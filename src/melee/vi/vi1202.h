@@ -7,7 +7,16 @@
 
 typedef struct vi1202_UnkStruct vi1202_UnkStruct;
 
-typedef struct vi1202_ViData {
+/// Configuration for crowd/announcer reactions during matches.
+///
+/// Evidence for "Crowd" naming:
+/// - Symbol names from UnclePunch's Training Mode map (Feb 2019)
+/// - Functions at 0x80321900+ named CrowdSFXManager_* in that map
+/// - Audio function 0x8002411C named lbAudio_PlayCrowdSFX
+/// - Code triggers match wiki descriptions of crowd gasps/cheers
+///
+/// @todo Field names are speculative based on observed usage
+typedef struct CrowdConfig {
     /* 0x00 */ f32 x0;
     /* 0x04 */ f32 x4;
     /* 0x08 */ f32 x8;
@@ -24,9 +33,9 @@ typedef struct vi1202_ViData {
     /* 0x38 */ f32 x38;
     /* 0x3C */ s32 x3C;
     /* 0x40 */ f32 x40;
-} vi1202_ViData;
+} CrowdConfig;
 
-/* 4D6500 */ extern vi1202_ViData* Fighter_804D6500;
+/* 4D6500 */ extern CrowdConfig* gCrowdConfig;
 
 /* 32110C */ void un_8032110C(HSD_GObj*);
 /* 321130 */ void un_80321130(HSD_GObj*);
