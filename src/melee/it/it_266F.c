@@ -1241,18 +1241,34 @@ void it_8026E5A0(Item_GObj* item_gobj, HSD_GObjEvent arg1) {
     }
 }
 
-void it_8026E664(Item_GObj* item_gobj, HSD_GObjEvent arg1) {
-    bool chk = it_8026E058(item_gobj);
+void it_8026E664(Item_GObj* item_gobj, HSD_GObjEvent arg1)
+{
+    CollData* coll;
+    Item* item;
+    bool chk;
+    PAD_STACK(32);
 
+    item = item_gobj->user_data;
+    coll = &item->x378_itemColl;
+    it_80276214(item_gobj);
+    chk = mpColl_800471F8(coll);
+    item->pos = coll->cur_pos;
     if (chk) {
-        if (chk & 0xC) {
-            it_80276FC4(item_gobj, chk);
+        item->xC30 = coll->floor.index;
+    }
+    chk = chk | it_80276308(item_gobj);
+    {
+        s32 chk_copy = chk;
+        if (chk & 0xD) {
+            if (chk & 0xC) {
+                it_80276FC4(item_gobj, chk_copy);
+            }
+            if (chk & 1) {
+                it_80275DFC(item_gobj);
+                it_802762B0(item);
+            }
+            arg1((HSD_GObj*) item_gobj);
         }
-        if (chk & 1) {
-            it_80275DFC(item_gobj);
-            it_802762B0(item_gobj->user_data);
-        }
-        arg1((HSD_GObj*) item_gobj);
     }
 }
 
@@ -1471,7 +1487,7 @@ void it_8026E664(Item_GObj* item_gobj, HSD_GObjEvent arg1)
     CollData* coll;
     Item* item;
     bool chk;
-    PAD_STACK(28);
+    PAD_STACK(32);
 
     item = item_gobj->user_data;
     coll = &item->x378_itemColl;
@@ -1482,15 +1498,18 @@ void it_8026E664(Item_GObj* item_gobj, HSD_GObjEvent arg1)
         item->xC30 = coll->floor.index;
     }
     chk = chk | it_80276308(item_gobj);
-    if (chk & 0xD) {
-        if (chk & 0xC) {
-            it_80276FC4(item_gobj, chk);
+    {
+        s32 chk_copy = chk;
+        if (chk & 0xD) {
+            if (chk & 0xC) {
+                it_80276FC4(item_gobj, chk_copy);
+            }
+            if (chk & 1) {
+                it_80275DFC(item_gobj);
+                it_802762B0(item);
+            }
+            arg1((HSD_GObj*) item_gobj);
         }
-        if (chk & 1) {
-            it_80275DFC(item_gobj);
-            it_802762B0(item);
-        }
-        arg1((HSD_GObj*) item_gobj);
     }
 }
 
