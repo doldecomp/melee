@@ -4,15 +4,50 @@
 #include "mnnamenew.h"
 
 #include <melee/gm/gmmain_lib.h>
+#include <melee/lb/lblanguage.h>
 #include <sysdolphin/baselib/jobj.h>
 
 extern char mnName_StringTerminator;
 extern char** NotAllowedNamesList;
 extern char mnNameNew_NullCharacter;
+extern char* mnNameNew_803EE724[];
+extern char* mnNameNew_803EE720[];
 
 void fn_80249A1C(HSD_GObj* arg0);
 
-/// #mnName_8023749C
+void* mnName_8023749C(s32 idx) {
+    char** table;
+    char* ptr;
+    s32 i;
+    s8 terminator;
+
+    if (lbLang_IsSavedLanguageUS()) {
+        table = mnNameNew_803EE724;
+    } else {
+        table = mnNameNew_803EE720;
+    }
+
+    terminator = mnName_StringTerminator;
+    ptr = (char*)table;
+    i = 0;
+
+    goto loop_cond;
+loop_body:
+    ptr += 4;
+    i++;
+loop_cond:
+    if (i != (u8)idx) {
+        char* str = *(char**)ptr;
+        if (terminator != str[0]) {
+            goto loop_body;
+        }
+    }
+
+    if ((s8)mnName_StringTerminator == table[i][0]) {
+        return 0;
+    }
+    return table[i];
+}
 
 char* GetNameText(int slot)
 {
