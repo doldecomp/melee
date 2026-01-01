@@ -36,7 +36,17 @@ void it_3F14_Logic1_Destroyed(Item_GObj* gobj)
 
 /// #it_802863BC
 
-/// #fn_80286480
+void fn_80286480(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    f32 zero;
+    it_8026B390(gobj);
+    zero = 0.0f;
+    ip->x40_vel.z = zero;
+    ip->x40_vel.y = zero;
+    ip->x40_vel.x = zero;
+    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+}
 
 bool itBox_UnkMotion0_Anim(Item_GObj* gobj)
 {
@@ -56,7 +66,11 @@ bool itBox_UnkMotion0_Coll(Item_GObj* gobj)
     return false;
 }
 
-/// #it_8028655C
+void it_8028655C(Item_GObj* gobj)
+{
+    it_8026B3A8(gobj);
+    Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
+}
 
 bool itBox_UnkMotion4_Anim(Item_GObj* gobj)
 {
