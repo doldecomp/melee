@@ -12,6 +12,7 @@
 
 extern const f32 it_804DC874;
 extern const f32 it_804DC870;
+extern const f32 it_804DC878;
 
 /// #it_3F14_Logic7_Spawned
 
@@ -199,7 +200,21 @@ bool itDosei_UnkMotion8_Coll(Item_GObj* gobj)
     return false;
 }
 
-/// #fn_80282CD4
+void fn_80282CD4(Item_GObj* gobj)
+{
+    f32 frame_speed;
+    Item* ip = gobj->user_data;
+
+    ip->x40_vel.z = it_804DC878;
+    ip->x40_vel.y = it_804DC878;
+    ip->x40_vel.x = it_804DC878;
+    it_802762B0(ip);
+    Item_80268E5C(gobj, 7, 3);
+    frame_speed = it_804DC870;
+    ip->x5D0_animFrameSpeed = frame_speed;
+    lb_8000BA0C(gobj->hsd_obj, frame_speed);
+    M2C_FIELD(ip, s32*, 0x518) = 0;
+}
 
 /// #itDosei_UnkMotion7_Anim
 
