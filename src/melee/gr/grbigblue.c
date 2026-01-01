@@ -63,8 +63,10 @@ void grBigBlue_801E57BC(bool arg) {}
 
 void grBigBlue_801E59C8(void) {}
 
-/// #grBigBlue_801E59CC
-
+void grBigBlue_801E59CC(void)
+{
+    grZakoGenerator_801CAE04(0);
+}
 bool grBigBlue_801E59F0(void)
 {
     return false;
