@@ -1424,7 +1424,13 @@ static bool fn_800DAD18(Fighter_GObj* gobj)
 
 /// #ftCo_CapturePulledHi_Phys
 
-/// #ftCo_CapturePulledHi_Coll
+void ftCo_CapturePulledHi_Coll(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    if (!fp->x2226_b2) {
+        ft_80083C00(gobj, fn_800DAECC);
+    }
+}
 
 static void fn_800DAEEC(Fighter_GObj* gobj);
 
@@ -1441,7 +1447,15 @@ void ftCo_CapturePulledLw_IASA(Fighter_GObj* gobj) {}
 
 /// #ftCo_CapturePulledLw_Phys
 
-/// #ftCo_CapturePulledLw_Coll
+static void fn_800DB230(Fighter_GObj* gobj);
+
+void ftCo_CapturePulledLw_Coll(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    if (!fp->x2226_b2) {
+        ft_8008403C(gobj, fn_800DB230);
+    }
+}
 
 /// #fn_800DB230
 
