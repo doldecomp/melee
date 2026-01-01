@@ -309,8 +309,16 @@ void grBigBlue_801EF7D8(Vec3* pos)
 
 /// #grBigBlue_801EF844
 
-/// #fn_801EFB9C
-
+void fn_801EFB9C(HSD_GObj* gobj, int idx)
+{
+    if (gm_801A45E8(1) == 0) {
+        if (gm_801A45E8(2) == 0) {
+            if (Camera_8003010C() == 0) {
+                grDisplay_801C5DB0(gobj, idx);
+            }
+        }
+    }
+}
 DynamicsDesc* grBigBlue_801EFC0C(enum_t arg)
 {
     return false;
