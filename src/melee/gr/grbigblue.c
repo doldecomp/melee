@@ -135,6 +135,7 @@ bool grBigBlue_801E61BC(Ground_GObj* arg)
 
 void grBigBlue_801E61C4(Ground_GObj* gobj)
 {
+    PAD_STACK(16);
     grBigBlue_801EBAF8(gobj);
     lb_800115F4();
     Ground_801C2FE0(gobj);
