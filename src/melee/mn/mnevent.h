@@ -2,10 +2,11 @@
 #define MELEE_MN_EVENT_H
 
 #include <placeholder.h>
+#include <sysdolphin/baselib/forward.h>
 
 /* 24CE74 */ UNK_RET mnEvent_8024CE74(UNK_PARAMS);
 /* 24D014 */ UNK_RET mnEvent_8024D014(UNK_PARAMS);
-/* 24D0CC */ UNK_RET mnEvent_8024D0CC(UNK_PARAMS);
+/* 24D0CC */ void mnEvent_8024D0CC(HSD_GObj* gobj, s32 event_id);
 /* 24D15C */ UNK_RET mnEvent_8024D15C(UNK_PARAMS);
 /* 24D4E0 */ UNK_RET mnEvent_8024D4E0(UNK_PARAMS);
 /* 24D5B0 */ UNK_RET mnEvent_8024D5B0(UNK_PARAMS);
