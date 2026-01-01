@@ -46,6 +46,57 @@ void mnStageSw_8023593C(void* gobj) {
     } while (i < 0x1D);
 }
 
+typedef struct StageSw_Node {
+    char x0[8];
+    struct StageSw_Node* x8;
+    char xC[4];
+    struct StageSw_Node* x10;
+} StageSw_Node;
+
+typedef struct {
+    char x0[0x2C];
+    StageSw_Node* x2C;
+    char x30[4];
+    StageSw_Node* x34;
+} StageSw_NodeData;
+
+void* mnStageSw_802364A0(void* arg0, u8 idx) {
+    StageSw_NodeData* data = arg0;
+    StageSw_Node* current;
+    StageSw_Node* result;
+    u8 i;
+
+    if (idx >= 15) {
+        if (data->x34 == 0) {
+            result = 0;
+        } else {
+            result = data->x34->x10;
+        }
+        current = result;
+        for (i = 15; i < idx; i++) {
+            if (current == 0) {
+                current = 0;
+            } else {
+                current = current->x8;
+            }
+        }
+    } else {
+        if (data->x2C == 0) {
+            current = 0;
+        } else {
+            current = data->x2C->x10;
+        }
+        for (i = 0; i < idx; i++) {
+            if (current == 0) {
+                current = 0;
+            } else {
+                current = current->x8;
+            }
+        }
+    }
+    return current;
+}
+
 void mnStageSw_80237410(void) {
     mn_unk1* data;
     u8 prev;
