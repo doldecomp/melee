@@ -40,6 +40,57 @@ s32 mnItemSw_80233A98(s32 arg0) {
     return (s32)table->vals[arg0];
 }
 
+typedef struct ItemSwNode {
+    char x0[8];
+    struct ItemSwNode* x8;
+    char xC[4];
+    struct ItemSwNode* x10;
+} ItemSwNode;
+
+typedef struct {
+    char x0[0x34];
+    ItemSwNode* x34;
+    char x38[4];
+    ItemSwNode* x3C;
+} ItemSwData;
+
+void* mnItemSw_8023405C(void* arg0, u8 idx) {
+    ItemSwData* data = arg0;
+    ItemSwNode* current;
+    ItemSwNode* result;
+    u8 i;
+
+    if (idx >= 16) {
+        if (data->x3C == 0) {
+            result = 0;
+        } else {
+            result = data->x3C->x10;
+        }
+        current = result;
+        for (i = 16; i < idx; i++) {
+            if (current == 0) {
+                current = 0;
+            } else {
+                current = current->x8;
+            }
+        }
+    } else {
+        if (data->x34 == 0) {
+            current = 0;
+        } else {
+            current = data->x34->x10;
+        }
+        for (i = 0; i < idx; i++) {
+            if (current == 0) {
+                current = 0;
+            } else {
+                current = current->x8;
+            }
+        }
+    }
+    return current;
+}
+
 void mnItemSw_802358C0(void) {
     mn_unk1* data;
     u8 prev;
