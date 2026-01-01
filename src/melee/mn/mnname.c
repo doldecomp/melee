@@ -282,8 +282,38 @@ void mnName_80239EBC(void* arg0, f32 arg1) {
         }
     }
 }
-/// #mnName_80239F5C
-
+void mnName_80239F5C(void* arg0, f32 arg1) {
+    if (arg0 == NULL) {
+        __assert(mnName_804D4BF4, 932, mnName_804D4BFC);
+    }
+    
+    *(f32*)((u8*)arg0 + 0x38) = arg1;
+    
+    if ((*(u32*)((u8*)arg0 + 0x14) & 0x02000000) != 0) {
+        return;
+    }
+    
+    if (arg0 == NULL) {
+        return;
+    }
+    
+    if (arg0 == NULL) {
+        __assert(mnName_804D4BF4, 564, mnName_804D4BFC);
+    }
+    
+    {
+        BOOL cond;
+        cond = FALSE;
+        if ((*(u32*)((u8*)arg0 + 0x14) & 0x00800000) == 0) {
+            if ((*(u32*)((u8*)arg0 + 0x14) & 0x00000040) != 0) {
+                cond = TRUE;
+            }
+        }
+        if (cond == FALSE) {
+            HSD_JObjSetMtxDirtySub(arg0);
+        }
+    }
+}
 typedef struct {
     char unk[0x30];
     void* x30;
