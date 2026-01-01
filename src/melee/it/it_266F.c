@@ -1212,19 +1212,36 @@ void it_8026E414(Item_GObj* item_gobj, HSD_GObjEvent arg1) {
     }
 }
 
-void it_8026E4D0(Item_GObj* item_gobj, HSD_GObjEvent arg1) {
-    bool chk = it_8026DF34(item_gobj);
+void it_8026E4D0(Item_GObj* item_gobj, HSD_GObjEvent arg1)
+{
+    CollData* coll;
+    Item* item;
+    HSD_JObj* item_jobj;
+    bool chk;
+    PAD_STACK(40);
 
-    chk |= it_80276308(item_gobj);
-    chk |= it_802763E0(item_gobj);
-    if (chk & 0xE) {
-        it_80276FC4(item_gobj, chk);
+    item = item_gobj->user_data;
+    coll = &item->x378_itemColl;
+    it_80276214(item_gobj);
+    chk = mpColl_800471F8(coll);
+    item->pos = coll->cur_pos;
+    if (chk) {
+        item->xC30 = coll->floor.index;
+    }
+    chk = chk | it_80276308(item_gobj);
+    chk = chk | it_802763E0(item_gobj);
+    {
+        s32 chk_copy = chk;
+        if (chk & 0xE) {
+            it_80276FC4(item_gobj, chk_copy);
+        }
     }
     if (chk & 1) {
+        item_jobj = item_gobj->hsd_obj;
         it_80275DFC(item_gobj);
-        it_802762B0(item_gobj->user_data);
+        it_802762B0(item);
         arg1((HSD_GObj*) item_gobj);
-        it_80272F7C(item_gobj->hsd_obj, item_gobj->user_data->xCC_item_attr->x60_scale);
+        it_80272F7C(item_jobj, item->xCC_item_attr->x60_scale);
     }
 }
 
@@ -1426,10 +1443,10 @@ void it_8026E414(Item_GObj* item_gobj, HSD_GObjEvent arg1)
 void it_8026E4D0(Item_GObj* item_gobj, HSD_GObjEvent arg1)
 {
     CollData* coll;
-    HSD_JObj* item_jobj;
     Item* item;
+    HSD_JObj* item_jobj;
     bool chk;
-    PAD_STACK(34);
+    PAD_STACK(40);
 
     item = item_gobj->user_data;
     coll = &item->x378_itemColl;
@@ -1441,8 +1458,11 @@ void it_8026E4D0(Item_GObj* item_gobj, HSD_GObjEvent arg1)
     }
     chk = chk | it_80276308(item_gobj);
     chk = chk | it_802763E0(item_gobj);
-    if (chk & 0xE) {
-        it_80276FC4(item_gobj, chk);
+    {
+        s32 chk_copy = chk;
+        if (chk & 0xE) {
+            it_80276FC4(item_gobj, chk_copy);
+        }
     }
     if (chk & 1) {
         item_jobj = item_gobj->hsd_obj;
