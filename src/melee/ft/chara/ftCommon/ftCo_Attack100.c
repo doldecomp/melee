@@ -1502,7 +1502,13 @@ static void fn_800DB5D8(Fighter_GObj* gobj)
 
 /// #fn_800DB790
 
-/// #fn_800DB8A4
+void fn_800DB8A4(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    *(float*)((u8*)fp + 0x2340) = (float)(*(float*)((u8*)fp + 0x2340) + 1.0);
+    fp->grab_timer -= p_ftCommonData->grab_timer_decrement;
+    *(s32*)((u8*)fp + 0x2348) = ftCommon_GrabMash(fp, p_ftCommonData->x3A8);
+}
 
 void ftCo_CaptureWaitHi_Anim(Fighter_GObj* gobj)
 {
