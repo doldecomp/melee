@@ -1197,17 +1197,32 @@ bool it_8026E32C(Item_GObj* item_gobj, HSD_GObjEvent arg1)
     return chk;
 }
 
-void it_8026E414(Item_GObj* item_gobj, HSD_GObjEvent arg1) {
-    bool chk = it_8026DF34(item_gobj);
+void it_8026E414(Item_GObj* item_gobj, HSD_GObjEvent arg1)
+{
+    CollData* coll;
+    Item* item;
+    bool chk;
+    PAD_STACK(32);
 
-    chk |= it_80276308(item_gobj);
-    chk |= it_802763E0(item_gobj);
-    if (chk & 0xE) {
-        it_80276FC4(item_gobj, chk);
+    item = item_gobj->user_data;
+    coll = &item->x378_itemColl;
+    it_80276214(item_gobj);
+    chk = mpColl_800471F8(coll);
+    item->pos = coll->cur_pos;
+    if (chk) {
+        item->xC30 = coll->floor.index;
+    }
+    chk = chk | it_80276308(item_gobj);
+    chk = chk | it_802763E0(item_gobj);
+    {
+        s32 chk_copy = chk;
+        if (chk & 0xE) {
+            it_80276FC4(item_gobj, chk_copy);
+        }
     }
     if (chk & 1) {
         it_80275DFC(item_gobj);
-        it_802762B0(item_gobj->user_data);
+        it_802762B0(item);
         arg1((HSD_GObj*) item_gobj);
     }
 }
@@ -1418,7 +1433,7 @@ void it_8026E414(Item_GObj* item_gobj, HSD_GObjEvent arg1)
     CollData* coll;
     Item* item;
     bool chk;
-    PAD_STACK(28);
+    PAD_STACK(32);
 
     item = item_gobj->user_data;
     coll = &item->x378_itemColl;
@@ -1430,8 +1445,11 @@ void it_8026E414(Item_GObj* item_gobj, HSD_GObjEvent arg1)
     }
     chk = chk | it_80276308(item_gobj);
     chk = chk | it_802763E0(item_gobj);
-    if (chk & 0xE) {
-        it_80276FC4(item_gobj, chk);
+    {
+        s32 chk_copy = chk;
+        if (chk & 0xE) {
+            it_80276FC4(item_gobj, chk_copy);
+        }
     }
     if (chk & 1) {
         it_80275DFC(item_gobj);
