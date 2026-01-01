@@ -17,7 +17,6 @@
 #include <baselib/jobj.h>
 
 extern f32 grCn_804DB170;
-extern u8 grCn_803E1D38[];
 
 /// #grCorneria_801DCCFC
 
@@ -422,13 +421,8 @@ void fn_801E12D0(Item_GObj* gobj, Ground* gr) {}
 
 /// #grCorneria_801E25C4
 
-void grCorneria_801E2738(Ground_GObj* gobj, s32 arg1, s32 arg2, s32 arg3)
-{
-    grCorneria_801E25C4(gobj, arg1, 
-        *(s32*)(grCn_803E1D38 + arg2 * 0x3C + arg3 * 0xC + 0x4CC),
-        *(s32*)(grCn_803E1D38 + arg2 * 0x3C + arg3 * 0xC + 0x4D0),
-        *(s32*)(grCn_803E1D38 + arg2 * 0x3C + arg3 * 0xC + 0x4D4));
-}
+/// #grCorneria_801E2738
+
 /// #grCorneria_801E277C
 
 /// #grCorneria_801E2A6C
