@@ -216,8 +216,11 @@ bool grBigBlue_801E687C(Ground_GObj* arg)
     return false;
 }
 
-/// #grBigBlue_801E6884
-
+void grBigBlue_801E6884(Ground_GObj* gobj)
+{
+    grBigBlue_801EF424(gobj);
+    Ground_801C2FE0(gobj);
+}
 /// #grBigBlue_801E68B8
 
 /// #grBigBlue_801E6904
