@@ -13,6 +13,17 @@ s32 fn_802502F0(u8 arg) {
     return GetFighterTotalKOs(arg);
 }
 
+s32 GetFighterTotalFalls(s32 slot);
+
+s32 fn_80250314(u8 arg) {
+    return GetFighterTotalFalls(arg);
+}
+
+u16 fn_80250338(u8 arg) {
+    void* data = GetPersistentFighterData(arg);
+    return *(u16*)((u8*)data + 0x34);
+}
+
 void mnCount_802517E0(void* data) {
     s32 i;
 
