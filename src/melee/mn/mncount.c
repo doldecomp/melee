@@ -24,6 +24,26 @@ u16 fn_80250338(u8 arg) {
     return *(u16*)((u8*)data + 0x34);
 }
 
+u16 fn_8025069C(u8 arg) {
+    void* data = GetPersistentFighterData(arg);
+    return *(u16*)((u8*)data + 0x50);
+}
+
+u16 fn_802506C0(u8 arg) {
+    void* data = GetPersistentFighterData(arg);
+    return *(u16*)((u8*)data + 0x52);
+}
+
+s32 fn_802506E4(u8 arg) {
+    void* data = GetPersistentFighterData(arg);
+    return *(s32*)((u8*)data + 0x40);
+}
+
+s32 fn_80250708(u8 arg) {
+    void* data = GetPersistentFighterData(arg);
+    return *(s32*)((u8*)data + 0x44);
+}
+
 void mnCount_802517E0(void* data) {
     s32 i;
 
