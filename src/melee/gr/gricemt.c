@@ -348,17 +348,18 @@ void grIceMt_801F75FC(Ground_GObj* arg0)
 {
     u32 iVar1;
     Ground* gp = GET_GROUND(arg0);
+    void** ptrs = (void**)&gp->gv.icemt.xF4;
     memzero(&gp->gv.icemt.xDC, 0x18);
     memzero(&gp->gv.icemt.xF4, 0x14);
     do {
         iVar1 = HSD_Randi(6);
-    } while (gp->gv.icemt.xF4[iVar1] != 0);
-    gp->gv.icemt.xF4[iVar1] = grIm_804D69F4;
+    } while (ptrs[iVar1] != 0);
+    ptrs[iVar1] = grIm_804D69F4;
     gp->gv.icemt.xC4 = grIm_803E4068[iVar1];
     do {
         iVar1 = HSD_Randi(6);
-    } while (gp->gv.icemt.xF4[iVar1] != 0);
-    gp->gv.icemt.xF4[iVar1] = grIm_804D69F4;
+    } while (ptrs[iVar1] != 0);
+    ptrs[iVar1] = grIm_804D69F4;
     // Ground_801C10B8(arg0,fn_801F75EC(arg0));grIm_803E4068
     gp->gv.icemt.xC6 = grIm_803E4068[iVar1];
     grIceMt_801FA0BC(gp->gv.icemt2.xC4);
@@ -632,7 +633,7 @@ bool grIceMt_801F85BC(Ground_GObj* param1)
 void grIceMt_801F85C4(Ground_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
-    grIceMt_801F929C((HSD_GObj*)&gp->gv.icemt.xF4[5]);
+    grIceMt_801F929C((HSD_GObj*)&gp->gv.icemt.xF8[4]);
     grIceMt_801F98A8(gobj);
     Ground_801C2FE0(gobj);
 }
@@ -690,14 +691,14 @@ void grIceMt_801F87C8(Ground_GObj* param1)
 }
 
 /// @todo Rename: This is callback3 (destroy) for row 5 in grIm_803E4718.
-/// Destroys HSD_GObj* stored in icemt.xF4[1-5].
+/// Destroys HSD_GObj* stored in icemt.xF8[0-4].
 void grIceMt_801F87FC(Ground_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
     int i;
     for (i = 0; i < 5; i++) {
         HSD_GObj* temp;
-        if ((temp = gp->gv.icemt.xF4[i + 1]) != NULL) {
+        if ((temp = gp->gv.icemt.xF8[i]) != NULL) {
             grMaterial_801C8CDC(temp);
         }
     }

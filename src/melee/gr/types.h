@@ -12,6 +12,8 @@
 #include <melee/sc/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
+typedef struct IceMountainParams IceMountainParams;
+
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
 
@@ -355,8 +357,8 @@ struct grIceMt_GroundVars {
     /* +0 gp+D8 */ f32 xE4;
     /* +0 gp+D8 */ u32 xE8;
     /* +0 gp+D8 */ u32 xEC;
-    /// @brief xF4[0] = IceMountainParams*, xF4[1-5] = HSD_GObj*.
-    /* +0 gp+D8 */ void* xF4[6];
+    /* +0 gp+D8 */ IceMountainParams* xF4;
+    /* +0 gp+D8 */ HSD_GObj* xF8[5];
 };
 struct grIceMt_GroundVars2 {
     /* +0 gp+C4 */ f32 xC4;
