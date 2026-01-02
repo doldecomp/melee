@@ -61,7 +61,7 @@ void mnDeflicker_8024A168(HSD_GObj* gobj)
         lb_8001CE00();
         mn_804A04F0.entering_menu = 0;
         mn_80229894(4, 2, 3);
-    } else if (mnDeflicker_804D6C3C && (events & MenuEvent_unk4)) {
+    } else if (mnDeflicker_804D6C3C && (events & MenuEvent_AButton)) {
         unsigned char x;
         PAD_STACK(4);
         sfxMove();
@@ -185,7 +185,7 @@ void mnDeflicker_8024A6C4(HSD_GObj* arg0)
     mn_804D6BC8.cooldown = 5;
     mn_804A04F0.prev_menu = mn_804A04F0.cur_menu;
     mn_804A04F0.cur_menu = 0x15;
-    mn_804A04F0.hovered_option = 0;
+    mn_804A04F0.hovered_selection = 0;
     mnDeflicker_804D6C3C = 0;
     archive = mn_804D6BB8;
     lbArchive_LoadSections(

@@ -738,8 +738,8 @@ void gm_801B0FB8(MinorScene* arg0)
     un_802FF884("/audio");
 }
 
-static GameRules* gm_804D68B8;
-static UNK_T gm_804D68BC;
+static MenuEnterData* gm_804D68B8;
+static MenuExitData* gm_804D68BC;
 
 MinorScene gm_803DD8B8_MinorScenes[] = {
     {
@@ -763,7 +763,7 @@ void gm_801B0FF8(MinorScene* arg0)
     struct gm_801B0FF8_arg0_x10_t* temp_r31;
     MajorSceneKind var_r0;
 
-    temp_r31 = arg0->info.unk_struct_0;
+    temp_r31 = arg0->info.load_data;
     lb_8001C550();
     lb_8001D164(0);
     lbSnap_8001E218(HSD_MemAlloc(lbSnap_8001E204()),
@@ -930,7 +930,7 @@ void gm_801B0FF8(MinorScene* arg0)
 
 void gm_801B138C(MinorScene* arg0)
 {
-    struct MainMenuExitData* data = arg0->info.unk_struct_1;
+    struct MainMenuExitData* data = arg0->info.leave_data;
 
     gm_801A42E8(data->x0);
     gm_801A42D4();
@@ -1383,7 +1383,7 @@ void gm_801B1788(MinorScene* arg0)
         gm_8018F634()->x28 = stage;
         return;
     }
-    if (gm_804771C4.x4 == 0) {
+    if (gm_804771C4.match_type == 0) {
         gm_8019A828();
         gm_SetScenePendingMinor(1);
         return;
@@ -1459,9 +1459,9 @@ void gm_801B1AD4(MinorScene* arg0)
     gm_80477738 = rmi->match_end;
 
     gm_8016247C(gm_801688AC(&rmi->match_end));
-    if (gm_804771C4.x4 == 0) {
+    if (gm_804771C4.match_type == 0) {
         gm_SetScenePendingMinor(1);
-        gm_8018F634()->x0 = 0x1F;
+        gm_8018F634()->cur_option = 0x1F;
         return;
     }
     gm_8019E634();

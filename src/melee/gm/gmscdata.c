@@ -62,7 +62,7 @@ static MinorSceneHandler gm_803DA920[] = {
     {
         MN_MENU,
         mn_8022DD38_OnFrame,
-        mn_8022DDA8_OnEnter,
+        (void*) mn_8022DDA8_OnEnter,
         NULL,
         NULL,
     },

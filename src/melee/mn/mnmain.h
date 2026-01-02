@@ -3,6 +3,7 @@
 
 #include <placeholder.h>
 #include <platform.h>
+#include "gm/forward.h"
 #include "mn/forward.h"
 
 #include <dolphin/gx.h>
@@ -10,18 +11,25 @@
 #include <baselib/object.h>
 
 typedef struct _MainMenuData {
-    u8 menu_kind;
-    u8 hovered_option;
-    u8 state;
-    HSD_JObj* jobj_tree[42];
+    MenuKind8 menu_kind;
+    MenuKind8 hovered_selection;
+    MenuState8 state;
+    HSD_JObj* tree[42];
     HSD_Text* description;
 } MainMenuData;
 
+typedef struct _MainMenuPanelData {
+    MenuKind8 cur_menu;
+    MenuKind8 prev_menu;
+    u8 x3;
+    MenuState8 state;
+} MainMenuPanelData;
+
 typedef struct _MenuFlow {
-    u8 cur_menu;
-    u8 prev_menu;
-    u16 hovered_option;
-    u32 confirmed_option;
+    MenuKind8 cur_menu;
+    MenuKind8 prev_menu;
+    u16 hovered_selection;
+    u32 confirmed_selection;
     u64 buttons;
     u8 x10;
     u8 entering_menu; ///< bool
@@ -40,14 +48,14 @@ typedef struct _MenuInputState {
 /* 229860 */ void mn_80229860(s8);
 /* 229894 */ void mn_80229894(s32, u16, s32);
 /* 229938 */ bool mn_80229938(s32 arg0, s32 arg1);
-/* 229A04 */ int mn_80229A04(int, int);
+/* 229A04 */ int mn_80229A04(MenuKind, int);
 /* 229B2C */ HSD_GObj* mn_80229B2C(void);
 /* 229BF4 */ void fn_80229BF4(HSD_GObj*);
 /* 229DC0 */ HSD_GObj* mn_80229DC0(void);
-/* 229F60 */ void mn_80229F60(HSD_GObj*, HSD_JObj*, int);
-/* 22A440 */ void mn_8022A440(HSD_GObj*, HSD_JObj*, s32);
-/* 22A5D0 */ void mn_8022A5D0(HSD_GObj*, int);
-/* 22ADD8 */ void mn_8022ADD8(HSD_GObj*, int);
+/* 229F60 */ void mn_80229F60(HSD_GObj*, HSD_JObj*, MainMenuSelection);
+/* 22A440 */ void mn_8022A440(HSD_GObj*, HSD_JObj*, MainMenuSelection);
+/* 22A5D0 */ void mn_8022A5D0(HSD_GObj*, MainMenuSelection);
+/* 22ADD8 */ void mn_8022ADD8(HSD_GObj*, bool);
 /* 22AF10 */ void fn_8022AF10(HSD_GObj*);
 /* 22AFEC */ void fn_8022AFEC(HSD_GObj*);
 /* 22B3A0 */ HSD_GObj* mn_8022B3A0(u8);
@@ -75,7 +83,7 @@ typedef struct _MenuInputState {
 /* 22D7F4 */ void mn_8022D7F4(HSD_GObj*);
 /* 22DB10 */ void mn_8022DB10(HSD_GObj*);
 /* 22DD38 */ void mn_8022DD38_OnFrame(void);
-/* 22DDA8 */ void mn_8022DDA8_OnEnter(void*);
+/* 22DDA8 */ void mn_8022DDA8_OnEnter(MenuEnterData*);
 /* 22E950 */ bool mn_8022E950(int);
 /* 22E978 */ void mn_8022E978(u8 item_idx, u8 enable); ///< set/unset item mask bit
 /* 22EA08 */ void mn_8022EA08(char* buf, u32 num);

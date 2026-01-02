@@ -1414,7 +1414,7 @@ void gm_801BEE9C(MinorScene* arg0)
     s8* temp_r28;
     u8 temp_r27; ///< maybe CharacterKind?
 
-    temp_r28 = arg0->info.unk_struct_1;
+    temp_r28 = arg0->info.leave_data;
     temp_r27 = gm_80173224(gm_801BF030(), 1);
     if (gm_801BEFB0() == CKIND_GAMEWATCH && !gm_80164430(0x1B)) {
         gm_80164504(0x1B);

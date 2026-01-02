@@ -44,6 +44,8 @@
     u8 _pad[0x130];
     void* x138;
 } un_803FA258;
+/* 3FA348 */ static u16 un_803FA348;
+/* 3FA34C */ static u8 un_803FA34C;
 /* 3FA658 */ static int un_803FA658;
 /* 3FA8E8 */ static int un_803FA8E8;
 /* 3FB168 */ static int un_803FB168;

@@ -315,7 +315,7 @@ void mnInfoBonus_80252F8C(void)
     mn_804D6BC8.cooldown = 5;
     mn_804A04F0.prev_menu = mn_804A04F0.cur_menu;
     mn_804A04F0.cur_menu = 0x1F;
-    mn_804A04F0.hovered_option = 0;
+    mn_804A04F0.hovered_selection = 0;
     memzero(o, sizeof(*o));
 
     o->x44 = 8;
