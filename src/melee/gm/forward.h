@@ -150,5 +150,7 @@ typedef struct gmm_x0_528_t gmm_x0_528_t;
 typedef struct Unk1PData_x24 Unk1PData_x24;
 typedef struct lbl_8046DBD8_t lbl_8046DBD8_t;
 typedef struct VsApproachData VsApproachData;
+typedef struct MenuExitData MenuExitData;
+typedef struct MenuEnterData MenuEnterData;
 
 #endif
