@@ -64,7 +64,15 @@ HSD_GObj* grIm_804D69EC;
 HSD_GObj* grIm_804D69F0;
 IceMountainParams* grIm_804D69F4;
 
-HSD_GObj* grIm_803E4068[6]; // This likely contains the ground segments
+/// @brief Ice Mountain row data - 12 bytes each.
+/// First field is used both as pointer comparison and as s16 index.
+typedef struct IceMtRowData {
+    HSD_GObj* gobj;  // Also sign-extended to s16 when stored to xC4/xC6
+    u32 x4;
+    u32 x8;
+} IceMtRowData;
+
+IceMtRowData grIm_803E4068[6];
 
 S16Vec3 grIm_803E40B0[] = {
     { 0, 0, 0 }, { 1, 0, 0 }, { 0, 1, 0 }, { 0, 0, 0 }, { 2, 0, 0 }
@@ -137,17 +145,17 @@ void grIceMt_801F686C(void)
 
         //}
         // uVar4 = 0;
-        if (grIm_804D69F4->xAC == grIm_803E4068[0]) {
+        if (grIm_804D69F4->xAC == grIm_803E4068[0].gobj) {
             uVar4 = 1;
-            if (grIm_804D69F4->xAC == grIm_803E4068[1]) {
+            if (grIm_804D69F4->xAC == grIm_803E4068[1].gobj) {
                 uVar4 = 2;
-                if (grIm_804D69F4->xAC == grIm_803E4068[2]) {
+                if (grIm_804D69F4->xAC == grIm_803E4068[2].gobj) {
                     uVar4 = 3;
-                    if (grIm_804D69F4->xAC == grIm_803E4068[3]) {
+                    if (grIm_804D69F4->xAC == grIm_803E4068[3].gobj) {
                         uVar4 = 4;
-                        if (grIm_804D69F4->xAC == grIm_803E4068[4]) {
+                        if (grIm_804D69F4->xAC == grIm_803E4068[4].gobj) {
                             uVar4 = 5;
-                            if (grIm_804D69F4->xAC == grIm_803E4068[5]) {
+                            if (grIm_804D69F4->xAC == grIm_803E4068[5].gobj) {
                                 uVar4 = 6;
                             }
                         }
@@ -344,24 +352,27 @@ void fn_801F75EC(HSD_GObj* arg0)
 }
 
 /// #grIceMt_801F75FC
+/// @note This function treats xF4 area as s16 indices during initialization.
+/// The same memory is later interpreted as pointers by other functions.
 void grIceMt_801F75FC(Ground_GObj* arg0)
 {
     u32 iVar1;
+    s16 val;
     Ground* gp = GET_GROUND(arg0);
-    void** ptrs = (void**)&gp->gv.icemt.xF4;
     memzero(&gp->gv.icemt.xDC, 0x18);
     memzero(&gp->gv.icemt.xF4, 0x14);
     do {
         iVar1 = HSD_Randi(6);
-    } while (ptrs[iVar1] != 0);
-    ptrs[iVar1] = grIm_804D69F4;
-    gp->gv.icemt.xC4 = grIm_803E4068[iVar1];
+        val = *(s16*)((u8*)gp + 0xF4 + iVar1 * 2);
+    } while (val != 0);
+    *(s16*)((u8*)gp + 0xF4 + iVar1 * 2) = *(s16*)grIm_804D69F4;
+    gp->gv.icemt.xC4 = (s16)(s32)grIm_803E4068[iVar1].gobj;
     do {
         iVar1 = HSD_Randi(6);
-    } while (ptrs[iVar1] != 0);
-    ptrs[iVar1] = grIm_804D69F4;
-    // Ground_801C10B8(arg0,fn_801F75EC(arg0));grIm_803E4068
-    gp->gv.icemt.xC6 = grIm_803E4068[iVar1];
+        val = *(s16*)((u8*)gp + 0xF4 + iVar1 * 2);
+    } while (val != 0);
+    *(s16*)((u8*)gp + 0xF4 + iVar1 * 2) = *(s16*)grIm_804D69F4;
+    gp->gv.icemt.xC6 = (s16)(s32)grIm_803E4068[iVar1].gobj;
     grIceMt_801FA0BC(gp->gv.icemt2.xC4);
     gp->gv.icemt.xDA = 0;
     gp->gv.icemt.xC8 = 0;
