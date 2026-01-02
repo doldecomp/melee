@@ -12,8 +12,6 @@
 #include <melee/sc/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
-typedef struct IceMountainParams IceMountainParams;
-
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
 
