@@ -449,15 +449,15 @@ void grIceMt_801F75FC(Ground_GObj* arg0)
     memzero(&gp->gv.icemt.xF4, 0x14);
     do {
         iVar1 = HSD_Randi(6);
-        val = *(s16*)((u8*)gp + 0xF4 + iVar1 * 2);
+        val = gp->gv.icemt.xF4[iVar1];
     } while (val != 0);
-    *(s16*)((u8*)gp + 0xF4 + iVar1 * 2) = *(s16*)grIm_804D69F4;
+    gp->gv.icemt.xF4[iVar1] = *(s16*)grIm_804D69F4;
     gp->gv.icemt.xC4 = (s16) grIm_803E4068[iVar1].id;
     do {
         iVar1 = HSD_Randi(6);
-        val = *(s16*)((u8*)gp + 0xF4 + iVar1 * 2);
+        val = gp->gv.icemt.xF4[iVar1];
     } while (val != 0);
-    *(s16*)((u8*)gp + 0xF4 + iVar1 * 2) = *(s16*)grIm_804D69F4;
+    gp->gv.icemt.xF4[iVar1] = *(s16*)grIm_804D69F4;
     gp->gv.icemt.xC6 = (s16) grIm_803E4068[iVar1].id;
     grIceMt_801FA0BC((int) &gp->gv.icemt.xC4);
     gp->gv.icemt.xDA = 0;
