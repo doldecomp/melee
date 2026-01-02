@@ -11,7 +11,7 @@
 
 #include <dolphin/mtx.h>
 
-typedef struct IceMountainParams {
+struct IceMountainParams {
     float x0;
     int x4;
     float x8;
@@ -65,7 +65,7 @@ typedef struct IceMountainParams {
     float xC4;
     float xC8;
     float xCC;
-} IceMountainParams;
+};
 
 /* 1F6868 */ void grIceMt_801F6868(bool id);
 /* 1F686C */ void grIceMt_801F686C(void);
