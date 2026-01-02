@@ -6,6 +6,8 @@
 
 #include "ft/types.h"
 
+#include <sysdolphin/baselib/forward.h>
+
 #include <dolphin/mtx.h>
 
 /* 0C0658 */ ColorOverlay* ftCo_800C0658(Fighter* fp);
@@ -13,7 +15,7 @@
 /* 0C0694 */ enum_t ftCo_800C0694(Fighter* fp);
 /* 0C06B4 */ int ftCo_800C06B4(Fighter* fp);
 /* 0C06C0 */ void ftCo_800C06C0(void);
-/* 0C06E8 */ UNK_RET ftCo_800C06E8(UNK_PARAMS);
+/* 0C06E8 */ void ftCo_800C06E8(Ground_GObj*, int, void*);
 /* 0C0764 */ void ftCo_800C0764(Ground_GObj*, u32, void*);
 /* 0C07F8 */ void ftCo_800C07F8(Ground_GObj*, u32, void*);
 

@@ -3209,8 +3209,20 @@ void ftKb_Init_UnkDemoCallbacks0(int arg0, int* arg1, int* arg2)
     }
 }
 
-/// #ftKb_Init_GetMotionFileString
+char* ftKb_Init_GetMotionFileString(enum_t arg0)
+{
+    int offset;
 
+    switch (arg0) {
+    case 11:
+        offset = 14;
+        break;
+    case 14:
+        offset = 17;
+    }
+
+    return ftKb_Init_803CA5A4[offset - 14];
+}
 /// #ftKb_SpecialN_800EEC34
 
 /// #ftKb_SpecialN_800EED50
@@ -3771,8 +3783,12 @@ void ftKb_SpecialN_800F10A4(Fighter_GObj* gobj)
 
 /// #ftKb_SpecialN_800F11F0
 
-/// #ftKb_SpecialN_800F12C8
-
+void ftKb_SpecialN_800F12C8(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftKb_SpecialN_800EF69C(gobj, 0x10, ft_80459B88.hats[FTKIND_PURIN]);
+    ftCo_UnloadDynamicBones(fp);
+}
 /// #ftKb_SpecialN_800F130C
 
 void ftKb_SpecialN_800F13F0(Fighter_GObj* gobj)
@@ -3798,14 +3814,60 @@ void ftKb_SpecialN_800F13F0(Fighter_GObj* gobj)
 
 /// #ftKb_SpecialN_800F1A8C
 
-/// #ftKb_Init_UnkMotionStates3
+void ftKb_Init_UnkMotionStates3(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    FighterKind kind = fp->fv.kb.hat.kind;
 
+    switch (kind) {
+    case FTKIND_KOOPA:
+    case FTKIND_GKOOPS:
+        ftKb_SpecialNKp_800FA7D4(gobj);
+        break;
+    }
+}
 /// #ftKb_SpecialN_800F1BAC
 
-/// #fn_800F1CA0
+static bool fn_800F1CA0(HSD_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    u32 val = M2C_FIELD(fp, u32*, 0x2238);
+    switch (val) {
+    case 2:
+    case 7:
+    case 10:
+    case 11:
+    case 13:
+        return true;
+    default:
+        return false;
+    }
+}
 
-/// #ftKb_SpecialN_800F1CD8
+s32 ftKb_SpecialN_800F1CD8(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    FighterKind kind = fp->fv.kb.hat.kind;
+    bool result;
 
+    switch (kind) {
+    case FTKIND_CAPTAIN:
+    case FTKIND_SEAK:
+    case FTKIND_POPO:
+    case FTKIND_NANA:
+    case FTKIND_SAMUS:
+        result = true;
+        break;
+    default:
+        result = false;
+        break;
+    }
+
+    if (result) {
+        return true;
+    }
+    return false;
+}
 /// #ftKb_SpecialN_800F1D24
 
 /// #ftKb_SpecialN_800F1DAC
