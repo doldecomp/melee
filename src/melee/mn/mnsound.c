@@ -271,7 +271,7 @@ void mnSound_8024A09C(int arg0)
     mn_804D6BC8.cooldown = 5;
     mn_804A04F0.prev_menu = mn_804A04F0.cur_menu;
     mn_804A04F0.cur_menu = 0x14; // @note: could this be an enum??
-    mn_804A04F0.hovered_option = 0;
+    mn_804A04F0.hovered_selection = 0;
     archive = mn_804D6BB8;
     lbArchive_LoadSections(
         archive, (void**) &mnSound_804A08A8.joint, "MenMainConSo_Top_joint",

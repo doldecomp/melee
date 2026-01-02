@@ -2,7 +2,6 @@
 #define MELEE_MN_MAINRULE_H
 
 #include <placeholder.h>
-
 #include <sysdolphin/baselib/forward.h>
 
 struct mn_80231634_t {
@@ -27,14 +26,5 @@ struct mn_80231634_t {
 /* 2317E4 */ void mn_802317E4(HSD_Archive*, int);
 /* 231804 */ void mn_80231804(HSD_Archive*, int);
 /* 231F80 */ UNK_RET mn_80231F80(UNK_PARAMS);
-/* 23201C */ UNK_RET fn_8023201C(UNK_PARAMS);
-/* 232458 */ UNK_RET mn_80232458(UNK_PARAMS);
-/* 2324E4 */ UNK_RET mn_802324E4(UNK_PARAMS);
-/* 232660 */ UNK_RET mn_80232660(UNK_PARAMS);
-/* 2327A4 */ UNK_RET mn_802327A4(UNK_PARAMS);
-/* 232D4C */ UNK_RET mn_80232D4C(UNK_PARAMS);
-/* 232F44 */ UNK_RET fn_80232F44(UNK_PARAMS);
-/* 233218 */ HSD_GObj* mn_80233218(UNK_PARAMS);
-/* 2339FC */ void mn_802339FC(void);
 
 #endif

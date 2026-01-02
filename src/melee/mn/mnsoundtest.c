@@ -406,7 +406,7 @@ void fn_8024AED0(HSD_GObj* arg0)
     if ((u8) mnSoundTest_804D6C44 == 0) {
         temp_r3_3 = lbAudioAx_80023968(data_3[user_data->unk3]);
         temp_r5 = 0 & 0;
-        if (events & MenuEvent_unk2) {
+        if (events & MenuEvent_RTrigger) {
             temp_r30 = user_data->unk4;
             temp_r28_2 = data_3[user_data->unk3];
             temp_r3_4 = mnSoundTest_804D6C40->user_data;
@@ -421,7 +421,7 @@ void fn_8024AED0(HSD_GObj* arg0)
             HSD_JObjReqAnimAll(sp7C, vec_4.x);
             mn_8022F3D8(sp7C, 0xFFU, MOBJ_MASK);
             HSD_JObjAnimAll(sp7C);
-        } else if (events & MenuEvent_unk) {
+        } else if (events & MenuEvent_LTrigger) {
             if (user_data->unkC == 1.0f) {
                 user_data->unkC = 0.98f;
             }
