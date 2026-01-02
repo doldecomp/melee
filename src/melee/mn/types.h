@@ -380,7 +380,15 @@ struct SSSData {
 struct AnimLoopSettings {
     /* +00 */ f32 start_frame;
     /* +04 */ f32 end_frame;
-    /* +08 */ f32 loop_frame; ///< if -1.0f, dont loop
+    /* +08 */ f32 loop_frame; ///< if this is -0.1f, dont loop
+};
+
+struct MenuKindData {
+    AnimLoopSettings* anim_loop;
+    float start_frame;
+    u16* description_indices; ///< array of sis idx's for each selection
+    u8 selection_count; ///< number of options/cursors in the menu
+    void (*think)(HSD_GObj*);
 };
 
 #endif

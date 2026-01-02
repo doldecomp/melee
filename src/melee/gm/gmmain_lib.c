@@ -859,63 +859,63 @@ struct gmm_x1868_1A8_t* gmMainLib_8015EDC8(void)
 
 s32 gmMainLib_8015EDD4(void)
 {
-    return gmMainLib_804D3EE0->thing.unk_4 & 4;
+    return gmMainLib_804D3EE0->thing.x186C & 4;
 }
 
 void gmMainLib_8015EDE4(void)
 {
-    gmMainLib_804D3EE0->thing.unk_4 |= 4;
+    gmMainLib_804D3EE0->thing.x186C |= 4;
 }
 
 void gmMainLib_8015EDF8(void)
 {
-    gmMainLib_804D3EE0->thing.unk_4 &= 0xFFFFFFFB;
+    gmMainLib_804D3EE0->thing.x186C &= 0xFFFFFFFB;
 }
 
 s32 gmMainLib_8015EE0C(void)
 {
-    return gmMainLib_804D3EE0->thing.unk_4 & 1;
+    return gmMainLib_804D3EE0->thing.x186C & 1;
 }
 
 void gmMainLib_8015EE1C(void)
 {
-    gmMainLib_804D3EE0->thing.unk_4 |= 1;
+    gmMainLib_804D3EE0->thing.x186C |= 1;
 }
 
 void gmMainLib_8015EE30(void)
 {
-    gmMainLib_804D3EE0->thing.unk_4 &= 0xFFFFFFFE;
+    gmMainLib_804D3EE0->thing.x186C &= 0xFFFFFFFE;
 }
 
 s32 gmMainLib_8015EE44(void)
 {
-    return gmMainLib_804D3EE0->thing.unk_4 & 2;
+    return gmMainLib_804D3EE0->thing.x186C & 2;
 }
 
 void gmMainLib_8015EE54(void)
 {
-    gmMainLib_804D3EE0->thing.unk_4 |= 2;
+    gmMainLib_804D3EE0->thing.x186C |= 2;
 }
 
 void gmMainLib_8015EE68(void)
 {
-    gmMainLib_804D3EE0->thing.unk_4 &= 0xFFFFFFFD;
+    gmMainLib_804D3EE0->thing.x186C &= 0xFFFFFFFD;
     gmMainLib_804D3EE0->thing.x1CB0.stage_mask = gmMainLib_803D4A60[6];
 }
 
 s32 gmMainLib_8015EE90(void)
 {
-    return gmMainLib_804D3EE0->thing.unk_4 & 8;
+    return gmMainLib_804D3EE0->thing.x186C & 8;
 }
 
 void gmMainLib_8015EEA0(void)
 {
-    gmMainLib_804D3EE0->thing.unk_4 |= 8;
+    gmMainLib_804D3EE0->thing.x186C |= 8;
 }
 
 void gmMainLib_8015EEB4(void)
 {
-    gmMainLib_804D3EE0->thing.unk_4 &= 0xFFFFFFF7;
+    gmMainLib_804D3EE0->thing.x186C &= 0xFFFFFFF7;
 }
 
 void gmMainLib_8015EEC8(void)
@@ -1048,7 +1048,7 @@ void gmMainLib_8015FA34(int arg0)
         }
     }
     if (g_debugLevel > 2 && db_804D6B20 != 0) {
-        gmMainLib_804D3EE0->thing.unk_4 = -1;
+        gmMainLib_804D3EE0->thing.x186C = -1;
         gm_80164F18();
         gm_8016468C();
         gm_8017297C();
@@ -1061,7 +1061,7 @@ void gmMainLib_8015FA34(int arg0)
 
 void gmMainLib_8015FB68(void)
 {
-    gmMainLib_804D3EE0->thing.unk_4 = 0;
+    gmMainLib_804D3EE0->thing.x186C = 0;
     gm_8016505C();
     gm_801647D0();
     gm_801729EC();
