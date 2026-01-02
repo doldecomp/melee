@@ -8,6 +8,7 @@
 #include "baselib/random.h"
 #include "cm/camera.h"
 #include "ef/efsync.h"
+#include "gr/grdatfiles.h"
 #include "gr/grdisplay.h"
 #include "gr/grlib.h"
 #include "gr/grmaterial.h"
@@ -22,6 +23,7 @@
 #include "lb/lb_00B0.h"
 #include "mp/mplib.h"
 
+#include <m2c_macros.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 
@@ -116,7 +118,10 @@ StageData grIm_803E4800 = {
     3,
 };
 
-const float grIm_804DB574 = 0.0;
+const float grIm_804DB574 = 0.0F;
+const float grIm_804DB5B0 = -1.0F;
+const float grIm_804DB5B4 = 1.0F;
+const float grIm_804DB5B8 = 6.0F;
 
 void grIceMt_801F6868(bool id) {}
 
@@ -813,7 +818,63 @@ void fn_801F8C64(Item_GObj* gobj, Ground* u1, Vec3* u2, HSD_GObj* u3, f32 u4)
     Camera_80030E44(2, &pos);
 }
 
-/// #grIceMt_801F8CDC
+/// @brief Creates material items and attaches them to Entity05 platform JObjs.
+/// @param gobj The Entity05 Ground_GObj
+/// @param joint_indices Array of joint indices to get parent JObjs from
+/// @param count Number of items to create (max 20)
+/// @param output_array Array to store created Item_GObj pointers
+void grIceMt_801F8CDC(Ground_GObj* gobj, s16* joint_indices, int count,
+                      HSD_GObj** output_array)
+{
+    Ground* gp = gobj->user_data;
+    UnkArchiveStruct* archive;
+    void* jobj_desc;
+    HSD_JObj* parent_jobjs[20];
+    HSD_JObj* parent_jobj;
+    HSD_JObj* child_jobj;
+    Item_GObj* item;
+    int i;
+    u8 unused[24];
+
+    archive = grDatFiles_801C6324();
+    jobj_desc = M2C_FIELD(archive->unk4->unk8, void**, 0x16C);
+
+    if (count > 20) {
+        __assert((char*) grIm_803E4068 + 0x690, 0x7D4,
+                 (char*) grIm_803E4068 + 0x7F0);
+    }
+
+    for (i = 0; i < count; i++) {
+        parent_jobjs[i] = Ground_801C3FA4(gobj, joint_indices[i]);
+    }
+
+    for (i = 0; i < count; i++) {
+        parent_jobj = parent_jobjs[i];
+        if (parent_jobj == NULL) {
+            __assert((char*) grIm_803E4068 + 0x690, 0x7E3,
+                     (char*) grIm_803E4068 + 0x810);
+        }
+
+        child_jobj = HSD_JObjLoadJoint(jobj_desc);
+        if (child_jobj == NULL) {
+            __assert((char*) grIm_803E4068 + 0x690, 0x7E6,
+                     (char*) grIm_803E4068 + 0x81C);
+        }
+
+        HSD_JObjAddChild(parent_jobj, child_jobj);
+
+        item = grMaterial_801C8CFC(8, 0, gp, parent_jobj, NULL, fn_801F8C64,
+                                   NULL);
+        if (item != NULL) {
+            grMaterial_801C8DE0(item, grIm_804DB574, grIm_804DB5B0,
+                                grIm_804DB574, grIm_804DB574, grIm_804DB5B4,
+                                grIm_804DB574, grIm_804DB5B8);
+            grMaterial_801C8E08(item);
+            grMaterial_801C8E68(item, 0);
+        }
+        output_array[i] = item;
+    }
+}
 
 /// #fn_801F8E58
 
