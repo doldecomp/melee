@@ -941,28 +941,28 @@ float grIceMt_801F96E0(float y)
 }
 
 /// #grIceMt_801F98A8
-int grIceMt_801F98A8(HSD_GObj* param1)
+/// @note Checks bit 6 of icemt2.xC4 (as byte) - clears it and does cleanup.
+int grIceMt_801F98A8(Ground_GObj* param1)
 {
-    Ground* gp = GET_GROUND(param1);
-    // gp->x8_callback = NULL;
-    // gp->xC_callback = NULL;
-    if (gp->gv.icemt2.xC8) {
-        Ground_801C2D0C(0, gp->gv.icemt2.xC8);
-    }
-    if (gp->gv.icemt2.xCC) {
-        Ground_801C2D0C(1, gp->gv.icemt2.xCC);
-    }
-    if (gp->gv.icemt2.xD0) {
-        Ground_801C2D0C(2, gp->gv.icemt2.xD0);
-    }
-    if (gp->gv.icemt2.xD4) {
-        Ground_801C2D0C(3, gp->gv.icemt2.xD4);
-    }
+    Ground* gp = param1->user_data;
+    u8 flags = *(u8*)&gp->gv.icemt2.xC4;
+    HSD_JObj** ptrs = &gp->gv.icemt2.xC8;
 
-    // Ground_801C2D0C(1);
-    // Ground_801C2D0C(2);
-    // Ground_801C2D0C(3);
-    // int bruh = Ground_801C2D0C(1, param1);
+    if (flags & 0x40) {
+        *(u8*)&gp->gv.icemt2.xC4 = flags & ~0x40;
+        if (ptrs[0]) {
+            Ground_801C2D0C(0, ptrs[0]);
+        }
+        if (ptrs[1]) {
+            Ground_801C2D0C(1, ptrs[1]);
+        }
+        if (ptrs[2]) {
+            Ground_801C2D0C(2, ptrs[2]);
+        }
+        if (ptrs[3]) {
+            Ground_801C2D0C(3, ptrs[3]);
+        }
+    }
     return 0;
 }
 
