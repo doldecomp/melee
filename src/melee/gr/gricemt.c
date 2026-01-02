@@ -68,7 +68,7 @@ IceMountainParams* grIm_804D69F4;
 
 /// @brief Ice Mountain row data - 12 bytes each.
 typedef struct IceMtRowData {
-    s32 id;  // Row identifier, compared with xAC[i] values
+    s32 id; // Row identifier, compared with xAC[i] values
     u32 x4;
     u32 x8;
 } IceMtRowData;
@@ -124,13 +124,24 @@ const float grIm_804DB5B8 = 6.0F;
 
 void grIceMt_801F6868(bool id) {}
 
+#define ICEMT_FIELD_MAX 6
+
 /// #grIceMt_801F686C
 void grIceMt_801F686C(void)
 {
-    int iVar3;
-    u32 uVar4;
-    f32 dVar6;
-    f32 dVar7;
+    s32 field30;
+    s32 field29;
+    s32 field28;
+    u32 row_idx;
+    s16* xAC;
+    s32 id;
+    f32 y_pos;
+    f32 y_pos2;
+    f32 y_pos3;
+    f32 y_pos4;
+    HSD_GObj* gobj;
+    HSD_JObj* jobj;
+
     grIm_804D69F4 = Ground_801C49F8();
     stage_info.unk8C.b4 = true;
     stage_info.unk8C.b5 = false;
@@ -142,47 +153,117 @@ void grIceMt_801F686C(void)
     Ground_801C3260(4);
     Ground_801C3260(5);
     Ground_801C3260(6);
-    iVar3 = Stage_80225194();
-    if (iVar3 == 76) { // adventure mode
-        // foreach (uVar4 = 0; (uVar4 < 7) && (grIm_804D69F4->xAC ==
-        // grIm_803E4068[uVar4]); uVar4++) {
 
-        //}
-        // TODO: Assembly shows checking both xAC[0] and xAC[1] against each id
-        if (grIm_804D69F4->xAC[0] == grIm_803E4068[0].id) {
-            uVar4 = 1;
-            if (grIm_804D69F4->xAC[0] == grIm_803E4068[1].id) {
-                uVar4 = 2;
-                if (grIm_804D69F4->xAC[0] == grIm_803E4068[2].id) {
-                    uVar4 = 3;
-                    if (grIm_804D69F4->xAC[0] == grIm_803E4068[3].id) {
-                        uVar4 = 4;
-                        if (grIm_804D69F4->xAC[0] == grIm_803E4068[4].id) {
-                            uVar4 = 5;
-                            if (grIm_804D69F4->xAC[0] == grIm_803E4068[5].id) {
-                                uVar4 = 6;
-                            }
-                        }
-                    }
-                }
+    if (Stage_80225194() == 76) {
+        // First loop: find row where neither xAC[0] nor xAC[1] matches
+        for (row_idx = 0; row_idx < ICEMT_FIELD_MAX; row_idx++) {
+            xAC = grIm_804D69F4->xAC;
+            id = grIm_803E4068[row_idx].id;
+            if (xAC[0] == id) {
+                continue;
             }
+            if (xAC[1] == id) {
+                continue;
+            }
+            field30 = grIm_803E4068[row_idx].id;
+            break;
         }
-        if (5 < uVar4) {
-            __assert("gricemt.c", 600, "<ICEMT_FIELD_MAX>");
+        if (row_idx >= ICEMT_FIELD_MAX) {
+            __assert("gricemt.c", 0x258, "<ICEMT_FIELD_MAX>");
         }
-        uVar4 = 0;
-        if (5 < uVar4) {
+
+        // Second loop: find row where xAC[0], xAC[1], and field30 don't match
+        for (row_idx = 0; row_idx < ICEMT_FIELD_MAX; row_idx++) {
+            xAC = grIm_804D69F4->xAC;
+            id = grIm_803E4068[row_idx].id;
+            if (xAC[0] == id) {
+                continue;
+            }
+            if (xAC[1] == id) {
+                continue;
+            }
+            if (field30 == id) {
+                continue;
+            }
+            field29 = grIm_803E4068[row_idx].id;
+            break;
+        }
+        if (row_idx >= ICEMT_FIELD_MAX) {
+            __assert("gricemt.c", 0x261, "<ICEMT_FIELD_MAX>");
+        }
+
+        // Third loop: find row where xAC[0], xAC[1], field30, and field29
+        // don't match
+        for (row_idx = 0; row_idx < ICEMT_FIELD_MAX; row_idx++) {
+            xAC = grIm_804D69F4->xAC;
+            id = grIm_803E4068[row_idx].id;
+            if (xAC[0] == id) {
+                continue;
+            }
+            if (xAC[1] == id) {
+                continue;
+            }
+            if (field30 == id) {
+                continue;
+            }
+            if (field29 == id) {
+                continue;
+            }
+            field28 = grIm_803E4068[row_idx].id;
+            break;
+        }
+        if (row_idx >= ICEMT_FIELD_MAX) {
             __assert("gricemt.c", 0x26B, "<ICEMT_FIELD_MAX>");
         }
-        __assert("gricemt.c", 0xA37, "bg_gobj");
-        __assert("gricemt.c", 0xA37, "bg_gobj");
-        __assert("gricemt.c", 0xA37, "bg_gobj");
-        __assert("gricemt.c", 0xA37, "bg_gobj");
-        __assert("gricemt.c", 0xA37, "bg_gobj");
-        dVar6 = Ground_801C0498();
-        dVar7 = -20.0 * dVar6;
-        // dVar6 = grIceMt_801F993C();
-    } else { // melee mode
+
+        // Calculate Y positions for the 3 topi platforms
+        y_pos = Ground_801C0498();
+        xAC = grIm_804D69F4->xAC;
+        y_pos = grIm_804DB570 * y_pos;
+        y_pos = y_pos + grIceMt_801F993C(grIm_803E4068[xAC[0]].id,
+                                         grIm_803E4068[xAC[1]].id);
+        y_pos2 = y_pos + grIceMt_801F993C(grIm_803E4068[xAC[1]].id, field30);
+        y_pos3 = y_pos2 + grIceMt_801F993C(field30, field29);
+        y_pos4 = y_pos3 + grIceMt_801F993C(field29, field28);
+
+        // Set up first topi (grIm_804D69E8)
+        gobj = grIceMt_801F71E8(grIm_803E4068[xAC[2]].id);
+        if (gobj == NULL) {
+            __assert("gricemt.c", 0x27C, "bg_gobj");
+        }
+        jobj = gobj->hsd_obj;
+        if (jobj == NULL) {
+            __assert("gricemt.c", 0x27D, "jobj");
+        }
+        HSD_JObjSetTranslateY(jobj, y_pos2);
+        grIm_804D69E8 = gobj;
+
+        // Set up second topi (grIm_804D69EC)
+        gobj = grIceMt_801F71E8(grIm_803E4068[xAC[3]].id);
+        if (gobj == NULL) {
+            __assert("gricemt.c", 0x281, "bg_gobj");
+        }
+        jobj = gobj->hsd_obj;
+        if (jobj == NULL) {
+            __assert("gricemt.c", 0x282, "jobj");
+        }
+        HSD_JObjSetTranslateY(jobj, y_pos3);
+        grIm_804D69EC = gobj;
+
+        // Set up third topi (grIm_804D69F0)
+        gobj = grIceMt_801F71E8(grIm_803E4068[xAC[4]].id);
+        if (gobj == NULL) {
+            __assert("gricemt.c", 0x286, "bg_gobj");
+        }
+        jobj = gobj->hsd_obj;
+        if (jobj == NULL) {
+            __assert("gricemt.c", 0x287, "jobj");
+        }
+        HSD_JObjSetTranslateY(jobj, y_pos4);
+        grIm_804D69F0 = gobj;
+
+        grIceMt_801F71E8(0xA);
+    } else {
         grIceMt_801F71E8(9);
         grIm_804D69E8 = NULL;
         grIm_804D69EC = NULL;
@@ -191,6 +272,7 @@ void grIceMt_801F686C(void)
     Ground_801C39C0();
     Ground_801C3BB4();
 }
+
 void grIceMt_801F7080(void)
 {
     // Ground_801C2BA4(5);
@@ -370,13 +452,13 @@ void grIceMt_801F75FC(Ground_GObj* arg0)
         val = *(s16*)((u8*)gp + 0xF4 + iVar1 * 2);
     } while (val != 0);
     *(s16*)((u8*)gp + 0xF4 + iVar1 * 2) = *(s16*)grIm_804D69F4;
-    gp->gv.icemt.xC4 = (s16)grIm_803E4068[iVar1].id;
+    gp->gv.icemt.xC4 = (s16) grIm_803E4068[iVar1].id;
     do {
         iVar1 = HSD_Randi(6);
         val = *(s16*)((u8*)gp + 0xF4 + iVar1 * 2);
     } while (val != 0);
     *(s16*)((u8*)gp + 0xF4 + iVar1 * 2) = *(s16*)grIm_804D69F4;
-    gp->gv.icemt.xC6 = (s16)grIm_803E4068[iVar1].id;
+    gp->gv.icemt.xC6 = (s16) grIm_803E4068[iVar1].id;
     grIceMt_801FA0BC((int) &gp->gv.icemt.xC4);
     gp->gv.icemt.xDA = 0;
     gp->gv.icemt.xC8 = 0;
@@ -424,8 +506,8 @@ void grIceMt_801F785C(Ground_GObj* gobj)
     Ground* gp = GET_GROUND(gobj);
 
     // Index into grIm_803E4068 using row indices from grIm_804D69F4->xAC
-    gp->gv.icemt.xC4 = (s16)grIm_803E4068[grIm_804D69F4->xAC[1]].id;
-    gp->gv.icemt.xC6 = (s16)grIm_803E4068[grIm_804D69F4->xAC[0]].id;
+    gp->gv.icemt.xC4 = (s16) grIm_803E4068[grIm_804D69F4->xAC[1]].id;
+    gp->gv.icemt.xC6 = (s16) grIm_803E4068[grIm_804D69F4->xAC[0]].id;
 
     grIceMt_801FA0BC((int) &gp->gv.icemt.xC4);
 
@@ -908,9 +990,9 @@ HSD_GObj* fn_801F91A8(HSD_GObj* arg0)
     Ground* gp = GET_GROUND(arg0);
     s16 index = grIm_804D69F4->xAC[gp->gv.icemt.xE0];
     if (index == -1) {
-        return (HSD_GObj*)index;
+        return (HSD_GObj*) index;
     }
-    return (HSD_GObj*)grIm_803E4068[index].id;
+    return (HSD_GObj*) grIm_803E4068[index].id;
 }
 
 /// #grIceMt_801F91EC

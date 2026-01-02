@@ -67,6 +67,8 @@ struct IceMountainParams {
     float xCC;
 };
 
+extern f32 grIm_804DB570;
+
 /* 1F6868 */ void grIceMt_801F6868(bool id);
 /* 1F686C */ void grIceMt_801F686C(void);
 /* 1F7080 */ void grIceMt_801F7080(void);
@@ -134,7 +136,7 @@ struct IceMountainParams {
 /* 1F9668 */ void grIceMt_801F9668(float);
 /* 1F96E0 */ float grIceMt_801F96E0(float);
 /* 1F98A8 */ bool grIceMt_801F98A8(HSD_GObj* param1);
-/* 1F993C */ UNK_RET grIceMt_801F993C(UNK_PARAMS);
+/* 1F993C */ f32 grIceMt_801F993C(s32, s32);
 /* 1F9ACC */ void grIceMt_801F9ACC(float);
 /* 1FA0BC */ UNK_RET grIceMt_801FA0BC(int);
 /* 1FA364 */ void grIceMt_801FA364(UNK_T, float*, HSD_GObjEvent, Ground_GObj*);
