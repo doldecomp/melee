@@ -367,7 +367,7 @@ struct grIceMt_GroundVars {
     /* +0 gp+D8 */ f32 xE4;
     /* +0 gp+D8 */ u32 xE8;
     /* +0 gp+D8 */ u32 xEC;
-    /* +0 gp+D8 */ u32 xF0;  // padding
+    /* +0 gp+D8 */ u32 xF0; // padding
     /* +0 gp+D8 */ IceMountainParams* xF4;
     /* +0 gp+D8 */ HSD_GObj* xF8[5];
 };
