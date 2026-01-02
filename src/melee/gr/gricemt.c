@@ -67,9 +67,8 @@ HSD_GObj* grIm_804D69F0;
 IceMountainParams* grIm_804D69F4;
 
 /// @brief Ice Mountain row data - 12 bytes each.
-/// First field is used both as pointer comparison and as s16 index.
 typedef struct IceMtRowData {
-    HSD_GObj* gobj;  // Also sign-extended to s16 when stored to xC4/xC6
+    s32 id;  // Row identifier, compared with xAC[i] values
     u32 x4;
     u32 x8;
 } IceMtRowData;
@@ -149,18 +148,18 @@ void grIceMt_801F686C(void)
         // grIm_803E4068[uVar4]); uVar4++) {
 
         //}
-        // uVar4 = 0;
-        if (grIm_804D69F4->xAC == grIm_803E4068[0].gobj) {
+        // TODO: Assembly shows checking both xAC[0] and xAC[1] against each id
+        if (grIm_804D69F4->xAC[0] == grIm_803E4068[0].id) {
             uVar4 = 1;
-            if (grIm_804D69F4->xAC == grIm_803E4068[1].gobj) {
+            if (grIm_804D69F4->xAC[0] == grIm_803E4068[1].id) {
                 uVar4 = 2;
-                if (grIm_804D69F4->xAC == grIm_803E4068[2].gobj) {
+                if (grIm_804D69F4->xAC[0] == grIm_803E4068[2].id) {
                     uVar4 = 3;
-                    if (grIm_804D69F4->xAC == grIm_803E4068[3].gobj) {
+                    if (grIm_804D69F4->xAC[0] == grIm_803E4068[3].id) {
                         uVar4 = 4;
-                        if (grIm_804D69F4->xAC == grIm_803E4068[4].gobj) {
+                        if (grIm_804D69F4->xAC[0] == grIm_803E4068[4].id) {
                             uVar4 = 5;
-                            if (grIm_804D69F4->xAC == grIm_803E4068[5].gobj) {
+                            if (grIm_804D69F4->xAC[0] == grIm_803E4068[5].id) {
                                 uVar4 = 6;
                             }
                         }
@@ -371,13 +370,13 @@ void grIceMt_801F75FC(Ground_GObj* arg0)
         val = *(s16*)((u8*)gp + 0xF4 + iVar1 * 2);
     } while (val != 0);
     *(s16*)((u8*)gp + 0xF4 + iVar1 * 2) = *(s16*)grIm_804D69F4;
-    gp->gv.icemt.xC4 = (s16)(s32)grIm_803E4068[iVar1].gobj;
+    gp->gv.icemt.xC4 = (s16)grIm_803E4068[iVar1].id;
     do {
         iVar1 = HSD_Randi(6);
         val = *(s16*)((u8*)gp + 0xF4 + iVar1 * 2);
     } while (val != 0);
     *(s16*)((u8*)gp + 0xF4 + iVar1 * 2) = *(s16*)grIm_804D69F4;
-    gp->gv.icemt.xC6 = (s16)(s32)grIm_803E4068[iVar1].gobj;
+    gp->gv.icemt.xC6 = (s16)grIm_803E4068[iVar1].id;
     grIceMt_801FA0BC((int) &gp->gv.icemt.xC4);
     gp->gv.icemt.xDA = 0;
     gp->gv.icemt.xC8 = 0;
@@ -424,11 +423,9 @@ void grIceMt_801F785C(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
 
-    // Index into grIm_803E4068 using s16 values from grIm_804D69F4->xAC
-    gp->gv.icemt.xC4 =
-        (s16) (s32) grIm_803E4068[M2C_FIELD(grIm_804D69F4->xAC, s16*, 2)].gobj;
-    gp->gv.icemt.xC6 =
-        (s16) (s32) grIm_803E4068[M2C_FIELD(grIm_804D69F4->xAC, s16*, 0)].gobj;
+    // Index into grIm_803E4068 using row indices from grIm_804D69F4->xAC
+    gp->gv.icemt.xC4 = (s16)grIm_803E4068[grIm_804D69F4->xAC[1]].id;
+    gp->gv.icemt.xC6 = (s16)grIm_803E4068[grIm_804D69F4->xAC[0]].id;
 
     grIceMt_801FA0BC((int) &gp->gv.icemt.xC4);
 
@@ -905,12 +902,15 @@ IceMountainParams* fn_801F9150(HSD_GObj* arg0)
 void fn_801F91A4(void) {}
 
 /// #fn_801F91A8 grIm_804D69F4
+/// @todo This function reads xAC[gp->xE0] and returns grIm_803E4068[index].id
 HSD_GObj* fn_801F91A8(HSD_GObj* arg0)
 {
-    HSD_GObj* iVar2 = grIm_804D69F4->xAC;
-    // if (iVar2 != -1) {
-    return iVar2;
-    //}
+    Ground* gp = GET_GROUND(arg0);
+    s16 index = grIm_804D69F4->xAC[gp->gv.icemt.xE0];
+    if (index == -1) {
+        return (HSD_GObj*)index;
+    }
+    return (HSD_GObj*)grIm_803E4068[index].id;
 }
 
 /// #grIceMt_801F91EC

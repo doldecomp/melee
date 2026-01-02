@@ -56,7 +56,7 @@ struct IceMountainParams {
     float xA0;
     float xA4;
     float xA8;
-    HSD_GObj* xAC;
+    s16* xAC;
     float xB0;
     float xB4;
     s16 xB8;
