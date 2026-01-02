@@ -629,6 +629,13 @@ bool grIceMt_801F85BC(Ground_GObj* param1)
 }
 
 /// #grIceMt_801F85C4
+void grIceMt_801F85C4(Ground_GObj* gobj)
+{
+    Ground* gp = gobj->user_data;
+    grIceMt_801F929C((HSD_GObj*)&gp->gv.icemt.xF4[5]);
+    grIceMt_801F98A8(gobj);
+    Ground_801C2FE0(gobj);
+}
 
 /// #grIceMt_801F8608
 void grIceMt_801F8608(Ground_GObj* arg0)
@@ -683,7 +690,19 @@ void grIceMt_801F87C8(Ground_GObj* param1)
     return;
 }
 
-/// #grIceMt_801F87FC
+/// @todo Rename: This is callback3 (destroy) for row 5 in grIm_803E4718.
+/// Destroys HSD_GObj* stored in icemt.xF4[1-5].
+void grIceMt_801F87FC(Ground_GObj* gobj)
+{
+    Ground* gp = gobj->user_data;
+    int i;
+    for (i = 0; i < 5; i++) {
+        HSD_GObj* temp;
+        if ((temp = gp->gv.icemt.xF4[i + 1]) != NULL) {
+            grMaterial_801C8CDC(temp);
+        }
+    }
+}
 
 /// #grIceMt_801F8850
 void grIceMt_801F8850(Ground_GObj* arg0)
