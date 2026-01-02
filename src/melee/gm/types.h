@@ -911,8 +911,7 @@ STATIC_ASSERT(sizeof(struct MenuEnterData) == 0x4);
 /// @brief data passed to OnLeave callback for MJ_MENU
 struct MenuExitData {
     /* +00 */ s8 pending_major; ///< will set the next major scene
-    /* +01 */ s8 pending_minor; ///< will set the next minor scene
-    /* +02 */ u8 _2[0x2];
+    /* +01 */ u8 _1[0x3];
 };
 STATIC_ASSERT(sizeof(struct MenuExitData) == 0x4);
 

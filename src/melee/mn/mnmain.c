@@ -717,28 +717,28 @@ void mn_80229894(s32 arg0, u16 arg1, s32 arg2)
 }
 
 /// @brief checks if a menu selection is locked
-bool mn_80229938(s32 arg0, s32 arg1)
+bool mn_80229938(MenuKind menu_kind, s32 selection)
 {
-    if (arg0 == 6 && arg1 == 2) {
+    if (menu_kind == 6 && selection == 2) {
         if (gmMainLib_8015EDD4()) {
             return true;
         }
         return false;
     }
-    if (arg0 == 5 && arg1 == 2) {
+    if (menu_kind == 5 && selection == 2) {
         if (gmMainLib_8015EE90()) {
             return true;
         }
         return false;
     }
-    if (arg0 == 4 && arg1 == 3) {
+    if (menu_kind == 4 && selection == 3) {
         return false;
     }
-    if (arg0 == 1 && arg1 == 2) {
+    if (menu_kind == 1 && selection == 2) {
         return false;
     }
-    if (arg0 == 3) {
-        switch (arg1) {
+    if (menu_kind == 3) {
+        switch (selection) {
         case 2:
             return false;
         default:
@@ -1818,6 +1818,29 @@ static inline void x2_inc(u8 temp_r29)
         !mn_80229938(mn_804A04F0.cur_menu, mn_804A04F0.hovered_selection));
 }
 
+static inline void decrement_selection(u8 selection_count, s32 menu_kind)
+{
+    do {
+        if (mn_804A04F0.hovered_selection != 0) {
+            mn_804A04F0.hovered_selection--;
+        } else {
+            mn_804A04F0.hovered_selection = selection_count - 1;
+        }
+    } while (mn_80229938(menu_kind, mn_804A04F0.hovered_selection) == 0);
+}
+
+static inline void increment_selection(u8 selection_count, MenuKind menu_kind)
+{
+    do {
+        if (mn_804A04F0.hovered_selection == selection_count - 1) {
+            mn_804A04F0.hovered_selection = 0;
+        } else {
+            mn_804A04F0.hovered_selection++;
+        }
+    } while (mn_80229938(menu_kind, mn_804A04F0.hovered_selection) == 0);
+}
+
+
 /// @brief Special Vs menu think
 void mn_8022C4F4(HSD_GObj* gp)
 {
@@ -2573,7 +2596,7 @@ void mn_8022D7F4(HSD_GObj* gp)
     }
 }
 
-/// @brief Main menu think
+/// @brief Main menu input think
 void mn_8022DB10(HSD_GObj* gp)
 {
     MenuExitData* data;
@@ -2582,19 +2605,23 @@ void mn_8022DB10(HSD_GObj* gp)
     int selection_count;
     u16 hovered_selection;
     HSD_GObjProc* temp_r3_2;
+    MenuFlow* mf = &mn_804A04F0;
+    u8* prev_menu_ptr;
+    u16* selection_ptr;
     u32 buttons;
-
     PAD_STACK(8);
 
     selection_count = mn_803EB6B0[MENU_KIND_MAIN].selection_count & 0xFF;
     buttons = mn_80229624(4);
-    mn_804A04F0.buttons = buttons;
+    mf->buttons = buttons;
     if (buttons & MenuInput_Confirm) {
         mn_804D6BC8.cooldown = 5;
-        mn_804A04F0.entering_menu = 1;
+        mf->entering_menu = 1;
         lbAudioAx_80024030(1);
-        mn_804A04F0.prev_menu = mn_804A04F0.cur_menu;
-        switch (mn_804A04F0.hovered_selection) {
+        prev_menu_ptr = &mf->prev_menu;
+        selection_ptr = &mf->hovered_selection;
+        *prev_menu_ptr = mf->cur_menu;
+        switch (mf->hovered_selection) {
         case SEL_MAIN_1P:
             menu_kind = MENU_KIND_1P;
             hovered_selection = 0;
@@ -2617,9 +2644,9 @@ void mn_8022DB10(HSD_GObj* gp)
             break;
         }
         mn_804D6BC8.cooldown = 5;
-        mn_804A04F0.prev_menu = mn_804A04F0.cur_menu;
-        mn_804A04F0.cur_menu = menu_kind;
-        mn_804A04F0.hovered_selection = hovered_selection;
+        *prev_menu_ptr = mf->cur_menu;
+        mf->cur_menu = menu_kind;
+        *selection_ptr = hovered_selection;
         HSD_GObj_80390CD4(mn_8022B3A0(1));
         HSD_GObjPLink_80390228(HSD_GObj_804D781C);
         /// @todo casting u64 here makes it match, but i dont know why
@@ -2630,32 +2657,17 @@ void mn_8022DB10(HSD_GObj* gp)
         }
     } else if (buttons & MenuInput_Back) {
         lbAudioAx_80024030(0);
-        mn_804A04F0.entering_menu = 0;
+        mf->entering_menu = 0;
         mn_804D6BC8.cooldown = 5;
         data = gm_801A4B9C();
         data->pending_major = MJ_TITLE;
         gm_801A4B60();
     } else if (buttons & MenuInput_Up) {
         lbAudioAx_80024030(2);
-        do {
-            if (mn_804A04F0.hovered_selection !=
-                (MainMenuSelection) SEL_MAIN_1P)
-            {
-                mn_804A04F0.hovered_selection--;
-            } else {
-                mn_804A04F0.hovered_selection = (u8) selection_count - 1;
-            }
-        } while (mn_80229938(0, mn_804A04F0.hovered_selection) == 0);
+        decrement_selection(selection_count, MENU_KIND_MAIN);
     } else if (buttons & MenuInput_Down) {
         lbAudioAx_80024030(2);
-        do {
-            if (mn_804A04F0.hovered_selection == (u8) selection_count - 1) {
-                mn_804A04F0.hovered_selection =
-                    (MainMenuSelection) SEL_MAIN_1P;
-            } else {
-                mn_804A04F0.hovered_selection++;
-            }
-        } while (mn_80229938(0, mn_804A04F0.hovered_selection) == 0);
+        increment_selection(selection_count, MENU_KIND_MAIN);
     }
 }
 

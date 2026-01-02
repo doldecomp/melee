@@ -91,7 +91,7 @@ void mnSound_802492CC(HSD_GObj* gobj)
         mn_80229894(4, 1, 3);
         return;
     }
-    if (events & (MenuEvent_Up | MenuInput_Down)) {
+    if (events & (MenuInput_Up | MenuInput_Down)) {
         // switch between the two
         sfxMove();
         if ((u8) menu->unk2 == 0) {
