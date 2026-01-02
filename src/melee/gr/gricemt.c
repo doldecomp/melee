@@ -451,13 +451,13 @@ void grIceMt_801F75FC(Ground_GObj* arg0)
         iVar1 = HSD_Randi(6);
         val = gp->gv.icemt.xF4[iVar1];
     } while (val != 0);
-    gp->gv.icemt.xF4[iVar1] = *(s16*)grIm_804D69F4;
+    gp->gv.icemt.xF4[iVar1] = *(s16*) grIm_804D69F4;
     gp->gv.icemt.xC4 = (s16) grIm_803E4068[iVar1].id;
     do {
         iVar1 = HSD_Randi(6);
         val = gp->gv.icemt.xF4[iVar1];
     } while (val != 0);
-    gp->gv.icemt.xF4[iVar1] = *(s16*)grIm_804D69F4;
+    gp->gv.icemt.xF4[iVar1] = *(s16*) grIm_804D69F4;
     gp->gv.icemt.xC6 = (s16) grIm_803E4068[iVar1].id;
     grIceMt_801FA0BC((int) &gp->gv.icemt.xC4);
     gp->gv.icemt.xDA = 0;
@@ -990,7 +990,7 @@ HSD_GObj* fn_801F91A8(HSD_GObj* arg0)
     Ground* gp = GET_GROUND(arg0);
     s16 index = grIm_804D69F4->xAC[gp->gv.icemt.xE0];
     if (index == -1) {
-        return (HSD_GObj*) index;
+        return (HSD_GObj*) (s32) index;
     }
     return (HSD_GObj*) grIm_803E4068[index].id;
 }
