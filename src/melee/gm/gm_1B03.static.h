@@ -26,10 +26,6 @@ struct DebugSoundTestData {
     u32 x4;
 };
 
-struct MainMenuExitData {
-    u8 x0;
-};
-
 struct TrainingMenuData {
     u8 pad_x0[0x6 - 0x0];
     s16 x6;

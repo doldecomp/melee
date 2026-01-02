@@ -1687,11 +1687,11 @@ int mn_8022C010(int menu_kind, int selection)
     switch (menu_kind) {
     case MENU_KIND_1P:
     case MENU_KIND_REG:
-    case MENU_KIND_7:
+    case MENU_KIND_EVENT:
     case MENU_KIND_8:
     case MENU_KIND_STADIUM:
     case MENU_KIND_10:
-    case MENU_KIND_33:
+    case MENU_KIND_MULTI_VS:
         return 0;
     case MENU_KIND_VS:
     case MENU_KIND_11:
@@ -2881,10 +2881,10 @@ void mn_8022DDA8_OnEnter(MenuEnterData* data)
     mn_80229DC0();
 
     switch (data->menu_kind) {
-    case MENU_KIND_7:
+    case MENU_KIND_EVENT:
         mnEvent_8024E838(gm_801BEB80(), 0);
         break;
-    case MENU_KIND_33:
+    case MENU_KIND_MULTI_VS:
         mnHyaku_8024CD64(data->hovered_selection);
         break;
     default:
@@ -3146,7 +3146,7 @@ bool mn_8022F218(void)
 
 void mn_8022F268(void)
 {
-    gmMainLib_8015CC34()->unk_x0 = 1;
+    gmMainLib_8015CC34()->force_main_menu = 1;
 }
 
 /// @brief returns the current frame of jobjs animation

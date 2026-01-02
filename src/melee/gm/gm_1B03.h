@@ -7,12 +7,6 @@
 #include <melee/mn/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
-struct gm_801B0FF8_arg0_x10_t {
-    /* +0 */ s8 x0;
-    /* +1 */ s8 x1;
-    /* +2 */ s8 x2;
-};
-
 struct gm_8049E548_t {
     /* 0x00 */ char c_kind[4];
     /* 0x04 */ u8 x4[4];

@@ -773,7 +773,7 @@ void gmMainLib_8015DB80(void)
 
 int gmMainLib_8015ECB0(void)
 {
-    return gmMainLib_804D3EE0->x1850.unk_x1;
+    return gmMainLib_804D3EE0->x1850.bgm;
 }
 
 void gmMainLib_8015ECBC(void)
@@ -783,12 +783,12 @@ void gmMainLib_8015ECBC(void)
     GameRules* rules = &gmMainLib_804D3EE0->x1850;
     if (gm_80164600() && gm_80164ABC()) {
         if (HSD_Randi(4) != 0) {
-            rules->unk_x1 = 0x34;
+            rules->bgm = 0x34;
         } else {
-            rules->unk_x1 = 0x36;
+            rules->bgm = 0x36;
         }
     } else {
-        rules->unk_x1 = 0x34;
+        rules->bgm = 0x34;
     }
 }
 

@@ -7,6 +7,7 @@
 
 #include "if/soundtest.h"
 
+#include "mn/forward.h"
 #include <melee/pl/forward.h>
 
 #include <sysdolphin/baselib/controller.h>
@@ -758,13 +759,13 @@ MinorScene gm_803DD8B8_MinorScenes[] = {
     { -1 },
 };
 
-void gm_801B0FF8(MinorScene* arg0)
+void gm_801B0FF8(MinorScene* scene)
 {
-    GameRules* temp_r3;
-    struct gm_801B0FF8_arg0_x10_t* temp_r31;
+    GameRules* rules;
+    MenuEnterData* data;
     MajorSceneKind var_r0;
 
-    temp_r31 = arg0->info.load_data;
+    data = scene->info.load_data;
     lb_8001C550();
     lb_8001D164(0);
     lbSnap_8001E218(HSD_MemAlloc(lbSnap_8001E204()),
@@ -780,160 +781,160 @@ void gm_801B0FF8(MinorScene* arg0)
     lbDvd_8001823C();
     lbDvd_80018254();
     mnGallery_80258940();
-    temp_r3 = gmMainLib_8015CC34();
-    if (temp_r3->unk_x0 != 0) {
-        temp_r3->unk_x0 = 0;
-        temp_r31->x0 = 0;
-        temp_r31->x1 = 0;
-        temp_r31->x2 = 1;
+    rules = gmMainLib_8015CC34();
+    if (rules->force_main_menu != 0) {
+        rules->force_main_menu = 0;
+        data->menu_kind = MENU_KIND_MAIN;
+        data->hovered_selection = SEL_MAIN_1P;
+        data->load_assets = 1;
         return;
     }
-    temp_r31->x2 = 1;
+    data->load_assets = 1;
     var_r0 = gm_801A4320();
     if (var_r0 == MJ_CHALLENGER_APPROACH) {
         var_r0 = gm_801737D8();
     }
     switch (var_r0) {
     case MJ_CLASSIC:
-        temp_r31->x0 = 6;
-        temp_r31->x1 = 0;
+        data->menu_kind = MENU_KIND_REG;
+        data->hovered_selection = SEL_REG_CLASSIC;
         return;
     case MJ_ADVENTURE:
-        temp_r31->x0 = 6;
-        temp_r31->x1 = 1;
+        data->menu_kind = MENU_KIND_REG;
+        data->hovered_selection = SEL_REG_ADVENTURE;
         return;
     case MJ_ALLSTAR:
-        temp_r31->x0 = 6;
-        temp_r31->x1 = 2;
+        data->menu_kind = MENU_KIND_REG;
+        data->hovered_selection = SEL_REG_ALLSTAR;
         return;
     case MJ_CLASSIC_GOVER:
-        temp_r31->x0 = 6;
-        temp_r31->x1 = 0;
+        data->menu_kind = MENU_KIND_REG;
+        data->hovered_selection = SEL_REG_CLASSIC;
         return;
     case MJ_ADVENTURE_GOVER:
-        temp_r31->x0 = 6;
-        temp_r31->x1 = 1;
+        data->menu_kind = MENU_KIND_REG;
+        data->hovered_selection = SEL_REG_ADVENTURE;
         return;
     case MJ_ALLSTAR_GOVER:
-        temp_r31->x0 = 6;
-        temp_r31->x1 = 2;
+        data->menu_kind = MENU_KIND_REG;
+        data->hovered_selection = SEL_REG_ALLSTAR;
         return;
     case MJ_EVENT:
-        temp_r31->x0 = 7;
-        temp_r31->x1 = 0;
+        data->menu_kind = MENU_KIND_EVENT;
+        data->hovered_selection = 0;
         return;
     case MJ_TARGET_TEST:
-        temp_r31->x0 = 9;
-        temp_r31->x1 = 0;
+        data->menu_kind = MENU_KIND_STADIUM;
+        data->hovered_selection = SEL_STADIUM_TARGET;
         return;
     case MJ_10MAN_VS:
-        temp_r31->x0 = 0x21;
-        temp_r31->x1 = 0;
+        data->menu_kind = MENU_KIND_MULTI_VS;
+        data->hovered_selection = SEL_MULTI_VS_10MAN;
         return;
     case MJ_100MAN_VS:
-        temp_r31->x0 = 0x21;
-        temp_r31->x1 = 1;
+        data->menu_kind = MENU_KIND_MULTI_VS;
+        data->hovered_selection = SEL_MULTI_VS_100MAN;
         return;
     case MJ_3MIN_VS:
-        temp_r31->x0 = 0x21;
-        temp_r31->x1 = 2;
+        data->menu_kind = MENU_KIND_MULTI_VS;
+        data->hovered_selection = SEL_MULTI_VS_3MIN;
         return;
     case MJ_15MIN_VS:
-        temp_r31->x0 = 0x21;
-        temp_r31->x1 = 3;
+        data->menu_kind = MENU_KIND_MULTI_VS;
+        data->hovered_selection = SEL_MULTI_VS_15MIN;
         return;
     case MJ_ENDLESS_VS:
-        temp_r31->x0 = 0x21;
-        temp_r31->x1 = 4;
+        data->menu_kind = MENU_KIND_MULTI_VS;
+        data->hovered_selection = SEL_MULTI_VS_ENDLESS;
         return;
     case MJ_CRUEL_VS:
-        temp_r31->x0 = 0x21;
-        temp_r31->x1 = 5;
+        data->menu_kind = MENU_KIND_MULTI_VS;
+        data->hovered_selection = SEL_MULTI_VS_CRUEL;
         return;
     case MJ_HOME_RUN_CONTEST:
-        temp_r31->x0 = 9;
-        temp_r31->x1 = 1;
+        data->menu_kind = MENU_KIND_STADIUM;
+        data->hovered_selection = SEL_STADIUM_HOMERUN;
         return;
     case MJ_TRAINING:
-        temp_r31->x0 = 1;
-        temp_r31->x1 = 4;
+        data->menu_kind = MENU_KIND_1P;
+        data->hovered_selection = SEL_1P_TRAINING;
         return;
     case MJ_VS:
-        temp_r31->x0 = 2;
-        temp_r31->x1 = 0;
+        data->menu_kind = MENU_KIND_VS;
+        data->hovered_selection = SEL_VS_MELEE;
         return;
     case MJ_TOURNAMENT:
-        temp_r31->x0 = 2;
-        temp_r31->x1 = 1;
+        data->menu_kind = MENU_KIND_VS;
+        data->hovered_selection = SEL_VS_TOURNAMENT;
         return;
     case MJ_CAMERA_MODE:
-        temp_r31->x0 = 0xC;
-        temp_r31->x1 = 0;
+        data->menu_kind = MENU_KIND_SPECIAL;
+        data->hovered_selection = SEL_SPECIAL_VS_CAMERA;
         return;
     case MJ_STAMINA_VS:
-        temp_r31->x0 = 0xC;
-        temp_r31->x1 = 1;
+        data->menu_kind = MENU_KIND_SPECIAL;
+        data->hovered_selection = SEL_SPECIAL_VS_STAMINA;
         return;
     case MJ_SUPER_SUDDEN_DEATH_VS:
-        temp_r31->x0 = 0xC;
-        temp_r31->x1 = 2;
+        data->menu_kind = MENU_KIND_SPECIAL;
+        data->hovered_selection = SEL_SPECIAL_VS_SUDDEN_DEATH;
         return;
     case MJ_GIANT_VS:
-        temp_r31->x0 = 0xC;
-        temp_r31->x1 = 3;
+        data->menu_kind = MENU_KIND_SPECIAL;
+        data->hovered_selection = SEL_SPECIAL_VS_GIANT;
         return;
     case MJ_TINY_VS:
-        temp_r31->x0 = 0xC;
-        temp_r31->x1 = 4;
+        data->menu_kind = MENU_KIND_SPECIAL;
+        data->hovered_selection = SEL_SPECIAL_VS_TINY;
         return;
     case MJ_INVISIBLE_VS:
-        temp_r31->x0 = 0xC;
-        temp_r31->x1 = 5;
+        data->menu_kind = MENU_KIND_SPECIAL;
+        data->hovered_selection = SEL_SPECIAL_VS_INVISIBLE;
         return;
     case MJ_SLOMO_VS:
-        temp_r31->x0 = 0xC;
-        temp_r31->x1 = 9;
+        data->menu_kind = MENU_KIND_SPECIAL;
+        data->hovered_selection = SEL_SPECIAL_VS_SLOMO;
         return;
     case MJ_LIGHTNING_VS:
-        temp_r31->x0 = 0xC;
-        temp_r31->x1 = 8;
+        data->menu_kind = MENU_KIND_SPECIAL;
+        data->hovered_selection = SEL_SPECIAL_VS_LIGHTNING;
         return;
     case MJ_FIXED_CAMERA_VS:
-        temp_r31->x0 = 0xC;
-        temp_r31->x1 = 6;
+        data->menu_kind = MENU_KIND_SPECIAL;
+        data->hovered_selection = SEL_SPECIAL_VS_FIXED_CAMERA;
         return;
     case MJ_SINGLE_BUTTON_VS:
-        temp_r31->x0 = 0xC;
-        temp_r31->x1 = 7;
+        data->menu_kind = MENU_KIND_SPECIAL;
+        data->hovered_selection = SEL_SPECIAL_VS_SINGLE_BUTTON;
         return;
     case MJ_TOY_GALLERY:
-        temp_r31->x0 = 3;
-        temp_r31->x1 = 0;
+        data->menu_kind = MENU_KIND_TOY;
+        data->hovered_selection = SEL_TOY_GALLERY;
         return;
     case MJ_TOY_LOTTERY:
-        temp_r31->x0 = 3;
-        temp_r31->x1 = 1;
+        data->menu_kind = MENU_KIND_TOY;
+        data->hovered_selection = SEL_TOY_LOTTERY;
         return;
     case MJ_TOY_COLLECTION:
-        temp_r31->x0 = 3;
-        temp_r31->x1 = 3;
+        data->menu_kind = MENU_KIND_TOY;
+        data->hovered_selection = SEL_TOY_COLLECTION;
         return;
     case MJ_MENU:
-        temp_r31->x0 = 4;
-        temp_r31->x1 = 4;
+        data->menu_kind = MENU_KIND_SETTINGS;
+        data->hovered_selection = SEL_SETTINGS_LANG;
         return;
     default:
-        temp_r31->x0 = 0;
-        temp_r31->x1 = 0;
+        data->menu_kind = MENU_KIND_MAIN;
+        data->hovered_selection = SEL_MAIN_1P;
         return;
     }
 }
 
 void gm_801B138C(MinorScene* arg0)
 {
-    struct MainMenuExitData* data = arg0->info.leave_data;
+    MenuExitData* data = arg0->info.leave_data;
 
-    gm_801A42E8(data->x0);
+    gm_801A42E8(data->pending_major);
     gm_801A42D4();
 }
 
