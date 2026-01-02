@@ -353,7 +353,9 @@ struct grIceMt_GroundVars {
     /* +0 gp+D8 */ s16 xDE;
     /* +0 gp+D8 */ s16 xE0;
     /* +0 gp+D8 */ f32 xE4;
-    /// @brief Mixed pointer array: xF4[0] = IceMountainParams*, xF4[1-5] = HSD_GObj*.
+    /* +0 gp+D8 */ u32 xE8;
+    /* +0 gp+D8 */ u32 xEC;
+    /// @brief xF4[0] = IceMountainParams*, xF4[1-5] = HSD_GObj*.
     /* +0 gp+D8 */ void* xF4[6];
 };
 struct grIceMt_GroundVars2 {
