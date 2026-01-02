@@ -82,8 +82,8 @@ void mnSound_802492CC(HSD_GObj* gobj)
         Menu_DecrementAnimTimer();
         return;
     }
-    events = Menu_GetAllEvents();
-    if (events & MenuEvent_Back) {
+    events = Menu_GetAllInputs();
+    if (events & MenuInput_Back) {
         sfxBack();
         mn_804A04F0.entering_menu = 0;
         gmMainLib_8015ED80(GET_MENU(mnSound_804D6C30)->unk3);
@@ -91,7 +91,7 @@ void mnSound_802492CC(HSD_GObj* gobj)
         mn_80229894(4, 1, 3);
         return;
     }
-    if (events & (MenuEvent_Up | MenuEvent_Down)) {
+    if (events & (MenuEvent_Up | MenuInput_Down)) {
         // switch between the two
         sfxMove();
         if ((u8) menu->unk2 == 0) {
@@ -109,7 +109,7 @@ void mnSound_802492CC(HSD_GObj* gobj)
         }
         return;
     }
-    if (events & MenuEvent_Left) {
+    if (events & MenuInput_Left) {
         if (menu->unk2 == 0) {
             if (menu->unk1 == 1) {
                 // switch from mono to stereo
@@ -126,7 +126,7 @@ void mnSound_802492CC(HSD_GObj* gobj)
             gm_801602C0(menu->unk3);
             gmMainLib_8015ED80(menu->unk3);
         }
-    } else if (events & MenuEvent_Right) {
+    } else if (events & MenuInput_Right) {
         if (menu->unk2 == 0) {
             if (menu->unk1 == 0) {
                 // switch from stereo to mono

@@ -169,7 +169,7 @@ void fn_80252C50(HSD_GObj* gobj)
     // Investigate further Context: inadvertent hack to remove an extra `li
     // r29,0` operation using i = 0
     i = 0;
-    temp_r3 = Menu_GetAllEvents();
+    temp_r3 = Menu_GetAllInputs();
     if (((u64) temp_r3 & 0x20) != 0) {
         lbAudioAx_80024030(i);
         mn_804A04F0.entering_menu = i;
