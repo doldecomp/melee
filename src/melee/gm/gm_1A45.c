@@ -179,14 +179,16 @@ void gm_801A4B88(struct MinorSceneInfo* info)
     gm_804D6720 = info;
 }
 
+/// @brief returns a pointer to the current scenes enter data
 void* gm_801A4B90(void)
 {
-    return gm_804D6720->unk_struct_0;
+    return gm_804D6720->load_data;
 }
 
+/// @brief returns a pointer to the current scenes exit data
 void* gm_801A4B9C(void)
 {
-    return gm_804D6720->unk_struct_1;
+    return gm_804D6720->leave_data;
 }
 
 u32 gm_801A4BA8(void)
