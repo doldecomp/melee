@@ -14,25 +14,30 @@ typedef struct vi1202_UnkStruct vi1202_UnkStruct;
 /// - Functions at 0x80321900+ named CrowdSFXManager_* in that map
 /// - Audio function 0x8002411C named lbAudio_PlayCrowdSFX
 /// - Code triggers match wiki descriptions of crowd gasps/cheers
-///
-/// @todo Field names are speculative based on observed usage
 typedef struct CrowdConfig {
-    /* 0x00 */ f32 x0;
-    /* 0x04 */ f32 x4;
-    /* 0x08 */ f32 x8;
-    /* 0x0C */ f32 xC;
-    /* 0x10 */ f32 x10;
-    /* 0x14 */ f32 x14;
+    /// Knockback thresholds for crowd gasp intensity (cat 1/2/3)
+    /* 0x00 */ f32 kb_threshold_low;
+    /* 0x04 */ f32 kb_threshold_mid;
+    /* 0x08 */ f32 kb_threshold_high;
+    /// Angle range and multiplier for crowd reaction modifier
+    /* 0x0C */ f32 angle_min;
+    /* 0x10 */ f32 angle_max;
+    /* 0x14 */ f32 angle_mult;
     /* 0x18 */ u8 pad18[0x20 - 0x18];
-    /* 0x20 */ s32 x20;
+    /// Cheer/gasp timing limits
+    /* 0x20 */ s32 cheer_limit;
     /* 0x24 */ s32 x24;
-    /* 0x28 */ s32 x28;
-    /* 0x2C */ f32 x2C;
-    /* 0x30 */ f32 x30;
-    /* 0x34 */ f32 x34;
-    /* 0x38 */ f32 x38;
-    /* 0x3C */ s32 x3C;
-    /* 0x40 */ f32 x40;
+    /* 0x28 */ s32 max_gasp_count;
+    /// Horizontal margin from blast zone for out-of-bounds check
+    /* 0x2C */ f32 horiz_margin;
+    /// Y-position thresholds for recovery gasp intensity (cat 3/2/1)
+    /* 0x30 */ f32 recovery_y_high;
+    /* 0x34 */ f32 recovery_y_mid;
+    /* 0x38 */ f32 recovery_y_low;
+    /// Fighter count threshold to trigger blast zone proximity gasp
+    /* 0x3C */ s32 fighters_near_blastzone;
+    /// Y-offset added to blast zone bottom for proximity check
+    /* 0x40 */ f32 blastzone_y_offset;
 } CrowdConfig;
 
 /* 4D6500 */ extern CrowdConfig* gCrowdConfig;
