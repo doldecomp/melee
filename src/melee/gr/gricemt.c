@@ -932,11 +932,10 @@ void grIceMt_801F8CDC(Ground_GObj* gobj, s16* joint_indices, int count,
     u8 unused[24];
 
     archive = grDatFiles_801C6324();
-    jobj_desc = M2C_FIELD(archive->unk4->unk8, void**, 0x16C);
+    jobj_desc = archive->unk4->unk8[7].unk0;
 
     if (count > 20) {
-        __assert((char*) grIm_803E4068 + 0x690, 0x7D4,
-                 (char*) grIm_803E4068 + 0x7F0);
+        __assert("gricemt.c", 0x7D4, "count <= 20");
     }
 
     for (i = 0; i < count; i++) {
@@ -946,14 +945,12 @@ void grIceMt_801F8CDC(Ground_GObj* gobj, s16* joint_indices, int count,
     for (i = 0; i < count; i++) {
         parent_jobj = parent_jobjs[i];
         if (parent_jobj == NULL) {
-            __assert((char*) grIm_803E4068 + 0x690, 0x7E3,
-                     (char*) grIm_803E4068 + 0x810);
+            __assert("gricemt.c", 0x7E3, "parent_jobj");
         }
 
         child_jobj = HSD_JObjLoadJoint(jobj_desc);
         if (child_jobj == NULL) {
-            __assert((char*) grIm_803E4068 + 0x690, 0x7E6,
-                     (char*) grIm_803E4068 + 0x81C);
+            __assert("gricemt.c", 0x7E6, "child_jobj");
         }
 
         HSD_JObjAddChild(parent_jobj, child_jobj);
