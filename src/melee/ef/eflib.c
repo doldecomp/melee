@@ -907,8 +907,8 @@ HSD_Generator* efLib_8005CC84(s32 arg0, HSD_JObj* jobj)
 
 HSD_Generator* efLib_8005CD2C(s32 arg0, void* vlist, HSD_GObj* arg_gobj)
 {
-    Vec3 sp18;
     HSD_Generator* generator;
+    Vec3 sp18;
     HSD_JObj* jobj_1;
 
     generator = efLib_8005C_inline(arg0, va_arg(vlist, HSD_JObj*));
