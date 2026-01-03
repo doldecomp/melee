@@ -1939,11 +1939,11 @@ void Camera_8002E6FC(int arg0)
     }
 
     cm_80452C68.x341_b1_b2 = 1;
-    *(s32*)&cm_80452C68.pad_342[2] = arg0;
+    cm_80452C68.x344.s32 = arg0;
 
     switch (cm_80452C68.x341_b1_b2) {
     case 1: {
-        HSD_GObj* gobj = Player_GetEntity(*(s32*)&cm_80452C68.pad_342[2]);
+        HSD_GObj* gobj = Player_GetEntity(cm_80452C68.x344.s32);
         if (gobj != NULL) {
             CmSubject* subject = ftLib_80086B74(gobj);
             if (subject != NULL) {
@@ -1953,12 +1953,10 @@ void Camera_8002E6FC(int arg0)
         break;
     }
     case 2:
-        cm_80452C68.transform.target_interest =
-            *(Vec3*)&cm_80452C68.pad_342[2];
+        cm_80452C68.transform.target_interest = cm_80452C68.x344.vec;
         break;
     case 3: {
-        s32 (**cbp)(Vec3*) = (s32 (**)(Vec3*))&cm_80452C68.pad_342[2];
-        if (*cbp != NULL && (*cbp)(&spC)) {
+        if (cm_80452C68.x344.cb != NULL && cm_80452C68.x344.cb(&spC)) {
             cm_80452C68.transform.target_interest = spC;
         }
         break;
@@ -1978,11 +1976,11 @@ void Camera_8002E818(Vec3* pos)
     }
 
     cm_80452C68.x341_b1_b2 = 2;
-    *(Vec3*)&cm_80452C68.pad_342[2] = *pos;
+    cm_80452C68.x344.vec = *pos;
 
     switch (cm_80452C68.x341_b1_b2) {
     case 1: {
-        HSD_GObj* gobj = Player_GetEntity(*(s32*)&cm_80452C68.pad_342[2]);
+        HSD_GObj* gobj = Player_GetEntity(cm_80452C68.x344.s32);
         if (gobj != NULL) {
             CmSubject* subject = ftLib_80086B74(gobj);
             if (subject != NULL) {
@@ -1992,11 +1990,10 @@ void Camera_8002E818(Vec3* pos)
         break;
     }
     case 2:
-        cm_80452C68.transform.target_interest = *(Vec3*)&cm_80452C68.pad_342[2];
+        cm_80452C68.transform.target_interest = cm_80452C68.x344.vec;
         break;
     case 3: {
-        s32 (**cbp)(Vec3*) = (s32 (**)(Vec3*))&cm_80452C68.pad_342[2];
-        if (*cbp != NULL && (*cbp)(&spC)) {
+        if (cm_80452C68.x344.cb != NULL && cm_80452C68.x344.cb(&spC)) {
             cm_80452C68.transform.target_interest = spC;
         }
         break;
@@ -2016,11 +2013,11 @@ void Camera_8002E948(bool (*cb)(Vec*))
     }
 
     cm_80452C68.x341_b1_b2 = 3;
-    *(bool (**)(Vec*))&cm_80452C68.pad_342[2] = cb;
+    cm_80452C68.x344.cb = (s32 (*)(Vec3*)) cb;
 
     switch (cm_80452C68.x341_b1_b2) {
     case 1: {
-        HSD_GObj* gobj = Player_GetEntity(*(s32*)&cm_80452C68.pad_342[2]);
+        HSD_GObj* gobj = Player_GetEntity(cm_80452C68.x344.s32);
         if (gobj != NULL) {
             CmSubject* subject = ftLib_80086B74(gobj);
             if (subject != NULL) {
@@ -2030,12 +2027,10 @@ void Camera_8002E948(bool (*cb)(Vec*))
         break;
     }
     case 2:
-        cm_80452C68.transform.target_interest =
-            *(Vec3*)&cm_80452C68.pad_342[2];
+        cm_80452C68.transform.target_interest = cm_80452C68.x344.vec;
         break;
     case 3: {
-        s32 (**cbp)(Vec3*) = (s32 (**)(Vec3*))&cm_80452C68.pad_342[2];
-        if (*cbp != NULL && (*cbp)(&spC)) {
+        if (cm_80452C68.x344.cb != NULL && cm_80452C68.x344.cb(&spC)) {
             cm_80452C68.transform.target_interest = spC;
         }
         break;
@@ -2070,7 +2065,7 @@ void Camera_8002EA64(Vec* arg0)
     }
 }
 
-void Camera_8002EB5C(float fov)
+void Camera_8002EB5C(float arg0)
 {
     Vec3 spC;
 
@@ -2084,7 +2079,7 @@ void Camera_8002EB5C(float fov)
         cm_80452C68.x35C.bits.b2 = 0;
     }
 
-    *(f32*)((u8*)&cm_80452C68 + 0x360) = fov;
+    cm_80452C68.x35C.vec.y = arg0;
     cm_80452C68.x35C.bits.b1 = 1;
 
     switch (cm_80452C68.x341_b3_b4) {
@@ -2103,7 +2098,7 @@ void Camera_8002EB5C(float fov)
     }
 }
 
-void Camera_8002EC7C(float fov)
+void Camera_8002EC7C(float arg0)
 {
     Vec3 spC;
 
@@ -2117,7 +2112,7 @@ void Camera_8002EC7C(float fov)
         cm_80452C68.x35C.bits.b1 = 0;
     }
 
-    *(f32*)((u8*)&cm_80452C68 + 0x364) = fov;
+    cm_80452C68.x35C.vec.z = arg0;
     cm_80452C68.x35C.bits.b2 = 1;
 
     switch (cm_80452C68.x341_b3_b4) {
@@ -2136,7 +2131,7 @@ void Camera_8002EC7C(float fov)
     }
 }
 
-void Camera_8002ED9C(float frames)
+void Camera_8002ED9C(float arg0)
 {
     Vec3 spC;
 
@@ -2150,7 +2145,7 @@ void Camera_8002ED9C(float frames)
         cm_80452C68.x35C.bits.b2 = 0;
     }
 
-    *(s16*)((u8*)&cm_80452C68 + 0x35E) = frames;
+    cm_80452C68.x35C.bits.x2 = arg0;
     cm_80452C68.x35C.bits.b0 = 1;
 
     switch (cm_80452C68.x341_b3_b4) {
@@ -2359,7 +2354,7 @@ s32 fn_8002F908(HSD_RectF32* arg0)
     return 1;
 }
 
-void Camera_8002F9E4(s8 mode, s8 arg1)
+void Camera_8002F9E4(s8 arg0, s8 arg1)
 {
     f32 fov;
     f32 scale;
@@ -2369,7 +2364,7 @@ void Camera_8002F9E4(s8 mode, s8 arg1)
     Vec3* pause_eye_ptr;
 
     cm_80452C68.mode = 5;
-    cm_80452C68.x304 = Camera_8002BA00(mode - 1, 1);
+    cm_80452C68.x304 = Camera_8002BA00(arg0 - 1, 1);
     x304_ptr = (u8*)&cm_80452C68.x304;
     cm_803BCCA0;  // Force load
     cm_80452C68.x305 = arg1;

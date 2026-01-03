@@ -57,9 +57,9 @@
 /* 02E818 */ void Camera_8002E818(Vec*);
 /* 02E948 */ void Camera_8002E948(bool (*)(Vec*));
 /* 02EA64 */ void Camera_8002EA64(Vec*);
-/* 02EB5C */ void Camera_8002EB5C(float);
-/* 02EC7C */ void Camera_8002EC7C(float);
-/* 02ED9C */ void Camera_8002ED9C(float);
+/* 02EB5C */ void Camera_8002EB5C(float arg0);
+/* 02EC7C */ void Camera_8002EC7C(float arg0);
+/* 02ED9C */ void Camera_8002ED9C(float arg0);
 /* 02EEC8 */ void Camera_8002EEC8(float);
 /* 02EF14 */ void Camera_8002EF14(void);
 /* 02F0E4 */ void Camera_8002F0E4(s32);
@@ -76,7 +76,7 @@
 /* 02F7AC */ void Camera_8002F7AC(s8);
 /* 02F8F4 */ void Camera_8002F8F4(void);
 /* 02F908 */ s32 fn_8002F908(HSD_RectF32* arg0);
-/* 02F9E4 */ void Camera_8002F9E4(s8, s8);
+/* 02F9E4 */ void Camera_8002F9E4(s8 arg0, s8 arg1);
 /* 02FBA0 */ s32 fn_8002FBA0(HSD_RectF32* arg0);
 /* 02FC7C */ void Camera_8002FC7C(s8, s8);
 /* 02FE38 */ void Camera_8002FE38(void);
