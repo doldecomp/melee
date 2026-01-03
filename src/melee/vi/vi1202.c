@@ -1,17 +1,18 @@
 #include "vi/vi1202.h"
 
-#include <baselib/aobj.h>
-#include <baselib/cobj.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjproc.h>
-#include <baselib/jobj.h>
+#include "vi.h"
 
 #include "ft/fighter.h"
 #include "ft/ftlib.h"
 #include "gm/gm_unsplit.h"
 #include "lb/lb_00F9.h"
 #include "lb/lbaudio_ax.h"
-#include "vi.h"
+
+#include <baselib/aobj.h>
+#include <baselib/cobj.h>
+#include <baselib/gobj.h>
+#include <baselib/gobjproc.h>
+#include <baselib/jobj.h>
 
 struct vi1202_UnkStruct {
     /* 0x00 */ s32 x0;
@@ -69,7 +70,7 @@ void un_80321900(void)
 {
     HSD_GObj* gobj = GObj_Create(0x16, 0x17, 0);
     HSD_GObjProc_8038FD54(gobj, fn_803219AC, 0x13);
-    un_804D7050 = (vi1202_UnkStruct*)un_804A2F08;
+    un_804D7050 = (vi1202_UnkStruct*) un_804A2F08;
     un_80321950(un_804D7050);
 }
 
@@ -156,10 +157,12 @@ void un_80321AF4(HSD_GObj* gobj)
             if (ftLib_8008731C(cur) == 0) {
                 ftLib_80086644(cur, &pos);
 
-                if (pos.y < M2C_FIELD(Fighter_804D6500, f32*, 0x40) + M2C_FIELD(mpLib, f32*, 0x14)) {
+                if (pos.y < M2C_FIELD(Fighter_804D6500, f32*, 0x40) +
+                                M2C_FIELD(mpLib, f32*, 0x14))
+                {
                     data->x24 = data->x24 + 1;
                 } else {
-                    if ((u32)data->xC == ftLib_80087460(cur)) {
+                    if ((u32) data->xC == ftLib_80087460(cur)) {
                         flag = 1;
                     }
                 }
@@ -176,45 +179,6 @@ void un_80321AF4(HSD_GObj* gobj)
                 un_80322178(3);
             }
         }
-    }
-}
-
-void un_80321A00(HSD_GObj* gobj)
-{
-    s32 zero;
-    vi1202_UnkStruct* data = un_804D7050;
-    void* fighter = Fighter_804D6500;
-
-    if (data->x18 >= M2C_FIELD(fighter, s32*, 0x28)) {
-        if (data->x10 < M2C_FIELD(fighter, s32*, 0x20)) {
-            data->x10 = data->x10 + 1;
-        }
-        return;
-    }
-
-    if (lbAudioAx_80023710(data->x2C) != 0) {
-        return;
-    }
-    data->x18 = data->x18 + 1;
-
-    if (data->x18 < M2C_FIELD(Fighter_804D6500, s32*, 0x28)) {
-        if (data->x1C != 0) {
-            zero = 0;
-            data->x1C = zero;
-            data->x10 = zero;
-            data->x18 = M2C_FIELD(Fighter_804D6500, s32*, 0x28);
-            un_80321C28();
-            if (data->x20 != 0) {
-                un_80321CA4(0x144);
-                data->x20 = zero;
-            }
-        } else {
-            un_80321BF8(data->x14);
-        }
-    } else {
-        data->x10 = 0;
-        un_80321C28();
-        un_80321CA4(0x140);
     }
 }
 
@@ -295,8 +259,8 @@ void un_8032201C(int arg0, s32 cat)
         break;
     }
 
-    if ((u32)arg0 != 0) {
-        if ((u32)data->xC == (u32)arg0) {
+    if ((u32) arg0 != 0) {
+        if ((u32) data->xC == (u32) arg0) {
             void* fighter = Fighter_804D6500;
             vi1202_UnkStruct* data2 = un_804D7050;
             if (data2->x18 < M2C_FIELD(fighter, s32*, 0x28)) {
@@ -452,7 +416,7 @@ int un_80322598(int arg0, float arg1)
     }
     fighter = Fighter_804D6500;
     if (arg1 < M2C_FIELD(fighter, f32*, 0x38) + val14) {
-ret_zero:
+    ret_zero:
         return 0;
     }
     if (arg1 > M2C_FIELD(fighter, f32*, 0x30) + val14) {
