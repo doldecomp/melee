@@ -2,6 +2,7 @@
 
 #include <platform.h>
 
+#include "lb/lb_00F9.h"
 #include "grmaterial.h"
 #include "grdisplay.h"
 #include "gr/inlines.h"
@@ -132,7 +133,13 @@ bool grBigBlue_801E61BC(Ground_GObj* arg)
     return false;
 }
 
-/// #grBigBlue_801E61C4
+void grBigBlue_801E61C4(Ground_GObj* gobj)
+{
+    PAD_STACK(16);
+    grBigBlue_801EBAF8(gobj);
+    lb_800115F4();
+    Ground_801C2FE0(gobj);
+}
 
 void grBigBlue_801E61FC(Ground_GObj* arg) {}
 
