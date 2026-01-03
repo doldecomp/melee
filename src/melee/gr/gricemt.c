@@ -1174,14 +1174,11 @@ f32 grIceMt_801F993C(s32 row_id1, s32 row_id2)
             idx2 = 1;
             if (id2 != rows[1].id) {
                 idx2 = 2;
-                if (id2 != ptr[1].id) {
-                    ptr++;
+                if (id2 != (++ptr)->id) {
                     idx2 = 3;
-                    if (id2 != ptr[1].id) {
-                        ptr++;
+                    if (id2 != (++ptr)->id) {
                         idx2 = 4;
-                        if (id2 != ptr[1].id) {
-                            ptr++;
+                        if (id2 != (++ptr)->id) {
                             idx2 = 5;
                             if (id2 != ptr[1].id) {
                                 idx2 = 6;
