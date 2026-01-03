@@ -1016,7 +1016,84 @@ int grIceMt_801F98A8(HSD_GObj* param1)
     return 0;
 }
 
-/// #grIceMt_801F993C
+/// File-local type for grIm_803E4068 (actual layout is 12-byte struct)
+typedef struct IceMtRowData_local {
+    s32 id;
+    f32 x4;
+    f32 x8;
+} IceMtRowData_local;
+
+#define ROWS ((IceMtRowData_local*) grIm_803E4068)
+
+f32 grIceMt_801F993C(s32 row_id1, s32 row_id2)
+{
+    f32 scroll_base;
+    IceMtRowData_local* rows = ROWS;
+    u32 idx1;
+    s32 id1 = row_id1;
+    s32 id2 = row_id2;
+    IceMtRowData_local* ptr;
+
+    scroll_base = Ground_801C0498();
+
+    idx1 = 0;
+    if (id1 != rows[0].id) {
+        ptr = &rows[1];
+        idx1 = 1;
+        if (id1 != rows[1].id) {
+            idx1 = 2;
+            if (id1 != (++ptr)->id) {
+                idx1 = 3;
+                if (id1 != (++ptr)->id) {
+                    idx1 = 4;
+                    if (id1 != (++ptr)->id) {
+                        idx1 = 5;
+                        if (id1 != ptr[1].id) {
+                            idx1 = 6;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    if (idx1 >= 6) {
+        __assert("gricemt.c", 0xA9D, "<ICEMT_FIELD_MAX>");
+    }
+
+    {
+        u32 idx2 = 0;
+        if (id2 != rows[0].id) {
+            ptr = &rows[1];
+            idx2 = 1;
+            if (id2 != rows[1].id) {
+                idx2 = 2;
+                if (id2 != ptr[1].id) {
+                    ptr++;
+                    idx2 = 3;
+                    if (id2 != ptr[1].id) {
+                        ptr++;
+                        idx2 = 4;
+                        if (id2 != ptr[1].id) {
+                            ptr++;
+                            idx2 = 5;
+                            if (id2 != ptr[1].id) {
+                                idx2 = 6;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        if (idx2 >= 6) {
+            __assert("gricemt.c", 0xAA2, "<ICEMT_FIELD_MAX>");
+        }
+
+        return grIm_804D69F4->x40 + scroll_base * rows[idx2].x4 -
+               scroll_base * rows[idx1].x8;
+    }
+}
 
 /// #grIceMt_801F9ACC
 // void grIceMt_801F9ACC() {

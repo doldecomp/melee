@@ -134,7 +134,7 @@ typedef struct IceMountainParams {
 /* 1F9668 */ void grIceMt_801F9668(float);
 /* 1F96E0 */ float grIceMt_801F96E0(float);
 /* 1F98A8 */ bool grIceMt_801F98A8(HSD_GObj* param1);
-/* 1F993C */ UNK_RET grIceMt_801F993C(UNK_PARAMS);
+/* 1F993C */ f32 grIceMt_801F993C(s32 row_id1, s32 row_id2);
 /* 1F9ACC */ void grIceMt_801F9ACC(float);
 /* 1FA0BC */ UNK_RET grIceMt_801FA0BC(int);
 /* 1FA364 */ void grIceMt_801FA364(UNK_T, float*, HSD_GObjEvent, Ground_GObj*);
