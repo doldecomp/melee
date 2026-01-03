@@ -118,8 +118,11 @@ static void fn_80021C18(HSD_GObj* gobj, CommandInfo* cmd, int arg2) {}
 
 void lbBgFlash_80021C48(u32 arg0, u32 arg1)
 {
-    ColorOverlay* overlay = (ColorOverlay*)((u8*)lbl_804D63E0->x2C + 4);
-    lb_800144C8(overlay, lbl_804D63DC, arg0, arg1);
+    struct {
+        u8 unk0[4];
+        ColorOverlay x4;
+    }* data = lbl_804D63E0->x2C;
+    lb_800144C8(&data->x4, lbl_804D63DC, arg0, arg1);
 }
 
 void fn_80021C80(HSD_GObj* gobj)

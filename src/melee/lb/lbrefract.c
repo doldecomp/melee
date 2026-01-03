@@ -57,16 +57,18 @@ static void lbRefract_WriteTexCoordIA4(lbRefract_CallbackData* data, s32 row,
                                        u32 col, u32 arg3, u8 arg4,
                                        u8 intensity, u8 alpha)
 {
-    s32 offset, tile_col, base_addr;
-    u8* dst;
+    struct {
+        u8 alpha;
+        u8 intensity;
+    }* pixel;
+    s32 row_stride = data->row_stride;
+    s32 tile_col = col >> 2;
+    s32 tile_base = data->buffer + tile_col * row_stride + ((row << 3) & 0xFFFFFFE0);
+    s32 pixel_offset = ((row & 3) + ((col << 2) & 0xC)) << 1;
 
-    offset = data->row_stride;
-    tile_col = col >> 2;
-    base_addr = data->buffer;
-    dst = (u8*) (base_addr + tile_col * offset + ((row << 3) & 0xFFFFFFE0));
-    offset = ((row & 3) + ((col << 2) & 0xC)) << 1;
-    dst[offset] = alpha;
-    dst[offset + 1] = intensity;
+    pixel = (void*) (tile_base + pixel_offset);
+    pixel->alpha = alpha;
+    pixel->intensity = intensity;
 }
 
 static void lbRefract_ReadTexCoordRGBA8(lbRefract_CallbackData* data, s32 row,
