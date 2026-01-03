@@ -5,6 +5,7 @@
 #include <platform.h>
 
 #include "gr/grlib.h"
+#include "baselib/dobj.h"
 #include "gr/inlines.h"
 
 void grRCruise_801FF164(bool arg) {}
