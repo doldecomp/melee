@@ -549,19 +549,19 @@ void gm_80190EA4(void)
     fn_80193308();
     fn_8019027C(lbl_804D664C->lights);
     fn_80193230();
-    tmdata->x0 = 0;
+    tmdata->cur_option = 0;
 
-    while (tmdata->x0 < 7) {
+    while (tmdata->cur_option < 7) {
         fn_80190ABC(0);
         fn_80190ABC(2);
         fn_80190ABC(3);
         fn_80190ABC(1);
-        tmdata->x0 += 1;
+        tmdata->cur_option += 1;
     }
-    if (gm_804771C4.x4 == 0) {
+    if (gm_804771C4.match_type == 0) {
         TmData* tmdata = gm_8018F634();
         fn_8018EC7C();
-        fn_8018E618(tmdata->xC, 1, 4.5f);
+        fn_8018E618(tmdata->entrants, 1, 4.5f);
         fn_80190480(130.0f);
         fn_80190520(-278.0f, 255.0f, 0.0f);
     }
@@ -616,17 +616,17 @@ void fn_80192690(HSD_GObj* gobj)
     TmData* tmdata = gm_8018F634();
     HSD_JObj* jobj = gobj->hsd_obj;
 
-    if (tmdata->x0 <= 9) {
+    if (tmdata->cur_option <= 9) {
         HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
         return;
     }
     HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
-    if (tmdata->x0 < 0x11 || tmdata->x0 > 0x12) {
+    if (tmdata->cur_option < 0x11 || tmdata->cur_option > 0x12) {
         HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
         return;
     }
     fn_8018FDC4(jobj, 666.0F, 666.0F, 0.3F);
-    fn_8019044C(jobj, tmdata->x0 - 0x11);
+    fn_8019044C(jobj, tmdata->cur_option - 0x11);
 }
 #pragma pop
 
@@ -726,7 +726,7 @@ s32 fn_8019655C(void)
 
 bool fn_80196564(TmData* arg0)
 {
-    if ((arg0->x14 == 0 && arg0->x32 == 0) || arg0->x14 == 1) {
+    if ((arg0->stage_selection_type == 0 && arg0->x32 == 0) || arg0->stage_selection_type == 1) {
         return true;
     }
     return false;
@@ -734,7 +734,7 @@ bool fn_80196564(TmData* arg0)
 
 bool fn_80196594(TmData* arg0)
 {
-    if ((arg0->x14 == 2 && arg0->x32 == 0) || arg0->x14 == 3) {
+    if ((arg0->stage_selection_type == 2 && arg0->x32 == 0) || arg0->stage_selection_type == 3) {
         return true;
     }
     return false;
@@ -747,7 +747,7 @@ void fn_801965C4(void)
 
     temp_r3 = gm_8018F634();
     temp_r3->x2D = 1;
-    temp_r4 = temp_r3->x14;
+    temp_r4 = temp_r3->stage_selection_type;
 
     if (fn_80196594(temp_r3)) {
         temp_r3->x32 = 1;

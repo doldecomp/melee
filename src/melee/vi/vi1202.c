@@ -99,6 +99,45 @@ void fn_803219AC(HSD_GObj* gobj)
     un_80321AF4(gobj);
 }
 
+void un_80321A00(HSD_GObj* gobj)
+{
+    s32 zero;
+    vi1202_UnkStruct* data = un_804D7050;
+    void* fighter = Fighter_804D6500;
+
+    if (data->x18 >= M2C_FIELD(fighter, s32*, 0x28)) {
+        if (data->x10 < M2C_FIELD(fighter, s32*, 0x20)) {
+            data->x10 = data->x10 + 1;
+        }
+        return;
+    }
+
+    if (lbAudioAx_80023710(data->x2C) != 0) {
+        return;
+    }
+    data->x18 = data->x18 + 1;
+
+    if (data->x18 < M2C_FIELD(Fighter_804D6500, s32*, 0x28)) {
+        if (data->x1C != 0) {
+            zero = 0;
+            data->x1C = zero;
+            data->x10 = zero;
+            data->x18 = M2C_FIELD(Fighter_804D6500, s32*, 0x28);
+            un_80321C28();
+            if (data->x20 != 0) {
+                un_80321CA4(0x144);
+                data->x20 = zero;
+            }
+        } else {
+            un_80321BF8(data->x14);
+        }
+    } else {
+        data->x10 = 0;
+        un_80321C28();
+        un_80321CA4(0x140);
+    }
+}
+
 void un_80321AF4(HSD_GObj* gobj)
 {
     char* mpLib = mpLib_80458868;
