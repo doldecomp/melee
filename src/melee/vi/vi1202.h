@@ -11,7 +11,7 @@ typedef struct vi1202_UnkStruct vi1202_UnkStruct;
 /* 321130 */ void un_80321130(HSD_GObj*);
 /* 321154 */ void un_80321154(HSD_GObj*);
 /* 321178 */ UNK_RET un_80321178(UNK_PARAMS);
-/* 321294 */ UNK_RET un_80321294(UNK_PARAMS);
+/* 321294 */ void un_80321294(HSD_GObj*);
 /* 321300 */ void un_80321300_OnEnter(UNK_T);
 /* 3218E0 */ void un_803218E0_OnFrame(void);
 /* 321900 */ void un_80321900(void);

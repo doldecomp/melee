@@ -1,15 +1,18 @@
 #include "vi/vi1202.h"
 
-#include <baselib/gobj.h>
-#include <baselib/gobjproc.h>
-#include <baselib/jobj.h>
+#include "vi.h"
 
 #include "ft/fighter.h"
 #include "ft/ftlib.h"
 #include "gm/gm_unsplit.h"
 #include "lb/lb_00F9.h"
 #include "lb/lbaudio_ax.h"
-#include "vi.h"
+
+#include <baselib/aobj.h>
+#include <baselib/cobj.h>
+#include <baselib/gobj.h>
+#include <baselib/gobjproc.h>
+#include <baselib/jobj.h>
 
 struct vi1202_UnkStruct {
     /* 0x00 */ s32 x0;
@@ -41,6 +44,19 @@ void un_80321154(HSD_GObj* gobj)
     HSD_JObjAnimAll(GET_JOBJ(gobj));
 }
 
+void un_80321294(HSD_GObj* gobj)
+{
+    HSD_CObj* cobj = GET_COBJ(gobj);
+    HSD_CObjAnim(cobj);
+    if (cobj->aobj->curr_frame == 1.0F) {
+        vi_8031C9B4(0xe, 0);
+    }
+    if (cobj->aobj->curr_frame == cobj->aobj->end_frame) {
+        lb_800145F4();
+        gm_801A4B60();
+    }
+}
+
 void un_803218E0_OnFrame(void)
 {
     vi_8031CAAC();
@@ -54,7 +70,7 @@ void un_80321900(void)
 {
     HSD_GObj* gobj = GObj_Create(0x16, 0x17, 0);
     HSD_GObjProc_8038FD54(gobj, fn_803219AC, 0x13);
-    un_804D7050 = (vi1202_UnkStruct*)un_804A2F08;
+    un_804D7050 = (vi1202_UnkStruct*) un_804A2F08;
     un_80321950(un_804D7050);
 }
 
@@ -141,10 +157,12 @@ void un_80321AF4(HSD_GObj* gobj)
             if (ftLib_8008731C(cur) == 0) {
                 ftLib_80086644(cur, &pos);
 
-                if (pos.y < M2C_FIELD(Fighter_804D6500, f32*, 0x40) + M2C_FIELD(mpLib, f32*, 0x14)) {
+                if (pos.y < M2C_FIELD(Fighter_804D6500, f32*, 0x40) +
+                                M2C_FIELD(mpLib, f32*, 0x14))
+                {
                     data->x24 = data->x24 + 1;
                 } else {
-                    if ((u32)data->xC == ftLib_80087460(cur)) {
+                    if ((u32) data->xC == ftLib_80087460(cur)) {
                         flag = 1;
                     }
                 }
@@ -241,8 +259,8 @@ void un_8032201C(int arg0, s32 cat)
         break;
     }
 
-    if ((u32)arg0 != 0) {
-        if ((u32)data->xC == (u32)arg0) {
+    if ((u32) arg0 != 0) {
+        if ((u32) data->xC == (u32) arg0) {
             void* fighter = Fighter_804D6500;
             vi1202_UnkStruct* data2 = un_804D7050;
             if (data2->x18 < M2C_FIELD(fighter, s32*, 0x28)) {
@@ -348,6 +366,46 @@ void un_80322314(void)
     data->x20 = 1;
 }
 
+bool un_803224DC(s32 spawn_id, f32 pos_x, f32 kb_mag)
+{
+    void* fighter = Fighter_804D6500;
+    s32 cat;
+    s32 out_of_bounds;
+
+    if (kb_mag >= M2C_FIELD(fighter, f32*, 0x8)) {
+        cat = 3;
+    } else if (kb_mag >= M2C_FIELD(fighter, f32*, 0x4)) {
+        cat = 2;
+    } else if (kb_mag >= M2C_FIELD(fighter, f32*, 0x0)) {
+        cat = 1;
+    } else {
+        cat = 0;
+    }
+
+    {
+        f32 val2c = M2C_FIELD(fighter, f32*, 0x2c);
+        f32 val18 = M2C_FIELD(mpLib_80458868, f32*, 0x18);
+        f32 val1c;
+
+        if (pos_x < val2c + val18) {
+            out_of_bounds = 1;
+        } else {
+            val1c = M2C_FIELD(mpLib_80458868, f32*, 0x1c);
+            if (pos_x > val1c - val2c) {
+                out_of_bounds = 1;
+            } else {
+                out_of_bounds = 0;
+            }
+        }
+    }
+
+    if (out_of_bounds != 0) {
+        un_8032201C(spawn_id, cat);
+    } else {
+        return 0;
+    }
+}
+
 int un_80322598(int arg0, float arg1)
 {
     f32 val14 = M2C_FIELD(mpLib_80458868, f32*, 0x14);
@@ -358,7 +416,7 @@ int un_80322598(int arg0, float arg1)
     }
     fighter = Fighter_804D6500;
     if (arg1 < M2C_FIELD(fighter, f32*, 0x38) + val14) {
-ret_zero:
+    ret_zero:
         return 0;
     }
     if (arg1 > M2C_FIELD(fighter, f32*, 0x30) + val14) {
