@@ -68,7 +68,7 @@ struct lbl_804D65A8_t;
 /* 172734 */ bool fn_80172734(void);
 /* 172768 */ bool fn_80172768(void);
 /* 17279C */ bool fn_8017279C(int, u16);
-/* 17280C */ UNK_RET fn_8017280C(UNK_PARAMS);
+/* 17280C */ void fn_8017280C(void);
 /* 172898 */ int gm_80172898(u16);
 /* 17297C */ UNK_RET gm_8017297C(UNK_PARAMS);
 /* 1729EC */ UNK_RET gm_801729EC(UNK_PARAMS);

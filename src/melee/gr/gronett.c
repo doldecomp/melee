@@ -9,6 +9,7 @@
 #include "gr/inlines.h"
 #include "if/ifhazard.h"
 #include "lb/lb_00B0.h"
+#include "lb/types.h"
 
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
@@ -19,8 +20,11 @@ StageCallbacks grOt_803E27E0[2] = {
     { NULL, NULL, NULL, NULL, NULL },
 };
 
-static struct {
-    int x0;
+/// Onett stage yakumono parameters
+static struct grOnett_StageParam {
+    /* 0x00 */ float awning_initial;
+    /* 0x04 */ u8 pad04[0x1C];
+    /* 0x20 */ float awning_delta;
 }* grOt_804D69C0;
 
 void grOnett_801E3734(bool arg) {}
@@ -148,7 +152,30 @@ void grOnett_801E502C(Ground_GObj* gobj) {}
 
 /// #grOnett_801E5214
 
-/// #grOnett_801E54B4
+/// Updates awning collision tracking data
+void grOnett_801E54B4(Ground* gp, int arg1, CollData* cd, int arg3, int arg4)
+{
+    int temp = cd->x34_flags.b1234;
+    int idx;
+
+    if (temp != 1 && temp != 2 && temp != 3) {
+        return;
+    }
+
+    if (arg1 == 0) {
+        idx = 0;
+    } else {
+        idx = 1;
+    }
+
+    if (arg4 == 1) {
+        gp->gv.onett.awnings[idx].flag = 1;
+        gp->gv.onett.awnings[idx].initial = grOt_804D69C0->awning_initial;
+    }
+
+    gp->gv.onett.awnings[idx].accumulator += grOt_804D69C0->awning_delta;
+    gp->gv.onett.awnings[idx].counter++;
+}
 
 /// #grOnett_801E5538
 

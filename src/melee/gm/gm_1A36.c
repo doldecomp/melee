@@ -18,7 +18,7 @@ u64 gm_801A36A0(u8 idx)
 
 u64 gm_801A36C0(u8 idx)
 {
-    return controller_map.x0[idx].unk;
+    return controller_map.x0[idx].repeat2;
 }
 
 void gm_801A36E0(s32 idx, s32 arg1)
@@ -26,11 +26,11 @@ void gm_801A36E0(s32 idx, s32 arg1)
     int i;
     if (idx == PAD_MAX_CONTROLLERS) {
         for (i = 0; i < PAD_MAX_CONTROLLERS; i++) {
-            controller_map.x0[i].x28 = arg1;
+            controller_map.x0[i].repeat_timer = arg1;
         }
         return;
     }
-    controller_map.x0[idx].x28 = arg1;
+    controller_map.x0[idx].repeat_timer = arg1;
 }
 
 void gm_801A3714(s32 idx, u64 arg1, u64 arg2)
@@ -74,8 +74,8 @@ static void fn_801A396C(int idx)
 {
     struct controller_map* controller = &controller_map;
     if (controller_map.x0[idx].trigger || controller_map.x0[idx].release) {
-        controller_map.x0[idx].unk = controller->x0[idx].trigger;
-        controller_map.x0[idx].x28 = controller->xF4;
+        controller_map.x0[idx].repeat2 = controller->x0[idx].trigger;
+        controller_map.x0[idx].repeat_timer = controller->xF4;
         controller_map.x0[idx].x2C = 0;
         return;
     }
@@ -83,20 +83,20 @@ static void fn_801A396C(int idx)
         controller_map.x0[idx].x2C++;
     }
 
-    if (controller_map.x0[idx].x28) {
-        controller_map.x0[idx].x28--;
-        controller_map.x0[idx].unk = 0;
+    if (controller_map.x0[idx].repeat_timer) {
+        controller_map.x0[idx].repeat_timer--;
+        controller_map.x0[idx].repeat2 = 0;
         return;
     }
 
-    controller_map.x0[idx].unk = controller_map.x0[idx].button;
+    controller_map.x0[idx].repeat2 = controller_map.x0[idx].button;
 
     if (controller_map.x0[idx].x2C >= controller_map.xFC) {
-        controller_map.x0[idx].x28 = controller_map.xFE;
+        controller_map.x0[idx].repeat_timer = controller_map.xFE;
     } else if (controller_map.x0[idx].x2C >= controller_map.xF8) {
-        controller_map.x0[idx].x28 = controller_map.xFA;
+        controller_map.x0[idx].repeat_timer = controller_map.xFA;
     } else {
-        controller_map.x0[idx].x28 = controller_map.xF6;
+        controller_map.x0[idx].repeat_timer = controller_map.xF6;
     }
 }
 
@@ -128,14 +128,14 @@ void gm_801A3A74(void)
     controller_map.x0[PAD_MAX_CONTROLLERS].trigger = 0;
     controller_map.x0[PAD_MAX_CONTROLLERS].repeat = 0;
     controller_map.x0[PAD_MAX_CONTROLLERS].release = 0;
-    controller_map.x0[PAD_MAX_CONTROLLERS].unk = 0;
+    controller_map.x0[PAD_MAX_CONTROLLERS].repeat2 = 0;
 
     for (i = 0; i < PAD_MAX_CONTROLLERS; i++) {
         controller[PAD_MAX_CONTROLLERS].button |= controller[i].button;
         controller[PAD_MAX_CONTROLLERS].trigger |= controller[i].trigger;
         controller[PAD_MAX_CONTROLLERS].repeat |= controller[i].repeat;
         controller[PAD_MAX_CONTROLLERS].release |= controller[i].release;
-        controller[PAD_MAX_CONTROLLERS].unk |= controller[i].unk;
+        controller[PAD_MAX_CONTROLLERS].repeat2 |= controller[i].repeat2;
     }
 }
 #pragma pop
@@ -150,7 +150,7 @@ void gm_801A3E88(void)
     controller_map = gm_803DA788;
 
     for (i = 0; i <= PAD_MAX_CONTROLLERS; i++) {
-        controller_map.x0[i].x28 = controller_map.xF4;
+        controller_map.x0[i].repeat_timer = controller_map.xF4;
     }
     controller_map.xF0 = fn_801A396C;
 }

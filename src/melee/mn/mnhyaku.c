@@ -52,14 +52,14 @@ void mnHyaku_8024C68C(HSD_GObj* arg0)
     Menu* menu = GET_MENU(mnHyaku_804D6C58);
     PAD_STACK(8);
 
-    if (mn_804D6BC8.x0 != 0) {
+    if (mn_804D6BC8.cooldown != 0) {
         Menu_DecrementAnimTimer();
         return;
     }
     events = Menu_GetAllEvents();
     if (events & MenuEvent_Back) {
         sfxBack();
-        mn_804A04F0.x11 = 0;
+        mn_804A04F0.entering_menu = 0;
         mn_80229894(9, 2, 3);
         return;
     }
@@ -126,7 +126,7 @@ void mnHyaku_8024CA50(HSD_GObj* gobj)
 {
     HSD_GObjProc* gobj_proc;
     Menu* menu = GET_MENU(gobj);
-    if (mn_804A04F0.x0 != 0x21) {
+    if (mn_804A04F0.cur_menu != 0x21) {
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
         gobj_proc = HSD_GObjProc_8038FD54(gobj, mnHyaku_8024C9F0, 0U);
         gobj_proc->flags_3 = HSD_GObj_804D783C;
@@ -144,7 +144,7 @@ void mnHyaku_8024CAC8(HSD_GObj* gobj)
 
     jobj = (HSD_JObj*) gobj->hsd_obj;
     menu = GET_MENU(gobj);
-    if (mn_804A04F0.x0 != 0x21) {
+    if (mn_804A04F0.cur_menu != 0x21) {
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
         gobj_proc = HSD_GObjProc_8038FD54(gobj, mnHyaku_8024C9F0, 0U);
         gobj_proc->flags_3 = HSD_GObj_804D783C;
@@ -210,10 +210,10 @@ void mnHyaku_8024CD64(u8 arg0)
     HSD_GObjProc* proc;
     HSD_Archive* archive;
 
-    mn_804D6BC8.x0 = 5;
-    mn_804A04F0.x1 = mn_804A04F0.x0;
-    mn_804A04F0.x0 = 33;
-    mn_804A04F0.x2 = 0;
+    mn_804D6BC8.cooldown = 5;
+    mn_804A04F0.prev_menu = mn_804A04F0.cur_menu;
+    mn_804A04F0.cur_menu = 33;
+    mn_804A04F0.hovered_selection = 0;
 
     lbAudioAx_80026F2C(0x12);
     lbAudioAx_8002702C(2, 8);
