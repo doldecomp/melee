@@ -45,8 +45,8 @@ struct MinorScene {
 
     struct MinorSceneInfo {
         /* 0C */ u8 class_id;
-        /* 10 */ void* unk_struct_0; ///< data passed to OnLoad callback
-        /* 14 */ void* unk_struct_1; ///< data passed to OnLeave callback
+        /* 10 */ void* load_data; ///< data passed to OnLoad callback
+        /* 14 */ void* leave_data; ///< data passed to OnLeave callback
     } info;
 };
 
@@ -209,10 +209,12 @@ struct gmm_retval_EDBC {
 };
 
 struct gmm_x1868 {
-    /* 0x0000 */ u16 x1868; // unlocked characters bitmask
-    /* 0x0002 */ u16 x186A; // unlocked stages bitmask
-    /* 0x0004 */ u8 unk_4;
-    /* 0x0005 */ char pad_5[3]; /* maybe part of unk_4[4]? */
+    /* 0x0000 */ u16 x1868; ///< unlocked characters bitmask
+    /* 0x0002 */ u16 x186A; ///< unlocked stages bitmask
+    /* 0x0004 */ u8 x186C;  ///< unlocked features bitmask - score display/random stage etc...
+    /// @remarks this would make sense to be apart of x186C, but seems unused.
+    // perhaps features got removed from the unlock system? item switch comes to mind as plausible
+    /* 0x0005 */ char pad_5[3];
     /* 0x0008 */ struct gmm_retval_ED98 unk_8;
     /* 0x0028 */ struct gmm_retval_EDB0 unk_28;
     /* 0x0030 */ struct gmm_retval_EDBC unk_30;
@@ -685,13 +687,14 @@ struct UnkAllstarData {
 };
 
 struct TmData {
-    int x0;
-    int x4;
-    int x8;
-    int xC;
-    int x10;
-    int x14;
-    u8 pad_x18[0x20 - 0x18];
+    int cur_option;
+    int match_type;
+    int combatants;
+    int entrants;
+    int hmn_cpu_count;
+    int stage_selection_type;
+    int cpu_level;
+    u8 _x1C[0x20 - 0x1C];
     int x20;
     int x24;
     u32 x28; ///< stage id
@@ -892,5 +895,22 @@ struct VsApproachData {
     u8 x0;
     u8 x1;
 };
+
+/// @brief data passed to OnLoad callback for MJ_MENU
+struct MenuEnterData {
+    /* +00 */ u8 menu_kind; ///< will set the next menu kind
+    /* +01 */ u8 hovered_selection; ///< will set the next hovered selection
+    /* +02 */ u8 load_assets; ///< checks if the assets need to be loaded or not
+    /* +03 */ s8 x3;
+};
+STATIC_ASSERT(sizeof(struct MenuEnterData) == 0x4);
+
+/// @brief data passed to OnLeave callback for MJ_MENU
+struct MenuExitData {
+    /* +00 */ s8 pending_major; ///< will set the next major scene
+    /* +01 */ s8 pending_minor; ///< will set the next minor scene
+    /* +02 */ u8 _2[0x2];
+};
+STATIC_ASSERT(sizeof(struct MenuExitData) == 0x4);
 
 #endif

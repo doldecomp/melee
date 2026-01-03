@@ -96,7 +96,7 @@ void fn_8019BF8C(HSD_GObj* gobj)
     s32 selection;
     HSD_JObj* jobj;
 
-    selection = gm_8018F634()->x0;
+    selection = gm_8018F634()->cur_option;
     jobj = GET_JOBJ(gobj);
     if ((selection <= 0x1A) || (selection >= 0x1F)) {
         if (lbl_80479A58.xE > 0x77U) {
@@ -180,7 +180,7 @@ void fn_8019C6AC(HSD_GObj* gobj)
         lbl_80479A58.xF = 60;
     }
 
-    fn_8019044C(jobj, (lbl_80479A58.xF + gm_804771C4.x4 * 100 + 100));
+    fn_8019044C(jobj, (lbl_80479A58.xF + gm_804771C4.match_type * 100 + 100));
     lbl_80479A58.xF++;
 }
 
