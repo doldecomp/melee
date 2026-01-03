@@ -799,7 +799,7 @@ void ftPp_SpecialHi_Enter(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftIceClimberAttributes* da = fp->dat_attrs;
 
-    fp->gr_vel /= *(float*)((u8*)da + 0x84);
+    fp->gr_vel /= da->x84;
 
     ftPp_SpecialHi_801218AC(gobj);
 
