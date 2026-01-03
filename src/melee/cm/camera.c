@@ -2070,14 +2070,6 @@ void Camera_8002EA64(Vec* arg0)
     }
 }
 
-typedef struct {
-    u8 b0 : 1;
-    u8 b1 : 1;
-    u8 b2 : 1;
-} X35C_Bits;
-
-#define X35C_BITS ((X35C_Bits*)&cm_80452C68.x35C)
-
 void Camera_8002EB5C(float fov)
 {
     Vec3 spC;
@@ -2088,12 +2080,12 @@ void Camera_8002EB5C(float fov)
 
     if (cm_80452C68.x341_b3_b4 != 2) {
         cm_80452C68.x341_b3_b4 = 2;
-        X35C_BITS->b0 = 0;
-        X35C_BITS->b2 = 0;
+        cm_80452C68.x35C.bits.b0 = 0;
+        cm_80452C68.x35C.bits.b2 = 0;
     }
 
     *(f32*)((u8*)&cm_80452C68 + 0x360) = fov;
-    X35C_BITS->b1 = 1;
+    cm_80452C68.x35C.bits.b1 = 1;
 
     switch (cm_80452C68.x341_b3_b4) {
     case 1:
@@ -2121,12 +2113,12 @@ void Camera_8002EC7C(float fov)
 
     if (cm_80452C68.x341_b3_b4 != 2) {
         cm_80452C68.x341_b3_b4 = 2;
-        X35C_BITS->b0 = 0;
-        X35C_BITS->b1 = 0;
+        cm_80452C68.x35C.bits.b0 = 0;
+        cm_80452C68.x35C.bits.b1 = 0;
     }
 
     *(f32*)((u8*)&cm_80452C68 + 0x364) = fov;
-    X35C_BITS->b2 = 1;
+    cm_80452C68.x35C.bits.b2 = 1;
 
     switch (cm_80452C68.x341_b3_b4) {
     case 1:
@@ -2154,12 +2146,12 @@ void Camera_8002ED9C(float frames)
 
     if (cm_80452C68.x341_b3_b4 != 2) {
         cm_80452C68.x341_b3_b4 = 2;
-        X35C_BITS->b1 = 0;
-        X35C_BITS->b2 = 0;
+        cm_80452C68.x35C.bits.b1 = 0;
+        cm_80452C68.x35C.bits.b2 = 0;
     }
 
     *(s16*)((u8*)&cm_80452C68 + 0x35E) = frames;
-    X35C_BITS->b0 = 1;
+    cm_80452C68.x35C.bits.b0 = 1;
 
     switch (cm_80452C68.x341_b3_b4) {
     case 1:
