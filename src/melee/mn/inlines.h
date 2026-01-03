@@ -11,37 +11,37 @@
 
 /// @todo: maybe rename to MenuInput?
 typedef enum _MenuEvent {
-    MenuEvent_Up = 1 << 0,
-    MenuEvent_Down = 1 << 1,
-    MenuEvent_Left = 1 << 2,
-    MenuEvent_Right = 1 << 3,
-    MenuEvent_Forward = 1 << 4,
-    MenuEvent_Back = 1 << 5,
-    MenuEvent_unk = 1 << 6,
-    MenuEvent_unk2 = 1 << 7,
-    MenuEvent_unk3 = 1 << 8,
-    MenuEvent_unk4 = 1 << 9,
-    MenuEvent_unk5 = 1 << 10,
-    MenuEvent_unk6 = 1 << 11,
+    MenuEvent_Up = 1 << 0,          ///< 0x0001
+    MenuEvent_Down = 1 << 1,        ///< 0x0002
+    MenuEvent_Left = 1 << 2,        ///< 0x0004
+    MenuEvent_Right = 1 << 3,       ///< 0x0008
+    MenuEvent_Forward = 1 << 4,     ///< 0x0010
+    MenuEvent_Back = 1 << 5,        ///< 0x0020
+    MenuEvent_LTrigger = 1 << 6,    ///< 0x0040
+    MenuEvent_RTrigger = 1 << 7,    ///< 0x0080
+    MenuEvent_StartButton = 1 << 8, ///< 0x0100
+    MenuEvent_AButton = 1 << 9,     ///< 0x0200
+    MenuEvent_XButton = 1 << 10,    ///< 0x0400
+    MenuEvent_YButton = 1 << 11,    ///< 0x0800
 } MenuEvent;
 
 #define GET_MENU(gobj) ((Menu*) HSD_GObjGetUserData(gobj))
 
 static inline void Menu_DecrementAnimTimer(void)
 {
-    mn_804D6BC8.x0--;
+    mn_804D6BC8.cooldown--;
     mn_804D6BC8.x2 = 0;
     mn_804D6BC8.x4 = 0;
 }
 
 static inline u64 Menu_GetAllEvents(void)
 {
-    return mn_804A04F0.x8 = mn_80229624(4);
+    return mn_804A04F0.buttons = mn_80229624(4);
 }
 
 static inline u64 Menu_GetEventsForPort(s32 i)
 {
-    return mn_804A04F0.x8 = mn_80229624(i);
+    return mn_804A04F0.buttons = mn_80229624(i);
 }
 
 // @todo: The functions `fn_8017435C`, `fn_80174338`, and `fn_80174380` are
