@@ -140,7 +140,6 @@ struct Camera {
             u8 b0 : 1;
             u8 b1 : 1;
             u8 b2 : 1;
-            u8 : 5;
             u8 pad;
             s16 x2;
         } bits;
