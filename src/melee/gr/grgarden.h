@@ -5,18 +5,28 @@
 #include <platform.h>
 
 #include "it/inlines.h"
+typedef struct GardenParams {
+    float x0;
+    float x4;
+    int x8;
+    int xC;
+    int x10;
+    int x14;
+    float x18;
+    float x1C;
+} GardenParams;
 
 /* 202B6C */ void grGarden_80202B6C(bool);
 /* 202B70 */ void grGarden_80202B70(void);
 /* 202C24 */ void grGarden_80202C24(void);
 /* 202C4C */ void grGarden_80202C4C(void);
 /* 202C70 */ bool grGarden_80202C70(void);
-/* 202C78 */ UNK_RET grGarden_80202C78(UNK_PARAMS);
+/* 202C78 */ HSD_GObj* grGarden_80202C78(int gobj_id);
 /* 202D60 */ void grGarden_80202D60(Ground_GObj*);
 /* 202D8C */ bool grGarden_80202D8C(Ground_GObj*);
 /* 202D94 */ void grGarden_80202D94(Ground_GObj*);
 /* 202D98 */ void grGarden_80202D98(Ground_GObj*);
-/* 202D9C */ UNK_RET fn_80202D9C(UNK_PARAMS);
+/* 202D9C */ void fn_80202D9C(Ground_GObj*);
 /* 202DC8 */ void grGarden_80202DC8(Ground_GObj*);
 /* 202E40 */ bool grGarden_80202E40(Ground_GObj*);
 /* 202E48 */ void grGarden_80202E48(Ground_GObj*);
@@ -42,8 +52,8 @@
 /* 203250 */ void grGarden_80203250(Ground_GObj*);
 /* 203494 */ void grGarden_80203494(Ground_GObj*);
 /* 203498 */ UNK_RET fn_80203498(UNK_PARAMS);
-/* 20349C */ UNK_RET fn_8020349C(UNK_PARAMS);
-/* 203560 */ UNK_RET grGarden_80203560(UNK_PARAMS);
+/* 20349C */ bool fn_8020349C(u32 unk,HSD_GObj* player,Vec3* water);
+/* 203560 */ void grGarden_80203560(float param1,Vec3* vec);
 /* 2035C8 */ DynamicsDesc* grGarden_802035C8(enum_t);
 /* 2035D0 */ bool grGarden_802035D0(Vec3*, int arg, HSD_JObj* jobj);
 /* 203624 */ float grGarden_80203624(void);
