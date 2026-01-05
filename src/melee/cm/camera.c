@@ -85,7 +85,7 @@ void Camera_80028B9C(int n_subjects)
     cm_80452C68.background_r = 0;
     cm_80452C68.nearz = 0.1f;
     cm_80452C68.farz = 16384.0f;
-    cm_80452C68.mode = 0;
+    cm_80452C68.mode = CAMERA_STANDARD;
     memzero(cm_80452C68._8C, 0x224);
     cm_80452C68.xAC = 1.0f;
     cm_80452C68.x2BC = 1.0f;
@@ -1934,7 +1934,7 @@ void Camera_8002E6FC(int arg0)
 {
     Vec3 spC;
 
-    if (cm_80452C68.mode != 6) {
+    if (cm_80452C68.mode != CAMERA_BOSS_INTRO) {
         Camera_8002FE38();
     }
 
@@ -1971,7 +1971,7 @@ void Camera_8002E818(Vec3* pos)
 {
     Vec3 spC;
 
-    if (cm_80452C68.mode != 6) {
+    if (cm_80452C68.mode != CAMERA_BOSS_INTRO) {
         Camera_8002FE38();
     }
 
@@ -2008,7 +2008,7 @@ void Camera_8002E948(bool (*cb)(Vec*))
 {
     Vec3 spC;
 
-    if (cm_80452C68.mode != 6) {
+    if (cm_80452C68.mode != CAMERA_BOSS_INTRO) {
         Camera_8002FE38();
     }
 
@@ -2045,7 +2045,7 @@ void Camera_8002EA64(Vec* arg0)
 {
     Vec3 spC;
 
-    if (cm_80452C68.mode != 6) {
+    if (cm_80452C68.mode != CAMERA_BOSS_INTRO) {
         Camera_8002FE38();
     }
 
@@ -2069,7 +2069,7 @@ void Camera_8002EB5C(float arg0)
 {
     Vec3 spC;
 
-    if (cm_80452C68.mode != 6) {
+    if (cm_80452C68.mode != CAMERA_BOSS_INTRO) {
         Camera_8002FE38();
     }
 
@@ -2102,7 +2102,7 @@ void Camera_8002EC7C(float arg0)
 {
     Vec3 spC;
 
-    if (cm_80452C68.mode != 6) {
+    if (cm_80452C68.mode != CAMERA_BOSS_INTRO) {
         Camera_8002FE38();
     }
 
@@ -2135,7 +2135,7 @@ void Camera_8002ED9C(float arg0)
 {
     Vec3 spC;
 
-    if (cm_80452C68.mode != 6) {
+    if (cm_80452C68.mode != CAMERA_BOSS_INTRO) {
         Camera_8002FE38();
     }
 
@@ -2166,7 +2166,7 @@ void Camera_8002ED9C(float arg0)
 
 void Camera_8002EEC8(f32 fov)
 {
-    if (cm_80452C68.mode != 6) {
+    if (cm_80452C68.mode != CAMERA_BOSS_INTRO) {
         Camera_8002FE38();
     }
     cm_80452C68.transform.target_fov = fov;
@@ -2185,7 +2185,7 @@ void Camera_8002F274(void)
 {
     Vec3 sp8;
 
-    if (cm_80452C68.mode != 6) {
+    if (cm_80452C68.mode != CAMERA_BOSS_INTRO) {
         Camera_8002FE38();
     }
 
@@ -2235,7 +2235,7 @@ void Camera_8002F3AC(void)
 
 void Camera_8002F474(void)
 {
-    cm_80452C68.mode = 0;
+    cm_80452C68.mode = CAMERA_STANDARD;
 }
 
 s32 fn_8002F488(Vec4* arg0)
@@ -2262,7 +2262,7 @@ void Camera_8002F760(s8 arg0, s8 arg1)
 // Camera_SetModeTraining
 void Camera_8002F784(s8 slot, s8 arg1)
 {
-    cm_80452C68.mode = 2;
+    cm_80452C68.mode = CAMERA_TRAINING_MENU;
     cm_80452C68.x2C4 = slot;
     cm_80452C68.x2C5 = arg1;
     cm_80452C68.pitch_offset = 0.0f;
@@ -2278,7 +2278,7 @@ void Camera_8002F7AC(s8 slot)
     f32 offset_dir;
     f64 rand_dir;
 
-    cm_80452C68.mode = 3;
+    cm_80452C68.mode = CAMERA_CLEAR;
     cm_80452C68.x2C4 = slot;
     fighter_gobj = Player_GetEntity(cm_80452C68.x2C4);
     if (fighter_gobj != NULL) {
@@ -2326,7 +2326,7 @@ void Camera_8002F7AC(s8 slot)
 
 void Camera_8002F8F4(void)
 {
-    cm_80452C68.mode = 4;
+    cm_80452C68.mode = CAMERA_FIXED;
 }
 
 s32 fn_8002F908(HSD_RectF32* arg0)
@@ -2363,7 +2363,7 @@ void Camera_8002F9E4(s8 arg0, s8 arg1)
     Vec3* x314_ptr;
     Vec3* pause_eye_ptr;
 
-    cm_80452C68.mode = 5;
+    cm_80452C68.mode = CAMERA_FREE;
     cm_80452C68.x304 = Camera_8002BA00(arg0 - 1, 1);
     x304_ptr = (u8*)&cm_80452C68.x304;
     cm_803BCCA0;  // Force load
@@ -2453,7 +2453,7 @@ void Camera_8002FC7C(s8 arg0, s8 arg1)
     s8* x304_ptr;
     s8 x304_check;
 
-    cm_80452C68.mode = 5;
+    cm_80452C68.mode = CAMERA_FREE;
     cm_80452C68.x304 = Camera_8002BA00(arg0 - 1, 1);
     cm_80452C68.x305 = arg1;
     cm_80452C68.x32C = cm_803BCCA0.x40;
@@ -2499,7 +2499,7 @@ void Camera_8002FC7C(s8 arg0, s8 arg1)
 
 void Camera_8002FE38(void)
 {
-    cm_80452C68.mode = 6;
+    cm_80452C68.mode = CAMERA_BOSS_INTRO;
     cm_80452C68.x341_b1_b2 = 0;
     cm_80452C68.x341_b3_b4 = 0;
     cm_80452C68.x341_b5_b6 = 0;
@@ -2528,13 +2528,13 @@ void Camera_8002FEEC(s32 arg0)
 
     if (Player_GetEntity(arg0) != NULL) {
         box = ftLib_80086B74(Player_GetEntity(arg0));
-        if ((box != NULL) && ((cm_80452C68.mode) != 7)) {
+        if ((box != NULL) && ((cm_80452C68.mode) != CAMERA_DEBUG_FOLLOW)) {
 
-            if (cm_80452C68.mode <= 1U) {
+            if (cm_80452C68.mode <= (u32)CAMERA_PAUSE) {
                 cm_80453004.last_mode = cm_80452C68.mode;
             }
 
-            cm_80452C68.mode = 7;
+            cm_80452C68.mode = CAMERA_DEBUG_FOLLOW;
             cm_80453004.ply_slot = arg0;
             temp_f1 = tanf(0.017453292f * cm_80452C68.transform.target_fov);
             temp_f31 = (2.0f * box->x34.z) / temp_f1;
@@ -2573,11 +2573,11 @@ void Camera_8003006C(void)
 {
     HSD_CObj* cobj;
 
-    if (cm_80452C68.mode != 8) {
-        if (cm_80452C68.mode <= 1U) {
+    if (cm_80452C68.mode != CAMERA_DEBUG_FREE) {
+        if (cm_80452C68.mode <= (u32)CAMERA_PAUSE) {
             cm_80453004.last_mode = cm_80452C68.mode;
         }
-        cm_80452C68.mode = 8;
+        cm_80452C68.mode = CAMERA_DEBUG_FREE;
         cobj = GET_COBJ(cm_80452C68.gobj);
         HSD_CObjGetInterest(cobj, &cm_80453004.free_int_pos);
         HSD_CObjGetEyePosition(cobj, &cm_80453004.free_eye_pos);
@@ -2592,7 +2592,7 @@ void Camera_800300F0(void)
 
 bool Camera_8003010C(void)
 {
-    if ((int) cm_80452C68.mode == 5) {
+    if ((int) cm_80452C68.mode == CAMERA_FREE) {
         return true;
     }
     return false;
@@ -2600,7 +2600,7 @@ bool Camera_8003010C(void)
 
 bool Camera_80030130(void)
 {
-    if ((int) cm_80452C68.mode == 6) {
+    if ((int) cm_80452C68.mode == CAMERA_BOSS_INTRO) {
         return true;
     }
     return false;
@@ -2608,7 +2608,7 @@ bool Camera_80030130(void)
 
 bool Camera_80030154(void)
 {
-    if ((int) cm_80452C68.mode == 7) {
+    if ((int) cm_80452C68.mode == CAMERA_DEBUG_FOLLOW) {
         return true;
     }
     return false;
@@ -2616,7 +2616,7 @@ bool Camera_80030154(void)
 
 bool Camera_80030178(void)
 {
-    if ((int) cm_80452C68.mode == 8) {
+    if ((int) cm_80452C68.mode == CAMERA_DEBUG_FREE) {
         return true;
     }
     return false;
