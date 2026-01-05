@@ -4,6 +4,7 @@
 #include <baselib/gobj.h>
 
 #include "lb/lb_00B0.h"
+#include "lb/lbshadow.h"
 #include "vi.h"
 
 extern u8 un_804D5B08;

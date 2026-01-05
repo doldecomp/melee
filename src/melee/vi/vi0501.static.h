@@ -5,13 +5,14 @@
 
 #include <placeholder.h>
 
+#include "sc/types.h"
 #include "vi/forward.h"
 
 #include <baselib/aobj.h>
 #include <baselib/cobj.h>
 #include <baselib/gobj.h>
 
-/* 4D6F70 */ extern void* un_804D6F70;
+/* 4D6F70 */ extern SceneDesc* un_804D6F70;
 /* 4D6F74 */ extern HSD_Archive* un_804D6F74;
 /* 4D6F78 */ extern HSD_Archive* un_804D6F78;
 /* 4DE070 */ static f32 un_804DE070;
