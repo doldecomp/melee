@@ -142,7 +142,14 @@ parser.add_argument(
     "--require-protos",
     dest="require_protos",
     action="store_true",
-    help="require function prototypes",
+    default=True,
+    help="require function prototypes (default: enabled)",
+)
+parser.add_argument(
+    "--no-require-protos",
+    dest="require_protos",
+    action="store_false",
+    help="disable function prototype requirement",
 )
 parser.add_argument(
     "--non-matching",

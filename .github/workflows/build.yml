@@ -53,7 +53,7 @@ jobs:
 
         case "$mode" in
           'link')
-            config_args="--map --require-protos $config_args"
+            config_args="--map $config_args"
             run_configure
 
             set +e
