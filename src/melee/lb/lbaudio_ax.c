@@ -1,9 +1,11 @@
 #include "lbaudio_ax.static.h"
 
 #include "baselib/forward.h"
+#include <m2c_macros.h>
 #include <melee/ft/forward.h>
 
 #include <baselib/axdriver.h>
+#include <baselib/gobjplink.h>
 #include <baselib/synth.h>
 #include <melee/gr/stage.h>
 #include <melee/lb/lbarchive.h>
@@ -806,16 +808,44 @@ int fn_800250A0(int arg0, int arg1, int arg2, int arg3)
 
 /// #fn_800262A0
 
-/// #fn_800263B4
-
+void fn_800263B4(void* ptr)
+{
+    if (ptr != NULL) {
+        void* p = ptr;
+        HSD_ObjFree(&lbl_80433710, p);
+    }
+}
 /// #lbAudioAx_800263E8
 
 /// #lbAudioAx_800264E4
 
 /// #lbAudioAx_80026510
 
-/// #lbAudioAx_800265C4
+bool lbAudioAx_800265C4(HSD_GObj* arg0, int arg1)
+{
+    HSD_GObj* gobj;
 
+    PAD_STACK(16);
+
+    gobj = M2C_FIELD(HSD_GObj_Entities, HSD_GObj**, 0xF8);
+
+    while (gobj != NULL) {
+        int* user_data = gobj->user_data;
+        if (user_data != NULL) {
+            if ((u32)user_data[2] == (u32)arg0) {
+                if (user_data[12] != -1 && user_data[12] == arg1) {
+                    AXDriverKeyOff(user_data[12]);
+                    if (gobj != NULL) {
+                        HSD_GObjPLink_80390228(gobj);
+                    }
+                    return true;
+                }
+            }
+        }
+        gobj = gobj->next;
+    }
+    return false;
+}
 /// #fn_80026650
 
 /// #fn_800267B0

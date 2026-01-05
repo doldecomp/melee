@@ -17,12 +17,34 @@ extern s32 lbl_804D3840;
 extern s32 lbl_804D3844;
 extern lbl_80433658_t lbl_80433658;
 
+typedef struct BgFlashData2 {
+    u8 state;
+    u8 pad1[3];
+    int x4;
+    int x8;
+    u8 xC;
+    u8 xD;
+    u8 xE;
+    u8 xF;
+    f32 x10;
+    f32 x14;
+    f32 x18;
+    f32 x1C;
+    u8 pad2[0x10];
+    u8 x30;
+    u8 x31;
+    u8 x32;
+    u8 x33;
+    s32 x34;
+    s32 x38;
+    s32 x3C;
+} BgFlashData2;
+
 /// #fn_8001FC08
 
 /// #fn_8001FEC4
 
 /// #fn_800204C8
-
 /// #lbBgFlash_800205F0
 
 void lbBgFlash_8002063C(int count)
