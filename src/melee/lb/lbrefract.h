@@ -1,3 +1,8 @@
+/**
+ * @file lbrefract.h
+ * @brief Refraction visual effects using GX indirect textures.
+ */
+
 #ifndef GALE01_021CE8
 #define GALE01_021CE8
 
@@ -7,11 +12,15 @@
 
 void lbRefract_800222A4(void);
 void lbRefract_8002247C(HSD_CObj*);
+/// @brief Copy framebuffer to refraction source texture.
 void lbRefract_80022560(void);
+/// @brief Reset TEV and indirect texture stages.
 void lbRefract_800225D4(void);
 s32 lbRefract_PObjLoad(HSD_PObj* pobj, HSD_PObjDesc* desc);
 void lbRefract_80022998(HSD_MObj*, u32 rendermode, s8);
+/// @brief Increment refraction effect user count.
 void lbRefract_80022BB8(void);
+/// @brief Decrement refraction effect user count.
 void lbRefract_80022BD0(void);
 float atan2f(float y, float x);
 float acosf(float);

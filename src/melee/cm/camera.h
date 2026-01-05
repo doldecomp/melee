@@ -20,7 +20,7 @@
 /* 0290D4 */ void Camera_800290D4(CmSubject*);
 /* 029124 */ s32 Camera_80029124(Vec3*, s32);
 /* 02928C */ bool Camera_8002928C(CmSubject*);
-/* 0293E0 */ UNK_RET Camera_800293E0(UNK_PARAMS);
+/* 0293E0 */ void Camera_800293E0(void);
 /* 02958C */ void Camera_8002958C(CameraBounds*, CameraTransformState*);
 /* 029AAC */ void Camera_80028F5C(CmSubject*, s32);
 /* 029BC4 */ void Camera_80029BC4(CameraBounds*, CameraTransformState*);
@@ -57,9 +57,9 @@
 /* 02E818 */ void Camera_8002E818(Vec*);
 /* 02E948 */ void Camera_8002E948(bool (*)(Vec*));
 /* 02EA64 */ void Camera_8002EA64(Vec*);
-/* 02EB5C */ void Camera_8002EB5C(float);
-/* 02EC7C */ void Camera_8002EC7C(float);
-/* 02ED9C */ void Camera_8002ED9C(float);
+/* 02EB5C */ void Camera_8002EB5C(float arg0);
+/* 02EC7C */ void Camera_8002EC7C(float arg0);
+/* 02ED9C */ void Camera_8002ED9C(float arg0);
 /* 02EEC8 */ void Camera_8002EEC8(float);
 /* 02EF14 */ void Camera_8002EF14(void);
 /* 02F0E4 */ void Camera_8002F0E4(s32);
@@ -76,13 +76,13 @@
 /* 02F7AC */ void Camera_8002F7AC(s8);
 /* 02F8F4 */ void Camera_8002F8F4(void);
 /* 02F908 */ s32 fn_8002F908(HSD_RectF32* arg0);
-/* 02F9E4 */ void Camera_8002F9E4(s8, s8);
+/* 02F9E4 */ void Camera_8002F9E4(s8 arg0, s8 arg1);
 /* 02FBA0 */ s32 fn_8002FBA0(HSD_RectF32* arg0);
 /* 02FC7C */ void Camera_8002FC7C(s8, s8);
 /* 02FE38 */ void Camera_8002FE38(void);
 /* 02FEEC */ void Camera_8002FEEC(s32);
 /* 03006C */ void Camera_8003006C(void);
-/* 0300F0 */ UNK_RET Camera_800300F0(UNK_PARAMS);
+/* 0300F0 */ void Camera_800300F0(void);
 /* 03010C */ bool Camera_8003010C(void);
 /* 030130 */ bool Camera_80030130(void);
 /* 030154 */ bool Camera_80030154(void);
@@ -90,7 +90,7 @@
 /* 03019C */ Vec3* Camera_8003019C(void);
 /* 0301D0 */ void fn_800301D0(HSD_GObj*, int);
 /* 0304E0 */ UNK_RET Camera_800304E0(UNK_PARAMS);
-/* 030688 */ UNK_RET Camera_80030688(UNK_PARAMS);
+/* 030688 */ void Camera_80030688(void);
 /* 030730 */ void Camera_80030730(f32);
 /* 030740 */ void Camera_SetBackgroundColor(u8, u8, u8);
 /* 030758 */ GXColor Camera_80030758(void);
@@ -117,7 +117,7 @@
 /* 030CD8 */ bool Camera_80030CD8(CmSubject*, S32Vec2*);
 /* 030CFC */ bool Camera_80030CFC(CmSubject*, float);
 /* 030DE4 */ void Camera_80030DE4(f32, f32);
-/* 030DF8 */ UNK_RET Camera_80030DF8(UNK_PARAMS);
+/* 030DF8 */ void Camera_80030DF8(void);
 /* 030E10 */ float Camera_80030E10(void);
 /* 030E34 */ void Camera_80030E34(f32);
 /* 030E44 */ void Camera_80030E44(enum_t, Vec*);
@@ -127,7 +127,7 @@
 /* 03108C */ enum_t Camera_8003108C(void);
 /* 0310A0 */ void Camera_800310A0(u8);
 /* 0310B8 */ HSD_CObj* Camera_800310B8(void);
-/* 0310E8 */ UNK_RET Camera_800310E8(UNK_PARAMS);
+/* 0310E8 */ void Camera_800310E8(void);
 /* 031144 */ float Camera_80031144(void);
 /* 031154 */ bool Camera_80031154(Vec3*);
 /* 03118C */ bool Camera_8003118C(Vec3*, float);
