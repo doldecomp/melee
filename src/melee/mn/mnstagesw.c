@@ -98,15 +98,15 @@ void* mnStageSw_802364A0(void* arg0, u8 idx) {
 }
 
 void mnStageSw_80237410(void) {
-    mn_unk1* data;
+    MenuFlow* data;
     u8 prev;
     HSD_GObj* gobj;
 
     data = &mn_804A04F0;
-    prev = data->x0;
-    data->x1 = prev;
-    data->x0 = 0x11;
-    data->x2 = mnStageSw_80235C58(0);
+    prev = data->cur_menu;
+    data->prev_menu = prev;
+    data->cur_menu = 0x11;
+    data->hovered_selection = mnStageSw_80235C58(0);
     mnStageSw_804D6BF4 = 1;
     HSD_GObj_80390CD4(mnStageSw_80236CBC(1));
     gobj = HSD_GObjProc_8038FD54(GObj_Create(0, 1, 0x80), fn_80235F80, 0);

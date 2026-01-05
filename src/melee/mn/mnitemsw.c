@@ -92,15 +92,15 @@ void* mnItemSw_8023405C(void* arg0, u8 idx) {
 }
 
 void mnItemSw_802358C0(void) {
-    mn_unk1* data;
+    MenuFlow* data;
     u8 prev;
     HSD_GObj* gobj;
 
     data = &mn_804A04F0;
-    prev = data->x0;
-    data->x1 = prev;
-    data->x0 = 0x10;
-    data->x2 = 0;
+    prev = data->cur_menu;
+    data->prev_menu = prev;
+    data->cur_menu = 0x10;
+    data->hovered_selection = 0;
     mnItemSw_804D6BEC = 1;
     mnItemSw_802351A0(1, 0, 0x10);
     gobj = HSD_GObjProc_8038FD54(GObj_Create(0, 1, 0x80), fn_80233E10, 0);

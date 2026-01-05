@@ -7,6 +7,7 @@
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
+#include "lb/lb_00B0.h"
 
 extern const f32 it_804DC978;
 
@@ -19,7 +20,7 @@ extern const f32 it_804DC978;
 bool itTaru_UnkMotion0_Anim(Item_GObj* gobj)
 {
     Item* ip = gobj->user_data;
-    if (ip->xD44 <= it_804DC978) {
+    if (ip->xD44_lifeTimer <= it_804DC978) {
         it_802787B4(gobj, 0x421);
     }
     return false;

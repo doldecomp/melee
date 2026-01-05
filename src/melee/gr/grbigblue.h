@@ -61,7 +61,7 @@
 /* 1EAB4C */ void grBigBlue_801EAB4C(Ground_GObj*);
 /* 1EAB50 */ UNK_RET grBigBlue_801EAB50(UNK_PARAMS);
 /* 1EACE8 */ UNK_RET grBigBlue_801EACE8(UNK_PARAMS);
-/* 1EB004 */ UNK_RET grBigBlue_801EB004(UNK_PARAMS);
+/* 1EB004 */ void grBigBlue_801EB004(HSD_GObj*);
 /* 1EB4AC */ UNK_RET grBigBlue_801EB4AC(UNK_PARAMS);
 /* 1EBAF8 */ void grBigBlue_801EBAF8(Ground_GObj*);
 /* 1EC58C */ UNK_RET grBigBlue_801EC58C(UNK_PARAMS);
@@ -71,7 +71,7 @@
 /* 1EDF44 */ UNK_RET grBigBlue_801EDF44(UNK_PARAMS);
 /* 1EE398 */ UNK_RET grBigBlue_801EE398(UNK_PARAMS);
 /* 1EEF00 */ UNK_RET grBigBlue_801EEF00(UNK_PARAMS);
-/* 1EF424 */ UNK_RET grBigBlue_801EF424(UNK_PARAMS);
+/* 1EF424 */ void grBigBlue_801EF424(Ground_GObj*);
 /* 1EF60C */ UNK_RET fn_801EF60C(UNK_PARAMS);
 /* 1EF7D8 */ void grBigBlue_801EF7D8(Vec3*);
 /* 1EF844 */ bool grBigBlue_801EF844(enum_t);
