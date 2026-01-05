@@ -493,8 +493,49 @@ void ftCo_Rebirth_Anim(Fighter_GObj* gobj)
 }
 void ftCo_Rebirth_IASA(Fighter_GObj* gobj) {}
 
-/// #ftCo_Rebirth_Phys
+float const ftCo_804D8FC8 = 0.0f;
+float const ftCo_804D8FCC = 1.0f;
 
+void ftCo_Rebirth_Phys(Fighter_GObj* gobj)
+{
+    Vec3 sp30;
+    Vec3 sp24;
+    Vec3 sp18;
+    u8 _pad[12];
+    Fighter* fp;
+    s8 platform;
+    Fighter_GObj* other_gobj;
+    Fighter* other_fp;
+    f32 factor;
+
+    fp = gobj->user_data;
+    if (!fp->x221F_b4) {
+        platform = fp->smash_attrs.x2135;
+        if ((s8) platform != (s8) -1) {
+            Stage_80224E38(&sp18, (s8) platform);
+            Player_GetSomePos(fp->player_id, &sp24);
+            M2C_FIELD(&fp->mv.co.unk_deadup, float*, 0x44 - 0x40) =
+                sp18.x + sp24.x + fp->facing_dir * ftCommon_800804EC(fp);
+            M2C_FIELD(&fp->mv.co.unk_deadup, float*, 0x48 - 0x40) =
+                sp18.y + sp24.y;
+            M2C_FIELD(&fp->mv.co.unk_deadup, float*, 0x4C - 0x40) =
+                ftCo_804D8FC8;
+        }
+        ftCommon_8007F8B4(fp, &sp30);
+        factor = ftCo_804D8FCC / (f32) fp->mv.co.unk_deadup.x40;
+        fp->self_vel.x =
+            factor *
+            (M2C_FIELD(&fp->mv.co.unk_deadup, float*, 0x44 - 0x40) - sp30.x);
+        fp->self_vel.y =
+            factor *
+            (M2C_FIELD(&fp->mv.co.unk_deadup, float*, 0x48 - 0x40) - sp30.y);
+    } else {
+        other_gobj = Player_GetEntityAtIndex(fp->player_id, 0);
+        other_fp = other_gobj->user_data;
+        fp->self_vel.x = other_fp->self_vel.x;
+        fp->self_vel.y = other_fp->self_vel.y;
+    }
+}
 void ftCo_Rebirth_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
