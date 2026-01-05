@@ -48,6 +48,7 @@
 #include <melee/it/item.h>
 #include <melee/it/items/it_2E5A.h>
 #include <melee/it/items/itkinoko.h>
+#include <melee/lb/lbvector.h>
 #include <melee/mp/mpcoll.h>
 #include <melee/pl/pl_040D.h>
 #include <melee/pl/player.h>
@@ -432,8 +433,35 @@ void ftCo_800D47B8(Fighter_GObj* gobj)
 
 /// #ftCo_DeadUpFall_Anim
 
-/// #ftCo_DeadUpFall_Phys
-
+void ftCo_DeadUpFall_Phys(Fighter_GObj* gobj)
+{
+    void* co;
+    Fighter* fp = gobj->user_data;
+    s32 state = M2C_FIELD(fp, s32*, 0x2344);
+    co = (void*)((u8*)p_ftCommonData + 0x520);
+    
+    switch (state) {
+    case 1:
+        if (!fp->x2222_b6 || ftAnim_80070FD0(fp) != 0) {
+            lbVector_Lerp((Vec3*)((u8*)co + 0x18), (Vec3*)((u8*)co + 0x24),
+                          (Vec3*)((u8*)fp + 0x2350),
+                          M2C_FIELD(fp, float*, 0x234C));
+        }
+        break;
+    case 2:
+        break;
+    case 3:
+        ftCommon_Fall(fp, M2C_FIELD(co, float*, 0x34), M2C_FIELD(co, float*, 0x38));
+        lbVector_Add((Vec3*)((u8*)fp + 0x235C), &fp->self_vel);
+        if (!fp->x2222_b6 || ftAnim_80070FD0(fp) != 0) {
+            lbVector_Add((Vec3*)((u8*)fp + 0x2350), (Vec3*)((u8*)fp + 0x235C));
+            M2C_FIELD(fp, float*, 0x235C) = 0.0f;
+            M2C_FIELD(fp, float*, 0x2360) = 0.0f;
+            M2C_FIELD(fp, float*, 0x2364) = 0.0f;
+        }
+        break;
+    }
+}
 static void fn_800D4DD4(Fighter_GObj* gobj)
 {
     u8 _pad[8];
