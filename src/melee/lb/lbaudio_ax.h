@@ -77,12 +77,11 @@
 /* 025E38 */ bool fn_80025E38(HSD_GObj* gobj);
 /* 025FAC */ UNK_RET fn_80025FAC(UNK_PARAMS);
 /* 0262A0 */ UNK_RET fn_800262A0(UNK_PARAMS);
-/// @brief Free an object from the audio allocator pool.
 /* 0263B4 */ void lbAudioAx_ObjFree(void* obj);
 /* 0263E8 */ HSD_GObj* lbAudioAx_800263E8(float, HSD_GObj*, int, int, int, int, int, int, int, int, int);
 /* 0264E4 */ bool lbAudioAx_800264E4(UNK_T);
 /* 026510 */ void lbAudioAx_80026510(HSD_GObj*);
-/* 0265C4 */ enum_t lbAudioAx_800265C4(HSD_GObj*, enum_t sfx);
+/* 0265C4 */ bool lbAudioAx_800265C4(HSD_GObj*, int sfx);
 /* 026650 */ UNK_RET fn_80026650(UNK_PARAMS);
 /* 0267B0 */ UNK_RET fn_800267B0(UNK_PARAMS);
 /* 0268B4 */ UNK_RET fn_800268B4(UNK_PARAMS);

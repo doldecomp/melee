@@ -12,6 +12,7 @@
 
 #include <math.h>
 #include <dolphin/gx/GXTexture.h>
+#include <baselib/cobj.h>
 #include <baselib/debug.h>
 #include <baselib/dobj.h>
 #include <baselib/state.h>
@@ -135,6 +136,52 @@ s32 lbRefract_8002219C(lbRefract_CallbackData* data, s32 buffer, s32 format,
 }
 
 /// @brief Copy framebuffer to refraction source texture.
+void lbRefract_8002247C(HSD_CObj* cobj) {
+    s32 proj_type;
+
+    if (lbl_804336D0[0] == 0) {
+        return;
+    }
+
+    proj_type = HSD_CObjGetProjectionType(cobj);
+
+    switch (proj_type) {
+    case 1:
+    {
+        f32 scale = 0.5F;
+        f32 trans = 0.5F;
+        MTXLightPerspective((MtxPtr)((char*)lbl_804336D0 + 0x10),
+                           M2C_FIELD(cobj, f32*, 0x40),
+                           M2C_FIELD(cobj, f32*, 0x44),
+                           scale, scale, scale, trans);
+        break;
+    }
+    case 2:
+    {
+        f32 scale = 0.5F;
+        MTXLightFrustum((MtxPtr)((char*)lbl_804336D0 + 0x10),
+                       M2C_FIELD(cobj, f32*, 0x40),
+                       M2C_FIELD(cobj, f32*, 0x44),
+                       M2C_FIELD(cobj, f32*, 0x48),
+                       M2C_FIELD(cobj, f32*, 0x4c),
+                       M2C_FIELD(cobj, f32*, 0x38),
+                       scale, 0.5F, scale, scale);
+        break;
+    }
+    default:
+    {
+        f32 scale = 0.5F;
+        MTXLightOrtho((MtxPtr)((char*)lbl_804336D0 + 0x10),
+                     M2C_FIELD(cobj, f32*, 0x40),
+                     M2C_FIELD(cobj, f32*, 0x44),
+                     M2C_FIELD(cobj, f32*, 0x48),
+                     M2C_FIELD(cobj, f32*, 0x4c),
+                     scale, 0.5F, scale, scale);
+        break;
+    }
+    }
+}
+
 void lbRefract_80022560(void)
 {
     if (lbl_804336D0[0] != 0) {
