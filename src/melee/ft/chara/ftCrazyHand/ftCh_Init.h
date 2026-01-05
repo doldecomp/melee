@@ -138,6 +138,7 @@
 /* 15A10C */ void ftCh_Cancel_IASA(HSD_GObj* gobj);
 /* 15A150 */ void ftCh_Cancel_Phys(HSD_GObj* gobj);
 /* 15A180 */ void ftCh_Cancel_Coll(HSD_GObj* gobj);
+/* 15A184 */ void ftCh_Init_8015A184(HSD_GObj* gobj);
 /* 15A20C */ void ftCh_Squeezing0_Anim(HSD_GObj* gobj);
 /* 15A248 */ void ftCh_Squeezing0_IASA(HSD_GObj* gobj);
 /* 15A28C */ void ftCh_Squeezing0_Phys(HSD_GObj* gobj);
@@ -216,5 +217,8 @@
 /* 3D4824 */ extern char ftCh_Init_DataName[];
 /* 3D485C */ extern char ftCh_Init_AnimDatFilename[];
 /* 3D4868 */ extern Fighter_CostumeStrings ftCh_Init_CostumeStrings[];
+
+/* 4DA070 */ extern f32 ftCh_Init_804DA070;
+/* 4DA074 */ extern f32 ftCh_Init_804DA074;
 
 #endif

@@ -141,14 +141,14 @@ struct ShieldDesc {
 };
 
 struct lbRefract_CallbackData {
-    s32 unk0;        // x00
-    s32 unk1;        // x04
-    s32 unk2;        // x08
-    s32 unk3;        // x08
-    s32 unk4;        // x10
-    s32 unk5;        // x14
-    void* callback0; // x1C
-    void* callback1; // x20
+    s32 buffer;      /// @brief Base address of texture buffer.
+    s32 format;      /// @brief Texture format (3=IA4, 4=IA8, 6=RGBA8).
+    s32 width;       /// @brief Texture width in pixels.
+    s32 height;      /// @brief Texture height in pixels.
+    s32 row_stride;  /// @brief Bytes per row (32/64-byte aligned).
+    s32 buffer_size; /// @brief Total buffer size from GXGetTexBufferSize.
+    void* callback0; /// @brief Write callback function.
+    void* callback1; /// @brief Read callback function.
 };
 
 typedef struct _ECBFlagStruct {

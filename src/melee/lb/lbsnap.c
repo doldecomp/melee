@@ -295,25 +295,26 @@ int lbSnap_8001DF6C(int chan)
 {
     struct Unk80433380_48* ptr = &lbSnap_80433380.x48[chan];
     char text[0x21];
+    int ret;
     PAD_STACK(8);
 
     if (ptr->unk0 == 0 && lbSnap_80433380.x54_stateChanged[chan] != 0) {
         ptr->unk0 = 8;
     }
-    if (ptr->unk0 == 0) {
+    ret = ptr->unk0;
+    if (ret == 0) {
         lbSnap_80433380.x48[chan].unk0 = 8;
         lbSnap_8001D4A4(chan, text);
         lbSnap_803BACC8.x14 =
             lbSnap_80433380.x0->xC +
             ((int) &lbSnap_80433380.x0->x38 - (int) &lbSnap_80433380.x0->x0);
         lbSnap_803BACC8.x1C = lbSnap_80433380.x0;
-        return lb_8001BB48(chan, text, &lbSnap_803BACC8.x14, &lbSnap_803BACC8,
+        ret = lb_8001BB48(chan, text, &lbSnap_803BACC8.x14, &lbSnap_803BACC8,
                            lbSnap_80433380.x4_string,
                            lbSnap_80433380.x44_LbMcSnap_MemSnapIconData[0],
                            lbSnap_80433380.x44_LbMcSnap_MemSnapIconData[1], 0);
-    } else {
-        return ptr->unk0;
     }
+    return ret;
 }
 
 int lbSnap_8001E058(int chan, int index)
