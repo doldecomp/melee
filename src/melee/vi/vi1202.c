@@ -1,20 +1,21 @@
 #include "vi/vi1202.h"
 
+#include "vi.h"
+
+#include "ft/fighter.h"
+#include "ft/ftlib.h"
+#include "gm/gm_1601.h"
+#include "gm/gm_unsplit.h"
+#include "lb/lb_00F9.h"
+#include "lb/lbaudio_ax.h"
+#include "pl/player.h"
+
 #include <baselib/aobj.h>
 #include <baselib/cobj.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjobject.h>
 #include <baselib/gobjproc.h>
 #include <baselib/jobj.h>
-
-#include "ft/fighter.h"
-#include "ft/ftlib.h"
-#include "gm/gm_unsplit.h"
-#include "gm/gm_1601.h"
-#include "lb/lb_00F9.h"
-#include "lb/lbaudio_ax.h"
-#include "pl/player.h"
-#include "vi.h"
 
 struct vi1202_UnkStruct {
     /* 0x00 */ s32 x0;

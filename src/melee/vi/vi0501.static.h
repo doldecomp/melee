@@ -6,6 +6,7 @@
 #include <placeholder.h>
 
 #include "sc/types.h"
+
 #include "vi/forward.h"
 
 #include <baselib/aobj.h>

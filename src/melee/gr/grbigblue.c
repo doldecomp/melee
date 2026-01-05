@@ -1,21 +1,22 @@
 #include "grbigblue.h"
 
+#include "grdisplay.h"
+#include "grmaterial.h"
+
 #include <platform.h>
 
+#include "baselib/gobjgxlink.h"
+#include "baselib/gobjproc.h"
+#include "baselib/jobj.h"
+#include "baselib/memory.h"
 #include "cm/camera.h"
 #include "gm/gm_1A45.h"
 #include "gr/grzakogenerator.h"
+#include "gr/inlines.h"
 #include "gr/stage.h"
+#include "gr/types.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
-#include "grmaterial.h"
-#include "grdisplay.h"
-#include "gr/inlines.h"
-#include "baselib/jobj.h"
-#include "baselib/gobjproc.h"
-#include "baselib/memory.h"
-#include "baselib/gobjgxlink.h"
-#include "gr/types.h"
 
 typedef struct {
     char pad[0xC8];

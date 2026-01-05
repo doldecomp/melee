@@ -1,17 +1,18 @@
 #include "vi/vi1201v2.h"
 
-#include <baselib/aobj.h>
-#include <baselib/cobj.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjplink.h>
-#include <baselib/jobj.h>
+#include "vi.h"
 
 #include "gm/gm_unsplit.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 #include "lb/lbshadow.h"
 #include "mn/mnmain.h"
-#include "vi.h"
+
+#include <baselib/aobj.h>
+#include <baselib/cobj.h>
+#include <baselib/gobj.h>
+#include <baselib/gobjplink.h>
+#include <baselib/jobj.h>
 
 extern HSD_GObj* un_804D7030;
 extern HSD_GObj* un_804D7034;
