@@ -1,7 +1,9 @@
 #include "lbmthp.static.h"
 
+#include <dolphin/gx/GXTexture.h>
 #include <melee/lb/lbanim.h>
 #include <melee/lb/types.h>
+#include <sysdolphin/baselib/sobjlib.h>
 
 /// #fn_8001E910
 
@@ -145,8 +147,49 @@ void lbMthp_8001F87C(void)
     lbl_804333E0.unk_14C = 0;
 }
 
-/// #lbMthp8001F890
+void* lbMthp8001F890(HSD_GObj* gobj)
+{
+    lbl_804335B8.x70 = 0;
+    lbl_804335B8.x74 = lbl_804335B8.x6C;
+    lbl_804335B8.x76 = lbl_804335B8.x6E;
+    lbl_804335B8.x78 = 6;
+    lbl_804335B8.x7C = 0;
+    lbl_804335B8.x84 = lbl_804D7CE0;
+    lbl_804335B8.x80 = lbl_804D7CE0;
+    lbl_804335B8.x88 = &lbl_804335B8.x70;
+    lbl_804335B8.x8C = 0;
+    lbl_804335B8.x90 = (struct HSD_SObj_803A477C_t_ext*)HSD_SObjLib_803A477C(gobj, (int)&lbl_804335B8.x88, 0, 0, 0x80, 0);
+    lbl_804335B8.x90->x40 |= 0x10;
+    return lbl_804335B8.x90;
+}
 
-/// #lbMthp8001F928
+void lbMthp8001F928(HSD_GObj* gobj, int arg1)
+{
+    u16* pWidth = &lbl_804335B8.x6C;
+    u16* pHeight = &lbl_804335B8.x6E;
+
+    /* First texture - full size */
+    GXInitTexObj(&lbl_804335B8.tex0, lbl_804335B8.x20, lbl_804335B8.x6C,
+                 lbl_804335B8.x6E, 1, 0, 0, 0);
+    GXInitTexObjLOD(&lbl_804335B8.tex0, 0, 0, lbl_804D7CE0, lbl_804D7CE0,
+                    lbl_804D7CE0, 0, 0, 0);
+    GXLoadTexObj(&lbl_804335B8.tex0, 0);
+
+    /* Second texture - half size */
+    GXInitTexObj(&lbl_804335B8.tex1, lbl_804335B8.x44, (u16) (*pWidth >> 1),
+                 (u16) (*pHeight >> 1), 1, 0, 0, 0);
+    GXInitTexObjLOD(&lbl_804335B8.tex1, 0, 0, lbl_804D7CE0, lbl_804D7CE0,
+                    lbl_804D7CE0, 0, 0, 0);
+    GXLoadTexObj(&lbl_804335B8.tex1, 1);
+
+    /* Third texture - half size */
+    GXInitTexObj(&lbl_804335B8.tex2, lbl_804335B8.x68, (u16) (*pWidth >> 1),
+                 (u16) (*pHeight >> 1), 1, 0, 0, 0);
+    GXInitTexObjLOD(&lbl_804335B8.tex2, 0, 0, lbl_804D7CE0, lbl_804D7CE0,
+                    lbl_804D7CE0, 0, 0, 0);
+    GXLoadTexObj(&lbl_804335B8.tex2, 2);
+
+    HSD_SObjLib_803A49E0(gobj, arg1);
+}
 
 /// #lbMthp8001FAA0

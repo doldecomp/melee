@@ -3,6 +3,8 @@
 
 #include "lbmthp.h" // IWYU pragma: export
 
+#include <dolphin/gx/GXStruct.h>
+
 struct lbl_804333E0_t {
     /* 0x000 */ char pad_0[0x84];
     /* 0x084 */ s32 unk_84;        /* inferred */
@@ -22,5 +24,40 @@ STATIC_ASSERT(sizeof(struct lbl_804333E0_t) == 0x1D8);
 
 /* 4333E0 */ static struct lbl_804333E0_t lbl_804333E0;
 /* 4D7CC0 */ static float lb_804D7CC0;
+
+/* HSD_SObj_803A477C_t extended for this function */
+struct HSD_SObj_803A477C_t_ext {
+    /* 0x00 */ u8 pad0[0x10];
+    /* 0x10 */ float x10, x14;
+    /* 0x18 */ u8 pad18[0x3C - 0x18];
+    /* 0x3C */ u8 x3C, x3D, x3E, x3F;
+    /* 0x40 */ u32 x40;
+};
+
+struct lbl_804335B8_t {
+    /* 0x00 */ GXTexObj tex0;          /* 0x00-0x20 (size 0x20) */
+    /* 0x20 */ void* x20;              /* image ptr for tex0 */
+    /* 0x24 */ GXTexObj tex1;          /* 0x24-0x44 (size 0x20) */
+    /* 0x44 */ void* x44;              /* image ptr for tex1 */
+    /* 0x48 */ GXTexObj tex2;          /* 0x48-0x68 (size 0x20) */
+    /* 0x68 */ void* x68;              /* image ptr for tex2 */
+    /* 0x6C */ u16 x6C;                /* width */
+    /* 0x6E */ u16 x6E;                /* height */
+    /* 0x70 */ s32 x70;
+    /* 0x74 */ u16 x74;
+    /* 0x76 */ u16 x76;
+    /* 0x78 */ s32 x78;
+    /* 0x7C */ s32 x7C;
+    /* 0x80 */ float x80;
+    /* 0x84 */ float x84;
+    /* 0x88 */ void* x88;
+    /* 0x8C */ s32 x8C;
+    /* 0x90 */ struct HSD_SObj_803A477C_t_ext* x90;
+    /* 0x94 */ char pad_94[0xA0 - 0x94];
+}; /* size = 0xA0 */
+STATIC_ASSERT(sizeof(struct lbl_804335B8_t) == 0xA0);
+
+/* 4335B8 */ static struct lbl_804335B8_t lbl_804335B8;
+/* 4D7CE0 */ static float lbl_804D7CE0;
 
 #endif
