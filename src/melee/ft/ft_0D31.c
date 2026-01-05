@@ -381,7 +381,7 @@ void ftCo_800D41C4(Fighter_GObj* gobj)
     int* temp_r31;
     Fighter* temp_r30;
     Fighter* temp_r28;
-    
+
     temp_r28 = GET_FIGHTER(gobj);
     temp_r28->x2227_b6 = true;
     temp_r30 = GET_FIGHTER(gobj);
@@ -482,8 +482,15 @@ void ftCo_800D4F24(Fighter_GObj* gobj, int index)
 
 /// #ftCo_800D4FF4
 
-/// #ftCo_Rebirth_Anim
-
+void ftCo_Rebirth_Anim(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    ftCo_8008A7A8(gobj, fp->ft_data->x24);
+    fp->mv.co.unk_deadup.x40--;
+    if (fp->mv.co.unk_deadup.x40 == 0) {
+        ftCo_800D5600(gobj);
+    }
+}
 void ftCo_Rebirth_IASA(Fighter_GObj* gobj) {}
 
 /// #ftCo_Rebirth_Phys
