@@ -27,13 +27,12 @@
 #include "it/types.h"
 
 #include "it/it_26B1.h"
+#include "it/itcoll.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbcollision.h"
 #include "lb/types.h"
 #include "pl/plbonuslib.h"
 #include "pl/plstale.h"
-
-#include "it/itcoll.h"
 
 #include <common_structs.h>
 #include <Runtime/runtime.h>

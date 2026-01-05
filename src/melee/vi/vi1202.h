@@ -7,11 +7,46 @@
 
 typedef struct vi1202_UnkStruct vi1202_UnkStruct;
 
+/// Configuration for crowd/announcer reactions during matches.
+///
+/// Evidence for "Crowd" naming:
+/// - Symbol names from UnclePunch's Training Mode map (Feb 2019)
+/// - Functions at 0x80321900+ named CrowdSFXManager_* in that map
+/// - Audio function 0x8002411C named lbAudio_PlayCrowdSFX
+/// - Code triggers match wiki descriptions of crowd gasps/cheers
+typedef struct CrowdConfig {
+    /// Knockback thresholds for crowd gasp intensity (cat 1/2/3)
+    /* 0x00 */ f32 kb_threshold_low;
+    /* 0x04 */ f32 kb_threshold_mid;
+    /* 0x08 */ f32 kb_threshold_high;
+    /// Angle range and multiplier for crowd reaction modifier
+    /* 0x0C */ f32 angle_min;
+    /* 0x10 */ f32 angle_max;
+    /* 0x14 */ f32 angle_mult;
+    /* 0x18 */ u8 pad18[0x20 - 0x18];
+    /// Cheer/gasp timing limits
+    /* 0x20 */ s32 cheer_limit;
+    /* 0x24 */ s32 x24;
+    /* 0x28 */ s32 max_gasp_count;
+    /// Horizontal margin from blast zone for out-of-bounds check
+    /* 0x2C */ f32 horiz_margin;
+    /// Y-position thresholds for recovery gasp intensity (cat 3/2/1)
+    /* 0x30 */ f32 recovery_y_high;
+    /* 0x34 */ f32 recovery_y_mid;
+    /* 0x38 */ f32 recovery_y_low;
+    /// Fighter count threshold to trigger blast zone proximity gasp
+    /* 0x3C */ s32 fighters_near_blastzone;
+    /// Y-offset added to blast zone bottom for proximity check
+    /* 0x40 */ f32 blastzone_y_offset;
+} CrowdConfig;
+
+/* 4D6500 */ extern CrowdConfig* gCrowdConfig;
+
 /* 32110C */ void un_8032110C(HSD_GObj*);
 /* 321130 */ void un_80321130(HSD_GObj*);
 /* 321154 */ void un_80321154(HSD_GObj*);
 /* 321178 */ UNK_RET un_80321178(UNK_PARAMS);
-/* 321294 */ UNK_RET un_80321294(UNK_PARAMS);
+/* 321294 */ void un_80321294(HSD_GObj*);
 /* 321300 */ void un_80321300_OnEnter(UNK_T);
 /* 3218E0 */ void un_803218E0_OnFrame(void);
 /* 321900 */ void un_80321900(void);

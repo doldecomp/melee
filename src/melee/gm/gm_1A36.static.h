@@ -8,11 +8,11 @@
 
 struct gm_controller_map {
     /* 00 */ u64 button;
-    /* 08 */ u64 trigger;
+    /* 08 */ u64 trigger; ///< buttons pressed this frame, maybe rename?
     /* 10 */ u64 repeat;
     /* 18 */ u64 release;
-    /* 20 */ u64 unk;
-    /* 28 */ s32 x28;
+    /* 20 */ u64 repeat2;
+    /* 28 */ s32 repeat_timer;
     /* 2C */ s32 x2C;
 };
 

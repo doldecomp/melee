@@ -115,11 +115,11 @@ void gm_801A4014(MajorScene* scene)
     gm_801A4BD4();
     gm_801A4B88(temp_r25);
     if (temp_r26->OnLoad != NULL) {
-        temp_r26->OnLoad(temp_r25->unk_struct_0);
+        temp_r26->OnLoad(temp_r25->load_data);
     }
     gm_801A4D34(temp_r26->OnFrame, temp_r25);
     if (!gmMainLib_8046B0F0.resetting && temp_r26->OnLeave != NULL) {
-        temp_r26->OnLeave(temp_r25->unk_struct_1);
+        temp_r26->OnLeave(temp_r25->leave_data);
     }
     if (!gmMainLib_8046B0F0.resetting) {
         if (var_r27->Decide != NULL) {
@@ -161,12 +161,12 @@ void gm_801A4014(MajorScene* scene)
 
 void* gm_801A427C(MinorScene* scene)
 {
-    return scene->info.unk_struct_0;
+    return scene->info.load_data;
 }
 
 void* gm_801A4284(MinorScene* scene)
 {
-    return scene->info.unk_struct_1;
+    return scene->info.leave_data;
 }
 
 void gm_SetSceneMinor(u8 arg0)
