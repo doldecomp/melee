@@ -5,7 +5,6 @@
 #include <placeholder.h>
 
 #include "baselib/forward.h"
-#include <baselib/debug.h>
 
 #include "cm/camera.h"
 #include "ft/ftdemo.h"
@@ -20,6 +19,7 @@
 
 #include <baselib/aobj.h>
 #include <baselib/cobj.h>
+#include <baselib/debug.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 

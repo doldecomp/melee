@@ -7,8 +7,8 @@
 #include "grmaterial.h"
 #include "ground.h"
 #include "grzakogenerator.h"
-#include "stage.h"
 #include "inlines.h"
+#include "stage.h"
 #include "types.h"
 
 #include "lb/lb_00B0.h"

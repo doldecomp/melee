@@ -1,11 +1,12 @@
-#include "vi1101.static.h"
+#include "vi.h"
 
-#include <baselib/cobj.h>
-#include <baselib/gobj.h>
+#include "vi1101.static.h"
 
 #include "lb/lb_00B0.h"
 #include "lb/lbshadow.h"
-#include "vi.h"
+
+#include <baselib/cobj.h>
+#include <baselib/gobj.h>
 
 extern u8 un_804D5B08;
 
