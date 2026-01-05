@@ -39,6 +39,7 @@ jobs:
     - name: Prepare
       run: ln -s /orig .
     - name: Build
+      shell: bash
       run: |
         set -eou pipefail
         export RUST_LOG=error
