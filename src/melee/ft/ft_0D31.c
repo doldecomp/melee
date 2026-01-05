@@ -42,6 +42,7 @@
 #include <melee/ft/ftmetal.h>
 #include <melee/gm/gm_unsplit.h>
 #include <melee/gr/stage.h>
+#include <melee/mp/mpcoll.h>
 #include <melee/it/item.h>
 #include <melee/it/items/it_2E5A.h>
 #include <melee/it/items/itkinoko.h>
@@ -547,8 +548,29 @@ void ftCo_Rebirth_Coll(HSD_GObj* gobj)
 
 /// #fn_800D55B4
 
-/// #ftCo_800D5600
-
+void ftCo_800D5600(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    
+    mpColl_80043680(&fp->coll_data, &fp->cur_pos);
+    fp->self_vel.y = 0.0f;
+    fp->mv.co.unk_deadup.x40 = (int)p_ftCommonData->x5D4;
+    Fighter_ChangeMotionState(gobj, ftCo_MS_RebirthWait, 
+        Ft_MF_KeepGfx | Ft_MF_SkipColAnim | Ft_MF_KeepAccessory | Ft_MF_SkipNametagVis, 
+        0.0f, 1.0f, 0.0f, NULL);
+    fp->x221E_b5 = true;
+    fp->x2219_b6 = true;
+    fp->x221E_b6 = true;
+    fp->x221D_b2 = true;
+    if (!fp->x221F_b4) {
+        fp->accessory1_cb = fn_800D54A4;
+    } else {
+        fp->accessory1_cb = fn_800D55B4;
+    }
+    if (fp->smash_attrs.x2135 != -1) {
+        mpColl_80043680(&fp->coll_data, &fp->cur_pos);
+    }
+}
 /// #ftCo_RebirthWait_Anim
 
 /// #ftCo_RebirthWait_IASA
