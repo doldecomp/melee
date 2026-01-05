@@ -1,21 +1,43 @@
+/**
+ * @file lbbgflash.c
+ * @brief Background flash effects for dramatic game events.
+ *
+ * Provides full-screen color overlay flashes triggered by various game events.
+ * Called from game mode code (gmallstar.c, gm_17C0.c, gm_1A4C.c, etc).
+ */
+
 #include "lbbgflash.h"
 
 #include <placeholder.h>
+#include "lb/forward.h"
+#include "lb/lb_00F9.h"
+
+typedef struct BgFlashState {
+    u8 active : 1;
+    u8 mode : 7;
+} BgFlashState;
+
+typedef struct BgFlashData {
+    BgFlashState state;
+    u8 pad[3];
+    int x4;
+    int x8;
+    int xC;
+} BgFlashData;
+
+extern BgFlashData lbl_80433658;
 
 #include <baselib/gobj.h>
 #include <melee/lb/lb_00F9.h>
 
+/* 021A10 */ static void lbBgFlash_80021A10(f32 arg8);
 /* 021C18 */ static void fn_80021C18(HSD_GObj* gobj, CommandInfo* cmd, int arg2);
-
-typedef struct lbl_80433658_t {
-    u8 _0 : 1;
-    u8 field : 7;
-    u8 bytes[0x47];
-} lbl_80433658_t;
+/// @brief Initialize background flash state.
+/* 02087C */ void lbBgFlash_InitState(int* duration);
 
 extern s32 lbl_804D3840;
 extern s32 lbl_804D3844;
-extern lbl_80433658_t lbl_80433658;
+extern s32 lbl_804D3848;
 
 typedef struct BgFlashData2 {
     u8 state;
@@ -45,23 +67,39 @@ typedef struct BgFlashData2 {
 /// #fn_8001FEC4
 
 /// #fn_800204C8
-/// #lbBgFlash_800205F0
 
+/// @brief Trigger background flash.
+/// @param duration Flash duration in frames (minimum 1).
+void lbBgFlash_800205F0(s32 duration)
+{
+    if (duration < 1) {
+        duration = 1;
+    }
+    lbBgFlash_800206D4(&lbl_804D3848, &lbl_804D3840, duration);
+    lbl_80433658.state.mode = 0;
+}
+
+/// @brief Trigger background flash.
+/// @param count Flash duration in frames (minimum 1).
 void lbBgFlash_8002063C(int count)
 {
     if (count < 1) {
         count = 1;
     }
     lbBgFlash_800206D4(&lbl_804D3844, &lbl_804D3840, count);
-    lbl_80433658.field = 0;
+    lbl_80433658.state.mode = 0;
 }
 
 /// #lbBgFlash_80020688
 
 /// #lbBgFlash_800206D4
 
-/// #fn_8002087C
-
+void lbBgFlash_InitState(int* duration)
+{
+    lbl_80433658.state.active = 0;
+    lbl_80433658.state.mode = 5;
+    lbl_80433658.xC = *duration;
+}
 /// #fn_800208B0
 
 /// #lbBgFlash_800208EC
@@ -80,7 +118,15 @@ void lbBgFlash_8002063C(int count)
 
 f32 lbl_804D63D8;
 
-void lbBgFlash_80021A10(f32 arg8)
+typedef struct {
+    char pad[0x2C];
+    void* x2C;
+} BgFlashGlobal;
+
+extern BgFlashGlobal* lbl_804D63E0;
+extern struct Fighter_804D653C_t* lbl_804D63DC;
+
+static void lbBgFlash_80021A10(f32 arg8)
 {
     lbl_804D63D8 = arg8;
 }
@@ -89,11 +135,18 @@ void lbBgFlash_80021A10(f32 arg8)
 
 /// #fn_80021B04
 
-void fn_80021C18(HSD_GObj* gobj, CommandInfo* cmd, int arg2) {}
+static void fn_80021C18(HSD_GObj* gobj, CommandInfo* cmd, int arg2) {}
 
 /// #fn_80021C1C
 
-/// #lbBgFlash_80021C48
+void lbBgFlash_80021C48(u32 arg0, u32 arg1)
+{
+    struct {
+        u8 unk0[4];
+        ColorOverlay x4;
+    }* data = lbl_804D63E0->x2C;
+    lb_800144C8(&data->x4, lbl_804D63DC, arg0, arg1);
+}
 
 void fn_80021C80(HSD_GObj* gobj)
 {

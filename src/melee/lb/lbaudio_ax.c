@@ -808,10 +808,11 @@ int fn_800250A0(int arg0, int arg1, int arg2, int arg3)
 
 /// #fn_800262A0
 
-void fn_800263B4(void* ptr)
+/// @brief Free an object from the audio allocator pool.
+void lbAudioAx_ObjFree(void* obj)
 {
-    if (ptr != NULL) {
-        void* p = ptr;
+    if (obj != NULL) {
+        void* p = obj;
         HSD_ObjFree(&lbl_80433710, p);
     }
 }
