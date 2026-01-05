@@ -40,7 +40,7 @@ extern SceneDesc* un_804D6FE0;
 extern SceneDesc* un_804D6FE4;
 extern HSD_Archive* un_804D6FE8;
 extern HSD_Joint* un_804D6FEC;
-extern void* un_804D6FF0;
+extern HSD_JObj* un_804D6FF0;
 extern u32 un_804D6FF4;
 extern s32 un_804D6FF8;
 extern u8 un_804D6FFC;
