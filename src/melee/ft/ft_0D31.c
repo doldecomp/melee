@@ -547,8 +547,54 @@ void ftCo_Rebirth_Coll(HSD_GObj* gobj)
         ft_80083DCC(gobj);
     }
 }
-static void fn_800D54A4(Fighter_GObj*);
-/// #fn_800D54A4
+static void fn_800D54A4(Fighter_GObj* gobj)
+{
+    Vec3 pos;
+    u8 _pad[8];
+    HSD_JObj* jobj;
+    Fighter* fp = gobj->user_data;
+    Fighter_GObj* other_gobj;
+    Fighter* other_fp;
+    s32 var;
+
+    other_gobj = Player_GetEntityAtIndex(fp->player_id, 1);
+    if (other_gobj != NULL) {
+        other_fp = other_gobj->user_data;
+        if (!other_fp->x221F_b3) {
+            if (other_fp->cur_pos.y > fp->cur_pos.y) {
+                fp->cur_pos.y = other_fp->cur_pos.y;
+            }
+        }
+    }
+
+    pos.x = fp->cur_pos.x - fp->facing_dir * ftCommon_800804EC(fp);
+    pos.y = fp->cur_pos.y;
+    pos.z = fp->cur_pos.z;
+
+    jobj = fp->x20A0_accessory;
+    if (jobj == NULL) {
+        __assert("ft_0D31.c", 0x394, "jobj");
+    }
+
+    *(u32*) &jobj->translate.x = *(u32*) &pos.x;
+    *(u32*) &jobj->translate.y = *(u32*) &pos.y;
+    *(u32*) &jobj->translate.z = *(u32*) &pos.z;
+
+    if (!(jobj->flags & 0x02000000)) {
+        if (jobj != NULL) {
+            if (jobj == NULL) {
+                __assert("ft_0D31.c", 0x234, "jobj");
+            }
+            var = 0;
+            if (!(jobj->flags & 0x800000) && (jobj->flags & 0x40)) {
+                var = 1;
+            }
+            if (var == 0) {
+                HSD_JObjSetMtxDirtySub(jobj);
+            }
+        }
+    }
+}
 
 static void fn_800D55B4(Fighter_GObj*);
 /// #fn_800D55B4
