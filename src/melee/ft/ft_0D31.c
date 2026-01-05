@@ -932,7 +932,7 @@ static void fn_800D5A30(Fighter_GObj* gobj);
 void ftCo_RebirthWait_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    
+
     ftCo_8008A7A8(gobj, fp->ft_data->x24);
     fp->mv.co.unk_deadup.x40--;
     if (fp->mv.co.unk_deadup.x40 == 0) {
