@@ -350,8 +350,8 @@ struct grGreatBay_GroundVars {
 };
 
 struct grIceMt_GroundVars {
-    /* +0 gp+C4 */ HSD_GObj* xC4;
-    /* +0 gp+C4 */ HSD_GObj* xC6;
+    /* +0 gp+C4 */ s16 xC4;
+    /* +0 gp+C4 */ s16 xC6;
     /* +0 gp+C4 */ s16 xC8;
     /* +0 gp+C4 */ s16 xCA;
     /* +0 gp+C4 */ s16 xCC;
@@ -365,7 +365,11 @@ struct grIceMt_GroundVars {
     /* +0 gp+D8 */ s16 xDE;
     /* +0 gp+D8 */ s16 xE0;
     /* +0 gp+D8 */ f32 xE4;
-    /* +0 gp+D8 */ void* xF4[6];
+    /* +0 gp+D8 */ u32 xE8;
+    /* +0 gp+D8 */ u32 xEC;
+    /* +0 gp+D8 */ u32 xF0; // padding
+    /* +0 gp+D8 */ s16 xF4[2];
+    /* +0 gp+D8 */ HSD_GObj* xF8[5];
 };
 struct grIceMt_GroundVars2 {
     /* +0 gp+C4 */ f32 xC4;
