@@ -78,14 +78,14 @@ void mnSound_802492CC(HSD_GObj* gobj)
 {
     Menu* menu = GET_MENU(mnSound_804D6C30);
     u64 events;
-    if (mn_804D6BC8.x0 != 0) {
+    if (mn_804D6BC8.cooldown != 0) {
         Menu_DecrementAnimTimer();
         return;
     }
     events = Menu_GetAllEvents();
     if (events & MenuEvent_Back) {
         sfxBack();
-        mn_804A04F0.x11 = 0;
+        mn_804A04F0.entering_menu = 0;
         gmMainLib_8015ED80(GET_MENU(mnSound_804D6C30)->unk3);
         lb_8001CE00();
         mn_80229894(4, 1, 3);
@@ -161,7 +161,7 @@ void fn_80249A1C(HSD_GObj* arg0)
 
     HSD_JObj* jobj = arg0->hsd_obj;
     Menu* menu = GET_MENU(arg0);
-    if ((u8) mn_804A04F0.x0 != 0x14) {
+    if ((u8) mn_804A04F0.cur_menu != 0x14) {
         HSD_GObjPLink_80390228(arg0);
         HSD_SisLib_803A5CC4(menu->text);
         return;
@@ -268,10 +268,10 @@ void mnSound_8024A09C(int arg0)
     HSD_GObjProc* temp_r3;
     HSD_Archive* archive;
 
-    mn_804D6BC8.x0 = 5;
-    mn_804A04F0.x1 = mn_804A04F0.x0;
-    mn_804A04F0.x0 = 0x14; // @note: could this be an enum??
-    mn_804A04F0.x2 = 0;
+    mn_804D6BC8.cooldown = 5;
+    mn_804A04F0.prev_menu = mn_804A04F0.cur_menu;
+    mn_804A04F0.cur_menu = 0x14; // @note: could this be an enum??
+    mn_804A04F0.hovered_selection = 0;
     archive = mn_804D6BB8;
     lbArchive_LoadSections(
         archive, (void**) &mnSound_804A08A8.joint, "MenMainConSo_Top_joint",

@@ -7,6 +7,7 @@ struct grCorneria_GroundVars;
 
 typedef struct grDynamicAttr_UnkStruct grDynamicAttr_UnkStruct;
 typedef struct Ground Ground;
+typedef struct IceMountainParams IceMountainParams;
 typedef struct StageInfo StageInfo;
 typedef struct UnkArchiveStruct UnkArchiveStruct;
 typedef struct UnkBgmStruct UnkBgmStruct;

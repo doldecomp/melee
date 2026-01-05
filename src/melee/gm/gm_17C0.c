@@ -37,6 +37,8 @@
 struct lbl_80472D28_t {
     /*   +0 */ char pad_0[0x104];
     /* +104 */ int x104;
+    /* +108 */ char pad_108[0xE];
+    /* +116 */ u8 x116;
 };
 
 struct lbl_80472E48_t {
@@ -230,7 +232,7 @@ void fn_8017C1A4(HSD_GObj* unused)
             gm_SetGameSpeed(0.5f);
             lbBgFlash_80020688(temp_r27);
         } else if (tmp->x8 == temp_r28) {
-            lbBgFlash_800205F0();
+            lbBgFlash_800205F0(temp_r3);
         } else if (tmp->x8 >= temp_r29_2) {
             lbAudioAx_80028B90();
             gm_SetGameSpeed(1.0f);
@@ -802,8 +804,13 @@ int fn_8017F294(void)
 
 /// #fn_80180630
 
-/// #fn_80180AC0
-
+int fn_80180AC0(void)
+{
+    if (lbl_80472D28.x116 == 1) {
+        return 1;
+    }
+    return 0;
+}
 s32 gm_80180AE4(void)
 {
     return lbl_80472EC8[0] * 0xA;

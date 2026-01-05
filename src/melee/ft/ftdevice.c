@@ -54,7 +54,7 @@ void ftCo_800C06C0(void)
     }
 }
 
-UNK_RET ftCo_800C06E8(UNK_PARAMS)
+void ftCo_800C06E8(Ground_GObj* gobj, int arg1, void* func)
 {
     NOT_IMPLEMENTED;
 }

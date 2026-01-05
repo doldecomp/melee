@@ -1,23 +1,45 @@
+/**
+ * @file lbrefract.c
+ * @brief Refraction visual effects using GX indirect textures.
+ *
+ * Uses reference counting to track active effect users.
+ * Supports IA4, IA8, and RGBA8 texture formats.
+ */
+
 #include "lbrefract.h"
 
 #include "lb/types.h"
 
 #include <math.h>
 #include <dolphin/gx/GXTexture.h>
+#include <baselib/cobj.h>
 #include <baselib/debug.h>
+#include <baselib/dobj.h>
+#include <baselib/state.h>
 #include <MetroTRK/intrinsics.h>
 
-/* 021F34 */ static UNK_RET fn_80021F34(UNK_PARAMS);
+extern HSD_DObjInfo hsdDObj;
+
+/// @brief Write IA4 texture coordinate to refraction buffer.
+/* 021F34 */ static void lbRefract_WriteTexCoordIA4(lbRefract_CallbackData* data,
+                                                    s32 row, u32 col, u32 arg3,
+                                                    u8 arg4, u8 intensity,
+                                                    u8 alpha);
 /* 021F70 */ static UNK_RET fn_80021F70(UNK_PARAMS);
 /* 021FB4 */ static UNK_RET fn_80021FB4(UNK_PARAMS);
 /* 021FF8 */ static UNK_RET fn_80021FF8(UNK_PARAMS);
 /* 02206C */ static UNK_RET fn_8002206C(UNK_PARAMS);
-/* 022120 */ static void fn_80022120(lbRefract_CallbackData* arg0, s32 arg1,
-                                     u32 arg2, u32* arg3, u32* arg4, u8* arg5,
-                                     u8* arg6);
+/// @brief Display DObj then reset TEV/indirect stages for refraction cleanup.
+/* 022608 */ static void lbRefract_DObjDispReset(HSD_DObj* dobj, Mtx vmtx, Mtx pmtx, u32 rendermode);
+/// @brief Read RGBA8 texture coordinate addresses from refraction buffer.
+/* 022120 */ static void lbRefract_ReadTexCoordRGBA8(lbRefract_CallbackData* data,
+                                                     s32 row, u32 col,
+                                                     u32* out_r, u32* out_g,
+                                                     u8* out_b, u8* out_a);
 /* 022DF8 */ static inline float lbRefract_80022DF8(float x);
-/* 02219C */ s32 lbRefract_8002219C(lbRefract_CallbackData*, s32, s32, u16,
-                                    u16);
+/// @brief Initialize refraction callback data for a texture buffer.
+/* 02219C */ s32 lbRefract_8002219C(lbRefract_CallbackData* data, s32 buffer,
+                                    s32 format, u16 width, u16 height);
 
 static int lbl_804336D0[0x10];
 
@@ -32,53 +54,79 @@ extern float MSL_TrigF_80400770[], MSL_TrigF_80400774[];
 #define NAN MSL_TrigF_80400770[0]
 #define INF MSL_TrigF_80400774[0]
 
-void fn_80022120(lbRefract_CallbackData* arg0, s32 arg1, u32 arg2, u32* arg3,
-                 u32* arg4, u8* arg5, u8* arg6)
+static void lbRefract_WriteTexCoordIA4(lbRefract_CallbackData* data, s32 row,
+                                       u32 col, u32 arg3, u8 arg4,
+                                       u8 intensity, u8 alpha)
 {
-    s32 temp_r10;
-    s32 temp_r4;
+    struct {
+        u8 alpha;
+        u8 intensity;
+    }* pixel;
+    s32 row_stride = data->row_stride;
+    s32 tile_col = col >> 2;
+    s32 tile_base = data->buffer + tile_col * row_stride + ((row << 3) & 0xFFFFFFE0);
+    s32 pixel_offset = ((row & 3) + ((col << 2) & 0xC)) << 1;
 
-    temp_r10 = arg0->unk0 +
-               (((arg2 >> 2U) * arg0->unk4) + ((arg1 * 0x10) & 0xFFFFFFC0));
-    temp_r4 = ((arg1 & 3) + ((arg2 * 4) & 0xC)) * 2;
-    if (arg6 != NULL) {
-        *arg6 = temp_r10 + temp_r4;
+    pixel = (void*) (tile_base + pixel_offset);
+    pixel->alpha = alpha;
+    pixel->intensity = intensity;
+}
+
+static void lbRefract_ReadTexCoordRGBA8(lbRefract_CallbackData* data, s32 row,
+                                        u32 col, u32* out_r, u32* out_g,
+                                        u8* out_b, u8* out_a)
+{
+    s32 base_offset;
+    s32 pixel_offset;
+
+    base_offset = data->buffer +
+                  (((col >> 2U) * data->row_stride) + ((row * 0x10) & 0xFFFFFFC0));
+    pixel_offset = ((row & 3) + ((col * 4) & 0xC)) * 2;
+    if (out_a != NULL) {
+        *out_a = base_offset + pixel_offset;
     }
-    if (arg3 != NULL) {
-        *arg3 = temp_r10 + temp_r4 + 0x01;
+    if (out_r != NULL) {
+        *out_r = base_offset + pixel_offset + 0x01;
     }
-    if (arg4 != NULL) {
-        *arg4 = temp_r10 + temp_r4 + 0x20;
+    if (out_g != NULL) {
+        *out_g = base_offset + pixel_offset + 0x20;
     }
-    if (arg5 != NULL) {
-        *arg5 = (s32) (temp_r10 + temp_r4 + 0x21);
+    if (out_b != NULL) {
+        *out_b = (s32) (base_offset + pixel_offset + 0x21);
     }
 }
 
-s32 lbRefract_8002219C(lbRefract_CallbackData* arg0, s32 arg1, s32 arg2,
-                       u16 arg3, u16 arg4)
+/// @brief Initialize refraction callback data for a texture buffer.
+/// @param data Callback data to initialize.
+/// @param buffer Base address of texture buffer.
+/// @param format Texture format (3=IA4, 4=IA8, 6=RGBA8).
+/// @param width Texture width in pixels.
+/// @param height Texture height in pixels.
+/// @return 0 on success, -1 if format is unsupported.
+s32 lbRefract_8002219C(lbRefract_CallbackData* data, s32 buffer, s32 format,
+                       u16 width, u16 height)
 {
-    arg0->unk0 = arg1;
-    arg0->unk1 = arg2;
-    arg0->unk2 = (s32) arg3;
-    arg0->unk3 = (s32) arg4;
-    arg0->unk5 = GXGetTexBufferSize(arg3, arg4, arg2, 0U, 0U);
-    switch (arg2) { /* irregular */
+    data->buffer = buffer;
+    data->format = format;
+    data->width = (s32) width;
+    data->height = (s32) height;
+    data->buffer_size = GXGetTexBufferSize(width, height, format, 0U, 0U);
+    switch (format) { /* irregular */
     case 3:
-        arg0->callback0 = fn_80021F34;
-        arg0->callback1 = fn_80021FF8;
-        arg0->unk4 = (arg3 * 8) & 0xFFFFFFE0;
+        data->callback0 = lbRefract_WriteTexCoordIA4;
+        data->callback1 = fn_80021FF8;
+        data->row_stride = (width * 8) & 0xFFFFFFE0;
     block_11:
         return 0;
     case 4:
-        arg0->callback0 = fn_80021F70;
-        arg0->callback1 = fn_8002206C;
-        arg0->unk4 = (arg3 * 8) & 0xFFFFFFE0;
+        data->callback0 = fn_80021F70;
+        data->callback1 = fn_8002206C;
+        data->row_stride = (width * 8) & 0xFFFFFFE0;
         goto block_11;
     case 6:
-        arg0->callback0 = fn_80021FB4;
-        arg0->callback1 = fn_80022120;
-        arg0->unk4 = (arg3 * 0x10) & 0xFFFFFFC0;
+        data->callback0 = fn_80021FB4;
+        data->callback1 = lbRefract_ReadTexCoordRGBA8;
+        data->row_stride = (width * 0x10) & 0xFFFFFFC0;
         goto block_11;
     case 5:
         /* fallthrough */
@@ -87,13 +135,88 @@ s32 lbRefract_8002219C(lbRefract_CallbackData* arg0, s32 arg1, s32 arg2,
     }
 }
 
-/// #lbRefract_8002247C
+/// @brief Copy framebuffer to refraction source texture.
+void lbRefract_8002247C(HSD_CObj* cobj) {
+    s32 proj_type;
 
+    if (lbl_804336D0[0] == 0) {
+        return;
+    }
+
+    proj_type = HSD_CObjGetProjectionType(cobj);
+
+    switch (proj_type) {
+    case 1:
+    {
+        f32 scale = 0.5F;
+        f32 trans = 0.5F;
+        MTXLightPerspective((MtxPtr)((char*)lbl_804336D0 + 0x10),
+                           M2C_FIELD(cobj, f32*, 0x40),
+                           M2C_FIELD(cobj, f32*, 0x44),
+                           scale, scale, scale, trans);
+        break;
+    }
+    case 2:
+    {
+        f32 scale = 0.5F;
+        MTXLightFrustum((MtxPtr)((char*)lbl_804336D0 + 0x10),
+                       M2C_FIELD(cobj, f32*, 0x40),
+                       M2C_FIELD(cobj, f32*, 0x44),
+                       M2C_FIELD(cobj, f32*, 0x48),
+                       M2C_FIELD(cobj, f32*, 0x4c),
+                       M2C_FIELD(cobj, f32*, 0x38),
+                       scale, 0.5F, scale, scale);
+        break;
+    }
+    default:
+    {
+        f32 scale = 0.5F;
+        MTXLightOrtho((MtxPtr)((char*)lbl_804336D0 + 0x10),
+                     M2C_FIELD(cobj, f32*, 0x40),
+                     M2C_FIELD(cobj, f32*, 0x44),
+                     M2C_FIELD(cobj, f32*, 0x48),
+                     M2C_FIELD(cobj, f32*, 0x4c),
+                     scale, 0.5F, scale, scale);
+        break;
+    }
+    }
+}
+
+void lbRefract_80022560(void)
+{
+    if (lbl_804336D0[0] != 0) {
+        GXSetTexCopySrc(0, 0, 0x280, 0x1E0);
+        GXSetTexCopyDst(0x140, 0xF0, 4, 1);
+        GXCopyTex((void*)lbl_804336D0[1], 0);
+        GXPixModeSync();
+        GXInvalidateTexAll();
+    }
+}
+
+/// @brief Reset TEV and indirect texture stages.
+void lbRefract_800225D4(void)
+{
+    GXSetTevDirect(0);
+    GXSetNumIndStages(0);
+    HSD_StateInvalidate(-1);
+}
+
+static void lbRefract_DObjDispReset(HSD_DObj* dobj, Mtx vmtx, Mtx pmtx,
+                                    u32 rendermode)
+{
+    hsdDObj.disp(dobj, vmtx, pmtx, rendermode);
+    GXSetTevDirect(0);
+    GXSetNumIndStages(0);
+    HSD_StateInvalidate(-1);
+}
+
+/// @brief Increment refraction effect user count.
 void lbRefract_80022BB8(void)
 {
     lbl_804336D0[0] += 1;
 }
 
+/// @brief Decrement refraction effect user count.
 void lbRefract_80022BD0(void)
 {
     lbl_804336D0[0] -= 1;

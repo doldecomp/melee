@@ -78,13 +78,13 @@ extern int mn_804D6BD4;
 void mn_80231804(HSD_Archive* archive, int arg1)
 {
     HSD_GObjProc* temp_r3;
-    mn_804D6BC8.x0 = 0x14;
+    mn_804D6BC8.cooldown = 0x14;
     mn_804D6BC8.x2 = 0;
     mn_804D6BC8.x4 = 0;
-    mn_804A04F0.x8 = 0;
-    mn_804A04F0.x1 = mn_804A04F0.x0;
-    mn_804A04F0.x0 = 0xD;
-    mn_804A04F0.x2 = 0;
+    mn_804A04F0.buttons = 0;
+    mn_804A04F0.prev_menu = mn_804A04F0.cur_menu;
+    mn_804A04F0.cur_menu = 0xD;
+    mn_804A04F0.hovered_selection = 0;
     HSD_SisLib_803A5E70();
 
     lbArchive_LoadSections(
@@ -227,21 +227,3 @@ void mn_80231804(HSD_Archive* archive, int arg1)
 }
 
 /// #mn_80231F80
-
-/// #fn_8023201C
-
-/// #mn_80232458
-
-/// #mn_802324E4
-
-/// #mn_80232660
-
-/// #mn_802327A4
-
-/// #mn_80232D4C
-
-/// #fn_80232F44
-
-/// #mn_80233218
-
-/// #mn_802339FC

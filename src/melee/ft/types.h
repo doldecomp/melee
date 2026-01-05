@@ -84,7 +84,7 @@ struct ftCommonData {
     /*  +58 */ float x58_someLStickXThreshold;
     /*  +5C */ float x5C;
     /*  +60 */ float x60_someFrictionMul;
-    /*  +64 */ UNK_T x64;
+    /*  +64 */ float x64;
     /*  +68 */ float x68;
     /*  +6C */ float x6C;
     /*  +70 */ float tap_jump_threshold;
