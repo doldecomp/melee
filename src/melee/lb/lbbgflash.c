@@ -38,7 +38,6 @@ extern BgFlashData lbl_80433658;
 extern s32 lbl_804D3840;
 extern s32 lbl_804D3844;
 extern s32 lbl_804D3848;
-extern lbl_80433658_t lbl_80433658;
 extern HSD_GObj* lbl_804D63E0;
 
 typedef struct BgFlashData2 {
@@ -169,12 +168,6 @@ void lbBgFlash_InitState(int* duration)
 
 f32 lbl_804D63D8;
 
-typedef struct {
-    char pad[0x2C];
-    void* x2C;
-} BgFlashGlobal;
-
-extern BgFlashGlobal* lbl_804D63E0;
 extern struct Fighter_804D653C_t* lbl_804D63DC;
 
 static void lbBgFlash_80021A10(f32 arg8)
@@ -200,7 +193,7 @@ void lbBgFlash_80021C48(u32 arg0, u32 arg1)
     struct {
         u8 unk0[4];
         ColorOverlay x4;
-    }* data = lbl_804D63E0->x2C;
+    }* data = lbl_804D63E0->user_data;
     lb_800144C8(&data->x4, lbl_804D63DC, arg0, arg1);
 }
 

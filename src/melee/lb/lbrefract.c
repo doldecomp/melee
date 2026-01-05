@@ -14,6 +14,8 @@
 #include <dolphin/gx/GXTexture.h>
 #include <baselib/cobj.h>
 #include <baselib/debug.h>
+#include <baselib/dobj.h>
+#include <baselib/state.h>
 #include <MetroTRK/intrinsics.h>
 
 extern HSD_DObjInfo hsdDObj;
