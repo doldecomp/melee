@@ -438,23 +438,25 @@ void ftCo_DeadUpFall_Phys(Fighter_GObj* gobj)
     void* co;
     Fighter* fp = gobj->user_data;
     s32 state = M2C_FIELD(fp, s32*, 0x2344);
-    co = (void*)((u8*)p_ftCommonData + 0x520);
-    
+    co = (void*) ((u8*) p_ftCommonData + 0x520);
+
     switch (state) {
     case 1:
         if (!fp->x2222_b6 || ftAnim_80070FD0(fp) != 0) {
-            lbVector_Lerp((Vec3*)((u8*)co + 0x18), (Vec3*)((u8*)co + 0x24),
-                          (Vec3*)((u8*)fp + 0x2350),
+            lbVector_Lerp((Vec3*) ((u8*) co + 0x18), (Vec3*) ((u8*) co + 0x24),
+                          (Vec3*) ((u8*) fp + 0x2350),
                           M2C_FIELD(fp, float*, 0x234C));
         }
         break;
     case 2:
         break;
     case 3:
-        ftCommon_Fall(fp, M2C_FIELD(co, float*, 0x34), M2C_FIELD(co, float*, 0x38));
-        lbVector_Add((Vec3*)((u8*)fp + 0x235C), &fp->self_vel);
+        ftCommon_Fall(fp, M2C_FIELD(co, float*, 0x34),
+                      M2C_FIELD(co, float*, 0x38));
+        lbVector_Add((Vec3*) ((u8*) fp + 0x235C), &fp->self_vel);
         if (!fp->x2222_b6 || ftAnim_80070FD0(fp) != 0) {
-            lbVector_Add((Vec3*)((u8*)fp + 0x2350), (Vec3*)((u8*)fp + 0x235C));
+            lbVector_Add((Vec3*) ((u8*) fp + 0x2350),
+                         (Vec3*) ((u8*) fp + 0x235C));
             M2C_FIELD(fp, float*, 0x235C) = 0.0f;
             M2C_FIELD(fp, float*, 0x2360) = 0.0f;
             M2C_FIELD(fp, float*, 0x2364) = 0.0f;
@@ -689,8 +691,39 @@ void ftCo_RebirthWait_Anim(Fighter_GObj* gobj)
 }
 /// #ftCo_RebirthWait_IASA
 
-/// #ftCo_RebirthWait_Phys
+void ftCo_RebirthWait_Phys(Fighter_GObj* gobj)
+{
+    Vec3 sp30;
+    Vec3 sp24;
+    Vec3 sp18;
+    u8 _pad[12];
+    Fighter* fp = gobj->user_data;
+    u8 platform;
+    Fighter_GObj* other_gobj;
+    Fighter* other_fp;
+    f32 factor;
 
+    if (!fp->x221F_b4) {
+        platform = fp->smash_attrs.x2135;
+        if ((s8)platform != (s8)-1) {
+            Stage_80224E38(&sp18, (s8)platform);
+            Player_GetSomePos(fp->player_id, &sp24);
+            M2C_FIELD(&fp->mv.co.unk_deadup, float*, 0x44 - 0x40) = 
+                sp18.x + sp24.x + fp->facing_dir * ftCommon_800804EC(fp);
+            M2C_FIELD(&fp->mv.co.unk_deadup, float*, 0x48 - 0x40) = sp18.y + sp24.y;
+            M2C_FIELD(&fp->mv.co.unk_deadup, float*, 0x4C - 0x40) = ftCo_804D8FC8;
+        }
+        ftCommon_8007F8B4(fp, &sp30);
+        factor = ftCo_804D8FCC / (f32)fp->mv.co.unk_deadup.x40;
+        fp->self_vel.x = factor * (M2C_FIELD(&fp->mv.co.unk_deadup, float*, 0x44 - 0x40) - sp30.x);
+        fp->self_vel.y = factor * (M2C_FIELD(&fp->mv.co.unk_deadup, float*, 0x48 - 0x40) - sp30.y);
+    } else {
+        other_gobj = Player_GetEntityAtIndex(fp->player_id, 0);
+        other_fp = other_gobj->user_data;
+        fp->self_vel.x = other_fp->self_vel.x;
+        fp->self_vel.y = other_fp->self_vel.y;
+    }
+}
 static void fn_800D5A30(Fighter_GObj* gobj)
 {
     ftColl_8007B7A4(gobj, (int)p_ftCommonData->x5D8);
