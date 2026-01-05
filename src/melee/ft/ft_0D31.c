@@ -20,6 +20,7 @@
 #include <melee/cm/camera.h>
 #include <melee/ef/efsync.h>
 #include <melee/ft/chara/ftCommon/ftCo_Attack1.h>
+#include <melee/ft/chara/ftCommon/ftCo_Attack100.h>
 #include <melee/ft/chara/ftCommon/ftCo_AttackHi3.h>
 #include <melee/ft/chara/ftCommon/ftCo_AttackHi4.h>
 #include <melee/ft/chara/ftCommon/ftCo_AttackLw3.h>
@@ -32,7 +33,15 @@
 #include <melee/ft/chara/ftCommon/ftCo_FallSpecial.h>
 #include <melee/ft/chara/ftCommon/ftCo_Guard.h>
 #include <melee/ft/chara/ftCommon/ftCo_Lift.h>
+#include <melee/ft/chara/ftCommon/ftCo_AirCatch.h>
+#include <melee/ft/chara/ftCommon/ftCo_AppealS.h>
+#include <melee/ft/chara/ftCommon/ftCo_AttackAir.h>
+#include <melee/ft/chara/ftCommon/ftCo_EscapeAir.h>
+#include <melee/ft/chara/ftCommon/ftCo_JumpAerial.h>
+#include <melee/ft/chara/ftCommon/ftCo_SpecialAir.h>
 #include <melee/ft/chara/ftCommon/ftCo_SpecialS.h>
+#include <melee/ft/chara/ftCommon/ftCo_Squat.h>
+#include <melee/ft/chara/ftCommon/ftCo_Turn.h>
 #include <melee/ft/ft_0877.h>
 #include <melee/ft/ft_0881.h>
 #include <melee/ft/ft_0892.h>
@@ -43,6 +52,7 @@
 #include <melee/ft/ftlib.h>
 #include <melee/ft/ftmaterial.h>
 #include <melee/ft/ftmetal.h>
+#include <melee/ft/ftwalkcommon.h>
 #include <melee/gm/gm_unsplit.h>
 #include <melee/gr/stage.h>
 #include <melee/it/item.h>
@@ -689,8 +699,49 @@ void ftCo_RebirthWait_Anim(Fighter_GObj* gobj)
         ftCo_Fall_Enter(gobj);
     }
 }
-/// #ftCo_RebirthWait_IASA
+void ftCo_RebirthWait_IASA(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    bool can_interrupt = false;
+    Fighter_GObj* other_gobj;
+    Fighter* other_fp;
+    u8 _pad[8];
 
+    if (!fp->x221F_b4) {
+        other_gobj = Player_GetEntityAtIndex(fp->player_id, 1);
+        if (other_gobj != NULL) {
+            other_fp = other_gobj->user_data;
+            if (!other_fp->x221F_b3 && ftLib_800873CC(other_gobj) == 0) {
+                can_interrupt = true;
+            }
+        }
+    } else {
+        other_gobj = Player_GetEntityAtIndex(fp->player_id, 0);
+        if (ftLib_800873CC(other_gobj) != 0) {
+            return;
+        }
+        can_interrupt = true;
+    }
+
+    if (ftCo_SpecialAir_CheckInput(gobj)) goto end;
+    if (ftCo_800D7100(gobj)) goto end;
+    if (ftCo_800C3B10(gobj)) goto end;
+    if (ftCo_80099A58(gobj)) goto end;
+    if (ftCo_AttackAir_CheckItemThrowInput(gobj)) goto end;
+    if (ftCo_800D705C(gobj)) goto end;
+    if (ftCo_800CB870(gobj)) goto end;
+    if (ftCo_80091A2C(gobj) || ftCo_800DE9B8(gobj) || fn_800D5F84(gobj) ||
+        ftCo_800C97A8(gobj) || ftWalkCommon_800DFC70(gobj) || can_interrupt)
+    {
+        ftCo_Fall_Enter(gobj);
+        goto end;
+    }
+    return;
+
+end:
+    ftColl_8007B7A4(gobj, (int)p_ftCommonData->x5D8);
+    pl_80040374(fp->player_id, fp->x221F_b4);
+}
 void ftCo_RebirthWait_Phys(Fighter_GObj* gobj)
 {
     Vec3 sp30;
@@ -705,18 +756,24 @@ void ftCo_RebirthWait_Phys(Fighter_GObj* gobj)
 
     if (!fp->x221F_b4) {
         platform = fp->smash_attrs.x2135;
-        if ((s8)platform != (s8)-1) {
-            Stage_80224E38(&sp18, (s8)platform);
+        if ((s8) platform != (s8) -1) {
+            Stage_80224E38(&sp18, (s8) platform);
             Player_GetSomePos(fp->player_id, &sp24);
-            M2C_FIELD(&fp->mv.co.unk_deadup, float*, 0x44 - 0x40) = 
+            M2C_FIELD(&fp->mv.co.unk_deadup, float*, 0x44 - 0x40) =
                 sp18.x + sp24.x + fp->facing_dir * ftCommon_800804EC(fp);
-            M2C_FIELD(&fp->mv.co.unk_deadup, float*, 0x48 - 0x40) = sp18.y + sp24.y;
-            M2C_FIELD(&fp->mv.co.unk_deadup, float*, 0x4C - 0x40) = ftCo_804D8FC8;
+            M2C_FIELD(&fp->mv.co.unk_deadup, float*, 0x48 - 0x40) =
+                sp18.y + sp24.y;
+            M2C_FIELD(&fp->mv.co.unk_deadup, float*, 0x4C - 0x40) =
+                ftCo_804D8FC8;
         }
         ftCommon_8007F8B4(fp, &sp30);
-        factor = ftCo_804D8FCC / (f32)fp->mv.co.unk_deadup.x40;
-        fp->self_vel.x = factor * (M2C_FIELD(&fp->mv.co.unk_deadup, float*, 0x44 - 0x40) - sp30.x);
-        fp->self_vel.y = factor * (M2C_FIELD(&fp->mv.co.unk_deadup, float*, 0x48 - 0x40) - sp30.y);
+        factor = ftCo_804D8FCC / (f32) fp->mv.co.unk_deadup.x40;
+        fp->self_vel.x =
+            factor *
+            (M2C_FIELD(&fp->mv.co.unk_deadup, float*, 0x44 - 0x40) - sp30.x);
+        fp->self_vel.y =
+            factor *
+            (M2C_FIELD(&fp->mv.co.unk_deadup, float*, 0x48 - 0x40) - sp30.y);
     } else {
         other_gobj = Player_GetEntityAtIndex(fp->player_id, 0);
         other_fp = other_gobj->user_data;
