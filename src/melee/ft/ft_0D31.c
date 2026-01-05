@@ -28,6 +28,7 @@
 #include <melee/ft/chara/ftCommon/ftCo_AttackS4.h>
 #include <melee/ft/chara/ftCommon/ftCo_DamageIce.h>
 #include <melee/ft/chara/ftCommon/ftCo_Escape.h>
+#include <melee/ft/chara/ftCommon/ftCo_Fall.h>
 #include <melee/ft/chara/ftCommon/ftCo_FallSpecial.h>
 #include <melee/ft/chara/ftCommon/ftCo_Guard.h>
 #include <melee/ft/chara/ftCommon/ftCo_Lift.h>
@@ -37,6 +38,7 @@
 #include <melee/ft/ft_0CDD.h>
 #include <melee/ft/ftcamera.h>
 #include <melee/ft/ftchangeparam.h>
+#include <melee/ft/ftcoll.h>
 #include <melee/ft/ftlib.h>
 #include <melee/ft/ftmaterial.h>
 #include <melee/ft/ftmetal.h>
