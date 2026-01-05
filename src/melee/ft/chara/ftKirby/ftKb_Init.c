@@ -4,6 +4,7 @@
 
 #include <placeholder.h>
 
+#include "ef/efasync.h"
 #include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "ft/chara/ftCommon/ftCo_Jump.h"

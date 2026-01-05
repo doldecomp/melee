@@ -12,6 +12,7 @@
 #include "types.h"
 
 #include "lb/lb_00B0.h"
+#include "mp/mplib.h"
 
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>

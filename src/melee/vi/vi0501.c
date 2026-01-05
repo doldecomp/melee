@@ -1,7 +1,11 @@
 #include "vi0501.static.h"
 
+#include "ef/efasync.h"
+#include "ef/eflib.h"
+#include "gm/gm_1601.h"
 #include "gm/gm_1A36.h"
 #include "gm/gm_1A45.h"
+#include "lb/lbarchive.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lb_00F9.h"
 #include "lb/lbshadow.h"
@@ -10,6 +14,10 @@
 #include <dolphin/gx.h>
 #include <baselib/aobj.h>
 #include <baselib/cobj.h>
+#include <baselib/fog.h>
+#include <baselib/gobjgxlink.h>
+#include <baselib/gobjobject.h>
+#include <baselib/gobjproc.h>
 #include <baselib/displayfunc.h>
 #include <baselib/wobj.h>
 

@@ -10,6 +10,8 @@
 #include "it/it_2725.h"
 #include "lb/lb_00B0.h"
 
+#include <baselib/random.h>
+
 extern const f32 it_804DC874;
 extern const f32 it_804DC870;
 extern const f32 it_804DC878;

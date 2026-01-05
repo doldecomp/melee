@@ -5,6 +5,7 @@
 #include <placeholder.h>
 
 #include "baselib/forward.h"
+#include <baselib/debug.h>
 
 #include "cm/camera.h"
 #include "ft/ftdemo.h"
@@ -56,7 +57,7 @@ void un_8031D030(CharacterKind char_kind, int costume)
     Player_SetSlottype(0, Gm_PKind_Demo);
     Player_SetFacingDirection(0, 1.0f);
 
-    assert(un_804D6F58 != NULL);
+    HSD_ASSERT(60, un_804D6F58 != NULL);
     pos.x = un_804D6F58->x38.x;
     pos.y = un_804D6F58->x38.y;
     pos.z = un_804D6F58->x38.z;

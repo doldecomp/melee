@@ -1804,7 +1804,7 @@ void Camera_8002C010(f32 farg0, f32 farg1)
 
 /// #Camera_8002C908
 
-void Camera_8002CB0C(void)
+void Camera_8002CB0C(CameraBounds* bounds)
 {
     Camera* camera;
     CameraInputs inputs;
