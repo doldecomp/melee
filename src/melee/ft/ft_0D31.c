@@ -35,6 +35,7 @@
 #include <melee/ft/chara/ftCommon/ftCo_SpecialS.h>
 #include <melee/ft/ft_0877.h>
 #include <melee/ft/ft_0881.h>
+#include <melee/ft/ft_0892.h>
 #include <melee/ft/ft_0CDD.h>
 #include <melee/ft/ftcamera.h>
 #include <melee/ft/ftchangeparam.h>
@@ -576,6 +577,9 @@ void ftCo_800D5600(Fighter_GObj* gobj)
         mpColl_80043680(&fp->coll_data, &fp->cur_pos);
     }
 }
+
+static void fn_800D5A30(Fighter_GObj* gobj);
+
 void ftCo_RebirthWait_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
@@ -591,14 +595,11 @@ void ftCo_RebirthWait_Anim(Fighter_GObj* gobj)
 
 /// #ftCo_RebirthWait_Phys
 
-static void fn_800D5A30(Fighter_GObj* gobj);
-
-void ftCo_RebirthWait_Coll(Fighter_GObj* gobj)
+static void fn_800D5A30(Fighter_GObj* gobj)
 {
-    ft_80083844(gobj, fn_800D5A30);
+    ftColl_8007B7A4(gobj, (int)p_ftCommonData->x5D8);
+    ft_8008A2BC(gobj);
 }
-/// #fn_800D5A30
-
 void ftCo_Rebirth_Cam(Fighter_GObj* gobj)
 {
     u8 _0[8];
