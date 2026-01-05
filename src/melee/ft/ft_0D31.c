@@ -1036,6 +1036,13 @@ void ftCo_RebirthWait_Phys(Fighter_GObj* gobj)
         fp->self_vel.y = other_fp->self_vel.y;
     }
 }
+
+/// #ftCo_RebirthWait_Coll
+void ftCo_RebirthWait_Coll(Fighter_GObj* gobj)
+{
+    ft_80083844(gobj, fn_800D5A30);
+}
+
 static void fn_800D5A30(Fighter_GObj* gobj)
 {
     ftColl_8007B7A4(gobj, (int)p_ftCommonData->x5D8);

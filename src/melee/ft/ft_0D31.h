@@ -11,13 +11,13 @@
 /* 0D38B8 */ void ftCo_800D38B8(Fighter* fp, int arg1);
 /* 0D3910 */ void ftCo_DeadLeft_Anim(Fighter_GObj* gobj);
 /* 0D394C */ void ftCo_DeadLeft_Cam(Fighter_GObj* gobj);
-/* 0D3950 */ void ftCo_800D3950(Fighter_GObj*);
+/* 0D3950 */ void ftCo_800D3950(Fighter_GObj* gobj);
 /* 0D3B88 */ void ftCo_DeadRight_Anim(Fighter_GObj* gobj);
 /* 0D3BC4 */ void ftCo_DeadRight_Cam(Fighter_GObj* gobj);
-/* 0D3BC8 */ void ftCo_800D3BC8(Fighter_GObj*);
+/* 0D3BC8 */ void ftCo_800D3BC8(Fighter_GObj* gobj);
 /* 0D3E00 */ void ftCo_DeadDown_Anim(Fighter_GObj* gobj);
 /* 0D3E3C */ void ftCo_DeadDown_Cam(Fighter_GObj* gobj);
-/* 0D3E40 */ void ftCo_800D3E40(Fighter_GObj*);
+/* 0D3E40 */ void ftCo_800D3E40(Fighter_GObj* gobj);
 /* 0D4078 */ void ftCo_DeadUp_Anim(Fighter_GObj* gobj);
 /* 0D40B4 */ void ftCo_DeadUp_Cam(Fighter_GObj* gobj);
 /* 0D40B8 */ void ftCo_800D40B8(Fighter_GObj*);
@@ -27,7 +27,7 @@
 /* 0D4580 */ void ftCo_800D4580(Fighter_GObj*, int);
 /* 0D4780 */ void ftCo_800D4780(Fighter_GObj*);
 /* 0D47B8 */ void ftCo_800D47B8(Fighter_GObj*);
-/* 0D481C */ UNK_RET ftCo_800D481C(UNK_PARAMS);
+/* 0D481C */ void ftCo_800D481C(Fighter_GObj* gobj, FtMotionId msid);
 /* 0D4A08 */ void ftCo_DeadUpFall_Anim(Fighter_GObj* gobj);
 /* 0D4CE8 */ void ftCo_DeadUpFall_Phys(Fighter_GObj* gobj);
 /* 0D4E30 */ void ftCo_DeadUpFall_Cam(Fighter_GObj* gobj);
