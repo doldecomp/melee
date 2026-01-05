@@ -631,16 +631,13 @@ Effect* efLib_8005C2BC(u32 arg0, HSD_GObj* arg_gobj, HSD_JObj* arg_jobj)
 {
     Vec3 sp24;
     Effect* eff_1;
-    HSD_GObj* gobj_1;
     HSD_JObj* jobj_1;
-    PAD_STACK(0x4);
 
     eff_1 = efLib_8005BE88(arg0, arg_gobj);
     if (eff_1 != NULL) {
-        gobj_1 = eff_1->gobj;
-        jobj_1 = GET_JOBJ(gobj_1);
+        jobj_1 = GET_JOBJ(eff_1->gobj);
         if (jobj_1 == NULL) {
-            HSD_GObjPLink_80390228(gobj_1);
+            HSD_GObjPLink_80390228(eff_1->gobj);
             eff_1 = NULL;
         } else {
             lb_8000C1C0(jobj_1, arg_jobj);
@@ -1590,50 +1587,46 @@ void efLib_8005F748(Effect* arg_effect)
 void efLib_8005F774(HSD_JObj* arg_jobj, s32 arg1, u32 arg2, u32 arg3)
 {
     HSD_DObj* dobj_1;
-    HSD_MObj* mobj_1;
     HSD_TObj* tobj_1;
-    u32 temp_r0;
-    u32 var_ctr;
-    u32 var_ctr_2;
-    u32 var_r4;
+    s32 ctr;
+    s32 i;
 
     dobj_1 = HSD_JObjGetDObj(arg_jobj);
     if (dobj_1 != NULL) {
-        mobj_1 = dobj_1->mobj;
+        tobj_1 = HSD_MObjGetTObj(dobj_1->mobj);
     } else {
-        mobj_1 = NULL;
+        tobj_1 = HSD_MObjGetTObj(NULL);
     }
-    tobj_1 = HSD_MObjGetTObj(mobj_1);
-    var_r4 = arg1;
+
+    i = arg1;
     if (arg1 != 0) {
-        temp_r0 = var_r4 >> 3U;
-        var_ctr = temp_r0;
-        if (temp_r0 != 0) {
+        ctr = (u32) i >> 3;
+        if (ctr != 0) {
             do {
-                tobj_1 =
-                    tobj_1->next->next->next->next->next->next->next->next;
-                var_ctr--;
-            } while (var_ctr != 0);
-            var_r4 &= 7;
-            if (var_r4 != 0) {
-                goto block_7;
-            }
-        } else {
-        block_7:
-            var_ctr_2 = var_r4;
-            while (var_ctr_2 != 0) {
                 tobj_1 = tobj_1->next;
-                var_ctr_2--;
-            };
+                tobj_1 = tobj_1->next;
+                tobj_1 = tobj_1->next;
+                tobj_1 = tobj_1->next;
+                tobj_1 = tobj_1->next;
+                tobj_1 = tobj_1->next;
+                tobj_1 = tobj_1->next;
+                tobj_1 = tobj_1->next;
+            } while (--ctr != 0);
+            i &= 7;
+            if (i == 0) {
+                goto done;
+            }
         }
+        do {
+            tobj_1 = tobj_1->next;
+        } while (--i != 0);
     }
+done:
     tobj_1->tev->konst.r = arg2 >> 0x10U;
     tobj_1->tev->konst.g = arg2 >> 8U;
-    // tobj_1->tev->konst.g = arg2;
     tobj_1->tev->konst.b = arg2;
     tobj_1->tev->tev0.r = arg3 >> 0x10U;
     tobj_1->tev->tev0.g = arg3 >> 8U;
-    // tobj_1->tev->tev0.g = arg3;
     tobj_1->tev->tev0.b = arg3;
 }
 

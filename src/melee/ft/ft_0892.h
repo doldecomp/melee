@@ -14,7 +14,7 @@
 /* 0898A8 */ struct Struct2074* ft_800898A8(Fighter_GObj* gobj);
 /* 0898B4 */ ft_800898B4_t* ft_800898B4(Fighter_GObj* gobj);
 /* 0898C0 */ bool ft_800898C0(HSD_GObj*);
-/* 089914 */ UNK_RET ft_80089914(UNK_PARAMS);
+/* 089914 */ s32 ft_80089914(HSD_GObj* gobj, int msid);
 /* 08998C */ UNK_RET fn_8008998C(UNK_PARAMS);
 /* 089B08 */ void ft_80089B08(Fighter_GObj* gobj);
 /* 08A1B8 */ void ft_8008A1B8(Fighter_GObj* gobj, int);

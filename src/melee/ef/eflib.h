@@ -19,8 +19,8 @@
 /* 05BBB4 */ void efLib_8005BBB4(u32, f32);
 /* 05BC50 */ void fn_8005BC50(HSD_GObj* gobj);
 /* 05BE88 */ Effect* efLib_8005BE88(int, HSD_GObj* parent_gobj);
-/* 05C1B4 */ Effect* efLib_8005C1B4(u32, HSD_GObj*, HSD_JObj*);
-/* 05C2BC */ Effect* efLib_8005C2BC(u32, HSD_GObj*, HSD_JObj*);
+/* 05C1B4 */ Effect* efLib_8005C1B4(u32 arg0, HSD_GObj* arg_gobj, HSD_JObj* arg_jobj);
+/* 05C2BC */ Effect* efLib_8005C2BC(u32 arg0, HSD_GObj* arg_gobj, HSD_JObj* arg_jobj);
 /* 05C3DC */ Effect* efLib_8005C3DC(u32, HSD_GObj*, HSD_JObj*);
 /* 05C5C4 */ Effect* efLib_8005C5C4(u32, HSD_GObj*, HSD_JObj*);
 /* 05C6F4 */ Effect* efLib_8005C6F4(u32, HSD_GObj*, void*);
@@ -32,7 +32,7 @@
 /* 05C9FC */ HSD_Generator* efLib_8005C9FC(s32, Vec3*);
 // /* 05C9FC */ Effect* efLib_8005C9FC(u32, Vec3*, f32, Vec3*, ...);
 /* 05CAB0 */ HSD_Generator* efLib_8005CAB0(s32);
-/* 05CB34 */ HSD_Generator* efLib_8005CB34(s32, Vec3*, f32);
+/* 05CB34 */ HSD_Generator* efLib_8005CB34(s32 arg0, Vec3* arg_vec3, f32 arg2);
 /* 05CC2C */ HSD_Generator* efLib_8005CC2C(s32, HSD_JObj*);
 // /* 05CC84 */ HSD_Generator* efLib_8005CC84(u32,  HSD_JObj*, ...);
 /* 05CC84 */ HSD_Generator* efLib_8005CC84(s32, HSD_JObj*);
@@ -49,7 +49,7 @@
 /* 05DE94 */ void efLib_8005DE94(Effect*);
 /* 05E090 */ void efLib_8005E090(Effect*);
 /* 05E1D8 */ void efLib_8005E1D8(Effect*);
-/* 05E2B4 */ void efLib_8005E2B4(Effect*);
+/* 05E2B4 */ void efLib_8005E2B4(Effect* effect);
 /* 05E3A0 */ void efLib_8005E3A0(Effect*);
 /* 05E648 */ void efLib_8005E648(Effect*);
 /* 05E950 */ void efLib_8005E950(Effect*);
@@ -60,7 +60,7 @@
 /* 05F270 */ void efLib_8005F270(Effect*);
 /* 05F454 */ void efLib_8005F454(Effect* arg_effect);
 /* 05F748 */ void efLib_8005F748(Effect*);
-/* 05F774 */ void efLib_8005F774(HSD_JObj*, s32, u32, u32);
+/* 05F774 */ void efLib_8005F774(HSD_JObj* arg_jobj, s32 arg1, u32 arg2, u32 arg3);
 /* 05F864 */ void efLib_8005F864(HSD_GObj* gobj, s8, float, float);
 /* 05F990 */ void efLib_8005F990(HSD_GObj*, s32);
 /* 05FAB8 */ void efLib_8005FAB8(Effect*);

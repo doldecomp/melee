@@ -84,7 +84,7 @@ struct ftCommonData {
     /*  +58 */ float x58_someLStickXThreshold;
     /*  +5C */ float x5C;
     /*  +60 */ float x60_someFrictionMul;
-    /*  +64 */ UNK_T x64;
+    /*  +64 */ float x64;
     /*  +68 */ float x68;
     /*  +6C */ float x6C;
     /*  +70 */ float tap_jump_threshold;
@@ -421,7 +421,7 @@ struct ftCommonData {
     /* +5CC */ float x5CC;
     /* +5D0 */ UNK_T x5D0;
     /* +5D4 */ UNK_T x5D4;
-    /* +5D8 */ UNK_T x5D8;
+    /* +5D8 */ int x5D8;
     /* +5DC */ u32 bury_timer_unk1;
     /* +5E0 */ u32 bury_timer_unk2;
     /* +5E4 */ u32 bury_timer_unk3;
