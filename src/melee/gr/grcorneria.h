@@ -92,8 +92,8 @@
 /* 1E2CE8 */ bool grCorneria_801E2CE8(void);
 /* 1E2D14 */ bool grCorneria_801E2D14(void);
 /* 1E2D90 */ bool grCorneria_801E2D90(enum_t);
-/* 1E2E50 */ UNK_RET grCorneria_801E2E50(UNK_PARAMS);
-/* 1E2EA0 */ UNK_RET grCorneria_801E2EA0(UNK_PARAMS);
+/* 1E2E50 */ bool grCorneria_801E2E50(enum_t);
+/* 1E2EA0 */ float grCorneria_801E2EA0(void);
 /* 1E2EE4 */ DynamicsDesc* grCorneria_801E2EE4(enum_t);
 /* 1E2EEC */ bool grCorneria_801E2EEC(Vec3* v, int arg1, HSD_JObj* jobj);
 /* 1E2FCC */ float grCorneria_801E2FCC(void);

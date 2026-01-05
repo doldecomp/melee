@@ -11,6 +11,9 @@
 #include <baselib/cobj.h>
 #include <baselib/gobj.h>
 
+/* 4D6F70 */ extern void* un_804D6F70;
+/* 4D6F74 */ extern HSD_Archive* un_804D6F74;
+/* 4D6F78 */ extern HSD_Archive* un_804D6F78;
 /* 4DE070 */ static f32 un_804DE070;
 /* 4DE074 */ static f32 un_804DE074;
 /* 4DE078 */ static f32 un_804DE078;
