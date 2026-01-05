@@ -7,6 +7,7 @@
 
 #include "baselib/forward.h"
 
+#include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ftbosslib.h"
 #include "ft/ftcamera.h"
@@ -16,11 +17,19 @@
 #include "ftCrazyHand/forward.h"
 
 #include "ftMasterHand/types.h"
+#include "gr/stage.h"
 #include "it/it_26B1.h"
 #include "pl/player.h"
 
 #include <common_structs.h>
 #include <dolphin/mtx.h>
+
+/* 156310 */ static void ftCh_Init_80156310(HSD_GObj* gobj);
+/* 157080 */ static void fn_80157080(Fighter_GObj* gobj);
+/* 15B174 */ void ftCh_GrabUnk1_8015B174(HSD_GObj* gobj);
+
+extern f32 ftCh_Init_804DA070;
+extern f32 ftCh_Init_804DA074;
 
 /* static */ void ftCh_Init_801566B4(void);
 /* static */ void ftCh_Init_80156A5C(void);
@@ -700,7 +709,14 @@ void ftCh_Init_LoadSpecialAttrs(HSD_GObj* gobj)
     COPY_ATTRS(gobj, ftCrazyHand_DatAttrs);
 }
 
-/// #ftCh_Init_80155FCC
+void ftCh_Init_80155FCC(HSD_GObj* gobj)
+{
+    if (Stage_80225194() == 0xFB) {
+        ftCh_Init_80156310(gobj);
+    } else {
+        ftCh_GrabUnk1_8015B174(gobj);
+    }
+}
 
 void ftCh_Init_80156014(HSD_GObj* gobj) {}
 
@@ -755,8 +771,12 @@ void ftCh_Entry_Phys(HSD_GObj* gobj)
 
 void ftCh_Entry_Coll(HSD_GObj* gobj) {}
 
-/// #fn_80157080
-
+void fn_80157080(Fighter_GObj* gobj)
+{
+    Fighter_ChangeMotionState(gobj, 0x158, 0,
+        ftCh_Init_804DA070, ftCh_Init_804DA074, ftCh_Init_804DA070, NULL);
+    ftAnim_8006EBA4(gobj);
+}
 void ftCh_Damage_Anim(HSD_GObj* gobj)
 {
     if (ftAnim_IsFramesRemaining(gobj) == 0) {
@@ -791,7 +811,14 @@ void ftCh_Damage2_IASA(HSD_GObj* gobj)
     }
 }
 
-/// #ftCh_Damage2_Phys
+void ftCh_Damage2_Phys(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftCrazyHand_DatAttrs* attrs = fp->ft_data->ext_attr;
+    ft_80085134(gobj);
+    ftBossLib_8015BE40(gobj, &fp->mv.ch.unk0.xC, &fp->mv.ch.unk0.x18,
+                       attrs->x14, attrs->x10);
+}
 
 void ftCh_Damage2_Coll(HSD_GObj* gobj) {}
 
@@ -1251,8 +1278,13 @@ void ftCh_BackAirplane3_Coll(HSD_GObj* gobj) {}
 
 /// #ftCh_Init_801597F0
 
-/// #ftCh_BackCrush_Anim
-
+void ftCh_BackCrush_Anim(HSD_GObj* gobj)
+{
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        Fighter* fp = GET_FIGHTER(gobj);
+        fp->mv.ch.unk0.x4(gobj);
+    }
+}
 void ftCh_BackCrush_IASA(HSD_GObj* gobj)
 {
     Fighter* ft = GET_FIGHTER(gobj);
@@ -1270,8 +1302,14 @@ void ftCh_BackCrush_Coll(HSD_GObj* gobj) {}
 
 /// #fn_80159908
 
-/// #ftCh_BackDisappear_Anim
-
+void ftCh_BackDisappear_Anim(HSD_GObj* gobj)
+{
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        Fighter* fp = GET_FIGHTER(gobj);
+        fp->self_vel.x = 0.0f;
+        ftCh_GrabUnk1_8015BC88(gobj);
+    }
+}
 void ftCh_BackDisappear_IASA(HSD_GObj* gobj)
 {
     Fighter* ft = GET_FIGHTER(gobj);
@@ -1326,8 +1364,14 @@ void ftCh_Grab_Coll(HSD_GObj* gobj) {}
 
 /// #ftCh_Init_8015A030
 
-/// #ftCh_Cancel_Anim
-
+void ftCh_Cancel_Anim(HSD_GObj* gobj)
+{
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        Fighter* fp = GET_FIGHTER(gobj);
+        fp->self_vel.x = 0.0f;
+        ftCh_Init_8015A184(gobj);
+    }
+}
 void ftCh_Cancel_IASA(HSD_GObj* gobj)
 {
     Fighter* ft = GET_FIGHTER(gobj);

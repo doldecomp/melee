@@ -75,7 +75,6 @@ struct plAllocInfo;
 /* 459080 */ extern HSD_ObjAllocData fighter_x2040_alloc_data;
 /* 4590AC */ extern HSD_ObjAllocData fighter_x59C_alloc_data;
 /* 4598B8 */ extern ftData* gFtDataList[FTKIND_MAX];
-/* 4D6500 */ extern UNK_T Fighter_804D6500;
 /* 4D6504 */ extern HSD_Joint* Fighter_804D6504;
 /* 4D6508 */ extern u8* Fighter_804D6508;
 /* 4D650C */ extern u8* Fighter_804D650C;

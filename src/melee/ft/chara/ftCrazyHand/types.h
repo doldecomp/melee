@@ -10,7 +10,7 @@ typedef struct _ftCrazyHandAttributes {
     s32 x4;
     s32 x8;
     s32 xC;
-    s32 x10;
+    float x10;
     float x14;
     float x18;
     float x1C;

@@ -1,15 +1,18 @@
 #include "vi/vi1202.h"
 
-#include <baselib/gobj.h>
-#include <baselib/gobjproc.h>
-#include <baselib/jobj.h>
+#include "vi.h"
 
 #include "ft/fighter.h"
 #include "ft/ftlib.h"
 #include "gm/gm_unsplit.h"
 #include "lb/lb_00F9.h"
 #include "lb/lbaudio_ax.h"
-#include "vi.h"
+
+#include <baselib/aobj.h>
+#include <baselib/cobj.h>
+#include <baselib/gobj.h>
+#include <baselib/gobjproc.h>
+#include <baselib/jobj.h>
 
 struct vi1202_UnkStruct {
     /* 0x00 */ s32 x0;
@@ -41,6 +44,19 @@ void un_80321154(HSD_GObj* gobj)
     HSD_JObjAnimAll(GET_JOBJ(gobj));
 }
 
+void un_80321294(HSD_GObj* gobj)
+{
+    HSD_CObj* cobj = GET_COBJ(gobj);
+    HSD_CObjAnim(cobj);
+    if (cobj->aobj->curr_frame == 1.0F) {
+        vi_8031C9B4(0xE, 0);
+    }
+    if (cobj->aobj->curr_frame == cobj->aobj->end_frame) {
+        lb_800145F4();
+        gm_801A4B60();
+    }
+}
+
 void un_803218E0_OnFrame(void)
 {
     vi_8031CAAC();
@@ -54,7 +70,7 @@ void un_80321900(void)
 {
     HSD_GObj* gobj = GObj_Create(0x16, 0x17, 0);
     HSD_GObjProc_8038FD54(gobj, fn_803219AC, 0x13);
-    un_804D7050 = (vi1202_UnkStruct*)un_804A2F08;
+    un_804D7050 = (vi1202_UnkStruct*) un_804A2F08;
     un_80321950(un_804D7050);
 }
 
@@ -64,9 +80,9 @@ void un_80321950(vi1202_UnkStruct* s)
     s->x4 = 0x10000;
     s->x8 = 1.0F;
     s->xC = 0;
-    s->x10 = M2C_FIELD(Fighter_804D6500, s32*, 0x20);
+    s->x10 = gCrowdConfig->cheer_limit;
     s->x14 = 0x83D60;
-    s->x18 = M2C_FIELD(Fighter_804D6500, s32*, 0x28);
+    s->x18 = gCrowdConfig->max_gasp_count;
     s->x1C = 0;
     s->x20 = 0;
     s->x24 = 0;
@@ -88,10 +104,10 @@ void un_80321A00(HSD_GObj* gobj)
 {
     s32 zero;
     vi1202_UnkStruct* data = un_804D7050;
-    void* fighter = Fighter_804D6500;
+    CrowdConfig* vdata = gCrowdConfig;
 
-    if (data->x18 >= M2C_FIELD(fighter, s32*, 0x28)) {
-        if (data->x10 < M2C_FIELD(fighter, s32*, 0x20)) {
+    if (data->x18 >= vdata->max_gasp_count) {
+        if (data->x10 < vdata->cheer_limit) {
             data->x10 = data->x10 + 1;
         }
         return;
@@ -102,12 +118,12 @@ void un_80321A00(HSD_GObj* gobj)
     }
     data->x18 = data->x18 + 1;
 
-    if (data->x18 < M2C_FIELD(Fighter_804D6500, s32*, 0x28)) {
+    if (data->x18 < gCrowdConfig->max_gasp_count) {
         if (data->x1C != 0) {
             zero = 0;
             data->x1C = zero;
             data->x10 = zero;
-            data->x18 = M2C_FIELD(Fighter_804D6500, s32*, 0x28);
+            data->x18 = gCrowdConfig->max_gasp_count;
             un_80321C28();
             if (data->x20 != 0) {
                 un_80321CA4(0x144);
@@ -141,10 +157,12 @@ void un_80321AF4(HSD_GObj* gobj)
             if (ftLib_8008731C(cur) == 0) {
                 ftLib_80086644(cur, &pos);
 
-                if (pos.y < M2C_FIELD(Fighter_804D6500, f32*, 0x40) + M2C_FIELD(mpLib, f32*, 0x14)) {
+                if (pos.y < gCrowdConfig->blastzone_y_offset +
+                                M2C_FIELD(mpLib, f32*, 0x14))
+                {
                     data->x24 = data->x24 + 1;
                 } else {
-                    if ((u32)data->xC == ftLib_80087460(cur)) {
+                    if ((u32) data->xC == ftLib_80087460(cur)) {
                         flag = 1;
                     }
                 }
@@ -153,8 +171,8 @@ void un_80321AF4(HSD_GObj* gobj)
         cur = cur->next;
     }
 
-    if (old_x24 < M2C_FIELD(Fighter_804D6500, s32*, 0x3C)) {
-        if (data->x24 >= M2C_FIELD(Fighter_804D6500, s32*, 0x3C)) {
+    if (old_x24 < gCrowdConfig->fighters_near_blastzone) {
+        if (data->x24 >= gCrowdConfig->fighters_near_blastzone) {
             if (flag != 0) {
                 un_8032201C(data->xC, 3);
             } else {
@@ -184,12 +202,12 @@ void un_80321C28(void)
 void un_80321C70(void)
 {
     vi1202_UnkStruct* data = un_804D7050;
-    void* fighter = Fighter_804D6500;
+    CrowdConfig* vdata = gCrowdConfig;
     s32 x18 = data->x18;
-    if (x18 >= M2C_FIELD(fighter, s32*, 0x28)) {
+    if (x18 >= vdata->max_gasp_count) {
         return;
     }
-    if (x18 >= M2C_FIELD(fighter, s32*, 0x24)) {
+    if (x18 >= vdata->x24) {
         data->x1C = 1;
     }
 }
@@ -241,12 +259,12 @@ void un_8032201C(int arg0, s32 cat)
         break;
     }
 
-    if ((u32)arg0 != 0) {
-        if ((u32)data->xC == (u32)arg0) {
-            void* fighter = Fighter_804D6500;
+    if ((u32) arg0 != 0) {
+        if ((u32) data->xC == (u32) arg0) {
+            CrowdConfig* vdata = gCrowdConfig;
             vi1202_UnkStruct* data2 = un_804D7050;
-            if (data2->x18 < M2C_FIELD(fighter, s32*, 0x28)) {
-                if (data2->x18 >= M2C_FIELD(fighter, s32*, 0x24)) {
+            if (data2->x18 < vdata->max_gasp_count) {
+                if (data2->x18 >= vdata->x24) {
                     data2->x1C = 1;
                 }
             }
@@ -297,7 +315,7 @@ void un_80322178(int arg)
 
 bool un_80322258(float arg)
 {
-    f32 val2c = M2C_FIELD(Fighter_804D6500, f32*, 0x2c);
+    f32 val2c = gCrowdConfig->horiz_margin;
     f32 val18 = M2C_FIELD(mpLib_80458868, f32*, 0x18);
     f32 val1c;
     if (arg >= val2c + val18) {
@@ -312,14 +330,14 @@ bool un_80322258(float arg)
 
 s32 un_80322298(float arg)
 {
-    void* fighter = Fighter_804D6500;
-    if (arg >= M2C_FIELD(fighter, f32*, 0x8)) {
+    CrowdConfig* vdata = gCrowdConfig;
+    if (arg >= vdata->kb_threshold_high) {
         return 3;
     }
-    if (arg >= M2C_FIELD(fighter, f32*, 0x4)) {
+    if (arg >= vdata->kb_threshold_mid) {
         return 2;
     }
-    if (arg >= M2C_FIELD(fighter, f32*, 0x0)) {
+    if (arg >= vdata->kb_threshold_low) {
         return 1;
     }
     return 0;
@@ -327,43 +345,83 @@ s32 un_80322298(float arg)
 
 f32 un_803222EC(f32 arg1, f32 arg2)
 {
-    void* fighter = Fighter_804D6500;
-    if (!(arg2 > M2C_FIELD(fighter, f32*, 0xc))) {
+    CrowdConfig* vdata = gCrowdConfig;
+    if (!(arg2 > vdata->angle_min)) {
         return arg1;
     }
-    if (!(arg2 < M2C_FIELD(fighter, f32*, 0x10))) {
+    if (!(arg2 < vdata->angle_max)) {
         return arg1;
     }
-    return arg1 * M2C_FIELD(fighter, f32*, 0x14);
+    return arg1 * vdata->angle_mult;
 }
 
 void un_80322314(void)
 {
     vi1202_UnkStruct* data = un_804D7050;
-    void* fighter = Fighter_804D6500;
-    if (data->x18 >= M2C_FIELD(fighter, s32*, 0x28)) {
+    CrowdConfig* vdata = gCrowdConfig;
+    if (data->x18 >= vdata->max_gasp_count) {
         return;
     }
     data->x1C = 1;
     data->x20 = 1;
 }
 
+bool un_803224DC(s32 spawn_id, f32 pos_x, f32 kb_mag)
+{
+    CrowdConfig* vdata = gCrowdConfig;
+    s32 cat;
+    s32 out_of_bounds;
+
+    if (kb_mag >= vdata->kb_threshold_high) {
+        cat = 3;
+    } else if (kb_mag >= vdata->kb_threshold_mid) {
+        cat = 2;
+    } else if (kb_mag >= vdata->kb_threshold_low) {
+        cat = 1;
+    } else {
+        cat = 0;
+    }
+
+    {
+        f32 val2c = vdata->horiz_margin;
+        f32 val18 = M2C_FIELD(mpLib_80458868, f32*, 0x18);
+        f32 val1c;
+
+        if (pos_x < val2c + val18) {
+            out_of_bounds = 1;
+        } else {
+            val1c = M2C_FIELD(mpLib_80458868, f32*, 0x1C);
+            if (pos_x > val1c - val2c) {
+                out_of_bounds = 1;
+            } else {
+                out_of_bounds = 0;
+            }
+        }
+    }
+
+    if (out_of_bounds != 0) {
+        un_8032201C(spawn_id, cat);
+    } else {
+        return 0;
+    }
+}
+
 int un_80322598(int arg0, float arg1)
 {
     f32 val14 = M2C_FIELD(mpLib_80458868, f32*, 0x14);
     s32 cat;
-    void* fighter;
+    CrowdConfig* vdata;
     if (arg1 >= val14) {
         goto ret_zero;
     }
-    fighter = Fighter_804D6500;
-    if (arg1 < M2C_FIELD(fighter, f32*, 0x38) + val14) {
-ret_zero:
+    vdata = gCrowdConfig;
+    if (arg1 < vdata->recovery_y_low + val14) {
+    ret_zero:
         return 0;
     }
-    if (arg1 > M2C_FIELD(fighter, f32*, 0x30) + val14) {
+    if (arg1 > vdata->recovery_y_high + val14) {
         cat = 3;
-    } else if (arg1 > M2C_FIELD(fighter, f32*, 0x34) + val14) {
+    } else if (arg1 > vdata->recovery_y_mid + val14) {
         cat = 2;
     } else {
         cat = 1;
