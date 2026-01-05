@@ -494,4 +494,20 @@ void ftCo_RebirthWait_Coll(Fighter_GObj* gobj)
 }
 /// #fn_800D5A30
 
-/// #ftCo_Rebirth_Cam
+void ftCo_Rebirth_Cam(Fighter_GObj* gobj)
+{
+    u8 _0[8];
+    Vec3 pos;
+    u8 _1[4];
+    Fighter* fp = gobj->user_data;
+    CmSubject* cam = fp->x890_cameraBox;
+
+    ftCamera_80076018((UnkFloat6_Camera*) fp->ft_data->x3C,
+                      (UnkFloat6_Camera*) &pos, fp->x34_scale.y);
+
+    cam->x10.x = *(float*) &fp->mv.co.unk_deadup.x44;
+    cam->x10.y = M2C_FIELD(&fp->mv.co.unk_deadup, float*, 0x48 - 0x40) + pos.x;
+    cam->x10.z = 0.0f;
+
+    ftLib_800866DC(gobj, &cam->x1C);
+}
