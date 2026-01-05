@@ -6,6 +6,8 @@
 #include <dolphin/gx/GXTexture.h>
 #include <baselib/cobj.h>
 #include <baselib/debug.h>
+#include <baselib/dobj.h>
+#include <baselib/state.h>
 #include <MetroTRK/intrinsics.h>
 
 /* 021F34 */ static UNK_RET fn_80021F34(UNK_PARAMS);
@@ -16,6 +18,8 @@
 /* 022120 */ static void fn_80022120(lbRefract_CallbackData* arg0, s32 arg1,
                                      u32 arg2, u32* arg3, u32* arg4, u8* arg5,
                                      u8* arg6);
+/* 022608 */ static void fn_80022608(HSD_DObj* dobj, Mtx vmtx, Mtx pmtx,
+                                     u32 rendermode);
 /* 022DF8 */ static inline float lbRefract_80022DF8(float x);
 /* 02219C */ s32 lbRefract_8002219C(lbRefract_CallbackData*, s32, s32, u16,
                                     u16);
@@ -133,6 +137,33 @@ void lbRefract_8002247C(HSD_CObj* cobj) {
     }
     }
 }
+
+void lbRefract_80022560(void)
+{
+    if (lbl_804336D0[0] != 0) {
+        GXSetTexCopySrc(0, 0, 0x280, 0x1E0);
+        GXSetTexCopyDst(0x140, 0xF0, 4, 1);
+        GXCopyTex((void*) lbl_804336D0[1], 0);
+        GXPixModeSync();
+        GXInvalidateTexAll();
+    }
+}
+
+void lbRefract_800225D4(void)
+{
+    GXSetTevDirect(0);
+    GXSetNumIndStages(0);
+    HSD_StateInvalidate(-1);
+}
+
+static void fn_80022608(HSD_DObj* dobj, Mtx vmtx, Mtx pmtx, u32 rendermode)
+{
+    hsdDObj.disp(dobj, vmtx, pmtx, rendermode);
+    GXSetTevDirect(0);
+    GXSetNumIndStages(0);
+    HSD_StateInvalidate(-1);
+}
+
 void lbRefract_80022BB8(void)
 {
     lbl_804336D0[0] += 1;

@@ -45,6 +45,8 @@ struct HSD_ShapeAnimDObj {
 #define HSD_DOBJ_INFO(i) ((HSD_DObjInfo*) (i))
 #define HSD_DOBJ_METHOD(o) HSD_DOBJ_INFO(HSD_CLASS_METHOD(o))
 
+extern HSD_DObjInfo hsdDObj;
+
 void HSD_DObjSetCurrent(HSD_DObj* dobj);
 u32 HSD_DObjGetFlags(HSD_DObj* dobj);
 void HSD_DObjSetFlags(HSD_DObj* dobj, u32 flags);
