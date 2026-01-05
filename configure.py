@@ -483,7 +483,7 @@ config.libs = [
     MeleeLib(
         "cm (Camera)",
         [
-            Object(Matching, "melee/cm/camera.c"),
+            Object(NonMatching, "melee/cm/camera.c"),
             Object(Matching, "melee/cm/cmsnap.c"),
         ],
     ),
@@ -503,8 +503,8 @@ config.libs = [
         "mp (Map)",
         [
             Object(NonMatching, "melee/mp/mpcoll.c"),
-            Object(Matching, "melee/mp/mplib.c"),
-            Object(Matching, "melee/mp/mpisland.c"),
+            Object(NonMatching, "melee/mp/mplib.c"),
+            Object(NonMatching, "melee/mp/mpisland.c"),
         ],
     ),
     MeleeLib(
@@ -735,7 +735,7 @@ config.libs = [
             Object(Matching, "melee/ft/chara/ftLink/ftLk_SpecialS.c"),
             Object(NonMatching, "melee/ft/chara/ftLink/ftLk_SpecialN.c"),
             # Kirby
-            Object(Matching, "melee/ft/chara/ftKirby/ftKb_Init.c"),
+            Object(NonMatching, "melee/ft/chara/ftKirby/ftKb_Init.c"),
             # Donkey Kong
             Object(Matching, "melee/ft/chara/ftDonkey/ftDk_Init.c"),
             Object(Matching, "melee/ft/chara/ftDonkey/ftDk_SpecialLw.c"),
@@ -1104,12 +1104,12 @@ config.libs = [
             # Main
             Object(Matching, "melee/it/item.c"),
             Object(Matching, "melee/it/it_26B1.c"),
-            Object(Matching, "melee/it/it_266F.c"),
+            Object(NonMatching, "melee/it/it_266F.c"),
             Object(NonMatching, "melee/it/itcoll.c"),
-            Object(Matching, "melee/it/it_2725.c"),
+            Object(NonMatching, "melee/it/it_2725.c"),
             # Individual items
             Object(Matching, "melee/it/items/itcapsule.c"),
-            Object(Matching, "melee/it/items/itbombhei.c"),
+            Object(NonMatching, "melee/it/items/itbombhei.c"),
             Object(NonMatching, "melee/it/items/itdosei.c"),
             Object(NonMatching, "melee/it/items/itheart.c"),
             Object(NonMatching, "melee/it/items/ittomato.c"),
@@ -1306,7 +1306,7 @@ config.libs = [
             Object(NonMatching, "melee/ty/toy.c"),
             Object(NonMatching, "melee/ty/tylist.c"),
             Object(NonMatching, "melee/ty/tyfigupon.c"),
-            Object(Matching, "melee/ty/tydisplay.c"),
+            Object(NonMatching, "melee/ty/tydisplay.c"),
         ],
     ),
     MeleeLib(
@@ -1314,7 +1314,7 @@ config.libs = [
         [
             Object(Matching, "melee/vi/vi.c"),
             Object(NonMatching, "melee/vi/vi0102.c"),
-            Object(Matching, "melee/vi/vi0401.c"),
+            Object(NonMatching, "melee/vi/vi0401.c"),
             Object(NonMatching, "melee/vi/vi0402.c"),
             Object(NonMatching, "melee/vi/vi0501.c"),
             Object(Matching, "melee/vi/vi0502.c"),
