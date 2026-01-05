@@ -2530,7 +2530,7 @@ void Camera_8002FEEC(s32 arg0)
         box = ftLib_80086B74(Player_GetEntity(arg0));
         if ((box != NULL) && ((cm_80452C68.mode) != CAMERA_DEBUG_FOLLOW)) {
 
-            if (cm_80452C68.mode <= CAMERA_PAUSE) {
+            if (cm_80452C68.mode <= (u32)CAMERA_PAUSE) {
                 cm_80453004.last_mode = cm_80452C68.mode;
             }
 
@@ -2574,7 +2574,7 @@ void Camera_8003006C(void)
     HSD_CObj* cobj;
 
     if (cm_80452C68.mode != CAMERA_DEBUG_FREE) {
-        if (cm_80452C68.mode <= CAMERA_PAUSE) {
+        if (cm_80452C68.mode <= (u32)CAMERA_PAUSE) {
             cm_80453004.last_mode = cm_80452C68.mode;
         }
         cm_80452C68.mode = CAMERA_DEBUG_FREE;
