@@ -486,8 +486,12 @@ void ftCo_Rebirth_Coll(HSD_GObj* gobj)
 
 /// #ftCo_RebirthWait_Phys
 
-/// #ftCo_RebirthWait_Coll
+static void fn_800D5A30(Fighter_GObj* gobj);
 
+void ftCo_RebirthWait_Coll(Fighter_GObj* gobj)
+{
+    ft_80083844(gobj, fn_800D5A30);
+}
 /// #fn_800D5A30
 
 /// #ftCo_Rebirth_Cam
