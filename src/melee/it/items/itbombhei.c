@@ -13,28 +13,6 @@
 #include "it/inlines.h"
 #include "it/item.h"
 
-// Placeholder state table - NOT_IMPLEMENTED entries
-ItemStateTable it_803F54D8[] = {
-    { 0, itBombhei_UnkMotion0_Anim, itBombhei_UnkMotion0_Phys,
-      itBombhei_UnkMotion0_Coll },
-    { 0, itBombhei_UnkMotion1_Anim, itBombhei_UnkMotion1_Phys,
-      itBombhei_UnkMotion1_Coll },
-    { 0, NULL, itBombhei_UnkMotion2_Phys, NULL },
-    { 0, NULL, itBombhei_UnkMotion3_Phys, NULL },
-    { 0, NULL, itBombhei_UnkMotion4_Phys, NULL },
-    { 0, itBombhei_UnkMotion5_Anim, itBombhei_UnkMotion5_Phys,
-      itBombhei_UnkMotion5_Coll },
-    { 0, itBombhei_UnkMotion6_Anim, NULL, NULL },
-    { 0, NULL, NULL, NULL },
-    { 0, itBombhei_UnkMotion8_Anim, itBombhei_UnkMotion8_Phys, NULL },
-    { 0, NULL, NULL, NULL },
-    { 0, NULL, NULL, NULL },
-    { 0, itBombhei_UnkMotion11_Anim, itBombhei_UnkMotion11_Phys,
-      itBombhei_UnkMotion11_Coll },
-    { 0, itBombhei_UnkMotion12_Anim, itBombhei_UnkMotion12_Phys,
-      itBombhei_UnkMotion12_Coll },
-};
-
 Item_GObj* it_8027D670(Vec3* pos)
 {
     SpawnItem data;
@@ -228,15 +206,9 @@ bool itBombhei_UnkMotion8_Anim(Item_GObj* igp)
 
 void itBombhei_UnkMotion8_Phys(Item_GObj* gobj) {}
 
-void it_3F14_Logic6_Dropped(Item_GObj* gobj)
-{
-    NOT_IMPLEMENTED;
-}
+/// #it_3F14_Logic6_Dropped
 
-void it_8027E978(Item_GObj* gobj)
-{
-    NOT_IMPLEMENTED;
-}
+/// #it_8027E978
 
 /// #itBombhei_UnkMotion3_Anim
 
@@ -260,10 +232,7 @@ void itBombhei_UnkMotion4_Phys(Item_GObj* gobj) {}
 
 /// #itBombhei_UnkMotion4_Coll
 
-void it_8027F8E0(Item_GObj* gobj)
-{
-    NOT_IMPLEMENTED;
-}
+/// #it_8027F8E0
 
 bool itBombhei_UnkMotion5_Anim(Item_GObj* gobj)
 {
@@ -282,10 +251,7 @@ bool itBombhei_UnkMotion5_Coll(Item_GObj* gobj)
     return false;
 }
 
-void fn_8027FCA8(Item_GObj* gobj)
-{
-    NOT_IMPLEMENTED;
-}
+/// #fn_8027FCA8
 
 bool itBombhei_UnkMotion6_Anim(Item_GObj* gobj)
 {
@@ -299,26 +265,17 @@ bool itBombhei_UnkMotion6_Anim(Item_GObj* gobj)
 
 /// #itBombhei_UnkMotion6_Coll
 
-void it_3F14_Logic6_Thrown(Item_GObj* gobj)
-{
-    NOT_IMPLEMENTED;
-}
+/// #it_3F14_Logic6_Thrown
 
 /// #itBombhei_UnkMotion10_Anim
 
 /// #itBombhei_UnkMotion10_Phys
 
-void fn_80280974(Item_GObj* gobj)
-{
-    NOT_IMPLEMENTED;
-}
+/// #fn_80280974
 
 /// #itBombhei_UnkMotion10_Coll
 
-void it_80280B60(Item_GObj* gobj)
-{
-    NOT_IMPLEMENTED;
-}
+/// #it_80280B60
 
 void it_80280DC0(Item_GObj* gobj)
 {
@@ -328,17 +285,9 @@ void it_80280DC0(Item_GObj* gobj)
     }
 }
 
-bool it_3F14_Logic6_DmgDealt(Item_GObj* gobj)
-{
-    NOT_IMPLEMENTED;
-    return false;
-}
+/// #it_3F14_Logic6_DmgDealt
 
-bool it_3F14_Logic6_DmgReceived(Item_GObj* gobj)
-{
-    NOT_IMPLEMENTED;
-    return false;
-}
+/// #it_3F14_Logic6_DmgReceived
 
 bool itBombhei_UnkMotion11_Anim(Item_GObj* gobj)
 {
@@ -352,10 +301,7 @@ bool itBombhei_UnkMotion11_Coll(Item_GObj* gobj)
     return false;
 }
 
-void it_3F14_Logic6_EnteredAir(Item_GObj* gobj)
-{
-    NOT_IMPLEMENTED;
-}
+/// #it_3F14_Logic6_EnteredAir
 
 bool itBombhei_UnkMotion12_Anim(Item_GObj* gobj)
 {
@@ -384,17 +330,9 @@ bool it_3F14_Logic6_Reflected(Item_GObj* gobj)
     return it_80273030(gobj);
 }
 
-bool it_3F14_Logic6_HitShield(Item_GObj* gobj)
-{
-    NOT_IMPLEMENTED;
-    return false;
-}
+/// #it_3F14_Logic6_HitShield
 
-bool it_3F14_Logic6_ShieldBounced(Item_GObj* gobj)
-{
-    NOT_IMPLEMENTED;
-    return false;
-}
+/// #it_3F14_Logic6_ShieldBounced
 
 void it_3F14_Logic6_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {

@@ -1203,6 +1203,8 @@ void fn_800DA1D8(Fighter_GObj* gobj)
     fn_800DB6C8(fp->victim_gobj);
 }
 
+#pragma push
+#pragma dont_inline on
 void fn_800DA2B0(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
@@ -1211,6 +1213,7 @@ void fn_800DA2B0(Fighter_GObj* gobj)
     fp->take_dmg_cb = fn_800DA490;
     ftCommon_8007E2F4(fp, 0x1FF);
 }
+#pragma pop
 
 void ftCo_CatchWait_Anim(Fighter_GObj* gobj) {}
 
@@ -1544,6 +1547,8 @@ static void fn_800DB5D8(Fighter_GObj* gobj)
 
 /// #fn_800DB790
 
+#pragma push
+#pragma dont_inline on
 void fn_800DB8A4(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
@@ -1551,6 +1556,7 @@ void fn_800DB8A4(Fighter_GObj* gobj)
     fp->grab_timer -= p_ftCommonData->grab_timer_decrement;
     *(s32*)((u8*)fp + 0x2348) = ftCommon_GrabMash(fp, p_ftCommonData->x3A8);
 }
+#pragma pop
 
 void ftCo_CaptureWaitHi_Anim(Fighter_GObj* gobj)
 {

@@ -14,9 +14,9 @@
 /* 05AC14 */ mp_UnkStruct0* mpIsland_8005AC14(Vec3*, float);
 /* 05AC8C */ bool mpIsland_8005AC8C(mp_UnkStruct0* arg0);
 /* 05ACE8 */ void mpIsland_8005ACE8(mp_UnkStruct0*, Vec3*, Vec3*);
-/* 05AE1C */ void mpIsland_8005AE1C(mp_UnkStruct0** arg0, mp_UnkStruct0** arg1, int arg2, int arg3, bool arg4);
-/* 05B004 */ void mpIsland_8005B004(mp_UnkStruct0** arg0, mp_UnkStruct0** arg1, int arg2, int arg3, bool arg4);
-/* 05B334 */ void mpIsland_8005B334(int arg0, int arg1, int arg2, bool arg3);
+/* 05AE1C */ UNK_RET mpIsland_8005AE1C(UNK_PARAMS);
+/* 05B004 */ UNK_RET mpIsland_8005B004(UNK_PARAMS);
+/* 05B334 */ UNK_RET mpIsland_8005B334(int, int, int, bool);
 
 extern mpIsland_Palette mpIsland_TerrainPalette;
 struct mpIsland_80458E88_t;

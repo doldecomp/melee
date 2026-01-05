@@ -7,14 +7,12 @@
 
 #include "mp/forward.h"
 
-struct mpLib_BoundsRect {
+static struct {
     float top;
     float bottom;
     float left;
     float right;
-};
-
-/* 458868 */ extern struct mpLib_BoundsRect mpLib_80458868[2];
+} mpLib_80458868[2];
 
 /* 04E97C */ static bool mpLineIntersection(float a0x, float a0y, float a1x,
                                             float a1y, float b0x, float b0y,
