@@ -434,8 +434,22 @@ void ftCo_800D47B8(Fighter_GObj* gobj)
 
 /// #ftCo_DeadUpFall_Phys
 
-/// #fn_800D4DD4
+static void fn_800D4DD4(Fighter_GObj* gobj)
+{
+    u8 _pad[8];
+    Fighter* fp = gobj->user_data;
 
+    if (M2C_FIELD(fp, s32*, 0x2344) != 3) {
+        goto end;
+    }
+    {
+        f32 bottom = Stage_GetCamBoundsBottomOffset();
+        if (fp->cur_pos.y < bottom) {
+            ftCommon_8007E2FC(gobj);
+        }
+    }
+end:;
+}
 void ftCo_DeadUpFall_Cam(Fighter_GObj* gobj)
 {
     ftCamera_80076320(gobj);
