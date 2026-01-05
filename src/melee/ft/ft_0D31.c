@@ -375,8 +375,29 @@ void ftCo_800D40B8(Fighter_GObj* gobj)
     fp->mv.co.unk_deadup.x68 = 0;
 }
 
-/// #ftCo_800D41C4
-
+void ftCo_800D41C4(Fighter_GObj* gobj)
+{
+    u8 _[8];
+    int* temp_r31;
+    Fighter* temp_r30;
+    Fighter* temp_r28;
+    
+    temp_r28 = GET_FIGHTER(gobj);
+    temp_r28->x2227_b6 = true;
+    temp_r30 = GET_FIGHTER(gobj);
+    temp_r31 = &p_ftCommonData->x504;
+    ftCo_800D331C(gobj);
+    temp_r30->mv.co.unk_deadup.x40 = *temp_r31;
+    temp_r30->mv.co.unk_deadup.x44 = 0.0F;
+    Fighter_ChangeMotionState(gobj, 5, 0, 0.0F, 1.0F, 0.0F, NULL);
+    ftCo_800D40B8_inline(gobj);
+    ftCommon_8007EFC0(temp_r30, true);
+    ft_800881D8(temp_r30, temp_r30->ft_data->x4C_sfx->xC, 127, 64);
+    pl_8003DF44(temp_r30->player_id, temp_r30->x221F_b4);
+    ftCo_80090AC0(temp_r28);
+    ftCommon_8007EBAC(temp_r28, true, false);
+    temp_r28->mv.co.unk_deadup.x68 = 1;
+}
 /// #ftCo_DeadUpStar_Anim
 
 void ftCo_DeadUpStar_Cam(Fighter_GObj* gobj)
