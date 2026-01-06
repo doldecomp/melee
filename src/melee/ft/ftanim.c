@@ -453,7 +453,7 @@ void ftAnim_8006EDD0(Fighter* fp, int arg1, float arg8, float arg9)
     temp_ret = ftData_80085FD4(fp, arg1);
     if (temp_ret->x10_b1) {
         HSD_ForeachAnim(jobj, JOBJ_TYPE, 0xFB7F, HSD_AObjSetFlags, AOBJ_ARG_AU,
-                        0x20000000);
+                        AOBJ_LOOP);
     }
     HSD_ForeachAnim(jobj, JOBJ_TYPE, 0xFB7F, HSD_AObjSetRate, AOBJ_ARG_AF,
                     arg9);
@@ -475,7 +475,7 @@ void ftAnim_8006EED4(Fighter* fp, Fighter_Part arg1, FigaTree* arg2,
         temp_ret = ftData_80085FD4(fp, fp->anim_id);
         if (temp_ret->x10_b1) {
             HSD_ForeachAnim(temp_r31, JOBJ_TYPE, 0xFB7F, HSD_AObjSetFlags,
-                            AOBJ_ARG_AU, 0x20000000);
+                            AOBJ_ARG_AU, AOBJ_LOOP);
         }
         HSD_ForeachAnim(temp_r31, JOBJ_TYPE, 0xFB7F, HSD_AObjSetRate,
                         AOBJ_ARG_AF, speed);
@@ -490,9 +490,9 @@ void ftAnim_8006EED4(Fighter* fp, Fighter_Part arg1, FigaTree* arg2,
     ftAnim_80070710(temp_r31, frame);
     if (fp->x594_b1) {
         HSD_ForeachAnim(temp_r26, JOBJ_TYPE, 0xFB7F, HSD_AObjSetFlags,
-                        AOBJ_ARG_AU, 0x20000000);
+                        AOBJ_ARG_AU, AOBJ_LOOP);
         HSD_ForeachAnim(temp_r31, JOBJ_TYPE, 0xFB7F, HSD_AObjSetFlags,
-                        AOBJ_ARG_AU, 0x20000000);
+                        AOBJ_ARG_AU, AOBJ_LOOP);
     }
     HSD_ForeachAnim(temp_r26, JOBJ_TYPE, 0xFB7F, HSD_AObjSetRate, AOBJ_ARG_AF,
                     speed);

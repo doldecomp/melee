@@ -206,7 +206,7 @@ void grIzumi_UnkStage0_OnLoad(void)
             lobj = GET_LOBJ(gobj);
             while (lobj != NULL) {
                 HSD_ForeachAnim(lobj, LOBJ_TYPE, ALL_TYPE_MASK,
-                                HSD_AObjSetFlags, AOBJ_ARG_AU, 0x20000000);
+                                HSD_AObjSetFlags, AOBJ_ARG_AU, AOBJ_LOOP);
                 lobj = HSD_LObjGetNext(lobj);
             }
             return;

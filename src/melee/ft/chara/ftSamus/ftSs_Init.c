@@ -346,7 +346,7 @@ void ftSs_Init_LoadSpecialAttrs(HSD_GObj* gobj)
 
 void ftSs_Init_80128770(HSD_AObj* gobj, float rate)
 {
-    if (gobj && !(HSD_AObjGetFlags(gobj) & 0x20000000)) {
+    if (gobj && !(HSD_AObjGetFlags(gobj) & AOBJ_LOOP)) {
         HSD_AObjSetRate(gobj, rate);
     }
 }

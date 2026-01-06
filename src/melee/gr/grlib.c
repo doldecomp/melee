@@ -275,7 +275,8 @@ HSD_GObj* grLib_801C9CEC(s32 idx1)
                        NULL);
     HSD_JObjReqAnimAll(jobj, 0);
     if (idx1 == 1) {
-        HSD_ForeachAnim(jobj, 6, 0x20, HSD_AObjSetFlags, 3, 0x20000000);
+        HSD_ForeachAnim(jobj, 6, 0x20, HSD_AObjSetFlags, AOBJ_ARG_AU,
+                        AOBJ_LOOP);
     }
     return gobj;
 }
