@@ -49,7 +49,7 @@ void ftParts_8007482C(void);
 s32 ftParts_IntpJObjLoad(HSD_JObj* jobj, HSD_Joint* joint, HSD_JObj* parent);
 void ftParts_80074B6C(void);
 void ftParts_80073830(void);
-void ftParts_80075028(void);
+void ftPartsRemap(void);
 void ftParts_800750C8(void);
 void ftParts_80075240(void);
 void ftParts_80075304(void);

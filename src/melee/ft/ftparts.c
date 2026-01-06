@@ -738,8 +738,7 @@ Fighter_Part ftParts_GetBoneIndex(Fighter* fp, Fighter_Part part)
     return ftPartsTable[fp->kind]->part_to_joint[part];
 }
 
-int ftParts_80075028(size_t to_table_idx, size_t from_table_idx,
-                     size_t joint_idx)
+int ftPartsRemap(size_t to_table_idx, size_t from_table_idx, size_t joint_idx)
 {
     FighterPartsTable* from_table = ftPartsTable[from_table_idx];
     if (joint_idx < from_table->parts_num) {

@@ -680,7 +680,7 @@ void ftAnim_8006F628(Fighter* fp, Fighter_Part part, bool do_blending)
         }
 
         {
-            int tmp = ftParts_80075028(fp->kind, kind, i);
+            int tmp = ftPartsRemap(fp->kind, kind, i);
             if (tmp != 0xFFU) {
                 if (fp->parts[tmp].flags_b1 && !fp->parts[tmp].flags_b0 &&
                     !fp->parts[tmp].flags_b5)
@@ -888,7 +888,7 @@ void ftAnim_8006FCE4(Fighter* fp, bool do_blending)
             i++;
         }
 
-        part = ftParts_80075028(fp->kind, kind, i);
+        part = ftPartsRemap(fp->kind, kind, i);
         if (part != 0xFFU) {
             if (fp->parts[part].flags_b1 && !fp->parts[part].flags_b0 &&
                 !fp->parts[part].flags_b5)
