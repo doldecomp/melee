@@ -11,12 +11,13 @@ typedef struct CountEntry {
 
 typedef struct LocalFighterData {
     char pad[0x54];
-    u32 unk54; 
+    u32 unk54;
 } LocalFighterData;
 
 // --- Function Implementation ---
 
-s32 mnCount_8025035C(s32 skip_count, u32 (*get_val_func)(s32)) {
+// Changed the function pointer argument from s32 to s8 to match the header
+s32 mnCount_8025035C(s32 skip_count, u32 (*get_val_func)(s8)) {
     CountEntry sp18[25];
     CountEntry temp;
     s32 i, j, best_idx;
@@ -36,10 +37,10 @@ s32 mnCount_8025035C(s32 skip_count, u32 (*get_val_func)(s32)) {
 check:
     if (no_valid) return 25;
 
-    // 2. Populate Array
+    // 2. Populate Array - Casting i to s8 for the function call
     for (i = 0; i < 25; i++) {
         sp18[i].id = i;
-        sp18[i].val = get_val_func(i);
+        sp18[i].val = get_val_func((s8)i);
     }
 
     // 3. Stable Selection Sort
@@ -72,7 +73,8 @@ check:
                     continue;
                 }
 
-                if (get_val_func(sp18[i].id) == get_val_func(sp18[j].id)) {
+                // Cast IDs to s8 to match get_val_func requirement
+                if (get_val_func((s8)sp18[i].id) == get_val_func((s8)sp18[j].id)) {
                     i++;
                     if (skip_count != 0) {
                         skip_count--;
@@ -86,7 +88,7 @@ check:
             for (j = i + 1; j < 25; j++) {
                 if (gm_80164840(gm_8016400C(sp18[j].id)) == 0) continue;
 
-                if (get_val_func(sp18[i].id) == get_val_func(sp18[j].id)) {
+                if (get_val_func((s8)sp18[i].id) == get_val_func((s8)sp18[j].id)) {
                     return 25;
                 }
             }
