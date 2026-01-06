@@ -798,21 +798,21 @@ void ftAnim_8006F954(Fighter* fp, Fighter_Part part, bool do_blending,
     }
 }
 
-HSD_Joint* ftAnim_8006F994(Fighter* fp, HSD_JObj* arg1, HSD_Joint* arg2)
+HSD_Joint* ftAnim_8006F994(Fighter* fp, HSD_JObj* jobj, HSD_Joint* joint)
 {
-    s32 sp14;
+    s32 depth;
     int i;
-    i = sp14 = 0;
+    i = depth = 0;
 
-    while (arg2 != NULL) {
+    while (joint != NULL) {
         while (ftParts_8007506C(fp->kind, i) != 0) {
             i++;
         }
-        if (arg1 == fp->parts[i].joint || arg1 == fp->parts[i].x4_jobj2) {
-            return arg2;
+        if (jobj == fp->parts[i].joint || jobj == fp->parts[i].x4_jobj2) {
+            return joint;
         }
         i += 1;
-        ftAnim_GetNextJointInTree(&arg2, &sp14);
+        ftAnim_GetNextJointInTree(&joint, &depth);
     }
 }
 
