@@ -37,10 +37,12 @@
 /* 06FCE4 */ void ftAnim_8006FCE4(Fighter*, bool);
 /* 06FE08 */ void ftAnim_8006FE08(Fighter*, bool);
 /* 06FE48 */ void ftAnim_8006FE48(Fighter_GObj*);
-/* 06FE9C */ void ftAnim_8006FE9C(Fighter*, int start_idx, float, float);
-/* 06FF74 */ void ftAnim_8006FF74(Fighter*, int start_idx);
-/* 070010 */ void ftAnim_80070010(Fighter*, int, float, float, HSD_Joint*);
-/* 070108 */ void ftAnim_80070108(Fighter*, int, float, float, HSD_Joint*);
+/* 06FE9C */ void ftAnim_8006FE9C(Fighter*, Fighter_Part start, float, float);
+/* 06FF74 */ void ftAnim_8006FF74(Fighter*, Fighter_Part start);
+/* 070010 */ void ftAnim_80070010(Fighter*, Fighter_Part, float, float,
+                                  HSD_Joint*);
+/* 070108 */ void ftAnim_80070108(Fighter*, Fighter_Part, float, float,
+                                  HSD_Joint*);
 /* 070200 */ void ftAnim_80070200(Fighter*, ftData_x8_x8*, CostumeTObjList*,
                                   DObjList*);
 /* 070308 */ void ftAnim_80070308(Fighter_GObj*);
@@ -54,7 +56,8 @@
 /* 070758 */ void ftAnim_80070758(HSD_JObj*);
 /* 07077C */ void ftAnim_8007077C(Fighter_GObj*);
 /* 0707B0 */ void ftAnim_800707B0(Fighter_GObj*);
-/* 070904 */ void ftAnim_80070904(Fighter*, int start_idx, HSD_AnimJoint*);
+/* 070904 */ void ftAnim_80070904(Fighter*, Fighter_Part start,
+                                  HSD_AnimJoint*);
 /* 070A10 */ void ftAnim_80070A10(Fighter*, Fighter_Part, FigaTree*);
 /* 070B88 */ void ftAnim_ApplyPartAnim(Fighter_GObj*, s32, s32, float);
 /* 070C48 */ void ftAnim_80070C48(Fighter_GObj*, s32);

@@ -940,10 +940,10 @@ void ftAnim_8006FE48(Fighter_GObj* fighter_gobj)
     ftParts_8007462C(fighter_gobj);
 }
 
-void ftAnim_8006FE9C(Fighter* fp, int start_idx, float arg2, float arg3)
+void ftAnim_8006FE9C(Fighter* fp, Fighter_Part start, float t, float t_inv)
 {
     int i;
-    for (i = start_idx; i < ftPartsTable[fp->kind]->parts_num; i++) {
+    for (i = start; i < ftPartsTable[fp->kind]->parts_num; i++) {
         if (fp->parts[i].flags_b1 && !fp->parts[i].flags_b0 &&
             !fp->parts[i].flags_b5)
         {
@@ -951,16 +951,16 @@ void ftAnim_8006FE9C(Fighter* fp, int start_idx, float arg2, float arg3)
                 lbCopyJObjSRT(fp->parts[i].x4_jobj2, fp->parts[i].joint);
             } else {
                 lb_8000C490(fp->parts[i].x4_jobj2, fp->parts[i].joint,
-                            fp->parts[i].joint, arg2, arg3);
+                            fp->parts[i].joint, t, t_inv);
             }
         }
     }
 }
 
-void ftAnim_8006FF74(Fighter* fp, int start_idx)
+void ftAnim_8006FF74(Fighter* fp, Fighter_Part start)
 {
     int i;
-    for (i = start_idx; i < ftPartsTable[fp->kind]->parts_num; i++) {
+    for (i = start; i < ftPartsTable[fp->kind]->parts_num; i++) {
         if (fp->parts[i].flags_b1 && !fp->parts[i].flags_b0 &&
             !fp->parts[i].flags_b5)
         {
@@ -969,10 +969,10 @@ void ftAnim_8006FF74(Fighter* fp, int start_idx)
     }
 }
 
-void ftAnim_80070010(Fighter* fp, int r4, float t, float t_inv,
+void ftAnim_80070010(Fighter* fp, Fighter_Part start, float t, float t_inv,
                      HSD_Joint* joint)
 {
-    int i = r4; // r31
+    int i = start; // r31
     s32 sp1C = 0;
 
     while (joint != NULL) {
@@ -992,10 +992,10 @@ void ftAnim_80070010(Fighter* fp, int r4, float t, float t_inv,
     }
 }
 
-void ftAnim_80070108(Fighter* fp, int r4, float t, float t_inv,
+void ftAnim_80070108(Fighter* fp, Fighter_Part start, float t, float t_inv,
                      HSD_Joint* joint)
 {
-    int i = r4; // r31
+    int i = start; // r31
     s32 sp1C = 0;
 
     while (joint != NULL) {
@@ -1180,9 +1180,9 @@ void ftAnim_800707B0(Fighter_GObj* arg0)
     }
 }
 
-void ftAnim_80070904(Fighter* fp, int start_idx, HSD_AnimJoint* animjoint)
+void ftAnim_80070904(Fighter* fp, Fighter_Part start, HSD_AnimJoint* animjoint)
 {
-    int i = start_idx;
+    int i = start;
     int sp14 = 0;
 
     while (animjoint != NULL) {
