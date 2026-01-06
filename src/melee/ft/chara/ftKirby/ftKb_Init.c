@@ -60,6 +60,8 @@
 #include <baselib/random.h>
 #include <MSL/math.h>
 
+void ftAnim_80070458_proto(Fighter* fp, struct KirbyFV_x44_t*, int);
+
 MotionState ftKb_Init_MotionStateTable[ftKb_MS_SelfCount] = {
     {
         // ftKb_MS_JumpAerialF1 = 341
@@ -3200,17 +3202,23 @@ void ftKb_Init_OnKnockbackExit(HSD_GObj* gobj)
     Fighter_OnKnockbackExit(gobj, 1);
 }
 
-void ftKb_Init_UnkDemoCallbacks0(int arg0, int* arg1, int* arg2)
+void ftKb_Init_UnkDemoCallbacks0(int kind, int* out1, int* out2)
 {
-    if (arg0 != 14) {
-        if (arg0 < 14 && arg0 >= 11) {
-            *arg1 = 14;
-            *arg2 = 16;
-        }
-    } else {
-        *arg2 = 17;
-        *arg1 = 17;
+    if (kind == 14) {
+        goto case14;
     }
+    if (kind >= 14) {
+        return;
+    }
+    if (kind < 11) {
+        return;
+    }
+    *out1 = 14;
+    *out2 = 16;
+    return;
+case14:
+    *out2 = 17;
+    *out1 = 17;
 }
 
 char* ftKb_Init_GetMotionFileString(enum_t arg0)
@@ -3276,7 +3284,7 @@ void ftKb_Init_UnkCallbackPairs0_1(Fighter_GObj* gobj, int arg1, float arg2)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->fv.kb.hat.x14.data != NULL && fp->fv.kb.hat.jobj == NULL) {
-        ftAnim_80070458(fp, &fp->fv.kb.x44, arg1);
+        ftAnim_80070458_proto(fp, &fp->fv.kb.x44, arg1);
     }
 }
 void ftKb_SpecialN_800EFA40(HSD_GObj* gobj)
