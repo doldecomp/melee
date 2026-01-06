@@ -105,7 +105,8 @@ static StageCallbacks grGr_callbacks[] = {
         0xC0000000,
     },
 };
-static s16 grGr_803E7840[128] = {};
+
+static s16 grGr_803E7840[128] = { 0 };
 static u8 grGr_8049F9E0[0x20];
 
 static inline int randrange(int min, int max);
@@ -169,7 +170,7 @@ void grGreens_Init(void)
 
 void grGreens_802134F4(void) {}
 
-void grGreens_802134F8()
+void grGreens_802134F8(void)
 {
     grZakoGenerator_801CAE04(0);
 }

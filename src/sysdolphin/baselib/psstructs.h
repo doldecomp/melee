@@ -5,7 +5,7 @@
 
 #include "baselib/archive.h"
 
-#include "baselib/forward.h"
+#include "baselib/forward.h" // IWYU pragma: export
 
 #include "baselib/jobj.h"
 
