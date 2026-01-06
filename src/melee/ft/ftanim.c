@@ -439,7 +439,7 @@ void ftAnim_8006EBE8(HSD_GObj* gobj, float arg1, float anim_rate,
                         AOBJ_ARG_AF, anim_rate);
     }
     fp->x8A4_animBlendFrames = anim_blend_frames;
-    fp->x8A8_unk = 0;
+    fp->x8A8_anim_frame = 0;
 }
 
 void ftAnim_8006EDD0(Fighter* fp, int arg1, float arg8, float arg9)
@@ -936,7 +936,7 @@ void ftAnim_8006FE48(Fighter_GObj* fighter_gobj)
     Fighter* fp = GET_FIGHTER(fighter_gobj);
     fp->x8AC_animSkeleton = ftParts_8007482C(fp->x108_costume_joint);
     fp->x8A4_animBlendFrames = 0.0F;
-    fp->x8A8_unk = 0.0F;
+    fp->x8A8_anim_frame = 0.0F;
     ftParts_8007462C(fighter_gobj);
 }
 

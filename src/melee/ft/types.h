@@ -1295,7 +1295,7 @@ struct Fighter {
     /*  fp+89C */ float frame_speed_mul;
     /*  fp+8A0 */ float x8A0_unk;
     /*  fp+8A4 */ float x8A4_animBlendFrames;
-    /*  fp+8A8 */ float x8A8_unk;
+    /*  fp+8A8 */ float x8A8_anim_frame;
     /*  fp+8AC */ HSD_JObj* x8AC_animSkeleton;
     /*  fp+8B0 */ struct Fighter_x8B0_t {
         int x0;

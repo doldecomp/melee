@@ -1366,7 +1366,7 @@ void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
             ftAnim_80070758(fp->x8AC_animSkeleton);
             fp->x3E4_fighterCmdScript.u = NULL;
             fp->x8A4_animBlendFrames = 0;
-            fp->x8A8_unk = 0;
+            fp->x8A8_anim_frame = 0;
         }
 
         if (animflags_bool) {
