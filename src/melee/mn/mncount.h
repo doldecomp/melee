@@ -3,6 +3,13 @@
 
 #include <platform.h>
 
+typedef struct CountEntry {
+    u8 id;
+    u8 pad[3];
+    u32 val;
+} CountEntry;
+
 s32 mnCount_8025035C(s32 arg0, u32 (*arg1)(s8));
+s32 mnCount_8025072C(CountEntry* entries, s32 start_idx, s32 mode);
 
 #endif
