@@ -652,65 +652,65 @@ void ftAnim_8006F4C8(Fighter* fp, int arg1, FigaTree* arg2)
     }
 }
 
-void ftAnim_8006F628(Fighter* fp, Fighter_Part arg1, int arg2)
+void ftAnim_8006F628(Fighter* fp, Fighter_Part part, bool do_blending)
 {
-    FigaTree* temp_r31;
-    s32 temp_r30;
-    FighterKind temp_r29;
-    s8* var_r28;
-    FigaTrack* var_r27;
+    FigaTree* tree;       // r31
+    s32 x594_bits;        // r30
+    FighterKind kind;     // r29
+    s8* cur_node;         // r28
+    FigaTrack* cur_track; // r27
     int i;
     u32 temp_r3;
     u32 temp_r3_2;
-    s8 temp_r0_2;
+    s8 frames; // r0
     int temp_r25;
 
     i = 0;
-    temp_r31 = fp->x590;
-    var_r28 = temp_r31->nodes;
-    temp_r30 = fp->x594_bits;
-    var_r27 = temp_r31->tracks;
-    temp_r29 = fp->x597_bits;
-    temp_r25 = fp->parts[arg1].xC;
+    tree = fp->x590;
+    cur_node = tree->nodes;
+    x594_bits = fp->x594_bits;
+    cur_track = tree->tracks;
+    kind = fp->x597_bits;
+    temp_r25 = fp->parts[part].xC;
 
-    while (i < arg1) {
-        temp_r3 = ftParts_8007506C(temp_r29, i);
-        if ((temp_r3 == 0) || (temp_r3 & temp_r30)) {
-            var_r27 = &var_r27[*var_r28++];
+    while (i < part) {
+        temp_r3 = ftParts_8007506C(kind, i);
+        if (temp_r3 == 0 || temp_r3 & x594_bits) {
+            cur_track = &cur_track[*cur_node++];
         }
         i++;
     }
-    while (*var_r28 != -1) {
+    while (*cur_node != -1) {
         while (1) {
-            temp_r3_2 = ftParts_8007506C(temp_r29, i);
-            if (temp_r3_2 == 0 || (temp_r3_2 & temp_r30)) {
+            temp_r3_2 = ftParts_8007506C(kind, i);
+            if (temp_r3_2 == 0 || temp_r3_2 & x594_bits) {
                 break;
             }
             i++;
         }
-        if (fp->parts[i].xC <= temp_r25 && (i != arg1)) {
+        if (fp->parts[i].xC <= temp_r25 && i != part) {
             break;
         }
 
         {
-            int tmp = ftParts_80075028(fp->kind, temp_r29, i);
+            int tmp = ftParts_80075028(fp->kind, kind, i);
             if (tmp != 0xFFU) {
                 if (fp->parts[tmp].flags_b1 && !fp->parts[tmp].flags_b0 &&
                     !fp->parts[tmp].flags_b5)
                 {
-                    HSD_JObj* var_r3 = get_part_joint(fp, tmp, arg2);
+                    HSD_JObj* jobj = get_part_joint(fp, tmp, do_blending);
                     if (fp->parts[tmp].flags_b3) {
-                        lbAnim_8001E6D8(var_r3, temp_r31, var_r27, *var_r28);
+                        lbAnim_8001E6D8(jobj, tree, cur_track, *cur_node);
                     } else {
-                        lbAnim_8001E7E8(var_r3, temp_r31, var_r27, *var_r28);
+                        lbAnim_8001E7E8(jobj, tree, cur_track, *cur_node);
                     }
                 }
             }
         }
 
-        temp_r0_2 = *var_r28++;
+        frames = *cur_node++;
         i++;
-        var_r27 = &var_r27[temp_r0_2];
+        cur_track = &cur_track[frames];
     }
 }
 
