@@ -598,13 +598,13 @@ float ftAnim_8006F484(Fighter_GObj* fighter_gobj)
     return lbGetJObjEndFrame(fp->x8AC_animSkeleton);
 }
 
-static HSD_JObj* get_part_joint(Fighter* fp, int i, int arg1)
+static HSD_JObj* get_part_joint(Fighter* fp, int part, bool do_blending)
 {
     HSD_JObj* result;
-    if (arg1 != 0) {
-        result = fp->parts[i].x4_jobj2;
+    if (do_blending) {
+        result = fp->parts[part].x4_jobj2;
     } else {
-        result = fp->parts[i].joint;
+        result = fp->parts[part].joint;
     }
     return result;
 }
