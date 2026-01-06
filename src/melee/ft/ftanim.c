@@ -788,13 +788,13 @@ void ftAnim_8006F7C8(Fighter* ft, Fighter_Part part, int arg2, FigaTree* tree)
     }
 }
 
-void ftAnim_8006F954(Fighter* fp, Fighter_Part arg1, int arg2,
+void ftAnim_8006F954(Fighter* fp, Fighter_Part part, bool do_blending,
                      FigaTree* unused)
 {
     if (fp->kind != fp->x597_bits) {
-        ftAnim_8006F628(fp, arg1, arg2);
+        ftAnim_8006F628(fp, part, do_blending);
     } else {
-        ftAnim_8006F7C8(fp, arg1, arg2, fp->x590);
+        ftAnim_8006F7C8(fp, part, do_blending, fp->x590);
     }
 }
 

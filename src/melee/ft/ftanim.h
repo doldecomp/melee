@@ -29,7 +29,7 @@
 /* 06F4C8 */ void ftAnim_8006F4C8(Fighter*, int, FigaTree*);
 /* 06F628 */ void ftAnim_8006F628(Fighter*, Fighter_Part, bool);
 /* 06F7C8 */ void ftAnim_8006F7C8(Fighter*, Fighter_Part, int, FigaTree*);
-/* 06F954 */ void ftAnim_8006F954(Fighter*, Fighter_Part, int,
+/* 06F954 */ void ftAnim_8006F954(Fighter*, Fighter_Part, bool,
                                   FigaTree* unused);
 /* 06F994 */ HSD_Joint* ftAnim_8006F994(Fighter*, HSD_JObj*, HSD_Joint*);
 /* 06FA58 */ void ftAnim_8006FA58(Fighter*, bool, HSD_Joint*);
