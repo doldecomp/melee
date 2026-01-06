@@ -81,6 +81,9 @@
 /* 3122D0 */ void un_803122D0_OnInit(void);
 /* 31234C */ void un_8031234C(s32);
 
+/* 3FE770 */ extern char str_TyDataf_dat[];
+/* 3FE77C */ extern char str_tyModelFileTbl[];
+/* 3FE78C */ extern char str_tyModelFileUsTbl[];
 /* 4D6E6C */ extern void* un_804D6E6C;
 /* 4D6EF4 */ extern struct un_804D6EF4_t* un_804D6EF4;
 
