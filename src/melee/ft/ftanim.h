@@ -15,7 +15,7 @@
 /* 06E7B8 */ void ftAnim_8006E7B8(Fighter*, Fighter_Part);
 /* 06E9B4 */ void ftAnim_8006E9B4(Fighter_GObj*);
 /* 06EBA4 */ void ftAnim_8006EBA4(Fighter_GObj*);
-/* 06EBE8 */ void ftAnim_8006EBE8(HSD_GObj*, float, float anim_rate,
+/* 06EBE8 */ void ftAnim_8006EBE8(HSD_GObj*, float anim_start, float anim_rate,
                                   float anim_blend_frames);
 /* 06EDD0 */ void ftAnim_8006EDD0(Fighter*, int, float, float);
 /* 06EED4 */ void ftAnim_8006EED4(Fighter*, Fighter_Part, FigaTree*, float,
