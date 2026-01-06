@@ -1,6 +1,9 @@
 #include "vi/vi1201v1.static.h"
 
+#include <baselib/aobj.h>
+#include <baselib/cobj.h>
 #include <baselib/gobj.h>
+#include <baselib/gobjplink.h>
 #include <baselib/jobj.h>
 #include <dolphin/gx/GXStruct.h>
 
@@ -49,9 +52,30 @@ void fn_8031FB90(HSD_GObj* gobj)
     }
 }
 
-/// #fn_8031FC30
+void fn_8031FC30(HSD_GObj* gobj)
+{
+    HSD_CObj* cobj = GET_COBJ(gobj);
+    HSD_CObjAnim(cobj);
+    if (cobj->aobj->curr_frame == 1.0F) {
+        vi_8031C9B4(0xD, 0);
+    }
+    if (cobj->aobj->curr_frame == 30.0F) {
+        un_8031F9D8(un_804D6FFC, un_804D6FFD);
+    }
+    if (cobj->aobj->curr_frame == cobj->aobj->end_frame) {
+        lb_800145F4();
+        gm_801A4B60();
+    }
+}
 
-/// #fn_8031FCBC
+void fn_8031FCBC(HSD_GObj* gobj)
+{
+    if ((f32) un_804D6FF8 >= 30.0F) {
+        HSD_GObjPLink_80390228(gobj);
+    } else {
+        un_804D6FF8 = un_804D6FF8 + 1;
+    }
+}
 
 /// #un_8031FD18_OnEnter
 
