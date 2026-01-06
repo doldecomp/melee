@@ -54,7 +54,8 @@ struct Fighter_x1614_t;
 /* 008D30 */ void lbColl_80008D30(HitCapsule*, lbColl_80008D30_arg1*);
 /* 008DA4 */ UNK_RET lbColl_80008DA4(GXColor*, GXColor*);
 /* 008FC8 */ void lbColl_80008FC8(Vec3, Vec3, GXColor*, GXColor*, float);
-/* 0096B4 */ void lbColl_800096B4(MtxPtr, Vec3, Vec3, GXColor*, GXColor*, float);
+/* 0096B4 */ void lbColl_800096B4(MtxPtr, Vec3, Vec3, GXColor*, GXColor*,
+                                  float);
 /* 009DD4 */ UNK_RET lbColl_80009DD4(Vec3*, Vec3*, GXColor*);
 /* 009F54 */ bool lbColl_80009F54(HitCapsule* hit, u32 arg1, float arg8);
 /* 00A044 */ bool lbColl_8000A044(HitCapsule* hit, u32 arg1, float arg8);

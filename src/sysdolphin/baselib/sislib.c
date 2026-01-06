@@ -327,8 +327,8 @@ void HSD_SisLib_803A5DA0(s32 arg0)
     }
 }
 
-HSD_Text* HSD_SisLib_803A5ACC(int font_idx, s32 arg1, f32 arg2, f32 arg3, f32 arg4,
-                              f32 arg5, f32 arg6)
+HSD_Text* HSD_SisLib_803A5ACC(int font_idx, s32 arg1, f32 arg2, f32 arg3,
+                              f32 arg4, f32 arg5, f32 arg6)
 {
     HSD_Text* var_r30;
     HSD_Text* var_r29;
@@ -337,7 +337,9 @@ HSD_Text* HSD_SisLib_803A5ACC(int font_idx, s32 arg1, f32 arg2, f32 arg3, f32 ar
     int var_r4;
     HSD_Text* temp_r30;
 
-    var_r4 = arg1; /// this is the context id that comes from HSD_SisLib_803A611C, it essentially tells us which camera to use
+    var_r4 =
+        arg1; /// this is the context id that comes from HSD_SisLib_803A611C,
+              /// it essentially tells us which camera to use
     var_r29 = NULL;
     var_r28 = NULL;
     gobj = NULL;
@@ -710,7 +712,8 @@ HSD_Text* HSD_SisLib_803A6754(int arg0, s32 arg1)
 }
 
 /// @brief Converts ASCII to "SIS" format
-/// @details - Maps ASCII characters to SIS characters by using byte pair lookup tables
+/// @details - Maps ASCII characters to SIS characters by using byte pair
+/// lookup tables
 /// @param data output buffer for the converted string
 /// @param string ASCII string to be converted
 /// @return length of encoded string
@@ -1211,10 +1214,11 @@ void HSD_SisLib_803A75E0(HSD_Text* arg0, s32 arg1)
 
     if (HSD_SisLib_803A70A0(arg0, 0) != 0) {
         color = arg0->text_color;
-        temp_r3 = (GXColor*)fn_803A6FEC((u8* ) arg0->sis_buffer, arg1, NULL);
+        temp_r3 = (GXColor*) fn_803A6FEC((u8*) arg0->sis_buffer, arg1, NULL);
         if (temp_r3 != NULL) {
             /// @todo: not really sure how to get the addi 0x5 here
-            /// fn_803A6FEC probably returns a struct that has color at an offset of 0x5?
+            /// fn_803A6FEC probably returns a struct that has color at an
+            /// offset of 0x5?
             temp_r3->g = color.r;
             temp_r3->b = color.g;
             temp_r3->a = color.b;
@@ -1226,12 +1230,11 @@ void HSD_SisLib_803A7664(HSD_Text* arg0)
 {
     sisLib_803A7664_t* data;
 
-    data = (sisLib_803A7664_t*)arg0->alloc_data;
+    data = (sisLib_803A7664_t*) arg0->alloc_data;
     data->x0 = data->x4;
-    *(u8*)data->x0 = 0;
+    *(u8*) data->x0 = 0;
     data->xC = 0;
 }
-
 
 void HSD_SisLib_803A8134(void* arg0, HSD_Text* arg1, f32* arg2, f32* arg3)
 {
@@ -1298,7 +1301,8 @@ loop_3:
         var_r23 += 4;
         goto block_33;
     case 10:
-        if (((sislib_UnkAllocData*) arg1->alloc_data == NULL) || ((s16) var_r28 == 0))
+        if (((sislib_UnkAllocData*) arg1->alloc_data == NULL) ||
+            ((s16) var_r28 == 0))
         {
             HSD_SisLib_803A7684(arg1, *var_r23, 0x81U);
             arg1->x78.x = (f32) (s16) * (var_r23 + 1) * 0.00390625f;
@@ -1306,7 +1310,8 @@ loop_3:
         var_r23 += 4;
         goto block_33;
     case 11:
-        if (((sislib_UnkAllocData*) arg1->alloc_data == NULL) || ((s16) var_r28 == 0))
+        if (((sislib_UnkAllocData*) arg1->alloc_data == NULL) ||
+            ((s16) var_r28 == 0))
         {
             HSD_SisLib_803A7F0C(arg1, 0x81);
         }
@@ -1404,9 +1409,12 @@ void static inline HSD_SisLib_803A7F0C_inline(HSD_Text* arg0, s32 arg1,
         case 2:
             *var_r5 -= 3;
             if (temp_r11 == 2) {
-                arg0->active_color.r = ((GXColor*) arg0->string_buffer + *var_r5)->r;
-                arg0->active_color.g = ((GXColor*) arg0->string_buffer + *var_r5)->g;
-                arg0->active_color.b = ((GXColor*) arg0->string_buffer + *var_r5)->b;
+                arg0->active_color.r =
+                    ((GXColor*) arg0->string_buffer + *var_r5)->r;
+                arg0->active_color.g =
+                    ((GXColor*) arg0->string_buffer + *var_r5)->g;
+                arg0->active_color.b =
+                    ((GXColor*) arg0->string_buffer + *var_r5)->b;
                 if (temp_r9 == temp_r10) {
                     *var_r4 = 4;
                 }

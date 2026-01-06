@@ -107,9 +107,11 @@ void ftCo_800978D4(Fighter_GObj* gobj)
 {
     u8 pad[16];
     Fighter* fp = gobj->user_data;
-    float param = atan2f(-*(f32*)((u8*)fp + 0x844), *(f32*)((u8*)fp + 0x848));
-    HSD_JObj** jobj_ptr = *(HSD_JObj***)((u8*)fp + 0x5e8);
-    efAsync_Spawn(gobj, (u8*)gobj->user_data + 0x60c, 4, 0x406, *jobj_ptr, &param);
+    float param =
+        atan2f(-*(f32*) ((u8*) fp + 0x844), *(f32*) ((u8*) fp + 0x848));
+    HSD_JObj** jobj_ptr = *(HSD_JObj***) ((u8*) fp + 0x5e8);
+    efAsync_Spawn(gobj, (u8*) gobj->user_data + 0x60c, 4, 0x406, *jobj_ptr,
+                  &param);
     ftCo_800976A4(gobj);
 }
 

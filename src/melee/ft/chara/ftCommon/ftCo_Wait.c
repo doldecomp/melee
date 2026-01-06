@@ -13,12 +13,12 @@
 #include <platform.h>
 
 #include "ft/ft_081B.h"
-#include "ftCommon/ftCo_Attack100.h"
 #include "ft/ftcoll.h"
 #include "ft/ftwaitanim.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_AppealS.h"
+#include "ftCommon/ftCo_Attack100.h"
 #include "ftCommon/ftCo_Dash.h"
 #include "ftCommon/ftCo_DownSpot.h"
 #include "ftCommon/ftCo_Guard.h"

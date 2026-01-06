@@ -1,11 +1,14 @@
 #include "gr/grcastle.h"
 
-#include <platform.h>
-#include "gr/forward.h"
-#include "baselib/psstructs.h"
 #include "placeholder.h"
 
+#include <platform.h>
+
+#include "baselib/psstructs.h"
 #include "ft/ftlib.h"
+
+#include "gr/forward.h"
+
 #include "gr/grlib.h"
 #include "gr/grmaterial.h"
 #include "gr/ground.h"
@@ -293,7 +296,7 @@ void grCastle_801D0A9C(Vec3* arg0, f32 arg8)
 {
     HSD_Generator* gen = grLib_801C96F8(0x7530, 0x1E, arg0);
     if (gen != NULL) {
-        gen = (HSD_Generator* ) gen->appsrt;
+        gen = (HSD_Generator*) gen->appsrt;
         gen->pos.x *= arg8;
         gen->pos.y *= arg8;
         gen->pos.z *= arg8;

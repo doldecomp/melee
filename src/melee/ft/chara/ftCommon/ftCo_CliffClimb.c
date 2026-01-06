@@ -53,7 +53,8 @@ bool ftCo_8009AAFC(Fighter_GObj* gobj, int arg1, float stick_x, float angle)
 {
     Fighter* fp = gobj->user_data;
     if (angle > p_ftCommonData->x20_radians ||
-        (angle > -p_ftCommonData->x20_radians && stick_x * fp->facing_dir >= 0))
+        (angle > -p_ftCommonData->x20_radians &&
+         stick_x * fp->facing_dir >= 0))
     {
         if (arg1 && fp->mv.co.cliff.x8) {
             ftCo_8009AB9C(gobj);

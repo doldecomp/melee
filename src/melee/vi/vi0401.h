@@ -4,7 +4,6 @@
 #include <placeholder.h>
 
 #include "ft/forward.h"
-
 #include <baselib/forward.h>
 
 /* 31D030 */ void un_8031D030(CharacterKind, int);

@@ -568,7 +568,7 @@ void ftNs_SpecialAirNStart_Phys(HSD_GObj* gobj)
         fp->mv.ns.specialn.falling_acceleration_delay--;
     } else {
         ftCommon_Fall(fp, sa->x14_PKFLASH_FALL_ACCEL,
-                          fp->co_attrs.terminal_vel);
+                      fp->co_attrs.terminal_vel);
     }
 
     {
@@ -589,7 +589,7 @@ void ftNs_SpecialAirNRelease_Phys(HSD_GObj* gobj)
         fp->mv.ns.specialn.falling_acceleration_delay--;
     } else {
         ftCommon_Fall(fp, sa->x14_PKFLASH_FALL_ACCEL,
-                          fp->co_attrs.terminal_vel);
+                      fp->co_attrs.terminal_vel);
     }
 
     {
@@ -610,7 +610,7 @@ void ftNs_SpecialAirNEnd_Phys(HSD_GObj* gobj)
         fp->mv.ns.specialn.falling_acceleration_delay--;
     } else {
         ftCommon_Fall(fp, sa->x14_PKFLASH_FALL_ACCEL,
-                          fp->co_attrs.terminal_vel);
+                      fp->co_attrs.terminal_vel);
     }
 
     {

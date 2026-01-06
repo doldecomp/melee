@@ -141,7 +141,7 @@ void ftMt_SpecialAirLw_Phys(HSD_GObj* gobj)
     ftCo_DatAttrs* ca = getFtAttrs(fp);
 
     ftCommon_Fall(fp, mewtwoAttrs->x78_MEWTWO_DISABLE_GRAVITY,
-                      mewtwoAttrs->x7C_MEWTWO_DISABLE_TERMINAL_VELOCITY);
+                  mewtwoAttrs->x7C_MEWTWO_DISABLE_TERMINAL_VELOCITY);
     ftCommon_ApplyFrictionAir(fp, ca->aerial_friction);
 }
 

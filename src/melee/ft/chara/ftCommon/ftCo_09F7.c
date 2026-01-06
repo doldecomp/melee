@@ -1,7 +1,5 @@
 #include "ftCo_09F7.h"
 
-#include <melee/ft/ftcmdscript.h>
-
 #include <placeholder.h>
 
 #include "ef/efasync.h"
@@ -15,6 +13,7 @@
 #include <math.h>
 #include <trigf.h>
 #include <baselib/gobj.h>
+#include <melee/ft/ftcmdscript.h>
 
 #pragma force_active on
 
@@ -43,7 +42,6 @@ struct _m2c_stack_ftCo_8009F834 {
     /* 0xB0 */ f32 spB0; /* inferred */
     /* 0xB4 */ char pad_B4[0x1C];
 }; /* size = 0xD0 */
-
 
 /*  args:
 gobj

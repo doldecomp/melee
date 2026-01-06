@@ -11,9 +11,9 @@
 
 #include "ft/forward.h"
 
-#include "ftCommon/ftCo_Attack100.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
+#include "ftCommon/ftCo_Attack100.h"
 
 #include <baselib/forward.h>
 

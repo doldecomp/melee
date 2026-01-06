@@ -2,6 +2,7 @@
 #define MELEE_FT_KP_SPECIAL_HI_H
 
 #include <platform.h>
+
 #include <melee/ft/forward.h>
 
 /* 135A2C */ void ftKp_SpecialHi_Enter(Fighter_GObj* gobj);

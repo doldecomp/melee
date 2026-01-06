@@ -1,6 +1,4 @@
 #include "ftCo_Shouldered.h"
-#include "ftCommon/ftCo_CaptureCut.h"
-#include "ftCommon/ftCo_Throw.h"
 
 #include "ftCo_Damage.h"
 
@@ -8,13 +6,15 @@
 #include <platform.h>
 
 #include "ft/fighter.h"
-#include "ftCommon/ftCo_Attack100.h"
 #include "ft/ftanim.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
 #include "ftCaptain/types.h"
+#include "ftCommon/ftCo_Attack100.h"
+#include "ftCommon/ftCo_CaptureCut.h"
+#include "ftCommon/ftCo_Throw.h"
 #include "ftCommon/types.h"
 
 #include "lb/forward.h"

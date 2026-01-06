@@ -1087,7 +1087,7 @@ void ftAnim_80070F28(HSD_GObj* gobj)
 
     for (i = 0; i < ARRAY_SIZE(fp->x8B0); i++) {
         struct Fighter_x8B0_t* slot = &fp->x8B0[i];
-        if ((s8)slot->x11 != -1) {
+        if ((s8) slot->x11 != -1) {
             struct ftData_x1C* data = fp->ft_data->x1C[i];
             u8* parts_list = data->x4;
 

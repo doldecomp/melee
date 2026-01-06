@@ -1,9 +1,9 @@
 #include "ithinoarashi.h"
 
+#include "it/inlines.h"
+#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
-#include "it/it_266F.h"
-#include "it/inlines.h"
 
 /* 2D60C8 */ static bool itHinoarashi_UnkMotion2_Anim(Item_GObj* gobj);
 

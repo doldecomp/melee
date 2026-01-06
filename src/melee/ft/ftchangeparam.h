@@ -4,6 +4,7 @@
 #include <placeholder.h>
 
 #include "ft/forward.h"
+
 #include "ft/types.h"
 
 /* 0CF138 */ float ftCo_CalcYScaledKnockback(float, float, float);

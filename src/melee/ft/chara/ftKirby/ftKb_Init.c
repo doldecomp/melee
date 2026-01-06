@@ -6,10 +6,10 @@
 
 #include "ef/eflib.h"
 #include "ef/efsync.h"
+#include "ft/chara/ftCommon/ftCo_FallSpecial.h"
 #include "ft/chara/ftCommon/ftCo_Jump.h"
 #include "ft/chara/ftCommon/ftCo_KneeBend.h"
 #include "ft/chara/ftCommon/ftCo_Wait.h"
-#include "ft/chara/ftCommon/ftCo_FallSpecial.h"
 #include "ft/fighter.h"
 
 #include "ft/forward.h"
@@ -4521,14 +4521,15 @@ void ftKb_SpecialHi_800F3570(Fighter_GObj* gobj)
     }
 }
 
-void ftKb_SpecialHi_800F36DC(Fighter_GObj* gobj) {
+void ftKb_SpecialHi_800F36DC(Fighter_GObj* gobj)
+{
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->mv.kb.speciallw.x24 =  ftKb_Init_803CB4EC.vec;
+    fp->mv.kb.speciallw.x24 = ftKb_Init_803CB4EC.vec;
     fp->mv.kb.speciallw.x54 = fp->mv.kb.speciallw.x24;
     fp->mv.kb.speciallw.x88[0] = 0.0f;
     fp->mv.kb.speciallw.x88[4] = 0.0f;
     fp->mv.kb.speciallw.x30 = ftKb_Init_803CB4EC.vec;
-     fp->mv.kb.speciallw.x60 =  fp->mv.kb.speciallw.x30;
+    fp->mv.kb.speciallw.x60 = fp->mv.kb.speciallw.x30;
     fp->mv.kb.speciallw.x88[1] = 0.0f;
     fp->mv.kb.speciallw.x88[5] = 0.0f;
     fp->mv.kb.speciallw.x3C = ftKb_Init_803CB4EC.vec;
@@ -4543,41 +4544,42 @@ void ftKb_SpecialHi_800F36DC(Fighter_GObj* gobj) {
     fp->mv.kb.speciallw.x84 = 0.0f;
 }
 
-void ftKb_SpecialHi_800F37EC(Fighter_GObj* gobj) {
+void ftKb_SpecialHi_800F37EC(Fighter_GObj* gobj)
+{
     f32 temp_f5 = 0;
     s32 var_r4;
     s32 var_r5;
     Fighter* fp = GET_FIGHTER(gobj);
     ftKb_DatAttrs* dat_attr = fp->dat_attrs;
     fp->mv.kb.speciallw.x48 = fp->mv.kb.speciallw.x3C;
-    fp->mv.kb.speciallw.x78 =  fp->mv.kb.speciallw.x6C;
+    fp->mv.kb.speciallw.x78 = fp->mv.kb.speciallw.x6C;
     fp->mv.kb.speciallw.x88[3] = fp->mv.kb.speciallw.x88[2];
     fp->mv.kb.speciallw.x88[7] = fp->mv.kb.speciallw.x88[6];
     fp->mv.kb.speciallw.x3C = fp->mv.kb.speciallw.x30;
     fp->mv.kb.speciallw.x6C = fp->mv.kb.speciallw.x60;
-    fp->mv.kb.speciallw.x88[2] =fp->mv.kb.speciallw.x88[1];
-    fp->mv.kb.speciallw.x88[6] =  fp->mv.kb.speciallw.x88[5];
-    fp->mv.kb.speciallw.x30 =  fp->mv.kb.speciallw.x24;
+    fp->mv.kb.speciallw.x88[2] = fp->mv.kb.speciallw.x88[1];
+    fp->mv.kb.speciallw.x88[6] = fp->mv.kb.speciallw.x88[5];
+    fp->mv.kb.speciallw.x30 = fp->mv.kb.speciallw.x24;
     fp->mv.kb.speciallw.x60 = fp->mv.kb.speciallw.x54;
     fp->mv.kb.speciallw.x88[1] = fp->mv.kb.speciallw.x88[0];
-    fp->mv.kb.speciallw.x88[5] =  fp->mv.kb.speciallw.x88[4];
-    fp->mv.kb.speciallw.x24 =  fp->mv.kb.speciallw.x18;
+    fp->mv.kb.speciallw.x88[5] = fp->mv.kb.speciallw.x88[4];
+    fp->mv.kb.speciallw.x24 = fp->mv.kb.speciallw.x18;
     fp->mv.kb.speciallw.x88[0] = fp->mv.kb.speciallw.x84;
-    fp->mv.kb.speciallw.x54.z =  0.0f;
-    fp->mv.kb.speciallw.x54.y =  0.0f;
+    fp->mv.kb.speciallw.x54.z = 0.0f;
+    fp->mv.kb.speciallw.x54.y = 0.0f;
     fp->mv.kb.speciallw.x54.x = 0.0f;
-    fp->mv.kb.speciallw.x88[4] =  0.0f;
+    fp->mv.kb.speciallw.x88[4] = 0.0f;
     fp->mv.kb.speciallw.x54.x += fp->mv.kb.speciallw.x24.x;
     fp->mv.kb.speciallw.x54.y += fp->mv.kb.speciallw.x24.y;
-    fp->mv.kb.speciallw.x54.z +=  fp->mv.kb.speciallw.x24.z;
-    fp->mv.kb.speciallw.x88[4] +=  fp->mv.kb.speciallw.x88[0];
-    fp->mv.kb.speciallw.x54.x +=   fp->mv.kb.speciallw.x30.x;
-    fp->mv.kb.speciallw.x54.y +=  fp->mv.kb.speciallw.x30.y;
-    fp->mv.kb.speciallw.x54.z +=fp->mv.kb.speciallw.x30.z;
-    fp->mv.kb.speciallw.x88[4] +=  fp->mv.kb.speciallw.x88[1];
-    fp->mv.kb.speciallw.x54.x +=  fp->mv.kb.speciallw.x3C.x;
-    fp->mv.kb.speciallw.x54.y +=  fp->mv.kb.speciallw.x3C.y;
-    fp->mv.kb.speciallw.x54.z +=  fp->mv.kb.speciallw.x3C.z;
+    fp->mv.kb.speciallw.x54.z += fp->mv.kb.speciallw.x24.z;
+    fp->mv.kb.speciallw.x88[4] += fp->mv.kb.speciallw.x88[0];
+    fp->mv.kb.speciallw.x54.x += fp->mv.kb.speciallw.x30.x;
+    fp->mv.kb.speciallw.x54.y += fp->mv.kb.speciallw.x30.y;
+    fp->mv.kb.speciallw.x54.z += fp->mv.kb.speciallw.x30.z;
+    fp->mv.kb.speciallw.x88[4] += fp->mv.kb.speciallw.x88[1];
+    fp->mv.kb.speciallw.x54.x += fp->mv.kb.speciallw.x3C.x;
+    fp->mv.kb.speciallw.x54.y += fp->mv.kb.speciallw.x3C.y;
+    fp->mv.kb.speciallw.x54.z += fp->mv.kb.speciallw.x3C.z;
     fp->mv.kb.speciallw.x88[4] += fp->mv.kb.speciallw.x88[2];
     fp->mv.kb.speciallw.x54.x += fp->mv.kb.speciallw.x48.x;
     fp->mv.kb.speciallw.x54.y += fp->mv.kb.speciallw.x48.y;
@@ -4588,31 +4590,36 @@ void ftKb_SpecialHi_800F37EC(Fighter_GObj* gobj) {
     fp->mv.kb.speciallw.x88[4] *= 0.25f;
     fp->mv.kb.speciallw.x88[8] = 1.0f;
     for (var_r4 = 3; var_r4 > 0; var_r4--) {
-        if (ABS(fp->mv.kb.speciallw.x88[var_r4]) > dat_attr->speciallw_min_slant_angle_slide) {
+        if (ABS(fp->mv.kb.speciallw.x88[var_r4]) >
+            dat_attr->speciallw_min_slant_angle_slide)
+        {
             for (var_r5 = var_r4; var_r5 >= 0; var_r5--) {
-                    if (ABS(fp->mv.kb.speciallw.x88[var_r5]) <= dat_attr->speciallw_min_slant_angle_slide) {
-                        fp->mv.kb.speciallw.x88[8] = 0.9f;
-                        var_r5 = -1;
-                        var_r4 = -1;
-                    } else if (fp->mv.kb.speciallw.x88[var_r5] > 0.0f) {
-                        if (temp_f5 < 0.0f) {
-                            fp->mv.kb.speciallw.x88[8] -= 0.25f;
-                            if (fp->mv.kb.speciallw.x88[8] < 0.0f) {
-                                fp->mv.kb.speciallw.x88[8] = 0.0f;
-                            }
-                        } else if (fp->mv.kb.speciallw.x88[var_r5] > 0.0f) {
-                            fp->mv.kb.speciallw.x88[8] -= 0.25f;
-                            if (fp->mv.kb.speciallw.x88[8] < 0.0f) {
+                if (ABS(fp->mv.kb.speciallw.x88[var_r5]) <=
+                    dat_attr->speciallw_min_slant_angle_slide)
+                {
+                    fp->mv.kb.speciallw.x88[8] = 0.9f;
+                    var_r5 = -1;
+                    var_r4 = -1;
+                } else if (fp->mv.kb.speciallw.x88[var_r5] > 0.0f) {
+                    if (temp_f5 < 0.0f) {
+                        fp->mv.kb.speciallw.x88[8] -= 0.25f;
+                        if (fp->mv.kb.speciallw.x88[8] < 0.0f) {
                             fp->mv.kb.speciallw.x88[8] = 0.0f;
-                            }
+                        }
+                    } else if (fp->mv.kb.speciallw.x88[var_r5] > 0.0f) {
+                        fp->mv.kb.speciallw.x88[8] -= 0.25f;
+                        if (fp->mv.kb.speciallw.x88[8] < 0.0f) {
+                            fp->mv.kb.speciallw.x88[8] = 0.0f;
                         }
                     }
+                }
             }
         }
     }
 }
 
-void ftKb_SpecialHi_800F3B28(Fighter_GObj* gobj) {
+void ftKb_SpecialHi_800F3B28(Fighter_GObj* gobj)
+{
     f32 temp_f1;
     f32 temp_f2;
     f32 temp_f3;
@@ -4638,7 +4645,8 @@ void ftKb_SpecialHi_800F3B28(Fighter_GObj* gobj) {
     if (ABS(var_f31) < 0.017453292f) {
         var_f5 = 0.0f;
         temp_f3 = fp->gr_vel;
-        temp_f2 = temp_f1 * (fp->mv.co.common.x58.x * fp->co_attrs.gr_friction);
+        temp_f2 =
+            temp_f1 * (fp->mv.co.common.x58.x * fp->co_attrs.gr_friction);
         var_f1_2 = ABS(fp->gr_vel);
         if (ABS(temp_f2) > var_f1_2) {
             var_f4 = -fp->gr_vel;
@@ -4651,7 +4659,9 @@ void ftKb_SpecialHi_800F3B28(Fighter_GObj* gobj) {
         }
     } else {
         var_f4 = 0.0f;
-        var_f5 = (1.0f + (1.0f - temp_f1)) * (fp->mv.co.common.x4C.z * dat_attr->speciallw_slide_acceleration);
+        var_f5 =
+            (1.0f + (1.0f - temp_f1)) *
+            (fp->mv.co.common.x4C.z * dat_attr->speciallw_slide_acceleration);
     }
     fp->xE4_ground_accel_1 = fp->mv.kb.speciallw.x88[8] * (var_f5 + var_f4);
     fp->gr_vel *= fp->mv.kb.speciallw.x88[8];
@@ -4660,10 +4670,16 @@ void ftKb_SpecialHi_800F3B28(Fighter_GObj* gobj) {
     } else if (fp->gr_vel > dat_attr->speciallw_slide_max_speed) {
         fp->gr_vel = dat_attr->speciallw_slide_max_speed;
     }
-    if (fp->gr_vel + fp->xE4_ground_accel_1 < -dat_attr->speciallw_slide_max_speed) {
-        fp->xE4_ground_accel_1 = -dat_attr->speciallw_slide_max_speed - fp->gr_vel;
-    } else if (fp->gr_vel + fp->xE4_ground_accel_1 > dat_attr->speciallw_slide_max_speed) {
-        fp->xE4_ground_accel_1 = dat_attr->speciallw_slide_max_speed - fp->gr_vel;
+    if (fp->gr_vel + fp->xE4_ground_accel_1 <
+        -dat_attr->speciallw_slide_max_speed)
+    {
+        fp->xE4_ground_accel_1 =
+            -dat_attr->speciallw_slide_max_speed - fp->gr_vel;
+    } else if (fp->gr_vel + fp->xE4_ground_accel_1 >
+               dat_attr->speciallw_slide_max_speed)
+    {
+        fp->xE4_ground_accel_1 =
+            dat_attr->speciallw_slide_max_speed - fp->gr_vel;
     }
     fp->x74_anim_vel.x = fp->mv.co.common.x58.x * fp->xE4_ground_accel_1;
     fp->x74_anim_vel.y = -fp->mv.co.common.x4C.z * fp->xE4_ground_accel_1;
@@ -4673,7 +4689,8 @@ void ftKb_SpecialHi_800F3B28(Fighter_GObj* gobj) {
     fp->self_vel.z = 0.0f;
 }
 
-void ftKb_SpecialLw_Enter(Fighter_GObj* gobj) {
+void ftKb_SpecialLw_Enter(Fighter_GObj* gobj)
+{
     Fighter* fp = GET_FIGHTER(gobj);
     HSD_JObj* temp_r28;
     s32 temp_r30;
@@ -4685,11 +4702,11 @@ void ftKb_SpecialLw_Enter(Fighter_GObj* gobj) {
     fp->cmd_vars[2] = 0;
     fp->cmd_vars[1] = 0;
     fp->cmd_vars[0] = 0;
-    fp->mv.kb.speciallw.x0 =  dat_attr->speciallw_max_time_in_stone;
-    fp->mv.kb.speciallw.x2 =  dat_attr->speciallw_min_time_in_stone;
+    fp->mv.kb.speciallw.x0 = dat_attr->speciallw_max_time_in_stone;
+    fp->mv.kb.speciallw.x2 = dat_attr->speciallw_min_time_in_stone;
     fp->mv.kb.speciallw.x4 = 0;
-    fp->mv.kb.speciallw.x6= 0;
-    fp->mv.kb.speciallw.x8= 0;
+    fp->mv.kb.speciallw.x6 = 0;
+    fp->mv.kb.speciallw.x8 = 0;
     fp->mv.kb.speciallw.xC = 0;
     fp->mv.kb.speciallw.x10 = -1;
     fp->mv.kb.speciallw.x14 = -1;
@@ -4701,10 +4718,11 @@ void ftKb_SpecialLw_Enter(Fighter_GObj* gobj) {
     fp->x221C_b4 = temp_r30;
     ftKirbyDmgInline2(gobj);
     ftAnim_8006EBA4(gobj);
-    efSync_Spawn(0x49B, (HSD_GObj* ) gobj, temp_r28);
+    efSync_Spawn(0x49B, (HSD_GObj*) gobj, temp_r28);
 }
 
-void ftKb_SpecialAirLw_Enter(Fighter_GObj* gobj) {
+void ftKb_SpecialAirLw_Enter(Fighter_GObj* gobj)
+{
     Fighter* fp = GET_FIGHTER(gobj);
     HSD_JObj* temp_r28;
     s32 temp_r30;
@@ -4716,11 +4734,11 @@ void ftKb_SpecialAirLw_Enter(Fighter_GObj* gobj) {
     fp->cmd_vars[2] = 0;
     fp->cmd_vars[1] = 0;
     fp->cmd_vars[0] = 0;
-    fp->mv.kb.speciallw.x0 =  dat_attr->speciallw_max_time_in_stone;
-    fp->mv.kb.speciallw.x2 =  dat_attr->speciallw_min_time_in_stone;
+    fp->mv.kb.speciallw.x0 = dat_attr->speciallw_max_time_in_stone;
+    fp->mv.kb.speciallw.x2 = dat_attr->speciallw_min_time_in_stone;
     fp->mv.kb.speciallw.x4 = 0;
-    fp->mv.kb.speciallw.x6= 0;
-    fp->mv.kb.speciallw.x8= 0;
+    fp->mv.kb.speciallw.x6 = 0;
+    fp->mv.kb.speciallw.x8 = 0;
     fp->mv.kb.speciallw.xC = 0;
     fp->mv.kb.speciallw.x10 = -1;
     fp->mv.kb.speciallw.x14 = -1;
@@ -4732,10 +4750,11 @@ void ftKb_SpecialAirLw_Enter(Fighter_GObj* gobj) {
     fp->x221C_b4 = temp_r30;
     ftKirbyDmgInline2(gobj);
     ftAnim_8006EBA4(gobj);
-    efSync_Spawn(0x49B, (HSD_GObj* ) gobj, temp_r28);
+    efSync_Spawn(0x49B, (HSD_GObj*) gobj, temp_r28);
 }
 
-void ftKb_SpecialLw1_Anim(Fighter_GObj* gobj) {
+void ftKb_SpecialLw1_Anim(Fighter_GObj* gobj)
+{
     Fighter* fp = GET_FIGHTER(gobj);
     s32 temp_r30;
 
@@ -4744,25 +4763,28 @@ void ftKb_SpecialLw1_Anim(Fighter_GObj* gobj) {
     ftKb_SpecialHi_800F331C(gobj);
     if (!ftAnim_IsFramesRemaining(gobj)) {
         temp_r30 = fp->x221C_b4;
-        Fighter_ChangeMotionState(gobj, 0x18A, 0x04440012U, 0.0f, 0.0f, 0.0f, NULL);
+        Fighter_ChangeMotionState(gobj, 0x18A, 0x04440012U, 0.0f, 0.0f, 0.0f,
+                                  NULL);
         fp->x221C_b4 = temp_r30;
         ftAnim_SetAnimRate(gobj, 0.0f);
     }
 }
 
-inline void ftKbUnkInline(Fighter_GObj* gobj, int val) {
+inline void ftKbUnkInline(Fighter_GObj* gobj, int val)
+{
     Fighter* fp = GET_FIGHTER(gobj);
     fp->x221C_b4 = val;
     ftKb_SpecialHi_800F346C(gobj);
     ftKb_SpecialHi_800F331C(gobj);
 }
 
-
-void ftKb_SpecialLw_Anim(Fighter_GObj* gobj) {
+void ftKb_SpecialLw_Anim(Fighter_GObj* gobj)
+{
     ftKbUnkInline(gobj, 1);
 }
 
-void ftKb_SpecialLwEnd_Anim(Fighter_GObj* gobj) {
+void ftKb_SpecialLwEnd_Anim(Fighter_GObj* gobj)
+{
     Fighter* fp = GET_FIGHTER(gobj);
     ftKb_DatAttrs* dat_attr = fp->dat_attrs;
 
@@ -4774,29 +4796,34 @@ void ftKb_SpecialLwEnd_Anim(Fighter_GObj* gobj) {
             ftCo_Fall_Enter(gobj);
             return;
         }
-        ftCo_80096900(gobj, 1, 0, 1, 1.0f, dat_attr->speciallw_freefall_toggle);
+        ftCo_80096900(gobj, 1, 0, 1, 1.0f,
+                      dat_attr->speciallw_freefall_toggle);
     }
 }
 
-void ftKb_SpecialAirLwStart_Anim(Fighter_GObj* gobj) {
-        Fighter* fp = GET_FIGHTER(gobj);
-        s32 temp_r30;
-        fp->x221C_b4 = 0;
-        ftKb_SpecialHi_800F346C(gobj);
-        ftKb_SpecialHi_800F331C(gobj);
+void ftKb_SpecialAirLwStart_Anim(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    s32 temp_r30;
+    fp->x221C_b4 = 0;
+    ftKb_SpecialHi_800F346C(gobj);
+    ftKb_SpecialHi_800F331C(gobj);
     if (!ftAnim_IsFramesRemaining(gobj)) {
         temp_r30 = fp->x221C_b4;
-        Fighter_ChangeMotionState(gobj, 0x18D, 0x04440012U, 0.0f, 0.0f, 0.0f, NULL);
+        Fighter_ChangeMotionState(gobj, 0x18D, 0x04440012U, 0.0f, 0.0f, 0.0f,
+                                  NULL);
         fp->x221C_b4 = temp_r30;
         ftAnim_SetAnimRate(gobj, 0.0f);
     }
 }
 
-void ftKb_SpecialAirLw_Anim(Fighter_GObj* gobj) {
+void ftKb_SpecialAirLw_Anim(Fighter_GObj* gobj)
+{
     ftKbUnkInline(gobj, 1);
 }
 
-void ftKb_SpecialAirLwEnd_Anim(Fighter_GObj* gobj) {
+void ftKb_SpecialAirLwEnd_Anim(Fighter_GObj* gobj)
+{
     Fighter* fp = GET_FIGHTER(gobj);
     ftKb_DatAttrs* dat_attr = fp->dat_attrs;
 
@@ -4808,18 +4835,24 @@ void ftKb_SpecialAirLwEnd_Anim(Fighter_GObj* gobj) {
             ftCo_Fall_Enter(gobj);
             return;
         }
-        ftCo_80096900(gobj, 1, 0, 1, 1.0f, dat_attr->speciallw_freefall_toggle);
+        ftCo_80096900(gobj, 1, 0, 1, 1.0f,
+                      dat_attr->speciallw_freefall_toggle);
     }
 }
 
-inline static bool fbKb_SpecialLw_IASA_Inline(Fighter_GObj* gobj) {
+inline static bool fbKb_SpecialLw_IASA_Inline(Fighter_GObj* gobj)
+{
     Fighter* fp = GET_FIGHTER(gobj);
     bool var_r0;
     ftKb_DatAttrs* dat_attr = fp->dat_attrs;
 
     if (fp->mv.kb.speciallw.x0 <= 0) {
         var_r0 = 1;
-    } else if ((fp->mv.kb.speciallw.x0 <= (s32) (dat_attr->speciallw_max_time_in_stone - dat_attr->speciallw_min_time_in_stone)) && (fp->input.x668 & 0x200)) {
+    } else if ((fp->mv.kb.speciallw.x0 <=
+                (s32) (dat_attr->speciallw_max_time_in_stone -
+                       dat_attr->speciallw_min_time_in_stone)) &&
+               (fp->input.x668 & 0x200))
+    {
         var_r0 = 1;
     } else {
         if (fp->mv.kb.speciallw.x0 > 0) {
@@ -4831,7 +4864,8 @@ inline static bool fbKb_SpecialLw_IASA_Inline(Fighter_GObj* gobj) {
     return var_r0;
 }
 
-void ftKb_SpecialLw_IASA(Fighter_GObj* gobj) {
+void ftKb_SpecialLw_IASA(Fighter_GObj* gobj)
+{
     Fighter* fp = GET_FIGHTER(gobj);
     s32 temp_r28;
     HSD_JObj* temp_r30 = fp->parts[FtPart_YRotN].joint;
@@ -4840,7 +4874,8 @@ void ftKb_SpecialLw_IASA(Fighter_GObj* gobj) {
     if (fbKb_SpecialLw_IASA_Inline(gobj)) {
         ftCommon_8007D5D4(fp);
         temp_r28 = fp->x221C_b4;
-        Fighter_ChangeMotionState(gobj, 0x18B, 0x04440012U, 0.0f, 1.0f, 0.0f, NULL);
+        Fighter_ChangeMotionState(gobj, 0x18B, 0x04440012U, 0.0f, 1.0f, 0.0f,
+                                  NULL);
         fp->x221C_b4 = temp_r28;
         ftKirbyDmgInline(gobj);
         efSync_Spawn(0x49C, gobj, temp_r30);

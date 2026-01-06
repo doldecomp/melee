@@ -1,17 +1,18 @@
 #include "vi/vi1201v2.h"
 
-#include <baselib/aobj.h>
-#include <baselib/cobj.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjplink.h>
-#include <baselib/jobj.h>
+#include "vi.h"
 
 #include "gm/gm_unsplit.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 #include "lb/lbshadow.h"
 #include "mn/mnmain.h"
-#include "vi.h"
+
+#include <baselib/aobj.h>
+#include <baselib/cobj.h>
+#include <baselib/gobj.h>
+#include <baselib/gobjplink.h>
+#include <baselib/jobj.h>
 
 extern HSD_GObj* un_804D7030;
 extern HSD_GObj* un_804D7034;
@@ -55,8 +56,8 @@ void un_803208F0(HSD_GObj* gobj)
         HSD_SetEraseColor(colors[0], colors[1], colors[2], colors[3]);
         HSD_CObjEraseScreen(GET_COBJ(gobj), 1, 0, 1);
         vi_8031CA04(gobj);
-        *(s32*)((char*)gobj + 0x24) = 0x881;
-        *(s32*)((char*)gobj + 0x20) = 0;
+        *(s32*) ((char*) gobj + 0x24) = 0x881;
+        *(s32*) ((char*) gobj + 0x20) = 0;
         HSD_GObj_80390ED0(gobj, 7);
         HSD_CObjEndCurrent();
     }

@@ -148,7 +148,8 @@ bool grVenom_80206B68(Ground_GObj* arg)
     return false;
 }
 
-void grVenom_80206B70(Ground_GObj* arg) {
+void grVenom_80206B70(Ground_GObj* arg)
+{
     grVenom_80205F30(arg);
 }
 

@@ -1,8 +1,10 @@
 #ifndef ITBOMBHEI_STATIC_H
 #define ITBOMBHEI_STATIC_H
 
-#include "it/forward.h"
 #include "ft/ft_0C31.h"
+
+#include "it/forward.h"
+
 #include "it/inlines.h"
 #include "it/it_2725.h"
 #include "it/item.h"
@@ -32,7 +34,8 @@ static inline HSD_JObj* itGetDynamicBone(Item_GObj* igp, u32 bone_id)
     return GET_ITEM(igp)->xBBC_dynamicBoneTable->bones[bone_id];
 }
 
-static inline void itBombhei_UpdateStatePreserveBone(Item_GObj* igp, int anim_id)
+static inline void itBombhei_UpdateStatePreserveBone(Item_GObj* igp,
+                                                     int anim_id)
 {
     Item* ip = GET_ITEM(igp);
     HSD_JObj* jobj = ip->xBBC_dynamicBoneTable->bones[0xB];
@@ -46,7 +49,8 @@ static inline void itBombhei_UpdateStatePreserveBone(Item_GObj* igp, int anim_id
     HSD_JObjSetRotationX(jobj, x);
 }
 
-static inline void itBombhei_UpdateStatePreserveBone2(Item_GObj* igp, int anim_id)
+static inline void itBombhei_UpdateStatePreserveBone2(Item_GObj* igp,
+                                                      int anim_id)
 {
     Item* ip = GET_ITEM(igp);
     HSD_JObj* jobj = ip->xBBC_dynamicBoneTable->bones[0xB];
@@ -60,7 +64,8 @@ static inline void itBombhei_UpdateStatePreserveBone2(Item_GObj* igp, int anim_i
     HSD_JObjSetRotationX(jobj, x);
 }
 
-static inline void itBombhei_UpdateStatePreserveBone3(Item_GObj* igp, int anim_id)
+static inline void itBombhei_UpdateStatePreserveBone3(Item_GObj* igp,
+                                                      int anim_id)
 {
     Item* ip = GET_ITEM(igp);
     HSD_JObj* jobj = ip->xBBC_dynamicBoneTable->bones[0xB];
@@ -74,7 +79,8 @@ static inline void itBombhei_UpdateStatePreserveBone3(Item_GObj* igp, int anim_i
     fake_HSD_JObjSetRotationX(jobj, x);
 }
 
-static inline void itBombhei_UpdateStatePreserveBone4(Item_GObj* igp, int anim_id)
+static inline void itBombhei_UpdateStatePreserveBone4(Item_GObj* igp,
+                                                      int anim_id)
 {
     Item* ip = GET_ITEM(igp);
     HSD_JObj* jobj = ip->xBBC_dynamicBoneTable->bones[0xB];

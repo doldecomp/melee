@@ -666,7 +666,7 @@ void it_802E6A74(HSD_GObj* gobj)
     item = gobj->user_data;
     if (item->xDD4_itemVar.it_2E5A.x8) {
         // Cast to get address of the inline struct at offset 0x1C
-        temp_r6 = (it_2E5A_ItemVars_struct*)&item->xDD4_itemVar.it_2E5A.x1C;
+        temp_r6 = (it_2E5A_ItemVars_struct*) &item->xDD4_itemVar.it_2E5A.x1C;
         temp_r6->x14 = temp_r6->x8;
         lb_8000B1CC(temp_r6->x4, NULL, &temp_r6->x8);
     }

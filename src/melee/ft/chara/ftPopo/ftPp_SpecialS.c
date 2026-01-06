@@ -843,7 +843,8 @@ void ftPp_SpecialHi_8012184C(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, 0x15B, 0x0C4C508AU, fp->cur_anim_frame, 0, 1, NULL);
+    Fighter_ChangeMotionState(gobj, 0x15B, 0x0C4C508AU, fp->cur_anim_frame, 0,
+                              1, NULL);
 }
 
 void ftPp_SpecialHi_801218AC(Fighter_GObj* gobj)
@@ -914,7 +915,8 @@ void ftPp_SpecialHiStart_1_Phys(Fighter_GObj* gobj)
 void ftPp_SpecialHi_80122098(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    Fighter_ChangeMotionState(gobj, 0x15E, 0, fp->cur_anim_frame, 1.0f, 0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, 0x15E, 0, fp->cur_anim_frame, 1.0f, 0.0f,
+                              NULL);
 }
 /// #ftPp_SpecialHi_801220D4
 

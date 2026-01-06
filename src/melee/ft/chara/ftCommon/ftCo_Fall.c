@@ -9,7 +9,6 @@
 #include "ft/forward.h"
 
 #include "ft/ft_081B.h"
-#include "ftCommon/ftCo_Attack100.h"
 #include "ft/ftcommon.h"
 #include "ft/ftlib.h"
 #include "ft/inlines.h"
@@ -18,6 +17,7 @@
 #include "ftCommon/forward.h"
 
 #include "ftCommon/ftCo_AirCatch.h"
+#include "ftCommon/ftCo_Attack100.h"
 #include "ftCommon/ftCo_AttackAir.h"
 #include "ftCommon/ftCo_DamageFall.h"
 #include "ftCommon/ftCo_EscapeAir.h"

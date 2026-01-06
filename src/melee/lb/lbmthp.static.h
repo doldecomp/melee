@@ -35,14 +35,14 @@ struct HSD_SObj_803A477C_t_ext {
 };
 
 struct lbl_804335B8_t {
-    /* 0x00 */ GXTexObj tex0;          /* 0x00-0x20 (size 0x20) */
-    /* 0x20 */ void* x20;              /* image ptr for tex0 */
-    /* 0x24 */ GXTexObj tex1;          /* 0x24-0x44 (size 0x20) */
-    /* 0x44 */ void* x44;              /* image ptr for tex1 */
-    /* 0x48 */ GXTexObj tex2;          /* 0x48-0x68 (size 0x20) */
-    /* 0x68 */ void* x68;              /* image ptr for tex2 */
-    /* 0x6C */ u16 x6C;                /* width */
-    /* 0x6E */ u16 x6E;                /* height */
+    /* 0x00 */ GXTexObj tex0; /* 0x00-0x20 (size 0x20) */
+    /* 0x20 */ void* x20;     /* image ptr for tex0 */
+    /* 0x24 */ GXTexObj tex1; /* 0x24-0x44 (size 0x20) */
+    /* 0x44 */ void* x44;     /* image ptr for tex1 */
+    /* 0x48 */ GXTexObj tex2; /* 0x48-0x68 (size 0x20) */
+    /* 0x68 */ void* x68;     /* image ptr for tex2 */
+    /* 0x6C */ u16 x6C;       /* width */
+    /* 0x6E */ u16 x6E;       /* height */
     /* 0x70 */ s32 x70;
     /* 0x74 */ u16 x74;
     /* 0x76 */ u16 x76;

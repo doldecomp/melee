@@ -18,8 +18,8 @@ struct Heap {
 STATIC_ASSERT(sizeof(struct Heap) == 0x1C);
 
 struct lbHeap_HeapState {
-    /* 0x00 */ void* arena_lo;        /* inferred */
-    /* 0x04 */ void* arena_hi;        /* inferred */
+    /* 0x00 */ void* arena_lo;       /* inferred */
+    /* 0x04 */ void* arena_hi;       /* inferred */
     /* 0x08 */ unsigned int aram_lo; /* inferred */
     /* 0x0C */ unsigned int aram_hi; /* inferred */
     /* 0x10 */ struct Heap heap_array[6];

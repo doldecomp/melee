@@ -2,11 +2,11 @@
 
 #include "ground.h"
 
+#include <platform.h>
+
 #include "cm/camera.h"
 #include "ft/ftlib.h"
 #include "gr/inlines.h"
-
-#include <platform.h>
 
 extern float grNKr_804DB830;
 
