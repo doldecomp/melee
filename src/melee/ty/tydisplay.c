@@ -48,7 +48,15 @@ void un_803182D4_OnFrame(void)
 
 /// #un_8031B850
 
-/// #un_8031B9A4_OnFrame
+void un_8031B9A4_OnFrame(void)
+{
+    TyModeState* state = (TyModeState*) un_804A284C;
+
+    if (state->x4 != 0) {
+        un_8031B850();
+        gm_801A4B60();
+    }
+}
 
 /// #un_8031B9DC
 

@@ -3,6 +3,7 @@
 #include "lb/lb_00B0.h"
 
 #include <baselib/cobj.h>
+#include <baselib/forward.h>
 #include <baselib/displayfunc.h>
 #include <baselib/fog.h>
 #include <baselib/gobjgxlink.h>
@@ -23,7 +24,7 @@ extern void* un_804D6EB8;
 extern void* un_804D6EB4;
 extern void* un_804D6EB0;
 extern void* un_804D6EAC;
-extern void* un_804D6ECC;
+extern HSD_Archive* un_804D6ECC;
 extern void* un_804D6EA8;
 extern void* un_804D6EA4;
 extern void* un_804D6EC8;

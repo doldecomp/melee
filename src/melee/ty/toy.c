@@ -26,7 +26,7 @@
 static u8 un_804D6EA1;
 
 extern char un_803FDD18[];
-extern void* un_804D6ECC;
+extern HSD_Archive* un_804D6ECC;
 extern void* un_804D6EA8;
 extern void* un_804D6EA4;
 
