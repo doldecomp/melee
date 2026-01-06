@@ -447,8 +447,8 @@ void ftAnim_8006EDD0(Fighter* fp, int arg1, float arg8, float arg9)
     struct ftData_80085FD4_ret* temp_ret;
     HSD_JObj* jobj = fp->x8AC_animSkeleton;
     ftAnim_80070758(jobj);
-    ftAnim_8006FB88(fp, 1, fp->x108_costume_joint->child);
-    ftAnim_80070A10(fp, 0, ftData_80085E50(fp, arg1));
+    ftAnim_8006FB88(fp, FtPart_TransN, fp->x108_costume_joint->child);
+    ftAnim_80070A10(fp, FtPart_TopN, ftData_80085E50(fp, arg1));
     ftAnim_80070710(jobj, arg8);
     temp_ret = ftData_80085FD4(fp, arg1);
     if (temp_ret->x10_b1) {

@@ -217,7 +217,7 @@ void ftYs_Shield_8012C1D4(Fighter_GObj* gobj)
     PAD_STACK(4 * 2);
     Fighter_ChangeMotionState(gobj, ftYs_MS_GuardHold, Ft_MF_None, 0, 1, 0,
                               NULL);
-    ftAnim_8006FA58(fp, 1, fp->x108_costume_joint->child);
+    ftAnim_8006FA58(fp, FtPart_TransN, fp->x108_costume_joint->child);
     ftParts_80074B0C(gobj, 0, 1);
     inlineA0(gobj);
     ftCo_80092450(gobj);
