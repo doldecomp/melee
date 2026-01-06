@@ -922,12 +922,12 @@ void ftAnim_8006FCE4(Fighter* fp, bool do_blending)
     }
 }
 
-void ftAnim_8006FE08(Fighter* fp, int arg1)
+void ftAnim_8006FE08(Fighter* fp, bool do_blending)
 {
     if (fp->kind != fp->x597_bits) {
-        ftAnim_8006FCE4(fp, arg1);
+        ftAnim_8006FCE4(fp, do_blending);
     } else {
-        ftAnim_8006F4C8(fp, arg1, fp->x590);
+        ftAnim_8006F4C8(fp, do_blending, fp->x590);
     }
 }
 
