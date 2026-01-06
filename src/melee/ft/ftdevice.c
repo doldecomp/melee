@@ -92,8 +92,7 @@ void ftCo_800C07F8(Ground_GObj* arg0, u32 arg1, void* arg2)
         temp_r6->type = arg1;
         temp_r6->active_cb = arg2;
         ft_804D6570++;
-    }
-    else {
+    } else {
         OSReport("fighter chk device coll func num over!\n", ft_80459A68);
         __assert("ftdevice.c", 0x95U, "0");
     }

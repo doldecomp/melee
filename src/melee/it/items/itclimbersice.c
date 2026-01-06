@@ -4,10 +4,11 @@
 #include <platform.h>
 
 #include "it/forward.h"
-#include "it/item.h"
+
+#include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_2725.h"
-#include "it/inlines.h"
+#include "it/item.h"
 
 /* 2C23D4 */ static bool itClimbersblizzard_UnkMotion0_Coll(Item_GObj* gobj);
 

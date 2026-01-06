@@ -4,11 +4,14 @@
 #include <placeholder.h>
 #include <platform.h>
 
+#include "ft/forward.h"
+
 #include "ft/types.h"
 
-#include "ft/forward.h"
 #include "ftCommon/forward.h"
+
 #include "ftCommon/ftCo_AttackDash.h"
+
 #include "ftKirby/forward.h"
 #include "it/forward.h"
 #include <baselib/forward.h>
@@ -26,7 +29,8 @@
 /* 0EEA24 */ void ftKb_Init_OnItemVisible(Fighter_GObj* gobj);
 /* 0EEA6C */ void ftKb_Init_OnItemDrop(Fighter_GObj* gobj, bool);
 /* 0EEAC0 */ void ftKb_Init_LoadSpecialAttrs(Fighter_GObj* gobj);
-/* 0EEB00 */ void ftKb_Init_800EEB00(Fighter_GObj* gobj, ArticleDynamicBones**);
+/* 0EEB00 */ void ftKb_Init_800EEB00(Fighter_GObj* gobj,
+                                     ArticleDynamicBones**);
 /* 0EEB1C */ void ftKb_Init_800EEB1C(Fighter_GObj* gobj, s32* arg1);
 /* 0EEB38 */ void ftKb_Init_OnKnockbackEnter(Fighter_GObj* gobj);
 /* 0EEB7C */ void ftKb_Init_OnKnockbackExit(Fighter_GObj* gobj);
@@ -47,7 +51,8 @@
 /* 0EF69C */ void ftKb_SpecialN_800EF69C(Fighter_GObj*, int, KirbyHatStruct*);
 /* 0EF87C */ void ftKb_UnkIntBoolFunc0(Fighter*, int, bool);
 /* 0EF9BC */ void ftKb_Init_UnkCallbackPairs0_0(Fighter_GObj* gobj);
-/* 0EF9FC */ void ftKb_Init_UnkCallbackPairs0_1(Fighter_GObj* gobj, int, float);
+/* 0EF9FC */ void ftKb_Init_UnkCallbackPairs0_1(Fighter_GObj* gobj, int,
+                                                float);
 /* 0EFA40 */ void ftKb_SpecialN_800EFA40(Fighter_GObj* gobj);
 /* 0EFAF0 */ void ftKb_SpecialN_800EFAF0(Fighter_GObj* gobj);
 /* 0EFB4C */ void ftKb_SpecialN_800EFB4C(Fighter_GObj* gobj);
@@ -767,7 +772,8 @@
 /* 108B50 */ void ftKb_MtSpecialAirNLoopFull_Coll(Fighter_GObj* gobj);
 /* 108BD8 */ void ftKb_MtSpecialAirNCancel_Coll(Fighter_GObj* gobj);
 /* 108C60 */ void ftKb_MtSpecialAirNEnd_Coll(Fighter_GObj* gobj);
-/* 108CE8 */ void ftKb_SpecialNIc_80108CE8(Fighter_GObj* gobj, Item_GObj* it_gobj);
+/* 108CE8 */ void ftKb_SpecialNIc_80108CE8(Fighter_GObj* gobj,
+                                           Item_GObj* it_gobj);
 /* 108D04 */ void ftKb_SpecialNIc_80108D04(Fighter_GObj* gobj);
 /* 108D64 */ void ftKb_SpecialNIc_80108D64(Fighter_GObj* gobj);
 /* 108E14 */ void ftKb_SpecialNIc_80108E14(Fighter_GObj* gobj);

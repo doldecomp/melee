@@ -7,7 +7,8 @@
 #include "vi/forward.h"
 #include <baselib/forward.h>
 
-/* 31D9F8 */ void un_8031D9F8(CharacterKind char_kind, int costume, int spawn_mode, int spawn_count);
+/* 31D9F8 */ void un_8031D9F8(CharacterKind char_kind, int costume,
+                              int spawn_mode, int spawn_count);
 /* 31DC80 */ void vi_8031DC80(HSD_GObj*, int);
 /* 31DD14 */ void fn_8031DD14(HSD_GObj* gobj);
 /* 31DE58 */ void un_8031DE58_OnEnter(UNK_T);

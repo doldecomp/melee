@@ -1329,12 +1329,14 @@ int pl_80040A54(int arg0)
 
 int pl_80040A78(int arg0)
 {
-    return Player_GetActionStats(arg0)->attacks.by_attack_counts[StatsAttack_Catch];
+    return Player_GetActionStats(arg0)
+        ->attacks.by_attack_counts[StatsAttack_Catch];
 }
 
 int pl_80040A9C(int arg0)
 {
-    u32* val = &Player_GetActionStats(arg0)->attacks.by_attack_counts[StatsAttack_DownAttackD];
+    u32* val = &Player_GetActionStats(arg0)
+                    ->attacks.by_attack_counts[StatsAttack_DownAttackD];
     int sum = 0;
     unsigned int cursor_i = 51;
     int ctr;

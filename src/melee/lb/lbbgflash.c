@@ -9,7 +9,9 @@
 #include "lbbgflash.h"
 
 #include <placeholder.h>
+
 #include "lb/forward.h"
+
 #include "lb/lb_00F9.h"
 
 typedef struct BgFlashState {
@@ -31,7 +33,8 @@ extern BgFlashData lbl_80433658;
 #include <melee/lb/lb_00F9.h>
 
 /* 021A10 */ static void lbBgFlash_80021A10(f32 arg8);
-/* 021C18 */ static void fn_80021C18(HSD_GObj* gobj, CommandInfo* cmd, int arg2);
+/* 021C18 */ static void fn_80021C18(HSD_GObj* gobj, CommandInfo* cmd,
+                                     int arg2);
 /// @brief Initialize background flash state.
 /* 02087C */ void lbBgFlash_InitState(int* duration);
 

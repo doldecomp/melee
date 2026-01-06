@@ -80,7 +80,8 @@
 /* 1E2454 */ UNK_RET fn_801E2454(UNK_PARAMS);
 /* 1E2480 */ UNK_RET fn_801E2480(UNK_PARAMS);
 /* 1E24AC */ UNK_RET fn_801E24AC(UNK_PARAMS);
-/* 1E2550 */ s32 grCorneria_801E2550(Ground_GObj* gobj, struct grCorneria_GroundVars* corneria);
+/* 1E2550 */ s32 grCorneria_801E2550(Ground_GObj* gobj,
+                                     struct grCorneria_GroundVars* corneria);
 /* 1E2598 */ UNK_RET grCorneria_801E2598(UNK_PARAMS);
 /* 1E25C4 */ UNK_RET grCorneria_801E25C4(UNK_PARAMS);
 /* 1E2738 */ UNK_RET grCorneria_801E2738(UNK_PARAMS);

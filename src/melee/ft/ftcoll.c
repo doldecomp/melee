@@ -24,10 +24,10 @@
 
 #include "gr/forward.h"
 #include "it/forward.h"
-#include "it/types.h"
 
 #include "it/it_26B1.h"
 #include "it/itcoll.h"
+#include "it/types.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbcollision.h"
 #include "lb/types.h"
@@ -35,11 +35,11 @@
 #include "pl/plstale.h"
 
 #include <common_structs.h>
-#include <Runtime/runtime.h>
 #include <math.h>
 #include <dolphin/mtx.h>
 #include <baselib/debug.h>
 #include <baselib/gobj.h>
+#include <Runtime/runtime.h>
 
 /* 07A06C */ static void ftColl_8007A06C(float facing_dir, DmgLogEntry** log,
                                          int idx, bool);
@@ -1676,7 +1676,7 @@ void ftColl_8007BE3C(Fighter_GObj* gobj)
         return;
     }
 
-    source = (HSD_GObj*)fp->dmg.x1894;
+    source = (HSD_GObj*) fp->dmg.x1894;
 
     switch (source->classifier) {
     case HSD_GOBJ_CLASS_FIGHTER:
@@ -1702,9 +1702,9 @@ void ftColl_8007BE3C(Fighter_GObj* gobj)
             if (ftLib_80086960(ip->owner)) {
                 owner_fp = ip->owner->user_data;
                 victim_fp = victim_gobj->user_data;
-                pl_8003EB30(dmg_amount, owner_fp->x221F_b4, victim_fp->x221F_b4,
-                            owner_fp->player_id, victim_fp->player_id,
-                            ip->xD90.x2073);
+                pl_8003EB30(dmg_amount, owner_fp->x221F_b4,
+                            victim_fp->x221F_b4, owner_fp->player_id,
+                            victim_fp->player_id, ip->xD90.x2073);
             }
         }
         break;

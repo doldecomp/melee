@@ -528,7 +528,7 @@ typedef enum ftCommon_MotionState {
     ftCo_MS_ThrownLw,
     ftCo_MS_ThrownlwWomen,
     ftCo_MS_Pass,
-    ftCo_MS_Ottotto, ///< teeter
+    ftCo_MS_Ottotto,     ///< teeter
     ftCo_MS_OttottoWait, ///< teeter wait
     ftCo_MS_FlyReflectWall,
     ftCo_MS_FlyReflectCeil,
@@ -839,7 +839,7 @@ typedef enum ftCo_Submotion {
     ftCo_SM_FuraSleepLoop,
     ftCo_SM_FuraSleepEnd,
     ftCo_SM_Pass,
-    ftCo_SM_Ottotto, ///< teeter
+    ftCo_SM_Ottotto,     ///< teeter
     ftCo_SM_OttottoWait, ///< teeter wait
     ftCo_SM_WallDamage,
     ftCo_SM_StopWall,

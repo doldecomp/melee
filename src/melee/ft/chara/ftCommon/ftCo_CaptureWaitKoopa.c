@@ -8,8 +8,8 @@
 
 #include "ft/forward.h"
 
-#include "ftCommon/ftCo_Attack100.h"
 #include "ft/ftcommon.h"
+#include "ftCommon/ftCo_Attack100.h"
 #include "ftCommon/ftCo_CaptureCut.h"
 #include "ftCommon/ftCo_Throw.h"
 

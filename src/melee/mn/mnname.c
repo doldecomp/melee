@@ -13,7 +13,7 @@ char* GetNameText(int slot)
     if (!IsNameValid(slot)) {
         return NULL;
     }
-    return (char*)((u8*)GetPersistentNameData((u8)slot) + 0x198);
+    return (char*) ((u8*) GetPersistentNameData((u8) slot) + 0x198);
 }
 int GetNameCount(void)
 {
@@ -33,7 +33,7 @@ bool IsNameListFull(void)
     int count = 0;
     int i;
     for (i = count; i < 0x78; i++) {
-        if (IsNameValid((u8)i)) {
+        if (IsNameValid((u8) i)) {
             count++;
         }
     }

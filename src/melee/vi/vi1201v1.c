@@ -1,17 +1,18 @@
-#include "vi/vi1201v1.static.h"
+#include "vi.h"
 
-#include <baselib/aobj.h>
-#include <baselib/cobj.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjplink.h>
-#include <baselib/jobj.h>
-#include <dolphin/gx/GXStruct.h>
+#include "vi/vi1201v1.static.h"
 
 #include "gm/gm_unsplit.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 #include "lb/lbshadow.h"
-#include "vi.h"
+
+#include <dolphin/gx/GXStruct.h>
+#include <baselib/aobj.h>
+#include <baselib/cobj.h>
+#include <baselib/gobj.h>
+#include <baselib/gobjplink.h>
+#include <baselib/jobj.h>
 
 extern void* un_804D7000;
 extern u8 un_804D6FF4;
@@ -45,8 +46,8 @@ void fn_8031FB90(HSD_GObj* gobj)
         HSD_SetEraseColor(colors->r, colors->g, colors->b, colors->a);
         HSD_CObjEraseScreen(GET_COBJ(gobj), 1, 0, 1);
         vi_8031CA04(gobj);
-        *(s32*)((char*)gobj + 0x24) = 0x881;
-        *(s32*)((char*)gobj + 0x20) = 0;
+        *(s32*) ((char*) gobj + 0x24) = 0x881;
+        *(s32*) ((char*) gobj + 0x20) = 0;
         HSD_GObj_80390ED0(gobj, 7);
         HSD_CObjEndCurrent();
     }

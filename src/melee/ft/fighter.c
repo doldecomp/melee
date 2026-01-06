@@ -27,7 +27,6 @@
 #include "ft/ft_0C31.h"
 #include "ft/ft_0C88.h"
 #include "ft/ft_0C8C.h"
-#include "ftCommon/ftCo_Attack100.h"
 #include "ft/ft_0DF0.h"
 #include "ft/ftafterimage.h"
 #include "ft/ftchangeparam.h"
@@ -43,6 +42,7 @@
 #include "ftCommon/ftCo_09F4.h"
 #include "ftCommon/ftCo_0A01.h"
 #include "ftCommon/ftCo_0C35.h"
+#include "ftCommon/ftCo_Attack100.h"
 #include "ftCommon/ftCo_Bury.h"
 #include "ftCommon/ftCo_Damage.h"
 #include "ftCommon/ftCo_DamageFall.h"
@@ -690,7 +690,8 @@ static void Fighter_UnkInitLoad_80068914_Inner1(Fighter_GObj* gobj)
             fp->x688 = fp->x689 = fp->x68A = fp->x68B = 0xFF;
 }
 
-void Fighter_UnkInitLoad_80068914(Fighter_GObj* gobj, struct plAllocInfo* argdata)
+void Fighter_UnkInitLoad_80068914(Fighter_GObj* gobj,
+                                  struct plAllocInfo* argdata)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     s32 costume_id;
@@ -1371,7 +1372,8 @@ void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
         if (animflags_bool) {
             if (!fp->x594_b0 && !fp->x594_b0) {
                 !fp;
-                ftCommon_ClampGrVel(fp, fp->co_attrs.dash_run_terminal_velocity);
+                ftCommon_ClampGrVel(fp,
+                                    fp->co_attrs.dash_run_terminal_velocity);
             }
         }
 
@@ -2364,9 +2366,7 @@ void Fighter_procUpdate(Fighter_GObj* gobj)
         // __assert functions. But I guess these just stop or reset the game.
         // result is written to where r5 points to, which is 'difference' in
         // this case
-        if (mpGetSpeed(fp->coll_data.floor.index, &fp->cur_pos,
-                           &difference))
-        {
+        if (mpGetSpeed(fp->coll_data.floor.index, &fp->cur_pos, &difference)) {
             // fp->position += difference
             PSVECAdd(&fp->cur_pos, &difference, &fp->cur_pos);
         }

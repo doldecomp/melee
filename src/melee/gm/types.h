@@ -45,7 +45,7 @@ struct MinorScene {
 
     struct MinorSceneInfo {
         /* 0C */ u8 class_id;
-        /* 10 */ void* load_data; ///< data passed to OnLoad callback
+        /* 10 */ void* load_data;  ///< data passed to OnLoad callback
         /* 14 */ void* leave_data; ///< data passed to OnLeave callback
     } info;
 };
@@ -211,9 +211,11 @@ struct gmm_retval_EDBC {
 struct gmm_x1868 {
     /* 0x0000 */ u16 x1868; ///< unlocked characters bitmask
     /* 0x0002 */ u16 x186A; ///< unlocked stages bitmask
-    /* 0x0004 */ u8 x186C;  ///< unlocked features bitmask - score display/random stage etc...
+    /* 0x0004 */ u8 x186C;  ///< unlocked features bitmask - score
+                            ///< display/random stage etc...
     /// @remarks this would make sense to be apart of x186C, but seems unused.
-    // perhaps features got removed from the unlock system? item switch comes to mind as plausible
+    // perhaps features got removed from the unlock system? item switch comes
+    // to mind as plausible
     /* 0x0005 */ char pad_5[3];
     /* 0x0008 */ struct gmm_retval_ED98 unk_8;
     /* 0x0028 */ struct gmm_retval_EDB0 unk_28;
@@ -898,9 +900,10 @@ struct VsApproachData {
 
 /// @brief data passed to OnLoad callback for MJ_MENU
 struct MenuEnterData {
-    /* +00 */ u8 menu_kind; ///< will set the next menu kind
+    /* +00 */ u8 menu_kind;         ///< will set the next menu kind
     /* +01 */ u8 hovered_selection; ///< will set the next hovered selection
-    /* +02 */ u8 load_assets; ///< checks if the assets need to be loaded or not
+    /* +02 */ u8
+        load_assets; ///< checks if the assets need to be loaded or not
     /* +03 */ s8 x3;
 };
 STATIC_ASSERT(sizeof(struct MenuEnterData) == 0x4);

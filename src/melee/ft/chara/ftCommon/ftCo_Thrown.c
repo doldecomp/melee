@@ -1,12 +1,9 @@
 #include "ftCo_Thrown.h"
-#include "ftCommon/ftCo_CaptureCut.h"
-#include "ftCommon/ftCo_Throw.h"
 
 #include "ft/fighter.h"
 
 #include "ft/forward.h"
 
-#include "ftCommon/ftCo_Attack100.h"
 #include "ft/ftcamera.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
@@ -16,7 +13,10 @@
 
 #include "ftCommon/forward.h"
 
+#include "ftCommon/ftCo_Attack100.h"
+#include "ftCommon/ftCo_CaptureCut.h"
 #include "ftCommon/ftCo_Damage.h"
+#include "ftCommon/ftCo_Throw.h"
 #include "lb/lb_00B0.h"
 
 #include <baselib/gobj.h>

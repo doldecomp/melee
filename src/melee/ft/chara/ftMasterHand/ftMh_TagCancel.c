@@ -1,18 +1,18 @@
 #include "ftMh_TagCancel.h"
-#include "ftCommon/ftCo_CaptureCut.h"
-#include "ftCommon/ftCo_Throw.h"
 
 #include <platform.h>
 
 #include "ft/fighter.h"
-#include "ftCommon/ftCo_Attack100.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/types.h"
 
 #include "ftCommon/forward.h"
 
+#include "ftCommon/ftCo_Attack100.h"
+#include "ftCommon/ftCo_CaptureCut.h"
 #include "ftCommon/ftCo_Lift.h"
+#include "ftCommon/ftCo_Throw.h"
 
 void ftMh_MS_388_80155A58(HSD_GObj* gobj_1, HSD_GObj* gobj_2)
 {

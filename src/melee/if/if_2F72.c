@@ -1,7 +1,6 @@
 #include "if_2F72.h"
 
 #include "if/ifall.h"
-
 #include "lb/lb_00B0.h"
 #include "lb/lbarchive.h"
 
@@ -19,9 +18,9 @@ void if_802F7E24(void)
 
 void if_802F7E7C(void)
 {
-    HSD_GObj** data = (HSD_GObj**)lbl_804A1340;
+    HSD_GObj** data = (HSD_GObj**) lbl_804A1340;
     s32 i = 0;
-    HSD_GObj** base = (HSD_GObj**)lbl_804A1340;
+    HSD_GObj** base = (HSD_GObj**) lbl_804A1340;
 
     do {
         if (data[1] != NULL) {

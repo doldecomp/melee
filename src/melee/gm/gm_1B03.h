@@ -21,7 +21,7 @@ struct gm_8049E548_t {
     /* 0x0A */ s8 unk_A;
     /* 0x0B */ char pad_B[1];
     /* 0x0C */ u16 unk_C; ///< InternalStageId
-    /* 0x0E */ s8 unk_E; /* inferred */
+    /* 0x0E */ s8 unk_E;  /* inferred */
     /* 0x0F */ char pad_F[1];
 }; /* size = 0x10 */
 STATIC_ASSERT(sizeof(struct gm_8049E548_t) == 0x10);

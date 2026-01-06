@@ -40,7 +40,8 @@
 /* 1FBAA0 */ void grInishie1_801FBAA0(HSD_GObj*, s32);
 /* 1FBC4C */ void grInishie1_801FBC4C(HSD_GObj*, u32);
 /* 1FBCEC */ void grInishie1_801FBCEC(HSD_GObj*, u32);
-/* 1FBEB8 */ void fn_801FBEB8(Ground*, s32, CollData*, s32, enum mpLib_GroundEnum, f32);
+/* 1FBEB8 */ void fn_801FBEB8(Ground*, s32, CollData*, s32,
+                              enum mpLib_GroundEnum, f32);
 /* 1FBF6C */ void fn_801FBF6C(Item_GObj*, Ground*, Point3d*, HSD_GObj*, f32);
 /* 1FC018 */ void grInishie1_801FC018(HSD_GObj*);
 /* 1FC110 */ void grInishie1_801FC110(HSD_GObj*);

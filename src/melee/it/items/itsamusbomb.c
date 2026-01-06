@@ -3,11 +3,11 @@
 #include <placeholder.h>
 #include <platform.h>
 
+#include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
-#include "it/inlines.h"
 
 /// #it_802B4AC8
 

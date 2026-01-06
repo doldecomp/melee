@@ -33,14 +33,14 @@ typedef struct {
     s32 x4;
     float x8;
     s32 xC;
-    u8 x10_b7 : 1;  // bit 7 (MSB)
+    u8 x10_b7 : 1; // bit 7 (MSB)
     u8 x10_b6 : 1;
     u8 x10_b5 : 1;
     u8 x10_b4 : 1;
     u8 x10_b3 : 1;
     u8 x10_b2 : 1;
     u8 x10_b1 : 1;
-    u8 x10_b0 : 1;  // bit 0 (LSB)
+    u8 x10_b0 : 1; // bit 0 (LSB)
     u8 x11_b7 : 1;
     u8 x11_b6 : 1;
     u8 x11_b5 : 1;
@@ -53,7 +53,7 @@ typedef struct {
 
 void ft_80089768(Vec2* ptr)
 {
-    UnkStruct89768* s = (UnkStruct89768*)ptr;
+    UnkStruct89768* s = (UnkStruct89768*) ptr;
     s->x0 = 0;
     s->x4 = 0;
     s->x8 = 1.0f;
@@ -121,13 +121,13 @@ s32 ft_80089914(HSD_GObj* gobj, int msid)
     }
 
     if (fp->kind == FTKIND_FOX) {
-        if ((u32)(msid - ftCo_MS_AttackS3LwS) <= 2) {
+        if ((u32) (msid - ftCo_MS_AttackS3LwS) <= 2) {
             return false;
         }
     }
 
     if (fp->kind == FTKIND_FALCO) {
-        if ((u32)(msid - ftCo_MS_AttackS3LwS) <= 2) {
+        if ((u32) (msid - ftCo_MS_AttackS3LwS) <= 2) {
             return false;
         }
     }

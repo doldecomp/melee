@@ -2,10 +2,11 @@
 
 #include <placeholder.h>
 #include <platform.h>
-#include "ft/forward.h"
-#include "lb/forward.h"
 
 #include "ft/fighter.h"
+
+#include "ft/forward.h"
+
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
 #include "ft/ft_0881.h"
@@ -21,6 +22,9 @@
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_09F7.h"
+
+#include "lb/forward.h"
+
 #include "lb/inlines.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbcommand.h"
@@ -246,8 +250,7 @@ void ftAction_80071028(Fighter_GObj* gobj, CommandInfo* cmd)
                 bone = cmd->u->spawn_gfx_0.boneId;
             }
             use_common_bone_id = cmd->u->spawn_gfx_0.useCommonBoneIDs;
-            destroy_on_state_change =
-                cmd->u->spawn_gfx_0.destroyOnStateChange;
+            destroy_on_state_change = cmd->u->spawn_gfx_0.destroyOnStateChange;
 
             NEXT_CMD(cmd);
             gfx_id = cmd->u->spawn_gfx_1.gfxID;
@@ -270,8 +273,7 @@ void ftAction_80071028(Fighter_GObj* gobj, CommandInfo* cmd)
 
             NEXT_CMD(cmd);
             ftCo_8009F834(gobj, gfx_id, bone, use_common_bone_id,
-                            destroy_on_state_change, &offset, &range,
-                            unk);
+                          destroy_on_state_change, &offset, &range, unk);
         } else {
             ftAction_800711DC(gobj, cmd);
         }
@@ -297,13 +299,15 @@ void ftAction_8007121C(Fighter_GObj* gobj, CommandInfo* cmd)
     fp = GET_FIGHTER(gobj);
     /// @todo this matches but isnt pretty. maybe an inline/macro as
     // we dont have enough stack in general?
-    skip = (struct spawn_hitbox_skip*)cmd->u;
+    skip = (struct spawn_hitbox_skip*) cmd->u;
     if ((skip->xF_b4) && (fp->x1064_thrownHitbox.owner == NULL)) {
         ftAction_800715EC(gobj, cmd);
-    }else {
+    } else {
         hitbox = &fp->x914[cmd->u->create_hitbox_0.id];
         hit_group = cmd->u->create_hitbox_0.hit_group;
-        if ((hitbox->state == HitCapsule_Disabled) || (hitbox->x4 != hit_group)) {
+        if ((hitbox->state == HitCapsule_Disabled) ||
+            (hitbox->x4 != hit_group))
+        {
             hitbox->x4 = hit_group;
             hitbox->state = HitCapsule_Enabled;
             fp->x2219_b3 = 1;
@@ -311,7 +315,9 @@ void ftAction_8007121C(Fighter_GObj* gobj, CommandInfo* cmd)
         }
         idx = cmd->u->create_hitbox_0.bone;
         if (cmd->u->create_hitbox_0.use_common_bone_ids) {
-            hitbox->jobj = fp->parts[ftParts_GetBoneIndex(fp, cmd->u->create_hitbox_0.bone)].joint;
+            hitbox->jobj = fp->parts[ftParts_GetBoneIndex(
+                                         fp, cmd->u->create_hitbox_0.bone)]
+                               .joint;
         } else {
             hitbox->jobj = fp->parts[idx].joint;
         }
@@ -581,37 +587,74 @@ void ftAction_80071B50(Fighter_GObj* gobj, CommandInfo* cmd)
     NEXT_CMD(cmd);
 
     switch (behavior) {
-        case 0: case 1: case 2: case 3: case 4: case 5: case 6:
-            sfx = cmd->u->sound_effect_1.sfx_id;
-            NEXT_CMD(cmd);
-            vol = cmd->u->sound_effect_2.volume;
-            pan = cmd->u->sound_effect_2.panning;
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+    case 6:
+        sfx = cmd->u->sound_effect_1.sfx_id;
+        NEXT_CMD(cmd);
+        vol = cmd->u->sound_effect_2.volume;
+        pan = cmd->u->sound_effect_2.panning;
 
         switch (behavior) {
-            case 0: ft_PlaySFX(fp, sfx, vol, pan); break;
-            case 1: ft_80088478(fp, sfx, vol, pan); break;
-            case 2: ft_800881D8(fp, sfx, vol, pan); break;
-            case 3: ft_80088510(fp, sfx, vol, pan); break;
-            case 4: ft_800885A8(fp, sfx, vol, pan); break;
-            case 5: ft_80088640(fp, sfx, vol, pan); break;
-            case 6: ft_80088328(fp, sfx, vol, pan); break;
+        case 0:
+            ft_PlaySFX(fp, sfx, vol, pan);
+            break;
+        case 1:
+            ft_80088478(fp, sfx, vol, pan);
+            break;
+        case 2:
+            ft_800881D8(fp, sfx, vol, pan);
+            break;
+        case 3:
+            ft_80088510(fp, sfx, vol, pan);
+            break;
+        case 4:
+            ft_800885A8(fp, sfx, vol, pan);
+            break;
+        case 5:
+            ft_80088640(fp, sfx, vol, pan);
+            break;
+        case 6:
+            ft_80088328(fp, sfx, vol, pan);
+            break;
         }
         break;
 
-        case 10: case 11: case 12: case 13: case 14: case 15:
-            NEXT_CMD(cmd);
-            switch (behavior) {
-                case 10: ft_80088828(fp); break;
-                case 11: ft_80088770(fp); break;
-                case 12: ft_80088884(fp); break;
-                case 13: ft_800888E0(fp); break;
-                case 14: ft_8008893C(fp); break;
-                case 15: ft_800887CC(fp); break;
-            }
+    case 10:
+    case 11:
+    case 12:
+    case 13:
+    case 14:
+    case 15:
+        NEXT_CMD(cmd);
+        switch (behavior) {
+        case 10:
+            ft_80088828(fp);
             break;
+        case 11:
+            ft_80088770(fp);
+            break;
+        case 12:
+            ft_80088884(fp);
+            break;
+        case 13:
+            ft_800888E0(fp);
+            break;
+        case 14:
+            ft_8008893C(fp);
+            break;
+        case 15:
+            ft_800887CC(fp);
+            break;
+        }
+        break;
 
-        default:
-            break;
+    default:
+        break;
     }
 
     NEXT_CMD(cmd);
@@ -642,7 +685,8 @@ void ftAction_80071D30(Fighter_GObj* gobj, CommandInfo* cmd)
 
 void ftAction_80071D40(Fighter_GObj* gobj, CommandInfo* cmd)
 {
-    ftParts_80074B0C(gobj, cmd->u->set_dobj_flags.idx, cmd->u->set_dobj_flags.value);
+    ftParts_80074B0C(gobj, cmd->u->set_dobj_flags.idx,
+                     cmd->u->set_dobj_flags.value);
     NEXT_CMD(cmd);
 }
 
@@ -719,60 +763,60 @@ void ftAction_80071FC8(Fighter_GObj* gobj, CommandInfo* cmd)
     behavior = cmd->u->pseudo_random_sfx_0.behavior;
     rand = HSD_Randi(cmd->u->pseudo_random_sfx_0.random_range);
     switch (rand) {
-        case 0:
-            sfx_id = cmd->u->pseudo_random_sfx_1.sfx_id;
-            SKIP_CMD(cmd, 5);
-            break;
-        case 1:
-            NEXT_CMD(cmd);
-            sfx_id = cmd->u->pseudo_random_sfx_1.sfx_id;
-            SKIP_CMD(cmd, 4);
-            break;
-        case 2:
-            SKIP_CMD(cmd, 2);
-            sfx_id = cmd->u->pseudo_random_sfx_1.sfx_id;
-            SKIP_CMD(cmd, 3);
-            break;
-        case 3:
-            SKIP_CMD(cmd, 3);
-            sfx_id = cmd->u->pseudo_random_sfx_1.sfx_id;
-            SKIP_CMD(cmd, 2);
-            break;
-        case 4:
-            SKIP_CMD(cmd, 4);
-            sfx_id = cmd->u->pseudo_random_sfx_1.sfx_id;
-            NEXT_CMD(cmd);
-            break;
-        case 5:
-            SKIP_CMD(cmd, 5);
-            sfx_id = cmd->u->pseudo_random_sfx_1.sfx_id;
-            break;
+    case 0:
+        sfx_id = cmd->u->pseudo_random_sfx_1.sfx_id;
+        SKIP_CMD(cmd, 5);
+        break;
+    case 1:
+        NEXT_CMD(cmd);
+        sfx_id = cmd->u->pseudo_random_sfx_1.sfx_id;
+        SKIP_CMD(cmd, 4);
+        break;
+    case 2:
+        SKIP_CMD(cmd, 2);
+        sfx_id = cmd->u->pseudo_random_sfx_1.sfx_id;
+        SKIP_CMD(cmd, 3);
+        break;
+    case 3:
+        SKIP_CMD(cmd, 3);
+        sfx_id = cmd->u->pseudo_random_sfx_1.sfx_id;
+        SKIP_CMD(cmd, 2);
+        break;
+    case 4:
+        SKIP_CMD(cmd, 4);
+        sfx_id = cmd->u->pseudo_random_sfx_1.sfx_id;
+        NEXT_CMD(cmd);
+        break;
+    case 5:
+        SKIP_CMD(cmd, 5);
+        sfx_id = cmd->u->pseudo_random_sfx_1.sfx_id;
+        break;
     }
     NEXT_CMD(cmd);
     switch (behavior) {
-        case 0:
-            ft_PlaySFX(fp, sfx_id, volume, panning);
-            return;
-        case 1:
-            ft_80088478(fp, sfx_id, volume, panning);
-            return;
-        case 2:
-            ft_800881D8(fp, sfx_id, volume, panning);
-            return;
-        case 3:
-            ft_80088510(fp, sfx_id, volume, panning);
-            return;
-        case 4:
-            ft_800885A8(fp, sfx_id, volume, panning);
-            return;
-        case 5:
-            ft_80088640(fp, sfx_id, volume, panning);
-            return;
-        case 6:
-            ft_80088328(fp, sfx_id, volume, panning);
-        default:
-            return;
-        }
+    case 0:
+        ft_PlaySFX(fp, sfx_id, volume, panning);
+        return;
+    case 1:
+        ft_80088478(fp, sfx_id, volume, panning);
+        return;
+    case 2:
+        ft_800881D8(fp, sfx_id, volume, panning);
+        return;
+    case 3:
+        ft_80088510(fp, sfx_id, volume, panning);
+        return;
+    case 4:
+        ft_800885A8(fp, sfx_id, volume, panning);
+        return;
+    case 5:
+        ft_80088640(fp, sfx_id, volume, panning);
+        return;
+    case 6:
+        ft_80088328(fp, sfx_id, volume, panning);
+    default:
+        return;
+    }
 }
 
 void ftAction_800722C8(Fighter_GObj* gobj, CommandInfo* cmd)
@@ -801,18 +845,18 @@ void ftAction_80072320(Fighter_GObj* gobj, CommandInfo* cmd)
     behavior = cmd->u->stage_sfx_0.x2_b0_7;
 
     switch (pitch_select) {
-        case 0:
-            direction = 0.0f;
-            break;
-        case 1:
-            direction = 1.0f;
-            break;
-        case 2:
-            direction = -1.0f;
-            break;
-        case 3:
-            direction = fp->facing_dir;
-            break;
+    case 0:
+        direction = 0.0f;
+        break;
+    case 1:
+        direction = 1.0f;
+        break;
+    case 2:
+        direction = -1.0f;
+        break;
+    case 3:
+        direction = fp->facing_dir;
+        break;
     }
 
     NEXT_CMD(cmd);
@@ -825,67 +869,89 @@ void ftAction_80072320(Fighter_GObj* gobj, CommandInfo* cmd)
     NEXT_CMD(cmd);
 
     switch (sfx_base) {
-        case 0:
-            sp8 = 0;
+    case 0:
+        sp8 = 0;
+        spC = -1;
+        fp->x2160 = lbAudioAx_800264E4(
+            lbAudioAx_800263E8(direction, gobj, behavior, sfx, 127, 127,
+                               temp_r8, temp_r9, temp_r10, sp8, spC));
+        break;
+
+    case 1:
+        sp8 = fp->player_id + 0x36 + fp->x221F_b4;
+        spC = -1;
+        fp->x214C = lbAudioAx_800264E4(
+            lbAudioAx_800263E8(direction, gobj, behavior, sfx, 127, 127,
+                               temp_r8, temp_r9, temp_r10, sp8, spC));
+        break;
+
+    case 2:
+        if (!fp->x2225_b0) {
+            sp8 = fp->player_id + 0x1E + fp->x221F_b4;
             spC = -1;
-            fp->x2160 = lbAudioAx_800264E4(lbAudioAx_800263E8(direction, gobj, behavior, sfx, 127, 127, temp_r8, temp_r9, temp_r10, sp8, spC));
+            fp->x2144 = lbAudioAx_800264E4(
+                lbAudioAx_800263E8(direction, gobj, behavior, sfx, 127, 127,
+                                   temp_r8, temp_r9, temp_r10, sp8, spC));
             break;
-
-        case 1:
-            sp8 = fp->player_id + 0x36 + fp->x221F_b4;
+        }
+        /// @todo cant get the b instruction to generate here and in case 6
+        ft_kind = fp->kind;
+        if (ft_kind == FTKIND_GAMEWATCH ||
+            (ft_kind < FTKIND_GAMEWATCH && (ft_kind != FTKIND_SAMUS)))
+        {
+            sp8 = fp->player_id + 0x1E + fp->x221F_b4;
             spC = -1;
-            fp->x214C = lbAudioAx_800264E4(lbAudioAx_800263E8(direction, gobj, behavior, sfx, 127, 127, temp_r8, temp_r9, temp_r10, sp8, spC));
-            break;
+            fp->x2144 = lbAudioAx_800264E4(
+                lbAudioAx_800263E8(direction, gobj, behavior, sfx, 127, 127,
+                                   temp_r8, temp_r9, temp_r10, sp8, spC));
+        }
+        break;
 
-        case 2:
-            if (!fp->x2225_b0) {
-                sp8 = fp->player_id + 0x1E + fp->x221F_b4;
-                spC = -1;
-                fp->x2144 = lbAudioAx_800264E4(lbAudioAx_800263E8(direction, gobj, behavior, sfx, 127, 127, temp_r8, temp_r9, temp_r10, sp8, spC));
-                break;
-            }
-            /// @todo cant get the b instruction to generate here and in case 6
-            ft_kind = fp->kind;
-            if (ft_kind == FTKIND_GAMEWATCH || (ft_kind < FTKIND_GAMEWATCH && (ft_kind != FTKIND_SAMUS))) {
-                sp8 = fp->player_id + 0x1E + fp->x221F_b4;
-                spC = -1;
-                fp->x2144 = lbAudioAx_800264E4(lbAudioAx_800263E8(direction, gobj, behavior, sfx, 127, 127, temp_r8, temp_r9, temp_r10, sp8, spC));
-            }
-            break;
+    case 3:
+        sp8 = fp->player_id + 0x42 + fp->x221F_b4;
+        spC = -1;
+        fp->x2150 = lbAudioAx_800264E4(
+            lbAudioAx_800263E8(direction, gobj, behavior, sfx, 127, 127,
+                               temp_r8, temp_r9, temp_r10, sp8, spC));
+        break;
 
-        case 3:
-            sp8 = fp->player_id + 0x42 + fp->x221F_b4;
+    case 4:
+        sp8 = fp->player_id + 0x4E + fp->x221F_b4;
+        spC = -1;
+        fp->x2154 = lbAudioAx_800264E4(
+            lbAudioAx_800263E8(direction, gobj, behavior, sfx, 127, 127,
+                               temp_r8, temp_r9, temp_r10, sp8, spC));
+        break;
+
+    case 5:
+        sp8 = fp->player_id + 0x5A + fp->x221F_b4;
+        spC = -1;
+        fp->x2158 = lbAudioAx_800264E4(
+            lbAudioAx_800263E8(direction, gobj, behavior, sfx, 127, 127,
+                               temp_r8, temp_r9, temp_r10, sp8, spC));
+        break;
+
+    case 6:
+        if (!fp->x2225_b0) {
+            sp8 = fp->player_id + 0x2A + fp->x221F_b4;
             spC = -1;
-            fp->x2150 = lbAudioAx_800264E4(lbAudioAx_800263E8(direction, gobj, behavior, sfx, 127, 127, temp_r8, temp_r9, temp_r10, sp8, spC));
+            fp->x2148 = lbAudioAx_800264E4(
+                lbAudioAx_800263E8(direction, gobj, behavior, sfx, 127, 127,
+                                   temp_r8, temp_r9, temp_r10, sp8, spC));
             break;
+        }
 
-        case 4:
-            sp8 = fp->player_id + 0x4E + fp->x221F_b4;
+        ft_kind = fp->kind;
+        if (ft_kind == FTKIND_GAMEWATCH ||
+            (ft_kind < FTKIND_GAMEWATCH && (ft_kind != FTKIND_SAMUS)))
+        {
+            sp8 = fp->player_id + 0x2A + fp->x221F_b4;
             spC = -1;
-            fp->x2154 = lbAudioAx_800264E4(lbAudioAx_800263E8(direction, gobj, behavior, sfx, 127, 127, temp_r8, temp_r9, temp_r10, sp8, spC));
-            break;
-
-        case 5:
-            sp8 = fp->player_id + 0x5A + fp->x221F_b4;
-            spC = -1;
-            fp->x2158 = lbAudioAx_800264E4(lbAudioAx_800263E8(direction, gobj, behavior, sfx, 127, 127, temp_r8, temp_r9, temp_r10, sp8, spC));
-            break;
-
-        case 6:
-            if (!fp->x2225_b0) {
-                sp8 = fp->player_id + 0x2A + fp->x221F_b4;
-                spC = -1;
-                fp->x2148 = lbAudioAx_800264E4(lbAudioAx_800263E8(direction, gobj, behavior, sfx, 127, 127, temp_r8, temp_r9, temp_r10, sp8, spC));
-                break;
-            }
-
-            ft_kind = fp->kind;
-            if (ft_kind == FTKIND_GAMEWATCH || (ft_kind < FTKIND_GAMEWATCH && (ft_kind != FTKIND_SAMUS))) {
-                sp8 = fp->player_id + 0x2A + fp->x221F_b4;
-                spC = -1;
-                fp->x2148 = lbAudioAx_800264E4(lbAudioAx_800263E8(direction, gobj, behavior, sfx, 127, 127, temp_r8, temp_r9, temp_r10, sp8, spC));
-            }
-            break;
+            fp->x2148 = lbAudioAx_800264E4(
+                lbAudioAx_800263E8(direction, gobj, behavior, sfx, 127, 127,
+                                   temp_r8, temp_r9, temp_r10, sp8, spC));
+        }
+        break;
     }
 }
 
@@ -896,9 +962,11 @@ void ftAction_800726C0(Fighter_GObj* gobj, CommandInfo* cmd)
 
 void ftAction_800726F4(Fighter_GObj* gobj, CommandInfo* cmd)
 {
-    ftAnim_800704F0(gobj, cmd->u->set_tex_anim.idx, cmd->u->set_tex_anim.frame);
+    ftAnim_800704F0(gobj, cmd->u->set_tex_anim.idx,
+                    cmd->u->set_tex_anim.frame);
     if (cmd->u->set_tex_anim.b) {
-        ftAnim_800704F0(gobj, cmd->u->set_tex_anim.idx2, cmd->u->set_tex_anim.frame);
+        ftAnim_800704F0(gobj, cmd->u->set_tex_anim.idx2,
+                        cmd->u->set_tex_anim.frame);
     }
     NEXT_CMD(cmd);
 }
@@ -1053,7 +1121,6 @@ void ftAction_80072CB0(Fighter_GObj* gobj, CommandInfo* cmd)
     NEXT_CMD(cmd);
 }
 
-
 void ftAction_80072CD8(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     /// @todo too much stack
@@ -1077,10 +1144,10 @@ void ftAction_80072CD8(Fighter_GObj* gobj, CommandInfo* cmd)
     if (ft_80084BFC(gobj, &sp64, &sp60, &gfx_id) != false) {
         /// @todo not sure how to actually handle this...
         if (sp64 != -1) {
-            _cmd.u = (union CmdUnion*)&sp2C;
-            sp2C.x0 = *(u32*)cmd->u;
+            _cmd.u = (union CmdUnion*) &sp2C;
+            sp2C.x0 = *(u32*) cmd->u;
             sp2C.x4 = sp64;
-            sp2C.x8 = *(u32*)((u8*)cmd->u + 8);
+            sp2C.x8 = *(u32*) ((u8*) cmd->u + 8);
             ftAction_80071B50(gobj, &_cmd);
         }
 
@@ -1140,13 +1207,15 @@ void ftAction_80072E4C(Fighter_GObj* gobj, CommandInfo* cmd)
     sp60 = 1;
     gfx_id = -1;
     temp_r29 = cmd->u->unk_fx_0.x1_b0_7;
-    if ((ft_80084C38(gobj, &sp64, &sp60, &gfx_id) != false) && (temp_r29 == 0) && (sp64 != -1)) {
-        _cmd.u = (union CmdUnion*)&sp2C;
-        sp2C.x0 = *(u32*)cmd->u;
+    if ((ft_80084C38(gobj, &sp64, &sp60, &gfx_id) != false) &&
+        (temp_r29 == 0) && (sp64 != -1))
+    {
+        _cmd.u = (union CmdUnion*) &sp2C;
+        sp2C.x0 = *(u32*) cmd->u;
         sp2C.x4 = sp64;
-        sp2C.x8 = *(u32*)((u8*)cmd->u + 8);
+        sp2C.x8 = *(u32*) ((u8*) cmd->u + 8);
         ftAction_80071B50(gobj, &_cmd);
-        }
+    }
 
     if (gfx_id == -1) {
         gfx_id = cmd->u->unk_fx_0.x2_b0_7;
@@ -1170,7 +1239,6 @@ void ftAction_80072E4C(Fighter_GObj* gobj, CommandInfo* cmd)
     ftCommon_8007EBAC(fp, 0x16U, 0U);
 }
 
-
 void ftAction_80072FE0(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     SKIP_CMD(cmd, 3);
@@ -1190,7 +1258,8 @@ void ftAction_80073008(Fighter_GObj* gobj, CommandInfo* cmd)
     NEXT_CMD(cmd);
     color_anim = cmd->u->smash_charge_1.color_anim;
     NEXT_CMD(cmd);
-    ftCo_800DEE84(gobj, color_anim, charge_rate, (1.0f / 256.0f) * charge_frames);
+    ftCo_800DEE84(gobj, color_anim, charge_rate,
+                  (1.0f / 256.0f) * charge_frames);
 }
 
 void ftAction_8007309C(Fighter_GObj* gobj, CommandInfo* cmd)

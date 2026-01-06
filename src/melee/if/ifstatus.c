@@ -9,9 +9,9 @@
 #include "if/if_2F72.h"
 #include "if/ifstock.h"
 #include "if/types.h"
-#include "sc/types.h"
 #include "lb/lbarchive.h"
 #include "pl/player.h"
+#include "sc/types.h"
 
 #include <baselib/gobj.h>
 #include <baselib/gobjplink.h>
@@ -578,7 +578,8 @@ void ifStatus_802F7134(void)
     }
 
     archive = ifAll_802F3690();
-    lbArchive_LoadSections(*archive, (void**) &models, "ScInfCnt_scene_models", 0);
+    lbArchive_LoadSections(*archive, (void**) &models, "ScInfCnt_scene_models",
+                           0);
 
     for (i = 0; i < 8; i++) {
         ifStatus_803F9628[i].x14 = models[i];

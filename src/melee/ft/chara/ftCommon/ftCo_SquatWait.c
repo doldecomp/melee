@@ -8,7 +8,6 @@
 #include "ft/forward.h"
 
 #include "ft/ft_081B.h"
-#include "ftCommon/ftCo_Attack100.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/ftdata.h"
@@ -21,6 +20,7 @@
 
 #include "ftCommon/ftCo_AppealS.h"
 #include "ftCommon/ftCo_Attack1.h"
+#include "ftCommon/ftCo_Attack100.h"
 #include "ftCommon/ftCo_AttackHi3.h"
 #include "ftCommon/ftCo_AttackHi4.h"
 #include "ftCommon/ftCo_AttackLw3.h"

@@ -2,9 +2,10 @@
 #define GALE01_23749C
 
 #include <placeholder.h>
-#include <stdbool.h>
 
 #include <baselib/forward.h>
+
+#include <stdbool.h>
 
 /* 23749C */ UNK_RET mnName_8023749C(UNK_PARAMS);
 /* 23754C */ char* GetNameText(int slot);

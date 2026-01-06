@@ -71,10 +71,10 @@ void ftDk_SpecialAirS_Phys(HSD_GObj* gobj)
     ftDonkeyAttributes* donkey_attr = getFtSpecialAttrs(fp);
     if (fp->cmd_vars[0]) {
         ftCommon_Fall(fp, donkey_attr->SpecialS.x44_AERIAL_GRAVITY,
-                          ca->terminal_vel);
+                      ca->terminal_vel);
     }
-    ftCommon_ApplyFrictionAir(fp,
-                      donkey_attr->SpecialS.x40_MOMENTUM_TRANSITION_MODIFIER);
+    ftCommon_ApplyFrictionAir(
+        fp, donkey_attr->SpecialS.x40_MOMENTUM_TRANSITION_MODIFIER);
     if (fp->cmd_vars[0] != 0) {
         /// @todo Fix control flow.
     }

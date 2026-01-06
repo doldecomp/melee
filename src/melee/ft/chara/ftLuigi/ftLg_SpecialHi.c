@@ -9,11 +9,11 @@
 
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
-#include "ftCommon/ftCo_Attack100.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
+#include "ftCommon/ftCo_Attack100.h"
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftCommon/ftCo_Landing.h"
 
@@ -224,7 +224,7 @@ void ftLg_SpecialAirHi_Phys(HSD_GObj* gobj)
         return;
     }
     ftCommon_Fall(fp, luigiAttrs->x68_LUIGI_SUPERJUMP_GRAVITY_START,
-                      ca->terminal_vel);
+                  ca->terminal_vel);
     ftCommon_8007CF58(fp);
 }
 

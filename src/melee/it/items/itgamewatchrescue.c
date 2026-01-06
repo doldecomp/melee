@@ -2,12 +2,13 @@
 
 #include <placeholder.h>
 #include <platform.h>
+
 #include "baselib/forward.h"
 
-#include <melee/it/inlines.h>
-#include <melee/it/item.h>
 #include <melee/ft/chara/ftGameWatch/ftGw_SpecialHi.h>
+#include <melee/it/inlines.h>
 #include <melee/it/it_26B1.h>
+#include <melee/it/item.h>
 
 /// #it_802C8038
 
@@ -17,7 +18,9 @@ void it_802C8158(Item_GObj* item_gobj)
     HSD_GObj* temp_r3;
 
     if ((item_gobj != NULL) && (item != NULL)) {
-        if ((temp_r3 = (HSD_GObj*) item->xDD4_itemVar.bombhei.xDD8) != NULL && item->owner == temp_r3) {
+        if ((temp_r3 = (HSD_GObj*) item->xDD4_itemVar.bombhei.xDD8) != NULL &&
+            item->owner == temp_r3)
+        {
             ftGw_SpecialHi_ItemRescueSetNULL(temp_r3);
         }
         item->xDD4_itemVar.bombhei.xDD8 = NULL;
@@ -47,7 +50,8 @@ bool itGamewatchrescue_UnkMotion1_Anim(Item_GObj* item_gobj)
 {
     Item* item1;
     Item* item2;
-    // All of these items are unused, but the stack needs padding for a match so...
+    // All of these items are unused, but the stack needs padding for a match
+    // so...
     Item* item3;
     Item* item4;
     Item* item5;
@@ -64,8 +68,12 @@ bool itGamewatchrescue_UnkMotion1_Anim(Item_GObj* item_gobj)
         if (ftGw_SpecialHi_ItemCheckRescueRemove(temp_r3) == true) {
             item2 = GET_ITEM(item_gobj);
             if (item_gobj != NULL && item2 != NULL) {
-                if ((temp_r3_2 = (HSD_GObj*) item2->xDD4_itemVar.bombhei.xDD8) != NULL && item2->owner == temp_r3_2) {
-                    ftGw_SpecialHi_ItemRescueSetNULL((HSD_GObj* ) temp_r3_2);
+                if ((temp_r3_2 =
+                         (HSD_GObj*) item2->xDD4_itemVar.bombhei.xDD8) !=
+                        NULL &&
+                    item2->owner == temp_r3_2)
+                {
+                    ftGw_SpecialHi_ItemRescueSetNULL((HSD_GObj*) temp_r3_2);
                 }
                 item2->xDD4_itemVar.bombhei.xDD8 = NULL;
                 item2->owner = NULL;
@@ -81,7 +89,7 @@ bool itGamewatchrescue_UnkMotion1_Anim(Item_GObj* item_gobj)
         goto end;
     }
     if (item_gobj != NULL && item1 != NULL) {
-        if (temp_r3 != NULL &&  item1->owner == temp_r3) {
+        if (temp_r3 != NULL && item1->owner == temp_r3) {
             ftGw_SpecialHi_ItemRescueSetNULL(temp_r3);
         }
         item1->xDD4_itemVar.bombhei.xDD8 = NULL;
@@ -94,7 +102,7 @@ bool itGamewatchrescue_UnkMotion1_Anim(Item_GObj* item_gobj)
         temp_r3_4->owner = NULL;
     }
     return true;
-    end:
+end:
     return false;
 }
 

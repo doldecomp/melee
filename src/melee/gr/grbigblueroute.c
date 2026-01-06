@@ -1,13 +1,11 @@
 #include "grbigblueroute.h"
 
-#include "gr/inlines.h"
-
 #include <platform.h>
 
-#include "ft/ftlib.h"
-#include "cm/camera.h"
-
 #include "baselib/memory.h"
+#include "cm/camera.h"
+#include "ft/ftlib.h"
+#include "gr/inlines.h"
 
 /// #grBigBlueRoute_8020B864
 

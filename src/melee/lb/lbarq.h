@@ -1,9 +1,10 @@
 #ifndef GALE01_014ABC
 #define GALE01_014ABC
 
-#include <dolphin/ar.h>
 #include <placeholder.h>
 #include <platform.h>
+
+#include <dolphin/ar.h>
 
 typedef void (*lbArqCallback)(void* arg);
 

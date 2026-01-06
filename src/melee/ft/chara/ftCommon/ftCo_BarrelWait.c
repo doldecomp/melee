@@ -9,13 +9,13 @@
 #include <platform.h>
 
 #include "ft/fighter.h"
-#include "ftCommon/ftCo_Attack100.h"
 #include "ft/ftanim.h"
 #include "ft/ftcamera.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/ftdynamics.h"
 #include "ft/types.h"
+#include "ftCommon/ftCo_Attack100.h"
 #include "ftCommon/inlines.h"
 #include "gr/ground.h"
 

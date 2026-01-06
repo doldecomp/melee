@@ -2,6 +2,7 @@
 #define MELEE_MN_SOUNDTEST_H
 
 #include <placeholder.h>
+
 #include <baselib/controller.h>
 #include <baselib/sislib.h>
 extern HSD_PadStatus HSD_PadCopyStatus[4];

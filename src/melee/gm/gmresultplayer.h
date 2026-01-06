@@ -2,6 +2,7 @@
 #define MELEE_GM_RESULTPLAYER_H
 
 #include <placeholder.h>
+
 #include "baselib/forward.h"
 #include <melee/ft/forward.h>
 

@@ -2,13 +2,14 @@
 
 #include "lb/lb_00B0.h"
 
-#include <baselib/cobj.h>
 #include <baselib/forward.h>
+
+#include <string.h>
+#include <baselib/cobj.h>
 #include <baselib/displayfunc.h>
 #include <baselib/fog.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/video.h>
-#include <string.h>
 
 typedef struct {
     u8 pad[0x28];

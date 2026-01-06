@@ -12,7 +12,6 @@
 
 #include "ft/ft_0877.h"
 #include "ft/ft_0892.h"
-#include "ftCommon/ftCo_Attack100.h"
 #include "ft/ftanim.h"
 #include "ft/ftcoll.h"
 #include "ft/ftparts.h"
@@ -20,6 +19,7 @@
 
 #include "ftCommon/forward.h"
 
+#include "ftCommon/ftCo_Attack100.h"
 #include "ftCommon/ftCo_Escape.h"
 #include "ftCommon/ftCo_Guard.h"
 #include "ftCommon/ftCo_ItemThrow.h"
@@ -133,7 +133,8 @@ static void ftYs_Init_8012BECC_sub(HSD_GObj* gobj)
 void ftYs_Init_8012BECC(Fighter_GObj* gobj)
 {
     PAD_STACK(8);
-    Fighter_ChangeMotionState(gobj, ftYs_MS_GuardOn_0, 0, 0.0f, 1.0f, 0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, ftYs_MS_GuardOn_0, 0, 0.0f, 1.0f, 0.0f,
+                              NULL);
     ftAnim_8006EBA4(gobj);
     ftCo_80092450(gobj);
     ftYs_Init_8012BECC_sub(gobj);
@@ -321,8 +322,7 @@ void ftYs_Shield_8012C600(Fighter_GObj* gobj, bool arg1)
 
     Fighter* fp = GET_FIGHTER(gobj);
 
-    Fighter_ChangeMotionState(gobj, 0x158, 0U, 0.0F,
-                              1.0F, 0.0F, NULL);
+    Fighter_ChangeMotionState(gobj, 0x158, 0U, 0.0F, 1.0F, 0.0F, NULL);
     fp->hitlag_cb = (void (*)(HSD_GObj*)) ftCo_80093240;
     fp->x670_timer_lstick_tilt_x = 0xFE;
     fp->post_hitlag_cb = (void (*)(HSD_GObj*)) ftCo_800932DC;
@@ -330,7 +330,9 @@ void ftYs_Shield_8012C600(Fighter_GObj* gobj, bool arg1)
         ftParts_80074B0C(gobj, 0, 1);
     }
     inlineA0(gobj);
-    temp = (p_ftCommonData->x28C * (fp->x19A4 * (1.0F - fp->lightshield_amount))) + p_ftCommonData->x290;
+    temp = (p_ftCommonData->x28C *
+            (fp->x19A4 * (1.0F - fp->lightshield_amount))) +
+           p_ftCommonData->x290;
     if (arg1 == false) {
         fp->gr_vel = temp * p_ftCommonData->x294;
         if (fp->specialn_facing_dir < 0.0F) {
@@ -409,7 +411,8 @@ static inline void ftYs_Shield_8012C914_inline(Fighter_GObj* gobj)
 void ftYs_Shield_8012C914(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    Fighter_ChangeMotionState(gobj, ftYs_MS_GuardOn_1, 0, 0.0F, 1.0F, 0.0F, NULL);
+    Fighter_ChangeMotionState(gobj, ftYs_MS_GuardOn_1, 0, 0.0F, 1.0F, 0.0F,
+                              NULL);
     ftAnim_8006EBA4(gobj);
     fp->x672_input_timer_counter = 254;
     fp->x221C_b3 = true;

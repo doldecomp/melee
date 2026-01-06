@@ -7,8 +7,8 @@
 #include "grmaterial.h"
 #include "ground.h"
 #include "grzakogenerator.h"
-#include "stage.h"
 #include "inlines.h"
+#include "stage.h"
 #include "types.h"
 
 #include "lb/lb_00B0.h"
@@ -195,7 +195,8 @@ bool grCorneria_801DFBC4(Ground_GObj* arg)
     return false;
 }
 
-void grCorneria_801DFBCC(Ground_GObj* arg) {
+void grCorneria_801DFBCC(Ground_GObj* arg)
+{
     grCorneria_801DED50(arg);
 }
 
@@ -248,7 +249,7 @@ void grCorneria_801DFEB8(Ground_GObj* gobj)
     struct grCorneria_GroundVars* cn = &gp->gv.corneria;
 
     cn->xC6_flags.b0 = 0;
-    grAnime_801C8138((HSD_GObj*)gobj, gp->map_id, 0);
+    grAnime_801C8138((HSD_GObj*) gobj, gp->map_id, 0);
     cn->xC4_flags.b0 = 0;
     cn->xC4_flags.b1 = 0;
     gp->x11_flags.b012 = 1;
