@@ -816,31 +816,31 @@ HSD_Joint* ftAnim_8006F994(Fighter* fp, HSD_JObj* arg1, HSD_Joint* arg2)
     }
 }
 
-void ftAnim_8006FA58(Fighter* fp, int arg1, HSD_Joint* arg2)
+void ftAnim_8006FA58(Fighter* fp, Fighter_Part part, HSD_Joint* joint)
 {
-    int i = arg1;
-    s32 sp14 = 0;
+    int i = part;
+    s32 depth = 0;
 
-    while (arg2 != NULL) {
+    while (joint != NULL) {
         while (ftParts_8007506C(fp->kind, i) != 0) {
             i++;
         }
         if (i == fp->ft_data->x8->x10) {
             if (fp->parts[i].flags_b0) {
-                lb_8000B760(fp->parts[i].joint, arg2);
+                lb_8000B760(fp->parts[i].joint, joint);
             } else if (!fp->parts[i].flags_b5) {
-                lb_8000B5DC(fp->parts[i].joint, arg2);
+                lb_8000B5DC(fp->parts[i].joint, joint);
             }
             ftCommon_8007F6A4(fp, fp->parts[i].joint);
         } else {
             if (fp->parts[i].flags_b0) {
-                lb_8000B6A4(fp->parts[i].joint, arg2);
+                lb_8000B6A4(fp->parts[i].joint, joint);
             } else if (!fp->parts[i].flags_b5) {
-                lb_8000B4FC(fp->parts[i].joint, arg2);
+                lb_8000B4FC(fp->parts[i].joint, joint);
             }
         }
         i++;
-        ftAnim_GetNextJointInTree(&arg2, &sp14);
+        ftAnim_GetNextJointInTree(&joint, &depth);
     }
 }
 

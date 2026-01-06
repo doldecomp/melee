@@ -32,7 +32,7 @@
 /* 06F954 */ void ftAnim_8006F954(Fighter*, Fighter_Part, bool,
                                   FigaTree* unused);
 /* 06F994 */ HSD_Joint* ftAnim_8006F994(Fighter*, HSD_JObj*, HSD_Joint*);
-/* 06FA58 */ void ftAnim_8006FA58(Fighter*, bool, HSD_Joint*);
+/* 06FA58 */ void ftAnim_8006FA58(Fighter*, Fighter_Part, HSD_Joint*);
 /* 06FB88 */ void ftAnim_8006FB88(Fighter*, bool, HSD_Joint*);
 /* 06FCE4 */ void ftAnim_8006FCE4(Fighter*, bool);
 /* 06FE08 */ void ftAnim_8006FE08(Fighter*, bool);
