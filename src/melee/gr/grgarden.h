@@ -51,9 +51,9 @@ typedef struct GardenParams {
 /* 203248 */ bool grGarden_80203248(Ground_GObj*);
 /* 203250 */ void grGarden_80203250(Ground_GObj*);
 /* 203494 */ void grGarden_80203494(Ground_GObj*);
-/* 203498 */ UNK_RET fn_80203498(UNK_PARAMS);
-/* 20349C */ bool fn_8020349C(u32 unk,HSD_GObj* player,Vec3* water);
-/* 203560 */ void grGarden_80203560(float param1,Vec3* vec);
+/* 203498 */ void fn_80203498(Item_GObj* item_gobj, Ground* gp);
+/* 20349C */ bool fn_8020349C(u32 unk, HSD_GObj* player, Vec3* water);
+/* 203560 */ void grGarden_80203560(float param1, Vec3* vec);
 /* 2035C8 */ DynamicsDesc* grGarden_802035C8(enum_t);
 /* 2035D0 */ bool grGarden_802035D0(Vec3*, int arg, HSD_JObj* jobj);
 /* 203624 */ float grGarden_80203624(void);

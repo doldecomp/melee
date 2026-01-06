@@ -349,15 +349,15 @@ struct grGreatBay_GroundVars {
     f32 x1C;
 };
 
-struct grGarden_GroundVars { //Cranky Kong
+struct grGarden_GroundVars { // Cranky Kong
     s32 xc4;
     s32 xc8;
 };
 
-struct grGarden_GroundVars2 { //Klaptrap
-    //HSD_GObj* xc4;
-    u32 xc4;
-    s8  xc8;
+struct grGarden_GroundVars2 { // Klaptrap
+    // HSD_GObj* xc4;
+    Item_GObj* xc4;
+    s8 xc8;
     s32 xcc;
 };
 
