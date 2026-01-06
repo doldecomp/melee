@@ -354,57 +354,44 @@ void Effect_RemoveUserData(void* effect)
 #pragma dont_inline on
 void efLib_8005BBB4(u32 arg1, f32 arg8)
 {
-    HSD_GObj* gobj_3;
-    HSD_GObj* gobj_4;
-    HSD_GObj* gobj_1;
-    HSD_GObj* gobj_2;
-    f32 var_f1;
-    u32 var_r4;
-    // void* temp_ret;
-    // void* temp_ret_2;
+    HSD_GObj* gobj;
+    HSD_GObj* next;
+    u32 unused1;
+    f32 unused2;
 
-    var_r4 = arg1;
-    var_f1 = arg8;
-    gobj_1 = HSD_GObj_Entities->x2C;
-#if 1
-    while (gobj_1 != NULL) {
-        gobj_4 = gobj_1->next;
-        // temp_ret_2 = efLib_8005B780();
-        efLib_8005B780(gobj_1);
-        // var_f1 = (bitwise f32) temp_ret_2;
-        // var_r4 = (u32) (u64) temp_ret_2;
-        if (efLib_804D64EC >= 0x40U) {
-            gobj_1 = gobj_4;
+    unused1 = arg1;
+    unused2 = arg8;
+
+    gobj = HSD_GObj_Entities->x2C;
+    while (gobj != NULL) {
+        next = gobj->next;
+        efLib_8005B780(gobj);
+        if (efLib_804D64EC < 0x40U) {
+            return;
         }
+        gobj = next;
     }
-    gobj_2 = HSD_GObj_Entities->x30;
-    while (gobj_2 != NULL) {
-        //     OSReport("can't remove no force effect!\n\0\0error no parent
-        //     gobj!\n\0\0Over Anime Call\n", var_r4, var_f1);
-        //     __assert("eflib.c", 0x4DU, "0");
-        // } else {
-        gobj_3 = gobj_2->next;
-        // temp_ret = efLib_8005B780(gobj_2); // which gobj?
-        efLib_8005B780(gobj_2);
-        // var_f1 = (bitwise f32) temp_ret;
-        // var_r4 = (u32) (u64) temp_ret;
-        if (efLib_804D64EC >= 0x40U) {
-            gobj_2 = gobj_3;
+
+    gobj = HSD_GObj_Entities->x30;
+    while (gobj != NULL) {
+        next = gobj->next;
+        efLib_8005B780(gobj);
+        if (efLib_804D64EC < 0x40U) {
+            return;
         }
+        gobj = next;
     }
-    // if (gobj_2 != NULL) {
+
     OSReport("can't remove no force effect!\n\0\0error no parent "
-             "gobj!\n\0\0Over Anime Call\n",
-             var_r4, var_f1);
+             "gobj!\n\0\0Over Anime Call\n");
     __assert("eflib.c", 0x4DU, "0");
-    // }
 
-#else
+#if 0
 loop_3:
-    if (gobj_1 == NULL) {
-        gobj_2 = HSD_GObj_Entities->x30;
+    if (gobj == NULL) {
+        gobj = HSD_GObj_Entities->x30;
     loop_7:
-        if (gobj_2 == NULL) {
+        if (gobj == NULL) {
             OSReport("can't remove no force effect!\n\0\0error no parent "
                      "gobj!\n\0\0Over Anime Call\n",
                      var_r4, var_f1);
@@ -624,15 +611,12 @@ Effect* efLib_8005C1B4(u32 arg0, HSD_GObj* arg_gobj, HSD_JObj* arg_jobj)
 {
     Vec3 sp1C;
     Effect* eff_1;
-    HSD_GObj* gobj_1;
     HSD_JObj* jobj_1;
 
     eff_1 = efLib_8005BE88(arg0, arg_gobj);
     if (eff_1 != NULL) {
-        gobj_1 = eff_1->gobj;
-        jobj_1 = GET_JOBJ(gobj_1);
-        if (jobj_1 == NULL) {
-            HSD_GObjPLink_80390228(gobj_1);
+        if ((jobj_1 = GET_JOBJ(eff_1->gobj)) == NULL) {
+            HSD_GObjPLink_80390228(eff_1->gobj);
             return NULL;
         }
         lb_8000C1C0(jobj_1, arg_jobj);
@@ -1021,7 +1005,7 @@ inline void efLib_8005D174_inline1(HSD_Generator* generator_1)
 // by trying to mimic original inlining Likely need to be remade to match how
 // inlines were actually written For more work/alternatives for this function
 // that may be helpful, see https://decomp.me/scratch/VjlDJ
-void efLib_8005D174(s8 arg0, s32 arg1, HSD_JObj* arg_jobj, s32 arg3)
+void efLib_8005D174(int arg0, s32 arg1, HSD_JObj* arg_jobj, s32 arg3)
 {
     // HSD_JObj* jobj_2;
     // HSD_JObj* jobj_3;
@@ -1223,7 +1207,6 @@ void fn_8005DB20(s32 arg0, s32 arg1, s32 arg2, HSD_JObj* arg3)
     efLib_8005D174(arg1, arg2, arg3, 0);
 }
 
-// void fn_8005DB70(s32 arg0, s32 lo, s32 hi, HSD_JObj* jobj)
 void fn_8005DB70(int arg0, int lo, int hi, HSD_JObj* jobj)
 {
     if (lo == 0x1E) {
@@ -1578,15 +1561,15 @@ void efLib_8005F270(Effect* arg_effect)
 
 void efLib_8005F454(Effect* arg_effect)
 {
-    HSD_JObj* jobj_2;
-    HSD_JObj* jobj_1;
     f32 rotate_z;
+    HSD_JObj* jobj_1;
+    HSD_JObj* jobj_2;
     Fighter* fighter;
 
     fighter = GET_FIGHTER(arg_effect->parent_gobj);
     jobj_1 = GET_JOBJ(arg_effect->gobj);
     jobj_2 = GET_JOBJ(arg_effect->x0->x4);
-    if (fighter->motion_id == 359) { // Special state 18
+    if (fighter->motion_id == 359) {
         HSD_JObjClearFlagsAll(jobj_2, 0x10U);
     } else {
         HSD_JObjSetFlagsAll(jobj_2, 0x10U);
