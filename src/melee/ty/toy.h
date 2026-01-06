@@ -33,8 +33,8 @@
                                        s32 val1, s32 val2);
 /* 306BB8 */ void un_80306BB8(HSD_GObj* gobj);
 /* 306C5C */ UNK_RET un_80306C5C(UNK_PARAMS);
-/* 306CF4 */ void Toy_RemoveUserData(void* ptr);
-/* 306D14 */ void un_80306D14(void);
+/* 306CF4 */ void Toy_RemoveUserData(void*);
+/* 306D14 */ UNK_RET un_80306D14(UNK_PARAMS);
 /* 306D70 */ UNK_RET un_80306D70(UNK_PARAMS);
 /* 306EEC */ UNK_RET un_80306EEC(UNK_PARAMS);
 /* 307018 */ UNK_RET un_80307018(UNK_PARAMS);
@@ -65,7 +65,7 @@
 /* 30FA50 */ UNK_RET un_8030FA50(UNK_PARAMS);
 /* 30FE48 */ UNK_RET un_8030FE48(UNK_PARAMS);
 /* 3102C4 */ void un_803102C4(s8 arg0);
-/* 3102D0 */ void un_803102D0(void);
+/* 3102D0 */ UNK_RET un_803102D0(UNK_PARAMS);
 /* 310324 */ UNK_RET un_80310324(UNK_PARAMS);
 /* 310660 */ UNK_RET un_80310660(UNK_PARAMS);
 /* 3109A0 */ UNK_RET un_803109A0(UNK_PARAMS);
