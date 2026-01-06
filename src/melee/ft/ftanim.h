@@ -7,8 +7,8 @@
 #include <melee/it/forward.h>
 #include <melee/lb/forward.h>
 
-/* 06DBF4 */ void ftAnim_8006DBF4(HSD_AnimJoint**, int*);
-/* 06DCF4 */ void ftAnim_8006DCF4(HSD_MatAnimJoint**, int*);
+/* 06DBF4 */ void ftAnim_GetNextAnimJointInTree(HSD_AnimJoint**, int*);
+/* 06DCF4 */ void ftAnim_GetNextMatAnimJointInTree(HSD_MatAnimJoint**, int*);
 /* 06DE00 */ void ftAnim_GetNextJointInTree(HSD_Joint**, s32* pdepth);
 /* 06DF0C */ void ftAnim_8006DF0C(Fighter*);
 /* 06E054 */ void ftAnim_8006E054(Fighter*, HSD_JObj*, HSD_JObj*, HSD_JObj*);

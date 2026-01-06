@@ -24,11 +24,11 @@ static HSD_AnimJoint* ftAnim_804590D8[30];
 static HSD_MatAnimJoint* ftAnim_804590D8_unk[30];
 static HSD_Joint* ftAnim_804590D8_F0[30];
 
-void ftAnim_8006DBF4(HSD_AnimJoint** panimjoint, int* arg1)
+void ftAnim_GetNextAnimJointInTree(HSD_AnimJoint** panimjoint, int* pdepth)
 {
     HSD_AnimJoint* temp_r28 = *panimjoint;
     HSD_AnimJoint* var_r0;
-    int i = *arg1;
+    int i = *pdepth;
 
     if (temp_r28->child != NULL) {
         ftAnim_804590D8[i++] = temp_r28;
@@ -54,10 +54,10 @@ void ftAnim_8006DBF4(HSD_AnimJoint** panimjoint, int* arg1)
         }
     }
     *panimjoint = var_r0;
-    *arg1 = i;
+    *pdepth = i;
 }
 
-void ftAnim_8006DCF4(HSD_MatAnimJoint** pjoint, int* pdepth)
+void ftAnim_GetNextMatAnimJointInTree(HSD_MatAnimJoint** pjoint, int* pdepth)
 {
     HSD_MatAnimJoint* temp_r28;
     HSD_MatAnimJoint* var_r0;
@@ -1197,7 +1197,7 @@ void ftAnim_80070904(Fighter* fp, int start_idx, HSD_AnimJoint* animjoint)
             fp->parts[i].flags_b5 = true;
         }
         i++;
-        ftAnim_8006DBF4(&animjoint, &sp14);
+        ftAnim_GetNextAnimJointInTree(&animjoint, &sp14);
     }
 }
 
@@ -1328,7 +1328,7 @@ void ftAnim_80070CC4(Fighter_GObj* gobj, int arg1)
         }
 
         i += 1;
-        ftAnim_8006DBF4(&animjoint, &sp24);
+        ftAnim_GetNextAnimJointInTree(&animjoint, &sp24);
     }
 
     r30->x11 = -1;
