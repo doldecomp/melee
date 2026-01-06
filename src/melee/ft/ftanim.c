@@ -326,69 +326,69 @@ void ftAnim_8006E7B8(Fighter* fp, Fighter_Part part)
     HSD_AObjInvokeCallBacks();
 }
 
-void ftAnim_8006E9B4(Fighter_GObj* fighter_gobj)
+void ftAnim_8006E9B4(Fighter_GObj* gobj)
 {
     Fighter* fp;
-    HSD_JObj* temp_r27;
-    HSD_JObj* temp_r27_2;
-    f32 temp_f1;
-    f32 temp_f1_2;
-    f32 temp_f2_2;
-    f32 var_f31;
-    f32 var_f30;
+    HSD_JObj* jobj;      // r27
+    HSD_JObj* anim_jobj; // r27
+    float framerate;     // f1
+    float blend_t_inv;   // f31
+    float blend_t;       // f30
 
-    fp = GET_FIGHTER(fighter_gobj);
+    fp = GET_FIGHTER(gobj);
 
-    if (fp->anim_id != -1) {
-        temp_r27 = fighter_gobj->hsd_obj;
-        if (fp->x8A4_animBlendFrames == 0.0F) {
-            HSD_JObjClearFlagsAll(temp_r27, 0x20000);
-            if (fp->x594_b0) {
-                ftAnim_8006E054(
-                    fp, temp_r27,
-                    fp->parts[ftParts_GetBoneIndex(fp, FtPart_TransN)].joint,
-                    fp->parts[ftParts_GetBoneIndex(fp, 0x35)].joint);
-            } else {
-                ftAnim_8006E7B8(fp, 0);
-            }
-        } else {
-            temp_r27_2 = fp->x8AC_animSkeleton;
-            temp_f1 = lbGetJObjFramerate(temp_r27_2);
-            fp->x8A8_unk += temp_f1;
-            if (fp->x8A4_animBlendFrames <= fp->x8A8_unk) {
-                fp->x8A8_unk = fp->x8A4_animBlendFrames;
-                var_f30 = 1.0F;
-                var_f31 = 0.0F;
-            } else {
-                temp_f1_2 =
-                    temp_f1 /
-                    (temp_f1 + (fp->x8A4_animBlendFrames - fp->x8A8_unk));
-                var_f30 = temp_f1_2;
-                var_f31 = 1.0F - temp_f1_2;
-            }
-            ftAnim_8006E7B8(fp, 0);
-            if (fp->x594_b0) {
-                ftAnim_8006E054(
-                    fp, temp_r27_2,
-                    fp->parts[ftParts_GetBoneIndex(fp, FtPart_TransN)]
-                        .x4_jobj2,
-                    fp->parts[ftParts_GetBoneIndex(fp, 0x35)].joint);
-            } else {
-                HSD_JObjAnimAll(temp_r27_2);
-            }
-            if (var_f31) {
-                ftAnim_8006FE9C(fp, 1, var_f30, var_f31);
-            } else {
-                ftAnim_8006FF74(fp, 1);
-            }
-        }
-        if (fp->x594_b2) {
-            if (ftAnim_8006F3DC(fighter_gobj) < fp->cur_anim_frame) {
-                fp->x898_unk += fp->cur_anim_frame + fp->frame_speed_mul;
-            }
-        }
-        fp->cur_anim_frame = ftAnim_8006F3DC(fighter_gobj);
+    if (fp->anim_id == -1) {
+        return;
     }
+
+    jobj = GET_JOBJ(gobj);
+    if (fp->x8A4_animBlendFrames == 0.0F) {
+        HSD_JObjClearFlagsAll(jobj, JOBJ_USE_QUATERNION);
+        if (fp->x594_b0) {
+            ftAnim_8006E054(
+                fp, jobj,
+                fp->parts[ftParts_GetBoneIndex(fp, FtPart_TransN)].joint,
+                fp->parts[ftParts_GetBoneIndex(fp, 0x35)].joint);
+        } else {
+            ftAnim_8006E7B8(fp, FtPart_TopN);
+        }
+    } else {
+        anim_jobj = fp->x8AC_animSkeleton;
+        framerate = lbGetJObjFramerate(anim_jobj);
+        fp->x8A8_anim_frame += framerate;
+        if (fp->x8A4_animBlendFrames <= fp->x8A8_anim_frame) {
+            fp->x8A8_anim_frame = fp->x8A4_animBlendFrames;
+            blend_t = 1.0F;
+            blend_t_inv = 0.0F;
+        } else {
+            float remaining; // f2
+            remaining = fp->x8A4_animBlendFrames - fp->x8A8_anim_frame;
+            blend_t = framerate / (framerate + remaining);
+            blend_t_inv = 1.0F - blend_t;
+        }
+        ftAnim_8006E7B8(fp, FtPart_TopN);
+        if (fp->x594_b0) {
+            ftAnim_8006E054(
+                fp, anim_jobj,
+                fp->parts[ftParts_GetBoneIndex(fp, FtPart_TransN)].x4_jobj2,
+                fp->parts[ftParts_GetBoneIndex(fp, 0x35)].joint);
+        } else {
+            HSD_JObjAnimAll(anim_jobj);
+        }
+        if (blend_t_inv) {
+            ftAnim_8006FE9C(fp, FtPart_TransN, blend_t, blend_t_inv);
+        } else {
+            ftAnim_8006FF74(fp, FtPart_TransN);
+        }
+    }
+
+    if (fp->x594_b2) {
+        if (ftAnim_8006F3DC(gobj) < fp->cur_anim_frame) {
+            fp->x898_unk += fp->cur_anim_frame + fp->frame_speed_mul;
+        }
+    }
+
+    fp->cur_anim_frame = ftAnim_8006F3DC(gobj);
 }
 
 // Process animation?
