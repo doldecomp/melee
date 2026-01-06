@@ -26,7 +26,7 @@
 /* 06F368 */ bool ftAnim_8006F368(Fighter*, Fighter_Part);
 /* 06F3DC */ float ftAnim_8006F3DC(Fighter_GObj*);
 /* 06F484 */ float ftAnim_8006F484(Fighter_GObj*);
-/* 06F4C8 */ void ftAnim_8006F4C8(Fighter*, int, FigaTree*);
+/* 06F4C8 */ void ftAnim_8006F4C8(Fighter*, bool, FigaTree*);
 /* 06F628 */ void ftAnim_8006F628(Fighter*, Fighter_Part, bool);
 /* 06F7C8 */ void ftAnim_8006F7C8(Fighter*, Fighter_Part, int, FigaTree*);
 /* 06F954 */ void ftAnim_8006F954(Fighter*, Fighter_Part, bool,
