@@ -38,7 +38,8 @@
 /* 1E5140 */ UNK_RET grOnett_801E5140(UNK_PARAMS);
 /* 1E5194 */ UNK_RET grOnett_801E5194(UNK_PARAMS);
 /* 1E5214 */ UNK_RET grOnett_801E5214(UNK_PARAMS);
-/* 1E54B4 */ void grOnett_801E54B4(Ground* gp, int arg1, CollData* cd, int arg3, int arg4);
+/* 1E54B4 */ void grOnett_801E54B4(Ground* gp, int arg1, CollData* cd,
+                                   int arg3, int arg4);
 /* 1E5538 */ UNK_RET grOnett_801E5538(UNK_PARAMS);
 /* 1E56FC */ void* grOnett_801E56FC(void);
 /* 1E5760 */ DynamicsDesc* grOnett_801E5760(enum_t);

@@ -358,7 +358,8 @@ static u8 hsd_804CF8E8[0x1000];
 void hsd_80397DA4(OSContext* arg0)
 {
     OSThread sp10;
-    OSCreateThread(&sp10, fn_80397814, arg0, hsd_804CF8E8 + 0xFFC, sizeof(hsd_804CF8E8), 0, 1);
+    OSCreateThread(&sp10, fn_80397814, arg0, hsd_804CF8E8 + 0xFFC,
+                   sizeof(hsd_804CF8E8), 0, 1);
     OSResumeThread(&sp10);
 }
 
@@ -372,7 +373,8 @@ void hsd_80397DFC(u32 arg0)
     hsd_804D78CC = (arg0 + 0xF) >> 4;
 }
 
-static s8 lbl_8040BF10[0x32] = "unsupported no. of special purpose register (%d).";
+static s8 lbl_8040BF10[0x32] =
+    "unsupported no. of special purpose register (%d).";
 
 int baselib_mfspr(int spr)
 {
@@ -500,7 +502,8 @@ int baselib_mfspr(int spr)
         asm { mfspr result, gqr7 }
         break;
     case 0x398:
-        asm { mfspr result, SPR_HID2 } ///< hid2 gives incorrect codegen? compiler bug?
+        asm { mfspr result, SPR_HID2
+        } ///< hid2 gives incorrect codegen? compiler bug?
         break;
     case 0x399:
         asm { mfspr result, wpar }

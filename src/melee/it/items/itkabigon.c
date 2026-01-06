@@ -3,9 +3,9 @@
 #include <placeholder.h>
 #include <platform.h>
 
+#include "cm/camera.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
-#include "cm/camera.h"
 
 /// #it_802C9D40
 

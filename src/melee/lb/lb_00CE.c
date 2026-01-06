@@ -89,10 +89,11 @@ s32 powi(s32 base, s32 exponent)
     if (exponent > 0) {
         exp_minus_8 = exponent - 8;
         if (exponent > 8) {
-            exp_minus_8 = (u32)(exp_minus_8 + 7) >> 3U;
+            exp_minus_8 = (u32) (exp_minus_8 + 7) >> 3U;
             if (exp_minus_8 > 0) {
                 do {
-                    result = result * base * base * base * base * base * base * base * base;
+                    result = result * base * base * base * base * base * base *
+                             base * base;
                     powers_done += 8;
                     exp_minus_8--;
                 } while (exp_minus_8 != 0);

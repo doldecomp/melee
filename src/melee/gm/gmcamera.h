@@ -71,11 +71,11 @@ union _gmCameraUnkUnion {
 };
 
 typedef struct _gmCameraUnkFuncTable {
-    /*0x00*/ struct{
-                 u8 x0;
-                 u8 x1;
-                 u16 x2;
-             } flags;
+    /*0x00*/ struct {
+        u8 x0;
+        u8 x1;
+        u16 x2;
+    } flags;
     /*0x04*/ void (*x4)(void);
     /*0x08*/ void (*x8)(void);
 } gmCameraUnkFuncTable;

@@ -22,12 +22,12 @@
 #include "ftCommon/forward.h"
 
 #include "ftCommon/ftCo_CaptureDamageKoopa.h"
+#include "ftCommon/ftCo_CaptureKoopa.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftCommon/ftCo_Throw.h"
 #include "ftCommon/ftCo_Thrown.h"
 #include "ftCommon/ftCo_ThrownKoopa.h"
-#include "ftCommon/ftCo_CaptureKoopa.h"
 
 #include "ftKoopa/forward.h"
 
@@ -68,8 +68,7 @@ void ftKp_SpecialS_Enter(HSD_GObj* gobj)
         fp->mv.kp.unk1.xC = 0;
     }
 
-    Fighter_ChangeMotionState(gobj, 347, 0, 0.0F,
-                              1.0F, 0.0F, 0);
+    Fighter_ChangeMotionState(gobj, 347, 0, 0.0F, 1.0F, 0.0F, 0);
 
     ftAnim_8006EBA4(gobj);
 
@@ -94,8 +93,7 @@ void ftKp_SpecialAirS_Enter(HSD_GObj* gobj)
         fp->mv.kp.unk1.xC = 0;
     }
 
-    Fighter_ChangeMotionState(gobj, 353, 0, 0.0F,
-                              1.0F, 0.0F, 0);
+    Fighter_ChangeMotionState(gobj, 353, 0, 0.0F, 1.0F, 0.0F, 0);
 
     ftAnim_8006EBA4(gobj);
 
@@ -116,12 +114,10 @@ void ftKp_SpecialS_8013302C(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if ((signed) fp->mv.kp.unk1.x4 != 0) {
-        Fighter_ChangeMotionState(gobj, 349, transition_flags0,
-                                  0.0F, 1.0F,
+        Fighter_ChangeMotionState(gobj, 349, transition_flags0, 0.0F, 1.0F,
                                   0.0F, 0);
     } else {
-        Fighter_ChangeMotionState(gobj, 348, 0, 0.0F,
-                                  1.0F, 0.0F, 0);
+        Fighter_ChangeMotionState(gobj, 348, 0, 0.0F, 1.0F, 0.0F, 0);
     }
 
     fp->x2222_b2 = true;
@@ -137,12 +133,10 @@ void ftKp_SpecialS_801330E4(HSD_GObj* gobj)
 
     fp = gobj->user_data;
     if ((signed) fp->mv.kp.unk1.x4 != 0) {
-        Fighter_ChangeMotionState(gobj, 355, transition_flags0,
-                                  0.0F, 1.0F,
+        Fighter_ChangeMotionState(gobj, 355, transition_flags0, 0.0F, 1.0F,
                                   0.0F, 0);
     } else {
-        Fighter_ChangeMotionState(gobj, 354, 0, 0.0F,
-                                  1.0F, 0.0F, 0);
+        Fighter_ChangeMotionState(gobj, 354, 0, 0.0F, 1.0F, 0.0F, 0);
     }
 
     fp->x2222_b2 = true;
@@ -183,8 +177,7 @@ void ftKp_SpecialS_8013322C(HSD_GObj* gobj)
     ftCommon_8007D7FC(fp1);
 
     Fighter_ChangeMotionState(gobj, 347, transition_flags1,
-                              fp1->cur_anim_frame, 1.0F,
-                              0.0F, 0);
+                              fp1->cur_anim_frame, 1.0F, 0.0F, 0);
 
     {
         fp0 = GET_FIGHTER(gobj);
@@ -371,13 +364,11 @@ void ftKp_SpecialSHit_Anim(HSD_GObj* gobj)
                 fp0 = GET_FIGHTER(gobj);
 
                 if ((signed) fp0->mv.kp.unk1.x4 != false) {
-                    Fighter_ChangeMotionState(
-                        gobj, 349, transition_flags0, 0.0F,
-                        1.0F, 0.0F, 0);
+                    Fighter_ChangeMotionState(gobj, 349, transition_flags0,
+                                              0.0F, 1.0F, 0.0F, 0);
                 } else {
-                    Fighter_ChangeMotionState(
-                        gobj, 348, Ft_MF_None, 0.0F,
-                        1.0F, 0.0F, 0);
+                    Fighter_ChangeMotionState(gobj, 348, Ft_MF_None, 0.0F,
+                                              1.0F, 0.0F, 0);
                 }
 
                 fp0->x2222_b2 = true;
@@ -393,8 +384,7 @@ void ftKp_SpecialSHit_Anim(HSD_GObj* gobj)
             /// @todo Combine @c fp0 with other branch somehow
             fp0 = GET_FIGHTER(gobj);
             Fighter_ChangeMotionState(gobj, 350, transition_flags3,
-                                      fp0->cur_anim_frame, 1.0F,
-                                      0.0F, 0);
+                                      fp0->cur_anim_frame, 1.0F, 0.0F, 0);
 
             ftAnim_8006F0FC(gobj, 0.0F);
             fp0->mv.kp.unk1.x0 = 0;

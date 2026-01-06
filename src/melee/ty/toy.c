@@ -25,6 +25,10 @@
 
 static u8 un_804D6EA1;
 
+extern HSD_Archive* un_804D6ECC;
+extern void* un_804D6EA8;
+extern void* un_804D6EA4;
+
 /// #un_80305058
 
 /// #un_803053C4
@@ -160,8 +164,16 @@ void Toy_RemoveUserData(void* ptr)
     HSD_Free(ptr);
 }
 
-/// #un_80306D14
+void un_80306D14(void)
+{
+    TyModeState* state = (TyModeState*) un_804A284C;
 
+    if (state->x0 == 1) {
+        lbAudioAx_800237A8(0xAA, 0x7F, 0x40);
+    } else if (state->x0 == 2) {
+        lbAudioAx_800237A8(0xAB, 0x7F, 0x40);
+    }
+}
 /// #un_80306D70
 
 /// #un_80306EEC
@@ -221,8 +233,14 @@ void un_803102C4(s8 arg0)
     M2C_FIELD(un_804D6E6C, s8*, 4) = arg0;
 }
 
-/// #un_803102D0
-
+void un_803102D0(void)
+{
+    if (un_804D6ECC == NULL) {
+        un_804D6ECC = lbArchive_LoadSymbols(str_TyDataf_dat, &un_804D6EA8,
+                                            str_tyModelFileTbl, &un_804D6EA4,
+                                            str_tyModelFileUsTbl, NULL);
+    }
+}
 /// #un_80310324
 
 /// #un_80310660
@@ -243,8 +261,15 @@ void un_803102C4(s8 arg0)
 
 /// #un_80311F5C
 
-/// #un_80312018_OnFrame
+void un_80312018_OnFrame(void)
+{
+    TyModeState* state = (TyModeState*) un_804A284C;
 
+    if (state->x4 != 0) {
+        un_80311F5C();
+        gm_801A4B60();
+    }
+}
 /// #un_80312050
 
 void un_803122D0_OnInit(void)

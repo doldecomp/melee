@@ -114,8 +114,8 @@ void ftCo_TurnRun_Phys(Fighter_GObj* gobj)
         }
         fp->xE4_ground_accel_1 = accel;
     } else {
-        ftCommon_ApplyFrictionGround(fp, co_attrs->gr_friction *
-                                  p_ftCommonData->x60_someFrictionMul);
+        ftCommon_ApplyFrictionGround(
+            fp, co_attrs->gr_friction * p_ftCommonData->x60_someFrictionMul);
     }
     ftCommon_ApplyGroundMovement(gobj);
 }

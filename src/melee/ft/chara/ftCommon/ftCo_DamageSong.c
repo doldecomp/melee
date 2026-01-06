@@ -1,6 +1,4 @@
 #include "ftCo_DamageSong.h"
-#include "ftCommon/ftCo_CaptureCut.h"
-#include "ftCommon/ftCo_Throw.h"
 
 #include "ftCo_0C35.h"
 #include "ftCo_Lift.h"
@@ -10,10 +8,12 @@
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0892.h"
-#include "ftCommon/ftCo_Attack100.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
 #include "ft/types.h"
+#include "ftCommon/ftCo_Attack100.h"
+#include "ftCommon/ftCo_CaptureCut.h"
+#include "ftCommon/ftCo_Throw.h"
 #include "pl/player.h"
 
 /* 0C3390 */ static void ftCo_800C3390(Fighter_GObj* gobj);

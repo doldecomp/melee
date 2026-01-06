@@ -242,7 +242,7 @@ void ftLg_SpecialAirLw_Phys(HSD_GObj* gobj)
         (fp->input.x668 & HSD_PAD_B))
     {
         ftCommon_Ascend(fp, attrs0->x8C_LUIGI_CYCLONE_TAP_Y_VEL_MAX,
-                          attrs0->x90_LUIGI_CYCLONE_TAP_GRAVITY);
+                        attrs0->x90_LUIGI_CYCLONE_TAP_GRAVITY);
     }
 
     ftCommon_FallBasic(fp);

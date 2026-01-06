@@ -2,8 +2,8 @@
 
 #include "gm/gm_1A36.h"
 #include "gm/gm_1A45.h"
-#include "lb/lbaudio_ax.h"
 #include "lb/lb_00F9.h"
+#include "lb/lbaudio_ax.h"
 #include "lb/lbshadow.h"
 #include "vi/vi.h"
 

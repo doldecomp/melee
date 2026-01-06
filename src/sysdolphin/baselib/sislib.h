@@ -35,7 +35,8 @@ struct sislib_UnkAllocData {
 };
 
 /// @todo: this is the same as above, but just more generic...
-/// proper types will have to be sorted out later, as well as merging the two structs.
+/// proper types will have to be sorted out later, as well as merging the two
+/// structs.
 typedef struct sisLib_803A7664_t {
     void* x0;
     void* x4;
@@ -45,44 +46,45 @@ typedef struct sisLib_803A7664_t {
 
 struct HSD_Text {
     // these get passed to the text initializer HSD_SisLib_803A5ACC
-    f32 pos_x;          ///< world position x
-    f32 pos_y;          ///< world position y
-    f32 pos_z;          ///< world position z
-    f32 box_size_x;      ///< text box size x
-    f32 box_size_y;      ///< text box size y
+    f32 pos_x;      ///< world position x
+    f32 pos_y;      ///< world position y
+    f32 pos_z;      ///< world position z
+    f32 box_size_x; ///< text box size x
+    f32 box_size_y; ///< text box size y
     Vec4 x14;
-    Vec2 font_size;         ///< font size, 1.0 being 100% of the screen?
+    Vec2 font_size; ///< font size, 1.0 being 100% of the screen?
     GXColor bg_color;
     GXColor text_color;
     Vec2 x34;
     Vec2 x3C;
-    u16 x44;                ///< render flags?
-    u16 x46;                ///< more flags?
-    u8 default_fitting;     ///< sets fitting below
-    u8 default_kerning;     ///< sets kerning below
-    u8 default_alignment;   ///< sets alignment below
+    u16 x44;              ///< render flags?
+    u16 x46;              ///< more flags?
+    u8 default_fitting;   ///< sets fitting below
+    u8 default_kerning;   ///< sets kerning below
+    u8 default_alignment; ///< sets alignment below
     u8 x4B;
-    u8 x4C; // whether to test for Z depth?
-    u8 hidden;              ///< visibility flag
+    u8 x4C;    // whether to test for Z depth?
+    u8 hidden; ///< visibility flag
     u8 x4E;
-    u8 font_idx;            ///< which font to select from the array HSD_SisLib_804D1124
+    u8 font_idx; ///< which font to select from the array HSD_SisLib_804D1124
     HSD_Text* next;
     HSD_GObj* entity;
-    void (*render_callback)(void*); ///< callback in the text renderer (HSD_SisLib_803A84BC)
-    SIS* sis_buffer;        ///< SIS text buffer
-    UNK_T x60;              ///< position in text buffer
+    void (*render_callback)(
+        void*);      ///< callback in the text renderer (HSD_SisLib_803A84BC)
+    SIS* sis_buffer; ///< SIS text buffer
+    UNK_T x60;       ///< position in text buffer
     sislib_UnkAllocData* alloc_data;
-    char* string_buffer;    ///< raw string buffer
-    u16 x6C;                ///< string length?
-    u16 x6E;                ///< alloc size?
+    char* string_buffer; ///< raw string buffer
+    u16 x6C;             ///< string length?
+    u16 x6E;             ///< alloc size?
     f32 current_width;
     f32 current_height;
     Vec2 x78;
     Vec2 x80;
     f32 x88;
-    GXColor active_color;   ///< the texts current color
-    u16 x90;                ///< set by x44
-    u16 x92;                ///< set by x46
+    GXColor active_color; ///< the texts current color
+    u16 x90;              ///< set by x44
+    u16 x92;              ///< set by x46
     u32 x94;
     u32 x98;
     u8 fitting;

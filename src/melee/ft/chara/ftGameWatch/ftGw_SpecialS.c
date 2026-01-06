@@ -282,7 +282,7 @@ void ftGw_SpecialAirS_Phys(HSD_GObj* gobj)
             }
         }
         ftCommon_Fall(fp, gawAttrs->x2C_GAMEWATCH_JUDGE_FRICTION1,
-                          gawAttrs->x30_GAMEWATCH_JUDGE_FRICTION2);
+                      gawAttrs->x30_GAMEWATCH_JUDGE_FRICTION2);
     } else {
         ftCommon_FallBasic(fp);
     }

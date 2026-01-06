@@ -1147,17 +1147,18 @@ struct Fighter {
     /*  fp+2C4 */ Vec2 x2C4;
     /*  fp+2CC */ ftDonkeyAttributes* x2CC;
     /*  fp+2D0 */ struct Fighter_x2D0_t {
-        /// @warning i didnt confirm these comments, they come from altimors ghidra db
-        int x0;         ///< turn frames
-        float x4;       ///< turn threshold
-        float x8;       ///< x impulse
-        float xC;       ///< accel mult
-        float x10;      ///< speed mult
-        float x14[5];      ///< y impulse
-        int x28;        ///< state count
-        enum_t x2C;     ///< start state
-        enum_t x30;     ///< start state helmet
-    }* x2D0; ///< multi jump stats
+        /// @warning i didnt confirm these comments, they come from altimors
+        /// ghidra db
+        int x0;       ///< turn frames
+        float x4;     ///< turn threshold
+        float x8;     ///< x impulse
+        float xC;     ///< accel mult
+        float x10;    ///< speed mult
+        float x14[5]; ///< y impulse
+        int x28;      ///< state count
+        enum_t x2C;   ///< start state
+        enum_t x30;   ///< start state helmet
+    }* x2D0;          ///< multi jump stats
     /*  fp+2D4 */ void* dat_attrs;
     /*  fp+2D8 */ void* dat_attrs_backup;
     /*  fp+2DC */ float x2DC;
@@ -1407,7 +1408,7 @@ struct Fighter {
     /* fp+1970 */ enum_t unk_msid;
     /* fp+1974 */ Item_GObj* item_gobj;
     /* fp+1978 */ Item_GObj* x1978; // held item
-    /* fp+197C */ HSD_GObj* x197C; ///< bunny hood
+    /* fp+197C */ HSD_GObj* x197C;  ///< bunny hood
     /* fp+1980 */ HSD_GObj* x1980;
     /* fp+1984 */ Item_GObj* x1984_heldItemSpec;
     /* fp+1988 */ enum_t x1988;

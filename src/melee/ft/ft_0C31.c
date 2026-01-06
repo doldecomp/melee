@@ -6,16 +6,15 @@
 
 #include <placeholder.h>
 
+#include "ef/efasync.h"
 #include "ft/fighter.h"
 
 #include "ft/forward.h"
 
 #include "ft/ftanim.h"
+#include "ft/ftcolanim.h"
 #include "ft/ftcoll.h"
 #include "ft/types.h"
-#include "ft/ftcolanim.h"
-#include "ef/efasync.h"
-#include "lb/lbaudio_ax.h"
 
 #include "ftCommon/forward.h"
 
@@ -26,6 +25,7 @@
 #include "it/items/itgreatfoxlaser.h"
 #include "it/items/itleadead.h"
 #include "it/items/itlikelike.h"
+#include "lb/lbaudio_ax.h"
 #include "pl/player.h"
 
 #include <dolphin/mtx.h>
@@ -111,7 +111,8 @@ void ftCo_800C6408(Fighter_GObj* gobj)
 
     temp_r31 = GET_FIGHTER(gobj);
     temp_r31->mv.co.entry.timer = p_ftCommonData->x6BC;
-    Fighter_ChangeMotionState(gobj, ftCo_MS_EntryStart, 0, 0.0F, 1.0F, 0.0F, NULL);
+    Fighter_ChangeMotionState(gobj, ftCo_MS_EntryStart, 0, 0.0F, 1.0F, 0.0F,
+                              NULL);
     temp_r31->x2219_b1 = true;
     if (!temp_r31->x221F_b4) {
         ftCommon_SetAccessory(temp_r31, Fighter_804D6514);
@@ -134,7 +135,8 @@ void ftCo_800C6408(Fighter_GObj* gobj)
         temp_r31->mv.co.entry.x28 = temp_f0_2;
         temp_r31->mv.co.entry.x20 = temp_f0_2;
         temp_r29_3 = gobj->user_data;
-        sp20.x = -(temp_r29_3->facing_dir * ftCommon_800804EC(temp_r29_3) - temp_r29_3->cur_pos.x);
+        sp20.x = -(temp_r29_3->facing_dir * ftCommon_800804EC(temp_r29_3) -
+                   temp_r29_3->cur_pos.x);
         sp20.y = temp_r29_3->cur_pos.y;
         sp20.z = temp_r29_3->cur_pos.z;
 
@@ -143,7 +145,8 @@ void ftCo_800C6408(Fighter_GObj* gobj)
     temp_r31->accessory1_cb = fn_800C69F4;
 
     fp = GET_FIGHTER(gobj);
-    efAsync_Spawn(gobj, &fp->x60C, 3, 0x43E, gobj->hsd_obj, &temp_r31->mv.co.entry.x8);
+    efAsync_Spawn(gobj, &fp->x60C, 3, 0x43E, gobj->hsd_obj,
+                  &temp_r31->mv.co.entry.x8);
     lbAudioAx_80024304(0x8B);
     ftCo_800BFFD0(temp_r31, 0x75, 0);
 }
@@ -176,7 +179,8 @@ void ftCo_EntryStart_Phys(Fighter_GObj* gobj)
     temp_r6 = p_ftCommonData->x6BC;
     temp_f4 = p_ftCommonData->x6C4;
     temp_f31 = (f32) (temp_r6 - temp_r31->mv.co.entry.timer) / temp_r6;
-    temp_r31->mv.co.entry.x14.y = (temp_f31 * (temp_r31->mv.co.entry.x8.y - temp_f4)) + temp_f4;
+    temp_r31->mv.co.entry.x14.y =
+        (temp_f31 * (temp_r31->mv.co.entry.x8.y - temp_f4)) + temp_f4;
 
     HSD_JObjSetScale(gobj->hsd_obj, &temp_r31->mv.co.entry.x14);
 
@@ -187,7 +191,8 @@ void ftCo_EntryStart_Phys(Fighter_GObj* gobj)
         sp20.z = temp_f1;
         HSD_JObjSetScale(temp_r31->x20A0_accessory, &sp20);
         temp_r31->mv.co.entry.x28 = temp_r31->mv.co.entry.x20 * temp_f31;
-        temp_r31->cur_pos.y = temp_r31->mv.co.entry.x4 + temp_r31->mv.co.entry.x28;
+        temp_r31->cur_pos.y =
+            temp_r31->mv.co.entry.x4 + temp_r31->mv.co.entry.x28;
     } else {
         Fighter_GObj* gobj = Player_GetEntityAtIndex(temp_r31->player_id, 0);
         temp_r31->cur_pos.y = GET_FIGHTER(gobj)->cur_pos.y;
@@ -257,14 +262,16 @@ void fn_800C69F4(Fighter_GObj* gobj)
             }
         }
         temp_r31_2 = GET_FIGHTER(gobj);
-        sp20.x = -(temp_r31_2->facing_dir * ftCommon_800804EC(temp_r31_2) - temp_r31_2->cur_pos.x);
+        sp20.x = -(temp_r31_2->facing_dir * ftCommon_800804EC(temp_r31_2) -
+                   temp_r31_2->cur_pos.x);
         sp20.y = temp_r31_2->cur_pos.y;
         sp20.z = temp_r31_2->cur_pos.z;
         fake_HSD_JObjSetTranslate(temp_r31_2->x20A0_accessory, &sp20);
     } else {
         HSD_GObj* gobj = Player_GetEntityAtIndex(temp_r31->player_id, 0);
         Fighter* fp2 = GET_FIGHTER(gobj);
-        temp_r31->cur_pos.y = fp2->cur_pos.y;;
+        temp_r31->cur_pos.y = fp2->cur_pos.y;
+        ;
     }
 }
 
@@ -284,13 +291,15 @@ void ftCo_800C6B6C(Fighter_GObj* gobj)
     HSD_JObjSetScale(GET_JOBJ(gobj), &temp_r31->mv.co.entry.x8);
 
     if (!temp_r31->x221F_b4) {
-        temp_r31->cur_pos.y = temp_r31->mv.co.entry.x4 + temp_r31->mv.co.entry.x20;
+        temp_r31->cur_pos.y =
+            temp_r31->mv.co.entry.x4 + temp_r31->mv.co.entry.x20;
     } else {
         HSD_GObj* gobj2 = Player_GetEntityAtIndex(temp_r31->player_id, 0);
         Fighter* fp2 = GET_FIGHTER(gobj2);
         temp_r31->cur_pos.y = fp2->cur_pos.y;
     }
-    Fighter_ChangeMotionState(gobj, ftCo_MS_EntryEnd, 0x3000, 0.0F, 1.0F, 0.0F, NULL);
+    Fighter_ChangeMotionState(gobj, ftCo_MS_EntryEnd, 0x3000, 0.0F, 1.0F, 0.0F,
+                              NULL);
     temp_r31->x2219_b1 = true;
     temp_r31->accessory1_cb = fn_800C6F34;
 }
@@ -606,7 +615,8 @@ void ftCo_800C7800(Fighter_GObj* gobj)
     } else {
         fp->self_vel.x = -fp->facing_dir * p_ftCommonData->x370;
     }
-    Fighter_ChangeMotionState(gobj, ftCo_MS_CaptureCut, 0, 0.0F, 1.0F, 0.0F, NULL);
+    Fighter_ChangeMotionState(gobj, ftCo_MS_CaptureCut, 0, 0.0F, 1.0F, 0.0F,
+                              NULL);
     fp->capture_timer = p_ftCommonData->x73C;
 }
 

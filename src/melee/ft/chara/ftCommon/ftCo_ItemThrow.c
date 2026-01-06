@@ -448,7 +448,8 @@ void ftCo_80095A30(HSD_GObj* gobj)
                         var_r29 = 0x60;
                     } else {
                         if (fp->input.lstick.y <= p_ftCommonData->xB0 &&
-                            ftCo_GetLStickAngle(fp) < -p_ftCommonData->x20_radians)
+                            ftCo_GetLStickAngle(fp) <
+                                -p_ftCommonData->x20_radians)
                         {
                             var_r29 = 0x61;
                         } else {

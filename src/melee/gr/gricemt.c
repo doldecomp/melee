@@ -1101,11 +1101,11 @@ float grIceMt_801F96E0(float y)
 int grIceMt_801F98A8(Ground_GObj* param1)
 {
     Ground* gp = param1->user_data;
-    u8 flags = *(u8*)&gp->gv.icemt2.xC4;
+    u8 flags = *(u8*) &gp->gv.icemt2.xC4;
     HSD_JObj** ptrs = &gp->gv.icemt2.xC8;
 
     if (flags & 0x40) {
-        *(u8*)&gp->gv.icemt2.xC4 = flags & ~0x40;
+        *(u8*) &gp->gv.icemt2.xC4 = flags & ~0x40;
         if (ptrs[0]) {
             Ground_801C2D0C(0, ptrs[0]);
         }

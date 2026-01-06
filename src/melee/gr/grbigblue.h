@@ -14,7 +14,7 @@
 /* 1E59C8 */ void grBigBlue_801E59C8(void);
 /* 1E59CC */ void grBigBlue_801E59CC(void);
 /* 1E59F0 */ bool grBigBlue_801E59F0(void);
-/* 1E59F8 */ HSD_GObj *grBigBlue_801E59F8(s32);
+/* 1E59F8 */ HSD_GObj* grBigBlue_801E59F8(s32);
 /* 1E5AE4 */ void grBigBlue_801E5AE4(Ground_GObj*);
 /* 1E5B10 */ bool grBigBlue_801E5B10(Ground_GObj*);
 /* 1E5B18 */ void grBigBlue_801E5B18(Ground_GObj*);

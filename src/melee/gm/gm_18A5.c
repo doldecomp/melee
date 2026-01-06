@@ -25,25 +25,10 @@
 typedef void (*lbl_803D9FD8_fn)(s32*, u32, u32);
 
 lbl_803D9FD8_fn lbl_803D9FD8[] = {
-    fn_801937C4,
-    fn_80193B58,
-    fn_80193FCC,
-    fn_80194658,
-    fn_801949B4,
-    fn_80194BC4,
-    fn_80194D84,
-    fn_80194D84,
-    fn_80194D84,
-    NULL,
-    fn_80194F30,
-    fn_801953C8,
-    fn_80194F30,
-    fn_80195AF0,
-    fn_80195AF0,
-    fn_80195CCC,
-    fn_80194F30,
-    fn_8019610C,
-    fn_8019610C,
+    fn_801937C4, fn_80193B58, fn_80193FCC, fn_80194658, fn_801949B4,
+    fn_80194BC4, fn_80194D84, fn_80194D84, fn_80194D84, NULL,
+    fn_80194F30, fn_801953C8, fn_80194F30, fn_80195AF0, fn_80195AF0,
+    fn_80195CCC, fn_80194F30, fn_8019610C, fn_8019610C,
 };
 
 /// #fn_8018A514
@@ -150,7 +135,8 @@ int fn_8018F410(void)
     temp_r29 = &lbl_803D9F0C.x4;
     do {
         temp_r3 = HSD_Randi(0x19);
-    } while (lbl_803D9D20.x72[temp_r3] == 0 || lbl_803D9F0C.x0 == temp_r3 || *temp_r29 == temp_r3 || *temp_r30 == temp_r3);
+    } while (lbl_803D9D20.x72[temp_r3] == 0 || lbl_803D9F0C.x0 == temp_r3 ||
+             *temp_r29 == temp_r3 || *temp_r30 == temp_r3);
     *temp_r30 = *temp_r29;
     *temp_r29 = lbl_803D9F0C.x0;
     lbl_803D9F0C.x0 = temp_r3;
@@ -498,9 +484,11 @@ void gm_801905F0(StartMeleeData* arg0)
             arg0->players[i].xA = (u8) MIN(gm_804771C4.x4B8[i].x6, 0x78);
             if (gm_804771C4.x4B8[i].x2 != 0) {
                 arg0->players[i].c_kind = gm_801905F0_inline0(fn_8018F410());
-                arg0->players[i].color = HSD_Randi(gm_80169238(arg0->players[i].c_kind));
+                arg0->players[i].color =
+                    HSD_Randi(gm_80169238(arg0->players[i].c_kind));
             } else {
-                arg0->players[i].c_kind = gm_801905F0_inline0(gm_804771C4.x4B8[i].x1);
+                arg0->players[i].c_kind =
+                    gm_801905F0_inline0(gm_804771C4.x4B8[i].x1);
                 arg0->players[i].color = gm_804771C4.x4B8[i].x3;
             }
             arg0->players[i].slot_type = gm_804771C4.x4B8[i].x0;
@@ -726,7 +714,9 @@ s32 fn_8019655C(void)
 
 bool fn_80196564(TmData* arg0)
 {
-    if ((arg0->stage_selection_type == 0 && arg0->x32 == 0) || arg0->stage_selection_type == 1) {
+    if ((arg0->stage_selection_type == 0 && arg0->x32 == 0) ||
+        arg0->stage_selection_type == 1)
+    {
         return true;
     }
     return false;
@@ -734,7 +724,9 @@ bool fn_80196564(TmData* arg0)
 
 bool fn_80196594(TmData* arg0)
 {
-    if ((arg0->stage_selection_type == 2 && arg0->x32 == 0) || arg0->stage_selection_type == 3) {
+    if ((arg0->stage_selection_type == 2 && arg0->x32 == 0) ||
+        arg0->stage_selection_type == 3)
+    {
         return true;
     }
     return false;

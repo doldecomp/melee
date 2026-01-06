@@ -7,13 +7,13 @@
 #include "ft/forward.h"
 
 #include "ft/ft_081B.h"
-#include "ftCommon/ftCo_Attack100.h"
 #include "ft/ft_0D27.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
 
 #include "ftCommon/forward.h"
 
+#include "ftCommon/ftCo_Attack100.h"
 #include "ftCommon/ftCo_AttackHi4.h"
 #include "ftCommon/ftCo_ItemScrew.h"
 #include "ftCommon/ftCo_Jump.h"

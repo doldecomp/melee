@@ -1,18 +1,19 @@
 #include "itbombhei.h"
-#include "itbombhei.static.h"
 
+#include "itbombhei.static.h"
 #include <placeholder.h>
 #include <platform.h>
+
 #include "baselib/forward.h"
+
 #include "baselib/gobj.h"
 #include "baselib/jobj.h"
-#include "it/itCommonItems.h"
+#include "it/inlines.h"
+#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
-#include "it/it_266F.h"
-#include "it/inlines.h"
+#include "it/itCommonItems.h"
 #include "it/item.h"
-
 
 Item_GObj* it_8027D670(Vec3* pos)
 {
@@ -111,7 +112,6 @@ void fn_8027DAC8(Item_GObj* igp)
 
 bool itBombhei_UnkMotion0_Anim(Item_GObj* igp)
 {
-
     inline1_UnkMotion0_Anim(igp);
     inline2_UnkMotion0_Anim(igp);
 
@@ -203,7 +203,6 @@ bool itBombhei_UnkMotion8_Anim(Item_GObj* igp)
 
     return false;
 }
-
 
 void itBombhei_UnkMotion8_Phys(Item_GObj* gobj) {}
 

@@ -182,7 +182,7 @@ void ftNs_SpecialAirLwStart_Phys(HSD_GObj* gobj)
         fp->mv.ns.speciallw.gravityDelay = gravity_timer - 1;
     } else {
         ftCommon_Fall(fp, ness_attr->x8C_PSI_MAGNET_FALL_ACCEL,
-                          da->terminal_vel);
+                      da->terminal_vel);
     }
 
     ftCommon_8007CF58(fp);
@@ -351,7 +351,7 @@ void ftNs_SpecialAirLwHold_Phys(HSD_GObj* gobj)
             fp->mv.ns.speciallw.gravityDelay = gravity_timer - 1;
         } else {
             ftCommon_Fall(fp, ness_attr->x8C_PSI_MAGNET_FALL_ACCEL,
-                              da->terminal_vel);
+                          da->terminal_vel);
         }
 
         ftCommon_8007CF58(fp);
@@ -576,7 +576,7 @@ void ftNs_SpecialAirLwTurn_Phys(
         fp->mv.ns.speciallw.gravityDelay = magnetTimer - 1;
     } else {
         ftCommon_Fall(fp, ness_attr->x8C_PSI_MAGNET_FALL_ACCEL,
-                          da->terminal_vel);
+                      da->terminal_vel);
     }
 
     ftCommon_8007CF58(fp);
@@ -841,7 +841,7 @@ void ftNs_SpecialAirLwHit_Phys(
         fp->mv.ns.speciallw.gravityDelay = temp_r3 - 1;
     } else {
         ftCommon_Fall(fp, attrs->x8C_PSI_MAGNET_FALL_ACCEL,
-                          attributes->terminal_vel);
+                      attributes->terminal_vel);
     }
 
     ftCommon_8007CF58(fp);
@@ -1024,7 +1024,7 @@ void ftNs_SpecialAirLwEnd_Phys(
         fp->mv.ns.speciallw.gravityDelay = gravity_timer - 1;
     } else {
         ftCommon_Fall(fp, attrs->x8C_PSI_MAGNET_FALL_ACCEL,
-                          attributes->terminal_vel);
+                      attributes->terminal_vel);
     }
 
     ftCommon_8007CF58(fp);

@@ -502,14 +502,16 @@ void mnCharSel_8025D1C4(int arg0, int arg1)
                 temp_r30->text_color.a = 0xA0;
             }
             {
-                UNK_T tmp = HSD_SisLib_803A6478(temp_r31, &HSD_SisLib_804D1124[0][43].kerning->left);
+                UNK_T tmp = HSD_SisLib_803A6478(
+                    temp_r31, &HSD_SisLib_804D1124[0][43].kerning->left);
                 mnCharSel_8025BC20(tmp, temp_r29);
             }
             HSD_SisLib_803A6368(temp_r30, 0x56);
             temp_r30->sis_buffer = (SIS*) temp_r31;
             HSD_JObjSetFlags(sp10 = HSD_JObjGetChild(sp10), JOBJ_HIDDEN);
             HSD_JObjSetFlags(sp10 = HSD_JObjGetNext(sp10), JOBJ_HIDDEN);
-            HSD_JObjSetFlags(sp10 = HSD_JObjGetNext(HSD_JObjGetNext(sp10)), JOBJ_HIDDEN);
+            HSD_JObjSetFlags(sp10 = HSD_JObjGetNext(HSD_JObjGetNext(sp10)),
+                             JOBJ_HIDDEN);
             HSD_JObjSetFlags(sp10 = HSD_JObjGetNext(sp10), JOBJ_HIDDEN);
         }
     }
@@ -887,9 +889,14 @@ void mnCharSel_802669F4_OnFrame(void)
         if (mnCharSel_804D6CF5 == 1) {
             CSSData* css = mnCharSel_804D6CB0;
             temp_r0 = css->data.data.players[mnCharSel_804D6CF0].slot_type;
-            if (!(temp_r0 != 0 && temp_r0 != 1) && mnCharSel_804A0BD0[0]->x5 == 0) {
-                temp_r3->entries[0].char_id = css->data.data.players[mnCharSel_804D6CF0].c_kind;
-                temp_r3->entries[0].color = mnCharSel_804D6CB0->data.data.players[mnCharSel_804D6CF0].color;
+            if (!(temp_r0 != 0 && temp_r0 != 1) &&
+                mnCharSel_804A0BD0[0]->x5 == 0)
+            {
+                temp_r3->entries[0].char_id =
+                    css->data.data.players[mnCharSel_804D6CF0].c_kind;
+                temp_r3->entries[0].color =
+                    mnCharSel_804D6CB0->data.data.players[mnCharSel_804D6CF0]
+                        .color;
             } else {
                 temp_r3->entries[0].char_id = 0x21;
             }
@@ -897,8 +904,12 @@ void mnCharSel_802669F4_OnFrame(void)
             temp_r0 = css->data.data.players[mnCharSel_804D6CF1].slot_type;
             if (!(temp_r0 != 0 && temp_r0 != 1)) {
                 if (mnCharSel_804A0BD0[1]->x5 == 0) {
-                    temp_r3->entries[1].char_id = css->data.data.players[mnCharSel_804D6CF1].c_kind;
-                    temp_r3->entries[1].color = mnCharSel_804D6CB0->data.data.players[mnCharSel_804D6CF1].color;
+                    temp_r3->entries[1].char_id =
+                        css->data.data.players[mnCharSel_804D6CF1].c_kind;
+                    temp_r3->entries[1].color =
+                        mnCharSel_804D6CB0->data.data
+                            .players[mnCharSel_804D6CF1]
+                            .color;
                 } else {
                     temp_r3->entries[1].char_id = 0x21;
                 }
@@ -913,9 +924,13 @@ void mnCharSel_802669F4_OnFrame(void)
             for (i = 0; i < var_r0; i++) {
                 CSSData* css = mnCharSel_804D6CB0;
                 temp_r0 = css->data.data.players[i].slot_type;
-                if (!(temp_r0 != 0 && temp_r0 != 1) && mnCharSel_804A0BD0[i]->x5 == 0) {
-                    temp_r3->entries[i].char_id = css->data.data.players[i].c_kind;
-                    temp_r3->entries[i].color = mnCharSel_804D6CB0->data.data.players[i].color;
+                if (!(temp_r0 != 0 && temp_r0 != 1) &&
+                    mnCharSel_804A0BD0[i]->x5 == 0)
+                {
+                    temp_r3->entries[i].char_id =
+                        css->data.data.players[i].c_kind;
+                    temp_r3->entries[i].color =
+                        mnCharSel_804D6CB0->data.data.players[i].color;
                 } else {
                     temp_r3->entries[i].char_id = 0x21;
                 }
@@ -939,7 +954,9 @@ void mnCharSel_802669F4_OnFrame(void)
     switch (mnCharSel_804D6CF6) {
     case 1:
         for (i = 0; i < 4; i++) {
-            if (mnCharSel_803F0DFC.doors[i].p_kind != 3 && mnCharSel_804A0BD0[0]->x5 != 0) {
+            if (mnCharSel_803F0DFC.doors[i].p_kind != 3 &&
+                mnCharSel_804A0BD0[0]->x5 != 0)
+            {
                 mnCharSel_804D6CF6 = 0;
             }
         }

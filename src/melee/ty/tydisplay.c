@@ -6,6 +6,7 @@
 #include "ty/toy.h"
 #include "ty/tyfigupon.h"
 #include "ty/tylist.h"
+#include "ty/types.h"
 
 #include <baselib/random.h>
 
@@ -13,7 +14,9 @@
 
 void un_803182D4_OnFrame(void)
 {
-    if (M2C_FIELD(un_804A284C, s8*, 4) != 0) {
+    TyModeState* state = (TyModeState*) un_804A284C;
+
+    if (state->x4 != 0) {
         un_803181BC();
         gm_801A4B60();
     }
@@ -47,7 +50,9 @@ void un_803182D4_OnFrame(void)
 
 void un_8031B9A4_OnFrame(void)
 {
-    if (M2C_FIELD(un_804A284C, s8*, 4) != 0) {
+    TyModeState* state = (TyModeState*) un_804A284C;
+
+    if (state->x4 != 0) {
         un_8031B850();
         gm_801A4B60();
     }
@@ -83,3 +88,11 @@ s32 tyDisplay_8031C2EC(void)
     }
     return un_80305058(2, 0, 1, 60.0f);
 }
+
+/// #un_8031C354
+
+/// #un_8031C454
+
+/// #un_8031C5E4
+
+/// #un_8031C8B8

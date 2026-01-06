@@ -8,12 +8,12 @@
 
 #include "ft/ft_0877.h"
 #include "ft/ft_0C31.h"
-#include "ftCommon/ftCo_Attack100.h"
 #include "ft/ft_0D31.h"
 #include "ft/ftcolanim.h"
 #include "ft/ftcommon.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
+#include "ftCommon/ftCo_Attack100.h"
 #include "ftCommon/ftCo_CaptureCut.h"
 #include "ftCommon/ftCo_DamageFall.h"
 #include "ftCommon/ftCo_DownSpot.h"

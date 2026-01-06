@@ -10,7 +10,7 @@ void grZebesRoute_8020B160(bool arg) {}
 
 /// #grZebesRoute_8020B164
 
-void grZebesRoute_8020B1D4()
+void grZebesRoute_8020B1D4(void)
 {
     grZebesRoute_8020B548();
 }

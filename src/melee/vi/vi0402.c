@@ -76,12 +76,14 @@ void un_8031D858_OnEnter(void* arg0)
     lbArchive_LoadSymbols("Vi0402.dat", &un_804D6F68, "visual0402Scene", NULL);
     {
         HSD_GObj* light_gobj = GObj_Create(0xB, 0x3, 0);
-        HSD_GObjObject_80390A70(light_gobj, HSD_GObj_804D784A, lb_80011AC4(un_804D6F68->lights));
+        HSD_GObjObject_80390A70(light_gobj, HSD_GObj_804D784A,
+                                lb_80011AC4(un_804D6F68->lights));
         GObj_SetupGXLink(light_gobj, HSD_GObj_LObjCallback, 0, 0);
     }
 
     cam_gobj = GObj_Create(0x13, 0x14, 0);
-    cobj = lb_80013B14((HSD_CameraDescPerspective*) un_804D6F68->cameras[0].desc);
+    cobj =
+        lb_80013B14((HSD_CameraDescPerspective*) un_804D6F68->cameras[0].desc);
     HSD_GObjObject_80390A70(cam_gobj, HSD_GObj_804D784B, cobj);
     GObj_SetupGXLinkMax(cam_gobj, HSD_GObj_803910D8, 8);
     cam_gobj->gxlink_prios = 0x89;

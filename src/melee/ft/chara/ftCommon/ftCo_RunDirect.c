@@ -7,10 +7,10 @@
 #include "ft/forward.h"
 
 #include "ft/ft_0892.h"
-#include "ftCommon/ftCo_Attack100.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_AppealS.h"
+#include "ftCommon/ftCo_Attack100.h"
 #include "ftCommon/ftCo_AttackDash.h"
 #include "ftCommon/ftCo_Guard.h"
 #include "ftCommon/ftCo_Jump.h"

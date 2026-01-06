@@ -21,21 +21,20 @@
 extern HSD_DObjInfo hsdDObj;
 
 /// @brief Write IA4 texture coordinate to refraction buffer.
-/* 021F34 */ static void lbRefract_WriteTexCoordIA4(lbRefract_CallbackData* data,
-                                                    s32 row, u32 col, u32 arg3,
-                                                    u8 arg4, u8 intensity,
-                                                    u8 alpha);
+/* 021F34 */ static void
+lbRefract_WriteTexCoordIA4(lbRefract_CallbackData* data, s32 row, u32 col,
+                           u32 arg3, u8 arg4, u8 intensity, u8 alpha);
 /* 021F70 */ static UNK_RET fn_80021F70(UNK_PARAMS);
 /* 021FB4 */ static UNK_RET fn_80021FB4(UNK_PARAMS);
 /* 021FF8 */ static UNK_RET fn_80021FF8(UNK_PARAMS);
 /* 02206C */ static UNK_RET fn_8002206C(UNK_PARAMS);
 /// @brief Display DObj then reset TEV/indirect stages for refraction cleanup.
-/* 022608 */ static void lbRefract_DObjDispReset(HSD_DObj* dobj, Mtx vmtx, Mtx pmtx, u32 rendermode);
+/* 022608 */ static void lbRefract_DObjDispReset(HSD_DObj* dobj, Mtx vmtx,
+                                                 Mtx pmtx, u32 rendermode);
 /// @brief Read RGBA8 texture coordinate addresses from refraction buffer.
-/* 022120 */ static void lbRefract_ReadTexCoordRGBA8(lbRefract_CallbackData* data,
-                                                     s32 row, u32 col,
-                                                     u32* out_r, u32* out_g,
-                                                     u8* out_b, u8* out_a);
+/* 022120 */ static void
+lbRefract_ReadTexCoordRGBA8(lbRefract_CallbackData* data, s32 row, u32 col,
+                            u32* out_r, u32* out_g, u8* out_b, u8* out_a);
 /* 022DF8 */ static inline float lbRefract_80022DF8(float x);
 /// @brief Initialize refraction callback data for a texture buffer.
 /* 02219C */ s32 lbRefract_8002219C(lbRefract_CallbackData* data, s32 buffer,
@@ -64,7 +63,8 @@ static void lbRefract_WriteTexCoordIA4(lbRefract_CallbackData* data, s32 row,
     }* pixel;
     s32 row_stride = data->row_stride;
     s32 tile_col = col >> 2;
-    s32 tile_base = data->buffer + tile_col * row_stride + ((row << 3) & 0xFFFFFFE0);
+    s32 tile_base =
+        data->buffer + tile_col * row_stride + ((row << 3) & 0xFFFFFFE0);
     s32 pixel_offset = ((row & 3) + ((col << 2) & 0xC)) << 1;
 
     pixel = (void*) (tile_base + pixel_offset);
@@ -79,8 +79,8 @@ static void lbRefract_ReadTexCoordRGBA8(lbRefract_CallbackData* data, s32 row,
     s32 base_offset;
     s32 pixel_offset;
 
-    base_offset = data->buffer +
-                  (((col >> 2U) * data->row_stride) + ((row * 0x10) & 0xFFFFFFC0));
+    base_offset = data->buffer + (((col >> 2U) * data->row_stride) +
+                                  ((row * 0x10) & 0xFFFFFFC0));
     pixel_offset = ((row & 3) + ((col * 4) & 0xC)) * 2;
     if (out_a != NULL) {
         *out_a = base_offset + pixel_offset;
@@ -136,7 +136,8 @@ s32 lbRefract_8002219C(lbRefract_CallbackData* data, s32 buffer, s32 format,
 }
 
 /// @brief Copy framebuffer to refraction source texture.
-void lbRefract_8002247C(HSD_CObj* cobj) {
+void lbRefract_8002247C(HSD_CObj* cobj)
+{
     s32 proj_type;
 
     if (lbl_804336D0[0] == 0) {
@@ -146,37 +147,30 @@ void lbRefract_8002247C(HSD_CObj* cobj) {
     proj_type = HSD_CObjGetProjectionType(cobj);
 
     switch (proj_type) {
-    case 1:
-    {
+    case 1: {
         f32 scale = 0.5F;
         f32 trans = 0.5F;
-        MTXLightPerspective((MtxPtr)((char*)lbl_804336D0 + 0x10),
-                           M2C_FIELD(cobj, f32*, 0x40),
-                           M2C_FIELD(cobj, f32*, 0x44),
-                           scale, scale, scale, trans);
+        MTXLightPerspective((MtxPtr) ((char*) lbl_804336D0 + 0x10),
+                            M2C_FIELD(cobj, f32*, 0x40),
+                            M2C_FIELD(cobj, f32*, 0x44), scale, scale, scale,
+                            trans);
         break;
     }
-    case 2:
-    {
+    case 2: {
         f32 scale = 0.5F;
-        MTXLightFrustum((MtxPtr)((char*)lbl_804336D0 + 0x10),
-                       M2C_FIELD(cobj, f32*, 0x40),
-                       M2C_FIELD(cobj, f32*, 0x44),
-                       M2C_FIELD(cobj, f32*, 0x48),
-                       M2C_FIELD(cobj, f32*, 0x4c),
-                       M2C_FIELD(cobj, f32*, 0x38),
-                       scale, 0.5F, scale, scale);
+        MTXLightFrustum(
+            (MtxPtr) ((char*) lbl_804336D0 + 0x10),
+            M2C_FIELD(cobj, f32*, 0x40), M2C_FIELD(cobj, f32*, 0x44),
+            M2C_FIELD(cobj, f32*, 0x48), M2C_FIELD(cobj, f32*, 0x4c),
+            M2C_FIELD(cobj, f32*, 0x38), scale, 0.5F, scale, scale);
         break;
     }
-    default:
-    {
+    default: {
         f32 scale = 0.5F;
-        MTXLightOrtho((MtxPtr)((char*)lbl_804336D0 + 0x10),
-                     M2C_FIELD(cobj, f32*, 0x40),
-                     M2C_FIELD(cobj, f32*, 0x44),
-                     M2C_FIELD(cobj, f32*, 0x48),
-                     M2C_FIELD(cobj, f32*, 0x4c),
-                     scale, 0.5F, scale, scale);
+        MTXLightOrtho((MtxPtr) ((char*) lbl_804336D0 + 0x10),
+                      M2C_FIELD(cobj, f32*, 0x40), M2C_FIELD(cobj, f32*, 0x44),
+                      M2C_FIELD(cobj, f32*, 0x48), M2C_FIELD(cobj, f32*, 0x4c),
+                      scale, 0.5F, scale, scale);
         break;
     }
     }
@@ -187,7 +181,7 @@ void lbRefract_80022560(void)
     if (lbl_804336D0[0] != 0) {
         GXSetTexCopySrc(0, 0, 0x280, 0x1E0);
         GXSetTexCopyDst(0x140, 0xF0, 4, 1);
-        GXCopyTex((void*)lbl_804336D0[1], 0);
+        GXCopyTex((void*) lbl_804336D0[1], 0);
         GXPixModeSync();
         GXInvalidateTexAll();
     }

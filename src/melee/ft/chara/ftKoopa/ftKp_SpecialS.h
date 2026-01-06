@@ -2,6 +2,7 @@
 #define GALE01_80134288
 
 #include <platform.h>
+
 #include "ft/forward.h"
 
 /* 134288 */ void ftKp_SpecialSHit_Phys(Fighter_GObj* gobj);

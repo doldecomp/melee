@@ -537,9 +537,12 @@ void fn_8003B9A4(int player)
     hit_counts = action_stats->hits.by_attack_counts;
 
     if (attack_counts[StatsAttack_Catch] != 0) {
-        if (attack_counts[StatsAttack_Catch] >= pl_804D6470->x3C && hit_counts[StatsAttack_Catch] == 0) {
+        if (attack_counts[StatsAttack_Catch] >= pl_804D6470->x3C &&
+            hit_counts[StatsAttack_Catch] == 0)
+        {
             setFlag(player, 0x26);
-        } else if (pl_CalculateAverage(hit_counts[StatsAttack_Catch], attack_counts[StatsAttack_Catch]) <=
+        } else if (pl_CalculateAverage(hit_counts[StatsAttack_Catch],
+                                       attack_counts[StatsAttack_Catch]) <=
                    pl_804D6470->x44)
         {
             setFlag(player, 0x25);
@@ -547,7 +550,9 @@ void fn_8003B9A4(int player)
     }
     if (hit_counts[StatsAttack_Catch] != 0) {
         for (i = StatsAttack_Catch; i < StatsAttack_LedgeAttackSlow; i++) {
-            if (!(i == StatsAttack_Catch || i == StatsAttack_CatchAttack || attack_counts[i] == 0)) {
+            if (!(i == StatsAttack_Catch || i == StatsAttack_CatchAttack ||
+                  attack_counts[i] == 0))
+            {
                 break;
             }
         }

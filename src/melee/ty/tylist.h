@@ -8,6 +8,6 @@
 
 /* 3124BC */ void un_803124BC(void);
 /* 3127D4 */ void un_803127D4(void);
-/* 314504 */ void fn_80314504(HSD_GObj* gobj);
+/* 314504 */ void fn_80314504(HSD_GObj*);
 
 #endif

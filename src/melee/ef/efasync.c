@@ -1299,7 +1299,7 @@ void* efAsync_80063930(s32 gfx_id, HSD_GObj* arg_gobj, ...)
 
 void efAsync_8006729C(int index)
 {
-    struct _struct_efAsync_803C025C_0xC *entry = &efAsync_803C025C[index];
+    struct _struct_efAsync_803C025C_0xC* entry = &efAsync_803C025C[index];
     if (index >= 50 || index < 0) {
         return;
     }

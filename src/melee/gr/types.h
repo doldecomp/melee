@@ -349,6 +349,18 @@ struct grGreatBay_GroundVars {
     f32 x1C;
 };
 
+struct grGarden_GroundVars { // Cranky Kong
+    s32 xc4;
+    s32 xc8;
+};
+
+struct grGarden_GroundVars2 { // Klaptrap
+    // HSD_GObj* xc4;
+    Item_GObj* xc4;
+    s8 xc8;
+    s32 xcc;
+};
+
 struct grIceMt_GroundVars {
     /* +0 gp+C4 */ s16 xC4;
     /* +0 gp+C4 */ s16 xC6;
@@ -760,6 +772,8 @@ struct Ground {
             struct GroundVars_flatzone2 flatzone2;
             struct grFourside_GroundVars fourside;
             struct grGreens_GroundVars greens;
+            struct grGarden_GroundVars garden;
+            struct grGarden_GroundVars2 garden2;
             struct grIceMt_GroundVars icemt;
             struct grIceMt_GroundVars2 icemt2;
             struct grInishie1_GroundVars inishie1;

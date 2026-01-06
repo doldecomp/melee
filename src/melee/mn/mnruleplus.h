@@ -2,9 +2,12 @@
 #define MELEE_MN_RULEPLUS_H
 
 #include <placeholder.h>
-#include <sysdolphin/baselib/forward.h>
+
 #include "mn/forward.h"
+
 #include "mn/types.h"
+
+#include <sysdolphin/baselib/forward.h>
 
 typedef struct _MenuRulesPlusData {
     MenuKind8 menu_kind;

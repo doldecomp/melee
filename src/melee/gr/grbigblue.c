@@ -1,60 +1,70 @@
 #include "grbigblue.h"
 
+#include "grdisplay.h"
+#include "grmaterial.h"
+
 #include <platform.h>
 
-#include "lb/lb_00F9.h"
-#include "grmaterial.h"
-#include "grdisplay.h"
-#include "gr/inlines.h"
-#include "baselib/jobj.h"
-#include "baselib/gobjproc.h"
 #include "baselib/gobjgxlink.h"
+#include "baselib/gobjproc.h"
+#include "baselib/jobj.h"
+#include "gr/inlines.h"
 #include "gr/types.h"
+#include "lb/lb_00F9.h"
 
-u8 tmpPadData[168] = {0};
+u8 tmpPadData[168] = { 0 };
 
 StageCallbacks grBb_803E29E0[] = {
-    {grBigBlue_801E5AE4, grBigBlue_801E5B10, grBigBlue_801E5B18, grBigBlue_801E5B1C, 0},
-    {grBigBlue_801E6298, grBigBlue_801E6354, grBigBlue_801E635C, grBigBlue_801E6360, 40000000},
-    {grBigBlue_801E6200, grBigBlue_801E6288, grBigBlue_801E6290, grBigBlue_801E6294, 0},
-    {NULL, NULL, NULL, NULL, 0},
-    {NULL, NULL, NULL, NULL, 0},
-    {NULL, NULL, NULL, NULL, 0},
-    {NULL, NULL, NULL, NULL, 0},
-    {NULL, NULL, NULL, NULL, 0},
-    {NULL, NULL, NULL, NULL, 0},
-    {NULL, NULL, NULL, NULL, 0},
-    {NULL, NULL, NULL, NULL, 0},
-    {NULL, NULL, NULL, NULL, 0},
-    {NULL, NULL, NULL, NULL, 0},
-    {NULL, NULL, NULL, NULL, 0},
-    {NULL, NULL, NULL, NULL, 0},
-    {NULL, NULL, NULL, NULL, 0},
-    {NULL, NULL, NULL, NULL, 0},
-    {NULL, NULL, NULL, NULL, 0},
-    {NULL, NULL, NULL, NULL, 0},
-    {NULL, NULL, NULL, NULL, 0},
-    {NULL, NULL, NULL, NULL, 0},
-    {NULL, NULL, NULL, NULL, 0},
-    {NULL, NULL, NULL, NULL, 0},
-    {NULL, NULL, NULL, NULL, 0},
-    {NULL, NULL, NULL, NULL, 0},
-    {NULL, NULL, NULL, NULL, 0},
-    {NULL, NULL, NULL, NULL, 0},
-    {NULL, NULL, NULL, NULL, 0},
-    {NULL, NULL, NULL, NULL, 0},
-    {NULL, NULL, NULL, NULL, 0},
-    {NULL, NULL, NULL, NULL, 0},
-    {grBigBlue_801E5B20, grBigBlue_801E6114, grBigBlue_801E611C, grBigBlue_801E6120, 0},
-    {grBigBlue_801E6904, grBigBlue_801E6C58, grBigBlue_801E6C60, grBigBlue_801E855C, 0},
-    {grBigBlue_801E6364, grBigBlue_801E687C, grBigBlue_801E6884, grBigBlue_801E68B8, 0},
-    {grBigBlue_801E613C, grBigBlue_801E61BC, grBigBlue_801E61C4, grBigBlue_801E61FC, 0},
-    {grBigBlue_801E8D64, grBigBlue_801E93D0, grBigBlue_801E93D8, grBigBlue_801E9F38, 80000000},
-    {grBigBlue_801E9F3C, grBigBlue_801EA054, grBigBlue_801EA05C, grBigBlue_801EAB4C, 0},
-    {NULL, NULL, NULL, NULL, 0},
-    {NULL, NULL, NULL, NULL, 0},
-    {NULL, NULL, NULL, NULL, 0},
-    {NULL, NULL, NULL, NULL, 0}
+    { grBigBlue_801E5AE4, grBigBlue_801E5B10, grBigBlue_801E5B18,
+      grBigBlue_801E5B1C, 0 },
+    { grBigBlue_801E6298, grBigBlue_801E6354, grBigBlue_801E635C,
+      grBigBlue_801E6360, 40000000 },
+    { grBigBlue_801E6200, grBigBlue_801E6288, grBigBlue_801E6290,
+      grBigBlue_801E6294, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { grBigBlue_801E5B20, grBigBlue_801E6114, grBigBlue_801E611C,
+      grBigBlue_801E6120, 0 },
+    { grBigBlue_801E6904, grBigBlue_801E6C58, grBigBlue_801E6C60,
+      grBigBlue_801E855C, 0 },
+    { grBigBlue_801E6364, grBigBlue_801E687C, grBigBlue_801E6884,
+      grBigBlue_801E68B8, 0 },
+    { grBigBlue_801E613C, grBigBlue_801E61BC, grBigBlue_801E61C4,
+      grBigBlue_801E61FC, 0 },
+    { grBigBlue_801E8D64, grBigBlue_801E93D0, grBigBlue_801E93D8,
+      grBigBlue_801E9F38, 80000000 },
+    { grBigBlue_801E9F3C, grBigBlue_801EA054, grBigBlue_801EA05C,
+      grBigBlue_801EAB4C, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { NULL, NULL, NULL, NULL, 0 }
 };
 
 void grBigBlue_801E57BC(bool arg) {}
@@ -70,13 +80,13 @@ bool grBigBlue_801E59F0(void)
     return false;
 }
 
-HSD_GObj *grBigBlue_801E59F8(s32 id)
+HSD_GObj* grBigBlue_801E59F8(s32 id)
 {
-    HSD_GObj *gobj;
-    StageCallbacks *cbs = &grBb_803E29E0[id];
+    HSD_GObj* gobj;
+    StageCallbacks* cbs = &grBb_803E29E0[id];
     gobj = Ground_801C14D0(id);
     if (gobj != NULL) {
-        Ground *gp = GET_GROUND(gobj);
+        Ground* gp = GET_GROUND(gobj);
         gp->x8_callback = NULL;
         gp->xC_callback = NULL;
 
@@ -91,7 +101,8 @@ HSD_GObj *grBigBlue_801E59F8(s32 id)
             HSD_GObjProc_8038FD54(gobj, cbs->callback2, 4U);
         }
     } else {
-        OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grbigblue.c", 0x17E, id);
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grbigblue.c", 0x17E,
+                 id);
     }
     return gobj;
 }

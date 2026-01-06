@@ -1,9 +1,9 @@
 #include "lbmthp.static.h"
 
 #include <dolphin/gx/GXTexture.h>
+#include <sysdolphin/baselib/sobjlib.h>
 #include <melee/lb/lbanim.h>
 #include <melee/lb/types.h>
-#include <sysdolphin/baselib/sobjlib.h>
 
 /// #fn_8001E910
 
@@ -36,14 +36,14 @@ s32 fn_8001EBF0(THPDecComp* data)
     aligned_100 = ALIGN_32(aligned_100);
 
     /* Store width */
-    data->unk_A0 = (u16)width;
+    data->unk_A0 = (u16) width;
 
     /* Multiply width * height */
     wh = width * height;
 
     /* Reload and store height */
     height = data->height;
-    data->unk_A2 = (u16)height;
+    data->unk_A2 = (u16) height;
 
     /* size = aligned * unk_104 */
     size = aligned_100 * unk_104_val;
@@ -63,7 +63,7 @@ s32 fn_8001EBF0(THPDecComp* data)
     size += wh_div4;
 
     /* Call THPDec_8032FD40 with &unk_9C and height as u16 */
-    size += THPDec_8032FD40(&data->unk_9C, (u16)data->height);
+    size += THPDec_8032FD40(&data->unk_9C, (u16) data->height);
 
     /* Zero various fields */
     data->unk_7C = 0;
@@ -76,8 +76,8 @@ s32 fn_8001EBF0(THPDecComp* data)
     data->unk_68 = 0;
 
     /* Copy width/height again */
-    data->unk_A8 = (u16)data->width;
-    data->unk_AA = (u16)data->height;
+    data->unk_A8 = (u16) data->width;
+    data->unk_AA = (u16) data->height;
     data->unk_AC = 0;
 
     /* Add aligned sizes */
@@ -158,7 +158,8 @@ void* lbMthp8001F890(HSD_GObj* gobj)
     lbl_804335B8.x80 = lbl_804D7CE0;
     lbl_804335B8.x88 = &lbl_804335B8.x70;
     lbl_804335B8.x8C = 0;
-    lbl_804335B8.x90 = (struct HSD_SObj_803A477C_t_ext*)HSD_SObjLib_803A477C(gobj, (int)&lbl_804335B8.x88, 0, 0, 0x80, 0);
+    lbl_804335B8.x90 = (struct HSD_SObj_803A477C_t_ext*) HSD_SObjLib_803A477C(
+        gobj, (int) &lbl_804335B8.x88, 0, 0, 0x80, 0);
     lbl_804335B8.x90->x40 |= 0x10;
     return lbl_804335B8.x90;
 }

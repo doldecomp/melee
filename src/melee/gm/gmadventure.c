@@ -1524,8 +1524,8 @@ static inline void inline0(MinorScene* scene)
         gm_8016A22C(temp_r29->xA[0], temp_r29->xA[1], temp_r29->xA[2],
                     temp_r29->xD, temp_r29->xE, temp_r29->xF, 1, 0, 1,
                     adv_data->x0.ckind, adv_data->x0.color,
-                    adv_data->x4C(count, adv_data->x0.cpu_level, 0), temp_r29->x4,
-                    gm_8017BE8C(temp_r29->xA), 1, 0, 1,
+                    adv_data->x4C(count, adv_data->x0.cpu_level, 0),
+                    temp_r29->x4, gm_8017BE8C(temp_r29->xA), 1, 0, 1,
                     adv_data->x64(count, adv_data->x0.cpu_level),
                     adv_data->x68(count, adv_data->x0.cpu_level));
         adv_data->x0.xC.x11 = 1;

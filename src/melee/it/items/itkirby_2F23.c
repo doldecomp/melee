@@ -3,8 +3,8 @@
 #include <placeholder.h>
 #include <platform.h>
 
-#include "it/inlines.h"
 #include "ft/chara/ftKirby/ftKb_Init.h"
+#include "it/inlines.h"
 
 double it_802F23AC(int* obj, float* pos)
 {

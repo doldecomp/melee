@@ -17,7 +17,6 @@
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
 #include "ft/ft_0881.h"
-#include "ftCommon/ftCo_Attack100.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/ftdynamics.h"
@@ -27,6 +26,7 @@
 
 #include "ftCommon/forward.h"
 
+#include "ftCommon/ftCo_Attack100.h"
 #include "ftCommon/ftCo_CaptureCut.h"
 #include "ftCommon/ftCo_DamageFall.h"
 #include "ftCommon/ftCo_Fall.h"

@@ -1,4 +1,5 @@
 #include "lbheap.static.h"
+
 #include "placeholder.h"
 
 #include <dolphin/os/OSInterrupt.h>
@@ -44,10 +45,9 @@ void lbHeap_80015900(void)
                 if (lbHeap_80431FA0.heap_array[i].type == 0) {
                     OSDestroyHeap(lbHeap_80431FA0.heap_array[i].id);
                     lbHeap_80431FA0.heap_array[i].id = -1;
-                }
-                else {
+                } else {
                     lbMemory_80014EEC(lbHeap_80431FA0.heap_array[i].handle);
-                    lbHeap_80431FA0.heap_array[i].handle = (Handle*)-1;
+                    lbHeap_80431FA0.heap_array[i].handle = (Handle*) -1;
                 }
             }
         }
@@ -55,61 +55,69 @@ void lbHeap_80015900(void)
 
     arena_lo = lbHeap_80431FA0.arena_lo;
     arena_hi = lbHeap_80431FA0.arena_hi;
-    aram_lo = (u32*)lbHeap_80431FA0.aram_lo;
-    aram_hi = (u32*)lbHeap_80431FA0.aram_hi;
+    aram_lo = (u32*) lbHeap_80431FA0.aram_lo;
+    aram_hi = (u32*) lbHeap_80431FA0.aram_hi;
 
     /// @todo this loop isnt entirely right, its purpose is to calculate where
-    // the main heap can be allocated. This currently checks heaps 2 and 3, then 2 and 1...
-    // checking 2 twice.
+    // the main heap can be allocated. This currently checks heaps 2 and 3,
+    // then 2 and 1... checking 2 twice.
     for (i = 2; i > 0; i--) {
         if (lbHeap_80431FA0.heap_array[i].transient == 0) {
             if (lbHeap_80431FA0.heap_array[i].type != 3) {
                 switch (lbHeap_80431FA0.heap_array[i].type) {
-                    case 1:
-                        temp_r0 = lbHeap_80431FA0.heap_array[i].start + lbHeap_80431FA0.heap_array[i].size;
-                        if (arena_lo < (u32*)temp_r0) {
-                            arena_lo = (u32*)temp_r0;
-                        }
-                        break;
+                case 1:
+                    temp_r0 = lbHeap_80431FA0.heap_array[i].start +
+                              lbHeap_80431FA0.heap_array[i].size;
+                    if (arena_lo < (u32*) temp_r0) {
+                        arena_lo = (u32*) temp_r0;
+                    }
+                    break;
 
-                    case 2:
-                        if (arena_hi > (u32*)lbHeap_80431FA0.heap_array[i].start) {
-                            arena_hi = (u32*)lbHeap_80431FA0.heap_array[i].start;
-                        }
-                        break;
+                case 2:
+                    if (arena_hi > (u32*) lbHeap_80431FA0.heap_array[i].start)
+                    {
+                        arena_hi = (u32*) lbHeap_80431FA0.heap_array[i].start;
+                    }
+                    break;
 
-                    case 4:
-                        temp_r0 = lbHeap_80431FA0.heap_array[i].start + lbHeap_80431FA0.heap_array[i].size;
-                        if (aram_lo < (u32*)temp_r0) {
-                            aram_lo = (u32*)temp_r0;
-                        }
-                        break;
+                case 4:
+                    temp_r0 = lbHeap_80431FA0.heap_array[i].start +
+                              lbHeap_80431FA0.heap_array[i].size;
+                    if (aram_lo < (u32*) temp_r0) {
+                        aram_lo = (u32*) temp_r0;
+                    }
+                    break;
                 }
             }
         }
 
-        if (lbHeap_80431FA0.heap_array[i+1].transient == 0) {
-            if (lbHeap_80431FA0.heap_array[i+1].type != 3) {
-                switch (lbHeap_80431FA0.heap_array[i+1].type) {
-                    case 1:
-                        temp_r0 = lbHeap_80431FA0.heap_array[i+1].start + lbHeap_80431FA0.heap_array[i+1].size;
-                        if (arena_lo < (u32*)temp_r0) {
-                            arena_lo = (u32*)temp_r0;
-                        }
-                        break;
+        if (lbHeap_80431FA0.heap_array[i + 1].transient == 0) {
+            if (lbHeap_80431FA0.heap_array[i + 1].type != 3) {
+                switch (lbHeap_80431FA0.heap_array[i + 1].type) {
+                case 1:
+                    temp_r0 = lbHeap_80431FA0.heap_array[i + 1].start +
+                              lbHeap_80431FA0.heap_array[i + 1].size;
+                    if (arena_lo < (u32*) temp_r0) {
+                        arena_lo = (u32*) temp_r0;
+                    }
+                    break;
 
-                    case 2:
-                        if (arena_hi > (u32*)lbHeap_80431FA0.heap_array[i+1].start) {
-                            arena_hi = (u32*)lbHeap_80431FA0.heap_array[i+1].start;
-                        }
-                        break;
+                case 2:
+                    if (arena_hi >
+                        (u32*) lbHeap_80431FA0.heap_array[i + 1].start)
+                    {
+                        arena_hi =
+                            (u32*) lbHeap_80431FA0.heap_array[i + 1].start;
+                    }
+                    break;
 
-                    case 4:
-                        temp_r0 = lbHeap_80431FA0.heap_array[i+1].start + lbHeap_80431FA0.heap_array[i+1].size;
-                        if (aram_lo < (u32*)temp_r0) {
-                            aram_lo = (u32*)temp_r0;
-                        }
-                        break;
+                case 4:
+                    temp_r0 = lbHeap_80431FA0.heap_array[i + 1].start +
+                              lbHeap_80431FA0.heap_array[i + 1].size;
+                    if (aram_lo < (u32*) temp_r0) {
+                        aram_lo = (u32*) temp_r0;
+                    }
+                    break;
                 }
             }
         }
@@ -137,12 +145,11 @@ void lbHeap_80015900(void)
                         (void*) lbHeap_80431FA0.heap_array[i].start,
                         (void*) (lbHeap_80431FA0.heap_array[i].start +
                                  lbHeap_80431FA0.heap_array[i].size));
-                }
-                else {
+                } else {
                     lbHeap_80431FA0.heap_array[i].handle = lbMemory_80014E24(
                         (void*) lbHeap_80431FA0.heap_array[i].start,
                         (void*) (lbHeap_80431FA0.heap_array[i].start +
-                            lbHeap_80431FA0.heap_array[i].size));
+                                 lbHeap_80431FA0.heap_array[i].size));
                 }
                 lbHeap_80431FA0.heap_array[i].status = 0;
             }

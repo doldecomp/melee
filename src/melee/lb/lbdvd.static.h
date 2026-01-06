@@ -3,28 +3,32 @@
 
 #include "lbdvd.h" // IWYU pragma: export
 
-#include <melee/lb/types.h>
-#include <melee/gm/forward.h>
 #include <melee/ft/forward.h>
+#include <melee/gm/forward.h>
+
+#include <melee/lb/types.h>
 
 /* 0189EC */ static void lbDvd_800189EC(int);
 /* 0189EC */ static void lbDvd_800189EC(int);
 /* 3BA638 */ static PreloadCacheScene lbDvd_803BA638 = {
-    { 0, },
     {
-        MJ_COUNT, 0, 0, 0,
-        0x148,
-        {
-            { CHKIND_NONE, 0, 1 },
-            { CHKIND_NONE, 0, 1 },
-            { CHKIND_NONE, 0, 1 },
-            { CHKIND_NONE, 0, 1 },
-            { CHKIND_NONE, 0, 1 },
-            { CHKIND_NONE, 0, 1 },
-            { CHKIND_NONE, 0, 1 },
-            { CHKIND_NONE, 0, 1 },
-        }
+        0,
     },
+    { MJ_COUNT,
+      0,
+      0,
+      0,
+      0x148,
+      {
+          { CHKIND_NONE, 0, 1 },
+          { CHKIND_NONE, 0, 1 },
+          { CHKIND_NONE, 0, 1 },
+          { CHKIND_NONE, 0, 1 },
+          { CHKIND_NONE, 0, 1 },
+          { CHKIND_NONE, 0, 1 },
+          { CHKIND_NONE, 0, 1 },
+          { CHKIND_NONE, 0, 1 },
+      } },
 };
 /* 3BA68C */ static PreloadEntry lbDvd_803BA68C = { 0, 0, 0, 0, -1, 0, -1 };
 /* 3BA6A8 */ static char* lbDvd_803BA6A8;

@@ -310,9 +310,9 @@ int lbSnap_8001DF6C(int chan)
             ((int) &lbSnap_80433380.x0->x38 - (int) &lbSnap_80433380.x0->x0);
         lbSnap_803BACC8.x1C = lbSnap_80433380.x0;
         ret = lb_8001BB48(chan, text, &lbSnap_803BACC8.x14, &lbSnap_803BACC8,
-                           lbSnap_80433380.x4_string,
-                           lbSnap_80433380.x44_LbMcSnap_MemSnapIconData[0],
-                           lbSnap_80433380.x44_LbMcSnap_MemSnapIconData[1], 0);
+                          lbSnap_80433380.x4_string,
+                          lbSnap_80433380.x44_LbMcSnap_MemSnapIconData[0],
+                          lbSnap_80433380.x44_LbMcSnap_MemSnapIconData[1], 0);
     }
     return ret;
 }

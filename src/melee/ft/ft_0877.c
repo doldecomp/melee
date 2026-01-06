@@ -183,8 +183,8 @@ bool ft_80087AEC(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    if (fp->x34_scale.y != fp->x34_scale.x ||
-        fp->x2226_b4 || fp->is_metal || fp->x197C != NULL)
+    if (fp->x34_scale.y != fp->x34_scale.x || fp->x2226_b4 || fp->is_metal ||
+        fp->x197C != NULL)
     {
         return true;
     }

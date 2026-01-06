@@ -221,7 +221,7 @@ void ftMr_SpecialAirLw_Phys(HSD_GObj* gobj)
         ((u32) fp->cmd_vars[2] != 0U) && ((fp->input.x668 & HSD_PAD_B) != 0))
     {
         ftCommon_Ascend(fp, sa->speciallw.tap_y_vel_max,
-                          sa->speciallw.tap_grav);
+                        sa->speciallw.tap_grav);
     }
     ftCommon_FallBasic(fp);
     flt_var = sa->speciallw.air_momentum_x;
