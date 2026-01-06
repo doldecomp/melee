@@ -627,9 +627,9 @@ struct ftData {
         /* +14 */ u8 x14;
     }* x8;
     /*  +C */ struct S_TEMP4* xC;
-    /* +10 */ u8* x10;
+    /* +10 */ u8 (*x10)[2];
     /* +14 */ struct S_TEMP4* x14;
-    /* +18 */ u8* x18;
+    /* +18 */ u8 (*x18)[2];
     /* +1C */ struct ftData_x1C {
         u16 x0; ///< Fighter_Part
         u16 x2;
@@ -1123,7 +1123,7 @@ struct Fighter {
     /*   fp+1C */ MotionState* x1C_actionStateList;
     /*   fp+20 */ MotionState* x20_actionStateList;
     /*   fp+24 */ struct S_TEMP4* x24;
-    /*   fp+28 */ u8* x28;
+    /*   fp+28 */ u8 (*x28)[2];
     /*   fp+2C */ float facing_dir;
     /*   fp+30 */ float facing_dir1;
     /*   fp+34 */ Vec3 x34_scale;

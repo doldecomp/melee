@@ -947,7 +947,7 @@ void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
     MotionState* new_motion_state;
     struct S_TEMP4* unk_struct_x18;
     s32 bone_index;
-    u8* unk_byte_ptr;
+    u8(*unk_byte_ptr)[2];
     bool animflags_bool;
     union Struct2070 x2070;
 
@@ -1253,11 +1253,10 @@ void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
             if (arg3 != NULL) {
                 unk_struct_x18 =
                     &((Fighter*) arg3->user_data)->x24[fp->anim_id];
-                unk_byte_ptr =
-                    &((Fighter*) arg3->user_data)->x28[fp->anim_id << 1];
+                unk_byte_ptr = &((Fighter*) arg3->user_data)->x28[fp->anim_id];
             } else {
                 unk_struct_x18 = &fp->x24[fp->anim_id];
-                unk_byte_ptr = &fp->x28[fp->anim_id << 1];
+                unk_byte_ptr = &fp->x28[fp->anim_id];
             }
             fp->x594_s32 = unk_struct_x18->x10_animCurrFlags;
             ftCo_8009E7B4(fp, unk_byte_ptr);
@@ -1278,7 +1277,7 @@ void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
                                         anim_speed,
                                         (anim_blend == -1.0f) ? 0.0f
                                         : (anim_blend)        ? anim_blend
-                                                              : *unk_byte_ptr);
+                                                       : (*unk_byte_ptr)[0]);
                     }
                     ftAnim_8006E9B4(gobj);
                     if (fp->x594_b0 != 0U) {
@@ -1299,13 +1298,13 @@ void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
                         ftAnim_8006EBE8(gobj, anim_start, anim_speed,
                                         (anim_blend == -1.0f) ? 0.0f
                                         : (anim_blend)        ? anim_blend
-                                                              : *unk_byte_ptr);
+                                                       : (*unk_byte_ptr)[0]);
                     }
                     fp->x3E4_fighterCmdScript.timer = 0.0f;
                 }
 
                 ftAnim_8006E9B4(gobj);
-                if ((bone_index != 0) && (*unk_byte_ptr != 0U)) {
+                if ((bone_index != 0) && (*unk_byte_ptr)[0] != 0U) {
                     HSD_JObj* temp_joint = fp->parts[bone_index].x4_jobj2;
 
                     HSD_JObjGetTranslation(temp_joint, &translation);
