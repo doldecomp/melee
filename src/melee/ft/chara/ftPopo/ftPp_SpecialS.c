@@ -828,8 +828,12 @@ void ftPp_SpecialHi_Enter(Fighter_GObj* gobj)
 
 /// #ftPp_SpecialAirHiStart_0_Phys
 
-/// #ftPp_SpecialHiStart_0_Coll
-
+void ftPp_SpecialHiStart_0_Coll(Fighter_GObj* gobj)
+{
+    if (ft_800827A0(gobj) == 0) {
+        ftPp_SpecialHi_801217EC(gobj);
+    }
+}
 /// #ftPp_SpecialAirHiStart_0_Coll
 
 /// #ftPp_SpecialHi_801217EC
@@ -866,8 +870,12 @@ void ftPp_SpecialAirHiThrow_0_IASA(Fighter_GObj* gobj) {}
 
 /// #ftPp_SpecialAirHiThrow_0_Phys
 
-/// #ftPp_SpecialHiThrow_0_Coll
-
+void ftPp_SpecialHiThrow_0_Coll(Fighter_GObj* gobj)
+{
+    if (ft_800827A0(gobj) == 0) {
+        ftPp_SpecialHi_80121CE0(gobj);
+    }
+}
 /// #ftPp_SpecialAirHiThrow_0_Coll
 
 /// #ftPp_SpecialHi_80121CE0
@@ -903,12 +911,19 @@ void ftPp_SpecialHiStart_1_Phys(Fighter_GObj* gobj)
 
 /// #ftPp_SpecialHi_80122038
 
-/// #ftPp_SpecialHi_80122098
-
+void ftPp_SpecialHi_80122098(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    Fighter_ChangeMotionState(gobj, 0x15E, 0, fp->cur_anim_frame, 1.0f, 0.0f, NULL);
+}
 /// #ftPp_SpecialHi_801220D4
 
-/// #ftPp_SpecialHiThrow_1_Anim
-
+void ftPp_SpecialHiThrow_1_Anim(Fighter_GObj* gobj)
+{
+    if (ftAnim_IsFramesRemaining(gobj) == 0) {
+        ft_8008A2BC(gobj);
+    }
+}
 /// #ftPp_SpecialAirHiThrow_1_Anim
 
 void ftPp_SpecialHiThrow_1_IASA(Fighter_GObj* gobj) {}
