@@ -233,15 +233,15 @@ void ftParts_800739B8(HSD_PObj* pobj, MtxPtr vmtx, MtxPtr pmtx, u32 rendermode)
 
 void ftParts_80073CA8(HSD_PObj* pobj, MtxPtr vmtx, MtxPtr pmtx, u32 rendermode)
 {
-    HSD_JObj* temp_r23;
-    HSD_SList* var_r22;
-    int var_r21;
-    MtxPtr temp_r20;
-    HSD_Envelope* envelope;
-    MtxPtr var_r19_2;
-    s32 temp_r18;
-    s32 var_r17;
-    int var_r17_2;
+    HSD_JObj* temp_r23;       // r23
+    HSD_SList* envelope_list; // r22
+    int i;                    // r21
+    MtxPtr temp_r20;          // r20
+    HSD_Envelope* envelope;   // r19
+    MtxPtr var_r19_2;         // r19
+    s32 temp_r18;             // r18
+    s32 var_r17;              // r17
+    int envelope_count;       // r17
 
     HSD_JObj* jp;
 
@@ -266,12 +266,11 @@ void ftParts_80073CA8(HSD_PObj* pobj, MtxPtr vmtx, MtxPtr pmtx, u32 rendermode)
         }
     }
     temp_r20 = _HSD_mkEnvelopeModelNodeMtx(temp_r23, spAC);
-    var_r22 = pobj->u.envelope_list;
-    var_r21 = 0;
-    while (var_r21 < 10 && var_r22 != NULL) {
-        envelope = var_r22->data;
-        temp_r18 = HSD_Index2PosNrmMtx(var_r21);
-        var_r17_2 = 0;
+    envelope_list = pobj->u.envelope_list;
+    for (i = 0; i < 10 && envelope_list != NULL; i++) {
+        envelope = envelope_list->data;
+        temp_r18 = HSD_Index2PosNrmMtx(i);
+        envelope_count = 0;
         HSD_ASSERT(328, envelope);
         if (envelope->weight >= 1.0F) {
             HSD_JObjSetupMatrix(envelope->jobj);
@@ -283,18 +282,18 @@ void ftParts_80073CA8(HSD_PObj* pobj, MtxPtr vmtx, MtxPtr pmtx, u32 rendermode)
                 var_r19_2 = envelope->jobj->mtx;
             }
         } else {
-            sp7C[2][3] = 0.0f;
-            sp7C[2][2] = 0.0f;
-            sp7C[2][1] = 0.0f;
-            sp7C[2][0] = 0.0f;
-            sp7C[1][3] = 0.0f;
-            sp7C[1][2] = 0.0f;
-            sp7C[1][1] = 0.0f;
-            sp7C[1][0] = 0.0f;
-            sp7C[0][3] = 0.0f;
-            sp7C[0][2] = 0.0f;
-            sp7C[0][1] = 0.0f;
-            sp7C[0][0] = 0.0f;
+            sp7C[2][3] = 0.0F;
+            sp7C[2][2] = 0.0F;
+            sp7C[2][1] = 0.0F;
+            sp7C[2][0] = 0.0F;
+            sp7C[1][3] = 0.0F;
+            sp7C[1][2] = 0.0F;
+            sp7C[1][1] = 0.0F;
+            sp7C[1][0] = 0.0F;
+            sp7C[0][3] = 0.0F;
+            sp7C[0][2] = 0.0F;
+            sp7C[0][1] = 0.0F;
+            sp7C[0][0] = 0.0F;
             while (envelope != NULL) {
                 HSD_ASSERT(348, envelope->jobj);
                 jp = envelope->jobj;
@@ -304,11 +303,11 @@ void ftParts_80073CA8(HSD_PObj* pobj, MtxPtr vmtx, MtxPtr pmtx, u32 rendermode)
                 PSMTXConcat(jp->mtx, jp->envelopemtx, sp4C);
                 HSD_MtxScaledAdd(sp4C, sp7C, sp7C, envelope->weight);
                 envelope = envelope->next;
-                var_r17_2++;
+                envelope_count++;
             }
             var_r19_2 = sp7C;
         }
-        HSD_PerfCountEnvelopeBlending(var_r17_2);
+        HSD_PerfCountEnvelopeBlending(envelope_count);
         if (temp_r20 != NULL) {
             PSMTXConcat(var_r19_2, temp_r20, sp7C);
         }
@@ -327,13 +326,11 @@ void ftParts_80073CA8(HSD_PObj* pobj, MtxPtr vmtx, MtxPtr pmtx, u32 rendermode)
                 HSD_PerfCurrentStat.nb_mtx_load += 1;
             }
             if (var_r17 & 6) {
-                GXLoadTexMtxImm(sp7C, HSD_Index2TexMtx((u32) var_r21),
-                                GX_MTX3x4);
+                GXLoadTexMtxImm(sp7C, HSD_Index2TexMtx((u32) i), GX_MTX3x4);
                 HSD_PerfCurrentStat.nb_mtx_load += 1;
             }
         }
-        var_r22 = var_r22->next;
-        var_r21++;
+        envelope_list = envelope_list->next;
     }
 }
 
