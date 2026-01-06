@@ -12,7 +12,7 @@
 /* 06DE00 */ void ftAnim_GetNextJointInTree(HSD_Joint**, s32* pdepth);
 /* 06DF0C */ void ftAnim_8006DF0C(Fighter*);
 /* 06E054 */ void ftAnim_8006E054(Fighter*, HSD_JObj*, HSD_JObj*, HSD_JObj*);
-/* 06E7B8 */ void ftAnim_8006E7B8(Fighter*, int);
+/* 06E7B8 */ void ftAnim_8006E7B8(Fighter*, Fighter_Part);
 /* 06E9B4 */ void ftAnim_8006E9B4(Fighter_GObj*);
 /* 06EBA4 */ void ftAnim_8006EBA4(Fighter_GObj*);
 /* 06EBE8 */ void ftAnim_8006EBE8(HSD_GObj*, float, float anim_rate,

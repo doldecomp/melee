@@ -281,7 +281,7 @@ void ftAnim_8006E054(Fighter* fp, HSD_JObj* jobj, HSD_JObj* arg2,
     HSD_AObjInvokeCallBacks();
 }
 
-void ftAnim_8006E7B8(Fighter* fp, int arg1)
+void ftAnim_8006E7B8(Fighter* fp, Fighter_Part part)
 {
     HSD_JObj* jobj;
     int i;
@@ -289,15 +289,15 @@ void ftAnim_8006E7B8(Fighter* fp, int arg1)
     int temp_r27;
 
     HSD_AObjInitEndCallBack();
-    i = arg1;
-    temp_r30 = fp->parts[arg1].joint;
-    temp_r27 = fp->parts[arg1].xC;
+    i = part;
+    temp_r30 = fp->parts[part].joint;
+    temp_r27 = fp->parts[part].xC;
     jobj = temp_r30;
     while (jobj != NULL) {
         while (!fp->parts[i].flags_b1) {
             i++;
         }
-        if (fp->parts[i].xC <= temp_r27 && i != arg1) {
+        if (fp->parts[i].xC <= temp_r27 && i != part) {
             break;
         }
         if (!fp->parts[i].flags_b0 && !fp->parts[i].flags_b5) {
