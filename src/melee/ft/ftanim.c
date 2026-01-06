@@ -416,7 +416,7 @@ void ftAnim_8006EBE8(HSD_GObj* gobj, float arg1, float anim_rate,
         ftAnim_8006FA58(fp, true, fp->x108_costume_joint->child);
         ftAnim_8006FE08(fp, false);
         ftAnim_80070710(root_jobj, arg1);
-        if (fp->x594_b1) {
+        if (fp->x594_b1_loop) {
             HSD_ForeachAnim(root_jobj, JOBJ_TYPE, mask, HSD_AObjSetFlags,
                             AOBJ_ARG_AU, AOBJ_LOOP);
         }
@@ -427,7 +427,7 @@ void ftAnim_8006EBE8(HSD_GObj* gobj, float arg1, float anim_rate,
         ftAnim_8006FE08(fp, true);
         ftAnim_80070710(anim_jobj, arg1);
         ftAnim_80070710(root_jobj, arg1);
-        if (fp->x594_b1) {
+        if (fp->x594_b1_loop) {
             HSD_ForeachAnim(anim_jobj, JOBJ_TYPE, mask, HSD_AObjSetFlags,
                             AOBJ_ARG_AU, AOBJ_LOOP);
             HSD_ForeachAnim(root_jobj, JOBJ_TYPE, mask, HSD_AObjSetFlags,
@@ -488,7 +488,7 @@ void ftAnim_8006EED4(Fighter* fp, Fighter_Part arg1, FigaTree* arg2,
     ftAnim_8006F954(fp, arg1, 1, arg2);
     ftAnim_80070710(temp_r26, frame);
     ftAnim_80070710(temp_r31, frame);
-    if (fp->x594_b1) {
+    if (fp->x594_b1_loop) {
         HSD_ForeachAnim(temp_r26, JOBJ_TYPE, 0xFB7F, HSD_AObjSetFlags,
                         AOBJ_ARG_AU, AOBJ_LOOP);
         HSD_ForeachAnim(temp_r31, JOBJ_TYPE, 0xFB7F, HSD_AObjSetFlags,
