@@ -13,29 +13,30 @@ typedef struct LocalFighterData {
 
 // --- Function Implementation ---
 
-s32 mnCount_8025035C(s32 skip_count, u32 (*get_val_func)(s8)) {
-    s32 pad8[2];
-    CountEntry sp18[25];
-    CountEntry temp;
-    s32 k;
+inline BOOL mnCount_8025035C_inline(void)
+{
     s32 i;
-    s32 best_idx;
-    s32 j;
-    LocalFighterData* fdata;
-    s32 no_valid;
-
-    (void)pad8;
-
-    for (k = 0; k < 25; k++) {
-        fdata = (LocalFighterData*)GetPersistentFighterData(k);
+    for (i = 0; i < 25; i++) {
+        LocalFighterData *fdata = (LocalFighterData*)GetPersistentFighterData(i);
         if (fdata->unk54 != 0) {
-            no_valid = 0;
-            goto check;
+            return 0;
         }
     }
-    no_valid = 1;
-check:
-    if (no_valid) return 25;
+    return 1;
+}
+
+s32 mnCount_8025035C(s32 skip_count, u32 (*get_val_func)(s8)) {
+    int stack_pad = 0;
+    
+    s32 i;
+    s32 j;
+    s32 best_idx;
+    CountEntry sp18[25];
+    CountEntry temp;
+
+    (void)stack_pad;
+
+    if (mnCount_8025035C_inline()) return 25;
 
     for (i = 0; i < 25; i++) {
         sp18[i].id = i;
@@ -46,7 +47,7 @@ check:
         best_idx = i;
 
         for (j = i + 1; j < 25; j++) {
-            if (sp18[j].val < sp18[best_idx].val) {
+            if (sp18[best_idx].val < sp18[j].val ) {
                 best_idx = j;
             }
         }
@@ -95,10 +96,10 @@ check:
 
 s32 mnCount_8025072C(CountEntry* entries, s32 start_idx, s32 mode) {
     s32 i;
-    s32 best_idx = start_idx;
-    s32 found_tie = 0;
-    s32 is_invalid = 0;
-    s32 curr_stat, best_stat;
+    s32 best_idx = start_idx; 
+    s32 found_tie = 0;        
+    s32 is_invalid = 0;       
+    s32 curr_stat, best_stat; 
 
     for (i = start_idx + 1; i < 25; i++) {
         if (entries[i].val != entries[start_idx].val) break;
@@ -114,7 +115,7 @@ s32 mnCount_8025072C(CountEntry* entries, s32 start_idx, s32 mode) {
 
         curr_stat = GetFighterTotalKOs(entries[i].id);
         best_stat = GetFighterTotalKOs(entries[best_idx].id);
-
+        
         if (curr_stat == best_stat) {
             found_tie = 1;
         }
@@ -127,7 +128,7 @@ s32 mnCount_8025072C(CountEntry* entries, s32 start_idx, s32 mode) {
     for (i = start_idx + 1; i < 25; i++) {
         if (i == best_idx) continue;
 
-        if (entries[i].val != entries[start_idx].val) break;
+        if (entries[i].val != entries[start_idx].val) break; 
 
         curr_stat = GetFighterTotalKOs(entries[i].id);
         best_stat = GetFighterTotalKOs(entries[best_idx].id);
@@ -138,7 +139,7 @@ s32 mnCount_8025072C(CountEntry* entries, s32 start_idx, s32 mode) {
 
         if (curr_stat == best_stat) {
             is_invalid = 1;
-            break;
+            break; 
         }
 
         if (mode == 0) {
