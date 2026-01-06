@@ -19,6 +19,22 @@
 #include <baselib/memory.h>
 #include <baselib/random.h>
 
+extern void* un_804D6EF0;
+
+typedef struct {
+    u8 pad[0x10];
+    s32 x10;
+    u8 pad2[0x4];
+    void* x18;
+    u8 pad3[0x8];
+    s32 x24;
+} TyFiguponData;
+
+typedef struct {
+    u8 pad[0x4D];
+    u8 x4D;
+} TyFiguponInner;
+
 void tyFigupon_80314AA8(HSD_JObj* jobj, char* anim_str, char* matanim_str,
                         char* shapeanim_str)
 {
@@ -136,7 +152,19 @@ void tyFigupon_80314C5C(HSD_GObj* gobj)
 
 /// #un_803153EC
 
-/// #fn_80315574
+void fn_80315574(void)
+{
+    TyFiguponData* data = un_804D6EF0;
+
+    if (data->x24 == 0) {
+        TyFiguponInner* inner = data->x18;
+        inner->x4D = 1;
+        data->x10 = 0;
+        HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
+    } else {
+        data->x24 = data->x24 - 1;
+    }
+}
 
 /// #fn_803155C8
 
