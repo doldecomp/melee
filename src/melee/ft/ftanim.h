@@ -39,8 +39,8 @@
 /* 06FE48 */ void ftAnim_8006FE48(Fighter_GObj*);
 /* 06FE9C */ void ftAnim_8006FE9C(Fighter*, int start_idx, float, float);
 /* 06FF74 */ void ftAnim_8006FF74(Fighter*, int start_idx);
-/* 070010 */ void ftAnim_80070010(Fighter*, int, HSD_Joint*, float, float);
-/* 070108 */ void ftAnim_80070108(Fighter*, int, HSD_Joint*, float, float);
+/* 070010 */ void ftAnim_80070010(Fighter*, int, float, float, HSD_Joint*);
+/* 070108 */ void ftAnim_80070108(Fighter*, int, float, float, HSD_Joint*);
 /* 070200 */ void ftAnim_80070200(Fighter*, ftData_x8_x8*, CostumeTObjList*,
                                   DObjList*);
 /* 070308 */ void ftAnim_80070308(Fighter_GObj*);

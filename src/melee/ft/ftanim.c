@@ -970,7 +970,8 @@ void ftAnim_8006FF74(Fighter* fp, int start_idx)
     }
 }
 
-void ftAnim_80070010(Fighter* fp, int r4, HSD_Joint* joint, float t, float s)
+void ftAnim_80070010(Fighter* fp, int r4, float t, float t_inv,
+                     HSD_Joint* joint)
 {
     int i = r4; // r31
     s32 sp1C = 0;
@@ -984,7 +985,7 @@ void ftAnim_80070010(Fighter* fp, int r4, HSD_Joint* joint, float t, float s)
                 lb_8000B4FC(fp->parts[i].joint, joint);
             } else {
                 lb_8000C868(joint, fp->parts[i].joint, fp->parts[i].joint, t,
-                            s);
+                            t_inv);
             }
         }
         i++;
@@ -992,24 +993,23 @@ void ftAnim_80070010(Fighter* fp, int r4, HSD_Joint* joint, float t, float s)
     }
 }
 
-void ftAnim_80070108(Fighter* fp, int r4, HSD_Joint* joint, float f1, float f2)
+void ftAnim_80070108(Fighter* fp, int r4, float t, float t_inv,
+                     HSD_Joint* joint)
 {
     int i = r4; // r31
     s32 sp1C = 0;
 
     while (joint != NULL) {
-        FighterBone* bone;
-        u8* flags;
         while (ftParts_8007506C(fp->kind, i) != 0) {
             i++;
         }
-        bone = &fp->parts[i];
-        flags = &bone->hi;
-        if (!(*flags >> 7 & 1) && !(*flags >> 2 & 1)) {
-            if ((*flags >> 3 & 1)) {
-                lb_8000B4FC(bone->x4_jobj2, joint);
+
+        if (!fp->parts[i].flags_b0 && !fp->parts[i].flags_b5) {
+            if (fp->parts[i].flags_b4) {
+                lb_8000B4FC(fp->parts[i].x4_jobj2, joint);
             } else {
-                lb_8000C868(joint, bone->x4_jobj2, bone->x4_jobj2, f1, f2);
+                lb_8000C868(joint, fp->parts[i].x4_jobj2,
+                            fp->parts[i].x4_jobj2, t, t_inv);
             }
         }
         i++;

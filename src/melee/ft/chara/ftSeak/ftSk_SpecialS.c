@@ -109,8 +109,8 @@ void ftSk_SpecialS_80110610(HSD_GObj* gobj, s32 arg1, float arg2)
             HSD_JObjAnimAll(bone);
 
             if (fp->mv.sk.specials.x14 < 1) {
-                ftAnim_80070108(fp, 1, item[2], 1 - fp->mv.sk.specials.x14,
-                                fp->mv.sk.specials.x14);
+                ftAnim_80070108(fp, 1, 1 - fp->mv.sk.specials.x14,
+                                fp->mv.sk.specials.x14, item[2]);
             }
 
             if (arg2 < 1) {
@@ -124,7 +124,7 @@ void ftSk_SpecialS_80110610(HSD_GObj* gobj, s32 arg1, float arg2)
     }
 
     if (arg2 < 1) {
-        ftAnim_80070010(fp, 1, item[2], arg2, 1 - arg2);
+        ftAnim_80070010(fp, 1, arg2, 1 - arg2, item[2]);
         return;
     }
 

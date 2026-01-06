@@ -220,8 +220,8 @@ void ftCo_80091E78(HSD_GObj* gobj, float arg1)
             ftAnim_8006FB88(fp, 1, fp->x108_costume_joint->child);
             HSD_JObjAnimAll(jobj);
             if (fp->mv.co.guard.x4 < 1) {
-                ftAnim_80070108(fp, 1, fp->ft_data->x20->x8,
-                                1 - fp->mv.co.guard.x4, fp->mv.co.guard.x4);
+                ftAnim_80070108(fp, 1, 1 - fp->mv.co.guard.x4,
+                                fp->mv.co.guard.x4, fp->ft_data->x20->x8);
             }
             if (arg1 < 1) {
                 ftAnim_8006FE9C(fp, 1, arg1, 1 - arg1);
@@ -229,7 +229,7 @@ void ftCo_80091E78(HSD_GObj* gobj, float arg1)
                 ftAnim_8006FF74(fp, 1);
             }
         } else if (arg1 < 1) {
-            ftAnim_80070010(fp, 1, fp->ft_data->x20->x8, arg1, 1 - arg1);
+            ftAnim_80070010(fp, 1, arg1, 1 - arg1, fp->ft_data->x20->x8);
         } else {
             ftAnim_8006FA58(fp, 1, fp->ft_data->x20->x8);
         }
