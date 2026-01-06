@@ -678,6 +678,7 @@ Effect* efLib_8005C3DC(u32 arg0, HSD_GObj* arg_gobj, HSD_JObj* arg_jobj)
     if (eff_1 != NULL) {
         jobj_1 = GET_JOBJ(arg_gobj);
         HSD_JObjGetScale(jobj_1, &sp34);
+        sp34.x = sp34.z = sp34.y;
         jobj_2 = GET_JOBJ(eff_1->gobj);
         HSD_JObjSetScale(jobj_2, &sp34);
     }
@@ -728,12 +729,13 @@ Effect* efLib_8005C6F4(u32 arg0, HSD_GObj* arg_gobj, void* unused_arg)
 
 Effect* efLib_8005C814(u32 arg0, HSD_GObj* arg_gobj, Vec3* arg_vec3)
 {
-    Effect* eff_1;
     HSD_JObj* jobj_1;
+    Effect* eff_1;
 
     eff_1 = efLib_8005BE88(arg0, arg_gobj);
     if (eff_1 != NULL) {
         jobj_1 = GET_JOBJ(eff_1->gobj);
+        (void) jobj_1;
         HSD_JObjSetTranslate(jobj_1, arg_vec3);
     }
     return eff_1;
@@ -810,8 +812,7 @@ HSD_Generator* efLib_8005CAB0(s32 arg0)
 
     generator = hsd_8039F05C(0, (arg0 / 1000), arg0);
     if (generator != NULL) {
-        psAppSRT = generator->appsrt;
-        if (psAppSRT == NULL) {
+        if ((psAppSRT = generator->appsrt) == NULL) {
             psAppSRT = psAddGeneratorAppSRT_begin(generator, 1);
         }
         if (psAppSRT == NULL) {
@@ -1300,21 +1301,24 @@ void efLib_8005DE94(Effect* effect)
 
 void efLib_8005E090(Effect* effect)
 {
-    HSD_JObj* eff_jobj;
+    f64 temp_d;
     f32 rotate_y;
-    void* temp_r4;
+    HSD_JObj* eff_jobj;
+    HSD_JObj* temp_r4;
 
-    temp_r4 = effect->x14;
+    temp_r4 = (HSD_JObj*) effect->x14;
     eff_jobj = GET_JOBJ(effect->gobj);
+    (void) temp_r4;
     if (temp_r4 != NULL) {
-        if (((HSD_JObj*) temp_r4)->scale.x < 0.0f) {
-            rotate_y = -M_PI_2; // needs to load as a double/f64?
+        if (temp_r4->scale.x < 0.0f) {
+            temp_d = -M_PI_2;
         } else {
-            rotate_y = M_PI_2; // needs to load as a double/f64?
+            temp_d = M_PI_2;
         }
+        rotate_y = temp_d;
         HSD_JObjSetRotationY(eff_jobj, rotate_y);
     }
-    if (effect->x26 != 0) {
+    if ((u8) effect->x26 != 0) {
         effect->x24 = 0xBU;
         effect->x10 = NULL;
         HSD_JObjReqAnimAll(eff_jobj, 65.0f);
@@ -1437,6 +1441,7 @@ void efLib_8005EB70(Effect* arg_effect)
 
 void efLib_8005EBC8(Effect* arg_effect)
 {
+    f64 temp_d;
     Vec3 sp38;
     Vec3 sp2C;
     HSD_JObj* jobj_2;
@@ -1444,7 +1449,7 @@ void efLib_8005EBC8(Effect* arg_effect)
     HSD_JObj* jobj_1;
     void* user_data;
     HSD_GObj* gobj_1;
-    PAD_STACK(0x10);
+    PAD_STACK(0xC);
 
     gobj_1 = arg_effect->parent_gobj;
     jobj_1 = GET_JOBJ(gobj_1);
@@ -1459,10 +1464,11 @@ void efLib_8005EBC8(Effect* arg_effect)
     HSD_JObjSetScale(jobj_2, &sp38);
 
     if (((Fighter*) user_data)->facing_dir < 0.0f) {
-        rotate_y = -M_PI_2;
+        temp_d = -M_PI_2;
     } else {
-        rotate_y = M_PI_2;
+        temp_d = M_PI_2;
     }
+    rotate_y = temp_d;
     HSD_JObjSetRotationY(jobj_2, rotate_y);
 }
 
@@ -1485,10 +1491,10 @@ void efLib_8005EDDC(Effect* arg_effect)
 
 void efLib_8005F08C(Effect* arg_effect)
 {
+    f32 rotate_z;
     HSD_JObj* jobj_1;
     HSD_JObj* jobj_3;
     HSD_JObj* jobj_2;
-    f32 rotate_z;
     Fighter* fighter;
 
     jobj_1 = GET_JOBJ(arg_effect->gobj);
@@ -1503,7 +1509,7 @@ void efLib_8005F08C(Effect* arg_effect)
         jobj_3 = jobj_2->next;
     }
     fighter = GET_FIGHTER(arg_effect->parent_gobj);
-    if (fighter->motion_id == 349) { // Special state 8
+    if (fighter->motion_id == 349) {
         HSD_JObjClearFlagsAll(jobj_3, 0x10U);
     } else {
         HSD_JObjSetFlagsAll(jobj_3, 0x10U);
@@ -1801,8 +1807,8 @@ loop_7:
 
 void fn_8005FBE4(Effect* arg_effect)
 {
-    Vec3 sp14;
     HSD_JObj* jobj_1;
+    Vec3 sp14;
 
     lb_8000B1CC(arg_effect->xC, NULL, &sp14);
     sp14.x += arg_effect->translate.x;
