@@ -517,8 +517,6 @@ void ftAnim_8006F0FC(Fighter_GObj* gobj, float anim_rate)
     fp->frame_speed_mul = anim_rate;
 }
 
-/// #ftAnim_SetAnimRate
-
 void ftAnim_SetAnimRate(Fighter_GObj* gobj, float anim_rate)
 {
     Fighter* fp = GET_FIGHTER(gobj);
