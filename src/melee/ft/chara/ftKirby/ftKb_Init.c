@@ -3157,9 +3157,12 @@ void ftKb_Init_OnItemPickup(HSD_GObj* gobj, bool arg1)
     }
 }
 
-void ftKb_Init_OnItemInvisible(HSD_GObj* gobj)
+void ftKb_Init_OnItemInvisible(Fighter_GObj* gobj)
 {
-    Fighter_OnItemInvisible(gobj, 1);
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (it_8026B2B4(fp->item_gobj) == 0) {
+        ftAnim_80070CC4(gobj, 1);
+    }
 }
 
 void ftKb_Init_OnItemVisible(HSD_GObj* gobj)
@@ -3269,8 +3272,13 @@ void ftKb_Init_UnkCallbackPairs0_0(Fighter_GObj* gobj)
     }
 }
 
-/// #ftKb_Init_UnkCallbackPairs0_1
-
+void ftKb_Init_UnkCallbackPairs0_1(Fighter_GObj* gobj, int arg1, float arg2)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (fp->fv.kb.hat.x14.data != NULL && fp->fv.kb.hat.jobj == NULL) {
+        ftAnim_80070458(fp, &fp->fv.kb.x44, arg1);
+    }
+}
 void ftKb_SpecialN_800EFA40(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
