@@ -44,7 +44,7 @@ struct KirbyFV_x44_t;
 /* 070200 */ UNK_RET ftAnim_80070200(Fighter*, void**, struct KirbyFV_x44_t*,
                                      DObjList*);
 /* 070308 */ void ftAnim_80070308(Fighter_GObj*);
-/* 070458 */ UNK_RET ftAnim_80070458(UNK_PARAMS);
+/* 070458 */ void ftAnim_80070458(Fighter*, struct KirbyFV_x44_t*, int);
 /* 0704F0 */ void ftAnim_800704F0(Fighter_GObj*, int, float);
 /* 0705E0 */ UNK_RET ftAnim_800705E0(UNK_T);
 /* 070654 */ void ftAnim_80070654(Fighter_GObj*);

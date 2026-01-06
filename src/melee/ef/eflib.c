@@ -354,57 +354,44 @@ void Effect_RemoveUserData(void* effect)
 #pragma dont_inline on
 void efLib_8005BBB4(u32 arg1, f32 arg8)
 {
-    HSD_GObj* gobj_3;
-    HSD_GObj* gobj_4;
-    HSD_GObj* gobj_1;
-    HSD_GObj* gobj_2;
-    f32 var_f1;
-    u32 var_r4;
-    // void* temp_ret;
-    // void* temp_ret_2;
+    HSD_GObj* gobj;
+    HSD_GObj* next;
+    u32 unused1;
+    f32 unused2;
 
-    var_r4 = arg1;
-    var_f1 = arg8;
-    gobj_1 = HSD_GObj_Entities->x2C;
-#if 1
-    while (gobj_1 != NULL) {
-        gobj_4 = gobj_1->next;
-        // temp_ret_2 = efLib_8005B780();
-        efLib_8005B780(gobj_1);
-        // var_f1 = (bitwise f32) temp_ret_2;
-        // var_r4 = (u32) (u64) temp_ret_2;
-        if (efLib_804D64EC >= 0x40U) {
-            gobj_1 = gobj_4;
+    unused1 = arg1;
+    unused2 = arg8;
+
+    gobj = HSD_GObj_Entities->x2C;
+    while (gobj != NULL) {
+        next = gobj->next;
+        efLib_8005B780(gobj);
+        if (efLib_804D64EC < 0x40U) {
+            return;
         }
+        gobj = next;
     }
-    gobj_2 = HSD_GObj_Entities->x30;
-    while (gobj_2 != NULL) {
-        //     OSReport("can't remove no force effect!\n\0\0error no parent
-        //     gobj!\n\0\0Over Anime Call\n", var_r4, var_f1);
-        //     __assert("eflib.c", 0x4DU, "0");
-        // } else {
-        gobj_3 = gobj_2->next;
-        // temp_ret = efLib_8005B780(gobj_2); // which gobj?
-        efLib_8005B780(gobj_2);
-        // var_f1 = (bitwise f32) temp_ret;
-        // var_r4 = (u32) (u64) temp_ret;
-        if (efLib_804D64EC >= 0x40U) {
-            gobj_2 = gobj_3;
+
+    gobj = HSD_GObj_Entities->x30;
+    while (gobj != NULL) {
+        next = gobj->next;
+        efLib_8005B780(gobj);
+        if (efLib_804D64EC < 0x40U) {
+            return;
         }
+        gobj = next;
     }
-    // if (gobj_2 != NULL) {
+
     OSReport("can't remove no force effect!\n\0\0error no parent "
-             "gobj!\n\0\0Over Anime Call\n",
-             var_r4, var_f1);
+             "gobj!\n\0\0Over Anime Call\n");
     __assert("eflib.c", 0x4DU, "0");
-    // }
 
-#else
+#if 0
 loop_3:
-    if (gobj_1 == NULL) {
-        gobj_2 = HSD_GObj_Entities->x30;
+    if (gobj == NULL) {
+        gobj = HSD_GObj_Entities->x30;
     loop_7:
-        if (gobj_2 == NULL) {
+        if (gobj == NULL) {
             OSReport("can't remove no force effect!\n\0\0error no parent "
                      "gobj!\n\0\0Over Anime Call\n",
                      var_r4, var_f1);
@@ -624,15 +611,12 @@ Effect* efLib_8005C1B4(u32 arg0, HSD_GObj* arg_gobj, HSD_JObj* arg_jobj)
 {
     Vec3 sp1C;
     Effect* eff_1;
-    HSD_GObj* gobj_1;
     HSD_JObj* jobj_1;
 
     eff_1 = efLib_8005BE88(arg0, arg_gobj);
     if (eff_1 != NULL) {
-        gobj_1 = eff_1->gobj;
-        jobj_1 = GET_JOBJ(gobj_1);
-        if (jobj_1 == NULL) {
-            HSD_GObjPLink_80390228(gobj_1);
+        if ((jobj_1 = GET_JOBJ(eff_1->gobj)) == NULL) {
+            HSD_GObjPLink_80390228(eff_1->gobj);
             return NULL;
         }
         lb_8000C1C0(jobj_1, arg_jobj);
@@ -694,6 +678,7 @@ Effect* efLib_8005C3DC(u32 arg0, HSD_GObj* arg_gobj, HSD_JObj* arg_jobj)
     if (eff_1 != NULL) {
         jobj_1 = GET_JOBJ(arg_gobj);
         HSD_JObjGetScale(jobj_1, &sp34);
+        sp34.x = sp34.z = sp34.y;
         jobj_2 = GET_JOBJ(eff_1->gobj);
         HSD_JObjSetScale(jobj_2, &sp34);
     }
@@ -744,12 +729,13 @@ Effect* efLib_8005C6F4(u32 arg0, HSD_GObj* arg_gobj, void* unused_arg)
 
 Effect* efLib_8005C814(u32 arg0, HSD_GObj* arg_gobj, Vec3* arg_vec3)
 {
-    Effect* eff_1;
     HSD_JObj* jobj_1;
+    Effect* eff_1;
 
     eff_1 = efLib_8005BE88(arg0, arg_gobj);
     if (eff_1 != NULL) {
         jobj_1 = GET_JOBJ(eff_1->gobj);
+        (void) jobj_1;
         HSD_JObjSetTranslate(jobj_1, arg_vec3);
     }
     return eff_1;
@@ -826,8 +812,7 @@ HSD_Generator* efLib_8005CAB0(s32 arg0)
 
     generator = hsd_8039F05C(0, (arg0 / 1000), arg0);
     if (generator != NULL) {
-        psAppSRT = generator->appsrt;
-        if (psAppSRT == NULL) {
+        if ((psAppSRT = generator->appsrt) == NULL) {
             psAppSRT = psAddGeneratorAppSRT_begin(generator, 1);
         }
         if (psAppSRT == NULL) {
@@ -1020,7 +1005,7 @@ inline void efLib_8005D174_inline1(HSD_Generator* generator_1)
 // by trying to mimic original inlining Likely need to be remade to match how
 // inlines were actually written For more work/alternatives for this function
 // that may be helpful, see https://decomp.me/scratch/VjlDJ
-void efLib_8005D174(s8 arg0, s32 arg1, HSD_JObj* arg_jobj, s32 arg3)
+void efLib_8005D174(int arg0, s32 arg1, HSD_JObj* arg_jobj, s32 arg3)
 {
     // HSD_JObj* jobj_2;
     // HSD_JObj* jobj_3;
@@ -1222,7 +1207,6 @@ void fn_8005DB20(s32 arg0, s32 arg1, s32 arg2, HSD_JObj* arg3)
     efLib_8005D174(arg1, arg2, arg3, 0);
 }
 
-// void fn_8005DB70(s32 arg0, s32 lo, s32 hi, HSD_JObj* jobj)
 void fn_8005DB70(int arg0, int lo, int hi, HSD_JObj* jobj)
 {
     if (lo == 0x1E) {
@@ -1317,21 +1301,24 @@ void efLib_8005DE94(Effect* effect)
 
 void efLib_8005E090(Effect* effect)
 {
-    HSD_JObj* eff_jobj;
+    f64 temp_d;
     f32 rotate_y;
-    void* temp_r4;
+    HSD_JObj* eff_jobj;
+    HSD_JObj* temp_r4;
 
-    temp_r4 = effect->x14;
+    temp_r4 = (HSD_JObj*) effect->x14;
     eff_jobj = GET_JOBJ(effect->gobj);
+    (void) temp_r4;
     if (temp_r4 != NULL) {
-        if (((HSD_JObj*) temp_r4)->scale.x < 0.0f) {
-            rotate_y = -M_PI_2; // needs to load as a double/f64?
+        if (temp_r4->scale.x < 0.0f) {
+            temp_d = -M_PI_2;
         } else {
-            rotate_y = M_PI_2; // needs to load as a double/f64?
+            temp_d = M_PI_2;
         }
+        rotate_y = temp_d;
         HSD_JObjSetRotationY(eff_jobj, rotate_y);
     }
-    if (effect->x26 != 0) {
+    if ((u8) effect->x26 != 0) {
         effect->x24 = 0xBU;
         effect->x10 = NULL;
         HSD_JObjReqAnimAll(eff_jobj, 65.0f);
@@ -1454,6 +1441,7 @@ void efLib_8005EB70(Effect* arg_effect)
 
 void efLib_8005EBC8(Effect* arg_effect)
 {
+    f64 temp_d;
     Vec3 sp38;
     Vec3 sp2C;
     HSD_JObj* jobj_2;
@@ -1461,7 +1449,7 @@ void efLib_8005EBC8(Effect* arg_effect)
     HSD_JObj* jobj_1;
     void* user_data;
     HSD_GObj* gobj_1;
-    PAD_STACK(0x10);
+    PAD_STACK(0xC);
 
     gobj_1 = arg_effect->parent_gobj;
     jobj_1 = GET_JOBJ(gobj_1);
@@ -1476,10 +1464,11 @@ void efLib_8005EBC8(Effect* arg_effect)
     HSD_JObjSetScale(jobj_2, &sp38);
 
     if (((Fighter*) user_data)->facing_dir < 0.0f) {
-        rotate_y = -M_PI_2;
+        temp_d = -M_PI_2;
     } else {
-        rotate_y = M_PI_2;
+        temp_d = M_PI_2;
     }
+    rotate_y = temp_d;
     HSD_JObjSetRotationY(jobj_2, rotate_y);
 }
 
@@ -1502,10 +1491,10 @@ void efLib_8005EDDC(Effect* arg_effect)
 
 void efLib_8005F08C(Effect* arg_effect)
 {
+    f32 rotate_z;
     HSD_JObj* jobj_1;
     HSD_JObj* jobj_3;
     HSD_JObj* jobj_2;
-    f32 rotate_z;
     Fighter* fighter;
 
     jobj_1 = GET_JOBJ(arg_effect->gobj);
@@ -1520,7 +1509,7 @@ void efLib_8005F08C(Effect* arg_effect)
         jobj_3 = jobj_2->next;
     }
     fighter = GET_FIGHTER(arg_effect->parent_gobj);
-    if (fighter->motion_id == 349) { // Special state 8
+    if (fighter->motion_id == 349) {
         HSD_JObjClearFlagsAll(jobj_3, 0x10U);
     } else {
         HSD_JObjSetFlagsAll(jobj_3, 0x10U);
@@ -1572,15 +1561,15 @@ void efLib_8005F270(Effect* arg_effect)
 
 void efLib_8005F454(Effect* arg_effect)
 {
-    HSD_JObj* jobj_2;
-    HSD_JObj* jobj_1;
     f32 rotate_z;
+    HSD_JObj* jobj_1;
+    HSD_JObj* jobj_2;
     Fighter* fighter;
 
     fighter = GET_FIGHTER(arg_effect->parent_gobj);
     jobj_1 = GET_JOBJ(arg_effect->gobj);
     jobj_2 = GET_JOBJ(arg_effect->x0->x4);
-    if (fighter->motion_id == 359) { // Special state 18
+    if (fighter->motion_id == 359) {
         HSD_JObjClearFlagsAll(jobj_2, 0x10U);
     } else {
         HSD_JObjSetFlagsAll(jobj_2, 0x10U);
@@ -1818,8 +1807,8 @@ loop_7:
 
 void fn_8005FBE4(Effect* arg_effect)
 {
-    Vec3 sp14;
     HSD_JObj* jobj_1;
+    Vec3 sp14;
 
     lb_8000B1CC(arg_effect->xC, NULL, &sp14);
     sp14.x += arg_effect->translate.x;

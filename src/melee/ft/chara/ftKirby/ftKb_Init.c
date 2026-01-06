@@ -60,6 +60,8 @@
 #include <baselib/random.h>
 #include <MSL/math.h>
 
+void ftAnim_80070458_proto(Fighter* fp, struct KirbyFV_x44_t*, int);
+
 MotionState ftKb_Init_MotionStateTable[ftKb_MS_SelfCount] = {
     {
         // ftKb_MS_JumpAerialF1 = 341
@@ -2542,6 +2544,7 @@ MotionState ftKb_Init_UnkMotionStates0[] = {
 /* 0EE8B0 */ static void ftKb_Init_800EE8B0(void);
 /* 0EE8EC */ static void ftKb_Init_800EE8EC(void);
 /* 0EE904 */ static void ftKb_Init_800EE904(void);
+/* 0F1CA0 */ static bool fn_800F1CA0(HSD_GObj* gobj);
 /* 105FEC */ static void fn_800F6AC8(HSD_GObj* gobj);
 /* 105FEC */ static void fn_80105FEC(void);
 /* 10C288 */ static void fn_8010C288(HSD_GObj* gobj);
@@ -3156,9 +3159,12 @@ void ftKb_Init_OnItemPickup(HSD_GObj* gobj, bool arg1)
     }
 }
 
-void ftKb_Init_OnItemInvisible(HSD_GObj* gobj)
+void ftKb_Init_OnItemInvisible(Fighter_GObj* gobj)
 {
-    Fighter_OnItemInvisible(gobj, 1);
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (it_8026B2B4(fp->item_gobj) == 0) {
+        ftAnim_80070CC4(gobj, 1);
+    }
 }
 
 void ftKb_Init_OnItemVisible(HSD_GObj* gobj)
@@ -3196,17 +3202,23 @@ void ftKb_Init_OnKnockbackExit(HSD_GObj* gobj)
     Fighter_OnKnockbackExit(gobj, 1);
 }
 
-void ftKb_Init_UnkDemoCallbacks0(int arg0, int* arg1, int* arg2)
+void ftKb_Init_UnkDemoCallbacks0(int kind, int* out1, int* out2)
 {
-    if (arg0 != 14) {
-        if (arg0 < 14 && arg0 >= 11) {
-            *arg1 = 14;
-            *arg2 = 16;
-        }
-    } else {
-        *arg2 = 17;
-        *arg1 = 17;
+    if (kind == 14) {
+        goto case14;
     }
+    if (kind >= 14) {
+        return;
+    }
+    if (kind < 11) {
+        return;
+    }
+    *out1 = 14;
+    *out2 = 16;
+    return;
+case14:
+    *out2 = 17;
+    *out1 = 17;
 }
 
 char* ftKb_Init_GetMotionFileString(enum_t arg0)
@@ -3268,8 +3280,13 @@ void ftKb_Init_UnkCallbackPairs0_0(Fighter_GObj* gobj)
     }
 }
 
-/// #ftKb_Init_UnkCallbackPairs0_1
-
+void ftKb_Init_UnkCallbackPairs0_1(Fighter_GObj* gobj, int arg1, float arg2)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (fp->fv.kb.hat.x14.data != NULL && fp->fv.kb.hat.jobj == NULL) {
+        ftAnim_80070458_proto(fp, &fp->fv.kb.x44, arg1);
+    }
+}
 void ftKb_SpecialN_800EFA40(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -3779,8 +3796,12 @@ void ftKb_SpecialN_800F10A4(Fighter_GObj* gobj)
 
 /// #ftKb_SpecialN_800F10D4
 
-/// #ftKb_SpecialN_800F11AC
-
+void ftKb_SpecialN_800F11AC(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    ftKb_SpecialN_800EF69C(gobj, 0xF, ft_80459B88.hats[14]);
+    ftCo_UnloadDynamicBones(fp);
+}
 /// #ftKb_SpecialN_800F11F0
 
 void ftKb_SpecialN_800F12C8(Fighter_GObj* gobj)

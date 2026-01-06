@@ -9,6 +9,7 @@
 #include "ft/chara/ftFox/ftFx_AppealS.h"
 #include "ft/fighter.h"
 #include "ft/ftlib.h"
+#include "ft/ftparts.h"
 #include "ft/inlines.h"
 #include "ftCLink/ftCl_Init.h"
 #include "ftCommon/ftCo_DownSpot.h"
@@ -26,7 +27,51 @@
 
 /// #ft_800895E0
 
-/// #ft_80089768
+// Local struct with bitfields - reversed order for MWCC big-endian
+typedef struct {
+    s32 x0;
+    s32 x4;
+    float x8;
+    s32 xC;
+    u8 x10_b7 : 1;  // bit 7 (MSB)
+    u8 x10_b6 : 1;
+    u8 x10_b5 : 1;
+    u8 x10_b4 : 1;
+    u8 x10_b3 : 1;
+    u8 x10_b2 : 1;
+    u8 x10_b1 : 1;
+    u8 x10_b0 : 1;  // bit 0 (LSB)
+    u8 x11_b7 : 1;
+    u8 x11_b6 : 1;
+    u8 x11_b5 : 1;
+    u8 x11_b4 : 1;
+    u8 x11_b3 : 1;
+    u8 x11_b2 : 1;
+    u8 x11_b1 : 1;
+    u8 x11_b0 : 1;
+} UnkStruct89768;
+
+void ft_80089768(Vec2* ptr)
+{
+    UnkStruct89768* s = (UnkStruct89768*)ptr;
+    s->x0 = 0;
+    s->x4 = 0;
+    s->x8 = 1.0f;
+    s->xC = 6;
+    s->x10_b7 = 0;
+    s->x11_b4 = 0;
+    s->x10_b6 = 0;
+    s->x10_b5 = 0;
+    s->x10_b4 = 0;
+    s->x10_b3 = 0;
+    s->x10_b2 = 0;
+    s->x10_b1 = 0;
+    s->x10_b0 = 0;
+    s->x11_b7 = 0;
+    s->x11_b6 = 0;
+    s->x11_b5 = 0;
+    s->x11_b3 = 0;
+}
 
 /// #ft_80089824
 
@@ -67,15 +112,58 @@ bool ft_800898C0(HSD_GObj* gobj)
     return false;
 }
 
-/// #ft_80089914
+s32 ft_80089914(HSD_GObj* gobj, int msid)
+{
+    Fighter* fp = gobj->user_data;
 
+    if (msid < ftCo_MS_AttackS3Hi || msid > ftCo_MS_AttackS4LwS) {
+        return false;
+    }
+
+    if (fp->kind == FTKIND_FOX) {
+        if ((u32)(msid - ftCo_MS_AttackS3LwS) <= 2) {
+            return false;
+        }
+    }
+
+    if (fp->kind == FTKIND_FALCO) {
+        if ((u32)(msid - ftCo_MS_AttackS3LwS) <= 2) {
+            return false;
+        }
+    }
+
+    if (fp->kind == FTKIND_MEWTWO) {
+        if (msid == ftCo_MS_AttackS3S) {
+            return false;
+        }
+    }
+
+    return true;
+}
 /// #fn_8008998C
 
 /// #ft_80089B08
 
-/// #ft_8008A1B8
+void ft_8008A1B8(Fighter_GObj* gobj, int flags)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    fp->x221C_u16_y = flags;
+    if (!(flags & 0x4)) {
+        ftParts_8007592C(fp, 0, 0.0f);
+    }
+}
 
-/// #ft_8008A1FC
+bool ft_8008A1FC(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    if ((fp->input.lstick.x * fp->facing_dir < 0.0F) ||
+        (ABS(fp->input.lstick.x) < p_ftCommonData->x24))
+    {
+        return true;
+    }
+    return false;
+}
 
 static inline bool ft_8008A244_inline(Fighter_GObj* gobj)
 {
