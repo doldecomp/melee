@@ -20,7 +20,7 @@ inline bool mnCount_8025035C_inline(void)
     for (i = 0; i < 25; i++) {
         LocalFighterData *fdata = (LocalFighterData*)GetPersistentFighterData(i);
         if (fdata->unk54 != 0) {
-            return 0;
+            return false;
         }
     }
     return 1;
