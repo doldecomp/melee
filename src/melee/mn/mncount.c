@@ -14,7 +14,7 @@ typedef struct LocalFighterData {
 
 // --- Function Implementation ---
 
-inline BOOL mnCount_8025035C_inline(void)
+inline bool mnCount_8025035C_inline(void)
 {
     s32 i;
     for (i = 0; i < 25; i++) {
