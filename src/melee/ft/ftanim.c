@@ -1300,37 +1300,38 @@ void ftAnim_80070C48(Fighter_GObj* gobj, s32 arg1)
     }
 }
 
-void ftAnim_80070CC4(Fighter_GObj* gobj, int arg1)
+static inline void some_inline(Fighter* fp, int start,
+                               HSD_AnimJoint* animjoint)
 {
-    Fighter* fp = GET_FIGHTER(gobj);
-    int sp24; // sp24
-    u8 _[4];
-    HSD_AnimJoint* animjoint;   // sp1C
-    struct Fighter_x8B0_t* r30; // r30
-    struct ftData_x1C* r28;     // r28
-    int i;                      // r27
-
-    r30 = &fp->x8B0[arg1];
-    if (r30->x11 == -1) {
-        return;
-    }
-    r28 = fp->ft_data->x1C[arg1];
-    animjoint = r28->x8[r30->x11];
-    i = r28->x0;
-    sp24 = 0;
-
+    int i = start; // r27
+    int depth = 0; // sp24
     while (animjoint != NULL) {
         while (ftParts_8007506C(fp->kind, i) != 0) {
-            i += 1;
+            i++;
         }
 
         if (fp->parts[i].flags_b5) {
             fp->parts[i].flags_b5 = false;
         }
 
-        i += 1;
-        ftAnim_GetNextAnimJointInTree(&animjoint, &sp24);
+        i++;
+        ftAnim_GetNextAnimJointInTree(&animjoint, &depth);
     }
+}
+
+void ftAnim_80070CC4(Fighter_GObj* gobj, int arg1)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    struct Fighter_x8B0_t* r30; // r30
+    struct ftData_x1C* r28;     // r28
+
+    r30 = &fp->x8B0[arg1];
+    if (r30->x11 == -1) {
+        return;
+    }
+    r28 = fp->ft_data->x1C[arg1];
+
+    some_inline(fp, r28->x0, r28->x8[r30->x11]);
 
     r30->x11 = -1;
     if (fp->x590 != NULL) {
