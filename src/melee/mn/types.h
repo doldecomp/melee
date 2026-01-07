@@ -10,14 +10,20 @@
 #include <baselib/sislib.h>
 
 typedef struct {
-    u8 cursor; // @todo are these arbitrary variables the menus can use in any
-               // way?
+    u8 cursor;
     u8 unk1;
     u8 unk2;
     u8 unk3;
     HSD_Text* text;
 } Menu;
 // size 0x8
+
+typedef struct CountEntry {
+    u8 id;
+    u8 pad[3];
+    u32 val;
+} CountEntry;
+
 
 #ifdef M2C
 typedef struct Menu_GObj Menu_GObj;
