@@ -4,12 +4,6 @@
 #include <platform.h>
 #include <placeholder.h>
 
-typedef struct CountEntry {
-    u8 id;
-    u8 pad[3];
-    u32 val;
-} CountEntry;
-
 /* 2502CC */ UNK_RET mnCount_802502CC(UNK_PARAMS);
 /* 2502F0 */ UNK_RET fn_802502F0(UNK_PARAMS);
 /* 250314 */ UNK_RET fn_80250314(UNK_PARAMS);
