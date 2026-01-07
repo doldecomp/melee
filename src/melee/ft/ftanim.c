@@ -145,6 +145,15 @@ void ftAnim_8006DF0C(Fighter* fp)
     }
 }
 
+// load bearing, fixes float order
+static void scale_inline(float scale, Vec3* sp38)
+{
+    float f1 = 1.0F / scale;
+    sp38->x *= f1;
+    sp38->y *= f1;
+    sp38->z *= f1;
+}
+
 void ftAnim_8006E054(Fighter* fp, HSD_JObj* jobj, HSD_JObj* arg2,
                      HSD_JObj* arg3)
 {
@@ -157,7 +166,6 @@ void ftAnim_8006E054(Fighter* fp, HSD_JObj* jobj, HSD_JObj* arg2,
     u32 temp_r4_2;
     u32 temp_r4_3;
     u32 temp_r4_4;
-    u32 pad[1];
 
     HSD_AObjInitEndCallBack();
 
@@ -245,15 +253,9 @@ void ftAnim_8006E054(Fighter* fp, HSD_JObj* jobj, HSD_JObj* arg2,
         HSD_JObjGetTranslation(jobj, &sp2C);
         sp38 = fp->x68C_transNPos;
         if (!fp->x594_b6) {
-            float temp_f1_5 = 1.0F / ftCommon_GetModelScale(fp);
-            sp38.x *= temp_f1_5;
-            sp38.y *= temp_f1_5;
-            sp38.z *= temp_f1_5;
+            scale_inline(ftCommon_GetModelScale(fp), &sp38);
         } else {
-            float temp_f1_6 = 1.0F / fp->co_attrs.model_scaling;
-            sp38.x *= temp_f1_6;
-            sp38.y *= temp_f1_6;
-            sp38.z *= temp_f1_6;
+            scale_inline(fp->co_attrs.model_scaling, &sp38);
         }
         lbVector_Sub(&sp2C, &sp38);
         HSD_JObjSetTranslate(jobj, &sp2C);
