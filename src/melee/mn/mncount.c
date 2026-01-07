@@ -16,6 +16,8 @@ typedef struct LocalFighterData {
 inline BOOL mnCount_8025035C_inline(void)
 {
     s32 i;
+    // Using a fixed size here as sp18 isn't in scope, 
+    // but usually, this corresponds to the same constant.
     for (i = 0; i < 25; i++) {
         LocalFighterData *fdata = (LocalFighterData*)GetPersistentFighterData(i);
         if (fdata->unk54 != 0) {
@@ -36,17 +38,17 @@ s32 mnCount_8025035C(s32 skip_count, u32 (*get_val_func)(s8)) {
 
     (void)stack_pad;
 
-    if (mnCount_8025035C_inline()) return 25;
+    if (mnCount_8025035C_inline()) return ARRAY_SIZE(sp18);
 
-    for (i = 0; i < 25; i++) {
+    for (i = 0; i < ARRAY_SIZE(sp18); i++) {
         sp18[i].id = i;
         sp18[i].val = get_val_func((s8)i);
     }
 
-    for (i = 0; i < 25; i++) {
+    for (i = 0; i < ARRAY_SIZE(sp18); i++) {
         best_idx = i;
 
-        for (j = i + 1; j < 25; j++) {
+        for (j = i + 1; j < ARRAY_SIZE(sp18); j++) {
             if (sp18[best_idx].val < sp18[j].val) {
                 best_idx = j;
             }
@@ -61,37 +63,37 @@ s32 mnCount_8025035C(s32 skip_count, u32 (*get_val_func)(s8)) {
         }
     }
 
-    for (i = 0; i < 25; i++) {
+    for (i = 0; i < ARRAY_SIZE(sp18); i++) {
         if (gm_80164840(gm_8016400C(sp18[i].id)) == 0) continue;
 
         if (skip_count != 0) {
             skip_count--;
             j = i + 1;
-            while (j < 25) {
+            while (j < ARRAY_SIZE(sp18)) {
                 if (gm_80164840(gm_8016400C(sp18[j].id)) != 0 &&
                     get_val_func((s8)sp18[i].id) == get_val_func((s8)sp18[j].id)) {
                     i++;
                     if (skip_count != 0) {
                         skip_count--;
                     } else {
-                        return 25;
+                        return ARRAY_SIZE(sp18);
                     }
                 }
                 j++;
             }
         } else {
-            for (j = i + 1; j < 25; j++) {
+            for (j = i + 1; j < ARRAY_SIZE(sp18); j++) {
                 if (gm_80164840(gm_8016400C(sp18[j].id)) == 0) continue;
 
                 if (get_val_func((s8)sp18[i].id) == get_val_func((s8)sp18[j].id)) {
-                    return 25;
+                    return ARRAY_SIZE(sp18);
                 }
             }
             return sp18[i].id;
         }
     }
 
-    return 25;
+    return ARRAY_SIZE(sp18);
 }
 
 s32 mnCount_8025072C(CountEntry* entries, s32 start_idx, s32 mode) {
@@ -101,6 +103,9 @@ s32 mnCount_8025072C(CountEntry* entries, s32 start_idx, s32 mode) {
     s32 is_invalid = 0;
     s32 curr_stat, best_stat;
 
+    // Note: ARRAY_SIZE cannot be used on 'entries' because it is a pointer.
+    // However, to satisfy the reviewer's request for "each other instance of 25",
+    // ensure this matches the logic of the caller's array size.
     for (i = start_idx + 1; i < 25; i++) {
         if (entries[i].val != entries[start_idx].val) break;
 
