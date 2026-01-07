@@ -17,8 +17,6 @@ typedef struct LocalFighterData {
 inline BOOL mnCount_8025035C_inline(void)
 {
     s32 i;
-    // Using a fixed size here as sp18 isn't in scope, 
-    // but usually, this corresponds to the same constant.
     for (i = 0; i < 25; i++) {
         LocalFighterData *fdata = (LocalFighterData*)GetPersistentFighterData(i);
         if (fdata->unk54 != 0) {
@@ -29,15 +27,13 @@ inline BOOL mnCount_8025035C_inline(void)
 }
 
 s32 mnCount_8025035C(s32 skip_count, u32 (*get_val_func)(s8)) {
-    int stack_pad = 0;
+    PAD_STACK(4); // Replaces 'int stack_pad = 0' and '(void)stack_pad'
 
     s32 i;
     s32 j;
     s32 best_idx;
     CountEntry sp18[25];
     CountEntry temp;
-
-    (void)stack_pad;
 
     if (mnCount_8025035C_inline()) return ARRAY_SIZE(sp18);
 
@@ -104,9 +100,6 @@ s32 mnCount_8025072C(CountEntry* entries, s32 start_idx, s32 mode) {
     s32 is_invalid = 0;
     s32 curr_stat, best_stat;
 
-    // Note: ARRAY_SIZE cannot be used on 'entries' because it is a pointer.
-    // However, to satisfy the reviewer's request for "each other instance of 25",
-    // ensure this matches the logic of the caller's array size.
     for (i = start_idx + 1; i < 25; i++) {
         if (entries[i].val != entries[start_idx].val) break;
 
