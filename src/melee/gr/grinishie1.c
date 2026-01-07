@@ -2,7 +2,6 @@
 #include "gr/grinishie1.h"
 
 #include <platform.h>
-#include "mp/forward.h"
 
 #include "cm/camera.h"
 #include "ef/efsync.h"
@@ -17,6 +16,9 @@
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 #include "lb/lbaudio_ax.h"
+
+#include "mp/forward.h"
+
 #include "mp/mplib.h"
 #include "sysdolphin/baselib/dobj.h"
 #include "sysdolphin/baselib/gobjgxlink.h"
@@ -346,7 +348,7 @@ void grInishie1_801FAD84(HSD_GObj* gobj)
             slot->jobj2 = NULL;
         }
 
-        mpJointSetCb2((s32) value, gp, (mpLib_Callback)fn_801FBEB8);
+        mpJointSetCb2((s32) value, gp, (mpLib_Callback) fn_801FBEB8);
         i++;
     }
 
@@ -807,7 +809,8 @@ static inline s32 get_block_id(s32 block_id)
     return idx;
 }
 
-void fn_801FBEB8(Ground* gr, s32 block_id, CollData* arg2, s32 arg3, mpLib_GroundEnum arg4, f32 dist)
+void fn_801FBEB8(Ground* gr, s32 block_id, CollData* arg2, s32 arg3,
+                 mpLib_GroundEnum arg4, f32 dist)
 {
     s32 id = get_block_id(block_id);
     if (fabsf_inline(dist) > 0.7) {

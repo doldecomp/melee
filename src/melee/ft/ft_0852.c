@@ -1,8 +1,9 @@
 #include "ft_0852.h"
 
+#include "ft/forward.h"
+
 #include "ft/inlines.h"
 #include "ft/types.h"
-#include "ft/forward.h"
 
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
@@ -43,7 +44,9 @@ void ft_800852B0(void)
     for (i = 0; i < FTKIND_MAX; ++var_r8, ++var_r9, ++var_r10, ++i) {
         int costume_idx = 0;
         gFtDataList[i] = NULL;
-        for (costume_idx = 0; costume_idx < (s32) var_r8->numCostumes; ++costume_idx) {
+        for (costume_idx = 0; costume_idx < (s32) var_r8->numCostumes;
+             ++costume_idx)
+        {
             var_r8->costume_list[costume_idx].joint = NULL;
             // Probably a pointer but no idea what kind of thing it points to.
             var_r8->costume_list[costume_idx].pad_x8 = NULL;

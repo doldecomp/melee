@@ -2,13 +2,14 @@
 
 #include <placeholder.h>
 #include <platform.h>
+
 #include "it/forward.h"
 
 #include "it/inlines.h"
-#include "it/itCommonItems.h"
-#include "it/it_26B1.h"
 #include "it/it_266F.h"
+#include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/itCommonItems.h"
 #include "it/item.h"
 
 #define GET_ATTRS(ip)                                                         \
@@ -19,7 +20,7 @@
 void it_3F14_Logic21_Spawned(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    ip->xD4C = *(s32*)ip->xC4_article_data->x4_specialAttributes;
+    ip->xD4C = *(s32*) ip->xC4_article_data->x4_specialAttributes;
     it_802920B8(gobj);
 }
 
@@ -44,7 +45,6 @@ s32 it_80291CF4(Item_GObj* gobj, s32 arg1)
     }
     return 9;
 }
-
 
 /// #it_80291DAC
 

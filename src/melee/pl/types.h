@@ -48,7 +48,8 @@ struct plAttackStats {
     /* +194 */ u32 thrown_item_count;
     /* +198 */ u32 aerials_count;
     /* +19C */ u32 specials_count;
-    /* +1A0 */ u32 x1A0_count; ///< increments on most attacks, but not down special?
+    /* +1A0 */ u32
+        x1A0_count; ///< increments on most attacks, but not down special?
     /* +1A4 */ u32 x1A4_count; ///< increments on down specials?
     /* +1A8 */ u32 x1A8;
 };

@@ -3,10 +3,10 @@
 #include "ftDk_HeavyWait0.h"
 
 #include "ft/ft_081B.h"
-#include "ftCommon/ftCo_Attack100.h"
 #include "ft/ftanim.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
+#include "ftCommon/ftCo_Attack100.h"
 #include "ftCommon/ftCo_ItemThrow.h"
 #include "ftCommon/ftCo_KneeBend.h"
 #include "ftCommon/ftCo_Landing.h"

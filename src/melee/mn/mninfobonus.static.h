@@ -4,7 +4,6 @@
 #include <baselib/jobj.h>
 #include <sc/types.h>
 
-
 static int mnInfoBonus_803EFCE8[0x101] = {
     0x00000000, 0x00000001, 0x00000002, 0x00000003, 0x00000004, 0x00000005,
     0x00000006, 0x00000007, 0x00000008, 0x00000009, 0x0000000A, 0x0000000B,

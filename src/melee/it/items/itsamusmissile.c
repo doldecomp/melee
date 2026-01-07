@@ -19,4 +19,3 @@ bool itSamusmissile_UnkMotion3_Anim(Item_GObj* gobj)
 {
     return it_802751D8(gobj);
 }
-

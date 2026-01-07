@@ -262,8 +262,7 @@ void Player_80031AD0(int slot)
         second_struct.x5 = -1;
 
         /// @todo Eliminate cast.
-        player->player_entity[1] =
-            Fighter_Create(&second_struct);
+        player->player_entity[1] = Fighter_Create(&second_struct);
 
         if (player->player_state != 1) {
             player->player_state = 2;

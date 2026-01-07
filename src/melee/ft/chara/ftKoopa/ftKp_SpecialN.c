@@ -1,27 +1,26 @@
 #include "ftKp_SpecialN.h"
 
-#include <melee/cm/camera.h>
-#include <melee/ft/ft_081B.h>
-#include <melee/ft/ftcoll.h>
-#include <melee/ft/ft_0877.h>
-#include <melee/ft/ft_0881.h>
-#include <melee/ft/ft_0892.h>
-#include <melee/ft/fighter.h>
-#include <melee/ft/ftcliffcommon.h>
-#include <melee/ft/ftcommon.h>
-#include <melee/ft/ftparts.h>
-#include <melee/ft/inlines.h>
-#include <melee/ef/efsync.h>
-#include <melee/ef/eflib.h>
-#include <melee/lb/lb_00B0.h>
-#include <melee/it/item.h>
-#include <melee/it/items/itkoopaflame.h>
-
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftKoopa/ftKp_Init.h"
 
 #include <trigf.h>
+#include <melee/cm/camera.h>
+#include <melee/ef/eflib.h>
+#include <melee/ef/efsync.h>
+#include <melee/ft/fighter.h>
+#include <melee/ft/ft_081B.h>
+#include <melee/ft/ft_0877.h>
+#include <melee/ft/ft_0881.h>
+#include <melee/ft/ft_0892.h>
+#include <melee/ft/ftcliffcommon.h>
+#include <melee/ft/ftcoll.h>
+#include <melee/ft/ftcommon.h>
+#include <melee/ft/ftparts.h>
+#include <melee/ft/inlines.h>
+#include <melee/it/item.h>
+#include <melee/it/items/itkoopaflame.h>
+#include <melee/lb/lb_00B0.h>
 
 enum_t ftKp_Init_803CF2A0[] = {
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1,

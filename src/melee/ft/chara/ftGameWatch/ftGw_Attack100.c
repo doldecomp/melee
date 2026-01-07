@@ -10,8 +10,8 @@
 #include "ft/forward.h"
 
 #include "ft/ft_081B.h"
-#include "ftCommon/ftCo_Attack100.h"
 #include "ft/ftanim.h"
+#include "ftCommon/ftCo_Attack100.h"
 
 #include <stddef.h>
 

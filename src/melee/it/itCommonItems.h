@@ -6,9 +6,10 @@
 #include <placeholder.h>
 #include <platform.h>
 
+#include "dolphin/types.h"
+
 #include "it/forward.h"
 
-#include "dolphin/types.h"
 #include "lb/types.h"
 
 #include <baselib/forward.h>
@@ -70,32 +71,32 @@ typedef struct itBatAttributes {
 } itBatAttributes;
 
 typedef struct itBombHei_ItemVars {
-/*  +0 */ s32 xDD4;
-/*  +4 */ s32 xDD8;
-/*  +8 */ s32 xDDC;
-/*  +C */ s32 xDE0;
-/* +10 */ s32 xDE4;
-/* +14 */ float xDE8;
-/* +18 */ float xDEC;
-/* +1C */ float xDF0;
-/* +20 */ s32 xDF4;
-/* +24 */ float xDF8;
-/* +28 */ float xDFC;
-/* +2C */ s32 _E00;
-/* +30 */ s32 _E04;
-/* +34 */ s32 _E08;
-/* +38 */ Vec3 xE0C;
+    /*  +0 */ s32 xDD4;
+    /*  +4 */ s32 xDD8;
+    /*  +8 */ s32 xDDC;
+    /*  +C */ s32 xDE0;
+    /* +10 */ s32 xDE4;
+    /* +14 */ float xDE8;
+    /* +18 */ float xDEC;
+    /* +1C */ float xDF0;
+    /* +20 */ s32 xDF4;
+    /* +24 */ float xDF8;
+    /* +28 */ float xDFC;
+    /* +2C */ s32 _E00;
+    /* +30 */ s32 _E04;
+    /* +34 */ s32 _E08;
+    /* +38 */ Vec3 xE0C;
 } itBombHei_ItemVars;
 
 typedef struct itBombHeiAttributes {
-/*  +0  */ float x0;
-/*  +4  */ float x4;
-/*  +8  */ float x8;
-/*  +C  */ s32 xC;
-/* +10  */ float x10;
-/* +14  */ float x14;
-/* +18  */ float x18;
-/* +1C  */ float x1C;
+    /*  +0  */ float x0;
+    /*  +4  */ float x4;
+    /*  +8  */ float x8;
+    /*  +C  */ s32 xC;
+    /* +10  */ float x10;
+    /* +14  */ float x14;
+    /* +18  */ float x18;
+    /* +1C  */ float x1C;
 } itBombHeiAttributes;
 
 typedef struct itBox_ItemVars {

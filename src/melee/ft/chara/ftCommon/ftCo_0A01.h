@@ -28,10 +28,10 @@ struct _m2c_stack_ftCo_800A3554 {
 /* 09D694 */ void ftCo_800A0798(Fighter* fp);
 /* 09DB88 */ void ftCo_800A0C8C(Fighter* fp);
 /* 09DCA0 */ void ftCo_800A0DA4(Fighter* fp);
-/* 09DEAC */ bool ftCo_800A0FB0(Vec3* vec_out, int* line_id_out, u32* flags_out, Vec3* normal_out,
-                                int arg4, int arg5, int arg6, float arg7,
-                                float arg8, float arg9, float arg10,
-                                float arg11);
+/* 09DEAC */ bool ftCo_800A0FB0(Vec3* vec_out, int* line_id_out,
+                                u32* flags_out, Vec3* normal_out, int arg4,
+                                int arg5, int arg6, float arg7, float arg8,
+                                float arg9, float arg10, float arg11);
 /* 09DF18 */ void ftCo_800A101C(Fighter*, int, int, int);
 /* 09E6E0 */ float ftCo_800A17E4(Fighter* fp);
 /* 09E770 */ float ftCo_800A1874(Fighter* fp);

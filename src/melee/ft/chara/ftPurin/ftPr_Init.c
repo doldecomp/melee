@@ -16,12 +16,12 @@
 #include "ft/fighter.h"
 #include "ft/ft_0852.h"
 #include "ft/ft_0877.h"
-#include "ftCommon/ftCo_Attack100.h"
 #include "ft/ftanim.h"
 #include "ft/ftcamera.h"
 #include "ft/ftdynamics.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
+#include "ftCommon/ftCo_Attack100.h"
 #include "it/it_26B1.h"
 
 #include <common_structs.h>

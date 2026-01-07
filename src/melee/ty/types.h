@@ -9,6 +9,17 @@
 
 #include <dolphin/mtx.h>
 
+typedef struct TyModeState {
+    s8 x0;
+    u8 x1;
+    u16 x2;
+    s8 x4;
+    u8 x5;
+    u16 x6;
+    u16 x8;
+    u16 xA;
+} TyModeState;
+
 struct Toy {
     /*   +0 */ char pad_0[0x4];
     /*   +4 */ int x4;

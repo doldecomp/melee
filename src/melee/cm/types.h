@@ -10,22 +10,22 @@
 
 /// @note name found @ 80029070
 struct CmSubject {
-/* +00 */ CmSubject* next;
-/* +04 */ CmSubject* prev;
-/* +08 */ bool x8;
-/* +0C:0 */ u8 xC_b0 : 1;
-/* +0C:1 */ u8 xC_b1 : 1;
-/* +0C:2 */ u8 xC_b2 : 1;
-/* +0E */ s16 xE;
-/* +10 */ Vec3 x10;  // might be Vec2?
-/* +1C */ Vec3 x1C;  // position?
-/* +28 */ float x28; // direction?
-/* +2C */ Vec2 x2C;
-/* +34 */ Vec3 x34; // size?
-/* +40 */ Vec2 x40;
-/* +48 */ Vec3 x48;
-/* +54 */ Vec3 x54;
-/* +60 */ Vec3 x60;
+    /* +00 */ CmSubject* next;
+    /* +04 */ CmSubject* prev;
+    /* +08 */ bool x8;
+    /* +0C:0 */ u8 xC_b0 : 1;
+    /* +0C:1 */ u8 xC_b1 : 1;
+    /* +0C:2 */ u8 xC_b2 : 1;
+    /* +0E */ s16 xE;
+    /* +10 */ Vec3 x10;  // might be Vec2?
+    /* +1C */ Vec3 x1C;  // position?
+    /* +28 */ float x28; // direction?
+    /* +2C */ Vec2 x2C;
+    /* +34 */ Vec3 x34; // size?
+    /* +40 */ Vec2 x40;
+    /* +48 */ Vec3 x48;
+    /* +54 */ Vec3 x54;
+    /* +60 */ Vec3 x60;
 };
 
 struct CameraTransformState {

@@ -1430,7 +1430,8 @@ void fn_801D7E60(Ground* gp, s32 arg1, CollData* arg2, s32 arg3,
 
 /// #grKongo_801D7F78
 
-void grKongo_801D8058(Ground_GObj* arg) {
+void grKongo_801D8058(Ground_GObj* arg)
+{
     Ground_801C4A08(arg);
 }
 

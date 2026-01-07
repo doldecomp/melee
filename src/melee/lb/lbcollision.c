@@ -7,9 +7,10 @@
 #include <placeholder.h>
 #include <platform.h>
 
+#include "ft/types.h"
+
 #include "lb/forward.h"
 
-#include "ft/types.h"
 #include "lb/types.h"
 
 #include <math.h>
@@ -72,12 +73,8 @@ struct unk {
     GXColor* pad;
     GXColor* pad_x;
 } lbColl_803B9928[] = {
-    &lbColl_804D36AC,
-    &lbColl_804D36B0,
-    &lbColl_804D36B4,
-    &lbColl_804D36B8,
-    &lbColl_804D36BC,
-    &lbColl_804D36C0,
+    &lbColl_804D36AC, &lbColl_804D36B0, &lbColl_804D36B4,
+    &lbColl_804D36B8, &lbColl_804D36BC, &lbColl_804D36C0,
 };
 
 u8 lbColl_803B9940[0x1A0] = { 0 };
@@ -1998,10 +1995,13 @@ void lbColl_80008DA4(GXColor* arg0, GXColor* arg1)
     GXSetNumTevStages(1);
     GXSetTevOrder(GX_TEVSTAGE0, GX_TEXCOORD_NULL, GX_TEXMAP_NULL, GX_COLOR0A0);
     GXSetTevColor(GX_TEVREG0, *arg0);
-    GXSetTevColorIn(GX_TEVSTAGE0, GX_CC_ZERO, GX_CC_RASC, GX_CC_C0, GX_CC_ZERO);
+    GXSetTevColorIn(GX_TEVSTAGE0, GX_CC_ZERO, GX_CC_RASC, GX_CC_C0,
+                    GX_CC_ZERO);
     GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_ZERO, GX_CA_ONE, GX_CA_A0, GX_CA_ZERO);
-    GXSetTevColorOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1, GX_TEVPREV);
-    GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1, GX_TEVPREV);
+    GXSetTevColorOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1,
+                    GX_TEVPREV);
+    GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1,
+                    GX_TEVPREV);
     GXSetNumChans(1);
     sp10 = *arg1;
     GXSetChanAmbColor(GX_COLOR0A0, sp10);
@@ -2011,9 +2011,11 @@ void lbColl_80008DA4(GXColor* arg0, GXColor* arg1)
     sp10.a = 0xFF;
     GXSetChanMatColor(GX_COLOR0A0, sp10);
     if (arg0->a < 0xFF) {
-        GXSetChanCtrl(GX_COLOR0A0, 0, GX_SRC_REG, GX_SRC_REG, 1, GX_DF_NONE, GX_AF_NONE);
+        GXSetChanCtrl(GX_COLOR0A0, 0, GX_SRC_REG, GX_SRC_REG, 1, GX_DF_NONE,
+                      GX_AF_NONE);
     } else {
-        GXSetChanCtrl(GX_COLOR0A0, 1, GX_SRC_REG, GX_SRC_REG, 1, GX_DF_CLAMP, GX_AF_NONE);
+        GXSetChanCtrl(GX_COLOR0A0, 1, GX_SRC_REG, GX_SRC_REG, 1, GX_DF_CLAMP,
+                      GX_AF_NONE);
     }
 }
 
@@ -2026,7 +2028,8 @@ static inline bool isSmall(float x)
     }
 }
 
-void lbColl_80008FC8(Vec3 arg0, Vec3 arg1, GXColor* arg2, GXColor* arg3, f32 arg4)
+void lbColl_80008FC8(Vec3 arg0, Vec3 arg1, GXColor* arg2, GXColor* arg3,
+                     f32 arg4)
 {
     Mtx sp104;
     Mtx spD4;
@@ -2048,7 +2051,9 @@ void lbColl_80008FC8(Vec3 arg0, Vec3 arg1, GXColor* arg2, GXColor* arg3, f32 arg
     sp38.y = arg0.y - arg1.y;
     sp38.z = arg0.z - arg1.z;
     var_f31 = sqrtf(SQ(sp38.x) + SQ(sp38.y) + SQ(sp38.z));
-    if (isSmall(var_f31) || (isSmall(sp38.x) && isSmall(sp38.y) && isSmall(sp38.z))) {
+    if (isSmall(var_f31) ||
+        (isSmall(sp38.x) && isSmall(sp38.y) && isSmall(sp38.z)))
+    {
         PSMTXIdentity(sp44);
         sp44[0][0] = -1.0F;
         sp44[1][0] = 0.0F;
@@ -2101,7 +2106,8 @@ void lbColl_80008FC8(Vec3 arg0, Vec3 arg1, GXColor* arg2, GXColor* arg3, f32 arg
     PSMTXConcat(sp44, spD4, spD4);
     PSMTXTrans(sp44, arg1.x, arg1.y, arg1.z);
     PSMTXConcat(sp44, spA4, spA4);
-    PSMTXTrans(sp44, 0.5 * (arg0.x + arg1.x), 0.5 * (arg0.y + arg1.y), 0.5 * (arg0.z + arg1.z));
+    PSMTXTrans(sp44, 0.5 * (arg0.x + arg1.x), 0.5 * (arg0.y + arg1.y),
+               0.5 * (arg0.z + arg1.z));
     PSMTXConcat(sp44, sp74, sp74);
     GXSetCullMode(GX_CULL_BACK);
     GXClearVtxDesc();
@@ -2149,7 +2155,8 @@ void lbColl_80008FC8(Vec3 arg0, Vec3 arg1, GXColor* arg2, GXColor* arg3, f32 arg
     HSD_StateInitTev();
 }
 
-void lbColl_800096B4(MtxPtr arg0, Vec3 arg1, Vec3 arg2, GXColor* arg3, GXColor* arg4, f32 arg5)
+void lbColl_800096B4(MtxPtr arg0, Vec3 arg1, Vec3 arg2, GXColor* arg3,
+                     GXColor* arg4, f32 arg5)
 {
     Mtx sp108;
     Mtx spD8;
@@ -2170,7 +2177,9 @@ void lbColl_800096B4(MtxPtr arg0, Vec3 arg1, Vec3 arg2, GXColor* arg3, GXColor* 
     sp3C.y = arg1.y - arg2.y;
     sp3C.z = arg1.z - arg2.z;
     var_f31 = sqrtf(SQ(sp3C.x) + SQ(sp3C.y) + SQ(sp3C.z));
-    if (isSmall(var_f31) || (isSmall(sp3C.x) && isSmall(sp3C.y) && isSmall(sp3C.z))) {
+    if (isSmall(var_f31) ||
+        (isSmall(sp3C.x) && isSmall(sp3C.y) && isSmall(sp3C.z)))
+    {
         PSMTXIdentity(sp48);
         sp48[0][0] = -1.0F;
         sp48[1][0] = 0.0F;
@@ -2223,7 +2232,8 @@ void lbColl_800096B4(MtxPtr arg0, Vec3 arg1, Vec3 arg2, GXColor* arg3, GXColor* 
     PSMTXConcat(sp48, spD8, spD8);
     PSMTXTrans(sp48, arg2.x, arg2.y, arg2.z);
     PSMTXConcat(sp48, spA8, spA8);
-    PSMTXTrans(sp48, 0.5 * (arg1.x + arg2.x), 0.5 * (arg1.y + arg2.y), 0.5 * (arg1.z + arg2.z));
+    PSMTXTrans(sp48, 0.5 * (arg1.x + arg2.x), 0.5 * (arg1.y + arg2.y),
+               0.5 * (arg1.z + arg2.z));
     PSMTXConcat(sp48, sp78, sp78);
     PSMTXConcat(arg0, spD8, spD8);
     PSMTXConcat(arg0, spA8, spA8);
@@ -2454,7 +2464,8 @@ bool lbColl_8000A10C(struct lbColl_8000A10C_arg0_t* arg0, u32 arg1, f32 arg2)
         var_r0 = 2;
     }
     if (var_r0 == arg1) {
-        lbColl_80008FC8(arg0->x14, arg0->x8, c, &lbColl_804D36FC, arg0->x0 * arg2);
+        lbColl_80008FC8(arg0->x14, arg0->x8, c, &lbColl_804D36FC,
+                        arg0->x0 * arg2);
         return true;
     }
     return false;
@@ -2473,7 +2484,8 @@ bool lbColl_8000A1A8(struct Fighter_x1614_t* arg0, int arg1, f32 scale_y)
         var_r0 = 2;
     }
     if (var_r0 == arg1) {
-        lbColl_80008FC8(arg0->x14, arg0->x8, &lbColl_804D36F0, &lbColl_804D36F4, arg0->x0 * scale_y);
+        lbColl_80008FC8(arg0->x14, arg0->x8, &lbColl_804D36F0,
+                        &lbColl_804D36F4, arg0->x0 * scale_y);
         return true;
     }
     return false;
@@ -2603,8 +2615,8 @@ bool lbColl_8000A95C(HitResult* hit, u32 arg1, Mtx arg2, f32 pos_z)
         HSD_MtxInverse(var_r31, sp3C);
         PSMTXMultVec(sp3C, &sp90, &sp24);
         PSMTXMultVec(sp3C, &sp84, &sp30);
-        lbColl_800096B4(var_r31, sp24, sp30, &lbColl_804D36CC, &lbColl_804D36D0,
-                        temp_f31);
+        lbColl_800096B4(var_r31, sp24, sp30, &lbColl_804D36CC,
+                        &lbColl_804D36D0, temp_f31);
         return true;
     }
     return false;
@@ -2650,7 +2662,8 @@ bool lbColl_8000AB2C(HitResult* hit, u32 arg1, MtxPtr arg2, f32 pos_z)
         HSD_MtxInverse(var_r31, sp3C);
         PSMTXMultVec(sp3C, &sp90, &sp24);
         PSMTXMultVec(sp3C, &sp84, &sp30);
-        lbColl_800096B4(var_r31, sp24, sp30, &lbColl_804D36D4, &lbColl_804D36D8, temp_f31);
+        lbColl_800096B4(var_r31, sp24, sp30, &lbColl_804D36D4,
+                        &lbColl_804D36D8, temp_f31);
         return true;
     }
     return false;

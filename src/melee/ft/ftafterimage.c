@@ -2,12 +2,12 @@
 
 #include "ftafterimage.h"
 
-#include <melee/it/item.h>
-#include <melee/it/it_26B1.h>
-#include <melee/it/items/itsword.h>
-#include <melee/ft/inlines.h>
-#include <melee/lb/lb_00B0.h>
 #include <sysdolphin/baselib/gobj.h>
+#include <melee/ft/inlines.h>
+#include <melee/it/it_26B1.h>
+#include <melee/it/item.h>
+#include <melee/it/items/itsword.h>
+#include <melee/lb/lb_00B0.h>
 
 void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
 {
@@ -65,19 +65,17 @@ void ftCo_800C2FD8(Fighter_GObj* gobj)
             /// @bug Undefined behavior if the fighter doesn't have a sword!
             break;
         case FTKIND_LINK:
-        case FTKIND_CLINK:
-            {
-                ftLk_DatAttrs* da = fp->dat_attrs;
-                var_r5 = &da->x64;
-                break;
-            }
+        case FTKIND_CLINK: {
+            ftLk_DatAttrs* da = fp->dat_attrs;
+            var_r5 = &da->x64;
+            break;
+        }
         case FTKIND_MARS:
-        case FTKIND_EMBLEM:
-            {
-                MarsAttributes* da = fp->dat_attrs;
-                var_r5 = &da->x78;
-                break;
-            }
+        case FTKIND_EMBLEM: {
+            MarsAttributes* da = fp->dat_attrs;
+            var_r5 = &da->x78;
+            break;
+        }
         }
         var_r29 = 0;
         fp->x20F8 = var_r5->x18;

@@ -83,7 +83,7 @@ static void HSD_DevComARAMCallback(ARQRequest* request)
 
     if (aramDC->callback != NULL) {
         aramDC->callback(aramDC->dcReq, (int) aramDC->args, buf,
-                                      aramDC->cancelflag);
+                         aramDC->cancelflag);
     }
 
     HSD_DevComUnlink(aramDC);
@@ -124,7 +124,8 @@ void HSD_DevComARAMWakeUp(void)
     if (devComStatus[3] != NULL) {
         if (aramDC->cancelflag) {
             if (aramDC->callback != NULL) {
-                aramDC->callback(aramDC->dcReq, (s32) aramDC->args, NULL, true);
+                aramDC->callback(aramDC->dcReq, (s32) aramDC->args, NULL,
+                                 true);
             }
             HSD_DevComUnlink(aramDC);
             OSRestoreInterrupts(enabled);
@@ -154,22 +155,29 @@ void HSD_DevComARAMWakeUp(void)
 
                 buf = HSD_DevCom_804C6330_bufs[req_idx];
                 DCStoreRange(buf, DEVCOM_BUF_SIZE);
-                ARQPostRequest(devComARQR[req_idx], 0, 0, 1, (u32) buf, aramDC->dest, var_r28, var_r26);
+                ARQPostRequest(devComARQR[req_idx], 0, 0, 1, (u32) buf,
+                               aramDC->dest, var_r28, var_r26);
                 aramDC->dest += var_r28;
                 aramDC->size -= var_r28;
                 aramstate = 1;
             } else if (aramDC->type == 0xB) {
                 DCStoreRange((void*) aramDC->src, aramDC->size);
-                ARQPostRequest(devComARQR[req_idx], 0, 0, 1, aramDC->src, aramDC->dest, aramDC->size, HSD_DevComARAMCallback);
+                ARQPostRequest(devComARQR[req_idx], 0, 0, 1, aramDC->src,
+                               aramDC->dest, aramDC->size,
+                               HSD_DevComARAMCallback);
                 aramstate = 1;
             } else if (aramDC->type == 0x19) {
-                DCInvalidateRange((void* ) aramDC->dest, aramDC->size);
-                ARQPostRequest(devComARQR[req_idx], 0, 1, 1, aramDC->src, aramDC->dest, aramDC->size, HSD_DevComARAMCallback);
+                DCInvalidateRange((void*) aramDC->dest, aramDC->size);
+                ARQPostRequest(devComARQR[req_idx], 0, 1, 1, aramDC->src,
+                               aramDC->dest, aramDC->size,
+                               HSD_DevComARAMCallback);
                 aramstate = 1;
             } else if (aramDC->type == 0x1A) {
                 buf = HSD_DevCom_804C6330_bufs[req_idx];
                 DCInvalidateRange(buf, DEVCOM_BUF_SIZE);
-                ARQPostRequest(devComARQR[req_idx], 0, 1, 1, aramDC->src, (u32) buf, aramDC->size, HSD_DevComARAMCallback);
+                ARQPostRequest(devComARQR[req_idx], 0, 1, 1, aramDC->src,
+                               (u32) buf, aramDC->size,
+                               HSD_DevComARAMCallback);
                 aramstate = 1;
             } else if (aramDC->type == 0x1B) {
                 buf = HSD_DevCom_804C6330_bufs[req_idx];
@@ -181,8 +189,10 @@ void HSD_DevComARAMWakeUp(void)
                     var_r26_2 = HSD_DevComARAMCallback;
                     var_r28_2 = aramDC->size;
                 }
-                ARQPostRequest(&devComARQR[req_idx][1], 0, 1, 1, aramDC->src, (u32) buf, var_r28_2, NULL);
-                ARQPostRequest(&devComARQR[req_idx][0], 0, 0, 1, (u32) buf, aramDC->dest, var_r28_2, var_r26_2);
+                ARQPostRequest(&devComARQR[req_idx][1], 0, 1, 1, aramDC->src,
+                               (u32) buf, var_r28_2, NULL);
+                ARQPostRequest(&devComARQR[req_idx][0], 0, 0, 1, (u32) buf,
+                               aramDC->dest, var_r28_2, var_r26_2);
                 aramDC->src += var_r28_2;
                 aramDC->dest += var_r28_2;
                 aramDC->size -= var_r28_2;
@@ -221,7 +231,9 @@ static void HSD_DevComDVDARAMEndCallback(ARQRequest* request)
     }
 
     if (HSD_DevCom_804D77FC[i]->callback != NULL && HSD_DevCom_804D7804 == 0) {
-        HSD_DevCom_804D77FC[i]->callback(HSD_DevCom_804D77FC[i]->dcReq, (int) HSD_DevCom_804D77FC[i]->args, NULL, HSD_DevCom_804D77FC[i]->cancelflag);
+        HSD_DevCom_804D77FC[i]->callback(
+            HSD_DevCom_804D77FC[i]->dcReq, (int) HSD_DevCom_804D77FC[i]->args,
+            NULL, HSD_DevCom_804D77FC[i]->cancelflag);
     }
     HSD_DevComARAMCallback_inline(HSD_DevCom_804D77FC[i]);
     HSD_DevCom_804D77FC[i] = NULL;
@@ -244,7 +256,8 @@ static void HSD_DevComDVDMemCallback(s32 arg0, DVDFileInfo* unused)
         return;
     }
     if (dvdDC->callback != NULL && HSD_DevCom_804D7804 == 0) {
-        dvdDC->callback(dvdDC->dcReq, (int) dvdDC->args, NULL, dvdDC->cancelflag);
+        dvdDC->callback(dvdDC->dcReq, (int) dvdDC->args, NULL,
+                        dvdDC->cancelflag);
     }
     HSD_DevComUnlink(dvdDC);
     temp_r31 = dvdDC;
@@ -276,7 +289,9 @@ static void HSD_DevComDVDCallback(s32 arg0, DVDFileInfo* unused)
             __assert("devcom.c", 0x18D, "dvdDC->callback");
         }
         if (HSD_DevCom_804D7804 == 0) {
-            dvdDC->callback(dvdDC->dcReq, (s32) dvdDC->args, HSD_DevCom_804C6330_bufs[HSD_DevCom_804D77F6], dvdDC->cancelflag);
+            dvdDC->callback(dvdDC->dcReq, (s32) dvdDC->args,
+                            HSD_DevCom_804C6330_bufs[HSD_DevCom_804D77F6],
+                            dvdDC->cancelflag);
         }
         HSD_DevComUnlink(dvdDC);
         temp_r30 = dvdDC;
@@ -291,7 +306,10 @@ static void HSD_DevComDVDCallback(s32 arg0, DVDFileInfo* unused)
     } else if (temp_r0 == 0x23) {
         HSD_DevCom_804D77F7 = HSD_DevCom_804D77F6;
         if (dvdDC->size > DEVCOM_BUF_SIZE) {
-            ARQPostRequest(devComARQR[HSD_DevCom_804D77F7], 0, 0, 1, (u32) HSD_DevCom_804C6330_bufs[HSD_DevCom_804D77F7], dvdDC->dest, DEVCOM_BUF_SIZE, HSD_DevComDVDStdCallback);
+            ARQPostRequest(devComARQR[HSD_DevCom_804D77F7], 0, 0, 1,
+                           (u32) HSD_DevCom_804C6330_bufs[HSD_DevCom_804D77F7],
+                           dvdDC->dest, DEVCOM_BUF_SIZE,
+                           HSD_DevComDVDStdCallback);
             dvdDC->src += DEVCOM_BUF_SIZE;
             dvdDC->dest += DEVCOM_BUF_SIZE;
             dvdDC->size -= DEVCOM_BUF_SIZE;
@@ -299,7 +317,10 @@ static void HSD_DevComDVDCallback(s32 arg0, DVDFileInfo* unused)
             HSD_DevComDVDWakeUp();
         } else {
             HSD_DevCom_804D77FC[HSD_DevCom_804D77F7] = dvdDC;
-            ARQPostRequest(devComARQR[HSD_DevCom_804D77F7], 0, 0, 1, (u32) HSD_DevCom_804C6330_bufs[HSD_DevCom_804D77F7], dvdDC->dest, dvdDC->size, HSD_DevComDVDARAMEndCallback);
+            ARQPostRequest(devComARQR[HSD_DevCom_804D77F7], 0, 0, 1,
+                           (u32) HSD_DevCom_804C6330_bufs[HSD_DevCom_804D77F7],
+                           dvdDC->dest, dvdDC->size,
+                           HSD_DevComDVDARAMEndCallback);
             HSD_DevComUnlink(dvdDC);
             HSD_DevCom_804D77F5 = 0;
             HSD_DevComDVDWakeUp();
@@ -321,7 +342,8 @@ void HSD_DevComDVDWakeUp(void)
         if ((dvdDC = devComStatus[i])) {
             if (dvdDC->cancelflag) {
                 if (dvdDC->callback != NULL) {
-                    dvdDC->callback(dvdDC->dcReq, (s32) dvdDC->args, NULL, true);
+                    dvdDC->callback(dvdDC->dcReq, (s32) dvdDC->args, NULL,
+                                    true);
                 }
                 HSD_DevComUnlink(dvdDC);
                 OSRestoreInterrupts(enabled);
@@ -330,7 +352,9 @@ void HSD_DevComDVDWakeUp(void)
             }
             DVDFastOpen(dvdDC->file, &fileinfo);
             if (dvdDC->type == 0x21) {
-                DVDReadAsyncPrio(&fileinfo, (void*) dvdDC->dest, MIN(dvdDC->size, 0x80000), (s32) dvdDC->src, HSD_DevComDVDMemCallback, 2);
+                DVDReadAsyncPrio(&fileinfo, (void*) dvdDC->dest,
+                                 MIN(dvdDC->size, 0x80000), (s32) dvdDC->src,
+                                 HSD_DevComDVDMemCallback, 2);
                 HSD_DevCom_804D77F5 = 1;
                 OSRestoreInterrupts(enabled);
                 return;
@@ -338,7 +362,9 @@ void HSD_DevComDVDWakeUp(void)
             buf_idx = getRelayBufIdx();
             if (buf_idx >= 0) {
                 HSD_DevCom_804D77F6 = buf_idx;
-                DVDReadAsyncPrio(&fileinfo, HSD_DevCom_804C6330_bufs[buf_idx], MIN(dvdDC->size, DEVCOM_BUF_SIZE), dvdDC->src, HSD_DevComDVDCallback, 2);
+                DVDReadAsyncPrio(&fileinfo, HSD_DevCom_804C6330_bufs[buf_idx],
+                                 MIN(dvdDC->size, DEVCOM_BUF_SIZE), dvdDC->src,
+                                 HSD_DevComDVDCallback, 2);
                 HSD_DevCom_804D77F5 = 1;
                 OSRestoreInterrupts(enabled);
                 return;

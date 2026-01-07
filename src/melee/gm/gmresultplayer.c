@@ -1,14 +1,14 @@
 #include "gmresultplayer.h"
 
+#include "gm_unsplit.h"
+
+#include "cm/camera.h"
+
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/mtx.h>
-#include "cm/camera.h"
-
-#include "gm_unsplit.h"
-
 #include <melee/gm/gmresult.h>
 #include <melee/gm/types.h>
 #include <melee/lb/lb_00B0.h>
@@ -26,8 +26,10 @@ void gm_80177724(struct ResultsMatchInfo* arg0)
 
 static inline void inline0(HSD_JObj* jobj, float f)
 {
-    HSD_ForeachAnim(jobj, JOBJ_TYPE, ALL_TYPE_MASK, HSD_AObjSetRate, AOBJ_ARG_AF, 0.0);
-    HSD_ForeachAnim(jobj, JOBJ_TYPE, ALL_TYPE_MASK, HSD_AObjSetCurrentFrame, AOBJ_ARG_AF, f);
+    HSD_ForeachAnim(jobj, JOBJ_TYPE, ALL_TYPE_MASK, HSD_AObjSetRate,
+                    AOBJ_ARG_AF, 0.0);
+    HSD_ForeachAnim(jobj, JOBJ_TYPE, ALL_TYPE_MASK, HSD_AObjSetCurrentFrame,
+                    AOBJ_ARG_AF, f);
     HSD_JObjAnimAll(jobj);
 }
 
@@ -60,7 +62,10 @@ void fn_80177748(void)
                 if (data->x6 == i) {
                     var_r24 = 5;
                 } else {
-                    var_r24 = temp_r3->team_standings[temp_r3->player_standings[i].team].is_big_loser;
+                    var_r24 =
+                        temp_r3
+                            ->team_standings[temp_r3->player_standings[i].team]
+                            .is_big_loser;
                 }
             }
             inline0(data->player_data[i].jobjs[4], var_r24);
@@ -83,7 +88,8 @@ void fn_80177920(HSD_GObj* gobj)
 
     for (i = 0; i < 4; i++) {
         if (end->player_standings[i].slot_type == Gm_PKind_Human &&
-            HSD_PadMasterStatus[(u8) i].err == 0) {
+            HSD_PadMasterStatus[(u8) i].err == 0)
+        {
             human_controller_count++;
             if (HSD_PadCopyStatus[(u8) i].trigger != 0) {
                 data->x1 = 3;
@@ -95,7 +101,8 @@ void fn_80177920(HSD_GObj* gobj)
     if (human_controller_count == 0) {
         for (i = 0; i < 4; i++) {
             if (HSD_PadMasterStatus[(u8) i].err == 0 &&
-                HSD_PadCopyStatus[(u8) i].trigger != 0) {
+                HSD_PadCopyStatus[(u8) i].trigger != 0)
+            {
                 data->x1 = 3;
                 break;
             }
@@ -143,7 +150,10 @@ static inline bool scrollDown(int slot, float amount)
     ResultsData* data = &lbl_8046DBE8;
     amount *= scroll_speed;
 
-    scroll_max = fn_80174A60(fn_801748EC(&lbl_803D6878, data->player_data[slot].page, slot), slot) - 10;
+    scroll_max = fn_80174A60(fn_801748EC(&lbl_803D6878,
+                                         data->player_data[slot].page, slot),
+                             slot) -
+                 10;
     if (data->player_data[slot].scroll_offset < scroll_max) {
         data->player_data[slot].scroll_offset += amount;
         if (data->player_data[slot].scroll_offset > scroll_max) {
@@ -220,7 +230,10 @@ bool fn_80177DD0(int slot)
     if (HSD_PadCopyStatus[slot].err == 0) {
         return fn_80177B7C(slot);
     }
-    scroll_max = fn_80174A60(fn_801748EC(unk, data->player_data[slot].page, slot), slot) - 10;
+    scroll_max =
+        fn_80174A60(fn_801748EC(unk, data->player_data[slot].page, slot),
+                    slot) -
+        10;
     if (scroll_max < 0) {
         scroll_max = 0;
     }

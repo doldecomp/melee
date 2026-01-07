@@ -2,13 +2,14 @@
 
 #include "lb/lb_00B0.h"
 
+#include <baselib/forward.h>
+
+#include <string.h>
 #include <baselib/cobj.h>
 #include <baselib/displayfunc.h>
 #include <baselib/fog.h>
-#include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/video.h>
-#include <string.h>
 
 typedef struct {
     u8 pad[0x28];
@@ -24,7 +25,7 @@ extern void* un_804D6EB8;
 extern void* un_804D6EB4;
 extern void* un_804D6EB0;
 extern void* un_804D6EAC;
-extern void* un_804D6ECC;
+extern HSD_Archive* un_804D6ECC;
 extern void* un_804D6EA8;
 extern void* un_804D6EA4;
 extern void* un_804D6EC8;

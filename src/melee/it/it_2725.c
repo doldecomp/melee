@@ -9000,7 +9000,7 @@ loop:
         return;
     }
 
-    opcode = (*(u8*)cmd->u >> 2) & 0x3F;
+    opcode = (*(u8*) cmd->u >> 2) & 0x3F;
     if (Command_Execute(cmd, opcode) != 0) {
         goto loop;
     }

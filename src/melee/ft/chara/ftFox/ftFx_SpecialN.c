@@ -342,9 +342,7 @@ void ftFx_SpecialNLoop_Anim(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
 
     it_802ADDD0(fp->fv.fx.x222C_blasterGObj, 1);
-    if (fp->cmd_vars[3] == 1 &&
-        fp->fv.fx.x222C_blasterGObj != NULL)
-    {
+    if (fp->cmd_vars[3] == 1 && fp->fv.fx.x222C_blasterGObj != NULL) {
         fp->cmd_vars[3] = 0;
         it_802AE538(fp->fv.fx.x222C_blasterGObj);
     }

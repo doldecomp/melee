@@ -2,6 +2,7 @@
 #define MELEE_MN_MAINRULE_H
 
 #include <placeholder.h>
+
 #include <sysdolphin/baselib/forward.h>
 
 struct mn_80231634_t {

@@ -27,7 +27,6 @@
 #include <lb/lbaudio_ax.h>
 #include <sc/types.h>
 
-
 inline int mnInfoBonus_802528F8_inline(int j)
 {
     if (*mnInfoBonus_804D6C80) {

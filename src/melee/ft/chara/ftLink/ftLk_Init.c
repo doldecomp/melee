@@ -9,7 +9,6 @@
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
-#include "ftCommon/ftCo_Attack100.h"
 #include "ft/ftattacks4combo.h"
 #include "ft/ftcamera.h"
 #include "ft/ftdata.h"
@@ -20,6 +19,7 @@
 #include "ftCommon/forward.h"
 
 #include "ftCommon/ftCo_AirCatch.h"
+#include "ftCommon/ftCo_Attack100.h"
 #include "ftCommon/ftCo_Guard.h"
 #include "it/it_26B1.h"
 #include "lb/lbanim.h"

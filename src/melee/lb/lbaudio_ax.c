@@ -1,9 +1,9 @@
 #include "lbaudio_ax.static.h"
 
 #include "baselib/forward.h"
-#include <m2c_macros.h>
 #include <melee/ft/forward.h>
 
+#include <m2c_macros.h>
 #include <baselib/axdriver.h>
 #include <baselib/gobjplink.h>
 #include <baselib/synth.h>
@@ -16,16 +16,8 @@ extern s8 flags_arr_803BB800[0x62];
 typedef bool (*lbl_803BCA24_fn)(HSD_GObj*);
 
 lbl_803BCA24_fn lbl_803BCA24[] = {
-    fn_800251EC,
-    fn_800253D8,
-    fn_800256BC,
-    fn_800259A0,
-    fn_800259EC,
-    fn_80025A98,
-    fn_80025B44,
-    fn_80025CBC,
-    fn_80025E38,
-    fn_80025E38,
+    fn_800251EC, fn_800253D8, fn_800256BC, fn_800259A0, fn_800259EC,
+    fn_80025A98, fn_80025B44, fn_80025CBC, fn_80025E38, fn_80025E38,
 };
 
 int lbAudioAx_8002305C(int arg0, int arg1)
@@ -833,7 +825,7 @@ bool lbAudioAx_800265C4(HSD_GObj* arg0, int arg1)
     while (gobj != NULL) {
         int* user_data = gobj->user_data;
         if (user_data != NULL) {
-            if ((u32)user_data[2] == (u32)arg0) {
+            if ((u32) user_data[2] == (u32) arg0) {
                 if (user_data[12] != -1 && user_data[12] == arg1) {
                     AXDriverKeyOff(user_data[12]);
                     if (gobj != NULL) {

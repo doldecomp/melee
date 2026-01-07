@@ -773,8 +773,8 @@ void ftCh_Entry_Coll(HSD_GObj* gobj) {}
 
 void fn_80157080(Fighter_GObj* gobj)
 {
-    Fighter_ChangeMotionState(gobj, 0x158, 0,
-        ftCh_Init_804DA070, ftCh_Init_804DA074, ftCh_Init_804DA070, NULL);
+    Fighter_ChangeMotionState(gobj, 0x158, 0, ftCh_Init_804DA070,
+                              ftCh_Init_804DA074, ftCh_Init_804DA070, NULL);
     ftAnim_8006EBA4(gobj);
 }
 void ftCh_Damage_Anim(HSD_GObj* gobj)

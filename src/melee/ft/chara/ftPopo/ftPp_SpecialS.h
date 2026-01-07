@@ -50,8 +50,8 @@
 /* 122B14 */ void ftPp_SpecialLw_Phys(Fighter_GObj* gobj);
 /* 122B34 */ void ftPp_SpecialAirLw_Phys(Fighter_GObj* gobj);
 /* 122B54 */ void fn_80122B54(Fighter_GObj* gobj);
-//ftPp_SpecialLw_Coll
+// ftPp_SpecialLw_Coll
 /* ??? */ void ftPp_SpecialAirLw_Coll(Fighter_GObj* gobj);
-//fn_80122D2C
+// fn_80122D2C
 
 #endif

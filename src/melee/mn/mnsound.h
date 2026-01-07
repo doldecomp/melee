@@ -2,6 +2,7 @@
 #define MELEE_MN_MNSOUND_H
 
 #include <placeholder.h>
+
 #include <sysdolphin/baselib/forward.h>
 
 /* 2492CC */ void mnSound_802492CC(HSD_GObj*);

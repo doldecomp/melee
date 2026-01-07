@@ -47,8 +47,7 @@
 #include <melee/pl/plbonuslib.h>
 #include <melee/pl/plstale.h>
 
-void ftCo_800DEE84(Fighter_GObj* gobj, u32 arg1,
-                   float arg2, float dmg_mult)
+void ftCo_800DEE84(Fighter_GObj* gobj, u32 arg1, float arg2, float dmg_mult)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     SmashAttr* attr = &fp->smash_attrs;

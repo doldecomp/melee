@@ -2,11 +2,15 @@
 #define MELEE_MN_STATIC_DATADEL_H
 
 #include <placeholder.h>
+
 #include "baselib/forward.h"
-#include "mn/forward.h"
-#include "mn/types.h"
+
 #include "baselib/jobj.h"
 #include "lb/lb_00F9.h"
+
+#include "mn/forward.h"
+
+#include "mn/types.h"
 #include "sc/types.h"
 
 struct WarnCmnData {
@@ -18,10 +22,10 @@ struct WarnCmnData {
 enum WarnCommonJoints {
     WARN_JOINT_ROOT,
     WARN_JOINT_BACKGROUND,
-    WARN_JOINT_PANEL,               ///< main panel root
-    WARN_JOINT_PANEL_TOP,           ///< top position of the panel/text box
-    WARN_JOINT_PANEL_TEXT_BOTTOM,   ///< bottom position of the text box
-    WARN_JOINT_PANEL_BOTTOM,        ///< bottom position of the panel
+    WARN_JOINT_PANEL,             ///< main panel root
+    WARN_JOINT_PANEL_TOP,         ///< top position of the panel/text box
+    WARN_JOINT_PANEL_TEXT_BOTTOM, ///< bottom position of the text box
+    WARN_JOINT_PANEL_BOTTOM,      ///< bottom position of the panel
     WARN_JOINT_CURSOR_YES,
     WARN_JOINT_CURSOR_NO,
     WARN_JOINT_EXCLAIM,
@@ -56,7 +60,8 @@ struct MnDataDelData {
     f32 x6C;
 };
 
-static inline void JObj_GetChildAtIdx(HSD_JObj* parent, HSD_JObj** child, s32 idx)
+static inline void JObj_GetChildAtIdx(HSD_JObj* parent, HSD_JObj** child,
+                                      s32 idx)
 {
     lb_80011E24(parent, child, idx, -1);
 }
@@ -68,17 +73,20 @@ static inline void JObj_HideChildAtIdx(HSD_JObj* root, s32 idx)
     HSD_JObjSetFlagsAll(child, JOBJ_HIDDEN);
 }
 
-static inline bool Anim_IsFrameInRange(float frame, AnimLoopSettings *settings) {
+static inline bool Anim_IsFrameInRange(float frame, AnimLoopSettings* settings)
+{
     return frame >= settings->start_frame && frame < settings->end_frame;
 }
 
-#define FRAME_IN_RANGE(frame, settings) \
+#define FRAME_IN_RANGE(frame, settings)                                       \
     ((frame) >= (settings).start_frame && (frame) < (settings).end_frame)
 
 extern HSD_GObj* mnDataDel_804D6C68;
 extern HSD_Text* mnDataDel_804D6C6C;
 static struct MnDataDelData mnDataDel_803EF870;
-static AnimLoopSettings mnDataDel_803EF8A0 = { 0.0f, 9.0f, -0.1f }; /// mnDataDel_803EF870[4]
+static AnimLoopSettings mnDataDel_803EF8A0 = {
+    0.0f, 9.0f, -0.1f
+}; /// mnDataDel_803EF870[4]
 static StaticModelDesc mnDataDel_804A0938;
 
 #endif
