@@ -194,6 +194,32 @@ struct VsModeData {
     /* +8 */ StartMeleeData data;
 };
 
+typedef enum CSSMatchType {
+    VS_MELEE = 0x0,
+    VS_CAMERA = 0x1,
+    VS_STAMINA = 0x2,
+    VS_SUDDEN_DEATH = 0x3,
+    VS_GIANT = 0x4,
+    VS_TINY = 0x5,
+    VS_INVISIBLE = 0x6,
+    VS_FIXED_CAMERA = 0x7,
+    VS_SINGLE_BUTTON = 0x8,
+    VS_LIGHTNING = 0x9,
+    VS_SLOWMO = 0xA,
+    REG_CLASSIC = 0xB,
+    REG_ADVENTURE = 0xC,
+    REG_ALLSTAR = 0xD,
+    EVENT_MATCH = 0xE,
+    STADIUM_TARGET = 0xF,
+    STADIUM_HOMERUN = 0x10,
+    STADIUM_MULTIMAN_10 = 0x11,
+    STADIUM_MULTIMAN_100 = 0x12,
+    STADIUM_3_MIN_MELEE = 0x13,
+    STADIUM_15_MIN_MELEE = 0x14,
+    STADIUM_ENDLESS_MELEE = 0x15,
+    STADIUM_CRUEL_MELEE = 0x16,
+} CSSMatchType;
+
 struct CSSData {
     u16 unk_0x0; ///< 1p port?
     u8 match_type;
