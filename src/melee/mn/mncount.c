@@ -23,7 +23,7 @@ inline bool mnCount_8025035C_inline(void)
             return false;
         }
     }
-    return 1;
+    return true;
 }
 
 s32 mnCount_8025035C(s32 skip_count, u32 (*get_val_func)(s8)) {
