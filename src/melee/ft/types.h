@@ -604,16 +604,18 @@ typedef struct ftData_x44_t {
     float ledge_snap_height;
 } ftData_x44_t;
 
+typedef struct ftData_x8_x8 {
+    /*  +8 */ u32 x8;
+    /*  +C */ u16** xC;
+} ftData_x8_x8;
+
 struct ftData {
     /*  +0 */ struct ftCo_DatAttrs* x0;
     /*  +4 */ void* ext_attr;
     /*  +8 */ struct ftData_x8 {
         /*  +0 */ u32 x0;
         /*  +4 */ u8 x4[0x4];
-        /*  +8 */ struct ftData_x8_x8 {
-            /*  +8 */ u32 x8;
-            /*  +C */ u16** xC;
-        } x8;
+        /*  +8 */ ftData_x8_x8 x8;
         /* +10 */ u8 x10; ///< Fighter_Part
         /* +11 */ u8 x11;
         /* +12 */ u8 x12;
@@ -625,7 +627,7 @@ struct ftData {
     /* +14 */ struct S_TEMP4* x14;
     /* +18 */ u8* x18;
     /* +1C */ struct ftData_x1C {
-        u16 x0;
+        u16 x0; ///< Fighter_Part
         u16 x2;
         u8* x4; ///< an array of Fighter part indices
         HSD_AnimJoint** x8;
@@ -788,6 +790,10 @@ struct FighterBone {
             /* +9:5 */ u8 flags2_b5 : 1;
             /* +9:6 */ u8 flags2_b6 : 1;
             /* +9:7 */ u8 flags2_b7 : 1;
+        };
+        struct {
+            u8 hi;
+            u8 lo;
         };
         u16 flags8;
     };
@@ -1178,7 +1184,7 @@ struct Fighter {
     /*  fp+594 */ union {
         struct {
             /* fp+594:0 */ u8 x594_b0 : 1;
-            /* fp+594:1 */ u8 x594_b1 : 1;
+            /* fp+594:1 */ u8 x594_b1_loop : 1;
             /* fp+594:2 */ u8 x594_b2 : 1;
             /* fp+594:3 */ u8 x594_b3 : 1;
             /* fp+594:4 */ u8 x594_b4 : 1;
@@ -1209,9 +1215,7 @@ struct Fighter {
     /*  fp+5BC */ UNK_T x5BC;
     /*  fp+598 */ u8 filler_x598[0x5C8 - 0x5C0];
     /*  fp+5A0 */ void* x5C8;
-    /*  fp+5CC */ u32 n_costume_tobjs;
-    /*  fp+5D0 */ u16* x5D0;
-    /*  fp+5D4 */ HSD_TObj* costume_tobjs[5];
+    /*  fp+5CC */ CostumeTObjList tobj_list;
     /*  fp+5E8 */ FighterBone* parts;
     /*  fp+5EC */ DObjList dobj_list;
     /*  fp+5F4 */ struct {
@@ -1291,7 +1295,7 @@ struct Fighter {
     /*  fp+89C */ float frame_speed_mul;
     /*  fp+8A0 */ float x8A0_unk;
     /*  fp+8A4 */ float x8A4_animBlendFrames;
-    /*  fp+8A8 */ float x8A8_unk;
+    /*  fp+8A8 */ float x8A8_anim_frame;
     /*  fp+8AC */ HSD_JObj* x8AC_animSkeleton;
     /*  fp+8B0 */ struct Fighter_x8B0_t {
         int x0;

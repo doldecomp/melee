@@ -98,9 +98,9 @@ void ftCo_800CC988(Fighter_GObj* gobj, f32 arg1)
     if (arg1) {
         HSD_JObjAnimAll(fp->x8AC_animSkeleton);
         if (arg1 != 1.0F) {
-            ftAnim_8006FE9C(fp, 1, arg1, 1.0F - arg1);
+            ftAnim_8006FE9C(fp, FtPart_TransN, arg1, 1.0F - arg1);
         } else {
-            ftAnim_8006FF74(fp, 1);
+            ftAnim_8006FF74(fp, FtPart_TransN);
         }
     }
 }
@@ -191,9 +191,9 @@ void ftCo_Fall_Anim_Inner(Fighter_GObj* gobj, f32* mv_x4,
         ftAnim_8006EDD0(fp, smid, fp->cur_anim_frame, 1.0F);
         HSD_JObjAnimAll(fp->x8AC_animSkeleton);
         if (*mv_x4 != 1.0F) {
-            ftAnim_8006FE9C(fp, 1, *mv_x4, 1.0F - *mv_x4);
+            ftAnim_8006FE9C(fp, FtPart_TransN, *mv_x4, 1.0F - *mv_x4);
         } else {
-            ftAnim_8006FF74(fp, 1);
+            ftAnim_8006FF74(fp, FtPart_TransN);
         }
         fp->mv.co.fall.smid = smid;
     }
