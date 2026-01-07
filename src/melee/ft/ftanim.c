@@ -145,28 +145,6 @@ void ftAnim_8006DF0C(Fighter* fp)
     }
 }
 
-static inline HSD_JObj* next(HSD_JObj* jobj)
-{
-    if (jobj == NULL) {
-        return NULL;
-    }
-    return jobj->next;
-}
-static inline HSD_JObj* parent(HSD_JObj* jobj)
-{
-    if (jobj == NULL) {
-        return NULL;
-    }
-    return jobj->parent;
-}
-static inline HSD_JObj* child(HSD_JObj* jobj)
-{
-    if (jobj == NULL) {
-        return NULL;
-    }
-    return jobj->child;
-}
-
 void ftAnim_8006E054(Fighter* fp, HSD_JObj* jobj, HSD_JObj* arg2,
                      HSD_JObj* arg3)
 {
@@ -231,21 +209,23 @@ void ftAnim_8006E054(Fighter* fp, HSD_JObj* jobj, HSD_JObj* arg2,
             HSD_JObjAnim(jobj);
         }
 
-        if (!(HSD_JObjGetFlags(jobj) & 0x1000) && child(jobj) != NULL) {
-            jobj = child(jobj);
-        } else if (next(jobj) != NULL) {
-            jobj = next(jobj);
+        if (!(HSD_JObjGetFlags(jobj) & 0x1000) &&
+            HSD_JObjGetChild(jobj) != NULL)
+        {
+            jobj = HSD_JObjGetChild(jobj);
+        } else if (HSD_JObjGetNext(jobj) != NULL) {
+            jobj = HSD_JObjGetNext(jobj);
         } else {
             while (1) {
-                if (parent(jobj) == NULL) {
+                if (HSD_JObjGetParent(jobj) == NULL) {
                     jobj = NULL;
                     break;
                 }
-                if (next(parent(jobj)) != NULL) {
-                    jobj = next(parent(jobj));
+                if (HSD_JObjGetNext(HSD_JObjGetParent(jobj)) != NULL) {
+                    jobj = HSD_JObjGetNext(HSD_JObjGetParent(jobj));
                     break;
                 }
-                jobj = parent(jobj);
+                jobj = HSD_JObjGetParent(jobj);
             }
         }
     }
@@ -305,21 +285,25 @@ void ftAnim_8006E7B8(Fighter* fp, Fighter_Part part)
         }
         i++;
 
-        if (!(HSD_JObjGetFlags(jobj) & 0x1000) && child(jobj) != NULL) {
-            jobj = child(jobj);
-        } else if (next(jobj) != NULL) {
-            jobj = next(jobj);
+        if (!(HSD_JObjGetFlags(jobj) & 0x1000) &&
+            HSD_JObjGetChild(jobj) != NULL)
+        {
+            jobj = HSD_JObjGetChild(jobj);
+        } else if (HSD_JObjGetNext(jobj) != NULL) {
+            jobj = HSD_JObjGetNext(jobj);
         } else {
             while (1) {
-                if (parent(jobj) == NULL || parent(jobj) == temp_r30) {
+                if (HSD_JObjGetParent(jobj) == NULL ||
+                    HSD_JObjGetParent(jobj) == temp_r30)
+                {
                     jobj = NULL;
                     break;
                 }
-                if (next(parent(jobj)) != NULL) {
-                    jobj = next(parent(jobj));
+                if (HSD_JObjGetNext(HSD_JObjGetParent(jobj)) != NULL) {
+                    jobj = HSD_JObjGetNext(HSD_JObjGetParent(jobj));
                     break;
                 }
-                jobj = parent(jobj);
+                jobj = HSD_JObjGetParent(jobj);
             }
         }
     }
