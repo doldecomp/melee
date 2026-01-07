@@ -140,15 +140,15 @@ void mnCharSel_8025BD30(void)
     }
 }
 
-static inline void inline1(HSD_Text* x, HSD_Text* y, int r6, int r7, int r8,
-                           int r31)
+static inline void drawTimeText(HSD_Text* x, HSD_Text* y, int hours,
+                                int minutes, int seconds, int microseconds)
 {
-    if (r6 == 0) {
-        HSD_SisLib_803A70A0(x, 0, "%02d:%02d", r7, r8);
-        HSD_SisLib_803A70A0(y, 0, "%02d", r31);
-    } else if (r6 < 0x64) {
-        HSD_SisLib_803A70A0(x, 0, "%d:%02d:%02d", r6, r7, r8);
-        HSD_SisLib_803A70A0(y, 0, "%02d", r31);
+    if (hours == 0) {
+        HSD_SisLib_803A70A0(x, 0, "%02d:%02d", minutes, seconds);
+        HSD_SisLib_803A70A0(y, 0, "%02d", microseconds);
+    } else if (hours < 100) {
+        HSD_SisLib_803A70A0(x, 0, "%d:%02d:%02d", hours, minutes, seconds);
+        HSD_SisLib_803A70A0(y, 0, "%02d", microseconds);
     } else {
         HSD_SisLib_803A70A0(x, 0, "99:59:59");
         HSD_SisLib_803A70A0(y, 0, "99");
@@ -194,7 +194,7 @@ void mnCharSel_8025C020(int arg0)
         }
     }
     switch (mnCharSel_804D6CB0->match_type) {
-    case 11:
+    case REG_CLASSIC:
         sp7C = inline3(0x42, *gmMainLib_8015D194(temp_r31));
         if (arg0 != 0) {
             HSD_JObjSetFlags(sp7C, JOBJ_HIDDEN);
@@ -211,7 +211,7 @@ void mnCharSel_8025C020(int arg0)
             HSD_JObjClearFlags(sp7C, JOBJ_HIDDEN);
         }
         break;
-    case 12:
+    case REG_ADVENTURE:
         sp7C = inline3(0x42, *gmMainLib_8015D2BC(temp_r31));
         if (arg0 != 0) {
             HSD_JObjSetFlags(sp7C, JOBJ_HIDDEN);
@@ -228,7 +228,7 @@ void mnCharSel_8025C020(int arg0)
             HSD_JObjClearFlags(sp7C, JOBJ_HIDDEN);
         }
         break;
-    case 13:
+    case REG_ALLSTAR:
         sp7C = inline3(0x42, *gmMainLib_8015D3E4(temp_r31));
         if (arg0 != 0) {
             HSD_JObjSetFlags(sp7C, JOBJ_HIDDEN);
@@ -245,7 +245,7 @@ void mnCharSel_8025C020(int arg0)
             HSD_JObjClearFlags(sp7C, JOBJ_HIDDEN);
         }
         break;
-    case 15:
+    case STADIUM_TARGET:
         if (arg0 == 0) {
             int temp_r29 = gm_8016332C(temp_r31);
             if (temp_r29 != -1U) {
@@ -258,14 +258,14 @@ void mnCharSel_8025C020(int arg0)
                 }
             } else {
                 gm_80163374(temp_r31, &sp7B, &sp7A, &sp79, &sp78);
-                inline1(mnCharSel_804D6CDC, mnCharSel_804D6CE0, sp7B, sp7A,
-                        sp79, sp78);
+                drawTimeText(mnCharSel_804D6CDC, mnCharSel_804D6CE0, sp7B,
+                             sp7A, sp79, sp78);
             }
         }
         lb_80011E24(mnCharSel_804D6CC8, &sp7C, 3, -1);
         if (gm_801634D4(&sp7B, &sp7A, &sp79, &sp78) != 0) {
-            inline1(mnCharSel_804D6CE4, mnCharSel_804D6CE8, sp7B, sp7A, sp79,
-                    sp78);
+            drawTimeText(mnCharSel_804D6CE4, mnCharSel_804D6CE8, sp7B, sp7A,
+                         sp79, sp78);
             HSD_JObjClearFlagsAll(sp7C, JOBJ_HIDDEN);
         } else {
             HSD_SisLib_803A70A0(mnCharSel_804D6CE4, 0, NULL);
@@ -273,7 +273,7 @@ void mnCharSel_8025C020(int arg0)
             HSD_JObjSetFlagsAll(sp7C, JOBJ_HIDDEN);
         }
         break;
-    case 16:
+    case STADIUM_HOMERUN:
         if (arg0 == 0) {
             if (lbLang_IsSavedLanguageJP()) {
                 HSD_SisLib_803A70A0(
@@ -303,20 +303,20 @@ void mnCharSel_8025C020(int arg0)
                                 gm_80163274(temp_r31));
         }
         break;
-    case 17:
+    case STADIUM_MULTIMAN_10:
         if (arg0 == 0) {
             if (gm_8016365C(temp_r31) != 0) {
                 show_kos(mnCharSel_804D6CDC, gm_80163690(temp_r31));
             } else {
                 gm_801636D8(temp_r31, &sp7B, &sp7A, &sp79, &sp78);
-                inline1(mnCharSel_804D6CDC, mnCharSel_804D6CE0, sp7B, sp7A,
-                        sp79, sp78);
+                drawTimeText(mnCharSel_804D6CDC, mnCharSel_804D6CE0, sp7B,
+                             sp7A, sp79, sp78);
             }
         }
         lb_80011E24(mnCharSel_804D6CC8, &sp7C, 3, -1);
         if (gm_80163838(&sp7B, &sp7A, &sp79, &sp78) != 0) {
-            inline1(mnCharSel_804D6CE4, mnCharSel_804D6CE8, sp7B, sp7A, sp79,
-                    sp78);
+            drawTimeText(mnCharSel_804D6CE4, mnCharSel_804D6CE8, sp7B, sp7A,
+                         sp79, sp78);
             HSD_JObjClearFlagsAll(sp7C, JOBJ_HIDDEN);
         } else {
             HSD_SisLib_803A70A0(mnCharSel_804D6CE4, 0, NULL);
@@ -324,20 +324,20 @@ void mnCharSel_8025C020(int arg0)
             HSD_JObjSetFlagsAll(sp7C, JOBJ_HIDDEN);
         }
         break;
-    case 18:
+    case STADIUM_MULTIMAN_100:
         if (arg0 == 0) {
             if (gm_801639C0(temp_r31) != 0) {
                 show_kos(mnCharSel_804D6CDC, gm_801639F4(temp_r31));
             } else {
                 gm_80163A3C(temp_r31, &sp7B, &sp7A, &sp79, &sp78);
-                inline1(mnCharSel_804D6CDC, mnCharSel_804D6CE0, sp7B, sp7A,
-                        sp79, sp78);
+                drawTimeText(mnCharSel_804D6CDC, mnCharSel_804D6CE0, sp7B,
+                             sp7A, sp79, sp78);
             }
         }
         lb_80011E24(mnCharSel_804D6CC8, &sp7C, 3, -1);
         if (gm_80163B9C(&sp7B, &sp7A, &sp79, &sp78) != 0) {
-            inline1(mnCharSel_804D6CE4, mnCharSel_804D6CE8, sp7B, sp7A, sp79,
-                    sp78);
+            drawTimeText(mnCharSel_804D6CE4, mnCharSel_804D6CE8, sp7B, sp7A,
+                         sp79, sp78);
             HSD_JObjClearFlagsAll(sp7C, JOBJ_HIDDEN);
         } else {
             HSD_SisLib_803A70A0(mnCharSel_804D6CE4, 0, NULL);
@@ -345,53 +345,53 @@ void mnCharSel_8025C020(int arg0)
             HSD_JObjSetFlagsAll(sp7C, JOBJ_HIDDEN);
         }
         break;
-    case 19:
+    case STADIUM_3_MIN_MELEE:
         if (arg0 == 0) {
             if (lbLang_IsSavedLanguageJP()) {
                 HSD_SisLib_803A70A0(mnCharSel_804D6CDC, 0, "%d 人抜き",
-                                    gm_80163DC4(temp_r31));
+                                    gm_Get3MinMultimanHighscore(temp_r31));
             } else {
                 HSD_SisLib_803A70A0(mnCharSel_804D6CDC, 0, "%d ＫＯｓ",
-                                    gm_80163DC4(temp_r31));
+                                    gm_Get3MinMultimanHighscore(temp_r31));
             }
         }
         if (lbLang_IsSavedLanguageJP()) {
             HSD_SisLib_803A70A0(mnCharSel_804D6CE4, 0, "%d 人抜き",
-                                gm_80163DE8());
+                                gm_Get3MinMultimanTotalHighscore());
         } else {
             HSD_SisLib_803A70A0(mnCharSel_804D6CE4, 0, "%d ＫＯｓ",
-                                gm_80163DE8());
+                                gm_Get3MinMultimanTotalHighscore());
         }
         break;
-    case 20:
+    case STADIUM_15_MIN_MELEE:
         if (!arg0) {
             if (lbLang_IsSavedLanguageJP()) {
                 HSD_SisLib_803A70A0(mnCharSel_804D6CDC, 0, "%d 人抜き",
-                                    gm_80163E3C(temp_r31));
+                                    gm_Get15MinMultimanHighscore(temp_r31));
             } else {
                 HSD_SisLib_803A70A0(mnCharSel_804D6CDC, 0, "%d ＫＯｓ",
-                                    gm_80163E3C(temp_r31));
+                                    gm_Get15MinMultimanHighscore(temp_r31));
             }
         }
         if (lbLang_IsSavedLanguageJP()) {
             HSD_SisLib_803A70A0(mnCharSel_804D6CE4, 0, "%d 人抜き",
-                                gm_80163E60());
+                                gm_Get15MinMultimanTotalHighscore());
         } else {
             HSD_SisLib_803A70A0(mnCharSel_804D6CE4, 0, "%d ＫＯｓ",
-                                gm_80163E60());
+                                gm_Get15MinMultimanTotalHighscore());
         }
         break;
-    case 21:
+    case STADIUM_ENDLESS_MELEE:
         if (!arg0) {
-            show_kos(mnCharSel_804D6CDC, gm_80163EB4(temp_r31));
+            show_kos(mnCharSel_804D6CDC, gm_GetEndlessHighscore(temp_r31));
         }
-        show_kos(mnCharSel_804D6CE4, gm_80163ED8());
+        show_kos(mnCharSel_804D6CE4, gm_GetEndlessTotalHighscore());
         break;
-    case 22:
+    case STADIUM_CRUEL_MELEE:
         if (!arg0) {
-            show_kos(mnCharSel_804D6CDC, gm_80163F2C(temp_r31));
+            show_kos(mnCharSel_804D6CDC, gm_GetCruelHighscore(temp_r31));
         }
-        show_kos(mnCharSel_804D6CE4, gm_80163F50());
+        show_kos(mnCharSel_804D6CE4, gm_GetCruelTotalHighscore());
         break;
     }
 }

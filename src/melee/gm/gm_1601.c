@@ -1048,13 +1048,13 @@ bool fn_80163D74(void)
     return false;
 }
 
-u16 gm_80163DC4(u8 i)
+u16 gm_Get3MinMultimanHighscore(u8 i)
 {
     return *gmMainLib_8015D74C(i);
 }
 
 /// Get total number of KOs
-int gm_80163DE8(void)
+int gm_Get3MinMultimanTotalHighscore(void)
 {
     int i;
     int total = 0;
@@ -1064,12 +1064,12 @@ int gm_80163DE8(void)
     return total;
 }
 
-u16 gm_80163E3C(u8 i)
+u16 gm_Get15MinMultimanHighscore(u8 i)
 {
     return *gmMainLib_8015D7A4(i);
 }
 
-int gm_80163E60(void)
+int gm_Get15MinMultimanTotalHighscore(void)
 {
     int i;
     int total = 0;
@@ -1079,12 +1079,12 @@ int gm_80163E60(void)
     return total;
 }
 
-int gm_80163EB4(u8 i)
+int gm_GetEndlessHighscore(u8 i)
 {
     return *gmMainLib_8015D7BC(i);
 }
 
-int gm_80163ED8(void)
+int gm_GetEndlessTotalHighscore(void)
 {
     int i;
     int total = 0;
@@ -1094,12 +1094,12 @@ int gm_80163ED8(void)
     return total;
 }
 
-int gm_80163F2C(u8 i)
+int gm_GetCruelHighscore(u8 i)
 {
     return *gmMainLib_8015D7D4(i);
 }
 
-int gm_80163F50(void)
+int gm_GetCruelTotalHighscore(void)
 {
     int i;
     int total = 0;
