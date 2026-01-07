@@ -1,5 +1,6 @@
 #include "mncount.h"
 #include <string.h>
+#include "types.h"
 
 extern s32 GetFighterTotalKOs(s32);
 extern s32 GetFighterTotalFalls(s32);
