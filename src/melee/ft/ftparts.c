@@ -251,7 +251,7 @@ void ftParts_80073CA8(HSD_PObj* pobj, MtxPtr vmtx, MtxPtr pmtx, u32 rendermode)
     HSD_PObjClearMtxMark(NULL, HSD_MTX_ENVELOPE);
     var_r17 = 0;
     if (!(rendermode & 0x4000000)) {
-        if (temp_r23->flags & 0x80) {
+        if (temp_r23->flags & JOBJ_LIGHTING) {
             var_r17 |= 1;
         }
         if (_HSD_TObjGetCurrentByType(NULL, TEX_COORD_REFLECTION) != NULL) {
@@ -317,7 +317,7 @@ void ftParts_80073CA8(HSD_PObj* pobj, MtxPtr vmtx, MtxPtr pmtx, u32 rendermode)
             } else {
                 HSD_MtxInverseTranspose(sp4C, sp7C);
             }
-            if (temp_r23->flags & 0x80) {
+            if (temp_r23->flags & JOBJ_LIGHTING) {
                 GXLoadNrmMtxImm(sp7C, (u32) temp_r18);
                 HSD_PerfCurrentStat.nb_mtx_load += 1;
             }
