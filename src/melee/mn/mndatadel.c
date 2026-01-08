@@ -269,8 +269,47 @@ void mnDataDel_8024EEC0(void)
     }
 }
 
-/// #fn_8024F1D4
+void fn_8024F1D4(HSD_GObj* arg0)
+{
+    u8 _pad[0x10];
+    struct WarnCmnData* data;
+    HSD_GObjProc* proc;
+    u32 buttons;
 
+    data = mnDataDel_804D6C68->user_data;
+    buttons = mn_80229624(4);
+    mn_804A04F0.buttons = (u64) buttons;
+    if (buttons & 0x10) {
+        if (data->cursor_idx != 0) {
+            mnDataDel_8024EA6C();
+        } else {
+            lbAudioAx_80024030(0);
+        }
+        mn_804D6BC8.cooldown = 5;
+        data->visible = 0;
+        HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
+        proc = HSD_GObjProc_8038FD54(arg0, fn_8024F840, 0);
+        proc->flags_3 = HSD_GObj_804D783C;
+        return;
+    }
+    if (buttons & 0x20) {
+        lbAudioAx_80024030(0);
+        mn_804D6BC8.cooldown = 5;
+        data->visible = 0;
+        HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
+        proc = HSD_GObjProc_8038FD54(arg0, fn_8024F840, 0);
+        proc->flags_3 = HSD_GObj_804D783C;
+        return;
+    }
+    if ((buttons & 8) || (buttons & 4)) {
+        lbAudioAx_80024030(2);
+        if (data->cursor_idx != 0) {
+            data->cursor_idx = 0;
+            return;
+        }
+        data->cursor_idx = 1;
+    }
+}
 /// #fn_8024F318
 
 /// #fn_8024F840
