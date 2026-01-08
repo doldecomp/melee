@@ -670,7 +670,8 @@ void mnDataDel_8024FE4C(u8 arg0)
     root = HSD_JObjLoadJoint(model->joint);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, root);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4, 0x80);
-    HSD_JObjAddAnimAll(root, model->animjoint, model->matanim_joint, model->shapeanim_joint);
+    HSD_JObjAddAnimAll(root, model->animjoint, model->matanim_joint,
+                       model->shapeanim_joint);
     HSD_JObjReqAnimAll(root, mnDataDel_804DC1AC);
     HSD_JObjAnimAll(root);
     data = (struct MnDataDelUserData*) HSD_MemAlloc(0x30);
@@ -695,12 +696,36 @@ void mnDataDel_8024FE4C(u8 arg0)
     proc = HSD_GObjProc_8038FD54(gobj, fn_8024FD40, 0);
     proc->flags_3 = HSD_GObj_804D783C;
     for (i = 0; i < 6; i++) {
-        mnDataDel_8024EBC8((HSD_JObj*) mn_80231634(data->x10[((s32*)&menu_data->x3C)[i]]), (u8) i, (u8)(data->x0 == i));
+        mnDataDel_8024EBC8(
+            (HSD_JObj*) mn_80231634(data->x10[((s32*) &menu_data->x3C)[i]]),
+            (u8) i, (u8) (data->x0 == i));
     }
-    text = HSD_SisLib_803A5ACC(0, 0, mnDataDel_804DC1B0, mnDataDel_804DC1B4, mnDataDel_804DC1B8, mnDataDel_804DC1BC, mnDataDel_804DC1C0);
+    text = HSD_SisLib_803A5ACC(0, 0, mnDataDel_804DC1B0, mnDataDel_804DC1B4,
+                               mnDataDel_804DC1B8, mnDataDel_804DC1BC,
+                               mnDataDel_804DC1C0);
     *(HSD_Text**) &data->pad[7] = text;
     text->font_size.x = mnDataDel_804DC1C4;
     text->font_size.y = mnDataDel_804DC1C4;
-    HSD_SisLib_803A6368(text, ((s16*)&menu_data->x58)[data->x0]);
+    HSD_SisLib_803A6368(text, ((s16*) &menu_data->x58)[data->x0]);
 }
-/// #mnDataDel_80250170
+void mnDataDel_80250170(void)
+{
+    HSD_GObjProc* proc;
+    struct MnDataDelData* data;
+    StaticModelDesc* model;
+
+    data = &mnDataDel_803EF870;
+    model = &mnDataDel_804A0918;
+    mn_804D6BC8.cooldown = 5;
+    mn_804A04F0.prev_menu = mn_804A04F0.cur_menu;
+    mn_804A04F0.cur_menu = 0x18;
+    mn_804A04F0.hovered_selection = 0;
+    mnDataDel_804D6C6C = NULL;
+    lbArchive_LoadSections(mn_804D6BB8, model, (char*) data + 0xA0,
+                           &model->animjoint, (char*) data + 0xB8,
+                           &model->matanim_joint, (char*) data + 0xD4,
+                           &model->shapeanim_joint);
+    mnDataDel_8024FE4C(0);
+    proc = HSD_GObjProc_8038FD54(GObj_Create(0, 1, 0x80), fn_8024F840, 0);
+    proc->flags_3 = HSD_GObj_804D783C;
+}
