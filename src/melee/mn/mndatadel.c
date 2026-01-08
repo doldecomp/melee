@@ -555,7 +555,7 @@ void fn_8024F840(HSD_GObj* arg0)
         data2 = mnDataDel_804D6C68->user_data;
         mnDataDel_8024EBC8((HSD_JObj*) mn_80231634(data2->x10[((s32*)&menu_data->x3C)[data->x0]]), data->x0, 1);
         data = mnDataDel_804D6C68->user_data;
-        text = (HSD_Text*) data->pad[7];
+        text = *(HSD_Text**) &data->pad[7];
         if (text != NULL) {
             HSD_SisLib_803A5CC4(text);
         }
@@ -579,7 +579,7 @@ void fn_8024F840(HSD_GObj* arg0)
         data2 = mnDataDel_804D6C68->user_data;
         mnDataDel_8024EBC8((HSD_JObj*) mn_80231634(data2->x10[((s32*)&menu_data->x3C)[data->x0]]), data->x0, 1);
         data = mnDataDel_804D6C68->user_data;
-        text = (HSD_Text*) data->pad[7];
+        text = *(HSD_Text**) &data->pad[7];
         if (text != NULL) {
             HSD_SisLib_803A5CC4(text);
         }
