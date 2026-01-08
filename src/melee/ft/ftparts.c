@@ -26,10 +26,6 @@
 
 #define MAX_FT_PARTS 140
 
-#define JOBJ_NEXT(jobj) ((jobj) == NULL ? NULL : (jobj)->next)
-#define JOBJ_PARENT(jobj) ((jobj) == NULL ? NULL : (jobj)->parent)
-#define JOBJ_CHILD(jobj) ((jobj) == NULL ? NULL : (jobj)->child)
-
 HSD_JObjInfo ftJObj = { ftParts_JObjInfoInit };
 HSD_JObjInfo ftIntpJObj = { ftParts_IntpJObjInfoInit };
 HSD_PObjInfo ftPObj = { ftParts_PObjInfoInit };
