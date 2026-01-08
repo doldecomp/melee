@@ -9,11 +9,30 @@
 #include "baselib/gobjobject.h"
 #include "baselib/gobjplink.h"
 #include "baselib/gobjproc.h"
+#include "baselib/gobjuserdata.h"
 #include "baselib/jobj.h"
+#include "baselib/memory.h"
+#include "baselib/sislib.h"
+#include "gm/gm_16F1.h"
+#include "gm/gm_1A3F.h"
+#include "gm/gmmain_lib.h"
 #include "lb/lb_00F9.h"
+#include "lb/lbarchive.h"
+#include "lb/lbaudio_ax.h"
+#include "lb/lbcardgame.h"
 #include "lb/lblanguage.h"
 #include "mn/mnmain.h"
 #include "sc/types.h"
+#include "ty/toy.h"
+
+/* Local declarations for gm_1601 functions with correct signatures */
+void gm_801647D0(void);
+u16 gm_801641CC(u8);
+s32 gm_80164430(void);
+s32 gm_80164250(u16);
+void gm_801641E4(u8 stage, u8 enable);
+void gm_801603B0(void);
+void gm_8016505C(void);
 
 void mnDataDel_8024E940(void)
 {
@@ -726,7 +745,7 @@ void mnDataDel_80250170(void)
     mn_804A04F0.cur_menu = 0x18;
     mn_804A04F0.hovered_selection = 0;
     mnDataDel_804D6C6C = NULL;
-    lbArchive_LoadSections(mn_804D6BB8, model, (char*) data + 0xA0,
+    lbArchive_LoadSections(mn_804D6BB8, (void**) model, (char*) data + 0xA0,
                            &model->animjoint, (char*) data + 0xB8,
                            &model->matanim_joint, (char*) data + 0xD4,
                            &model->shapeanim_joint);
