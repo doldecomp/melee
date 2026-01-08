@@ -102,6 +102,9 @@ extern HSD_Text* mnDataDel_804D6C6C;
 extern struct MnDataDelSelectData mnDataDel_803EF8AC;
 extern f32 mnDataDel_804DC1A8;
 extern f32 mnDataDel_804DC1AC;
+extern f32 mnDataDel_804DC1C8;
+extern f32 mnDataDel_804DC1CC;
+extern f32 mnDataDel_804DC1D0;
 static struct MnDataDelData mnDataDel_803EF870;
 static AnimLoopSettings mnDataDel_803EF8A0 = {
     0.0f, 9.0f, -0.1f

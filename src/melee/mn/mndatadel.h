@@ -13,7 +13,7 @@
 /* 24ECCC */ void fn_8024ECCC(HSD_GObj*);
 /* 24EEC0 */ void mnDataDel_8024EEC0(void);
 /* 24F1D4 */ void fn_8024F1D4(HSD_GObj* arg0);
-/* 24F318 */ void fn_8024F318(HSD_GObj*);
+/* 24F318 */ void fn_8024F318(HSD_GObj* arg0);
 /* 24F840 */ void fn_8024F840(HSD_GObj*);
 /* 24FBA4 */ void fn_8024FBA4(HSD_GObj*);
 /* 24FC48 */ void fn_8024FC48(HSD_GObj*);
