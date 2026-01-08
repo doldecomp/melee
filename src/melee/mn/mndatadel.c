@@ -15,7 +15,8 @@
 #include "mn/mnmain.h"
 #include "sc/types.h"
 
-void mnDataDel_8024E940(void) {
+void mnDataDel_8024E940(void)
+{
     u8 _pad[8];
     HSD_JObj* child;
     u8 _pad2[16];
@@ -26,7 +27,8 @@ void mnDataDel_8024E940(void) {
     f32 const_zero;
 
     data = mnDataDel_804D6C68->user_data;
-    lb_80011E24((HSD_JObj*)mn_80231634(data->x10[mnDataDel_803EF8AC.x4]), &child, 1, -1);
+    lb_80011E24((HSD_JObj*) mn_80231634(data->x10[mnDataDel_803EF8AC.x4]),
+                &child, 1, -1);
     frame = mn_8022F298(child);
     const_zero = mnDataDel_804DC1A8;
     HSD_JObjReqAnimAll(child, const_zero);
@@ -41,8 +43,8 @@ void mnDataDel_8024E940(void) {
     found = 0;
     i = 0;
     do {
-        gm_801641CC((u8)i);
-        if (gm_80164430() != 0 && (u8)gm_80164250((u16)i) != 0) {
+        gm_801641CC((u8) i);
+        if (gm_80164430() != 0 && (u8) gm_80164250((u16) i) != 0) {
             found = 1;
             break;
         }
@@ -54,10 +56,52 @@ void mnDataDel_8024E940(void) {
     gm_801729EC();
     lb_8001CE00();
 }
-/// #mnDataDel_8024EA6C
+void mnDataDel_8024EA6C(void) {
+    u8 _pad0[8];
+    HSD_JObj* child;
+    u8 _pad[16];
+    f32 frame;
+    struct MnDataDelUserData* data;
+    s32* select_ptr;
+    s32 saved_lang;
+    s32 i;
+    f32 const_zero;
+    s32 offset;
 
-/// #mnDataDel_8024EBC8                 /* unable to generate initializer:
-/// unknown type */
+    i = 0;
+    select_ptr = &mnDataDel_803EF8AC.x0;
+    const_zero = mnDataDel_804DC1A8;
+    data = mnDataDel_804D6C68->user_data;
+    do {
+        lb_80011E24((HSD_JObj*)mn_80231634(((struct MnDataDelUserData*)mnDataDel_804D6C68->user_data)->x10[*select_ptr]), &child, 1, -1);
+        frame = mn_8022F298(child);
+        HSD_JObjReqAnimAll(child, const_zero);
+        mn_8022F3D8(child, 0xFF, MOBJ_MASK);
+        HSD_JObjAnimAll(child);
+        HSD_JObjReqAnimAll(child, frame);
+        mn_8022F3D8(child, 0xFF, 0x480);
+        HSD_JObjAnimAll(child);
+        offset = i + 3;
+        i++;
+        ((u8*)data)[offset] = 1;
+        select_ptr++;
+    } while (i < 6);
+    saved_lang = lbLang_GetSavedLanguage();
+    gmMainLib_8015FBA4();
+    gm_801A3EF4();
+    if (saved_lang == lbLang_GetSavedLanguage()) {
+        lbAudioAx_800237A8(0xBF, 0x7F, 0x40);
+    } else {
+        lbLang_SetSavedLanguage(saved_lang);
+        lbAudioAx_80027AB0(0xBF);
+    }
+    gm_801603B0();
+    gmMainLib_8015F588((u8)gmMainLib_8015F4E8());
+    gm_801729EC();
+    lb_8001CE00();
+}
+
+/// #mnDataDel_8024EBC8
 
 /// @brief animates the warning modal
 void fn_8024ECCC(HSD_GObj* arg0)
