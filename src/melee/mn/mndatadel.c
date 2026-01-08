@@ -149,33 +149,38 @@ void mnDataDel_8024EBC8(HSD_JObj* root, u8 arg1, u8 arg2)
 }
 
 /// @brief animates the warning modal
-void fn_8024ECCC(HSD_GObj* arg0)
+void fn_8024ECCC(HSD_GObj* gobj)
 {
-    HSD_JObj* root;
     HSD_JObj* panel;
     HSD_JObj* exclaim;
-    HSD_JObj* cursor_no;
     HSD_JObj* cursor_yes;
-    u8 _pad[10];
+    HSD_JObj* cursor_no;
+    u8 _pad[16];
     f32 curr_frame;
     HSD_Text* text;
     s32 sis_id;
     u8 visible;
     u8 cursor_idx;
+    f32* end_frame_ptr;
+    struct MnDataDelData* menu_data;
+    HSD_JObj* root;
     struct WarnCmnData* data;
 
-    root = GET_JOBJ(arg0);
+    menu_data = &mnDataDel_803EF870;
+    root = gobj->hsd_obj;
     data = mnDataDel_804D6C68->user_data;
     lb_80011E24(root, &panel, WARN_JOINT_PANEL, -1);
-    if (data->visible != 0) {
+    if (data->visible != 0)
+    {
         curr_frame = mn_8022F298(root);
-        if ((mnDataDel_803EF8A0.start_frame <= curr_frame) &&
-            (curr_frame < mnDataDel_803EF8A0.end_frame))
+        if ((menu_data->x30.start_frame <= curr_frame) && (curr_frame < menu_data->x30.end_frame))
         {
-            curr_frame = mn_8022EFD8(panel, &mnDataDel_803EF8A0);
-            lb_80011E24(root, &exclaim, WARN_JOINT_EXCLAIM, -1, curr_frame);
-            mn_8022EFD8(exclaim, &mnDataDel_803EF8A0);
-            if (curr_frame >= mnDataDel_803EF8A0.end_frame) {
+            end_frame_ptr = &menu_data->x30.end_frame;
+            curr_frame = mn_8022EFD8(panel, &menu_data->x30);
+            lb_80011E24(root, &exclaim, WARN_JOINT_EXCLAIM, -1);
+            mn_8022EFD8(exclaim, &menu_data->x30);
+            if (curr_frame >= *end_frame_ptr)
+            {
                 visible = data->visible;
                 if (mnDataDel_804D6C6C != NULL) {
                     HSD_SisLib_803A5CC4(mnDataDel_804D6C6C);
@@ -185,33 +190,33 @@ void fn_8024ECCC(HSD_GObj* arg0)
                 } else {
                     sis_id = 319;
                 }
-                text = HSD_SisLib_803A5ACC(
-                    0, 1, mnDataDel_803EF870.x64, mnDataDel_803EF870.x68,
-                    mnDataDel_803EF870.x6C, 250.0f, 5.0f);
+                text = HSD_SisLib_803A5ACC(0, 1, menu_data->x64, menu_data->x68, menu_data->x6C, mnDataDel_804DC1C8, mnDataDel_804DC1CC);
                 mnDataDel_804D6C6C = text;
-                text->font_size.x = 0.05f;
-                text->font_size.y = 0.05f;
+                text->font_size.x = mnDataDel_804DC1D0;
+                text->font_size.y = mnDataDel_804DC1D0;
                 text->default_alignment = 1;
                 HSD_SisLib_803A6368(text, sis_id);
             }
-        } else {
+        } else
+        {
             cursor_idx = data->cursor_idx;
             lb_80011E24(root, &cursor_yes, WARN_JOINT_CURSOR_YES, -1);
             lb_80011E24(root, &cursor_no, WARN_JOINT_CURSOR_NO, -1);
             if ((s32) cursor_idx != 0) {
-                HSD_JObjReqAnimAll(cursor_yes, 1.0f);
-                HSD_JObjReqAnimAll(cursor_no, 0.0f);
+                HSD_JObjReqAnimAll(cursor_yes, mnDataDel_804DC1A8);
+                HSD_JObjReqAnimAll(cursor_no, mnDataDel_804DC1AC);
             } else {
-                HSD_JObjReqAnimAll(cursor_yes, 0.0f);
-                HSD_JObjReqAnimAll(cursor_no, 1.0f);
+                HSD_JObjReqAnimAll(cursor_yes, mnDataDel_804DC1AC);
+                HSD_JObjReqAnimAll(cursor_no, mnDataDel_804DC1A8);
             }
             HSD_JObjAnimAll(cursor_yes);
             HSD_JObjAnimAll(cursor_no);
         }
-    } else {
+    } else
+    {
         HSD_SisLib_803A5CC4(mnDataDel_804D6C6C);
         mnDataDel_804D6C6C = NULL;
-        HSD_GObjPLink_80390228(arg0);
+        HSD_GObjPLink_80390228(gobj);
     }
 }
 
