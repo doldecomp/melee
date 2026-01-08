@@ -15,12 +15,12 @@ struct Fighter_804D6540_x0_t;
 /* 073758 */ void ftParts_80073758(HSD_JObj*);
 /* 073780 */ s32 ftParts_IntpJObjLoad(HSD_JObj*, HSD_Joint*, HSD_JObj* parent);
 /* 0737D8 */ void ftParts_IntpJObjInfoInit(void);
-/* 073830 */ void ftParts_80073830(HSD_PObj*, Mtx vmtx, Mtx pmtx,
-                                   u32 rendermode);
-/* 0739B8 */ void ftParts_800739B8(HSD_PObj*, Mtx vmtx, Mtx pmtx,
-                                   u32 rendermode);
-/* 073CA8 */ void ftParts_80073CA8(HSD_PObj*, Mtx vmtx, Mtx pmtx,
-                                   u32 rendermode);
+/* 073830 */ void ftPartsSetupRigidMtx(HSD_PObj*, Mtx vmtx, Mtx pmtx,
+                                       u32 rendermode);
+/* 0739B8 */ void ftPartsSetupSharedVtxMtx(HSD_PObj*, Mtx vmtx, Mtx pmtx,
+                                           u32 rendermode);
+/* 073CA8 */ void ftPartsSetupEnvelopeMtx(HSD_PObj*, Mtx vmtx, Mtx pmtx,
+                                          u32 rendermode);
 /* 074048 */ void ftParts_PObjSetupMtx(HSD_PObj*, Mtx vmtx, Mtx pmtx,
                                        u32 rendermode);
 /* 0740E4 */ void ftParts_PObjInfoInit(void);

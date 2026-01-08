@@ -48,14 +48,14 @@ void ftParts_8007462C(void);
 void ftParts_8007482C(void);
 s32 ftParts_IntpJObjLoad(HSD_JObj* jobj, HSD_Joint* joint, HSD_JObj* parent);
 void ftParts_80074B6C(void);
-void ftParts_80073830(void);
+void ftPartsSetupRigidMtx(void);
 void ftPartsRemap(void);
 void ftParts_800750C8(void);
 void ftParts_80075240(void);
 void ftParts_80075304(void);
 void ftParts_800755E8(void);
-void ftParts_800739B8(void);
-void ftParts_80073CA8(void);
+void ftPartsSetupSharedVtxMtx(void);
+void ftPartsSetupEnvelopeMtx(void);
 void ftParts_PObjSetupMtx(HSD_PObj* pobj, Mtx vmtx, Mtx pmtx, u32 rendermode);
 void ftParts_80074194(Fighter* fighter, FighterBone* bone, HSD_JObj* jobj,
                       u32* dobj_index, u32 tree_depth);

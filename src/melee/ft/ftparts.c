@@ -7,6 +7,7 @@
 #include "ftparts.static.h"
 
 #include "inlines.h"
+#include "placeholder.h"
 #include "types.h"
 
 #include "ft/forward.h"
@@ -82,250 +83,215 @@ void ftParts_IntpJObjInfoInit(void)
     HSD_JOBJ_INFO(&ftIntpJObj)->load = ftParts_IntpJObjLoad;
 }
 
-void ftParts_80073830(HSD_PObj* pobj, Mtx vmtx, Mtx pmtx, u32 rendermode)
+static inline PObjSetupFlag ftPartsGetSetupFlags(HSD_JObj* jobj,
+                                                 u32 rendermode)
 {
-    HSD_JObj* jobj;
-    MtxPtr temp_r29;
-    int var_r28;
-
-    Mtx sp54;
-    HSD_JObj* sp50;
-    u32 sp4C;
-    u8 _[4];
-    Mtx sp18;
-
-    temp_r29 = pmtx;
-    jobj = HSD_JObjGetCurrent();
-    HSD_PObjGetMtxMark(0, (void**) &sp50, &sp4C);
-    if (sp50 != jobj || sp4C != 1) {
-        HSD_PObjSetMtxMark(0, jobj, 1);
-        GXSetCurrentMtx(GX_PNMTX0);
-        GXLoadPosMtxImm(temp_r29, GX_PNMTX0);
-        var_r28 = 0;
-        HSD_PerfCurrentStat.nb_mtx_load++;
-        if (!(rendermode & RENDER_SHADOW)) {
-            if (jobj->flags & JOBJ_LIGHTING) {
-                var_r28 |= 1;
-            }
-            if (_HSD_TObjGetCurrentByType(NULL, TEX_COORD_REFLECTION) != NULL)
-            {
-                var_r28 |= 1 | 2;
-            }
-            if (_HSD_TObjGetCurrentByType(NULL, TEX_COORD_HILIGHT) != NULL) {
-                var_r28 |= 1 | 4;
-            }
-        }
-        if (var_r28 & 1) {
-            if (ft_jobj_scale.has_z_scale) {
-                PSMTXConcat(ft_jobj_scale.mtx, temp_r29, sp18);
-                HSD_MtxInverseTranspose(sp18, sp54);
-            } else {
-                HSD_MtxInverseTranspose(temp_r29, sp54);
-            }
-            if (jobj->flags & JOBJ_LIGHTING) {
-                GXLoadNrmMtxImm(sp54, GX_PNMTX0);
-                HSD_PerfCurrentStat.nb_mtx_load++;
-            }
-            if (var_r28 & (2 | 4)) {
-                GXLoadTexMtxImm(sp54, GX_TEXMTX0, GX_MTX3x4);
-                HSD_PerfCurrentStat.nb_mtx_load++;
-            }
-        }
-    }
-}
-
-void ftParts_800739B8(HSD_PObj* pobj, MtxPtr vmtx, MtxPtr pmtx, u32 rendermode)
-{
-    HSD_JObj* jobj;
-    int var_r28;
-
-    Mtx spE4;
-    Mtx spB4;
-    Mtx sp84;
-    HSD_JObj* sp80;
-    u32 sp7C;
-    u8 _[4];
-    Mtx sp48;
-    Mtx sp18;
-
-    var_r28 = 0;
-    jobj = HSD_JObjGetCurrent();
-    HSD_PObjGetMtxMark(0, (void**) &sp80, &sp7C);
-    if (sp80 != jobj && sp7C != 1) {
-        var_r28 |= 1;
-    }
-    HSD_PObjSetMtxMark(0, jobj, 1);
-    HSD_PObjGetMtxMark(1, (void**) &sp80, &sp7C);
-    if (sp80 != pobj->u.jobj && sp7C != 1) {
-        var_r28 |= 2;
-    }
-    HSD_PObjSetMtxMark(1, pobj->u.jobj, 1);
-    if (var_r28 != 0) {
-        {
-            u32 flags = 0;
-            if (!(rendermode & RENDER_SHADOW)) {
-                if (jobj->flags & JOBJ_LIGHTING) {
-                    flags |= 1;
-                }
-                if (_HSD_TObjGetCurrentByType(NULL, TEX_COORD_REFLECTION) !=
-                    NULL)
-                {
-                    flags |= 1 | 2;
-                }
-                if (_HSD_TObjGetCurrentByType(NULL, TEX_COORD_HILIGHT) != NULL)
-                {
-                    flags |= 1 | 4;
-                }
-            }
-            var_r28 |= flags;
-        }
-
-        if (var_r28 | 1) {
-            GXSetCurrentMtx(GX_PNMTX0);
-            GXLoadPosMtxImm(pmtx, GX_PNMTX0);
-            HSD_PerfCurrentStat.nb_mtx_load =
-                HSD_PerfCurrentStat.nb_mtx_load + 1;
-            if (var_r28 & 1) {
-                if (ft_jobj_scale.has_z_scale) {
-                    PSMTXConcat(ft_jobj_scale.mtx, pmtx, sp48);
-                    HSD_MtxInverseTranspose(sp48, spE4);
-                } else {
-                    HSD_MtxInverseTranspose(pmtx, spE4);
-                }
-                if (jobj->flags & JOBJ_LIGHTING) {
-                    GXLoadNrmMtxImm(spE4, 0);
-                    HSD_PerfCurrentStat.nb_mtx_load++;
-                }
-                if (var_r28 & (2 | 4)) {
-                    GXLoadTexMtxImm(spE4, GX_TEXMTX0, GX_MTX3x4);
-                    HSD_PerfCurrentStat.nb_mtx_load++;
-                }
-            }
-        }
-        if (var_r28 | 2) {
-            HSD_JObjSetupMatrix(pobj->u.jobj);
-            PSMTXConcat(vmtx, pobj->u.jobj->mtx, sp84);
-            GXLoadPosMtxImm(sp84, 3);
-            HSD_PerfCurrentStat.nb_mtx_load++;
-            if (var_r28 & 1) {
-                if (ft_jobj_scale.has_z_scale) {
-                    PSMTXConcat(ft_jobj_scale.mtx, sp84, sp18);
-                    HSD_MtxInverseTranspose(sp18, spB4);
-                } else {
-                    HSD_MtxInverseTranspose(sp84, spB4);
-                }
-                if (jobj->flags & JOBJ_LIGHTING) {
-                    GXLoadNrmMtxImm(spB4, GX_PNMTX1);
-                    HSD_PerfCurrentStat.nb_mtx_load++;
-                }
-                if (var_r28 & (2 | 4)) {
-                    GXLoadTexMtxImm(spB4, GX_TEXMTX1, GX_MTX3x4);
-                    HSD_PerfCurrentStat.nb_mtx_load++;
-                }
-            }
-        }
-    }
-}
-
-void ftParts_80073CA8(HSD_PObj* pobj, MtxPtr vmtx, MtxPtr pmtx, u32 rendermode)
-{
-    HSD_JObj* temp_r23;       // r23
-    HSD_SList* envelope_list; // r22
-    int i;                    // r21
-    MtxPtr temp_r20;          // r20
-    HSD_Envelope* envelope;   // r19
-    MtxPtr var_r19_2;         // r19
-    s32 temp_r18;             // r18
-    s32 var_r17;              // r17
-    int envelope_count;       // r17
-
-    HSD_JObj* jp;
-
-    Mtx spAC;
-    Mtx sp7C;
-    Mtx sp4C;
-    u8 _[4];
-    Mtx sp18;
-
-    temp_r23 = HSD_JObjGetCurrent();
-    HSD_PObjClearMtxMark(NULL, HSD_MTX_ENVELOPE);
-    var_r17 = 0;
-    if (!(rendermode & 0x4000000)) {
-        if (temp_r23->flags & JOBJ_LIGHTING) {
-            var_r17 |= 1;
+    PObjSetupFlag flags = SETUP_NONE;
+    if (!(rendermode & RENDER_SHADOW)) {
+        if (jobj->flags & JOBJ_LIGHTING) {
+            flags |= SETUP_NORMAL;
         }
         if (_HSD_TObjGetCurrentByType(NULL, TEX_COORD_REFLECTION) != NULL) {
-            var_r17 |= 3;
+            flags |= SETUP_NORMAL | SETUP_REFLECTION;
         }
         if (_HSD_TObjGetCurrentByType(NULL, TEX_COORD_HILIGHT) != NULL) {
-            var_r17 |= 5;
+            flags |= SETUP_NORMAL | SETUP_HIGHLIGHT;
         }
     }
-    temp_r20 = _HSD_mkEnvelopeModelNodeMtx(temp_r23, spAC);
+    return flags;
+}
+
+static inline void ftPartsSetupZScaleMtx(Mtx src, Mtx dst)
+{
+    Mtx scale_mtx;
+    if (ft_jobj_scale.has_z_scale) {
+        PSMTXConcat(ft_jobj_scale.mtx, src, scale_mtx);
+        HSD_MtxInverseTranspose(scale_mtx, dst);
+    } else {
+        HSD_MtxInverseTranspose(src, dst);
+    }
+}
+
+static inline void ftPartsSetupNrmMtx(HSD_JObj* jobj, Mtx mtx, GXPosNrmMtx id)
+{
+    if (jobj->flags & JOBJ_LIGHTING) {
+        GXLoadNrmMtxImm(mtx, id);
+        HSD_PerfCountMtxLoad();
+    }
+}
+
+static inline void ftPartsSetupTexMtx(Mtx mtx, GXTexMtx id)
+{
+    GXLoadTexMtxImm(mtx, id, GX_MTX3x4);
+    HSD_PerfCountMtxLoad();
+}
+
+void ftPartsSetupRigidMtx(HSD_PObj* pobj, Mtx vmtx, Mtx pmtx, u32 rendermode)
+{
+    HSD_JObj* jobj;
+    MtxPtr tmp;          // r29
+    PObjSetupFlag flags; // r28
+
+    Mtx mtx;             // sp54
+    HSD_JObj* mark_jobj; // sp50
+    u32 mark;            // sp4C
+
+    tmp = pmtx;
+    jobj = HSD_JObjGetCurrent();
+    HSD_PObjGetMtxMark(0, (void**) &mark_jobj, &mark);
+    if (mark_jobj != jobj || mark != HSD_MTX_RIGID) {
+        HSD_PObjSetMtxMark(0, jobj, HSD_MTX_RIGID);
+        GXSetCurrentMtx(GX_PNMTX0);
+
+        GXLoadPosMtxImm(tmp, GX_PNMTX0);
+        HSD_PerfCountMtxLoad();
+        flags = ftPartsGetSetupFlags(jobj, rendermode);
+        if (flags & SETUP_NORMAL) {
+            ftPartsSetupZScaleMtx(tmp, mtx);
+            ftPartsSetupNrmMtx(jobj, mtx, GX_PNMTX0);
+
+            if (flags & SETUP_NORMAL_PROJECTION) {
+                ftPartsSetupTexMtx(mtx, GX_TEXMTX0);
+            }
+        }
+    }
+}
+
+void ftPartsSetupSharedVtxMtx(HSD_PObj* pobj, MtxPtr vmtx, MtxPtr pmtx,
+                              u32 rendermode)
+{
+    HSD_JObj* jobj;
+    PObjSetupFlag flags = SETUP_NONE; // r28
+
+    Mtx mtx0;            // spE4
+    Mtx mtx1;            // spB4
+    Mtx tmp;             // sp84
+    HSD_JObj* mark_jobj; // sp80
+    u32 mark;            // sp7C
+
+    jobj = HSD_JObjGetCurrent();
+
+    HSD_PObjGetMtxMark(0, (void**) &mark_jobj, &mark);
+    if (mark_jobj != jobj && mark != HSD_MTX_RIGID) {
+        flags |= SETUP_JOINT0;
+    }
+    HSD_PObjSetMtxMark(0, jobj, HSD_MTX_RIGID);
+
+    HSD_PObjGetMtxMark(1, (void**) &mark_jobj, &mark);
+    if (mark_jobj != pobj->u.jobj && mark != HSD_MTX_RIGID) {
+        flags |= SETUP_JOINT1;
+    }
+    HSD_PObjSetMtxMark(1, pobj->u.jobj, HSD_MTX_RIGID);
+
+    if (flags == SETUP_NONE) {
+        return;
+    }
+
+    flags |= ftPartsGetSetupFlags(jobj, rendermode);
+
+    if (flags | SETUP_NORMAL) {
+        GXSetCurrentMtx(GX_PNMTX0);
+
+        GXLoadPosMtxImm(pmtx, GX_PNMTX0);
+        HSD_PerfCountMtxLoad();
+        if (flags & SETUP_NORMAL) {
+            ftPartsSetupZScaleMtx(pmtx, mtx0);
+            ftPartsSetupNrmMtx(jobj, mtx0, GX_PNMTX0);
+
+            if (flags & SETUP_NORMAL_PROJECTION) {
+                ftPartsSetupTexMtx(mtx0, GX_TEXMTX0);
+            }
+        }
+    }
+
+    if (flags | SETUP_REFLECTION) {
+        HSD_JObjSetupMatrix(pobj->u.jobj);
+        PSMTXConcat(vmtx, pobj->u.jobj->mtx, tmp);
+
+        GXLoadPosMtxImm(tmp, GX_PNMTX1);
+        HSD_PerfCountMtxLoad();
+        if (flags & SETUP_NORMAL) {
+            ftPartsSetupZScaleMtx(tmp, mtx1);
+            ftPartsSetupNrmMtx(jobj, mtx1, GX_PNMTX1);
+
+            if (flags & SETUP_NORMAL_PROJECTION) {
+                ftPartsSetupTexMtx(mtx1, GX_TEXMTX1);
+            }
+        }
+    }
+}
+
+void ftPartsSetupEnvelopeMtx(HSD_PObj* pobj, MtxPtr vmtx, MtxPtr pmtx,
+                             u32 rendermode)
+{
+    HSD_JObj* jobj;           // r23
+    HSD_SList* envelope_list; // r22
+    int i;                    // r21
+    MtxPtr node_mtxp;         // r20
+    Mtx spAC;                 // spAC
+    MtxPtr mtxp;              // r19
+    PObjSetupFlag flags;      // r17
+
+    jobj = HSD_JObjGetCurrent();
+    HSD_PObjClearMtxMark(NULL, HSD_MTX_ENVELOPE);
+    flags = ftPartsGetSetupFlags(jobj, rendermode);
+    node_mtxp = _HSD_mkEnvelopeModelNodeMtx(jobj, spAC);
     envelope_list = pobj->u.envelope_list;
     for (i = 0; i < 10 && envelope_list != NULL; i++) {
+        Mtx mtx;                // sp7C
+        Mtx tmp;                // sp4C
+        HSD_Envelope* envelope; // r19
+        u32 mtx_id;             // r18
+        int envelope_count;     // r17
+
         envelope = envelope_list->data;
-        temp_r18 = HSD_Index2PosNrmMtx(i);
+        mtx_id = HSD_Index2PosNrmMtx(i);
         envelope_count = 0;
         HSD_ASSERT(328, envelope);
         if (envelope->weight >= 1.0F) {
             HSD_JObjSetupMatrix(envelope->jobj);
-            if (temp_r20 != NULL) {
+            if (node_mtxp != NULL) {
                 PSMTXConcat(envelope->jobj->mtx, envelope->jobj->envelopemtx,
-                            sp7C);
-                var_r19_2 = sp7C;
+                            mtx);
+                mtxp = mtx;
             } else {
-                var_r19_2 = envelope->jobj->mtx;
+                mtxp = envelope->jobj->mtx;
             }
         } else {
-            sp7C[2][3] = 0.0F;
-            sp7C[2][2] = 0.0F;
-            sp7C[2][1] = 0.0F;
-            sp7C[2][0] = 0.0F;
-            sp7C[1][3] = 0.0F;
-            sp7C[1][2] = 0.0F;
-            sp7C[1][1] = 0.0F;
-            sp7C[1][0] = 0.0F;
-            sp7C[0][3] = 0.0F;
-            sp7C[0][2] = 0.0F;
-            sp7C[0][1] = 0.0F;
-            sp7C[0][0] = 0.0F;
+            mtx[0][0] = mtx[0][1] = mtx[0][2] = mtx[0][3] = mtx[1][0] =
+                mtx[1][1] = mtx[1][2] = mtx[1][3] = mtx[2][0] = mtx[2][1] =
+                    mtx[2][2] = mtx[2][3] = 0.0F;
             while (envelope != NULL) {
+                HSD_JObj* jp;
                 HSD_ASSERT(348, envelope->jobj);
                 jp = envelope->jobj;
                 HSD_JObjSetupMatrix(jp);
                 HSD_ASSERT(351, jp->mtx);
                 HSD_ASSERT(352, jp->envelopemtx);
-                PSMTXConcat(jp->mtx, jp->envelopemtx, sp4C);
-                HSD_MtxScaledAdd(sp4C, sp7C, sp7C, envelope->weight);
+                PSMTXConcat(jp->mtx, jp->envelopemtx, tmp);
+                HSD_MtxScaledAdd(tmp, mtx, mtx, envelope->weight);
                 envelope = envelope->next;
                 envelope_count++;
             }
-            var_r19_2 = sp7C;
+            mtxp = mtx;
         }
         HSD_PerfCountEnvelopeBlending(envelope_count);
-        if (temp_r20 != NULL) {
-            PSMTXConcat(var_r19_2, temp_r20, sp7C);
+        if (node_mtxp != NULL) {
+            PSMTXConcat(mtxp, node_mtxp, mtx);
         }
-        PSMTXConcat(vmtx, var_r19_2, sp4C);
-        GXLoadPosMtxImm(sp4C, temp_r18);
-        HSD_PerfCurrentStat.nb_mtx_load += 1;
-        if (var_r17 & 1) {
-            if (ft_jobj_scale.has_z_scale) {
-                PSMTXConcat(ft_jobj_scale.mtx, sp4C, sp18);
-                HSD_MtxInverseTranspose(sp18, sp7C);
-            } else {
-                HSD_MtxInverseTranspose(sp4C, sp7C);
-            }
-            if (temp_r23->flags & JOBJ_LIGHTING) {
-                GXLoadNrmMtxImm(sp7C, (u32) temp_r18);
-                HSD_PerfCurrentStat.nb_mtx_load += 1;
-            }
-            if (var_r17 & 6) {
-                GXLoadTexMtxImm(sp7C, HSD_Index2TexMtx((u32) i), GX_MTX3x4);
-                HSD_PerfCurrentStat.nb_mtx_load += 1;
+        PSMTXConcat(vmtx, mtxp, tmp);
+
+        GXLoadPosMtxImm(tmp, mtx_id);
+        HSD_PerfCountMtxLoad();
+        if (flags & SETUP_NORMAL) {
+            ftPartsSetupZScaleMtx(tmp, mtx);
+            ftPartsSetupNrmMtx(jobj, mtx, mtx_id);
+
+            if (flags & SETUP_NORMAL_PROJECTION) {
+                ftPartsSetupTexMtx(mtx, HSD_Index2TexMtx(i));
             }
         }
+
         envelope_list = envelope_list->next;
     }
 }
@@ -339,16 +305,16 @@ void ftParts_PObjSetupMtx(HSD_PObj* pobj, Mtx vmtx, Mtx pmtx, u32 rendermode)
     switch (pobj_type(pobj)) {
     case POBJ_SKIN:
         if (pobj->u.jobj == NULL) {
-            ftParts_80073830(pobj, vmtx, pmtx, rendermode);
+            ftPartsSetupRigidMtx(pobj, vmtx, pmtx, rendermode);
         } else {
-            ftParts_800739B8(pobj, vmtx, pmtx, rendermode);
+            ftPartsSetupSharedVtxMtx(pobj, vmtx, pmtx, rendermode);
         }
         break;
     case POBJ_SHAPEANIM:
-        ftParts_80073830(pobj, vmtx, pmtx, rendermode);
+        ftPartsSetupRigidMtx(pobj, vmtx, pmtx, rendermode);
         break;
     case POBJ_ENVELOPE:
-        ftParts_80073CA8(pobj, vmtx, pmtx, rendermode);
+        ftPartsSetupEnvelopeMtx(pobj, vmtx, pmtx, rendermode);
         break;
     }
 }
