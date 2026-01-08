@@ -209,10 +209,10 @@ void fn_8024ECCC(HSD_GObj* gobj)
                 } else {
                     sis_id = 319;
                 }
-                text = HSD_SisLib_803A5ACC(0, 1, menu_data->x64, menu_data->x68, menu_data->x6C, mnDataDel_804DC1C8, mnDataDel_804DC1CC);
+                text = HSD_SisLib_803A5ACC(0, 1, menu_data->x64, menu_data->x68, menu_data->x6C, 250.0f, 5.0f);
                 mnDataDel_804D6C6C = text;
-                text->font_size.x = mnDataDel_804DC1D0;
-                text->font_size.y = mnDataDel_804DC1D0;
+                text->font_size.x = 0.05f;
+                text->font_size.y = 0.05f;
                 text->default_alignment = 1;
                 HSD_SisLib_803A6368(text, sis_id);
             }
@@ -222,11 +222,11 @@ void fn_8024ECCC(HSD_GObj* gobj)
             lb_80011E24(root, &cursor_yes, WARN_JOINT_CURSOR_YES, -1);
             lb_80011E24(root, &cursor_no, WARN_JOINT_CURSOR_NO, -1);
             if ((s32) cursor_idx != 0) {
-                HSD_JObjReqAnimAll(cursor_yes, mnDataDel_804DC1A8);
-                HSD_JObjReqAnimAll(cursor_no, mnDataDel_804DC1AC);
+                HSD_JObjReqAnimAll(cursor_yes, 1.0f);
+                HSD_JObjReqAnimAll(cursor_no, 0.0f);
             } else {
-                HSD_JObjReqAnimAll(cursor_yes, mnDataDel_804DC1AC);
-                HSD_JObjReqAnimAll(cursor_no, mnDataDel_804DC1A8);
+                HSD_JObjReqAnimAll(cursor_yes, 0.0f);
+                HSD_JObjReqAnimAll(cursor_no, 1.0f);
             }
             HSD_JObjAnimAll(cursor_yes);
             HSD_JObjAnimAll(cursor_no);
@@ -699,10 +699,7 @@ void mnDataDel_8024FE4C(u8 arg0)
     HSD_JObjReqAnimAll(root, mnDataDel_804DC1AC);
     HSD_JObjAnimAll(root);
     data = (struct MnDataDelUserData*) HSD_MemAlloc(0x30);
-    if (data == NULL) {
-        OSReport("error");
-        __assert("file", 0x402, "assert");
-    }
+    HSD_ASSERT(0x402, data != NULL);
     data->x0 = arg0;
     data->x1 = 0;
     data->x2 = 0;
