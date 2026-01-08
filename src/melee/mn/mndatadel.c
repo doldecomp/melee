@@ -480,8 +480,26 @@ void fn_8024F318(HSD_GObj* arg0)
 
 /// #fn_8024F840
 
-/// #fn_8024FBA4
+void fn_8024FBA4(HSD_GObj* arg0)
+{
+    u8 _pad[8];
+    HSD_JObj* jobj;
+    struct MnDataDelData* menu_data;
+    s32 i;
+    struct MnDataDelUserData* data;
+    f32 frame;
 
+    menu_data = &mnDataDel_803EF870;
+    jobj = arg0->hsd_obj;
+    data = arg0->user_data;
+    frame = mn_8022EE84(jobj, &menu_data->xC, 0x480);
+    for (i = 0; i < 6; i++) {
+        mn_8022EE84((HSD_JObj*) data->x10[((s32*)&menu_data->x3C)[i]], &menu_data->xC, 0x480);
+    }
+    if (frame >= menu_data->xC.end_frame) {
+        HSD_GObjPLink_80390228(arg0);
+    }
+}
 /// #fn_8024FC48
 
 /// #fn_8024FD40
