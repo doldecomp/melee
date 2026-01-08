@@ -15,8 +15,45 @@
 #include "mn/mnmain.h"
 #include "sc/types.h"
 
-/// #mnDataDel_8024E940
+void mnDataDel_8024E940(void) {
+    u8 _pad[8];
+    HSD_JObj* child;
+    u8 _pad2[16];
+    f32 frame;
+    struct MnDataDelUserData* data;
+    s32 i;
+    s32 found;
+    f32 const_zero;
 
+    data = mnDataDel_804D6C68->user_data;
+    lb_80011E24((HSD_JObj*)mn_80231634(data->x10[mnDataDel_803EF8AC.x4]), &child, 1, -1);
+    frame = mn_8022F298(child);
+    const_zero = mnDataDel_804DC1A8;
+    HSD_JObjReqAnimAll(child, const_zero);
+    mn_8022F3D8(child, 0xFF, MOBJ_MASK);
+    HSD_JObjAnimAll(child);
+    HSD_JObjReqAnimAll(child, frame);
+    mn_8022F3D8(child, 0xFF, 0x480);
+    HSD_JObjAnimAll(child);
+    data->x4 = 1;
+    gm_801647D0();
+    gmMainLib_8015F490();
+    found = 0;
+    i = 0;
+    do {
+        gm_801641CC((u8)i);
+        if (gm_80164430() != 0 && (u8)gm_80164250((u16)i) != 0) {
+            found = 1;
+            break;
+        }
+        i++;
+    } while (i < 29);
+    if (found == 0) {
+        gm_801641E4(0, 1);
+    }
+    gm_801729EC();
+    lb_8001CE00();
+}
 /// #mnDataDel_8024EA6C
 
 /// #mnDataDel_8024EBC8                 /* unable to generate initializer:
