@@ -24,8 +24,8 @@ struct Fighter_804D6540_x0_t;
 /* 074048 */ void ftParts_PObjSetupMtx(HSD_PObj*, Mtx vmtx, Mtx pmtx,
                                        u32 rendermode);
 /* 0740E4 */ void ftParts_PObjInfoInit(void);
-/* 074148 */ void ftParts_80074148(void);
-/* 074170 */ void ftParts_80074170(void);
+/* 074148 */ void ftPartsPObjSetDefaultClass(void);
+/* 074170 */ void ftPartsPObjClearDefaultClass(void);
 /* 074194 */ void ftParts_80074194(Fighter*, FighterBone* bone, HSD_JObj*,
                                    int* dobj_index, u32 tree_depth);
 /* 0743E0 */ void ftParts_SetupParts(Fighter_GObj* fighter_obj);

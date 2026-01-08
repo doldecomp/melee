@@ -366,12 +366,12 @@ void ftParts_PObjInfoInit(void)
     HSD_POBJ_INFO(&ftPObj)->setup_mtx = ftParts_PObjSetupMtx;
 }
 
-void ftParts_80074148(void)
+void ftPartsPObjSetDefaultClass(void)
 {
     HSD_PObjSetDefaultClass(&ftPObj);
 }
 
-void ftParts_80074170(void)
+void ftPartsPObjClearDefaultClass(void)
 {
     HSD_PObjSetDefaultClass(NULL);
 }

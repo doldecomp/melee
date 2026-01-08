@@ -477,10 +477,10 @@ void ftPr_Init_8013C360(HSD_GObj* gobj)
         }
 
         fp->fv.pr.x2240.data = HSD_ObjAlloc(&fighter_x2040_alloc_data);
-        ftParts_80074148();
+        ftPartsPObjSetDefaultClass();
         fp->fv.pr.x223C = HSD_JObjLoadJoint(joints[fp->x619_costume_id]);
         fp->x2225_b2 = true;
-        ftParts_80074170();
+        ftPartsPObjClearDefaultClass();
         ftParts_80075650(gobj, fp->fv.pr.x223C, &fp->fv.pr.x2240);
 
         ftParts_8007487C((FtPartsDesc*) &items_shifted[1], &fp->fv.pr.x2248,

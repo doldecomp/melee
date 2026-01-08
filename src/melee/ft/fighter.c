@@ -580,9 +580,9 @@ void Fighter_UnkUpdateCostumeJoint_800686E4(Fighter_GObj* gobj)
     fp->x108_costume_joint = CostumeListsForeachCharacter[fp->kind]
                                  .costume_list[fp->x619_costume_id]
                                  .joint;
-    ftParts_80074148();
+    ftPartsPObjSetDefaultClass();
     jobj = HSD_JObjLoadJoint(fp->x108_costume_joint);
-    ftParts_80074170();
+    ftPartsPObjClearDefaultClass();
     ftParts_80073758(jobj);
 
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
