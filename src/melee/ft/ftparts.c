@@ -336,18 +336,18 @@ void ftParts_PObjSetupMtx(HSD_PObj* pobj, Mtx vmtx, Mtx pmtx, u32 rendermode)
         hsdPObj.setup_mtx(pobj, vmtx, pmtx, rendermode);
         return;
     }
-    switch (pobj->flags & 0x3000) {
-    case 0x0:
+    switch (pobj_type(pobj)) {
+    case POBJ_SKIN:
         if (pobj->u.jobj == NULL) {
             ftParts_80073830(pobj, vmtx, pmtx, rendermode);
         } else {
             ftParts_800739B8(pobj, vmtx, pmtx, rendermode);
         }
         break;
-    case 0x1000:
+    case POBJ_SHAPEANIM:
         ftParts_80073830(pobj, vmtx, pmtx, rendermode);
         break;
-    case 0x2000:
+    case POBJ_ENVELOPE:
         ftParts_80073CA8(pobj, vmtx, pmtx, rendermode);
         break;
     }
