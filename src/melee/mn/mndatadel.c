@@ -650,6 +650,57 @@ void fn_8024FD40(HSD_GObj* arg0)
         proc->flags_3 = HSD_GObj_804D783C;
     }
 }
-/// #mnDataDel_8024FE4C
+void mnDataDel_8024FE4C(u8 arg0)
+{
+    u8 _pad[0x18];
+    HSD_JObj* child;
+    HSD_GObj* gobj;
+    HSD_JObj* root;
+    HSD_GObjProc* proc;
+    struct MnDataDelData* menu_data;
+    StaticModelDesc* model;
+    s32 i;
+    struct MnDataDelUserData* data;
+    HSD_Text* text;
 
+    menu_data = &mnDataDel_803EF870;
+    model = &mnDataDel_804A0918;
+    gobj = GObj_Create(6, 7, 0x80);
+    mnDataDel_804D6C68 = gobj;
+    root = HSD_JObjLoadJoint(model->joint);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, root);
+    GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4, 0x80);
+    HSD_JObjAddAnimAll(root, model->animjoint, model->matanim_joint, model->shapeanim_joint);
+    HSD_JObjReqAnimAll(root, mnDataDel_804DC1AC);
+    HSD_JObjAnimAll(root);
+    data = (struct MnDataDelUserData*) HSD_MemAlloc(0x30);
+    if (data == NULL) {
+        OSReport("error");
+        __assert("file", 0x402, "assert");
+    }
+    data->x0 = arg0;
+    data->x1 = 0;
+    data->x2 = 0;
+    data->x3 = 0;
+    data->x4 = 0;
+    data->pad[0] = 0;
+    data->pad[1] = 0;
+    data->pad[2] = 0;
+    data->pad[3] = 0;
+    *(HSD_Text**) &data->pad[7] = NULL;
+    GObj_InitUserData(gobj, 0, HSD_Free, data);
+    for (i = 0; i < 8; i++) {
+        lb_80011E24(root, (HSD_JObj**) &data->x10[i], i, -1);
+    }
+    proc = HSD_GObjProc_8038FD54(gobj, fn_8024FD40, 0);
+    proc->flags_3 = HSD_GObj_804D783C;
+    for (i = 0; i < 6; i++) {
+        mnDataDel_8024EBC8((HSD_JObj*) mn_80231634(data->x10[((s32*)&menu_data->x3C)[i]]), (u8) i, (u8)(data->x0 == i));
+    }
+    text = HSD_SisLib_803A5ACC(0, 0, mnDataDel_804DC1B0, mnDataDel_804DC1B4, mnDataDel_804DC1B8, mnDataDel_804DC1BC, mnDataDel_804DC1C0);
+    *(HSD_Text**) &data->pad[7] = text;
+    text->font_size.x = mnDataDel_804DC1C4;
+    text->font_size.y = mnDataDel_804DC1C4;
+    HSD_SisLib_803A6368(text, ((s16*)&menu_data->x58)[data->x0]);
+}
 /// #mnDataDel_80250170
