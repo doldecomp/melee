@@ -494,14 +494,42 @@ void fn_8024FBA4(HSD_GObj* arg0)
     data = arg0->user_data;
     frame = mn_8022EE84(jobj, &menu_data->xC, 0x480);
     for (i = 0; i < 6; i++) {
-        mn_8022EE84((HSD_JObj*) data->x10[((s32*)&menu_data->x3C)[i]], &menu_data->xC, 0x480);
+        mn_8022EE84((HSD_JObj*) data->x10[((s32*) &menu_data->x3C)[i]],
+                    &menu_data->xC, 0x480);
     }
     if (frame >= menu_data->xC.end_frame) {
         HSD_GObjPLink_80390228(arg0);
     }
 }
-/// #fn_8024FC48
+void fn_8024FC48(HSD_GObj* arg0)
+{
+    u8 _pad[8];
+    HSD_JObj* child;
+    struct MnDataDelUserData* data;
+    struct MnDataDelData* menu_data;
+    s32 i;
+    HSD_JObj* jobj;
+    HSD_GObjProc* proc;
 
+    menu_data = &mnDataDel_803EF870;
+    data = arg0->user_data;
+    if (mn_804A04F0.cur_menu != 0x18) {
+        HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
+        proc = HSD_GObjProc_8038FD54(arg0, fn_8024FBA4, 0);
+        proc->flags_3 = HSD_GObj_804D783C;
+        HSD_SisLib_803A5CC4(*(HSD_Text**) &data->pad[7]);
+        return;
+    }
+    for (i = 0; i < 6; i++) {
+        jobj = (HSD_JObj*) mn_80231634(((struct MnDataDelUserData*) arg0->user_data)->x10[((s32*)&menu_data->x3C)[i]]);
+        lb_80011E24(jobj, &child, 1, -1);
+        if (data->x0 == i) {
+            mn_8022EC18(child, (f32*) &menu_data->x18, 0x400);
+        } else {
+            mn_8022EC18(child, (f32*) &menu_data->x24, 0x400);
+        }
+    }
+}
 /// #fn_8024FD40
 
 /// #mnDataDel_8024FE4C
