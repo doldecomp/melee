@@ -56,7 +56,8 @@ void mnDataDel_8024E940(void)
     gm_801729EC();
     lb_8001CE00();
 }
-void mnDataDel_8024EA6C(void) {
+void mnDataDel_8024EA6C(void)
+{
     u8 _pad0[8];
     HSD_JObj* child;
     u8 _pad[16];
@@ -73,7 +74,11 @@ void mnDataDel_8024EA6C(void) {
     const_zero = mnDataDel_804DC1A8;
     data = mnDataDel_804D6C68->user_data;
     do {
-        lb_80011E24((HSD_JObj*)mn_80231634(((struct MnDataDelUserData*)mnDataDel_804D6C68->user_data)->x10[*select_ptr]), &child, 1, -1);
+        lb_80011E24(
+            (HSD_JObj*) mn_80231634(
+                ((struct MnDataDelUserData*) mnDataDel_804D6C68->user_data)
+                    ->x10[*select_ptr]),
+            &child, 1, -1);
         frame = mn_8022F298(child);
         HSD_JObjReqAnimAll(child, const_zero);
         mn_8022F3D8(child, 0xFF, MOBJ_MASK);
@@ -83,7 +88,7 @@ void mnDataDel_8024EA6C(void) {
         HSD_JObjAnimAll(child);
         offset = i + 3;
         i++;
-        ((u8*)data)[offset] = 1;
+        ((u8*) data)[offset] = 1;
         select_ptr++;
     } while (i < 6);
     saved_lang = lbLang_GetSavedLanguage();
@@ -96,12 +101,52 @@ void mnDataDel_8024EA6C(void) {
         lbAudioAx_80027AB0(0xBF);
     }
     gm_801603B0();
-    gmMainLib_8015F588((u8)gmMainLib_8015F4E8());
+    gmMainLib_8015F588((u8) gmMainLib_8015F4E8());
     gm_801729EC();
     lb_8001CE00();
 }
 
-/// #mnDataDel_8024EBC8
+void mnDataDel_8024EBC8(HSD_JObj* root, u8 arg1, u8 arg2)
+{
+    HSD_JObj* child1;
+    HSD_JObj* child2;
+    f32 anim_frame;
+    struct MnDataDelData* data;
+    HSD_JObj* root_copy;
+    u8 a1;
+    u8 a2;
+
+    data = &mnDataDel_803EF870;
+    a2 = arg2;
+    a1 = arg1;
+    root_copy = root;
+    lb_80011E24(root_copy, &child1, 4, -1);
+    if (a1 != 0) {
+        anim_frame = mnDataDel_804DC1A8;
+    } else {
+        anim_frame = mnDataDel_804DC1AC;
+    }
+    HSD_JObjReqAnimAll(child1, anim_frame);
+    mn_8022F3D8(child1, 0xFF, TOBJ_MASK);
+    HSD_JObjAnimAll(child1);
+    lb_80011E24(root_copy, &child2, 1, -1);
+    if (a1 != 0) {
+        if (a2 != 0) {
+            anim_frame = data->x18.end_frame;
+        } else {
+            anim_frame = data->x18.start_frame;
+        }
+    } else {
+        if (a2 != 0) {
+            anim_frame = data->x24.end_frame;
+        } else {
+            anim_frame = data->x24.start_frame;
+        }
+    }
+    HSD_JObjReqAnimAll(child2, anim_frame);
+    mn_8022F3D8(child2, 0xFF, TOBJ_MASK);
+    HSD_JObjAnimAll(child2);
+}
 
 /// @brief animates the warning modal
 void fn_8024ECCC(HSD_GObj* arg0)

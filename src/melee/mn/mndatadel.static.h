@@ -10,8 +10,24 @@
 
 #include "mn/forward.h"
 
+#include "mn/mnmainrule.h"
 #include "mn/types.h"
 #include "sc/types.h"
+
+struct MnDataDelSelectData {
+    s32 x0;
+    s32 x4;
+};
+
+struct MnDataDelUserData {
+    u8 x0;
+    u8 x1;
+    u8 x2;
+    u8 x3;
+    u8 x4;
+    u8 pad[0xB];
+    struct mn_80231634_t* x10[8];
+};
 
 struct WarnCmnData {
     /* +00 */ u8 x0;
@@ -83,6 +99,9 @@ static inline bool Anim_IsFrameInRange(float frame, AnimLoopSettings* settings)
 
 extern HSD_GObj* mnDataDel_804D6C68;
 extern HSD_Text* mnDataDel_804D6C6C;
+extern struct MnDataDelSelectData mnDataDel_803EF8AC;
+extern f32 mnDataDel_804DC1A8;
+extern f32 mnDataDel_804DC1AC;
 static struct MnDataDelData mnDataDel_803EF870;
 static AnimLoopSettings mnDataDel_803EF8A0 = {
     0.0f, 9.0f, -0.1f
