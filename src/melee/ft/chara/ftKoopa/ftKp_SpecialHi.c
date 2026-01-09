@@ -151,12 +151,11 @@ static void ftKp_SpecialHi_Coll_inline(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if ((fp->cmd_vars[3] != 0) && (fp->mv.kp.specials.x10 != 0)) {
-        ftParts_8007592C(fp, 0,
-                         fp->facing_dir *
-                             atan2f(fp->coll_data.floor.normal.x,
-                                    fp->coll_data.floor.normal.y));
+        ftPartSetRotX(fp, 0,
+                      fp->facing_dir * atan2f(fp->coll_data.floor.normal.x,
+                                              fp->coll_data.floor.normal.y));
     } else {
-        ftParts_8007592C(fp, 0, 0.0f);
+        ftPartSetRotX(fp, 0, 0.0F);
     }
 }
 
@@ -208,12 +207,11 @@ static inline void ftKp_SpecialAirHi_Coll_inline_2(Fighter_GObj* gobj)
     ftKp_SpecialN_80135780(gobj);
     fp = GET_FIGHTER(gobj);
     if ((fp->cmd_vars[3] != 0) && (fp->mv.kp.specials.x10 != 0)) {
-        ftParts_8007592C(fp, 0,
-                         fp->facing_dir *
-                             atan2f(fp->coll_data.floor.normal.x,
-                                    fp->coll_data.floor.normal.y));
+        ftPartSetRotX(fp, 0,
+                      fp->facing_dir * atan2f(fp->coll_data.floor.normal.x,
+                                              fp->coll_data.floor.normal.y));
     } else {
-        ftParts_8007592C(fp, 0, 0.0f);
+        ftPartSetRotX(fp, 0, 0.0F);
     }
 }
 

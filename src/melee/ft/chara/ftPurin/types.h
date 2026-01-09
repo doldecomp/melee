@@ -14,7 +14,7 @@ struct ftPurin_FighterVars {
     /* 0x2230 */ Vec3 x2230;
     /* 0x223C */ HSD_JObj* x223C;
     /* 0x2240 */ DObjList x2240;
-    /* 0x2248 */ u32 x2248;
+    /* 0x2248 */ FtPartsVis x2248;
 };
 
 typedef union ftPurin_MotionVars {

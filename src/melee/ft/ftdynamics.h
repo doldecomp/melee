@@ -20,7 +20,7 @@
 /* 09E714 */ bool ftCo_8009E714(Fighter_GObj* gobj, Fighter_Part part,
                                 int arg2, float x, float y, float arg5,
                                 float arg6, float arg7);
-/* 09E7B4 */ void ftCo_8009E7B4(Fighter* fp, u8*);
+/* 09E7B4 */ void ftCo_8009E7B4(Fighter* fp, u8 (*)[2]);
 /* 09EAF8 */ void ftCo_8009EAF8(HSD_GObj* gobj);
 
 /// @todo

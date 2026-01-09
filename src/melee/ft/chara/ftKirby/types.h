@@ -27,12 +27,9 @@ struct ftKb_FighterVars {
         /*  +C   fp+2238 */ FighterKind kind;
         /* +10   fp+223C */ HSD_JObj* jobj;
         /* +14   fp+2240 */ DObjList x14;
-        /* +1C   fp+2248 */ u32 x1C;
-        /* +20   fp+224C */ UNK_T x20;
-        /* +24   fp+2250 */ u32 x24;
+        /* +1C   fp+2248 */ DObjList x1C;
+        /* +24   fp+2250 */ FtPartsVis x24;
     } hat;
-    /* fp+224C   */ HSD_DObj** x28;
-    /* fp+2250   */ u8 _2C[0x44 - 0x2C];
     /* fp+2270   */ CostumeTObjList x44;
     /* fp+228C   */ UNK_T x60;
     /* fp+2290   */ bool x64;

@@ -227,7 +227,7 @@ void ftCa_SpecialLw_Phys(HSD_GObj* gobj)
         ftCommon_8007E5AC((Fighter*) fp);
         ft_80085088(gobj);
     } else {
-        ftParts_80075CB4((Fighter*) fp, 0, 0);
+        ftPartSetRotZ((Fighter*) fp, 0, 0);
         ft_80085134(gobj);
     }
     ftCa_Special_Inline_Friction(fp);
@@ -249,7 +249,7 @@ void ftCa_SpecialLwEnd_Phys(HSD_GObj* gobj)
             ft_80084F3C(gobj);
         }
     } else {
-        ftParts_80075CB4(fp, 0, 0.0F);
+        ftPartSetRotZ(fp, 0, 0.0F);
         ft_80084EEC(gobj);
     }
     ftCa_Special_Inline_Friction(fp);
@@ -263,7 +263,7 @@ void ftCa_SpecialLwEndAir_Phys(HSD_GObj* gobj)
         ft_80085088(gobj);
         return;
     }
-    ftParts_80075CB4(fp, 0, 0);
+    ftPartSetRotZ(fp, 0, 0);
     if (fp->cmd_vars[0] != 0) {
         ft_80084EEC(gobj);
     } else {

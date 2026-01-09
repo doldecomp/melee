@@ -7,7 +7,10 @@
 #include "ftparts.static.h"
 
 #include "inlines.h"
+#include "placeholder.h"
 #include "types.h"
+
+#include "ft/forward.h"
 
 #include <dolphin/mtx.h>
 #include <dolphin/os/OSError.h>
@@ -23,10 +26,6 @@
 #include <melee/lb/lbrefract.h>
 
 #define MAX_FT_PARTS 140
-
-#define JOBJ_NEXT(jobj) ((jobj) == NULL ? NULL : (jobj)->next)
-#define JOBJ_PARENT(jobj) ((jobj) == NULL ? NULL : (jobj)->parent)
-#define JOBJ_CHILD(jobj) ((jobj) == NULL ? NULL : (jobj)->child)
 
 HSD_JObjInfo ftJObj = { ftParts_JObjInfoInit };
 HSD_JObjInfo ftIntpJObj = { ftParts_IntpJObjInfoInit };
@@ -84,262 +83,216 @@ void ftParts_IntpJObjInfoInit(void)
     HSD_JOBJ_INFO(&ftIntpJObj)->load = ftParts_IntpJObjLoad;
 }
 
-void ftParts_80073830(HSD_PObj* pobj, Mtx vmtx, Mtx pmtx, u32 rendermode)
+static inline PObjSetupFlag ftPartsGetSetupFlags(HSD_JObj* jobj,
+                                                 u32 rendermode)
 {
-    HSD_JObj* jobj;
-    MtxPtr temp_r29;
-    int var_r28;
-
-    Mtx sp54;
-    HSD_JObj* sp50;
-    u32 sp4C;
-    u8 _[4];
-    Mtx sp18;
-
-    temp_r29 = pmtx;
-    jobj = HSD_JObjGetCurrent();
-    HSD_PObjGetMtxMark(0, (void**) &sp50, &sp4C);
-    if (sp50 != jobj || sp4C != 1) {
-        HSD_PObjSetMtxMark(0, jobj, 1);
-        GXSetCurrentMtx(GX_PNMTX0);
-        GXLoadPosMtxImm(temp_r29, GX_PNMTX0);
-        var_r28 = 0;
-        HSD_PerfCurrentStat.nb_mtx_load++;
-        if (!(rendermode & RENDER_SHADOW)) {
-            if (jobj->flags & JOBJ_LIGHTING) {
-                var_r28 |= 1;
-            }
-            if (_HSD_TObjGetCurrentByType(NULL, TEX_COORD_REFLECTION) != NULL)
-            {
-                var_r28 |= 1 | 2;
-            }
-            if (_HSD_TObjGetCurrentByType(NULL, TEX_COORD_HILIGHT) != NULL) {
-                var_r28 |= 1 | 4;
-            }
-        }
-        if (var_r28 & 1) {
-            if (ft_jobj_scale.has_z_scale) {
-                PSMTXConcat(ft_jobj_scale.mtx, temp_r29, sp18);
-                HSD_MtxInverseTranspose(sp18, sp54);
-            } else {
-                HSD_MtxInverseTranspose(temp_r29, sp54);
-            }
-            if (jobj->flags & JOBJ_LIGHTING) {
-                GXLoadNrmMtxImm(sp54, GX_PNMTX0);
-                HSD_PerfCurrentStat.nb_mtx_load++;
-            }
-            if (var_r28 & (2 | 4)) {
-                GXLoadTexMtxImm(sp54, GX_TEXMTX0, GX_MTX3x4);
-                HSD_PerfCurrentStat.nb_mtx_load++;
-            }
-        }
-    }
-}
-
-void ftParts_800739B8(HSD_PObj* pobj, MtxPtr vmtx, MtxPtr pmtx, u32 rendermode)
-{
-    HSD_JObj* jobj;
-    int var_r28;
-
-    Mtx spE4;
-    Mtx spB4;
-    Mtx sp84;
-    HSD_JObj* sp80;
-    u32 sp7C;
-    u8 _[4];
-    Mtx sp48;
-    Mtx sp18;
-
-    var_r28 = 0;
-    jobj = HSD_JObjGetCurrent();
-    HSD_PObjGetMtxMark(0, (void**) &sp80, &sp7C);
-    if (sp80 != jobj && sp7C != 1) {
-        var_r28 |= 1;
-    }
-    HSD_PObjSetMtxMark(0, jobj, 1);
-    HSD_PObjGetMtxMark(1, (void**) &sp80, &sp7C);
-    if (sp80 != pobj->u.jobj && sp7C != 1) {
-        var_r28 |= 2;
-    }
-    HSD_PObjSetMtxMark(1, pobj->u.jobj, 1);
-    if (var_r28 != 0) {
-        {
-            u32 flags = 0;
-            if (!(rendermode & RENDER_SHADOW)) {
-                if (jobj->flags & JOBJ_LIGHTING) {
-                    flags |= 1;
-                }
-                if (_HSD_TObjGetCurrentByType(NULL, TEX_COORD_REFLECTION) !=
-                    NULL)
-                {
-                    flags |= 1 | 2;
-                }
-                if (_HSD_TObjGetCurrentByType(NULL, TEX_COORD_HILIGHT) != NULL)
-                {
-                    flags |= 1 | 4;
-                }
-            }
-            var_r28 |= flags;
-        }
-
-        if (var_r28 | 1) {
-            GXSetCurrentMtx(GX_PNMTX0);
-            GXLoadPosMtxImm(pmtx, GX_PNMTX0);
-            HSD_PerfCurrentStat.nb_mtx_load =
-                HSD_PerfCurrentStat.nb_mtx_load + 1;
-            if (var_r28 & 1) {
-                if (ft_jobj_scale.has_z_scale) {
-                    PSMTXConcat(ft_jobj_scale.mtx, pmtx, sp48);
-                    HSD_MtxInverseTranspose(sp48, spE4);
-                } else {
-                    HSD_MtxInverseTranspose(pmtx, spE4);
-                }
-                if (jobj->flags & JOBJ_LIGHTING) {
-                    GXLoadNrmMtxImm(spE4, 0);
-                    HSD_PerfCurrentStat.nb_mtx_load++;
-                }
-                if (var_r28 & (2 | 4)) {
-                    GXLoadTexMtxImm(spE4, GX_TEXMTX0, GX_MTX3x4);
-                    HSD_PerfCurrentStat.nb_mtx_load++;
-                }
-            }
-        }
-        if (var_r28 | 2) {
-            HSD_JObjSetupMatrix(pobj->u.jobj);
-            PSMTXConcat(vmtx, pobj->u.jobj->mtx, sp84);
-            GXLoadPosMtxImm(sp84, 3);
-            HSD_PerfCurrentStat.nb_mtx_load++;
-            if (var_r28 & 1) {
-                if (ft_jobj_scale.has_z_scale) {
-                    PSMTXConcat(ft_jobj_scale.mtx, sp84, sp18);
-                    HSD_MtxInverseTranspose(sp18, spB4);
-                } else {
-                    HSD_MtxInverseTranspose(sp84, spB4);
-                }
-                if (jobj->flags & JOBJ_LIGHTING) {
-                    GXLoadNrmMtxImm(spB4, GX_PNMTX1);
-                    HSD_PerfCurrentStat.nb_mtx_load++;
-                }
-                if (var_r28 & (2 | 4)) {
-                    GXLoadTexMtxImm(spB4, GX_TEXMTX1, GX_MTX3x4);
-                    HSD_PerfCurrentStat.nb_mtx_load++;
-                }
-            }
-        }
-    }
-}
-
-void ftParts_80073CA8(HSD_PObj* pobj, MtxPtr vmtx, MtxPtr pmtx, u32 rendermode)
-{
-    HSD_JObj* temp_r23;
-    HSD_SList* var_r22;
-    int var_r21;
-    MtxPtr temp_r20;
-    HSD_Envelope* envelope;
-    MtxPtr var_r19_2;
-    s32 temp_r18;
-    s32 var_r17;
-    int var_r17_2;
-
-    HSD_JObj* jp;
-
-    Mtx spAC;
-    Mtx sp7C;
-    Mtx sp4C;
-    u8 _[4];
-    Mtx sp18;
-
-    temp_r23 = HSD_JObjGetCurrent();
-    HSD_PObjClearMtxMark(NULL, HSD_MTX_ENVELOPE);
-    var_r17 = 0;
-    if (!(rendermode & 0x4000000)) {
-        if (temp_r23->flags & 0x80) {
-            var_r17 |= 1;
+    PObjSetupFlag flags = SETUP_NONE;
+    if (!(rendermode & RENDER_SHADOW)) {
+        if (jobj->flags & JOBJ_LIGHTING) {
+            flags |= SETUP_NORMAL;
         }
         if (_HSD_TObjGetCurrentByType(NULL, TEX_COORD_REFLECTION) != NULL) {
-            var_r17 |= 3;
+            flags |= SETUP_NORMAL | SETUP_REFLECTION;
         }
         if (_HSD_TObjGetCurrentByType(NULL, TEX_COORD_HILIGHT) != NULL) {
-            var_r17 |= 5;
+            flags |= SETUP_NORMAL | SETUP_HIGHLIGHT;
         }
     }
-    temp_r20 = _HSD_mkEnvelopeModelNodeMtx(temp_r23, spAC);
-    var_r22 = pobj->u.envelope_list;
-    var_r21 = 0;
-    while (var_r21 < 10 && var_r22 != NULL) {
-        envelope = var_r22->data;
-        temp_r18 = HSD_Index2PosNrmMtx(var_r21);
-        var_r17_2 = 0;
-        if (envelope == NULL) {
-            __assert("ftparts.c", 0x148, "envelope");
+    return flags;
+}
+
+static inline void ftPartsSetupZScaleMtx(Mtx src, Mtx dst)
+{
+    Mtx scale_mtx;
+    if (ft_jobj_scale.has_z_scale) {
+        PSMTXConcat(ft_jobj_scale.mtx, src, scale_mtx);
+        HSD_MtxInverseTranspose(scale_mtx, dst);
+    } else {
+        HSD_MtxInverseTranspose(src, dst);
+    }
+}
+
+static inline void ftPartsSetupNrmMtx(HSD_JObj* jobj, Mtx mtx, GXPosNrmMtx id)
+{
+    if (jobj->flags & JOBJ_LIGHTING) {
+        GXLoadNrmMtxImm(mtx, id);
+        HSD_PerfCountMtxLoad();
+    }
+}
+
+static inline void ftPartsSetupTexMtx(Mtx mtx, GXTexMtx id)
+{
+    GXLoadTexMtxImm(mtx, id, GX_MTX3x4);
+    HSD_PerfCountMtxLoad();
+}
+
+void ftPartsSetupRigidMtx(HSD_PObj* pobj, Mtx vmtx, Mtx pmtx, u32 rendermode)
+{
+    HSD_JObj* jobj;
+    MtxPtr tmp;          // r29
+    PObjSetupFlag flags; // r28
+
+    Mtx mtx;             // sp54
+    HSD_JObj* mark_jobj; // sp50
+    u32 mark;            // sp4C
+
+    tmp = pmtx;
+    jobj = HSD_JObjGetCurrent();
+    HSD_PObjGetMtxMark(0, (void**) &mark_jobj, &mark);
+    if (mark_jobj != jobj || mark != HSD_MTX_RIGID) {
+        HSD_PObjSetMtxMark(0, jobj, HSD_MTX_RIGID);
+        GXSetCurrentMtx(GX_PNMTX0);
+
+        GXLoadPosMtxImm(tmp, GX_PNMTX0);
+        HSD_PerfCountMtxLoad();
+        flags = ftPartsGetSetupFlags(jobj, rendermode);
+        if (flags & SETUP_NORMAL) {
+            ftPartsSetupZScaleMtx(tmp, mtx);
+            ftPartsSetupNrmMtx(jobj, mtx, GX_PNMTX0);
+
+            if (flags & SETUP_NORMAL_PROJECTION) {
+                ftPartsSetupTexMtx(mtx, GX_TEXMTX0);
+            }
         }
+    }
+}
+
+void ftPartsSetupSharedVtxMtx(HSD_PObj* pobj, MtxPtr vmtx, MtxPtr pmtx,
+                              u32 rendermode)
+{
+    HSD_JObj* jobj;
+    PObjSetupFlag flags = SETUP_NONE; // r28
+
+    Mtx mtx0;            // spE4
+    Mtx mtx1;            // spB4
+    Mtx tmp;             // sp84
+    HSD_JObj* mark_jobj; // sp80
+    u32 mark;            // sp7C
+
+    jobj = HSD_JObjGetCurrent();
+
+    HSD_PObjGetMtxMark(0, (void**) &mark_jobj, &mark);
+    if (mark_jobj != jobj && mark != HSD_MTX_RIGID) {
+        flags |= SETUP_JOINT0;
+    }
+    HSD_PObjSetMtxMark(0, jobj, HSD_MTX_RIGID);
+
+    HSD_PObjGetMtxMark(1, (void**) &mark_jobj, &mark);
+    if (mark_jobj != pobj->u.jobj && mark != HSD_MTX_RIGID) {
+        flags |= SETUP_JOINT1;
+    }
+    HSD_PObjSetMtxMark(1, pobj->u.jobj, HSD_MTX_RIGID);
+
+    if (flags == SETUP_NONE) {
+        return;
+    }
+
+    flags |= ftPartsGetSetupFlags(jobj, rendermode);
+
+    if (flags | SETUP_NORMAL) {
+        GXSetCurrentMtx(GX_PNMTX0);
+
+        GXLoadPosMtxImm(pmtx, GX_PNMTX0);
+        HSD_PerfCountMtxLoad();
+        if (flags & SETUP_NORMAL) {
+            ftPartsSetupZScaleMtx(pmtx, mtx0);
+            ftPartsSetupNrmMtx(jobj, mtx0, GX_PNMTX0);
+
+            if (flags & SETUP_NORMAL_PROJECTION) {
+                ftPartsSetupTexMtx(mtx0, GX_TEXMTX0);
+            }
+        }
+    }
+
+    if (flags | SETUP_REFLECTION) {
+        HSD_JObjSetupMatrix(pobj->u.jobj);
+        PSMTXConcat(vmtx, pobj->u.jobj->mtx, tmp);
+
+        GXLoadPosMtxImm(tmp, GX_PNMTX1);
+        HSD_PerfCountMtxLoad();
+        if (flags & SETUP_NORMAL) {
+            ftPartsSetupZScaleMtx(tmp, mtx1);
+            ftPartsSetupNrmMtx(jobj, mtx1, GX_PNMTX1);
+
+            if (flags & SETUP_NORMAL_PROJECTION) {
+                ftPartsSetupTexMtx(mtx1, GX_TEXMTX1);
+            }
+        }
+    }
+}
+
+void ftPartsSetupEnvelopeMtx(HSD_PObj* pobj, MtxPtr vmtx, MtxPtr pmtx,
+                             u32 rendermode)
+{
+    HSD_JObj* jobj;           // r23
+    HSD_SList* envelope_list; // r22
+    int i;                    // r21
+    MtxPtr node_mtxp;         // r20
+    Mtx spAC;                 // spAC
+    MtxPtr mtxp;              // r19
+    PObjSetupFlag flags;      // r17
+
+    jobj = HSD_JObjGetCurrent();
+    HSD_PObjClearMtxMark(NULL, HSD_MTX_ENVELOPE);
+    flags = ftPartsGetSetupFlags(jobj, rendermode);
+    node_mtxp = _HSD_mkEnvelopeModelNodeMtx(jobj, spAC);
+    envelope_list = pobj->u.envelope_list;
+    for (i = 0; i < 10 && envelope_list != NULL; i++) {
+        Mtx mtx;                // sp7C
+        Mtx tmp;                // sp4C
+        HSD_Envelope* envelope; // r19
+        u32 mtx_id;             // r18
+        int envelope_count;     // r17
+
+        envelope = envelope_list->data;
+        mtx_id = HSD_Index2PosNrmMtx(i);
+        envelope_count = 0;
+        HSD_ASSERT(328, envelope);
         if (envelope->weight >= 1.0F) {
             HSD_JObjSetupMatrix(envelope->jobj);
-            if (temp_r20 != NULL) {
+            if (node_mtxp != NULL) {
                 PSMTXConcat(envelope->jobj->mtx, envelope->jobj->envelopemtx,
-                            sp7C);
-                var_r19_2 = sp7C;
+                            mtx);
+                mtxp = mtx;
             } else {
-                var_r19_2 = envelope->jobj->mtx;
+                mtxp = envelope->jobj->mtx;
             }
         } else {
-            sp7C[2][3] = 0.0f;
-            sp7C[2][2] = 0.0f;
-            sp7C[2][1] = 0.0f;
-            sp7C[2][0] = 0.0f;
-            sp7C[1][3] = 0.0f;
-            sp7C[1][2] = 0.0f;
-            sp7C[1][1] = 0.0f;
-            sp7C[1][0] = 0.0f;
-            sp7C[0][3] = 0.0f;
-            sp7C[0][2] = 0.0f;
-            sp7C[0][1] = 0.0f;
-            sp7C[0][0] = 0.0f;
+            mtx[0][0] = mtx[0][1] = mtx[0][2] = mtx[0][3] = mtx[1][0] =
+                mtx[1][1] = mtx[1][2] = mtx[1][3] = mtx[2][0] = mtx[2][1] =
+                    mtx[2][2] = mtx[2][3] = 0.0F;
             while (envelope != NULL) {
-                if (envelope->jobj == NULL) {
-                    __assert("ftparts.c", 0x15C, "envelope->jobj");
-                }
+                HSD_JObj* jp;
+                HSD_ASSERT(348, envelope->jobj);
                 jp = envelope->jobj;
                 HSD_JObjSetupMatrix(jp);
-                if (jp->mtx == NULL) {
-                    __assert("ftparts.c", 0x15F, "jp->mtx");
-                }
-                if (jp->envelopemtx == NULL) {
-                    __assert("ftparts.c", 0x160, "jp->envelopemtx");
-                }
-                PSMTXConcat(jp->mtx, jp->envelopemtx, sp4C);
-                HSD_MtxScaledAdd(sp4C, sp7C, sp7C, envelope->weight);
+                HSD_ASSERT(351, jp->mtx);
+                HSD_ASSERT(352, jp->envelopemtx);
+                PSMTXConcat(jp->mtx, jp->envelopemtx, tmp);
+                HSD_MtxScaledAdd(tmp, mtx, mtx, envelope->weight);
                 envelope = envelope->next;
-                var_r17_2++;
+                envelope_count++;
             }
-            var_r19_2 = sp7C;
+            mtxp = mtx;
         }
-        HSD_PerfCountEnvelopeBlending(var_r17_2);
-        if (temp_r20 != NULL) {
-            PSMTXConcat(var_r19_2, temp_r20, sp7C);
+        HSD_PerfCountEnvelopeBlending(envelope_count);
+        if (node_mtxp != NULL) {
+            PSMTXConcat(mtxp, node_mtxp, mtx);
         }
-        PSMTXConcat(vmtx, var_r19_2, sp4C);
-        GXLoadPosMtxImm(sp4C, temp_r18);
-        HSD_PerfCurrentStat.nb_mtx_load += 1;
-        if (var_r17 & 1) {
-            if (ft_jobj_scale.has_z_scale) {
-                PSMTXConcat(ft_jobj_scale.mtx, sp4C, sp18);
-                HSD_MtxInverseTranspose(sp18, sp7C);
-            } else {
-                HSD_MtxInverseTranspose(sp4C, sp7C);
-            }
-            if (temp_r23->flags & 0x80) {
-                GXLoadNrmMtxImm(sp7C, (u32) temp_r18);
-                HSD_PerfCurrentStat.nb_mtx_load += 1;
-            }
-            if (var_r17 & 6) {
-                GXLoadTexMtxImm(sp7C, HSD_Index2TexMtx((u32) var_r21),
-                                GX_MTX3x4);
-                HSD_PerfCurrentStat.nb_mtx_load += 1;
+        PSMTXConcat(vmtx, mtxp, tmp);
+
+        GXLoadPosMtxImm(tmp, mtx_id);
+        HSD_PerfCountMtxLoad();
+        if (flags & SETUP_NORMAL) {
+            ftPartsSetupZScaleMtx(tmp, mtx);
+            ftPartsSetupNrmMtx(jobj, mtx, mtx_id);
+
+            if (flags & SETUP_NORMAL_PROJECTION) {
+                ftPartsSetupTexMtx(mtx, HSD_Index2TexMtx(i));
             }
         }
-        var_r22 = var_r22->next;
-        var_r21++;
+
+        envelope_list = envelope_list->next;
     }
 }
 
@@ -349,19 +302,19 @@ void ftParts_PObjSetupMtx(HSD_PObj* pobj, Mtx vmtx, Mtx pmtx, u32 rendermode)
         hsdPObj.setup_mtx(pobj, vmtx, pmtx, rendermode);
         return;
     }
-    switch (pobj->flags & 0x3000) {
-    case 0x0:
+    switch (pobj_type(pobj)) {
+    case POBJ_SKIN:
         if (pobj->u.jobj == NULL) {
-            ftParts_80073830(pobj, vmtx, pmtx, rendermode);
+            ftPartsSetupRigidMtx(pobj, vmtx, pmtx, rendermode);
         } else {
-            ftParts_800739B8(pobj, vmtx, pmtx, rendermode);
+            ftPartsSetupSharedVtxMtx(pobj, vmtx, pmtx, rendermode);
         }
         break;
-    case 0x1000:
-        ftParts_80073830(pobj, vmtx, pmtx, rendermode);
+    case POBJ_SHAPEANIM:
+        ftPartsSetupRigidMtx(pobj, vmtx, pmtx, rendermode);
         break;
-    case 0x2000:
-        ftParts_80073CA8(pobj, vmtx, pmtx, rendermode);
+    case POBJ_ENVELOPE:
+        ftPartsSetupEnvelopeMtx(pobj, vmtx, pmtx, rendermode);
         break;
     }
 }
@@ -375,12 +328,12 @@ void ftParts_PObjInfoInit(void)
     HSD_POBJ_INFO(&ftPObj)->setup_mtx = ftParts_PObjSetupMtx;
 }
 
-void ftParts_80074148(void)
+void ftPartsPObjSetDefaultClass(void)
 {
     HSD_PObjSetDefaultClass(&ftPObj);
 }
 
-void ftParts_80074170(void)
+void ftPartsPObjClearDefaultClass(void)
 {
     HSD_PObjSetDefaultClass(NULL);
 }
@@ -411,9 +364,9 @@ void ftParts_80074194(Fighter* fighter, FighterBone* bone, HSD_JObj* jobj,
             break;
         }
         if (*dobj_index >= 124) {
-            OSReport("fighter parts model dobj num over! player %d\n",
-                     fighter->player_id);
-            __assert("ftparts.c", 0x1D2, "0");
+            HSD_ASSERTREPORT(466, 0,
+                             "fighter parts model dobj num over! player %d\n",
+                             fighter->player_id);
         }
         fighter->dobj_list.data[*dobj_index] = dobj;
         mobj = dobj != NULL ? dobj->mobj : NULL;
@@ -425,8 +378,8 @@ void ftParts_80074194(Fighter* fighter, FighterBone* bone, HSD_JObj* jobj,
         (*dobj_index)++;
     }
     if (dobj_count >= 128) {
-        OSReport("fighter dobj num over! player %d\n", fighter->player_id);
-        __assert("ftparts.c", 0x1E0, "0");
+        HSD_ASSERTREPORT(480, 0, "fighter dobj num over! player %d\n",
+                         fighter->player_id);
     }
     if (*dobj_index != 0) {
         bone->xD = *dobj_index - 1;
@@ -445,8 +398,8 @@ void ftParts_SetupParts(Fighter_GObj* fighter_obj)
     int dobj_count = 0;
 
     if (ftPartsTable[fp->kind]->parts_num > MAX_FT_PARTS) {
-        OSReport("fighter parts num over! player %d\n", fp->player_id);
-        __assert("ftparts.c", 503, "0");
+        HSD_ASSERTREPORT(503, 0, "fighter parts num over! player %d\n",
+                         fp->player_id);
     }
 
     while (jobj != NULL) {
@@ -496,8 +449,8 @@ void ftParts_SetupParts(Fighter_GObj* fighter_obj)
     fp->dobj_list.count = dobj_count;
 
     if (part != ftPartsTable[fp->kind]->parts_num) {
-        OSReport("fighter parts num not match! player %d\n", fp->player_id);
-        __assert("ftparts.c", 546, "0");
+        HSD_ASSERTREPORT(546, 0, "fighter parts num not match! player %d\n",
+                         fp->player_id);
     }
 }
 
@@ -539,8 +492,8 @@ void ftParts_8007462C(Fighter_GObj* gobj)
         }
     }
     if (i != ftPartsTable[fp->kind]->parts_num) {
-        OSReport("fighter parts num not match! player %d\n", fp->player_id);
-        __assert("ftparts.c", 0x251, "0");
+        HSD_ASSERTREPORT(593, 0, "fighter parts num not match! player %d\n",
+                         fp->player_id);
     }
 }
 
@@ -553,10 +506,38 @@ HSD_JObj* ftParts_8007482C(HSD_Joint* joint)
     return jobj;
 }
 
-/// just filling out the data section, remove when matching ftParts_8007487C
-static char ftParts_803C0AE0[] = "fighter parts model num over!\n";
+void ftParts_8007487C(FtPartsDesc* desc, FtPartsVis* vis, u32 costume_id,
+                      DObjList* arg3, DObjList* arg4)
+{
+    void*(*vis_table)[4];
+    PAD_STACK(0x8);
 
-/// #ftParts_8007487C
+    vis_table = desc->vis_table;
+    vis->model_num = desc->model_num;
+    if (vis->model_num > 11) {
+        HSD_ASSERTREPORT(627, 0, "fighter parts model num over!\n");
+    }
+
+    vis->xC[0] =
+        vis_table[costume_id][0] ? vis_table[costume_id][0] : vis_table[0][0];
+    vis->xC[1] =
+        vis_table[costume_id][1] ? vis_table[costume_id][1] : vis_table[0][1];
+    vis->xC[2] =
+        vis_table[costume_id][2] ? vis_table[costume_id][2] : vis_table[0][2];
+    vis->xC[3] =
+        vis_table[costume_id][3] ? vis_table[costume_id][3] : vis_table[0][3];
+    vis->xC[4] = 0;
+    vis->cleared[0] = true;
+    vis->cleared[1] = true;
+    vis->cleared[2] = true;
+    vis->cleared[3] = true;
+    vis->cleared[4] = true;
+    ftParts_80074D7C(vis, 0, arg3);
+    ftParts_80074D7C(vis, 1, arg3);
+    ftParts_80074D7C(vis, 2, arg4);
+    ftParts_80074D7C(vis, 3, arg3);
+    ftParts_80074D7C(vis, 4, arg3);
+}
 
 void ftParts_800749CC(Fighter_GObj* gobj)
 {
@@ -564,24 +545,24 @@ void ftParts_800749CC(Fighter_GObj* gobj)
     int i;
 
     ftParts_8007487C(&fp->ft_data->x8->x0, &fp->x5AC, fp->x619_costume_id,
-                     &fp->dobj_list.count, &fp->x203C);
-    for (i = 0; i < fp->x5AC; i++) {
-        fp->x5F4_arr[i].x0 = -1;
+                     &fp->dobj_list, &fp->x203C);
+    for (i = 0; i < fp->x5AC.model_num; i++) {
+        fp->x5F4_arr[i].prev = -1;
     }
     ftParts_80074ACC(gobj);
 }
 
-void ftParts_80074A4C(Fighter_GObj* gobj, int idx, int val)
+void ftParts_80074A4C(Fighter_GObj* gobj, int model_idx, int val)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->x5F4_arr[idx].x0 = val;
+    fp->x5F4_arr[model_idx].prev = val;
     fp->x221D_b2 = true;
 }
 
-int ftParts_80074A74(Fighter_GObj* gobj, int idx)
+int ftParts_80074A74(Fighter_GObj* gobj, int model_idx)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    return fp->x5F4_arr[idx].x0;
+    return fp->x5F4_arr[model_idx].prev;
 }
 
 void ftParts_80074A8C(Fighter_GObj* gobj)
@@ -589,8 +570,8 @@ void ftParts_80074A8C(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     int i;
 
-    for (i = 0; i < fp->x5AC; i++) {
-        fp->x5F4_arr[i].x1 = fp->x5F4_arr[i].x0;
+    for (i = 0; i < fp->x5AC.model_num; i++) {
+        fp->x5F4_arr[i].idx = fp->x5F4_arr[i].prev;
     }
     fp->x221D_b2 = false;
 }
@@ -600,27 +581,94 @@ void ftParts_80074ACC(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     int i;
 
-    for (i = 0; i < fp->x5AC; i++) {
-        fp->x5F4_arr[i].x1 = -1;
+    for (i = 0; i < fp->x5AC.model_num; i++) {
+        fp->x5F4_arr[i].idx = -1;
     }
     fp->x221D_b2 = false;
 }
 
-void ftParts_80074B0C(Fighter_GObj* gobj, int idx, int val)
+void ftParts_80074B0C(Fighter_GObj* gobj, int model_idx, int val)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (val != fp->x5F4_arr[idx].x1) {
-        fp->x5F4_arr[idx].x1 = val;
+    if (val != fp->x5F4_arr[model_idx].idx) {
+        fp->x5F4_arr[model_idx].idx = val;
         fp->x221D_b2 = true;
-        ftParts_80074D7C(&fp->x5AC, 0, &fp->dobj_list.count);
+        ftParts_80074D7C(&fp->x5AC, 0, &fp->dobj_list);
     }
 }
 
-/// #ftParts_80074B6C
+void ftParts_80074B6C(Fighter* fp, FtPartsVis* vis, int idx,
+                      DObjList* dobj_list)
+{
+    FtPartsVisLookup* lookup = vis->xC[idx]; // r4
+    if (lookup != NULL && !vis->cleared[idx]) {
+        int i; // r26
+        for (i = 0; i < vis->model_num; i++) {
+            int r25 = (int) fp->x5F4_arr[i].idx; // r25
+            int j;                               // r24
+            for (j = 0; j < lookup[i].x0; j++) {
+                TempS* r27 = &lookup[i].x4[j]; // r27
+                u8* r0 = r27->x4;              // r0
+                if (j == r25) {
+                    int k; // r20
+                    for (k = 0; k < r27->x0; k++) {
+                        HSD_DObjClearFlags(dobj_list->data[r0[k]], 1);
+                    }
+                } else {
+                    int k; // r20
+                    for (k = 0; k < r27->x0; k++) {
+                        HSD_DObjSetFlags(dobj_list->data[r0[k]], 1);
+                    }
+                }
+            }
+            vis->cleared[idx] = 1;
+        }
+    }
+}
 
-/// #ftParts_80074CA0
+void ftParts_80074CA0(FtPartsVis* vis, int idx, DObjList* dobj_list)
+{
+    FtPartsVisLookup* lookup = vis->xC[idx]; // r0
+    if (lookup != NULL && !vis->cleared[idx]) {
+        int i; // r24
+        for (i = 0; i < vis->model_num; i++) {
+            int j; // r23
+            for (j = 0; j < lookup[i].x0; j++) {
+                TempS* r26; // r26
+                int k;      // r22
+                u8* r29;    // r29
+                r26 = &lookup[i].x4[j];
+                r29 = r26->x4;
+                for (k = 0; k < r26->x0; k++) {
+                    HSD_DObjClearFlags(dobj_list->data[r29[k]], 1);
+                }
+            }
+        }
+        vis->cleared[idx] = true;
+    }
+}
 
-/// #ftParts_80074D7C
+void ftParts_80074D7C(FtPartsVis* vis, int idx, DObjList* dobj_list)
+{
+    FtPartsVisLookup* lookup = vis->xC[idx]; // r0
+    if (lookup != NULL && vis->cleared[idx]) {
+        int i; // r24
+        for (i = 0; i < vis->model_num; i++) {
+            int j; // r23
+            for (j = 0; j < lookup[i].x0; j++) {
+                TempS* r26; // r26
+                int k;      // r22
+                u8* r29;    // r29
+                r26 = &lookup[i].x4[j];
+                r29 = r26->x4;
+                for (k = 0; k < r26->x0; k++) {
+                    HSD_DObjSetFlags(dobj_list->data[r29[k]], 1);
+                }
+            }
+        }
+        vis->cleared[idx] = false;
+    }
+}
 
 void ftParts_80074E58(Fighter* fp)
 {
@@ -649,8 +697,7 @@ Fighter_Part ftParts_GetBoneIndex(Fighter* fp, Fighter_Part part)
     return ftPartsTable[fp->kind]->part_to_joint[part];
 }
 
-int ftParts_80075028(size_t to_table_idx, size_t from_table_idx,
-                     size_t joint_idx)
+int ftPartsRemap(size_t to_table_idx, size_t from_table_idx, size_t joint_idx)
 {
     FighterPartsTable* from_table = ftPartsTable[from_table_idx];
     if (joint_idx < from_table->parts_num) {
@@ -692,18 +739,18 @@ void ftParts_800750C8(Fighter* fp, enum_t arg1, bool arg2)
             ftData_UnkIntBoolFunc0.model_events[fp->kind](fp, 2, arg2);
         }
         if (arg2) {
-            ftParts_80074B6C(fp, &fp->x5AC, 3, &fp->dobj_list.count);
+            ftParts_80074B6C(fp, &fp->x5AC, 3, &fp->dobj_list);
         } else {
-            ftParts_80074D7C(&fp->x5AC, 3, &fp->dobj_list.count);
+            ftParts_80074D7C(&fp->x5AC, 3, &fp->dobj_list);
         }
         if (ftData_UnkIntBoolFunc0.model_events[fp->kind] != NULL) {
             ftData_UnkIntBoolFunc0.model_events[fp->kind](fp, 3, arg2);
         }
     } else {
         if (arg2) {
-            ftParts_80074B6C(fp, &fp->x5AC, arg1, &fp->dobj_list.count);
+            ftParts_80074B6C(fp, &fp->x5AC, arg1, &fp->dobj_list);
         } else {
-            ftParts_80074D7C(&fp->x5AC, arg1, &fp->dobj_list.count);
+            ftParts_80074D7C(&fp->x5AC, arg1, &fp->dobj_list);
         }
         if (ftData_UnkIntBoolFunc0.model_events[fp->kind] != NULL) {
             ftData_UnkIntBoolFunc0.model_events[fp->kind](fp, arg1, arg2);
@@ -743,8 +790,7 @@ HSD_TObj* ftParts_80075240(DObjList* arg0, int n)
             }
         }
     }
-    OSReport("can't find tobj!\n");
-    __assert("ftparts.c", 0x3B4, "0");
+    HSD_ASSERTREPORT(948, 0, "can't find tobj!\n");
 }
 
 /**
@@ -898,8 +944,8 @@ void ftParts_80075650(Fighter_GObj* arg0, HSD_JObj* jobj, DObjList* arg2)
                 break;
             }
             if (var_r30 >= 0x20) {
-                OSReport("fighter parts model dobj num over!\n");
-                __assert("ftparts.c", 0x427, "0");
+                HSD_ASSERTREPORT(1063, 0,
+                                 "fighter parts model dobj num over!\n");
             }
             arg2->data[var_r30] = dobj;
             temp_r0 = dobj->mobj;
@@ -944,14 +990,13 @@ void ftParts_JObjSetRotation(HSD_JObj* jobj, Vec4* quat)
     HSD_JObjClearFlags(jobj, JOBJ_USE_QUATERNION);
 }
 
-void ftParts_8007592C(Fighter* fp, int part_idx, f32 rotate_x)
+void ftPartSetRotX(Fighter* fp, int part_idx, f32 rotate_x)
 {
     HSD_JObj* jobj = fp->parts[part_idx].joint;
     if (HSD_JObjGetFlags(jobj) & JOBJ_USE_QUATERNION) {
         HSD_JObj* jobj2 = fp->parts[part_idx].x4_jobj2;
         if (HSD_JObjGetFlags(jobj2) & JOBJ_USE_QUATERNION) {
-            OSReport("cant set fighter rot x!\n");
-            __assert("ftparts.c", 0x460, "0");
+            HSD_ASSERTREPORT(1120, 0, "cant set fighter rot x!\n");
         }
         HSD_JObjSetRotationX(jobj2, rotate_x);
     } else {
@@ -959,14 +1004,13 @@ void ftParts_8007592C(Fighter* fp, int part_idx, f32 rotate_x)
     }
 }
 
-void ftParts_80075AF0(Fighter* fp, int part_idx, f32 rotate_y)
+void ftPartSetRotY(Fighter* fp, int part_idx, f32 rotate_y)
 {
     HSD_JObj* jobj = fp->parts[part_idx].joint;
     if (HSD_JObjGetFlags(jobj) & JOBJ_USE_QUATERNION) {
         HSD_JObj* jobj2 = fp->parts[part_idx].x4_jobj2;
         if (HSD_JObjGetFlags(jobj2) & JOBJ_USE_QUATERNION) {
-            OSReport("cant set fighter rot y!\n");
-            __assert("ftparts.c", 0x473, "0");
+            HSD_ASSERTREPORT(1139, 0, "cant set fighter rot y!\n");
         }
         HSD_JObjSetRotationY(jobj2, rotate_y);
     } else {
@@ -974,7 +1018,7 @@ void ftParts_80075AF0(Fighter* fp, int part_idx, f32 rotate_y)
     }
 }
 
-void ftParts_80075CB4(Fighter* arg0, int part_idx, f32 rotate_z)
+void ftPartSetRotZ(Fighter* arg0, int part_idx, f32 rotate_z)
 {
     HSD_JObj* jobj;
     HSD_JObj* jobj2;
@@ -983,8 +1027,7 @@ void ftParts_80075CB4(Fighter* arg0, int part_idx, f32 rotate_z)
     if (HSD_JObjGetFlags(jobj) & JOBJ_USE_QUATERNION) {
         jobj2 = arg0->parts[part_idx].x4_jobj2;
         if (HSD_JObjGetFlags(jobj2) & JOBJ_USE_QUATERNION) {
-            OSReport("cant set fighter rot z!\n");
-            __assert("ftparts.c", 0x486, "0");
+            HSD_ASSERTREPORT(1158, 0, "cant set fighter rot z!\n");
         }
         HSD_JObjSetRotationZ(jobj2, rotate_z);
     } else {
@@ -992,30 +1035,30 @@ void ftParts_80075CB4(Fighter* arg0, int part_idx, f32 rotate_z)
     }
 }
 
-f32 ftParts_80075E78(Fighter* fp, int part_idx)
+f32 ftPartGetRotX(Fighter* fp, int part_idx)
 {
     HSD_JObj* jobj = fp->parts[part_idx].joint;
     if (HSD_JObjGetFlags(jobj) & JOBJ_USE_QUATERNION) {
         HSD_JObj* jobj = fp->parts[part_idx].x4_jobj2;
         if (HSD_JObjGetFlags(jobj) & JOBJ_USE_QUATERNION) {
-            OSReport("cant get fighter rot x!\n");
-            __assert("ftparts.c", 0x499, "0");
+            HSD_ASSERTREPORT(1177, 0, "cant get fighter rot x!\n");
         }
         return HSD_JObjGetRotationX(jobj);
     }
     return HSD_JObjGetRotationX(jobj);
 }
 
-f32 ftParts_80075F48(Fighter* fp, int part_idx)
+f32 ftPartGetRotZ(Fighter* fp, int part_idx)
 {
     HSD_JObj* jobj = fp->parts[part_idx].joint;
     if (HSD_JObjGetFlags(jobj) & JOBJ_USE_QUATERNION) {
         HSD_JObj* jobj = fp->parts[part_idx].x4_jobj2;
         if (HSD_JObjGetFlags(jobj) & JOBJ_USE_QUATERNION) {
-            OSReport("cant get fighter rot y!\n");
-            __assert("ftparts.c", 0x4AC, "0");
+            HSD_ASSERTREPORT(1196, 0, "cant get fighter rot y!\n");
         }
         return HSD_JObjGetRotationY(jobj);
     }
     return HSD_JObjGetRotationY(jobj);
 }
+
+static char* ftParts_803C0BEC = "cant get fighter rot z!\n";

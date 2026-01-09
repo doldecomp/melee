@@ -643,7 +643,7 @@ void ftCo_8009E4A8(Fighter* fp)
     int i;
 
     if (fp->x594_b4) {
-        FigaTree** tree = fp->ft_data->x2C->x10[fp->x28[fp->anim_id * 2 + 1]];
+        FigaTree** tree = fp->ft_data->x2C->x10[fp->x28[fp->anim_id][1]];
         if (tree != NULL) {
             for (i = 0; i < fp->dynamics_num; i++) {
                 ftCo_8009CB40(fp, i, 1, tree[i]);

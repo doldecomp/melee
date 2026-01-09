@@ -104,8 +104,8 @@ void ftFx_SpecialAirHiStart_Enter(HSD_GObj* gobj)
 static void ftFox_SpecialHi_RotateModel(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftParts_8007592C(fp, ftParts_GetBoneIndex(fp, FtPart_XRotN),
-                     2 * (float) M_PI - fp->mv.fx.SpecialHi.rotateModel);
+    ftPartSetRotX(fp, ftParts_GetBoneIndex(fp, FtPart_XRotN),
+                  (2 * (float) M_PI) - fp->mv.fx.SpecialHi.rotateModel);
 }
 
 void ftFx_SpecialHiHold_Anim(HSD_GObj* gobj)

@@ -22,4 +22,20 @@ struct CostumeTObjList {
     /*  fp+5D4 */ HSD_TObj* costume_tobjs[5];
 };
 
+struct TempS {
+    int x0;
+    u8* x4;
+};
+
+struct FtPartsVisLookup {
+    int x0;
+    TempS* x4;
+};
+
+struct FtPartsVis {
+    /* fp+5AC */ u32 model_num;
+    /* fp+5B0 */ u8 cleared[5];
+    /* fp+5B8 */ FtPartsVisLookup* xC[5];
+};
+
 #endif

@@ -24,7 +24,7 @@ void ftCo_8008A6D8(Fighter_GObj* gobj, s32 anim_id)
     Fighter* fp = GET_FIGHTER(gobj);
     if (anim_id != -1) {
         struct S_TEMP4* anim = &fp->x24[anim_id];
-        u8* blend_data = fp->x28 + (anim_id * 2);
+        u8(*blend_data)[2] = &fp->x28[anim_id];
         ftData_80085CD8(fp, fp, anim_id);
         fp->anim_id = anim_id;
         ftCo_8009E7B4(fp, blend_data);
@@ -32,7 +32,7 @@ void ftCo_8008A6D8(Fighter_GObj* gobj, s32 anim_id)
         fp->x3E4_fighterCmdScript.loop_count = 0;
         if (fp->x590 != NULL) {
             fp->x594_s32 = anim->x10_animCurrFlags;
-            ftAnim_8006EBE8(gobj, 0.0f, 1.0f, *blend_data);
+            ftAnim_8006EBE8(gobj, 0.0F, 1.0F, (*blend_data)[0]);
         }
         fp->x3E4_fighterCmdScript.timer = 0.0f;
         ftAnim_8006EBA4(gobj);

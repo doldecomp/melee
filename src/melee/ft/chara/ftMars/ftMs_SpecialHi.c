@@ -104,7 +104,7 @@ void ftMs_SpecialHi_IASA(HSD_GObj* gobj)
     if (ftCheckThrowB3(fp)) {
         if (abs(fp->input.lstick.x) > da->x30) {
             ftCommon_UpdateFacing(fp);
-            ftParts_80075AF0(fp, 0, (float) (HALF_PI * fp->facing_dir));
+            ftPartSetRotY(fp, 0, (float) (HALF_PI * fp->facing_dir));
         }
     }
 }
@@ -129,7 +129,7 @@ void ftMs_SpecialAirHi_IASA(HSD_GObj* gobj)
     if (ftCheckThrowB3(fp)) {
         if (abs(fp->input.lstick.x) > da->x30) {
             ftCommon_UpdateFacing(fp);
-            ftParts_80075AF0(fp, 0, (float) (HALF_PI * fp->facing_dir));
+            ftPartSetRotY(fp, 0, (float) (HALF_PI * fp->facing_dir));
         }
     }
 }

@@ -31,7 +31,7 @@ void ftPr_SpecialS_8013D658(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
     HSD_JObjSetScale(jobj, &fp->fv.pr.x2230);
-    ftParts_80075AF0(fp, FtPart_TopN, M_PI_2 * fp->facing_dir);
+    ftPartSetRotY(fp, FtPart_TopN, M_PI_2 * fp->facing_dir);
     if (fp->mv.pr.specialn.facing_dir != 0) {
         fp->facing_dir = fp->mv.pr.specialn.facing_dir;
     }
@@ -78,7 +78,7 @@ void ftPr_SpecialS_8013D764(HSD_GObj* gobj)
         fp->gr_vel = 0;
         fp->mv.pr.specialn.facing_dir = 0;
 
-        ftParts_80075AF0(fp, FtPart_TopN, M_PI_2);
+        ftPartSetRotY(fp, FtPart_TopN, M_PI_2);
         ft_PlaySFX(fp, 250070, 127, 64);
     }
 }
@@ -159,7 +159,7 @@ void ftPr_SpecialAirNStart_Anim(HSD_GObj* gobj)
         ftAnim_SetAnimRate(gobj, 0);
         fp->self_vel.x = fp->facing_dir * 0.0001f;
         fp->x74_anim_vel.x = 0;
-        ftParts_80075AF0(fp, 0, M_PI_2);
+        ftPartSetRotY(fp, 0, M_PI_2);
     }
 }
 /// #ftPr_SpecialAirNChargeLoop_Anim

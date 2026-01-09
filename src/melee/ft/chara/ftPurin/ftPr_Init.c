@@ -477,15 +477,15 @@ void ftPr_Init_8013C360(HSD_GObj* gobj)
         }
 
         fp->fv.pr.x2240.data = HSD_ObjAlloc(&fighter_x2040_alloc_data);
-        ftParts_80074148();
+        ftPartsPObjSetDefaultClass();
         fp->fv.pr.x223C = HSD_JObjLoadJoint(joints[fp->x619_costume_id]);
         fp->x2225_b2 = true;
-        ftParts_80074170();
+        ftPartsPObjClearDefaultClass();
         ftParts_80075650(gobj, fp->fv.pr.x223C, &fp->fv.pr.x2240);
 
-        ftParts_8007487C((void*) &items_shifted[1], &fp->fv.pr.x2248,
-                         fp->x619_costume_id, &fp->fv.pr.x2240.count,
-                         &fp->fv.pr.x2240.count);
+        ftParts_8007487C((FtPartsDesc*) &items_shifted[1], &fp->fv.pr.x2248,
+                         fp->x619_costume_id, &fp->fv.pr.x2240,
+                         &fp->fv.pr.x2240);
         ftCo_8009DC54(fp);
         return;
     }
@@ -524,9 +524,9 @@ void ftPr_Init_UnkIntBoolFunc0(Fighter* fp, int arg1, bool arg2)
 {
     if (fp->fv.pr.x223C) {
         if (arg2) {
-            ftParts_80074CA0(&fp->fv.pr.x2248, arg1, &fp->fv.pr.x2240.count);
+            ftParts_80074CA0(&fp->fv.pr.x2248, arg1, &fp->fv.pr.x2240);
         } else {
-            ftParts_80074D7C(&fp->fv.pr.x2248, arg1, &fp->fv.pr.x2240.count);
+            ftParts_80074D7C(&fp->fv.pr.x2248, arg1, &fp->fv.pr.x2240);
         }
     }
 }

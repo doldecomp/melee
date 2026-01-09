@@ -604,17 +604,21 @@ typedef struct ftData_x44_t {
     float ledge_snap_height;
 } ftData_x44_t;
 
-typedef struct ftData_x8_x8 {
+struct ftData_x8_x8 {
     /*  +8 */ u32 x8;
     /*  +C */ u16** xC;
-} ftData_x8_x8;
+};
+
+struct FtPartsDesc {
+    /*  +0 */ u32 model_num;
+    /*  +4 */ void* (*vis_table)[4];
+};
 
 struct ftData {
     /*  +0 */ struct ftCo_DatAttrs* x0;
     /*  +4 */ void* ext_attr;
     /*  +8 */ struct ftData_x8 {
-        /*  +0 */ u32 x0;
-        /*  +4 */ u8 x4[0x4];
+        /*  +0 */ FtPartsDesc x0;
         /*  +8 */ ftData_x8_x8 x8;
         /* +10 */ u8 x10; ///< Fighter_Part
         /* +11 */ u8 x11;
@@ -623,9 +627,9 @@ struct ftData {
         /* +14 */ u8 x14;
     }* x8;
     /*  +C */ struct S_TEMP4* xC;
-    /* +10 */ u8* x10;
+    /* +10 */ u8 (*x10)[2];
     /* +14 */ struct S_TEMP4* x14;
-    /* +18 */ u8* x18;
+    /* +18 */ u8 (*x18)[2];
     /* +1C */ struct ftData_x1C {
         u16 x0; ///< Fighter_Part
         u16 x2;
@@ -1119,7 +1123,7 @@ struct Fighter {
     /*   fp+1C */ MotionState* x1C_actionStateList;
     /*   fp+20 */ MotionState* x20_actionStateList;
     /*   fp+24 */ struct S_TEMP4* x24;
-    /*   fp+28 */ u8* x28;
+    /*   fp+28 */ u8 (*x28)[2];
     /*   fp+2C */ float facing_dir;
     /*   fp+30 */ float facing_dir1;
     /*   fp+34 */ Vec3 x34_scale;
@@ -1209,20 +1213,13 @@ struct Fighter {
     /*  fp+5A0 */ struct Fighter_x59C_t* x5A0;
     /*  fp+5A4 */ UNK_T x5A4;
     /*  fp+5A8 */ UNK_T x5A8;
-    /*  fp+5AC */ u32 x5AC;
-    /*  fp+5B0 */ u8 _5B0[0x5B8 - 0x5B0];
-    /*  fp+5B8 */ s32 x5B8;
-    /*  fp+5BC */ UNK_T x5BC;
-    /*  fp+598 */ u8 filler_x598[0x5C8 - 0x5C0];
-    /*  fp+5A0 */ void* x5C8;
+    /*  fp+5AC */ FtPartsVis x5AC;
     /*  fp+5CC */ CostumeTObjList tobj_list;
     /*  fp+5E8 */ FighterBone* parts;
     /*  fp+5EC */ DObjList dobj_list;
     /*  fp+5F4 */ struct {
-        s8 x0, x1;
-    } x5F4_arr[2];
-    /*  fp+5F8 */ s8 x5F8;
-    /*  fp+5FC */ u8 filler_x5FC[0x60C - 0x5F9];
+        /*  fp+5F4 */ s8 prev, idx;
+    } x5F4_arr[12];
     /*  fp+60C */ void* x60C;
     /*  fp+610 */ GXColor x610_color_rgba[2];
     /*  fp+618 */ u8 x618_player_id;
@@ -1479,9 +1476,8 @@ struct Fighter {
     /* fp+2030 */ s32 x2030;
     /* fp+2034 */ s32 x2034;
     /* fp+2038 */ s32 x2038;
-    /* fp+203C */ u32 x203C;
-    /* fp+2040 */ HSD_DObj** x2040;
-    /* fp+203C */ u8 filler_x203C[0x2064 - 0x2044];
+    /* fp+203C */ DObjList x203C;
+    /* fp+2044 */ u8 filler_x2044[0x2064 - 0x2044];
     /* fp+2064 */ int x2064_ledgeCooldown;
     /* fp+2068 */ s32 x2068_attackID;
     /* fp+206C */ u16 x206C_attack_instance;
@@ -1852,15 +1848,13 @@ typedef struct ftDynamics {
 
 typedef struct KirbyHatStruct {
     /*  +0 */ HSD_Joint* hat_joint;
-    /*  +4 */ u32 joint_num;
-    /*  +8 */ void* hat_vis_table;
+    /*  +4 */ FtPartsDesc desc;
     /*  +C */ ftDynamics* hat_dynamics[5];
 } KirbyHatStruct;
 
 typedef struct Kirby_Unk {
     /*  +0 */ HSD_Joint* x0;
-    /*  +4 */ HSD_Joint* x4;
-    /*  +8 */ UNK_T x8;
+    /*  +4 */ FtPartsDesc x4;
     /*  +C */ UNK_T xC;
     /* +10 */ ftDynamics* x10;
     /* +14 */ UNK_T x14;

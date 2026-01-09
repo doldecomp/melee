@@ -680,7 +680,7 @@ void ftAnim_8006F628(Fighter* fp, Fighter_Part part, bool do_blending)
         }
 
         {
-            int tmp = ftParts_80075028(fp->kind, kind, i);
+            int tmp = ftPartsRemap(fp->kind, kind, i);
             if (tmp != 0xFFU) {
                 if (fp->parts[tmp].flags_b1 && !fp->parts[tmp].flags_b0 &&
                     !fp->parts[tmp].flags_b5)
@@ -888,7 +888,7 @@ void ftAnim_8006FCE4(Fighter* fp, bool do_blending)
             i++;
         }
 
-        part = ftParts_80075028(fp->kind, kind, i);
+        part = ftPartsRemap(fp->kind, kind, i);
         if (part != 0xFFU) {
             if (fp->parts[part].flags_b1 && !fp->parts[part].flags_b0 &&
                 !fp->parts[part].flags_b5)
@@ -1373,7 +1373,7 @@ void ftAnim_80070FB4(Fighter_GObj* arg0, s32 arg1, s32 arg2)
 
 bool ftAnim_80070FD0(Fighter* fp)
 {
-    float rotation = ftParts_80075E78(fp, ftParts_GetBoneIndex(fp, 0x35));
+    float rotation = ftPartGetRotX(fp, ftParts_GetBoneIndex(fp, 0x35));
     if (fp->x100 != rotation) {
         fp->x100 = rotation;
         return true;
