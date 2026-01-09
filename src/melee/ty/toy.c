@@ -890,7 +890,7 @@ void un_80312050(void)
     data = un_804D6E6C;
     cobj = HSD_CObjGetCurrent();
 
-    if ((s8) ((u8*) data)[4] == 0) {
+    if (M2C_FIELD(data, s8*, 4) == 0) {
         HSD_CObjGetInterest(cobj, &interest);
         HSD_CObjGetLeftVector(cobj, &left);
         HSD_CObjGetUpVector(cobj, &up);
