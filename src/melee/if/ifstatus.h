@@ -5,6 +5,9 @@
 #include <platform.h>
 
 #include "if/forward.h"
+
+#include "if/types.h"
+
 #include <baselib/forward.h>
 
 /* 2F4910 */ HudIndex* ifStatus_802F4910(void);
@@ -34,6 +37,7 @@
 /* 2F7034 */ void ifStatus_802F7034(UNK_T);
 /* 2F7134 */ void ifStatus_802F7134(void);
 /* 2F7220 */ void ifStatus_802F7220(void);
+/* 3F9628 */ extern Element_803F9628 ifStatus_803F9628[8];
 /* 4A10C8 */ extern HudIndex ifStatus_HudInfo;
 
 #endif
