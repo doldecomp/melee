@@ -574,7 +574,7 @@ void grAnime_801C78FC(HSD_GObj* gobj, int arg1, u32 arg2)
     if (arg2 & 4) {
         var_r31 |= 0x100;
     }
-    grAnime_801C752C(jobj, 1, var_r31, HSD_AObjClearFlags, 3, 0x20000000);
+    grAnime_801C752C(jobj, 1, var_r31, HSD_AObjClearFlags, 3, AOBJ_LOOP);
 }
 
 void grAnime_801C7980(HSD_GObj* gobj, int arg1, u32 arg2)
@@ -593,7 +593,7 @@ void grAnime_801C7980(HSD_GObj* gobj, int arg1, u32 arg2)
     if (arg2 & 4) {
         var_r31 |= 0x100;
     }
-    grAnime_801C752C(jobj, 0, var_r31, HSD_AObjClearFlags, 3, 0x20000000);
+    grAnime_801C752C(jobj, 0, var_r31, HSD_AObjClearFlags, 3, AOBJ_LOOP);
 }
 
 void grAnime_801C7A04(HSD_GObj* gobj, int arg1, u32 arg2, f32 val)

@@ -301,7 +301,7 @@ void ftNs_SpecialNEnd_Anim(HSD_GObj* gobj)
     u8 _[8];
 
     SetPKFlashAttr(gobj);
-    ftParts_8007592C(fp, 0, 0);
+    ftPartSetRotX(fp, 0, 0);
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
@@ -402,7 +402,7 @@ void ftNs_SpecialAirNEnd_Anim(HSD_GObj* gobj)
     u8 _[8];
 
     SetPKFlashAttr(gobj);
-    ftParts_8007592C(fp, 0, 0);
+    ftPartSetRotX(fp, 0, 0);
 
     if (ftAnim_IsFramesRemaining(gobj)) {
         return;

@@ -15,7 +15,7 @@
 /* 291CCC */ itSScopeAttributes* it_80291CCC(Item_GObj* gobj, Vec3* pos);
 /* 291CF4 */ s32 it_80291CF4(Item_GObj*, s32);
 /* 291D38 */ UNK_RET it_80291D38(UNK_PARAMS);
-/* 291DAC */ UNK_RET it_80291DAC(UNK_PARAMS);
+/* 291DAC */ int it_80291DAC(Item_GObj*, int);
 /* 291F14 */ UNK_RET it_80291F14(UNK_PARAMS);
 /* 291FA8 */ UNK_RET it_80291FA8(UNK_PARAMS);
 /* 292030 */ void it_80292030(Item_GObj* gobj);

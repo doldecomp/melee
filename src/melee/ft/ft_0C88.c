@@ -17,10 +17,10 @@
 void ftCo_800C884C(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->x2040 = HSD_ObjAlloc(&fighter_x2040_alloc_data);
-    ftParts_80074148();
+    fp->x203C.data = HSD_ObjAlloc(&fighter_x2040_alloc_data);
+    ftPartsPObjSetDefaultClass();
     ft_800C85B8(gobj);
-    ftParts_80074170();
+    ftPartsPObjClearDefaultClass();
 }
 
 void ftCo_800C88A0(Fighter* fp)

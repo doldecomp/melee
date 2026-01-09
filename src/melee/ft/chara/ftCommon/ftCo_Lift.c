@@ -147,18 +147,18 @@ void ftCo_LiftTurn_Anim(HSD_GObj* gobj)
     HSD_JObj* jobj = fp->parts[part].x4_jobj2;
     fp->mv.co.lift.x4 -= 1;
     if (!fp->x2222_b6) {
-        float angle = 180 / p_ftCommonData->x230 * deg_to_rad +
-                      ftParts_80075F48(fp, part);
-        ftParts_80075AF0(fp, part, angle);
+        float angle = (180 / p_ftCommonData->x230 * deg_to_rad) +
+                      ftPartGetRotZ(fp, part);
+        ftPartSetRotY(fp, part, angle);
         HSD_JObjSetRotationY(jobj, angle);
     }
     if (!fp->mv.co.lift.x8) {
         if (fp->mv.co.lift.x4 <= 0.5f * p_ftCommonData->x230) {
-            float f = ftParts_80075F48(fp, part);
+            float f = ftPartGetRotZ(fp, part);
             fp->facing_dir = -fp->facing_dir;
-            ftParts_80075AF0(fp, FtPart_TopN, M_PI_2 * fp->facing_dir);
+            ftPartSetRotY(fp, FtPart_TopN, M_PI_2 * fp->facing_dir);
             {
-                ftParts_80075AF0(fp, part, -f);
+                ftPartSetRotY(fp, part, -f);
                 HSD_JObjSetRotationY(jobj, -f);
             }
             fp->gr_vel = -fp->gr_vel;

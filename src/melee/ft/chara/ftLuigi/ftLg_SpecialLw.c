@@ -37,7 +37,7 @@
 void ftLg_SpecialLw_UpdateRot(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    ftParts_8007592C(fp, 0, 0.0f);
+    ftPartSetRotX(fp, 0, 0.0F);
 }
 
 static inline void ftLuigi_SpecialLw_SetVars(HSD_GObj* gobj)
@@ -279,13 +279,12 @@ static inline void ftLuigi_SpecialLw_UnkAngle(HSD_GObj* gobj)
     if (((u32) fp->cmd_vars[3] != 0U) &&
         ((s32) fp->mv.lg.SpecialLw.isUnkColl != false))
     {
-        ftParts_8007592C(fp, 0,
-                         fp->facing_dir *
-                             atan2f(fp->coll_data.floor.normal.x,
-                                    fp->coll_data.floor.normal.y));
+        ftPartSetRotX(fp, 0,
+                      fp->facing_dir * atan2f(fp->coll_data.floor.normal.x,
+                                              fp->coll_data.floor.normal.y));
         return;
     }
-    ftParts_8007592C(fp, 0, 0.0f);
+    ftPartSetRotX(fp, 0, 0.0F);
 }
 
 /// Luigi's grounded Cyclone Collision callback

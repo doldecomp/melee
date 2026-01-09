@@ -134,7 +134,7 @@ void ftLg_SpecialHi_IASA(HSD_GObj* gobj)
         }
         if (control > luigiAttrs->x58_LUIGI_SUPERJUMP_REVERSE_STICK_RANGE) {
             ftCommon_UpdateFacing(fp);
-            ftParts_80075AF0(fp, 0, (M_PI / 2) * fp->facing_dir);
+            ftPartSetRotY(fp, 0, M_PI_2 * fp->facing_dir);
         }
     }
 }
@@ -190,7 +190,7 @@ void ftLg_SpecialAirHi_IASA(HSD_GObj* gobj)
         }
         if (control > luigiAttrs->x58_LUIGI_SUPERJUMP_REVERSE_STICK_RANGE) {
             ftCommon_UpdateFacing(fp);
-            ftParts_80075AF0(fp, 0, (M_PI / 2) * fp->facing_dir);
+            ftPartSetRotY(fp, 0, M_PI_2 * fp->facing_dir);
         }
     }
 }

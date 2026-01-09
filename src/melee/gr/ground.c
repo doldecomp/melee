@@ -2437,17 +2437,17 @@ void Ground_801C466C(void)
         while (var_r26_2 != NULL) {
             if (Ground_801C43C4((*var_r27_2)->anims[0]) != 0) {
                 if (var_r26_2->aobj != NULL) {
-                    HSD_AObjSetFlags(var_r26_2->aobj, 0x20000000);
+                    HSD_AObjSetFlags(var_r26_2->aobj, AOBJ_LOOP);
                 }
                 if (var_r26_2->position != NULL) {
                     HSD_ForeachAnim(var_r26_2->position, WOBJ_TYPE,
                                     ALL_TYPE_MASK, HSD_AObjSetFlags,
-                                    AOBJ_ARG_AU, 0x20000000);
+                                    AOBJ_ARG_AU, AOBJ_LOOP);
                 }
                 if (var_r26_2->interest != NULL) {
                     HSD_ForeachAnim(var_r26_2->interest, WOBJ_TYPE,
                                     ALL_TYPE_MASK, HSD_AObjSetFlags,
-                                    AOBJ_ARG_AU, 0x20000000);
+                                    AOBJ_ARG_AU, AOBJ_LOOP);
                 }
             }
             if (var_r26_2 == NULL) {

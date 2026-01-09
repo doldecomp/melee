@@ -1,22 +1,23 @@
 #ifndef MELEE_MN_FORWARD_H
 #define MELEE_MN_FORWARD_H
 
+typedef struct AnimLoopSettings AnimLoopSettings;
+typedef struct CountEntry CountEntry;
 typedef struct CSSData CSSData;
+typedef struct CSSDoor CSSDoor;
+typedef struct CSSDoorsData CSSDoorsData;
+typedef struct CSSIcon CSSIcon;
+typedef struct CSSIconsData CSSIconsData;
+typedef struct CSSKOStar CSSKOStar;
+typedef struct CSSModeInfo CSSModeInfo;
+typedef struct CSSTag CSSTag;
+typedef struct CSSTagData CSSTagData;
+typedef struct MenuKindData MenuKindData;
 typedef struct PlayerInitData PlayerInitData;
+typedef struct SSSData SSSData;
 typedef struct StartMeleeData StartMeleeData;
 typedef struct StartMeleeRules StartMeleeRules;
 typedef struct VsModeData VsModeData;
-typedef struct CSSModeInfo CSSModeInfo;
-typedef struct CSSIcon CSSIcon;
-typedef struct CSSIconsData CSSIconsData;
-typedef struct CSSDoor CSSDoor;
-typedef struct CSSTagData CSSTagData;
-typedef struct CSSTag CSSTag;
-typedef struct CSSKOStar CSSKOStar;
-typedef struct CSSDoorsData CSSDoorsData;
-typedef struct SSSData SSSData;
-typedef struct AnimLoopSettings AnimLoopSettings;
-typedef struct MenuKindData MenuKindData;
 
 typedef unsigned char MenuKind8;
 typedef unsigned char MenuState8;

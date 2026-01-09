@@ -580,9 +580,9 @@ void Fighter_UnkUpdateCostumeJoint_800686E4(Fighter_GObj* gobj)
     fp->x108_costume_joint = CostumeListsForeachCharacter[fp->kind]
                                  .costume_list[fp->x619_costume_id]
                                  .joint;
-    ftParts_80074148();
+    ftPartsPObjSetDefaultClass();
     jobj = HSD_JObjLoadJoint(fp->x108_costume_joint);
-    ftParts_80074170();
+    ftPartsPObjClearDefaultClass();
     ftParts_80073758(jobj);
 
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
@@ -947,7 +947,7 @@ void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
     MotionState* new_motion_state;
     struct S_TEMP4* unk_struct_x18;
     s32 bone_index;
-    u8* unk_byte_ptr;
+    u8(*unk_byte_ptr)[2];
     bool animflags_bool;
     union Struct2070 x2070;
 
@@ -1177,9 +1177,9 @@ void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
 
     fp->lstick_angle = 0.0f;
 
-    ftParts_8007592C(fp, 0, 0.0f);
-    ftParts_80075AF0(fp, 0, (M_PI_2 * fp->facing_dir));
-    ftParts_80075CB4(fp, 0, 0.0f);
+    ftPartSetRotX(fp, 0, 0.0F);
+    ftPartSetRotY(fp, 0, (M_PI_2 * fp->facing_dir));
+    ftPartSetRotZ(fp, 0, 0.0F);
 
     if (msid >= fp->x18) {
         new_motion_state = &fp->x20_actionStateList[(msid - fp->x18)];
@@ -1253,11 +1253,10 @@ void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
             if (arg3 != NULL) {
                 unk_struct_x18 =
                     &((Fighter*) arg3->user_data)->x24[fp->anim_id];
-                unk_byte_ptr =
-                    &((Fighter*) arg3->user_data)->x28[fp->anim_id << 1];
+                unk_byte_ptr = &((Fighter*) arg3->user_data)->x28[fp->anim_id];
             } else {
                 unk_struct_x18 = &fp->x24[fp->anim_id];
-                unk_byte_ptr = &fp->x28[fp->anim_id << 1];
+                unk_byte_ptr = &fp->x28[fp->anim_id];
             }
             fp->x594_s32 = unk_struct_x18->x10_animCurrFlags;
             ftCo_8009E7B4(fp, unk_byte_ptr);
@@ -1278,7 +1277,7 @@ void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
                                         anim_speed,
                                         (anim_blend == -1.0f) ? 0.0f
                                         : (anim_blend)        ? anim_blend
-                                                              : *unk_byte_ptr);
+                                                       : (*unk_byte_ptr)[0]);
                     }
                     ftAnim_8006E9B4(gobj);
                     if (fp->x594_b0 != 0U) {
@@ -1299,13 +1298,13 @@ void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
                         ftAnim_8006EBE8(gobj, anim_start, anim_speed,
                                         (anim_blend == -1.0f) ? 0.0f
                                         : (anim_blend)        ? anim_blend
-                                                              : *unk_byte_ptr);
+                                                       : (*unk_byte_ptr)[0]);
                     }
                     fp->x3E4_fighterCmdScript.timer = 0.0f;
                 }
 
                 ftAnim_8006E9B4(gobj);
-                if ((bone_index != 0) && (*unk_byte_ptr != 0U)) {
+                if ((bone_index != 0) && (*unk_byte_ptr)[0] != 0U) {
                     HSD_JObj* temp_joint = fp->parts[bone_index].x4_jobj2;
 
                     HSD_JObjGetTranslation(temp_joint, &translation);
@@ -1366,7 +1365,7 @@ void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
             ftAnim_80070758(fp->x8AC_animSkeleton);
             fp->x3E4_fighterCmdScript.u = NULL;
             fp->x8A4_animBlendFrames = 0;
-            fp->x8A8_unk = 0;
+            fp->x8A8_anim_frame = 0;
         }
 
         if (animflags_bool) {
@@ -3104,7 +3103,7 @@ void Fighter_Unload_8006DABC(void* user_data)
     HSD_ObjFree(&fighter_x59C_alloc_data, fp->x5A0);
     HSD_ObjFree(&fighter_parts_alloc_data, fp->parts);
     HSD_ObjFree(&fighter_dobj_list_alloc_data, fp->dobj_list.data);
-    HSD_ObjFree(&fighter_x2040_alloc_data, fp->x2040);
+    HSD_ObjFree(&fighter_x2040_alloc_data, fp->x203C.data);
     HSD_ObjFree(&fighter_dat_attrs_alloc_data, fp->dat_attrs_backup);
     HSD_ObjFree(&fighter_alloc_data, fp);
 }

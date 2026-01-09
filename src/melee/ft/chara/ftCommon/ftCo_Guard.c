@@ -215,23 +215,24 @@ void ftCo_80091E78(HSD_GObj* gobj, float arg1)
         ftCo_80091BC4(fp);
         if (fp->mv.co.guard.x4) {
             HSD_JObj* jobj = fp->x8AC_animSkeleton;
-            ftAnim_8006F4C8(fp, 1, ftData_80085E50(fp, 38));
+            ftAnim_8006F4C8(fp, true, ftData_80085E50(fp, 38));
             ftAnim_80070710(jobj, fp->mv.co.guard.x8);
-            ftAnim_8006FB88(fp, 1, fp->x108_costume_joint->child);
+            ftAnim_8006FB88(fp, FtPart_TransN, fp->x108_costume_joint->child);
             HSD_JObjAnimAll(jobj);
             if (fp->mv.co.guard.x4 < 1) {
-                ftAnim_80070108(fp, 1, fp->ft_data->x20->x8,
-                                1 - fp->mv.co.guard.x4, fp->mv.co.guard.x4);
+                ftAnim_80070108(fp, FtPart_TransN, 1 - fp->mv.co.guard.x4,
+                                fp->mv.co.guard.x4, fp->ft_data->x20->x8);
             }
             if (arg1 < 1) {
-                ftAnim_8006FE9C(fp, 1, arg1, 1 - arg1);
+                ftAnim_8006FE9C(fp, FtPart_TransN, arg1, 1 - arg1);
             } else {
-                ftAnim_8006FF74(fp, 1);
+                ftAnim_8006FF74(fp, FtPart_TransN);
             }
         } else if (arg1 < 1) {
-            ftAnim_80070010(fp, 1, fp->ft_data->x20->x8, arg1, 1 - arg1);
+            ftAnim_80070010(fp, FtPart_TransN, arg1, 1 - arg1,
+                            fp->ft_data->x20->x8);
         } else {
-            ftAnim_8006FA58(fp, 1, fp->ft_data->x20->x8);
+            ftAnim_8006FA58(fp, FtPart_TransN, fp->ft_data->x20->x8);
         }
         ftCo_80091D58(fp);
         inlineD0(gobj);

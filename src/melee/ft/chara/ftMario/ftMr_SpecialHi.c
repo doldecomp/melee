@@ -88,7 +88,7 @@ void ftMr_SpecialHi_IASA(HSD_GObj* gobj)
     if (ftCheckThrowB3(fp)) {
         if (abs(fp->input.lstick.x) > sa->specialhi.reverse_stick_range) {
             ftCommon_UpdateFacing(fp);
-            ftParts_80075AF0(fp, 0, M_PI_2 * fp->facing_dir);
+            ftPartSetRotY(fp, 0, M_PI_2 * fp->facing_dir);
         }
     }
 }

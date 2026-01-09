@@ -103,32 +103,32 @@ void ftSk_SpecialS_80110610(HSD_GObj* gobj, s32 arg1, float arg2)
 
         if (fp->mv.sk.specials.x14) {
             HSD_JObj* bone = fp->x8AC_animSkeleton;
-            ftAnim_8006F4C8(fp, 1, ftData_80085E50(fp, arg1));
+            ftAnim_8006F4C8(fp, true, ftData_80085E50(fp, arg1));
             ftAnim_80070710(bone, f);
-            ftAnim_8006FB88(fp, 1, fp->x108_costume_joint->child);
+            ftAnim_8006FB88(fp, FtPart_TransN, fp->x108_costume_joint->child);
             HSD_JObjAnimAll(bone);
 
             if (fp->mv.sk.specials.x14 < 1) {
-                ftAnim_80070108(fp, 1, item[2], 1 - fp->mv.sk.specials.x14,
-                                fp->mv.sk.specials.x14);
+                ftAnim_80070108(fp, FtPart_TransN, 1 - fp->mv.sk.specials.x14,
+                                fp->mv.sk.specials.x14, item[2]);
             }
 
             if (arg2 < 1) {
-                ftAnim_8006FE9C(fp, 1, arg2, 1 - arg2);
+                ftAnim_8006FE9C(fp, FtPart_TransN, arg2, 1 - arg2);
                 return;
             }
 
-            ftAnim_8006FF74(fp, 1);
+            ftAnim_8006FF74(fp, FtPart_TransN);
             return;
         }
     }
 
     if (arg2 < 1) {
-        ftAnim_80070010(fp, 1, item[2], arg2, 1 - arg2);
+        ftAnim_80070010(fp, FtPart_TransN, arg2, 1 - arg2, item[2]);
         return;
     }
 
-    ftAnim_8006FA58(fp, 1, item[2]);
+    ftAnim_8006FA58(fp, FtPart_TransN, item[2]);
 }
 
 void ftSk_SpecialS_80110788(HSD_GObj* gobj)

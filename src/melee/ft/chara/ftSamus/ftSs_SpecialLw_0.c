@@ -47,7 +47,7 @@ void ftSs_Init_80128944(HSD_GObj* gobj, float farg1, float farg2)
         case 3:
         case 4:
             if ((fp->x2070.x2073 == 0x14) || ((fp->x2070.x2071_b5) == 0)) {
-                if (fp->x5F4_arr[0].x1 == 2) {
+                if (fp->x5F4_arr[0].idx == 2) {
                     ftSs_Init_80128B1C(gobj, float_result, da->x0, 1.0f);
                 } else {
                     ftSs_Init_80128B1C(gobj, float_result, 0.0f, 1.0f);

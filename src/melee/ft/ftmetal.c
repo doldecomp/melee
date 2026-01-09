@@ -224,7 +224,7 @@ void ft_800C85B8(Fighter_GObj* gobj)
                         OSReport("fighter parts model dobj num over!\n");
                         __assert("ftmetal.c", 0xF8, "0");
                     }
-                    temp_r28->x2040[var_r26] = var_r24_2;
+                    temp_r28->x203C.data[var_r26] = var_r24_2;
                     {
                         HSD_MObj* mobj = var_r24_2->mobj;
                         if (mobj != NULL) {
@@ -246,5 +246,5 @@ void ft_800C85B8(Fighter_GObj* gobj)
             ftAnim_GetNextJointInTree(&sp20, &sp1C);
         }
     }
-    temp_r28->x203C = var_r26;
+    temp_r28->x203C.count = var_r26;
 }

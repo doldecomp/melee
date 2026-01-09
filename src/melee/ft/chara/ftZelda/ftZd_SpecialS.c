@@ -192,7 +192,7 @@ void ftZd_SpecialSEnd_Anim(HSD_GObj* gobj)
 
     fp = GET_FIGHTER(gobj);
 
-    ftParts_8007592C(fp, 0, 0);
+    ftPartSetRotX(fp, 0, 0);
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         fp = GET_FIGHTER(gobj);
@@ -316,7 +316,7 @@ void ftZd_SpecialAirSEnd_Anim(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftZelda_DatAttrs* sa = fp->dat_attrs;
 
-    ftParts_8007592C(fp, 0, 0);
+    ftPartSetRotX(fp, 0, 0);
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
         {
