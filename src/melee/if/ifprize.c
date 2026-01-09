@@ -174,7 +174,7 @@ void un_802FE918(int a, int b, int c)
     HSD_Randi(2);
     gmMainLib_8015D8B0(0);
     HSD_SisLib_803A6530(0, 0, 0);
-    un_803063D4();
+    un_803063D4(0, 0, 0);
     HSD_SisLib_803A660C(0, 0, 0);
     HSD_SisLib_803A660C(0, 0, 0);
     HSD_SisLib_803A6368(0, 0);
