@@ -138,5 +138,6 @@
 /* 0313E0 */ void Camera_800313E0(HSD_GObj*, u64);
 
 extern CmSubject* cm_804D6468;
+extern CameraDebugMode cm_80453004;
 
 #endif
