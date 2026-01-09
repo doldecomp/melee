@@ -13,7 +13,6 @@
 
 /// .bss
 /* 452C68 */ static Camera cm_80452C68;
-/* 453004 */ CameraDebugMode cm_80453004;
 
 // .data
 /* 3BCB18 */ static CameraModeCallbacks cm_803BCB18 = { Camera_8002B3D4,
