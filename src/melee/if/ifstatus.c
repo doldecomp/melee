@@ -41,15 +41,15 @@ typedef struct UnkX {
 
 /* 2F491C */ static void ifStatus_PercentOnDeathAnimationThink(UnkX* value,
                                                                s32, s32);
-/* 3F9628 */ static Element_803F9628 ifStatus_803F9628[8] = {
-    { NULL, 0, if_802F74D0, 0x7C860U, 0x08000000U, 0, 0, 0, 0, 0 },
-    { NULL, 0, if_802F73C4, 0xC351U, 0, 0, 0, 0, 0, 0 },
-    { NULL, 0, if_802F74D0, 0x7C85EU, 0, 0, 0, 0, 0, 0 },
-    { NULL, 0, if_802F73C4, 0x7C85DU, 0, 0, 0, 0, 0, 0 },
-    { NULL, 0, if_802F73C4, 0x7C857U, 0x0A000000U, 0, 0, 0, 0, 0 },
-    { NULL, 0, if_802F74D0, 0x7C855U, 0x08000000U, 0, 0, 0, 0, 0 },
-    { NULL, 0, if_802F74D0, 0x9C48U, 0, 0, 0, 0, 0, 0 },
-    { NULL, 0, if_802F74D0, 0x9C46U, 0, 0, 0, 0, 0, 0 },
+/* 3F9628 */ Element_803F9628 ifStatus_803F9628[8] = {
+    { NULL, 0, if_802F74D0, 0x7C860U, 8, 0, { 0 }, 0, NULL, NULL, 0, 0 },
+    { NULL, 0, if_802F73C4, 0xC351U, 0, 0, { 0 }, 0, NULL, NULL, 0, 0 },
+    { NULL, 0, if_802F74D0, 0x7C85EU, 0, 0, { 0 }, 0, NULL, NULL, 0, 0 },
+    { NULL, 0, if_802F73C4, 0x7C85DU, 0, 0, { 0 }, 0, NULL, NULL, 0, 0 },
+    { NULL, 0, if_802F73C4, 0x7C857U, 10, 0, { 0 }, 0, NULL, NULL, 0, 0 },
+    { NULL, 0, if_802F74D0, 0x7C855U, 8, 0, { 0 }, 0, NULL, NULL, 0, 0 },
+    { NULL, 0, if_802F74D0, 0x9C48U, 0, 0, { 0 }, 0, NULL, NULL, 0, 0 },
+    { NULL, 0, if_802F74D0, 0x9C46U, 0, 0, { 0 }, 0, NULL, NULL, 0, 0 },
 };
 /* 4D6D60 */ static u8 ifStatus_804D6D60;
 /* 4D6D61 */ static s8 ifStatus_804D6D61;
