@@ -559,14 +559,14 @@ int un_80300724(int arg0)
 void un_80300758(int arg0)
 {
     if (arg0 == 1) {
-        un_802FFCD0(4, (u8*)&un_803FA258 + 0x10);
+        un_802FFCD0(4, (u8*) &un_803FA258 + 0x10);
     }
 }
 
 void un_80300790(int arg0)
 {
     if (arg0 == 1) {
-        un_802FFCD0(4, (u8*)&un_803FA258 + 0x24);
+        un_802FFCD0(4, (u8*) &un_803FA258 + 0x24);
     }
 }
 
