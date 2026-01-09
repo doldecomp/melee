@@ -55,12 +55,12 @@ void un_80321178(void)
     HSD_JObj* jobj;
 
     i = 0;
-    while (((void**) (*un_804D7040))[i] != NULL) {
+    while ((*un_804D7040)[i] != NULL) {
         gobj = GObj_Create(0xE, 0xF, 0);
-        jobj = HSD_JObjLoadJoint(*(void**) ((void**) (*un_804D7040))[i]);
+        jobj = HSD_JObjLoadJoint((*un_804D7040)[i]->joint);
         HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
         GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0xB, 0);
-        gm_8016895C(jobj, (DynamicModelDesc*) ((void**) (*un_804D7040))[i], 0);
+        gm_8016895C(jobj, (*un_804D7040)[i], 0);
         HSD_JObjReqAnimAll(jobj, un_804DE140);
         HSD_JObjAnimAll(jobj);
         HSD_GObjProc_8038FD54(gobj, un_80321154, 0x17);
