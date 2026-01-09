@@ -11,7 +11,6 @@
 #include <sysdolphin/baselib/cobj.h>
 #include <melee/cm/types.h>
 
-
 /// .bss
 /* 452C68 */ static Camera cm_80452C68;
 /* 453004 */ CameraDebugMode cm_80453004;
