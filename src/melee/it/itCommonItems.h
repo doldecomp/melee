@@ -585,6 +585,24 @@ typedef struct itKlap_ItemVars {
     /* +28 ip+DFC */ f32 x28;
 } itKlap_ItemVars;
 
+typedef struct itLeadeadAttr_x0 {
+    /* 0x00 */ s32 x0;
+    /* 0x04 */ f32 x4;
+} itLeadeadAttr_x0;
+
+typedef struct itLeadeadAttributes {
+    /* 0x00 */ itLeadeadAttr_x0* x0;
+    /* 0x04 */ s32 x4;
+    /* 0x08 */ f32 x8;
+    /* 0x0C */ f32 xC;
+    /* 0x10 */ f32 x10;
+    /* 0x14 */ f32 x14;
+    /* 0x18 */ s16 x18;
+    /* 0x1A */ s16 x1A;
+    /* 0x1C */ s16 x1C;
+    /* 0x1E */ s8 x1E;
+} itLeadeadAttributes;
+
 typedef struct itChicorita_ItemVars {
     /* ip+DD4 */ u8 _0[0x60 - 0x0];
     /* ip+E34 */ s32 x60; // timer?

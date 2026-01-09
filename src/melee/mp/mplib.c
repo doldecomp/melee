@@ -4862,8 +4862,7 @@ int mpJointFromLine(int line_id)
 }
 
 bool mpLib_80056C54(int line_id, Vec3* pos, int* line_id_out, Vec3* vec_out,
-                    u32* flags_out, Vec3* normal_out, f32 var_f25, f32 arg7,
-                    f32 arg8, f32 arg9)
+                    u32* flags_out, Vec3* normal_out, f32 var_f25, f32 arg7)
 {
     float sp64;
     Vec3 sp58;
