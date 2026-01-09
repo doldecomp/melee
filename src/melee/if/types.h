@@ -60,15 +60,31 @@ struct Element_803F9628_Obj_14 {
     s32 unk1C;
 };
 
+struct Element_803F9628_x12 {
+    u8 x0 : 1;
+    u8 x1 : 1;
+    u8 x2 : 1;
+    u8 x3 : 1;
+    u8 x4 : 1;
+    u8 x5 : 1;
+    u8 x6 : 1;
+    u8 x7 : 1;
+};
+
+typedef void (*IfStatusCb)(s32);
+
 struct Element_803F9628 {
     /* +00 */ HSD_GObj* x0;
     /* +04 */ u32 x4;
     /* +08 */ void (*x8)(HSD_GObj*);
-    /* +0C */ u32 xC;  // flags?
-    /* +10 */ u32 x10; // flags?
+    /* +0C */ u32 xC;
+    /* +10 */ u8 x10;
+    /* +11 */ u8 x11;
+    /* +12 */ struct Element_803F9628_x12 x12;
+    /* +13 */ u8 x13;
     /* +14 */ DynamicModelDesc* x14;
-    /* +18 */ u32 x18;
-    /* +1C */ u32 x1C;
+    /* +18 */ IfStatusCb x18;
+    /* +1C */ IfStatusCb x1C;
     /* +20 */ u32 x20;
     /* +24 */ u32 x24;
 };

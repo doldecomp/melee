@@ -13,6 +13,7 @@ typedef struct HSD_SObj_803A477C_t {
     float x10, x14;
     u8 pad18[0x3C - 0x18];
     u8 x3C, x3D, x3E, x3F;
+    u8 x40;
 } HSD_SObj_803A477C_t;
 
 /* 3A44A4 */ void HSD_SObjLib_803A44A4(void);
