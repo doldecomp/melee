@@ -48,8 +48,8 @@ void un_803124BC(void)
     u16* table2;
     s32 i;
 
-    table1 = (u16*) gmMainLib_8015CC78();
-    table2 = (u16*) gmMainLib_8015CC84();
+    table1 = gmMainLib_8015CC78();
+    table2 = gmMainLib_8015CC84();
 
     if (un_804D6ED0 == NULL) {
         char* archiveName;
@@ -104,8 +104,8 @@ void un_8031263C(void)
     u16* table2;
 
     ((u8*) un_804A284C)[4] = 0;
-    table1 = (u16*) gmMainLib_8015CC78();
-    table2 = (u16*) gmMainLib_8015CC84();
+    table1 = gmMainLib_8015CC78();
+    table2 = gmMainLib_8015CC84();
 
     if (un_804D6ED0 == NULL) {
         char* archiveName;
@@ -160,8 +160,10 @@ void un_803127D4(void)
     memzero(un_804A2AA8, 0x14);
 }
 
+/// Formats a number into a string buffer using digit glyphs from the font.
 void un_80312834(char* buf, u32 num)
 {
+    /// @todo Extract font digit lookup struct - offset 0x4E8 in SIS font data
     u8* lookup = M2C_FIELD(HSD_SisLib_804D1124[0], u8**, 0x4E8);
     u32 idx;
     u32 original = num;

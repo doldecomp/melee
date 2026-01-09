@@ -41,7 +41,17 @@ typedef struct ToyEntry {
     };
 } ToyEntry;
 
-/* Used by un_803060BC for trophy data lookup. 0x24 bytes per entry. */
+/**
+ * Trophy metadata entry used by un_803060BC for trophy data lookup.
+ * Size: 0x24 bytes per entry.
+ *
+ * Evidence: un_803060BC switch statement accesses fields by index:
+ * - cases 0-5: return float fields x08-x1C
+ * - case 6: return (float) x20 (s8)
+ * - case 7: return (float) x21 (s8)
+ * - case 8: return (float) x04 (category)
+ * - id field used for -1 sentinel check in table iteration
+ */
 typedef struct TrophyData {
     s32 id;  /* 0x00 - trophy ID, -1 for end sentinel */
     s32 x04; /* 0x04 - category (case 8) */
@@ -69,8 +79,19 @@ struct Toy {
     /* +198 */ char pad_198[0x19A - 0x198];
     /* +19A */ u16 x19A;
     /* +19C */ u16 x19C;
-    /* +19E */ u16 trophyTable[0x125]; /* Trophy unlock states (0x24A bytes) */
+    /**
+     * Trophy unlock states array. 0x125 (293) entries for each trophy ID.
+     * Evidence: Trophy_SetUnlockState uses toy->trophyTable as u16 array
+     * indexed by trophyId. gmMainLib_8015CC78 returns same data from save.
+     * Size: 0x24A bytes (293 * 2).
+     */
+    /* +19E */ u16 trophyTable[0x125];
     /* +3E8 */ char pad_3E8[0x3EC - 0x3E8];
+    /**
+     * Count of unlocked trophies.
+     * Evidence: Trophy_SetUnlockState increments toy->trophyCount when
+     * unlocking new trophy. gmMainLib_8015CC90 returns same from save.
+     */
     /* +3EC */ s16 trophyCount;
 };
 
