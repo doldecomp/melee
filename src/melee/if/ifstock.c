@@ -1,15 +1,16 @@
-#include "if/ifstock.h"
+#include <placeholder.h>
+
+#include "gm/forward.h"
+#include "sc/forward.h"
 
 #include "if/ifstock.static.h"
-#include <placeholder.h>
+
+#include "if/ifstock.h"
 
 #include "baselib/gobj.h"
 #include "baselib/gobjgxlink.h"
 #include "baselib/jobj.h"
 #include "ef/efsync.h"
-
-#include "gm/forward.h"
-
 #include "gm/gm_1601.h"
 #include "gm/gm_16AE.h"
 #include "gm/types.h"
@@ -22,9 +23,6 @@
 #include "lb/lbarchive.h"
 #include "lb/lbvector.h"
 #include "pl/player.h"
-
-#include "sc/forward.h"
-
 #include "sc/types.h"
 
 #include <baselib/aobj.h>
