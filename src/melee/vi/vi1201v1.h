@@ -5,7 +5,6 @@
 
 #include "ft/forward.h"
 #include "sc/forward.h"
-
 #include <baselib/forward.h>
 
 /* 4D6FE0 */ extern SceneDesc* un_804D6FE0;

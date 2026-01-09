@@ -4,7 +4,6 @@
 #include <placeholder.h>
 
 #include "ft/forward.h"
-
 #include <baselib/forward.h>
 
 /* 4D7028 */ extern u8 un_804D7028;

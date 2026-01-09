@@ -5,8 +5,8 @@
 
 #include "ft/forward.h"
 #include "sc/forward.h"
-
 #include <baselib/forward.h>
+
 #include <dolphin/gx/GXStruct.h>
 
 /* 4D6F90 */ extern SceneDesc* un_804D6F90;

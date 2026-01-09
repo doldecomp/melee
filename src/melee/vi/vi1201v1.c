@@ -171,12 +171,13 @@ void un_8031FD18_OnEnter(void* arg)
 
     char_index = input[0];
 
-    un_804D6FE8 = lbArchive_LoadSymbols(un_80400258 + 0x34, &un_804D6FE0,
-                                        un_80400258 + 0x44, NULL);
-    lbArchive_LoadSymbols(un_80400258 + 0x58, &un_804D6FEC, un_80400258 + 0x64,
-                          NULL);
-    lbArchive_LoadSymbols(un_80400258 + 0x80, &un_804D6FE4, un_80400258 + 0x90,
-                          NULL);
+    un_804D6FE8 = lbArchive_LoadSymbols(
+        &M2C_FIELD(un_80400258, char*, 0x34), &un_804D6FE0,
+        &M2C_FIELD(un_80400258, char*, 0x44), NULL);
+    lbArchive_LoadSymbols(&M2C_FIELD(un_80400258, char*, 0x58), &un_804D6FEC,
+                          &M2C_FIELD(un_80400258, char*, 0x64), NULL);
+    lbArchive_LoadSymbols(&M2C_FIELD(un_80400258, char*, 0x80), &un_804D6FE4,
+                          &M2C_FIELD(un_80400258, char*, 0x90), NULL);
     un_803124BC();
     un_804D6FE8 = lbArchive_LoadSymbols(gm_80160438(char_index), NULL);
 
