@@ -6,6 +6,7 @@
 #include "lb/lbarchive.h"
 #include "lb/lblanguage.h"
 #include "ty/toy.h"
+#include "ty/types.h"
 
 #include <m2c_macros.h>
 #include <baselib/archive.h>
@@ -25,20 +26,6 @@ typedef struct {
     u8 pad[0x28];
     HSD_CObj* cobj;
 } TyListData;
-
-typedef struct TyListArg {
-    /* 0x00 */ void* x0;
-    /* 0x04 */ void* x4;
-    /* 0x08 */ void* x8;
-    /* 0x0C */ HSD_JObj* xC;
-    /* 0x10 */ HSD_JObj* x10;
-    /* 0x14 */ HSD_JObj* x14;
-    /* 0x18 */ u8 pad_18[0x26 - 0x18];
-    /* 0x26 */ s16 idx;
-    /* 0x28 */ u8 pad_28[0x2C - 0x28];
-    /* 0x2C */ float x2C;
-    /* 0x30 */ float x30;
-} TyListArg;
 
 void un_803124BC(void)
 {
@@ -526,42 +513,40 @@ void un_803147C4(void)
 
 void un_803148E4(s32 arg0)
 {
-    char* data = un_804A2AC0;
-    char* ptr1 = data + 0x2AC;
+    TyListState* state = (TyListState*) un_804A2AC0;
     void* archive = un_804D6ED8;
-    char* ptr2 = data + 0x2C4;
     PAD_STACK(8);
 
     if (un_80304870() != 0) {
         if (arg0 != 0) {
-            un_804A284C[0x12A] = M2C_FIELD(data, s16*, 0x298);
-            un_804A284C[0x12B] = un_804D6EDC[M2C_FIELD(data, s16*, 0x298)];
-            M2C_FIELD(un_804A284C, u8*, 1) = M2C_FIELD(data, u8*, 0x29B);
-            M2C_FIELD(un_804A284C, u8*, 2) = M2C_FIELD(data, u8*, 0x29C);
-            M2C_FIELD(un_804A284C, u8*, 3) = M2C_FIELD(ptr1, u8*, 0xC);
+            un_804A284C[0x12A] = state->selectedIdx;
+            un_804A284C[0x12B] = un_804D6EDC[state->selectedIdx];
+            M2C_FIELD(un_804A284C, u8*, 1) = state->x29B;
+            M2C_FIELD(un_804A284C, u8*, 2) = state->x29C;
+            M2C_FIELD(un_804A284C, u8*, 3) = state->x2B8;
         } else {
             if (un_80304870() != 0) {
-                s16 val = un_804D6EDC[M2C_FIELD(data, s16*, 0x298)];
+                s16 val = un_804D6EDC[state->selectedIdx];
                 un_803067BC(0, 0);
-                M2C_FIELD(data, u16*, 0x298) = un_803062BC(val);
+                state->selectedIdx = un_803062BC(val);
             }
-            un_804A284C[0x12A] = M2C_FIELD(data, s16*, 0x298);
-            un_804A284C[0x12B] = un_804D6EDC[M2C_FIELD(data, s16*, 0x298)];
+            un_804A284C[0x12A] = state->selectedIdx;
+            un_804A284C[0x12B] = un_804D6EDC[state->selectedIdx];
             M2C_FIELD(un_804A284C, u8*, 1) = 0;
             M2C_FIELD(un_804A284C, u8*, 2) = 0;
             M2C_FIELD(un_804A284C, u8*, 3) = 0;
         }
 
-        if (un_80304924(un_804D6EDC[M2C_FIELD(data, s16*, 0x298)]) != 0) {
-            un_80304988(un_804D6EDC[M2C_FIELD(data, s16*, 0x298)]);
+        if (un_80304924(un_804D6EDC[state->selectedIdx]) != 0) {
+            un_80304988(un_804D6EDC[state->selectedIdx]);
         }
     }
 
-    if (M2C_FIELD(data, void**, 0x27C) != NULL) {
+    if (state->gobj != NULL) {
         if (arg0 != 0) {
-            HSD_GObjPLink_80390228(M2C_FIELD(data, HSD_GObj**, 0x27C));
+            HSD_GObjPLink_80390228(state->gobj);
         }
-        M2C_FIELD(data, void**, 0x27C) = NULL;
+        state->gobj = NULL;
     }
 
     if (arg0 != 0) {
@@ -575,18 +560,18 @@ void un_803148E4(s32 arg0)
         M2C_FIELD(archive, void**, 0) = NULL;
     }
 
-    if (M2C_FIELD(ptr2, void**, 0) != NULL && arg0 != 0) {
-        HSD_GObjPLink_80390228(M2C_FIELD(ptr2, HSD_GObj**, 0));
+    if (state->gobj_2C4 != NULL && arg0 != 0) {
+        HSD_GObjPLink_80390228(state->gobj_2C4);
     }
 
-    if (M2C_FIELD(ptr1, void**, 0) != NULL) {
-        HSD_GObjProc_8038FED4(M2C_FIELD(ptr1, HSD_GObj**, 0));
+    if (state->gobj_2AC != NULL) {
+        HSD_GObjProc_8038FED4(state->gobj_2AC);
         if (arg0 != 0) {
-            HSD_GObjPLink_80390228(M2C_FIELD(ptr1, HSD_GObj**, 0));
+            HSD_GObjPLink_80390228(state->gobj_2AC);
         }
     }
 
-    if (M2C_FIELD(ptr1, void**, 4) != NULL && arg0 != 0) {
-        HSD_GObjPLink_80390228(M2C_FIELD(ptr1, HSD_GObj**, 4));
+    if (state->gobj_2B0 != NULL && arg0 != 0) {
+        HSD_GObjPLink_80390228(state->gobj_2B0);
     }
 }
