@@ -4,6 +4,7 @@
 #include "toy.h"
 #include "types.h"
 
+#include "if/textlib.h"
 #include "if/types.h"
 #include "lb/lbaudio_ax.h"
 
@@ -63,7 +64,23 @@ void tyFigupon_80314AA8(HSD_JObj* jobj, char* anim_str, char* matanim_str,
     HSD_JObjReqAnimAll(jobj, 0.0f);
 }
 
-/// #un_80314B54
+s32 un_80314B54(void)
+{
+    s32 i;
+    s32 count = 0;
+
+    for (i = 0; i < 0x125; i++) {
+        if (un_80304CC8(i) != 0) {
+            if (un_803048C0(i) != 0) {
+                s32 result = (s32) un_803060BC(i, 6);
+                if (result != 8 && (u32) result > 1) {
+                    count++;
+                }
+            }
+        }
+    }
+    return count;
+}
 
 void tyFigupon_80314BE4(HSD_GObj* gobj, int unused)
 {
