@@ -33,10 +33,17 @@ typedef struct _ftYoshiAttributes { // x2D4 (fp->dat_attrs)
     float x44;
     int x48;
     int x4C;
-    u8 pad_x50[0x6C - 0x50];
+    int x50;
+    u8 pad_x54[0x6C - 0x54];
     float specials_start_gravity;
     float specials_start_terminal_vel;
-    u8 pad_x74[0x114 - 0x74];
+    u8 pad_x74[0x7C - 0x74];
+    float x7C;
+    u8 pad_x80[0x8C - 0x80];
+    float x8C;
+    u8 pad_x90[0xcc - 0x90];
+    float xCC;
+    u8 pad_xD0[0x114 - 0xD0];
     float x114;
     float x118;
     float x11C;
@@ -85,7 +92,15 @@ union ftYoshi_MotionVars {
     } specialn;
     struct ftYoshi_SpecialSVars {
         /* fp+2340 */ int x0;
-        /* fp+2344 */ u8 x4[0x30 - 0x4];
+        /* fp+2344 */ u8 x4[0xC - 0x4];
+        /* fp+234C */ int xC;
+        /* fp+2350 */ f32 x10;
+        /* fp+2354 */ f32 x14;
+        /* fp+2358 */ f32 x18;
+        /* fp+235C */ f32 x1C;
+        /* fp+2360 */ f32 x20;
+        /* fp+2364 */ f32 x24;
+        /* fp+2368 */ u8 x28[0x30 - 0x28];
         /* fp+2370 */ int x30;
     } specials;
     struct ftYoshi_SpecialHiVars {
