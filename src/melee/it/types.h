@@ -561,6 +561,7 @@ struct Item {
         itKinoko_ItemVars kinoko;
         itKirbyHammer_ItemVars kirbyhammer;
         itKlap_ItemVars klap;
+        itLeadead_ItemVars leadead;
         itLGun_ItemVars lgun;
         itLGunBeam_ItemVars lgunbeam;
         itLGunRay_ItemVars lgunray;
