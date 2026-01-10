@@ -734,10 +734,12 @@ void mnDataDel_8024FE4C(u8 arg0)
     for (i = 0; i < 6; i++) {
         item_jobj = HSD_JObjLoadJoint(item_model->joint);
         HSD_JObjAddAnimAll(item_jobj, item_model->animjoint,
-                           item_model->matanim_joint, item_model->shapeanim_joint);
+                           item_model->matanim_joint,
+                           item_model->shapeanim_joint);
         HSD_JObjReqAnimAll(item_jobj, (f32) i);
         HSD_JObjAnimAll(item_jobj);
-        HSD_JObjAddChild((HSD_JObj*) data->x10[((s32*) &menu_data->x3C)[i]], item_jobj);
+        HSD_JObjAddChild((HSD_JObj*) data->x10[((s32*) &menu_data->x3C)[i]],
+                         item_jobj);
         mnDataDel_8024EBC8(item_jobj, (u8) i, (u8) (data->x0 == i));
         is_deleted = ((u8*) data)[i + 3];
         lb_80011E24(item_jobj, &sp20, 1, -1);
@@ -779,10 +781,21 @@ void mnDataDel_80250170(void)
     mn_804A04F0.cur_menu = 0x18;
     mn_804A04F0.hovered_selection = 0;
     mnDataDel_804D6C6C = NULL;
-    lbArchive_LoadSections(mn_804D6BB8, (void**) model, (char*) data + 0xA0,
-                           &model->animjoint, (char*) data + 0xB8,
-                           &model->matanim_joint, (char*) data + 0xD4,
-                           &model->shapeanim_joint);
+    lbArchive_LoadSections(
+        mn_804D6BB8,
+        (void**) &model[0].joint, (char*) data + 0xA0,
+        &model[0].animjoint, (char*) data + 0xB8,
+        &model[0].matanim_joint, (char*) data + 0xD4,
+        &model[0].shapeanim_joint, (char*) data + 0xF4,
+        &model[1].joint, (char*) data + 0x118,
+        &model[1].animjoint, (char*) data + 0x134,
+        &model[1].matanim_joint, (char*) data + 0x154,
+        &model[1].shapeanim_joint, (char*) data + 0x178,
+        &model[2].joint, (char*) data + 0x19C,
+        &model[2].animjoint, (char*) data + 0x1B4,
+        &model[2].matanim_joint, (char*) data + 0x1D0,
+        &model[2].shapeanim_joint, (char*) data + 0x1F0,
+        NULL);
     mnDataDel_8024FE4C(0);
     proc = HSD_GObjProc_8038FD54(GObj_Create(0, 1, 0x80), fn_8024F840, 0);
     proc->flags_3 = HSD_GObj_804D783C;
