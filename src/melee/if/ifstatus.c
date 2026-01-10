@@ -103,8 +103,8 @@ inline void jobj_unk_x(UnkX* value, s32 i)
     //@c8
     ASSERT_NOT_NULL(jobj_r30, 993);
     //@e0
-    if (fabsf_bitwise(jobj_r30->translate.x) <
-        100.0f) { // 100.0f @ lbl_804DDA6C
+    if (fabsf_bitwise(jobj_r30->translate.x) < 100.0f)
+    { // 100.0f @ lbl_804DDA6C
         //@100
         jobj_r30 = value->x54_jobj[i];
         //@108
@@ -186,8 +186,8 @@ void ifStatus_PercentOnDeathAnimationThink(UnkX* value, s32 arg1, s32 arg2)
     {
         HSD_JObj* jobj_r30 = value->x54_jobj[i];
         ASSERT_NOT_NULL(jobj_r30, 993);
-        if (fabsf_bitwise(jobj_r30->translate.x) <
-            100.0f) { // 100.0f @ lbl_804DDA6C
+        if (fabsf_bitwise(jobj_r30->translate.x) < 100.0f)
+        { // 100.0f @ lbl_804DDA6C
             float f = (&value->x34_vec.x)[i];
             jobj_r30 = (void*) jobj_get(jobj_r30, value, i);
             ASSERT_NOT_NULL(jobj_r30, 1102);

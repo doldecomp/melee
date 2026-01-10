@@ -532,7 +532,8 @@ void ftFx_SpecialAirNLoop_Anim(HSD_GObj* gobj)
                 launchAngle = da->x10_FOX_BLASTER_ANGLE;
             }
 
-            else {
+            else
+            {
                 launchAngle = M_PI - da->x10_FOX_BLASTER_ANGLE;
             }
 

@@ -2074,8 +2074,8 @@ void mn_8022CC28(HSD_GObj* gp)
         mn_804D6BC8.cooldown = 5;
         mn_804A04F0.entering_menu = 1;
         gm_801677E8(mn_8022C7CC_inline());
-        switch ((RegMatchMenuSelection)
-                    mn_804A04F0.hovered_selection) { /* irregular */
+        switch ((RegMatchMenuSelection) mn_804A04F0.hovered_selection)
+        { /* irregular */
         case SEL_REG_CLASSIC:
             lbAudioAx_80024030(1);
             data = gm_801A4B9C();
@@ -2151,8 +2151,8 @@ void mn_8022CE6C(HSD_GObj* gp)
     mn_804A04F0.buttons = buttons;
     if (buttons & MenuEvent_Forward) {
         mn_804A04F0.entering_menu = 1;
-        switch ((DataMenuSelection)
-                    mn_804A04F0.hovered_selection) { /* irregular */
+        switch ((DataMenuSelection) mn_804A04F0.hovered_selection)
+        { /* irregular */
         case SEL_DATA_SNAP:
             lbAudioAx_80024030(1);
             mnSnap_80257F24();

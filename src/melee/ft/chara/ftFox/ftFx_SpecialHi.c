@@ -750,7 +750,8 @@ void ftFx_SpecialHiBound_Coll(HSD_GObj* gobj)
         }
     }
 
-    else {
+    else
+    {
         ft_80084104(gobj);
     }
 }
