@@ -42,11 +42,11 @@ void mnDiagram2_80245178(s32);
 void fn_80243D40(HSD_GObj*);
 
 void mnDiagram2_802453B0(void) {
-    mn_unk1* data = &mn_804A04F0;
+    MenuFlow* data = &mn_804A04F0;
     HSD_GObj* gobj;
 
     data->x10 = 1;
-    data->x2 = 0;
+    data->hovered_selection = 0;
     mnDiagram2_80245178(0);
     gobj = HSD_GObjProc_8038FD54(GObj_Create(0, 1, 0x80), fn_80243D40, 0);
     {
