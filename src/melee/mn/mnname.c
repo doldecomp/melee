@@ -5,6 +5,7 @@
 
 #include <sysdolphin/baselib/jobj.h>
 #include <melee/gm/gmmain_lib.h>
+#include <melee/gm/types.h>
 #include <melee/lb/lblanguage.h>
 
 extern char mnName_StringTerminator;
@@ -58,7 +59,7 @@ char* GetNameText(int slot)
     if (!IsNameValid(slot)) {
         return NULL;
     }
-    return (char*) ((u8*) GetPersistentNameData((u8) slot) + 0x198);
+    return GetPersistentNameData((u8) slot)->namedata;
 }
 int GetNameCount(void)
 {
@@ -97,8 +98,8 @@ void fn_802377A4(void) {}
 
 bool IsNameValid(int slot)
 {
-    char* data = (char*) GetPersistentNameData((u8) slot);
-    char first_char = data[0x198];
+    struct gmm_x2FF8_inner* data = GetPersistentNameData((u8) slot);
+    char first_char = data->namedata[0];
     char term = mnName_StringTerminator;
     if (term == first_char) {
         return false;
@@ -145,12 +146,12 @@ s32 mnName_GetPageCount(void)
     i = 0;
 
     for (; i < 0x78; i++) {
-        char* data;
+        struct gmm_x2FF8_inner* data;
         char first_char;
         char term;
         s32 valid;
-        data = (char*) GetPersistentNameData((u8) i);
-        first_char = data[0x198];
+        data = GetPersistentNameData((u8) i);
+        first_char = data->namedata[0];
         term = mnName_StringTerminator;
         if (term == first_char) {
             valid = 0;
@@ -181,12 +182,12 @@ s32 mnName_GetColumnCount(void)
     i = zero;
 
     for (; i < 0x78; i++) {
-        char* data;
+        struct gmm_x2FF8_inner* data;
         char first_char;
         char term;
         s32 valid;
-        data = (char*) GetPersistentNameData((u8) i);
-        first_char = data[0x198];
+        data = GetPersistentNameData((u8) i);
+        first_char = data->namedata[0];
         term = mnName_StringTerminator;
         if (term == first_char) {
             valid = 0;
