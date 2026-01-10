@@ -94,7 +94,7 @@ typedef struct _MenuInputState {
 /* 22EB04 */ void mn_8022EB04(void* user_data);
 /* 22EB24 */ s32 mn_8022EB24(s32, s32);
 /* 22EB78 */ s32 mn_8022EB78(s32);
-/* 22EBDC */ UNK_RET mn_8022EBDC(UNK_PARAMS);
+/* 22EBDC */ void mn_8022EBDC(void);
 /* 22EC18 */ float mn_8022EC18(HSD_JObj*, float*, HSD_TypeMask);
 /* 22ED6C */ float mn_8022ED6C(HSD_JObj*, AnimLoopSettings*);
 /* 22EE84 */ float mn_8022EE84(HSD_JObj* arg0, AnimLoopSettings* arg1,
@@ -104,13 +104,13 @@ typedef struct _MenuInputState {
 /* 22F138 */ void mn_8022F138(u16, u16);
 /* 22F1A8 */ void mn_8022F1A8(u16, u16);
 /* 22F218 */ bool mn_8022F218(void);
-/* 22F268 */ UNK_RET mn_8022F268(UNK_PARAMS);
+/* 22F268 */ void mn_8022F268(void);
 /* 22F298 */ f32 mn_8022F298(HSD_JObj*);
-/* 22F360 */ UNK_RET mn_8022F360(HSD_AObj*, void*, u32);
+/* 22F360 */ void mn_8022F360(HSD_AObj* aobj, void* obj, u32 arg2);
 /* 22F3D8 */ void mn_8022F3D8(HSD_JObj*, u8, HSD_TypeMask);
 /* 22F410 */ int mn_8022F410(float* x, float* target, float dx);
 /* 22F470 */ int mn_8022F470(int* x, int* target, int dx);
-/* 22F4CC */ UNK_RET mn_8022F4CC(UNK_PARAMS);
+/* 22F4CC */ void mn_8022F4CC(void);
 
 /* 4A04F0 */ extern MenuFlow mn_804A04F0;
 /* 4D6BB8 */ extern HSD_Archive* mn_804D6BB8;
