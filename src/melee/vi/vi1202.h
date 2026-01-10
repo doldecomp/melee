@@ -23,7 +23,8 @@ typedef struct CrowdConfig {
     /* 0x0C */ f32 angle_min;
     /* 0x10 */ f32 angle_max;
     /* 0x14 */ f32 angle_mult;
-    /* 0x18 */ u8 pad18[0x20 - 0x18];
+    /* 0x18 */ f32 x18;
+    /* 0x1C */ s32 x1C;
     /// Cheer/gasp timing limits
     /* 0x20 */ s32 cheer_limit;
     /* 0x24 */ s32 x24;
@@ -45,7 +46,7 @@ typedef struct CrowdConfig {
 /* 32110C */ void un_8032110C(HSD_GObj*);
 /* 321130 */ void un_80321130(HSD_GObj*);
 /* 321154 */ void un_80321154(HSD_GObj*);
-/* 321178 */ UNK_RET un_80321178(UNK_PARAMS);
+/* 321178 */ void un_80321178(void);
 /* 321294 */ void un_80321294(HSD_GObj*);
 /* 321300 */ void un_80321300_OnEnter(UNK_T);
 /* 3218E0 */ void un_803218E0_OnFrame(void);
@@ -53,14 +54,14 @@ typedef struct CrowdConfig {
 /* 321950 */ void un_80321950(vi1202_UnkStruct*);
 /* 3219AC */ void fn_803219AC(HSD_GObj*);
 /* 321A00 */ void un_80321A00(HSD_GObj*);
-/* 321AF4 */ void un_80321AF4(HSD_GObj*);
+/* 321AF4 */ void un_80321AF4(HSD_GObj* gobj);
 /* 321BF8 */ void un_80321BF8(int);
 /* 321C28 */ void un_80321C28(void);
 /* 321C70 */ void un_80321C70(void);
 /* 321CA4 */ void un_80321CA4(s32);
 /* 321CE8 */ void un_80321CE8(void);
-/* 321D30 */ UNK_RET un_80321D30(UNK_PARAMS);
-/* 321EBC */ UNK_RET un_80321EBC(UNK_PARAMS);
+/* 321D30 */ void un_80321D30(int, f32);
+/* 321EBC */ bool un_80321EBC(int, f32);
 /* 32201C */ void un_8032201C(int, s32);
 /* 322178 */ void un_80322178(int);
 /* 322258 */ bool un_80322258(float);

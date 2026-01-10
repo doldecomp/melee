@@ -38,6 +38,7 @@ static GXColor erase_colors_vi0401;
 void un_8031D030(CharacterKind char_kind, int costume)
 {
     Vec3 pos;
+    un_804D6F58_t* ptr;
 
     Camera_80028B9C(6);
     lb_8000FCDC();
@@ -59,14 +60,14 @@ void un_8031D030(CharacterKind char_kind, int costume)
     Player_SetSlottype(0, Gm_PKind_Demo);
     Player_SetFacingDirection(0, 1.0f);
 
-    pos.x = un_804D6F58->x38.x;
-    pos.y = un_804D6F58->x38.y;
-    pos.z = un_804D6F58->x38.z;
+    ptr = un_804D6F58;
+    HSD_ASSERT(0x3D3, ptr != NULL);
+    pos = ptr->x38;
     Player_80032768(0, &pos);
     Player_80036F34(0, 8);
 
     lbAudioAx_80026F2C(0x18);
-    lbAudioAx_8002702C(8, 0x10000000000ULL);
+    lbAudioAx_8002702C(8, (u64) 0x100 << 32);
     lbAudioAx_80027168();
     lbAudioAx_80027648();
     lbAudioAx_80024634(0x88);

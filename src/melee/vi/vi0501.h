@@ -11,7 +11,7 @@
                               int spawn_mode, int spawn_count);
 /* 31DC80 */ void vi_8031DC80(HSD_GObj*, int);
 /* 31DD14 */ void fn_8031DD14(HSD_GObj* gobj);
-/* 31DE58 */ void un_8031DE58_OnEnter(UNK_T);
+/* 31DE58 */ void un_8031DE58_OnEnter(void* arg);
 /* 31E0F0 */ void vi_8031E0F0_OnFrame(void);
 /* 31E110 */ void un_8031E110(int arg0, int arg1, int arg2);
 /* 4D7004 */ extern un_804D7004_t un_804D6FA8;

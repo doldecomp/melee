@@ -1,16 +1,20 @@
-#include "vi/vi1202.h"
-
 #include "vi.h"
+
+#include "vi/vi1202.static.h"
 
 #include "ft/fighter.h"
 #include "ft/ftlib.h"
+#include "gm/gm_1601.h"
 #include "gm/gm_unsplit.h"
 #include "lb/lb_00F9.h"
 #include "lb/lbaudio_ax.h"
+#include "pl/player.h"
+#include "pl/plbonuslib.h"
 
 #include <baselib/aobj.h>
 #include <baselib/cobj.h>
 #include <baselib/gobj.h>
+#include <baselib/gobjobject.h>
 #include <baselib/gobjproc.h>
 #include <baselib/jobj.h>
 
@@ -42,6 +46,31 @@ void un_80321130(HSD_GObj* gobj)
 void un_80321154(HSD_GObj* gobj)
 {
     HSD_JObjAnimAll(GET_JOBJ(gobj));
+}
+
+void un_80321178(void)
+{
+    s32 i;
+    HSD_GObj* gobj;
+    HSD_JObj* jobj;
+
+    i = 0;
+    while ((*un_804D7040)[i] != NULL) {
+        gobj = GObj_Create(0xE, 0xF, 0);
+        jobj = HSD_JObjLoadJoint((*un_804D7040)[i]->joint);
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+        GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0xB, 0);
+        gm_8016895C(jobj, (*un_804D7040)[i], 0);
+        HSD_JObjReqAnimAll(jobj, un_804DE140);
+        HSD_JObjAnimAll(jobj);
+        HSD_GObjProc_8038FD54(gobj, un_80321154, 0x17);
+        lb_80011E24(jobj, &un_804D704C, 2, -1);
+        i++;
+    }
+    lbAudioAx_80026F2C(0x18);
+    lbAudioAx_8002702C(8, 0x0020000000000000ULL);
+    lbAudioAx_80027168();
+    lbAudioAx_80027648();
 }
 
 void un_80321294(HSD_GObj* gobj)
@@ -157,8 +186,8 @@ void un_80321AF4(HSD_GObj* gobj)
             if (ftLib_8008731C(cur) == 0) {
                 ftLib_80086644(cur, &pos);
 
-                if (pos.y < gCrowdConfig->blastzone_y_offset +
-                                M2C_FIELD(mpLib, f32*, 0x14))
+                if (pos.y <
+                    gCrowdConfig->blastzone_y_offset + *(f32*) (mpLib + 0x14))
                 {
                     data->x24 = data->x24 + 1;
                 } else {
@@ -184,9 +213,7 @@ void un_80321AF4(HSD_GObj* gobj)
 
 void un_80321BF8(int arg0)
 {
-    vi1202_UnkStruct* data;
-    char pad[8];
-    data = un_804D7050;
+    vi1202_UnkStruct* data = un_804D7050;
     data->x2C = lbAudioAx_800240B4(arg0);
 }
 
@@ -203,13 +230,16 @@ void un_80321C70(void)
 {
     vi1202_UnkStruct* data = un_804D7050;
     CrowdConfig* vdata = gCrowdConfig;
-    s32 x18 = data->x18;
+    s32 x18;
+
+    x18 = data->x18;
     if (x18 >= vdata->max_gasp_count) {
         return;
     }
-    if (x18 >= vdata->x24) {
-        data->x1C = 1;
+    if (x18 < vdata->x24) {
+        return;
     }
+    data->x1C = 1;
 }
 
 void un_80321CA4(s32 arg)
@@ -226,6 +256,121 @@ void un_80321CE8(void)
         lbAudioAx_800236B8(data->x28);
     }
     data->x28 = -1;
+}
+
+void un_80321D30(int arg0, f32 arg1)
+{
+    s32 cat;
+    vi1202_UnkStruct* data = un_804D7050;
+    cat = un_80322298(arg1);
+
+    if (cat >= 2) {
+        if (un_80321EBC(arg0, arg1) != 0) {
+            vi1202_UnkStruct* data2 = un_804D7050;
+            if (lbAudioAx_80023710(data2->x28) != 0) {
+                lbAudioAx_800236B8(data2->x28);
+            }
+            data2->x28 = -1;
+            return;
+        }
+    }
+
+    switch (cat) {
+    case 3: {
+        vi1202_UnkStruct* data2 = un_804D7050;
+        if (lbAudioAx_80023710(data2->x28) != 0) {
+            lbAudioAx_800236B8(data2->x28);
+        }
+        data2->x28 = -1;
+        data2->x28 = lbAudioAx_8002411C(0x140);
+        break;
+    }
+    case 2: {
+        vi1202_UnkStruct* data2 = un_804D7050;
+        if (lbAudioAx_80023710(data2->x28) != 0) {
+            lbAudioAx_800236B8(data2->x28);
+        }
+        data2->x28 = -1;
+        data2->x28 = lbAudioAx_8002411C(0x141);
+        break;
+    }
+    case 1: {
+        vi1202_UnkStruct* data2 = un_804D7050;
+        if (lbAudioAx_80023710(data2->x28) != 0) {
+            lbAudioAx_800236B8(data2->x28);
+        }
+        data2->x28 = -1;
+        data2->x28 = lbAudioAx_8002411C(0x142);
+        break;
+    }
+    }
+
+    if ((u32) arg0 != 0) {
+        if ((u32) data->xC == (u32) arg0) {
+            vi1202_UnkStruct* data3 = un_804D7050;
+            CrowdConfig* vdata = gCrowdConfig;
+            if (data3->x18 < vdata->max_gasp_count) {
+                if (data3->x18 >= vdata->x24) {
+                    data3->x1C = 1;
+                }
+            }
+        }
+    }
+}
+bool un_80321EBC(int arg0, f32 arg1)
+{
+    vi1202_UnkStruct* data = un_804D7050;
+    HSD_GObj* gobj;
+    s32 port;
+
+    gobj = ftLib_8008741C(arg0);
+    if (gobj == NULL) {
+        return 0;
+    }
+
+    port = ftLib_800874BC(gobj);
+    if (Player_8003248C(ftLib_80086BE0(gobj), port) == 1) {
+        return 0;
+    }
+
+    if (ftLib_80087120(gobj) < gCrowdConfig->x1C) {
+        return 0;
+    }
+    if (data->x10 < gCrowdConfig->cheer_limit) {
+        return 0;
+    }
+    if ((u32) data->xC == (u32) arg0) {
+        return 0;
+    }
+
+    data->x14 = ftLib_8008746C(gobj);
+    if ((u32) (data->x14 - 0x83D60) == 0) {
+        return 0;
+    }
+
+    {
+        vi1202_UnkStruct* data2 = un_804D7050;
+        s32 sfx;
+        if (lbAudioAx_80023710(data2->x2C) != 0) {
+            lbAudioAx_800236B8(data2->x2C);
+        }
+        data2->x2C = -1;
+        if (un_80322298(arg1) == 3) {
+            sfx = 0x140;
+        } else {
+            sfx = 0x141;
+        }
+        un_804D7050->x2C = lbAudioAx_800240B4(sfx);
+    }
+
+    data->xC = arg0;
+    data->x18 = 0;
+
+    port = ftLib_800874BC(gobj);
+    data->x10 = port;
+    pl_8003FDA0(ftLib_80086BE0(gobj), port);
+
+    return 1;
 }
 
 void un_8032201C(int arg0, s32 cat)
@@ -316,16 +461,17 @@ void un_80322178(int arg)
 bool un_80322258(float arg)
 {
     f32 val2c = gCrowdConfig->horiz_margin;
-    f32 val18 = M2C_FIELD(mpLib_80458868, f32*, 0x18);
-    f32 val1c;
-    if (arg >= val2c + val18) {
-        val1c = M2C_FIELD(mpLib_80458868, f32*, 0x1c);
-        if (arg > val1c - val2c) {
-            return TRUE;
-        }
-        return FALSE;
+
+    if (arg < val2c + M2C_FIELD(mpLib_80458868, f32*, 0x18)) {
+        goto ret_true;
     }
-    return TRUE;
+    if (!(arg > M2C_FIELD(mpLib_80458868, f32*, 0x1C) - val2c)) {
+        goto ret_false;
+    }
+ret_true:
+    return 1;
+ret_false:
+    return 0;
 }
 
 s32 un_80322298(float arg)
@@ -366,20 +512,80 @@ void un_80322314(void)
     data->x20 = 1;
 }
 
+void un_8032233C(int arg0, int arg1)
+{
+    vi1202_UnkStruct* data = un_804D7050;
+    HSD_GObj* gobj0;
+    f32 kb_mag;
+    s32 cat;
+
+    gobj0 = ftLib_8008741C(arg0);
+    kb_mag = ftLib_80087454(ftLib_8008741C(arg1));
+
+    if (kb_mag >= gCrowdConfig->kb_threshold_high) {
+        cat = 3;
+    } else if (kb_mag >= gCrowdConfig->kb_threshold_mid) {
+        cat = 2;
+    } else if (kb_mag >= gCrowdConfig->kb_threshold_low) {
+        cat = 1;
+    } else {
+        cat = 0;
+    }
+
+    if (cat == 0) {
+        return;
+    }
+
+    if (gobj0 != NULL) {
+        if (ftLib_80087454(gobj0) >= un_804DE150) {
+            un_80321D30(arg0, kb_mag);
+            return;
+        }
+    }
+
+    if ((u32) data->x0 == (u32) arg0) {
+        if ((f32) data->x4 < gCrowdConfig->x18) {
+            f32 max = data->x8;
+            if (kb_mag > max) {
+                max = kb_mag;
+            }
+            un_80321D30(arg0, max);
+            return;
+        }
+    }
+
+    switch (cat) {
+    case 3:
+        un_80321CA4(0x144);
+        break;
+    case 2:
+        un_80321CA4(0x145);
+        break;
+    case 1:
+        un_80321CA4(0x146);
+        break;
+    }
+
+    if (cat == 3 || (cat == 2 && (u32) data->xC == (u32) arg1)) {
+        un_80321C70();
+    }
+}
+
 bool un_803224DC(s32 spawn_id, f32 pos_x, f32 kb_mag)
 {
     CrowdConfig* vdata = gCrowdConfig;
     s32 cat;
     s32 out_of_bounds;
+    s32 tmp_cat;
 
     if (kb_mag >= vdata->kb_threshold_high) {
-        cat = 3;
+        tmp_cat = 3;
     } else if (kb_mag >= vdata->kb_threshold_mid) {
-        cat = 2;
+        tmp_cat = 2;
     } else if (kb_mag >= vdata->kb_threshold_low) {
-        cat = 1;
+        tmp_cat = 1;
     } else {
-        cat = 0;
+        tmp_cat = 0;
     }
 
     {
@@ -387,18 +593,22 @@ bool un_803224DC(s32 spawn_id, f32 pos_x, f32 kb_mag)
         f32 val18 = M2C_FIELD(mpLib_80458868, f32*, 0x18);
         f32 val1c;
 
-        if (pos_x < val2c + val18) {
-            out_of_bounds = 1;
-        } else {
-            val1c = M2C_FIELD(mpLib_80458868, f32*, 0x1C);
-            if (pos_x > val1c - val2c) {
-                out_of_bounds = 1;
-            } else {
-                out_of_bounds = 0;
-            }
-        }
-    }
+        cat = tmp_cat;
 
+        if (pos_x < val2c + val18) {
+            goto oob;
+        }
+        val1c = M2C_FIELD(mpLib_80458868, f32*, 0x1C);
+        if (!(pos_x > val1c - val2c)) {
+            goto inb;
+        }
+    oob:
+        out_of_bounds = 1;
+        goto check;
+    inb:
+        out_of_bounds = 0;
+    }
+check:
     if (out_of_bounds != 0) {
         un_8032201C(spawn_id, cat);
     } else {
