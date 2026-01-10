@@ -18,4 +18,6 @@ STATIC_ASSERT(sizeof(struct mnDiagram_804A076C_t) == 0x78);
 /* 4A0750 */ struct mnDiagram_804A0750_t mnDiagram_804A0750;
 /* 4A076C */ struct mnDiagram_804A076C_t mnDiagram_804A076C;
 
+/* 3EE774 */ extern f32 mnDiagram_803EE774[];
+
 #endif

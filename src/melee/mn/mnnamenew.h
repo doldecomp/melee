@@ -13,7 +13,7 @@
 /* 23BFE4 */ UNK_RET WriteCharactersForNameAtIndex(UNK_PARAMS);
 /* 23C148 */ UNK_RET AddCharacterToName(UNK_PARAMS);
 /* 23C290 */ UNK_RET mnNameNew_GlyphVariantInput(UNK_PARAMS);
-/* 23C54C */ UNK_RET mnNameNew_MainInput(UNK_PARAMS);
+/* 23C54C */ void mnNameNew_MainInput(void);
 /* 23CE4C */ UNK_RET mnNameNew_8023CE4C(UNK_PARAMS);
 /* 23CFC8 */ UNK_RET fn_8023CFC8(UNK_PARAMS);
 /* 23D0F8 */ UNK_RET fn_8023D0F8(UNK_PARAMS);
