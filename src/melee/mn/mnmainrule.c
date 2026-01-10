@@ -64,33 +64,35 @@ extern f32 mn_804DBE2C;
 
 /// #mn_80230274
 
-void mn_802307F8(s32 arg0, s32 arg1, s32 arg2) {
-    u8* data = (u8*)arg0;
+void mn_802307F8(s32 arg0, s32 arg1, s32 arg2)
+{
+    u8* data = (u8*) arg0;
     s32 r30 = arg2;
-    
-    if (*(void**)(data + 0x130) != NULL) {
-        HSD_SisLib_803A5CC4(*(void**)(data + 0x130));
-        *(void**)(data + 0x130) = NULL;
+
+    if (*(void**) (data + 0x130) != NULL) {
+        HSD_SisLib_803A5CC4(*(void**) (data + 0x130));
+        *(void**) (data + 0x130) = NULL;
     }
-    
-    if (arg1 == 1 && *(u8*)(data + 2) == 1) {
+
+    if (arg1 == 1 && *(u8*) (data + 2) == 1) {
         r30 = mn_804D4B96;
-    } else if (arg1 == 1 || arg1 == 3 || (u32)(arg1 - 5) <= 1) {
+    } else if (arg1 == 1 || arg1 == 3 || (u32) (arg1 - 5) <= 1) {
         r30 = mn_803EC818[arg1 * 5];
     } else {
         s32 idx = arg1 * 5;
         r30 = mn_803EC818[idx + r30];
     }
-    
+
     {
-        void* sis = HSD_SisLib_803A5ACC(0, 1, mn_804DBE18, mn_804DBE1C, mn_804DBE20, mn_804DBE24, mn_804DBE28);
-        *(void**)(data + 0x130) = sis;
+        HSD_Text* sis = HSD_SisLib_803A5ACC(0, 1, mn_804DBE18, mn_804DBE1C,
+                                            mn_804DBE20, mn_804DBE24, mn_804DBE28);
+        *(void**) (data + 0x130) = sis;
         {
             f32 zero = mn_804DBE2C;
-            *(f32*)((u8*)sis + 0x24) = zero;
-            *(f32*)((u8*)sis + 0x28) = zero;
+            sis->font_size.x = zero;
+            sis->font_size.y = zero;
         }
-        HSD_SisLib_803A6368(sis, (u8)r30);
+        HSD_SisLib_803A6368(sis, (u8) r30);
     }
 }
 /// #mn_802308F0
@@ -109,7 +111,8 @@ int mn_80231634(struct mn_80231634_t* arg0)
     return arg0->x10;
 }
 
-void mn_8023164C(void) {
+void mn_8023164C(void)
+{
     MenuFlow* data;
     u8 prev;
     HSD_GObj* gobj;
@@ -135,11 +138,13 @@ void mn_8023164C(void) {
         break;
     }
 
-    gobj = (HSD_GObj*)HSD_GObjProc_8038FD54(GObj_Create(0, 1, 0x80), fn_8022F538, 0);
-    ((GObjBitfield*)gobj)->render_plink = HSD_GObj_804D783C;
+    gobj = (HSD_GObj*) HSD_GObjProc_8038FD54(GObj_Create(0, 1, 0x80),
+                                             fn_8022F538, 0);
+    ((GObjBitfield*) gobj)->render_plink = HSD_GObj_804D783C;
     HSD_GObj_80390CD4(mn_80230E38(mode));
 }
-void mn_80231714(void) {
+void mn_80231714(void)
+{
     MenuFlow* data;
     u8 prev;
     HSD_GObj* gobj;
@@ -165,8 +170,9 @@ void mn_80231714(void) {
         break;
     }
 
-    gobj = (HSD_GObj*)HSD_GObjProc_8038FD54(GObj_Create(0, 1, 0x80), fn_8022F538, 0);
-    ((GObjBitfield*)gobj)->render_plink = HSD_GObj_804D783C;
+    gobj = (HSD_GObj*) HSD_GObjProc_8038FD54(GObj_Create(0, 1, 0x80),
+                                             fn_8022F538, 0);
+    ((GObjBitfield*) gobj)->render_plink = HSD_GObj_804D783C;
     HSD_GObj_80390CD4(mn_80230E38(mode));
     mn_804D6BD4 = 1;
 }

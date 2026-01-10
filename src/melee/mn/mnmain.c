@@ -682,7 +682,6 @@ void mn_8022EA78(char* buf, int buf_end, u32 num)
 
 #pragma dont_inline off
 
-
 s32 mn_8022EB24(s32 arg0, s32 arg1)
 {
     return (arg0 / powi(10, arg1)) % 10;
