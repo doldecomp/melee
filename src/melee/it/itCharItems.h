@@ -134,6 +134,25 @@ typedef struct {
     /* x108 */ HSD_GObj* owner;    // xE7C
 } itFoxBlaster_ItemVars;
 
+typedef struct itLeadead_ItemVars {
+    /* 0x00 */ u8 pad[0x18];
+    /* 0x18 */ s32 xDEC;
+    /* 0x1C */ u8 pad1b[0x1C];
+    /* 0x38 */ HSD_GObj* x38;
+    /* 0x3C */ f32 x3C;
+    /* 0x40 */ s32 xE14;
+    /* 0x44 */ s32 x44;
+    /* 0x48 */ s32 x48;
+    /* 0x4C */ s32 x4C;
+    /* 0x50 */ s32 x50;
+    /* 0x54 */ u8 pad3[8];
+    /* 0x5C */ s32 xE30_state;
+    /* 0x60 */ Vec3 xE34_a_offset;
+    /* 0x6C */ Vec3 xE40_b_offset;
+    /* 0x78 */ f32 xE4C_scale;
+    /* 0x7C */ itECB xE50;
+} itLeadead_ItemVars;
+
 typedef struct FoxBlasterAttr {
     /* +0 */ float x0;
     /* +4 */ float x4;
