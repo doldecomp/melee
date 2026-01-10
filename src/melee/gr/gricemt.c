@@ -1241,8 +1241,8 @@ void grIceMt_801FA7F0(Ground* gp, s32 arg1, CollData* arg2, s32 arg3,
                       mpLib_GroundEnum arg4, float arg8)
 {
     HSD_GObj* playerGObj = Ground_801C57A4();
-    if ((Ground_801C2BA4(10)) && (playerGObj->user_data))
-    { // && playerGObj->userdata) {
+    if ((Ground_801C2BA4(10)) &&
+        (playerGObj->user_data)) { // && playerGObj->userdata) {
     }
 }
 

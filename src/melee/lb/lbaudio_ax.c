@@ -887,7 +887,7 @@ int fn_800250A0(int arg0, int arg1, int arg2, int arg3)
 
 bool fn_800251EC(HSD_GObj* gobj)
 {
-    void* user_data;
+    lbAudioAx_UserData* ud;
     s32 pad1;
     s32 pad2;
     f32 cam_left;
@@ -906,8 +906,8 @@ bool fn_800251EC(HSD_GObj* gobj)
         goto ret_true;
     }
 
-    user_data = gobj->user_data;
-    if (user_data == NULL) {
+    ud = gobj->user_data;
+    if (ud == NULL) {
         goto ret_true;
     }
 
@@ -919,7 +919,7 @@ bool fn_800251EC(HSD_GObj* gobj)
     if (gobj->user_data == NULL) {
         goto set_flag;
     }
-    entity = M2C_FIELD(gobj->user_data, HSD_GObj**, 0x08);
+    entity = ((lbAudioAx_UserData*) gobj->user_data)->entity;
     if (entity == NULL) {
         goto set_flag;
     }
@@ -965,7 +965,7 @@ check_flag:
     }
 
     if (cam_center < pos.x) {
-        val = M2C_FIELD(user_data, s32*, 0x28);
+        val = ud->pan_right;
         if (!(val > 0x40)) {
             goto store_pan;
         }
@@ -979,7 +979,7 @@ check_flag:
         if (!(cam_center > pos.x)) {
             goto store_pan;
         }
-        val = M2C_FIELD(user_data, s32*, 0x24);
+        val = ud->pan_left;
         if (!(val < 0x40)) {
             goto store_pan;
         }
@@ -992,7 +992,7 @@ check_flag:
     }
 
 store_pan:
-    M2C_FIELD(user_data, s32*, 0x2C) = (s32) pan;
+    ud->x2C.pan = (s32) pan;
     return false;
 
 ret_true:
@@ -1010,7 +1010,7 @@ ret_true:
 
 bool fn_80025B44(HSD_GObj* gobj)
 {
-    void* user_data;
+    lbAudioAx_UserData* ud;
     s32 target;
     s32 current;
     s32 end_frame;
@@ -1022,15 +1022,15 @@ bool fn_80025B44(HSD_GObj* gobj)
         goto end;
     }
 
-    user_data = gobj->user_data;
-    if (user_data == NULL) {
+    ud = gobj->user_data;
+    if (ud == NULL) {
         goto end;
     }
 
-    end_frame = M2C_FIELD(user_data, s32*, 0x38);
-    current_frame = M2C_FIELD(user_data, s32*, 0x34);
-    target = M2C_FIELD(user_data, s32*, 0x28);
-    current = M2C_FIELD(user_data, s32*, 0x24);
+    end_frame = ud->end_frame;
+    current_frame = ud->current_frame;
+    target = ud->pan_right;
+    current = ud->pan_left;
 
     if (current_frame > end_frame) {
         current_frame = end_frame;
@@ -1057,13 +1057,13 @@ bool fn_80025B44(HSD_GObj* gobj)
         result = 0x40;
     }
 
-    M2C_FIELD(user_data, s32*, 0x2C) = result;
+    ud->x2C.pan = result;
 end:
     return false;
 }
 bool fn_80025CBC(HSD_GObj* gobj)
 {
-    void* user_data;
+    lbAudioAx_UserData* ud;
     s32 target;
     s32 current;
     s32 end_frame;
@@ -1075,15 +1075,15 @@ bool fn_80025CBC(HSD_GObj* gobj)
         goto end;
     }
 
-    user_data = gobj->user_data;
-    if (user_data == NULL) {
+    ud = gobj->user_data;
+    if (ud == NULL) {
         goto end;
     }
 
-    end_frame = M2C_FIELD(user_data, s32*, 0x38);
-    current_frame = M2C_FIELD(user_data, s32*, 0x34);
-    target = M2C_FIELD(user_data, s32*, 0x28);
-    current = M2C_FIELD(user_data, s32*, 0x24);
+    end_frame = ud->end_frame;
+    current_frame = ud->current_frame;
+    target = ud->pan_right;
+    current = ud->pan_left;
 
     if (current_frame > end_frame) {
         current_frame = end_frame;
@@ -1110,13 +1110,13 @@ bool fn_80025CBC(HSD_GObj* gobj)
         result = 0x40;
     }
 
-    M2C_FIELD(user_data, s32*, 0x2C) = 0x7F - result;
+    ud->x2C.pan = 0x7F - result;
 end:
     return false;
 }
 bool fn_80025E38(HSD_GObj* gobj)
 {
-    void* user_data;
+    lbAudioAx_UserData* ud;
     s32 end_frame;
     s32 current_frame;
     s32 end_val;
@@ -1128,20 +1128,20 @@ bool fn_80025E38(HSD_GObj* gobj)
         goto end;
     }
 
-    user_data = gobj->user_data;
-    if (user_data == NULL) {
+    ud = gobj->user_data;
+    if (ud == NULL) {
         goto end;
     }
 
-    current_frame = M2C_FIELD(user_data, s32*, 0x34);
-    end_frame = M2C_FIELD(user_data, s32*, 0x38);
+    current_frame = ud->current_frame;
+    end_frame = ud->end_frame;
 
     if (current_frame > end_frame) {
         goto set_7f;
     }
 
-    start_val = M2C_FIELD(user_data, s32*, 0x18);
-    end_val = M2C_FIELD(user_data, s32*, 0x1C);
+    start_val = ud->start_val;
+    end_val = ud->end_val;
 
     if (start_val < end_val) {
         diff = (f32) end_val - (f32) start_val;
@@ -1149,7 +1149,7 @@ bool fn_80025E38(HSD_GObj* gobj)
             diff = -diff;
         }
         ratio = (f32) current_frame / (f32) end_frame;
-        M2C_FIELD(user_data, s32*, 0x20) = start_val + (s32) (ratio * diff);
+        ud->x20 = start_val + (s32) (ratio * diff);
         goto end;
     }
 
@@ -1158,11 +1158,11 @@ bool fn_80025E38(HSD_GObj* gobj)
         diff = -diff;
     }
     ratio = (f32) current_frame / (f32) end_frame;
-    M2C_FIELD(user_data, s32*, 0x20) = end_val - (s32) (ratio * diff);
+    ud->x20 = end_val - (s32) (ratio * diff);
     goto end;
 
 set_7f:
-    M2C_FIELD(user_data, s32*, 0x20) = 0x7F;
+    ud->x20 = 0x7F;
 
 end:
     return false;
@@ -1246,13 +1246,13 @@ return_null:
 
 bool lbAudioAx_800264E4(void* data)
 {
-    u8* inner;
+    lbAudioAx_UserData* inner;
     if (data != NULL) {
-        inner = M2C_FIELD(data, u8**, 0x2C);
+        inner = ((lbAudioAx_UserData*) data)->x2C.inner;
         if (inner == NULL) {
             return -1;
         }
-        return M2C_FIELD(inner, s32*, 0x30);
+        return inner->voice_id;
     }
     return -1;
 }
@@ -1268,16 +1268,16 @@ bool lbAudioAx_80026510(HSD_GObj* arg0)
         goto end;
     }
 
-    gobj = M2C_FIELD(HSD_GObj_Entities, HSD_GObj**, 0xF8);
+    gobj = ((HSD_GObj**) HSD_GObj_Entities)[0x3E];
 
     while (gobj != NULL) {
-        void* data = gobj->user_data;
+        lbAudioAx_UserData* ud = gobj->user_data;
         next = gobj->next;
 
-        if (data != NULL) {
-            if (M2C_FIELD(data, HSD_GObj**, 0x08) == arg0) {
+        if (ud != NULL) {
+            if (ud->entity == arg0) {
                 s32 voice_id;
-                voice_id = M2C_FIELD(data, s32*, 0x30);
+                voice_id = ud->voice_id;
                 if (voice_id != -1) {
                     AXDriverKeyOff(voice_id);
                 }
@@ -1303,14 +1303,14 @@ bool lbAudioAx_800265C4(HSD_GObj* arg0, int arg1)
 
     PAD_STACK(16);
 
-    gobj = M2C_FIELD(HSD_GObj_Entities, HSD_GObj**, 0xF8);
+    gobj = ((HSD_GObj**) HSD_GObj_Entities)[0x3E];
 
     while (gobj != NULL) {
-        int* user_data = gobj->user_data;
-        if (user_data != NULL) {
-            if ((u32) user_data[2] == (u32) arg0) {
-                if (user_data[12] != -1 && user_data[12] == arg1) {
-                    AXDriverKeyOff(user_data[12]);
+        lbAudioAx_UserData* ud = gobj->user_data;
+        if (ud != NULL) {
+            if (ud->entity == arg0) {
+                if (ud->voice_id != -1 && ud->voice_id == arg1) {
+                    AXDriverKeyOff(ud->voice_id);
                     if (gobj != NULL) {
                         HSD_GObjPLink_80390228(gobj);
                     }
