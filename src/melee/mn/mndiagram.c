@@ -1,5 +1,7 @@
 #include "mndiagram.static.h"
 
+#include "mnname.h"
+
 u8 mnDiagram_8023EA2C(s32 arg0)
 {
     return mnDiagram_804A0750.pad_0[arg0];
