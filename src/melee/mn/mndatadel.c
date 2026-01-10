@@ -782,20 +782,15 @@ void mnDataDel_80250170(void)
     mn_804A04F0.hovered_selection = 0;
     mnDataDel_804D6C6C = NULL;
     lbArchive_LoadSections(
-        mn_804D6BB8,
-        (void**) &model[0].joint, (char*) data + 0xA0,
-        &model[0].animjoint, (char*) data + 0xB8,
-        &model[0].matanim_joint, (char*) data + 0xD4,
-        &model[0].shapeanim_joint, (char*) data + 0xF4,
-        &model[1].joint, (char*) data + 0x118,
-        &model[1].animjoint, (char*) data + 0x134,
-        &model[1].matanim_joint, (char*) data + 0x154,
-        &model[1].shapeanim_joint, (char*) data + 0x178,
-        &model[2].joint, (char*) data + 0x19C,
-        &model[2].animjoint, (char*) data + 0x1B4,
+        mn_804D6BB8, (void**) &model[0].joint, (char*) data + 0xA0,
+        &model[0].animjoint, (char*) data + 0xB8, &model[0].matanim_joint,
+        (char*) data + 0xD4, &model[0].shapeanim_joint, (char*) data + 0xF4,
+        &model[1].joint, (char*) data + 0x118, &model[1].animjoint,
+        (char*) data + 0x134, &model[1].matanim_joint, (char*) data + 0x154,
+        &model[1].shapeanim_joint, (char*) data + 0x178, &model[2].joint,
+        (char*) data + 0x19C, &model[2].animjoint, (char*) data + 0x1B4,
         &model[2].matanim_joint, (char*) data + 0x1D0,
-        &model[2].shapeanim_joint, (char*) data + 0x1F0,
-        NULL);
+        &model[2].shapeanim_joint, (char*) data + 0x1F0, NULL);
     mnDataDel_8024FE4C(0);
     proc = HSD_GObjProc_8038FD54(GObj_Create(0, 1, 0x80), fn_8024F840, 0);
     proc->flags_3 = HSD_GObj_804D783C;
