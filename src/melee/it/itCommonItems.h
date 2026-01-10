@@ -624,6 +624,23 @@ typedef struct itChicoritaAttr {
     s32 x4; // x60 in item vars gets set to this if -1; max timer/lifetime?
 } itChicoritaAttr;
 
+typedef struct itLuckyAttributes {
+    f32 x0;
+    f32 x4;
+    f32 x8;
+    f32 xC;
+    s32 x10;
+    s32 x14;
+    s32 x18;
+} itLuckyAttributes;
+
+typedef struct itLucky_ItemVars {
+    /* ip+DD4 */ u8 _0[0x60 - 0x0];
+    /* ip+E34 */ enum_t x60;
+    /* ip+E38 */ s32 x64;
+    /* ip+E3C */ s32 x68;
+} itLucky_ItemVars;
+
 typedef struct itChicoritaLeafAttr {
     f32 timer;
     f32 x4;
