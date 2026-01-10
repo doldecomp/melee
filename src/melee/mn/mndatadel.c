@@ -687,16 +687,19 @@ void fn_8024FD40(HSD_GObj* arg0)
 }
 void mnDataDel_8024FE4C(u8 arg0)
 {
-    u8 _pad[0x18];
-    HSD_JObj* child;
+    HSD_JObj* sp20;
     HSD_GObj* gobj;
     HSD_JObj* root;
     HSD_GObjProc* proc;
     struct MnDataDelData* menu_data;
     StaticModelDesc* model;
+    StaticModelDesc* item_model;
     s32 i;
     struct MnDataDelUserData* data;
     HSD_Text* text;
+    HSD_JObj* item_jobj;
+    f32 frame;
+    u8 is_deleted;
 
     menu_data = &mnDataDel_803EF870;
     model = &mnDataDel_804A0918;
@@ -727,10 +730,33 @@ void mnDataDel_8024FE4C(u8 arg0)
     }
     proc = HSD_GObjProc_8038FD54(gobj, fn_8024FD40, 0);
     proc->flags_3 = HSD_GObj_804D783C;
+    item_model = &mnDataDel_804A0928;
     for (i = 0; i < 6; i++) {
-        mnDataDel_8024EBC8(
-            (HSD_JObj*) mn_80231634(data->x10[((s32*) &menu_data->x3C)[i]]),
-            (u8) i, (u8) (data->x0 == i));
+        item_jobj = HSD_JObjLoadJoint(item_model->joint);
+        HSD_JObjAddAnimAll(item_jobj, item_model->animjoint,
+                           item_model->matanim_joint, item_model->shapeanim_joint);
+        HSD_JObjReqAnimAll(item_jobj, (f32) i);
+        HSD_JObjAnimAll(item_jobj);
+        HSD_JObjAddChild((HSD_JObj*) data->x10[((s32*) &menu_data->x3C)[i]], item_jobj);
+        mnDataDel_8024EBC8(item_jobj, (u8) i, (u8) (data->x0 == i));
+        is_deleted = ((u8*) data)[i + 3];
+        lb_80011E24(item_jobj, &sp20, 1, -1);
+        frame = mn_8022F298(sp20);
+        if (is_deleted != 0) {
+            HSD_JObjReqAnimAll(sp20, 1.0f);
+        } else {
+            HSD_JObjReqAnimAll(sp20, 0.0f);
+        }
+        mn_8022F3D8(sp20, 0xFF, MOBJ_MASK);
+        HSD_JObjAnimAll(sp20);
+        HSD_JObjReqAnimAll(sp20, frame);
+        mn_8022F3D8(sp20, 0xFF, 0x480);
+        HSD_JObjAnimAll(sp20);
+    }
+    data = gobj->user_data;
+    text = *(HSD_Text**) &data->pad[7];
+    if (text != NULL) {
+        HSD_SisLib_803A5CC4(text);
     }
     text = HSD_SisLib_803A5ACC(0, 0, mnDataDel_804DC1B0, mnDataDel_804DC1B4,
                                mnDataDel_804DC1B8, mnDataDel_804DC1BC,
