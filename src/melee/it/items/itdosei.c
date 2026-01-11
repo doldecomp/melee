@@ -169,7 +169,16 @@ void itDosei_UnkMotion2_Phys(Item_GObj* gobj) {}
 
 /// #itDosei_UnkMotion2_Coll
 
-void it_80282074(Item_GObj* gobj) {}
+void it_80282074(Item_GObj* arg0) {
+    Item* temp_r31;
+
+    temp_r31 = arg0->user_data;
+    Item_80268E5C(arg0, 3, 3);
+    temp_r31->x5D0_animFrameSpeed = it_804DC870;
+    lb_8000BA0C(arg0->hsd_obj, it_804DC870);
+    temp_r31->x518 = 0;
+}
+
 
 /// #itDosei_UnkMotion3_Anim
 
