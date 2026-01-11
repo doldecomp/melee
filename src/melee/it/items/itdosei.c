@@ -12,22 +12,8 @@
 extern const f32 it_804DC874;
 extern const f32 it_804DC870;
 
-// --- Fix 1: External Declaration ---
-// This was implicitly declared, causing C99 errors.
-extern void Item_80268E5C(Item_GObj* gobj, int arg1, int arg2); 
-
-// --- Fix 2: Forward Declarations ---
-// These allow the functions to be called before their full definition later in the file.
-void it_80281C6C(Item_GObj* gobj);
-void it_80282074(Item_GObj* gobj);
-
-// --- Fix 3: Missing Struct Definition ---
-// If this is not in "itdosei.h", it must be defined here to use 'attr->unk8'
-typedef struct itDoseiAttributes {
-    f32 unk0;
-    f32 unk4;
-    f32 unk8;
-} itDoseiAttributes;
+// Explicit declaration for external function
+extern void Item_80268E5C(Item_GObj* gobj, int arg1, int arg2);
 
 /// #it_3F14_Logic7_Spawned
 
@@ -72,8 +58,8 @@ bool itDosei_UnkMotion1_Anim(Item_GObj* gobj)
 void itDosei_UnkMotion1_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    // Now valid because itDoseiAttributes is defined above
-    itDoseiAttributes* attr = (itDoseiAttributes*)ip->xC4_article_data->x4_specialAttributes;
+    // Cast strict to itDoseiAttributes* to match the header definition
+    itDoseiAttributes* attr = (itDoseiAttributes*) ip->xC4_article_data->x4_specialAttributes;
     f32 var_f1;
 
     var_f1 = attr->unk8 * ip->x5D0_animFrameSpeed;
@@ -100,7 +86,7 @@ bool itDosei_UnkMotion1_Coll(Item_GObj* gobj)
         if (var_f1 < 0.0f) {
             var_f1 = -var_f1;
         }
-        // M2C_ERROR(/* unknown instruction: cror eq, gt, eq */);
+        
         temp_r4->xD5C = (var_f1 == 0.7853982f);
         temp_r4->xDCC_flag.b0 = temp_r4->xD5C;
 
@@ -175,7 +161,7 @@ void itDosei_UnkMotion6_Phys(Item_GObj* gobj) {}
 bool itDosei_UnkMotion6_Coll(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    // NOTE: Ensure struct itDosei_ItemVars has members xDF8, xDFC, xE00
+    // Requires header update for xDF8, xDFC, xE00
     ip->xDD4_itemVar.dosei.xDF8 = M2C_FIELD(ip, f32*, 0x4CC);
     ip->xDD4_itemVar.dosei.xDFC = M2C_FIELD(ip, f32*, 0x4D0);
     ip->xDD4_itemVar.dosei.xE00 = M2C_FIELD(ip, f32*, 0x4D4);
