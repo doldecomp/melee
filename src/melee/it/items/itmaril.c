@@ -11,6 +11,43 @@
 
 #include <math.h>
 
+ItemStateTable it_803F82B0[] = {
+    {
+        -1,
+        itMaril_UnkMotion0_Anim,
+        itMaril_UnkMotion0_Phys,
+        itMaril_UnkMotion0_Coll,
+    },
+    {
+        0,
+        itMaril_UnkMotion1_Anim,
+        itMaril_UnkMotion1_Phys,
+        itMaril_UnkMotion1_Coll,
+    },
+    {
+        -1,
+        itMaril_UnkMotion2_Anim,
+        itMaril_UnkMotion2_Phys,
+        itMaril_UnkMotion2_Coll,
+    },
+    {
+        -1,
+        itMaril_UnkMotion3_Anim,
+        itMaril_UnkMotion3_Phys,
+        NULL,
+    },
+};
+
+static bool itMaril_UnkMotion2_Anim_inline(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->xD44_lifeTimer -= 1.0f;
+    if (ip->xD44_lifeTimer <= 0.0f) {
+        return true;
+    }
+    return false;
+}
+
 bool it_802D66F8(Item_GObj* gobj)
 {
     PAD_STACK(8);
@@ -102,6 +139,20 @@ void it_802D68FC(Item_GObj* gobj)
     it_8026BDB4(gobj);
 }
 
+static void itMaril_UnkMotion1_Coll_inline(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itMarilAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+    if (!ip->xDD4_itemVar.maril.x60.x0) {
+        ip->xDD4_itemVar.maril.x6C.y = attr->x8;
+        ip->xDD4_itemVar.maril.x6C.x = (M_PI * -ip->facing_dir) / attr->x8;
+        ip->xDD4_itemVar.maril.x60.x0 = 1;
+        ip->facing_dir = -ip->facing_dir;
+        ip->xDC8_word.flags.x19 = 0;
+        ip->xDD4_itemVar.maril.x64 = -ip->xDD4_itemVar.maril.x64;
+    }
+}
+
 bool itMaril_UnkMotion0_Anim(Item_GObj* gobj)
 {
     it_80279FF8(gobj);
@@ -157,14 +208,7 @@ bool itMaril_UnkMotion1_Anim(Item_GObj* gobj)
             ip->xDC8_word.flags.x19 = 1;
         }
     }
-    {
-        Item* ip2 = GET_ITEM(gobj);
-        ip2->xD44_lifeTimer -= 1.0f;
-        if (ip2->xD44_lifeTimer <= 0.0f) {
-            return true;
-        }
-    }
-    return false;
+    return itMaril_UnkMotion2_Anim_inline(gobj);
 }
 
 void itMaril_UnkMotion1_Phys(Item_GObj* gobj)
@@ -172,20 +216,6 @@ void itMaril_UnkMotion1_Phys(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     it_8027A344(gobj);
     ip->x40_vel.x = ip->xDD4_itemVar.maril.x64;
-}
-
-static inline void itMaril_UnkMotion1_Coll_inline(Item_GObj* gobj)
-{
-    Item* ip = GET_ITEM(gobj);
-    itMarilAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
-    if (!ip->xDD4_itemVar.maril.x60.x0) {
-        ip->xDD4_itemVar.maril.x6C.y = attr->x8;
-        ip->xDD4_itemVar.maril.x6C.x = (M_PI * -ip->facing_dir) / attr->x8;
-        ip->xDD4_itemVar.maril.x60.x0 = 1;
-        ip->facing_dir = -ip->facing_dir;
-        ip->xDC8_word.flags.x19 = 0;
-        ip->xDD4_itemVar.maril.x64 = -ip->xDD4_itemVar.maril.x64;
-    }
 }
 
 bool itMaril_UnkMotion1_Coll(Item_GObj* gobj)
@@ -212,12 +242,7 @@ void it_802D6DDC(HSD_GObj* gobj)
 
 bool itMaril_UnkMotion2_Anim(Item_GObj* gobj)
 {
-    Item* ip = GET_ITEM(gobj);
-    ip->xD44_lifeTimer -= 1.0f;
-    if (ip->xD44_lifeTimer <= 0.0f) {
-        return true;
-    }
-    return false;
+    return itMaril_UnkMotion2_Anim_inline(gobj);
 }
 
 void itMaril_UnkMotion2_Phys(Item_GObj* gobj)
