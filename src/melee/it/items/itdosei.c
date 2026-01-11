@@ -72,41 +72,65 @@ void itDosei_UnkMotion1_Phys(Item_GObj* gobj)
 
 bool itDosei_UnkMotion1_Coll(Item_GObj* gobj)
 {
-    Item* temp_r31;
-    Item* temp_r4;
-    f32 var_f1;
+    // Define persistent pointer first to force prologue scheduling: stw r0 -> mflr r0
+    Item* temp_r31 = gobj->user_data;
+    PAD_STACK(8);
 
-    temp_r31 = gobj->user_data;
-    if (it_8026D8A4(gobj, (void (*)(HSD_GObj*)) it_80281C6C) != 0) {
-        if (it_80276308(gobj) != 0) {
-            it_80281C6C(gobj);
-            return 0;
-        }
-        temp_r4 = gobj->user_data;
-        var_f1 = temp_r4->x378_itemColl.floor.normal.x;
-        if (var_f1 < 0.0f) {
-            var_f1 = -var_f1;
-        }
-
-        temp_r4->xD5C = (var_f1 == 0.7853982f);
-        temp_r4->xDCC_flag.b0 = temp_r4->xD5C;
-
-        if ((u32) temp_r31->xD5C == 1U) {
-            it_3F14_Logic7_EnteredAir(gobj);
+    // [0x28] Check 1: Cast function pointer to match signature
+    if (it_8026D8A4(gobj, (void (*)(Item_GObj*)) it_80281C6C)) {
+        // [0x38] Check 2
+        if (it_80276308(gobj)) {
+            // [0x44] Function Return Trick:
+            // The target jumps directly to epilogue (b d8), preserving r3.
+            // We cast it to a bool-returning function to prevent 'li r3, 0' generation
+            // and use the value returned by lb_8000BA0C inside it_80281C6C.
+            return ((bool (*)(Item_GObj*)) it_80281C6C)(gobj);
         } else {
-            it_80276CB8(gobj);
+            // [0x50] Fall-through: Float Logic Block
+            {
+                // Reload pointer for temporary usage (r4) to match 'lwz r4'
+                Item* temp_r4 = gobj->user_data;
+                // [0x5C] Velocity offset 0x4CC
+                f32 var_f1 = M2C_FIELD(temp_r4, f32*, 0x4CC);
+
+                // [0x58-0x68] Absolute Value (fcmpo -> bge -> fneg)
+                if (var_f1 < 0.0f) {
+                    var_f1 = -var_f1;
+                }
+
+                // [0x6C-0xA0] Comparison (>= 0.0f)
+                if (var_f1 >= 0.0f) {
+                    temp_r4->xD5C = 1;
+                    temp_r4->xDCC_flag.b0 = 1;
+                } else {
+                    temp_r4->xD5C = 0;
+                    temp_r4->xDCC_flag.b0 = 0;
+                }
+            }
+
+            // [0xA8] Persistent Flag Check (r31)
+            // This separation ensures the branch target 'ac' aligns
+            if (temp_r31->xD5C == 1) {
+                it_3F14_Logic7_EnteredAir(gobj);
+            } else {
+                it_80276CB8(gobj);
+            }
+            // [0xC4] Explicit return 0 matches 'li r3, 0' before 'b d8'
+            return false;
         }
-        return 0;
+    } else {
+        // [0xD0] Outer Else
+        it_80282074(gobj);
     }
-    it_80282074(gobj);
-    return 0;
+
+    // [0xD4] Shared return
+    return false;
 }
 
-bool it_80281C6C(Item_GObj* gobj)
+void it_80281C6C(Item_GObj* gobj)
 {
     // [0x1C] r29 = gobj, r30 = user_data (ip)
     Item* ip = GET_ITEM(gobj);
-    bool ret;
 
     // [0x10 & 0x24] r31 = 0; ip->xDD8 = 0;
     M2C_FIELD(ip, u32*, 0xDD8) = 0;
@@ -114,28 +138,31 @@ bool it_80281C6C(Item_GObj* gobj)
     // [0x2C - 0x40] Copy xDE4 (Vec3) to x4C
     M2C_FIELD(ip, Vec3*, 0x4C) = ip->xDD4_itemVar.dosei.xDE4;
 
-    // [0x44 - 0x4C] Initialize xDDC and vel.x with it_804DC878
-    M2C_FIELD(ip, f32*, 0xDDC) = it_804DC878;
-    ip->x40_vel.x = it_804DC878;
+    // [0x44 - 0x4C] Initialize xDDC and vel.x
+    // Assign local here to force load into f0 right before use
+    {
+        f32 var_878 = it_804DC878;
+        M2C_FIELD(ip, f32*, 0xDDC) = var_878;
+        ip->x40_vel.x = var_878;
+    }
 
-    // [0x50] Call helper with Item*
+    // [0x50] Call helper
     it_802762B0(ip);
 
     // [0x54] Call Item_80268E5C
     Item_80268E5C(gobj, 2, 3);
 
-    // [0x64] Set anim speed
-    ip->x5D0_animFrameSpeed = it_804DC870;
-
-    // [0x68 - 0x70] Call lb_8000BA0C using gobj->hsd_obj (0x28)
-    // Matches assembly: lwz r3, 0x28(r29) -> bl lb_8000BA0C
-    ret = ((bool (*)(HSD_JObj*, f32)) lb_8000BA0C)(gobj->hsd_obj, it_804DC870);
+    // [0x64 - 0x70] Set anim speed and call function
+    // Assign local here. Since it's not live across calls, compiler uses volatile f1.
+    {
+        f32 var_870 = it_804DC870;
+        ip->x5D0_animFrameSpeed = var_870;
+        // Result is implicitly left in r3 for the caller to pick up if they cast the function type
+        lb_8000BA0C(gobj->hsd_obj, var_870);
+    }
 
     // [0x74] Clear x518
     M2C_FIELD(ip, u32*, 0x518) = 0;
-
-    // [0x90] Return result (r3 is preserved)
-    return ret;
 }
 
 void itDosei_UnkMotion2_Phys(Item_GObj* gobj) {}
