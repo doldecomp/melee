@@ -72,35 +72,48 @@ void itDosei_UnkMotion1_Phys(Item_GObj* gobj)
 
 bool itDosei_UnkMotion1_Coll(Item_GObj* gobj)
 {
+    s32 unused[2];  // Stack padding to achieve 0x20 frame size
     Item* temp_r31;
-    Item* temp_r4;
-    f32 var_f1;
-
+    
     temp_r31 = gobj->user_data;
-    if (it_8026D8A4(gobj, (void (*)(HSD_GObj*)) it_80281C6C) != 0) {
-        if (it_80276308(gobj) != 0) {
-            it_80281C6C(gobj);
-            return 0;
+    
+    if (it_8026D8A4(gobj, (ItemStateFunc)it_80281C6C)) {
+        if (it_80276308(gobj)) {
+            return it_80281C6C(gobj);
         }
-        temp_r4 = gobj->user_data;
-        var_f1 = temp_r4->x378_itemColl.floor.normal.x;
-        if (var_f1 < 0.0f) {
-            var_f1 = -var_f1;
+        
+        {
+            Item* temp_r4 = gobj->user_data;
+            f32 var_f1 = temp_r4->x4CC_velocity;
+            
+            // Absolute value
+            if (var_f1 < 0.0f) {
+                var_f1 = -var_f1;
+            }
+            
+            // Check if >= 0.0f (generates cror eq,gt,eq)
+            if (var_f1 >= 0.0f) {
+                temp_r4->xD5C = 1;
+                temp_r4->xDCB_flag.bits.b0 = 1;
+            } else {
+                temp_r4->xD5C = 0;
+                temp_r4->xDCB_flag.bits.b0 = 0;
+            }
         }
-
-        temp_r4->xD5C = (var_f1 == 0.7853982f);
-        temp_r4->xDCC_flag.b0 = temp_r4->xD5C;
-
-        if ((u32) temp_r31->xD5C == 1U) {
+        
+        // Use persistent r31 pointer for flag check
+        if (temp_r31->xD5C == 1) {
             it_3F14_Logic7_EnteredAir(gobj);
         } else {
             it_80276CB8(gobj);
         }
-        return 0;
+    } else {
+        it_80282074(gobj);
     }
-    it_80282074(gobj);
-    return 0;
+    
+    return false;
 }
+
 
 void it_80281C6C(Item_GObj* gobj)
 {
