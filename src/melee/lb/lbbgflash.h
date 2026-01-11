@@ -29,7 +29,7 @@
 /* 0219E4 */ UNK_RET fn_800219E4(UNK_PARAMS);
 /* 021A18 */ void lbBgFlash_80021A18(int);
 /* 021B04 */ UNK_RET fn_80021B04(UNK_PARAMS);
-/* 021C1C */ UNK_RET fn_80021C1C(UNK_PARAMS);
+/* 021C1C */ void fn_80021C1C(void);
 /* 021C48 */ void lbBgFlash_80021C48(u32, u32);
 /* 021C80 */ void fn_80021C80(HSD_GObj* gobj);
 
