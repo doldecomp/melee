@@ -42,7 +42,6 @@ bool itDosei_UnkMotion1_Anim(Item_GObj* gobj)
     f32 frame_speed;
     HSD_JObj* jobj;
     PAD_STACK(16);
-
     ip = gobj->user_data;
     ip->xDD4_itemVar.dosei.xDE4 = ip->pos;
     ip2 = gobj->user_data;
@@ -279,7 +278,6 @@ bool itDosei_UnkMotion10_Anim(Item_GObj* gobj)
 {
     Item* ip;
     HSD_JObj* jobj;
-    
     ip = gobj->user_data;
     ip->xDD4_itemVar.dosei.xDE4 = ip->pos;
     jobj = gobj->hsd_obj;
