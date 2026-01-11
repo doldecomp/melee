@@ -86,7 +86,7 @@ bool itDosei_UnkMotion1_Coll(Item_GObj* gobj)
         if (var_f1 < 0.0f) {
             var_f1 = -var_f1;
         }
-        
+
         temp_r4->xD5C = (var_f1 == 0.7853982f);
         temp_r4->xDCC_flag.b0 = temp_r4->xD5C;
 
