@@ -3,22 +3,19 @@
 
 #include <platform.h>
 #include "it/forward.h"
-#include "it/items/types.h"
+#include "it/items/types.h" // This likely pulls in itCommonItems.h
 
+// Keep this if it is NOT defined in itCommonItems.h or similar.
+// If you get a redefinition error for this too, remove it.
 typedef struct itDoseiAttributes {
     f32 unk0;
     f32 unk4;
     f32 unk8;
 } itDoseiAttributes;
 
-typedef struct itDosei_ItemVars {
-    Vec3 xDE4;   // 0x00
-    f32 xDF0;    // 0x0C (Padding/Unknown)
-    f32 xDF4;    // 0x10 (Padding/Unknown)
-    f32 xDF8;    // 0x14
-    f32 xDFC;    // 0x18
-    f32 xE00;    // 0x1C
-} itDosei_ItemVars;
+/* * NOTE: itDosei_ItemVars is removed from here because 
+ * it is defined in src/melee/it/itCommonItems.h 
+ */
 
 /* 281164 */ void it_3F14_Logic7_Spawned(Item_GObj*);
 /* 281390 */ void fn_80281390(Item_GObj*);
