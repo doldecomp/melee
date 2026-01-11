@@ -105,12 +105,15 @@ typedef struct itBox_ItemVars {
 } itBox_ItemVars;
 
 typedef struct itDosei_ItemVars {
-    s32 xDD4;
-    s32 xDD8;
-    s32 xDDC;
-    s32 xDE0;
-    Vec3 xDE4;
+    u8 padding[0x10]; // Padding from 0xDD4 to 0xDE4
+    Vec3 xDE4;        // 0xDE4
+    f32 xDF0;         // 0xDF0
+    f32 xDF4;         // 0xDF4
+    f32 xDF8;         // 0xDF8 (Added)
+    f32 xDFC;         // 0xDFC (Added)
+    f32 xE00;         // 0xE00 (Added)
 } itDosei_ItemVars;
+
 
 typedef struct itHeart_ItemVars {
     s32 xDD4_heal;
