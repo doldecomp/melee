@@ -214,17 +214,9 @@ void itDosei_UnkMotion6_Phys(Item_GObj* gobj) {}
 
 bool itDosei_UnkMotion6_Coll(Item_GObj* gobj)
 {
-    Item* ip;
-    u32 temp_r6;
-    u32 temp_r0;
-    ip = gobj->user_data;
-    temp_r6 = M2C_FIELD(ip, u32*, 0x4CC);
-    temp_r0 = M2C_FIELD(ip, u32*, 0x4D0);
-    M2C_FIELD(ip, u32*, 0xDF8) = temp_r6;
-    M2C_FIELD(ip, u32*, 0xDFC) = temp_r0;
-    temp_r0 = M2C_FIELD(ip, u32*, 0x4D4);
-    M2C_FIELD(ip, u32*, 0xE00) = temp_r0;
-    it_8026E8C4(gobj, fn_80281734, it_80282074);
+    Item* ip = gobj->user_data;
+    *(Vec3*)((u8*)ip + 0xDF8) = ip->x378_itemColl.floor.normal;
+    it_8026E8C4(gobj, (HSD_GObjEvent) fn_80281734, (HSD_GObjEvent) it_80282074);
     return false;
 }
 
