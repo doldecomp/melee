@@ -1,25 +1,40 @@
 #ifndef GALE01_281164
 #define GALE01_281164
 
+#include <platform.h>
 #include "it/forward.h"
-
 #include "it/items/types.h"
+
+typedef struct itDoseiAttributes {
+    f32 unk0;
+    f32 unk4;
+    f32 unk8;
+} itDoseiAttributes;
+
+typedef struct itDosei_ItemVars {
+    Vec3 xDE4;   // 0x00
+    f32 xDF0;    // 0x0C (Padding/Unknown)
+    f32 xDF4;    // 0x10 (Padding/Unknown)
+    f32 xDF8;    // 0x14
+    f32 xDFC;    // 0x18
+    f32 xE00;    // 0x1C
+} itDosei_ItemVars;
 
 /* 281164 */ void it_3F14_Logic7_Spawned(Item_GObj*);
 /* 281390 */ void fn_80281390(Item_GObj*);
 /* 2813F8 */ bool itDosei_UnkMotion0_Anim(Item_GObj* gobj);
 /* 2816F0 */ void itDosei_UnkMotion0_Phys(Item_GObj* gobj);
 /* 2816F4 */ bool itDosei_UnkMotion0_Coll(Item_GObj* gobj);
-/* 281734 */ UNK_RET fn_80281734(UNK_PARAMS);
+/* 281734 */ void fn_80281734(Item_GObj* gobj);
 /* 2817A0 */ void it_802817A0(Item_GObj*);
 /* 281AB4 */ bool itDosei_UnkMotion1_Anim(Item_GObj* gobj);
 /* 281B44 */ void itDosei_UnkMotion1_Phys(Item_GObj* gobj);
 /* 281B7C */ bool itDosei_UnkMotion1_Coll(Item_GObj* gobj);
-/* 281C6C */ UNK_RET it_80281C6C(UNK_PARAMS);
+/* 281C6C */ void it_80281C6C(Item_GObj* gobj);
 /* 281D00 */ bool itDosei_UnkMotion2_Anim(Item_GObj* gobj);
 /* 281E30 */ void itDosei_UnkMotion2_Phys(Item_GObj* gobj);
 /* 281E34 */ bool itDosei_UnkMotion2_Coll(Item_GObj* gobj);
-/* 282074 */ UNK_RET it_80282074(UNK_PARAMS);
+/* 282074 */ void it_80282074(Item_GObj* gobj);
 /* 2820CC */ bool itDosei_UnkMotion3_Anim(Item_GObj* gobj);
 /* 282130 */ void itDosei_UnkMotion3_Phys(Item_GObj* gobj);
 /* 282160 */ bool itDosei_UnkMotion5_Coll(Item_GObj* gobj);
