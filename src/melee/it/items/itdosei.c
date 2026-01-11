@@ -267,8 +267,6 @@ void itDosei_UnkMotion9_Phys(Item_GObj* gobj) {}
 
 /// #itDosei_UnkMotion9_Coll
 
-/// #itDosei_UnkMotion10_Anim
-
 void itDosei_UnkMotion10_Phys(Item_GObj* gobj) {}
 
 bool itDosei_UnkMotion10_Coll(Item_GObj* gobj)
@@ -279,10 +277,14 @@ bool itDosei_UnkMotion10_Coll(Item_GObj* gobj)
 
 bool itDosei_UnkMotion10_Anim(Item_GObj* gobj)
 {
-    Item* ip = GET_ITEM(gobj);
+    Item* ip;
+    HSD_JObj* jobj;
+    
+    ip = gobj->user_data;
     ip->xDD4_itemVar.dosei.xDE4 = ip->pos;
+    jobj = gobj->hsd_obj;
     ip->x5D0_animFrameSpeed = it_804DC870;
-    lb_8000BA0C(gobj->hsd_obj, it_804DC870);
+    lb_8000BA0C(jobj, it_804DC870);
     return false;
 }
 
