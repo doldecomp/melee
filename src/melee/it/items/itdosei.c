@@ -72,59 +72,34 @@ void itDosei_UnkMotion1_Phys(Item_GObj* gobj)
 
 bool itDosei_UnkMotion1_Coll(Item_GObj* gobj)
 {
-    // Define persistent pointer first to force prologue scheduling: stw r0 -> mflr r0
-    Item* temp_r31 = gobj->user_data;
-    PAD_STACK(8);
+    Item* temp_r31;
+    Item* temp_r4;
+    f32 var_f1;
 
-    // [0x28] Check 1: Cast function pointer to match signature
-    if (it_8026D8A4(gobj, (void (*)(Item_GObj*)) it_80281C6C)) {
-        // [0x38] Check 2
-        if (it_80276308(gobj)) {
-            // [0x44] Function Return Trick:
-            // The target jumps directly to epilogue (b d8), preserving r3.
-            // We cast it to a bool-returning function to prevent 'li r3, 0' generation
-            // and use the value returned by lb_8000BA0C inside it_80281C6C.
-            return ((bool (*)(Item_GObj*)) it_80281C6C)(gobj);
-        } else {
-            // [0x50] Fall-through: Float Logic Block
-            {
-                // Reload pointer for temporary usage (r4) to match 'lwz r4'
-                Item* temp_r4 = gobj->user_data;
-                // [0x5C] Velocity offset 0x4CC
-                f32 var_f1 = M2C_FIELD(temp_r4, f32*, 0x4CC);
-
-                // [0x58-0x68] Absolute Value (fcmpo -> bge -> fneg)
-                if (var_f1 < 0.0f) {
-                    var_f1 = -var_f1;
-                }
-
-                // [0x6C-0xA0] Comparison (>= 0.0f)
-                if (var_f1 >= 0.0f) {
-                    temp_r4->xD5C = 1;
-                    temp_r4->xDCC_flag.b0 = 1;
-                } else {
-                    temp_r4->xD5C = 0;
-                    temp_r4->xDCC_flag.b0 = 0;
-                }
-            }
-
-            // [0xA8] Persistent Flag Check (r31)
-            // This separation ensures the branch target 'ac' aligns
-            if (temp_r31->xD5C == 1) {
-                it_3F14_Logic7_EnteredAir(gobj);
-            } else {
-                it_80276CB8(gobj);
-            }
-            // [0xC4] Explicit return 0 matches 'li r3, 0' before 'b d8'
-            return false;
+    temp_r31 = gobj->user_data;
+    if (it_8026D8A4(gobj, (void (*)(HSD_GObj*)) it_80281C6C) != 0) {
+        if (it_80276308(gobj) != 0) {
+            it_80281C6C(gobj);
+            return 0;
         }
-    } else {
-        // [0xD0] Outer Else
-        it_80282074(gobj);
-    }
+        temp_r4 = gobj->user_data;
+        var_f1 = temp_r4->x378_itemColl.floor.normal.x;
+        if (var_f1 < 0.0f) {
+            var_f1 = -var_f1;
+        }
 
-    // [0xD4] Shared return
-    return false;
+        temp_r4->xD5C = (var_f1 == 0.7853982f);
+        temp_r4->xDCC_flag.b0 = temp_r4->xD5C;
+
+        if ((u32) temp_r31->xD5C == 1U) {
+            it_3F14_Logic7_EnteredAir(gobj);
+        } else {
+            it_80276CB8(gobj);
+        }
+        return 0;
+    }
+    it_80282074(gobj);
+    return 0;
 }
 
 void it_80281C6C(Item_GObj* gobj)
@@ -169,16 +144,14 @@ void itDosei_UnkMotion2_Phys(Item_GObj* gobj) {}
 
 /// #itDosei_UnkMotion2_Coll
 
-void it_80282074(Item_GObj* arg0) {
-    Item* temp_r31;
-
-    temp_r31 = arg0->user_data;
-    Item_80268E5C(arg0, 3, 3);
-    temp_r31->x5D0_animFrameSpeed = it_804DC870;
-    lb_8000BA0C(arg0->hsd_obj, it_804DC870);
-    temp_r31->x518 = 0;
+void it_80282074(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    Item_80268E5C(gobj, 3, 3);
+    ip->x5D0_animFrameSpeed = it_804DC870;
+    lb_8000BA0C(gobj->hsd_obj, it_804DC870);
+    M2C_FIELD(ip, u32*, 0x518) = 0;
 }
-
 
 /// #itDosei_UnkMotion3_Anim
 
