@@ -11,6 +11,7 @@
 
 extern const f32 it_804DC874;
 extern const f32 it_804DC870;
+extern const f32 it_804DC878;
 
 // Explicit declaration for external function
 extern void Item_80268E5C(Item_GObj* gobj, int arg1, int arg2);
@@ -101,20 +102,20 @@ bool itDosei_UnkMotion1_Coll(Item_GObj* gobj)
     return 0;
 }
 
-s32 it_80281C6C(Item_GObj* gobj)
+bool it_80281C6C(Item_GObj* gobj)
 {
     // [0x1C] r29 = gobj, r30 = user_data (ip)
     Item* ip = GET_ITEM(gobj);
-    s32 ret;
+    bool ret;
 
     // [0x10 & 0x24] r31 = 0; ip->xDD8 = 0;
-    ip->xDD4_itemVar.dosei.xDD8 = 0;
+    M2C_FIELD(ip, u32*, 0xDD8) = 0;
 
     // [0x2C - 0x40] Copy xDE4 (Vec3) to x4C
-    ip->x4C_pos = ip->xDD4_itemVar.dosei.xDE4;
+    M2C_FIELD(ip, Vec3*, 0x4C) = ip->xDD4_itemVar.dosei.xDE4;
 
     // [0x44 - 0x4C] Initialize xDDC and vel.x with it_804DC878
-    ip->xDD4_itemVar.dosei.xDDC = it_804DC878;
+    M2C_FIELD(ip, f32*, 0xDDC) = it_804DC878;
     ip->x40_vel.x = it_804DC878;
 
     // [0x50] Call helper with Item*
@@ -128,10 +129,10 @@ s32 it_80281C6C(Item_GObj* gobj)
 
     // [0x68 - 0x70] Call lb_8000BA0C using gobj->hsd_obj (0x28)
     // Matches assembly: lwz r3, 0x28(r29) -> bl lb_8000BA0C
-    ret = lb_8000BA0C(gobj->hsd_obj, it_804DC870);
+    ret = ((bool (*)(HSD_JObj*, f32)) lb_8000BA0C)(gobj->hsd_obj, it_804DC870);
 
     // [0x74] Clear x518
-    ip->x518 = 0;
+    M2C_FIELD(ip, u32*, 0x518) = 0;
 
     // [0x90] Return result (r3 is preserved)
     return ret;
