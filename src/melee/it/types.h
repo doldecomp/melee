@@ -534,6 +534,7 @@ struct Item {
         itCapsule_ItemVars capsule;
         itDosei_ItemVars dosei;
         itChicorita_ItemVars chicorita;
+        itMaril_ItemVars maril;
         itLucky_ItemVars lucky;
         itClimbersBlizzard_ItemVars climbersblizzard;
         itCoin_ItemVars coin;

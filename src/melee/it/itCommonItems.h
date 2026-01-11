@@ -624,6 +624,35 @@ typedef struct itChicoritaAttr {
     s32 x4; // x60 in item vars gets set to this if -1; max timer/lifetime?
 } itChicoritaAttr;
 
+typedef struct itMarilAttributes {
+    f32 x0;
+    f32 x4;
+    f32 x8;
+    f32 xC;
+    f32 x10;
+    f32 x14;
+} itMarilAttributes;
+
+typedef struct itMaril_ItemVars {
+    u8 pad[0x60];
+    union {
+        struct {
+            u8 x0 : 1;
+            u8 x1 : 1;
+            u8 x2 : 1;
+            u8 x3 : 1;
+            u8 x4 : 1;
+            u8 x5 : 1;
+            u8 x6 : 1;
+            u8 x7 : 1;
+        };
+        u32 flags;
+    } x60;
+    f32 x64;
+    f32 x68;
+    Vec3 x6C;
+} itMaril_ItemVars;
+
 typedef struct itLuckyAttributes {
     f32 x0;
     f32 x4;
