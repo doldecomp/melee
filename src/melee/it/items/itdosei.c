@@ -7,6 +7,10 @@
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "lb/lb_00B0.h"
+
+extern const f32 it_804DC874;
+extern const f32 it_804DC870;
 
 /// #it_3F14_Logic7_Spawned
 
@@ -16,27 +20,90 @@
 
 void itDosei_UnkMotion0_Phys(Item_GObj* gobj) {}
 
-/// #itDosei_UnkMotion0_Coll
+bool itDosei_UnkMotion0_Coll(Item_GObj* gobj)
+{
+    it_8026D62C(gobj, (HSD_GObjEvent) it_80282074);
+    it_80276CB8(gobj);
+    return false;
+}
 
 /// #fn_80281734
 
 /// #it_802817A0
 
-/// #itDosei_UnkMotion1_Anim
+bool itDosei_UnkMotion1_Anim(Item_GObj* gobj)
+{
+    Item* ip2;
+    Item* ip;
+    f32 frame_speed;
+    HSD_JObj* jobj;
+    PAD_STACK(16);
 
-/// #itDosei_UnkMotion1_Phys
+    ip = gobj->user_data;
+    ip->xDD4_itemVar.dosei.xDE4 = ip->pos;
+    ip2 = gobj->user_data;
+    frame_speed = it_804DC874 * (M2C_FIELD(ip2, f32*, 0x4CC) * ip2->facing_dir) + it_804DC870;
+    jobj = gobj->hsd_obj;
+    ip->x5D0_animFrameSpeed = frame_speed;
+    lb_8000BA0C(jobj, frame_speed);
+    if (it_80272C6C(gobj) == 0) {
+        Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
+    }
+    return false;
+}
 
-/// #itDosei_UnkMotion1_Coll
+void itDosei_UnkMotion1_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itDoseiAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+    f32 var_f1;
 
-/// #it_80281C6C
+    var_f1 = attr->unk8 * ip->x5D0_animFrameSpeed;
+    if (var_f1 < 0.0f) {
+        var_f1 = -var_f1;
+    }
+    ip->x40_vel.x = ip->facing_dir * var_f1;
+}
 
-/// #itDosei_UnkMotion2_Anim
+bool itDosei_UnkMotion1_Coll(Item_GObj* gobj)
+{
+    Item* temp_r31;
+    Item* temp_r4;
+    f32 var_f1;
+
+    temp_r31 = gobj->user_data;
+    if (it_8026D8A4(gobj, (void (*)(HSD_GObj*)) it_80281C6C) != 0) {
+        if (it_80276308(gobj) != 0) {
+            it_80281C6C(gobj);
+            return 0;
+        }
+        temp_r4 = gobj->user_data;
+        var_f1 = temp_r4->x378_itemColl.floor.normal.x;
+        if (var_f1 < 0.0f) {
+            var_f1 = -var_f1;
+        }
+        // M2C_ERROR(/* unknown instruction: cror eq, gt, eq */);
+        temp_r4->xD5C = (var_f1 == 0.7853982f);
+        temp_r4->xDCC_flag.b0 = temp_r4->xD5C;
+
+        if ((u32) temp_r31->xD5C == 1U) {
+            it_3F14_Logic7_EnteredAir(gobj);
+        } else {
+            it_80276CB8(gobj);
+        }
+        return 0;
+    }
+    it_80282074(gobj);
+    return 0;
+}
+
+void it_80281C6C(Item_GObj* gobj) {}
 
 void itDosei_UnkMotion2_Phys(Item_GObj* gobj) {}
 
 /// #itDosei_UnkMotion2_Coll
 
-/// #it_80282074
+void it_80282074(Item_GObj* gobj) {}
 
 /// #itDosei_UnkMotion3_Anim
 
@@ -68,7 +135,13 @@ bool itDosei_UnkMotion5_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itDosei_UnkMotion5_Phys
+void itDosei_UnkMotion5_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ItemAttr* attrs = ip->xCC_item_attr;
+    it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
+    it_80274658(gobj, it_804D6D28->x68_float);
+}
 
 /// #it_3F14_Logic7_EnteredAir
 
@@ -81,7 +154,15 @@ bool itDosei_UnkMotion6_Anim(Item_GObj* gobj)
 
 void itDosei_UnkMotion6_Phys(Item_GObj* gobj) {}
 
-/// #itDosei_UnkMotion6_Coll
+bool itDosei_UnkMotion6_Coll(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->xDD4_itemVar.dosei.xDF8 = M2C_FIELD(ip, f32*, 0x4CC);
+    ip->xDD4_itemVar.dosei.xDFC = M2C_FIELD(ip, f32*, 0x4D0);
+    ip->xDD4_itemVar.dosei.xE00 = M2C_FIELD(ip, f32*, 0x4D4);
+    it_8026E8C4(gobj, (HSD_GObjEvent) fn_80281734, (HSD_GObjEvent) it_80282074);
+    return false;
+}
 
 /// #it_80282BFC
 
@@ -111,7 +192,12 @@ bool itDosei_UnkMotion8_Coll(Item_GObj* gobj)
 
 void itDosei_UnkMotion7_Phys(Item_GObj* gobj) {}
 
-/// #itDosei_UnkMotion7_Coll
+bool itDosei_UnkMotion7_Coll(Item_GObj* gobj)
+{
+    it_8026D62C(gobj, (HSD_GObjEvent) it_80282BFC);
+    it_80276CB8(gobj);
+    return false;
+}
 
 /// #it_80282DE4
 
@@ -128,6 +214,15 @@ void itDosei_UnkMotion10_Phys(Item_GObj* gobj) {}
 bool itDosei_UnkMotion10_Coll(Item_GObj* gobj)
 {
     it_8026E8C4(gobj, fn_80282CD4, it_80282BFC);
+    return false;
+}
+
+bool itDosei_UnkMotion10_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->xDD4_itemVar.dosei.xDE4 = ip->pos;
+    ip->x5D0_animFrameSpeed = it_804DC870;
+    lb_8000BA0C(gobj->hsd_obj, it_804DC870);
     return false;
 }
 
