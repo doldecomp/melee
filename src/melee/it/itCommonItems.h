@@ -105,7 +105,10 @@ typedef struct itBox_ItemVars {
 } itBox_ItemVars;
 
 typedef struct itDosei_ItemVars {
-    u8 padding[0x10];
+    s32 xDD4
+    s32 xDD8
+    s32 xDDC
+    s32 xDE0
     Vec3 xDE4;
     f32 xDF0;
     f32 xDF4;
