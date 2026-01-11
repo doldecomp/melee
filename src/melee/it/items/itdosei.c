@@ -77,14 +77,15 @@ bool itDosei_UnkMotion1_Coll(Item_GObj* gobj)
     
     temp_r31 = gobj->user_data;
     
-    if (it_8026D8A4(gobj, (ItemStateFunc)it_80281C6C)) {
+    if (it_8026D8A4(gobj, it_80281C6C)) {
         if (it_80276308(gobj)) {
-            return it_80281C6C(gobj);
+            it_80281C6C(gobj);
+            return false;
         }
         
         {
             Item* temp_r4 = gobj->user_data;
-            f32 var_f1 = temp_r4->x4CC_velocity;
+            f32 var_f1 = M2C_FIELD(temp_r4, f32*, 0x4CC);
             
             // Absolute value
             if (var_f1 < 0.0f) {
@@ -94,10 +95,10 @@ bool itDosei_UnkMotion1_Coll(Item_GObj* gobj)
             // Check if >= 0.0f (generates cror eq,gt,eq)
             if (var_f1 >= 0.0f) {
                 temp_r4->xD5C = 1;
-                temp_r4->xDCB_flag.bits.b0 = 1;
+                M2C_FIELD(temp_r4, u8*, 0xDCB) |= 1;
             } else {
                 temp_r4->xD5C = 0;
-                temp_r4->xDCB_flag.bits.b0 = 0;
+                M2C_FIELD(temp_r4, u8*, 0xDCB) &= ~1;
             }
         }
         
