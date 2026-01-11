@@ -104,8 +104,8 @@ bool itDosei_UnkMotion1_Coll(Item_GObj* gobj)
 s32 it_80281C6C(Item_GObj* gobj)
 {
     // [0x1C] r29 = gobj, r30 = user_data (ip)
-    Item* ip = GET_ITEM(gobj); 
-    s32 ret; 
+    Item* ip = GET_ITEM(gobj);
+    s32 ret;
 
     // [0x10 & 0x24] r31 = 0; ip->xDD8 = 0;
     ip->xDD4_itemVar.dosei.xDD8 = 0;
