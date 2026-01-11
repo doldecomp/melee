@@ -294,7 +294,17 @@ typedef struct itFoodsAttributes {
 
 typedef struct itWhispyApple_ItemVars {
     s32 xDD4_heal;
+    s32 xDD8;
 } itWhispyApple_ItemVars;
+
+typedef struct itWhispyAppleAttributes {
+    u8 x0[0x4];
+    s32 x4;
+    s32 x8;
+    u8 xC[0x8];
+    f32 x14;
+    f32 x18;
+} itWhispyAppleAttributes;
 
 typedef struct itFreeze_ItemVars {
     /*  +0 */ char pad_0[0x1C];

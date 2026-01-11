@@ -887,11 +887,11 @@ bool it_8026DA70(Item_GObj* gobj)
     return mpColl_800471F8(coll);
 }
 
-bool it_8026DAA8(Item_GObj* gobj)
+s32 it_8026DAA8(Item_GObj* gobj)
 {
     CollData* coll;
     Item* ip;
-    bool test;
+    s32 test;
     PAD_STACK(12);
 
     ip = GET_ITEM((HSD_GObj*) gobj);
@@ -900,7 +900,7 @@ bool it_8026DAA8(Item_GObj* gobj)
 
     test = mpColl_800471F8(coll);
     ip->pos = coll->cur_pos;
-    if (test != false) {
+    if (test != 0) {
         ip->xC30 = coll->floor.index;
     }
     test |= it_80276308(gobj);

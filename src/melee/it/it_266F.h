@@ -37,7 +37,7 @@
 /* 26D9A0 */ bool it_8026D9A0(Item_GObj*);
 /* 26DA08 */ bool it_8026DA08(Item_GObj*);
 /* 26DA70 */ bool it_8026DA70(Item_GObj*);
-/* 26DAA8 */ bool it_8026DAA8(Item_GObj*);
+/* 26DAA8 */ s32 it_8026DAA8(Item_GObj*);
 /* 26DB40 */ bool it_8026DB40(Item_GObj*);
 /* 26DBC8 */ bool it_8026DBC8(Item_GObj*);
 /* 26DC24 */ bool it_8026DC24(Item_GObj*);
