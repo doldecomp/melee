@@ -691,13 +691,13 @@ void it_8026D564(Item_GObj* item_gobj)
     }
 }
 
-void it_8026D5CC(Item_GObj* item_gobj)
+bool it_8026D5CC(Item_GObj* item_gobj)
 {
     Item* ip = GET_ITEM((HSD_GObj*) item_gobj);
     CollData* coll = &ip->x378_itemColl;
 
     it_80276214(item_gobj);
-    mpColl_8004B108(coll);
+    return mpColl_8004B108(coll);
 }
 
 bool it_8026D604(Item_GObj* item_gobj)

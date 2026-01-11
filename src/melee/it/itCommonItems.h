@@ -870,8 +870,13 @@ typedef struct itWhiteBea_ItemVars {
 } itWhiteBea_ItemVars;
 
 typedef struct itOctarock_ItemVars {
-    /*  +0 ip+DD4 */ char pad_0[0x20];
+    /*  +0 ip+DD4 */ char pad_0[0x18];
+    /* +18 ip+DEC */ s32 x18;
+    /* +1C ip+DF0 */ char pad_1C[0x4];
     /* +20 ip+DF4 */ Vec3 x20;
+    /* +2C ip+E00 */ s32 x2C;
+    /* +30 ip+E04 */ char pad_30[0x2];
+    /* +32 ip+E06 */ s16 x32;
 } itOctarock_ItemVars;
 
 typedef struct itSScopeAttributes {
@@ -936,5 +941,16 @@ typedef struct itKoopaFlame_ItemVars {
     bool x44_spawned;
     int x48_gfx;
 } itKoopaFlame_ItemVars;
+
+typedef struct itOctarockAttributes {
+    s32* x0;
+    f32 x4;
+    f32 x8;
+    f32 xC;
+    f32 x10;
+    f32 x14;
+    f32 x18;
+    s16 x1C;
+} itOctarockAttributes;
 
 #endif

@@ -26,7 +26,7 @@
 /* 26D324 */ bool it_8026D324(ItemKind);
 /* 26D3CC */ bool it_8026D3CC(void);
 /* 26D564 */ void it_8026D564(Item_GObj*);
-/* 26D5CC */ void it_8026D5CC(Item_GObj*);
+/* 26D5CC */ bool it_8026D5CC(Item_GObj*);
 /* 26D604 */ bool it_8026D604(Item_GObj*);
 /* 26D62C */ void it_8026D62C(Item_GObj*, HSD_GObjEvent);
 /* 26D6F4 */ void it_8026D6F4(Item_GObj*, HSD_GObjEvent);
