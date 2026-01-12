@@ -112,9 +112,7 @@ typedef struct itDosei_ItemVars {
     Vec3 xDE4;
     f32 xDF0;
     f32 xDF4;
-    f32 xDF8;
-    f32 xDFC;
-    f32 xE00;
+    Vec3 xDF8;
 } itDosei_ItemVars;
 
 
