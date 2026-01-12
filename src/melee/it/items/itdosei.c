@@ -216,11 +216,10 @@ void itDosei_UnkMotion6_Phys(Item_GObj* gobj) {}
 bool itDosei_UnkMotion6_Coll(Item_GObj* gobj)
 {
     Item* ip = gobj->user_data;
-    *(Vec3*)((u8*)ip + 0xDF8) = ip->x378_itemColl.floor.normal;
+    ip->xDD4_itemVar.dosei.xDF8 = ip->x378_itemColl.floor.normal;
     it_8026E8C4(gobj, (HSD_GObjEvent) fn_80281734, (HSD_GObjEvent) it_80282074);
     return false;
 }
-
 /// #it_80282BFC
 
 bool itDosei_UnkMotion8_Anim(Item_GObj* gobj)
