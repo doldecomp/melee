@@ -218,6 +218,7 @@ typedef enum CSSMatchType {
     STADIUM_15_MIN_MELEE = 0x14,
     STADIUM_ENDLESS_MELEE = 0x15,
     STADIUM_CRUEL_MELEE = 0x16,
+    TRAINING_MODE = 0x17
 } CSSMatchType;
 
 struct CSSData {

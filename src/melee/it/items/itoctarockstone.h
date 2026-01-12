@@ -24,7 +24,7 @@
 /* 2E8990 */ bool itOctarockstone_UnkMotion1_Coll(Item_GObj* gobj);
 /* 2E89B0 */ void it_802E89B0(Item_GObj*, Item_GObj*);
 /* 2E89D0 */ UNK_RET it_802E89D0(UNK_PARAMS);
-/* 2E8ADC */ UNK_RET it_802E8ADC(UNK_PARAMS);
+/* 2E8ADC */ void it_802E8ADC(Item_GObj*, Vec3*, s32, f32, f32, f32);
 /* 3F8E90 */ extern ItemStateTable it_803F8E90[];
 
 #endif

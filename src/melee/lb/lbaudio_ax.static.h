@@ -7,6 +7,26 @@
 
 #include <melee/ft/forward.h>
 
+/// Sound object userdata (0x48 bytes, allocated by HSD_ObjAlloc)
+typedef struct lbAudioAx_UserData {
+    /* 0x00 */ u8 x0[0x08];
+    /* 0x08 */ HSD_GObj* entity;
+    /* 0x0C */ u8 xC[0x0C];
+    /* 0x18 */ s32 start_val;
+    /* 0x1C */ s32 end_val;
+    /* 0x20 */ s32 x20;
+    /* 0x24 */ s32 pan_left;
+    /* 0x28 */ s32 pan_right;
+    /* 0x2C */ union {
+        s32 pan;
+        struct lbAudioAx_UserData* inner;
+    } x2C;
+    /* 0x30 */ s32 voice_id;
+    /* 0x34 */ s32 current_frame;
+    /* 0x38 */ s32 end_frame;
+    /* 0x3C */ u8 x3C[0x0C];
+} lbAudioAx_UserData;
+
 extern f32 lbl_804D63F0;
 extern int lbl_804D63F4;
 extern int lbl_804D63FC;
@@ -189,5 +209,16 @@ static u8 unk_arr_803BC4A0[0x21][2] = {
     { 0x3F, 0x3F }, { 0x22, 0x22 }, { 0x62, 0x62 }, { 0x62, 0x62 },
     { 0x62, 0x62 }, { 0x62, 0x62 }, { 0x62, 0x62 }, { 0x62, 0x62 },
 };
+
+static int offsets_arr_803BC4E4[0x38][2];
+
+extern int lbl_804337C4[0x38];
+extern int lbl_804338A4[0x38];
+extern int lbl_80433B44[0x38];
+
+extern int lbl_804D6438;
+extern int lbl_804D6448;
+extern int lbl_804D644C;
+extern int lbl_804D6450;
 
 #endif
