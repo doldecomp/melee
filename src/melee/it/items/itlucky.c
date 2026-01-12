@@ -19,6 +19,84 @@
 #include "lb/lb_00B0.h"
 #include "sysdolphin/baselib/random.h"
 
+ItemStateTable it_803F8190[] = {
+    {
+        -1,
+        it_802D55DC,
+        it_802D5600,
+        it_802D5620,
+    },
+    {
+        -1,
+        itLucky_UnkMotion5_Anim,
+        itLucky_UnkMotion5_Phys,
+        itLucky_UnkMotion5_Coll,
+    },
+    {
+        1,
+        it_802D53AC,
+        it_802D53F0,
+        it_802D53F4,
+    },
+    {
+        2,
+        it_802D53AC,
+        it_802D53F0,
+        it_802D53F4,
+    },
+    {
+        3,
+        it_802D53AC,
+        it_802D53F0,
+        it_802D53F4,
+    },
+    {
+        0,
+        itLucky_UnkMotion5_Anim,
+        itLucky_UnkMotion5_Phys,
+        itLucky_UnkMotion5_Coll,
+    },
+    {
+        -1,
+        itLucky_UnkMotion6_Anim,
+        itLucky_UnkMotion6_Phys,
+        NULL,
+    },
+};
+
+ItemStateTable it_803F8200[] = {
+    {
+        -1,
+        it_802D5884,
+        it_802D58BC,
+        it_802D58C0,
+    },
+    {
+        -1,
+        itLucky_UnkMotion3_Anim,
+        itLucky_UnkMotion3_Phys,
+        itLucky_UnkMotion3_Coll,
+    },
+    {
+        -1,
+        itLucky_UnkMotion2_Anim,
+        itLucky_UnkMotion2_Phys,
+        NULL,
+    },
+    {
+        -1,
+        itLucky_UnkMotion3_Anim,
+        itLucky_UnkMotion3_Phys,
+        itLucky_UnkMotion3_Coll,
+    },
+    {
+        -1,
+        it_802D5A2C,
+        it_802D5A64,
+        it_802D5A68,
+    },
+};
+
 void it_802D5050(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
