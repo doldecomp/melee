@@ -23,6 +23,117 @@
 
 extern f32* it_804D6D40;
 
+ItemStateTable it_803F8EB0[] = {
+    {
+        0,
+        NULL,
+        NULL,
+        NULL,
+    },
+    {
+        -1,
+        itLeadead_UnkMotion1_Anim,
+        itLeadead_UnkMotion1_Phys,
+        itLeadead_UnkMotion1_Coll,
+    },
+    {
+        1,
+        itLeadead_UnkMotion2_Anim,
+        itLeadead_UnkMotion2_Phys,
+        itLeadead_UnkMotion2_Coll,
+    },
+    {
+        2,
+        itLeadead_UnkMotion3_Anim,
+        itLeadead_UnkMotion3_Phys,
+        itLeadead_UnkMotion3_Coll,
+    },
+    {
+        3,
+        itLeadead_UnkMotion4_Anim,
+        itLeadead_UnkMotion4_Phys,
+        itLeadead_UnkMotion4_Coll,
+    },
+    {
+        4,
+        itLeadead_UnkMotion5_Anim,
+        itLeadead_UnkMotion5_Phys,
+        itLeadead_UnkMotion5_Coll,
+    },
+    {
+        5,
+        itLeadead_UnkMotion6_Anim,
+        itLeadead_UnkMotion6_Phys,
+        itLeadead_UnkMotion6_Coll,
+    },
+    {
+        6,
+        itLeadead_UnkMotion7_Anim,
+        itLeadead_UnkMotion7_Phys,
+        itLeadead_UnkMotion7_Coll,
+    },
+    {
+        -1,
+        itLeadead_UnkMotion8_Anim,
+        itLeadead_UnkMotion8_Phys,
+        itLeadead_UnkMotion8_Coll,
+    },
+    {
+        7,
+        itLeadead_UnkMotion9_Anim,
+        itLeadead_UnkMotion9_Phys,
+        itLeadead_UnkMotion9_Coll,
+    },
+    {
+        1,
+        itLeadead_UnkMotion10_Anim,
+        itLeadead_UnkMotion10_Phys,
+        itLeadead_UnkMotion10_Coll,
+    },
+    {
+        -1,
+        itLeadead_UnkMotion11_Anim,
+        itLeadead_UnkMotion12_Phys,
+        itLeadead_UnkMotion12_Coll,
+    },
+    {
+        -1,
+        itLeadead_UnkMotion12_Anim,
+        itLeadead_UnkMotion12_Phys,
+        itLeadead_UnkMotion12_Coll,
+    },
+    {
+        8,
+        itLeadead_UnkMotion13_Anim,
+        itLeadead_UnkMotion13_Phys,
+        NULL,
+    },
+    {
+        9,
+        itLeadead_UnkMotion14_Anim,
+        itLeadead_UnkMotion14_Phys,
+        itLeadead_UnkMotion14_Coll,
+    },
+    {
+        -1,
+        itLeadead_UnkMotion15_Anim,
+        itLeadead_UnkMotion15_Phys,
+        itLeadead_UnkMotion15_Coll,
+    },
+    {
+        -1,
+        itLeadead_UnkMotion16_Anim,
+        itLeadead_UnkMotion16_Phys,
+        itLeadead_UnkMotion16_Coll,
+    },
+    {
+        -1,
+        itLeadead_UnkMotion17_Anim,
+        itLeadead_UnkMotion17_Phys,
+        itLeadead_UnkMotion17_Coll,
+    },
+};
+
 void it_802E8BCC(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
@@ -392,14 +503,12 @@ bool itLeadead_UnkMotion7_Anim(Item_GObj* gobj)
     return false;
 }
 
-extern f32 it_804DD87C;
-
 void itLeadead_UnkMotion7_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
 
     it_8027C8D0(&ip->x40_vel, &ip->x378_itemColl.floor.normal, ip->facing_dir);
-    it_8027C0A8(gobj, ip->facing_dir, it_804DD87C);
+    it_8027C0A8(gobj, ip->facing_dir, 5.0F);
 }
 
 bool itLeadead_UnkMotion7_Coll(Item_GObj* gobj)
