@@ -119,17 +119,16 @@ void it_80281C6C(Item_GObj* gobj)
     // [0x1C] r29 = gobj, r30 = user_data (ip)
     Item* ip = GET_ITEM(gobj);
 
-    // [0x10 & 0x24] r31 = 0; ip->xDD8 = 0;
-    M2C_FIELD(ip, u32*, 0xDD8) = 0;
+    // [0x10 & 0x24] r31 = 0;
+    ip->xDD4_itemVar.dosei.xDD8 = 0;
 
-    // [0x2C - 0x40] Copy xDE4 (Vec3) to x4C
-    M2C_FIELD(ip, Vec3*, 0x4C) = ip->xDD4_itemVar.dosei.xDE4;
+    // [0x2C - 0x40] Copy xDE4 (Vec3) to pos
+    ip->pos = ip->xDD4_itemVar.dosei.xDE4;
 
     // [0x44 - 0x4C] Initialize xDDC and vel.x
-    // Assign local here to force load into f0 right before use
     {
         f32 var_878 = it_804DC878;
-        M2C_FIELD(ip, f32*, 0xDDC) = var_878;
+        ip->xDD4_itemVar.dosei.xDDC = var_878;
         ip->x40_vel.x = var_878;
     }
 
@@ -140,17 +139,16 @@ void it_80281C6C(Item_GObj* gobj)
     Item_80268E5C(gobj, 2, 3);
 
     // [0x64 - 0x70] Set anim speed and call function
-    // Assign local here. Since it's not live across calls, compiler uses volatile f1.
     {
         f32 var_870 = it_804DC870;
         ip->x5D0_animFrameSpeed = var_870;
-        // Result is implicitly left in r3 for the caller to pick up if they cast the function type
         lb_8000BA0C(gobj->hsd_obj, var_870);
     }
 
-    // [0x74] Clear x518
-    M2C_FIELD(ip, u32*, 0x518) = 0;
+    // [0x74] Clear owner (0x518)
+    ip->owner = NULL;
 }
+
 
 void itDosei_UnkMotion2_Phys(Item_GObj* gobj) {}
 
@@ -162,7 +160,7 @@ void it_80282074(Item_GObj* gobj)
     Item_80268E5C(gobj, 3, 3);
     ip->x5D0_animFrameSpeed = it_804DC870;
     lb_8000BA0C(gobj->hsd_obj, it_804DC870);
-    M2C_FIELD(ip, u32*, 0x518) = 0;
+    ip->owner = NULL;
 }
 
 /// #itDosei_UnkMotion3_Anim
@@ -220,6 +218,7 @@ bool itDosei_UnkMotion6_Coll(Item_GObj* gobj)
     it_8026E8C4(gobj, (HSD_GObjEvent) fn_80281734, (HSD_GObjEvent) it_80282074);
     return false;
 }
+
 /// #it_80282BFC
 
 bool itDosei_UnkMotion8_Anim(Item_GObj* gobj)
