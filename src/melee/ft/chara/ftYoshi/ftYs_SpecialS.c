@@ -37,63 +37,47 @@ void fn_8012EC7C(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
-    if ((ftGetAction(fp) != 0x16B) && ((ftGetAction(fp) >=- 0x16B) || (ftGetAction(fp) != 0x167))) {
+    FtMotionId motion = ftGetAction(fp);
+    if ((motion != 0x16B) && ((motion >= 0x16B) || (motion != 0x167))) {
         ftParts_80074B0C(gobj, 0, 0);
     }
-    if (jobj == NULL) {
-        __assert("jobj.h", 0x2F8U, "jobj");
+    HSD_JObjSetScale(jobj,&fp->fv.ys.x222C);
+    ftPartSetRotY(fp, 0, M_PI_2 * fp->facing_dir);
+    ftPartSetRotZ(fp, 2, 0.0f);
+    if (fp->mv.ys.specials.x24 != 0.0f) {
+        fp->facing_dir = fp->mv.ys.specials.x24;
     }
-    if (&fp->fv == NULL) {
-        __assert("jobj.h", 0x2F9U, "scale");
-    }
+    fp->mv.ys.specials.x24 = 0.0f;
+    ftCommon_8007F5CC((Item_GObj* ) gobj, 1);
+    fp->x221E_b4 = 1;
 }
 
 void fn_8012EDE8(Fighter_GObj* gobj)
 {
     Point3d sp18;
     HSD_JObj* jobj;
-    s32 var_r3;
-    union Fighter_FighterVars* temp_r29;
-
     Fighter* fp = GET_FIGHTER(gobj);
-    if ((ftGetAction(fp) != 0x16B) && ((ftGetAction(fp) >= 0x16B) || (ftGetAction(fp) != 0x167))) {
+    FtMotionId motion = ftGetAction(fp);
+    if ((motion != 0x16B) && ((motion >= 0x16B) || (motion != 0x167))) {
         lb_8000B1CC(fp->parts->joint, NULL, &sp18);
         efSync_Spawn(0x4CF, gobj, &sp18, &fp->co_attrs.xBC);
         ft_PlaySFX(fp, 0x44618, 0x7FU, 0x40U);
     }
+    fp = GET_FIGHTER(gobj);
     jobj = GET_JOBJ(gobj);
-    if ((ftGetAction(fp) != 0x16B) && ((ftGetAction(fp) >= 0x16B) || (ftGetAction(fp) != 0x167))) {
+    motion = fp->motion_id;
+    if ((motion != 0x16B) && ((motion >= 0x16B) || (motion != 0x167))) {
         ftParts_80074B0C(gobj,0, 0);
     }
-    temp_r29 = &fp->fv;
-    if (jobj == NULL) {
-        __assert("jobj.h", 0x2F8U, "jobj");
-    }
-    if (temp_r29 == NULL) {
-        __assert("jobj.h", 0x2F9U, "scale");
-    }
-    jobj->scale.x = *(f32*)&fp->fv.ys.x222C;
-    jobj->scale.y = *(f32*)&fp->fv.ys.x2230;
-    jobj->scale.z = *(f32*)&fp->fv.ys.x2234;
-    if (!(jobj->flags & 0x02000000)) {
-        if (jobj != NULL) {
-            if (jobj == NULL) {
-                __assert("jobj.h", 0x234U, "jobj");
-            }
-            var_r3 = !(jobj->flags & 0x800000) && (jobj->flags & 0x40);
-            if (var_r3 == 0) {
-                HSD_JObjSetMtxDirtySub(jobj);
-            }
-        }
-    }
-    ftPartSetRotY(fp, 0, (f32) (1.5707963267948966 * (f64) fp->facing_dir));
+    HSD_JObjSetScale(jobj,&fp->fv.ys.x222C);
+    ftPartSetRotY(fp, 0, M_PI_2 * fp->facing_dir);
     ftPartSetRotZ(fp, 2, 0.0f);
-    if (fp->mv.co.common.x24 != 0.0f) {
-        fp->facing_dir = fp->mv.co.common.x24;
+    if (fp->mv.ys.specials.x24 != 0.0f) {
+        fp->facing_dir = fp->mv.ys.specials.x24;
     }
-    fp->mv.co.common.x24 = 0.0f;
-    ftCommon_8007F5CC((Item_GObj* ) gobj, 1);
-    fp->x221E_b4 = fp->x221E_b7;
+    fp->mv.ys.specials.x24 = 0.0f;
+    ftCommon_8007F5CC(gobj, 1);
+    fp->x221E_b4 = 1;
 }
 
 void fn_8012EFC0(Fighter_GObj* gobj)
