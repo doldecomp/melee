@@ -15,7 +15,64 @@
 #include "mp/mpcoll.h"
 #include "sysdolphin/baselib/random.h"
 
-extern f32** it_804D6D40;
+extern f32* it_804D6D40;
+
+ItemStateTable it_803F8B48[] = {
+    {
+        0,
+        itOctarock_UnkMotion0_Anim,
+        itOctarock_UnkMotion0_Phys,
+        itOctarock_UnkMotion0_Coll,
+    },
+    {
+        1,
+        itOctarock_UnkMotion1_Anim,
+        itOctarock_UnkMotion1_Phys,
+        itOctarock_UnkMotion1_Coll,
+    },
+    {
+        -1,
+        itOctarock_UnkMotion2_Anim,
+        itOctarock_UnkMotion2_Phys,
+        itOctarock_UnkMotion2_Coll,
+    },
+    {
+        3,
+        itOctarock_UnkMotion3_Anim,
+        itOctarock_UnkMotion3_Phys,
+        itOctarock_UnkMotion3_Coll,
+    },
+    {
+        2,
+        itOctarock_UnkMotion4_Anim,
+        itOctarock_UnkMotion4_Phys,
+        itOctarock_UnkMotion4_Coll,
+    },
+    {
+        3,
+        itOctarock_UnkMotion5_Anim,
+        itOctarock_UnkMotion5_Phys,
+        NULL,
+    },
+    {
+        4,
+        itOctarock_UnkMotion6_Anim,
+        itOctarock_UnkMotion6_Phys,
+        itOctarock_UnkMotion6_Coll,
+    },
+    {
+        3,
+        itOctarock_UnkMotion7_Anim,
+        itOctarock_UnkMotion7_Phys,
+        itOctarock_UnkMotion7_Coll,
+    },
+    {
+        3,
+        itOctarock_UnkMotion8_Anim,
+        itOctarock_UnkMotion8_Phys,
+        itOctarock_UnkMotion8_Coll,
+    },
+};
 
 static inline void itOctarock_SetFacingDir(Item* ip)
 {
@@ -51,7 +108,7 @@ bool it_802E4B00(Item_GObj* gobj)
         it_80275474(gobj);
         it_8027CE44(gobj);
         Camera_80030E44(2, &ip->pos);
-        if (HSD_Randf() < ((f32*) it_804D6D40)[2]) {
+        if (HSD_Randf() < it_804D6D40[2]) {
             it_802E58A0(gobj);
         } else {
             it_802E57D4(gobj);
