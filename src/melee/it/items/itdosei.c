@@ -9,9 +9,7 @@
 #include "it/it_2725.h"
 #include "lb/lb_00B0.h"
 
-extern const f32 it_804DC874;
-extern const f32 it_804DC870;
-extern const f32 it_804DC878;
+#include <math.h>
 
 // Explicit declaration for external function
 extern void Item_80268E5C(Item_GObj* gobj, int arg1, int arg2);
@@ -47,7 +45,7 @@ bool itDosei_UnkMotion1_Anim(Item_GObj* gobj)
     ip = gobj->user_data;
     ip->xDD4_itemVar.dosei.xDE4 = ip->pos;
     ip2 = gobj->user_data;
-    frame_speed = it_804DC874 * (M2C_FIELD(ip2, f32*, 0x4CC) * ip2->facing_dir) + it_804DC870;
+    frame_speed = 0.5F * (M2C_FIELD(ip2, f32*, 0x4CC) * ip2->facing_dir) + 1.0F;
     jobj = gobj->hsd_obj;
     ip->x5D0_animFrameSpeed = frame_speed;
     lb_8000BA0C(jobj, frame_speed);
@@ -60,15 +58,9 @@ bool itDosei_UnkMotion1_Anim(Item_GObj* gobj)
 void itDosei_UnkMotion1_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    // Cast strict to itDoseiAttributes* to match the header definition
     itDoseiAttributes* attr = (itDoseiAttributes*) ip->xC4_article_data->x4_specialAttributes;
-    f32 var_f1;
 
-    var_f1 = attr->unk8 * ip->x5D0_animFrameSpeed;
-    if (var_f1 < 0.0f) {
-        var_f1 = -var_f1;
-    }
-    ip->x40_vel.x = ip->facing_dir * var_f1;
+    ip->x40_vel.x = ip->facing_dir * ABS(attr->unk8 * ip->x5D0_animFrameSpeed);
 }
 
 bool itDosei_UnkMotion1_Coll(Item_GObj* gobj)
@@ -92,12 +84,12 @@ bool itDosei_UnkMotion1_Coll(Item_GObj* gobj)
                 var_f1 = -var_f1;
             }
 
-            if (var_f1 >= 0.0f) {
+            if (var_f1 >= (f32) M_PI / 4) {
                 temp_r4->xD5C = 1;
-                M2C_FIELD(temp_r4, u8*, 0xDCB) |= 1;
+                temp_r4->xDC8_word.flags.x1F = true;
             } else {
                 temp_r4->xD5C = 0;
-                M2C_FIELD(temp_r4, u8*, 0xDCB) &= ~1;
+                temp_r4->xDC8_word.flags.x1F = false;
             }
         }
 
@@ -125,12 +117,8 @@ void it_80281C6C(Item_GObj* gobj)
     // [0x2C - 0x40] Copy xDE4 (Vec3) to pos
     ip->pos = ip->xDD4_itemVar.dosei.xDE4;
 
-    // [0x44 - 0x4C] Initialize xDDC and vel.x
-    {
-        f32 var_878 = it_804DC878;
-        ip->xDD4_itemVar.dosei.xDDC = var_878;
-        ip->x40_vel.x = var_878;
-    }
+    ip->xDD4_itemVar.dosei.xDDC = 0.0F;
+    ip->x40_vel.x = 0.0F;
 
     // [0x50] Call helper
     it_802762B0(ip);
@@ -138,11 +126,10 @@ void it_80281C6C(Item_GObj* gobj)
     // [0x54] Call Item_80268E5C
     Item_80268E5C(gobj, 2, 3);
 
-    // [0x64 - 0x70] Set anim speed and call function
     {
-        f32 var_870 = it_804DC870;
-        ip->x5D0_animFrameSpeed = var_870;
-        lb_8000BA0C(gobj->hsd_obj, var_870);
+        HSD_JObj* jobj = gobj->hsd_obj;
+        ip->x5D0_animFrameSpeed = 1.0F;
+        lb_8000BA0C(jobj, 1.0F);
     }
 
     // [0x74] Clear owner (0x518)
@@ -157,9 +144,11 @@ void itDosei_UnkMotion2_Phys(Item_GObj* gobj) {}
 void it_80282074(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
+    HSD_JObj* jobj;
     Item_80268E5C(gobj, 3, 3);
-    ip->x5D0_animFrameSpeed = it_804DC870;
-    lb_8000BA0C(gobj->hsd_obj, it_804DC870);
+    jobj = gobj->hsd_obj;
+    ip->x5D0_animFrameSpeed = 1.0F;
+    lb_8000BA0C(jobj, 1.0F);
     ip->owner = NULL;
 }
 
@@ -249,7 +238,8 @@ void itDosei_UnkMotion7_Phys(Item_GObj* gobj) {}
 
 bool itDosei_UnkMotion7_Coll(Item_GObj* gobj)
 {
-    it_8026D62C(gobj, (HSD_GObjEvent) it_80282BFC);
+    PAD_STACK(8);
+    it_8026D62C(gobj, it_80282BFC);
     it_80276CB8(gobj);
     return false;
 }
@@ -277,8 +267,8 @@ bool itDosei_UnkMotion10_Anim(Item_GObj* gobj)
     ip = gobj->user_data;
     ip->xDD4_itemVar.dosei.xDE4 = ip->pos;
     jobj = gobj->hsd_obj;
-    ip->x5D0_animFrameSpeed = it_804DC870;
-    lb_8000BA0C(jobj, it_804DC870);
+    ip->x5D0_animFrameSpeed = 1.0F;
+    lb_8000BA0C(jobj, 1.0F);
     return false;
 }
 

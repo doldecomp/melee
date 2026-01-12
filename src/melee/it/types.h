@@ -472,7 +472,7 @@ struct Item {
     u32 xD50_landNum;  // Number of times this item has landed
     u32 xD54_throwNum; // Number of times this item has been thrown
     u32 xD58;
-    s32 xD5C;
+    u32 xD5C;
 
     /// @at{D60} @sz{4}
     enum_t destroy_type;
