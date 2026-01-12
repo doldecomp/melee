@@ -12,10 +12,60 @@
 
 #include <baselib/random.h>
 
-static Vec3 it_803B8750;
+ItemStateTable it_803F91D0[] = {
+    {
+        1,
+        itWhispyapple_UnkMotion0_Anim,
+        itWhispyapple_UnkMotion0_Phys,
+        itWhispyapple_UnkMotion0_Coll,
+    },
+    {
+        0,
+        itWhispyapple_UnkMotion1_Anim,
+        itWhispyapple_UnkMotion1_Phys,
+        itWhispyapple_UnkMotion1_Coll,
+    },
+    {
+        0,
+        itWhispyapple_UnkMotion5_Anim,
+        itWhispyapple_UnkMotion5_Phys,
+        itWhispyapple_UnkMotion5_Coll,
+    },
+    {
+        0,
+        itWhispyapple_UnkMotion3_Anim,
+        itWhispyapple_UnkMotion3_Phys,
+        NULL,
+    },
+    {
+        1,
+        itWhispyapple_UnkMotion5_Anim,
+        itWhispyapple_UnkMotion5_Phys,
+        itWhispyapple_UnkMotion5_Coll,
+    },
+    {
+        1,
+        itWhispyapple_UnkMotion5_Anim,
+        itWhispyapple_UnkMotion5_Phys,
+        itWhispyapple_UnkMotion5_Coll,
+    },
+    {
+        0,
+        itWhispyapple_UnkMotion6_Anim,
+        itWhispyapple_UnkMotion6_Phys,
+        itWhispyapple_UnkMotion6_Coll,
+    },
+    {
+        2,
+        itWhispyapple_UnkMotion7_Anim,
+        itWhispyapple_UnkMotion7_Phys,
+        itWhispyapple_UnkMotion7_Coll,
+    },
+};
+
 static s32 it_803F9250[4] = { 0x68FB4, 0x68FB5, 0x68FB6, 0 };
 
-static inline bool itWhispyapple_UnkMotion0_Anim_inline(Item_GObj* gobj)
+static bool itWhispyapple_UnkMotion0_Anim_inline(Item_GObj* gobj)
 {
     HSD_JObj* jobj = GET_JOBJ(gobj);
     Item* ip = GET_ITEM(gobj);
@@ -239,7 +289,7 @@ void it_802EEA70(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
     HSD_JObj* child = HSD_JObjGetChild(jobj);
-    Vec3 vec = it_803B8750;
+    Vec3 vec = { 0, 0, 0 };
 
     it_8026B390(gobj);
     HSD_JObjClearFlagsAll(child, 0x10);
