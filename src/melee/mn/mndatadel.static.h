@@ -10,6 +10,7 @@
 
 #include "mn/forward.h"
 
+#include "mn/mnmain.h"
 #include "mn/mnmainrule.h"
 #include "mn/types.h"
 #include "sc/types.h"
@@ -28,7 +29,7 @@ struct MnDataDelUserData {
     /* +0x03 */ u8 item_deleted[6]; ///< Flags for deleted items (0-5)
     /* +0x09 */ u8 pad[3];          ///< Padding for alignment
     /* +0x0C */ HSD_Text* label_text;
-    /* +0x10 */ struct mn_80231634_t* menu_joints[8];
+    /* +0x10 */ HSD_JObj* menu_joints[8];
 };
 
 struct WarnCmnData {
@@ -60,8 +61,8 @@ struct MnDataDelData {
     AnimLoopSettings x18;
     AnimLoopSettings x24;
     AnimLoopSettings x30;
-    /* +0x3C */ s32 item_joint_indices[7]; ///< Joint indices for menu items
-    /* +0x58 */ s16 item_label_ids[6];     ///< SIS label IDs for menu items
+    /* +0x3C */ s32 x3C[7]; ///< Joint indices for menu items
+    /* +0x58 */ s16 x58[6]; ///< SIS label IDs for menu items
     f32 x64;
     f32 x68;
     f32 x6C;
@@ -87,6 +88,28 @@ static inline bool Anim_IsFrameInRange(float frame, AnimLoopSettings* settings)
 
 #define FRAME_IN_RANGE(frame, settings)                                       \
     ((frame) >= (settings).start_frame && (frame) < (settings).end_frame)
+
+static inline void SetItemChildAnim(HSD_JObj* item_root, u32 item_enabled)
+{
+    u32 _pad[5];
+    HSD_JObj* child;
+    f32 saved_frame;
+    s32 target_frame;
+    (void) _pad;
+    lb_80011E24(item_root, &child, 1, -1);
+    saved_frame = mn_8022F298(child);
+    if (item_enabled != 0) {
+        target_frame = 1;
+    } else {
+        target_frame = 0;
+    }
+    HSD_JObjReqAnimAll(child, (f32) target_frame);
+    mn_8022F3D8(child, 0xFF, 0x80);
+    HSD_JObjAnimAll(child);
+    HSD_JObjReqAnimAll(child, saved_frame);
+    mn_8022F3D8(child, 0xFF, 0x480);
+    HSD_JObjAnimAll(child);
+}
 
 extern HSD_GObj* mnDataDel_804D6C68;
 extern HSD_Text* mnDataDel_804D6C6C;
