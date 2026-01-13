@@ -32,9 +32,9 @@ struct MnDataDelUserData {
 };
 
 struct WarnCmnData {
-    /* +00 */ u8 x0;
-    /* +01 */ u8 visible;
-    /* +02 */ u8 cursor_idx;
+    /* +00 */ u8 x0;          ///< Menu item being confirmed (0-5, compared with 5 in confirm handler)
+    /* +01 */ u8 visible;     ///< Dialog visibility state: 0=hidden, 1/2=showing
+    /* +02 */ u8 cursor_idx;  ///< Yes/No cursor selection (0 or 1)
 };
 
 enum WarnCommonJoints {

@@ -39,9 +39,9 @@ typedef struct _MenuFlow {
 } MenuFlow;
 
 typedef struct _MenuInputState {
-    u16 cooldown;
-    u16 x2;
-    s32 x4;
+    u16 cooldown;        ///< Input cooldown timer - prevents rapid input
+    u16 x2;              ///< @todo Reset to 0 when cooldown active
+    s32 x4;              ///< @todo Reset to 0 when cooldown active
 } MenuInputState;
 
 /* 2295AC */ u8 mn_802295AC(void);
