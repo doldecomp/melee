@@ -104,7 +104,14 @@ float un_80305DB0(void)
 
 /// #un_803067BC
 
-/// #un_803068E0
+s32 un_803068E0(HSD_GObj* gobj)
+{
+    if (HSD_CObjSetCurrent(gobj->hsd_obj) != 0) {
+        HSD_GObj_80390ED0(gobj, 7U);
+        HSD_CObjEndCurrent();
+        HSD_FogSet(NULL);
+    }
+}
 
 /// #un_80306930
 
