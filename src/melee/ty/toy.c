@@ -1,6 +1,7 @@
 #include "toy.h"
 
 #include "baselib/controller.h"
+#include "baselib/fog.h"
 #include "baselib/gobj.h"
 #include "baselib/gobjproc.h"
 #include "baselib/jobj.h"
