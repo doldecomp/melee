@@ -22,13 +22,13 @@ struct MnDataDelSelectData {
 };
 
 struct MnDataDelUserData {
-    u8 x0;
-    u8 x1;
-    u8 x2;
-    u8 x3;
-    u8 x4;
-    u8 pad[0xB];
-    struct mn_80231634_t* x10[8];
+    /* +0x00 */ u8 selected_item;    ///< Current menu selection (0-5)
+    /* +0x01 */ u8 confirm_active;   ///< Confirmation dialog active
+    /* +0x02 */ u8 x2;
+    /* +0x03 */ u8 item_deleted[6];  ///< Flags for deleted items (0-5)
+    /* +0x09 */ u8 pad[3];           ///< Padding for alignment
+    /* +0x0C */ HSD_Text* label_text;
+    /* +0x10 */ struct mn_80231634_t* menu_joints[8];
 };
 
 struct WarnCmnData {
@@ -60,19 +60,8 @@ struct MnDataDelData {
     AnimLoopSettings x18;
     AnimLoopSettings x24;
     AnimLoopSettings x30;
-    s32 x3C;
-    s32 x40;
-    s32 x44;
-    s32 x48;
-    s32 x4C;
-    s32 x50;
-    s32 x54;
-    s16 x58;
-    s16 x5A;
-    s16 x5C;
-    s16 x5E;
-    s16 x60;
-    s16 x62;
+    /* +0x3C */ s32 item_joint_indices[7]; ///< Joint indices for menu items
+    /* +0x58 */ s16 item_label_ids[6];     ///< SIS label IDs for menu items
     f32 x64;
     f32 x68;
     f32 x6C;

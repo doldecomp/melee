@@ -46,7 +46,7 @@ void mnDataDel_8024E940(void)
     f32 const_zero;
 
     data = mnDataDel_804D6C68->user_data;
-    lb_80011E24((HSD_JObj*) mn_80231634(data->x10[mnDataDel_803EF8AC.x4]),
+    lb_80011E24((HSD_JObj*) mn_80231634(data->menu_joints[mnDataDel_803EF8AC.x4]),
                 &child, 1, -1);
     frame = mn_8022F298(child);
     const_zero = mnDataDel_804DC1A8;
@@ -56,7 +56,7 @@ void mnDataDel_8024E940(void)
     HSD_JObjReqAnimAll(child, frame);
     mn_8022F3D8(child, 0xFF, 0x480);
     HSD_JObjAnimAll(child);
-    data->x4 = 1;
+    data->item_deleted[1] = 1;
     gm_801647D0();
     gmMainLib_8015F490();
     found = 0;
@@ -96,7 +96,7 @@ void mnDataDel_8024EA6C(void)
         lb_80011E24(
             (HSD_JObj*) mn_80231634(
                 ((struct MnDataDelUserData*) mnDataDel_804D6C68->user_data)
-                    ->x10[*select_ptr]),
+                    ->menu_joints[*select_ptr]),
             &child, 1, -1);
         frame = mn_8022F298(child);
         HSD_JObjReqAnimAll(child, const_zero);
@@ -398,7 +398,7 @@ void fn_8024F318(HSD_GObj* arg0)
             case 0:
                 user_data = mnDataDel_804D6C68->user_data;
                 lb_80011E24(
-                    (HSD_JObj*) mn_80231634(user_data->x10[data_tbl->x3C]),
+                    (HSD_JObj*) mn_80231634(user_data->menu_joints[data_tbl->item_joint_indices[0]]),
                     &child, 1, -1);
                 frame = mn_8022F298(child);
                 HSD_JObjReqAnimAll(child, mnDataDel_804DC1A8);
@@ -407,7 +407,7 @@ void fn_8024F318(HSD_GObj* arg0)
                 HSD_JObjReqAnimAll(child, frame);
                 mn_8022F3D8(child, 0xFF, 0x480);
                 HSD_JObjAnimAll(child);
-                user_data->x3 = 1;
+                user_data->item_deleted[0] = 1;
                 gm_8016505C();
                 gmMainLib_8015F464();
                 gm_801729EC();
@@ -420,7 +420,7 @@ void fn_8024F318(HSD_GObj* arg0)
             case 2:
                 user_data = mnDataDel_804D6C68->user_data;
                 lb_80011E24(
-                    (HSD_JObj*) mn_80231634(user_data->x10[data_tbl->x44]),
+                    (HSD_JObj*) mn_80231634(user_data->menu_joints[data_tbl->item_joint_indices[2]]),
                     &child, 1, -1);
                 frame = mn_8022F298(child);
                 HSD_JObjReqAnimAll(child, mnDataDel_804DC1A8);
@@ -429,7 +429,7 @@ void fn_8024F318(HSD_GObj* arg0)
                 HSD_JObjReqAnimAll(child, frame);
                 mn_8022F3D8(child, 0xFF, 0x480);
                 HSD_JObjAnimAll(child);
-                user_data->pad[0] = 1;
+                user_data->item_deleted[2] = 1;
                 gmMainLib_8015EEC8();
                 gm_801729EC();
                 lb_8001CE00();
@@ -437,7 +437,7 @@ void fn_8024F318(HSD_GObj* arg0)
             case 3:
                 user_data = mnDataDel_804D6C68->user_data;
                 lb_80011E24(
-                    (HSD_JObj*) mn_80231634(user_data->x10[data_tbl->x48]),
+                    (HSD_JObj*) mn_80231634(user_data->menu_joints[data_tbl->item_joint_indices[3]]),
                     &child, 1, -1);
                 frame = mn_8022F298(child);
                 HSD_JObjReqAnimAll(child, mnDataDel_804DC1A8);
@@ -446,7 +446,7 @@ void fn_8024F318(HSD_GObj* arg0)
                 HSD_JObjReqAnimAll(child, frame);
                 mn_8022F3D8(child, 0xFF, 0x480);
                 HSD_JObjAnimAll(child);
-                user_data->pad[1] = 1;
+                user_data->item_deleted[3] = 1;
                 gmMainLib_8015F150();
                 gmMainLib_8015F260();
                 gm_801729EC();
@@ -455,7 +455,7 @@ void fn_8024F318(HSD_GObj* arg0)
             case 4:
                 user_data = mnDataDel_804D6C68->user_data;
                 lb_80011E24(
-                    (HSD_JObj*) mn_80231634(user_data->x10[data_tbl->x4C]),
+                    (HSD_JObj*) mn_80231634(user_data->menu_joints[data_tbl->item_joint_indices[4]]),
                     &child, 1, -1);
                 frame = mn_8022F298(child);
                 HSD_JObjReqAnimAll(child, mnDataDel_804DC1A8);
@@ -464,7 +464,7 @@ void fn_8024F318(HSD_GObj* arg0)
                 HSD_JObjReqAnimAll(child, frame);
                 mn_8022F3D8(child, 0xFF, 0x480);
                 HSD_JObjAnimAll(child);
-                user_data->pad[2] = 1;
+                user_data->item_deleted[4] = 1;
                 un_80311960();
                 gmMainLib_8015F4BC();
                 gm_80174238();
@@ -530,8 +530,8 @@ void fn_8024F840(HSD_GObj* gobj)
         mn_80229894(4, 5, 3);
         return;
     }
-    if (((buttons & 0x10) ^ zero) && *((u8*) &data->x3 + data->x0) == 0) {
-        data->x1 = 1;
+    if (((buttons & 0x10) ^ zero) && data->item_deleted[data->selected_item] == 0) {
+        data->confirm_active = 1;
         data->x2 = zero;
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
         proc = HSD_GObjProc_8038FD54(gobj, fn_8024F318, 0);
@@ -546,27 +546,27 @@ void fn_8024F840(HSD_GObj* gobj)
         lbAudioAx_80024030(2);
         data2 = mnDataDel_804D6C68->user_data;
         mnDataDel_8024EBC8((HSD_JObj*) mn_80231634(
-                               data2->x10[((s32*) &menu_data->x3C)[data->x0]]),
-                           data->x0, 0);
-        if (data->x0 != 0) {
-            data->x0 = data->x0 - 1;
+                               data2->menu_joints[menu_data->item_joint_indices[data->selected_item]]),
+                           data->selected_item, 0);
+        if (data->selected_item != 0) {
+            data->selected_item = data->selected_item - 1;
         } else {
-            data->x0 = 5;
+            data->selected_item = 5;
         }
         data2 = mnDataDel_804D6C68->user_data;
         mnDataDel_8024EBC8((HSD_JObj*) mn_80231634(
-                               data2->x10[((s32*) &menu_data->x3C)[data->x0]]),
-                           data->x0, 1);
+                               data2->menu_joints[menu_data->item_joint_indices[data->selected_item]]),
+                           data->selected_item, 1);
         data = mnDataDel_804D6C68->user_data;
-        text = *(HSD_Text**) &data->pad[7];
+        text = data->label_text;
         if (text != NULL) {
             HSD_SisLib_803A5CC4(text);
         }
-        sis_id = ((s16*) &menu_data->x58)[data->x0];
+        sis_id = menu_data->item_label_ids[data->selected_item];
         text = HSD_SisLib_803A5ACC(0, 0, mnDataDel_804DC1B0,
                                    mnDataDel_804DC1B4, mnDataDel_804DC1B8,
                                    mnDataDel_804DC1BC, mnDataDel_804DC1C0);
-        *(HSD_Text**) &data->pad[7] = text;
+        data->label_text = text;
         text->font_size.x = mnDataDel_804DC1C4;
         text->font_size.y = mnDataDel_804DC1C4;
         HSD_SisLib_803A6368(text, sis_id);
@@ -576,27 +576,27 @@ void fn_8024F840(HSD_GObj* gobj)
         lbAudioAx_80024030(2);
         data2 = mnDataDel_804D6C68->user_data;
         mnDataDel_8024EBC8((HSD_JObj*) mn_80231634(
-                               data2->x10[((s32*) &menu_data->x3C)[data->x0]]),
-                           data->x0, 0);
-        if (data->x0 == 5) {
-            data->x0 = 0;
+                               data2->menu_joints[menu_data->item_joint_indices[data->selected_item]]),
+                           data->selected_item, 0);
+        if (data->selected_item == 5) {
+            data->selected_item = 0;
         } else {
-            data->x0 = data->x0 + 1;
+            data->selected_item = data->selected_item + 1;
         }
         data2 = mnDataDel_804D6C68->user_data;
         mnDataDel_8024EBC8((HSD_JObj*) mn_80231634(
-                               data2->x10[((s32*) &menu_data->x3C)[data->x0]]),
-                           data->x0, 1);
+                               data2->menu_joints[menu_data->item_joint_indices[data->selected_item]]),
+                           data->selected_item, 1);
         data = mnDataDel_804D6C68->user_data;
-        text = *(HSD_Text**) &data->pad[7];
+        text = data->label_text;
         if (text != NULL) {
             HSD_SisLib_803A5CC4(text);
         }
-        sis_id = ((s16*) &menu_data->x58)[data->x0];
+        sis_id = menu_data->item_label_ids[data->selected_item];
         text = HSD_SisLib_803A5ACC(0, 0, mnDataDel_804DC1B0,
                                    mnDataDel_804DC1B4, mnDataDel_804DC1B8,
                                    mnDataDel_804DC1BC, mnDataDel_804DC1C0);
-        *(HSD_Text**) &data->pad[7] = text;
+        data->label_text = text;
         text->font_size.x = mnDataDel_804DC1C4;
         text->font_size.y = mnDataDel_804DC1C4;
         HSD_SisLib_803A6368(text, sis_id);
@@ -616,7 +616,7 @@ void fn_8024FBA4(HSD_GObj* arg0)
     data = arg0->user_data;
     frame = mn_8022EE84(jobj, &menu_data->xC, 0x480);
     for (i = 0; i < 6; i++) {
-        mn_8022EE84((HSD_JObj*) data->x10[((s32*) &menu_data->x3C)[i]],
+        mn_8022EE84((HSD_JObj*) data->menu_joints[menu_data->item_joint_indices[i]],
                     &menu_data->xC, 0x480);
     }
     if (frame >= menu_data->xC.end_frame) {
@@ -639,15 +639,15 @@ void fn_8024FC48(HSD_GObj* arg0)
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
         proc = HSD_GObjProc_8038FD54(arg0, fn_8024FBA4, 0);
         proc->flags_3 = HSD_GObj_804D783C;
-        HSD_SisLib_803A5CC4(*(HSD_Text**) &data->pad[7]);
+        HSD_SisLib_803A5CC4(data->label_text);
         return;
     }
     for (i = 0; i < 6; i++) {
         jobj = (HSD_JObj*) mn_80231634(
             ((struct MnDataDelUserData*) arg0->user_data)
-                ->x10[((s32*) &menu_data->x3C)[i]]);
+                ->menu_joints[menu_data->item_joint_indices[i]]);
         lb_80011E24(jobj, &child, 1, -1);
-        if (data->x0 == i) {
+        if (data->selected_item == i) {
             mn_8022EC18(child, (f32*) &menu_data->x18, 0x400);
         } else {
             mn_8022EC18(child, (f32*) &menu_data->x24, 0x400);
@@ -671,12 +671,12 @@ void fn_8024FD40(HSD_GObj* arg0)
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
         proc = HSD_GObjProc_8038FD54(arg0, fn_8024FBA4, 0);
         proc->flags_3 = HSD_GObj_804D783C;
-        HSD_SisLib_803A5CC4(*(HSD_Text**) &data->pad[7]);
+        HSD_SisLib_803A5CC4(data->label_text);
         return;
     }
     frame = mn_8022EE84(jobj, &menu_data->x0, 0x480);
     for (i = 0; i < 6; i++) {
-        mn_8022EE84((HSD_JObj*) data->x10[((s32*) &menu_data->x3C)[i]],
+        mn_8022EE84((HSD_JObj*) data->menu_joints[menu_data->item_joint_indices[i]],
                     &menu_data->x0, 0x480);
     }
     if (frame == menu_data->x0.end_frame) {
@@ -714,19 +714,19 @@ void mnDataDel_8024FE4C(u8 arg0)
     HSD_JObjAnimAll(root);
     data = (struct MnDataDelUserData*) HSD_MemAlloc(0x30);
     HSD_ASSERT(0x402, data != NULL);
-    data->x0 = arg0;
-    data->x1 = 0;
+    data->selected_item = arg0;
+    data->confirm_active = 0;
     data->x2 = 0;
-    data->x3 = 0;
-    data->x4 = 0;
-    data->pad[0] = 0;
-    data->pad[1] = 0;
-    data->pad[2] = 0;
-    data->pad[3] = 0;
-    *(HSD_Text**) &data->pad[7] = NULL;
+    data->item_deleted[0] = 0;
+    data->item_deleted[1] = 0;
+    data->item_deleted[2] = 0;
+    data->item_deleted[3] = 0;
+    data->item_deleted[4] = 0;
+    data->item_deleted[5] = 0;
+    data->label_text = NULL;
     GObj_InitUserData(gobj, 0, HSD_Free, data);
     for (i = 0; i < 8; i++) {
-        lb_80011E24(root, (HSD_JObj**) &data->x10[i], i, -1);
+        lb_80011E24(root, (HSD_JObj**) &data->menu_joints[i], i, -1);
     }
     proc = HSD_GObjProc_8038FD54(gobj, fn_8024FD40, 0);
     proc->flags_3 = HSD_GObj_804D783C;
@@ -738,9 +738,9 @@ void mnDataDel_8024FE4C(u8 arg0)
                            item_model->shapeanim_joint);
         HSD_JObjReqAnimAll(item_jobj, (f32) i);
         HSD_JObjAnimAll(item_jobj);
-        HSD_JObjAddChild((HSD_JObj*) data->x10[((s32*) &menu_data->x3C)[i]],
+        HSD_JObjAddChild((HSD_JObj*) data->menu_joints[menu_data->item_joint_indices[i]],
                          item_jobj);
-        mnDataDel_8024EBC8(item_jobj, (u8) i, (u8) (data->x0 == i));
+        mnDataDel_8024EBC8(item_jobj, (u8) i, (u8) (data->selected_item == i));
         is_deleted = ((u8*) data)[i + 3];
         lb_80011E24(item_jobj, &sp20, 1, -1);
         frame = mn_8022F298(sp20);
@@ -756,17 +756,17 @@ void mnDataDel_8024FE4C(u8 arg0)
         HSD_JObjAnimAll(sp20);
     }
     data = gobj->user_data;
-    text = *(HSD_Text**) &data->pad[7];
+    text = data->label_text;
     if (text != NULL) {
         HSD_SisLib_803A5CC4(text);
     }
     text = HSD_SisLib_803A5ACC(0, 0, mnDataDel_804DC1B0, mnDataDel_804DC1B4,
                                mnDataDel_804DC1B8, mnDataDel_804DC1BC,
                                mnDataDel_804DC1C0);
-    *(HSD_Text**) &data->pad[7] = text;
+    data->label_text = text;
     text->font_size.x = mnDataDel_804DC1C4;
     text->font_size.y = mnDataDel_804DC1C4;
-    HSD_SisLib_803A6368(text, ((s16*) &menu_data->x58)[data->x0]);
+    HSD_SisLib_803A6368(text, menu_data->item_label_ids[data->selected_item]);
 }
 void mnDataDel_80250170(void)
 {
