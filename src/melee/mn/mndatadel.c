@@ -501,7 +501,7 @@ void fn_8024F318(HSD_GObj* arg0)
     }
 }
 
-void fn_8024F840(HSD_GObj* arg0)
+void fn_8024F840(HSD_GObj* gobj)
 {
     u8 _pad[0x34];
     struct MnDataDelUserData* data;
@@ -511,10 +511,10 @@ void fn_8024F840(HSD_GObj* arg0)
     HSD_GObjProc* proc;
     HSD_Text* text;
     s16 sis_id;
-    u32 buttons;
+    u64 buttons;
 
-    menu_data = &mnDataDel_803EF870;
     data = mnDataDel_804D6C68->user_data;
+    menu_data = &mnDataDel_803EF870;
     if (mn_804D6BC8.cooldown != 0) {
         mn_804D6BC8.cooldown -= 1;
         mn_804D6BC8.x2 = 0;
@@ -523,18 +523,18 @@ void fn_8024F840(HSD_GObj* arg0)
     }
     buttons = mn_80229624(4);
     zero = 0;
-    mn_804A04F0.buttons = (u64) buttons;
-    if (buttons & 0x20) {
+    mn_804A04F0.buttons = buttons;
+    if ((buttons & 0x20) ^ zero) {
         lbAudioAx_80024030(0);
-        mn_804A04F0.entering_menu = 0;
+        mn_804A04F0.entering_menu = zero;
         mn_80229894(4, 5, 3);
         return;
     }
-    if ((buttons & 0x10) && *((u8*) &data->x3 + data->x0) == 0) {
+    if (((buttons & 0x10) ^ zero) && *((u8*) &data->x3 + data->x0) == 0) {
         data->x1 = 1;
         data->x2 = zero;
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
-        proc = HSD_GObjProc_8038FD54(arg0, fn_8024F318, 0);
+        proc = HSD_GObjProc_8038FD54(gobj, fn_8024F318, 0);
         proc->flags_3 = HSD_GObj_804D783C;
         mnDataDel_8024EEC0();
         mn_804D6BC8.cooldown = 10;
@@ -542,7 +542,7 @@ void fn_8024F840(HSD_GObj* arg0)
         return;
     }
     zero = 0;
-    if (buttons & 1) {
+    if ((buttons & 1) ^ zero) {
         lbAudioAx_80024030(2);
         data2 = mnDataDel_804D6C68->user_data;
         mnDataDel_8024EBC8((HSD_JObj*) mn_80231634(
@@ -572,7 +572,7 @@ void fn_8024F840(HSD_GObj* arg0)
         HSD_SisLib_803A6368(text, sis_id);
         return;
     }
-    if (buttons & 2) {
+    if ((buttons & 2) ^ zero) {
         lbAudioAx_80024030(2);
         data2 = mnDataDel_804D6C68->user_data;
         mnDataDel_8024EBC8((HSD_JObj*) mn_80231634(
