@@ -22,11 +22,11 @@ struct MnDataDelSelectData {
 };
 
 struct MnDataDelUserData {
-    /* +0x00 */ u8 selected_item;    ///< Current menu selection (0-5)
-    /* +0x01 */ u8 confirm_active;   ///< Confirmation dialog active
+    /* +0x00 */ u8 selected_item;  ///< Current menu selection (0-5)
+    /* +0x01 */ u8 confirm_active; ///< Confirmation dialog active
     /* +0x02 */ u8 x2;
-    /* +0x03 */ u8 item_deleted[6];  ///< Flags for deleted items (0-5)
-    /* +0x09 */ u8 pad[3];           ///< Padding for alignment
+    /* +0x03 */ u8 item_deleted[6]; ///< Flags for deleted items (0-5)
+    /* +0x09 */ u8 pad[3];          ///< Padding for alignment
     /* +0x0C */ HSD_Text* label_text;
     /* +0x10 */ struct mn_80231634_t* menu_joints[8];
 };
