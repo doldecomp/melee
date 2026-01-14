@@ -13,8 +13,8 @@
 typedef struct TyModeState {
     s8 x0;
     u8 x1;
-    u8 x2; /* Written separately via byte access in un_803148E4 */
-    u8 x3; /* Written separately via byte access in un_803148E4 */
+    u8 x2;
+    u8 x3;
     s8 x4;
     u8 x5;
     u16 x6;
@@ -42,41 +42,26 @@ typedef struct ToyEntry {
     };
 } ToyEntry;
 
-/**
- * Trophy metadata entry used by un_803060BC for trophy data lookup.
- * Size: 0x24 bytes per entry.
- *
- * Evidence for struct layout:
- * - un_803060BC switch statement accesses fields by index:
- *   - cases 0-5: return float fields x08-x1C
- *   - case 6: return (float) x20 (s8)
- *   - case 7: return (float) x21 (s8)
- *   - case 8: return (float) x04 (category)
- * - id (s32): compared to -1 sentinel and int trophyId in table search loops
- *   (lines 331-332, 359-360 in toy.c), matches s32 to produce correct cmpwi
- */
+/* Trophy metadata entry. Size: 0x24 bytes. */
 typedef struct TrophyData {
-    s32 id;  /* 0x00 - compared to -1 sentinel and int trophyId */
-    s32 x04; /* 0x04 - category (case 8) */
-    f32 x08; /* 0x08 - field 0 */
-    f32 x0C; /* 0x0C - field 1 */
-    f32 x10; /* 0x10 - field 2 */
-    f32 x14; /* 0x14 - field 3 */
-    f32 x18; /* 0x18 - field 4 */
-    f32 x1C; /* 0x1C - field 5 */
-    s8 x20;  /* 0x20 - field 6 */
-    s8 x21;  /* 0x21 - field 7 */
-    s8 x22;  /* 0x22 - padding */
-    s8 x23;  /* 0x23 - padding */
+    s32 id;
+    s32 x04;
+    f32 x08;
+    f32 x0C;
+    f32 x10;
+    f32 x14;
+    f32 x18;
+    f32 x1C;
+    s8 x20;
+    s8 x21;
+    s8 x22;
+    s8 x23;
 } TrophyData;
 
-/**
- * Entry in the trophy list UI. Size: 0x34 bytes.
- * Used in TyListState entries array.
- */
+/* Trophy list entry. Size: 0x34 bytes. */
 typedef struct TyListArg {
-    /* 0x00 */ struct TyListArg* x0; /* Pointer to related entry */
-    /* 0x04 */ struct TyListArg* x4; /* Pointer to related entry */
+    /* 0x00 */ struct TyListArg* x0;
+    /* 0x04 */ struct TyListArg* x4;
     /* 0x08 */ void* x8;
     /* 0x0C */ struct HSD_JObj* xC;
     /* 0x10 */ struct HSD_JObj* x10;
@@ -88,15 +73,7 @@ typedef struct TyListArg {
     /* 0x30 */ float x30;
 } TyListArg;
 
-/**
- * Trophy list UI state. Located at un_804A2AC0.
- * Size: 0x2D8 bytes.
- *
- * Evidence from tylist.c:
- * - memzero(&data[0], 0x2AC) clears entries + fields up to 0x2AC
- * - memzero(&data[0x2AC], 0x18) clears gobj_2AC area
- * - memzero(&data[0x2C4], 0x14) clears gobj_2C4 area
- */
+/* Trophy list UI state. Size: 0x2D8 bytes. */
 typedef struct TyListState {
     /* 0x000 */ TyListArg entries[12]; /* 12 * 0x34 = 0x270 */
     /* 0x270 */ u8 pad_270[0xC];
@@ -137,20 +114,8 @@ struct Toy {
     /* +198 */ char pad_198[0x19A - 0x198];
     /* +19A */ u16 x19A;
     /* +19C */ u16 x19C;
-    /**
-     * Trophy unlock states array. 0x125 (293) entries for each trophy ID.
-     * Evidence: Trophy_SetUnlockState uses toy->trophyTable as u16 array
-     * indexed by trophyId. gmMainLib_8015CC78 returns same data from save.
-     * Size: 0x24A bytes (293 * 2).
-     */
     /* +19E */ u16 trophyTable[0x125];
     /* +3E8 */ char pad_3E8[0x3EC - 0x3E8];
-    /**
-     * Count of unlocked trophies.
-     * Evidence (s16): Trophy_SetUnlockState casts to s16 on assignment
-     * (line 198 in toy.c: toy->trophyCount = (s16) newCount).
-     * gmMainLib_8015CC90 returns s16* to same field in save data.
-     */
     /* +3EC */ s16 trophyCount;
 };
 

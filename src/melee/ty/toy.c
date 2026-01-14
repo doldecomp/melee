@@ -33,22 +33,19 @@
 #include <melee/if/textlib.h>
 #include <MSL/math.h> // for ABS
 
-/// un_804D6E6C data structure. Contains flag at offset 4.
 typedef struct {
-    u8 pad[4]; /* 0x00 - 0x03 */
-    s8 x4;     /* 0x04 */
+    u8 pad[4];
+    s8 x4;
 } TyViewData;
 
-/// un_804D6EE0 data structure. Contains selected index at offset 0x154.
 typedef struct {
-    u8 pad[0x154];   /* 0x000 - 0x153 */
-    s16 selectedIdx; /* 0x154 */
+    u8 pad[0x154];
+    s16 selectedIdx;
 } TyDisplayData;
 
-/// un_804D6ED4 data structure. Contains light GObj at offset 4.
 typedef struct {
-    u8 pad[4];       /* 0x00 - 0x03 */
-    HSD_GObj* gobj;  /* 0x04 */
+    u8 pad[4];
+    HSD_GObj* gobj;
 } TyLightData;
 
 static u8 un_804D6EA1;

@@ -27,19 +27,15 @@ typedef struct {
     HSD_CObj* cobj;
 } TyListData;
 
-/// Font data accessed via HSD_SisLib_804D1124[0] for digit rendering.
-/// @see gmcamera.c SisLibUnkStruct for similar pattern.
 typedef struct {
     u8 pad[0x4E8];
-    u8* digits; /* 0x4E8 - digit glyph lookup table */
+    u8* digits;
 } SisFontData;
 
-/// Archive wrapper struct for trophy list data (un_804D6ED8).
-/// Contains a GObj at offset 0 and archive data pointer at offset 0x50.
 typedef struct {
-    HSD_GObj* gobj; /* 0x00 */
-    u8 pad[0x4C];   /* 0x04 - 0x4F */
-    void* data;     /* 0x50 - archive data pointer */
+    HSD_GObj* gobj;
+    u8 pad[0x4C];
+    void* data;
 } TyArchiveData;
 
 void un_803124BC(void)
