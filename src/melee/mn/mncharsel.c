@@ -2,6 +2,8 @@
 
 #include "mncharsel.static.h"
 
+#include "types.h"
+
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/fog.h>
 #include <sysdolphin/baselib/jobj.h>
@@ -67,11 +69,11 @@ void mnCharSel_8025BD30(void)
 
     match_type = mnCharSel_804D6CB0->match_type;
 
-    if (match_type == 1) {
+    if (match_type == VS_CAMERA) {
         HSD_SisLib_803A6530(0, 0x4A, 0x4F);
         return;
     }
-    if (match_type == 2) {
+    if (match_type == VS_STAMINA) {
         HSD_SisLib_803A6530(0, 0x4A, 0x50);
         return;
     }
@@ -414,15 +416,15 @@ void mnCharSel_8025D1C4(int arg0, int arg1)
     HSD_JObj* sp10;
 
     switch (css->match_type) {
-    case 0:
-    case 3:
-    case 4:
-    case 5:
-    case 6:
-    case 7:
-    case 8:
-    case 9:
-    case 10:
+    case VS_MELEE:
+    case VS_SUDDEN_DEATH:
+    case VS_GIANT:
+    case VS_TINY:
+    case VS_INVISIBLE:
+    case VS_FIXED_CAMERA:
+    case VS_SINGLE_BUTTON:
+    case VS_LIGHTNING:
+    case VS_SLOWMO:
         var_r0 = true;
         break;
     default:
@@ -613,7 +615,7 @@ bool mnCharSel_8025DAA0(int door)
     int num_doors;
     int j;
 
-    if (mnCharSel_804D6CB0->match_type == 0x17) {
+    if (mnCharSel_804D6CB0->match_type == TRAINING_MODE) {
         num_doors = 2;
     } else {
         num_doors = mnCharSel_804D6CF5;
@@ -673,7 +675,7 @@ void mnCharSel_8025EE8C(u8 idx)
         HSD_ForeachAnim(sp14, JOBJ_TYPE, TOBJ_MASK, HSD_AObjStopAnim,
                         AOBJ_ARG_AOV, 0, 0);
         mnCharSel_8025DB34(0);
-        if (mnCharSel_804D6CB0->match_type == 0x17) {
+        if (mnCharSel_804D6CB0->match_type == TRAINING_MODE) {
             mnCharSel_8025DB34(1);
         }
     } else {
@@ -733,7 +735,7 @@ static inline bool isDuplicateCostume(int door)
     int j;
     CSSDoor* temp_r30 = &mnCharSel_803F0DFC.doors[door];
 
-    if (mnCharSel_804D6CB0->match_type == 0x17) {
+    if (mnCharSel_804D6CB0->match_type == TRAINING_MODE) {
         num_doors = 2;
     } else {
         num_doors = mnCharSel_804D6CF5;
@@ -876,7 +878,7 @@ static struct asdf {
 
 void mnCharSel_802669F4_OnFrame(void)
 {
-    int var_r0;
+    int num_slots;
     u8 temp_r0;
     struct GameCache* temp_r3;
     int i;
@@ -898,7 +900,7 @@ void mnCharSel_802669F4_OnFrame(void)
                     mnCharSel_804D6CB0->data.data.players[mnCharSel_804D6CF0]
                         .color;
             } else {
-                temp_r3->entries[0].char_id = 0x21;
+                temp_r3->entries[0].char_id = CHKIND_NONE;
             }
             css = mnCharSel_804D6CB0;
             temp_r0 = css->data.data.players[mnCharSel_804D6CF1].slot_type;
@@ -911,17 +913,17 @@ void mnCharSel_802669F4_OnFrame(void)
                             .players[mnCharSel_804D6CF1]
                             .color;
                 } else {
-                    temp_r3->entries[1].char_id = 0x21;
+                    temp_r3->entries[1].char_id = CHKIND_NONE;
                 }
             }
         } else {
-            if (mnCharSel_804D6CB0->match_type == 1) {
-                var_r0 = 3;
+            if (mnCharSel_804D6CB0->match_type == VS_CAMERA) {
+                num_slots = 3;
             } else {
-                var_r0 = 4;
+                num_slots = 4;
             }
 
-            for (i = 0; i < var_r0; i++) {
+            for (i = 0; i < num_slots; i++) {
                 CSSData* css = mnCharSel_804D6CB0;
                 temp_r0 = css->data.data.players[i].slot_type;
                 if (!(temp_r0 != 0 && temp_r0 != 1) &&
@@ -932,7 +934,7 @@ void mnCharSel_802669F4_OnFrame(void)
                     temp_r3->entries[i].color =
                         mnCharSel_804D6CB0->data.data.players[i].color;
                 } else {
-                    temp_r3->entries[i].char_id = 0x21;
+                    temp_r3->entries[i].char_id = CHKIND_NONE;
                 }
             }
         }
@@ -991,7 +993,7 @@ void mnCharSel_802669F4_OnFrame(void)
 
 void mnCharSel_80266D70_OnLeave(void* unused)
 {
-    int var_r28;
+    int num_slots;
     u64 tmp;
     CSSData* data;
     int i;
@@ -1030,12 +1032,12 @@ void mnCharSel_80266D70_OnLeave(void* unused)
                 data->data.data.players[mnCharSel_804D6CF1].c_kind);
         }
     } else {
-        if (mnCharSel_804D6CB0->match_type == 1) {
-            var_r28 = 3;
+        if (mnCharSel_804D6CB0->match_type == VS_CAMERA) {
+            num_slots = 3;
         } else {
-            var_r28 = 4;
+            num_slots = 4;
         }
-        for (i = 0; i < var_r28; i++) {
+        for (i = 0; i < num_slots; i++) {
             data = mnCharSel_804D6CB0;
             type = data->data.data.players[i].slot_type;
             if ((type == Gm_PKind_Human || type == Gm_PKind_Cpu) &&

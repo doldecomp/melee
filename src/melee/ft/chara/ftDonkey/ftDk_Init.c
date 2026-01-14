@@ -670,9 +670,7 @@ void ftDk_Init_8010DB3C(HSD_GObj* gobj)
 
             if (!mpLib_80056C54(colldata->floor.index, &fp->cur_pos, 0,
                                 &vec_list[i], 0, 0, temp_f6,
-                                donkey_attr->SpecialLw.x70,
-                                donkey_attr->SpecialLw.x68 * 1.5f,
-                                donkey_attr->SpecialLw.x68))
+                                donkey_attr->SpecialLw.x70))
             {
                 vec_list[i] = fp->cur_pos;
             }

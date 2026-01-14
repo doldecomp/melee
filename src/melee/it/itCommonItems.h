@@ -107,9 +107,12 @@ typedef struct itBox_ItemVars {
 typedef struct itDosei_ItemVars {
     s32 xDD4;
     s32 xDD8;
-    s32 xDDC;
+    f32 xDDC;
     s32 xDE0;
     Vec3 xDE4;
+    f32 xDF0;
+    f32 xDF4;
+    Vec3 xDF8;
 } itDosei_ItemVars;
 
 typedef struct itHeart_ItemVars {
@@ -294,7 +297,17 @@ typedef struct itFoodsAttributes {
 
 typedef struct itWhispyApple_ItemVars {
     s32 xDD4_heal;
+    s32 xDD8;
 } itWhispyApple_ItemVars;
+
+typedef struct itWhispyAppleAttributes {
+    u8 x0[0x4];
+    s32 x4;
+    s32 x8;
+    u8 xC[0x8];
+    f32 x14;
+    f32 x18;
+} itWhispyAppleAttributes;
 
 typedef struct itFreeze_ItemVars {
     /*  +0 */ char pad_0[0x1C];
@@ -585,6 +598,24 @@ typedef struct itKlap_ItemVars {
     /* +28 ip+DFC */ f32 x28;
 } itKlap_ItemVars;
 
+typedef struct itLeadeadAttr_x0 {
+    /* 0x00 */ s32 x0;
+    /* 0x04 */ f32 x4;
+} itLeadeadAttr_x0;
+
+typedef struct itLeadeadAttributes {
+    /* 0x00 */ itLeadeadAttr_x0* x0;
+    /* 0x04 */ s32 x4;
+    /* 0x08 */ f32 x8;
+    /* 0x0C */ f32 xC;
+    /* 0x10 */ f32 x10;
+    /* 0x14 */ f32 x14;
+    /* 0x18 */ s16 x18;
+    /* 0x1A */ s16 x1A;
+    /* 0x1C */ s16 x1C;
+    /* 0x1E */ s8 x1E;
+} itLeadeadAttributes;
+
 typedef struct itChicorita_ItemVars {
     /* ip+DD4 */ u8 _0[0x60 - 0x0];
     /* ip+E34 */ s32 x60; // timer?
@@ -595,6 +626,52 @@ typedef struct itChicoritaAttr {
     f32 scale;
     s32 x4; // x60 in item vars gets set to this if -1; max timer/lifetime?
 } itChicoritaAttr;
+
+typedef struct itMarilAttributes {
+    f32 x0;
+    f32 x4;
+    f32 x8;
+    f32 xC;
+    f32 x10;
+    f32 x14;
+} itMarilAttributes;
+
+typedef struct itMaril_ItemVars {
+    u8 pad[0x60];
+    union {
+        struct {
+            u8 x0 : 1;
+            u8 x1 : 1;
+            u8 x2 : 1;
+            u8 x3 : 1;
+            u8 x4 : 1;
+            u8 x5 : 1;
+            u8 x6 : 1;
+            u8 x7 : 1;
+        };
+        u32 flags;
+    } x60;
+    f32 x64;
+    f32 x68;
+    Vec3 x6C;
+} itMaril_ItemVars;
+
+typedef struct itLuckyAttributes {
+    f32 x0;
+    f32 x4;
+    f32 x8;
+    f32 xC;
+    s32 x10;
+    s32 x14;
+    s32 x18;
+} itLuckyAttributes;
+
+typedef struct itLucky_ItemVars {
+    /* ip+DD4 */ u8 _0[0x60 - 0x0];
+    /* ip+E34 */ enum_t x60;
+    /* ip+E38 */ s32 x64;
+    /* ip+E3C */ s32 x68;
+} itLucky_ItemVars;
 
 typedef struct itChicoritaLeafAttr {
     f32 timer;
@@ -825,8 +902,13 @@ typedef struct itWhiteBea_ItemVars {
 } itWhiteBea_ItemVars;
 
 typedef struct itOctarock_ItemVars {
-    /*  +0 ip+DD4 */ char pad_0[0x20];
+    /*  +0 ip+DD4 */ char pad_0[0x18];
+    /* +18 ip+DEC */ s32 x18;
+    /* +1C ip+DF0 */ char pad_1C[0x4];
     /* +20 ip+DF4 */ Vec3 x20;
+    /* +2C ip+E00 */ s32 x2C;
+    /* +30 ip+E04 */ char pad_30[0x2];
+    /* +32 ip+E06 */ s16 x32;
 } itOctarock_ItemVars;
 
 typedef struct itSScopeAttributes {
@@ -891,5 +973,16 @@ typedef struct itKoopaFlame_ItemVars {
     bool x44_spawned;
     int x48_gfx;
 } itKoopaFlame_ItemVars;
+
+typedef struct itOctarockAttributes {
+    s32* x0;
+    f32 x4;
+    f32 x8;
+    f32 xC;
+    f32 x10;
+    f32 x14;
+    f32 x18;
+    s16 x1C;
+} itOctarockAttributes;
 
 #endif

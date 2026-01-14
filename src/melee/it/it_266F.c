@@ -691,13 +691,13 @@ void it_8026D564(Item_GObj* item_gobj)
     }
 }
 
-void it_8026D5CC(Item_GObj* item_gobj)
+bool it_8026D5CC(Item_GObj* item_gobj)
 {
     Item* ip = GET_ITEM((HSD_GObj*) item_gobj);
     CollData* coll = &ip->x378_itemColl;
 
     it_80276214(item_gobj);
-    mpColl_8004B108(coll);
+    return mpColl_8004B108(coll);
 }
 
 bool it_8026D604(Item_GObj* item_gobj)
@@ -887,11 +887,11 @@ bool it_8026DA70(Item_GObj* gobj)
     return mpColl_800471F8(coll);
 }
 
-bool it_8026DAA8(Item_GObj* gobj)
+s32 it_8026DAA8(Item_GObj* gobj)
 {
     CollData* coll;
     Item* ip;
-    bool test;
+    s32 test;
     PAD_STACK(12);
 
     ip = GET_ITEM((HSD_GObj*) gobj);
@@ -900,7 +900,7 @@ bool it_8026DAA8(Item_GObj* gobj)
 
     test = mpColl_800471F8(coll);
     ip->pos = coll->cur_pos;
-    if (test != false) {
+    if (test != 0) {
         ip->xC30 = coll->floor.index;
     }
     test |= it_80276308(gobj);
