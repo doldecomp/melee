@@ -27,6 +27,13 @@ typedef struct {
     HSD_CObj* cobj;
 } TyListData;
 
+/// Font data accessed via HSD_SisLib_804D1124[0] for digit rendering.
+/// @see gmcamera.c SisLibUnkStruct for similar pattern.
+typedef struct {
+    u8 pad[0x4E8];
+    u8* digits; /* 0x4E8 - digit glyph lookup table */
+} SisFontData;
+
 void un_803124BC(void)
 {
     u16* table1;
@@ -148,8 +155,7 @@ void un_803127D4(void)
 /// Formats a number into a string buffer using digit glyphs from the font.
 void un_80312834(char* buf, u32 num)
 {
-    /// @todo Extract font digit lookup struct - offset 0x4E8 in SIS font data
-    u8* lookup = M2C_FIELD(HSD_SisLib_804D1124[0], u8**, 0x4E8);
+    u8* lookup = ((SisFontData*) HSD_SisLib_804D1124[0])->digits;
     u32 idx;
     u32 original = num;
 
