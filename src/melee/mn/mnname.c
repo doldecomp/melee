@@ -107,7 +107,18 @@ bool IsNameValid(int slot)
     return true;
 }
 
-/// #CreateNameAtIndex
+void CreateNameAtIndex(u8 slot)
+{
+    char term = mnName_StringTerminator;
+    u8 idx = slot;
+
+    GetPersistentNameData(idx)->namedata[0] = term;
+
+    term = 1;
+    GetPersistentNameData(idx)->x1A1 = term;
+
+    InitializePersistentNameData(slot);
+}
 
 /// #mnName_SortNames
 
