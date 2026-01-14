@@ -45,15 +45,17 @@ typedef struct ToyEntry {
  * Trophy metadata entry used by un_803060BC for trophy data lookup.
  * Size: 0x24 bytes per entry.
  *
- * Evidence: un_803060BC switch statement accesses fields by index:
- * - cases 0-5: return float fields x08-x1C
- * - case 6: return (float) x20 (s8)
- * - case 7: return (float) x21 (s8)
- * - case 8: return (float) x04 (category)
- * - id field used for -1 sentinel check in table iteration
+ * Evidence for struct layout:
+ * - un_803060BC switch statement accesses fields by index:
+ *   - cases 0-5: return float fields x08-x1C
+ *   - case 6: return (float) x20 (s8)
+ *   - case 7: return (float) x21 (s8)
+ *   - case 8: return (float) x04 (category)
+ * - id (s32): compared to -1 sentinel and int trophyId in table search loops
+ *   (lines 331-332, 359-360 in toy.c), matches s32 to produce correct cmpwi
  */
 typedef struct TrophyData {
-    s32 id;  /* 0x00 - trophy ID, -1 for end sentinel */
+    s32 id;  /* 0x00 - compared to -1 sentinel and int trophyId */
     s32 x04; /* 0x04 - category (case 8) */
     f32 x08; /* 0x08 - field 0 */
     f32 x0C; /* 0x0C - field 1 */
@@ -144,8 +146,9 @@ struct Toy {
     /* +3E8 */ char pad_3E8[0x3EC - 0x3E8];
     /**
      * Count of unlocked trophies.
-     * Evidence: Trophy_SetUnlockState increments toy->trophyCount when
-     * unlocking new trophy. gmMainLib_8015CC90 returns same from save.
+     * Evidence (s16): Trophy_SetUnlockState casts to s16 on assignment
+     * (line 198 in toy.c: toy->trophyCount = (s16) newCount).
+     * gmMainLib_8015CC90 returns s16* to same field in save data.
      */
     /* +3EC */ s16 trophyCount;
 };

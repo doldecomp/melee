@@ -29,7 +29,6 @@ typedef struct {
 
 void un_803124BC(void)
 {
-    char* strs = un_803FDD18;
     u16* table1;
     s16* list;
     u16* table2;
@@ -41,15 +40,15 @@ void un_803124BC(void)
     if (un_804D6ED0 == NULL) {
         char* archiveName;
         if (lbLang_IsSavedLanguageJP()) {
-            archiveName = strs + 0x608;
+            archiveName = "TyDatai.dat";
         } else {
-            archiveName = strs + 0x614;
+            archiveName = "TyDatai.usd";
         }
         un_804D6ED0 = lbArchive_LoadSymbols(
-            archiveName, &un_804D6EC4, strs + 0x9DC, &un_804D6EC0,
-            strs + 0x9EC, &un_804D6EBC, strs + 0x9FC, &un_804D6EB8,
-            strs + 0xA0C, &un_804D6EB4, strs + 0xA20, &un_804D6EB0,
-            strs + 0xA30, &un_804D6EAC, strs + 0xA44, NULL);
+            archiveName, &un_804D6EC4, "tyInitModelTbl", &un_804D6EC0,
+            "tyInitModelDTbl", &un_804D6EBC, "tyModelSortTbl", &un_804D6EB8,
+            "tyExpDifferentTbl", &un_804D6EB4, "tyNoGetUsTbl", &un_804D6EB0,
+            "tyDisplayModelTbl", &un_804D6EAC, "tyDisplayModelUsTbl", NULL);
     }
 
     i = 0;
@@ -85,27 +84,26 @@ check:
 
 void un_8031263C(void)
 {
-    char* strs = un_803FDD18;
     s32 i;
     u16* table1;
     u16* table2;
 
-    M2C_FIELD(un_804A284C, u8*, 4) = 0;
+    ((TyModeState*) un_804A284C)->x4 = 0;
     table1 = gmMainLib_8015CC78();
     table2 = gmMainLib_8015CC84();
 
     if (un_804D6ED0 == NULL) {
         char* archiveName;
         if (lbLang_IsSavedLanguageJP()) {
-            archiveName = strs + 0x608;
+            archiveName = "TyDatai.dat";
         } else {
-            archiveName = strs + 0x614;
+            archiveName = "TyDatai.usd";
         }
         un_804D6ED0 = lbArchive_LoadSymbols(
-            archiveName, &un_804D6EC4, strs + 0x9DC, &un_804D6EC0,
-            strs + 0x9EC, &un_804D6EBC, strs + 0x9FC, &un_804D6EB8,
-            strs + 0xA0C, &un_804D6EB4, strs + 0xA20, &un_804D6EB0,
-            strs + 0xA30, &un_804D6EAC, strs + 0xA44, NULL);
+            archiveName, &un_804D6EC4, "tyInitModelTbl", &un_804D6EC0,
+            "tyInitModelDTbl", &un_804D6EBC, "tyModelSortTbl", &un_804D6EB8,
+            "tyExpDifferentTbl", &un_804D6EB4, "tyNoGetUsTbl", &un_804D6EB0,
+            "tyDisplayModelTbl", &un_804D6EAC, "tyDisplayModelUsTbl", NULL);
     }
 
     i = 0;
@@ -123,9 +121,9 @@ void un_8031263C(void)
     un_804A284C[3] |= 4;
 
     if (un_804D6ECC == NULL) {
-        un_804D6ECC =
-            lbArchive_LoadSymbols(strs + 0xA58, &un_804D6EA8, strs + 0xA64,
-                                  &un_804D6EA4, strs + 0xA74, NULL);
+        un_804D6ECC = lbArchive_LoadSymbols(str_TyDataf_dat, &un_804D6EA8,
+                                            str_tyModelFileTbl, &un_804D6EA4,
+                                            str_tyModelFileUsTbl, NULL);
     }
 
     un_8031234C(0);
