@@ -34,6 +34,14 @@ typedef struct {
     u8* digits; /* 0x4E8 - digit glyph lookup table */
 } SisFontData;
 
+/// Archive wrapper struct for trophy list data (un_804D6ED8).
+/// Contains a GObj at offset 0 and archive data pointer at offset 0x50.
+typedef struct {
+    HSD_GObj* gobj; /* 0x00 */
+    u8 pad[0x4C];   /* 0x04 - 0x4F */
+    void* data;     /* 0x50 - archive data pointer */
+} TyArchiveData;
+
 void un_803124BC(void)
 {
     u16* table1;
@@ -212,7 +220,7 @@ void un_80312E88(TyListArg* arg, float delta)
     data = un_804A2AC0;
     i = 0;
 loop:
-    if ((jobj = M2C_FIELD(ptr, HSD_JObj**, 0xC)) == NULL) {
+    if ((jobj = ptr->xC) == NULL) {
         goto next;
     }
     if (i == 2) {
@@ -248,7 +256,7 @@ skip_dirty:
 
     if (arg->idx == un_80304870() - 1) {
         float pos;
-        jobj = M2C_FIELD(data, HSD_JObj**, 0x28C);
+        jobj = ((TyListState*) data)->jobj;
         pos = arg->x30;
         if (jobj == NULL) {
             __assert(&un_804D5A78, 0x3B3, &un_804D5A80);
@@ -287,35 +295,31 @@ next:
 }
 /// #un_8031305C
 
-void un_80313358(void* arg1, s8 arg2, s8 arg3, s8 arg4)
+void un_80313358(TyListState* state, s8 arg2, s8 arg3, s8 arg4)
 {
-    u8* ptr = arg1;
     int i;
 
     if (arg2 != -1) {
-        M2C_FIELD(ptr, u8*, 0x29E) = arg2;
-        M2C_FIELD(ptr, u8*, 0x2A1) = arg4;
+        state->x29E = arg2;
+        state->x2A1 = arg4;
     }
 
-    M2C_FIELD(ptr, u8*, 0x29F) = arg3;
-    M2C_FIELD(ptr, float*, 0x2A4) =
-        M2C_FIELD(ptr, float*, 0x2A8) / (float) arg3;
+    state->x29F = arg3;
+    state->x2A4 = state->x2A8 / (float) arg3;
 
-    if (M2C_FIELD(ptr, s8*, 0x2A1) == 0) {
-        for (i = 0; i < M2C_FIELD(ptr, s8*, 0x29A); i++) {
-            void** entry = (void**) (ptr + i * 0x34);
-            u8* sub = entry[0];
-            M2C_FIELD(ptr, float*, i * 0x34 + 0x2C) =
-                M2C_FIELD(sub, float*, 0x30);
-            un_80312904(entry, M2C_FIELD(ptr, u8*, 0x29A) + 1);
+    if (state->x2A1 == 0) {
+        for (i = 0; i < state->entryCount; i++) {
+            TyListArg* entry = &state->entries[i];
+            TyListArg* sub = entry->x0;
+            entry->x2C = sub->x30;
+            un_80312904(entry, state->entryCount + 1);
         }
     } else {
-        for (i = 0; i < M2C_FIELD(ptr, s8*, 0x29A); i++) {
-            void** entry = (void**) (ptr + i * 0x34);
-            u8* sub = entry[1];
-            M2C_FIELD(ptr, float*, i * 0x34 + 0x2C) =
-                M2C_FIELD(sub, float*, 0x30);
-            un_80312904(entry, M2C_FIELD(ptr, u8*, 0x29A) + 1);
+        for (i = 0; i < state->entryCount; i++) {
+            TyListArg* entry = &state->entries[i];
+            TyListArg* sub = entry->x4;
+            entry->x2C = sub->x30;
+            un_80312904(entry, state->entryCount + 1);
         }
     }
 }
@@ -336,20 +340,19 @@ void un_80313464(TyListArg* arg)
     }
 
     if (un_80304924(val) != 0) {
-        arg->x10 = un_80313508(M2C_FIELD(data, void**, 0x27C), un_803FE8D0,
+        arg->x10 = un_80313508(((TyListState*) data)->gobj, un_803FE8D0,
                                un_804DDE60, arg->x30, un_804DDE48);
     }
 }
 HSD_JObj* un_80313508(void* parent, void* symbol, float x, float y, float z)
 {
     HSD_JObj* jobj;
-    void* archive;
+    TyArchiveData* archive;
     void* joint;
     PAD_STACK(8);
 
     archive = un_804D6ED8;
-    joint =
-        HSD_ArchiveGetPublicAddress(M2C_FIELD(archive, void**, 0x50), symbol);
+    joint = HSD_ArchiveGetPublicAddress(archive->data, symbol);
 
     if (joint == NULL) {
         OSPanic(un_803FE8F0, 0x337, un_803FE8FC);
@@ -439,7 +442,7 @@ HSD_JObj* un_80313508(void* parent, void* symbol, float x, float y, float z)
     }
 
     if (parent != NULL) {
-        HSD_JObj* parentJobj = M2C_FIELD(parent, HSD_JObj**, 0x28);
+        HSD_JObj* parentJobj = ((HSD_GObj*) parent)->hsd_obj;
         HSD_JObj* child;
         HSD_JObjAddChild(parentJobj, jobj);
         child = parentJobj->child;
@@ -479,37 +482,36 @@ void fn_80314504(HSD_GObj* gobj)
 
 void un_803147C4(void)
 {
-    char* data = un_804A2AC0;
+    TyListState* state = (TyListState*) un_804A2AC0;
     char* strs = un_803FE880;
-    void* archive;
-    HSD_GObj** gobj_ptr;
-    HSD_JObj* jobj;
+    TyArchiveData* archive;
     PAD_STACK(8);
 
-    memzero(&M2C_FIELD(data, u8*, 0x2AC), 0x18);
+    memzero(&state->gobj_2AC, 0x18);
     un_8031457C();
-    memzero(&M2C_FIELD(data, u8*, 0x2C4), 0x14);
+    memzero(&state->gobj_2C4, 0x14);
 
     archive = un_804D6ED8;
-    gobj_ptr = (HSD_GObj**) (data + 0x2C4);
 
-    if (M2C_FIELD(archive, void**, 0x50) == NULL) {
+    if (archive->data == NULL) {
         OSReport(strs + 0x14C);
         OSPanic(strs + 0x70, 0x636, un_804D5A8C);
     }
 
-    jobj = HSD_ArchiveGetPublicAddress(M2C_FIELD(archive, void**, 0x50),
-                                       strs + 0x170);
-    if (jobj != NULL) {
-        *gobj_ptr = GObj_Create(2, 3, 0);
-        HSD_GObjObject_80390A70(*gobj_ptr, (u8) HSD_GObj_804D784A,
-                                un_80306EEC(jobj, 0));
-        GObj_SetupGXLink(*gobj_ptr, HSD_GObj_LObjCallback, 0x34, 0);
+    {
+        HSD_JObj* jobj =
+            HSD_ArchiveGetPublicAddress(archive->data, strs + 0x170);
+        if (jobj != NULL) {
+            state->gobj_2C4 = GObj_Create(2, 3, 0);
+            HSD_GObjObject_80390A70(state->gobj_2C4, (u8) HSD_GObj_804D784A,
+                                    un_80306EEC(jobj, 0));
+            GObj_SetupGXLink(state->gobj_2C4, HSD_GObj_LObjCallback, 0x34, 0);
+        }
     }
 
     un_80307470(0);
     if (un_80304870() != 0) {
-        memzero(&M2C_FIELD(data, u8*, 0), 0x2AC);
+        memzero(state, 0x2AC);
         un_80313774();
     }
     HSD_PadRenewStatus();
@@ -518,16 +520,17 @@ void un_803147C4(void)
 void un_803148E4(s32 arg0)
 {
     TyListState* state = (TyListState*) un_804A2AC0;
-    void* archive = un_804D6ED8;
+    TyModeState* mode = (TyModeState*) un_804A284C;
+    TyArchiveData* archive = un_804D6ED8;
     PAD_STACK(8);
 
     if (un_80304870() != 0) {
         if (arg0 != 0) {
             un_804A284C[0x12A] = state->selectedIdx;
             un_804A284C[0x12B] = un_804D6EDC[state->selectedIdx];
-            M2C_FIELD(un_804A284C, u8*, 1) = state->x29B;
-            M2C_FIELD(un_804A284C, u8*, 2) = state->x29C;
-            M2C_FIELD(un_804A284C, u8*, 3) = state->x2B8;
+            mode->x1 = state->x29B;
+            mode->x2 = state->x29C;
+            mode->x3 = state->x2B8;
         } else {
             if (un_80304870() != 0) {
                 s16 val = un_804D6EDC[state->selectedIdx];
@@ -536,9 +539,9 @@ void un_803148E4(s32 arg0)
             }
             un_804A284C[0x12A] = state->selectedIdx;
             un_804A284C[0x12B] = un_804D6EDC[state->selectedIdx];
-            M2C_FIELD(un_804A284C, u8*, 1) = 0;
-            M2C_FIELD(un_804A284C, u8*, 2) = 0;
-            M2C_FIELD(un_804A284C, u8*, 3) = 0;
+            mode->x1 = 0;
+            mode->x2 = 0;
+            mode->x3 = 0;
         }
 
         if (un_80304924(un_804D6EDC[state->selectedIdx]) != 0) {
@@ -557,11 +560,11 @@ void un_803148E4(s32 arg0)
         HSD_SisLib_803A5E70();
     }
 
-    if (M2C_FIELD(archive, void**, 0) != NULL) {
+    if (archive->gobj != NULL) {
         if (arg0 != 0) {
-            HSD_GObjPLink_80390228(M2C_FIELD(archive, HSD_GObj**, 0));
+            HSD_GObjPLink_80390228(archive->gobj);
         }
-        M2C_FIELD(archive, void**, 0) = NULL;
+        archive->gobj = NULL;
     }
 
     if (state->gobj_2C4 != NULL && arg0 != 0) {

@@ -13,7 +13,8 @@
 typedef struct TyModeState {
     s8 x0;
     u8 x1;
-    u16 x2;
+    u8 x2; /* Written separately via byte access in un_803148E4 */
+    u8 x3; /* Written separately via byte access in un_803148E4 */
     s8 x4;
     u8 x5;
     u16 x6;
@@ -74,8 +75,8 @@ typedef struct TrophyData {
  * Used in TyListState entries array.
  */
 typedef struct TyListArg {
-    /* 0x00 */ void* x0;
-    /* 0x04 */ void* x4;
+    /* 0x00 */ struct TyListArg* x0; /* Pointer to related entry */
+    /* 0x04 */ struct TyListArg* x4; /* Pointer to related entry */
     /* 0x08 */ void* x8;
     /* 0x0C */ struct HSD_JObj* xC;
     /* 0x10 */ struct HSD_JObj* x10;
