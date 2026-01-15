@@ -1926,9 +1926,9 @@ void it_8026EECC(HSD_GObj* gobj, int arg1)
     }
 }
 
-void it_8026F3AC(void)
+ItemKind it_8026F3AC(void)
 {
-    it_8026C75C(&it_804A0E50);
+    return it_8026C75C(&it_804A0E50);
 }
 
 void it_8026F3D4(Item_GObj* item_gobj, struct it_8026F3D4_arg1_t* arg1,
