@@ -3,10 +3,9 @@
 #include "mnmain.h"
 
 #include <sysdolphin/baselib/gobj.h>
+#include <sysdolphin/baselib/gobjproc.h>
 #include <melee/lb/lblanguage.h>
 
-HSD_GObj* GObj_Create(u16, u8, u8);
-void* HSD_GObjProc_8038FD54(HSD_GObj*, void*, s32);
 void mnItemSw_802351A0(s32, s32, s32);
 void fn_80233E10(HSD_GObj*);
 
@@ -85,26 +84,16 @@ void* mnItemSw_8023405C(void* arg0, u8 idx)
     return current;
 }
 
-typedef struct {
-    u8 pad[0xD];
-    u8 x0 : 2;
-    u8 render_plink : 2;
-    u8 x4 : 4;
-} ItemSwGObjBitfield;
-
 void mnItemSw_802358C0(void)
 {
-    MenuFlow* data;
-    u8 prev;
-    HSD_GObj* gobj;
+    MenuFlow* data = &mn_804A04F0;
+    HSD_GObjProc* proc;
 
-    data = &mn_804A04F0;
-    prev = data->cur_menu;
-    data->prev_menu = prev;
+    data->prev_menu = data->cur_menu;
     data->cur_menu = 0x10;
     data->hovered_selection = 0;
     mnItemSw_804D6BEC = 1;
     mnItemSw_802351A0(1, 0, 0x10);
-    gobj = HSD_GObjProc_8038FD54(GObj_Create(0, 1, 0x80), fn_80233E10, 0);
-    ((ItemSwGObjBitfield*) gobj)->render_plink = HSD_GObj_804D783C;
+    proc = HSD_GObjProc_8038FD54(GObj_Create(0, 1, 0x80), fn_80233E10, 0);
+    proc->flags_3 = HSD_GObj_804D783C;
 }
