@@ -2,7 +2,6 @@
 
 #include "baselib/cobj.h"
 #include "baselib/controller.h"
-#include "baselib/displayfunc.h"
 #include "baselib/fog.h"
 #include "baselib/gobj.h"
 #include "baselib/gobjproc.h"
@@ -440,20 +439,20 @@ s16 un_803062BC(s32 trophyId)
 
 /// #un_803067BC
 
-void un_803068E0(HSD_GObj* gobj)
+s32 un_803068E0(HSD_GObj* gobj)
 {
-    HSD_CObj* cobj = gobj->hsd_obj;
-
-    if (HSD_CObjSetCurrent(cobj) != 0) {
+    if (HSD_CObjSetCurrent(gobj->hsd_obj) != 0) {
         HSD_GObj_80390ED0(gobj, 7);
         HSD_CObjEndCurrent();
         HSD_FogSet(NULL);
     }
 }
+
 void un_80306930(void* arg)
 {
     HSD_FogSet(((HSD_GObj*) arg)->hsd_obj);
 }
+
 /// #un_80306954
 
 void un_80306A0C(void* arg0)

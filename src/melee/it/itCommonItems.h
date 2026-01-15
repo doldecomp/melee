@@ -584,6 +584,26 @@ typedef struct itTaruCann_DatAttrs {
     /* +2C */ int x2C;
 } itTaruCann_DatAttrs;
 
+typedef struct itKusudama_ItemVars {
+    /* +0 ip+DD4 */ bool x0;
+    /* +4 ip+DD8 */ s32 x4;
+} itKusudama_ItemVars;
+
+typedef struct itKusudamaAttributes {
+    /* +00 */ s32 x0;
+    /* +04 */ s32 x4;
+    /* +08 */ s32 x8;
+    /* +0C */ s32 xC;
+    /* +10 */ ItemKind x10;
+    /* +14 */ s32 x14;
+    /* +18 */ f32 x18;
+    /* +1C */ f32 x1C;
+    /* +20 */ f32 x20;
+    /* +24 */ u8 _24[0x4];
+    /* +28 */ f32 x28;
+    /* +2C */ f32 x2C;
+} itKusudamaAttributes;
+
 typedef struct itKlap_ItemVars {
     /*  +0 ip+DD4 */ f32 x0;
     /*  +4 ip+DD8 */ f32 x4;
@@ -655,6 +675,28 @@ typedef struct itMaril_ItemVars {
     f32 x68;
     Vec3 x6C;
 } itMaril_ItemVars;
+
+typedef struct itLizardon_ItemVars {
+    /* +00 ip+DD4 */ u8 pad[0x60];
+    /* +60 ip+E34 */ s32 x60;
+    /* +64 ip+E38 */ s32 x64;
+    /* +68 ip+E3C */ f32 x68;
+    /* +6C ip+E40 */ s32 x6C;
+    /* +70 ip+E44 */ s32 x70;
+    /* +74 ip+E48 */ s32 x74[4];
+} itLizardon_ItemVars;
+
+typedef struct itLizardonAttributes {
+    f32 x0;
+    f32 x4;
+    f32 x8;
+    f32 xC;
+    f32 x10;
+    s32 x14;
+    s32 x18[4];
+    s32 x28;
+    s32 x2C;
+} itLizardonAttributes;
 
 typedef struct itLuckyAttributes {
     f32 x0;
