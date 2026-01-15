@@ -2,6 +2,7 @@
 
 #include "baselib/cobj.h"
 #include "baselib/controller.h"
+#include "baselib/displayfunc.h"
 #include "baselib/fog.h"
 #include "baselib/gobj.h"
 #include "baselib/gobjproc.h"
