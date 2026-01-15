@@ -584,6 +584,26 @@ typedef struct itTaruCann_DatAttrs {
     /* +2C */ int x2C;
 } itTaruCann_DatAttrs;
 
+typedef struct itKusudama_ItemVars {
+    /* +0 ip+DD4 */ bool x0;
+    /* +4 ip+DD8 */ s32 x4;
+} itKusudama_ItemVars;
+
+typedef struct itKusudamaAttributes {
+    /* +00 */ s32 x0;
+    /* +04 */ s32 x4;
+    /* +08 */ s32 x8;
+    /* +0C */ s32 xC;
+    /* +10 */ ItemKind x10;
+    /* +14 */ s32 x14;
+    /* +18 */ f32 x18;
+    /* +1C */ f32 x1C;
+    /* +20 */ f32 x20;
+    /* +24 */ u8 _24[0x4];
+    /* +28 */ f32 x28;
+    /* +2C */ f32 x2C;
+} itKusudamaAttributes;
+
 typedef struct itKlap_ItemVars {
     /*  +0 ip+DD4 */ f32 x0;
     /*  +4 ip+DD8 */ f32 x4;
