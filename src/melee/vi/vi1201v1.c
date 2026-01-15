@@ -37,7 +37,24 @@
 #include <baselib/lobj.h>
 
 // .data section 0x80400258 - 0x80400xxx
-char un_80400258[0x100];
+typedef struct Vi1201SceneData {
+    /* 0x00 */ Vec3 player_spawn;
+    /* 0x0C */ char pad_0C[0x28];
+    /* 0x34 */ char* scene1_file;
+    /* 0x38 */ char pad_38[0x0C];
+    /* 0x44 */ char* scene1_symbol;
+    /* 0x48 */ char pad_48[0x10];
+    /* 0x58 */ char* scene2_file;
+    /* 0x5C */ char pad_5C[0x08];
+    /* 0x64 */ char* scene2_symbol;
+    /* 0x68 */ char pad_68[0x18];
+    /* 0x80 */ char* scene3_file;
+    /* 0x84 */ char pad_84[0x0C];
+    /* 0x90 */ char* scene3_symbol;
+    /* 0x94 */ char pad_94[0x6C];
+} Vi1201SceneData; /* size = 0x100 */
+
+Vi1201SceneData un_80400258;
 
 static f32 un_804DE0F8;
 static f32 un_804DE0FC;
@@ -66,7 +83,7 @@ void un_8031F9D8(CharacterKind char_index, int costume_id)
     Player_SetPlayerId(0, 0);
     Player_SetSlottype(0, 2);
     Player_SetFacingDirection(0, un_804DE100);
-    Player_80032768(0, (Vec3*) un_80400258);
+    Player_80032768(0, &un_80400258.player_spawn);
     Player_80036F34(0, 1);
     un_804D7000 = Player_GetEntity(0);
     lbAudioAx_80026F2C(0x18);
@@ -113,8 +130,7 @@ void fn_8031FB90(HSD_GObj* gobj)
         HSD_SetEraseColor(colors->r, colors->g, colors->b, colors->a);
         HSD_CObjEraseScreen(GET_COBJ(gobj), 1, 0, 1);
         vi_8031CA04(gobj);
-        M2C_FIELD(gobj, s32*, 0x24) = 0x881;
-        M2C_FIELD(gobj, s32*, 0x20) = 0;
+        gobj->gxlink_prios = 0x881;
         HSD_GObj_80390ED0(gobj, 7);
         HSD_CObjEndCurrent();
     }
@@ -171,13 +187,12 @@ void un_8031FD18_OnEnter(void* arg)
 
     char_index = input[0];
 
-    un_804D6FE8 = lbArchive_LoadSymbols(
-        &M2C_FIELD(un_80400258, char*, 0x34), &un_804D6FE0,
-        &M2C_FIELD(un_80400258, char*, 0x44), NULL);
-    lbArchive_LoadSymbols(&M2C_FIELD(un_80400258, char*, 0x58), &un_804D6FEC,
-                          &M2C_FIELD(un_80400258, char*, 0x64), NULL);
-    lbArchive_LoadSymbols(&M2C_FIELD(un_80400258, char*, 0x80), &un_804D6FE4,
-                          &M2C_FIELD(un_80400258, char*, 0x90), NULL);
+    un_804D6FE8 = lbArchive_LoadSymbols(un_80400258.scene1_file, &un_804D6FE0,
+                                        un_80400258.scene1_symbol, NULL);
+    lbArchive_LoadSymbols(un_80400258.scene2_file, &un_804D6FEC,
+                          un_80400258.scene2_symbol, NULL);
+    lbArchive_LoadSymbols(un_80400258.scene3_file, &un_804D6FE4,
+                          un_80400258.scene3_symbol, NULL);
     un_803124BC();
     un_804D6FE8 = lbArchive_LoadSymbols(gm_80160438(char_index), NULL);
 
@@ -328,6 +343,6 @@ void un_80320490_OnFrame(void)
 
 void un_803204B0(int arg0, int arg1)
 {
-    M2C_FIELD(&un_804D7038, u8*, 0) = arg0;
-    M2C_FIELD(&un_804D7038, u8*, 1) = arg1;
+    un_804D7038.char_index = arg0;
+    un_804D7038.costume_id = arg1;
 }

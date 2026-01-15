@@ -77,6 +77,6 @@ void un_8031F960_OnFrame(void)
 
 void un_8031F980(int arg0, int arg1)
 {
-    M2C_FIELD(&un_804D7004, u8*, 0) = arg0;
-    M2C_FIELD(&un_804D7004, u8*, 1) = arg1;
+    un_804D7004.char_index = arg0;
+    un_804D7004.costume_id = arg1;
 }

@@ -104,7 +104,7 @@ void vi_8031D9C4_OnFrame(void)
 
 void un_8031D9E4(int arg0, int arg1, int arg2)
 {
-    M2C_FIELD(&un_804D6F84, u8*, 0) = arg0;
-    M2C_FIELD(&un_804D6F84, u8*, 1) = arg1;
-    M2C_FIELD(&un_804D6F84, u8*, 3) = arg2;
+    un_804D6F84[0] = arg0;
+    un_804D6F84[1] = arg1;
+    un_804D6F84[3] = arg2;
 }

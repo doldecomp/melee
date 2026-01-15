@@ -1133,7 +1133,13 @@ void ftCo_CaptureWaitLw_IASA(Fighter_GObj* gobj)
 
 /// #ftCo_CaptureJump_IASA
 
-/// #ftCo_CaptureJump_Phys
+void ftCo_CaptureJump_Phys(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    PAD_STACK(8);
+    ftCommon_Fall(fp, fp->co_attrs.grav, fp->co_attrs.terminal_vel);
+    ftCommon_8007D268(fp);
+}
 
 void ftCo_CaptureJump_Coll(Fighter_GObj* gobj)
 {

@@ -7,8 +7,9 @@
 
 #include "it/items/types.h"
 
-/* 2EE200 */ UNK_RET it_802EE200(UNK_PARAMS);
-/* 2EE374 */ UNK_RET it_802EE374(UNK_PARAMS);
+/* 2EE200 */ Item_GObj* it_802EE200(HSD_GObj* parent, Vec3* pos,
+                                    f32 threshold1, f32 threshold2);
+/* 2EE374 */ void it_802EE374(Item_GObj* gobj);
 /* 2EE434 */ bool itWhispyapple_UnkMotion0_Anim(Item_GObj* gobj);
 /* 2EE544 */ void itWhispyapple_UnkMotion0_Phys(Item_GObj* gobj);
 /* 2EE5A0 */ bool itWhispyapple_UnkMotion0_Coll(Item_GObj* gobj);
@@ -29,7 +30,7 @@
 /* 2EEBD8 */ bool itWhispyapple_UnkMotion6_Anim(Item_GObj* gobj);
 /* 2EECC8 */ void itWhispyapple_UnkMotion6_Phys(Item_GObj* gobj);
 /* 2EECCC */ bool itWhispyapple_UnkMotion6_Coll(Item_GObj* gobj);
-/* 2EED00 */ UNK_RET it_802EED00(UNK_PARAMS);
+/* 2EED00 */ void it_802EED00(Item_GObj* gobj);
 /* 2EEDD4 */ bool itWhispyapple_UnkMotion7_Anim(Item_GObj* gobj);
 /* 2EEEC4 */ void itWhispyapple_UnkMotion7_Phys(Item_GObj* gobj);
 /* 2EEEC8 */ bool itWhispyapple_UnkMotion7_Coll(Item_GObj*);

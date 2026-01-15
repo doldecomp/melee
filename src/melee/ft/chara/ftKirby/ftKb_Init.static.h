@@ -12,5 +12,6 @@
 /* 10C44C */ static void fn_8010C44C(Fighter_GObj*);
 /* 10CD88 */ static void fn_8010CD88(Fighter_GObj*);
 /* 10CFB0 */ static void fn_8010CFB0(Fighter_GObj*);
+/* 4D9570 */ extern f32 ftKb_Init_804D9570;
 
 #endif
