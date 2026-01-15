@@ -15,15 +15,6 @@
 #include <common_structs.h>
 #include <dolphin/mtx.h>
 
-typedef struct MapBounds {
-    f32 top;
-    f32 bottom;
-    f32 left;
-    f32 right;
-} MapBounds;
-
-/* 458868 */ extern MapBounds mpLib_80458868[2];
-
 /* 04D164 */ MapCollData* mpLib_8004D164(void);
 /* 04D16C */ CollVtx* mpGetGroundCollVtx(void);
 /* 04D174 */ CollLine* mpGetGroundCollLine(void);

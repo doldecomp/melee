@@ -137,7 +137,7 @@ void vi_8031E0F0_OnFrame(void)
 
 void un_8031E110(int arg0, int arg1, int arg2)
 {
-    un_804D6FA8.char_index = arg0;
-    un_804D6FA8.costume_id = arg1;
-    un_804D6FA8.x3 = arg2;
+    M2C_FIELD(&un_804D6FA8, u8*, 0) = arg0;
+    M2C_FIELD(&un_804D6FA8, u8*, 1) = arg1;
+    M2C_FIELD(&un_804D6FA8, u8*, 3) = arg2;
 }

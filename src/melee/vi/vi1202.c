@@ -8,7 +8,6 @@
 #include "gm/gm_unsplit.h"
 #include "lb/lb_00F9.h"
 #include "lb/lbaudio_ax.h"
-#include "mp/mplib.h"
 #include "pl/player.h"
 #include "pl/plbonuslib.h"
 
@@ -170,6 +169,7 @@ void un_80321A00(HSD_GObj* gobj)
 
 void un_80321AF4(HSD_GObj* gobj)
 {
+    char* mpLib = mpLib_80458868;
     HSD_GObj* cur;
     vi1202_UnkStruct* data = un_804D7050;
     s32 old_x24 = data->x24;
@@ -185,8 +185,8 @@ void un_80321AF4(HSD_GObj* gobj)
             if (ftLib_8008731C(cur) == 0) {
                 ftLib_80086644(cur, &pos);
 
-                if (pos.y < gCrowdConfig->blastzone_y_offset +
-                                mpLib_80458868[1].bottom)
+                if (pos.y <
+                    gCrowdConfig->blastzone_y_offset + *(f32*) (mpLib + 0x14))
                 {
                     data->x24 = data->x24 + 1;
                 } else {
@@ -461,10 +461,10 @@ bool un_80322258(float arg)
 {
     f32 val2c = gCrowdConfig->horiz_margin;
 
-    if (arg < val2c + mpLib_80458868[1].left) {
+    if (arg < val2c + M2C_FIELD(mpLib_80458868, f32*, 0x18)) {
         goto ret_true;
     }
-    if (!(arg > mpLib_80458868[1].right - val2c)) {
+    if (!(arg > M2C_FIELD(mpLib_80458868, f32*, 0x1C) - val2c)) {
         goto ret_false;
     }
 ret_true:
@@ -589,7 +589,7 @@ bool un_803224DC(s32 spawn_id, f32 pos_x, f32 kb_mag)
 
     {
         f32 val2c = vdata->horiz_margin;
-        f32 val18 = mpLib_80458868[1].left;
+        f32 val18 = M2C_FIELD(mpLib_80458868, f32*, 0x18);
         f32 val1c;
 
         cat = tmp_cat;
@@ -597,7 +597,7 @@ bool un_803224DC(s32 spawn_id, f32 pos_x, f32 kb_mag)
         if (pos_x < val2c + val18) {
             goto oob;
         }
-        val1c = mpLib_80458868[1].right;
+        val1c = M2C_FIELD(mpLib_80458868, f32*, 0x1C);
         if (!(pos_x > val1c - val2c)) {
             goto inb;
         }
@@ -617,7 +617,7 @@ check:
 
 int un_80322598(int arg0, float arg1)
 {
-    f32 val14 = mpLib_80458868[1].bottom;
+    f32 val14 = M2C_FIELD(mpLib_80458868, f32*, 0x14);
     s32 cat;
     CrowdConfig* vdata;
     if (arg1 >= val14) {

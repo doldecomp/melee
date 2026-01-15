@@ -343,6 +343,6 @@ void un_80320490_OnFrame(void)
 
 void un_803204B0(int arg0, int arg1)
 {
-    un_804D7038.char_index = arg0;
-    un_804D7038.costume_id = arg1;
+    M2C_FIELD(&un_804D7038, u8*, 0) = arg0;
+    M2C_FIELD(&un_804D7038, u8*, 1) = arg1;
 }

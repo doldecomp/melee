@@ -55,8 +55,6 @@
                              __FILE__, line, line_id);                        \
     } while (0)
 
-MapBounds mpLib_80458868[2];
-
 static Vec2 mpLib_803BF718[2] = { { -1.0F, -400.0F }, { 1.0F, -400.0F } };
 static MapLine mpLib_803BF728 = { 0, 1, -1, -1, -1, -1, 1, 0 };
 static MapJoint mpLib_803BF738 = {
