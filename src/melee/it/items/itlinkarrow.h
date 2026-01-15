@@ -24,7 +24,7 @@
 /* 2A8C74 */ bool itLinkarrow_UnkMotion0_Coll(HSD_GObj*);
 /* 2A8C7C */ void it_802A8C7C(HSD_GObj*);
 /* 2A8CC8 */ bool itLinkarrow_UnkMotion1_Anim(HSD_GObj*);
-/* 2A90F0 */ void itLinkarrow_UnkMotion1_Phys(HSD_GObj*);
+/* 2A90F0 */ void itLinkarrow_UnkMotion1_Phys(Item_GObj*);
 /* 2A9138 */ bool itLinkarrow_UnkMotion1_Coll(Item_GObj*);
 /* 2A934C */ bool itLinkarrow_UnkMotion2_Anim(Item_GObj*);
 /* 2A93B4 */ void itLinkarrow_UnkMotion2_Phys(HSD_GObj*);
