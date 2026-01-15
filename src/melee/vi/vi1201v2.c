@@ -39,6 +39,8 @@ void un_803204E4(HSD_GObj* gobj)
 
 void un_80320508(CharacterKind char_kind, int costume)
 {
+    char pad[16];
+
     Camera_80028B9C(6);
     lb_8000FCDC();
     mpColl_80041C78();
@@ -63,8 +65,9 @@ void un_80320508(CharacterKind char_kind, int costume)
 
 void un_803205F4(void)
 {
-    HSD_JObj* jobj;
     HSD_GObj* gobj;
+    HSD_JObj* jobj;
+    char pad[16];
 
     gobj = GObj_Create(0xE, 0xF, 0);
     jobj = HSD_JObjLoadJoint(un_804D7010->models[1]->joint);
