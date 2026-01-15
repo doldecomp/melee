@@ -535,6 +535,7 @@ struct Item {
         itDosei_ItemVars dosei;
         itChicorita_ItemVars chicorita;
         itMaril_ItemVars maril;
+        itLizardon_ItemVars lizardon;
         itLucky_ItemVars lucky;
         itClimbersBlizzard_ItemVars climbersblizzard;
         itCoin_ItemVars coin;
@@ -562,6 +563,7 @@ struct Item {
         it_2F28_ItemVars it_2F28;
         itKinoko_ItemVars kinoko;
         itKirbyHammer_ItemVars kirbyhammer;
+        itKusudama_ItemVars kusudama;
         itKlap_ItemVars klap;
         itLeadead_ItemVars leadead;
         itLGun_ItemVars lgun;
