@@ -11,7 +11,6 @@
 
 /* 4D7040 */ extern DynamicModelDesc*** un_804D7040;
 /* 4D704C */ extern HSD_JObj* un_804D704C;
-/* 458868 */ extern char mpLib_80458868[];
 /* 4DE140 */ static f32 un_804DE140;
 /* 4DE150 */ static f32 un_804DE150;
 /* 4DE158 */ static f64 un_804DE158;

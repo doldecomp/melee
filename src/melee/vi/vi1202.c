@@ -93,6 +93,7 @@ void un_803218E0_OnFrame(void)
 
 extern char un_804A2F08[];
 extern vi1202_UnkStruct* un_804D7050;
+extern char mpLib_80458868[];
 
 void un_80321900(void)
 {
