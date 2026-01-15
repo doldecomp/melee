@@ -36,7 +36,7 @@ typedef struct VibData {
 /* 2487A8 */ UNK_RET fn_802487A8(UNK_PARAMS);
 /* 248A78 */ UNK_RET fn_80248A78(UNK_PARAMS);
 /* 248ED4 */ UNK_RET mnVibration_80248ED4(UNK_PARAMS);
-/* 249174 */ UNK_RET mnVibration_80249174(int);
+/* 249174 */ void mnVibration_80249174(int arg0);
 
 /* 3EECEC */ extern f32 mnVibration_803EECEC[2];
 /* 4D6C28 */ extern VibData* mnVibration_804D6C28;
