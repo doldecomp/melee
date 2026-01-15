@@ -69,7 +69,7 @@
 /* 26EC54 */ void it_8026EC54(HSD_GObj*, u16, u8*);
 /* 26ECE0 */ bool it_8026ECE0(Item_GObj*, u32);
 /* 26EECC */ void it_8026EECC(HSD_GObj*, int);
-/* 26F3AC */ void it_8026F3AC(void);
+/* 26F3AC */ ItemKind it_8026F3AC(void);
 /* 26F3D4 */ void it_8026F3D4(Item_GObj*, struct it_8026F3D4_arg1_t*, s32,
                               s32);
 /* 26F53C */ void it_8026F53C(Item_GObj*, Vec3*, bool);
