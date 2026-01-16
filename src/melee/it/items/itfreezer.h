@@ -17,7 +17,7 @@
 /* 2CD230 */ void itFreezer_UnkMotion2_Phys(Item_GObj* gobj);
 /* 2CD288 */ bool itFreezer_UnkMotion2_Coll(Item_GObj* gobj);
 /* 2CD290 */ UNK_RET it_802CD290(UNK_PARAMS);
-/* 2CD2EC */ UNK_RET it_802CD2EC(UNK_PARAMS);
+/* 2CD2EC */ void it_802CD2EC(Item_GObj*);
 /* 2CD360 */ bool itFreezer_UnkMotion0_Anim(Item_GObj* gobj);
 /* 2CD384 */ void itFreezer_UnkMotion0_Phys(Item_GObj* gobj);
 /* 2CD424 */ bool itFreezer_UnkMotion0_Coll(Item_GObj* gobj);

@@ -26,6 +26,10 @@ typedef struct itClimbersBlizzardAttributes {
     /* +10 */ f32 x10;
 } itClimbersBlizzardAttributes;
 
+typedef struct itClimbersIce_ItemVars {
+    /* +0 */ Item_GObj* x0;
+} itClimbersIce_ItemVars;
+
 typedef struct {
     /* x0 ip+DD4 */ f32 x0;
     /* x4 ip+DD8 */ HSD_GObj* x4;
@@ -463,6 +467,11 @@ typedef struct itPikachutJoltAir_ItemVars {
     /* +0 +DD4 */ char pad_0[0x4];
     /* +4 +DD8 */ u32 xDD8;
 } itPikachutJoltAir_ItemVars;
+
+typedef struct itPikachuthunder_ItemVars {
+    /* +0 */ char pad_0[0x38];
+    /* +38 */ Item_GObj* x38;
+} itPikachuthunder_ItemVars;
 
 typedef struct itSamusBomb_ItemVars {
     /* +0 +DD4 */ char pad_0[0x4];

@@ -75,18 +75,39 @@ void it_3F14_Logic23_Dropped(Item_GObj* gobj)
     Item_80268E5C(gobj, 4, 6);
 }
 
-/// #itLipstick_UnkMotion4_Coll
+bool itLipstick_UnkMotion4_Coll(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+
+    if (ip->xD4C != 0) {
+        it_8026E15C(gobj, it_802957AC);
+        return false;
+    }
+    return it_8026DF34(gobj);
+}
 
 void it_3F14_Logic23_Thrown(Item_GObj* gobj)
 {
     Item_80268E5C(gobj, 3, 6);
 }
 
-/// #itLipstick_UnkMotion4_Phys
+void itLipstick_UnkMotion4_Phys(Item_GObj* gobj)
+{
+    ItemAttr* attr = ((Item*) gobj->user_data)->xCC_item_attr;
+    it_80272860(gobj, attr->x10_fall_speed, attr->x14_fall_speed_max);
+    it_80274658(gobj, it_804D6D28->x68_float);
+}
 
 /// #itLipstick_UnkMotion3_Coll
 
-/// #it_3F14_Logic23_DmgDealt
+bool it_3F14_Logic23_DmgDealt(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->msid == 3 || ip->msid == 4) {
+        itColl_BounceOffVictim(gobj);
+    }
+    return false;
+}
 
 void it_3F14_Logic23_EnteredAir(Item_GObj* gobj)
 {

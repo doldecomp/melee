@@ -5,10 +5,11 @@
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
+#include "it/it_266F.h"
 
 /// #it_802CD44C
 
-void it_802CD4D8(void) {}
+void it_802CD4D8(Item_GObj* gobj) {}
 
 void it_802CD4DC(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
@@ -33,7 +34,15 @@ void itSonans_UnkMotion0_Phys(Item_GObj* gobj)
     it_802CD4FC(gobj);
 }
 
-/// #itSonans_UnkMotion0_Coll
+bool itSonans_UnkMotion0_Coll(Item_GObj* gobj)
+{
+    if (GET_ITEM(gobj)->ground_or_air == GA_Air) {
+        it_8026E15C(gobj, it_802CD4D8);
+    } else {
+        it_8026D62C(gobj, it_802CD4D8);
+    }
+    return false;
+}
 
 void it_802CD9C0(Item_GObj* gobj)
 {
@@ -61,7 +70,14 @@ void itSonans_UnkMotion1_Phys(Item_GObj* gobj)
 
 /// #itSonans_UnkMotion1_Coll
 
-/// #it_802CDAA8
+void it_802CDAA8(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    it_802762BC(ip);
+    Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
+    ip->entered_hitlag = efLib_PauseAll;
+    ip->exited_hitlag = efLib_ResumeAll;
+}
 
 bool itSonans_UnkMotion2_Anim(Item_GObj* gobj)
 {

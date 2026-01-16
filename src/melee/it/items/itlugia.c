@@ -105,7 +105,22 @@ bool itLugia_UnkMotion4_Coll(Item_GObj* gobj)
 
 /// #it_802D1A44
 
-/// #itLugia_UnkMotion5_Anim
+bool itLugia_UnkMotion5_Anim(Item_GObj* gobj)
+{
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+    Item* ip = GET_ITEM(gobj);
+
+    if (jobj == NULL) {
+        jobj = NULL;
+    } else {
+        jobj = jobj->child;
+    }
+    it_8027A160(jobj, ip);
+    if (!it_80272C6C(gobj)) {
+        return true;
+    }
+    return false;
+}
 
 void itLugia_UnkMotion5_Phys(Item_GObj* gobj)
 {
@@ -119,7 +134,15 @@ bool itLugia_UnkMotion5_Coll(Item_GObj* gobj)
 
 /// #it_802D1BBC
 
-/// #it_802D1D40
+void it_802D1D40(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    it_802762BC(ip);
+    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+    ip->entered_hitlag = efLib_PauseAll;
+    ip->exited_hitlag = efLib_ResumeAll;
+    it_80273670(gobj, 0, 0.0f);
+}
 
 bool it_802D1DB4(Item_GObj* gobj)
 {

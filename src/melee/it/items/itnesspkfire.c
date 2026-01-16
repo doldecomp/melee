@@ -4,16 +4,29 @@
 #include <platform.h>
 
 #include "it/forward.h"
+#include "it/types.h"
+
+#include <baselib/gobj.h>
 
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/inlines.h"
+#include "it/item.h"
 
 /// #it_802AA054
 
 /// #it_802AA1D8
 
-/// #itNesspkfire_UnkMotion0_Anim
+bool itNesspkfire_UnkMotion0_Anim(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    ip->xD44_lifeTimer--;
+    if (ip->xD44_lifeTimer <= 0.0f) {
+        return true;
+    }
+    return false;
+}
 
 bool itNesspkfire_UnkMotion0_Coll(Item_GObj* gobj)
 {

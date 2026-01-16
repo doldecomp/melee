@@ -6,6 +6,7 @@
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_2725.h"
+#include "it/itCommonItems.h"
 #include "it/item.h"
 #include "it/items/itwhitebea.h"
 
@@ -39,7 +40,14 @@ bool itOldottosea_UnkMotion0_Coll(Item_GObj* gobj)
 
 /// #itOldottosea_UnkMotion2_Coll
 
-/// #it_802E2BC0
+void it_802E2BC0(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itOldottoseaAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+    ip->xDD4_itemVar.oldottosea.x28 = 0;
+    ip->x40_vel.x *= attr->x4;
+    Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
+}
 
 bool itOldottosea_UnkMotion4_Anim(Item_GObj* gobj)
 {

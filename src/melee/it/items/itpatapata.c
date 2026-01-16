@@ -103,7 +103,13 @@ void itPatapata_UnkMotion6_Phys(Item_GObj* gobj)
 
 /// #it_802E1648
 
-/// #it_802E1694
+void it_802E1694(Item_GObj* gobj)
+{
+    PAD_STACK(8);
+    it_8027327C(gobj, 0x444, 0x130);
+    it_8027CE44(gobj);
+    Item_8026A8EC(gobj);
+}
 
 void it_802E16D8(Item_GObj* gobj, Item_GObj* ref_gobj)
 {

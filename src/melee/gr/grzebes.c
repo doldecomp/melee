@@ -3,6 +3,7 @@
 #include <platform.h>
 
 #include "gr/inlines.h"
+#include "gr/grzakogenerator.h"
 
 /* 1D84A0 */ static void grZebes_801D84A0(bool arg);
 /* 1D8528 */ static void grZebes_801D8528(void);
@@ -51,7 +52,10 @@ void grZebes_801D84A4(void)
 }
 void grZebes_801D8528(void) {}
 
-/// #grZebes_801D852C
+void grZebes_801D852C(void)
+{
+    grZakoGenerator_801CAE04(0);
+}
 
 bool grZebes_801D8550(void)
 {
@@ -82,7 +86,11 @@ bool grZebes_801D9254(Ground_GObj* arg)
 
 void grZebes_801D93D8(Ground_GObj* arg) {}
 
-/// #grZebes_801D93DC
+void grZebes_801D93DC(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    grAnime_801C8138(gobj, gp->map_id, 0);
+}
 
 bool grZebes_801D9408(Ground_GObj* arg)
 {

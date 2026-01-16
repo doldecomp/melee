@@ -2,12 +2,33 @@
 
 #include "it/inlines.h"
 #include "it/it_26B1.h"
+#include "it/it_266F.h"
 
 /// #it_802AB3F0
 
 /// #it_802AB468
 
-/// #it_802AB4B8
+bool it_802AB4B8(Item_GObj* gobj, CollData* cd)
+{
+    Item* ip = GET_ITEM(gobj);
+    bool ret = false;
+    it_8026DA08(gobj);
+    if (ip->x40_vel.y > 0.0f) {
+        if (cd->env_flags & Collide_CeilingMask) {
+            ret = true;
+        }
+    } else if (cd->env_flags & Collide_FloorMask) {
+        ret = true;
+    }
+    if (ip->x40_vel.x > 0.0f) {
+        if (cd->env_flags & Collide_LeftWallMask) {
+            ret = true;
+        }
+    } else if (cd->env_flags & Collide_RightWallMask) {
+        ret = true;
+    }
+    return ret;
+}
 
 HSD_GObj* it_802AB568(Item_GObj* gobj)
 {

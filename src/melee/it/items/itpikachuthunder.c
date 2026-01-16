@@ -1,6 +1,10 @@
 #include "itpikachuthunder.h"
 
 #include "it/inlines.h"
+#include "it/it_26B1.h"
+#include "it/types.h"
+
+#include <baselib/gobj.h>
 
 int it_802B1DEC(Item_GObj* arg0)
 {
@@ -24,7 +28,15 @@ s32 it_802B1FC8(Item_GObj* gobj)
 
 /// #it_802B211C
 
-/// #itPikachuthunder_UnkMotion1_Anim
+bool itPikachuthunder_UnkMotion1_Anim(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    ip->xD44_lifeTimer--;
+    if (ip->xD44_lifeTimer <= 0.0f) {
+        return true;
+    }
+    return false;
+}
 
 /// #itPikachuthunder_UnkMotion1_Coll
 
@@ -52,4 +64,11 @@ bool it_2725_Logic39_Absorbed(Item_GObj* arg0)
     return false;
 }
 
-/// #it_2725_Logic39_EvtUnk
+void it_2725_Logic39_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->xDD4_itemVar.pikachuthunder.x38 == ref_gobj) {
+        ip->xDD4_itemVar.pikachuthunder.x38 = NULL;
+    }
+    it_8026B894(gobj, ref_gobj);
+}

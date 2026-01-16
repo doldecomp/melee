@@ -4,6 +4,7 @@
 
 #include "it/inlines.h"
 #include "it/it_26B1.h"
+#include "it/it_266F.h"
 
 /* 2AB29C */ static bool itNesspkflush_UnkMotion1_Coll(Item_GObj* gobj);
 /* 2AB2A4 */ static bool itNesspkflush_UnkMotion2_Coll(Item_GObj* gobj);
@@ -22,7 +23,27 @@ bool it_802AA7F0(Item_GObj* gobj)
     return 0;
 }
 
-/// #it_802AA810
+bool it_802AA810(Item_GObj* gobj, CollData* cd)
+{
+    Item* ip = GET_ITEM(gobj);
+    bool ret = false;
+    it_8026DA08(gobj);
+    if (ip->x40_vel.y > 0.0f) {
+        if (cd->env_flags & Collide_CeilingMask) {
+            ret = true;
+        }
+    } else if (cd->env_flags & Collide_FloorMask) {
+        ret = true;
+    }
+    if (ip->x40_vel.x > 0.0f) {
+        if (cd->env_flags & Collide_LeftWallMask) {
+            ret = true;
+        }
+    } else if (cd->env_flags & Collide_RightWallMask) {
+        ret = true;
+    }
+    return ret;
+}
 
 /// #it_802AA8C0
 

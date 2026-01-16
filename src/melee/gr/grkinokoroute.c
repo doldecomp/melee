@@ -5,6 +5,7 @@
 #include <platform.h>
 
 #include "cm/camera.h"
+#include "ft/ftdevice.h"
 #include "ft/ftlib.h"
 #include "gr/inlines.h"
 
@@ -78,7 +79,10 @@ void grKinokoRoute_80207B28(Ground_GObj* arg) {}
 
 void grKinokoRoute_80207B2C(Ground_GObj* arg) {}
 
-/// #fn_80207B30
+void fn_80207B30(HSD_GObj* gobj)
+{
+    ftCo_800C07F8(gobj, 6, fn_80208660);
+}
 
 /// #grKinokoRoute_80207B5C
 

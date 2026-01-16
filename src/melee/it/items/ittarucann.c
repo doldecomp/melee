@@ -3,6 +3,7 @@
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/item.h"
 
 /// #it_80295ED4
 
@@ -36,7 +37,12 @@ void itTarucann_UnkMotion0_Phys(Item_GObj* gobj) {}
 
 /// #itTarucann_UnkMotion0_Coll
 
-/// #it_80296694
+void it_80296694(Item_GObj* gobj)
+{
+    PAD_STACK(8);
+    Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
+    it_8026B3A8(gobj);
+}
 
 /// #itTarucann_UnkMotion1_Anim
 

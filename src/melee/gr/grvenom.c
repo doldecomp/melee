@@ -2,6 +2,7 @@
 
 #include <platform.h>
 
+#include "gr/grcorneria.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
 
@@ -155,7 +156,11 @@ void grVenom_80206B70(Ground_GObj* arg)
 
 void grVenom_80206B90(Ground_GObj* arg) {}
 
-/// #grVenom_80206B94
+void grVenom_80206B94(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    grCorneria_801E2550(gobj, &gp->gv.corneria);
+}
 
 bool grVenom_80206BBC(Ground_GObj* arg)
 {

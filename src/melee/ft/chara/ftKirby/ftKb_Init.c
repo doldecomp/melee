@@ -5733,7 +5733,12 @@ void ftKb_MrSpecialAirN_Phys(Fighter_GObj* gobj)
     ft_80084DB0(gobj);
 }
 
-/// #ftKb_MrSpecialAirN_Coll
+void ftKb_MrSpecialAirN_Coll(Fighter_GObj* gobj)
+{
+    if (ft_80081D0C(gobj) != GA_Ground) {
+        ftKb_SpecialNLg_800F9598(gobj);
+    }
+}
 
 /// #ftKb_SpecialNLg_800F951C
 
@@ -5849,7 +5854,17 @@ void ftKb_PkSpecialAirN_Phys(Fighter_GObj* gobj)
 
 /// #ftKb_SpecialNKp_800FA7D4
 
-/// #ftKb_SpecialNKp_800FA83C
+int ftKb_SpecialNKp_800FA83C(Fighter_GObj* gobj)
+{
+    if (gobj != NULL) {
+        Fighter* fp = GET_FIGHTER(gobj);
+        if (fp != NULL) {
+            ftKb_DatAttrs* da = fp->dat_attrs;
+            return da->specialn_kp_max_fuel;
+        }
+    }
+    return 1;
+}
 
 /// #ftKb_SpecialNKp_800FA878
 
@@ -6833,7 +6848,12 @@ void ftKb_PrSpecialNFull_Phys(Fighter_GObj* gobj)
 
 /// #ftKb_PrSpecialNTurn_Phys
 
-/// #ftKb_PrSpecialNEnd_Phys
+void ftKb_PrSpecialNEnd_Phys(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftCommon_ApplyFrictionGround(fp, fp->co_attrs.gr_friction);
+    ftCommon_ApplyGroundMovement(gobj);
+}
 
 void ftKb_PrSpecialAirNStart_Phys(Fighter_GObj* gobj)
 {
@@ -7819,7 +7839,12 @@ void ftKb_MsSpecialNStart_Coll(Fighter_GObj* gobj)
     }
 }
 
-/// #ftKb_MsSpecialAirNStart_Coll
+void ftKb_MsSpecialAirNStart_Coll(Fighter_GObj* gobj)
+{
+    if (ft_80081D0C(gobj) != GA_Ground) {
+        ftKb_SpecialNMs_8010B8E0(gobj);
+    }
+}
 
 /// #ftKb_SpecialNMs_8010B868
 
@@ -7864,7 +7889,12 @@ void ftKb_MsSpecialNLoop_Coll(Fighter_GObj* gobj)
     }
 }
 
-/// #ftKb_MsSpecialAirNLoop_Coll
+void ftKb_MsSpecialAirNLoop_Coll(Fighter_GObj* gobj)
+{
+    if (ft_80081D0C(gobj) != GA_Ground) {
+        ftKb_SpecialNMs_8010BBC8(gobj);
+    }
+}
 
 /// #ftKb_SpecialNMs_8010BB50
 
@@ -7912,7 +7942,12 @@ void ftKb_MsSpecialNEnd_Coll(Fighter_GObj* gobj)
     }
 }
 
-/// #ftKb_MsSpecialAirNEnd_Coll
+void ftKb_MsSpecialAirNEnd_Coll(Fighter_GObj* gobj)
+{
+    if (ft_80081D0C(gobj) != GA_Ground) {
+        ftKb_SpecialNPe_8010C06C(gobj);
+    }
+}
 
 /// #ftKb_SpecialNPe_8010BF90
 

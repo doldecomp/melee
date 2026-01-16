@@ -191,9 +191,16 @@ bool it_2725_Logic11_Reflected(Item_GObj* gobj)
 
 /// #it_2725_Logic11_HitShield
 
-/// #it_2725_Logic11_ShieldBounced
+bool it_2725_Logic11_ShieldBounced(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->msid == 3 || ip->msid == 4) {
+        itColl_BounceOffShield(gobj);
+    }
+    return false;
+}
 
-s32 fn_802DFE7C(Item_GObj* gobj)
+int fn_802DFE7C(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     it_80272940(gobj);

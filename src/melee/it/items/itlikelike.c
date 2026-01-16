@@ -7,6 +7,7 @@
 #include "it/it_266F.h"
 #include "it/it_2725.h"
 #include "it/item.h"
+#include "it/it_26B1.h"
 
 #define GET_ATTRS(ip)                                                         \
     ((itLikelikeAttributes*) ip->xC4_article_data->x4_specialAttributes)
@@ -281,7 +282,14 @@ bool itLikelike_UnkMotion6_Anim(Item_GObj* gobj)
 
 /// #itLikelike_UnkMotion6_Coll
 
-/// #it_802DC310
+void it_802DC310(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    it_802762BC(ip);
+    it_8027B964(gobj, 0);
+    ip->xDD4_itemVar.likelike.x18 = 0;
+    Item_80268E5C(gobj, 0x14, ITEM_ANIM_UPDATE);
+}
 
 bool itLikelike_UnkMotion20_Anim(Item_GObj* gobj)
 {
@@ -298,7 +306,14 @@ bool itLikelike_UnkMotion20_Coll(Item_GObj* gobj)
     return it_8027C79C(gobj);
 }
 
-/// #it_802DC3DC
+void it_802DC3DC(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    it_802762BC(ip);
+    it_8027BA54(gobj, &ip->x40_vel);
+    it_802762BC(ip);
+    Item_80268E5C(gobj, 0x15, 3);
+}
 
 bool itLikelike_UnkMotion21_Anim(Item_GObj* gobj)
 {
@@ -316,6 +331,10 @@ bool itLikelike_UnkMotion21_Coll(Item_GObj* gobj)
     return it_8027C794(gobj);
 }
 
-/// #it_2725_Logic5_Destroyed
+void it_2725_Logic5_Destroyed(Item_GObj* gobj)
+{
+    it_802DBAF0(gobj, 0, 1);
+    it_2725_Logic9_Destroyed(gobj);
+}
 
 /// #it_802DC4BC

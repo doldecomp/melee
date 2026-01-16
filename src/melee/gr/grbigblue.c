@@ -11,6 +11,7 @@
 #include "gr/inlines.h"
 #include "gr/types.h"
 #include "lb/lb_00F9.h"
+#include "gr/grzakogenerator.h"
 
 u8 tmpPadData[168] = { 0 };
 
@@ -73,7 +74,10 @@ void grBigBlue_801E57BC(bool arg) {}
 
 void grBigBlue_801E59C8(void) {}
 
-/// #grBigBlue_801E59CC
+void grBigBlue_801E59CC(void)
+{
+    grZakoGenerator_801CAE04(0);
+}
 
 bool grBigBlue_801E59F0(void)
 {

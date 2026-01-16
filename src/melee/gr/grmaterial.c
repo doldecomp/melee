@@ -24,6 +24,7 @@ grMaterial_801C8D44(int arg0, int arg1, Ground* arg2, Vec3* arg3, int arg4,
 /* 1C8EF8 */ static void fn_801C8EF8(HSD_MObj* mobj, u32 rendermode);
 /* 1C9490 */ void grMaterial_801C9490(HSD_JObj* jobj);
 /* 3E0A20 */ static HSD_MObjInfo grMaterial_803E0A20 = { 0 };
+/* 4D456C */ static ItCmd grMaterial_804D456C[1];
 
 static u32 data_section_pad[35] = { 0 };
 
@@ -303,6 +304,10 @@ void grMaterial_801C94D8(void* obj)
 
 /// #grMaterial_801C9604
 
-/// #fn_801C9664
+void fn_801C9664(Item_GObj* gobj, CommandInfo* cmd, int arg2)
+{
+    int idx = arg2 - 21;
+    grMaterial_804D456C[idx](gobj, cmd);
+}
 
 /// #grMaterial_801C9698

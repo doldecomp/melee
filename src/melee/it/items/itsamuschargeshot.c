@@ -6,8 +6,30 @@
 #include "it/forward.h"
 
 #include "it/it_26B1.h"
+#include "it/inlines.h"
+#include "it/it_266F.h"
 
-/// #it_802B5518
+bool it_802B5518(Item_GObj* gobj, CollData* cd)
+{
+    Item* ip = GET_ITEM(gobj);
+    bool ret = false;
+    it_8026DA08(gobj);
+    if (ip->x40_vel.y > 0.0f) {
+        if (cd->env_flags & Collide_CeilingMask) {
+            ret = true;
+        }
+    } else if (cd->env_flags & Collide_FloorMask) {
+        ret = true;
+    }
+    if (ip->x40_vel.x > 0.0f) {
+        if (cd->env_flags & Collide_LeftWallMask) {
+            ret = true;
+        }
+    } else if (cd->env_flags & Collide_RightWallMask) {
+        ret = true;
+    }
+    return ret;
+}
 
 /// #it_802B55C8
 

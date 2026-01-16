@@ -6,10 +6,14 @@
 #include "cm/camera.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/inlines.h"
+#include "it/it_266F.h"
+#include "ef/eflib.h"
+#include "it/item.h"
 
 /// #it_802C9D40
 
-void it_802C9DFC(void) {}
+void it_802C9DFC(Item_GObj* gobj) {}
 
 void it_2725_Logic2_Destroyed(Item_GObj* gobj)
 {
@@ -29,7 +33,19 @@ void it_802C9E24(Item_GObj* gobj, Item_GObj* ref_gobj)
 
 /// #itKabigon_UnkMotion0_Phys
 
-/// #itKabigon_UnkMotion0_Coll
+bool itKabigon_UnkMotion0_Coll(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+
+    if (ip->xDB0_itcmd_var1 == 0) {
+        if (ip->ground_or_air == GA_Air) {
+            it_8026E15C(gobj, it_802C9DFC);
+        } else {
+            it_8026D62C(gobj, it_802C9DFC);
+        }
+    }
+    return false;
+}
 
 /// #it_802CA014
 
@@ -44,7 +60,14 @@ bool itKabigon_UnkMotion1_Coll(Item_GObj* gobj)
     return false;
 }
 
-/// #it_802CA324
+void it_802CA324(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    it_802762BC(ip);
+    Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
+    ip->entered_hitlag = efLib_PauseAll;
+    ip->exited_hitlag = efLib_ResumeAll;
+}
 
 bool itKabigon_UnkMotion2_Anim(Item_GObj* gobj)
 {

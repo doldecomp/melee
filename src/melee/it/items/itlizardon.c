@@ -261,7 +261,7 @@ bool itLizardon_UnkMotion3_Coll(Item_GObj* gobj)
     return itLizardon_UnkMotion1_Coll(gobj);
 }
 
-void it_802CC0EC(HSD_GObj* gobj)
+void it_802CC0EC(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     it_802762BC(ip);

@@ -26,7 +26,10 @@
 
 /// #grCorneria_801DD478
 
-/// #grCorneria_801DD508
+void grCorneria_801DD508(void)
+{
+    grZakoGenerator_801CAE04(0);
+}
 
 bool grCorneria_801DD52C(void)
 {

@@ -9,6 +9,12 @@
 #include "it/it_2725.h"
 #include "it/item.h"
 
+typedef struct itOldkuriAttributes {
+    s32* x0;
+    f32 x4;
+    f32 x8;
+} itOldkuriAttributes;
+
 void it_2725_Logic29_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
@@ -16,7 +22,7 @@ void it_2725_Logic29_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 
 /// #it_802D73F0
 
-/// #it_802D747C
+void it_802D747C(Item_GObj* gobj) {}
 
 bool itOldkuri_UnkMotion0_Anim(Item_GObj* gobj)
 {
@@ -123,7 +129,16 @@ void itOldkuri_UnkMotion9_Phys(Item_GObj* gobj)
     }
 }
 
-/// #itOldkuri_UnkMotion9_Coll
+bool itOldkuri_UnkMotion9_Coll(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->ground_or_air == GA_Air) {
+        it_8026E414(gobj, it_802D747C);
+    } else {
+        it_8026D62C(gobj, it_802D7AF0);
+    }
+    return it_8027C794(gobj);
+}
 
 /// #it_2725_Logic0_DmgReceived
 
@@ -140,7 +155,13 @@ bool itOldkuri_UnkMotion7_Coll(Item_GObj* gobj)
     return it_8027C794(gobj);
 }
 
-/// #it_802D81FC
+void it_802D81FC(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itOldkuriAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+    ip->x40_vel.x *= attr->x8;
+    Item_80268E5C(gobj, 8, ITEM_ANIM_UPDATE);
+}
 
 bool itOldkuri_UnkMotion8_Anim(Item_GObj* gobj)
 {

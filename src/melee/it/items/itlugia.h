@@ -30,7 +30,7 @@
 /* 2D1B94 */ void itLugia_UnkMotion5_Phys(Item_GObj* gobj);
 /* 2D1BB4 */ bool itLugia_UnkMotion5_Coll(Item_GObj* gobj);
 /* 2D1BBC */ UNK_RET it_802D1BBC(UNK_PARAMS);
-/* 2D1D40 */ UNK_RET it_802D1D40(UNK_PARAMS);
+/* 2D1D40 */ void it_802D1D40(Item_GObj*);
 /* 2D1DB4 */ bool it_802D1DB4(Item_GObj* gobj);
 /* 2D1DD8 */ void it_802D1DD8(Item_GObj* gobj);
 /* 2D1E64 */ bool it_802D1E64(Item_GObj* gobj);
