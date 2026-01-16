@@ -7,6 +7,7 @@
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/item.h"
 
 void it_2725_Logic29_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
@@ -46,7 +47,13 @@ bool itOldkuri_UnkMotion0_Coll(Item_GObj* gobj)
 
 /// #itOldkuri_UnkMotion2_Coll
 
-/// #itOldkuri_UnkMotion3_Anim
+bool itOldkuri_UnkMotion3_Anim(Item_GObj* gobj)
+{
+    if (!it_80272C6C(gobj)) {
+        Item_80268E5C(gobj, 3, ITEM_ANIM_UPDATE | ITEM_HIT_PRESERVE);
+    }
+    return false;
+}
 
 void itOldkuri_UnkMotion3_Phys(Item_GObj* gobj)
 {
@@ -59,7 +66,13 @@ void itOldkuri_UnkMotion3_Phys(Item_GObj* gobj)
 
 /// #it_802D7AF0
 
-/// #itOldkuri_UnkMotion4_Anim
+bool itOldkuri_UnkMotion4_Anim(Item_GObj* gobj)
+{
+    if (!it_80272C6C(gobj)) {
+        Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
+    }
+    return false;
+}
 
 void itOldkuri_UnkMotion4_Phys(Item_GObj* gobj)
 {
@@ -80,7 +93,13 @@ void itOldkuri_UnkMotion5_Phys(Item_GObj* gobj) {}
 
 /// #it_2725_Logic0_Thrown
 
-/// #itOldkuri_UnkMotion6_Anim
+bool itOldkuri_UnkMotion6_Anim(Item_GObj* gobj)
+{
+    if (!it_80272C6C(gobj)) {
+        Item_80268E5C(gobj, 6, ITEM_ANIM_UPDATE);
+    }
+    return false;
+}
 
 void itOldkuri_UnkMotion6_Phys(Item_GObj* gobj)
 {
@@ -145,7 +164,13 @@ bool itOldkuri_UnkMotion8_Coll(Item_GObj* gobj)
 
 /// #it_802D82C4
 
-/// #itOldkuri_UnkMotion10_Anim
+bool itOldkuri_UnkMotion10_Anim(Item_GObj* gobj)
+{
+    if (!it_80272C6C(gobj)) {
+        Item_80268E5C(gobj, 0xA, ITEM_ANIM_UPDATE);
+    }
+    return false;
+}
 
 void itOldkuri_UnkMotion10_Phys(Item_GObj* gobj) {}
 
@@ -156,7 +181,13 @@ bool itOldkuri_UnkMotion10_Coll(Item_GObj* gobj)
 
 /// #it_802D839C
 
-/// #itOldkuri_UnkMotion11_Anim
+bool itOldkuri_UnkMotion11_Anim(Item_GObj* gobj)
+{
+    if (!it_80272C6C(gobj)) {
+        Item_80268E5C(gobj, 0xB, ITEM_ANIM_UPDATE);
+    }
+    return false;
+}
 
 void itOldkuri_UnkMotion11_Phys(Item_GObj* gobj)
 {

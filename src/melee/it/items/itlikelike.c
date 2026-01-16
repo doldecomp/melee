@@ -6,6 +6,7 @@
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_2725.h"
+#include "it/item.h"
 
 #define GET_ATTRS(ip)                                                         \
     ((itLikelikeAttributes*) ip->xC4_article_data->x4_specialAttributes)
@@ -26,7 +27,14 @@ void it_802D9B78(Item_GObj* gobj)
 
 /// #it_802D9DDC
 
-/// #itLikelike_UnkMotion0_Anim
+bool itLikelike_UnkMotion0_Anim(Item_GObj* gobj)
+{
+    PAD_STACK(8);
+    if (!it_80272C6C(gobj)) {
+        Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+    }
+    return false;
+}
 
 /// #itLikelike_UnkMotion0_Phys
 
@@ -40,7 +48,14 @@ void it_802D9B78(Item_GObj* gobj)
 
 /// #it_802DA104
 
-/// #itLikelike_UnkMotion1_Anim
+bool itLikelike_UnkMotion1_Anim(Item_GObj* gobj)
+{
+    PAD_STACK(8);
+    if (!it_80272C6C(gobj)) {
+        Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE | ITEM_HIT_PRESERVE);
+    }
+    return false;
+}
 
 /// #itLikelike_UnkMotion1_Phys
 
@@ -48,7 +63,14 @@ void it_802D9B78(Item_GObj* gobj)
 
 /// #it_802DA4C0
 
-/// #itLikelike_UnkMotion2_Anim
+bool itLikelike_UnkMotion2_Anim(Item_GObj* gobj)
+{
+    PAD_STACK(8);
+    if (!it_80272C6C(gobj)) {
+        Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE | ITEM_HIT_PRESERVE);
+    }
+    return false;
+}
 
 /// #itLikelike_UnkMotion2_Phys
 
@@ -124,7 +146,14 @@ void itLikelike_UnkMotion16_Phys(Item_GObj* gobj) {}
 
 /// #it_802DB074
 
-/// #itLikelike_UnkMotion8_Anim
+bool itLikelike_UnkMotion8_Anim(Item_GObj* gobj)
+{
+    PAD_STACK(8);
+    if (!it_80272C6C(gobj)) {
+        Item_80268E5C(gobj, 8, ITEM_ANIM_UPDATE);
+    }
+    return false;
+}
 
 /// #itLikelike_UnkMotion8_Phys
 
@@ -168,7 +197,14 @@ bool itLikelike_UnkMotion10_Coll(Item_GObj* gobj)
 
 /// #it_802DB8A8
 
-/// #itLikelike_UnkMotion13_Anim
+bool itLikelike_UnkMotion13_Anim(Item_GObj* gobj)
+{
+    PAD_STACK(8);
+    if (!it_80272C6C(gobj)) {
+        Item_80268E5C(gobj, 0xD, ITEM_ANIM_UPDATE);
+    }
+    return false;
+}
 
 /// #itLikelike_UnkMotion13_Phys
 
@@ -247,7 +283,13 @@ bool itLikelike_UnkMotion6_Anim(Item_GObj* gobj)
 
 /// #it_802DC310
 
-/// #itLikelike_UnkMotion20_Anim
+bool itLikelike_UnkMotion20_Anim(Item_GObj* gobj)
+{
+    if (!it_80272C6C(gobj)) {
+        Item_80268E5C(gobj, 0x14, ITEM_ANIM_UPDATE);
+    }
+    return false;
+}
 
 void itLikelike_UnkMotion20_Phys(Item_GObj* gobj) {}
 

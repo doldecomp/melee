@@ -6,6 +6,7 @@
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_2725.h"
+#include "it/item.h"
 #include "it/items/itwhitebea.h"
 
 /// #it_802E2470
@@ -14,7 +15,13 @@
 
 /// #it_802E269C
 
-/// #itOldottosea_UnkMotion0_Anim
+bool itOldottosea_UnkMotion0_Anim(Item_GObj* gobj)
+{
+    if (!it_80272C6C(gobj)) {
+        Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+    }
+    return false;
+}
 
 /// #itOldottosea_UnkMotion0_Phys
 

@@ -17,7 +17,13 @@ void itOldottosea_UnkMotion8_Phys(Item_GObj* gobj) {}
 
 /// #it_802E3314
 
-/// #itOldottosea_UnkMotion9_Anim
+bool itOldottosea_UnkMotion9_Anim(Item_GObj* gobj)
+{
+    if (!it_80272C6C(gobj)) {
+        Item_80268E5C(gobj, 9, ITEM_ANIM_UPDATE);
+    }
+    return false;
+}
 
 void itOldottosea_UnkMotion9_Phys(Item_GObj* gobj)
 {
@@ -33,7 +39,13 @@ bool itOldottosea_UnkMotion9_Coll(Item_GObj* gobj)
 
 /// #it_802E3400
 
-/// #itOldottosea_UnkMotion10_Anim
+bool itOldottosea_UnkMotion10_Anim(Item_GObj* gobj)
+{
+    if (!it_80272C6C(gobj)) {
+        Item_80268E5C(gobj, 0xA, ITEM_ANIM_UPDATE);
+    }
+    return false;
+}
 
 void itOldottosea_UnkMotion10_Phys(Item_GObj* gobj) {}
 
@@ -84,7 +96,14 @@ void it_802E37A4(Item_GObj* gobj)
 
 /// #fn_802E398C
 
-/// #itWhitebea_UnkMotion0_Anim
+bool itWhitebea_UnkMotion0_Anim(Item_GObj* gobj)
+{
+    PAD_STACK(8);
+    if (!it_80272C6C(gobj)) {
+        Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+    }
+    return false;
+}
 
 /// #itWhitebea_UnkMotion0_Phys
 
@@ -202,7 +221,13 @@ void it_2725_Logic9_PickedUp(Item_GObj* gobj)
     Item_80268E5C(gobj, 8, ITEM_ANIM_UPDATE);
 }
 
-/// #itWhitebea_UnkMotion8_Anim
+bool itWhitebea_UnkMotion8_Anim(Item_GObj* gobj)
+{
+    if (!it_80272C6C(gobj)) {
+        Item_80268E5C(gobj, 8, ITEM_ANIM_UPDATE);
+    }
+    return false;
+}
 
 void itWhitebea_UnkMotion8_Phys(Item_GObj* gobj) {}
 
@@ -210,7 +235,13 @@ void itWhitebea_UnkMotion8_Phys(Item_GObj* gobj) {}
 
 /// #it_2725_Logic9_Thrown
 
-/// #itWhitebea_UnkMotion9_Anim
+bool itWhitebea_UnkMotion9_Anim(Item_GObj* gobj)
+{
+    if (!it_80272C6C(gobj)) {
+        Item_80268E5C(gobj, 9, ITEM_ANIM_UPDATE);
+    }
+    return false;
+}
 
 void itWhitebea_UnkMotion9_Phys(Item_GObj* gobj)
 {
@@ -226,7 +257,13 @@ bool itWhitebea_UnkMotion9_Coll(Item_GObj* gobj)
 
 /// #it_802E48B4
 
-/// #itWhitebea_UnkMotion10_Anim
+bool itWhitebea_UnkMotion10_Anim(Item_GObj* gobj)
+{
+    if (!it_80272C6C(gobj)) {
+        Item_80268E5C(gobj, 0xA, ITEM_ANIM_UPDATE);
+    }
+    return false;
+}
 
 void itWhitebea_UnkMotion10_Phys(Item_GObj* gobj) {}
 

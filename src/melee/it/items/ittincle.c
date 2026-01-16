@@ -54,7 +54,14 @@ bool itTincle_UnkMotion1_Coll(Item_GObj* gobj)
 
 /// #it_802EBA00
 
-/// #itTincle_UnkMotion2_Anim
+bool itTincle_UnkMotion2_Anim(Item_GObj* gobj)
+{
+    PAD_STACK(8);
+    if (!it_80272C6C(gobj)) {
+        Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
+    }
+    return false;
+}
 
 /// #itTincle_UnkMotion2_Phys
 
