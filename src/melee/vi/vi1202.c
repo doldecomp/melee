@@ -169,12 +169,13 @@ static void HSD_JObjSetTranslateZ_2(HSD_JObj* jobj, f32 z)
 
 void un_80321300_OnEnter(void* arg)
 {
-    HSD_GObj* gobj;
+    f32 scale;
     HSD_LObj* lobj;
     HSD_CObj* cobj;
     HSD_JObj* jobj;
     HSD_JObj* child;
-    f32 scale;
+    HSD_GObj *gobj, *cam_gobj;
+    PAD_STACK(24);
 
     lbAudioAx_80023694();
     lbAudioAx_800236DC();
@@ -194,16 +195,16 @@ void un_80321300_OnEnter(void* arg)
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784A, lobj);
     GObj_SetupGXLink(gobj, HSD_GObj_LObjCallback, 0, 0);
 
-    gobj = GObj_Create(0x13, 0x14, 0);
+    cam_gobj = GObj_Create(0x13, 0x14, 0);
     cobj =
         lb_80013B14((HSD_CameraDescPerspective*) un_804D7040->cameras->desc);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
-    GObj_SetupGXLinkMax(gobj, HSD_GObj_803910D8, 0x8);
-    gobj->gxlink_prios = 0x8A9;
+    HSD_GObjObject_80390A70(cam_gobj, HSD_GObj_804D784B, cobj);
+    GObj_SetupGXLinkMax(cam_gobj, HSD_GObj_803910D8, 0x8);
+    cam_gobj->gxlink_prios = 0x8A9;
     HSD_CObjAddAnim(cobj, un_804D7040->cameras->anims[0]);
     HSD_CObjReqAnim(cobj, 0.0f);
     HSD_CObjAnim(cobj);
-    HSD_GObjProc_8038FD54(gobj, un_80321294, 0);
+    HSD_GObjProc_8038FD54(cam_gobj, un_80321294, 0);
     un_80321178();
 
     gobj = GObj_Create(0xE, 0xF, 0);
@@ -211,9 +212,9 @@ void un_80321300_OnEnter(void* arg)
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0xB, 0);
 
-    HSD_JObjSetScaleX(jobj, 0.55f);
-    HSD_JObjSetScaleY(jobj, 0.55f);
-    HSD_JObjSetScaleZ(jobj, 0.55f);
+    HSD_JObjSetScaleX(jobj, 0.49f);
+    HSD_JObjSetScaleY(jobj, 0.49f);
+    HSD_JObjSetScaleZ(jobj, 0.49f);
 
     lb_8000C1C0(jobj, un_804D704C);
     lb_8000C290(jobj, un_804D704C);
@@ -236,7 +237,7 @@ void un_80321300_OnEnter(void* arg)
     HSD_JObjSetTranslateZ_2(child, -un_803060BC(0x1F, 2));
     HSD_JObjSetRotationY_2(child, -un_803060BC(0x1F, 5));
 
-    scale = 0.55f * (un_803060BC(0x1F, 4) * (1.0f / un_803060BC(0x1F, 3)));
+    scale = 0.49f * (un_803060BC(0x1F, 4) * (1.0f / un_803060BC(0x1F, 3)));
 
     HSD_JObjSetScaleX_2(child, scale);
     HSD_JObjSetScaleY_2(child, scale);
