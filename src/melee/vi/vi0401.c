@@ -116,7 +116,7 @@ static void fn_8031D168(HSD_GObj* gobj)
     HSD_JObjAnimAll(GET_JOBJ(gobj));
 }
 
-void un_8031D288_OnEnter(vi0401_SceneData* data)
+void un_8031D288_OnEnter(void* data)
 {
     int i;
     HSD_CObj* cobj;
@@ -129,7 +129,7 @@ void un_8031D288_OnEnter(vi0401_SceneData* data)
     HSD_JObj* jobj;
     HSD_JObj* child;
 
-    u8 char_index = data->char_id;
+    u8 char_index = ((u8*) data)[0];
 
     lbAudioAx_800236DC();
     efLib_8005B4B8();
@@ -194,7 +194,7 @@ void un_8031D288_OnEnter(vi0401_SceneData* data)
         HSD_JObjAnimAll(jobj);
         HSD_GObjProc_8038FD54(gobj, fn_8031D168, 0x17);
     }
-    un_8031D030(data->char_id, data->costume_id);
+    un_8031D030(((u8*) data)[0], ((u8*) data)[1]);
     vi_8031C9B4(1, 0);
 
     lbAudioAx_800237A8(0x61a88, 0x7F, 0x40);
