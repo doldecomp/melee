@@ -15,7 +15,7 @@
 /* 2D26BC */ bool itHouou_UnkMotion2_Anim(Item_GObj* gobj);
 /* 2D26FC */ void itHouou_UnkMotion2_Phys(Item_GObj* gobj);
 /* 2D27A8 */ bool itHouou_UnkMotion2_Coll(Item_GObj* gobj);
-/* 2D27B0 */ UNK_RET it_802D27B0(UNK_PARAMS);
+/* 2D27B0 */ void it_802D27B0(Item_GObj* gobj);
 /* 2D27FC */ bool itHouou_UnkMotion3_Anim(Item_GObj* gobj);
 /* 2D288C */ void itHouou_UnkMotion3_Phys(Item_GObj* gobj);
 /* 2D2904 */ bool itHouou_UnkMotion3_Coll(Item_GObj* gobj);
@@ -35,7 +35,7 @@
 /* 2D2D2C */ UNK_RET it_802D2D2C(UNK_PARAMS);
 /* 2D2E80 */ void it_2725_Logic42_Spawned(Item_GObj*);
 /* 2D2ED0 */ void it_802D2ED0(Item_GObj*, Item_GObj*);
-/* 2D2EF0 */ UNK_RET it_802D2EF0(UNK_PARAMS);
+/* 2D2EF0 */ void it_802D2EF0(Item_GObj* gobj);
 /* 2D2F3C */ bool it_802D2F3C(Item_GObj* gobj);
 /* 2D2F70 */ void it_802D2F70(Item_GObj* gobj);
 /* 2D2FE8 */ bool it_802D2FE8(Item_GObj* gobj);

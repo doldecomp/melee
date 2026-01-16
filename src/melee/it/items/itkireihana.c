@@ -3,6 +3,9 @@
 #include <placeholder.h>
 #include <platform.h>
 
+#include "ef/eflib.h"
+#include "it/inlines.h"
+#include "it/item.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
@@ -45,4 +48,20 @@ void itKireihana_UnkMotion0_Phys(Item_GObj* gobj)
 void itKireihana_UnkMotion0_Coll(Item_GObj* gobj)
 {
     it_8027A118(gobj, it_802D0138);
+}
+
+void it_802D0774(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
+    ip->entered_hitlag = efLib_PauseAll;
+    ip->exited_hitlag = efLib_ResumeAll;
+}
+
+void it_802D07C0(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    Item_80268E5C(gobj, 4, 0x11);
+    ip->entered_hitlag = efLib_PauseAll;
+    ip->exited_hitlag = efLib_ResumeAll;
 }

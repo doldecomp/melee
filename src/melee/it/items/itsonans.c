@@ -35,7 +35,13 @@ void itSonans_UnkMotion0_Phys(Item_GObj* gobj)
 
 /// #itSonans_UnkMotion0_Coll
 
-/// #it_802CD9C0
+void it_802CD9C0(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
+    ip->entered_hitlag = efLib_PauseAll;
+    ip->exited_hitlag = efLib_ResumeAll;
+}
 
 f32 it_804DD3B8 = 0.0f;
 

@@ -9,6 +9,8 @@
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "ef/eflib.h"
+#include "it/item.h"
 
 /// #it_802CA49C
 
@@ -26,7 +28,13 @@ void it_802CA558(Item_GObj* gobj)
     it_802CA58C(gobj);
 }
 
-/// #it_802CA58C
+void it_802CA58C(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+    ip->entered_hitlag = efLib_PauseAll;
+    ip->exited_hitlag = efLib_ResumeAll;
+}
 
 /// #it_802CA5D8
 
@@ -44,7 +52,13 @@ void it_802CA558(Item_GObj* gobj)
 
 /// #it_802CA8DC
 
-/// #it_802CA938
+void it_802CA938(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
+    ip->entered_hitlag = efLib_PauseAll;
+    ip->exited_hitlag = efLib_ResumeAll;
+}
 
 bool itKamex_UnkMotion2_Anim(Item_GObj* gobj)
 {

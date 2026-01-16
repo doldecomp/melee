@@ -3,6 +3,8 @@
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "ef/eflib.h"
+#include "it/item.h"
 
 /// #it_802CE710
 
@@ -57,7 +59,13 @@ void it_2725_Logic38_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
     it_8026B894(gobj, ref_gobj);
 }
 
-/// #it_802CF0D4
+void it_802CF0D4(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+    ip->entered_hitlag = efLib_PauseAll;
+    ip->exited_hitlag = efLib_ResumeAll;
+}
 
 bool it_802CF120(Item_GObj* gobj)
 {

@@ -16,7 +16,7 @@
 /* 2CD8E4 */ bool itSonans_UnkMotion0_Anim(Item_GObj* gobj);
 /* 2CD954 */ void itSonans_UnkMotion0_Phys(Item_GObj* gobj);
 /* 2CD974 */ bool itSonans_UnkMotion0_Coll(Item_GObj* gobj);
-/* 2CD9C0 */ UNK_RET it_802CD9C0(UNK_PARAMS);
+/* 2CD9C0 */ void it_802CD9C0(Item_GObj* gobj);
 /* 2CDA0C */ bool itSonans_UnkMotion1_Anim(Item_GObj* gobj);
 /* 2CDA3C */ void itSonans_UnkMotion1_Phys(Item_GObj* gobj);
 /* 2CDA5C */ bool itSonans_UnkMotion1_Coll(Item_GObj* gobj);
