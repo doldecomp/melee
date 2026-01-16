@@ -1,12 +1,16 @@
-#include "vi.h"
+#include "vi1101.h"
 
-#include "vi1101.static.h"
+#include "vi.h"
 
 #include "gm/gm_1601.h"
 #include "gm/gm_1A45.h"
 #include "lb/lb_00F9.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbshadow.h"
+
+#include "vi/forward.h"
+
+static un_804D7004_t un_804D7004;
 
 /// #un_8031F294
 
@@ -40,25 +44,25 @@ void fn_8031F600(HSD_GObj* gobj)
 
     HSD_CObjAnim(cobj);
 
-    if (un_804DE0E4 == cobj->aobj->curr_frame) {
+    if (170.0f == cobj->aobj->curr_frame) {
         if (gm_80164840(7) != 0) {
             vi_8031C9B4(0xD, 0);
             lbAudioAx_800237A8(0x209, 0x7F, 0x40);
         }
     }
 
-    if (un_804DE0E8 == cobj->aobj->curr_frame) {
+    if (190.0f == cobj->aobj->curr_frame) {
         vi_8031C9B4(0xD, 0);
         lbAudioAx_800237A8(0x209, 0x7F, 0x40);
     }
 
-    if (un_804DE0EC == cobj->aobj->curr_frame) {
+    if (241.0f == cobj->aobj->curr_frame) {
         if (gm_80164840(7) != 0) {
             lbAudioAx_800237A8(0x20A, 0x7F, 0x40);
         }
     }
 
-    if (un_804DE0F0 == cobj->aobj->curr_frame) {
+    if (271.0f == cobj->aobj->curr_frame) {
         lbAudioAx_800237A8(0x20A, 0x7F, 0x40);
     }
 
