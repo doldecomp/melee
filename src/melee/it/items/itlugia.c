@@ -122,14 +122,20 @@ bool it_802D1E64(Item_GObj* gobj)
 
 /// #it_802D208C
 
-/// #it_2725_Logic39_Spawned
+void it_2725_Logic39_Spawned(Item_GObj* gobj) {
+    it_8027ADEC(0x465, gobj, HSD_GObjGetHSDObj(gobj), it_804DD490);
+    it_802D23F4(gobj);
+}
 
 void it_2725_Logic40_Spawned(Item_GObj* gobj) {
     it_8027ADEC(0x466, gobj, HSD_GObjGetHSDObj(gobj), it_804DD490);
     it_802D23F4(gobj);
 }
 
-/// #it_2725_Logic41_Spawned
+void it_2725_Logic41_Spawned(Item_GObj* gobj) {
+    it_8027ADEC(0x467, gobj, HSD_GObjGetHSDObj(gobj), it_804DD490);
+    it_802D23F4(gobj);
+}
 
 void it_802D23D4(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
