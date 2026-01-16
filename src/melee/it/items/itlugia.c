@@ -57,7 +57,13 @@ bool itLugia_UnkMotion2_Coll(Item_GObj* gobj)
     return false;
 }
 
-/// #it_802D16D4
+void it_802D16D4(Item_GObj* gobj)
+{
+    Item* item = GET_ITEM(gobj);
+    Item_80268E5C((HSD_GObj*) gobj, 3, ITEM_ANIM_UPDATE);
+    item->entered_hitlag = efLib_PauseAll;
+    item->exited_hitlag = efLib_ResumeAll;
+}
 
 /// #itLugia_UnkMotion3_Anim
 
