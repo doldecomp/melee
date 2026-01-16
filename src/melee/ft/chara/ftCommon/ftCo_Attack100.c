@@ -68,7 +68,10 @@
 
 /* 0D8BFC */ static void fn_800D8BFC(Fighter_GObj* arg0);
 /* 0D9CE8 */ static void fn_800D9CE8(Fighter_GObj* arg0);
+/* 0DA054 */ void fn_800DA054(Fighter_GObj* gobj);
 /* 0DAADC */ static void fn_800DAADC(Fighter_GObj* arg0, Fighter_GObj* arg1);
+/* 0DAEEC */ void fn_800DAEEC(Fighter_GObj* gobj);
+/* 0DBBF8 */ void fn_800DBBF8(Fighter_GObj* gobj);
 
 extern f32 ftCo_804D90D0; // 0.0f
 extern f32 ftCo_804D90D4; // Decrement value
@@ -891,7 +894,10 @@ void fn_800DA490(Fighter_GObj* gobj)
     GET_FIGHTER(gobj)->take_dmg_cb = NULL;
 }
 
-/// #fn_800DA4A0
+void fn_800DA4A0(Fighter_GObj* gobj)
+{
+    fn_800DA054(gobj);
+}
 
 /// #fn_800DA4C0
 
@@ -928,7 +934,10 @@ void fn_800DA668(Fighter_GObj* gobj)
     GET_FIGHTER(gobj)->take_dmg_cb = NULL;
 }
 
-/// #fn_800DA678
+void fn_800DA678(Fighter_GObj* gobj)
+{
+    fn_800DA054(gobj);
+}
 
 /// #ftCo_800DA698
 
@@ -1013,7 +1022,10 @@ static bool fn_800DAD18(Fighter_GObj* gobj)
 
 /// #ftCo_CapturePulledHi_Coll
 
-/// #fn_800DAECC
+void fn_800DAECC(Fighter_GObj* gobj)
+{
+    fn_800DAEEC(gobj);
+}
 
 /// #fn_800DAEEC
 
@@ -1106,11 +1118,20 @@ void ftCo_CaptureWaitHi_IASA(Fighter_GObj* gobj)
     fn_800DC014(gobj);
 }
 
-/// #ftCo_CaptureWaitHi_Phys
+#pragma push
+#pragma dont_inline on
+void ftCo_CaptureWaitHi_Phys(Fighter_GObj* gobj)
+{
+    fn_800DAD18(gobj);
+}
+#pragma pop
 
 /// #ftCo_CaptureWaitHi_Coll
 
-/// #fn_800DBAC4
+void fn_800DBAC4(Fighter_GObj* gobj)
+{
+    fn_800DBBF8(gobj);
+}
 
 /// #fn_800DBAE4
 

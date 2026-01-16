@@ -4,6 +4,9 @@
 
 #include "gm/gm_1601.h"
 #include "gm/gmmain_lib.h"
+#include "sysdolphin/baselib/gobjplink.h"
+
+#include <baselib/gobj.h>
 
 extern s32 GetFighterTotalKOs(s32);
 extern s32 GetFighterTotalFalls(s32);
@@ -186,4 +189,9 @@ s32 mnCount_8025072C(CountEntry* entries, s32 start_idx, s32 mode)
         return 25;
     }
     return entries[best_idx].id;
+}
+
+void fn_802514B8(HSD_GObj* gobj)
+{
+    HSD_GObjPLink_80390228(gobj);
 }
