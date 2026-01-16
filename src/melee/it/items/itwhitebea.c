@@ -1,6 +1,7 @@
 #include "itwhitebea.h"
 
 #include "it/inlines.h"
+#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
@@ -87,7 +88,11 @@ void it_802E37A4(Item_GObj* gobj)
 
 /// #itWhitebea_UnkMotion0_Phys
 
-/// #itWhitebea_UnkMotion0_Coll
+bool itWhitebea_UnkMotion0_Coll(Item_GObj* gobj)
+{
+    it_8026D62C(gobj, it_802E3DA0);
+    return it_8027C794(gobj);
+}
 
 /// #it_802E3AC8
 
@@ -111,7 +116,12 @@ void itWhitebea_UnkMotion3_Phys(Item_GObj* gobj)
     it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
 }
 
-/// #itWhitebea_UnkMotion3_Coll
+bool itWhitebea_UnkMotion3_Coll(Item_GObj* gobj)
+{
+    PAD_STACK(8);
+    it_8026E414(gobj, fn_802E398C);
+    return it_8027C794(gobj);
+}
 
 /// #it_802E3ED0
 
@@ -135,7 +145,11 @@ void itWhitebea_UnkMotion4_Phys(Item_GObj* gobj)
 
 void itWhitebea_UnkMotion2_Phys(Item_GObj* gobj) {}
 
-/// #itWhitebea_UnkMotion2_Coll
+bool itWhitebea_UnkMotion2_Coll(Item_GObj* gobj)
+{
+    it_8026D62C(gobj, it_802E3DA0);
+    return it_8027C794(gobj);
+}
 
 /// #it_802E436C
 
@@ -143,7 +157,11 @@ void itWhitebea_UnkMotion2_Phys(Item_GObj* gobj) {}
 
 void itWhitebea_UnkMotion5_Phys(Item_GObj* gobj) {}
 
-/// #itWhitebea_UnkMotion5_Coll
+bool itWhitebea_UnkMotion5_Coll(Item_GObj* gobj)
+{
+    it_8026D6F4(gobj, it_802E3DA0);
+    return it_8027C794(gobj);
+}
 
 /// #it_802E4464
 
@@ -159,7 +177,12 @@ void itWhitebea_UnkMotion6_Phys(Item_GObj* gobj)
     it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
 }
 
-/// #itWhitebea_UnkMotion6_Coll
+bool itWhitebea_UnkMotion6_Coll(Item_GObj* gobj)
+{
+    PAD_STACK(8);
+    it_8026E414(gobj, it_802E4558);
+    return it_8027C794(gobj);
+}
 
 /// #it_802E4558
 
@@ -167,7 +190,12 @@ void itWhitebea_UnkMotion6_Phys(Item_GObj* gobj)
 
 void itWhitebea_UnkMotion7_Phys(Item_GObj* gobj) {}
 
-/// #itWhitebea_UnkMotion7_Coll
+bool itWhitebea_UnkMotion7_Coll(Item_GObj* gobj)
+{
+    PAD_STACK(8);
+    it_8026D6F4(gobj, it_802E3DA0);
+    return it_8027C794(gobj);
+}
 
 void it_2725_Logic9_PickedUp(Item_GObj* gobj)
 {

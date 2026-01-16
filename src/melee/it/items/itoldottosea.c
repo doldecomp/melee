@@ -4,7 +4,9 @@
 #include <platform.h>
 
 #include "it/inlines.h"
+#include "it/it_266F.h"
 #include "it/it_2725.h"
+#include "it/items/itwhitebea.h"
 
 /// #it_802E2470
 
@@ -16,7 +18,11 @@
 
 /// #itOldottosea_UnkMotion0_Phys
 
-/// #itOldottosea_UnkMotion0_Coll
+bool itOldottosea_UnkMotion0_Coll(Item_GObj* gobj)
+{
+    it_8026D62C(gobj, it_802E2BC0);
+    return it_802E35CC(gobj);
+}
 
 /// #it_802E27B4
 
@@ -40,7 +46,11 @@ void itOldottosea_UnkMotion4_Phys(Item_GObj* gobj)
     it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
 }
 
-/// #itOldottosea_UnkMotion4_Coll
+bool itOldottosea_UnkMotion4_Coll(Item_GObj* gobj)
+{
+    it_8026E414(gobj, it_802E269C);
+    return it_802E35CC(gobj);
+}
 
 /// #it_802E2C80
 
@@ -72,4 +82,8 @@ void itOldottosea_UnkMotion5_Phys(Item_GObj* gobj)
 
 void itOldottosea_UnkMotion3_Phys(Item_GObj* gobj) {}
 
-/// #itOldottosea_UnkMotion3_Coll
+bool itOldottosea_UnkMotion3_Coll(Item_GObj* gobj)
+{
+    it_8026D62C(gobj, it_802E2BC0);
+    return it_802E35CC(gobj);
+}

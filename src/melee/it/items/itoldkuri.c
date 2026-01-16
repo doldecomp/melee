@@ -24,7 +24,11 @@ bool itOldkuri_UnkMotion0_Anim(Item_GObj* gobj)
 
 /// #itOldkuri_UnkMotion0_Phys
 
-/// #itOldkuri_UnkMotion0_Coll
+bool itOldkuri_UnkMotion0_Coll(Item_GObj* gobj)
+{
+    it_8026D62C(gobj, it_802D7AF0);
+    return it_8027C794(gobj);
+}
 
 /// #it_802D758C
 

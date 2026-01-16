@@ -11,7 +11,7 @@
 /* 2D9B78 */ void it_802D9B78(Item_GObj*);
 /* 2D9BA8 */ void it_802D9BA8(Item_GObj*);
 /* 2D9CC4 */ bool it_2725_Logic5_DmgReceived(Item_GObj*);
-/* 2D9DDC */ UNK_RET it_802D9DDC(UNK_PARAMS);
+/* 2D9DDC */ void it_802D9DDC(Item_GObj*);
 /* 2D9E38 */ bool itLikelike_UnkMotion0_Anim(Item_GObj* gobj);
 /* 2D9E80 */ void itLikelike_UnkMotion0_Phys(Item_GObj* gobj);
 /* 2D9EF4 */ bool itLikelike_UnkMotion0_Coll(Item_GObj* gobj);
@@ -26,14 +26,14 @@
 /* 2DA550 */ bool itLikelike_UnkMotion2_Anim(Item_GObj* gobj);
 /* 2DA598 */ void itLikelike_UnkMotion2_Phys(Item_GObj* gobj);
 /* 2DA730 */ bool itLikelike_UnkMotion2_Coll(Item_GObj* gobj);
-/* 2DA8D8 */ UNK_RET it_802DA8D8(UNK_PARAMS);
+/* 2DA8D8 */ void it_802DA8D8(Item_GObj*);
 /* 2DA960 */ UNK_RET it_802DA960(UNK_PARAMS);
-/* 2DAA10 */ UNK_RET it_802DAA10(UNK_PARAMS);
+/* 2DAA10 */ void it_802DAA10(Item_GObj*);
 /* 2DAAD0 */ bool itLikelike_UnkMotion5_Anim(Item_GObj* gobj);
 /* 2DAAD8 */ void itLikelike_UnkMotion5_Phys(Item_GObj* gobj);
 /* 2DAB48 */ bool itLikelike_UnkMotion4_Coll(Item_GObj* gobj);
 /* 2DAB84 */ bool itLikelike_UnkMotion5_Coll(Item_GObj* gobj);
-/* 2DABC0 */ UNK_RET it_802DABC0(UNK_PARAMS);
+/* 2DABC0 */ void it_802DABC0(Item_GObj*);
 /* 2DAC20 */ bool itLikelike_UnkMotion17_Anim(Item_GObj* gobj);
 /* 2DAC98 */ void itLikelike_UnkMotion17_Phys(Item_GObj* gobj);
 /* 2DACE4 */ bool itLikelike_UnkMotion17_Coll(Item_GObj* gobj);

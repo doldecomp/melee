@@ -7,7 +7,7 @@
 
 /* 2E2470 */ void it_802E2470(Item_GObj*);
 /* 2E257C */ bool it_2725_Logic8_DmgReceived(Item_GObj*);
-/* 2E269C */ UNK_RET it_802E269C(UNK_PARAMS);
+/* 2E269C */ void it_802E269C(Item_GObj*);
 /* 2E26F4 */ bool itOldottosea_UnkMotion0_Anim(Item_GObj* gobj);
 /* 2E273C */ void itOldottosea_UnkMotion0_Phys(Item_GObj* gobj);
 /* 2E2778 */ bool itOldottosea_UnkMotion0_Coll(Item_GObj* gobj);
@@ -15,7 +15,7 @@
 /* 2E28E0 */ bool itOldottosea_UnkMotion2_Anim(Item_GObj* gobj);
 /* 2E2A58 */ void itOldottosea_UnkMotion2_Phys(Item_GObj* gobj);
 /* 2E2B38 */ bool itOldottosea_UnkMotion2_Coll(Item_GObj* gobj);
-/* 2E2BC0 */ UNK_RET it_802E2BC0(UNK_PARAMS);
+/* 2E2BC0 */ void it_802E2BC0(Item_GObj*);
 /* 2E2C0C */ bool itOldottosea_UnkMotion4_Anim(Item_GObj* gobj);
 /* 2E2C14 */ void itOldottosea_UnkMotion4_Phys(Item_GObj* gobj);
 /* 2E2C44 */ bool itOldottosea_UnkMotion4_Coll(Item_GObj* gobj);
