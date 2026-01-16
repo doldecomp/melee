@@ -237,8 +237,8 @@ static MinorSceneHandler gm_803DA920[] = {
     },
     {
         MN_CUTSCENE_GIGADEFEATED,
-        un_803218E0_OnFrame,
-        un_80321300_OnEnter,
+        vi1202_OnFrame,
+        vi1202_OnEnter,
         NULL,
         NULL,
     },

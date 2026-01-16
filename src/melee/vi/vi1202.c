@@ -88,7 +88,7 @@ void un_80321178(void)
     lbAudioAx_80027648();
 }
 
-void un_80321294(HSD_GObj* gobj)
+void vi1202_RunFrame(HSD_GObj* gobj)
 {
     HSD_CObj* cobj = GET_COBJ(gobj);
     HSD_CObjAnim(cobj);
@@ -167,7 +167,7 @@ static void HSD_JObjSetTranslateZ_2(HSD_JObj* jobj, f32 z)
     }
 }
 
-void un_80321300_OnEnter(void* arg)
+void vi1202_OnEnter(void* arg)
 {
     f32 scale;
     HSD_LObj* lobj;
@@ -204,7 +204,7 @@ void un_80321300_OnEnter(void* arg)
     HSD_CObjAddAnim(cobj, un_804D7040->cameras->anims[0]);
     HSD_CObjReqAnim(cobj, 0.0f);
     HSD_CObjAnim(cobj);
-    HSD_GObjProc_8038FD54(cam_gobj, un_80321294, 0);
+    HSD_GObjProc_8038FD54(cam_gobj, vi1202_RunFrame, 0);
     un_80321178();
 
     gobj = GObj_Create(0xE, 0xF, 0);
@@ -248,7 +248,7 @@ void un_80321300_OnEnter(void* arg)
     lbAudioAx_80024E50(0);
 }
 
-void un_803218E0_OnFrame(void)
+void vi1202_OnFrame(void)
 {
     vi_8031CAAC();
 }

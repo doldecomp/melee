@@ -47,9 +47,9 @@ typedef struct CrowdConfig {
 /* 321130 */ void un_80321130(HSD_GObj*);
 /* 321154 */ void un_80321154(HSD_GObj*);
 /* 321178 */ void un_80321178(void);
-/* 321294 */ void un_80321294(HSD_GObj*);
-/* 321300 */ void un_80321300_OnEnter(UNK_T);
-/* 3218E0 */ void un_803218E0_OnFrame(void);
+/* 321294 */ void vi1202_RunFrame(HSD_GObj*);
+/* 321300 */ void vi1202_OnEnter(UNK_T);
+/* 3218E0 */ void vi1202_OnFrame(void);
 /* 321900 */ void un_80321900(void);
 /* 321950 */ void un_80321950(vi1202_UnkStruct*);
 /* 3219AC */ void fn_803219AC(HSD_GObj*);
