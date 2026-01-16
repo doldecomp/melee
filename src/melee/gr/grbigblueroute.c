@@ -5,7 +5,15 @@
 #include "baselib/memory.h"
 #include "cm/camera.h"
 #include "ft/ftlib.h"
+#include "gr/grdisplay.h"
+#include "gr/ground.h"
 #include "gr/inlines.h"
+#include "gr/types.h"
+
+#include <baselib/gobjgxlink.h>
+#include <baselib/gobjproc.h>
+
+extern StageCallbacks grBb_Route_803E5E78[];
 
 /// #grBigBlueRoute_8020B864
 
@@ -31,7 +39,38 @@ bool grBigBlueRoute_8020B9CC(void)
     return false;
 }
 
-/// #grBigBlueRoute_8020B9D4
+HSD_GObj* grBigBlueRoute_8020B9D4(int gobj_id)
+{
+    HSD_GObj* gobj;
+    StageCallbacks* callbacks = &grBb_Route_803E5E78[gobj_id];
+
+    gobj = Ground_801C14D0(gobj_id);
+
+    if (gobj != NULL) {
+        Ground* gp = gobj->user_data;
+        gp->x8_callback = NULL;
+        gp->xC_callback = NULL;
+        GObj_SetupGXLink(gobj, grDisplay_801C5DB0, 3, 0);
+
+        if (callbacks->callback3 != NULL) {
+            gp->x1C_callback = callbacks->callback3;
+        }
+
+        if (callbacks->callback0 != NULL) {
+            callbacks->callback0(gobj);
+        }
+
+        if (callbacks->callback2 != NULL) {
+            HSD_GObjProc_8038FD54(gobj, callbacks->callback2, 4);
+        }
+
+    } else {
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grbigblueroute.c", 279,
+                 gobj_id);
+    }
+
+    return gobj;
+}
 
 /// #grBigBlueRoute_8020BABC
 

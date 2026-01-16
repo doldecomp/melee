@@ -3928,7 +3928,12 @@ void ftKb_AttackDash_Coll(Fighter_GObj* gobj)
 
 /// #fn_800F20C4
 
-/// #ftKb_AttackDashAir_Anim
+void ftKb_AttackDashAir_Anim(Fighter_GObj* gobj)
+{
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        ftCo_Fall_Enter(gobj);
+    }
+}
 
 void ftKb_AttackDashAir_IASA(Fighter_GObj* gobj) {}
 
@@ -5257,9 +5262,21 @@ void fn_800F6AC8(HSD_GObj* gobj)
 
 /// #ftKb_SpecialAirNLoop_Anim
 
-/// #ftKb_SpecialNEnd_Anim
+void ftKb_SpecialNEnd_Anim(Fighter_GObj* gobj)
+{
+    PAD_STACK(8);
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        ft_8008A2BC(gobj);
+    }
+}
 
-/// #ftKb_SpecialAirNEnd_Anim
+void ftKb_SpecialAirNEnd_Anim(Fighter_GObj* gobj)
+{
+    PAD_STACK(8);
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        ftCo_Fall_Enter(gobj);
+    }
+}
 
 /// #ftKb_SpecialNCapture0_Anim
 
@@ -5647,7 +5664,12 @@ void ftKb_SpecialN_800F9090(HSD_GObj* gobj)
 
 /// #ftKb_SpecialN_800F9110
 
-/// #ftKb_MrSpecialN_Anim
+void ftKb_MrSpecialN_Anim(Fighter_GObj* gobj)
+{
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        ft_8008A2BC(gobj);
+    }
+}
 
 void ftKb_MrSpecialN_IASA(Fighter_GObj* gobj)
 {
@@ -5662,13 +5684,23 @@ void ftKb_MrSpecialN_Phys(Fighter_GObj* gobj)
     ft_80084F3C(gobj);
 }
 
-/// #ftKb_MrSpecialN_Coll
+void ftKb_MrSpecialN_Coll(Fighter_GObj* gobj)
+{
+    if (ft_80082708(gobj) == GA_Ground) {
+        ftKb_SpecialNLg_800F951C(gobj);
+    }
+}
 
 /// #fn_800F9260
 
 /// #ftKb_SpecialNMr_800F93CC
 
-/// #ftKb_MrSpecialAirN_Anim
+void ftKb_MrSpecialAirN_Anim(Fighter_GObj* gobj)
+{
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        ftCo_Fall_Enter(gobj);
+    }
+}
 
 void ftKb_MrSpecialAirN_IASA(Fighter_GObj* gobj)
 {
@@ -5693,9 +5725,19 @@ void ftKb_MrSpecialAirN_Phys(Fighter_GObj* gobj)
 
 /// #ftKb_SpecialNLg_800F9684
 
-/// #ftKb_LgSpecialN_Anim
+void ftKb_LgSpecialN_Anim(Fighter_GObj* gobj)
+{
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        ft_8008A2BC(gobj);
+    }
+}
 
-/// #ftKb_LgSpecialAirN_Anim
+void ftKb_LgSpecialAirN_Anim(Fighter_GObj* gobj)
+{
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        ftCo_Fall_Enter(gobj);
+    }
+}
 
 void ftKb_LgSpecialN_IASA(Fighter_GObj* gobj)
 {
@@ -5735,12 +5777,17 @@ void ftKb_LgSpecialAirN_Phys(Fighter_GObj* gobj)
 
 void ftKb_CaSpecialN_Anim(Fighter_GObj* gobj)
 {
-    if (ftAnim_IsFramesRemaining(gobj) == 0) {
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
     }
 }
 
-/// #ftKb_CaSpecialAirN_Anim
+void ftKb_CaSpecialAirN_Anim(Fighter_GObj* gobj)
+{
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        ftCo_Fall_Enter(gobj);
+    }
+}
 
 /// #ftKb_CaSpecialN_IASA
 
@@ -5796,13 +5843,25 @@ void ftKb_PkSpecialAirN_Phys(Fighter_GObj* gobj)
 
 /// #ftKb_KpSpecialN_Anim
 
-/// #ftKb_KpSpecialNEnd_Anim
+void ftKb_KpSpecialNEnd_Anim(Fighter_GObj* gobj)
+{
+    PAD_STACK(8);
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        ft_8008A2BC(gobj);
+    }
+}
 
 /// #ftKb_KpSpecialAirNStart_Anim
 
 /// #ftKb_KpSpecialAirN_Anim
 
-/// #ftKb_KpSpecialAirNEnd_Anim
+void ftKb_KpSpecialAirNEnd_Anim(Fighter_GObj* gobj)
+{
+    PAD_STACK(8);
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        ftCo_Fall_Enter(gobj);
+    }
+}
 
 /// #ftKb_KpSpecialNStart_IASA
 
@@ -7279,9 +7338,19 @@ void ftKb_SpecialNIc_80108CE8(Fighter_GObj* gobj, Item_GObj* it_gobj)
 
 /// #ftKb_SpecialNIc_80108E14
 
-/// #ftKb_PpSpecialN_Anim
+void ftKb_PpSpecialN_Anim(Fighter_GObj* gobj)
+{
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        ft_8008A2BC(gobj);
+    }
+}
 
-/// #ftKb_PpSpecialAirN_Anim
+void ftKb_PpSpecialAirN_Anim(Fighter_GObj* gobj)
+{
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        ftCo_Fall_Enter(gobj);
+    }
+}
 
 void ftKb_PpSpecialN_IASA(Fighter_GObj* gobj) {}
 
@@ -7770,7 +7839,12 @@ void ftKb_MsSpecialAirNLoop_Phys(Fighter_GObj* gobj)
     ft_80084EEC(gobj);
 }
 
-/// #ftKb_MsSpecialNLoop_Coll
+void ftKb_MsSpecialNLoop_Coll(Fighter_GObj* gobj)
+{
+    if (ft_80082708(gobj) == GA_Ground) {
+        ftKb_SpecialNMs_8010BB50(gobj);
+    }
+}
 
 /// #ftKb_MsSpecialAirNLoop_Coll
 

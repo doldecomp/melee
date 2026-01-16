@@ -1018,7 +1018,12 @@ void ftCh_Drill_Coll(HSD_GObj* gobj) {}
 
 /// #ftCh_RockCrushUp_Anim
 
-/// #ftCh_RockCrushWait_Anim
+void ftCh_RockCrushWait_Anim(HSD_GObj* gobj)
+{
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        ftCh_GrabUnk1_8015BC88(gobj);
+    }
+}
 
 void ftCh_RockCrushUp_IASA(HSD_GObj* gobj)
 {
