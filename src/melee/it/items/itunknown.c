@@ -6,7 +6,7 @@
 
 /// #it_802CE710
 
-void it_802CE7CC(void) {}
+void it_802CE7CC(Item_GObj* gobj) {}
 
 void it_802CE7D0(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
@@ -45,7 +45,7 @@ void itUnknown_UnkMotion2_Phys(Item_GObj* gobj) {}
 
 bool itUnknown_UnkMotion2_Coll(Item_GObj* gobj)
 {
-    return false;
+    return it_8027A118(gobj, it_802CE7CC);
 }
 
 /// #it_802CED54

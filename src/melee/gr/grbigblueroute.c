@@ -159,7 +159,10 @@ int grBigBlueRoute_8020DA9C(struct grBigBlueRoute_8020DA9C_t* arg0)
 
 /// #grBigBlueRoute_8020DE48
 
-/// #fn_8020DEAC
+void fn_8020DEAC(void)
+{
+    Ground_801C53EC(0x77A12);
+}
 
 /// #grBigBlueRoute_8020DED4
 
