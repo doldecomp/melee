@@ -173,7 +173,7 @@ static void HSD_JObjSetScaleX_2(HSD_JObj* jobj, f32 x)
 static void HSD_JObjSetScaleY_2(HSD_JObj* jobj, f32 x)
 {
     ((jobj) ? ((void) 0) : __assert("jobj.h", 791, "jobj"));
-    jobj->scale.x = x;
+    jobj->scale.y = x;
     if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
         ftCo_800C6AFC(jobj);
     }
@@ -182,7 +182,7 @@ static void HSD_JObjSetScaleY_2(HSD_JObj* jobj, f32 x)
 static void HSD_JObjSetScaleZ_2(HSD_JObj* jobj, f32 x)
 {
     ((jobj) ? ((void) 0) : __assert("jobj.h", 806, "jobj"));
-    jobj->scale.x = x;
+    jobj->scale.z = x;
     if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
         ftCo_800C6AFC(jobj);
     }
