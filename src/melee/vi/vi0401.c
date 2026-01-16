@@ -25,20 +25,14 @@
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 
-typedef struct un_804D6F58_t {
-    char pad[0x38];
-    Vec3 x38;
-} un_804D6F58_t;
-
 extern HSD_Archive* un_804D6F54;
-extern un_804D6F58_t* un_804D6F58;
+extern HSD_JObj* un_804D6F58;
 
 static GXColor erase_colors_vi0401;
 
 void un_8031D030(CharacterKind char_kind, int costume)
 {
     Vec3 pos;
-    un_804D6F58_t* ptr;
 
     Camera_80028B9C(6);
     lb_8000FCDC();
@@ -60,9 +54,7 @@ void un_8031D030(CharacterKind char_kind, int costume)
     Player_SetSlottype(0, Gm_PKind_Demo);
     Player_SetFacingDirection(0, 1.0f);
 
-    ptr = un_804D6F58;
-    HSD_ASSERT(0x3D3, ptr != NULL);
-    pos = ptr->x38;
+    HSD_JObjGetTranslation2(un_804D6F58, &pos);
     Player_80032768(0, &pos);
     Player_80036F34(0, 8);
 
