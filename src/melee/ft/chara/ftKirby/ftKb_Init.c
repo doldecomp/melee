@@ -3926,7 +3926,13 @@ void ftKb_AttackDash_Coll(Fighter_GObj* gobj)
     ft_8008403C(gobj, fn_800F20C4);
 }
 
-/// #fn_800F20C4
+void fn_800F20C4(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftCommon_8007D5D4(fp);
+    Fighter_ChangeMotionState(gobj, 0x160, 0x0C4C5082, fp->cur_anim_frame,
+                              fp->frame_speed_mul, 0.0f, NULL);
+}
 
 void ftKb_AttackDashAir_Anim(Fighter_GObj* gobj)
 {
@@ -5203,9 +5209,21 @@ void fn_800F6178(HSD_GObj* gobj)
 
 /// #fn_800F6798
 
-/// #fn_800F6848
+void fn_800F6848(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftCommon_8007D5D4(fp);
+    Fighter_ChangeMotionState(gobj, 0x175, 0x0C4C5082, fp->cur_anim_frame,
+                              1.0f, 0.0f, NULL);
+}
 
-/// #fn_800F68A8
+void fn_800F68A8(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftCommon_8007D7FC(fp);
+    Fighter_ChangeMotionState(gobj, 0x163, 0x0C4C5082, fp->cur_anim_frame,
+                              1.0f, 0.0f, NULL);
+}
 
 /// #fn_800F6908
 
