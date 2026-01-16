@@ -3,10 +3,12 @@
 #include <placeholder.h>
 #include <platform.h>
 
+#include "ef/eflib.h"
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/item.h"
 
 /// #it_2725_Logic17_Spawned
 
@@ -19,7 +21,7 @@ void it_2725_Logic17_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 
 bool itLugia_UnkMotion1_Anim(Item_GObj* gobj)
 {
-    Item* ip = GET_ITEM(gobj); // r31
+    Item* ip = GET_ITEM(gobj);       // r31
     HSD_JObj* jobj = GET_JOBJ(gobj); // r3
     HSD_JObj* child;
 
@@ -31,7 +33,7 @@ bool itLugia_UnkMotion1_Anim(Item_GObj* gobj)
 
     it_8027A160(child, ip);
 
-    if (it_80272C6C(gobj) == 0) {
+    if (!it_80272C6C(gobj)) {
         it_802D1580(gobj);
     }
 
@@ -76,7 +78,7 @@ bool itLugia_UnkMotion2_Coll(Item_GObj* gobj)
 void it_802D16D4(Item_GObj* gobj)
 {
     Item* item = GET_ITEM(gobj);
-    Item_80268E5C((HSD_GObj*) gobj, 3, ITEM_ANIM_UPDATE);
+    Item_80268E5C(gobj, 3, ITEM_ANIM_UPDATE);
     item->entered_hitlag = efLib_PauseAll;
     item->exited_hitlag = efLib_ResumeAll;
 }
@@ -138,17 +140,20 @@ bool it_802D1E64(Item_GObj* gobj)
 
 /// #it_802D208C
 
-void it_2725_Logic39_Spawned(Item_GObj* gobj) {
+void it_2725_Logic39_Spawned(Item_GObj* gobj)
+{
     it_8027ADEC(0x465, gobj, HSD_GObjGetHSDObj(gobj), it_804DD490);
     it_802D23F4(gobj);
 }
 
-void it_2725_Logic40_Spawned(Item_GObj* gobj) {
+void it_2725_Logic40_Spawned(Item_GObj* gobj)
+{
     it_8027ADEC(0x466, gobj, HSD_GObjGetHSDObj(gobj), it_804DD490);
     it_802D23F4(gobj);
 }
 
-void it_2725_Logic41_Spawned(Item_GObj* gobj) {
+void it_2725_Logic41_Spawned(Item_GObj* gobj)
+{
     it_8027ADEC(0x467, gobj, HSD_GObjGetHSDObj(gobj), it_804DD490);
     it_802D23F4(gobj);
 }
