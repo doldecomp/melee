@@ -1,6 +1,8 @@
+#include "vi/vi1201v1.h"
+
 #include "vi.h"
 
-#include "vi/vi1201v1.static.h"
+#include "baselib/forward.h"
 
 #include "cm/camera.h"
 #include "ef/efasync.h"
@@ -36,30 +38,18 @@
 #include <baselib/jobj.h>
 #include <baselib/lobj.h>
 
-// .data section 0x80400258 - 0x80400xxx
-typedef struct Vi1201SceneData {
-    /* 0x00 */ Vec3 player_spawn;
-    /* 0x0C */ char pad_0C[0x28];
-    /* 0x34 */ char* scene1_file;
-    /* 0x38 */ char pad_38[0x0C];
-    /* 0x44 */ char* scene1_symbol;
-    /* 0x48 */ char pad_48[0x10];
-    /* 0x58 */ char* scene2_file;
-    /* 0x5C */ char pad_5C[0x08];
-    /* 0x64 */ char* scene2_symbol;
-    /* 0x68 */ char pad_68[0x18];
-    /* 0x80 */ char* scene3_file;
-    /* 0x84 */ char pad_84[0x0C];
-    /* 0x90 */ char* scene3_symbol;
-    /* 0x94 */ char pad_94[0x6C];
-} Vi1201SceneData; /* size = 0x100 */
+/* 4D6FE0 */ extern SceneDesc* un_804D6FE0;
+/* 4D6FE4 */ extern SceneDesc* un_804D6FE4;
+/* 4D6FE8 */ extern HSD_Archive* un_804D6FE8;
+/* 4D6FEC */ extern HSD_Joint* un_804D6FEC;
+/* 4D6FF0 */ extern HSD_JObj* un_804D6FF0;
+/* 4D6FF4 */ extern GXColor un_804D6FF4;
+/* 4D6FF8 */ extern s32 un_804D6FF8;
+/* 4D6FFC */ extern u8 un_804D6FFC;
+/* 4D6FFD */ extern u8 un_804D6FFD;
+/* 4D7000 */ extern void* un_804D7000;
 
-Vi1201SceneData un_80400258;
-
-static f32 un_804DE0F8;
-static f32 un_804DE0FC;
-static f32 un_804DE100;
-static f32 un_804DE104;
+Vec3 player_spawn = { 0.0f, 0.0f, 0.0f };
 
 void un_8031F990(HSD_GObj* gobj)
 {
@@ -73,7 +63,7 @@ void un_8031F9B4(HSD_GObj* gobj)
 
 void un_8031F9D8(CharacterKind char_index, int costume_id)
 {
-    char pad[16];
+    PAD_STACK(16);
 
     ftDemo_ObjAllocInit();
     Player_InitAllPlayers();
@@ -82,8 +72,8 @@ void un_8031F9D8(CharacterKind char_index, int costume_id)
     Player_SetCostumeId(0, costume_id);
     Player_SetPlayerId(0, 0);
     Player_SetSlottype(0, 2);
-    Player_SetFacingDirection(0, un_804DE100);
-    Player_80032768(0, &un_80400258.player_spawn);
+    Player_SetFacingDirection(0, 0.0f);
+    Player_80032768(0, &player_spawn);
     Player_80036F34(0, 1);
     un_804D7000 = Player_GetEntity(0);
     lbAudioAx_80026F2C(0x18);
@@ -99,20 +89,18 @@ void fn_8031FAA8(HSD_GObj* gobj)
     f32 scale_x;
     f32 scale_y;
     HSD_JObj* child;
-    char pad[4];
+    PAD_STACK(4);
 
     HSD_JObjAnimAll(gobj->hsd_obj);
     jobj = gobj->hsd_obj;
-    if (mn_8022F298(jobj) != un_804DE104) {
+    if (mn_8022F298(jobj) != 120.0f) {
         return;
     }
     lb_80011E24(jobj, &child, 1, -1);
     jobj = child;
-    HSD_ASSERT(0x3D3, jobj);
-
-    pos = jobj->translate;
-    scale_x = un_804DE100;
-    scale_y = un_804DE0FC;
+    HSD_JObjGetTranslation2(jobj, &pos);
+    scale_x = 0.0f;
+    scale_y = 1.0f;
 
     efSync_Spawn(0x42B, gobj, &pos, &scale_x, &scale_y, 0x00FFFFFF,
                  0x00808080);
@@ -161,6 +149,72 @@ void fn_8031FCBC(HSD_GObj* gobj)
     }
 }
 
+static void HSD_JObjSetRotationY_2(HSD_JObj* jobj, f32 y)
+{
+    ((jobj) ? ((void) 0) : __assert("jobj.h", 660, "jobj"));
+    ((!(jobj->flags & JOBJ_USE_QUATERNION))
+         ? ((void) 0)
+         : __assert("jobj.h", 661, "!(jobj->flags & JOBJ_USE_QUATERNION)"));
+    jobj->rotate.y = y;
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
+        ftCo_800C6AFC(jobj);
+    }
+}
+
+static void HSD_JObjSetScaleX_2(HSD_JObj* jobj, f32 x)
+{
+    ((jobj) ? ((void) 0) : __assert("jobj.h", 776, "jobj"));
+    jobj->scale.x = x;
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
+        ftCo_800C6AFC(jobj);
+    }
+}
+
+static void HSD_JObjSetScaleY_2(HSD_JObj* jobj, f32 x)
+{
+    ((jobj) ? ((void) 0) : __assert("jobj.h", 791, "jobj"));
+    jobj->scale.x = x;
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
+        ftCo_800C6AFC(jobj);
+    }
+}
+
+static void HSD_JObjSetScaleZ_2(HSD_JObj* jobj, f32 x)
+{
+    ((jobj) ? ((void) 0) : __assert("jobj.h", 806, "jobj"));
+    jobj->scale.x = x;
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
+        ftCo_800C6AFC(jobj);
+    }
+}
+
+static void HSD_JObjSetTranslateX_2(HSD_JObj* jobj, f32 x)
+{
+    ((jobj) ? ((void) 0) : __assert("jobj.h", 932, "jobj"));
+    jobj->translate.x = x;
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
+        ftCo_800C6AFC(jobj);
+    }
+}
+
+static void HSD_JObjSetTranslateY_2(HSD_JObj* jobj, f32 y)
+{
+    ((jobj) ? ((void) 0) : __assert("jobj.h", 947, "jobj"));
+    jobj->translate.y = y;
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
+        ftCo_800C6AFC(jobj);
+    }
+}
+
+static void HSD_JObjSetTranslateZ_2(HSD_JObj* jobj, f32 z)
+{
+    ((jobj) ? ((void) 0) : __assert("jobj.h", 962, "jobj"));
+    jobj->translate.z = z;
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
+        ftCo_800C6AFC(jobj);
+    }
+}
+
 void un_8031FD18_OnEnter(void* arg)
 {
     u8* input = arg;
@@ -187,12 +241,11 @@ void un_8031FD18_OnEnter(void* arg)
 
     char_index = input[0];
 
-    un_804D6FE8 = lbArchive_LoadSymbols(un_80400258.scene1_file, &un_804D6FE0,
-                                        un_80400258.scene1_symbol, NULL);
-    lbArchive_LoadSymbols(un_80400258.scene2_file, &un_804D6FEC,
-                          un_80400258.scene2_symbol, NULL);
-    lbArchive_LoadSymbols(un_80400258.scene3_file, &un_804D6FE4,
-                          un_80400258.scene3_symbol, NULL);
+    un_804D6FE8 = lbArchive_LoadSymbols("Vi1201v1.dat", &un_804D6FE0,
+                                        "visual1201v1Scene", NULL);
+    lbArchive_LoadSymbols("TyKoopa.dat", &un_804D6FEC,
+                          "ToyKoopaModel_TopN_joint", NULL);
+    lbArchive_LoadSymbols("GmRgStnd.dat", &un_804D6FE4, "standScene", NULL);
     un_803124BC();
     un_804D6FE8 = lbArchive_LoadSymbols(gm_80160438(char_index), NULL);
 
@@ -202,17 +255,17 @@ void un_8031FD18_OnEnter(void* arg)
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
     GObj_SetupGXLinkMax(gobj, (void (*)(HSD_GObj*, int)) fn_8031FB90, 8);
     HSD_CObjAddAnim(cobj, un_804D6FE0->cameras->anims[0]);
-    HSD_CObjReqAnim(cobj, un_804DE100);
+    HSD_CObjReqAnim(cobj, 0.0f);
     HSD_CObjAnim(cobj);
     HSD_GObjProc_8038FD54(gobj, fn_8031FC30, 0);
 
-    for (i = 0; un_804D6FE0->models[i] != NULL; i++) {
+    for (; un_804D6FE0->models[i] != NULL; i++) {
         gobj = GObj_Create(0xE, 0xF, 0);
         jobj = HSD_JObjLoadJoint(un_804D6FE0->models[i]->joint);
         HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
         GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0xB, 0);
         gm_8016895C(jobj, un_804D6FE0->models[i], 0);
-        HSD_JObjReqAnimAll(jobj, un_804DE100);
+        HSD_JObjReqAnimAll(jobj, 0.0f);
         HSD_JObjAnimAll(jobj);
         HSD_GObjProc_8038FD54(gobj, fn_8031FAA8, 0);
         lb_80011E24(jobj, &un_804D6FF0, 3, -1);
@@ -233,30 +286,16 @@ void un_8031FD18_OnEnter(void* arg)
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0xB, 0);
 
-    HSD_ASSERT(0x308, jobj != NULL);
-    jobj->scale.x = un_804DE0F8;
-    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
-        HSD_JObjSetMtxDirtySub(jobj);
-    }
-
-    HSD_ASSERT(0x317, jobj != NULL);
-    jobj->scale.y = un_804DE0F8;
-    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
-        HSD_JObjSetMtxDirtySub(jobj);
-    }
-
-    HSD_ASSERT(0x326, jobj != NULL);
-    jobj->scale.z = un_804DE0F8;
-    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
-        HSD_JObjSetMtxDirtySub(jobj);
-    }
+    HSD_JObjSetScaleX(jobj, 0.55f);
+    HSD_JObjSetScaleY(jobj, 0.55f);
+    HSD_JObjSetScaleZ(jobj, 0.55f);
 
     lb_8000C1C0(jobj, un_804D6FF0);
     lb_8000C290(jobj, un_804D6FF0);
     HSD_GObjProc_8038FD54(gobj, un_8031F9B4, 0);
 
     gobj = GObj_Create(0xE, 0xF, 0);
-    jobj = HSD_JObjLoadJoint(un_804D6FE4->models[0]->joint->child->child);
+    jobj = HSD_JObjLoadJoint(un_804D6FE4->models[0]->joint);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0xB, 0);
     HSD_GObjProc_8038FD54(gobj, un_8031F990, 0);
@@ -267,55 +306,16 @@ void un_8031FD18_OnEnter(void* arg)
         child = jobj->child;
     }
 
-    scale = -un_803060BC(0x1E, 0);
-    HSD_ASSERT(0x3A4, child != NULL);
-    child->translate.x = scale;
-    if (!(child->flags & JOBJ_MTX_INDEP_SRT)) {
-        ftCo_800C6AFC(child);
-    }
+    HSD_JObjSetTranslateX_2(child, -un_803060BC(0x1E, 0));
+    HSD_JObjSetTranslateY_2(child, -un_803060BC(0x1E, 1));
+    HSD_JObjSetTranslateZ_2(child, -un_803060BC(0x1E, 2));
+    HSD_JObjSetRotationY_2(child, -un_803060BC(0x1E, 5));
 
-    scale = -un_803060BC(0x1E, 1);
-    HSD_ASSERT(0x3B3, child != NULL);
-    child->translate.y = scale;
-    if (!(child->flags & JOBJ_MTX_INDEP_SRT)) {
-        ftCo_800C6AFC(child);
-    }
+    scale = 0.55f * (un_803060BC(0x1E, 4) * (1.0f / un_803060BC(0x1E, 3)));
 
-    scale = -un_803060BC(0x1E, 2);
-    HSD_ASSERT(0x3C2, child != NULL);
-    child->translate.z = scale;
-    if (!(child->flags & JOBJ_MTX_INDEP_SRT)) {
-        ftCo_800C6AFC(child);
-    }
-
-    scale = -un_803060BC(0x1E, 5);
-    HSD_ASSERT(0x294, child != NULL);
-    HSD_ASSERT(0x295, !(child->flags & JOBJ_USE_QUATERNION));
-    child->rotate.x = scale;
-    if (!(child->flags & JOBJ_MTX_INDEP_SRT)) {
-        ftCo_800C6AFC(child);
-    }
-
-    scale = un_804DE0FC / un_803060BC(0x1E, 3);
-    scale = un_804DE0F8 * (un_803060BC(0x1E, 4) * scale);
-
-    HSD_ASSERT(0x308, child != NULL);
-    child->scale.x = scale;
-    if (!(child->flags & JOBJ_MTX_INDEP_SRT)) {
-        ftCo_800C6AFC(child);
-    }
-
-    HSD_ASSERT(0x317, child != NULL);
-    child->scale.y = scale;
-    if (!(child->flags & JOBJ_MTX_INDEP_SRT)) {
-        ftCo_800C6AFC(child);
-    }
-
-    HSD_ASSERT(0x326, child != NULL);
-    child->scale.z = scale;
-    if (!(child->flags & JOBJ_MTX_INDEP_SRT)) {
-        ftCo_800C6AFC(child);
-    }
+    HSD_JObjSetScaleX_2(child, scale);
+    HSD_JObjSetScaleY_2(child, scale);
+    HSD_JObjSetScaleZ_2(child, scale);
 
     lb_8000C1C0(jobj, un_804D6FF0);
     lb_8000C290(jobj, un_804D6FF0);
@@ -325,7 +325,7 @@ void un_8031FD18_OnEnter(void* arg)
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7848, fog);
     GObj_SetupGXLink(gobj, HSD_GObj_FogCallback, 0, 0);
     HSD_GObjProc_8038FD54(gobj, fn_8031FCBC, 0);
-    un_804D6FF4 = *(u32*) &fog->color;
+    un_804D6FF4 = fog->color;
     un_804D6FF8 = 0;
 
     gobj = GObj_Create(0xB, 3, 0);
@@ -339,10 +339,4 @@ void un_8031FD18_OnEnter(void* arg)
 void un_80320490_OnFrame(void)
 {
     vi_8031CAAC();
-}
-
-void un_803204B0(int arg0, int arg1)
-{
-    M2C_FIELD(&un_804D7038, u8*, 0) = arg0;
-    M2C_FIELD(&un_804D7038, u8*, 1) = arg1;
 }
