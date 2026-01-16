@@ -31,7 +31,24 @@ bool itLugia_UnkMotion1_Coll(Item_GObj* gobj)
 
 /// #it_802D1580
 
-/// #itLugia_UnkMotion2_Anim
+bool itLugia_UnkMotion2_Anim(Item_GObj* gobj)
+{
+    HSD_JObj* bone;
+    Item* item;
+    HSD_JObj* jobj;
+
+    item = GET_ITEM(gobj);
+    jobj = (HSD_JObj*) gobj->hsd_obj;
+
+    if (jobj == NULL) {
+        bone = NULL;
+    } else {
+        bone = jobj->child;
+    }
+
+    it_8027A160(bone, item);
+    return false;
+}
 
 /// #itLugia_UnkMotion2_Phys
 
