@@ -321,13 +321,16 @@ void un_80321D30(int arg0, f32 arg1)
         }
     }
 }
+
 bool un_80321EBC(u32 arg0, f32 arg1)
 {
-    vi1202_UnkStruct* data = un_804D7050;
-    HSD_GObj* gobj;
     s32 port;
+    vi1202_UnkStruct* data;
+    HSD_GObj* gobj;
+    u32 arg0_copy = arg0;
 
-    gobj = ftLib_8008741C(arg0);
+    data = un_804D7050;
+    gobj = ftLib_8008741C(arg0_copy);
     if (gobj == NULL) {
         goto skip;
     }
@@ -349,7 +352,7 @@ bool un_80321EBC(u32 arg0, f32 arg1)
     }
 
     data->x14 = ftLib_8008746C(gobj);
-    if ((data->x14) == 0x83D60) {
+    if (data->x14 == 0x83D60) {
         return 0;
     }
 
@@ -365,14 +368,14 @@ bool un_80321EBC(u32 arg0, f32 arg1)
         } else {
             sfx = 0x141;
         }
-        un_804D7050->x2C = lbAudioAx_800240B4(sfx);
+        data2 = un_804D7050;
+        data2->x2C = lbAudioAx_800240B4(sfx);
     }
 
     data->xC = arg0;
     data->x18 = 0;
 
     port = ftLib_800874BC(gobj);
-    data->x10 = port;
     pl_8003FDA0(ftLib_80086BE0(gobj), port);
 
     return 1;
