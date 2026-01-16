@@ -7,7 +7,8 @@
 
 #include "it/items/types.h"
 
-/* 2EE200 */ Item_GObj* it_802EE200(HSD_GObj* parent, Vec3* pos, f32 threshold1, f32 threshold2);
+/* 2EE200 */ Item_GObj* it_802EE200(HSD_GObj* parent, Vec3* pos,
+                                    f32 threshold1, f32 threshold2);
 /* 2EE374 */ void it_802EE374(Item_GObj* gobj);
 /* 2EE434 */ bool itWhispyapple_UnkMotion0_Anim(Item_GObj* gobj);
 /* 2EE544 */ void itWhispyapple_UnkMotion0_Phys(Item_GObj* gobj);

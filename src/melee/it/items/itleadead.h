@@ -85,5 +85,6 @@
 /* 2EADD8 */ void it_802EADD8(Item_GObj* gobj);
 /* 2EAE80 */ void it_802EAE80(Item_GObj* gobj);
 /* 3F8EB0 */ extern ItemStateTable it_803F8EB0[];
+/* 4D6D40 */ extern f32* it_804D6D40;
 
 #endif

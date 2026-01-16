@@ -21,8 +21,6 @@
 #include <MSL/math.h>
 #include <MSL/trigf.h>
 
-extern f32* it_804D6D40;
-
 ItemStateTable it_803F8EB0[] = {
     {
         0,

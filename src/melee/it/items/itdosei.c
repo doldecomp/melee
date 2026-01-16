@@ -22,11 +22,10 @@ extern void Item_80268E5C(Item_GObj* gobj, int arg1, int arg2);
 
 void itDosei_UnkMotion0_Phys(Item_GObj* gobj) {}
 
-
 bool itDosei_UnkMotion0_Coll(Item_GObj* gobj)
 {
     PAD_STACK(8);
-    it_8026D62C(gobj, (HSD_GObjEvent)it_80282074);
+    it_8026D62C(gobj, (HSD_GObjEvent) it_80282074);
     it_80276CB8(gobj);
     return false;
 }
@@ -45,7 +44,8 @@ bool itDosei_UnkMotion1_Anim(Item_GObj* gobj)
     ip = gobj->user_data;
     ip->xDD4_itemVar.dosei.xDE4 = ip->pos;
     ip2 = gobj->user_data;
-    frame_speed = 0.5F * (M2C_FIELD(ip2, f32*, 0x4CC) * ip2->facing_dir) + 1.0F;
+    frame_speed =
+        0.5F * (M2C_FIELD(ip2, f32*, 0x4CC) * ip2->facing_dir) + 1.0F;
     jobj = gobj->hsd_obj;
     ip->x5D0_animFrameSpeed = frame_speed;
     lb_8000BA0C(jobj, frame_speed);
@@ -58,7 +58,8 @@ bool itDosei_UnkMotion1_Anim(Item_GObj* gobj)
 void itDosei_UnkMotion1_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itDoseiAttributes* attr = (itDoseiAttributes*) ip->xC4_article_data->x4_specialAttributes;
+    itDoseiAttributes* attr =
+        (itDoseiAttributes*) ip->xC4_article_data->x4_specialAttributes;
 
     ip->x40_vel.x = ip->facing_dir * ABS(attr->unk8 * ip->x5D0_animFrameSpeed);
 }
@@ -105,7 +106,6 @@ bool itDosei_UnkMotion1_Coll(Item_GObj* gobj)
     return false;
 }
 
-
 void it_80281C6C(Item_GObj* gobj)
 {
     // [0x1C] r29 = gobj, r30 = user_data (ip)
@@ -135,7 +135,6 @@ void it_80281C6C(Item_GObj* gobj)
     // [0x74] Clear owner (0x518)
     ip->owner = NULL;
 }
-
 
 void itDosei_UnkMotion2_Phys(Item_GObj* gobj) {}
 
@@ -204,7 +203,8 @@ bool itDosei_UnkMotion6_Coll(Item_GObj* gobj)
 {
     Item* ip = gobj->user_data;
     ip->xDD4_itemVar.dosei.xDF8 = ip->x378_itemColl.floor.normal;
-    it_8026E8C4(gobj, (HSD_GObjEvent) fn_80281734, (HSD_GObjEvent) it_80282074);
+    it_8026E8C4(gobj, (HSD_GObjEvent) fn_80281734,
+                (HSD_GObjEvent) it_80282074);
     return false;
 }
 

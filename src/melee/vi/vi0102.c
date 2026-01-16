@@ -31,14 +31,12 @@
 #include <baselib/gobjproc.h>
 #include <baselib/wobj.h>
 
-/* 31CD20 */ static void vi0102_RunFrame(HSD_GObj* gobj);
-
-Vec3 initial_pos = { 0.0f, 0.0f, 0.0f };
-
 extern SceneDesc* un_804D6F30;
 extern GXColor erase_colors_vi0102;
 extern HSD_Archive* un_804D6F38;
 static un_804D6F60_t un_804D6F60;
+static f32 un_804DE048;
+static Vec3 initial_pos = { 0, 0, 0 };
 
 void vi0102_8031CB00(int mario_costume, int luigi_costume)
 {
@@ -88,20 +86,31 @@ void vi0102_JObjCallback(HSD_GObj* gobj)
 
 void vi0102_CameraCallback(HSD_GObj* gobj, int unused)
 {
+    HSD_CObj* cobj;
     PAD_STACK(8);
     lbShadow_8000F38C(0);
-    vi_RunCamera(gobj, (u8*) &erase_colors_vi0102, 0x881);
+    cobj = gobj->hsd_obj;
+    if (HSD_CObjSetCurrent(cobj)) {
+        HSD_SetEraseColor(erase_colors_vi0102.r, erase_colors_vi0102.g,
+                          erase_colors_vi0102.b, erase_colors_vi0102.a);
+        cobj = gobj->hsd_obj;
+        HSD_CObjEraseScreen(cobj, 1, 0, 1);
+        vi_8031CA04(gobj);
+        gobj->gxlink_prios = 0x881;
+        HSD_GObj_80390ED0(gobj, 7);
+        HSD_CObjEndCurrent();
+    }
 }
 
-void vi0102_RunFrame(HSD_GObj* gobj)
+static void vi0102_RunFrame(HSD_GObj* gobj)
 {
     HSD_CObj* cobj;
 
-    cobj = GET_COBJ(gobj);
+    cobj = gobj->hsd_obj;
     HSD_CObjAnim(cobj);
 
-    if (190.0f == cobj->eyepos->aobj->curr_frame) {
-        vi_8031C9B4(33, 0);
+    if (un_804DE048 == cobj->eyepos->aobj->curr_frame) {
+        vi_8031C9B4(0x21, 0);
     }
     if (cobj->eyepos->aobj->curr_frame == cobj->eyepos->aobj->end_frame) {
         lb_800145F4();

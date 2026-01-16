@@ -65,6 +65,7 @@ void vi_8031D80C(HSD_GObj* gobj)
 
 void un_8031D858_OnEnter(void* arg0)
 {
+    HSD_GObj* light_gobj;
     HSD_CObj* cobj;
     HSD_GObj* cam_gobj;
 
@@ -74,12 +75,11 @@ void un_8031D858_OnEnter(void* arg0)
     lbAudioAx_80023F28(0x58);
     lbAudioAx_80024E50(1);
     lbArchive_LoadSymbols("Vi0402.dat", &un_804D6F68, "visual0402Scene", NULL);
-    {
-        HSD_GObj* light_gobj = GObj_Create(0xB, 0x3, 0);
-        HSD_GObjObject_80390A70(light_gobj, HSD_GObj_804D784A,
-                                lb_80011AC4(un_804D6F68->lights));
-        GObj_SetupGXLink(light_gobj, HSD_GObj_LObjCallback, 0, 0);
-    }
+
+    light_gobj = GObj_Create(0xB, 0x3, 0);
+    HSD_GObjObject_80390A70(light_gobj, HSD_GObj_804D784A,
+                            lb_80011AC4(un_804D6F68->lights));
+    GObj_SetupGXLink(light_gobj, HSD_GObj_LObjCallback, 0, 0);
 
     cam_gobj = GObj_Create(0x13, 0x14, 0);
     cobj =
@@ -104,7 +104,7 @@ void vi_8031D9C4_OnFrame(void)
 
 void un_8031D9E4(int arg0, int arg1, int arg2)
 {
-    M2C_FIELD(&un_804D6F84, u8*, 0) = arg0;
-    M2C_FIELD(&un_804D6F84, u8*, 1) = arg1;
-    M2C_FIELD(&un_804D6F84, u8*, 3) = arg2;
+    un_804D6F84[0] = arg0;
+    un_804D6F84[1] = arg1;
+    un_804D6F84[3] = arg2;
 }

@@ -2,7 +2,9 @@
 #define GALE01_281164
 
 #include <platform.h>
+
 #include "it/forward.h"
+
 #include "it/items/types.h"
 
 // Keep this if it is NOT defined in itCommonItems.h or similar.

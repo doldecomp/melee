@@ -4712,9 +4712,7 @@ struct Fighter_804D653C_t* it_804D6D04;
 // ItemCommonData* it_804D6D28; // 8 bytes instead of 4 for some reason
 // Article** it_804D6D30; // 8 bytes instead of 4 for some reason
 // Article** it_804D6D38; // 8 bytes instead of 4 for some reason
-f32**
-    it_804D6D40; // Not sure of type. 8 bytes instead of 4 for some reason.
-                 // Based on ItCo.dat, may be a pointer to a struct of size 2C?
+f32* it_804D6D40;
 
 // static f32 it_804DC708 = 0.0f;
 // static f32 it_804DC70C = 0.00001f;

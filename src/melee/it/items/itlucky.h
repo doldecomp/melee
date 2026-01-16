@@ -30,7 +30,8 @@
 /* 2D5620 */ bool it_802D5620(Item_GObj* gobj);
 /* 2D5648 */ bool it_802D5648(Item_GObj*);
 /* 2D56F0 */ void it_802D56F0(Item_GObj*, Item_GObj*);
-/* 2D5710 */ Item_GObj* it_802D5710(Item_GObj* gobj, Vec3* pos, Vec3* vel, f32 facing);
+/* 2D5710 */ Item_GObj* it_802D5710(Item_GObj* gobj, Vec3* pos, Vec3* vel,
+                                    f32 facing);
 /* 2D57D0 */ void it_2725_Logic44_Spawned(Item_GObj*);
 /* 2D582C */ void it_802D582C(Item_GObj*);
 /* 2D5884 */ bool it_802D5884(Item_GObj* gobj);
