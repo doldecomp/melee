@@ -230,16 +230,31 @@ void un_80321C28(void)
     data->x2C = -1;
 }
 
+static void un_80321C70_inline(void)
+{
+    vi1202_UnkStruct* data;
+
+    data = un_804D7050;
+
+    if (data->x18 >= gCrowdConfig->max_gasp_count ||
+        data->x18 < gCrowdConfig->x24)
+    {
+        return;
+    }
+    data->x1C = 1;
+}
+
 #pragma push
 #pragma dont_inline on
 void un_80321C70(void)
 {
-    vi1202_UnkStruct* data = un_804D7050;
-    CrowdConfig* vdata = gCrowdConfig;
-    s32 x18;
+    vi1202_UnkStruct* data;
 
-    x18 = data->x18;
-    if (x18 >= vdata->max_gasp_count || x18 < vdata->x24) {
+    data = un_804D7050;
+
+    if (data->x18 >= gCrowdConfig->max_gasp_count ||
+        data->x18 < gCrowdConfig->x24)
+    {
         return;
     }
     data->x1C = 1;
@@ -262,61 +277,61 @@ void un_80321CE8(void)
     data->x28 = -1;
 }
 
-void un_80321D30(int arg0, f32 arg1)
+void un_80321D30(u32 arg0, f32 arg1)
 {
     s32 cat;
-    vi1202_UnkStruct* data = un_804D7050;
-    cat = un_80322298(arg1);
+    vi1202_UnkStruct* data;
+    CrowdConfig* vdata;
 
+    data = un_804D7050;
+    cat = un_80322298(arg1);
     if (cat >= 2) {
         if (un_80321EBC(arg0, arg1) != 0) {
-            vi1202_UnkStruct* data2 = un_804D7050;
-            if (lbAudioAx_80023710(data2->x28) != 0) {
-                lbAudioAx_800236B8(data2->x28);
+            data = un_804D7050;
+            if (lbAudioAx_80023710(data->x28) != 0) {
+                lbAudioAx_800236B8(data->x28);
             }
-            data2->x28 = -1;
+            data->x28 = -1;
             return;
         }
     }
 
     switch (cat) {
     case 3: {
-        vi1202_UnkStruct* data2 = un_804D7050;
-        if (lbAudioAx_80023710(data2->x28) != 0) {
-            lbAudioAx_800236B8(data2->x28);
+        data = un_804D7050;
+        if (lbAudioAx_80023710(data->x28) != 0) {
+            lbAudioAx_800236B8(data->x28);
         }
-        data2->x28 = -1;
-        data2->x28 = lbAudioAx_8002411C(0x140);
+        data->x28 = -1;
+        data->x28 = lbAudioAx_8002411C(0x140);
         break;
     }
     case 2: {
-        vi1202_UnkStruct* data2 = un_804D7050;
-        if (lbAudioAx_80023710(data2->x28) != 0) {
-            lbAudioAx_800236B8(data2->x28);
+        data = un_804D7050;
+        if (lbAudioAx_80023710(data->x28) != 0) {
+            lbAudioAx_800236B8(data->x28);
         }
-        data2->x28 = -1;
-        data2->x28 = lbAudioAx_8002411C(0x141);
+        data->x28 = -1;
+        data->x28 = lbAudioAx_8002411C(0x141);
         break;
     }
     case 1: {
-        vi1202_UnkStruct* data2 = un_804D7050;
-        if (lbAudioAx_80023710(data2->x28) != 0) {
-            lbAudioAx_800236B8(data2->x28);
+        data = un_804D7050;
+        if (lbAudioAx_80023710(data->x28) != 0) {
+            lbAudioAx_800236B8(data->x28);
         }
-        data2->x28 = -1;
-        data2->x28 = lbAudioAx_8002411C(0x142);
+        data->x28 = -1;
+        data->x28 = lbAudioAx_8002411C(0x142);
         break;
     }
     }
 
-    if ((u32) arg0 != 0) {
-        if ((u32) data->xC == (u32) arg0) {
-            vi1202_UnkStruct* data3 = un_804D7050;
-            CrowdConfig* vdata = gCrowdConfig;
-            if (data3->x18 < vdata->max_gasp_count) {
-                if (data3->x18 >= vdata->x24) {
-                    data3->x1C = 1;
-                }
+    if (arg0 != 0) {
+        if ((u32) data->xC == arg0) {
+            data = un_804D7050;
+            vdata = gCrowdConfig;
+            if (data->x18 < vdata->max_gasp_count && data->x18 >= vdata->x24) {
+                data->x1C = 1;
             }
         }
     }
@@ -381,9 +396,10 @@ bool un_80321EBC(u32 arg0, f32 arg1)
     return 1;
 }
 
-bool un_8032201C(int arg0, s32 cat)
+bool un_8032201C(u32 arg0, s32 cat)
 {
     vi1202_UnkStruct* data = un_804D7050;
+    HSD_GObj* gobj;
     char pad[16];
 
     switch (cat) {
@@ -412,25 +428,13 @@ bool un_8032201C(int arg0, s32 cat)
         return false;
     }
 
-    if ((u32) arg0 != 0) {
-        if ((u32) data->xC == (u32) arg0) {
-            vi1202_UnkStruct* data2;
-            CrowdConfig* vdata;
-
-            data2 = un_804D7050;
-            vdata = gCrowdConfig;
-            if (data2->x18 < vdata->max_gasp_count) {
-                if (data2->x18 >= vdata->x24) {
-                    data2->x1C = 1;
-                }
-            }
+    if (arg0 != 0) {
+        if ((u32) data->xC == arg0) {
+            un_80321C70_inline();
         }
 
-        {
-            HSD_GObj* gobj = ftLib_8008741C(arg0);
-            s32 port = ftLib_800874BC(gobj);
-            pl_8003FDC8(ftLib_80086BE0(gobj), port);
-        }
+        gobj = ftLib_8008741C(arg0);
+        pl_8003FDC8(ftLib_80086BE0(gobj), ftLib_800874BC(gobj));
     }
     return true;
 }

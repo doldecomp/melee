@@ -60,9 +60,9 @@ typedef struct CrowdConfig {
 /* 321C70 */ void un_80321C70(void);
 /* 321CA4 */ void un_80321CA4(s32);
 /* 321CE8 */ void un_80321CE8(void);
-/* 321D30 */ void un_80321D30(int, f32);
+/* 321D30 */ void un_80321D30(u32, f32);
 /* 321EBC */ bool un_80321EBC(u32, f32);
-/* 32201C */ bool un_8032201C(int, s32);
+/* 32201C */ bool un_8032201C(u32, s32);
 /* 322178 */ void un_80322178(int);
 /* 322258 */ bool un_80322258(float);
 /* 322298 */ s32 un_80322298(float);
