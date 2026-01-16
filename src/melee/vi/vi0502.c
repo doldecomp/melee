@@ -41,17 +41,17 @@
 #include <baselib/mtx.h>
 #include <baselib/wobj.h>
 
-// .data section 0x804000D0 - 0x80400108 (size 0x38)
-char un_804000D0[0x38];
+Vec3 initial_pos = { 0, -3.0f, 0 };
 
-Vec3 initial_pos = { 0, 0, 0 };
-
-static f32 un_804DE0A0;
 static HSD_Archive* un_804D6F94;
 static HSD_GObj* kirby_gobj;
+static SceneDesc* un_804D6F90;
+static HSD_Archive* un_804D6F98;
+static HSD_Archive* un_804D6F9C;
+static GXColor erase_colors_vi0502;
 
-void vi0502_8031E124(CharacterKind player_kind, s8 player_costume,
-                     s8 kirby_costume)
+void vi0502_8031E124(CharacterKind player_kind, int player_costume,
+                     int kirby_costume)
 {
     HSD_JObj* jobj;
     VecMtxPtr pmtx;
@@ -79,7 +79,7 @@ void vi0502_8031E124(CharacterKind player_kind, s8 player_costume,
     Player_80032768(0, &initial_pos);
     Player_80036F34(0, 8);
 
-    Player_80036E20(CKIND_KIRBY, un_804D6F94, 7);
+    Player_80036E20(CKIND_KIRBY, un_804D6F9C, 7);
     Player_SetPlayerCharacter(1, CKIND_KIRBY);
     Player_SetCostumeId(1, kirby_costume);
     Player_SetPlayerId(1, 0);
@@ -159,10 +159,10 @@ void un_8031E444_OnEnter(void* arg)
 
     char_kind = input[0];
 
-    un_804D6F9C = lbArchive_LoadSymbols(un_804000D0 + 0xC, &un_804D6F90,
-                                        un_804000D0 + 0x18, NULL);
+    un_804D6F9C = lbArchive_LoadSymbols("Vi0502.dat", &un_804D6F90,
+                                        "visual0502Scene", NULL);
     un_804D6F94 = lbArchive_LoadSymbols(viGetCharAnimByIndex(char_kind), NULL);
-    un_804D6F98 = lbArchive_LoadSymbols(un_804000D0 + 0x28, NULL);
+    un_804D6F98 = lbArchive_LoadSymbols("IrAls.dat", NULL);
 
     gobj = GObj_Create(0xB, 3, 0);
     fog = HSD_FogLoadDesc(un_804D6F90->fogs->desc);
@@ -181,7 +181,7 @@ void un_8031E444_OnEnter(void* arg)
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
     GObj_SetupGXLinkMax(gobj, (void (*)(HSD_GObj*, int)) vi0502_8031E328, 5);
     HSD_CObjAddAnim(cobj, un_804D6F90->cameras->anims[0]);
-    HSD_CObjReqAnim(cobj, un_804DE0A0);
+    HSD_CObjReqAnim(cobj, 0.0f);
     HSD_CObjAnim(cobj);
     HSD_GObjProc_8038FD54(gobj, vi0502_RunFrame, 0);
 
@@ -191,7 +191,7 @@ void un_8031E444_OnEnter(void* arg)
         HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
         GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 9, 0);
         gm_8016895C(jobj, un_804D6F90->models[i], 0);
-        HSD_JObjReqAnimAll(jobj, un_804DE0A0);
+        HSD_JObjReqAnimAll(jobj, 0.0f);
         HSD_JObjAnimAll(jobj);
         HSD_GObjProc_8038FD54(gobj, vi0502_8031E304, 0x17);
     }

@@ -27,10 +27,6 @@
 #include <baselib/gobjproc.h>
 #include <baselib/lobj.h>
 
-// .data section 0x804001E0 - 0x80400200
-char un_804001E0[] = "ViWait0801";
-char un_804001EC[] = "ViWait0801_scene";
-
 typedef struct vi_GObj {
     u8 pad0[0x20];
     s32 x20;
@@ -114,10 +110,10 @@ void fn_8031EFE4(HSD_GObj* gobj)
 {
     HSD_CObj* cobj = gobj->hsd_obj;
     HSD_CObjAnim(cobj);
-    if (cobj->aobj->curr_frame == 1.0F || cobj->aobj->curr_frame == 30.0F) {
+    if (cobj->aobj->curr_frame == 75.0F || cobj->aobj->curr_frame == 160.0F) {
         vi_8031C9B4(0xC, 0);
     }
-    if (cobj->aobj->curr_frame == 60.0F) {
+    if (cobj->aobj->curr_frame == 120.0F) {
         vi_8031C9B4(0x10, 0);
     }
     if (cobj->aobj->curr_frame == cobj->aobj->end_frame) {
@@ -140,7 +136,7 @@ void un_8031F07C_OnEnter(void* unused)
     lbAudioAx_80023F28(0x5B);
     lbAudioAx_80024E50(1);
 
-    lbArchive_LoadSymbols(un_804001E0, &un_804D6FB8, un_804001EC, NULL);
+    lbArchive_LoadSymbols("Vi0801.dat", &un_804D6FB8, "visual0801Scene", NULL);
 
     gobj = GObj_Create(0x13, 0x14, 0);
     cobj =
@@ -148,7 +144,7 @@ void un_8031F07C_OnEnter(void* unused)
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
     GObj_SetupGXLinkMax(gobj, (void (*)(HSD_GObj*, int)) un_8031ED70, 8);
     HSD_CObjAddAnim(cobj, un_804D6FB8->cameras->anims[0]);
-    HSD_CObjReqAnim(cobj, un_804DE0C0);
+    HSD_CObjReqAnim(cobj, 0.0f);
     HSD_CObjAnim(cobj);
     HSD_GObjProc_8038FD54(gobj, fn_8031EFE4, 0);
 
@@ -175,7 +171,7 @@ void un_8031F07C_OnEnter(void* unused)
     HSD_GObjObject_80390A70(gobj2, (u8) HSD_GObj_804D784A, lobj);
     GObj_SetupGXLink(gobj2, HSD_GObj_LObjCallback, 0, 0);
 
-    grBigBlueRoute_8020DAB4(un_804A2EA8, un_804DE0D0, 0x17);
+    grBigBlueRoute_8020DAB4(un_804A2EA8, 0.5f, 0x17);
 
     Player_InitAllPlayers();
     lbAudioAx_80024E50(0);

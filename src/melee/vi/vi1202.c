@@ -1,6 +1,6 @@
-#include "vi.h"
+#include "vi/vi1202.h"
 
-#include "vi/vi1202.static.h"
+#include "vi.h"
 
 #include "ft/fighter.h"
 #include "ft/ftlib.h"
@@ -10,6 +10,7 @@
 #include "lb/lbaudio_ax.h"
 #include "pl/player.h"
 #include "pl/plbonuslib.h"
+#include "sc/types.h"
 
 #include <baselib/aobj.h>
 #include <baselib/cobj.h>
@@ -32,6 +33,9 @@ struct vi1202_UnkStruct {
     /* 0x28 */ s32 x28;
     /* 0x2C */ s32 x2C;
 };
+
+/* 4D7040 */ extern DynamicModelDesc*** un_804D7040;
+/* 4D704C */ extern HSD_JObj* un_804D704C;
 
 void un_8032110C(HSD_GObj* gobj)
 {
@@ -61,7 +65,7 @@ void un_80321178(void)
         HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
         GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0xB, 0);
         gm_8016895C(jobj, (*un_804D7040)[i], 0);
-        HSD_JObjReqAnimAll(jobj, un_804DE140);
+        HSD_JObjReqAnimAll(jobj, 0.0f);
         HSD_JObjAnimAll(jobj);
         HSD_GObjProc_8038FD54(gobj, un_80321154, 0x17);
         lb_80011E24(jobj, &un_804D704C, 2, -1);
@@ -77,7 +81,7 @@ void un_80321294(HSD_GObj* gobj)
 {
     HSD_CObj* cobj = GET_COBJ(gobj);
     HSD_CObjAnim(cobj);
-    if (cobj->aobj->curr_frame == 1.0F) {
+    if (cobj->aobj->curr_frame == 100.0F) {
         vi_8031C9B4(0xE, 0);
     }
     if (cobj->aobj->curr_frame == cobj->aobj->end_frame) {
@@ -107,7 +111,7 @@ void un_80321950(vi1202_UnkStruct* s)
 {
     s->x0 = 0;
     s->x4 = 0x10000;
-    s->x8 = 1.0F;
+    s->x8 = 0.0F;
     s->xC = 0;
     s->x10 = gCrowdConfig->cheer_limit;
     s->x14 = 0x83D60;
@@ -317,7 +321,7 @@ void un_80321D30(int arg0, f32 arg1)
         }
     }
 }
-bool un_80321EBC(int arg0, f32 arg1)
+bool un_80321EBC(u32 arg0, f32 arg1)
 {
     vi1202_UnkStruct* data = un_804D7050;
     HSD_GObj* gobj;
@@ -325,26 +329,27 @@ bool un_80321EBC(int arg0, f32 arg1)
 
     gobj = ftLib_8008741C(arg0);
     if (gobj == NULL) {
-        return 0;
+        goto skip;
     }
 
     port = ftLib_800874BC(gobj);
     if (Player_8003248C(ftLib_80086BE0(gobj), port) == 1) {
-        return 0;
+        goto skip;
     }
 
     if (ftLib_80087120(gobj) < gCrowdConfig->x1C) {
-        return 0;
+        goto skip;
     }
     if (data->x10 < gCrowdConfig->cheer_limit) {
-        return 0;
+        goto skip;
     }
-    if ((u32) data->xC == (u32) arg0) {
+    if (data->xC == arg0) {
+    skip:
         return 0;
     }
 
     data->x14 = ftLib_8008746C(gobj);
-    if ((u32) (data->x14 - 0x83D60) == 0) {
+    if ((data->x14) == 0x83D60) {
         return 0;
     }
 
@@ -373,14 +378,12 @@ bool un_80321EBC(int arg0, f32 arg1)
     return 1;
 }
 
-void un_8032201C(int arg0, s32 cat)
+bool un_8032201C(int arg0, s32 cat)
 {
     vi1202_UnkStruct* data = un_804D7050;
     char pad[16];
 
     switch (cat) {
-    case 0:
-        return;
     case 3:
         if (lbAudioAx_80023710(data->x28) != 0) {
             lbAudioAx_800236B8(data->x28);
@@ -402,25 +405,31 @@ void un_8032201C(int arg0, s32 cat)
         data->x28 = -1;
         data->x28 = lbAudioAx_8002411C(0x13f);
         break;
+    case 0:
+        return false;
     }
 
     if ((u32) arg0 != 0) {
         if ((u32) data->xC == (u32) arg0) {
-            CrowdConfig* vdata = gCrowdConfig;
-            vi1202_UnkStruct* data2 = un_804D7050;
+            vi1202_UnkStruct* data2;
+            CrowdConfig* vdata;
+
+            data2 = un_804D7050;
+            vdata = gCrowdConfig;
             if (data2->x18 < vdata->max_gasp_count) {
                 if (data2->x18 >= vdata->x24) {
                     data2->x1C = 1;
                 }
             }
         }
-    }
 
-    {
-        HSD_GObj* gobj = ftLib_8008741C(arg0);
-        s32 port = ftLib_800874BC(gobj);
-        data->x10 = port;
+        {
+            HSD_GObj* gobj = ftLib_8008741C(arg0);
+            s32 port = ftLib_800874BC(gobj);
+            pl_8003FDC8(ftLib_80086BE0(gobj), port);
+        }
     }
+    return true;
 }
 
 void un_80322178(int arg)
@@ -537,7 +546,7 @@ void un_8032233C(int arg0, int arg1)
     }
 
     if (gobj0 != NULL) {
-        if (ftLib_80087454(gobj0) >= un_804DE150) {
+        if (ftLib_80087454(gobj0) >= 3.0f) {
             un_80321D30(arg0, kb_mag);
             return;
         }

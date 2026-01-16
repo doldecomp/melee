@@ -27,13 +27,6 @@
 #include <baselib/lobj.h>
 #include <baselib/wobj.h>
 
-// .data section 0x80400108 - 0x80400128
-char un_80400108[] = "ViWait0601";
-char un_80400114[] = "ViWait0601_scene";
-
-static f32 un_804DE0A8;
-static f32 un_804DE0AC;
-
 void vi_8031E6CC_OnFrame(void)
 {
     vi_8031CAAC();
@@ -75,14 +68,13 @@ void fn_8031E800(HSD_GObj* gobj)
     f32 scale;
 
     jobj = GET_JOBJ(gobj);
-    if (jobj != NULL) {
-        child = jobj->child;
-    } else {
+    if (jobj == NULL) {
         child = NULL;
+    } else {
+        child = jobj->child;
     }
-    HSD_ASSERT(875, child);
 
-    scale = un_804DE0A8 * child->scale.x;
+    scale = 0.65f * HSD_JObjGetScaleX(child);
     HSD_JObjSetScaleX(child, scale);
     HSD_JObjSetScaleY(child, scale);
     HSD_JObjSetScaleZ(child, scale);
@@ -101,7 +93,7 @@ void un_8031E9B8(void)
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0xB, 0);
     gm_8016895C(jobj, *un_804D6FB0->models, 0);
-    HSD_JObjReqAnimAll(jobj, un_804DE0AC);
+    HSD_JObjReqAnimAll(jobj, 0.0f);
     HSD_JObjAnimAll(jobj);
     HSD_GObjProc_8038FD54(gobj, vi_8031E6EC, 0x17);
 
@@ -115,7 +107,7 @@ void un_8031E9B8(void)
             }
             HSD_GObjProc_8038FD54(gobj, fn_8031E800, 2);
             gm_8016895C(child, un_804D6FB0->models[i], 0);
-            HSD_JObjReqAnimAll(child, un_804DE0AC);
+            HSD_JObjReqAnimAll(child, 0.0f);
             HSD_JObjAnimAll(child);
         }
         i++;
@@ -158,7 +150,7 @@ void un_8031EBBC_OnEnter(void* unused)
     lbAudioAx_80023F28(0x57);
     lbAudioAx_80024E50(1);
 
-    lbArchive_LoadSymbols(un_80400108, &un_804D6FB0, un_80400114, NULL);
+    lbArchive_LoadSymbols("Vi0601.dat", &un_804D6FB0, "visual0601Scene", NULL);
 
     gobj = GObj_Create(0x13, 0x14, 0);
     cobj =
@@ -166,7 +158,7 @@ void un_8031EBBC_OnEnter(void* unused)
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
     GObj_SetupGXLinkMax(gobj, vi0601_CameraCallback, 2);
     HSD_CObjAddAnim(cobj, un_804D6FB0->cameras->anims[0]);
-    HSD_CObjReqAnim(cobj, un_804DE0AC);
+    HSD_CObjReqAnim(cobj, 0.0f);
     HSD_CObjAnim(cobj);
     HSD_GObjProc_8038FD54(gobj, vi0601_RunFrame, 0);
 

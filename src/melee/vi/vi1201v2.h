@@ -10,6 +10,7 @@
 /* 4D7030 */ extern HSD_GObj* un_804D7030;
 /* 4D7034 */ extern HSD_GObj* un_804D7034;
 
+/* 3204B0 */ void un_803204B0(int, int);
 /* 3204C0 */ void un_803204C0(HSD_GObj*);
 /* 3204E4 */ void un_803204E4(HSD_GObj*);
 /* 320508 */ void un_80320508(CharacterKind char_kind, int costume);

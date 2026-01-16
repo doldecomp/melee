@@ -45,7 +45,7 @@
 /* 03FC44 */ void pl_8003FC44(int slot, int);
 /* 03FC88 */ void pl_8003FC88(int, int, int);
 /* 03FDA0 */ void pl_8003FDA0(int, int);
-/* 03FDC8 */ void pl_8003FDC8(int);
+/* 03FDC8 */ void pl_8003FDC8(int, int);
 /* 03FDF4 */ void pl_8003FDF4(int, int);
 /* 03FE1C */ void pl_8003FE1C(int slot, int);
 /* 03FE40 */ void pl_8003FE40(int);
