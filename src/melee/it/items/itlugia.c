@@ -17,7 +17,26 @@ void it_2725_Logic17_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
     it_8026B894(gobj, ref_gobj);
 }
 
-/// #itLugia_UnkMotion1_Anim
+bool itLugia_UnkMotion1_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj); // r31
+    HSD_JObj* jobj = GET_JOBJ(gobj); // r3
+    HSD_JObj* child;
+
+    if (jobj == NULL) {
+        child = NULL;
+    } else {
+        child = jobj->child;
+    }
+
+    it_8027A160(child, ip);
+
+    if (it_80272C6C(gobj) == 0) {
+        it_802D1580(gobj);
+    }
+
+    return false;
+}
 
 void itLugia_UnkMotion1_Phys(Item_GObj* gobj)
 {
@@ -34,11 +53,8 @@ bool itLugia_UnkMotion1_Coll(Item_GObj* gobj)
 bool itLugia_UnkMotion2_Anim(Item_GObj* gobj)
 {
     HSD_JObj* bone;
-    Item* item;
-    HSD_JObj* jobj;
-
-    item = GET_ITEM(gobj);
-    jobj = (HSD_JObj*) gobj->hsd_obj;
+    Item* item = GET_ITEM(gobj);
+    HSD_JObj* jobj = GET_JOBJ(gobj);
 
     if (jobj == NULL) {
         bone = NULL;
