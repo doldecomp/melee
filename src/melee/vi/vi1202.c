@@ -230,6 +230,8 @@ void un_80321C28(void)
     data->x2C = -1;
 }
 
+#pragma push
+#pragma dont_inline on
 void un_80321C70(void)
 {
     vi1202_UnkStruct* data = un_804D7050;
@@ -237,10 +239,7 @@ void un_80321C70(void)
     s32 x18;
 
     x18 = data->x18;
-    if (x18 >= vdata->max_gasp_count) {
-        return;
-    }
-    if (x18 < vdata->x24) {
+    if (x18 >= vdata->max_gasp_count || x18 < vdata->x24) {
         return;
     }
     data->x1C = 1;
@@ -252,6 +251,7 @@ void un_80321CA4(s32 arg)
     un_80321CE8();
     data->x28 = lbAudioAx_8002411C(arg);
 }
+#pragma pop
 
 void un_80321CE8(void)
 {
@@ -521,14 +521,15 @@ void un_80322314(void)
     data->x20 = 1;
 }
 
-void un_8032233C(int arg0, int arg1)
+void un_8032233C(u32 arg0, u32 arg1)
 {
-    vi1202_UnkStruct* data = un_804D7050;
-    HSD_GObj* gobj0;
-    f32 kb_mag;
     s32 cat;
+    vi1202_UnkStruct* data = un_804D7050;
+    HSD_GObj* gobj;
+    f32 kb_mag;
+    PAD_STACK(8);
 
-    gobj0 = ftLib_8008741C(arg0);
+    gobj = ftLib_8008741C(arg0);
     kb_mag = ftLib_80087454(ftLib_8008741C(arg1));
 
     if (kb_mag >= gCrowdConfig->kb_threshold_high) {
@@ -545,21 +546,17 @@ void un_8032233C(int arg0, int arg1)
         return;
     }
 
-    if (gobj0 != NULL) {
-        if (ftLib_80087454(gobj0) >= 3.0f) {
+    if (gobj != NULL) {
+        if (ftLib_80087454(gobj) >= 3.0f) {
             un_80321D30(arg0, kb_mag);
-            return;
+            goto end;
         }
     }
 
-    if ((u32) data->x0 == (u32) arg0) {
+    if (data->x0 == arg0) {
         if ((f32) data->x4 < gCrowdConfig->x18) {
-            f32 max = data->x8;
-            if (kb_mag > max) {
-                max = kb_mag;
-            }
-            un_80321D30(arg0, max);
-            return;
+            un_80321D30(arg0, kb_mag > data->x8 ? kb_mag : data->x8);
+            goto end;
         }
     }
 
@@ -575,9 +572,13 @@ void un_8032233C(int arg0, int arg1)
         break;
     }
 
-    if (cat == 3 || (cat == 2 && (u32) data->xC == (u32) arg1)) {
+    if (cat == 3 || (cat == 2 && (u32) data->xC == arg1)) {
         un_80321C70();
     }
+end:
+    data->x4 = 0;
+    data->x0 = arg0;
+    data->x8 = kb_mag;
 }
 
 bool un_803224DC(s32 spawn_id, f32 pos_x, f32 kb_mag)
