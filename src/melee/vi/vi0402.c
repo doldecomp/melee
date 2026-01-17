@@ -1,6 +1,10 @@
 #include "vi/vi0402.h"
 
+#include "types.h"
+
 #include <placeholder.h>
+
+#include "baselib/forward.h"
 
 #include "ef/efasync.h"
 #include "ef/eflib.h"
@@ -10,6 +14,7 @@
 #include "lb/lbaudio_ax.h"
 #include "pl/player.h"
 #include "sc/types.h"
+#include "vi/types.h"
 #include "vi/vi.h"
 
 #include <baselib/cobj.h>
@@ -20,7 +25,7 @@
 #include <baselib/gobjproc.h>
 #include <baselib/jobj.h>
 
-extern SceneDesc* un_804D6F68;
+static SceneDesc* un_804D6F68;
 
 void un_8031D6E4(HSD_GObj* gobj)
 {
@@ -66,6 +71,7 @@ void vi_8031D80C(HSD_GObj* gobj)
 void un_8031D858_OnEnter(void* arg0)
 {
     HSD_GObj* light_gobj;
+    HSD_LObj* lobj;
     HSD_CObj* cobj;
     HSD_GObj* cam_gobj;
 
@@ -77,8 +83,8 @@ void un_8031D858_OnEnter(void* arg0)
     lbArchive_LoadSymbols("Vi0402.dat", &un_804D6F68, "visual0402Scene", NULL);
 
     light_gobj = GObj_Create(0xB, 0x3, 0);
-    HSD_GObjObject_80390A70(light_gobj, HSD_GObj_804D784A,
-                            lb_80011AC4(un_804D6F68->lights));
+    lobj = lb_80011AC4(un_804D6F68->lights);
+    HSD_GObjObject_80390A70(light_gobj, HSD_GObj_804D784A, lobj);
     GObj_SetupGXLink(light_gobj, HSD_GObj_LObjCallback, 0, 0);
 
     cam_gobj = GObj_Create(0x13, 0x14, 0);
@@ -100,11 +106,4 @@ void un_8031D858_OnEnter(void* arg0)
 void vi_8031D9C4_OnFrame(void)
 {
     vi_8031CAAC();
-}
-
-void un_8031D9E4(int arg0, int arg1, int arg2)
-{
-    un_804D6F84[0] = arg0;
-    un_804D6F84[1] = arg1;
-    un_804D6F84[3] = arg2;
 }

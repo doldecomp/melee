@@ -8,7 +8,6 @@
 #include "gr/ground.h"
 #include "gr/stage.h"
 #include "it/item.h"
-#include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 #include "lb/lbarchive.h"
 #include "lb/lbaudio_ax.h"
@@ -26,6 +25,9 @@
 #include <baselib/jobj.h>
 #include <baselib/lobj.h>
 #include <baselib/wobj.h>
+
+static SceneDesc* un_804D6FB0;
+static GXColor erase_colors_vi0601;
 
 void vi_8031E6CC_OnFrame(void)
 {

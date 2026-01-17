@@ -1,10 +1,6 @@
 #include "vi0401.h"
 
-#include "vi.h"
-
 #include <placeholder.h>
-
-#include "baselib/forward.h"
 
 #include "cm/camera.h"
 #include "ef/efasync.h"
@@ -23,6 +19,8 @@
 #include "mp/mpcoll.h"
 #include "pl/player.h"
 #include "sc/types.h"
+#include "vi/types.h"
+#include "vi/vi.h"
 
 #include <baselib/aobj.h>
 #include <baselib/cobj.h>
@@ -40,6 +38,13 @@ static SceneDesc* un_804D6F50;
 static HSD_Archive* un_804D6F54;
 static HSD_JObj* un_804D6F58;
 static GXColor erase_colors_vi0401;
+static ViCharaDesc un_804D6F60;
+
+void vi0401_8031D020(int arg0, int arg1)
+{
+    un_804D6F60.p1_char_index = arg0;
+    un_804D6F60.p1_costume_index = arg1;
+}
 
 void un_8031D030(CharacterKind char_kind, int costume)
 {
@@ -129,7 +134,8 @@ void un_8031D288_OnEnter(void* data)
     HSD_JObj* jobj;
     HSD_JObj* child;
 
-    u8 char_index = ((u8*) data)[0];
+    ViCharaDesc* desc = (ViCharaDesc*) data;
+    u8 char_index = desc->p1_char_index;
 
     lbAudioAx_800236DC();
     efLib_8005B4B8();
@@ -194,7 +200,7 @@ void un_8031D288_OnEnter(void* data)
         HSD_JObjAnimAll(jobj);
         HSD_GObjProc_8038FD54(gobj, fn_8031D168, 0x17);
     }
-    un_8031D030(((u8*) data)[0], ((u8*) data)[1]);
+    un_8031D030(desc->p1_char_index, desc->p1_costume_index);
     vi_8031C9B4(1, 0);
 
     lbAudioAx_800237A8(0x61a88, 0x7F, 0x40);

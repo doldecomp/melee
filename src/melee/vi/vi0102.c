@@ -17,6 +17,7 @@
 #include "mp/mpcoll.h"
 #include "pl/player.h"
 #include "sc/types.h"
+#include "vi/types.h"
 #include "vi/vi.h"
 
 #include <baselib/forward.h>
@@ -31,11 +32,10 @@
 #include <baselib/gobjproc.h>
 #include <baselib/wobj.h>
 
-extern SceneDesc* un_804D6F30;
-extern GXColor erase_colors_vi0102;
-extern HSD_Archive* un_804D6F38;
-static un_804D6F60_t un_804D6F60;
-static f32 un_804DE048;
+static SceneDesc* un_804D6F30;
+static GXColor erase_colors_vi0102;
+static HSD_Archive* un_804D6F38;
+
 static Vec3 initial_pos = { 0, 0, 0 };
 
 void vi0102_8031CB00(int mario_costume, int luigi_costume)
@@ -109,7 +109,7 @@ static void vi0102_RunFrame(HSD_GObj* gobj)
     cobj = gobj->hsd_obj;
     HSD_CObjAnim(cobj);
 
-    if (un_804DE048 == cobj->eyepos->aobj->curr_frame) {
+    if (190.0f == cobj->eyepos->aobj->curr_frame) {
         vi_8031C9B4(0x21, 0);
     }
     if (cobj->eyepos->aobj->curr_frame == cobj->eyepos->aobj->end_frame) {
@@ -118,7 +118,7 @@ static void vi0102_RunFrame(HSD_GObj* gobj)
     }
 }
 
-void vi0102_Initialize_OnEnter(un_804D6F60_t* unk)
+void vi0102_Initialize_OnEnter(ViCharaDesc* desc)
 {
     HSD_CObj* cobj;
     HSD_GObj* cam_gobj;
@@ -163,7 +163,7 @@ void vi0102_Initialize_OnEnter(un_804D6F60_t* unk)
         HSD_GObjProc_8038FD54(joint_gobj, vi0102_JObjCallback, 0x17);
     }
 
-    vi0102_8031CB00(unk->unk_1, unk->unk_3);
+    vi0102_8031CB00(desc->p1_costume_index, desc->p2_costume_index);
 
     fog_gobj = GObj_Create(0xA, 0x3, 0);
     fog = HSD_FogLoadDesc(un_804D6F30->fogs[0].desc);
@@ -182,10 +182,4 @@ void vi0102_Initialize_OnEnter(un_804D6F60_t* unk)
 void vi0102_8031D000_OnFrame(void)
 {
     vi_8031CAAC();
-}
-
-void vi0102_8031D020(int arg0, int arg1)
-{
-    un_804D6F60.unk_0 = arg0;
-    un_804D6F60.unk_1 = arg1;
 }

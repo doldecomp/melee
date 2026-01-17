@@ -1,14 +1,20 @@
 #include "vi0501.h"
 
+#include "dolphin/mtx.h"
 #include "ef/efasync.h"
 #include "ef/eflib.h"
+
+#include "forward.h"
+
 #include "gm/gm_1601.h"
 #include "gm/gm_1A45.h"
 #include "lb/lb_00F9.h"
 #include "lb/lbarchive.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbshadow.h"
+#include "mn/mnmain.h"
 #include "sc/types.h"
+#include "vi/types.h"
 #include "vi/vi.h"
 
 #include <dolphin/gx.h>
@@ -21,14 +27,23 @@
 #include <baselib/gobjproc.h>
 #include <baselib/wobj.h>
 
-/* 4D6F70 */ extern SceneDesc* un_804D6F70;
-/* 4D6F74 */ extern HSD_Archive* un_804D6F74;
-/* 4D6F78 */ extern HSD_Archive* un_804D6F78;
-
+static SceneDesc* un_804D6F70;
+static HSD_Archive* un_804D6F74;
+static HSD_Archive* un_804D6F78;
 static GXColor erase_colors_vi0501;
-extern un_804D7004_t un_804D6FA8;
+static float un_804D6F80;
+static ViCharaDesc un_804D6F84;
 
-void mn_8022EAE0(HSD_GObj*);
+static Vec3 initial_pos = { 0.0f, 0.0f, 0.0f };
+
+void un_8031D9E4(int arg0, int arg1, int arg2)
+{
+    ViCharaDesc* desc;
+    un_804D6F84.p1_char_index = arg0;
+    desc = &un_804D6F84;
+    desc->p1_costume_index = arg1;
+    desc->p2_costume_index = arg2;
+}
 
 /// #un_8031D9F8
 
@@ -74,7 +89,6 @@ void fn_8031DD14(HSD_GObj* gobj)
 }
 void un_8031DE58_OnEnter(void* arg)
 {
-    u8* input = arg;
     s32 i;
     u8 char_index;
     HSD_GObj* fog_gobj;
@@ -85,12 +99,14 @@ void un_8031DE58_OnEnter(void* arg)
     HSD_LObj* lobj;
     HSD_CObj* cobj;
     HSD_JObj* jobj;
+    ViCharaDesc* desc;
 
     lbAudioAx_800236DC();
     efLib_8005B4B8();
     efAsync_8006737C(0);
 
-    char_index = input[0];
+    desc = (ViCharaDesc*) arg;
+    char_index = desc->p1_char_index;
 
     un_804D6F74 = lbArchive_LoadSymbols("Vi0501.dat", &un_804D6F70,
                                         "visual0501Scene", NULL);
@@ -129,7 +145,8 @@ void un_8031DE58_OnEnter(void* arg)
         HSD_GObjProc_8038FD54(model_gobj, mn_8022EAE0, 0x17);
     }
 
-    un_8031D9F8(input[0], input[1], input[3], (int) &input[4]);
+    un_8031D9F8(desc->p1_char_index, desc->p1_costume_index,
+                desc->p2_costume_index, (int) &desc->spawn_count);
     lbAudioAx_800237A8(0x20B, 0x7F, 0x40);
     lbAudioAx_800237A8(0x20C, 0x7F, 0x40);
 }
@@ -137,11 +154,4 @@ void un_8031DE58_OnEnter(void* arg)
 void vi_8031E0F0_OnFrame(void)
 {
     vi_8031CAAC();
-}
-
-void un_8031E110(int arg0, int arg1, int arg2)
-{
-    M2C_FIELD(&un_804D6FA8, u8*, 0) = arg0;
-    M2C_FIELD(&un_804D6FA8, u8*, 1) = arg1;
-    M2C_FIELD(&un_804D6FA8, u8*, 3) = arg2;
 }

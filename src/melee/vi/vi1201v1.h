@@ -9,6 +9,7 @@
 #include "sc/forward.h"
 #include <baselib/forward.h>
 
+/* 31F980 */ void un_8031F980(int arg0, int arg1);
 /* 31F990 */ void un_8031F990(HSD_GObj*);
 /* 31F9B4 */ void un_8031F9B4(HSD_GObj*);
 /* 31F9D8 */ void un_8031F9D8(CharacterKind, int);
