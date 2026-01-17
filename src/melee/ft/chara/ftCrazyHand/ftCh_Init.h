@@ -89,10 +89,12 @@
 /* 158850 */ void ftCh_FingerBeamStart_IASA(HSD_GObj* gobj);
 /* 158894 */ void ftCh_FingerBeamStart_Phys(HSD_GObj* gobj);
 /* 1588B4 */ void ftCh_FingerBeamStart_Coll(HSD_GObj* gobj);
+/* 158B3C */ void ftCh_Init_80158B3C(HSD_GObj* gobj);
 /* 158BBC */ void ftCh_FingerBeamLoop_Anim(HSD_GObj* gobj);
 /* 158C44 */ void ftCh_FingerBeamLoop_IASA(HSD_GObj* gobj);
 /* 158C88 */ void ftCh_FingerBeamLoop_Phys(HSD_GObj* gobj);
 /* 158DF8 */ void ftCh_FingerBeamLoop_Coll(HSD_GObj* gobj);
+/* 158DFC */ void ftCh_Init_80158DFC(HSD_GObj* gobj);
 /* 158E7C */ void ftCh_FingerBeamEnd_Anim(HSD_GObj* gobj);
 /* 158ECC */ void ftCh_FingerBeamEnd_IASA(HSD_GObj* gobj);
 /* 158F10 */ void ftCh_FingerBeamEnd_Phys(HSD_GObj* gobj);
@@ -125,6 +127,8 @@
 /* 159A08 */ void ftCh_BackDisappear_IASA(HSD_GObj* gobj);
 /* 159A4C */ void ftCh_BackDisappear_Phys(HSD_GObj* gobj);
 /* 159AA0 */ void ftCh_BackDisappear_Coll(HSD_GObj* gobj);
+/* 15AAC8 */ void fn_8015AAC8(HSD_GObj* gobj);
+/* 15B800 */ void ftCh_GrabUnk1_8015B800(HSD_GObj* gobj);
 /* 159D04 */ void ftCh_Wait1_1_Anim(HSD_GObj* gobj);
 /* 159E8C */ void ftCh_Wait1_1_IASA(HSD_GObj* gobj);
 /* 159ED0 */ void ftCh_Wait1_1_Phys(HSD_GObj* gobj);

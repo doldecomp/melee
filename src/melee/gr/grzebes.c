@@ -2,17 +2,19 @@
 
 #include <platform.h>
 
-#include "gr/inlines.h"
 #include "gr/grzakogenerator.h"
+#include "gr/inlines.h"
 
 /* 1D84A0 */ static void grZebes_801D84A0(bool arg);
 /* 1D8528 */ static void grZebes_801D8528(void);
+/* 1D852C */ void grZebes_801D852C(void);
 /* 1D8550 */ static bool grZebes_801D8550(void);
 /* 1D8558 */ static void grZebes_801D8558(int);
 /* 1D8814 */ static bool grZebes_801D8814(Ground_GObj* arg);
 /* 1D90FC */ static void grZebes_801D90FC(Ground_GObj* arg);
 /* 1D9254 */ static bool grZebes_801D9254(Ground_GObj* arg);
 /* 1D93D8 */ static void grZebes_801D93D8(Ground_GObj* arg);
+/* 1D93DC */ void grZebes_801D93DC(Ground_GObj* gobj);
 /* 1D9408 */ static bool grZebes_801D9408(Ground_GObj* arg);
 /* 1D94EC */ static void grZebes_801D94EC(Ground_GObj* arg);
 /* 1D94F0 */ static void fn_801D94F0(Ground_GObj* gobj);
