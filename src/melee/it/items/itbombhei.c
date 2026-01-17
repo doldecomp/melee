@@ -236,7 +236,13 @@ void itBombhei_UnkMotion2_Phys(Item_GObj* gobj) {}
 
 void itBombhei_UnkMotion4_Phys(Item_GObj* gobj) {}
 
-/// #itBombhei_UnkMotion4_Coll
+bool itBombhei_UnkMotion4_Coll(Item_GObj* gobj)
+{
+    PAD_STACK(8);
+    it_8026D62C(gobj, it_8027DE18);
+    it_80276CB8(gobj);
+    return false;
+}
 
 /// #it_8027F8E0
 

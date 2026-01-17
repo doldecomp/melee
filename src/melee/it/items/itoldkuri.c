@@ -221,7 +221,13 @@ bool itOldkuri_UnkMotion11_Coll(Item_GObj* gobj)
     return it_8027C794(gobj);
 }
 
-/// #it_802D848C
+void it_802D848C(Item_GObj* gobj, s32 arg1, Item_StateChangeFlags arg2)
+{
+    Item* ip = GET_ITEM(gobj);
+    Item_80268E5C(gobj, arg1, arg2);
+    it_80274CAC(gobj);
+    ip->jumped_on = it_802D8098;
+}
 
 void it_802D84D8(Item_GObj* gobj, Item_GObj* ref_gobj)
 {

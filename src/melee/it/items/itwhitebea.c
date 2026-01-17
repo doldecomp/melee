@@ -295,7 +295,14 @@ bool itWhitebea_UnkMotion10_Coll(Item_GObj* gobj)
     return it_8027C79C(gobj);
 }
 
-/// #it_802E4980
+void it_802E4980(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    it_802762BC(ip);
+    it_8027BA54(gobj, &ip->x40_vel);
+    it_802762BC(ip);
+    Item_80268E5C(gobj, 0xB, 3);
+}
 
 bool itWhitebea_UnkMotion11_Anim(Item_GObj* gobj)
 {

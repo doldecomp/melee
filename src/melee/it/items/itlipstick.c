@@ -127,14 +127,20 @@ bool itLipstick_UnkMotion5_Coll(Item_GObj* gobj)
     return false;
 }
 
-/// #it_3F14_Logic23_Clanked
+bool it_3F14_Logic23_Clanked(Item_GObj* gobj)
+{
+    return it_3F14_Logic23_DmgDealt(gobj);
+}
 
 bool it_3F14_Logic23_Reflected(Item_GObj* gobj)
 {
     return it_80273030(gobj);
 }
 
-/// #it_3F14_Logic23_HitShield
+bool it_3F14_Logic23_HitShield(Item_GObj* gobj)
+{
+    return it_3F14_Logic23_DmgDealt(gobj);
+}
 
 bool it_3F14_Logic23_ShieldBounced(Item_GObj* gobj)
 {

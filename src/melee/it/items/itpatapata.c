@@ -101,7 +101,13 @@ void itPatapata_UnkMotion6_Phys(Item_GObj* gobj)
 
 /// #it_802E15B0
 
-/// #it_802E1648
+void it_802E1648(Item_GObj* gobj, int arg1, int arg2)
+{
+    Item* ip = GET_ITEM(gobj);
+    Item_80268E5C(gobj, arg1, arg2);
+    it_80274CAC(gobj);
+    ip->jumped_on = it_802E0F1C;
+}
 
 void it_802E1694(Item_GObj* gobj)
 {

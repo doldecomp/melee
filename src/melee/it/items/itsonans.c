@@ -68,7 +68,15 @@ void itSonans_UnkMotion1_Phys(Item_GObj* gobj)
     it_802CD4FC(gobj);
 }
 
-/// #itSonans_UnkMotion1_Coll
+bool itSonans_UnkMotion1_Coll(Item_GObj* gobj)
+{
+    if (GET_ITEM(gobj)->ground_or_air == GA_Air) {
+        it_8026E15C(gobj, it_802CD4D8);
+    } else {
+        it_8026D62C(gobj, it_802CD4D8);
+    }
+    return false;
+}
 
 void it_802CDAA8(Item_GObj* gobj)
 {

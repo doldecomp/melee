@@ -40,7 +40,7 @@
 /* 2D7EAC */ void itOldkuri_UnkMotion9_Phys(Item_GObj* gobj);
 /* 2D7ED4 */ bool itOldkuri_UnkMotion9_Coll(Item_GObj* gobj);
 /* 2D7F38 */ bool it_2725_Logic0_DmgReceived(Item_GObj*);
-/* 2D8098 */ UNK_RET it_802D8098(UNK_PARAMS);
+/* 2D8098 */ bool it_802D8098(Item_GObj*);
 /* 2D813C */ UNK_RET it_802D813C(UNK_PARAMS);
 /* 2D8190 */ bool itOldkuri_UnkMotion7_Anim(Item_GObj* gobj);
 /* 2D81D8 */ void itOldkuri_UnkMotion7_Phys(Item_GObj* gobj);
@@ -57,7 +57,7 @@
 /* 2D8408 */ bool itOldkuri_UnkMotion11_Anim(Item_GObj* gobj);
 /* 2D8450 */ void itOldkuri_UnkMotion11_Phys(Item_GObj* gobj);
 /* 2D846C */ bool itOldkuri_UnkMotion11_Coll(Item_GObj* gobj);
-/* 2D848C */ UNK_RET it_802D848C(UNK_PARAMS);
+/* 2D848C */ void it_802D848C(Item_GObj*, s32, Item_StateChangeFlags);
 /* 2D84D8 */ void it_802D84D8(Item_GObj*, Item_GObj*);
 /* 3F8320 */ extern ItemStateTable it_803F8320[];
 

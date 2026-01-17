@@ -872,7 +872,10 @@ void fn_800D9CE8(Fighter_GObj* arg0)
 
 void ftCo_CatchPull_IASA(Fighter_GObj* gobj) {}
 
-/// #ftCo_CatchPull_Phys
+void ftCo_CatchPull_Phys(Fighter_GObj* gobj)
+{
+    ftCo_Catch_Phys(gobj);
+}
 
 void ftCo_CatchPull_Coll(Fighter_GObj* gobj)
 {
@@ -900,14 +903,20 @@ void ftCo_CatchWait_Anim(Fighter_GObj* gobj) {}
 
 /// #ftCo_CatchWait_IASA
 
-/// #ftCo_CatchWait_Phys
+void ftCo_CatchWait_Phys(Fighter_GObj* gobj)
+{
+    ftCo_Catch_Phys(gobj);
+}
 
 void ftCo_CatchWait_Coll(Fighter_GObj* gobj)
 {
     ft_800841B8(gobj, fn_800DA440);
 }
 
-/// #fn_800DA440
+void fn_800DA440(Fighter_GObj* gobj)
+{
+    fn_800DA004(gobj);
+}
 
 void fn_800DA490(Fighter_GObj* gobj)
 {
@@ -932,7 +941,10 @@ void ftCo_CatchAttack_Anim(Fighter_GObj* gobj)
 
 void ftCo_CatchAttack_IASA(Fighter_GObj* gobj) {}
 
-/// #ftCo_CatchAttack_Phys
+void ftCo_CatchAttack_Phys(Fighter_GObj* gobj)
+{
+    ftCo_Catch_Phys(gobj);
+}
 
 void ftCo_CatchAttack_Coll(Fighter_GObj* gobj)
 {
@@ -1168,7 +1180,10 @@ void ftCo_CaptureWaitHi_Phys(Fighter_GObj* gobj)
 }
 #pragma pop
 
-/// #ftCo_CaptureWaitHi_Coll
+void ftCo_CaptureWaitHi_Coll(Fighter_GObj* gobj)
+{
+    ftCo_CapturePulledHi_Coll(gobj);
+}
 
 void fn_800DBAC4(Fighter_GObj* gobj)
 {
@@ -1191,7 +1206,10 @@ void ftCo_CaptureWaitLw_IASA(Fighter_GObj* gobj)
 
 /// #ftCo_CaptureWaitLw_Phys
 
-/// #ftCo_CaptureWaitLw_Coll
+void ftCo_CaptureWaitLw_Coll(Fighter_GObj* gobj)
+{
+    ftCo_CapturePulledLw_Coll(gobj);
+}
 
 /// #fn_800DBED4
 
