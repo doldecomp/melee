@@ -168,7 +168,7 @@ static MinorSceneHandler gm_803DA920[] = {
     {
         MN_CUTSCENE_LUIGI,
         vi0102_8031D000_OnFrame,
-        (void*) vi0102_Initialize_OnEnter,
+        vi0102_Initialize_OnEnter,
         NULL,
         NULL,
     },

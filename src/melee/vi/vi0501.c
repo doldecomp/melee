@@ -91,13 +91,16 @@ void un_8031DE58_OnEnter(void* arg)
 {
     s32 i;
     u8 char_index;
-    HSD_GObj* fog_gobj;
-    HSD_GObj* light_gobj;
-    HSD_GObj* camera_gobj;
-    HSD_GObj* model_gobj;
     HSD_Fog* fog;
+    HSD_GObj* fog_gobj;
+
     HSD_LObj* lobj;
+    HSD_GObj* light_gobj;
+
     HSD_CObj* cobj;
+    HSD_GObj* camera_gobj;
+
+    HSD_GObj* model_gobj;
     HSD_JObj* jobj;
     ViCharaDesc* desc;
 

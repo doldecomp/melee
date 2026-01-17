@@ -16,6 +16,9 @@
 #include "lb/lbshadow.h"
 #include "mp/mpcoll.h"
 #include "pl/player.h"
+
+#include "sc/forward.h"
+
 #include "sc/types.h"
 #include "vi/types.h"
 #include "vi/vi.h"
@@ -118,7 +121,7 @@ static void vi0102_RunFrame(HSD_GObj* gobj)
     }
 }
 
-void vi0102_Initialize_OnEnter(ViCharaDesc* desc)
+void vi0102_Initialize_OnEnter(void* arg)
 {
     HSD_CObj* cobj;
     HSD_GObj* cam_gobj;
@@ -133,6 +136,7 @@ void vi0102_Initialize_OnEnter(ViCharaDesc* desc)
     HSD_GObj* light_gobj;
 
     int i;
+    ViCharaDesc* desc = arg;
 
     lbAudioAx_800236DC();
     efLib_8005B4B8();

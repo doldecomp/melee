@@ -16,6 +16,9 @@
 #include "lb/lbaudio_ax.h"
 #include "mp/mpcoll.h"
 #include "pl/player.h"
+
+#include "sc/forward.h"
+
 #include "sc/types.h"
 
 #include <baselib/aobj.h>
@@ -82,13 +85,11 @@ void un_8031EE60(HSD_GObj* gobj)
 
 void un_8031EE84(void)
 {
-    s32 i;
     HSD_GObj* gobj;
     HSD_JObj* jobj;
-    s32 j;
+    s32 i, j;
 
-    i = 0;
-    while (un_804D6FB8->models[i] != NULL) {
+    for (i = 0; un_804D6FB8->models[i] != NULL; i++) {
         gobj = GObj_Create(0xE, 0xF, 0);
         jobj = HSD_JObjLoadJoint(un_804D6FB8->models[i]->joint);
         HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
@@ -98,16 +99,12 @@ void un_8031EE84(void)
         HSD_JObjAnimAll(jobj);
         HSD_GObjProc_8038FD54(gobj, un_8031EE60, 23);
 
-        j = 0;
-        do {
+        for (j = 0; j < 23; j++) {
             if (i == un_80400128[j][0]) {
                 lb_80011E24(jobj, (HSD_JObj**) &un_804A2EA8[j * 4],
                             un_80400128[j][1], -1);
             }
-            j++;
-        } while (j < 23);
-
-        i++;
+        }
     }
 
     lbAudioAx_80026F2C(0x18);
