@@ -31,7 +31,11 @@ static SceneDesc* un_804D6FB8;
 static GXColor un_804D6FBC;
 
 /* 4A2EA8 */ extern char un_804A2EA8[];
-/* 400128 */ extern s32 un_80400128[][2];
+s32 un_80400128[23][2] = { { 1, 2 }, { 1, 3 }, { 1, 4 },  { 1, 5 },  { 1, 6 },
+                           { 1, 7 }, { 1, 8 }, { 1, 9 },  { 1, 10 }, { 0, 2 },
+                           { 0, 3 }, { 0, 4 }, { 0, 5 },  { 0, 6 },  { 0, 7 },
+                           { 0, 8 }, { 0, 9 }, { 0, 10 }, { 0, 11 }, { 2, 2 },
+                           { 2, 3 }, { 2, 4 }, { 2, 5 } };
 
 typedef struct vi_GObj {
     u8 pad0[0x20];
@@ -92,7 +96,7 @@ void un_8031EE84(void)
         gm_8016895C(jobj, un_804D6FB8->models[i], 0);
         HSD_JObjReqAnimAll(jobj, 0.0F);
         HSD_JObjAnimAll(jobj);
-        HSD_GObjProc_8038FD54(gobj, un_8031EE60, 0x17);
+        HSD_GObjProc_8038FD54(gobj, un_8031EE60, 23);
 
         j = 0;
         do {
@@ -101,7 +105,7 @@ void un_8031EE84(void)
                             un_80400128[j][1], -1);
             }
             j++;
-        } while (j < 0x17);
+        } while (j < 23);
 
         i++;
     }
