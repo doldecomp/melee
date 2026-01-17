@@ -1,11 +1,6 @@
 #include "vi0401.h"
 
-#include "types.h"
-#include "vi.h"
-
 #include <placeholder.h>
-
-#include "baselib/forward.h"
 
 #include "cm/camera.h"
 #include "ef/efasync.h"
@@ -24,6 +19,8 @@
 #include "mp/mpcoll.h"
 #include "pl/player.h"
 #include "sc/types.h"
+#include "vi/types.h"
+#include "vi/vi.h"
 
 #include <baselib/aobj.h>
 #include <baselib/cobj.h>

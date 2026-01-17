@@ -13,6 +13,5 @@
 /* 31CD20 */ void vi0102_8031CD20(HSD_GObj*);
 /* 31CD94 */ void vi0102_Initialize_OnEnter(ViCharaDesc*);
 /* 31D000 */ void vi0102_8031D000_OnFrame(void);
-/* 31D020 */ void vi0401_8031D020(int, int);
 
 #endif
