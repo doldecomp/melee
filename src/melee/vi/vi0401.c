@@ -124,7 +124,7 @@ static void fn_8031D168(HSD_GObj* gobj)
     HSD_JObjAnimAll(GET_JOBJ(gobj));
 }
 
-void un_8031D288_OnEnter(ViCharaDesc* data)
+void un_8031D288_OnEnter(void* data)
 {
     int i;
     HSD_CObj* cobj;
@@ -137,7 +137,8 @@ void un_8031D288_OnEnter(ViCharaDesc* data)
     HSD_JObj* jobj;
     HSD_JObj* child;
 
-    u8 char_index = data->p1_char_index;
+    ViCharaDesc* desc = (ViCharaDesc*) data;
+    u8 char_index = desc->p1_char_index;
 
     lbAudioAx_800236DC();
     efLib_8005B4B8();
@@ -202,7 +203,7 @@ void un_8031D288_OnEnter(ViCharaDesc* data)
         HSD_JObjAnimAll(jobj);
         HSD_GObjProc_8038FD54(gobj, fn_8031D168, 0x17);
     }
-    un_8031D030(data->p1_char_index, data->p1_costume_index);
+    un_8031D030(desc->p1_char_index, desc->p1_costume_index);
     vi_8031C9B4(1, 0);
 
     lbAudioAx_800237A8(0x61a88, 0x7F, 0x40);

@@ -12,8 +12,7 @@
                               int spawn_mode, int spawn_count);
 /* 31DC80 */ void vi_8031DC80(HSD_GObj*, int);
 /* 31DD14 */ void fn_8031DD14(HSD_GObj* gobj);
-/* 31DE58 */ void un_8031DE58_OnEnter(ViCharaDesc* arg);
+/* 31DE58 */ void un_8031DE58_OnEnter(void* arg);
 /* 31E0F0 */ void vi_8031E0F0_OnFrame(void);
-/* 31E110 */ void un_8031E110(int arg0, int arg1, int arg2);
 
 #endif

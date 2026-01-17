@@ -68,7 +68,7 @@ void vi_8031D80C(HSD_GObj* gobj)
     }
 }
 
-void un_8031D858_OnEnter(ViCharaDesc* arg0)
+void un_8031D858_OnEnter(void* arg0)
 {
     HSD_GObj* light_gobj;
     HSD_LObj* lobj;

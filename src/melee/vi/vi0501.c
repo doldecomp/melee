@@ -87,7 +87,7 @@ void fn_8031DD14(HSD_GObj* gobj)
         gm_801A4B60();
     }
 }
-void un_8031DE58_OnEnter(ViCharaDesc* arg)
+void un_8031DE58_OnEnter(void* arg)
 {
     s32 i;
     u8 char_index;
@@ -99,12 +99,14 @@ void un_8031DE58_OnEnter(ViCharaDesc* arg)
     HSD_LObj* lobj;
     HSD_CObj* cobj;
     HSD_JObj* jobj;
+    ViCharaDesc* desc;
 
     lbAudioAx_800236DC();
     efLib_8005B4B8();
     efAsync_8006737C(0);
 
-    char_index = arg->p1_char_index;
+    desc = (ViCharaDesc*) arg;
+    char_index = desc->p1_char_index;
 
     un_804D6F74 = lbArchive_LoadSymbols("Vi0501.dat", &un_804D6F70,
                                         "visual0501Scene", NULL);
@@ -143,8 +145,8 @@ void un_8031DE58_OnEnter(ViCharaDesc* arg)
         HSD_GObjProc_8038FD54(model_gobj, mn_8022EAE0, 0x17);
     }
 
-    un_8031D9F8(arg->p1_char_index, arg->p1_costume_index,
-                arg->p2_costume_index, (int) &arg->spawn_count);
+    un_8031D9F8(desc->p1_char_index, desc->p1_costume_index,
+                desc->p2_costume_index, (int) &desc->spawn_count);
     lbAudioAx_800237A8(0x20B, 0x7F, 0x40);
     lbAudioAx_800237A8(0x20C, 0x7F, 0x40);
 }

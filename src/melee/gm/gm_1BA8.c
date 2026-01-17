@@ -40,7 +40,9 @@
 #include <melee/vi/vi0102.h>
 #include <melee/vi/vi0402.h>
 #include <melee/vi/vi0501.h>
+#include <melee/vi/vi0502.h>
 #include <melee/vi/vi1101.h>
+#include <melee/vi/vi1201v1.h>
 #include <melee/vi/vi1201v2.h>
 
 MinorScene gm_803DF618_MinorScenes[] = {

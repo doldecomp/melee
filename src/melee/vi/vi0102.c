@@ -17,6 +17,7 @@
 #include "mp/mpcoll.h"
 #include "pl/player.h"
 #include "sc/types.h"
+#include "vi/types.h"
 #include "vi/vi.h"
 
 #include <baselib/forward.h>
