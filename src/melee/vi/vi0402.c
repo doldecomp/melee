@@ -1,5 +1,7 @@
 #include "vi/vi0402.h"
 
+#include "types.h"
+
 #include <placeholder.h>
 
 #include "baselib/forward.h"
@@ -12,6 +14,7 @@
 #include "lb/lbaudio_ax.h"
 #include "pl/player.h"
 #include "sc/types.h"
+#include "vi/types.h"
 #include "vi/vi.h"
 
 #include <baselib/cobj.h>
@@ -22,7 +25,7 @@
 #include <baselib/gobjproc.h>
 #include <baselib/jobj.h>
 
-extern SceneDesc* un_804D6F68;
+static SceneDesc* un_804D6F68;
 
 void un_8031D6E4(HSD_GObj* gobj)
 {
@@ -65,7 +68,7 @@ void vi_8031D80C(HSD_GObj* gobj)
     }
 }
 
-void un_8031D858_OnEnter(void* arg0)
+void un_8031D858_OnEnter(ViCharaDesc* arg0)
 {
     HSD_GObj* light_gobj;
     HSD_LObj* lobj;
@@ -103,11 +106,4 @@ void un_8031D858_OnEnter(void* arg0)
 void vi_8031D9C4_OnFrame(void)
 {
     vi_8031CAAC();
-}
-
-void un_8031D9E4(int arg0, int arg1, int arg2)
-{
-    un_804D6F84[0] = arg0;
-    un_804D6F84[1] = arg1;
-    un_804D6F84[3] = arg2;
 }

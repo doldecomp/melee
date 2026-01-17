@@ -8,10 +8,6 @@
 #include "lb/lbaudio_ax.h"
 #include "lb/lbshadow.h"
 
-#include "vi/forward.h"
-
-static un_804D7004_t un_804D7004;
-
 /// #un_8031F294
 
 void fn_8031F548(HSD_GObj* gobj)
@@ -77,10 +73,4 @@ void fn_8031F600(HSD_GObj* gobj)
 void un_8031F960_OnFrame(void)
 {
     vi_8031CAAC();
-}
-
-void un_8031F980(int arg0, int arg1)
-{
-    M2C_FIELD(&un_804D7004, u8*, 0) = arg0;
-    M2C_FIELD(&un_804D7004, u8*, 1) = arg1;
 }

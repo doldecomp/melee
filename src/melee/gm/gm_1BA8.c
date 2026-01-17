@@ -1684,6 +1684,7 @@ u8 gm_801BF718(void)
 
 extern u8 un_804D6F3C[8];
 extern u8 un_804D6FD8[8];
+extern u8 un_804D6F84[8];
 
 void gm_801BF728(MinorScene* arg)
 {
@@ -1693,7 +1694,7 @@ void gm_801BF728(MinorScene* arg)
 
     un_804D6F3C[1] = 1;
     un_804D6F3C[3] = 1;
-    vi0102_8031D020(0xE, HSD_Randi(4));
+    vi0401_8031D020(0xE, HSD_Randi(4));
     temp_r31 = HSD_Randi(4);
     un_8031D9E4(0xE, HSD_Randi(4), temp_r31);
     un_804D6F84[4] = HSD_Randi(0x1B);

@@ -1,7 +1,5 @@
 #include "vi0502.h"
 
-#include "baselib/gobj.h"
-#include "baselib/mtx.h"
 #include "cm/camera.h"
 #include "ef/efasync.h"
 #include "ef/eflib.h"
@@ -9,14 +7,11 @@
 #include "ft/forward.h"
 
 #include "ft/ftdemo.h"
-#include "gm/gm_17C0.h"
-#include "gm/gm_1A36.h"
 #include "gm/gm_unsplit.h"
 #include "gr/grlib.h"
 #include "gr/ground.h"
 #include "gr/stage.h"
 #include "it/item.h"
-#include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 #include "lb/lbarchive.h"
 #include "lb/lbaudio_ax.h"
@@ -24,15 +19,15 @@
 #include "mp/mpcoll.h"
 #include "pl/player.h"
 #include "sc/types.h"
+#include "vi/types.h"
 #include "vi/vi.h"
-
-#include <baselib/forward.h>
 
 #include <dolphin/gx.h>
 #include <baselib/aobj.h>
 #include <baselib/cobj.h>
 #include <baselib/displayfunc.h>
 #include <baselib/fog.h>
+#include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjobject.h>
 #include <baselib/gobjproc.h>
@@ -43,12 +38,20 @@
 
 Vec3 initial_pos = { 0, -3.0f, 0 };
 
-static HSD_Archive* un_804D6F94;
-static HSD_GObj* kirby_gobj;
 static SceneDesc* un_804D6F90;
+static HSD_Archive* un_804D6F94;
 static HSD_Archive* un_804D6F98;
 static HSD_Archive* un_804D6F9C;
 static GXColor erase_colors_vi0502;
+static HSD_GObj* kirby_gobj;
+static ViCharaDesc* un_804D6FA8;
+
+void un_8031E110(int arg0, int arg1, int arg2)
+{
+    un_804D6FA8->p1_char_index = arg0;
+    un_804D6FA8->p1_costume_index = arg1;
+    un_804D6FA8->p2_costume_index = arg2;
+}
 
 void vi0502_8031E124(CharacterKind player_kind, int player_costume,
                      int kirby_costume)

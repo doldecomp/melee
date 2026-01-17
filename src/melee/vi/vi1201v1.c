@@ -27,6 +27,8 @@
 #include "ty/toy.h"
 #include "ty/tylist.h"
 
+#include "vi/forward.h"
+
 #include <baselib/aobj.h>
 #include <baselib/cobj.h>
 #include <baselib/fog.h>
@@ -38,18 +40,25 @@
 #include <baselib/jobj.h>
 #include <baselib/lobj.h>
 
-/* 4D6FE0 */ extern SceneDesc* un_804D6FE0;
-/* 4D6FE4 */ extern SceneDesc* un_804D6FE4;
-/* 4D6FE8 */ extern HSD_Archive* un_804D6FE8;
-/* 4D6FEC */ extern HSD_Joint* un_804D6FEC;
-/* 4D6FF0 */ extern HSD_JObj* un_804D6FF0;
-/* 4D6FF4 */ extern GXColor un_804D6FF4;
-/* 4D6FF8 */ extern s32 un_804D6FF8;
-/* 4D6FFC */ extern u8 un_804D6FFC;
-/* 4D6FFD */ extern u8 un_804D6FFD;
-/* 4D7000 */ extern void* un_804D7000;
+/* 4D6FE0 */ static SceneDesc* un_804D6FE0;
+/* 4D6FE4 */ static SceneDesc* un_804D6FE4;
+/* 4D6FE8 */ static HSD_Archive* un_804D6FE8;
+/* 4D6FEC */ static HSD_Joint* un_804D6FEC;
+/* 4D6FF0 */ static HSD_JObj* un_804D6FF0;
+/* 4D6FF4 */ static GXColor un_804D6FF4;
+/* 4D6FF8 */ static s32 un_804D6FF8;
+/* 4D6FFC */ static u8 un_804D6FFC;
+/* 4D6FFD */ static u8 un_804D6FFD;
+/* 4D7000 */ static void* un_804D7000;
+static un_804D7004_t un_804D7004;
 
 Vec3 player_spawn = { 0.0f, 0.0f, 0.0f };
+
+void un_8031F980(int arg0, int arg1)
+{
+    M2C_FIELD(&un_804D7004, u8*, 0) = arg0;
+    M2C_FIELD(&un_804D7004, u8*, 1) = arg1;
+}
 
 void un_8031F990(HSD_GObj* gobj)
 {

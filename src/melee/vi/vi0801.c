@@ -1,6 +1,6 @@
-#include "vi.h"
+#include "vi0801.h"
 
-#include "vi0801.static.h"
+#include "vi.h"
 
 #include "cm/camera.h"
 #include "ef/efasync.h"
@@ -26,6 +26,12 @@
 #include <baselib/gobjobject.h>
 #include <baselib/gobjproc.h>
 #include <baselib/lobj.h>
+
+static SceneDesc* un_804D6FB8;
+static GXColor un_804D6FBC;
+
+/* 4A2EA8 */ extern char un_804A2EA8[];
+/* 400128 */ extern s32 un_80400128[][2];
 
 typedef struct vi_GObj {
     u8 pad0[0x20];
