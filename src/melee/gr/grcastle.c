@@ -1,5 +1,6 @@
 #include "gr/grcastle.h"
 
+#include "gr/inlines.h"
 #include "placeholder.h"
 
 #include <platform.h>
@@ -59,7 +60,12 @@ bool grCastle_801CD4C8(void)
 
 /// #grCastle_801CD4D0
 
-/// #grCastle_801CD5BC
+void grCastle_801CD5BC(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    grAnime_801C8138(gobj, gp->map_id, 0);
+    gp->x11_flags.b012 = 2;
+}
 
 bool grCastle_801CD600(Ground_GObj* gobj)
 {

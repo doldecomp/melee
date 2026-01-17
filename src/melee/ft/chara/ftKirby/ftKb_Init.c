@@ -5358,7 +5358,18 @@ void ftKb_EatWalk_Anim(Fighter_GObj* gobj)
 
 /// #ftKb_EatJump2_Anim
 
-/// #ftKb_EatLanding_Anim
+void ftKb_EatLanding_Anim(HSD_GObj* gobj)
+{
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        Fighter* fp = GET_FIGHTER(gobj);
+        PAD_STACK(4);
+        Fighter_ChangeMotionState(gobj, ftKb_MS_EatWait, Ft_MF_SkipModel, 0, 1,
+                                  0, NULL);
+        ftKb_SpecialN_800F9070(gobj);
+        ftAnim_8006EBA4(gobj);
+        ftCommon_8007E2F4(fp, 0x1FF);
+    }
+}
 
 /// #ftKb_SpecialNLoop_IASA
 

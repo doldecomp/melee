@@ -4,10 +4,13 @@
 
 #include <platform.h>
 
+#include "baselib/psstructs.h"
 #include "cm/camera.h"
+#include "gr/grlib.h"
 #include "ft/ftdevice.h"
 #include "ft/ftlib.h"
 #include "gr/inlines.h"
+#include "lb/lb_00B0.h"
 
 extern float grNKr_804DB830;
 
@@ -112,11 +115,29 @@ bool fn_80208480(bool arg)
 
 /// #fn_80208660
 
-/// #grKinokoRoute_802086EC
+void grKinokoRoute_802086EC(Vec3* arg0, f32 arg8)
+{
+    HSD_Generator* gen = grLib_801C96F8(0x7530, 0x1E, arg0);
+    if (gen != NULL) {
+        gen = (HSD_Generator*) gen->appsrt;
+        gen->pos.x *= arg8;
+        gen->pos.y *= arg8;
+        gen->pos.z *= arg8;
+    }
+}
 
 DynamicsDesc* grKinokoRoute_80208754(enum_t arg)
 {
     return false;
 }
 
-/// #grKinokoRoute_8020875C
+bool grKinokoRoute_8020875C(Vec3* a, int b, HSD_JObj* jobj)
+{
+    Vec3 vec;
+    lb_8000B1CC(jobj, NULL, &vec);
+    if (a->y > vec.y) {
+        return true;
+    } else {
+        return false;
+    }
+}

@@ -47,7 +47,7 @@
 /* 211198 */ void grOldPupupu_80211198(Ground_GObj*);
 /* 21119C */ void grOldPupupu_8021119C(Ground_GObj*);
 /* 211284 */ bool grOldPupupu_80211284(Ground_GObj*);
-/* 21128C */ UNK_RET grOldPupupu_8021128C(UNK_PARAMS);
+/* 21128C */ bool grOldPupupu_8021128C(Vec*, f32, f32, f32, f32);
 /* 2112F4 */ UNK_RET fn_802112F4(UNK_PARAMS);
 /* 2113E0 */ void grOldPupupu_802113E0(Ground_GObj*);
 /* 211C0C */ void grOldPupupu_80211C0C(Ground_GObj*);

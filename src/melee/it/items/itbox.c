@@ -3,6 +3,7 @@
 #include <placeholder.h>
 #include <platform.h>
 
+#include "baselib/random.h"
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
@@ -17,7 +18,22 @@
 
 /// #it_80286248
 
-/// #it_80286340
+bool it_80286340(Item_GObj* gobj, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
+{
+    s32 sum1 = arg1 + arg2;
+    s32 sum2 = arg3 + sum1;
+    s32 rand = HSD_Randi(arg4 + sum2);
+    if (rand < arg1) {
+        return true;
+    }
+    if (rand < sum1) {
+        return true;
+    }
+    if (rand < sum2) {
+        return true;
+    }
+    return false;
+}
 
 /// #it_802863BC
 

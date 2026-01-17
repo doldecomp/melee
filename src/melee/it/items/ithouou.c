@@ -33,7 +33,21 @@ bool itHouou_UnkMotion1_Coll(Item_GObj* gobj)
 
 /// #it_802D2668
 
-/// #itHouou_UnkMotion2_Anim
+bool itHouou_UnkMotion2_Anim(Item_GObj* gobj)
+{
+    HSD_JObj* bone;
+    Item* item = GET_ITEM(gobj);
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+
+    if (jobj == NULL) {
+        bone = NULL;
+    } else {
+        bone = jobj->child;
+    }
+
+    it_8027A160(bone, item);
+    return false;
+}
 
 /// #itHouou_UnkMotion2_Phys
 

@@ -531,7 +531,11 @@ void grFlatzone_80217DA4(Ground_GObj* gobj)
 
 void grFlatzone_80217DA8(Ground_GObj* gobj)
 {
-    grFlatzone_80217CD4(gobj);
+    Ground* gp = GET_GROUND(gobj);
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+    Ground_801C2ED0(jobj, gp->map_id);
+    HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
+    gp->gv.flatzone.xC4 = 0;
 }
 
 bool grFlatzone_80217DFC(Ground_GObj* gobj)

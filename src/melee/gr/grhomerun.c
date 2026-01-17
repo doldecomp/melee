@@ -6,6 +6,7 @@
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
+#include "lb/lb_00B0.h"
 
 void grHomeRun_8021C750(bool arg) {}
 
@@ -253,7 +254,16 @@ DynamicsDesc* grHomeRun_8021EEB4(enum_t arg)
     return false;
 }
 
-/// #grHomeRun_8021EEBC
+bool grHomeRun_8021EEBC(Vec3* a, int b, HSD_JObj* jobj)
+{
+    Vec3 vec;
+    lb_8000B1CC(jobj, NULL, &vec);
+    if (a->y > vec.y) {
+        return true;
+    } else {
+        return false;
+    }
+}
 
 extern f32 grHr_804DBC94;
 

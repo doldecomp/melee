@@ -6,6 +6,7 @@
 
 #include "gr/grmaterial.h"
 #include "gr/inlines.h"
+#include "lb/lb_00B0.h"
 
 extern float grNKr_804DB868;
 
@@ -148,4 +149,13 @@ DynamicsDesc* grShrineRoute_8020B104(enum_t arg)
     return false;
 }
 
-/// #grShrineRoute_8020B10C
+bool grShrineRoute_8020B10C(Vec3* a, int b, HSD_JObj* jobj)
+{
+    Vec3 vec;
+    lb_8000B1CC(jobj, NULL, &vec);
+    if (a->y > vec.y) {
+        return true;
+    } else {
+        return false;
+    }
+}

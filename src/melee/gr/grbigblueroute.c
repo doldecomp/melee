@@ -72,7 +72,12 @@ HSD_GObj* grBigBlueRoute_8020B9D4(int gobj_id)
     return gobj;
 }
 
-/// #grBigBlueRoute_8020BABC
+void grBigBlueRoute_8020BABC(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    grAnime_801C8138(gobj, gp->map_id, 0);
+    gp->x11_flags.b012 = 2;
+}
 
 bool grBigBlueRoute_8020BB00(Ground_GObj* arg)
 {

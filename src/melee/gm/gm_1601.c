@@ -1933,7 +1933,15 @@ void gm_8016895C(HSD_JObj* arg0, DynamicModelDesc* arg1, int idx)
     HSD_JObjAddAnimAll(arg0, anim, matanim, shapeanim);
 }
 
-/// #fn_801689E4
+void fn_801689E4(HSD_JObj* arg0, DynamicModelDesc* arg1, int idx)
+{
+    HSD_AnimJoint* anim = arg1->anims != NULL ? arg1->anims[idx] : NULL;
+    HSD_MatAnimJoint* matanim =
+        arg1->matanims != NULL ? arg1->matanims[idx] : NULL;
+    HSD_ShapeAnimJoint* shapeanim =
+        arg1->shapeanims != NULL ? arg1->shapeanims[idx] : NULL;
+    HSD_JObjAddAnimAll(arg0, anim, matanim, shapeanim);
+}
 
 /// #fn_80168A6C
 

@@ -192,7 +192,7 @@ gm_80167BC8(struct VsModeData*); // inits VsModeData from game rules
 /* 1688AC */ int gm_801688AC(MatchEnd*);
 /* 168940 */ int gm_80168940(MatchEnd*);
 /* 16895C */ void gm_8016895C(HSD_JObj*, DynamicModelDesc*, int idx);
-/* 1689E4 */ UNK_RET fn_801689E4(UNK_PARAMS);
+/* 1689E4 */ void fn_801689E4(HSD_JObj*, DynamicModelDesc*, int);
 /* 168A6C */ UNK_RET fn_80168A6C(UNK_PARAMS);
 /* 168B34 */ float gm_80168B34(CharacterKind, int, int);
 /* 168BF8 */ float gm_80168BF8(int);

@@ -10,6 +10,7 @@
 #include "baselib/jobj.h"
 #include "gr/inlines.h"
 #include "gr/types.h"
+#include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 #include "gr/grzakogenerator.h"
 
@@ -310,4 +311,13 @@ DynamicsDesc* grBigBlue_801EFC0C(enum_t arg)
     return false;
 }
 
-/// #grBigBlue_801EFC14
+bool grBigBlue_801EFC14(Vec3* a, int b, HSD_JObj* jobj)
+{
+    Vec3 vec;
+    lb_8000B1CC(jobj, NULL, &vec);
+    if (a->y > vec.y) {
+        return true;
+    } else {
+        return false;
+    }
+}

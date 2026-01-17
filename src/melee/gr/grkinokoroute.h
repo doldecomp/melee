@@ -33,7 +33,7 @@
 /* 2084B4 */ UNK_RET fn_802084B4(UNK_PARAMS);
 /* 208564 */ UNK_RET grKinokoRoute_80208564(UNK_PARAMS);
 /* 208660 */ UNK_RET fn_80208660(UNK_PARAMS);
-/* 2086EC */ UNK_RET grKinokoRoute_802086EC(UNK_PARAMS);
+/* 2086EC */ void grKinokoRoute_802086EC(Vec3*, f32);
 /* 208754 */ DynamicsDesc* grKinokoRoute_80208754(enum_t);
 /* 20875C */ bool grKinokoRoute_8020875C(Vec3*, int arg, HSD_JObj* jobj);
 
