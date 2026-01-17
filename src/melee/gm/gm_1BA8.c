@@ -38,6 +38,7 @@
 #include <melee/pl/plbonuslib.h>
 #include <melee/vi/types.h>
 #include <melee/vi/vi0102.h>
+#include <melee/vi/vi0401.h>
 #include <melee/vi/vi0402.h>
 #include <melee/vi/vi0501.h>
 #include <melee/vi/vi0502.h>
