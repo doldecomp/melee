@@ -7,7 +7,7 @@
 #include <baselib/forward.h>
 
 /* 31D030 */ void un_8031D030(CharacterKind, int);
-/* 31D288 */ void un_8031D288_OnEnter(UNK_T);
+/* 31D288 */ void un_8031D288_OnEnter(void*);
 /* 31D698 */ void un_8031D698_OnFrame(void);
 
 #endif

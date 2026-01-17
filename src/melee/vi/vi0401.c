@@ -7,6 +7,8 @@
 #include "baselib/forward.h"
 
 #include "cm/camera.h"
+#include "ef/efasync.h"
+#include "ef/eflib.h"
 #include "ft/ftdemo.h"
 #include "gm/gm_17C0.h"
 #include "gm/gm_1A36.h"
@@ -16,18 +18,27 @@
 #include "gr/stage.h"
 #include "it/item.h"
 #include "lb/lb_00F9.h"
+#include "lb/lbarchive.h"
 #include "lb/lbaudio_ax.h"
 #include "mp/mpcoll.h"
 #include "pl/player.h"
+#include "sc/types.h"
 
 #include <baselib/aobj.h>
 #include <baselib/cobj.h>
+#include <baselib/fog.h>
 #include <baselib/gobj.h>
+#include <baselib/gobjgxlink.h>
+#include <baselib/gobjobject.h>
+#include <baselib/gobjproc.h>
 #include <baselib/jobj.h>
+#include <baselib/lobj.h>
 
-extern HSD_Archive* un_804D6F54;
-extern HSD_JObj* un_804D6F58;
-
+static SceneDesc* un_804D6F48;
+static SceneDesc* un_804D6F4C;
+static SceneDesc* un_804D6F50;
+static HSD_Archive* un_804D6F54;
+static HSD_JObj* un_804D6F58;
 static GXColor erase_colors_vi0401;
 
 void un_8031D030(CharacterKind char_kind, int costume)
@@ -105,7 +116,91 @@ static void fn_8031D168(HSD_GObj* gobj)
     HSD_JObjAnimAll(GET_JOBJ(gobj));
 }
 
-/// #un_8031D288_OnEnter
+void un_8031D288_OnEnter(void* data)
+{
+    int i;
+    HSD_CObj* cobj;
+    HSD_GObj* cam_gobj;
+    HSD_GObj* fog_gobj;
+    HSD_Fog* fog;
+    HSD_GObj* light_gobj;
+    HSD_LObj* lobj;
+    HSD_GObj* gobj;
+    HSD_JObj* jobj;
+    HSD_JObj* child;
+
+    u8 char_index = ((u8*) data)[0];
+
+    lbAudioAx_800236DC();
+    efLib_8005B4B8();
+    efAsync_8006737C(0);
+
+    lbArchive_LoadSymbols("Vi0401.dat", &un_804D6F48, "visual0401Scene",
+                          &un_804D6F4C, "visual0401InfoScene", 0);
+    lbArchive_LoadSymbols("IfAll.dat", &un_804D6F50, "ScInfDmg_scene_data",
+                          NULL);
+    un_804D6F54 = lbArchive_LoadSymbols(viGetCharAnimByIndex(char_index), 0);
+
+    fog_gobj = GObj_Create(0xB, 3, 0);
+    fog = HSD_FogLoadDesc(un_804D6F48->fogs->desc);
+    HSD_GObjObject_80390A70(fog_gobj, HSD_GObj_804D7848, fog);
+    GObj_SetupGXLink(fog_gobj, HSD_GObj_FogCallback, 0, 0);
+    erase_colors_vi0401 = fog->color;
+
+    light_gobj = GObj_Create(0xB, 3, 0);
+    lobj = lb_80011AC4(un_804D6F48->lights);
+    HSD_GObjObject_80390A70(light_gobj, HSD_GObj_804D784A, lobj);
+    GObj_SetupGXLink(light_gobj, HSD_GObj_LObjCallback, 0, 0);
+
+    cam_gobj = GObj_Create(0x13, 0x14, 0);
+    cobj =
+        lb_80013B14((HSD_CameraDescPerspective*) un_804D6F48->cameras->desc);
+    HSD_GObjObject_80390A70(cam_gobj, HSD_GObj_804D784B, cobj);
+    GObj_SetupGXLinkMax(cam_gobj, vi0401_8031D1B0, 0x5);
+    cam_gobj->gxlink_prios = 0x2A9;
+    HSD_CObjAddAnim(cobj, un_804D6F48->cameras->anims[0]);
+    HSD_CObjReqAnim(cobj, 0.0f);
+    HSD_CObjAnim(cobj);
+    HSD_GObjProc_8038FD54(cam_gobj, vi0401_8031D23C, 0);
+
+    for (i = 0; un_804D6F48->models[i] != NULL; i++) {
+        gobj = GObj_Create(0xE, 0xF, 0);
+        jobj = HSD_JObjLoadJoint(un_804D6F48->models[i]->joint);
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+        GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 9, 0);
+        gm_8016895C(jobj, un_804D6F48->models[i], 0);
+        HSD_JObjReqAnimAll(jobj, 0.0f);
+        HSD_JObjAnimAll(jobj);
+        HSD_GObjProc_8038FD54(gobj, vi0401_8031D18C, 0x17);
+        if (i == 0) {
+            lb_80011E24(jobj, (HSD_JObj**) &un_804D6F58, 1, -1);
+        }
+    }
+
+    cam_gobj = GObj_Create(0x13, 0x14, 0);
+    cobj =
+        lb_80013B14((HSD_CameraDescPerspective*) un_804D6F50->cameras->desc);
+    HSD_GObjObject_80390A70(cam_gobj, HSD_GObj_804D784B, cobj);
+    GObj_SetupGXLinkMax(cam_gobj, HSD_GObj_803910D8, 0x8);
+    gobj->gxlink_prios = 0x801;
+
+    for (i = 0; un_804D6F4C->models[i] != NULL; i++) {
+        gobj = GObj_Create(0xE, 0xF, 0);
+        jobj = HSD_JObjLoadJoint(un_804D6F4C->models[i]->joint);
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+        GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 9, 0);
+        gm_8016895C(jobj, un_804D6F4C->models[i], 0);
+        HSD_JObjReqAnimAll(jobj, 0.0f);
+        HSD_JObjAnimAll(jobj);
+        HSD_GObjProc_8038FD54(gobj, fn_8031D168, 0x17);
+    }
+    un_8031D030(((u8*) data)[0], ((u8*) data)[1]);
+    vi_8031C9B4(1, 0);
+
+    lbAudioAx_800237A8(0x61a88, 0x7F, 0x40);
+    lbAudioAx_800237A8(0x61a89, 0x7F, 0x40);
+    lbAudioAx_800237A8(0x61a8a, 0x7F, 0x40);
+}
 
 void un_8031D698_OnFrame(void)
 {
