@@ -9,11 +9,16 @@
 #include "gr/ground.h"
 #include "gr/inlines.h"
 #include "gr/types.h"
+#include "if/ifhazard.h"
 
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
 extern StageCallbacks grBb_Route_803E5E78[];
+
+static struct {
+    int x0;
+}* grBb_Route_804D6A68;
 
 void grBigBlueRoute_8020B864(bool arg)
 {
@@ -25,7 +30,20 @@ void grBigBlueRoute_8020B864(bool arg)
     grBigBlueRoute_8020B9D4(1);
 }
 
-/// #grBigBlueRoute_8020B89C
+void grBigBlueRoute_8020B89C(void)
+{
+    grBb_Route_804D6A68 = Ground_801C49F8();
+    stage_info.unk8C.b4 = 0;
+    stage_info.unk8C.b5 = 1;
+    grBigBlueRoute_8020B9D4(0);
+    grBigBlueRoute_8020B9D4(0x20);
+    grBigBlueRoute_8020B9D4(0x1F);
+    Ground_801C39C0();
+    Ground_801C3BB4();
+    Camera_80030AE0(true);
+    un_802FD8E8(grBigBlueRoute_8020DE48());
+    un_802FD65C();
+}
 
 void grBigBlueRoute_8020B920(void)
 {

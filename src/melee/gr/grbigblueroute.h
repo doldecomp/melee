@@ -3,7 +3,11 @@
 
 #include <placeholder.h>
 
-#include "it/inlines.h"
+#include "gr/forward.h"
+#include "lb/forward.h"
+#include "sc/forward.h"
+
+#include <dolphin/mtx.h>
 
 struct grBigBlueRoute_8020DA9C_t {
     /* +0 */ char pad_0[0x8];
@@ -44,7 +48,7 @@ struct grBigBlueRoute_8020DA9C_t {
 /* 20DA9C */ int grBigBlueRoute_8020DA9C(struct grBigBlueRoute_8020DA9C_t*);
 /* 20DAB4 */ void grBigBlueRoute_8020DAB4(char*, float, int);
 /* 20DD64 */ UNK_RET grBigBlueRoute_8020DD64(UNK_PARAMS);
-/* 20DE48 */ UNK_RET grBigBlueRoute_8020DE48(UNK_PARAMS);
+/* 20DE48 */ DynamicModelDesc* grBigBlueRoute_8020DE48();
 /* 20DEAC */ UNK_RET fn_8020DEAC(UNK_PARAMS);
 /* 20DED4 */ void grBigBlueRoute_8020DED4(Point3d*);
 /* 20DF78 */ DynamicsDesc* grBigBlueRoute_8020DF78(enum_t);
