@@ -13,6 +13,7 @@
 #include "gr/types.h"
 #include "if/ifhazard.h"
 
+#include <dolphin/os.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
@@ -135,7 +136,12 @@ void grBigBlueRoute_8020BB08(Ground_GObj* arg) {}
 
 void grBigBlueRoute_8020BB0C(Ground_GObj* arg) {}
 
-/// #grBigBlueRoute_8020BB10
+void grBigBlueRoute_8020BB10(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    grAnime_801C8138(gobj, gp->map_id, 0);
+    grAnime_801C77FC(gobj, 0, 7);
+}
 
 bool grBigBlueRoute_8020BB58(Ground_GObj* arg)
 {
