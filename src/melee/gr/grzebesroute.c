@@ -6,9 +6,24 @@
 
 #include <baselib/gobj.h>
 
+static struct {
+    int x0;
+}* grZe_Route_804D6A60;
+
 void grZebesRoute_8020B160(bool arg) {}
 
 /// #grZebesRoute_8020B164
+void grZebesRoute_8020B164(void)
+{
+    grZe_Route_804D6A60 = Ground_801C49F8();
+    stage_info.unk8C.b4 = 0;
+    stage_info.unk8C.b5 = 1;
+    grZebesRoute_8020B260(0);
+    grZebesRoute_8020B260(1);
+    grZebesRoute_8020B260(2);
+    Ground_801C39C0();
+    Ground_801C3BB4();
+}
 
 void grZebesRoute_8020B1D4(void)
 {
