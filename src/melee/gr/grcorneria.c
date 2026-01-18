@@ -1,16 +1,18 @@
 #include "grcorneria.h"
 
-#include "granime.h"
-
 #include "grcorneria.static.h"
 
-#include "grmaterial.h"
-#include "ground.h"
-#include "grzakogenerator.h"
-#include "inlines.h"
-#include "stage.h"
-#include "types.h"
+#include "baselib/forward.h"
+#include "gr/forward.h"
 
+#include "gr/granime.h"
+#include "gr/grlib.h"
+#include "gr/grmaterial.h"
+#include "gr/ground.h"
+#include "gr/grzakogenerator.h"
+#include "gr/inlines.h"
+#include "gr/stage.h"
+#include "gr/types.h"
 #include "if/ifcoget.h"
 #include "if/ifstatus.h"
 #include "lb/lb_00B0.h"
@@ -56,7 +58,7 @@ void grCorneria_801DD658(Ground_GObj* arg) {}
 
 void fn_801DD65C(Ground_GObj* gobj)
 {
-    GET_GROUND(gobj)->gv.corneria.xC4_flags.b0 = false;
+    GET_GROUND(gobj)->gv.corneria.xC4.flags.b0 = false;
 }
 
 extern int grCn_803E1FE8[];
@@ -70,8 +72,8 @@ void grCorneria_801DD674(Ground_GObj* ground_gobj)
 
     Ground* gr = GET_GROUND(ground_gobj);
     Ground_801C2ED0(ground_gobj->hsd_obj, gr->map_id);
-    gr->gv.corneria.xC4_flags.b0 = 1;
-    gr->gv.corneria.xC4_flags.b1 = 0;
+    gr->gv.corneria.xC4.flags.b0 = 1;
+    gr->gv.corneria.xC4.flags.b1 = 0;
     gr->gv.corneria.base_x = 0.0f;
     gr->gv.corneria.base_y = 250.0f;
     gr->gv.corneria.xD0 = 0.0f;
@@ -117,9 +119,9 @@ void grCorneria_801DD674(Ground_GObj* ground_gobj)
     HSD_JObjClearFlags(Ground_801C3FA4(ground_gobj, 6), JOBJ_HIDDEN);
     HSD_JObjSetFlags(Ground_801C3FA4(ground_gobj, 5), JOBJ_HIDDEN);
     gr->gv.corneria.xC8 =
-        grZakoGenerator_801CA394(grCn_803E1FE8, 1, fn_801E2454, 0.3f);
+        grZakoGenerator_801CA394(grCn_803E1FE8, 1, grCorneria_801E2454, 0.3f);
     gr->gv.corneria.xCC =
-        grZakoGenerator_801CA394(grCn_803E2000, 2, fn_801E2480, 0.3f);
+        grZakoGenerator_801CA394(grCn_803E2000, 2, grCorneria_801E2480, 0.3f);
     Ground_801C10B8(ground_gobj, fn_801DD65C);
     gr->x11_flags.b012 = 1;
     gr->gv.corneria.x12C = Ground_801C3FA4(ground_gobj, 8);
@@ -141,9 +143,31 @@ bool grCorneria_801DDCE8(Ground_GObj* arg)
     return false;
 }
 
-/// #grCorneria_801DDCF0
+void grCorneria_801DDCF0(Vec3* vec)
+{
+    Ground* gp;
+    HSD_GObj* gobj;
+    PAD_STACK(4);
 
-/// #grCorneria_801DDD4C
+    gobj = Ground_801C2BA4(3);
+    gp = GET_GROUND(gobj);
+    vec->x = gp->gv.corneria.offset_x - gp->gv.corneria.xE4;
+    vec->y = gp->gv.corneria.offset_y.val - gp->gv.corneria.xE8;
+    vec->z = 0.0f;
+}
+
+void grCorneria_801DDD4C(Vec3* vec)
+{
+    Ground* gp;
+    HSD_GObj* gobj;
+    PAD_STACK(4);
+
+    gobj = Ground_801C2BA4(3);
+    gp = GET_GROUND(gobj);
+    vec->x = gp->gv.corneria.base_x + gp->gv.corneria.offset_x;
+    vec->y = gp->gv.corneria.base_y + gp->gv.corneria.offset_y.val;
+    vec->z = 0.0f;
+}
 
 /// #grCorneria_801DDDA8
 
@@ -224,19 +248,12 @@ void grCorneria_801DFC28(Ground_GObj* arg) {}
 
 void grCorneria_801DFC2C(Ground_GObj* gobj)
 {
-    Ground* gp = gobj->user_data;
-    struct grCorneria_GroundVars* cn = &gp->gv.corneria;
+    Ground* gp = GET_GROUND(gobj);
 
-    cn->xC6_flags.b0 = 0;
-    cn->offset_y.flags.b0 = 0;
-    cn->xC8 = 0;
-    cn->xCC = 0;
-    cn->xD0 = 0.0f;
-    cn->base_x = 0.0f;
-    cn->base_y = 0.0f;
-    cn->offset_x = 0.0f;
-    cn->xC4_flags.b0 = 0;
-    cn->xC4_flags.b1 = 0;
+    gp->gv.corneria.xC6.value = 0;
+    gp->gv.corneria.offset_y.flags.b0 = 0;
+    memzero(&gp->gv.corneria.xC8, 0x18);
+    gp->gv.corneria.xC4.value = 0;
     gp->x11_flags.b012 = 1;
 }
 bool grCorneria_801DFC90(Ground_GObj* arg)
@@ -251,14 +268,13 @@ void grCorneria_801DFEB4(Ground_GObj* arg) {}
 void grCorneria_801DFEB8(Ground_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
-    struct grCorneria_GroundVars* cn = &gp->gv.corneria;
 
-    cn->xC6_flags.b0 = 0;
+    gp->gv.corneria.xC6.flags.b0 = 0;
     grAnime_801C8138((HSD_GObj*) gobj, gp->map_id, 0);
-    cn->xC4_flags.b0 = 0;
-    cn->xC4_flags.b1 = 0;
+    gp->gv.corneria.xC4.value = 0;
     gp->x11_flags.b012 = 1;
 }
+
 bool grCorneria_801DFF18(Ground_GObj* arg)
 {
     return false;
@@ -268,7 +284,15 @@ bool grCorneria_801DFF18(Ground_GObj* arg)
 
 void grCorneria_801E013C(Ground_GObj* arg) {}
 
-/// #grCorneria_801E0140
+void grCorneria_801E0140(Ground_GObj* gobj)
+{
+    Ground* gp = gobj->user_data;
+
+    gp->gv.corneria.xC6.flags.b0 = 0;
+    grAnime_801C8138((HSD_GObj*) gobj, gp->map_id, 0);
+    gp->gv.corneria.xC4.value = 0;
+    gp->x11_flags.b012 = 1;
+}
 
 bool grCorneria_801E01A0(Ground_GObj* arg)
 {
@@ -372,7 +396,19 @@ void grCorneria_801E0E3C(Ground_GObj* arg) {}
 
 void grCorneria_801E0F30(Ground_GObj* arg) {}
 
-/// #grCorneria_801E0F34
+void grCorneria_801E0F34(Ground_GObj* gobj, int val)
+{
+    Ground* gp = GET_GROUND(gobj);
+    gp->gv.corneria.xCC = 0;
+    gp->gv.corneria.xC8 = 0;
+    if (val < 0) {
+        val = 0;
+    }
+    if (val >= 0x14u) {
+        val = 0x13;
+    }
+    *(int*) (&gp->gv.corneria.xC4) = val;
+}
 
 bool grCorneria_801E0F64(Ground_GObj* arg)
 {
@@ -414,9 +450,15 @@ void fn_801E12D0(Item_GObj* gobj, Ground* gr) {}
 
 /// #grCorneria_801E2228
 
-/// #fn_801E2454
+HSD_Generator* grCorneria_801E2454(Vec3* vec)
+{
+    return grLib_801C96F8(0x7534, 0x1E, vec);
+}
 
-/// #fn_801E2480
+HSD_Generator* grCorneria_801E2480(Vec3* vec)
+{
+    grLib_801C96F8(0x7530, 0x1E, vec);
+}
 
 /// #fn_801E24AC
 
@@ -438,7 +480,15 @@ void fn_801E12D0(Item_GObj* gobj, Ground* gr) {}
 
 /// #grCorneria_801E2C34
 
-/// #grCorneria_801E2CE8
+bool grCorneria_801E2CE8(void)
+{
+    if (stage_info.internal_stage_id == CORNERIA ||
+        stage_info.internal_stage_id == VENOM)
+    {
+        return true;
+    }
+    return false;
+}
 
 /// #grCorneria_801E2D14
 
@@ -446,7 +496,20 @@ void fn_801E12D0(Item_GObj* gobj, Ground* gr) {}
 
 /// #grCorneria_801E2E50
 
-/// #grCorneria_801E2EA0
+f32 grCorneria_801E2EA0(void)
+{
+    HSD_GObj* gobj;
+    Ground* gp;
+
+    gobj = Ground_801C2BA4(3);
+    if (gobj != NULL) {
+        gp = GET_GROUND(gobj);
+        if (gp != NULL) {
+            return gp->gv.corneria.xD0;
+        }
+    }
+    return 0.0f;
+}
 
 DynamicsDesc* grCorneria_801E2EE4(enum_t arg)
 {

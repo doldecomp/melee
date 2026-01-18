@@ -296,14 +296,20 @@ struct grKraid_GroundVars {
 };
 
 struct grCorneria_GroundVars {
-    struct {
-        u8 b0 : 1;
-        u8 b1 : 1;
-    } xC4_flags;
+    union {
+        struct {
+            u8 b0 : 1;
+            u8 b1 : 1;
+        } flags;
+        u8 value;
+    } xC4;
     u8 xC5;
-    struct {
-        u8 b0 : 1;
-    } xC6_flags;
+    union {
+        struct {
+            u8 b0 : 1;
+        } flags;
+        u8 value;
+    } xC6;
     u8 xC7;
     u32 xC8;
     u32 xCC;
