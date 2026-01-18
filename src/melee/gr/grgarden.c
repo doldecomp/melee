@@ -419,10 +419,10 @@ void grGarden_80203560(float param1, Vec3* vec)
 {
     HSD_Generator* gen = grLib_801C96F8(0x753A, 0x1E, vec);
     if (gen != NULL) {
-        gen = (HSD_Generator*) gen->appsrt;
-        gen->pos.x *= param1;
-        gen->pos.y *= param1;
-        gen->pos.z *= param1;
+        HSD_psAppSRT* srt = gen->appsrt;
+        srt->scale.x *= param1;
+        srt->scale.y *= param1;
+        srt->scale.z *= param1;
     }
 }
 

@@ -41,7 +41,7 @@
 /* 2DAE0C */ bool itLikelike_UnkMotion3_Anim(Item_GObj* gobj);
 /* 2DAE14 */ void itLikelike_UnkMotion3_Phys(Item_GObj* gobj);
 /* 2DAE30 */ bool itLikelike_UnkMotion3_Coll(Item_GObj* gobj);
-/* 2DAE6C */ UNK_RET it_802DAE6C(UNK_PARAMS);
+/* 2DAE6C */ void it_802DAE6C(Item_GObj* gobj);
 /* 2DAEA8 */ bool itLikelike_UnkMotion16_Anim(Item_GObj* gobj);
 /* 2DAFC8 */ void itLikelike_UnkMotion16_Phys(Item_GObj* gobj);
 /* 2DAFCC */ bool itLikelike_UnkMotion16_Coll(Item_GObj* gobj);

@@ -6,7 +6,7 @@
 #include "it/items/types.h"
 
 /* 2E05A0 */ void it_802E05A0(Item_GObj*);
-/* 2E0678 */ UNK_RET it_802E0678(UNK_PARAMS);
+/* 2E0678 */ void it_802E0678(Item_GObj* gobj);
 /* 2E06B4 */ bool itPatapata_UnkMotion1_Anim(Item_GObj* gobj);
 /* 2E06BC */ void itPatapata_UnkMotion1_Phys(Item_GObj* gobj);
 /* 2E06F8 */ bool itPatapata_UnkMotion1_Coll(Item_GObj* gobj);

@@ -493,6 +493,11 @@ typedef struct itSeakNeedleThrown_ItemVars {
     /* +C +DE0 */ f32 xDE0;
 } itSeakNeedleThrown_ItemVars;
 
+typedef struct itSeakChain_ItemVars {
+    /* +0 +DD4 */ char pad_0[0x8];
+    /* +8 +DDC */ HSD_GObj* x8;
+} itSeakChain_ItemVars;
+
 typedef struct itZeldaDinFireExplode_ItemVars {
     /* +0 ip+DD4 */ f32 xDD4;
     /* +4 ip+DD8 */ f32 xDD8;

@@ -27,6 +27,7 @@
 /* 1572D4 */ void ftCh_Damage2_IASA(HSD_GObj* gobj);
 /* 157318 */ void ftCh_Damage2_Phys(HSD_GObj* gobj);
 /* 157378 */ void ftCh_Damage2_Coll(HSD_GObj* gobj);
+/* 15737C */ void ftCh_Init_8015737C(HSD_GObj* gobj);
 /* 1573C8 */ void ftCh_WaitSweep_Anim(HSD_GObj* gobj);
 /* 157404 */ void ftCh_WaitSweep_Phys(HSD_GObj* gobj);
 /* 157424 */ void ftCh_WaitSweep_IASA(HSD_GObj* gobj);
@@ -43,6 +44,7 @@
 /* 1576B0 */ void ftCh_Slap_Anim(HSD_GObj* gobj);
 /* 157724 */ void ftCh_Slap_IASA(HSD_GObj* gobj);
 /* 157768 */ void ftCh_Slap_Phys(HSD_GObj* gobj);
+/* 1577F8 */ void ftCh_Init_801577F8(HSD_GObj* gobj);
 /* 157844 */ void ftCh_Walk2_Anim(HSD_GObj* gobj);
 /* 157880 */ void ftCh_Walk2_IASA(HSD_GObj* gobj);
 /* 1578C4 */ void ftCh_Walk2_Phys(HSD_GObj* gobj);
@@ -51,10 +53,12 @@
 /* 15798C */ void ftCh_WalkLoop_IASA(HSD_GObj* gobj);
 /* 1579D0 */ void ftCh_WalkLoop_Phys(HSD_GObj* gobj);
 /* 1579F0 */ void ftCh_WalkLoop_Coll(HSD_GObj* gobj);
+/* 1579F4 */ void ftCh_Init_801579F4(HSD_GObj* gobj);
 /* 157A40 */ void ftCh_WalkWait_Anim(HSD_GObj* gobj);
 /* 157ABC */ void ftCh_WalkWait_IASA(HSD_GObj* gobj);
 /* 157B00 */ void ftCh_WalkWait_Phys(HSD_GObj* gobj);
 /* 157B54 */ void ftCh_WalkWait_Coll(HSD_GObj* gobj);
+/* 157B58 */ void ftCh_Init_80157B58(HSD_GObj* gobj);
 /* 157BAC */ void ftCh_WalkShoot_Anim(HSD_GObj* gobj);
 /* 157BE8 */ void ftCh_WalkShoot_IASA(HSD_GObj* gobj);
 /* 157C2C */ void ftCh_WalkShoot_Phys(HSD_GObj* gobj);
@@ -135,6 +139,7 @@
 /* 159E8C */ void ftCh_Wait1_1_IASA(HSD_GObj* gobj);
 /* 159ED0 */ void ftCh_Wait1_1_Phys(HSD_GObj* gobj);
 /* 159F3C */ void ftCh_Wait1_1_Coll(HSD_GObj* gobj);
+/* 159F40 */ void ftCh_Init_80159F40(HSD_GObj* gobj);
 /* 159F8C */ void ftCh_Grab_Anim(HSD_GObj* gobj);
 /* 159FC8 */ void ftCh_Grab_IASA(HSD_GObj* gobj);
 /* 15A00C */ void ftCh_Grab_Phys(HSD_GObj* gobj);
@@ -172,6 +177,7 @@
 /* 15A820 */ void ftCh_Fail_IASA(HSD_GObj* gobj);
 /* 15A864 */ void ftCh_Fail_Phys(HSD_GObj* gobj);
 /* 15A884 */ void ftCh_Fail_Coll(HSD_GObj* gobj);
+/* 15A888 */ void ftCh_GrabUnk1_8015A888(HSD_GObj* gobj);
 /* 15A8D4 */ void ftCh_TagCrush_Anim(HSD_GObj* gobj);
 /* 15A910 */ void ftCh_TagCrush_IASA(HSD_GObj* gobj);
 /* 15A954 */ void ftCh_TagCrush_Phys(HSD_GObj* gobj);

@@ -902,7 +902,7 @@ void ftPp_SpecialHi_80121D40(Fighter_GObj* gobj)
 
 void ftPp_SpecialHi_80121DA0(Fighter_GObj* gobj)
 {
-    Fighter_ChangeMotionState(gobj, 0x15C, 0, 0, 1.0f, 0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, 0x15C, 0, 0.0f, 1.0f, 0.0f, NULL);
 }
 void ftPp_SpecialHi_80121DD8(Fighter_GObj* gobj)
 {

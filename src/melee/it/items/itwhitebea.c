@@ -101,7 +101,12 @@ void it_802E37A4(Item_GObj* gobj)
 
 /// #it_802E3884
 
-/// #fn_802E398C
+void fn_802E398C(Item_GObj* gobj)
+{
+    PAD_STACK(16);
+    it_8027CAD8(gobj);
+    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+}
 
 bool itWhitebea_UnkMotion0_Anim(Item_GObj* gobj)
 {

@@ -88,7 +88,12 @@ bool itRshell_UnkMotion1_Coll(Item_GObj* gobj)
     return false;
 }
 
-/// #it_3F14_Logic15_PickedUp
+void it_3F14_Logic15_PickedUp(Item_GObj* gobj)
+{
+    PAD_STACK(8);
+    it_80275474(gobj);
+    Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
+}
 
 bool itRshell_UnkMotion2_Anim(Item_GObj* gobj)
 {

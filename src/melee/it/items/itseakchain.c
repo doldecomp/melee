@@ -76,7 +76,7 @@ void it_2725_Logic54_EvtUnk(Item_GObj* arg0, Item_GObj* arg1)
 {
     Item* item = GET_ITEM((HSD_GObj*) arg0);
     it_8026B894(arg0, (HSD_GObj*) arg1);
-    if ((HSD_GObj*) item->xDD4_itemVar.linkhookshot.x8 == arg1) {
-        item->xDD4_itemVar.linkhookshot.x8 = NULL;
+    if ((HSD_GObj*) item->xDD4_itemVar.seakchain.x8 == arg1) {
+        item->xDD4_itemVar.seakchain.x8 = NULL;
     }
 }

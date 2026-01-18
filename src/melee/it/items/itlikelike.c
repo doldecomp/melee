@@ -143,7 +143,12 @@ bool itLikelike_UnkMotion3_Coll(Item_GObj* gobj)
     return it_8027C794(gobj);
 }
 
-/// #it_802DAE6C
+void it_802DAE6C(Item_GObj* gobj)
+{
+    PAD_STACK(16);
+    it_80273454(gobj);
+    Item_80268E5C(gobj, 0x10, ITEM_ANIM_UPDATE);
+}
 
 /// #itLikelike_UnkMotion16_Anim
 

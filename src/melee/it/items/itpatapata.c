@@ -11,7 +11,12 @@
 
 /// #it_802E05A0
 
-/// #it_802E0678
+void it_802E0678(Item_GObj* gobj)
+{
+    PAD_STACK(8);
+    it_8027CAD8(gobj);
+    it_802E1648(gobj, 1, 2);
+}
 
 bool itPatapata_UnkMotion1_Anim(Item_GObj* gobj)
 {
