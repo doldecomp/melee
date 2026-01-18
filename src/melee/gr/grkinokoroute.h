@@ -23,7 +23,7 @@
 /* 207B20 */ bool grKinokoRoute_80207B20(Ground_GObj*);
 /* 207B28 */ void grKinokoRoute_80207B28(Ground_GObj*);
 /* 207B2C */ void grKinokoRoute_80207B2C(Ground_GObj*);
-/* 207B30 */ UNK_RET fn_80207B30(UNK_PARAMS);
+/* 207B30 */ void fn_80207B30(HSD_GObj*);
 /* 207B5C */ void grKinokoRoute_80207B5C(Ground_GObj*);
 /* 207C80 */ bool grKinokoRoute_80207C80(Ground_GObj*);
 /* 207C88 */ void grKinokoRoute_80207C88(Ground_GObj*);
@@ -33,7 +33,7 @@
 /* 2084B4 */ UNK_RET fn_802084B4(UNK_PARAMS);
 /* 208564 */ UNK_RET grKinokoRoute_80208564(UNK_PARAMS);
 /* 208660 */ UNK_RET fn_80208660(UNK_PARAMS);
-/* 2086EC */ UNK_RET grKinokoRoute_802086EC(UNK_PARAMS);
+/* 2086EC */ void grKinokoRoute_802086EC(Vec3*, f32);
 /* 208754 */ DynamicsDesc* grKinokoRoute_80208754(enum_t);
 /* 20875C */ bool grKinokoRoute_8020875C(Vec3*, int arg, HSD_JObj* jobj);
 

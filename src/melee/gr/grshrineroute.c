@@ -6,6 +6,7 @@
 
 #include "gr/grmaterial.h"
 #include "gr/inlines.h"
+#include "lb/lb_00B0.h"
 
 extern float grNKr_804DB868;
 
@@ -32,7 +33,11 @@ bool grShrineRoute_802088B8(void)
 
 /// #grShrineRoute_802088C0
 
-/// #grShrineRoute_802089AC
+void grShrineRoute_802089AC(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    grAnime_801C8138(gobj, gp->map_id, 0);
+}
 
 bool grShrineRoute_802089D8(Ground_GObj* arg)
 {
@@ -97,7 +102,11 @@ bool grShrineRoute_8020A214(Ground_GObj* arg)
 
 void grShrineRoute_8020A864(Ground_GObj* arg) {}
 
-/// #grShrineRoute_8020A868
+void grShrineRoute_8020A868(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    grAnime_801C8138(gobj, gp->map_id, 0);
+}
 
 bool grShrineRoute_8020A894(Ground_GObj* arg)
 {
@@ -140,4 +149,13 @@ DynamicsDesc* grShrineRoute_8020B104(enum_t arg)
     return false;
 }
 
-/// #grShrineRoute_8020B10C
+bool grShrineRoute_8020B10C(Vec3* a, int b, HSD_JObj* jobj)
+{
+    Vec3 vec;
+    lb_8000B1CC(jobj, NULL, &vec);
+    if (a->y > vec.y) {
+        return true;
+    } else {
+        return false;
+    }
+}

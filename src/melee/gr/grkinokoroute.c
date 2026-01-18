@@ -5,8 +5,13 @@
 #include <platform.h>
 
 #include "cm/camera.h"
+#include "ft/ftdevice.h"
 #include "ft/ftlib.h"
+#include "gr/grlib.h"
 #include "gr/inlines.h"
+#include "lb/lb_00B0.h"
+
+#include <baselib/psstructs.h>
 
 extern float grNKr_804DB830;
 
@@ -78,7 +83,10 @@ void grKinokoRoute_80207B28(Ground_GObj* arg) {}
 
 void grKinokoRoute_80207B2C(Ground_GObj* arg) {}
 
-/// #fn_80207B30
+void fn_80207B30(HSD_GObj* gobj)
+{
+    ftCo_800C07F8(gobj, 6, fn_80208660);
+}
 
 /// #grKinokoRoute_80207B5C
 
@@ -108,11 +116,29 @@ bool fn_80208480(bool arg)
 
 /// #fn_80208660
 
-/// #grKinokoRoute_802086EC
+void grKinokoRoute_802086EC(Vec3* arg0, f32 arg8)
+{
+    HSD_Generator* gen = grLib_801C96F8(0x7530, 0x1E, arg0);
+    if (gen != NULL) {
+        HSD_psAppSRT* srt = gen->appsrt;
+        srt->scale.x *= arg8;
+        srt->scale.y *= arg8;
+        srt->scale.z *= arg8;
+    }
+}
 
 DynamicsDesc* grKinokoRoute_80208754(enum_t arg)
 {
     return false;
 }
 
-/// #grKinokoRoute_8020875C
+bool grKinokoRoute_8020875C(Vec3* a, int b, HSD_JObj* jobj)
+{
+    Vec3 vec;
+    lb_8000B1CC(jobj, NULL, &vec);
+    if (a->y > vec.y) {
+        return true;
+    } else {
+        return false;
+    }
+}

@@ -8934,9 +8934,8 @@ void it_8027978C(Item_GObj* item_gobj, CommandInfo* cmd)
 void it_80279888(Item_GObj* item_gobj, CommandInfo* cmd)
 {
     PAD_STACK(4);
-    // it_80273598(item_gobj, ((u32) cmd->x8_bits->x0 >> 13U) & 0x1FFF,
-    // cmd->x8_bits->x2 & 0x1FFF);
-    // cmd->x8 = cmd->x8 + 4;
+    it_80273598(item_gobj, cmd->u->unk33.unk0, cmd->u->unk33.unk1);
+    NEXT_CMD(cmd);
 }
 
 void it_802798D4(Item_GObj* item_gobj, CommandInfo* cmd)

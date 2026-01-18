@@ -93,7 +93,13 @@ void itEvyoshiegg_UnkMotion3_Phys(Item_GObj* gobj)
     it_80274658(gobj, it_804D6D28->x68_float);
 }
 
-/// #itEvyoshiegg_UnkMotion3_Coll
+bool itEvyoshiegg_UnkMotion3_Coll(Item_GObj* gobj)
+{
+    if (it_8026DA08(gobj)) {
+        return it_3F14_Logic42_DmgDealt(gobj);
+    }
+    return false;
+}
 
 /// #itEvyoshiegg_UnkMotion5_Anim
 

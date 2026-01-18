@@ -60,7 +60,9 @@ void it_2725_Logic71_Destroyed(Item_GObj* item_gobj)
 
 void it_802C6328(Item_GObj* item_gobj)
 {
+    int pad[1];
     Item* item = GET_ITEM(item_gobj);
+
     if (item != NULL) {
         if (item->owner != NULL) {
             ftGw_Attack11_ItemGreenhouseSetFlag(item->owner);
@@ -113,6 +115,28 @@ void it_802C6480(Item_GObj* item_gobj)
 void it_802C64A8(Item_GObj* item_gobj)
 {
     Item_80268E5C((HSD_GObj*) item_gobj, 3, ITEM_ANIM_UPDATE);
+}
+
+bool itGamewatchgreenhouse_UnkMotion3_Anim(Item_GObj* item_gobj)
+{
+    int pad[3];
+    Item* item;
+    bool var_r3;
+
+    item = GET_ITEM(item_gobj);
+    if (item->owner != NULL) {
+        var_r3 = ftGw_Attack11_ItemGreenhouse_CheckAll(item->owner);
+    } else {
+        var_r3 = true;
+    }
+    if (var_r3) {
+        item = GET_ITEM(item_gobj);
+        if (item->owner != NULL) {
+            ftGw_Attack11_ItemGreenhouseSetFlag(item->owner);
+        }
+        return true;
+    }
+    return false;
 }
 
 bool itGamewatchgreenhouse_UnkMotion2_Anim(Item_GObj* item_gobj)

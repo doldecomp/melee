@@ -10,7 +10,9 @@
 #include "baselib/jobj.h"
 #include "gr/inlines.h"
 #include "gr/types.h"
+#include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
+#include "gr/grzakogenerator.h"
 
 u8 tmpPadData[168] = { 0 };
 
@@ -73,7 +75,10 @@ void grBigBlue_801E57BC(bool arg) {}
 
 void grBigBlue_801E59C8(void) {}
 
-/// #grBigBlue_801E59CC
+void grBigBlue_801E59CC(void)
+{
+    grZakoGenerator_801CAE04(0);
+}
 
 bool grBigBlue_801E59F0(void)
 {
@@ -216,7 +221,11 @@ bool grBigBlue_801E687C(Ground_GObj* arg)
     return false;
 }
 
-/// #grBigBlue_801E6884
+void grBigBlue_801E6884(Ground_GObj* gobj)
+{
+    grBigBlue_801EF424();
+    Ground_801C2FE0(gobj);
+}
 
 /// #grBigBlue_801E68B8
 
@@ -306,4 +315,13 @@ DynamicsDesc* grBigBlue_801EFC0C(enum_t arg)
     return false;
 }
 
-/// #grBigBlue_801EFC14
+bool grBigBlue_801EFC14(Vec3* a, int b, HSD_JObj* jobj)
+{
+    Vec3 vec;
+    lb_8000B1CC(jobj, NULL, &vec);
+    if (a->y > vec.y) {
+        return true;
+    } else {
+        return false;
+    }
+}

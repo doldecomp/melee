@@ -30,6 +30,7 @@ typedef struct BgFlashData {
 extern BgFlashData lbl_80433658;
 
 #include <baselib/gobj.h>
+#include <baselib/objalloc.h>
 #include <melee/lb/lb_00F9.h>
 
 /* 021A10 */ static void lbBgFlash_80021A10(f32 arg8);
@@ -41,6 +42,7 @@ extern BgFlashData lbl_80433658;
 extern s32 lbl_804D3840;
 extern s32 lbl_804D3844;
 extern s32 lbl_804D3848;
+extern s32 lbl_804D384C;
 
 typedef struct BgFlashData2 {
     u8 state;
@@ -142,7 +144,14 @@ void lbBgFlash_8002063C(int count)
     lbl_80433658.state.mode = 0;
 }
 
-/// #lbBgFlash_80020688
+void lbBgFlash_80020688(int count)
+{
+    if (count < 1) {
+        count = 1;
+    }
+    lbBgFlash_800206D4(&lbl_804D384C, &lbl_804D3848, count);
+    lbl_80433658.state.mode = 0;
+}
 
 /// #lbBgFlash_800206D4
 
@@ -166,7 +175,12 @@ void lbBgFlash_InitState(int* duration)
 
 /// #lbBgFlash_80021410
 
-/// #fn_800219E4
+extern HSD_ObjAllocData lbl_804336A0;
+
+void fn_800219E4(void* arg0)
+{
+    HSD_ObjFree(&lbl_804336A0, arg0);
+}
 
 f32 lbl_804D63D8;
 

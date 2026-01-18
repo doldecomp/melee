@@ -9,6 +9,8 @@
 #include "it/it_266F.h"
 #include "it/it_2725.h"
 #include "it/item.h"
+#include "it/it_26B1.h"
+#include "ef/eflib.h"
 
 /* 2C23D4 */ static bool itClimbersblizzard_UnkMotion0_Coll(Item_GObj* gobj);
 
@@ -25,13 +27,25 @@ void it_802C17DC(Item_GObj* gobj)
 
 /// #it_802C1854
 
-/// #it_802C1950
+void it_802C1950(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->x40_vel.z = 0.0f;
+    ip->x40_vel.y = 0.0f;
+    ip->x40_vel.x = 0.0f;
+    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+}
 
 /// #itClimbersice_UnkMotion0_Anim
 
 void itClimbersice_UnkMotion0_Phys(Item_GObj* gobj) {}
 
-/// #itClimbersice_UnkMotion0_Coll
+bool itClimbersice_UnkMotion0_Coll(Item_GObj* gobj)
+{
+    it_8026D62C(gobj, (HSD_GObjEvent) it_802C1A58);
+    it_80276CB8(gobj);
+    return false;
+}
 
 void it_802C1A58(Item_GObj* gobj)
 {
@@ -72,7 +86,11 @@ bool itClimbersice_UnkMotion2_Anim(Item_GObj* gobj)
 
 /// #itClimbersice_UnkMotion2_Coll
 
-/// #fn_802C1D44
+void fn_802C1D44(Item_GObj* gobj)
+{
+    Item_80268E5C(gobj, 3, ITEM_ANIM_UPDATE);
+    efLib_DestroyAll(gobj);
+}
 
 bool itClimbersice_UnkMotion3_Anim(Item_GObj* gobj)
 {
@@ -115,4 +133,11 @@ bool it_2725_Logic90_ShieldBounced(Item_GObj* gobj)
     return itColl_BounceOffShield(gobj);
 }
 
-/// #it_2725_Logic90_EvtUnk
+void it_2725_Logic90_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->xDD4_itemVar.climbersice.x0 == ref_gobj) {
+        ip->xDD4_itemVar.climbersice.x0 = NULL;
+    }
+    it_8026B894(gobj, ref_gobj);
+}

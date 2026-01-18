@@ -37,7 +37,13 @@ void it_3F14_Logic40_Dropped(Item_GObj* gobj)
 
 /// #itHammerhead_UnkMotion2_Anim
 
-/// #itHammerhead_UnkMotion2_Phys
+void itHammerhead_UnkMotion2_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ItemAttr* attr = ip->xCC_item_attr;
+    it_80272860(gobj, attr->x10_fall_speed, attr->x14_fall_speed_max);
+    it_80274658(gobj, it_804D6D28->x68_float);
+}
 
 bool itHammerhead_UnkMotion2_Coll(Item_GObj* gobj)
 {

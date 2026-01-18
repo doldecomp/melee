@@ -219,23 +219,8 @@ void ftCo_ThrownCopyStar_IASA(Fighter_GObj* gobj) {}
 
 void ftCo_ThrownCopyStar_Phys(Fighter_GObj* gobj)
 {
-    u8 _[8] = { 0 };
     Fighter* fp = GET_FIGHTER(gobj);
-    float dist = sqrtf(SQ(fp->self_vel.x) + SQ(fp->self_vel.y));
-    if (dist > fp->mv.co.thrownkirby.x4) {
-        fp->self_vel.x =
-            fp->self_vel.x * (dist - fp->mv.co.thrownkirby.x4) / dist;
-        fp->self_vel.y =
-            fp->self_vel.y * (dist - fp->mv.co.thrownkirby.x4) / dist;
-        if (fp->self_vel.y < 0) {
-            fp->facing_dir = -1;
-        } else {
-            fp->facing_dir = +1;
-        }
-    } else {
-        fp->self_vel.x = 0;
-    }
-    fp->grab_timer -= ftKb_SpecialN_800F5AC0();
+    inlineA0(gobj);
     fp->mv.co.thrownkirby.x14 =
         ftCommon_GrabMash(fp, ftKb_SpecialN_800F5AD8());
     if (fp->grab_timer <= 0) {

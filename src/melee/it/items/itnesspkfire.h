@@ -10,7 +10,7 @@
 #include <dolphin/mtx.h>
 
 /* 2AA054 */ void it_802AA054(Item_GObj*, Vec3*, Vec3*, float, float);
-/* 2AA1D8 */ UNK_RET it_802AA1D8(UNK_PARAMS);
+/* 2AA1D8 */ void it_802AA1D8(Item_GObj*);
 /* 2AA22C */ bool itNesspkfire_UnkMotion0_Anim(Item_GObj* gobj);
 /* 2AA264 */ bool itNesspkfire_UnkMotion0_Coll(Item_GObj* gobj);
 /* 2AA284 */ bool it_2725_Logic23_DmgDealt(Item_GObj*);

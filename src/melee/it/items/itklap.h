@@ -10,7 +10,7 @@
 /* 2E1820 */ void it_802E1820(Item_GObj*);
 /* 2E1874 */ void it_2725_Logic10_Destroyed(Item_GObj*);
 /* 2E18B4 */ UNK_RET it_802E18B4(UNK_PARAMS);
-/* 2E1930 */ UNK_RET it_802E1930(UNK_PARAMS);
+/* 2E1930 */ void it_802E1930(Item_GObj*);
 /* 2E1968 */ bool itKlap_UnkMotion1_Anim(Item_GObj* gobj);
 /* 2E1970 */ void itKlap_UnkMotion1_Phys(Item_GObj* gobj);
 /* 2E19FC */ bool itKlap_UnkMotion1_Coll(Item_GObj* gobj);

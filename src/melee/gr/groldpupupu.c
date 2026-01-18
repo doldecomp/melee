@@ -127,7 +127,29 @@ bool grOldPupupu_80211284(Ground_GObj* gobj)
     return false;
 }
 
-/// #grOldPupupu_8021128C
+bool grOldPupupu_8021128C(Vec* vec, f32 maxX, f32 minX, f32 maxY, f32 minY)
+{
+    float maxY_actual;
+    float maxX_actual;
+    if (maxX > minX) {
+        maxX_actual = maxX;
+    } else {
+        maxX_actual = minX;
+        minX = maxX;
+    }
+    if (maxY > minY) {
+        maxY_actual = maxY;
+    } else {
+        maxY_actual = minY;
+        minY = maxY;
+    }
+    if (minX < vec->x && vec->x < maxX_actual) {
+        if (minY < vec->y && vec->y < maxY_actual) {
+            return true;
+        }
+    }
+    return false;
+}
 
 /// #fn_802112F4
 

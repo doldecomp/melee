@@ -3,10 +3,12 @@
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "ef/eflib.h"
+#include "it/item.h"
 
 /// #it_802CE710
 
-void it_802CE7CC(void) {}
+void it_802CE7CC(Item_GObj* gobj) {}
 
 void it_802CE7D0(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
@@ -33,7 +35,14 @@ bool itUnknown_UnkMotion1_Coll(Item_GObj* gobj)
     return false;
 }
 
-/// #it_802CEC24
+void it_802CEC24(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    it_802762BC(ip);
+    Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
+    ip->entered_hitlag = efLib_PauseAll;
+    ip->exited_hitlag = efLib_ResumeAll;
+}
 
 bool itUnknown_UnkMotion2_Anim(Item_GObj* gobj)
 {
@@ -45,7 +54,7 @@ void itUnknown_UnkMotion2_Phys(Item_GObj* gobj) {}
 
 bool itUnknown_UnkMotion2_Coll(Item_GObj* gobj)
 {
-    return false;
+    return it_8027A118(gobj, it_802CE7CC);
 }
 
 /// #it_802CED54
@@ -57,7 +66,13 @@ void it_2725_Logic38_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
     it_8026B894(gobj, ref_gobj);
 }
 
-/// #it_802CF0D4
+void it_802CF0D4(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+    ip->entered_hitlag = efLib_PauseAll;
+    ip->exited_hitlag = efLib_ResumeAll;
+}
 
 bool it_802CF120(Item_GObj* gobj)
 {

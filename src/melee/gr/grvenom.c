@@ -2,8 +2,16 @@
 
 #include <platform.h>
 
+#include "gr/grcorneria.h"
+#include "gr/stage.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
+
+#include <baselib/aobj.h>
+#include <baselib/gobj.h>
+#include <baselib/lobj.h>
+#include "if/ifcoget.h"
+#include "if/ifstatus.h"
 
 /// #grVenom_8020362C
 
@@ -11,7 +19,25 @@ void grVenom_80203B14(bool arg) {}
 
 /// #grVenom_80203B18
 
-/// #grVenom_80203DD0
+void grVenom_80203DD0(void)
+{
+    HSD_GObj* gobj;
+    HSD_LObj* lobj;
+
+    gobj = HSD_GObj_Entities->xC;
+    while (gobj != NULL) {
+        if (HSD_GObjGetClassifier(gobj) == 0xC) {
+            lobj = GET_LOBJ(gobj);
+            while (lobj != NULL) {
+                HSD_ForeachAnim(lobj, LOBJ_TYPE, ALL_TYPE_MASK,
+                                HSD_AObjSetFlags, AOBJ_ARG_AU, AOBJ_LOOP);
+                lobj = HSD_LObjGetNext(lobj);
+            }
+            return;
+        }
+        gobj = HSD_GObjGetNext(gobj);
+    }
+}
 
 void grVenom_80203E80(void)
 {
@@ -86,7 +112,11 @@ bool grVenom_80204CE4(Ground_GObj* arg)
 
 /// #grVenom_80204CEC
 
-/// #grVenom_80204DB0
+void grVenom_80204DB0(Ground_GObj* gobj)
+{
+    ifStatus_802F68F0();
+    un_802FF620();
+}
 
 /// #grVenom_80204DD4
 
@@ -133,7 +163,22 @@ bool grVenom_80205DF0(Ground_GObj* arg)
     return false;
 }
 
-/// #grVenom_80205DF8
+s32 grVenom_80205DF8(Vec3* pos)
+{
+    if (pos->x > Stage_GetBlastZoneRightOffset()) {
+        return 1;
+    }
+    if (pos->x < Stage_GetBlastZoneLeftOffset()) {
+        return 1;
+    }
+    if (pos->y > Stage_GetBlastZoneTopOffset()) {
+        return 1;
+    }
+    if (pos->y < Stage_GetBlastZoneBottomOffset()) {
+        return 1;
+    }
+    return 0;
+}
 
 /// #grVenom_80205E84
 
@@ -155,14 +200,22 @@ void grVenom_80206B70(Ground_GObj* arg)
 
 void grVenom_80206B90(Ground_GObj* arg) {}
 
-/// #grVenom_80206B94
+void grVenom_80206B94(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    grCorneria_801E2550(gobj, &gp->gv.corneria);
+}
 
 bool grVenom_80206BBC(Ground_GObj* arg)
 {
     return false;
 }
 
-/// #grVenom_80206BC4
+void grVenom_80206BC4(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    grCorneria_801E277C(gobj, &gp->gv.corneria);
+}
 
 void grVenom_80206BEC(Ground_GObj* arg) {}
 

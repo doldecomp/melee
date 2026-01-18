@@ -11,6 +11,8 @@
 #include "stage.h"
 #include "types.h"
 
+#include "if/ifcoget.h"
+#include "if/ifstatus.h"
 #include "lb/lb_00B0.h"
 
 #include <baselib/gobj.h>
@@ -26,7 +28,10 @@
 
 /// #grCorneria_801DD478
 
-/// #grCorneria_801DD508
+void grCorneria_801DD508(void)
+{
+    grZakoGenerator_801CAE04(0);
+}
 
 bool grCorneria_801DD52C(void)
 {
@@ -344,10 +349,10 @@ bool grCorneria_801E0D28(Ground_GObj* arg)
 
 void grCorneria_801E0DE0(Ground_GObj* arg) {}
 
-s32 grCorneria_801E0DE4(Ground_GObj* gobj)
+void grCorneria_801E0DE4(Ground_GObj* gobj)
 {
     Ground* gr = GET_GROUND(gobj);
-    return grCorneria_801E2550(gobj, &gr->gv.corneria);
+    grCorneria_801E2550(gobj, &gr->gv.corneria);
 }
 
 bool grCorneria_801E0E0C(Ground_GObj* arg)
@@ -355,7 +360,11 @@ bool grCorneria_801E0E0C(Ground_GObj* arg)
     return false;
 }
 
-/// #grCorneria_801E0E14
+void grCorneria_801E0E14(Ground_GObj* gobj)
+{
+    Ground* gr = GET_GROUND(gobj);
+    grCorneria_801E277C(gobj, &gr->gv.corneria);
+}
 
 void grCorneria_801E0E3C(Ground_GObj* arg) {}
 
@@ -372,7 +381,11 @@ bool grCorneria_801E0F64(Ground_GObj* arg)
 
 /// #grCorneria_801E0F6C
 
-/// #grCorneria_801E1030
+void grCorneria_801E1030(Ground_GObj* gobj)
+{
+    ifStatus_802F68F0();
+    un_802FF620();
+}
 
 void grCorneria_801E1054(Ground_GObj* arg) {}
 

@@ -4,16 +4,36 @@
 #include <platform.h>
 
 #include "it/forward.h"
+#include "it/types.h"
+
+#include <baselib/gobj.h>
 
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/inlines.h"
+#include "it/item.h"
 
 /// #it_802AA054
 
-/// #it_802AA1D8
+void it_802AA1D8(Item_GObj* item_gobj)
+{
+    Item* item = GET_ITEM(item_gobj);
+    itNessPKFirepillarAttributes* attrs =
+        item->xC4_article_data->x4_specialAttributes;
+    Item_80268E5C(item_gobj, 0, ITEM_ANIM_UPDATE);
+    it_80275158(item_gobj, attrs->x0);
+}
 
-/// #itNesspkfire_UnkMotion0_Anim
+bool itNesspkfire_UnkMotion0_Anim(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    ip->xD44_lifeTimer--;
+    if (ip->xD44_lifeTimer <= 0.0f) {
+        return true;
+    }
+    return false;
+}
 
 bool itNesspkfire_UnkMotion0_Coll(Item_GObj* gobj)
 {

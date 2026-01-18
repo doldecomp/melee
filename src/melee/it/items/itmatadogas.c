@@ -7,6 +7,8 @@
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "ef/eflib.h"
+#include "it/item.h"
 
 /// #it_802CAFD4
 
@@ -45,7 +47,14 @@ bool itMatadogas_UnkMotion1_Coll(Item_GObj* gobj)
 
 /// #it_802CB2B0
 
-/// #it_802CB350
+void it_802CB350(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    it_802762BC(ip);
+    Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
+    ip->entered_hitlag = efLib_PauseAll;
+    ip->exited_hitlag = efLib_ResumeAll;
+}
 
 bool itMatadogas_UnkMotion2_Anim(Item_GObj* gobj)
 {

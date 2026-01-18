@@ -616,7 +616,8 @@
 /* 100E0C */ /// #fn_80100E0C
 /* 100F60 */ void fn_80100F60(Fighter_GObj* gobj);
 /* 100F94 */ void ftKb_SpecialNPr_80100F94(Fighter_GObj* gobj);
-/* 1010D4 */ void ftKb_SpecialNPr_801010D4(Fighter_GObj* gobj);
+/* 1010D4 */ void ftKb_SpecialNPr_801010D4(Fighter_GObj* gobj, bool unk,
+                                           MotionFlags flags, float anim_start);
 /* 10131C */ void ftKb_SpecialNPr_8010131C(Fighter_GObj* gobj);
 /* 10140C */ void ftKb_SpecialNPr_8010140C(Fighter_GObj* gobj);
 /* 101560 */ void ftKb_SpecialNPr_80101560(Fighter_GObj* gobj);

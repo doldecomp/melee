@@ -13,6 +13,7 @@
 #include "gr/grmaterial.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
+#include "gr/inlines.h"
 #include "it/it_26B1.h"
 #include "lb/lb_00B0.h"
 
@@ -59,7 +60,12 @@ bool grCastle_801CD4C8(void)
 
 /// #grCastle_801CD4D0
 
-/// #grCastle_801CD5BC
+void grCastle_801CD5BC(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    grAnime_801C8138(gobj, gp->map_id, 0);
+    gp->x11_flags.b012 = 2;
+}
 
 bool grCastle_801CD600(Ground_GObj* gobj)
 {
@@ -296,10 +302,10 @@ void grCastle_801D0A9C(Vec3* arg0, f32 arg8)
 {
     HSD_Generator* gen = grLib_801C96F8(0x7530, 0x1E, arg0);
     if (gen != NULL) {
-        gen = (HSD_Generator*) gen->appsrt;
-        gen->pos.x *= arg8;
-        gen->pos.y *= arg8;
-        gen->pos.z *= arg8;
+        HSD_psAppSRT* srt = gen->appsrt;
+        srt->scale.x *= arg8;
+        srt->scale.y *= arg8;
+        srt->scale.z *= arg8;
     }
 }
 

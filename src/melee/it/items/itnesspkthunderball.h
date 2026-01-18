@@ -10,8 +10,8 @@
 #include <dolphin/mtx.h>
 
 /* 2AB3F0 */ void it_802AB3F0(Item_GObj*, void*, s32);
-/* 2AB468 */ UNK_RET it_802AB468(UNK_PARAMS);
-/* 2AB4B8 */ UNK_RET it_802AB4B8(UNK_PARAMS);
+/* 2AB468 */ void it_802AB468(Item_GObj*, f32*, s32);
+/* 2AB4B8 */ bool it_802AB4B8(Item_GObj*, CollData*);
 /* 2AB568 */ HSD_GObj* it_802AB568(Item_GObj*);
 /* 2AB58C */ HSD_GObj* it_802AB58C(Item_GObj* owner, Vec3* pos,
                                    float facing_dir);

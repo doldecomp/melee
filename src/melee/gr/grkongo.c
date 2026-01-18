@@ -1456,4 +1456,13 @@ DynamicsDesc* grKongo_801D8444(enum_t arg)
     return false;
 }
 
-/// #grKongo_801D844C
+bool grKongo_801D844C(Vec3* a, int b, HSD_JObj* jobj)
+{
+    Vec3 vec;
+    lb_8000B1CC(jobj, NULL, &vec);
+    if (a->y > vec.y) {
+        return true;
+    } else {
+        return false;
+    }
+}

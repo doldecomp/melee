@@ -3,6 +3,20 @@
 #include "ft/chara/ftMario/ftMr_SpecialS.h"
 #include "it/inlines.h"
 #include "it/it_26B1.h"
+#include "it/item.h"
+
+void it_802B2674(Item_GObj* item_gobj)
+{
+    int pad[1];
+    Item* item = GET_ITEM(item_gobj);
+
+    if (item != NULL) {
+        if (item->owner != NULL) {
+            ftMr_SpecialS_Reset(item->owner);
+        }
+        Item_8026A8EC(item_gobj);
+    }
+}
 
 void it_802B26C0(Item_GObj* gobj)
 {

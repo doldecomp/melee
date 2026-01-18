@@ -538,6 +538,7 @@ struct Item {
         itLizardon_ItemVars lizardon;
         itLucky_ItemVars lucky;
         itClimbersBlizzard_ItemVars climbersblizzard;
+        itClimbersIce_ItemVars climbersice;
         itCoin_ItemVars coin;
         itDrMarioPill_ItemVars drmariopill;
         itEgg_ItemVars egg;
@@ -566,6 +567,7 @@ struct Item {
         itKusudama_ItemVars kusudama;
         itKlap_ItemVars klap;
         itLeadead_ItemVars leadead;
+        itLikelike_ItemVars likelike;
         itLGun_ItemVars lgun;
         itLGunBeam_ItemVars lgunbeam;
         itLGunRay_ItemVars lgunray;
@@ -579,15 +581,18 @@ struct Item {
         itMsBomb_ItemVars msbomb;
         itNokoNoko_ItemVars nokonoko;
         itOctarock_ItemVars octarock;
+        itOldottosea_ItemVars oldottosea;
         itPeachTurnip_ItemVars peachturnip;
         itPikachutJoltGround_ItemVars pikachujoltground;
         itPikachutJoltAir_ItemVars pikachujoltair;
+        itPikachuthunder_ItemVars pikachuthunder;
         itPKFlush_ItemVars pkflush;
         itPKFlushExplode_ItemVars pkflushexplode;
         itPKThunder_ItemVars pkthunder;
         itPokemon_ItemVars pokemon;
         itSamusBomb_ItemVars samusbomb;
         itSamusGrapple_ItemVars samusgrapple;
+        itSeakChain_ItemVars seakchain;
         itSeakNeedleThrown_ItemVars seakneedlethrown;
         itSonans_ItemVars sonans;
         itStar_ItemVars star;

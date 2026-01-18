@@ -449,9 +449,9 @@ s32 un_803068E0(HSD_GObj* gobj)
     }
 }
 
-void un_80306930(void* arg)
+void un_80306930(HSD_GObj* gobj, int unused)
 {
-    HSD_FogSet(((HSD_GObj*) arg)->hsd_obj);
+    HSD_FogSet(gobj->hsd_obj);
 }
 
 /// #un_80306954

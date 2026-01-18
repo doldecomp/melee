@@ -5,6 +5,7 @@
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
+#include "ef/eflib.h"
 
 /// #it_80294364
 
@@ -14,7 +15,15 @@
 
 /// #it_3F14_Logic29_Spawned
 
-/// #it_8029455C
+void it_8029455C(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->x40_vel.z = 0.0f;
+    ip->x40_vel.y = 0.0f;
+    ip->x40_vel.x = 0.0f;
+    it_8026B390(gobj);
+    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+}
 
 bool itWstar_UnkMotion0_Anim(Item_GObj* gobj)
 {
@@ -61,7 +70,11 @@ bool itWstar_UnkMotion3_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #it_3F14_Logic29_Dropped
+void it_3F14_Logic29_Dropped(Item_GObj* gobj)
+{
+    Item_80268E5C(gobj, 1, 6);
+    efLib_DestroyAll(gobj);
+}
 
 /// #it_802947CC
 
