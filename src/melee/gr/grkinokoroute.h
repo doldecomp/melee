@@ -10,7 +10,7 @@
 /* 207490 */ void grKinokoRoute_80207490(void);
 /* 2074D8 */ void grKinokoRoute_802074D8(void);
 /* 207544 */ bool grKinokoRoute_80207544(void);
-/* 20754C */ UNK_RET grKinokoRoute_8020754C(UNK_PARAMS);
+/* 20754C */ void grKinokoRoute_8020754C(int);
 /* 207634 */ void grKinokoRoute_80207634(Ground_GObj*);
 /* 2078E8 */ bool grKinokoRoute_802078E8(Ground_GObj*);
 /* 2078F0 */ void grKinokoRoute_802078F0(Ground_GObj*);

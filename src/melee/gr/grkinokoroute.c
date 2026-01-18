@@ -13,11 +13,20 @@
 
 #include <baselib/psstructs.h>
 
-extern float grNKr_804DB830;
+extern void* grNKr_804D6A50;
 
 void grKinokoRoute_8020741C(bool arg) {}
 
-/// #grKinokoRoute_80207420
+void grKinokoRoute_80207420(void)
+{
+    grNKr_804D6A50 = Ground_801C49F8();
+    stage_info.unk8C.b4 = 0;
+    stage_info.unk8C.b5 = 1;
+    grKinokoRoute_8020754C(2);
+    grKinokoRoute_8020754C(0);
+    grKinokoRoute_8020754C(1);
+    grKinokoRoute_8020754C(3);
+}
 
 void grKinokoRoute_80207490(void)
 {
@@ -25,7 +34,7 @@ void grKinokoRoute_80207490(void)
     HSD_GObj* gobj = Ground_801C57A4();
     if (gobj != NULL) {
         ftLib_80086644(gobj, &pos);
-        Ground_801C38BC(pos.x, grNKr_804DB830 + pos.y);
+        Ground_801C38BC(pos.x, 20.0f + pos.y);
         Camera_8002F3AC();
     }
 }
