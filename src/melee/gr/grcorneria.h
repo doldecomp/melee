@@ -63,7 +63,7 @@
 /* 1E0E0C */ bool grCorneria_801E0E0C(Ground_GObj*);
 /* 1E0E14 */ void grCorneria_801E0E14(Ground_GObj*);
 /* 1E0E40 */ UNK_RET grCorneria_801E0E40(UNK_PARAMS);
-/* 1E0F34 */ UNK_RET grCorneria_801E0F34(UNK_PARAMS);
+/* 1E0F34 */ void grCorneria_801E0F34(Ground_GObj*, int);
 /* 1E0F64 */ bool grCorneria_801E0F64(Ground_GObj*);
 /* 1E0F6C */ void grCorneria_801E0F6C(Ground_GObj*);
 /* 1E1030 */ void grCorneria_801E1030(Ground_GObj*);

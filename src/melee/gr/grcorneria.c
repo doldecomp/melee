@@ -11,6 +11,8 @@
 #include "stage.h"
 #include "types.h"
 
+#include "forward.h"
+
 #include "gr/inlines.h"
 #include "if/ifcoget.h"
 #include "if/ifstatus.h"
@@ -395,7 +397,19 @@ void grCorneria_801E0E3C(Ground_GObj* arg) {}
 
 void grCorneria_801E0F30(Ground_GObj* arg) {}
 
-/// #grCorneria_801E0F34
+void grCorneria_801E0F34(Ground_GObj* gobj, int val)
+{
+    Ground* gp = GET_GROUND(gobj);
+    gp->gv.corneria.xCC = 0;
+    gp->gv.corneria.xC8 = 0;
+    if (val < 0) {
+        val = 0;
+    }
+    if (val >= 0x14u) {
+        val = 0x13;
+    }
+    *(int*) (&gp->gv.corneria.xC4) = val;
+}
 
 bool grCorneria_801E0F64(Ground_GObj* arg)
 {
