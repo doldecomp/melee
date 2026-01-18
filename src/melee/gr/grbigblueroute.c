@@ -5,14 +5,18 @@
 #include "baselib/memory.h"
 #include "cm/camera.h"
 #include "ft/ftlib.h"
+#include "gm/gm_16AE.h"
 #include "gr/grdisplay.h"
 #include "gr/ground.h"
+#include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
 #include "gr/types.h"
 #include "if/ifhazard.h"
 
+#include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
+#include <baselib/random.h>
 
 extern StageCallbacks grBb_Route_803E5E78[];
 
@@ -58,7 +62,24 @@ void grBigBlueRoute_8020B920(void)
     }
 }
 
-/// #grBigBlueRoute_8020B95C
+void grBigBlueRoute_8020B95C(void)
+{
+    int val;
+    grZakoGenerator_801CAE04(NULL);
+    if (gm_8016B3D8() == false) {
+        return;
+    }
+
+    val = grBb_Route_804D6A68->x0;
+    if (val != 0) {
+        val = HSD_Randi(grBb_Route_804D6A68->x0);
+    } else {
+        val = 0;
+    }
+    if (val == 0) {
+        grZakoGenerator_801CAEB0(Ground_801C5840(), Ground_801C5940());
+    }
+}
 
 bool grBigBlueRoute_8020B9CC(void)
 {
