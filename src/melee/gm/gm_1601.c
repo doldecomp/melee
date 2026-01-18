@@ -774,7 +774,11 @@ f32 fn_80160F58(u8 ckind)
 
 /// #fn_80162170
 
-/// #gm_801623A4
+s32 gm_801623A4(MatchEnd* arg0)
+{
+    fn_80162068();
+    return fn_80162170(arg0);
+}
 
 int gm_801623D8(void)
 {
@@ -894,7 +898,10 @@ void gm_80162B98(void)
     *temp_r3 = MAX(*temp_r3 + 1, -1);
 }
 
-/// #gm_80162BD8
+int gm_80162BD8(u8 arg0)
+{
+    return *gmMainLib_8015D0C0(arg0);
+}
 
 /// #fn_80162BFC
 
@@ -924,7 +931,10 @@ bool gm_80162D1C(void)
 
 /// #gm_80162D6C
 
-/// #gm_80162DD4
+int gm_80162DD4(u8 i)
+{
+    return *gmMainLib_8015D1E8(i);
+}
 
 /// #fn_80162DF8
 
@@ -954,7 +964,10 @@ bool gm_80162F18(void)
 
 /// #gm_80162F68
 
-/// #gm_80162FD0
+int gm_80162FD0(u8 i)
+{
+    return *gmMainLib_8015D310(i);
+}
 
 /// #fn_80162FF4
 
@@ -984,11 +997,17 @@ bool gm_80163114(void)
 
 /// #gm_80163164
 
-/// #gm_801631CC
+u32 gm_801631CC(u8 i)
+{
+    return *gmMainLib_8015D06C(i);
+}
 
 /// #gm_801631F0
 
-/// #gm_80163274
+u16 gm_80163274(u8 i)
+{
+    return *gmMainLib_8015D7EC(i);
+}
 
 /// #gm_80163298
 

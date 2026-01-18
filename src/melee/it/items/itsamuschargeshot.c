@@ -56,7 +56,14 @@ bool itSamuschargeshot_UnkMotion0_Coll(Item_GObj* gobj)
 
 /// #itSamuschargeshot_UnkMotion8_Phys
 
-/// #itSamuschargeshot_UnkMotion8_Coll
+bool itSamuschargeshot_UnkMotion8_Coll(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (it_802B5518(gobj, &ip->x378_itemColl)) {
+        return true;
+    }
+    return false;
+}
 
 /// #it_802B5EDC
 

@@ -19,7 +19,13 @@ void it_802CD000(Item_GObj* gobj, Item_GObj* ref_gobj)
     it_8026B894(gobj, ref_gobj);
 }
 
-/// #itFreezer_UnkMotion1_Anim
+bool itFreezer_UnkMotion1_Anim(Item_GObj* gobj)
+{
+    if (it_80272C6C(gobj) == 0) {
+        it_802CD12C(gobj);
+    }
+    return false;
+}
 
 void itFreezer_UnkMotion1_Phys(Item_GObj* gobj) {}
 

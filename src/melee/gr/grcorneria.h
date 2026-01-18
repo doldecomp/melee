@@ -59,7 +59,7 @@
 /* 1E0C3C */ void grCorneria_801E0C3C(Ground_GObj*);
 /* 1E0D28 */ bool grCorneria_801E0D28(Ground_GObj*);
 /* 1E0D30 */ void grCorneria_801E0D30(Ground_GObj*);
-/* 1E0DE4 */ s32 grCorneria_801E0DE4(Ground_GObj* gobj);
+/* 1E0DE4 */ void grCorneria_801E0DE4(Ground_GObj* gobj);
 /* 1E0E0C */ bool grCorneria_801E0E0C(Ground_GObj*);
 /* 1E0E14 */ void grCorneria_801E0E14(Ground_GObj*);
 /* 1E0E40 */ UNK_RET grCorneria_801E0E40(UNK_PARAMS);
@@ -80,12 +80,13 @@
 /* 1E2454 */ UNK_RET fn_801E2454(UNK_PARAMS);
 /* 1E2480 */ UNK_RET fn_801E2480(UNK_PARAMS);
 /* 1E24AC */ UNK_RET fn_801E24AC(UNK_PARAMS);
-/* 1E2550 */ s32 grCorneria_801E2550(Ground_GObj* gobj,
-                                     struct grCorneria_GroundVars* corneria);
+/* 1E2550 */ void grCorneria_801E2550(Ground_GObj* gobj,
+                                      struct grCorneria_GroundVars* corneria);
 /* 1E2598 */ UNK_RET grCorneria_801E2598(UNK_PARAMS);
 /* 1E25C4 */ UNK_RET grCorneria_801E25C4(UNK_PARAMS);
 /* 1E2738 */ UNK_RET grCorneria_801E2738(UNK_PARAMS);
-/* 1E277C */ UNK_RET grCorneria_801E277C(UNK_PARAMS);
+/* 1E277C */ void grCorneria_801E277C(Ground_GObj* gobj,
+                                      struct grCorneria_GroundVars* corneria);
 /* 1E2A6C */ void grCorneria_801E2A6C(void);
 /* 1E2AF4 */ void grCorneria_801E2AF4(void);
 /* 1E2B80 */ s32 grCorneria_801E2B80(void);

@@ -19,7 +19,26 @@ void it_802D25BC(Item_GObj* gobj, Item_GObj* ref_gobj)
     it_8026B894(gobj, ref_gobj);
 }
 
-/// #itHouou_UnkMotion1_Anim
+bool itHouou_UnkMotion1_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+    HSD_JObj* child;
+
+    if (jobj == NULL) {
+        child = NULL;
+    } else {
+        child = jobj->child;
+    }
+
+    it_8027A160(child, ip);
+
+    if (!it_80272C6C(gobj)) {
+        it_802D2668(gobj);
+    }
+
+    return false;
+}
 
 void itHouou_UnkMotion1_Phys(Item_GObj* gobj)
 {
@@ -75,7 +94,26 @@ bool itHouou_UnkMotion3_Coll(Item_GObj* gobj)
 
 /// #it_802D290C
 
-/// #itHouou_UnkMotion4_Anim
+bool itHouou_UnkMotion4_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+    HSD_JObj* child;
+
+    if (jobj == NULL) {
+        child = NULL;
+    } else {
+        child = jobj->child;
+    }
+
+    it_8027A160(child, ip);
+
+    if (!it_80272C6C(gobj)) {
+        it_802D2A58(gobj);
+    }
+
+    return false;
+}
 
 /// #itHouou_UnkMotion4_Phys
 

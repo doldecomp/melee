@@ -89,7 +89,13 @@ void itPatapata_UnkMotion6_Phys(Item_GObj* gobj)
     it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
 }
 
-/// #itPatapata_UnkMotion6_Coll
+bool itPatapata_UnkMotion6_Coll(Item_GObj* gobj)
+{
+    if (it_8026DAA8(gobj) & 0xF) {
+        it_802E1694(gobj);
+    }
+    return false;
+}
 
 /// #it_802E11E0
 

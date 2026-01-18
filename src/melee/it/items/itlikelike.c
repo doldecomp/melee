@@ -41,7 +41,13 @@ bool itLikelike_UnkMotion0_Anim(Item_GObj* gobj)
 
 /// #itLikelike_UnkMotion0_Coll
 
-/// #itLikelike_UnkMotion7_Anim
+bool itLikelike_UnkMotion7_Anim(Item_GObj* gobj)
+{
+    if (it_80272C6C(gobj) == 0) {
+        it_802DA104(gobj);
+    }
+    return false;
+}
 
 /// #itLikelike_UnkMotion7_Phys
 

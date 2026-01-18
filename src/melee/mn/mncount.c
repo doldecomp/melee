@@ -20,6 +20,16 @@ typedef struct LocalFighterData {
 
 // --- Function Implementation ---
 
+s32 fn_802502F0(u8 arg0)
+{
+    return GetFighterTotalKOs(arg0);
+}
+
+s32 fn_80250314(u8 arg0)
+{
+    return GetFighterTotalFalls(arg0);
+}
+
 inline bool mnCount_8025035C_inline(void)
 {
     s32 i;

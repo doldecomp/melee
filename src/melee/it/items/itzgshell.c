@@ -180,7 +180,13 @@ bool it_2725_Logic11_DmgDealt(Item_GObj* gobj)
     return false;
 }
 
-/// #it_2725_Logic11_DmgReceived
+bool it_2725_Logic11_DmgReceived(Item_GObj* gobj)
+{
+    PAD_STACK(8);
+    it_80272940(gobj);
+    it_802DDD38(gobj);
+    return false;
+}
 
 bool it_2725_Logic11_Reflected(Item_GObj* gobj)
 {

@@ -10,6 +10,8 @@
 #include <baselib/aobj.h>
 #include <baselib/gobj.h>
 #include <baselib/lobj.h>
+#include "if/ifcoget.h"
+#include "if/ifstatus.h"
 
 /// #grVenom_8020362C
 
@@ -110,7 +112,11 @@ bool grVenom_80204CE4(Ground_GObj* arg)
 
 /// #grVenom_80204CEC
 
-/// #grVenom_80204DB0
+void grVenom_80204DB0(Ground_GObj* gobj)
+{
+    ifStatus_802F68F0();
+    un_802FF620();
+}
 
 /// #grVenom_80204DD4
 
@@ -205,7 +211,11 @@ bool grVenom_80206BBC(Ground_GObj* arg)
     return false;
 }
 
-/// #grVenom_80206BC4
+void grVenom_80206BC4(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    grCorneria_801E277C(gobj, &gp->gv.corneria);
+}
 
 void grVenom_80206BEC(Ground_GObj* arg) {}
 

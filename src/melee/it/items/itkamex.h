@@ -16,7 +16,7 @@
 /* 2CA5D8 */ bool it_802CA5D8(Item_GObj* gobj);
 /* 2CA618 */ void it_802CA618(Item_GObj* gobj);
 /* 2CA654 */ bool it_802CA654(Item_GObj* gobj);
-/* 2CA6A0 */ UNK_RET it_802CA6A0(UNK_PARAMS);
+/* 2CA6A0 */ void it_802CA6A0(Item_GObj*);
 /* 2CA724 */ bool itKamex_UnkMotion1_Anim(Item_GObj* gobj);
 /* 2CA7FC */ void itKamex_UnkMotion1_Phys(Item_GObj* gobj);
 /* 2CA890 */ bool itKamex_UnkMotion1_Coll(Item_GObj* gobj);

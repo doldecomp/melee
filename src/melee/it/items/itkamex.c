@@ -36,7 +36,13 @@ void it_802CA58C(Item_GObj* gobj)
     ip->exited_hitlag = efLib_ResumeAll;
 }
 
-/// #it_802CA5D8
+bool it_802CA5D8(Item_GObj* gobj)
+{
+    if (it_80272C6C(gobj) == 0) {
+        it_802CA6A0(gobj);
+    }
+    return false;
+}
 
 void it_802CA618(Item_GObj* gobj)
 {

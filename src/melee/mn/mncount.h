@@ -9,8 +9,8 @@
 #include "mn/forward.h"
 
 /* 2502CC */ UNK_RET mnCount_802502CC(UNK_PARAMS);
-/* 2502F0 */ UNK_RET fn_802502F0(UNK_PARAMS);
-/* 250314 */ UNK_RET fn_80250314(UNK_PARAMS);
+/* 2502F0 */ s32 fn_802502F0(u8);
+/* 250314 */ s32 fn_80250314(u8);
 /* 250338 */ UNK_RET fn_80250338(UNK_PARAMS);
 /* 25035C */ int mnCount_8025035C(s32 skip_count, u32 (*get_val_func)(s8));
 /* 25069C */ UNK_RET fn_8025069C(UNK_PARAMS);

@@ -5,6 +5,7 @@
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
+#include "it/items/itlipstickspore.h"
 
 #define GET_ATTRS(ip)                                                         \
     ((itLipstickAttributes*) (ip)->xC4_article_data->x4_specialAttributes)
@@ -17,7 +18,14 @@ void it_80295748(Item_GObj* gobj, Vec* pos)
     *pos = GET_ATTRS(ip)->x4;
 }
 
-/// #it_80295770
+void it_80295770(Item_GObj* gobj, Vec* arg1, float arg2, int arg3)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->xD4C > 0) {
+        ip->xD4C -= 1;
+    }
+    it_8029A114(ip->owner, arg1, arg3, arg2);
+}
 
 /// #it_802957AC
 
