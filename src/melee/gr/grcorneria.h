@@ -77,8 +77,8 @@
 /* 1E1BF0 */ HSD_GObj* grCorneria_801E1BF0(void);
 /* 1E2110 */ UNK_RET grCorneria_801E2110(UNK_PARAMS);
 /* 1E2228 */ UNK_RET grCorneria_801E2228(UNK_PARAMS);
-/* 1E2454 */ void grCorneria_801E2454(Vec3*);
-/* 1E2480 */ UNK_RET fn_801E2480(UNK_PARAMS);
+/* 1E2454 */ HSD_Generator* grCorneria_801E2454(Vec3*);
+/* 1E2480 */ HSD_Generator* grCorneria_801E2480(Vec3*);
 /* 1E24AC */ UNK_RET fn_801E24AC(UNK_PARAMS);
 /* 1E2550 */ void grCorneria_801E2550(Ground_GObj* gobj,
                                       struct grCorneria_GroundVars* corneria);

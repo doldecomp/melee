@@ -2,6 +2,8 @@
 
 #include "grcorneria.static.h"
 
+#include "baselib/forward.h"
+
 #include "gr/granime.h"
 #include "gr/grlib.h"
 #include "gr/grmaterial.h"
@@ -118,7 +120,7 @@ void grCorneria_801DD674(Ground_GObj* ground_gobj)
     gr->gv.corneria.xC8 =
         grZakoGenerator_801CA394(grCn_803E1FE8, 1, grCorneria_801E2454, 0.3f);
     gr->gv.corneria.xCC =
-        grZakoGenerator_801CA394(grCn_803E2000, 2, fn_801E2480, 0.3f);
+        grZakoGenerator_801CA394(grCn_803E2000, 2, grCorneria_801E2480, 0.3f);
     Ground_801C10B8(ground_gobj, fn_801DD65C);
     gr->x11_flags.b012 = 1;
     gr->gv.corneria.x12C = Ground_801C3FA4(ground_gobj, 8);
@@ -447,12 +449,15 @@ void fn_801E12D0(Item_GObj* gobj, Ground* gr) {}
 
 /// #grCorneria_801E2228
 
-void grCorneria_801E2454(Vec3* vec)
+HSD_Generator* grCorneria_801E2454(Vec3* vec)
 {
-    grLib_801C96F8(0x7534, 0x1E, vec);
+    return grLib_801C96F8(0x7534, 0x1E, vec);
 }
 
-/// #fn_801E2480
+HSD_Generator* grCorneria_801E2480(Vec3* vec)
+{
+    grLib_801C96F8(0x7530, 0x1E, vec);
+}
 
 /// #fn_801E24AC
 
