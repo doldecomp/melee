@@ -8,6 +8,10 @@
 #include "gr/inlines.h"
 #include "lb/lb_00B0.h"
 
+static struct {
+    int x0;
+}* grSh_Route_804D6A58;
+
 extern float grNKr_804DB868;
 
 float grShrineRoute_802087B0(void)
@@ -17,7 +21,18 @@ float grShrineRoute_802087B0(void)
 
 void grShrineRoute_802087B8(bool arg) {}
 
-/// #grShrineRoute_802087BC
+void grShrineRoute_802087BC(void)
+{
+    grSh_Route_804D6A58 = Ground_801C49F8();
+    stage_info.unk8C.b4 = 0;
+    stage_info.unk8C.b5 = 0;
+    grShrineRoute_802088C0(0);
+    grShrineRoute_802088C0(4);
+    grShrineRoute_802088C0(2);
+    Ground_801C39C0();
+    Ground_801C3BB4();
+    grShrineRoute_8020B0AC();
+}
 
 void grShrineRoute_8020882C(void)
 {
