@@ -39,7 +39,7 @@ void grOldKongo_8020F4E8(void)
 {
     HSD_GObj* gobj;
     gobj = Ground_801C2BA4(1);
-    ftCo_800C0764(gobj, 2, fn_80210454);
+    ftCo_800C0764(gobj, 2, grOldKongo_80210454);
     grZakoGenerator_801CAE04(0);
 }
 
@@ -102,7 +102,7 @@ bool grOldKongo_802100F4(Ground_GObj* gobj)
 
 void grOldKongo_80210450(Ground_GObj* arg) {}
 
-/// #fn_80210454
+/// #grOldKongo_80210454
 
 void grOldKongo_802105AC(Ground_GObj* gobj)
 {
