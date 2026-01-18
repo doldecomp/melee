@@ -1,12 +1,23 @@
 #include "groldyoshi.h"
 
+#include "types.h"
+
 #include <platform.h>
 
+#include "forward.h"
+
+#include "gr/grdisplay.h"
+#include "gr/grmaterial.h"
+#include "gr/ground.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
 #include "lb/lb_00F9.h"
 
 #include <baselib/gobj.h>
+#include <baselib/gobjgxlink.h>
+#include <baselib/gobjproc.h>
+
+extern StageCallbacks grOy_803E6488[];
 
 static struct {
     int x0;
@@ -41,7 +52,38 @@ bool grOldYoshi_8020E84C(void)
     return false;
 }
 
-/// #grOldYoshi_8020E854
+HSD_GObj* grOldYoshi_8020E854(int gobj_id)
+{
+    HSD_GObj* gobj;
+    StageCallbacks* callbacks = &grOy_803E6488[gobj_id];
+
+    gobj = Ground_801C14D0(gobj_id);
+
+    if (gobj != NULL) {
+        Ground* gp = gobj->user_data;
+        gp->x8_callback = NULL;
+        gp->xC_callback = NULL;
+        GObj_SetupGXLink(gobj, grDisplay_801C5DB0, 3, 0);
+
+        if (callbacks->callback3 != NULL) {
+            gp->x1C_callback = callbacks->callback3;
+        }
+
+        if (callbacks->callback0 != NULL) {
+            callbacks->callback0(gobj);
+        }
+
+        if (callbacks->callback2 != NULL) {
+            HSD_GObjProc_8038FD54(gobj, callbacks->callback2, 4);
+        }
+
+    } else {
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", "groldyoshi.c", 206,
+                 gobj_id);
+    }
+
+    return gobj;
+}
 
 void grOldYoshi_8020E93C(Ground_GObj* gobj)
 {
@@ -58,7 +100,16 @@ void grOldYoshi_8020E970(Ground_GObj* arg) {}
 
 void grOldYoshi_8020E974(Ground_GObj* arg) {}
 
-/// #grOldYoshi_8020E978
+void grOldYoshi_8020E978(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+
+    grAnime_801C8138(gobj, gp->map_id, 0);
+    grMaterial_801C8858(jobj, JOBJ_UNK_B27);
+    grMaterial_801C8858(jobj, JOBJ_ROOT_XLU);
+    gp->x11_flags.b012 = 2;
+}
 
 bool grOldYoshi_8020E9E0(Ground_GObj* arg)
 {
