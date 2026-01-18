@@ -120,7 +120,16 @@ void grOldYoshi_8020E9E8(Ground_GObj* arg) {}
 
 void grOldYoshi_8020E9EC(Ground_GObj* arg) {}
 
-/// #grOldYoshi_8020E9F0
+void grOldYoshi_8020E9F0(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+
+    Ground_801C2ED0(jobj, gp->map_id);
+    grAnime_801C8138(gobj, gp->map_id, 0);
+    gp->x11_flags.b012 = 1;
+    gp->x10_flags.b5 = 1;
+}
 
 bool grOldYoshi_8020EA5C(Ground_GObj* arg)
 {
