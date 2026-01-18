@@ -81,7 +81,12 @@ bool grOldPupupu_80210A1C(Ground_GObj* gobj)
 
 void grOldPupupu_80210B00(Ground_GObj* arg) {}
 
-/// #grOldPupupu_80210B04
+void grOldPupupu_80210B04(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    grAnime_801C8138(gobj, gp->map_id, 0);
+    gp->x10_flags.b5 = 1;
+}
 
 bool grOldPupupu_80210B48(Ground_GObj* gobj)
 {
@@ -92,7 +97,6 @@ void grOldPupupu_80210B50(Ground_GObj* arg) {}
 
 void grOldPupupu_80210B54(Ground_GObj* arg) {}
 
-/// #grOldPupupu_80210B58
 void grOldPupupu_80210B58(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
