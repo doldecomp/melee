@@ -15,7 +15,15 @@
 
 extern StageCallbacks grBb_Route_803E5E78[];
 
-/// #grBigBlueRoute_8020B864
+void grBigBlueRoute_8020B864(bool arg)
+{
+    HSD_GObj* gobj;
+    gobj = Ground_801C2BA4(0x1F);
+    if (gobj != NULL) {
+        Ground_801C4A08(gobj);
+    }
+    grBigBlueRoute_8020B9D4(1);
+}
 
 /// #grBigBlueRoute_8020B89C
 
