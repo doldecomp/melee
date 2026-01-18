@@ -8,9 +8,26 @@
 
 #include <baselib/gobj.h>
 
+static struct {
+    int x0;
+}* grOy_804D6A88;
+
 void grOldYoshi_8020E798(bool arg) {}
 
-/// #grOldYoshi_8020E79C
+void grOldYoshi_8020E79C(void)
+{
+    grOy_804D6A88 = Ground_801C49F8();
+    stage_info.unk8C.b4 = 0;
+    stage_info.unk8C.b5 = 1;
+    grOldYoshi_8020E854(0);
+    grOldYoshi_8020E854(1);
+    grOldYoshi_8020E854(4);
+    grOldYoshi_8020E854(5);
+    grOldYoshi_8020E854(2);
+    grOldYoshi_8020E854(3);
+    Ground_801C39C0();
+    Ground_801C3BB4();
+}
 
 void grOldYoshi_8020E824(void) {}
 
