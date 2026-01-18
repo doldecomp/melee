@@ -2,6 +2,8 @@
 
 #include <platform.h>
 
+#include "forward.h"
+
 #include "ft/ftdevice.h"
 #include "gr/granime.h"
 #include "gr/ground.h"
@@ -65,7 +67,14 @@ void grOldKongo_8020F64C(Ground_GObj* arg) {}
 
 void grOldKongo_8020F650(Ground_GObj* arg) {}
 
-/// #grOldKongo_8020F654
+void grOldKongo_8020F654(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+    Ground_801C2ED0(jobj, gp->map_id);
+    grAnime_801C8138(gobj, gp->map_id, 0);
+    gp->x10_flags.b5 = 1;
+}
 
 bool grOldKongo_8020F6B4(Ground_GObj* gobj)
 {
