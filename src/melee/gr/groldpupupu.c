@@ -12,9 +12,33 @@
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 
+static struct {
+    int x0;
+}* grOp_804D6A98;
+
+static void* grOp_804D6A9C;
+
 void grOldPupupu_802107DC(bool arg) {}
 
-/// #grOldPupupu_802107E0
+void grOldPupupu_802107E0(void)
+{
+    PAD_STACK(8);
+
+    grOp_804D6A98 = Ground_801C49F8();
+    stage_info.unk8C.b4 = 0;
+    stage_info.unk8C.b5 = 1;
+    grOldPupupu_802108B4(0);
+    grOldPupupu_802108B4(3);
+    grOldPupupu_802108B4(7);
+    grOldPupupu_802108B4(5);
+    grOldPupupu_802108B4(4);
+    grOldPupupu_802108B4(6);
+    grOldPupupu_802108B4(1);
+    grOldPupupu_802108B4(8);
+    Ground_801C39C0();
+    Ground_801C3BB4();
+    grOp_804D6A9C = NULL;
+}
 
 void grOldPupupu_80210884(void) {}
 
