@@ -2,11 +2,15 @@
 
 #include <platform.h>
 
+#include "ft/ftdevice.h"
 #include "gr/granime.h"
 #include "gr/ground.h"
+#include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
+
+#include <baselib/gobj.h>
 
 static struct {
     int x0;
@@ -31,6 +35,13 @@ void grOldKongo_8020F46C(void)
 void grOldKongo_8020F4E4(void) {}
 
 /// #grOldKongo_8020F4E8
+void grOldKongo_8020F4E8(void)
+{
+    HSD_GObj* gobj;
+    gobj = Ground_801C2BA4(1);
+    ftCo_800C0764(gobj, 2, fn_80210454);
+    grZakoGenerator_801CAE04(0);
+}
 
 bool grOldKongo_8020F524(void)
 {
