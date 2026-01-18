@@ -16,7 +16,7 @@
 /* 210884 */ void grOldPupupu_80210884(void);
 /* 210888 */ void grOldPupupu_80210888(void);
 /* 2108AC */ bool grOldPupupu_802108AC(void);
-/* 2108B4 */ UNK_RET grOldPupupu_802108B4(UNK_PARAMS);
+/* 2108B4 */ HSD_GObj* grOldPupupu_802108B4(int);
 /* 21099C */ void grOldPupupu_8021099C(Ground_GObj*);
 /* 2109C8 */ bool grOldPupupu_802109C8(Ground_GObj*);
 /* 2109D0 */ void grOldPupupu_802109D0(Ground_GObj*);

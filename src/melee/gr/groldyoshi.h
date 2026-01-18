@@ -10,7 +10,7 @@
 /* 20E824 */ void grOldYoshi_8020E824(void);
 /* 20E828 */ void grOldYoshi_8020E828(void);
 /* 20E84C */ bool grOldYoshi_8020E84C(void);
-/* 20E854 */ UNK_RET grOldYoshi_8020E854(UNK_PARAMS);
+/* 20E854 */ HSD_GObj* grOldYoshi_8020E854(int);
 /* 20E93C */ void grOldYoshi_8020E93C(Ground_GObj*);
 /* 20E968 */ bool grOldYoshi_8020E968(Ground_GObj*);
 /* 20E970 */ void grOldYoshi_8020E970(Ground_GObj*);
