@@ -111,9 +111,9 @@ void grKinokoRoute_80207B28(Ground_GObj* arg) {}
 
 void grKinokoRoute_80207B2C(Ground_GObj* arg) {}
 
-void fn_80207B30(HSD_GObj* gobj)
+void grKinokoRoute_80207B30(HSD_GObj* gobj)
 {
-    ftCo_800C07F8(gobj, 6, fn_80208660);
+    ftCo_800C07F8(gobj, 6, grKinokoRoute_80208660);
 }
 
 /// #grKinokoRoute_80207B5C
@@ -129,7 +129,7 @@ void grKinokoRoute_80208368(Ground_GObj* arg) {}
 
 /// #grKinokoRoute_8020836C
 
-bool fn_80208480(bool arg)
+bool grKinokoRoute_80208480(bool arg)
 {
     if (arg == 1) {
         Ground_801C5740(arg);
@@ -138,11 +138,11 @@ bool fn_80208480(bool arg)
     return 0;
 }
 
-/// #fn_802084B4
+/// #grKinokoRoute_802084B4
 
 /// #grKinokoRoute_80208564
 
-/// #fn_80208660
+/// #grKinokoRoute_80208660
 
 void grKinokoRoute_802086EC(Vec3* arg0, f32 arg8)
 {
