@@ -144,7 +144,18 @@ bool grCorneria_801DDCE8(Ground_GObj* arg)
 
 /// #grCorneria_801DDCF0
 
-/// #grCorneria_801DDD4C
+void grCorneria_801DDD4C(Vec3* vec)
+{
+    Ground* gp;
+    HSD_GObj* gobj;
+    PAD_STACK(4);
+
+    gobj = Ground_801C2BA4(3);
+    gp = GET_GROUND(gobj);
+    vec->x = gp->gv.corneria.base_x + gp->gv.corneria.offset_x;
+    vec->y = gp->gv.corneria.base_y + gp->gv.corneria.offset_y.val;
+    vec->z = 0.0f;
+}
 
 /// #grCorneria_801DDDA8
 
