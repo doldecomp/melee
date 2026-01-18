@@ -496,7 +496,20 @@ bool grCorneria_801E2CE8(void)
 
 /// #grCorneria_801E2E50
 
-/// #grCorneria_801E2EA0
+f32 grCorneria_801E2EA0(void)
+{
+    HSD_GObj* gobj;
+    Ground* gp;
+
+    gobj = Ground_801C2BA4(3);
+    if (gobj != NULL) {
+        gp = GET_GROUND(gobj);
+        if (gp != NULL) {
+            return gp->gv.corneria.xD0;
+        }
+    }
+    return 0.0f;
+}
 
 DynamicsDesc* grCorneria_801E2EE4(enum_t arg)
 {
