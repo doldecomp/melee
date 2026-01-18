@@ -11,6 +11,7 @@
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
+#include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 
 #include <baselib/gobj.h>
@@ -194,4 +195,15 @@ DynamicsDesc* grOldYoshi_8020F404(enum_t arg)
     return NULL;
 }
 
-/// #grOldYoshi_8020F40C
+bool grOldYoshi_8020F40C(Vec3* a, int arg, HSD_JObj* joint)
+{
+    Vec3 b;
+
+    lb_8000B1CC(joint, NULL, &b);
+
+    if (a->y > b.y + -5.0f) {
+        return true;
+    } else {
+        return false;
+    }
+}
