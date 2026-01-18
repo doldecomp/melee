@@ -1,19 +1,15 @@
 #include "grcorneria.h"
 
-#include "granime.h"
-
 #include "grcorneria.static.h"
 
-#include "grmaterial.h"
-#include "ground.h"
-#include "grzakogenerator.h"
-#include "inlines.h"
-#include "stage.h"
-#include "types.h"
-
-#include "forward.h"
-
+#include "gr/granime.h"
+#include "gr/grlib.h"
+#include "gr/grmaterial.h"
+#include "gr/ground.h"
+#include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
+#include "gr/stage.h"
+#include "gr/types.h"
 #include "if/ifcoget.h"
 #include "if/ifstatus.h"
 #include "lb/lb_00B0.h"
@@ -120,7 +116,7 @@ void grCorneria_801DD674(Ground_GObj* ground_gobj)
     HSD_JObjClearFlags(Ground_801C3FA4(ground_gobj, 6), JOBJ_HIDDEN);
     HSD_JObjSetFlags(Ground_801C3FA4(ground_gobj, 5), JOBJ_HIDDEN);
     gr->gv.corneria.xC8 =
-        grZakoGenerator_801CA394(grCn_803E1FE8, 1, fn_801E2454, 0.3f);
+        grZakoGenerator_801CA394(grCn_803E1FE8, 1, grCorneria_801E2454, 0.3f);
     gr->gv.corneria.xCC =
         grZakoGenerator_801CA394(grCn_803E2000, 2, fn_801E2480, 0.3f);
     Ground_801C10B8(ground_gobj, fn_801DD65C);
@@ -451,7 +447,10 @@ void fn_801E12D0(Item_GObj* gobj, Ground* gr) {}
 
 /// #grCorneria_801E2228
 
-/// #fn_801E2454
+void grCorneria_801E2454(Vec3* vec)
+{
+    grLib_801C96F8(0x7534, 0x1E, vec);
+}
 
 /// #fn_801E2480
 
