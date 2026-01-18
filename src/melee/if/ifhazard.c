@@ -3,6 +3,7 @@
 #include "baselib/forward.h"
 
 #include "gm/gm_unsplit.h"
+#include "sc/types.h"
 
 #include <dolphin/mtx.h>
 #include <baselib/gobj.h>
@@ -62,13 +63,13 @@ void fn_802FD6CC(HSD_GObj* gobj, int pass)
 
 void un_802FD704(void) {}
 
-void un_802FD708(void* arg0, int arg1)
+void un_802FD708(DynamicModelDesc* desc, int arg1)
 {
     HSD_GObj* gobj = GObj_Create(HSD_GOBJ_CLASS_UI, 15, 0);
-    HSD_JObj* jobj = HSD_JObjLoadJoint(*(HSD_Joint**) arg0);
+    HSD_JObj* jobj = HSD_JObjLoadJoint(desc->joint);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
     GObj_SetupGXLink(gobj, fn_802FD6CC, 11, 0);
-    gm_8016895C(jobj, arg0, 0);
+    gm_8016895C(jobj, desc, 0);
     HSD_GObjProc_8038FD54(gobj, fn_802FD680, 17);
     un_804D6D88 = 0;
     un_804D6D8C = 0;
@@ -96,9 +97,9 @@ void un_802FD8C4(void* arg0)
     un_802FD708(arg0, 1);
 }
 
-void un_802FD8E8(void* arg0)
+void un_802FD8E8(DynamicModelDesc* desc)
 {
-    un_802FD708(arg0, 2);
+    un_802FD708(desc, 2);
 }
 
 void un_802FD90C(void) {}

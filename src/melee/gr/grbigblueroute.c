@@ -5,19 +5,51 @@
 #include "baselib/memory.h"
 #include "cm/camera.h"
 #include "ft/ftlib.h"
+#include "gm/gm_16AE.h"
 #include "gr/grdisplay.h"
 #include "gr/ground.h"
+#include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
 #include "gr/types.h"
+#include "if/ifhazard.h"
 
+#include <dolphin/os.h>
+#include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
+#include <baselib/jobj.h>
+#include <baselib/random.h>
 
 extern StageCallbacks grBb_Route_803E5E78[];
 
-/// #grBigBlueRoute_8020B864
+static struct {
+    int x0;
+}* grBb_Route_804D6A68;
 
-/// #grBigBlueRoute_8020B89C
+void grBigBlueRoute_8020B864(bool arg)
+{
+    HSD_GObj* gobj;
+    gobj = Ground_801C2BA4(0x1F);
+    if (gobj != NULL) {
+        Ground_801C4A08(gobj);
+    }
+    grBigBlueRoute_8020B9D4(1);
+}
+
+void grBigBlueRoute_8020B89C(void)
+{
+    grBb_Route_804D6A68 = Ground_801C49F8();
+    stage_info.unk8C.b4 = 0;
+    stage_info.unk8C.b5 = 1;
+    grBigBlueRoute_8020B9D4(0);
+    grBigBlueRoute_8020B9D4(0x20);
+    grBigBlueRoute_8020B9D4(0x1F);
+    Ground_801C39C0();
+    Ground_801C3BB4();
+    Camera_80030AE0(true);
+    un_802FD8E8(grBigBlueRoute_8020DE48());
+    un_802FD65C();
+}
 
 void grBigBlueRoute_8020B920(void)
 {
@@ -32,7 +64,24 @@ void grBigBlueRoute_8020B920(void)
     }
 }
 
-/// #grBigBlueRoute_8020B95C
+void grBigBlueRoute_8020B95C(void)
+{
+    int val;
+    grZakoGenerator_801CAE04(NULL);
+    if (gm_8016B3D8() == false) {
+        return;
+    }
+
+    val = grBb_Route_804D6A68->x0;
+    if (val != 0) {
+        val = HSD_Randi(grBb_Route_804D6A68->x0);
+    } else {
+        val = 0;
+    }
+    if (val == 0) {
+        grZakoGenerator_801CAEB0(Ground_801C5840(), Ground_801C5940());
+    }
+}
 
 bool grBigBlueRoute_8020B9CC(void)
 {
@@ -88,7 +137,12 @@ void grBigBlueRoute_8020BB08(Ground_GObj* arg) {}
 
 void grBigBlueRoute_8020BB0C(Ground_GObj* arg) {}
 
-/// #grBigBlueRoute_8020BB10
+void grBigBlueRoute_8020BB10(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    grAnime_801C8138(gobj, gp->map_id, 0);
+    grAnime_801C77FC(gobj, 0, 7);
+}
 
 bool grBigBlueRoute_8020BB58(Ground_GObj* arg)
 {
@@ -99,7 +153,21 @@ void grBigBlueRoute_8020BB60(Ground_GObj* arg) {}
 
 void grBigBlueRoute_8020BB64(Ground_GObj* arg) {}
 
-/// #grBigBlueRoute_8020BB68
+void grBigBlueRoute_8020BB68(Ground_GObj* gobj)
+{
+    HSD_JObj *jobj, *jobj2, *jobj3, *jobj4, *jobj5, *jobj6;
+
+    Ground* gp = GET_GROUND(gobj);
+    grAnime_801C8138(gobj, gp->map_id, 0);
+    grAnime_801C77FC(gobj, 0, 7);
+    jobj6 = Ground_801C3FA4(gobj, 7);
+    jobj5 = Ground_801C3FA4(gobj, 8);
+    jobj4 = Ground_801C3FA4(gobj, 4);
+    jobj3 = Ground_801C3FA4(gobj, 5);
+    jobj2 = Ground_801C3FA4(gobj, 3);
+    jobj = Ground_801C3FA4(gobj, 6);
+    Ground_801C4E70(jobj, jobj2, jobj3, jobj4, jobj5, jobj6);
+}
 
 bool grBigBlueRoute_8020BC24(Ground_GObj* arg)
 {
@@ -110,7 +178,11 @@ void grBigBlueRoute_8020BC2C(Ground_GObj* arg) {}
 
 void grBigBlueRoute_8020BC30(Ground_GObj* arg) {}
 
-/// #fn_8020BC34
+void grBigBlueRoute_8020BC34(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    gp->gv.bigblueroute.xC4 = grBigBlueRoute_8020B9D4(4);
+}
 
 /// #grBigBlueRoute_8020BC68
 
