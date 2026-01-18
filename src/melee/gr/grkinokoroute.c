@@ -8,12 +8,17 @@
 #include "ft/ftdevice.h"
 #include "ft/ftlib.h"
 #include "gr/grlib.h"
+#include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
 #include "lb/lb_00B0.h"
 
 #include <baselib/psstructs.h>
+#include <baselib/random.h>
 
-extern void* grNKr_804D6A50;
+static struct {
+    int x0;
+    int x4;
+}* grNKr_804D6A50;
 
 void grKinokoRoute_8020741C(bool arg) {}
 
@@ -39,7 +44,21 @@ void grKinokoRoute_80207490(void)
     }
 }
 
-/// #grKinokoRoute_802074D8
+void grKinokoRoute_802074D8(void)
+{
+    int val;
+    grZakoGenerator_801CAE04(&grNKr_804D6A50->x4);
+    val = grNKr_804D6A50->x0;
+    if (val != 0) {
+        val = HSD_Randi(grNKr_804D6A50->x0);
+    } else {
+        val = 0;
+    }
+    if (val == 0) {
+        grZakoGenerator_801CAEB0(Ground_801C5840(), Ground_801C5940());
+    }
+    grZakoGenerator_801CADE0();
+}
 
 bool grKinokoRoute_80207544(void)
 {
