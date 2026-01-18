@@ -32,7 +32,7 @@ struct grBigBlueRoute_8020DA9C_t {
 /* 20BC24 */ bool grBigBlueRoute_8020BC24(Ground_GObj*);
 /* 20BC2C */ void grBigBlueRoute_8020BC2C(Ground_GObj*);
 /* 20BC30 */ void grBigBlueRoute_8020BC30(Ground_GObj*);
-/* 20BC34 */ UNK_RET fn_8020BC34(UNK_PARAMS);
+/* 20BC34 */ void grBigBlueRoute_8020BC34(Ground_GObj*);
 /* 20BC68 */ void grBigBlueRoute_8020BC68(Ground_GObj*);
 /* 20BF30 */ bool grBigBlueRoute_8020BF30(Ground_GObj*);
 /* 20BF38 */ void grBigBlueRoute_8020BF38(Ground_GObj*);

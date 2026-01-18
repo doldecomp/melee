@@ -658,6 +658,10 @@ struct grBigBlue_GroundVars {
     /*  +0 gp+C4:0 */ u8 x0_b0 : 1;
 };
 
+struct grBigBlueRoute_GroundVars {
+    /* +0 gp+C4 */ HSD_GObj* xC4;
+};
+
 struct grPura_GroundVars {
     /*  +0 gp+C4:0 */ u16 xC4;
     /*  +0 gp+C4:0 */ s16 xC6;
@@ -765,6 +769,7 @@ struct Ground {
         union GroundVars {
             char pad_0[0x204 - 0xC4];
             struct grBigBlue_GroundVars bigblue;
+            struct grBigBlueRoute_GroundVars bigblueroute;
             struct grCorneria_GroundVars corneria;
             struct grGreatBay_GroundVars greatbay;
             struct grFigureGet_GroundVars figureget;

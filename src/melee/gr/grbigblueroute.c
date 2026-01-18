@@ -178,7 +178,11 @@ void grBigBlueRoute_8020BC2C(Ground_GObj* arg) {}
 
 void grBigBlueRoute_8020BC30(Ground_GObj* arg) {}
 
-/// #fn_8020BC34
+void grBigBlueRoute_8020BC34(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    gp->gv.bigblueroute.xC4 = grBigBlueRoute_8020B9D4(4);
+}
 
 /// #grBigBlueRoute_8020BC68
 
