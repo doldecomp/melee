@@ -1,6 +1,7 @@
 #include "groldpupupu.h"
 
 #include "baselib/forward.h"
+#include "forward.h"
 
 #include "gr/granime.h"
 #include "gr/ground.h"
@@ -105,7 +106,12 @@ void grOldPupupu_80210BC0(Ground_GObj* gobj)
 
 void grOldPupupu_80210BE0(Ground_GObj* arg) {}
 
-/// #grOldPupupu_80210BE4
+void grOldPupupu_80210BE4(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    HSD_JObjSetFlagsAll(GET_JOBJ(gobj), JOBJ_HIDDEN);
+    gp->x11_flags.b012 = 2;
+}
 
 bool grOldPupupu_80210C2C(Ground_GObj* gobj)
 {
