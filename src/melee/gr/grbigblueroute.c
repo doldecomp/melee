@@ -17,6 +17,7 @@
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
+#include <baselib/jobj.h>
 #include <baselib/random.h>
 
 extern StageCallbacks grBb_Route_803E5E78[];
@@ -152,7 +153,21 @@ void grBigBlueRoute_8020BB60(Ground_GObj* arg) {}
 
 void grBigBlueRoute_8020BB64(Ground_GObj* arg) {}
 
-/// #grBigBlueRoute_8020BB68
+void grBigBlueRoute_8020BB68(Ground_GObj* gobj)
+{
+    HSD_JObj *jobj, *jobj2, *jobj3, *jobj4, *jobj5, *jobj6;
+
+    Ground* gp = GET_GROUND(gobj);
+    grAnime_801C8138(gobj, gp->map_id, 0);
+    grAnime_801C77FC(gobj, 0, 7);
+    jobj6 = Ground_801C3FA4(gobj, 7);
+    jobj5 = Ground_801C3FA4(gobj, 8);
+    jobj4 = Ground_801C3FA4(gobj, 4);
+    jobj3 = Ground_801C3FA4(gobj, 5);
+    jobj2 = Ground_801C3FA4(gobj, 3);
+    jobj = Ground_801C3FA4(gobj, 6);
+    Ground_801C4E70(jobj, jobj2, jobj3, jobj4, jobj5, jobj6);
+}
 
 bool grBigBlueRoute_8020BC24(Ground_GObj* arg)
 {
