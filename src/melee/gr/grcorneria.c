@@ -11,6 +11,7 @@
 #include "stage.h"
 #include "types.h"
 
+#include "gr/inlines.h"
 #include "if/ifcoget.h"
 #include "if/ifstatus.h"
 #include "lb/lb_00B0.h"
@@ -224,19 +225,12 @@ void grCorneria_801DFC28(Ground_GObj* arg) {}
 
 void grCorneria_801DFC2C(Ground_GObj* gobj)
 {
-    Ground* gp = gobj->user_data;
-    struct grCorneria_GroundVars* cn = &gp->gv.corneria;
+    Ground* gp = GET_GROUND(gobj);
 
-    cn->xC6_flags.b0 = 0;
-    cn->offset_y.flags.b0 = 0;
-    cn->xC8 = 0;
-    cn->xCC = 0;
-    cn->xD0 = 0.0f;
-    cn->base_x = 0.0f;
-    cn->base_y = 0.0f;
-    cn->offset_x = 0.0f;
-    cn->xC4.flags.b0 = 0;
-    cn->xC4.flags.b1 = 0;
+    gp->gv.corneria.xC6.value = 0;
+    gp->gv.corneria.offset_y.flags.b0 = 0;
+    memzero(&gp->gv.corneria.xC8, 0x18);
+    gp->gv.corneria.xC4.value = 0;
     gp->x11_flags.b012 = 1;
 }
 bool grCorneria_801DFC90(Ground_GObj* arg)
@@ -252,7 +246,7 @@ void grCorneria_801DFEB8(Ground_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
 
-    gp->gv.corneria.xC6_flags.b0 = 0;
+    gp->gv.corneria.xC6.flags.b0 = 0;
     grAnime_801C8138((HSD_GObj*) gobj, gp->map_id, 0);
     gp->gv.corneria.xC4.value = 0;
     gp->x11_flags.b012 = 1;
