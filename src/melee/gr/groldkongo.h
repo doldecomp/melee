@@ -15,7 +15,7 @@
 /* 20F4E4 */ void grOldKongo_8020F4E4(void);
 /* 20F4E8 */ void grOldKongo_8020F4E8(void);
 /* 20F524 */ bool grOldKongo_8020F524(void);
-/* 20F52C */ UNK_RET grOldKongo_8020F52C(UNK_PARAMS);
+/* 20F52C */ HSD_GObj* grOldKongo_8020F52C(int);
 /* 20F618 */ void grOldKongo_8020F618(Ground_GObj*);
 /* 20F644 */ bool grOldKongo_8020F644(Ground_GObj*);
 /* 20F64C */ void grOldKongo_8020F64C(Ground_GObj*);

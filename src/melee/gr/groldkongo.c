@@ -8,9 +8,25 @@
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 
+static struct {
+    int x0;
+}* grOk_804D6A90;
+
 void grOldKongo_8020F468(bool arg) {}
 
 /// #grOldKongo_8020F46C
+void grOldKongo_8020F46C(void)
+{
+    grOk_804D6A90 = Ground_801C49F8();
+    stage_info.unk8C.b4 = 0;
+    stage_info.unk8C.b5 = 1;
+    grOldKongo_8020F52C(0);
+    grOldKongo_8020F52C(3);
+    grOldKongo_8020F52C(1);
+    grOldKongo_8020F52C(2);
+    Ground_801C39C0();
+    Ground_801C3BB4();
+}
 
 void grOldKongo_8020F4E4(void) {}
 
