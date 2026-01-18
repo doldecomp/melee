@@ -3,6 +3,7 @@
 #include "grcorneria.static.h"
 
 #include "baselib/forward.h"
+#include "gr/forward.h"
 
 #include "gr/granime.h"
 #include "gr/grlib.h"
@@ -479,7 +480,15 @@ HSD_Generator* grCorneria_801E2480(Vec3* vec)
 
 /// #grCorneria_801E2C34
 
-/// #grCorneria_801E2CE8
+bool grCorneria_801E2CE8(void)
+{
+    if (stage_info.internal_stage_id == CORNERIA ||
+        stage_info.internal_stage_id == VENOM)
+    {
+        return true;
+    }
+    return false;
+}
 
 /// #grCorneria_801E2D14
 
