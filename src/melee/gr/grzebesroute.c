@@ -2,12 +2,16 @@
 
 #include <platform.h>
 
+#include "gr/ground.h"
+#include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
 
 #include <baselib/gobj.h>
+#include <baselib/random.h>
 
 static struct {
     int x0;
+    int x4;
 }* grZe_Route_804D6A60;
 
 void grZebesRoute_8020B160(bool arg) {}
@@ -31,6 +35,20 @@ void grZebesRoute_8020B1D4(void)
 }
 
 /// #grZebesRoute_8020B1F4
+void grZebesRoute_8020B1F4(void)
+{
+    int val;
+    grZakoGenerator_801CAE04(NULL);
+    val = grZe_Route_804D6A60->x4;
+    if (val != 0) {
+        val = HSD_Randi(grZe_Route_804D6A60->x4);
+    } else {
+        val = 0;
+    }
+    if (val == 0) {
+        grZakoGenerator_801CAEB0(Ground_801C5840(), Ground_801C5940());
+    }
+}
 
 bool grZebesRoute_8020B258(void)
 {
