@@ -12,6 +12,7 @@
 #include "gr/inlines.h"
 #include "gr/types.h"
 #include "if/ifhazard.h"
+#include "lb/lb_00B0.h"
 
 #include <dolphin/os.h>
 #include <baselib/gobj.h>
@@ -248,4 +249,15 @@ DynamicsDesc* grBigBlueRoute_8020DF78(enum_t arg)
     return false;
 }
 
-/// #grBigBlueRoute_8020DF80
+bool grBigBlueRoute_8020DF80(Vec3* a, int arg, HSD_JObj* joint)
+{
+    Vec3 b;
+
+    lb_8000B1CC(joint, NULL, &b);
+
+    if (a->y > b.y + -3.0f) {
+        return true;
+    } else {
+        return false;
+    }
+}
