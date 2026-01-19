@@ -1,14 +1,7 @@
-#include "gr/grcastle.h"
+#include "grcastle.h"
 
-#include "placeholder.h"
-
-#include <platform.h>
-
-#include "baselib/psstructs.h"
+#include "ft/ftdevice.h"
 #include "ft/ftlib.h"
-
-#include "gr/forward.h"
-
 #include "gr/grlib.h"
 #include "gr/grmaterial.h"
 #include "gr/ground.h"
@@ -19,6 +12,7 @@
 
 #include <dolphin/mtx.h>
 #include <baselib/jobj.h>
+#include <baselib/psstructs.h>
 
 unkCastleCallback grCs_803B7F28[] = {
     grCastle_801D0550, grCastle_801D059C, grCastle_801D05E8,
@@ -76,7 +70,12 @@ void grCastle_801CD608(Ground_GObj* gobj) {}
 
 void grCastle_801CD60C(Ground_GObj* gobj) {}
 
-/// #fn_801CD610
+void grCastle_801CD610(Ground_GObj* gobj)
+{
+    ftCo_800C06E8(gobj, 6, grCastle_801D09B8);
+    grCastle_801CF7B0(gobj);
+    grCastle_801CDFD8(gobj);
+}
 
 /// #grCastle_801CD658
 
@@ -269,7 +268,7 @@ void grCastle_801D08AC(void* arg0, unkCastle* arg1, Ground_GObj* gobj)
 
 /// #fn_801D0924
 
-/// #fn_801D09B8
+/// #grCastle_801D09B8
 
 /// #grCastle_801D0A9C
 

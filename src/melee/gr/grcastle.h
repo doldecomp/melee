@@ -26,7 +26,7 @@ struct unkCastle {
 /* 1CD600 */ bool grCastle_801CD600(Ground_GObj*);
 /* 1CD608 */ void grCastle_801CD608(Ground_GObj*);
 /* 1CD60C */ void grCastle_801CD60C(Ground_GObj*);
-/* 1CD610 */ UNK_RET fn_801CD610(UNK_PARAMS);
+/* 1CD610 */ void grCastle_801CD610(Ground_GObj*);
 /* 1CD658 */ void grCastle_801CD658(Ground_GObj*);
 /* 1CD8A0 */ bool grCastle_801CD8A0(Ground_GObj*);
 /* 1CD8A8 */ void grCastle_801CD8A8(Ground_GObj*);
@@ -37,7 +37,7 @@ struct unkCastle {
 /* 1CDC44 */ void grCastle_801CDC44(Ground_GObj*);
 /* 1CDF50 */ void grCastle_801CDF50(Ground_GObj*);
 /* 1CDF54 */ UNK_RET grCastle_801CDF54(UNK_PARAMS);
-/* 1CDFD8 */ UNK_RET grCastle_801CDFD8(UNK_PARAMS);
+/* 1CDFD8 */ void grCastle_801CDFD8(Ground_GObj*);
 /* 1CE054 */ UNK_RET grCastle_801CE054(UNK_PARAMS);
 /* 1CE19C */ UNK_RET grCastle_801CE19C(UNK_PARAMS);
 /* 1CE260 */ void grCastle_801CE260(Ground_GObj*);
@@ -64,7 +64,7 @@ struct unkCastle {
 /* 1CF308 */ void grCastle_801CF308(Ground_GObj*);
 /* 1CF74C */ void grCastle_801CF74C(Ground_GObj*);
 /* 1CF750 */ UNK_RET fn_801CF750(UNK_PARAMS);
-/* 1CF7B0 */ UNK_RET grCastle_801CF7B0(UNK_PARAMS);
+/* 1CF7B0 */ void grCastle_801CF7B0(Ground_GObj*);
 /* 1CF868 */ UNK_RET grCastle_801CF868(UNK_PARAMS);
 /* 1CFAFC */ UNK_RET fn_801CFAFC(UNK_PARAMS);
 /* 1CFB68 */ UNK_RET fn_801CFB68(UNK_PARAMS);
@@ -83,7 +83,7 @@ struct unkCastle {
 /* 1D0834 */ void grCastle_801D0834(UNK_T, unkCastle*, Ground_GObj*);
 /* 1D08AC */ void grCastle_801D08AC(UNK_T, unkCastle*, Ground_GObj*);
 /* 1D0924 */ UNK_RET fn_801D0924(UNK_PARAMS);
-/* 1D09B8 */ UNK_RET fn_801D09B8(UNK_PARAMS);
+/* 1D09B8 */ UNK_RET grCastle_801D09B8(UNK_PARAMS);
 /* 1D0A9C */ void grCastle_801D0A9C(Vec3* arg0, f32 arg8);
 /* 1D0B04 */ DynamicsDesc* grCastle_801D0B04(enum_t);
 /* 1D0B0C */ bool grCastle_801D0B0C(Vec3* v, int arg1, HSD_JObj* jobj);
