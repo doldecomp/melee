@@ -52,7 +52,33 @@ void grCorneria_801DD2C0(void)
 
 /// #grCorneria_801DD350
 
-/// #grCorneria_801DD478
+void grCorneria_801DD478(void)
+{
+    HSD_GObj* gobj;
+    Ground* gp;
+
+    gobj = Ground_801C2BA4(11);
+    if (gobj != NULL) {
+        Ground_801C4A08(gobj);
+    }
+    gobj = Ground_801C2BA4(8);
+    if (gobj != NULL) {
+        Ground_801C4A08(gobj);
+    }
+    gobj = Ground_801C2BA4(9);
+    if (gobj != NULL) {
+        Ground_801C4A08(gobj);
+    }
+    gobj = Ground_801C2BA4(4);
+    if (gobj != NULL) {
+        Ground_801C4A08(gobj);
+    }
+    gobj = grCorneria_801DD534(8);
+    gp = GET_GROUND(gobj);
+    gp->gv.corneria.xC5 = 0;
+    grCn_804D69AC = 0;
+    Ground_801C53EC(0x55737);
+}
 
 void grCorneria_801DD508(void)
 {
