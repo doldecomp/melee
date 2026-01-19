@@ -78,6 +78,8 @@
 /* 0DAEEC */ void fn_800DAEEC(Fighter_GObj* gobj);
 /* 0DB230 */ static void fn_800DB230(Fighter_GObj* gobj);
 /* 0DBBF8 */ void fn_800DBBF8(Fighter_GObj* gobj);
+/* 0D949C */ static void fn_800D949C(void);
+/* 0D9C64 */ static void fn_800D9C64(Fighter_GObj* gobj);
 
 extern f32 ftCo_804D90D0; // 0.0f
 extern f32 ftCo_804D90D4; // Decrement value
@@ -819,7 +821,13 @@ void ftCo_Catch_Coll(Fighter_GObj* gobj)
     ft_800841B8(gobj, fn_800D8E30);
 }
 
-/// #fn_800D8E30
+void fn_800D8E30(Fighter_GObj* gobj)
+{
+    PAD_STACK(8);
+    fn_800D949C();
+    fn_800D9C64(gobj);
+    ftCo_Fall_Enter(gobj);
+}
 
 void ftCo_CatchDash_Coll(Fighter_GObj* gobj)
 {
@@ -1095,7 +1103,17 @@ void ftCo_CapturePulledLw_Coll(Fighter_GObj* gobj)
 
 /// #ftCo_800DB368
 
-/// #ftCo_800DB464
+void ftCo_800DB464(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    Vec3 pos;
+    lb_8000B1CC(fp->parts[ftParts_GetBoneIndex(fp, FtPart_XRotN)].joint, NULL,
+                &pos);
+    pos.x = (fp->facing_dir * (fp->x1A70.z * fp->x34_scale.y)) + pos.x;
+    pos.y += fp->x1A70.y * fp->x34_scale.y;
+    pos.z = 0.0f;
+    fp->cur_pos = pos;
+}
 
 /// #ftCo_800DB500
 

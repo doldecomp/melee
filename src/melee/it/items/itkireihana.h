@@ -14,6 +14,7 @@
 /* 2D06EC */ void itKireihana_UnkMotion3_Phys(Item_GObj* gobj);
 /* 2D0774 */ void it_802D0774(Item_GObj* gobj);
 /* 2D07C0 */ void it_802D07C0(Item_GObj* gobj);
+/* 2D08F0 */ void it_802D08F0(Item_GObj* gobj);
 /* 2D08C4 */ bool itKireihana_UnkMotion4_Coll(Item_GObj* gobj);
 /* 2D0964 */ bool itKireihana_UnkMotion0_Anim(Item_GObj* gobj);
 /* 2D0988 */ void itKireihana_UnkMotion0_Phys(Item_GObj* gobj);

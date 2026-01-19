@@ -2,6 +2,7 @@
 
 #include "itlinkhookshot.h"
 
+#include "ft/ftcoll.h"
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/item.h"
@@ -113,9 +114,23 @@ void it_2725_Logic53_PickedUp(Item_GObj* gobj)
     it_802A2428(gobj);
 }
 
-/// #it_802BA9B8
+void it_802BA9B8(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    PAD_STACK(8);
+    Item_80268E5C(gobj, 3, ITEM_ANIM_UPDATE);
+    ftColl_8007AFF8(ip->xDD4_itemVar.samusgrapple.x8);
+    it_802A2428(gobj);
+}
 
-/// #it_802BAA08
+void it_802BAA08(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    PAD_STACK(8);
+    Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
+    ftColl_8007AFF8(ip->xDD4_itemVar.samusgrapple.x8);
+    it_802A2428(gobj);
+}
 
 void it_802BAA58(Item_GObj* gobj)
 {
@@ -124,7 +139,14 @@ void it_802BAA58(Item_GObj* gobj)
     it_802A2428(gobj);
 }
 
-/// #it_802BAA94
+void it_802BAA94(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    PAD_STACK(8);
+    Item_80268E5C(gobj, 5, ITEM_ANIM_UPDATE);
+    ftColl_8007AFF8(ip->xDD4_itemVar.samusgrapple.x8);
+    it_802A2428(gobj);
+}
 
 /// #it_802BAAE4
 

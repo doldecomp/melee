@@ -1,11 +1,24 @@
 #include "ithinoarashi.h"
 
+#include "ef/eflib.h"
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/item.h"
 
 /* 2D60C8 */ static bool itHinoarashi_UnkMotion2_Anim(Item_GObj* gobj);
+
+void it_802D5E4C(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    it_802762BC(ip);
+    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+    ip->entered_hitlag = efLib_PauseAll;
+    ip->exited_hitlag = efLib_ResumeAll;
+    it_80273670(gobj, 0, 0.0f);
+    it_8026BDB4(gobj);
+}
 
 bool it_802D5EC8(Item_GObj* gobj)
 {

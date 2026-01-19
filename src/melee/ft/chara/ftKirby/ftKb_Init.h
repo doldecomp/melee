@@ -845,6 +845,7 @@
 /* 10A86C */ void ftKb_YsSpecialAirN2_1_Coll(Fighter_GObj* gobj);
 /* 10A894 */ void ftKb_YsSpecialAirN2_0_Coll(Fighter_GObj* gobj);
 /* 10A8BC */ void ftKb_SpecialNYs_8010A8BC(Fighter_GObj* gobj);
+/* 10A930 */ void fn_8010A930(Fighter_GObj* gobj, Fighter_GObj* attacker_gobj);
 /* 10AA1C */ void ftCo_CaptureKirbyYoshi_Anim(Fighter_GObj* gobj);
 /* 10AA20 */ void ftCo_CaptureKirbyYoshi_IASA(Fighter_GObj* gobj);
 /* 10AA24 */ void ftCo_CaptureKirbyYoshi_Phys(Fighter_GObj* gobj);

@@ -37,7 +37,14 @@ bool it_80286340(Item_GObj* gobj, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
 
 /// #it_802863BC
 
-/// #fn_80286480
+void fn_80286480(Item_GObj* gobj)
+{
+    Item* it = GET_ITEM(gobj);
+    PAD_STACK(12);
+    it_8026B390(gobj);
+    it->x40_vel.x = it->x40_vel.y = it->x40_vel.z = 0.0F;
+    Item_80268E5C(gobj, 0, 2);
+}
 
 /// #itBox_UnkMotion0_Anim
 

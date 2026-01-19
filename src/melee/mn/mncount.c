@@ -14,11 +14,23 @@ extern s32 GetFighterTotalFalls(s32);
 // --- Internal Structs ---
 
 typedef struct LocalFighterData {
-    char pad[0x54];
+    char pad[0x34];
+    u16 unk34;
+    char pad1a[0xA];
+    u32 unk40;
+    u32 unk44;
+    char pad2[0x8];
+    u16 unk50;
+    u16 unk52;
     u32 unk54;
 } LocalFighterData;
 
 // --- Function Implementation ---
+
+s32 mnCount_802502CC(s32 arg0)
+{
+    return ((LocalFighterData*) GetPersistentFighterData(arg0))->unk54;
+}
 
 s32 fn_802502F0(u8 arg0)
 {
@@ -28,6 +40,11 @@ s32 fn_802502F0(u8 arg0)
 s32 fn_80250314(u8 arg0)
 {
     return GetFighterTotalFalls(arg0);
+}
+
+s32 fn_80250338(s32 arg0)
+{
+    return ((LocalFighterData*) GetPersistentFighterData(arg0))->unk34;
 }
 
 inline bool mnCount_8025035C_inline(void)
@@ -121,6 +138,26 @@ int mnCount_8025035C(s32 skip_count, u32 (*get_val_func)(s8))
 
         return arr_size;
     }
+}
+
+s32 fn_8025069C(s32 arg0)
+{
+    return ((LocalFighterData*) GetPersistentFighterData(arg0))->unk50;
+}
+
+s32 fn_802506C0(s32 arg0)
+{
+    return ((LocalFighterData*) GetPersistentFighterData(arg0))->unk52;
+}
+
+s32 fn_802506E4(s32 arg0)
+{
+    return ((LocalFighterData*) GetPersistentFighterData(arg0))->unk40;
+}
+
+s32 fn_80250708(s32 arg0)
+{
+    return ((LocalFighterData*) GetPersistentFighterData(arg0))->unk44;
 }
 
 s32 mnCount_8025072C(CountEntry* entries, s32 start_idx, s32 mode)

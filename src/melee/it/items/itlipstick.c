@@ -10,7 +10,13 @@
 #define GET_ATTRS(ip)                                                         \
     ((itLipstickAttributes*) (ip)->xC4_article_data->x4_specialAttributes)
 
-/// #it_3F14_Logic23_Spawned
+void it_3F14_Logic23_Spawned(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    ip->xD4C = GET_ATTRS(ip)->x0;
+    ip->xDAC_itcmd_var0 = 0;
+    it_8029583C(gobj);
+}
 
 void it_80295748(Item_GObj* gobj, Vec* pos)
 {
@@ -27,7 +33,13 @@ void it_80295770(Item_GObj* gobj, Vec* arg1, float arg2, int arg3)
     it_8029A114(ip->owner, arg1, arg3, arg2);
 }
 
-/// #it_802957AC
+void it_802957AC(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    it_8026B390(gobj);
+    itResetVelocity(ip);
+    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+}
 
 bool itLipstick_UnkMotion0_Anim(Item_GObj* gobj)
 {

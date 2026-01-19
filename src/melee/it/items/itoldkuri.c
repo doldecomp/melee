@@ -89,7 +89,12 @@ void itOldkuri_UnkMotion4_Phys(Item_GObj* gobj)
 
 /// #itOldkuri_UnkMotion4_Coll
 
-/// #it_2725_Logic0_PickedUp
+void it_2725_Logic0_PickedUp(Item_GObj* gobj)
+{
+    it_80275474(gobj);
+    it_80274740(gobj);
+    Item_80268E5C(gobj, 5, ITEM_ANIM_UPDATE);
+}
 
 /// #itOldkuri_UnkMotion5_Anim
 

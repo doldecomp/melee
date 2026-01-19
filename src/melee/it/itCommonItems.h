@@ -226,7 +226,7 @@ typedef struct ItLGunBeamAttr {
 } ItLGunBeamAttr;
 
 typedef struct itLipstickAttributes {
-    /* +0 */ float x0;
+    /* +0 */ s32 x0;
     /* +4 */ Vec3 x4;
 } itLipstickAttributes;
 
@@ -347,6 +347,8 @@ typedef struct {
 typedef struct itLikelike_ItemVars {
     /*  +0 ip+DD4 */ char pad_0[0x18];
     /* +18 ip+DEC */ s32 x18;
+    /* +1C ip+DF0 */ char pad_1C[0x30];
+    /* +4C ip+E20 */ s32 x4C;
 } itLikelike_ItemVars;
 
 typedef struct {
@@ -950,7 +952,16 @@ typedef struct itWhiteBea_ItemVars {
     /* +18 ip+DEC */ s32 x18;
     /* +1C ip+DF0 */ char pad_1C[0x4];
     /* +20 ip+DF4 */ UNK_T x20;
+    /* +24 ip+DF8 */ char pad_24[0x4];
+    /* +28 ip+DFC */ s32 x28;
+    /* +2C ip+E00 */ char pad_2C[0x14];
+    /* +40 ip+E14 */ s32 x40;
 } itWhiteBea_ItemVars;
+
+typedef struct itWhiteBeaAttributes {
+    /* +0 */ char pad_0[0x4];
+    /* +4 */ f32 x4;
+} itWhiteBeaAttributes;
 
 typedef struct itOctarock_ItemVars {
     /*  +0 ip+DD4 */ char pad_0[0x18];

@@ -10,7 +10,15 @@
 #include "it/inlines.h"
 #include "it/item.h"
 
-/// #it_2725_Logic7_Spawned
+void it_2725_Logic7_Spawned(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itThunderAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    ip->facing_dir = 0.0f;
+    ip->xDAC_itcmd_var0 = 0;
+    it_802CCE28(gobj);
+    it_80279CDC(gobj, attrs->x0);
+}
 
 void it_802CCB10(Item_GObj* gobj) {}
 

@@ -65,3 +65,13 @@ void it_802D07C0(Item_GObj* gobj)
     ip->entered_hitlag = efLib_PauseAll;
     ip->exited_hitlag = efLib_ResumeAll;
 }
+
+void it_802D08F0(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    it_802762BC(ip);
+    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+    ip->entered_hitlag = efLib_PauseAll;
+    ip->exited_hitlag = efLib_ResumeAll;
+    it_80273670(gobj, 0, 0.0f);
+}

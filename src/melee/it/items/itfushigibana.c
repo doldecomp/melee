@@ -12,7 +12,13 @@
 
 /// #it_2725_Logic29_Spawned
 
-/// #it_802D705C
+void it_802D705C(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->xDCE_flag.b7 = 0;
+    it_80273454(gobj);
+    it_802D718C(gobj);
+}
 
 void it_802D70A4(Item_GObj* gobj)
 {

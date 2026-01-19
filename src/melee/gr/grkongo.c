@@ -27,6 +27,7 @@
 #include <baselib/gobjproc.h>
 #include <baselib/random.h>
 #include <baselib/spline.h>
+#include "ft/ftdevice.h"
 
 void grKongo_801D5490(Ground_GObj* arg0)
 {
@@ -1290,8 +1291,8 @@ void grKongo_801D52F8(void) {}
 
 void grKongo_801D52FC(void)
 {
-    Ground_801C2BA4(5);
-    // ftCo_800C0764(2, fn_801D8134);
+    HSD_GObj* gobj = Ground_801C2BA4(5);
+    ftCo_800C0764(gobj, 2, fn_801D8134);
     grZakoGenerator_801CAE04(0);
 }
 

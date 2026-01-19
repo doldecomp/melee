@@ -23,7 +23,13 @@ void it_3F14_Logic24_Spawned(Item_GObj* gobj)
     it_8029290C(gobj);
 }
 
-/// #it_8029287C
+void it_8029287C(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    it_8026B390(gobj);
+    itResetVelocity(ip);
+    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+}
 
 bool itHarisen_UnkMotion0_Anim(Item_GObj* gobj)
 {

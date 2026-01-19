@@ -8841,11 +8841,10 @@ void it_80279744(Item_GObj* item_gobj, CommandInfo* cmd)
     ++cmd->u;
 }
 
-void it_80279768(Item_GObj* item_gobj, CommandInfo* cmd)
+void it_80279768(Item_GObj* gobj, CommandInfo* cmd)
 {
-    Item* item = item_gobj->user_data;
-    item->xDBC_itcmd_var4 |= (item->xDBC_itcmd_var4 >> 24U & 0x80);
-    // item->xDBC_itcmd_var4 |= (item->xDBC_itcmd_var4 >> 25U & 0x80);
+    Item* ip = GET_ITEM(gobj);
+    ip->xDBC_itcmd_var4.flags.x0 = true;
     ++cmd->u;
 }
 
@@ -8974,7 +8973,7 @@ void it_802799E4(Item_GObj* item_gobj)
     u32 opcode;
 
     cmd->frame_count = item->x5CC_currentAnimFrame;
-    item->xDBC_itcmd_var4 = 0;
+    item->xDBC_itcmd_var4_word = 0;
 
     if (cmd->u == NULL) {
         return;

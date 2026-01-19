@@ -1,4 +1,6 @@
 #include "mnnamenew.h"
+#include "sysdolphin/baselib/memory.h"
+#include "sysdolphin/baselib/sislib.h"
 
 /// #mnNameNew_8023B0F8
 
@@ -26,7 +28,11 @@
 
 /// #fn_8023CFC8
 
-/// #fn_8023D0F8
+void fn_8023D0F8(void* arg0)
+{
+    HSD_SisLib_803A5CC4(*(HSD_Text**) ((u8*) arg0 + 0x20));
+    HSD_Free(arg0);
+}
 
 /// #mnNameNew_8023D130
 

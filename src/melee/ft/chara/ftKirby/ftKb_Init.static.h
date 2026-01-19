@@ -7,6 +7,8 @@
 
 /* 0F6178 */ static void fn_800F6178(Fighter_GObj*);
 /* 0F6210 */ static void fn_800F6210(Fighter_GObj*);
+/* 0F6280 */ static void fn_800F6280(Fighter_GObj*);
+/* 0F6318 */ static void fn_800F6318(Fighter_GObj*);
 /* 10B2E8 */ static void fn_8010B2E8(Fighter_GObj*);
 /* 10C344 */ static void fn_8010C344(Fighter_GObj*);
 /* 10C44C */ static void fn_8010C44C(Fighter_GObj*);

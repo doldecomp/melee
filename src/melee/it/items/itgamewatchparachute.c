@@ -55,3 +55,10 @@ void it_2725_Logic74_PickedUp(Item_GObj* item_gobj)
         Item_802694CC(item_gobj);
     }
 }
+
+void it_802C6E50(Item_GObj* gobj)
+{
+    PAD_STACK(8);
+    it_8026BB44(gobj);
+    Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
+}

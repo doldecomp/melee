@@ -53,6 +53,10 @@ typedef struct {
 } itFireAttributes;
 
 typedef struct {
+    /* x0 */ f32 x0;
+} itThunderAttributes;
+
+typedef struct {
     /* x0 */ s32 xDD4; // gets iterated from 0 to 14 in function (it_802AE200)
                        // that transforms the item model (possibly frame number
                        // of animation?)

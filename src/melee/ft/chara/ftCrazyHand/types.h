@@ -23,8 +23,9 @@ typedef struct _ftCrazyHandAttributes {
     float x3C;
     Vec3 x40_pos;
     float x4C;
-    Vec2 x50;
-    float x58;
+    float x50;
+    s32 x54;
+    s32 x58;
     float x5C;
     float x60;
     float x64;
@@ -56,7 +57,7 @@ typedef struct _ftCrazyHandAttributes {
     float xE0;
     float xE4;
     float xE8;
-    s32 xEC;
+    float xEC;
     s32 xF0;
     float xF4;
     float xF8;

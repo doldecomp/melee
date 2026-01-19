@@ -208,7 +208,16 @@ bool itDosei_UnkMotion6_Coll(Item_GObj* gobj)
     return false;
 }
 
-/// #it_80282BFC
+void it_80282BFC(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    HSD_JObj* jobj;
+    Item_80268E5C(gobj, 8, 3);
+    jobj = gobj->hsd_obj;
+    ip->x5D0_animFrameSpeed = 1.0F;
+    lb_8000BA0C(jobj, 1.0F);
+    ip->owner = NULL;
+}
 
 bool itDosei_UnkMotion8_Anim(Item_GObj* gobj)
 {
