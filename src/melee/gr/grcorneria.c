@@ -20,6 +20,10 @@
 #include <baselib/jobj.h>
 #include <baselib/random.h>
 
+int grCn_803E1D80[3] = { 0, 0, 0 };
+int grCn_803E2190[5] = { 0, 0, 1, 2, 5 };
+
+static u32 grCn_804D69A4;
 static int grCn_804D69AC;
 
 /// #grCorneria_801DCCFC
@@ -228,6 +232,30 @@ void grCorneria_801DDD4C(Vec3* vec)
 void grCorneria_801DE4BC(Ground_GObj* arg) {}
 
 /// #grCorneria_801DE4C0
+void grCorneria_801DE4C0(Ground_GObj* gobj)
+{
+    Ground* gp = gobj->user_data;
+    HSD_JObj* jobj = gobj->hsd_obj;
+    int* joint_idx;
+    int joint_offset;
+    int* joints;
+    int joint_id;
+
+    Ground_801C2ED0(jobj, gp->map_id);
+    gp->gv.corneria.xC8 = grCn_804D69A4;
+    joint_idx = grCn_803E1D80;
+    joints = grCn_803E2190;
+    *(u32*) &gp->gv.corneria.xD0 = 0;
+    gp->gv.corneria.offset_x = 0.0f;
+    gp->gv.corneria.xE8 = 0.0f;
+    gp->gv.corneria.xE4 = 0.0f;
+    gp->gv.corneria.offset_y.val = 0.0f;
+    joint_offset = joint_idx[gp->gv.corneria.xC8];
+    joint_id = joints[joint_offset];
+    mpJointListAdd(joint_id);
+
+    Ground_801C2ED0(jobj, gp->map_id);
+}
 
 bool grCorneria_801DE560(Ground_GObj* arg)
 {
