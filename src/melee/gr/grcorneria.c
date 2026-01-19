@@ -2,8 +2,7 @@
 
 #include "grcorneria.static.h"
 
-#include "gr/forward.h"
-
+#include "gm/gm_17C0.h"
 #include "gr/granime.h"
 #include "gr/grlib.h"
 #include "gr/grmaterial.h"
@@ -19,12 +18,37 @@
 
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
+#include <baselib/random.h>
+
+static int grCn_804D69AC;
 
 /// #grCorneria_801DCCFC
 
 /// #grCorneria_801DCE1C
 
-/// #grCorneria_801DD2C0
+void grCorneria_801DD2C0(void)
+{
+    void* obj;
+    int rand;
+    PAD_STACK(32);
+
+    obj = Ground_801C2BA4(3);
+    if (obj != NULL) {
+        obj = GET_JOBJ(obj);
+        if (obj != NULL) {
+            HSD_JObjSetFlagsAll(obj, JOBJ_HIDDEN);
+        }
+    }
+    grCorneria_801E0678();
+    obj = grCorneria_801DD534(12);
+    if (gm_8017E7E0() != 0) {
+        rand = HSD_Randi(4) + 4;
+    } else {
+        rand = HSD_Randi(4);
+    }
+    grCorneria_801E0F34(obj, rand);
+    grCn_804D69AC = 1;
+}
 
 /// #grCorneria_801DD350
 
