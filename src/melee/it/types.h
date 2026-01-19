@@ -551,6 +551,7 @@ struct Item {
         itFoxLaser_ItemVars foxlaser;
         itFreeze_ItemVars freeze;
         itGShell_ItemVars gshell, rshell, zgshell, zrshell;
+        itGamewatchrescue_ItemVars gamewatchrescue;
         itHassam_ItemVars hassam;
         itHeart_ItemVars heart;
         itHeiho_ItemVars heiho;

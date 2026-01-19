@@ -7,7 +7,7 @@
 
 #include <dolphin/mtx.h>
 
-/* 2C8038 */ HSD_GObj* it_802C8038(Item_GObj*, Vec3*, s32, s32, float, float);
+/* 2C8038 */ Item_GObj* it_802C8038(Item_GObj*, Vec3*, s32, s32, float, float);
 /* 2C8158 */ void it_802C8158(Item_GObj* item_gobj);
 /* 2C81C8 */ void it_802C81C8(Item_GObj* item_gobj);
 /* 2C81E8 */ void it_802C81E8(Item_GObj* item_gobj);
