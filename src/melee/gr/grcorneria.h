@@ -1,6 +1,8 @@
 #ifndef GALE01_1DCCFC
 #define GALE01_1DCCFC
 
+#include "types.h"
+
 #include <placeholder.h>
 #include <platform.h>
 
@@ -80,8 +82,8 @@
 /* 1E2454 */ HSD_Generator* grCorneria_801E2454(Vec3*);
 /* 1E2480 */ HSD_Generator* grCorneria_801E2480(Vec3*);
 /* 1E24AC */ void smashTaunt_801E24AC(Ground_GObj*, int);
-/* 1E2550 */ void grCorneria_801E2550(Ground_GObj*,
-                                      struct grCorneria_GroundVars*);
+/* 1E2550 */ void smashTaunt_801E2550(Ground_GObj*,
+                                      struct grSmashTaunt_GroundVars*);
 /* 1E2598 */ UNK_RET grCorneria_801E2598(UNK_PARAMS);
 /* 1E25C4 */ UNK_RET grCorneria_801E25C4(UNK_PARAMS);
 /* 1E2738 */ UNK_RET grCorneria_801E2738(UNK_PARAMS);

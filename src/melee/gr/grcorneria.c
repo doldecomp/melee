@@ -456,7 +456,7 @@ void grCorneria_801E0DE0(Ground_GObj* arg) {}
 void grCorneria_801E0DE4(Ground_GObj* gobj)
 {
     Ground* gr = GET_GROUND(gobj);
-    grCorneria_801E2550(gobj, &gr->gv.corneria);
+    smashTaunt_801E2550(gobj, &gr->gv.smashtaunt);
 }
 
 bool grCorneria_801E0E0C(Ground_GObj* arg)
@@ -564,7 +564,16 @@ void smashTaunt_801E24AC(Ground_GObj* gobj, int renderpass)
     grDisplay_801C5DB0(gobj, renderpass);
 }
 
-/// #grCorneria_801E2550
+void smashTaunt_801E2550(Ground_GObj* gobj, struct grSmashTaunt_GroundVars* gv)
+{
+    PAD_STACK(8);
+
+    gv->xE4 = NULL;
+    Ground_801C11AC(gobj);
+    ifStatus_802F6898();
+    un_802FF570();
+    gobj->render_cb = smashTaunt_801E24AC;
+}
 
 /// #grCorneria_801E2598
 

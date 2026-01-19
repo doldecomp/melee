@@ -3,15 +3,15 @@
 #include <platform.h>
 
 #include "gr/grcorneria.h"
-#include "gr/stage.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
+#include "gr/stage.h"
+#include "if/ifcoget.h"
+#include "if/ifstatus.h"
 
 #include <baselib/aobj.h>
 #include <baselib/gobj.h>
 #include <baselib/lobj.h>
-#include "if/ifcoget.h"
-#include "if/ifstatus.h"
 
 /// #grVenom_8020362C
 
@@ -203,7 +203,7 @@ void grVenom_80206B90(Ground_GObj* arg) {}
 void grVenom_80206B94(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
-    grCorneria_801E2550(gobj, &gp->gv.corneria);
+    smashTaunt_801E2550(gobj, &gp->gv.corneria);
 }
 
 bool grVenom_80206BBC(Ground_GObj* arg)
