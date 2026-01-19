@@ -61,7 +61,7 @@
 /* 206BBC */ bool grVenom_80206BBC(Ground_GObj*);
 /* 206BC4 */ void grVenom_80206BC4(Ground_GObj*);
 /* 206BEC */ void grVenom_80206BEC(Ground_GObj*);
-/* 206BF0 */ UNK_RET grVenom_80206BF0(UNK_PARAMS);
+/* 206BF0 */ bool grVenom_80206BF0(int);
 /* 206CB0 */ UNK_RET grVenom_80206CB0(UNK_PARAMS);
 /* 206D10 */ bool grVenom_80206D10(enum_t);
 /* 206D74 */ DynamicsDesc* grVenom_80206D74(enum_t);

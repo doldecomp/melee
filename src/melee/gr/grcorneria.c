@@ -10,6 +10,7 @@
 #include "gr/grlib.h"
 #include "gr/grmaterial.h"
 #include "gr/ground.h"
+#include "gr/grvenom.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
 #include "gr/stage.h"
@@ -589,7 +590,29 @@ void smashTaunt_801E2550(Ground_GObj* gobj, struct grSmashTaunt_GroundVars* gv)
 
 /// #grCorneria_801E2B80
 
-/// #grCorneria_801E2C34
+#pragma push
+#pragma dont_inline on
+bool grCorneria_801E2C34(void)
+{
+    int rand;
+    HSD_GObj* gobj;
+    PAD_STACK(44);
+
+    if (stage_info.internal_stage_id == CORNERIA) {
+        if (Ground_801C2BA4(12) != NULL) {
+            return false;
+        }
+        rand = HSD_Randi(5) + 13;
+        gobj = grCorneria_801DD534(12);
+        HSD_ASSERT(3598, gobj);
+        grCorneria_801E0F34(gobj, rand);
+        return true;
+    } else if (stage_info.internal_stage_id == VENOM) {
+        return grVenom_80206BF0(0x14);
+    }
+    return true;
+}
+#pragma pop
 
 bool grCorneria_801E2CE8(void)
 {
