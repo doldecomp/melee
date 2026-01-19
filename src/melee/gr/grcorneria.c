@@ -553,3 +553,17 @@ bool grCorneria_801E2EEC(Vec3* v, int arg1, HSD_JObj* jobj)
 }
 
 /// #grCorneria_801E2FCC
+f32 grCorneria_801E2FCC()
+{
+    HSD_GObj* gobj;
+    Ground* gp;
+
+    gobj = Ground_801C2BA4(3);
+    if (gobj != NULL) {
+        gp = gobj->user_data;
+        if (gp != NULL) {
+            return (Ground_801C0498() * -35.0f - gp->gv.corneria.xD0) + 5.0f;
+        }
+    }
+    return -3.4028235e38f;
+}
