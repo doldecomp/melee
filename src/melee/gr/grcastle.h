@@ -73,7 +73,7 @@ struct unkCastle {
 /* 1CFBD4 */ UNK_RET grCastle_801CFBD4(UNK_PARAMS);
 /* 1D0298 */ UNK_RET grCastle_801D0298(UNK_PARAMS);
 /* 1D02B8 */ UNK_RET grCastle_801D02B8(UNK_PARAMS);
-/* 1D0520 */ UNK_RET fn_801D0520(UNK_PARAMS);
+/* 1D0520 */ void grCastle_801D0520(Ground_GObj*, int);
 /* 1D0550 */ void grCastle_801D0550(UNK_T, unkCastle*);
 /* 1D059C */ void grCastle_801D059C(UNK_T, unkCastle*);
 /* 1D05E8 */ void grCastle_801D05E8(UNK_T, unkCastle*);

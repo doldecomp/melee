@@ -2,6 +2,7 @@
 
 #include "ft/ftdevice.h"
 #include "ft/ftlib.h"
+#include "gr/grdisplay.h"
 #include "gr/grlib.h"
 #include "gr/grmaterial.h"
 #include "gr/ground.h"
@@ -215,7 +216,13 @@ void grCastle_801D0298(void)
 
 /// #grCastle_801D02B8
 
-/// #fn_801D0520
+void grCastle_801D0520(Ground_GObj* gobj, int renderpass)
+{
+    Ground* gp = GET_GROUND(gobj);
+    if (gp->gv.castle.xC8 == 0) {
+        grDisplay_801C5DB0(gobj, renderpass);
+    }
+}
 
 static inline void grCastle_801D0550_sub(unkCastle* arg0, s32 i)
 {
