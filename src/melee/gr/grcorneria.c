@@ -2,13 +2,15 @@
 
 #include "grcorneria.static.h"
 
-#include "baselib/forward.h"
-#include "gr/forward.h"
-
+#include "cm/camera.h"
+#include "gm/gm_17C0.h"
+#include "gm/gm_1A45.h"
 #include "gr/granime.h"
+#include "gr/grdisplay.h"
 #include "gr/grlib.h"
 #include "gr/grmaterial.h"
 #include "gr/ground.h"
+#include "gr/grvenom.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
 #include "gr/stage.h"
@@ -16,19 +18,75 @@
 #include "if/ifcoget.h"
 #include "if/ifstatus.h"
 #include "lb/lb_00B0.h"
+#include "mp/mplib.h"
 
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
+#include <baselib/random.h>
+
+int grCn_803E1D80[3] = { 0, 0, 0 };
+int grCn_803E2190[5] = { 0, 0, 1, 2, 5 };
+
+static u32 grCn_804D69A4;
+static int grCn_804D69AC;
 
 /// #grCorneria_801DCCFC
 
 /// #grCorneria_801DCE1C
 
-/// #grCorneria_801DD2C0
+void grCorneria_801DD2C0(void)
+{
+    void* obj;
+    int rand;
+    PAD_STACK(32);
+
+    obj = Ground_801C2BA4(3);
+    if (obj != NULL) {
+        obj = GET_JOBJ(obj);
+        if (obj != NULL) {
+            HSD_JObjSetFlagsAll(obj, JOBJ_HIDDEN);
+        }
+    }
+    grCorneria_801E0678();
+    obj = grCorneria_801DD534(12);
+    if (gm_8017E7E0() != 0) {
+        rand = HSD_Randi(4) + 4;
+    } else {
+        rand = HSD_Randi(4);
+    }
+    grCorneria_801E0F34(obj, rand);
+    grCn_804D69AC = 1;
+}
 
 /// #grCorneria_801DD350
 
-/// #grCorneria_801DD478
+void grCorneria_801DD478(void)
+{
+    HSD_GObj* gobj;
+    Ground* gp;
+
+    gobj = Ground_801C2BA4(11);
+    if (gobj != NULL) {
+        Ground_801C4A08(gobj);
+    }
+    gobj = Ground_801C2BA4(8);
+    if (gobj != NULL) {
+        Ground_801C4A08(gobj);
+    }
+    gobj = Ground_801C2BA4(9);
+    if (gobj != NULL) {
+        Ground_801C4A08(gobj);
+    }
+    gobj = Ground_801C2BA4(4);
+    if (gobj != NULL) {
+        Ground_801C4A08(gobj);
+    }
+    gobj = grCorneria_801DD534(8);
+    gp = GET_GROUND(gobj);
+    gp->gv.corneria.xC5 = 0;
+    grCn_804D69AC = 0;
+    Ground_801C53EC(0x55737);
+}
 
 void grCorneria_801DD508(void)
 {
@@ -56,7 +114,7 @@ void grCorneria_801DD654(Ground_GObj* arg) {}
 
 void grCorneria_801DD658(Ground_GObj* arg) {}
 
-void fn_801DD65C(Ground_GObj* gobj)
+void grCorneria_801DD65C(Ground_GObj* gobj)
 {
     GET_GROUND(gobj)->gv.corneria.xC4.flags.b0 = false;
 }
@@ -122,7 +180,7 @@ void grCorneria_801DD674(Ground_GObj* ground_gobj)
         grZakoGenerator_801CA394(grCn_803E1FE8, 1, grCorneria_801E2454, 0.3f);
     gr->gv.corneria.xCC =
         grZakoGenerator_801CA394(grCn_803E2000, 2, grCorneria_801E2480, 0.3f);
-    Ground_801C10B8(ground_gobj, fn_801DD65C);
+    Ground_801C10B8(ground_gobj, grCorneria_801DD65C);
     gr->x11_flags.b012 = 1;
     gr->gv.corneria.x12C = Ground_801C3FA4(ground_gobj, 8);
 }
@@ -177,7 +235,30 @@ void grCorneria_801DDD4C(Vec3* vec)
 
 void grCorneria_801DE4BC(Ground_GObj* arg) {}
 
-/// #grCorneria_801DE4C0
+void grCorneria_Arwing_801DE4C0(Ground_GObj* gobj)
+{
+    Ground* gp = gobj->user_data;
+    HSD_JObj* jobj = gobj->hsd_obj;
+    int* joint_idx;
+    int joint_offset;
+    int* joints;
+    int joint_id;
+
+    Ground_801C2ED0(jobj, gp->map_id);
+    gp->gv.arwing.xC8 = grCn_804D69A4;
+    joint_idx = grCn_803E1D80;
+    joints = grCn_803E2190;
+    gp->gv.arwing.xD0 = 0;
+    gp->gv.arwing.xDC = 0.0f;
+    gp->gv.arwing.xE8 = 0.0f;
+    gp->gv.arwing.xE4 = 0.0f;
+    gp->gv.arwing.xE0 = 0.0f;
+    joint_offset = joint_idx[gp->gv.arwing.xC8];
+    joint_id = joints[joint_offset];
+    mpJointListAdd(joint_id);
+
+    Ground_801C2ED0(jobj, gp->map_id);
+}
 
 bool grCorneria_801DE560(Ground_GObj* arg)
 {
@@ -376,7 +457,7 @@ void grCorneria_801E0DE0(Ground_GObj* arg) {}
 void grCorneria_801E0DE4(Ground_GObj* gobj)
 {
     Ground* gr = GET_GROUND(gobj);
-    grCorneria_801E2550(gobj, &gr->gv.corneria);
+    smashTaunt_801E2550(gobj, &gr->gv.smashtaunt);
 }
 
 bool grCorneria_801E0E0C(Ground_GObj* arg)
@@ -399,15 +480,15 @@ void grCorneria_801E0F30(Ground_GObj* arg) {}
 void grCorneria_801E0F34(Ground_GObj* gobj, int val)
 {
     Ground* gp = GET_GROUND(gobj);
-    gp->gv.corneria.xCC = 0;
-    gp->gv.corneria.xC8 = 0;
+    gp->gv.arwing.xCC = 0;
+    gp->gv.arwing.xC8 = 0;
     if (val < 0) {
         val = 0;
     }
     if (val >= 0x14u) {
         val = 0x13;
     }
-    *(int*) (&gp->gv.corneria.xC4) = val;
+    gp->gv.arwing.xC4 = val;
 }
 
 bool grCorneria_801E0F64(Ground_GObj* arg)
@@ -460,9 +541,40 @@ HSD_Generator* grCorneria_801E2480(Vec3* vec)
     grLib_801C96F8(0x7530, 0x1E, vec);
 }
 
-/// #fn_801E24AC
+// This triggers for both Corneria and Venom
+void smashTaunt_801E24AC(Ground_GObj* gobj, int renderpass)
+{
+    Ground* gp = GET_GROUND(gobj);
+    void* obj;
+    PAD_STACK(8);
 
-/// #grCorneria_801E2550
+    if (gm_801A45E8(1) != false || gm_801A45E8(2) != false ||
+        Camera_8003010C() != false)
+    {
+        obj = gp->gv.smashtaunt.xE4;
+        if (obj == NULL) {
+            return;
+        }
+        M2C_FIELD(gp->gv.smashtaunt.xE4, u8*, 0x4D) = 1;
+        return;
+    }
+    obj = gp->gv.smashtaunt.xE4;
+    if (obj != NULL) {
+        M2C_FIELD(gp->gv.smashtaunt.xE4, u8*, 0x4D) = 0;
+    }
+    grDisplay_801C5DB0(gobj, renderpass);
+}
+
+void smashTaunt_801E2550(Ground_GObj* gobj, struct grSmashTaunt_GroundVars* gv)
+{
+    PAD_STACK(8);
+
+    gv->xE4 = NULL;
+    Ground_801C11AC(gobj);
+    ifStatus_802F6898();
+    un_802FF570();
+    gobj->render_cb = smashTaunt_801E24AC;
+}
 
 /// #grCorneria_801E2598
 
@@ -472,13 +584,93 @@ HSD_Generator* grCorneria_801E2480(Vec3* vec)
 
 /// #grCorneria_801E277C
 
-/// #grCorneria_801E2A6C
+void grCorneria_801E2A6C(void)
+{
+    HSD_GObj* gobj;
+    PAD_STACK(20);
 
-/// #grCorneria_801E2AF4
+    if (stage_info.internal_stage_id == CORNERIA) {
+        gobj = Ground_801C2BA4(12);
+        if (gobj == NULL) {
+            return;
+        }
+        gobj = Ground_801C2BA4(5);
+        if (gobj != NULL) {
+            Ground_801C5544(GET_GROUND(gobj), 0);
+            Ground_801C4A08(gobj);
+        }
+        HSD_SisLib_803A5F50(1);
+    } else if (stage_info.internal_stage_id == VENOM) {
+        grVenom_80206CB0(0);
+    }
+}
 
-/// #grCorneria_801E2B80
+void grCorneria_801E2AF4(void)
+{
+    HSD_GObj* gobj;
+    PAD_STACK(20);
 
-/// #grCorneria_801E2C34
+    if (stage_info.internal_stage_id == CORNERIA) {
+        gobj = Ground_801C2BA4(12);
+        if (gobj == NULL) {
+            return;
+        }
+        Ground_801C4A08(gobj);
+        gobj = Ground_801C2BA4(5);
+        if (gobj != NULL) {
+            Ground_801C5544(GET_GROUND(gobj), 0);
+            Ground_801C4A08(gobj);
+        }
+        HSD_SisLib_803A5F50(1);
+    } else if (stage_info.internal_stage_id == VENOM) {
+        grVenom_80206CB0(1);
+    }
+}
+
+#pragma push
+#pragma dont_inline on
+bool grCorneria_801E2B80(void)
+{
+    int rand;
+    HSD_GObj* gobj;
+    PAD_STACK(44);
+
+    if (stage_info.internal_stage_id == CORNERIA) {
+        if (Ground_801C2BA4(12) != NULL) {
+            return false;
+        }
+        rand = HSD_Randi(5) + 8;
+        gobj = grCorneria_801DD534(12);
+        HSD_ASSERT(3598, gobj);
+        grCorneria_801E0F34(gobj, rand);
+        return true;
+    } else if (stage_info.internal_stage_id == VENOM) {
+        return grVenom_80206BF0(2);
+    }
+    return true;
+}
+
+bool grCorneria_801E2C34(void)
+{
+    int rand;
+    HSD_GObj* gobj;
+    PAD_STACK(44);
+
+    if (stage_info.internal_stage_id == CORNERIA) {
+        if (Ground_801C2BA4(12) != NULL) {
+            return false;
+        }
+        rand = HSD_Randi(5) + 13;
+        gobj = grCorneria_801DD534(12);
+        HSD_ASSERT(3598, gobj);
+        grCorneria_801E0F34(gobj, rand);
+        return true;
+    } else if (stage_info.internal_stage_id == VENOM) {
+        return grVenom_80206BF0(20);
+    }
+    return true;
+}
+#pragma pop
 
 bool grCorneria_801E2CE8(void)
 {
@@ -490,11 +682,36 @@ bool grCorneria_801E2CE8(void)
     return false;
 }
 
-/// #grCorneria_801E2D14
+bool grCorneria_801E2D14(void)
+{
+    HSD_GObj* gobj;
+    if (stage_info.internal_stage_id == CORNERIA) {
+        gobj = Ground_801C2BA4(12);
+        if (gobj != NULL) {
+            return true;
+        }
+        return false;
+    } else if (stage_info.internal_stage_id == VENOM) {
+        gobj = Ground_801C2BA4(8);
+        if (gobj != NULL) {
+            return true;
+        }
+        return false;
+    }
+    return false;
+}
 
 /// #grCorneria_801E2D90
 
-/// #grCorneria_801E2E50
+bool grCorneria_801E2E50(int line_id)
+{
+    if (stage_info.internal_stage_id == CORNERIA && line_id != -1) {
+        if (mpJointFromLine(line_id) == 4) {
+            return true;
+        }
+    }
+    return false;
+}
 
 f32 grCorneria_801E2EA0(void)
 {
@@ -544,4 +761,17 @@ bool grCorneria_801E2EEC(Vec3* v, int arg1, HSD_JObj* jobj)
     return false;
 }
 
-/// #grCorneria_801E2FCC
+f32 grCorneria_801E2FCC(void)
+{
+    HSD_GObj* gobj;
+    Ground* gp;
+
+    gobj = Ground_801C2BA4(3);
+    if (gobj != NULL) {
+        gp = gobj->user_data;
+        if (gp != NULL) {
+            return (Ground_801C0498() * -35.0f - gp->gv.corneria.xD0) + 5.0f;
+        }
+    }
+    return -3.4028235e38f;
+}

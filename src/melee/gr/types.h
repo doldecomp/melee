@@ -347,6 +347,48 @@ struct grCorneria_GroundVars {
     HSD_JObj* x12C;
 };
 
+struct grVenom_GroundVars {
+    u32 xC4;
+    u32 xC8;
+    u32 xCC;
+    u32 xD0;
+    f32 xD4;
+    f32 xD8;
+    f32 xDC;
+    f32 xE0;
+    f32 xE4;
+    f32 xE8;
+    f32 xEC;
+};
+
+struct grArwing_GroundVars {
+    u32 xC4;
+    u32 xC8;
+    u32 xCC;
+    u32 xD0;
+    f32 xD4;
+    f32 xD8;
+    f32 xDC;
+    f32 xE0;
+    f32 xE4;
+    f32 xE8;
+    f32 xEC;
+};
+
+struct grSmashTaunt_GroundVars {
+    u32 xC4;
+    u32 xC8;
+    u32 xCC;
+    u32 xD0;
+    f32 xD4;
+    f32 xD8;
+    f32 xDC;
+    f32 xE0;
+    void* xE4;
+    f32 xE8;
+    f32 xEC;
+};
+
 struct grGreatBay_GroundVars {
     u8 _0[0x10];
     u32 x10;
@@ -774,6 +816,7 @@ struct Ground {
         /// @todo This union is named 'u', from assert statements
         union GroundVars {
             char pad_0[0x204 - 0xC4];
+            struct grArwing_GroundVars arwing;
             struct grBigBlue_GroundVars bigblue;
             struct grBigBlueRoute_GroundVars bigblueroute;
             struct grCorneria_GroundVars corneria;
@@ -803,7 +846,9 @@ struct Ground {
             struct grOnett_GroundVars onett;
             struct grPura_GroundVars pura;
             struct grPura_GroundVars2 pura2;
+            struct grSmashTaunt_GroundVars smashtaunt;
             struct GroundVars_unk unk;
+            struct grVenom_GroundVars venom;
             struct grYorster_GroundVars yorster;
             struct grZebes_GroundVars zebes;
         } gv;
