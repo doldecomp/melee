@@ -138,6 +138,11 @@ typedef struct {
     /* x108 */ HSD_GObj* owner;    // xE7C
 } itFoxBlaster_ItemVars;
 
+typedef struct {
+    /* 0x00 */ int xDD4;
+    /* 0x00 */ Item_GObj* xDD8;
+} itGamewatchrescue_ItemVars;
+
 typedef struct itLeadead_ItemVars {
     /* 0x00 */ u8 pad[0x18];
     /* 0x18 */ s32 xDEC;
