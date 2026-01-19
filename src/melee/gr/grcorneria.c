@@ -490,7 +490,24 @@ bool grCorneria_801E2CE8(void)
     return false;
 }
 
-/// #grCorneria_801E2D14
+bool grCorneria_801E2D14(void)
+{
+    HSD_GObj* gobj;
+    if (stage_info.internal_stage_id == CORNERIA) {
+        gobj = Ground_801C2BA4(12);
+        if (gobj != NULL) {
+            return true;
+        }
+        return false;
+    } else if (stage_info.internal_stage_id == VENOM) {
+        gobj = Ground_801C2BA4(8);
+        if (gobj != NULL) {
+            return true;
+        }
+        return false;
+    }
+    return false;
+}
 
 /// #grCorneria_801E2D90
 
