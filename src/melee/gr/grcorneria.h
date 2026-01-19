@@ -100,6 +100,6 @@
 /* 1E2EA0 */ f32 grCorneria_801E2EA0(void);
 /* 1E2EE4 */ DynamicsDesc* grCorneria_801E2EE4(enum_t);
 /* 1E2EEC */ bool grCorneria_801E2EEC(Vec3*, int, HSD_JObj*);
-/* 1E2FCC */ f32 grCorneria_801E2FCC();
+/* 1E2FCC */ f32 grCorneria_801E2FCC(void);
 
 #endif
