@@ -2,7 +2,6 @@
 
 #include "grcorneria.static.h"
 
-#include "baselib/forward.h"
 #include "gr/forward.h"
 
 #include "gr/granime.h"
@@ -16,6 +15,7 @@
 #include "if/ifcoget.h"
 #include "if/ifstatus.h"
 #include "lb/lb_00B0.h"
+#include "mp/mplib.h"
 
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
@@ -494,7 +494,15 @@ bool grCorneria_801E2CE8(void)
 
 /// #grCorneria_801E2D90
 
-/// #grCorneria_801E2E50
+bool grCorneria_801E2E50(int line_id)
+{
+    if (stage_info.internal_stage_id == CORNERIA && line_id != -1) {
+        if (mpJointFromLine(line_id) == 4) {
+            return true;
+        }
+    }
+    return false;
+}
 
 f32 grCorneria_801E2EA0(void)
 {
