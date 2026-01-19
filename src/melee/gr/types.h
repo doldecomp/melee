@@ -637,6 +637,7 @@ struct grFourside_GroundVars {
     /*  +0 gp+C4 */ u8 x0;
     /*  +1 gp+C5 */ u8 x1;
     /*  +4 gp+C8 */ s32 x4;
+    /*  +4 gp+CC */ s32 x8;
 };
 
 struct grGreens_BlockVars {

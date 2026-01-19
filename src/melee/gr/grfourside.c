@@ -1,5 +1,6 @@
 #include "grfourside.h"
 
+#include "m2c_macros.h"
 #include "placeholder.h"
 
 #include <platform.h>
@@ -97,7 +98,21 @@ void grFourside_801F3078(Ground_GObj* gobj)
 
 void grFourside_801F309C(Ground_GObj* arg) {}
 
-/// #fn_801F30A0
+void grFourside_801F30A0(void* unusedr3, void* unusedr4, void* r5)
+{
+    HSD_GObj* gobj;
+    Ground* gp;
+    s32 val;
+    PAD_STACK(20);
+
+    gobj = Ground_801C2BA4(5);
+    val = M2C_FIELD(r5, u8*, 0x34);
+    gp = GET_GROUND(gobj);
+    val = ((val >> 3) & 0xF);
+    if (val == 1) {
+        gp->gv.fourside.x8 += 1;
+    }
+}
 
 void grFourside_801F30F0(Ground_GObj* gobj)
 {
