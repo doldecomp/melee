@@ -2,8 +2,11 @@
 
 #include "grcorneria.static.h"
 
+#include "cm/camera.h"
 #include "gm/gm_17C0.h"
+#include "gm/gm_1A45.h"
 #include "gr/granime.h"
+#include "gr/grdisplay.h"
 #include "gr/grlib.h"
 #include "gr/grmaterial.h"
 #include "gr/ground.h"
@@ -110,7 +113,7 @@ void grCorneria_801DD654(Ground_GObj* arg) {}
 
 void grCorneria_801DD658(Ground_GObj* arg) {}
 
-void fn_801DD65C(Ground_GObj* gobj)
+void grCorneria_801DD65C(Ground_GObj* gobj)
 {
     GET_GROUND(gobj)->gv.corneria.xC4.flags.b0 = false;
 }
@@ -176,7 +179,7 @@ void grCorneria_801DD674(Ground_GObj* ground_gobj)
         grZakoGenerator_801CA394(grCn_803E1FE8, 1, grCorneria_801E2454, 0.3f);
     gr->gv.corneria.xCC =
         grZakoGenerator_801CA394(grCn_803E2000, 2, grCorneria_801E2480, 0.3f);
-    Ground_801C10B8(ground_gobj, fn_801DD65C);
+    Ground_801C10B8(ground_gobj, grCorneria_801DD65C);
     gr->x11_flags.b012 = 1;
     gr->gv.corneria.x12C = Ground_801C3FA4(ground_gobj, 8);
 }
@@ -231,8 +234,7 @@ void grCorneria_801DDD4C(Vec3* vec)
 
 void grCorneria_801DE4BC(Ground_GObj* arg) {}
 
-/// #grCorneria_801DE4C0
-void grCorneria_801DE4C0(Ground_GObj* gobj)
+void grCorneria_Arwing_801DE4C0(Ground_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
     HSD_JObj* jobj = gobj->hsd_obj;
@@ -242,15 +244,15 @@ void grCorneria_801DE4C0(Ground_GObj* gobj)
     int joint_id;
 
     Ground_801C2ED0(jobj, gp->map_id);
-    gp->gv.corneria.xC8 = grCn_804D69A4;
+    gp->gv.arwing.xC8 = grCn_804D69A4;
     joint_idx = grCn_803E1D80;
     joints = grCn_803E2190;
-    *(u32*) &gp->gv.corneria.xD0 = 0;
-    gp->gv.corneria.offset_x = 0.0f;
-    gp->gv.corneria.xE8 = 0.0f;
-    gp->gv.corneria.xE4 = 0.0f;
-    gp->gv.corneria.offset_y.val = 0.0f;
-    joint_offset = joint_idx[gp->gv.corneria.xC8];
+    gp->gv.arwing.xD0 = 0;
+    gp->gv.arwing.xDC = 0.0f;
+    gp->gv.arwing.xE8 = 0.0f;
+    gp->gv.arwing.xE4 = 0.0f;
+    gp->gv.arwing.xE0 = 0.0f;
+    joint_offset = joint_idx[gp->gv.arwing.xC8];
     joint_id = joints[joint_offset];
     mpJointListAdd(joint_id);
 
@@ -477,15 +479,15 @@ void grCorneria_801E0F30(Ground_GObj* arg) {}
 void grCorneria_801E0F34(Ground_GObj* gobj, int val)
 {
     Ground* gp = GET_GROUND(gobj);
-    gp->gv.corneria.xCC = 0;
-    gp->gv.corneria.xC8 = 0;
+    gp->gv.arwing.xCC = 0;
+    gp->gv.arwing.xC8 = 0;
     if (val < 0) {
         val = 0;
     }
     if (val >= 0x14u) {
         val = 0x13;
     }
-    *(int*) (&gp->gv.corneria.xC4) = val;
+    gp->gv.arwing.xC4 = val;
 }
 
 bool grCorneria_801E0F64(Ground_GObj* arg)
@@ -538,7 +540,29 @@ HSD_Generator* grCorneria_801E2480(Vec3* vec)
     grLib_801C96F8(0x7530, 0x1E, vec);
 }
 
-/// #fn_801E24AC
+// This triggers for both Corneria and Venom
+void smashTaunt_801E24AC(Ground_GObj* gobj, int renderpass)
+{
+    Ground* gp = GET_GROUND(gobj);
+    void* obj;
+    PAD_STACK(8);
+
+    if (gm_801A45E8(1) != false || gm_801A45E8(2) != false ||
+        Camera_8003010C() != false)
+    {
+        obj = gp->gv.smashtaunt.xE4;
+        if (obj == NULL) {
+            return;
+        }
+        M2C_FIELD(gp->gv.smashtaunt.xE4, u8*, 0x4D) = 1;
+        return;
+    }
+    obj = gp->gv.smashtaunt.xE4;
+    if (obj != NULL) {
+        M2C_FIELD(gp->gv.smashtaunt.xE4, u8*, 0x4D) = 0;
+    }
+    grDisplay_801C5DB0(gobj, renderpass);
+}
 
 /// #grCorneria_801E2550
 
@@ -647,8 +671,7 @@ bool grCorneria_801E2EEC(Vec3* v, int arg1, HSD_JObj* jobj)
     return false;
 }
 
-/// #grCorneria_801E2FCC
-f32 grCorneria_801E2FCC()
+f32 grCorneria_801E2FCC(void)
 {
     HSD_GObj* gobj;
     Ground* gp;
