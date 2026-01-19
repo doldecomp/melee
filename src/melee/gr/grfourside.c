@@ -13,9 +13,11 @@
 #include <dolphin/mtx.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
+#include <baselib/random.h>
 
 static struct {
     int x0;
+    int x4;
 }* grFs_804D69D8;
 
 void grFourside_801F2D0C(bool arg) {}
@@ -140,7 +142,19 @@ void grFourside_801F3B6C(Ground_GObj* arg) {}
 
 /// #grFourside_801F3B70
 
-/// #grFourside_801F3C40
+void grFourside_801F3C40(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+
+    gp->x11_flags.b012 = 1;
+    HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
+    gp->gv.fourside.x0 = 0;
+    gp->gv.fourside.x4 =
+        grFs_804D69D8->x0 +
+        (grFs_804D69D8->x4 != 0 ? HSD_Randi(grFs_804D69D8->x4) : 0);
+    gp->gv.fourside.x1 = 0;
+}
 
 bool grFourside_801F3CC0(Ground_GObj* arg)
 {
