@@ -87,12 +87,12 @@ void un_802FD708(DynamicModelDesc* desc, int arg1)
     }
 }
 
-void un_802FD8A0(void* arg0)
+void un_802FD8A0(DynamicModelDesc* arg0)
 {
     un_802FD708(arg0, 0);
 }
 
-void un_802FD8C4(void* arg0)
+void un_802FD8C4(DynamicModelDesc* arg0)
 {
     un_802FD708(arg0, 1);
 }

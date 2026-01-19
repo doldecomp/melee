@@ -5,10 +5,26 @@
 
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
+#include "if/ifhazard.h"
+
+static struct {
+    int x0;
+}* grMc_804D69D0;
 
 void grMuteCity_801EFC68(bool arg) {}
 
-/// #grMuteCity_801EFC6C
+void grMuteCity_801EFC6C(void)
+{
+    grMc_804D69D0 = Ground_801C49F8();
+    stage_info.unk8C.b4 = 0;
+    stage_info.unk8C.b5 = 0;
+    grMuteCity_801EFD0C(0);
+    Ground_801C39C0();
+    Ground_801C3BB4();
+    grMuteCity_801EFD0C(0x1E);
+    un_802FD8C4(grMuteCity_801F28A8());
+    un_802FD65C();
+}
 
 void grMuteCity_801EFCDC(void) {}
 
