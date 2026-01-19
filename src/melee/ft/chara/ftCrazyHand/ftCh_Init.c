@@ -8,8 +8,10 @@
 #include "baselib/forward.h"
 
 #include "ft/chara/ftCommon/ftCo_CaptureCut.h"
+#include "ft/chara/ftCommon/ftCo_Thrown.h"
 #include "ft/fighter.h"
 #include "ft/ft_081B.h"
+#include "ft/ft_0881.h"
 #include "ft/ftbosslib.h"
 #include "ft/ftcamera.h"
 #include "ft/ftcommon.h"
@@ -26,8 +28,6 @@
 
 #include <common_structs.h>
 #include <dolphin/mtx.h>
-#include "ft/chara/ftCommon/ftCo_Thrown.h"
-#include "ft/ft_0881.h"
 
 /* 156310 */ static void ftCh_Init_80156310(HSD_GObj* gobj);
 /* 157080 */ static void fn_80157080(Fighter_GObj* gobj);
@@ -1928,16 +1928,26 @@ void ftCh_GrabUnk1_8015AC50(HSD_GObj* gobj)
     fp->mv.ch.unk0.xC.z = 0.0f;
 }
 
+static void ftCh_FingerGun2_Anim_inline(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    if (fp->mv.mh.unk0.x20 == 1) {
+        ftCh_Init_801592D4(gobj);
+    } else {
+        ftCh_Init_80158F34(gobj);
+    }
+}
+
+static void ftCh_FingerGun2_Anim_inline2(HSD_GObj* gobj)
+{
+    ftCh_FingerGun2_Anim_inline(gobj);
+}
+
 void ftCh_FingerGun2_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        Fighter* fp = GET_FIGHTER(gobj);
-
-        if (fp->mv.mh.unk0.x20 == 1) {
-            ftCh_Init_801592D4(gobj);
-        } else {
-            ftCh_Init_80158F34(gobj);
-        }
+        ftCh_FingerGun2_Anim_inline2(gobj);
     }
 }
 
