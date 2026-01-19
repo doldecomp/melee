@@ -5,6 +5,7 @@
 
 #include "gr/forward.h"
 #include "lb/forward.h"
+#include "mp/forward.h"
 #include <baselib/forward.h>
 
 #include <dolphin/mtx.h>
@@ -26,18 +27,18 @@ struct unkCastle {
 /* 1CD600 */ bool grCastle_801CD600(Ground_GObj*);
 /* 1CD608 */ void grCastle_801CD608(Ground_GObj*);
 /* 1CD60C */ void grCastle_801CD60C(Ground_GObj*);
-/* 1CD610 */ UNK_RET fn_801CD610(UNK_PARAMS);
+/* 1CD610 */ void grCastle_801CD610(Ground_GObj*);
 /* 1CD658 */ void grCastle_801CD658(Ground_GObj*);
 /* 1CD8A0 */ bool grCastle_801CD8A0(Ground_GObj*);
 /* 1CD8A8 */ void grCastle_801CD8A8(Ground_GObj*);
 /* 1CD960 */ void grCastle_801CD960(Ground_GObj*);
-/* 1CD9B4 */ UNK_RET fn_801CD9B4(UNK_PARAMS);
+/* 1CD9B4 */ void grCastle_801CD9B4(Ground_GObj*);
 /* 1CDA0C */ void grCastle_801CDA0C(Ground_GObj*);
 /* 1CDC3C */ bool grCastle_801CDC3C(Ground_GObj*);
 /* 1CDC44 */ void grCastle_801CDC44(Ground_GObj*);
 /* 1CDF50 */ void grCastle_801CDF50(Ground_GObj*);
-/* 1CDF54 */ UNK_RET grCastle_801CDF54(UNK_PARAMS);
-/* 1CDFD8 */ UNK_RET grCastle_801CDFD8(UNK_PARAMS);
+/* 1CDF54 */ bool grCastle_801CDF54(Vec3*);
+/* 1CDFD8 */ void grCastle_801CDFD8(Ground_GObj*);
 /* 1CE054 */ UNK_RET grCastle_801CE054(UNK_PARAMS);
 /* 1CE19C */ UNK_RET grCastle_801CE19C(UNK_PARAMS);
 /* 1CE260 */ void grCastle_801CE260(Ground_GObj*);
@@ -63,15 +64,16 @@ struct unkCastle {
 /* 1CF300 */ bool grCastle_801CF300(Ground_GObj*);
 /* 1CF308 */ void grCastle_801CF308(Ground_GObj*);
 /* 1CF74C */ void grCastle_801CF74C(Ground_GObj*);
-/* 1CF750 */ UNK_RET fn_801CF750(UNK_PARAMS);
-/* 1CF7B0 */ UNK_RET grCastle_801CF7B0(UNK_PARAMS);
+/* 1CF750 */ void grCastle_801CF750(Ground*, s32, CollData*, s32,
+                                    mpLib_GroundEnum, f32);
+/* 1CF7B0 */ void grCastle_801CF7B0(Ground_GObj*);
 /* 1CF868 */ UNK_RET grCastle_801CF868(UNK_PARAMS);
 /* 1CFAFC */ UNK_RET fn_801CFAFC(UNK_PARAMS);
 /* 1CFB68 */ UNK_RET fn_801CFB68(UNK_PARAMS);
 /* 1CFBD4 */ UNK_RET grCastle_801CFBD4(UNK_PARAMS);
 /* 1D0298 */ UNK_RET grCastle_801D0298(UNK_PARAMS);
 /* 1D02B8 */ UNK_RET grCastle_801D02B8(UNK_PARAMS);
-/* 1D0520 */ UNK_RET fn_801D0520(UNK_PARAMS);
+/* 1D0520 */ void grCastle_801D0520(Ground_GObj*, int);
 /* 1D0550 */ void grCastle_801D0550(UNK_T, unkCastle*);
 /* 1D059C */ void grCastle_801D059C(UNK_T, unkCastle*);
 /* 1D05E8 */ void grCastle_801D05E8(UNK_T, unkCastle*);
@@ -83,7 +85,7 @@ struct unkCastle {
 /* 1D0834 */ void grCastle_801D0834(UNK_T, unkCastle*, Ground_GObj*);
 /* 1D08AC */ void grCastle_801D08AC(UNK_T, unkCastle*, Ground_GObj*);
 /* 1D0924 */ UNK_RET fn_801D0924(UNK_PARAMS);
-/* 1D09B8 */ UNK_RET fn_801D09B8(UNK_PARAMS);
+/* 1D09B8 */ UNK_RET grCastle_801D09B8(UNK_PARAMS);
 /* 1D0A9C */ void grCastle_801D0A9C(Vec3* arg0, f32 arg8);
 /* 1D0B04 */ DynamicsDesc* grCastle_801D0B04(enum_t);
 /* 1D0B0C */ bool grCastle_801D0B0C(Vec3* v, int arg1, HSD_JObj* jobj);

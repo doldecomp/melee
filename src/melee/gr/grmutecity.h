@@ -3,16 +3,19 @@
 
 #include <placeholder.h>
 
-#include "it/inlines.h"
-
+#include "gr/forward.h"
+#include "lb/forward.h"
+#include "sc/forward.h"
 #include <baselib/forward.h>
+
+#include <dolphin/mtx.h>
 
 /* 1EFC68 */ void grMuteCity_801EFC68(bool);
 /* 1EFC6C */ void grMuteCity_801EFC6C(void);
 /* 1EFCDC */ void grMuteCity_801EFCDC(void);
 /* 1EFCE0 */ void grMuteCity_801EFCE0(void);
 /* 1EFD04 */ bool grMuteCity_801EFD04(void);
-/* 1EFD0C */ UNK_RET grMuteCity_801EFD0C(UNK_PARAMS);
+/* 1EFD0C */ HSD_GObj* grMuteCity_801EFD0C(int);
 /* 1EFDF8 */ void grMuteCity_801EFDF8(Ground_GObj*);
 /* 1F0118 */ bool grMuteCity_801F0118(Ground_GObj*);
 /* 1F0120 */ void grMuteCity_801F0120(Ground_GObj*);
@@ -66,9 +69,9 @@
 /* 1F19C4 */ void grMuteCity_801F19C4(float);
 /* 1F19DC */ void grMuteCity_801F19DC(float);
 /* 1F19F4 */ void grMuteCity_801F19F4(float);
-/* 1F1A0C */ UNK_RET fn_801F1A0C(UNK_PARAMS);
+/* 1F1A0C */ void grMuteCity_801F1A0C(void);
 /* 1F1A34 */ UNK_RET grMuteCity_801F1A34(UNK_PARAMS);
-/* 1F28A8 */ UNK_RET grMuteCity_801F28A8(UNK_PARAMS);
+/* 1F28A8 */ DynamicModelDesc* grMuteCity_801F28A8(void);
 /* 1F290C */ UNK_RET grMuteCity_801F290C(UNK_PARAMS);
 /* 1F2AB0 */ UNK_RET grMuteCity_801F2AB0(UNK_PARAMS);
 /* 1F2B58 */ UNK_RET fn_801F2B58(UNK_PARAMS);

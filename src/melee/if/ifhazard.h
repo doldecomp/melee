@@ -14,8 +14,8 @@
 /* 2FD6CC */ void fn_802FD6CC(HSD_GObj* gobj, int pass);
 /* 2FD704 */ void un_802FD704(void);
 /* 2FD708 */ void un_802FD708(DynamicModelDesc*, int);
-/* 2FD8A0 */ void un_802FD8A0(void* arg0);
-/* 2FD8C4 */ void un_802FD8C4(void* arg0);
+/* 2FD8A0 */ void un_802FD8A0(DynamicModelDesc*);
+/* 2FD8C4 */ void un_802FD8C4(DynamicModelDesc*);
 /* 2FD8E8 */ void un_802FD8E8(DynamicModelDesc*);
 /* 2FD90C */ void un_802FD90C(void);
 

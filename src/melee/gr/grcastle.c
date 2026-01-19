@@ -1,14 +1,8 @@
-#include "gr/grcastle.h"
+#include "grcastle.h"
 
-#include "placeholder.h"
-
-#include <platform.h>
-
-#include "baselib/psstructs.h"
+#include "ft/ftdevice.h"
 #include "ft/ftlib.h"
-
-#include "gr/forward.h"
-
+#include "gr/grdisplay.h"
 #include "gr/grlib.h"
 #include "gr/grmaterial.h"
 #include "gr/ground.h"
@@ -16,9 +10,11 @@
 #include "gr/inlines.h"
 #include "it/it_26B1.h"
 #include "lb/lb_00B0.h"
+#include "mp/mplib.h"
 
 #include <dolphin/mtx.h>
 #include <baselib/jobj.h>
+#include <baselib/psstructs.h>
 
 unkCastleCallback grCs_803B7F28[] = {
     grCastle_801D0550, grCastle_801D059C, grCastle_801D05E8,
@@ -76,7 +72,12 @@ void grCastle_801CD608(Ground_GObj* gobj) {}
 
 void grCastle_801CD60C(Ground_GObj* gobj) {}
 
-/// #fn_801CD610
+void grCastle_801CD610(Ground_GObj* gobj)
+{
+    ftCo_800C06E8(gobj, 6, grCastle_801D09B8);
+    grCastle_801CF7B0(gobj);
+    grCastle_801CDFD8(gobj);
+}
 
 /// #grCastle_801CD658
 
@@ -89,7 +90,12 @@ bool grCastle_801CD8A0(Ground_GObj* gobj)
 
 /// #grCastle_801CD960
 
-/// #fn_801CD9B4
+void grCastle_801CD9B4(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    mpJointSetCb1(4, gp, grCastle_801CF750);
+    mpJointSetCb1(5, gp, grCastle_801CF750);
+}
 
 /// #grCastle_801CDA0C
 
@@ -102,7 +108,25 @@ bool grCastle_801CDC3C(Ground_GObj* gobj)
 
 void grCastle_801CDF50(Ground_GObj* gobj) {}
 
-/// #grCastle_801CDF54
+bool grCastle_801CDF54(Vec3* vec)
+{
+    HSD_GObj* gobj;
+    HSD_JObj* jobj;
+    int i;
+
+    i = 0;
+    if (stage_info.internal_stage_id == 0x2) {
+        for (i = 0; i < 9; i += 1) {
+            gobj = Ground_801C2BA4(i + 8);
+            if (gobj != NULL) {
+                jobj = Ground_801C3FA4(gobj, 0);
+                lb_8000B1CC(jobj, NULL, vec);
+                return true;
+            }
+        }
+    }
+    return false;
+}
 
 /// #grCastle_801CDFD8
 
@@ -171,7 +195,7 @@ bool grCastle_801CF300(Ground_GObj* gobj)
 
 void grCastle_801CF74C(Ground_GObj* gobj) {}
 
-/// #fn_801CF750
+/// #grCastle_801CF750
 
 /// #grCastle_801CF7B0
 
@@ -192,7 +216,13 @@ void grCastle_801D0298(void)
 
 /// #grCastle_801D02B8
 
-/// #fn_801D0520
+void grCastle_801D0520(Ground_GObj* gobj, int renderpass)
+{
+    Ground* gp = GET_GROUND(gobj);
+    if (gp->gv.castle.xC8 == 0) {
+        grDisplay_801C5DB0(gobj, renderpass);
+    }
+}
 
 static inline void grCastle_801D0550_sub(unkCastle* arg0, s32 i)
 {
@@ -269,7 +299,7 @@ void grCastle_801D08AC(void* arg0, unkCastle* arg1, Ground_GObj* gobj)
 
 /// #fn_801D0924
 
-/// #fn_801D09B8
+/// #grCastle_801D09B8
 
 /// #grCastle_801D0A9C
 
