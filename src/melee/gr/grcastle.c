@@ -107,7 +107,25 @@ bool grCastle_801CDC3C(Ground_GObj* gobj)
 
 void grCastle_801CDF50(Ground_GObj* gobj) {}
 
-/// #grCastle_801CDF54
+bool grCastle_801CDF54(Vec3* vec)
+{
+    HSD_GObj* gobj;
+    HSD_JObj* jobj;
+    int i;
+
+    i = 0;
+    if (stage_info.internal_stage_id == 0x2) {
+        for (i = 0; i < 9; i += 1) {
+            gobj = Ground_801C2BA4(i + 8);
+            if (gobj != NULL) {
+                jobj = Ground_801C3FA4(gobj, 0);
+                lb_8000B1CC(jobj, NULL, vec);
+                return true;
+            }
+        }
+    }
+    return false;
+}
 
 /// #grCastle_801CDFD8
 
