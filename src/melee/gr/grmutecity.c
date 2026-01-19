@@ -252,9 +252,10 @@ void grMuteCity_801F19F4(f32 arg0)
     grMc_8049F4B8.x50C += arg0;
 }
 
-/// end
-
-/// #fn_801F1A0C
+void grMuteCity_801F1A0C(void)
+{
+    Ground_801C53EC(0x5CC60);
+}
 
 /// #grMuteCity_801F1A34
 
