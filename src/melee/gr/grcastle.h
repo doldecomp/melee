@@ -5,6 +5,7 @@
 
 #include "gr/forward.h"
 #include "lb/forward.h"
+#include "mp/forward.h"
 #include <baselib/forward.h>
 
 #include <dolphin/mtx.h>
@@ -31,7 +32,7 @@ struct unkCastle {
 /* 1CD8A0 */ bool grCastle_801CD8A0(Ground_GObj*);
 /* 1CD8A8 */ void grCastle_801CD8A8(Ground_GObj*);
 /* 1CD960 */ void grCastle_801CD960(Ground_GObj*);
-/* 1CD9B4 */ UNK_RET fn_801CD9B4(UNK_PARAMS);
+/* 1CD9B4 */ void grCastle_801CD9B4(Ground_GObj*);
 /* 1CDA0C */ void grCastle_801CDA0C(Ground_GObj*);
 /* 1CDC3C */ bool grCastle_801CDC3C(Ground_GObj*);
 /* 1CDC44 */ void grCastle_801CDC44(Ground_GObj*);
@@ -63,7 +64,8 @@ struct unkCastle {
 /* 1CF300 */ bool grCastle_801CF300(Ground_GObj*);
 /* 1CF308 */ void grCastle_801CF308(Ground_GObj*);
 /* 1CF74C */ void grCastle_801CF74C(Ground_GObj*);
-/* 1CF750 */ UNK_RET fn_801CF750(UNK_PARAMS);
+/* 1CF750 */ void grCastle_801CF750(Ground*, s32, CollData*, s32,
+                                    mpLib_GroundEnum, f32);
 /* 1CF7B0 */ void grCastle_801CF7B0(Ground_GObj*);
 /* 1CF868 */ UNK_RET grCastle_801CF868(UNK_PARAMS);
 /* 1CFAFC */ UNK_RET fn_801CFAFC(UNK_PARAMS);

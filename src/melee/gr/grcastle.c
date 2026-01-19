@@ -9,6 +9,7 @@
 #include "gr/inlines.h"
 #include "it/it_26B1.h"
 #include "lb/lb_00B0.h"
+#include "mp/mplib.h"
 
 #include <dolphin/mtx.h>
 #include <baselib/jobj.h>
@@ -88,7 +89,12 @@ bool grCastle_801CD8A0(Ground_GObj* gobj)
 
 /// #grCastle_801CD960
 
-/// #fn_801CD9B4
+void grCastle_801CD9B4(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    mpJointSetCb1(4, gp, grCastle_801CF750);
+    mpJointSetCb1(5, gp, grCastle_801CF750);
+}
 
 /// #grCastle_801CDA0C
 
@@ -170,7 +176,7 @@ bool grCastle_801CF300(Ground_GObj* gobj)
 
 void grCastle_801CF74C(Ground_GObj* gobj) {}
 
-/// #fn_801CF750
+/// #grCastle_801CF750
 
 /// #grCastle_801CF7B0
 
