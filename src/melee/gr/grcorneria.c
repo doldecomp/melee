@@ -586,7 +586,27 @@ void smashTaunt_801E2550(Ground_GObj* gobj, struct grSmashTaunt_GroundVars* gv)
 
 /// #grCorneria_801E2A6C
 
-/// #grCorneria_801E2AF4
+void grCorneria_801E2AF4(void)
+{
+    HSD_GObj* gobj;
+    PAD_STACK(20);
+
+    if (stage_info.internal_stage_id == CORNERIA) {
+        gobj = Ground_801C2BA4(12);
+        if (gobj == NULL) {
+            return;
+        }
+        Ground_801C4A08(gobj);
+        gobj = Ground_801C2BA4(5);
+        if (gobj != NULL) {
+            Ground_801C5544(GET_GROUND(gobj), 0);
+            Ground_801C4A08(gobj);
+        }
+        HSD_SisLib_803A5F50(1);
+    } else if (stage_info.internal_stage_id == VENOM) {
+        grVenom_80206CB0(1);
+    }
+}
 
 #pragma push
 #pragma dont_inline on
