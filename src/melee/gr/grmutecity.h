@@ -71,7 +71,7 @@
 /* 1F19F4 */ void grMuteCity_801F19F4(float);
 /* 1F1A0C */ void grMuteCity_801F1A0C(void);
 /* 1F1A34 */ UNK_RET grMuteCity_801F1A34(UNK_PARAMS);
-/* 1F28A8 */ DynamicModelDesc* grMuteCity_801F28A8();
+/* 1F28A8 */ DynamicModelDesc* grMuteCity_801F28A8(void);
 /* 1F290C */ UNK_RET grMuteCity_801F290C(UNK_PARAMS);
 /* 1F2AB0 */ UNK_RET grMuteCity_801F2AB0(UNK_PARAMS);
 /* 1F2B58 */ UNK_RET fn_801F2B58(UNK_PARAMS);
