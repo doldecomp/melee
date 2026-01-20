@@ -626,6 +626,10 @@ struct grZebes_GroundVars {
     /*  +C gp+D0 */ Vec3 xC;
 };
 
+struct grZebes_GroundVars2 {
+    /*  +0 gp+C4 */ u16 xC4;
+};
+
 struct grFigureGet_GroundVars {
     /*  +0 gp+C4 */ UNK_T x0;
     /*  +4 gp+C8 */ UNK_T x4;
@@ -894,6 +898,7 @@ struct Ground {
             struct grVenom_GroundVars venom;
             struct grYorster_GroundVars yorster;
             struct grZebes_GroundVars zebes;
+            struct grZebes_GroundVars2 zebes2;
         } gv;
 
         /**

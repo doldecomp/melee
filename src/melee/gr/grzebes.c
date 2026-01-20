@@ -2,6 +2,8 @@
 
 #include <platform.h>
 
+#include "forward.h"
+
 #include "ft/ftdevice.h"
 #include "gr/grlib.h"
 #include "gr/grzakogenerator.h"
@@ -139,7 +141,15 @@ bool grZebes_801D99D8(Ground_GObj* arg)
 
 void grZebes_801D9F2C(Ground_GObj* arg) {}
 
-/// #grZebes_801D9F30
+void grZebes_801D9F30(HSD_GObj* gobj)
+{
+    Ground* gp;
+
+    gp = GET_GROUND(gobj);
+    grAnime_801C8138(gobj, gp->map_id, 0);
+    gp->gv.zebes2.xC4 = 0;
+    gp->x11_flags.b012 = 1;
+}
 
 bool grZebes_801D9F7C(Ground_GObj* arg)
 {
