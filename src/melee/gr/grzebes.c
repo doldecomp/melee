@@ -171,7 +171,11 @@ void grZebes_801DA3E8(void)
 
 /// #grZebes_801DA3F4
 
-/// #grZebes_801DA4FC
+void grZebes_801DA4FC(Ground_GObj* gobj)
+{
+    grZe_804D6998 -= 1;
+    Ground_801C4A08(gobj);
+}
 
 /// #grZebes_801DA528
 

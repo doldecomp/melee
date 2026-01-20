@@ -3,10 +3,13 @@
 
 #include <placeholder.h>
 
+#include "forward.h"
+
 #include <dolphin/mtx.h>
 
 /* 1D84A4 */ void grZebes_801D84A4(void);
 /* 1DA3F4 */ void grZebes_801DA3F4(UNK_T);
+/* 1DA4FC */ void grZebes_801DA4FC(Ground_GObj*);
 /* 1DCB64 */ bool grZebes_801DCB64(Vec3*, int);
 /* 1DCBB0 */ bool grZebes_801DCBB0(Vec3*, int);
 /* 1DCBFC */ bool grZebes_801DCBFC(UNK_T);
