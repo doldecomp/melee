@@ -201,7 +201,15 @@ bool grZebes_801DCB64(Vec3* vec, int val)
     return false;
 }
 
-/// #fn_801DCBB0
+bool grZebes_801DCBB0(Vec3* vec, int val)
+{
+    if (val < 3) {
+        grLib_801C96F8(0xBA, 0, vec);
+    } else {
+        grLib_801C96F8(0xBB, 0, vec);
+    }
+    return false;
+}
 
 /// #fn_801DCBFC
 
