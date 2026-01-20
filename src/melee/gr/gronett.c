@@ -4,12 +4,15 @@
 
 #include <platform.h>
 
+#include "forward.h"
+
 #include "gr/grdatfiles.h"
 #include "gr/grdisplay.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
 #include "if/ifhazard.h"
 #include "lb/lb_00B0.h"
+#include "lb/lb_00F9.h"
 #include "lb/types.h"
 
 #include "sc/forward.h"
@@ -114,7 +117,25 @@ bool grOnett_801E3C58(Ground_GObj* gobj)
     return false;
 }
 
-/// #grOnett_801E3C60
+void grOnett_801E3C60(Ground_GObj* gobj)
+{
+    Ground* gp;
+    PAD_STACK(8);
+
+    gp = GET_GROUND(gobj);
+
+    grOnett_801E5214();
+    grOnett_801E5538(gobj);
+    if (gp->gv.onett.x104 != NULL) {
+        if (Ground_801C5794() != 0) {
+            M2C_FIELD(gp->gv.onett.x104, u32*, 8) = 0;
+        } else {
+            M2C_FIELD(gp->gv.onett.x104, u32*, 8) = 1;
+        }
+    }
+    lb_800115F4();
+    Ground_801C2FE0(gobj);
+}
 
 void grOnett_801E3CE0(Ground_GObj* gobj) {}
 

@@ -41,7 +41,7 @@
 /* 1E5214 */ UNK_RET grOnett_801E5214(UNK_PARAMS);
 /* 1E54B4 */ void grOnett_801E54B4(Ground* gp, int arg1, CollData* cd,
                                    int arg3, int arg4);
-/* 1E5538 */ UNK_RET grOnett_801E5538(UNK_PARAMS);
+/* 1E5538 */ void grOnett_801E5538(Ground_GObj*);
 /* 1E56FC */ DynamicModelDesc* grOnett_801E56FC(void);
 /* 1E5760 */ DynamicsDesc* grOnett_801E5760(enum_t);
 /* 1E5768 */ bool grOnett_801E5768(Vec3*, int, HSD_JObj*);
