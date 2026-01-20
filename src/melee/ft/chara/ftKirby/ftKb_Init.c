@@ -9,6 +9,8 @@
 #include "ft/chara/ftCommon/ftCo_FallSpecial.h"
 #include "ft/chara/ftCommon/ftCo_Jump.h"
 #include "ft/chara/ftCommon/ftCo_KneeBend.h"
+#include "ft/chara/ftCommon/ftCo_Lift.h"
+#include "ft/chara/ftCommon/ftCo_Throw.h"
 #include "ft/chara/ftCommon/ftCo_Wait.h"
 #include "ft/fighter.h"
 
@@ -2546,7 +2548,6 @@ MotionState ftKb_Init_UnkMotionStates0[] = {
 /* 0EE904 */ static void ftKb_Init_800EE904(void);
 /* 0F1CA0 */ static bool fn_800F1CA0(HSD_GObj* gobj);
 /* 0F6AC8 */ static void fn_800F6AC8(HSD_GObj* gobj);
-/* 105FEC */ static void fn_80105FEC(void);
 /* 10C288 */ static void fn_8010C288(HSD_GObj* gobj);
 
 jtbl_t ftKb_Init_803CA0CC = {
@@ -3895,7 +3896,14 @@ s32 ftKb_SpecialN_800F1CD8(HSD_GObj* gobj)
 
 /// #ftKb_SpecialN_800F1F1C
 
-/// #ftKb_SpecialN_800F1F68
+void ftKb_SpecialN_800F1F68(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    fp->allow_interrupt = false;
+    Fighter_ChangeMotionState(gobj, 0x15F, 0, 0.0f, 1.0f, 0.0f, NULL);
+    ftAnim_8006EBA4(gobj);
+    fp->mv.co.attackdash.x0 = 0;
+}
 
 void fn_800F1FDC(Fighter_GObj* gobj)
 {
@@ -5170,7 +5178,30 @@ void ftKb_SpecialN_800F5F68(HSD_GObj* gobj)
     }
 }
 
-/// #ftKb_SpecialN_800F6070
+void ftKb_SpecialN_800F6070(HSD_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    ftKb_DatAttrs* da = fp->dat_attrs;
+    PAD_STACK(4 * 14);
+
+    fp->throw_flags = 0;
+    fp->cmd_vars[0] = fp->cmd_vars[1] = 0;
+    fp->fv.kb.xE0 = 4;
+    fp->fv.kb.xE4 = da->jumpaerial_unk;
+    fp->fv.kb.xE8 = lbAnim_8001E8F8(ftData_80085E50(fp, ftCo_MS_HammerFall));
+    fp->fv.kb.xEC = lbAnim_8001E8F8(ftData_80085E50(fp, ftCo_MS_HammerJump));
+    fp->fv.kb.xF0 =
+        lbAnim_8001E8F8(ftData_80085E50(fp, ftCo_MS_HammerLanding));
+
+    Fighter_ChangeMotionState(gobj, 0x173, 0, 0, 1, 0, NULL);
+    fp->x2222_b2 = true;
+    ftAnim_8006EBA4(gobj);
+    {
+        Fighter* fp = GET_FIGHTER(gobj);
+        ftCommon_8007E2D0(fp, 16, fn_800F6318, fn_800F6280, ftCo_800BD1DC);
+        fp->x2225_b1 = true;
+    }
+}
 
 void fn_800F6178(HSD_GObj* gobj)
 {
@@ -5187,7 +5218,18 @@ void fn_800F6178(HSD_GObj* gobj)
 
 /// #fn_800F6210
 
-/// #fn_800F6280
+static void fn_800F6280(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    it_802F23EC(fp->target_item_gobj, gobj, -fp->facing_dir);
+    Fighter_ChangeMotionState(gobj, 0x177,
+                              Ft_MF_KeepGfx | Ft_MF_SkipModel | Ft_MF_KeepSfx,
+                              0, 1, 0, NULL);
+    fp->x2222_b2 = true;
+    fp->fv.kb.xF4_b0 = true;
+    ftKb_SpecialN_800F9070(gobj);
+    ftCommon_8007E2F4(fp, 0x1FF);
+}
 
 /// #fn_800F6318
 
@@ -5364,7 +5406,14 @@ void fn_800F6F50(HSD_GObj* gobj)
     ftCommon_8007E2F4(fp, 0x1FF);
 }
 
-/// #fn_800F6FC4
+void fn_800F6FC4(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftCommon_8007D5D4(fp);
+    Fighter_ChangeMotionState(gobj, 0x17E, 0x0C4C5092, fp->cur_anim_frame, 1,
+                              0, NULL);
+    ftKb_SpecialN_800F9070(gobj);
+}
 
 void fn_800F702C(HSD_GObj* gobj)
 {
@@ -5859,9 +5908,29 @@ void ftKb_MrSpecialAirN_Coll(Fighter_GObj* gobj)
 
 /// #ftKb_SpecialNLg_800F9598
 
-/// #ftKb_SpecialNLg_800F9614
+static void fn_800F98F4(Fighter_GObj*);
 
-/// #ftKb_SpecialNLg_800F9684
+void ftKb_SpecialNLg_800F9614(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    fp->cmd_vars[0] = 0;
+    fp->throw_flags = 0;
+    Fighter_ChangeMotionState(gobj, ftKb_MS_LgSpecialN, 0, 0.0f, 1.0f, 0.0f,
+                              NULL);
+    ftAnim_8006EBA4(gobj);
+    fp->accessory4_cb = fn_800F98F4;
+}
+
+void ftKb_SpecialNLg_800F9684(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    fp->cmd_vars[0] = 0;
+    fp->throw_flags = 0;
+    Fighter_ChangeMotionState(gobj, ftKb_MS_LgSpecialAirN, 0, 0.0f, 1.0f, 0.0f,
+                              NULL);
+    ftAnim_8006EBA4(gobj);
+    fp->accessory4_cb = fn_800F98F4;
+}
 
 void ftKb_LgSpecialN_Anim(Fighter_GObj* gobj)
 {
@@ -7061,13 +7130,50 @@ void ftKb_PrSpecialAirNEndR_Coll(Fighter_GObj* gobj)
 
 /// #fn_80105978
 
-/// #fn_80105A34
+static void fn_80105A34(Fighter_GObj*);
+static void fn_80105AB0(Fighter_GObj*);
 
 /// #fn_80105AB0
 
-/// #ftKb_SpecialNZd_80105B2C
+static inline void ftKb_SpecialNZd_Helper(Fighter_GObj* gobj)
+{
+    ftKb_DatAttrs* attributes;
+    Fighter* fighter2; // r5
+    fighter2 = GET_FIGHTER(gobj);
+    attributes = fighter2->dat_attrs;
+    fighter2->cmd_vars[0] = 0;
+    fighter2->mv.zd.specialn.x0 =
+        attributes->specialn_zd_frames_before_gravity;
+}
 
-/// #ftKb_SpecialNZd_80105BA8
+void ftKb_SpecialNZd_80105B2C(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    PAD_STACK(8);
+    Fighter_ChangeMotionState(gobj, ftKb_MS_ZdSpecialN, 0, 0.0f, 1.0f, 0.0f,
+                              NULL);
+    ftAnim_8006EBA4(gobj);
+    ftKb_SpecialNZd_Helper(gobj);
+    fp->accessory4_cb = fn_80105A34;
+}
+
+void ftKb_SpecialNZd_80105BA8(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftKb_DatAttrs* da = fp->dat_attrs;
+    PAD_STACK(20);
+
+    fp->self_vel.y = 0;
+    fp->self_vel.x =
+        fp->self_vel.x / da->specialn_zd_horizontal_momentum_preservation;
+
+    Fighter_ChangeMotionState(gobj, ftKb_MS_ZdSpecialAirN, 0, 0.0f, 1.0f, 0.0f,
+                              NULL);
+    ftAnim_8006EBA4(gobj);
+
+    ftKb_SpecialNZd_Helper(gobj);
+    fp->accessory4_cb = fn_80105AB0;
+}
 
 /// #ftKb_ZdSpecialN_Anim
 
@@ -7831,7 +7937,26 @@ void ftKb_YsSpecialAirN2_0_Coll(Fighter_GObj* gobj)
 
 /// #ftKb_SpecialNYs_8010A8BC
 
-/// #fn_8010A930
+void fn_8010A930(Fighter_GObj* gobj, Fighter_GObj* attacker_gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* attacker_fp = GET_FIGHTER(attacker_gobj);
+    ftCommon_8007DB58(gobj);
+    ftCo_8009750C(gobj);
+    ftCo_800DD168(gobj);
+    fp->x1A5C = attacker_gobj;
+    fp->victim_gobj = attacker_gobj;
+    fp->x221B_b5 = false;
+    fp->x221B_b7 = false;
+    fp->facing_dir = -attacker_fp->facing_dir;
+    ftCo_800DB368(attacker_fp, fp);
+    Fighter_ChangeMotionState(gobj, 0x14B, 0, 0.0f, 1.0f, 0.0f, NULL);
+    fp->accessory1_cb = ftCo_800DB464;
+    ftCommon_8007D5D4(fp);
+    ftCommon_8007E2F4(fp, 0x1FF);
+    ftAnim_8006EBA4(gobj);
+    ftCommon_8007E2FC(gobj);
+}
 
 void ftCo_CaptureKirbyYoshi_Anim(Fighter_GObj* gobj) {}
 

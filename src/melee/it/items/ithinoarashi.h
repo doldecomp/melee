@@ -8,6 +8,7 @@
 #include "it/items/types.h"
 
 /* 2D5CF8 */ void it_802D5CF8(Item_GObj*);
+/* 2D5E4C */ void it_802D5E4C(Item_GObj*);
 /* 2D5EC8 */ bool it_802D5EC8(Item_GObj*);
 /* 2D5EEC */ void it_802D5EEC(Item_GObj*);
 /* 2D5F0C */ void it_802D5F0C(Item_GObj*);

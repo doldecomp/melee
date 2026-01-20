@@ -27,7 +27,13 @@ bool itKlap_UnkMotion1_Anim(Item_GObj* gobj)
 
 /// #itKlap_UnkMotion1_Coll
 
-/// #it_802E1C4C
+void it_802E1C4C(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->x40_vel.y = 0.0f;
+    ip->x40_vel.x = 0.0f;
+    Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
+}
 
 /// #it_802E1C84
 

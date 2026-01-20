@@ -854,12 +854,14 @@ void ftPp_SpecialHi_8012184C(Fighter_GObj* gobj)
 
 void ftPp_SpecialHi_801218AC(Fighter_GObj* gobj)
 {
+    PAD_STACK(8);
     Fighter_ChangeMotionState(gobj, 0x15B, Ft_MF_None, 0.0f, 1.0f, 0.0f, NULL);
     ftAnim_8006EBA4(gobj);
 }
 
 void ftPp_SpecialHi_801218F8(Fighter_GObj* gobj)
 {
+    PAD_STACK(8);
     Fighter_ChangeMotionState(gobj, 0x160, Ft_MF_None, 0.0f, 1.0f, 0.0f, NULL);
     ftAnim_8006EBA4(gobj);
 }

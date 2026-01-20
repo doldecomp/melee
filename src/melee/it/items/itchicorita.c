@@ -31,8 +31,7 @@ void it_802C9588(Item_GObj* item_gobj)
     attr = article->x4_specialAttributes;
     it_80279C48(item_gobj, article);
     item->xDD4_itemVar.chicorita.x60 = -1;
-    // item->xDBC_itcmd_var4 &= ~0x80;
-    ((flag32*) item->xDBC_itcmd_var4)->flags.x0 = 0;
+    item->xDBC_itcmd_var4.flags.x0 = false;
     it_80279CDC(item_gobj, attr->scale);
     item->xDD4_itemVar.chicorita.x64 = 0.0f;
     it_802C9A74(item_gobj);
@@ -159,15 +158,10 @@ bool itChicorita_UnkMotion0_Coll(HSD_GObj* item_gobj)
 
 void it_802C989C(HSD_GObj* item_gobj)
 {
-    Item* item;
-
-    item = item_gobj->user_data;
-    // if (((u8) item->xDBC_itcmd_var4 >> 7U) & 1) {
-    // if ((((UnkFlagStruct*) item->xDBC_itcmd_var4)->u8 >> 7U) & 1) {
-    if (((flag32*) item->xDBC_itcmd_var4)->flags.x0) {
+    Item* item = item_gobj->user_data;
+    if (item->xDBC_itcmd_var4.flags.x0) {
         it_802C9B20((Item_GObj*) item_gobj);
-        // item->xDBC_itcmd_var4 &= ~0x80;
-        ((flag32*) item->xDBC_itcmd_var4)->flags.x0 = 0;
+        item->xDBC_itcmd_var4.flags.x0 = false;
     }
 }
 

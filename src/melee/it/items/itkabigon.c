@@ -25,7 +25,13 @@ void it_802C9E24(Item_GObj* gobj, Item_GObj* ref_gobj)
     it_8026B894(gobj, ref_gobj);
 }
 
-/// #it_802C9E44
+void it_802C9E44(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->xDCC_flag.b4567 = 0xE;
+    it_80273454(gobj);
+    it_802C9E8C(gobj);
+}
 
 /// #it_802C9E8C
 

@@ -14,7 +14,13 @@
 
 /// #it_2725_Logic8_DmgReceived
 
-/// #it_802E269C
+void it_802E269C(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    it_8027CAD8(gobj);
+    it_8027C0A8(gobj, ip->facing_dir, 1.0f);
+    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+}
 
 bool itOldottosea_UnkMotion0_Anim(Item_GObj* gobj)
 {

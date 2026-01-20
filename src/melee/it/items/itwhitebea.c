@@ -13,9 +13,25 @@
 
 void itOldottosea_UnkMotion8_Phys(Item_GObj* gobj) {}
 
-/// #it_802E32B4
+void it_802E32B4(Item_GObj* gobj)
+{
+    Item* ip;
+    itWhiteBeaAttributes* attrs;
+    it_8027CBA4(gobj);
+    ip = gobj->user_data;
+    attrs = ip->xC4_article_data->x4_specialAttributes;
+    ip->xDD4_itemVar.whitebea.x28 = 0;
+    ip->x40_vel.x *= attrs->x4;
+    Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
+}
 
-/// #it_802E3314
+void it_802E3314(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    it_8027CB3C(gobj);
+    ip->xDD4_itemVar.whitebea.x28 = 0;
+    Item_80268E5C(gobj, 9, ITEM_ANIM_UPDATE);
+}
 
 bool itOldottosea_UnkMotion9_Anim(Item_GObj* gobj)
 {
@@ -179,7 +195,13 @@ bool itWhitebea_UnkMotion4_Coll(Item_GObj* gobj)
 
 void it_802E40A4(Item_GObj* gobj) {}
 
-/// #it_802E4190
+void it_802E4190(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itResetVelocity(ip);
+    ip->xDD4_itemVar.whitebea.x40 = 0xF;
+    Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
+}
 
 /// #itWhitebea_UnkMotion2_Anim
 
