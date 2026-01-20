@@ -2,6 +2,7 @@
 
 #include <platform.h>
 
+#include "ft/ftdevice.h"
 #include "gr/grlib.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
@@ -120,7 +121,12 @@ bool grZebes_801D95B0(Ground_GObj* arg)
 
 void grZebes_801D9754(Ground_GObj* arg) {}
 
-/// #fn_801D9758
+void grZebes_801D9758(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    ftCo_800C07F8(gobj, 3, grZebes_801DCBFC);
+    gp->gv.zebes.x4 = 1;
+}
 
 /// #grZebes_801D9798
 
@@ -211,7 +217,7 @@ bool grZebes_801DCBB0(Vec3* vec, int val)
     return false;
 }
 
-/// #fn_801DCBFC
+/// #grZebes_801DCBFC
 
 DynamicsDesc* grZebes_801DCCB8(enum_t arg)
 {

@@ -621,7 +621,7 @@ struct grYorster_GroundVars {
 
 struct grZebes_GroundVars {
     /*  +0 gp+C4:0 */ u8 x0_b0 : 1;
-    /*  +4 gp+C8 */ UNK_T x4;
+    /*  +4 gp+C8 */ u32 x4;
     /*  +8 gp+CC */ UNK_T x8;
     /*  +C gp+D0 */ Vec3 xC;
 };
