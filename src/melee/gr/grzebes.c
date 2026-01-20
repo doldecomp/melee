@@ -2,6 +2,9 @@
 
 #include <platform.h>
 
+#include "forward.h"
+
+#include "ft/ftdevice.h"
 #include "gr/grlib.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
@@ -120,7 +123,12 @@ bool grZebes_801D95B0(Ground_GObj* arg)
 
 void grZebes_801D9754(Ground_GObj* arg) {}
 
-/// #fn_801D9758
+void grZebes_801D9758(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    ftCo_800C07F8(gobj, 3, grZebes_801DCBFC);
+    gp->gv.zebes.x4 = 1;
+}
 
 /// #grZebes_801D9798
 
@@ -133,7 +141,15 @@ bool grZebes_801D99D8(Ground_GObj* arg)
 
 void grZebes_801D9F2C(Ground_GObj* arg) {}
 
-/// #grZebes_801D9F30
+void grZebes_801D9F30(Ground_GObj* gobj)
+{
+    Ground* gp;
+
+    gp = GET_GROUND(gobj);
+    grAnime_801C8138(gobj, gp->map_id, 0);
+    gp->gv.zebes2.xC4 = 0;
+    gp->x11_flags.b012 = 1;
+}
 
 bool grZebes_801D9F7C(Ground_GObj* arg)
 {
@@ -155,7 +171,11 @@ void grZebes_801DA3E8(void)
 
 /// #grZebes_801DA3F4
 
-/// #grZebes_801DA4FC
+void grZebes_801DA4FC(Ground_GObj* gobj)
+{
+    grZe_804D6998 -= 1;
+    Ground_801C4A08(gobj);
+}
 
 /// #grZebes_801DA528
 
@@ -211,7 +231,7 @@ bool grZebes_801DCBB0(Vec3* vec, int val)
     return false;
 }
 
-/// #fn_801DCBFC
+/// #grZebes_801DCBFC
 
 DynamicsDesc* grZebes_801DCCB8(enum_t arg)
 {

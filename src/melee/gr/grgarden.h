@@ -26,7 +26,7 @@ typedef struct GardenParams {
 /* 202D8C */ bool grGarden_80202D8C(Ground_GObj*);
 /* 202D94 */ void grGarden_80202D94(Ground_GObj*);
 /* 202D98 */ void grGarden_80202D98(Ground_GObj*);
-/* 202D9C */ void fn_80202D9C(Ground_GObj*);
+/* 202D9C */ void grGarden_80202D9C(Ground_GObj*);
 /* 202DC8 */ void grGarden_80202DC8(Ground_GObj*);
 /* 202E40 */ bool grGarden_80202E40(Ground_GObj*);
 /* 202E48 */ void grGarden_80202E48(Ground_GObj*);
@@ -51,8 +51,8 @@ typedef struct GardenParams {
 /* 203248 */ bool grGarden_80203248(Ground_GObj*);
 /* 203250 */ void grGarden_80203250(Ground_GObj*);
 /* 203494 */ void grGarden_80203494(Ground_GObj*);
-/* 203498 */ void fn_80203498(Item_GObj* item_gobj, Ground* gp);
-/* 20349C */ bool fn_8020349C(u32 unk, HSD_GObj* player, Vec3* water);
+/* 203498 */ void grGarden_80203498(Item_GObj* item_gobj, Ground* gp);
+/* 20349C */ bool grGarden_8020349C(u32 unk, HSD_GObj* player, Vec3* water);
 /* 203560 */ void grGarden_80203560(float param1, Vec3* vec);
 /* 2035C8 */ DynamicsDesc* grGarden_802035C8(enum_t);
 /* 2035D0 */ bool grGarden_802035D0(Vec3*, int arg, HSD_JObj* jobj);

@@ -44,7 +44,7 @@ StageCallbacks grGd_803E5248[] = {
       grGarden_80203000, 0 } // water
 };
 
-StageData grGd_803E4800 = {
+StageData grGd_803E52E0 = {
     5,
     grGd_803E5248,
     "/GrGd.dat",
@@ -98,7 +98,6 @@ bool grGarden_80202C70(void)
     return false;
 }
 
-/// #grGarden_80202C78
 HSD_GObj* grGarden_80202C78(int gobj_id)
 {
     HSD_GObj* gobj;
@@ -149,19 +148,18 @@ void grGarden_80202D94(Ground_GObj* arg) {}
 
 void grGarden_80202D98(Ground_GObj* arg) {}
 
-void fn_80202D9C(Ground_GObj* arg)
+void grGarden_80202D9C(Ground_GObj* arg)
 {
-    ftCo_800C06E8(arg, 4, fn_8020349C);
+    ftCo_800C06E8(arg, 4, grGarden_8020349C);
 }
 
-/// #grGarden_80202DC8
 void grGarden_80202DC8(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     grAnime_801C8138(gobj, gp->map_id, 0);
     gp->x8_callback = NULL;
     gp->xC_callback = NULL;
-    Ground_801C10B8(gobj, fn_80202D9C);
+    Ground_801C10B8(gobj, grGarden_80202D9C);
     gp->x11_flags.b012 = 1;
     gp->x10_flags.b5 = 1;
 }
@@ -178,7 +176,6 @@ void grGarden_80202E48(Ground_GObj* arg)
 
 void grGarden_80202E68(Ground_GObj* arg) {}
 
-/// #grGarden_80202E6C
 void grGarden_80202E6C(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
@@ -218,7 +215,6 @@ void grGarden_80202F9C(Ground_GObj* arg) {}
 
 void grGarden_80202FA0(Ground_GObj* arg) {}
 
-/// #grGarden_80202FA4
 void grGarden_80202FA4(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
@@ -237,7 +233,6 @@ void grGarden_80202FFC(Ground_GObj* arg) {}
 
 void grGarden_80203000(Ground_GObj* arg) {}
 
-/// #grGarden_80203004
 void grGarden_80203004(Ground_GObj* gobj)
 {
     int iVar1;
@@ -257,7 +252,6 @@ bool grGarden_80203090(Ground_GObj* arg)
     return false;
 }
 
-/// #grGarden_80203098
 void grGarden_80203098(Ground_GObj* gobj)
 {
     int iVar1;
@@ -294,13 +288,12 @@ void grGarden_80203098(Ground_GObj* gobj)
 
 void grGarden_802031A0(Ground_GObj* arg) {}
 
-/// #grGarden_802031A4
 void grGarden_802031A4(Ground_GObj* gobj)
 {
     int iVar1;
     Ground* gp = GET_GROUND(gobj);
     gp->gv.garden2.xc4 = grMaterial_801C8CFC(
-        0, 0, gp, Ground_801C3FA4(gobj, 8), fn_80203498, 0, 0);
+        0, 0, gp, Ground_801C3FA4(gobj, 8), grGarden_80203498, 0, 0);
     if (grGd_804D6A28->x14 != 0) {
         iVar1 = HSD_Randi(grGd_804D6A28->x14);
     } else {
@@ -326,27 +319,25 @@ inline float absoluteValue(float fVar1)
     return fVar1;
 }
 
-/// #grGarden_80203250
 void grGarden_80203250(Ground_GObj* gobj)
 {
     int iVar1;
     int iVar4;
     float fVar1;
     float dVar1;
-    Ground* gp = GET_GROUND(gobj);
+    Ground* gp = gobj->user_data;
     HSD_JObj* jobj = Ground_801C3FA4(gobj, 0);
+
     switch (gp->gv.garden2.xc8) {
     case 0:
         if (gp->gv.garden2.xcc == 0) {
             Item_80268E5C(gp->gv.garden2.xc4, 2, 2);
             grAnime_801C8138(gobj, gp->map_id, 0);
             dVar1 = grGd_804D6A28->x18;
-            fVar1 = grGd_804D6A28->x1C - dVar1;
+            iVar1 = (grGd_804D6A28->x1C - grGd_804D6A28->x18) < 0.0f
+                        ? -(grGd_804D6A28->x1C - grGd_804D6A28->x18)
+                        : (grGd_804D6A28->x1C - grGd_804D6A28->x18);
 
-            if (fVar1 < 0.0f) {
-                fVar1 = -fVar1;
-            }
-            iVar1 = fVar1;
             if (iVar1 != 0) {
                 iVar1 = HSD_Randi(iVar1);
             } else {
@@ -354,7 +345,6 @@ void grGarden_80203250(Ground_GObj* gobj)
             }
             dVar1 += iVar1;
             HSD_JObjSetTranslateX(jobj, dVar1);
-            // HSD_JObjMtxIsDirty(jobj);
             gp->gv.garden2.xcc = 0;
             gp->gv.garden2.xc8 = 1;
         } else {
@@ -386,10 +376,9 @@ void grGarden_80203250(Ground_GObj* gobj)
 
 void grGarden_80203494(Ground_GObj* arg) {}
 
-void fn_80203498(Item_GObj* item_gobj, Ground* gp) {}
+void grGarden_80203498(Item_GObj* item_gobj, Ground* gp) {}
 
-/// #fn_8020349C
-bool fn_8020349C(u32 unk, HSD_GObj* player, Vec3* water)
+bool grGarden_8020349C(u32 unk, HSD_GObj* player, Vec3* water)
 {
     bool uVar1;
     float dVar3;

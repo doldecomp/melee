@@ -621,9 +621,13 @@ struct grYorster_GroundVars {
 
 struct grZebes_GroundVars {
     /*  +0 gp+C4:0 */ u8 x0_b0 : 1;
-    /*  +4 gp+C8 */ UNK_T x4;
+    /*  +4 gp+C8 */ u32 x4;
     /*  +8 gp+CC */ UNK_T x8;
     /*  +C gp+D0 */ Vec3 xC;
+};
+
+struct grZebes_GroundVars2 {
+    /*  +0 gp+C4 */ u16 xC4;
 };
 
 struct grFigureGet_GroundVars {
@@ -735,6 +739,7 @@ struct grOnett_GroundVars {
     /*  +0 gp+C4:0 */ u8 x0_b0 : 1;
     u8 pad[0xCC - 0xC5];
     struct grOnett_AwningData awnings[2];
+    /*  +0 gp+104:0 */ CmSubject* x104;
 };
 
 struct grBigBlue_GroundVars {
@@ -894,6 +899,7 @@ struct Ground {
             struct grVenom_GroundVars venom;
             struct grYorster_GroundVars yorster;
             struct grZebes_GroundVars zebes;
+            struct grZebes_GroundVars2 zebes2;
         } gv;
 
         /**
