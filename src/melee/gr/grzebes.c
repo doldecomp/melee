@@ -141,7 +141,7 @@ bool grZebes_801D99D8(Ground_GObj* arg)
 
 void grZebes_801D9F2C(Ground_GObj* arg) {}
 
-void grZebes_801D9F30(HSD_GObj* gobj)
+void grZebes_801D9F30(Ground_GObj* gobj)
 {
     Ground* gp;
 
