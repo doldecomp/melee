@@ -739,7 +739,7 @@ struct grOnett_GroundVars {
     /*  +0 gp+C4:0 */ u8 x0_b0 : 1;
     u8 pad[0xCC - 0xC5];
     struct grOnett_AwningData awnings[2];
-    /*  +0 gp+104:0 */ void* x104;
+    /*  +0 gp+104:0 */ CmSubject* x104;
 };
 
 struct grBigBlue_GroundVars {

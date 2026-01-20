@@ -4,9 +4,10 @@
 #include <placeholder.h>
 
 #include "gr/forward.h"
+#include "lb/forward.h"
+#include "mp/forward.h"
 #include "sc/forward.h"
 #include <baselib/forward.h>
-#include <lb/forward.h>
 
 #include <dolphin/mtx.h>
 
@@ -20,7 +21,7 @@
 /* 1E3920 */ bool grOnett_801E3920(Ground_GObj*);
 /* 1E3928 */ void grOnett_801E3928(Ground_GObj*);
 /* 1E392C */ void grOnett_801E392C(Ground_GObj*);
-/* 1E3930 */ UNK_RET grOnett_801E3930(UNK_PARAMS);
+/* 1E3930 */ void grOnett_801E3930(Ground_GObj*);
 /* 1E3A34 */ void grOnett_801E3A34(Ground_GObj*);
 /* 1E3C58 */ bool grOnett_801E3C58(Ground_GObj*);
 /* 1E3C60 */ void grOnett_801E3C60(Ground_GObj*);
@@ -39,8 +40,8 @@
 /* 1E5140 */ UNK_RET grOnett_801E5140(UNK_PARAMS);
 /* 1E5194 */ UNK_RET grOnett_801E5194(UNK_PARAMS);
 /* 1E5214 */ UNK_RET grOnett_801E5214(UNK_PARAMS);
-/* 1E54B4 */ void grOnett_801E54B4(Ground* gp, int arg1, CollData* cd,
-                                   int arg3, int arg4);
+/* 1E54B4 */ void grOnett_801E54B4(Ground*, s32, CollData*, s32,
+                                   mpLib_GroundEnum, f32);
 /* 1E5538 */ void grOnett_801E5538(Ground_GObj*);
 /* 1E56FC */ DynamicModelDesc* grOnett_801E56FC(void);
 /* 1E5760 */ DynamicsDesc* grOnett_801E5760(enum_t);
