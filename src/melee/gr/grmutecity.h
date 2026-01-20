@@ -32,10 +32,10 @@
 /* 1F04A8 */ bool grMuteCity_801F04A8(Ground_GObj*);
 /* 1F04B0 */ void grMuteCity_801F04B0(Ground_GObj*);
 /* 1F04B4 */ void grMuteCity_801F04B4(Ground_GObj*);
-/* 1F04B8 */ UNK_RET grMuteCity_801F04B8(UNK_PARAMS);
-/* 1F0948 */ UNK_RET grMuteCity_801F0948(UNK_PARAMS);
+/* 1F04B8 */ void grMuteCity_801F04B8(Ground_GObj*);
+/* 1F0948 */ void grMuteCity_801F0948(Ground_GObj*);
 /* 1F094C */ UNK_RET grMuteCity_801F094C(UNK_PARAMS);
-/* 1F0D20 */ UNK_RET grMuteCity_801F0D20(UNK_PARAMS);
+/* 1F0D20 */ void grMuteCity_801F0D20(Ground_GObj*);
 /* 1F0F4C */ UNK_RET grMuteCity_801F0F4C(UNK_PARAMS);
 /* 1F106C */ UNK_RET grMuteCity_801F106C(UNK_PARAMS);
 /* 1F1328 */ UNK_RET grMuteCity_801F1328(UNK_PARAMS);
@@ -70,7 +70,7 @@
 /* 1F19DC */ void grMuteCity_801F19DC(float);
 /* 1F19F4 */ void grMuteCity_801F19F4(float);
 /* 1F1A0C */ void grMuteCity_801F1A0C(void);
-/* 1F1A34 */ UNK_RET grMuteCity_801F1A34(UNK_PARAMS);
+/* 1F1A34 */ void grMuteCity_801F1A34(u32, Ground_GObj*);
 /* 1F28A8 */ DynamicModelDesc* grMuteCity_801F28A8(void);
 /* 1F290C */ UNK_RET grMuteCity_801F290C(UNK_PARAMS);
 /* 1F2AB0 */ UNK_RET grMuteCity_801F2AB0(UNK_PARAMS);

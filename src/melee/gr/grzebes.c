@@ -2,6 +2,7 @@
 
 #include <platform.h>
 
+#include "gr/grlib.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
 
@@ -190,9 +191,25 @@ void fn_801DA9F0(UNK_T arg0, Ground* gp, float y, float* x)
 
 /// #grZebes_801DC9DC
 
-/// #fn_801DCB64
+bool grZebes_801DCB64(Vec3* vec, int val)
+{
+    if (val < 9) {
+        grLib_801C96F8(0xBA, 0, vec);
+    } else {
+        grLib_801C96F8(0xBB, 0, vec);
+    }
+    return false;
+}
 
-/// #fn_801DCBB0
+bool grZebes_801DCBB0(Vec3* vec, int val)
+{
+    if (val < 3) {
+        grLib_801C96F8(0xBA, 0, vec);
+    } else {
+        grLib_801C96F8(0xBB, 0, vec);
+    }
+    return false;
+}
 
 /// #fn_801DCBFC
 

@@ -6,6 +6,7 @@
 #include "cm/camera.h"
 #include "ft/ftlib.h"
 #include "gm/gm_16AE.h"
+#include "gr/grdatfiles.h"
 #include "gr/grdisplay.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
@@ -235,7 +236,17 @@ int grBigBlueRoute_8020DA9C(struct grBigBlueRoute_8020DA9C_t* arg0)
 
 /// #grBigBlueRoute_8020DD64
 
-/// #grBigBlueRoute_8020DE48
+DynamicModelDesc* grBigBlueRoute_8020DE48(void)
+{
+    UnkArchiveStruct* archive = grDatFiles_801C6330(0x2);
+    UnkStageDat* dat;
+    HSD_ASSERT(1495, archive);
+    dat = archive->unk4;
+    if (dat != NULL) {
+        return (DynamicModelDesc*) ((char*) dat->unk8 + 0x68);
+    }
+    return NULL;
+}
 
 void fn_8020DEAC(void)
 {

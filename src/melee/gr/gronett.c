@@ -4,12 +4,15 @@
 
 #include <platform.h>
 
+#include "gr/grdatfiles.h"
 #include "gr/grdisplay.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
 #include "if/ifhazard.h"
 #include "lb/lb_00B0.h"
 #include "lb/types.h"
+
+#include "sc/forward.h"
 
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
@@ -180,6 +183,17 @@ void grOnett_801E54B4(Ground* gp, int arg1, CollData* cd, int arg3, int arg4)
 /// #grOnett_801E5538
 
 /// #grOnett_801E56FC
+DynamicModelDesc* grOnett_801E56FC(void)
+{
+    UnkArchiveStruct* archive = grDatFiles_801C6330(0x1);
+    UnkStageDat* dat;
+    HSD_ASSERT(1319, archive);
+    dat = archive->unk4;
+    if (dat != NULL) {
+        return (DynamicModelDesc*) ((char*) dat->unk8 + 0x34);
+    }
+    return NULL;
+}
 
 DynamicsDesc* grOnett_801E5760(enum_t arg)
 {

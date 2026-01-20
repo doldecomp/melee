@@ -683,6 +683,40 @@ struct grGreens_GroundVars {
     /* +1C gp+E0 */ int x1C;
 };
 
+struct grMuteCity_GroundVars {
+    /* +0x00 gp+C4) */ u32 xC4;
+    /* +0x00 gp+C8) */ u32 xC8;
+    /* +0x00 gp+CC) */ u32 xCC;
+    /* +0x00 gp+D0) */ struct {
+        u8 b0 : 1;
+        u8 b1 : 1;
+        u8 b2 : 1;
+        u8 b3 : 1;
+        u8 b4 : 1;
+        u8 b5 : 1;
+        u8 b6 : 1;
+        u8 b7 : 1;
+    } xD0_flags;
+    /* +0x00 gp+D1) */ u8 pad2[0x110 - 0xD1];
+    /* +0x00 gp+110) */ HSD_LObj* x110;
+};
+
+struct grMuteCity_GroundVars2 {
+    /* +0x00 gp+C4) */ struct {
+        u8 b0 : 1;
+        u8 b1 : 1;
+        u8 b2 : 1;
+        u8 b3 : 1;
+        u8 b4 : 1;
+        u8 b5 : 1;
+        u8 b6 : 1;
+        u8 b7 : 1;
+    } xC4_flags;
+    /* +0x00 gp+C8) */ HSD_JObj* xC8;
+    /* +0x00 gp+CC) */ f32 xCC;
+    /* +0x00 gp+D0) */ f32 xD0;
+};
+
 /// Onett collision element (0x1C bytes)
 /// Callback for joints 0 and 1; could be awning hit tracking?
 /// (counter, accumulator, state machine with reset timer)
@@ -850,6 +884,8 @@ struct Ground {
             struct grKongo_GroundVars2 kongo2;
             struct grKongo_GroundVars3 kongo3;
             struct grKraid_GroundVars kraid;
+            struct grMuteCity_GroundVars mutecity;
+            struct grMuteCity_GroundVars2 mutecity2;
             struct grOnett_GroundVars onett;
             struct grPura_GroundVars pura;
             struct grPura_GroundVars2 pura2;
@@ -972,7 +1008,8 @@ struct UnkStageDat {
     void* unk0;
     s32 unk4;
 
-    struct UnkStageDat_x8_t* unk8;
+    struct UnkStageDat_x8_t* unk8; // Suspect this may not be a consistent type
+                                   // based on un_802FD708 callers
     s32 unkC;
 
     HSD_Spline** unk10;
