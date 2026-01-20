@@ -45,8 +45,6 @@
                                           void* arg4);
 /* 1C7228 */ static void grAnime_801C7228(HSD_JObj* obj, int flags, void* func,
                                           u32 type, void* param, int arg5);
-/* 1C775C */ static void grAnime_801C775C(HSD_GObj* gobj, int arg1, u32 arg2,
-                                          f32 arg8, f32 arg9);
 /* 1C7B24 */ static void grAnime_801C7B24(HSD_GObj* gobj, int arg1, u32 arg2,
                                           f32 arg8);
 /* 1C7BA0 */ static void grAnime_801C7BA0(HSD_GObj* gobj, int arg1, u32 arg2,

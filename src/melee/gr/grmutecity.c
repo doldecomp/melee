@@ -3,6 +3,9 @@
 #include "grmutecity.static.h"
 #include <platform.h>
 
+#include "forward.h"
+
+#include "gr/grmaterial.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
 #include "if/ifhazard.h"
@@ -78,7 +81,22 @@ void grMuteCity_801F0120(Ground_GObj* gobj)
 
 void grMuteCity_801F01B0(Ground_GObj* arg) {}
 
-/// #grMuteCity_801F01B4
+void grMuteCity_801F01B4(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+
+    Ground_801C2ED0(jobj, gp->map_id);
+    grMaterial_801C94D8(jobj);
+    grAnime_801C8138(gobj, gp->map_id, false);
+    grAnime_801C775C(gobj, 0, 7, 0.0f, 3600.0f);
+    grAnime_801C7FF8(gobj, 6, 7, 1, 0.0f, 1.0f);
+    gp->x10_flags.b5 = 1;
+    gp->gv.mutecity2.xC8 = Ground_801C3FA4(gobj, 6);
+    gp->gv.mutecity2.xCC = 0.0f;
+    gp->gv.mutecity2.xD0 = 0.0f;
+    gp->gv.mutecity2.xC4_flags.b0 = 0;
+}
 
 bool grMuteCity_801F0288(Ground_GObj* arg)
 {

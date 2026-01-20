@@ -6,6 +6,7 @@
 
 /* 1C65B0 */ void grAnime_801C65B0(UnkArchiveStruct*);
 /* 1C752C */ void grAnime_801C752C(HSD_JObj*, ...);
+/* 1C775C */ void grAnime_801C775C(HSD_GObj*, int, u32, f32, f32);
 /* 1C77FC */ void grAnime_801C77FC(HSD_GObj*, int, u32);
 /* 1C78FC */ void grAnime_801C78FC(HSD_GObj*, int, u32);
 /* 1C7980 */ void grAnime_801C7980(HSD_GObj*, int, u32);
