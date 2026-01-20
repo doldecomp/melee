@@ -6,10 +6,18 @@
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
 #include "if/ifhazard.h"
+#include "lb/lb_00F9.h"
+
+#include <baselib/gobj.h>
+#include <baselib/lobj.h>
 
 static struct {
     int x0;
 }* grMc_804D69D0;
+
+static f32 light_ref_br = 40000.0f;
+static f32 light_ref_dist = 0.99f;
+static s32 light_dist_func = 0x1;
 
 void grMuteCity_801EFC68(bool arg) {}
 
@@ -47,7 +55,26 @@ bool grMuteCity_801F0118(Ground_GObj* arg)
     return false;
 }
 
-/// #grMuteCity_801F0120
+void grMuteCity_801F0120(Ground_GObj* gobj)
+{
+    Ground* ground;
+    HSD_LObj* lobj;
+
+    ground = GET_GROUND(gobj);
+    if (ground->gv.mutecity.x110 != NULL) {
+        HSD_LObjSetDistAttn(ground->gv.mutecity.x110, light_ref_dist,
+                            light_ref_br, light_dist_func);
+    }
+    grMuteCity_801F04B8(gobj);
+    grMuteCity_801F0948(gobj);
+    if (ground->gv.mutecity.xD0_flags.b0 != 0) {
+        grMuteCity_801F0D20(gobj);
+    }
+    grMuteCity_801F1328();
+    grMuteCity_801F1A34(ground->gv.mutecity.xCC, gobj);
+    Ground_801C2FE0(gobj);
+    lb_800115F4();
+}
 
 void grMuteCity_801F01B0(Ground_GObj* arg) {}
 
@@ -90,7 +117,7 @@ void grMuteCity_801F04B4(Ground_GObj* arg) {}
 
 /// #grMuteCity_801F04B8
 
-void grMuteCity_801F0948(void) {}
+void grMuteCity_801F0948(Ground_GObj* arg) {}
 
 /// #grMuteCity_801F094C
 
