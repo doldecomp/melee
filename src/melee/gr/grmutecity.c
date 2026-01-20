@@ -5,6 +5,7 @@
 
 #include "forward.h"
 
+#include "gr/grdatfiles.h"
 #include "gr/grmaterial.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
@@ -304,7 +305,17 @@ void grMuteCity_801F1A0C(void)
 
 /// #grMuteCity_801F1A34
 
-/// #grMuteCity_801F28A8
+DynamicModelDesc* grMuteCity_801F28A8(void)
+{
+    UnkArchiveStruct* archive = grDatFiles_801C6330(0x26);
+    UnkStageDat* dat;
+    HSD_ASSERT(2135, archive);
+    dat = archive->unk4;
+    if (dat != NULL) {
+        return (DynamicModelDesc*) ((char*) dat->unk8 + 0x7B8);
+    }
+    return NULL;
+}
 
 /// #grMuteCity_801F290C
 

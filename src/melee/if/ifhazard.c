@@ -76,25 +76,25 @@ void un_802FD708(DynamicModelDesc* desc, int arg1)
     un_804D6D80 = gobj;
     switch (arg1) {
         Vec3 v;
-    case 0:
+    case 0: // Onett
         HSD_JObjGetTranslation(jobj, &v);
         v.x += 18.0f;
         HSD_JObjSetTranslate(jobj, &v);
         break;
-    case 1:
-    case 2:
+    case 1: // Mute City
+    case 2: // Big Blue
         break;
     }
 }
 
-void un_802FD8A0(DynamicModelDesc* arg0)
+void un_802FD8A0(DynamicModelDesc* desc)
 {
-    un_802FD708(arg0, 0);
+    un_802FD708(desc, 0);
 }
 
-void un_802FD8C4(DynamicModelDesc* arg0)
+void un_802FD8C4(DynamicModelDesc* desc)
 {
-    un_802FD708(arg0, 1);
+    un_802FD708(desc, 1);
 }
 
 void un_802FD8E8(DynamicModelDesc* desc)

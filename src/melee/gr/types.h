@@ -1008,7 +1008,7 @@ struct UnkStageDat {
     void* unk0;
     s32 unk4;
 
-    struct UnkStageDat_x8_t* unk8;
+    struct UnkStageDat_x8_t* unk8; // Suspect this may not be a consistent type
     s32 unkC;
 
     HSD_Spline** unk10;
