@@ -4,6 +4,7 @@
 #include <placeholder.h>
 
 #include "gr/forward.h"
+#include "sc/forward.h"
 #include <baselib/forward.h>
 #include <lb/forward.h>
 
@@ -41,7 +42,7 @@
 /* 1E54B4 */ void grOnett_801E54B4(Ground* gp, int arg1, CollData* cd,
                                    int arg3, int arg4);
 /* 1E5538 */ UNK_RET grOnett_801E5538(UNK_PARAMS);
-/* 1E56FC */ void* grOnett_801E56FC(void);
+/* 1E56FC */ DynamicModelDesc* grOnett_801E56FC(void);
 /* 1E5760 */ DynamicsDesc* grOnett_801E5760(enum_t);
 /* 1E5768 */ bool grOnett_801E5768(Vec3*, int, HSD_JObj*);
 

@@ -1009,6 +1009,7 @@ struct UnkStageDat {
     s32 unk4;
 
     struct UnkStageDat_x8_t* unk8; // Suspect this may not be a consistent type
+                                   // based on un_802FD708 callers
     s32 unkC;
 
     HSD_Spline** unk10;
