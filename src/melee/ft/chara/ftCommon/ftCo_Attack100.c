@@ -683,7 +683,13 @@ void ftCo_ItemScopeAirFire_Coll(Fighter_GObj* gobj)
 
 /// #fn_800D84D4
 
-/// #fn_800D86B8
+static void fn_800D84D4(Fighter_GObj*, int);
+
+static void fn_800D86B8(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    fn_800D84D4(gobj, fp->mv.co.common.x0);
+}
 
 /// #fn_800D86E0
 
@@ -943,7 +949,14 @@ void fn_800DA4A0(Fighter_GObj* gobj)
     fn_800DA054(gobj);
 }
 
-/// #fn_800DA4C0
+bool fn_800DA4C0(Fighter_GObj* gobj)
+{
+    if (GET_FIGHTER(gobj)->input.x668 & 0x100) {
+        fn_800DA4FC(gobj);
+        return true;
+    }
+    return false;
+}
 
 /// #fn_800DA4FC
 

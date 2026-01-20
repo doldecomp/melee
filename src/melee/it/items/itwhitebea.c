@@ -147,7 +147,18 @@ bool itWhitebea_UnkMotion0_Coll(Item_GObj* gobj)
 
 /// #itWhitebea_UnkMotion1_Phys
 
-/// #itWhitebea_UnkMotion1_Coll
+bool itWhitebea_UnkMotion1_Coll(Item_GObj* gobj)
+{
+    PAD_STACK(8);
+    if (it_8026D8A4(gobj, it_802E4190) != 0) {
+        if (it_80276308(gobj) != 0) {
+            it_802E4190(gobj);
+        }
+    } else {
+        it_802E3DA0(gobj);
+    }
+    return it_8027C794(gobj);
+}
 
 /// #it_802E3DA0
 

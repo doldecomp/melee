@@ -84,7 +84,6 @@
 void fn_80105AB0(Fighter_GObj*);
 void fn_80105A34(Fighter_GObj*);
 void fn_801090D4(Fighter_GObj*);
-void fn_80105FEC(void);
 static void fn_801095DC(HSD_GObj*);
 static void fn_80109680(HSD_GObj*);
 static void fn_80109714(HSD_GObj*);
@@ -141,7 +140,7 @@ void ftKb_ZdSpecialN_Anim(Fighter_GObj* gobj)
     if (fp->cmd_vars[0] == 1) {
         fp->cmd_vars[0] = 2;
         ftColl_CreateReflectHit(gobj, &da->specialn_zd_reflectdesc,
-                                (HSD_GObjEvent) fn_80105FEC);
+                                fn_80105FEC);
     }
 
     var1 = 0;
@@ -167,7 +166,7 @@ void ftKb_ZdSpecialAirN_Anim(Fighter_GObj* gobj)
     if (fp->cmd_vars[0] == 1U) {
         fp->cmd_vars[0] = 2U;
         ftColl_CreateReflectHit(gobj, &da->specialn_zd_reflectdesc,
-                                (HSD_GObjEvent) fn_80105FEC);
+                                fn_80105FEC);
     }
 
     if (fp->cmd_vars[0] == 0) {
@@ -241,7 +240,7 @@ void ftKb_SpecialNSk_80105E8C(Fighter_GObj* gobj)
     }
     if (fp->cmd_vars[0] == 2U) {
         ftColl_CreateReflectHit(gobj, &da->specialn_zd_reflectdesc,
-                                (HSD_GObjEvent) fn_80105FEC);
+                                fn_80105FEC);
     }
 }
 
@@ -260,7 +259,7 @@ void ftKb_SpecialNSk_80105F3C(Fighter_GObj* gobj)
     }
     if (fp->cmd_vars[0] == 2U) {
         ftColl_CreateReflectHit(gobj, &da->specialn_zd_reflectdesc,
-                                (HSD_GObjEvent) fn_80105FEC);
+                                fn_80105FEC);
     }
 }
 

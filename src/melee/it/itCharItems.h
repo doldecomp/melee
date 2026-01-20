@@ -492,7 +492,7 @@ typedef struct itSamusGrapple_ItemVars {
     /* +4 +DD8 */ f32 x4;
     /* +8 +DDC */ HSD_GObj* x8;
     /* +C +DE0 */ HSD_JObj* xC;
-    /* +10 +DE4 */ UNK_RET (*unk_10)(UNK_PARAMS);
+    /* +10 +DE4 */ void (*unk_10)(Item_GObj*);
     /* +14 +DE8 */ u8 x14;
     /* +15 +DE9 */ u8 x15;
     /* +16 +DEA */ u8 x16;
