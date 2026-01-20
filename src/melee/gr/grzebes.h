@@ -7,6 +7,7 @@
 
 /* 1D84A4 */ void grZebes_801D84A4(void);
 /* 1DA3F4 */ void grZebes_801DA3F4(UNK_T);
+/* 1DCB64 */ bool grZebes_801DCB64(Vec3*, int);
 /* 1DCCC8 */ float grZebes_801DCCC8(void);
 
 #endif
