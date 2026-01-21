@@ -5,6 +5,7 @@
 #include "grmaterial.h"
 #include "types.h"
 
+#include "ft/ftdevice.h"
 #include "gm/gm_unsplit.h"
 #include "gr/granime.h"
 #include "gr/grdisplay.h"
@@ -1290,8 +1291,8 @@ void grKongo_801D52F8(void) {}
 
 void grKongo_801D52FC(void)
 {
-    Ground_801C2BA4(5);
-    // ftCo_800C0764(2, fn_801D8134);
+    HSD_GObj* gobj = Ground_801C2BA4(5);
+    ftCo_800C0764(gobj, 2, fn_801D8134);
     grZakoGenerator_801CAE04(0);
 }
 
@@ -1456,4 +1457,13 @@ DynamicsDesc* grKongo_801D8444(enum_t arg)
     return false;
 }
 
-/// #grKongo_801D844C
+bool grKongo_801D844C(Vec3* a, int b, HSD_JObj* jobj)
+{
+    Vec3 vec;
+    lb_8000B1CC(jobj, NULL, &vec);
+    if (a->y > vec.y) {
+        return true;
+    } else {
+        return false;
+    }
+}

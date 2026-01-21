@@ -3942,7 +3942,7 @@ melee/if/soundtest.c:
 	.text       start:0x802FF7DC end:0x80301E44
 	.data       start:0x803F9F28 end:0x803FDC20
 	.sdata      start:0x804D5850 end:0x804D5A40
-	.sbss       start:0x804D6DA8 end:0x804D7054
+	.sbss       start:0x804D6DA8 end:0x804D6F2C
 
 melee/if/textdraw.c:
 	.text       start:0x80301E44 end:0x80302834
@@ -3978,6 +3978,7 @@ melee/ty/tydisplay.c:
 	.rodata     start:0x803B8988 end:0x803B8B90
 	.data       start:0x803FEFF0 end:0x803FFDA0
 	.sdata      start:0x804D5AA8 end:0x804D5AC8
+	.sbss       start:0x804D6F2C end:0x804D6F30
 	.sdata2     start:0x804DDF70 end:0x804DE040
 
 melee/vi/vi.c:
@@ -3985,66 +3986,77 @@ melee/vi/vi.c:
 	.data       start:0x803FFDA0 end:0x80400010
 
 melee/vi/vi0102.c:
-	.text       start:0x8031CB00 end:0x8031D030
+	.text       start:0x8031CB00 end:0x8031D020
 	.data       start:0x80400010 end:0x80400038
+	.sbss       start:0x804D6F30 end:0x804D6F38
 	.sdata2     start:0x804DE040 end:0x804DE050
 
 melee/vi/vi0401.c:
-	.text       start:0x8031D030 end:0x8031D6E4
+	.text       start:0x8031D020 end:0x8031D6E4
 	.data       start:0x80400038 end:0x80400088
 	.sdata      start:0x804D5AC8 end:0x804D5AD8
+	.sbss       start:0x804D6F3C end:0x804D6F68
 	.sdata2     start:0x804DE050 end:0x804DE058
 
 melee/vi/vi0402.c:
-	.text       start:0x8031D6E4 end:0x8031D9F8
+	.text       start:0x8031D6E4 end:0x8031D9E4
 	.data       start:0x80400088 end:0x804000A8
+	.sbss       start:0x804D6F68 end:0x804D6F70
 	.sdata2     start:0x804DE058 end:0x804DE060
 
 melee/vi/vi0501.c:
-	.text       start:0x8031D9F8 end:0x8031E124
+	.text       start:0x8031D9E4 end:0x8031E110
 	.data       start:0x804000A8 end:0x804000D0
 	.sdata      start:0x804D5AD8 end:0x804D5AE8
+	.sbss       start:0x804D6F70 end:0x804D6F90
 	.sdata2     start:0x804DE060 end:0x804DE090
 
 melee/vi/vi0502.c:
-	.text       start:0x8031E124 end:0x8031E6CC
+	.text       start:0x8031E110 end:0x8031E6CC
 	.data       start:0x804000D0 end:0x80400108
 	.sdata      start:0x804D5AE8 end:0x804D5AF8
+	.sbss       start:0x804D6F90 end:0x804D6FB0
 	.sdata2     start:0x804DE090 end:0x804DE0A8
 
 melee/vi/vi0601.c:
 	.text       start:0x8031E6CC end:0x8031ED70
 	.data       start:0x80400108 end:0x80400128
 	.sdata      start:0x804D5AF8 end:0x804D5B08
+	.sbss       start:0x804D6FB0 end:0x804D6FB8
 	.sdata2     start:0x804DE0A8 end:0x804DE0C0
 
 melee/vi/vi0801.c:
 	.text       start:0x8031ED70 end:0x8031F294
 	.data       start:0x80400128 end:0x80400200
+	.sbss       start:0x804D6FB8 end:0x804D6FC0
 	.sdata2     start:0x804DE0C0 end:0x804DE0D8
 
 melee/vi/vi1101.c:
-	.text       start:0x8031F294 end:0x8031F990
+	.text       start:0x8031F294 end:0x8031F980
 	.data       start:0x80400200 end:0x80400258
 	.sdata      start:0x804D5B08 end:0x804D5B10
+	.sbss       start:0x804D6FC0 end:0x804D6FE0
 	.sdata2     start:0x804DE0D8 end:0x804DE0F8
 
 melee/vi/vi1201v1.c:
-	.text       start:0x8031F990 end:0x803204C0
+	.text       start:0x8031F980 end:0x803204B0
 	.data       start:0x80400258 end:0x804002F8
 	.sdata      start:0x804D5B10 end:0x804D5B20
+	.sbss       start:0x804D6FE0 end:0x804D7010
 	.sdata2     start:0x804DE0F8 end:0x804DE118
 
 melee/vi/vi1201v2.c:
-	.text       start:0x803204C0 end:0x8032110C
+	.text       start:0x803204B0 end:0x8032110C
 	.data       start:0x804002F8 end:0x804003A0
 	.sdata      start:0x804D5B20 end:0x804D5B30
+	.sbss       start:0x804D7010 end:0x804D7040
 	.sdata2     start:0x804DE118 end:0x804DE138
 
 melee/vi/vi1202.c:
 	.text       start:0x8032110C end:0x80322620
 	.data       start:0x804003A0 end:0x80400430
 	.sdata      start:0x804D5B30 end:0x804D5B40
+	.sbss       start:0x804D7040 end:0x804D7054
 	.sdata2     start:0x804DE138 end:0x804DE160
 
 MSL/ansi_files.c:

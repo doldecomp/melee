@@ -50,5 +50,6 @@
 /* 2E595C */ void it_802E595C(HSD_JObj*, Item*);
 /* 2E5AA4 */ void it_802E5AA4(Item_GObj*, Item_GObj*);
 /* 3F8B48 */ extern ItemStateTable it_803F8B48[];
+/* 4D6D40 */ extern f32* it_804D6D40;
 
 #endif

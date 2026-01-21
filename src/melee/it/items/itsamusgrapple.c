@@ -2,7 +2,9 @@
 
 #include "itlinkhookshot.h"
 
+#include "ft/ftcoll.h"
 #include "it/inlines.h"
+#include "it/it_26B1.h"
 #include "it/item.h"
 
 void it_2725_Logic53_Spawned(Item_GObj* gobj)
@@ -108,28 +110,59 @@ void itSamusgrapple_UnkMotion8_Phys(Item_GObj* gobj)
 void it_2725_Logic53_PickedUp(Item_GObj* gobj)
 {
     PAD_STACK(16);
-    Item_80268E5C((HSD_GObj*) gobj, 0, ITEM_ANIM_UPDATE);
+    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
     it_802A2428(gobj);
 }
 
-/// #it_802BA9B8
+void it_802BA9B8(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    PAD_STACK(8);
+    Item_80268E5C(gobj, 3, ITEM_ANIM_UPDATE);
+    ftColl_8007AFF8(ip->xDD4_itemVar.samusgrapple.x8);
+    it_802A2428(gobj);
+}
 
-/// #it_802BAA08
+void it_802BAA08(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    PAD_STACK(8);
+    Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
+    ftColl_8007AFF8(ip->xDD4_itemVar.samusgrapple.x8);
+    it_802A2428(gobj);
+}
 
 void it_802BAA58(Item_GObj* gobj)
 {
     PAD_STACK(16);
-    Item_80268E5C((HSD_GObj*) gobj, 4, ITEM_ANIM_UPDATE);
+    Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
     it_802A2428(gobj);
 }
 
-/// #it_802BAA94
+void it_802BAA94(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    PAD_STACK(8);
+    Item_80268E5C(gobj, 5, ITEM_ANIM_UPDATE);
+    ftColl_8007AFF8(ip->xDD4_itemVar.samusgrapple.x8);
+    it_802A2428(gobj);
+}
 
 /// #it_802BAAE4
 
-/// #it_802BAB40
+void it_802BAB40(Item_GObj* gobj)
+{
+    PAD_STACK(16);
+    Item_80268E5C(gobj, 6, ITEM_ANIM_UPDATE);
+    it_802A2428(gobj);
+}
 
-/// #it_802BAB7C
+void it_802BAB7C(Item_GObj* gobj)
+{
+    PAD_STACK(16);
+    Item_80268E5C(gobj, 7, ITEM_ANIM_UPDATE);
+    it_802A2428(gobj);
+}
 
 /// #it_802BABB8
 
@@ -139,4 +172,11 @@ void it_802BAA58(Item_GObj* gobj)
 
 /// #it_802BACC4
 
-/// #it_2725_Logic53_EvtUnk
+void it_2725_Logic53_EvtUnk(Item_GObj* gobj, Item_GObj* arg1)
+{
+    Item* item = GET_ITEM(gobj);
+    it_8026B894(gobj, arg1);
+    if (item->xDD4_itemVar.samusgrapple.x8 == arg1) {
+        item->xDD4_itemVar.samusgrapple.x8 = NULL;
+    }
+}

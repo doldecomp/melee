@@ -4712,9 +4712,7 @@ struct Fighter_804D653C_t* it_804D6D04;
 // ItemCommonData* it_804D6D28; // 8 bytes instead of 4 for some reason
 // Article** it_804D6D30; // 8 bytes instead of 4 for some reason
 // Article** it_804D6D38; // 8 bytes instead of 4 for some reason
-f32**
-    it_804D6D40; // Not sure of type. 8 bytes instead of 4 for some reason.
-                 // Based on ItCo.dat, may be a pointer to a struct of size 2C?
+f32* it_804D6D40;
 
 // static f32 it_804DC708 = 0.0f;
 // static f32 it_804DC70C = 0.00001f;
@@ -8843,11 +8841,10 @@ void it_80279744(Item_GObj* item_gobj, CommandInfo* cmd)
     ++cmd->u;
 }
 
-void it_80279768(Item_GObj* item_gobj, CommandInfo* cmd)
+void it_80279768(Item_GObj* gobj, CommandInfo* cmd)
 {
-    Item* item = item_gobj->user_data;
-    item->xDBC_itcmd_var4 |= (item->xDBC_itcmd_var4 >> 24U & 0x80);
-    // item->xDBC_itcmd_var4 |= (item->xDBC_itcmd_var4 >> 25U & 0x80);
+    Item* ip = GET_ITEM(gobj);
+    ip->xDBC_itcmd_var4.flags.x0 = true;
     ++cmd->u;
 }
 
@@ -8936,9 +8933,8 @@ void it_8027978C(Item_GObj* item_gobj, CommandInfo* cmd)
 void it_80279888(Item_GObj* item_gobj, CommandInfo* cmd)
 {
     PAD_STACK(4);
-    // it_80273598(item_gobj, ((u32) cmd->x8_bits->x0 >> 13U) & 0x1FFF,
-    // cmd->x8_bits->x2 & 0x1FFF);
-    // cmd->x8 = cmd->x8 + 4;
+    it_80273598(item_gobj, cmd->u->unk33.unk0, cmd->u->unk33.unk1);
+    NEXT_CMD(cmd);
 }
 
 void it_802798D4(Item_GObj* item_gobj, CommandInfo* cmd)
@@ -8977,7 +8973,7 @@ void it_802799E4(Item_GObj* item_gobj)
     u32 opcode;
 
     cmd->frame_count = item->x5CC_currentAnimFrame;
-    item->xDBC_itcmd_var4 = 0;
+    item->xDBC_itcmd_var4_word = 0;
 
     if (cmd->u == NULL) {
         return;

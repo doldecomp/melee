@@ -1,5 +1,7 @@
 #include "itseakchain.h"
 
+#include "itlinkhookshot.h"
+
 #include "it/forward.h"
 
 #include "it/inlines.h"
@@ -70,4 +72,11 @@ s32 it_802BBAEC(ItemLink* link, s32 arg1, f32 arg2)
 
 /// #it_802BCFC4
 
-/// #it_2725_Logic54_EvtUnk
+void it_2725_Logic54_EvtUnk(Item_GObj* arg0, Item_GObj* arg1)
+{
+    Item* item = GET_ITEM((HSD_GObj*) arg0);
+    it_8026B894(arg0, (HSD_GObj*) arg1);
+    if ((HSD_GObj*) item->xDD4_itemVar.seakchain.x8 == arg1) {
+        item->xDD4_itemVar.seakchain.x8 = NULL;
+    }
+}

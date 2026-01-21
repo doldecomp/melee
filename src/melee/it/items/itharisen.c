@@ -23,7 +23,13 @@ void it_3F14_Logic24_Spawned(Item_GObj* gobj)
     it_8029290C(gobj);
 }
 
-/// #it_8029287C
+void it_8029287C(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    it_8026B390(gobj);
+    itResetVelocity(ip);
+    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+}
 
 bool itHarisen_UnkMotion0_Anim(Item_GObj* gobj)
 {
@@ -103,14 +109,28 @@ void itHarisen_UnkMotion6_Phys(Item_GObj* gobj) {}
 
 /// #it_3F14_Logic24_Dropped
 
-/// #itHarisen_UnkMotion8_Coll
+bool itHarisen_UnkMotion8_Coll(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+
+    if (ip->xD4C != 0) {
+        it_8026E15C(gobj, it_8029287C);
+        return false;
+    }
+    return it_8026DF34(gobj);
+}
 
 void it_3F14_Logic24_Thrown(Item_GObj* gobj)
 {
     Item_80268E5C(gobj, 7, 6);
 }
 
-/// #itHarisen_UnkMotion8_Phys
+void itHarisen_UnkMotion8_Phys(Item_GObj* gobj)
+{
+    ItemAttr* attr = ((Item*) gobj->user_data)->xCC_item_attr;
+    it_80272860(gobj, attr->x10_fall_speed, attr->x14_fall_speed_max);
+    it_80274658(gobj, it_804D6D28->x68_float);
+}
 
 bool itHarisen_UnkMotion7_Coll(Item_GObj* gobj)
 {
@@ -118,7 +138,14 @@ bool itHarisen_UnkMotion7_Coll(Item_GObj* gobj)
     return false;
 }
 
-/// #it_3F14_Logic24_DmgDealt
+bool it_3F14_Logic24_DmgDealt(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->msid == 7 || ip->msid == 8) {
+        itColl_BounceOffVictim(gobj);
+    }
+    return false;
+}
 
 void it_3F14_Logic24_EnteredAir(Item_GObj* gobj)
 {
@@ -138,14 +165,20 @@ bool itHarisen_UnkMotion9_Coll(Item_GObj* gobj)
     return false;
 }
 
-/// #it_3F14_Logic24_Clanked
+bool it_3F14_Logic24_Clanked(Item_GObj* gobj)
+{
+    return it_3F14_Logic24_DmgDealt(gobj);
+}
 
 bool it_3F14_Logic24_Reflected(Item_GObj* gobj)
 {
     return it_80273030(gobj);
 }
 
-/// #it_3F14_Logic24_HitShield
+bool it_3F14_Logic24_HitShield(Item_GObj* gobj)
+{
+    return it_3F14_Logic24_DmgDealt(gobj);
+}
 
 bool it_3F14_Logic24_ShieldBounced(Item_GObj* gobj)
 {

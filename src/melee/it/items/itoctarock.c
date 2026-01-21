@@ -15,8 +15,6 @@
 #include "mp/mpcoll.h"
 #include "sysdolphin/baselib/random.h"
 
-extern f32* it_804D6D40;
-
 ItemStateTable it_803F8B48[] = {
     {
         0,

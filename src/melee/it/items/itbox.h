@@ -9,7 +9,7 @@
 /* 2861CC */ void it_3F14_Logic1_Spawned(Item_GObj*);
 /* 286208 */ void it_3F14_Logic1_Destroyed(Item_GObj*);
 /* 286248 */ UNK_RET it_80286248(UNK_PARAMS);
-/* 286340 */ UNK_RET it_80286340(UNK_PARAMS);
+/* 286340 */ bool it_80286340(Item_GObj*, s32, s32, s32, s32);
 /* 2863BC */ UNK_RET it_802863BC(UNK_PARAMS);
 /* 286480 */ void fn_80286480(Item_GObj*);
 /* 2864D8 */ bool itBox_UnkMotion0_Anim(Item_GObj* gobj);

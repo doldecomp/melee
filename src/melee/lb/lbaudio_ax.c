@@ -91,7 +91,7 @@ void fn_80023254(s32 arg0)
     int* arr_b44;
     int* local_ptr;
     s8(*arr_5d0)[4];
-    int (*arr_4e4)[2];
+    int(*arr_4e4)[2];
     int count;
     int j;
     int n;
@@ -1331,7 +1331,7 @@ void fn_800267B0(void)
     s8(*arr_5d0)[4];
     int* arr_194;
     int* arr_354;
-    int (*arr_4e4)[2];
+    int(*arr_4e4)[2];
     int j;
     int i;
 
@@ -1386,7 +1386,7 @@ void fn_800268B4(void)
 {
     int* arr_38a4;
     int* arr_3984;
-    int (*arr_4e4)[2];
+    int(*arr_4e4)[2];
     int i;
 
     lbl_804D6450 = 0;

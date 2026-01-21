@@ -9,6 +9,7 @@
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/item.h"
 
 /// #it_80299C48
 
@@ -21,7 +22,13 @@ void it_3F14_Logic40_Spawned(Item_GObj* gobj)
 
 /// #it_80299D7C
 
-/// #it_3F14_Logic40_PickedUp
+void it_3F14_Logic40_PickedUp(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itHammerheadAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    it_80275158(gobj, attrs->x4);
+    Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
+}
 
 bool itHammerhead_UnkMotion1_Anim(Item_GObj* gobj)
 {
@@ -37,7 +44,13 @@ void it_3F14_Logic40_Dropped(Item_GObj* gobj)
 
 /// #itHammerhead_UnkMotion2_Anim
 
-/// #itHammerhead_UnkMotion2_Phys
+void itHammerhead_UnkMotion2_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ItemAttr* attr = ip->xCC_item_attr;
+    it_80272860(gobj, attr->x10_fall_speed, attr->x14_fall_speed_max);
+    it_80274658(gobj, it_804D6D28->x68_float);
+}
 
 bool itHammerhead_UnkMotion2_Coll(Item_GObj* gobj)
 {

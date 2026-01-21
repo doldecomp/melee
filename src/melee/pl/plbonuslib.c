@@ -951,12 +951,12 @@ void pl_8003FC88(int arg0, int arg1, int arg2)
     }
 }
 
-void pl_8003FDA0(int arg0)
+void pl_8003FDA0(int arg0, int arg1)
 {
     pl_80038788(arg0, 0x5B, 1);
 }
 
-void pl_8003FDC8(int arg0)
+void pl_8003FDC8(int arg0, int arg1)
 {
     pl_StaleMoveTableExt_t* temp_r3 = Player_GetStaleMoveTableIndexPtr2(arg0);
     temp_r3->xD70 += 1;

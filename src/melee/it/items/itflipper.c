@@ -21,7 +21,13 @@
 
 /// #it_80290DD4
 
-/// #it_80290E78
+void it_80290E78(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itResetVelocity(ip);
+    it_8026B390(gobj);
+    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+}
 
 bool itFlipper_UnkMotion0_Anim(Item_GObj* gobj)
 {

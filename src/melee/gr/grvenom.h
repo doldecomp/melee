@@ -49,7 +49,7 @@
 /* 205AD0 */ void grVenom_80205AD0(Ground_GObj*);
 /* 205AD4 */ void grVenom_80205AD4(Ground_GObj*);
 /* 205DF0 */ bool grVenom_80205DF0(Ground_GObj*);
-/* 205DF8 */ UNK_RET grVenom_80205DF8(UNK_PARAMS);
+/* 205DF8 */ s32 grVenom_80205DF8(Vec3*);
 /* 205E84 */ UNK_RET grVenom_80205E84(UNK_PARAMS);
 /* 205F30 */ void grVenom_80205F30(Ground_GObj*);
 /* 206870 */ void grVenom_80206870(Ground_GObj*);
@@ -61,8 +61,8 @@
 /* 206BBC */ bool grVenom_80206BBC(Ground_GObj*);
 /* 206BC4 */ void grVenom_80206BC4(Ground_GObj*);
 /* 206BEC */ void grVenom_80206BEC(Ground_GObj*);
-/* 206BF0 */ UNK_RET grVenom_80206BF0(UNK_PARAMS);
-/* 206CB0 */ UNK_RET grVenom_80206CB0(UNK_PARAMS);
+/* 206BF0 */ bool grVenom_80206BF0(int);
+/* 206CB0 */ void grVenom_80206CB0(int);
 /* 206D10 */ bool grVenom_80206D10(enum_t);
 /* 206D74 */ DynamicsDesc* grVenom_80206D74(enum_t);
 /* 206D7C */ bool grVenom_80206D7C(Vec3*, int arg, HSD_JObj* jobj);

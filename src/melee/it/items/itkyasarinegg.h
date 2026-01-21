@@ -20,3 +20,5 @@ void itKyasarinegg_UnkMotion1_Phys(Item_GObj* gobj);
 s32 itKyasarinegg_UnkMotion3_Coll(Item_GObj* gobj);
 void itKyasarinegg_UnkMotion3_Phys(Item_GObj* gobj);
 void itKyasarinegg_UnkMotion4_Anim(Item_GObj* gobj);
+bool itKyasarinegg_UnkMotion0_Coll(Item_GObj* gobj);
+void it_802EFCC0(Item_GObj*);

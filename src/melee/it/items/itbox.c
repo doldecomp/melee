@@ -3,6 +3,7 @@
 #include <placeholder.h>
 #include <platform.h>
 
+#include "baselib/random.h"
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
@@ -17,19 +18,50 @@
 
 /// #it_80286248
 
-/// #it_80286340
+bool it_80286340(Item_GObj* gobj, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
+{
+    s32 sum1 = arg1 + arg2;
+    s32 sum2 = arg3 + sum1;
+    s32 rand = HSD_Randi(arg4 + sum2);
+    if (rand < arg1) {
+        return true;
+    }
+    if (rand < sum1) {
+        return true;
+    }
+    if (rand < sum2) {
+        return true;
+    }
+    return false;
+}
 
 /// #it_802863BC
 
-/// #fn_80286480
+void fn_80286480(Item_GObj* gobj)
+{
+    Item* it = GET_ITEM(gobj);
+    PAD_STACK(12);
+    it_8026B390(gobj);
+    it->x40_vel.x = it->x40_vel.y = it->x40_vel.z = 0.0F;
+    Item_80268E5C(gobj, 0, 2);
+}
 
 /// #itBox_UnkMotion0_Anim
 
 void itBox_UnkMotion0_Phys(Item_GObj* gobj) {}
 
-/// #itBox_UnkMotion0_Coll
+bool itBox_UnkMotion0_Coll(Item_GObj* gobj)
+{
+    it_8026D62C(gobj, (HSD_GObjEvent) it_8028655C);
+    it_80276CB8(gobj);
+    return false;
+}
 
-/// #it_8028655C
+void it_8028655C(Item_GObj* gobj)
+{
+    it_8026B3A8(gobj);
+    Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
+}
 
 bool itBox_UnkMotion4_Anim(Item_GObj* gobj)
 {
@@ -62,7 +94,12 @@ void it_3F14_Logic1_Thrown(Item_GObj* gobj)
     Item_80268E5C(gobj, 3, ITEM_ANIM_UPDATE | ITEM_DROP_UPDATE);
 }
 
-/// #itBox_UnkMotion4_Phys
+void itBox_UnkMotion4_Phys(Item_GObj* gobj)
+{
+    ItemAttr* attr = ((Item*) gobj->user_data)->xCC_item_attr;
+    it_80272860(gobj, attr->x10_fall_speed, attr->x14_fall_speed_max);
+    it_80274658(gobj, it_804D6D28->x68_float);
+}
 
 /// #itBox_UnkMotion3_Coll
 

@@ -45,6 +45,14 @@ void itKyasarinegg_UnkMotion4_Anim(Item_GObj* gobj)
     it_802751D8(gobj);
 }
 
+bool itKyasarinegg_UnkMotion0_Coll(Item_GObj* gobj)
+{
+    if (it_8026DAA8(gobj) & 0xF) {
+        it_802EFCC0(gobj);
+    }
+    return false;
+}
+
 void it_2725_Logic28_PickedUp(Item_GObj* gobj)
 {
     Item_80268E5C((HSD_GObj*) gobj, 2, ITEM_ANIM_UPDATE);

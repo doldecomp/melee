@@ -4,12 +4,25 @@
 
 #include <platform.h>
 
+#include "cm/camera.h"
+
+#include "cm/forward.h"
+
+#include "cm/types.h"
+
+#include "forward.h"
+
+#include "gr/grdatfiles.h"
 #include "gr/grdisplay.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
 #include "if/ifhazard.h"
 #include "lb/lb_00B0.h"
+#include "lb/lb_00F9.h"
 #include "lb/types.h"
+#include "mp/mplib.h"
+
+#include "sc/forward.h"
 
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
@@ -57,7 +70,6 @@ bool grOnett_801E37EC(void)
     return false;
 }
 
-/// #grOnett_801E37F4
 HSD_GObj* grOnett_801E37F4(int gobj_id)
 {
     HSD_GObj* gobj;
@@ -102,7 +114,27 @@ void grOnett_801E3928(Ground_GObj* gobj) {}
 
 void grOnett_801E392C(Ground_GObj* gobj) {}
 
-/// #grOnett_801E3930
+void grOnett_801E3930(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+
+    mpJointSetCb1(0, gp, grOnett_801E54B4);
+    mpJointSetCb1(1, gp, grOnett_801E54B4);
+    gp->gv.onett.x104 = Camera_80029020();
+    if (gp->gv.onett.x104 == NULL) {
+        __assert("gronett.c", 331, "gp->u.map.subject");
+    }
+    gp->gv.onett.x104->x40.x = -40.0f;
+    gp->gv.onett.x104->x40.y = 40.0f;
+    gp->gv.onett.x104->x48.x = 20.0f;
+    gp->gv.onett.x104->x48.y = -20.0f;
+    gp->gv.onett.x104->x48.z = 1.0f;
+    gp->gv.onett.x104->x10.x = 0.0f;
+    gp->gv.onett.x104->x10.y = 0.0f;
+    gp->gv.onett.x104->x10.z = 0.0f;
+    gp->gv.onett.x104->x1C = gp->gv.onett.x104->x10;
+    gp->gv.onett.x104->x8 = true;
+}
 
 /// #grOnett_801E3A34
 
@@ -111,7 +143,25 @@ bool grOnett_801E3C58(Ground_GObj* gobj)
     return false;
 }
 
-/// #grOnett_801E3C60
+void grOnett_801E3C60(Ground_GObj* gobj)
+{
+    Ground* gp;
+    PAD_STACK(8);
+
+    gp = GET_GROUND(gobj);
+
+    grOnett_801E5214();
+    grOnett_801E5538(gobj);
+    if (gp->gv.onett.x104 != NULL) {
+        if (Ground_801C5794() != 0) {
+            gp->gv.onett.x104->x8 = false;
+        } else {
+            gp->gv.onett.x104->x8 = true;
+        }
+    }
+    lb_800115F4();
+    Ground_801C2FE0(gobj);
+}
 
 void grOnett_801E3CE0(Ground_GObj* gobj) {}
 
@@ -153,7 +203,8 @@ void grOnett_801E502C(Ground_GObj* gobj) {}
 /// #grOnett_801E5214
 
 /// Updates awning collision tracking data
-void grOnett_801E54B4(Ground* gp, int arg1, CollData* cd, int arg3, int arg4)
+void grOnett_801E54B4(Ground* gp, s32 arg1, CollData* cd, s32 arg3,
+                      mpLib_GroundEnum arg4, f32 arg5)
 {
     int temp = cd->x34_flags.b1234;
     int idx;
@@ -180,6 +231,17 @@ void grOnett_801E54B4(Ground* gp, int arg1, CollData* cd, int arg3, int arg4)
 /// #grOnett_801E5538
 
 /// #grOnett_801E56FC
+DynamicModelDesc* grOnett_801E56FC(void)
+{
+    UnkArchiveStruct* archive = grDatFiles_801C6330(0x1);
+    UnkStageDat* dat;
+    HSD_ASSERT(1319, archive);
+    dat = archive->unk4;
+    if (dat != NULL) {
+        return (DynamicModelDesc*) ((char*) dat->unk8 + 0x34);
+    }
+    return NULL;
+}
 
 DynamicsDesc* grOnett_801E5760(enum_t arg)
 {

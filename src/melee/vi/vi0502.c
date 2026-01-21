@@ -1,7 +1,5 @@
 #include "vi0502.h"
 
-#include "baselib/gobj.h"
-#include "baselib/mtx.h"
 #include "cm/camera.h"
 #include "ef/efasync.h"
 #include "ef/eflib.h"
@@ -9,7 +7,6 @@
 #include "ft/forward.h"
 
 #include "ft/ftdemo.h"
-#include "gm/gm_1A36.h"
 #include "gm/gm_unsplit.h"
 #include "gr/grlib.h"
 #include "gr/ground.h"
@@ -21,30 +18,43 @@
 #include "lb/lbshadow.h"
 #include "mp/mpcoll.h"
 #include "pl/player.h"
+#include "sc/types.h"
+#include "vi/types.h"
 #include "vi/vi.h"
-
-#include <baselib/forward.h>
 
 #include <dolphin/gx.h>
 #include <baselib/aobj.h>
 #include <baselib/cobj.h>
 #include <baselib/displayfunc.h>
 #include <baselib/fog.h>
+#include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjobject.h>
 #include <baselib/gobjproc.h>
+#include <baselib/jobj.h>
+#include <baselib/lobj.h>
 #include <baselib/mtx.h>
 #include <baselib/wobj.h>
 
-const GXColor erase_colors_vi0502 = { 0, 0, 0, 0 };
+Vec3 initial_pos = { 0, -3.0f, 0 };
 
-Vec3 initial_pos = { 0, 0, 0 };
-
+static SceneDesc* un_804D6F90;
 static HSD_Archive* un_804D6F94;
+static HSD_Archive* un_804D6F98;
+static HSD_Archive* un_804D6F9C;
+static GXColor erase_colors_vi0502;
 static HSD_GObj* kirby_gobj;
+static ViCharaDesc* un_804D6FA8;
 
-void vi0502_8031E124(CharacterKind player_kind, s8 player_costume,
-                     s8 kirby_costume)
+void un_8031E110(int arg0, int arg1, int arg2)
+{
+    un_804D6FA8->p1_char_index = arg0;
+    un_804D6FA8->p1_costume_index = arg1;
+    un_804D6FA8->p2_costume_index = arg2;
+}
+
+void vi0502_8031E124(CharacterKind player_kind, int player_costume,
+                     int kirby_costume)
 {
     HSD_JObj* jobj;
     VecMtxPtr pmtx;
@@ -72,7 +82,7 @@ void vi0502_8031E124(CharacterKind player_kind, s8 player_costume,
     Player_80032768(0, &initial_pos);
     Player_80036F34(0, 8);
 
-    Player_80036E20(CKIND_KIRBY, un_804D6F94, 7);
+    Player_80036E20(CKIND_KIRBY, un_804D6F9C, 7);
     Player_SetPlayerCharacter(1, CKIND_KIRBY);
     Player_SetCostumeId(1, kirby_costume);
     Player_SetPlayerId(1, 0);
@@ -101,7 +111,7 @@ void vi0502_8031E304(HSD_GObj* gobj)
     HSD_JObjAnimAll(GET_JOBJ(gobj));
 }
 
-void vi0502_8031E328(HSD_GObj* gobj)
+static void vi0502_8031E328(HSD_GObj* gobj, int unused)
 {
     HSD_CObj* cobj;
     lbShadow_8000F38C(0);
@@ -133,4 +143,61 @@ void vi0502_RunFrame(HSD_GObj* gobj)
         lb_800145F4();
         gm_801A4B60();
     }
+}
+
+void un_8031E444_OnEnter(void* arg)
+{
+    u8* input = arg;
+    HSD_GObj* gobj;
+    HSD_CObj* cobj;
+    HSD_Fog* fog;
+    HSD_LObj* lobj;
+    HSD_JObj* jobj;
+    CharacterKind char_kind;
+    s32 i;
+
+    lbAudioAx_800236DC();
+    efLib_8005B4B8();
+    efAsync_8006737C(0);
+
+    char_kind = input[0];
+
+    un_804D6F9C = lbArchive_LoadSymbols("Vi0502.dat", &un_804D6F90,
+                                        "visual0502Scene", NULL);
+    un_804D6F94 = lbArchive_LoadSymbols(viGetCharAnimByIndex(char_kind), NULL);
+    un_804D6F98 = lbArchive_LoadSymbols("IrAls.dat", NULL);
+
+    gobj = GObj_Create(0xB, 3, 0);
+    fog = HSD_FogLoadDesc(un_804D6F90->fogs->desc);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7848, fog);
+    GObj_SetupGXLink(gobj, HSD_GObj_FogCallback, 0, 0);
+    *(GXColor*) &erase_colors_vi0502 = fog->color;
+
+    gobj = GObj_Create(0xB, 3, 0);
+    lobj = lb_80011AC4(un_804D6F90->lights);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784A, lobj);
+    GObj_SetupGXLink(gobj, HSD_GObj_LObjCallback, 0, 0);
+
+    gobj = GObj_Create(0x13, 0x14, 0);
+    cobj =
+        lb_80013B14((HSD_CameraDescPerspective*) un_804D6F90->cameras->desc);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
+    GObj_SetupGXLinkMax(gobj, (void (*)(HSD_GObj*, int)) vi0502_8031E328, 5);
+    HSD_CObjAddAnim(cobj, un_804D6F90->cameras->anims[0]);
+    HSD_CObjReqAnim(cobj, 0.0f);
+    HSD_CObjAnim(cobj);
+    HSD_GObjProc_8038FD54(gobj, vi0502_RunFrame, 0);
+
+    for (i = 0; un_804D6F90->models[i] != NULL; i++) {
+        gobj = GObj_Create(0xE, 0xF, 0);
+        jobj = HSD_JObjLoadJoint(un_804D6F90->models[i]->joint);
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+        GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 9, 0);
+        gm_8016895C(jobj, un_804D6F90->models[i], 0);
+        HSD_JObjReqAnimAll(jobj, 0.0f);
+        HSD_JObjAnimAll(jobj);
+        HSD_GObjProc_8038FD54(gobj, vi0502_8031E304, 0x17);
+    }
+
+    vi0502_8031E124(input[0], input[1], input[3]);
 }

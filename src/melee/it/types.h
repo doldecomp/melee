@@ -510,7 +510,10 @@ struct Item {
     u32 xDB0_itcmd_var1;
     u32 xDB4_itcmd_var2;
     u32 xDB8_itcmd_var3;
-    u32 xDBC_itcmd_var4;
+    union {
+        flag32 xDBC_itcmd_var4;
+        u32 xDBC_itcmd_var4_word;
+    };
     u32 xDC0;
     u32 xDC4;
     flag32 xDC8_word;
@@ -538,6 +541,7 @@ struct Item {
         itLizardon_ItemVars lizardon;
         itLucky_ItemVars lucky;
         itClimbersBlizzard_ItemVars climbersblizzard;
+        itClimbersIce_ItemVars climbersice;
         itCoin_ItemVars coin;
         itDrMarioPill_ItemVars drmariopill;
         itEgg_ItemVars egg;
@@ -550,6 +554,7 @@ struct Item {
         itFoxLaser_ItemVars foxlaser;
         itFreeze_ItemVars freeze;
         itGShell_ItemVars gshell, rshell, zgshell, zrshell;
+        itGamewatchrescue_ItemVars gamewatchrescue;
         itHassam_ItemVars hassam;
         itHeart_ItemVars heart;
         itHeiho_ItemVars heiho;
@@ -566,6 +571,7 @@ struct Item {
         itKusudama_ItemVars kusudama;
         itKlap_ItemVars klap;
         itLeadead_ItemVars leadead;
+        itLikelike_ItemVars likelike;
         itLGun_ItemVars lgun;
         itLGunBeam_ItemVars lgunbeam;
         itLGunRay_ItemVars lgunray;
@@ -579,15 +585,18 @@ struct Item {
         itMsBomb_ItemVars msbomb;
         itNokoNoko_ItemVars nokonoko;
         itOctarock_ItemVars octarock;
+        itOldottosea_ItemVars oldottosea;
         itPeachTurnip_ItemVars peachturnip;
         itPikachutJoltGround_ItemVars pikachujoltground;
         itPikachutJoltAir_ItemVars pikachujoltair;
+        itPikachuthunder_ItemVars pikachuthunder;
         itPKFlush_ItemVars pkflush;
         itPKFlushExplode_ItemVars pkflushexplode;
         itPKThunder_ItemVars pkthunder;
         itPokemon_ItemVars pokemon;
         itSamusBomb_ItemVars samusbomb;
         itSamusGrapple_ItemVars samusgrapple;
+        itSeakChain_ItemVars seakchain;
         itSeakNeedleThrown_ItemVars seakneedlethrown;
         itSonans_ItemVars sonans;
         itStar_ItemVars star;

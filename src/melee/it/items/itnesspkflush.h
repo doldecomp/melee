@@ -12,7 +12,7 @@
 
 /* 2AA7E4 */ Fighter_GObj* it_802AA7E4(Item_GObj*);
 /* 2AA7F0 */ bool it_802AA7F0(Item_GObj*);
-/* 2AA810 */ UNK_RET it_802AA810(UNK_PARAMS);
+/* 2AA810 */ bool it_802AA810(Item_GObj*, CollData*);
 /* 2AA8C0 */ HSD_GObj* it_802AA8C0(Item_GObj*, Vec3*, enum_t, float);
 /* 2AA9CC */ void it_2725_Logic102_Destroyed(Item_GObj*);
 /* 2AAA50 */ void it_802AAA50(Item_GObj*);

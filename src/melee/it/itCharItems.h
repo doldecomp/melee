@@ -26,6 +26,10 @@ typedef struct itClimbersBlizzardAttributes {
     /* +10 */ f32 x10;
 } itClimbersBlizzardAttributes;
 
+typedef struct itClimbersIce_ItemVars {
+    /* +0 */ Item_GObj* x0;
+} itClimbersIce_ItemVars;
+
 typedef struct {
     /* x0 ip+DD4 */ f32 x0;
     /* x4 ip+DD8 */ HSD_GObj* x4;
@@ -47,6 +51,10 @@ typedef struct {
     /* x8 */ f32 x8;
     /* xC */ f32 xC;
 } itFireAttributes;
+
+typedef struct {
+    /* x0 */ f32 x0;
+} itThunderAttributes;
 
 typedef struct {
     /* x0 */ s32 xDD4; // gets iterated from 0 to 14 in function (it_802AE200)
@@ -133,6 +141,11 @@ typedef struct {
                                    // 2: Being put away
     /* x108 */ HSD_GObj* owner;    // xE7C
 } itFoxBlaster_ItemVars;
+
+typedef struct {
+    /* 0x00 */ int xDD4;
+    /* 0x00 */ Item_GObj* xDD8;
+} itGamewatchrescue_ItemVars;
 
 typedef struct itLeadead_ItemVars {
     /* 0x00 */ u8 pad[0x18];
@@ -464,13 +477,21 @@ typedef struct itPikachutJoltAir_ItemVars {
     /* +4 +DD8 */ u32 xDD8;
 } itPikachutJoltAir_ItemVars;
 
+typedef struct itPikachuthunder_ItemVars {
+    /* +0 */ char pad_0[0x38];
+    /* +38 */ Item_GObj* x38;
+} itPikachuthunder_ItemVars;
+
 typedef struct itSamusBomb_ItemVars {
     /* +0 +DD4 */ char pad_0[0x4];
     /* +4 +DD8 */ s32 xDD8;
 } itSamusBomb_ItemVars;
 
 typedef struct itSamusGrapple_ItemVars {
-    /*  +0 +DD4 */ char pad_0[0x10];
+    /* +0 +DD4 */ f32 x0;
+    /* +4 +DD8 */ f32 x4;
+    /* +8 +DDC */ HSD_GObj* x8;
+    /* +C +DE0 */ f32 xC;
     /* +10 +DE4 */ UNK_RET (*unk_10)(UNK_PARAMS);
 } itSamusGrapple_ItemVars;
 
@@ -480,6 +501,11 @@ typedef struct itSeakNeedleThrown_ItemVars {
     /* +8 +DDC */ f32 xDDC;
     /* +C +DE0 */ f32 xDE0;
 } itSeakNeedleThrown_ItemVars;
+
+typedef struct itSeakChain_ItemVars {
+    /* +0 +DD4 */ char pad_0[0x8];
+    /* +8 +DDC */ HSD_GObj* x8;
+} itSeakChain_ItemVars;
 
 typedef struct itZeldaDinFireExplode_ItemVars {
     /* +0 ip+DD4 */ f32 xDD4;

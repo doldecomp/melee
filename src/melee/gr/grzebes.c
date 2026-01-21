@@ -2,16 +2,23 @@
 
 #include <platform.h>
 
+#include "forward.h"
+
+#include "ft/ftdevice.h"
+#include "gr/grlib.h"
+#include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
 
 /* 1D84A0 */ static void grZebes_801D84A0(bool arg);
 /* 1D8528 */ static void grZebes_801D8528(void);
+/* 1D852C */ void grZebes_801D852C(void);
 /* 1D8550 */ static bool grZebes_801D8550(void);
 /* 1D8558 */ static void grZebes_801D8558(int);
 /* 1D8814 */ static bool grZebes_801D8814(Ground_GObj* arg);
 /* 1D90FC */ static void grZebes_801D90FC(Ground_GObj* arg);
 /* 1D9254 */ static bool grZebes_801D9254(Ground_GObj* arg);
 /* 1D93D8 */ static void grZebes_801D93D8(Ground_GObj* arg);
+/* 1D93DC */ void grZebes_801D93DC(Ground_GObj* gobj);
 /* 1D9408 */ static bool grZebes_801D9408(Ground_GObj* arg);
 /* 1D94EC */ static void grZebes_801D94EC(Ground_GObj* arg);
 /* 1D94F0 */ static void fn_801D94F0(Ground_GObj* gobj);
@@ -51,7 +58,10 @@ void grZebes_801D84A4(void)
 }
 void grZebes_801D8528(void) {}
 
-/// #grZebes_801D852C
+void grZebes_801D852C(void)
+{
+    grZakoGenerator_801CAE04(0);
+}
 
 bool grZebes_801D8550(void)
 {
@@ -82,7 +92,11 @@ bool grZebes_801D9254(Ground_GObj* arg)
 
 void grZebes_801D93D8(Ground_GObj* arg) {}
 
-/// #grZebes_801D93DC
+void grZebes_801D93DC(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    grAnime_801C8138(gobj, gp->map_id, 0);
+}
 
 bool grZebes_801D9408(Ground_GObj* arg)
 {
@@ -109,7 +123,12 @@ bool grZebes_801D95B0(Ground_GObj* arg)
 
 void grZebes_801D9754(Ground_GObj* arg) {}
 
-/// #fn_801D9758
+void grZebes_801D9758(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    ftCo_800C07F8(gobj, 3, grZebes_801DCBFC);
+    gp->gv.zebes.x4 = 1;
+}
 
 /// #grZebes_801D9798
 
@@ -122,7 +141,15 @@ bool grZebes_801D99D8(Ground_GObj* arg)
 
 void grZebes_801D9F2C(Ground_GObj* arg) {}
 
-/// #grZebes_801D9F30
+void grZebes_801D9F30(Ground_GObj* gobj)
+{
+    Ground* gp;
+
+    gp = GET_GROUND(gobj);
+    grAnime_801C8138(gobj, gp->map_id, 0);
+    gp->gv.zebes2.xC4 = 0;
+    gp->x11_flags.b012 = 1;
+}
 
 bool grZebes_801D9F7C(Ground_GObj* arg)
 {
@@ -144,7 +171,11 @@ void grZebes_801DA3E8(void)
 
 /// #grZebes_801DA3F4
 
-/// #grZebes_801DA4FC
+void grZebes_801DA4FC(Ground_GObj* gobj)
+{
+    grZe_804D6998 -= 1;
+    Ground_801C4A08(gobj);
+}
 
 /// #grZebes_801DA528
 
@@ -180,11 +211,27 @@ void fn_801DA9F0(UNK_T arg0, Ground* gp, float y, float* x)
 
 /// #grZebes_801DC9DC
 
-/// #fn_801DCB64
+bool grZebes_801DCB64(Vec3* vec, int val)
+{
+    if (val < 9) {
+        grLib_801C96F8(0xBA, 0, vec);
+    } else {
+        grLib_801C96F8(0xBB, 0, vec);
+    }
+    return false;
+}
 
-/// #fn_801DCBB0
+bool grZebes_801DCBB0(Vec3* vec, int val)
+{
+    if (val < 3) {
+        grLib_801C96F8(0xBA, 0, vec);
+    } else {
+        grLib_801C96F8(0xBB, 0, vec);
+    }
+    return false;
+}
 
-/// #fn_801DCBFC
+/// #grZebes_801DCBFC
 
 DynamicsDesc* grZebes_801DCCB8(enum_t arg)
 {

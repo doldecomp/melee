@@ -55,6 +55,7 @@ void it_2725_Logic73_Destroyed(Item_GObj* item_gobj)
 
 void it_802C6A2C(Item_GObj* item_gobj)
 {
+    int pad[1];
     Item* item = GET_ITEM(item_gobj);
 
     if (item != NULL) {

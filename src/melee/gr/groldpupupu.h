@@ -16,7 +16,7 @@
 /* 210884 */ void grOldPupupu_80210884(void);
 /* 210888 */ void grOldPupupu_80210888(void);
 /* 2108AC */ bool grOldPupupu_802108AC(void);
-/* 2108B4 */ UNK_RET grOldPupupu_802108B4(UNK_PARAMS);
+/* 2108B4 */ HSD_GObj* grOldPupupu_802108B4(int);
 /* 21099C */ void grOldPupupu_8021099C(Ground_GObj*);
 /* 2109C8 */ bool grOldPupupu_802109C8(Ground_GObj*);
 /* 2109D0 */ void grOldPupupu_802109D0(Ground_GObj*);
@@ -47,7 +47,7 @@
 /* 211198 */ void grOldPupupu_80211198(Ground_GObj*);
 /* 21119C */ void grOldPupupu_8021119C(Ground_GObj*);
 /* 211284 */ bool grOldPupupu_80211284(Ground_GObj*);
-/* 21128C */ UNK_RET grOldPupupu_8021128C(UNK_PARAMS);
+/* 21128C */ bool grOldPupupu_8021128C(Vec*, f32, f32, f32, f32);
 /* 2112F4 */ UNK_RET fn_802112F4(UNK_PARAMS);
 /* 2113E0 */ void grOldPupupu_802113E0(Ground_GObj*);
 /* 211C0C */ void grOldPupupu_80211C0C(Ground_GObj*);

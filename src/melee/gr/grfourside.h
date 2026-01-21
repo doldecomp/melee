@@ -16,7 +16,7 @@
 /* 1F2DA0 */ void grFourside_801F2DA0(void);
 /* 1F2DA4 */ void grFourside_801F2DA4(void);
 /* 1F2DC8 */ bool grFourside_801F2DC8(void);
-/* 1F2DD0 */ void grFourside_801F2DD0(int);
+/* 1F2DD0 */ HSD_GObj* grFourside_801F2DD0(int);
 /* 1F2EBC */ void grFourside_801F2EBC(Ground_GObj*);
 /* 1F2EE8 */ bool grFourside_801F2EE8(Ground_GObj*);
 /* 1F2EF0 */ void grFourside_801F2EF0(Ground_GObj*);
@@ -29,7 +29,8 @@
 /* 1F3070 */ bool grFourside_801F3070(Ground_GObj*);
 /* 1F3078 */ void grFourside_801F3078(Ground_GObj*);
 /* 1F309C */ void grFourside_801F309C(Ground_GObj*);
-/* 1F30A0 */ UNK_RET fn_801F30A0(UNK_PARAMS);
+/* 1F9338 */ void grFourside_801F30A0(Ground*, s32, CollData*, s32,
+                                      mpLib_GroundEnum, float);
 /* 1F30F0 */ void grFourside_801F30F0(Ground_GObj*);
 /* 1F3144 */ bool grFourside_801F3144(Ground_GObj*);
 /* 1F314C */ void grFourside_801F314C(Ground_GObj*);
@@ -42,13 +43,13 @@
 /* 1F388C */ bool grFourside_801F388C(Ground_GObj*);
 /* 1F3894 */ void grFourside_801F3894(Ground_GObj*);
 /* 1F3B6C */ void grFourside_801F3B6C(Ground_GObj*);
-/* 1F3B70 */ UNK_RET grFourside_801F3B70(UNK_PARAMS);
+/* 1F3B70 */ void grFourside_801F3B70(Ground_GObj*);
 /* 1F3C40 */ void grFourside_801F3C40(Ground_GObj*);
 /* 1F3CC0 */ bool grFourside_801F3CC0(Ground_GObj*);
 /* 1F3CC8 */ void grFourside_801F3CC8(Ground_GObj*);
 /* 1F3F0C */ void grFourside_801F3F0C(Ground_GObj*);
 /* 1F3F10 */ int grFourside_801F3F10(void);
-/* 1F3F74 */ UNK_RET fn_801F3F74(UNK_PARAMS);
+/* 1F3F74 */ void fn_801F3F74(HSD_GObj*, int);
 /* 1F41E0 */ DynamicsDesc* grFourside_801F41E0(enum_t);
 /* 1F41E8 */ bool grFourside_801F41E8(Vec3* a, int arg, HSD_JObj* joint);
 

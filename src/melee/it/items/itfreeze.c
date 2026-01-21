@@ -62,7 +62,17 @@ void itFreeze_UnkMotion1_Phys(Item_GObj* gobj)
     it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
 }
 
-/// #itFreeze_UnkMotion1_Coll
+bool itFreeze_UnkMotion1_Coll(Item_GObj* gobj)
+{
+    Item* it = GET_ITEM(gobj);
+    CollData* cd = &it->x378_itemColl;
+
+    it_8026E414(gobj, it_8028EF34);
+    if (it->ground_or_air != GA_Air && (cd->env_flags & Collide_FloorMask)) {
+        it_80276408(gobj, cd, &it->xDD4_itemVar.freeze.x4);
+    }
+    return false;
+}
 
 void it_3F14_Logic17_PickedUp(Item_GObj* gobj)
 {
