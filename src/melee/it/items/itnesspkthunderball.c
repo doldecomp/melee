@@ -1,8 +1,8 @@
 #include "itnesspkthunderball.h"
 
 #include "it/inlines.h"
-#include "it/it_26B1.h"
 #include "it/it_266F.h"
+#include "it/it_26B1.h"
 
 /// #it_802AB3F0
 

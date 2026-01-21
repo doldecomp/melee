@@ -3,13 +3,14 @@
 #include <placeholder.h>
 #include <platform.h>
 
+#include "ef/eflib.h"
+#include "ef/efsync.h"
+
 #include "it/forward.h"
 
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
-#include "ef/eflib.h"
-#include "ef/efsync.h"
 #include "it/item.h"
 
 /// #it_2725_Logic24_Spawned

@@ -4,9 +4,8 @@
 #include <placeholder.h>
 #include <platform.h>
 
-#include <baselib/forward.h>
-
 #include "mn/forward.h"
+#include <baselib/forward.h>
 
 /* 2502CC */ s32 mnCount_802502CC(s32);
 /* 2502F0 */ s32 fn_802502F0(u8);

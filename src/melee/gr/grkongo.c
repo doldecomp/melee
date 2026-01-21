@@ -5,6 +5,7 @@
 #include "grmaterial.h"
 #include "types.h"
 
+#include "ft/ftdevice.h"
 #include "gm/gm_unsplit.h"
 #include "gr/granime.h"
 #include "gr/grdisplay.h"
@@ -27,7 +28,6 @@
 #include <baselib/gobjproc.h>
 #include <baselib/random.h>
 #include <baselib/spline.h>
-#include "ft/ftdevice.h"
 
 void grKongo_801D5490(Ground_GObj* arg0)
 {

@@ -3,8 +3,8 @@
 #include "it/forward.h"
 
 #include "it/inlines.h"
-#include "it/it_26B1.h"
 #include "it/it_266F.h"
+#include "it/it_26B1.h"
 
 /* 2AB29C */ static bool itNesspkflush_UnkMotion1_Coll(Item_GObj* gobj);
 /* 2AB2A4 */ static bool itNesspkflush_UnkMotion2_Coll(Item_GObj* gobj);

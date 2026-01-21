@@ -8,11 +8,11 @@
 #include "baselib/gobjgxlink.h"
 #include "baselib/gobjproc.h"
 #include "baselib/jobj.h"
+#include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
 #include "gr/types.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
-#include "gr/grzakogenerator.h"
 
 u8 tmpPadData[168] = { 0 };
 

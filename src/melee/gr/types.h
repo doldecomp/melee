@@ -646,15 +646,15 @@ struct grFourside_GroundVars {
 struct grFourside_CraneVars {
     /*  +0 gp+C4 */ u8 x0;
     /*  +0 gp+C5 */ struct {
-                        u8 b0 : 1;
-                        u8 b1 : 1;
-                        u8 b2 : 1;
-                        u8 b3 : 1;
-                        u8 b4 : 1;
-                        u8 b5 : 1;
-                        u8 b6 : 1;
-                        u8 b7 : 1;
-                    } x1;
+        u8 b0 : 1;
+        u8 b1 : 1;
+        u8 b2 : 1;
+        u8 b3 : 1;
+        u8 b4 : 1;
+        u8 b5 : 1;
+        u8 b6 : 1;
+        u8 b7 : 1;
+    } x1;
     /*  +4 gp+C8 */ int x4;
     /*  +4 gp+CC */ float x8;
     /*  +4 gp+D0 */ float xC;
