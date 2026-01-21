@@ -11,22 +11,21 @@
 #include <melee/it/it_2725.h>
 #include <melee/it/item.h>
 
-ItemStateTable it_803F79C0[] = {
-    {
-        0,
-        itGamewatchrescue_UnkMotion1_Anim,
-        itGamewatchrescue_UnkMotion1_Phys,
-        itGamewatchrescue_UnkMotion1_Coll,
-    },
-    {
-        0,
-        itGamewatchrescue_UnkMotion1_Anim,
-        itGamewatchrescue_UnkMotion1_Phys,
-        itGamewatchrescue_UnkMotion1_Coll,
-    }
-};
+ItemStateTable it_803F79C0[] = { {
+                                     0,
+                                     itGamewatchrescue_UnkMotion1_Anim,
+                                     itGamewatchrescue_UnkMotion1_Phys,
+                                     itGamewatchrescue_UnkMotion1_Coll,
+                                 },
+                                 {
+                                     0,
+                                     itGamewatchrescue_UnkMotion1_Anim,
+                                     itGamewatchrescue_UnkMotion1_Phys,
+                                     itGamewatchrescue_UnkMotion1_Coll,
+                                 } };
 
-Item_GObj* it_802C8038(Item_GObj* parent, Vec3* arg1, s32 arg2, s32 arg3, f32 farg0, f32 farg1)
+Item_GObj* it_802C8038(Item_GObj* parent, Vec3* arg1, s32 arg2, s32 arg3,
+                       f32 farg0, f32 farg1)
 {
     void** tmp;
     Item* temp_r6;

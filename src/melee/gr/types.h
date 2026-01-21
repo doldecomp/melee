@@ -638,6 +638,43 @@ struct grFigureGet_GroundVars {
 };
 
 struct grFourside_GroundVars {
+    /*  +0 gp+C4 */ HSD_JObj* x0;
+    /*  +4 gp+C8 */ HSD_JObj* x4;
+    /*  +4 gp+C8 */ HSD_JObj* x8;
+};
+
+struct grFourside_CraneVars {
+    /*  +0 gp+C4 */ u8 x0;
+    /*  +0 gp+C5 */ struct {
+        u8 b0 : 1;
+        u8 b1 : 1;
+        u8 b2 : 1;
+        u8 b3 : 1;
+        u8 b4 : 1;
+        u8 b5 : 1;
+        u8 b6 : 1;
+        u8 b7 : 1;
+    } x1;
+    /*  +4 gp+C8 */ int x4;
+    /*  +4 gp+CC */ float x8;
+    /*  +4 gp+D0 */ float xC;
+    /*  +4 gp+D4 */ float x10;
+    /*  +4 gp+D8 */ float x14;
+    /*  +4 gp+DC */ float x18;
+    /*  +4 gp+E0 */ float x1C;
+};
+
+struct grFourside_UfoVars {
+    /*  +0 gp+C4 */ u8 x0;
+    /*  +0 gp+C5 */ u8 x1;
+    /*  +4 gp+C6 */ u8 x2;
+    /*  +4 gp+C6 */ u8 x3;
+    /*  +4 gp+C8 */ int x4;
+    /*  +4 gp+CC */ int x8;
+    /*  +4 gp+D0 */ CmSubject* xC;
+};
+
+struct grFourside_GroundVars2 {
     /*  +0 gp+C4 */ u8 x0;
     /*  +1 gp+C5 */ u8 x1;
     /*  +4 gp+C8 */ s32 x4;
@@ -871,6 +908,9 @@ struct Ground {
             struct GroundVars_flatzone flatzone;
             struct GroundVars_flatzone2 flatzone2;
             struct grFourside_GroundVars fourside;
+            struct grFourside_CraneVars foursideCrane;
+            struct grFourside_UfoVars foursideUfo;
+            struct grFourside_GroundVars2 fourside2;
             struct grGreens_GroundVars greens;
             struct grGarden_GroundVars garden;
             struct grGarden_GroundVars2 garden2;

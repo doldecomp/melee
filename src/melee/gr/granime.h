@@ -12,6 +12,7 @@
 /* 1C7980 */ void grAnime_801C7980(HSD_GObj*, int, u32);
 /* 1C7A04 */ void grAnime_801C7A04(HSD_GObj*, int, u32, f32);
 /* 1C7A94 */ void grAnime_801C7A94(HSD_GObj*, int, u32, float);
+/* 1C7B24 */ void grAnime_801C7B24(HSD_GObj*, int, u32, float);
 /* 1C7C1C */ void grAnime_801C7C1C(HSD_JObj*, s32, s32, s32, s32, int, f32,
                                    f32);
 /* 1C7FF8 */ void grAnime_801C7FF8(HSD_GObj*, int, int, int, float, float);

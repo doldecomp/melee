@@ -17,41 +17,37 @@
 #include "MSL/math.h"
 #include "sysdolphin/baselib/random.h"
 
-ItemStateTable it_803F7BC0[] = {
-    {
-        0,
-        it_802CC160,
-        it_802CC184,
-        it_802CC1A4,
-    },
-    {
-        1,
-        itLizardon_UnkMotion1_Anim,
-        itLizardon_UnkMotion1_Phys,
-        itLizardon_UnkMotion1_Coll,
-    },
-    {
-        2,
-        itLizardon_UnkMotion2_Anim,
-        itLizardon_UnkMotion2_Phys,
-        itLizardon_UnkMotion2_Coll,
-    },
-    {
-        3,
-        itLizardon_UnkMotion3_Anim,
-        itLizardon_UnkMotion3_Phys,
-        itLizardon_UnkMotion3_Coll,
-    }
-};
+ItemStateTable it_803F7BC0[] = { {
+                                     0,
+                                     it_802CC160,
+                                     it_802CC184,
+                                     it_802CC1A4,
+                                 },
+                                 {
+                                     1,
+                                     itLizardon_UnkMotion1_Anim,
+                                     itLizardon_UnkMotion1_Phys,
+                                     itLizardon_UnkMotion1_Coll,
+                                 },
+                                 {
+                                     2,
+                                     itLizardon_UnkMotion2_Anim,
+                                     itLizardon_UnkMotion2_Phys,
+                                     itLizardon_UnkMotion2_Coll,
+                                 },
+                                 {
+                                     3,
+                                     itLizardon_UnkMotion3_Anim,
+                                     itLizardon_UnkMotion3_Phys,
+                                     itLizardon_UnkMotion3_Coll,
+                                 } };
 
-ItemStateTable it_803F7C00[] = {
-    {
-        0,
-        it_802CC650,
-        it_802CC684,
-        it_802CC6C4,
-    }
-};
+ItemStateTable it_803F7C00[] = { {
+    0,
+    it_802CC650,
+    it_802CC684,
+    it_802CC6C4,
+} };
 
 void it_802CB8AC(Item_GObj* gobj)
 {
