@@ -615,6 +615,7 @@ struct Item {
         itTosakinto_ItemVars tosakinto;
         itMDisable_ItemVars mdisable;
         itKoopaFlame_ItemVars koopaflame;
+        itfreezer_ItemVars freezer;
         u8 _[0xFCC - 0xDD4];
     } xDD4_itemVar;
 };
