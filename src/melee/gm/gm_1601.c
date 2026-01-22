@@ -2285,7 +2285,13 @@ UNK_T gm_80169540(void)
     return &M2C_FIELD(&lbl_8046B488, UNK_T*, 0x124);
 }
 
-/// #fn_80169550
+/// Reads signed byte at [base + slot + 0x1A6], uses it as index to write -1
+/// at [base + idx + 0x20]. Must reference lbl_8046B488 twice (not via local
+/// variable) to get correct register allocation (keeps base in r4 for reuse).
+void fn_80169550(int slot)
+{
+    ((s8*) &lbl_8046B488)[((s8*) &lbl_8046B488)[slot + 0x1A6] + 0x20] = -1;
+}
 
 /// #fn_80169574
 
