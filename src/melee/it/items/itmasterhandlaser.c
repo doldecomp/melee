@@ -140,52 +140,50 @@ void it_802F05A8(Item_GObj* gobj)
 
 void it_802F063C(Item_GObj* gobj, Item_GObj* arg1)
 {
-    s32 temp_r0;
-    Vec3 delta;
-    Vec3 pos_0;
-    Vec3 pos_1;
-    Vec3 pos_2;
     Fighter* fp;
     Item* ip;
-    f32 var_f1;
-    f32 var_f0;
-    f32 var_f2;
     itMasterHandLaserAttributes* attrs;
-    Vec3 translate;
+
+    f32 x0, y0, x1, y1;
+    Vec3 pos_0;     // 58, 5C, 60
+    Vec3 pos_1;     // 4C, 50, 54
+    Vec3 pos_2;     // 40, 44, 48
+    Vec3 translate; // 34, 38, 3C
 
     ip = GET_ITEM(gobj);
     fp = GET_FIGHTER(ip->owner);
     attrs = ip->xC4_article_data->x4_specialAttributes;
+
     lb_8000B804(HSD_JObjGetChild(gobj->hsd_obj), ip->xC8_joint->child);
     lb_8000B1CC(fp->parts[ip->xDD4_itemVar.masterhandlaser.x4].joint, NULL,
                 &pos_0);
-    translate.x = 0;
+    y0 = pos_0.y;
+    x0 = pos_0.x;
+
+    translate.x = 0.0f;
     translate.y = -attrs->x0;
-    translate.z = 0;
+    translate.z = 0.0f;
+
     HSD_JObjSetTranslate(ip->xBBC_dynamicBoneTable->bones[2], &translate);
     lb_8000B1CC(ip->xBBC_dynamicBoneTable->bones[2], NULL, &pos_2);
-    if (mpCheckMultiple(pos_0.x, pos_0.y, pos_2.x, pos_2.y, &pos_1, NULL, NULL,
-                        NULL, 1, -1, -1) != 0)
-    {
-        translate.x = 0;
-        translate.z = 0;
-        delta.x = (pos_0.x - pos_2.x) * (pos_0.x - pos_2.x);
-        delta.y = (pos_0.y - pos_2.y) * (pos_0.y - pos_2.y);
-        delta.z = (pos_0.z - pos_2.z) * (pos_0.z - pos_2.z);
-        var_f0 = sqrtf(delta.x + delta.y + delta.z);
-        delta.x = (pos_0.x - pos_1.x) * (pos_0.x - pos_1.x);
-        delta.y = (pos_0.y - pos_1.y) * (pos_0.y - pos_1.y);
-        var_f1 = sqrtf(delta.x + delta.y);
-        delta.x = (pos_0.x - pos_2.x) * (pos_0.x - pos_2.x);
-        delta.y = (pos_0.y - pos_2.y) * (pos_0.y - pos_2.y);
-        var_f2 = sqrtf(delta.x + delta.y);
+    x1 = pos_2.x;
+    y1 = pos_2.y;
 
-        translate.y = var_f0 * -(var_f1 / var_f2);
+    if (mpCheckMultiple(x0, y0, x1, y1, &pos_1, NULL, NULL, NULL, 1, -1, -1) !=
+        0)
+    {
+        translate.x = 0.0f;
+        translate.z = 0.0f;
+        translate.y = sqrtf(((pos_0.x - pos_2.x) * (pos_0.x - pos_2.x)) +
+                            ((pos_0.y - pos_2.y) * (pos_0.y - pos_2.y)) +
+                            ((pos_0.z - pos_2.z) * (pos_0.z - pos_2.z))) *
+                      -(sqrtf(((pos_0.x - pos_1.x) * (pos_0.x - pos_1.x)) +
+                              ((pos_0.y - pos_1.y) * (pos_0.y - pos_1.y))) /
+                        sqrtf(((pos_0.x - pos_2.x) * (pos_0.x - pos_2.x)) +
+                              ((pos_0.y - pos_2.y) * (pos_0.y - pos_2.y))));
         HSD_JObjSetTranslate(ip->xBBC_dynamicBoneTable->bones[2], &translate);
 
-        temp_r0 = ip->xDD4_itemVar.masterhandlaser.x8 - 1;
-        ip->xDD4_itemVar.masterhandlaser.x8 = temp_r0;
-        if (temp_r0 < 0) {
+        if (--ip->xDD4_itemVar.masterhandlaser.x8 < 0) {
             lb_8000B1CC(ip->xBBC_dynamicBoneTable->bones[2], NULL, &pos_2);
             efSync_Spawn(0x405, gobj, &pos_2);
             ip->xDD4_itemVar.masterhandlaser.x8 = attrs->x4;

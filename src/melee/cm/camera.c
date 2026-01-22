@@ -3310,12 +3310,12 @@ GXColor Camera_80030758(void)
     return color;
 }
 
-void Camera_80030788(Vec3* arg0)
+void Camera_GetTransformPosition(Vec3* arg0)
 {
     *arg0 = cm_80452C68.transform.position;
 }
 
-void Camera_800307AC(Vec* arg0)
+void Camera_GetTransformInterest(Vec* arg0)
 {
     *arg0 = cm_80452C68.transform.interest;
 }

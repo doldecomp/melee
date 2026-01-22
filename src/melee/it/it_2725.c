@@ -1303,7 +1303,7 @@ ItemLogicTable it_803F23CC[ARRAY_SIZE(it_803F2310)] = {
     {
         // Hassam (Scizor)
         it_803F7CF8,
-        it_802CDBE0,
+        itHassam_802CDBE0,
         NULL,
         NULL,
         NULL,
@@ -1316,7 +1316,7 @@ ItemLogicTable it_803F23CC[ARRAY_SIZE(it_803F2310)] = {
         NULL,
         NULL,
         NULL,
-        it_802CDC60,
+        itHassam_802CDC60,
     },
     {
         // Unknown (Unown)
@@ -2103,20 +2103,20 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
     {
         // Octarock stone
         it_803F8E90,
-        it_802E878C,
+        itOctarockstone_802E878C,
         NULL,
         NULL,
         NULL,
         NULL,
-        it_2725_Logic4_DmgDealt,
+        itOctarockstone_Logic4_DmgDealt,
         NULL,
         NULL,
-        it_2725_Logic4_Reflected,
-        it_2725_Logic4_Clanked,
-        it_2725_Logic4_Absorbed,
-        it_2725_Logic4_ShieldBounced,
-        it_2725_Logic4_HitShield,
-        it_802E89B0,
+        itOctarockstone_Logic4_Reflected,
+        itOctarockstone_Logic4_Clanked,
+        itOctarockstone_Logic4_Absorbed,
+        itOctarockstone_Logic4_ShieldBounced,
+        itOctarockstone_Logic4_HitShield,
+        itOctarockstone_802E89B0,
     },
     {
         // Mario fireball
@@ -9973,7 +9973,7 @@ int it_8027BA54(HSD_GObj* item_gobj, Vec3* arg1)
     Item* item;
 
     item = GET_ITEM((HSD_GObj*) item_gobj);
-    Camera_80030788(&sp20);
+    Camera_GetTransformPosition(&sp20);
     sp20.x = ((10.0f * (HSD_Randf() - it_804DC7F8)) + sp20.x);
     sp20.y += 30.0f * HSD_Randf();
     lbVector_Diff(&sp20, &item->pos, &sp14);
