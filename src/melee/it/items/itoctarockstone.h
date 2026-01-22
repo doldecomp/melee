@@ -18,7 +18,7 @@
 /* 2E8864 */ bool itOctarockstone_UnkMotion0_Anim(Item_GObj* gobj);
 /* 2E8898 */ void itOctarockstone_UnkMotion0_Phys(Item_GObj* gobj);
 /* 2E889C */ bool itOctarockstone_UnkMotion0_Coll(Item_GObj* gobj);
-/* 2E890C */ UNK_RET it_802E890C(UNK_PARAMS);
+/* 2E890C */ void itOctarockstone_802E890C(Item_GObj*);
 /* 2E896C */ bool itOctarockstone_UnkMotion1_Anim(Item_GObj* gobj);
 /* 2E8974 */ void itOctarockstone_UnkMotion1_Phys(Item_GObj* gobj);
 /* 2E8990 */ bool itOctarockstone_UnkMotion1_Coll(Item_GObj* gobj);

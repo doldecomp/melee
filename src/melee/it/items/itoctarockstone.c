@@ -54,9 +54,24 @@ bool itOctarockstone_UnkMotion0_Anim(Item_GObj* gobj)
 
 void itOctarockstone_UnkMotion0_Phys(Item_GObj* gobj) {}
 
-/// #itOctarockstone_UnkMotion0_Coll
+bool itOctarockstone_UnkMotion0_Coll(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    s32 coll;
 
-/// #it_802E890C
+    coll = it_8026DAA8(gobj);
+    if (coll & 0xF) {
+        it_8027781C(gobj);
+        if (coll & 0x1) {
+            it_802762B0(ip);
+        }
+        itOctarockstone_802E890C(gobj);
+    }
+    return false;
+}
+
+/// #itOctarockstone_802E890C
+void itOctarockstone_802E890C(Item_GObj* gobj) {}
 
 bool itOctarockstone_UnkMotion1_Anim(Item_GObj* gobj)
 {
