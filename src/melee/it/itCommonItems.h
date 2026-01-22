@@ -1067,6 +1067,6 @@ typedef struct itfreezertAttributes {
 typedef struct itfreezer_ItemVars {
     /* ip+DD4 */ u8 _0[0x60 - 0x0];
     /* ip+E34 */ s32 x60;
-} itfreezer_ItemVars; 
+} itfreezer_ItemVars;
 
 #endif
