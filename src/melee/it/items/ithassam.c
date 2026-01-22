@@ -7,6 +7,9 @@
 #include "ft/ftlib.h"
 #include "ft/inlines.h"
 #include "gm/gm_unsplit.h"
+
+#include "it/forward.h"
+
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
@@ -291,32 +294,40 @@ bool itHassam_UnkMotion1_Coll(Item_GObj* gobj)
     return false;
 }
 
-void itHassam_802CE400(Item_GObj* gobj)
+inline void itHassam_802CE400_sub(HSD_GObj* gobj, int msid,
+                                  Item_StateChangeFlags flags)
 {
-    Vec3 sp1C;
-    Vec3 sp10;
-
-    Item* ip = GET_ITEM(gobj);
-    HSD_JObj* jobj = (HSD_JObj*) gobj->hsd_obj;
-    itHassam_ItemVars* attr = ip->xC4_article_data->x4_specialAttributes;
-
-    Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
+    Item* ip = gobj->user_data;
+    Item_80268E5C(gobj, msid, flags);
     ip->entered_hitlag = efLib_PauseAll;
     ip->exited_hitlag = efLib_ResumeAll;
     it_8027A160(ip->xBBC_dynamicBoneTable->bones[2], ip);
-    Camera_80030788(&sp1C);
-    lbVector_Diff(&sp1C, &ip->pos, &sp10);
+}
+
+void itHassam_802CE400(Item_GObj* gobj)
+{
+    Item* ip;
+    HSD_JObj* jobj;
+    itHassam_ItemVars* attr;
+    Vec3 cam_pos;
+    Vec3 sp10;
+
+    ip = GET_ITEM(gobj);
+    jobj = (HSD_JObj*) gobj->hsd_obj;
+    attr = ip->xC4_article_data->x4_specialAttributes;
+
+    itHassam_802CE400_sub(gobj, 2, ITEM_ANIM_UPDATE);
+    Camera_GetTransformPosition(&cam_pos);
+    lbVector_Diff(&cam_pos, &ip->pos, &sp10);
     lbVector_Normalize(&sp10);
-    sp10.x = sp10.x * attr->x4;
-    sp10.y = sp10.y * attr->x4;
-    sp10.z = sp10.z * attr->x4;
+    sp10.x *= attr->x4;
+    sp10.y *= attr->x4;
+    sp10.z *= attr->x4;
 
     ip->xDD4_itemVar.hassam.x5C.x = sp10.x;
     ip->xDD4_itemVar.hassam.x5C.y = sp10.y;
     ip->xDD4_itemVar.hassam.x5C.z = sp10.z;
-    ip->x40_vel.x = 0.0F;
-    ip->x40_vel.y = 0.0F;
-    ip->x40_vel.z = 0.0F;
+    ip->x40_vel.z = ip->x40_vel.y = ip->x40_vel.x = 0.0F;
     ip->facing_dir = 0.0F;
 
     HSD_JObjSetRotationY(jobj, 0.0F);
