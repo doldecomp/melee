@@ -38,8 +38,8 @@ int ftMr_SpecialN_VitaminRandom(HSD_GObj* gobj)
     fp = gobj->user_data;
 
     for (i = r3 = 0; i < 9; i++) {
-        if (i != (int) fp->fv.mr.x222C_vitaminCurr &&
-            i != (int) fp->fv.mr.x2230_vitaminPrev)
+        if (i != fp->fv.mr.x222C_vitaminCurr &&
+            i != fp->fv.mr.x2230_vitaminPrev)
         {
             arr[r3] = i;
             r3++;
@@ -120,8 +120,8 @@ void ftMr_SpecialN_ItemFireSpawn(HSD_GObj* gobj)
                 &fp->facing_dir);
         } else {
             rand_val_800E0D1C = ftMr_SpecialN_VitaminRandom(gobj);
-            it_802C0510(gobj, &coords, rand_val_800E0D1C, FtPart_RThumbNb,
-                        fp->facing_dir);
+            itDrMarioPill_Spawn(gobj, &coords, rand_val_800E0D1C,
+                                FtPart_RThumbNb, fp->facing_dir);
         }
     }
 }

@@ -35,10 +35,6 @@
 /* 2B26E0 */ void it_802B26E0(Item_GObj*);
 /* 2BDC18 */ void it_802BDC18(Item_GObj* gobj);
 /* 2BDC38 */ bool it_802BDC38(Item_GObj* gobj);
-/* 2C0510 */ void it_802C0510(Item_GObj*, Vec3*, s32, s32, float facing_dir);
-/* 2C0850 */ u32 it_802C0850(Item_GObj*, Vec3*, u32, s32,
-                             float facing_direction);
-/* 2C0DBC */ void it_802C0DBC(u32 arg0);
 /* 2C65E4 */ HSD_GObj* it_802C65E4(Item_GObj*, Vec3*, s32, float);
 /* 2C6718 */ void it_802C6718(Item_GObj*);
 /* 2C6764 */ void it_802C6764(Item_GObj*);

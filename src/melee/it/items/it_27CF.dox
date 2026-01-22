@@ -46,10 +46,6 @@ void it_802F046C(s32);
 void it_802F0AE0(Item_GObj* fighter_gobj, Vec3*, Vec3*, enum_t, bool,
                  f32 facing_dir, f32, f32);
 
-/// @todo @c arg0 is likely a @c HSD_GObj*.
-void it_802C0DBC(u32 arg0);
-
-u32 it_802C0850(Item_GObj*, Vec3*, u32, s32, f32 facing_direction);
 void it_802C8C34(Item_GObj*);
 
 void it_802AE1D0(Item_GObj*);
@@ -80,7 +76,7 @@ void it_8028FAF4(Item_GObj*, Vec3*);
 void it_802C7A84(Item_GObj*);
 void it_802C7AD0(Item_GObj*);
 void it_802C7AF0(Item_GObj*);
-void it_802C0510(Item_GObj*, Vec3*, s32, s32, f32 facing_dir);
+void itDrMarioPill_Spawn(Item_GObj*, Vec3*, s32, s32, f32 facing_dir);
 HSD_GObj* it_802B2560(Item_GObj*, f32, Vec3*, long, u32);
 void it_802B2674(Item_GObj*);
 void it_802B26C0(Item_GObj*);

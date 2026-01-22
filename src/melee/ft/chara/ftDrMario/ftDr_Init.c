@@ -247,7 +247,7 @@ void ftDr_Init_801497CC(HSD_GObj* gobj)
     if (gobj != NULL) {
         fp = gobj->user_data;
         if (fp != NULL && fp->fv.mr.x2240 != 0) {
-            it_802C0DBC(fp->fv.mr.x2240);
+            itDrMarioPill_802C0DBC(fp->fv.mr.x2240);
             fp->fv.mr.x2240 = 0;
         }
     }
