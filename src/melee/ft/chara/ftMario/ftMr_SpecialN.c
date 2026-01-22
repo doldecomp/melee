@@ -121,7 +121,7 @@ void ftMr_SpecialN_ItemFireSpawn(HSD_GObj* gobj)
         } else {
             rand_val_800E0D1C = ftMr_SpecialN_VitaminRandom(gobj);
             itDrMarioPill_Spawn(gobj, &coords, rand_val_800E0D1C,
-                                FtPart_RThumbNb, fp->facing_dir);
+                                It_Kind_DrMario_Vitamin, fp->facing_dir);
         }
     }
 }

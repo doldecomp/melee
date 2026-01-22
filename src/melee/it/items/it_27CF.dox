@@ -76,7 +76,6 @@ void it_8028FAF4(Item_GObj*, Vec3*);
 void it_802C7A84(Item_GObj*);
 void it_802C7AD0(Item_GObj*);
 void it_802C7AF0(Item_GObj*);
-void itDrMarioPill_Spawn(Item_GObj*, Vec3*, s32, s32, f32 facing_dir);
 HSD_GObj* it_802B2560(Item_GObj*, f32, Vec3*, long, u32);
 void it_802B2674(Item_GObj*);
 void it_802B26C0(Item_GObj*);
