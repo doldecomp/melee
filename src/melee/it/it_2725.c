@@ -3308,8 +3308,8 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         // Game & Watch greenhouse (insecticide spray)
         it_803F7898,
         NULL,
-        it_2725_Logic71_Destroyed,
-        it_2725_Logic71_PickedUp,
+        itGamewatchGreenhouse_Destroyed,
+        itGamewatchGreenhouse_PickedUp,
         NULL,
         NULL,
         NULL,
@@ -3320,7 +3320,7 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic71_EvtUnk,
+        itGamewatchGreenhouse_EvtUnk,
     },
     {
         // Game & Watch manhole

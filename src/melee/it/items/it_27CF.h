@@ -39,14 +39,6 @@
 /* 2C0850 */ u32 it_802C0850(Item_GObj*, Vec3*, u32, s32,
                              float facing_direction);
 /* 2C0DBC */ void it_802C0DBC(u32 arg0);
-/* 2C61F4 */ HSD_GObj* it_802C61F4(Item_GObj*, Vec3*, s32, float);
-/* 2C6328 */ void it_802C6328(Item_GObj*);
-/* 2C6374 */ void it_802C6374(Item_GObj*);
-/* 2C6394 */ void it_802C6394(Item_GObj*);
-/* 2C6430 */ void it_802C6430(Item_GObj*);
-/* 2C6458 */ void it_802C6458(Item_GObj*);
-/* 2C6480 */ void it_802C6480(Item_GObj*);
-/* 2C64A8 */ void it_802C64A8(Item_GObj*);
 /* 2C65E4 */ HSD_GObj* it_802C65E4(Item_GObj*, Vec3*, s32, float);
 /* 2C6718 */ void it_802C6718(Item_GObj*);
 /* 2C6764 */ void it_802C6764(Item_GObj*);
