@@ -2103,20 +2103,20 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
     {
         // Octarock stone
         it_803F8E90,
-        it_802E878C,
+        itOctarockstone_802E878C,
         NULL,
         NULL,
         NULL,
         NULL,
-        it_2725_Logic4_DmgDealt,
+        itOctarockstone_Logic4_DmgDealt,
         NULL,
         NULL,
-        it_2725_Logic4_Reflected,
-        it_2725_Logic4_Clanked,
-        it_2725_Logic4_Absorbed,
-        it_2725_Logic4_ShieldBounced,
-        it_2725_Logic4_HitShield,
-        it_802E89B0,
+        itOctarockstone_Logic4_Reflected,
+        itOctarockstone_Logic4_Clanked,
+        itOctarockstone_Logic4_Absorbed,
+        itOctarockstone_Logic4_ShieldBounced,
+        itOctarockstone_Logic4_HitShield,
+        itOctarockstone_802E89B0,
     },
     {
         // Mario fireball
