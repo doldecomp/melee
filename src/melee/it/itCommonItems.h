@@ -1057,16 +1057,16 @@ typedef struct itOldottoseaAttributes {
     /* 0x04 */ f32 x4;
 } itOldottoseaAttributes;
 
-typedef struct itfreezertAttributes {
+typedef struct itFreezerAttributes {
     f32 x0;
     f32 x4;
     f32 x8;
-    f32 xC;
-} itfreezertAttributes;
+    s32 xC;
+} itFreezerAttributes;
 
-typedef struct itfreezer_ItemVars {
+typedef struct itFreezer_ItemVars {
     /* ip+DD4 */ u8 _0[0x60 - 0x0];
     /* ip+E34 */ s32 x60;
-} itfreezer_ItemVars;
+} itFreezer_ItemVars;
 
 #endif
