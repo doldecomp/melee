@@ -1,5 +1,7 @@
 #include "itoctarockstone.h"
 
+#include "it/forward.h"
+
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
@@ -70,8 +72,13 @@ bool itOctarockstone_UnkMotion0_Coll(Item_GObj* gobj)
     return false;
 }
 
-/// #itOctarockstone_802E890C
-void itOctarockstone_802E890C(Item_GObj* gobj) {}
+void itOctarockstone_802E890C(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    it_802762BC(ip);
+    Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
+    Item_8026AE84(ip, 0x138, 0x7F, 0x40);
+}
 
 bool itOctarockstone_UnkMotion1_Anim(Item_GObj* gobj)
 {
