@@ -23,7 +23,7 @@
 #include "ftMario/ftMr_SpecialS.h"
 #include "ftMario/types.h"
 #include "it/it_26B1.h"
-#include "it/items/it_27CF.h"
+#include "it/items/itdrmariopill.h"
 
 MotionState ftDr_Init_MotionStateTable[ftMr_MS_SelfCount] = {
     {
@@ -247,7 +247,7 @@ void ftDr_Init_801497CC(HSD_GObj* gobj)
     if (gobj != NULL) {
         fp = gobj->user_data;
         if (fp != NULL && fp->fv.mr.x2240 != 0) {
-            it_802C0DBC(fp->fv.mr.x2240);
+            itDrMarioPill_802C0DBC(fp->fv.mr.x2240);
             fp->fv.mr.x2240 = 0;
         }
     }
