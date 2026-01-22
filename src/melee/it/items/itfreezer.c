@@ -1,5 +1,6 @@
 #include "itfreezer.h"
 
+
 #include <placeholder.h>
 #include <platform.h>
 
@@ -9,6 +10,8 @@
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
+#include "gr/stage.h"
+
 
 void it_802CCF9C(Item_GObj* gobj)
 {
