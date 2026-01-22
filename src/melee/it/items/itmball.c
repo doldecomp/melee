@@ -15,6 +15,7 @@
 #include "it/it_2725.h"
 #include "it/itCommonItems.h"
 #include "it/types.h"
+#include "mp/mpcoll.h"
 
 #include <dolphin/mtx.h>
 #include <melee/gr/ground.h>
@@ -130,11 +131,11 @@ void itMball_UnkMotion3_Phys(Item_GObj* arg0)
 
 bool itMball_UnkMotion3_Coll(Item_GObj* arg0)
 {
-    it_8026E414(arg0, (void (*)(HSD_GObj*)) it_80297CC4);
+    it_8026E414(arg0, (void (*)(HSD_GObj*)) itMball_80297CC4);
     return 0;
 }
 
-bool it_3F14_Logic34_DmgDealt(Item_GObj* arg0)
+bool itMball_DmgDealt(Item_GObj* arg0)
 {
     it_8026B3A8(arg0);
     it_802725D4(arg0);
@@ -142,7 +143,15 @@ bool it_3F14_Logic34_DmgDealt(Item_GObj* arg0)
     return 0;
 }
 
-/// #it_3F14_Logic34_EnteredAir
+void itMball_EnteredAir(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+
+    Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
+    ip->facing_dir =
+        (ip->x40_vel.x + ip->x7C.x + ip->x88.x) >= 0.0f ? 1.0f : -1.0f;
+    mpCollSetFacingDir(&ip->x378_itemColl, -1.0f == ip->facing_dir ? -1 : 1);
+}
 
 bool itMball_UnkMotion4_Anim(Item_GObj* gobj)
 {
@@ -157,7 +166,7 @@ bool itMball_UnkMotion4_Coll(Item_GObj* gobj)
     return false;
 }
 
-void it_80297CC4(Item_GObj* arg0)
+void itMball_80297CC4(Item_GObj* arg0)
 {
     f32 zero = 0.0f;
     Item* item = GET_ITEM(arg0);
@@ -182,10 +191,10 @@ void it_80297CC4(Item_GObj* arg0)
     } else {
         Item_80268E5C((HSD_GObj*) arg0, 5, ITEM_UNK_0x1);
     }
-    item->on_accessory = it_80297DD8;
+    item->on_accessory = itMball_OnAccessory;
 }
 
-void it_80297DD8(Item_GObj* arg0)
+void itMball_OnAccessory(Item_GObj* arg0)
 {
     Item* item = GET_ITEM(arg0);
     itMBallAttributes* spec_attrs =
@@ -210,11 +219,11 @@ void itMball_UnkMotion5_Phys(Item_GObj* gobj) {}
 
 bool itMball_UnkMotion5_Coll(Item_GObj* gobj)
 {
-    it_8026D62C(gobj, it_80297E8C);
+    it_8026D62C(gobj, itMball_80297E8C);
     return false;
 }
 
-/// #it_80297E8C
+/// #itMball_80297E8C
 
 bool itMball_UnkMotion6_Anim(Item_GObj* gobj)
 {
@@ -240,7 +249,7 @@ bool itMball_UnkMotion6_Coll(Item_GObj* arg0)
     f32 previous_vel_x;
 
     previous_vel_x = item->x40_vel.x;
-    it_8026E15C(arg0, (void (*)(HSD_GObj*)) it_80297CC4);
+    it_8026E15C(arg0, (void (*)(HSD_GObj*)) itMball_80297CC4);
     if (item->x40_vel.x != previous_vel_x) {
         it_80272980(arg0);
     }
