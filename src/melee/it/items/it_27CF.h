@@ -39,10 +39,6 @@
 /* 2C6718 */ void it_802C6718(Item_GObj*);
 /* 2C6764 */ void it_802C6764(Item_GObj*);
 /* 2C6784 */ void it_802C6784(Item_GObj*);
-/* 2C68F8 */ HSD_GObj* it_802C68F8(Item_GObj*, Vec3*, s32, float);
-/* 2C6A2C */ void it_802C6A2C(Item_GObj*);
-/* 2C6A78 */ void it_802C6A78(Item_GObj*);
-/* 2C6A98 */ void it_802C6A98(Item_GObj*);
 /* 2C6C38 */ HSD_GObj* it_802C6C38(Item_GObj*, Vec3*, enum_t part, float);
 /* 2C6D6C */ void it_802C6D6C(Item_GObj*);
 /* 2C6DB8 */ void it_802C6DB8(Item_GObj*);

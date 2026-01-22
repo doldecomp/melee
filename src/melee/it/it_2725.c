@@ -3344,8 +3344,8 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         // Game & Watch fire
         it_803F78E8,
         NULL,
-        it_2725_Logic73_Destroyed,
-        it_2725_Logic73_PickedUp,
+        itGamewatchFire_Destroyed,
+        itGamewatchFire_PickedUp,
         NULL,
         NULL,
         NULL,
@@ -3356,7 +3356,7 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic73_EvtUnk,
+        itGamewatchFire_EvtUnk,
     },
     {
         // Game & Watch parachute
