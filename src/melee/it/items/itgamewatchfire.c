@@ -1,5 +1,9 @@
 #include "itgamewatchfire.h"
 
+#include "baselib/gobj.h"
+
+#include "it/forward.h"
+
 #include <melee/db/db.h>
 #include <melee/ft/ftlib.h>
 #include <melee/it/inlines.h>
@@ -55,13 +59,10 @@ void it_2725_Logic73_Destroyed(Item_GObj* item_gobj)
 
 void it_802C6A2C(Item_GObj* item_gobj)
 {
-    int pad[1];
     Item* item = GET_ITEM(item_gobj);
 
     if (item != NULL) {
-        if (item->owner != NULL) {
-            ftGw_AttackS4_ItemTorchSetFlag(item->owner);
-        }
+        it_2725_Logic73_Destroyed(item_gobj);
         Item_8026A8EC(item_gobj);
     }
 }
@@ -88,36 +89,37 @@ void it_2725_Logic73_PickedUp(Item_GObj* item_gobj)
     }
 }
 
+static inline bool torchRemoveCheck(Item_GObj* gobj)
+{
+    Item* item = GET_ITEM(gobj);
+    if (item->owner != NULL) {
+        return ftGw_AttackS4_ItemCheckTorchRemove(item->owner);
+    }
+    return true;
+}
+
 bool itGamewatchfire_UnkMotion0_Anim(Item_GObj* item_gobj)
 {
-    HSD_JObj* temp_r30;
+    HSD_JObj* jobj;
     Item* item = GET_ITEM(item_gobj);
-    bool var_r3;
 
-    temp_r30 = item_gobj->hsd_obj;
+    jobj = GET_JOBJ(item_gobj);
     if (item->x5CC_currentAnimFrame == 3.0f) {
         it_8026BB20(item_gobj);
     }
-    if (item->owner != NULL) {
-        var_r3 = ftGw_AttackS4_ItemCheckTorchRemove(item->owner);
-    } else {
-        var_r3 = true;
-    }
-    if (var_r3) {
-        if (item->owner != NULL) {
-            ftGw_AttackS4_ItemTorchSetFlag(item->owner);
-        }
+    if (torchRemoveCheck(item_gobj)) {
+        it_2725_Logic73_Destroyed(item_gobj);
         return true;
     }
     if (item->owner != NULL) {
         if (ftLib_800876D4(item->owner) != 0) {
             if (item->x5D0_animFrameSpeed != 0.0f) {
                 item->x5D0_animFrameSpeed = 0.0f;
-                lb_8000BA0C(temp_r30, item->x5D0_animFrameSpeed);
+                lb_8000BA0C(jobj, item->x5D0_animFrameSpeed);
             }
         } else if (item->x5D0_animFrameSpeed != 1.0f) {
             item->x5D0_animFrameSpeed = 1.0f;
-            lb_8000BA0C(temp_r30, item->x5D0_animFrameSpeed);
+            lb_8000BA0C(jobj, item->x5D0_animFrameSpeed);
         }
     }
     return false;
