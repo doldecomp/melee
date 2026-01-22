@@ -12,27 +12,15 @@
 #include <melee/it/item.h>
 #include <melee/it/types.h>
 
-/* 2C61F4 */ static HSD_GObj* it_802C61F4(HSD_GObj* parent, Vec3* pos,
-                                          Fighter_Part part, float dir);
-/* 2C6328 */ static void it_802C6328(Item_GObj* item_gobj);
-/* 2C6374 */ static void it_802C6374(Item_GObj* item_gobj);
-/* 2C6394 */ static void it_802C6394(Item_GObj* item_gobj);
-/* 2C6430 */ static void it_802C6430(Item_GObj* item_gobj);
-/* 2C6458 */ static void it_802C6458(Item_GObj* item_gobj);
-/* 2C6480 */ static void it_802C6480(Item_GObj* item_gobj);
-/* 2C64A8 */ static void it_802C64A8(Item_GObj* item_gobj);
-/* 2C653C */ static bool
-itGamewatchgreenhouse_UnkMotion2_Anim(Item_GObj* item_gobj);
-
 ItemStateTable it_803F7898[] = {
-    { 0, itGamewatchgreenhouse_UnkMotion3_Anim, NULL, NULL },
-    { 1, itGamewatchgreenhouse_UnkMotion3_Anim, NULL, NULL },
-    { 2, itGamewatchgreenhouse_UnkMotion2_Anim, NULL, NULL },
-    { 3, itGamewatchgreenhouse_UnkMotion3_Anim, NULL, NULL }
+    { 0, itGamewatchGreenhouse_Motion3_Anim, NULL, NULL },
+    { 1, itGamewatchGreenhouse_Motion3_Anim, NULL, NULL },
+    { 2, itGamewatchGreenhouse_Motion2_Anim, NULL, NULL },
+    { 3, itGamewatchGreenhouse_Motion3_Anim, NULL, NULL }
 };
 
-HSD_GObj* it_802C61F4(HSD_GObj* parent, Vec3* pos, Fighter_Part part,
-                      float dir)
+HSD_GObj* itGamewatchGreenhouse_Spawn(HSD_GObj* parent, Vec3* pos,
+                                      Fighter_Part part, float dir)
 {
     SpawnItem spawn;
     Item_GObj* result;
@@ -60,7 +48,7 @@ HSD_GObj* it_802C61F4(HSD_GObj* parent, Vec3* pos, Fighter_Part part,
     return NULL;
 }
 
-void it_2725_Logic71_Destroyed(Item_GObj* item_gobj)
+void itGamewatchGreenhouse_Destroyed(Item_GObj* item_gobj)
 {
     Item* item = GET_ITEM(item_gobj);
 
@@ -69,27 +57,27 @@ void it_2725_Logic71_Destroyed(Item_GObj* item_gobj)
     }
 }
 
-void it_802C6328(Item_GObj* item_gobj)
+void itGamewatchGreenhouse_802C6328(Item_GObj* item_gobj)
 {
     Item* item = GET_ITEM(item_gobj);
 
     if (item != NULL) {
-        it_2725_Logic71_Destroyed(item_gobj);
+        itGamewatchGreenhouse_Destroyed(item_gobj);
         Item_8026A8EC(item_gobj);
     }
 }
 
-void it_802C6374(Item_GObj* item_gobj)
+void itGamewatchGreenhouse_802C6374(Item_GObj* item_gobj)
 {
     it_8026B724(item_gobj);
 }
 
-void it_802C6394(Item_GObj* item_gobj)
+void itGamewatchGreenhouse_802C6394(Item_GObj* item_gobj)
 {
     it_8026B73C(item_gobj);
 }
 
-void it_2725_Logic71_PickedUp(Item_GObj* item_gobj)
+void itGamewatchGreenhouse_PickedUp(Item_GObj* item_gobj)
 {
     Item* item = GET_ITEM(item_gobj);
 
@@ -105,22 +93,22 @@ void it_2725_Logic71_PickedUp(Item_GObj* item_gobj)
     }
 }
 
-void it_802C6430(Item_GObj* item_gobj)
+void itGamewatchGreenhouse_802C6430(Item_GObj* item_gobj)
 {
     Item_80268E5C((HSD_GObj*) item_gobj, 0, ITEM_ANIM_UPDATE);
 }
 
-void it_802C6458(Item_GObj* item_gobj)
+void itGamewatchGreenhouse_802C6458(Item_GObj* item_gobj)
 {
     Item_80268E5C((HSD_GObj*) item_gobj, 1, ITEM_ANIM_UPDATE);
 }
 
-void it_802C6480(Item_GObj* item_gobj)
+void itGamewatchGreenhouse_802C6480(Item_GObj* item_gobj)
 {
     Item_80268E5C((HSD_GObj*) item_gobj, 2, ITEM_ANIM_UPDATE);
 }
 
-void it_802C64A8(Item_GObj* item_gobj)
+void itGamewatchGreenhouse_802C64A8(Item_GObj* item_gobj)
 {
     Item_80268E5C((HSD_GObj*) item_gobj, 3, ITEM_ANIM_UPDATE);
 }
@@ -135,19 +123,19 @@ static inline bool greenhouse_Check(Item_GObj* item_gobj)
     return true;
 }
 
-bool itGamewatchgreenhouse_UnkMotion3_Anim(Item_GObj* item_gobj)
+bool itGamewatchGreenhouse_Motion3_Anim(Item_GObj* item_gobj)
 {
     Item* item;
     PAD_STACK(8);
 
     if (greenhouse_Check(item_gobj)) {
-        it_2725_Logic71_Destroyed(item_gobj);
+        itGamewatchGreenhouse_Destroyed(item_gobj);
         return true;
     }
     return false;
 }
 
-bool itGamewatchgreenhouse_UnkMotion2_Anim(Item_GObj* item_gobj)
+bool itGamewatchGreenhouse_Motion2_Anim(Item_GObj* item_gobj)
 {
     Item* item;
     PAD_STACK(0x10);
@@ -156,13 +144,13 @@ bool itGamewatchgreenhouse_UnkMotion2_Anim(Item_GObj* item_gobj)
         Item_80268E5C(item_gobj, 2, ITEM_ANIM_UPDATE);
     }
     if (greenhouse_Check(item_gobj)) {
-        it_2725_Logic71_Destroyed(item_gobj);
+        itGamewatchGreenhouse_Destroyed(item_gobj);
         return true;
     }
     return false;
 }
 
-void it_2725_Logic71_EvtUnk(Item_GObj* item_gobj, Item_GObj* ref_gobj)
+void itGamewatchGreenhouse_EvtUnk(Item_GObj* item_gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(item_gobj, ref_gobj);
 }
