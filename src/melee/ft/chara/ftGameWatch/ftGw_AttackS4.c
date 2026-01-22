@@ -11,7 +11,7 @@
 #include "ft/types.h"
 #include "ftCommon/ftCo_Wait.h"
 #include "ftGameWatch/types.h"
-#include "it/items/it_27CF.h"
+#include "it/items/itgamewatchfire.h"
 #include "lb/lb_00B0.h"
 
 #include <dolphin/mtx.h>
@@ -29,7 +29,7 @@ void ftGw_ItemTorchSetup(HSD_GObj* gobj)
     fp = getFighter(gobj);
     lb_8000B1CC(fp->parts[FtPart_LHandNb].joint, NULL, &sp10);
     fp->fv.gw.x2254_fireGObj =
-        it_802C68F8(gobj, &sp10, FtPart_LHandNb, fp->facing_dir);
+        itGamewatchFire_Spawn(gobj, &sp10, FtPart_LHandNb, fp->facing_dir);
     if (fp->fv.gw.x2254_fireGObj != NULL) {
         if (fp->death2_cb == NULL) {
             fp->death2_cb = ftGw_Init_OnDamage;
@@ -61,7 +61,7 @@ void ftGw_AttackS4_ItemTorchOnDamage(HSD_GObj* gobj)
     u8 _[4];
 
     if (fp->fv.gw.x2254_fireGObj != NULL) {
-        it_802C6A2C(fp->fv.gw.x2254_fireGObj);
+        itGamewatchFire_802C6A2C(fp->fv.gw.x2254_fireGObj);
         ftGw_AttackS4_ItemTorchSetFlag(gobj);
     }
 }
@@ -72,7 +72,7 @@ void ftGw_AttackS4_ItemTorchEnterHitlag(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->fv.gw.x2254_fireGObj != NULL) {
-        it_802C6A78(fp->fv.gw.x2254_fireGObj);
+        itGamewatchFire_802C6A78(fp->fv.gw.x2254_fireGObj);
     }
 }
 
@@ -82,7 +82,7 @@ void ftGw_AttackS4_ItemTorchExitHitlag(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->fv.gw.x2254_fireGObj != NULL) {
-        it_802C6A98(fp->fv.gw.x2254_fireGObj);
+        itGamewatchFire_802C6A98(fp->fv.gw.x2254_fireGObj);
     }
 }
 
