@@ -13,7 +13,7 @@
 #include "it/it_2725.h"
 #include "it/item.h"
 
-/* 2C23D4 */ static bool itClimbersblizzard_UnkMotion0_Coll(Item_GObj* gobj);
+/* 2C23D4 */ static bool itClimbersBlizzard_UnkMotion0_Coll(Item_GObj* gobj);
 
 /// #it_802C1590
 
