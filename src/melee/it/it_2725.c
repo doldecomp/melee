@@ -9973,7 +9973,7 @@ int it_8027BA54(HSD_GObj* item_gobj, Vec3* arg1)
     Item* item;
 
     item = GET_ITEM((HSD_GObj*) item_gobj);
-    Camera_80030788(&sp20);
+    Camera_GetTransformPosition(&sp20);
     sp20.x = ((10.0f * (HSD_Randf() - it_804DC7F8)) + sp20.x);
     sp20.y += 30.0f * HSD_Randf();
     lbVector_Diff(&sp20, &item->pos, &sp14);

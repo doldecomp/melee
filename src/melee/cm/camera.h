@@ -94,8 +94,8 @@
 /* 030730 */ void Camera_80030730(f32);
 /* 030740 */ void Camera_SetBackgroundColor(u8, u8, u8);
 /* 030758 */ GXColor Camera_80030758(void);
-/* 030788 */ void Camera_80030788(Vec*);
-/* 0307AC */ void Camera_800307AC(Vec*);
+/* 030788 */ void Camera_GetTransformPosition(Vec*);
+/* 0307AC */ void Camera_GetTransformInterest(Vec*);
 /* 0307D0 */ bool Camera_800307D0(f32*, f32*, f32*);
 /* 030A50 */ HSD_GObj* Camera_80030A50(void);
 /* 030A60 */ void Camera_80030A60(bool);
