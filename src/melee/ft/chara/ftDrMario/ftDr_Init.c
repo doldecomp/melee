@@ -23,7 +23,7 @@
 #include "ftMario/ftMr_SpecialS.h"
 #include "ftMario/types.h"
 #include "it/it_26B1.h"
-#include "it/items/it_27CF.h"
+#include "it/items/itdrmariopill.h"
 
 MotionState ftDr_Init_MotionStateTable[ftMr_MS_SelfCount] = {
     {
