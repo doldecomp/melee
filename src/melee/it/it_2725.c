@@ -1267,7 +1267,7 @@ ItemLogicTable it_803F23CC[ARRAY_SIZE(it_803F2310)] = {
     {
         // Freezer (Articuno)
         it_803F7C70,
-        it_802CCF9C,
+        itFreezer_802CCF9C,
         NULL,
         NULL,
         NULL,
@@ -1280,7 +1280,7 @@ ItemLogicTable it_803F23CC[ARRAY_SIZE(it_803F2310)] = {
         NULL,
         NULL,
         NULL,
-        it_802CD000,
+        itFreezer_802CD000,
     },
     {
         // Sonans (Wobbuffet)
