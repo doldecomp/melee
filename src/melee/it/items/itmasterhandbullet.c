@@ -1,16 +1,9 @@
 #include "itmasterhandbullet.h"
 
-#include <placeholder.h>
 #include <platform.h>
 
-#include "baselib/gobj.h"
-#include "baselib/jobj.h"
 #include "db/db.h"
-#include "dolphin/mtx.h"
 #include "ef/efsync.h"
-
-#include "it/forward.h"
-
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
@@ -18,40 +11,19 @@
 #include "it/itCharItems.h"
 #include "it/item.h"
 
+#include <dolphin/mtx.h>
+#include <baselib/gobj.h>
+#include <baselib/jobj.h>
+
+ItemStateTable it_803F9388[] = {
+    { 0, itMasterhandbullet_UnkMotion1_Anim,
+      itMasterhandbullet_UnkMotion1_Phys, itMasterhandbullet_UnkMotion1_Coll },
+    { 1, itMasterhandbullet_UnkMotion1_Anim,
+      itMasterhandbullet_UnkMotion1_Phys, itMasterhandbullet_UnkMotion1_Coll }
+};
+
 /* 2F0D2C */ static void it_802F0D2C(Item_GObj* gobj);
 /* 2F0F04 */ static void it_802F0F04(HSD_GObj* gobj);
-
-void it_802F0F04(HSD_GObj* gobj) {}
-
-void it_802F0D2C(Item_GObj* gobj)
-{
-    Item* ip = GET_ITEM(gobj);
-    HSD_JObj* jobj = GET_JOBJ(gobj);
-    itMasterHandBulletAttributes* attrs =
-        ip->xC4_article_data->x4_specialAttributes;
-    Quaternion quad = { 0 };
-    Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
-    ip->on_accessory = it_802F0F04;
-    ip->xDD4_itemVar.masterhandbullet.x0 = attrs->x0;
-    it_80274C60(gobj);
-    quad.y = 1.5707963267948966 * ip->facing_dir;
-    HSD_JObjSetRotation(jobj, &quad);
-}
-
-void it_802F0BE8(Item_GObj* gobj)
-{
-    Item* ip = GET_ITEM(gobj);
-    HSD_JObj* jobj = GET_JOBJ(gobj);
-    itMasterHandBulletAttributes* attrs =
-        ip->xC4_article_data->x4_specialAttributes;
-    Quaternion quad = { 0 };
-    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
-    ip->on_accessory = it_802F0F04;
-    ip->xDD4_itemVar.masterhandbullet.x0 = attrs->x0;
-    it_80274C60(gobj);
-    quad.y = 1.5707963267948966 * ip->facing_dir;
-    HSD_JObjSetRotation(jobj, &quad);
-}
 
 static inline void it_802F0AE0_sub(Item_GObj* gobj, enum_t msid,
                                    Item_GObj* parent_gobj)
@@ -92,6 +64,36 @@ void it_2725_Logic85_EvtUnk(Item_GObj* gobj, Item_GObj* arg1)
     it_8026B894(gobj, arg1);
 }
 
+void it_802F0BE8(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+    itMasterHandBulletAttributes* attrs =
+        ip->xC4_article_data->x4_specialAttributes;
+    Quaternion quad = { 0 };
+    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+    ip->on_accessory = it_802F0F04;
+    ip->xDD4_itemVar.masterhandbullet.x0 = attrs->x0;
+    it_80274C60(gobj);
+    quad.y = 1.5707963267948966 * ip->facing_dir;
+    HSD_JObjSetRotation(jobj, &quad);
+}
+
+void it_802F0D2C(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+    itMasterHandBulletAttributes* attrs =
+        ip->xC4_article_data->x4_specialAttributes;
+    Quaternion quad = { 0 };
+    Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
+    ip->on_accessory = it_802F0F04;
+    ip->xDD4_itemVar.masterhandbullet.x0 = attrs->x0;
+    it_80274C60(gobj);
+    quad.y = 1.5707963267948966 * ip->facing_dir;
+    HSD_JObjSetRotation(jobj, &quad);
+}
+
 bool itMasterhandbullet_UnkMotion1_Anim(Item_GObj* gobj)
 {
     Item* ip;
@@ -109,13 +111,15 @@ bool itMasterhandbullet_UnkMotion1_Anim(Item_GObj* gobj)
 
 void itMasterhandbullet_UnkMotion1_Phys(Item_GObj* gobj) {}
 
-void it_802F0F08(Item_GObj* gobj) {}
-
 bool itMasterhandbullet_UnkMotion1_Coll(Item_GObj* gobj)
 {
     it_8026E15C(gobj, it_802F0F08);
     return false;
 }
+
+void it_802F0F04(HSD_GObj* gobj) {}
+
+void it_802F0F08(Item_GObj* gobj) {}
 
 bool it_2725_Logic83_DmgDealt(Item_GObj* gobj)
 {
