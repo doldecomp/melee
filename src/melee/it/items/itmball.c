@@ -5,6 +5,7 @@
 
 #include "baselib/forward.h"
 
+#include "baselib/gobj.h"
 #include "ef/efasync.h"
 
 #include "it/forward.h"
@@ -224,6 +225,29 @@ bool itMball_UnkMotion5_Coll(Item_GObj* gobj)
 }
 
 /// #itMball_80297E8C
+void itMball_80297E8C(Item_GObj* gobj)
+{
+    Item* item = GET_ITEM(gobj);
+    itMBallAttributes* spec_attrs =
+        item->xC4_article_data->x4_specialAttributes;
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+
+    it_8026B3A8(gobj);
+    item->xDC8_word.flags.x1A = 0;
+    item->xD5C = 0;
+    item->x40_vel.x = item->x40_vel.y = item->x40_vel.z = 0.0f;
+    it_80274740(gobj);
+    if (item->xDD4_itemVar.mball.b0 == 0) {
+        item->xD44_lifeTimer = spec_attrs->x0;
+        item->xDD4_itemVar.mball.b0 = 1;
+        efAsync_Spawn(gobj, &(GET_ITEM(gobj)->xBC0), 0, 1097, jobj);
+        Item_8026AE84(item, 0x10C, 0x7F, 0x40);
+        Item_80268E5C(gobj, 6, ITEM_ANIM_UPDATE);
+    } else {
+        Item_80268E5C(gobj, 6, ITEM_UNK_0x1);
+    }
+    item->on_accessory = itMball_OnAccessory;
+}
 
 bool itMball_UnkMotion6_Anim(Item_GObj* gobj)
 {
