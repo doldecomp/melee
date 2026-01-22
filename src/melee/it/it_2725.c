@@ -1303,7 +1303,7 @@ ItemLogicTable it_803F23CC[ARRAY_SIZE(it_803F2310)] = {
     {
         // Hassam (Scizor)
         it_803F7CF8,
-        it_802CDBE0,
+        itHassam_802CDBE0,
         NULL,
         NULL,
         NULL,
@@ -1316,7 +1316,7 @@ ItemLogicTable it_803F23CC[ARRAY_SIZE(it_803F2310)] = {
         NULL,
         NULL,
         NULL,
-        it_802CDC60,
+        itHassam_802CDC60,
     },
     {
         // Unknown (Unown)
