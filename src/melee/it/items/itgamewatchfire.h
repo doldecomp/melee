@@ -5,6 +5,10 @@
 
 #include "it/items/types.h"
 
+#include <baselib/forward.h>
+
+#include <dolphin/mtx.h>
+
 /* 2C68F8 */ HSD_GObj* itGamewatchFire_Spawn(HSD_GObj*, Vec3*, Fighter_Part,
                                              float);
 /* 2C69FC */ void itGamewatchFire_Destroyed(Item_GObj*);

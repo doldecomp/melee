@@ -1,19 +1,21 @@
 #include "itgamewatchfire.h"
 
-#include "baselib/gobj.h"
+#include "db/db.h"
+#include "ft/ftlib.h"
+#include "it/inlines.h"
+#include "it/it_26B1.h"
+#include "it/it_2725.h"
+#include "it/item.h"
+#include "it/types.h"
+#include "lb/lb_00B0.h"
 
-#include "it/forward.h"
-
-#include <melee/db/db.h>
-#include <melee/ft/ftlib.h>
-#include <melee/it/inlines.h>
-#include <melee/it/it_26B1.h>
-#include <melee/it/it_2725.h>
-#include <melee/it/item.h>
-#include <melee/it/types.h>
-#include <melee/lb/lb_00B0.h>
+#include <baselib/gobj.h>
+#include <baselib/jobj.h>
 
 /* 2C6B20 */ static bool itGamewatchFire_Motion0_Anim(Item_GObj* item_gobj);
+
+ItemStateTable it_803F78E8[] = { { 0, itGamewatchFire_Motion0_Anim, NULL,
+                                   NULL } };
 
 HSD_GObj* itGamewatchFire_Spawn(HSD_GObj* parent, Vec3* pos, Fighter_Part part,
                                 float dir)
