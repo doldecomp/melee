@@ -1,29 +1,35 @@
 #include "itmball.h"
 
-#include <placeholder.h>
 #include <platform.h>
 
-#include "baselib/forward.h"
-
-#include "baselib/gobj.h"
 #include "ef/efasync.h"
-
-#include "it/forward.h"
-
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/itCommonItems.h"
+#include "it/item.h"
+
+#include "it/items/forward.h"
+
 #include "it/types.h"
 #include "mp/mpcoll.h"
 
 #include <dolphin/mtx.h>
-#include <melee/gr/ground.h>
-#include <melee/it/item.h>
-#include <melee/lb/lb_00B0.h>
+#include <baselib/gobj.h>
+#include <baselib/jobj.h>
 
-void it_3F14_Logic34_Destroyed(Item_GObj* item_gobj)
+ItemStateTable it_803F6488[] = {
+    { -1, itMball_Motion0_Anim, itMball_Motion0_Phys, itMball_Motion0_Coll },
+    { -1, itMball_Motion3_Anim, itMball_Motion1_Phys, itMball_Motion1_Coll },
+    { -1, itMball_Motion2_Anim, itMball_Motion2_Phys, NULL },
+    { 0, itMball_Motion3_Anim, itMball_Motion3_Phys, itMball_Motion3_Coll },
+    { -1, itMball_Motion4_Anim, itMball_Motion4_Phys, itMball_Motion4_Coll },
+    { 1, itMball_Motion5_Anim, itMball_Motion5_Phys, itMball_Motion5_Coll },
+    { 1, itMball_Motion6_Anim, itMball_Motion6_Phys, itMball_Motion6_Coll },
+};
+
+void itMball_Destroyed(Item_GObj* item_gobj)
 {
     Item* it = GET_ITEM(item_gobj);
     if (!(it->xDD4_itemVar.mball.b1)) {
@@ -31,16 +37,16 @@ void it_3F14_Logic34_Destroyed(Item_GObj* item_gobj)
     }
 }
 
-void it_3F14_Logic34_Spawned(Item_GObj* arg0)
+void itMball_Spawned(Item_GObj* arg0)
 {
     Item* item = GET_ITEM(arg0);
 
     item->xDD4_itemVar.mball.b0 = false;
     item->xDD4_itemVar.mball.b1 = false;
-    it_802979D4(arg0);
+    itMball_802979D4(arg0);
 }
 
-void it_80297944(Item_GObj* arg0)
+void itMball_80297944(Item_GObj* arg0)
 {
     Item* item = GET_ITEM(arg0);
     HSD_JObj* jobj = GET_JOBJ(arg0);
@@ -51,20 +57,20 @@ void it_80297944(Item_GObj* arg0)
     Item_80268E5C(arg0, 0, ITEM_ANIM_UPDATE);
 }
 
-bool itMball_UnkMotion0_Anim(Item_GObj* gobj)
+bool itMball_Motion0_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-void itMball_UnkMotion0_Phys(Item_GObj* gobj) {}
+void itMball_Motion0_Phys(Item_GObj* gobj) {}
 
-bool itMball_UnkMotion0_Coll(Item_GObj* arg0)
+bool itMball_Motion0_Coll(Item_GObj* arg0)
 {
-    it_8026D62C(arg0, it_802979D4);
+    it_8026D62C(arg0, itMball_802979D4);
     return 0;
 }
 
-void it_802979D4(Item_GObj* arg0)
+void itMball_802979D4(Item_GObj* arg0)
 {
     Item* item = GET_ITEM(arg0);
 
@@ -75,54 +81,54 @@ void it_802979D4(Item_GObj* arg0)
     Item_80268E5C(arg0, 1, ITEM_ANIM_UPDATE);
 }
 
-bool itMball_UnkMotion3_Anim(Item_GObj* gobj)
+bool itMball_Motion3_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-void itMball_UnkMotion1_Phys(Item_GObj* arg0)
+void itMball_Motion1_Phys(Item_GObj* arg0)
 {
     Item* item = GET_ITEM(arg0);
     it_80272860(arg0, item->xCC_item_attr->x10_fall_speed,
                 item->xCC_item_attr->x14_fall_speed_max);
 }
 
-bool itMball_UnkMotion1_Coll(Item_GObj* arg0)
+bool itMball_Motion1_Coll(Item_GObj* arg0)
 {
     Item* item = GET_ITEM(arg0);
     f32 previous_vel_x;
 
     previous_vel_x = item->x40_vel.x;
-    it_8026E15C(arg0, it_80297944);
+    it_8026E15C(arg0, itMball_80297944);
     if (item->x40_vel.x != previous_vel_x) {
         it_80272980(arg0);
     }
     return 0;
 }
 
-void it_3F14_Logic34_PickedUp(Item_GObj* arg0)
+void itMball_PickedUp(Item_GObj* arg0)
 {
     Item_80268E5C(arg0, 2, ITEM_ANIM_UPDATE);
 }
 
-bool itMball_UnkMotion2_Anim(Item_GObj* gobj)
+bool itMball_Motion2_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-void itMball_UnkMotion2_Phys(Item_GObj* gobj) {}
+void itMball_Motion2_Phys(Item_GObj* gobj) {}
 
-void it_3F14_Logic34_Dropped(Item_GObj* arg0)
+void itMball_Dropped(Item_GObj* arg0)
 {
     Item_80268E5C(arg0, 3, 6);
 }
 
-void it_3F14_Logic34_Thrown(Item_GObj* arg0)
+void itMball_Thrown(Item_GObj* arg0)
 {
     Item_80268E5C(arg0, 3, 6);
 }
 
-void itMball_UnkMotion3_Phys(Item_GObj* arg0)
+void itMball_Motion3_Phys(Item_GObj* arg0)
 {
     Item* item = GET_ITEM(arg0);
     it_80272860(arg0, item->xCC_item_attr->x10_fall_speed,
@@ -130,7 +136,7 @@ void itMball_UnkMotion3_Phys(Item_GObj* arg0)
     it_80274658(arg0, it_804D6D28->x68_float);
 }
 
-bool itMball_UnkMotion3_Coll(Item_GObj* arg0)
+bool itMball_Motion3_Coll(Item_GObj* arg0)
 {
     it_8026E414(arg0, (void (*)(HSD_GObj*)) itMball_80297CC4);
     return 0;
@@ -154,16 +160,16 @@ void itMball_EnteredAir(Item_GObj* gobj)
     mpCollSetFacingDir(&ip->x378_itemColl, -1.0f == ip->facing_dir ? -1 : 1);
 }
 
-bool itMball_UnkMotion4_Anim(Item_GObj* gobj)
+bool itMball_Motion4_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-void itMball_UnkMotion4_Phys(Item_GObj* gobj) {}
+void itMball_Motion4_Phys(Item_GObj* gobj) {}
 
-bool itMball_UnkMotion4_Coll(Item_GObj* gobj)
+bool itMball_Motion4_Coll(Item_GObj* gobj)
 {
-    it_8026E8C4(gobj, it_80297944, it_802979D4);
+    it_8026E8C4(gobj, itMball_80297944, itMball_802979D4);
     return false;
 }
 
@@ -206,7 +212,7 @@ void itMball_OnAccessory(Item_GObj* arg0)
     }
 }
 
-bool itMball_UnkMotion5_Anim(Item_GObj* gobj)
+bool itMball_Motion5_Anim(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     if (ip->xD44_lifeTimer <= 0.0f) {
@@ -216,15 +222,14 @@ bool itMball_UnkMotion5_Anim(Item_GObj* gobj)
     return false;
 }
 
-void itMball_UnkMotion5_Phys(Item_GObj* gobj) {}
+void itMball_Motion5_Phys(Item_GObj* gobj) {}
 
-bool itMball_UnkMotion5_Coll(Item_GObj* gobj)
+bool itMball_Motion5_Coll(Item_GObj* gobj)
 {
     it_8026D62C(gobj, itMball_80297E8C);
     return false;
 }
 
-/// #itMball_80297E8C
 void itMball_80297E8C(Item_GObj* gobj)
 {
     Item* item = GET_ITEM(gobj);
@@ -249,7 +254,7 @@ void itMball_80297E8C(Item_GObj* gobj)
     item->on_accessory = itMball_OnAccessory;
 }
 
-bool itMball_UnkMotion6_Anim(Item_GObj* gobj)
+bool itMball_Motion6_Anim(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     if (ip->xD44_lifeTimer <= 0.0f) {
@@ -259,7 +264,7 @@ bool itMball_UnkMotion6_Anim(Item_GObj* gobj)
     return false;
 }
 
-void itMball_UnkMotion6_Phys(Item_GObj* arg0)
+void itMball_Motion6_Phys(Item_GObj* arg0)
 {
     Item* item = GET_ITEM(arg0);
 
@@ -267,7 +272,7 @@ void itMball_UnkMotion6_Phys(Item_GObj* arg0)
                 item->xCC_item_attr->x14_fall_speed_max);
 }
 
-bool itMball_UnkMotion6_Coll(Item_GObj* arg0)
+bool itMball_Motion6_Coll(Item_GObj* arg0)
 {
     Item* item = GET_ITEM(arg0);
     f32 previous_vel_x;
@@ -280,7 +285,7 @@ bool itMball_UnkMotion6_Coll(Item_GObj* arg0)
     return 0;
 }
 
-bool it_3F14_Logic34_Clanked(Item_GObj* arg0)
+bool itMball_Clanked(Item_GObj* arg0)
 {
     it_8026B3A8(arg0);
     it_802725D4(arg0);
@@ -288,13 +293,13 @@ bool it_3F14_Logic34_Clanked(Item_GObj* arg0)
     return 0;
 }
 
-bool it_3F14_Logic34_Reflected(Item_GObj* arg0)
+bool itMball_Reflected(Item_GObj* arg0)
 {
     it_8026B3A8(arg0);
     return it_80273030(arg0);
 }
 
-bool it_3F14_Logic34_HitShield(Item_GObj* arg0)
+bool itMball_HitShield(Item_GObj* arg0)
 {
     it_8026B3A8(arg0);
     it_802725D4(arg0);
@@ -302,13 +307,13 @@ bool it_3F14_Logic34_HitShield(Item_GObj* arg0)
     return 0;
 }
 
-bool it_3F14_Logic34_ShieldBounced(Item_GObj* arg0)
+bool itMball_ShieldBounced(Item_GObj* arg0)
 {
     it_8026B3A8(arg0);
     return itColl_BounceOffShield(arg0);
 }
 
-void it_3F14_Logic34_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
+void itMball_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }
