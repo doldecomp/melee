@@ -47,7 +47,7 @@
 /* 17E440 */ u8 gm_8017E440(void);
 /* 17E48C */ int gm_8017E48C(MinorScene*);
 /* 17E4C4 */ struct gm_803DE650_t* gm_8017E4C4(u8);
-/* 17E500 */ UNK_RET gm_8017E500(UNK_PARAMS);
+/* 17E500 */ u8 gm_8017E500(u8, u8);
 /* 17E528 */ float gm_8017E528(int count, u8);
 /* 17E578 */ float gm_8017E578(int count, u8);
 /* 17E5C8 */ u8 gm_8017E5C8(int count, u8, u8);
@@ -63,7 +63,7 @@
 /* 17E7FC */ void gm_8017E7FC(int);
 /* 17E8A4 */ void fn_8017E8A4(int);
 /* 17EB30 */ UnkAllstarData* gm_8017EB30(void);
-/* 17EB3C */ UNK_RET gm_8017EB3C(UNK_PARAMS);
+/* 17EB3C */ u8 gm_8017EB3C(u8, u8);
 /* 17EB64 */ UNK_RET gm_8017EB64(UNK_PARAMS);
 /* 17EB98 */ UNK_RET gm_8017EB98(UNK_PARAMS);
 /* 17EBCC */ UNK_RET gm_8017EBCC(UNK_PARAMS);

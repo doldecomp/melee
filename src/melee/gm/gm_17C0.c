@@ -689,7 +689,12 @@ int gm_8017E48C(MinorScene* scene)
 
 /// #gm_8017E4C4
 
-/// #gm_8017E500
+extern u8 gm_803DE920[50][26];
+
+u8 gm_8017E500(u8 arg0, u8 arg1)
+{
+    return gm_803DE920[arg0 * 5 + arg1][0];
+}
 
 /// #gm_8017E528
 
@@ -727,7 +732,12 @@ UnkAllstarData* gm_8017EB30(void)
     return &lbl_80472CB0;
 }
 
-/// #gm_8017EB3C
+extern u8 gm_803DEBB0[50][26];
+
+u8 gm_8017EB3C(u8 arg0, u8 arg1)
+{
+    return gm_803DEBB0[arg0 * 5 + arg1][0];
+}
 
 /// #gm_8017EB64
 
@@ -917,7 +927,23 @@ bool gm_80182510(void)
     return false;
 }
 
-/// #gm_80182554
+static struct {
+    /* 0x6BC */ u8 x0;
+    /* 0x6BD */ u8 pad;
+    /* 0x6BE */ u16 x2;
+    /* 0x6C0 */ int x4;
+    /* 0x6C4 */ int x8;
+    /* 0x6C8 */ int xC;
+} lbl_804735BC;
+
+void gm_80182554(int arg0, int arg1)
+{
+    lbl_804735BC.xC = arg0;
+    lbl_804735BC.x8 = arg1;
+    lbl_804735BC.x0 = 0;
+    lbl_804735BC.x4 = 0;
+    lbl_804735BC.x2 = 0;
+}
 
 /// #gm_80182578
 

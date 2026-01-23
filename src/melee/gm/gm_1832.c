@@ -499,7 +499,12 @@ int gm_80188454(int idx)
 
 /// #fn_8018A000
 
-/// #gm_8018A160
+extern u8 gm_803DED40[50][16];
+
+u8 gm_8018A160(u8 arg0, u8 arg1)
+{
+    return gm_803DED40[arg0 * 5 + arg1][0];
+}
 
 /// #gm_8018A188
 
