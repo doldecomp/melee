@@ -70,6 +70,7 @@
 #include <melee/pl/plbonuslib.h>
 #include <melee/pl/plstale.h>
 
+/* 0D84D4 */ void fn_800D84D4(Fighter_GObj*, s32);
 /* 0D8BFC */ static void fn_800D8BFC(Fighter_GObj* arg0);
 /* 0D9CE8 */ static void fn_800D9CE8(Fighter_GObj* arg0);
 /* 0DA054 */ void fn_800DA054(Fighter_GObj* gobj);
@@ -676,7 +677,11 @@ void ftCo_ItemScopeAirFire_Coll(Fighter_GObj* gobj)
 
 /// #fn_800D84D4
 
-/// #fn_800D86B8
+void fn_800D86B8(Fighter_GObj* gobj)
+{
+    FighterOverlay* fp = gobj->user_data;
+    fn_800D84D4(gobj, *(s32*) &fp->x2340);
+}
 
 /// #fn_800D86E0
 
