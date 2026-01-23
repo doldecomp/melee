@@ -87,15 +87,18 @@ void un_8031EE84(void)
 {
     HSD_GObj* gobj;
     HSD_JObj* jobj;
+    HSD_JObj* temp;
     s32 i, j;
 
     for (i = 0; un_804D6FB8->models[i] != NULL; i++) {
         gobj = GObj_Create(0xE, 0xF, 0);
         jobj = HSD_JObjLoadJoint(un_804D6FB8->models[i]->joint);
-        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+        temp = jobj;
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, temp);
         GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0xB, 0);
-        gm_8016895C(jobj, un_804D6FB8->models[i], 0);
-        HSD_JObjReqAnimAll(jobj, 0.0F);
+        gm_8016895C(jobj, un_804D6FB8->models[i],
+                    (un_804D6FB8->models[i] != NULL) * 0);
+        HSD_JObjReqAnimAll(temp, 0.0F);
         HSD_JObjAnimAll(jobj);
         HSD_GObjProc_8038FD54(gobj, un_8031EE60, 23);
 
