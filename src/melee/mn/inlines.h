@@ -9,21 +9,20 @@
 #include <baselib/memory.h>
 #include <baselib/sislib.h>
 
-/// @todo: maybe rename to MenuInput?
-typedef enum _MenuEvent {
-    MenuEvent_Up = 1 << 0,          ///< 0x0001
-    MenuEvent_Down = 1 << 1,        ///< 0x0002
-    MenuEvent_Left = 1 << 2,        ///< 0x0004
-    MenuEvent_Right = 1 << 3,       ///< 0x0008
-    MenuEvent_Forward = 1 << 4,     ///< 0x0010
-    MenuEvent_Back = 1 << 5,        ///< 0x0020
-    MenuEvent_LTrigger = 1 << 6,    ///< 0x0040
-    MenuEvent_RTrigger = 1 << 7,    ///< 0x0080
-    MenuEvent_StartButton = 1 << 8, ///< 0x0100
-    MenuEvent_AButton = 1 << 9,     ///< 0x0200
-    MenuEvent_XButton = 1 << 10,    ///< 0x0400
-    MenuEvent_YButton = 1 << 11,    ///< 0x0800
-} MenuEvent;
+typedef enum _MenuInput {
+    MenuInput_Up = 1 << 0,          ///< 0x0001
+    MenuInput_Down = 1 << 1,        ///< 0x0002
+    MenuInput_Left = 1 << 2,        ///< 0x0004
+    MenuInput_Right = 1 << 3,       ///< 0x0008
+    MenuInput_Confirm = 1 << 4,     ///< 0x0010
+    MenuInput_Back = 1 << 5,        ///< 0x0020
+    MenuInput_LTrigger = 1 << 6,    ///< 0x0040
+    MenuInput_RTrigger = 1 << 7,    ///< 0x0080
+    MenuInput_StartButton = 1 << 8, ///< 0x0100
+    MenuInput_AButton = 1 << 9,     ///< 0x0200
+    MenuInput_XButton = 1 << 10,    ///< 0x0400
+    MenuInput_YButton = 1 << 11,    ///< 0x0800
+} MenuInput;
 
 #define GET_MENU(gobj) ((Menu*) HSD_GObjGetUserData(gobj))
 
@@ -34,12 +33,12 @@ static inline void Menu_DecrementAnimTimer(void)
     mn_804D6BC8.x4 = 0;
 }
 
-static inline u64 Menu_GetAllEvents(void)
+static inline u64 Menu_GetAllInputs(void)
 {
     return mn_804A04F0.buttons = mn_80229624(4);
 }
 
-static inline u64 Menu_GetEventsForPort(s32 i)
+static inline u64 Menu_GetInputsForPort(s32 i)
 {
     return mn_804A04F0.buttons = mn_80229624(i);
 }

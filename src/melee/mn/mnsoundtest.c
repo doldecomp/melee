@@ -374,8 +374,8 @@ void fn_8024AED0(HSD_GObj* arg0)
         Menu_DecrementAnimTimer();
         return;
     }
-    events = Menu_GetAllEvents();
-    if (events & MenuEvent_Back) {
+    events = Menu_GetAllInputs();
+    if (events & MenuInput_Back) {
         lbAudioAx_80023694();
         user_data->unk0 = 1U;
         mnSoundTest_8024AA70(mnSoundTest_804D6C40, user_data->unk0);
@@ -406,7 +406,7 @@ void fn_8024AED0(HSD_GObj* arg0)
     if ((u8) mnSoundTest_804D6C44 == 0) {
         temp_r3_3 = lbAudioAx_80023968(data_3[user_data->unk3]);
         temp_r5 = 0 & 0;
-        if (events & MenuEvent_RTrigger) {
+        if (events & MenuInput_RTrigger) {
             temp_r30 = user_data->unk4;
             temp_r28_2 = data_3[user_data->unk3];
             temp_r3_4 = mnSoundTest_804D6C40->user_data;
@@ -421,11 +421,11 @@ void fn_8024AED0(HSD_GObj* arg0)
             HSD_JObjReqAnimAll(sp7C, vec_4.x);
             mn_8022F3D8(sp7C, 0xFFU, MOBJ_MASK);
             HSD_JObjAnimAll(sp7C);
-        } else if (events & MenuEvent_LTrigger) {
+        } else if (events & MenuInput_LTrigger) {
             if (user_data->unkC == 1.0f) {
                 user_data->unkC = 0.98f;
             }
-        } else if (events & MenuEvent_Left) {
+        } else if (events & MenuInput_Left) {
             temp_r4 = user_data->unk4;
             if (temp_r4 != 0) {
                 user_data->unk4 = (u16) (temp_r4 - 1);
@@ -433,7 +433,7 @@ void fn_8024AED0(HSD_GObj* arg0)
                 user_data->unk4 = (u16) (temp_r3_3 - 1);
             }
             fn_8024AED0_inline(arg0);
-        } else if (events & MenuEvent_Right) {
+        } else if (events & MenuInput_Right) {
             user_data->unk4 += 1;
             if (user_data->unk4 >= temp_r3_3) {
                 user_data->unk4 = 0;

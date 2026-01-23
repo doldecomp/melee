@@ -48,7 +48,7 @@ typedef struct _MenuInputState {
 /* 229624 */ u32 mn_80229624(u32);
 /* 229860 */ void mn_80229860(s8);
 /* 229894 */ void mn_80229894(s32, u16, s32);
-/* 229938 */ bool mn_80229938(s32 arg0, s32 arg1);
+/* 229938 */ bool mn_80229938(MenuKind, s32);
 /* 229A04 */ int mn_80229A04(MenuKind, int);
 /* 229B2C */ HSD_GObj* mn_80229B2C(void);
 /* 229BF4 */ void fn_80229BF4(HSD_GObj*);

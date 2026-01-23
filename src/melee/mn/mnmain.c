@@ -608,40 +608,40 @@ u32 mn_80229624(u32 slot)
         return 0;
     }
     if (inputs_trigger & PAD_BUTTON_A) {
-        ret |= MenuEvent_AButton;
+        ret |= MenuInput_AButton;
     }
     if (inputs_trigger & PAD_BUTTON_START) {
-        ret |= MenuEvent_StartButton;
+        ret |= MenuInput_StartButton;
     }
     if (inputs_trigger & PAD_CONFIRM) {
-        ret |= MenuEvent_Forward;
+        ret |= MenuInput_Confirm;
     }
     if (inputs_trigger & PAD_CANCEL) {
-        ret |= MenuEvent_Back;
+        ret |= MenuInput_Back;
     }
     if (inputs_trigger & PAD_TRIGGER_L) {
-        ret |= MenuEvent_LTrigger;
+        ret |= MenuInput_LTrigger;
     }
     if (inputs_trigger & PAD_TRIGGER_R) {
-        ret |= MenuEvent_RTrigger;
+        ret |= MenuInput_RTrigger;
     }
     if (inputs_trigger & PAD_BUTTON_X) {
-        ret |= MenuEvent_XButton;
+        ret |= MenuInput_XButton;
     }
     if (inputs_trigger & PAD_BUTTON_Y) {
-        ret |= MenuEvent_YButton;
+        ret |= MenuInput_YButton;
     }
     if (inputs_repeated & PAD_ANY_UP) {
-        ret |= MenuEvent_Up;
+        ret |= MenuInput_Up;
     }
     if (inputs_repeated & PAD_ANY_DOWN) {
-        ret |= MenuEvent_Down;
+        ret |= MenuInput_Down;
     }
     if (inputs_repeated & PAD_ANY_LEFT) {
-        ret |= MenuEvent_Left;
+        ret |= MenuInput_Left;
     }
     if (inputs_repeated & PAD_ANY_RIGHT) {
-        ret |= MenuEvent_Right;
+        ret |= MenuInput_Right;
     }
     return ret;
 }
@@ -717,29 +717,29 @@ void mn_80229894(s32 arg0, u16 arg1, s32 arg2)
 }
 
 /// @brief checks if a menu selection is locked
-bool mn_80229938(s32 arg0, s32 arg1)
+bool mn_80229938(MenuKind menu_kind, s32 selection)
 {
-    if (arg0 == 6 && arg1 == 2) {
+    if (menu_kind == MENU_KIND_REG && selection == SEL_REG_ALLSTAR) {
         if (gmMainLib_8015EDD4()) {
             return true;
         }
         return false;
     }
-    if (arg0 == 5 && arg1 == 2) {
+    if (menu_kind == MENU_KIND_DATA && selection == SEL_DATA_SOUND) {
         if (gmMainLib_8015EE90()) {
             return true;
         }
         return false;
     }
-    if (arg0 == 4 && arg1 == 3) {
+    if (menu_kind == MENU_KIND_SETTINGS && selection == SEL_SETTINGS_3) {
         return false;
     }
-    if (arg0 == 1 && arg1 == 2) {
+    if (menu_kind == MENU_KIND_1P && selection == SEL_1P_2) {
         return false;
     }
-    if (arg0 == 3) {
-        switch (arg1) {
-        case 2:
+    if (menu_kind == MENU_KIND_TOY) {
+        switch (selection) {
+        case SEL_TOY_2:
             return false;
         default:
             return true;
@@ -1687,11 +1687,11 @@ int mn_8022C010(int menu_kind, int selection)
     switch (menu_kind) {
     case MENU_KIND_1P:
     case MENU_KIND_REG:
-    case MENU_KIND_7:
+    case MENU_KIND_EVENT:
     case MENU_KIND_8:
     case MENU_KIND_STADIUM:
     case MENU_KIND_10:
-    case MENU_KIND_33:
+    case MENU_KIND_MULTI_VS:
         return 0;
     case MENU_KIND_VS:
     case MENU_KIND_11:
@@ -1818,6 +1818,29 @@ static inline void x2_inc(u8 temp_r29)
         !mn_80229938(mn_804A04F0.cur_menu, mn_804A04F0.hovered_selection));
 }
 
+static inline void decrement_selection(u8 selection_count, s32 menu_kind)
+{
+    do {
+        if (mn_804A04F0.hovered_selection != 0) {
+            mn_804A04F0.hovered_selection--;
+        } else {
+            mn_804A04F0.hovered_selection = selection_count - 1;
+        }
+    } while (mn_80229938(menu_kind, mn_804A04F0.hovered_selection) == 0);
+}
+
+static inline void increment_selection(u8 selection_count, MenuKind menu_kind)
+{
+    do {
+        if (mn_804A04F0.hovered_selection == selection_count - 1) {
+            mn_804A04F0.hovered_selection = 0;
+        } else {
+            mn_804A04F0.hovered_selection++;
+        }
+    } while (mn_80229938(menu_kind, mn_804A04F0.hovered_selection) == 0);
+}
+
+
 /// @brief Special Vs menu think
 void mn_8022C4F4(HSD_GObj* gp)
 {
@@ -1832,7 +1855,7 @@ void mn_8022C4F4(HSD_GObj* gp)
     PAD_STACK(8);
 
     mn_804A04F0.buttons = buttons;
-    if (buttons & MenuEvent_Forward) {
+    if (buttons & MenuInput_Confirm) {
         mn_804D6BC8.cooldown = 5;
         mn_804A04F0.entering_menu = 1;
         switch (mn_804A04F0.hovered_selection) {
@@ -1897,7 +1920,7 @@ void mn_8022C4F4(HSD_GObj* gp)
             gm_801A4B60();
             break;
         }
-    } else if (buttons & MenuEvent_Back) {
+    } else if (buttons & MenuInput_Back) {
         lbAudioAx_80024030(0);
         mn_804A04F0.entering_menu = 0;
         mn_804D6BC8.cooldown = 5;
@@ -1911,10 +1934,10 @@ void mn_8022C4F4(HSD_GObj* gp)
             temp_r3_2 = HSD_GObjProc_8038FD54(gobj, temp_r28, 0);
             temp_r3_2->flags_3 = HSD_GObj_804D783C;
         }
-    } else if (buttons & MenuEvent_Up) {
+    } else if (buttons & MenuInput_Up) {
         lbAudioAx_80024030(2);
         x2_dec(selection_count);
-    } else if (buttons & MenuEvent_Down) {
+    } else if (buttons & MenuInput_Down) {
         lbAudioAx_80024030(2);
         x2_inc(selection_count);
     }
@@ -1945,7 +1968,7 @@ void mn_8022C7CC(HSD_GObj* gp)
     PAD_STACK(8);
 
     mn_804A04F0.buttons = buttons;
-    if (buttons & MenuEvent_Forward) {
+    if (buttons & MenuInput_Confirm) {
         mn_804D6BC8.cooldown = 5;
         mn_804A04F0.entering_menu = 1;
         switch (mn_804A04F0.hovered_selection) {
@@ -1969,7 +1992,7 @@ void mn_8022C7CC(HSD_GObj* gp)
             HSD_GObjPLink_80390228(gp);
             return;
         }
-    } else if (buttons & MenuEvent_Back) {
+    } else if (buttons & MenuInput_Back) {
         lbAudioAx_80024030(0);
         mn_804A04F0.entering_menu = 0;
         mn_804D6BC8.cooldown = 5;
@@ -1983,10 +2006,10 @@ void mn_8022C7CC(HSD_GObj* gp)
             think = HSD_GObjProc_8038FD54(gobj, temp_r28, 0);
             think->flags_3 = HSD_GObj_804D783C;
         }
-    } else if (buttons & MenuEvent_Up) {
+    } else if (buttons & MenuInput_Up) {
         lbAudioAx_80024030(2);
         x2_dec(selection_count);
-    } else if (buttons & MenuEvent_Down) {
+    } else if (buttons & MenuInput_Down) {
         lbAudioAx_80024030(2);
         x2_inc(selection_count);
     }
@@ -2002,7 +2025,7 @@ void mn_8022CA54(HSD_GObj* gp)
 
     buttons = mn_80229624(4);
     mn_804A04F0.buttons = buttons;
-    if (buttons & MenuEvent_Forward) {
+    if (buttons & MenuInput_Confirm) {
         mn_804D6BC8.cooldown = 5;
         mn_804A04F0.entering_menu = 1;
         switch ((RecordsMenuSelection) mn_804A04F0.hovered_selection) {
@@ -2022,7 +2045,7 @@ void mn_8022CA54(HSD_GObj* gp)
             HSD_GObjPLink_80390228(gp);
             return;
         }
-    } else if (buttons & MenuEvent_Back) {
+    } else if (buttons & MenuInput_Back) {
         lbAudioAx_80024030(0);
         mn_804A04F0.entering_menu = 0;
         mn_804D6BC8.cooldown = 5;
@@ -2036,7 +2059,7 @@ void mn_8022CA54(HSD_GObj* gp)
                 HSD_GObjProc_8038FD54(GObj_Create(0, 1, 0x80), temp_r30, 0);
             think->flags_3 = HSD_GObj_804D783C;
         }
-    } else if (buttons & MenuEvent_Up) {
+    } else if (buttons & MenuInput_Up) {
         lbAudioAx_80024030(2);
         if ((RecordsMenuSelection) mn_804A04F0.hovered_selection ==
             SEL_RECORDS_VS)
@@ -2046,7 +2069,7 @@ void mn_8022CA54(HSD_GObj* gp)
         } else {
             mn_804A04F0.hovered_selection--;
         }
-    } else if (buttons & MenuEvent_Down) {
+    } else if (buttons & MenuInput_Down) {
         lbAudioAx_80024030(2);
         if ((RecordsMenuSelection) mn_804A04F0.hovered_selection ==
             SEL_RECORDS_MISC)
@@ -2070,7 +2093,7 @@ void mn_8022CC28(HSD_GObj* gp)
 
     buttons = mn_80229624(4);
     mn_804A04F0.buttons = buttons;
-    if (buttons & MenuEvent_Forward) {
+    if (buttons & MenuInput_Confirm) {
         mn_804D6BC8.cooldown = 5;
         mn_804A04F0.entering_menu = 1;
         gm_801677E8(mn_8022C7CC_inline());
@@ -2095,7 +2118,7 @@ void mn_8022CC28(HSD_GObj* gp)
             gm_801A4B60();
             return;
         }
-    } else if (buttons & MenuEvent_Back) {
+    } else if (buttons & MenuInput_Back) {
         lbAudioAx_80024030(0);
         mn_804A04F0.entering_menu = 0;
         mn_804D6BC8.cooldown = 5;
@@ -2109,7 +2132,7 @@ void mn_8022CC28(HSD_GObj* gp)
                 HSD_GObjProc_8038FD54(GObj_Create(0, 1, 0x80), temp_r28, 0);
             think->flags_3 = HSD_GObj_804D783C;
         }
-    } else if (buttons & MenuEvent_Up) {
+    } else if (buttons & MenuInput_Up) {
         lbAudioAx_80024030(2);
         do {
             if (mn_804A04F0.hovered_selection !=
@@ -2121,7 +2144,7 @@ void mn_8022CC28(HSD_GObj* gp)
                     (RegMatchMenuSelection) SEL_REG_ALLSTAR;
             }
         } while (mn_80229938(6, (s32) mn_804A04F0.hovered_selection) == 0);
-    } else if (buttons & MenuEvent_Down) {
+    } else if (buttons & MenuInput_Down) {
         lbAudioAx_80024030(2);
         do {
             if ((RegMatchMenuSelection) mn_804A04F0.hovered_selection ==
@@ -2149,7 +2172,7 @@ void mn_8022CE6C(HSD_GObj* gp)
 
     buttons = mn_80229624(4);
     mn_804A04F0.buttons = buttons;
-    if (buttons & MenuEvent_Forward) {
+    if (buttons & MenuInput_Confirm) {
         mn_804A04F0.entering_menu = 1;
         switch ((DataMenuSelection) mn_804A04F0.hovered_selection)
         { /* irregular */
@@ -2189,7 +2212,7 @@ void mn_8022CE6C(HSD_GObj* gp)
             HSD_GObjPLink_80390228(gp);
             break;
         }
-    } else if (buttons & MenuEvent_Back) {
+    } else if (buttons & MenuInput_Back) {
         lbAudioAx_80024030(0);
         mn_804A04F0.entering_menu = 0;
         mn_804D6BC8.cooldown = 5;
@@ -2203,7 +2226,7 @@ void mn_8022CE6C(HSD_GObj* gp)
                 HSD_GObjProc_8038FD54(GObj_Create(0, 1, 0x80), temp_r29_2, 0);
             think2->flags_3 = HSD_GObj_804D783C;
         }
-    } else if (buttons & MenuEvent_Up) {
+    } else if (buttons & MenuInput_Up) {
         lbAudioAx_80024030(2);
         do {
             if (mn_804A04F0.hovered_selection !=
@@ -2215,7 +2238,7 @@ void mn_8022CE6C(HSD_GObj* gp)
                     (DataMenuSelection) SEL_DATA_SPECIAL;
             }
         } while (mn_80229938(5, (s32) mn_804A04F0.hovered_selection) == 0);
-    } else if (buttons & MenuEvent_Down) {
+    } else if (buttons & MenuInput_Down) {
         lbAudioAx_80024030(2);
         do {
             if ((DataMenuSelection) mn_804A04F0.hovered_selection ==
@@ -2243,7 +2266,7 @@ void mn_8022D104(HSD_GObj* gp)
     selection_count = mn_803EB6B0[MENU_KIND_SETTINGS].selection_count & 0xFF;
     buttons = mn_80229624(4);
     mn_804A04F0.buttons = buttons;
-    if (buttons & MenuEvent_Forward) {
+    if (buttons & MenuInput_Confirm) {
         mn_804D6BC8.cooldown = 5;
         mn_804A04F0.entering_menu = 1;
         switch (mn_804A04F0.hovered_selection) {
@@ -2273,7 +2296,7 @@ void mn_8022D104(HSD_GObj* gp)
             HSD_GObjPLink_80390228(gp);
             break;
         }
-    } else if (buttons & MenuEvent_Back) {
+    } else if (buttons & MenuInput_Back) {
         lbAudioAx_80024030(0);
         mn_804A04F0.entering_menu = 0;
         mn_804D6BC8.cooldown = 5;
@@ -2287,7 +2310,7 @@ void mn_8022D104(HSD_GObj* gp)
                 HSD_GObjProc_8038FD54(GObj_Create(0, 1, 0x80), temp_r28, 0);
             temp_r3_2->flags_3 = HSD_GObj_804D783C;
         }
-    } else if (buttons & MenuEvent_Up) {
+    } else if (buttons & MenuInput_Up) {
         lbAudioAx_80024030(2);
         do {
             if (mn_804A04F0.hovered_selection !=
@@ -2322,7 +2345,7 @@ void mn_8022D34C(HSD_GObj* gp)
 
     buttons = mn_80229624(4);
     mn_804A04F0.buttons = buttons;
-    if (buttons & MenuEvent_Forward) {
+    if (buttons & MenuInput_Confirm) {
         mn_804D6BC8.cooldown = 5;
         mn_804A04F0.entering_menu = 1;
         gm_801677E8(mn_8022C7CC_inline());
@@ -2346,7 +2369,7 @@ void mn_8022D34C(HSD_GObj* gp)
             gm_801A4B60();
             return;
         }
-    } else if (buttons & MenuEvent_Back) {
+    } else if (buttons & MenuInput_Back) {
         lbAudioAx_80024030(0);
         mn_804A04F0.entering_menu = 0;
         mn_804D6BC8.cooldown = 5;
@@ -2360,7 +2383,7 @@ void mn_8022D34C(HSD_GObj* gp)
                 HSD_GObjProc_8038FD54(GObj_Create(0, 1, 0x80), temp_r28, 0);
             think->flags_3 = HSD_GObj_804D783C;
         }
-    } else if (buttons & MenuEvent_Up) {
+    } else if (buttons & MenuInput_Up) {
         lbAudioAx_80024030(2);
         do {
             if (mn_804A04F0.hovered_selection !=
@@ -2372,7 +2395,7 @@ void mn_8022D34C(HSD_GObj* gp)
                     (TrophyMenuSelection) SEL_TOY_COLLECTION;
             }
         } while (mn_80229938(3, mn_804A04F0.hovered_selection) == 0);
-    } else if (buttons & MenuEvent_Down) {
+    } else if (buttons & MenuInput_Down) {
         lbAudioAx_80024030(2);
         do {
             if ((TrophyMenuSelection) mn_804A04F0.hovered_selection ==
@@ -2400,7 +2423,7 @@ void mn_8022D594(HSD_GObj* gp)
 
     buttons = mn_80229624(4);
     mn_804A04F0.buttons = buttons;
-    if (buttons & MenuEvent_Forward) {
+    if (buttons & MenuInput_Confirm) {
         mn_804D6BC8.cooldown = 5;
         mn_804A04F0.entering_menu = 1;
         switch (mn_804A04F0.hovered_selection) {
@@ -2442,7 +2465,7 @@ void mn_8022D594(HSD_GObj* gp)
             HSD_GObjPLink_80390228(gp);
             break;
         }
-    } else if (buttons & MenuEvent_Back) {
+    } else if (buttons & MenuInput_Back) {
         lbAudioAx_80024030(0);
         mn_804A04F0.entering_menu = 0;
         mn_804D6BC8.cooldown = 5;
@@ -2456,14 +2479,14 @@ void mn_8022D594(HSD_GObj* gp)
                 HSD_GObjProc_8038FD54(GObj_Create(0, 1, 0x80), temp_r28_2, 0);
             think2->flags_3 = HSD_GObj_804D783C;
         }
-    } else if (buttons & MenuEvent_Up) {
+    } else if (buttons & MenuInput_Up) {
         lbAudioAx_80024030(2);
         if ((VsMenuSelection) mn_804A04F0.hovered_selection == SEL_VS_MELEE) {
             mn_804A04F0.hovered_selection = SEL_VS_NAME;
         } else {
             mn_804A04F0.hovered_selection--;
         }
-    } else if (buttons & MenuEvent_Down) {
+    } else if (buttons & MenuInput_Down) {
         lbAudioAx_80024030(2);
         if ((VsMenuSelection) mn_804A04F0.hovered_selection == SEL_VS_NAME) {
             mn_804A04F0.hovered_selection = SEL_VS_MELEE;
@@ -2489,7 +2512,7 @@ void mn_8022D7F4(HSD_GObj* gp)
     selection_count = mn_803EB6B0[MENU_KIND_1P].selection_count & 0xFF;
     buttons = mn_80229624(4);
     mn_804A04F0.buttons = buttons;
-    if (buttons & MenuEvent_Forward) {
+    if (buttons & MenuInput_Confirm) {
         mn_804A04F0.entering_menu = 1;
         gm_801677E8(mn_8022C7CC_inline());
         switch (mn_804A04F0.hovered_selection) {
@@ -2535,7 +2558,7 @@ void mn_8022D7F4(HSD_GObj* gp)
             gm_801A4B60();
             break;
         }
-    } else if (buttons & MenuEvent_Back) {
+    } else if (buttons & MenuInput_Back) {
         lbAudioAx_80024030(0);
         mn_804A04F0.entering_menu = 0;
         mn_804D6BC8.cooldown = 5;
@@ -2549,7 +2572,7 @@ void mn_8022D7F4(HSD_GObj* gp)
                 HSD_GObjProc_8038FD54(GObj_Create(0, 1, 0x80), temp_r27, 0);
             temp_r3_4->flags_3 = HSD_GObj_804D783C;
         }
-    } else if (buttons & MenuEvent_Up) {
+    } else if (buttons & MenuInput_Up) {
         lbAudioAx_80024030(2);
         do {
             if (mn_804A04F0.hovered_selection !=
@@ -2560,7 +2583,7 @@ void mn_8022D7F4(HSD_GObj* gp)
                 mn_804A04F0.hovered_selection = (u8) selection_count - 1;
             }
         } while (mn_80229938(1, mn_804A04F0.hovered_selection) == 0);
-    } else if (buttons & MenuEvent_Down) {
+    } else if (buttons & MenuInput_Down) {
         lbAudioAx_80024030(2);
         do {
             if (mn_804A04F0.hovered_selection == (u8) selection_count - 1) {
@@ -2573,7 +2596,7 @@ void mn_8022D7F4(HSD_GObj* gp)
     }
 }
 
-/// @brief Main menu think
+/// @brief Main menu input think
 void mn_8022DB10(HSD_GObj* gp)
 {
     MenuExitData* data;
@@ -2582,19 +2605,23 @@ void mn_8022DB10(HSD_GObj* gp)
     int selection_count;
     u16 hovered_selection;
     HSD_GObjProc* temp_r3_2;
+    MenuFlow* mf = &mn_804A04F0;
+    u8* prev_menu_ptr;
+    u16* selection_ptr;
     u32 buttons;
-
     PAD_STACK(8);
 
     selection_count = mn_803EB6B0[MENU_KIND_MAIN].selection_count & 0xFF;
     buttons = mn_80229624(4);
-    mn_804A04F0.buttons = buttons;
-    if (buttons & MenuEvent_Forward) {
+    mf->buttons = buttons;
+    if (buttons & MenuInput_Confirm) {
         mn_804D6BC8.cooldown = 5;
-        mn_804A04F0.entering_menu = 1;
+        mf->entering_menu = 1;
         lbAudioAx_80024030(1);
-        mn_804A04F0.prev_menu = mn_804A04F0.cur_menu;
-        switch (mn_804A04F0.hovered_selection) {
+        prev_menu_ptr = &mf->prev_menu;
+        selection_ptr = &mf->hovered_selection;
+        *prev_menu_ptr = mf->cur_menu;
+        switch (mf->hovered_selection) {
         case SEL_MAIN_1P:
             menu_kind = MENU_KIND_1P;
             hovered_selection = 0;
@@ -2617,9 +2644,9 @@ void mn_8022DB10(HSD_GObj* gp)
             break;
         }
         mn_804D6BC8.cooldown = 5;
-        mn_804A04F0.prev_menu = mn_804A04F0.cur_menu;
-        mn_804A04F0.cur_menu = menu_kind;
-        mn_804A04F0.hovered_selection = hovered_selection;
+        *prev_menu_ptr = mf->cur_menu;
+        mf->cur_menu = menu_kind;
+        *selection_ptr = hovered_selection;
         HSD_GObj_80390CD4(mn_8022B3A0(1));
         HSD_GObjPLink_80390228(HSD_GObj_804D781C);
         /// @todo casting u64 here makes it match, but i dont know why
@@ -2628,34 +2655,19 @@ void mn_8022DB10(HSD_GObj* gp)
                 HSD_GObjProc_8038FD54(GObj_Create(0, 1, 0x80), temp_r28, 0);
             temp_r3_2->flags_3 = HSD_GObj_804D783C;
         }
-    } else if (buttons & MenuEvent_Back) {
+    } else if (buttons & MenuInput_Back) {
         lbAudioAx_80024030(0);
-        mn_804A04F0.entering_menu = 0;
+        mf->entering_menu = 0;
         mn_804D6BC8.cooldown = 5;
         data = gm_801A4B9C();
         data->pending_major = MJ_TITLE;
         gm_801A4B60();
-    } else if (buttons & MenuEvent_Up) {
+    } else if (buttons & MenuInput_Up) {
         lbAudioAx_80024030(2);
-        do {
-            if (mn_804A04F0.hovered_selection !=
-                (MainMenuSelection) SEL_MAIN_1P)
-            {
-                mn_804A04F0.hovered_selection--;
-            } else {
-                mn_804A04F0.hovered_selection = (u8) selection_count - 1;
-            }
-        } while (mn_80229938(0, mn_804A04F0.hovered_selection) == 0);
-    } else if (buttons & MenuEvent_Down) {
+        decrement_selection(selection_count, MENU_KIND_MAIN);
+    } else if (buttons & MenuInput_Down) {
         lbAudioAx_80024030(2);
-        do {
-            if (mn_804A04F0.hovered_selection == (u8) selection_count - 1) {
-                mn_804A04F0.hovered_selection =
-                    (MainMenuSelection) SEL_MAIN_1P;
-            } else {
-                mn_804A04F0.hovered_selection++;
-            }
-        } while (mn_80229938(0, mn_804A04F0.hovered_selection) == 0);
+        increment_selection(selection_count, MENU_KIND_MAIN);
     }
 }
 
@@ -2881,10 +2893,10 @@ void mn_8022DDA8_OnEnter(MenuEnterData* data)
     mn_80229DC0();
 
     switch (data->menu_kind) {
-    case MENU_KIND_7:
+    case MENU_KIND_EVENT:
         mnEvent_8024E838(gm_801BEB80(), 0);
         break;
-    case MENU_KIND_33:
+    case MENU_KIND_MULTI_VS:
         mnHyaku_8024CD64(data->hovered_selection);
         break;
     default:
@@ -3146,7 +3158,7 @@ bool mn_8022F218(void)
 
 void mn_8022F268(void)
 {
-    gmMainLib_8015CC34()->unk_x0 = 1;
+    gmMainLib_8015CC34()->force_main_menu = 1;
 }
 
 /// @brief returns the current frame of jobjs animation
