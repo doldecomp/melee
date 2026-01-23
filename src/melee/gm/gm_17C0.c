@@ -942,6 +942,8 @@ static struct {
     /* 0x6C8 */ int xC;
 } lbl_804735BC;
 
+/// FAKE MATCH: Assignment order (xC, x8, x0, x4, x2) chosen for regalloc.
+/// 99.44% match - relocation offsets differ due to static placement.
 void gm_80182554(int arg0, int arg1)
 {
     lbl_804735BC.xC = arg0;

@@ -677,6 +677,8 @@ void ftCo_ItemScopeAirFire_Coll(Fighter_GObj* gobj)
 
 /// #fn_800D84D4
 
+/// FAKE MATCH: Type punning (*(s32*)&) forces lwz instead of lfs.
+/// Original code likely used a union or the field was actually an int.
 void fn_800D86B8(Fighter_GObj* gobj)
 {
     FighterOverlay* fp = gobj->user_data;

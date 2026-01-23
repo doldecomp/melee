@@ -14,6 +14,8 @@
 
 /// #it_802C8B28
 
+/// FAKE MATCH: Type punning (*(s32*)&) used to force integer store.
+/// Original code likely assigned 0 directly or used proper union access.
 void it_802C8C34(Item_GObj* gobj)
 {
     Item* ip;
@@ -28,6 +30,8 @@ void it_802C8C34(Item_GObj* gobj)
     }
 }
 
+/// FAKE MATCH: Local 'zero' variable and Yoda condition (zero == x) used
+/// to manipulate register allocation. Original was likely: if (ip->facing_dir == 0.0F)
 void it_2725_Logic80_PickedUp(Item_GObj* gobj)
 {
     Item* ip = gobj->user_data;
