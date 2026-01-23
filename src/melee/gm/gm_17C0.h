@@ -51,7 +51,7 @@
 /* 17E528 */ float gm_8017E528(int count, u8);
 /* 17E578 */ float gm_8017E578(int count, u8);
 /* 17E5C8 */ u8 gm_8017E5C8(int count, u8, u8);
-/* 17E5FC */ UNK_RET gm_8017E5FC(UNK_PARAMS);
+/* 17E5FC */ u8 gm_8017E5FC(int count, u8, u8);
 /* 17E630 */ UNK_RET gm_8017E630(UNK_PARAMS);
 /* 17E664 */ UNK_RET gm_8017E664(UNK_PARAMS);
 /* 17E6B4 */ UNK_RET gm_8017E6B4(UNK_PARAMS);

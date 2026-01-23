@@ -656,7 +656,14 @@ void hsd_8039D1E4(UNK_T arg0, int arg1)
     M2C_FIELD(arg0, int*, 0x58) = arg1;
 }
 
-/// #hsd_8039D1EC
+u16 hsd_8039D1EC(void)
+{
+    hsd_804D78E0++;
+    if (hsd_804D78E0 < 256) {
+        hsd_804D78E0 = 256;
+    }
+    return hsd_804D78E0;
+}
 
 /// #hsd_8039D214
 

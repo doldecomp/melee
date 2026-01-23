@@ -700,9 +700,15 @@ u8 gm_8017E500(u8 arg0, u8 arg1)
 
 /// #gm_8017E578
 
-/// #gm_8017E5C8
+u8 gm_8017E5C8(int arg0, u8 arg1, u8 arg2)
+{
+    return gm_803DE920[(u8) arg0 * 5 + arg1][arg2 * 3 + 6];
+}
 
-/// #gm_8017E5FC
+u8 gm_8017E5FC(int arg0, u8 arg1, u8 arg2)
+{
+    return gm_803DE920[(u8) arg0 * 5 + arg1][arg2 * 3 + 7];
+}
 
 /// #gm_8017E630
 
