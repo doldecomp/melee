@@ -10,15 +10,11 @@
 #include "gr/ground.h"
 #include "gr/stage.h"
 #include "it/item.h"
-#include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 #include "lb/lbarchive.h"
 #include "lb/lbaudio_ax.h"
 #include "mp/mpcoll.h"
 #include "pl/player.h"
-
-#include "sc/forward.h"
-
 #include "sc/types.h"
 
 #include <baselib/aobj.h>
@@ -33,21 +29,15 @@
 static SceneDesc* un_804D6FB8;
 static GXColor un_804D6FBC;
 
-/* 4A2EA8 */ extern char un_804A2EA8[];
+HSD_JObj* un_804A2EA8[24];
+
 s32 un_80400128[23][2] = { { 1, 2 }, { 1, 3 }, { 1, 4 },  { 1, 5 },  { 1, 6 },
                            { 1, 7 }, { 1, 8 }, { 1, 9 },  { 1, 10 }, { 0, 2 },
                            { 0, 3 }, { 0, 4 }, { 0, 5 },  { 0, 6 },  { 0, 7 },
                            { 0, 8 }, { 0, 9 }, { 0, 10 }, { 0, 11 }, { 2, 2 },
                            { 2, 3 }, { 2, 4 }, { 2, 5 } };
 
-typedef struct vi_GObj {
-    u8 pad0[0x20];
-    s32 x20;
-    s32 x24;
-    void* hsd_obj;
-} vi_GObj;
-
-static void un_8031ED70(vi_GObj* gobj, int unused)
+static void vi0801_8031ED70(HSD_GObj* gobj, int unused)
 {
     GXColor* colors;
     s32 zero;
@@ -58,32 +48,26 @@ static void un_8031ED70(vi_GObj* gobj, int unused)
         HSD_SetEraseColor(colors->r, colors->g, colors->b, colors->a);
         HSD_CObjEraseScreen(gobj->hsd_obj, 1, 0, 1);
         Camera_800310A0(2);
-        gobj->x24 = 9;
-        zero = 0;
-        gobj->x20 = zero;
-        HSD_GObj_80390ED0((HSD_GObj*) gobj, 7);
+        gobj->gxlink_prios = 9;
+        HSD_GObj_80390ED0(gobj, 7);
         Camera_800310A0(1);
-        prio = 8;
-        gobj->x24 = prio;
-        gobj->x20 = zero;
-        HSD_GObj_80390ED0((HSD_GObj*) gobj, 7);
+        gobj->gxlink_prios = 8;
+        HSD_GObj_80390ED0(gobj, 7);
         Camera_800310A0(0);
-        gobj->x24 = prio;
-        gobj->x20 = zero;
-        HSD_GObj_80390ED0((HSD_GObj*) gobj, 7);
-        gobj->x24 = 0x8A1;
-        gobj->x20 = zero;
-        HSD_GObj_80390ED0((HSD_GObj*) gobj, 7);
+        gobj->gxlink_prios = 8;
+        HSD_GObj_80390ED0(gobj, 7);
+        gobj->gxlink_prios = 0x8A1;
+        HSD_GObj_80390ED0(gobj, 7);
         HSD_CObjEndCurrent();
     }
 }
 
-void un_8031EE60(HSD_GObj* gobj)
+void vi0801_8031EE60(HSD_GObj* gobj)
 {
     HSD_JObjAnimAll(GET_JOBJ(gobj));
 }
 
-void un_8031EE84(void)
+void vi0801_8031EE84(void)
 {
     HSD_GObj* gobj;
     HSD_JObj* jobj;
@@ -100,11 +84,11 @@ void un_8031EE84(void)
                     (un_804D6FB8->models[i] != NULL) * 0);
         HSD_JObjReqAnimAll(temp, 0.0F);
         HSD_JObjAnimAll(jobj);
-        HSD_GObjProc_8038FD54(gobj, un_8031EE60, 23);
+        HSD_GObjProc_8038FD54(gobj, vi0801_8031EE60, 23);
 
         for (j = 0; j < 23; j++) {
             if (i == un_80400128[j][0]) {
-                lb_80011E24(jobj, (HSD_JObj**) &un_804A2EA8[j * 4],
+                lb_80011E24(jobj, (HSD_JObj**) &un_804A2EA8[j],
                             un_80400128[j][1], -1);
             }
         }
@@ -116,7 +100,7 @@ void un_8031EE84(void)
     lbAudioAx_80027648();
 }
 
-void fn_8031EFE4(HSD_GObj* gobj)
+void vi0801_8031EFE4(HSD_GObj* gobj)
 {
     HSD_CObj* cobj = gobj->hsd_obj;
     HSD_CObjAnim(cobj);
@@ -132,11 +116,11 @@ void fn_8031EFE4(HSD_GObj* gobj)
     }
 }
 
-void un_8031F07C_OnEnter(void* unused)
+void vi0801_OnEnter(void* unused)
 {
     HSD_CObj* cobj;
     HSD_GObj* gobj;
-    struct HSD_Fog* fog;
+    HSD_Fog* fog;
     HSD_LObj* lobj;
     HSD_GObj* gobj2;
 
@@ -152,13 +136,13 @@ void un_8031F07C_OnEnter(void* unused)
     cobj =
         lb_80013B14((HSD_CameraDescPerspective*) un_804D6FB8->cameras->desc);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
-    GObj_SetupGXLinkMax(gobj, (void (*)(HSD_GObj*, int)) un_8031ED70, 8);
+    GObj_SetupGXLinkMax(gobj, vi0801_8031ED70, 8);
     HSD_CObjAddAnim(cobj, un_804D6FB8->cameras->anims[0]);
     HSD_CObjReqAnim(cobj, 0.0f);
     HSD_CObjAnim(cobj);
-    HSD_GObjProc_8038FD54(gobj, fn_8031EFE4, 0);
+    HSD_GObjProc_8038FD54(gobj, vi0801_8031EFE4, 0);
 
-    un_8031EE84();
+    vi0801_8031EE84();
 
     Camera_80028B9C(6);
     lb_8000FCDC();
@@ -171,7 +155,7 @@ void un_8031F07C_OnEnter(void* unused)
     Stage_8022532C(0x49, 0);
 
     gobj = GObj_Create(0xB, 3, 0);
-    fog = (struct HSD_Fog*) HSD_FogLoadDesc(un_804D6FB8->fogs->desc);
+    fog = HSD_FogLoadDesc(un_804D6FB8->fogs->desc);
     HSD_GObjObject_80390A70(gobj, (u8) HSD_GObj_804D7848, fog);
     GObj_SetupGXLink(gobj, HSD_GObj_FogCallback, 0, 0);
     un_804D6FBC = fog->color;
@@ -187,7 +171,7 @@ void un_8031F07C_OnEnter(void* unused)
     lbAudioAx_80024E50(0);
 }
 
-void un_8031F274_OnFrame(void)
+void vi0801_OnFrame(void)
 {
     vi_8031CAAC();
 }
