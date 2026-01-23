@@ -719,27 +719,27 @@ void mn_80229894(s32 arg0, u16 arg1, s32 arg2)
 /// @brief checks if a menu selection is locked
 bool mn_80229938(MenuKind menu_kind, s32 selection)
 {
-    if (menu_kind == 6 && selection == 2) {
+    if (menu_kind == MENU_KIND_REG && selection == SEL_REG_ALLSTAR) {
         if (gmMainLib_8015EDD4()) {
             return true;
         }
         return false;
     }
-    if (menu_kind == 5 && selection == 2) {
+    if (menu_kind == MENU_KIND_DATA && selection == SEL_DATA_SOUND) {
         if (gmMainLib_8015EE90()) {
             return true;
         }
         return false;
     }
-    if (menu_kind == 4 && selection == 3) {
+    if (menu_kind == MENU_KIND_SETTINGS && selection == SEL_SETTINGS_3) {
         return false;
     }
-    if (menu_kind == 1 && selection == 2) {
+    if (menu_kind == MENU_KIND_1P && selection == SEL_1P_2) {
         return false;
     }
-    if (menu_kind == 3) {
+    if (menu_kind == MENU_KIND_TOY) {
         switch (selection) {
-        case 2:
+        case SEL_TOY_2:
             return false;
         default:
             return true;
