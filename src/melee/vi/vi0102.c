@@ -105,6 +105,12 @@ void vi0102_CameraCallback(HSD_GObj* gobj, int unused)
     }
 }
 
+// Used to force float ordering of file
+static f32 unused(void)
+{
+    return 0.0f;
+}
+
 static void vi0102_RunFrame(HSD_GObj* gobj)
 {
     HSD_CObj* cobj;
@@ -123,9 +129,11 @@ static void vi0102_RunFrame(HSD_GObj* gobj)
 
 void vi0102_Initialize_OnEnter(void* arg)
 {
+    int i;
     HSD_CObj* cobj;
     HSD_GObj* cam_gobj;
 
+    HSD_JObj* tmp;
     HSD_JObj* jobj;
     HSD_GObj* joint_gobj;
 
@@ -135,8 +143,7 @@ void vi0102_Initialize_OnEnter(void* arg)
     HSD_LObj* lobj;
     HSD_GObj* light_gobj;
 
-    int i;
-    ViCharaDesc* desc = arg;
+    ViCharaDesc* desc = (ViCharaDesc*) arg;
 
     lbAudioAx_800236DC();
     efLib_8005B4B8();
@@ -152,17 +159,19 @@ void vi0102_Initialize_OnEnter(void* arg)
     HSD_GObjObject_80390A70(cam_gobj, HSD_GObj_804D784B, cobj);
     GObj_SetupGXLinkMax(cam_gobj, vi0102_CameraCallback, 0x8);
     HSD_CObjAddAnim(cobj, un_804D6F30->cameras[0].anims[0]);
-    HSD_CObjReqAnim(cobj, 0.0f);
+    HSD_CObjReqAnim(cobj, 0.0F);
     HSD_CObjAnim(cobj);
     HSD_GObjProc_8038FD54(cam_gobj, vi0102_RunFrame, 0);
 
     for (i = 0; un_804D6F30->models[i] != NULL; i++) {
         joint_gobj = GObj_Create(0xE, 0xF, 0);
         jobj = HSD_JObjLoadJoint(un_804D6F30->models[i]->joint);
-        HSD_GObjObject_80390A70(joint_gobj, HSD_GObj_804D7849, jobj);
+        tmp = jobj;
+        HSD_GObjObject_80390A70(joint_gobj, HSD_GObj_804D7849, tmp);
         GObj_SetupGXLink(joint_gobj, HSD_GObj_JObjCallback, 0xB, 0);
-        gm_8016895C(jobj, un_804D6F30->models[i], 0);
-        HSD_JObjReqAnimAll(jobj, 0.0f);
+        gm_8016895C(jobj, un_804D6F30->models[i],
+                    (un_804D6F30->models[i] != NULL) * 0);
+        HSD_JObjReqAnimAll(tmp, 0.0F);
         HSD_JObjAnimAll(jobj);
         HSD_GObjProc_8038FD54(joint_gobj, vi0102_JObjCallback, 0x17);
     }

@@ -3988,7 +3988,7 @@ melee/vi/vi.c:
 melee/vi/vi0102.c:
 	.text       start:0x8031CB00 end:0x8031D020
 	.data       start:0x80400010 end:0x80400038
-	.sbss       start:0x804D6F30 end:0x804D6F38
+	.sbss       start:0x804D6F30 end:0x804D6F3C
 	.sdata2     start:0x804DE040 end:0x804DE050
 
 melee/vi/vi0401.c:
