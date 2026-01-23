@@ -3951,7 +3951,7 @@ melee/if/textdraw.c:
 
 melee/if/textlib.c:
 	.text       start:0x80302834 end:0x80305058
-	.bss        start:0x804A2688 end:0x804A2F38
+	.bss        start:0x804A2688 end:0x804A2EA8
 
 melee/ty/toy.c:
 	.text       start:0x80305058 end:0x803124BC
@@ -3988,7 +3988,7 @@ melee/vi/vi.c:
 melee/vi/vi0102.c:
 	.text       start:0x8031CB00 end:0x8031D020
 	.data       start:0x80400010 end:0x80400038
-	.sbss       start:0x804D6F30 end:0x804D6F38
+	.sbss       start:0x804D6F30 end:0x804D6F3C
 	.sdata2     start:0x804DE040 end:0x804DE050
 
 melee/vi/vi0401.c:
@@ -4028,6 +4028,7 @@ melee/vi/vi0601.c:
 melee/vi/vi0801.c:
 	.text       start:0x8031ED70 end:0x8031F294
 	.data       start:0x80400128 end:0x80400200
+	.bss        start:0x804A2EA8 end:0x804A2F08
 	.sbss       start:0x804D6FB8 end:0x804D6FC0
 	.sdata2     start:0x804DE0C0 end:0x804DE0D8
 
@@ -4055,6 +4056,7 @@ melee/vi/vi1201v2.c:
 melee/vi/vi1202.c:
 	.text       start:0x8032110C end:0x80322620
 	.data       start:0x804003A0 end:0x80400430
+	.bss        start:0x804A2F08 end:0x804A2F38
 	.sdata      start:0x804D5B30 end:0x804D5B40
 	.sbss       start:0x804D7040 end:0x804D7054
 	.sdata2     start:0x804DE138 end:0x804DE160

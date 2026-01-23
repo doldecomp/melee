@@ -43,10 +43,13 @@ struct vi1202_UnkStruct {
     /* 0x2C */ s32 x2C;
 };
 
+vi1202_UnkStruct un_804A2F08;
+
 static SceneDesc* un_804D7040;
 static SceneDesc* un_804D7044;
 static HSD_Joint* un_804D7048;
 static HSD_JObj* un_804D704C;
+static vi1202_UnkStruct* un_804D7050;
 
 void un_8032110C(HSD_GObj* gobj)
 {
@@ -252,16 +255,13 @@ void vi1202_OnFrame(void)
 {
     vi_8031CAAC();
 }
-
-extern char un_804A2F08[];
-extern vi1202_UnkStruct* un_804D7050;
 extern char mpLib_80458868[];
 
 void un_80321900(void)
 {
     HSD_GObj* gobj = GObj_Create(0x16, 0x17, 0);
     HSD_GObjProc_8038FD54(gobj, fn_803219AC, 0x13);
-    un_804D7050 = (vi1202_UnkStruct*) un_804A2F08;
+    un_804D7050 = &un_804A2F08;
     un_80321950(un_804D7050);
 }
 

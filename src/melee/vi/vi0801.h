@@ -5,10 +5,10 @@
 
 #include <baselib/forward.h>
 
-/* 31EE60 */ void un_8031EE60(HSD_GObj*);
-/* 31EE84 */ void un_8031EE84(void);
-/* 31EFE4 */ void fn_8031EFE4(HSD_GObj*);
-/* 31F07C */ void un_8031F07C_OnEnter(void* unused);
-/* 31F274 */ void un_8031F274_OnFrame(void);
+/* 31EE60 */ void vi0801_8031EE60(HSD_GObj*);
+/* 31EE84 */ void vi0801_8031EE84(void);
+/* 31EFE4 */ void vi0801_8031EFE4(HSD_GObj*);
+/* 31F07C */ void vi0801_OnEnter(void* unused);
+/* 31F274 */ void vi0801_OnFrame(void);
 
 #endif
