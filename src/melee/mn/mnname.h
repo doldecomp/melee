@@ -8,11 +8,11 @@
 #include <stdbool.h>
 
 /* 23749C */ UNK_RET mnName_8023749C(UNK_PARAMS);
-/* 23754C */ char* GetNameText(int slot);
+/* 23754C */ char* GetNameText(u8 slot);
 /* 237594 */ int GetNameCount(void);
 /* 2375EC */ bool IsNameListFull(void);
 /* 237654 */ UNK_RET CompareNameStrings(UNK_PARAMS);
-/* 2377A4 */ UNK_RET fn_802377A4(UNK_PARAMS);
+/* 2377A4 */ void fn_802377A4(void);
 /* 2377A8 */ UNK_RET IsNameUnique(UNK_PARAMS);
 /* 237834 */ UNK_RET DeleteName(UNK_PARAMS);
 /* 2379BC */ bool IsNameValid(int slot);

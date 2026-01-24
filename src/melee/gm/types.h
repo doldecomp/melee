@@ -107,13 +107,34 @@ struct gmm_x1CB0 {
     /* +1C */ u8 padding_x16[0x1];
 };
 
-struct gmm_x1F2C {
-    u8 padding_x0[0x78];
-    s8 x78;
-    s8 x79;
-    UnkFlagStruct x7A;
-    s8 x7B;
-    struct {
+struct FighterData {
+    /* 0x00 */ u16 fighter_kos[25];
+    /* 0x32 */ u8 padding_0x32[2];
+    /* 0x34 */ u16 sd_count;
+    /* 0x36 */ u8 padding_0x36[2];
+    /* 0x38 */ u32 attacks_hit;
+    /* 0x3C */ u32 attacks_total;
+    /* 0x40 */ s32 damage_dealt;
+    /* 0x44 */ s32 damage_taken;
+    /* 0x48 */ s32 damage_recovered;
+    /* 0x4C */ u16 peak_damage;
+    /* 0x4E */ u16 match_count;
+    /* 0x50 */ u16 victories;
+    /* 0x52 */ u16 losses;
+    /* 0x54 */ u32 play_time;
+    /* 0x58 */ u32 total_player_count;
+    /* 0x5C */ s32 walk_distance;
+    /* 0x60 */ s32 run_distance;
+    /* 0x64 */ s32 fall_distance;
+    /* 0x68 */ s32 peak_height;
+    /* 0x6C */ s32 coins_collected;
+    /* 0x70 */ s32 coins_swiped;
+    /* 0x74 */ s32 coins_lost;
+    /* 0x78 */ s8 x78;
+    /* 0x79 */ s8 x79;
+    /* 0x7A */ UnkFlagStruct x7A;
+    /* 0x7B */ s8 x7B;
+    /* 0x7C */ struct {
         u16 b0 : 1;
         u16 b1 : 1;
         u16 b2 : 1;
@@ -143,17 +164,38 @@ struct gmm_x1F2C {
     } x7C;
 };
 
-struct gmm_x2FF8_inner {
-    /* 000 */ u8 padding[0x198];
-    /* 198 */ char namedata[8];
-    /* 1A0 */ s8 x1A0;
-    /* 1A1 */ u8 x1A1;
-    /* 1A2 */ s8 x1A2;
-    /* 1A3 */ u8 padding_x1A2;
+struct NameTagData {
+    /* 0x000 */ u16 vs_kos[120];
+    /* 0x0F0 */ u16 sd_count;
+    /* 0x0F2 */ u8 padding_0xF2[2];
+    /* 0x0F4 */ u32 attacks_hit;
+    /* 0x0F8 */ u32 attacks_total;
+    /* 0x0FC */ s32 damage_dealt;
+    /* 0x100 */ s32 damage_taken;
+    /* 0x104 */ s32 damage_recovered;
+    /* 0x108 */ u16 peak_damage;
+    /* 0x10A */ u16 match_count;
+    /* 0x10C */ u16 victories;
+    /* 0x10E */ u16 losses;
+    /* 0x110 */ u32 play_time;
+    /* 0x114 */ u32 total_player_count;
+    /* 0x118 */ s32 walk_distance;
+    /* 0x11C */ s32 run_distance;
+    /* 0x120 */ s32 fall_distance;
+    /* 0x124 */ s32 peak_height;
+    /* 0x128 */ s32 coins_collected;
+    /* 0x12C */ s32 coins_swiped;
+    /* 0x130 */ s32 coins_lost;
+    /* 0x134 */ u32 play_time_by_fighter[25];
+    /* 0x198 */ char namedata[8];
+    /* 0x1A0 */ s8 x1A0;
+    /* 0x1A1 */ u8 x1A1;
+    /* 0x1A2 */ s8 x1A2;
+    /* 0x1A3 */ u8 padding_x1A2;
 };
 
-struct gmm_x2FF8 {
-    struct gmm_x2FF8_inner inner[19];
+struct NameTagDataBank {
+    struct NameTagData inner[19];
 };
 
 struct GameRules {
@@ -170,9 +212,13 @@ struct GameRules {
     /* 0x0A */ u8 pause;
     /* 0x0B */ u8 score_display;
     /* 0x0C */ u8 unk_xc;
-    /* 0x0D */ char pad_D[3]; /* maybe part of unk_xc[4]? */
+    /* 0x0D */ u8 xD;
+    /* 0x0E */ u8 xE;
+    /* 0x0F */ u8 xF;
     /* 0x10 */ u8 unk_x10;
-    /* 0x11 */ char pad_11[3]; /* maybe part of unk_x10[4]? */
+    /* 0x11 */ u8 x11;
+    /* 0x12 */ u8 x12;
+    /* 0x13 */ u8 x13;
     /* 0x14 */ s32 unk_14;     /* inferred */
 }; /* size = 0x18 */
 STATIC_ASSERT(sizeof(struct GameRules) == 0x18);
@@ -264,8 +310,8 @@ struct gmm_x1868 {
     /* 0x046A */ s16 x1CD2;
     /* 0x046C */ s32 x1CD4;
     /* 0x0470 */ u8 padding_x1CD4[0x254];
-    /* 0x06C4 */ struct gmm_x1F2C x1F2C[0x19];
-    /* 0x1790 */ struct gmm_x2FF8 x2FF8[2];
+    /* 0x06C4 */ struct FighterData x1F2C[0x19];
+    /* 0x1760 */ struct NameTagDataBank x2FF8[2];
 }; /* size = 0x55E8 */
 
 struct gmm_x0 {

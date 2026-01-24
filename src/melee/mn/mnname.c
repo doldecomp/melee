@@ -8,12 +8,12 @@ void fn_80249A1C(HSD_GObj* arg0);
 
 /// #mnName_8023749C
 
-char* GetNameText(int slot)
+char* GetNameText(u8 slot)
 {
     if (!IsNameValid(slot)) {
         return NULL;
     }
-    return (char*) ((u8*) GetPersistentNameData((u8) slot) + 0x198);
+    return GetPersistentNameData((u8) slot)->namedata;
 }
 int GetNameCount(void)
 {

@@ -27,18 +27,14 @@ GameRules gmMainLib_803D4A48 = {
     false, // friendly fire
     true,  // pause
     0,     // score display
-    0,
-    {
-        0,
-        8,
-        8,
-    },
-    0,
-    {
-        0,
-        8,
-        0,
-    },
+    0,     // unk_xc
+    0,     // xD
+    8,     // xE
+    8,     // xF
+    0,     // unk_x10
+    0,     // x11
+    8,     // x12
+    0,     // x13
     /* unk_14 */ -1,
 };
 
@@ -95,9 +91,9 @@ struct gmm_x1CB0* gmMainLib_8015CC58(void)
     return &gmMainLib_8015CC40()->x1CB0;
 }
 
-void* GetPersistentFighterData(s32 arg0)
+struct FighterData* GetPersistentFighterData(s32 arg0)
 {
-    struct gmm_x1F2C* base = gmMainLib_804D3EE0->thing.x1F2C;
+    struct FighterData* base = gmMainLib_804D3EE0->thing.x1F2C;
     return &base[arg0];
 }
 
@@ -116,10 +112,10 @@ short* gmMainLib_8015CC90(void)
     return &gmMainLib_804D3EE0->thing.x1CD0;
 }
 
-struct gmm_x2FF8_inner* GetPersistentNameData(s32 arg0)
+struct NameTagData* GetPersistentNameData(s32 arg0)
 {
-    struct gmm_x2FF8* base = &gmMainLib_804D3EE0->thing.x2FF8[0];
-    struct gmm_x2FF8_inner* inner = base[arg0 / 19].inner;
+    struct NameTagDataBank* base = &gmMainLib_804D3EE0->thing.x2FF8[0];
+    struct NameTagData* inner = base[arg0 / 19].inner;
     return &inner[arg0 % 19];
 }
 
@@ -252,8 +248,8 @@ s8* gmMainLib_8015CE44(s32 arg0, s32 arg1)
         }
         return 0;
     } else {
-        struct gmm_x2FF8* base = &gmMainLib_804D3EE0->thing.x2FF8[0];
-        struct gmm_x2FF8_inner* inner = &base[arg1 / 19].inner[0];
+        struct NameTagDataBank* base = &gmMainLib_804D3EE0->thing.x2FF8[0];
+        struct NameTagData* inner = &base[arg1 / 19].inner[0];
         return &inner[arg1 % 19].x1A2;
     }
 }
@@ -297,7 +293,7 @@ bool gmMainLib_8015CF94(void)
 
 s8* gmMainLib_8015CFB4(u8 arg0)
 {
-    struct gmm_x1F2C* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
+    struct FighterData* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
     return &base[arg0].x78;
 }
 
@@ -310,14 +306,14 @@ void gmMainLib_8015D00C(u8 arg0)
 {
     u8 _[12];
 
-    struct gmm_x1F2C* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
+    struct FighterData* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
     base[arg0].x7A.b0 = true;
     gmMainLib_8015ED98()->xC |= 1 << arg0;
 }
 
 s32* gmMainLib_8015D06C(u8 arg0)
 {
-    struct gmm_x1F2C* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
+    struct FighterData* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
     return &base[arg0].x7C.x84;
 }
 
@@ -328,13 +324,13 @@ s32* gmMainLib_8015D084(u8 arg0)
 
 s32* gmMainLib_8015D0C0(u8 arg0)
 {
-    struct gmm_x1F2C* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
+    struct FighterData* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
     return &base[arg0].x7C.x88;
 }
 
 bool gmMainLib_8015D0D8(u8 arg0)
 {
-    struct gmm_x1F2C* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
+    struct FighterData* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
     return base[arg0].x7C.b4;
 }
 
@@ -348,38 +344,38 @@ void gmMainLib_8015D134(u8 arg0)
 {
     u8 _[12];
 
-    struct gmm_x1F2C* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
+    struct FighterData* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
     base[arg0].x7C.b4 = true;
     gmMainLib_8015ED98()->x10 |= 1 << arg0;
 }
 
 u8* gmMainLib_8015D194(u8 arg0)
 {
-    struct gmm_x1F2C* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
+    struct FighterData* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
     return &base[arg0].x7C.x80;
 }
 
 s32 gmMainLib_8015D1AC(u8 arg0)
 {
-    struct gmm_x1F2C* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
+    struct FighterData* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
     return base[arg0].x7C.b789;
 }
 
 void gmMainLib_8015D1C8(u8 arg0, int stocks)
 {
-    struct gmm_x1F2C* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
+    struct FighterData* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
     base[arg0].x7C.b789 = stocks;
 }
 
 s32* gmMainLib_8015D1E8(u8 arg0)
 {
-    struct gmm_x1F2C* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
+    struct FighterData* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
     return &base[arg0].x7C.x8C;
 }
 
 bool gmMainLib_8015D200(u8 arg0)
 {
-    struct gmm_x1F2C* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
+    struct FighterData* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
     return base[arg0].x7C.b5;
 }
 
@@ -393,38 +389,38 @@ void gmMainLib_8015D25C(u8 arg0)
 {
     u8 _[12];
 
-    struct gmm_x1F2C* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
+    struct FighterData* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
     base[arg0].x7C.b5 = true;
     gmMainLib_8015ED98()->x14 |= 1 << arg0;
 }
 
 u8* gmMainLib_8015D2BC(u8 arg0)
 {
-    struct gmm_x1F2C* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
+    struct FighterData* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
     return &base[arg0].x7C.x81;
 }
 
 s32 gmMainLib_8015D2D4(u8 arg0)
 {
-    struct gmm_x1F2C* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
+    struct FighterData* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
     return base[arg0].x7C.b10_to_12;
 }
 
 void gmMainLib_8015D2F0(u8 arg0, int stocks)
 {
-    struct gmm_x1F2C* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
+    struct FighterData* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
     base[arg0].x7C.b10_to_12 = stocks;
 }
 
 s32* gmMainLib_8015D310(u8 arg0)
 {
-    struct gmm_x1F2C* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
+    struct FighterData* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
     return &base[arg0].x7C.x90;
 }
 
 bool gmMainLib_8015D328(u8 arg0)
 {
-    struct gmm_x1F2C* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
+    struct FighterData* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
     return base[arg0].x7C.b6;
 }
 
@@ -438,32 +434,32 @@ void gmMainLib_8015D384(u8 arg0)
 {
     u8 _[12];
 
-    struct gmm_x1F2C* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
+    struct FighterData* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
     base[arg0].x7C.b6 = true;
     gmMainLib_8015ED98()->x18 |= 1 << arg0;
 }
 
 u8* gmMainLib_8015D3E4(u8 arg0)
 {
-    struct gmm_x1F2C* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
+    struct FighterData* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
     return &base[arg0].x7C.x82;
 }
 
 s32 gmMainLib_8015D3FC(u8 arg0)
 {
-    struct gmm_x1F2C* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
+    struct FighterData* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
     return base[arg0].x7C.b13_to_15;
 }
 
 void gmMainLib_8015D418(u8 arg0, int stocks)
 {
-    struct gmm_x1F2C* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
+    struct FighterData* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
     base[arg0].x7C.b13_to_15 = stocks;
 }
 
 u32* gmMainLib_8015D438(u8 arg0)
 {
-    struct gmm_x1F2C* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
+    struct FighterData* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
     return &base[arg0].x7C.x94;
 }
 
@@ -474,7 +470,7 @@ s32* gmMainLib_8015D450(u8 arg0)
 
 bool gmMainLib_8015D48C(u8 arg0)
 {
-    struct gmm_x1F2C* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
+    struct FighterData* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
     return base[arg0].x7C.b0;
 }
 
@@ -486,7 +482,7 @@ s32 gmMainLib_8015D4A8(u8 arg0)
 
 void gmMainLib_8015D4E8(u8 arg0, s32 arg1)
 {
-    struct gmm_x1F2C* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
+    struct FighterData* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
     base[arg0].x7C.b0 = arg1;
 }
 
@@ -495,7 +491,7 @@ bool gmMainLib_8015D508(void)
     struct gmm_x1868* base = &gmMainLib_804D3EE0->thing;
     s32 i;
     for (i = 0; i < 25; ++i) {
-        struct gmm_x1F2C* _x1F2C = base->x1F2C;
+        struct FighterData* _x1F2C = base->x1F2C;
         if (!_x1F2C[(u8) i].x7C.b0) {
             return false;
         }
@@ -531,79 +527,79 @@ bool gmMainLib_8015D640(void)
 
 s32* gmMainLib_8015D6A4(u8 arg0)
 {
-    struct gmm_x1F2C* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
+    struct FighterData* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
     return &base[arg0].x7C.x98;
 }
 
 bool gmMainLib_8015D6BC(u8 arg0)
 {
-    struct gmm_x1F2C* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
+    struct FighterData* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
     return base[arg0].x7C.b1;
 }
 
 void gmMainLib_8015D6D8(u8 arg0, s32 arg1)
 {
-    struct gmm_x1F2C* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
+    struct FighterData* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
     base[arg0].x7C.b1 = arg1;
 }
 
 s32* gmMainLib_8015D6F8(u8 arg0)
 {
-    struct gmm_x1F2C* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
+    struct FighterData* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
     return &base[arg0].x7C.x9C;
 }
 
 bool gmMainLib_8015D710(u8 arg0)
 {
-    struct gmm_x1F2C* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
+    struct FighterData* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
     return base[arg0].x7C.b2;
 }
 
 void gmMainLib_8015D72C(u8 arg0, s32 arg1)
 {
-    struct gmm_x1F2C* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
+    struct FighterData* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
     base[arg0].x7C.b2 = arg1;
 }
 
 u16* gmMainLib_8015D74C(u8 arg0)
 {
-    struct gmm_x1F2C* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
+    struct FighterData* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
     return &base[arg0].x7C.xA0;
 }
 
 bool gmMainLib_8015D764(u8 arg0)
 {
-    struct gmm_x1F2C* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
+    struct FighterData* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
     return base[arg0].x7C.b3;
 }
 
 void gmMainLib_8015D780(u8 arg0)
 {
-    struct gmm_x1F2C* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
+    struct FighterData* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
     base[arg0].x7C.b3 = 1;
 }
 
 u16* gmMainLib_8015D7A4(u8 arg0)
 {
-    struct gmm_x1F2C* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
+    struct FighterData* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
     return &base[arg0].x7C.xA2;
 }
 
 s32* gmMainLib_8015D7BC(u8 arg0)
 {
-    struct gmm_x1F2C* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
+    struct FighterData* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
     return &base[arg0].x7C.xA4;
 }
 
 s32* gmMainLib_8015D7D4(u8 arg0)
 {
-    struct gmm_x1F2C* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
+    struct FighterData* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
     return &base[arg0].x7C.xA8;
 }
 
 s16* gmMainLib_8015D7EC(u8 arg0)
 {
-    struct gmm_x1F2C* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
+    struct FighterData* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
     return &base[arg0].x7C.x7E;
 }
 
@@ -924,7 +920,7 @@ void gmMainLib_8015EEC8(void)
     PAD_STACK(0x10);
 
     for (i = 0; i < 0x19; i++) {
-        struct gmm_x1F2C* data = GetPersistentFighterData(i);
+        struct FighterData* data = GetPersistentFighterData(i);
         memzero(&data->x7C, sizeof(data->x7C));
     }
     memzero(&gmMainLib_804D3EE0->thing.x1A68, 0xD8);
