@@ -13,7 +13,7 @@ char* GetNameText(int slot)
     if (!IsNameValid(slot)) {
         return NULL;
     }
-    return (char*) ((u8*) GetPersistentNameData((u8) slot) + 0x198);
+    return GetPersistentNameData((u8) slot)->namedata;
 }
 int GetNameCount(void)
 {

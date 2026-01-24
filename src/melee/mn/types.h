@@ -415,6 +415,24 @@ struct AnimLoopSettings {
     /* +08 */ f32 loop_frame; ///< if this is -0.1f, dont loop
 };
 
+/// User data for VS Records diagram screen (mnDiagram)
+struct Diagram {
+    /* 0x00 */ u8 saved_menu; ///< Saved menu ID on entry
+    /* 0x01 */ u8 pad_1;
+    /* 0x02 */ u16 saved_selection; ///< Saved hovered selection on entry
+    /* 0x04 */ u8 anim_state;       ///< 0 = idle, 1 = intro anim playing
+    /* 0x05 */ u8 pad_5[3];
+    /* 0x08 */ HSD_JObj* jobjs[13]; ///< JObj references, filled by lb_80011E24
+    /* 0x3C */ u16
+        fighter_cursor_pos;          ///< Fighter mode cursor (row << 8 | col)
+    /* 0x3E */ u16 name_cursor_pos;  ///< Name mode cursor (row << 8 | col)
+    /* 0x40 */ HSD_GObj* popup_gobj; ///< Popup window GObj (or NULL)
+    /* 0x44 */ u8 is_name_mode;      ///< 0 = fighter mode, 1 = name mode
+    /* 0x45 */ u8 pad_45[3];
+    /* 0x48 */ HSD_Text* col_header_text; ///< Column header text object
+    /* 0x4C */ HSD_Text* row_header_text; ///< Row header text object
+};
+
 struct MenuKindData {
     AnimLoopSettings* anim_loop;
     float start_frame;
