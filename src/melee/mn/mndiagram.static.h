@@ -11,6 +11,7 @@
 #include <melee/lb/lblanguage.h>
 #include <melee/mn/mnmain.h>
 #include <melee/mn/mnname.h>
+#include <melee/mn/types.h>
 
 extern char mnDiagram_804D4FA4;
 extern SDATA char mnDiagram_804D4FA8[];
