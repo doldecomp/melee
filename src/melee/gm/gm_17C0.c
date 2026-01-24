@@ -50,24 +50,27 @@ struct lbl_80472E48_t {
 STATIC_ASSERT(sizeof(struct lbl_80472E48_t) == 0x80);
 
 /// Adventure mode stage data table entry (size 0x1A)
+/// Table has 110 entries: 22 stages × 5 difficulty levels
+/// Indexed as: difficulty * 5 + stage_slot
 typedef struct AdventureStageEntry {
-    /* 0x00 */ u8 x0;
+    /* 0x00 */ u8 stage_kind;
     /* 0x01 */ u8 pad_1;
-    /* 0x02 */ u16 x2;
-    /* 0x04 */ u16 x4;
+    /* 0x02 */ u16 scale0_pct;  ///< Divided by 100 to get ratio
+    /* 0x04 */ u16 scale1_pct;  ///< Divided by 100 to get ratio
     /* 0x06 */ u8 pad_6[0x14];
 } AdventureStageEntry;
 STATIC_ASSERT(sizeof(AdventureStageEntry) == 0x1A);
 
 /// Allstar mode stage data table entry (size 0x1A)
+/// Table has 55 entries: 11 stages × 5 difficulty levels
 typedef struct AllstarStageEntry {
-    /* 0x00 */ u8 x0;
+    /* 0x00 */ u8 stage_kind;
     /* 0x01 */ u8 pad_1;
-    /* 0x02 */ u16 x2;
-    /* 0x04 */ u16 x4;
+    /* 0x02 */ u16 scale0_pct;  ///< Divided by 100 to get ratio
+    /* 0x04 */ u16 scale1_pct;  ///< Divided by 100 to get ratio
     /* 0x06 */ u8 pad_6[0xA];
-    /* 0x10 */ u16 x10;
-    /* 0x12 */ u16 x12;
+    /* 0x10 */ u16 scale2_pct;  ///< Divided by 100 to get ratio
+    /* 0x12 */ u16 scale3_pct;  ///< Divided by 100 to get ratio
     /* 0x14 */ u8 pad_14[0x6];
 } AllstarStageEntry;
 STATIC_ASSERT(sizeof(AllstarStageEntry) == 0x1A);
@@ -715,19 +718,24 @@ int gm_8017E48C(MinorScene* scene)
 
 /// #gm_8017E4C4
 
-u8 gm_8017E500(int arg0, u8 arg1)
+/// Get adventure stage kind for given difficulty and stage slot.
+/// The (u8) cast on difficulty is required - these functions are called
+/// via function pointers typed as f32(*)(int, u8) in UnkAdventureData.
+u8 gm_8017E500(int difficulty, u8 stage_slot)
 {
-    return lbl_803D7AC0[arg1 + ((u8) arg0 * 5)].x0;
+    return lbl_803D7AC0[stage_slot + ((u8) difficulty * 5)].stage_kind;
 }
 
-f32 gm_8017E528(int arg0, u8 arg1)
+f32 gm_8017E528(int difficulty, u8 stage_slot)
 {
-    return (f32) lbl_803D7AC0[arg1 + ((u8) arg0 * 5)].x2 / 100.0F;
+    return (f32) lbl_803D7AC0[stage_slot + ((u8) difficulty * 5)].scale0_pct /
+           100.0F;
 }
 
-f32 gm_8017E578(int arg0, u8 arg1)
+f32 gm_8017E578(int difficulty, u8 stage_slot)
 {
-    return (f32) lbl_803D7AC0[arg1 + ((u8) arg0 * 5)].x4 / 100.0F;
+    return (f32) lbl_803D7AC0[stage_slot + ((u8) difficulty * 5)].scale1_pct /
+           100.0F;
 }
 
 /// #gm_8017E5C8
@@ -736,14 +744,14 @@ f32 gm_8017E578(int arg0, u8 arg1)
 
 /// #gm_8017E630
 
-f32 gm_8017E664(u8 arg0, u8 arg1)
+f32 gm_8017E664(u8 difficulty, u8 stage_slot)
 {
-    return (f32) lbl_803D7AC0[arg1 + (arg0 * 5)].x2 / 100.0F;
+    return (f32) lbl_803D7AC0[stage_slot + (difficulty * 5)].scale0_pct / 100.0F;
 }
 
-f32 gm_8017E6B4(u8 arg0, u8 arg1)
+f32 gm_8017E6B4(u8 difficulty, u8 stage_slot)
 {
-    return (f32) lbl_803D7AC0[arg1 + (arg0 * 5)].x4 / 100.0F;
+    return (f32) lbl_803D7AC0[stage_slot + (difficulty * 5)].scale1_pct / 100.0F;
 }
 
 /// #gm_8017E704
@@ -768,9 +776,9 @@ UnkAllstarData* gm_8017EB30(void)
     return &lbl_80472CB0;
 }
 
-u8 gm_8017EB3C(u8 arg0, u8 arg1)
+u8 gm_8017EB3C(u8 difficulty, u8 stage_slot)
 {
-    return lbl_803D85F0[arg1 + (arg0 * 5)].x0;
+    return lbl_803D85F0[stage_slot + (difficulty * 5)].stage_kind;
 }
 
 /// #gm_8017EB64
@@ -779,14 +787,14 @@ u8 gm_8017EB3C(u8 arg0, u8 arg1)
 
 /// #gm_8017EBCC
 
-f32 gm_8017EC00(u8 arg0, u8 arg1)
+f32 gm_8017EC00(u8 difficulty, u8 stage_slot)
 {
-    return (f32) lbl_803D85F0[arg1 + (arg0 * 5)].x10 / 100.0F;
+    return (f32) lbl_803D85F0[stage_slot + (difficulty * 5)].scale2_pct / 100.0F;
 }
 
-f32 gm_8017EC50(u8 arg0, u8 arg1)
+f32 gm_8017EC50(u8 difficulty, u8 stage_slot)
 {
-    return (f32) lbl_803D85F0[arg1 + (arg0 * 5)].x12 / 100.0F;
+    return (f32) lbl_803D85F0[stage_slot + (difficulty * 5)].scale3_pct / 100.0F;
 }
 
 /// #gm_8017ECA0
@@ -795,14 +803,14 @@ f32 gm_8017EC50(u8 arg0, u8 arg1)
 
 /// #gm_8017ED08
 
-f32 gm_8017ED3C(u8 arg0, u8 arg1)
+f32 gm_8017ED3C(u8 difficulty, u8 stage_slot)
 {
-    return (f32) lbl_803D85F0[arg1 + (arg0 * 5)].x2 / 100.0F;
+    return (f32) lbl_803D85F0[stage_slot + (difficulty * 5)].scale0_pct / 100.0F;
 }
 
-f32 gm_8017ED8C(u8 arg0, u8 arg1)
+f32 gm_8017ED8C(u8 difficulty, u8 stage_slot)
 {
-    return (f32) lbl_803D85F0[arg1 + (arg0 * 5)].x4 / 100.0F;
+    return (f32) lbl_803D85F0[stage_slot + (difficulty * 5)].scale1_pct / 100.0F;
 }
 
 /// #fn_8017EDDC

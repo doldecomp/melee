@@ -121,17 +121,17 @@ void mnName_802385A0(HSD_GObj* gobj)
 extern char** NotAllowedNamesList;
 extern char mnNameNew_NullCharacter;
 
-s32 IsNameNotAllowed(s32 arg0)
+bool IsNameNotAllowed(s32 name_idx)
 {
     char** list = NotAllowedNamesList;
 
 loop:
     if ((s8) mnNameNew_NullCharacter != (s8) **list) {
-        if (CompareNameStrings(*list, arg0) == 0) {
-            return 1;
+        if (CompareNameStrings(*list, name_idx) == 0) {
+            return true;
         }
         list++;
         goto loop;
     }
-    return 0;
+    return false;
 }

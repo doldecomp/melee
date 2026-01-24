@@ -43,6 +43,6 @@
 /* 23A59C */ UNK_RET mnName_8023A59C(UNK_PARAMS);
 /* 23A9B4 */ UNK_RET mnName_8023A9B4(UNK_PARAMS);
 /* 23AC40 */ UNK_RET mnName_8023AC40(UNK_PARAMS);
-/* 23B084 */ s32 IsNameNotAllowed(s32 arg0);
+/* 23B084 */ bool IsNameNotAllowed(s32 name_idx);
 
 #endif
