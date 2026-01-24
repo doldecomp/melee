@@ -84,7 +84,7 @@
 /* 1E24AC */ void smashTaunt_801E24AC(Ground_GObj*, int);
 /* 1E2550 */ void smashTaunt_801E2550(Ground_GObj*,
                                       struct grSmashTaunt_GroundVars*);
-/* 1E2598 */ bool grCorneria_801E2598(int, int);
+/* 1E2598 */ UNK_RET grCorneria_801E2598(UNK_PARAMS);
 /* 1E25C4 */ UNK_RET grCorneria_801E25C4(UNK_PARAMS);
 /* 1E2738 */ UNK_RET grCorneria_801E2738(UNK_PARAMS);
 /* 1E277C */ void grCorneria_801E277C(Ground_GObj*,

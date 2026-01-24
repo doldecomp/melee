@@ -122,14 +122,6 @@ void grCorneria_801DD65C(Ground_GObj* gobj)
 extern int grCn_803E1FE8[];
 extern int grCn_803E2000[];
 
-typedef struct grCn_Unk {
-    int x0;
-    int x4;
-    int x8;
-} grCn_Unk;
-
-extern grCn_Unk grCn_803E2204[20][5];
-
 void grCorneria_801DD674(Ground_GObj* ground_gobj)
 {
     Vec3 translate;
@@ -584,10 +576,7 @@ void smashTaunt_801E2550(Ground_GObj* gobj, struct grSmashTaunt_GroundVars* gv)
     gobj->render_cb = smashTaunt_801E24AC;
 }
 
-bool grCorneria_801E2598(int arg0, int arg1)
-{
-    return grCn_803E2204[arg0][arg1].x0 != 0;
-}
+/// #grCorneria_801E2598
 
 /// #grCorneria_801E25C4
 
