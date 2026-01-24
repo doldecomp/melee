@@ -675,7 +675,7 @@ u32* gmMainLib_8015D970(ssize_t idx)
 // register swap
 bool gmMainLib_8015D984(u32 arg0)
 {
-    u8 _[16];
+    PAD_STACK(16);
 
     if (gmMainLib_8015DA90(arg0) == 0) {
         u32* base = &gmMainLib_804D3EE0->unk_6C[0];
