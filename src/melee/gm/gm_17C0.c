@@ -49,6 +49,32 @@ struct lbl_80472E48_t {
 }; /* size = 0x80 */
 STATIC_ASSERT(sizeof(struct lbl_80472E48_t) == 0x80);
 
+/// Adventure mode stage data table entry (size 0x1A)
+typedef struct AdventureStageEntry {
+    /* 0x00 */ u8 x0;
+    /* 0x01 */ u8 pad_1;
+    /* 0x02 */ u16 x2;
+    /* 0x04 */ u16 x4;
+    /* 0x06 */ u8 pad_6[0x14];
+} AdventureStageEntry;
+STATIC_ASSERT(sizeof(AdventureStageEntry) == 0x1A);
+
+/// Allstar mode stage data table entry (size 0x1A)
+typedef struct AllstarStageEntry {
+    /* 0x00 */ u8 x0;
+    /* 0x01 */ u8 pad_1;
+    /* 0x02 */ u16 x2;
+    /* 0x04 */ u16 x4;
+    /* 0x06 */ u8 pad_6[0xA];
+    /* 0x10 */ u16 x10;
+    /* 0x12 */ u16 x12;
+    /* 0x14 */ u8 pad_14[0x6];
+} AllstarStageEntry;
+STATIC_ASSERT(sizeof(AllstarStageEntry) == 0x1A);
+
+extern AdventureStageEntry lbl_803D7AC0[110];
+extern AllstarStageEntry lbl_803D85F0[55];
+
 static struct lbl_804706C0_t {
     int x0;
     int x4;
@@ -689,11 +715,20 @@ int gm_8017E48C(MinorScene* scene)
 
 /// #gm_8017E4C4
 
-/// #gm_8017E500
+u8 gm_8017E500(int arg0, u8 arg1)
+{
+    return lbl_803D7AC0[arg1 + ((u8) arg0 * 5)].x0;
+}
 
-/// #gm_8017E528
+f32 gm_8017E528(int arg0, u8 arg1)
+{
+    return (f32) lbl_803D7AC0[arg1 + ((u8) arg0 * 5)].x2 / 100.0F;
+}
 
-/// #gm_8017E578
+f32 gm_8017E578(int arg0, u8 arg1)
+{
+    return (f32) lbl_803D7AC0[arg1 + ((u8) arg0 * 5)].x4 / 100.0F;
+}
 
 /// #gm_8017E5C8
 
@@ -701,9 +736,15 @@ int gm_8017E48C(MinorScene* scene)
 
 /// #gm_8017E630
 
-/// #gm_8017E664
+f32 gm_8017E664(u8 arg0, u8 arg1)
+{
+    return (f32) lbl_803D7AC0[arg1 + (arg0 * 5)].x2 / 100.0F;
+}
 
-/// #gm_8017E6B4
+f32 gm_8017E6B4(u8 arg0, u8 arg1)
+{
+    return (f32) lbl_803D7AC0[arg1 + (arg0 * 5)].x4 / 100.0F;
+}
 
 /// #gm_8017E704
 
@@ -727,7 +768,10 @@ UnkAllstarData* gm_8017EB30(void)
     return &lbl_80472CB0;
 }
 
-/// #gm_8017EB3C
+u8 gm_8017EB3C(u8 arg0, u8 arg1)
+{
+    return lbl_803D85F0[arg1 + (arg0 * 5)].x0;
+}
 
 /// #gm_8017EB64
 
@@ -735,9 +779,15 @@ UnkAllstarData* gm_8017EB30(void)
 
 /// #gm_8017EBCC
 
-/// #gm_8017EC00
+f32 gm_8017EC00(u8 arg0, u8 arg1)
+{
+    return (f32) lbl_803D85F0[arg1 + (arg0 * 5)].x10 / 100.0F;
+}
 
-/// #gm_8017EC50
+f32 gm_8017EC50(u8 arg0, u8 arg1)
+{
+    return (f32) lbl_803D85F0[arg1 + (arg0 * 5)].x12 / 100.0F;
+}
 
 /// #gm_8017ECA0
 
@@ -745,9 +795,15 @@ UnkAllstarData* gm_8017EB30(void)
 
 /// #gm_8017ED08
 
-/// #gm_8017ED3C
+f32 gm_8017ED3C(u8 arg0, u8 arg1)
+{
+    return (f32) lbl_803D85F0[arg1 + (arg0 * 5)].x2 / 100.0F;
+}
 
-/// #gm_8017ED8C
+f32 gm_8017ED8C(u8 arg0, u8 arg1)
+{
+    return (f32) lbl_803D85F0[arg1 + (arg0 * 5)].x4 / 100.0F;
+}
 
 /// #fn_8017EDDC
 
