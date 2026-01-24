@@ -881,7 +881,7 @@ void mnDiagram2_UpdateScrollArrows(HSD_GObj* gobj)
 
     jobj = data->down_arrow;
     mn_8022ED6C(jobj, table);
-    if (data->is_name_mode != 0) {
+    if (data->is_name_mode) {
         if (data->scroll_offset + 10 < 0x18) {
             HSD_JObjClearFlagsAll(jobj, 0x10);
         } else {
@@ -897,7 +897,7 @@ void mnDiagram2_UpdateScrollArrows(HSD_GObj* gobj)
 
     jobj = data->up_arrow;
     mn_8022ED6C(jobj, table);
-    if (data->scroll_offset != 0) {
+    if (data->scroll_offset) {
         HSD_JObjClearFlagsAll(jobj, 0x10);
     } else {
         HSD_JObjSetFlagsAll(jobj, 0x10);
@@ -905,8 +905,8 @@ void mnDiagram2_UpdateScrollArrows(HSD_GObj* gobj)
 
     jobj = data->left_arrow;
     mn_8022ED6C(jobj, table);
-    if (data->is_name_mode != 0) {
-        if (data->selected_name_idx != 0) {
+    if (data->is_name_mode) {
+        if (data->selected_name_idx) {
             HSD_JObjClearFlagsAll(jobj, 0x10);
         } else {
             HSD_JObjSetFlagsAll(jobj, 0x10);
@@ -985,8 +985,8 @@ void mnDiagram2_FreeUserData(Diagram2* data)
 void mnDiagram2_InitUserData(void* arg)
 {
     Diagram2* data = arg;
-    int zero;
     u8* src = (u8*) &mn_804A04F0;
+    int i;
 
     data->saved_menu = src[0];
     data->saved_selection = *(u16*) (src + 2);
@@ -994,50 +994,12 @@ void mnDiagram2_InitUserData(void* arg)
     data->scroll_offset = 0;
     data->selected_fighter_idx = 0;
     data->selected_name_idx = 0;
+    data->is_name_mode = gmMainLib_8015CC34()->xD;
 
-    {
-        GameRules* rules = gmMainLib_8015CC34();
-        data->is_name_mode = rules->xD;
-    }
-
-    zero = 0;
-    data->row_labels[0] = NULL;
-    data->row_values[0] = NULL;
-    data->row_icons[0] = NULL;
-    data->row_labels[1] = NULL;
-    data->row_values[1] = NULL;
-    data->row_icons[1] = NULL;
-    data->row_labels[2] = NULL;
-    data->row_values[2] = NULL;
-    data->row_icons[2] = NULL;
-    data->row_labels[3] = NULL;
-    data->row_values[3] = NULL;
-    data->row_icons[3] = NULL;
-    data->row_labels[4] = NULL;
-    data->row_values[4] = NULL;
-    data->row_icons[4] = NULL;
-    data->row_labels[5] = NULL;
-    data->row_values[5] = NULL;
-    data->row_icons[5] = NULL;
-    data->row_labels[6] = NULL;
-    data->row_values[6] = NULL;
-    data->row_icons[6] = NULL;
-    data->row_labels[7] = NULL;
-    data->row_values[7] = NULL;
-    data->row_icons[7] = NULL;
-
-    {
-        int i = 8;
-        Diagram2* ptr = (Diagram2*) ((u8*) data + (i << 2));
-        int n = 10 - i;
-        if (i < 10) {
-            do {
-                ptr->row_labels[0] = NULL;
-                ptr->row_values[0] = NULL;
-                ptr->row_icons[0] = NULL;
-                ptr = (Diagram2*) ((u8*) ptr + 4);
-            } while (--n);
-        }
+    for (i = 0; i < 10; i++) {
+        data->row_labels[i] = NULL;
+        data->row_values[i] = NULL;
+        data->row_icons[i] = NULL;
     }
 
     data->header_text = NULL;
@@ -1053,14 +1015,12 @@ void mnDiagram2_Create(int arg0)
     HSD_JObj* jobj;
     Diagram2* data;
     int i;
-    u32 x48;
     int threshold;
     u32 var_r29;
     int idx;
     u8 x46_or_x47;
-    int j;
+    int offset;
     Diagram2* user_data;
-    PAD_STACK(8);
 
     gobj = GObj_Create(6, 7, 0x80);
     mnDiagram2_804D6C18 = gobj;
@@ -1085,42 +1045,28 @@ void mnDiagram2_Create(int arg0)
 
     HSD_GObjProc_8038FD54(gobj, mnDiagram2_Think, 0);
 
-    x48 = data->is_name_mode;
-    if (x48 != 0) {
+    if (data->is_name_mode) {
         x46_or_x47 = data->selected_name_idx;
-    } else {
-        x46_or_x47 = data->selected_fighter_idx;
-    }
-
-    idx = (u8) data->scroll_offset;
-    if (x48 != 0) {
         var_r29 = (u8) mnDiagram_GetNameByIndex(x46_or_x47);
-    } else {
-        var_r29 = (u8) mnDiagram_GetFighterByIndex(x46_or_x47);
-    }
-
-    if (x48 != 0) {
         threshold = 0x18;
     } else {
+        x46_or_x47 = data->selected_fighter_idx;
+        var_r29 = (u8) mnDiagram_GetFighterByIndex(x46_or_x47);
         threshold = 0x15;
     }
 
-    j = 0;
-    do {
-        int offset;
+    idx = (u8) data->scroll_offset;
+    for (i = 0; i < 10; i++) {
         if (idx >= threshold) {
             offset = idx - threshold;
         } else {
             offset = idx;
         }
-        mnDiagram2_CreateStatRow(gobj, x48, offset, j, var_r29);
-        j++;
-        idx++;
-    } while (j < 10);
+        mnDiagram2_CreateStatRow(gobj, data->is_name_mode, offset, i, var_r29);
+    }
 
-    x48 = data->is_name_mode;
     user_data = gobj->user_data;
-    if (x48 != 0) {
+    if (data->is_name_mode) {
         HSD_JObjSetFlagsAll(user_data->fighter_mode_header, 0x10);
         HSD_JObjClearFlagsAll(user_data->name_mode_header, 0x10);
     } else {
@@ -1128,12 +1074,12 @@ void mnDiagram2_Create(int arg0)
         HSD_JObjSetFlagsAll(user_data->name_mode_header, 0x10);
     }
 
-    if (x48 != 0) {
+    if (data->is_name_mode) {
         x46_or_x47 = user_data->selected_name_idx;
     } else {
         x46_or_x47 = user_data->selected_fighter_idx;
     }
-    mnDiagram2_UpdateHeader(gobj, x48, x46_or_x47);
+    mnDiagram2_UpdateHeader(gobj, data->is_name_mode, x46_or_x47);
 }
 
 /// @brief Entry point for VS Records page 2 - initializes diagram and input
@@ -1150,6 +1096,7 @@ void mnDiagram2_Init(void)
                                  mnDiagram2_HandleInput, 0);
     gobj->flags_3 = HSD_GObj_804D783C;
 }
+
 /// @brief Returns the fighter at rank N for a given stat type.
 /// @param stat_type The stat type to rank by
 /// @param rank The rank to retrieve (0 = highest, 1 = second highest, etc.)
@@ -1176,7 +1123,7 @@ u8 mnDiagram2_GetRankedFighter(u8 stat_type, u8 rank)
     zero = 0;
     neg1 = -1;
 
-    do {
+    for (i = 0; i < 25; i++) {
         name = mnDiagram_GetFighterByIndex(i);
         ptr->name = name;
         if (mn_IsFighterUnlocked(name) != 0) {
@@ -1186,9 +1133,7 @@ u8 mnDiagram2_GetRankedFighter(u8 stat_type, u8 rank)
             ptr->xC = neg1;
             ptr->x8 = neg1;
         }
-        i++;
-        ptr++;
-    } while (i < 25);
+    }
 
     // Selection sort with -1 handling
     i = 0;
