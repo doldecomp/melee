@@ -435,68 +435,45 @@ void gm_801B607C(MinorScene* unused)
     gm_801A42D4();
 }
 
-gm_803DEBE8_t gm_803DEBE8[0x19] = {
-    { 0xB1, 0xB1, 0, 8 },
-    { 0xB2, 0xB2, 0, 1 },
-    { 0xB3, 0xB3, 0, 6 },
-    { 0xB4, 0xB4, 0, 0x10 },
-    { 0xB5, 0xB5, 0, 0x11 },
-    { 0xB6, 0xB6, 0, 4 },
-    { 0xB7, 0xB7, 0, 2 },
-    { 0xB8, 0xB8, 0, 0xD },
-    { 0xB9, 0xB9, 0, 7 },
-    { 0xBA, 0xBA, 0, 0 },
-    { 0xBB, 0xBB, 0, 0xB },
-    { 0xBC, 0xBC, 0, 0xF },
-    { 0xBD, 0xBD, 0, 0xE },
-    { 0xBE, 0xBE, 0, 0xC },
-    { 0xBF, 0xBF, 0, 0x12 },
-    { 0xC0, 0xC0, 0, 9 },
-    { 0xC1, 0xC1, 0, 0xA },
-    { 0xC2, 0xC2, 0, 5 },
-    { 0xC3, 0xC3, 0, 0x16 },
-    { 0xC4, 0xC4, 0, 0x15 },
-    { 0xC5, 0xC5, 0, 0x14 },
-    { 0xC6, 0xC6, 0, 0x18 },
-    { 0xC7, 0xC7, 0, 0x17 },
-    { 0xC9, 0xC9, 0, 0x19 },
-    { 0xC8, 0xC8, 0, 3 },
-};
-
 void gm_801B60A4_OnLoad(void)
 {
-    UnkAllstarData *data;
+    UnkAllstarData* data;
+    gm_803DEBE8_t* arr;
     gm_803DEBE8_t* var_r29;
     gm_803DEBE8_t* var_r30;
-    gm_80490940_t* var_r3;
-    s32 i;
+    u8* ptr;
+    u32 i;
     int temp;
     u32 var_r28;
-    gmMainLib_8015CDE0();
+    PAD_STACK(8);
+
     data = &gm_80473A18;
+    gmMainLib_8015CDE0();
     gm_8017C984(data);
-    {
-        gm_80490940_t* ptr = gm_80490940;
-        gm_80490940_t* end = ptr + 5;
-        do {
-            ptr->x0 = 0;
-            ptr->x1 = 0;
-            ptr->x2 = 0;
-            ptr->x3 = 0;
-            ptr->x4 = 0;
-        } while (++ptr < end);
-    }
+
+    i = 5;
+    ptr = (u8*) gm_80490940;
+    do {
+        ptr[0] = 0;
+        ptr[1] = 0;
+        ptr[2] = 0;
+        ptr[3] = 0;
+        ptr[4] = 0;
+        ptr += 5;
+    } while (--i != 0);
+
     gm_8017DB58(data->x0.xC.x24);
-    gm_80473A18.x0.slot = gm_801677F0();
-    gm_80473A18.x48 = gm_8018A160;
-    gm_80473A18.x4C = gm_8018A228;
-    gm_80473A18.x50 = gm_8018A290;
-    gm_80473A18.x54 = gm_8018A25C;
-    gm_80473A18.x58 = 0;
-    gm_80473A18.x64 = gm_8018A2C4;
-    gm_80473A18.x68 = gm_8018A314;
+    data->x0.slot = gm_801677F0();
+    data->x48 = gm_8018A160;
+    data->x4C = gm_8018A228;
+    data->x50 = gm_8018A290;
+    data->x54 = gm_8018A25C;
+    data->x58 = 0;
+    data->x64 = gm_8018A2C4;
     var_r29 = gm_803DEBE8;
-    var_r30 = gm_803DEBE8;
+    data->x68 = gm_8018A314;
+
+    var_r30 = var_r29;
     for (var_r28 = 0; var_r28 < 25; var_r28++) {
         var_r30->x2 = *((&var_r30->x0) + HSD_Randi(2));
         var_r30++;
@@ -512,51 +489,53 @@ void gm_801B60A4_OnLoad(void)
     }
 
     temp = 0x21;
-    gm_80473A18.x74 = 0;
-    gm_80473A18.x9C = 0;
-    gm_80473A18.x76[0] = temp;
-    gm_80473A18.x76[1] = temp;
-    gm_80473A18.x76[2] = temp;
-    gm_80473A18.x76[3] = temp;
-    gm_80473A18.x76[4] = temp;
-    gm_80473A18.x76[5] = temp;
-    gm_80473A18.x76[6] = temp;
-    gm_80473A18.x76[7] = temp;
-    gm_80473A18.x76[8] = temp;
-    gm_80473A18.x76[9] = temp;
-    gm_80473A18.x76[0xA] = temp;
-    gm_80473A18.x76[0xB] = temp;
-    gm_80473A18.x76[0xC] = temp;
-    gm_80473A18.x76[0xD] = temp;
-    gm_80473A18.x76[0xE] = temp;
-    gm_80473A18.x76[0xF] = temp;
-    gm_80473A18.x76[0x10] = temp;
-    gm_80473A18.x76[0x11] = temp;
-    gm_80473A18.x76[0x12] = temp;
-    gm_80473A18.x76[0x13] = temp;
-    gm_80473A18.x76[0x14] = temp;
-    gm_80473A18.x76[0x15] = temp;
-    gm_80473A18.x76[0x16] = temp;
-    gm_80473A18.x76[0x17] = temp;
+    data->x74 = 0;
+    data->x9C = 0;
+    data->x76[0] = temp;
+    data->x76[1] = temp;
+    data->x76[2] = temp;
+    data->x76[3] = temp;
+    data->x76[4] = temp;
+    data->x76[5] = temp;
+    data->x76[6] = temp;
+    data->x76[7] = temp;
+    data->x76[8] = temp;
+    data->x76[9] = temp;
+    data->x76[0xA] = temp;
+    data->x76[0xB] = temp;
+    data->x76[0xC] = temp;
+    data->x76[0xD] = temp;
+    data->x76[0xE] = temp;
+    data->x76[0xF] = temp;
+    data->x76[0x10] = temp;
+    data->x76[0x11] = temp;
+    data->x76[0x12] = temp;
+    data->x76[0x13] = temp;
+    data->x76[0x14] = temp;
+    data->x76[0x15] = temp;
+    data->x76[0x16] = temp;
+    data->x76[0x17] = temp;
 
     temp = 0x1A;
     {
-        u8* ptr = ((u8*) (&gm_80473A18)) + 0x18;
+        u8* p = ((u8*) data) + 0x18;
         i = temp - 0x18;
         if (0x18 < temp) {
             do {
-                *(ptr + 0x76) = temp;
-                ptr++;
+                *(p + 0x76) = temp;
+                p++;
             } while ((--i) != 0);
         }
     }
+
     {
-        u8* ptr = &gm_80473A18.x90[0];
-        gm_80473A18.x90[0] = 1;
-        ptr[1] = 1;
-        ptr[2] = 1;
-        ptr[3] = 1;
+        u8* p = &data->x90[0];
+        data->x90[0] = 1;
+        p[1] = 1;
+        p[2] = 1;
+        p[3] = 1;
     }
+
     gm_SetSceneMinor(0x70U);
     gm_80172174();
     Ground_801C5A28();
