@@ -8,7 +8,7 @@
 #include <stdbool.h>
 
 /* 23749C */ UNK_RET mnName_8023749C(UNK_PARAMS);
-/* 23754C */ char* GetNameText(u8 slot);
+/* 23754C */ char* GetNameText(int slot);
 /* 237594 */ int GetNameCount(void);
 /* 2375EC */ bool IsNameListFull(void);
 /* 237654 */ UNK_RET CompareNameStrings(UNK_PARAMS);

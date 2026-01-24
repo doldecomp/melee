@@ -8,7 +8,7 @@ void fn_80249A1C(HSD_GObj* arg0);
 
 /// #mnName_8023749C
 
-char* GetNameText(u8 slot)
+char* GetNameText(int slot)
 {
     if (!IsNameValid(slot)) {
         return NULL;
