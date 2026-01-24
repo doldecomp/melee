@@ -745,11 +745,20 @@ u8 gm_8017EB3C(u8 arg0, u8 arg1)
     return gm_803DEBB0[arg0 * 5 + arg1][0];
 }
 
-/// #gm_8017EB64
+u8 gm_8017EB64(u8 arg0, u8 arg1, u8 arg2)
+{
+    return gm_803DEBB0[arg0 * 5 + arg1][arg2 * 3 + 6];
+}
 
-/// #gm_8017EB98
+u8 gm_8017EB98(u8 arg0, u8 arg1, u8 arg2)
+{
+    return gm_803DEBB0[arg0 * 5 + arg1][arg2 * 3 + 7];
+}
 
-/// #gm_8017EBCC
+u8 gm_8017EBCC(u8 arg0, u8 arg1, u8 arg2)
+{
+    return gm_803DEBB0[arg0 * 5 + arg1][arg2 * 3 + 8];
+}
 
 /// #gm_8017EC00
 
