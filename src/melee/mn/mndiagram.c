@@ -21,6 +21,10 @@
 #include "mn/mnmain.h"
 #include "mn/mnname.h"
 
+/// BSS variables - sorted player arrays
+struct mnDiagram_804A0750_t mnDiagram_804A0750;
+struct mnDiagram_804A076C_t mnDiagram_804A076C;
+
 /// @brief Gets the fighter ID at the given sorted index.
 /// @param idx Index into the sorted fighter list
 /// @return Fighter ID
