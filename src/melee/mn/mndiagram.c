@@ -1397,7 +1397,7 @@ void mnDiagram_OnFrame(HSD_GObj* gobj)
         }
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
         proc = HSD_GObjProc_8038FD54(gobj, mnDiagram_ExitAnimProc, 0);
-        proc->flags_4 = HSD_GObj_804D783C;
+        proc->flags_3 = HSD_GObj_804D783C;
         HSD_JObjSetFlagsAll(data->jobjs[2], 0x10);
         mnDiagram_80241668(gobj);
         return;
