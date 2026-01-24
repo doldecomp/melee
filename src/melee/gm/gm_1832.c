@@ -499,31 +499,17 @@ int gm_80188454(int idx)
 
 /// #fn_8018A000
 
-extern u8 gm_803DED40[50][16];
-
-u8 gm_8018A160(u8 arg0, u8 arg1)
-{
-    return gm_803DED40[arg0 * 5 + arg1][0];
-}
+/// #gm_8018A160
 
 /// #gm_8018A188
 
 /// #gm_8018A1D8
 
-u8 gm_8018A228(u8 arg0, u8 arg1, u8 arg2)
-{
-    return gm_803DED40[arg0 * 5 + arg1][arg2 * 3 + 6];
-}
+/// #gm_8018A228
 
-u8 gm_8018A25C(u8 arg0, u8 arg1, u8 arg2)
-{
-    return gm_803DED40[arg0 * 5 + arg1][arg2 * 3 + 7];
-}
+/// #gm_8018A25C
 
-u8 gm_8018A290(u8 arg0, u8 arg1, u8 arg2)
-{
-    return gm_803DED40[arg0 * 5 + arg1][arg2 * 3 + 8];
-}
+/// #gm_8018A290
 
 /// #gm_8018A2C4
 
