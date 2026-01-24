@@ -2285,13 +2285,7 @@ UNK_T gm_80169540(void)
     return &M2C_FIELD(&lbl_8046B488, UNK_T*, 0x124);
 }
 
-/// FAKE MATCH: This convoluted expression was written to force specific
-/// register allocation. Original code likely used a local variable and
-/// separate array accesses. Needs proper struct definition for lbl_8046B488.
-void fn_80169550(int slot)
-{
-    ((s8*) &lbl_8046B488)[((s8*) &lbl_8046B488)[slot + 0x1A6] + 0x20] = -1;
-}
+/// #fn_80169550
 
 /// #fn_80169574
 

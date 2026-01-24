@@ -689,50 +689,27 @@ int gm_8017E48C(MinorScene* scene)
 
 /// #gm_8017E4C4
 
-extern u8 gm_803DE920[50][26];
-
-u8 gm_8017E500(u8 arg0, u8 arg1)
-{
-    return gm_803DE920[arg0 * 5 + arg1][0];
-}
+/// #gm_8017E500
 
 /// #gm_8017E528
 
 /// #gm_8017E578
 
-u8 gm_8017E5C8(int arg0, u8 arg1, u8 arg2)
-{
-    return gm_803DE920[(u8) arg0 * 5 + arg1][arg2 * 3 + 6];
-}
+/// #gm_8017E5C8
 
-u8 gm_8017E5FC(int arg0, u8 arg1, u8 arg2)
-{
-    return gm_803DE920[(u8) arg0 * 5 + arg1][arg2 * 3 + 7];
-}
+/// #gm_8017E5FC
 
-u8 gm_8017E630(int arg0, u8 arg1, u8 arg2)
-{
-    return gm_803DE920[(u8) arg0 * 5 + arg1][arg2 * 3 + 8];
-}
+/// #gm_8017E630
 
 /// #gm_8017E664
 
 /// #gm_8017E6B4
 
-u8 gm_8017E704(int arg0, u8 arg1, u8 arg2)
-{
-    return gm_803DE920[(u8) arg0 * 5 + arg1][arg2 * 3 + 20];
-}
+/// #gm_8017E704
 
-u8 gm_8017E738(int arg0, u8 arg1, u8 arg2)
-{
-    return gm_803DE920[(u8) arg0 * 5 + arg1][arg2 * 3 + 21];
-}
+/// #gm_8017E738
 
-u8 gm_8017E76C(int arg0, u8 arg1, u8 arg2)
-{
-    return gm_803DE920[(u8) arg0 * 5 + arg1][arg2 * 3 + 22];
-}
+/// #gm_8017E76C
 
 /// #gm_8017E7A0
 
@@ -750,46 +727,23 @@ UnkAllstarData* gm_8017EB30(void)
     return &lbl_80472CB0;
 }
 
-extern u8 gm_803DEBB0[50][26];
+/// #gm_8017EB3C
 
-u8 gm_8017EB3C(u8 arg0, u8 arg1)
-{
-    return gm_803DEBB0[arg0 * 5 + arg1][0];
-}
+/// #gm_8017EB64
 
-u8 gm_8017EB64(u8 arg0, u8 arg1, u8 arg2)
-{
-    return gm_803DEBB0[arg0 * 5 + arg1][arg2 * 3 + 6];
-}
+/// #gm_8017EB98
 
-u8 gm_8017EB98(u8 arg0, u8 arg1, u8 arg2)
-{
-    return gm_803DEBB0[arg0 * 5 + arg1][arg2 * 3 + 7];
-}
-
-u8 gm_8017EBCC(u8 arg0, u8 arg1, u8 arg2)
-{
-    return gm_803DEBB0[arg0 * 5 + arg1][arg2 * 3 + 8];
-}
+/// #gm_8017EBCC
 
 /// #gm_8017EC00
 
 /// #gm_8017EC50
 
-u8 gm_8017ECA0(u8 arg0, u8 arg1, u8 arg2)
-{
-    return gm_803DEBB0[arg0 * 5 + arg1][arg2 * 3 + 20];
-}
+/// #gm_8017ECA0
 
-u8 gm_8017ECD4(u8 arg0, u8 arg1, u8 arg2)
-{
-    return gm_803DEBB0[arg0 * 5 + arg1][arg2 * 3 + 21];
-}
+/// #gm_8017ECD4
 
-u8 gm_8017ED08(u8 arg0, u8 arg1, u8 arg2)
-{
-    return gm_803DEBB0[arg0 * 5 + arg1][arg2 * 3 + 22];
-}
+/// #gm_8017ED08
 
 /// #gm_8017ED3C
 
@@ -963,25 +917,7 @@ bool gm_80182510(void)
     return false;
 }
 
-static struct {
-    /* 0x6BC */ u8 x0;
-    /* 0x6BD */ u8 pad;
-    /* 0x6BE */ u16 x2;
-    /* 0x6C0 */ int x4;
-    /* 0x6C4 */ int x8;
-    /* 0x6C8 */ int xC;
-} lbl_804735BC;
-
-/// FAKE MATCH: Assignment order (xC, x8, x0, x4, x2) chosen for regalloc.
-/// 99.44% match - relocation offsets differ due to static placement.
-void gm_80182554(int arg0, int arg1)
-{
-    lbl_804735BC.xC = arg0;
-    lbl_804735BC.x8 = arg1;
-    lbl_804735BC.x0 = 0;
-    lbl_804735BC.x4 = 0;
-    lbl_804735BC.x2 = 0;
-}
+/// #gm_80182554
 
 /// #gm_80182578
 
