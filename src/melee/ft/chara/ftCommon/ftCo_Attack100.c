@@ -47,6 +47,7 @@
 #include <melee/ft/chara/ftCommon/ftCo_SpecialS.h>
 #include <melee/ft/chara/ftCommon/ftpickupitem.h>
 #include <melee/ft/chara/ftGameWatch/ftGw_Attack100.h>
+#include <melee/ft/chara/ftKirby/ftKb_Init.h>
 #include <melee/ft/chara/ftYoshi/ftYs_Init.h>
 #include <melee/ft/ft_0877.h>
 #include <melee/ft/ft_0881.h>
@@ -404,7 +405,13 @@ void ftCo_800D71D8(Fighter_GObj* gobj)
     }
 }
 
-/// #ftCo_800D7268
+s32 ftCo_800D7268(Fighter* fp)
+{
+    if (fp->kind == FTKIND_KIRBY) {
+        return ftKb_SpecialN_800F1CD8(fp->gobj);
+    }
+    return 0;
+}
 
 /// #ftCo_800D72A0
 
