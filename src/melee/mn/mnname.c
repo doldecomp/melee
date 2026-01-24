@@ -118,4 +118,20 @@ void mnName_802385A0(HSD_GObj* gobj)
 
 /// #mnName_8023AC40
 
-/// #IsNameNotAllowed
+extern char** NotAllowedNamesList;
+extern char mnNameNew_NullCharacter;
+
+s32 IsNameNotAllowed(s32 arg0)
+{
+    char** list = NotAllowedNamesList;
+
+loop:
+    if ((s8) mnNameNew_NullCharacter != (s8) **list) {
+        if (CompareNameStrings(*list, arg0) == 0) {
+            return 1;
+        }
+        list++;
+        goto loop;
+    }
+    return 0;
+}
