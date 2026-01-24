@@ -3,7 +3,6 @@
 
 #include "dolphin/types.h"
 
-
 typedef struct gm_80490940_t {
     /* +0 */ u8 x0;
     /* +1 */ u8 x1;

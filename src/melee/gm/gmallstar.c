@@ -438,29 +438,24 @@ void gm_801B607C(MinorScene* unused)
 void gm_801B60A4_OnLoad(void)
 {
     UnkAllstarData* data;
-    gm_803DEBE8_t* arr;
-    gm_803DEBE8_t* var_r29;
     gm_803DEBE8_t* var_r30;
-    u8* ptr;
-    u32 i;
-    int temp;
+    gm_803DEBE8_t* var_r29;
     u32 var_r28;
+    int temp;
     PAD_STACK(8);
 
     data = &gm_80473A18;
     gmMainLib_8015CDE0();
     gm_8017C984(data);
 
-    i = 5;
-    ptr = (u8*) gm_80490940;
-    do {
-        ptr[0] = 0;
-        ptr[1] = 0;
-        ptr[2] = 0;
-        ptr[3] = 0;
-        ptr[4] = 0;
-        ptr += 5;
-    } while (--i != 0);
+    {
+        gm_80490940_t* p = gm_80490940;
+        char* pp = (char*)p;
+        int i = 25;
+        while(i--) {
+            *(pp++) = 0;
+        }
+    }
 
     gm_8017DB58(data->x0.xC.x24);
     data->x0.slot = gm_801677F0();
@@ -472,7 +467,6 @@ void gm_801B60A4_OnLoad(void)
     data->x64 = gm_8018A2C4;
     var_r29 = gm_803DEBE8;
     data->x68 = gm_8018A314;
-
     var_r30 = var_r29;
     for (var_r28 = 0; var_r28 < 25; var_r28++) {
         var_r30->x2 = *((&var_r30->x0) + HSD_Randi(2));
@@ -482,55 +476,56 @@ void gm_801B60A4_OnLoad(void)
     var_r30 = gm_803DEBE8;
     for (var_r28 = 0; var_r28 < 0x17; var_r28++) {
         gm_803DEBE8_t* swap = &var_r30[var_r28 + HSD_Randi(0x18 - var_r28)];
-        gm_803DEBE8_t temp = *var_r29;
+        gm_803DEBE8_t tmp = *var_r29;
         *var_r29 = *swap;
         var_r29++;
-        *swap = temp;
+        *swap = tmp;
     }
 
-    temp = 0x21;
     data->x74 = 0;
-    data->x9C = 0;
-    data->x76[0] = temp;
-    data->x76[1] = temp;
-    data->x76[2] = temp;
-    data->x76[3] = temp;
-    data->x76[4] = temp;
-    data->x76[5] = temp;
-    data->x76[6] = temp;
-    data->x76[7] = temp;
-    data->x76[8] = temp;
-    data->x76[9] = temp;
-    data->x76[0xA] = temp;
-    data->x76[0xB] = temp;
-    data->x76[0xC] = temp;
-    data->x76[0xD] = temp;
-    data->x76[0xE] = temp;
-    data->x76[0xF] = temp;
-    data->x76[0x10] = temp;
-    data->x76[0x11] = temp;
-    data->x76[0x12] = temp;
-    data->x76[0x13] = temp;
-    data->x76[0x14] = temp;
-    data->x76[0x15] = temp;
-    data->x76[0x16] = temp;
-    data->x76[0x17] = temp;
-
-    temp = 0x1A;
     {
-        u8* p = ((u8*) data) + 0x18;
-        i = temp - 0x18;
-        if (0x18 < temp) {
+        UnkAllstarData* p = &gm_80473A18;
+        int i = 0x18;
+        p->x9C = 0;
+        temp = 0x21;
+        p->x76[0] = temp;
+        p->x76[1] = temp;
+        p->x76[2] = temp;
+        p->x76[3] = temp;
+        p->x76[4] = temp;
+        p->x76[5] = temp;
+        p->x76[6] = temp;
+        p->x76[7] = temp;
+        p->x76[8] = temp;
+        p->x76[9] = temp;
+        p->x76[0xA] = temp;
+        p->x76[0xB] = temp;
+        p->x76[0xC] = temp;
+        p->x76[0xD] = temp;
+        p->x76[0xE] = temp;
+        p->x76[0xF] = temp;
+        p->x76[0x10] = temp;
+        p->x76[0x11] = temp;
+        p->x76[0x12] = temp;
+        p->x76[0x13] = temp;
+        p->x76[0x14] = temp;
+        p->x76[0x15] = temp;
+        p->x76[0x16] = temp;
+        p->x76[0x17] = temp;
+
+        temp = 0x1A;
+        if (i < temp) {
+            u8* q = ((u8*)p) + i;
+            i = temp - i;
             do {
-                *(p + 0x76) = temp;
-                p++;
-            } while ((--i) != 0);
+                *(q++ + 0x76) = temp;
+            } while (--i != 0);
         }
     }
 
     {
-        u8* p = &data->x90[0];
-        data->x90[0] = 1;
+        u8* p = gm_80473A18.x90;
+        gm_80473A18.x90[0] = 1;
         p[1] = 1;
         p[2] = 1;
         p[3] = 1;
