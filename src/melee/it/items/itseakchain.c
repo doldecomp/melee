@@ -62,7 +62,13 @@ s32 it_802BBAEC(ItemLink* link, s32 arg1, f32 arg2)
 
 /// #it_802BCB88
 
-/// #it_2725_Logic54_PickedUp
+void it_2725_Logic54_PickedUp(Item_GObj* gobj)
+{
+    Item* item = GET_ITEM(gobj);
+    PAD_STACK(4);
+    Item_80268E5C((HSD_GObj*) gobj, 0, ITEM_ANIM_UPDATE);
+    item->on_accessory = (void (*)(HSD_GObj*)) fn_802BB428;
+}
 
 /// #it_802BCED4
 
