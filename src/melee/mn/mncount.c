@@ -8,8 +8,7 @@
 
 #include <baselib/gobj.h>
 
-extern s32 GetFighterTotalKOs(s32);
-extern s32 GetFighterTotalFalls(s32);
+#include "mn/mndiagram.h"
 
 // --- Internal Structs ---
 
@@ -34,12 +33,12 @@ s32 mnCount_802502CC(s32 arg0)
 
 s32 fn_802502F0(u8 arg0)
 {
-    return GetFighterTotalKOs(arg0);
+    return mnDiagram_GetFighterTotalKOs(arg0);
 }
 
 s32 fn_80250314(u8 arg0)
 {
-    return GetFighterTotalFalls(arg0);
+    return mnDiagram_GetFighterTotalFalls(arg0);
 }
 
 s32 fn_80250338(s32 arg0)
@@ -173,8 +172,8 @@ s32 mnCount_8025072C(CountEntry* entries, s32 start_idx, s32 mode)
             break;
         }
 
-        curr_stat = GetFighterTotalKOs(entries[i].id);
-        best_stat = GetFighterTotalKOs(entries[best_idx].id);
+        curr_stat = mnDiagram_GetFighterTotalKOs(entries[i].id);
+        best_stat = mnDiagram_GetFighterTotalKOs(entries[best_idx].id);
 
         if (mode == 0) {
             if (curr_stat > best_stat) {
@@ -186,8 +185,8 @@ s32 mnCount_8025072C(CountEntry* entries, s32 start_idx, s32 mode)
             }
         }
 
-        curr_stat = GetFighterTotalKOs(entries[i].id);
-        best_stat = GetFighterTotalKOs(entries[best_idx].id);
+        curr_stat = mnDiagram_GetFighterTotalKOs(entries[i].id);
+        best_stat = mnDiagram_GetFighterTotalKOs(entries[best_idx].id);
 
         if (curr_stat == best_stat) {
             found_tie = 1;
@@ -207,14 +206,14 @@ s32 mnCount_8025072C(CountEntry* entries, s32 start_idx, s32 mode)
             break;
         }
 
-        curr_stat = GetFighterTotalKOs(entries[i].id);
-        best_stat = GetFighterTotalKOs(entries[best_idx].id);
+        curr_stat = mnDiagram_GetFighterTotalKOs(entries[i].id);
+        best_stat = mnDiagram_GetFighterTotalKOs(entries[best_idx].id);
         if (curr_stat != best_stat) {
             continue;
         }
 
-        curr_stat = GetFighterTotalFalls(entries[i].id);
-        best_stat = GetFighterTotalFalls(entries[best_idx].id);
+        curr_stat = mnDiagram_GetFighterTotalFalls(entries[i].id);
+        best_stat = mnDiagram_GetFighterTotalFalls(entries[best_idx].id);
 
         if (curr_stat == best_stat) {
             is_invalid = 1;

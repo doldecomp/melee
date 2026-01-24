@@ -53,16 +53,17 @@ STATIC_ASSERT(sizeof(mnDiagram_Assets) == 0x108);
 
 /// Main user data struct for VS Records diagram (0x50 bytes)
 typedef struct mnDiagram_Data {
-    /* 0x00 */ u8 saved_menu;            ///< Saved menu ID on entry
+    /* 0x00 */ u8 saved_menu; ///< Saved menu ID on entry
     /* 0x01 */ u8 pad_1;
-    /* 0x02 */ u16 saved_selection;      ///< Saved hovered selection on entry
-    /* 0x04 */ u8 anim_state;            ///< 0 = idle, 1 = intro anim playing
+    /* 0x02 */ u16 saved_selection; ///< Saved hovered selection on entry
+    /* 0x04 */ u8 anim_state;       ///< 0 = idle, 1 = intro anim playing
     /* 0x05 */ u8 pad_5[3];
-    /* 0x08 */ HSD_JObj* jobjs[13];      ///< JObj references, filled by lb_80011E24
-    /* 0x3C */ u16 fighter_cursor_pos;   ///< Fighter mode cursor (row << 8 | col)
-    /* 0x3E */ u16 name_cursor_pos;      ///< Name mode cursor (row << 8 | col)
-    /* 0x40 */ HSD_GObj* popup_gobj;     ///< Popup window GObj (or NULL)
-    /* 0x44 */ u8 is_name_mode;          ///< 0 = fighter mode, 1 = name mode
+    /* 0x08 */ HSD_JObj* jobjs[13]; ///< JObj references, filled by lb_80011E24
+    /* 0x3C */ u16
+        fighter_cursor_pos;          ///< Fighter mode cursor (row << 8 | col)
+    /* 0x3E */ u16 name_cursor_pos;  ///< Name mode cursor (row << 8 | col)
+    /* 0x40 */ HSD_GObj* popup_gobj; ///< Popup window GObj (or NULL)
+    /* 0x44 */ u8 is_name_mode;      ///< 0 = fighter mode, 1 = name mode
     /* 0x45 */ u8 pad_45[3];
     /* 0x48 */ HSD_Text* col_header_text; ///< Column header text object
     /* 0x4C */ HSD_Text* row_header_text; ///< Row header text object
@@ -146,7 +147,7 @@ u32 mnDiagram_ConvertDistanceForDisplay(u32 distance)
     return distance / 100;
 }
 
-s32 GetHitPercentage(u8 is_name_mode, u8 player_index)
+s32 mnDiagram_GetHitPercentage(u8 is_name_mode, u8 player_index)
 {
     f32 player_attacks;
     f32 tag_player_attacks;
@@ -172,7 +173,7 @@ s32 GetHitPercentage(u8 is_name_mode, u8 player_index)
     return 0;
 }
 
-s32 GetPlayPercentage(u8 is_name_mode, u8 player_index)
+s32 mnDiagram_GetPlayPercentage(u8 is_name_mode, u8 player_index)
 {
     f32 total_play_time;
     s32 i;
@@ -208,7 +209,7 @@ s32 GetPlayPercentage(u8 is_name_mode, u8 player_index)
     return 0;
 }
 
-s32 GetAveragePlayerCount(u8 is_name_mode, u8 player_index)
+s32 mnDiagram_GetAveragePlayerCount(u8 is_name_mode, u8 player_index)
 {
     f32 temp_f31;
     f32 temp_f31_2;
@@ -239,7 +240,7 @@ s32 GetAveragePlayerCount(u8 is_name_mode, u8 player_index)
 /// @brief Gets total KOs scored by a name against all other names.
 /// @param field_index Index of the name tag to query.
 /// @return Sum of KOs scored by this name against all existing names.
-int GetNameTotalKOs(u8 field_index)
+int mnDiagram_GetNameTotalKOs(u8 field_index)
 {
     int total = 0;
     s32 i;
@@ -259,7 +260,7 @@ int GetNameTotalKOs(u8 field_index)
 /// @param field_index Index of the name tag to query.
 /// @return Sum of times this name was KO'd by all existing names (capped at
 /// 999999).
-int GetNameTotalFalls(u8 field_index)
+int mnDiagram_GetNameTotalFalls(u8 field_index)
 {
     int i;
     int total = 0;
@@ -282,7 +283,7 @@ int GetNameTotalFalls(u8 field_index)
 ///          matrix layout to name data.
 /// @param field_index Index of the fighter to query (0-24).
 /// @return Sum of KOs scored by this fighter against all unlocked fighters.
-int GetFighterTotalKOs(u8 field_index)
+int mnDiagram_GetFighterTotalKOs(u8 field_index)
 {
     int total = 0;
     int i;
@@ -302,7 +303,7 @@ int GetFighterTotalKOs(u8 field_index)
 ///          of the fighter KO matrix.
 /// @param field_index Index of the fighter to query (0-24).
 /// @return Sum of times this fighter was KO'd by all unlocked fighters.
-int GetFighterTotalFalls(u8 field_index)
+int mnDiagram_GetFighterTotalFalls(u8 field_index)
 {
     int i;
     int total = 0;
