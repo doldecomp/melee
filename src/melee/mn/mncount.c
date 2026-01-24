@@ -8,7 +8,8 @@
 
 #include <baselib/gobj.h>
 
-#include "mn/mndiagram.h"
+extern s32 mnDiagram_GetFighterTotalKOs(s32);
+extern s32 mnDiagram_GetFighterTotalFalls(s32);
 
 // --- Internal Structs ---
 
