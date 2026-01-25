@@ -88,12 +88,15 @@ void it_3F14_Logic1_Destroyed(Item_GObj* gobj)
 /// arg1/arg2/arg3 are spawn weights, arg4 is additional weight for special roll.
 void it_80286248(Item_GObj* gobj, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
 {
-    Item* ip = GET_ITEM(gobj);
-    Vec3 zero;
-    s32 special;
+    u8 pad1[24];
     s32 sum1;
     s32 rand;
-    PAD_STACK(32);
+    Item* ip = GET_ITEM(gobj);
+    s32 special;
+    Vec3 zero;
+    u8 pad2[4];
+    (void)pad1;
+    (void)pad2;
 
     zero.z = 0.0F;
     zero.y = 0.0F;
@@ -629,10 +632,10 @@ bool itBox_UnkMotion8_Coll(Item_GObj* gobj)
 void it_8028733C(Item_GObj* gobj)
 {
     HSD_JObj* spawned_jobj;
-    Item* ip = GET_ITEM(gobj);
-    Item_GObj* spawned = ip->xDD4_itemVar.box.spawned_gobj;
     Vec3 target_pos;
     Vec3 vel;
+    Item* ip = GET_ITEM(gobj);
+    Item_GObj* spawned = ip->xDD4_itemVar.box.spawned_gobj;
     PAD_STACK(4);
 
     if (spawned != NULL) {
