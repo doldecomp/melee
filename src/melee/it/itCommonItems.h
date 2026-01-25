@@ -595,7 +595,8 @@ typedef struct itTaru_ItemVars {
 } itTaru_ItemVars;
 
 typedef struct itTaruCann_DatAttrs {
-    /*  +0 */ char pad_0[0x28];
+    /*  +0 */ char pad_0[0x24];
+    /* +24 */ f32 x24;
     /* +28 */ int x28;
     /* +2C */ int x2C;
 } itTaruCann_DatAttrs;

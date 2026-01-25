@@ -55,7 +55,14 @@ void itTarucann_UnkMotion1_Phys(Item_GObj* gobj)
 
 /// #itTarucann_UnkMotion1_Coll
 
-/// #it_3F14_Logic5_PickedUp
+void it_3F14_Logic5_PickedUp(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itTaruCann_DatAttrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    ip->xDB0_itcmd_var1 = 1;
+    Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
+    it_80275158(gobj, attrs->x24);
+}
 
 /// #itTarucann_UnkMotion2_Anim
 
