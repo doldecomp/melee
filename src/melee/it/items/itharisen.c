@@ -115,11 +115,14 @@ bool itHarisen_UnkMotion6_Anim(Item_GObj* gobj)
 
 void itHarisen_UnkMotion6_Phys(Item_GObj* gobj) {}
 
+/// Reset harisen scale and animation speed when dropped.
+/// @note The double user_data load is required to match - the compiler
+/// reloads ip into a different register between the two assignments.
 void it_3F14_Logic24_Dropped(Item_GObj* gobj)
 {
     Item* ip = gobj->user_data;
     PAD_STACK(8);
-    ip->x5D0_animFrameSpeed = 1.0f;
+    ip->x5D0_animFrameSpeed = 1.0F;
     ip = gobj->user_data;
     ip->scl = ip->xCC_item_attr->x60_scale;
     it_8026B390(gobj);

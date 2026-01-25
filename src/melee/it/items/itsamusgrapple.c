@@ -206,6 +206,9 @@ void it_802BAB7C(Item_GObj* gobj)
     it_802A2428(gobj);
 }
 
+/// Set grapple beam state and store duration.
+/// @note The type pun stores a float value to an s32 field. The field
+/// may actually be a float, but changing the struct affects other code.
 void it_802BABB8(Item_GObj* gobj)
 {
     Item* ip = gobj->user_data;

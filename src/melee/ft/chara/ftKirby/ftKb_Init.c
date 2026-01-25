@@ -3827,10 +3827,11 @@ void ftKb_SpecialN_800F12C8(Fighter_GObj* gobj)
     ftKb_SpecialN_800EF69C(gobj, 0x10, ft_80459B88.hats[FTKIND_PURIN]);
     ftCo_UnloadDynamicBones(fp);
 }
+/// Load Dr. Mario's hat for Kirby copy ability.
+/// @note The self-assignment `fp = fp` is required for register allocation.
 void ftKb_SpecialN_800F130C(Fighter_GObj* gobj)
 {
     u8 sp14[0x90];
-
     Fighter* fp = fp = GET_FIGHTER(gobj);
     KirbyHatStruct* temp_r29;
 
