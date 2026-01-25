@@ -161,7 +161,16 @@ void lbBgFlash_InitState(int* duration)
     lbl_80433658.state.mode = 5;
     lbl_80433658.xC = *duration;
 }
-/// #fn_800208B0
+void fn_800208B0(u8 arg0)
+{
+    BgFlashData2* data = (BgFlashData2*) &lbl_80433658;
+    lbl_80433658.state.active = 0;
+    lbl_80433658.state.mode = 5;
+    data->xE = 0;
+    data->xD = 0;
+    data->xC = 0;
+    data->xF = arg0;
+}
 
 /// #lbBgFlash_800208EC
 

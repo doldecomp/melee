@@ -67,7 +67,7 @@ static inline const char* fn_8017BB94_inline(int arg0, int target)
                 return lbl_803D79D0[target];
             }
         } else {
-            struct gmm_x2FF8_inner* tmp = GetPersistentNameData(temp_r3);
+            struct NameTagData* tmp = GetPersistentNameData(temp_r3);
             return tmp->namedata;
         }
     }

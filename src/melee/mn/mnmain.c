@@ -657,10 +657,10 @@ static char null_terminator[1] = "\0";
 
 void mn_8022EA08(char* buf, u32 num)
 {
-    int buf_end = mn_8022EB78(num);
+    int buf_end = mn_GetDigitCount(num);
     int i;
     for (i = 0; i < buf_end; i++) {
-        buf[buf_end - 1 - i] = mn_8022EB24(num, i) + 0x30;
+        buf[buf_end - 1 - i] = mn_GetDigitAt(num, i) + '0';
     }
     buf[buf_end] = null_terminator[0];
 }
@@ -669,17 +669,17 @@ void mn_8022EA78(char* buf, int buf_end, u32 num)
 {
     int i;
     for (i = 0; i < buf_end; i++) {
-        buf[buf_end - 1 - i] = mn_8022EB24(num, i) + 0x30;
+        buf[buf_end - 1 - i] = mn_GetDigitAt(num, i) + '0';
     }
     buf[buf_end] = null_terminator[0];
 }
 
-s32 mn_8022EB24(s32 arg0, s32 arg1)
+s32 mn_GetDigitAt(s32 arg0, s32 arg1)
 {
     return (arg0 / powi(10, arg1)) % 10;
 }
 
-s32 mn_8022EB78(s32 num)
+s32 mn_GetDigitCount(s32 num)
 {
     s32 count;
     if (num == 0) {
@@ -2912,7 +2912,7 @@ void mn_8022DDA8_OnEnter(MenuEnterData* data)
     lb_8001CE00();
 }
 
-bool mn_8022E950(int arg0)
+bool mn_IsFighterUnlocked(int arg0)
 {
     return gm_80164840(gm_8016400C(arg0));
 }
@@ -2940,9 +2940,9 @@ void mn_8022EB04(void* user_data)
     HSD_Free(user_data);
 }
 
-/// #mn_8022EB24
+/// #mn_GetDigitAt
 
-/// #mn_8022EB78
+/// #mn_GetDigitCount
 
 void mn_8022EBDC(void)
 {

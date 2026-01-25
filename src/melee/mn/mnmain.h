@@ -85,15 +85,15 @@ typedef struct _MenuInputState {
 /* 22DB10 */ void mn_8022DB10(HSD_GObj*);
 /* 22DD38 */ void mn_8022DD38_OnFrame(void);
 /* 22DDA8 */ void mn_8022DDA8_OnEnter(MenuEnterData*);
-/* 22E950 */ bool mn_8022E950(int);
+/* 22E950 */ bool mn_IsFighterUnlocked(int);
 /* 22E978 */ void mn_8022E978(u8 item_idx,
                               u8 enable); ///< set/unset item mask bit
 /* 22EA08 */ void mn_8022EA08(char* buf, u32 num);
 /* 22EA78 */ void mn_8022EA78(char* buf, int buf_end, u32 num);
 /* 22EAE0 */ void mn_8022EAE0(HSD_GObj*);
 /* 22EB04 */ void mn_8022EB04(void* user_data);
-/* 22EB24 */ s32 mn_8022EB24(s32, s32);
-/* 22EB78 */ s32 mn_8022EB78(s32);
+/* 22EB24 */ s32 mn_GetDigitAt(s32, s32);
+/* 22EB78 */ s32 mn_GetDigitCount(s32);
 /* 22EBDC */ void mn_8022EBDC(void);
 /* 22EC18 */ float mn_8022EC18(HSD_JObj*, float*, HSD_TypeMask);
 /* 22ED6C */ float mn_8022ED6C(HSD_JObj*, AnimLoopSettings*);

@@ -3,6 +3,7 @@
 
 typedef struct AnimLoopSettings AnimLoopSettings;
 typedef struct CountEntry CountEntry;
+typedef struct Diagram Diagram;
 typedef struct CSSData CSSData;
 typedef struct CSSDoor CSSDoor;
 typedef struct CSSDoorsData CSSDoorsData;
