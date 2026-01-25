@@ -284,9 +284,10 @@ typedef struct itFlipper_ItemVars {
     s32 xDD4;
     s32 xDD8;
     s32 xDDC;
-    s32 xDE0;
-    s32 xDE4;
+    f32 xDE0;
+    f32 xDE4;
     s32 xDE8;
+    s32 xDEC;
 } itFlipper_ItemVars;
 
 typedef struct itFoods_ItemVars {

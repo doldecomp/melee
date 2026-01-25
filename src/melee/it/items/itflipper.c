@@ -11,7 +11,20 @@
 
 /// #it_80290938
 
-/// #it_3F14_Logic20_Spawned
+void it_3F14_Logic20_Spawned(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    PAD_STACK(8);
+    ip->xDD4_itemVar.flipper.xDD4 = 0;
+    ip->xDD4_itemVar.flipper.xDD8 = 0;
+    ip->xDD4_itemVar.flipper.xDDC = 0;
+    ip->xDD4_itemVar.flipper.xDE0 = 0.0F;
+    ip->xDD4_itemVar.flipper.xDE4 = 0.0F;
+    ip->xDD4_itemVar.flipper.xDE8 = 0;
+    ip->xDD4_itemVar.flipper.xDEC = 0;
+    it_802756D0(gobj);
+    it_80290F00(gobj);
+}
 
 /// #it_80290A7C
 
