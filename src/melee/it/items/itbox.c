@@ -166,12 +166,12 @@ bool it_802863BC(Item_GObj* gobj)
     Vec3 dir;
     Vec3 unit;
 
-    if (coll->env_flags & 0x18000) {
+    if (coll->env_flags & Collide_FloorMask) {
         it_80276408(gobj, coll, &dir);
         unit.x = 0.0F;
         unit.y = 1.0F;
         unit.z = 0.0F;
-        if (lbVector_AngleXY(&dir, &unit) < attr->x18) {
+        if (lbVector_AngleXY(&dir, &unit) < attr->bounce_angle_threshold) {
             ip->x7C.z = 0.0F;
             ip->x7C.y = 0.0F;
             ip->x7C.x = 0.0F;
@@ -427,7 +427,7 @@ void it_80286BA0(Item_GObj* gobj)
     Item_8026AE84(ip, 0xF6, 0x7F, 0x40);
     Camera_80030E44(2, &ip->pos);
     it_80286248(gobj, attr->spawn_weight_0, attr->spawn_weight_1,
-                attr->spawn_weight_2, attr->x10);
+                attr->spawn_weight_2, attr->special_spawn_weight);
     HSD_JObjSetFlagsAll(jobj, 0x10);
     it_802756D0(gobj);
 

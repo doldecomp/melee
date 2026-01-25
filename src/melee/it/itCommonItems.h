@@ -120,9 +120,9 @@ typedef struct itBoxAttributes {
     /* +04 */ s32 spawn_weight_1;         ///< Weight for item spawn outcome 2
     /* +08 */ s32 spawn_weight_2;         ///< Weight for item spawn outcome 3
     /* +0C */ s32 empty_weight;           ///< Weight for empty box (no items)
-    /* +10 */ s32 x10;                ///< Weight for special item roll
-    /* +14 */ f32 damage_threshold;   ///< Damage needed to break the box
-    /* +18 */ f32 x18;                ///< Max angle from vertical to stop
+    /* +10 */ s32 special_spawn_weight;   ///< Weight for special item roll
+    /* +14 */ f32 damage_threshold;       ///< Damage needed to break the box
+    /* +18 */ f32 bounce_angle_threshold; ///< Max angle from vertical to stop
     /* +1C */ f32
         break_vel_threshold; ///< Velocity needed to break box on landing
 } itBoxAttributes;
