@@ -10,6 +10,8 @@
 #include "it/it_2725.h"
 #include "it/item.h"
 
+/* 0x802910B8 */ void it_3F14_Logic20_Thrown(Item_GObj* gobj);
+
 /// #it_80290938
 
 void it_3F14_Logic20_Spawned(Item_GObj* gobj)
@@ -91,7 +93,10 @@ bool itFlipper_UnkMotion2_Anim(Item_GObj* gobj)
 
 void itFlipper_UnkMotion2_Phys(Item_GObj* gobj) {}
 
-/// #it_3F14_Logic20_Dropped
+void it_3F14_Logic20_Dropped(Item_GObj* gobj)
+{
+    it_3F14_Logic20_Thrown(gobj);
+}
 
 void it_3F14_Logic20_Thrown(Item_GObj* gobj)
 {
@@ -106,11 +111,6 @@ void it_3F14_Logic20_Thrown(Item_GObj* gobj)
     }
     it_8026B3A8(gobj);
     Item_80268E5C(gobj, 3, ITEM_ANIM_UPDATE | ITEM_DROP_UPDATE);
-}
-
-void it_3F14_Logic20_Dropped(Item_GObj* gobj)
-{
-    it_3F14_Logic20_Thrown(gobj);
 }
 
 /// #itFlipper_UnkMotion3_Anim
