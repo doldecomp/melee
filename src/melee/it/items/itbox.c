@@ -163,14 +163,6 @@ bool itBox_UnkMotion7_Coll(Item_GObj* gobj)
     return false;
 }
 
-/// #it_3F14_Logic1_DmgDealt
-
-/// #it_3F14_Logic1_Clanked
-
-/// #it_3F14_Logic1_HitShield
-
-/// #it_3F14_Logic1_Reflected
-
 /// Box/Crate item attributes for spawn behavior
 typedef struct itBoxAttributes {
     /* +00 */ s32 spawn_weight_0;     ///< Weight for item spawn outcome 1
@@ -180,6 +172,66 @@ typedef struct itBoxAttributes {
     /* +10 */ s32 x10;                ///< Used when spawning items
     /* +14 */ f32 damage_threshold;   ///< Damage needed to break the box
 } itBoxAttributes;
+
+/// Inline helper: spawn break effect and roll for item spawn.
+/// Used by DmgDealt, Clanked, HitShield, and Reflected callbacks.
+static inline void itBox_TryOpen_inline(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itBoxAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+    efSync_Spawn(0x427, gobj, &ip->pos);
+    if (it_80286340(gobj, attr->spawn_weight_0, attr->spawn_weight_1,
+                   attr->spawn_weight_2, attr->empty_weight))
+    {
+        it_80286BA0(gobj);
+    } else {
+        it_80286AA4(gobj);
+    }
+}
+
+/// Box dealt damage to something - try to open
+bool it_3F14_Logic1_DmgDealt(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    PAD_STACK(8);
+    if (ip->xDD4_itemVar.box.opened == 0) {
+        itBox_TryOpen_inline(gobj);
+    }
+    return false;
+}
+
+/// Box clanked with another hitbox - try to open
+bool it_3F14_Logic1_Clanked(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    PAD_STACK(8);
+    if (ip->xDD4_itemVar.box.opened == 0) {
+        itBox_TryOpen_inline(gobj);
+    }
+    return false;
+}
+
+/// Box hit a shield - try to open
+bool it_3F14_Logic1_HitShield(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    PAD_STACK(8);
+    if (ip->xDD4_itemVar.box.opened == 0) {
+        itBox_TryOpen_inline(gobj);
+    }
+    return false;
+}
+
+/// Box was reflected - try to open
+bool it_3F14_Logic1_Reflected(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    PAD_STACK(8);
+    if (ip->xDD4_itemVar.box.opened == 0) {
+        itBox_TryOpen_inline(gobj);
+    }
+    return false;
+}
 
 /// Handle damage received by box. When accumulated damage reaches threshold,
 /// box breaks open. Weighted random roll determines if items spawn or box is
