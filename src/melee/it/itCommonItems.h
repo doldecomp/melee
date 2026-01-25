@@ -100,17 +100,32 @@ typedef struct itBombHeiAttributes {
 } itBombHeiAttributes;
 
 typedef struct itBox_ItemVars {
-    /* +0 */ s32 opened;             ///< True if box has been opened/broken
-    /* +4 */ s32 despawn_timer;      ///< Countdown timer after opening (starts at 40)
-    /* +8 */ HSD_GObj* spawned_gobj; ///< Related GObj that needs cleanup on destroy
-    /* +C */ f32 rot_vel_x;          ///< Rotation velocity around X axis (wobble)
-    /* +10 */ f32 rot_vel_y;         ///< Rotation velocity around Y axis (wobble)
+    /* +0 */ s32 opened; ///< True if box has been opened/broken
+    /* +4 */ s32
+        despawn_timer; ///< Countdown timer after opening (starts at 40)
+    /* +8 */ HSD_GObj*
+        spawned_gobj;        ///< Related GObj that needs cleanup on destroy
+    /* +C */ f32 rot_vel_x;  ///< Rotation velocity around X axis (wobble)
+    /* +10 */ f32 rot_vel_y; ///< Rotation velocity around Y axis (wobble)
 } itBox_ItemVars;
 
 typedef struct itWstar_ItemVars {
     f32 xDD4;
     f32 xDD8;
 } itWstar_ItemVars;
+
+/// Box/Crate item attributes loaded from .dat file
+typedef struct itBoxAttributes {
+    /* +00 */ s32 spawn_weight_0;         ///< Weight for item spawn outcome 1
+    /* +04 */ s32 spawn_weight_1;         ///< Weight for item spawn outcome 2
+    /* +08 */ s32 spawn_weight_2;         ///< Weight for item spawn outcome 3
+    /* +0C */ s32 empty_weight;           ///< Weight for empty box (no items)
+    /* +10 */ s32 x10;                ///< Weight for special item roll
+    /* +14 */ f32 damage_threshold;   ///< Damage needed to break the box
+    /* +18 */ f32 x18;                ///< Max angle from vertical to stop
+    /* +1C */ f32
+        break_vel_threshold; ///< Velocity needed to break box on landing
+} itBoxAttributes;
 
 typedef struct itDosei_ItemVars {
     s32 xDD4;

@@ -1,6 +1,5 @@
 #include "itbox.h"
 
-#include <math.h>
 #include <placeholder.h>
 #include <platform.h>
 
@@ -13,11 +12,14 @@
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/itCommonItems.h"
 #include "it/item.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 #include "lb/lbvector.h"
 #include "mp/mpcoll.h"
+
+#include <math.h>
 
 #define ROT_VEL_SCALE 0.03490658476948738
 
@@ -91,7 +93,8 @@ void it_3F14_Logic1_Destroyed(Item_GObj* gobj)
 }
 
 /// Spawn item(s) from box based on weighted random roll.
-/// arg1/arg2/arg3 are spawn weights, arg4 is additional weight for special roll.
+/// arg1/arg2/arg3 are spawn weights, arg4 is additional weight for special
+/// roll.
 void it_80286248(Item_GObj* gobj, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
 {
     u8 pad1[24];
@@ -101,8 +104,8 @@ void it_80286248(Item_GObj* gobj, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     s32 special;
     Vec3 zero;
     u8 pad2[4];
-    (void)pad1;
-    (void)pad2;
+    (void) pad1;
+    (void) pad2;
 
     zero.z = 0.0F;
     zero.y = 0.0F;
@@ -151,18 +154,6 @@ bool it_80286340(Item_GObj* gobj, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     return false;
 }
 #pragma pop
-
-/// Box/Crate item attributes for spawn behavior
-typedef struct itBoxAttributes {
-    /* +00 */ s32 spawn_weight_0;     ///< Weight for item spawn outcome 1
-    /* +04 */ s32 spawn_weight_1;     ///< Weight for item spawn outcome 2
-    /* +08 */ s32 spawn_weight_2;     ///< Weight for item spawn outcome 3
-    /* +0C */ s32 empty_weight;       ///< Weight for empty box (no items)
-    /* +10 */ s32 x10;                ///< Used when spawning items
-    /* +14 */ f32 damage_threshold;   ///< Damage needed to break the box
-    /* +18 */ f32 x18;                ///< Angle threshold for bounce check
-    /* +1C */ f32 break_vel_threshold; ///< Velocity needed to break box on landing
-} itBoxAttributes;
 
 /// Check if box bounced off a surface nearly upright. If the bounce angle
 /// relative to vertical is below threshold, clear velocity vectors and
@@ -219,7 +210,10 @@ bool itBox_UnkMotion0_Anim(Item_GObj* gobj)
     return false;
 }
 
-void itBox_UnkMotion0_Phys(Item_GObj* gobj) {}
+void itBox_UnkMotion0_Phys(Item_GObj* gobj)
+{
+    return;
+}
 
 bool itBox_UnkMotion0_Coll(Item_GObj* gobj)
 {
@@ -293,7 +287,10 @@ bool itBox_UnkMotion2_Anim(Item_GObj* gobj)
     return false;
 }
 
-void itBox_UnkMotion2_Phys(Item_GObj* gobj) {}
+void itBox_UnkMotion2_Phys(Item_GObj* gobj)
+{
+    return;
+}
 
 void it_3F14_Logic1_Thrown(Item_GObj* gobj)
 {
@@ -316,7 +313,7 @@ static inline void itBox_TryOpen_inline(Item_GObj* gobj)
     itBoxAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
     efSync_Spawn(0x427, gobj, &ip->pos);
     if (it_80286340(gobj, attr->spawn_weight_0, attr->spawn_weight_1,
-                   attr->spawn_weight_2, attr->empty_weight))
+                    attr->spawn_weight_2, attr->empty_weight))
     {
         it_80286BA0(gobj);
     } else {
@@ -408,7 +405,10 @@ bool itBox_UnkMotion6_Anim(Item_GObj* gobj)
     return it_802751D8(gobj);
 }
 
-void itBox_UnkMotion6_Phys(Item_GObj* gobj) {}
+void itBox_UnkMotion6_Phys(Item_GObj* gobj)
+{
+    return;
+}
 
 bool itBox_UnkMotion6_Coll(Item_GObj* gobj)
 {
@@ -452,7 +452,10 @@ bool itBox_UnkMotion7_Anim(Item_GObj* gobj)
     return true;
 }
 
-void itBox_UnkMotion7_Phys(Item_GObj* gobj) {}
+void itBox_UnkMotion7_Phys(Item_GObj* gobj)
+{
+    return;
+}
 
 bool itBox_UnkMotion7_Coll(Item_GObj* gobj)
 {
@@ -515,7 +518,7 @@ bool it_3F14_Logic1_DmgReceived(Item_GObj* gobj)
         if (ip->xC9C >= attr->damage_threshold) {
             efSync_Spawn(0x427, gobj, &ip->pos);
             if (it_80286340(gobj, attr->spawn_weight_0, attr->spawn_weight_1,
-                           attr->spawn_weight_2, attr->empty_weight))
+                            attr->spawn_weight_2, attr->empty_weight))
             {
                 it_80286BA0(gobj);
             } else {
@@ -548,7 +551,10 @@ bool itBox_UnkMotion5_Anim(Item_GObj* gobj)
     return false;
 }
 
-void itBox_UnkMotion5_Phys(Item_GObj* gobj) {}
+void itBox_UnkMotion5_Phys(Item_GObj* gobj)
+{
+    return;
+}
 
 bool itBox_UnkMotion5_Coll(Item_GObj* gobj)
 {
@@ -638,14 +644,14 @@ bool itBox_UnkMotion8_Coll(Item_GObj* gobj)
 void it_8028733C(Item_GObj* gobj)
 {
     HSD_JObj* spawned_jobj;
+    Item* ip;
     Vec3 target_pos;
     Vec3 vel;
-    Item* ip = GET_ITEM(gobj);
-    Item_GObj* spawned = ip->xDD4_itemVar.box.spawned_gobj;
-    PAD_STACK(4);
 
-    if (spawned != NULL) {
-        spawned_jobj = GET_JOBJ(spawned);
+    ip = GET_ITEM(gobj);
+
+    if (ip->xDD4_itemVar.box.spawned_gobj != NULL) {
+        spawned_jobj = GET_JOBJ(ip->xDD4_itemVar.box.spawned_gobj);
         HSD_JObjGetTranslation(spawned_jobj, &target_pos);
         lbVector_Diff(&target_pos, &ip->pos, &vel);
         ip->pos = target_pos;
