@@ -438,11 +438,12 @@ void gm_801B607C(MinorScene* unused)
 void gm_801B60A4_OnLoad(void)
 {
     UnkAllstarData* data;
-    gm_803DEBE8_t* var_r30;
     gm_803DEBE8_t* var_r29;
+    gm_803DEBE8_t* var_r30;
     u32 var_r28;
     int temp;
-    PAD_STACK(8);
+    gm_803DEBE8_t tmp;
+    PAD_STACK(12);
 
     data = &gm_80473A18;
     gmMainLib_8015CDE0();
@@ -476,7 +477,7 @@ void gm_801B60A4_OnLoad(void)
     var_r30 = gm_803DEBE8;
     for (var_r28 = 0; var_r28 < 0x17; var_r28++) {
         gm_803DEBE8_t* swap = &var_r30[var_r28 + HSD_Randi(0x18 - var_r28)];
-        gm_803DEBE8_t tmp = *var_r29;
+        tmp = *var_r29;
         *var_r29 = *swap;
         var_r29++;
         *swap = tmp;
@@ -525,7 +526,7 @@ void gm_801B60A4_OnLoad(void)
 
     {
         u8* p = gm_80473A18.x90;
-        gm_80473A18.x90[0] = 1;
+        p[0] = 1;
         p[1] = 1;
         p[2] = 1;
         p[3] = 1;
