@@ -50,10 +50,16 @@ Item_GObj* it_80286088(Item_GObj* parent_gobj)
         if (result != NULL) {
             spawned_ip = GET_ITEM(result);
             spawned_ip->xDD4_itemVar.box.spawned_gobj = parent_gobj;
-            spawned_ip->xDD4_itemVar.box.rot_vel_x =
-                ROT_VEL_SCALE * (HSD_Randf() - 0.5F);
-            spawned_ip->xDD4_itemVar.box.rot_vel_y =
-                ROT_VEL_SCALE * (HSD_Randf() - 0.5F);
+            {
+                f32 r = HSD_Randf();
+                spawned_ip->xDD4_itemVar.box.rot_vel_x =
+                    (r - 0.5F) * ROT_VEL_SCALE;
+            }
+            {
+                f32 r = HSD_Randf();
+                spawned_ip->xDD4_itemVar.box.rot_vel_y =
+                    (r - 0.5F) * ROT_VEL_SCALE;
+            }
             spawned_ip->xDC8_word.flags.x19 = 0;
             it_8026BDB4(result);
             it_802870A4(result);
