@@ -105,6 +105,11 @@ typedef struct itBox_ItemVars {
     HSD_JObj* xDDC;
 } itBox_ItemVars;
 
+typedef struct itWstar_ItemVars {
+    f32 xDD4;
+    f32 xDD8;
+} itWstar_ItemVars;
+
 typedef struct itDosei_ItemVars {
     s32 xDD4;
     s32 xDD8;
