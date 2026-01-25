@@ -9,7 +9,15 @@
 #include "it/it_2725.h"
 #include "it/item.h"
 
-/// #it_802927E8
+void it_802927E8(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    HSD_JObj* item_jobj = gobj->hsd_obj;
+    f32* special = ip->xC4_article_data->x4_specialAttributes;
+    f32 scale = special[0] * ip->xCC_item_attr->x60_scale;
+    ip->scl = scale;
+    it_80272F7C(item_jobj, scale);
+}
 
 void it_8029282C(Item_GObj* gobj)
 {
@@ -107,7 +115,16 @@ bool itHarisen_UnkMotion6_Anim(Item_GObj* gobj)
 
 void itHarisen_UnkMotion6_Phys(Item_GObj* gobj) {}
 
-/// #it_3F14_Logic24_Dropped
+void it_3F14_Logic24_Dropped(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    PAD_STACK(8);
+    ip->x5D0_animFrameSpeed = 1.0f;
+    ip = gobj->user_data;
+    ip->scl = ip->xCC_item_attr->x60_scale;
+    it_8026B390(gobj);
+    Item_80268E5C(gobj, 8, 6);
+}
 
 bool itHarisen_UnkMotion8_Coll(Item_GObj* gobj)
 {
