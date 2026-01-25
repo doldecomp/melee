@@ -953,11 +953,12 @@ void mnDiagram_80240D94(void* arg0, s32 arg1, s32 arg2, s32 arg3)
     text->pos_y = -pos.y;
     text->pos_z = pos.z;
     text->default_alignment = 0;
+    *(s32*) &text->text_color = mnDiagram_804D4FA0;
 
     if (arg3 != 0) {
-        HSD_SisLib_803A6B98(text, 0.0f, 0.0f, GetNameText(arg1));
+        HSD_SisLib_803A6B98(text, 0.0f, 0.0f, GetNameText((u8) arg1));
     } else {
-        HSD_SisLib_803A6B98(text, 0.0f, 0.0f, "Fighter");
+        gm_80160C90(text, gm_8016400C((u8) arg1), 0);
     }
 
     if ((arg3 != 0) && (arg1 != arg2)) {
