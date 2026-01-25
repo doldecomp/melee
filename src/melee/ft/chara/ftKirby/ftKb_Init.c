@@ -5318,7 +5318,14 @@ void fn_800F6908(HSD_GObj* gobj)
     ftCommon_8007E2F4(fp, 0x1FF);
 }
 
-/// #fn_800F697C
+void fn_800F697C(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftCommon_8007D5D4(fp);
+    Fighter_ChangeMotionState(gobj, ftKb_MS_SpecialAirNCapture0, 0x0C4C5092,
+                              fp->cur_anim_frame, 1, 0, NULL);
+    ftCommon_8007E2F4(fp, 0x1FF);
+}
 
 void fn_800F69E8(HSD_GObj* gobj)
 {
