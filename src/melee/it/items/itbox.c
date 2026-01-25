@@ -13,7 +13,14 @@
 
 /// #it_80286088
 
-/// #it_3F14_Logic1_Spawned
+void it_3F14_Logic1_Spawned(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->xDCE_flag.b7 = 0;
+    ip->xDD4_itemVar.box.xDD4 = 0;
+    ip->xDD4_itemVar.box.xDDC = NULL;
+    it_80286088(gobj);
+}
 
 void it_3F14_Logic1_Destroyed(Item_GObj* gobj)
 {
