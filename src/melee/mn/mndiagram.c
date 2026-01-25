@@ -71,6 +71,20 @@ mnDiagram_804A076C_t mnDiagram_804A076C;
 
 static AnimLoopSettings mnDiagram_803EE768 = { 0.0f, 9.0f, -0.1f };
 
+static u8 mnDiagram_803EE74C[0x1C] = {
+    8,    1,    6,    0x10, 0x11, 4,   2,   0xD, 0xB, 0,
+    5,    0xC,  0xE,  0x12, 7,    0xF, 0xA, 9,   3,   0x15,
+    0x18, 0x13, 0x14, 0x17, 0x16, 0,   0,   0,
+};
+
+static Point3d mnDiagram_803EE728[3] = {
+    { 4.0F, 1.0F, 0.0F },
+    { -3.0F, 0.8F, 0.0F },
+    { -1.0F, 0.7F, 0.0F },
+};
+
+static s32 mnDiagram_804D4FA0 = 0xFF;
+
 /// @brief Gets the fighter ID at the given sorted index.
 /// @param idx Index into the sorted fighter list
 /// @return Fighter ID
@@ -653,12 +667,6 @@ u8 mnDiagram_GetLeastPlayedFighter(u8 name_idx)
     return (u8) var_r30;
 }
 
-static u8 mnDiagram_803EE74C[0x1C] = {
-    8,    1,    6,    0x10, 0x11, 4,   2,   0xD, 0xB, 0,
-    5,    0xC,  0xE,  0x12, 7,    0xF, 0xA, 9,   3,   0x15,
-    0x18, 0x13, 0x14, 0x17, 0x16, 0,   0,   0,
-};
-
 void mnDiagram_8023FA6C(void)
 {
     u32 totals[0x19];
@@ -877,13 +885,6 @@ void mnDiagram_PopupCleanup(void* arg0)
     }
     HSD_Free(arg0);
 }
-
-static Point3d mnDiagram_803EE728[3] = {
-    { 4.0f, 1.0f, 0.0f },
-    { -3.0f, 0.8f, 0.0f },
-    { -1.0f, 0.7f, 0.0f },
-};
-static s32 mnDiagram_804D4FA0 = 0xFF;
 
 typedef struct mnDiagram_PopupData {
     /* 0x00 */ HSD_JObj* jobjs[14];
