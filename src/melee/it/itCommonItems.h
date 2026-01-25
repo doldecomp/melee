@@ -295,6 +295,10 @@ typedef struct itFlipper_DatAttrs {
     /* +4 */ s32 x4;
 } itFlipper_DatAttrs;
 
+typedef struct itHarisen_DatAttrs {
+    /* +0 */ f32 x0_scale;
+} itHarisen_DatAttrs;
+
 typedef struct itFoods_ItemVars {
     /* +0 ip+DD4 */ s32 x0;
     /* +4 ip+DD8 */ s32 heal_amount;

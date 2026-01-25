@@ -13,8 +13,8 @@ void it_802927E8(Item_GObj* gobj)
 {
     Item* ip = gobj->user_data;
     HSD_JObj* item_jobj = gobj->hsd_obj;
-    f32* special = ip->xC4_article_data->x4_specialAttributes;
-    f32 scale = special[0] * ip->xCC_item_attr->x60_scale;
+    itHarisen_DatAttrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    f32 scale = attrs->x0_scale * ip->xCC_item_attr->x60_scale;
     ip->scl = scale;
     it_80272F7C(item_jobj, scale);
 }
