@@ -70,7 +70,15 @@ void fn_80286480(Item_GObj* gobj)
     Item_80268E5C(gobj, 0, 2);
 }
 
-/// #itBox_UnkMotion0_Anim
+/// Check animation frame and play sound if at start
+bool itBox_UnkMotion0_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->xD44_lifeTimer <= 1.0F) {
+        it_802787B4(gobj, 0x421);
+    }
+    return false;
+}
 
 void itBox_UnkMotion0_Phys(Item_GObj* gobj) {}
 
