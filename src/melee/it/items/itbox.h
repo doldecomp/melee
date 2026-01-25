@@ -5,7 +5,7 @@
 
 #include "it/items/types.h"
 
-/* 286088 */ HSD_GObj* it_80286088(HSD_GObj*);
+/* 286088 */ Item_GObj* it_80286088(Item_GObj*);
 /* 2861CC */ void it_3F14_Logic1_Spawned(Item_GObj*);
 /* 286208 */ void it_3F14_Logic1_Destroyed(Item_GObj*);
 /* 286248 */ void it_80286248(Item_GObj*, s32, s32, s32, s32);
@@ -49,7 +49,7 @@
 /* 287104 */ bool itBox_UnkMotion8_Anim(Item_GObj* gobj);
 /* 28710C */ void itBox_UnkMotion8_Phys(Item_GObj* gobj);
 /* 287334 */ bool itBox_UnkMotion8_Coll(Item_GObj* gobj);
-/* 28733C */ UNK_RET it_8028733C(UNK_PARAMS);
+/* 28733C */ void it_8028733C(Item_GObj*);
 /* 3F5850 */ extern ItemStateTable it_803F5850[];
 
 #endif

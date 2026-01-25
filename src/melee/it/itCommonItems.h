@@ -100,9 +100,11 @@ typedef struct itBombHeiAttributes {
 } itBombHeiAttributes;
 
 typedef struct itBox_ItemVars {
-    s32 opened;             ///< True if box has been opened/broken
-    s32 despawn_timer;      ///< Countdown timer after opening (starts at 40)
-    HSD_GObj* spawned_gobj; ///< Related GObj that needs cleanup on destroy
+    /* +0 */ s32 opened;             ///< True if box has been opened/broken
+    /* +4 */ s32 despawn_timer;      ///< Countdown timer after opening (starts at 40)
+    /* +8 */ HSD_GObj* spawned_gobj; ///< Related GObj that needs cleanup on destroy
+    /* +C */ f32 rot_vel_x;          ///< Rotation velocity around X axis (wobble)
+    /* +10 */ f32 rot_vel_y;         ///< Rotation velocity around Y axis (wobble)
 } itBox_ItemVars;
 
 typedef struct itWstar_ItemVars {
