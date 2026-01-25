@@ -335,7 +335,15 @@ void it_3F14_Logic1_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
     it_8026B894(gobj, ref_gobj);
 }
 
-/// #it_802870A4
+/// Transition box to state 8 and set accessory callback
+void it_802870A4(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    it_802762B0(ip);
+    it_8026B3A8(gobj);
+    Item_80268E5C(gobj, 8, ITEM_ANIM_UPDATE);
+    ip->on_accessory = (HSD_GObjEvent) it_8028733C;
+}
 
 bool itBox_UnkMotion8_Anim(Item_GObj* gobj)
 {
