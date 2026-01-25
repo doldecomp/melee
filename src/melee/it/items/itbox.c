@@ -14,6 +14,7 @@
 #include "it/it_2725.h"
 #include "it/item.h"
 #include "lb/lb_00F9.h"
+#include "lb/lbvector.h"
 
 /// #it_80286088
 
@@ -59,7 +60,52 @@ bool it_80286340(Item_GObj* gobj, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
 }
 #pragma pop
 
-/// #it_802863BC
+/// Box/Crate item attributes for spawn behavior
+typedef struct itBoxAttributes {
+    /* +00 */ s32 spawn_weight_0;     ///< Weight for item spawn outcome 1
+    /* +04 */ s32 spawn_weight_1;     ///< Weight for item spawn outcome 2
+    /* +08 */ s32 spawn_weight_2;     ///< Weight for item spawn outcome 3
+    /* +0C */ s32 empty_weight;       ///< Weight for empty box (no items)
+    /* +10 */ s32 x10;                ///< Used when spawning items
+    /* +14 */ f32 damage_threshold;   ///< Damage needed to break the box
+    /* +18 */ f32 x18;                ///< Angle threshold for bounce check
+} itBoxAttributes;
+
+/// Check if box bounced off a surface nearly upright. If the bounce angle
+/// relative to vertical is below threshold, clear velocity vectors and
+/// set ground flag.
+bool it_802863BC(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    CollData* coll = &ip->x378_itemColl;
+    itBoxAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+    Vec3 dir;
+    Vec3 unit;
+
+    if (coll->env_flags & 0x18000) {
+        it_80276408(gobj, coll, &dir);
+        unit.x = 0.0F;
+        unit.y = 1.0F;
+        unit.z = 0.0F;
+        if (lbVector_AngleXY(&dir, &unit) < attr->x18) {
+            ip->x7C.z = 0.0F;
+            ip->x7C.y = 0.0F;
+            ip->x7C.x = 0.0F;
+            ip->x88.z = 0.0F;
+            ip->x88.y = 0.0F;
+            ip->x88.x = 0.0F;
+            ip->x94.z = 0.0F;
+            ip->x94.y = 0.0F;
+            ip->x94.x = 0.0F;
+            ip->xA0.z = 0.0F;
+            ip->xA0.y = 0.0F;
+            ip->xA0.x = 0.0F;
+            ip->xD5C = 1;
+            return true;
+        }
+    }
+    return false;
+}
 
 void fn_80286480(Item_GObj* gobj)
 {
@@ -142,16 +188,6 @@ void it_3F14_Logic1_Dropped(Item_GObj* gobj)
 }
 
 /// #itBox_UnkMotion4_Coll
-
-/// Box/Crate item attributes for spawn behavior
-typedef struct itBoxAttributes {
-    /* +00 */ s32 spawn_weight_0;     ///< Weight for item spawn outcome 1
-    /* +04 */ s32 spawn_weight_1;     ///< Weight for item spawn outcome 2
-    /* +08 */ s32 spawn_weight_2;     ///< Weight for item spawn outcome 3
-    /* +0C */ s32 empty_weight;       ///< Weight for empty box (no items)
-    /* +10 */ s32 x10;                ///< Used when spawning items
-    /* +14 */ f32 damage_threshold;   ///< Damage needed to break the box
-} itBoxAttributes;
 
 /// Box opens empty (no items spawned). Clears velocity, sets opened flag,
 /// spawns smoke effect (0x78), and transitions to state 6.
@@ -322,7 +358,19 @@ bool it_3F14_Logic1_DmgReceived(Item_GObj* gobj)
 
 void it_3F14_Logic1_EnteredAir(Item_GObj* gobj)
 {
-    Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
+    Item* ip;
+    PAD_STACK(16);
+
+    if (it_802863BC(gobj) != 0) {
+        ip = GET_ITEM(gobj);
+        it_8026B390(gobj);
+        ip->x40_vel.z = 0.0F;
+        ip->x40_vel.y = 0.0F;
+        ip->x40_vel.x = 0.0F;
+        Item_80268E5C(gobj, 0, 2);
+    } else {
+        Item_80268E5C(gobj, 5, 2);
+    }
 }
 
 bool itBox_UnkMotion5_Anim(Item_GObj* gobj)

@@ -10,7 +10,7 @@
 /* 286208 */ void it_3F14_Logic1_Destroyed(Item_GObj*);
 /* 286248 */ void it_80286248(Item_GObj*, s32, s32, s32, s32);
 /* 286340 */ bool it_80286340(Item_GObj*, s32, s32, s32, s32);
-/* 2863BC */ UNK_RET it_802863BC(UNK_PARAMS);
+/* 2863BC */ bool it_802863BC(Item_GObj*);
 /* 286480 */ void fn_80286480(Item_GObj*);
 /* 2864D8 */ bool itBox_UnkMotion0_Anim(Item_GObj* gobj);
 /* 286518 */ void itBox_UnkMotion0_Phys(Item_GObj* gobj);
