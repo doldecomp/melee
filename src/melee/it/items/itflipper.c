@@ -3,6 +3,7 @@
 #include <placeholder.h>
 #include <platform.h>
 
+#include "ft/ftlib.h"
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
@@ -92,7 +93,20 @@ void itFlipper_UnkMotion2_Phys(Item_GObj* gobj) {}
 
 /// #it_3F14_Logic20_Dropped
 
-/// #it_3F14_Logic20_Thrown
+void it_3F14_Logic20_Thrown(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itFlipper_DatAttrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    if (ip->owner != NULL) {
+        if (ftLib_80087284(ip->owner)) {
+            ip->xDD4_itemVar.flipper.xDD4 = attrs->x4;
+        } else {
+            ip->xDD4_itemVar.flipper.xDD4 = attrs->x0;
+        }
+    }
+    it_8026B3A8(gobj);
+    Item_80268E5C(gobj, 3, ITEM_ANIM_UPDATE | ITEM_DROP_UPDATE);
+}
 
 void it_3F14_Logic20_Dropped(Item_GObj* gobj)
 {

@@ -290,6 +290,11 @@ typedef struct itFlipper_ItemVars {
     s32 xDEC;
 } itFlipper_ItemVars;
 
+typedef struct itFlipper_DatAttrs {
+    /* +0 */ s32 x0;
+    /* +4 */ s32 x4;
+} itFlipper_DatAttrs;
+
 typedef struct itFoods_ItemVars {
     /* +0 ip+DD4 */ s32 x0;
     /* +4 ip+DD8 */ s32 heal_amount;
