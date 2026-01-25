@@ -1,4 +1,5 @@
 #include "mndiagram.static.h"
+#include "mndiagram2.static.h"
 
 #include "baselib/gobj.h"
 #include "baselib/gobjgxlink.h"
