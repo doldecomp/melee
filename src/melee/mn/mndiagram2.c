@@ -1347,7 +1347,6 @@ void mnDiagram2_GetAggregatedFighterRank(u8* out, u8 type, u8 idx)
 
     count = GetNameCount();
     funcTable = (void*) mnDiagram_GetNamePlayTimeByFighter;
-    type = type;
     arr = entries;
 
     i = 0;
