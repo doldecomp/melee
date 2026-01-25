@@ -8,7 +8,8 @@
 #include "it/items/types.h"
 
 /* 29A114 */ void it_8029A114(Fighter_GObj*, Vec*, int, float);
-/* 29A218 */ UNK_RET it_8029A218(UNK_PARAMS);
+/* 29A218 */ void it_8029A218(HSD_GObj* owner, Vec3* pos, f32 facing_dir,
+                              s32 arg4);
 /* 29A31C */ UNK_RET it_8029A31C(UNK_PARAMS);
 /* 29A498 */ UNK_RET it_8029A498(UNK_PARAMS);
 /* 29A504 */ bool itLipstickspore_UnkMotion0_Anim(Item_GObj* gobj);
