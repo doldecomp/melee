@@ -5,6 +5,7 @@
 
 #include "baselib/jobj.h"
 #include "baselib/random.h"
+#include "ef/efsync.h"
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
@@ -17,22 +18,24 @@ void it_3F14_Logic1_Spawned(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     ip->xDCE_flag.b7 = 0;
-    ip->xDD4_itemVar.box.xDD4 = 0;
-    ip->xDD4_itemVar.box.xDDC = NULL;
+    ip->xDD4_itemVar.box.opened = 0;
+    ip->xDD4_itemVar.box.spawned_gobj = NULL;
     it_80286088(gobj);
 }
 
 void it_3F14_Logic1_Destroyed(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    if (ip->xDD4_itemVar.box.xDDC != NULL) {
-        HSD_JObjRemoveAll(ip->xDD4_itemVar.box.xDDC);
-        ip->xDD4_itemVar.box.xDDC = NULL;
+    if (ip->xDD4_itemVar.box.spawned_gobj != NULL) {
+        HSD_JObjRemoveAll(ip->xDD4_itemVar.box.spawned_gobj);
+        ip->xDD4_itemVar.box.spawned_gobj = NULL;
     }
 }
 
 /// #it_80286248
 
+#pragma push
+#pragma dont_inline on
 bool it_80286340(Item_GObj* gobj, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
 {
     s32 sum1 = arg1 + arg2;
@@ -49,6 +52,7 @@ bool it_80286340(Item_GObj* gobj, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     }
     return false;
 }
+#pragma pop
 
 /// #it_802863BC
 
@@ -145,8 +149,8 @@ bool itBox_UnkMotion6_Coll(Item_GObj* gobj)
 bool itBox_UnkMotion7_Anim(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    ip->xDD4_itemVar.box.xDD8 -= 1;
-    if (ip->xDD4_itemVar.box.xDD8 > 0) {
+    ip->xDD4_itemVar.box.despawn_timer -= 1;
+    if (ip->xDD4_itemVar.box.despawn_timer > 0) {
         return false;
     }
     return true;
@@ -167,7 +171,38 @@ bool itBox_UnkMotion7_Coll(Item_GObj* gobj)
 
 /// #it_3F14_Logic1_Reflected
 
-/// #it_3F14_Logic1_DmgReceived
+/// Box/Crate item attributes for spawn behavior
+typedef struct itBoxAttributes {
+    /* +00 */ s32 spawn_weight_0;     ///< Weight for item spawn outcome 1
+    /* +04 */ s32 spawn_weight_1;     ///< Weight for item spawn outcome 2
+    /* +08 */ s32 spawn_weight_2;     ///< Weight for item spawn outcome 3
+    /* +0C */ s32 empty_weight;       ///< Weight for empty box (no items)
+    /* +10 */ s32 x10;                ///< Used when spawning items
+    /* +14 */ f32 damage_threshold;   ///< Damage needed to break the box
+} itBoxAttributes;
+
+/// Handle damage received by box. When accumulated damage reaches threshold,
+/// box breaks open. Weighted random roll determines if items spawn or box is
+/// empty. Effect 0x427 is the box breaking visual effect.
+bool it_3F14_Logic1_DmgReceived(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itBoxAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+    PAD_STACK(16);
+    if (ip->xDD4_itemVar.box.opened == 0) {
+        if (ip->xC9C >= attr->damage_threshold) {
+            efSync_Spawn(0x427, gobj, &ip->pos);
+            if (it_80286340(gobj, attr->spawn_weight_0, attr->spawn_weight_1,
+                           attr->spawn_weight_2, attr->empty_weight))
+            {
+                it_80286BA0(gobj);
+            } else {
+                it_80286AA4(gobj);
+            }
+        }
+    }
+    return false;
+}
 
 void it_3F14_Logic1_EnteredAir(Item_GObj* gobj)
 {

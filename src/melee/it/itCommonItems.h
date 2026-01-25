@@ -100,9 +100,9 @@ typedef struct itBombHeiAttributes {
 } itBombHeiAttributes;
 
 typedef struct itBox_ItemVars {
-    s32 xDD4;
-    s32 xDD8;
-    HSD_JObj* xDDC;
+    s32 opened;          ///< True if box has been opened/broken
+    s32 despawn_timer;   ///< Countdown timer after opening (starts at 40)
+    HSD_JObj* spawned_gobj;  ///< JObj of spawned accessory item
 } itBox_ItemVars;
 
 typedef struct itWstar_ItemVars {
