@@ -3,6 +3,7 @@
 #include <placeholder.h>
 #include <platform.h>
 
+#include "baselib/jobj.h"
 #include "baselib/random.h"
 #include "it/inlines.h"
 #include "it/it_266F.h"
@@ -14,7 +15,14 @@
 
 /// #it_3F14_Logic1_Spawned
 
-/// #it_3F14_Logic1_Destroyed
+void it_3F14_Logic1_Destroyed(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->xDD4_itemVar.box.xDDC != NULL) {
+        HSD_JObjRemoveAll(ip->xDD4_itemVar.box.xDDC);
+        ip->xDD4_itemVar.box.xDDC = NULL;
+    }
+}
 
 /// #it_80286248
 

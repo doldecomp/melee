@@ -102,6 +102,7 @@ typedef struct itBombHeiAttributes {
 typedef struct itBox_ItemVars {
     s32 xDD4;
     s32 xDD8;
+    HSD_JObj* xDDC;
 } itBox_ItemVars;
 
 typedef struct itDosei_ItemVars {
