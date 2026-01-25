@@ -5,12 +5,14 @@
 
 #include "baselib/jobj.h"
 #include "baselib/random.h"
+#include "cm/camera.h"
 #include "ef/efsync.h"
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
+#include "lb/lb_00F9.h"
 
 /// #it_80286088
 
@@ -130,7 +132,43 @@ void it_3F14_Logic1_Dropped(Item_GObj* gobj)
 
 /// #itBox_UnkMotion4_Coll
 
-/// #it_80286AA4
+/// Box/Crate item attributes for spawn behavior
+typedef struct itBoxAttributes {
+    /* +00 */ s32 spawn_weight_0;     ///< Weight for item spawn outcome 1
+    /* +04 */ s32 spawn_weight_1;     ///< Weight for item spawn outcome 2
+    /* +08 */ s32 spawn_weight_2;     ///< Weight for item spawn outcome 3
+    /* +0C */ s32 empty_weight;       ///< Weight for empty box (no items)
+    /* +10 */ s32 x10;                ///< Used when spawning items
+    /* +14 */ f32 damage_threshold;   ///< Damage needed to break the box
+} itBoxAttributes;
+
+/// Box opens empty (no items spawned). Clears velocity, sets opened flag,
+/// spawns smoke effect (0x78), and transitions to state 6.
+void it_80286AA4(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    Vec3 pos;
+
+    it_8026BB44(gobj);
+    it_80272C08(gobj);
+    it_802756D0(gobj);
+    it_8026B3A8(gobj);
+    it_8026BD24(gobj);
+    it_8027518C(gobj);
+
+    ip->x40_vel.x = 0.0F;
+    ip->x40_vel.y = 0.0F;
+    ip->xDCF_flag.b2 = 1;
+    ip->xDD4_itemVar.box.opened = 1;
+    ip->xDD4_itemVar.box.despawn_timer = 40;
+
+    it_80275444(gobj);
+
+    pos = ip->pos;
+    lb_800119DC(&pos, 0x78, 1.0F, 0.02F, 1.0471976F);
+
+    Item_80268E5C(gobj, 6, 2);
+}
 
 bool itBox_UnkMotion6_Anim(Item_GObj* gobj)
 {
@@ -144,7 +182,32 @@ bool itBox_UnkMotion6_Coll(Item_GObj* gobj)
     return false;
 }
 
-/// #it_80286BA0
+/// Box opens and spawns items. Plays sound, triggers camera, spawns items,
+/// sets opened flag, and transitions to state 7.
+void it_80286BA0(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itBoxAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+    HSD_JObj* jobj = gobj->hsd_obj;
+    PAD_STACK(8);
+
+    Item_8026AE84(ip, 0xF6, 0x7F, 0x40);
+    Camera_80030E44(2, &ip->pos);
+    it_80286248(gobj, attr->spawn_weight_0, attr->spawn_weight_1,
+                attr->spawn_weight_2, attr->x10);
+    HSD_JObjSetFlagsAll(jobj, 0x10);
+    it_802756D0(gobj);
+
+    ip->x40_vel.x = 0.0F;
+    ip->x40_vel.y = 0.0F;
+    ip->xDCF_flag.b2 = 1;
+    ip->xDD4_itemVar.box.opened = 1;
+    ip->xDD4_itemVar.box.despawn_timer = 40;
+
+    it_8026B3A8(gobj);
+
+    Item_80268E5C(gobj, 7, 2);
+}
 
 bool itBox_UnkMotion7_Anim(Item_GObj* gobj)
 {
@@ -162,16 +225,6 @@ bool itBox_UnkMotion7_Coll(Item_GObj* gobj)
 {
     return false;
 }
-
-/// Box/Crate item attributes for spawn behavior
-typedef struct itBoxAttributes {
-    /* +00 */ s32 spawn_weight_0;     ///< Weight for item spawn outcome 1
-    /* +04 */ s32 spawn_weight_1;     ///< Weight for item spawn outcome 2
-    /* +08 */ s32 spawn_weight_2;     ///< Weight for item spawn outcome 3
-    /* +0C */ s32 empty_weight;       ///< Weight for empty box (no items)
-    /* +10 */ s32 x10;                ///< Used when spawning items
-    /* +14 */ f32 damage_threshold;   ///< Damage needed to break the box
-} itBoxAttributes;
 
 /// Inline helper: spawn break effect and roll for item spawn.
 /// Used by DmgDealt, Clanked, HitShield, and Reflected callbacks.
