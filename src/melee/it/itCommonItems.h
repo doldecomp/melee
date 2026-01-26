@@ -100,9 +100,32 @@ typedef struct itBombHeiAttributes {
 } itBombHeiAttributes;
 
 typedef struct itBox_ItemVars {
-    s32 xDD4;
-    s32 xDD8;
+    /* +0 */ s32 opened; ///< True if box has been opened/broken
+    /* +4 */ s32
+        despawn_timer; ///< Countdown timer after opening (starts at 40)
+    /* +8 */ HSD_GObj*
+        spawned_gobj;        ///< Related GObj that needs cleanup on destroy
+    /* +C */ f32 rot_vel_x;  ///< Rotation velocity around X axis (wobble)
+    /* +10 */ f32 rot_vel_y; ///< Rotation velocity around Y axis (wobble)
 } itBox_ItemVars;
+
+typedef struct itWstar_ItemVars {
+    f32 xDD4;
+    f32 xDD8;
+} itWstar_ItemVars;
+
+/// Box/Crate item attributes loaded from .dat file
+typedef struct itBoxAttributes {
+    /* +00 */ s32 spawn_weight_0;         ///< Weight for item spawn outcome 1
+    /* +04 */ s32 spawn_weight_1;         ///< Weight for item spawn outcome 2
+    /* +08 */ s32 spawn_weight_2;         ///< Weight for item spawn outcome 3
+    /* +0C */ s32 empty_weight;           ///< Weight for empty box (no items)
+    /* +10 */ s32 special_spawn_weight;   ///< Weight for special item roll
+    /* +14 */ f32 damage_threshold;       ///< Damage needed to break the box
+    /* +18 */ f32 bounce_angle_threshold; ///< Max angle from vertical to stop
+    /* +1C */ f32
+        break_vel_threshold; ///< Velocity needed to break box on landing
+} itBoxAttributes;
 
 typedef struct itDosei_ItemVars {
     s32 xDD4;
@@ -278,10 +301,20 @@ typedef struct itFlipper_ItemVars {
     s32 xDD4;
     s32 xDD8;
     s32 xDDC;
-    s32 xDE0;
-    s32 xDE4;
+    f32 xDE0;
+    f32 xDE4;
     s32 xDE8;
+    s32 xDEC;
 } itFlipper_ItemVars;
+
+typedef struct itFlipper_DatAttrs {
+    /* +0 */ s32 x0;
+    /* +4 */ s32 x4;
+} itFlipper_DatAttrs;
+
+typedef struct itHarisen_DatAttrs {
+    /* +0 */ f32 x0_scale;
+} itHarisen_DatAttrs;
 
 typedef struct itFoods_ItemVars {
     /* +0 ip+DD4 */ s32 x0;
@@ -610,7 +643,8 @@ typedef struct itTaru_ItemVars {
 } itTaru_ItemVars;
 
 typedef struct itTaruCann_DatAttrs {
-    /*  +0 */ char pad_0[0x28];
+    /*  +0 */ char pad_0[0x24];
+    /* +24 */ f32 x24;
     /* +28 */ int x28;
     /* +2C */ int x2C;
 } itTaruCann_DatAttrs;
@@ -1003,9 +1037,24 @@ typedef struct itSScopeAttributes {
     /* +34 */ Vec3 x34;
 } itSScopeAttributes;
 
+typedef struct itsonansAttributes{
+    f32 x0;
+    f32 x4;
+    f32 x8; //hit sens
+    f32 xC;
+    f32 x10;
+    f32 x14;
+    f32 x18;
+    f32 x1C;
+    f32 x20;
+    s32 x24; //lifetimeset
+}itsonansAttributes;
+
 typedef struct itSonans_ItemVars {
     /* ip+DD4 */ u8 _0[0x60 - 0x0];
     /* ip+E34 */ f32 x60;
+    /* ip+E38 */ f32 x64;
+    /* ip+E3C */ f32 x68;
 } itSonans_ItemVars;
 
 typedef struct itStarRodStar_ItemVars {

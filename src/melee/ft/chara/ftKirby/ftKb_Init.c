@@ -3378,7 +3378,23 @@ void ftKb_SpecialN_800EFD08(Fighter_GObj* gobj)
     ftKb_SpecialN_800EFAF0_inline(gobj);
 }
 
-/// #ftKb_SpecialN_800EFD64
+void ftKb_SpecialN_800EFD64(Fighter_GObj* gobj)
+{
+    if (GET_FIGHTER(gobj)->fv.kb.hat.jobj == NULL) {
+        Fighter* fp = gobj->user_data;
+        KirbyHatStruct** hats = ft_80459B88.hats;
+        KirbyHatStruct* hat = hats[FTKIND_KIRBY];
+        fp->fv.kb.hat.x14.data = HSD_ObjAlloc(&fighter_x2040_alloc_data);
+        ftPartsPObjSetDefaultClass();
+        fp->fv.kb.hat.jobj = HSD_JObjLoadJoint(hat->hat_joint);
+        fp->x2225_b2 = true;
+        ftPartsPObjClearDefaultClass();
+        ftParts_80075650(gobj, fp->fv.kb.hat.jobj, &fp->fv.kb.hat.x14);
+        ftParts_8007487C(&hat->desc, &fp->fv.kb.hat.x24, 0, &fp->fv.kb.hat.x14,
+                         &fp->fv.kb.hat.x14);
+        ftCo_8009D704(fp);
+    }
+}
 
 void ftKb_SpecialN_800EFE1C(Fighter_GObj* gobj)
 {
@@ -3811,7 +3827,33 @@ void ftKb_SpecialN_800F12C8(Fighter_GObj* gobj)
     ftKb_SpecialN_800EF69C(gobj, 0x10, ft_80459B88.hats[FTKIND_PURIN]);
     ftCo_UnloadDynamicBones(fp);
 }
-/// #ftKb_SpecialN_800F130C
+/// Load Dr. Mario's hat for Kirby copy ability.
+/// @note The self-assignment `fp = fp` is required for register allocation.
+void ftKb_SpecialN_800F130C(Fighter_GObj* gobj)
+{
+    u8 sp14[0x90];
+    Fighter* fp = fp = GET_FIGHTER(gobj);
+    KirbyHatStruct* temp_r29;
+
+    PAD_STACK(4);
+
+    if (fp->fv.kb.hat.x14.data != NULL) {
+        return;
+    }
+
+    temp_r29 = ft_80459B88.hats[FTKIND_DRMARIO];
+    ftKb_SpecialN_800EF040(gobj, 0x16, temp_r29);
+    fp->fv.kb.hat.x14.data = HSD_ObjAlloc(&fighter_x2040_alloc_data);
+    fp->fv.kb.hat.x1C.data = HSD_ObjAlloc(&fighter_x2040_alloc_data);
+    ftKb_SpecialN_800EF0E4(gobj, 0x16, sp14);
+    ftKb_SpecialN_800EF35C(gobj, 0x16, sp14);
+    ftKb_SpecialN_800EF438(gobj, temp_r29);
+    ftParts_8007487C((FtPartsDesc*) temp_r29, &fp->fv.kb.hat.x24,
+                     fp->x619_costume_id, &fp->fv.kb.hat.x14,
+                     &fp->fv.kb.hat.x1C);
+    ftAnim_80070200(fp, (ftData_x8_x8*) &temp_r29->desc.vis_table,
+                    &fp->fv.kb.x44, &fp->fv.kb.hat.x14);
+}
 
 void ftKb_SpecialN_800F13F0(Fighter_GObj* gobj)
 {
@@ -5277,7 +5319,14 @@ void fn_800F6908(HSD_GObj* gobj)
     ftCommon_8007E2F4(fp, 0x1FF);
 }
 
-/// #fn_800F697C
+void fn_800F697C(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftCommon_8007D5D4(fp);
+    Fighter_ChangeMotionState(gobj, ftKb_MS_SpecialAirNCapture0, 0x0C4C5092,
+                              fp->cur_anim_frame, 1, 0, NULL);
+    ftCommon_8007E2F4(fp, 0x1FF);
+}
 
 void fn_800F69E8(HSD_GObj* gobj)
 {
@@ -8244,7 +8293,20 @@ void ftKb_MsSpecialAirNLoop_Coll(Fighter_GObj* gobj)
 
 /// #ftKb_SpecialNMs_8010BBC8
 
-/// #ftKb_SpecialNMs_8010BC40
+void ftKb_SpecialNMs_8010BC40(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    s32 var_r4;
+
+    if ((s32) fp->fv.gw.x2238_panicCharge == 0x12) {
+        var_r4 = 0x1ED;
+    } else {
+        var_r4 = 0x213;
+    }
+
+    Fighter_ChangeMotionState(gobj, var_r4, 0x3200U, ftKb_Init_804D9570, 0,
+                              ftKb_Init_804D9570, NULL);
+}
 
 void ftKb_SpecialNMs_8010BC90(Fighter_GObj* gobj)
 {

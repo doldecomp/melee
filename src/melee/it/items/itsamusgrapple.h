@@ -14,7 +14,7 @@
 /* 2B7150 */ void it_2725_Logic53_Spawned(Item_GObj*);
 /* 2B7160 */ UNK_RET it_802B7160(UNK_PARAMS);
 /* 2B743C */ UNK_RET it_802B743C(UNK_PARAMS);
-/* 2B75FC */ UNK_RET it_802B75FC(UNK_PARAMS);
+/* 2B75FC */ HSD_JObj* it_802B75FC(Item*, HSD_JObj*, s32, f32);
 /* 2B7B84 */ void it_802B7B84(Item_GObj* gobj);
 /* 2B7C18 */ Item_GObj* it_802B7C18(Fighter_GObj*, Vec3*, float facing_dir);
 /* 2B7E34 */ UNK_RET fn_802B7E34(UNK_PARAMS);
@@ -51,10 +51,10 @@
 /* 2BAA08 */ void it_802BAA08(Item_GObj* gobj);
 /* 2BAA58 */ void it_802BAA58(Item_GObj* gobj);
 /* 2BAA94 */ void it_802BAA94(Item_GObj* gobj);
-/* 2BAAE4 */ void it_802BAAE4(HSD_GObj*, Vec3*, float facing_dir);
+/* 2BAAE4 */ void it_802BAAE4(Item_GObj* gobj, Vec3* vel, f32 unused);
 /* 2BAB40 */ void it_802BAB40(Item_GObj*);
 /* 2BAB7C */ void it_802BAB7C(Item_GObj*);
-/* 2BABB8 */ UNK_RET it_802BABB8(UNK_PARAMS);
+/* 2BABB8 */ void it_802BABB8(Item_GObj* gobj);
 /* 2BAC3C */ void it_802BAC3C(Fighter_GObj* gobj);
 /* 2BAC80 */ void it_802BAC80(Fighter_GObj* gobj);
 /* 2BACC4 */ void it_802BACC4(Fighter_GObj* gobj);

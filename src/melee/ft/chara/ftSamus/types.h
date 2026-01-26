@@ -90,12 +90,19 @@ union ftSamus_MotionVars {
         s32 x0;
     } unk2;
 
-    /// @todo Proper state name.
+    /// SpecialN charge shot state - x4 is frame counter (integer)
     struct ftSamus_State3Vars {
         s32 x0;
         s32 x4;
         float x8;
     } unk3;
+
+    /// Grapple beam state - x4 is duration (float)
+    struct ftSamus_GrappleVars {
+        s32 x0;
+        float x4;
+        float x8;
+    } grapple;
 
     /// @todo Proper state name.
     struct ftSamus_State5Vars {
