@@ -53,6 +53,8 @@ static s8 mnStageSw_804D6BF4;
 /// Sync stage toggle states from user data to unlock system.
 /// For each stage, if it's unlocked, set its enable state from user_data[i+2].
 /// Stack padding required to match original frame size.
+/// Pragma prevents inlining - function is called from fn_80235F80, not inlined.
+#pragma dont_inline on
 static void mnStageSw_8023593C(HSD_GObj* gobj)
 {
     u8* arr = mnStageSw_803ED4C4;
@@ -72,6 +74,7 @@ static void mnStageSw_8023593C(HSD_GObj* gobj)
         ptr++;
     } while (i < NUM_STAGES);
 }
+#pragma dont_inline reset
 
 /// #mnStageSw_802359C8
 
