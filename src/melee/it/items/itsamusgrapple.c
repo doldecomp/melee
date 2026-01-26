@@ -207,8 +207,10 @@ void it_802BAB7C(Item_GObj* gobj)
 }
 
 /// Set grapple beam state and store duration.
-/// @note The type pun stores a float value to an s32 field. The field
-/// may actually be a float, but changing the struct affects other code.
+/// @todo Type pun required: stores float to s32 field unk3.x4. Changing x4 to
+/// float breaks ftSs_SpecialN_Enter, ftSs_SpecialAirN_Enter, and
+/// ftSs_SpecialNHold_Anim (generates stfs instead of stw for "= 0").
+/// Fix: add grapple-specific union member to ftSamus_MotionVars.
 void it_802BABB8(Item_GObj* gobj)
 {
     Item* ip = gobj->user_data;

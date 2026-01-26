@@ -116,8 +116,15 @@ bool itHarisen_UnkMotion6_Anim(Item_GObj* gobj)
 void itHarisen_UnkMotion6_Phys(Item_GObj* gobj) {}
 
 /// Reset harisen scale and animation speed when dropped.
-/// @note The double user_data load is required to match - the compiler
-/// reloads ip into a different register between the two assignments.
+/// @todo Fake match: the `ip = gobj->user_data` reload at line 126 suggests an
+/// inline function boundary. The pattern `ip->scl = ...; it_8026B390(gobj);`
+/// is likely wrapped in an inline like:
+///   static inline void itResetScaleAndFlag(Item_GObj* gobj) {
+///       Item* ip = gobj->user_data;
+///       ip->scl = ip->xCC_item_attr->x60_scale;
+///       it_8026B390(gobj);
+///   }
+/// This inline isn't used elsewhere in the codebase yet, so we can't confirm.
 void it_3F14_Logic24_Dropped(Item_GObj* gobj)
 {
     Item* ip = gobj->user_data;
