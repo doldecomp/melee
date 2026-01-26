@@ -43,7 +43,7 @@ void it_802CD4DC(Item_GObj* gobj, Item_GObj* ref_gobj)
 void it_802CD4FC(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itSonans_DatAttrs* attr = ip->xC4_article_data->x4_specialAttributes;
+    itsonansAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
     f32 angle;
     f32 max_angle;
     if (ip->ground_or_air == GA_Air)
@@ -56,30 +56,30 @@ void it_802CD4FC(Item_GObj* gobj)
         angle = ip->xDD4_itemVar.sonans.x64;
         if (angle > 0.0f && ip->xDD4_itemVar.sonans.x60 > 0.0f)
         {
-            ip->xDD4_itemVar.sonans.x60 += attr->x14;
+            ip->xDD4_itemVar.sonans.x60 += attrs->x14;
         } else if (angle <= 0.0f && ip->xDD4_itemVar.sonans.x60 <= 0.0f)
         {
-            ip->xDD4_itemVar.sonans.x60 -= attr->x14;
+            ip->xDD4_itemVar.sonans.x60 -= attrs->x14;
         } else if (angle > 0.0f && ip->xDD4_itemVar.sonans.x60 <= 0.0f)
         {
             ip->xDD4_itemVar.sonans.x60 -= attr->x10;
         } else if (angle <= 0.0f && ip->xDD4_itemVar.sonans.x60 > 0.0f)
         {
-            ip->xDD4_itemVar.sonans.x60 += attr->x10;
+            ip->xDD4_itemVar.sonans.x60 += attrs->x10;
         }
         angle = ip->xDD4_itemVar.sonans.x64;
         if (angle < 0.0f)
         {
             angle = -angle;
         }
-        if (angle < attr->x1C)
+        if (angle < attrs->x1C)
         {
             angle = ip->xDD4_itemVar.sonans.x60;
             if (angle < 0.0f)
             {
                 angle = -angle;
             }
-            if (angle < attr->x1C)
+            if (angle < attrs->x1C)
             {
                 ip->xDD4_itemVar.sonans.x64 = 0.0f;
                 ip->xDD4_itemVar.sonans.x60 = 0.0f;
@@ -94,24 +94,24 @@ void it_802CD4FC(Item_GObj* gobj)
             ip->xDD4_itemVar.sonans.x64 += ip->xDD4_itemVar.sonans.x60;
         }
         angle = ip->xDD4_itemVar.sonans.x64;
-        max_angle = attr->x18;
+        max_angle = attrs->x18;
         if (angle > max_angle)
         {
             ip->xDD4_itemVar.sonans.x60 =
                 (f32) (ip->xDD4_itemVar.sonans.x60 * it_804DD3C8);
-            ip->xDD4_itemVar.sonans.x64 = attr->x18;
+            ip->xDD4_itemVar.sonans.x64 = attrs->x18;
         } else if (angle < -max_angle)
         {
             ip->xDD4_itemVar.sonans.x60 =
                 (f32) (ip->xDD4_itemVar.sonans.x60 * it_804DD3C8);
-            ip->xDD4_itemVar.sonans.x64 = -attr->x18;
+            ip->xDD4_itemVar.sonans.x64 = -attrs->x18;
         }
         HSD_JObjSetRotationZ(ip->xBBC_dynamicBoneTable->bones[4],
                              it_804DD3D0 * ip->xDD4_itemVar.sonans.x64);
     }
     it_80272460(&ip->x5D4_hitboxes[0].hit, (u32) ip->xDD4_itemVar.sonans.x68,
                 gobj);
-    ip->xDD4_itemVar.sonans.x68 -= attr->x20;
+    ip->xDD4_itemVar.sonans.x68 -= attrs->x20;
 }
 
 bool it_2725_Logic9_DmgDealt(Item_GObj* gobj)
