@@ -606,6 +606,7 @@ struct Item {
         itTomato_ItemVars tomato;
         itWhispyApple_ItemVars whispyapple;
         itWhiteBea_ItemVars whitebea;
+        itWstar_ItemVars wstar;
         itZeldaDinFireExplode_ItemVars zeldadinfireexplode;
         itMasterHandBullet_ItemVars masterhandbullet;
         itMasterHandLaser_ItemVars masterhandlaser;

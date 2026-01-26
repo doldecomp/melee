@@ -2,10 +2,16 @@
 
 #include "itlinkhookshot.h"
 
+#include "ft/chara/ftSamus/types.h"
+#include "ft/fighter.h"
 #include "ft/ftcoll.h"
 #include "it/inlines.h"
 #include "it/it_26B1.h"
+#include "it/itCharItems.h"
 #include "it/item.h"
+
+#include <baselib/gobj.h>
+#include <baselib/gobjplink.h>
 
 void it_2725_Logic53_Spawned(Item_GObj* gobj)
 {
@@ -18,7 +24,36 @@ void it_2725_Logic53_Spawned(Item_GObj* gobj)
 
 /// #it_802B75FC
 
-/// #it_802B7B84
+void it_802B7B84(Item_GObj* arg0)
+{
+    Item* item;
+    Fighter* fp;
+    HSD_GObj* gobj;
+    ItemLink* item_link;
+
+    if (arg0 != NULL) {
+        item = arg0->user_data;
+        if (item != NULL) {
+            if (item->xDD4_itemVar.samusgrapple.x8 != NULL) {
+                fp = GET_FIGHTER(item->xDD4_itemVar.samusgrapple.x8);
+                if (fp != NULL) {
+                    item->xDD4_itemVar.samusgrapple.unk_10 = NULL;
+                    fp->fv.ss.x223C = 0;
+                    fp->accessory2_cb = 0;
+                    fp->death1_cb = 0;
+                    fp->accessory3_cb = 0;
+                    item_link = item->xDD4_itemVar.linkhookshot.x0;
+                    while (item_link != NULL) {
+                        gobj = item_link->x1D0_GObj;
+                        item_link = item_link->next;
+                        HSD_GObjPLink_80390228(gobj);
+                    }
+                    Item_8026A8EC(arg0);
+                }
+            }
+        }
+    }
+}
 
 /// #it_802B7C18
 
@@ -148,7 +183,14 @@ void it_802BAA94(Item_GObj* gobj)
     it_802A2428(gobj);
 }
 
-/// #it_802BAAE4
+void it_802BAAE4(Item_GObj* gobj, Vec3* vel, f32 unused)
+{
+    Item* ip = GET_ITEM(gobj);
+    ItemLink* link = ip->xDD4_itemVar.linkhookshot.x0;
+    link->x8_vel = *vel;
+    Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
+    it_802A2428(gobj);
+}
 
 void it_802BAB40(Item_GObj* gobj)
 {
@@ -164,11 +206,46 @@ void it_802BAB7C(Item_GObj* gobj)
     it_802A2428(gobj);
 }
 
-/// #it_802BABB8
+/// Set grapple beam state and store duration.
+void it_802BABB8(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    Fighter* fp = ip->owner->user_data;
+    ftSs_DatAttrs* da = fp->ft_data->ext_attr;
+    PAD_STACK(24);
+    Item_80268E5C(gobj, 8, ITEM_ANIM_UPDATE);
+    it_802A2428(gobj);
+    fp->mv.ss.grapple.x4 = (f32) (s32) da->xD0;
+}
 
-/// #it_802BAC3C
+void it_802BAC3C(Fighter_GObj* gobj)
+{
+    Fighter* fp;
 
-/// #it_802BAC80
+    fp = gobj->user_data;
+    if (fp->fv.ss.x223C != NULL) {
+        it_802B7B84(fp->fv.ss.x223C);
+        return;
+    }
+    fp->accessory2_cb = NULL;
+    fp->death1_cb = NULL;
+    fp->accessory3_cb = NULL;
+}
+
+void it_802BAC80(Fighter_GObj* gobj)
+{
+    Item* ip;
+    Fighter* fp;
+
+    fp = gobj->user_data;
+    if (fp->fv.ss.x223C != NULL) {
+        ip = GET_ITEM((HSD_GObj*) fp->fv.ss.x223C);
+        if (ip->xDD4_itemVar.samusgrapple.unk_10 != NULL) {
+            ((void (*)(Item_GObj*)) ip->xDD4_itemVar.samusgrapple.unk_10)(
+                fp->fv.ss.x223C);
+        }
+    }
+}
 
 /// #it_802BACC4
 
