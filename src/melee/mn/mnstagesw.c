@@ -53,7 +53,8 @@ static s8 mnStageSw_804D6BF4;
 /// Sync stage toggle states from user data to unlock system.
 /// For each stage, if it's unlocked, set its enable state from user_data[i+2].
 /// Stack padding required to match original frame size.
-/// Pragma prevents inlining - function is called from fn_80235F80, not inlined.
+/// Pragma prevents inlining - function is called from fn_80235F80, not
+/// inlined.
 #pragma dont_inline on
 static void mnStageSw_8023593C(HSD_GObj* gobj)
 {
@@ -119,41 +120,18 @@ static void mnStageSw_80236178(HSD_GObj* gobj, u8 idx)
 static HSD_JObj* mnStageSw_802364A0(HSD_GObj* gobj, u8 idx)
 {
     HSD_JObj* jobj;
-    HSD_JObj* temp;
     u8 i;
 
-    if ((u8) idx >= 15) {
-        jobj = (HSD_JObj*) gobj->x34_unk;
-        if (jobj == NULL) {
-            temp = NULL;
-        } else {
-            temp = jobj->child;
+    if (idx >= 15) {
+        jobj = HSD_JObjGetChild(gobj->x34_unk);
+        for (i = 15; i < idx; i++) {
+            jobj = HSD_JObjGetNext(jobj);
         }
-        jobj = temp;
-        for (i = 15; (u8) i < (u8) idx; i++) {
-            if (jobj == NULL) {
-                temp = NULL;
-            } else {
-                temp = jobj->next;
-            }
-            jobj = temp;
-        }
-    } else {
-        jobj = (HSD_JObj*) gobj->user_data;
-        if (jobj == NULL) {
-            temp = NULL;
-        } else {
-            temp = jobj->child;
-        }
-        jobj = temp;
-        for (i = 0; (u8) i < (u8) idx; i++) {
-            if (jobj == NULL) {
-                temp = NULL;
-            } else {
-                temp = jobj->next;
-            }
-            jobj = temp;
-        }
+        return jobj;
+    }
+    jobj = HSD_JObjGetChild(gobj->user_data);
+    for (i = 0; i < idx; i++) {
+        jobj = HSD_JObjGetNext(jobj);
     }
     return jobj;
 }
