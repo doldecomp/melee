@@ -21,7 +21,7 @@
 
 #include <math.h>
 
-#define ROT_VEL_SCALE 0.03490658476948738
+static double const ROT_VEL_SCALE = 0.03490658476948738;
 
 /// Spawn a box accessory item that follows the parent item.
 /// Returns the spawned gobj, or NULL if parent is invalid.
@@ -69,8 +69,6 @@ Item_GObj* it_80286088(Item_GObj* parent_gobj)
     }
     return result;
 }
-
-#undef ROT_VEL_SCALE
 
 /// Initialize box item state when spawned
 void it_3F14_Logic1_Spawned(Item_GObj* gobj)
