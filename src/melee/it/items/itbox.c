@@ -107,9 +107,7 @@ void it_80286248(Item_GObj* gobj, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     (void) pad1;
     (void) pad2;
 
-    zero.z = 0.0F;
-    zero.y = 0.0F;
-    zero.x = 0.0F;
+    zero.x = zero.y = zero.z = 0.0F;
 
     if (it_8026F8B4(gobj, &ip->pos, &zero, false)) {
         return;
