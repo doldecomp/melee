@@ -7,6 +7,15 @@
 #include "it/it_2725.h"
 #include "it/item.h"
 
+ItemStateTable it_803F7C70[] = {
+    { 0, itSonans_UnkMotion0_Anim, itSonans_UnkMotion0_Phys,
+      itSonans_UnkMotion0_Coll },
+    { 1, itSonans_UnkMotion1_Anim, itSonans_UnkMotion1_Phys,
+      itSonans_UnkMotion1_Coll },
+    { 2, itSonans_UnkMotion2_Anim, itSonans_UnkMotion2_Phys,
+      itSonans_UnkMotion2_Coll }
+};
+
 void it_802CD44C(Item_GObj* gobj)
 {
     Item* item = GET_ITEM(gobj);
