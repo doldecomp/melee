@@ -118,7 +118,34 @@ void itLipstick_UnkMotion4_Phys(Item_GObj* gobj)
     it_80274658(gobj, it_804D6D28->x68_float);
 }
 
-/// #itLipstick_UnkMotion3_Coll
+bool itLipstick_UnkMotion3_Coll(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    s32 result;
+
+    if (ip->xD4C != 0) {
+        result = it_8026DAA8(gobj);
+        if ((result & 0xF) != 0) {
+            if (ip->xDAC_itcmd_var0 != 0) {
+                it_8029A218(ip->owner, &ip->pos, ip->facing_dir, 0);
+                ip->xDAC_itcmd_var0 = 0;
+            }
+
+            it_80276FC4(gobj, result);
+
+            if ((result & 1) != 0) {
+                if (it_8026DBC8(gobj)) {
+                    ip = GET_ITEM(gobj);
+                    it_8026B390(gobj);
+                    ip->x40_vel.x = ip->x40_vel.y = ip->x40_vel.z = 0.0F;
+                    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+                }
+            }
+        }
+        return false;
+    }
+    return it_8026DF34(gobj);
+}
 
 bool it_3F14_Logic23_DmgDealt(Item_GObj* gobj)
 {
