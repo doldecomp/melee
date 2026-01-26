@@ -206,10 +206,7 @@ bool itBox_UnkMotion0_Anim(Item_GObj* gobj)
     return false;
 }
 
-void itBox_UnkMotion0_Phys(Item_GObj* gobj)
-{
-    return;
-}
+void itBox_UnkMotion0_Phys(Item_GObj* gobj) {}
 
 bool itBox_UnkMotion0_Coll(Item_GObj* gobj)
 {
@@ -280,10 +277,7 @@ bool itBox_UnkMotion2_Anim(Item_GObj* gobj)
     return false;
 }
 
-void itBox_UnkMotion2_Phys(Item_GObj* gobj)
-{
-    return;
-}
+void itBox_UnkMotion2_Phys(Item_GObj* gobj) {}
 
 void it_3F14_Logic1_Thrown(Item_GObj* gobj)
 {
@@ -398,10 +392,7 @@ bool itBox_UnkMotion6_Anim(Item_GObj* gobj)
     return it_802751D8(gobj);
 }
 
-void itBox_UnkMotion6_Phys(Item_GObj* gobj)
-{
-    return;
-}
+void itBox_UnkMotion6_Phys(Item_GObj* gobj) {}
 
 bool itBox_UnkMotion6_Coll(Item_GObj* gobj)
 {
@@ -445,10 +436,7 @@ bool itBox_UnkMotion7_Anim(Item_GObj* gobj)
     return true;
 }
 
-void itBox_UnkMotion7_Phys(Item_GObj* gobj)
-{
-    return;
-}
+void itBox_UnkMotion7_Phys(Item_GObj* gobj) {}
 
 bool itBox_UnkMotion7_Coll(Item_GObj* gobj)
 {
@@ -544,10 +532,7 @@ bool itBox_UnkMotion5_Anim(Item_GObj* gobj)
     return false;
 }
 
-void itBox_UnkMotion5_Phys(Item_GObj* gobj)
-{
-    return;
-}
+void itBox_UnkMotion5_Phys(Item_GObj* gobj) {}
 
 bool itBox_UnkMotion5_Coll(Item_GObj* gobj)
 {
