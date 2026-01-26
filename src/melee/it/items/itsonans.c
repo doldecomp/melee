@@ -7,7 +7,20 @@
 #include "it/it_2725.h"
 #include "it/item.h"
 
-/// #it_802CD44C
+void it_802CD44C(Item_GObj* gobj)
+{
+    Item* item = GET_ITEM(gobj);
+    itsonansAttributes* attrs = item->xC4_article_data->x4_specialAttributes;
+    item->facing_dir = 0.0f;
+    item->xDAC_itcmd_var0 = 0;
+    item->xD44_lifeTimer = attrs->x24;
+    item->xDD4_itemVar.sonans.x60 = 0.0f;
+    item->xDD4_itemVar.sonans.x64 = 0.0f;
+    item->xDD4_itemVar.sonans.x68 = 0.0f;
+    it_80279CDC(gobj, attrs->x0);
+    it_80275444(gobj);
+    it_802CDAA8(gobj);
+}
 
 void it_802CD4D8(Item_GObj* gobj) {}
 
@@ -27,7 +40,16 @@ bool it_2725_Logic9_DmgDealt(Item_GObj* gobj)
 
 /// #it_802CD7D4
 
-/// #itSonans_UnkMotion0_Anim
+bool itSonans_UnkMotion0_Anim(Item_GObj* gobj)
+{
+    Item* item = GET_ITEM(gobj);
+    if (it_80272C6C(gobj) == 0) {
+        it_802CD9C0(gobj);
+        Item_8026AE84(item, 0x272B, 0x7F, 0x40);
+    }
+    item->xD44_lifeTimer -= 1.0f;
+    return false;
+}
 
 void itSonans_UnkMotion0_Phys(Item_GObj* gobj)
 {

@@ -981,9 +981,24 @@ typedef struct itSScopeAttributes {
     /* +34 */ Vec3 x34;
 } itSScopeAttributes;
 
+typedef struct itsonansAttributes{
+    f32 x0;
+    u32 x4;
+    f32 x8; //hit sens
+    f32 xC;
+    f32 x10;
+    f32 x14;
+    f32 x18;
+    f32 x1C;
+    f32 x20;
+    s32 x24; //lifetimeset
+}itsonansAttributes;
+
 typedef struct itSonans_ItemVars {
     /* ip+DD4 */ u8 _0[0x60 - 0x0];
     /* ip+E34 */ f32 x60;
+    /* ip+E38 */ f32 x64;
+    /* ip+E3C */ f32 x68;
 } itSonans_ItemVars;
 
 typedef struct itStarRodStar_ItemVars {
