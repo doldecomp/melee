@@ -983,7 +983,7 @@ typedef struct itSScopeAttributes {
 
 typedef struct itsonansAttributes{
     f32 x0;
-    u32 x4;
+    f32 x4;
     f32 x8; //hit sens
     f32 xC;
     f32 x10;
