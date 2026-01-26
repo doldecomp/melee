@@ -207,10 +207,6 @@ void it_802BAB7C(Item_GObj* gobj)
 }
 
 /// Set grapple beam state and store duration.
-/// @todo Type pun required: stores float to s32 field unk3.x4. Changing x4 to
-/// float breaks ftSs_SpecialN_Enter, ftSs_SpecialAirN_Enter, and
-/// ftSs_SpecialNHold_Anim (generates stfs instead of stw for "= 0").
-/// Fix: add grapple-specific union member to ftSamus_MotionVars.
 void it_802BABB8(Item_GObj* gobj)
 {
     Item* ip = gobj->user_data;
@@ -219,7 +215,7 @@ void it_802BABB8(Item_GObj* gobj)
     PAD_STACK(24);
     Item_80268E5C(gobj, 8, ITEM_ANIM_UPDATE);
     it_802A2428(gobj);
-    *(f32*) &fp->mv.ss.unk3.x4 = (f32)(s32) da->xD0;
+    fp->mv.ss.grapple.x4 = (f32) (s32) da->xD0;
 }
 
 void it_802BAC3C(Fighter_GObj* gobj)
