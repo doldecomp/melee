@@ -133,7 +133,6 @@ bool it_802CD7D4(Item_GObj* gobj) {
         item->xDAC_itcmd_var0 = 1;
     } else
     {
-        
         if ((attrs->x8 * (item->xCA0 * item->xCCC_incDamageDirection)) < 0.0f)
         {
             var_f1 = -(attrs->x8 * (item->xCA0 * item->xCCC_incDamageDirection));
