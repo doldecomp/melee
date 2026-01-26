@@ -231,8 +231,6 @@ bool itBox_UnkMotion4_Anim(Item_GObj* gobj)
     return false;
 }
 
-#define TAU 6.2831853071795862
-
 /// Physics for thrown box motion. Applies gravity and updates rotation
 /// based on stored rotation velocities (wobble effect when thrown).
 void itBox_UnkMotion1_Phys(Item_GObj* gobj)
@@ -240,6 +238,7 @@ void itBox_UnkMotion1_Phys(Item_GObj* gobj)
     HSD_JObj* jobj = GET_JOBJ(gobj);
     Item* ip = GET_ITEM(gobj);
     ItemAttr* attr = ip->xCC_item_attr;
+    double const tau = 2 * M_PI;
 
     it_80272860(gobj, attr->x10_fall_speed, attr->x14_fall_speed_max);
 
@@ -250,24 +249,22 @@ void itBox_UnkMotion1_Phys(Item_GObj* gobj)
         HSD_JObjGetRotation(jobj, &rot);
 
         rot.x += ip->xDD4_itemVar.box.rot_vel_x;
-        if (rot.x > TAU) {
-            rot.x -= TAU;
-        } else if (rot.x < -TAU) {
-            rot.x += TAU;
+        if (rot.x > tau) {
+            rot.x -= tau;
+        } else if (rot.x < -tau) {
+            rot.x += tau;
         }
 
         rot.y += ip->xDD4_itemVar.box.rot_vel_y;
-        if (rot.y > TAU) {
-            rot.y -= TAU;
-        } else if (rot.y < -TAU) {
-            rot.y += TAU;
+        if (rot.y > tau) {
+            rot.y -= tau;
+        } else if (rot.y < -tau) {
+            rot.y += tau;
         }
 
         HSD_JObjSetRotation(jobj, &rot);
     }
 }
-
-#undef TAU
 
 bool itBox_UnkMotion1_Coll(Item_GObj* gobj)
 {
