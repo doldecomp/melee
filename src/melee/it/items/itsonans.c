@@ -62,7 +62,7 @@ void it_802CD4FC(Item_GObj* gobj)
             ip->xDD4_itemVar.sonans.x60 -= attrs->x14;
         } else if (angle > 0.0f && ip->xDD4_itemVar.sonans.x60 <= 0.0f)
         {
-            ip->xDD4_itemVar.sonans.x60 -= attr->x10;
+            ip->xDD4_itemVar.sonans.x60 -= attrs->x10;
         } else if (angle <= 0.0f && ip->xDD4_itemVar.sonans.x60 > 0.0f)
         {
             ip->xDD4_itemVar.sonans.x60 += attrs->x10;
