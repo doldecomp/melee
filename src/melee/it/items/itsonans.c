@@ -6,6 +6,7 @@
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
+#include "it/itcoll.h"
 
 ItemStateTable it_803F7C70[] = {
     { 0, itSonans_UnkMotion0_Anim, itSonans_UnkMotion0_Phys,
