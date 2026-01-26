@@ -124,14 +124,14 @@ extern char mnNameNew_NullCharacter;
 bool IsNameNotAllowed(s32 name_idx)
 {
     char** list = NotAllowedNamesList;
-
-loop:
-    if ((s8) mnNameNew_NullCharacter != (s8) **list) {
-        if (CompareNameStrings(*list, name_idx) == 0) {
+    while (true) {
+        if (mnNameNew_NullCharacter == **list) {
+            break;
+        }
+        if (!CompareNameStrings(*list, name_idx)) {
             return true;
         }
         list++;
-        goto loop;
     }
     return false;
 }
