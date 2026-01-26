@@ -4,6 +4,7 @@
 #include <placeholder.h>
 
 #include "it/inlines.h"
+#include "mp/forward.h"
 
 /* 2182C4 */ void grPushOn_802182C4(bool);
 /* 2182C8 */ void grPushOn_802182C8(void);
@@ -26,7 +27,7 @@
 /* 218ED0 */ void grPushOn_80218ED0(Ground_GObj*);
 /* 218ED4 */ UNK_RET grPushOn_80218ED4(UNK_PARAMS);
 /* 218FC0 */ UNK_RET grPushOn_80218FC0(UNK_PARAMS);
-/* 2190A0 */ UNK_RET fn_802190A0(UNK_PARAMS);
+/* 2190A0 */ void fn_802190A0(Ground*, s32, CollData*, s32, mpLib_GroundEnum);
 /* 2190D0 */ UNK_RET grPushOn_802190D0(UNK_PARAMS);
 /* 219204 */ UNK_RET grPushOn_80219204(UNK_PARAMS);
 /* 219230 */ int grPushOn_80219230(int);
