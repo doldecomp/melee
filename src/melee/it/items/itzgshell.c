@@ -10,6 +10,23 @@
 #include "it/it_2725.h"
 #include "it/item.h"
 
+typedef struct itGShell_Attrs {
+    float x0;
+    float x4;
+    float x8;
+    float xC;
+    float x10;
+    float x14;
+    char pad18[0x1C - 0x18];
+    float x1C;
+    float x20;
+    float x24;
+    float x28;
+    float x2C;
+    float x30;
+    Vec x34;
+} itGShell_Attrs;
+
 /* 2DFFA0 */ static void it_802DFFA0(Item_GObj* gobj);
 
 /// #it_802DDB38
@@ -41,7 +58,19 @@ void it_802DE320(Item_GObj* gobj)
     it_80274C88(gobj);
 }
 
-/// #itZrshell_UnkMotion1_Anim
+bool itZrshell_UnkMotion1_Anim(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    if (ip->xDD4_itemVar.zgshell.xE1C_b0 && ip->xDD0_flag.b0 != 1) {
+        if (ip->xDD4_itemVar.zgshell.xE04 <= 0.0f) {
+            it_80274CAC(gobj);
+            ip->jumped_on = fn_802DFE7C;
+        } else {
+            ip->xDD4_itemVar.zgshell.xE04 -= 1;
+        }
+    }
+    return false;
+}
 
 void itZrshell_UnkMotion1_Phys(Item_GObj* gobj)
 {
@@ -73,7 +102,23 @@ void it_2725_Logic11_Thrown(Item_GObj* gobj)
     Item_8026AE84(ip, 0xF2, 0x7FU, 0x40U);
 }
 
-/// #itZrshell_UnkMotion3_Anim
+bool itZrshell_UnkMotion3_Anim(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    itGShell_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    if (ip->xDD4_itemVar.zgshell.xE08_b0) {
+        ip->xDD4_itemVar.zgshell.xDFC -= 1.0f;
+        if (ip->xDD4_itemVar.zgshell.xDFC <= 0.0f) {
+            ip->xDD4_itemVar.zgshell.xE08_b0 = 0;
+            ip->xDD4_itemVar.zgshell.xDFC = attrs->x28;
+            it_8027572C(gobj, 0);
+            if (ip->xDD4_itemVar.zgshell.xE08_b1) {
+                it_802756E0(gobj);
+            }
+        }
+    }
+    return false;
+}
 
 void itZrshell_UnkMotion3_Phys(Item_GObj* gobj)
 {
@@ -122,7 +167,22 @@ bool itZrshell_UnkMotion4_Coll(Item_GObj* gobj)
 
 /// #it_802DEC80
 
-/// #itZrshell_UnkMotion8_Anim
+bool itZrshell_UnkMotion8_Anim(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    if (ip->xDD4_itemVar.zgshell.xDF4 <= 0.0f) {
+        if (!ip->xDCD_flag.b5) {
+            fn_802DDC8C(gobj);
+        }
+    } else {
+        ip->xDD4_itemVar.zgshell.xDF4 -= 1.0f;
+    }
+    it_802DDBE8(gobj);
+    if (ip->msid == 6 || ip->msid == 5) {
+        it_80272940(gobj);
+    }
+    return false;
+}
 
 void itZrshell_UnkMotion8_Phys(Item_GObj* gobj)
 {
