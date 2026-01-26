@@ -491,8 +491,11 @@ typedef struct itSamusGrapple_ItemVars {
     /* +0 +DD4 */ f32 x0;
     /* +4 +DD8 */ f32 x4;
     /* +8 +DDC */ HSD_GObj* x8;
-    /* +C +DE0 */ f32 xC;
+    /* +C +DE0 */ HSD_JObj* xC;
     /* +10 +DE4 */ UNK_RET (*unk_10)(UNK_PARAMS);
+    /* +14 +DE8 */ u8 x14;
+    /* +15 +DE9 */ u8 x15;
+    /* +16 +DEA */ u8 x16;
 } itSamusGrapple_ItemVars;
 
 typedef struct itSeakNeedleThrown_ItemVars {

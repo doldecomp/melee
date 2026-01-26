@@ -102,7 +102,13 @@ typedef struct itBombHeiAttributes {
 typedef struct itBox_ItemVars {
     s32 xDD4;
     s32 xDD8;
+    HSD_JObj* xDDC;
 } itBox_ItemVars;
+
+typedef struct itWstar_ItemVars {
+    f32 xDD4;
+    f32 xDD8;
+} itWstar_ItemVars;
 
 typedef struct itDosei_ItemVars {
     s32 xDD4;
@@ -278,10 +284,20 @@ typedef struct itFlipper_ItemVars {
     s32 xDD4;
     s32 xDD8;
     s32 xDDC;
-    s32 xDE0;
-    s32 xDE4;
+    f32 xDE0;
+    f32 xDE4;
     s32 xDE8;
+    s32 xDEC;
 } itFlipper_ItemVars;
+
+typedef struct itFlipper_DatAttrs {
+    /* +0 */ s32 x0;
+    /* +4 */ s32 x4;
+} itFlipper_DatAttrs;
+
+typedef struct itHarisen_DatAttrs {
+    /* +0 */ f32 x0_scale;
+} itHarisen_DatAttrs;
 
 typedef struct itFoods_ItemVars {
     /* +0 ip+DD4 */ s32 x0;
@@ -588,7 +604,8 @@ typedef struct itTaru_ItemVars {
 } itTaru_ItemVars;
 
 typedef struct itTaruCann_DatAttrs {
-    /*  +0 */ char pad_0[0x28];
+    /*  +0 */ char pad_0[0x24];
+    /* +24 */ f32 x24;
     /* +28 */ int x28;
     /* +2C */ int x2C;
 } itTaruCann_DatAttrs;
