@@ -1,5 +1,7 @@
 #include "grpushon.h"
 
+#include "lb/types.h"
+
 #include <platform.h>
 
 void grPushOn_802182C4(bool arg) {}
@@ -56,7 +58,17 @@ void grPushOn_80218ED0(Ground_GObj* arg) {}
 
 /// #grPushOn_80218FC0
 
-/// #fn_802190A0
+/// Ground collision callback for pushon stage elements.
+/// Activates push behavior when collision flags indicate contact (b1234 == 1).
+void fn_802190A0(Ground* gp, s32 joint_id, CollData* coll, s32 unk,
+                 mpLib_GroundEnum ground_enum)
+{
+    if (((*(u8*) &coll->x34_flags >> 3U) & 0xF) == 1 &&
+        (ground_enum - 1) <= 1U)
+    {
+        gp->u.map.xC4_b0 = true;
+    }
+}
 
 /// #grPushOn_802190D0
 

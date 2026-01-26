@@ -122,7 +122,34 @@ void ftPr_SpecialN_Enter(HSD_GObj* gobj)
 
 /// #ftPr_SpecialAirN_Enter
 
-/// #ftPr_SpecialNStart_Anim
+static inline void setupPurinCallbacks(HSD_GObj* gobj)
+{
+    Fighter* temp_r5;
+    temp_r5 = gobj->user_data;
+    temp_r5->death2_cb = ftPr_SpecialS_8013D658;
+    temp_r5->take_dmg_cb = ftPr_SpecialS_8013D658;
+    temp_r5->deal_dmg_cb = ftPr_SpecialS_8013D764;
+    temp_r5->x21F8 = ftPr_SpecialN_8014222C;
+}
+
+void ftPr_SpecialNStart_Anim(HSD_GObj* gobj)
+{
+    /// @todo Named flags.
+    static u32 const mf = (1 << 1) | (1 << 4) | (1 << 18);
+    Fighter* fp = GET_FIGHTER(gobj);
+    PAD_STACK(4 * 4);
+    fp->mv.pr.specialn.facing_dir = 0;
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        Fighter_ChangeMotionState(gobj, ftPr_MS_SpecialNLoop, mf, 0, 0, 0,
+                                  NULL);
+        setupPurinCallbacks(gobj);
+        fp->cur_anim_frame = 0;
+        ftAnim_SetAnimRate(gobj, 0);
+        fp->gr_vel = fp->self_vel.x = fp->facing_dir * 0.0001f;
+        fp->xE4_ground_accel_1 = fp->x74_anim_vel.x = 0;
+        ftPartSetRotY(fp, 0, M_PI_2);
+    }
+}
 
 /// #ftPr_SpecialNLoop_Anim
 
@@ -133,16 +160,6 @@ void ftPr_SpecialN_Enter(HSD_GObj* gobj)
 /// #ftPr_SpecialNTurn_Anim
 
 /// #ftPr_SpecialNEnd_Anim
-
-static inline void setupPurinCallbacks(HSD_GObj* gobj)
-{
-    Fighter* temp_r5;
-    temp_r5 = gobj->user_data;
-    temp_r5->death2_cb = ftPr_SpecialS_8013D658;
-    temp_r5->take_dmg_cb = ftPr_SpecialS_8013D658;
-    temp_r5->deal_dmg_cb = ftPr_SpecialS_8013D764;
-    temp_r5->x21F8 = ftPr_SpecialN_8014222C;
-}
 
 void ftPr_SpecialAirNStart_Anim(HSD_GObj* gobj)
 {
