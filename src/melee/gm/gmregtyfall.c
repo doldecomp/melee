@@ -279,7 +279,7 @@ void fn_801A6C30(HSD_GObj* gobj)
 
 static u8 gm_804D6740;
 static SceneDesc* gm_804D6748;
-static UNK_T gm_804D6798;
+static HSD_Joint* gm_804D6798;
 static HSD_Archive* gm_804D679C;
 static SceneDesc* gm_804D67A0;
 static SceneDesc* gm_804D67A4;
@@ -456,7 +456,8 @@ void gm_801A7070_OnEnter(void* unused)
     lobj = lb_80011AC4(gm_804D6748->lights);
     HSD_GObjObject_80390A70(temp_r27, HSD_GObj_804D784A, lobj);
     GObj_SetupGXLink(temp_r27, HSD_GObj_LObjCallback, 0, 0);
-    /// create cameras
+    /// the rest of the gobj spawns creates/handles multiple cameras or deal
+    /// with sobjs
     gm_801A6C54();
     gm_801A6DC0();
     temp_r27_2 = GObj_Create(0x13, 0x14, 0);
@@ -489,6 +490,8 @@ void gm_801A7070_OnEnter(void* unused)
     GObj_SetupGXLink(temp_r3_3, HSD_SObjLib_803A49E0, 0x12, 0);
     gm_801A68D8();
     gm_801A4B90();
+
+    // create jobj
     temp_r3_4 = GObj_Create(0xE, 0xF, 0);
     gm_804D6768 = temp_r3_4;
     temp_r3_5 = HSD_JObjLoadJoint(gm_804D6798);
