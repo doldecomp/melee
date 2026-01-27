@@ -219,7 +219,7 @@ struct GameRules {
     /* 0x11 */ u8 x11;
     /* 0x12 */ u8 x12;
     /* 0x13 */ u8 x13;
-    /* 0x14 */ s32 unk_14;     /* inferred */
+    /* 0x14 */ s32 unk_14; /* inferred */
 }; /* size = 0x18 */
 STATIC_ASSERT(sizeof(struct GameRules) == 0x18);
 

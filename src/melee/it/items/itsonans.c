@@ -5,8 +5,8 @@
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
-#include "it/item.h"
 #include "it/itcoll.h"
+#include "it/item.h"
 
 ItemStateTable it_803F7C70[] = {
     { 0, itSonans_UnkMotion0_Anim, itSonans_UnkMotion0_Phys,
@@ -39,69 +39,55 @@ void it_802CD4DC(Item_GObj* gobj, Item_GObj* ref_gobj)
     it_8026B894(gobj, ref_gobj);
 }
 
-//99.63%
+// 99.63%
 void it_802CD4FC(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itsonansAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
     f32 angle;
     f32 max_angle;
-    if (ip->ground_or_air == GA_Air)
-    {
+    if (ip->ground_or_air == GA_Air) {
         it_80272860(gobj, ip->xCC_item_attr->x10_fall_speed,
                     ip->xCC_item_attr->x14_fall_speed_max);
     }
-    if (ip->xDAC_itcmd_var0)
-    {
+    if (ip->xDAC_itcmd_var0) {
         angle = ip->xDD4_itemVar.sonans.x64;
-        if (angle > 0.0f && ip->xDD4_itemVar.sonans.x60 > 0.0f)
-        {
+        if (angle > 0.0f && ip->xDD4_itemVar.sonans.x60 > 0.0f) {
             ip->xDD4_itemVar.sonans.x60 += attrs->x14;
-        } else if (angle <= 0.0f && ip->xDD4_itemVar.sonans.x60 <= 0.0f)
-        {
+        } else if (angle <= 0.0f && ip->xDD4_itemVar.sonans.x60 <= 0.0f) {
             ip->xDD4_itemVar.sonans.x60 -= attrs->x14;
-        } else if (angle > 0.0f && ip->xDD4_itemVar.sonans.x60 <= 0.0f)
-        {
+        } else if (angle > 0.0f && ip->xDD4_itemVar.sonans.x60 <= 0.0f) {
             ip->xDD4_itemVar.sonans.x60 -= attrs->x10;
-        } else if (angle <= 0.0f && ip->xDD4_itemVar.sonans.x60 > 0.0f)
-        {
+        } else if (angle <= 0.0f && ip->xDD4_itemVar.sonans.x60 > 0.0f) {
             ip->xDD4_itemVar.sonans.x60 += attrs->x10;
         }
         angle = ip->xDD4_itemVar.sonans.x64;
-        if (angle < 0.0f)
-        {
+        if (angle < 0.0f) {
             angle = -angle;
         }
-        if (angle < attrs->x1C)
-        {
+        if (angle < attrs->x1C) {
             angle = ip->xDD4_itemVar.sonans.x60;
-            if (angle < 0.0f)
-            {
+            if (angle < 0.0f) {
                 angle = -angle;
             }
-            if (angle < attrs->x1C)
-            {
+            if (angle < attrs->x1C) {
                 ip->xDD4_itemVar.sonans.x64 = 0.0f;
                 ip->xDD4_itemVar.sonans.x60 = 0.0f;
                 ip->xDAC_itcmd_var0 = 0;
-            } else
-            {
+            } else {
                 goto accumulate;
             }
-        } else
-        {
+        } else {
         accumulate:
             ip->xDD4_itemVar.sonans.x64 += ip->xDD4_itemVar.sonans.x60;
         }
         angle = ip->xDD4_itemVar.sonans.x64;
         max_angle = attrs->x18;
-        if (angle > max_angle)
-        {
+        if (angle > max_angle) {
             ip->xDD4_itemVar.sonans.x60 =
                 (f32) (ip->xDD4_itemVar.sonans.x60 * it_804DD3C8);
             ip->xDD4_itemVar.sonans.x64 = attrs->x18;
-        } else if (angle < -max_angle)
-        {
+        } else if (angle < -max_angle) {
             ip->xDD4_itemVar.sonans.x60 =
                 (f32) (ip->xDD4_itemVar.sonans.x60 * it_804DD3C8);
             ip->xDD4_itemVar.sonans.x64 = -attrs->x18;
@@ -121,42 +107,40 @@ bool it_2725_Logic9_DmgDealt(Item_GObj* gobj)
     return false;
 }
 
-//99.04%
-bool it_802CD7D4(Item_GObj* gobj) {
+// 99.04%
+bool it_802CD7D4(Item_GObj* gobj)
+{
     Item* item = GET_ITEM(gobj);
     itsonansAttributes* attrs = item->xC4_article_data->x4_specialAttributes;
     f32 var_f1;
     f32 var_f3;
     f32 temp;
-    if (item->xDAC_itcmd_var0 == 0)
-    {
-        item->xDD4_itemVar.sonans.x60 = attrs->x8 * (item->xCA0 * item->xCCC_incDamageDirection);
+    if (item->xDAC_itcmd_var0 == 0) {
+        item->xDD4_itemVar.sonans.x60 =
+            attrs->x8 * (item->xCA0 * item->xCCC_incDamageDirection);
         item->xDAC_itcmd_var0 = 1;
-    } else
-    {
+    } else {
         if ((attrs->x8 * (item->xCA0 * item->xCCC_incDamageDirection)) < 0.0f)
         {
-            var_f1 = -(attrs->x8 * (item->xCA0 * item->xCCC_incDamageDirection));
-        } else
-        {
-            var_f1 = (attrs->x8 * (item->xCA0 * item->xCCC_incDamageDirection));
+            var_f1 =
+                -(attrs->x8 * (item->xCA0 * item->xCCC_incDamageDirection));
+        } else {
+            var_f1 =
+                (attrs->x8 * (item->xCA0 * item->xCCC_incDamageDirection));
         }
         var_f3 = item->xDD4_itemVar.sonans.x60;
-        if (var_f3 < 0.0f)
-        {
+        if (var_f3 < 0.0f) {
             var_f3 = -var_f3;
         }
-        if (var_f3 < var_f1)
-        {
-            item->xDD4_itemVar.sonans.x60 = (attrs->x8 * (item->xCA0 * item->xCCC_incDamageDirection));
+        if (var_f3 < var_f1) {
+            item->xDD4_itemVar.sonans.x60 =
+                (attrs->x8 * (item->xCA0 * item->xCCC_incDamageDirection));
         }
     }
     temp = item->xCA0 * attrs->x4;
-    if (temp > attrs->xC)
-    {
+    if (temp > attrs->xC) {
         item->xDD4_itemVar.sonans.x68 = attrs->xC;
-    } else
-    {
+    } else {
         item->xDD4_itemVar.sonans.x68 = temp;
     }
     return false;
