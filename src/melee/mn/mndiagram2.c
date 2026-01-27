@@ -1,8 +1,10 @@
 #include "mndiagram2.h"
+
 #include "mndiagram2.static.h"
 
 #include "baselib/forward.h"
 
+#include <stdbool.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjobject.h>
@@ -21,7 +23,6 @@
 #include <melee/mn/mndiagram3.h>
 #include <melee/mn/mnmain.h>
 #include <melee/mn/mnname.h>
-#include <stdbool.h>
 
 /* GetPersistentNameData and GetPersistentFighterData are in gm/gmmain_lib.h */
 

@@ -11,7 +11,8 @@
 /* 23EAC4 */ u32 mnDiagram_ConvertDistanceForDisplay(u32 distance);
 /* 23EB84 */ s32 mnDiagram_GetHitPercentage(u8 is_name_mode, u8 player_index);
 /* 23ECC4 */ s32 mnDiagram_GetPlayPercentage(u8 is_name_mode, u8 player_index);
-/* 23EE38 */ s32 mnDiagram_GetAveragePlayerCount(u8 is_name_mode, u8 player_index);
+/* 23EE38 */ s32 mnDiagram_GetAveragePlayerCount(u8 is_name_mode,
+                                                 u8 player_index);
 /* 23EF70 */ int mnDiagram_GetNameTotalKOs(u8 field_index);
 /* 23EFE4 */ int mnDiagram_GetNameTotalFalls(u8 field_index);
 /* 23F068 */ int mnDiagram_GetFighterTotalKOs(u8 field_index);

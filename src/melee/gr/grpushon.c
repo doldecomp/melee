@@ -1,8 +1,8 @@
 #include "grpushon.h"
 
-#include "lb/types.h"
-
 #include <platform.h>
+
+#include "lb/types.h"
 
 void grPushOn_802182C4(bool arg) {}
 

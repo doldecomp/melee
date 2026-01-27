@@ -1840,7 +1840,6 @@ static inline void increment_selection(u8 selection_count, MenuKind menu_kind)
     } while (mn_80229938(menu_kind, mn_804A04F0.hovered_selection) == 0);
 }
 
-
 /// @brief Special Vs menu think
 void mn_8022C4F4(HSD_GObj* gp)
 {
