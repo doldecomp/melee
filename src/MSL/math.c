@@ -35,8 +35,8 @@ extern const float __sincos_poly[];
 
 // logf Taylor series coefficients - stored as u32 bit patterns in math_data.c
 // to get the right codegen (lwz load from global)
-extern const u32 __logf_C0_bits;  // 0xBF000030 = -0.500003F
-extern const u32 __logf_C1_bits;  // 0x3EAA9F44 = 0.333329856F
+extern const u32 __logf_C0_bits; // 0xBF000030 = -0.500003F
+extern const u32 __logf_C1_bits; // 0x3EAA9F44 = 0.333329856F
 
 /*
 Computes the natural logarithm of x.
