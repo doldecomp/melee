@@ -17,12 +17,12 @@
 /* 23F068 */ int mnDiagram_GetFighterTotalKOs(u8 field_index);
 /* 23F0DC */ int mnDiagram_GetFighterTotalFalls(u8 field_index);
 /* 23F14C */ void mnDiagram_FormatDecimalNumber(char* buf, u32 val, int mode);
-/* 23F238 */ void mnDiagram_FormatTime(char* buf, u32 val);
+/* 23F238 */ void mnDiagram_FormatTime(char* buf, s32 seconds);
 /* 23F334 */ void mnDiagram_IntToStr(char* buf, u32 val);
-/* 23F3A8 */ u8 mnDiagram_GetPrevNameIndex(u8 idx);
-/* 23F400 */ u8 mnDiagram_GetNextNameIndex(u8 idx);
-/* 23F45C */ u8 mnDiagram_GetPrevFighterIndex(u8 idx);
-/* 23F4CC */ u8 mnDiagram_GetNextFighterIndex(u8 idx);
+/* 23F3A8 */ u8 mnDiagram_GetPrevNameIndex(s32 idx);
+/* 23F400 */ u8 mnDiagram_GetNextNameIndex(s32 idx);
+/* 23F45C */ u8 mnDiagram_GetPrevFighterIndex(s32 idx);
+/* 23F4CC */ u8 mnDiagram_GetNextFighterIndex(s32 idx);
 /* 23F540 */ u32 mnDiagram_GetNamePlayTimeByFighter(int name_idx,
                                                     int fighter_idx);
 /* 23F578 */ int mnDiagram_GetRankedFighterForName(int rank, int name_idx,
