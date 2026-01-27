@@ -1140,4 +1140,19 @@ typedef struct itFreezer_ItemVars {
     /* ip+E34 */ s32 x60;
 } itFreezer_ItemVars;
 
+typedef struct itFushigibana_ItemVars
+{
+    /* xDD4 */ u8 _0[0x60 - 0x0];
+    /* xE34 */ UnkFlagStruct x60;
+    /* xE35 */ u8 x61[0x64 - 0x61];
+    /* xE38 */ f32 x64;
+} itFushigibana_ItemVars;
+
+typedef struct itFushigibanaAttributes
+{
+    f32 x0;
+    f32 x4;
+    f32 x8;
+} itFushigibanaAttributes;
+
 #endif

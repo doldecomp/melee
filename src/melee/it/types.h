@@ -617,6 +617,7 @@ struct Item {
         itMDisable_ItemVars mdisable;
         itKoopaFlame_ItemVars koopaflame;
         itFreezer_ItemVars freezer;
+        itFushigibana_ItemVars fushigibana;
         u8 _[0xFCC - 0xDD4];
     } xDD4_itemVar;
 };
