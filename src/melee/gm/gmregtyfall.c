@@ -395,11 +395,6 @@ void gm_801A6EE4(void)
     }
 }
 
-// static inline void gm_801A7070_create_lobj(void)
-// {
-
-// }
-
 void gm_801A7070_OnEnter(void* unused)
 {
     s32 temp_r29;
