@@ -15,8 +15,8 @@ struct HSD_SObj {
     float x10, x14;
     u8 pad18[0x3C - 0x18];
     u8 x3C, x3D, x3E, x3F;
-    u8 x40;
-    u8 pad41[0x48 - 0x41];
+    u32 x40;
+    u8 pad44[0x44 - 0x41];
     u32 x48;
 };
 
