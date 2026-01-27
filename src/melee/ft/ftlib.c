@@ -289,7 +289,7 @@ void ftLib_800865D8(HSD_GObj* gobj, float* x, float* y)
     *y = fp->input.lstick.y;
 }
 
-void* ftLib_800865F0(HSD_GObj* gobj)
+HSD_JObj* ftLib_800865F0(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return fp->parts[ftParts_GetBoneIndex(fp, 4)].joint;
