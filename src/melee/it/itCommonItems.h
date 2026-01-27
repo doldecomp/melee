@@ -1141,7 +1141,7 @@ typedef struct itFreezer_ItemVars {
 } itFreezer_ItemVars;
 
 typedef struct itFushigibana_ItemVars
-{ 
+{
     /* xDD4 */ u8 _0[0x60 - 0x0];
     /* xE34 */ UnkFlagStruct x60;
     /* xE35 */ u8 x61[0x64 - 0x61];
