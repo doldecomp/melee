@@ -76,7 +76,7 @@ void it_802D718C(Item_GObj* gobj)
     item->xDD4_itemVar.fushigibana.x60.b0 = true;
 }
 
-void itFushigibana_UnkMotion1_Anim_inline1(Item_GObj* gobj)
+static void itFushigibana_UnkMotion1_Anim_inline1(Item_GObj* gobj)
 {
         Item* item = GET_ITEM(gobj);
         Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
@@ -85,7 +85,7 @@ void itFushigibana_UnkMotion1_Anim_inline1(Item_GObj* gobj)
         item->xDD4_itemVar.fushigibana.x60.b0 = true;
 }
 
-bool itFushigibana_UnkMotion1_Anim_inline2(Item_GObj* gobj)
+static bool itFushigibana_UnkMotion1_Anim_inline2(Item_GObj* gobj)
 {
     Item* item = GET_ITEM(gobj);
     item->xD44_lifeTimer -= 1.0f;
