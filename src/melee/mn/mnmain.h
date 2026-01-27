@@ -30,7 +30,8 @@ typedef struct _MenuFlow {
     MenuKind8 cur_menu;
     MenuKind8 prev_menu;
     u16 hovered_selection;
-    u32 confirmed_selection;
+    u8 confirmed_selection;
+    u8 pad_5[3];
     u64 buttons;
     u8 x10;
     u8 entering_menu; ///< bool

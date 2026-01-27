@@ -94,7 +94,28 @@ bool itLugia_UnkMotion3_Coll(Item_GObj* gobj)
 
 /// #it_802D1830
 
-/// #itLugia_UnkMotion4_Anim
+bool itLugia_UnkMotion4_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+    HSD_JObj* child;
+
+    if (jobj == NULL) {
+        child = NULL;
+    } else {
+        child = jobj->child;
+    }
+
+    it_8027A160(child, ip);
+
+    if (!it_80272C6C(gobj)) {
+        Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
+        ip->entered_hitlag = efLib_PauseAll;
+        ip->exited_hitlag = efLib_ResumeAll;
+    }
+
+    return false;
+}
 
 /// #itLugia_UnkMotion4_Phys
 

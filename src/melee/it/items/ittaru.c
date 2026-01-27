@@ -7,6 +7,7 @@
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
+#include "lb/lb_00B0.h"
 
 /// #it_3F14_Logic2_Spawned
 
@@ -59,7 +60,14 @@ void it_3F14_Logic2_Dropped(Item_GObj* gobj)
     it_80287F20(gobj);
 }
 
-/// #it_3F14_Logic2_Thrown
+void it_3F14_Logic2_Thrown(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    PAD_STACK(8);
+    lb_8000B804(gobj->hsd_obj, ip->xC4_article_data->x10_modelDesc->x0_joint);
+    it_8026B3A8(gobj);
+    Item_80268E5C(gobj, 3, ITEM_ANIM_UPDATE | ITEM_DROP_UPDATE);
+}
 
 void it_80287F20(Item_GObj* gobj)
 {
