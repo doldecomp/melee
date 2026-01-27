@@ -12,6 +12,8 @@
 #include <dolphin/mtx.h>
 
 struct ResultsPlayerData;
+struct StatsEntry;
+struct StatsList;
 
 /* 174274 */ MatchEnd* fn_80174274(void);
 /* 174284 */ s32 fn_80174284(u8);
@@ -19,24 +21,26 @@ struct ResultsPlayerData;
 /* 17435C */ void fn_8017435C(void);
 /* 174380 */ void fn_80174380(void);
 /* 1743A4 */ bool gm_801743A4(u8);
-/* 1743C4 */ UNK_RET fn_801743C4(UNK_PARAMS);
-/* 174468 */ UNK_RET fn_80174468(UNK_PARAMS);
-/* 1748EC */ UNK_T fn_801748EC(UNK_T, u8, int);
+/* 1743C4 */ bool fn_801743C4(s32, struct StatsEntry*);
+/* 174468 */ void fn_80174468(u8 slot, HSD_Text* text1, HSD_Text* text2,
+                              HSD_Text* text3, struct StatsList* list,
+                              s32 entry_idx);
+/* 1748EC */ void* fn_801748EC(void*, s32, s32);
 /* 174920 */ void fn_80174920(struct ResultsPlayerData*);
 /* 1749B8 */ void fn_801749B8(HSD_GObj*);
-/* 174A60 */ int fn_80174A60(UNK_T, int);
+/* 174A60 */ u8 fn_80174A60(struct StatsList*, s32);
 /* 174B4C */ void fn_80174B4C(struct ResultsData*, s32);
 /* 174FD0 */ void fn_80174FD0(HSD_JObj*, s32);
 /* 175038 */ void fn_80175038(HSD_GObj*, int);
 /* 17507C */ GXColor fn_8017507C(s32);
 /* 175240 */ void fn_80175240(s32);
 /* 17556C */ void fn_8017556C(s32);
-/* 1756E0 */ UNK_RET fn_801756E0(UNK_PARAMS);
-/* 175880 */ UNK_RET fn_80175880(UNK_PARAMS);
+/* 1756E0 */ void fn_801756E0(s32);
+/* 175880 */ void fn_80175880(s32);
 /* 175A94 */ void fn_80175A94(s32, Vec3*);
 /* 175C5C */ void fn_80175C5C(void);
 /* 175D34 */ void fn_80175D34(void);
-/* 175DC8 */ UNK_RET fn_80175DC8(UNK_PARAMS);
+/* 175DC8 */ void fn_80175DC8(HSD_GObj*);
 /* 176A6C */ void fn_80176A6C(void);
 /* 176BCC */ void fn_80176BCC(HSD_GObj*);
 /* 176BF0 */ HSD_JObj* fn_80176BF0(HSD_JObj*, u8, int);
