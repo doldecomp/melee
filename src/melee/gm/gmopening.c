@@ -90,7 +90,7 @@ void gm_801AA28C_OnFrame(void)
 {
     HSD_GObj* temp_r3_2;
     int temp_r3;
-    HSD_SObj_803A477C_t* temp_r3_3;
+    HSD_SObj* temp_r3_3;
     PAD_STACK(4);
 
     lbMthp_8001F578();

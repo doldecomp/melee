@@ -25,7 +25,7 @@ STATIC_ASSERT(sizeof(struct lbl_804333E0_t) == 0x1D8);
 /* 4333E0 */ static struct lbl_804333E0_t lbl_804333E0;
 /* 4D7CC0 */ static float lb_804D7CC0;
 
-/* HSD_SObj_803A477C_t extended for this function */
+/* HSD_SObj extended for this function */
 struct HSD_SObj_803A477C_t_ext {
     /* 0x00 */ u8 pad0[0x10];
     /* 0x10 */ float x10, x14;

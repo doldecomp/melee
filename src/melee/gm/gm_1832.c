@@ -236,7 +236,21 @@ void fn_8018575C(HSD_GObj* gobj)
 
 /// #fn_801857C4
 
-/// #fn_801859C8
+
+void fn_801859C8(HSD_GObj* gobj)
+{
+    HSD_SObj* sobj = gobj->hsd_obj;
+
+    while (sobj != NULL) {
+        if (sobj->x48 != 0) {
+            sobj->x48--;
+            if (sobj->x48 == 0) {
+                sobj->x40 &= ~1;
+            }
+        }
+        sobj = sobj->next;
+    }
+}
 
 /// #fn_80185A0C
 

@@ -80,7 +80,7 @@ typedef struct HSD_ShapeAnimJoint HSD_ShapeAnimJoint;
 typedef struct HSD_ShapeSet HSD_ShapeSet;
 typedef struct HSD_ShapeSetDesc HSD_ShapeSetDesc;
 typedef struct HSD_SM HSD_SM;
-typedef struct HSD_SObj_803A477C_t HSD_SObj_803A477C_t;
+typedef struct HSD_SObj HSD_SObj;
 typedef struct HSD_Spline HSD_Spline;
 typedef struct HSD_TExpDag HSD_TExpDag;
 typedef struct HSD_TExpRes HSD_TExpRes;

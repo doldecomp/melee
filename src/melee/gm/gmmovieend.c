@@ -110,7 +110,7 @@ void gm_801A637C_OnEnter(void* arg0)
 {
     HSD_GObj* temp_r3;
     HSD_GObj* temp_r3_2;
-    HSD_SObj_803A477C_t* temp_r3_3;
+    HSD_SObj* temp_r3_3;
     const char* filename;
     PAD_STACK(8);
 

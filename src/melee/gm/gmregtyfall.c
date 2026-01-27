@@ -92,8 +92,8 @@ static struct {
 
 void fn_801A6664(HSD_GObj* arg0)
 {
-    HSD_SObj_803A477C_t* temp_r3;
-    HSD_SObj_803A477C_t* temp_r3_2;
+    HSD_SObj* temp_r3;
+    HSD_SObj* temp_r3_2;
 
     HSD_JObjAnimAll((HSD_JObj*) arg0->hsd_obj);
     if ((s32) gm_804D6758 != 0) {
