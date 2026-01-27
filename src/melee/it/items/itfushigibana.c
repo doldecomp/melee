@@ -10,7 +10,6 @@
 #include "it/it_2725.h"
 #include "it/item.h"
 
-
 ItemStateTable it_803F82F0[] = {
     { 0, itFushigibana_UnkMotion0_Anim, itFushigibana_UnkMotion0_Phys,
       itFushigibana_UnkMotion0_Coll },
@@ -23,7 +22,8 @@ ItemStateTable it_803F82F0[] = {
 void it_2725_Logic29_Spawned(Item_GObj* gobj)
 {
     Item* item = GET_ITEM(gobj);
-    itFushigibanaAttributes* attrs = item->xC4_article_data->x4_specialAttributes;
+    itFushigibanaAttributes* attrs =
+        item->xC4_article_data->x4_specialAttributes;
     it_80279CDC(gobj, attrs->x0);
     Item_8026AE84(item, 0x272f, 0x7f, 0x40);
     it_80275158(gobj, attrs->x4);
@@ -78,22 +78,20 @@ void it_802D718C(Item_GObj* gobj)
 
 static void itFushigibana_UnkMotion1_Anim_inline1(Item_GObj* gobj)
 {
-        Item* item = GET_ITEM(gobj);
-        Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
-        item->entered_hitlag = efLib_PauseAll;
-        item->exited_hitlag = efLib_ResumeAll;
-        item->xDD4_itemVar.fushigibana.x60.b0 = true;
+    Item* item = GET_ITEM(gobj);
+    Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
+    item->entered_hitlag = efLib_PauseAll;
+    item->exited_hitlag = efLib_ResumeAll;
+    item->xDD4_itemVar.fushigibana.x60.b0 = true;
 }
 
 static bool itFushigibana_UnkMotion1_Anim_inline2(Item_GObj* gobj)
 {
     Item* item = GET_ITEM(gobj);
     item->xD44_lifeTimer -= 1.0f;
-    if (item->xD44_lifeTimer <= 0)
-    {
+    if (item->xD44_lifeTimer <= 0) {
         return true;
-    } else
-    {
+    } else {
         return false;
     }
 }
@@ -101,13 +99,12 @@ static bool itFushigibana_UnkMotion1_Anim_inline2(Item_GObj* gobj)
 bool itFushigibana_UnkMotion1_Anim(Item_GObj* gobj)
 {
     Item* item = GET_ITEM(gobj);
-    itFushigibanaAttributes* attrs = item->xC4_article_data->x4_specialAttributes;
-    if (it_80272C6C(gobj) == 0)
-    {
+    itFushigibanaAttributes* attrs =
+        item->xC4_article_data->x4_specialAttributes;
+    if (it_80272C6C(gobj) == 0) {
         itFushigibana_UnkMotion1_Anim_inline1(gobj);
     }
-    if(!item->xDD4_itemVar.fushigibana.x64)
-    {
+    if (!item->xDD4_itemVar.fushigibana.x64) {
         item->xDD4_itemVar.fushigibana.x64 = attrs->x8;
         it_80275288(gobj, 4, 0x2730);
     }

@@ -79,5 +79,5 @@ const float __sincos_poly[] = {
 
 // logf Taylor series coefficients - stored as u32 bit patterns
 // so they can be loaded with lwz and then reinterpreted as floats
-const u32 __logf_C0_bits = 0xBF000030;  // -0.500003F
-const u32 __logf_C1_bits = 0x3EAA9F44;  // 0.333329856F
+const u32 __logf_C0_bits = 0xBF000030; // -0.500003F
+const u32 __logf_C1_bits = 0x3EAA9F44; // 0.333329856F
