@@ -63,6 +63,19 @@ static struct {
     Vec3 x6A8[1];
 }* lbl_804D6604;
 
+/// Classic mode stage data table entry (size 0x10)
+/// Table has 65 entries: 13 stages × 5 difficulty levels
+typedef struct ClassicStageEntry {
+    /* 0x00 */ u8 stage_kind;
+    /* 0x01 */ u8 pad_1;
+    /* 0x02 */ u16 scale0_pct;  ///< Divided by 100 to get ratio
+    /* 0x04 */ u16 scale1_pct;  ///< Divided by 100 to get ratio
+    /* 0x06 */ u8 pad_6[0xA];
+} ClassicStageEntry;
+STATIC_ASSERT(sizeof(ClassicStageEntry) == 0x10);
+
+extern ClassicStageEntry lbl_803D9910[65];
+
 /// #fn_8018325C
 
 /// #fn_80184138
@@ -499,11 +512,20 @@ int gm_80188454(int idx)
 
 /// #fn_8018A000
 
-/// #gm_8018A160
+u8 gm_8018A160(u8 difficulty, u8 stage_slot)
+{
+    return lbl_803D9910[stage_slot + (difficulty * 5)].stage_kind;
+}
 
-/// #gm_8018A188
+f32 gm_8018A188(u8 difficulty, u8 stage_slot)
+{
+    return (f32) lbl_803D9910[stage_slot + (difficulty * 5)].scale0_pct / 100.0F;
+}
 
-/// #gm_8018A1D8
+f32 gm_8018A1D8(u8 difficulty, u8 stage_slot)
+{
+    return (f32) lbl_803D9910[stage_slot + (difficulty * 5)].scale1_pct / 100.0F;
+}
 
 /// #gm_8018A228
 
@@ -511,8 +533,14 @@ int gm_80188454(int idx)
 
 /// #gm_8018A290
 
-/// #gm_8018A2C4
+f32 gm_8018A2C4(u8 difficulty, u8 stage_slot)
+{
+    return (f32) lbl_803D9910[stage_slot + (difficulty * 5)].scale0_pct / 100.0F;
+}
 
-/// #gm_8018A314
+f32 gm_8018A314(u8 difficulty, u8 stage_slot)
+{
+    return (f32) lbl_803D9910[stage_slot + (difficulty * 5)].scale1_pct / 100.0F;
+}
 
 /// #fn_8018A364

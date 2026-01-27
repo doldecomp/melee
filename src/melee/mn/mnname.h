@@ -11,7 +11,7 @@
 /* 23754C */ char* GetNameText(int slot);
 /* 237594 */ int GetNameCount(void);
 /* 2375EC */ bool IsNameListFull(void);
-/* 237654 */ UNK_RET CompareNameStrings(UNK_PARAMS);
+/* 237654 */ s32 CompareNameStrings(char* str, s32 slot);
 /* 2377A4 */ void fn_802377A4(void);
 /* 2377A8 */ UNK_RET IsNameUnique(UNK_PARAMS);
 /* 237834 */ UNK_RET DeleteName(UNK_PARAMS);
@@ -43,6 +43,6 @@
 /* 23A59C */ UNK_RET mnName_8023A59C(UNK_PARAMS);
 /* 23A9B4 */ UNK_RET mnName_8023A9B4(UNK_PARAMS);
 /* 23AC40 */ UNK_RET mnName_8023AC40(UNK_PARAMS);
-/* 23B084 */ UNK_RET IsNameNotAllowed(UNK_PARAMS);
+/* 23B084 */ bool IsNameNotAllowed(s32 name_idx);
 
 #endif
