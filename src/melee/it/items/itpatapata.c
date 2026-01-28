@@ -23,7 +23,15 @@ bool itPatapata_UnkMotion1_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itPatapata_UnkMotion1_Phys
+void itPatapata_UnkMotion1_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->xDD4_itemVar.nokonoko.x28 == 0) {
+        it_802E0734(gobj);
+        return;
+    }
+    ip->xDD4_itemVar.nokonoko.x28 -= 1;
+}
 
 // Decompilation of itPatapata_UnkMotion1_Coll
 // Unit: main/melee/it/items/itpatapata
