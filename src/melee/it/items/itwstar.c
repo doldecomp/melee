@@ -37,7 +37,15 @@ bool itWstar_UnkMotion0_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itWstar_UnkMotion0_Phys
+// Decompilation attempt 2 for itWstar_UnkMotion0_Phys
+
+void itWstar_UnkMotion0_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    f32* attr = ip->xC4_article_data->x4_specialAttributes;
+    it_80274658(gobj, *attr);
+    it_80274A64(gobj);
+}
 
 bool itWstar_UnkMotion0_Coll(Item_GObj* gobj)
 {
