@@ -467,7 +467,17 @@ void fn_80187C9C(HSD_GObj* gobj, int arg1)
 
 /// #gm_80188364_OnLeave
 
-/// #gm_8018838C_OnFrame
+static struct {
+    u8 pad[0x36];
+    u8 x36;
+} lbl_804736C0;
+
+void gm_8018838C_OnFrame(void)
+{
+    if (((u8) lbl_804736C0.x36 >> 2U) & 1) {
+        gm_801A4B60();
+    }
+}
 
 /// #gm_801883C0
 
