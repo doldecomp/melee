@@ -740,7 +740,10 @@ f32 gm_8017E578(int difficulty, u8 stage_slot)
 
 /// #gm_8017E5C8
 
-/// #gm_8017E5FC
+u8 gm_8017E5FC(int difficulty, u8 stage_slot, u8 arg2)
+{
+    return lbl_803D7AC0[stage_slot + ((u8) difficulty * 5)].pad_6[1 + arg2 * 3];
+}
 
 /// #gm_8017E630
 
