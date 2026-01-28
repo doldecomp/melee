@@ -37,7 +37,7 @@ void itOldottosea_UnkMotion0_Phys(Item_GObj* gobj)
         it_802E27B4(gobj);
         return;
     }
-    ip->xDD4_itemVar.oldottosea.x28 = ip->xDD4_itemVar.oldottosea.x28 - 1;
+    ip->xDD4_itemVar.oldottosea.x28 -= 1;
 }
 
 bool itOldottosea_UnkMotion0_Coll(Item_GObj* gobj)

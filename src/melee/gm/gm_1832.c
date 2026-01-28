@@ -557,7 +557,7 @@ u8 gm_8018A25C(u8 difficulty, u8 stage_slot, u8 arg2)
 
 u8 gm_8018A290(u8 difficulty, u8 stage_slot, u8 idx)
 {
-    return (&lbl_803D9910[stage_slot + (difficulty * 5)])->pad_6[2 + idx * 3];
+    return lbl_803D9910[stage_slot + (difficulty * 5)].pad_6[2 + idx * 3];
 }
 
 f32 gm_8018A2C4(u8 difficulty, u8 stage_slot)

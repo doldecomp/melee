@@ -149,11 +149,6 @@ bool itOldkuri_UnkMotion9_Coll(Item_GObj* gobj)
 
 /// #it_802D8098
 
-// Decompilation of it_802D813C
-// Unit: main/melee/it/items/itoldkuri
-
-#include "it/forward.h"
-
 void it_802D813C(Item_GObj* gobj)
 {
     Item* ip = gobj->user_data;

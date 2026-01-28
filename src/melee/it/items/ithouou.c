@@ -10,6 +10,10 @@
 #include "it/it_2725.h"
 #include "it/item.h"
 
+typedef struct itHououAttr {
+    f32 timer;
+} itHououAttr;
+
 /// #it_2725_Logic18_Spawned
 
 void it_802D25B8(void) {}
@@ -199,10 +203,6 @@ bool it_802D2D04(Item_GObj* gobj)
 }
 
 /// #it_802D2D2C
-
-typedef struct itHououAttr {
-    f32 timer;
-} itHououAttr;
 
 void it_2725_Logic42_Spawned(Item_GObj* item_gobj)
 {

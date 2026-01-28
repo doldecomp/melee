@@ -142,9 +142,6 @@ void it_802D4F78(Item_GObj* gobj)
     efSync_Spawn(0x46C, gobj, jobj, &f);
 }
 
-// Decompilation of it_802D4FFC
-// Unit: main/melee/it/items/ithitodeman
-
 bool it_802D4FFC(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);

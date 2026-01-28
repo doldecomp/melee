@@ -250,9 +250,6 @@ void it_802ECC98(Item_GObj* arg0, f32 arg1)
     GET_ITEM(arg0)->xDD4_itemVar.tincle.x54 = arg1;
 }
 
-// Decompilation of it_802ECCA4
-// Unit: main/melee/it/items/ittincle
-
 void it_802ECCA4(Item_GObj* gobj, s32* kind, Vec3* pos)
 {
     Item* ip = GET_ITEM(gobj);

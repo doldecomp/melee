@@ -888,9 +888,6 @@ long gm_80162A4C(s32 amount)
 
 /// #gm_80162A98
 
-// Attempt 10: Reversed ternary
-// Unit: main/melee/gm/gm_1601
-
 void gm_80162B4C(s32 amount)
 {
     u32* ptr;
