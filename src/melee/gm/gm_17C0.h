@@ -55,7 +55,7 @@
 /* 17E630 */ u8 gm_8017E630(u8 difficulty, u8 stage_slot, u8 arg2);
 /* 17E664 */ f32 gm_8017E664(u8, u8);
 /* 17E6B4 */ f32 gm_8017E6B4(u8, u8);
-/* 17E704 */ UNK_RET gm_8017E704(UNK_PARAMS);
+/* 17E704 */ u8 gm_8017E704(int difficulty, u8 stage_slot, u8 arg2);
 /* 17E738 */ UNK_RET gm_8017E738(UNK_PARAMS);
 /* 17E76C */ UNK_RET gm_8017E76C(UNK_PARAMS);
 /* 17E7A0 */ void gm_8017E7A0(int);
