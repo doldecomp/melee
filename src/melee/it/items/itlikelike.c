@@ -114,7 +114,12 @@ bool itLikelike_UnkMotion5_Coll(Item_GObj* gobj)
 
 /// #itLikelike_UnkMotion17_Anim
 
-/// #itLikelike_UnkMotion17_Phys
+void itLikelike_UnkMotion17_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    it_8027C8D0(&ip->x40_vel, &ip->x378_itemColl.floor.normal, ip->facing_dir);
+    it_8027C0A8(gobj, 0.0F, 5.0F);
+}
 
 bool itLikelike_UnkMotion17_Coll(Item_GObj* gobj)
 {
