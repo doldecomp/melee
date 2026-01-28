@@ -62,7 +62,15 @@ s32 it_802BBAEC(ItemLink* link, s32 arg1, f32 arg2)
 
 /// #it_802BCB88
 
-/// #it_2725_Logic54_PickedUp
+void it_2725_Logic54_PickedUp(Item_GObj* gobj)
+{
+    Item* ip;
+    PAD_STACK(16);
+
+    ip = gobj->user_data;
+    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+    ip->on_accessory = (HSD_GObjEvent) fn_802BB428;
+}
 
 /// #it_802BCED4
 
