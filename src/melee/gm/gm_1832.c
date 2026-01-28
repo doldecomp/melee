@@ -473,7 +473,17 @@ void gm_80188364_OnLeave(void* arg0)
     lbArchive_80016EFC(*var);
 }
 
-/// #gm_8018838C_OnFrame
+static struct {
+    u8 pad[0x36];
+    u8 x36;
+} lbl_804736C0;
+
+void gm_8018838C_OnFrame(void)
+{
+    if (((u8) lbl_804736C0.x36 >> 2U) & 1) {
+        gm_801A4B60();
+    }
+}
 
 /// #gm_801883C0
 
