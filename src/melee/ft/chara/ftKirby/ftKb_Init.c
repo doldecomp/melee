@@ -6821,7 +6821,15 @@ void ftKb_NsSpecialAirNEnd_Coll(Fighter_GObj* gobj)
 
 /// #ftKb_DkSpecialNLoop_Anim
 
-/// #ftKb_DkSpecialNCancel_Anim
+void ftKb_DkSpecialNCancel_Anim(HSD_GObj* gobj)
+{
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        Fighter* fp = GET_FIGHTER(gobj);
+        fp->pre_hitlag_cb = NULL;
+        fp->post_hitlag_cb = NULL;
+        ft_8008A2BC(gobj);
+    }
+}
 
 /// #ftKb_DkSpecialN_Anim
 
