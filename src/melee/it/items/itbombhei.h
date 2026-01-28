@@ -52,7 +52,7 @@
 /* 280B60 */ void it_80280B60(Item_GObj* gobj);
 /* 280DC0 */ void it_80280DC0(Item_GObj* gobj);
 /* 280DF0 */ bool it_3F14_Logic6_DmgDealt(Item_GObj* gobj);
-/* 280E30 */ bool it_3F14_Logic6_DmgReceived(Item_GObj*);
+/* 280E30 */ bool it_3F14_Logic6_DmgReceived(Item_GObj* gobj);
 /* 280E70 */ bool itBombhei_UnkMotion11_Anim(Item_GObj* gobj);
 /* 280E90 */ void itBombhei_UnkMotion11_Phys(Item_GObj* gobj);
 /* 280E94 */ bool itBombhei_UnkMotion11_Coll(Item_GObj* gobj);
