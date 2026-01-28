@@ -149,7 +149,20 @@ bool itOldkuri_UnkMotion9_Coll(Item_GObj* gobj)
 
 /// #it_802D8098
 
-/// #it_802D813C
+// Decompilation of it_802D813C
+// Unit: main/melee/it/items/itoldkuri
+
+#include "it/forward.h"
+
+void it_802D813C(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    ip->x40_vel.z = 0.0F;
+    ip->x40_vel.y = 0.0F;
+    ip->x40_vel.x = 0.0F;
+    it_8027C0A8(gobj, 0.0F, 0.0F);
+    Item_80268E5C(gobj, 7, 2);
+}
 
 bool itOldkuri_UnkMotion7_Anim(Item_GObj* gobj)
 {
