@@ -316,7 +316,16 @@ bool it_3F14_Logic6_DmgDealt(Item_GObj* gobj)
     return false;
 }
 
-/// #it_3F14_Logic6_DmgReceived
+void it_80280B60(Item_GObj*);
+
+bool it_3F14_Logic6_DmgReceived(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    if (ip->msid != 7 && ip->xDD4_itemVar.bombhei.xDDC == 0) {
+        it_80280B60(gobj);
+    }
+    return false;
+}
 
 bool itBombhei_UnkMotion11_Anim(Item_GObj* gobj)
 {
