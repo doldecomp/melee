@@ -25,7 +25,19 @@ bool itPatapata_UnkMotion1_Anim(Item_GObj* gobj)
 
 /// #itPatapata_UnkMotion1_Phys
 
-/// #itPatapata_UnkMotion1_Coll
+// Decompilation of itPatapata_UnkMotion1_Coll
+// Unit: main/melee/it/items/itpatapata
+
+bool itPatapata_UnkMotion1_Coll(Item_GObj* gobj)
+{
+    Item* it = gobj->user_data;
+    if (it->ground_or_air == GA_Air) {
+        it_8026DA08(gobj);
+    } else {
+        it_8026D564(gobj);
+    }
+    return false;
+}
 
 /// #it_802E0734
 
