@@ -23,7 +23,17 @@ int it_802960CC(Item_GObj* gobj)
     return da->x28;
 }
 
-/// #it_3F14_Logic5_Destroyed
+void it_3F14_Logic5_Destroyed(Item_GObj* gobj)
+{
+    Item* ip;
+
+    if (gobj != NULL) {
+        ip = gobj->user_data;
+        if (ip != NULL && ip->xDD4_itemVar.zeldadinfire.xDF4 != 0) {
+            it_80295F38(gobj);
+        }
+    }
+}
 
 /// #it_3F14_Logic5_Spawned
 
