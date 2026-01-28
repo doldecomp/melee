@@ -580,7 +580,7 @@
 /* 0FFE6C */ void ftKb_DkSpecialNFull_Anim(Fighter_GObj* gobj);
 /* 0FFFB8 */ void ftKb_DkSpecialAirNStart_Anim(Fighter_GObj* gobj);
 /* 100040 */ void ftKb_DkSpecialAirNLoop_Anim(Fighter_GObj* gobj);
-/* 1000DC */ void ftKb_DkSpecialAirNCancel_Anim(Fighter_GObj* gobj);
+/* 1000DC */ void ftKb_DkSpecialAirNCancel_Anim(HSD_GObj* gobj);
 /* 100128 */ void ftKb_DkSpecialAirN_Anim(Fighter_GObj* gobj);
 /* 1002C8 */ void ftKb_DkSpecialAirNFull_Anim(Fighter_GObj* gobj);
 /* 1003DC */ void ftKb_DkSpecialNStart_IASA(Fighter_GObj* gobj);
