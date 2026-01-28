@@ -45,7 +45,20 @@ void it_802ECE90(Item_GObj* gobj)
 
 /// #itKyasarin_UnkMotion2_Coll
 
-/// #it_802ED25C
+typedef struct itKyasarinAttributes {
+    /* 0x00 */ s32* x0;
+    /* 0x04 */ f32 x4;
+} itKyasarinAttributes;
+
+void it_802ED25C(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itKyasarinAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+    ip->x40_vel.x = attr->x4 * ip->facing_dir;
+    ip->x40_vel.z = 0.0F;
+    ip->x40_vel.y = 0.0F;
+    Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
+}
 
 /// #itKyasarin_UnkMotion4_Anim
 
