@@ -39,7 +39,12 @@ bool it_802C4F50(Item_GObj* gobj, CollData* cd)
 
 /// #it_802C573C
 
-/// #it_2725_Logic101_PickedUp
+void it_2725_Logic101_PickedUp(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+    ip->xDD4_itemVar.it_279D.x50 = 0.0F;
+}
 
 /// #itMewtwoshadowball_UnkMotion0_Anim
 
