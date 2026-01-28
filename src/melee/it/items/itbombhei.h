@@ -63,7 +63,7 @@
 /* 281070 */ bool it_3F14_Logic6_Clanked(Item_GObj*);
 /* 2810A4 */ bool it_3F14_Logic6_Reflected(Item_GObj*);
 /* 2810C4 */ bool it_3F14_Logic6_HitShield(Item_GObj* gobj);
-/* 281104 */ bool it_3F14_Logic6_ShieldBounced(Item_GObj*);
+/* 281104 */ bool it_3F14_Logic6_ShieldBounced(Item_GObj* gobj);
 /* 281144 */ void it_3F14_Logic6_EvtUnk(Item_GObj*, Item_GObj*);
 /* 3F54D8 */ extern ItemStateTable it_803F54D8[];
 
