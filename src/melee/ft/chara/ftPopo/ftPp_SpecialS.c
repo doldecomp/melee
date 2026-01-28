@@ -1099,7 +1099,18 @@ void ftPp_SpecialHi_80122380(Fighter_GObj* gobj)
     Fighter_ChangeMotionState(gobj, 0x164, 0, 0.0f, 1.0f, 0.0f, NULL);
 }
 
-/// #ftPp_SpecialHiThrow2_Anim
+void ftPp_SpecialHiThrow2_Anim(Fighter_GObj* gobj)
+{
+    Fighter* fp;
+
+    if (ftAnim_IsFramesRemaining(gobj) == 0) {
+        ft_8008A2BC(gobj);
+        return;
+    }
+    fp = gobj->user_data;
+    fp->mv.pp.unk_80123954.x0++;
+    ftPp_SpecialS_80120FE0(gobj);
+}
 
 /// #ftPp_SpecialAirHiThrow2_Anim
 
