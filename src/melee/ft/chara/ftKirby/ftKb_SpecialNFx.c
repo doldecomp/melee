@@ -93,7 +93,7 @@ void fn_800FDCE0(Fighter_GObj* gobj)
 bool ftKb_SpecialNFx_800FDD14(Fighter_GObj* gobj)
 {
     if (gobj != NULL) {
-        Fighter* ft = gobj->user_data;
+        Fighter* ft = GET_FIGHTER(gobj);
         if (ft != NULL) {
             if (!ft->fv.kb.xB0) {
                 return true;
@@ -111,7 +111,7 @@ bool ftKb_SpecialNFx_800FDD14(Fighter_GObj* gobj)
 void ftKb_SpecialNFx_800FDEB4(Fighter_GObj* gobj)
 {
     if (gobj != NULL) {
-        Fighter* ft = gobj->user_data;
+        Fighter* ft = GET_FIGHTER(gobj);
         if ((ft != NULL) && (ft->fv.kb.xB0 != 0)) {
             ft->fv.kb.xB0 = 0;
         }
@@ -122,7 +122,7 @@ void ftKb_SpecialNFx_800FDEE0(Fighter_GObj* gobj)
 {
     PAD_STACK(8);
     if (gobj != NULL) {
-        Fighter* fp = gobj->user_data;
+        Fighter* fp = GET_FIGHTER(gobj);
         if (fp != NULL) {
             if (fp->fv.kb.xB0 != 0) {
                 it_802AEAB4((Item_GObj*) fp->fv.kb.xB0);
@@ -340,7 +340,7 @@ void ftKb_SpecialNNs_800FECE8(HSD_GObj* gobj)
 {
     Fighter* fp;
     if (gobj != NULL) {
-        fp = gobj->user_data;
+        fp = GET_FIGHTER(gobj);
         if (fp != NULL && fp->fv.kb.ns_flash_gobj != NULL) {
             it_802AAA50(fp->fv.kb.ns_flash_gobj);
             fp->fv.kb.ns_flash_gobj = NULL;
