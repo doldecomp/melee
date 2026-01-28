@@ -1101,9 +1101,11 @@ void ftPp_SpecialHi_80122380(Fighter_GObj* gobj)
 
 void ftPp_SpecialHiThrow2_Anim(Fighter_GObj* gobj)
 {
+    int new_var;
     Fighter* fp;
 
-    if (ftAnim_IsFramesRemaining(gobj) == 0) {
+    new_var = 0;
+    if (ftAnim_IsFramesRemaining(gobj) == new_var) {
         ft_8008A2BC(gobj);
         return;
     }

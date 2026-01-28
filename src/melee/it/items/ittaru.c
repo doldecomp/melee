@@ -94,6 +94,8 @@ void itTaru_UnkMotion3_Phys(Item_GObj* gobj)
     it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
     it_802874F0(gobj);
     it_80287690(gobj);
+    if (ip->xCC_item_attr) {
+    }
 }
 
 /// #itTaru_UnkMotion3_Coll
