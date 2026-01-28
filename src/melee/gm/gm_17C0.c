@@ -768,7 +768,10 @@ u8 gm_8017E704(int difficulty, u8 stage_slot, u8 arg2)
         .pad_6[0x0E + arg2 * 3];
 }
 
-/// #gm_8017E738
+u8 gm_8017E738(u8 arg0, u8 arg1, u8 arg2)
+{
+    return lbl_803D7AC0[arg1 + (arg0 * 5)].pad_6[0xF + arg2 * 3];
+}
 
 // Decompilation of gm_8017E76C
 // Unit: main/melee/gm/gm_17C0
