@@ -5,7 +5,19 @@
 #include "it/it_2725.h"
 #include "it/item.h"
 
-/// #it_2725_Logic25_Destroyed
+typedef struct itKyasarin_ItemVars {
+    /* +0  ip+DD4 */ char pad_0[0x20];
+    /* +20 ip+DF4 */ HSD_GObj* x20;
+} itKyasarin_ItemVars;
+
+void it_2725_Logic25_Destroyed(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (((itKyasarin_ItemVars*) &ip->xDD4_itemVar)->x20 != NULL) {
+        grInishie2_801FD448(((itKyasarin_ItemVars*) &ip->xDD4_itemVar)->x20);
+    }
+    ((itKyasarin_ItemVars*) &ip->xDD4_itemVar)->x20 = NULL;
+}
 
 void it_802ECD1C(Item_GObj* gobj, Vec3* v)
 {
