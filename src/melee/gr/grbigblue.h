@@ -39,7 +39,7 @@
 /* 1E6364 */ void grBigBlue_801E6364(Ground_GObj*);
 /* 1E687C */ bool grBigBlue_801E687C(Ground_GObj*);
 /* 1E6884 */ void grBigBlue_801E6884(Ground_GObj*);
-/* 1E68B8 */ void grBigBlue_801E68B8(Ground_GObj*);
+/* 1E68B8 */ void grBigBlue_801E68B8(Ground_GObj* gobj);
 /* 1E6904 */ void grBigBlue_801E6904(Ground_GObj*);
 /* 1E6C58 */ bool grBigBlue_801E6C58(Ground_GObj*);
 /* 1E6C60 */ void grBigBlue_801E6C60(Ground_GObj*);
