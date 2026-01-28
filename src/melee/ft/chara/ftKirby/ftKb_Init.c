@@ -8,7 +8,6 @@
 #include "ef/efasync.h"
 #include "ef/eflib.h"
 #include "ef/efsync.h"
-#include "ft/chara/ftCommon/ftCo_CaptureWaitKirby.h"
 #include "ft/chara/ftCommon/ftCo_Damage.h"
 #include "ft/chara/ftCommon/ftCo_Escape.h"
 #include "ft/chara/ftCommon/ftCo_FallSpecial.h"
@@ -52,7 +51,6 @@
 #include "it/items/it_2ADA.h"
 #include "it/items/it_2F28.h"
 #include "it/items/itclimbersice.h"
-#include "it/items/itgamewatchchef.h"
 #include "it/items/itkirby_2F23.h"
 #include "it/items/itkirbycutterbeam.h"
 #include "it/items/itkirbygamewatchchefpan.h"
@@ -70,13 +68,13 @@
 #include "lb/lb_00B0.h"
 #include "lb/lbanim.h"
 #include "lb/lbvector.h"
-#include "melee/lb/lbrefract.h"
 #include "mp/mpcoll.h"
 #include "mp/mplib.h"
 #include "pl/player.h"
 
 #include <common_structs.h>
 #include <stddef.h>
+#include <trigf.h>
 #include <baselib/gobj.h>
 #include <baselib/random.h>
 #include <MSL/math.h>
@@ -5194,7 +5192,7 @@ void ftKb_SpecialAirLw_800F5318(Fighter_GObj* gobj)
 
 void ftKb_SpecialAirLw_800F539C(Fighter_GObj* gobj)
 {
-    ((Fighter*) gobj->user_data)->fv.kb.hat.x0 = 0;
+    GET_FIGHTER(gobj)->fv.kb.hat.x0 = NULL;
 }
 
 /// #fn_800F53AC
@@ -6421,7 +6419,7 @@ void ftKb_SpecialNMr_800F93CC(Fighter_GObj* gobj)
     PAD_STACK(8);
     fp->cmd_vars[0] = 0;
     fp->throw_flags = 0;
-    if (((Fighter*) gobj->user_data)->fv.kb.hat.kind != 0) {
+    if (GET_FIGHTER(gobj)->fv.kb.hat.kind != 0) {
         msid = 0x201;
     }
     Fighter_ChangeMotionState(gobj, msid, 0, 0.0F, 1.0F, 0.0F, NULL);
@@ -6875,7 +6873,7 @@ void ftKb_SpecialNKp_800FA8B4(Fighter_GObj* gobj)
 {
     Fighter* fp;
     s32 msid = ftKb_MS_KpSpecialNStart;
-    switch ((s32) ((Fighter*) gobj->user_data)->fv.kb.hat.kind) {
+    switch ((s32) GET_FIGHTER(gobj)->fv.kb.hat.kind) {
     case FTKIND_KOOPA:
         break;
     case FTKIND_GKOOPS:
@@ -6897,7 +6895,7 @@ void ftKb_SpecialNKp_800FA958(Fighter_GObj* gobj)
 {
     Fighter* fp;
     s32 msid = ftKb_MS_KpSpecialAirNStart;
-    switch ((s32) ((Fighter*) gobj->user_data)->fv.kb.hat.kind) {
+    switch ((s32) GET_FIGHTER(gobj)->fv.kb.hat.kind) {
     case FTKIND_KOOPA:
         break;
     case FTKIND_GKOOPS:
@@ -10838,7 +10836,7 @@ void ftKb_SpecialNMs_8010BB50(Fighter_GObj* gobj)
     Fighter* fp = gobj->user_data;
     unsigned long long new_var;
     ftCommon_8007D5D4(fp);
-    if ((s32) ((Fighter*) gobj->user_data)->fv.kb.hat.kind == FTKIND_MARS) {
+    if ((s32) GET_FIGHTER(gobj)->fv.kb.hat.kind == FTKIND_MARS) {
         msid = 0x1F1;
     } else {
         new_var = 0x217;
@@ -10851,9 +10849,9 @@ void ftKb_SpecialNMs_8010BB50(Fighter_GObj* gobj)
 void ftKb_SpecialNMs_8010BBC8(Fighter_GObj* gobj)
 {
     FtMotionId msid;
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     ftCommon_8007D7FC(fp);
-    if ((s32) ((Fighter*) gobj->user_data)->fv.kb.hat.kind == FTKIND_MARS) {
+    if ((s32) GET_FIGHTER(gobj)->fv.kb.hat.kind == FTKIND_MARS) {
         msid = 0x1ED;
     } else {
         msid = 0x213;
