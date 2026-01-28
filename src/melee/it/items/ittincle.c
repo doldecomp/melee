@@ -29,7 +29,15 @@ bool itTincle_UnkMotion0_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itTincle_UnkMotion0_Phys
+void itTincle_UnkMotion0_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->xDD4_itemVar.bombhei.xDF4 <= 0) {
+        it_802EB870(gobj);
+        return;
+    }
+    ip->xDD4_itemVar.bombhei.xDF4 -= 1;
+}
 
 bool itTincle_UnkMotion0_Coll(Item_GObj* gobj)
 {
