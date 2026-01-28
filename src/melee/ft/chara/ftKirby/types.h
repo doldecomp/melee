@@ -20,7 +20,7 @@
 
 struct ftKb_FighterVars {
     /* fp+222C */ struct ftKb_Hat {
-        /*  +0   fp+222C */ UNK_T x0;
+        /*  +0   fp+222C */ Item_GObj* x0;
         /*  +4   fp+2230 */ s32 x4;
         /*  +8:0 fp+2234:0 */ u8 x8_b0 : 1;
         /*  +9   fp+2235 */ u8 x9[3];
@@ -31,7 +31,7 @@ struct ftKb_FighterVars {
         /* +24   fp+2250 */ FtPartsVis x24;
     } hat;
     /* fp+2270   */ CostumeTObjList x44;
-    /* fp+228C   */ UNK_T x60;
+    /* fp+228C   */ s32 x60;
     /* fp+2290   */ bool x64;
     /* fp+2294   */ s32 x68;
     /* fp+2298   */ s32 x6C;
