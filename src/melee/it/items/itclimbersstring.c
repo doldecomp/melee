@@ -1,6 +1,8 @@
 #include "itclimbersstring.h"
 
 #include "it/inlines.h"
+#include "it/it_26B1.h"
+#include "it/item.h"
 
 static void it_802C33B8(Item* item);
 

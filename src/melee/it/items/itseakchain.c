@@ -6,6 +6,7 @@
 
 #include "it/inlines.h"
 #include "it/it_26B1.h"
+#include "it/item.h"
 
 void it_802BAEEC(Item_GObj* gobj)
 {

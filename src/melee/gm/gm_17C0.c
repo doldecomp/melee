@@ -768,13 +768,10 @@ u8 gm_8017E704(int difficulty, u8 stage_slot, u8 arg2)
         .pad_6[0x0E + arg2 * 3];
 }
 
-u8 gm_8017E738(u8 arg0, u8 arg1, u8 arg2)
+u8 gm_8017E738(u8 difficulty, u8 stage_slot, u8 arg2)
 {
-    return lbl_803D7AC0[arg1 + (arg0 * 5)].pad_6[0xF + arg2 * 3];
+    return lbl_803D7AC0[stage_slot + (difficulty * 5)].pad_6[0xF + arg2 * 3];
 }
-
-// Decompilation of gm_8017E76C
-// Unit: main/melee/gm/gm_17C0
 
 u8 gm_8017E76C(u8 difficulty, u8 stage_slot, u8 arg2)
 {
@@ -812,13 +809,9 @@ u8 gm_8017EB98(u8 difficulty, u8 stage_slot, u8 arg2)
     return lbl_803D85F0[stage_slot + difficulty * 5].pad_6[arg2 * 3 + 1];
 }
 
-u8 gm_8017EBCC(u8 arg0, u8 arg1, u8 arg2)
+u8 gm_8017EBCC(u8 difficulty, u8 stage_slot, u8 arg2)
 {
-    u8* p;
-    s32 idx;
-    idx = arg1 + arg0 * 5;
-    p = (u8*) lbl_803D85F0;
-    return p[idx * 0x1A + arg2 * 3 + 8];
+    return lbl_803D85F0[stage_slot + (difficulty * 5)].pad_6[arg2 * 3 + 2];
 }
 
 f32 gm_8017EC00(u8 difficulty, u8 stage_slot)
@@ -834,9 +827,9 @@ f32 gm_8017EC50(u8 difficulty, u8 stage_slot)
 }
 
 
-u8 gm_8017ECA0(u8 arg0, u8 arg1, u8 arg2)
+u8 gm_8017ECA0(u8 difficulty, u8 stage_slot, u8 arg2)
 {
-    return lbl_803D85F0[arg1 + ((u8) arg0 * 5)].pad_14[arg2 * 3];
+    return lbl_803D85F0[stage_slot + ((u8) difficulty * 5)].pad_14[arg2 * 3];
 }
 
 /// #gm_8017ECD4

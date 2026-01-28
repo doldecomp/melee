@@ -33,9 +33,6 @@ void itPatapata_UnkMotion1_Phys(Item_GObj* gobj)
     ip->xDD4_itemVar.nokonoko.x28 -= 1;
 }
 
-// Decompilation of itPatapata_UnkMotion1_Coll
-// Unit: main/melee/it/items/itpatapata
-
 bool itPatapata_UnkMotion1_Coll(Item_GObj* gobj)
 {
     Item* it = gobj->user_data;

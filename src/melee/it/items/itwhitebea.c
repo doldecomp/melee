@@ -5,6 +5,7 @@
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
+#include "it/items/itfreeze.h"
 #include "it/types.h"
 
 /// #it_802E31F8

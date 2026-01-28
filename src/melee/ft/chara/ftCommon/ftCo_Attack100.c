@@ -683,9 +683,6 @@ void ftCo_ItemScopeAirFire_Coll(Fighter_GObj* gobj)
 
 /// #fn_800D84D4
 
-// Decompilation of fn_800D86B8
-// Unit: main/melee/ft/chara/ftCommon/ftCo_Attack100
-
 void fn_800D84D4(Fighter_GObj*, s32);
 
 void fn_800D86B8(Fighter_GObj* gobj)

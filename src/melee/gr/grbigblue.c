@@ -8,6 +8,7 @@
 #include "baselib/gobjgxlink.h"
 #include "baselib/gobjproc.h"
 #include "baselib/jobj.h"
+#include "baselib/memory.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
 #include "gr/types.h"

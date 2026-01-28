@@ -43,7 +43,7 @@
 /* 200154 */ void grRCruise_80200154(Ground_GObj*);
 /* 20045C */ void grRCruise_8020045C(Ground_GObj*);
 /* 200460 */ UNK_RET fn_80200460(UNK_PARAMS);
-/* 200540 */ void grRCruise_80200540();
+/* 200540 */ void grRCruise_80200540(Ground_GObj*);
 /* 200578 */ UNK_RET fn_80200578(UNK_PARAMS);
 /* 20071C */ UNK_RET grRCruise_8020071C(UNK_PARAMS);
 /* 200B48 */ UNK_RET grRCruise_80200B48(UNK_PARAMS);
