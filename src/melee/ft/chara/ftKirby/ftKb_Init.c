@@ -3265,6 +3265,7 @@ char* ftKb_Init_GetMotionFileString(enum_t arg0)
 
     return ftKb_Init_803CA5A4[offset - 14];
 }
+
 /// #ftKb_SpecialN_800EEC34
 
 /// #ftKb_SpecialN_800EED50
@@ -3317,6 +3318,7 @@ void ftKb_Init_UnkCallbackPairs0_1(Fighter_GObj* gobj, int arg1, float arg2)
         ftAnim_80070458_proto(fp, &fp->fv.kb.x44, arg1);
     }
 }
+
 void ftKb_SpecialN_800EFA40(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -3848,6 +3850,7 @@ void ftKb_SpecialN_800F11AC(Fighter_GObj* gobj)
     ftKb_SpecialN_800EF69C(gobj, 0xF, ft_80459B88.hats[14]);
     ftCo_UnloadDynamicBones(fp);
 }
+
 /// #ftKb_SpecialN_800F11F0
 
 void ftKb_SpecialN_800F12C8(Fighter_GObj* gobj)
@@ -3856,6 +3859,7 @@ void ftKb_SpecialN_800F12C8(Fighter_GObj* gobj)
     ftKb_SpecialN_800EF69C(gobj, 0x10, ft_80459B88.hats[FTKIND_PURIN]);
     ftCo_UnloadDynamicBones(fp);
 }
+
 /// Load Dr. Mario's hat for Kirby copy ability.
 /// @note The self-assignment `fp = fp` is required for register allocation.
 void ftKb_SpecialN_800F130C(Fighter_GObj* gobj)
@@ -3952,6 +3956,7 @@ void ftKb_Init_UnkMotionStates3(Fighter_GObj* gobj)
         break;
     }
 }
+
 /// #ftKb_SpecialN_800F1BAC
 
 static bool fn_800F1CA0(HSD_GObj* gobj)
@@ -3994,6 +3999,7 @@ s32 ftKb_SpecialN_800F1CD8(HSD_GObj* gobj)
     }
     return false;
 }
+
 void ftKb_SpecialN_800F1D24(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
