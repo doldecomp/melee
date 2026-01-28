@@ -540,7 +540,10 @@ u8 gm_8018A228(u8 difficulty, u8 stage_slot, u8 idx)
     return lbl_803D9910[stage_slot + (difficulty * 5)].pad_6[idx * 3];
 }
 
-/// #gm_8018A25C
+u8 gm_8018A25C(u8 difficulty, u8 stage_slot, u8 arg2)
+{
+    return lbl_803D9910[stage_slot + difficulty * 5].pad_6[arg2 * 3 + 1];
+}
 
 u8 gm_8018A290(u8 difficulty, u8 stage_slot, u8 idx)
 {
