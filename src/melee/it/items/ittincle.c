@@ -191,7 +191,14 @@ void it_802EC604(HSD_GObj* gobj)
     Item_80268E5C(gobj, 0xB, ITEM_ANIM_UPDATE);
 }
 
-/// #itTincle_UnkMotion11_Anim
+bool itTincle_UnkMotion11_Anim(Item_GObj* gobj)
+{
+    PAD_STACK(8);
+    if (!it_80272C6C(gobj)) {
+        it_802EC69C(gobj);
+    }
+    return false;
+}
 
 void itTincle_UnkMotion11_Phys(Item_GObj* gobj) {}
 
