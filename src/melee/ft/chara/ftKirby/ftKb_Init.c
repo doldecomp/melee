@@ -6223,7 +6223,15 @@ void ftKb_SpecialNLk800FB444(Fighter_GObj* gobj)
 
 /// #ftKb_SpecialNLk800FB6DC
 
-/// #ftKb_SpecialNLk800FB800
+void ftKb_SpecialNLk800FB800(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+
+    if (fp->fv.kb.x74 != 0) {
+        it_802A8A7C((Item_GObj*) fp->fv.kb.x74);
+        fp->fv.kb.x74 = 0;
+    }
+}
 
 void it_802AF304(Item_GObj*);
 
