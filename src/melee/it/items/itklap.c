@@ -6,7 +6,16 @@
 
 /// #it_802E1820
 
-/// #it_2725_Logic10_Destroyed
+void grKongo_801D8058(Ground_GObj*);
+
+void it_2725_Logic10_Destroyed(Item_GObj* item_gobj)
+{
+    Item* ip = GET_ITEM(item_gobj);
+    if ((u32) ip->xDD4_itemVar.sword.x20 != 0) {
+        grKongo_801D8058((Ground_GObj*) ip->xDD4_itemVar.sword.x20);
+        ip->xDD4_itemVar.sword.x20 = 0;
+    }
+}
 
 /// #it_802E18B4
 
