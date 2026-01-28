@@ -5,10 +5,11 @@
 
 #include "it/items/types.h"
 
+#include <baselib/forward.h>
 #include <dolphin/mtx.h>
 
 /* 2B18B0 */ UNK_RET it_802B18B0(UNK_PARAMS);
-/* 2B19AC */ Item_GObj* it_802B19AC(Item_GObj*, Vec3* cur_pos, u32, u32,
+/* 2B19AC */ Item_GObj* it_802B19AC(HSD_GObj*, Vec3* cur_pos, u32, u32,
                                     float facing_dir);
 /* 2B1AAC */ void it_2725_Logic110_PickedUp(Item_GObj*);
 /* 2B1AD4 */ bool itSeakneedleheld_UnkMotion0_Anim(Item_GObj* gobj);

@@ -4,7 +4,6 @@
 #include <placeholder.h>
 
 #include "it/inlines.h"
-
 #include "mp/forward.h"
 
 /* 2182C4 */ void grPushOn_802182C4(bool);
