@@ -12,7 +12,18 @@
 
 /// #it_802AF940
 
-/// #it_2725_Logic103_Destroyed
+void it_2725_Logic103_Destroyed(Item_GObj* item_gobj)
+{
+    Item* item;
+
+    if (item_gobj != NULL) {
+        item = item_gobj->user_data;
+        if (item != NULL) {
+            it_802725D4(item_gobj);
+            item->owner = NULL;
+        }
+    }
+}
 
 /// #it_802AFA70
 
