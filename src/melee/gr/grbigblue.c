@@ -227,7 +227,15 @@ void grBigBlue_801E6884(Ground_GObj* gobj)
     Ground_801C2FE0(gobj);
 }
 
-/// #grBigBlue_801E68B8
+void grBigBlue_801E68B8(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+
+    HSD_Free((void*) gp->gv.corneria.xC8);
+    gp->gv.corneria.xC8 = 0;
+    HSD_Free((void*) gp->gv.corneria.xCC);
+    gp->gv.corneria.xCC = 0;
+}
 
 /// #grBigBlue_801E6904
 
