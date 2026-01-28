@@ -25,7 +25,16 @@ Item* it_8028ECF0(Item_GObj* gobj, Vec3* v)
     return ip;
 }
 
-/// #it_3F14_Logic17_Destroyed
+void it_802E37A4(Item_GObj*);
+
+void it_3F14_Logic17_Destroyed(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->xDD4_itemVar.freeze.unk_1C != NULL) {
+        it_802E37A4(ip->xDD4_itemVar.freeze.unk_1C);
+        ip->xDD4_itemVar.freeze.unk_1C = NULL;
+    }
+}
 
 /// #it_3F14_Logic17_Spawned
 
