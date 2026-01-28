@@ -65,7 +65,7 @@
 /* 17EB30 */ UnkAllstarData* gm_8017EB30(void);
 /* 17EB3C */ u8 gm_8017EB3C(u8, u8);
 /* 17EB64 */ u8 gm_8017EB64(u8 difficulty, u8 stage_slot, u8 arg2);
-/* 17EB98 */ UNK_RET gm_8017EB98(UNK_PARAMS);
+/* 17EB98 */ u8 gm_8017EB98(u8 difficulty, u8 stage_slot, u8 arg2);
 /* 17EBCC */ u8 gm_8017EBCC(u8 arg0, u8 arg1, u8 arg2);
 /* 17EC00 */ f32 gm_8017EC00(u8, u8);
 /* 17EC50 */ f32 gm_8017EC50(u8, u8);
