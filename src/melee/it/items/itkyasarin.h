@@ -11,7 +11,7 @@
 /* 2ECD1C */ void it_802ECD1C(Item_GObj*, Vec3*);
 /* 2ECD3C */ HSD_GObj* it_802ECD3C(HSD_GObj*, Point3d*, f32);
 /* 2ECE90 */ void it_802ECE90(Item_GObj*);
-/* 2ECEB0 */ UNK_RET it_802ECEB0(UNK_PARAMS);
+/* 2ECEB0 */ void it_802ECEB0(Item_GObj* gobj);
 /* 2ECF00 */ bool itKyasarin_UnkMotion0_Anim(Item_GObj* gobj);
 /* 2ECF70 */ bool itKyasarin_UnkMotion0_Coll(Item_GObj* gobj);
 /* 2ECFE0 */ UNK_RET it_802ECFE0(UNK_PARAMS);
