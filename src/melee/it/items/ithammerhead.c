@@ -63,7 +63,15 @@ void it_80299F94(Item_GObj* gobj)
     it_80299FB4(gobj);
 }
 
-/// #it_80299FB4
+void it_80299FB4(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+
+    ip->x40_vel.y = 0.0F;
+    ip->x40_vel.x = 0.0F;
+    it_8026B390(gobj);
+    Item_80268E5C(gobj, 3, 1);
+}
 
 /// #itHammerhead_UnkMotion3_Anim
 
