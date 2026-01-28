@@ -193,11 +193,16 @@ void it_802EC604(HSD_GObj* gobj)
 
 bool itTincle_UnkMotion11_Anim(Item_GObj* gobj)
 {
+    int new_var;
+    int new_var2;
+
+    new_var2 = 0;
     PAD_STACK(8);
     if (!it_80272C6C(gobj)) {
         it_802EC69C(gobj);
     }
-    return false;
+    new_var = new_var2;
+    return new_var;
 }
 
 void itTincle_UnkMotion11_Phys(Item_GObj* gobj) {}
