@@ -69,7 +69,7 @@ struct lbl_8046B488_t;
 /* 162A00 */ long gm_80162A00(void);
 /* 162A4C */ long gm_80162A4C(s32 amount);
 /* 162A98 */ UNK_RET gm_80162A98(s32);
-/* 162B4C */ UNK_RET gm_80162B4C(s32);
+/* 162B4C */ void gm_80162B4C(s32 amount);
 /* 162B98 */ void gm_80162B98(void);
 /* 162BD8 */ int gm_80162BD8(u8);
 /* 162BFC */ UNK_RET fn_80162BFC(s8 ckind, int);

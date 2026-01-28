@@ -467,7 +467,17 @@ void fn_80187C9C(HSD_GObj* gobj, int arg1)
 
 /// #gm_80188364_OnLeave
 
-/// #gm_8018838C_OnFrame
+static struct {
+    u8 pad[0x36];
+    u8 x36;
+} lbl_804736C0;
+
+void gm_8018838C_OnFrame(void)
+{
+    if (((u8) lbl_804736C0.x36 >> 2U) & 1) {
+        gm_801A4B60();
+    }
+}
 
 /// #gm_801883C0
 
@@ -529,11 +539,20 @@ f32 gm_8018A1D8(u8 difficulty, u8 stage_slot)
            100.0F;
 }
 
-/// #gm_8018A228
+u8 gm_8018A228(u8 difficulty, u8 stage_slot, u8 idx)
+{
+    return lbl_803D9910[stage_slot + (difficulty * 5)].pad_6[idx * 3];
+}
 
-/// #gm_8018A25C
+u8 gm_8018A25C(u8 difficulty, u8 stage_slot, u8 arg2)
+{
+    return lbl_803D9910[stage_slot + difficulty * 5].pad_6[arg2 * 3 + 1];
+}
 
-/// #gm_8018A290
+u8 gm_8018A290(u8 difficulty, u8 stage_slot, u8 idx)
+{
+    return lbl_803D9910[stage_slot + (difficulty * 5)].pad_6[2 + idx * 3];
+}
 
 f32 gm_8018A2C4(u8 difficulty, u8 stage_slot)
 {

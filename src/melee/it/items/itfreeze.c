@@ -25,13 +25,32 @@ Item* it_8028ECF0(Item_GObj* gobj, Vec3* v)
     return ip;
 }
 
-/// #it_3F14_Logic17_Destroyed
+void it_802E37A4(Item_GObj*);
+
+void it_3F14_Logic17_Destroyed(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->xDD4_itemVar.freeze.unk_1C != NULL) {
+        it_802E37A4(ip->xDD4_itemVar.freeze.unk_1C);
+        ip->xDD4_itemVar.freeze.unk_1C = NULL;
+    }
+}
 
 /// #it_3F14_Logic17_Spawned
 
 /// #it_8028EDBC
 
-/// #it_8028EF34
+/// FAKE MATCH: freeze.x0 is declared s32 but used as f32 here.
+/// Needs itFreeze_ItemVars.x0 changed to f32 to fix.
+void it_8028EF34(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->x40_vel.x = *(f32*) &ip->xDD4_itemVar.freeze.x0;
+    ip->x40_vel.z = 0.0F;
+    ip->x40_vel.y = 0.0F;
+    it_8026B390(gobj);
+    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+}
 
 bool itFreeze_UnkMotion0_Anim(Item_GObj* gobj)
 {

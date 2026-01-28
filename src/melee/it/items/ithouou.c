@@ -10,6 +10,10 @@
 #include "it/it_2725.h"
 #include "it/item.h"
 
+typedef struct itHououAttr {
+    f32 timer;
+} itHououAttr;
+
 /// #it_2725_Logic18_Spawned
 
 void it_802D25B8(void) {}
@@ -200,7 +204,19 @@ bool it_802D2D04(Item_GObj* gobj)
 
 /// #it_802D2D2C
 
-/// #it_2725_Logic42_Spawned
+void it_2725_Logic42_Spawned(Item_GObj* item_gobj)
+{
+    Item* item;
+    PAD_STACK(12);
+
+    item = GET_ITEM((HSD_GObj*) item_gobj);
+    item->xD44_lifeTimer =
+        ((itHououAttr*) item->xC4_article_data->x4_specialAttributes)
+            ->timer;
+    it_80274740(item_gobj);
+    it_802D2EF0(item_gobj);
+    it_8026B3A8(item_gobj);
+}
 
 void it_802D2ED0(Item_GObj* gobj, Item_GObj* ref_gobj)
 {

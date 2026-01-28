@@ -9,7 +9,7 @@
 /* 295F38 */ UNK_RET it_80295F38(Item_GObj* gobj);
 /* 2960B8 */ int it_802960B8(Item_GObj* gobj);
 /* 2960CC */ int it_802960CC(Item_GObj* gobj);
-/* 2960E0 */ void it_3F14_Logic5_Destroyed(Item_GObj*);
+/* 2960E0 */ void it_3F14_Logic5_Destroyed(Item_GObj* gobj);
 /* 296120 */ void it_3F14_Logic5_Spawned(Item_GObj*);
 /* 2961E8 */ UNK_RET it_802961E8(UNK_PARAMS);
 /* 2962E0 */ UNK_RET it_802962E0(UNK_PARAMS);

@@ -30,7 +30,15 @@ bool itOldottosea_UnkMotion0_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itOldottosea_UnkMotion0_Phys
+void itOldottosea_UnkMotion0_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->xDD4_itemVar.oldottosea.x28 == 0) {
+        it_802E27B4(gobj);
+        return;
+    }
+    ip->xDD4_itemVar.oldottosea.x28 -= 1;
+}
 
 bool itOldottosea_UnkMotion0_Coll(Item_GObj* gobj)
 {

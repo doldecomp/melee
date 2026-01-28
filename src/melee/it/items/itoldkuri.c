@@ -149,9 +149,24 @@ bool itOldkuri_UnkMotion9_Coll(Item_GObj* gobj)
 
 /// #it_802D8098
 
-/// #it_802D813C
+void it_802D813C(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    ip->x40_vel.z = 0.0F;
+    ip->x40_vel.y = 0.0F;
+    ip->x40_vel.x = 0.0F;
+    it_8027C0A8(gobj, 0.0F, 0.0F);
+    Item_80268E5C(gobj, 7, 2);
+}
 
-/// #itOldkuri_UnkMotion7_Anim
+bool itOldkuri_UnkMotion7_Anim(Item_GObj* gobj)
+{
+    if (!it_80272C6C(gobj)) {
+        it_8027CC88(gobj);
+        return true;
+    }
+    return false;
+}
 
 void itOldkuri_UnkMotion7_Phys(Item_GObj* gobj) {}
 
