@@ -6223,27 +6223,9 @@ void ftKb_SpecialNLk800FB444(Fighter_GObj* gobj)
 
 /// #ftKb_SpecialNLk800FB6DC
 
-void ftKb_SpecialNLk800FB800(Fighter_GObj* gobj)
-{
-    Fighter* fp = gobj->user_data;
+/// #ftKb_SpecialNLk800FB800
 
-    if (fp->fv.kb.x74 != 0) {
-        it_802A8A7C((Item_GObj*) fp->fv.kb.x74);
-        fp->fv.kb.x74 = 0;
-    }
-}
-
-void it_802AF304(Item_GObj*);
-
-void ftKb_SpecialNLk800FB840(Fighter_GObj* gobj)
-{
-    Fighter* fp = gobj->user_data;
-
-    if (fp->fv.kb.x78 != 0) {
-        it_802AF304((Item_GObj*) fp->fv.kb.x78);
-        fp->fv.kb.x78 = 0;
-    }
-}
+/// #ftKb_SpecialNLk800FB840
 
 /// #ftKb_SpecialNLk800FB880
 
@@ -6839,15 +6821,7 @@ void ftKb_NsSpecialAirNEnd_Coll(Fighter_GObj* gobj)
 
 /// #ftKb_DkSpecialNLoop_Anim
 
-void ftKb_DkSpecialNCancel_Anim(HSD_GObj* gobj)
-{
-    if (!ftAnim_IsFramesRemaining(gobj)) {
-        Fighter* fp = GET_FIGHTER(gobj);
-        fp->pre_hitlag_cb = NULL;
-        fp->post_hitlag_cb = NULL;
-        ft_8008A2BC(gobj);
-    }
-}
+/// #ftKb_DkSpecialNCancel_Anim
 
 /// #ftKb_DkSpecialN_Anim
 
@@ -6857,15 +6831,7 @@ void ftKb_DkSpecialNCancel_Anim(HSD_GObj* gobj)
 
 /// #ftKb_DkSpecialAirNLoop_Anim
 
-void ftKb_DkSpecialAirNCancel_Anim(HSD_GObj* gobj)
-{
-    if (!ftAnim_IsFramesRemaining(gobj)) {
-        Fighter* fp = GET_FIGHTER(gobj);
-        fp->pre_hitlag_cb = NULL;
-        fp->post_hitlag_cb = NULL;
-        ftCo_Fall_Enter(gobj);
-    }
-}
+/// #ftKb_DkSpecialAirNCancel_Anim
 
 /// #ftKb_DkSpecialAirN_Anim
 
