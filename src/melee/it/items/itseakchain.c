@@ -76,7 +76,12 @@ void it_2725_Logic54_PickedUp(Item_GObj* gobj)
 
 /// #it_802BCF2C
 
-/// #it_802BCF84
+void it_802BCF84(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
+    ip->on_accessory = (HSD_GObjEvent) fn_802BB784;
+}
 
 /// #it_802BCFC4
 
