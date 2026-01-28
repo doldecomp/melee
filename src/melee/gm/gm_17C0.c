@@ -790,7 +790,14 @@ u8 gm_8017EB3C(u8 difficulty, u8 stage_slot)
 
 /// #gm_8017EB98
 
-/// #gm_8017EBCC
+u8 gm_8017EBCC(u8 arg0, u8 arg1, u8 arg2)
+{
+    u8* p;
+    s32 idx;
+    idx = arg1 + arg0 * 5;
+    p = (u8*) lbl_803D85F0;
+    return p[idx * 0x1A + arg2 * 3 + 8];
+}
 
 f32 gm_8017EC00(u8 difficulty, u8 stage_slot)
 {
