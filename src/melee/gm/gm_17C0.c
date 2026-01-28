@@ -789,7 +789,10 @@ u8 gm_8017EB3C(u8 difficulty, u8 stage_slot)
     return lbl_803D85F0[stage_slot + (difficulty * 5)].stage_kind;
 }
 
-/// #gm_8017EB64
+u8 gm_8017EB64(u8 difficulty, u8 stage_slot, u8 arg2)
+{
+    return lbl_803D85F0[stage_slot + (difficulty * 5)].pad_6[arg2 * 3];
+}
 
 /// #gm_8017EB98
 
