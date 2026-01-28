@@ -821,7 +821,11 @@ f32 gm_8017EC50(u8 difficulty, u8 stage_slot)
            100.0F;
 }
 
-/// #gm_8017ECA0
+
+u8 gm_8017ECA0(u8 arg0, u8 arg1, u8 arg2)
+{
+    return lbl_803D85F0[arg1 + ((u8) arg0 * 5)].pad_14[arg2 * 3];
+}
 
 /// #gm_8017ECD4
 
