@@ -424,8 +424,8 @@ struct Diagram {
     /* 0x05 */ u8 pad_5[3];
     /* 0x08 */ HSD_JObj* jobjs[13]; ///< JObj references, filled by lb_80011E24
     /* 0x3C */ u16
-        fighter_cursor_pos;          ///< Fighter mode cursor (row << 8 | col)
-    /* 0x3E */ u16 name_cursor_pos;  ///< Name mode cursor (row << 8 | col)
+        fighter_cursor_pos;          ///< Fighter mode scroll offset (col << 8 | row)
+    /* 0x3E */ u16 name_cursor_pos;  ///< Name mode scroll offset (col << 8 | row)
     /* 0x40 */ HSD_GObj* popup_gobj; ///< Popup window GObj (or NULL)
     /* 0x44 */ u8 is_name_mode;      ///< 0 = fighter mode, 1 = name mode
     /* 0x45 */ u8 pad_45[3];

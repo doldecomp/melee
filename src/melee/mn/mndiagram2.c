@@ -204,7 +204,7 @@ void mnDiagram2_UpdateHeader(HSD_GObj* gobj, u8 is_name_mode, u8 entity_idx)
         if (jobj != NULL) {
             HSD_JObjRemoveAll(jobj);
         }
-        HSD_JObjAddChild(data->x18, mnDiagram_80242B38((u8) name, 0));
+        HSD_JObjAddChild(data->x18, mnDiagram_CreateFighterIcon((u8) name, 0));
     }
 
     if (data->header_text != NULL) {
@@ -272,20 +272,18 @@ static inline void mnDiagram2_RefreshStatRows(void)
 void mnDiagram2_HandleInput(HSD_GObj* gobj)
 {
     Diagram2* data;
+    u32 result;
     Diagram2* data2;
-    int result;
     u8 x46;
     u8 x47;
     u8 x48;
-    u8 var_r6;
     u8 var_r5;
-    u8 var_r28;
     u8 new_val;
+    PAD_STACK(40);
 
     data = mnDiagram2_804D6C18->user_data;
     result = mn_80229624(4);
     mn_804A04F0.buttons = result;
-    var_r28 = 0;
 
     if (result & 0x20) {
         lbAudioAx_80024030(0);
@@ -314,7 +312,7 @@ void mnDiagram2_HandleInput(HSD_GObj* gobj)
         mnDiagram2_ClearStatRows(mnDiagram2_804D6C18);
         HSD_GObjPLink_80390228(gobj);
         if (result & 0x40) {
-            mnDiagram_802437E8(0, 0);
+            mnDiagram_Init(0, 0);
             return;
         }
         mnDiagram3_8024714C(NULL);
@@ -327,10 +325,7 @@ void mnDiagram2_HandleInput(HSD_GObj* gobj)
             return;
         }
         lbAudioAx_80024030(1);
-        if (data->is_name_mode == 0) {
-            var_r28 = 1;
-        }
-        data->is_name_mode = var_r28;
+        data->is_name_mode = (data->is_name_mode == 0) ? 1 : 0;
         if (data->is_name_mode == 0 && (s32) (data->scroll_offset + 10) > 0x15)
         {
             data->scroll_offset = 0;
@@ -692,7 +687,7 @@ void mnDiagram2_CreateStatRow(HSD_GObj* gobj, u8 is_name_mode, u8 stat_type,
                         (u32) mnDiagram2_GetStatValue(is_name_mode, stat_type,
                                                       entity_idx) < 0x19)
                     {
-                        HSD_JObj* jobj = mnDiagram_80242B38(
+                        HSD_JObj* jobj = mnDiagram_CreateFighterIcon(
                             (u8) mnDiagram2_GetStatValue(
                                 is_name_mode, stat_type, entity_idx),
                             0);
