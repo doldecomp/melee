@@ -44,7 +44,7 @@ static inline void inlineA0(Fighter_GObj* gobj)
     {
         fp->mv.co.capturekirby.x8.x = ftKb_SpecialN_800F5B4C(fp->victim_gobj);
         fp->mv.co.capturekirby.x8.y = ftKb_SpecialN_800F5B3C(fp->victim_gobj);
-        ftKb_SpecialN_800F5B5C(fp->victim_gobj);
+        ftKb_SpecialN_800F5B5C(fp->victim_gobj, &vec0);
         {
             fp->mv.co.capturekirby.pos_offset.x = fp->cur_pos.x - vec0.x;
             fp->mv.co.capturekirby.pos_offset.y = fp->cur_pos.y - vec0.y;
@@ -114,6 +114,7 @@ static inline void inlineB0(Fighter_GObj* gobj, Vec3* pos)
 static inline void inlineB1(Fighter_GObj* gobj, Vec3* pos)
 {
     Fighter* fp = GET_FIGHTER(gobj);
+    Vec3 victim_pos;
     if (ABS(pos->x) > fp->mv.co.capturekirby.x10.x) {
         pos->x = fp->mv.co.capturekirby.x10.x * (pos->x < 0 ? -1 : +1);
     }
@@ -122,10 +123,10 @@ static inline void inlineB1(Fighter_GObj* gobj, Vec3* pos)
     }
     fp->mv.co.capturekirby.pos_offset.x -= pos->x;
     fp->mv.co.capturekirby.pos_offset.y -= pos->y;
-    ftKb_SpecialN_800F5B5C(fp->victim_gobj);
-    fp->cur_pos.x = pos->x + fp->mv.co.capturekirby.pos_offset.x;
-    fp->cur_pos.y = pos->y + fp->mv.co.capturekirby.pos_offset.y;
-    fp->cur_pos.z = pos->z;
+    ftKb_SpecialN_800F5B5C(fp->victim_gobj, &victim_pos);
+    fp->cur_pos.x = victim_pos.x + fp->mv.co.capturekirby.pos_offset.x;
+    fp->cur_pos.y = victim_pos.y + fp->mv.co.capturekirby.pos_offset.y;
+    fp->cur_pos.z = victim_pos.z;
 }
 
 void ftCo_800BD39C(Fighter_GObj* gobj)

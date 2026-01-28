@@ -7,7 +7,7 @@
 
 #include "it/items/types.h"
 
-/* 29BAB8 */ UNK_RET it_8029BAB8(UNK_PARAMS);
+/* 29BAB8 */ void it_8029BAB8(HSD_GObj* gobj, Vec3* pos, float facing_dir);
 /* 29BB90 */ UNK_RET it_8029BB90(UNK_PARAMS);
 /* 29BC88 */ bool itKirbycutterbeam_UnkMotion0_Anim(Item_GObj* gobj);
 /* 29BCA8 */ void itKirbycutterbeam_UnkMotion0_Phys(Item_GObj* gobj);
