@@ -575,7 +575,7 @@
 /* 0FFA10 */ void ftKb_SpecialNDk_800FFA10(Fighter_GObj* gobj);
 /* 0FFB24 */ void ftKb_DkSpecialNStart_Anim(Fighter_GObj* gobj);
 /* 0FFBAC */ void ftKb_DkSpecialNLoop_Anim(Fighter_GObj* gobj);
-/* 0FFC48 */ void ftKb_DkSpecialNCancel_Anim(Fighter_GObj* gobj);
+/* 0FFC48 */ void ftKb_DkSpecialNCancel_Anim(HSD_GObj* gobj);
 /* 0FFC94 */ void ftKb_DkSpecialN_Anim(Fighter_GObj* gobj);
 /* 0FFE6C */ void ftKb_DkSpecialNFull_Anim(Fighter_GObj* gobj);
 /* 0FFFB8 */ void ftKb_DkSpecialAirNStart_Anim(Fighter_GObj* gobj);
