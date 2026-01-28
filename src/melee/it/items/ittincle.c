@@ -157,7 +157,14 @@ bool itTincle_UnkMotion8_Coll(Item_GObj* gobj)
 
 /// #it_802EC3F4
 
-/// #itTincle_UnkMotion9_Anim
+bool itTincle_UnkMotion9_Anim(Item_GObj* gobj)
+{
+    PAD_STACK(8);
+    if (!it_80272C6C(gobj)) {
+        it_802EC4D0(gobj);
+    }
+    return false;
+}
 
 void itTincle_UnkMotion9_Phys(Item_GObj* gobj) {}
 
