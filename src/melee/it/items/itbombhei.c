@@ -307,7 +307,14 @@ void it_80280DC0(Item_GObj* gobj)
     }
 }
 
-/// #it_3F14_Logic6_DmgDealt
+bool it_3F14_Logic6_DmgDealt(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->msid != 7 && ip->xDD4_itemVar.bombhei.xDDC == 0) {
+        it_80280B60(gobj);
+    }
+    return false;
+}
 
 /// #it_3F14_Logic6_DmgReceived
 
