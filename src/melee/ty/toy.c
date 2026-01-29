@@ -858,7 +858,65 @@ void un_803083D8(HSD_JObj* jobj, s32 arg1)
 
 /// #un_803087F4
 
-/// #un_80308DC8
+// Decompilation of un_80308DC8
+
+void un_80307F64(s32 a, s32 b);
+f32 un_80309338(Vec3* pos, s32 arg);
+
+typedef struct un_804A2AA8_t {
+    /* 0x00 */ u8 pad[0x4];
+    /* 0x04 */ HSD_JObj* x4;
+    /* 0x08 */ HSD_JObj* x8;
+    /* 0x0C */ u8 padC[0x2];
+    /* 0x0E */ u8 xE;
+} un_804A2AA8_t;
+
+typedef struct un_804D6E68_t {
+    /* 0x00 */ u8 pad[0x18];
+    /* 0x18 */ f32 x18;
+} un_804D6E68_t;
+
+void un_80308DC8(HSD_CObj* cobj)
+{
+    Vec3 interest;
+    Vec3 eye_pos;
+    un_804D6E68_t* temp_r30;
+    un_804A2AA8_t* temp_r31;
+    f32 temp_f1;
+
+    temp_r31 = (un_804A2AA8_t*) un_804A2AA8;
+    temp_r30 = (un_804D6E68_t*) un_804D6E68;
+
+    HSD_CObjGetInterest(cobj, &interest);
+    HSD_CObjGetEyePosition(cobj, &eye_pos);
+
+    temp_f1 = temp_r30->x18;
+
+    if (temp_f1 >= 25.0F ||
+        (temp_f1 >= -3.0F && un_80309338(&eye_pos, 0) <= 15.0F))
+    {
+        un_80307F64(1, 1);
+        return;
+    }
+
+    un_80307F64(2, 1);
+
+    if (temp_r30->x18 < 10.0F) {
+        if (eye_pos.y < 0.0F) {
+            temp_r31->xE = 1;
+            HSD_JObjClearFlagsAll(temp_r31->x8, 0x10);
+            HSD_JObjSetFlagsAll(temp_r31->x4, 0x10);
+        } else {
+            temp_r31->xE = 0;
+            HSD_JObjClearFlagsAll(temp_r31->x4, 0x10);
+            HSD_JObjSetFlagsAll(temp_r31->x8, 0x10);
+        }
+    } else {
+        temp_r31->xE = 1;
+        HSD_JObjClearFlagsAll(temp_r31->x8, 0x10);
+        HSD_JObjSetFlagsAll(temp_r31->x4, 0x10);
+    }
+}
 
 /// #un_80308F04
 
