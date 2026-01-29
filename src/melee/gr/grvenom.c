@@ -13,6 +13,8 @@
 
 #include <baselib/aobj.h>
 #include <baselib/gobj.h>
+#include <baselib/gobjgxlink.h>
+#include <baselib/gobjproc.h>
 #include <baselib/lobj.h>
 
 /// #grVenom_8020362C
