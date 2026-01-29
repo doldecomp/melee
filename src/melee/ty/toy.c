@@ -54,6 +54,8 @@ extern s8 un_804D6E50;
 extern void** un_804D6E68;
 extern s8 un_804D6EA2;
 
+extern void* un_804D6EBC;
+
 /// #un_80305058
 
 void un_803053C4(s32 targetValue, s32 count, s32 flag)
@@ -509,7 +511,79 @@ s32 un_803063D4(s32 arg0, s32 arg1, s32 arg2)
     return result;
 }
 
-/// #un_803064B8
+// Decompilation of un_803064B8
+// Unit: main/melee/ty/toy
+
+int lbLang_IsSavedLanguageJP(void);
+int lbLang_IsSavedLanguageUS(void);
+int lbLang_IsSettingJP(void);
+
+typedef struct {
+    s16 x0;
+    s16 x2;
+    s16 x4;
+    s16 x6;
+    s16 x8;
+    s16 xA;
+} ToyNameData;
+
+
+s16 un_803064B8(s16 arg0, s8 arg1)
+{
+    ToyNameData* data;
+    s16 result;
+
+    result = arg0;
+    switch (arg1) {
+    case 0:
+        data = (ToyNameData*)un_804D6EBC;
+        result = data[arg0].x0;
+        break;
+    case 1:
+        data = (ToyNameData*)un_804D6EBC;
+        result = data[arg0].x2;
+        break;
+    case 2:
+        if (lbLang_IsSettingJP() != 0) {
+            if (lbLang_IsSavedLanguageJP() != 0) {
+                data = (ToyNameData*)un_804D6EBC;
+                result = data[arg0].x4;
+                break;
+            }
+            data = (ToyNameData*)un_804D6EBC;
+            result = data[arg0].x8;
+            break;
+        }
+        if (lbLang_IsSavedLanguageUS() != 0) {
+            data = (ToyNameData*)un_804D6EBC;
+            result = data[arg0].x4;
+            break;
+        }
+        data = (ToyNameData*)un_804D6EBC;
+        result = data[arg0].x8;
+        break;
+    case 3:
+        if (lbLang_IsSettingJP() != 0) {
+            if (lbLang_IsSavedLanguageJP() != 0) {
+                data = (ToyNameData*)un_804D6EBC;
+                result = data[arg0].x6;
+                break;
+            }
+            data = (ToyNameData*)un_804D6EBC;
+            result = data[arg0].xA;
+            break;
+        }
+        if (lbLang_IsSavedLanguageUS() != 0) {
+            data = (ToyNameData*)un_804D6EBC;
+            result = data[arg0].x6;
+            break;
+        }
+        data = (ToyNameData*)un_804D6EBC;
+        result = data[arg0].xA;
+        break;
+    }
+    return result;
+}
 
 /// #un_8030663C
 
