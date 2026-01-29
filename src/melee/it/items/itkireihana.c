@@ -10,19 +10,6 @@
 #include "it/it_2725.h"
 #include "it/item.h"
 
-ItemStateTable it_803F7E28[] = {
-    { 0, itKireihana_UnkMotion0_Anim, itKireihana_UnkMotion0_Phys,
-      itKireihana_UnkMotion0_Coll },
-    { 1, itKireihana_UnkMotion1_Anim, itKireihana_UnkMotion1_Phys,
-      itKireihana_UnkMotion1_Coll },
-    { 2, itKireihana_UnkMotion2_Anim, itKireihana_UnkMotion2_Phys,
-      itKireihana_UnkMotion2_Coll },
-    { 3, itKireihana_UnkMotion3_Anim, itKireihana_UnkMotion3_Phys,
-      itKireihana_UnkMotion3_Coll },
-    { 4, itKireihana_UnkMotion4_Anim, itKireihana_UnkMotion4_Phys,
-      itKireihana_UnkMotion4_Coll }
-};
-
 void it_2725_Logic15_Spawned(Item_GObj* gobj)
 {
     Item* item = GET_ITEM(gobj);
