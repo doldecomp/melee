@@ -73,7 +73,7 @@
 /* 3109A0 */ void un_803109A0(s32, s32, s32);
 /* 310B48 */ UNK_RET un_80310B48(UNK_PARAMS);
 /* 3114E8 */ void un_803114E8(void);
-/* 311680 */ UNK_RET un_80311680(UNK_PARAMS);
+/* 311680 */ void un_80311680(void);
 /* 311788 */ void un_80311788(void);
 /* 311960 */ void un_80311960(void);
 /* 311AB0 */ void un_80311AB0_OnEnter(UNK_T);

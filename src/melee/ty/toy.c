@@ -1022,7 +1022,54 @@ void un_803114E8(void)
         OSReport(un_803FE7C0);
     }
 }
-/// #un_80311680
+// m2c decompilation of un_80311680
+// Unit: main/melee/ty/toy
+
+
+void un_80311680(void) {
+    s16* temp_r31;
+    s16* var_r30;
+    u16* var_r29;
+    s32 var_r28;
+    s16 temp_r0;
+    s32 var_r0;
+    s16* temp_r3;
+    s16 temp_r5;
+    s32 temp_r0_2;
+
+    var_r29 = gmMainLib_8015CC78();
+    temp_r31 = gmMainLib_8015CC84();
+    un_80311960();
+    var_r28 = 0;
+    do {
+        var_r30 = un_804D6EB4;
+        if (lbLang_IsSettingUS() != 0) {
+            while ((temp_r0 = *var_r30) != -1) {
+                if (temp_r0 == var_r28) {
+                    var_r0 = 0;
+                    goto check_var;
+                }
+                var_r30++;
+            }
+        }
+        var_r0 = 1;
+check_var:
+        if (var_r0 != 0) {
+            temp_r3 = gmMainLib_8015CC90();
+            temp_r5 = *temp_r3 + 1;
+            *temp_r3 = temp_r5;
+            *var_r29 = 1;
+            temp_r0_2 = (s32)un_803060BC(var_r28, 6);
+            if ((u32)temp_r0_2 > 1U && temp_r0_2 != 8 && temp_r0_2 != 3) {
+                *var_r29 |= 0x4000;
+            }
+        }
+        var_r28++;
+        var_r29++;
+    } while (var_r28 < 0x125);
+    *temp_r31 = 0xF4;
+    un_804D6EA1 = 1;
+}
 
 void un_80311788(void)
 {
