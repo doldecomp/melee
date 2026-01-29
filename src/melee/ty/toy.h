@@ -21,7 +21,7 @@
 /* 305FB8 */ float un_80305FB8(void);
 /* 3060BC */ float un_803060BC(int, int);
 /* 3062BC */ s16 un_803062BC(s32 trophyId);
-/* 3062EC */ UNK_RET un_803062EC(UNK_PARAMS);
+/* 3062EC */ void un_803062EC(s32 arg0, u32 arg1, f32 farg0);
 /* 3063D4 */ long un_803063D4(long, long, long);
 /* 3064B8 */ s16 un_803064B8(s16 arg0, s8 arg1);
 /* 30663C */ void un_8030663C(void);
@@ -39,17 +39,16 @@
 /* 306D14 */ void un_80306D14(void);
 /* 306D70 */ void un_80306D70(s32);
 /* 306EEC */ void* un_80306EEC(HSD_JObj*, s32);
-/* 307018 */ UNK_RET un_80307018(UNK_PARAMS);
+/* 307018 */ void un_80307018(void);
 /* 30715C */ UNK_RET un_8030715C(UNK_PARAMS);
 /* 307470 */ void un_80307470(s32);
 /* 3075E8 */ void un_803075E8(s32 arg0);
 /* 307828 */ UNK_RET un_80307828(UNK_PARAMS);
-/* 3078E4 */ UNK_RET un_803078E4(UNK_PARAMS);
+/* 3078E4 */ void un_803078E4(void);
 /* 307BA0 */ UNK_RET un_80307BA0(UNK_PARAMS);
 /* 307E84 */ void fn_80307E84(HSD_GObj* gobj);
 /* 307F64 */ void un_80307F64(s32, s32);
-/* 30813C */ char*
-    un_8030813C(s16, enum MajorSceneKind); /// TODO :: fill out the struct that
+/* 30813C */ char* un_8030813C(s32 arg0, enum_t unused); /// TODO :: fill out the struct that
                                            /// this uses/returns
 /* 308250 */ UNK_RET un_80308250(UNK_PARAMS);
 /* 3082F8 */ void un_803082F8(s16 idx);
@@ -60,7 +59,7 @@
 /* 3087F4 */ UNK_RET un_803087F4(UNK_PARAMS);
 /* 308DC8 */ void un_80308DC8(HSD_CObj*);
 /* 308F04 */ UNK_RET un_80308F04(UNK_PARAMS);
-/* 309338 */ f32 un_80309338(Point3d*, s32);
+/* 309338 */ f32 un_80309338(Vec3* arg0, Vec3* arg1);
 /* 309404 */ UNK_RET fn_80309404(UNK_PARAMS);
 /* 30B530 */ UNK_RET fn_8030B530(UNK_PARAMS);
 /* 30E110 */ UNK_RET fn_8030E110(UNK_PARAMS);

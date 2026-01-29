@@ -10,6 +10,7 @@
 #include "baselib/lobj.h"
 #include "baselib/memory.h"
 #include "baselib/random.h"
+#include "baselib/sobjlib.h"
 #include "baselib/state.h"
 #include "gm/gm_1601.h" // for gm_801677E8
 #include "gm/gm_16AE.h"
@@ -60,6 +61,25 @@ extern s16* un_804D6E64;
 
 extern char un_803FDD18[];
 extern void* un_804D6ED8;
+
+extern DevText* un_804D6E9C;
+extern TrophyData* un_804D6EC4;
+
+extern void* un_804D6ED4;
+extern char un_803FE3B8[];
+extern char un_803FE3DC[];
+extern HSD_FogDesc un_803B8844;
+
+typedef struct PosArray {
+    s32 xy[2];
+} PosArray;
+
+typedef struct PosArrayFull {
+    PosArray a[7];
+} PosArrayFull;
+
+extern PosArrayFull un_803B8864;
+extern PosArrayFull un_803B889C;
 
 /// #un_80305058
 
@@ -598,7 +618,57 @@ s16 un_803062BC(s32 trophyId)
 
     return (s16) i;
 }
-/// #un_803062EC
+// Decompilation of un_803062EC
+// Unit: main/melee/ty/toy
+
+
+void un_803062EC(s32 arg0, u32 arg1, f32 farg0)
+{
+    char sp14[80];
+    TrophyData* td;
+    s32 id;
+
+    td = un_804D6EC4;
+    while ((id = td->id) != -1) {
+        if (id == arg0) {
+            break;
+        }
+        td++;
+    }
+
+    switch (arg1) {
+    case 0:
+        td->x08 = farg0;
+        break;
+    case 1:
+        td->x0C = farg0;
+        break;
+    case 2:
+        td->x10 = farg0;
+        break;
+    case 3:
+        td->x14 = farg0;
+        break;
+    case 4:
+        td->x18 = farg0;
+        break;
+    case 5:
+        td->x1C = farg0;
+        break;
+    case 6:
+    case 7:
+    default:
+        break;
+    }
+
+    if (un_804D6E9C != NULL) {
+        DevText_Erase(un_804D6E9C);
+        DevText_SetCursorXY(un_804D6E9C, 0, 0);
+        sprintf(sp14, "X   %3.2f\nY   %3.2f\nZ   %3.2f\nMS  %3.2f\nSS  %3.2f\nMD  %3.2f",
+                td->x08, td->x0C, td->x10, td->x14, td->x18, td->x1C);
+        DevText_Print(un_804D6E9C, sp14);
+    }
+}
 
 // m2c decompilation of un_803063D4
 // Unit: main/melee/ty/toy
@@ -991,7 +1061,59 @@ void un_80306D14(void)
 
 /// #un_80306EEC
 
-/// #un_80307018
+// Decompilation of un_80307018
+// Unit: main/melee/ty/toy
+
+
+
+
+typedef struct {
+    /* 0x00 */ HSD_GObj* x0;
+    /* 0x04 */ void* x4;
+    /* 0x08 */ HSD_GObj* x8;
+} tyUnkStruct;
+
+typedef struct {
+    /* 0x00 */ u8 pad[0x50];
+    /* 0x50 */ HSD_Archive* x50;
+} tyUnkStruct2;
+
+void un_80307018(void)
+{
+    HSD_FogDesc fog_desc;
+    HSD_Fog* fog;
+    HSD_JObj* jobj;
+    void* obj;
+    u8 kind;
+    tyUnkStruct2* ptr1;
+    tyUnkStruct* ptr2;
+
+    ptr1 = un_804D6ED8;
+    ptr2 = un_804D6ED4;
+
+    if (ptr1->x50 == NULL) {
+        OSReport("*** BG data aren't being loaded!\n");
+        __assert("toy.c", 0x912, "0");
+    }
+
+    jobj = HSD_ArchiveGetPublicAddress(ptr1->x50, un_803FE3DC);
+    if (jobj != NULL) {
+        ptr2->x0 = GObj_Create(2, 3, 0);
+        obj = un_80306EEC(jobj, 0);
+        kind = HSD_GObj_804D784A;
+        HSD_GObjObject_80390A70(ptr2->x0, kind, obj);
+        GObj_SetupGXLink(ptr2->x0, HSD_GObj_LObjCallback, 0x36, 0);
+
+        if (un_804D6E50 != 0) {
+            fog_desc = un_803B8844;
+            fog = HSD_FogLoadDesc(&fog_desc);
+            ptr2->x8 = GObj_Create(3, 4, 0);
+            kind = HSD_GObj_804D7848;
+            HSD_GObjObject_80390A70(ptr2->x8, kind, fog);
+            GObj_SetupGXLink(ptr2->x8, (GObj_RenderFunc)un_80306A0C, 0x35, 0);
+        }
+    }
+}
 
 /// #un_8030715C
 
@@ -1099,7 +1221,83 @@ void un_803075E8(s32 arg0)
 
 /// #un_80307828
 
-/// #un_803078E4
+// Decompilation of un_803078E4
+// Unit: main/melee/ty/toy
+
+typedef struct tyLightData {
+    /* 0x00 */ char _pad0[0x0C];
+    /* 0x0C */ HSD_GObj* x0C;
+    /* 0x10 */ char _pad1[0x48];
+    /* 0x58 */ void* x58;
+} tyLightData;
+
+
+void un_803078E4(void)
+{
+    tyLightData* data;
+    char* table;
+    PosArrayFull pos_en;
+    PosArrayFull pos_jp;
+    void* syms[7];
+    HSD_SObj_803A477C_t* sobj;
+    void** sym_ptr;
+    s32* jp_ptr;
+    s32* en_ptr;
+    s32 i;
+
+    table = un_803FDD18;
+    data = un_804D6ED8;
+
+    pos_en = un_803B8864;
+    pos_jp = un_803B889C;
+
+    if (data->x58 == NULL) {
+        char* filename;
+
+        if (lbLang_IsSavedLanguageJP() != 0) {
+            filename = table + 0x620;
+        } else {
+            filename = table + 0x630;
+        }
+
+        data->x58 = lbArchive_LoadSymbols(
+            filename,
+            &syms[0], *(s32*)(table + 0x3F0),
+            &syms[1], *(s32*)(table + 0x3F4),
+            &syms[2], *(s32*)(table + 0x3F8),
+            &syms[3], *(s32*)(table + 0x3FC),
+            &syms[4], *(s32*)(table + 0x400),
+            &syms[5], *(s32*)(table + 0x404),
+            &syms[6], *(s32*)(table + 0x408),
+            NULL
+        );
+
+        data->x0C = GObj_Create(5, 6, 0);
+        GObj_SetupGXLink(data->x0C, HSD_SObjLib_803A49E0, 0x38, 0);
+
+        i = 0;
+        sym_ptr = &syms[i];
+        jp_ptr = pos_jp.a[0].xy;
+        en_ptr = pos_en.a[0].xy;
+
+        do {
+            sobj = HSD_SObjLib_803A477C(data->x0C, (int)*sym_ptr, 0, 0, 0x80, 0);
+            if (sobj != NULL) {
+                if (lbLang_IsSavedLanguageJP() != 0) {
+                    sobj->x10 = (f32)jp_ptr[0];
+                    sobj->x14 = (f32)jp_ptr[1];
+                } else {
+                    sobj->x10 = (f32)en_ptr[0];
+                    sobj->x14 = (f32)en_ptr[1];
+                }
+            }
+            i += 1;
+            sym_ptr += 1;
+            jp_ptr += 2;
+            en_ptr += 2;
+        } while (i < 7);
+    }
+}
 
 /// #un_80307BA0
 
@@ -1184,7 +1382,51 @@ void un_80307F64(s32 arg0, s32 arg1)
         }
     }
 }
-/// #un_8030813C
+// Decompilation of un_8030813C
+// Unit: main/melee/ty/toy
+
+char* un_8030813C(s32 arg0, enum_t unused)
+{
+    char* ptr;
+    s32 i;
+    s32 found;
+
+    found = 0;
+
+    if (lbLang_IsSettingUS()) {
+        if (*(s32*)(ptr = un_804D6EA4) == arg0) {
+            found = 1;
+        } else if (*(s32*)(ptr += 0x54) == arg0) {
+            found = 1;
+        } else if (*(s32*)(ptr += 0x54) == arg0) {
+            found = 1;
+        } else if (*(s32*)(ptr += 0x54) == arg0) {
+            found = 1;
+        } else if (*(s32*)(ptr += 0x54) == arg0) {
+            found = 1;
+        } else {
+            ptr += 0x54;
+        }
+    }
+
+    if (found == 0) {
+        ptr = un_804D6EA8;
+        for (i = 0x125; i != 0; i--) {
+            if (*(s32*)ptr == arg0) {
+                found = 1;
+                break;
+            }
+            ptr += 0x54;
+        }
+    }
+
+    if (found == 0) {
+        OSReport("**** Not Found Toy Model!(%d)\n", arg0);
+        __assert("toy.c", 0xBA3, "0");
+    }
+
+    return ptr;
+}
 
 /// #un_80308250
 
@@ -1256,7 +1498,7 @@ void un_803083D8(HSD_JObj* jobj, s32 arg1)
 // Decompilation of un_80308DC8
 
 void un_80307F64(s32 a, s32 b);
-f32 un_80309338(Vec3* pos, s32 arg);
+f32 un_80309338(Vec3* arg0, Vec3* arg1);
 
 typedef struct un_804A2AA8_t {
     /* 0x00 */ u8 pad[0x4];
@@ -1315,7 +1557,46 @@ void un_80308DC8(HSD_CObj* cobj)
 
 /// #un_80308F04
 
-/// #un_80309338
+// Decompilation of un_80309338
+// Unit: main/melee/ty/toy
+
+static Vec3 un_803B88D4;
+
+f32 un_80309338(Vec3* arg0, Vec3* arg1)
+{
+    Vec3 sp14;
+    volatile f32 sp10;
+    Vec3* var_r3;
+    Vec3* var_r4;
+    f32 dy;
+    f32 dx;
+    f32 dz;
+    f32 var_f1;
+    f64 guess;
+
+    sp14 = un_803B88D4;
+    var_r3 = arg0;
+    var_r4 = arg1;
+    if (var_r3 == NULL) {
+        var_r3 = &sp14;
+    }
+    if (var_r4 == NULL) {
+        var_r4 = &sp14;
+    }
+    dy = var_r3->y - var_r4->y;
+    dx = var_r3->x - var_r4->x;
+    dz = var_r3->z - var_r4->z;
+    var_f1 = (dy * dy) + (dx * dx) + (dz * dz);
+    if (var_f1 > 0.0F) {
+        guess = __frsqrte((f64)var_f1);
+        guess = 0.5 * guess * (3.0 - guess * guess * var_f1);
+        guess = 0.5 * guess * (3.0 - guess * guess * var_f1);
+        guess = 0.5 * guess * (3.0 - guess * guess * var_f1);
+        sp10 = (f32)(var_f1 * guess);
+        var_f1 = sp10;
+    }
+    return var_f1;
+}
 
 /// #fn_80309404
 
