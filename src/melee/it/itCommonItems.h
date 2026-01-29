@@ -1153,8 +1153,7 @@ typedef struct itFushigibanaAttributes {
     f32 x8;
 } itFushigibanaAttributes;
 
-typedef struct itkireihana_ItemVars
-{
+typedef struct itkireihana_ItemVars {
     /* xDD4 */ f32 x0;
     /* xDD8 */ u32 x4;
     /* xDDC */ f32 x8;
@@ -1166,8 +1165,7 @@ typedef struct itkireihana_ItemVars
     /* xE44 */ f32 x70;
 } itkireihana_ItemVars;
 
-typedef struct itkireihanaAttributes
-{
+typedef struct itkireihanaAttributes {
     f32 x0;
     u32 x4;
     u32 x8;

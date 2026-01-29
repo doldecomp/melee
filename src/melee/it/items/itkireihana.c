@@ -3,13 +3,13 @@
 #include <placeholder.h>
 #include <platform.h>
 
+#include "baselib/random.h"
 #include "ef/eflib.h"
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
-#include "baselib/random.h"
 
 ItemStateTable it_803F7E28[] = {
     { 0, itKireihana_UnkMotion0_Anim, itKireihana_UnkMotion0_Phys,
@@ -27,7 +27,8 @@ ItemStateTable it_803F7E28[] = {
 void it_2725_Logic15_Spawned(Item_GObj* gobj)
 {
     Item* item = GET_ITEM(gobj);
-    itkireihanaAttributes* attrs = item->xC4_article_data->x4_specialAttributes;
+    itkireihanaAttributes* attrs =
+        item->xC4_article_data->x4_specialAttributes;
     item->facing_dir = 0.0f;
     item->xDAC_itcmd_var0 = 0;
     item->xDD4_itemVar.kireihana.x64 = attrs->x4;
@@ -82,14 +83,12 @@ bool itKireihana_UnkMotion1_Anim(Item_GObj* gobj)
     s32 temp_r0;
     item->xDD4_itemVar.kireihana.x70 = item->xDD4_itemVar.kireihana.x8;
     it_8027A160(item->xBBC_dynamicBoneTable->bones[1], item);
-    if(!it_80272C6C(gobj))
-    {
+    if (!it_80272C6C(gobj)) {
         temp_r0 = item->xDD4_itemVar.kireihana.x64 - 1;
         item->xDD4_itemVar.kireihana.x64 = temp_r0;
         if (temp_r0 <= 0) {
             it_802D05D8(gobj);
-        } else
-        {
+        } else {
             itKireihana_UnkMotion1_Anim_inline(gobj);
         }
     }
@@ -104,12 +103,13 @@ void itKireihana_UnkMotion1_Phys(Item_GObj* gobj)
     temp_r0_2 = GET_ITEM(gobj)->xDD4_itemVar.kireihana.x68 - 1;
     item->xDD4_itemVar.kireihana.x68 = temp_r0_2;
     if (!temp_r0_2) {
-        itkireihanaAttributes* attrs = item->xC4_article_data->x4_specialAttributes;
+        itkireihanaAttributes* attrs =
+            item->xC4_article_data->x4_specialAttributes;
         it_8027ADEC(0x470, gobj, item->xBBC_dynamicBoneTable->bones[2], 2.6f);
         temp_r0 = item->xDD4_itemVar.kireihana.x6C - 1;
         item->xDD4_itemVar.kireihana.x6C = temp_r0;
         if (!temp_r0) {
-            if(HSD_Randi(2)) {
+            if (HSD_Randi(2)) {
                 Item_8026AE84(item, 0x2726, 0x7FU, 0x40U);
             } else {
                 Item_8026AE84(item, 0x2727, 0x7FU, 0x40U);
@@ -124,9 +124,8 @@ void itKireihana_UnkMotion1_Phys(Item_GObj* gobj)
 bool itKireihana_UnkMotion1_Coll(Item_GObj* gobj)
 {
     Item* item = GET_ITEM(gobj);
-    if (!(it_8026DA08(gobj))
-           && (item->xDD4_itemVar.kireihana.x70 < 0.0f)
-           && (item->xDD4_itemVar.kireihana.x8 > 0.0f))
+    if (!(it_8026DA08(gobj)) && (item->xDD4_itemVar.kireihana.x70 < 0.0f) &&
+        (item->xDD4_itemVar.kireihana.x8 > 0.0f))
     {
         it_802D03F8(gobj);
     }
@@ -175,15 +174,17 @@ void itKireihana_UnkMotion2_Phys(Item_GObj* gobj)
     r0 = item->xDD4_itemVar.kireihana.x68 - 1;
     item->xDD4_itemVar.kireihana.x68 -= 1;
     if (r0 == 0) {
-        itkireihanaAttributes* attrs = item->xC4_article_data->x4_specialAttributes;
+        itkireihanaAttributes* attrs =
+            item->xC4_article_data->x4_specialAttributes;
         it_8027ADEC(0x470, gobj, item->xBBC_dynamicBoneTable->bones[2], 2.6f);
         item->xDD4_itemVar.kireihana.x68 = attrs->x8;
     }
     it_8027A344(gobj);
     item->xDD4_itemVar.kireihana.x60 += item->xCC_item_attr->x10_fall_speed;
     temp_f1 = item->xCC_item_attr->x14_fall_speed_max;
-    if(item->xDD4_itemVar.kireihana.x60 > temp_f1) {
-        item->xDD4_itemVar.kireihana.x60 = item->xCC_item_attr->x14_fall_speed_max;
+    if (item->xDD4_itemVar.kireihana.x60 > temp_f1) {
+        item->xDD4_itemVar.kireihana.x60 =
+            item->xCC_item_attr->x14_fall_speed_max;
     }
     item->x40_vel.y = -item->xDD4_itemVar.kireihana.x60;
 }
@@ -232,9 +233,8 @@ void itKireihana_UnkMotion3_Phys(Item_GObj* gobj)
 bool itKireihana_UnkMotion3_Coll(Item_GObj* gobj)
 {
     Item* item = GET_ITEM(gobj);
-    if ((!it_8026DA08(gobj))
-            && (item->xDD4_itemVar.kireihana.x70 < 0.0f)
-            && (item->xDD4_itemVar.kireihana.x8 > 0.0f))
+    if ((!it_8026DA08(gobj)) && (item->xDD4_itemVar.kireihana.x70 < 0.0f) &&
+        (item->xDD4_itemVar.kireihana.x8 > 0.0f))
     {
         it_802D07C0(gobj);
     }
@@ -272,8 +272,11 @@ void itKireihana_UnkMotion4_Phys(Item_GObj* gobj)
     Item* item = GET_ITEM(gobj);
     it_8027A344(gobj);
     item->xDD4_itemVar.kireihana.x60 += item->xCC_item_attr->x10_fall_speed;
-    if (item->xDD4_itemVar.kireihana.x60 > item->xCC_item_attr->x14_fall_speed_max) {
-        item->xDD4_itemVar.kireihana.x60 = item->xCC_item_attr->x14_fall_speed_max;
+    if (item->xDD4_itemVar.kireihana.x60 >
+        item->xCC_item_attr->x14_fall_speed_max)
+    {
+        item->xDD4_itemVar.kireihana.x60 =
+            item->xCC_item_attr->x14_fall_speed_max;
     }
     item->x40_vel.y = -item->xDD4_itemVar.kireihana.x60;
 }
