@@ -13,10 +13,18 @@
 #include "pl/player.h"
 #include "sc/types.h"
 
+#include <baselib/aobj.h>
+#include <baselib/dobj.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjplink.h>
+#include <baselib/jobj.h>
+#include <baselib/mobj.h>
 #include <baselib/mtx.h>
 #include <baselib/random.h>
+#include <baselib/tobj.h>
+
+#include "lb/lb_00B0.h"
+#include "mn/mnmain.h"
 
 typedef struct FlagsX {
     u32 b80 : 1;
@@ -209,14 +217,155 @@ void ifStatus_PercentOnDeathAnimationThink(UnkX* value, s32 arg1, s32 arg2)
     }
 }
 
-void ifStatus_802F4B84(void)
+void ifStatus_802F4B84(IfDamageState* state, s32 is_stamina)
 {
     NOT_IMPLEMENTED;
 }
 
-void ifStatus_802F4EDC(void)
+void ifStatus_802F4EDC(HSD_GObj* gobj)
 {
-    NOT_IMPLEMENTED;
+    IfDamageState* state;
+    HSD_JObj* jobj;
+    HSD_JObj* digit_jobj;
+    s32 i;
+    s32 is_stamina;
+    s32 ones_digit;
+    s32 tens_digit;
+    s32 hundreds_digit;
+    f32 digit_offset;
+    f32 ones_offset;
+    f32 tens_offset;
+    f32 hundreds_offset;
+    f32 pos;
+    s32 var_ctr;
+
+    /* Find matching player state via bdnz loop */
+    var_ctr = 6;
+    state = NULL;
+    {
+        IfDamageState* ptr = &ifStatus_HudInfo.players[0];
+        s32 idx = 0;
+        do {
+            if (ptr->HUD_parent_entity == gobj) {
+                state = &ifStatus_HudInfo.players[idx];
+                break;
+            }
+            ptr++;
+            idx++;
+            var_ctr--;
+        } while (var_ctr != 0);
+    }
+
+    if (state == NULL) {
+        return;
+    }
+
+    jobj = gobj->hsd_obj;
+
+    /* Check for death animation flag (bit 7 of flags byte at offset 0x10) */
+    if (state->flags.explode_animation) {
+        ifStatus_PercentOnDeathAnimationThink((UnkX*) state, 0, 0);
+        return;
+    }
+
+    is_stamina = lb_8000B09C(jobj);
+
+    /* Check if we need to start a new animation */
+    if (state->flags.unk10 &&
+        (state->flags.animation_status_id != 1 || is_stamina == 0))
+    {
+        state->flags.animation_status_id = 1;
+
+        HSD_JObjRemoveAnim(jobj);
+        lb_8000C07C(jobj, 1, &ifStatus_HudInfo.janim_selection_joints,
+                    (HSD_MatAnimJoint**) &ifStatus_HudInfo.unk268,
+                    (HSD_ShapeAnimJoint**) &ifStatus_HudInfo.unk26C);
+        HSD_JObjReqAnimAll(jobj, 0.0F);
+
+        mn_8022F3D8(jobj, 1, 0x400);
+    }
+
+    HSD_JObjAnimAll(jobj);
+
+    /* Hide tens digit if value < 10 */
+    hundreds_digit = (state->damage_percent % 1000) / 100;
+    tens_digit = (state->damage_percent % 100) / 10;
+    if (hundreds_digit == 0 && tens_digit == 0) {
+        HSD_JObjSetFlagsAll(state->jobjs[Tens], 0x10);
+    } else {
+        HSD_JObjClearFlagsAll(state->jobjs[Tens], 0x10);
+    }
+
+    /* Hide hundreds digit if value < 100 */
+    if (((state->damage_percent % 1000) / 100) == 0) {
+        HSD_JObjSetFlagsAll(state->jobjs[Hundreds], 0x10);
+    } else {
+        HSD_JObjClearFlagsAll(state->jobjs[Hundreds], 0x10);
+    }
+
+    /* Update JObj positions when animating */
+    if (lb_8000B09C(jobj)) {
+        for (i = 0; i < 4; i++) {
+            digit_jobj = state->jobjs[i];
+            if (digit_jobj == NULL) {
+                __assert("jobj.h", 993, "jobj");
+            }
+            state->translation_x[i] = digit_jobj->translate.x;
+
+            digit_jobj = state->jobjs[i];
+            if (digit_jobj == NULL) {
+                __assert("jobj.h", 1006, "jobj");
+            }
+            state->translation_y[i] = digit_jobj->translate.y;
+        }
+    }
+
+    /* Calculate digit spacing offsets based on which digit is "1" */
+    ones_offset = (state->damage_percent % 10 == 1) ? 0.5069F : 0.0F;
+    tens_offset = ((state->damage_percent % 100) / 10 == 1) ? 0.5069F : 0.0F;
+
+    /* Position percent sign */
+    digit_jobj = state->jobjs[Percent];
+    pos = state->translation_y[Percent] - ones_offset;
+    if (digit_jobj == NULL) {
+        __assert("jobj.h", 932, "jobj");
+    }
+    digit_jobj->translate.x = pos;
+    jobj_flagCheckSetMtxDirtySub(digit_jobj);
+
+    /* Position tens digit */
+    digit_offset = ones_offset + tens_offset;
+    digit_jobj = state->jobjs[Tens];
+    pos = state->translation_y[Tens] + digit_offset;
+    if (digit_jobj == NULL) {
+        __assert("jobj.h", 932, "jobj");
+    }
+    digit_jobj->translate.x = pos;
+    jobj_flagCheckSetMtxDirtySub(digit_jobj);
+
+    /* Position hundreds digit */
+    hundreds_offset =
+        ((state->damage_percent % 1000) / 100 == 1) ? 0.5069F : 0.0F;
+    digit_jobj = state->jobjs[Hundreds];
+    pos = state->translation_y[Hundreds] +
+          (digit_offset + tens_offset + hundreds_offset);
+    if (digit_jobj == NULL) {
+        __assert("jobj.h", 932, "jobj");
+    }
+    digit_jobj->translate.x = pos;
+    jobj_flagCheckSetMtxDirtySub(digit_jobj);
+
+    /* Handle shake animation */
+    if (state->flags.force_digit_shake) {
+        state->frames_of_shake_remaining = 10;
+    }
+
+    ifStatus_802F4B84(state, is_stamina);
+
+    /* Apply final scale */
+    if (ifStatus_804D6D60 >= 5) {
+        jobj->scale.x = 0.65F;
+    }
 }
 
 void ifStatus_802F5B48(void)
