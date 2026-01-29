@@ -11,7 +11,7 @@
 #include "ftCommon/ftCo_AppealS.h"
 #include "ftMario/ftMr_SpecialN.h"
 #include "ftMario/types.h"
-#include "it/items/it_27CF.h"
+#include "it/items/itdrmariopill.h"
 #include "lb/lb_00B0.h"
 
 #include <dolphin/mtx.h>
@@ -21,15 +21,17 @@ void ftDr_AppealS_Anim(HSD_GObj* gobj)
 {
     Vec3 sp18;
     Fighter* fp;
-    u32 tmp;
+    HSD_GObj* tmp;
+    int vitamin_idx;
 
     u8 _[12];
 
     fp = gobj->user_data;
-    if (fp->cmd_vars[0] == 1 && fp->fv.mr.x2240 == 0U) {
+    if (fp->cmd_vars[0] == 1 && fp->fv.mr.x2240 == NULL) {
         lb_8000B1CC(fp->parts->joint, 0, &sp18);
-        tmp = ftMr_SpecialN_VitaminRandom(gobj);
-        tmp = it_802C0850(gobj, &sp18, tmp, 0x31, fp->facing_dir);
+        vitamin_idx = ftMr_SpecialN_VitaminRandom(gobj);
+        tmp = itDrMarioPill_Appeal_Spawn(gobj, &sp18, vitamin_idx, 0x31,
+                                         fp->facing_dir);
         fp->fv.mr.x2240 = tmp;
         if (tmp != 0) {
             fp->death2_cb = ftDr_Init_80149540;
@@ -42,7 +44,7 @@ void ftDr_AppealS_Anim(HSD_GObj* gobj)
         if (gobj != NULL) {
             fp = gobj->user_data;
             if (fp != NULL && fp->fv.mr.x2240 != 0) {
-                it_802C0DBC(fp->fv.mr.x2240);
+                itDrMarioPill_802C0DBC(fp->fv.mr.x2240);
                 fp->fv.mr.x2240 = 0;
             }
         }

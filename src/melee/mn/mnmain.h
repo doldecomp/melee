@@ -30,7 +30,8 @@ typedef struct _MenuFlow {
     MenuKind8 cur_menu;
     MenuKind8 prev_menu;
     u16 hovered_selection;
-    u32 confirmed_selection;
+    u8 confirmed_selection;
+    u8 pad_5[3];
     u64 buttons;
     u8 x10;
     u8 entering_menu; ///< bool
@@ -48,7 +49,7 @@ typedef struct _MenuInputState {
 /* 229624 */ u32 mn_80229624(u32);
 /* 229860 */ void mn_80229860(s8);
 /* 229894 */ void mn_80229894(s32, u16, s32);
-/* 229938 */ bool mn_80229938(s32 arg0, s32 arg1);
+/* 229938 */ bool mn_80229938(MenuKind, s32);
 /* 229A04 */ int mn_80229A04(MenuKind, int);
 /* 229B2C */ HSD_GObj* mn_80229B2C(void);
 /* 229BF4 */ void fn_80229BF4(HSD_GObj*);
@@ -85,15 +86,15 @@ typedef struct _MenuInputState {
 /* 22DB10 */ void mn_8022DB10(HSD_GObj*);
 /* 22DD38 */ void mn_8022DD38_OnFrame(void);
 /* 22DDA8 */ void mn_8022DDA8_OnEnter(MenuEnterData*);
-/* 22E950 */ bool mn_8022E950(int);
+/* 22E950 */ bool mn_IsFighterUnlocked(int);
 /* 22E978 */ void mn_8022E978(u8 item_idx,
                               u8 enable); ///< set/unset item mask bit
 /* 22EA08 */ void mn_8022EA08(char* buf, u32 num);
 /* 22EA78 */ void mn_8022EA78(char* buf, int buf_end, u32 num);
 /* 22EAE0 */ void mn_8022EAE0(HSD_GObj*);
 /* 22EB04 */ void mn_8022EB04(void* user_data);
-/* 22EB24 */ s32 mn_8022EB24(s32, s32);
-/* 22EB78 */ s32 mn_8022EB78(s32);
+/* 22EB24 */ s32 mn_GetDigitAt(s32, s32);
+/* 22EB78 */ s32 mn_GetDigitCount(s32);
 /* 22EBDC */ void mn_8022EBDC(void);
 /* 22EC18 */ float mn_8022EC18(HSD_JObj*, float*, HSD_TypeMask);
 /* 22ED6C */ float mn_8022ED6C(HSD_JObj*, AnimLoopSettings*);

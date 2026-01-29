@@ -5,17 +5,24 @@
 
 #include <placeholder.h>
 
-struct mnDiagram_804A0750_t {
-    char pad_0[0x1C];
-};
-STATIC_ASSERT(sizeof(struct mnDiagram_804A0750_t) == 0x1C);
+#include <m2c_macros.h>
+#include <melee/gm/gmmain_lib.h>
+#include <melee/gm/types.h>
+#include <melee/lb/lblanguage.h>
+#include <melee/mn/mnmain.h>
+#include <melee/mn/mnname.h>
+#include <melee/mn/types.h>
 
-struct mnDiagram_804A076C_t {
-    char pad_0[0x78];
-};
-STATIC_ASSERT(sizeof(struct mnDiagram_804A076C_t) == 0x78);
-
-/* 4A0750 */ struct mnDiagram_804A0750_t mnDiagram_804A0750;
-/* 4A076C */ struct mnDiagram_804A076C_t mnDiagram_804A076C;
+extern char mnDiagram_804D4FA4;
+extern SDATA char mnDiagram_804D4FA8[];
+extern SDATA char mnDiagram_804D4FB0[];
+extern f32 mnDiagram_803EE774[];
+extern f32 mnDiagram_803EE758[];
+extern void* mnDiagram_804A0814[4];
+extern void* mnDiagram_804A07E4[4];
+extern void* mnDiagram_804A07F4[4];
+extern void* mnDiagram_804A0804[4];
+extern void* mnDiagram_804A0824[4];
+extern HSD_GObj* mnDiagram_804D6C10;
 
 #endif

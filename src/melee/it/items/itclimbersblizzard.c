@@ -15,6 +15,8 @@
 #include "it/itCharItems.h"
 #include "it/item.h"
 
+#include "it/items/forward.h"
+
 #include <math.h>
 
 #define M_TAU 6.283185307179586
@@ -23,102 +25,53 @@
     ((itClimbersBlizzardAttributes*)                                          \
          ip->xC4_article_data->x4_specialAttributes)
 
-/* 2C2144 */ Item_GObj* it_802C2144(Item_GObj* gobj, Vec3* pos,
-                                    f32 facing_dir);
-/* 2C2248 */ void it_802C2248(Item_GObj* gobj);
-/* 2C2380 */ bool itClimbersblizzard_UnkMotion0_Anim(Item_GObj* gobj);
-/* 2C23B4 */ void itClimbersblizzard_UnkMotion0_Phys(Item_GObj* gobj);
-/* 2C23D4 */ bool itClimbersblizzard_UnkMotion0_Coll(Item_GObj* gobj);
+/* 2C2380 */ bool itClimbersBlizzard_UnkMotion0_Anim(Item_GObj* gobj);
+/* 2C23B4 */ void itClimbersBlizzard_UnkMotion0_Phys(Item_GObj* gobj);
+/* 2C23D4 */ bool itClimbersBlizzard_UnkMotion0_Coll(Item_GObj* gobj);
 
-void it_802C2358(Item_GObj* gobj);
+ItemStateTable it_803F76A8[] = { { 0, itClimbersBlizzard_UnkMotion0_Anim,
+                                   itClimbersBlizzard_UnkMotion0_Phys,
+                                   itClimbersBlizzard_UnkMotion0_Coll } };
 
-bool it_2725_Logic64_DmgDealt(Item_GObj* gobj)
+static inline Item_GObj* spawn_item_0z(Item_GObj* gobj, ItemKind kind,
+                                       Vec3* pos, f32 facing_dir,
+                                       SpawnItem* spawn)
 {
-    return true;
+    spawn->kind = kind;
+    spawn->prev_pos = *pos;
+    spawn->prev_pos.z = 0.0f;
+    it_8026BB68(gobj, &spawn->pos);
+    spawn->facing_dir = facing_dir;
+    spawn->x3C_damage = 0;
+    spawn->vel.x = spawn->vel.y = spawn->vel.z = 0.0f;
+    spawn->x0_parent_gobj = gobj;
+    spawn->x4_parent_gobj2 = spawn->x0_parent_gobj;
+    spawn->x44_flag.b0 = true;
+    spawn->x40 = 0;
+    return Item_80268B18(spawn);
 }
 
-bool it_2725_Logic64_Clanked(Item_GObj* gobj)
+Item_GObj* itClimbersBlizzard_Spawn(Item_GObj* gobj, Vec3* pos, f32 facing_dir)
 {
-    return true;
-}
-
-bool it_2725_Logic64_HitShield(Item_GObj* gobj)
-{
-    return true;
-}
-
-bool it_2725_Logic64_Absorbed(Item_GObj* gobj)
-{
-    return true;
-}
-
-bool it_2725_Logic64_ShieldBounced(Item_GObj* gobj)
-{
-    return true;
-}
-
-void it_2725_Logic64_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
-{
-    it_8026B894(gobj, ref_gobj);
-}
-
-bool it_2725_Logic64_Reflected(Item_GObj* gobj)
-{
-    return it_80273030(gobj);
-}
-
-bool itClimbersblizzard_UnkMotion0_Coll(Item_GObj* gobj)
-{
-    s32 flags = 0;
-    it_8026D9A0(gobj);
-    flags |= it_80276308(gobj);
-    flags |= it_802763E0(gobj);
-    return flags;
-}
-
-void itClimbersblizzard_UnkMotion0_Phys(Item_GObj* gobj)
-{
-    Item* ip = GET_ITEM(gobj);
-    itClimbersBlizzardAttributes* attrs = GET_ATTRS(ip);
-    ip->x40_vel.y += attrs->x8;
-}
-
-bool itClimbersblizzard_UnkMotion0_Anim(Item_GObj* gobj)
-{
-    Item* ip = GET_ITEM(gobj);
-    if (ip->xD44_lifeTimer <= 0.0f) {
-        return true;
+    SpawnItem spawn;
+    Item_GObj* spawned;
+    ItemAttr* attr;
+    spawned = spawn_item_0z(gobj, It_Kind_IceClimber_Blizzard, pos, facing_dir,
+                            &spawn);
+    if (spawned != NULL) {
+        Item* ip = GET_ITEM(spawned);
+        ip->xDD4_itemVar.climbersblizzard.flag0 = 0;
+        attr = ip->xCC_item_attr;
+        ip->xDD4_itemVar.climbersblizzard.x0 = attr->x60_scale;
+        itClimbersBlizzard_802C2248(spawned);
+        db_80225DD8(spawned, gobj);
+        it_8026B3A8(spawned);
+        it_802750F8(spawned);
     }
-    ip->xD44_lifeTimer -= 1.0F;
-    return false;
+    return spawned;
 }
 
-void it_802C2358(Item_GObj* gobj)
-{
-    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
-}
-
-static inline void it_802C2358_no_inline4(Item_GObj* gobj)
-{
-    it_802C2358(gobj);
-}
-
-static inline void it_802C2358_no_inline3(Item_GObj* gobj)
-{
-    it_802C2358_no_inline4(gobj);
-}
-
-static inline void it_802C2358_no_inline2(Item_GObj* gobj)
-{
-    it_802C2358_no_inline3(gobj);
-}
-
-static inline void it_802C2358_no_inline(Item_GObj* gobj)
-{
-    it_802C2358_no_inline2(gobj);
-}
-
-void it_802C2248(Item_GObj* gobj)
+void itClimbersBlizzard_802C2248(Item_GObj* gobj)
 {
     Item* ip;
     f32 temp_f0;
@@ -149,43 +102,71 @@ void it_802C2248(Item_GObj* gobj)
     ip->x40_vel.z = 0.0f;
     it_80275158(gobj, attrs->x0);
     ip->xDD4_itemVar.climbersblizzard.flag0 = 1;
-    it_802C2358_no_inline(gobj);
+    itClimbersBlizzard_802C2358(gobj);
 }
 
-static inline Item_GObj* spawn_item_0z(Item_GObj* gobj, ItemKind kind,
-                                       Vec3* pos, f32 facing_dir,
-                                       SpawnItem* spawn)
+void itClimbersBlizzard_802C2358(Item_GObj* gobj)
 {
-    spawn->kind = kind;
-    spawn->prev_pos = *pos;
-    spawn->prev_pos.z = 0.0f;
-    it_8026BB68(gobj, &spawn->pos);
-    spawn->facing_dir = facing_dir;
-    spawn->x3C_damage = 0;
-    spawn->vel.x = spawn->vel.y = spawn->vel.z = 0.0f;
-    spawn->x0_parent_gobj = gobj;
-    spawn->x4_parent_gobj2 = spawn->x0_parent_gobj;
-    spawn->x44_flag.b0 = true;
-    spawn->x40 = 0;
-    return Item_80268B18(spawn);
+    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
 }
 
-Item_GObj* it_802C2144(Item_GObj* gobj, Vec3* pos, f32 facing_dir)
+bool itClimbersBlizzard_UnkMotion0_Anim(Item_GObj* gobj)
 {
-    SpawnItem spawn;
-    Item_GObj* spawned;
-    ItemAttr* attr;
-    spawned = spawn_item_0z(gobj, It_Kind_IceClimber_Blizzard, pos, facing_dir,
-                            &spawn);
-    if (spawned != NULL) {
-        Item* ip = GET_ITEM(spawned);
-        ip->xDD4_itemVar.climbersblizzard.flag0 = 0;
-        attr = ip->xCC_item_attr;
-        ip->xDD4_itemVar.climbersblizzard.x0 = attr->x60_scale;
-        it_802C2248(spawned);
-        db_80225DD8(spawned, gobj);
-        it_8026B3A8(spawned);
-        it_802750F8(spawned);
+    Item* ip = GET_ITEM(gobj);
+    if (ip->xD44_lifeTimer <= 0.0f) {
+        return true;
     }
-    return spawned;
+    ip->xD44_lifeTimer -= 1.0F;
+    return false;
+}
+
+void itClimbersBlizzard_UnkMotion0_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itClimbersBlizzardAttributes* attrs = GET_ATTRS(ip);
+    ip->x40_vel.y += attrs->x8;
+}
+
+bool itClimbersBlizzard_UnkMotion0_Coll(Item_GObj* gobj)
+{
+    s32 flags = 0;
+    it_8026D9A0(gobj);
+    flags |= it_80276308(gobj);
+    flags |= it_802763E0(gobj);
+    return flags;
+}
+
+bool itClimbersBlizzard_DmgDealt(Item_GObj* gobj)
+{
+    return true;
+}
+
+bool itClimbersBlizzard_Reflected(Item_GObj* gobj)
+{
+    return it_80273030(gobj);
+}
+
+bool itClimbersBlizzard_Clanked(Item_GObj* gobj)
+{
+    return true;
+}
+
+bool itClimbersBlizzard_HitShield(Item_GObj* gobj)
+{
+    return true;
+}
+
+bool itClimbersBlizzard_Absorbed(Item_GObj* gobj)
+{
+    return true;
+}
+
+bool itClimbersBlizzard_ShieldBounced(Item_GObj* gobj)
+{
+    return true;
+}
+
+void itClimbersBlizzard_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
+{
+    it_8026B894(gobj, ref_gobj);
 }

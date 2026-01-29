@@ -53,15 +53,15 @@ void mnDeflicker_8024A168(HSD_GObj* gobj)
         Menu_DecrementAnimTimer();
         return;
     }
-    events = Menu_GetAllEvents();
-    if ((events & MenuEvent_Back)) {
+    events = Menu_GetAllInputs();
+    if ((events & MenuInput_Back)) {
         sfxBack();
         gmMainLib_8015F4F4(
             ((Menu*) mnDeflicker_804D6C38->user_data)->cursor); // inline
         lb_8001CE00();
         mn_804A04F0.entering_menu = 0;
         mn_80229894(4, 2, 3);
-    } else if (mnDeflicker_804D6C3C && (events & MenuEvent_AButton)) {
+    } else if (mnDeflicker_804D6C3C && (events & MenuInput_AButton)) {
         unsigned char x;
         PAD_STACK(4);
         sfxMove();

@@ -56,14 +56,14 @@ void mnHyaku_8024C68C(HSD_GObj* arg0)
         Menu_DecrementAnimTimer();
         return;
     }
-    events = Menu_GetAllEvents();
-    if (events & MenuEvent_Back) {
+    events = Menu_GetAllInputs();
+    if (events & MenuInput_Back) {
         sfxBack();
         mn_804A04F0.entering_menu = 0;
         mn_80229894(9, 2, 3);
         return;
     }
-    if (events & MenuEvent_Forward) {
+    if (events & MenuInput_Confirm) {
         sfxForward();
         mn_802295AC();
         gm_801677E8();
@@ -89,7 +89,7 @@ void mnHyaku_8024C68C(HSD_GObj* arg0)
             return;
         }
     } else {
-        if (events & MenuEvent_Left) {
+        if (events & MenuInput_Left) {
             sfxMove();
             if (menu->cursor == 0) {
                 menu->cursor = 5;
@@ -100,7 +100,7 @@ void mnHyaku_8024C68C(HSD_GObj* arg0)
             mnHyaku_8024C68C_inline_2(mnHyaku_804D6C58);
             return;
         }
-        if (events & MenuEvent_Right) {
+        if (events & MenuInput_Right) {
             sfxMove();
             if (menu->cursor == 5) {
                 menu->cursor = 0;

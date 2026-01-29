@@ -3,6 +3,8 @@
 
 typedef struct AnimLoopSettings AnimLoopSettings;
 typedef struct CountEntry CountEntry;
+typedef struct Diagram Diagram;
+typedef struct Diagram2 Diagram2;
 typedef struct CSSData CSSData;
 typedef struct CSSDoor CSSDoor;
 typedef struct CSSDoorsData CSSDoorsData;
@@ -75,7 +77,7 @@ typedef enum MenuKind {
     /* +04 */ MENU_KIND_SETTINGS = 4,
     /* +05 */ MENU_KIND_DATA = 5,
     /* +06 */ MENU_KIND_REG = 6,
-    /* +07 */ MENU_KIND_7 = 7, ///< debug event?
+    /* +07 */ MENU_KIND_EVENT = 7,
     /* +08 */ MENU_KIND_8 = 8,
     /* +09 */ MENU_KIND_STADIUM = 9,
     /* +0A */ MENU_KIND_10 = 10,
@@ -101,7 +103,7 @@ typedef enum MenuKind {
     /* +1E */ MENU_KIND_RECORDS_VS = 30,
     /* +1F */ MENU_KIND_RECORDS_BONUS = 31,
     /* +20 */ MENU_KIND_RECORDS_MISC = 32,
-    /* +21 */ MENU_KIND_33 = 33, ///< debug css?
+    /* +21 */ MENU_KIND_MULTI_VS = 33,
     /* +22 */ MENU_KIND_34 = 34,
 } MenuKind;
 
@@ -194,5 +196,14 @@ typedef enum TrophyMenuSelection {
     SEL_TOY_2 = 2, ///< hidden
     SEL_TOY_COLLECTION = 3,
 } TrophyMenuSelection;
+
+typedef enum MultiVsMenuSelection {
+    SEL_MULTI_VS_10MAN = 0,
+    SEL_MULTI_VS_100MAN = 1,
+    SEL_MULTI_VS_3MIN = 2,
+    SEL_MULTI_VS_15MIN = 3,
+    SEL_MULTI_VS_ENDLESS = 4,
+    SEL_MULTI_VS_CRUEL = 5,
+} MultiVsMenuSelection;
 
 #endif

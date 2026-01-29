@@ -26,4 +26,7 @@
 /* 2CDBB8 */ bool itSonans_UnkMotion2_Coll(Item_GObj* gobj);
 /* 3F7CA0 */ extern ItemStateTable it_803F7CA0[];
 
+f32 it_804DD3D0 = 0.017453292f;
+f64 it_804DD3C8 = -0.9;
+
 #endif

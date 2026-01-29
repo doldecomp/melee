@@ -23,7 +23,7 @@ struct ftMario_FighterVars {
     /* 0x2234 */ bool x2234_tornadoCharge;
     /* 0x2238 */ bool x2238_isCapeBoost;
     /* 0x223C */ HSD_GObj* x223C_capeGObj;
-    /* 0x2240 */ u32 x2240;
+    /* 0x2240 */ HSD_GObj* x2240;
     u8 _[FIGHTERVARS_SIZE - 0x18];
 };
 

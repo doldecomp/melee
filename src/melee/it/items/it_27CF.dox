@@ -46,10 +46,6 @@ void it_802F046C(s32);
 void it_802F0AE0(Item_GObj* fighter_gobj, Vec3*, Vec3*, enum_t, bool,
                  f32 facing_dir, f32, f32);
 
-/// @todo @c arg0 is likely a @c HSD_GObj*.
-void it_802C0DBC(u32 arg0);
-
-u32 it_802C0850(Item_GObj*, Vec3*, u32, s32, f32 facing_direction);
 void it_802C8C34(Item_GObj*);
 
 void it_802AE1D0(Item_GObj*);
@@ -57,14 +53,6 @@ void it_802AEAB4(Item_GObj*);
 HSD_GObj* it_802AE8A8(f32, HSD_GObj*, Vec3*, s32, s32);
 void it_802ADDD0(Item_GObj*, s32);
 void it_802AE538(Item_GObj*);
-HSD_GObj* it_802C61F4(Item_GObj*, Vec3*, s32, f32);
-void it_802C6328(Item_GObj*);
-void it_802C6374(Item_GObj*);
-void it_802C6394(Item_GObj*);
-void it_802C6430(Item_GObj*);
-void it_802C6458(Item_GObj*);
-void it_802C6480(Item_GObj*);
-void it_802C64A8(Item_GObj*);
 HSD_GObj* it_802C6C38(Item_GObj*, Vec3*, enum_t part, f32);
 void it_802C7158(Item_GObj*);
 void it_802C7074(Item_GObj*);
@@ -73,10 +61,6 @@ void it_802C6E50(Item_GObj*);
 void it_802C6D6C(Item_GObj*);
 HSD_GObj* it_802C6F40(Item_GObj*, Vec3*, s32, f32);
 HSD_GObj* it_802C65E4(Item_GObj*, Vec3*, s32, f32);
-HSD_GObj* it_802C68F8(Item_GObj*, Vec3*, s32, f32);
-void it_802C6A2C(Item_GObj*);
-void it_802C6A78(Item_GObj*);
-void it_802C6A98(Item_GObj*);
 HSD_GObj* it_802C8038(Item_GObj*, Vec3*, s32, s32, f32, f32);
 HSD_GObj* it_802C7D60(Item_GObj*, Vec3*, s32, f32);
 void it_802C7E94(Item_GObj*);
@@ -88,7 +72,6 @@ void it_8028FAF4(Item_GObj*, Vec3*);
 void it_802C7A84(Item_GObj*);
 void it_802C7AD0(Item_GObj*);
 void it_802C7AF0(Item_GObj*);
-void it_802C0510(Item_GObj*, Vec3*, s32, s32, f32 facing_dir);
 HSD_GObj* it_802B2560(Item_GObj*, f32, Vec3*, long, u32);
 void it_802B2674(Item_GObj*);
 void it_802B26C0(Item_GObj*);

@@ -13,7 +13,14 @@
 
 /// #it_802944AC
 
-/// #it_3F14_Logic29_Spawned
+void it_3F14_Logic29_Spawned(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->xDCE_flag.b7 = 0;
+    ip->xDD4_itemVar.wstar.xDD8 = 0.0F;
+    ip->xDD4_itemVar.wstar.xDD4 = 0.0F;
+    it_80294364(gobj);
+}
 
 void it_8029455C(Item_GObj* gobj)
 {

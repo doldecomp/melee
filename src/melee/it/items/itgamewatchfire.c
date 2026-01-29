@@ -1,23 +1,24 @@
 #include "itgamewatchfire.h"
 
-#include <melee/db/db.h>
-#include <melee/ft/ftlib.h>
-#include <melee/it/inlines.h>
-#include <melee/it/it_26B1.h>
-#include <melee/it/it_2725.h>
-#include <melee/it/item.h>
-#include <melee/it/types.h>
-#include <melee/lb/lb_00B0.h>
+#include "db/db.h"
+#include "ft/ftlib.h"
+#include "it/inlines.h"
+#include "it/it_26B1.h"
+#include "it/it_2725.h"
+#include "it/item.h"
+#include "it/types.h"
+#include "lb/lb_00B0.h"
 
-/* 2C68F8 */ static HSD_GObj* it_802C68F8(HSD_GObj* parent, Vec3* pos,
-                                          Fighter_Part part, float dir);
-/* 2C6A2C */ static void it_802C6A2C(Item_GObj* item_gobj);
-/* 2C6A78 */ static void it_802C6A78(Item_GObj* item_gobj);
-/* 2C6A98 */ static void it_802C6A98(Item_GObj* item_gobj);
-/* 2C6B20 */ static bool itGamewatchfire_UnkMotion0_Anim(Item_GObj* item_gobj);
+#include <baselib/gobj.h>
+#include <baselib/jobj.h>
 
-HSD_GObj* it_802C68F8(HSD_GObj* parent, Vec3* pos, Fighter_Part part,
-                      float dir)
+/* 2C6B20 */ static bool itGamewatchFire_Motion0_Anim(Item_GObj* item_gobj);
+
+ItemStateTable it_803F78E8[] = { { 0, itGamewatchFire_Motion0_Anim, NULL,
+                                   NULL } };
+
+HSD_GObj* itGamewatchFire_Spawn(HSD_GObj* parent, Vec3* pos, Fighter_Part part,
+                                float dir)
 {
     SpawnItem spawn;
     Item_GObj* result;
@@ -45,7 +46,7 @@ HSD_GObj* it_802C68F8(HSD_GObj* parent, Vec3* pos, Fighter_Part part,
     return NULL;
 }
 
-void it_2725_Logic73_Destroyed(Item_GObj* item_gobj)
+void itGamewatchFire_Destroyed(Item_GObj* item_gobj)
 {
     Item* item = GET_ITEM(item_gobj);
     if (item->owner != NULL) {
@@ -53,30 +54,27 @@ void it_2725_Logic73_Destroyed(Item_GObj* item_gobj)
     }
 }
 
-void it_802C6A2C(Item_GObj* item_gobj)
+void itGamewatchFire_802C6A2C(Item_GObj* item_gobj)
 {
-    int pad[1];
     Item* item = GET_ITEM(item_gobj);
 
     if (item != NULL) {
-        if (item->owner != NULL) {
-            ftGw_AttackS4_ItemTorchSetFlag(item->owner);
-        }
+        itGamewatchFire_Destroyed(item_gobj);
         Item_8026A8EC(item_gobj);
     }
 }
 
-void it_802C6A78(Item_GObj* item_gobj)
+void itGamewatchFire_802C6A78(Item_GObj* item_gobj)
 {
     it_8026B724(item_gobj);
 }
 
-void it_802C6A98(Item_GObj* item_gobj)
+void itGamewatchFire_802C6A98(Item_GObj* item_gobj)
 {
     it_8026B73C(item_gobj);
 }
 
-void it_2725_Logic73_PickedUp(Item_GObj* item_gobj)
+void itGamewatchFire_PickedUp(Item_GObj* item_gobj)
 {
     Item* item = GET_ITEM(item_gobj);
     item->xDB0_itcmd_var1 = 0;
@@ -88,42 +86,43 @@ void it_2725_Logic73_PickedUp(Item_GObj* item_gobj)
     }
 }
 
-bool itGamewatchfire_UnkMotion0_Anim(Item_GObj* item_gobj)
+static inline bool torchRemoveCheck(Item_GObj* gobj)
 {
-    HSD_JObj* temp_r30;
-    Item* item = GET_ITEM(item_gobj);
-    bool var_r3;
+    Item* item = GET_ITEM(gobj);
+    if (item->owner != NULL) {
+        return ftGw_AttackS4_ItemCheckTorchRemove(item->owner);
+    }
+    return true;
+}
 
-    temp_r30 = item_gobj->hsd_obj;
+bool itGamewatchFire_Motion0_Anim(Item_GObj* item_gobj)
+{
+    HSD_JObj* jobj;
+    Item* item = GET_ITEM(item_gobj);
+
+    jobj = GET_JOBJ(item_gobj);
     if (item->x5CC_currentAnimFrame == 3.0f) {
         it_8026BB20(item_gobj);
     }
-    if (item->owner != NULL) {
-        var_r3 = ftGw_AttackS4_ItemCheckTorchRemove(item->owner);
-    } else {
-        var_r3 = true;
-    }
-    if (var_r3) {
-        if (item->owner != NULL) {
-            ftGw_AttackS4_ItemTorchSetFlag(item->owner);
-        }
+    if (torchRemoveCheck(item_gobj)) {
+        itGamewatchFire_Destroyed(item_gobj);
         return true;
     }
     if (item->owner != NULL) {
         if (ftLib_800876D4(item->owner) != 0) {
             if (item->x5D0_animFrameSpeed != 0.0f) {
                 item->x5D0_animFrameSpeed = 0.0f;
-                lb_8000BA0C(temp_r30, item->x5D0_animFrameSpeed);
+                lb_8000BA0C(jobj, item->x5D0_animFrameSpeed);
             }
         } else if (item->x5D0_animFrameSpeed != 1.0f) {
             item->x5D0_animFrameSpeed = 1.0f;
-            lb_8000BA0C(temp_r30, item->x5D0_animFrameSpeed);
+            lb_8000BA0C(jobj, item->x5D0_animFrameSpeed);
         }
     }
     return false;
 }
 
-void it_2725_Logic73_EvtUnk(Item_GObj* item_gobj, Item_GObj* ref_gobj)
+void itGamewatchFire_EvtUnk(Item_GObj* item_gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(item_gobj, ref_gobj);
 }

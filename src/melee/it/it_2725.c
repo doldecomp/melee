@@ -896,20 +896,20 @@ struct ItemLogicTable it_803F14C4[ARRAY_SIZE(it_803F1418)] = {
     {
         // M Ball
         it_803F6488,
-        it_3F14_Logic34_Spawned,
-        it_3F14_Logic34_Destroyed,
-        it_3F14_Logic34_PickedUp,
-        it_3F14_Logic34_Dropped,
-        it_3F14_Logic34_Thrown,
-        it_3F14_Logic34_DmgDealt,
+        itMball_Spawned,
+        itMball_Destroyed,
+        itMball_PickedUp,
+        itMball_Dropped,
+        itMball_Thrown,
+        itMball_DmgDealt,
         NULL,
-        it_3F14_Logic34_EnteredAir,
-        it_3F14_Logic34_Reflected,
-        it_3F14_Logic34_Clanked,
+        itMball_EnteredAir,
+        itMball_Reflected,
+        itMball_Clanked,
         NULL,
-        it_3F14_Logic34_ShieldBounced,
-        it_3F14_Logic34_HitShield,
-        it_3F14_Logic34_EvtUnk,
+        itMball_ShieldBounced,
+        itMball_HitShield,
+        itMball_EvtUnk,
     },
     {
         // L Gun Ray
@@ -1267,7 +1267,7 @@ ItemLogicTable it_803F23CC[ARRAY_SIZE(it_803F2310)] = {
     {
         // Freezer (Articuno)
         it_803F7C70,
-        it_802CCF9C,
+        itFreezer_802CCF9C,
         NULL,
         NULL,
         NULL,
@@ -1280,7 +1280,7 @@ ItemLogicTable it_803F23CC[ARRAY_SIZE(it_803F2310)] = {
         NULL,
         NULL,
         NULL,
-        it_802CD000,
+        itFreezer_802CD000,
     },
     {
         // Sonans (Wobbuffet)
@@ -1303,7 +1303,7 @@ ItemLogicTable it_803F23CC[ARRAY_SIZE(it_803F2310)] = {
     {
         // Hassam (Scizor)
         it_803F7CF8,
-        it_802CDBE0,
+        itHassam_802CDBE0,
         NULL,
         NULL,
         NULL,
@@ -1316,7 +1316,7 @@ ItemLogicTable it_803F23CC[ARRAY_SIZE(it_803F2310)] = {
         NULL,
         NULL,
         NULL,
-        it_802CDC60,
+        itHassam_802CDC60,
     },
     {
         // Unknown (Unown)
@@ -2103,20 +2103,20 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
     {
         // Octarock stone
         it_803F8E90,
-        it_802E878C,
+        itOctarockstone_802E878C,
         NULL,
         NULL,
         NULL,
         NULL,
-        it_2725_Logic4_DmgDealt,
+        itOctarockstone_Logic4_DmgDealt,
         NULL,
         NULL,
-        it_2725_Logic4_Reflected,
-        it_2725_Logic4_Clanked,
-        it_2725_Logic4_Absorbed,
-        it_2725_Logic4_ShieldBounced,
-        it_2725_Logic4_HitShield,
-        it_802E89B0,
+        itOctarockstone_Logic4_Reflected,
+        itOctarockstone_Logic4_Clanked,
+        itOctarockstone_Logic4_Absorbed,
+        itOctarockstone_Logic4_ShieldBounced,
+        itOctarockstone_Logic4_HitShield,
+        itOctarockstone_802E89B0,
     },
     {
         // Mario fireball
@@ -2141,18 +2141,18 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         it_803F75D0,
         NULL,
         NULL,
-        it_2725_Logic6_PickedUp,
+        itDrMarioPill_PickedUp,
         NULL,
         NULL,
-        it_2725_Logic88_DmgDealt,
+        itDrMarioPill_DmgDealt,
         NULL,
         NULL,
-        it_2725_Logic88_Reflected,
-        it_2725_Logic88_Clanked,
-        it_2725_Logic88_Absorbed,
-        it_2725_Logic88_ShieldBounced,
-        it_2725_Logic88_HitShield,
-        it_2725_Logic88_EvtUnk,
+        itDrMarioPill_Reflected,
+        itDrMarioPill_Clanked,
+        itDrMarioPill_Absorbed,
+        itDrMarioPill_ShieldBounced,
+        itDrMarioPill_HitShield,
+        itDrMarioPill_EvtUnk,
     },
     {
         // Kirby cutter beam
@@ -3186,15 +3186,15 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic64_DmgDealt,
+        itClimbersBlizzard_DmgDealt,
         NULL,
         NULL,
-        it_2725_Logic64_Reflected,
-        it_2725_Logic64_Clanked,
-        it_2725_Logic64_Absorbed,
-        it_2725_Logic64_ShieldBounced,
-        it_2725_Logic64_HitShield,
-        it_2725_Logic64_EvtUnk,
+        itClimbersBlizzard_Reflected,
+        itClimbersBlizzard_Clanked,
+        itClimbersBlizzard_Absorbed,
+        itClimbersBlizzard_ShieldBounced,
+        itClimbersBlizzard_HitShield,
+        itClimbersBlizzard_EvtUnk,
     },
     {
         // Zelda din fire
@@ -3308,8 +3308,8 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         // Game & Watch greenhouse (insecticide spray)
         it_803F7898,
         NULL,
-        it_2725_Logic71_Destroyed,
-        it_2725_Logic71_PickedUp,
+        itGamewatchGreenhouse_Destroyed,
+        itGamewatchGreenhouse_PickedUp,
         NULL,
         NULL,
         NULL,
@@ -3320,7 +3320,7 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic71_EvtUnk,
+        itGamewatchGreenhouse_EvtUnk,
     },
     {
         // Game & Watch manhole
@@ -3344,8 +3344,8 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         // Game & Watch fire
         it_803F78E8,
         NULL,
-        it_2725_Logic73_Destroyed,
-        it_2725_Logic73_PickedUp,
+        itGamewatchFire_Destroyed,
+        itGamewatchFire_PickedUp,
         NULL,
         NULL,
         NULL,
@@ -3356,7 +3356,7 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic73_EvtUnk,
+        itGamewatchFire_EvtUnk,
     },
     {
         // Game & Watch parachute
@@ -3616,15 +3616,15 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic88_DmgDealt,
+        itDrMarioPill_DmgDealt,
         NULL,
         NULL,
-        it_2725_Logic88_Reflected,
-        it_2725_Logic88_Clanked,
-        it_2725_Logic88_Absorbed,
-        it_2725_Logic88_ShieldBounced,
-        it_2725_Logic88_HitShield,
-        it_2725_Logic88_EvtUnk,
+        itDrMarioPill_Reflected,
+        itDrMarioPill_Clanked,
+        itDrMarioPill_Absorbed,
+        itDrMarioPill_ShieldBounced,
+        itDrMarioPill_HitShield,
+        itDrMarioPill_EvtUnk,
     },
     {
         it_803F75C0,
@@ -9973,7 +9973,7 @@ int it_8027BA54(HSD_GObj* item_gobj, Vec3* arg1)
     Item* item;
 
     item = GET_ITEM((HSD_GObj*) item_gobj);
-    Camera_80030788(&sp20);
+    Camera_GetTransformPosition(&sp20);
     sp20.x = ((10.0f * (HSD_Randf() - it_804DC7F8)) + sp20.x);
     sp20.y += 30.0f * HSD_Randf();
     lbVector_Diff(&sp20, &item->pos, &sp14);

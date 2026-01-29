@@ -60,7 +60,7 @@ void ftCo_800BF108(Fighter_GObj* gobj)
         return;
     }
     case FTKIND_DRMARIO: {
-        fp->item_gobj = it_802C09C4(
+        fp->item_gobj = itDrMarioPill_802C09C4(
             gobj, &fp->cur_pos, ftMr_SpecialN_VitaminRandom(gobj), 49, 2,
             ftParts_GetBoneIndex(fp, FtPart_RThumbNb), fp->facing_dir);
         return;

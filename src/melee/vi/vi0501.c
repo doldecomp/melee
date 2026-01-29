@@ -87,66 +87,64 @@ void fn_8031DD14(HSD_GObj* gobj)
         gm_801A4B60();
     }
 }
+
 void un_8031DE58_OnEnter(void* arg)
 {
-    s32 i;
     u8 char_index;
-    HSD_GObj* fog_gobj;
-    HSD_GObj* light_gobj;
-    HSD_GObj* camera_gobj;
-    HSD_GObj* model_gobj;
     HSD_Fog* fog;
+    HSD_GObj* fog_gobj;
     HSD_LObj* lobj;
+    HSD_GObj* light_gobj;
     HSD_CObj* cobj;
+    HSD_GObj* camera_gobj;
+    int i;
+    HSD_JObj* new_var;
+    HSD_GObj* model_gobj;
     HSD_JObj* jobj;
     ViCharaDesc* desc;
 
+    desc = (ViCharaDesc*) arg;
     lbAudioAx_800236DC();
     efLib_8005B4B8();
     efAsync_8006737C(0);
-
-    desc = (ViCharaDesc*) arg;
     char_index = desc->p1_char_index;
-
     un_804D6F74 = lbArchive_LoadSymbols("Vi0501.dat", &un_804D6F70,
                                         "visual0501Scene", NULL);
     un_804D6F78 =
         lbArchive_LoadSymbols(viGetCharAnimByIndex(char_index), NULL);
-
     fog_gobj = GObj_Create(0xB, 3, 0);
     fog = HSD_FogLoadDesc(un_804D6F70->fogs->desc);
     HSD_GObjObject_80390A70(fog_gobj, HSD_GObj_804D7848, fog);
     GObj_SetupGXLink(fog_gobj, HSD_GObj_FogCallback, 0, 0);
     erase_colors_vi0501 = fog->color;
-
     light_gobj = GObj_Create(0xB, 3, 0);
     lobj = lb_80011AC4(un_804D6F70->lights);
     HSD_GObjObject_80390A70(light_gobj, HSD_GObj_804D784A, lobj);
     GObj_SetupGXLink(light_gobj, HSD_GObj_LObjCallback, 0, 0);
-
     camera_gobj = GObj_Create(0x13, 0x14, 0);
     cobj =
         lb_80013B14((HSD_CameraDescPerspective*) un_804D6F70->cameras->desc);
     HSD_GObjObject_80390A70(camera_gobj, HSD_GObj_804D784B, cobj);
     GObj_SetupGXLinkMax(camera_gobj, vi_8031DC80, 5);
     HSD_CObjAddAnim(cobj, un_804D6F70->cameras->anims[0]);
-    HSD_CObjReqAnim(cobj, 0.0f);
+    HSD_CObjReqAnim(cobj, 0.0F);
     HSD_CObjAnim(cobj);
     HSD_GObjProc_8038FD54(camera_gobj, fn_8031DD14, 0);
-
     for (i = 0; un_804D6F70->models[i] != NULL; i++) {
         model_gobj = GObj_Create(0xE, 0xF, 0);
         jobj = HSD_JObjLoadJoint(un_804D6F70->models[i]->joint);
-        HSD_GObjObject_80390A70(model_gobj, HSD_GObj_804D7849, jobj);
+        new_var = jobj;
+        HSD_GObjObject_80390A70(model_gobj, HSD_GObj_804D7849, new_var);
         GObj_SetupGXLink(model_gobj, HSD_GObj_JObjCallback, 9, 0);
-        gm_8016895C(jobj, un_804D6F70->models[i], 0);
-        HSD_JObjReqAnimAll(jobj, 0.0f);
+        gm_8016895C(jobj, un_804D6F70->models[i],
+                    (un_804D6F70->models[i] != NULL) * 0);
+        HSD_JObjReqAnimAll(new_var, 0.0F);
         HSD_JObjAnimAll(jobj);
         HSD_GObjProc_8038FD54(model_gobj, mn_8022EAE0, 0x17);
     }
 
     un_8031D9F8(desc->p1_char_index, desc->p1_costume_index,
-                desc->p2_costume_index, (int) &desc->spawn_count);
+                desc->p2_costume_index, (int) (&desc->spawn_count));
     lbAudioAx_800237A8(0x20B, 0x7F, 0x40);
     lbAudioAx_800237A8(0x20C, 0x7F, 0x40);
 }
