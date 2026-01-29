@@ -29,7 +29,7 @@
 /* 2D08F0 */ void it_802D08F0(Item_GObj* gobj);
 /* 2D0964 */ bool itKireihana_UnkMotion0_Anim(Item_GObj* gobj);
 /* 2D0988 */ void itKireihana_UnkMotion0_Phys(Item_GObj* gobj);
-/* 2D09A8 */ void itKireihana_UnkMotion0_Coll(Item_GObj* gobj);
+/* 2D09A8 */ bool itKireihana_UnkMotion0_Coll(Item_GObj* gobj);
 /* 3F7E28 */ extern ItemStateTable it_803F7E28[];
 
 f32 it_804DD438 = 0.0f;
