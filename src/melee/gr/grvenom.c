@@ -564,13 +564,7 @@ void grVenom_80203FCC(Ground_GObj* arg) {}
 
 void grVenom_80203FD0(Ground_GObj* arg) {}
 
-// Decompilation of grVenom_80203FD4
-
-#include "gr/grvenom.h"
-#include "gr/inlines.h"
-#include "gr/ground.h"
-#include "gr/granime.h"
-
+// @TODO: Currently 99.90% match - needs minor register allocation fix
 void grVenom_80203FD4(Ground_GObj* gobj)
 {
     HSD_JObj* jobj1;
@@ -704,14 +698,8 @@ void grVenom_80204284(Ground_GObj* gobj)
 
 void grVenom_80204424(Ground_GObj* arg) {}
 
-// Decompilation of grVenom_80204428
+// @TODO: Currently 99.70% match - needs register allocation fix
 // FAKE MATCH: grVenom_GroundVars has wrong types for this function
-
-#include <platform.h>
-#include "gr/ground.h"
-#include "gr/inlines.h"
-#include "mp/mplib.h"
-
 void grVenom_80204428(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
@@ -915,7 +903,7 @@ bool grVenom_802052D8(Ground_GObj* arg)
     return false;
 }
 
-// Decompilation of grVenom_802052E0
+// @TODO: Currently 99.92% match - needs minor register allocation fix
 // TODO: VenomSpawnData struct should be defined in gr/types.h or grvenom.h
 typedef struct {
     u8 pad[0x218];
