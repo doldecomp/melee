@@ -8,6 +8,7 @@
 #include "ef/efasync.h"
 #include "ef/eflib.h"
 #include "ef/efsync.h"
+#include "ft/chara/ftCommon/ftCo_Bury.h"
 #include "ft/chara/ftCommon/ftCo_Damage.h"
 #include "ft/chara/ftCommon/ftCo_Escape.h"
 #include "ft/chara/ftCommon/ftCo_FallSpecial.h"
@@ -7437,11 +7438,63 @@ void ftKb_LkSpecialAirNEnd_Phys(Fighter_GObj* gobj)
 
 /// #ftKb_LkSpecialAirNEnd_Coll
 
-/// #ftKb_SpecialNSs_800FCC14
+s32 ftKb_SpecialNSs_800FCC14(Fighter_GObj* gobj, s32* chargeLevel,
+                             s32* chargeCycles)
+{
+    if (gobj != NULL) {
+        Fighter* fp = GET_FIGHTER(gobj);
+        ftKb_DatAttrs* da = fp->dat_attrs;
+        PAD_STACK(8);
+        if (fp->fv.kb.xA4 == NULL) {
+            return -1;
+        }
+        *chargeLevel = fp->fv.kb.xA8;
+        *chargeCycles = da->specialn_ss_charge_time;
+        return 0;
+    }
+    return -1;
+}
 
-/// #ftKb_SpecialNSs_800FCC6C
+bool ftKb_SpecialNSs_800FCC6C(Fighter_GObj* gobj)
+{
+    if (gobj != NULL) {
+        Fighter* fp = GET_FIGHTER(gobj);
+        s32 msid = fp->motion_id;
 
-/// #ftKb_SpecialNSs_800FCCBC
+        switch (msid) {
+        case ftKb_MS_SsSpecialNStart:
+        case ftKb_MS_SsSpecialNHold:
+        case ftKb_MS_SsSpecialNCancel:
+        case ftKb_MS_SsSpecialN:
+        case ftKb_MS_SsSpecialAirNStart:
+        case ftKb_MS_SsSpecialAirN:
+            if (fp->x2070.x2071_b6) {
+                return true;
+            }
+            return false;
+        }
+        return true;
+    }
+    return true;
+}
+
+bool ftKb_SpecialNSs_800FCCBC(Fighter_GObj* gobj)
+{
+    if (gobj) {
+        Fighter* fp = GET_FIGHTER(gobj);
+        s32 msid = fp->motion_id;
+        switch (msid) {
+        case ftKb_MS_SsSpecialNStart:
+        case ftKb_MS_SsSpecialNHold:
+        case ftKb_MS_SsSpecialN:
+        case ftKb_MS_SsSpecialAirNStart:
+        case ftKb_MS_SsSpecialAirN:
+            return false;
+        }
+        return true;
+    }
+    return true;
+}
 
 void ftKb_SpecialNSs_800FCD04(Fighter_GObj* gobj)
 {
@@ -9390,22 +9443,20 @@ void ftKb_SkSpecialAirNStart_Anim(Fighter_GObj* gobj)
 
 void ftKb_SkSpecialAirNLoop_Anim(Fighter_GObj* gobj)
 {
-    volatile unsigned char pad;
     Fighter* fp = GET_FIGHTER(gobj);
-    Fighter* new_var;
-    switch (fp->mv.kb.specialhi.x8.i) {
-    case 0:
+    switch (fp->mv.sk.specialn.x8) {
+    case 0: {
+        Fighter* fp = GET_FIGHTER(gobj);
         ft_PlaySFX(fp, 270134, 127, 64);
-        break;
     }
-    ++fp->mv.kb.specialhi.x8.i;
+    }
+    ++fp->mv.sk.specialn.x8;
     if (fp->cur_anim_frame == 0) {
-        new_var = fp;
         ++fp->fv.kb.xB4;
-        fp->mv.kb.specialhi.x8.i = 0;
+        fp->mv.sk.specialn.x8 = 0;
         if (fp->fv.kb.xB4 > 6) {
-            new_var->fv.kb.xB4 = 6;
-            new_var->mv.kb.specialhi.x8.i = 100;
+            fp->fv.kb.xB4 = 6;
+            fp->mv.sk.specialn.x8 = 100;
             ftCo_800BFFD0(fp, 87, 0);
         }
     }
@@ -9846,13 +9897,16 @@ void ftKb_MtSpecialAirNEnd_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftKb_DatAttrs* da = fp->dat_attrs;
+    PAD_STACK(8);
+
     ftKb_SpecialNMt_801071FC(gobj);
+
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        if (da->specialn_mt_freefall_toggle == 0.0F) {
+        if (0.0f == da->specialn_mt_freefall_toggle) {
             ftCo_Fall_Enter(gobj);
             return;
         }
-        ftCo_80096900(gobj, 1, 0, 1, 1.0F, da->specialn_mt_freefall_toggle);
+        ftCo_80096900(gobj, 1, 0, true, 1.0f, da->specialn_mt_freefall_toggle);
     }
 }
 

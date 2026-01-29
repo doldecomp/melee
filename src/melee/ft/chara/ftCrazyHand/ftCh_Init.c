@@ -1362,14 +1362,14 @@ void ftCh_Poke1_Anim(HSD_GObj* gobj)
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter* fp = GET_FIGHTER(gobj);
         ftCh_Init_8015868C(gobj);
-        it_802F046C(fp->mv.ch.fingerbeam.x34);
-        it_802F046C(fp->mv.ch.fingerbeam.x38);
-        it_802F046C(fp->mv.ch.fingerbeam.x3C);
-        it_802F046C(fp->mv.ch.fingerbeam.x40);
-        fp->mv.ch.unk0.x28 = NULL;
-        fp->mv.ch.unk0.x2C = NULL;
-        fp->mv.ch.unk0.x30 = NULL;
-        fp->mv.ch.unk0.x34 = NULL;
+        it_802F046C(fp->mv.ch.grab.x28);
+        it_802F046C(fp->mv.ch.grab.x2C);
+        it_802F046C(fp->mv.ch.grab.x30);
+        it_802F046C(fp->mv.ch.grab.x34);
+        fp->mv.ch.grab.x28 = NULL;
+        fp->mv.ch.grab.x2C = NULL;
+        fp->mv.ch.grab.x30 = NULL;
+        fp->mv.ch.grab.x34 = NULL;
     }
 }
 
@@ -1399,16 +1399,16 @@ void fn_80158534(HSD_GObj* gobj)
     {
         Vec3 vec;
         lb_8000B1CC(fp->parts[FtPart_RLegJA].joint, 0, &vec);
-        fp->mv.ch.fingerbeam.x34 =
+        fp->mv.ch.grab.x28 =
             it_802F0340(gobj, &vec, &vec, FtPart_RLegJA, 125, fp->facing_dir);
         lb_8000B1CC(fp->parts[FtPart_BustN].joint, 0, &vec);
-        fp->mv.ch.fingerbeam.x38 =
+        fp->mv.ch.grab.x2C =
             it_802F0340(gobj, &vec, &vec, FtPart_BustN, 125, fp->facing_dir);
         lb_8000B1CC(fp->parts[FtPart_LHandN].joint, 0, &vec);
-        fp->mv.ch.fingerbeam.x3C =
+        fp->mv.ch.grab.x30 =
             it_802F0340(gobj, &vec, &vec, FtPart_LHandN, 125, fp->facing_dir);
         lb_8000B1CC(fp->parts[FtPart_L3rdNa].joint, 0, &vec);
-        fp->mv.ch.fingerbeam.x40 =
+        fp->mv.ch.grab.x34 =
             it_802F0340(gobj, &vec, &vec, FtPart_L3rdNa, 125, fp->facing_dir);
         fp->mv.ch.unk0.x38 = lbAudioAx_800237A8(320004, 127, 64);
         fp->mv.ch.unk0.x3C = lbAudioAx_800237A8(320005, 127, 64);
@@ -2393,14 +2393,14 @@ inline void func_8015ADD0_inline(HSD_GObj* gobj)
     Fighter* fp = gobj->user_data;
     ftCrazyHand_DatAttrs* da = fp->ft_data->ext_attr;
     fp->self_vel.x = fp->self_vel.y = fp->self_vel.z = 0;
-    it_802F046C(fp->mv.ch.fingerbeam.x34);
-    it_802F046C(fp->mv.ch.fingerbeam.x38);
-    it_802F046C(fp->mv.ch.fingerbeam.x3C);
-    it_802F046C(fp->mv.ch.fingerbeam.x40);
-    fp->mv.ch.fingerbeam.x34 = NULL;
-    fp->mv.ch.fingerbeam.x38 = NULL;
-    fp->mv.ch.fingerbeam.x3C = NULL;
-    fp->mv.ch.fingerbeam.x40 = NULL;
+    it_802F046C(fp->mv.ch.grab.x28);
+    it_802F046C(fp->mv.ch.grab.x2C);
+    it_802F046C(fp->mv.ch.grab.x30);
+    it_802F046C(fp->mv.ch.grab.x34);
+    fp->mv.ch.grab.x28 = NULL;
+    fp->mv.ch.grab.x2C = NULL;
+    fp->mv.ch.grab.x30 = NULL;
+    fp->mv.ch.grab.x34 = NULL;
     lbAudioAx_800236B8(fp->mv.ch.unk0.x38);
     lbAudioAx_800236B8(fp->mv.ch.unk0.x3C);
     lbAudioAx_800236B8(fp->mv.ch.unk0.x40);

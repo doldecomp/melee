@@ -153,6 +153,14 @@ union ftMasterHand_MotionVars {
         /* +40 fp+2380 */ Item_GObj* x40;
     } fingerbeam;
 
+    struct ftMasterHand_GrabVars {
+        char pad_0[0x28];
+        Item_GObj* x28;
+        Item_GObj* x2C;
+        Item_GObj* x30;
+        Item_GObj* x34;
+    } grab;
+
     struct ftMasterHand_Damage_0 {
         /*  +0 fp+2340 */ char pad_0[0x28];
         /* +28 fp+2368 */ int x28;
