@@ -1831,13 +1831,6 @@ typedef struct tyDispData {
 
 static s32 un_804DDCFC = 0xFFBA00FF;
 
-/* Declare un_803063D4 with correct return type locally to get direct call */
-static s32 call_text_func(s16 a, s32 b, s32 c);
-asm s32 call_text_func(s16 a, s32 b, s32 c)
-{
-    nofralloc
-    b un_803063D4
-}
 
 #pragma push
 #pragma peephole on
@@ -1878,7 +1871,7 @@ void un_803084A0(s16 arg0)
             text->x34.y = 1.0F;
         }
     }
-    HSD_SisLib_803A6368(display->x144, call_text_func(arg0, 2, 0x128));
+    HSD_SisLib_803A6368(display->x144, un_803063D4(arg0, 2, 0x128));
 
     if (display->x148 == NULL) {
         if (lbLang_IsSavedLanguageJP()) {
@@ -1900,7 +1893,7 @@ void un_803084A0(s16 arg0)
         text = display->x148;
         text->default_kerning = 1;
     }
-    HSD_SisLib_803A6368(display->x148, call_text_func(arg0, 2, 0x374));
+    HSD_SisLib_803A6368(display->x148, un_803063D4(arg0, 2, 0x374));
 
     if (display->x14C == NULL) {
         if (lbLang_IsSavedLanguageJP()) {
@@ -1935,8 +1928,8 @@ void un_803084A0(s16 arg0)
         display->x14C->default_alignment = 0;
         display->x150->default_alignment = 0;
     }
-    HSD_SisLib_803A6368(display->x14C, call_text_func(arg0, 0x128, 0x37A));
-    HSD_SisLib_803A6368(display->x150, call_text_func(arg0, 0x24E, 0x380));
+    HSD_SisLib_803A6368(display->x14C, un_803063D4(arg0, 0x128, 0x37A));
+    HSD_SisLib_803A6368(display->x150, un_803063D4(arg0, 0x24E, 0x380));
 }
 
 #pragma pop
