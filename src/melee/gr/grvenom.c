@@ -621,6 +621,7 @@ void grVenom_802040F0(Ground_GObj* gobj)
     Vec3 pos1;
     Vec3 pos2;
     HSD_JObj* temp;
+    Ground* new_var;
     Ground* gp = GET_GROUND(gobj);
 
     Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
@@ -629,6 +630,7 @@ void grVenom_802040F0(Ground_GObj* gobj)
     grAnime_801C7FF8(gobj, 0xB, 7, 2, 0.0F, 1.0F);
     grAnime_801C7FF8(gobj, 0xD, 7, 2, 0.0F, 1.0F);
     grAnime_801C7FF8(gobj, 0xF, 7, 2, 0.0F, 1.0F);
+    new_var = gp;
     grAnime_801C7FF8(gobj, 4, 7, 3, 0.0F, 1.0F);
     grAnime_801C7FF8(gobj, 7, 7, 3, 0.0F, 1.0F);
     Ground_801C10B8(gobj, (HSD_GObjEvent) fn_802040B4);
@@ -639,7 +641,7 @@ void grVenom_802040F0(Ground_GObj* gobj)
     lb_8000B1CC((HSD_JObj*) gp->gv.venom.xD0, NULL, &pos2);
     if (pos2.y > pos1.y) {
         temp = (HSD_JObj*) gp->gv.venom.xCC;
-        gp->gv.venom.xCC = gp->gv.venom.xD0;
+        gp->gv.venom.xCC = new_var->gv.venom.xD0;
         gp->gv.venom.xD0 = (u32) temp;
     }
     gp->x10_flags.b5 = 1;
@@ -864,6 +866,9 @@ void grVenom_80204DB0(Ground_GObj* gobj)
 
 void grVenom_80204DD4(Ground_GObj* gobj)
 {
+    int new_var;
+    int new_var3;
+    HSD_JObj* new_var2;
     Ground* gp = gobj->user_data;
     HSD_JObj* jobj = gobj->hsd_obj;
 
@@ -872,18 +877,21 @@ void grVenom_80204DD4(Ground_GObj* gobj)
     // HSD_JObjSetScaleX(jobj, 1.0F) expanded:
     ((jobj) ? ((void) 0) : __assert("jobj.h", 0x308, "jobj"));
     jobj->scale.x = 1.0F;
-    if (!(jobj->flags & (1 << 25))) {
+    new_var3 = !(jobj->flags & (1 << 25));
+    if (new_var3) {
         if (jobj != 0L && !HSD_JObjMtxIsDirty(jobj)) {
             HSD_JObjSetMtxDirtySub(jobj);
         }
     }
 
+    new_var = 1 << 25;
     // HSD_JObjSetScaleY(jobj, 1.0F) expanded:
     ((jobj) ? ((void) 0) : __assert("jobj.h", 0x317, "jobj"));
     jobj->scale.y = 1.0F;
-    if (!(jobj->flags & (1 << 25))) {
-        if (jobj != 0L && !HSD_JObjMtxIsDirty(jobj)) {
-            HSD_JObjSetMtxDirtySub(jobj);
+    new_var2 = jobj;
+    if (!(new_var2->flags & new_var)) {
+        if (new_var2 != 0L && !HSD_JObjMtxIsDirty(new_var2)) {
+            HSD_JObjSetMtxDirtySub(new_var2);
         }
     }
 }
@@ -922,7 +930,11 @@ void grVenom_802052E0(Ground_GObj* gobj, Vec3* pos)
     Ground* gp;
     HSD_JObj* jobj;
     Vec3 jobj_pos;
+    s32* new_var;
+    s32* new_var4;
+    u8* new_var2;
     u32 spawn_idx;
+    struct grVenom_GroundVars* new_var3;
     s32 data_idx;
     VenomSpawnData* spawn_data;
 
@@ -931,9 +943,13 @@ void grVenom_802052E0(Ground_GObj* gobj, Vec3* pos)
         Ground_801C2BA4(5);
         jobj = Ground_801C3FA4(gobj, 5);
         lb_8000B1CC(jobj, NULL, &jobj_pos);
-        spawn_idx = gp->gv.venom.xC8;
-        data_idx = spawn_table[spawn_idx + 11];
-        spawn_data = (VenomSpawnData*)((u8*)spawn_table + data_idx * 12);
+        new_var = spawn_table;
+        new_var4 = spawn_table;
+        new_var2 = (u8*)new_var4;
+        new_var3 = &gp->gv.venom;
+        spawn_idx = (*new_var3).xC8;
+        data_idx = new_var[spawn_idx + 11];
+        spawn_data = (VenomSpawnData*)(new_var2 + data_idx * 12);
         pos->x = jobj_pos.x + spawn_data->x;
         pos->y = jobj_pos.y + spawn_data->y;
         pos->z = jobj_pos.z + spawn_data->z;
@@ -1327,6 +1343,7 @@ bool grVenom_80206BF0(int arg0)
     s32 var_r30;
     Ground_GObj* wgobj;
     Ground* gp;
+    PAD_STACK(32);
 
     if (Ground_801C2BA4(8) != NULL) {
         return 0;
