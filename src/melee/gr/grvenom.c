@@ -146,7 +146,35 @@ void grVenom_80204DB0(Ground_GObj* gobj)
     un_802FF620();
 }
 
-/// #grVenom_80204DD4
+// Decompilation of grVenom_80204DD4
+// Unit: main/melee/gr/grvenom
+// Manual expansion of HSD_JObjSetScaleX/Y without using inline functions
+
+void grVenom_80204DD4(Ground_GObj* gobj)
+{
+    Ground* gp = gobj->user_data;
+    HSD_JObj* jobj = gobj->hsd_obj;
+
+    Ground_801C2ED0(jobj, gp->map_id);
+
+    // HSD_JObjSetScaleX(jobj, 1.0F) expanded:
+    ((jobj) ? ((void) 0) : __assert("jobj.h", 0x308, "jobj"));
+    jobj->scale.x = 1.0F;
+    if (!(jobj->flags & (1 << 25))) {
+        if (jobj != 0L && !HSD_JObjMtxIsDirty(jobj)) {
+            HSD_JObjSetMtxDirtySub(jobj);
+        }
+    }
+
+    // HSD_JObjSetScaleY(jobj, 1.0F) expanded:
+    ((jobj) ? ((void) 0) : __assert("jobj.h", 0x317, "jobj"));
+    jobj->scale.y = 1.0F;
+    if (!(jobj->flags & (1 << 25))) {
+        if (jobj != 0L && !HSD_JObjMtxIsDirty(jobj)) {
+            HSD_JObjSetMtxDirtySub(jobj);
+        }
+    }
+}
 
 bool grVenom_80204EF4(Ground_GObj* arg)
 {
