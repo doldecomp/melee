@@ -27,7 +27,9 @@
 #include "lb/lbarchive.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lblanguage.h"
+#include "lb/lbvector.h"
 #include "mn/mnsoundtest.h"
+#include "sc/types.h"
 
 #include "ty/forward.h"
 
@@ -1132,7 +1134,67 @@ void un_80306D70(s32 arg0)
     }
 }
 
-/// #un_80306EEC
+/* 78.7% match */
+static char un_804D5A54[] = "lobj.h";
+static char un_804D5A5C[] = "lobj";
+
+HSD_LObj* un_80306EEC(void* list_arg, s32 hasAnim_arg)
+{
+    LightList** list = list_arg;
+    s32* hasAnim = (s32*)hasAnim_arg;
+    HSD_LObj* prev;
+    HSD_LObj* lobj;
+    HSD_LObj* first;
+    HSD_LightAnim** anims;
+    u8* base;
+    u8* posTable;
+    u8* animFlag;
+    s32 idx;
+
+    prev = NULL;
+    idx = 0;
+    base = un_804D6ED4;
+
+    if (hasAnim != NULL) {
+        *hasAnim = 0;
+    }
+
+    posTable = base + idx * 0xC;
+
+    while (*list != NULL) {
+        lobj = HSD_LObjLoadDesc((*list)->desc);
+        if (lobj != NULL) {
+            animFlag = base + idx + 0xDC;
+            anims = (*list)->anims;
+            *animFlag = 0;
+            if (anims != NULL && *anims != NULL) {
+                if (hasAnim != NULL) {
+                    *hasAnim = 1;
+                }
+                HSD_LObjAddAnimAll(lobj, *anims);
+                HSD_LObjReqAnimAll(lobj, 0.0F);
+                if ((*anims)->next != NULL) {
+                    *animFlag = 1;
+                }
+            }
+            HSD_LObjGetPosition(lobj, (Vec3*)(posTable + 0x1C));
+            HSD_LObjGetInterest(lobj, (Vec3*)(posTable + 0x7C));
+            posTable += 0xC;
+            idx += 1;
+        }
+        if (prev != NULL) {
+            if (prev == NULL) {
+                __assert(un_804D5A54, 0x136, un_804D5A5C);
+            }
+            prev->next = lobj;
+        } else {
+            first = lobj;
+        }
+        prev = lobj;
+        list++;
+    }
+    return first;
+}
 
 // Decompilation of un_80307018
 // Unit: main/melee/ty/toy
@@ -1188,7 +1250,149 @@ void un_80307018(void)
     }
 }
 
-/// #un_8030715C
+/* 78.7% match */
+typedef struct TyGObjX8_ {
+    u8 pad[0x28];
+    HSD_CObj* x28;
+} TyGObjX8_;
+
+typedef struct TyCameraData_ {
+    void* x0;
+    void* x4;
+    TyGObjX8_* x8;
+    u8 padC[0x18 - 0x0C];
+    f32 x18;
+    f32 x1C;
+    f32 x20;
+} TyCameraData_;
+
+typedef struct TyLightGObj_ {
+    u8 pad[0x28];
+    HSD_LObj* x28;
+} TyLightGObj_;
+
+typedef struct TyLightArray_ {
+    void* x0;
+    TyLightGObj_* x4;
+    u8 pad08[0x14 - 0x08];
+    f32 x14;
+    f32 x18;
+    s32 x1C;
+    s32 x20;
+    s32 x24;
+    u8 pad28[0x7C - 0x28];
+    s32 x7C;
+    s32 x80;
+    s32 x84;
+} TyLightArray_;
+
+void un_8030715C(f32 cstick_x, f32 cstick_y)
+{
+    Vec3 interest;
+    Vec3 new_interest;
+    Mtx mtx;
+    Vec3 up_vec;
+    Vec3 left_vec;
+    Vec3 euler;
+    Vec3 angles;
+    TyCameraData_* data;
+    TyLightArray_* data2;
+    HSD_CObj* cobj;
+    HSD_LObj* lobj;
+    TyLightArray_* cur;
+    s32 i;
+    s8* flag_ptr;
+
+    data = (void*)un_804D6E68;
+    data2 = un_804D6ED4;
+    cobj = data->x8->x28;
+
+    HSD_CObjGetInterest(cobj, &interest);
+    HSD_CObjGetInterest(cobj, &new_interest);
+    HSD_CObjGetUpVector(cobj, &up_vec);
+    PSVECScale(&up_vec, &up_vec, -cstick_y);
+    PSVECAdd(&up_vec, &new_interest, &new_interest);
+    HSD_CObjGetLeftVector(cobj, &left_vec);
+    PSVECScale(&left_vec, &left_vec, cstick_x);
+    PSVECAdd(&left_vec, &new_interest, &new_interest);
+
+    if (new_interest.x <= -3000.0F ||
+        new_interest.y <= -3000.0F ||
+        new_interest.z <= -3000.0F ||
+        new_interest.x >= 3000.0F ||
+        new_interest.y >= 3000.0F ||
+        new_interest.z >= 3000.0F)
+    {
+        return;
+    }
+
+    HSD_CObjSetInterest(cobj, &new_interest);
+
+    euler.x = 0.0F;
+    euler.y = 0.0F;
+    euler.z = data->x20;
+
+    MTXRotRad(mtx, 'x', 0.017453292F * data->x18);
+    PSMTXMultVecSR(mtx, &euler, &euler);
+    MTXRotRad(mtx, 'y', 0.017453292F * -data->x1C);
+    PSMTXMultVecSR(mtx, &euler, &euler);
+
+    euler.x += new_interest.x;
+    euler.y += new_interest.y;
+    euler.z += new_interest.z;
+
+    HSD_CObjSetEyePosition(cobj, &euler);
+
+    cur = data2;
+    i = 0;
+    lobj = data2->x4->x28;
+
+    while (lobj != NULL) {
+        flag_ptr = (s8*)data2 + i + 0xDC;
+
+        angles.x = 0.017453292F * data2->x14;
+        angles.y = 0.017453292F * -data2->x18;
+        angles.z = 0.0F;
+
+        if (*flag_ptr != 0) {
+            HSD_LObjGetPosition(lobj, &interest);
+        } else {
+            *(s32*)&interest.x = cur->x1C;
+            *(s32*)&interest.y = cur->x20;
+            *(s32*)&interest.z = cur->x24;
+        }
+
+        if (*flag_ptr != 0) {
+            cur->x1C = *(s32*)&interest.x;
+            cur->x20 = *(s32*)&interest.y;
+            cur->x24 = *(s32*)&interest.z;
+        }
+
+        lbVector_ApplyEulerRotation(&interest, &angles);
+        HSD_LObjSetPosition(lobj, &interest);
+
+        if (HSD_LObjGetInterest(lobj, &interest) != 0) {
+            if (*flag_ptr != 0) {
+                cur->x7C = *(s32*)&interest.x;
+                cur->x80 = *(s32*)&interest.y;
+                cur->x84 = *(s32*)&interest.z;
+            } else {
+                *(s32*)&interest.x = cur->x7C;
+                *(s32*)&interest.y = cur->x80;
+                *(s32*)&interest.z = cur->x84;
+            }
+            lbVector_ApplyEulerRotation(&interest, &angles);
+            HSD_LObjSetInterest(lobj, &interest);
+        }
+
+        cur = (TyLightArray_*)((u8*)cur + 0xC);
+        i += 1;
+
+        if (lobj != NULL) {
+            lobj = lobj->next;
+        }
+    }
+}
 
 /// #un_80307470
 
@@ -1369,7 +1573,57 @@ void un_803078E4(void)
     }
 }
 
-/// #un_80307BA0
+/* 66.5% match */
+HSD_JObj* un_80307BA0(HSD_JObj* parent_jobj, s16 arg1)
+{
+    void* joint_data;
+    HSD_JObj* jobj;
+    u8* data_ptr;
+    f32 scale_val;
+    char* str = un_803FDD18;
+
+    data_ptr = un_804A2AA8;
+
+    if (un_804D6EC8 == NULL) {
+        un_804D6EC8 = lbArchive_LoadSymbols(str + 0x144, &joint_data, str + 0x150, 0);
+    } else {
+        joint_data = HSD_ArchiveGetPublicAddress(un_804D6EC8, str + 0x150);
+    }
+
+    jobj = HSD_JObjLoadJoint(joint_data);
+    HSD_JObjAddChild(parent_jobj, jobj);
+
+    {
+        s32 offset;
+        s8 idx;
+        if (*(HSD_JObj**)(data_ptr + 0x4) != NULL) {
+            idx = 1;
+        } else {
+            idx = 0;
+        }
+        *(s8*)(data_ptr + 0xE) = idx;
+        offset = (s8)data_ptr[0xE];
+        offset = offset * 4;
+        offset = offset + 4;
+        *(HSD_JObj**)(data_ptr + offset) = jobj;
+    }
+
+    HSD_JObjAddTranslationY(jobj, 0.25F);
+
+    *(u8*)(data_ptr + 0x11) = 2;
+    *(u8*)(data_ptr + 0x10) = 2;
+    *(u8*)(data_ptr + 0xF) = 0;
+
+    un_80307F64(2, 0);
+
+    scale_val = un_803060BC((int)arg1, 4);
+
+    HSD_JObjSetScaleX(jobj, scale_val);
+    HSD_JObjSetScaleY(jobj, scale_val);
+    HSD_JObjSetScaleZ(jobj, scale_val);
+
+    return jobj;
+}
 
 // Decompilation of fn_80307E84
 
@@ -2008,7 +2262,193 @@ void un_803102D0(void)
     }
 }
 
-/// #un_80310324
+/* 69.1% match */
+extern f32 un_804DDCD8;
+extern f32 un_804DDCF0;
+
+typedef struct ToyGlobalsS_ {
+    u8 pad0[0x8];
+    HSD_GObj* x8;
+    HSD_GObj* xC;
+    u8 pad10[0x20];
+    void* x30;
+    u8 pad34[0x1C];
+    void* x50;
+    void* x54;
+} ToyGlobalsS_;
+
+typedef struct ToyGlobals2S_ {
+    HSD_GObj* x0;
+    u8 x4;
+} ToyGlobals2S_;
+
+typedef struct ToyGlobals3S_ {
+    u8 pad0[0x10];
+    s32 x10;
+} ToyGlobals3S_;
+
+typedef struct ToyGlobals4S_ {
+    u8 pad0[0x58];
+    s32 x58;
+} ToyGlobals4S_;
+
+typedef struct ToyGlobals5S_ {
+    u8 pad0[0x140];
+    void* x140;
+    u8 pad144[0x10];
+    s16 x154;
+} ToyGlobals5S_;
+
+typedef struct ToySubStructS_ {
+    u8 pad0[0x10];
+    s16 x10;
+} ToySubStructS_;
+
+void un_80310324(void)
+{
+    char* toy;
+    char* data;
+    ToyGlobalsS_* tg;
+    ToyGlobalsS_* tg2;
+    ToyGlobals2S_* tg3;
+    ToyGlobals3S_* tg4;
+    ToyGlobals4S_* tg5;
+    ToyGlobals5S_* tg6;
+    ToySubStructS_* sub;
+    s32 sp18;
+    s32 sp1C;
+    s32 sp20;
+    s32 sp24;
+    s32* ptr;
+    s32 i;
+    s32 one;
+    s16 idx;
+    s16 var_r0;
+    char* str;
+    HSD_SObj_803A477C_t* sobj;
+    HSD_GObj* gobj;
+    u16* flags;
+    f32 two;
+
+    data = un_803FDD18;
+    toy = (char*) un_804A26B8;
+    tg = un_804D6ED8;
+
+    un_8030663C();
+    un_803067BC((s8) toy[0x195], (s8) toy[0x196]);
+
+    if (tg->x50 == NULL) {
+        if (lbLang_IsSavedLanguageJP() != 0) {
+            str = data + 0x5E8;
+        } else {
+            str = data + 0x5F8;
+        }
+        tg->x50 = lbArchive_LoadSymbols(str, &sp24, *(void**)(data + 0x188), NULL);
+    }
+
+    memzero(un_804D6E68, 0x64);
+    un_8030FA50();
+    memzero(un_804D6ED4, 0xE4);
+    un_80306D70(0);
+    un_80307018();
+
+    tg2 = un_804D6ED8;
+    if (tg2->x54 == NULL) {
+        tg2->x54 = lbArchive_LoadSymbols(
+            data + 0x640, &sp18,
+            *(void**)(data + 0x320), &sp1C,
+            *(void**)(data + 0x324), &sp20,
+            *(void**)(data + 0x328), 0);
+
+        tg2->x8 = GObj_Create(4, 5, 0);
+        GObj_SetupGXLink(tg2->x8, HSD_SObjLib_803A49E0, 0x32, 0);
+
+        i = 0;
+        ptr = &sp18;
+        two = un_804DDCF0;
+        one = 1;
+        do {
+            sobj = HSD_SObjLib_803A477C(tg2->x8, *ptr, 0, 0, 0x80, 0);
+            *(f32*)((char*)sobj + 0x1C) = two;
+            i += 1;
+            *(f32*)((char*)sobj + 0x20) = two;
+            ptr += 1;
+            *(s32*)((char*)sobj + 0x40) = one;
+        } while (i < 3);
+    }
+
+    un_803075E8(0);
+    un_80307470(0);
+    un_803078E4();
+
+    gobj = ((ToyGlobalsS_*)un_804D6ED8)->xC;
+    gobj = *(HSD_GObj**)((char*)gobj + 0x28);
+    while (gobj != NULL) {
+        *(s32*)((char*)gobj + 0x40) = 9;
+        gobj = *(HSD_GObj**)((char*)gobj + 0x4);
+    }
+
+    if (gm_8016B498() != 0 || (u8)gm_801A4310() == 0xC) {
+        var_r0 = *(s16*)(toy + 0x3EC);
+    } else {
+        var_r0 = *gmMainLib_8015CC90();
+    }
+
+    if (var_r0 != 0) {
+        memzero(toy + 0x3F0, 0x14);
+        un_8030FE48(un_804D6EE0, 0);
+        tg6 = un_804D6EE0;
+        un_803087F4(tg6->x140);
+
+        tg6 = un_804D6EE0;
+        idx = un_804D6EDC[tg6->x154];
+
+        if (gm_8016B498() != 0 || (u8)gm_801A4310() == 0xC) {
+            flags = (u16*)(toy + 0x19E);
+        } else {
+            flags = gmMainLib_8015CC78();
+        }
+
+        if (flags[idx] & 0x8000) {
+            tg6 = un_804D6EE0;
+            idx = un_804D6EDC[tg6->x154];
+
+            if (gm_8016B498() != 0 || (u8)gm_801A4310() == 0xC) {
+                flags = (u16*)(toy + 0x19E);
+            } else {
+                flags = gmMainLib_8015CC78();
+            }
+
+            flags[idx] ^= 0x8000;
+        }
+
+        tg6 = un_804D6EE0;
+        sub = tg6->x140;
+        un_803084A0(sub->x10);
+
+        tg6 = un_804D6EE0;
+        sub = tg6->x140;
+        un_803083D8(tg->x30, sub->x10);
+
+        tg3 = un_804D6E6C;
+        tg3->x0 = GObj_Create(6, 7, 0);
+        GObj_SetupGXLink(tg3->x0, (void (*)(HSD_GObj*, int))un_80312050, 0x39, 0);
+        tg3->x4 = 1;
+    }
+
+    un_80307828(0);
+
+    tg5 = (ToyGlobals4S_*)un_804D6E68;
+    tg5->x58 = 0x95E;
+
+    un_8030715C(un_804DDCD8, un_804DDCD8);
+
+    tg4 = un_804D6ED4;
+    tg4->x10 = 0;
+    un_80306D70(tg4->x10);
+    un_803075E8(tg4->x10);
+    HSD_PadRenewStatus();
+}
 
 // Decompilation of un_80310660
 // Unit: main/melee/ty/toy
