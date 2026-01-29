@@ -24,7 +24,7 @@
 /* 3062EC */ UNK_RET un_803062EC(UNK_PARAMS);
 /* 3063D4 */ long un_803063D4(long, long, long);
 /* 3064B8 */ s16 un_803064B8(s16 arg0, s8 arg1);
-/* 30663C */ UNK_RET un_8030663C(UNK_PARAMS);
+/* 30663C */ void un_8030663C(void);
 /* 3067BC */ void un_803067BC(s32, s32);
 /* 3068E0 */ s32 un_803068E0(HSD_GObj* gobj);
 /* 306930 */ void un_80306930(HSD_GObj*, int);

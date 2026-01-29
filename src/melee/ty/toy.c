@@ -56,6 +56,8 @@ extern s8 un_804D6EA2;
 
 extern void* un_804D6EBC;
 
+extern s16* un_804D6E64;
+
 /// #un_80305058
 
 void un_803053C4(s32 targetValue, s32 count, s32 flag)
@@ -585,7 +587,103 @@ s16 un_803064B8(s16 arg0, s8 arg1)
     return result;
 }
 
-/// #un_8030663C
+// Decompilation of un_8030663C
+// Unit: main/melee/ty/toy
+
+
+void un_8030663C(void)
+{
+    s32 var_r31;
+    s32 var_r30;
+    u16* var_r29;
+    s16* var_r28;
+    int var_r27;
+
+    var_r29 = (u16*)((u8*)un_804A284C + 0xA);
+    var_r27 = 0;
+    var_r31 = 0;
+    var_r30 = 0;
+    var_r28 = un_804D6E64;
+    do {
+        u16* src;
+        if (gm_8016B498() != 0 || (u8)gm_801A4310() == 0xC) {
+            src = var_r29;
+        } else {
+            src = gmMainLib_8015CC78();
+        }
+        if ((u8)*(u16*)((u8*)src + var_r30) != 0) {
+            *var_r28 = un_803064B8(var_r27, 0);
+            var_r31 += 1;
+            var_r28 += 3;
+        }
+        var_r27 += 1;
+        var_r30 += 2;
+    } while (var_r27 < 0x125);
+    {
+        s32 var2_r27;
+        s16* var2_r28;
+        s16* var2_r29;
+        int var2_r30;
+
+        var2_r29 = un_804D6E64;
+        var2_r30 = 0;
+        do {
+            var2_r28 = un_804D6E64;
+            var2_r27 = 0;
+            goto loop_13_check;
+    loop_13_body:
+            if (*var2_r28 == un_803064B8(var2_r30, 1)) {
+                var2_r29[1] = *var2_r28;
+                var2_r29 += 3;
+            } else {
+                var2_r28 += 3;
+                var2_r27 += 1;
+    loop_13_check:
+                if (var2_r27 < var_r31) {
+                    goto loop_13_body;
+                }
+            }
+            var2_r30 += 1;
+        } while (var2_r30 < 0x125);
+    }
+    {
+        s16* var3_r27;
+        s32 var3_r28;
+        s16* var3_r29;
+        int var3_r30;
+
+        var3_r29 = un_804D6E64;
+        var3_r30 = 0;
+        do {
+            var3_r27 = un_804D6E64;
+            var3_r28 = 0;
+            goto loop_23_check;
+    loop_23_body:
+            if (lbLang_IsSavedLanguageJP() != 0) {
+                if (*var3_r27 == un_803064B8(var3_r30, 2)) {
+                    var3_r29[2] = *var3_r27;
+                    var3_r29 += 3;
+                } else {
+                    goto block_22;
+                }
+            } else {
+                if (*var3_r27 == un_803064B8(var3_r30, 3)) {
+                    var3_r29[2] = *var3_r27;
+                    var3_r29 += 3;
+                } else {
+    block_22:
+                    var3_r27 += 3;
+                    var3_r28 += 1;
+    loop_23_check:
+                    if (var3_r28 < var_r31) {
+                        goto loop_23_body;
+                    }
+                }
+            }
+            var3_r30 += 1;
+        } while (var3_r30 < 0x125);
+    }
+}
 
 /// #un_803067BC
 
