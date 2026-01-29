@@ -8,11 +8,8 @@
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/itCommonItems.h"
 #include "it/item.h"
-
-typedef struct itHououAttr {
-    f32 timer;
-} itHououAttr;
 
 /// #it_2725_Logic18_Spawned
 
@@ -207,12 +204,12 @@ bool it_802D2D04(Item_GObj* gobj)
 void it_2725_Logic42_Spawned(Item_GObj* item_gobj)
 {
     Item* item;
-    PAD_STACK(12);
+    itHououAttr* attr;
+    PAD_STACK(8);
 
     item = GET_ITEM((HSD_GObj*) item_gobj);
-    item->xD44_lifeTimer =
-        ((itHououAttr*) item->xC4_article_data->x4_specialAttributes)
-            ->timer;
+    attr = item->xC4_article_data->x4_specialAttributes;
+    item->xD44_lifeTimer = attr->timer;
     it_80274740(item_gobj);
     it_802D2EF0(item_gobj);
     it_8026B3A8(item_gobj);

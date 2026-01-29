@@ -128,6 +128,10 @@ typedef struct itKyasarinAttributes {
     /* +4 */ f32 x4;
 } itKyasarinAttributes;
 
+typedef struct itHououAttr {
+    /* +0 */ f32 timer;
+} itHououAttr;
+
 /// Box/Crate item attributes loaded from .dat file
 typedef struct itBoxAttributes {
     /* +00 */ s32 spawn_weight_0;         ///< Weight for item spawn outcome 1
