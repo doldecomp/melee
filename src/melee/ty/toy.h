@@ -28,7 +28,7 @@
 /* 3067BC */ void un_803067BC(s32, s32);
 /* 3068E0 */ s32 un_803068E0(HSD_GObj* gobj);
 /* 306930 */ void un_80306930(HSD_GObj*, int);
-/* 306954 */ UNK_RET un_80306954(UNK_PARAMS);
+/* 306954 */ void un_80306954(HSD_GObj* gobj);
 /* 306A0C */ void un_80306A0C(void* arg0);
 /* 306A48 */ void un_80306A48(HSD_JObj*, s32, char*, s32, void*, s32);
 /* 306B18 */ HSD_GObjProc* un_80306B18(HSD_GObj* gobj, s32 anim_frame,
@@ -55,7 +55,7 @@
 /* 3082F8 */ void un_803082F8(s16 idx);
 /* 308328 */ void un_80308328(s32 arg0);
 /* 308354 */ s16 un_80308354(s16 idx);
-/* 3083D8 */ void un_803083D8(void*, s32);
+/* 3083D8 */ void un_803083D8(HSD_JObj* jobj, s32 arg1);
 /* 3084A0 */ UNK_RET un_803084A0(UNK_PARAMS);
 /* 3087F4 */ UNK_RET un_803087F4(UNK_PARAMS);
 /* 308DC8 */ void un_80308DC8(HSD_CObj*);
@@ -77,7 +77,7 @@
 /* 311788 */ void un_80311788(void);
 /* 311960 */ void un_80311960(void);
 /* 311AB0 */ void un_80311AB0_OnEnter(UNK_T);
-/* 311F5C */ UNK_RET un_80311F5C(UNK_PARAMS);
+/* 311F5C */ void un_80311F5C(void);
 /* 312018 */ void un_80312018_OnFrame(void);
 /* 312050 */ void un_80312050(void);
 /* 3122D0 */ void un_803122D0_OnInit(void);

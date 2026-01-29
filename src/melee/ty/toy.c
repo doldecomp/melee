@@ -50,6 +50,10 @@ typedef struct {
 
 static u8 un_804D6EA1;
 
+extern s8 un_804D6E50;
+extern void** un_804D6E68;
+extern s8 un_804D6EA2;
+
 /// #un_80305058
 
 void un_803053C4(s32 targetValue, s32 count, s32 flag)
@@ -489,7 +493,36 @@ void un_80306930(HSD_GObj* gobj, int unused)
     HSD_FogSet(gobj->hsd_obj);
 }
 
-/// #un_80306954
+// Decompilation of un_80306954
+// Unit: main/melee/ty/toy
+
+
+void un_80306954(HSD_GObj* gobj)
+{
+    void* state;
+    char* tbl;
+    char* entry;
+
+    tbl = un_803FDD18;
+    state = un_804D6ED4;
+    if (HSD_CObjSetCurrent((HSD_CObj*)gobj->hsd_obj)) {
+        if (un_804D6E50 == 0) {
+            entry = tbl + *(s32*)((u8*)state + 0x10) * 0xC;
+            if (*(s32*)(entry + 0x104) != 0) {
+                HSD_SetEraseColor(
+                    *(u8*)(entry + 0x100),
+                    *(u8*)(entry + 0x101),
+                    *(u8*)(entry + 0x102),
+                    *(u8*)(entry + 0x103)
+                );
+                HSD_CObjEraseScreen((HSD_CObj*)gobj->hsd_obj, 1, 0, 0);
+            }
+        }
+        HSD_GObj_80390ED0(gobj, 7);
+        HSD_FogSet(0);
+        HSD_CObjEndCurrent();
+    }
+}
 
 void un_80306A0C(void* arg0)
 {
@@ -698,7 +731,34 @@ s16 un_80308354(s16 idx)
 
     return target;
 }
-/// #un_803083D8
+// Decompilation of un_803083D8
+// Unit: main/melee/ty/toy
+
+void un_803083D8(HSD_JObj* jobj, s32 arg1)
+{
+    s32 temp_r31;
+
+    if (arg1 == 0x3E6) {
+        HSD_JObjClearFlagsAll(jobj, 0x10);
+        return;
+    }
+    if (arg1 == 0x3E7) {
+        HSD_JObjSetFlagsAll(jobj, 0x10);
+        return;
+    }
+    temp_r31 = (s32) un_803060BC(arg1, 8);
+    if (temp_r31 == 0) {
+        HSD_JObjSetFlagsAll(jobj, 0x10);
+        return;
+    }
+    HSD_JObjClearFlagsAll(jobj, 0x10);
+    if (temp_r31 == 1) {
+        HSD_JObjReqAnim(jobj, 0.0F);
+    } else {
+        HSD_JObjReqAnim(jobj, 1.0F);
+    }
+    HSD_JObjAnim(jobj);
+}
 
 /// #un_803084A0
 
@@ -910,7 +970,42 @@ void un_80311788(void)
 
 /// #un_80311AB0_OnEnter
 
-/// #un_80311F5C
+// Decompilation of un_80311F5C
+// Unit: main/melee/ty/toy
+
+#include <platform.h>
+
+void DevText_Remove(DevText** ptext);
+void HSD_Free(void* ptr);
+
+
+void un_80311F5C(void)
+{
+    void** p1 = un_804D6ED8;
+    void** p2 = un_804D6E68;
+
+    if (p1[0x14] != NULL) {
+        p1[0x14] = NULL;
+    }
+    if (p1[0] != NULL) {
+        p1[0] = NULL;
+    }
+    if (p2[0] != NULL) {
+        p2[0] = NULL;
+    }
+    if (un_804D6EA2 != 0 && un_804D6E9C != NULL) {
+        DevText_Remove(&un_804D6E9C);
+        un_804D6E9C = NULL;
+    }
+    if (un_804D6E98 != NULL) {
+        DevText_Remove(&un_804D6E98);
+        un_804D6E98 = NULL;
+    }
+    if (un_804D6E5C != NULL) {
+        HSD_Free(un_804D6E5C);
+        un_804D6E5C = NULL;
+    }
+}
 
 void un_80312018_OnFrame(void)
 {
