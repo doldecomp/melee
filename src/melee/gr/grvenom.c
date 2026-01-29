@@ -3,11 +3,13 @@
 #include <platform.h>
 
 #include "gr/grcorneria.h"
+#include "gr/grdisplay.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
 #include "gr/stage.h"
 #include "if/ifcoget.h"
 #include "if/ifstatus.h"
+#include "lb/lb_00B0.h"
 
 #include <baselib/aobj.h>
 #include <baselib/gobj.h>
@@ -49,7 +51,47 @@ bool grVenom_80203EA4(void)
     return false;
 }
 
-/// #grVenom_80203EAC
+// Decompilation of grVenom_80203EAC
+// TODO: grVe_Data should be defined in gr/types.h or a proper header
+typedef struct grVe_Data {
+    char x0[0x44];
+    StageCallbacks callbacks[1];  // at offset 0x44
+    char x58[0x1B8 - 0x58];
+    char x1B8_file[0x1DC - 0x1B8];  // 0x1B8: "%s:%d..." string
+    char x1DC_func[0x20];          // 0x1DC: function name or filename
+} grVe_Data;
+
+extern grVe_Data grVe_803E5348;
+
+Ground_GObj* grVenom_80203EAC(int gobj_id)
+{
+    Ground_GObj* gobj;
+    Ground* gp;
+    grVe_Data* base = &grVe_803E5348;
+    StageCallbacks* callbacks = &((StageCallbacks*)((char*)base + 0x44))[gobj_id];
+
+    gobj = Ground_801C14D0(gobj_id);
+
+    if (gobj != NULL) {
+        gp = gobj->user_data;
+        gp->x8_callback = NULL;
+        gp->xC_callback = NULL;
+        GObj_SetupGXLink(gobj, grDisplay_801C5DB0, 3, 0);
+        if (callbacks->callback3 != NULL) {
+            gp->x1C_callback = callbacks->callback3;
+        }
+        if (callbacks->callback0 != NULL) {
+            callbacks->callback0(gobj);
+        }
+        if (callbacks->callback2 != NULL) {
+            HSD_GObjProc_8038FD54(gobj, callbacks->callback2, 4);
+        }
+    } else {
+        OSReport(&base->x1B8_file[0], &base->x1DC_func[0], 0x23B, gobj_id);
+    }
+
+    return gobj;
+}
 
 void grVenom_80203F98(Ground_GObj* gobj)
 {
@@ -257,13 +299,77 @@ bool grVenom_802052D8(Ground_GObj* arg)
     return false;
 }
 
-/// #grVenom_802052E0
+// Decompilation of grVenom_802052E0
+// TODO: VenomSpawnData struct should be defined in gr/types.h or grvenom.h
+typedef struct {
+    u8 pad[0x218];
+    f32 x;
+    f32 y;
+    f32 z;
+} VenomSpawnData;
+
+void grVenom_802052E0(Ground_GObj* gobj, Vec3* pos)
+{
+    s32* spawn_table = (s32*)&grVe_803E5348;
+    Ground* gp;
+    HSD_JObj* jobj;
+    Vec3 jobj_pos;
+    u32 spawn_idx;
+    s32 data_idx;
+    VenomSpawnData* spawn_data;
+
+    if (gobj != NULL) {
+        gp = gobj->user_data;
+        Ground_801C2BA4(5);
+        jobj = Ground_801C3FA4(gobj, 5);
+        lb_8000B1CC(jobj, NULL, &jobj_pos);
+        spawn_idx = gp->gv.venom.xC8;
+        data_idx = spawn_table[spawn_idx + 11];
+        spawn_data = (VenomSpawnData*)((u8*)spawn_table + data_idx * 12);
+        pos->x = jobj_pos.x + spawn_data->x;
+        pos->y = jobj_pos.y + spawn_data->y;
+        pos->z = jobj_pos.z + spawn_data->z;
+    } else {
+        pos->z = 0.0F;
+        pos->y = 0.0F;
+        pos->x = 0.0F;
+    }
+}
 
 /// #grVenom_802053B0
 
 void grVenom_802056AC(Ground_GObj* arg) {}
 
-/// #grVenom_802056B0
+// Decompilation of grVenom_802056B0
+
+extern int grVe_803E5380[];
+extern int grVe_803E5680[];
+extern u32 grVe_804D6A34;
+
+void grVenom_802056B0(Ground_GObj* gobj)
+{
+    Ground* gp = gobj->user_data;
+    HSD_JObj* jobj = gobj->hsd_obj;
+    int* joint_idx;
+    int joint_offset;
+    int* joints;
+    int joint_id;
+
+    Ground_801C2ED0(jobj, gp->map_id);
+    gp->gv.venom.xC8 = grVe_804D6A34;
+    joint_idx = grVe_803E5380;
+    joints = grVe_803E5680;
+    gp->gv.venom.xD0 = 0;
+    gp->gv.venom.xDC = 0.0F;
+    gp->gv.venom.xE8 = 0.0F;
+    gp->gv.venom.xE4 = 0.0F;
+    gp->gv.venom.xE0 = 0.0F;
+    joint_offset = joint_idx[gp->gv.venom.xC8];
+    joint_id = joints[joint_offset];
+    mpJointListAdd(joint_id);
+
+    Ground_801C2ED0(jobj, gp->map_id);
+}
 
 bool grVenom_80205750(Ground_GObj* arg)
 {
@@ -412,9 +518,6 @@ DynamicsDesc* grVenom_80206D74(enum_t arg)
 
 // Decompilation of grVenom_80206D7C
 // Unit: main/melee/gr/grvenom
-
-#include "gr/ground.h"
-#include "lb/lb_00B0.h"
 
 // arg0 appears to be some struct with a float at offset 0x4
 // arg1 is unused
