@@ -29,7 +29,7 @@
 /* 204544 */ bool grVenom_80204544(Ground_GObj*);
 /* 20454C */ void grVenom_8020454C(Ground_GObj*);
 /* 204B84 */ void grVenom_80204B84(Ground_GObj*);
-/* 204B88 */ UNK_RET grVenom_80204B88(UNK_PARAMS);
+/* 204B88 */ void grVenom_80204B88(Ground_GObj*);
 /* 204CE0 */ void grVenom_80204CE0(Ground_GObj*);
 /* 204CE4 */ bool grVenom_80204CE4(Ground_GObj*);
 /* 204CEC */ void grVenom_80204CEC(Ground_GObj*);
