@@ -793,6 +793,9 @@ struct grOnett_GroundVars {
 
 struct grBigBlue_GroundVars {
     /*  +0 gp+C4:0 */ u8 x0_b0 : 1;
+    /* pad */ char pad_1[3];
+    /*  +4 gp+C8 */ void* xC8;
+    /*  +8 gp+CC */ void* xCC;
 };
 
 struct grBigBlueRoute_GroundVars {

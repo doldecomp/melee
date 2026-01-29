@@ -176,12 +176,10 @@ bool itLikelike_UnkMotion8_Anim(Item_GObj* gobj)
 
 /// #itLikelike_UnkMotion8_Coll
 
-/// FAKE MATCH: Raw offset needed because itLikelike_ItemVars lacks a
-/// field at +0x50. Original likely had a named field (e.g., grabbed_gobj).
 void it_802DB358(Item_GObj* gobj)
 {
     Item* ip = gobj->user_data;
-    *(s32*) ((u8*) &ip->xDD4_itemVar.likelike + 0x50) = (s32) ip->grab_victim;
+    ip->xDD4_itemVar.likelike.x50 = ip->grab_victim;
     ip->xDD0_flag.b5 = false;
     it_80274ECC(gobj, true);
 }

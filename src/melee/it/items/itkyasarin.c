@@ -4,6 +4,7 @@
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/itCommonItems.h"
 #include "it/item.h"
 
 void it_2725_Logic25_Destroyed(Item_GObj* gobj)
@@ -52,11 +53,6 @@ void it_802ECEB0(Item_GObj* gobj)
 /// #itKyasarin_UnkMotion2_Anim
 
 /// #itKyasarin_UnkMotion2_Coll
-
-typedef struct itKyasarinAttributes {
-    /* 0x00 */ s32* x0;
-    /* 0x04 */ f32 x4;
-} itKyasarinAttributes;
 
 void it_802ED25C(Item_GObj* gobj)
 {

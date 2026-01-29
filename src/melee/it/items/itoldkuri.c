@@ -152,9 +152,7 @@ bool itOldkuri_UnkMotion9_Coll(Item_GObj* gobj)
 void it_802D813C(Item_GObj* gobj)
 {
     Item* ip = gobj->user_data;
-    ip->x40_vel.z = 0.0F;
-    ip->x40_vel.y = 0.0F;
-    ip->x40_vel.x = 0.0F;
+    ip->x40_vel.x = ip->x40_vel.y = ip->x40_vel.z = 0.0F;
     it_8027C0A8(gobj, 0.0F, 0.0F);
     Item_80268E5C(gobj, 7, 2);
 }
