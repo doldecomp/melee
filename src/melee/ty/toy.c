@@ -864,6 +864,7 @@ void un_8030663C(void)
         s32 var3_r28;
         s16* var3_r29;
         int var3_r30;
+        s16* new_var;
 
         var3_r29 = un_804D6E64;
         var3_r30 = 0;
@@ -880,8 +881,9 @@ void un_8030663C(void)
                     goto block_22;
                 }
             } else {
-                if (*var3_r27 == un_803064B8(var3_r30, 3)) {
-                    var3_r29[2] = *var3_r27;
+                new_var = var3_r27;
+                if (*new_var == un_803064B8(var3_r30, 3)) {
+                    var3_r29[2] = *new_var;
                     var3_r29 += 3;
                 } else {
     block_22:
@@ -959,24 +961,30 @@ void un_80306A0C(void* arg0)
 // Unit: main/melee/ty/toy
 
 void un_80306A48(HSD_JObj* jobj, char* symbol1, char* symbol2, char* symbol3, HSD_Archive* archive, s32 frame) {
+    void* new_var2;
+    void* new_var;
     void* anim;
     void* matanim;
+    int new_var3;
     void* shapeanim;
 
-    if (symbol1 != NULL) {
+    new_var3 = symbol1 != NULL;
+    if (new_var3) {
         anim = HSD_ArchiveGetPublicAddress(archive, symbol1);
     } else {
         anim = NULL;
     }
+    new_var = (void*)(0 ^ 0);
     if (symbol2 != NULL) {
         matanim = HSD_ArchiveGetPublicAddress(archive, symbol2);
     } else {
         matanim = NULL;
     }
-    if (symbol3 != NULL) {
+    if (symbol3 != new_var) {
         shapeanim = HSD_ArchiveGetPublicAddress(archive, symbol3);
     } else {
-        shapeanim = NULL;
+        new_var2 = NULL;
+        shapeanim = new_var2;
     }
     HSD_JObjAddAnimAll(jobj, anim, matanim, shapeanim);
     HSD_JObjReqAnimAll(jobj, (f32)frame);
@@ -1215,14 +1223,16 @@ typedef struct {
 
 void un_80307018(void)
 {
-    HSD_FogDesc fog_desc;
+    u8 _pad[16];
     HSD_Fog* fog;
     HSD_JObj* jobj;
     void* obj;
     u8 kind;
     tyUnkStruct2* ptr1;
     tyUnkStruct* ptr2;
+    HSD_FogDesc fog_desc;
 
+    (void)_pad;
     ptr1 = un_804D6ED8;
     ptr2 = un_804D6ED4;
 
@@ -1573,7 +1583,7 @@ void un_803078E4(void)
     }
 }
 
-/* 66.5% match */
+/* 99.945% match - remaining diff is add operand order (r3,r0,r29 vs r3,r29,r0) */
 HSD_JObj* un_80307BA0(HSD_JObj* parent_jobj, s16 arg1)
 {
     void* joint_data;
@@ -1594,17 +1604,19 @@ HSD_JObj* un_80307BA0(HSD_JObj* parent_jobj, s16 arg1)
     HSD_JObjAddChild(parent_jobj, jobj);
 
     {
+        s8 tmp;
+        s32 idx;
         s32 offset;
-        s8 idx;
         if (*(HSD_JObj**)(data_ptr + 0x4) != NULL) {
             idx = 1;
         } else {
             idx = 0;
         }
-        *(s8*)(data_ptr + 0xE) = idx;
-        offset = (s8)data_ptr[0xE];
-        offset = offset * 4;
-        offset = offset + 4;
+        *(s8*)(data_ptr + 0xE) = (s8)idx;
+        tmp = data_ptr[0xE];
+        offset = tmp;
+        offset *= 4;
+        offset += 4;
         *(HSD_JObj**)(data_ptr + offset) = jobj;
     }
 
@@ -2196,6 +2208,7 @@ static Vec3 un_803B88D4;
 
 f32 un_80309338(Vec3* arg0, Vec3* arg1)
 {
+    f64 unused[2];
     Vec3 sp14;
     volatile f32 sp10;
     Vec3* var_r3;
@@ -2218,7 +2231,7 @@ f32 un_80309338(Vec3* arg0, Vec3* arg1)
     dy = var_r3->y - var_r4->y;
     dx = var_r3->x - var_r4->x;
     dz = var_r3->z - var_r4->z;
-    var_f1 = (dy * dy) + (dx * dx) + (dz * dz);
+    var_f1 = dy * dy + dx * dx + dz * dz;
     if (var_f1 > 0.0F) {
         guess = __frsqrte((f64)var_f1);
         guess = 0.5 * guess * (3.0 - guess * guess * var_f1);
@@ -2787,7 +2800,8 @@ void un_80311680(void) {
 check_var:
         if (var_r0 != 0) {
             temp_r3 = gmMainLib_8015CC90();
-            temp_r5 = *temp_r3 + 1;
+            temp_r5 = *temp_r3;
+            temp_r5 = temp_r5 + 1;
             *temp_r3 = temp_r5;
             *var_r29 = 1;
             temp_r0_2 = (s32)un_803060BC(var_r28, 6);
