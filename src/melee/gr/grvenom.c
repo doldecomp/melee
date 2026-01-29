@@ -118,7 +118,41 @@ bool grVenom_8020427C(Ground_GObj* arg)
 
 void grVenom_80204424(Ground_GObj* arg) {}
 
-/// #grVenom_80204428
+// Decompilation of grVenom_80204428
+// FAKE MATCH: grVenom_GroundVars has wrong types for this function
+
+#include <platform.h>
+#include "gr/ground.h"
+#include "gr/inlines.h"
+#include "mp/mplib.h"
+
+void grVenom_80204428(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+
+    gp->gv.venom.xC4 = (u32)Ground_801C3FA4(gobj, 4);
+    gp->gv.venom.xC8 = (u32)Ground_801C3FA4(gobj, 0xE);
+    gp->gv.venom.xCC = (u32)Ground_801C3FA4(gobj, 0x10);
+    gp->gv.venom.xD0 = (u32)Ground_801C3FA4(gobj, 0x11);
+    *(u32*)&gp->gv.venom.xD4 = (u32)Ground_801C3FA4(gobj, 0x12);
+    *(u32*)&gp->gv.venom.xD8 = (u32)Ground_801C3FA4(gobj, 0x13);
+    *(u32*)&gp->gv.venom.xDC = (u32)Ground_801C3FA4(gobj, 0x15);
+
+    // Access bitfields using mutecity2 which has 8 bitfields at xC4_flags
+    // xC4_flags is at offset 0, we need offset 0x1C, so shift by 7 u32s
+    gp->gv.mutecity2.xC4_flags.b0 = 0;
+    gp->gv.mutecity2.xC4_flags.b1 = 0;
+    gp->gv.mutecity2.xC4_flags.b2 = 0;
+    gp->gv.mutecity2.xC4_flags.b3 = 0;
+    gp->gv.mutecity2.xC4_flags.b4 = 0;
+    gp->gv.mutecity2.xC4_flags.b5 = 0;
+    gp->gv.mutecity2.xC4_flags.b6 = 0;
+
+    gp->gv.venom.xE4 = 0.0F;
+
+    Ground_801C5440(gp, 0, 0x6B6C3);
+    mpLib_80057BC0(2);
+}
 
 bool grVenom_80204544(Ground_GObj* arg)
 {
