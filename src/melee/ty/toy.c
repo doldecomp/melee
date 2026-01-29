@@ -534,7 +534,33 @@ void un_80306A0C(void* arg0)
         HSD_FogSet(fog);
     }
 }
-/// #un_80306A48
+// Decompilation of un_80306A48
+// Unit: main/melee/ty/toy
+
+void un_80306A48(HSD_JObj* jobj, char* symbol1, char* symbol2, char* symbol3, HSD_Archive* archive, s32 frame) {
+    void* anim;
+    void* matanim;
+    void* shapeanim;
+
+    if (symbol1 != NULL) {
+        anim = HSD_ArchiveGetPublicAddress(archive, symbol1);
+    } else {
+        anim = NULL;
+    }
+    if (symbol2 != NULL) {
+        matanim = HSD_ArchiveGetPublicAddress(archive, symbol2);
+    } else {
+        matanim = NULL;
+    }
+    if (symbol3 != NULL) {
+        shapeanim = HSD_ArchiveGetPublicAddress(archive, symbol3);
+    } else {
+        shapeanim = NULL;
+    }
+    HSD_JObjAddAnimAll(jobj, anim, matanim, shapeanim);
+    HSD_JObjReqAnimAll(jobj, (f32)frame);
+    HSD_JObjAnimAll(jobj);
+}
 
 HSD_GObjProc* un_80306B18(HSD_GObj* gobj, s32 anim_frame, s32 val1, s32 val2)
 {

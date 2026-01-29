@@ -30,7 +30,7 @@
 /* 306930 */ void un_80306930(HSD_GObj*, int);
 /* 306954 */ void un_80306954(HSD_GObj* gobj);
 /* 306A0C */ void un_80306A0C(void* arg0);
-/* 306A48 */ void un_80306A48(HSD_JObj*, s32, char*, s32, void*, s32);
+/* 306A48 */ void un_80306A48(HSD_JObj*, char *, char *, char *, HSD_Archive*, long);
 /* 306B18 */ HSD_GObjProc* un_80306B18(HSD_GObj* gobj, s32 anim_frame,
                                        s32 val1, s32 val2);
 /* 306BB8 */ void un_80306BB8(HSD_GObj* gobj);
