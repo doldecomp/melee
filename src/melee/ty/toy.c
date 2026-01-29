@@ -92,6 +92,11 @@ extern f32 un_804D6E8C;
 extern f32 un_804D6E90;
 extern f32 un_804D6E94;
 
+extern s32 un_804D6E70;
+extern s32 un_804D6E74;
+extern s32 un_804D6E78;
+extern s32 un_804D6E7C;
+
 /// #un_80305058
 
 /* 97.5% match */
@@ -1503,7 +1508,128 @@ void un_803083D8(HSD_JObj* jobj, s32 arg1)
     HSD_JObjAnim(jobj);
 }
 
-/// #un_803084A0
+// m2c decompilation of un_803084A0
+// Unit: main/melee/ty/toy
+
+typedef struct tyDispData {
+    u8 pad[0x144];
+    HSD_Text* x144;
+    HSD_Text* x148;
+    HSD_Text* x14C;
+    HSD_Text* x150;
+} tyDispData;
+
+static s32 un_804DDCFC = 0xFFBA00FF;
+
+/* Declare un_803063D4 with correct return type locally to get direct call */
+static s32 call_text_func(s16 a, s32 b, s32 c);
+asm s32 call_text_func(s16 a, s32 b, s32 c)
+{
+    nofralloc
+    b un_803063D4
+}
+
+#pragma push
+#pragma peephole on
+
+void un_803084A0(s16 arg0)
+{
+    volatile s32 color;
+    tyDispData* display;
+    HSD_Text* text;
+    s32 one;
+
+    display = un_804D6EE0;
+    color = un_804DDCFC;
+
+    if (display->x144 == NULL) {
+        display->x144 = HSD_SisLib_803A5ACC(0, un_804D6E70, 0.9F, -10.9F, 0.0F, 384.0F, 64.0F);
+        one = 1;
+        text = display->x144;
+        text->default_fitting = one;
+        text = display->x144;
+        text->default_alignment = one;
+        text = display->x144;
+        *(s32*)&text->bg_color = color;
+        if (lbLang_IsSavedLanguageJP()) {
+            text = display->x144;
+            text->font_size.x = 0.044F;
+            text->font_size.y = 0.103F;
+            text = display->x144;
+            text->x34.x = 2.0F;
+            text->x34.y = 1.0F;
+        } else {
+            text = display->x144;
+            text->font_size.x = 0.044F;
+            text->font_size.y = 0.103F;
+            display->x144->default_kerning = one;
+            text = display->x144;
+            text->x34.x = 1.75F;
+            text->x34.y = 1.0F;
+        }
+    }
+    HSD_SisLib_803A6368(display->x144, call_text_func(arg0, 2, 0x128));
+
+    if (display->x148 == NULL) {
+        if (lbLang_IsSavedLanguageJP()) {
+            display->x148 = HSD_SisLib_803A5ACC(3, un_804D6E74, 0.2F, -5.1F, 17.2F, 384.0F, 384.0F);
+            text = display->x148;
+            text->font_size.x = 0.035F;
+            text->font_size.y = 0.034F;
+        } else {
+            display->x148 = HSD_SisLib_803A5ACC(3, un_804D6E74, 0.2F, -5.0F, 17.2F, 384.0F, 384.0F);
+            text = display->x148;
+            text->font_size.x = 0.034F;
+            text->font_size.y = 0.033F;
+            text = display->x148;
+            text->x34.x = 0.7F;
+            text->x34.y = 0.7F;
+        }
+        text = display->x148;
+        text->default_fitting = 1;
+        text = display->x148;
+        text->default_kerning = 1;
+    }
+    HSD_SisLib_803A6368(display->x148, call_text_func(arg0, 2, 0x374));
+
+    if (display->x14C == NULL) {
+        if (lbLang_IsSavedLanguageJP()) {
+            display->x14C = HSD_SisLib_803A5ACC(3, un_804D6E78, 0.7F, 7.9F, 17.2F, 384.0F, 64.0F);
+            display->x150 = HSD_SisLib_803A5ACC(3, un_804D6E7C, 0.7F, 9.0F, 17.2F, 384.0F, 64.0F);
+            text = display->x14C;
+            text->font_size.x = 0.03F;
+            text->font_size.y = 0.03F;
+            text = display->x150;
+            text->font_size.x = 0.03F;
+            text->font_size.y = 0.03F;
+        } else {
+            display->x14C = HSD_SisLib_803A5ACC(3, un_804D6E78, 0.7F, 7.9F, 17.2F, 384.0F, 64.0F);
+            display->x150 = HSD_SisLib_803A5ACC(3, un_804D6E7C, 0.7F, 9.0F, 17.2F, 384.0F, 64.0F);
+            text = display->x14C;
+            text->font_size.x = 0.03F;
+            text->font_size.y = 0.03F;
+            text = display->x150;
+            text->font_size.x = 0.03F;
+            text->font_size.y = 0.03F;
+        }
+        display->x14C->default_kerning = 1;
+        display->x150->default_kerning = 1;
+        text = display->x14C;
+        text->x34.x = 1.0F;
+        text->x34.y = 1.0F;
+        text = display->x150;
+        text->x34.x = 1.0F;
+        text->x34.y = 1.0F;
+        display->x14C->default_fitting = 1;
+        display->x150->default_fitting = 1;
+        display->x14C->default_alignment = 0;
+        display->x150->default_alignment = 0;
+    }
+    HSD_SisLib_803A6368(display->x14C, call_text_func(arg0, 0x128, 0x37A));
+    HSD_SisLib_803A6368(display->x150, call_text_func(arg0, 0x24E, 0x380));
+}
+
+#pragma pop
 
 /// #un_803087F4
 

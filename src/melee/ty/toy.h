@@ -55,7 +55,7 @@
 /* 308328 */ void un_80308328(s32 arg0);
 /* 308354 */ s16 un_80308354(s16 idx);
 /* 3083D8 */ void un_803083D8(HSD_JObj* jobj, s32 arg1);
-/* 3084A0 */ UNK_RET un_803084A0(UNK_PARAMS);
+/* 3084A0 */ void un_803084A0(s16 arg0);
 /* 3087F4 */ UNK_RET un_803087F4(UNK_PARAMS);
 /* 308DC8 */ void un_80308DC8(HSD_CObj*);
 /* 308F04 */ void un_80308F04(HSD_CObj*);
