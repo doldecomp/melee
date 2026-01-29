@@ -478,7 +478,32 @@ void grVenom_80206BC4(Ground_GObj* gobj)
 
 void grVenom_80206BEC(Ground_GObj* arg) {}
 
-/// #grVenom_80206BF0
+bool grVenom_80206BF0(int arg0)
+{
+    s32 var_r30;
+    Ground_GObj* wgobj;
+    Ground* gp;
+
+    if (Ground_801C2BA4(8) != NULL) {
+        return 0;
+    }
+    if (arg0 == 2) {
+        var_r30 = HSD_Randi(5) + 8;
+    } else if (arg0 == 20) {
+        var_r30 = HSD_Randi(5) + 13;
+    } else {
+        return 0;
+    }
+    wgobj = (Ground_GObj*)grVenom_80203EAC(8);
+    if (wgobj == NULL) {
+        __assert("grvenom.c", 0x8C4, "wgobj");
+    }
+    gp = wgobj->user_data;
+    gp->gv.venom.xCC = 10;
+    gp->gv.venom.xC8 = 0;
+    gp->gv.venom.xC4 = var_r30;
+    return 1;
+}
 
 // Decompilation of grVenom_80206CB0
 
