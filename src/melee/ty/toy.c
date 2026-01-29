@@ -1629,7 +1629,184 @@ void un_803102D0(void)
 
 /// #un_80310324
 
-/// #un_80310660
+// Decompilation of un_80310660
+// Unit: main/melee/ty/toy
+
+typedef struct TyUnk25 {
+    u8 pad[0x140];
+    void* x140;
+    u8 pad2[0x10];
+    s16 x154;
+} TyUnk25;
+
+void un_80310660(s32 arg0)
+{
+    s32 idx;
+    s32 arg;
+    u8* state;
+    void** ty31;
+    void* ty28;
+    u8* ty27;
+    void* ty26;
+    TyUnk25* ty25;
+    void* ty30;
+
+    state = (u8*) un_804A26B8;
+    arg = arg0;
+    ty27 = state + 0x3F0;
+    ty31 = un_804D6E68;
+    ty28 = un_804D6ED4;
+    ty26 = un_804D6E6C;
+    ty25 = un_804D6EE0;
+    ty30 = un_804D6ED8;
+
+    if (gm_8016B498() != 0 || (u8)gm_801A4310() == 0xC) {
+        idx = *(s16*)(state + 0x3EC);
+    } else {
+        idx = *gmMainLib_8015CC90();
+    }
+
+    if (idx != 0) {
+        u16* ptr;
+        idx = un_804D6EDC[ty25->x154];
+
+        if (gm_8016B498() != 0 || (u8)gm_801A4310() == 0xC) {
+            ptr = (u16*)(state + 0x19E);
+        } else {
+            ptr = gmMainLib_8015CC78();
+        }
+
+        if (ptr[idx] & 0x8000) {
+            idx = un_804D6EDC[ty25->x154];
+
+            if (gm_8016B498() != 0 || (u8)gm_801A4310() == 0xC) {
+                ptr = (u16*)(state + 0x19E);
+            } else {
+                ptr = gmMainLib_8015CC78();
+            }
+            ptr[idx] ^= 0x8000;
+        }
+
+        *(s16*)(state + 0x3E8) = ty25->x154;
+        *(s16*)(state + 0x3EA) = *(s16*)((u8*)ty25->x140 + 0x10);
+    }
+
+    if (arg != 0) {
+        void* loopPtr;
+        s32 count;
+
+        HSD_SisLib_803A5E70();
+        *(s32*)((u8*)ty25 + 0x150) = 0;
+        *(s32*)((u8*)ty25 + 0x14C) = 0;
+        *(s32*)((u8*)ty25 + 0x148) = 0;
+        *(s32*)((u8*)ty25 + 0x144) = 0;
+
+        if (gm_8016B498() != 0 || (u8)gm_801A4310() == 0xC) {
+            idx = *(s16*)(state + 0x3EC);
+        } else {
+            idx = *gmMainLib_8015CC90();
+        }
+
+        if (idx != 0) {
+            loopPtr = ty25;
+            count = 0;
+            arg = 0;
+            do {
+                if (*(void**)((u8*)loopPtr + 0x14) != NULL) {
+                    lbArchive_80016EFC(*(void**)((u8*)loopPtr + 0x14));
+                    *(void**)((u8*)loopPtr + 0x14) = (void*)arg;
+                }
+                count += 1;
+                loopPtr = (u8*)loopPtr + 0x18;
+            } while (count < 0xD);
+        }
+
+        if (un_804D6EC8 != NULL) {
+            lbArchive_80016EFC(un_804D6EC8);
+            un_804D6EC8 = NULL;
+        }
+
+        if (*(void**)((u8*)ty28 + 0xC) != NULL) {
+            lbArchive_80016EFC(*(void**)((u8*)ty28 + 0xC));
+            *(void**)((u8*)ty28 + 0xC) = NULL;
+        }
+
+        if (*(void**)((u8*)ty30 + 0x58) != NULL) {
+            lbArchive_80016EFC(*(void**)((u8*)ty30 + 0x58));
+            arg = 0;
+            *(void**)((u8*)ty30 + 0x58) = (void*)arg;
+            if (*(void**)((u8*)ty30 + 0xC) != NULL) {
+                HSD_GObjPLink_80390228(*(void**)((u8*)ty30 + 0xC));
+                *(void**)((u8*)ty30 + 0xC) = (void*)arg;
+            }
+        }
+
+        if (*(void**)ty27 != NULL) {
+            HSD_GObjPLink_80390228(*(void**)ty27);
+            *(void**)ty27 = NULL;
+            *(void**)(ty27 + 0x8) = NULL;
+            *(void**)(ty27 + 0x4) = NULL;
+        }
+
+        if (*(void**)ty26 != NULL) {
+            HSD_GObjPLink_80390228(*(void**)ty26);
+            *(void**)ty26 = NULL;
+        }
+
+        if (*(void**)ty28 != NULL) {
+            HSD_GObjPLink_80390228(*(void**)ty28);
+            *(void**)ty28 = NULL;
+            *(void**)((u8*)ty28 + 0x10) = NULL;
+        }
+
+        if (*(void**)((u8*)ty28 + 0x4) != NULL) {
+            HSD_GObjProc_8038FED4(*(void**)((u8*)ty28 + 0x4));
+            HSD_GObjPLink_80390228(*(void**)((u8*)ty28 + 0x4));
+            *(void**)((u8*)ty28 + 0x4) = NULL;
+        }
+
+        if (*(void**)((u8*)ty28 + 0x8) != NULL) {
+            HSD_GObjPLink_80390228(*(void**)((u8*)ty28 + 0x8));
+            *(void**)((u8*)ty28 + 0x8) = NULL;
+            HSD_FogSet(NULL);
+        }
+
+        if (*(void**)((u8*)ty30 + 0xC) != NULL) {
+            HSD_GObjPLink_80390228(*(void**)((u8*)ty30 + 0xC));
+            *(void**)((u8*)ty30 + 0xC) = NULL;
+        }
+
+        if (ty31[0] != NULL) {
+            HSD_GObjPLink_80390228(ty31[0]);
+            ty31[0] = NULL;
+        }
+
+        if (ty31[1] != NULL) {
+            HSD_GObjPLink_80390228(ty31[1]);
+            ty31[1] = NULL;
+        }
+
+        if (ty31[2] != NULL) {
+            HSD_GObjPLink_80390228(ty31[2]);
+            ty31[2] = NULL;
+        }
+
+        if (ty31[3] != NULL) {
+            HSD_GObjPLink_80390228(ty31[3]);
+            ty31[3] = NULL;
+        }
+
+        if (ty31[4] != NULL) {
+            HSD_GObjPLink_80390228(ty31[4]);
+            ty31[4] = NULL;
+        }
+
+        if (ty31[5] != NULL) {
+            HSD_GObjPLink_80390228(ty31[5]);
+            ty31[5] = NULL;
+        }
+    }
+}
 
 /* 87.7% match */
 void un_803109A0(s32 arg0, s32 arg1, s32 arg2)
