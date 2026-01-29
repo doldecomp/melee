@@ -1074,7 +1074,63 @@ void un_80306D14(void)
         lbAudioAx_800237A8(0xAB, 0x7F, 0x40);
     }
 }
-/// #un_80306D70
+// Attempt 7: Try struct-based array access
+
+
+typedef struct {
+    char pad[0xFC];
+    s32 xFC_idx;
+} TyLightEntry;
+
+typedef struct {
+    char pad[0xCC];
+    char* xCC_name;
+} TyLightSymbol;
+
+void un_80306D70(s32 arg0)
+{
+    void* sp14;
+    s32 spC;
+    char* base;
+    u8* data;
+    TyLightEntry* entry;
+    TyLightSymbol* sym;
+    s32 idx;
+
+    base = un_803FDD18;
+    data = un_804D6ED4;
+
+    if (*(HSD_Archive**)(data + 0xC) != NULL && *(HSD_GObj**)(data + 0x4) != NULL) {
+        HSD_GObjProc_8038FED4(*(HSD_GObj**)(data + 0x4));
+        HSD_GObjPLink_80390228(*(HSD_GObj**)(data + 0x4));
+        *(HSD_GObj**)(data + 0x4) = NULL;
+        entry = (TyLightEntry*)(base + arg0 * 0xC);
+        idx = entry->xFC_idx;
+        sym = (TyLightSymbol*)(base + idx * 8);
+        sp14 = HSD_ArchiveGetPublicAddress(*(HSD_Archive**)(data + 0xC), sym->xCC_name);
+    } else {
+        entry = (TyLightEntry*)(base + arg0 * 0xC);
+        idx = entry->xFC_idx;
+        sym = (TyLightSymbol*)(base + idx * 8);
+        *(HSD_Archive**)(data + 0xC) = lbArchive_80016DBC(base, &sp14, sym->xCC_name);
+    }
+
+    if (sp14 != NULL) {
+        *(HSD_GObj**)(data + 0x4) = GObj_Create(2, 1, 0);
+        HSD_GObjObject_80390A70(*(HSD_GObj**)(data + 0x4), HSD_GObj_804D784A, un_80306EEC(sp14, (s32)&spC));
+        GObj_SetupGXLink(*(HSD_GObj**)(data + 0x4), HSD_GObj_LObjCallback, 0x37, 0);
+        if (spC != 0) {
+            HSD_GObjProc_8038FD54(*(HSD_GObj**)(data + 0x4), (HSD_GObjEvent)un_80306C5C, 0);
+            HSD_GObj_80390CD4(*(HSD_GObj**)(data + 0x4));
+        }
+    } else {
+        entry = (TyLightEntry*)(base + arg0 * 0xC);
+        idx = entry->xFC_idx;
+        sym = (TyLightSymbol*)(base + idx * 8);
+        OSReport(base + 0x64C, sym->xCC_name);
+        __assert("toy.c", 0x8CD, "0");
+    }
+}
 
 /// #un_80306EEC
 

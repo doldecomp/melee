@@ -37,7 +37,7 @@
 /* 306C5C */ void un_80306C5C(void* arg0);
 /* 306CF4 */ void Toy_RemoveUserData(void* ptr);
 /* 306D14 */ void un_80306D14(void);
-/* 306D70 */ void un_80306D70(s32);
+/* 306D70 */ void un_80306D70(s32 arg0);
 /* 306EEC */ void* un_80306EEC(HSD_JObj*, s32);
 /* 307018 */ void un_80307018(void);
 /* 30715C */ UNK_RET un_8030715C(UNK_PARAMS);
