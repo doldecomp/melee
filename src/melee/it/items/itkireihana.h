@@ -32,7 +32,4 @@
 /* 2D09A8 */ bool itKireihana_UnkMotion0_Coll(Item_GObj* gobj);
 /* 3F7E28 */ extern ItemStateTable it_803F7E28[];
 
-f32 it_804DD438 = 0.0f;
-f32 it_804DD43C = 2.6f;
-
 #endif
