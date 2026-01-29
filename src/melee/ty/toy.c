@@ -672,7 +672,39 @@ void un_80306D14(void)
 
 /// #un_80307BA0
 
-/// #fn_80307E84
+// Decompilation of fn_80307E84
+
+void fn_80307E84(HSD_GObj* gobj)
+{
+    s32* base;
+    ToyAnimState* state;
+    s8 idx;
+    s8 x0F_val;
+    HSD_JObj* jobj0;
+    HSD_JObj* jobj1;
+
+    base = (s32*)un_804A26B8;
+    state = (ToyAnimState*)((u8*)base + 0x3F0);
+    idx = *(s8*)((u8*)base + 0x3FE);
+    x0F_val = *(s8*)((u8*)base + 0x3FF);
+    jobj0 = (HSD_JObj*)base[idx + (0x3F4 / 4)];
+    jobj1 = (HSD_JObj*)base[(idx ^ 1) + (0x3F4 / 4)];
+
+    if (x0F_val <= 0) {
+        if (state->x10 == 1) {
+            HSD_JObjSetFlagsAll(jobj0, 0x10);
+            HSD_JObjSetFlagsAll(jobj1, 0x10);
+        }
+        state->x10 = 0;
+        HSD_JObjRemoveAnimAll(jobj0);
+        HSD_JObjRemoveAnimAll(jobj1);
+        HSD_GObjProc_8038FED4(gobj);
+    } else {
+        state->x0F = state->x0F - 1;
+        HSD_JObjAnimAll(jobj0);
+        HSD_JObjAnimAll(jobj1);
+    }
+}
 
 void un_80307F64(s32 arg0, s32 arg1)
 {
