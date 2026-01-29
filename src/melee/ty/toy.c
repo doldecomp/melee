@@ -471,7 +471,43 @@ s16 un_803062BC(s32 trophyId)
 }
 /// #un_803062EC
 
-/// #un_803063D4
+// m2c decompilation of un_803063D4
+// Unit: main/melee/ty/toy
+
+s32 un_803063D4(s32 arg0, s32 arg1, s32 arg2)
+{
+    s32 result;
+    s32 i;
+    s16* ptr;
+
+    result = arg0 + arg1 + 1;
+
+    if (lbLang_IsSettingJP() && lbLang_IsSavedLanguageUS()) {
+        ptr = un_804D6EB8;
+        i = 0;
+        while (*ptr != -1) {
+            if (*ptr == arg0) {
+                result = i + arg2 + 1;
+                break;
+            }
+            ptr++;
+            i++;
+        }
+    } else if (lbLang_IsSettingUS() && lbLang_IsSavedLanguageJP()) {
+        ptr = un_804D6EB8;
+        i = 0;
+        while (*ptr != -1) {
+            if (*ptr == arg0) {
+                result = i + arg2 + 1;
+                break;
+            }
+            ptr++;
+            i++;
+        }
+    }
+
+    return result;
+}
 
 /// #un_803064B8
 
