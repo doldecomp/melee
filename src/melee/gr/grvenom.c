@@ -162,7 +162,36 @@ void fn_802040B4(Ground_GObj* gobj)
     }
 }
 
-/// #grVenom_802040F0
+// Decompilation of grVenom_802040F0
+
+void grVenom_802040F0(Ground_GObj* gobj)
+{
+    Vec3 pos1;
+    Vec3 pos2;
+    HSD_JObj* temp;
+    Ground* gp = GET_GROUND(gobj);
+
+    Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
+    grAnime_801C7FF8(gobj, 0, 7, 0, 0.0F, 1.0F);
+    grAnime_801C8098(gobj, 0, 7, 1, 0.0F, 1.0F);
+    grAnime_801C7FF8(gobj, 0xB, 7, 2, 0.0F, 1.0F);
+    grAnime_801C7FF8(gobj, 0xD, 7, 2, 0.0F, 1.0F);
+    grAnime_801C7FF8(gobj, 0xF, 7, 2, 0.0F, 1.0F);
+    grAnime_801C7FF8(gobj, 4, 7, 3, 0.0F, 1.0F);
+    grAnime_801C7FF8(gobj, 7, 7, 3, 0.0F, 1.0F);
+    Ground_801C10B8(gobj, (HSD_GObjEvent) fn_802040B4);
+    gp->gv.venom.xC8 = -1;
+    gp->gv.venom.xCC = (u32) Ground_801C3FA4(gobj, 2);
+    gp->gv.venom.xD0 = (u32) Ground_801C3FA4(gobj, 3);
+    lb_8000B1CC((HSD_JObj*) gp->gv.venom.xCC, NULL, &pos1);
+    lb_8000B1CC((HSD_JObj*) gp->gv.venom.xD0, NULL, &pos2);
+    if (pos2.y > pos1.y) {
+        temp = (HSD_JObj*) gp->gv.venom.xCC;
+        gp->gv.venom.xCC = gp->gv.venom.xD0;
+        gp->gv.venom.xD0 = (u32) temp;
+    }
+    gp->x10_flags.b5 = 1;
+}
 
 bool grVenom_8020427C(Ground_GObj* arg)
 {
