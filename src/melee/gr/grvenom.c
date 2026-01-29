@@ -149,8 +149,6 @@ void grVenom_802040AC(Ground_GObj* arg) {}
 
 void grVenom_802040B0(Ground_GObj* arg) {}
 
-// Decompilation of fn_802040B4
-
 enum_t Stage_80225194(void);
 
 void fn_802040B4(Ground_GObj* gobj)
