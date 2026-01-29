@@ -5,6 +5,9 @@
 #include "baselib/displayfunc.h"
 #include "baselib/fog.h"
 #include "baselib/gobj.h"
+#include "baselib/gobjgxlink.h"
+#include "baselib/gobjobject.h"
+#include "baselib/gobjplink.h"
 #include "baselib/gobjproc.h"
 #include "baselib/jobj.h"
 #include "baselib/lobj.h"
@@ -83,6 +86,7 @@ extern PosArrayFull un_803B889C;
 
 /// #un_80305058
 
+/* 97.5% match */
 void un_803053C4(s32 targetValue, s32 count, s32 flag)
 {
     s16* list;
@@ -200,6 +204,7 @@ done:
     return;
 }
 
+/* 94.9% match */
 void Trophy_SetUnlockState(enum_t trophyId, bool addValue)
 {
     s32 newCount;
@@ -305,9 +310,7 @@ void Trophy_SetUnlockState(enum_t trophyId, bool addValue)
     }
 }
 
-// m2c decompilation of un_80305918
-// Unit: main/melee/ty/toy
-
+/* 98.7% match */
 void un_80305918(s8 arg0, s32 arg1, s32 arg2) {
     s16* var_r22;
     s32 var_r27;
@@ -1008,6 +1011,7 @@ void un_80306BB8(HSD_GObj* gobj)
     }
 }
 
+/* 91.1% match */
 void un_80306C5C(void* arg0)
 {
     s32 idx;
@@ -1119,9 +1123,7 @@ void un_80307018(void)
 
 /// #un_80307470
 
-// Decompilation of un_803075E8
-// Unit: main/melee/ty/toy
-
+/* 96.3% match */
 
 typedef struct ToyDataJObj {
     /* 0x00 */ void* x0;
@@ -1221,8 +1223,7 @@ void un_803075E8(s32 arg0)
 
 /// #un_80307828
 
-// Decompilation of un_803078E4
-// Unit: main/melee/ty/toy
+/* 96.8% match */
 
 typedef struct tyLightData {
     /* 0x00 */ char _pad0[0x0C];
@@ -1335,6 +1336,7 @@ void fn_80307E84(HSD_GObj* gobj)
     }
 }
 
+/* 98.4% match */
 void un_80307F64(s32 arg0, s32 arg1)
 {
     s8 idx;
@@ -1430,6 +1432,7 @@ char* un_8030813C(s32 arg0, enum_t unused)
 
 /// #un_80308250
 
+/* 91.2% match */
 void un_803082F8(s16 idx)
 {
     s32 trophyId = un_80308354(idx);
@@ -1439,6 +1442,7 @@ void un_80308328(s32 arg0)
 {
     un_803063D4((s16) arg0, 2, 0x128);
 }
+/* 68.1% match */
 s16 un_80308354(s16 idx)
 {
     s32 i;
@@ -1613,6 +1617,7 @@ void un_803102C4(s8 arg0)
     ((TyViewData*) un_804D6E6C)->x4 = arg0;
 }
 
+/* 72.4% match */
 void un_803102D0(void)
 {
     if (un_804D6ECC == NULL) {
@@ -1626,6 +1631,7 @@ void un_803102D0(void)
 
 /// #un_80310660
 
+/* 87.7% match */
 void un_803109A0(s32 arg0, s32 arg1, s32 arg2)
 {
     ToyEntry table[9];
@@ -1805,6 +1811,7 @@ check_var:
     un_804D6EA1 = 1;
 }
 
+/* 81.3% match */
 void un_80311788(void)
 {
     s32 color;
@@ -1891,6 +1898,7 @@ void un_80312018_OnFrame(void)
         gm_801A4B60();
     }
 }
+/* 91.8% match */
 void un_80312050(void)
 {
     Point3d interest;
