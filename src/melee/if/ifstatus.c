@@ -258,18 +258,17 @@ void ifStatus_802F4EDC(HSD_GObj* gobj)
     /* Find matching player state via bdnz loop */
     {
         IfDamageState* ptr;
-        s32 idx;
 
         ptr = hud->players;
-        idx = 0;
+        i = 0;
         jobj = gobj->hsd_obj;
         do {
             if (ptr->HUD_parent_entity == gobj) {
-                state = hud->players + idx;
+                state = hud->players + i;
                 goto found_player;
             }
             ptr++;
-            idx++;
+            i++;
         } while (--var_ctr != 0);
         state = NULL;
     found_player:
