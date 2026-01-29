@@ -292,7 +292,7 @@ void itKireihana_UnkMotion0_Phys(Item_GObj* gobj)
     it_8027A09C(gobj);
 }
 
-void itKireihana_UnkMotion0_Coll(Item_GObj* gobj)
+bool itKireihana_UnkMotion0_Coll(Item_GObj* gobj)
 {
-    it_8027A118(gobj, it_802D0138);
+    return it_8027A118(gobj, it_802D0138);
 }
