@@ -688,9 +688,7 @@ void un_803062EC(s32 arg0, u32 arg1, f32 farg0)
     }
 }
 
-// m2c decompilation of un_803063D4
-// Unit: main/melee/ty/toy
-
+/* 90.3% match */
 s32 un_803063D4(s16 arg0, s32 arg1, s32 arg2)
 {
     s32 result;
@@ -1097,6 +1095,7 @@ typedef struct {
     char* xCC_name;
 } TyLightSymbol;
 
+/* 82.6% match */
 void un_80306D70(s32 arg0)
 {
     void* sp14;
@@ -1142,7 +1141,7 @@ void un_80306D70(s32 arg0)
     }
 }
 
-/* 78.7% match */
+/* 96.3% match */
 static char un_804D5A54[] = "lobj.h";
 static char un_804D5A5C[] = "lobj";
 
@@ -1191,6 +1190,7 @@ HSD_LObj* un_80306EEC(void* list_arg, s32 hasAnim_arg)
             idx += 1;
         }
         if (prev != NULL) {
+            /* FAKE MATCH: Dead code needed for binary match */
             if (prev == NULL) {
                 __assert(un_804D5A54, 0x136, un_804D5A5C);
             }
@@ -1260,7 +1260,7 @@ void un_80307018(void)
     }
 }
 
-/* 78.7% match */
+/* 92.2% match */
 typedef struct TyGObjX8_ {
     u8 pad[0x28];
     HSD_CObj* x28;
@@ -1428,8 +1428,6 @@ typedef struct ToyData {
     /* 0x50 */ HSD_Archive* archive;
     /* 0x54 */ u32 x54;
 } ToyData;
-
-void un_80306BB8(HSD_GObj*);
 
 void un_803075E8(s32 arg0)
 {
@@ -1719,9 +1717,7 @@ void un_80307F64(s32 arg0, s32 arg1)
         }
     }
 }
-// Decompilation of un_8030813C
-// Unit: main/melee/ty/toy
-
+/* 95.7% match */
 char* un_8030813C(s16 arg0, enum_t unused)
 {
     char* ptr;
@@ -1767,7 +1763,6 @@ char* un_8030813C(s16 arg0, enum_t unused)
 
 /// #un_80308250
 
-/* 91.2% match */
 void un_803082F8(s16 idx)
 {
     s32 trophyId = un_80308354(idx);
@@ -2268,7 +2263,7 @@ void un_803102D0(void)
     }
 }
 
-/* 69.1% match */
+/* 96.3% match */
 extern f32 un_804DDCD8;
 extern f32 un_804DDCF0;
 
@@ -2466,6 +2461,7 @@ typedef struct TyUnk25 {
     s16 x154;
 } TyUnk25;
 
+/* 95.2% match */
 void un_80310660(s32 arg0)
 {
     s32 idx;
