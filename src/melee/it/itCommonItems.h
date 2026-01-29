@@ -1153,4 +1153,23 @@ typedef struct itFushigibanaAttributes {
     f32 x8;
 } itFushigibanaAttributes;
 
+typedef struct itkireihana_ItemVars {
+    /* xDD4 */ f32 x0;
+    /* xDD8 */ u32 x4;
+    /* xDDC */ f32 x8;
+    /* xDD8 */ u8 pad[0x60 - 0xC];
+    /* xE34 */ f32 fall_speed;
+    /* xE38 */ int timer_unk0;
+    /* xE3C */ int timer_unk1;
+    /* xE40 */ int timer_unk2;
+    /* xE44 */ f32 x70;
+} itkireihana_ItemVars;
+
+typedef struct itkireihanaAttributes {
+    f32 x0;
+    u32 x4;
+    u32 x8;
+    u32 xC;
+} itkireihanaAttributes;
+
 #endif
