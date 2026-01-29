@@ -123,9 +123,9 @@ void itKireihana_UnkMotion1_Phys(Item_GObj* gobj)
 bool itKireihana_UnkMotion1_Coll(Item_GObj* gobj)
 {
     Item* item = GET_ITEM(gobj);
-    if (!(it_8026DA08(gobj)) 
-           && (item->xDD4_itemVar.kireihana.x70 < 0.0f) 
-           && (item->xDD4_itemVar.kireihana.x8 > 0.0f)) 
+    if (!(it_8026DA08(gobj))
+           && (item->xDD4_itemVar.kireihana.x70 < 0.0f)
+           && (item->xDD4_itemVar.kireihana.x8 > 0.0f))
     {
         it_802D03F8(gobj);
     }
@@ -231,9 +231,9 @@ void itKireihana_UnkMotion3_Phys(Item_GObj* gobj)
 bool itKireihana_UnkMotion3_Coll(Item_GObj* gobj)
 {
     Item* item = GET_ITEM(gobj);
-    if ((!it_8026DA08(gobj)) 
-            && (item->xDD4_itemVar.kireihana.x70 < 0.0f) 
-            && (item->xDD4_itemVar.kireihana.x8 > 0.0f)) 
+    if ((!it_8026DA08(gobj))
+            && (item->xDD4_itemVar.kireihana.x70 < 0.0f)
+            && (item->xDD4_itemVar.kireihana.x8 > 0.0f))
     {
         it_802D07C0(gobj);
     }
