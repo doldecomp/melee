@@ -228,16 +228,17 @@ extern u8 ifStatus_804D57AC[3];  /* End color (high damage) */
 
 void ifStatus_802F4EDC(HSD_GObj* gobj)
 {
+    HudIndex* hud;
     IfDamageState* state;
     HSD_JObj* jobj;
     HSD_JObj* digit_jobj;
+    s32 is_stamina;
+    HSD_MatAnimJoint** anim_base;
     HSD_TObj* tobj;
     HSD_MObj* mobj;
     HSD_DObj* dobj;
-    HudIndex* hud;
-    HSD_MatAnimJoint** anim_base;
     s32 i;
-    s32 is_stamina;
+    s32 var_ctr;
     u8 ones_digit;
     u8 tens_digit;
     u8 hundreds_digit;
@@ -246,7 +247,6 @@ void ifStatus_802F4EDC(HSD_GObj* gobj)
     f32 tens_offset;
     f32 hundreds_offset;
     f32 pos;
-    s32 var_ctr;
     s16 clamped_damage;
     f32 factor;
     GXColor color;
