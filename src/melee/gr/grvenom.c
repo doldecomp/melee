@@ -66,7 +66,35 @@ void grVenom_80203FCC(Ground_GObj* arg) {}
 
 void grVenom_80203FD0(Ground_GObj* arg) {}
 
-/// #grVenom_80203FD4
+// Decompilation of grVenom_80203FD4
+
+#include "gr/grvenom.h"
+#include "gr/inlines.h"
+#include "gr/ground.h"
+#include "gr/granime.h"
+
+void grVenom_80203FD4(Ground_GObj* gobj)
+{
+    HSD_JObj* jobj1;
+    HSD_JObj* jobj4;
+    HSD_JObj* jobj3;
+    HSD_JObj* jobj2;
+    HSD_JObj* jobj5;
+    HSD_JObj* jobj6;
+    Ground* gp = gobj->user_data;
+
+    grAnime_801C8138(gobj, gp->map_id, 0);
+    gp->x11_flags.b012 = 2;
+    jobj6 = Ground_801C3FA4(gobj, 6);
+    jobj5 = Ground_801C3FA4(gobj, 5);
+    jobj2 = Ground_801C3FA4(gobj, 2);
+    jobj3 = Ground_801C3FA4(gobj, 3);
+    jobj4 = Ground_801C3FA4(gobj, 4);
+    jobj1 = Ground_801C3FA4(gobj, 1);
+    Ground_801C4E70(jobj1, jobj4, jobj3, jobj2, jobj5, jobj6);
+    gp = gobj->user_data;
+    gp->x10_flags.b2 = 0;
+}
 
 bool grVenom_802040A4(Ground_GObj* arg)
 {
