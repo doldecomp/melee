@@ -325,16 +325,14 @@ void ifStatus_802F4EDC(HSD_GObj* gobj)
         /* Set up TObj animations for digit JObjs */
         {
             HSD_MatAnimJoint* mat_anim;
-            HSD_TexAnim* tex_anim;
 
             mat_anim = ((HSD_MatAnimJoint*) anim_base[0])->child->next->next;
-            tex_anim = mat_anim->matanim->texanim;
 
             /* Ones digit */
             digit_jobj = state->jobjs[Ones];
             tobj = digit_jobj->u.dobj->mobj->tobj;
             ones_digit = state->damage_percent % 10;
-            HSD_TObjAddAnimAll(tobj, tex_anim);
+            HSD_TObjAddAnimAll(tobj, mat_anim->matanim->texanim);
             HSD_TObjReqAnimAll(tobj, 2.0F * ones_digit);
             HSD_AObjSetRate(tobj->aobj, 0.0F);
 
@@ -342,7 +340,7 @@ void ifStatus_802F4EDC(HSD_GObj* gobj)
             digit_jobj = state->jobjs[Tens];
             tobj = digit_jobj->u.dobj->mobj->tobj;
             tens_digit = (state->damage_percent % 100) / 10;
-            HSD_TObjAddAnimAll(tobj, tex_anim);
+            HSD_TObjAddAnimAll(tobj, mat_anim->matanim->texanim);
             HSD_TObjReqAnimAll(digit_jobj->u.dobj->mobj->tobj,
                                2.0F * tens_digit);
             HSD_AObjSetRate(digit_jobj->u.dobj->mobj->tobj->aobj, 0.0F);
@@ -351,7 +349,7 @@ void ifStatus_802F4EDC(HSD_GObj* gobj)
             digit_jobj = state->jobjs[Hundreds];
             tobj = digit_jobj->u.dobj->mobj->tobj;
             hundreds_digit = (state->damage_percent % 1000) / 100;
-            HSD_TObjAddAnimAll(tobj, tex_anim);
+            HSD_TObjAddAnimAll(tobj, mat_anim->matanim->texanim);
             HSD_TObjReqAnimAll(tobj, 2.0F * hundreds_digit);
             HSD_AObjSetRate(tobj->aobj, 0.0F);
         }
@@ -470,18 +468,28 @@ void ifStatus_802F4EDC(HSD_GObj* gobj)
 
     /* Update JObj positions when animating */
     if (lb_8000B09C(jobj)) {
+        f32* tx;
+        f32* ty;
+        HSD_JObj** jp;
+
+        tx = state->translation_x;
+        ty = state->translation_y;
+        jp = state->jobjs;
         for (i = 0; i < 4; i++) {
-            digit_jobj = state->jobjs[i];
+            digit_jobj = *jp;
             if (digit_jobj == NULL) {
                 __assert("jobj.h", 993, "jobj");
             }
-            state->translation_x[i] = digit_jobj->translate.x;
+            *tx = digit_jobj->translate.x;
 
-            digit_jobj = state->jobjs[i];
+            digit_jobj = *jp;
             if (digit_jobj == NULL) {
                 __assert("jobj.h", 1006, "jobj");
             }
-            state->translation_y[i] = digit_jobj->translate.y;
+            *ty = digit_jobj->translate.y;
+            tx++;
+            ty++;
+            jp++;
         }
     }
 
@@ -491,7 +499,7 @@ void ifStatus_802F4EDC(HSD_GObj* gobj)
 
     /* Position percent sign */
     digit_jobj = state->jobjs[Percent];
-    pos = state->translation_y[Percent] - ones_offset;
+    pos = state->translation_x[Percent] - ones_offset;
     if (digit_jobj == NULL) {
         __assert("jobj.h", 932, "jobj");
     }
@@ -501,7 +509,7 @@ void ifStatus_802F4EDC(HSD_GObj* gobj)
     /* Position tens digit */
     digit_offset = ones_offset + tens_offset;
     digit_jobj = state->jobjs[Tens];
-    pos = state->translation_y[Tens] + digit_offset;
+    pos = state->translation_x[Tens] + digit_offset;
     if (digit_jobj == NULL) {
         __assert("jobj.h", 932, "jobj");
     }
@@ -512,7 +520,7 @@ void ifStatus_802F4EDC(HSD_GObj* gobj)
     hundreds_offset =
         ((state->damage_percent % 1000) / 100 == 1) ? 0.5069F : 0.0F;
     digit_jobj = state->jobjs[Hundreds];
-    pos = state->translation_y[Hundreds] +
+    pos = state->translation_x[Hundreds] +
           (digit_offset + tens_offset + hundreds_offset);
     if (digit_jobj == NULL) {
         __assert("jobj.h", 932, "jobj");
