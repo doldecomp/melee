@@ -22,7 +22,7 @@
 /* 3060BC */ float un_803060BC(int, int);
 /* 3062BC */ s16 un_803062BC(s32 trophyId);
 /* 3062EC */ void un_803062EC(s32 arg0, u32 arg1, f32 farg0);
-/* 3063D4 */ long un_803063D4(long, long, long);
+/* 3063D4 */ s32 un_803063D4(s16, s32, s32);
 /* 3064B8 */ s16 un_803064B8(s16 arg0, s8 arg1);
 /* 30663C */ void un_8030663C(void);
 /* 3067BC */ void un_803067BC(s32, s32);
@@ -48,7 +48,7 @@
 /* 307BA0 */ HSD_JObj* un_80307BA0(HSD_JObj*, s16);
 /* 307E84 */ void fn_80307E84(HSD_GObj* gobj);
 /* 307F64 */ void un_80307F64(s32, s32);
-/* 30813C */ char* un_8030813C(s32 arg0, enum_t unused); /// TODO :: fill out the struct that
+/* 30813C */ char* un_8030813C(s16 arg0, enum_t unused); /// TODO :: fill out the struct that
                                            /// this uses/returns
 /* 308250 */ UNK_RET un_80308250(UNK_PARAMS);
 /* 3082F8 */ void un_803082F8(s16 idx);

@@ -691,7 +691,7 @@ void un_803062EC(s32 arg0, u32 arg1, f32 farg0)
 // m2c decompilation of un_803063D4
 // Unit: main/melee/ty/toy
 
-s32 un_803063D4(s32 arg0, s32 arg1, s32 arg2)
+s32 un_803063D4(s16 arg0, s32 arg1, s32 arg2)
 {
     s32 result;
     s32 i;
@@ -1710,7 +1710,7 @@ void un_80307F64(s32 arg0, s32 arg1)
 // Decompilation of un_8030813C
 // Unit: main/melee/ty/toy
 
-char* un_8030813C(s32 arg0, enum_t unused)
+char* un_8030813C(s16 arg0, enum_t unused)
 {
     char* ptr;
     s32 i;
