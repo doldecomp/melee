@@ -58,6 +58,9 @@ extern void* un_804D6EBC;
 
 extern s16* un_804D6E64;
 
+extern char un_803FDD18[];
+extern void* un_804D6ED8;
+
 /// #un_80305058
 
 void un_803053C4(s32 targetValue, s32 count, s32 flag)
@@ -872,7 +875,105 @@ void un_80306D14(void)
 
 /// #un_80307470
 
-/// #un_803075E8
+// Decompilation of un_803075E8
+// Unit: main/melee/ty/toy
+
+
+typedef struct ToyDataJObj {
+    /* 0x00 */ void* x0;
+    /* 0x04 */ struct ToyDataJObj* x4;
+    /* 0x08 */ u8 pad08[0x40 - 0x08];
+    /* 0x40 */ s32 x40;
+} ToyDataJObj;
+
+typedef struct ToyDataX8 {
+    /* 0x00 */ u8 pad0[0x28];
+    /* 0x28 */ ToyDataJObj* x28;
+} ToyDataX8;
+
+typedef struct ToyData {
+    /* 0x00 */ void* x0;
+    /* 0x04 */ HSD_GObj* gobj;
+    /* 0x08 */ ToyDataX8* x8;
+    /* 0x0C */ u8 pad0C[0x50 - 0x0C];
+    /* 0x50 */ HSD_Archive* archive;
+    /* 0x54 */ u32 x54;
+} ToyData;
+
+void un_80306BB8(HSD_GObj*);
+
+void un_803075E8(s32 arg0)
+{
+    char* data;
+    ToyData* td;
+    void* joint;
+    char** ptr;
+    HSD_JObj* jobj;
+    void* animjoint;
+    void* matanim;
+    void* shapanim;
+    ToyDataJObj* tdjobj;
+
+    data = un_803FDD18;
+    td = un_804D6ED8;
+
+    if (td->archive == NULL) {
+        OSReport(data + 0x6A0);
+        __assert("toy.c", 0xA41, "0");
+    }
+
+    if (td->gobj != NULL) {
+        HSD_GObjProc_8038FED4(td->gobj);
+        HSD_GObjPLink_80390228(td->gobj);
+        td->gobj = NULL;
+    }
+
+    if (td->x54 != 0) {
+        ((ToyData*)un_804D6ED8)->x8->x28->x40 = 9;
+        ((ToyData*)un_804D6ED8)->x8->x28->x4->x40 = 9;
+        ((ToyData*)un_804D6ED8)->x8->x28->x4->x4->x40 = 9;
+    }
+
+    ptr = (char**)(data + arg0 * 4);
+    if (*(ptr += 0x69) != NULL) {
+        joint = HSD_ArchiveGetPublicAddress(td->archive, *ptr);
+        if (joint != NULL) {
+            td->gobj = GObj_Create(4, 7, 0);
+            jobj = HSD_JObjLoadJoint(joint);
+            HSD_GObjObject_80390A70(td->gobj, HSD_GObj_804D7849, jobj);
+            GObj_SetupGXLink(td->gobj, HSD_GObj_JObjCallback, 0x33, 0);
+
+            ptr = (char**)(data + arg0 * 0xC);
+            animjoint = HSD_ArchiveGetPublicAddress(td->archive, ptr[0x290 / 4]);
+            matanim = HSD_ArchiveGetPublicAddress(td->archive, ptr[0x294 / 4]);
+            shapanim = HSD_ArchiveGetPublicAddress(td->archive, ptr[0x298 / 4]);
+
+            if (animjoint != NULL || matanim != NULL || shapanim != NULL) {
+                HSD_JObjAddAnimAll(jobj, animjoint, matanim, shapanim);
+                HSD_JObjReqAnimAll(jobj, 0.0F);
+                HSD_JObjAnimAll(jobj);
+                HSD_GObjProc_8038FD54(td->gobj, un_80306BB8, 0);
+                HSD_GObj_80390CD4(td->gobj);
+            }
+        } else {
+            OSReport(data + 0x718, *ptr);
+            __assert("toy.c", 0xA75, "0");
+        }
+    } else if (td->x54 != 0) {
+        tdjobj = ((ToyData*)un_804D6ED8)->x8->x28;
+        switch (arg0) {
+        case 2:
+            break;
+        case 4:
+            tdjobj = tdjobj->x4;
+            break;
+        case 5:
+            tdjobj = tdjobj->x4->x4;
+            break;
+        }
+        tdjobj->x40 = 8;
+    }
+}
 
 /// #un_80307828
 
