@@ -328,9 +328,7 @@ bool grVenom_8020427C(Ground_GObj* arg)
 }
 
 // Decompilation of grVenom_80204284
-// @TODO: Complete implementation (currently 68.27% match)
-// Needs: Control flow fixes, proper timer handling
-#if 0
+// @TODO: Currently 97.29% match - needs minor register allocation fix
 void grVenom_80204284(Ground_GObj* gobj)
 {
     Ground* gp;
@@ -378,7 +376,6 @@ void grVenom_80204284(Ground_GObj* gobj)
     grVenom_8020362C();
     Ground_801C2FE0(gobj);
 }
-#endif
 
 void grVenom_80204424(Ground_GObj* arg) {}
 
@@ -766,10 +763,7 @@ bool grVenom_80205750(Ground_GObj* arg)
 void grVenom_80205AD0(Ground_GObj* arg) {}
 
 // Decompilation of grVenom_80205AD4
-// @TODO: Complete implementation (currently 72.36% match)
-// Needs: grVe_804D6A30 struct fields, proper GroundVenom struct with xE0-x100
-// fields
-#if 0
+// @TODO: Currently 92.66% match - needs minor code ordering fix
 void grVenom_80205AD4(Ground_GObj* gobj)
 {
     u8* base;
@@ -783,7 +777,7 @@ void grVenom_80205AD4(Ground_GObj* gobj)
     Ground* other_gp;
     HSD_JObj* jobj2;
     f32 scl;
-    f32* attr;
+    void* attr;
 
     base = (u8*)&grVe_803E5348;
     gp = gobj->user_data;
@@ -853,7 +847,6 @@ void grVenom_80205AD4(Ground_GObj* gobj)
     *(s32*)((u8*)gp + 0xFC) = zero;
     *(s32*)((u8*)gp + 0x100) = HSD_Randi(2);
 }
-#endif
 
 bool grVenom_80205DF0(Ground_GObj* arg)
 {
@@ -905,10 +898,9 @@ s32 grVenom_80205E84(Vec2* pos)
 
 void grVenom_80206870(Ground_GObj* arg) {}
 
-// Decompilation of grVenom_80206874
-// @TODO: Complete implementation (currently 64.02% match)
-// Needs: grVe_804D6A30 struct fields, proper GroundVenom struct
 #if 0
+// Decompilation of grVenom_80206874
+// @TODO: Currently 32.92% match - below 50% threshold, needs significant work
 void grVenom_80206874(Ground_GObj* gobj)
 {
     u8* base;
@@ -973,6 +965,8 @@ void grVenom_80206874(Ground_GObj* gobj)
     // HSD_JObjSetScaleX/Y/Z(jobj, scaled);
 }
 #endif
+
+/// #grVenom_80206874
 
 bool grVenom_80206B68(Ground_GObj* arg)
 {
