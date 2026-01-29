@@ -234,7 +234,8 @@ void ifStatus_802F4EDC(HSD_GObj* gobj)
     HSD_TObj* tobj;
     HSD_MObj* mobj;
     HSD_DObj* dobj;
-    void* anim_textures;
+    HudIndex* hud;
+    HSD_MatAnimJoint** anim_base;
     s32 i;
     s32 is_stamina;
     u8 ones_digit;
@@ -250,28 +251,29 @@ void ifStatus_802F4EDC(HSD_GObj* gobj)
     f32 factor;
     GXColor color;
 
-    /* Find matching player state via bdnz loop */
+    PAD_STACK(96);
+    hud = &ifStatus_HudInfo;
     var_ctr = 6;
+
+    /* Find matching player state via bdnz loop */
     {
-        IfDamageState* ptr = &ifStatus_HudInfo.players[0];
-        s32 idx = 0;
+        IfDamageState* ptr;
+        s32 idx;
 
+        ptr = hud->players;
+        idx = 0;
         jobj = gobj->hsd_obj;
-
         do {
             if (ptr->HUD_parent_entity == gobj) {
-                state = &ifStatus_HudInfo.players[idx];
-                goto found;
+                state = hud->players + idx;
+                goto found_player;
             }
             ptr++;
             idx++;
         } while (--var_ctr != 0);
         state = NULL;
-    }
-found:
-
-    if (state == NULL) {
-        return;
+    found_player:
+        (void) 0;
     }
 
     /* Check for death animation flag (bit 7 of flags byte at offset 0x10) */
@@ -289,23 +291,24 @@ found:
         state->flags.animation_status_id = 1;
 
         HSD_JObjRemoveAnim(jobj);
-        lb_8000C07C(jobj, 1,
-                    (HSD_AnimJoint**) ifStatus_HudInfo.jobj_desc_parent,
-                    (HSD_MatAnimJoint**) ifStatus_HudInfo.janim_selection_joints,
-                    (HSD_ShapeAnimJoint**) ifStatus_HudInfo.janim_selection_textures);
+
+        /* Cache pointer to animation base at offset 0x260 */
+        anim_base = (HSD_MatAnimJoint**) &hud->janim_selection_joints;
+
+        lb_8000C07C(jobj, 1, (HSD_AnimJoint**) hud->jobj_desc_parent,
+                    (HSD_MatAnimJoint**) anim_base[0],
+                    (HSD_ShapeAnimJoint**) anim_base[1]);
         HSD_JObjReqAnimAll(jobj, 0.0F);
 
         /* Set up TObj animation for Percent sign */
         digit_jobj = state->jobjs[Percent];
         if (digit_jobj != NULL) {
-            HSD_MatAnimJoint** mat_anim_arr;
             HSD_MatAnimJoint* mat_anim;
             HSD_TexAnim* tex_anim;
 
             tobj = digit_jobj->u.dobj->mobj->tobj;
-            mat_anim_arr = (HSD_MatAnimJoint**)
-                ifStatus_HudInfo.janim_selection_textures;
-            mat_anim = mat_anim_arr[0][0].next->next->next;
+            mat_anim =
+                ((HSD_MatAnimJoint*) anim_base[0])->child->next->next->next;
             tex_anim = mat_anim->matanim->texanim;
             HSD_TObjAddAnimAll(tobj, tex_anim);
             if (Player_GetMoreFlagsBit2((s8) state->player_slot)) {
@@ -321,13 +324,10 @@ found:
 
         /* Set up TObj animations for digit JObjs */
         {
-            HSD_MatAnimJoint** mat_anim_arr;
             HSD_MatAnimJoint* mat_anim;
             HSD_TexAnim* tex_anim;
 
-            mat_anim_arr = (HSD_MatAnimJoint**)
-                ifStatus_HudInfo.janim_selection_textures;
-            mat_anim = mat_anim_arr[0][0].next->next;
+            mat_anim = ((HSD_MatAnimJoint*) anim_base[0])->child->next->next;
             tex_anim = mat_anim->matanim->texanim;
 
             /* Ones digit */
@@ -343,8 +343,9 @@ found:
             tobj = digit_jobj->u.dobj->mobj->tobj;
             tens_digit = (state->damage_percent % 100) / 10;
             HSD_TObjAddAnimAll(tobj, tex_anim);
-            HSD_TObjReqAnimAll(tobj, 2.0F * tens_digit);
-            HSD_AObjSetRate(tobj->aobj, 0.0F);
+            HSD_TObjReqAnimAll(digit_jobj->u.dobj->mobj->tobj,
+                               2.0F * tens_digit);
+            HSD_AObjSetRate(digit_jobj->u.dobj->mobj->tobj->aobj, 0.0F);
 
             /* Hundreds digit */
             digit_jobj = state->jobjs[Hundreds];
@@ -359,14 +360,12 @@ found:
     HSD_JObjAnimAll(jobj);
 
     /* Update TObj animations for all digits */
+    anim_base = (HSD_MatAnimJoint**) &hud->janim_selection_joints;
     {
-        HSD_MatAnimJoint** mat_anim_arr;
         HSD_MatAnimJoint* mat_anim;
         HSD_TexAnim* tex_anim;
 
-        mat_anim_arr = (HSD_MatAnimJoint**)
-            ifStatus_HudInfo.janim_selection_textures;
-        mat_anim = mat_anim_arr[0][0].next->next;
+        mat_anim = ((HSD_MatAnimJoint*) anim_base[0])->child->next->next;
         tex_anim = mat_anim->matanim->texanim;
 
         /* Ones digit */
