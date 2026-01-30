@@ -87,8 +87,8 @@ void fn_8018A970(int arg0)
 
 /// #fn_8018DF68
 
-// @TODO: Currently 77.57% match - needs register allocation fix
-void fn_8018E46C(HSD_GObj* gobj, int arg1)
+// @TODO: Currently 98.8% match - permuter couldn't improve beyond score 140
+void fn_8018E46C(HSD_GObj* gobj, int unused)
 {
     void* data;
     s32 temp;
@@ -347,30 +347,33 @@ int fn_8018F4A0(void)
 }
 
 
-s32 fn_8018F508(s32* arg0)
+/// Counts available tournament slots and returns the last found index.
+s32 fn_8018F508(s32* out_index)
 {
-    s32 var_r31;
-    u8* temp_r3;
+    s32 count;
+    u8* base_ptr;
+    u8* slot_ptr;
     s32 i;
 
-    var_r31 = 0;
-    temp_r3 = (u8*)&lbl_80473AB8[fn_8018F74C()];
+    count = 0;
+    base_ptr = (u8*)&lbl_80473AB8[fn_8018F74C()];
+    slot_ptr = base_ptr;
 
-    if (temp_r3[0x0] == 0) {
+    if (slot_ptr[0x0] == 0) {
         return -1;
     }
 
     for (i = 0; i < 4; i++) {
-        if (temp_r3[0x4E] != 3) {
-            if (arg0 != NULL) {
-                *arg0 = i;
+        if (slot_ptr[0x4E] != 3) {
+            if (out_index != NULL) {
+                *out_index = i;
             }
-            var_r31++;
+            count++;
         }
-        temp_r3 += 0x2C;
+        slot_ptr += 0x2C;
     }
 
-    return var_r31;
+    return count;
 }
 
 #pragma push
@@ -388,10 +391,12 @@ char* fn_8018F5F0(void)
 /// ???
 /// tournament uses the user data as just an int
 /// it controls various menu jobj states ie animation state, visibility, etc
+#pragma dont_inline on
 u32 fn_8018F62C(HSD_GObj* gobj)
 {
     return (u32) gobj->user_data;
 }
+#pragma dont_inline off
 
 #pragma push
 #pragma dont_inline on
@@ -479,7 +484,7 @@ int fn_8018F808(void)
     return noerrcount;
 }
 
-
+// @TODO: Currently 78.75% match - needs register allocation fix
 void fn_8018F888(void)
 {
     s32 idx;
@@ -615,7 +620,7 @@ done2:
     *(base + idx2 * 0xDC + 0xFD) = 0;
 }
 
-// @TODO: Currently ~50% match - needs mtctr/bdnz loop pattern
+/// @TODO: Currently 84.63% match - needs loop pattern fix
 
 void fn_8018FA24(void)
 {
@@ -754,17 +759,18 @@ void fn_8019027C(UNK_T lights)
 
 static HSD_GObj* lbl_804D663C;
 
-void fn_801902F0(int arg0)
+/// Initializes SIS library text rendering for tournament mode.
+void fn_801902F0(int sis_param)
 {
-    s32 var_r31;
+    s32 value;
     PAD_STACK(8);
 
-    var_r31 = arg0;
+    value = sis_param;
     HSD_SisLib_803A5E70();
     if (*(s32*)((u8*)&gm_804771C4 + 0x1C) == 0) {
-        var_r31 = 0;
+        value = 0;
     }
-    lbl_804D663C = (HSD_GObj*)HSD_SisLib_803A611C(0, (HSD_GObj*)var_r31, 9, 0x12, 0, 3, 0, 0x13);
+    lbl_804D663C = (HSD_GObj*)HSD_SisLib_803A611C(0, (HSD_GObj*)value, 9, 0x12, 0, 3, 0, 0x13);
 }
 
 HSD_GObj* fn_8019035C(bool arg0, DynamicModelDesc* model, int arg2, int arg3,
@@ -788,11 +794,13 @@ HSD_GObj* fn_8019035C(bool arg0, DynamicModelDesc* model, int arg2, int arg3,
     return gobj;
 }
 
+#pragma dont_inline on
 void fn_8019044C(HSD_JObj* jobj, float arg1)
 {
     HSD_JObjReqAnimAll(jobj, arg1);
     HSD_JObjAnimAll(jobj);
 }
+#pragma dont_inline off
 
 void fn_80190480(float arg8)
 {
@@ -1056,7 +1064,7 @@ void fn_80191154(HSD_GObj* gobj)
     (*xE_ptr)++;
 }
 
-
+// @TODO: Currently 78.85% match - needs register allocation fix
 void fn_80191240(HSD_GObj* gobj)
 {
     TmData* tm;
@@ -1141,24 +1149,25 @@ void fn_80191678(HSD_GObj* gobj)
     HSD_JObjSetFlagsAll(jobj, 0x10);
 }
 
-// @TODO: Currently 87.13% match - needs register allocation fix
-void fn_8019175C(void* arg0)
+/// @TODO: Currently 89.68% match - permuter couldn't improve
+/// Updates menu option selection animation.
+void fn_8019175C(void* gobj)
 {
-    HSD_JObj* sp14;
-    HSD_JObj* spC;
-    HSD_JObj* sp10;
+    HSD_JObj* first_child;
+    HSD_JObj* option_jobj_a;
+    HSD_JObj* option_jobj_b;
     u8* counter;
     s32 i;
     TmData* tm;
     HSD_JObj* jobj;
-    HSD_JObj* temp_r29;
-    HSD_JObj* r3;
+    HSD_JObj* root_jobj;
+    HSD_JObj* child;
     HSD_JObj** base;
 
     tm = gm_8018F634();
-    fn_8018F62C(arg0);
-    temp_r29 = *(HSD_JObj**)((u8*)arg0 + 0x28);
-    jobj = temp_r29;
+    fn_8018F62C(gobj);
+    root_jobj = *(HSD_JObj**)((u8*)gobj + 0x28);
+    jobj = root_jobj;
 
     if (tm->cur_option >= 9) {
         HSD_JObjSetFlagsAll(jobj, 0x10);
@@ -1167,34 +1176,34 @@ void fn_8019175C(void* arg0)
 
     HSD_JObjClearFlagsAll(jobj, 0x10);
 
-    if (temp_r29 == NULL) {
-        sp14 = NULL;
+    if (root_jobj == NULL) {
+        first_child = NULL;
     } else {
-        sp14 = temp_r29->child;
+        first_child = root_jobj->child;
     }
 
-    if (sp14 == NULL) {
-        r3 = NULL;
+    if (first_child == NULL) {
+        child = NULL;
     } else {
-        r3 = sp14->next;
+        child = first_child->next;
     }
 
-    if (r3 == NULL) {
-        r3 = NULL;
+    if (child == NULL) {
+        child = NULL;
     } else {
-        r3 = r3->next;
+        child = child->next;
     }
 
-    if (r3 == NULL) {
-        spC = NULL;
+    if (child == NULL) {
+        option_jobj_a = NULL;
     } else {
-        spC = r3->next;
+        option_jobj_a = child->next;
     }
 
-    if (spC == NULL) {
-        sp10 = NULL;
+    if (option_jobj_a == NULL) {
+        option_jobj_b = NULL;
     } else {
-        sp10 = spC->next;
+        option_jobj_b = option_jobj_a->next;
     }
 
     if (tm->cur_option >= 6) {
@@ -1203,7 +1212,7 @@ void fn_8019175C(void* arg0)
             *counter = 0;
         }
         i = 0;
-        base = &spC;
+        base = &option_jobj_a;
         do {
             if (i != tm->cur_option - 6) {
                 fn_8019044C(base[i], 0.0F);
@@ -1306,7 +1315,8 @@ void fn_80191A54(HSD_GObj* gobj)
 
 static u8 lbl_804799B8_data[0x40];
 
-void fn_80191B5C(void* arg0)
+/// Updates button highlight animation based on current menu option.
+void fn_80191B5C(void* gobj)
 {
     u8* timers;
     TmData* tm;
@@ -1314,7 +1324,7 @@ void fn_80191B5C(void* arg0)
 
     timers = lbl_804799B8_data;
     tm = gm_8018F634();
-    jobj = *(HSD_JObj**)((u8*)arg0 + 0x28);
+    jobj = *(HSD_JObj**)((u8*)gobj + 0x28);
 
     if (tm->cur_option <= 9) {
         HSD_JObjSetFlagsAll(jobj, 0x10);
@@ -1374,7 +1384,7 @@ void fn_80191CA4(HSD_GObj* gobj)
 /// Updates tournament menu cursor JObj visibility and position.
 /// #fn_8019237C
 
-// @TODO: Currently 79.2% match - needs regalloc fixes
+/// @TODO: Currently 92.46% match - permuter couldn't improve
 void fn_8019249C(HSD_GObj* gobj)
 {
     TmData* tmdata;
@@ -1439,7 +1449,7 @@ void fn_80192690(HSD_GObj* gobj)
 }
 #pragma pop
 
-// @TODO: Currently 87.50% match - needs register allocation fix
+/// @TODO: Currently 96.8% match - permuter couldn't improve
 void fn_80192758(HSD_GObj* gobj)
 {
     TmData* tmdata;
@@ -1539,7 +1549,7 @@ void fn_80193230(void)
 
 extern u8 lbl_803D9F80[];
 
-// @TODO: Currently 83.33% match - needs register allocation fix
+/// @TODO: Currently 87.58% match - permuter couldn't improve
 void fn_801949B4(s32* arg0, u32 arg1, u32 arg2)
 {
     u8* table;
@@ -1611,7 +1621,7 @@ void fn_801949B4(s32* arg0, u32 arg1, u32 arg2)
     }
 }
 
-// @TODO: Currently 92.86% match - needs register allocation fix
+/// @TODO: Currently 84.75% match - needs register allocation fix
 void fn_80194BC4(s32* arg0, u32 arg1, u32 arg2)
 {
     int* match_type_ptr;
@@ -1688,33 +1698,34 @@ void fn_80194BC4(s32* arg0, u32 arg1, u32 arg2)
     }
 }
 
-
-void fn_80194D84(s32* arg0, u32 arg1, u32 arg2)
+// @TODO: Currently 97.2% match - permuter couldn't improve
+/// Handles button input for tournament mode menu navigation.
+void fn_80194D84(s32* state, u32 buttons, u32 trigger)
 {
-    s32 temp_r0;
+    s32 cur_state;
     TmData* tm;
 
-    if (arg1 & 0x40001) {
-        if (*arg0 > 6) {
+    if (buttons & 0x40001) {
+        if (*state > 6) {
             lbAudioAx_80024030(2);
-            *arg0 -= 1;
+            *state -= 1;
         }
-    } else if ((arg1 & 0x80002) && (*arg0 < 8)) {
+    } else if ((buttons & 0x80002) && (*state < 8)) {
         lbAudioAx_80024030(2);
-        *arg0 += 1;
+        *state += 1;
     }
 
-    if ((arg1 != 0) && ((arg1 | arg2) & 0x300)) {
+    if ((buttons != 0) && ((buttons | trigger) & 0x300)) {
         fn_80190ABC(0);
     }
 
-    if (arg2 & 0x1100) {
+    if (trigger & 0x1100) {
         lbAudioAx_80024030(1);
         fn_8018EC7C();
-        temp_r0 = *arg0;
-        if (temp_r0 == 6) {
+        cur_state = *state;
+        if (cur_state == 6) {
             fn_80192938();
-        } else if (temp_r0 == 7) {
+        } else if (cur_state == 7) {
             tm = gm_8018F634();
             tm->x20 = 1;
             HSD_SisLib_803A5E70();
@@ -1727,18 +1738,18 @@ void fn_80194D84(s32* arg0, u32 arg1, u32 arg2)
             }
             return;
         } else {
-            *arg0 = 0;
+            *state = 0;
         }
-    } else if (arg2 & 0x200) {
+    } else if (trigger & 0x200) {
         lbAudioAx_80024030(0);
         if (gm_804771C4.match_type == 0) {
-            *arg0 = 5;
+            *state = 5;
         } else {
-            *arg0 = 4;
+            *state = 4;
         }
     }
 
-    if ((arg2 != 0) && ((arg1 | arg2) & 0x300)) {
+    if ((trigger != 0) && ((buttons | trigger) & 0x300)) {
         fn_80190ABC(0);
     }
 }
@@ -1749,43 +1760,44 @@ void fn_80194D84(s32* arg0, u32 arg1, u32 arg2)
 
 static s32 lbl_804D6654;
 
-// @TODO: Currently 89.08% match - needs register allocation fix
-void fn_80195AF0(s32* arg0, u32 arg1, u32 arg2)
+/// @TODO: Currently 93.5% match - permuter couldn't improve
+/// Handles name entry/selection input for tournament mode.
+void fn_80195AF0(s32* state_ptr, u32 buttons, u32 trigger)
 {
     u8* ptr;
-    u8* r29;
-    u8* r28;
-    u8* r27;
-    s32 state;
+    u8* page_ptr;
+    u8* row_ptr;
+    u8* col_ptr;
+    s32 cur_state;
 
     ptr = (u8*)&lbl_804799B8;
 
-    if (arg2 & 0x1000) {
-        lbl_804D6654 = *arg0;
-        *arg0 = 0x11;
+    if (trigger & 0x1000) {
+        lbl_804D6654 = *state_ptr;
+        *state_ptr = 0x11;
         return;
     }
 
-    if (arg1 & 0x40001) {
-        if (*arg0 == 0xE) {
+    if (buttons & 0x40001) {
+        if (*state_ptr == 0xE) {
             lbAudioAx_80024030(2);
-            *arg0 = 0xD;
+            *state_ptr = 0xD;
         }
-    } else if ((arg1 & 0x80002) && (*arg0 == 0xD)) {
+    } else if ((buttons & 0x80002) && (*state_ptr == 0xD)) {
         lbAudioAx_80024030(2);
-        *arg0 = 0xE;
+        *state_ptr = 0xE;
     }
 
-    if (arg2 & 0x100) {
+    if (trigger & 0x100) {
         u16* arr;
 
         lbAudioAx_80024030(1);
-        r27 = &ptr[2];
-        r28 = &ptr[3];
-        arr = (u16*)((u8*)arg0 + (ptr[2] + ptr[3]) * 0x12);
+        col_ptr = &ptr[2];
+        row_ptr = &ptr[3];
+        arr = (u16*)((u8*)state_ptr + (ptr[2] + ptr[3]) * 0x12);
         arr[0x21] = arr[0x20];
-        state = *arg0;
-        switch (state) {
+        cur_state = *state_ptr;
+        switch (cur_state) {
         case 0xD:
             if (IsNameListFull() == 0) {
                 TmData* tm = gm_8018F634();
@@ -1797,90 +1809,94 @@ void fn_80195AF0(s32* arg0, u32 arg1, u32 arg2)
             }
             return;
         case 0xE:
-            r29 = &ptr[6];
+            page_ptr = &ptr[6];
             if (GetNameText(ptr[5] + (ptr[6] * 4)) != NULL) {
-                s32 idx = (*r27 + *r28) * 0x12;
-                s16 val = ptr[5] + (*r29 * 4);
-                ((u16*)((u8*)arg0 + idx))[0x20] = val;
+                s32 idx = (*col_ptr + *row_ptr) * 0x12;
+                s16 val = ptr[5] + (*page_ptr * 4);
+                ((u16*)((u8*)state_ptr + idx))[0x20] = val;
             }
-            *arg0 = 0xF;
+            *state_ptr = 0xF;
             fn_80190ABC(4);
             return;
         }
         return;
     }
 
-    if (arg2 & 0x200) {
+    if (trigger & 0x200) {
         u16* arr;
 
         lbAudioAx_80024030(0);
-        arr = (u16*)((u8*)arg0 + (ptr[2] + ptr[3]) * 0x12);
+        arr = (u16*)((u8*)state_ptr + (ptr[2] + ptr[3]) * 0x12);
         arr[0x20] = arr[0x21];
         fn_80190ABC(5);
         fn_80190ABC(6);
-        *arg0 = 0xC;
+        *state_ptr = 0xC;
     }
 }
 
 /// #fn_80195CCC
 
 // @TODO: Currently 96.88% match - needs minor register allocation fix
-void fn_8019610C(s32* arg0, u32 arg1, u32 arg2)
+/// Handles confirm/cancel input for tournament start.
+/// Type casts used to match target sth instruction patterns.
+void fn_8019610C(s32* state, u32 buttons, u32 trigger)
 {
-    TmData* temp_r3;
-    s32 var_r5;
-    u8* var_r6;
-    u8* var_r7;
-    s32 var_r4;
+    TmData* td;
+    s32 i;
+    u8* src_ptr;
+    u8* dst_ptr;
+    s32 base_val;
 
-    if (arg1 & 0x10008) {
-        if (*arg0 == 0x12) {
+    i = 1;
+
+    if (buttons & 0x10008) {
+        if (*state == 0x12) {
             lbAudioAx_80024030(2);
-            *arg0 = 0x11;
+            *state = 0x11;
         }
-    } else if ((arg1 & 0x20004) != 0) {
-        if (*arg0 == 0x11) {
+    } else if ((buttons & 0x20004) != 0) {
+        if (*state == 0x11) {
             lbAudioAx_80024030(2);
-            *arg0 = 0x12;
+            *state = 0x12;
         }
     }
 
-    if ((arg2 & 0x1100) != 0) {
-        if (*arg0 == 0x11) {
-            lbAudioAx_80024030(1);
+    if ((trigger & 0x1100) != 0) {
+        if (*state == 0x11) {
+            lbAudioAx_80024030(i);
             if (gm_804771C4.match_type == 0) {
                 gm_SetScenePendingMinor(1);
             } else {
-                temp_r3 = gm_8018F634();
-                var_r5 = 0;
-                var_r6 = (u8*)temp_r3;
-                var_r7 = (u8*)temp_r3;
-                var_r4 = var_r5;
-                while (var_r5 < temp_r3->x2E) {
-                    var_r6[0x45] = var_r6[0x44];
-                    var_r6[0x46] = var_r4;
-                    if (var_r5 < temp_r3->x30) {
-                        *(u16*)&var_r7[0x4BE] = *(u16*)&var_r6[0x40];
-                        var_r7[0x4BD] = var_r6[0x39];
-                        var_r7[0x4B9] = var_r6[0x3A];
-                        var_r7[0x4B8] = var_r6[0x37];
-                        var_r7[0x4BB] = var_r6[0x3E];
-                        var_r7[0x4BA] = var_r6[0x3C];
+                td = gm_8018F634();
+                i = 0;
+                src_ptr = (u8*)td;
+                dst_ptr = (u8*)td;
+                base_val = i;
+                while (i < td->x2E) {
+                    src_ptr[0x45] = src_ptr[0x44];
+                    src_ptr[0x46] = base_val;
+                    if (i < td->x30) {
+                        *(u16*)&dst_ptr[0x4BE] = *(u16*)&src_ptr[0x40];
+                        dst_ptr[0x4BD] = src_ptr[0x39];
+                        dst_ptr[0x4B9] = src_ptr[0x3A];
+                        dst_ptr[0x4B8] = src_ptr[0x37];
+                        dst_ptr[0x4BB] = src_ptr[0x3E];
+                        dst_ptr[0x4BA] = src_ptr[0x3C];
                     }
-                    var_r6 += 0x12;
-                    var_r7 += 0xA;
-                    var_r5++;
+                    src_ptr += 0x12;
+                    dst_ptr += 0xA;
+                    i++;
                 }
                 gm_SetScenePendingMinor(2);
             }
             gm_801A4B60();
         } else {
             lbAudioAx_80024030(0);
-            *arg0 = lbl_804D6654;
+            *state = lbl_804D6654;
         }
-    } else if ((arg2 & 0x200) != 0) {
+    } else if ((trigger & 0x200) != 0) {
         lbAudioAx_80024030(0);
-        *arg0 = lbl_804D6654;
+        *state = lbl_804D6654;
     }
 }
 
@@ -2018,58 +2034,57 @@ void fn_801965C4(void)
     gm_801A4B60();
 }
 
-// Decompilation attempt 3 for fn_80196684
-// Closer to original m2c structure
+// @TODO: Currently 83.98% match - needs register allocation fix
+/// Randomly assigns bracket positions for tournament seeding.
+void fn_80196684(s32 bracket_idx) {
+    s32 rand_val;
+    u8* weight_c;
+    u8* weight_b;
+    u8* weight_a;
+    u8* bracket;
+    u8 weight_a_val;
 
-void fn_80196684(s32 arg0) {
-    s32 temp_r3;
-    u8* temp_r28;
-    u8* temp_r27;
-    u8* temp_r29;
-    u8* temp_r31;
-    u8 temp_r4;
-
-    temp_r28 = (u8*)&lbl_80473AB8[arg0];
-    temp_r27 = (u8*)&lbl_80473AB8[arg0];
-    temp_r28 = &temp_r28[0xA9];
-    temp_r29 = (u8*)&lbl_80473AB8[arg0];
-    temp_r27 = &temp_r27[0x7D];
-    temp_r29 = &temp_r29[0x51];
-    temp_r3 = HSD_Randi(*temp_r29 + *temp_r27 + *temp_r28);
-    temp_r4 = *temp_r29;
-    if (temp_r3 < (s32)temp_r4) {
-        temp_r31 = (u8*)&lbl_80473AB8[arg0];
-        temp_r31[0x4C] = 0;
-        if (HSD_Randi(*temp_r27 + *temp_r28) < (s32)*temp_r27) {
-            temp_r31[0x78] = 1;
-            temp_r31[0xA4] = 2;
+    weight_c = (u8*)&lbl_80473AB8[bracket_idx];
+    weight_b = (u8*)&lbl_80473AB8[bracket_idx];
+    weight_c = &weight_c[0xA9];
+    weight_a = (u8*)&lbl_80473AB8[bracket_idx];
+    weight_b = &weight_b[0x7D];
+    weight_a = &weight_a[0x51];
+    rand_val = HSD_Randi(*weight_a + *weight_b + *weight_c);
+    weight_a_val = *weight_a;
+    if (rand_val < (s32)weight_a_val) {
+        bracket = (u8*)&lbl_80473AB8[bracket_idx];
+        bracket[0x4C] = 0;
+        if (HSD_Randi(*weight_b + *weight_c) < (s32)*weight_b) {
+            bracket[0x78] = 1;
+            bracket[0xA4] = 2;
             return;
         }
-        temp_r31[0x78] = 2;
-        temp_r31[0xA4] = 1;
+        bracket[0x78] = 2;
+        bracket[0xA4] = 1;
         return;
     }
-    if (temp_r3 < (s32)(temp_r4 + *temp_r27)) {
-        temp_r31 = (u8*)&lbl_80473AB8[arg0];
-        temp_r31[0x78] = 0;
-        if (HSD_Randi(*temp_r29 + *temp_r28) < (s32)*temp_r29) {
-            temp_r31[0x4C] = 1;
-            temp_r31[0xA4] = 2;
+    if (rand_val < (s32)(weight_a_val + *weight_b)) {
+        bracket = (u8*)&lbl_80473AB8[bracket_idx];
+        bracket[0x78] = 0;
+        if (HSD_Randi(*weight_a + *weight_c) < (s32)*weight_a) {
+            bracket[0x4C] = 1;
+            bracket[0xA4] = 2;
             return;
         }
-        temp_r31[0x4C] = 2;
-        temp_r31[0xA4] = 1;
+        bracket[0x4C] = 2;
+        bracket[0xA4] = 1;
         return;
     }
-    temp_r31 = (u8*)&lbl_80473AB8[arg0];
-    temp_r31[0xA4] = 0;
-    if (HSD_Randi(*temp_r29 + *temp_r27) < (s32)*temp_r29) {
-        temp_r31[0x4C] = 1;
-        temp_r31[0x78] = 2;
+    bracket = (u8*)&lbl_80473AB8[bracket_idx];
+    bracket[0xA4] = 0;
+    if (HSD_Randi(*weight_a + *weight_b) < (s32)*weight_a) {
+        bracket[0x4C] = 1;
+        bracket[0x78] = 2;
         return;
     }
-    temp_r31[0x4C] = 2;
-    temp_r31[0x78] = 1;
+    bracket[0x4C] = 2;
+    bracket[0x78] = 1;
 }
 
 /// #fn_801967E0
@@ -2267,6 +2282,7 @@ void fn_801976D4(HSD_GObj* gobj)
     HSD_JObj* jobj;
     u8* counter;
     s32 is_in_range;
+    PAD_STACK(8);
 
     gm_8018F634();
     jobj = gobj->hsd_obj;
@@ -2298,6 +2314,7 @@ void fn_80197D4C(HSD_GObj* gobj)
     HSD_JObj* jobj;
     u8* counter;
     int cond;
+    PAD_STACK(8);
 
     gm_8018F634();
     jobj = gobj->hsd_obj;
@@ -2318,26 +2335,27 @@ void fn_80197D4C(HSD_GObj* gobj)
     }
 }
 
-
+// @TODO: Currently 69.71% match - needs register allocation fix
+/// Updates player HUD element visibility and position.
 void fn_80197E18(HSD_GObj* gobj)
 {
     HSD_JObj* jobj;
     TmData* data;
     s32 pnum;
-    s32 var_r0;
-    f32 var_f1;
+    s32 in_range;
+    f32 x_pos;
 
     data = gm_8018F634();
     pnum = fn_8018F62C(gobj);
     jobj = gobj->hsd_obj;
 
     if (gm_8018F634()->cur_option >= 0x1B && gm_8018F634()->cur_option <= 0x1E) {
-        var_r0 = 1;
+        in_range = 1;
     } else {
-        var_r0 = 0;
+        in_range = 0;
     }
 
-    if (var_r0 == 0) {
+    if (in_range == 0) {
         HSD_JObjSetFlagsAll(jobj, 0x10);
         return;
     }
@@ -2354,15 +2372,16 @@ void fn_80197E18(HSD_GObj* gobj)
     }
 
     if ((s32)data->x30 == 4) {
-        var_f1 = (13.0F * pnum) + (-19.5F);
+        x_pos = (13.0F * pnum) + (-19.5F);
     } else if ((s32)data->x30 == 3) {
-        var_f1 = 6.5F + ((13.0F * pnum) - 19.5F);
+        x_pos = 6.5F + ((13.0F * pnum) - 19.5F);
     } else {
-        var_f1 = 6.5F + ((13.0F * (2.0F * pnum)) - 19.5F);
+        x_pos = 6.5F + ((13.0F * (2.0F * pnum)) - 19.5F);
     }
-    fn_8018FDC4(jobj, var_f1, 666.0F, 666.0F);
+    fn_8018FDC4(jobj, x_pos, 666.0F, 666.0F);
 }
 
+// @TODO: Currently 70.24% match - needs register allocation fix
 /// Updates JObj visibility based on menu option and player state.
 void fn_80197FD8(HSD_GObj* gobj)
 {
@@ -2417,15 +2436,16 @@ void fn_80197FD8(HSD_GObj* gobj)
     }
 }
 
-// @TODO: Currently 94.48% match - needs register allocation fix
+/// @TODO: Currently 55.88% match - needs significant rework
+/// Updates player cursor animation and position.
 void fn_801981A0(HSD_GObj* gobj) {
     TmData* data;
-    u8* r5_ptr;
+    u8* player_ptr;
     s32 pnum;
     HSD_JObj* jobj;
-    u8* r28_ptr;
-    f32 var_f1;
-    s32 var_r0;
+    u8* state_ptr;
+    f32 x_pos;
+    s32 in_range;
     u8 counter;
 
     data = gm_8018F634();
@@ -2433,12 +2453,12 @@ void fn_801981A0(HSD_GObj* gobj) {
     jobj = gobj->hsd_obj;
 
     if (gm_8018F634()->cur_option >= 0x1B && gm_8018F634()->cur_option <= 0x1E) {
-        var_r0 = 1;
+        in_range = 1;
     } else {
-        var_r0 = 0;
+        in_range = 0;
     }
 
-    if (var_r0 == 0) {
+    if (in_range == 0) {
         HSD_JObjSetFlagsAll(jobj, 0x10);
         return;
     }
@@ -2451,45 +2471,45 @@ void fn_801981A0(HSD_GObj* gobj) {
         return;
     }
 
-    r28_ptr = &((u8*)&lbl_804799D8)[pnum + 0x44];
-    if (*r28_ptr == 6) {
+    state_ptr = &((u8*)&lbl_804799D8)[pnum + 0x44];
+    if (*state_ptr == 6) {
         HSD_JObjSetFlagsAll(jobj, 0x10);
     }
 
     if ((s32)data->x30 == 4) {
-        var_f1 = (13.0F * (f32)pnum) + (-19.5F);
+        x_pos = (13.0F * (f32)pnum) + (-19.5F);
     } else if ((s32)data->x30 == 3) {
-        var_f1 = 6.5F + ((13.0F * (f32)pnum) - 19.5F);
+        x_pos = 6.5F + ((13.0F * (f32)pnum) - 19.5F);
     } else {
-        var_f1 = 6.5F + ((13.0F * (2.0F * (f32)pnum)) - 19.5F);
+        x_pos = 6.5F + ((13.0F * (2.0F * (f32)pnum)) - 19.5F);
     }
 
-    fn_8018FDC4(jobj, var_f1, 666.0F, 0.01F);
+    fn_8018FDC4(jobj, x_pos, 666.0F, 0.01F);
 
-    r5_ptr = (u8*)&lbl_804799D8 + pnum;
-    counter = r5_ptr[0x21];
+    player_ptr = (u8*)&lbl_804799D8 + pnum;
+    counter = player_ptr[0x21];
     counter = (counter + 1) % 11;
-    r5_ptr[0x21] = counter;
+    player_ptr[0x21] = counter;
 
-    if (*r28_ptr == 7) {
-        fn_8019044C(jobj, (f32)r5_ptr[0x21]);
+    if (*state_ptr == 7) {
+        fn_8019044C(jobj, (f32)player_ptr[0x21]);
         return;
     }
 
-    fn_8019044C(jobj, (f32)(r5_ptr[0x21] + 0x14));
+    fn_8019044C(jobj, (f32)(player_ptr[0x21] + 0x14));
 }
 
 /// Updates the visibility and position of a player's controller indicator.
 /// #fn_801983E4
 
 
-void fn_80198584(ResultsData* arg0)
+void fn_80198584(ResultsData* results)
 {
     HSD_JObj* jobj;
     int cur_option;
 
     cur_option = gm_8018F634()->cur_option;
-    jobj = arg0->x28;
+    jobj = results->x28;
     if (cur_option == 0x1D) {
         HSD_JObjClearFlagsAll(jobj, 0x10);
     } else {
@@ -2502,6 +2522,8 @@ void fn_80198584(ResultsData* arg0)
 /// #fn_80198824
 
 /// Initializes tournament mode match data.
+/// Initializes tournament mode match data structures.
+/// Type casts used to match target instruction patterns (stw/sth vs stb).
 void fn_80198BA0(void)
 {
     TmData* td;
@@ -2513,7 +2535,12 @@ void fn_80198BA0(void)
     ptr = lbl_804799D8.x0;
     td = gm_8018F634();
 
+    /* Clear first 4 bytes as word (stw instruction) */
     *(u32*)&ptr[0x00] = 0;
+    if (td && td) {
+        /* FAKE MATCH: Empty block affects register allocation */
+    }
+    /* Clear 2 bytes at offset 0x10 as halfword (sth instruction) */
     *(u16*)&ptr[0x10] = 0;
 
     if (td->x2C != 0) {
@@ -2528,6 +2555,7 @@ void fn_80198BA0(void)
 
     for (i = 0; i < td->x30; i++) {
         ptr[0x25] = 0;
+        /* Clear 2 bytes as halfword (sth instruction) */
         *(u16*)&ptr7[0x12] = 0;
         ptr7 += 2;
         ptr[0x1D] = 0;
@@ -2543,6 +2571,7 @@ void fn_80198BA0(void)
     }
 }
 
+// @TODO: Currently 99.63% match - permuter couldn't improve (instruction scheduling)
 /// Initializes tournament mode text displays.
 void fn_80198C60(void)
 {
@@ -2579,48 +2608,48 @@ extern SceneDesc* lbl_804D666C;
 
 // @TODO: Currently 98.36% match - needs branch pattern fix (beq+b vs bne)
 #pragma dont_inline on
-void fn_8019A71C(s32* arg0)
+void fn_8019A71C(s32* state)
 {
     u32* counter = (u32*)&lbl_804799D8;
     PAD_STACK(8);
 
-    if (*arg0 == 0x13) {
-        fn_8019B458(arg0);
+    if (*state == 0x13) {
+        fn_8019B458(state);
     }
 
-    if (*arg0 > 0x14) {
+    if (*state > 0x14) {
         *counter = *counter + 1;
     }
 
     if (*counter >= 0x14U) {
-        *arg0 = 0x15;
+        *state = 0x15;
     }
 
     if (*counter == 0x1EU) {
-        *arg0 = 0x16;
+        *state = 0x16;
     }
 
     if (*counter > 0x1EU) {
-        *arg0 = 0x17;
+        *state = 0x17;
     }
 
     if (*counter >= 0x3CU) {
-        *arg0 = 0x18;
+        *state = 0x18;
     }
 
     if (*counter >= 0x46U) {
-        *arg0 = 0x19;
+        *state = 0x19;
     }
 
     if (*counter >= 0x5AU) {
         fn_8018EC48();
-        *arg0 = 0x1A;
+        *state = 0x1A;
         fn_8018EC7C();
         if (fn_8018F508(0) == 1) {
-            *arg0 = 0x1F;
+            *state = 0x1F;
             return;
         }
-        *arg0 = 0x1B;
+        *state = 0x1B;
     }
 }
 #pragma dont_inline reset
@@ -2638,6 +2667,7 @@ void gm_8019A828(void) {
 
 /// #fn_8019AF50
 
+// @TODO: Currently 89.97% match - permuter couldn't improve
 /// Per-frame update for tournament mode menu.
 void gm_8019B2DC_OnFrame(void)
 {
@@ -2706,28 +2736,27 @@ void gm_8019B2DC_OnFrame(void)
 
 /// #fn_8019B458
 
-void fn_8019B81C(s32* arg0)
+/// Initializes match data and transitions to next state.
+/// Type cast used to match target stw instruction pattern.
+void fn_8019B81C(s32* state)
 {
     fn_80198BA0();
     fn_80198EBC();
-    *arg0 = 0x1C;
+    *state = 0x1C;
     *(u32*)&lbl_804799D8 = 0;
 }
 
 extern SceneDesc* lbl_804D6670;
 
-// @TODO: Currently 92.00% match - needs register allocation fix
-void fn_8019B860(TmData* arg0)
+// @TODO: Currently 92% match - instruction scheduling issue (lfs/lbz order)
+/// Sets up tournament bracket display with entrant data.
+void fn_8019B860(TmData* tm)
 {
     fn_8019A158();
     fn_80199AF0();
     fn_80198BA0();
     fn_8018F888();
-    {
-        int ent = arg0->entrants;
-        f32 fval = 4.5F;
-        fn_8018E618(ent, arg0->x2C, fval);
-    }
-    fn_8018E85C(*(int*)((char*)lbl_804D6670->models + 0x10), arg0->x2C);
-    arg0->cur_option = 0x20;
+    fn_8018E618(tm->entrants, tm->x2C, 4.5F);
+    fn_8018E85C(*(int*)((char*)lbl_804D6670->models + 0x10), tm->x2C);
+    tm->cur_option = 0x20;
 }
