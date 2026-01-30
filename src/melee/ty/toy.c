@@ -520,7 +520,11 @@ void Trophy_SetUnlockState(enum_t trophyId, bool addValue)
     }
 }
 
-/* 98.7% match */
+/* 98.7% match
+ * Note: The inner loop with load_value/loop_top/check_skip labels is logically:
+ *   skip = !lbLang_IsSettingUS() || !IsInSkipList(var_r25, un_804D6EB4);
+ * Refactoring to an inline function breaks the match due to control flow changes.
+ */
 void un_80305918(s8 arg0, s32 arg1, s32 arg2) {
     s16* var_r22;
     s32 var_r27;
@@ -539,13 +543,12 @@ void un_80305918(s8 arg0, s32 arg1, s32 arg2) {
     }
 
     temp_r26 = (u8*)base + 0x19E;
-    var_r25 = 0;
-    var_r27 = 0;
 
-    do {
+    for (var_r25 = 0, var_r27 = 0; var_r25 < 0x125; var_r25++, var_r27 += 2) {
         s32 skip;
         s16 temp_r0;
 
+        /* Check if var_r25 is in skip list (only when US locale) */
         var_r22 = un_804D6EB4;
         if (lbLang_IsSettingUS() != 0) {
             goto load_value;
@@ -565,11 +568,11 @@ void un_80305918(s8 arg0, s32 arg1, s32 arg2) {
 
 check_skip:
         if (skip == 0) {
-            goto next_iter;
+            continue;
         }
 
         if ((f32)arg0 != un_803060BC(var_r25, 6)) {
-            goto next_iter;
+            continue;
         }
 
         if (arg1 != 0) {
@@ -598,11 +601,7 @@ check_skip:
             }
             *(u16*)(var_r3 + var_r27) |= 0x4000;
         }
-
-next_iter:
-        var_r25++;
-        var_r27 += 2;
-    } while (var_r25 < 0x125);
+    }
 
     if (arg1 != 0) {
         if (arg2 != 0) {
