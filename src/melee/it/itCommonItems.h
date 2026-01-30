@@ -1180,12 +1180,12 @@ typedef struct itThunder_ItemVars
     /* xE3C */ f32 x68;
 } itThunder_ItemVars;
 
-typedef struct itThunderAttributes
+typedef struct itThunderPokemonAttributes
 {
     f32 x0;
     u32 x4;
     u32 x8;
     u32 xC;
-} itThunderAttributes;
+} itThunderPokemonAttributes;
 
 #endif
