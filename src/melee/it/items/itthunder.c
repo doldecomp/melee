@@ -4,11 +4,13 @@
 #include <platform.h>
 
 #include "ef/eflib.h"
+#include "ef/efsync.h"
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
+#include "gr/stage.h"
 
 ItemStateTable it_803F7C40[] = {
     { 0, itThunder_UnkMotion0_Anim, itThunder_UnkMotion0_Phys,
