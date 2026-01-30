@@ -11,7 +11,7 @@
 /* 12EFC0 */ void fn_8012EFC0(Fighter_GObj* gobj);
 /* 12EFF4 */ void fn_8012EFF4(Fighter_GObj* gobj);
 /* 12F0DC */ void ftYs_SpecialS_8012F0DC(Fighter_GObj* gobj, s32, s32, f32);
-/* 12F35C */ UNK_RET ftYs_SpecialS_8012F35C(UNK_PARAMS);
+/* 12F35C */ void ftYs_SpecialS_8012F35C(Fighter_GObj* gobj);
 /* 12F4B4 */ void ftYs_SpecialS_Enter(Fighter_GObj* gobj);
 /* 12F588 */ void ftYs_SpecialAirS_Enter(Fighter_GObj* gobj);
 /* 12F654 */ void ftYs_SpecialAirSStart_0_Anim(Fighter_GObj* gobj);
