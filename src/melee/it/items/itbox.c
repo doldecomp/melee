@@ -23,6 +23,24 @@
 
 static double const ROT_VEL_SCALE = 0.03490658476948738;
 
+void it_3F14_Logic1_Spawned(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->xDCE_flag.b7 = 0;
+    ip->xDD4_itemVar.box.opened = 0;
+    ip->xDD4_itemVar.box.spawned_gobj = NULL;
+    it_8028655C(gobj);
+}
+
+void it_3F14_Logic1_Destroyed(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->xDD4_itemVar.box.spawned_gobj != NULL) {
+        efLib_DestroyAll(ip->xDD4_itemVar.box.spawned_gobj);
+        ip->xDD4_itemVar.box.spawned_gobj = NULL;
+    }
+}
+
 /// Spawn a box accessory item that follows the parent item.
 /// Returns the spawned gobj, or NULL if parent is invalid.
 Item_GObj* it_80286088(Item_GObj* parent_gobj)
@@ -68,26 +86,6 @@ Item_GObj* it_80286088(Item_GObj* parent_gobj)
         }
     }
     return result;
-}
-
-/// Initialize box item state when spawned
-void it_3F14_Logic1_Spawned(Item_GObj* gobj)
-{
-    Item* ip = GET_ITEM(gobj);
-    ip->xDCE_flag.b7 = 0;
-    ip->xDD4_itemVar.box.opened = 0;
-    ip->xDD4_itemVar.box.spawned_gobj = NULL;
-    it_8028655C(gobj);
-}
-
-/// Cleanup box item when destroyed - destroys any spawned effect
-void it_3F14_Logic1_Destroyed(Item_GObj* gobj)
-{
-    Item* ip = GET_ITEM(gobj);
-    if (ip->xDD4_itemVar.box.spawned_gobj != NULL) {
-        efLib_DestroyAll(ip->xDD4_itemVar.box.spawned_gobj);
-        ip->xDD4_itemVar.box.spawned_gobj = NULL;
-    }
 }
 
 /// Spawn item(s) from box based on weighted random roll.
