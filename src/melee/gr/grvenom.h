@@ -65,6 +65,6 @@
 /* 206CB0 */ void grVenom_80206CB0(s32);
 /* 206D10 */ s32 grVenom_80206D10(s32);
 /* 206D74 */ DynamicsDesc* grVenom_80206D74(enum_t);
-/* 206D7C */ bool grVenom_80206D7C(void*, s32, HSD_JObj*);
+/* 206D7C */ bool grVenom_80206D7C(Vec3*, s32, HSD_JObj*);
 
 #endif
