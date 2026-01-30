@@ -194,26 +194,26 @@ bool fn_80177B7C(int slot)
 {
     static const float scroll_deadzone = 0.3F;
 
-    float stick_y = HSD_PadCopyStatus[(u8) slot].nml_stickY;
-    u32 trigger;
-    bool result = false;
+    {
+        float stick_y = HSD_PadCopyStatus[(u8) slot].nml_stickY;
+        u32 trigger;
+        bool result = false;
 
-    PAD_STACK(8);
-
-    if (fabsf_bitwise(stick_y) < scroll_deadzone) {
-        stick_y = 0;
+        if (fabsf_bitwise(stick_y) < scroll_deadzone) {
+            stick_y = 0;
+        }
+        trigger = HSD_PadCopyStatus[(u8) slot].trigger;
+        if (trigger & 0x40200) {
+            result = pagePrev(slot);
+        } else if (trigger & 0x80100) {
+            result = pageNext(slot);
+        } else if (stick_y < 0) {
+            result = scrollDown(slot, -stick_y);
+        } else if (stick_y > 0) {
+            result = scrollUp(slot, stick_y);
+        }
+        return result;
     }
-    trigger = HSD_PadCopyStatus[(u8) slot].trigger;
-    if (trigger & 0x40200) {
-        result = pagePrev(slot);
-    } else if (trigger & 0x80100) {
-        result = pageNext(slot);
-    } else if (stick_y < 0) {
-        result = scrollDown(slot, -stick_y);
-    } else if (stick_y > 0) {
-        result = scrollUp(slot, stick_y);
-    }
-    return result;
 }
 
 bool fn_80177DD0(int slot)
