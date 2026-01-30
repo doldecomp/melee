@@ -22,4 +22,7 @@
 /* 2CCF74 */ bool itThunder_UnkMotion0_Coll(Item_GObj* gobj);
 /* 3F7C40 */ extern ItemStateTable it_803F7C40[];
 
+f32 it_804DD3AC = 1.0f;
+f32 it_804DD3A8 = 0.0f;
+
 #endif
