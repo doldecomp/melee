@@ -56,6 +56,201 @@ typedef struct {
 
 static u8 un_804D6EA1;
 
+
+typedef struct {
+    s16 x0;
+    s16 x2;
+    s16 x4;
+    s16 x6;
+    s16 x8;
+    s16 xA;
+} ToyNameData;
+
+typedef struct {
+    char pad[0xFC];
+    s32 xFC_idx;
+} TyLightEntry;
+
+typedef struct {
+    char pad[0xCC];
+    char* xCC_name;
+} TyLightSymbol;
+
+typedef struct {
+    /* 0x00 */ HSD_GObj* x0;
+    /* 0x04 */ void* x4;
+    /* 0x08 */ HSD_GObj* x8;
+} tyUnkStruct;
+
+typedef struct {
+    /* 0x00 */ u8 pad[0x50];
+    /* 0x50 */ HSD_Archive* x50;
+} tyUnkStruct2;
+
+typedef struct TyGObjX8_ {
+    u8 pad[0x28];
+    HSD_CObj* x28;
+} TyGObjX8_;
+
+typedef struct TyCameraData_ {
+    void* x0;
+    void* x4;
+    TyGObjX8_* x8;
+    u8 padC[0x18 - 0x0C];
+    f32 x18;
+    f32 x1C;
+    f32 x20;
+} TyCameraData_;
+
+typedef struct TyLightGObj_ {
+    u8 pad[0x28];
+    HSD_LObj* x28;
+} TyLightGObj_;
+
+typedef struct TyLightArray_ {
+    void* x0;
+    TyLightGObj_* x4;
+    u8 pad08[0x14 - 0x08];
+    f32 x14;
+    f32 x18;
+    s32 x1C;
+    s32 x20;
+    s32 x24;
+    u8 pad28[0x7C - 0x28];
+    s32 x7C;
+    s32 x80;
+    s32 x84;
+} TyLightArray_;
+
+typedef struct ToyDataJObj {
+    /* 0x00 */ void* x0;
+    /* 0x04 */ struct ToyDataJObj* x4;
+    /* 0x08 */ u8 pad08[0x40 - 0x08];
+    /* 0x40 */ s32 x40;
+} ToyDataJObj;
+
+typedef struct ToyDataX8 {
+    /* 0x00 */ u8 pad0[0x28];
+    /* 0x28 */ ToyDataJObj* x28;
+} ToyDataX8;
+
+typedef struct ToyData {
+    /* 0x00 */ void* x0;
+    /* 0x04 */ HSD_GObj* gobj;
+    /* 0x08 */ ToyDataX8* x8;
+    /* 0x0C */ u8 pad0C[0x50 - 0x0C];
+    /* 0x50 */ HSD_Archive* archive;
+    /* 0x54 */ u32 x54;
+} ToyData;
+
+typedef struct tyLightData {
+    /* 0x00 */ char _pad0[0x0C];
+    /* 0x0C */ HSD_GObj* x0C;
+    /* 0x10 */ char _pad1[0x48];
+    /* 0x58 */ void* x58;
+} tyLightData;
+
+typedef struct tyDispData {
+    u8 pad[0x144];
+    HSD_Text* x144;
+    HSD_Text* x148;
+    HSD_Text* x14C;
+    HSD_Text* x150;
+} tyDispData;
+
+typedef struct un_804A2AA8_t {
+    /* 0x00 */ u8 pad[0x4];
+    /* 0x04 */ HSD_JObj* x4;
+    /* 0x08 */ HSD_JObj* x8;
+    /* 0x0C */ u8 padC[0x2];
+    /* 0x0E */ u8 xE;
+} un_804A2AA8_t;
+
+typedef struct un_804D6E68_t {
+    /* 0x00 */ u8 pad[0x18];
+    /* 0x18 */ f32 x18;
+} un_804D6E68_t;
+
+typedef struct {
+    Vec3 x0;
+    u8 pad[0x3F0 - 0xC];
+    void* x3F0;
+} Toy26B8;
+
+typedef struct {
+    u8 x0[0x28];
+    void* x28;
+} Toy26B8_2;
+
+typedef struct {
+    u8 x0[0x4];
+    void* x4;
+    u8 x8[0x40 - 0x8];
+    s32 x40;
+} ToyJObjNode;
+
+typedef struct {
+    u8 x0[0xC];
+    Toy26B8_2* xC;
+} ToyED8Data;
+
+typedef struct {
+    u8 x0[0x18];
+    f32 x18;
+    u8 x1C[0x20 - 0x1C];
+    f32 x20;
+    u8 x24[0x58 - 0x24];
+    s32 x58;
+    s32 x5C;
+    s8 x60;
+    s8 x61;
+} Toy6E68;
+
+typedef struct ToyGlobalsS_ {
+    u8 pad0[0x8];
+    HSD_GObj* x8;
+    HSD_GObj* xC;
+    u8 pad10[0x20];
+    void* x30;
+    u8 pad34[0x1C];
+    void* x50;
+    void* x54;
+} ToyGlobalsS_;
+
+typedef struct ToyGlobals2S_ {
+    HSD_GObj* x0;
+    u8 x4;
+} ToyGlobals2S_;
+
+typedef struct ToyGlobals3S_ {
+    u8 pad0[0x10];
+    s32 x10;
+} ToyGlobals3S_;
+
+typedef struct ToyGlobals4S_ {
+    u8 pad0[0x58];
+    s32 x58;
+} ToyGlobals4S_;
+
+typedef struct ToyGlobals5S_ {
+    u8 pad0[0x140];
+    void* x140;
+    u8 pad144[0x10];
+    s16 x154;
+} ToyGlobals5S_;
+
+typedef struct ToySubStructS_ {
+    u8 pad0[0x10];
+    s16 x10;
+} ToySubStructS_;
+
+typedef struct TyUnk25 {
+    u8 pad[0x140];
+    void* x140;
+    u8 pad2[0x10];
+    s16 x154;
+} TyUnk25;
+
 extern s8 un_804D6E50;
 extern void** un_804D6E68;
 extern s8 un_804D6EA2;
@@ -636,9 +831,6 @@ s16 un_803062BC(s32 trophyId)
 
     return (s16) i;
 }
-// Decompilation of un_803062EC
-// Unit: main/melee/ty/toy
-
 
 void un_803062EC(s32 arg0, u32 arg1, f32 farg0)
 {
@@ -724,22 +916,9 @@ s32 un_803063D4(s16 arg0, s32 arg1, s32 arg2)
     return result;
 }
 
-// Decompilation of un_803064B8
-// Unit: main/melee/ty/toy
-
 int lbLang_IsSavedLanguageJP(void);
 int lbLang_IsSavedLanguageUS(void);
 int lbLang_IsSettingJP(void);
-
-typedef struct {
-    s16 x0;
-    s16 x2;
-    s16 x4;
-    s16 x6;
-    s16 x8;
-    s16 xA;
-} ToyNameData;
-
 
 s16 un_803064B8(s16 arg0, s8 arg1)
 {
@@ -797,10 +976,6 @@ s16 un_803064B8(s16 arg0, s8 arg1)
     }
     return result;
 }
-
-// Decompilation of un_8030663C
-// Unit: main/melee/ty/toy
-
 
 void un_8030663C(void)
 {
@@ -914,10 +1089,6 @@ void un_80306930(HSD_GObj* gobj, int unused)
     HSD_FogSet(gobj->hsd_obj);
 }
 
-// Decompilation of un_80306954
-// Unit: main/melee/ty/toy
-
-
 void un_80306954(HSD_GObj* gobj)
 {
     void* state;
@@ -955,8 +1126,6 @@ void un_80306A0C(void* arg0)
         HSD_FogSet(fog);
     }
 }
-// Decompilation of un_80306A48
-// Unit: main/melee/ty/toy
 
 void un_80306A48(HSD_JObj* jobj, char* symbol1, char* symbol2, char* symbol3, HSD_Archive* archive, s32 frame) {
     void* new_var2;
@@ -1085,16 +1254,6 @@ void un_80306D14(void)
 // Attempt 7: Try struct-based array access
 
 
-typedef struct {
-    char pad[0xFC];
-    s32 xFC_idx;
-} TyLightEntry;
-
-typedef struct {
-    char pad[0xCC];
-    char* xCC_name;
-} TyLightSymbol;
-
 /* 82.6% match */
 void un_80306D70(s32 arg0)
 {
@@ -1204,23 +1363,6 @@ HSD_LObj* un_80306EEC(void* list_arg, s32 hasAnim_arg)
     return first;
 }
 
-// Decompilation of un_80307018
-// Unit: main/melee/ty/toy
-
-
-
-
-typedef struct {
-    /* 0x00 */ HSD_GObj* x0;
-    /* 0x04 */ void* x4;
-    /* 0x08 */ HSD_GObj* x8;
-} tyUnkStruct;
-
-typedef struct {
-    /* 0x00 */ u8 pad[0x50];
-    /* 0x50 */ HSD_Archive* x50;
-} tyUnkStruct2;
-
 void un_80307018(void)
 {
     u8 _pad[16];
@@ -1261,41 +1403,6 @@ void un_80307018(void)
 }
 
 /* 92.2% match */
-typedef struct TyGObjX8_ {
-    u8 pad[0x28];
-    HSD_CObj* x28;
-} TyGObjX8_;
-
-typedef struct TyCameraData_ {
-    void* x0;
-    void* x4;
-    TyGObjX8_* x8;
-    u8 padC[0x18 - 0x0C];
-    f32 x18;
-    f32 x1C;
-    f32 x20;
-} TyCameraData_;
-
-typedef struct TyLightGObj_ {
-    u8 pad[0x28];
-    HSD_LObj* x28;
-} TyLightGObj_;
-
-typedef struct TyLightArray_ {
-    void* x0;
-    TyLightGObj_* x4;
-    u8 pad08[0x14 - 0x08];
-    f32 x14;
-    f32 x18;
-    s32 x1C;
-    s32 x20;
-    s32 x24;
-    u8 pad28[0x7C - 0x28];
-    s32 x7C;
-    s32 x80;
-    s32 x84;
-} TyLightArray_;
-
 void un_8030715C(f32 cstick_x, f32 cstick_y)
 {
     Vec3 interest;
@@ -1408,27 +1515,6 @@ void un_8030715C(f32 cstick_x, f32 cstick_y)
 
 /* 96.3% match */
 
-typedef struct ToyDataJObj {
-    /* 0x00 */ void* x0;
-    /* 0x04 */ struct ToyDataJObj* x4;
-    /* 0x08 */ u8 pad08[0x40 - 0x08];
-    /* 0x40 */ s32 x40;
-} ToyDataJObj;
-
-typedef struct ToyDataX8 {
-    /* 0x00 */ u8 pad0[0x28];
-    /* 0x28 */ ToyDataJObj* x28;
-} ToyDataX8;
-
-typedef struct ToyData {
-    /* 0x00 */ void* x0;
-    /* 0x04 */ HSD_GObj* gobj;
-    /* 0x08 */ ToyDataX8* x8;
-    /* 0x0C */ u8 pad0C[0x50 - 0x0C];
-    /* 0x50 */ HSD_Archive* archive;
-    /* 0x54 */ u32 x54;
-} ToyData;
-
 void un_803075E8(s32 arg0)
 {
     char* data;
@@ -1505,14 +1591,6 @@ void un_803075E8(s32 arg0)
 /// #un_80307828
 
 /* 96.8% match */
-
-typedef struct tyLightData {
-    /* 0x00 */ char _pad0[0x0C];
-    /* 0x0C */ HSD_GObj* x0C;
-    /* 0x10 */ char _pad1[0x48];
-    /* 0x58 */ void* x58;
-} tyLightData;
-
 
 void un_803078E4(void)
 {
@@ -1634,8 +1712,6 @@ HSD_JObj* un_80307BA0(HSD_JObj* parent_jobj, s16 arg1)
 
     return jobj;
 }
-
-// Decompilation of fn_80307E84
 
 void fn_80307E84(HSD_GObj* gobj)
 {
@@ -1796,8 +1872,6 @@ s16 un_80308354(s16 idx)
 
     return target;
 }
-// Decompilation of un_803083D8
-// Unit: main/melee/ty/toy
 
 void un_803083D8(HSD_JObj* jobj, s32 arg1)
 {
@@ -1824,17 +1898,6 @@ void un_803083D8(HSD_JObj* jobj, s32 arg1)
     }
     HSD_JObjAnim(jobj);
 }
-
-// m2c decompilation of un_803084A0
-// Unit: main/melee/ty/toy
-
-typedef struct tyDispData {
-    u8 pad[0x144];
-    HSD_Text* x144;
-    HSD_Text* x148;
-    HSD_Text* x14C;
-    HSD_Text* x150;
-} tyDispData;
 
 static s32 un_804DDCFC = 0xFFBA00FF;
 
@@ -1943,23 +2006,8 @@ void un_803084A0(s16 arg0)
 
 /// #un_803087F4
 
-// Decompilation of un_80308DC8
-
 void un_80307F64(s32 a, s32 b);
 f32 un_80309338(Vec3* arg0, Vec3* arg1);
-
-typedef struct un_804A2AA8_t {
-    /* 0x00 */ u8 pad[0x4];
-    /* 0x04 */ HSD_JObj* x4;
-    /* 0x08 */ HSD_JObj* x8;
-    /* 0x0C */ u8 padC[0x2];
-    /* 0x0E */ u8 xE;
-} un_804A2AA8_t;
-
-typedef struct un_804D6E68_t {
-    /* 0x00 */ u8 pad[0x18];
-    /* 0x18 */ f32 x18;
-} un_804D6E68_t;
 
 void un_80308DC8(HSD_CObj* cobj)
 {
@@ -2002,45 +2050,6 @@ void un_80308DC8(HSD_CObj* cobj)
         HSD_JObjSetFlagsAll(temp_r31->x4, 0x10);
     }
 }
-
-// m2c decompilation of un_80308F04
-// Unit: main/melee/ty/toy
-
-typedef struct {
-    Vec3 x0;
-    u8 pad[0x3F0 - 0xC];
-    void* x3F0;
-} Toy26B8;
-
-typedef struct {
-    u8 x0[0x28];
-    void* x28;
-} Toy26B8_2;
-
-typedef struct {
-    u8 x0[0x4];
-    void* x4;
-    u8 x8[0x40 - 0x8];
-    s32 x40;
-} ToyJObjNode;
-
-typedef struct {
-    u8 x0[0xC];
-    Toy26B8_2* xC;
-} ToyED8Data;
-
-typedef struct {
-    u8 x0[0x18];
-    f32 x18;
-    u8 x1C[0x20 - 0x1C];
-    f32 x20;
-    u8 x24[0x58 - 0x24];
-    s32 x58;
-    s32 x5C;
-    s8 x60;
-    s8 x61;
-} Toy6E68;
-
 
 #define TOY_DATA ((Toy26B8*)un_804A26B8)
 #define TOY_ED8 ((ToyED8Data*)un_804D6ED8)
@@ -2196,9 +2205,6 @@ void un_80308F04(HSD_CObj* cobj)
     }
 }
 
-// Decompilation of un_80309338
-// Unit: main/melee/ty/toy
-
 static Vec3 un_803B88D4;
 
 f32 un_80309338(Vec3* arg0, Vec3* arg1)
@@ -2266,44 +2272,6 @@ void un_803102D0(void)
 /* 96.3% match */
 extern f32 un_804DDCD8;
 extern f32 un_804DDCF0;
-
-typedef struct ToyGlobalsS_ {
-    u8 pad0[0x8];
-    HSD_GObj* x8;
-    HSD_GObj* xC;
-    u8 pad10[0x20];
-    void* x30;
-    u8 pad34[0x1C];
-    void* x50;
-    void* x54;
-} ToyGlobalsS_;
-
-typedef struct ToyGlobals2S_ {
-    HSD_GObj* x0;
-    u8 x4;
-} ToyGlobals2S_;
-
-typedef struct ToyGlobals3S_ {
-    u8 pad0[0x10];
-    s32 x10;
-} ToyGlobals3S_;
-
-typedef struct ToyGlobals4S_ {
-    u8 pad0[0x58];
-    s32 x58;
-} ToyGlobals4S_;
-
-typedef struct ToyGlobals5S_ {
-    u8 pad0[0x140];
-    void* x140;
-    u8 pad144[0x10];
-    s16 x154;
-} ToyGlobals5S_;
-
-typedef struct ToySubStructS_ {
-    u8 pad0[0x10];
-    s16 x10;
-} ToySubStructS_;
 
 void un_80310324(void)
 {
@@ -2450,16 +2418,6 @@ void un_80310324(void)
     un_803075E8(tg4->x10);
     HSD_PadRenewStatus();
 }
-
-// Decompilation of un_80310660
-// Unit: main/melee/ty/toy
-
-typedef struct TyUnk25 {
-    u8 pad[0x140];
-    void* x140;
-    u8 pad2[0x10];
-    s16 x154;
-} TyUnk25;
 
 /* 95.2% match */
 void un_80310660(s32 arg0)
@@ -2762,9 +2720,6 @@ void un_803114E8(void)
         OSReport(un_803FE7C0);
     }
 }
-// m2c decompilation of un_80311680
-// Unit: main/melee/ty/toy
-
 
 void un_80311680(void) {
     s16* temp_r31;
@@ -2852,9 +2807,6 @@ void un_80311788(void)
 /// #un_80311960
 
 /// #un_80311AB0_OnEnter
-
-// Decompilation of un_80311F5C
-// Unit: main/melee/ty/toy
 
 #include <platform.h>
 
