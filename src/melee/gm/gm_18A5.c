@@ -2629,12 +2629,9 @@ void fn_8019A71C(s32* arg0)
 s32 lbl_804D6678;
 
 void gm_8019A828(void) {
-    s32 temp = 0;
-
-    gm_8018F634()->x32 = temp;
+    gm_8018F634()->x32 = 0;
     lbl_804D6678 = 1;
-    temp = 0x1B;
-    gm_8018F634()->cur_option = temp;
+    gm_8018F634()->cur_option = 0x1B;
 }
 
 /// #fn_8019A86C
