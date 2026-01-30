@@ -54,11 +54,11 @@ inline void fn_8012EC7C_inline(Fighter_GObj *gobj)
     }
     HSD_JObjSetScale(jobj,&fp->fv.ys.x222C);
     ftPartSetRotY(fp, 0, M_PI_2 * fp->facing_dir);
-    ftPartSetRotZ(fp, 2, 0.0f);
-    if (fp->mv.ys.specials.x24 != 0.0f) {
+    ftPartSetRotZ(fp, 2, 0.0F);
+    if (fp->mv.ys.specials.x24 != 0.0F) {
         fp->facing_dir = fp->mv.ys.specials.x24;
     }
-    fp->mv.ys.specials.x24 = 0.0f;
+    fp->mv.ys.specials.x24 = 0.0F;
     ftCommon_8007F5CC(gobj, 1);
     fp->x221E_b4 = 1;
 }
@@ -73,11 +73,11 @@ void fn_8012EC7C(Fighter_GObj* gobj)
     }
     HSD_JObjSetScale(jobj,&fp->fv.ys.x222C);
     ftPartSetRotY(fp, 0, M_PI_2 * fp->facing_dir);
-    ftPartSetRotZ(fp, 2, 0.0f);
-    if (fp->mv.ys.specials.x24 != 0.0f) {
+    ftPartSetRotZ(fp, 2, 0.0F);
+    if (fp->mv.ys.specials.x24 != 0.0F) {
         fp->facing_dir = fp->mv.ys.specials.x24;
     }
-    fp->mv.ys.specials.x24 = 0.0f;
+    fp->mv.ys.specials.x24 = 0.0F;
     ftCommon_8007F5CC(gobj, 1);
     fp->x221E_b4 = 1;
 }
@@ -110,17 +110,11 @@ void fn_8012EFF4(Fighter_GObj* gobj)
     fp->mv.ys.specials.xC = 0;
     motion = fp->motion_id;
     if((motion != 0x16a )) {
-        if(motion >= 0x16a ) {
-            return;
-        }
-        if(motion != 0x165 ) {
-            return;
-        }
+        if(motion >= 0x16a ) return;
+        if(motion != 0x165 ) return;
     }
-
     fp->mv.ys.specials.x0 -= attributes->x50;
     temp_f2 = fp->ground_or_air==1 ? attributes->x8C : attributes->x7C;
-    
     if ((fp->mv.ys.specials.x1C < 0.0F ? -fp->mv.ys.specials.x1C : +fp->mv.ys.specials.x1C) > temp_f2) {
         if (fp->mv.ys.specials.x1C > 0.0F) {
             fp->mv.ys.specials.x1C -= attributes->xCC;
@@ -134,7 +128,7 @@ void fn_8012EFF4(Fighter_GObj* gobj)
         fp->mv.ys.specials.x1C = temp_f2;
         return;
     }
-    if (0.0f != fp->mv.ys.specials.x1C) return;
+    if (0.0F != fp->mv.ys.specials.x1C) return;
     fp->mv.ys.specials.x1C = fp->facing_dir * temp_f2;
 }
 
@@ -246,7 +240,7 @@ void ftYs_SpecialAirSLoop_1_IASA(Fighter_GObj* gobj)
     s32 difference = x48 - x4C;
 
     if ((fp->mv.ys.specials.x0 < difference) && (fp->input.x668 & HSD_PAD_B)) {
-        ftYs_SpecialS_8012F0DC(gobj, 0, 0x440012, 0.0f);
+        ftYs_SpecialS_8012F0DC(gobj, 0, 0x440012, 0.0F);
     }
 }
 
@@ -266,7 +260,7 @@ void ftYs_SpecialAirSLoop_2_IASA(Fighter_GObj* gobj)
     if ((fp->mv.ys.specials.x0 < attributes->x48 - attributes->x4C) &&
         (fp->input.x668 & HSD_PAD_B))
     {
-        ftYs_SpecialS_8012F0DC(gobj, 1, 0x440012, 0.0f);
+        ftYs_SpecialS_8012F0DC(gobj, 1, 0x440012, 0.0F);
     }
 }
 
@@ -279,7 +273,7 @@ void ftYs_SpecialAirSLoop_3_IASA(Fighter_GObj* gobj)
     if ((fp->mv.ys.specials.x0 < (attributes->x48 - attributes->x4C)) &&
         (fp->input.x668 & HSD_PAD_B))
     {
-        ftYs_SpecialS_8012F0DC(gobj, 1, 0x440012, 0.0f);
+        ftYs_SpecialS_8012F0DC(gobj, 1, 0x440012, 0.0F);
     }
 }
 
@@ -292,12 +286,12 @@ void ftYs_SpecialAirSStart_0_Phys(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    fp->xE4_ground_accel_1 = 0.0f;
-    fp->gr_vel = 0.0f;
-    fp->self_vel.y = 0.0f;
-    fp->self_vel.x = 0.0f;
-    fp->x74_anim_vel.y = 0.0f;
-    fp->x74_anim_vel.x = 0.0f;
+    fp->xE4_ground_accel_1 = 0.0F;
+    fp->gr_vel = 0.0F;
+    fp->self_vel.y = 0.0F;
+    fp->self_vel.x = 0.0F;
+    fp->x74_anim_vel.y = 0.0F;
+    fp->x74_anim_vel.x = 0.0F;
 }
 
 /// #ftYs_SpecialAirSLoop_0_Phys
@@ -334,10 +328,10 @@ void ftYs_SpecialAirSLoop_2_Phys(Fighter_GObj* gobj)
     fp->mv.ys.specials.x30 = 0;
     temp = fp->input.lstick.x * attributes->xE0;
     fp->self_vel.x += temp;
-    var_f0 = fp->self_vel.x < 0.0f ? -fp->self_vel.x : fp->self_vel.x;
+    var_f0 = fp->self_vel.x < 0.0F ? -fp->self_vel.x : fp->self_vel.x;
     var_f2 = attributes->x90;
     if (var_f0 > var_f2) {
-        if (fp->self_vel.x < 0.0f) {
+        if (fp->self_vel.x < 0.0F) {
             var_f2 = -var_f2;
         }
         fp->self_vel.x = var_f2;
@@ -350,16 +344,16 @@ void ftYs_SpecialAirSLoop_3_Phys(Fighter_GObj* gobj)
     f32 var_f0;
     f32 var_f2;
     f32 temp;
-    
+
     Fighter* fp = GET_FIGHTER(gobj);
     ftYoshiAttributes* attributes = fp->dat_attrs;
     fp->mv.ys.specials.x30 = 0;
     temp = fp->input.lstick.x * attributes->xE0;
     fp->self_vel.x += temp;
-    var_f0 = fp->self_vel.x < 0.0f ? -fp->self_vel.x : fp->self_vel.x;
+    var_f0 = fp->self_vel.x < 0.0F ? -fp->self_vel.x : fp->self_vel.x;
     var_f2 = attributes->x90;
     if (var_f0 > var_f2) {
-        if (fp->self_vel.x < 0.0f) {
+        if (fp->self_vel.x < 0.0F) {
             var_f2 = -var_f2;
         }
         fp->self_vel.x = var_f2;
@@ -434,7 +428,7 @@ void fn_8013295C(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     PAD_STACK(4);
-    
+
     ftPartSetRotY(fp, 0, M_PI_2 * fp->facing_dir);
     fp->self_vel.x = -fp->self_vel.x;
     fp->gr_vel = -fp->gr_vel;
