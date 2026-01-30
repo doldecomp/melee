@@ -401,6 +401,7 @@ TmData* gm_8018F634(void)
 }
 #pragma pop
 
+#pragma dont_inline on
 u32 fn_8018F640(int arg0)
 {
     if (arg0 >= 4) {
@@ -416,6 +417,7 @@ u32 fn_8018F674(int arg0)
     }
     return gm_801A36C0(arg0);
 }
+#pragma dont_inline off
 
 u32 fn_8018F6A8(int arg0)
 {
@@ -755,6 +757,7 @@ static HSD_GObj* lbl_804D663C;
 void fn_801902F0(int arg0)
 {
     s32 var_r31;
+    PAD_STACK(8);
 
     var_r31 = arg0;
     HSD_SisLib_803A5E70();
@@ -1912,9 +1915,13 @@ void gm_8019628C_OnFrame(void)
     lbl_804799B8.pad[0xA] = (u8)((lbl_804799B8.pad[0xA] + 1) % 11);
 
     cur_option = tm->cur_option;
-    if (cur_option < 9 || (cur_option > 9 && cur_option < 0x13)) {
-        lbl_803D9FD8[cur_option]((s32*)tm, r30, r29);
+    if (cur_option >= 9 && cur_option <= 9) {
+        return;
     }
+    if (cur_option >= 0x13) {
+        return;
+    }
+    lbl_803D9FD8[cur_option]((s32*)tm, r30, r29);
 }
 
 extern struct {
@@ -1948,20 +1955,14 @@ void gm_801963B4_OnEnter(void* arg0)
 /// Scene OnLeave callback for gm_18A5. Frees archive resources.
 void gm_801964A4_OnLeave(UNK_T arg)
 {
-    s32 val;
-    u8 byte_val;
-
     (void)arg;
     lbArchive_80016EFC(lbl_804D6640);
     lbArchive_80016EFC(lbl_804D6644);
     lbArchive_80016EFC(lbl_804D6648);
     lbArchive_80016EFC(lbl_804D6638);
-    val = 0x13;
-    gm_8018F634()->cur_option = val;
-    val = 1;
-    gm_8018F634()->x2C = val;
-    byte_val = lbl_804799B8.pad[0];
-    gm_8018F634()->x31 = byte_val;
+    gm_8018F634()->cur_option = 0x13;
+    gm_8018F634()->x2C = 1;
+    gm_8018F634()->x31 = lbl_804799B8.pad[0];
 }
 
 
