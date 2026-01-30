@@ -36,7 +36,7 @@ void it_802CCB14(Item_GObj* gobj, Item_GObj* ref_gobj)
     it_8026B894(gobj, ref_gobj);
 }
 
-bool itThunder_UnkMotion1_Anim(HSD_GObj* gobj) //new
+bool itThunder_UnkMotion1_Anim(HSD_GObj* gobj)
 {
     Item* item = GET_ITEM(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
@@ -69,12 +69,10 @@ bool itThunder_UnkMotion1_Coll(Item_GObj* gobj)
     return false;
 }
 
-void it_802CCBF8(Item_GObj* gobj)//new
+void it_802CCBF8(Item_GObj* gobj)
 {
     Item* item = GET_ITEM(gobj);
     f32 out = 1.0f;
-    
-    
     if(item->xDD4_itemVar.thunder.x64)
     {
         if(item->xDD4_itemVar.thunder.x60 <= 0){
@@ -86,7 +84,7 @@ void it_802CCBF8(Item_GObj* gobj)//new
     }
 }
 
-void it_802CCC68(HSD_GObj* gobj)//new
+void it_802CCC68(HSD_GObj* gobj)
 {
     Item* item = GET_ITEM(gobj);
     Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
@@ -96,7 +94,7 @@ void it_802CCC68(HSD_GObj* gobj)//new
     item->xDB0_itcmd_var1 = 0;
 }
 
-static void itThunder_UnkMotion2_Anim_inline2(Item_GObj* gobj)//new
+static void itThunder_UnkMotion2_Anim_inline2(Item_GObj* gobj)
 {
     Item* item = GET_ITEM(gobj);
     Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
@@ -106,7 +104,7 @@ static void itThunder_UnkMotion2_Anim_inline2(Item_GObj* gobj)//new
     item->xDB0_itcmd_var1 = 0;
 }
 
-static HSD_JObj *itThunder_UnkMotion2_Anim_inline(Item_GObj* gobj)//new
+static HSD_JObj *itThunder_UnkMotion2_Anim_inline(Item_GObj* gobj)
 {
     HSD_JObj* jobj = GET_JOBJ(gobj);
     HSD_JObj* child;
@@ -124,9 +122,9 @@ static HSD_JObj *itThunder_UnkMotion2_Anim_inline(Item_GObj* gobj)//new
     return child;
 }
 
-bool itThunder_UnkMotion2_Anim(Item_GObj* gobj)//new
+bool itThunder_UnkMotion2_Anim(Item_GObj* gobj)
 {
-    Item* item = GET_ITEM(gobj); 
+    Item* item = GET_ITEM(gobj);
     it_8027A160(itThunder_UnkMotion2_Anim_inline(gobj), item);
     if (!it_80272C6C(gobj)) {
         itThunder_UnkMotion2_Anim_inline2(gobj);
@@ -137,7 +135,7 @@ bool itThunder_UnkMotion2_Anim(Item_GObj* gobj)//new
     return false;
 }
 
-void itThunder_UnkMotion2_Phys(Item_GObj* gobj)//new
+void itThunder_UnkMotion2_Phys(Item_GObj* gobj)
 {
     Item* item = GET_ITEM(gobj);
     it_8027A344(gobj);
