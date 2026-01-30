@@ -5,13 +5,41 @@
 #include <placeholder.h>
 #include <platform.h>
 
+#include "baselib/jobj.h"
+#include "ef/efasync.h"
+
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
+#include "MSL/math.h"
 
-/// #it_8028CFE0
+typedef struct itRShell_Attrs {
+    char pad0[0x38];
+    float x38; // rotation multiplier (gshell x20)
+    char pad3C[0x44 - 0x3C];
+    float x44;
+    Vec x48;
+} itRShell_Attrs;
+
+void it_8028CFE0(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itRShell_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    Vec v;
+    HSD_JObj* jobj;
+    PAD_STACK(4);
+    if (ip->xDD4_itemVar.rshell.xDDC <= 0.0f) {
+        jobj = GET_JOBJ(gobj);
+        v = attrs->x48;
+        v.x *= -ip->facing_dir;
+        efAsync_Spawn(gobj, &GET_ITEM(gobj)->xBC0, 2, 1029, jobj, &v);
+        ip->xDD4_itemVar.rshell.xDDC = attrs->x44;
+    } else {
+        ip->xDD4_itemVar.rshell.xDDC -= 1.0f;
+    }
+}
 
 /// #it_8028D090
 
@@ -58,7 +86,22 @@ bool itRshell_UnkMotion0_Anim(Item_GObj* gobj)
 
 void itRshell_UnkMotion0_Phys(Item_GObj* gobj) {}
 
-/// #itRshell_UnkMotion0_Coll
+bool itRshell_UnkMotion0_Coll(Item_GObj* gobj)
+{
+    itRShell_Attrs* attrs;
+    Item* ip;
+    HSD_JObj* jobj;
+    it_8026D62C(gobj, it_8028D7F0);
+    ip = GET_ITEM(gobj);
+    jobj = GET_JOBJ(gobj);
+    attrs = ip->xC4_article_data->x4_specialAttributes;
+    if (ip->ground_or_air == GA_Ground) {
+        it_80276CB8(gobj);
+        jobj = HSD_JObjGetChild(jobj);
+        HSD_JObjAddRotationY(jobj, attrs->x38 * ABS(ip->x40_vel.x));
+    }
+    return false;
+}
 
 void it_8028D7F0(Item_GObj* gobj)
 {
@@ -170,7 +213,23 @@ bool itRshell_UnkMotion7_Anim(Item_GObj* gobj)
 
 void itRshell_UnkMotion7_Phys(Item_GObj* gobj) {}
 
-/// #itRshell_UnkMotion7_Coll
+bool itRshell_UnkMotion7_Coll(Item_GObj* gobj)
+{
+    itRShell_Attrs* attrs;
+    Item* ip;
+    HSD_JObj* jobj;
+    PAD_STACK(8);
+    it_8026E8C4(gobj, it_8028D62C, it_8028D7F0);
+    ip = GET_ITEM(gobj);
+    jobj = GET_JOBJ(gobj);
+    attrs = ip->xC4_article_data->x4_specialAttributes;
+    if (ip->ground_or_air == GA_Ground) {
+        it_80276CB8(gobj);
+        jobj = HSD_JObjGetChild(jobj);
+        HSD_JObjAddRotationY(jobj, attrs->x38 * ABS(ip->x40_vel.x));
+    }
+    return false;
+}
 
 /// #it_3F14_Logic15_DmgDealt
 

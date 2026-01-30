@@ -427,7 +427,7 @@ typedef struct {
     /* ip+DEC */ unsigned char xDEC_b7 : 1;
     /* ip+DF0 */ s32 xDF0;
     /* ip+DF4 */ float xDF4;
-    /* ip+DF8 */ char pad_DF8[0xDFC - 0xDF8];
+    /* ip+DF8 */ float xDF8;
     /* ip+DFC */ float xDFC;
     /* ip+E00 */ char pad_E00[0xE04 - 0xE00];
     /* ip+E04 */ float xE04;
@@ -678,10 +678,15 @@ typedef struct itKlap_ItemVars {
     /* +14 ip+DE8 */ f32 x14;
     /* +18 ip+DEC */ f32 x18;
     /* +1C ip+DF0 */ f32 x1C;
-    /* +20 ip+DF4 */ f32 x20;
+    /* +20 ip+DF4 */ HSD_GObj* x20;
     /* +24 ip+DF8 */ f32 x24;
     /* +28 ip+DFC */ f32 x28;
 } itKlap_ItemVars;
+
+typedef struct itKyasarin_ItemVars {
+    /* +0  ip+DD4 */ u8 x0[0x20];
+    /* +20 ip+DF4 */ HSD_GObj* x20;
+} itKyasarin_ItemVars;
 
 typedef struct itLeadeadAttr_x0 {
     /* 0x00 */ s32 x0;
@@ -1015,7 +1020,7 @@ typedef struct itWhiteBea_ItemVars {
 } itWhiteBea_ItemVars;
 
 typedef struct itWhiteBeaAttributes {
-    /* +0 */ char pad_0[0x4];
+    /* +0 */ s32* x0;
     /* +4 */ f32 x4;
 } itWhiteBeaAttributes;
 

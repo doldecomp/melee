@@ -1,5 +1,7 @@
 #include "itzgshell.h"
 
+#include "baselib/jobj.h"
+#include "ef/efasync.h"
 #include "gr/grzakogenerator.h"
 
 #include "it/forward.h"
@@ -9,6 +11,7 @@
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
+#include "MSL/math.h"
 
 typedef struct itGShell_Attrs {
     float x0;
@@ -27,13 +30,65 @@ typedef struct itGShell_Attrs {
     Vec x34;
 } itGShell_Attrs;
 
+typedef struct itZGShell_Attrs {
+    char pad0[0x38];
+    float x38;
+    Vec x3C;
+} itZGShell_Attrs;
+
 /* 2DFFA0 */ static void it_802DFFA0(Item_GObj* gobj);
 
-/// #it_802DDB38
+void it_802DDB38(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itZGShell_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    Vec v;
+    HSD_JObj* jobj;
+    PAD_STACK(4);
+    if (ip->xDD4_itemVar.zgshell.xDF8 <= 0.0f) {
+        jobj = GET_JOBJ(gobj);
+        v = attrs->x3C;
+        v.x *= -ip->facing_dir;
+        efAsync_Spawn(gobj, &GET_ITEM(gobj)->xBC0, 2, 1029, jobj, &v);
+        ip->xDD4_itemVar.zgshell.xDF8 = attrs->x38;
+    } else {
+        ip->xDD4_itemVar.zgshell.xDF8 -= 1.0f;
+    }
+}
 
-/// #it_802DDBE8
+void it_802DDBE8(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itGShell_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    if (ip->xDD4_itemVar.zgshell.xE08_b0) {
+        ip->xDD4_itemVar.zgshell.xDFC -= 1.0f;
+        if (ip->xDD4_itemVar.zgshell.xDFC <= 0.0f) {
+            ip->xDD4_itemVar.zgshell.xE08_b0 = 0;
+            ip->xDD4_itemVar.zgshell.xDFC = attrs->x28;
+            it_8027572C(gobj, 0);
+            if (ip->xDD4_itemVar.zgshell.xE08_b1) {
+                it_802756E0(gobj);
+            }
+        }
+    }
+}
 
-/// #fn_802DDC8C
+void fn_802DDC8C(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itGShell_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    it_80275D5C(gobj, &ip->xC0C);
+    if (ABS(ip->x40_vel.x) < attrs->x8) {
+        ip->x40_vel.x = ip->x40_vel.y = ip->x40_vel.z = 0.0f;
+        if (!it_80277040(gobj)) {
+            it_802DE0F0(gobj);
+        } else {
+            it_2725_Logic11_EnteredAir(gobj);
+        }
+    } else {
+        it_802DE6F0(gobj);
+    }
+}
 
 /// #it_802DDD38
 
@@ -50,7 +105,22 @@ bool itZrshell_UnkMotion0_Anim(Item_GObj* arg0)
 
 /// #itZrshell_UnkMotion0_Phys
 
-/// #itZrshell_UnkMotion0_Coll
+bool itZrshell_UnkMotion0_Coll(Item_GObj* gobj)
+{
+    itGShell_Attrs* attrs;
+    Item* ip;
+    HSD_JObj* jobj;
+    it_8026D62C(gobj, it_802DE320);
+    ip = GET_ITEM(gobj);
+    jobj = GET_JOBJ(gobj);
+    attrs = ip->xC4_article_data->x4_specialAttributes;
+    if (ip->ground_or_air == GA_Ground) {
+        it_80276CB8(gobj);
+        jobj = HSD_JObjGetChild(jobj);
+        HSD_JObjAddRotationY(jobj, attrs->x20 * ABS(ip->x40_vel.x));
+    }
+    return false;
+}
 
 void it_802DE320(Item_GObj* gobj)
 {
@@ -138,11 +208,13 @@ void it_2725_Logic11_Dropped(Item_GObj* gobj)
     Item_80268E5C(gobj, 4, 6);
 }
 
+#pragma dont_inline on
 bool itZrshell_UnkMotion4_Anim(Item_GObj* gobj)
 {
     it_802DDBE8(gobj);
     return false;
 }
+#pragma dont_inline reset
 
 void itZrshell_UnkMotion4_Phys(Item_GObj* gobj)
 {
@@ -163,26 +235,47 @@ bool itZrshell_UnkMotion4_Coll(Item_GObj* gobj)
 
 /// #itZrshell_UnkMotion6_Phys
 
-/// #itZrshell_UnkMotion6_Coll
+bool itZrshell_UnkMotion6_Coll(Item_GObj* gobj)
+{
+    itGShell_Attrs* attrs;
+    Item* ip;
+    HSD_JObj* jobj;
+    PAD_STACK(8);
+    it_8026D62C(gobj, it_802DEC80);
+    ip = GET_ITEM(gobj);
+    jobj = GET_JOBJ(gobj);
+    attrs = ip->xC4_article_data->x4_specialAttributes;
+    if (ip->ground_or_air == GA_Ground) {
+        it_80276CB8(gobj);
+        jobj = HSD_JObjGetChild(jobj);
+        HSD_JObjAddRotationY(jobj, attrs->x20 * ABS(ip->x40_vel.x));
+    }
+    if (it_8027770C(gobj)) {
+        it_80272980(gobj);
+    }
+    return false;
+}
 
 /// #it_802DEC80
 
+#pragma dont_inline on
 bool itZrshell_UnkMotion8_Anim(Item_GObj* gobj)
 {
     Item* ip = gobj->user_data;
     if (ip->xDD4_itemVar.zgshell.xDF4 <= 0.0f) {
         if (!ip->xDCD_flag.b5) {
-            fn_802DDC8C(gobj);
+            it_80275444(gobj);
         }
     } else {
         ip->xDD4_itemVar.zgshell.xDF4 -= 1.0f;
     }
     it_802DDBE8(gobj);
     if (ip->msid == 6 || ip->msid == 5) {
-        it_80272940(gobj);
+        it_802DDB38(gobj);
     }
     return false;
 }
+#pragma dont_inline reset
 
 void itZrshell_UnkMotion8_Phys(Item_GObj* gobj)
 {
@@ -206,7 +299,23 @@ bool itZrshell_UnkMotion9_Anim(Item_GObj* arg0)
 
 /// #itZrshell_UnkMotion9_Phys
 
-/// #itZrshell_UnkMotion9_Coll
+bool itZrshell_UnkMotion9_Coll(Item_GObj* gobj)
+{
+    itGShell_Attrs* attrs;
+    Item* ip;
+    HSD_JObj* jobj;
+    PAD_STACK(8);
+    it_8026E8C4(gobj, it_802DE0F0, it_802DE320);
+    ip = GET_ITEM(gobj);
+    jobj = GET_JOBJ(gobj);
+    attrs = ip->xC4_article_data->x4_specialAttributes;
+    if (ip->ground_or_air == GA_Ground) {
+        it_80276CB8(gobj);
+        jobj = HSD_JObjGetChild(jobj);
+        HSD_JObjAddRotationY(jobj, attrs->x20 * ABS(ip->x40_vel.x));
+    }
+    return false;
+}
 
 /// #it_802DF230
 
@@ -295,6 +404,20 @@ void it_802DFFA0(Item_GObj* gobj)
     ip->xDD4_itemVar.zgshell.vel.z = 0.0F;
 }
 
-/// #it_802DFFB8
+void it_802DFFB8(HSD_JObj* jobj, Item* ip)
+{
+    Vec3 vec;
+    Vec3 vec2;
+    if (jobj != NULL) {
+        vec.x = vec.y = vec.z = 0.0F;
+        HSD_JObjGetTranslation(jobj, &vec2);
+        ip->x40_vel.x =
+            ip->facing_dir * (vec2.z - ip->xDD4_itemVar.zgshell.vel.z);
+        ip->x40_vel.y = vec2.y - ip->xDD4_itemVar.zgshell.vel.y;
+        ip->x40_vel.z = vec2.x - ip->xDD4_itemVar.zgshell.vel.x;
+        ip->xDD4_itemVar.zgshell.vel = vec2;
+        HSD_JObjSetTranslate(jobj, &vec);
+    }
+}
 
 /// #it_802E0100

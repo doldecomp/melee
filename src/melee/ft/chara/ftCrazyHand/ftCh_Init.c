@@ -1,5 +1,6 @@
 #include "ftCh_Init.h"
 
+#include "math.h"
 #include "types.h"
 
 #include <placeholder.h>
@@ -7,6 +8,7 @@
 
 #include "baselib/forward.h"
 
+#include "cm/camera.h"
 #include "ft/chara/ftCommon/ftCo_CaptureCut.h"
 #include "ft/chara/ftCommon/ftCo_Throw.h"
 #include "ft/chara/ftCommon/ftCo_Thrown.h"
@@ -18,6 +20,7 @@
 #include "ft/ftbosslib.h"
 #include "ft/ftcamera.h"
 #include "ft/ftcommon.h"
+#include "ft/ftlib.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
 
@@ -802,7 +805,22 @@ static void ftCh_Init_80156018(HSD_GObj* gobj)
     fp->fv.mh.x2258 = ftMh_MS_Wait1_0;
 }
 
-/// #ftCh_Init_801560D8
+static void ftCh_Init_801560D8(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (fp->motion_id == 0x155 || fp->motion_id == 0x156) {
+        fp->cur_pos = fp->fv.mh.x2240_pos;
+    } else {
+        fp->fv.mh.x2240_pos = fp->cur_pos;
+    }
+    if (fp->fv.mh.x2258 == 0x185) {
+        Fighter_ChangeMotionState(gobj, 0x156, 0, fp->cur_anim_frame, 1.0f,
+                                  0.0f, NULL);
+    } else {
+        Fighter_ChangeMotionState(gobj, 0x156, 0, 0, 1.0f, 0.0f, NULL);
+    }
+    fp->fv.mh.x2258 = 0x156;
+}
 
 /// #ftCh_Init_80156198
 
@@ -2450,7 +2468,28 @@ void ftCh_TagGrab_Anim(HSD_GObj* gobj)
     }
 }
 
-/// #ftCh_TagSqueeze_Anim
+void ftCh_TagSqueeze_Anim(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (fp->cmd_vars[0]) {
+        ftCrazyHand_DatAttrs* da = fp->ft_data->ext_attr;
+        if (++fp->mv.ch.ch_dmg.x60 <= da->x124) {
+            lbAudioAx_8002438C(0x81652);
+        } else {
+            if (++fp->mv.ch.ch_dmg.x64 <= da->x128) {
+                lbAudioAx_8002438C(0x81653);
+            }
+        }
+        fp->cmd_vars[0] = 0;
+    }
+    if (fp->mv.ch.unk0.x8 > 0 && !ftAnim_IsFramesRemaining(gobj)) {
+        Fighter_ChangeMotionState(gobj, 0x182, 0, 0, 1.0f, 0.0f, NULL);
+        ftAnim_8006EBA4(gobj);
+    }
+    if (--fp->mv.ch.unk0.x8 == 0) {
+        ftCo_800D4F24(gobj, 0);
+    }
+}
 
 void ftCh_TagGrab_IASA(HSD_GObj* gobj)
 {
@@ -2506,7 +2545,106 @@ void ftCh_TagFail_Phys(HSD_GObj* gobj) {}
 
 void ftCh_TagFail_Coll(HSD_GObj* gobj) {}
 
-/// #fn_8015B2C0
+static void fn_8015B2C0(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    u8 _[16];
+    switch (fp->mv.ch.unk4.x0) {
+    case 0: {
+        HSD_GObj* enemy_gobj = ftLib_8008627C(&fp->cur_pos, gobj);
+        if (enemy_gobj != NULL) {
+            Camera_8002E6FC((int) ftLib_80086BE0(enemy_gobj));
+        } else {
+            Camera_8002E6FC(0);
+        }
+        Camera_8002ED9C(40);
+        Camera_8002EEC8(45);
+        Camera_8002EC7C(-M_PI);
+        Camera_8002EF14();
+        Camera_8002EC7C(0);
+        Camera_8002F0E4(120);
+        fp->mv.ch.unk4.x0 = 1;
+        return;
+    }
+    case 1: {
+        if (Camera_8002F260() != 0) {
+            Camera_8002E948(fn_8015B4EC);
+            Camera_8002ED9C(120);
+            Camera_8002F0E4(20);
+            fp->mv.ch.unk4.x0 = 2;
+        }
+        return;
+    }
+    case 2: {
+        if (Camera_8002F260() != 0) {
+            Camera_8002EC7C(M_PI / 2);
+            Camera_8002F0E4(60);
+            fp->mv.ch.unk4.x0 = 3;
+        }
+        return;
+    }
+    case 3: {
+        if (Camera_8002F260() != 0) {
+            Camera_8002ED9C(90);
+            Camera_8002EC7C(-M_PI / 9);
+            Camera_8002EB5C(-M_PI / 12);
+            Camera_8002EF14();
+            fp->mv.ch.unk4.x0 = 4;
+        }
+        return;
+    }
+    case 4: {
+        Camera_8002F274();
+        fp->mv.ch.unk4.x8 = 120;
+        fp->mv.ch.unk4.x0 = 5;
+        return;
+    }
+    case 5: {
+        if (--fp->mv.ch.unk4.x8 == 0) {
+            Camera_8002EC7C(-M_PI / 9);
+            Camera_8002EF14();
+            Camera_8002ED9C(120);
+            fp->mv.ch.unk4.x8 = 30;
+            fp->mv.ch.unk4.x0 = 6;
+        }
+        return;
+    }
+    case 6: {
+        if (--fp->mv.ch.unk4.x8 == 0) {
+            Camera_8002EC7C(M_PI / 9);
+            Camera_8002EF14();
+            fp->mv.ch.unk4.x8 = 30;
+            fp->mv.ch.unk4.x0 = 7;
+        }
+        return;
+    }
+    case 7: {
+        if (--fp->mv.ch.unk4.x8 == 0) {
+            Camera_8002ED9C(180);
+            Camera_8002EC7C(-M_PI / 2);
+            Camera_8002EB5C(-M_PI / 9);
+            Camera_8002EF14();
+            fp->mv.ch.unk4.x8 = 50;
+            fp->mv.ch.unk4.x0 = 8;
+        }
+        return;
+    }
+    case 8: {
+        Camera_8002F274();
+        fp->mv.ch.unk4.x0 = 9;
+        return;
+    }
+    case 9: {
+        if (--fp->mv.ch.unk4.x8 == 0) {
+            Camera_8002F474();
+            fp->mv.ch.unk4.x0 = 10;
+        }
+        return;
+    }
+    }
+    // NOTE: maybe add an #ifdef BUGFIX for case 10, like
+    // ftMh_MS_343_801511FC?
+}
 
 bool fn_8015B4EC(Vec3* vec)
 {
@@ -2531,7 +2669,17 @@ void ftCo_CaptureCrazyHand_Coll(HSD_GObj* gobj) {}
 
 /// #ftCh_GrabUnk1_8015B670
 
-/// #ftCo_CaptureDamageCrazyHand_Anim
+#pragma dont_inline on
+void ftCo_CaptureDamageCrazyHand_Anim(HSD_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    ftCommon_GrabMash(fp, p_ftCommonData->x3A8);
+    if (fp->grab_timer <= 0) {
+        ftCh_GrabUnk1_8015B778(gobj);
+        ftCh_Init_80159098(fp->victim_gobj);
+    }
+}
+#pragma dont_inline reset
 
 void ftCo_CaptureDamageCrazyHand_IASA(HSD_GObj* gobj) {}
 

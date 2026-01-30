@@ -36,8 +36,8 @@ struct ftKb_FighterVars {
     /* fp+2294   */ s32 x68;
     /* fp+2298   */ s32 x6C;
     /* fp+229C   */ u8 _70[0x74 - 0x70];
-    /* fp+22A0   */ u32 x74;
-    /* fp+22A4   */ u32 x78;
+    /* fp+22A0   */ Item_GObj* x74;
+    /* fp+22A4   */ Item_GObj* x78;
     /* fp+22A8   */ Item_GObj* ns_flash_gobj;
     /* fp+22AC   */ s32 x80;
     /* fp+22B0   */ float x84; ///< Bowser fire breath scale 1
@@ -172,7 +172,7 @@ struct ftKb_DatAttrs {
     /* +128 */ float specialn_kp_spew_flame_velocity;
     /* +12C */ float specialn_kp_flame_scale;
     /* +130 */ float specialn_kp_lowest_charge_graphic_size;
-    /* +134 */ u32 specialn_kp_screen_shake_frequency;
+    /* +134 */ s32 specialn_kp_screen_shake_frequency;
     /* +138 */ float specialn_kp_breath_x_offset;
     // Values repeat below here
     /* +13C */ float specialn_kp_breath_y_offset;

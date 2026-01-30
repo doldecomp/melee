@@ -25,7 +25,14 @@ Item* it_8028ECF0(Item_GObj* gobj, Vec3* v)
     return ip;
 }
 
-/// #it_3F14_Logic17_Destroyed
+void it_3F14_Logic17_Destroyed(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->xDD4_itemVar.freeze.unk_1C != NULL) {
+        it_802E37A4(ip->xDD4_itemVar.freeze.unk_1C);
+        ip->xDD4_itemVar.freeze.unk_1C = NULL;
+    }
+}
 
 /// #it_3F14_Logic17_Spawned
 
@@ -79,7 +86,7 @@ void it_3F14_Logic17_PickedUp(Item_GObj* gobj)
     Item* item = gobj->user_data;
     Item_GObj* linked;
 
-    if ((linked = (Item_GObj*) item->xDD4_itemVar.freeze.unk_1C) != NULL) {
+    if ((linked = item->xDD4_itemVar.freeze.unk_1C) != NULL) {
         it_802E37A4(linked);
         item->xDD4_itemVar.freeze.unk_1C = NULL;
     }

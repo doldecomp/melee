@@ -600,7 +600,7 @@ void ftKb_SkSpecialAirNEnd_Coll(Fighter_GObj* gobj)
 /// @param out_charge Output: current charge value
 /// @param out_max Output: max charge time (integer)
 /// @return 0 if valid, -1 if invalid/inactive
-int ftKb_SpecialNMt_80106F44(Fighter_GObj* gobj, int* out_charge, int* out_max)
+s32 ftKb_SpecialNMt_80106F44(Fighter_GObj* gobj, s32* out_charge, s32* out_max)
 {
     Vec2 unused;
     Fighter* fp;

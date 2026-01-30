@@ -738,7 +738,25 @@ void ftCo_ItemScopeAirEnd_Coll(Fighter_GObj* gobj)
     ft_80082C74(gobj, fn_800D87C0);
 }
 
-/// #ftCo_Catch_CheckInput
+bool ftCo_Catch_CheckInput(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    if (ftCo_800951D0(gobj)) {
+        return true;
+    }
+    if (!fn_800D8E94(gobj)) {
+        return false;
+    }
+    if (!fn_800D952C(gobj)) {
+        return false;
+    }
+    if ((fp->input.held_inputs & HSD_PAD_LR) && (fp->input.x668 & HSD_PAD_A)) {
+        ftCo_800D8C54(gobj, ftCo_MS_Catch);
+        return true;
+    }
+    return false;
+}
 
 bool ftCo_800D8A38(Fighter_GObj* gobj)
 {
@@ -1266,7 +1284,23 @@ void ftCo_CaptureJump_Anim(Fighter_GObj* gobj)
     }
 }
 
-/// #ftCo_CaptureJump_IASA
+#pragma dont_inline on
+void ftCo_CaptureJump_IASA(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    PAD_STACK(8);
+    if (fp->mv.ca.specials.grav >= p_ftCommonData->x3B8) {
+        RETURN_IF(ftCo_SpecialAir_CheckInput(gobj));
+        RETURN_IF(ftCo_80095328(gobj, NULL));
+        RETURN_IF(ftCo_800D7100(gobj));
+        RETURN_IF(ftCo_800C3B10(gobj));
+        RETURN_IF(ftCo_80099A58(gobj));
+        RETURN_IF(ftCo_AttackAir_CheckItemThrowInput(gobj));
+        RETURN_IF(ftCo_800D705C(gobj));
+        RETURN_IF(ftCo_800CB870(gobj));
+    }
+}
+#pragma dont_inline reset
 
 void ftCo_CaptureJump_Phys(Fighter_GObj* gobj)
 {

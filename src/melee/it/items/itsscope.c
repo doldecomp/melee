@@ -15,7 +15,27 @@
 #define GET_ATTRS(ip)                                                         \
     ((itSScopeAttributes*) (ip)->xC4_article_data->x4_specialAttributes)
 
-/// #it_80291BE0
+HSD_GObj* it_80291BE0(Vec3* arg0)
+{
+    SpawnItem spawn;
+    Item_GObj* gobj;
+
+    spawn.kind = It_Kind_S_Scope;
+    spawn.prev_pos = *arg0;
+    spawn.pos = spawn.prev_pos;
+    spawn.facing_dir = -1.0f;
+    spawn.x3C_damage = 0;
+    spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;
+    spawn.x0_parent_gobj = NULL;
+    spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
+    spawn.x44_flag.b0 = true;
+    spawn.x40 = 0;
+    gobj = Item_80268B5C(&spawn);
+    if (gobj != NULL) {
+        it_80292030(gobj);
+    }
+    return gobj;
+}
 
 void it_3F14_Logic21_Spawned(Item_GObj* gobj)
 {
