@@ -24,7 +24,7 @@ ItemStateTable it_803F7C40[] = {
 void it_2725_Logic7_Spawned(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itThunderAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itThunderPokemonAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
     ip->facing_dir = 0.0f;
     ip->xDAC_itcmd_var0 = 0;
     it_802CCE28(gobj);
@@ -142,13 +142,13 @@ void itThunder_UnkMotion2_Phys(Item_GObj* gobj)
     Item* item = GET_ITEM(gobj);
     it_8027A344(gobj);
     if (item->xDAC_itcmd_var0 != 0) {
-        itThunderAttributes* attrs = item->xC4_article_data->x4_specialAttributes;
+        itThunderPokemonAttributes* attrs = item->xC4_article_data->x4_specialAttributes;
         item->xDD4_itemVar.thunder.x68 = attrs->x4;
         item->xDAC_itcmd_var0 = 0;
         item->xDB0_itcmd_var1 = 1;
     }
     if (item->xDB0_itcmd_var1 != 0) {
-        itThunderAttributes* attrs = item->xC4_article_data->x4_specialAttributes;
+        itThunderPokemonAttributes* attrs = item->xC4_article_data->x4_specialAttributes;
         item->xDD4_itemVar.thunder.x68 += attrs->x8;
     }
     item->x40_vel.y = item->xDD4_itemVar.thunder.x68;
@@ -178,7 +178,7 @@ bool itThunder_UnkMotion0_Anim(Item_GObj* gobj)
 static void itThunder_UnkMotion0_Phys_inline2(Item_GObj* gobj)
 {
     Item* item = GET_ITEM(gobj);
-    itThunderAttributes* attrs = item->xC4_article_data->x4_specialAttributes;
+    itThunderPokemonAttributes* attrs = item->xC4_article_data->x4_specialAttributes;
     item->xDD4_itemVar.thunder.x60 = attrs->xC;
     item->xDD4_itemVar.thunder.x64 = 1;
     Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
