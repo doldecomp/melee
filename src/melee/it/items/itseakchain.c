@@ -1,7 +1,5 @@
 #include "itseakchain.h"
 
-#include "itlinkhookshot.h"
-
 #include "it/forward.h"
 
 #include "it/inlines.h"
@@ -25,9 +23,9 @@ void it_802BAF0C(Item_GObj* gobj)
 /// #it_802BB290
 
 /// #fn_802BB428
-s32 fn_802BB428(Item_GObj* gobj)
+void fn_802BB428(Item_GObj* gobj)
 {
-    return it_802BCA30(GET_ITEM(gobj));
+    it_802BCA30(GET_ITEM(gobj));
 }
 
 /// #fn_802BB44C
@@ -65,12 +63,10 @@ s32 it_802BBAEC(ItemLink* link, s32 arg1, f32 arg2)
 
 void it_2725_Logic54_PickedUp(Item_GObj* gobj)
 {
-    Item* ip;
-    PAD_STACK(16);
-
-    ip = gobj->user_data;
+    Item* item = GET_ITEM(gobj);
+    PAD_STACK(4);
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
-    ip->on_accessory = (HSD_GObjEvent) fn_802BB428;
+    item->on_accessory = fn_802BB428;
 }
 
 /// #it_802BCED4
