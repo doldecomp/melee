@@ -1,7 +1,12 @@
 #include "itgamewatchchef.h"
 
+#include "math.h"
+
+#include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+
+#include <baselib/jobj.h>
 
 /// #it_802C837C
 
@@ -38,7 +43,15 @@ bool it_2725_Logic112_ShieldBounced(Item_GObj* gobj)
     return itColl_BounceOffShield(gobj);
 }
 
-/// #it_2725_Logic112_Reflected
+bool it_2725_Logic112_Reflected(Item_GObj* gobj)
+{
+    const f32 PI_2 = M_PI / 2;
+    Item* ip = GET_ITEM(gobj);
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+    it_80273030(gobj);
+    HSD_JObjSetRotationY(jobj, PI_2 * ip->facing_dir);
+    return false;
+}
 
 void it_2725_Logic112_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {

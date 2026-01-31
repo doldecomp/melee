@@ -37,6 +37,6 @@
 /* 0DE2A8 */ void ftCo_800DE2A8(Fighter_GObj*, Fighter_GObj* gobj);
 /* 0DE2CC */ void ftCo_800DE2CC(Fighter_GObj*, Fighter_GObj*);
 /* 0DE2F0 */ void ftCo_800DE2F0(Fighter_GObj* gobj);
-/* 105FEC */ void fn_80105FEC(void);
+/* 105FEC */ void fn_80105FEC(HSD_GObj* gobj);
 
 #endif

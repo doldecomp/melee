@@ -12,6 +12,7 @@
 #include "it/types.h"
 
 #include <baselib/gobj.h>
+#include "MSL/trigf.h"
 
 /* 29A5F8 */ static bool itLipstickspore_UnkMotion1_Coll(Item_GObj* gobj);
 
@@ -74,7 +75,15 @@ bool it_3F14_Logic37_Absorbed(Item_GObj* arg0)
     return true;
 }
 
-/// #it_3F14_Logic37_Reflected
+bool it_3F14_Logic37_Reflected(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    HSD_JObj* jobj = gobj->hsd_obj;
+    PAD_STACK(8);
+    it_80273030(gobj);
+    HSD_JObjSetRotationZ(jobj, atan2f(ip->x40_vel.y, ip->x40_vel.x));
+    return false;
+}
 
 bool it_3F14_Logic37_ShieldBounced(Item_GObj* gobj)
 {

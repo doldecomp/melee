@@ -570,6 +570,7 @@ struct Item {
         itKirbyHammer_ItemVars kirbyhammer;
         itKusudama_ItemVars kusudama;
         itKlap_ItemVars klap;
+        itKyasarin_ItemVars kyasarin;
         itLeadead_ItemVars leadead;
         itLikelike_ItemVars likelike;
         itLGun_ItemVars lgun;

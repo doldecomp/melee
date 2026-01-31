@@ -153,6 +153,14 @@ union ftMasterHand_MotionVars {
         /* +40 fp+2380 */ Item_GObj* x40;
     } fingerbeam;
 
+    struct ftMasterHand_GrabVars {
+        char pad_0[0x28];
+        Item_GObj* x28;
+        Item_GObj* x2C;
+        Item_GObj* x30;
+        Item_GObj* x34;
+    } grab;
+
     struct ftMasterHand_Damage_0 {
         /*  +0 fp+2340 */ char pad_0[0x28];
         /* +28 fp+2368 */ int x28;
@@ -163,6 +171,19 @@ union ftMasterHand_MotionVars {
         /* +3C fp+237C */ Item_GObj* x3C;
         /* +40 fp+2380 */ Item_GObj* x40;
     } dmg0;
+
+    struct ftCrazyHand_DamageVars {
+        /*  +0 fp+2340 */ char pad_0[0x60];
+        /* +60 fp+23A0 */ int x60;
+        /* +64 fp+23A4 */ int x64;
+    } ch_dmg;
+
+    struct ftCrazyHand_BackCrushVars {
+        /* +0 fp+2340 */ char pad_0[0x44];
+        /* +44 fp+2384 */ Vec3 x44;
+        /* +50 fp+2390 */ Vec3 x50;
+        /* +5C fp+239C */ int x5C;
+    } ch_backcrush;
 };
 
 #endif

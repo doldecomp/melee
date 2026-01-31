@@ -325,9 +325,44 @@ float un_80305DB0(void)
     return ret;
 }
 
-/// #un_80305EB4
+static inline float HSD_PadGetNmlSubStickX(u8 slot)
+{
+    return HSD_PadCopyStatus[slot].nml_subStickX;
+}
 
-/// #un_80305FB8
+float un_80305EB4(void)
+{
+    float ret = 0.0F;
+    int i;
+
+    for (i = 0; i < 4; i++) {
+        ret = HSD_PadGetNmlSubStickX(i);
+
+        if (ABS(ret) > 0.1F) {
+            gm_801677E8(i);
+            break;
+        }
+    }
+
+    return ret;
+}
+
+float un_80305FB8(void)
+{
+    float ret = 0.0F;
+    int i;
+
+    for (i = 0; i < 4; i++) {
+        ret = HSD_PadGetNmlSubStickY(i);
+
+        if (ABS(ret) > 0.1F) {
+            gm_801677E8(i);
+            break;
+        }
+    }
+
+    return ret;
+}
 
 float un_803060BC(int trophyId, int field)
 {
