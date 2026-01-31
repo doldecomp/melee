@@ -685,7 +685,7 @@ void ftCo_ItemScopeAirFire_Coll(Fighter_GObj* gobj)
 
 static void fn_800D84D4(Fighter_GObj*, int);
 
-static void fn_800D86B8(Fighter_GObj* gobj)
+void fn_800D86B8(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fn_800D84D4(gobj, fp->mv.co.common.x0);

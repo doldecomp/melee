@@ -702,11 +702,6 @@ typedef struct itKlap_ItemVars {
     /* +28 ip+DFC */ f32 x28;
 } itKlap_ItemVars;
 
-typedef struct itKyasarin_ItemVars {
-    /* +0  ip+DD4 */ u8 x0[0x20];
-    /* +20 ip+DF4 */ HSD_GObj* x20;
-} itKyasarin_ItemVars;
-
 typedef struct itLeadeadAttr_x0 {
     /* 0x00 */ s32 x0;
     /* 0x04 */ f32 x4;
