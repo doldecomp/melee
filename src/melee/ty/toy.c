@@ -347,11 +347,6 @@ float un_80305EB4(void)
     return ret;
 }
 
-static inline float HSD_PadGetNmlSubStickY(u8 slot)
-{
-    return HSD_PadCopyStatus[slot].nml_subStickY;
-}
-
 float un_80305FB8(void)
 {
     float ret = 0.0F;

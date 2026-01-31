@@ -90,6 +90,11 @@ static inline float HSD_PadGetNmlStickY(u8 slot)
     return HSD_PadCopyStatus[slot].nml_stickY;
 }
 
+static inline float HSD_PadGetNmlSubStickY(u8 slot)
+{
+    return HSD_PadCopyStatus[slot].nml_subStickY;
+}
+
 void HSD_PadFlushQueue(HSD_FlushType);
 u8 HSD_PadGetRawQueueCount(void);
 s32 HSD_PadGetResetSwitch(void);
