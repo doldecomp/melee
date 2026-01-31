@@ -5,6 +5,8 @@
 #include "ft/chara/ftSamus/types.h"
 #include "ft/fighter.h"
 #include "ft/ftcoll.h"
+#include "ft/inlines.h"
+#include "ftSamus/types.h"
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/itCharItems.h"
@@ -234,15 +236,11 @@ void it_802BAC3C(Fighter_GObj* gobj)
 
 void it_802BAC80(Fighter_GObj* gobj)
 {
-    Item* ip;
-    Fighter* fp;
-
-    fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     if (fp->fv.ss.x223C != NULL) {
-        ip = GET_ITEM((HSD_GObj*) fp->fv.ss.x223C);
-        if (ip->xDD4_itemVar.samusgrapple.unk_10 != NULL) {
-            ((void (*)(Item_GObj*)) ip->xDD4_itemVar.samusgrapple.unk_10)(
-                fp->fv.ss.x223C);
+        Item* item = GET_ITEM(fp->fv.ss.x223C);
+        if (item->xDD4_itemVar.samusgrapple.unk_10) {
+            item->xDD4_itemVar.samusgrapple.unk_10(fp->fv.ss.x223C);
         }
     }
 }

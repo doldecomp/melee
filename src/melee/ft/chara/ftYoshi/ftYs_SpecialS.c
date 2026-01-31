@@ -4,9 +4,11 @@
 #include "math.h"
 #include "placeholder.h"
 
+#include "baselib/forward.h"
+
+#include "ef/efsync.h"
 #include "ft/fighter.h"
 
-#include "baselib/forward.h"
 #include "ft/forward.h"
 
 #include "ft/ft_081B.h"
@@ -15,12 +17,10 @@
 #include "ft/ft_0892.h"
 #include "ft/ftanim.h"
 #include "ft/ftcommon.h"
-#include "ft/inlines.h"
 #include "ft/ftparts.h"
+#include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftYoshi/types.h"
-
-#include "ef/efsync.h"
 #include "lb/lb_00B0.h"
 
 #include <dolphin/mtx.h>
@@ -44,7 +44,7 @@ inline void ftYoshi_SpecialS_SetCall(Fighter_GObj* gobj)
 
 /// #ftYs_SpecialS_8012EB48
 
-inline void fn_8012EC7C_inline(Fighter_GObj *gobj)
+inline void fn_8012EC7C_inline(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
@@ -52,7 +52,7 @@ inline void fn_8012EC7C_inline(Fighter_GObj *gobj)
     if ((motion != 0x16B) && ((motion >= 0x16B) || (motion != 0x167))) {
         ftParts_80074B0C(gobj, 0, 0);
     }
-    HSD_JObjSetScale(jobj,&fp->fv.ys.x222C);
+    HSD_JObjSetScale(jobj, &fp->fv.ys.x222C);
     ftPartSetRotY(fp, 0, M_PI_2 * fp->facing_dir);
     ftPartSetRotZ(fp, 2, 0.0F);
     if (fp->mv.ys.specials.x24 != 0.0F) {
@@ -71,7 +71,7 @@ void fn_8012EC7C(Fighter_GObj* gobj)
     if ((motion != 0x16B) && ((motion >= 0x16B) || (motion != 0x167))) {
         ftParts_80074B0C(gobj, 0, 0);
     }
-    HSD_JObjSetScale(jobj,&fp->fv.ys.x222C);
+    HSD_JObjSetScale(jobj, &fp->fv.ys.x222C);
     ftPartSetRotY(fp, 0, M_PI_2 * fp->facing_dir);
     ftPartSetRotZ(fp, 2, 0.0F);
     if (fp->mv.ys.specials.x24 != 0.0F) {
@@ -109,26 +109,38 @@ void fn_8012EFF4(Fighter_GObj* gobj)
     ftYoshiAttributes* attributes = fp->dat_attrs;
     fp->mv.ys.specials.xC = 0;
     motion = fp->motion_id;
-    if((motion != 0x16a )) {
-        if(motion >= 0x16a ) return;
-        if(motion != 0x165 ) return;
+    if ((motion != 0x16a)) {
+        if (motion >= 0x16a) {
+            return;
+        }
+        if (motion != 0x165) {
+            return;
+        }
     }
     fp->mv.ys.specials.x0 -= attributes->x50;
-    temp_f2 = fp->ground_or_air==1 ? attributes->x8C : attributes->x7C;
-    if ((fp->mv.ys.specials.x1C < 0.0F ? -fp->mv.ys.specials.x1C : +fp->mv.ys.specials.x1C) > temp_f2) {
+    temp_f2 = fp->ground_or_air == 1 ? attributes->x8C : attributes->x7C;
+    if ((fp->mv.ys.specials.x1C < 0.0F ? -fp->mv.ys.specials.x1C
+                                       : +fp->mv.ys.specials.x1C) > temp_f2)
+    {
         if (fp->mv.ys.specials.x1C > 0.0F) {
             fp->mv.ys.specials.x1C -= attributes->xCC;
-            if (!(fp->mv.ys.specials.x1C < temp_f2)) return;
+            if (!(fp->mv.ys.specials.x1C < temp_f2)) {
+                return;
+            }
             fp->mv.ys.specials.x1C = temp_f2;
             return;
         }
         temp_f2 = -temp_f2;
         fp->mv.ys.specials.x1C += attributes->xCC;
-        if (!(fp->mv.ys.specials.x1C > temp_f2)) return;
+        if (!(fp->mv.ys.specials.x1C > temp_f2)) {
+            return;
+        }
         fp->mv.ys.specials.x1C = temp_f2;
         return;
     }
-    if (0.0F != fp->mv.ys.specials.x1C) return;
+    if (0.0F != fp->mv.ys.specials.x1C) {
+        return;
+    }
     fp->mv.ys.specials.x1C = fp->facing_dir * temp_f2;
 }
 
@@ -144,7 +156,7 @@ void ftYs_SpecialS_Enter(Fighter_GObj* gobj)
     PAD_STACK(16);
     fp->facing_dir = fp->input.lstick.x > 0.0F ? 1.0F : -1.0F;
     Fighter_ChangeMotionState(gobj, 0x168, 0U, 0.0F, 1.0F, 0.0F, NULL);
-    for (i=3; i >= 0; i--) {
+    for (i = 3; i >= 0; i--) {
         fp->cmd_vars[i] = 0;
     }
     ftCommon_8007D5D4(fp);
@@ -164,7 +176,7 @@ void ftYs_SpecialAirS_Enter(Fighter_GObj* gobj)
     PAD_STACK(16);
     fp->facing_dir = fp->input.lstick.x > 0.0F ? 1.0F : -1.0F;
     Fighter_ChangeMotionState(gobj, 0x168, 0U, 0.0F, 1.0F, 0.0F, NULL);
-    for (i=3; i >= 0; i--) {
+    for (i = 3; i >= 0; i--) {
         fp->cmd_vars[i] = 0;
     }
     ftAnim_8006EBA4(gobj);
@@ -184,7 +196,8 @@ void ftYs_SpecialAirSStart_0_Anim(Fighter_GObj* gobj)
     ftYs_SpecialS_8012EB48();
     if (ftAnim_IsFramesRemaining(gobj) == 0) {
         ftCommon_8007D5D4(fp);
-        Fighter_ChangeMotionState(gobj, 0x169, 0x440012U, 0.0F, 0.0F, 0.0F, NULL);
+        Fighter_ChangeMotionState(gobj, 0x169, 0x440012U, 0.0F, 0.0F, 0.0F,
+                                  NULL);
         ftYoshi_SpecialS_SetCall(gobj);
         fp->cur_anim_frame = 0.0F;
         ftAnim_SetAnimRate(gobj, 0.0F);
@@ -212,11 +225,11 @@ void ftYs_SpecialAirSStart_1_Anim(Fighter_GObj* gobj)
     PAD_STACK(8);
     ftYs_SpecialS_8012EB48();
     if (ftAnim_IsFramesRemaining(gobj) == 0) {
-        Fighter_ChangeMotionState(gobj, 0x169, 0x440012U, 0.0F, 0.0F, 0.0F, NULL);
+        Fighter_ChangeMotionState(gobj, 0x169, 0x440012U, 0.0F, 0.0F, 0.0F,
+                                  NULL);
         ftYoshi_SpecialS_SetCall(gobj);
         fp->cur_anim_frame = 0.0F;
         ftAnim_SetAnimRate(gobj, 0.0F);
-
     }
 }
 
@@ -336,7 +349,8 @@ void ftYs_SpecialAirSLoop_2_Phys(Fighter_GObj* gobj)
         }
         fp->self_vel.x = var_f2;
     }
-    ftCommon_Fall(fp, attributes->specials_start_gravity, attributes->specials_start_terminal_vel);
+    ftCommon_Fall(fp, attributes->specials_start_gravity,
+                  attributes->specials_start_terminal_vel);
 }
 
 void ftYs_SpecialAirSLoop_3_Phys(Fighter_GObj* gobj)
@@ -358,7 +372,8 @@ void ftYs_SpecialAirSLoop_3_Phys(Fighter_GObj* gobj)
         }
         fp->self_vel.x = var_f2;
     }
-    ftCommon_Fall(fp, attributes->specials_start_gravity, attributes->specials_start_terminal_vel);
+    ftCommon_Fall(fp, attributes->specials_start_gravity,
+                  attributes->specials_start_terminal_vel);
 }
 
 void ftYs_SpecialAirSLanding_Phys(Fighter_GObj* gobj)
@@ -377,7 +392,8 @@ void ftYs_SpecialAirSStart_0_Coll(Fighter_GObj* gobj)
 
     if (ft_80082708(gobj) == 0) {
         ftCommon_8007D5D4(fp);
-        Fighter_ChangeMotionState(gobj, 360, 0x0C4C5092U, fp->cur_anim_frame, 1.0F, 0.0F, NULL);
+        Fighter_ChangeMotionState(gobj, 360, 0x0C4C5092U, fp->cur_anim_frame,
+                                  1.0F, 0.0F, NULL);
         ftYoshi_SpecialS_SetCall(gobj);
     }
 }
@@ -403,9 +419,9 @@ void ftYs_SpecialAirSStart_1_Coll(Fighter_GObj* gobj)
 
     if (ft_80081D0C(gobj) != GA_Ground) {
         ftCommon_8007D7FC(fp);
-        Fighter_ChangeMotionState(gobj, 356, 0x0C4C5092U, fp->cur_anim_frame, 1.0F, 0.0F, NULL);
+        Fighter_ChangeMotionState(gobj, 356, 0x0C4C5092U, fp->cur_anim_frame,
+                                  1.0F, 0.0F, NULL);
         ftYoshi_SpecialS_SetCall(gobj);
-
     }
 }
 

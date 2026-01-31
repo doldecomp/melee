@@ -1,10 +1,14 @@
 #include "itnesspkflush.h"
 
+#include "math.h"
+
 #include "it/forward.h"
 
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
+
+#include <baselib/jobj.h>
 
 /* 2AB29C */ static bool itNesspkflush_UnkMotion1_Coll(Item_GObj* gobj);
 /* 2AB2A4 */ static bool itNesspkflush_UnkMotion2_Coll(Item_GObj* gobj);
@@ -97,7 +101,18 @@ bool itNesspkflush_UnkMotion2_Coll(Item_GObj* gobj)
     return false;
 }
 
-/// #it_2725_Logic102_Reflected
+bool it_2725_Logic102_Reflected(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+    ip->xDD4_itemVar.pkflush.xDDC_PKFlash = 1;
+    ip->facing_dir = -(ip->facing_dir);
+    HSD_JObjSetRotationY(jobj, M_PI_2 * ip->facing_dir);
+    ip->x40_vel.x = -(ip->x40_vel.x);
+    ip->x40_vel.y = -(ip->x40_vel.y);
+    ip->x40_vel.z = 0.0f;
+    return false;
+}
 
 bool it_2725_Logic102_Clanked(Item_GObj* arg0)
 {

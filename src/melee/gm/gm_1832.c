@@ -465,7 +465,13 @@ void fn_80187C9C(HSD_GObj* gobj, int arg1)
 
 /// #gm_80187F48_OnEnter
 
-/// #gm_80188364_OnLeave
+static HSD_Archive* lbl_804D6620;
+
+void gm_80188364_OnLeave(void* arg0)
+{
+    HSD_Archive** var = &lbl_804D6620;
+    lbArchive_80016EFC(*var);
+}
 
 /// #gm_8018838C_OnFrame
 

@@ -6,6 +6,8 @@
 #include "it/it_2725.h"
 #include "it/item.h"
 #include "it/types.h"
+#include "cm/camera.h"
+#include "sysdolphin/baselib/random.h"
 
 /// #it_802E31F8
 
@@ -115,7 +117,29 @@ void it_802E37A4(Item_GObj* gobj)
 
 /// #it_802E37BC
 
-/// #it_802E3884
+bool it_802E3884(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itWhiteBeaAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+    PAD_STACK(16);
+    ip->init_facing_dir = ip->facing_dir;
+    ip->xC9C += it_8027CBFC(gobj);
+    if (ip->xC9C > *attr->x0 || ip->msid == 9) {
+        it_8027C9D8(ip);
+        it_802756D0(gobj);
+        it_80275474(gobj);
+        it_8027CE44(gobj);
+        Camera_80030E44(2, &ip->pos);
+        if (HSD_Randf() < it_804D6D40[2]) {
+            it_802E4980(gobj);
+        } else {
+            it_802E48B4(gobj);
+        }
+    } else {
+        it_802E3ED0(gobj);
+    }
+    return false;
+}
 
 void fn_802E398C(Item_GObj* gobj)
 {
@@ -147,7 +171,18 @@ bool itWhitebea_UnkMotion0_Coll(Item_GObj* gobj)
 
 /// #itWhitebea_UnkMotion1_Phys
 
-/// #itWhitebea_UnkMotion1_Coll
+bool itWhitebea_UnkMotion1_Coll(Item_GObj* gobj)
+{
+    PAD_STACK(8);
+    if (it_8026D8A4(gobj, it_802E4190) != 0) {
+        if (it_80276308(gobj) != 0) {
+            it_802E4190(gobj);
+        }
+    } else {
+        it_802E3DA0(gobj);
+    }
+    return it_8027C794(gobj);
+}
 
 /// #it_802E3DA0
 

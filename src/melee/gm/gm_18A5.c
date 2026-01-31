@@ -565,9 +565,26 @@ void gm_80190EA4(void)
 }
 #pragma pop
 
+extern struct {
+    u8 pad[0xC];
+    u16 xC;
+} lbl_804799B8;
+
 /// #gm_80190FE4
 
-/// #fn_801910E0
+#pragma dont_inline on
+void fn_801910E0(HSD_GObj* gobj)
+{
+    HSD_JObj* jobj = gobj->hsd_obj;
+
+    if (lbl_804799B8.xC > 800) {
+        lbl_804799B8.xC = 0;
+    }
+
+    fn_8019044C(jobj, lbl_804799B8.xC);
+    lbl_804799B8.xC++;
+}
+#pragma dont_inline reset
 
 /// #fn_80191154
 
@@ -761,7 +778,26 @@ void fn_801965C4(void)
 
 /// #fn_80196CF8
 
-/// #fn_80196DBC
+extern struct {
+    u8 pad[0x10];
+    u16 x10;
+    u8 pad2[0x1A - 0x12];
+    u8 x1A;
+} lbl_804799D8;
+
+#pragma dont_inline on
+void fn_80196DBC(HSD_GObj* gobj)
+{
+    HSD_JObj* jobj = gobj->hsd_obj;
+
+    if (lbl_804799D8.x10 > 800) {
+        lbl_804799D8.x10 = 0;
+    }
+
+    fn_8019044C(jobj, lbl_804799D8.x10);
+    lbl_804799D8.x10++;
+}
+#pragma dont_inline reset
 
 /// #fn_80196E30
 

@@ -2,7 +2,16 @@
 
 #include <platform.h>
 
+#include "gr/ground.h"
+#include "gr/grzakogenerator.h"
 #include "lb/types.h"
+
+#include <baselib/random.h>
+
+static struct {
+    char pad[0x18];
+    bool x18;
+}* grPushOn_804D6AB8;
 
 void grPushOn_802182C4(bool arg) {}
 
@@ -10,7 +19,20 @@ void grPushOn_802182C4(bool arg) {}
 
 /// #grPushOn_80218330
 
-/// #grPushOn_80218378
+void grPushOn_80218378(void)
+{
+    bool val;
+    grZakoGenerator_801CAE04(NULL);
+    val = grPushOn_804D6AB8->x18;
+    if (val) {
+        val = HSD_Randi(grPushOn_804D6AB8->x18);
+    } else {
+        val = false;
+    }
+    if (!val) {
+        grZakoGenerator_801CAEB0(Ground_801C5840(), Ground_801C5940());
+    }
+}
 
 bool grPushOn_802183DC(void)
 {

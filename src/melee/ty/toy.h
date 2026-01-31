@@ -17,8 +17,8 @@
 /* 305C44 */ s32 un_80305C44(void);
 /* 305D00 */ UNK_RET un_80305D00(UNK_PARAMS);
 /* 305DB0 */ float un_80305DB0(void);
-/* 305EB4 */ UNK_RET un_80305EB4(UNK_PARAMS);
-/* 305FB8 */ UNK_RET un_80305FB8(UNK_PARAMS);
+/* 305EB4 */ float un_80305EB4(void);
+/* 305FB8 */ float un_80305FB8(void);
 /* 3060BC */ float un_803060BC(int, int);
 /* 3062BC */ s16 un_803062BC(s32 trophyId);
 /* 3062EC */ UNK_RET un_803062EC(UNK_PARAMS);

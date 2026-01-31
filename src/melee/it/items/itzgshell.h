@@ -10,7 +10,7 @@
 
 #include <dolphin/mtx.h>
 
-/* 2DDB38 */ UNK_RET it_802DDB38(UNK_PARAMS);
+/* 2DDB38 */ void it_802DDB38(Item_GObj*);
 /* 2DDBE8 */ void it_802DDBE8(Item_GObj*);
 /* 2DDC8C */ void fn_802DDC8C(Item_GObj*);
 /* 2DDD38 */ void it_802DDD38(Item_GObj*);
@@ -35,11 +35,11 @@
 /* 2DE670 */ bool itZrshell_UnkMotion4_Anim(Item_GObj*);
 /* 2DE694 */ void itZrshell_UnkMotion4_Phys(Item_GObj*);
 /* 2DE6C4 */ bool itZrshell_UnkMotion4_Coll(Item_GObj*);
-/* 2DE6F0 */ UNK_RET it_802DE6F0(UNK_PARAMS);
+/* 2DE6F0 */ void it_802DE6F0(Item_GObj*);
 /* 2DE884 */ bool itZrshell_UnkMotion6_Anim(Item_GObj*);
 /* 2DEA0C */ void itZrshell_UnkMotion6_Phys(Item_GObj*);
 /* 2DEB44 */ bool itZrshell_UnkMotion6_Coll(Item_GObj*);
-/* 2DEC80 */ UNK_RET it_802DEC80(UNK_PARAMS);
+/* 2DEC80 */ void it_802DEC80(Item_GObj*);
 /* 2DEE04 */ bool itZrshell_UnkMotion8_Anim(Item_GObj*);
 /* 2DEE98 */ void itZrshell_UnkMotion8_Phys(Item_GObj*);
 /* 2DEEC8 */ bool itZrshell_UnkMotion8_Coll(Item_GObj*);
@@ -65,7 +65,7 @@
 /* 2DFED4 */ void it_802DFED4(Item_GObj*, Item_GObj*);
 /* 2DFEF4 */ void it_2725_Logic11_Destroyed(Item_GObj*);
 /* 2DFF14 */ UNK_RET it_802DFF14(UNK_PARAMS);
-/* 2DFFB8 */ UNK_RET it_802DFFB8(UNK_PARAMS);
+/* 2DFFB8 */ void it_802DFFB8(HSD_JObj*, Item*);
 /* 2E0100 */ Item_GObj* it_802E0100(s32, Vec3*, s32);
 /* 2E0408 */ bool it_2725_Logic12_Clanked(Item_GObj*);
 extern ItemStateTable it_803F86C8[];

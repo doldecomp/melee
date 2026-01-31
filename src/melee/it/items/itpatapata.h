@@ -10,7 +10,7 @@
 /* 2E06B4 */ bool itPatapata_UnkMotion1_Anim(Item_GObj* gobj);
 /* 2E06BC */ void itPatapata_UnkMotion1_Phys(Item_GObj* gobj);
 /* 2E06F8 */ bool itPatapata_UnkMotion1_Coll(Item_GObj* gobj);
-/* 2E0734 */ UNK_RET it_802E0734(UNK_PARAMS);
+/* 2E0734 */ void it_802E0734(Item_GObj*);
 /* 2E0974 */ bool itPatapata_UnkMotion2_Anim(Item_GObj* gobj);
 /* 2E09BC */ void itPatapata_UnkMotion3_Phys(Item_GObj* gobj);
 /* 2E0B78 */ bool itPatapata_UnkMotion3_Coll(Item_GObj* gobj);

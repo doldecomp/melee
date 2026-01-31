@@ -33,7 +33,7 @@
 /* 288454 */ bool itTaru_UnkMotion4_Anim(Item_GObj* gobj);
 /* 2884DC */ void itTaru_UnkMotion4_Phys(Item_GObj* gobj);
 /* 2885A8 */ bool itTaru_UnkMotion4_Coll(Item_GObj* gobj);
-/* 2885C8 */ UNK_RET it_802885C8(UNK_PARAMS);
+/* 2885C8 */ void it_802885C8(Item_GObj*);
 /* 288698 */ bool itTaru_UnkMotion6_Anim(Item_GObj* gobj);
 /* 2886B8 */ void itTaru_UnkMotion6_Phys(Item_GObj* gobj);
 /* 2886BC */ bool itTaru_UnkMotion6_Coll(Item_GObj* gobj);

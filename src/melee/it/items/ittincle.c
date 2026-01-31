@@ -4,6 +4,7 @@
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/itCommonItems.h"
 #include "it/item.h"
 
 /// #it_802EB5C8
@@ -29,7 +30,15 @@ bool itTincle_UnkMotion0_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itTincle_UnkMotion0_Phys
+void itTincle_UnkMotion0_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->xDD4_itemVar.nokonoko.x20 <= 0) {
+        it_802EB870(gobj);
+        return;
+    }
+    ip->xDD4_itemVar.nokonoko.x20 -= 1;
+}
 
 bool itTincle_UnkMotion0_Coll(Item_GObj* gobj)
 {
@@ -149,7 +158,14 @@ bool itTincle_UnkMotion8_Coll(Item_GObj* gobj)
 
 /// #it_802EC3F4
 
-/// #itTincle_UnkMotion9_Anim
+bool itTincle_UnkMotion9_Anim(Item_GObj* gobj)
+{
+    PAD_STACK(8);
+    if (it_80272C6C(gobj) == 0) {
+        it_802EC4D0(gobj);
+    }
+    return false;
+}
 
 void itTincle_UnkMotion9_Phys(Item_GObj* gobj) {}
 
@@ -176,7 +192,14 @@ void it_802EC604(HSD_GObj* gobj)
     Item_80268E5C(gobj, 0xB, ITEM_ANIM_UPDATE);
 }
 
-/// #itTincle_UnkMotion11_Anim
+bool itTincle_UnkMotion11_Anim(Item_GObj* gobj)
+{
+    PAD_STACK(16);
+    if (!it_80272C6C(gobj)) {
+        it_802EC69C(gobj);
+    }
+    return false;
+}
 
 void itTincle_UnkMotion11_Phys(Item_GObj* gobj) {}
 
