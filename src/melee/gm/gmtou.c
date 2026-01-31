@@ -75,7 +75,9 @@ void gm_8019B9C8_OnLeave(void* arg0)
     lbArchive_80016EFC(lbl_804D6668);
 }
 
-void fn_8019BA04(void) {}
+void fn_8019BA04(s32* state)
+{
+}
 
 /// #fn_8019BA08
 

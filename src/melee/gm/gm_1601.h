@@ -124,7 +124,7 @@ struct lbl_8046B488_t;
 /* 1641CC */ u16 gm_801641CC(u8);
 /* 1641E4 */ void gm_801641E4(u8 stage, u8 enable);
 /* 164250 */ UNK_RET gm_80164250(UNK_PARAMS);
-/* 1642A0 */ UNK_RET fn_801642A0(UNK_PARAMS);
+/* 1642A0 */ bool fn_801642A0(void);
 /* 164330 */ u8 gm_80164330(u8);
 /* 164430 */ bool gm_80164430(u16);
 /* 164504 */ int gm_80164504(u16);
