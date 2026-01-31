@@ -25,9 +25,9 @@ void it_802BAF0C(Item_GObj* gobj)
 /// #it_802BB290
 
 /// #fn_802BB428
-s32 fn_802BB428(Item_GObj* gobj)
+void fn_802BB428(Item_GObj* gobj)
 {
-    return it_802BCA30(GET_ITEM(gobj));
+    it_802BCA30(GET_ITEM(gobj));
 }
 
 /// #fn_802BB44C
@@ -67,8 +67,8 @@ void it_2725_Logic54_PickedUp(Item_GObj* gobj)
 {
     Item* item = GET_ITEM(gobj);
     PAD_STACK(4);
-    Item_80268E5C((HSD_GObj*) gobj, 0, ITEM_ANIM_UPDATE);
-    item->on_accessory = (void (*)(HSD_GObj*)) fn_802BB428;
+    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+    item->on_accessory = fn_802BB428;
 }
 
 /// #it_802BCED4

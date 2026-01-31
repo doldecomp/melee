@@ -15,7 +15,7 @@
 /* 2BB20C */ void it_802BB20C(Item_GObj*);
 /* 2BB290 */ HSD_GObj* it_802BB290(Item_GObj* gobj, Vec3* arg1,
                                    float facing_dir);
-/* 2BB428 */ s32 fn_802BB428(Item_GObj* gobj);
+/* 2BB428 */ void fn_802BB428(Item_GObj* gobj);
 /* 2BB44C */ UNK_RET fn_802BB44C(UNK_PARAMS);
 /* 2BB574 */ UNK_RET fn_802BB574(UNK_PARAMS);
 /* 2BB694 */ UNK_RET fn_802BB694(UNK_PARAMS);
@@ -29,7 +29,7 @@
 /* 2BBED0 */ UNK_RET it_802BBED0(UNK_PARAMS);
 /* 2BC080 */ UNK_RET it_802BC080(UNK_PARAMS);
 /* 2BC94C */ UNK_RET it_802BC94C(UNK_PARAMS);
-/* 2BCA30 */ s32 it_802BCA30(Item* item);
+/* 2BCA30 */ HSD_GObjEvent it_802BCA30(Item* item);
 /* 2BCB88 */ UNK_RET it_802BCB88(UNK_PARAMS);
 /* 2BCE94 */ void it_2725_Logic54_PickedUp(Item_GObj*);
 /* 2BCED4 */ UNK_RET it_802BCED4(UNK_PARAMS);
