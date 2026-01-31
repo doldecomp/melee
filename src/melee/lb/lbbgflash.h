@@ -19,7 +19,7 @@
 /* 020688 */ void lbBgFlash_80020688(int);
 /* 0206D4 */ void lbBgFlash_800206D4(void*, s32*, int);
 /* 02087C */ void lbBgFlash_InitState(int* duration);
-/* 0208B0 */ UNK_RET fn_800208B0(UNK_PARAMS);
+/* 0208B0 */ void fn_800208B0(u8 arg0);
 /* 0208EC */ UNK_RET lbBgFlash_800208EC(UNK_PARAMS);
 /* 0209F4 */ void lbBgFlash_800209F4(void);
 /* 020AEC */ UNK_RET fn_80020AEC(UNK_PARAMS);

@@ -2,5 +2,6 @@
 #define MNDIAGRAM3_H
 
 void fn_80246F0C(void* arg0);
+void mnDiagram3_8024714C(void* arg0);
 
 #endif
