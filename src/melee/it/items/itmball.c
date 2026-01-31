@@ -18,6 +18,9 @@
 #include <dolphin/mtx.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
+#include <melee/gr/ground.h>
+#include <melee/it/item.h>
+#include <melee/lb/lb_00B0.h>
 
 ItemStateTable it_803F6488[] = {
     { -1, itMball_Motion0_Anim, itMball_Motion0_Phys, itMball_Motion0_Coll },
@@ -153,7 +156,6 @@ bool itMball_DmgDealt(Item_GObj* arg0)
 void itMball_EnteredAir(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-
     Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
     ip->facing_dir =
         (ip->x40_vel.x + ip->x7C.x + ip->x88.x) >= 0.0f ? 1.0f : -1.0f;

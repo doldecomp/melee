@@ -729,6 +729,12 @@ config.libs = [
             Object(NonMatching, "melee/ft/chara/ftLink/ftLk_SpecialN.c"),
             # Kirby
             Object(NonMatching, "melee/ft/chara/ftKirby/ftKb_Init.c"),
+            Object(NonMatching, "melee/ft/chara/ftKirby/ftKb_SpecialN.c"),
+            Object(NonMatching, "melee/ft/chara/ftKirby/ftKb_SpecialNPk.c"),
+            Object(NonMatching, "melee/ft/chara/ftKirby/ftKb_SpecialNFx.c"),
+            Object(NonMatching, "melee/ft/chara/ftKirby/ftKb_SpecialNNs.c"),
+            Object(NonMatching, "melee/ft/chara/ftKirby/ftKb_SpecialNZd.c"),
+            Object(NonMatching, "melee/ft/chara/ftKirby/ftKb_SpecialNYs.c"),
             # Donkey Kong
             Object(Matching, "melee/ft/chara/ftDonkey/ftDk_Init.c"),
             Object(Matching, "melee/ft/chara/ftDonkey/ftDk_SpecialLw.c"),
@@ -1223,7 +1229,7 @@ config.libs = [
             Object(Matching, "melee/it/items/itentei.c"),
             Object(Matching, "melee/it/items/itraikou.c"),
             Object(Matching, "melee/it/items/itsuikun.c"),
-            Object(NonMatching, "melee/it/items/itkireihana.c"),
+            Object(Matching, "melee/it/items/itkireihana.c"),
             Object(Matching, "melee/it/items/itmarumine.c"),
             Object(NonMatching, "melee/it/items/itlugia.c"),
             Object(NonMatching, "melee/it/items/ithouou.c"),

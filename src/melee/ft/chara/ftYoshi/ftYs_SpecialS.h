@@ -4,14 +4,15 @@
 #include <placeholder.h>
 
 #include "ft/forward.h"
+#include <baselib/forward.h>
 
 /* 12EB48 */ UNK_RET ftYs_SpecialS_8012EB48(UNK_PARAMS);
-/* 12EC7C */ UNK_RET fn_8012EC7C(UNK_PARAMS);
-/* 12EDE8 */ UNK_RET fn_8012EDE8(UNK_PARAMS);
+/* 12EC7C */ void fn_8012EC7C(Fighter_GObj* gobj);
+/* 12EDE8 */ void fn_8012EDE8(Fighter_GObj* gobj);
 /* 12EFC0 */ void fn_8012EFC0(Fighter_GObj* gobj);
-/* 12EFF4 */ UNK_RET fn_8012EFF4(UNK_PARAMS);
+/* 12EFF4 */ void fn_8012EFF4(Fighter_GObj* gobj);
 /* 12F0DC */ void ftYs_SpecialS_8012F0DC(Fighter_GObj* gobj, s32, s32, f32);
-/* 12F35C */ UNK_RET ftYs_SpecialS_8012F35C(UNK_PARAMS);
+/* 12F35C */ void ftYs_SpecialS_8012F35C(Fighter_GObj* gobj);
 /* 12F4B4 */ void ftYs_SpecialS_Enter(Fighter_GObj* gobj);
 /* 12F588 */ void ftYs_SpecialAirS_Enter(Fighter_GObj* gobj);
 /* 12F654 */ void ftYs_SpecialAirSStart_0_Anim(Fighter_GObj* gobj);
@@ -46,5 +47,5 @@
 /* 131F80 */ void ftYs_SpecialAirSLoop_2_Coll(Fighter_GObj* gobj);
 /* 13245C */ void ftYs_SpecialAirSLoop_3_Coll(Fighter_GObj* gobj);
 /* 1328F0 */ void ftYs_SpecialAirSLanding_Coll(Fighter_GObj* gobj);
-
+/* 13295C */ void fn_8013295C(Fighter_GObj* gobj);
 #endif

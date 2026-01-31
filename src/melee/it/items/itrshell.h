@@ -7,7 +7,7 @@
 
 #include "it/items/types.h"
 
-/* 28CFE0 */ UNK_RET it_8028CFE0(UNK_PARAMS);
+/* 28CFE0 */ void it_8028CFE0(Item_GObj*);
 /* 28D090 */ void it_8028D090(Item_GObj*);
 /* 28D100 */ UNK_RET it_8028D100(UNK_PARAMS);
 /* 28D26C */ UNK_RET it_8028D26C(UNK_PARAMS);

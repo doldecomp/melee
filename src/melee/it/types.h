@@ -570,6 +570,7 @@ struct Item {
         itKirbyHammer_ItemVars kirbyhammer;
         itKusudama_ItemVars kusudama;
         itKlap_ItemVars klap;
+        itKyasarin_ItemVars kyasarin;
         itLeadead_ItemVars leadead;
         itLikelike_ItemVars likelike;
         itLGun_ItemVars lgun;
@@ -606,6 +607,7 @@ struct Item {
         itTomato_ItemVars tomato;
         itWhispyApple_ItemVars whispyapple;
         itWhiteBea_ItemVars whitebea;
+        itWstar_ItemVars wstar;
         itZeldaDinFireExplode_ItemVars zeldadinfireexplode;
         itMasterHandBullet_ItemVars masterhandbullet;
         itMasterHandLaser_ItemVars masterhandlaser;
@@ -616,6 +618,9 @@ struct Item {
         itMDisable_ItemVars mdisable;
         itKoopaFlame_ItemVars koopaflame;
         itFreezer_ItemVars freezer;
+        itFushigibana_ItemVars fushigibana;
+        itkireihana_ItemVars kireihana;
+        itThunder_ItemVars thunder;
         u8 _[0xFCC - 0xDD4];
     } xDD4_itemVar;
 };

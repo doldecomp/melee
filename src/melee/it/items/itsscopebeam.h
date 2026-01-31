@@ -7,8 +7,10 @@
 
 #include "it/items/types.h"
 
-/* 298DEC */ UNK_RET it_80298DEC(UNK_PARAMS);
-/* 298ED0 */ UNK_RET it_80298ED0(UNK_PARAMS);
+#include <dolphin/mtx.h>
+
+/* 298DEC */ void it_80298DEC(Fighter_GObj*, Vec*, int, float);
+/* 298ED0 */ void it_80298ED0(Item_GObj*, Fighter_GObj*);
 /* 2990CC */ bool itSscopebeam_UnkMotion9_Anim(Item_GObj* gobj);
 /* 299148 */ void itSscopebeam_UnkMotion9_Phys(Item_GObj* gobj);
 /* 29914C */ bool itSscopebeam_UnkMotion9_Coll(Item_GObj* gobj);

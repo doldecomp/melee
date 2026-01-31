@@ -23,7 +23,6 @@ extern void* mnDiagram_804A07E4[4];
 extern void* mnDiagram_804A07F4[4];
 extern void* mnDiagram_804A0804[4];
 extern void* mnDiagram_804A0824[4];
-extern void* mnDiagram_804A0834[4];
 extern HSD_GObj* mnDiagram_804D6C10;
 
 #endif

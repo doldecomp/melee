@@ -1,11 +1,19 @@
 #include "itkyasarin.h"
 
+#include "gr/grinishie2.h"
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
 
-/// #it_2725_Logic25_Destroyed
+void it_2725_Logic25_Destroyed(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->xDD4_itemVar.kyasarin.x20 != NULL) {
+        grInishie2_801FD448(ip->xDD4_itemVar.kyasarin.x20);
+    }
+    ip->xDD4_itemVar.kyasarin.x20 = NULL;
+}
 
 void it_802ECD1C(Item_GObj* gobj, Vec3* v)
 {

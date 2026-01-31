@@ -151,7 +151,14 @@ bool itOldkuri_UnkMotion9_Coll(Item_GObj* gobj)
 
 /// #it_802D813C
 
-/// #itOldkuri_UnkMotion7_Anim
+bool itOldkuri_UnkMotion7_Anim(Item_GObj* gobj)
+{
+    if (it_80272C6C(gobj) == 0) {
+        it_8027CC88(gobj);
+        return true;
+    }
+    return false;
+}
 
 void itOldkuri_UnkMotion7_Phys(Item_GObj* gobj) {}
 

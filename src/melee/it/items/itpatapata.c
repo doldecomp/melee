@@ -7,6 +7,7 @@
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/itCommonItems.h"
 #include "it/item.h"
 
 /// #it_802E05A0
@@ -23,7 +24,15 @@ bool itPatapata_UnkMotion1_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itPatapata_UnkMotion1_Phys
+void itPatapata_UnkMotion1_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->xDD4_itemVar.oldottosea.x28 == 0) {
+        it_802E0734(gobj);
+        return;
+    }
+    ip->xDD4_itemVar.oldottosea.x28 = ip->xDD4_itemVar.oldottosea.x28 - 1;
+}
 
 /// #itPatapata_UnkMotion1_Coll
 

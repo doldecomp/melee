@@ -1,12 +1,20 @@
 #include "itklap.h"
 
+#include "gr/grkongo.h"
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/item.h"
 
 /// #it_802E1820
 
-/// #it_2725_Logic10_Destroyed
+void it_2725_Logic10_Destroyed(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->xDD4_itemVar.klap.x20 != NULL) {
+        grKongo_801D8058(ip->xDD4_itemVar.klap.x20);
+        ip->xDD4_itemVar.klap.x20 = NULL;
+    }
+}
 
 /// #it_802E18B4
 

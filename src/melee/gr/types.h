@@ -536,6 +536,18 @@ struct grInishie2_GroundVars {
     Vec3 xD8;
 };
 
+struct grOldKongo_GroundVars {
+    u8 xC4;
+    u8 xC5;
+    s16 xC6;
+    s16 xC8;
+    s16 xCA;
+    s16 xCC;
+    s16 xCE;
+    void* xD0;
+    void* xD4;
+};
+
 // likely for Cathrine (Birdo)
 struct grInishie2_GroundVars2 {
     Item_GObj* xC4;
@@ -922,6 +934,7 @@ struct Ground {
             struct grInishie2_GroundVars inishie2;
             struct grInishie2_GroundVars2 inishie22;
             struct grInishie2_GroundVars3 inishie23;
+            struct grOldKongo_GroundVars oldkongo;
             struct GroundVars_izumi izumi;
             struct GroundVars_izumi2 izumi2;
             struct GroundVars_izumi3 izumi3;
