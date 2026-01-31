@@ -15,10 +15,8 @@
 
 void it_2725_Logic103_Destroyed(Item_GObj* item_gobj)
 {
-    Item* item;
-
     if (item_gobj != NULL) {
-        item = GET_ITEM(item_gobj);
+        Item* item = GET_ITEM(item_gobj);
         if (item != NULL) {
             it_802725D4(item_gobj);
             item->owner = NULL;
