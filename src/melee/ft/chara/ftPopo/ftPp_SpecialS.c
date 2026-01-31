@@ -1101,17 +1101,13 @@ void ftPp_SpecialHi_80122380(Fighter_GObj* gobj)
 
 void ftPp_SpecialHiThrow2_Anim(Fighter_GObj* gobj)
 {
-    int new_var;
-    Fighter* fp;
-
-    new_var = 0;
-    if (ftAnim_IsFramesRemaining(gobj) == new_var) {
+    if (!ftAnim_IsFramesRemaining(gobj)) {
         ft_8008A2BC(gobj);
-        return;
+    } else {
+        Fighter* fp = GET_FIGHTER(gobj);
+        ++fp->mv.pp.unk_80123954.x0;
+        ftPp_SpecialS_80120FE0(gobj);
     }
-    fp = gobj->user_data;
-    fp->mv.pp.unk_80123954.x0++;
-    ftPp_SpecialS_80120FE0(gobj);
 }
 
 /// #ftPp_SpecialAirHiThrow2_Anim
