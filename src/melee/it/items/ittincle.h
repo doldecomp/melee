@@ -66,7 +66,7 @@
 /* 2ECA70 */ UNK_RET it_802ECA70(UNK_PARAMS);
 /* 2ECC8C */ int it_802ECC8C(Item_GObj*);
 /* 2ECC98 */ void it_802ECC98(Item_GObj*, float);
-/* 2ECCA4 */ UNK_RET it_802ECCA4(UNK_PARAMS);
+/* 2ECCA4 */ void it_802ECCA4(Item_GObj* gobj, s32* kind, Vec3* pos);
 extern ItemStateTable it_803F9000[];
 
 #endif

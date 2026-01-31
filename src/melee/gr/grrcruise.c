@@ -120,7 +120,20 @@ void grRCruise_8020045C(Ground_GObj* arg) {}
 
 /// #fn_80200460
 
-/// #grRCruise_80200540
+void grRCruise_80200540(Ground_GObj* gobj)
+{
+    Ground* gp = gobj->user_data;
+    gp->gv.rcruise.x18 = 0.0F;
+    gp->gv.rcruise.x14 = 0.0F;
+    gp->gv.rcruise.x1C = 0.0F;
+    gp->gv.rcruise.x20 = 0.0F;
+    gp->gv.rcruise.x34 = 0;
+    gp->gv.rcruise.x30 = 0;
+    gp->gv.rcruise.x28 = 0.0F;
+    gp->gv.rcruise.x24 = 0.0F;
+    gp->gv.rcruise.x38 = 0;
+    gp->gv.rcruise.x2C = 0;
+}
 
 /// #fn_80200578
 

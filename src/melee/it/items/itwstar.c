@@ -5,6 +5,7 @@
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/itCommonItems.h"
 #include "it/item.h"
 
 /// #it_80294364
@@ -37,7 +38,13 @@ bool itWstar_UnkMotion0_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itWstar_UnkMotion0_Phys
+void itWstar_UnkMotion0_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itWstarAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+    it_80274658(gobj, attr->x0);
+    it_80274A64(gobj);
+}
 
 bool itWstar_UnkMotion0_Coll(Item_GObj* gobj)
 {

@@ -642,6 +642,20 @@ struct grZebes_GroundVars2 {
     /*  +0 gp+C4 */ u16 xC4;
 };
 
+struct grRCruise_GroundVars {
+    /* +00 gp+C4 */ char pad_0[0x14];
+    /* +14 gp+D8 */ f32 x14;
+    /* +18 gp+DC */ f32 x18;
+    /* +1C gp+E0 */ f32 x1C;
+    /* +20 gp+E4 */ f32 x20;
+    /* +24 gp+E8 */ f32 x24;
+    /* +28 gp+EC */ f32 x28;
+    /* +2C gp+F0 */ s32 x2C;
+    /* +30 gp+F4 */ s32 x30;
+    /* +34 gp+F8 */ s32 x34;
+    /* +38 gp+FC */ s32 x38;
+};
+
 struct grFigureGet_GroundVars {
     /*  +0 gp+C4 */ UNK_T x0;
     /*  +4 gp+C8 */ UNK_T x4;
@@ -793,6 +807,9 @@ struct grOnett_GroundVars {
 
 struct grBigBlue_GroundVars {
     /*  +0 gp+C4:0 */ u8 x0_b0 : 1;
+    /* pad */ char pad_1[3];
+    /*  +4 gp+C8 */ void* xC8;
+    /*  +8 gp+CC */ void* xCC;
 };
 
 struct grBigBlueRoute_GroundVars {
@@ -947,6 +964,7 @@ struct Ground {
             struct grOnett_GroundVars onett;
             struct grPura_GroundVars pura;
             struct grPura_GroundVars2 pura2;
+            struct grRCruise_GroundVars rcruise;
             struct grSmashTaunt_GroundVars smashtaunt;
             struct GroundVars_unk unk;
             struct grVenom_GroundVars venom;

@@ -888,7 +888,15 @@ long gm_80162A4C(s32 amount)
 
 /// #gm_80162A98
 
-/// #gm_80162B4C
+void gm_80162B4C(s32 amount)
+{
+    u32* ptr;
+    u32 sum;
+
+    ptr = gmMainLib_8015CDBC();
+    sum = *ptr + amount;
+    *ptr = (sum > (u32) -1) ? (u32) -1 : sum;
+}
 
 void gm_80162B98(void)
 {
