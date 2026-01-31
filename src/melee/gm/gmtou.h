@@ -8,7 +8,7 @@
 
 /* 19B8C4 */ void gm_8019B8C4_OnEnter(void*);
 /* 19B9C8 */ void gm_8019B9C8_OnLeave(void*);
-/* 19BA04 */ void fn_8019BA04(void);
+/* 19BA04 */ void fn_8019BA04(s32* arg0);
 /* 19BA08 */ void fn_8019BA08(u8, HSD_JObj*);
 /* 19BF18 */ void fn_8019BF18(HSD_GObj*);
 /* 19BF8C */ void fn_8019BF8C(HSD_GObj*);
