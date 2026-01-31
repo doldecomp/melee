@@ -1,7 +1,5 @@
 #include "itseakchain.h"
 
-#include "itlinkhookshot.h"
-
 #include "it/forward.h"
 
 #include "it/inlines.h"
