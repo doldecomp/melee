@@ -29,7 +29,7 @@
 /* 2BBED0 */ UNK_RET it_802BBED0(UNK_PARAMS);
 /* 2BC080 */ UNK_RET it_802BC080(UNK_PARAMS);
 /* 2BC94C */ UNK_RET it_802BC94C(UNK_PARAMS);
-/* 2BCA30 */ void it_802BCA30(Item* item);
+/* 2BCA30 */ void it_802BCA30(Item* ip);
 /* 2BCB88 */ UNK_RET it_802BCB88(UNK_PARAMS);
 /* 2BCE94 */ void it_2725_Logic54_PickedUp(Item_GObj* gobj);
 /* 2BCED4 */ UNK_RET it_802BCED4(UNK_PARAMS);

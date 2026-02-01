@@ -505,8 +505,15 @@ typedef struct itSeakNeedleThrown_ItemVars {
     /* +C +DE0 */ f32 xDE0;
 } itSeakNeedleThrown_ItemVars;
 
+struct itSeakChain_ItemVars_x0_t {
+    /*   +0 */ char pad_0[0x1D0];
+    /* +1D0 */ HSD_JObj* x1D0;
+    /* +1D4 */ HSD_JObj* x1D4;
+};
+
 typedef struct itSeakChain_ItemVars {
-    /* +0 +DD4 */ char pad_0[0x8];
+    /* +0 +DD4 */ struct itSeakChain_ItemVars_x0_t* x0;
+    /* +0 +DD8 */ UNK_T x4;
     /* +8 +DDC */ HSD_GObj* x8;
 } itSeakChain_ItemVars;
 
