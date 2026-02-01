@@ -49,7 +49,7 @@ HSD_GObj* it_802C65E4(Item_GObj* gobj, Vec* vec, enum Fighter_Part arg2,
     return NULL;
 }
 
-void it_2725_Logic72_Destroyed(Item_GObj* gobj)
+void itGameWatchManhole_Logic72_Destroyed(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     if (ip->owner != NULL) {
@@ -79,7 +79,7 @@ void it_802C6784(Item_GObj* gobj)
     it_8026B73C(gobj);
 }
 
-void it_2725_Logic72_PickedUp(Item_GObj* gobj)
+void itGameWatchManhole_Logic72_PickedUp(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     PAD_STACK(0x10);
@@ -115,13 +115,13 @@ bool itGamewatchmanhole_UnkMotion0_Anim(Item_GObj* gobj)
         lb_800119DC(&vec, 120, 3.0f, 0.1f, 1.0471976f);
     }
     if (itGamewatchmanhole_UnkMotion0_Anim_inline(gobj)) {
-        it_2725_Logic72_Destroyed(gobj);
+        itGameWatchManhole_Logic72_Destroyed(gobj);
         return true;
     }
     return false;
 }
 
-void it_2725_Logic72_EvtUnk(Item_GObj* gobj, Item_GObj* gobj2)
+void itGameWatchManhole_Logic72_EvtUnk(Item_GObj* gobj, Item_GObj* gobj2)
 {
     it_8026B894(gobj, gobj2);
 }

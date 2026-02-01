@@ -5,8 +5,8 @@
 
 #include "it/items/types.h"
 
-/* 2D007C */ void it_2725_Logic15_Spawned(Item_GObj*);
-/* 2D0118 */ void it_2725_Logic15_EvtUnk(Item_GObj*, Item_GObj*);
+/* 2D007C */ void itKireihana_Logic15_Spawned(Item_GObj*);
+/* 2D0118 */ void itKireihana_Logic15_EvtUnk(Item_GObj*, Item_GObj*);
 /* 2D0138 */ void it_802D0138(HSD_GObj* gobj);
 /* 2D01A0 */ void it_802D01A0(Item_GObj*);
 /* 2D0204 */ bool itKireihana_UnkMotion1_Anim(Item_GObj* gobj);

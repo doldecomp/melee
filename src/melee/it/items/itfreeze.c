@@ -25,7 +25,7 @@ Item* it_8028ECF0(Item_GObj* gobj, Vec3* v)
     return ip;
 }
 
-void it_3F14_Logic17_Destroyed(Item_GObj* gobj)
+void itFreeze_Logic17_Destroyed(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     if (ip->xDD4_itemVar.freeze.unk_1C != NULL) {
@@ -89,7 +89,7 @@ bool itFreeze_UnkMotion1_Coll(Item_GObj* gobj)
     return false;
 }
 
-void it_3F14_Logic17_PickedUp(Item_GObj* gobj)
+void itFreeze_Logic17_PickedUp(Item_GObj* gobj)
 {
     Item* item = gobj->user_data;
     Item_GObj* linked;
@@ -107,12 +107,12 @@ bool itFreeze_UnkMotion2_Anim(Item_GObj* gobj)
     return false;
 }
 
-void it_3F14_Logic17_Dropped(Item_GObj* gobj)
+void itFreeze_Logic17_Dropped(Item_GObj* gobj)
 {
     Item_80268E5C(gobj, 1, 6);
 }
 
-void it_3F14_Logic17_Thrown(Item_GObj* gobj)
+void itFreeze_Logic17_Thrown(Item_GObj* gobj)
 {
     Item_80268E5C(gobj, 3, 6);
 }
@@ -135,37 +135,37 @@ bool itFreeze_UnkMotion3_Coll(Item_GObj* gobj)
     return 0;
 }
 
-bool it_3F14_Logic17_DmgDealt(Item_GObj* arg0)
+bool itFreeze_Logic17_DmgDealt(Item_GObj* arg0)
 {
     return true;
 }
 
-bool it_3F14_Logic17_Clanked(Item_GObj* arg0)
+bool itFreeze_Logic17_Clanked(Item_GObj* arg0)
 {
     return true;
 }
 
-bool it_3F14_Logic17_HitShield(Item_GObj* arg0)
+bool itFreeze_Logic17_HitShield(Item_GObj* arg0)
 {
     return true;
 }
 
-bool it_3F14_Logic17_Absorbed(Item_GObj* arg0)
+bool itFreeze_Logic17_Absorbed(Item_GObj* arg0)
 {
     return true;
 }
 
-bool it_3F14_Logic17_Reflected(Item_GObj* gobj)
+bool itFreeze_Logic17_Reflected(Item_GObj* gobj)
 {
     return it_80273030(gobj);
 }
 
-bool it_3F14_Logic17_ShieldBounced(Item_GObj* gobj)
+bool itFreeze_Logic17_ShieldBounced(Item_GObj* gobj)
 {
     return itColl_BounceOffShield(gobj);
 }
 
-bool it_3F14_Logic17_DmgReceived(Item_GObj* arg0)
+bool itFreeze_Logic17_DmgReceived(Item_GObj* arg0)
 {
     return true;
 }
@@ -192,7 +192,7 @@ void itFreeze_UnkMotion5_Phys(Item_GObj* gobj) {}
 
 /// #itFreeze_UnkMotion5_Coll
 
-void it_3F14_Logic17_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
+void itFreeze_Logic17_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }

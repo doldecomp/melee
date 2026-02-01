@@ -112,7 +112,7 @@ bool it_802D4F28(Item_GObj* gobj)
     return it_8027AE34(gobj);
 }
 
-bool it_2725_Logic43_Absorbed(Item_GObj* arg0)
+bool itHitodeman_Logic43_Absorbed(Item_GObj* arg0)
 {
     return true;
 }

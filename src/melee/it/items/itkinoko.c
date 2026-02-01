@@ -19,7 +19,7 @@ HSD_AnimJoint* it_80293660(int idx)
     return attrs[idx + 2].joint;
 }
 
-void it_3F14_Logic26_Spawned(Item_GObj* gobj)
+void itKinoko_Logic26_Spawned(Item_GObj* gobj)
 {
     Item* it;
 
@@ -144,12 +144,12 @@ bool itKinoko_UnkMotion1_Coll(Item_GObj* gobj)
     return false;
 }
 
-bool it_3F14_Logic26_DmgDealt(Item_GObj* gobj)
+bool itKinoko_Logic26_DmgDealt(Item_GObj* gobj)
 {
     return true;
 }
 
-void it_3F14_Logic26_EvtUnk(Item_GObj* gobj, HSD_GObj* gobj_2)
+void itKinoko_Logic26_EvtUnk(Item_GObj* gobj, HSD_GObj* gobj_2)
 {
     it_8026B894(gobj, gobj_2);
 }

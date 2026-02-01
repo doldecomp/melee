@@ -38,7 +38,7 @@
 /* 2BCFC4 */ void it_802BCFC4(Item_GObj* gobj, float* arg1,
                               itChainSegment* chainSegment, Item* item_data,
                               float arg4);
-/* 2BD10C */ void it_2725_Logic54_EvtUnk(Item_GObj*, Item_GObj*);
+/* 2BD10C */ void itSeakChain_Logic54_EvtUnk(Item_GObj*, Item_GObj*);
 /* 2BDBF8 */ void it_802BDBF8(Item_GObj* gobj);
 /* 3F7438 */ extern ItemStateTable it_803F7438[];
 

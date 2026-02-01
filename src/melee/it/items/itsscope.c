@@ -37,7 +37,7 @@ HSD_GObj* it_80291BE0(Vec3* arg0)
     return gobj;
 }
 
-void it_3F14_Logic21_Spawned(Item_GObj* gobj)
+void itSScope_Logic21_Spawned(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     ip->xD4C = *(s32*) ip->xC4_article_data->x4_specialAttributes;
@@ -120,7 +120,7 @@ bool itSscope_UnkMotion3_Coll(Item_GObj* gobj)
     return it_8026DF34(gobj);
 }
 
-void it_3F14_Logic21_PickedUp(Item_GObj* gobj)
+void itSScope_Logic21_PickedUp(Item_GObj* gobj)
 {
     Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
 }
@@ -132,12 +132,12 @@ bool itSscope_UnkMotion2_Anim(Item_GObj* gobj)
 
 void itSscope_UnkMotion2_Phys(Item_GObj* gobj) {}
 
-void it_3F14_Logic21_Dropped(Item_GObj* gobj)
+void itSScope_Logic21_Dropped(Item_GObj* gobj)
 {
     Item_80268E5C(gobj, 3, 6);
 }
 
-void it_3F14_Logic21_Thrown(Item_GObj* gobj)
+void itSScope_Logic21_Thrown(Item_GObj* gobj)
 {
     Item_80268E5C(gobj, 3, 6);
 }
@@ -149,39 +149,39 @@ void itSscope_UnkMotion3_Phys(Item_GObj* gobj)
     it_80274658(gobj, it_804D6D28->x68_float);
 }
 
-bool it_3F14_Logic21_DmgDealt(Item_GObj* gobj)
+bool itSScope_Logic21_DmgDealt(Item_GObj* gobj)
 {
     itColl_BounceOffVictim(gobj);
     return false;
 }
 
-bool it_3F14_Logic21_Clanked(Item_GObj* gobj)
+bool itSScope_Logic21_Clanked(Item_GObj* gobj)
 {
     itColl_BounceOffVictim(gobj);
     return false;
 }
 
-bool it_3F14_Logic21_HitShield(Item_GObj* gobj)
+bool itSScope_Logic21_HitShield(Item_GObj* gobj)
 {
     itColl_BounceOffVictim(gobj);
     return false;
 }
 
-/// #it_3F14_Logic21_Reflected
+/// #itSScope_Logic21_Reflected
 
-bool it_3F14_Logic21_Reflected(Item_GObj* gobj)
+bool itSScope_Logic21_Reflected(Item_GObj* gobj)
 {
     return it_80273030(gobj);
 }
 
-/// #it_3F14_Logic21_ShieldBounced
+/// #itSScope_Logic21_ShieldBounced
 
-bool it_3F14_Logic21_ShieldBounced(Item_GObj* gobj)
+bool itSScope_Logic21_ShieldBounced(Item_GObj* gobj)
 {
     return itColl_BounceOffShield(gobj);
 }
 
-void it_3F14_Logic21_EnteredAir(Item_GObj* gobj)
+void itSScope_Logic21_EnteredAir(Item_GObj* gobj)
 {
     Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
 }
@@ -199,7 +199,7 @@ bool itSscope_UnkMotion4_Coll(Item_GObj* gobj)
     return false;
 }
 
-void it_3F14_Logic21_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
+void itSScope_Logic21_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }

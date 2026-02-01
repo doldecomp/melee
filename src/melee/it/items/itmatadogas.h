@@ -22,7 +22,7 @@
 /* 2CB4F0 */ UNK_RET it_802CB4F0(UNK_PARAMS);
 /* 2CB690 */ void it_2725_Logic32_Spawned(Item_GObj*);
 /* 2CB704 */ void it_2725_Logic33_Spawned(Item_GObj*);
-/* 2CB778 */ void it_2725_Logic33_EvtUnk(Item_GObj*, Item_GObj*);
+/* 2CB778 */ void itMatadogas_Logic33_EvtUnk(Item_GObj*, Item_GObj*);
 /* 2CB798 */ UNK_RET it_802CB798(UNK_PARAMS);
 /* 2CB810 */ bool it_802CB810(Item_GObj* gobj);
 /* 2CB844 */ void it_802CB844(Item_GObj* gobj);

@@ -626,7 +626,7 @@ void fn_802A33A0(Item_GObj* arg0)
             it_802A2B10(arg0);
             return;
         }
-        it_2725_Logic20_PickedUp(arg0);
+        itLinkHookshot_Logic20_PickedUp(arg0);
     }
 
     it_802A7168(item, &vec, fp->x34_scale.y);
@@ -1890,7 +1890,7 @@ void it_802A7384(Item* arg0, Vec3* arg1, f32 arg8)
     NOT_IMPLEMENTED;
 }
 
-static inline void it_2725_Logic20_PickedUp_inline(HSD_GObj* arg0)
+static inline void itLinkHookshot_Logic20_PickedUp_inline(HSD_GObj* arg0)
 {
     Item* item;
     Fighter* fp;
@@ -1906,11 +1906,11 @@ static inline void it_2725_Logic20_PickedUp_inline(HSD_GObj* arg0)
     }
 }
 
-void it_2725_Logic20_PickedUp(Item_GObj* arg0)
+void itLinkHookshot_Logic20_PickedUp(Item_GObj* arg0)
 {
     f32 pad[7];
     Item_80268E5C((HSD_GObj*) arg0, 0, ITEM_ANIM_UPDATE);
-    it_2725_Logic20_PickedUp_inline(arg0);
+    itLinkHookshot_Logic20_PickedUp_inline(arg0);
 }
 
 void it_802A76EC(HSD_GObj* arg0)
@@ -1920,7 +1920,7 @@ void it_802A76EC(HSD_GObj* arg0)
     item = GET_ITEM(arg0);
     Item_80268E5C(arg0, 3, ITEM_ANIM_UPDATE);
     ftColl_8007AFF8(item->xDD4_itemVar.linkhookshot.x8);
-    it_2725_Logic20_PickedUp_inline(arg0);
+    itLinkHookshot_Logic20_PickedUp_inline(arg0);
 }
 
 void it_802A7764(HSD_GObj* arg0)
@@ -1930,7 +1930,7 @@ void it_802A7764(HSD_GObj* arg0)
     item = GET_ITEM(arg0);
     Item_80268E5C(arg0, 2, ITEM_ANIM_UPDATE);
     ftColl_8007AFF8(item->xDD4_itemVar.linkhookshot.x8);
-    it_2725_Logic20_PickedUp_inline(arg0);
+    itLinkHookshot_Logic20_PickedUp_inline(arg0);
 }
 
 void it_802A77DC(Item_GObj* arg0)
@@ -1939,7 +1939,7 @@ void it_802A77DC(Item_GObj* arg0)
     f32 pad[4];
     item = GET_ITEM((HSD_GObj*) arg0);
     Item_80268E5C((HSD_GObj*) arg0, 4, ITEM_ANIM_UPDATE);
-    it_2725_Logic20_PickedUp_inline((HSD_GObj*) arg0);
+    itLinkHookshot_Logic20_PickedUp_inline((HSD_GObj*) arg0);
 }
 
 void it_802A7840(HSD_GObj* arg0)
@@ -1949,7 +1949,7 @@ void it_802A7840(HSD_GObj* arg0)
     item = GET_ITEM(arg0);
     Item_80268E5C(arg0, 5, ITEM_ANIM_UPDATE);
     ftColl_8007AFF8(item->xDD4_itemVar.linkhookshot.x8);
-    it_2725_Logic20_PickedUp_inline(arg0);
+    itLinkHookshot_Logic20_PickedUp_inline(arg0);
 }
 
 void it_802A78B8(HSD_GObj* arg0, Vec3* arg1, f32 arg2)
@@ -1962,21 +1962,21 @@ void it_802A78B8(HSD_GObj* arg0, Vec3* arg1, f32 arg2)
     item_link = item->xDD4_itemVar.linkhookshot.x0;
     item_link->x8_vel = *arg1;
     Item_80268E5C(arg0, 1, ITEM_ANIM_UPDATE);
-    it_2725_Logic20_PickedUp_inline(arg0);
+    itLinkHookshot_Logic20_PickedUp_inline(arg0);
 }
 
 void it_802A793C(HSD_GObj* arg0)
 {
     f32 pad[6];
     Item_80268E5C(arg0, 6, ITEM_ANIM_UPDATE);
-    it_2725_Logic20_PickedUp_inline(arg0);
+    itLinkHookshot_Logic20_PickedUp_inline(arg0);
 }
 
 void it_802A79A0(HSD_GObj* arg0)
 {
     f32 pad[6];
     Item_80268E5C(arg0, 7, ITEM_ANIM_UPDATE);
-    it_2725_Logic20_PickedUp_inline(arg0);
+    itLinkHookshot_Logic20_PickedUp_inline(arg0);
 }
 
 void it_802A7A04(HSD_GObj* arg0)
@@ -1991,7 +1991,7 @@ void it_802A7A04(HSD_GObj* arg0)
     lk_attr = fp->dat_attrs;
 
     Item_80268E5C(arg0, 8, ITEM_ANIM_UPDATE);
-    it_2725_Logic20_PickedUp_inline(arg0);
+    itLinkHookshot_Logic20_PickedUp_inline(arg0);
     // @todo: should this be its own struct?
     fp->mv.lk.specialn.x0.y = lk_attr->xB8;
 }

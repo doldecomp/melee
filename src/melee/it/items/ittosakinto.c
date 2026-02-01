@@ -171,7 +171,7 @@ bool itTosakinto_UnkMotion3_Coll(Item_GObj* gobj)
     return false;
 }
 
-void it_2725_Logic0_Destroyed(Item_GObj* gobj)
+void itTosakinto_Logic0_Destroyed(Item_GObj* gobj)
 {
     Item* it_r31 = GET_ITEM(gobj);
     if (it_r31->pos.y - 50.0F < Stage_GetBlastZoneBottomOffset()) {

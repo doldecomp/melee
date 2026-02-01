@@ -9,13 +9,13 @@
 
 /// #it_802EB5C8
 
-bool it_2725_Logic13_DmgReceived(Item_GObj* gobj)
+bool itTincle_Logic13_DmgReceived(Item_GObj* gobj)
 {
     it_802EC18C(gobj);
     return false;
 }
 
-bool it_2725_Logic13_DmgDealt(Item_GObj* gobj)
+bool itTincle_Logic13_DmgDealt(Item_GObj* gobj)
 {
     if (GET_ITEM(gobj)->msid != 7) {
         it_802EC1F4(gobj);

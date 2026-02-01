@@ -64,7 +64,7 @@ static void zero_pad(Item* ip)
     ip->x40_vel.y = 0.0f;
 }
 
-bool it_2725_Logic3_DmgReceived(Item_GObj* gobj)
+bool itNokonoko_Logic3_DmgReceived(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itNokoNoko_DatAttrs* da = ip->xC4_article_data->x4_specialAttributes;

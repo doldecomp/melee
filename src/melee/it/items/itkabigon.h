@@ -7,7 +7,7 @@
 
 /* 2C9D40 */ void it_802C9D40(Item_GObj*);
 /* 2C9DFC */ void it_802C9DFC(Item_GObj*);
-/* 2C9E00 */ void it_2725_Logic2_Destroyed(Item_GObj*);
+/* 2C9E00 */ void itKabigon_Logic2_Destroyed(Item_GObj*);
 /* 2C9E24 */ void it_802C9E24(Item_GObj*, Item_GObj*);
 /* 2C9E44 */ void it_802C9E44(Item_GObj*);
 /* 2C9E8C */ void it_802C9E8C(Item_GObj*);

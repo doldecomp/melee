@@ -16,7 +16,7 @@
 /* 2AD8DC */ bool itNessbat_UnkMotion1_Anim(Item_GObj* gobj);
 /* 2AD9F0 */ void itNessbat_UnkMotion1_Phys(Item_GObj* gobj);
 /* 2AD9F4 */ bool itNessbat_UnkMotion1_Coll(Item_GObj* gobj);
-/* 2AD9FC */ void it_2725_Logic58_EvtUnk(Item_GObj*, Item_GObj*);
+/* 2AD9FC */ void itNessBat_Logic58_EvtUnk(Item_GObj*, Item_GObj*);
 /* 3F6C68 */ extern ItemStateTable it_803F6C68[];
 
 #endif

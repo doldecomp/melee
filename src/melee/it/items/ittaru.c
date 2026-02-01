@@ -49,7 +49,7 @@ void itTaru_UnkMotion1_Phys(Item_GObj* gobj)
 
 /// #itTaru_UnkMotion1_Coll
 
-void it_3F14_Logic2_PickedUp(Item_GObj* gobj)
+void itTaru_Logic2_PickedUp(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     ip->xDB0_itcmd_var1 = 1;
@@ -63,12 +63,12 @@ bool itTaru_UnkMotion2_Anim(Item_GObj* gobj)
 
 void itTaru_UnkMotion2_Phys(Item_GObj* gobj) {}
 
-void it_3F14_Logic2_Dropped(Item_GObj* gobj)
+void itTaru_Logic2_Dropped(Item_GObj* gobj)
 {
     it_80287F20(gobj);
 }
 
-void it_3F14_Logic2_Thrown(Item_GObj* gobj)
+void itTaru_Logic2_Thrown(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     PAD_STACK(8);
@@ -196,7 +196,7 @@ bool itTaru_UnkMotion7_Coll(Item_GObj* gobj)
 
 /// #it_3F14_Logic2_DmgReceived
 
-void it_3F14_Logic2_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
+void itTaru_Logic2_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }

@@ -65,7 +65,7 @@ void itTarucann_UnkMotion1_Phys(Item_GObj* gobj)
 
 /// #itTarucann_UnkMotion1_Coll
 
-void it_3F14_Logic5_PickedUp(Item_GObj* gobj)
+void itTaruCann_Logic5_PickedUp(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itTaruCann_DatAttrs* attrs = ip->xC4_article_data->x4_specialAttributes;
@@ -127,27 +127,27 @@ bool itTarucann_UnkMotion9_Coll(Item_GObj* gobj)
 
 /// #it_80297790
 
-bool it_3F14_Logic5_DmgDealt(Item_GObj* arg0)
+bool itTaruCann_Logic5_DmgDealt(Item_GObj* arg0)
 {
     return false;
 }
 
-bool it_3F14_Logic5_Clanked(Item_GObj* arg0)
+bool itTaruCann_Logic5_Clanked(Item_GObj* arg0)
 {
     return false;
 }
 
-bool it_3F14_Logic5_HitShield(Item_GObj* arg0)
+bool itTaruCann_Logic5_HitShield(Item_GObj* arg0)
 {
     return false;
 }
 
-bool it_3F14_Logic5_Reflected(Item_GObj* arg0)
+bool itTaruCann_Logic5_Reflected(Item_GObj* arg0)
 {
     return false;
 }
 
-void it_3F14_Logic5_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
+void itTaruCann_Logic5_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }

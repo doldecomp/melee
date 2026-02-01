@@ -22,12 +22,12 @@
 /* 29C6F4 */ bool itFoxlaser_UnkMotion1_Anim(Item_GObj*);
 /* 29C9CC */ void itFoxlaser_UnkMotion1_Phys(Item_GObj*);
 /* 29C9EC */ bool itFoxlaser_UnkMotion1_Coll(Item_GObj*);
-/* 29CA78 */ bool it_2725_Logic94_Clanked(Item_GObj*);
-/* 29CA80 */ bool it_2725_Logic94_Reflected(Item_GObj*);
-/* 29CC4C */ bool it_2725_Logic94_Absorbed(Item_GObj*);
-/* 29CC54 */ bool it_2725_Logic94_ShieldBounced(Item_GObj*);
-/* 29CCF0 */ bool it_2725_Logic94_HitShield(Item_GObj*);
-/* 29CCF8 */ void it_2725_Logic94_EvtUnk(Item_GObj*, HSD_GObj*);
+/* 29CA78 */ bool itFoxLaser_Logic94_Clanked(Item_GObj*);
+/* 29CA80 */ bool itFoxLaser_Logic94_Reflected(Item_GObj*);
+/* 29CC4C */ bool itFoxLaser_Logic94_Absorbed(Item_GObj*);
+/* 29CC54 */ bool itFoxLaser_Logic94_ShieldBounced(Item_GObj*);
+/* 29CCF0 */ bool itFoxLaser_Logic94_HitShield(Item_GObj*);
+/* 29CCF8 */ void itFoxLaser_Logic94_EvtUnk(Item_GObj*, HSD_GObj*);
 /* 3F67D0 */ extern ItemStateTable it_803F67D0[];
 
 #endif

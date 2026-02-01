@@ -72,7 +72,7 @@ void it_802D09D0(Item_GObj* gobj)
     }
 }
 
-void it_2725_Logic16_Spawned(Item_GObj* gobj)
+void itMarumine_Logic16_Spawned(Item_GObj* gobj)
 {
     Item* ip;
     itPokemonAttributes* attr;

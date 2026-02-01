@@ -5,7 +5,7 @@
 
 #include "it/items/types.h"
 
-/* 2D6FD0 */ void it_2725_Logic29_Spawned(Item_GObj*);
+/* 2D6FD0 */ void itFushigibana_Logic29_Spawned(Item_GObj*);
 /* 2D705C */ void it_802D705C(Item_GObj*);
 /* 2D70A4 */ void it_802D70A4(Item_GObj*);
 /* 2D7120 */ bool itFushigibana_UnkMotion0_Anim(Item_GObj* gobj);

@@ -15,7 +15,7 @@
 #include <baselib/gobj.h>
 #include <baselib/gobjplink.h>
 
-void it_2725_Logic53_Spawned(Item_GObj* gobj)
+void itSamusGrapple_Logic53_Spawned(Item_GObj* gobj)
 {
     GET_ITEM(gobj)->xDD4_itemVar.samusgrapple.unk_10 = NULL;
 }
@@ -144,7 +144,7 @@ void itSamusgrapple_UnkMotion8_Phys(Item_GObj* gobj)
 
 /// #it_802BA760
 
-void it_2725_Logic53_PickedUp(Item_GObj* gobj)
+void itSamusGrapple_Logic53_PickedUp(Item_GObj* gobj)
 {
     PAD_STACK(16);
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
@@ -247,7 +247,7 @@ void it_802BAC80(Fighter_GObj* gobj)
 
 /// #it_802BACC4
 
-void it_2725_Logic53_EvtUnk(Item_GObj* gobj, Item_GObj* arg1)
+void itSamusGrapple_Logic53_EvtUnk(Item_GObj* gobj, Item_GObj* arg1)
 {
     Item* item = GET_ITEM(gobj);
     it_8026B894(gobj, arg1);

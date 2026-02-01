@@ -32,13 +32,13 @@
 /* 2C5F7C */ bool itMewtwoshadowball_UnkMotion17_Anim(Item_GObj* gobj);
 /* 2C6094 */ void itMewtwoshadowball_UnkMotion17_Phys(Item_GObj*);
 /* 2C60AC */ bool itMewtwoshadowball_UnkMotion17_Coll(Item_GObj* gobj);
-/* 2C60B4 */ bool it_2725_Logic101_DmgDealt(Item_GObj*);
-/* 2C60BC */ bool it_2725_Logic101_Clanked(Item_GObj*);
-/* 2C60C4 */ bool it_2725_Logic101_Absorbed(Item_GObj*);
+/* 2C60B4 */ bool itMewtwoShadowball_Logic101_DmgDealt(Item_GObj*);
+/* 2C60BC */ bool itMewtwoShadowball_Logic101_Clanked(Item_GObj*);
+/* 2C60C4 */ bool itMewtwoShadowball_Logic101_Absorbed(Item_GObj*);
 /* 2C60CC */ bool it_2725_Logic101_Reflected(Item_GObj*);
-/* 2C6138 */ bool it_2725_Logic101_HitShield(Item_GObj*);
+/* 2C6138 */ bool itMewtwoShadowball_Logic101_HitShield(Item_GObj*);
 /* 2C6140 */ bool it_2725_Logic101_ShieldBounced(Item_GObj*);
-/* 2C61D4 */ void it_2725_Logic101_EvtUnk(Item_GObj*, Item_GObj*);
+/* 2C61D4 */ void itMewtwoShadowball_Logic101_EvtUnk(Item_GObj*, Item_GObj*);
 /* 3F7760 */ extern ItemStateTable it_803F7760[];
 
 #endif

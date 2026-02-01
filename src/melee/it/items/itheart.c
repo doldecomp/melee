@@ -74,7 +74,7 @@ void it_80283BD4(Item_GObj* gobj)
     ip->xDD4_itemVar.heart.xDD4_heal = vars->x4.flags;
 }
 
-void it_3F14_Logic8_Spawned(Item_GObj* gobj)
+void itHeart_Logic8_Spawned(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     HeartContainerAttr* vars = ip->xC4_article_data->x4_specialAttributes;
@@ -88,7 +88,7 @@ void it_3F14_Logic8_Spawned(Item_GObj* gobj)
     it_80283DD4(gobj);
 }
 
-void it_3F14_Logic8_Destroyed(Item_GObj* gobj)
+void itHeart_Logic8_Destroyed(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
 
@@ -155,7 +155,7 @@ bool itHeart_UnkMotion3_Coll(Item_GObj* gobj)
     return false;
 }
 
-void it_3F14_Logic8_PickedUp(Item_GObj* gobj)
+void itHeart_Logic8_PickedUp(Item_GObj* gobj)
 {
     HSD_JObj* child = HSD_JObjGetChild(GET_JOBJ(gobj));
 
@@ -171,7 +171,7 @@ bool itHeart_UnkMotion2_Anim(Item_GObj* gobj)
 
 void itHeart_UnkMotion2_Phys(Item_GObj* gobj) {}
 
-void it_3F14_Logic8_Dropped(Item_GObj* gobj)
+void itHeart_Logic8_Dropped(Item_GObj* gobj)
 {
     HSD_JObj* child = HSD_JObjGetChild(GET_JOBJ(gobj));
 
@@ -181,7 +181,7 @@ void it_3F14_Logic8_Dropped(Item_GObj* gobj)
     Item_80268E5C(gobj, 3, 6);
 }
 
-void it_3F14_Logic8_EnteredAir(Item_GObj* gobj)
+void itHeart_Logic8_EnteredAir(Item_GObj* gobj)
 {
     Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
 }
@@ -199,7 +199,7 @@ bool itHeart_UnkMotion4_Coll(Item_GObj* gobj)
     return false;
 }
 
-void it_3F14_Logic8_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
+void itHeart_Logic8_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }

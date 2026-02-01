@@ -75,7 +75,7 @@ bool itMatadogas_UnkMotion2_Coll(Item_GObj* gobj)
 
 /// #it_2725_Logic33_Spawned
 
-void it_2725_Logic33_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
+void itMatadogas_Logic33_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }

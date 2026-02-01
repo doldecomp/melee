@@ -14,7 +14,7 @@
 
 /// #it_802944AC
 
-void it_3F14_Logic29_Spawned(Item_GObj* gobj)
+void itWStar_Logic29_Spawned(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     ip->xDCE_flag.b7 = 0;
@@ -84,7 +84,7 @@ bool itWstar_UnkMotion3_Anim(Item_GObj* gobj)
     return false;
 }
 
-void it_3F14_Logic29_Dropped(Item_GObj* gobj)
+void itWStar_Logic29_Dropped(Item_GObj* gobj)
 {
     Item_80268E5C(gobj, 1, 6);
     efLib_DestroyAll(gobj);
@@ -101,7 +101,7 @@ bool itWstar_UnkMotion5_Coll(Item_GObj* gobj)
     return false;
 }
 
-void it_3F14_Logic29_EnteredAir(Item_GObj* gobj)
+void itWStar_Logic29_EnteredAir(Item_GObj* gobj)
 {
     Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
 }
@@ -119,7 +119,7 @@ bool itWstar_UnkMotion4_Coll(Item_GObj* gobj)
     return false;
 }
 
-void it_3F14_Logic30_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
+void itWStar_Logic30_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }

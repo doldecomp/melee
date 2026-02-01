@@ -62,7 +62,7 @@
 /* 2E45D0 */ bool itWhitebea_UnkMotion7_Anim(Item_GObj* gobj);
 /* 2E464C */ void itWhitebea_UnkMotion7_Phys(Item_GObj* gobj);
 /* 2E4650 */ bool itWhitebea_UnkMotion7_Coll(Item_GObj* gobj);
-/* 2E468C */ void it_2725_Logic9_PickedUp(Item_GObj*);
+/* 2E468C */ void itWhiteBea_Logic9_PickedUp(Item_GObj*);
 /* 2E46B4 */ bool itWhitebea_UnkMotion8_Anim(Item_GObj* gobj);
 /* 2E46FC */ void itWhitebea_UnkMotion8_Phys(Item_GObj* gobj);
 /* 2E4700 */ void it_2725_Logic9_Dropped(Item_GObj*);

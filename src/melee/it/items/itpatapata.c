@@ -68,7 +68,7 @@ bool itPatapata_UnkMotion2_Anim(Item_GObj* gobj)
 
 /// #it_802E0F1C
 
-void it_2725_Logic4_PickedUp(Item_GObj* gobj)
+void itPatapata_Logic4_PickedUp(Item_GObj* gobj)
 {
     Item_80268E5C(gobj, 5, ITEM_ANIM_UPDATE);
 }
