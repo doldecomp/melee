@@ -367,7 +367,7 @@ void it_802CC1CC(Item_GObj* gobj, ItemKind kind)
     }
 }
 
-void it_2725_Logic34_Spawned(Item_GObj* gobj)
+void itLizardon_Logic34_Spawned(Item_GObj* gobj)
 {
     Item* ip = gobj->user_data;
     void* hsd_obj = gobj->hsd_obj;
@@ -380,7 +380,7 @@ void it_2725_Logic34_Spawned(Item_GObj* gobj)
     it_802CC5D4(gobj);
 }
 
-void it_2725_Logic35_Spawned(Item_GObj* gobj)
+void itLizardon_Logic35_Spawned(Item_GObj* gobj)
 {
     Item* ip = gobj->user_data;
     void* hsd_obj = gobj->hsd_obj;
@@ -393,7 +393,7 @@ void it_2725_Logic35_Spawned(Item_GObj* gobj)
     it_802CC5D4(gobj);
 }
 
-void it_2725_Logic36_Spawned(Item_GObj* gobj)
+void itLizardon_Logic36_Spawned(Item_GObj* gobj)
 {
     Item* ip = gobj->user_data;
     void* hsd_obj = gobj->hsd_obj;
@@ -406,7 +406,7 @@ void it_2725_Logic36_Spawned(Item_GObj* gobj)
     it_802CC5D4(gobj);
 }
 
-void it_2725_Logic37_Spawned(Item_GObj* gobj)
+void itLizardon_Logic37_Spawned(Item_GObj* gobj)
 {
     Item* ip = gobj->user_data;
     void* hsd_obj = gobj->hsd_obj;
@@ -419,22 +419,22 @@ void it_2725_Logic37_Spawned(Item_GObj* gobj)
     it_802CC5D4(gobj);
 }
 
-void it_2725_Logic37_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
+void itLizardon_Logic37_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }
 
-bool it_2725_Logic37_Reflected(Item_GObj* gobj)
+bool itLizardon_Logic37_Reflected(Item_GObj* gobj)
 {
     return it_80273030(gobj);
 }
 
-bool it_2725_Logic37_HitShield(Item_GObj* gobj)
+bool itLizardon_Logic37_HitShield(Item_GObj* gobj)
 {
     return true;
 }
 
-bool it_2725_Logic37_Absorbed(Item_GObj* gobj)
+bool itLizardon_Logic37_Absorbed(Item_GObj* gobj)
 {
     return true;
 }

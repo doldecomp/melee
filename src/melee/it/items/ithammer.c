@@ -113,7 +113,7 @@ void it_80293E34(Item_GObj* gobj)
     thing(gobj);
 }
 
-void it_3F14_Logic28_Spawned(HSD_GObj* gobj)
+void itHammer_Logic28_Spawned(HSD_GObj* gobj)
 {
     GET_ITEM(gobj)->xD4C = 1;
     it_8029402C(gobj);
@@ -171,7 +171,7 @@ bool itHammer_UnkMotion1_Coll(HSD_GObj* gobj)
     return it_8026DF34(gobj);
 }
 
-void it_3F14_Logic28_PickedUp(HSD_GObj* gobj)
+void itHammer_Logic28_PickedUp(HSD_GObj* gobj)
 {
     Item* item = GET_ITEM(gobj);
     Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
@@ -195,7 +195,7 @@ void it_802941A4(HSD_GObj* gobj)
     thing(gobj);
 }
 
-void it_3F14_Logic28_Dropped(HSD_GObj* gobj)
+void itHammer_Logic28_Dropped(HSD_GObj* gobj)
 {
     Item_80268E5C(gobj, 1, 6);
     thing(gobj);
@@ -216,7 +216,7 @@ bool itHammer_UnkMotion4_Coll(HSD_GObj* gobj)
     return 0;
 }
 
-void it_3F14_Logic28_EnteredAir(HSD_GObj* gobj)
+void itHammer_Logic28_EnteredAir(HSD_GObj* gobj)
 {
     Item_80268E5C(gobj, 5, ITEM_ANIM_UPDATE);
     thing(gobj);
@@ -235,7 +235,7 @@ bool itHammer_UnkMotion5_Coll(Item_GObj* gobj)
     return 0;
 }
 
-void it_3F14_Logic28_EvtUnk(Item_GObj* igobj, HSD_GObj* gobj)
+void itHammer_Logic28_EvtUnk(Item_GObj* igobj, HSD_GObj* gobj)
 {
     it_8026B894(igobj, gobj);
 }

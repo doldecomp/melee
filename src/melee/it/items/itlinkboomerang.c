@@ -212,7 +212,7 @@ void it_802A0810(Item_GObj* gobj)
     ip->xDD4_itemVar.linkboomerang.xF90[0] = NULL;
 }
 
-void it_2725_Logic18_Destroyed(Item_GObj* gobj)
+void itLinkBoomerang_Logic18_Destroyed(Item_GObj* gobj)
 {
     Item* ip;
     ip = GET_ITEM(gobj);
@@ -730,7 +730,7 @@ bool it_802A1FA8(Item_GObj* gobj)
 }
 
 // NOTE: identical to it_802A1F08
-bool it_2725_Logic18_Absorbed(Item_GObj* gobj)
+bool itLinkBoomerang_Logic18_Absorbed(Item_GObj* gobj)
 {
     Item* ip;
     itLinkBoomerangAttributes* attrs;

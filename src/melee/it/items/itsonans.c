@@ -100,7 +100,7 @@ void it_802CD4FC(Item_GObj* gobj)
     ip->xDD4_itemVar.sonans.x68 -= attrs->x20;
 }
 
-bool it_2725_Logic9_DmgDealt(Item_GObj* gobj)
+bool itSonans_Logic9_DmgDealt(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     ip->xDD4_itemVar.sonans.x60 *= -1.0f;

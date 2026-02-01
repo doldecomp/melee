@@ -15,11 +15,11 @@
 /* 287D48 */ bool itTaru_UnkMotion1_Anim(Item_GObj* gobj);
 /* 287D50 */ void itTaru_UnkMotion1_Phys(Item_GObj* gobj);
 /* 287D80 */ bool itTaru_UnkMotion1_Coll(Item_GObj* gobj);
-/* 287E68 */ void it_3F14_Logic2_PickedUp(Item_GObj*);
+/* 287E68 */ void itTaru_Logic2_PickedUp(Item_GObj*);
 /* 287E9C */ bool itTaru_UnkMotion2_Anim(Item_GObj* gobj);
 /* 287EA4 */ void itTaru_UnkMotion2_Phys(Item_GObj* gobj);
-/* 287EA8 */ void it_3F14_Logic2_Dropped(Item_GObj*);
-/* 287EC8 */ void it_3F14_Logic2_Thrown(Item_GObj*);
+/* 287EA8 */ void itTaru_Logic2_Dropped(Item_GObj*);
+/* 287EC8 */ void itTaru_Logic2_Thrown(Item_GObj*);
 /* 287F20 */ void it_80287F20(Item_GObj* gobj);
 /* 287F5C */ bool itTaru_UnkMotion3_Anim(Item_GObj* gobj);
 /* 287FE4 */ void itTaru_UnkMotion3_Phys(Item_GObj* gobj);
@@ -46,7 +46,7 @@
 /* 288958 */ bool it_3F14_Logic2_HitShield(Item_GObj*);
 /* 2889F8 */ bool it_3F14_Logic2_Reflected(Item_GObj*);
 /* 288A98 */ bool it_3F14_Logic2_DmgReceived(Item_GObj*);
-/* 288C68 */ void it_3F14_Logic2_EvtUnk(Item_GObj*, Item_GObj*);
+/* 288C68 */ void itTaru_Logic2_EvtUnk(Item_GObj*, Item_GObj*);
 /* 3F58E0 */ extern ItemStateTable it_803F58E0[];
 
 #endif

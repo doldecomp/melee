@@ -33,7 +33,7 @@ void it_802B2870(Item_GObj* gobj, Item_GObj* ref_gobj)
     it_8026B894(gobj, ref_gobj);
 }
 
-void it_2725_Logic41_Destroyed(Item_GObj* gobj)
+void itMarioCape_Logic41_Destroyed(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     if (ip->owner != NULL) {

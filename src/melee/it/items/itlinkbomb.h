@@ -38,14 +38,14 @@
 /* 29F954 */ void itLinkbomb_UnkMotion5_Phys(HSD_GObj*);
 /* 29F958 */ bool itLinkbomb_UnkMotion5_Coll(HSD_GObj*);
 /* 29F960 */ bool it_8029F960(Item_GObj*);
-/* 29FA30 */ bool it_2725_Logic16_DmgReceived(Item_GObj*);
-/* 29FB24 */ void it_2725_Logic16_EnteredAir(Item_GObj*);
+/* 29FA30 */ bool itLinkBomb_Logic16_DmgReceived(Item_GObj*);
+/* 29FB24 */ void itLinkBomb_Logic16_EnteredAir(Item_GObj*);
 /* 29FB4C */ bool itLinkbomb_UnkMotion6_Anim(HSD_GObj*);
 /* 29FCE8 */ void itLinkbomb_UnkMotion6_Phys(HSD_GObj*);
 /* 29FCEC */ bool itLinkbomb_UnkMotion6_Coll(Item_GObj*);
-/* 29FD20 */ bool it_2725_Logic16_Reflected(Item_GObj*);
-/* 29FD40 */ bool it_2725_Logic16_HitShield(Item_GObj*);
-/* 29FD64 */ bool it_2725_Logic16_ShieldBounced(Item_GObj*);
+/* 29FD20 */ bool itLinkBomb_Logic16_Reflected(Item_GObj*);
+/* 29FD40 */ bool itLinkBomb_Logic16_HitShield(Item_GObj*);
+/* 29FD64 */ bool itLinkBomb_Logic16_ShieldBounced(Item_GObj*);
 /* 29FD84 */ void it_8029FD84(Item_GObj*, Item_GObj*);
 
 /* 3F6888 */ extern ItemStateTable it_803F6888[];
