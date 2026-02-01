@@ -652,7 +652,7 @@ bool it_2E5A_UnkMotion2_Coll(HSD_GObj* item_gobj)
     return false;
 }
 
-bool it_2725_Logic115_DmgDealt(Item_GObj* item_gobj)
+bool it_2E5A_Logic115_DmgDealt(Item_GObj* item_gobj)
 {
     lbAudioAx_80023870(0x93, 0x7F, 0x40, 0x1A);
     return true;
@@ -672,7 +672,7 @@ void it_802E6A74(HSD_GObj* gobj)
     }
 }
 
-void it_2725_Logic115_EvtUnk(Item_GObj* item_gobj, HSD_GObj* ref_gobj)
+void it_2E5A_Logic115_EvtUnk(Item_GObj* item_gobj, HSD_GObj* ref_gobj)
 {
     it_8026B894(item_gobj, ref_gobj);
 }

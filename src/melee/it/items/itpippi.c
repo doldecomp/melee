@@ -24,7 +24,7 @@ ItemStateTable it_803F7FF8[] = {
       itPippi_UnkMotion5_Coll },
 };
 
-void it_2725_Logic20_Spawned(Item_GObj* gobj)
+void itPippi_Logic20_Spawned(Item_GObj* gobj)
 {
     Item* it = gobj->user_data;
     Article* ap = it->xC4_article_data;

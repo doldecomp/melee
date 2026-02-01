@@ -7,7 +7,7 @@
 
 #include "it/items/types.h"
 
-/* 2ECCDC */ void it_2725_Logic25_Destroyed(Item_GObj*);
+/* 2ECCDC */ void itKyasarin_Logic25_Destroyed(Item_GObj*);
 /* 2ECD1C */ void it_802ECD1C(Item_GObj*, Vec3*);
 /* 2ECD3C */ HSD_GObj* it_802ECD3C(HSD_GObj*, Point3d*, f32);
 /* 2ECE90 */ void it_802ECE90(Item_GObj*);

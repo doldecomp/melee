@@ -77,7 +77,7 @@ void it_2725_Logic54_PickedUp(Item_GObj* gobj)
 
 /// #it_802BCFC4
 
-void it_2725_Logic54_EvtUnk(Item_GObj* arg0, Item_GObj* arg1)
+void itSeakChain_Logic54_EvtUnk(Item_GObj* arg0, Item_GObj* arg1)
 {
     Item* item = GET_ITEM((HSD_GObj*) arg0);
     it_8026B894(arg0, (HSD_GObj*) arg1);

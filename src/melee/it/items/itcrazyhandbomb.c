@@ -10,18 +10,18 @@
 
 /// #it_802F1030
 
-void it_2725_Logic86_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
+void itCrazyHandBomb_Logic86_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }
 
-bool it_2725_Logic86_DmgDealt(Item_GObj* gobj)
+bool itCrazyHandBomb_Logic86_DmgDealt(Item_GObj* gobj)
 {
     it_802F1344();
     return 1;
 }
 
-bool it_2725_Logic86_Reflected(Item_GObj* gobj)
+bool itCrazyHandBomb_Logic86_Reflected(Item_GObj* gobj)
 {
     return it_80273030(gobj);
 }

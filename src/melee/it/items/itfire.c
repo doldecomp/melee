@@ -20,7 +20,7 @@ ItemStateTable it_803F7C10[] = {
       itFire_UnkMotion2_Coll }
 };
 
-void it_2725_Logic6_Spawned(Item_GObj* gobj)
+void itFire_Logic6_Spawned(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itFireAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
@@ -32,7 +32,7 @@ void it_2725_Logic6_Spawned(Item_GObj* gobj)
 
 void it_802CC740(Item_GObj* gobj) {}
 
-void it_2725_Logic6_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
+void itFire_Logic6_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }

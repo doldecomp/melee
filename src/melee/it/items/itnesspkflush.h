@@ -24,10 +24,10 @@
 /* 2AB128 */ void itNesspkflush_UnkMotion1_Phys(Item_GObj*);
 /* 2AB140 */ void itNesspkflush_UnkMotion2_Phys(Item_GObj*);
 /* 2AB158 */ bool itNesspkflush_UnkMotion0_Coll(Item_GObj* gobj);
-/* 2AB2AC */ bool it_2725_Logic102_Reflected(Item_GObj*);
-/* 2AB3C0 */ bool it_2725_Logic102_Clanked(Item_GObj*);
-/* 2AB3C8 */ bool it_2725_Logic102_Absorbed(Item_GObj*);
-/* 2AB3D0 */ void it_2725_Logic102_EvtUnk(Item_GObj*, Item_GObj*);
+/* 2AB2AC */ bool itNessPKFlush_Logic102_Reflected(Item_GObj*);
+/* 2AB3C0 */ bool itNessPKFlush_Logic102_Clanked(Item_GObj*);
+/* 2AB3C8 */ bool itNessPKFlush_Logic102_Absorbed(Item_GObj*);
+/* 2AB3D0 */ void itNessPKFlush_Logic102_EvtUnk(Item_GObj*, Item_GObj*);
 /* 3F6B70 */ extern ItemStateTable it_803F6B70[];
 
 #endif

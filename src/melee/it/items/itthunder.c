@@ -21,7 +21,7 @@ ItemStateTable it_803F7C40[] = {
       itThunder_UnkMotion2_Coll }
 };
 
-void it_2725_Logic7_Spawned(Item_GObj* gobj)
+void itThunder_Logic7_Spawned(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itThunderPokemonAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;

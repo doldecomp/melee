@@ -101,7 +101,7 @@ bool itNesspkflush_UnkMotion2_Coll(Item_GObj* gobj)
     return false;
 }
 
-bool it_2725_Logic102_Reflected(Item_GObj* gobj)
+bool itNessPKFlush_Logic102_Reflected(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
@@ -114,17 +114,17 @@ bool it_2725_Logic102_Reflected(Item_GObj* gobj)
     return false;
 }
 
-bool it_2725_Logic102_Clanked(Item_GObj* arg0)
+bool itNessPKFlush_Logic102_Clanked(Item_GObj* arg0)
 {
     return true;
 }
 
-bool it_2725_Logic102_Absorbed(Item_GObj* arg0)
+bool itNessPKFlush_Logic102_Absorbed(Item_GObj* arg0)
 {
     return true;
 }
 
-void it_2725_Logic102_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
+void itNessPKFlush_Logic102_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }

@@ -47,7 +47,7 @@ void it_8027D730(Item_GObj* igp)
     }
 }
 
-void it_3F14_Logic6_Spawned(Item_GObj* igp)
+void itBombhei_Logic6_Spawned(Item_GObj* igp)
 {
     Item* ip = GET_ITEM(igp);
     f32 temp_f2;
@@ -173,7 +173,7 @@ bool itBombhei_UnkMotion1_Coll(Item_GObj* igp)
     return false;
 }
 
-void it_3F14_Logic6_PickedUp(Item_GObj* igp)
+void itBombhei_Logic6_PickedUp(Item_GObj* igp)
 {
     Item* ip = GET_ITEM(igp);
     itBombHeiAttributes* ap = ip->xC4_article_data->x4_specialAttributes;
@@ -338,7 +338,7 @@ bool itBombhei_UnkMotion12_Coll(Item_GObj* gobj)
     return false;
 }
 
-bool it_3F14_Logic6_Clanked(Item_GObj* gobj)
+bool itBombhei_Logic6_Clanked(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     if (ip->xDD4_itemVar.bombhei.xDDC == 0) {
@@ -347,7 +347,7 @@ bool it_3F14_Logic6_Clanked(Item_GObj* gobj)
     return false;
 }
 
-bool it_3F14_Logic6_Reflected(Item_GObj* gobj)
+bool itBombhei_Logic6_Reflected(Item_GObj* gobj)
 {
     return it_80273030(gobj);
 }
@@ -356,7 +356,7 @@ bool it_3F14_Logic6_Reflected(Item_GObj* gobj)
 
 /// #it_3F14_Logic6_ShieldBounced
 
-void it_3F14_Logic6_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
+void itBombhei_Logic6_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }

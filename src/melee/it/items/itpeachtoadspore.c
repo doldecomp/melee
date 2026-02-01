@@ -117,36 +117,36 @@ void itPeachtoadspore_UnkMotion0_Phys(Item_GObj* item_gobj)
     item->x40_vel.y *= attr->x8_speed_decay_rate;
 }
 
-bool it_2725_Logic92_DmgDealt(Item_GObj* item_gobj)
+bool itPeachToadSpore_Logic92_DmgDealt(Item_GObj* item_gobj)
 {
     efLib_DestroyAll(item_gobj);
     return true;
 }
 
-bool it_2725_Logic68_Clanked(Item_GObj* item_gobj)
+bool itPeachToadSpore_Logic68_Clanked(Item_GObj* item_gobj)
 {
     efLib_DestroyAll(item_gobj);
     return true;
 }
 
-bool it_2725_Logic68_HitShield(Item_GObj* item_gobj)
+bool itPeachToadSpore_Logic68_HitShield(Item_GObj* item_gobj)
 {
     efLib_DestroyAll(item_gobj);
     return true;
 }
 
-bool it_2725_Logic68_Absorbed(Item_GObj* item_gobj)
+bool itPeachToadSpore_Logic68_Absorbed(Item_GObj* item_gobj)
 {
     efLib_DestroyAll(item_gobj);
     return true;
 }
 
-bool it_2725_Logic68_ShieldBounced(Item_GObj* item_gobj)
+bool itPeachToadSpore_Logic68_ShieldBounced(Item_GObj* item_gobj)
 {
     return itColl_BounceOffShield(item_gobj);
 }
 
-bool it_2725_Logic68_Reflected(Item_GObj* item_gobj)
+bool itPeachToadSpore_Logic68_Reflected(Item_GObj* item_gobj)
 {
     Item* item;
     f32 lifeTimer;
@@ -158,7 +158,7 @@ bool it_2725_Logic68_Reflected(Item_GObj* item_gobj)
     return false;
 }
 
-void it_2725_Logic92_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
+void itPeachToadSpore_Logic92_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }

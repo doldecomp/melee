@@ -21,7 +21,7 @@
 /* 2B46C8 */ bool it_2725_Logic107_Reflected(Item_GObj*);
 /* 2B4A18 */ bool it_2725_Logic107_HitShield(Item_GObj*);
 /* 2B4A60 */ bool it_2725_Logic107_ShieldBounced(Item_GObj*);
-/* 2B4AA8 */ void it_2725_Logic107_EvtUnk(Item_GObj*, Item_GObj*);
+/* 2B4AA8 */ void itPikachuTJoltAir_Logic107_EvtUnk(Item_GObj*, Item_GObj*);
 /* 3F71D8 */ extern ItemStateTable it_803F71D8[];
 
 #endif

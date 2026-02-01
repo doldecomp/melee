@@ -173,7 +173,7 @@ void it_2E6A_UnkMotion19_Phys(HSD_GObj* item_gobj)
     }
 }
 
-bool it_2725_Logic117_DmgDealt(Item_GObj* item_gobj)
+bool it_2E6A_Logic117_DmgDealt(Item_GObj* item_gobj)
 {
     Item* item = GET_ITEM(item_gobj);
     if (item->xDD4_itemVar.it_2E6A_1.x14 != NULL &&
@@ -185,7 +185,7 @@ bool it_2725_Logic117_DmgDealt(Item_GObj* item_gobj)
     return false;
 }
 
-bool it_2725_Logic117_DmgReceived(Item_GObj* item_gobj)
+bool it_2E6A_Logic117_DmgReceived(Item_GObj* item_gobj)
 {
     Vec3 sp10;
     Item* item = GET_ITEM((HSD_GObj*) item_gobj);
@@ -216,7 +216,7 @@ bool it_802E7054(HSD_GObj* item_gobj)
     return false;
 }
 
-void it_2725_Logic117_EvtUnk(Item_GObj* item_gobj, HSD_GObj* ref_gobj)
+void it_2E6A_Logic117_EvtUnk(Item_GObj* item_gobj, HSD_GObj* ref_gobj)
 {
     it_8026B894(item_gobj, ref_gobj);
 }

@@ -131,7 +131,7 @@ bool itRshell_UnkMotion1_Coll(Item_GObj* gobj)
     return false;
 }
 
-void it_3F14_Logic15_PickedUp(Item_GObj* gobj)
+void itRShell_Logic15_PickedUp(Item_GObj* gobj)
 {
     PAD_STACK(8);
     it_80275474(gobj);
@@ -235,7 +235,7 @@ bool itRshell_UnkMotion7_Coll(Item_GObj* gobj)
 
 /// #it_3F14_Logic15_DmgReceived
 
-bool it_3F14_Logic15_Reflected(Item_GObj* gobj)
+bool itRShell_Logic15_Reflected(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     it_80273030(gobj);
@@ -243,7 +243,7 @@ bool it_3F14_Logic15_Reflected(Item_GObj* gobj)
     return false;
 }
 
-bool it_3F14_Logic15_Clanked(Item_GObj* gobj)
+bool itRShell_Logic15_Clanked(Item_GObj* gobj)
 {
     itColl_BounceOffVictim(gobj);
     return false;
@@ -251,7 +251,7 @@ bool it_3F14_Logic15_Clanked(Item_GObj* gobj)
 
 /// #it_3F14_Logic15_HitShield
 
-bool it_3F14_Logic15_ShieldBounced(Item_GObj* gobj)
+bool itRShell_Logic15_ShieldBounced(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     if (ip->msid == 3 || ip->msid == 4) {
@@ -262,7 +262,7 @@ bool it_3F14_Logic15_ShieldBounced(Item_GObj* gobj)
 
 /// #it_8028E6C0
 
-void it_3F14_Logic15_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
+void itRShell_Logic15_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }

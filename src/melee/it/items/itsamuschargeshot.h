@@ -24,13 +24,13 @@
 /* 2B5E50 */ void itSamuschargeshot_UnkMotion8_Phys(Item_GObj* gobj);
 /* 2B5EA0 */ bool itSamuschargeshot_UnkMotion8_Coll(Item_GObj* gobj);
 /* 2B5EDC */ UNK_RET it_802B5EDC(UNK_PARAMS);
-/* 2B5FD8 */ bool it_2725_Logic108_DmgDealt(Item_GObj*);
-/* 2B5FE0 */ bool it_2725_Logic108_Clanked(Item_GObj*);
-/* 2B5FE8 */ bool it_2725_Logic108_Absorbed(Item_GObj*);
+/* 2B5FD8 */ bool itSamusChargeshot_Logic108_DmgDealt(Item_GObj*);
+/* 2B5FE0 */ bool itSamusChargeshot_Logic108_Clanked(Item_GObj*);
+/* 2B5FE8 */ bool itSamusChargeshot_Logic108_Absorbed(Item_GObj*);
 /* 2B5FF0 */ bool it_2725_Logic108_Reflected(Item_GObj*);
-/* 2B613C */ bool it_2725_Logic108_HitShield(Item_GObj*);
+/* 2B613C */ bool itSamusChargeshot_Logic108_HitShield(Item_GObj*);
 /* 2B6144 */ bool it_2725_Logic108_ShieldBounced(Item_GObj*);
-/* 2B62B0 */ void it_2725_Logic108_EvtUnk(Item_GObj*, Item_GObj*);
+/* 2B62B0 */ void itSamusChargeshot_Logic108_EvtUnk(Item_GObj*, Item_GObj*);
 /* 2B62D0 */ void it_802B62D0(Item_GObj*, Vec3* pos, bool, float facing_dir);
 /* 3F7288 */ extern ItemStateTable it_803F7288[];
 

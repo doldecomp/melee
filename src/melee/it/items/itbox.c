@@ -23,7 +23,7 @@
 
 static double const ROT_VEL_SCALE = 0.03490658476948738;
 
-void it_3F14_Logic1_Spawned(Item_GObj* gobj)
+void itBox_Logic1_Spawned(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     ip->xDCE_flag.b7 = 0;
@@ -32,7 +32,7 @@ void it_3F14_Logic1_Spawned(Item_GObj* gobj)
     it_8028655C(gobj);
 }
 
-void it_3F14_Logic1_Destroyed(Item_GObj* gobj)
+void itBox_Logic1_Destroyed(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     if (ip->xDD4_itemVar.box.spawned_gobj != NULL) {
@@ -265,7 +265,7 @@ bool itBox_UnkMotion1_Coll(Item_GObj* gobj)
     return false;
 }
 
-void it_3F14_Logic1_PickedUp(Item_GObj* gobj)
+void itBox_Logic1_PickedUp(Item_GObj* gobj)
 {
     Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
 }
@@ -277,7 +277,7 @@ bool itBox_UnkMotion2_Anim(Item_GObj* gobj)
 
 void itBox_UnkMotion2_Phys(Item_GObj* gobj) {}
 
-void it_3F14_Logic1_Thrown(Item_GObj* gobj)
+void itBox_Logic1_Thrown(Item_GObj* gobj)
 {
     it_8026B3A8(gobj);
     Item_80268E5C(gobj, 3, ITEM_ANIM_UPDATE | ITEM_DROP_UPDATE);
@@ -323,7 +323,7 @@ bool itBox_UnkMotion3_Coll(Item_GObj* gobj)
     return false;
 }
 
-void it_3F14_Logic1_Dropped(Item_GObj* gobj)
+void itBox_Logic1_Dropped(Item_GObj* gobj)
 {
     it_8026B3A8(gobj);
     Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE | ITEM_DROP_UPDATE);
@@ -442,7 +442,7 @@ bool itBox_UnkMotion7_Coll(Item_GObj* gobj)
 }
 
 /// Box dealt damage to something - try to open
-bool it_3F14_Logic1_DmgDealt(Item_GObj* gobj)
+bool itBox_Logic1_DmgDealt(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     PAD_STACK(8);
@@ -453,7 +453,7 @@ bool it_3F14_Logic1_DmgDealt(Item_GObj* gobj)
 }
 
 /// Box clanked with another hitbox - try to open
-bool it_3F14_Logic1_Clanked(Item_GObj* gobj)
+bool itBox_Logic1_Clanked(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     PAD_STACK(8);
@@ -464,7 +464,7 @@ bool it_3F14_Logic1_Clanked(Item_GObj* gobj)
 }
 
 /// Box hit a shield - try to open
-bool it_3F14_Logic1_HitShield(Item_GObj* gobj)
+bool itBox_Logic1_HitShield(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     PAD_STACK(8);
@@ -475,7 +475,7 @@ bool it_3F14_Logic1_HitShield(Item_GObj* gobj)
 }
 
 /// Box was reflected - try to open
-bool it_3F14_Logic1_Reflected(Item_GObj* gobj)
+bool itBox_Logic1_Reflected(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     PAD_STACK(8);
@@ -488,7 +488,7 @@ bool it_3F14_Logic1_Reflected(Item_GObj* gobj)
 /// Handle damage received by box. When accumulated damage reaches threshold,
 /// box breaks open. Weighted random roll determines if items spawn or box is
 /// empty. Effect 0x427 is the box breaking visual effect.
-bool it_3F14_Logic1_DmgReceived(Item_GObj* gobj)
+bool itBox_Logic1_DmgReceived(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itBoxAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
@@ -508,7 +508,7 @@ bool it_3F14_Logic1_DmgReceived(Item_GObj* gobj)
     return false;
 }
 
-void it_3F14_Logic1_EnteredAir(Item_GObj* gobj)
+void itBox_Logic1_EnteredAir(Item_GObj* gobj)
 {
     Item* ip;
     PAD_STACK(16);
@@ -538,7 +538,7 @@ bool itBox_UnkMotion5_Coll(Item_GObj* gobj)
     return false;
 }
 
-void it_3F14_Logic1_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
+void itBox_Logic1_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }

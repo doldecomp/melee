@@ -7,7 +7,7 @@
 
 /// #it_802E1820
 
-void it_2725_Logic10_Destroyed(Item_GObj* gobj)
+void itKlap_Logic10_Destroyed(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     if (ip->xDD4_itemVar.klap.x20 != NULL) {

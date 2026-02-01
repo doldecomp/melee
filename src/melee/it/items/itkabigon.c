@@ -15,7 +15,7 @@
 
 void it_802C9DFC(Item_GObj* gobj) {}
 
-void it_2725_Logic2_Destroyed(Item_GObj* gobj)
+void itKabigon_Logic2_Destroyed(Item_GObj* gobj)
 {
     Camera_80031044(2);
 }

@@ -66,7 +66,7 @@ void itPikachutjoltair_UnkMotion0_Phys(Item_GObj* gobj)
 
 /// #it_2725_Logic107_ShieldBounced
 
-void it_2725_Logic107_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
+void itPikachuTJoltAir_Logic107_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }

@@ -106,7 +106,7 @@ void it_802E3784(Item_GObj* gobj, Item_GObj* ref_gobj)
     it_8026B894(gobj, ref_gobj);
 }
 
-// This function only called by it_3F14_Logic17_PickedUp from itfreeze, so
+// This function only called by itFreeze_Logic17_PickedUp from itfreeze, so
 // using those item vars
 void it_802E37A4(Item_GObj* gobj)
 {
@@ -294,7 +294,7 @@ bool itWhitebea_UnkMotion7_Coll(Item_GObj* gobj)
     return it_8027C794(gobj);
 }
 
-void it_2725_Logic9_PickedUp(Item_GObj* gobj)
+void itWhiteBea_Logic9_PickedUp(Item_GObj* gobj)
 {
     Item_80268E5C(gobj, 8, ITEM_ANIM_UPDATE);
 }

@@ -10,7 +10,7 @@
 
 /// #it_802EEFA8
 
-bool it_2725_Logic22_DmgDealt(Item_GObj* gobj)
+bool itTools_Logic22_DmgDealt(Item_GObj* gobj)
 {
     it_802EF320(gobj);
     return false;
@@ -34,7 +34,7 @@ void itTools_UnkMotion9_Phys(Item_GObj* gobj) {}
 
 /// #it_802EF548
 
-bool it_2725_Logic22_DmgReceived(Item_GObj* gobj)
+bool itTools_Logic22_DmgReceived(Item_GObj* gobj)
 {
     it_802EF548(gobj);
     return false;
@@ -46,12 +46,12 @@ bool it_2725_Logic22_DmgReceived(Item_GObj* gobj)
 
 /// #it_2725_Logic22_Absorbed
 
-bool it_2725_Logic22_ShieldBounced(Item_GObj* gobj)
+bool itTools_Logic22_ShieldBounced(Item_GObj* gobj)
 {
     return itColl_BounceOffShield(gobj);
 }
 
-bool it_2725_Logic22_Reflected(Item_GObj* gobj)
+bool itTools_Logic22_Reflected(Item_GObj* gobj)
 {
     const f32 PI_2 = M_PI / 2;
     Item* ip = GET_ITEM(gobj);

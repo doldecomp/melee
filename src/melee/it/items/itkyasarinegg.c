@@ -35,9 +35,9 @@ void itKyasarinegg_UnkMotion3_Phys(Item_GObj* gobj)
     it_80274658(gobj, it_804D6D28->x68_float);
 }
 
-void it_2725_Logic28_Dropped(Item_GObj* gobj)
+void itKyasarinEgg_Logic28_Dropped(Item_GObj* gobj)
 {
-    it_2725_Logic28_Thrown(gobj);
+    itKyasarinEgg_Logic28_Thrown(gobj);
 }
 
 void itKyasarinegg_UnkMotion4_Anim(Item_GObj* gobj)
@@ -53,12 +53,12 @@ bool itKyasarinegg_UnkMotion0_Coll(Item_GObj* gobj)
     return false;
 }
 
-void it_2725_Logic28_PickedUp(Item_GObj* gobj)
+void itKyasarinEgg_Logic28_PickedUp(Item_GObj* gobj)
 {
     Item_80268E5C((HSD_GObj*) gobj, 2, ITEM_ANIM_UPDATE);
 }
 
-void it_2725_Logic28_Thrown(Item_GObj* gobj)
+void itKyasarinEgg_Logic28_Thrown(Item_GObj* gobj)
 {
     Item_80268E5C((HSD_GObj*) gobj, 3, 6);
 }
@@ -68,7 +68,7 @@ void it_802F0320(Item_GObj* gobj, Item_GObj* ref_gobj)
     it_8026B894(gobj, ref_gobj);
 }
 
-bool it_2725_Logic28_ShieldBounced(Item_GObj* gobj)
+bool itKyasarinEgg_Logic28_ShieldBounced(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     if (ip->msid == 3) {

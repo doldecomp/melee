@@ -6,7 +6,7 @@
 #include "it/it_2725.h"
 #include "it/item.h"
 
-void it_2725_Logic25_Destroyed(Item_GObj* gobj)
+void itKyasarin_Logic25_Destroyed(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     if (ip->xDD4_itemVar.kyasarin.x20 != NULL) {

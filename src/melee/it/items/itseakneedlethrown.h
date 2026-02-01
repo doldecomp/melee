@@ -13,7 +13,7 @@
 /* 2AFD8C */ Item_GObj* it_802AFD8C(Item_GObj*, Vec3*, u32, float);
 /* 2AFEA8 */ Item_GObj* it_802AFEA8(Item_GObj* gobj, Fighter_GObj* owner_gobj,
                                     u32);
-/* 2AFEF8 */ void it_2725_Logic109_Destroyed(Item_GObj*);
+/* 2AFEF8 */ void itSeakNeedleThrown_Logic109_Destroyed(Item_GObj*);
 /* 2AFF08 */ UNK_RET it_802AFF08(UNK_PARAMS);
 /* 2B00F4 */ UNK_RET it_802B00F4(UNK_PARAMS);
 /* 2B0210 */ bool itSeakneedlethrown_UnkMotion0_Anim(Item_GObj* gobj);
@@ -37,7 +37,7 @@
 /* 2B1294 */ bool it_2725_Logic109_Reflected(Item_GObj*);
 /* 2B14DC */ bool it_2725_Logic109_ShieldBounced(Item_GObj*);
 /* 2B16E4 */ bool it_2725_Logic109_HitShield(Item_GObj*);
-/* 2B1890 */ void it_2725_Logic109_EvtUnk(Item_GObj*, Item_GObj*);
+/* 2B1890 */ void itSeakNeedleThrown_Logic109_EvtUnk(Item_GObj*, Item_GObj*);
 /* 3F6F50 */ extern ItemStateTable it_803F6F50[];
 
 #endif

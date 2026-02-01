@@ -15,7 +15,7 @@ typedef struct itOldkuriAttributes {
     f32 x8;
 } itOldkuriAttributes;
 
-void it_2725_Logic29_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
+void itOldKuri_Logic29_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }
@@ -89,7 +89,7 @@ void itOldkuri_UnkMotion4_Phys(Item_GObj* gobj)
 
 /// #itOldkuri_UnkMotion4_Coll
 
-void it_2725_Logic0_PickedUp(Item_GObj* gobj)
+void itOldKuri_Logic0_PickedUp(Item_GObj* gobj)
 {
     it_80275474(gobj);
     it_80274740(gobj);

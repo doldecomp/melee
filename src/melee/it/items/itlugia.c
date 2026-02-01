@@ -14,7 +14,7 @@
 
 void it_802D14D0(void) {}
 
-void it_2725_Logic17_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
+void itLugia_Logic17_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }
@@ -203,19 +203,19 @@ bool it_802D1E64(Item_GObj* gobj)
 
 /// #it_802D208C
 
-void it_2725_Logic39_Spawned(Item_GObj* gobj)
+void itLugia_Logic39_Spawned(Item_GObj* gobj)
 {
     it_8027ADEC(0x465, gobj, HSD_GObjGetHSDObj(gobj), it_804DD490);
     it_802D23F4(gobj);
 }
 
-void it_2725_Logic40_Spawned(Item_GObj* gobj)
+void itLugia_Logic40_Spawned(Item_GObj* gobj)
 {
     it_8027ADEC(0x466, gobj, HSD_GObjGetHSDObj(gobj), it_804DD490);
     it_802D23F4(gobj);
 }
 
-void it_2725_Logic41_Spawned(Item_GObj* gobj)
+void itLugia_Logic41_Spawned(Item_GObj* gobj)
 {
     it_8027ADEC(0x467, gobj, HSD_GObjGetHSDObj(gobj), it_804DD490);
     it_802D23F4(gobj);
