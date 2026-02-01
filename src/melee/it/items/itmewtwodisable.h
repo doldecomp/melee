@@ -11,8 +11,8 @@
 
 /* 2C49E0 */ void itMewtwoDisable_Logic67_Destroy(Item_GObj*);
 /* 2C4A00 */ void itMewtwoDisable_Logic67_Destroyed(Item_GObj*);
-/* 2C4A40 */ Item_GObj* itMewtwoDisable_Logic67_SpawnMewtwoDisable(Fighter_GObj*,
-                                                           Vec3*, float);
+/* 2C4A40 */ Item_GObj*
+itMewtwoDisable_Logic67_SpawnMewtwoDisable(Fighter_GObj*, Vec3*, float);
 /* 2C4B38 */ void it_802C4B38(Item_GObj* item_gobj);
 /* 2C4BB8 */ void it_802C4BB8(Item_GObj* item_gobj);
 /* 2C4C08 */ bool itMewtwodisable_UnkMotion0_Anim(Item_GObj* gobj);

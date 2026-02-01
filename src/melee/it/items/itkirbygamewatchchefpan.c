@@ -101,7 +101,8 @@ bool itKirbygamewatchchefpan_UnkMotion0_Anim(Item_GObj* item_gobj)
     return false;
 }
 
-void itKirbyGameWatchChefPan_Logic113_EvtUnk(Item_GObj* item_gobj, HSD_GObj* ref_gobj)
+void itKirbyGameWatchChefPan_Logic113_EvtUnk(Item_GObj* item_gobj,
+                                             HSD_GObj* ref_gobj)
 {
     it_8026B894(item_gobj, ref_gobj);
 }

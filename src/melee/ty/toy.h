@@ -30,7 +30,8 @@
 /* 306930 */ void un_80306930(HSD_GObj*, int);
 /* 306954 */ void un_80306954(HSD_GObj* gobj);
 /* 306A0C */ void un_80306A0C(void* arg0);
-/* 306A48 */ void un_80306A48(HSD_JObj*, char *, char *, char *, HSD_Archive*, long);
+/* 306A48 */ void un_80306A48(HSD_JObj*, char*, char*, char*, HSD_Archive*,
+                              long);
 /* 306B18 */ HSD_GObjProc* un_80306B18(HSD_GObj* gobj, s32 anim_frame,
                                        s32 val1, s32 val2);
 /* 306BB8 */ void un_80306BB8(HSD_GObj* gobj);
@@ -48,8 +49,9 @@
 /* 307BA0 */ HSD_JObj* un_80307BA0(HSD_JObj*, s16);
 /* 307E84 */ void fn_80307E84(HSD_GObj* gobj);
 /* 307F64 */ void un_80307F64(s32, s32);
-/* 30813C */ char* un_8030813C(s16 arg0, enum_t unused); /// TODO :: fill out the struct that
-                                           /// this uses/returns
+/* 30813C */ char* un_8030813C(s16 arg0,
+                               enum_t unused); /// TODO :: fill out the struct
+                                               /// that this uses/returns
 /* 308250 */ UNK_RET un_80308250(UNK_PARAMS);
 /* 3082F8 */ void un_803082F8(s16 idx);
 /* 308328 */ void un_80308328(s32 arg0);

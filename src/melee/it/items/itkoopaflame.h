@@ -25,7 +25,7 @@
 /* 2AD3B0 */ bool itKoopaFlame_Logic111_ShieldBounced(Item_GObj* gobj);
 /* 2AD450 */ bool itKoopaFlame_Logic111_HitShield(Item_GObj* gobj);
 /* 2AD458 */ void itKoopaFlame_Logic111_EvtUnk(Item_GObj* item_gobj,
-                                          Item_GObj* ref_gobj);
+                                               Item_GObj* ref_gobj);
 /* 3F6C58 */ extern ItemStateTable ItemStateTable_KoopaFlame[];
 
 #endif
