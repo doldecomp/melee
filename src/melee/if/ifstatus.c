@@ -9,7 +9,9 @@
 #include "if/if_2F72.h"
 #include "if/ifstock.h"
 #include "if/types.h"
+#include "lb/lb_00B0.h"
 #include "lb/lbarchive.h"
+#include "mn/mnmain.h"
 #include "pl/player.h"
 #include "sc/types.h"
 
@@ -22,9 +24,6 @@
 #include <baselib/mtx.h>
 #include <baselib/random.h>
 #include <baselib/tobj.h>
-
-#include "lb/lb_00B0.h"
-#include "mn/mnmain.h"
 
 typedef struct FlagsX {
     u32 b80 : 1;
@@ -223,8 +222,8 @@ void ifStatus_802F4B84(IfDamageState* state, s32 is_stamina)
 }
 
 /* Color endpoints for damage percentage interpolation (extern from .sdata2) */
-extern u8 ifStatus_804D57A8[3];  /* Start color (low damage) */
-extern u8 ifStatus_804D57AC[3];  /* End color (high damage) */
+extern u8 ifStatus_804D57A8[3]; /* Start color (low damage) */
+extern u8 ifStatus_804D57AC[3]; /* End color (high damage) */
 
 void ifStatus_802F4EDC(HSD_GObj* gobj)
 {

@@ -742,7 +742,8 @@ f32 gm_8017E578(int difficulty, u8 stage_slot)
 
 u8 gm_8017E5FC(int difficulty, u8 stage_slot, u8 arg2)
 {
-    return lbl_803D7AC0[stage_slot + ((u8) difficulty * 5)].pad_6[1 + arg2 * 3];
+    return lbl_803D7AC0[stage_slot + ((u8) difficulty * 5)]
+        .pad_6[1 + arg2 * 3];
 }
 
 u8 gm_8017E630(u8 difficulty, u8 stage_slot, u8 arg2)
@@ -775,7 +776,8 @@ u8 gm_8017E738(u8 difficulty, u8 stage_slot, u8 arg2)
 
 u8 gm_8017E76C(u8 difficulty, u8 stage_slot, u8 arg2)
 {
-    return lbl_803D7AC0[stage_slot + (difficulty * 5)].pad_6[0x10 + (arg2 * 3)];
+    return lbl_803D7AC0[stage_slot + (difficulty * 5)]
+        .pad_6[0x10 + (arg2 * 3)];
 }
 
 /// #gm_8017E7A0
@@ -825,7 +827,6 @@ f32 gm_8017EC50(u8 difficulty, u8 stage_slot)
     return (f32) lbl_803D85F0[stage_slot + (difficulty * 5)].scale3_pct /
            100.0F;
 }
-
 
 u8 gm_8017ECA0(u8 difficulty, u8 stage_slot, u8 arg2)
 {

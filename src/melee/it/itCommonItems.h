@@ -1191,16 +1191,14 @@ typedef struct itkireihanaAttributes {
     u32 xC;
 } itkireihanaAttributes;
 
-typedef struct itThunder_ItemVars
-{
+typedef struct itThunder_ItemVars {
     /* xDD8 */ u8 pad[0x60 - 0x0];
     /* xE34 */ u32 x60;
     /* xE38 */ u32 x64;
     /* xE3C */ f32 x68;
 } itThunder_ItemVars;
 
-typedef struct itThunderPokemonAttributes
-{
+typedef struct itThunderPokemonAttributes {
     f32 x0;
     u32 x4;
     u32 x8;
