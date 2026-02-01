@@ -15,9 +15,9 @@
                                     void (*)(Item_GObj*, Ground*, Vec3*,
                                              HSD_GObj*, f32),
                                     void (*)(Item_GObj*, Ground*, HSD_GObj*));
-/* 2E6F7C */ bool it_2725_Logic117_DmgDealt(Item_GObj*);
-/* 2E6FC0 */ bool it_2725_Logic117_DmgReceived(Item_GObj*);
-/* 2E709C */ void it_2725_Logic117_EvtUnk(Item_GObj*, HSD_GObj*);
+/* 2E6F7C */ bool it_2E6A_Logic117_DmgDealt(Item_GObj*);
+/* 2E6FC0 */ bool it_2E6A_Logic117_DmgReceived(Item_GObj*);
+/* 2E709C */ void it_2E6A_Logic117_EvtUnk(Item_GObj*, HSD_GObj*);
 /* 3F8C8C */ extern ItemStateTable it_803F8C8C[];
 
 #endif

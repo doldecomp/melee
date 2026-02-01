@@ -55,27 +55,27 @@ bool itLipstickspore_UnkMotion1_Coll(Item_GObj* gobj)
     return false;
 }
 
-bool it_3F14_Logic37_DmgDealt(Item_GObj* arg0)
+bool itLipstickSpore_Logic37_DmgDealt(Item_GObj* arg0)
 {
     return true;
 }
 
-bool it_3F14_Logic37_Clanked(Item_GObj* arg0)
+bool itLipstickSpore_Logic37_Clanked(Item_GObj* arg0)
 {
     return true;
 }
 
-bool it_3F14_Logic37_HitShield(Item_GObj* arg0)
+bool itLipstickSpore_Logic37_HitShield(Item_GObj* arg0)
 {
     return true;
 }
 
-bool it_3F14_Logic37_Absorbed(Item_GObj* arg0)
+bool itLipstickSpore_Logic37_Absorbed(Item_GObj* arg0)
 {
     return true;
 }
 
-bool it_3F14_Logic37_Reflected(Item_GObj* gobj)
+bool itLipstickSpore_Logic37_Reflected(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     HSD_JObj* jobj = gobj->hsd_obj;
@@ -85,13 +85,13 @@ bool it_3F14_Logic37_Reflected(Item_GObj* gobj)
     return false;
 }
 
-bool it_3F14_Logic37_ShieldBounced(Item_GObj* gobj)
+bool itLipstickSpore_Logic37_ShieldBounced(Item_GObj* gobj)
 {
     itColl_BounceOffShield(gobj);
     return false;
 }
 
-void it_3F14_Logic37_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
+void itLipstickSpore_Logic37_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }

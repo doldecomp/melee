@@ -23,7 +23,7 @@ ItemStateTable it_803F8250[] = {
     },
 };
 
-void it_2725_Logic26_Spawned(Item_GObj* item_gobj)
+void itPorygon2_Logic26_Spawned(Item_GObj* item_gobj)
 {
     Item* item = GET_ITEM(item_gobj);
     it_80279CDC(item_gobj, item->scl);

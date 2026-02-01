@@ -18,17 +18,17 @@ UNK_T it_802EAF28(Item_GObj* item_gobj)
 
 /// #itGreatfoxlaser_UnkMotion1_Phys
 
-bool it_2725_Logic27_DmgDealt(Item_GObj* item_gobj)
+bool itGreatFoxLaser_Logic27_DmgDealt(Item_GObj* item_gobj)
 {
     return false;
 }
 
-bool it_2725_Logic27_Clanked(Item_GObj* item_gobj)
+bool itGreatFoxLaser_Logic27_Clanked(Item_GObj* item_gobj)
 {
     return false;
 }
 
-bool it_2725_Logic27_Absorbed(Item_GObj* item_gobj)
+bool itGreatFoxLaser_Logic27_Absorbed(Item_GObj* item_gobj)
 {
     return false;
 }

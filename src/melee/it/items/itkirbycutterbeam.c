@@ -21,17 +21,17 @@ bool itKirbycutterbeam_UnkMotion0_Anim(Item_GObj* gobj)
 
 /// #itKirbycutterbeam_UnkMotion0_Coll
 
-bool it_2725_Logic7_DmgDealt(Item_GObj* arg0)
+bool itKirbyCutterBeam_Logic7_DmgDealt(Item_GObj* arg0)
 {
     return false;
 }
 
-bool it_2725_Logic7_Clanked(Item_GObj* arg0)
+bool itKirbyCutterBeam_Logic7_Clanked(Item_GObj* arg0)
 {
     return true;
 }
 
-bool it_2725_Logic7_Absorbed(Item_GObj* arg0)
+bool itKirbyCutterBeam_Logic7_Absorbed(Item_GObj* arg0)
 {
     return true;
 }
@@ -40,7 +40,7 @@ bool it_2725_Logic7_Absorbed(Item_GObj* arg0)
 
 /// #it_2725_Logic7_ShieldBounced
 
-bool it_2725_Logic7_HitShield(Item_GObj* arg0)
+bool itKirbyCutterBeam_Logic7_HitShield(Item_GObj* arg0)
 {
     return true;
 }

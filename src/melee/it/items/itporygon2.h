@@ -9,7 +9,7 @@
 
 #include <baselib/forward.h>
 
-/* 2D5ABC */ void it_2725_Logic26_Spawned(Item_GObj*);
+/* 2D5ABC */ void itPorygon2_Logic26_Spawned(Item_GObj*);
 /* 2D5B14 */ void it_802D5B14(Item_GObj*);
 /* 2D5B60 */ bool itPorygon2_UnkMotion0_Anim(Item_GObj*);
 /* 2D5BBC */ void itPorygon2_UnkMotion0_Phys(Item_GObj*);

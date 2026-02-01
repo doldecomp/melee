@@ -24,7 +24,7 @@ ItemStateTable it_803F7E28[] = {
       itKireihana_UnkMotion4_Coll }
 };
 
-void it_2725_Logic15_Spawned(Item_GObj* gobj)
+void itKireihana_Logic15_Spawned(Item_GObj* gobj)
 {
     Item* item = GET_ITEM(gobj);
     itkireihanaAttributes* attrs =
@@ -41,7 +41,7 @@ void it_2725_Logic15_Spawned(Item_GObj* gobj)
     item->xDD4_itemVar.kireihana.x70 = 0.0f;
 }
 
-void it_2725_Logic15_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
+void itKireihana_Logic15_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }

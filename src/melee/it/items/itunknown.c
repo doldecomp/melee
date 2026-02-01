@@ -61,7 +61,7 @@ bool itUnknown_UnkMotion2_Coll(Item_GObj* gobj)
 
 /// #it_2725_Logic38_Spawned
 
-void it_2725_Logic38_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
+void itUnknown_Logic38_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }

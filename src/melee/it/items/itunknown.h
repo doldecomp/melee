@@ -23,7 +23,7 @@
 /* 2CED2C */ bool itUnknown_UnkMotion2_Coll(Item_GObj* gobj);
 /* 2CED54 */ UNK_RET it_802CED54(UNK_PARAMS);
 /* 2CEEC8 */ void it_2725_Logic38_Spawned(Item_GObj*);
-/* 2CF0B4 */ void it_2725_Logic38_EvtUnk(Item_GObj*, Item_GObj*);
+/* 2CF0B4 */ void itUnknown_Logic38_EvtUnk(Item_GObj*, Item_GObj*);
 /* 2CF0D4 */ void it_802CF0D4(Item_GObj* gobj);
 /* 2CF120 */ bool it_802CF120(Item_GObj* gobj);
 /* 2CF154 */ void it_802CF154(Item_GObj* gobj);

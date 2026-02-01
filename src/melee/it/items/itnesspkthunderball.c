@@ -70,7 +70,7 @@ HSD_GObj* it_802AB568(Item_GObj* gobj)
 
 /// #itNesspkthunderball_UnkMotion0_Coll
 
-bool it_2725_Logic26_DmgDealt(Item_GObj* gobj)
+bool itNessPKThunderball_Logic26_DmgDealt(Item_GObj* gobj)
 {
     it_802AB90C(gobj);
     return true;

@@ -44,27 +44,27 @@ bool itPikachuthunder_UnkMotion1_Anim(Item_GObj* gobj)
 
 /// #itPikachuthunder_UnkMotion2_Anim
 
-bool it_2725_Logic39_DmgDealt(Item_GObj* arg0)
+bool itPikachuThunder_Logic39_DmgDealt(Item_GObj* arg0)
 {
     return false;
 }
 
-bool it_2725_Logic39_HitShield(Item_GObj* arg0)
+bool itPikachuThunder_Logic39_HitShield(Item_GObj* arg0)
 {
     return false;
 }
 
-bool it_2725_Logic39_Clanked(Item_GObj* arg0)
+bool itPikachuThunder_Logic39_Clanked(Item_GObj* arg0)
 {
     return false;
 }
 
-bool it_2725_Logic39_Absorbed(Item_GObj* arg0)
+bool itPikachuThunder_Logic39_Absorbed(Item_GObj* arg0)
 {
     return false;
 }
 
-void it_2725_Logic39_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
+void itPikachuThunder_Logic39_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     Item* ip = GET_ITEM(gobj);
     if (ip->xDD4_itemVar.pikachuthunder.x38 == ref_gobj) {

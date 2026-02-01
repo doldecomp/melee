@@ -6,7 +6,7 @@
 #include "it/item.h"
 #include "it/items/types.h"
 
-void it_2725_Logic14_Spawned(Item_GObj*);
+void itSuikun_Logic14_Spawned(Item_GObj*);
 void it_802CFCB4(Item_GObj*);
 void it_802CFCB8(Item_GObj*, Item_GObj*);
 void it_802CFCD8(Item_GObj*);

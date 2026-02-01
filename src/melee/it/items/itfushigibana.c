@@ -19,7 +19,7 @@ ItemStateTable it_803F82F0[] = {
       itFushigibana_UnkMotion2_Coll }
 };
 
-void it_2725_Logic29_Spawned(Item_GObj* gobj)
+void itFushigibana_Logic29_Spawned(Item_GObj* gobj)
 {
     Item* item = GET_ITEM(gobj);
     itFushigibanaAttributes* attrs =

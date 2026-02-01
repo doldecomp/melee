@@ -44,17 +44,17 @@ bool itNesspkfire_UnkMotion0_Coll(Item_GObj* gobj)
 
 /// #it_2725_Logic23_Clanked
 
-bool it_2725_Logic23_Absorbed(Item_GObj* arg0)
+bool itNessPKFire_Logic23_Absorbed(Item_GObj* arg0)
 {
     return true;
 }
 
-bool it_2725_Logic23_HitShield(Item_GObj* arg0)
+bool itNessPKFire_Logic23_HitShield(Item_GObj* arg0)
 {
     return true;
 }
 
-bool it_2725_Logic23_Reflected(Item_GObj* gobj)
+bool itNessPKFire_Logic23_Reflected(Item_GObj* gobj)
 {
     return it_80273030(gobj);
 }
