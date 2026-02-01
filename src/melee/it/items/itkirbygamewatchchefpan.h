@@ -13,7 +13,8 @@
 /* 2C7678 */ void it_802C7678(Item_GObj*);
 /* 2C7698 */ void itKirbyGameWatchChefPan_Logic113_PickedUp(Item_GObj*);
 /* 2C76E8 */ bool itKirbygamewatchchefpan_UnkMotion0_Anim(Item_GObj*);
-/* 2C7754 */ void itKirbyGameWatchChefPan_Logic113_EvtUnk(Item_GObj*, HSD_GObj* ref_gobj);
+/* 2C7754 */ void itKirbyGameWatchChefPan_Logic113_EvtUnk(Item_GObj*,
+                                                          HSD_GObj* ref_gobj);
 /* 3F7958 */ extern ItemStateTable it_803F7958[];
 
 #endif

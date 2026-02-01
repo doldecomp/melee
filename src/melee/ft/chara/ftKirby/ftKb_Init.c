@@ -4439,8 +4439,8 @@ void ftKb_SpecialAirHi3_Phys(Fighter_GObj* gobj)
 
     /// FAKE MATCH: comma operator required for regalloc
     ftCommon_8007D3A8(fp, 0.0f,
-                      ((0, fp->co_attrs.air_drift_stick_mul)) *dat_attr
-                          ->specialhi_horizontal_momentum,
+                      ((0, fp->co_attrs.air_drift_stick_mul)) *
+                          dat_attr->specialhi_horizontal_momentum,
                       fp->co_attrs.air_drift_max);
 }
 

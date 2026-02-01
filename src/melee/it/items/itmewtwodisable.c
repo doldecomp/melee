@@ -32,8 +32,9 @@ void itMewtwoDisable_Logic67_Destroyed(Item_GObj* item_gobj)
     item->xDD4_itemVar.mdisable.owner = NULL;
 }
 
-Item_GObj* itMewtwoDisable_Logic67_SpawnMewtwoDisable(Fighter_GObj* fighter_gobj,
-                                              Vec3* offset, f32 facing_dir)
+Item_GObj*
+itMewtwoDisable_Logic67_SpawnMewtwoDisable(Fighter_GObj* fighter_gobj,
+                                           Vec3* offset, f32 facing_dir)
 {
     Item_GObj* item_gobj;
     SpawnItem spawnitem;
@@ -148,7 +149,8 @@ bool itMewtwoDisable_Logic67_ShieldBounced(Item_GObj* item_gobj)
     return true;
 }
 
-void itMewtwoDisable_Logic67_EvtUnk(Item_GObj* item_gobj, Fighter_GObj* ref_owner)
+void itMewtwoDisable_Logic67_EvtUnk(Item_GObj* item_gobj,
+                                    Fighter_GObj* ref_owner)
 {
     Item* item = GET_ITEM(item_gobj);
     if (item->xDD4_itemVar.mdisable.owner == ref_owner) {

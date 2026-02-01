@@ -38,7 +38,15 @@ void itFreeze_Logic17_Destroyed(Item_GObj* gobj)
 
 /// #it_8028EDBC
 
-/// #it_8028EF34
+void it_8028EF34(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->x40_vel.x = ip->xDD4_itemVar.freeze.x0;
+    ip->x40_vel.z = 0.0F;
+    ip->x40_vel.y = 0.0F;
+    it_8026B390(gobj);
+    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+}
 
 bool itFreeze_UnkMotion0_Anim(Item_GObj* gobj)
 {

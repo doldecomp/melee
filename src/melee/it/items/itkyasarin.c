@@ -4,6 +4,7 @@
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/itCommonItems.h"
 #include "it/item.h"
 
 void itKyasarin_Logic25_Destroyed(Item_GObj* gobj)
@@ -27,7 +28,15 @@ void it_802ECE90(Item_GObj* gobj)
     it_8027B730(gobj);
 }
 
-/// #it_802ECEB0
+void it_802ECEB0(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itOldottoseaAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+    ip->x40_vel.x = attr->x4 * ip->facing_dir;
+    ip->x40_vel.z = 0.0F;
+    ip->x40_vel.y = 0.0F;
+    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+}
 
 /// #itKyasarin_UnkMotion0_Anim
 
@@ -45,7 +54,15 @@ void it_802ECE90(Item_GObj* gobj)
 
 /// #itKyasarin_UnkMotion2_Coll
 
-/// #it_802ED25C
+void it_802ED25C(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itKyasarinAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+    ip->x40_vel.x = attr->x4 * ip->facing_dir;
+    ip->x40_vel.z = 0.0F;
+    ip->x40_vel.y = 0.0F;
+    Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
+}
 
 /// #itKyasarin_UnkMotion4_Anim
 

@@ -10,9 +10,9 @@
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/types.h"
+#include "MSL/trigf.h"
 
 #include <baselib/gobj.h>
-#include "MSL/trigf.h"
 
 /* 29A5F8 */ static bool itLipstickspore_UnkMotion1_Coll(Item_GObj* gobj);
 

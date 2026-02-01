@@ -7,7 +7,6 @@
 
 #include "baselib/jobj.h"
 #include "ef/efasync.h"
-
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
@@ -204,7 +203,12 @@ bool itRshell_UnkMotion6_Coll(Item_GObj* gobj)
     return false;
 }
 
-/// #it_3F14_Logic15_EnteredAir
+void it_3F14_Logic15_EnteredAir(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->xDC8_word.flags.x1F = 1;
+    Item_80268E5C(gobj, 7, ITEM_ANIM_UPDATE);
+}
 
 bool itRshell_UnkMotion7_Anim(Item_GObj* gobj)
 {

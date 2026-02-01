@@ -114,6 +114,24 @@ typedef struct itWstar_ItemVars {
     f32 xDD8;
 } itWstar_ItemVars;
 
+typedef struct itWstarAttributes {
+    /* +0 */ f32 x0;
+} itWstarAttributes;
+
+typedef struct itKyasarin_ItemVars {
+    /* +0  ip+DD4 */ char pad_0[0x20];
+    /* +20 ip+DF4 */ HSD_GObj* x20;
+} itKyasarin_ItemVars;
+
+typedef struct itKyasarinAttributes {
+    /* +0 */ s32* x0;
+    /* +4 */ f32 x4;
+} itKyasarinAttributes;
+
+typedef struct itHououAttr {
+    /* +0 */ f32 timer;
+} itHououAttr;
+
 /// Box/Crate item attributes loaded from .dat file
 typedef struct itBoxAttributes {
     /* +00 */ s32 spawn_weight_0;         ///< Weight for item spawn outcome 1
@@ -343,7 +361,7 @@ typedef struct itWhispyAppleAttributes {
 } itWhispyAppleAttributes;
 
 typedef struct itFreeze_ItemVars {
-    /*  +0 */ s32 x0;
+    /*  +0 */ f32 x0;
     /*  +4 */ Vec3 x4;
     /* +10 */ u8 pad[0xC];
     /* +1C */ Item_GObj* unk_1C;
@@ -382,6 +400,7 @@ typedef struct itLikelike_ItemVars {
     /* +18 ip+DEC */ s32 x18;
     /* +1C ip+DF0 */ char pad_1C[0x30];
     /* +4C ip+E20 */ s32 x4C;
+    /* +50 ip+E24 */ HSD_GObj* x50;
 } itLikelike_ItemVars;
 
 typedef struct {
@@ -682,11 +701,6 @@ typedef struct itKlap_ItemVars {
     /* +24 ip+DF8 */ f32 x24;
     /* +28 ip+DFC */ f32 x28;
 } itKlap_ItemVars;
-
-typedef struct itKyasarin_ItemVars {
-    /* +0  ip+DD4 */ u8 x0[0x20];
-    /* +20 ip+DF4 */ HSD_GObj* x20;
-} itKyasarin_ItemVars;
 
 typedef struct itLeadeadAttr_x0 {
     /* 0x00 */ s32 x0;
@@ -1177,16 +1191,14 @@ typedef struct itkireihanaAttributes {
     u32 xC;
 } itkireihanaAttributes;
 
-typedef struct itThunder_ItemVars
-{
+typedef struct itThunder_ItemVars {
     /* xDD8 */ u8 pad[0x60 - 0x0];
     /* xE34 */ u32 x60;
     /* xE38 */ u32 x64;
     /* xE3C */ f32 x68;
 } itThunder_ItemVars;
 
-typedef struct itThunderPokemonAttributes
-{
+typedef struct itThunderPokemonAttributes {
     f32 x0;
     u32 x4;
     u32 x8;

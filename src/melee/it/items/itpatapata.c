@@ -34,7 +34,16 @@ void itPatapata_UnkMotion1_Phys(Item_GObj* gobj)
     ip->xDD4_itemVar.oldottosea.x28 = ip->xDD4_itemVar.oldottosea.x28 - 1;
 }
 
-/// #itPatapata_UnkMotion1_Coll
+bool itPatapata_UnkMotion1_Coll(Item_GObj* gobj)
+{
+    Item* it = gobj->user_data;
+    if (it->ground_or_air == GA_Air) {
+        it_8026DA08(gobj);
+    } else {
+        it_8026D564(gobj);
+    }
+    return false;
+}
 
 /// #it_802E0734
 

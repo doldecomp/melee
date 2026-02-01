@@ -1,9 +1,14 @@
 #include "itseakchain.h"
 
+#include "it/items/itseakchain.static.h"
+
+#include "baselib/jobj.h"
+
 #include "it/forward.h"
 
 #include "it/inlines.h"
 #include "it/it_26B1.h"
+#include "it/itCharItems.h"
 #include "it/item.h"
 
 void it_802BAEEC(Item_GObj* gobj)
@@ -22,7 +27,6 @@ void it_802BAF0C(Item_GObj* gobj)
 
 /// #it_802BB290
 
-/// #fn_802BB428
 void fn_802BB428(Item_GObj* gobj)
 {
     it_802BCA30(GET_ITEM(gobj));
@@ -57,7 +61,24 @@ s32 it_802BBAEC(ItemLink* link, s32 arg1, f32 arg2)
 
 /// #it_802BC94C
 
-/// #it_802BCA30
+void it_802BCA30(Item* ip)
+{
+    struct itSeakChain_ItemVars_x0_t* chain_x0 = ip->xDD4_itemVar.seakchain.x0;
+    HSD_JObj* jobj0 = chain_x0->x1D0;
+    Mtx mtx;
+    Vec3 vec = { 0 };
+    PAD_STACK(3 * 4);
+    HSD_JObjSetupMatrix(chain_x0->x1D4);
+    PSMTXIdentity(mtx);
+    mtx[0][3] = vec.x;
+    mtx[1][3] = vec.y;
+    mtx[2][3] = vec.z;
+    PSMTXConcat(chain_x0->x1D4->mtx, mtx, mtx);
+    HSD_JObjCopyMtx(jobj0, mtx);
+    jobj0->flags |=
+        JOBJ_USER_DEF_MTX | JOBJ_MTX_INDEP_PARENT | JOBJ_MTX_INDEP_SRT;
+    HSD_JObjSetMtxDirty(jobj0);
+}
 
 /// #it_802BCB88
 
@@ -73,7 +94,12 @@ void it_2725_Logic54_PickedUp(Item_GObj* gobj)
 
 /// #it_802BCF2C
 
-/// #it_802BCF84
+void it_802BCF84(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
+    ip->on_accessory = (HSD_GObjEvent) fn_802BB784;
+}
 
 /// #it_802BCFC4
 

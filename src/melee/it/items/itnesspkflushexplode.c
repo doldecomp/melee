@@ -7,12 +7,22 @@
 
 #include "it/inlines.h"
 #include "it/it_26B1.h"
+#include "it/it_2725.h"
 
 /* 2AFD44 */ static bool itNesspkflushexplode_UnkMotion0_Coll(Item_GObj* gobj);
 
 /// #it_802AF940
 
-/// #it_2725_Logic103_Destroyed
+void it_2725_Logic103_Destroyed(Item_GObj* item_gobj)
+{
+    if (item_gobj != NULL) {
+        Item* item = GET_ITEM(item_gobj);
+        if (item != NULL) {
+            it_802725D4(item_gobj);
+            item->owner = NULL;
+        }
+    }
+}
 
 /// #it_802AFA70
 

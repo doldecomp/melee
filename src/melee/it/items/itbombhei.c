@@ -307,9 +307,25 @@ void it_80280DC0(Item_GObj* gobj)
     }
 }
 
-/// #it_3F14_Logic6_DmgDealt
+bool it_3F14_Logic6_DmgDealt(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->msid != 7 && ip->xDD4_itemVar.bombhei.xDDC == 0) {
+        it_80280B60(gobj);
+    }
+    return false;
+}
 
-/// #it_3F14_Logic6_DmgReceived
+void it_80280B60(Item_GObj*);
+
+bool it_3F14_Logic6_DmgReceived(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    if (ip->msid != 7 && ip->xDD4_itemVar.bombhei.xDDC == 0) {
+        it_80280B60(gobj);
+    }
+    return false;
+}
 
 bool itBombhei_UnkMotion11_Anim(Item_GObj* gobj)
 {
@@ -352,9 +368,23 @@ bool itBombhei_Logic6_Reflected(Item_GObj* gobj)
     return it_80273030(gobj);
 }
 
-/// #it_3F14_Logic6_HitShield
+bool it_3F14_Logic6_HitShield(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->msid == 9 && ip->xDD4_itemVar.bombhei.xDDC == 0) {
+        it_80280B60(gobj);
+    }
+    return false;
+}
 
-/// #it_3F14_Logic6_ShieldBounced
+bool it_3F14_Logic6_ShieldBounced(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->msid == 9 && ip->xDD4_itemVar.bombhei.xDDC == 0) {
+        it_80280B60(gobj);
+    }
+    return false;
+}
 
 void itBombhei_Logic6_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {

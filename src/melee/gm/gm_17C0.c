@@ -740,9 +740,16 @@ f32 gm_8017E578(int difficulty, u8 stage_slot)
 
 /// #gm_8017E5C8
 
-/// #gm_8017E5FC
+u8 gm_8017E5FC(int difficulty, u8 stage_slot, u8 arg2)
+{
+    return lbl_803D7AC0[stage_slot + ((u8) difficulty * 5)]
+        .pad_6[1 + arg2 * 3];
+}
 
-/// #gm_8017E630
+u8 gm_8017E630(u8 difficulty, u8 stage_slot, u8 arg2)
+{
+    return lbl_803D7AC0[stage_slot + (u8) difficulty * 5].pad_6[arg2 * 3 + 2];
+}
 
 f32 gm_8017E664(u8 difficulty, u8 stage_slot)
 {
@@ -756,11 +763,22 @@ f32 gm_8017E6B4(u8 difficulty, u8 stage_slot)
            100.0F;
 }
 
-/// #gm_8017E704
+u8 gm_8017E704(int difficulty, u8 stage_slot, u8 arg2)
+{
+    return lbl_803D7AC0[stage_slot + ((u8) difficulty * 5)]
+        .pad_6[0x0E + arg2 * 3];
+}
 
-/// #gm_8017E738
+u8 gm_8017E738(u8 difficulty, u8 stage_slot, u8 arg2)
+{
+    return lbl_803D7AC0[stage_slot + (difficulty * 5)].pad_6[0xF + arg2 * 3];
+}
 
-/// #gm_8017E76C
+u8 gm_8017E76C(u8 difficulty, u8 stage_slot, u8 arg2)
+{
+    return lbl_803D7AC0[stage_slot + (difficulty * 5)]
+        .pad_6[0x10 + (arg2 * 3)];
+}
 
 /// #gm_8017E7A0
 
@@ -783,11 +801,20 @@ u8 gm_8017EB3C(u8 difficulty, u8 stage_slot)
     return lbl_803D85F0[stage_slot + (difficulty * 5)].stage_kind;
 }
 
-/// #gm_8017EB64
+u8 gm_8017EB64(u8 difficulty, u8 stage_slot, u8 arg2)
+{
+    return lbl_803D85F0[stage_slot + (difficulty * 5)].pad_6[arg2 * 3];
+}
 
-/// #gm_8017EB98
+u8 gm_8017EB98(u8 difficulty, u8 stage_slot, u8 arg2)
+{
+    return lbl_803D85F0[stage_slot + difficulty * 5].pad_6[arg2 * 3 + 1];
+}
 
-/// #gm_8017EBCC
+u8 gm_8017EBCC(u8 difficulty, u8 stage_slot, u8 arg2)
+{
+    return lbl_803D85F0[stage_slot + (difficulty * 5)].pad_6[arg2 * 3 + 2];
+}
 
 f32 gm_8017EC00(u8 difficulty, u8 stage_slot)
 {
@@ -801,7 +828,10 @@ f32 gm_8017EC50(u8 difficulty, u8 stage_slot)
            100.0F;
 }
 
-/// #gm_8017ECA0
+u8 gm_8017ECA0(u8 difficulty, u8 stage_slot, u8 arg2)
+{
+    return lbl_803D85F0[stage_slot + ((u8) difficulty * 5)].pad_14[arg2 * 3];
+}
 
 /// #gm_8017ECD4
 

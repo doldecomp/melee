@@ -115,7 +115,8 @@ bool itGamewatchbreath_UnkMotion1_Anim(Item_GObj* item_gobj)
     return false;
 }
 
-void itGameWatchBreath_Logic76_EvtUnk(Item_GObj* item_gobj, Item_GObj* ref_gobj)
+void itGameWatchBreath_Logic76_EvtUnk(Item_GObj* item_gobj,
+                                      Item_GObj* ref_gobj)
 {
     it_8026B894(item_gobj, ref_gobj);
 }

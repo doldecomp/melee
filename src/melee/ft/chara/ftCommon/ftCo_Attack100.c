@@ -685,7 +685,7 @@ void ftCo_ItemScopeAirFire_Coll(Fighter_GObj* gobj)
 
 static void fn_800D84D4(Fighter_GObj*, int);
 
-static void fn_800D86B8(Fighter_GObj* gobj)
+void fn_800D86B8(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fn_800D84D4(gobj, fp->mv.co.common.x0);
@@ -1040,7 +1040,15 @@ void ftCo_CatchCut_Phys(Fighter_GObj* gobj)
     ft_80084DB0(gobj);
 }
 
-/// #ftCo_CatchCut_Coll
+void ftCo_CatchCut_Coll(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    if (fp->ground_or_air == GA_Ground) {
+        ft_80084104(gobj);
+        return;
+    }
+    ft_8008370C(gobj, ft_80082B1C);
+}
 
 /// #ftCo_800DA824
 

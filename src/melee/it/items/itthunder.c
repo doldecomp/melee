@@ -5,12 +5,12 @@
 
 #include "ef/eflib.h"
 #include "ef/efsync.h"
+#include "gr/stage.h"
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
-#include "gr/stage.h"
 
 ItemStateTable it_803F7C40[] = {
     { 0, itThunder_UnkMotion0_Anim, itThunder_UnkMotion0_Phys,
@@ -24,7 +24,8 @@ ItemStateTable it_803F7C40[] = {
 void itThunder_Logic7_Spawned(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itThunderPokemonAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itThunderPokemonAttributes* attrs =
+        ip->xC4_article_data->x4_specialAttributes;
     ip->facing_dir = 0.0f;
     ip->xDAC_itcmd_var0 = 0;
     it_802CCE28(gobj);
@@ -75,13 +76,14 @@ void it_802CCBF8(Item_GObj* gobj)
 {
     Item* item = GET_ITEM(gobj);
     f32 out = 1.0f;
-    if(item->xDD4_itemVar.thunder.x64)
-    {
-        if(item->xDD4_itemVar.thunder.x60 <= 0){
+    if (item->xDD4_itemVar.thunder.x64) {
+        if (item->xDD4_itemVar.thunder.x60 <= 0) {
             item->xDD4_itemVar.thunder.x64 = 0;
-            efSync_Spawn(0x460, gobj, item->xBBC_dynamicBoneTable->bones[2], &out);
-        }else {
-            item->xDD4_itemVar.thunder.x60 = item->xDD4_itemVar.thunder.x60 - 1;
+            efSync_Spawn(0x460, gobj, item->xBBC_dynamicBoneTable->bones[2],
+                         &out);
+        } else {
+            item->xDD4_itemVar.thunder.x60 =
+                item->xDD4_itemVar.thunder.x60 - 1;
         }
     }
 }
@@ -106,19 +108,19 @@ static void itThunder_UnkMotion2_Anim_inline2(Item_GObj* gobj)
     item->xDB0_itcmd_var1 = 0;
 }
 
-static HSD_JObj *itThunder_UnkMotion2_Anim_inline(Item_GObj* gobj)
+static HSD_JObj* itThunder_UnkMotion2_Anim_inline(Item_GObj* gobj)
 {
     HSD_JObj* jobj = GET_JOBJ(gobj);
     HSD_JObj* child;
 
     if (!jobj) {
         child = NULL;
-    }else {
+    } else {
         child = jobj->child;
     }
-    if(!child) {
+    if (!child) {
         child = NULL;
-    }else {
+    } else {
         child = child->child;
     }
     return child;
@@ -142,13 +144,15 @@ void itThunder_UnkMotion2_Phys(Item_GObj* gobj)
     Item* item = GET_ITEM(gobj);
     it_8027A344(gobj);
     if (item->xDAC_itcmd_var0 != 0) {
-        itThunderPokemonAttributes* attrs = item->xC4_article_data->x4_specialAttributes;
+        itThunderPokemonAttributes* attrs =
+            item->xC4_article_data->x4_specialAttributes;
         item->xDD4_itemVar.thunder.x68 = attrs->x4;
         item->xDAC_itcmd_var0 = 0;
         item->xDB0_itcmd_var1 = 1;
     }
     if (item->xDB0_itcmd_var1 != 0) {
-        itThunderPokemonAttributes* attrs = item->xC4_article_data->x4_specialAttributes;
+        itThunderPokemonAttributes* attrs =
+            item->xC4_article_data->x4_specialAttributes;
         item->xDD4_itemVar.thunder.x68 += attrs->x8;
     }
     item->x40_vel.y = item->xDD4_itemVar.thunder.x68;
@@ -178,7 +182,8 @@ bool itThunder_UnkMotion0_Anim(Item_GObj* gobj)
 static void itThunder_UnkMotion0_Phys_inline2(Item_GObj* gobj)
 {
     Item* item = GET_ITEM(gobj);
-    itThunderPokemonAttributes* attrs = item->xC4_article_data->x4_specialAttributes;
+    itThunderPokemonAttributes* attrs =
+        item->xC4_article_data->x4_specialAttributes;
     item->xDD4_itemVar.thunder.x60 = attrs->xC;
     item->xDD4_itemVar.thunder.x64 = 1;
     Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);

@@ -1,12 +1,13 @@
 #include "itwhitebea.h"
 
+#include "cm/camera.h"
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
+#include "it/items/itfreeze.h"
 #include "it/types.h"
-#include "cm/camera.h"
 #include "sysdolphin/baselib/random.h"
 
 /// #it_802E31F8
@@ -72,7 +73,15 @@ bool itOldottosea_UnkMotion10_Coll(Item_GObj* gobj)
     return it_8027C79C(gobj);
 }
 
-/// #it_2725_Logic3_Destroyed
+void it_2725_Logic3_Destroyed(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if ((u32) ip->xDD4_itemVar.whitebea.x20 != 0U) {
+        it_8028ECE0((HSD_GObj*) ip->xDD4_itemVar.whitebea.x20);
+    }
+    it_802E37A4(gobj);
+    it_2725_Logic9_Destroyed(gobj);
+}
 
 void it_802E3528(Item_GObj* gobj)
 {

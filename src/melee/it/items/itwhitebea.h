@@ -19,7 +19,7 @@
 /* 2E3470 */ bool itOldottosea_UnkMotion10_Anim(Item_GObj* gobj);
 /* 2E34B8 */ void itOldottosea_UnkMotion10_Phys(Item_GObj* gobj);
 /* 2E34BC */ bool itOldottosea_UnkMotion10_Coll(Item_GObj* gobj);
-/* 2E34DC */ void it_2725_Logic3_Destroyed(Item_GObj*);
+/* 2E34DC */ void it_2725_Logic3_Destroyed(Item_GObj* gobj);
 /* 2E3528 */ void it_802E3528(Item_GObj*);
 /* 2E3588 */ bool itOldottosea_UnkMotion11_Anim(Item_GObj* gobj);
 /* 2E3590 */ void itOldottosea_UnkMotion11_Phys(Item_GObj* gobj);

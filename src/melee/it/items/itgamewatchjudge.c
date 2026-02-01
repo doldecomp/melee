@@ -40,3 +40,13 @@ void itGameWatchJudge_Logic77_Destroyed(Item_GObj* gobj)
         ftGw_SpecialS_ItemJudgementSetFlag(ip->owner);
     }
 }
+
+void it_2725_Logic77_PickedUp(Item_GObj* item_gobj)
+{
+    Item* it = GET_ITEM(item_gobj);
+    it->xDB0_itcmd_var1 = 0;
+    it->xDAC_itcmd_var0 = 0;
+    if (it->owner != NULL) {
+        Item_80268E5C(item_gobj, 0, ITEM_ANIM_UPDATE);
+    }
+}

@@ -6,6 +6,7 @@
 
 #include "ft/ftdevice.h"
 #include "gr/granime.h"
+#include "gr/grmaterial.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
@@ -13,7 +14,6 @@
 #include "lb/lb_00F9.h"
 
 #include <baselib/gobj.h>
-#include "gr/grmaterial.h"
 
 static struct {
     int x0;
