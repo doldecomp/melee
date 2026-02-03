@@ -9,8 +9,34 @@
 #include "it/it_2725.h"
 #include "it/itCommonItems.h"
 #include "it/item.h"
+#include "mp/mpcoll.h"
 
-/// #it_802E05A0
+void it_802E05A0(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    s32 facing;
+
+    it_8027B730(gobj);
+    ip->facing_dir = it_8026B684(&ip->pos);
+    if (ip->facing_dir == -1.0f) {
+        facing = -1;
+    } else {
+        facing = 1;
+    }
+    mpCollSetFacingDir(&ip->x378_itemColl, facing);
+    it_8027C56C(gobj, ip->facing_dir);
+    ip->xD5C = 0;
+    ip->xDC8_word.flags.x15 = 0;
+    it_8027542C(gobj);
+    it_80275270(gobj);
+    ip->xDC8_word.flags.x19 = 1;
+    ip->xDD4_itemVar.patapata.x28 = 0xA;
+    ip->xDD4_itemVar.patapata.x24 = 0;
+    ip->xDD4_itemVar.patapata.x20 = 0;
+    ip->xDD4_itemVar.patapata.x40 = 2;
+    it_802762BC(ip);
+    it_802E0678(gobj);
+}
 
 void it_802E0678(Item_GObj* gobj)
 {
@@ -27,11 +53,11 @@ bool itPatapata_UnkMotion1_Anim(Item_GObj* gobj)
 void itPatapata_UnkMotion1_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    if (ip->xDD4_itemVar.oldottosea.x28 == 0) {
+    if (ip->xDD4_itemVar.patapata.x28 == 0) {
         it_802E0734(gobj);
         return;
     }
-    ip->xDD4_itemVar.oldottosea.x28 = ip->xDD4_itemVar.oldottosea.x28 - 1;
+    ip->xDD4_itemVar.patapata.x28 = ip->xDD4_itemVar.patapata.x28 - 1;
 }
 
 bool itPatapata_UnkMotion1_Coll(Item_GObj* gobj)
@@ -64,7 +90,16 @@ bool itPatapata_UnkMotion2_Anim(Item_GObj* gobj)
 
 /// #itPatapata_UnkMotion3_Anim
 
-/// #it_2725_Logic4_DmgReceived
+bool it_2725_Logic4_DmgReceived(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    if (ip->msid == 6) {
+        it_802E1694(gobj);
+    } else {
+        it_802E11E0();
+    }
+    return false;
+}
 
 /// #it_802E0F1C
 
@@ -126,7 +161,16 @@ bool itPatapata_UnkMotion6_Coll(Item_GObj* gobj)
 
 /// #itPatapata_UnkMotion4_Phys
 
-/// #itPatapata_UnkMotion4_Coll
+bool itPatapata_UnkMotion4_Coll(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->xDD4_itemVar.patapata.x20 == 0) {
+        ip->xDCC_flag.b3 = true;
+        return true;
+    }
+    ip->xDD4_itemVar.patapata.x20 -= 1;
+    return false;
+}
 
 /// #it_802E15B0
 

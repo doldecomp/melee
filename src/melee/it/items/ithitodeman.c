@@ -17,7 +17,13 @@
 
 void it_802D43AC(void) {}
 
-/// #it_802D43B0
+void it_802D43B0(Item_GObj* gobj, Item_GObj* ref_gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    it_8026B894(gobj, ref_gobj);
+    ip->xDD4_itemVar.hitodeman.xE64 = NULL;
+    ip->xDAC_itcmd_var0 = 1;
+}
 
 /// #it_802D43EC
 

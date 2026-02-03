@@ -33,11 +33,11 @@ bool itTincle_UnkMotion0_Anim(Item_GObj* gobj)
 void itTincle_UnkMotion0_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    if (ip->xDD4_itemVar.nokonoko.x20 <= 0) {
+    if (ip->xDD4_itemVar.tincle.x20 <= 0) {
         it_802EB870(gobj);
         return;
     }
-    ip->xDD4_itemVar.nokonoko.x20 -= 1;
+    ip->xDD4_itemVar.tincle.x20 -= 1;
 }
 
 bool itTincle_UnkMotion0_Coll(Item_GObj* gobj)
@@ -53,7 +53,13 @@ bool itTincle_UnkMotion1_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itTincle_UnkMotion1_Phys
+void itTincle_UnkMotion1_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->pos.y <= ip->xDD4_itemVar.tincle.x5C) {
+        it_802EBA00(gobj);
+    }
+}
 
 bool itTincle_UnkMotion1_Coll(Item_GObj* gobj)
 {
@@ -242,7 +248,7 @@ void it_802EC850(Item_GObj* gobj, Item_GObj* ref_gobj)
 
 int it_802ECC8C(Item_GObj* arg0)
 {
-    return GET_ITEM(arg0)->xDD4_itemVar.sword.x20;
+    return GET_ITEM(arg0)->xDD4_itemVar.tincle.x20;
 }
 
 void it_802ECC98(Item_GObj* arg0, f32 arg1)
@@ -254,6 +260,6 @@ void it_802ECCA4(Item_GObj* gobj, s32* kind, Vec3* pos)
 {
     Item* ip = GET_ITEM(gobj);
     *pos = ip->pos;
-    pos->y += ip->xDD4_itemVar.sword.x50;
+    pos->y += ip->xDD4_itemVar.tincle.x50;
     *kind = ip->msid;
 }

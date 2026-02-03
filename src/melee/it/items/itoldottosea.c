@@ -104,7 +104,15 @@ bool itOldottosea_UnkMotion5_Coll(Item_GObj* gobj)
     return it_802E35CC(gobj);
 }
 
-/// #it_802E2DF4
+void it_802E2DF4(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    if (ip->xCCC_incDamageDirection == ip->facing_dir) {
+        it_802E3098();
+        return;
+    }
+    it_802E27B4(gobj);
+}
 
 /// #it_802E2E30
 

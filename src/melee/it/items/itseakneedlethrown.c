@@ -19,7 +19,12 @@ void itSeakNeedleThrown_Logic109_Destroyed(Item_GObj* gobj)
 
 /// #it_802B00F4
 
-/// #itSeakneedlethrown_UnkMotion0_Anim
+bool itSeakneedlethrown_UnkMotion0_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->xDD4_itemVar.seakneedlethrown.xDE4 = ip->pos;
+    return it_80273130(gobj);
+}
 
 /// #itSeakneedlethrown_UnkMotion1_Anim
 

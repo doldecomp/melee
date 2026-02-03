@@ -2,6 +2,7 @@
 
 #include "it/inlines.h"
 #include "it/it_26B1.h"
+#include "it/it_2725.h"
 
 /* 2B37F0 */ static void itPikachutjoltground_UnkMotion1_Phys(Item_GObj*);
 
@@ -29,7 +30,12 @@ void it_802B3544(Item_GObj* gobj)
 
 /// #it_802B3554
 
-/// #itPikachutjoltground_UnkMotion0_Anim
+bool itPikachutjoltground_UnkMotion0_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->xDD4_itemVar.pikachujoltground.xDE8 = ip->pos;
+    return it_80273130(gobj);
+}
 
 /// #itPikachutjoltground_UnkMotion1_Anim
 

@@ -29,7 +29,7 @@ void it_3F14_Logic5_Destroyed(Item_GObj* gobj)
 
     if (gobj != NULL) {
         ip = gobj->user_data;
-        if (ip != NULL && ip->xDD4_itemVar.zeldadinfire.xDF4 != 0) {
+        if (ip != NULL && ip->xDD4_itemVar.tarucann.x20 != 0) {
             it_80295F38(gobj);
         }
     }
@@ -74,7 +74,16 @@ void itTaruCann_Logic5_PickedUp(Item_GObj* gobj)
     it_80275158(gobj, attrs->x24);
 }
 
-/// #itTarucann_UnkMotion2_Anim
+bool itTarucann_UnkMotion2_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->xDD4_itemVar.tarucann.x20 == 0) {
+        ip->xDCC_flag.b3 = true;
+    } else {
+        ip->xDCC_flag.b3 = false;
+    }
+    return false;
+}
 
 void itTarucann_UnkMotion2_Phys(Item_GObj* gobj) {}
 
