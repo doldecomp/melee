@@ -42,9 +42,10 @@ bool it_802C4F50(Item_GObj* gobj, CollData* cd)
 
 void it_2725_Logic101_PickedUp(Item_GObj* gobj)
 {
-    Item* ip = GET_ITEM(gobj);
+    Item* ip = gobj->user_data;
+    PAD_STACK(0x18);
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
-    ip->xDD4_itemVar.it_279D.x50 = 0.0F;
+    ip->xDD4_itemVar.mewtwoshadowball.x50 = 0.0F;
 }
 
 /// #itMewtwoshadowball_UnkMotion0_Anim

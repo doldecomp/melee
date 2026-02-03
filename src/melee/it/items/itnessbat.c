@@ -5,12 +5,21 @@
 
 #include "it/inlines.h"
 #include "it/it_26B1.h"
+#include "it/item.h"
 
 /// #it_802AD478
 
 /// #it_802AD590
 
-/// #it_802AD6B8
+void it_802AD6B8(Item_GObj* gobj)
+{
+    if (gobj != NULL) {
+        Item* ip = GET_ITEM(gobj);
+        ip->xDD4_itemVar.nessbat.x0 = 0;
+        ip->owner = NULL;
+        Item_8026A8EC(gobj);
+    }
+}
 
 /// #it_2725_Logic58_PickedUp
 

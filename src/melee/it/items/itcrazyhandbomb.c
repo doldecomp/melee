@@ -5,6 +5,8 @@
 
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/inlines.h"
+#include "it/it_266F.h"
 
 /// #it_802F0F6C
 
@@ -35,7 +37,14 @@ bool itCrazyhandbomb_UnkMotion0_Anim(Item_GObj* gobj)
 
 /// #itCrazyhandbomb_UnkMotion0_Phys
 
-/// #itCrazyhandbomb_UnkMotion0_Coll
+bool itCrazyhandbomb_UnkMotion0_Coll(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->ground_or_air == GA_Air) {
+        it_8026E71C(gobj, it_802F1030);
+    }
+    return false;
+}
 
 void it_802F1340(void) {}
 
