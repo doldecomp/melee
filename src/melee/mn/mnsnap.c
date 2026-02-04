@@ -2,6 +2,8 @@
 
 #include <placeholder.h>
 
+#include "baselib/debug.h"
+
 #include <baselib/aobj.h>
 #include <baselib/dobj.h>
 #include <baselib/gobjobject.h>
@@ -20,34 +22,6 @@
 #include <melee/lb/lbsnap.h>
 #include <melee/mn/inlines.h>
 #include <melee/mn/mnmain.h>
-
-static char mnSnap_803F0168[0x124] = {
-    0x6D, 0x6E, 0x73, 0x6E, 0x61, 0x70, 0x2E, 0x63, 0x00, 0x00, 0x00, 0x00,
-    0x6A, 0x6F, 0x62, 0x6A, 0x2D, 0x3E, 0x75, 0x2E, 0x64, 0x6F, 0x62, 0x6A,
-    0x00, 0x00, 0x00, 0x00, 0x6A, 0x6F, 0x62, 0x6A, 0x2D, 0x3E, 0x75, 0x2E,
-    0x64, 0x6F, 0x62, 0x6A, 0x2D, 0x3E, 0x6D, 0x6F, 0x62, 0x6A, 0x00, 0x00,
-    0x6A, 0x6F, 0x62, 0x6A, 0x2D, 0x3E, 0x75, 0x2E, 0x64, 0x6F, 0x62, 0x6A,
-    0x2D, 0x3E, 0x6D, 0x6F, 0x62, 0x6A, 0x2D, 0x3E, 0x74, 0x6F, 0x62, 0x6A,
-    0x00, 0x00, 0x00, 0x00, 0x6A, 0x6F, 0x62, 0x6A, 0x2D, 0x3E, 0x75, 0x2E,
-    0x64, 0x6F, 0x62, 0x6A, 0x2D, 0x3E, 0x6D, 0x6F, 0x62, 0x6A, 0x2D, 0x3E,
-    0x74, 0x6F, 0x62, 0x6A, 0x2D, 0x3E, 0x69, 0x6D, 0x61, 0x67, 0x65, 0x64,
-    0x65, 0x73, 0x63, 0x00, 0x6A, 0x6F, 0x62, 0x6A, 0x2D, 0x3E, 0x75, 0x2E,
-    0x64, 0x6F, 0x62, 0x6A, 0x2D, 0x3E, 0x6E, 0x65, 0x78, 0x74, 0x00, 0x00,
-    0x6A, 0x6F, 0x62, 0x6A, 0x2D, 0x3E, 0x75, 0x2E, 0x64, 0x6F, 0x62, 0x6A,
-    0x2D, 0x3E, 0x6E, 0x65, 0x78, 0x74, 0x2D, 0x3E, 0x6E, 0x65, 0x78, 0x74,
-    0x00, 0x00, 0x00, 0x00, 0x6A, 0x6F, 0x62, 0x6A, 0x2D, 0x3E, 0x75, 0x2E,
-    0x64, 0x6F, 0x62, 0x6A, 0x2D, 0x3E, 0x6E, 0x65, 0x78, 0x74, 0x2D, 0x3E,
-    0x6E, 0x65, 0x78, 0x74, 0x2D, 0x3E, 0x6D, 0x6F, 0x62, 0x6A, 0x00, 0x00,
-    0x6A, 0x6F, 0x62, 0x6A, 0x2D, 0x3E, 0x75, 0x2E, 0x64, 0x6F, 0x62, 0x6A,
-    0x2D, 0x3E, 0x6E, 0x65, 0x78, 0x74, 0x2D, 0x3E, 0x6E, 0x65, 0x78, 0x74,
-    0x2D, 0x3E, 0x6D, 0x6F, 0x62, 0x6A, 0x2D, 0x3E, 0x74, 0x6F, 0x62, 0x6A,
-    0x00, 0x00, 0x00, 0x00, 0x6A, 0x6F, 0x62, 0x6A, 0x2D, 0x3E, 0x75, 0x2E,
-    0x64, 0x6F, 0x62, 0x6A, 0x2D, 0x3E, 0x6E, 0x65, 0x78, 0x74, 0x2D, 0x3E,
-    0x6E, 0x65, 0x78, 0x74, 0x2D, 0x3E, 0x6D, 0x6F, 0x62, 0x6A, 0x2D, 0x3E,
-    0x74, 0x6F, 0x62, 0x6A, 0x2D, 0x3E, 0x69, 0x6D, 0x61, 0x67, 0x65, 0x64,
-    0x65, 0x73, 0x63, 0x00, 0x74, 0x72, 0x61, 0x6E, 0x73, 0x6C, 0x61, 0x74,
-    0x65, 0x00, 0x00, 0x00,
-};
 
 static const f32 mnSnap_804DC2C0 = 0.0F;
 static const f32 mnSnap_804DC2C4 = 50.0F;
@@ -225,7 +199,6 @@ void mnSnap_80253184(void)
 // Polls card read result and updates thumbnail display.
 static void mnSnap_8025329C(void)
 {
-    char* file = (char*) mnSnap_803F0168;
     mnSnap_State* snap = &mnSnap_804A0A10;
     s32* p52;
     s32* p51;
@@ -247,27 +220,13 @@ static void mnSnap_8025329C(void)
         if (lbSnap_8001DE8C((void*) mnSnap_thumb_imgs[idx]) == 1) {
             jobj = snap->thumb_jobjs[snap->load_idx];
             img = (void*) mnSnap_thumb_imgs[idx];
-            if (jobj == NULL) {
-                __assert(file, 0xC1, "jobj");
-            }
-            if (jobj->u.dobj == NULL) {
-                __assert(file, 0xC2, file + 0xC);
-            }
-            if (jobj->u.dobj->next == NULL) {
-                __assert(file, 0xC3, file + 0x70);
-            }
-            if (jobj->u.dobj->next->next == NULL) {
-                __assert(file, 0xC4, file + 0x84);
-            }
-            if (jobj->u.dobj->next->next->mobj == NULL) {
-                __assert(file, 0xC5, file + 0xA0);
-            }
-            if (jobj->u.dobj->next->next->mobj->tobj == NULL) {
-                __assert(file, 0xC6, file + 0xC0);
-            }
-            if (jobj->u.dobj->next->next->mobj->tobj->imagedesc == NULL) {
-                __assert(file, 0xC7, file + 0xE8);
-            }
+            HSD_ASSERT(193, jobj);
+            HSD_ASSERT(194, jobj->u.dobj);
+            HSD_ASSERT(195, jobj->u.dobj->next);
+            HSD_ASSERT(196, jobj->u.dobj->next->next);
+            HSD_ASSERT(197, jobj->u.dobj->next->next->mobj);
+            HSD_ASSERT(198, jobj->u.dobj->next->next->mobj->tobj);
+            HSD_ASSERT(199, jobj->u.dobj->next->next->mobj->tobj->imagedesc);
             jobj->u.dobj->next->next->mobj->tobj->imagedesc->image_ptr = img;
             jobj->u.dobj->next->next->mobj->tobj->imagedesc->width = 0x280;
             jobj->u.dobj->next->next->mobj->tobj->imagedesc->height = 0x1E0;
@@ -331,7 +290,6 @@ static void mnSnap_8025329C(void)
 void mnSnap_80253640(s32 page)
 {
     mnSnap_State* snap = &mnSnap_804A0A10;
-    char* file = (char*) mnSnap_803F0168;
     s32* p48 = &snap->photo_count[0];
     s32* p4F = &snap->cur_page;
     s32* p50 = &snap->active_slot;
@@ -366,27 +324,13 @@ void mnSnap_80253640(s32 page)
         HSD_DObjClearFlags(snap->thumb_jobjs[i]->u.dobj->next->next, 1);
         jobj = snap->thumb_jobjs[i];
         img = snap->blank_img;
-        if (jobj == NULL) {
-            __assert(file, 0xC1, (char*) 0);
-        }
-        if (jobj->u.dobj == NULL) {
-            __assert(file, 0xC2, file + 0xC);
-        }
-        if (jobj->u.dobj->next == NULL) {
-            __assert(file, 0xC3, file + 0x70);
-        }
-        if (jobj->u.dobj->next->next == NULL) {
-            __assert(file, 0xC4, file + 0x84);
-        }
-        if (jobj->u.dobj->next->next->mobj == NULL) {
-            __assert(file, 0xC5, file + 0xA0);
-        }
-        if (jobj->u.dobj->next->next->mobj->tobj == NULL) {
-            __assert(file, 0xC6, file + 0xC0);
-        }
-        if (jobj->u.dobj->next->next->mobj->tobj->imagedesc == NULL) {
-            __assert(file, 0xC7, file + 0xE8);
-        }
+        HSD_ASSERT(193, jobj);
+        HSD_ASSERT(194, jobj->u.dobj);
+        HSD_ASSERT(195, jobj->u.dobj->next);
+        HSD_ASSERT(196, jobj->u.dobj->next->next);
+        HSD_ASSERT(197, jobj->u.dobj->next->next->mobj);
+        HSD_ASSERT(198, jobj->u.dobj->next->next->mobj->tobj);
+        HSD_ASSERT(199, jobj->u.dobj->next->next->mobj->tobj->imagedesc);
         i += 1;
         jobj->u.dobj->next->next->mobj->tobj->imagedesc->image_ptr = img;
         jobj->u.dobj->next->next->mobj->tobj->imagedesc->width = 0x40;
@@ -1494,25 +1438,11 @@ void fn_802545C4(void)
                 snap->state = 0xA;
                 HSD_JObjClearFlagsAll(snap->fullview_jobj, 0x10);
                 jobj = snap->fullview_jobj;
-                if (jobj == NULL) {
-                    __assert((char*) mnSnap_803F0168, 0xB5, "jobj");
-                }
-                if (jobj->u.dobj == NULL) {
-                    __assert((char*) mnSnap_803F0168, 0xB6,
-                             (char*) mnSnap_803F0168 + 0xC);
-                }
-                if (jobj->u.dobj->mobj == NULL) {
-                    __assert((char*) mnSnap_803F0168, 0xB7,
-                             (char*) mnSnap_803F0168 + 0x1C);
-                }
-                if (jobj->u.dobj->mobj->tobj == NULL) {
-                    __assert((char*) mnSnap_803F0168, 0xB8,
-                             (char*) mnSnap_803F0168 + 0x30);
-                }
-                if (jobj->u.dobj->mobj->tobj->imagedesc == NULL) {
-                    __assert((char*) mnSnap_803F0168, 0xB9,
-                             (char*) mnSnap_803F0168 + 0x4C);
-                }
+                HSD_ASSERT(181, jobj);
+                HSD_ASSERT(182, jobj->u.dobj);
+                HSD_ASSERT(183, jobj->u.dobj->mobj);
+                HSD_ASSERT(184, jobj->u.dobj->mobj->tobj);
+                HSD_ASSERT(185, jobj->u.dobj->mobj->tobj->imagedesc );
                 jobj->u.dobj->mobj->tobj->imagedesc->image_ptr =
                     (void*) mnSnap_thumb_imgs[snap->cursor_idx % 4];
                 jobj->u.dobj->mobj->tobj->imagedesc->width = 640;
