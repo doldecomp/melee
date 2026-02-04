@@ -112,7 +112,7 @@ static void* mnSnap_thumb_imgs[4];
 
 void mnSnap_80254298(void);
 
-// Recursively loads snapshot thumbnails from memory card.
+/// Recursively loads snapshot thumbnails from memory card.
 void mnSnap_80253184(void)
 {
     mnSnap_State* snap = &mnSnap_804A0A10;
@@ -157,7 +157,7 @@ void mnSnap_80253184(void)
 }
 
 /// @todo The HSD_ASSERT chain (lines 193-199) is an inline from tobj.h.
-// Polls card read result and updates thumbnail display.
+/// Polls card read result and updates thumbnail display.
 static void mnSnap_8025329C(void)
 {
     mnSnap_State* snap = &mnSnap_804A0A10;
@@ -246,7 +246,7 @@ static void mnSnap_8025329C(void)
     }
 }
 
-// Loads a page of snapshot thumbnails and updates navigation arrows.
+/// Loads a page of snapshot thumbnails and updates navigation arrows.
 void mnSnap_80253640(s32 page)
 {
     mnSnap_State* snap = &mnSnap_804A0A10;
@@ -329,7 +329,7 @@ void mnSnap_80253640(s32 page)
     }
 }
 
-// Updates the SIS text labels showing thumbnail numbers and page info.
+/// Updates the SIS text labels showing thumbnail numbers and page info.
 void mnSnap_80253964(void)
 {
     mnSnap_State* snap = &mnSnap_804A0A10;
@@ -372,7 +372,7 @@ void mnSnap_80253964(void)
     }
 }
 
-// Animates the 5 sub-menu option buttons. mode=0 for enter, mode=1 for exit.
+/// Animates the 5 sub-menu option buttons. mode=0 for enter, mode=1 for exit.
 void mnSnap_80253AE4(s32 mode)
 {
     mnSnap_State* snap = &mnSnap_804A0A10;
@@ -405,8 +405,8 @@ void mnSnap_80253AE4(s32 mode)
     }
 }
 
-// Processes D-pad/trigger inputs to navigate a 2D grid of snapshots.
-// Returns 0 if no movement, 1 if moved within page, 2 if page changed.
+/// Processes D-pad/trigger inputs to navigate a 2D grid of snapshots.
+/// @returns 0 if no movement, 1 if moved within page, 2 if page changed.
 s32 mnSnap_80253BE0(u64 buttons, s32* cursor, s32 count)
 {
     s32 cur = *cursor;
@@ -463,7 +463,7 @@ s32 mnSnap_80253BE0(u64 buttons, s32* cursor, s32 count)
     return 2;
 }
 
-// Renders the main content GObj only when in photo-browsing states (>= 4).
+/// Renders the main content GObj only when in photo-browsing states (>= 4).
 void fn_80253DB4(HSD_GObj* gobj, s32 rendermode)
 {
     if (mnSnap_804A0A10.state >= 4) {
@@ -471,7 +471,7 @@ void fn_80253DB4(HSD_GObj* gobj, s32 rendermode)
     }
 }
 
-// Renders the arrow/slot selector GObj only during slot selection (state 2).
+/// Renders the arrow/slot selector GObj only during slot selection (state 2).
 void fn_80253DE8(HSD_GObj* gobj, s32 rendermode)
 {
     if (mnSnap_804A0A10.state == 2) {
@@ -479,7 +479,7 @@ void fn_80253DE8(HSD_GObj* gobj, s32 rendermode)
     }
 }
 
-// Renders the cursor GObj during menu (state 6) or full-screen view (10-11).
+/// Renders the cursor GObj during menu (state 6) or full-screen view (10-11).
 void fn_80253E1C(HSD_GObj* gobj, s32 rendermode)
 {
     s32 state = mnSnap_804A0A10.state;
@@ -488,7 +488,7 @@ void fn_80253E1C(HSD_GObj* gobj, s32 rendermode)
     }
 }
 
-// Renders the warning/dialog GObj only when a dialog is active.
+/// Renders the warning/dialog GObj only when a dialog is active.
 void fn_80253E5C(HSD_GObj* gobj, s32 rendermode)
 {
     if (mnSnap_804A0A10.dlg_active == 1) {
@@ -496,7 +496,7 @@ void fn_80253E5C(HSD_GObj* gobj, s32 rendermode)
     }
 }
 
-// Queries memory card status for slot idx and stores the photo count/error.
+/// Queries memory card status for slot idx and stores the photo count/error.
 void mnSnap_80253E90(s32 idx)
 {
     mnSnap_State* snap = &mnSnap_804A0A10;
@@ -516,9 +516,9 @@ void mnSnap_80253E90(s32 idx)
     }
 }
 
-// Animates the memory card slot selector highlights.
-// Pointer arithmetic required to match: walk[0x94] reads card_status[i],
-// and (snap + byte_off + 0x98) accesses slot_a_jobj / slot_b_jobj.
+/// Animates the memory card slot selector highlights.
+/// Pointer arithmetic required to match: walk[0x94] reads card_status[i],
+/// and (snap + byte_off + 0x98) accesses slot_a_jobj / slot_b_jobj.
 void mnSnap_80253F60(void)
 {
     s32 byte_off = 4;
@@ -544,7 +544,7 @@ void mnSnap_80253F60(void)
     }
 }
 
-// Resets the sub-menu view and shows all 5 option buttons.
+/// Resets the sub-menu view and shows all 5 option buttons.
 void mnSnap_80254014(void)
 {
     mnSnap_State* snap = &mnSnap_804A0A10;
@@ -562,7 +562,7 @@ void mnSnap_80254014(void)
     HSD_JObjSetFlagsAll(snap->move_jobj, 0x10);
 }
 
-// Configures the Yes/No dialog button positions based on language setting.
+/// Configures the Yes/No dialog button positions based on language setting.
 void mnSnap_8025409C(HSD_JObj* jobj_flag)
 {
     mnSnap_State* snap = &mnSnap_804A0A10;
@@ -642,7 +642,7 @@ void mnSnap_8025409C(HSD_JObj* jobj_flag)
     snap->right_btn = right;
 }
 
-// Resets to slot selection state after a card error or empty card.
+/// Resets to slot selection state after a card error or empty card.
 void mnSnap_80254298(void)
 {
     s32* p50 = &mnSnap_804A0A10.active_slot;
@@ -716,8 +716,8 @@ void mnSnap_80254298(void)
     *p51 = 0;
 }
 
-// Handles Yes/No dialog button inputs. Sets snap->dlg_result to the selection
-// result.
+/// Handles Yes/No dialog button inputs. Sets snap->dlg_result to the selection
+/// result.
 s32 mnSnap_8025441C(u64 buttons)
 {
     mnSnap_State* snap = &mnSnap_804A0A10;
@@ -766,9 +766,9 @@ s32 mnSnap_8025441C(u64 buttons)
     }
 }
 
-// Main per-frame update for the Snap menu. Handles all state transitions
-// including slot selection, photo browsing, copy/move/delete operations,
-// and dialog confirmations via a large switch on snap->state.
+/// Main per-frame update for the Snap menu. Handles all state transitions
+/// including slot selection, photo browsing, copy/move/delete operations,
+/// and dialog confirmations via a large switch on snap->state.
 void fn_802545C4(void)
 {
     mnSnap_State* snap = &mnSnap_804A0A10;
@@ -2264,7 +2264,7 @@ end_loop:
     }
 }
 
-// Handles the Back button to exit the Snap menu and cleans up GObjs/text.
+/// Handles the Back button to exit the Snap menu and cleans up GObjs/text.
 void fn_80257D7C(void)
 {
     mnSnap_State* snap = &mnSnap_804A0A10;
@@ -2326,8 +2326,8 @@ void fn_80257D7C(void)
     mnSnap_804A0A10.frame_count += 1;
 }
 
-// Entry point: initializes the Snap menu scene. Loads assets, creates GObjs,
-// sets up thumbnail grid positions, SIS text labels, and dialog widgets.
+/// Entry point: initializes the Snap menu scene. Loads assets, creates GObjs,
+/// sets up thumbnail grid positions, SIS text labels, and dialog widgets.
 void mnSnap_80257F24(void)
 {
     mnSnap_State* snap = &mnSnap_804A0A10;
