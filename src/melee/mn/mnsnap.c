@@ -112,7 +112,6 @@ static void* mnSnap_thumb_imgs[4];
 
 void mnSnap_80254298(void);
 
-// @TODO: Currently 92.61% match - needs register allocation fix
 // Recursively loads snapshot thumbnails from memory card.
 void mnSnap_80253184(void)
 {
@@ -157,7 +156,7 @@ void mnSnap_80253184(void)
     }
 }
 
-// @TODO: Currently 88.85% match - needs register allocation fix
+/// @todo The HSD_ASSERT chain (lines 193-199) is an inline from tobj.h.
 // Polls card read result and updates thumbnail display.
 static void mnSnap_8025329C(void)
 {
@@ -247,7 +246,6 @@ static void mnSnap_8025329C(void)
     }
 }
 
-// @TODO: Currently 94.60% match - needs register allocation fix
 // Loads a page of snapshot thumbnails and updates navigation arrows.
 void mnSnap_80253640(s32 page)
 {
@@ -331,7 +329,6 @@ void mnSnap_80253640(s32 page)
     }
 }
 
-// @TODO: Currently 95.82% match - needs register allocation fix
 // Updates the SIS text labels showing thumbnail numbers and page info.
 void mnSnap_80253964(void)
 {
@@ -408,7 +405,6 @@ void mnSnap_80253AE4(s32 mode)
     }
 }
 
-// @TODO: Currently 98.70% match - needs minor register allocation fix
 // Processes D-pad/trigger inputs to navigate a 2D grid of snapshots.
 // Returns 0 if no movement, 1 if moved within page, 2 if page changed.
 s32 mnSnap_80253BE0(u64 buttons, s32* cursor, s32 count)
@@ -520,7 +516,6 @@ void mnSnap_80253E90(s32 idx)
     }
 }
 
-// @TODO: Currently 96.22% match - needs register allocation fix
 // Animates the memory card slot selector highlights.
 // Pointer arithmetic required to match: walk[0x94] reads card_status[i],
 // and (snap + byte_off + 0x98) accesses slot_a_jobj / slot_b_jobj.
@@ -567,7 +562,6 @@ void mnSnap_80254014(void)
     HSD_JObjSetFlagsAll(snap->move_jobj, 0x10);
 }
 
-// @TODO: Currently 96.14% match - needs register allocation fix
 // Configures the Yes/No dialog button positions based on language setting.
 void mnSnap_8025409C(HSD_JObj* jobj_flag)
 {
@@ -648,7 +642,6 @@ void mnSnap_8025409C(HSD_JObj* jobj_flag)
     snap->right_btn = right;
 }
 
-// @TODO: Currently 94.60% match - needs register allocation fix
 // Resets to slot selection state after a card error or empty card.
 void mnSnap_80254298(void)
 {
@@ -773,7 +766,6 @@ s32 mnSnap_8025441C(u64 buttons)
     }
 }
 
-// @TODO: Currently 80.82% match - needs control flow and register fixes
 // Main per-frame update for the Snap menu. Handles all state transitions
 // including slot selection, photo browsing, copy/move/delete operations,
 // and dialog confirmations via a large switch on snap->state.
@@ -2272,7 +2264,6 @@ end_loop:
     }
 }
 
-// @TODO: Currently 99.25% match - needs minor register allocation fix
 // Handles the Back button to exit the Snap menu and cleans up GObjs/text.
 void fn_80257D7C(void)
 {
@@ -2335,7 +2326,6 @@ void fn_80257D7C(void)
     mnSnap_804A0A10.frame_count += 1;
 }
 
-// @TODO: Currently 84.05% match - needs register allocation and struct fixes
 // Entry point: initializes the Snap menu scene. Loads assets, creates GObjs,
 // sets up thumbnail grid positions, SIS text labels, and dialog widgets.
 void mnSnap_80257F24(void)
