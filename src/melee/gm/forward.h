@@ -152,5 +152,6 @@ typedef struct lbl_8046DBD8_t lbl_8046DBD8_t;
 typedef struct VsApproachData VsApproachData;
 typedef struct MenuExitData MenuExitData;
 typedef struct MenuEnterData MenuEnterData;
+typedef struct gm_803DDEC8Struct gm_803DDEC8Struct;
 
 #endif
