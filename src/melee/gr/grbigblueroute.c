@@ -17,6 +17,8 @@
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 #include "lb/lbvector.h"
+#include "mp/mpcoll.h"
+#include "mp/mplib.h"
 
 #include <dolphin/os.h>
 #include <baselib/gobj.h>
@@ -26,11 +28,22 @@
 #include <baselib/random.h>
 #include <baselib/spline.h>
 
+/* K&R declaration: original code passes gobj despite void definition */
+void grBigBlue_801E8D04();
+
 extern StageCallbacks grBb_Route_803E5E78[];
 
 static struct {
     int x0;
     f32 x4;
+    u8 pad_8[0x20 - 0x8];
+    f32 x20;
+    u8 pad_24[0x3C - 0x24];
+    f32 x3C;
+    f32 x40;
+    f32 x44;
+    f32 x48;
+    f32 x4C;
 }* grBb_Route_804D6A68;
 
 void grBigBlueRoute_8020B864(bool arg)
@@ -60,13 +73,13 @@ void grBigBlueRoute_8020B89C(void)
 
 void grBigBlueRoute_8020B920(void)
 {
-    Point3d sp8;
-    HSD_GObj* temp_r3;
+    Point3d fighter_pos;
+    HSD_GObj* fighter;
 
-    temp_r3 = Ground_801C57A4();
-    if (temp_r3 != NULL) {
-        ftLib_80086644(temp_r3, &sp8);
-        grBigBlueRoute_8020DED4(&sp8);
+    fighter = Ground_801C57A4();
+    if (fighter != NULL) {
+        ftLib_80086644(fighter, &fighter_pos);
+        grBigBlueRoute_8020DED4(&fighter_pos);
         Camera_8002F3AC();
     }
 }
@@ -195,7 +208,7 @@ void grBigBlueRoute_8020BC34(Ground_GObj* gobj)
 // pointer to r27 (target uses r0 for addic. + r30+offset for stores)
 void grBigBlueRoute_8020BC68(Ground_GObj* gobj)
 {
-    Vec3 sp10;
+    Vec3 origin;
     Ground* gp = gobj->user_data;
     HSD_JObj* jobj;
 
@@ -205,14 +218,14 @@ void grBigBlueRoute_8020BC68(Ground_GObj* gobj)
     gp->x10_flags.b5 = 1;
     *(s16*) ((u8*) gp + 0xC8) = 0;
 
-    if (Ground_801C2D24(148, &sp10)) {
+    if (Ground_801C2D24(148, &origin)) {
         jobj = Ground_801C2CF4(127);
         *(HSD_JObj**) ((u8*) gp + 0xE4) = jobj;
         if (jobj != NULL) {
             jobj = *(HSD_JObj**) ((u8*) gp + 0xE4);
             HSD_JObjGetTranslation(jobj,
                                    (Vec3*) ((u8*) gp + 0xD8));
-            lbVector_Sub((Vec3*) ((u8*) gp + 0xD8), &sp10);
+            lbVector_Sub((Vec3*) ((u8*) gp + 0xD8), &origin);
         }
 
         jobj = Ground_801C2CF4(128);
@@ -221,7 +234,7 @@ void grBigBlueRoute_8020BC68(Ground_GObj* gobj)
             jobj = *(HSD_JObj**) ((u8*) gp + 0xF4);
             HSD_JObjGetTranslation(jobj,
                                    (Vec3*) ((u8*) gp + 0xE8));
-            lbVector_Sub((Vec3*) ((u8*) gp + 0xE8), &sp10);
+            lbVector_Sub((Vec3*) ((u8*) gp + 0xE8), &origin);
         }
 
         jobj = Ground_801C2CF4(129);
@@ -230,7 +243,7 @@ void grBigBlueRoute_8020BC68(Ground_GObj* gobj)
             jobj = *(HSD_JObj**) ((u8*) gp + 0x104);
             HSD_JObjGetTranslation(jobj,
                                    (Vec3*) ((u8*) gp + 0xF8));
-            lbVector_Sub((Vec3*) ((u8*) gp + 0xF8), &sp10);
+            lbVector_Sub((Vec3*) ((u8*) gp + 0xF8), &origin);
         }
 
         jobj = Ground_801C2CF4(130);
@@ -239,7 +252,7 @@ void grBigBlueRoute_8020BC68(Ground_GObj* gobj)
             jobj = *(HSD_JObj**) ((u8*) gp + 0x114);
             HSD_JObjGetTranslation(jobj,
                                    (Vec3*) ((u8*) gp + 0x108));
-            lbVector_Sub((Vec3*) ((u8*) gp + 0x108), &sp10);
+            lbVector_Sub((Vec3*) ((u8*) gp + 0x108), &origin);
         }
     } else {
         *(HSD_JObj**) ((u8*) gp + 0xE4) = NULL;
@@ -269,8 +282,8 @@ void grBigBlueRoute_8020BF38(Ground_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
     HSD_GObj* fighter;
-    Vec3 sp1C;
-    Vec3 sp10;
+    Vec3 checkpoint;
+    Vec3 fighter_pos;
     int i;
     u8* car;
     HSD_JObj* jobj;
@@ -280,18 +293,18 @@ void grBigBlueRoute_8020BF38(Ground_GObj* gobj)
     Ground_801C3D44(0, grBb_Route_804DB948, grBb_Route_804DB94C);
 
     if (fighter != NULL) {
-        ftLib_80086644(fighter, &sp10);
+        ftLib_80086644(fighter, &fighter_pos);
 
         if (ftLib_80086EC0(fighter) == 0) {
-            grBigBlueRoute_8020DED4(&sp10);
+            grBigBlueRoute_8020DED4(&fighter_pos);
 
             for (i = 0, car = (u8*) gp; i < 3; i++, car += 0x10) {
                 jobj = *(HSD_JObj**) (car + 0xE4);
                 if (jobj != NULL) {
-                    HSD_JObjSetTranslateX(jobj, *(f32*) (car + 0xD8) + sp10.x);
+                    HSD_JObjSetTranslateX(jobj, *(f32*) (car + 0xD8) + fighter_pos.x);
 
                     jobj = *(HSD_JObj**) (car + 0xE4);
-                    HSD_JObjSetTranslateY(jobj, *(f32*) (car + 0xDC) + sp10.y);
+                    HSD_JObjSetTranslateY(jobj, *(f32*) (car + 0xDC) + fighter_pos.y);
                 }
             }
 
@@ -301,8 +314,8 @@ void grBigBlueRoute_8020BF38(Ground_GObj* gobj)
         {
             s32 idx = *(s16*) ((u8*) gp + 0xC8) + 5;
             if (idx <= 7) {
-                if (mpLib_8004DBB4(idx, &sp1C) != 0) {
-                    if (sp10.x > sp1C.x) {
+                if (mpLib_8004DBB4(idx, &checkpoint) != 0) {
+                    if (fighter_pos.x > checkpoint.x) {
                         *(s16*) ((u8*) gp + 0xC8) =
                             *(s16*) ((u8*) gp + 0xC8) + 1;
                     }
@@ -345,7 +358,7 @@ void grBigBlueRoute_8020C1DC(Ground_GObj* gobj)
 void grBigBlueRoute_8020C210(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
-    HSD_Free((void*) gp->gv.corneria.xC8);
+    HSD_Free((void*) gp->gv.bigblueroute.xC8);
 }
 
 // @TODO: Currently 96.39% match - r30/r31 register swap
@@ -353,7 +366,7 @@ void grBigBlueRoute_8020C238(Ground_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
     HSD_JObj* root_jobj = gobj->hsd_obj;
-    Vec3 sp14;
+    Vec3 spline_pt;
     PAD_STACK(8);
 
     if (root_jobj != NULL) {
@@ -391,81 +404,23 @@ void grBigBlueRoute_8020C238(Ground_GObj* gobj)
     splGetSplinePoint(&gp->gv.bigblueroute.xE4, gp->gv.bigblueroute.xCC, 1.0F);
 
     splGetSplinePoint(&gp->gv.bigblueroute.xF0, gp->gv.bigblueroute.xD0, 0.0F);
-    splGetSplinePoint(&sp14, gp->gv.bigblueroute.xD4, 0.0F);
-    lbVector_Add(&gp->gv.bigblueroute.xF0, &sp14);
+    splGetSplinePoint(&spline_pt, gp->gv.bigblueroute.xD4, 0.0F);
+    lbVector_Add(&gp->gv.bigblueroute.xF0, &spline_pt);
 
     gp->gv.bigblueroute.xF0.x *= 0.5F;
     gp->gv.bigblueroute.xF0.y *= 0.5F;
     gp->gv.bigblueroute.xF0.z *= 0.5F;
 
     splGetSplinePoint(&gp->gv.bigblueroute.xFC, gp->gv.bigblueroute.xD0, 1.0F);
-    splGetSplinePoint(&sp14, gp->gv.bigblueroute.xD4, 1.0F);
-    lbVector_Add(&gp->gv.bigblueroute.xFC, &sp14);
+    splGetSplinePoint(&spline_pt, gp->gv.bigblueroute.xD4, 1.0F);
+    lbVector_Add(&gp->gv.bigblueroute.xFC, &spline_pt);
 
     gp->gv.bigblueroute.xFC.x *= 0.5F;
     gp->gv.bigblueroute.xFC.y *= 0.5F;
     gp->gv.bigblueroute.xFC.z *= 0.5F;
 }
 
-// @TODO: Currently partial match - compiler unrolls by 3 instead of 11
-s32 grBigBlueRoute_8020C530(Ground_GObj* gobj)
-{
-    Ground* gp = gobj->user_data;
-    u8* data;
-    s32 count = 0;
-    s32 idx;
-    s32 offset;
-
-    for (idx = 0, offset = 0; idx < 33; idx++, offset += 0x2C) {
-        data = *(u8**) ((u8*) gp + 0xC8);
-        if (!(data[offset] & 0x40)) {
-            count++;
-        }
-    }
-
-    if (count == 0) {
-        return -1;
-    }
-
-    count = HSD_Randi(count);
-
-    idx = 0;
-    offset = idx;
-
-    for (idx = 0; idx < 33; idx++, offset += 0x2C) {
-        data = *(u8**) ((u8*) gp + 0xC8);
-        if (!(data[offset] & 0x40)) {
-            if (--count < 0) {
-                return idx;
-            }
-        }
-    }
-
-    HSD_ASSERT(741, 0);
-}
-
-typedef struct {
-    u8 b0 : 1;
-    u8 b1 : 1;
-    u8 b2_5 : 4;
-    u8 b6 : 1;
-    u8 b7 : 1;
-} RouteEntryFlags;
-
-typedef struct {
-    RouteEntryFlags flags;
-    u8 pad_1[3];
-    f32 x4;
-    f32 x8;
-    f32 xC;
-    f32 x10;
-    f32 x14;
-    f32 x18;
-    f32 x1C;
-    f32 x20;
-    u8 pad_24[4];
-    void* x28;
-} RouteEntry;
+/// #grBigBlueRoute_8020C530
 
 /// @todo: Currently 91.77% match - register allocation (gp in r30 vs r31)
 /// and cror+beq vs bge for float >= comparison.
@@ -476,7 +431,7 @@ void grBigBlueRoute_8020C85C(Ground_GObj* gobj)
     PAD_STACK(8);
 
     if ((f32) gp->gv.bigblueroute.x108 >=
-        0.5F + *(f32*) ((u8*) grBb_Route_804D6A68 + 0x40))
+        0.5F + grBb_Route_804D6A68->x40)
     {
         return;
     }
@@ -490,7 +445,7 @@ void grBigBlueRoute_8020C85C(Ground_GObj* gobj)
         ((UnkFlagStruct*) ((u8*) gp->gv.bigblueroute.xC8 +
                            30 * 44))->b1 = 1;
         gp->gv.bigblueroute.x10A =
-            *(f32*) ((u8*) grBb_Route_804D6A68 + 0x4C);
+            grBb_Route_804D6A68->x4C;
     } else {
         s32 min_val;
         s32 max_val;
@@ -502,9 +457,9 @@ void grBigBlueRoute_8020C85C(Ground_GObj* gobj)
                            route_idx * 44))->b1 = 0;
 
         min_val =
-            (s32) (*(f32*) ((u8*) grBb_Route_804D6A68 + 0x44));
+            (s32) grBb_Route_804D6A68->x44;
         max_val =
-            (s32) (*(f32*) ((u8*) grBb_Route_804D6A68 + 0x48));
+            (s32) grBb_Route_804D6A68->x48;
 
         if (max_val > min_val) {
             s32 range = max_val - min_val;
@@ -535,7 +490,7 @@ void grBigBlueRoute_8020C85C(Ground_GObj* gobj)
         re->x4 = 0.0F;
 
         re = (RouteEntry*) ((u8*) gp->gv.bigblueroute.xC8 + offset);
-        re->x8 = *(f32*) ((u8*) grBb_Route_804D6A68 + 0x20);
+        re->x8 = grBb_Route_804D6A68->x20;
 
         re = (RouteEntry*) ((u8*) gp->gv.bigblueroute.xC8 + offset);
         re->xC = 0.0F;
@@ -551,7 +506,7 @@ void grBigBlueRoute_8020C85C(Ground_GObj* gobj)
         re->x14 = 0.0F;
 
         re = (RouteEntry*) ((u8*) gp->gv.bigblueroute.xC8 + offset);
-        re->x18 = *(f32*) ((u8*) grBb_Route_804D6A68 + 0x3C);
+        re->x18 = grBb_Route_804D6A68->x3C;
 
         re = (RouteEntry*) ((u8*) gp->gv.bigblueroute.xC8 + offset);
         re->x1C = 0.0F;
@@ -617,12 +572,12 @@ void grBigBlueRoute_8020C85C(Ground_GObj* gobj)
 
 /// #grBigBlueRoute_8020CD20
 
-int grBigBlueRoute_8020DA9C(struct grBigBlueRoute_8020DA9C_t* arg0)
+int grBigBlueRoute_8020DA9C(struct grBigBlueRoute_8020DA9C_t* desc)
 {
-    if (arg0 == NULL) {
+    if (desc == NULL) {
         return 0;
     }
-    return arg0->x8;
+    return desc->x8;
 }
 
 // @TODO: Currently 97.71% match - needs register allocation fix (r27/r30 swap for arr/jobj)
@@ -758,7 +713,7 @@ bool grBigBlueRoute_8020DF80(Vec3* a, int arg, HSD_JObj* joint)
 
     lb_8000B1CC(joint, NULL, &b);
 
-    if (a->y > b.y + -3.0f) {
+    if (a->y > b.y + -3.0F) {
         return true;
     } else {
         return false;

@@ -14,6 +14,29 @@ struct grBigBlueRoute_8020DA9C_t {
     /* +8 */ int x8;
 };
 
+typedef struct {
+    u8 b0 : 1;
+    u8 b1 : 1;
+    u8 b2_5 : 4;
+    u8 b6 : 1;
+    u8 b7 : 1;
+} RouteEntryFlags;
+
+typedef struct {
+    RouteEntryFlags flags;
+    u8 pad_1[3];
+    f32 x4;
+    f32 x8;
+    f32 xC;
+    f32 x10;
+    f32 x14;
+    f32 x18;
+    f32 x1C;
+    f32 x20;
+    u8 pad_24[4];
+    void* x28;
+} RouteEntry;
+
 /* 20B864 */ void grBigBlueRoute_8020B864(bool);
 /* 20B89C */ void grBigBlueRoute_8020B89C(void);
 /* 20B920 */ void grBigBlueRoute_8020B920(void);

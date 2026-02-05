@@ -50,7 +50,7 @@
 /* 1E89DC */ void* grBigBlue_801E89DC(int);
 /* 1E8A1C */ void grBigBlue_801E8A1C(int);
 /* 1E8B84 */ f32 grBigBlue_801E8B84(f32, f32, f32, f32);
-/* 1E8D04 */ void grBigBlue_801E8D04();
+/* 1E8D04 */ void grBigBlue_801E8D04(void);
 /* 1E8D64 */ void grBigBlue_801E8D64(Ground_GObj*);
 /* 1E93D0 */ bool grBigBlue_801E93D0(Ground_GObj*);
 /* 1E93D8 */ void grBigBlue_801E93D8(Ground_GObj*);
