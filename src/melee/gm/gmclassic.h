@@ -6,7 +6,7 @@
 #include <melee/gm/forward.h>
 
 /* 1B2BA4 */ UNK_RET gm_801B2BA4(UNK_PARAMS);
-/* 1B2D54 */ UNK_RET gm_801B2D54(UNK_PARAMS);
+/* 1B2D54 */ UNK_RET gm_801B2D54(gm_803DDEC8Struct*);
 /* 1B2F78 */ void gm_801B2F78_OnLoad(void);
 /* 1B34B8 */ void gm_801B34B8_OnInit(void);
 /* 1B3500 */ void gm_801B3500(MinorScene*);
