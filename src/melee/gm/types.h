@@ -973,6 +973,6 @@ struct gm_803DDEC8Struct{
     u8 x1_b7 : 1;
     u8 x2[0xC - 0x2];
     void* xC;
-} gm_803DDEC8Struct;
+};
 
 #endif
