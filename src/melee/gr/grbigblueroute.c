@@ -28,8 +28,7 @@
 #include <baselib/random.h>
 #include <baselib/spline.h>
 
-/* K&R declaration: original code passes gobj despite void definition */
-void grBigBlue_801E8D04();
+void grBigBlue_801E8D04(Ground_GObj*);
 
 extern StageCallbacks grBb_Route_803E5E78[];
 
