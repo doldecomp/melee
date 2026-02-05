@@ -15,7 +15,15 @@
 /* 1B3D44 */ void gm_801B3D44(MinorScene*);
 /* 1B3D84 */ void gm_801B3D84(MinorScene*);
 /* 1B3DD8 */ void gm_801B3DD8(MinorScene*);
-/* 1B3E44 */ void gm_801B3E44(MinorScene*);
+/* 1B3E44 */ void gmClassic_801B3E44(MinorScene*);
 /* 1B3F18 */ void gm_801B3F18(MinorScene*);
 
+typedef struct gm_803DDEC8Struct{
+    u8 x0;
+    UnkFlagStruct x1;
+    u8 x2[0xC - 0x2];
+    void* xC;
+} gm_803DDEC8Struct;
+
+gm_803DDEC8Struct gm_803DDEC8;
 #endif
