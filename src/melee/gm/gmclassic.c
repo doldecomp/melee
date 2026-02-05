@@ -360,7 +360,7 @@ void gmClassic_801B3E44(MinorScene* scene) {
     CSSData* temp_r30 = gm_801A4284(scene);
     gmm_x0_528_t* temp_r29 = gmMainLib_8015CDC8();
     UnkAllstarData* temp_r31 = gm_8017EB30();
-    gm_803DDEC8Struct* r4 = &gm_803DDEC8;    
+    gm_803DDEC8Struct* r4 = &gm_803DDEC8;
     if (temp_r30->pending_scene_change == 2) {
         //This only happens when, instead of pressing start to begin the game, we press back to exit.
         gm_801A42F8(1);
