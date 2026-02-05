@@ -209,7 +209,7 @@ void grBigBlueRoute_8020BC34(Ground_GObj* gobj)
 void grBigBlueRoute_8020BC68(Ground_GObj* gobj)
 {
     Vec3 origin;
-    Ground* gp = gobj->user_data;
+    Ground* gp = GET_GROUND(gobj);
     HSD_JObj* jobj;
 
     grAnime_801C8138(gobj, gp->map_id, 0);
@@ -280,7 +280,7 @@ extern s16 grBb_Route_804D49EC;
 // minor register allocation in loop jobj load
 void grBigBlueRoute_8020BF38(Ground_GObj* gobj)
 {
-    Ground* gp = gobj->user_data;
+    Ground* gp = GET_GROUND(gobj);
     HSD_GObj* fighter;
     Vec3 checkpoint;
     Vec3 fighter_pos;
@@ -308,7 +308,7 @@ void grBigBlueRoute_8020BF38(Ground_GObj* gobj)
                 }
             }
 
-            Camera_80030AE0(1);
+            Camera_80030AE0(true);
         }
 
         {
@@ -364,7 +364,7 @@ void grBigBlueRoute_8020C210(Ground_GObj* gobj)
 // @TODO: Currently 96.39% match - r30/r31 register swap
 void grBigBlueRoute_8020C238(Ground_GObj* gobj)
 {
-    Ground* gp = gobj->user_data;
+    Ground* gp = GET_GROUND(gobj);
     HSD_JObj* root_jobj = gobj->hsd_obj;
     Vec3 spline_pt;
     PAD_STACK(8);
@@ -422,11 +422,11 @@ void grBigBlueRoute_8020C238(Ground_GObj* gobj)
 
 /// #grBigBlueRoute_8020C530
 
-/// @todo: Currently 91.77% match - register allocation (gp in r30 vs r31)
-/// and cror+beq vs bge for float >= comparison.
+// @TODO: Currently 91.77% match - register allocation (gp in r30 vs r31)
+// and cror+beq vs bge for float >= comparison.
 void grBigBlueRoute_8020C85C(Ground_GObj* gobj)
 {
-    Ground* gp = gobj->user_data;
+    Ground* gp = GET_GROUND(gobj);
     s32 route_idx;
     PAD_STACK(8);
 
@@ -442,7 +442,8 @@ void grBigBlueRoute_8020C85C(Ground_GObj* gobj)
 
     if (gp->gv.bigblueroute.x108 == 0) {
         route_idx = 30;
-        ((UnkFlagStruct*) ((u8*) gp->gv.bigblueroute.xC8 +
+        /* RouteEntry array at xC8, each entry 44 bytes */
+        ((RouteEntryFlags*) ((u8*) gp->gv.bigblueroute.xC8 +
                            30 * 44))->b1 = 1;
         gp->gv.bigblueroute.x10A =
             grBb_Route_804D6A68->x4C;
@@ -453,7 +454,7 @@ void grBigBlueRoute_8020C85C(Ground_GObj* gobj)
 
         route_idx = grBigBlueRoute_8020C530(gobj);
 
-        ((UnkFlagStruct*) ((u8*) gp->gv.bigblueroute.xC8 +
+        ((RouteEntryFlags*) ((u8*) gp->gv.bigblueroute.xC8 +
                            route_idx * 44))->b1 = 0;
 
         min_val =
@@ -597,7 +598,7 @@ void grBigBlueRoute_8020DAB4(HSD_JObj** jobjs, f32 scale, int count)
     gobj = grBigBlueRoute_8020B9D4(4);
     HSD_ASSERT(1414, gobj);
     {
-        Ground* gp = gobj->user_data;
+        Ground* gp = GET_GROUND(gobj);
         HSD_ASSERT(1415, gp);
     }
 
@@ -684,6 +685,7 @@ void fn_8020DEAC(void)
     Ground_801C53EC(0x77A12);
 }
 
+/* Clamp camera position to stage bounds */
 void grBigBlueRoute_8020DED4(Vec3* pos)
 {
     f32 x = pos->x;
@@ -693,6 +695,8 @@ void grBigBlueRoute_8020DED4(Vec3* pos)
         x = -3.0F * Ground_801C0498();
     }
 
+    /* Both branches clamp y to the same value - this is how the
+     * original code compiles (y is always clamped to -3*scale) */
     if (y < -3.0F * Ground_801C0498()) {
         y = -3.0F * Ground_801C0498();
     } else if (y > -3.0F * Ground_801C0498()) {
@@ -704,7 +708,7 @@ void grBigBlueRoute_8020DED4(Vec3* pos)
 
 DynamicsDesc* grBigBlueRoute_8020DF78(enum_t arg)
 {
-    return false;
+    return NULL;
 }
 
 bool grBigBlueRoute_8020DF80(Vec3* a, int arg, HSD_JObj* joint)
