@@ -684,7 +684,12 @@ bool fn_8017E160(void)
     return false;
 }
 
-/// #fn_8017E21C
+void fn_8017E21C(void) {
+    int i;
+    for (i = 0; i < 12; i++) {
+        lbl_804706D8[i].x0 = -1;
+    }
+}
 
 /// #gm_8017E280
 
