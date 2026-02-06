@@ -1362,6 +1362,7 @@ config.libs = [
             Object(Matching, "MSL/float.c"),
             Object(Matching, "MSL/trigf.c"),
             Object(NonMatching, "MSL/math.c"),
+            Object(NonMatching, "MSL/math_data.c"),
         ],
     ),
     TRKLib(
