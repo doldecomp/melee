@@ -302,7 +302,7 @@ MinorScene gm_803DDC58_MinorScenes[] = {
         3,
         0,
         gm_801B3DD8,
-        gmClassic_801B3E44,
+        gm_801B3E44,
         {
             MN_CSS,
             &gm_80470708,
@@ -356,7 +356,7 @@ void gm_801B3DD8(MinorScene* scene)
     lbDvd_800174BC();
 }
 
-void gmClassic_801B3E44(MinorScene* scene) {
+void gm_801B3E44(MinorScene* scene) {
     CSSData* temp_r30 = gm_801A4284(scene);
     gmm_x0_528_t* temp_r29 = gmMainLib_8015CDC8();
     UnkAllstarData* temp_r31 = gm_8017EB30();
