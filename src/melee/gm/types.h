@@ -961,4 +961,18 @@ struct MenuExitData {
 };
 STATIC_ASSERT(sizeof(struct MenuExitData) == 0x4);
 
+typedef struct gm_803DDEC8Struct{
+    u8 x0;
+    u8 x1_b0 : 1;
+    u8 x1_b1 : 1;
+    u8 x1_b2 : 1;
+    u8 x1_b3 : 1;
+    u8 x1_b4 : 1;
+    u8 x1_b5 : 1;
+    u8 x1_b6 : 1;
+    u8 x1_b7 : 1;
+    u8 x2[0xC - 0x2];
+    void* xC;
+}gm_803DDEC8Struct;
+
 #endif

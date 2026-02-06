@@ -34,6 +34,13 @@
 #include <melee/pl/player.h>
 #include <melee/sc/types.h>
 
+typedef struct lbl_804706D8_t{
+    s16 x0;
+    s16 x2;
+}lbl_804706D8_t;
+
+lbl_804706D8_t lbl_804706D8[12];
+
 struct lbl_80472D28_t {
     /*   +0 */ char pad_0[0x104];
     /* +104 */ int x104;
@@ -684,7 +691,12 @@ bool fn_8017E160(void)
     return false;
 }
 
-/// #fn_8017E21C
+void fn_8017E21C(void) {
+    int i;
+    for (i = 0; i < 12; i++) {
+        lbl_804706D8[i].x0 = -1;
+    }
+}
 
 /// #gm_8017E280
 
