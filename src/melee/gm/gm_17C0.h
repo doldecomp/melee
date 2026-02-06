@@ -38,7 +38,7 @@
 /* 17E068 */ bool gm_8017E068(void);
 /* 17E0E4 */ int fn_8017E0E4(void);
 /* 17E160 */ bool fn_8017E160(void);
-/* 17E21C */ UNK_RET fn_8017E21C(UNK_PARAMS);
+/* 17E21C */ void fn_8017E21C(void);
 /* 17E280 */ UNK_T gm_8017E280(u16, bool);
 /* 17E318 */ UNK_RET fn_8017E318(UNK_PARAMS);
 /* 17E3C8 */ UNK_RET fn_8017E3C8(UNK_PARAMS);
