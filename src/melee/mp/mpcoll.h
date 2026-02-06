@@ -122,6 +122,7 @@
 /* 04CBF4 */ void mpClearFloorSkip(CollData*);
 /* 04CC00 */ void mpCopyCollData(CollData* src, CollData* dst, int);
 /* 04D024 */ bool mpColl_8004D024(Vec3*);
+/* 04F42C */ s32 mpColl_8004F42C(int joint, int index);
 /* 4D64AC */ extern int mpColl_804D64AC;
 
 #endif
