@@ -34,6 +34,13 @@
 #include <melee/pl/player.h>
 #include <melee/sc/types.h>
 
+typedef struct lbl_804706D8_t{
+    s16 x0;
+    s16 x2;
+}lbl_804706D8_t;
+
+lbl_804706D8_t lbl_804706D8[12];
+
 struct lbl_80472D28_t {
     /*   +0 */ char pad_0[0x104];
     /* +104 */ int x104;
