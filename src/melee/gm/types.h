@@ -724,14 +724,24 @@ struct UnkAdventureData {
 };
 
 struct UnkAllstarData {
-    /* 00 */ Unk1PData x0;
-    s8 pad_x0[0x74 - 0x48];
-    u16 x74;
-    u8 x76;
-    u8 x77;
-    s8 pad_x78[0x7C - 0x78];
-    u8 x7C;
-    s8 pad_x7D[0xA0 - 0x7D];
+    /*  +0 */ Unk1PData x0;
+    /* +48*/ UNK_T x48;
+    /* +4C*/ UNK_T x4C;
+    /* +50*/ UNK_T x50;
+    /* +54*/ UNK_T x54;
+    /* +58*/ u32 x58;
+    /* +5C*/ u32 _5C;
+    /* +60*/ u32 _60;
+    /* +64*/ UNK_T x64;
+    /* +68*/ UNK_T x68;
+    /* +6C*/ u32 _6C;
+    /* +70*/ u32 _70;
+    /* +74*/ u16 x74; ///< current percent
+    /* +76*/ u8 x76[24]; ///< character id array
+    /* +8E*/ u8 x8E[2];
+    /* +90*/ u8 x90[4];
+    /* +94*/ u8 _94[0x9C - 0x94];
+    /* +9C*/ u32 x9C; ///< current time (frames)
 };
 
 struct TmData {

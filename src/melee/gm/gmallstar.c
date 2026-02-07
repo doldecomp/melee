@@ -1,6 +1,9 @@
 #include "gmallstar.h"
+#include "gm/gmallstar.static.h"
 
 #include "gm_unsplit.h"
+#include "baselib/random.h"
+#include "gr/ground.h"
 
 #include <melee/gm/gmmain_lib.h>
 #include <melee/lb/lbbgflash.h>
@@ -432,7 +435,107 @@ void gm_801B607C(MinorScene* unused)
     gm_801A42D4();
 }
 
-/// #gm_801B60A4_OnLoad
+void gm_801B60A4_OnLoad(void)
+{
+    UnkAllstarData* data;
+    gm_803DEBE8_t* var_r29;
+    gm_803DEBE8_t* var_r30;
+    u32 var_r28;
+    int temp;
+    gm_803DEBE8_t tmp;
+    PAD_STACK(12);
+
+    data = &gm_80473A18;
+    gmMainLib_8015CDE0();
+    gm_8017C984(data);
+
+    {
+        gm_80490940_t* p = gm_80490940;
+        char* pp = (char*)p;
+        int i = 25;
+        while(i--) {
+            *(pp++) = 0;
+        }
+    }
+
+    gm_8017DB58(data->x0.xC.x24);
+    data->x0.slot = gm_801677F0();
+    data->x48 = gm_8018A160;
+    data->x4C = gm_8018A228;
+    data->x50 = gm_8018A290;
+    data->x54 = gm_8018A25C;
+    data->x58 = 0;
+    data->x64 = gm_8018A2C4;
+    var_r29 = gm_803DEBE8;
+    data->x68 = gm_8018A314;
+    var_r30 = var_r29;
+    for (var_r28 = 0; var_r28 < 25; var_r28++) {
+        var_r30->x2 = *((&var_r30->x0) + HSD_Randi(2));
+        var_r30++;
+    }
+
+    var_r30 = gm_803DEBE8;
+    for (var_r28 = 0; var_r28 < 0x17; var_r28++) {
+        gm_803DEBE8_t* swap = &var_r30[var_r28 + HSD_Randi(0x18 - var_r28)];
+        tmp = *var_r29;
+        *var_r29 = *swap;
+        var_r29++;
+        *swap = tmp;
+    }
+
+    data->x74 = 0;
+    {
+        UnkAllstarData* p = &gm_80473A18;
+        int i = 0x18;
+        p->x9C = 0;
+        temp = 0x21;
+        p->x76[0] = temp;
+        p->x76[1] = temp;
+        p->x76[2] = temp;
+        p->x76[3] = temp;
+        p->x76[4] = temp;
+        p->x76[5] = temp;
+        p->x76[6] = temp;
+        p->x76[7] = temp;
+        p->x76[8] = temp;
+        p->x76[9] = temp;
+        p->x76[0xA] = temp;
+        p->x76[0xB] = temp;
+        p->x76[0xC] = temp;
+        p->x76[0xD] = temp;
+        p->x76[0xE] = temp;
+        p->x76[0xF] = temp;
+        p->x76[0x10] = temp;
+        p->x76[0x11] = temp;
+        p->x76[0x12] = temp;
+        p->x76[0x13] = temp;
+        p->x76[0x14] = temp;
+        p->x76[0x15] = temp;
+        p->x76[0x16] = temp;
+        p->x76[0x17] = temp;
+
+        temp = 0x1A;
+        if (i < temp) {
+            u8* q = ((u8*)p) + i;
+            i = temp - i;
+            do {
+                *(q++ + 0x76) = temp;
+            } while (--i != 0);
+        }
+    }
+
+    {
+        u8* p = gm_80473A18.x90;
+        p[0] = 1;
+        p[1] = 1;
+        p[2] = 1;
+        p[3] = 1;
+    }
+
+    gm_SetSceneMinor(0x70U);
+    gm_80172174();
+    Ground_801C5A28();
+}
 
 void gm_801B62D8_OnInit(void)
 {

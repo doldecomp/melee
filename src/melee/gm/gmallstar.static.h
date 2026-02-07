@@ -1,0 +1,52 @@
+#ifndef MELEE_GM_ALLSTAR_STATIC_H
+#define MELEE_GM_ALLSTAR_STATIC_H
+
+#include "dolphin/types.h"
+
+typedef struct gm_80490940_t {
+    /* +0 */ u8 x0;
+    /* +1 */ u8 x1;
+    /* +2 */ u8 x2;
+    /* +3 */ u8 x3;
+    /* +4 */ u8 x4;
+} gm_80490940_t;
+
+typedef struct gm_803DEBE8_t {
+    /* +0 */ u8 x0;
+    /* +1 */ u8 x1;
+    /* +2 */ u8 x2;
+    /* +3 */ u8 x3;
+} gm_803DEBE8_t;
+
+extern gm_803DEBE8_t gm_803DEBE8[25];
+extern gm_80490940_t gm_80490940[5];
+
+// gm_803DEBE8_t gm_803DEBE8[0x19] = {
+//     { 0xB1, 0xB1, 0, 8 },
+//     { 0xB2, 0xB2, 0, 1 },
+//     { 0xB3, 0xB3, 0, 6 },
+//     { 0xB4, 0xB4, 0, 0x10 },
+//     { 0xB5, 0xB5, 0, 0x11 },
+//     { 0xB6, 0xB6, 0, 4 },
+//     { 0xB7, 0xB7, 0, 2 },
+//     { 0xB8, 0xB8, 0, 0xD },
+//     { 0xB9, 0xB9, 0, 7 },
+//     { 0xBA, 0xBA, 0, 0 },
+//     { 0xBB, 0xBB, 0, 0xB },
+//     { 0xBC, 0xBC, 0, 0xF },
+//     { 0xBD, 0xBD, 0, 0xE },
+//     { 0xBE, 0xBE, 0, 0xC },
+//     { 0xBF, 0xBF, 0, 0x12 },
+//     { 0xC0, 0xC0, 0, 9 },
+//     { 0xC1, 0xC1, 0, 0xA },
+//     { 0xC2, 0xC2, 0, 5 },
+//     { 0xC3, 0xC3, 0, 0x16 },
+//     { 0xC4, 0xC4, 0, 0x15 },
+//     { 0xC5, 0xC5, 0, 0x14 },
+//     { 0xC6, 0xC6, 0, 0x18 },
+//     { 0xC7, 0xC7, 0, 0x17 },
+//     { 0xC9, 0xC9, 0, 0x19 },
+//     { 0xC8, 0xC8, 0, 3 },
+// };
+
+#endif
