@@ -119,4 +119,31 @@ void itOctarockstone_802E89B0(Item_GObj* gobj, Item_GObj* ref_gobj)
 
 /// #it_802E89D0
 
-/// #it_802E8ADC
+/// @brief Spawn an Octarock stone projectile.
+/// @param gobj The parent Octarock gobj.
+/// @param pos The spawn position.
+/// @param dir The facing direction (-1 or 1).
+/// @param horiz_speed Horizontal speed for the stone.
+/// @param min_vy Minimum vertical velocity.
+/// @param max_vy Maximum vertical velocity.
+void it_802E8ADC(Item_GObj* gobj, Vec3* pos, s32 dir, f32 horiz_speed,
+                 f32 min_vy, f32 max_vy)
+{
+    SpawnItem spawn;
+    Item_GObj* stone_gobj;
+
+    spawn.kind = It_Kind_Octarock_Stone;
+    spawn.prev_pos = *pos;
+    spawn.prev_pos.z = 0.0F;
+    it_8026BB88(gobj, &spawn.pos);
+    spawn.facing_dir = (f32) dir;
+    spawn.x3C_damage = 0;
+    spawn.x0_parent_gobj = NULL;
+    spawn.x4_parent_gobj2 = gobj;
+    spawn.x44_flag.b0 = true;
+    spawn.x40 = 0;
+    stone_gobj = Item_80268B18(&spawn);
+    if (stone_gobj != NULL) {
+        it_802E89D0(stone_gobj, horiz_speed, min_vy, max_vy);
+    }
+}

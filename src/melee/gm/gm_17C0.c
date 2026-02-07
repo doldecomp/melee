@@ -34,6 +34,13 @@
 #include <melee/pl/player.h>
 #include <melee/sc/types.h>
 
+typedef struct lbl_804706D8_t{
+    s16 x0;
+    s16 x2;
+}lbl_804706D8_t;
+
+lbl_804706D8_t lbl_804706D8[12];
+
 struct lbl_80472D28_t {
     /*   +0 */ char pad_0[0x104];
     /* +104 */ int x104;
@@ -48,6 +55,35 @@ struct lbl_80472E48_t {
     /* 0x0C */ char pad_C[0x74]; /* maybe part of unk_8[0x1E]? */
 }; /* size = 0x80 */
 STATIC_ASSERT(sizeof(struct lbl_80472E48_t) == 0x80);
+
+/// Adventure mode stage data table entry (size 0x1A)
+/// Table has 110 entries: 22 stages × 5 difficulty levels
+/// Indexed as: difficulty * 5 + stage_slot
+typedef struct AdventureStageEntry {
+    /* 0x00 */ u8 stage_kind;
+    /* 0x01 */ u8 pad_1;
+    /* 0x02 */ u16 scale0_pct; ///< Divided by 100 to get ratio
+    /* 0x04 */ u16 scale1_pct; ///< Divided by 100 to get ratio
+    /* 0x06 */ u8 pad_6[0x14];
+} AdventureStageEntry;
+STATIC_ASSERT(sizeof(AdventureStageEntry) == 0x1A);
+
+/// Allstar mode stage data table entry (size 0x1A)
+/// Table has 55 entries: 11 stages × 5 difficulty levels
+typedef struct AllstarStageEntry {
+    /* 0x00 */ u8 stage_kind;
+    /* 0x01 */ u8 pad_1;
+    /* 0x02 */ u16 scale0_pct; ///< Divided by 100 to get ratio
+    /* 0x04 */ u16 scale1_pct; ///< Divided by 100 to get ratio
+    /* 0x06 */ u8 pad_6[0xA];
+    /* 0x10 */ u16 scale2_pct; ///< Divided by 100 to get ratio
+    /* 0x12 */ u16 scale3_pct; ///< Divided by 100 to get ratio
+    /* 0x14 */ u8 pad_14[0x6];
+} AllstarStageEntry;
+STATIC_ASSERT(sizeof(AllstarStageEntry) == 0x1A);
+
+extern AdventureStageEntry lbl_803D7AC0[110];
+extern AllstarStageEntry lbl_803D85F0[55];
 
 static struct lbl_804706C0_t {
     int x0;
@@ -655,7 +691,12 @@ bool fn_8017E160(void)
     return false;
 }
 
-/// #fn_8017E21C
+void fn_8017E21C(void) {
+    int i;
+    for (i = 0; i < 12; i++) {
+        lbl_804706D8[i].x0 = -1;
+    }
+}
 
 /// #gm_8017E280
 
@@ -689,27 +730,67 @@ int gm_8017E48C(MinorScene* scene)
 
 /// #gm_8017E4C4
 
-/// #gm_8017E500
+/// Get adventure stage kind for given difficulty and stage slot.
+/// The (u8) cast on difficulty is required - these functions are called
+/// via function pointers typed as f32(*)(int, u8) in UnkAdventureData.
+u8 gm_8017E500(int difficulty, u8 stage_slot)
+{
+    return lbl_803D7AC0[stage_slot + ((u8) difficulty * 5)].stage_kind;
+}
 
-/// #gm_8017E528
+f32 gm_8017E528(int difficulty, u8 stage_slot)
+{
+    return (f32) lbl_803D7AC0[stage_slot + ((u8) difficulty * 5)].scale0_pct /
+           100.0F;
+}
 
-/// #gm_8017E578
+f32 gm_8017E578(int difficulty, u8 stage_slot)
+{
+    return (f32) lbl_803D7AC0[stage_slot + ((u8) difficulty * 5)].scale1_pct /
+           100.0F;
+}
 
 /// #gm_8017E5C8
 
-/// #gm_8017E5FC
+u8 gm_8017E5FC(int difficulty, u8 stage_slot, u8 arg2)
+{
+    return lbl_803D7AC0[stage_slot + ((u8) difficulty * 5)]
+        .pad_6[1 + arg2 * 3];
+}
 
-/// #gm_8017E630
+u8 gm_8017E630(u8 difficulty, u8 stage_slot, u8 arg2)
+{
+    return lbl_803D7AC0[stage_slot + (u8) difficulty * 5].pad_6[arg2 * 3 + 2];
+}
 
-/// #gm_8017E664
+f32 gm_8017E664(u8 difficulty, u8 stage_slot)
+{
+    return (f32) lbl_803D7AC0[stage_slot + (difficulty * 5)].scale0_pct /
+           100.0F;
+}
 
-/// #gm_8017E6B4
+f32 gm_8017E6B4(u8 difficulty, u8 stage_slot)
+{
+    return (f32) lbl_803D7AC0[stage_slot + (difficulty * 5)].scale1_pct /
+           100.0F;
+}
 
-/// #gm_8017E704
+u8 gm_8017E704(int difficulty, u8 stage_slot, u8 arg2)
+{
+    return lbl_803D7AC0[stage_slot + ((u8) difficulty * 5)]
+        .pad_6[0x0E + arg2 * 3];
+}
 
-/// #gm_8017E738
+u8 gm_8017E738(u8 difficulty, u8 stage_slot, u8 arg2)
+{
+    return lbl_803D7AC0[stage_slot + (difficulty * 5)].pad_6[0xF + arg2 * 3];
+}
 
-/// #gm_8017E76C
+u8 gm_8017E76C(u8 difficulty, u8 stage_slot, u8 arg2)
+{
+    return lbl_803D7AC0[stage_slot + (difficulty * 5)]
+        .pad_6[0x10 + (arg2 * 3)];
+}
 
 /// #gm_8017E7A0
 
@@ -727,27 +808,58 @@ UnkAllstarData* gm_8017EB30(void)
     return &lbl_80472CB0;
 }
 
-/// #gm_8017EB3C
+u8 gm_8017EB3C(u8 difficulty, u8 stage_slot)
+{
+    return lbl_803D85F0[stage_slot + (difficulty * 5)].stage_kind;
+}
 
-/// #gm_8017EB64
+u8 gm_8017EB64(u8 difficulty, u8 stage_slot, u8 arg2)
+{
+    return lbl_803D85F0[stage_slot + (difficulty * 5)].pad_6[arg2 * 3];
+}
 
-/// #gm_8017EB98
+u8 gm_8017EB98(u8 difficulty, u8 stage_slot, u8 arg2)
+{
+    return lbl_803D85F0[stage_slot + difficulty * 5].pad_6[arg2 * 3 + 1];
+}
 
-/// #gm_8017EBCC
+u8 gm_8017EBCC(u8 difficulty, u8 stage_slot, u8 arg2)
+{
+    return lbl_803D85F0[stage_slot + (difficulty * 5)].pad_6[arg2 * 3 + 2];
+}
 
-/// #gm_8017EC00
+f32 gm_8017EC00(u8 difficulty, u8 stage_slot)
+{
+    return (f32) lbl_803D85F0[stage_slot + (difficulty * 5)].scale2_pct /
+           100.0F;
+}
 
-/// #gm_8017EC50
+f32 gm_8017EC50(u8 difficulty, u8 stage_slot)
+{
+    return (f32) lbl_803D85F0[stage_slot + (difficulty * 5)].scale3_pct /
+           100.0F;
+}
 
-/// #gm_8017ECA0
+u8 gm_8017ECA0(u8 difficulty, u8 stage_slot, u8 arg2)
+{
+    return lbl_803D85F0[stage_slot + ((u8) difficulty * 5)].pad_14[arg2 * 3];
+}
 
 /// #gm_8017ECD4
 
 /// #gm_8017ED08
 
-/// #gm_8017ED3C
+f32 gm_8017ED3C(u8 difficulty, u8 stage_slot)
+{
+    return (f32) lbl_803D85F0[stage_slot + (difficulty * 5)].scale0_pct /
+           100.0F;
+}
 
-/// #gm_8017ED8C
+f32 gm_8017ED8C(u8 difficulty, u8 stage_slot)
+{
+    return (f32) lbl_803D85F0[stage_slot + (difficulty * 5)].scale1_pct /
+           100.0F;
+}
 
 /// #fn_8017EDDC
 

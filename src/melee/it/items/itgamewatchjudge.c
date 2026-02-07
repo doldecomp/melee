@@ -18,7 +18,7 @@ void it_802C7A84(Item_GObj* item_gobj)
     }
 }
 
-void it_2725_Logic77_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
+void itGameWatchJudge_Logic77_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }
@@ -33,10 +33,20 @@ void it_802C7AF0(Item_GObj* gobj)
     it_8026B73C(gobj);
 }
 
-void it_2725_Logic77_Destroyed(Item_GObj* gobj)
+void itGameWatchJudge_Logic77_Destroyed(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     if (ip->owner != NULL) {
         ftGw_SpecialS_ItemJudgementSetFlag(ip->owner);
+    }
+}
+
+void it_2725_Logic77_PickedUp(Item_GObj* item_gobj)
+{
+    Item* it = GET_ITEM(item_gobj);
+    it->xDB0_itcmd_var1 = 0;
+    it->xDAC_itcmd_var0 = 0;
+    if (it->owner != NULL) {
+        Item_80268E5C(item_gobj, 0, ITEM_ANIM_UPDATE);
     }
 }

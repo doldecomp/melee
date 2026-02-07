@@ -681,7 +681,7 @@ static int it_803F6E68[11] = { 0, 9, 9, 3, 9, 9, 6, 7, 8, 9, 10 };
 /// get the item state for the current fighter move, and set that. Then call
 /// Item_802694CC to do advance animation + script
 /// @param item_gobj
-void it_2725_Logic96_PickedUp(Item_GObj* item_gobj)
+void itFoxBlaster_Logic96_PickedUp(Item_GObj* item_gobj)
 {
     Item* item;
     enum_t ft_special_state = 9;
@@ -981,7 +981,7 @@ bool itFoxblaster_UnkMotion10_Coll(HSD_GObj* item_gobj)
 /// @brief Calls function it_8026B894
 /// @param item_gobj
 /// @param ref_gobj
-void it_2725_Logic96_EvtUnk(Item_GObj* item_gobj, HSD_GObj* ref_gobj)
+void itFoxBlaster_Logic96_EvtUnk(Item_GObj* item_gobj, HSD_GObj* ref_gobj)
 {
     // Remove all GObj interaction references from item
     // Returns whether or not the referenced_gobj was the #Item::owner.

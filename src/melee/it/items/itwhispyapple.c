@@ -314,7 +314,7 @@ void it_802EEB28(Item_GObj* gobj)
     ip->pos.z = 0.0f;
 }
 
-void it_2725_Logic18_EnteredAir(Item_GObj* gobj)
+void itWhispyApple_Logic18_EnteredAir(Item_GObj* gobj)
 {
     Item_80268E5C(gobj, 6, ITEM_ANIM_UPDATE);
 }

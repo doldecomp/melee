@@ -17,7 +17,13 @@
 
 void it_802D43AC(void) {}
 
-/// #it_802D43B0
+void it_802D43B0(Item_GObj* gobj, Item_GObj* ref_gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    it_8026B894(gobj, ref_gobj);
+    ip->xDD4_itemVar.hitodeman.xE64 = NULL;
+    ip->xDAC_itcmd_var0 = 1;
+}
 
 /// #it_802D43EC
 
@@ -112,7 +118,7 @@ bool it_802D4F28(Item_GObj* gobj)
     return it_8027AE34(gobj);
 }
 
-bool it_2725_Logic43_Absorbed(Item_GObj* arg0)
+bool itHitodeman_Logic43_Absorbed(Item_GObj* arg0)
 {
     return true;
 }
@@ -142,7 +148,21 @@ void it_802D4F78(Item_GObj* gobj)
     efSync_Spawn(0x46C, gobj, jobj, &f);
 }
 
-/// #it_802D4FFC
+bool it_802D4FFC(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    f32 timer;
+
+    timer = ip->xD44_lifeTimer - 1.0F;
+    ip->xD44_lifeTimer = timer;
+    if (timer <= 0.0F) {
+        return true;
+    }
+    if (ip->xDB4_itcmd_var2 != 0) {
+        return true;
+    }
+    return false;
+}
 
 void it_802D5044(Item_GObj* gobj) {}
 

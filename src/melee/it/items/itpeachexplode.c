@@ -46,7 +46,7 @@ Item_GObj* it_802BD158(Item_GObj* gobj, Vec3* pos, bool arg2, float dir)
     return NULL;
 }
 
-bool it_2725_Logic55_DmgDealt(Item_GObj* arg0)
+bool itPeachExplode_Logic55_DmgDealt(Item_GObj* arg0)
 {
     return false;
 }
@@ -75,7 +75,7 @@ bool itPeachexplode_UnkMotion1_Anim(Item_GObj* item_gobj)
     return it_802751D8(item_gobj);
 }
 
-void it_2725_Logic55_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
+void itPeachExplode_Logic55_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }

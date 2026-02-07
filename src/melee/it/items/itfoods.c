@@ -73,7 +73,7 @@ HSD_GObj* it_8028FAF4(Item_GObj* arg0, Vec3* arg1)
     return gobj;
 }
 
-void it_3F14_Logic18_Spawned(Item_GObj* arg0)
+void itFoods_Logic18_Spawned(Item_GObj* arg0)
 {
     Item* ip = GET_ITEM(arg0);
     itFoodsAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
@@ -132,7 +132,7 @@ bool itFoods_UnkMotion1_Coll(Item_GObj* gobj)
     return 0;
 }
 
-void it_3F14_Logic18_PickedUp(Item_GObj* gobj)
+void itFoods_Logic18_PickedUp(Item_GObj* gobj)
 {
     HSD_JObj* jobj = HSD_GObjGetHSDObj(gobj);
     HSD_JObj* child = HSD_JObjGetChild(jobj);
@@ -147,7 +147,7 @@ bool itFoods_UnkMotion2_Anim(Item_GObj* gobj)
 
 void itFoods_UnkMotion2_Phys(Item_GObj* gobj) {}
 
-void it_3F14_Logic18_Dropped(Item_GObj* gobj)
+void itFoods_Logic18_Dropped(Item_GObj* gobj)
 {
     Item_80268E5C((HSD_GObj*) gobj, 3, 6);
 }
@@ -170,7 +170,7 @@ bool itFoods_UnkMotion3_Coll(Item_GObj* gobj)
     return 0;
 }
 
-void it_3F14_Logic18_EvtUnk(Item_GObj* gobj, Item_GObj* arg1)
+void itFoods_Logic18_EvtUnk(Item_GObj* gobj, Item_GObj* arg1)
 {
     it_8026B894(gobj, (HSD_GObj*) arg1);
 }

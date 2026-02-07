@@ -30,6 +30,10 @@ typedef struct itClimbersIce_ItemVars {
     /* +0 */ Item_GObj* x0;
 } itClimbersIce_ItemVars;
 
+typedef struct itNessbat_ItemVars {
+    /* +0 ip+DD4 */ s32 x0;
+} itNessbat_ItemVars;
+
 typedef struct {
     /* x0 ip+DD4 */ f32 x0;
     /* x4 ip+DD8 */ HSD_GObj* x4;
@@ -470,6 +474,8 @@ typedef struct itPeachTurnip_ItemVars {
 typedef struct itPikachutJoltGround_ItemVars {
     /* +0 +DD4 */ char pad_0[0x8];
     /* +8 +DDC */ UNK_T unk_8;
+    /* +C +DE0 */ char pad_1[0x8];
+    /* +14 +DE8 */ Vec3 xDE8;
 } itPikachutJoltGround_ItemVars;
 
 typedef struct itPikachutJoltAir_ItemVars {
@@ -491,8 +497,11 @@ typedef struct itSamusGrapple_ItemVars {
     /* +0 +DD4 */ f32 x0;
     /* +4 +DD8 */ f32 x4;
     /* +8 +DDC */ HSD_GObj* x8;
-    /* +C +DE0 */ f32 xC;
-    /* +10 +DE4 */ UNK_RET (*unk_10)(UNK_PARAMS);
+    /* +C +DE0 */ HSD_JObj* xC;
+    /* +10 +DE4 */ void (*unk_10)(Item_GObj*);
+    /* +14 +DE8 */ u8 x14;
+    /* +15 +DE9 */ u8 x15;
+    /* +16 +DEA */ u8 x16;
 } itSamusGrapple_ItemVars;
 
 typedef struct itSeakNeedleThrown_ItemVars {
@@ -500,10 +509,18 @@ typedef struct itSeakNeedleThrown_ItemVars {
     /* +4 +DD8 */ f32 xDD8;
     /* +8 +DDC */ f32 xDDC;
     /* +C +DE0 */ f32 xDE0;
+    /* +10 +DE4 */ Vec3 xDE4;
 } itSeakNeedleThrown_ItemVars;
 
+struct itSeakChain_ItemVars_x0_t {
+    /*   +0 */ char pad_0[0x1D0];
+    /* +1D0 */ HSD_JObj* x1D0;
+    /* +1D4 */ HSD_JObj* x1D4;
+};
+
 typedef struct itSeakChain_ItemVars {
-    /* +0 +DD4 */ char pad_0[0x8];
+    /* +0 +DD4 */ struct itSeakChain_ItemVars_x0_t* x0;
+    /* +0 +DD8 */ UNK_T x4;
     /* +8 +DDC */ HSD_GObj* x8;
 } itSeakChain_ItemVars;
 

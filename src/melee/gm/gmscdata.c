@@ -412,9 +412,9 @@ MajorScene gm_803DACA4[] = {
     {
         1,
         MJ_CLASSIC,
-        gm_801B2F78_OnLoad,
+        gmClassic_OnLoad,
         NULL,
-        gm_801B34B8_OnInit,
+        gmClassic_OnInit,
         gm_803DDC58_MinorScenes,
     },
     {

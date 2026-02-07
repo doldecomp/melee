@@ -2,13 +2,37 @@
 
 #include <platform.h>
 
+#include "gr/ground.h"
+#include "gr/grzakogenerator.h"
+#include "lb/types.h"
+
+#include <baselib/random.h>
+
+static struct {
+    char pad[0x18];
+    bool x18;
+}* grPushOn_804D6AB8;
+
 void grPushOn_802182C4(bool arg) {}
 
 /// #grPushOn_802182C8
 
 /// #grPushOn_80218330
 
-/// #grPushOn_80218378
+void grPushOn_80218378(void)
+{
+    bool val;
+    grZakoGenerator_801CAE04(NULL);
+    val = grPushOn_804D6AB8->x18;
+    if (val) {
+        val = HSD_Randi(grPushOn_804D6AB8->x18);
+    } else {
+        val = false;
+    }
+    if (!val) {
+        grZakoGenerator_801CAEB0(Ground_801C5840(), Ground_801C5940());
+    }
+}
 
 bool grPushOn_802183DC(void)
 {
@@ -56,7 +80,17 @@ void grPushOn_80218ED0(Ground_GObj* arg) {}
 
 /// #grPushOn_80218FC0
 
-/// #fn_802190A0
+/// Ground collision callback for pushon stage elements.
+/// Activates push behavior when collision flags indicate contact (b1234 == 1).
+void fn_802190A0(Ground* gp, s32 joint_id, CollData* coll, s32 unk,
+                 mpLib_GroundEnum ground_enum)
+{
+    if (((*(u8*) &coll->x34_flags >> 3U) & 0xF) == 1 &&
+        (ground_enum - 1) <= 1U)
+    {
+        gp->u.map.xC4_b0 = true;
+    }
+}
 
 /// #grPushOn_802190D0
 

@@ -19,7 +19,7 @@
 /* 2D6840 */ bool it_802D6840(Item_GObj*);
 /* 2D6848 */ bool it_802D6848(Item_GObj*);
 /* 2D6850 */ void it_802D6850(Item_GObj*, Item_GObj*);
-/* 2D6870 */ void it_2725_Logic28_Spawned(Item_GObj*);
+/* 2D6870 */ void itMaril_Logic28_Spawned(Item_GObj*);
 /* 2D68FC */ void it_802D68FC(Item_GObj* gobj);
 /* 2D6978 */ bool itMaril_UnkMotion0_Anim(Item_GObj* gobj);
 /* 2D699C */ void itMaril_UnkMotion0_Phys(Item_GObj* gobj);

@@ -1,12 +1,16 @@
+#include "placeholder.h"
+
 #include <platform.h>
 
 #include "ef/eflib.h"
+#include "ft/chara/ftCommon/ftCo_Landing.h"
 #include "ft/fighter.h"
 
 #include "ft/forward.h"
 
 #include "ft/ft_081B.h"
 #include "ft/ft_0892.h"
+#include "ft/ftcliffcommon.h"
 #include "ft/ftcommon.h"
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
@@ -833,7 +837,23 @@ void ftPp_SpecialHiStart_0_Coll(Fighter_GObj* gobj)
         ftPp_SpecialHi_801217EC(gobj);
     }
 }
-/// #ftPp_SpecialAirHiStart_0_Coll
+void ftPp_SpecialAirHiStart_0_Coll(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    s32 facingDir;
+    if (fp->facing_dir < 0.0f) {
+        facingDir = -1;
+    } else {
+        facingDir = 1;
+    }
+    if (ft_CheckGroundAndLedge(gobj, facingDir)) {
+        ftPp_SpecialHi_8012184C(gobj);
+        return;
+    }
+    if (ftCliffCommon_80081298(gobj)) {
+        return;
+    }
+}
 
 void ftPp_SpecialHi_801217EC(Fighter_GObj* gobj)
 {
@@ -884,7 +904,26 @@ void ftPp_SpecialHiThrow_0_Coll(Fighter_GObj* gobj)
         ftPp_SpecialHi_80121CE0(gobj);
     }
 }
-/// #ftPp_SpecialAirHiThrow_0_Coll
+void ftPp_SpecialAirHiThrow_0_Coll(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    s32 facingDir;
+
+    if (fp->facing_dir < 0.0f) {
+        facingDir = -1;
+    } else {
+        facingDir = 1;
+    }
+
+    if (ft_CheckGroundAndLedge(gobj, facingDir)) {
+        ftPp_SpecialHi_80121D40(gobj);
+        return;
+    }
+
+    if (ftCliffCommon_80081298(gobj)) {
+        return;
+    }
+}
 
 void ftPp_SpecialHi_80121CE0(Fighter_GObj* gobj)
 {
@@ -938,7 +977,26 @@ void ftPp_SpecialHiStart_1_Coll(Fighter_GObj* gobj)
     }
 }
 
-/// #ftPp_SpecialAirHiStart_1_Coll
+void ftPp_SpecialAirHiStart_1_Coll(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    s32 facingDir;
+
+    if (fp->facing_dir < 0.0f) {
+        facingDir = -1;
+    } else {
+        facingDir = 1;
+    }
+
+    if (ft_CheckGroundAndLedge(gobj, facingDir)) {
+        ftPp_SpecialHi_80122038(gobj);
+        return;
+    }
+
+    if (ftCliffCommon_80081298(gobj)) {
+        return;
+    }
+}
 
 void ftPp_SpecialHi_80121FD8(Fighter_GObj* gobj)
 {
@@ -976,7 +1034,14 @@ void ftPp_SpecialHiThrow_1_Anim(Fighter_GObj* gobj)
         ft_8008A2BC(gobj);
     }
 }
-/// #ftPp_SpecialAirHiThrow_1_Anim
+void ftPp_SpecialAirHiThrow_1_Anim(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftIceClimberAttributes* da = fp->dat_attrs;
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        ftCo_80096900(gobj, 0, 1, false, da->x74, da->x78);
+    }
+}
 
 void ftPp_SpecialHiThrow_1_IASA(Fighter_GObj* gobj) {}
 
@@ -996,7 +1061,25 @@ void ftPp_SpecialHiThrow_1_Coll(Fighter_GObj* gobj)
     }
 }
 
-/// #ftPp_SpecialAirHiThrow_1_Coll
+void ftPp_SpecialAirHiThrow_1_Coll(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftIceClimberAttributes* da = fp->dat_attrs;
+    s32 cliffCatchDir;
+    PAD_STACK(4);
+    if (fp->facing_dir < 0.0f) {
+        cliffCatchDir = -1;
+    } else {
+        cliffCatchDir = 1;
+    }
+    if (ft_CheckGroundAndLedge(gobj, cliffCatchDir)) {
+        ftCo_LandingFallSpecial_Enter(gobj, false, da->x78);
+        return;
+    }
+    if (ftCliffCommon_80081298(gobj)) {
+        return;
+    }
+}
 
 void ftPp_SpecialHi_801222E8(Fighter_GObj* gobj)
 {
@@ -1016,7 +1099,16 @@ void ftPp_SpecialHi_80122380(Fighter_GObj* gobj)
     Fighter_ChangeMotionState(gobj, 0x164, 0, 0.0f, 1.0f, 0.0f, NULL);
 }
 
-/// #ftPp_SpecialHiThrow2_Anim
+void ftPp_SpecialHiThrow2_Anim(Fighter_GObj* gobj)
+{
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        ft_8008A2BC(gobj);
+    } else {
+        Fighter* fp = GET_FIGHTER(gobj);
+        ++fp->mv.pp.unk_80123954.x0;
+        ftPp_SpecialS_80120FE0(gobj);
+    }
+}
 
 /// #ftPp_SpecialAirHiThrow2_Anim
 

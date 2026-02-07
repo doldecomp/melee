@@ -8,6 +8,7 @@
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/itCommonItems.h"
 #include "it/item.h"
 
 /// #it_2725_Logic18_Spawned
@@ -83,7 +84,29 @@ void it_802D27B0(Item_GObj* gobj)
     ip->exited_hitlag = efLib_ResumeAll;
 }
 
-/// #itHouou_UnkMotion3_Anim
+bool itHouou_UnkMotion3_Anim(Item_GObj* gobj)
+{
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+    Item* ip = GET_ITEM(gobj);
+    HSD_JObj* child;
+
+    if (jobj == NULL) {
+        child = NULL;
+    } else {
+        child = jobj->child;
+    }
+
+    it_8027A160(child, ip);
+
+    if (!it_80272C6C(gobj)) {
+        Item* ip2 = GET_ITEM(gobj);
+        Item_80268E5C(gobj, 3, ITEM_ANIM_UPDATE);
+        ip2->entered_hitlag = efLib_PauseAll;
+        ip2->exited_hitlag = efLib_ResumeAll;
+    }
+
+    return false;
+}
 
 /// #itHouou_UnkMotion3_Phys
 
@@ -178,7 +201,19 @@ bool it_802D2D04(Item_GObj* gobj)
 
 /// #it_802D2D2C
 
-/// #it_2725_Logic42_Spawned
+void it_2725_Logic42_Spawned(Item_GObj* item_gobj)
+{
+    Item* item;
+    itHououAttr* attr;
+    PAD_STACK(8);
+
+    item = GET_ITEM((HSD_GObj*) item_gobj);
+    attr = item->xC4_article_data->x4_specialAttributes;
+    item->xD44_lifeTimer = attr->timer;
+    it_80274740(item_gobj);
+    it_802D2EF0(item_gobj);
+    it_8026B3A8(item_gobj);
+}
 
 void it_802D2ED0(Item_GObj* gobj, Item_GObj* ref_gobj)
 {

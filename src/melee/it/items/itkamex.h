@@ -31,9 +31,9 @@
 /* 2CAAE8 */ bool itKamex_UnkMotion3_Coll(Item_GObj* gobj);
 /* 2CAB10 */ UNK_RET it_802CAB10(UNK_PARAMS);
 /* 2CACD0 */ void it_2725_Logic31_Spawned(Item_GObj*);
-/* 2CADC0 */ bool it_2725_Logic31_HitShield(Item_GObj*);
-/* 2CADC8 */ bool it_2725_Logic31_DmgDealt(Item_GObj*);
-/* 2CADD0 */ void it_2725_Logic31_EvtUnk(Item_GObj*, Item_GObj*);
+/* 2CADC0 */ bool itKamex_Logic31_HitShield(Item_GObj*);
+/* 2CADC8 */ bool itKamex_Logic31_DmgDealt(Item_GObj*);
+/* 2CADD0 */ void itKamex_Logic31_EvtUnk(Item_GObj*, Item_GObj*);
 /* 2CADF0 */ void it_802CADF0(Item_GObj*);
 /* 2CAE60 */ bool it_802CAE60(Item_GObj* gobj);
 /* 2CAE94 */ void it_802CAE94(Item_GObj* gobj);

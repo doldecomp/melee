@@ -14,7 +14,7 @@ void it_802B2890(Item_GObj* gobj)
     Item_8026A8EC(gobj);
 }
 
-void it_2725_Logic43_PickedUp(Item_GObj* gobj)
+void itYoshiEggThrow_Logic43_PickedUp(Item_GObj* gobj)
 {
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
 }

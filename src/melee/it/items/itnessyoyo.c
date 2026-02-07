@@ -49,7 +49,7 @@ void itNessyoyo_UnkMotion0_Phys(Item_GObj* gobj)
 
 /// #it_802BFAFC
 
-void it_2725_Logic59_PickedUp(Item_GObj* gobj)
+void itNessYoyo_Logic59_PickedUp(Item_GObj* gobj)
 {
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
 }

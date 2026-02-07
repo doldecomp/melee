@@ -9,10 +9,10 @@
 #include <melee/lb/lbbgflash.h>
 #include <melee/lb/lbdvd.h>
 
-extern CSSData gm_80470708;
-extern DebugGameOverData gm_80470850;
-extern MatchExitInfo gm_8047086C;
-extern StartMeleeData gm_80472AF8;
+extern CSSData gmClassic_80470708;
+extern DebugGameOverData gmClassic_80470850;
+extern MatchExitInfo gmClassic_8047086C;
+extern StartMeleeData gmClassic_80472AF8;
 
 MinorScene gm_803DE930_MinorScenes[] = {
     {
@@ -23,8 +23,8 @@ MinorScene gm_803DE930_MinorScenes[] = {
         gm_801B59AC,
         {
             MN_VS,
-            &gm_80472AF8,
-            &gm_8047086C,
+            &gmClassic_80472AF8,
+            &gmClassic_8047086C,
         },
     },
     {
@@ -35,8 +35,8 @@ MinorScene gm_803DE930_MinorScenes[] = {
         gm_801B5E7C,
         {
             MN_VS,
-            &gm_80472AF8,
-            &gm_8047086C,
+            &gmClassic_80472AF8,
+            &gmClassic_8047086C,
         },
     },
     {
@@ -47,8 +47,8 @@ MinorScene gm_803DE930_MinorScenes[] = {
         gm_801B59AC,
         {
             MN_VS,
-            &gm_80472AF8,
-            &gm_8047086C,
+            &gmClassic_80472AF8,
+            &gmClassic_8047086C,
         },
     },
     {
@@ -59,8 +59,8 @@ MinorScene gm_803DE930_MinorScenes[] = {
         gm_801B5E7C,
         {
             MN_VS,
-            &gm_80472AF8,
-            &gm_8047086C,
+            &gmClassic_80472AF8,
+            &gmClassic_8047086C,
         },
     },
     {
@@ -71,8 +71,8 @@ MinorScene gm_803DE930_MinorScenes[] = {
         gm_801B59AC,
         {
             MN_VS,
-            &gm_80472AF8,
-            &gm_8047086C,
+            &gmClassic_80472AF8,
+            &gmClassic_8047086C,
         },
     },
     {
@@ -83,8 +83,8 @@ MinorScene gm_803DE930_MinorScenes[] = {
         gm_801B5E7C,
         {
             MN_VS,
-            &gm_80472AF8,
-            &gm_8047086C,
+            &gmClassic_80472AF8,
+            &gmClassic_8047086C,
         },
     },
     {
@@ -95,8 +95,8 @@ MinorScene gm_803DE930_MinorScenes[] = {
         gm_801B59AC,
         {
             MN_VS,
-            &gm_80472AF8,
-            &gm_8047086C,
+            &gmClassic_80472AF8,
+            &gmClassic_8047086C,
         },
     },
     {
@@ -107,8 +107,8 @@ MinorScene gm_803DE930_MinorScenes[] = {
         gm_801B5E7C,
         {
             MN_VS,
-            &gm_80472AF8,
-            &gm_8047086C,
+            &gmClassic_80472AF8,
+            &gmClassic_8047086C,
         },
     },
     {
@@ -119,8 +119,8 @@ MinorScene gm_803DE930_MinorScenes[] = {
         gm_801B59AC,
         {
             MN_VS,
-            &gm_80472AF8,
-            &gm_8047086C,
+            &gmClassic_80472AF8,
+            &gmClassic_8047086C,
         },
     },
     {
@@ -131,8 +131,8 @@ MinorScene gm_803DE930_MinorScenes[] = {
         gm_801B5E7C,
         {
             MN_VS,
-            &gm_80472AF8,
-            &gm_8047086C,
+            &gmClassic_80472AF8,
+            &gmClassic_8047086C,
         },
     },
     {
@@ -143,8 +143,8 @@ MinorScene gm_803DE930_MinorScenes[] = {
         gm_801B59AC,
         {
             MN_VS,
-            &gm_80472AF8,
-            &gm_8047086C,
+            &gmClassic_80472AF8,
+            &gmClassic_8047086C,
         },
     },
     {
@@ -155,8 +155,8 @@ MinorScene gm_803DE930_MinorScenes[] = {
         gm_801B5E7C,
         {
             MN_VS,
-            &gm_80472AF8,
-            &gm_8047086C,
+            &gmClassic_80472AF8,
+            &gmClassic_8047086C,
         },
     },
     {
@@ -167,8 +167,8 @@ MinorScene gm_803DE930_MinorScenes[] = {
         gm_801B59AC,
         {
             MN_VS,
-            &gm_80472AF8,
-            &gm_8047086C,
+            &gmClassic_80472AF8,
+            &gmClassic_8047086C,
         },
     },
     {
@@ -179,8 +179,8 @@ MinorScene gm_803DE930_MinorScenes[] = {
         gm_801B5E7C,
         {
             MN_VS,
-            &gm_80472AF8,
-            &gm_8047086C,
+            &gmClassic_80472AF8,
+            &gmClassic_8047086C,
         },
     },
     {
@@ -191,8 +191,8 @@ MinorScene gm_803DE930_MinorScenes[] = {
         gm_801B59AC,
         {
             MN_VS,
-            &gm_80472AF8,
-            &gm_8047086C,
+            &gmClassic_80472AF8,
+            &gmClassic_8047086C,
         },
     },
     {
@@ -203,8 +203,8 @@ MinorScene gm_803DE930_MinorScenes[] = {
         gm_801B5E7C,
         {
             MN_VS,
-            &gm_80472AF8,
-            &gm_8047086C,
+            &gmClassic_80472AF8,
+            &gmClassic_8047086C,
         },
     },
     {
@@ -215,8 +215,8 @@ MinorScene gm_803DE930_MinorScenes[] = {
         gm_801B59AC,
         {
             MN_VS,
-            &gm_80472AF8,
-            &gm_8047086C,
+            &gmClassic_80472AF8,
+            &gmClassic_8047086C,
         },
     },
     {
@@ -227,8 +227,8 @@ MinorScene gm_803DE930_MinorScenes[] = {
         gm_801B5E7C,
         {
             MN_VS,
-            &gm_80472AF8,
-            &gm_8047086C,
+            &gmClassic_80472AF8,
+            &gmClassic_8047086C,
         },
     },
     {
@@ -239,8 +239,8 @@ MinorScene gm_803DE930_MinorScenes[] = {
         gm_801B59AC,
         {
             MN_VS,
-            &gm_80472AF8,
-            &gm_8047086C,
+            &gmClassic_80472AF8,
+            &gmClassic_8047086C,
         },
     },
     {
@@ -251,8 +251,8 @@ MinorScene gm_803DE930_MinorScenes[] = {
         gm_801B5E7C,
         {
             MN_VS,
-            &gm_80472AF8,
-            &gm_8047086C,
+            &gmClassic_80472AF8,
+            &gmClassic_8047086C,
         },
     },
     {
@@ -263,8 +263,8 @@ MinorScene gm_803DE930_MinorScenes[] = {
         gm_801B59AC,
         {
             MN_VS,
-            &gm_80472AF8,
-            &gm_8047086C,
+            &gmClassic_80472AF8,
+            &gmClassic_8047086C,
         },
     },
     {
@@ -275,8 +275,8 @@ MinorScene gm_803DE930_MinorScenes[] = {
         gm_801B5E7C,
         {
             MN_VS,
-            &gm_80472AF8,
-            &gm_8047086C,
+            &gmClassic_80472AF8,
+            &gmClassic_8047086C,
         },
     },
     {
@@ -287,8 +287,8 @@ MinorScene gm_803DE930_MinorScenes[] = {
         gm_801B59AC,
         {
             MN_VS,
-            &gm_80472AF8,
-            &gm_8047086C,
+            &gmClassic_80472AF8,
+            &gmClassic_8047086C,
         },
     },
     {
@@ -299,8 +299,8 @@ MinorScene gm_803DE930_MinorScenes[] = {
         gm_801B5E7C,
         {
             MN_VS,
-            &gm_80472AF8,
-            &gm_8047086C,
+            &gmClassic_80472AF8,
+            &gmClassic_8047086C,
         },
     },
     {
@@ -311,8 +311,8 @@ MinorScene gm_803DE930_MinorScenes[] = {
         gm_801B59AC,
         {
             MN_VS,
-            &gm_80472AF8,
-            &gm_8047086C,
+            &gmClassic_80472AF8,
+            &gmClassic_8047086C,
         },
     },
     {
@@ -335,8 +335,8 @@ MinorScene gm_803DE930_MinorScenes[] = {
         gm_801B5EE4,
         {
             MN_GAMEOVER,
-            &gm_80470850,
-            &gm_80470850,
+            &gmClassic_80470850,
+            &gmClassic_80470850,
         },
     },
     {
@@ -347,8 +347,8 @@ MinorScene gm_803DE930_MinorScenes[] = {
         gm_801B5FB4,
         {
             MN_CSS,
-            &gm_80470708,
-            &gm_80470708,
+            &gmClassic_80470708,
+            &gmClassic_80470708,
         },
     },
     {

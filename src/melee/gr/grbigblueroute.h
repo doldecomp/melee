@@ -14,6 +14,29 @@ struct grBigBlueRoute_8020DA9C_t {
     /* +8 */ int x8;
 };
 
+typedef struct {
+    u8 b0 : 1;
+    u8 b1 : 1;
+    u8 b2_5 : 4;
+    u8 b6 : 1;
+    u8 b7 : 1;
+} RouteEntryFlags;
+
+typedef struct {
+    RouteEntryFlags flags;
+    u8 pad_1[3];
+    f32 x4;
+    f32 x8;
+    f32 xC;
+    f32 x10;
+    f32 x14;
+    f32 x18;
+    f32 x1C;
+    f32 x20;
+    u8 pad_24[4];
+    void* x28;
+} RouteEntry;
+
 /* 20B864 */ void grBigBlueRoute_8020B864(bool);
 /* 20B89C */ void grBigBlueRoute_8020B89C(void);
 /* 20B920 */ void grBigBlueRoute_8020B920(void);
@@ -41,13 +64,13 @@ struct grBigBlueRoute_8020DA9C_t {
 /* 20C1D4 */ bool grBigBlueRoute_8020C1D4(Ground_GObj*);
 /* 20C1DC */ void grBigBlueRoute_8020C1DC(Ground_GObj*);
 /* 20C210 */ void grBigBlueRoute_8020C210(Ground_GObj*);
-/* 20C238 */ UNK_RET grBigBlueRoute_8020C238(UNK_PARAMS);
-/* 20C530 */ UNK_RET grBigBlueRoute_8020C530(UNK_PARAMS);
-/* 20C85C */ UNK_RET grBigBlueRoute_8020C85C(UNK_PARAMS);
+/* 20C238 */ void grBigBlueRoute_8020C238(Ground_GObj*);
+/* 20C530 */ s32 grBigBlueRoute_8020C530(Ground_GObj*);
+/* 20C85C */ void grBigBlueRoute_8020C85C(Ground_GObj*);
 /* 20CD20 */ UNK_RET grBigBlueRoute_8020CD20(Ground_GObj*);
 /* 20DA9C */ int grBigBlueRoute_8020DA9C(struct grBigBlueRoute_8020DA9C_t*);
 /* 20DAB4 */ void grBigBlueRoute_8020DAB4(HSD_JObj**, float, int);
-/* 20DD64 */ UNK_RET grBigBlueRoute_8020DD64(UNK_PARAMS);
+/* 20DD64 */ void grBigBlueRoute_8020DD64(Vec3*);
 /* 20DE48 */ DynamicModelDesc* grBigBlueRoute_8020DE48(void);
 /* 20DEAC */ UNK_RET fn_8020DEAC(UNK_PARAMS);
 /* 20DED4 */ void grBigBlueRoute_8020DED4(Point3d*);

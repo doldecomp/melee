@@ -103,7 +103,7 @@ Item_GObj* it_802C3BAC(Item_GObj* gobj, Vec* vec, float facing_dir, float arg3)
     return n;
 }
 
-void it_2725_Logic65_Destroyed(Item_GObj* gobj)
+void itZeldaDinFire_Logic65_Destroyed(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     it_802725D4(gobj);
@@ -303,7 +303,7 @@ bool itZeldadinfire_UnkMotion1_Coll(Item_GObj* gobj)
     return false;
 }
 
-bool it_2725_Logic65_Reflected(Item_GObj* gobj)
+bool itZeldaDinFire_Logic65_Reflected(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
@@ -316,17 +316,17 @@ bool it_2725_Logic65_Reflected(Item_GObj* gobj)
     return false;
 }
 
-bool it_2725_Logic65_Clanked(Item_GObj* gobj)
+bool itZeldaDinFire_Logic65_Clanked(Item_GObj* gobj)
 {
     return true;
 }
 
-bool it_2725_Logic65_Absorbed(Item_GObj* gobj)
+bool itZeldaDinFire_Logic65_Absorbed(Item_GObj* gobj)
 {
     return true;
 }
 
-void it_2725_Logic65_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
+void itZeldaDinFire_Logic65_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }

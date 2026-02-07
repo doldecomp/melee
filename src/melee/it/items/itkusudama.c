@@ -39,7 +39,7 @@ HSD_GObj* it_802896CC(Vec3* arg0)
     return gobj;
 }
 
-void it_3F14_Logic4_Spawned(Item_GObj* gobj)
+void itKusudama_Logic4_Spawned(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     ip->xDCE_flag.b7 = 0;
@@ -438,7 +438,7 @@ bool itKusudama_UnkMotion3_Coll(Item_GObj* gobj)
     return false;
 }
 
-void it_3F14_Logic4_PickedUp(Item_GObj* gobj)
+void itKusudama_Logic4_PickedUp(Item_GObj* gobj)
 {
     Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
 }
@@ -450,7 +450,7 @@ bool itKusudama_UnkMotion4_Anim(Item_GObj* gobj)
 
 void itKusudama_UnkMotion4_Phys(Item_GObj* gobj) {}
 
-void it_3F14_Logic4_Thrown(Item_GObj* gobj)
+void itKusudama_Logic4_Thrown(Item_GObj* gobj)
 {
     it_8026B3A8(gobj);
     Item_80268E5C(gobj, 5, ITEM_ANIM_UPDATE | ITEM_DROP_UPDATE);
@@ -495,7 +495,7 @@ bool itKusudama_UnkMotion5_Coll(Item_GObj* gobj)
     return false;
 }
 
-void it_3F14_Logic4_Dropped(Item_GObj* gobj)
+void itKusudama_Logic4_Dropped(Item_GObj* gobj)
 {
     it_8026B3A8(gobj);
     Item_80268E5C(gobj, 6, ITEM_ANIM_UPDATE | ITEM_DROP_UPDATE);
@@ -612,7 +612,7 @@ bool itKusudama_UnkMotion8_Coll(Item_GObj* gobj)
     return false;
 }
 
-static inline void it_3F14_Logic4_DmgDealt_inline(Item_GObj* gobj)
+static inline void itKusudama_Logic4_DmgDealt_inline(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itKusudamaAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
@@ -623,52 +623,52 @@ static inline void it_3F14_Logic4_DmgDealt_inline(Item_GObj* gobj)
     }
 }
 
-bool it_3F14_Logic4_DmgDealt(Item_GObj* gobj)
+bool itKusudama_Logic4_DmgDealt(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     if (!ip->xDD4_itemVar.kusudama.x0) {
-        it_3F14_Logic4_DmgDealt_inline(gobj);
+        itKusudama_Logic4_DmgDealt_inline(gobj);
     }
     return false;
 }
 
-static inline void it_3F14_Logic4_Clanked_inline(Item_GObj* gobj)
+static inline void itKusudama_Logic4_Clanked_inline(Item_GObj* gobj)
 {
     it_80289B50(gobj, 0);
 }
 
-bool it_3F14_Logic4_Clanked(Item_GObj* gobj)
+bool itKusudama_Logic4_Clanked(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     if (!ip->xDD4_itemVar.kusudama.x0) {
-        it_3F14_Logic4_Clanked_inline(gobj);
+        itKusudama_Logic4_Clanked_inline(gobj);
     }
     return false;
 }
 
-bool it_3F14_Logic4_HitShield(Item_GObj* gobj)
+bool itKusudama_Logic4_HitShield(Item_GObj* gobj)
 {
-    return it_3F14_Logic4_Clanked(gobj);
+    return itKusudama_Logic4_Clanked(gobj);
 }
 
-bool it_3F14_Logic4_Reflected(Item_GObj* gobj)
+bool itKusudama_Logic4_Reflected(Item_GObj* gobj)
 {
-    return it_3F14_Logic4_Clanked(gobj);
+    return itKusudama_Logic4_Clanked(gobj);
 }
 
-bool it_3F14_Logic4_DmgReceived(Item_GObj* gobj)
+bool itKusudama_Logic4_DmgReceived(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itKusudamaAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
     if (!ip->xDD4_itemVar.kusudama.x0) {
         if (ip->xC9C >= attr->x20) {
-            it_3F14_Logic4_DmgDealt_inline(gobj);
+            itKusudama_Logic4_DmgDealt_inline(gobj);
         }
     }
     return false;
 }
 
-void it_3F14_Logic4_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
+void itKusudama_Logic4_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }

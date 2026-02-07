@@ -13,6 +13,7 @@ struct HSD_GObjProc {
     /* 0x0D */ u8 flags_1 : 1;
     /* 0x0D */ u8 flags_2 : 1;
     /* 0x0D */ u8 flags_3 : 2;
+    /* 0x0D */ u8 flags_4 : 2;
     /* 0x10 */ HSD_GObj* gobj; // owner
     /* 0x14 */ HSD_GObjEvent on_invoke;
 };

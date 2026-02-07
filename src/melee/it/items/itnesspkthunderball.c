@@ -3,6 +3,19 @@
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
+#include "lb/lbvector.h"
+#include "MSL/math.h"
+#include "MSL/trigf.h"
+
+static inline void normalizeAngle(f32* angle)
+{
+    while (*angle < 0.0F) {
+        *angle += 2 * M_PI;
+    }
+    while (*angle > 2 * M_PI) {
+        *angle -= 2 * M_PI;
+    }
+}
 
 /// #it_802AB3F0
 
@@ -57,7 +70,7 @@ HSD_GObj* it_802AB568(Item_GObj* gobj)
 
 /// #itNesspkthunderball_UnkMotion0_Coll
 
-bool it_2725_Logic26_DmgDealt(Item_GObj* gobj)
+bool itNessPKThunderball_Logic26_DmgDealt(Item_GObj* gobj)
 {
     it_802AB90C(gobj);
     return true;
@@ -77,7 +90,16 @@ bool it_802AC338(Item_GObj* gobj)
     return true;
 }
 
-/// #it_802AC35C
+bool it_802AC35C(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    PAD_STACK(16);
+    lbVector_Mirror(&ip->x40_vel, &ip->xC58);
+    ip->x40_vel.z = 0.0f;
+    ip->xDD4_itemVar.pkthunder.xEAC = atan2f(ip->x40_vel.y, ip->x40_vel.x);
+    normalizeAngle(&ip->xDD4_itemVar.pkthunder.xEAC);
+    return false;
+}
 
 bool it_802AC3F8(Item_GObj* gobj)
 {

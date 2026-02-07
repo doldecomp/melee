@@ -20,7 +20,7 @@ bool itClinkmilk_UnkMotion1_Coll(Item_GObj* gobj)
     return false;
 }
 
-void it_2725_Logic80_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
+void itCLinkMilk_Logic80_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }

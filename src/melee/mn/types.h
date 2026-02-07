@@ -415,6 +415,24 @@ struct AnimLoopSettings {
     /* +08 */ f32 loop_frame; ///< if this is -0.1f, dont loop
 };
 
+/// User data for VS Records diagram screen (mnDiagram)
+struct Diagram {
+    /* 0x00 */ u8 saved_menu; ///< Saved menu ID on entry
+    /* 0x01 */ u8 pad_1;
+    /* 0x02 */ u16 saved_selection; ///< Saved hovered selection on entry
+    /* 0x04 */ u8 anim_state;       ///< 0 = idle, 1 = intro anim playing
+    /* 0x05 */ u8 pad_5[3];
+    /* 0x08 */ HSD_JObj* jobjs[13]; ///< JObj references, filled by lb_80011E24
+    /* 0x3C */ u16
+        fighter_cursor_pos;          ///< Fighter mode cursor (row << 8 | col)
+    /* 0x3E */ u16 name_cursor_pos;  ///< Name mode cursor (row << 8 | col)
+    /* 0x40 */ HSD_GObj* popup_gobj; ///< Popup window GObj (or NULL)
+    /* 0x44 */ u8 is_name_mode;      ///< 0 = fighter mode, 1 = name mode
+    /* 0x45 */ u8 pad_45[3];
+    /* 0x48 */ HSD_Text* col_header_text; ///< Column header text object
+    /* 0x4C */ HSD_Text* row_header_text; ///< Row header text object
+};
+
 struct MenuKindData {
     AnimLoopSettings* anim_loop;
     float start_frame;
@@ -422,5 +440,86 @@ struct MenuKindData {
     u8 selection_count;       ///< number of options/cursors in the menu
     void (*think)(HSD_GObj*);
 };
+
+/// User data for VS Records page 2 (character details screen)
+/// Total size: 0xC8 bytes
+struct Diagram2 {
+    /* 0x00 */ u8 saved_menu; ///< Saved menu ID on entry
+    /* 0x01 */ u8 pad_1;
+    /* 0x02 */ u16 saved_selection; ///< Saved hovered selection on entry
+    /* 0x04 */ u8 anim_state;       ///< 0 = idle, 1 = intro anim playing
+    /* 0x05 */ u8 pad_5[3];
+    /* 0x08 */ HSD_JObj* x8;
+    /* 0x0C */ HSD_JObj* xC;
+    /* 0x10 */ HSD_JObj* x10;
+    /* 0x14 */ HSD_JObj* fighter_mode_header; ///< shown in fighter mode
+    /* 0x18 */ HSD_JObj* x18;
+    /* 0x1C */ HSD_JObj* x1C;
+    /* 0x20 */ HSD_JObj* name_mode_header; ///< shown in name mode
+    /* 0x24 */ HSD_JObj* x24;
+    /* 0x28 */ HSD_JObj* icon_parent;   ///< parent for character icons
+    /* 0x2C */ HSD_JObj* row0_ref;      ///< row 0 position reference
+    /* 0x30 */ HSD_JObj* row1_ref;      ///< row 1 position reference
+    /* 0x34 */ HSD_JObj* down_arrow;    ///< hidden when at bottom
+    /* 0x38 */ HSD_JObj* up_arrow;      ///< hidden when scroll_offset == 0
+    /* 0x3C */ HSD_JObj* left_arrow;    ///< hidden at first selection
+    /* 0x40 */ HSD_JObj* right_arrow;   ///< hidden at last selection
+    /* 0x44 */ u16 scroll_offset;       ///< current scroll position
+    /* 0x46 */ u8 selected_fighter_idx; ///< fighter mode selection
+    /* 0x47 */ u8 selected_name_idx;    ///< name mode selection
+    /* 0x48 */ u8 is_name_mode;         ///< 0 = fighter, 1 = name mode
+    /* 0x49 */ u8 pad_49[3];
+    /* 0x4C */ HSD_Text* row_labels[10]; ///< stat category label text
+    /* 0x74 */ HSD_Text* row_values[10]; ///< stat value text
+    /* 0x9C */ HSD_Text* row_icons[10];  ///< optional stat icons
+    /* 0xC4 */ HSD_Text* header_text;    ///< entity name header
+};
+
+/// VS Records stat types for mnDiagram2 (page 2 of VS Records menu).
+/// Fighter mode shows stats 0x00-0x14 (21 types).
+/// Name mode shows stats 0x00-0x17 (24 types, including character icon stats).
+typedef enum VSRecordsStatType {
+    /* 0x00 */ VSSTAT_TOTAL_KOS,      ///< Total KOs across all opponents
+    /* 0x01 */ VSSTAT_TOTAL_FALLS,    ///< Total falls (deaths)
+    /* 0x02 */ VSSTAT_SD_COUNT,       ///< Self-destructs (FD+0x34 / ND+0xF0)
+    /* 0x03 */ VSSTAT_HIT_PERCENTAGE, ///< Attack accuracy % (calculated)
+    /* 0x04 */ VSSTAT_DAMAGE_DEALT, ///< Total damage dealt (FD+0x40 / ND+0xFC)
+    /* 0x05 */ VSSTAT_DAMAGE_TAKEN, ///< Total damage received (FD+0x44 /
+                                    ///< ND+0x100)
+    /* 0x06 */ VSSTAT_DAMAGE_RECOVERED, ///< Damage healed (FD+0x48 / ND+0x104)
+    /* 0x07 */ VSSTAT_PEAK_DAMAGE, ///< Highest % survived (FD+0x4C / ND+0x108)
+    /* 0x08 */ VSSTAT_MATCH_COUNT, ///< Total matches played (FD+0x4E /
+                                   ///< ND+0x10A)
+    /* 0x09 */ VSSTAT_VICTORIES,   ///< Total wins (FD+0x50 / ND+0x10C)
+    /* 0x0A */ VSSTAT_LOSSES,      ///< Total losses (FD+0x52 / ND+0x10E)
+    /* 0x0B */ VSSTAT_PLAY_TIME,   ///< Total play time in frames (FD+0x54 /
+                                   ///< ND+0x110)
+    /* 0x0C */ VSSTAT_PLAY_PERCENTAGE, ///< % of total VS play time
+                                       ///< (calculated)
+    /* 0x0D */ VSSTAT_AVG_PLAYERS,     ///< Average player count (calculated)
+    /* 0x0E */ VSSTAT_WALK_DISTANCE,   ///< Distance walked in ft (FD+0x5C /
+                                       ///< ND+0x118)
+    /* 0x0F */ VSSTAT_RUN_DISTANCE,    ///< Distance run in ft (FD+0x60 /
+                                       ///< ND+0x11C)
+    /* 0x10 */ VSSTAT_FALL_DISTANCE,   ///< Distance fallen in ft (FD+0x64 /
+                                       ///< ND+0x120)
+    /* 0x11 */ VSSTAT_PEAK_HEIGHT,     ///< Max height reached in ft (FD+0x68 /
+                                       ///< ND+0x124)
+    /* 0x12 */ VSSTAT_COINS_COLLECTED, ///< Coins picked up (FD+0x6C /
+                                       ///< ND+0x128)
+    /* 0x13 */ VSSTAT_COINS_SWIPED, ///< Coins stolen from opponents (FD+0x70 /
+                                    ///< ND+0x12C)
+    /* 0x14 */ VSSTAT_COINS_LOST,   ///< Coins lost to opponents (FD+0x74 /
+                                    ///< ND+0x130)
+    /* 0x15 */ VSSTAT_MOST_PLAYED,  ///< Most played fighter (Name mode only,
+                                    ///< icon)
+    /* 0x16 */ VSSTAT_SECOND_PLAYED, ///< 2nd most played fighter (Name mode
+                                     ///< only, icon)
+    /* 0x17 */ VSSTAT_LEAST_PLAYED,  ///< Least played fighter (Name mode only,
+                                     ///< icon)
+
+    VSSTAT_COUNT_FIGHTER = 0x15, ///< Number of stats in fighter mode
+    VSSTAT_COUNT_NAME = 0x18,    ///< Number of stats in name mode
+} VSRecordsStatType;
 
 #endif

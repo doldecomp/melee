@@ -379,7 +379,7 @@ bool itOctarock_UnkMotion1_Coll(Item_GObj* gobj)
     return it_8027C794(gobj);
 }
 
-void it_2725_Logic2_PickedUp(Item_GObj* gobj)
+void itOctarock_Logic2_PickedUp(Item_GObj* gobj)
 {
     Item_80268E5C(gobj, 5, ITEM_ANIM_UPDATE);
 }
@@ -395,13 +395,13 @@ bool itOctarock_UnkMotion5_Anim(Item_GObj* gobj)
 
 void itOctarock_UnkMotion5_Phys(Item_GObj* gobj) {}
 
-void it_2725_Logic2_Dropped(Item_GObj* gobj)
+void itOctarock_Logic2_Dropped(Item_GObj* gobj)
 {
     it_8027CBA4(gobj);
     it_802E4DB4(gobj);
 }
 
-void it_2725_Logic2_Thrown(Item_GObj* gobj)
+void itOctarock_Logic2_Thrown(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     it_8027CB3C(gobj);

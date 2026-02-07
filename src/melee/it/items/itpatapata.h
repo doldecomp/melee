@@ -10,7 +10,7 @@
 /* 2E06B4 */ bool itPatapata_UnkMotion1_Anim(Item_GObj* gobj);
 /* 2E06BC */ void itPatapata_UnkMotion1_Phys(Item_GObj* gobj);
 /* 2E06F8 */ bool itPatapata_UnkMotion1_Coll(Item_GObj* gobj);
-/* 2E0734 */ UNK_RET it_802E0734(UNK_PARAMS);
+/* 2E0734 */ void it_802E0734(Item_GObj*);
 /* 2E0974 */ bool itPatapata_UnkMotion2_Anim(Item_GObj* gobj);
 /* 2E09BC */ void itPatapata_UnkMotion3_Phys(Item_GObj* gobj);
 /* 2E0B78 */ bool itPatapata_UnkMotion3_Coll(Item_GObj* gobj);
@@ -18,7 +18,7 @@
 /* 2E0E10 */ bool itPatapata_UnkMotion3_Anim(Item_GObj* gobj);
 /* 2E0EE0 */ bool it_2725_Logic4_DmgReceived(Item_GObj*);
 /* 2E0F1C */ bool it_802E0F1C(Item_GObj*);
-/* 2E0F70 */ void it_2725_Logic4_PickedUp(Item_GObj*);
+/* 2E0F70 */ void itPatapata_Logic4_PickedUp(Item_GObj*);
 /* 2E0F98 */ bool itPatapata_UnkMotion5_Anim(Item_GObj* gobj);
 /* 2E0FE0 */ void itPatapata_UnkMotion5_Phys(Item_GObj* gobj);
 /* 2E0FE4 */ void it_2725_Logic4_Dropped(Item_GObj*);

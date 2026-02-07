@@ -15,7 +15,7 @@ typedef struct itOldkuriAttributes {
     f32 x8;
 } itOldkuriAttributes;
 
-void it_2725_Logic29_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
+void itOldKuri_Logic29_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }
@@ -89,7 +89,7 @@ void itOldkuri_UnkMotion4_Phys(Item_GObj* gobj)
 
 /// #itOldkuri_UnkMotion4_Coll
 
-void it_2725_Logic0_PickedUp(Item_GObj* gobj)
+void itOldKuri_Logic0_PickedUp(Item_GObj* gobj)
 {
     it_80275474(gobj);
     it_80274740(gobj);
@@ -149,9 +149,22 @@ bool itOldkuri_UnkMotion9_Coll(Item_GObj* gobj)
 
 /// #it_802D8098
 
-/// #it_802D813C
+void it_802D813C(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    ip->x40_vel.x = ip->x40_vel.y = ip->x40_vel.z = 0.0F;
+    it_8027C0A8(gobj, 0.0F, 0.0F);
+    Item_80268E5C(gobj, 7, 2);
+}
 
-/// #itOldkuri_UnkMotion7_Anim
+bool itOldkuri_UnkMotion7_Anim(Item_GObj* gobj)
+{
+    if (it_80272C6C(gobj) == 0) {
+        it_8027CC88(gobj);
+        return true;
+    }
+    return false;
+}
 
 void itOldkuri_UnkMotion7_Phys(Item_GObj* gobj) {}
 

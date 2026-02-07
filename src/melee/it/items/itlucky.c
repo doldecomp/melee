@@ -350,7 +350,7 @@ Item_GObj* it_802D5710(Item_GObj* gobj, Vec3* pos, Vec3* vel, f32 facing)
     return result;
 }
 
-void it_2725_Logic44_Spawned(Item_GObj* gobj)
+void itLucky_Logic44_Spawned(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itLuckyAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
@@ -410,7 +410,7 @@ bool itLucky_UnkMotion3_Coll(Item_GObj* gobj)
     return false;
 }
 
-void it_2725_Logic44_PickedUp(Item_GObj* gobj)
+void itLucky_Logic44_PickedUp(Item_GObj* gobj)
 {
     Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
 }
@@ -422,12 +422,12 @@ bool itLucky_UnkMotion2_Anim(Item_GObj* gobj)
 
 void itLucky_UnkMotion2_Phys(Item_GObj* gobj) {}
 
-void it_2725_Logic44_Dropped(Item_GObj* gobj)
+void itLucky_Logic44_Dropped(Item_GObj* gobj)
 {
     Item_80268E5C(gobj, 3, ITEM_ANIM_UPDATE);
 }
 
-void it_2725_Logic44_EnteredAir(Item_GObj* gobj)
+void itLucky_Logic44_EnteredAir(Item_GObj* gobj)
 {
     Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
 }
@@ -445,7 +445,7 @@ bool it_802D5A68(Item_GObj* gobj)
     return false;
 }
 
-void it_2725_Logic44_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
+void itLucky_Logic44_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }

@@ -731,7 +731,7 @@ bool itLeadead_UnkMotion6_Coll(Item_GObj* gobj)
     return it_8027C794(gobj);
 }
 
-void it_2725_Logic1_PickedUp(Item_GObj* gobj)
+void itLeadead_Logic1_PickedUp(Item_GObj* gobj)
 {
     Item_80268E5C(gobj, 0xD, ITEM_ANIM_UPDATE);
 }
@@ -746,13 +746,13 @@ bool itLeadead_UnkMotion13_Anim(Item_GObj* gobj)
 
 void itLeadead_UnkMotion13_Phys(Item_GObj* gobj) {}
 
-void it_2725_Logic1_Dropped(Item_GObj* gobj)
+void itLeadead_Logic1_Dropped(Item_GObj* gobj)
 {
     it_8027CBA4(gobj);
     it_802E9308_inline(gobj);
 }
 
-void it_2725_Logic1_Thrown(Item_GObj* gobj)
+void itLeadead_Logic1_Thrown(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     it_8027CB3C(gobj);
@@ -843,7 +843,7 @@ bool itLeadead_UnkMotion17_Coll(Item_GObj* gobj)
     return it_8026DFB0(gobj);
 }
 
-void it_2725_Logic1_Destroyed(Item_GObj* gobj)
+void itLeadead_Logic1_Destroyed(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     if (ip->xDD4_itemVar.leadead.x38 != NULL) {

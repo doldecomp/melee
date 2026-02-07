@@ -7,7 +7,7 @@
 
 #include "it/items/types.h"
 
-/* 2D73D0 */ void it_2725_Logic29_EvtUnk(Item_GObj*, Item_GObj*);
+/* 2D73D0 */ void itOldKuri_Logic29_EvtUnk(Item_GObj*, Item_GObj*);
 /* 2D73F0 */ void it_802D73F0(Item_GObj*);
 /* 2D747C */ void it_802D747C(Item_GObj*);
 /* 2D74D0 */ bool itOldkuri_UnkMotion0_Anim(Item_GObj* gobj);
@@ -28,7 +28,7 @@
 /* 2D7B3C */ bool itOldkuri_UnkMotion4_Anim(Item_GObj* gobj);
 /* 2D7B84 */ void itOldkuri_UnkMotion4_Phys(Item_GObj* gobj);
 /* 2D7BB4 */ bool itOldkuri_UnkMotion4_Coll(Item_GObj* gobj);
-/* 2D7C14 */ void it_2725_Logic0_PickedUp(Item_GObj*);
+/* 2D7C14 */ void itOldKuri_Logic0_PickedUp(Item_GObj*);
 /* 2D7C58 */ bool itOldkuri_UnkMotion5_Anim(Item_GObj* gobj);
 /* 2D7CB0 */ void itOldkuri_UnkMotion5_Phys(Item_GObj* gobj);
 /* 2D7CB4 */ void it_2725_Logic0_Dropped(Item_GObj*);
@@ -41,7 +41,7 @@
 /* 2D7ED4 */ bool itOldkuri_UnkMotion9_Coll(Item_GObj* gobj);
 /* 2D7F38 */ bool it_2725_Logic0_DmgReceived(Item_GObj*);
 /* 2D8098 */ bool it_802D8098(Item_GObj*);
-/* 2D813C */ UNK_RET it_802D813C(UNK_PARAMS);
+/* 2D813C */ void it_802D813C(Item_GObj* gobj);
 /* 2D8190 */ bool itOldkuri_UnkMotion7_Anim(Item_GObj* gobj);
 /* 2D81D8 */ void itOldkuri_UnkMotion7_Phys(Item_GObj* gobj);
 /* 2D81DC */ bool itOldkuri_UnkMotion7_Coll(Item_GObj* gobj);

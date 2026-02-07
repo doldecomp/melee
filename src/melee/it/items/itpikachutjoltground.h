@@ -25,7 +25,7 @@
 /* 2B3CA8 */ bool it_2725_Logic106_Absorbed(Item_GObj*);
 /* 2B3D0C */ bool it_2725_Logic106_HitShield(Item_GObj*);
 /* 2B3D70 */ bool it_2725_Logic106_ShieldBounced(Item_GObj*);
-/* 2B3EDC */ void it_2725_Logic106_EvtUnk(Item_GObj*, Item_GObj*);
+/* 2B3EDC */ void itPikachuTJoltGround_Logic106_EvtUnk(Item_GObj*, Item_GObj*);
 /* 3F7190 */ extern ItemStateTable it_803F7190[];
 
 #endif

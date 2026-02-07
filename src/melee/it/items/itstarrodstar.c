@@ -107,27 +107,27 @@ bool itStarrodstar_UnkMotion0_Coll(Item_GObj* gobj)
     return false;
 }
 
-bool it_3F14_Logic36_DmgDealt(Item_GObj* arg0)
+bool itStarRodStar_Logic36_DmgDealt(Item_GObj* arg0)
 {
     return true;
 }
 
-bool it_3F14_Logic36_Clanked(Item_GObj* arg0)
+bool itStarRodStar_Logic36_Clanked(Item_GObj* arg0)
 {
     return true;
 }
 
-bool it_3F14_Logic36_HitShield(Item_GObj* arg0)
+bool itStarRodStar_Logic36_HitShield(Item_GObj* arg0)
 {
     return true;
 }
 
-bool it_3F14_Logic36_Absorbed(Item_GObj* arg0)
+bool itStarRodStar_Logic36_Absorbed(Item_GObj* arg0)
 {
     return true;
 }
 
-bool it_3F14_Logic36_Reflected(Item_GObj* gobj)
+bool itStarRodStar_Logic36_Reflected(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     HSD_JObj* jobj = gobj->hsd_obj;
@@ -137,7 +137,7 @@ bool it_3F14_Logic36_Reflected(Item_GObj* gobj)
     return false;
 }
 
-bool it_3F14_Logic36_ShieldBounced(Item_GObj* gobj)
+bool itStarRodStar_Logic36_ShieldBounced(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     HSD_JObj* jobj = gobj->hsd_obj;
@@ -147,7 +147,7 @@ bool it_3F14_Logic36_ShieldBounced(Item_GObj* gobj)
     return false;
 }
 
-void it_3F14_Logic36_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
+void itStarRodStar_Logic36_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }

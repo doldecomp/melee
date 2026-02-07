@@ -3,15 +3,31 @@
 #include <placeholder.h>
 #include <platform.h>
 
+#include "ft/ftlib.h"
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
 
+/* 0x802910B8 */ void itFlipper_Logic20_Thrown(Item_GObj* gobj);
+
 /// #it_80290938
 
-/// #it_3F14_Logic20_Spawned
+void itFlipper_Logic20_Spawned(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    PAD_STACK(8);
+    ip->xDD4_itemVar.flipper.xDD4 = 0;
+    ip->xDD4_itemVar.flipper.xDD8 = 0;
+    ip->xDD4_itemVar.flipper.xDDC = 0;
+    ip->xDD4_itemVar.flipper.xDE0 = 0.0F;
+    ip->xDD4_itemVar.flipper.xDE4 = 0.0F;
+    ip->xDD4_itemVar.flipper.xDE8 = 0;
+    ip->xDD4_itemVar.flipper.xDEC = 0;
+    it_802756D0(gobj);
+    it_80290F00(gobj);
+}
 
 /// #it_80290A7C
 
@@ -65,7 +81,7 @@ bool itFlipper_UnkMotion1_Coll(Item_GObj* gobj)
     return false;
 }
 
-void it_3F14_Logic20_PickedUp(Item_GObj* gobj)
+void itFlipper_Logic20_PickedUp(Item_GObj* gobj)
 {
     Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
 }
@@ -77,13 +93,24 @@ bool itFlipper_UnkMotion2_Anim(Item_GObj* gobj)
 
 void itFlipper_UnkMotion2_Phys(Item_GObj* gobj) {}
 
-/// #it_3F14_Logic20_Dropped
-
-/// #it_3F14_Logic20_Thrown
-
-void it_3F14_Logic20_Dropped(Item_GObj* gobj)
+void itFlipper_Logic20_Dropped(Item_GObj* gobj)
 {
-    it_3F14_Logic20_Thrown(gobj);
+    itFlipper_Logic20_Thrown(gobj);
+}
+
+void itFlipper_Logic20_Thrown(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itFlipper_DatAttrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    if (ip->owner != NULL) {
+        if (ftLib_80087284(ip->owner)) {
+            ip->xDD4_itemVar.flipper.xDD4 = attrs->x4;
+        } else {
+            ip->xDD4_itemVar.flipper.xDD4 = attrs->x0;
+        }
+    }
+    it_8026B3A8(gobj);
+    Item_80268E5C(gobj, 3, ITEM_ANIM_UPDATE | ITEM_DROP_UPDATE);
 }
 
 /// #itFlipper_UnkMotion3_Anim
@@ -122,19 +149,19 @@ bool itFlipper_UnkMotion6_Coll(Item_GObj* gobj)
 
 /// #it_3F14_Logic20_HitShield
 
-bool it_3F14_Logic20_Reflected(Item_GObj* gobj)
+bool itFlipper_Logic20_Reflected(Item_GObj* gobj)
 {
     return it_80273030(gobj);
 }
 
-bool it_3F14_Logic20_ShieldBounced(Item_GObj* gobj)
+bool itFlipper_Logic20_ShieldBounced(Item_GObj* gobj)
 {
     return itColl_BounceOffShield(gobj);
 }
 
 /// #it_3F14_Logic20_DmgReceived
 
-void it_3F14_Logic20_EnteredAir(Item_GObj* gobj)
+void itFlipper_Logic20_EnteredAir(Item_GObj* gobj)
 {
     Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
 }
@@ -152,7 +179,7 @@ bool itFlipper_UnkMotion4_Coll(Item_GObj* gobj)
     return false;
 }
 
-void it_3F14_Logic20_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
+void itFlipper_Logic20_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }

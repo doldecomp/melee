@@ -11,7 +11,7 @@
 /* 2CD4D8 */ void it_802CD4D8(Item_GObj*);
 /* 2CD4DC */ void it_802CD4DC(Item_GObj*, Item_GObj*);
 /* 2CD4FC */ void it_802CD4FC(Item_GObj*);
-/* 2CD7B8 */ bool it_2725_Logic9_DmgDealt(Item_GObj*);
+/* 2CD7B8 */ bool itSonans_Logic9_DmgDealt(Item_GObj*);
 /* 2CD7D4 */ bool it_802CD7D4(Item_GObj*);
 /* 2CD8E4 */ bool itSonans_UnkMotion0_Anim(Item_GObj* gobj);
 /* 2CD954 */ void itSonans_UnkMotion0_Phys(Item_GObj* gobj);
@@ -25,5 +25,8 @@
 /* 2CDB30 */ void itSonans_UnkMotion2_Phys(Item_GObj* gobj);
 /* 2CDBB8 */ bool itSonans_UnkMotion2_Coll(Item_GObj* gobj);
 /* 3F7CA0 */ extern ItemStateTable it_803F7CA0[];
+
+f32 it_804DD3D0 = 0.017453292f;
+f64 it_804DD3C8 = -0.9;
 
 #endif

@@ -8,10 +8,10 @@
 #include "it/items/types.h"
 
 /* 2F0F6C */ UNK_RET it_802F0F6C(UNK_PARAMS);
-/* 2F1030 */ UNK_RET it_802F1030(UNK_PARAMS);
-/* 2F1094 */ void it_2725_Logic86_EvtUnk(Item_GObj*, Item_GObj*);
-/* 2F10B4 */ bool it_2725_Logic86_DmgDealt(Item_GObj* gobj);
-/* 2F10D8 */ bool it_2725_Logic86_Reflected(Item_GObj*);
+/* 2F1030 */ void it_802F1030(Item_GObj* gobj);
+/* 2F1094 */ void itCrazyHandBomb_Logic86_EvtUnk(Item_GObj*, Item_GObj*);
+/* 2F10B4 */ bool itCrazyHandBomb_Logic86_DmgDealt(Item_GObj* gobj);
+/* 2F10D8 */ bool itCrazyHandBomb_Logic86_Reflected(Item_GObj*);
 /* 2F10F8 */ UNK_RET it_802F10F8(UNK_PARAMS);
 /* 2F1168 */ bool itCrazyhandbomb_UnkMotion0_Anim(Item_GObj* gobj);
 /* 2F1170 */ void itCrazyhandbomb_UnkMotion0_Phys(Item_GObj* gobj);

@@ -11,7 +11,7 @@
 #include <dolphin/mtx.h>
 
 /* 291BE0 */ HSD_GObj* it_80291BE0(Vec3*);
-/* 291C98 */ void it_3F14_Logic21_Spawned(Item_GObj*);
+/* 291C98 */ void itSScope_Logic21_Spawned(Item_GObj*);
 /* 291CCC */ itSScopeAttributes* it_80291CCC(Item_GObj* gobj, Vec3* pos);
 /* 291CF4 */ s32 it_80291CF4(Item_GObj*, s32);
 /* 291D38 */ UNK_RET it_80291D38(UNK_PARAMS);
@@ -26,22 +26,22 @@
 /* 2920E0 */ bool itSscope_UnkMotion3_Anim(Item_GObj* gobj);
 /* 2920E8 */ void itSscope_UnkMotion1_Phys(Item_GObj* gobj);
 /* 292118 */ bool itSscope_UnkMotion3_Coll(Item_GObj* gobj);
-/* 29215C */ void it_3F14_Logic21_PickedUp(Item_GObj*);
+/* 29215C */ void itSScope_Logic21_PickedUp(Item_GObj*);
 /* 292184 */ bool itSscope_UnkMotion2_Anim(Item_GObj* gobj);
 /* 29218C */ void itSscope_UnkMotion2_Phys(Item_GObj* gobj);
-/* 292190 */ void it_3F14_Logic21_Dropped(Item_GObj*);
-/* 2921B8 */ void it_3F14_Logic21_Thrown(Item_GObj*);
+/* 292190 */ void itSScope_Logic21_Dropped(Item_GObj*);
+/* 2921B8 */ void itSScope_Logic21_Thrown(Item_GObj*);
 /* 2921E0 */ void itSscope_UnkMotion3_Phys(Item_GObj* gobj);
-/* 29222C */ bool it_3F14_Logic21_DmgDealt(Item_GObj*);
-/* 292250 */ bool it_3F14_Logic21_Clanked(Item_GObj*);
-/* 292274 */ bool it_3F14_Logic21_HitShield(Item_GObj*);
-/* 292298 */ bool it_3F14_Logic21_Reflected(Item_GObj*);
-/* 2922B8 */ bool it_3F14_Logic21_ShieldBounced(Item_GObj*);
-/* 2922D8 */ void it_3F14_Logic21_EnteredAir(Item_GObj*);
+/* 29222C */ bool itSScope_Logic21_DmgDealt(Item_GObj*);
+/* 292250 */ bool itSScope_Logic21_Clanked(Item_GObj*);
+/* 292274 */ bool itSScope_Logic21_HitShield(Item_GObj*);
+/* 292298 */ bool itSScope_Logic21_Reflected(Item_GObj*);
+/* 2922B8 */ bool itSScope_Logic21_ShieldBounced(Item_GObj*);
+/* 2922D8 */ void itSScope_Logic21_EnteredAir(Item_GObj*);
 /* 292300 */ bool itSscope_UnkMotion4_Anim(Item_GObj* gobj);
 /* 292308 */ void itSscope_UnkMotion4_Phys(Item_GObj* gobj);
 /* 29230C */ bool itSscope_UnkMotion4_Coll(Item_GObj* gobj);
-/* 292340 */ void it_3F14_Logic21_EvtUnk(Item_GObj*, Item_GObj*);
+/* 292340 */ void itSScope_Logic21_EvtUnk(Item_GObj*, Item_GObj*);
 /* 3F5F40 */ extern ItemStateTable it_803F5F40[];
 
 #endif

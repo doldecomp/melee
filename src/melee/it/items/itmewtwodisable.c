@@ -18,12 +18,12 @@ ItemStateTable it_803F7750[1] = { 0, itMewtwodisable_UnkMotion0_Anim,
                                   itMewtwodisable_UnkMotion0_Phys,
                                   itMewtwodisable_UnkMotion0_Coll };
 
-void it_2725_Logic67_Destroy(Item_GObj* item_gobj)
+void itMewtwoDisable_Logic67_Destroy(Item_GObj* item_gobj)
 {
     Item_8026A8EC(item_gobj);
 }
 
-void it_2725_Logic67_Destroyed(Item_GObj* item_gobj)
+void itMewtwoDisable_Logic67_Destroyed(Item_GObj* item_gobj)
 {
     Item* item = GET_ITEM(item_gobj);
     if (item->xDD4_itemVar.mdisable.owner != NULL) {
@@ -32,8 +32,9 @@ void it_2725_Logic67_Destroyed(Item_GObj* item_gobj)
     item->xDD4_itemVar.mdisable.owner = NULL;
 }
 
-Item_GObj* it_2725_Logic67_SpawnMewtwoDisable(Fighter_GObj* fighter_gobj,
-                                              Vec3* offset, f32 facing_dir)
+Item_GObj*
+itMewtwoDisable_Logic67_SpawnMewtwoDisable(Fighter_GObj* fighter_gobj,
+                                           Vec3* offset, f32 facing_dir)
 {
     Item_GObj* item_gobj;
     SpawnItem spawnitem;
@@ -117,38 +118,39 @@ int itMewtwodisable_UnkMotion0_Coll(Item_GObj* item_gobj)
     return coll_flags;
 }
 
-bool it_2725_Logic67_DmgDealt(Item_GObj* item_gobj)
+bool itMewtwoDisable_Logic67_DmgDealt(Item_GObj* item_gobj)
 {
     return true;
 }
 
-bool it_2725_Logic67_Reflected(Item_GObj* item_gobj)
+bool itMewtwoDisable_Logic67_Reflected(Item_GObj* item_gobj)
 {
     // process being reflected
     return it_80273030(item_gobj);
 }
 
-bool it_2725_Logic67_Clanked(Item_GObj* item_gobj)
+bool itMewtwoDisable_Logic67_Clanked(Item_GObj* item_gobj)
 {
     return true;
 }
 
-bool it_2725_Logic67_HitShield(Item_GObj* item_gobj)
+bool itMewtwoDisable_Logic67_HitShield(Item_GObj* item_gobj)
 {
     return true;
 }
 
-bool it_2725_Logic67_Absorbed(Item_GObj* item_gobj)
+bool itMewtwoDisable_Logic67_Absorbed(Item_GObj* item_gobj)
 {
     return true;
 }
 
-bool it_2725_Logic67_ShieldBounced(Item_GObj* item_gobj)
+bool itMewtwoDisable_Logic67_ShieldBounced(Item_GObj* item_gobj)
 {
     return true;
 }
 
-void it_2725_Logic67_EvtUnk(Item_GObj* item_gobj, Fighter_GObj* ref_owner)
+void itMewtwoDisable_Logic67_EvtUnk(Item_GObj* item_gobj,
+                                    Fighter_GObj* ref_owner)
 {
     Item* item = GET_ITEM(item_gobj);
     if (item->xDD4_itemVar.mdisable.owner == ref_owner) {
