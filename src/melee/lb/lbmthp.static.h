@@ -25,15 +25,6 @@ STATIC_ASSERT(sizeof(struct lbl_804333E0_t) == 0x1D8);
 /* 4333E0 */ static struct lbl_804333E0_t lbl_804333E0;
 /* 4D7CC0 */ static float lb_804D7CC0;
 
-/* HSD_SObj extended for this function */
-struct HSD_SObj_803A477C_t_ext {
-    /* 0x00 */ u8 pad0[0x10];
-    /* 0x10 */ float x10, x14;
-    /* 0x18 */ u8 pad18[0x3C - 0x18];
-    /* 0x3C */ u8 x3C, x3D, x3E, x3F;
-    /* 0x40 */ u32 x40;
-};
-
 struct lbl_804335B8_t {
     /* 0x00 */ GXTexObj tex0; /* 0x00-0x20 (size 0x20) */
     /* 0x20 */ void* x20;     /* image ptr for tex0 */
@@ -52,7 +43,7 @@ struct lbl_804335B8_t {
     /* 0x84 */ float x84;
     /* 0x88 */ void* x88;
     /* 0x8C */ s32 x8C;
-    /* 0x90 */ struct HSD_SObj_803A477C_t_ext* x90;
+    /* 0x90 */ struct HSD_SObj* x90;
     /* 0x94 */ char pad_94[0xA0 - 0x94];
 }; /* size = 0xA0 */
 STATIC_ASSERT(sizeof(struct lbl_804335B8_t) == 0xA0);

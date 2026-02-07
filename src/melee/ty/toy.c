@@ -1605,7 +1605,7 @@ void un_803078E4(void)
     PosArrayFull pos_en;
     PosArrayFull pos_jp;
     void* syms[7];
-    HSD_SObj_803A477C_t* sobj;
+    HSD_SObj* sobj;
     void** sym_ptr;
     s32* jp_ptr;
     s32* en_ptr;
@@ -2304,7 +2304,7 @@ void un_80310324(void)
     s16 idx;
     s16 var_r0;
     char* str;
-    HSD_SObj_803A477C_t* sobj;
+    HSD_SObj* sobj;
     HSD_GObj* gobj;
     u16* flags;
     f32 two;

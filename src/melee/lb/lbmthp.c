@@ -158,7 +158,7 @@ void* lbMthp8001F890(HSD_GObj* gobj)
     lbl_804335B8.x80 = lbl_804D7CE0;
     lbl_804335B8.x88 = &lbl_804335B8.x70;
     lbl_804335B8.x8C = 0;
-    lbl_804335B8.x90 = (struct HSD_SObj_803A477C_t_ext*) HSD_SObjLib_803A477C(
+    lbl_804335B8.x90 = (struct HSD_SObj*) HSD_SObjLib_803A477C(
         gobj, (int) &lbl_804335B8.x88, 0, 0, 0x80, 0);
     lbl_804335B8.x90->x40 |= 0x10;
     return lbl_804335B8.x90;
