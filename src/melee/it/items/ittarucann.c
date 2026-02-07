@@ -580,9 +580,7 @@ void it_802975F4(Item_GObj* gobj)
     it_802756D0(gobj);
     ip->xDAC_itcmd_var0 = 0;
     ip->xDD4_itemVar.tarucann.x20 = 0;
-    ip->x40_vel.x = 0.0f;
-    ip->x40_vel.y = 0.0f;
-    ip->x40_vel.z = 0.0f;
+    ip->x40_vel.x = ip->x40_vel.y = ip->x40_vel.z = 0.0f;
     Item_8026AE84(ip, 0x12A, 0x7F, 0x40);
 }
 
