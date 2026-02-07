@@ -20,7 +20,7 @@ static inline void ftCo_800C6AFC_dontinline(HSD_JObj* jobj)
 #define fake_HSD_ASSERT(line, cond)                                           \
     ((cond) ? ((void) 0) : __assert("jobj.h", line, #cond))
 
-inline void fake_HSD_JObjSetTranslateX(HSD_JObj* jobj, f32 x)
+inline void fake_tyfall_HSD_JObjSetTranslateX(HSD_JObj* jobj, f32 x)
 {
     fake_HSD_ASSERT(932, jobj);
     jobj->translate.x = x;
@@ -29,7 +29,7 @@ inline void fake_HSD_JObjSetTranslateX(HSD_JObj* jobj, f32 x)
     }
 }
 
-inline void fake_HSD_JObjSetTranslateY(HSD_JObj* jobj, f32 y)
+inline void fake_tyfall_HSD_JObjSetTranslateY(HSD_JObj* jobj, f32 y)
 {
     fake_HSD_ASSERT(947, jobj);
     jobj->translate.y = y;
@@ -38,7 +38,7 @@ inline void fake_HSD_JObjSetTranslateY(HSD_JObj* jobj, f32 y)
     }
 }
 
-inline void fake_HSD_JObjSetTranslateZ(HSD_JObj* jobj, f32 z)
+inline void fake_tyfall_HSD_JObjSetTranslateZ(HSD_JObj* jobj, f32 z)
 {
     fake_HSD_ASSERT(962, jobj);
     jobj->translate.z = z;
@@ -47,7 +47,7 @@ inline void fake_HSD_JObjSetTranslateZ(HSD_JObj* jobj, f32 z)
     }
 }
 
-inline void fake_HSD_JObjSetRotationY(HSD_JObj* jobj, f32 y)
+inline void fake_tyfall_HSD_JObjSetRotationY(HSD_JObj* jobj, f32 y)
 {
     fake_HSD_ASSERT(660, jobj);
     fake_HSD_ASSERT(661, !(jobj->flags & JOBJ_USE_QUATERNION));
@@ -57,7 +57,7 @@ inline void fake_HSD_JObjSetRotationY(HSD_JObj* jobj, f32 y)
     }
 }
 
-inline void fake_HSD_JObjSetScaleX(HSD_JObj* jobj, f32 x)
+inline void fake_tyfall_HSD_JObjSetScaleX(HSD_JObj* jobj, f32 x)
 {
     fake_HSD_ASSERT(776, jobj);
     jobj->scale.x = x;
@@ -66,7 +66,7 @@ inline void fake_HSD_JObjSetScaleX(HSD_JObj* jobj, f32 x)
     }
 }
 
-inline void fake_HSD_JObjSetScaleY(HSD_JObj* jobj, f32 y)
+inline void fake_tyfall_HSD_JObjSetScaleY(HSD_JObj* jobj, f32 y)
 {
     fake_HSD_ASSERT(791, jobj);
     jobj->scale.y = y;
@@ -75,7 +75,7 @@ inline void fake_HSD_JObjSetScaleY(HSD_JObj* jobj, f32 y)
     }
 }
 
-inline void fake_HSD_JObjSetScaleZ(HSD_JObj* jobj, f32 z)
+inline void fake_tyfall_HSD_JObjSetScaleZ(HSD_JObj* jobj, f32 z)
 {
     fake_HSD_ASSERT(806, jobj);
     jobj->scale.z = z;
