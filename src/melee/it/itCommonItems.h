@@ -112,10 +112,26 @@ typedef struct itBox_ItemVars {
 typedef struct itWstar_ItemVars {
     f32 xDD4;
     f32 xDD8;
+    s32 xDDC;
 } itWstar_ItemVars;
+
+typedef struct itWstarAttrEntry {
+    /* +0 */ HSD_AnimJoint* x0_anim_joint;
+    /* +4 */ enum_t x4_sfx;
+} itWstarAttrEntry;
 
 typedef struct itWstarAttributes {
     /* +0 */ f32 x0;
+    /* +4 */ f32 x4;
+    /* +8 */ f32 x8;
+    /* +C */ f32 xC;
+    /* +10 */ f32 x10;
+    /* +14 */ f32 x14;
+    /* +18 */ f32 x18;
+    /* +1C */ f32 x1C;
+    /* +20 */ f32 x20;
+    /* +24 */ s32 x24_count;
+    /* +28 */ itWstarAttrEntry x28_entries[1];
 } itWstarAttributes;
 
 typedef struct itKyasarin_ItemVars {
