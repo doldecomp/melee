@@ -770,7 +770,18 @@ u8 gm_8017E48C(MinorScene* scene)
     return count;
 }
 
-/// #gm_8017E4C4
+struct gm_803DE650_t* gm_8017E4C4(u8 arg0)
+{
+    struct gm_803DE650_t* var_r4 = gm_803DE650;
+    u8 temp;
+    while (var_r4->x0 != 0xFF) {
+        if (var_r4->x0 == arg0) {
+            return var_r4;
+        }
+        var_r4++;
+    }
+    return NULL;
+}
 
 /// Get adventure stage kind for given difficulty and stage slot.
 /// The (u8) cast on difficulty is required - these functions are called
