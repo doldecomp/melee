@@ -851,7 +851,13 @@ u8 gm_8017E76C(u8 difficulty, u8 stage_slot, u8 arg2)
     return lbl_803D7AC0[stage_slot + difficulty * 5].pad_6[0x10 + (arg2 * 3)];
 }
 
-/// #gm_8017E7A0
+void gm_8017E7A0(u8 arg0) {
+    if (arg0 == 1) {
+        Player_LoseStock(0);
+        ifStatus_802F6948(0);
+        ifStatus_802F6E3C(0);
+    }
+}
 
 bool gm_8017E7E0(void)
 {
