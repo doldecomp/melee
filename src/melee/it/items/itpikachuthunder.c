@@ -18,7 +18,18 @@ s32 it_802B1FC8(Item_GObj* gobj)
     return it_802B22B8(gobj);
 }
 
-/// #it_802B1FE8
+void it_802B1FE8(Item_GObj* gobj, Vec3* pos)
+{
+    Item* ip = GET_ITEM(gobj);
+    itPikachuthunderAttributes* attrs =
+        ip->xC4_article_data->x4_specialAttributes;
+    f32 scale = ip->xDD4_itemVar.pikachuthunder.x18;
+    f32 offset = -attrs->x8;
+
+    offset *= scale;
+    *pos = ip->pos;
+    pos->y += offset;
+}
 
 /// #it_2725_Logic39_Destroyed
 

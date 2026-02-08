@@ -2293,7 +2293,11 @@ UNK_T gm_80169540(void)
     return &M2C_FIELD(&lbl_8046B488, UNK_T*, 0x124);
 }
 
-/// #fn_80169550
+void fn_80169550(int slot)
+{
+    s8 idx = ((s8*) &lbl_8046B488)[slot + 0x1A6];
+    ((s8*) &lbl_8046B488)[idx + 0x20] = -1;
+}
 
 /// #fn_80169574
 

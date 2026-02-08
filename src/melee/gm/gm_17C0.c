@@ -100,6 +100,8 @@ static struct lbl_80472D28_t lbl_80472D28;
 static struct lbl_80472E48_t lbl_80472E48;
 static int lbl_80472EC8[4];
 
+extern u8 lbl_80472ED8[0x6BC];
+
 void fn_8017C0C8(void)
 {
     PlayerInitData sp8;
@@ -750,7 +752,11 @@ f32 gm_8017E578(int difficulty, u8 stage_slot)
            100.0F;
 }
 
-/// #gm_8017E5C8
+u8 gm_8017E5C8(int difficulty, u8 stage_slot, u8 arg2)
+{
+    return lbl_803D7AC0[stage_slot + ((u8) difficulty * 5)]
+        .pad_6[arg2 * 3];
+}
 
 u8 gm_8017E5FC(int difficulty, u8 stage_slot, u8 arg2)
 {
@@ -964,11 +970,13 @@ void gm_80181A00(s32 arg0, s32 arg1)
     lbl_80472E48.unk_8 = arg1;
 }
 
-static struct {
+struct {
     u8 x0;
     u16 x2;
     int x4;
-    int pad;
+    int x8;
+    int xC;
+    int x10;
 } lbl_80473594;
 
 int gm_80181A14(void)
@@ -1029,7 +1037,15 @@ bool gm_80182510(void)
     return false;
 }
 
-/// #gm_80182554
+void gm_80182554(int arg0, int arg1)
+{
+    u8* base = lbl_80472ED8;
+    *(int*)(base + 0x6C8) = arg0;
+    *(int*)(base + 0x6C4) = arg1;
+    *(u8*)(base + 0x6BC) = 0;
+    *(int*)(base + 0x6C0) = 0;
+    *(u16*)(base + 0x6BE) = 0;
+}
 
 /// #gm_80182578
 
