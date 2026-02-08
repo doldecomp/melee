@@ -1,6 +1,7 @@
 #include "gm_17C0.h"
 
 #include "gm_unsplit.h"
+#include "platform.h"
 
 #include <math_ppc.h>
 #include <dolphin/gx.h>
@@ -100,7 +101,15 @@ static struct lbl_80472D28_t lbl_80472D28;
 static struct lbl_80472E48_t lbl_80472E48;
 static int lbl_80472EC8[4];
 
-extern u8 lbl_80472ED8[0x6BC];
+struct {
+    u8 pad[0x398];
+    // offsets relative to .bss
+    u8 x6BC;
+    u16 x6BE;
+    int x6C0;
+    int x6C4;
+    int x6C8;
+} lbl_80472ED8;
 
 void fn_8017C0C8(void)
 {
@@ -718,9 +727,9 @@ u8 gm_8017E430(void)
 
 /// #gm_8017E440
 
-int gm_8017E48C(MinorScene* scene)
+u8 gm_8017E48C(MinorScene* scene)
 {
-    int count = 0;
+    u8 count = 0;
     int i;
     for (i = 0; scene->idx != gm_803DE1B8_MinorScenes[i].idx; i++) {
         if (gm_803DE1B8_MinorScenes[i].info.class_id == 2) {
@@ -735,33 +744,29 @@ int gm_8017E48C(MinorScene* scene)
 /// Get adventure stage kind for given difficulty and stage slot.
 /// The (u8) cast on difficulty is required - these functions are called
 /// via function pointers typed as f32(*)(int, u8) in UnkAdventureData.
-u8 gm_8017E500(int difficulty, u8 stage_slot)
+u8 gm_8017E500(u8 difficulty, u8 stage_slot)
 {
-    return lbl_803D7AC0[stage_slot + ((u8) difficulty * 5)].stage_kind;
+    return lbl_803D7AC0[stage_slot + difficulty * 5].stage_kind;
 }
 
-f32 gm_8017E528(int difficulty, u8 stage_slot)
+f32 gm_8017E528(u8 difficulty, u8 stage_slot)
 {
-    return (f32) lbl_803D7AC0[stage_slot + ((u8) difficulty * 5)].scale0_pct /
-           100.0F;
+    return lbl_803D7AC0[stage_slot + difficulty * 5].scale0_pct / 100.0F;
 }
 
-f32 gm_8017E578(int difficulty, u8 stage_slot)
+f32 gm_8017E578(u8 difficulty, u8 stage_slot)
 {
-    return (f32) lbl_803D7AC0[stage_slot + ((u8) difficulty * 5)].scale1_pct /
-           100.0F;
+    return lbl_803D7AC0[stage_slot + difficulty * 5].scale1_pct / 100.0F;
 }
 
-u8 gm_8017E5C8(int difficulty, u8 stage_slot, u8 arg2)
+u8 gm_8017E5C8(u8 difficulty, u8 stage_slot, u8 arg2)
 {
-    return lbl_803D7AC0[stage_slot + ((u8) difficulty * 5)]
-        .pad_6[arg2 * 3];
+    return lbl_803D7AC0[stage_slot + difficulty * 5].pad_6[arg2 * 3];
 }
 
-u8 gm_8017E5FC(int difficulty, u8 stage_slot, u8 arg2)
+u8 gm_8017E5FC(u8 difficulty, u8 stage_slot, u8 arg2)
 {
-    return lbl_803D7AC0[stage_slot + ((u8) difficulty * 5)]
-        .pad_6[1 + arg2 * 3];
+    return lbl_803D7AC0[stage_slot + difficulty * 5].pad_6[1 + arg2 * 3];
 }
 
 u8 gm_8017E630(u8 difficulty, u8 stage_slot, u8 arg2)
@@ -771,31 +776,27 @@ u8 gm_8017E630(u8 difficulty, u8 stage_slot, u8 arg2)
 
 f32 gm_8017E664(u8 difficulty, u8 stage_slot)
 {
-    return (f32) lbl_803D7AC0[stage_slot + (difficulty * 5)].scale0_pct /
-           100.0F;
+    return lbl_803D7AC0[stage_slot + difficulty * 5].scale0_pct / 100.0F;
 }
 
 f32 gm_8017E6B4(u8 difficulty, u8 stage_slot)
 {
-    return (f32) lbl_803D7AC0[stage_slot + (difficulty * 5)].scale1_pct /
-           100.0F;
+    return lbl_803D7AC0[stage_slot + difficulty * 5].scale1_pct / 100.0F;
 }
 
-u8 gm_8017E704(int difficulty, u8 stage_slot, u8 arg2)
+u8 gm_8017E704(u8 difficulty, u8 stage_slot, u8 arg2)
 {
-    return lbl_803D7AC0[stage_slot + ((u8) difficulty * 5)]
-        .pad_6[0x0E + arg2 * 3];
+    return lbl_803D7AC0[stage_slot + difficulty * 5].pad_6[0x0E + arg2 * 3];
 }
 
 u8 gm_8017E738(u8 difficulty, u8 stage_slot, u8 arg2)
 {
-    return lbl_803D7AC0[stage_slot + (difficulty * 5)].pad_6[0xF + arg2 * 3];
+    return lbl_803D7AC0[stage_slot + difficulty * 5].pad_6[0xF + arg2 * 3];
 }
 
 u8 gm_8017E76C(u8 difficulty, u8 stage_slot, u8 arg2)
 {
-    return lbl_803D7AC0[stage_slot + (difficulty * 5)]
-        .pad_6[0x10 + (arg2 * 3)];
+    return lbl_803D7AC0[stage_slot + difficulty * 5].pad_6[0x10 + (arg2 * 3)];
 }
 
 /// #gm_8017E7A0
@@ -816,12 +817,12 @@ UnkAllstarData* gm_8017EB30(void)
 
 u8 gm_8017EB3C(u8 difficulty, u8 stage_slot)
 {
-    return lbl_803D85F0[stage_slot + (difficulty * 5)].stage_kind;
+    return lbl_803D85F0[stage_slot + difficulty * 5].stage_kind;
 }
 
 u8 gm_8017EB64(u8 difficulty, u8 stage_slot, u8 arg2)
 {
-    return lbl_803D85F0[stage_slot + (difficulty * 5)].pad_6[arg2 * 3];
+    return lbl_803D85F0[stage_slot + difficulty * 5].pad_6[arg2 * 3];
 }
 
 u8 gm_8017EB98(u8 difficulty, u8 stage_slot, u8 arg2)
@@ -831,24 +832,22 @@ u8 gm_8017EB98(u8 difficulty, u8 stage_slot, u8 arg2)
 
 u8 gm_8017EBCC(u8 difficulty, u8 stage_slot, u8 arg2)
 {
-    return lbl_803D85F0[stage_slot + (difficulty * 5)].pad_6[arg2 * 3 + 2];
+    return lbl_803D85F0[stage_slot + difficulty * 5].pad_6[arg2 * 3 + 2];
 }
 
 f32 gm_8017EC00(u8 difficulty, u8 stage_slot)
 {
-    return (f32) lbl_803D85F0[stage_slot + (difficulty * 5)].scale2_pct /
-           100.0F;
+    return lbl_803D85F0[stage_slot + difficulty * 5].scale2_pct / 100.0F;
 }
 
 f32 gm_8017EC50(u8 difficulty, u8 stage_slot)
 {
-    return (f32) lbl_803D85F0[stage_slot + (difficulty * 5)].scale3_pct /
-           100.0F;
+    return lbl_803D85F0[stage_slot + difficulty * 5].scale3_pct / 100.0F;
 }
 
 u8 gm_8017ECA0(u8 difficulty, u8 stage_slot, u8 arg2)
 {
-    return lbl_803D85F0[stage_slot + ((u8) difficulty * 5)].pad_14[arg2 * 3];
+    return lbl_803D85F0[stage_slot + difficulty * 5].pad_14[arg2 * 3];
 }
 
 /// #gm_8017ECD4
@@ -857,14 +856,12 @@ u8 gm_8017ECA0(u8 difficulty, u8 stage_slot, u8 arg2)
 
 f32 gm_8017ED3C(u8 difficulty, u8 stage_slot)
 {
-    return (f32) lbl_803D85F0[stage_slot + (difficulty * 5)].scale0_pct /
-           100.0F;
+    return lbl_803D85F0[stage_slot + difficulty * 5].scale0_pct / 100.0F;
 }
 
 f32 gm_8017ED8C(u8 difficulty, u8 stage_slot)
 {
-    return (f32) lbl_803D85F0[stage_slot + (difficulty * 5)].scale1_pct /
-           100.0F;
+    return lbl_803D85F0[stage_slot + difficulty * 5].scale1_pct / 100.0F;
 }
 
 /// #fn_8017EDDC
@@ -1039,12 +1036,11 @@ bool gm_80182510(void)
 
 void gm_80182554(int arg0, int arg1)
 {
-    u8* base = lbl_80472ED8;
-    *(int*)(base + 0x6C8) = arg0;
-    *(int*)(base + 0x6C4) = arg1;
-    *(u8*)(base + 0x6BC) = 0;
-    *(int*)(base + 0x6C0) = 0;
-    *(u16*)(base + 0x6BE) = 0;
+    lbl_80472ED8.x6C8 = arg0;
+    lbl_80472ED8.x6C4 = arg1;
+    lbl_80472ED8.x6BC = 0;
+    lbl_80472ED8.x6C0 = 0;
+    lbl_80472ED8.x6BE = 0;
 }
 
 /// #gm_80182578
