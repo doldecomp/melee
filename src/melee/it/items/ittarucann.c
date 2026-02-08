@@ -1,9 +1,11 @@
 #include "ittarucann.h"
 
+#include "ft/ftlib.h"
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
+#include "lb/lb_00B0.h"
 
 /// #it_80295ED4
 
@@ -87,7 +89,16 @@ bool itTarucann_UnkMotion2_Anim(Item_GObj* gobj)
 
 void itTarucann_UnkMotion2_Phys(Item_GObj* gobj) {}
 
-/// #it_3F14_Logic5_Dropped
+void it_3F14_Logic5_Dropped(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    f32 facing;
+    it_802969D8(gobj);
+    it_80275444(gobj);
+    facing = ftLib_800865C0(ip->owner);
+    ip->facing_dir = facing;
+    ip->x40_vel.x = 0.5f * facing;
+}
 
 /// #it_3F14_Logic5_Thrown
 
@@ -104,7 +115,13 @@ void it_80296E88(Item_GObj* gobj)
     it_80296EF0(gobj);
 }
 
-/// #it_80296EA8
+void it_80296EA8(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    HSD_Joint* joint = ip->xC4_article_data->x10_modelDesc->x0_joint;
+    lb_8000B804(gobj->hsd_obj, joint);
+    it_80296EF0(gobj);
+}
 
 /// #it_80296EF0
 

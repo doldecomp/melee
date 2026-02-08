@@ -103,9 +103,23 @@ void it_80288194(Item_GObj* gobj)
     it_802881FC(gobj);
 }
 
-/// #it_802881B4
+void it_802881B4(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    PAD_STACK(8);
+    lb_8000B804(gobj->hsd_obj, ip->xC4_article_data->x10_modelDesc->x0_joint);
+    it_802881FC(gobj);
+}
 
-/// #it_802881FC
+void it_802881FC(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    PAD_STACK(8);
+    ip->x40_vel.x = ip->xDD4_itemVar.taru.xDE4;
+    ip->x40_vel.y = 0.0f;
+    it_8026B3A8(gobj);
+    Item_80268E5C(gobj, 5, ITEM_ANIM_UPDATE);
+}
 
 /// #itTaru_UnkMotion5_Anim
 
