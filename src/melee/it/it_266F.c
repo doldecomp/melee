@@ -676,7 +676,7 @@ bool it_8026D3CC(void)
            it_8026D324(It_Kind_Heart);
 }
 
-void it_8026D564(Item_GObj* item_gobj)
+bool it_8026D564(Item_GObj* item_gobj)
 {
     bool test;
     Item* ip = GET_ITEM((HSD_GObj*) item_gobj);
@@ -689,6 +689,7 @@ void it_8026D564(Item_GObj* item_gobj)
     if (test) {
         ip->xC30 = coll->floor.index;
     }
+    return test;
 }
 
 bool it_8026D5CC(Item_GObj* item_gobj)
