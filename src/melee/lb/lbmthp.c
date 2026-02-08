@@ -145,9 +145,9 @@ void lbMthp_8001F614(s32 arg0)
     lbl_804333E0.unk_148 = arg0;
 }
 
-HSD_SObj_803A477C_t* lbMthp_8001F624(HSD_GObj* gobj, int width, int height)
+HSD_SObj* lbMthp_8001F624(HSD_GObj* gobj, int width, int height)
 {
-    HSD_SObj_803A477C_t* sobj;
+    HSD_SObj* sobj;
     lbl_803BAFE8.x0 = 0;
     lbl_803BAFE8.x4 = (u16) width;
     lbl_803BAFE8.x6 = (u16) height;
