@@ -37,7 +37,8 @@
 
 typedef struct lbl_804706D8_t{
     s16 x0;
-    s16 x2;
+    u8 x2;
+    u8 x3;
 }lbl_804706D8_t;
 
 lbl_804706D8_t lbl_804706D8[12];
@@ -737,7 +738,16 @@ void fn_8017E21C(void) {
 
 /// #fn_8017E318
 
-/// #fn_8017E3C8
+void fn_8017E3C8(void) {
+    int i = 0;
+    PAD_STACK(8);
+
+    for(i = 0; i < 12; i++){
+        if (lbl_804706D8[i].x0 != -1) {
+            Trophy_SetUnlockState(lbl_804706D8[i].x0, lbl_804706D8[i].x2);
+        }
+    }
+}
 
 UnkAdventureData* gm_8017E424(void)
 {
