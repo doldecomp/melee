@@ -749,7 +749,14 @@ u8 gm_8017E430(void)
     return lbl_80472C30.x0.slot;
 }
 
-/// #gm_8017E440
+u8 gm_8017E440(void) 
+{
+    UnkAdventureData* r31 = &lbl_80472C30;
+    if (gm_801677F8(r31->x0.slot, r31->x0.x4) == false) {
+        return 4;
+    }
+    return r31->x0.slot;
+}
 
 u8 gm_8017E48C(MinorScene* scene)
 {
