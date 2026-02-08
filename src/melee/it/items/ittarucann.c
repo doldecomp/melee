@@ -1,22 +1,20 @@
 #include "ittarucann.h"
 
+#include "cm/camera.h"
+#include "ef/efsync.h"
+#include "ft/chara/ftCommon/ftCo_Barrel.h"
+#include "ft/ftlib.h"
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
-
-#include "cm/camera.h"
-#include "ef/efsync.h"
-#include "ft/chara/ftCommon/ftCo_Barrel.h"
-#include "ft/ftlib.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbvector.h"
+#include "MSL/math.h"
 
 #include <baselib/jobj.h>
 #include <baselib/random.h>
-
-#include "MSL/math.h"
 
 extern lbColl_80008D30_arg1 it_803B8610;
 extern Vec3 it_803B8634;
@@ -26,7 +24,7 @@ void it_80295ED4(Item_GObj* gobj)
     if (gobj != NULL) {
         Item* ip = gobj->user_data;
         if (ip != NULL) {
-            ip->xDD4_itemVar.tarucann.x20 = (u32) ip->grab_victim;
+            ip->xDD4_itemVar.tarucann.x20 = ip->grab_victim;
             ip->xDD0_flag.b5 = false;
             it_80274ECC(gobj, true);
             it_80297790(gobj);
@@ -64,8 +62,8 @@ void it_80295F38(Item_GObj* gobj)
         launch_pos.y = ip->pos.y + 8.0f * sinf(angle);
         launch_pos.z = ip->pos.z;
         ftCo_800C92E4((Fighter_GObj*) ip->xDD4_itemVar.tarucann.x20,
-                       &launch_pos, &ip->pos, &params,
-                       (f32) (180.0 / M_PI) * angle);
+                      &launch_pos, &ip->pos, &params,
+                      (f32) (180.0 / M_PI) * angle);
         it_802975F4(gobj);
     }
 }
@@ -121,7 +119,7 @@ void it_3F14_Logic5_Spawned(Item_GObj* gobj)
 bool it_802961E8(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    HSD_JObj* jobj = gobj->hsd_obj;
+    HSD_JObj* jobj = GET_JOBJ(gobj);
     if (ip->xD44_lifeTimer <= 2.0f) {
         it_8026B3A8(gobj);
     }
@@ -134,10 +132,10 @@ bool it_802961E8(Item_GObj* gobj)
         if (ip->xD44_lifeTimer <= it_804D6D28->x34) {
             it_802728C8(gobj);
         } else {
-            HSD_JObjClearFlagsAll(jobj, 0x10);
+            HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
         }
     } else {
-        HSD_JObjClearFlagsAll(jobj, 0x10);
+        HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
     }
     return false;
 }
@@ -149,11 +147,15 @@ void it_802962E0(Item_GObj* gobj)
     f32 temp_f1;
     f32 temp_f2;
     f32 var_f0;
+    int new_var2;
     f32 var_f1;
+    f32 new_var;
     f32 var_f2;
     if (ip->ground_or_air != GA_Air) {
-        temp_f2 = ip->xDD4_itemVar.tarucann.x14.x;
-        if (temp_f2 < 0.0f) {
+        var_f1 = ip->xDD4_itemVar.tarucann.x14.x;
+        temp_f2 = var_f1;
+        new_var2 = temp_f2 < 0.0f;
+        if (new_var2) {
             var_f1 = -temp_f2;
         } else {
             var_f1 = temp_f2;
@@ -173,7 +175,8 @@ void it_802962E0(Item_GObj* gobj)
             } else {
                 var_f0 = temp_f1;
             }
-            var_f2 = da->x14;
+            new_var = da->x14;
+            var_f2 = new_var;
             if (var_f0 < var_f2) {
                 ip->xDD4_itemVar.tarucann.x10 = 0.0f;
             } else {
@@ -197,13 +200,15 @@ void it_802962E0(Item_GObj* gobj)
         if (var_f1 > temp_f2) {
             ip->xDD4_itemVar.tarucann.x10 = temp_f2 * ip->facing_dir;
         }
-        ip->x40_vel.x = ip->xDD4_itemVar.tarucann.x28 *
+        ip->x40_vel.x =
+            ip->xDD4_itemVar.tarucann.x28 *
             (ip->xDD4_itemVar.tarucann.x10 * ip->xDD4_itemVar.tarucann.x14.y);
         var_f2 = ip->xDD4_itemVar.tarucann.x10;
         if (var_f2 < 0.0f) {
             var_f2 = -var_f2;
         }
-        ip->xDD4_itemVar.tarucann.xC += ip->xDD4_itemVar.tarucann.x28 *
+        ip->xDD4_itemVar.tarucann.xC +=
+            ip->xDD4_itemVar.tarucann.x28 *
             (0.12217305f * var_f2 * -ip->facing_dir);
     } else {
         ip->xDD4_itemVar.tarucann.xC +=
@@ -228,7 +233,7 @@ void itTarucann_UnkMotion0_Phys(Item_GObj* gobj) {}
 bool itTarucann_UnkMotion0_Coll(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    HSD_JObj* jobj = gobj->hsd_obj;
+    HSD_JObj* jobj = GET_JOBJ(gobj);
     itTaruCann_DatAttrs* da = ip->xC4_article_data->x4_specialAttributes;
     CollData* coll = &ip->x378_itemColl;
     Vec3 normal = it_803B8634;
@@ -237,8 +242,7 @@ bool itTarucann_UnkMotion0_Coll(Item_GObj* gobj)
         it_80296694(gobj);
     } else if (coll->env_flags & 0x18000) {
         it_80276408(gobj, coll, &ip->xDD4_itemVar.tarucann.x14);
-        if (lbVector_AngleXY(&ip->xDD4_itemVar.tarucann.x14, &normal) >
-            da->x0)
+        if (lbVector_AngleXY(&ip->xDD4_itemVar.tarucann.x14, &normal) > da->x0)
         {
             f32 var_f0;
             if (ip->xDD4_itemVar.tarucann.x14.x > 0.0f) {
@@ -287,18 +291,16 @@ bool itTarucann_UnkMotion1_Coll(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     ItemAttr* attrs = ip->xCC_item_attr;
     itTaruCann_DatAttrs* da = ip->xC4_article_data->x4_specialAttributes;
-    f32 var_f1;
+    f32 y;
     if (it_8026DA08(gobj) != 0) {
         it_802762B0(ip);
-        var_f1 = ip->x40_vel.y;
-        if (var_f1 < 0.0f) {
-            var_f1 = -var_f1;
+        y = ip->x40_vel.y;
+        if (y < 0.0f) {
+            y = -y;
         }
-        if (var_f1 < da->x20) {
+        if (y < da->x20) {
             Item* ip2 = GET_ITEM(gobj);
-            ip2->x40_vel.x = 0.0f;
-            ip2->x40_vel.y = 0.0f;
-            ip2->x40_vel.z = 0.0f;
+            ip2->x40_vel.x = ip2->x40_vel.y = ip2->x40_vel.z = 0.0f;
             it_8026B390(gobj);
             Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
         } else {
@@ -346,8 +348,8 @@ void it_3F14_Logic5_Dropped(Item_GObj* gobj)
 void it_3F14_Logic5_Thrown(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    lb_8000B804(gobj->hsd_obj,
-                ip->xC4_article_data->x10_modelDesc->x0_joint);
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+    lb_8000B804(jobj, ip->xC4_article_data->x10_modelDesc->x0_joint);
     it_8026B3A8(gobj);
     if (ip->xDD4_itemVar.tarucann.x20 != 0) {
         Item_80268E5C(gobj, 6, 6);
@@ -362,6 +364,7 @@ void it_3F14_Logic5_Thrown(Item_GObj* gobj)
 void it_802969D8(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
+    PAD_STACK(16);
     if (ip->xDD4_itemVar.tarucann.x20 != 0) {
         Item_80268E5C(gobj, 6, 0x15);
     } else {
@@ -447,14 +450,15 @@ void it_80296E88(Item_GObj* gobj)
 void it_80296EA8(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    lb_8000B804(gobj->hsd_obj,
-                ip->xC4_article_data->x10_modelDesc->x0_joint);
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+    lb_8000B804(jobj, ip->xC4_article_data->x10_modelDesc->x0_joint);
     it_80296EF0(gobj);
 }
 
 void it_80296EF0(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
+    PAD_STACK(4);
     ip->x40_vel.x = ip->xDD4_itemVar.tarucann.x10;
     ip->x40_vel.y = 0.0f;
     if (ip->xDD4_itemVar.tarucann.x20 != 0) {
@@ -587,7 +591,7 @@ void it_802975F4(Item_GObj* gobj)
 bool itTarucann_UnkMotion9_Anim(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    HSD_JObj* jobj = gobj->hsd_obj;
+    HSD_JObj* jobj = GET_JOBJ(gobj);
     if (ip->xDD4_itemVar.tarucann.x20 == 0) {
         ip->xDCC_flag.b3 = true;
     } else {

@@ -700,7 +700,7 @@ typedef struct itTarucann_ItemVars {
     /*  +C ip+DE0 */ f32 xC;
     /* +10 ip+DE4 */ f32 x10;
     /* +14 ip+DE8 */ Vec3 x14;
-    /* +20 ip+DF4 */ u32 x20;
+    /* +20 ip+DF4 */ Fighter_GObj* x20;
     /* +24 ip+DF8 */ s32 x24;
     /* +28 ip+DFC */ f32 x28;
 } itTarucann_ItemVars;
