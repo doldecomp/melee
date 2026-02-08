@@ -576,7 +576,19 @@ void smashTaunt_801E2550(Ground_GObj* gobj, struct grSmashTaunt_GroundVars* gv)
     gobj->render_cb = smashTaunt_801E24AC;
 }
 
-/// #grCorneria_801E2598
+typedef struct {
+    int data[3];
+} grCn_Entry;
+
+extern grCn_Entry grCn_803E2204[][5];
+
+s32 grCorneria_801E2598(u32 arg0, u32 arg1)
+{
+    int val;
+
+    val = grCn_803E2204[arg0][arg1].data[0];
+    return val != 0;
+}
 
 /// #grCorneria_801E25C4
 

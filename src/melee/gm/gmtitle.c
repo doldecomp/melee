@@ -330,13 +330,14 @@ void gmTitle_801A1E20_OnEnter(void* unused)
 {
     HSD_Text* text;
     int scale;
-    PAD_STACK(8);
+    HSD_Archive* archive;
 
     lbAudioAx_800236DC();
     gmTitle_804D6714 = 0x14;
     gmTitle_804D6718 = 0;
 
-    gmTitle_801A1AC0();
+    archive = gmTitle_801A1AC0();
+    (void) archive;
 
     lbAudioAx_80026F2C(0x12);
     lbAudioAx_8002702C(2, 4);

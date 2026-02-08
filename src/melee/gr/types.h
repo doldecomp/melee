@@ -805,15 +805,42 @@ struct grOnett_GroundVars {
     /*  +0 gp+104:0 */ CmSubject* x104;
 };
 
+/// Used by multiple Big Blue Ground subtypes (track, road, car gobjs).
+/// Different gobjs interpret the same offsets differently.
+///
+/// Track gobj (ID 32): uses xC8 as HSD_JObj*[30], xCC as u8[30] flags.
+/// Road gobj (ID 34): uses xCC as f32 velocity, xD0/xD8 for position.
+/// Car gobj (ID 33): per-lane data at 0x40-byte stride from gp+D4,
+///   with fields: state(+0), target(+4), delta(+8), pos Vec3(+C),
+///   lateral(+20), direction(+2C), gravity(+30), height(+34),
+///   velocity(+38), accel(+3C), rotation(+40), amplitude(+44),
+///   angular_vel(+48).
 struct grBigBlue_GroundVars {
-    /*  +0 gp+C4:0 */ u8 x0_b0 : 1;
+    /*  +0 gp+C4 */ u8 x0_b0 : 1;
     /* pad */ char pad_1[3];
     /*  +4 gp+C8 */ void* xC8;
     /*  +8 gp+CC */ void* xCC;
+    /*  +C gp+D0 */ f32 xD0;
+    /* +10 gp+D4 */ HSD_JObj* x10;
+    /* +14 gp+D8 */ HSD_JObj* x14;
+    /* +18 gp+DC */ HSD_JObj* x18;
+    /* pad */ char pad_3[4];
+    /* +20 gp+E4 */ u8 x20;
+    /* +21 gp+E5 */ u8 x21;
 };
 
 struct grBigBlueRoute_GroundVars {
     /* +0 gp+C4 */ HSD_GObj* xC4;
+    /* +4 gp+C8 */ void* xC8;
+    /* +8 gp+CC */ HSD_Spline* xCC;
+    /* +C gp+D0 */ HSD_Spline* xD0;
+    /* +10 gp+D4 */ HSD_Spline* xD4;
+    /* +14 gp+D8 */ Vec3 xD8;
+    /* +20 gp+E4 */ Vec3 xE4;
+    /* +2C gp+F0 */ Vec3 xF0;
+    /* +38 gp+FC */ Vec3 xFC;
+    /* +44 gp+108 */ s16 x108;
+    /* +46 gp+10A */ s16 x10A;
 };
 
 struct grCastle_GroundVars {

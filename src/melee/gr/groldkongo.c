@@ -37,7 +37,6 @@ void grOldKongo_8020F46C(void)
 
 void grOldKongo_8020F4E4(void) {}
 
-/// #grOldKongo_8020F4E8
 void grOldKongo_8020F4E8(void)
 {
     HSD_GObj* gobj;

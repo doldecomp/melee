@@ -1273,7 +1273,7 @@ int un_80301964(int arg0)
 
         if (result == 0 && lbSnap_8001DE8C(un_804D6E04) != 0) {
             HSD_GObj* gobj;
-            HSD_SObj_803A477C_t* sobj;
+            HSD_SObj* sobj;
 
             if (un_804D6E08 != NULL) {
                 HSD_GObjPLink_80390228(un_804D6E08);

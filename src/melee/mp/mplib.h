@@ -22,6 +22,7 @@
 /* 04D184 */ void mpPruneEmptyLines(MapCollData* coll_data);
 /* 04D288 */ void mpLibLoad(MapCollData* coll_data);
 /* 04DB78 */ int mpLineGetNext(int line_id);
+/* 04DBB4 */ bool mpLib_8004DBB4(int index, Vec3* out);
 /* 04DC04 */ int mpLineGetPrev(int line_id);
 /* 04DD90 */ int mpLib_8004DD90_Floor(int line_id, Vec3*, float* y_out,
                                       u32* flags_out, Vec3* normal_out);

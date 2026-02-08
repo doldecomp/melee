@@ -2280,20 +2280,24 @@ int gm_801694A0(HSD_GObj* arg0)
 
 UNK_T gm_80169520(void)
 {
-    return &M2C_FIELD(&lbl_8046B488, UNK_T*, 0x20);
+    return lbl_8046B488.x20;
 }
 
 UNK_T gm_80169530(void)
 {
-    return &M2C_FIELD(&lbl_8046B488, UNK_T*, 0xA2);
+    return lbl_8046B488.xA2;
 }
 
 UNK_T gm_80169540(void)
 {
-    return &M2C_FIELD(&lbl_8046B488, UNK_T*, 0x124);
+    return lbl_8046B488.x124;
 }
 
-/// #fn_80169550
+void fn_80169550(int slot)
+{
+    s8 idx = lbl_8046B488.x1A6[slot];
+    lbl_8046B488.x20[idx] = -1;
+}
 
 /// #fn_80169574
 

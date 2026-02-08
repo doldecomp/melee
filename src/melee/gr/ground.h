@@ -101,6 +101,7 @@
 /* 1C39A0 */ void Ground_801C39A0(f32 left);
 /* 1C39B0 */ void Ground_801C39B0(f32 right);
 /* 1C39C0 */ void Ground_801C39C0(void);
+/* 1C3BA8 */ void Ground_801C3BA8(HSD_GObj*, StageCallbacks*, int, int);
 /* 1C3BB4 */ void Ground_801C3BB4(void);
 /* 1C3D44 */ s32 Ground_801C3D44(void*, f32, f32);
 /* 1C3DB4 */ s32 Ground_801C3DB4(void*, f32, f32);

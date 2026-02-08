@@ -688,7 +688,6 @@ bool grIceMt_801F835C(Ground_GObj* param1)
     return false;
 }
 
-/// #grIceMt_801F8364
 void grIceMt_801F8364(Ground_GObj* arg0)
 {
     grIceMt_801F98A8(arg0);
