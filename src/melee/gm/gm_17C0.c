@@ -612,7 +612,31 @@ u8 gm_8017DB78(gm_8017DB6C_arg0_t* arg0, int index)
 
 /// #gm_8017DB88
 
-/// #fn_8017DD7C
+s32 fn_8017DD7C(PlayerInitData* arg0, Unk1PData_x24* arg1, u8 stage)
+{
+    s32 index = 1;
+    int i;
+    for (i = 0; i < 3; i++) {
+        if (arg1[i].ckind != CHKIND_NONE) {
+            gm_8016795C(&arg0[index]);
+            arg0[index].c_kind = arg1[i].ckind;
+            arg0[index].slot_type = 1;
+            arg0[index].stocks = 1;
+            arg0[index].team = arg0->team;
+            arg0[index].color = arg1[i].x1;
+            arg0[index].xE = arg1[i].x3;
+            arg0[index].cpu_level = arg1[i].x2;
+            arg0[index].x18 = arg1[i].x4;
+            arg0[index].x1C = arg1[i].x8;
+            arg0[index].xD_b1 = 1;
+            if (arg0[index].c_kind == CKIND_GKOOPS) {
+                arg0[index].xC_b1 = 0;
+            }
+            index++;
+        }
+    }
+    return index - 1;
+}
 
 /// #fn_8017DE54
 
