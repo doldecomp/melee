@@ -612,7 +612,7 @@ u8 gm_8017DB78(gm_8017DB6C_arg0_t* arg0, int index)
 
 /// #gm_8017DB88
 
-s32 fn_8017DD7C(PlayerInitData* arg0, Unk1PData_x24* arg1)
+u8 fn_8017DD7C(PlayerInitData* arg0, Unk1PData_x24* arg1)
 {
     s32 index = 1;
     int i;
