@@ -602,6 +602,7 @@ struct Item {
         itPokemon_ItemVars pokemon;
         itHitodeman_ItemVars hitodeman;
         itSamusBomb_ItemVars samusbomb;
+        itSamusChargeshot_ItemVars samuschargeshot;
         itSamusGrapple_ItemVars samusgrapple;
         itSeakChain_ItemVars seakchain;
         itSeakNeedleThrown_ItemVars seakneedlethrown;
@@ -630,6 +631,7 @@ struct Item {
         itkireihana_ItemVars kireihana;
         itThunder_ItemVars thunder;
         itTools_ItemVars tools;
+        itUnknown_ItemVars unknown;
         u8 _[0xFCC - 0xDD4];
     } xDD4_itemVar;
 };

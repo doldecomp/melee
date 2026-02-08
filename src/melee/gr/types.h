@@ -751,8 +751,9 @@ struct grGreens_GroundVars {
 };
 
 struct grMuteCity_GroundVars {
-    /* +0x00 gp+C4) */ u32 xC4;
-    /* +0x00 gp+C8) */ u32 xC8;
+    /* +0x00 gp+C4) */ s16 xC4;
+    /* +0x02 gp+C6) */ s16 xC6;
+    /* +0x04 gp+C8) */ u32 xC8;
     /* +0x00 gp+CC) */ u32 xCC;
     /* +0x00 gp+D0) */ struct {
         u8 b0 : 1;

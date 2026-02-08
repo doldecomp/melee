@@ -90,7 +90,7 @@ static void fn_801095DC(HSD_GObj*);
 static void fn_80109680(HSD_GObj*);
 static void fn_80109714(HSD_GObj*);
 static void fn_801097B8(HSD_GObj*);
-void fn_800F64C8(Fighter_GObj*);
+void fn_800F64C8(Fighter_GObj*, float);
 void fn_8010A930(Fighter_GObj*, Fighter_GObj*);
 
 MotionState ftKb_Init_MotionStateTable[ftKb_MS_SelfCount] = {
@@ -3897,7 +3897,13 @@ void ftKb_SpecialN_800F13F0(Fighter_GObj* gobj)
 
 /// #ftKb_SpecialN_800F14B4
 
-/// #ftKb_SpecialN_800F15D8
+void ftKb_SpecialN_800F15D8(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftKb_SpecialN_800EF69C(gobj, 0x18, ft_80459B88.hats[FTKIND_PICHU]);
+    fp->x5AC.xC[4] = NULL;
+    Fighter_UpdateModelScale(gobj);
+}
 
 /// #ftKb_SpecialN_Enter
 

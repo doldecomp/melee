@@ -196,7 +196,11 @@ void grOnett_801E502C(Ground_GObj* gobj) {}
 
 /// #grOnett_801E5030
 
-/// #grOnett_801E5140
+void grOnett_801E5140(s32 idx)
+{
+    u32 table[] = { 0x5F370, 0x5F370, 0x5F371, 0x5F372 };
+    Ground_801C53EC(table[idx]);
+}
 
 /// #grOnett_801E5194
 
