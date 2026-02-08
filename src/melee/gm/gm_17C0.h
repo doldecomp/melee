@@ -29,7 +29,7 @@
 /* 17DB6C */ u8 gm_8017DB6C(gm_8017DB6C_arg0_t* arg0, int index);
 /* 17DB78 */ u8 gm_8017DB78(gm_8017DB6C_arg0_t* arg0, int index);
 /* 17DB88 */ UNK_RET gm_8017DB88(UNK_PARAMS);
-/* 17DD7C */ UNK_RET fn_8017DD7C(UNK_PARAMS);
+/* 17DD7C */ u8 fn_8017DD7C(PlayerInitData* arg0, Unk1PData_x24* arg1);
 /* 17DE54 */ UNK_RET fn_8017DE54(UNK_PARAMS);
 /* 17DEC8 */ Unk1PData* fn_8017DEC8(int);
 /* 17DF28 */ Unk1PData* fn_8017DF28(void);
