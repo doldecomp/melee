@@ -33,7 +33,15 @@ void it_802C9E44(Item_GObj* gobj)
     it_802C9E8C(gobj);
 }
 
-/// #it_802C9E8C
+void it_802C9E8C(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+    ip->entered_hitlag = efLib_PauseAll;
+    ip->exited_hitlag = efLib_ResumeAll;
+    ip->on_accessory = (HSD_GObjEvent) it_802CA014;
+    Camera_80030E44(3, NULL);
+}
 
 /// #itKabigon_UnkMotion0_Anim
 
