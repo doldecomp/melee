@@ -330,3 +330,5 @@ struct lbl_803D5A4C_t {
     };
 
 /* 4D65A0 */ static u8 lbl_804D65A0;
+/* 4D65A8 */ static u8 lbl_804D65A8[6];
+/* 4D65B0 */ static s32 lbl_804D65B0;

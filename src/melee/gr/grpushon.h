@@ -30,7 +30,7 @@
 /* 218FC0 */ UNK_RET grPushOn_80218FC0(UNK_PARAMS);
 /* 2190A0 */ void fn_802190A0(Ground*, s32, CollData*, s32, mpLib_GroundEnum);
 /* 2190D0 */ UNK_RET grPushOn_802190D0(UNK_PARAMS);
-/* 219204 */ UNK_RET grPushOn_80219204(UNK_PARAMS);
+/* 219204 */ void grPushOn_80219204(int arg0, int* out1, int* out2);
 /* 219230 */ int grPushOn_80219230(int);
 /* 2192A4 */ UNK_RET fn_802192A4(UNK_PARAMS);
 /* 219458 */ DynamicsDesc* grPushOn_80219458(enum_t);

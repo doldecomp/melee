@@ -2299,7 +2299,11 @@ void fn_80169550(int slot)
     lbl_8046B488.x20[idx] = -1;
 }
 
-/// #fn_80169574
+void fn_80169574(ssize_t size, void* buf)
+{
+    memzero(buf, size);
+    ((s8*) buf)[size] = -2;
+}
 
 /// #fn_801695BC
 

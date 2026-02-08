@@ -26,7 +26,18 @@ s32 grZakoGenerator_801CADE0(void)
 
 /// #grZakoGenerator_801CAE04
 
-/// #grZakoGenerator_801CAEB0
+void grZakoGenerator_801CAEB0(int arg0, int arg1)
+{
+    struct grZakoGenerator_Data* data = lbl_8049F030.x4;
+    s16 val = (s16) arg1;
+
+    if (data->x3C0 != -1) {
+        return;
+    }
+    data->x3C0 = val;
+    lbl_8049F030.x4->x3C8 = arg0;
+    lbl_8049F030.x4->x3C4 = 0;
+}
 
 void grZakoGenerator_801CAEF0(bool arg0)
 {
