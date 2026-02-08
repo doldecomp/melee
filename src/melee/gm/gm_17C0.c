@@ -738,11 +738,11 @@ void fn_8017E21C(void) {
 
 /// #fn_8017E318
 
-void fn_8017E3C8(void) {
+void fn_8017E3C8(void)
+{
     int i = 0;
     PAD_STACK(8);
-
-    for(i = 0; i < 12; i++){
+    for(i = 0; i < 12; i++) {
         if (lbl_804706D8[i].x0 != -1) {
             Trophy_SetUnlockState(lbl_804706D8[i].x0, lbl_804706D8[i].x2);
         }
