@@ -13,6 +13,8 @@
 #include "it/it_2725.h"
 #include "it/item.h"
 
+#include <baselib/random.h>
+
 typedef struct {
     u8 _pad[0x40];
     s32 x40;
