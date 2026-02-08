@@ -14,7 +14,7 @@
 /* 28D390 */ s32 it_8028D390(Item_GObj* gobj);
 /* 28D3B8 */ void it_8028D3B8(Item_GObj* gobj);
 /* 28D4A8 */ void fn_8028D4A8(Item_GObj* gobj);
-/* 28D4E4 */ UNK_RET it_8028D4E4(UNK_PARAMS);
+/* 28D4E4 */ void it_8028D4E4(Item_GObj* gobj);
 /* 28D56C */ f32 it_8028D56C(Item_GObj*, f32, f32);
 /* 28D59C */ void it_3F14_Logic15_Spawned(Item_GObj*);
 /* 28D62C */ void it_8028D62C(Item_GObj* gobj);
