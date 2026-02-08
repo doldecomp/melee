@@ -69,7 +69,13 @@ bool grRCruise_801FF6CC(Ground_GObj* arg)
 
 void grRCruise_801FF738(Ground_GObj* arg) {}
 
-/// #grRCruise_801FF73C
+void grRCruise_801FF73C(Ground_GObj* gobj)
+{
+    Ground* gp = gobj->user_data;
+    grAnime_801C8138(gobj, gp->map_id, 0);
+    HSD_JObjSetFlagsAll(gobj->hsd_obj, 0x10);
+    HSD_JObjClearFlagsAll(Ground_801C3FA4(gobj, 31), 0x10);
+}
 
 bool grRCruise_801FF794(Ground_GObj* arg)
 {
