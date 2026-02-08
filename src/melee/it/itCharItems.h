@@ -472,10 +472,14 @@ typedef struct itPeachTurnip_ItemVars {
 } itPeachTurnip_ItemVars;
 
 typedef struct itPikachutJoltGround_ItemVars {
-    /* +0 +DD4 */ char pad_0[0x8];
-    /* +8 +DDC */ UNK_T unk_8;
-    /* +C +DE0 */ char pad_1[0x8];
+    /* +0 +DD4 */ f32 xDD4;
+    /* +4 +DD8 */ char pad_0[0x4];
+    /* +8 +DDC */ Item_GObj* xDDC;
+    /* +C +DE0 */ s32 xDE0;
+    /* +10 +DE4 */ s32 xDE4;
     /* +14 +DE8 */ Vec3 xDE8;
+    /* +20 +DF4 */ Vec3 xDF4;
+    /* +2C +E00 */ Vec3 xE00;
 } itPikachutJoltGround_ItemVars;
 
 typedef struct itPikachutJoltAir_ItemVars {
@@ -496,6 +500,13 @@ typedef struct itPikachuthunder_ItemVars {
     /* +34 +E08 */ Item_GObj* x34;
     /* +38 +E0C */ Item_GObj* x38;
 } itPikachuthunder_ItemVars;
+
+typedef struct itPikachutJoltGroundAttributes {
+    /* +0 */ char pad_0[0x4];
+    /* +4 */ f32 x4;
+    /* +8 */ f32 x8;
+    /* +C */ f32 xC;
+} itPikachutJoltGroundAttributes;
 
 typedef struct itPikachuthunderAttributes {
     /* +0 */ f32 x0;
