@@ -14,7 +14,7 @@
 /* 2B1FC8 */ s32 it_802B1FC8(Item_GObj*);
 /* 2B1FE8 */ void it_802B1FE8(Item_GObj*, Vec3*);
 /* 2B202C */ void it_2725_Logic39_Destroyed(Item_GObj*);
-/* 2B2080 */ UNK_RET it_802B2080(UNK_PARAMS);
+/* 2B2080 */ void it_802B2080(Item_GObj*);
 /* 2B20DC */ bool itPikachuthunder_UnkMotion0_Anim(Item_GObj* gobj);
 /* 2B211C */ UNK_RET it_802B211C(UNK_PARAMS);
 /* 2B21A8 */ bool itPikachuthunder_UnkMotion1_Anim(Item_GObj* gobj);
