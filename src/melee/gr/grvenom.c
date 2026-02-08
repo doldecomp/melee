@@ -381,7 +381,8 @@ void grVenom_80204284(Ground_GObj* gobj)
                 other_gobj = (Ground_GObj*) grVenom_80203EAC(1);
                 if (other_gobj != NULL) {
                     Ground* other_gp = GET_GROUND(other_gobj);
-                    grCorneria_801E25C4(&other_gp->gv.venom.xC4, 4, 6,
+                    grCorneria_801E25C4(other_gobj,
+                                        &other_gp->gv.venom.xC4, 4, 6,
                                         0x6B6CC);
                 }
             } else {

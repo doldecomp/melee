@@ -8,9 +8,16 @@
 
 #include <baselib/random.h>
 
+struct grPushOn_Entry {
+    s32 x0;
+    s16 x4;
+    s16 x6;
+};
+
 static struct {
     char pad[0x18];
     bool x18;
+    struct grPushOn_Entry x1c[0x21];
 }* grPushOn_804D6AB8;
 
 void grPushOn_802182C4(bool arg) {}
@@ -94,7 +101,12 @@ void fn_802190A0(Ground* gp, s32 joint_id, CollData* coll, s32 unk,
 
 /// #grPushOn_802190D0
 
-/// #grPushOn_80219204
+void grPushOn_80219204(int arg0, int* out1, int* out2)
+{
+    int idx = arg0 - 0x99;
+    *out1 = grPushOn_804D6AB8->x1c[idx].x0;
+    *out2 = grPushOn_804D6AB8->x1c[idx].x4;
+}
 
 /// #grPushOn_80219230
 

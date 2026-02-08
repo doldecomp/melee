@@ -13,6 +13,16 @@
 #include <melee/pl/plbonus.h>
 #include <melee/ty/toy.h>
 
+struct lbl_804D65A8_t {
+    /* 0x00 */ u8 x0;
+    /* 0x01 */ u8 x1;
+    /* 0x02 */ u8 x2;
+    /* 0x03 */ u8 x3;
+    /* 0x04 */ u8 x4;
+    /* 0x05 */ u8 x5;
+    /* 0x06 */ u8 x6;
+};
+
 struct lbl_803D6300_t {
     u16 x0;
     u16 x2;
@@ -202,7 +212,16 @@ bool fn_80171B2C(int arg0)
     return false;
 }
 
-/// #fn_80171B64
+void fn_80171B64(struct lbl_804D65A8_t* arg0)
+{
+    arg0->x0 = lbl_804D65A8[0];
+    arg0->x1 = lbl_804D65A8[1];
+    arg0->x2 = lbl_804D65A8[2];
+    arg0->x3 = lbl_804D65A8[3];
+    arg0->x4 = lbl_804D65A8[4];
+    arg0->x5 = lbl_804D65A8[5];
+    arg0->x6 = (u8) lbl_804D65B0;
+}
 
 /// #fn_80171BA4
 
