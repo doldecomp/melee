@@ -733,15 +733,39 @@ typedef struct itTaru_ItemVars {
 } itTaru_ItemVars;
 
 typedef struct itTarucann_ItemVars {
-    /*  +0 ip+DD4 */ u8 pad[0x20];
-    /* +20 ip+DF4 */ u32 x20;
+    /*  +0 ip+DD4 */ s32 x0;
+    /*  +4 ip+DD8 */ s32 x4;
+    /*  +8 ip+DDC */ f32 x8;
+    /*  +C ip+DE0 */ f32 xC;
+    /* +10 ip+DE4 */ f32 x10;
+    /* +14 ip+DE8 */ Vec3 x14;
+    /* +20 ip+DF4 */ Fighter_GObj* x20;
+    /* +24 ip+DF8 */ s32 x24;
+    /* +28 ip+DFC */ f32 x28;
 } itTarucann_ItemVars;
 
 typedef struct itTaruCann_DatAttrs {
-    /*  +0 */ char pad_0[0x24];
+    /* +00 */ f32 x0;
+    /* +04 */ char pad_4[0x4];
+    /* +08 */ f32 x8;
+    /* +0C */ f32 xC;
+    /* +10 */ f32 x10;
+    /* +14 */ f32 x14;
+    /* +18 */ f32 x18;
+    /* +1C */ f32 x1C;
+    /* +20 */ f32 x20;
     /* +24 */ f32 x24;
     /* +28 */ int x28;
     /* +2C */ int x2C;
+    /* +30 */ u32 x30;
+    /* +34 */ int x34;
+    /* +38 */ u32 x38;
+    /* +3C */ u32 x3C;
+    /* +40 */ u32 x40;
+    /* +44 */ u32 x44;
+    /* +48 */ f32 x48;
+    /* +4C */ f32 x4C;
+    /* +50 */ f32 x50;
 } itTaruCann_DatAttrs;
 
 typedef struct itKusudama_ItemVars {
