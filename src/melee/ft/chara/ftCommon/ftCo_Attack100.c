@@ -1188,7 +1188,18 @@ static void fn_800DB5D8(Fighter_GObj* gobj)
 
 /// #fn_800DB790
 
-/// #fn_800DB8A4
+#pragma push
+#pragma dont_inline on
+void fn_800DB8A4(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    FighterOverlay* fp_ovl = (FighterOverlay*) fp;
+    fp_ovl->x2340 = (f32) ((f64) fp_ovl->x2340 + ftCo_804D90D8);
+    fp_ovl->x1A4C -= *(f32*) ((u8*) p_ftCommonData + 0x3A4);
+    fp_ovl->x2348 =
+        ftCommon_GrabMash(fp, *(f32*) ((u8*) p_ftCommonData + 0x3A8));
+}
+#pragma pop
 
 void ftCo_CaptureWaitHi_Anim(Fighter_GObj* gobj)
 {

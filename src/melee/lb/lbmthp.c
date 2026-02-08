@@ -104,7 +104,16 @@ s32 fn_8001F294(void)
 
 /// #lbMthp_8001F410
 
-/// #lbMthp_8001F578
+void lbMthp_8001F578(void)
+{
+    BOOL intr;
+    PAD_STACK(8);
+    intr = OSDisableInterrupts();
+    lbl_804333E0.unk_90 = lbl_804333E0.unk_88;
+    lbl_804333E0.unk_7C = lbl_804333E0.unk_78;
+    lbl_804333E0.unk_84 = lbl_804333E0.unk_80;
+    OSRestoreInterrupts(intr);
+}
 
 s32 lbMthp_8001F5C4(void)
 {
