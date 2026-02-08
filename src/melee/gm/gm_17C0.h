@@ -22,7 +22,7 @@
 /* 17CBAC */ UNK_RET gm_8017CBAC(UnkAdventureData*, struct gmm_x0_528_t*, u8);
 /* 17CD94 */ UNK_RET gm_8017CD94(UNK_PARAMS);
 /* 17CE34 */ UNK_RET gm_8017CE34(StartMeleeData*, UnkAdventureData*, s8*, u8,
-                                 u8, u8, int, int, u8 count, int);
+                                 u8, u8, int, int, int count, int);
 /* 17D7AC */ bool gm_8017D7AC(MatchExitInfo*, Unk1PData*, u8);
 /* 17D9C0 */ UNK_RET fn_8017D9C0(UNK_PARAMS);
 /* 17DB58 */ void gm_8017DB58(struct Unk1PData_x24* arg0);
@@ -45,17 +45,17 @@
 /* 17E424 */ UnkAdventureData* gm_8017E424(void);
 /* 17E430 */ u8 gm_8017E430(void); ///< returns a player slot
 /* 17E440 */ u8 gm_8017E440(void);
-/* 17E48C */ int gm_8017E48C(MinorScene*);
+/* 17E48C */ u8 gm_8017E48C(MinorScene*);
 /* 17E4C4 */ struct gm_803DE650_t* gm_8017E4C4(u8);
-/* 17E500 */ u8 gm_8017E500(int, u8);
-/* 17E528 */ f32 gm_8017E528(int, u8);
-/* 17E578 */ f32 gm_8017E578(int, u8);
-/* 17E5C8 */ u8 gm_8017E5C8(int, u8, u8);
-/* 17E5FC */ u8 gm_8017E5FC(int, u8, u8);
+/* 17E500 */ u8 gm_8017E500(u8, u8);
+/* 17E528 */ f32 gm_8017E528(u8, u8);
+/* 17E578 */ f32 gm_8017E578(u8, u8);
+/* 17E5C8 */ u8 gm_8017E5C8(u8, u8, u8);
+/* 17E5FC */ u8 gm_8017E5FC(u8, u8, u8);
 /* 17E630 */ u8 gm_8017E630(u8 difficulty, u8 stage_slot, u8 arg2);
 /* 17E664 */ f32 gm_8017E664(u8, u8);
 /* 17E6B4 */ f32 gm_8017E6B4(u8, u8);
-/* 17E704 */ u8 gm_8017E704(int difficulty, u8 stage_slot, u8 arg2);
+/* 17E704 */ u8 gm_8017E704(u8 difficulty, u8 stage_slot, u8 arg2);
 /* 17E738 */ u8 gm_8017E738(u8 difficulty, u8 stage_slot, u8 arg2);
 /* 17E76C */ u8 gm_8017E76C(u8 difficulty, u8 stage_slot, u8 arg2);
 /* 17E7A0 */ void gm_8017E7A0(int);
@@ -70,8 +70,8 @@
 /* 17EC00 */ f32 gm_8017EC00(u8, u8);
 /* 17EC50 */ f32 gm_8017EC50(u8, u8);
 /* 17ECA0 */ u8 gm_8017ECA0(u8 difficulty, u8 stage_slot, u8 arg2);
-/* 17ECD4 */ UNK_RET gm_8017ECD4(UNK_PARAMS);
-/* 17ED08 */ UNK_RET gm_8017ED08(UNK_PARAMS);
+/* 17ECD4 */ u8 gm_8017ECD4(u8 difficulty, u8 stage_slot, u8 arg2);
+/* 17ED08 */ u8 gm_8017ED08(u8 difficulty, u8 stage_slot, u8 arg2);
 /* 17ED3C */ f32 gm_8017ED3C(u8, u8);
 /* 17ED8C */ f32 gm_8017ED8C(u8, u8);
 /* 17EDDC */ bool fn_8017EDDC(void);
@@ -111,7 +111,7 @@
 /* 181E18 */ UNK_RET fn_80181E18(UNK_PARAMS);
 /* 182174 */ UNK_RET gm_80182174(UNK_PARAMS);
 /* 182510 */ bool gm_80182510(void);
-/* 182554 */ UNK_RET gm_80182554(int, int);
+/* 182554 */ void gm_80182554(int, int);
 /* 182578 */ UNK_RET gm_80182578(UNK_PARAMS);
 /* 182B5C */ UNK_RET fn_80182B5C(UNK_PARAMS);
 /* 182DF0 */ UnkMultimanData* gm_80182DF0(int c_kind, int);

@@ -5,6 +5,7 @@
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
+#include "mp/mplib.h"
 
 #include <baselib/gobj.h>
 #include <baselib/random.h>
@@ -87,7 +88,15 @@ void grZebesRoute_8020B3B8(Ground_GObj* arg) {}
 
 void grZebesRoute_8020B3BC(Ground_GObj* arg) {}
 
-/// #grZebesRoute_8020B3C0
+void grZebesRoute_8020B3C0(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    grAnime_801C8138(gobj, gp->map_id, 0);
+    gp->x8_callback = NULL;
+    gp->xC_callback = NULL;
+    mpJointSetCb1(1, gp, (mpLib_Callback) fn_8020B4D8);
+    gp->gv.zebes2.xC4 = (s16) grZe_Route_804D6A60->x0;
+}
 
 bool grZebesRoute_8020B424(Ground_GObj* arg)
 {

@@ -3,8 +3,21 @@
 
 #include <platform.h>
 
+struct grZakoGenerator_Data {
+    /* +0x000 */ s16 x0;
+    /* +0x002 */ s16 x2;
+    /* +0x004 */ s32 x4;
+    /* +0x008 */ char pad_8[0x3B8];
+    /* +0x3C0 */ s16 x3C0;
+    /* +0x3C2 */ s16 x3C2;
+    /* +0x3C4 */ s32 x3C4;
+    /* +0x3C8 */ s32 x3C8;
+};
+
 struct lbl_8049F030_t {
-    /* +0 */ char pad_0[0xA];
+    /* +0 */ void* x0;
+    /* +4 */ struct grZakoGenerator_Data* x4;
+    /* +8 */ s16 x8;
     /* +A:0 */ u8 xA_b0 : 1;
     /* +A:1 */ u8 xA_b1 : 1;
     /* +A:2 */ u8 xA_b2 : 1;

@@ -576,11 +576,36 @@ void smashTaunt_801E2550(Ground_GObj* gobj, struct grSmashTaunt_GroundVars* gv)
     gobj->render_cb = smashTaunt_801E24AC;
 }
 
-/// #grCorneria_801E2598
+typedef struct {
+    int data[3];
+} grCn_Entry;
+
+extern grCn_Entry grCn_803E2204[][5];
+
+typedef struct grCn_Data {
+    /* 0x000 */ u8 pad[0x4CC];
+    /* 0x4CC */ grCn_Entry entries[][5];
+} grCn_Data;
+
+extern grCn_Data grCn_803E1D38;
+
+s32 grCorneria_801E2598(u32 arg0, u32 arg1)
+{
+    int val;
+
+    val = grCn_803E2204[arg0][arg1].data[0];
+    return val != 0;
+}
 
 /// #grCorneria_801E25C4
 
-/// #grCorneria_801E2738
+void grCorneria_801E2738(HSD_GObj* gobj, void* ptr, u32 idx1, u32 idx2)
+{
+    grCorneria_801E25C4(gobj, ptr,
+                        grCn_803E1D38.entries[idx1][idx2].data[0],
+                        grCn_803E1D38.entries[idx1][idx2].data[1],
+                        grCn_803E1D38.entries[idx1][idx2].data[2]);
+}
 
 /// #grCorneria_801E277C
 

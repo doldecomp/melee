@@ -1469,7 +1469,7 @@ void gm_801B4860(MinorScene* scene)
 
 void gm_801B4974(MinorScene* arg0)
 {
-    int count;
+    u8 count;
     UnkAdventureData* temp_r29;
     UnkAdventureData* temp_r3;
     struct gm_803DE650_t* temp_r25_2;
@@ -1519,7 +1519,7 @@ static inline void inline0(MinorScene* scene)
     if (adv_data->x0.xC.x11 != 1) {
         UNK_T unused1 = gm_80169520();
         UNK_T unused2 = gm_80169540();
-        int count = gm_8017E48C(scene);
+        u8 count = gm_8017E48C(scene);
         struct gm_803DE650_t* temp_r29 = gm_8017E4C4(scene->idx);
         gm_8016A22C(temp_r29->xA[0], temp_r29->xA[1], temp_r29->xA[2],
                     temp_r29->xD, temp_r29->xE, temp_r29->xF, 1, 0, 1,

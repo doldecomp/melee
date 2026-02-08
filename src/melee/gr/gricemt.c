@@ -688,7 +688,6 @@ bool grIceMt_801F835C(Ground_GObj* param1)
     return false;
 }
 
-/// #grIceMt_801F8364
 void grIceMt_801F8364(Ground_GObj* arg0)
 {
     grIceMt_801F98A8(arg0);
@@ -740,11 +739,10 @@ bool grIceMt_801F85BC(Ground_GObj* param1)
     return false;
 }
 
-/// #grIceMt_801F85C4
 void grIceMt_801F85C4(Ground_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
-    grIceMt_801F929C((HSD_GObj*) &gp->gv.icemt.xF8[4]);
+    grIceMt_801F929C(gobj, &gp->gv.icemt.xF8[4]);
     grIceMt_801F98A8(gobj);
     Ground_801C2FE0(gobj);
 }
@@ -980,16 +978,23 @@ IceMountainParams* fn_801F9150(HSD_GObj* arg0)
 
 void fn_801F91A4(void) {}
 
-/// #fn_801F91A8 grIm_804D69F4
-/// @todo This function reads xAC[gp->xE0] and returns grIm_803E4068[index].id
-HSD_GObj* fn_801F91A8(HSD_GObj* arg0)
+HSD_GObj* fn_801F91A8(HSD_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(arg0);
-    s16 index = grIm_804D69F4->xAC[gp->gv.icemt.xE0];
-    if (index == -1) {
-        return (HSD_GObj*) (s32) index;
+    Ground* gp;
+    s16 xE0_val;
+    s32 index;
+    s32 result;
+
+    gp = gobj->user_data;
+    xE0_val = gp->gv.icemt.xE0;
+    index = grIm_804D69F4->xAC[xE0_val];
+    result = index;
+    if (result == -1) {
+        return (HSD_GObj*) result;
     }
-    return (HSD_GObj*) grIm_803E4068[index].id;
+    result = grIm_803E4068[index].id;
+    gp->gv.icemt.xE0 = xE0_val + 1;
+    return (HSD_GObj*) result;
 }
 
 /// #grIceMt_801F91EC
@@ -1013,7 +1018,7 @@ void FUN_801f91ec(HSD_GObj* param_1, s16* param_2, int param_3, int param_4,
 }
 
 /// #grIceMt_801F929C
-void grIceMt_801F929C(HSD_GObj* arg0)
+void grIceMt_801F929C(HSD_GObj* arg0, void* arg1)
 {
     mpLib_80057BC0(2);
     mpJointListAdd(2);
