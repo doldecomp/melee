@@ -1340,4 +1340,21 @@ typedef struct itOldkuri_ItemVars {
     /* +28 */ s32 xDFC;
 } itOldkuri_ItemVars;
 
+typedef struct itUnknown_ItemVars {
+    /* +00 ip+DD4 */ char pad_0[0x60];
+    /* +60 ip+E34 */ f32 x60;
+    /* +64 ip+E38 */ s32 x64;
+    /* +68 ip+E3C */ s32 x68;
+} itUnknown_ItemVars;
+
+typedef struct itUnknownAttributes {
+    /* +00 */ f32 x0;
+    /* +04 */ f32 x4;
+    /* +08 */ char pad_8[0x4];
+    /* +0C */ f32 xC;
+    /* +10 */ f32 x10;
+    /* +14 */ char pad_14[0x4];
+    /* +18 */ s32 x18;
+} itUnknownAttributes;
+
 #endif

@@ -26,7 +26,15 @@ void it_802D9B78(Item_GObj* gobj)
 
 /// #it_2725_Logic5_DmgReceived
 
-/// #it_802D9DDC
+void it_802D9DDC(Item_GObj* gobj)
+{
+    PAD_STACK(16);
+    it_8027CAD8(gobj);
+    it_8026D5CC(gobj);
+    it_8027C0A8(gobj, 0.0f, 5.0f);
+    it_80275270(gobj);
+    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+}
 
 bool itLikelike_UnkMotion0_Anim(Item_GObj* gobj)
 {

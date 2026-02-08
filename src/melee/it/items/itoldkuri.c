@@ -117,7 +117,15 @@ void itOldkuri_UnkMotion5_Phys(Item_GObj* gobj) {}
 
 /// #it_2725_Logic0_Dropped
 
-/// #it_2725_Logic0_Thrown
+void it_2725_Logic0_Thrown(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    it_8027CB3C(gobj);
+    it_80274C88(gobj);
+    ip->xDD4_itemVar.oldkuri.xDF8 = 0;
+    Item_80268E5C(gobj, 6, ITEM_ANIM_UPDATE);
+    it_8027C56C(gobj, 0.0f);
+}
 
 bool itOldkuri_UnkMotion6_Anim(Item_GObj* gobj)
 {
