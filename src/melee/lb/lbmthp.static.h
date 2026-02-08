@@ -57,4 +57,17 @@ STATIC_ASSERT(sizeof(struct lbl_804335B8_t) == 0xA0);
 /* 4335B8 */ static struct lbl_804335B8_t lbl_804335B8;
 /* 4D7CE0 */ static float lbl_804D7CE0;
 
+struct lbl_803BAFE8_t {
+    /* 0x00 */ s32 x0;
+    /* 0x04 */ u16 x4;
+    /* 0x06 */ u16 x6;
+    /* 0x08 */ s32 x8;
+    /* 0x0C */ s32 xC;
+    /* 0x10 */ s32 x10;
+    /* 0x14 */ s32 x14;
+}; /* size = 0x18 */
+
+/* 3BAFE8 */ extern struct lbl_803BAFE8_t lbl_803BAFE8;
+/* 4D3834 */ extern s32 lbl_804D3834;
+
 #endif
