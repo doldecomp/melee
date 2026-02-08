@@ -519,6 +519,12 @@ typedef struct itSamusBomb_ItemVars {
     /* +4 +DD8 */ s32 xDD8;
 } itSamusBomb_ItemVars;
 
+typedef struct itSamusChargeshot_ItemVars {
+    /* +0 +DD4 */ s32 x0;
+    /* +4 +DD8 */ f32 x4;
+    /* +8 +DDC */ f32 x8;
+} itSamusChargeshot_ItemVars;
+
 typedef struct itSamusGrapple_ItemVars {
     /* +0 +DD4 */ f32 x0;
     /* +4 +DD8 */ f32 x4;
