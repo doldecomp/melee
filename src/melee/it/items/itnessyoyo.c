@@ -62,6 +62,9 @@ void itNessYoyo_Logic59_PickedUp(Item_GObj* gobj)
 
 /// #it_802C0010
 
+#ifdef MWERKS_GEKKO
+
+#pragma push
 asm void it_2725_Logic59_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     // clang-format off
@@ -84,3 +87,13 @@ asm void it_2725_Logic59_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
     blr
     // clang-format on
 }
+#pragma pop
+
+#else
+
+void it_2725_Logic59_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
+{
+    NOT_IMPLEMENTED;
+}
+
+#endif
