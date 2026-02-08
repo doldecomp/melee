@@ -111,7 +111,7 @@
 /* 181E18 */ UNK_RET fn_80181E18(UNK_PARAMS);
 /* 182174 */ UNK_RET gm_80182174(UNK_PARAMS);
 /* 182510 */ bool gm_80182510(void);
-/* 182554 */ UNK_RET gm_80182554(int, int);
+/* 182554 */ void gm_80182554(int, int);
 /* 182578 */ UNK_RET gm_80182578(UNK_PARAMS);
 /* 182B5C */ UNK_RET fn_80182B5C(UNK_PARAMS);
 /* 182DF0 */ UnkMultimanData* gm_80182DF0(int c_kind, int);

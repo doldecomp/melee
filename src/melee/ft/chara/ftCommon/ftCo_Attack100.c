@@ -1277,7 +1277,16 @@ void ftCo_CaptureWaitLw_Coll(Fighter_GObj* gobj)
 
 /// #fn_800DBED4
 
-/// #fn_800DC014
+void fn_800DC014(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    FighterOverlay* fp_ovl = (FighterOverlay*) fp;
+    if (fp_ovl->x2340 < p_ftCommonData->x3AC) {
+        if (fp->input.x668 & HSD_PAD_XY) {
+            fp_ovl->x234C = true;
+        }
+    }
+}
 
 /// #fn_800DC044
 

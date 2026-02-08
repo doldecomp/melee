@@ -484,9 +484,24 @@ typedef struct itPikachutJoltAir_ItemVars {
 } itPikachutJoltAir_ItemVars;
 
 typedef struct itPikachuthunder_ItemVars {
-    /* +0 */ char pad_0[0x38];
-    /* +38 */ Item_GObj* x38;
+    /* +0 +DD4 */ s32 x0;
+    /* +4 +DD8 */ s32 x4;
+    /* +8 +DDC */ s32 x8;
+    /* +C +DE0 */ f32 xC;
+    /* +10 +DE4 */ f32 x10;
+    /* +14 +DE8 */ f32 x14;
+    /* +18 +DEC */ f32 x18;
+    /* +1C +DF0 */ Vec3 x1C;
+    /* +28 +DFC */ Vec3 x28;
+    /* +34 +E08 */ Item_GObj* x34;
+    /* +38 +E0C */ Item_GObj* x38;
 } itPikachuthunder_ItemVars;
+
+typedef struct itPikachuthunderAttributes {
+    /* +0 */ f32 x0;
+    /* +4 */ f32 x4;
+    /* +8 */ f32 x8;
+} itPikachuthunderAttributes;
 
 typedef struct itSamusBomb_ItemVars {
     /* +0 +DD4 */ char pad_0[0x4];

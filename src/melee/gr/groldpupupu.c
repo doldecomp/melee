@@ -70,7 +70,15 @@ void grOldPupupu_802109D0(Ground_GObj* arg) {}
 
 void grOldPupupu_802109D4(Ground_GObj* arg) {}
 
-/// #grOldPupupu_802109D8
+void grOldPupupu_802109D8(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    gp->gv.unk.xC4 = 0;
+    gp->gv.unk.xC8 = 0;
+    gp->gv.unk.xCC = 0;
+    gp->gv.unk.xD0 = 1;
+    grAnime_801C8138(gobj, gp->map_id, 0);
+}
 
 bool grOldPupupu_80210A1C(Ground_GObj* gobj)
 {

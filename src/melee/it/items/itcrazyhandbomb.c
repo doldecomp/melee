@@ -7,6 +7,7 @@
 #include "it/it_2725.h"
 #include "it/inlines.h"
 #include "it/it_266F.h"
+#include "it/item.h"
 
 /// #it_802F0F6C
 
@@ -19,7 +20,7 @@ void itCrazyHandBomb_Logic86_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 
 bool itCrazyHandBomb_Logic86_DmgDealt(Item_GObj* gobj)
 {
-    it_802F1344();
+    it_802F1344(gobj);
     return 1;
 }
 
@@ -48,7 +49,13 @@ bool itCrazyhandbomb_UnkMotion0_Coll(Item_GObj* gobj)
 
 void it_802F1340(void) {}
 
-/// #it_802F1344
+void it_802F1344(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    PAD_STACK(8);
+    Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
+    ip->on_accessory = it_802F13B0;
+}
 
 bool itCrazyhandbomb_UnkMotion1_Anim(Item_GObj* gobj)
 {
@@ -62,4 +69,4 @@ bool itCrazyhandbomb_UnkMotion1_Coll(Item_GObj* gobj)
     return false;
 }
 
-void it_802F13B0(void) {}
+void it_802F13B0(HSD_GObj* gobj) {}
