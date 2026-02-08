@@ -371,7 +371,8 @@ typedef struct itFreeze_ItemVars {
     /*  +0 */ f32 x0;
     /*  +4 */ Vec3 x4;
     /* +10 */ f32 x10;
-    /* +14 */ u8 pad[0x8];
+    /* +14 */ f32 x14;
+    /* +18 */ s32 x18;
     /* +1C */ Item_GObj* unk_1C;
     /* +20 */ UNK_T x20;
 } itFreeze_ItemVars;
