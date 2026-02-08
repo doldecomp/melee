@@ -2075,7 +2075,7 @@ void Player_80036E20(CharacterKind ckind, HSD_Archive* archive, s32 arg2)
     }
 }
 
-s32 Player_80036EA0(s32 slot)
+HSD_JObj* Player_80036EA0(s32 slot)
 {
     StaticPlayer* player;
     HSD_GObj* entity;
@@ -2085,11 +2085,10 @@ s32 Player_80036EA0(s32 slot)
     entity = player->player_entity[player->transformed[0]];
 
     if (entity) {
-        /// @todo Eliminate cast.
-        return (s32) ftLib_800865F0(entity);
+        return ftLib_800865F0(entity);
     }
 
-    return 0;
+    return NULL;
 }
 
 void Player_80036F34(s32 slot, s32 arg1)

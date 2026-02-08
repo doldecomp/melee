@@ -15,7 +15,7 @@ static HSD_GObj* gm_804D6858;
 void gm_801ACE94_OnEnter(void* unused)
 {
     HSD_GObj* gobj;
-    HSD_SObj_803A477C_t* temp_r3_2;
+    HSD_SObj* temp_r3_2;
 
     gobj = GObj_Create(0x13, 0x14, 0);
     gm_801A9DD0(gobj, 0x280, 0x1E0, 8, 0);
