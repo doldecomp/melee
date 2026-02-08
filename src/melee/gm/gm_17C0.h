@@ -41,7 +41,7 @@
 /* 17E21C */ void fn_8017E21C(void);
 /* 17E280 */ UNK_T gm_8017E280(u16, bool);
 /* 17E318 */ UNK_RET fn_8017E318(UNK_PARAMS);
-/* 17E3C8 */ UNK_RET fn_8017E3C8(UNK_PARAMS);
+/* 17E3C8 */ void fn_8017E3C8(void);
 /* 17E424 */ UnkAdventureData* gm_8017E424(void);
 /* 17E430 */ u8 gm_8017E430(void); ///< returns a player slot
 /* 17E440 */ u8 gm_8017E440(void);
