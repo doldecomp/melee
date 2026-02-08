@@ -8,7 +8,7 @@
 #include "it/items/types.h"
 
 /* 28EB88 */ UNK_RET it_8028EB88(UNK_PARAMS);
-/* 28EC98 */ UNK_RET it_8028EC98(UNK_PARAMS);
+/* 28EC98 */ void it_8028EC98(Item_GObj* gobj, f32 vel);
 /* 28ECE0 */ void it_8028ECE0(Item_GObj* gobj);
 /* 28ECF0 */ Item* it_8028ECF0(Item_GObj* gobj, Vec3* v);
 /* 28ED10 */ void itFreeze_Logic17_Destroyed(Item_GObj*);

@@ -42,7 +42,14 @@ void it_802ECEB0(Item_GObj* gobj)
 
 /// #itKyasarin_UnkMotion0_Coll
 
-/// #it_802ECFE0
+void it_802ECFE0(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itKyasarinAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+    Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
+    it_80273454(gobj);
+    ip->xDD4_itemVar.kyasarin.x24 = attr->x8;
+}
 
 /// #itKyasarin_UnkMotion1_Anim
 

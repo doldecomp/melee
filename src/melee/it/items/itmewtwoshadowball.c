@@ -74,7 +74,13 @@ void itMewtwoshadowball_UnkMotion9_Phys(Item_GObj* gobj) {}
 
 /// #itMewtwoshadowball_UnkMotion9_Coll
 
-/// #fn_802C5E18
+void fn_802C5E18(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->xDD4_itemVar.mewtwoshadowball.x20++;
+    ip->xDD4_itemVar.mewtwoshadowball.x20 =
+        ip->xDD4_itemVar.mewtwoshadowball.x20 % 3;
+}
 
 /// #it_802C5E5C
 

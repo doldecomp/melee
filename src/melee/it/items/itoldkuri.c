@@ -13,6 +13,7 @@ typedef struct itOldkuriAttributes {
     s32* x0;
     f32 x4;
     f32 x8;
+    f32 xC;
 } itOldkuriAttributes;
 
 void itOldKuri_Logic29_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
@@ -68,7 +69,14 @@ void itOldkuri_UnkMotion3_Phys(Item_GObj* gobj)
     it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
 }
 
-/// #itOldkuri_UnkMotion3_Coll
+bool itOldkuri_UnkMotion3_Coll(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itOldkuriAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+    ip->xDD4_itemVar.oldkuri.xDF8 = (s32)attr->xC;
+    it_8026E414(gobj, it_802D747C);
+    return it_8027C794(gobj);
+}
 
 /// #it_802D7AF0
 
@@ -87,7 +95,14 @@ void itOldkuri_UnkMotion4_Phys(Item_GObj* gobj)
     it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
 }
 
-/// #itOldkuri_UnkMotion4_Coll
+bool itOldkuri_UnkMotion4_Coll(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itOldkuriAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+    ip->xDD4_itemVar.oldkuri.xDF8 = (s32)attr->xC;
+    it_8026E414(gobj, it_802D747C);
+    return it_8027C794(gobj);
+}
 
 void itOldKuri_Logic0_PickedUp(Item_GObj* gobj)
 {

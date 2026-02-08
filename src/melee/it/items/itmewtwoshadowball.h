@@ -27,7 +27,7 @@
 /* 2C5DAC */ bool itMewtwoshadowball_UnkMotion9_Anim(Item_GObj* gobj);
 /* 2C5DCC */ void itMewtwoshadowball_UnkMotion9_Phys(Item_GObj* gobj);
 /* 2C5DD0 */ bool itMewtwoshadowball_UnkMotion9_Coll(Item_GObj* gobj);
-/* 2C5E18 */ UNK_RET fn_802C5E18(UNK_PARAMS);
+/* 2C5E18 */ void fn_802C5E18(Item_GObj* gobj);
 /* 2C5E5C */ UNK_RET it_802C5E5C(UNK_PARAMS);
 /* 2C5F7C */ bool itMewtwoshadowball_UnkMotion17_Anim(Item_GObj* gobj);
 /* 2C6094 */ void itMewtwoshadowball_UnkMotion17_Phys(Item_GObj*);

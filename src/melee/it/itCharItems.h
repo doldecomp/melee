@@ -561,4 +561,47 @@ typedef struct itUnk4_ItemVars {
     /*  +1C ip+DF0 */ Mtx xDF0;
 } itUnk4_ItemVars;
 
+typedef struct itGamewatchchef_ItemVars {
+    /* +0 ip+DD4 */ s32 x0;
+    /* +4 ip+DD8 */ s32 x4;
+} itGamewatchchef_ItemVars;
+
+typedef struct itGamewatchchefAttrEntry {
+    /* +0 */ f32 x0;
+    /* +4 */ f32 x4;
+    /* +8 */ f32 x8;
+    /* +C */ f32 xC;
+    /* +10 */ f32 x10;
+} itGamewatchchefAttrEntry;
+
+typedef struct itGamewatchchefAttributes {
+    /* +0 */ void* x0;
+    /* +4 */ f32 x4;
+    /* +8 */ f32 x8;
+    /* +C */ f32 xC;
+    /* +10 */ itGamewatchchefAttrEntry entries[1];
+} itGamewatchchefAttributes;
+
+typedef struct itTools_ItemVars {
+    /* +0 ip+DD4 */ s32 x0;
+} itTools_ItemVars;
+
+typedef struct itToolsAttrEntry {
+    /* +0 */ f32 x0;
+    /* +4 */ f32 x4;
+    /* +8 */ f32 x8;
+    /* +C */ f32 xC;
+    /* +10 */ f32 x10;
+    /* +14 */ f32 x14;
+    /* +18 */ f32 x18;
+} itToolsAttrEntry;
+
+typedef struct itToolsAttributes {
+    /* +0 */ f32 x0;
+    /* +4 */ f32 x4;
+    /* +8 */ f32 x8;
+    /* +C */ f32 xC;
+    /* +10 */ itToolsAttrEntry entries[1];
+} itToolsAttributes;
+
 #endif

@@ -20,7 +20,14 @@ bool itGameWatchChef_Logic112_DmgDealt(Item_GObj* gobj)
 
 /// #itGamewatchchef_UnkMotion0_Anim
 
-/// #itGamewatchchef_UnkMotion0_Phys
+void itGamewatchchef_UnkMotion0_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itGamewatchchefAttributes* attrs =
+        ip->xC4_article_data->x4_specialAttributes;
+    s32 index = ip->xDD4_itemVar.gamewatchchef.x4;
+    it_80272860(gobj, attrs->entries[index].x8, attrs->entries[index].xC);
+}
 
 /// #itGamewatchchef_UnkMotion0_Coll
 
