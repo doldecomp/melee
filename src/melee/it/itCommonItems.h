@@ -147,7 +147,9 @@ typedef struct itKyasarinAttributes {
 } itKyasarinAttributes;
 
 typedef struct itHououAttr {
-    /* +0 */ f32 timer;
+    /* +00 */ f32 timer;
+    /* +04 */ u8 x4_pad[0x14];
+    /* +18 */ f32 x18;
 } itHououAttr;
 
 typedef struct itLugiaAttributes {
@@ -1121,7 +1123,8 @@ typedef struct itWhiteBea_ItemVars {
     /* +20 ip+DF4 */ UNK_T x20;
     /* +24 ip+DF8 */ char pad_24[0x4];
     /* +28 ip+DFC */ s32 x28;
-    /* +2C ip+E00 */ char pad_2C[0x14];
+    /* +2C ip+E00 */ char pad_2C[0x10];
+    /* +3C ip+E10 */ s32 x3C;
     /* +40 ip+E14 */ s32 x40;
 } itWhiteBea_ItemVars;
 

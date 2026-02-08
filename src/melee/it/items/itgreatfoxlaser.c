@@ -1,6 +1,7 @@
 #include "itgreatfoxlaser.h"
 
 #include "it/inlines.h"
+#include "it/item.h"
 #include "it/it_26B1.h"
 
 UNK_T it_802EAF28(Item_GObj* item_gobj)
@@ -12,7 +13,14 @@ UNK_T it_802EAF28(Item_GObj* item_gobj)
 
 /// #it_802EB1EC
 
-/// #it_802EB268
+void it_802EB268(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    it_8026B3A8(gobj);
+    M2C_FIELD(&ip->xDD4_itemVar._, s16*, 0x36) = 60;
+    M2C_FIELD(&ip->xDD4_itemVar._, s16*, 0x34) = 0;
+    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+}
 
 /// #itGreatfoxlaser_UnkMotion1_Anim
 

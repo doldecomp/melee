@@ -50,7 +50,7 @@
 /* 2E41D4 */ bool itWhitebea_UnkMotion2_Anim(Item_GObj* gobj);
 /* 2E432C */ void itWhitebea_UnkMotion2_Phys(Item_GObj* gobj);
 /* 2E4330 */ bool itWhitebea_UnkMotion2_Coll(Item_GObj* gobj);
-/* 2E436C */ UNK_RET it_802E436C(UNK_PARAMS);
+/* 2E436C */ void it_802E436C(Item_GObj* gobj);
 /* 2E43C0 */ bool itWhitebea_UnkMotion5_Anim(Item_GObj* gobj);
 /* 2E4424 */ void itWhitebea_UnkMotion5_Phys(Item_GObj* gobj);
 /* 2E4428 */ bool itWhitebea_UnkMotion5_Coll(Item_GObj* gobj);

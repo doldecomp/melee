@@ -10,6 +10,7 @@
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
+#include "it/items/itnesspkfirepillar.h"
 #include "it/types.h"
 
 #include <baselib/gobj.h>
@@ -40,9 +41,27 @@ bool itNesspkfire_UnkMotion0_Coll(Item_GObj* gobj)
     return it_8026E058(gobj);
 }
 
-/// #it_2725_Logic23_DmgDealt
+bool it_2725_Logic23_DmgDealt(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itNessPKFirepillarAttributes* attrs =
+        ip->xC4_article_data->x4_specialAttributes;
+    Vec3 pos = ip->pos;
+    pos.y += attrs->x4;
+    itNesspkfirepillar_802AA494(gobj, ip->owner, &pos, ip->facing_dir);
+    return true;
+}
 
-/// #it_2725_Logic23_Clanked
+bool it_2725_Logic23_Clanked(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itNessPKFirepillarAttributes* attrs =
+        ip->xC4_article_data->x4_specialAttributes;
+    Vec3 pos = ip->pos;
+    pos.y += attrs->x4;
+    itNesspkfirepillar_802AA494(gobj, ip->owner, &pos, ip->facing_dir);
+    return true;
+}
 
 bool itNessPKFire_Logic23_Absorbed(Item_GObj* arg0)
 {
