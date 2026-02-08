@@ -6,9 +6,15 @@
 #include <dolphin/gx/GXStruct.h>
 
 struct lbl_804333E0_t {
-    /* 0x000 */ char pad_0[0x84];
-    /* 0x084 */ s32 unk_84;        /* inferred */
-    /* 0x088 */ char pad_88[0x80]; /* maybe part of unk_84[0x21]? */
+    /* 0x000 */ char pad_0[0x78];
+    /* 0x078 */ s32 unk_78;
+    /* 0x07C */ s32 unk_7C;
+    /* 0x080 */ s32 unk_80;
+    /* 0x084 */ s32 unk_84;
+    /* 0x088 */ s32 unk_88;
+    /* 0x08C */ char pad_8C[0x4];
+    /* 0x090 */ s32 unk_90;
+    /* 0x094 */ char pad_94[0x74];
     /* 0x108 */ s32 unk_108;
     /* 0x10C */ s32 unk_10C;
     /* 0x110 */ s32 unk_110;

@@ -16,7 +16,7 @@
 /* 2377A8 */ UNK_RET IsNameUnique(UNK_PARAMS);
 /* 237834 */ UNK_RET DeleteName(UNK_PARAMS);
 /* 2379BC */ bool IsNameValid(int slot);
-/* 237A04 */ UNK_RET CreateNameAtIndex(UNK_PARAMS);
+/* 237A04 */ void CreateNameAtIndex(s32 slot);
 /* 237A68 */ UNK_RET mnName_SortNames(UNK_PARAMS);
 /* 237D94 */ UNK_RET mnName_80237D94(UNK_PARAMS);
 /* 237F78 */ UNK_RET mnName_ConfirmNameDeleteInput(UNK_PARAMS);

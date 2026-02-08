@@ -61,8 +61,13 @@ bool IsNameValid(int slot)
     return true;
 }
 
-/// #CreateNameAtIndex
-
+void CreateNameAtIndex(s32 slot)
+{
+    s32 idx = slot & 0xFF;
+    GetPersistentNameData(idx)->namedata[0] = mnName_StringTerminator;
+    GetPersistentNameData(idx)->x1A1 = true;
+    InitializePersistentNameData(slot);
+}
 /// #mnName_SortNames
 
 /// #mnName_80237D94
