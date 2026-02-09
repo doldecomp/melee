@@ -35,6 +35,7 @@ float HSD_ByteCodeEval(u8* pc, float* args, u32 nb_args)
     f32 fv;
     u32 i;
     s32 a;
+    s32 b;
 
     stack = NULL;
     extra_bytes = 0;
@@ -319,10 +320,8 @@ float HSD_ByteCodeEval(u8* pc, float* args, u32 nb_args)
             HSD_ASSERTMSG(551, stack->next, "stack->next");
             a = (s32) stack->data;
             stack = HSD_SListRemove(stack);
-            {
-                s32 b = (s32) stack->data;
-                stack->data = (void*) (b % a);
-            }
+            b = (s32) stack->data;
+            stack->data = (void*) (b % a);
             break;
         case 0x21:
             HSD_ASSERT(556, stack);
@@ -479,42 +478,35 @@ float HSD_ByteCodeEval(u8* pc, float* args, u32 nb_args)
         case 0x2F:
             HSD_ASSERT(663, stack);
             HSD_ASSERTMSG(663, stack->next, "stack->next");
+            a = (s32) stack->data;
+            stack = HSD_SListRemove(stack);
+            b = (s32) stack->data;
             {
-                s32 b;
-                a = (s32) stack->data;
-                stack = HSD_SListRemove(stack);
-                b = (s32) stack->data;
-                {
-                    s32 val = 0;
-                    if (b != 0 && a != 0) {
-                        val = 1;
-                    }
-                    stack->data = (void*) val;
+                s32 val = 0;
+                if (b != 0 && a != 0) {
+                    val = 1;
                 }
+                stack->data = (void*) val;
             }
             break;
         case 0x30:
             HSD_ASSERT(668, stack);
             HSD_ASSERTMSG(668, stack->next, "stack->next");
+            a = (s32) stack->data;
+            stack = HSD_SListRemove(stack);
+            b = (s32) stack->data;
             {
-                s32 b;
-                a = (s32) stack->data;
-                stack = HSD_SListRemove(stack);
-                b = (s32) stack->data;
-                {
-                    s32 val = 1;
-                    if (b == 0 && a == 0) {
-                        val = 0;
-                    }
-                    stack->data = (void*) val;
+                s32 val = 1;
+                if (b == 0 && a == 0) {
+                    val = 0;
                 }
+                stack->data = (void*) val;
             }
             break;
         case 0x32:
             HSD_ASSERT(673, stack);
             HSD_ASSERTMSG(673, stack->next, "stack->next");
             {
-                s32 b;
                 s32 val;
                 a = (s32) stack->data;
                 stack = HSD_SListRemove(stack);
@@ -562,14 +554,11 @@ float HSD_ByteCodeEval(u8* pc, float* args, u32 nb_args)
         case 0x27:
             HSD_ASSERT(694, stack);
             HSD_ASSERTMSG(694, stack->next, "stack->next");
-            {
-                s32 lo;
-                a = (s32) stack->data;
-                stack = HSD_SListRemove(stack);
-                lo = (s32) stack->data;
-                stack->data =
-                    (void*) (lo + HSD_Randi((a - lo) + 1));
-            }
+            a = (s32) stack->data;
+            stack = HSD_SListRemove(stack);
+            b = (s32) stack->data;
+            stack->data =
+                (void*) (b + HSD_Randi((a - b) + 1));
             break;
         default:
             OSReport("unexpected opcode 0x%x.\n");
