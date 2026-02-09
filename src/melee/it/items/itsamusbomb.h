@@ -11,7 +11,7 @@
 
 /* 2B4AC8 */ void it_802B4AC8(Item_GObj* gobj, Vec3*, float facing_dir,
                               float x);
-/* 2B4BA0 */ UNK_RET it_802B4BA0(UNK_PARAMS);
+/* 2B4BA0 */ void it_802B4BA0(Item_GObj* gobj);
 /* 2B4C10 */ void it_802B4C10(Item_GObj* gobj);
 /* 2B4C38 */ bool itSamusbomb_UnkMotion0_Anim(Item_GObj* gobj);
 /* 2B4CC4 */ void itSamusbomb_UnkMotion0_Phys(Item_GObj* gobj);

@@ -872,7 +872,20 @@ f32 gm_8017ED8C(u8 difficulty, u8 stage_slot)
     return lbl_803D85F0[stage_slot + difficulty * 5].scale1_pct / 100.0F;
 }
 
-/// #fn_8017EDDC
+bool fn_8017EDDC(void)
+{
+    UnkAllstarData* p;
+
+    if (gm_801A4310() == MJ_CLASSIC) {
+        p = &lbl_80472CB0;
+        if (p->x0.xC.xD == 0 && p->x0.cpu_level >= 2 &&
+            p->x0.xC.x20 < 0x5208)
+        {
+            return true;
+        }
+    }
+    return false;
+}
 
 /// #fn_8017EE40
 

@@ -338,7 +338,21 @@ void grGreatBay_801F5D48(Ground_GObj* gobj)
 
 /// #grGreatBay_801F660C
 
-/// #grGreatBay_801F66A4
+bool grGreatBay_801F66A4(void)
+{
+    if (stage_info.internal_stage_id == GREATBAY) {
+        HSD_GObj* gobj = Ground_801C2BA4(1);
+        if (gobj != NULL) {
+            Ground* gp = gobj->user_data;
+            if (gp != NULL) {
+                if (gp->gv.greatbay._0[0] != 0) {
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
+}
 
 /// #fn_801F6708
 

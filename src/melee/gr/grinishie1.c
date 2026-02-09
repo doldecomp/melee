@@ -826,7 +826,25 @@ void fn_801FBEB8(Ground* gr, s32 block_id, CollData* arg2, s32 arg3,
 
 /// #fn_801FC9AC
 
-/// #grInishie1_801FCAAC
+s32 grInishie1_801FCAAC(s32 line_id)
+{
+    s32 in_range;
+    s32 result;
+    u32 diff;
+
+    if (stage_info.internal_stage_id == INISHIE1 && line_id != -1) {
+        result = mpJointFromLine(line_id);
+        diff = result - 20;
+        in_range = 1;
+        if (diff > 1U) {
+            in_range = 0;
+        }
+        if (in_range != 0) {
+            return 1;
+        }
+    }
+    return 0;
+}
 
 void grInishie1_801FCB10(HSD_GObj* gobj)
 {

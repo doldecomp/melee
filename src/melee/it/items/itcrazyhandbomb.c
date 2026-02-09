@@ -7,6 +7,7 @@
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/itCommonItems.h"
 #include "it/item.h"
 
 #include <baselib/jobj.h>
@@ -41,7 +42,16 @@ bool itCrazyHandBomb_Logic86_Reflected(Item_GObj* gobj)
     return it_80273030(gobj);
 }
 
-/// #it_802F10F8
+void it_802F10F8(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itCrazyHandBombAttributes* attrs =
+        ip->xC4_article_data->x4_specialAttributes;
+    it_802762BC(ip);
+    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+    ip->on_accessory = (HSD_GObjEvent) it_802F1340;
+    ip->x40_vel.y = attrs->x0;
+}
 
 bool itCrazyhandbomb_UnkMotion0_Anim(Item_GObj* gobj)
 {

@@ -5,7 +5,9 @@
 #include <platform.h>
 
 #include "gr/grlib.h"
+#include "gr/ground.h"
 #include "gr/inlines.h"
+#include "lb/lb_00F9.h"
 
 void grRCruise_801FF164(bool arg) {}
 
@@ -65,7 +67,18 @@ bool grRCruise_801FF6CC(Ground_GObj* arg)
     return false;
 }
 
-/// #grRCruise_801FF6D4
+void grRCruise_801FF6D4(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    if (gp->gv.unk.xD4 == 0) {
+        grRCruise_80201588(gobj);
+        grRCruise_8020071C(gobj);
+        grRCruise_80200C04(gobj);
+    }
+    lb_800115F4();
+    grRCruise_80201110(gobj);
+    Ground_801C2FE0(gobj);
+}
 
 void grRCruise_801FF738(Ground_GObj* arg) {}
 

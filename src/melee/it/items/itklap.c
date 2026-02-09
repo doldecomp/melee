@@ -122,7 +122,17 @@ bool itKlap_UnkMotion4_Coll(Item_GObj* gobj)
     return false;
 }
 
-/// #it_802E20D8
+void it_802E20D8(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->x40_vel.z = 0.0f;
+    ip->x40_vel.y = 0.0f;
+    ip->x40_vel.x = 0.0f;
+    it_802762BC(ip);
+    Item_80268E5C(gobj, 3, ITEM_ANIM_UPDATE);
+    it_802756D0(gobj);
+    ip->on_accessory = it_802E215C;
+}
 
 bool itKlap_UnkMotion3_Anim(Item_GObj* gobj)
 {

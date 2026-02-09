@@ -12,7 +12,18 @@
 
 /// #it_802E31F8
 
-/// #itOldottosea_UnkMotion8_Anim
+bool itOldottosea_UnkMotion8_Anim(Item_GObj* gobj)
+{
+    if (!it_80272C6C(gobj)) {
+        Item* ip = GET_ITEM(gobj);
+        if ((u32) ip->xDD4_itemVar.whitebea.x20 != 0U) {
+            it_8028ECE0((HSD_GObj*) ip->xDD4_itemVar.whitebea.x20);
+            it_802E37A4(gobj);
+        }
+        Item_80268E5C(gobj, 8, ITEM_ANIM_UPDATE);
+    }
+    return false;
+}
 
 void itOldottosea_UnkMotion8_Phys(Item_GObj* gobj) {}
 
@@ -265,7 +276,16 @@ void it_802E436C(Item_GObj* gobj)
     ip->xDD4_itemVar.whitebea.x40 = 0x14;
 }
 
-/// #itWhitebea_UnkMotion5_Anim
+bool itWhitebea_UnkMotion5_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (!it_80272C6C(gobj) || ip->xDD4_itemVar.whitebea.x40 == 0) {
+        it_802E4464(gobj);
+    } else {
+        ip->xDD4_itemVar.whitebea.x40--;
+    }
+    return false;
+}
 
 void itWhitebea_UnkMotion5_Phys(Item_GObj* gobj) {}
 

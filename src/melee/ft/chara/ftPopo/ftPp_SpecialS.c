@@ -957,7 +957,19 @@ void ftPp_SpecialHiStart_1_Anim(Fighter_GObj* gobj)
     }
 }
 
-/// #ftPp_SpecialAirHiStart_1_Anim
+void ftPp_SpecialAirHiStart_1_Anim(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftIceClimberAttributes* da = fp->dat_attrs;
+    PAD_STACK(8);
+    if (fp->cmd_vars[2] != 0) {
+        fp->cmd_vars[2] = 0;
+        fp->self_vel.y = da->xA4;
+    }
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        ftPp_SpecialHi_80122380(gobj);
+    }
+}
 
 void ftPp_SpecialHiStart_1_IASA(Fighter_GObj* gobj) {}
 

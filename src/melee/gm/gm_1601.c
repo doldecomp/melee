@@ -937,7 +937,17 @@ bool gm_80162D1C(void)
     return true;
 }
 
-/// #gm_80162D6C
+u8 gm_80162D6C(void)
+{
+    int i;
+    u8 result = 4;
+    for (i = 0; i < 0x19; i++) {
+        if (result > *gmMainLib_8015D194(i)) {
+            result = *gmMainLib_8015D194(i);
+        }
+    }
+    return result;
+}
 
 int gm_80162DD4(u8 i)
 {
@@ -2309,7 +2319,13 @@ void fn_80169574(ssize_t size, void* buf)
 
 /// #fn_801697FC
 
-/// #fn_8016989C
+void fn_8016989C(u8* arr, s32 character, s32 costume, void* arg3, void* arg4)
+{
+    int i;
+    for (i = 0; i < 3; i++) {
+        fn_801695BC(arr[i], character, costume, arg3, arg4);
+    }
+}
 
 /// #fn_80169900
 

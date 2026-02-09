@@ -11,7 +11,20 @@
 
 /// #it_802B4AC8
 
-/// #it_802B4BA0
+void it_802B4BA0(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    Article* ap = ip->xC4_article_data;
+    ItemAttr* attrs = ip->xCC_item_attr;
+    f32* sa = ap->x4_specialAttributes;
+
+    ip->x40_vel.y = attrs->x18;
+    ip->xDB4_itcmd_var2 = 0;
+    ip->xDD4_itemVar.samusbomb.xDD8 = (s32) ip->owner;
+    it_80275158(gobj, sa[0]);
+    it_8026B3A8(gobj);
+    Item_80268E5C(gobj, 1, 2);
+}
 
 void it_802B4C10(Item_GObj* gobj)
 {

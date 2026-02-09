@@ -111,7 +111,27 @@ void mnName_802385A0(HSD_GObj* gobj)
 
 /// #mnName_80239FFC
 
-/// #mnName_8023A058
+void mnName_8023A058(HSD_GObj* gobj)
+{
+    u8* p = (u8*) gobj;
+    HSD_JObj* jobj;
+    HSD_JObj* child;
+
+    jobj = *(HSD_JObj**) (p + 0x30);
+    if (jobj == NULL) {
+        child = NULL;
+    } else {
+        child = *(HSD_JObj**) ((u8*) jobj + 0x10);
+    }
+    HSD_JObjRemoveAll(child);
+
+    if (*(void**) (p + 0x3C) != NULL) {
+        HSD_SisLib_803A5CC4(*(void**) (p + 0x3C));
+        *(void**) (p + 0x3C) = NULL;
+    }
+
+    mnName_80239A24(gobj);
+}
 
 /// #fn_8023A0BC
 

@@ -691,7 +691,18 @@ void fn_800D86B8(Fighter_GObj* gobj)
     fn_800D84D4(gobj, fp->mv.co.common.x0);
 }
 
-/// #fn_800D86E0
+#pragma push
+#pragma dont_inline on
+
+void fn_800D86E0(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    Fighter_ChangeMotionState(gobj, fn_800D769C(fp, ftCo_MS_ItemScopeEnd),
+                              0, 0.0F, 1.0F, 0.0F, NULL);
+    fp->take_dmg_cb = fn_800D8378;
+}
+
+#pragma pop
 
 /// #fn_800D874C
 
@@ -936,7 +947,15 @@ void fn_800DA004(Fighter_GObj* gobj)
 
 /// #fn_800DA1D8
 
-/// #fn_800DA2B0
+void fn_800DA2B0(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    Fighter_ChangeMotionState(gobj, ftCo_MS_CatchWait, 0, 0.0F, 1.0F, 0.0F,
+                              NULL);
+    fp->accessory1_cb = fn_800DA4A0;
+    fp->take_dmg_cb = fn_800DA490;
+    ftCommon_8007E2F4(fp, 0x1FF);
+}
 
 void ftCo_CatchWait_Anim(Fighter_GObj* gobj) {}
 
@@ -976,7 +995,19 @@ bool fn_800DA4C0(Fighter_GObj* gobj)
     return false;
 }
 
-/// #fn_800DA4FC
+void fn_800DA4FC(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    fp->gr_vel = 0.0F;
+    Fighter_ChangeMotionState(gobj, ftCo_MS_CatchAttack, 0, 0.0F, 1.0F,
+                              0.0F, NULL);
+    fp->accessory1_cb = fn_800DA678;
+    fp->take_dmg_cb = fn_800DA668;
+    ftCommon_8007E2F4(fp, 0x1FF);
+}
+
+#pragma push
+#pragma dont_inline on
 
 void ftCo_CatchAttack_Anim(Fighter_GObj* gobj)
 {
@@ -984,6 +1015,8 @@ void ftCo_CatchAttack_Anim(Fighter_GObj* gobj)
         fn_800DA2B0(gobj);
     }
 }
+
+#pragma pop
 
 void ftCo_CatchAttack_IASA(Fighter_GObj* gobj) {}
 

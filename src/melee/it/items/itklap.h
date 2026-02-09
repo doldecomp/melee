@@ -28,7 +28,7 @@
 /* 2E2148 */ bool itKlap_UnkMotion3_Anim(Item_GObj* gobj);
 /* 2E2150 */ void itKlap_UnkMotion3_Phys(Item_GObj* gobj);
 /* 2E2154 */ bool itKlap_UnkMotion3_Coll(Item_GObj* gobj);
-/* 2E215C */ UNK_RET it_802E215C(UNK_PARAMS);
+/* 2E215C */ void it_802E215C(HSD_GObj*);
 /* 2E2330 */ void it_802E2330(Item_GObj*, Vec3*, s32, f32);
 /* 2E2450 */ void it_802E2450(Item_GObj*, Item_GObj*);
 extern ItemStateTable it_803F8940[];

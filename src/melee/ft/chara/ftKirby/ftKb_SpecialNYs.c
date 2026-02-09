@@ -815,7 +815,20 @@ void ftKb_MsSpecialNStart_Phys(Fighter_GObj* gobj)
     ftCommon_ApplyGroundMovement(gobj);
 }
 
-/// #ftKb_MsSpecialAirNStart_Phys
+void ftKb_MsSpecialAirNStart_Phys(Fighter_GObj* gobj)
+{
+    struct ftKb_SpecialNMs_DatAttrs* ms_da;
+    Fighter* fp = getFighter(gobj);
+    ftKb_DatAttrs* da = fp->dat_attrs;
+    PAD_STACK(16);
+    if (fp->fv.kb.hat.kind == FTKIND_MARS) {
+        ms_da = &da->ms;
+    } else {
+        ms_da = &da->fe;
+    }
+    ftCommon_FallBasic(fp);
+    ftCommon_ApplyFrictionAir(fp, ms_da->air_horizontal_deceleration_rate);
+}
 
 void ftKb_MsSpecialNStart_Coll(Fighter_GObj* gobj)
 {
