@@ -4,6 +4,7 @@
 
 #include <math_ppc.h>
 #include <dolphin/ai.h>
+#include <dolphin/ar.h>
 #include <dolphin/os.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/devcom.h>
@@ -179,7 +180,7 @@ static inline void HSD_SynthSFXUnloadBank_inline(AXVPB* temp_r29)
 {
     int i;
     for (i = 0; i < temp_r29->priority; i++) {
-        HSD_Synth_80388DC8((u8*) temp_r29->next1 + i);
+        HSD_Synth_80388DC8((int) temp_r29->next1 + i);
     }
 }
 
@@ -198,7 +199,21 @@ void HSD_SynthSFXUnloadBank(int arg0)
     hsd_SynthSFXBank[arg0] = hsd_SynthSFXBankHead[arg0];
 }
 
-/// #HSD_Synth_80388DC8
+/// @todo Currently 97.2% match - add instruction uses r4 instead of r5
+/// as destination (register allocation swap for prev/cur)
+void HSD_Synth_80388DC8(int arg0)
+{
+    void** pcur = &HSD_Synth_804C29E0[arg0 & 0x1F];
+    void* cur;
+
+    while ((cur = *pcur) != NULL) {
+        if (((int*) cur)[1] == arg0) {
+            *pcur = *(void**) cur;
+            return;
+        }
+        pcur = (void**) cur;
+    }
+}
 
 void HSD_Synth_80388E08(int arg0)
 {
@@ -291,12 +306,67 @@ void HSD_SynthSFXStopNode(struct HSD_SynthSFXNode* node)
     }
 }
 
-/// #dropcallback
+/// @todo Currently ~90% match - second loop uses pointer arithmetic instead of
+/// indexed store (stwx). Stack frame is 8 bytes too large.
+void dropcallback(void* arg0)
+{
+    AXVPB* voice = arg0;
+    struct HSD_SynthSFXNode* node;
+    bool enabled;
+    int i;
+
+    PAD_STACK(0x10);
+
+    enabled = OSDisableInterrupts();
+
+    node = &hsd_SynthSFXNodes[voice->index];
+
+    /// Search HSD_Synth_804C28E0 queue for this voice and remove it
+    for (i = 0; i < HSD_Synth_804D7720; i++) {
+        if (HSD_Synth_804C28E0[i] == voice) {
+            HSD_Synth_804C28E0[i] = NULL;
+            break;
+        }
+    }
+
+    if (node->x0 == 0) {
+        OSRestoreInterrupts(enabled);
+        return;
+    }
+
+    if (node->x0 == -1) {
+        /// Secondary voice - follow to primary node
+        node = &hsd_SynthSFXNodes[node->voice[0]->index];
+    }
+
+    if (!(node->flags & 1) && node->x27 == 1 &&
+        driverInactivatedCallback != NULL)
+    {
+        driverInactivatedCallback(node->x0);
+    }
+
+    {
+        int j;
+        struct HSD_SynthSFXNode* walk = node;
+        for (j = 0; j < node->voice_count; j++) {
+            if (walk->voice[0] != voice) {
+                HSD_Synth_804C28E0[HSD_Synth_804D7720] = walk->voice[0];
+                HSD_Synth_804D7720++;
+            }
+            hsd_SynthSFXNodes[walk->voice[0]->index].x0 = 0;
+            walk = (void*) ((u8*) walk + 4);
+        }
+    }
+
+    OSRestoreInterrupts(enabled);
+}
 
 static AXPBMIX lbl_80407FB4 = { 0 };
 
 static AXPBSRC HSD_Synth_80407FD8 = { 1, 0, 0, { 0, 0, 0, 0 } };
 
+/// @todo Currently 95.4% match - register allocation shifted by 1
+/// (r29 reuse for loop counter and computation missing)
 int HSD_Synth_80389334(int arg0, u8 arg1, u8 arg2, u8 arg3, int arg4, u8 arg5,
                        float arg6, float arg7, float arg8, float arg9,
                        float argA)
@@ -938,4 +1008,71 @@ void HSD_SynthStreamSetVolume(f32 arg0)
     AISetStreamVolLeft(HSD_Synth_804D6030 * (f32) HSD_Synth_804D777C);
     AISetStreamVolRight(HSD_Synth_804D6030 * (f32) HSD_Synth_804D777C);
     updateAllVolume(0xFFFF);
-} /// #HSD_SynthInit
+}
+
+void HSD_SynthInit(int arg0, int arg1, int arg2, int arg3)
+{
+    AXInit();
+    AISetDSPSampleRate(0);
+    HSD_Synth_804D7784 = ARAlloc(0x500);
+    HSD_DevComRequest(0, 0, HSD_Synth_804D7784, 0x500, 3, 0, 0, 0);
+    HSD_Synth_804D7784 *= 2;
+    hsd_SynthSFXBankHead[0] = ARAlloc(arg3);
+    AXRegisterCallback(HSD_SynthCallback);
+    HSD_Synth_804D777C = 0xFF;
+    AISetStreamVolLeft(HSD_Synth_804D6030 * (f32) HSD_Synth_804D777C);
+    AISetStreamVolRight(HSD_Synth_804D6030 * (f32) HSD_Synth_804D777C);
+    /// Loop unrolled to match original binary (loop version adds 8 bytes
+    /// to stack frame due to compiler allocating space for the counter)
+    HSD_Synth_804C28E0_1784[0].x1784 = 1.0F;
+    HSD_Synth_804C28E0_1784[0].x1788 = 1.0F;
+    HSD_Synth_804C28E0_1784[0].x178C = 0;
+    HSD_Synth_804C28E0_1784[1].x1784 = 1.0F;
+    HSD_Synth_804C28E0_1784[1].x1788 = 1.0F;
+    HSD_Synth_804C28E0_1784[1].x178C = 0;
+    HSD_Synth_804C28E0_1784[2].x1784 = 1.0F;
+    HSD_Synth_804C28E0_1784[2].x1788 = 1.0F;
+    HSD_Synth_804C28E0_1784[2].x178C = 0;
+    HSD_Synth_804C28E0_1784[3].x1784 = 1.0F;
+    HSD_Synth_804C28E0_1784[3].x1788 = 1.0F;
+    HSD_Synth_804C28E0_1784[3].x178C = 0;
+    HSD_Synth_804C28E0_1784[4].x1784 = 1.0F;
+    HSD_Synth_804C28E0_1784[4].x1788 = 1.0F;
+    HSD_Synth_804C28E0_1784[4].x178C = 0;
+    HSD_Synth_804C28E0_1784[5].x1784 = 1.0F;
+    HSD_Synth_804C28E0_1784[5].x1788 = 1.0F;
+    HSD_Synth_804C28E0_1784[5].x178C = 0;
+    HSD_Synth_804C28E0_1784[6].x1784 = 1.0F;
+    HSD_Synth_804C28E0_1784[6].x1788 = 1.0F;
+    HSD_Synth_804C28E0_1784[6].x178C = 0;
+    HSD_Synth_804C28E0_1784[7].x1784 = 1.0F;
+    HSD_Synth_804C28E0_1784[7].x1788 = 1.0F;
+    HSD_Synth_804C28E0_1784[7].x178C = 0;
+    HSD_Synth_804C28E0_1784[8].x1784 = 1.0F;
+    HSD_Synth_804C28E0_1784[8].x1788 = 1.0F;
+    HSD_Synth_804C28E0_1784[8].x178C = 0;
+    HSD_Synth_804C28E0_1784[9].x1784 = 1.0F;
+    HSD_Synth_804C28E0_1784[9].x1788 = 1.0F;
+    HSD_Synth_804C28E0_1784[9].x178C = 0;
+    HSD_Synth_804C28E0_1784[10].x1784 = 1.0F;
+    HSD_Synth_804C28E0_1784[10].x1788 = 1.0F;
+    HSD_Synth_804C28E0_1784[10].x178C = 0;
+    HSD_Synth_804C28E0_1784[11].x1784 = 1.0F;
+    HSD_Synth_804C28E0_1784[11].x1788 = 1.0F;
+    HSD_Synth_804C28E0_1784[11].x178C = 0;
+    HSD_Synth_804C28E0_1784[12].x1784 = 1.0F;
+    HSD_Synth_804C28E0_1784[12].x1788 = 1.0F;
+    HSD_Synth_804C28E0_1784[12].x178C = 0;
+    HSD_Synth_804C28E0_1784[13].x1784 = 1.0F;
+    HSD_Synth_804C28E0_1784[13].x1788 = 1.0F;
+    HSD_Synth_804C28E0_1784[13].x178C = 0;
+    HSD_Synth_804C28E0_1784[14].x1784 = 1.0F;
+    HSD_Synth_804C28E0_1784[14].x1788 = 1.0F;
+    HSD_Synth_804C28E0_1784[14].x178C = 0;
+    HSD_Synth_804C28E0_1784[15].x1784 = 1.0F;
+    HSD_Synth_804C28E0_1784[15].x1788 = 1.0F;
+    HSD_Synth_804C28E0_1784[15].x178C = 0;
+    hsd_SynthSFXBankAREnd = hsd_SynthSFXBankHead[0] + arg3;
+    HSD_Synth_804D7780 = ARAlloc(0x30000);
+    HSD_Synth_804D7754 = OSGetSoundMode();
+}

@@ -103,14 +103,12 @@ struct HSD_psAppSRT {
     float ssx; /* 0x64 */
     float ssy; /* 0x68 */
 
-    void (*freefunc)(struct HSD_psAppSRT* appSrt); /* 0x6C */
+    u8 x6C_fill[0x9C - 0x6C]; /* 0x6C */
 
-    u16 idnum;                /* 0x70 */
-    u8 billboard;             /* 0x72 */
-    u8 dummy;                 /* 0x73 */
-    u8 x31_fill[0xA2 - 0x74]; /* 0x74 */
-    s8 xA2; /* 0xA2 */        // This and preceding fill only added to match
-                              // grLib_801C96F8
+    void (*freefunc)(struct HSD_psAppSRT* appSrt); /* 0x9C */
+
+    u16 idnum;                /* 0xA0 */
+    s8 xA2;                   /* 0xA2 */
 };
 
 /* size: 0x98 */

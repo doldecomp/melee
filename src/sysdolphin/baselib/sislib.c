@@ -76,6 +76,8 @@ static HSD_Archive* HSD_SisLib_804D1110[5];
 SIS* HSD_SisLib_804D1124[5];
 s8 HSD_SisLib_804D6390[4] = { 0, 0, 0, 0 };
 
+// @TODO: Currently 99.54% match - needs register allocation fix
+// (var_r4 allocated to r3 instead of r4)
 // a generic allocator used by multiple
 // data types
 void* HSD_SisLib_803A5798(s32 size)
@@ -166,53 +168,63 @@ void* HSD_SisLib_803A5798(s32 size)
     return var_r31->data_1;
 }
 
+// @TODO: Currently 92.39% match - needs register allocation fix in
+// coalesce block (new_size/old_next register assignment differs)
 void HSD_SisLib_803A594C(void* arg0)
 {
     sislib_UnkAllocData* var_r4;
     sislib_UnkAllocData* var_r5;
     sislib_UnkAllocData* var_r6;
     sislib_UnkAllocData* var_r7;
-    u32 temp_r3;
 
     var_r4 = HSD_SisLib_804D7970;
     var_r5 = NULL;
     var_r7 = HSD_SisLib_804D7974;
     var_r6 = NULL;
     while (var_r7 != NULL) {
-        if ((void*) var_r7->data_1 != (void*) arg0) {
-            var_r6 = var_r7;
-            var_r7 = var_r7->data_0;
+        if ((void*) var_r7->data_1 == (void*) arg0) {
+            break;
         }
+        var_r6 = var_r7;
+        var_r7 = var_r7->data_0;
     }
-    if (var_r7 != NULL) {
-        if (var_r4 == (void*) ((u8*) var_r7->data_1 + var_r7->size)) {
-            s32 new_size = var_r4->size + (var_r7->size + 0xC);
-            if (var_r6 != NULL) {
-                var_r6->data_0 = var_r7->data_0;
-            } else {
-                HSD_SisLib_804D7974 = var_r7->data_0;
-            }
-            arg0 = var_r7;
-            HSD_SisLib_804D7970->data_0 = var_r4->data_0;
-            HSD_SisLib_804D7970->data_1 =
-                (HSD_Text*) (HSD_SisLib_804D7970 + 1);
-            HSD_SisLib_804D7970->size = new_size;
-            return;
-        }
-        while (var_r4 != NULL) {
-            var_r5 = var_r4;
-            var_r4 = var_r4->data_0;
-        }
-        if (var_r5 != NULL) {
-            var_r5->data_0 = var_r7;
-        }
+    if (var_r7 == NULL) {
+        return;
+    }
+    if (var_r4 ==
+        (sislib_UnkAllocData*) ((u8*) var_r7->data_1 + var_r7->size))
+    {
+        sislib_UnkAllocData* old_next;
+        s32 new_size;
+
+        old_next = var_r4->data_0;
+        new_size = var_r4->size + (var_r7->size + 0xC);
+
         if (var_r6 != NULL) {
             var_r6->data_0 = var_r7->data_0;
         } else {
             HSD_SisLib_804D7974 = var_r7->data_0;
         }
-        var_r7->data_0 = NULL;
+        HSD_SisLib_804D7970 = var_r7;
+        var_r7->data_0 = old_next;
+        HSD_SisLib_804D7970->data_1 =
+            (HSD_Text*) (HSD_SisLib_804D7970 + 1);
+        HSD_SisLib_804D7970->size = new_size;
+        return;
     }
+    while (var_r4 != NULL) {
+        var_r5 = var_r4;
+        var_r4 = var_r4->data_0;
+    }
+    if (var_r5 != NULL) {
+        var_r5->data_0 = var_r7;
+    }
+    if (var_r6 != NULL) {
+        var_r6->data_0 = var_r7->data_0;
+    } else {
+        HSD_SisLib_804D7974 = var_r7->data_0;
+    }
+    var_r7->data_0 = NULL;
 }
 
 void HSD_SisLib_803A5A2C(void* arg0)
@@ -471,6 +483,8 @@ void HSD_SisLib_803A5FBC(void)
     HSD_Free(HSD_SisLib_804D796C);
 }
 
+// @TODO: Currently 97.56% match - extra lwz reload optimized away by
+// compiler after dual global store
 void HSD_SisLib_803A6048(u32 size)
 {
     sislib_UnkAllocData* alloc;
@@ -480,7 +494,7 @@ void HSD_SisLib_803A6048(u32 size)
     HSD_SisLib_804D7974 = NULL;
     alloc = HSD_MemAlloc(HSD_SisLib_804D7968);
     HSD_SisLib_804D7970 = alloc;
-    HSD_SisLib_804D796C = HSD_SisLib_804D7970;
+    HSD_SisLib_804D796C = alloc;
     HSD_SisLib_804D7970->data_0 = NULL;
     HSD_SisLib_804D7970->data_1 = (HSD_Text*) (HSD_SisLib_804D7970 + 1);
     HSD_SisLib_804D7970->size = HSD_SisLib_804D7968 - 0xC;
@@ -1162,20 +1176,19 @@ end:
 
 void HSD_SisLib_803A746C(HSD_Text* arg0, s32 arg1, f32 arg2, f32 arg3)
 {
-    s16 temp_r0;
-    s16 temp_r0_2;
+    s32 x;
+    s32 y;
     u8* temp_r3;
-    u8* temp_r3_2;
 
     temp_r3 = fn_803A6FEC((u8*) arg0->sis_buffer, arg1, NULL);
     if (temp_r3 != NULL) {
-        temp_r0 = arg2;
-        temp_r0_2 = arg3;
-        temp_r3_2 = temp_r3 + 1;
-        temp_r3_2[0] = (u8) (temp_r0 >> 8);
-        temp_r3_2[1] = (u8) temp_r0;
-        temp_r3_2[2] = (u8) (temp_r0_2 >> 8);
-        temp_r3_2[3] = (u8) temp_r0_2;
+        u8* p = temp_r3 + 1;
+        x = (s16) arg2;
+        p[0] = (u8) (x >> 8);
+        y = (s16) arg3;
+        p[1] = (u8) x;
+        p[2] = (u8) (y >> 8);
+        p[3] = (u8) y;
     }
 }
 
@@ -1200,28 +1213,27 @@ void HSD_SisLib_803A7548(HSD_Text* arg0, int arg1, float arg2, float arg3)
     u8* temp_r4;
     if (temp_r3 != NULL) {
         temp_r4 = temp_r3 + 9;
-        temp_r4[0] = arg2;
-        temp_r4[1] = 256.0F * arg2;
-        temp_r4[2] = arg3;
-        temp_r4[3] = 256.0F * arg3;
+        *++temp_r4 = (u8) arg2;
+        temp_r4[1] = (u8) (256.0F * arg2);
+        temp_r4[2] = (u8) arg3;
+        temp_r4[3] = (u8) (256.0F * arg3);
     }
 }
 
 void HSD_SisLib_803A75E0(HSD_Text* arg0, s32 arg1)
 {
     GXColor color;
-    GXColor* temp_r3;
+    u8* temp_r3;
+    u8* p;
 
-    if (HSD_SisLib_803A70A0(arg0, 0) != 0) {
+    if (HSD_SisLib_803A70A0(arg0, arg1, 0) != 0) {
         color = arg0->text_color;
-        temp_r3 = (GXColor*) fn_803A6FEC((u8*) arg0->sis_buffer, arg1, NULL);
+        temp_r3 = fn_803A6FEC((u8*) arg0->sis_buffer, arg1, NULL);
         if (temp_r3 != NULL) {
-            /// @todo: not really sure how to get the addi 0x5 here
-            /// fn_803A6FEC probably returns a struct that has color at an
-            /// offset of 0x5?
-            temp_r3->g = color.r;
-            temp_r3->b = color.g;
-            temp_r3->a = color.b;
+            p = temp_r3 + 5;
+            p[1] = color.r;
+            p[2] = color.g;
+            p[3] = color.b;
         }
     }
 }

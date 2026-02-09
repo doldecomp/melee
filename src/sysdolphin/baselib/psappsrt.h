@@ -15,12 +15,13 @@
 #define PSAPPSRT_UNK_B11 (1 << 11)
 
 /* 003A0D18 */ bool psInitAppSRT(int, int);
-/* 003A0D58 */ s32 psAddGeneratorAppSRT(s32, u16);
-/* 003A0E3C */ void HSD_PSAppSrt_803A425C(UNK_T, s32);
-u16 psRemoveGeneratorSRT(UNK_T);
-u16 psRemoveParticleAppSRT(UNK_T);
+/* 003A0D58 */ HSD_psAppSRT* psAddGeneratorAppSRT(s32, u16);
+/* 003A0E3C */ void HSD_PSAppSrt_803A425C(HSD_Particle*, s32);
+int psRemoveGeneratorSRT(HSD_Generator*);
+int psRemoveParticleAppSRT(HSD_Particle*);
 HSD_psAppSRT* psAddGeneratorAppSRT_begin(HSD_Generator*, s32);
-u16 psAttachParticleAppSRT(UNK_T, UNK_T);
+int psAttachParticleAppSRT(HSD_Particle*, HSD_psAppSRT*);
+int psAttachGeneratorAppSRT(HSD_Generator*, HSD_psAppSRT*);
 
 extern HSD_ObjAllocData HSD_PSAppSrt_804D10B0;
 

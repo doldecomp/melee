@@ -18,7 +18,7 @@ struct HSD_SynthSFXNode;
 /* 388B60 */ int HSD_SynthSFXCancelLoad(int);
 /* 388CB0 */ void HSD_SynthSFXAllocateBank(int);
 /* 388D30 */ void HSD_SynthSFXUnloadBank(int);
-/* 388DC8 */ void HSD_Synth_80388DC8(u8*);
+/* 388DC8 */ void HSD_Synth_80388DC8(int);
 /* 388E08 */ void HSD_Synth_80388E08(int);
 /* 388EFC */ void HSD_SynthSFXGroupDataReaddress(AXVPB*, void* callback);
 /* 388FF0 */ void HSD_SynthSFXBankDeflag(int);

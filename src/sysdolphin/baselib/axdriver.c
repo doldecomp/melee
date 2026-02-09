@@ -5,6 +5,8 @@
 #include <math_ppc.h>
 #include <string.h>
 #include <dolphin/axfx.h>
+#include <dolphin/dvd.h>
+#include <dolphin/os.h>
 #include <sysdolphin/baselib/axdriver.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/synth.h>
@@ -282,9 +284,9 @@ void AXDriver_8038BF6C(HSD_SM* v)
 void AXDriver_8038C6C0(HSD_SM* v)
 {
     u32 temp_r27;
-    s32 temp_r3_2;
     u32 temp_r3;
     int var_r28;
+    PAD_STACK(8);
 
     while (v->x30 == (s32) AXDriver_804D778C) {
         temp_r3 = *(u32*) v->cmd_stream;
@@ -759,14 +761,120 @@ bool AXDriver_8038D9D8(int arg0)
     return true;
 }
 
-static void fn_8038DA5C(int arg0)
+static void fn_8038DA5C(s32 result, DVDFileInfo* fileInfo)
 {
-    if (arg0 != -1) {
+    if (result != -1) {
         AXDriver_804D77EC = 1;
     }
 }
 
-/// #AXDriver_8038DA70
+// @TODO: Currently 90.31% match - register allocation in parsing section
+void AXDriver_8038DA70(const char* path, void (*callback)(void))
+{
+    DVDFileInfo fileInfo;
+    s32 entrynum;
+    s32 alignedSize;
+    void* ptr;
+    s32 offset;
+    s32 i;
+    s32 j;
+
+    entrynum = DVDConvertPathToEntrynum(path);
+    if (entrynum == -1 || DVDFastOpen(entrynum, &fileInfo) == 0) {
+        OSReport("can not open %s\n", path);
+        return;
+    }
+
+    AXDriver_804D779C = fileInfo.length;
+    if (AXDriver_804D779C == 0) {
+        OSReport("file size of \"%s\" is 0\n", path);
+        return;
+    }
+
+    alignedSize = (AXDriver_804D779C + 0x1F) & ~0x1F;
+    AXDriver_804D7798 = HSD_AudioMalloc(alignedSize);
+    AXDriver_804D77EC = 0;
+    DVDReadAsyncPrio(&fileInfo, AXDriver_804D7798, alignedSize, 0,
+                     fn_8038DA5C, 2);
+
+    while (AXDriver_804D77EC == 0) {
+        callback();
+    }
+
+    DVDClose(&fileInfo);
+
+    AXDriver_804D77A0 = ((s32*)AXDriver_804D7798)[0];
+    if (AXDriver_804D77A0 != 0) {
+        ptr = (void*)((u8*)AXDriver_804D7798 + 4);
+    } else {
+        ptr = NULL;
+    }
+    AXDriver_804D77A4 = ptr;
+    offset = AXDriver_804D77A0 * 4 + 4;
+
+    AXDriver_804D77A8 = *(s32*)((u8*)AXDriver_804D7798 + offset);
+    offset += 4;
+    if (AXDriver_804D77A8 != 0) {
+        ptr = (u8*)AXDriver_804D7798 + offset;
+    } else {
+        ptr = NULL;
+    }
+    AXDriver_804D77AC = ptr;
+
+    i = 0;
+    j = 0;
+    while (i < AXDriver_804D77A8) {
+        i++;
+        ((u32*)AXDriver_804D77AC)[j / 4] +=
+            (u32)AXDriver_804D7798 & ~3u;
+        j += 4;
+    }
+
+    offset += AXDriver_804D77A8 * 4;
+    AXDriver_804D77B0 = *(s32*)((u8*)AXDriver_804D7798 + offset);
+    offset += 4;
+    if (AXDriver_804D77B0 != 0) {
+        ptr = (u8*)AXDriver_804D7798 + offset;
+    } else {
+        ptr = NULL;
+    }
+    AXDriver_804D77B4 = ptr;
+    offset += AXDriver_804D77B0 * 4;
+
+    AXDriver_804D77B8 = *(s32*)((u8*)AXDriver_804D7798 + offset);
+    offset += 4;
+    if (AXDriver_804D77B8 != 0) {
+        ptr = (u8*)AXDriver_804D7798 + offset;
+    } else {
+        ptr = NULL;
+    }
+    i = 0;
+    AXDriver_804D77BC = ptr;
+    j = 0;
+    while (i < AXDriver_804D77B8) {
+        i++;
+        ((u32*)AXDriver_804D77BC)[j / 4] +=
+            (u32)AXDriver_804D7798 & ~3u;
+        j += 4;
+    }
+
+    offset += AXDriver_804D77B8 * 4;
+    AXDriver_804D77C0 = *(s32*)((u8*)AXDriver_804D7798 + offset);
+    if (AXDriver_804D77C0 != 0) {
+        ptr = (u8*)AXDriver_804D7798 + offset + 4;
+    } else {
+        ptr = NULL;
+    }
+    i = 0;
+    AXDriver_804D77C4 = ptr;
+    j = 0;
+    while (i < AXDriver_804D77C0) {
+        i++;
+        ((u32*)AXDriver_804D77C4)[j / 4] +=
+            (u32)AXDriver_804D7798 & ~3u;
+        j += 4;
+    }
+}
 
 void AXDriver_8038DCFC(void)
 {
@@ -884,7 +992,95 @@ int AXDriverSetupAux(int channel, AXDriverAuxType type, void* param)
     return result;
 }
 
-/// #AXDriver_8038E034
+typedef struct {
+    s32 v[8];
+} RevHiDims;
+
+static const RevHiDims revhi_dims = {
+    { 0x6FD, 0x7CF, 0x91D, 0x1B1, 0x95, 0x2F, 0x49, 0x43 },
+};
+
+static const s32 revstd_dims[] = {
+    0x6FD, 0x7CF, 0x1B1, 0x95,
+};
+
+// @TODO: Currently 53.61% match - needs struct copy and computation order fixes
+s32 AXDriver_8038E034(AXDriverAuxType type, void* param)
+{
+    s32 result;
+    s32 d[8];
+    s32 predelay;
+    s32 s0, s1, s2, s3, s4, s5;
+
+    result = 0;
+
+    if (type < 0 || type > 4 || (type != 0 && param == NULL)) {
+        return 0;
+    }
+
+    switch (type) {
+    case AXDRIVER_AUX_OFF:
+        break;
+
+    case AXDRIVER_AUX_REVERB_HI:
+    {
+        RevHiDims tmp;
+
+        tmp = revhi_dims;
+        predelay = (s32)(32000.0F *
+            ((struct AXFX_REVERBHI*)param)->preDelay);
+
+        s0 = (tmp.v[0] + 2) * 4;
+        s1 = (tmp.v[1] + 2) * 4;
+        s2 = (tmp.v[2] + 2) * 4;
+        s3 = (tmp.v[3] + 2) * 4;
+        s4 = (tmp.v[4] + 2) * 4;
+        s5 = (tmp.v[5] + 2) * 4;
+
+        result += s0 + s3 + s1 + s4 + s2 + s5 +
+                  (tmp.v[5] + 2) * 4 + predelay * 4;
+        result += s0 + s3 + s1 + s4 + s2 + s5 +
+                  (tmp.v[6] + 2) * 4 + predelay * 4;
+        result += s0 + s3 + s1 + s4 + s2 + s5 +
+                  (tmp.v[7] + 2) * 4 + predelay * 4;
+        break;
+    }
+
+    case AXDRIVER_AUX_REVERB_STD:
+    {
+        s0 = (revstd_dims[0] + 2) * 4;
+        s1 = (revstd_dims[1] + 2) * 4;
+        s2 = (revstd_dims[2] + 2) * 4;
+        s3 = (revstd_dims[3] + 2) * 4;
+
+        predelay = (s32)(32000.0F *
+            ((struct AXFX_REVERBSTD*)param)->preDelay);
+
+        result = s0 + s2 + s1 + s3 + predelay * 4;
+        result += s0 + s2 + s1 + s3 + predelay * 4;
+        result += s0 + s2 + s1 + s3 + predelay * 4;
+        break;
+    }
+
+    case AXDRIVER_AUX_CHORUS:
+        result = 0x1680;
+        break;
+
+    case AXDRIVER_AUX_DELAY:
+    {
+        struct AXFX_DELAY* delay = (struct AXFX_DELAY*)param;
+        s32 ch0, ch1, ch2;
+
+        ch0 = ((delay->delay[0] - 5) * 32 + 159) / 160 * 640;
+        ch1 = ((delay->delay[1] - 5) * 32 + 159) / 160 * 640;
+        ch2 = ((delay->delay[2] - 5) * 32 + 159) / 160 * 640;
+        result = ch0 + ch1 + ch2;
+        break;
+    }
+    }
+
+    return result;
+}
 
 bool AXDriver_8038E30C(s32 arg0, s32 arg1, void* arg2, u8* arg3, u32 arg4)
 {
@@ -949,8 +1145,8 @@ bool AXDriver_8038E37C(AXDriverAuxType type, void* param)
 
 void AXDriver_8038E498(int arg0, int arg1, int arg2, int arg3)
 {
-    HSD_SM* v;
     int i;
+    HSD_SM* v;
 
     v = AXDriver_804C45A0;
     for (i = 0; i < 0x60; i++) {

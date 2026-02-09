@@ -62,13 +62,204 @@ int assign_reg(int num, u32* unused, HSD_TExpDag* list, int* order)
     return (4 - var_r24) + (4 - var_r23);
 }
 
-/// #order_dag
+void order_dag(int num, int* dep, int* full_dep, HSD_TExpDag* list, int depth,
+               int node, int scheduled, int available, int* order,
+               int* best_score, int* best_order)
+{
+    HSD_TExpDag* dag;
+    int new_scheduled;
+    int new_available;
+    int blocked;
+    int dep_bits;
+    int score;
+    int i;
+    int n;
+    int rem;
 
-/// #CalcDistance
+    new_scheduled = scheduled | (1 << node);
+    new_available = available & ~(1 << node);
+    order[depth] = (u8) node;
+
+    if (depth + 1 == num) {
+        score = assign_reg(num, (u32*) dep, list, order);
+        if (score < *best_score) {
+            *best_score = score;
+            i = 0;
+            if (num > 0) {
+                rem = num - 8;
+                if (num <= 8) {
+                    goto remainder;
+                }
+                n = (u32) (rem + 7) >> 3;
+                if (rem <= 0) {
+                    goto remainder;
+                }
+                {
+                    int* src = order;
+                    int* dst = best_order;
+
+                    do {
+                        i += 8;
+                        dst[0] = src[0];
+                        dst[1] = src[1];
+                        dst[2] = src[2];
+                        dst[3] = src[3];
+                        dst[4] = src[4];
+                        dst[5] = src[5];
+                        dst[6] = src[6];
+                        dst[7] = src[7];
+                        src += 8;
+                        dst += 8;
+                    } while (--n > 0);
+                }
+            remainder: {
+                    int* src2 = order + i;
+                    int* dst2 = best_order + i;
+
+                    n = num - i;
+                    if (i < num) {
+                        do {
+                            *dst2 = *src2;
+                            src2++;
+                            dst2++;
+                        } while (--n > 0);
+                    }
+                }
+            }
+        }
+    } else {
+        dep_bits = dep[node];
+        blocked = new_available | dep_bits;
+        {
+            int* fp = full_dep;
+
+            dep_bits = 0;
+            n = 0;
+            for (i = 0; i < num; i++) {
+                if (blocked & (1 << n)) {
+                    dep_bits |= *fp;
+                }
+                fp++;
+                n++;
+            }
+        }
+        dag = &list[node];
+        new_available = blocked & ~dep_bits;
+        if (dag->nb_dep == 1 && (new_available & dep[node])) {
+            order_dag(num, dep, full_dep, list, depth + 1,
+                      dag->depend[0]->idx, new_scheduled, new_available,
+                      order, best_score, best_order);
+        } else {
+            for (i = 0; i < num; i++) {
+                if (new_available & (1 << i)) {
+                    order_dag(num, dep, full_dep, list, depth + 1, i,
+                              new_scheduled, new_available, order,
+                              best_score, best_order);
+                }
+            }
+        }
+    }
+}
+
+void CalcDistance(HSD_TExp** tevs, int* dist, HSD_TExp* tev, int num,
+                  int depth)
+{
+    int idx;
+    int i;
+
+    idx = 0;
+    for (i = 0; i < num; i++) {
+        if (tevs[i] == tev) {
+            if (dist[idx] < depth) {
+                dist[idx] = depth;
+                for (i = 0; i < 4; i++) {
+                    if (tev->tev.c_in[i].type == 1) {
+                        CalcDistance(tevs, dist, tev->tev.c_in[i].exp, num,
+                                    depth + 1);
+                    }
+                    if (tev->tev.a_in[i].type == 1) {
+                        CalcDistance(tevs, dist, tev->tev.a_in[i].exp, num,
+                                    depth + 1);
+                    }
+                }
+            }
+            return;
+        }
+        idx++;
+    }
+}
 
 /// #HSD_TExpMakeDag
 
-/// #make_full_dependancy_mtx
+void make_full_dependancy_mtx(int num, int* dep, int* full)
+{
+    int* src;
+    int* dst;
+    int* row;
+    int changed;
+    int rem;
+    int i;
+    int j;
+    int old;
+    int n;
+
+    i = 0;
+    if (num > 0) {
+        rem = num - 8;
+        if (num <= 8) {
+            goto remainder;
+        }
+        n = (u32) (rem + 7) >> 3;
+        if (rem <= 0) {
+            goto remainder;
+        }
+        src = dep;
+        dst = full;
+        do {
+            i += 8;
+            dst[0] = src[0];
+            dst[1] = src[1];
+            dst[2] = src[2];
+            dst[3] = src[3];
+            dst[4] = src[4];
+            dst[5] = src[5];
+            dst[6] = src[6];
+            dst[7] = src[7];
+            src += 8;
+            dst += 8;
+        } while (--n > 0);
+    remainder:
+        n = num - i;
+        src = dep + i;
+        dst = full + i;
+        if (i < num) {
+            do {
+                *dst = *src;
+                src++;
+                dst++;
+            } while (--n > 0);
+        }
+    }
+    do {
+        row = full;
+        changed = 0;
+        j = 0;
+        while (j < num) {
+            n = *row;
+            for (i = 0; i < num; i++) {
+                if ((1 << j) & full[i]) {
+                    old = full[i];
+                    full[i] = old | n;
+                    if (old != full[i]) {
+                        changed = 1;
+                    }
+                }
+            }
+            row++;
+            j++;
+        }
+    } while (changed != 0);
+}
 
 void fn_80386230(void) {}
 
@@ -97,18 +288,16 @@ void HSD_TExpSchedule(int num, HSD_TExpDag* list, HSD_TExp** result,
 {
     int* var_r29;
     HSD_TExp** var_r28;
-    HSD_TExpDag* temp_r3;
     int var_r27;
-    int var_r7;
     u8 temp_r0;
     u8 temp_r0_2;
+    int var_r7;
     int idx;
     int i;
-    HSD_TETev* tev;
 
     int sp1AC[32];
-    UNK_T sp12C[0x80 / 4];
-    UNK_T spAC[0x80 / 4];
+    int sp12C[32];
+    int spAC[32];
     int sp2C[32];
     int sp28;
 
@@ -139,14 +328,13 @@ void HSD_TExpSchedule(int num, HSD_TExpDag* list, HSD_TExp** result,
             for (i = 0; i < 4; i++) {
                 if (HSD_TExpGetType((*var_r28)->tev.c_in[i].exp) == HSD_TE_TEV)
                 {
-                    tev = &(*var_r28)->tev;
-                    if (tev->c_in[i].sel == 1) {
-                        tev->c_in[i].arg =
-                            HSD_TExpDag_80407AA0_44[tev->c_in[i]
+                    if ((*var_r28)->tev.c_in[i].sel == 1) {
+                        (*var_r28)->tev.c_in[i].arg =
+                            HSD_TExpDag_80407AA0_44[(*var_r28)->tev.c_in[i]
                                                         .exp->tev.c_dst];
                     } else {
-                        tev->c_in[i].arg =
-                            HSD_TExpDag_80407AA0_54[tev->c_in[i]
+                        (*var_r28)->tev.c_in[i].arg =
+                            HSD_TExpDag_80407AA0_54[(*var_r28)->tev.c_in[i]
                                                         .exp->tev.c_dst];
                     }
                 }
@@ -159,9 +347,9 @@ void HSD_TExpSchedule(int num, HSD_TExpDag* list, HSD_TExp** result,
             for (i = 0; i < 4; i++) {
                 if (HSD_TExpGetType((*var_r28)->tev.a_in[i].exp) == HSD_TE_TEV)
                 {
-                    tev = &(*var_r28)->tev;
-                    tev->a_in[i].arg =
-                        HSD_TExpDag_80407AA0_64[tev->a_in[i].exp->tev.a_dst];
+                    (*var_r28)->tev.a_in[i].arg =
+                        HSD_TExpDag_80407AA0_64[(*var_r28)->tev.a_in[i]
+                                                    .exp->tev.a_dst];
                 }
             }
         }
@@ -196,4 +384,91 @@ int HSD_TExpSimplify(HSD_TExp* texp_)
     return res;
 }
 
-/// #HSD_TExpSimplify2
+int HSD_TExpSimplify2(HSD_TExp* texp)
+{
+    HSD_TExp* child;
+    u8 sel;
+    int i;
+    int r3;
+    int r4;
+    int r5;
+    int r6;
+
+    for (i = 0; i < 4; i++) {
+        child = texp->tev.c_in[i].exp;
+        sel = texp->tev.c_in[i].sel;
+        if (texp->tev.c_in[i].type == HSD_TE_TEV && sel == 1) {
+            r3 = 0;
+            r4 = 0;
+            r5 = 0;
+            r6 = 0;
+            if (child->tev.c_op == 0 && child->tev.c_in[0].sel == HSD_TE_0) {
+                r6 = 1;
+            }
+            if (r6 != 0 && child->tev.c_in[1].sel == HSD_TE_0) {
+                r5 = 1;
+            }
+            if (r5 != 0 && child->tev.c_bias == 0) {
+                r4 = 1;
+            }
+            if (r4 != 0 && child->tev.c_scale == 0) {
+                r3 = 1;
+            }
+            if (r3 != 0) {
+                switch (child->tev.c_in[3].type) {
+                case HSD_TE_KONST:
+                    if (texp->tev.kcsel == 0xFF) {
+                        texp->tev.kcsel = child->tev.kcsel;
+                    } else if (texp->tev.kcsel != child->tev.kcsel) {
+                        break;
+                    }
+                    /* fallthrough */
+                case HSD_TE_IMM:
+                    texp->tev.c_in[i] = child->tev.c_in[3];
+                    HSD_TExpRef(texp->tev.c_in[i].exp, texp->tev.c_in[i].sel);
+                    HSD_TExpUnref(child, sel);
+                    break;
+                }
+            }
+        }
+    }
+    for (i = 0; i < 4; i++) {
+        child = texp->tev.a_in[i].exp;
+        sel = texp->tev.a_in[i].sel;
+        if (texp->tev.a_in[i].type == HSD_TE_TEV) {
+            r3 = 0;
+            r4 = 0;
+            r5 = 0;
+            r6 = 0;
+            if (child->tev.a_op == 0 && child->tev.a_in[0].sel == HSD_TE_0) {
+                r6 = 1;
+            }
+            if (r6 != 0 && child->tev.a_in[1].sel == HSD_TE_0) {
+                r5 = 1;
+            }
+            if (r5 != 0 && child->tev.a_bias == 0) {
+                r4 = 1;
+            }
+            if (r4 != 0 && child->tev.a_scale == 0) {
+                r3 = 1;
+            }
+            if (r3 != 0) {
+                switch (child->tev.a_in[3].type) {
+                case HSD_TE_KONST:
+                    if (texp->tev.kasel == 0xFF) {
+                        texp->tev.kasel = child->tev.kasel;
+                    } else if (texp->tev.kasel != child->tev.kasel) {
+                        break;
+                    }
+                    /* fallthrough */
+                case HSD_TE_IMM:
+                    texp->tev.a_in[i] = child->tev.a_in[3];
+                    HSD_TExpRef(texp->tev.a_in[i].exp, texp->tev.a_in[i].sel);
+                    HSD_TExpUnref(child, sel);
+                    break;
+                }
+            }
+        }
+    }
+    return 0;
+}

@@ -62,11 +62,11 @@ struct HSD_SM {
 /* 38D5B4 */ bool AXDriver_8038D5B4(s32 arg0, s32 arg1, u8 arg2);
 /* 38D914 */ bool AXDriver_8038D914(s32 arg0, s32 arg1, s8 arg2);
 /* 38D9D8 */ bool AXDriver_8038D9D8(int arg0);
-/* 38DA70 */ UNK_RET AXDriver_8038DA70(UNK_PARAMS);
+/* 38DA70 */ void AXDriver_8038DA70(const char* path, void (*callback)(void));
 /* 38DCFC */ void AXDriver_8038DCFC(void);
 /* 38DD30 */ int AXDriverSetupAux(int channel, AXDriverAuxType type,
                                   void* param);
-/* 38E034 */ UNK_RET AXDriver_8038E034(UNK_PARAMS);
+/* 38E034 */ s32 AXDriver_8038E034(AXDriverAuxType type, void* param);
 /* 38E30C */ bool AXDriver_8038E30C(s32 arg0, s32 arg1, void* arg2, u8* arg3,
                                     u32 arg4);
 /* 38E37C */ bool AXDriver_8038E37C(AXDriverAuxType type, void* param);

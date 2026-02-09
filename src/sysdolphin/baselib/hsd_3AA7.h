@@ -18,7 +18,7 @@ struct hsd_803AC3E0_arg0_t {
 /* 3AC2D4 */ UNK_RET fn_803AC2D4(UNK_PARAMS);
 /* 3AC2E0 */ UNK_RET fn_803AC2E0(UNK_PARAMS);
 /* 3AC334 */ UNK_RET fn_803AC334(UNK_PARAMS);
-/* 3AC340 */ UNK_RET hsd_803AC340(UNK_PARAMS);
+/* 3AC340 */ int hsd_803AC340(void*);
 /* 3AC3E0 */ void hsd_803AC3E0(struct hsd_803AC3E0_arg0_t* arg0, int arg1,
                                int arg2, int arg3, int arg4);
 /* 3AC3F8 */ UNK_RET fn_803AC3F8(UNK_PARAMS);

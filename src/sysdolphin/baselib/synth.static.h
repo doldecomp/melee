@@ -79,3 +79,5 @@ static int hsd_SynthSFXBankNum;
 /* 4D776C */ static int HSD_Synth_804D776C;
 /* 4D7778 */ static volatile u8 HSD_Synth_804D7778;
 /* 4D777C */ static s32 HSD_Synth_804D777C;
+/* 4D7780 */ static u32 HSD_Synth_804D7780;
+/* 4D7784 */ static u32 HSD_Synth_804D7784;
