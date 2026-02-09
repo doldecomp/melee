@@ -963,7 +963,7 @@ int lb_8001C4A8(void* arg0, void* arg1)
         i++;
         var_r30++;
     }
-    return hsd_803B2674(&lb_80432A68.unk_A8);
+    return hsd_803B2674((CardState*) &lb_80432A68.unk_A8);
 }
 
 void lb_8001C550(void)

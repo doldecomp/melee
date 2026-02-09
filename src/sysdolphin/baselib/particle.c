@@ -3,12 +3,14 @@
 #include "particle.static.h"
 
 #include <dolphin/gx.h>
+#include <dolphin/os.h>
 #include <dolphin/gx/GXGeometry.h>
 #include <dolphin/mcc.h>
 #include <baselib/cobj.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjobject.h>
+#include <baselib/psstructs.h>
 #include <baselib/state.h>
 #include <MetroTRK/ppc_reg.h>
 
@@ -97,7 +99,18 @@ void hsd_80391A04(float scale_x, float scale_y, int line_width)
 
 /// #hsd_80391F28
 
-/// #hsd_80392194
+void hsd_80392194(u8* dst, s32 flags, void* unused1, void* unused2,
+                   u8* src)
+{
+    u8 b;
+    dst[0] = src[0];
+    if (flags & 1) {
+        b = src[2];
+    } else {
+        b = src[1];
+    }
+    dst[1] = b;
+}
 
 /// #hsd_803921B8
 
@@ -122,7 +135,20 @@ void hsd_80392528(Event arg0)
 
 /// #fn_80392934
 
-/// #fn_80392A08
+static s32 lbl_804D6088 = 4;
+static s32 lbl_804D608C = 1;
+
+void fn_80392A08(int arg0, int arg1, int arg2)
+{
+    lbl_804D6088 = arg0;
+    lbl_804D608C = arg1;
+    if (hsd_804D7888 == 0 && arg2 != 0) {
+        hsd_804D787C = 0.0F;
+        hsd_804D7880 = 0.0F;
+        hsd_804D7884 = 0.0F;
+    }
+    hsd_804D7888 = arg2;
+}
 
 /// #fn_80392A3C
 
@@ -134,13 +160,47 @@ s32 fn_80392CCC(s32 arg0)
 
 /// #fn_80392CD8
 
-/// #fn_80392E2C
+static s32 hsd_804CE728[0x106];
+
+void fn_80392E2C(s32 arg0)
+{
+    s32 idx;
+
+    if (hsd_804D7898 <= 0x100 && (u32) (arg0 - 1) <= 1U) {
+        idx = hsd_804D789C + hsd_804D7898;
+        hsd_804CE728[idx % 256] = arg0;
+        hsd_804D7898 += 1;
+    }
+}
 
 /// #hsd_80392E80
 
 /// #hsd_803931A4
 
-/// #fn_803932D0
+typedef struct {
+    s32 x0;
+    u32 x4;
+    s32 x8;
+} ParticleLogEntry;
+
+static ParticleLogEntry hsd_804CEB40[0x100];
+
+void fn_803932D0(s32 arg0, u32 arg1, s32 arg2)
+{
+    s32 count = hsd_804D78BC;
+    ParticleLogEntry* base = hsd_804CEB40;
+    s32 idx;
+    ParticleLogEntry* entry;
+
+    if (count <= 0x100 && arg1 == 0x100U) {
+        idx = (hsd_804D78B8 + count) % 256;
+        *(s32*) ((u8*) base + idx * (s32) sizeof(ParticleLogEntry)) = arg0;
+        entry = &base[idx];
+        entry->x4 = arg1;
+        entry->x8 = arg2;
+        hsd_804D78BC += 1;
+    }
+}
 
 /// #hsd_80393328
 
@@ -243,7 +303,15 @@ void hsd_80393DA0(u8* arg0, size_t arg1)
     HSD_SetReportCallback(fn_80393C14);
 }
 
-/// #hsd_80393E34
+void hsd_80393E34(s32* arg0, s32* arg1)
+{
+    if (arg0 != NULL) {
+        *arg0 = hsd_804CF7E8.x14;
+    }
+    if (arg1 != NULL) {
+        *arg1 = hsd_804CF7E8.x18;
+    }
+}
 
 /// #hsd_80393E68
 
@@ -289,18 +357,32 @@ void hsd_80393DA0(u8* arg0, size_t arg1)
 
 /// #hsd_80395D88
 
-/// #hsd_80396130
+extern struct {
+    /* 0x00 */ u8 _pad[0x10];
+    /* 0x10 */ u32 x10;
+} lbl_8040BAF0;
+
+extern struct {
+    /* 0x00 */ u8 _pad[0x10];
+    /* 0x10 */ u32 x10;
+} lbl_8040BC3C;
+
+void hsd_80396130(void)
+{
+    u32 old = lbl_8040BC3C.x10;
+    u32 memsize;
+
+    memsize = OSGetPhysicalMemSize();
+    old &= 0x0FFFFFFF;
+    lbl_8040BAF0.x10 = (old + memsize) % memsize + 0x80000000;
+    PAD_STACK(16);
+}
 
 /// #hsd_80396188
 
 /// #hsd_803962A8
 
 /// #hsd_803966A0
-
-extern struct {
-    /* 0x00 */ u8 _pad[0x10];
-    /* 0x10 */ u32 x10;
-} lbl_8040BC3C;
 
 void hsd_80396868(void)
 {
@@ -647,7 +729,19 @@ HSD_GObj* hsd_80398310(u16 arg0, u8 arg1, u8 arg2, u32 arg3)
 
 /// #hsd_8039CF4C
 
-/// #hsd_8039D048
+static HSD_JObj* hsd_804D08E8[8];
+
+void hsd_8039D048(void* arg0)
+{
+    u32 flags = *(u32*) ((u8*) arg0 + 4);
+    if (flags & 0x8000) {
+        HSD_JObj** p = &hsd_804D08E8[(flags >> 12) & 7];
+        if (*p != NULL) {
+            HSD_JObjUnref(*p);
+            *p = NULL;
+        }
+    }
+}
 
 /// #hsd_8039D0A0
 
@@ -667,13 +761,40 @@ u16 hsd_8039D1EC(void)
 
 /// #hsd_8039D214
 
-/// #hsd_8039D354
+void hsd_8039D354(u32 unused)
+{
+    HSD_ObjAllocInit(&hsd_804D0F90, 0x94, 4);
+    hsd_804D78FC = NULL;
+    hsd_804D78E0 = 0;
+    hsd_804D78DA = 0;
+    hsd_804D78F4 = 0;
+    hsd_804D78F0 = 0;
+    hsd_804D78E8 = 0;
+    hsd_804D78EC = 0;
+    hsd_804D78F8 = 0;
+    hsd_804D7900 = 0;
+}
 
 /// #hsd_8039D3AC
 
 /// #hsd_8039D4DC
 
-/// #hsd_8039D580
+void hsd_8039D580(HSD_JObj* jobj)
+{
+    HSD_Generator* next;
+    HSD_Generator* cur;
+
+    if (jobj != NULL) {
+        cur = hsd_804D78FC;
+        while (cur != NULL) {
+            next = cur->next;
+            if (cur->jobj == jobj) {
+                hsd_8039D4DC(cur);
+            }
+            cur = next;
+        }
+    }
+}
 
 /// #hsd_8039D5DC
 
