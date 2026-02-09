@@ -28,11 +28,9 @@ extern HSD_LeakChecker HSD_Leak_80407B58;
 static char HSD_Leak_804D6000[] = " ";
 static char HSD_Leak_804D6004[] = "done.\n";
 
-/* @TODO: Currently ~96.7% match - correct stack frame (64 bytes),
- * control flow, and instruction opcodes (including mtctr/bdnz scan loop).
- * Only difference is register allocation: target assigns scan->r24,
- * indent->r25, but compiler assigns scan->r25, indent->r24. This swap
- * propagates to all register references throughout the function. */
+/* @TODO: Currently ~97.2% match - register allocation differences
+ * remain: r28/r29 swap (scan_copy/cap_ptr), r21/r23 swap (heap_start_phys),
+ * and r22/r27 swap (ofs/loop counter) in second half. */
 int HSD_Leak_80387DF8(int indent)
 {
     u32 val;
@@ -42,7 +40,7 @@ int HSD_Leak_80387DF8(int indent)
     u32 heap_start_align;
     int leak_count;
     u32 i;
-    u32 inner_i;
+    u32 j;
     u32 ofs;
     u32* heap_start_phys;
 
@@ -68,8 +66,7 @@ int HSD_Leak_80387DF8(int indent)
     }
     OSReport(lc->str_begin);
 
-    i = indent + 2;
-    for (inner_i = 0; inner_i < i; inner_i++) {
+    for (j = 0; j < (u32)(indent + 2); j++) {
         OSReport(HSD_Leak_804D6000);
     }
     cap_ptr = &lc->capacity;
@@ -110,7 +107,8 @@ int HSD_Leak_80387DF8(int indent)
     }
 
     /* Check allocation table for leaks */
-    i = indent + 2;
+    i = indent;
+    i += 2;
     val = (u32) lc->table;
     scan = (u32*) (val + (*cap_ptr << 2));
     ofs = 0;
@@ -134,7 +132,7 @@ int HSD_Leak_80387DF8(int indent)
                     if ((u32) heap_start_phys ==
                         *(u32*)((u32)lc->table + (reg_idx << 2)))
                     {
-                        for (inner_i = 0; inner_i < i; inner_i++) {
+                        for (j = 0; j < i; j++) {
                             OSReport(HSD_Leak_804D6000);
                         }
                         OSReport(lc->str_leak_detected,
@@ -144,7 +142,7 @@ int HSD_Leak_80387DF8(int indent)
                     }
                 }
             }
-            for (inner_i = 0; inner_i < i; inner_i++) {
+            for (j = 0; j < i; j++) {
                 OSReport(HSD_Leak_804D6000);
             }
             OSReport(lc->str_leak_destroyed,
@@ -156,18 +154,18 @@ next_leak:
     }
 
     if (leak_count > 0) {
-        for (inner_i = 0; inner_i < (u32)(indent + 2); inner_i++) {
+        for (j = 0; j < (u32)(indent + 2); j++) {
             OSReport(HSD_Leak_804D6000);
         }
         OSReport(lc->str_num_leaked, leak_count);
     } else {
-        for (inner_i = 0; inner_i < (u32)(indent + 2); inner_i++) {
+        for (j = 0; j < (u32)(indent + 2); j++) {
             OSReport(HSD_Leak_804D6000);
         }
         OSReport(lc->str_no_leak);
     }
 
-    for (inner_i = 0; inner_i < (u32) indent; inner_i++) {
+    for (j = 0; j < (u32) indent; j++) {
         OSReport(HSD_Leak_804D6000);
     }
     OSReport(HSD_Leak_804D6004);

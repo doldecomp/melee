@@ -44,7 +44,66 @@ void HSD_SObjLib_803A44A4(void)
     HSD_ObjAllocInit(&HSD_SObjLib_804D10E0, 0x9C, 4);
 }
 
-/// #HSD_SObjLib_803A44D4
+/* @TODO: 99.56% match - needs register allocation fix (r4 vs r5 for cur) */
+void HSD_SObjLib_803A44D4(HSD_GObj* gobj, HSD_SObj* sobj, u8 priority)
+{
+    HSD_SObj* cur;
+    HSD_SObj* next;
+
+    PAD_STACK(16);
+
+    cur = sobj->prev;
+    if (cur != NULL || sobj->next != NULL) {
+        if (cur != NULL) {
+            cur->next = sobj->next;
+        } else {
+            HSD_GObjObject_80390ADC(gobj);
+            HSD_GObjObject_80390A70(gobj, HSD_SObjLib_804D7960, sobj->next);
+            sobj->next->prev = NULL;
+        }
+
+        if (sobj->next != NULL) {
+            sobj->next->prev = sobj->prev;
+        } else {
+            sobj->prev->next = NULL;
+        }
+
+        sobj->next = NULL;
+        sobj->prev = NULL;
+    } else {
+        if (gobj->hsd_obj == sobj) {
+            HSD_GObjObject_80390ADC(gobj);
+        }
+    }
+
+    cur = gobj->hsd_obj;
+    if (cur == NULL) {
+        HSD_GObjObject_80390ADC(gobj);
+        HSD_GObjObject_80390A70(gobj, HSD_SObjLib_804D7960, sobj);
+    } else {
+        next = cur;
+        while (next->next != NULL && next->x44 <= (u8) priority) {
+            next = next->next;
+        }
+
+        if (next->next == NULL && next->x44 <= (u8) priority) {
+            next->next = sobj;
+            sobj->prev = next;
+        } else if (next == cur) {
+            sobj->next = cur;
+            ((HSD_SObj*) gobj->hsd_obj)->prev = sobj;
+            HSD_GObjObject_80390ADC(gobj);
+            HSD_GObjObject_80390A70(gobj, HSD_SObjLib_804D7960, sobj);
+        } else {
+            next->prev->next = sobj;
+            sobj->prev = next->prev;
+            next->prev = sobj;
+            sobj->next = next;
+        }
+    }
+
+    sobj->x44 = priority;
+}
 
 void HSD_SObjLib_803A466C(HSD_SObj* sobj)
 {
@@ -141,4 +200,43 @@ void HSD_SObjLib_803A54EC(HSD_GObj* gobj, int unused)
     HSD_StateSetZMode(1, 3, 1);
 }
 
-/// #HSD_SObjLib_803A55DC
+/* @TODO: 99.84% match - near_val variable forces 6 FPR saves but adds
+ * 4 bytes to stack, shifting local offsets by 4 */
+void HSD_SObjLib_803A55DC(HSD_GObj* gobj, int width, int height, int priority)
+{
+    HSD_CObj* cobj;
+    Vec3 eye = HSD_SObjLib_803B9658;
+    Vec3 interest = HSD_SObjLib_803B9664;
+    Scissor viewport;
+    Scissor scissor;
+    f32 roll = 0.0F;
+    f32 near_val = roll;
+    f32 far_val = 0.5F;
+    f32 top = roll;
+    f32 bottom = (f32) -(s32)(u16) height;
+    f32 left = roll;
+    f32 right = (f32)(u16) width;
+
+    viewport.left = 0;
+    viewport.right = width;
+    viewport.top = 0;
+    viewport.bottom = height;
+
+    scissor.left = 0;
+    scissor.right = width;
+    scissor.top = 0;
+    scissor.bottom = height;
+
+    cobj = HSD_CObjAlloc();
+    HSD_CObjSetProjectionType(cobj, PROJ_ORTHO);
+    HSD_CObjSetViewport(cobj, (HSD_RectS16*) &viewport);
+    HSD_CObjSetScissor(cobj, &scissor);
+    HSD_CObjSetEyePosition(cobj, &eye);
+    HSD_CObjSetInterest(cobj, &interest);
+    HSD_CObjSetRoll(cobj, roll);
+    HSD_CObjSetNear(cobj, near_val);
+    HSD_CObjSetFar(cobj, far_val);
+    HSD_CObjSetOrtho(cobj, top, bottom, left, right);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
+    GObj_SetupGXLinkMax(gobj, HSD_SObjLib_803A54EC, priority);
+}

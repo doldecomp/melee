@@ -106,10 +106,7 @@ float HSD_ByteCodeEval(u8* pc, float* args, u32 nb_args)
             continue;
         }
 
-        opcode = *pc;
-        pc++;
-
-        switch (opcode) {
+        switch (opcode = *pc++) {
         case 0:
             break;
         case 1:
@@ -137,9 +134,8 @@ float HSD_ByteCodeEval(u8* pc, float* args, u32 nb_args)
             break;
         case 7:
             HSD_ASSERT(376, stack);
-            fv = *(f32*) &stack->data;
             {
-                s32 iv = (s32) fv;
+                s32 iv = (s32) *(f32*) &stack->data;
                 stack->data = (void*) iv;
             }
             break;
@@ -211,9 +207,8 @@ float HSD_ByteCodeEval(u8* pc, float* args, u32 nb_args)
             break;
         case 0x15:
             HSD_ASSERT(459, stack);
-            fv = *(f32*) &stack->data;
-            if (fv < 0.0F) {
-                fv = -fv;
+            if (*(f32*) &stack->data < 0.0F) {
+                fv = -(*(f32*) &stack->data);
                 stack->data = *(void**) &fv;
             }
             break;
@@ -228,22 +223,26 @@ float HSD_ByteCodeEval(u8* pc, float* args, u32 nb_args)
             break;
         case 0x16:
             HSD_ASSERT(474, stack);
-            fv = *(f32*) &stack->data;
-            if (fv > 0.0F) {
-                f64 guess = __frsqrte((f64) fv);
-                guess = 0.5 * guess *
-                        -(((f64) fv * (guess * guess)) - 3.0);
-                guess = 0.5 * guess *
-                        -(((f64) fv * (guess * guess)) - 3.0);
-                fv = (f32) ((f64) fv *
-                            (0.5 * guess *
-                             -(((f64) fv * (guess * guess)) - 3.0)));
+            {
+                f32 val = *(f32*) &stack->data;
+                if (val > 0.0F) {
+                    f64 guess = __frsqrte((f64) val);
+                    guess = 0.5 * guess *
+                            -(((f64) val * (guess * guess)) - 3.0);
+                    guess = 0.5 * guess *
+                            -(((f64) val * (guess * guess)) - 3.0);
+                    fv = (f32) ((f64) val *
+                               (0.5 * guess *
+                                -(((f64) val * (guess * guess)) - 3.0)));
+                    val = fv;
+                }
+                fv = val;
+                stack->data = *(void**) &fv;
             }
-            stack->data = *(void**) &fv;
             break;
         case 0x31:
             HSD_ASSERTMSG(480, stack, "stack");
-            stack->data = (void*) ((s32) stack->data == 0);
+            stack->data = (void*) !(s32) stack->data;
             break;
         case 0x17:
             HSD_ASSERT(501, stack);
@@ -388,7 +387,8 @@ float HSD_ByteCodeEval(u8* pc, float* args, u32 nb_args)
                         result = (f32) (RAD_TO_DEG * atan2f(fb, fv));
                     }
                 }
-                *(f32*) &stack->data = result;
+                fv = result;
+            stack->data = *(void**) &fv;
             }
             break;
         case 0x33:
@@ -466,14 +466,14 @@ float HSD_ByteCodeEval(u8* pc, float* args, u32 nb_args)
             HSD_ASSERTMSG(653, stack->next, "stack->next");
             a = (s32) stack->data;
             stack = HSD_SListRemove(stack);
-            stack->data = (void*) (a == (s32) stack->data);
+            stack->data = (void*) ((s32) stack->data == a);
             break;
         case 0x2E:
             HSD_ASSERT(658, stack);
             HSD_ASSERTMSG(658, stack->next, "stack->next");
             a = (s32) stack->data;
             stack = HSD_SListRemove(stack);
-            stack->data = (void*) (a != (s32) stack->data);
+            stack->data = (void*) ((s32) stack->data != a);
             break;
         case 0x2F:
             HSD_ASSERT(663, stack);

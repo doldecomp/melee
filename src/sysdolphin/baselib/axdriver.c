@@ -768,7 +768,8 @@ static void fn_8038DA5C(s32 result, DVDFileInfo* fileInfo)
     }
 }
 
-// @TODO: Currently 90.31% match - register allocation in parsing section
+// @TODO: Currently 97.58% match - register allocation in section 1 and 2
+// parsing blocks (r0/r3 swap for count/ptr, r4/r5 swap for base pointer)
 void AXDriver_8038DA70(const char* path, void (*callback)(void))
 {
     DVDFileInfo fileInfo;
@@ -776,8 +777,8 @@ void AXDriver_8038DA70(const char* path, void (*callback)(void))
     s32 alignedSize;
     void* ptr;
     s32 offset;
-    s32 i;
     s32 j;
+    s32 i;
 
     entrynum = DVDConvertPathToEntrynum(path);
     if (entrynum == -1 || DVDFastOpen(entrynum, &fileInfo) == 0) {
@@ -809,8 +810,8 @@ void AXDriver_8038DA70(const char* path, void (*callback)(void))
     } else {
         ptr = NULL;
     }
-    AXDriver_804D77A4 = ptr;
     offset = AXDriver_804D77A0 * 4 + 4;
+    AXDriver_804D77A4 = ptr;
 
     AXDriver_804D77A8 = *(s32*)((u8*)AXDriver_804D7798 + offset);
     offset += 4;
@@ -821,11 +822,11 @@ void AXDriver_8038DA70(const char* path, void (*callback)(void))
     }
     AXDriver_804D77AC = ptr;
 
-    i = 0;
     j = 0;
+    i = 0;
     while (i < AXDriver_804D77A8) {
         i++;
-        ((u32*)AXDriver_804D77AC)[j / 4] +=
+        *(u32*)((u8*)AXDriver_804D77AC + j) +=
             (u32)AXDriver_804D7798 & ~3u;
         j += 4;
     }
@@ -838,8 +839,8 @@ void AXDriver_8038DA70(const char* path, void (*callback)(void))
     } else {
         ptr = NULL;
     }
-    AXDriver_804D77B4 = ptr;
     offset += AXDriver_804D77B0 * 4;
+    AXDriver_804D77B4 = ptr;
 
     AXDriver_804D77B8 = *(s32*)((u8*)AXDriver_804D7798 + offset);
     offset += 4;
@@ -848,29 +849,30 @@ void AXDriver_8038DA70(const char* path, void (*callback)(void))
     } else {
         ptr = NULL;
     }
-    i = 0;
     AXDriver_804D77BC = ptr;
-    j = 0;
+    i = 0;
+    j = i;
     while (i < AXDriver_804D77B8) {
         i++;
-        ((u32*)AXDriver_804D77BC)[j / 4] +=
+        *(u32*)((u8*)AXDriver_804D77BC + j) +=
             (u32)AXDriver_804D7798 & ~3u;
         j += 4;
     }
 
     offset += AXDriver_804D77B8 * 4;
     AXDriver_804D77C0 = *(s32*)((u8*)AXDriver_804D7798 + offset);
+    offset += 4;
     if (AXDriver_804D77C0 != 0) {
-        ptr = (u8*)AXDriver_804D7798 + offset + 4;
+        ptr = (u8*)AXDriver_804D7798 + offset;
     } else {
         ptr = NULL;
     }
-    i = 0;
     AXDriver_804D77C4 = ptr;
-    j = 0;
+    i = 0;
+    j = i;
     while (i < AXDriver_804D77C0) {
         i++;
-        ((u32*)AXDriver_804D77C4)[j / 4] +=
+        *(u32*)((u8*)AXDriver_804D77C4 + j) +=
             (u32)AXDriver_804D7798 & ~3u;
         j += 4;
     }
@@ -1145,8 +1147,8 @@ bool AXDriver_8038E37C(AXDriverAuxType type, void* param)
 
 void AXDriver_8038E498(int arg0, int arg1, int arg2, int arg3)
 {
-    int i;
     HSD_SM* v;
+    int i;
 
     v = AXDriver_804C45A0;
     for (i = 0; i < 0x60; i++) {

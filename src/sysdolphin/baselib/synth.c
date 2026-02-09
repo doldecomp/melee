@@ -203,8 +203,8 @@ void HSD_SynthSFXUnloadBank(int arg0)
 /// as destination (register allocation swap for prev/cur)
 void HSD_Synth_80388DC8(int arg0)
 {
-    void** pcur = &HSD_Synth_804C29E0[arg0 & 0x1F];
     void* cur;
+    void** pcur = &HSD_Synth_804C29E0[arg0 & 0x1F];
 
     while ((cur = *pcur) != NULL) {
         if (((int*) cur)[1] == arg0) {
@@ -346,12 +346,14 @@ void dropcallback(void* arg0)
     }
 
     {
-        int j;
         struct HSD_SynthSFXNode* walk = node;
+        int j;
         for (j = 0; j < node->voice_count; j++) {
-            if (walk->voice[0] != voice) {
-                HSD_Synth_804C28E0[HSD_Synth_804D7720] = walk->voice[0];
-                HSD_Synth_804D7720++;
+            AXVPB* v = walk->voice[0];
+            if (v != voice) {
+                int idx = HSD_Synth_804D7720;
+                HSD_Synth_804D7720 = idx + 1;
+                HSD_Synth_804C28E0[idx] = v;
             }
             hsd_SynthSFXNodes[walk->voice[0]->index].x0 = 0;
             walk = (void*) ((u8*) walk + 4);

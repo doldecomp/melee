@@ -106,14 +106,12 @@ static inline int getRelayBufIdx(void)
 void HSD_DevComARAMWakeUp(void)
 {
     bool enabled;
-    s32 var_ctr_2;
     int req_idx;
+    void* buf;
     u32 var_r28;
     u32 var_r28_2;
-    void* buf;
     void (*var_r26)(ARQRequest*);
     void (*var_r26_2)(ARQRequest*);
-    int* var_r3_2;
 
     enabled = OSDisableInterrupts();
     if (aramstate != 0) {
@@ -143,16 +141,14 @@ void HSD_DevComARAMWakeUp(void)
                     var_r28 = aramDC->size;
                 }
 
-                var_ctr_2 = 0x200;
-                var_r3_2 = HSD_DevCom_804C6330_bufs[req_idx];
-                do {
-                    int j;
-                    for (j = 0; j < 8; j++) {
-                        *var_r3_2++ = 0;
+                {
+                    int* p = (int*) ((u8*) devComStatus +
+                                     (req_idx * DEVCOM_BUF_SIZE) + 0x20);
+                    int i;
+                    for (i = 0x1000; i > 0; i--) {
+                        *p++ = 0;
                     }
-                    var_ctr_2 -= 1;
-                } while (var_ctr_2 != 0);
-
+                }
                 buf = HSD_DevCom_804C6330_bufs[req_idx];
                 DCStoreRange(buf, DEVCOM_BUF_SIZE);
                 ARQPostRequest(devComARQR[req_idx], 0, 0, 1, (u32) buf,
