@@ -1195,9 +1195,9 @@ void fn_800DB8A4(Fighter_GObj* gobj)
     Fighter* fp = gobj->user_data;
     FighterOverlay* fp_ovl = (FighterOverlay*) fp;
     fp_ovl->x2340 = (f32) ((f64) fp_ovl->x2340 + ftCo_804D90D8);
-    fp_ovl->x1A4C -= *(f32*) ((u8*) p_ftCommonData + 0x3A4);
+    fp_ovl->x1A4C -= p_ftCommonData->grab_timer_decrement;
     fp_ovl->x2348 =
-        ftCommon_GrabMash(fp, *(f32*) ((u8*) p_ftCommonData + 0x3A8));
+        ftCommon_GrabMash(fp, p_ftCommonData->x3A8);
 }
 #pragma pop
 
