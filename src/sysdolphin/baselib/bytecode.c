@@ -338,7 +338,7 @@ float HSD_ByteCodeEval(u8* pc, float* args, u32 nb_args)
             fv = *(f32*) &stack->data;
             stack = HSD_SListRemove(stack);
             if (*(f32*) &stack->data > fv) {
-                *(f32*) &stack->data = fv;
+                stack->data = *(void**) &fv;
             }
             break;
         case 0x23:
@@ -347,7 +347,7 @@ float HSD_ByteCodeEval(u8* pc, float* args, u32 nb_args)
             fv = *(f32*) &stack->data;
             stack = HSD_SListRemove(stack);
             if (*(f32*) &stack->data < fv) {
-                *(f32*) &stack->data = fv;
+                stack->data = *(void**) &fv;
             }
             break;
         case 0x24:
