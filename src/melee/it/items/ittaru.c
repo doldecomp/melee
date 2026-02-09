@@ -3,9 +3,12 @@
 #include <placeholder.h>
 #include <platform.h>
 
+#include "baselib/random.h"
+#include "ef/efsync.h"
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/itCommonItems.h"
 #include "it/item.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
@@ -198,13 +201,109 @@ bool itTaru_UnkMotion7_Coll(Item_GObj* gobj)
     return false;
 }
 
-/// #it_3F14_Logic2_DmgDealt
+bool it_3F14_Logic2_DmgDealt(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    PAD_STACK(24);
+    if (ip->xDD4_itemVar.taru.xDD4 == 0) {
+        itTaru_DatAttrs* attr = ip->xC4_article_data->x4_specialAttributes;
+        s32 x4;
+        s32 x0;
+        s32 flag;
+        efSync_Spawn(0x427, gobj, &ip->pos);
+        x4 = attr->x4;
+        x0 = attr->x0;
+        if (HSD_Randi(x0 + x4) < x0) {
+            flag = 1;
+        } else {
+            flag = 0;
+        }
+        if (flag != 0) {
+            it_802886C4(gobj);
+        } else {
+            it_802885C8(gobj);
+        }
+    }
+    return false;
+}
 
-/// #it_3F14_Logic2_Clanked
+bool it_3F14_Logic2_Clanked(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    PAD_STACK(24);
+    if (ip->xDD4_itemVar.taru.xDD4 == 0) {
+        itTaru_DatAttrs* attr = ip->xC4_article_data->x4_specialAttributes;
+        s32 x4;
+        s32 x0;
+        s32 flag;
+        efSync_Spawn(0x427, gobj, &ip->pos);
+        x4 = attr->x4;
+        x0 = attr->x0;
+        if (HSD_Randi(x0 + x4) < x0) {
+            flag = 1;
+        } else {
+            flag = 0;
+        }
+        if (flag != 0) {
+            it_802886C4(gobj);
+        } else {
+            it_802885C8(gobj);
+        }
+    }
+    return false;
+}
 
-/// #it_3F14_Logic2_HitShield
+bool it_3F14_Logic2_HitShield(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    PAD_STACK(24);
+    if (ip->xDD4_itemVar.taru.xDD4 == 0) {
+        itTaru_DatAttrs* attr = ip->xC4_article_data->x4_specialAttributes;
+        s32 x4;
+        s32 x0;
+        s32 flag;
+        efSync_Spawn(0x427, gobj, &ip->pos);
+        x4 = attr->x4;
+        x0 = attr->x0;
+        if (HSD_Randi(x0 + x4) < x0) {
+            flag = 1;
+        } else {
+            flag = 0;
+        }
+        if (flag != 0) {
+            it_802886C4(gobj);
+        } else {
+            it_802885C8(gobj);
+        }
+    }
+    return false;
+}
 
-/// #it_3F14_Logic2_Reflected
+bool it_3F14_Logic2_Reflected(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    PAD_STACK(24);
+    if (ip->xDD4_itemVar.taru.xDD4 == 0) {
+        itTaru_DatAttrs* attr = ip->xC4_article_data->x4_specialAttributes;
+        s32 x4;
+        s32 x0;
+        s32 flag;
+        efSync_Spawn(0x427, gobj, &ip->pos);
+        x4 = attr->x4;
+        x0 = attr->x0;
+        if (HSD_Randi(x0 + x4) < x0) {
+            flag = 1;
+        } else {
+            flag = 0;
+        }
+        if (flag != 0) {
+            it_802886C4(gobj);
+        } else {
+            it_802885C8(gobj);
+        }
+    }
+    return false;
+}
 
 /// #it_3F14_Logic2_DmgReceived
 

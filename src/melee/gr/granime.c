@@ -2,6 +2,7 @@
 
 #include <platform.h>
 
+#include "gr/grdatfiles.h"
 #include "gr/grmaterial.h"
 #include "gr/ground.h"
 #include "gr/inlines.h"
@@ -762,6 +763,26 @@ HSD_AObj* grAnime_801C8318(HSD_GObj* gobj, int arg1, u32 arg2)
 
 /// #grAnime_801C8578
 
-/// #grAnime_801C86D4
+void grAnime_801C86D4(s32 arg0, HSD_GObj* arg1, s32 arg2)
+{
+    struct {
+        s32 x0;
+        s32 x4;
+        s32 x8;
+        s32 xC;
+        s32 x10;
+    } sp;
+    HSD_Joint* joint;
+    UnkArchiveStruct* archive;
+
+    Ground_801C3FA4(arg1, arg2);
+    archive = grDatFiles_801C6330(arg0);
+    if (archive == NULL) {
+        __assert("granime.c", 0x602, "archive");
+    }
+    sp.x0 = arg2;
+    joint = (HSD_Joint*) grAnime_801C8578(archive->unk4->unk8[arg0].unk0, &sp);
+    HSD_JObjResetRST(Ground_801C3FA4(arg1, arg2), joint);
+}
 
 /// #grAnime_801C8780

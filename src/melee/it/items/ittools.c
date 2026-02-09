@@ -44,7 +44,22 @@ bool itTools_UnkMotion4_Coll(Item_GObj* gobj)
 
 /// #it_802EF320
 
-/// #itTools_UnkMotion9_Anim
+bool itTools_UnkMotion9_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->xD44_lifeTimer -= 1.0f;
+    if (ip->xD44_lifeTimer <= 0.0f) {
+        ip->xD44_lifeTimer = 0.0f;
+        return true;
+    }
+    if ((s32) ip->xD44_lifeTimer & 2) {
+        it_8026BB20(gobj);
+        it_80273670(gobj, ip->xDD4_itemVar.tools.x0 + 5, 0.0f);
+    } else {
+        it_8026BB44(gobj);
+    }
+    return false;
+}
 
 void itTools_UnkMotion9_Phys(Item_GObj* gobj) {}
 

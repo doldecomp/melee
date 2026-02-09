@@ -1841,7 +1841,28 @@ char* un_8030813C(s16 arg0, enum_t unused)
     return ptr;
 }
 
-/// #un_80308250
+void un_80308250(u8* arg0, s32 arg1, s32 arg2)
+{
+    void* sym;
+    char* ptr;
+
+    ptr = un_8030813C(arg1, arg1);
+
+    if (*(HSD_Archive**) (arg0 + 0x14) != NULL) {
+        lbArchive_80016EFC(*(HSD_Archive**) (arg0 + 0x14));
+        *(HSD_Archive**) (arg0 + 0x14) = NULL;
+    }
+
+    *(char**) (arg0 + 0x8) = ptr + 4;
+    *(char**) (arg0 + 0xC) = ptr + 0x24;
+    *(u16*) (arg0 + 0x10) = arg1;
+
+    if (arg2 == 0) {
+        *(HSD_Archive**) (arg0 + 0x14) = lbArchive_LoadSymbols(
+            *(char**) (arg0 + 0x8), &sym,
+            *(char**) (arg0 + 0xC), 0);
+    }
+}
 
 void un_803082F8(s16 idx)
 {

@@ -851,7 +851,12 @@ void ftCo_GuardReflect_Coll(Fighter_GObj* gobj)
     ft_800845B4(gobj);
 }
 
-/// #ftCo_80094098
+float ftCo_80094098(HSD_GObj* gobj, float* pos)
+{
+    Fighter* fp = gobj->user_data;
+    lb_8000B1CC(fp->parts[fp->ft_data->x8->x11].joint, NULL, (Vec3*) pos);
+    return inlineB0(fp);
+}
 
 void ftCo_80094138(Fighter* fp)
 {

@@ -587,7 +587,10 @@ typedef struct {
 } itPokemon_ItemVars;
 
 typedef struct itHitodeman_ItemVars {
-    /*  +0 ip+DD4 */ u8 pad[0x88];
+    /*  +0 ip+DD4 */ u8 pad[0x60];
+    /* +60 ip+E34 */ f32 xE34;
+    /* +64 ip+E38 */ f32 xE38;
+    /* +68 ip+E3C */ u8 pad1a[0x20];
     /* +88 ip+E5C */ s32 xE5C;
     /* +8C ip+E60 */ u8 pad2[0x4];
     /* +90 ip+E64 */ HSD_GObj* xE64;
@@ -727,6 +730,11 @@ typedef struct itNokoNoko_DatAttrs {
     f32 x4;
     f32 x8;
 } itNokoNoko_DatAttrs;
+
+typedef struct itTaru_DatAttrs {
+    s32 x0;
+    s32 x4;
+} itTaru_DatAttrs;
 
 typedef struct itTaru_ItemVars {
     s32 xDD4;
@@ -1345,6 +1353,19 @@ typedef struct itkireihanaAttributes {
     u32 x8;
     u32 xC;
 } itkireihanaAttributes;
+
+typedef struct itMatadogas_ItemVars {
+    /* xDD4 */ u8 pad[0x60];
+    /* xE34 */ s32 x60;
+    /* xE38 */ s32 x64;
+} itMatadogas_ItemVars;
+
+typedef struct itMatadogasAttributes {
+    /* +00 */ f32 x0;
+    /* +04 */ f32 x4;
+    /* +08 */ f32 x8;
+    /* +0C */ f32 xC;
+} itMatadogasAttributes;
 
 typedef struct itThunder_ItemVars {
     /* xDD8 */ u8 pad[0x60 - 0x0];

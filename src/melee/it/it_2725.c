@@ -10242,7 +10242,7 @@ bool it_8027C824(Item_GObj* item_gobj, s32 (*arg_func)(Item_GObj*))
 
 void it_2725_Logic9_Destroyed(Item_GObj* item_gobj)
 {
-    grZakoGenerator_801CAC14();
+    grZakoGenerator_801CAC14((HSD_GObj*) item_gobj);
 }
 
 static inline float product_xyz(Vec3* a, Vec3* b)

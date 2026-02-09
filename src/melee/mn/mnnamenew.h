@@ -24,8 +24,8 @@
 /* 23DBE8 */ UNK_RET fn_8023DBE8(UNK_PARAMS);
 /* 23E0D8 */ UNK_RET mnNameNew_8023E0D8(UNK_PARAMS);
 /* 23E264 */ UNK_RET InitNameEntryUIState(UNK_PARAMS);
-/* 23E32C */ UNK_RET mnNameNew_8023E32C(UNK_PARAMS);
-/* 23E630 */ UNK_RET mnNameNew_EnterFromMnName(UNK_PARAMS);
+/* 23E32C */ void mnNameNew_8023E32C(UNK_T);
+/* 23E630 */ void mnNameNew_EnterFromMnName(UNK_T);
 /* 23E6D0 */ void mnNameNew_EnterFromMnCharSel(UNK_T, int);
 /* 23EA08 */ void mnNameNew_8023EA08(UNK_T);
 

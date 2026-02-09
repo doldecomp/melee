@@ -43,8 +43,8 @@
                                          FighterKind victim_kind);
 /* 0EEF04 */ void ftKb_UnkMtxFunc0(Fighter_GObj* gobj, int, Mtx);
 /* 0EF028 */ HSD_JObj* ftKb_Init_UnkMotionStates6(Fighter_GObj* gobj);
-/* 0EF040 */ UNK_RET ftKb_SpecialN_800EF040(Fighter_GObj*, int,
-                                            KirbyHatStruct*);
+/* 0EF040 */ void ftKb_SpecialN_800EF040(Fighter_GObj*, int,
+                                        KirbyHatStruct*);
 /* 0EF0E4 */ UNK_RET ftKb_SpecialN_800EF0E4(Fighter_GObj*, int, u8*);
 /* 0EF35C */ UNK_RET ftKb_SpecialN_800EF35C(Fighter_GObj*, int, u8*);
 /* 0EF438 */ UNK_RET ftKb_SpecialN_800EF438(Fighter_GObj*, KirbyHatStruct*);

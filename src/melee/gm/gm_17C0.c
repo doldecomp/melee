@@ -518,7 +518,21 @@ void gm_8017CBAC(UnkAdventureData* arg0, gmm_x0_528_t* arg1, u8 arg2)
     gm_801A42D4();
 }
 
-/// #gm_8017CD94
+u8 gm_8017CD94(UnkAdventureData* arg0, int arg1, int arg2, int arg3)
+{
+    u8 num_colors;
+    u8 result;
+
+    num_colors = gm_80169238(arg1);
+    if (arg0->x54 != NULL) {
+        result = arg0->x54(arg2, arg0->x0.cpu_level, arg3);
+        if (num_colors != 0) {
+            return result % num_colors;
+        }
+        return 0;
+    }
+    return 0;
+}
 
 /// #gm_8017CE34
 
@@ -1014,9 +1028,63 @@ s32 gm_80181A34(void)
 
 /// #gm_80181A44
 
-/// #gm_80181AC8
+extern u8 lbl_803D8D08[];
 
-/// #gm_80181B64
+void gm_80181AC8(int c_kind, int arg1, s16 arg2)
+{
+    u8* base;
+
+    base = lbl_803D8D08;
+
+    switch (arg1) {
+    case 0x21:
+        ((s16*) (base + 0x88))[c_kind] = arg2;
+        break;
+    case 0x22:
+        ((s16*) (base + 0x148))[c_kind] = arg2;
+        break;
+    case 0x23:
+        ((s16*) (base + 0x208))[c_kind] = arg2;
+        break;
+    case 0x24:
+        ((s16*) (base + 0x2C8))[c_kind] = arg2;
+        break;
+    case 0x25:
+        ((s16*) (base + 0x388))[c_kind] = arg2;
+        break;
+    case 0x26:
+        ((s16*) (base + 0x448))[c_kind] = arg2;
+        break;
+    }
+}
+
+void gm_80181B64(int c_kind, int arg1, s32 arg2)
+{
+    u8* base;
+
+    base = lbl_803D8D08;
+
+    switch (arg1) {
+    case 0x21:
+        ((s32*) base)[c_kind] = arg2;
+        break;
+    case 0x22:
+        ((s32*) (base + 0xC0))[c_kind] = arg2;
+        break;
+    case 0x23:
+        ((s32*) (base + 0x180))[c_kind] = arg2;
+        break;
+    case 0x24:
+        ((s32*) (base + 0x240))[c_kind] = arg2;
+        break;
+    case 0x25:
+        ((s32*) (base + 0x300))[c_kind] = arg2;
+        break;
+    case 0x26:
+        ((s32*) (base + 0x3C0))[c_kind] = arg2;
+        break;
+    }
+}
 
 int fn_80181BFC(int* arg0)
 {

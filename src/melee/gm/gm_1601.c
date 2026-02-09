@@ -850,7 +850,22 @@ u32 gm_8016279C(void)
 
 /// #gm_80162800
 
-/// #gm_801628C4
+void gm_801628C4(u32 arg0, u32 arg1)
+{
+    u32* ptr;
+    u32 product;
+    struct gmm_retval_ED98* ptr3;
+
+    ptr = gmMainLib_8015CD14();
+    *ptr = ((*ptr + arg0) > (u32) -1) ? (u32) -1 : (*ptr + arg0);
+
+    ptr = gmMainLib_8015CD20();
+    product = arg0 * arg1;
+    *ptr = ((*ptr + product) > (u32) -1) ? (u32) -1 : (*ptr + product);
+
+    ptr3 = gmMainLib_8015ED98();
+    ptr3->x4 = ((ptr3->x4 + product) > (u32) -1) ? (u32) -1 : (ptr3->x4 + product);
+}
 
 long gm_80162968(u32 seconds)
 {
@@ -1581,7 +1596,19 @@ void gm_80167320(int slot, bool arg1)
 
 /// #gm_801674C4
 
-/// #fn_8016758C
+void fn_8016758C(void)
+{
+    lbl_8046B6A0_t* match_info = gm_8016AE44();
+    u8 val;
+    int i;
+
+    for (i = 0; i < 6; i++) {
+        val = *(u8*) &match_info->FighterMatchInfo[i].x8;
+        if (val != 0) {
+            *(u8*) &match_info->FighterMatchInfo[i].x8 = val - 1;
+        }
+    }
+}
 
 /// #fn_80167638
 
@@ -2317,7 +2344,24 @@ void fn_80169574(ssize_t size, void* buf)
 
 /// #fn_801695BC
 
-/// #fn_801697FC
+#pragma dont_inline on
+void fn_801697FC(s8 character, s8 costume, s8 new_character, s8 new_costume,
+                 s8* buf)
+{
+    u8 ncolors = gm_80169238(character);
+    int i;
+
+    if (character == 0x21) {
+        return;
+    }
+    if (new_character == character && costume == new_costume) {
+        costume = (s8) ((costume + 1) % ncolors);
+    }
+    for (i = 0; (s8) buf[i] != -2; i++) {
+        buf[i] = costume;
+    }
+}
+#pragma dont_inline reset
 
 void fn_8016989C(u8* arr, s32 character, s32 costume, void* arg3, void* arg4)
 {

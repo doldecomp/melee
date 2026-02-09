@@ -3,6 +3,7 @@
 #include <placeholder.h>
 #include <platform.h>
 
+#include "ef/efasync.h"
 #include "ef/eflib.h"
 
 #include "it/forward.h"
@@ -71,7 +72,32 @@ bool itClimbersice_UnkMotion1_Coll(Item_GObj* gobj)
     return false;
 }
 
-/// #it_802C1AE4
+void it_802C1AE4(Item_GObj* gobj)
+{
+    HSD_JObj* child;
+    HSD_JObj* jobj = gobj->hsd_obj;
+    PAD_STACK(16);
+
+    if (jobj == NULL) {
+        child = NULL;
+    } else {
+        child = jobj->child;
+    }
+
+    {
+        Item* ip = GET_ITEM(gobj);
+
+        if (ip->kind == 0x6A) {
+            f32* facing = &ip->facing_dir;
+            efAsync_Spawn(gobj, &ip->xBC0, 3, 0x4EB, child, facing);
+        } else {
+            f32* facing = &ip->facing_dir;
+            efAsync_Spawn(gobj, &ip->xBC0, 3, 0x4B0, child, facing);
+        }
+    }
+
+    Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
+}
 
 bool itClimbersice_UnkMotion2_Anim(Item_GObj* gobj)
 {

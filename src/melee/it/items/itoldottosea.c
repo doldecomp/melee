@@ -5,10 +5,13 @@
 
 #include "it/inlines.h"
 #include "it/it_266F.h"
+#include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/itCommonItems.h"
 #include "it/item.h"
 #include "it/items/itwhitebea.h"
+
+#include "mp/mpcoll.h"
 
 /// #it_802E2470
 
@@ -124,7 +127,27 @@ void it_802E2DF4(Item_GObj* gobj)
 
 /// #it_802E3098
 
-/// #itOldottosea_UnkMotion3_Anim
+bool itOldottosea_UnkMotion3_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->xDD4_itemVar.oldottosea.x28 == 0) {
+        int int_dir;
+        ip->facing_dir = -ip->facing_dir;
+        if (-1.0f == ip->facing_dir) {
+            int_dir = -1;
+        } else {
+            int_dir = 1;
+        }
+        mpCollSetFacingDir(&ip->x378_itemColl, int_dir);
+    }
+    ip->xDD4_itemVar.oldottosea.x28--;
+    if (!it_80272C6C(gobj)) {
+        ip->xDD4_itemVar.oldottosea.x28 = 0;
+        it_8026BD9C(gobj);
+        it_802E27B4(gobj);
+    }
+    return false;
+}
 
 void itOldottosea_UnkMotion3_Phys(Item_GObj* gobj) {}
 

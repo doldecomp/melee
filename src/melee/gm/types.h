@@ -705,7 +705,7 @@ struct UnkAdventureData {
     /* 48 */ UNK_T x48;
     /* 4C */ u8 (*x4C)(u8, u8, u8);
     /* 50 */ UNK_T x50;
-    /* 54 */ UNK_T x54;
+    /* 54 */ u8 (*x54)(u8, u8, u8);
     /* 58 */ UNK_T x58;
     /* 5C */ UNK_T x5C;
     /* 60 */ UNK_T x60;

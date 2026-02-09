@@ -24,7 +24,9 @@ typedef struct lbAudioAx_UserData {
     /* 0x30 */ s32 voice_id;
     /* 0x34 */ s32 current_frame;
     /* 0x38 */ s32 end_frame;
-    /* 0x3C */ u8 x3C[0x0C];
+    /* 0x3C */ f32 x3C;
+    /* 0x40 */ u8 x40[0x04];
+    /* 0x44 */ s32 x44;
 } lbAudioAx_UserData;
 
 extern f32 lbl_804D63F0;

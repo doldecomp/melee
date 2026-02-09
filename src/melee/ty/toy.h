@@ -52,7 +52,7 @@
 /* 30813C */ char* un_8030813C(s16 arg0,
                                enum_t unused); /// TODO :: fill out the struct
                                                /// that this uses/returns
-/* 308250 */ UNK_RET un_80308250(UNK_PARAMS);
+/* 308250 */ void un_80308250(u8* arg0, s32 arg1, s32 arg2);
 /* 3082F8 */ void un_803082F8(s16 idx);
 /* 308328 */ void un_80308328(s32 arg0);
 /* 308354 */ s16 un_80308354(s16 idx);

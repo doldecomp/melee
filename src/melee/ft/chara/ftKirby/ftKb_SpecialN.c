@@ -2657,9 +2657,56 @@ static u32 const ftKb_Ca_transition_flags =
     Ft_MF_SkipColAnim | Ft_MF_SkipItemVis | Ft_MF_Unk19 |
     Ft_MF_SkipModelPartVis | Ft_MF_SkipModelFlags | Ft_MF_Unk27;
 
-/// #ftKb_CaSpecialN_Coll
+void ftKb_CaSpecialN_Coll(Fighter_GObj* gobj)
+{
+    Fighter* fp;
+    Fighter* fp2;
+    ftKirby_MotionState msid;
+    PAD_STACK(8);
 
-/// #ftKb_CaSpecialAirN_Coll
+    if (ft_800827A0(gobj) == false) {
+        fp = getFighter(gobj);
+        ftCommon_8007D5D4(fp);
+        fp2 = getFighter(gobj);
+        msid = ftKb_MS_CaSpecialAirN;
+        {
+            f32 anim_frame = fp->cur_anim_frame;
+            if (fp2->fv.kb.hat.kind != FTKIND_CAPTAIN) {
+                msid = ftKb_MS_GnSpecialAirN;
+            }
+            Fighter_ChangeMotionState(gobj, msid, ftKb_Ca_transition_flags,
+                                      anim_frame, 1.0f, 0.0f, NULL);
+        }
+        fp2->pre_hitlag_cb = efLib_PauseAll;
+        fp2->post_hitlag_cb = efLib_ResumeAll;
+        ftCommon_ClampAirDrift(fp);
+    }
+}
+
+void ftKb_CaSpecialAirN_Coll(Fighter_GObj* gobj)
+{
+    Fighter* fp;
+    Fighter* fp2;
+    ftKirby_MotionState msid;
+    PAD_STACK(8);
+
+    if (ft_80081D0C(gobj) != GA_Ground) {
+        fp = getFighter(gobj);
+        ftCommon_8007D7FC(fp);
+        fp2 = getFighter(gobj);
+        msid = ftKb_MS_CaSpecialN;
+        {
+            f32 anim_frame = fp->cur_anim_frame;
+            if (fp2->fv.kb.hat.kind != FTKIND_CAPTAIN) {
+                msid = ftKb_MS_GnSpecialN;
+            }
+            Fighter_ChangeMotionState(gobj, msid, ftKb_Ca_transition_flags,
+                                      anim_frame, 1.0f, 0.0f, NULL);
+        }
+        fp2->pre_hitlag_cb = efLib_PauseAll;
+        fp2->post_hitlag_cb = efLib_ResumeAll;
+    }
+}
 
 void ftKb_SpecialNPk_800F9FD4(Fighter_GObj* gobj)
 {

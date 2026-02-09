@@ -584,6 +584,7 @@ struct Item {
         itLinkBow_ItemVars linkbow;
         itLinkHookshot_ItemVars linkhookshot;
         itMBall_ItemVars mball;
+        itMatadogas_ItemVars matadogas;
         itMato_ItemVars mato;
         itMsBomb_ItemVars msbomb;
         itNokoNoko_ItemVars nokonoko;

@@ -15,8 +15,12 @@
 
 #include <baselib/gobj.h>
 #include <baselib/lobj.h>
+#include <baselib/psappsrt.h>
+#include <baselib/psstructs.h>
 
 extern s16 grMc_803E34A4[];
+
+extern HSD_Generator* grLib_801C9808(s32, s32, HSD_JObj*);
 
 static struct {
     int x0;
@@ -328,7 +332,27 @@ DynamicModelDesc* grMuteCity_801F28A8(void)
 
 /// #grMuteCity_801F290C
 
-/// #grMuteCity_801F2AB0
+void grMuteCity_801F2AB0(s32 arg0, HSD_JObj* arg1)
+{
+    HSD_Generator* gen;
+    HSD_psAppSRT* appsrt;
+
+    gen = grLib_801C9808(arg0, arg0 / 1000, arg1);
+    if (gen != NULL) {
+        if ((appsrt = gen->appsrt) == NULL) {
+            appsrt = psAddGeneratorAppSRT_begin(gen, 0);
+            if (appsrt == NULL) {
+                return;
+            }
+        }
+        appsrt->xA2 = 0;
+        appsrt->scale.x = appsrt->scale.y = appsrt->scale.z =
+            Ground_801C0498();
+        gen->type &= ~(PSAPPSRT_UNK_B09 | PSAPPSRT_UNK_B10);
+        gen->type |= PSAPPSRT_UNK_B11;
+        appsrt->gp = gen;
+    }
+}
 
 /// #fn_801F2B58
 

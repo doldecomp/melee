@@ -20,7 +20,7 @@
 /* 17CA38 */ UNK_RET gm_8017CA38(DebugGameOverData*, Unk1PData*,
                                  struct gmm_x0_528_t*, u8);
 /* 17CBAC */ UNK_RET gm_8017CBAC(UnkAdventureData*, struct gmm_x0_528_t*, u8);
-/* 17CD94 */ UNK_RET gm_8017CD94(UNK_PARAMS);
+/* 17CD94 */ u8 gm_8017CD94(UnkAdventureData*, int, int, int);
 /* 17CE34 */ UNK_RET gm_8017CE34(StartMeleeData*, UnkAdventureData*, s8*, u8,
                                  u8, u8, int, int, int count, int);
 /* 17D7AC */ bool gm_8017D7AC(MatchExitInfo*, Unk1PData*, u8);
@@ -104,8 +104,8 @@
 /* 181A24 */ u32 gm_80181A24(void);
 /* 181A34 */ s32 gm_80181A34(void);
 /* 181A44 */ UNK_RET gm_80181A44(int c_kind, int, bool);
-/* 181AC8 */ UNK_RET gm_80181AC8(int, int, int);
-/* 181B64 */ UNK_RET gm_80181B64(int c_kind, int, u32);
+/* 181AC8 */ void gm_80181AC8(int, int, s16);
+/* 181B64 */ void gm_80181B64(int c_kind, int, s32);
 /* 181BFC */ int fn_80181BFC(int*);
 /* 181C80 */ UNK_RET fn_80181C80(UNK_PARAMS);
 /* 181E18 */ UNK_RET fn_80181E18(UNK_PARAMS);

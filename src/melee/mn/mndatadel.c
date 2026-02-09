@@ -149,7 +149,28 @@ void mnDataDel_8024EEC0(void)
 
 /// #fn_8024F840
 
-/// #fn_8024FBA4
+void fn_8024FBA4(HSD_GObj* gobj)
+{
+    s32 i;
+    f32 frame;
+    struct MnDataDelData* data;
+    u8* user_data;
+    PAD_STACK(8);
+
+    data = &mnDataDel_803EF870;
+    user_data = gobj->user_data;
+    frame = mn_8022EE84(GET_JOBJ(gobj), &data->xC,
+                        (enum _HSD_TypeMask) 0x480);
+    for (i = 0; i < 6; i++) {
+        mn_8022EE84(
+            *(HSD_JObj**)(user_data +
+                          ((s32*) ((u8*) &data->x3C))[i] * 4 + 0x10),
+            &data->xC, (enum _HSD_TypeMask) 0x480);
+    }
+    if (frame >= data->xC.end_frame) {
+        HSD_GObjPLink_80390228(gobj);
+    }
+}
 
 /// #fn_8024FC48
 

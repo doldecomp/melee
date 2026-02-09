@@ -2,9 +2,12 @@
 
 #include <platform.h>
 
+#include "cm/camera.h"
+#include "ft/ftlib.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
+#include "lb/lb_00F9.h"
 #include "mp/mplib.h"
 
 #include <baselib/gobj.h>
@@ -14,6 +17,8 @@ static struct {
     int x0;
     int x4;
 }* grZe_Route_804D6A60;
+
+extern Vec3 grZe_Route_803B83A0;
 
 void grZebesRoute_8020B160(bool arg) {}
 
@@ -103,7 +108,32 @@ bool grZebesRoute_8020B424(Ground_GObj* arg)
     return false;
 }
 
-/// #grZebesRoute_8020B42C
+void grZebesRoute_8020B42C(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    Vec3 pos = grZe_Route_803B83A0;
+    HSD_GObj* fighter;
+    s32 timer;
+
+    fighter = Ground_801C57A4();
+    if (fighter != NULL) {
+        ftLib_80086644(fighter, &pos);
+        if (pos.y < -50.0f) {
+            pos.y = -50.0f;
+        }
+        pos.x = 0.0f;
+        Ground_801C38BC(pos.x, pos.y);
+    }
+
+    timer = *(s16*) &gp->gv.zebes2.xC4;
+    if (timer > 0) {
+        gp->gv.zebes2.xC4 = timer - 1;
+    } else {
+        Camera_80030E44(1, NULL);
+    }
+
+    lb_800115F4();
+}
 
 void grZebesRoute_8020B4D4(Ground_GObj* arg) {}
 

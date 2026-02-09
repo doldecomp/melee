@@ -1128,9 +1128,41 @@ void ftKb_SpecialNPe_8010C06C(Fighter_GObj* gobj)
     }
 }
 
-/// #ftKb_SpecialNPe_8010C148
+void ftKb_SpecialNPe_8010C148(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    s32 msid;
+    PAD_STACK(4 * 6);
+    if (fp->cmd_vars[0] == 0U) {
+        msid = ((s32) fp->fv.kb.hat.kind == FTKIND_MARS)
+                   ? ftKb_MS_MsSpecialNEnd0
+                   : ftKb_MS_FeSpecialNEnd0;
+    } else {
+        msid = ((s32) fp->fv.kb.hat.kind == FTKIND_MARS)
+                   ? ftKb_MS_MsSpecialNEnd0 + 1
+                   : ftKb_MS_FeSpecialNEnd0 + 1;
+    }
+    Fighter_ChangeMotionState(gobj, msid, 0x2000, 1.0F, 1.0F, 0.0F, NULL);
+    GET_FIGHTER(gobj)->accessory4_cb = fn_8010B1F4;
+}
 
-/// #ftKb_SpecialNPe_8010C1E8
+void ftKb_SpecialNPe_8010C1E8(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    s32 msid;
+    PAD_STACK(4 * 6);
+    if (fp->cmd_vars[0] == 0U) {
+        msid = ((s32) fp->fv.kb.hat.kind == FTKIND_MARS)
+                   ? ftKb_MS_MsSpecialAirNEnd0
+                   : ftKb_MS_FeSpecialAirNEnd0;
+    } else {
+        msid = ((s32) fp->fv.kb.hat.kind == FTKIND_MARS)
+                   ? ftKb_MS_MsSpecialAirNEnd0 + 1
+                   : ftKb_MS_FeSpecialAirNEnd0 + 1;
+    }
+    Fighter_ChangeMotionState(gobj, msid, 0x2000, 1.0F, 1.0F, 0.0F, NULL);
+    GET_FIGHTER(gobj)->accessory4_cb = fn_8010B1F4;
+}
 
 static void fn_8010C288(HSD_GObj* gobj)
 {

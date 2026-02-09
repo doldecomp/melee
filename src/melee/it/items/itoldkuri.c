@@ -3,6 +3,8 @@
 #include <placeholder.h>
 #include <platform.h>
 
+#include "cm/camera.h"
+#include "ft/ftlib.h"
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
@@ -205,7 +207,23 @@ bool itOldkuri_UnkMotion9_Coll(Item_GObj* gobj)
 
 /// #it_2725_Logic0_DmgReceived
 
-/// #it_802D8098
+bool it_802D8098(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    it_802756D0(gobj);
+    it_80274C88(gobj);
+    it_80275474(gobj);
+    it_8027CE44(gobj);
+    Camera_80030E44(2, &ip->pos);
+    if (ip->ground_or_air == GA_Air) {
+        it_802D81FC(gobj);
+    } else {
+        it_802D813C(gobj);
+    }
+    Item_8026AE84(ip, 0x12E, 0x7F, 0x40);
+    ftLib_80086D40(ip->xCFC, 0xC, 0x0);
+    return false;
+}
 
 void it_802D813C(Item_GObj* gobj)
 {

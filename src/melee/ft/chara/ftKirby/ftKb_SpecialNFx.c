@@ -104,7 +104,58 @@ bool ftKb_SpecialNFx_800FDD14(Fighter_GObj* gobj)
     return true;
 }
 
-/// #ftKb_SpecialNFx_800FDD4C
+/// @todo Use enum values once ftKb_MS enum is fixed (#ftCo_MS_Count mismatch)
+ftFx_SpecialNIndex ftKb_SpecialNFx_800FDD4C(Fighter_GObj* gobj)
+{
+    s32 msid = 9;
+
+    if (gobj != NULL) {
+        Fighter* fp = GET_FIGHTER(gobj);
+        if (fp != NULL) {
+            switch (fp->fv.kb.hat.kind) {
+            case FTKIND_FOX: {
+                s32 motion_id = fp->motion_id;
+                switch (motion_id) {
+                case 0x1A7: /* ftKb_MS_FxSpecialNStart */
+                case 0x1A8: /* ftKb_MS_FxSpecialNLoop */
+                case 0x1A9: /* ftKb_MS_FxSpecialNEnd */
+                case 0x1AA: /* ftKb_MS_FxSpecialAirNStart */
+                case 0x1AB: /* ftKb_MS_FxSpecialAirNLoop */
+                case 0x1AC: /* ftKb_MS_FxSpecialAirNEnd */
+                    msid = motion_id - 0x1A7;
+                    break;
+                case 0xDC: /* ftCo_MS_ThrowB */
+                case 0xDD: /* ftCo_MS_ThrowHi */
+                case 0xDE: /* ftCo_MS_ThrowLw */
+                    msid = motion_id - 0xD6;
+                    break;
+                }
+                break;
+            }
+            case FTKIND_FALCO: {
+                s32 motion_id = fp->motion_id;
+                switch (motion_id) {
+                case 0x208: /* ftKb_MS_FcSpecialNStart */
+                case 0x209: /* ftKb_MS_FcSpecialNLoop */
+                case 0x20A: /* ftKb_MS_FcSpecialNEnd */
+                case 0x20B: /* ftKb_MS_FcSpecialAirNStart */
+                case 0x20C: /* ftKb_MS_FcSpecialAirNLoop */
+                case 0x20D: /* ftKb_MS_FcSpecialAirNEnd */
+                    msid = motion_id - 0x208;
+                    break;
+                case 0xDC: /* ftCo_MS_ThrowB */
+                case 0xDD: /* ftCo_MS_ThrowHi */
+                case 0xDE: /* ftCo_MS_ThrowLw */
+                    msid = motion_id - 0xD6;
+                    break;
+                }
+                break;
+            }
+            }
+        }
+    }
+    return msid;
+}
 
 /// #ftKb_SpecialNFx_800FDDF4
 

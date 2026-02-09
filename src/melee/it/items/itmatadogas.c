@@ -10,6 +10,8 @@
 #include "it/it_2725.h"
 #include "it/item.h"
 
+#include <baselib/random.h>
+
 /// #it_802CAFD4
 
 void it_802CB0F4(Item_GObj* gobj) {}
@@ -45,7 +47,24 @@ bool itMatadogas_UnkMotion1_Coll(Item_GObj* gobj)
     return false;
 }
 
-/// #it_802CB2B0
+void it_802CB2B0(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    PAD_STACK(8);
+    if (ip->xDAC_itcmd_var0 != 0) {
+        itMatadogasAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+        s32 timer = ip->xDD4_itemVar.matadogas.x60 - 1;
+        ip->xDD4_itemVar.matadogas.x60 = timer;
+        if (timer == 0) {
+            ip->xDD4_itemVar.matadogas.x60 = (s32) attrs->x4;
+            if (HSD_Randi(2) == 0) {
+                it_802CB4F0(gobj, 0xC1, attrs->x8);
+            } else {
+                it_802CB4F0(gobj, 0xC2, attrs->xC);
+            }
+        }
+    }
+}
 
 void it_802CB350(Item_GObj* gobj)
 {

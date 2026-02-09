@@ -3291,7 +3291,25 @@ HSD_JObj* ftKb_Init_UnkMotionStates6(Fighter_GObj* gobj)
     return (HSD_JObj*) gobj;
 }
 
-/// #ftKb_SpecialN_800EF040
+void ftKb_SpecialN_800EF040(Fighter_GObj* gobj, int arg1,
+                            KirbyHatStruct* hat)
+{
+    u32 mask = (u32) hat->hat_dynamics[1];
+    if (mask != 0) {
+        Fighter* fp = GET_FIGHTER(gobj);
+        struct Fighter_804D6540_t* ft_data = Fighter_804D6540[fp->kind];
+        int count = ft_data->x4;
+        HSD_Joint* joint =
+            ((HSD_Joint**) ftKb_Init_803C9FC8[arg1])[fp->x619_costume_id * 2];
+        struct Fighter_804D6540_x0_t* parts = ft_data->x0;
+        int i;
+        for (i = 0; i < count; i++, parts++) {
+            if ((1 << i) & mask) {
+                ftParts_800753D4(fp, parts, joint);
+            }
+        }
+    }
+}
 
 /// #ftKb_SpecialN_800EF0E4
 

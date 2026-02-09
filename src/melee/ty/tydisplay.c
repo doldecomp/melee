@@ -8,6 +8,8 @@
 #include "ty/tylist.h"
 #include "ty/types.h"
 
+#include "lb/lblanguage.h"
+
 #include <baselib/random.h>
 
 /// #un_803181BC
@@ -58,7 +60,35 @@ void un_8031B9A4_OnFrame(void)
     }
 }
 
-/// #un_8031B9DC
+void* un_8031B9DC(s32 id)
+{
+    s32* p;
+    s32 val;
+    bool found = false;
+
+    if (lbLang_IsSettingUS()) {
+        p = un_804D6EAC;
+        while (val = *p, val != -1) {
+            if (val == id) {
+                found = true;
+                break;
+            }
+            p = (s32*) ((u8*) p + 0x10);
+        }
+    }
+
+    if (!found) {
+        p = un_804D6EB0;
+        while (val = *p, val != -1) {
+            if (val == id) {
+                break;
+            }
+            p = (s32*) ((u8*) p + 0x10);
+        }
+    }
+
+    return p;
+}
 
 /// #un_8031BA78
 

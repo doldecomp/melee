@@ -5,6 +5,7 @@
 
 #include "ef/eflib.h"
 #include "ef/efsync.h"
+#include "ft/ftlib.h"
 
 #include "it/forward.h"
 
@@ -16,7 +17,12 @@
 #include <baselib/random.h>
 
 typedef struct {
-    u8 _pad[0x40];
+    u8 _pad0[0x4];
+    f32 x4;
+    f32 x8;
+    f32 xC;
+    f32 x10;
+    u8 _pad1[0x2C];
     s32 x40;
     s32 x44;
     u8 _pad2[0x4];
@@ -35,7 +41,34 @@ void it_802D43B0(Item_GObj* gobj, Item_GObj* ref_gobj)
     ip->xDAC_itcmd_var0 = 1;
 }
 
-/// #it_802D43EC
+void it_802D43EC(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itHitodemanAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    HSD_GObj* owner_gobj;
+    f32 randf;
+    f32 diff;
+
+    owner_gobj = ftLib_80086198(ip->owner);
+    if (owner_gobj != NULL) {
+        ip->xDD4_itemVar.hitodeman.xE64 = owner_gobj;
+    } else {
+        ip->xDD4_itemVar.hitodeman.xE64 = ip->owner;
+    }
+
+    randf = HSD_Randf();
+    diff = attrs->x8;
+    diff = attrs->x4 - diff;
+    ip->xDD4_itemVar.hitodeman.xE34 = diff * randf + attrs->x8;
+
+    randf = HSD_Randf();
+    diff = attrs->xC - attrs->x10;
+    ip->xDD4_itemVar.hitodeman.xE38 = diff * randf + attrs->x10;
+
+    if (HSD_Randi(2) != 0) {
+        ip->xDD4_itemVar.hitodeman.xE34 *= -1.0f;
+    }
+}
 
 /// #it_802D4494
 

@@ -1050,7 +1050,27 @@ void fn_800DA678(Fighter_GObj* gobj)
     fn_800DA054(gobj);
 }
 
-/// #ftCo_800DA698
+#pragma push
+#pragma dont_inline on
+
+void ftCo_800DA698(Fighter_GObj* gobj, bool arg1)
+{
+    Fighter* fp = gobj->user_data;
+    PAD_STACK(8);
+    if (fp->ground_or_air == GA_Air) {
+        fp->self_vel.x = -fp->facing_dir * p_ftCommonData->x374;
+        fp->self_vel.y = p_ftCommonData->x378;
+    } else {
+        fp->gr_vel = -fp->facing_dir * p_ftCommonData->x370;
+    }
+    Fighter_ChangeMotionState(gobj, ftCo_MS_CatchCut, 0, 0.0F, 1.0F, 0.0F,
+                              NULL);
+    if (arg1) {
+        ftCo_CaptureCut_Enter(fp->victim_gobj);
+    }
+}
+
+#pragma pop
 
 void ftCo_CatchCut_Anim(Fighter_GObj* gobj)
 {

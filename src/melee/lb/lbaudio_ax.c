@@ -1004,9 +1004,90 @@ ret_true:
 
 /// #fn_800259A0
 
-/// #fn_800259EC
+#pragma dont_inline on
+bool fn_800259EC(HSD_GObj* gobj)
+{
+    lbAudioAx_UserData* ud;
 
-/// #fn_80025A98
+    PAD_STACK(8);
+
+    if (gobj == NULL) {
+        goto end;
+    }
+
+    ud = gobj->user_data;
+    if (ud == NULL) {
+        goto end;
+    }
+
+    if (ud->x44 != 0) {
+        goto end;
+    }
+
+    ud->x44 = 1;
+
+    if (gobj == NULL) {
+        goto end;
+    }
+
+    ud = gobj->user_data;
+    if (ud == NULL) {
+        goto end;
+    }
+
+    if (1.0f == ud->x3C) {
+        ud->x2C.pan = fn_800250A0(ud->current_frame, ud->end_frame,
+                                   ud->pan_left, ud->pan_right);
+    } else {
+        ud->x2C.pan = 0x7F - fn_800250A0(ud->current_frame, ud->end_frame,
+                                          ud->pan_left, ud->pan_right);
+    }
+
+end:
+    return false;
+}
+bool fn_80025A98(HSD_GObj* gobj)
+{
+    lbAudioAx_UserData* ud;
+
+    PAD_STACK(8);
+
+    if (gobj == NULL) {
+        goto end;
+    }
+
+    ud = gobj->user_data;
+    if (ud == NULL) {
+        goto end;
+    }
+
+    if (ud->x44 != 0) {
+        goto end;
+    }
+
+    ud->x44 = 1;
+
+    if (gobj == NULL) {
+        goto end;
+    }
+
+    ud = gobj->user_data;
+    if (ud == NULL) {
+        goto end;
+    }
+
+    if (1.0f == ud->x3C) {
+        ud->x2C.pan = fn_800250A0(ud->current_frame, ud->end_frame,
+                                   ud->pan_left, ud->pan_right);
+    } else {
+        ud->x2C.pan = 0x7F - fn_800250A0(ud->current_frame, ud->end_frame,
+                                          ud->pan_left, ud->pan_right);
+    }
+
+end:
+    return false;
+}
+#pragma dont_inline reset
 
 bool fn_80025B44(HSD_GObj* gobj)
 {
