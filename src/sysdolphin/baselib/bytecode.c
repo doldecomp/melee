@@ -13,7 +13,15 @@
 #include <MSL/trigf.h>
 #include <melee/lb/lb_00CE.h>
 
-float fmod(float, float);
+static inline float fmod(float a, float b)
+{
+    long long quotient;
+    if (__fabs(b) > __fabs(a)) {
+        return a;
+    }
+    quotient = a / b;
+    return a - b * quotient;
+}
 
 #define DEG_TO_RAD 0.017453292519943295
 #define RAD_TO_DEG 57.29577951308232
@@ -22,8 +30,8 @@ float HSD_ByteCodeEval(u8* pc, float* args, u32 nb_args)
 {
     HSD_SList* stack;
     s32 extra_bytes;
-    int opcode;
     u32 operand;
+    int opcode;
     f32 fv;
     u32 i;
     s32 a;
@@ -118,9 +126,6 @@ float HSD_ByteCodeEval(u8* pc, float* args, u32 nb_args)
             break;
         case 2:
         case 3:
-            extra_bytes = 2;
-            operand = 0;
-            break;
         case 4:
             extra_bytes = 2;
             operand = 0;
@@ -211,6 +216,15 @@ float HSD_ByteCodeEval(u8* pc, float* args, u32 nb_args)
                 stack->data = *(void**) &fv;
             }
             break;
+        case 0x28:
+            HSD_ASSERTMSG(467, stack, "stack");
+            {
+                s32 iv = (s32) stack->data;
+                if (iv < 0) {
+                    stack->data = (void*) -iv;
+                }
+            }
+            break;
         case 0x16:
             HSD_ASSERT(474, stack);
             fv = *(f32*) &stack->data;
@@ -225,6 +239,10 @@ float HSD_ByteCodeEval(u8* pc, float* args, u32 nb_args)
                              -(((f64) fv * (guess * guess)) - 3.0)));
             }
             stack->data = *(void**) &fv;
+            break;
+        case 0x31:
+            HSD_ASSERTMSG(480, stack, "stack");
+            stack->data = (void*) ((s32) stack->data == 0);
             break;
         case 0x17:
             HSD_ASSERT(501, stack);
@@ -374,64 +392,75 @@ float HSD_ByteCodeEval(u8* pc, float* args, u32 nb_args)
                 *(f32*) &stack->data = result;
             }
             break;
-        case 0x28:
-            HSD_ASSERTMSG(467, stack, "stack");
-            {
-                s32 iv = (s32) stack->data;
-                if (iv < 0) {
-                    stack->data = (void*) -iv;
-                }
-            }
+        case 0x33:
+            HSD_ASSERT(603, stack);
+            HSD_ASSERTMSG(603, stack->next, "stack->next");
+            fv = *(f32*) &stack->data;
+            stack = HSD_SListRemove(stack);
+            stack->data = (void*) (*(f32*) &stack->data < fv);
+            break;
+        case 0x34:
+            HSD_ASSERT(608, stack);
+            HSD_ASSERTMSG(608, stack->next, "stack->next");
+            fv = *(f32*) &stack->data;
+            stack = HSD_SListRemove(stack);
+            stack->data = (void*) (*(f32*) &stack->data > fv);
+            break;
+        case 0x35:
+            HSD_ASSERT(613, stack);
+            HSD_ASSERTMSG(613, stack->next, "stack->next");
+            fv = *(f32*) &stack->data;
+            stack = HSD_SListRemove(stack);
+            stack->data = (void*) (*(f32*) &stack->data <= fv);
+            break;
+        case 0x36:
+            HSD_ASSERT(618, stack);
+            HSD_ASSERTMSG(618, stack->next, "stack->next");
+            fv = *(f32*) &stack->data;
+            stack = HSD_SListRemove(stack);
+            stack->data = (void*) (*(f32*) &stack->data >= fv);
+            break;
+        case 0x37:
+            HSD_ASSERT(623, stack);
+            HSD_ASSERTMSG(623, stack->next, "stack->next");
+            fv = *(f32*) &stack->data;
+            stack = HSD_SListRemove(stack);
+            stack->data = (void*) (*(f32*) &stack->data == fv);
+            break;
+        case 0x38:
+            HSD_ASSERT(628, stack);
+            HSD_ASSERTMSG(628, stack->next, "stack->next");
+            fv = *(f32*) &stack->data;
+            stack = HSD_SListRemove(stack);
+            stack->data = (void*) (*(f32*) &stack->data != fv);
             break;
         case 0x29:
             HSD_ASSERT(633, stack);
             HSD_ASSERTMSG(633, stack->next, "stack->next");
-            {
-                s32 b;
-                a = (s32) stack->data;
-                stack = HSD_SListRemove(stack);
-                b = (s32) stack->data;
-                {
-                    s32 diff = b - a;
-                    stack->data = (void*) (((~(a ^ b) >> 31) & 1) + (diff >> 31) + ((u32) diff >> 31));
-                }
-            }
+            a = (s32) stack->data;
+            stack = HSD_SListRemove(stack);
+            stack->data = (void*) ((s32) stack->data < a);
             break;
         case 0x2A:
             HSD_ASSERT(638, stack);
             HSD_ASSERTMSG(638, stack->next, "stack->next");
-            {
-                s32 b;
-                a = (s32) stack->data;
-                stack = HSD_SListRemove(stack);
-                b = (s32) stack->data;
-                {
-                    s32 diff = a - b;
-                    stack->data = (void*) (((~(b ^ a) >> 31) & 1) + (diff >> 31) + ((u32) diff >> 31));
-                }
-            }
+            a = (s32) stack->data;
+            stack = HSD_SListRemove(stack);
+            stack->data = (void*) ((s32) stack->data > a);
             break;
         case 0x2B:
             HSD_ASSERT(643, stack);
             HSD_ASSERTMSG(643, stack->next, "stack->next");
-            {
-                s32 b;
-                a = (s32) stack->data;
-                stack = HSD_SListRemove(stack);
-                b = (s32) stack->data;
-                stack->data = (void*) ((a >> 31) + ((u32) b >> 31) + ((b < a) ? 1 : 0));
-            }
+            a = (s32) stack->data;
+            stack = HSD_SListRemove(stack);
+            stack->data = (void*) ((s32) stack->data <= a);
             break;
         case 0x2C:
             HSD_ASSERT(648, stack);
             HSD_ASSERTMSG(648, stack->next, "stack->next");
-            {
-                s32 b;
-                a = (s32) stack->data;
-                stack = HSD_SListRemove(stack);
-                b = (s32) stack->data;
-                stack->data = (void*) ((b >> 31) + ((u32) a >> 31) + ((a < b) ? 1 : 0));
-            }
+            a = (s32) stack->data;
+            stack = HSD_SListRemove(stack);
+            stack->data = (void*) ((s32) stack->data >= a);
             break;
         case 0x2D:
             HSD_ASSERT(653, stack);
@@ -481,10 +510,6 @@ float HSD_ByteCodeEval(u8* pc, float* args, u32 nb_args)
                 }
             }
             break;
-        case 0x31:
-            HSD_ASSERTMSG(480, stack, "stack");
-            stack->data = (void*) ((s32) stack->data == 0);
-            break;
         case 0x32:
             HSD_ASSERT(673, stack);
             HSD_ASSERTMSG(673, stack->next, "stack->next");
@@ -512,48 +537,6 @@ float HSD_ByteCodeEval(u8* pc, float* args, u32 nb_args)
                 }
                 stack->data = (void*) val;
             }
-            break;
-        case 0x33:
-            HSD_ASSERT(603, stack);
-            HSD_ASSERTMSG(603, stack->next, "stack->next");
-            fv = *(f32*) &stack->data;
-            stack = HSD_SListRemove(stack);
-            stack->data = (void*) (*(f32*) &stack->data < fv);
-            break;
-        case 0x34:
-            HSD_ASSERT(608, stack);
-            HSD_ASSERTMSG(608, stack->next, "stack->next");
-            fv = *(f32*) &stack->data;
-            stack = HSD_SListRemove(stack);
-            stack->data = (void*) (*(f32*) &stack->data > fv);
-            break;
-        case 0x35:
-            HSD_ASSERT(613, stack);
-            HSD_ASSERTMSG(613, stack->next, "stack->next");
-            fv = *(f32*) &stack->data;
-            stack = HSD_SListRemove(stack);
-            stack->data = (void*) (*(f32*) &stack->data <= fv);
-            break;
-        case 0x36:
-            HSD_ASSERT(618, stack);
-            HSD_ASSERTMSG(618, stack->next, "stack->next");
-            fv = *(f32*) &stack->data;
-            stack = HSD_SListRemove(stack);
-            stack->data = (void*) (*(f32*) &stack->data >= fv);
-            break;
-        case 0x37:
-            HSD_ASSERT(623, stack);
-            HSD_ASSERTMSG(623, stack->next, "stack->next");
-            fv = *(f32*) &stack->data;
-            stack = HSD_SListRemove(stack);
-            stack->data = (void*) (*(f32*) &stack->data == fv);
-            break;
-        case 0x38:
-            HSD_ASSERT(628, stack);
-            HSD_ASSERTMSG(628, stack->next, "stack->next");
-            fv = *(f32*) &stack->data;
-            stack = HSD_SListRemove(stack);
-            stack->data = (void*) (*(f32*) &stack->data != fv);
             break;
         case 0x39:
             HSD_ASSERT(678, stack);
