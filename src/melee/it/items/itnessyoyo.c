@@ -1,7 +1,5 @@
 #include "itnessyoyo.h"
 
-#include <placeholder.h>
-
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/item.h"
@@ -62,38 +60,4 @@ void itNessYoyo_Logic59_PickedUp(Item_GObj* gobj)
 
 /// #it_802C0010
 
-#ifdef MWERKS_GEKKO
-
-#pragma push
-asm void it_2725_Logic59_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
-{
-    // clang-format off
-    nofralloc
-    mflr r0
-    stw r0, 0x4(r1)
-    stwu r1, -0x20(r1)
-    stw r31, 0x1c(r1)
-    stw r30, 0x18(r1)
-    mr r30, r4
-    lwz r31, 0x2c(r3)
-    bl it_8026B894
-    lwz r0, 0xde4(r31)
-    cmplw r0, r30
-    lwz r0, 0x24(r1)
-    lwz r31, 0x1c(r1)
-    lwz r30, 0x18(r1)
-    addi r1, r1, 0x20
-    mtlr r0
-    blr
-    // clang-format on
-}
-#pragma pop
-
-#else
-
-void it_2725_Logic59_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
-{
-    NOT_IMPLEMENTED;
-}
-
-#endif
+/// #it_2725_Logic59_EvtUnk
