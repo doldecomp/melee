@@ -734,7 +734,27 @@ void fn_8017E21C(void) {
     }
 }
 
-/// #gm_8017E280
+s8 gm_8017E280(u16 arg0, u32 arg1)
+{
+    lbl_804706D8_t* var_r7 = lbl_804706D8;
+    s32 index;
+    index = 0;
+    for (index = 0; index < 12; index++) {
+        if (arg0 == var_r7[index].x0) {
+            var_r7[index].x2 += arg1;
+            return var_r7[index].x2;
+        }
+    }
+    index = 0;
+    for (index = 0; index < 12; index++) {
+        if (var_r7[index].x0 == -1) {
+            var_r7[index].x0 = arg0;
+            var_r7[index].x2 = arg1;
+            return (u8)arg1;
+        }
+    }
+    return -1;
+}
 
 /// #fn_8017E318
 
