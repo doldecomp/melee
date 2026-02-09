@@ -164,12 +164,14 @@ void order_dag(int num, int* dep, int* full_dep, HSD_TExpDag* list, int depth,
 void CalcDistance(HSD_TExp** tevs, int* dist, HSD_TExp* tev, int num,
                   int depth)
 {
+    HSD_TExp** p;
     int idx;
     int i;
 
+    p = tevs;
     idx = 0;
     for (i = 0; i < num; i++) {
-        if (tevs[i] == tev) {
+        if (*p == tev) {
             if (dist[idx] < depth) {
                 dist[idx] = depth;
                 for (i = 0; i < 4; i++) {
@@ -185,6 +187,7 @@ void CalcDistance(HSD_TExp** tevs, int* dist, HSD_TExp* tev, int num,
             }
             return;
         }
+        p++;
         idx++;
     }
 }
@@ -305,9 +308,10 @@ void HSD_TExpSchedule(int num, HSD_TExpDag* list, HSD_TExp** result,
     memset(sp2C, 0, sizeof(sp2C));
 
     for (idx = 0; idx < num; idx++) {
+        HSD_TExpDag* dag = &list[idx];
         sp1AC[idx] = 0;
-        for (var_r7 = 0; var_r7 < list[idx].nb_dep; var_r7++) {
-            sp1AC[idx] |= 1 << list[idx].depend[var_r7]->idx;
+        for (var_r7 = 0; var_r7 < dag->nb_dep; var_r7++) {
+            sp1AC[idx] |= 1 << dag->depend[var_r7]->idx;
         }
     }
 

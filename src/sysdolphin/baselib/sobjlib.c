@@ -45,6 +45,7 @@ void HSD_SObjLib_803A44A4(void)
 }
 
 /* @TODO: 99.56% match - needs register allocation fix (r4 vs r5 for cur) */
+/* @TODO: 99.56% match - needs register allocation fix (r4 vs r5 for cur) */
 void HSD_SObjLib_803A44D4(HSD_GObj* gobj, HSD_SObj* sobj, u8 priority)
 {
     HSD_SObj* cur;
@@ -185,9 +186,9 @@ void HSD_SObjLib_803A54EC(HSD_GObj* gobj, int unused)
         HSD_CObjGetViewingMtx(HSD_CObjGetCurrent(), viewmtx);
         GXLoadPosMtxImm(viewmtx, 0);
         GXSetTexCoordGen2(GX_TEXCOORD0, GX_TG_MTX2x4, GX_TG_TEX0,
-                          GX_TEXMTX0, GX_FALSE, GX_PTIDENTITY);
+                          GX_IDENTITY, GX_FALSE, GX_PTIDENTITY);
         GXSetTexCoordGen2(GX_TEXCOORD1, GX_TG_MTX2x4, GX_TG_TEX0,
-                          GX_TEXMTX0, GX_FALSE, GX_PTIDENTITY);
+                          GX_IDENTITY, GX_FALSE, GX_PTIDENTITY);
         HSD_SetupChannel(&data->x78_chan0);
         HSD_SetupChannel(&data->xA8_chan1);
         HSD_StateSetNumChans(1);
