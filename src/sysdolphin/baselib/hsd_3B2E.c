@@ -9,13 +9,13 @@ static s32 lbl_80430BD0[13] = {
 
 #pragma dont_inline on
 
-static u8 fn_803B2E04(u8 arg0, s32 arg1)
+static u8 fn_803B2E04(u8 prev, s32 cur)
 {
     u32 mod7;
     u8 val;
 
-    mod7 = arg0 % 7;
-    val = arg0 ^ arg1 ^ lbl_80430BD0[arg0 % 13];
+    mod7 = prev % 7;
+    val = prev ^ cur ^ lbl_80430BD0[prev % 13];
 
     if (mod7 > 6) {
         return val;
@@ -84,58 +84,55 @@ int hsd_803B2FA0(u8* data, int len)
 
 #pragma dont_inline on
 
-static u8 fn_803B302C(u8 arg0, u8 arg1)
+static u8 fn_803B302C(u8 prev, u8 cur)
 {
     u32 mod7;
 
-    mod7 = arg0 % 7;
+    mod7 = prev % 7;
 
     switch (mod7) {
     case 0:
-        arg1 = (u8) ((arg1 & 1) | ((arg1 << 1) & 4) |
-                      ((arg1 << 2) & 0x10) | ((arg1 << 3) & 0x40) |
-                      ((arg1 >> 3U) & 2) | ((arg1 >> 2U) & 8) |
-                      ((arg1 >> 1U) & 0x20) | (arg1 & 0x80));
+        cur = (u8) ((cur & 1) | ((cur << 1) & 4) | ((cur << 2) & 0x10) |
+                    ((cur << 3) & 0x40) | ((cur >> 3U) & 2) |
+                    ((cur >> 2U) & 8) | ((cur >> 1U) & 0x20) | (cur & 0x80));
         break;
     case 1:
-        arg1 = (u8) (((arg1 << 1) & 2) | ((arg1 << 6) & 0x80) |
-                      (arg1 & 4) | ((arg1 >> 3U) & 1) |
-                      ((arg1 << 1) & 0x20) | ((arg1 >> 1U) & 0x10) |
-                      ((arg1 >> 3U) & 8) | ((arg1 >> 1U) & 0x40));
+        cur = (u8) (((cur << 1) & 2) | ((cur << 6) & 0x80) | (cur & 4) |
+                    ((cur >> 3U) & 1) | ((cur << 1) & 0x20) |
+                    ((cur >> 1U) & 0x10) | ((cur >> 3U) & 8) |
+                    ((cur >> 1U) & 0x40));
         break;
     case 2:
-        arg1 = (u8) (((arg1 & 1) << 2) | ((arg1 << 2) & 8) |
-                      ((arg1 << 4) & 0x40) | ((arg1 << 1) & 0x10) |
-                      ((arg1 << 3) & 0x80) | ((arg1 >> 4U) & 2) |
-                      ((arg1 >> 6U) & 1) | ((arg1 >> 2U) & 0x20));
+        cur = (u8) (((cur & 1) << 2) | ((cur << 2) & 8) | ((cur << 4) & 0x40) |
+                    ((cur << 1) & 0x10) | ((cur << 3) & 0x80) |
+                    ((cur >> 4U) & 2) | ((cur >> 6U) & 1) |
+                    ((cur >> 2U) & 0x20));
         break;
     case 3:
-        arg1 = (u8) (((arg1 << 4) & 0x10) | ((arg1 >> 1U) & 1) |
-                      ((arg1 << 3) & 0x20) | ((arg1 >> 2U) & 2) |
-                      ((arg1 >> 1U) & 8) | ((arg1 << 1) & 0x40) |
-                      ((arg1 << 1) & 0x80) | ((arg1 >> 5U) & 4));
+        cur = (u8) (((cur << 4) & 0x10) | ((cur >> 1U) & 1) |
+                    ((cur << 3) & 0x20) | ((cur >> 2U) & 2) |
+                    ((cur >> 1U) & 8) | ((cur << 1) & 0x40) |
+                    ((cur << 1) & 0x80) | ((cur >> 5U) & 4));
         break;
     case 4:
-        arg1 = (u8) (((arg1 << 3) & 8) | ((arg1 << 4) & 0x20) |
-                      ((arg1 >> 1U) & 2) | ((arg1 << 4) & 0x80) |
-                      ((arg1 << 2) & 0x40) | ((arg1 >> 3U) & 4) |
-                      ((arg1 >> 2U) & 0x10) | ((arg1 >> 7U) & 1));
+        cur = (u8) (((cur << 3) & 8) | ((cur << 4) & 0x20) |
+                    ((cur >> 1U) & 2) | ((cur << 4) & 0x80) |
+                    ((cur << 2) & 0x40) | ((cur >> 3U) & 4) |
+                    ((cur >> 2U) & 0x10) | ((cur >> 7U) & 1));
         break;
     case 5:
-        arg1 = (u8) (((arg1 & 1) << 5) | ((arg1 << 5) & 0x40) |
-                      ((arg1 & 4) << 5) | (arg1 & 8) |
-                      ((arg1 >> 2U) & 4) | ((arg1 >> 5U) & 1) |
-                      ((arg1 >> 5U) & 2) | ((arg1 >> 3U) & 0x10));
+        cur = (u8) (((cur & 1) << 5) | ((cur << 5) & 0x40) | ((cur & 4) << 5) |
+                    (cur & 8) | ((cur >> 2U) & 4) | ((cur >> 5U) & 1) |
+                    ((cur >> 5U) & 2) | ((cur >> 3U) & 0x10));
         break;
     case 6:
-        arg1 = (u8) (((arg1 << 6) & 0x40) | (arg1 & 2) |
-                      ((arg1 >> 2U) & 1) | ((arg1 << 2) & 0x20) |
-                      (arg1 & 0x10) | ((arg1 << 2) & 0x80) |
-                      ((arg1 >> 4U) & 4) | ((arg1 >> 4U) & 8));
+        cur = (u8) (((cur << 6) & 0x40) | (cur & 2) | ((cur >> 2U) & 1) |
+                    ((cur << 2) & 0x20) | (cur & 0x10) | ((cur << 2) & 0x80) |
+                    ((cur >> 4U) & 4) | ((cur >> 4U) & 8));
         break;
     }
 
-    return arg1 ^ lbl_80430BD0[arg0 % 13] ^ arg0;
+    return cur ^ lbl_80430BD0[prev % 13] ^ prev;
 }
 
 #pragma dont_inline reset

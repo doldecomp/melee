@@ -8,8 +8,8 @@
 /* 3B286C */ int hsd_803B286C(s32*, UNK_T, const char*, int, int,
                               void (*)(int, int));
 /* 3B2928 */ int hsd_803B2928(s32*, const char*, int, int, void (*)(int, int));
-/* 3B29D8 */ int hsd_803B29D8(s32*, int, int, UNK_T);
+/* 3B29D8 */ int hsd_803B29D8(s32* ctx, int channel, int size, UNK_T callback);
 /* 3B2A4C */ int hsd_803B2A4C(s32*, int, int, void (*)(int, int));
-/* 3B2ADC */ int hsd_803B2ADC(s32*, UNK_T);
+/* 3B2ADC */ int hsd_803B2ADC(s32* ctx, UNK_T data);
 
 #endif

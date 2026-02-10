@@ -43,7 +43,7 @@
 /* 393C14 */ void fn_80393C14(const u8* buf, size_t);
 /* 393D2C */ s32 hsd_80393D2C(s32);
 /* 393DA0 */ void hsd_80393DA0(u8*, size_t);
-/* 393E34 */ void hsd_80393E34(s32* arg0, s32* arg1);
+/* 393E34 */ void hsd_80393E34(s32* col_out, s32* row_out);
 /* 393E68 */ void hsd_80393E68(u32, u32);
 /* 393EF4 */ void hsd_80393EF4(int, int);
 /* 394068 */ u8 hsd_80394068(void);
@@ -96,7 +96,7 @@
 /* 397814 */ void* fn_80397814(void*);
 /* 397DA4 */ void hsd_80397DA4(OSContext*);
 /* 397DF4 */ void Exception_StoreDebugLevel(int);
-/* 397DFC */ void hsd_80397DFC(u32 arg0);
+/* 397DFC */ void hsd_80397DFC(u32 size);
 /* 397E0C */ int baselib_mfspr(int);
 /* 3982E4 */ void fn_803982E4(HSD_GObj*, int);
 /* 398310 */ HSD_GObj* hsd_80398310(u16, u8, u8, u32);
@@ -117,7 +117,7 @@
 /* 39930C */ void* hsd_8039930C(void*, void*);
 /* 39CEAC */ void hsd_8039CEAC(u32);
 /* 39CF4C */ void hsd_8039CF4C(s32, HSD_JObj*);
-/* 39D048 */ void hsd_8039D048(void* arg0);
+/* 39D048 */ void hsd_8039D048(void* particle);
 /* 39D0A0 */ void hsd_8039D0A0(HSD_Generator*);
 /* 39D1E4 */ void hsd_8039D1E4(HSD_Generator*, void*);
 /* 39D1EC */ u16 hsd_8039D1EC(void);

@@ -9,9 +9,9 @@
 #include <sysdolphin/baselib/memory.h>
 #include <melee/lb/lb_0192.h>
 
-int lb_80019BB8(int arg0)
+int lb_80019BB8(int card_result)
 {
-    switch (arg0) {
+    switch (card_result) {
     case -1:
     case -2:
     case -3:
@@ -58,7 +58,7 @@ static void reset_task_array(void)
     }
 }
 
-int lb_80019CB0(int var_r28)
+int lb_80019CB0(int result)
 {
     struct CardTask* task;
     int i;
@@ -73,77 +73,77 @@ again:
         }
     }
     if (i != 0xB) {
-        if (!(task->x4 & (1 << var_r28))) {
+        if (!(task->x4 & (1 << result))) {
             reset_task_array();
         } else {
             switch (task->x0) {
             case 0:
-                var_r28 = lb_8001A184();
+                result = lb_8001A184();
                 break;
             case 1:
-                var_r28 = lb_8001A3A4();
+                result = lb_8001A3A4();
                 break;
             case 2:
-                var_r28 = lb_8001A594(task->xC, task->x8);
+                result = lb_8001A594(task->xC, task->x8);
                 break;
             case 3:
-                var_r28 = lb_8001A860();
+                result = lb_8001A860();
                 break;
             case 4:
-                var_r28 = lb_8001A8A4();
+                result = lb_8001A8A4();
                 break;
             case 5:
-                var_r28 = lb_8001A9CC(task->x10);
+                result = lb_8001A9CC(task->x10);
                 break;
             case 6:
-                var_r28 = lb_8001AAE4(task->x10, task->x19);
+                result = lb_8001AAE4(task->x10, task->x19);
                 break;
             case 7:
-                var_r28 = lb_8001AC04(&task->x10);
+                result = lb_8001AC04(&task->x10);
                 break;
             case 8:
-                var_r28 = lb_8001ACEC(task->x8);
+                result = lb_8001ACEC(task->x8);
                 break;
             case 9:
-                var_r28 = lb_8001AE38(task->x8);
+                result = lb_8001AE38(task->x8);
                 break;
             case 10:
-                var_r28 = lb_8001AF84();
+                result = lb_8001AF84();
                 break;
             case 11:
-                var_r28 = lb_8001B068();
+                result = lb_8001B068();
                 break;
             case 12:
-                var_r28 = lb_8001B14C();
+                result = lb_8001B14C();
                 break;
             case 13:
-                var_r28 = lb_8001B614(task->x10);
+                result = lb_8001B614(task->x10);
                 break;
             }
             task->x0 = 0xE;
-            if (var_r28 != 11) {
+            if (result != 11) {
                 goto again;
             }
         }
     }
-    if (var_r28 != 11 && lb_80432A68.x50C != NULL) {
-        lb_80432A68.x50C(var_r28);
+    if (result != 11 && lb_80432A68.x50C != NULL) {
+        lb_80432A68.x50C(result);
         lb_80432A68.x50C = NULL;
     }
-    if (var_r28 != 11 && lb_80432A68.unk_80 != 0) {
+    if (result != 11 && lb_80432A68.unk_80 != 0) {
         CARDUnmount(lb_80432A68.chan);
         lb_80432A68.unk_80 = 0;
     }
-    return var_r28;
+    return result;
 }
 
-void lb_80019EF0(int chan, UNK_T arg1, UNK_T arg2, UNK_T arg3)
+void lb_80019EF0(int chan, UNK_T save_data, UNK_T status_out, UNK_T callback)
 {
     int i;
 
     lb_80432A68.chan = chan;
-    lb_80432A68.unk_C = arg1;
-    lb_80432A68.unk_10 = arg2;
+    lb_80432A68.unk_C = save_data;
+    lb_80432A68.unk_10 = status_out;
     lb_80432A68.unk_14 = NULL;
     lb_80432A68.unk_18 = 0;
     lb_80432A68.unk_1C = 0;
@@ -158,87 +158,87 @@ void lb_80019EF0(int chan, UNK_T arg1, UNK_T arg2, UNK_T arg3)
     }
 
     lb_80432A68.unk_80 = 0;
-    lb_80432A68.x50C = arg3;
+    lb_80432A68.x50C = callback;
 
     reset_task_array();
 }
 
-void fn_8001A008(s32 unused, s32 arg0)
+void fn_8001A008(s32 unused, s32 card_result)
 {
-    s32 var_r0;
+    s32 error;
 
-    var_r0 = lb_80019BB8(arg0);
+    error = lb_80019BB8(card_result);
 
-    if (var_r0 != 0) {
-        lb_80432A68.unk_34 = var_r0;
+    if (error != 0) {
+        lb_80432A68.unk_34 = error;
     }
     lb_80432A68.x8AC -= 1;
 }
 
-static int convert_hsdcard_error(int arg1)
+static int convert_hsdcard_error(int hsd_error)
 {
-    int var_r3;
-    switch (arg1) {
+    int error;
+    switch (hsd_error) {
     case 0:
     case 1:
-        var_r3 = 0;
+        error = 0;
         break;
     case -0x105:
     case -0x104:
     case -0x103:
     case -0x102:
-        var_r3 = 2;
+        error = 2;
         break;
     case -0x107:
     case -0x106:
     case -0x101:
-        var_r3 = 3;
+        error = 3;
         break;
     case -0x108:
     case -0x109:
     case -0x10A:
     case -0x10B:
-        var_r3 = 10;
+        error = 10;
         break;
     default:
-        var_r3 = lb_80019BB8(arg1);
+        error = lb_80019BB8(hsd_error);
         break;
     }
-    return var_r3;
+    return error;
 }
 
-void fn_8001A0B0(int arg0, int arg1)
+void fn_8001A0B0(int file_idx, int hsd_error)
 {
-    s32 var_r3;
+    s32 error;
 
-    var_r3 = convert_hsdcard_error(arg1);
+    error = convert_hsdcard_error(hsd_error);
 
-    lb_80432A68.unk_38[arg0].unk_0 = var_r3;
-    lb_80432A68.unk_38[arg0].unk_4 = arg1;
-    if (var_r3 != 0) {
-        lb_80432A68.unk_34 = var_r3;
+    lb_80432A68.unk_38[file_idx].unk_0 = error;
+    lb_80432A68.unk_38[file_idx].unk_4 = hsd_error;
+    if (error != 0) {
+        lb_80432A68.unk_34 = error;
     }
     lb_80432A68.x8AC -= 1;
 }
 
 int lb_8001A184(void)
 {
-    s32 temp_r27;
-    s32 temp_r28;
-    s32 temp_r3;
-    s32 temp_r3_2;
-    s32 var_r0;
-    s32 var_r26;
-    s32 var_r25;
-    s32 var_r28;
+    s32 pending_ops;
+    s32 saved_error;
+    s32 probe_result;
+    s32 mount_result;
+    s32 unused;
+    s32 enabled;
+    s32 did_disable;
+    s32 result;
     u8 _[8];
 
-    var_r28 = 0;
-    var_r25 = 0;
+    result = 0;
+    did_disable = 0;
     lb_80432A68.x8AC = 0;
-    temp_r3 = CARDProbeEx(lb_80432A68.chan, &lb_80432A68.memsize,
-                          &lb_80432A68.sectorsize);
-    lb_80432A68.unk_34 = lb_80019BB8(temp_r3);
+    probe_result = CARDProbeEx(lb_80432A68.chan, &lb_80432A68.memsize,
+                               &lb_80432A68.sectorsize);
+    lb_80432A68.unk_34 = lb_80019BB8(probe_result);
     if (lb_80432A68.unk_34 == 0) {
         if (lb_80432A68.unk_10 != NULL) {
             *(s32*) lb_80432A68.unk_10 = 0;
@@ -246,129 +246,130 @@ int lb_8001A184(void)
         if (lb_80432A68.work_area == NULL) {
             __assert("lbcardnew.c", 0x23F, "_p(work_area)");
         }
-        var_r26 = OSDisableInterrupts();
-        var_r25 = 1;
-        temp_r3_2 = CARDMountAsync(lb_80432A68.chan, lb_80432A68.work_area,
-                                   NULL, fn_8001A008);
+        enabled = OSDisableInterrupts();
+        did_disable = 1;
+        mount_result = CARDMountAsync(lb_80432A68.chan, lb_80432A68.work_area,
+                                      NULL, fn_8001A008);
 
-        lb_80432A68.unk_34 = lb_80019BB8(temp_r3_2);
-        if (temp_r3_2 == 0 || temp_r3_2 == -6 || temp_r3_2 == -0xD) {
+        lb_80432A68.unk_34 = lb_80019BB8(mount_result);
+        if (mount_result == 0 || mount_result == -6 || mount_result == -0xD) {
             lb_80432A68.unk_80 = 1;
         }
         if (lb_80432A68.unk_34 == 0) {
             lb_80432A68.x8AC += 1;
         }
     }
-    temp_r27 = lb_80432A68.x8AC;
-    temp_r28 = lb_80432A68.unk_34;
-    if (var_r25 != 0) {
-        OSRestoreInterrupts(var_r26);
+    pending_ops = lb_80432A68.x8AC;
+    saved_error = lb_80432A68.unk_34;
+    if (did_disable != 0) {
+        OSRestoreInterrupts(enabled);
     }
-    if (temp_r27 != 0) {
+    if (pending_ops != 0) {
         return 0xB;
     }
-    return temp_r28;
+    return saved_error;
 }
 
 int lb_8001A3A4(void)
 {
-    int temp_r29;
-    int temp_r30;
-    int var_r30;
-    int temp_r28;
-    int temp_r3;
+    int pending_ops;
+    int saved_error;
+    int unused;
+    int enabled;
+    int check_result;
     u8 _[8];
 
-    var_r30 = 0;
+    unused = 0;
     lb_80432A68.x8AC = 0;
-    temp_r28 = OSDisableInterrupts();
-    temp_r3 = CARDCheckAsync(lb_80432A68.chan, fn_8001A008);
-    lb_80432A68.unk_34 = lb_80019BB8(temp_r3);
+    enabled = OSDisableInterrupts();
+    check_result = CARDCheckAsync(lb_80432A68.chan, fn_8001A008);
+    lb_80432A68.unk_34 = lb_80019BB8(check_result);
     if (lb_80432A68.unk_34 == 0) {
         lb_80432A68.x8AC += 1;
     }
-    temp_r29 = lb_80432A68.x8AC;
-    temp_r30 = lb_80432A68.unk_34;
-    OSRestoreInterrupts(temp_r28);
-    if (temp_r29 != 0) {
+    pending_ops = lb_80432A68.x8AC;
+    saved_error = lb_80432A68.unk_34;
+    OSRestoreInterrupts(enabled);
+    if (pending_ops != 0) {
         return 0xB;
     }
-    return temp_r30;
+    return saved_error;
 }
 
-void lb_8001A4CC(const char* arg0, UNK_T arg1)
+void lb_8001A4CC(const char* filename, UNK_T file_entries)
 {
     struct CardTask* task = lb_80019C38();
     task->x0 = 2;
     task->x4 = 1;
-    if (arg0 != NULL) {
-        strncpy(task->xC = task->x10, arg0, ARRAY_SIZE(task->x10));
+    if (filename != NULL) {
+        strncpy(task->xC = task->x10, filename, ARRAY_SIZE(task->x10));
     } else {
         task->xC = NULL;
     }
-    task->x8 = arg1;
+    task->x8 = file_entries;
 }
 
-int lb_8001A594(char* filename, void* arg1)
+int lb_8001A594(char* filename, void* file_entries)
 {
-    int temp_r24;
-    int temp_r3;
-    int temp_r3_2;
-    int temp_r5;
-    int var_r24;
-    int var_r24_2;
-    int var_r3;
+    int open_result;
+    int free_result;
+    int hsd_result;
+    int unused_1;
+    int unused_2;
+    int unused_3;
+    int unused_4;
     int i;
     struct {
         int unk0, unk4, unk8;
-    }* var_r25;
+    }* entry;
     u8 _[8];
 
-    var_r24 = 0;
+    unused_2 = 0;
     lb_80432A68.x8AC = 0;
     if (lb_80432A68.sectorsize != 0x2000) {
         lb_80432A68.unk_34 = 0xC;
     } else {
-        temp_r3 = CARDFreeBlocks(lb_80432A68.chan, &lb_80432A68.unused_bytes,
-                                 &lb_80432A68.unused_files);
+        free_result =
+            CARDFreeBlocks(lb_80432A68.chan, &lb_80432A68.unused_bytes,
+                           &lb_80432A68.unused_files);
 
-        lb_80432A68.unk_34 = lb_80019BB8(temp_r3);
+        lb_80432A68.unk_34 = lb_80019BB8(free_result);
         if (lb_80432A68.unk_34 == 0) {
             if (filename == NULL) {
                 lb_80432A68.unk_34 = 7;
             } else {
-                temp_r24 = CARDOpen(lb_80432A68.chan, filename,
-                                    &lb_80432A68.file_info);
+                open_result = CARDOpen(lb_80432A68.chan, filename,
+                                       &lb_80432A68.file_info);
                 CARDClose(&lb_80432A68.file_info);
                 if (lb_80432A68.lib_area == NULL) {
                     __assert("lbcardnew.c", 0x2C8, "_p(lib_area)");
                 }
                 hsd_803B24E4(&lb_80432A68.unk_A8, lb_80432A68.chan, 0x2000,
                              lb_80432A68.lib_area);
-                if (temp_r24 == 0) {
-                    temp_r3_2 = hsd_803B2550(&lb_80432A68.unk_A8, filename,
-                                             fn_8001A0B0);
+                if (open_result == 0) {
+                    hsd_result = hsd_803B2550(&lb_80432A68.unk_A8, filename,
+                                              fn_8001A0B0);
 
-                    lb_80432A68.unk_34 = convert_hsdcard_error(temp_r3_2);
+                    lb_80432A68.unk_34 = convert_hsdcard_error(hsd_result);
                     if (lb_80432A68.unk_34 == 0) {
                         lb_80432A68.x8AC += 1;
                     }
-                } else if (arg1 == NULL) {
+                } else if (file_entries == NULL) {
                     lb_80432A68.unk_34 = 4;
                 } else if (lb_80432A68.unused_files == 0) {
                     lb_80432A68.unk_34 = 6;
                 } else {
-                    var_r25 = arg1;
+                    entry = file_entries;
                     hsd_803B2ADC(&lb_80432A68.unk_A8, lb_80432A68.unk_C);
                     i = 0;
-                    while (var_r25->unk0 != -1) {
-                        if (var_r25->unk0 != 0) {
+                    while (entry->unk0 != -1) {
+                        if (entry->unk0 != 0) {
                             hsd_803AC3E0((void*) &lb_80432A68.unk_A8, i,
-                                         var_r25->unk0, var_r25->unk4,
-                                         var_r25->unk8);
+                                         entry->unk0, entry->unk4,
+                                         entry->unk8);
                         }
                         i++;
-                        var_r25++;
+                        entry++;
                     }
                     if (lb_80432A68.unused_bytes <
                         (hsd_803B2674((void*) &lb_80432A68.unk_A8) << 0xD))
@@ -403,100 +404,100 @@ int lb_8001A860(void)
 
 int lb_8001A8A4(void)
 {
-    int temp_r29;
-    int temp_r30;
-    int temp_r3;
-    int var_r28;
-    int var_r27;
-    int var_r30;
+    int pending_ops;
+    int saved_error;
+    int format_result;
+    int enabled;
+    int did_disable;
+    int unused;
 
-    var_r30 = 0;
-    var_r27 = 0;
+    unused = 0;
+    did_disable = 0;
     lb_80432A68.x8AC = 0;
     if (lb_80432A68.unk_80 != 0) {
-        var_r28 = OSDisableInterrupts();
-        var_r27 = 1;
-        temp_r3 = CARDFormatAsync(lb_80432A68.chan, fn_8001A008);
+        enabled = OSDisableInterrupts();
+        did_disable = 1;
+        format_result = CARDFormatAsync(lb_80432A68.chan, fn_8001A008);
 
-        lb_80432A68.unk_34 = lb_80019BB8(temp_r3);
+        lb_80432A68.unk_34 = lb_80019BB8(format_result);
         if (lb_80432A68.unk_34 == 0) {
             lb_80432A68.x8AC += 1;
         }
     }
-    temp_r29 = lb_80432A68.x8AC;
-    temp_r30 = lb_80432A68.unk_34;
-    if (var_r27 != 0) {
-        OSRestoreInterrupts(var_r28);
+    pending_ops = lb_80432A68.x8AC;
+    saved_error = lb_80432A68.unk_34;
+    if (did_disable != 0) {
+        OSRestoreInterrupts(enabled);
     }
-    if (temp_r29 != 0) {
+    if (pending_ops != 0) {
         return 0xB;
     }
-    return temp_r30;
+    return saved_error;
 }
 
 int lb_8001A9CC(char* filename)
 {
-    int var_r30;
-    int temp_r29;
-    int temp_r30;
-    int temp_r28;
-    int temp_r3;
+    int unused;
+    int pending_ops;
+    int saved_error;
+    int enabled;
+    int delete_result;
     u8 _[8];
 
-    var_r30 = 0;
+    unused = 0;
     lb_80432A68.x8AC = 0;
-    temp_r28 = OSDisableInterrupts();
-    temp_r3 = CARDDeleteAsync(lb_80432A68.chan, filename, fn_8001A008);
+    enabled = OSDisableInterrupts();
+    delete_result = CARDDeleteAsync(lb_80432A68.chan, filename, fn_8001A008);
 
-    lb_80432A68.unk_34 = lb_80019BB8(temp_r3);
+    lb_80432A68.unk_34 = lb_80019BB8(delete_result);
     if (lb_80432A68.unk_34 == 0) {
         lb_80432A68.x8AC += 1;
     }
-    temp_r29 = lb_80432A68.x8AC;
-    temp_r30 = lb_80432A68.unk_34;
-    OSRestoreInterrupts(temp_r28);
-    if (temp_r29 != 0) {
+    pending_ops = lb_80432A68.x8AC;
+    saved_error = lb_80432A68.unk_34;
+    OSRestoreInterrupts(enabled);
+    if (pending_ops != 0) {
         return 0xB;
     }
-    return temp_r30;
+    return saved_error;
 }
 
 int lb_8001AAE4(const char* old_name, const char* new_name)
 {
-    int var_r30;
-    int temp_r29;
-    int temp_r30;
-    int temp_r28;
-    int temp_r3;
+    int unused;
+    int pending_ops;
+    int saved_error;
+    int enabled;
+    int rename_result;
     u8 _[8];
 
-    var_r30 = 0;
+    unused = 0;
     lb_80432A68.x8AC = 0;
-    temp_r28 = OSDisableInterrupts();
-    temp_r3 =
+    enabled = OSDisableInterrupts();
+    rename_result =
         CARDRenameAsync(lb_80432A68.chan, old_name, new_name, fn_8001A008);
-    lb_80432A68.unk_34 = lb_80019BB8(temp_r3);
+    lb_80432A68.unk_34 = lb_80019BB8(rename_result);
     if (lb_80432A68.unk_34 == 0) {
         lb_80432A68.x8AC += 1;
     }
-    temp_r29 = lb_80432A68.x8AC;
-    temp_r30 = lb_80432A68.unk_34;
-    OSRestoreInterrupts(temp_r28);
-    if (temp_r29 != 0) {
+    pending_ops = lb_80432A68.x8AC;
+    saved_error = lb_80432A68.unk_34;
+    OSRestoreInterrupts(enabled);
+    if (pending_ops != 0) {
         return 0xB;
     }
-    return temp_r30;
+    return saved_error;
 }
 
-int lb_8001AC04(UNK_T arg0)
+int lb_8001AC04(UNK_T filename)
 {
-    int temp_r3;
-    int var_r3;
+    int hsd_result;
+    int unused;
 
-    temp_r3 =
-        hsd_803B286C(&lb_80432A68.unk_A8, arg0, lb_80432A68.unk_14,
+    hsd_result =
+        hsd_803B286C(&lb_80432A68.unk_A8, filename, lb_80432A68.unk_14,
                      lb_80432A68.unk_18, lb_80432A68.unk_1C, fn_8001A0B0);
-    lb_80432A68.unk_34 = convert_hsdcard_error(temp_r3);
+    lb_80432A68.unk_34 = convert_hsdcard_error(hsd_result);
     if (lb_80432A68.unk_34 == 0) {
         lb_80432A68.x8AC += 1;
     }
@@ -506,36 +507,35 @@ int lb_8001AC04(UNK_T arg0)
     return lb_80432A68.unk_34;
 }
 
-int lb_8001ACEC(UNK_T arg0)
+int lb_8001ACEC(UNK_T file_entries)
 {
-    int temp_r0;
-    int temp_r3;
-    int var_r3;
+    int file_error;
+    int hsd_result;
+    int unused;
     int i;
     struct {
         int unk0, unk4, unk8;
-    }* var_r30 = arg0;
+    }* entries = file_entries;
 
     // TODO this seems fake
-    volatile int sp18;
-    volatile int sp14;
-    volatile int sp10;
+    volatile int cached_flag;
+    volatile int pad_stack;
+    volatile int cached_data;
 
-    // var_r30 = arg0 + (0 * 0xC);
     lb_80432A68.unk_34 = 0;
     for (i = 0; i < 9; i++) {
-        sp18 = lb_80432A68.xF4[i];
-        sp10 = lb_80432A68.xD0[i];
+        cached_flag = lb_80432A68.xF4[i];
+        cached_data = lb_80432A68.xD0[i];
         if (lb_80432A68.xF4[i] != 0) {
-            temp_r3 = hsd_803B29D8(&lb_80432A68.unk_A8, i, var_r30[i].unk8,
-                                   fn_8001A0B0);
-            lb_80432A68.unk_38[i].unk_0 = convert_hsdcard_error(temp_r3);
-            lb_80432A68.unk_38[i].unk_4 = temp_r3;
-            temp_r0 = lb_80432A68.unk_38[i].unk_0;
-            if (temp_r0 == 0) {
+            hsd_result = hsd_803B29D8(&lb_80432A68.unk_A8, i, entries[i].unk8,
+                                      fn_8001A0B0);
+            lb_80432A68.unk_38[i].unk_0 = convert_hsdcard_error(hsd_result);
+            lb_80432A68.unk_38[i].unk_4 = hsd_result;
+            file_error = lb_80432A68.unk_38[i].unk_0;
+            if (file_error == 0) {
                 lb_80432A68.x8AC += 1;
             } else {
-                lb_80432A68.unk_34 = temp_r0;
+                lb_80432A68.unk_34 = file_error;
             }
         }
     }
@@ -545,36 +545,35 @@ int lb_8001ACEC(UNK_T arg0)
     return lb_80432A68.unk_34;
 }
 
-int lb_8001AE38(UNK_T arg0)
+int lb_8001AE38(UNK_T file_entries)
 {
-    int temp_r0;
-    int temp_r3;
-    int var_r3;
+    int file_error;
+    int hsd_result;
+    int unused;
     int i;
     struct {
         int unk0, unk4, unk8;
-    }* var_r30 = arg0;
+    }* entries = file_entries;
 
     // TODO this seems fake
-    volatile int sp18;
-    volatile int sp14;
-    volatile int sp10;
+    volatile int cached_flag;
+    volatile int pad_stack;
+    volatile int cached_data;
 
-    // var_r30 = arg0 + (0 * 0xC);
     lb_80432A68.unk_34 = 0;
     for (i = 0; i < 9; i++) {
-        sp18 = lb_80432A68.xF4[i];
-        sp10 = lb_80432A68.xD0[i];
+        cached_flag = lb_80432A68.xF4[i];
+        cached_data = lb_80432A68.xD0[i];
         if (lb_80432A68.xF4[i] != 0) {
-            temp_r3 = hsd_803B2A4C(&lb_80432A68.unk_A8, i, var_r30[i].unk8,
-                                   fn_8001A0B0);
-            lb_80432A68.unk_38[i].unk_0 = convert_hsdcard_error(temp_r3);
-            lb_80432A68.unk_38[i].unk_4 = temp_r3;
-            temp_r0 = lb_80432A68.unk_38[i].unk_0;
-            if (temp_r0 == 0) {
+            hsd_result = hsd_803B2A4C(&lb_80432A68.unk_A8, i, entries[i].unk8,
+                                      fn_8001A0B0);
+            lb_80432A68.unk_38[i].unk_0 = convert_hsdcard_error(hsd_result);
+            lb_80432A68.unk_38[i].unk_4 = hsd_result;
+            file_error = lb_80432A68.unk_38[i].unk_0;
+            if (file_error == 0) {
                 lb_80432A68.x8AC += 1;
             } else {
-                lb_80432A68.unk_34 = temp_r0;
+                lb_80432A68.unk_34 = file_error;
             }
         }
     }
@@ -586,11 +585,11 @@ int lb_8001AE38(UNK_T arg0)
 
 int lb_8001AF84(void)
 {
-    int temp_r3 =
+    int hsd_result =
         hsd_803B2928(&lb_80432A68.unk_A8, lb_80432A68.unk_14,
                      lb_80432A68.unk_18, lb_80432A68.unk_1C, fn_8001A0B0);
 
-    lb_80432A68.unk_34 = convert_hsdcard_error(temp_r3);
+    lb_80432A68.unk_34 = convert_hsdcard_error(hsd_result);
 
     if (lb_80432A68.unk_34 == 0) {
         lb_80432A68.x8AC += 1;
@@ -603,11 +602,11 @@ int lb_8001AF84(void)
 
 int lb_8001B068(void)
 {
-    int temp_r3 =
+    int hsd_result =
         hsd_803B27F4(&lb_80432A68.unk_A8, lb_80432A68.unk_14,
                      lb_80432A68.unk_18, lb_80432A68.unk_1C, fn_8001A0B0);
 
-    lb_80432A68.unk_34 = convert_hsdcard_error(temp_r3);
+    lb_80432A68.unk_34 = convert_hsdcard_error(hsd_result);
 
     if (lb_80432A68.unk_34 == 0) {
         lb_80432A68.x8AC += 1;
@@ -626,18 +625,18 @@ int lb_8001B14C(void)
     return lb_80432A68.unk_34;
 }
 
-int lb_8001B614(const char* arg0)
+int lb_8001B614(const char* filename)
 {
-    CARDStat spC;
+    CARDStat card_stat;
     int fileno;
 
     fileno = 0;
     lb_80432A68.x8AC = 0;
 loop_1:
-    if (CARDGetStatus(lb_80432A68.chan, fileno, &spC) == 0 &&
-        strncmp((const char*) spC.company, lb_80432A68.x2C, 2) == 0 &&
-        strncmp((const char*) spC.gameName, lb_80432A68.x2F, 4) == 0 &&
-        strcmp(spC.fileName, arg0) == 0)
+    if (CARDGetStatus(lb_80432A68.chan, fileno, &card_stat) == 0 &&
+        strncmp((const char*) card_stat.company, lb_80432A68.x2C, 2) == 0 &&
+        strncmp((const char*) card_stat.gameName, lb_80432A68.x2F, 4) == 0 &&
+        strcmp(card_stat.fileName, filename) == 0)
     {
         lb_80432A68.unk_34 = 0;
     } else {
@@ -651,317 +650,325 @@ loop_1:
     return lb_80432A68.unk_34;
 }
 
-s32 lb_8001B6E0(s32 arg0)
+s32 lb_8001B6E0(s32 file_idx)
 {
-    return lb_80432A68.unk_38[arg0].unk_0;
+    return lb_80432A68.unk_38[file_idx].unk_0;
 }
 
 int lb_8001B6F8(void)
 {
     int enabled;
-    int var_r31;
+    int result;
 
     hsd_803AAA48();
     enabled = OSDisableInterrupts();
     if (lb_80432A68.x8AC != 0) {
-        var_r31 = 0xB;
+        result = 0xB;
     } else {
-        var_r31 = lb_80432A68.unk_34;
+        result = lb_80432A68.unk_34;
     }
     OSRestoreInterrupts(enabled);
-    if (var_r31 != 0xB) {
-        var_r31 = lb_80019CB0(var_r31);
+    if (result != 0xB) {
+        result = lb_80019CB0(result);
     }
-    return var_r31;
+    return result;
 }
 
-void lb_8001B760(int arg0)
+void lb_8001B760(int result)
 {
-    if (arg0 == 0xB) {
+    if (result == 0xB) {
         do {
-            arg0 = lb_8001B6F8();
-        } while (arg0 == 0xB);
+            result = lb_8001B6F8();
+        } while (result == 0xB);
     }
 }
 
 inline struct CardTask* setup_task(int a, int b)
 {
-    struct CardTask* temp_r3 = lb_80019C38();
-    temp_r3->x0 = a;
-    temp_r3->x4 = b;
-    return temp_r3;
+    struct CardTask* task = lb_80019C38();
+    task->x0 = a;
+    task->x4 = b;
+    return task;
 }
 
-inline void lb_8001A4CC_dontinline(const char* arg1, void* arg2)
+inline void lb_8001A4CC_dontinline(const char* filename, void* file_entries)
 {
-    lb_8001A4CC(arg1, arg2);
+    lb_8001A4CC(filename, file_entries);
 }
 
-u32 lb_8001B7E0(int chan, char* arg1, void* arg2, void* arg3, int* arg4)
+u32 lb_8001B7E0(int chan, char* filename, void* file_entries, void* save_data,
+                int* status_out)
 {
     int enabled;
-    s32 var_r30;
-    s32 var_r3;
+    s32 unused;
+    s32 result;
     u8 _[0x10];
 
-    lb_80019EF0(chan, arg3, arg4, NULL);
+    lb_80019EF0(chan, save_data, status_out, NULL);
     setup_task(0, 0x10000);
     setup_task(1, 0x201);
-    lb_8001A4CC_dontinline(arg1, arg2);
+    lb_8001A4CC_dontinline(filename, file_entries);
     setup_task(3, -1);
 
-    var_r3 = lb_80019CB0(0x10);
-    if (var_r3 == 0xB) {
+    result = lb_80019CB0(0x10);
+    if (result == 0xB) {
         do {
-            var_r3 = lb_8001B6F8();
-        } while (var_r3 == 0xB);
+            result = lb_8001B6F8();
+        } while (result == 0xB);
     }
-    return var_r3;
+    return result;
 }
 
-int lb_8001B8C8(int arg0)
+int lb_8001B8C8(int chan)
 {
-    int temp_r3_4;
-    int var_r30;
-    int var_r3;
+    int unused_1;
+    int unused_2;
+    int result;
     u8 _[0x18];
 
-    lb_80019EF0(arg0, 0, 0, 0);
+    lb_80019EF0(chan, 0, 0, 0);
     setup_task(0, 0x10000);
     setup_task(1, 0x201);
     setup_task(4, -1);
 
-    var_r3 = lb_80019CB0(0x10);
-    if (var_r3 == 0xB) {
+    result = lb_80019CB0(0x10);
+    if (result == 0xB) {
         do {
-            var_r3 = lb_8001B6F8();
-        } while (var_r3 == 0xB);
+            result = lb_8001B6F8();
+        } while (result == 0xB);
     }
-    return var_r3;
+    return result;
 }
 
-int lb_8001B99C(int arg0, const char* arg1, UNK_T arg2)
+int lb_8001B99C(int chan, const char* filename, UNK_T status_out)
 {
-    lb_80019EF0(arg0, 0, arg2, 0);
+    lb_80019EF0(chan, 0, status_out, 0);
     setup_task(0, 0x10000);
     setup_task(1, 0x201);
-    lb_8001A4CC_dontinline(arg1, 0);
+    lb_8001A4CC_dontinline(filename, 0);
     setup_task(3, -1);
-    strncpy(setup_task(5, 0xE)->x10, arg1, 0x20);
+    strncpy(setup_task(5, 0xE)->x10, filename, 0x20);
     return lb_80019CB0(0x10);
 }
 
-int lb_8001BA44(int arg0, const char* arg1, UNK_T arg2)
+int lb_8001BA44(int chan, const char* filename, UNK_T status_out)
 {
-    s32 var_r3 = lb_8001B99C(arg0, arg1, arg2);
-    if (var_r3 == 0xB) {
+    s32 result = lb_8001B99C(chan, filename, status_out);
+    if (result == 0xB) {
         do {
-            var_r3 = lb_8001B6F8();
-        } while (var_r3 == 0xB);
+            result = lb_8001B6F8();
+        } while (result == 0xB);
     }
-    return var_r3;
+    return result;
 }
 
-int lb_8001BB48(int arg0, char* arg1, void* arg2, void* arg3, const char* arg4,
-                int arg5, int arg6, UNK_T arg7)
+int lb_8001BB48(int chan, char* filename, void* file_entries, void* save_data,
+                const char* write_buf, int write_offset, int write_len,
+                UNK_T status_out)
 {
-    lb_80019EF0(arg0, arg3, arg7, 0);
+    lb_80019EF0(chan, save_data, status_out, 0);
     setup_task(0, 0x10000);
     setup_task(1, 0x201);
-    lb_8001A4CC_dontinline(arg1, arg2);
+    lb_8001A4CC_dontinline(filename, file_entries);
     setup_task(3, -1);
-    memcpy(setup_task(7, 0x10)->x10, arg1, 0x20);
-    lb_80432A68.unk_14 = arg4;
-    lb_80432A68.unk_18 = arg5;
-    lb_80432A68.unk_1C = arg6;
+    memcpy(setup_task(7, 0x10)->x10, filename, 0x20);
+    lb_80432A68.unk_14 = write_buf;
+    lb_80432A68.unk_18 = write_offset;
+    lb_80432A68.unk_1C = write_len;
     return lb_80019CB0(0x10);
 }
 
-int lb_8001BC18(int arg0, char* arg1, void** arg2, void* arg3,
-                const char* arg4, int arg5, int arg6, UNK_T arg7)
+int lb_8001BC18(int chan, char* filename, void** file_entries, void* save_data,
+                const char* write_buf, int write_offset, int write_len,
+                UNK_T status_out)
 {
-    s32 var_r3 = lb_8001BB48(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
-    if (var_r3 == 0xB) {
+    s32 result = lb_8001BB48(chan, filename, file_entries, save_data,
+                             write_buf, write_offset, write_len, status_out);
+    if (result == 0xB) {
         do {
-            var_r3 = lb_8001B6F8();
-        } while (var_r3 == 0xB);
+            result = lb_8001B6F8();
+        } while (result == 0xB);
     }
-    return var_r3;
+    return result;
 }
 
-int lb_8001BD34(int chan, const char* arg1, UNK_T arg2, UNK_T arg3)
+int lb_8001BD34(int chan, const char* filename, UNK_T file_entries,
+                UNK_T status_out)
 {
-    s32 temp_r3_5;
-    s32 var_r30;
-    s32 var_r3;
-    struct CardTask* temp_r3;
+    s32 unused_1;
+    s32 unused_2;
+    s32 result;
+    struct CardTask* task;
     u8 _[4];
 
-    lb_80019EF0(chan, NULL, arg3, NULL);
+    lb_80019EF0(chan, NULL, status_out, NULL);
 
     setup_task(0, 0x10000);
     setup_task(1, 0x201);
-    lb_8001A4CC_dontinline(arg1, 0);
+    lb_8001A4CC_dontinline(filename, 0);
     setup_task(3, -1);
-    setup_task(8, 3)->x8 = arg2;
+    setup_task(8, 3)->x8 = file_entries;
 
-    var_r3 = lb_80019CB0(0x10);
-    if (var_r3 == 0xB) {
+    result = lb_80019CB0(0x10);
+    if (result == 0xB) {
         do {
-            var_r3 = lb_8001B6F8();
-        } while (var_r3 == 0xB);
+            result = lb_8001B6F8();
+        } while (result == 0xB);
     }
-    return var_r3;
+    return result;
 }
 
-int lb_8001BE30(int arg0, const char* arg1, UNK_T arg2, const char* arg3,
-                int arg4, int arg5, UNK_T arg6, UNK_T arg7)
+int lb_8001BE30(int chan, const char* filename, UNK_T file_entries,
+                const char* read_buf, int read_offset, int read_len,
+                UNK_T status_out, UNK_T callback)
 {
-    lb_80019EF0(arg0, 0, arg6, arg7);
+    lb_80019EF0(chan, 0, status_out, callback);
     setup_task(0, 0x10000);
     setup_task(1, 0x201);
-    lb_8001A4CC_dontinline(arg1, 0);
+    lb_8001A4CC_dontinline(filename, 0);
     setup_task(3, -1);
     setup_task(10, 2);
-    lb_80432A68.unk_14 = arg3;
-    lb_80432A68.unk_18 = arg4;
-    lb_80432A68.unk_1C = arg5;
-    setup_task(9, 3)->x8 = arg2;
+    lb_80432A68.unk_14 = read_buf;
+    lb_80432A68.unk_18 = read_offset;
+    lb_80432A68.unk_1C = read_len;
+    setup_task(9, 3)->x8 = file_entries;
     return lb_80019CB0(0x10);
 }
 
-int lb_8001BF04(int arg0, char* arg1, void* arg2, const char* arg3, int arg4,
-                int arg5, UNK_T arg6)
+int lb_8001BF04(int chan, char* filename, void* file_entries,
+                const char* write_buf, int write_offset, int write_len,
+                UNK_T status_out)
 {
-    lb_80019EF0(arg0, 0, arg6, 0);
+    lb_80019EF0(chan, 0, status_out, 0);
     setup_task(0, 0x10000);
     setup_task(1, 0x201);
-    lb_8001A4CC_dontinline(arg1, 0);
+    lb_8001A4CC_dontinline(filename, 0);
     setup_task(3, -1);
     setup_task(11, 2);
-    lb_80432A68.unk_14 = arg3;
-    lb_80432A68.unk_18 = arg4;
-    lb_80432A68.unk_1C = arg5;
-    setup_task(8, 3)->x8 = arg2;
+    lb_80432A68.unk_14 = write_buf;
+    lb_80432A68.unk_18 = write_offset;
+    lb_80432A68.unk_1C = write_len;
+    setup_task(8, 3)->x8 = file_entries;
     return lb_80019CB0(0x10);
 }
 
-int lb_8001BFD8(int arg0, UNK_T arg1, UNK_T arg2, UNK_T arg3)
+int lb_8001BFD8(int chan, UNK_T snap_buf, UNK_T snap_count, UNK_T snap_max)
 {
-    s32 var_r3;
+    s32 result;
     u8 _[0x18];
 
-    lb_80019EF0(arg0, 0, 0, 0);
+    lb_80019EF0(chan, 0, 0, 0);
     setup_task(0, 0x10000);
     setup_task(1, 0x201);
     lb_8001A4CC_dontinline(NULL, 0);
     setup_task(3, -1);
     setup_task(12, 0x80);
-    lb_80432A68.unk_20 = arg1;
-    lb_80432A68.unk_24 = arg2;
-    lb_80432A68.unk_28 = arg3;
-    var_r3 = lb_80019CB0(0x10);
-    if (var_r3 == 0xB) {
+    lb_80432A68.unk_20 = snap_buf;
+    lb_80432A68.unk_24 = snap_count;
+    lb_80432A68.unk_28 = snap_max;
+    result = lb_80019CB0(0x10);
+    if (result == 0xB) {
         do {
-            var_r3 = lb_8001B6F8();
-        } while (var_r3 == 0xB);
+            result = lb_8001B6F8();
+        } while (result == 0xB);
     }
-    return var_r3;
+    return result;
 }
 
-int lb_8001C0F4(int arg0, const char* arg1, const char* arg2, const char* arg3,
-                UNK_T arg4)
+int lb_8001C0F4(int chan, const char* name_a, const char* name_b,
+                const char* name_c, UNK_T status_out)
 {
     struct CardTask* task;
 
-    lb_80019EF0(arg0, 0, arg4, 0);
+    lb_80019EF0(chan, 0, status_out, 0);
     setup_task(0, 0x10000);
     setup_task(1, 0x201);
-    lb_8001A4CC_dontinline(arg1, 0);
+    lb_8001A4CC_dontinline(name_a, 0);
     setup_task(3, -1);
     task = setup_task(6, 14);
-    strncpy(task->x10, arg1, 0x20);
-    strncpy(task->x19, arg3, 0x20);
+    strncpy(task->x10, name_a, 0x20);
+    strncpy(task->x19, name_c, 0x20);
     task = setup_task(2, 1);
-    if (arg2 != NULL) {
+    if (name_b != NULL) {
         task->xC = task->x10;
-        strncpy(task->x10, arg2, 0x20);
+        strncpy(task->x10, name_b, 0x20);
     } else {
         task->xC = NULL;
     }
     task->x8 = 0;
     setup_task(3, -1);
     task = setup_task(6, 14);
-    strncpy(task->x10, arg2, 0x20);
-    strncpy(task->x19, arg1, 0x20);
+    strncpy(task->x10, name_b, 0x20);
+    strncpy(task->x19, name_a, 0x20);
     task = setup_task(2, 1);
-    if (arg3 != NULL) {
+    if (name_c != NULL) {
         task->xC = task->x10;
-        strncpy(task->x10, arg3, 0x20);
+        strncpy(task->x10, name_c, 0x20);
     } else {
         task->xC = NULL;
     }
     task->x8 = 0;
     setup_task(3, -1);
     task = setup_task(6, 14);
-    strncpy(task->x10, arg3, 0x20);
-    strncpy(task->x19, arg2, 0x20);
+    strncpy(task->x10, name_c, 0x20);
+    strncpy(task->x19, name_b, 0x20);
     return lb_80019CB0(0x10);
 }
 
-int lb_8001C2D8(int arg0, const char* arg1, const char* arg2, const char* arg3)
+int lb_8001C2D8(int chan, const char* company, const char* game_name,
+                const char* filename)
 {
     int enabled;
-    int var_r31;
-    s32 var_r3;
-    struct CardTask* temp_r3;
-    struct CardTask* temp_r3_2;
-    struct CardTask* temp_r3_3;
-    struct CardTask* temp_r3_4;
+    int unused;
+    s32 result;
+    struct CardTask* task;
+    struct CardTask* unused_1;
+    struct CardTask* unused_2;
+    struct CardTask* unused_3;
 
-    lb_80019EF0(arg0, 0, 0, 0);
+    lb_80019EF0(chan, 0, 0, 0);
     setup_task(0, 0x10000);
     setup_task(1, 0x201);
     lb_8001A4CC_dontinline(NULL, 0);
     setup_task(3, -1);
-    temp_r3_4 = setup_task(0xD, 0x80);
-    strncpy(lb_80432A68.x2C, arg1, 2U);
-    strncpy(lb_80432A68.x2F, arg2, 4U);
-    strncpy(temp_r3_4->x10, arg3, 0x20U);
-    var_r3 = lb_80019CB0(0x10);
-    if (var_r3 == 0xB) {
+    task = setup_task(0xD, 0x80);
+    strncpy(lb_80432A68.x2C, company, 2U);
+    strncpy(lb_80432A68.x2F, game_name, 4U);
+    strncpy(task->x10, filename, 0x20U);
+    result = lb_80019CB0(0x10);
+    if (result == 0xB) {
         do {
-            var_r3 = lb_8001B6F8();
-        } while (var_r3 == 0xB);
+            result = lb_8001B6F8();
+        } while (result == 0xB);
     }
-    return var_r3;
+    return result;
 }
 
-int lb_8001C404(int arg0)
+int lb_8001C404(int chan)
 {
-    s32 sp10;
-    s32 spC;
-    return lb_80019BB8(CARDProbeEx(arg0, &sp10, &spC));
+    s32 memsize;
+    s32 sectorsize;
+    return lb_80019BB8(CARDProbeEx(chan, &memsize, &sectorsize));
 }
 
-int lb_8001C4A8(void* arg0, void* arg1)
+int lb_8001C4A8(void* file_entries, void* icon_data)
 {
     struct {
         int unk0, unk4, unk8;
-    }* var_r30;
+    }* entry;
     int i;
 
-    var_r30 = arg0;
+    entry = file_entries;
     hsd_803B24E4(&lb_80432A68.unk_A8, 0, 0x2000, lb_80432A68.lib_area);
-    hsd_803B2ADC(&lb_80432A68.unk_A8, arg1);
+    hsd_803B2ADC(&lb_80432A68.unk_A8, icon_data);
     i = 0;
-    while (var_r30->unk0 != -1) {
-        if (var_r30->unk0 != 0) {
+    while (entry->unk0 != -1) {
+        if (entry->unk0 != 0) {
             hsd_803AC3E0((struct hsd_803AC3E0_arg0_t*) &lb_80432A68.unk_A8, i,
-                         var_r30->unk0, var_r30->unk4, var_r30->unk8);
+                         entry->unk0, entry->unk4, entry->unk8);
         }
         i++;
-        var_r30++;
+        entry++;
     }
     return hsd_803B2674((CardState*) &lb_80432A68.unk_A8);
 }

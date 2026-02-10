@@ -4,62 +4,62 @@
 
 int assign_reg(int num, u32* unused, HSD_TExpDag* list, int* order)
 {
-    u8 sp20[4] = { 0 };
-    u8 sp1C[4] = { 0 };
-    HSD_TETev* var_r29;
-    HSD_TExpDag* temp_r27;
+    u8 color_refs[4] = { 0 };
+    u8 alpha_refs[4] = { 0 };
+    HSD_TETev* tev;
+    HSD_TExpDag* dag_entry;
     int idx;
     int i;
-    int var_r24 = 4;
-    int var_r23 = 4;
-    int temp_r5;
+    int min_color_reg = 4;
+    int min_alpha_reg = 4;
+    int alpha_ref_count;
     PAD_STACK(4);
 
     for (idx = num - 1; idx >= 0; idx--) {
-        temp_r27 = &list[order[idx]];
-        var_r29 = temp_r27->tev;
+        dag_entry = &list[order[idx]];
+        tev = dag_entry->tev;
 
         for (i = 0; i < 4; i++) {
-            if (HSD_TExpGetType(var_r29->c_in[i].exp) == HSD_TE_TEV) {
-                if (var_r29->c_in[i].sel == 1) {
-                    sp20[var_r29->c_in[i].exp->tev.c_dst] -= 1;
+            if (HSD_TExpGetType(tev->c_in[i].exp) == HSD_TE_TEV) {
+                if (tev->c_in[i].sel == 1) {
+                    color_refs[tev->c_in[i].exp->tev.c_dst] -= 1;
                 } else {
-                    sp1C[var_r29->c_in[i].exp->tev.a_dst] -= 1;
+                    alpha_refs[tev->c_in[i].exp->tev.a_dst] -= 1;
                 }
             }
-            if (HSD_TExpGetType(var_r29->a_in[i].exp) == HSD_TE_TEV) {
-                sp1C[var_r29->a_in[i].exp->tev.a_dst] -= 1;
+            if (HSD_TExpGetType(tev->a_in[i].exp) == HSD_TE_TEV) {
+                alpha_refs[tev->a_in[i].exp->tev.a_dst] -= 1;
             }
         }
 
-        var_r29 = temp_r27->tev;
-        if (var_r29->c_ref > 0) {
+        tev = dag_entry->tev;
+        if (tev->c_ref > 0) {
             for (i = 3; i >= 0; i--) {
-                if (sp20[i] == 0) {
-                    sp20[i] = var_r29->c_ref;
-                    var_r29->c_dst = i;
-                    if (var_r24 > i) {
-                        var_r24 = i;
+                if (color_refs[i] == 0) {
+                    color_refs[i] = tev->c_ref;
+                    tev->c_dst = i;
+                    if (min_color_reg > i) {
+                        min_color_reg = i;
                     }
                     break;
                 }
             }
         }
-        temp_r5 = var_r29->a_ref;
-        if (temp_r5 > 0) {
+        alpha_ref_count = tev->a_ref;
+        if (alpha_ref_count > 0) {
             for (i = 3; i >= 0; i--) {
-                if (sp1C[i] == 0) {
-                    sp1C[i] = temp_r5;
-                    var_r29->a_dst = i;
-                    if (var_r23 > i) {
-                        var_r23 = i;
+                if (alpha_refs[i] == 0) {
+                    alpha_refs[i] = alpha_ref_count;
+                    tev->a_dst = i;
+                    if (min_alpha_reg > i) {
+                        min_alpha_reg = i;
                     }
                     break;
                 }
             }
         }
     }
-    return (4 - var_r24) + (4 - var_r23);
+    return (4 - min_color_reg) + (4 - min_alpha_reg);
 }
 
 void order_dag(int num, int* dep, int* full_dep, HSD_TExpDag* list, int depth,
@@ -289,77 +289,79 @@ static int HSD_TExpDag_80407AA0_64[8] = {
 void HSD_TExpSchedule(int num, HSD_TExpDag* list, HSD_TExp** result,
                       HSD_TExpRes* resource)
 {
-    int* var_r29;
-    HSD_TExp** var_r28;
-    int var_r27;
-    u8 temp_r0;
-    u8 temp_r0_2;
-    int var_r7;
+    int* order_ptr;
+    HSD_TExp** result_ptr;
+    int count;
+    u8 c_dst_reg;
+    u8 a_dst_reg;
+    int j;
     int idx;
     int i;
 
-    int sp1AC[32];
-    int sp12C[32];
-    int spAC[32];
-    int sp2C[32];
-    int sp28;
+    int dep_matrix[32];
+    int full_dep_matrix[32];
+    int work_order[32];
+    int best_order[32];
+    int best_score;
 
-    sp28 = 5;
-    memset(sp2C, 0, sizeof(sp2C));
+    best_score = 5;
+    memset(best_order, 0, sizeof(best_order));
 
     for (idx = 0; idx < num; idx++) {
         HSD_TExpDag* dag = &list[idx];
-        sp1AC[idx] = 0;
-        for (var_r7 = 0; var_r7 < dag->nb_dep; var_r7++) {
-            sp1AC[idx] |= 1 << dag->depend[var_r7]->idx;
+        dep_matrix[idx] = 0;
+        for (j = 0; j < dag->nb_dep; j++) {
+            dep_matrix[idx] |= 1 << dag->depend[j]->idx;
         }
     }
 
-    make_full_dependancy_mtx(num, sp1AC, sp12C);
-    // sp8 = &spAC;
-    var_r29 = sp2C;
-    // spC = &sp28;
-    // sp10 = var_r29;
-    order_dag(num, sp1AC, sp12C, list, 0, 0, 0, 0, spAC, &sp28, var_r29);
-    var_r28 = result;
-    var_r27 = 0;
-    while (var_r27 < num) {
-        *var_r28 = (HSD_TExp*) list[*var_r29].tev;
-        temp_r0 = (*var_r28)->tev.c_dst;
-        if (temp_r0 != 0xFF) {
-            resource->reg[temp_r0 + 4].color = 3;
+    make_full_dependancy_mtx(num, dep_matrix, full_dep_matrix);
+    // sp8 = &work_order;
+    order_ptr = best_order;
+    // spC = &best_score;
+    // sp10 = order_ptr;
+    order_dag(num, dep_matrix, full_dep_matrix, list, 0, 0, 0, 0, work_order,
+              &best_score, order_ptr);
+    result_ptr = result;
+    count = 0;
+    while (count < num) {
+        *result_ptr = (HSD_TExp*) list[*order_ptr].tev;
+        c_dst_reg = (*result_ptr)->tev.c_dst;
+        if (c_dst_reg != 0xFF) {
+            resource->reg[c_dst_reg + 4].color = 3;
 
             for (i = 0; i < 4; i++) {
-                if (HSD_TExpGetType((*var_r28)->tev.c_in[i].exp) == HSD_TE_TEV)
+                if (HSD_TExpGetType((*result_ptr)->tev.c_in[i].exp) ==
+                    HSD_TE_TEV)
                 {
-                    if ((*var_r28)->tev.c_in[i].sel == 1) {
-                        (*var_r28)->tev.c_in[i].arg =
-                            HSD_TExpDag_80407AA0_44[(*var_r28)->tev.c_in[i]
-                                                        .exp->tev.c_dst];
+                    if ((*result_ptr)->tev.c_in[i].sel == 1) {
+                        (*result_ptr)->tev.c_in[i].arg =
+                            HSD_TExpDag_80407AA0_44
+                                [(*result_ptr)->tev.c_in[i].exp->tev.c_dst];
                     } else {
-                        (*var_r28)->tev.c_in[i].arg =
-                            HSD_TExpDag_80407AA0_54[(*var_r28)->tev.c_in[i]
-                                                        .exp->tev.c_dst];
+                        (*result_ptr)->tev.c_in[i].arg =
+                            HSD_TExpDag_80407AA0_54
+                                [(*result_ptr)->tev.c_in[i].exp->tev.c_dst];
                     }
                 }
             }
         }
-        temp_r0_2 = (*var_r28)->tev.a_dst;
-        if (temp_r0_2 != 0xFF) {
-            resource->reg[temp_r0_2 + 4].alpha = 1;
+        a_dst_reg = (*result_ptr)->tev.a_dst;
+        if (a_dst_reg != 0xFF) {
+            resource->reg[a_dst_reg + 4].alpha = 1;
 
             for (i = 0; i < 4; i++) {
-                if (HSD_TExpGetType((*var_r28)->tev.a_in[i].exp) == HSD_TE_TEV)
+                if (HSD_TExpGetType((*result_ptr)->tev.a_in[i].exp) ==
+                    HSD_TE_TEV)
                 {
-                    (*var_r28)->tev.a_in[i].arg =
-                        HSD_TExpDag_80407AA0_64[(*var_r28)->tev.a_in[i]
-                                                    .exp->tev.a_dst];
+                    (*result_ptr)->tev.a_in[i].arg = HSD_TExpDag_80407AA0_64
+                        [(*result_ptr)->tev.a_in[i].exp->tev.a_dst];
                 }
             }
         }
-        var_r29 += 1;
-        var_r28 += 1;
-        var_r27 += 1;
+        order_ptr += 1;
+        result_ptr += 1;
+        count += 1;
     }
 }
 

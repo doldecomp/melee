@@ -56,26 +56,27 @@ struct HSD_SM {
 /* 38C6C0 */ void AXDriver_8038C6C0(HSD_SM* v);
 /* 38CFF4 */ int AXDriver_8038CFF4(int sound_id, u8 volume, u8 pan, int track,
                                    int channel);
-/* 38D2B4 */ bool AXDriver_8038D2B4(int arg0, u8 arg1);
-/* 38D3B8 */ bool AXDriver_8038D3B8(s32 arg0, u8 arg1);
-/* 38D4E4 */ bool AXDriver_8038D4E4(s32 arg0, s16 arg1);
-/* 38D5B4 */ bool AXDriver_8038D5B4(s32 arg0, s32 arg1, u8 arg2);
-/* 38D914 */ bool AXDriver_8038D914(s32 arg0, s32 arg1, s8 arg2);
-/* 38D9D8 */ bool AXDriver_8038D9D8(int arg0);
+/* 38D2B4 */ bool AXDriver_8038D2B4(int vid, u8 pan);
+/* 38D3B8 */ bool AXDriver_8038D3B8(s32 vid, u8 volume);
+/* 38D4E4 */ bool AXDriver_8038D4E4(s32 vid, s16 pitch);
+/* 38D5B4 */ bool AXDriver_8038D5B4(s32 vid, s32 aux_bus, u8 send_level);
+/* 38D914 */ bool AXDriver_8038D914(s32 channel, s32 aux_bus, s8 send_level);
+/* 38D9D8 */ bool AXDriver_8038D9D8(int vid);
 /* 38DA70 */ void AXDriver_8038DA70(const char* path, void (*callback)(void));
 /* 38DCFC */ void AXDriver_8038DCFC(void);
 /* 38DD30 */ int AXDriverSetupAux(int channel, AXDriverAuxType type,
                                   void* param);
 /* 38E034 */ s32 AXDriver_8038E034(AXDriverAuxType type, void* param);
-/* 38E30C */ bool AXDriver_8038E30C(s32 arg0, s32 arg1, void* arg2, u8* arg3,
-                                    u32 arg4);
+/* 38E30C */ bool AXDriver_8038E30C(s32 channel, s32 type, void* param,
+                                    u8* heap, u32 heap_size);
 /* 38E37C */ bool AXDriver_8038E37C(AXDriverAuxType type, void* param);
-/* 38E498 */ void AXDriver_8038E498(int arg0, int arg1, int arg2, int arg3);
+/* 38E498 */ void AXDriver_8038E498(int voices, int priority, int sample_rate,
+                                    int aram_size);
 /* 38E5D4 */ int AXDriver_8038E5D4(void);
 /* 38E5DC */ int AXDriver_8038E5DC(void);
-/* 38E6C0 */ bool AXDriver_8038E6C0(int arg0);
-/* 38E844 */ bool AXDriver_8038E844(int arg0);
-/* 38E8EC */ bool AXDriver_8038E8EC(const char* arg0, u8 arg1, int arg2);
+/* 38E6C0 */ bool AXDriver_8038E6C0(int channel);
+/* 38E844 */ bool AXDriver_8038E844(int channel);
+/* 38E8EC */ bool AXDriver_8038E8EC(const char* path, u8 volume, int track);
 /* 38E968 */ bool AXDriverStop(void);
 /* 38E9A8 */ bool AXDriverPause(void);
 /* 38E9E0 */ bool AXDriverResume(void);

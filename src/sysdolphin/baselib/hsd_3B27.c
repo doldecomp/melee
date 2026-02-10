@@ -102,7 +102,7 @@ int hsd_803B2928(s32* arg0, const char* arg1, int arg2, int arg3,
     return 0;
 }
 
-int hsd_803B29D8(s32* arg0, int arg1, int arg2, UNK_T arg3)
+int hsd_803B29D8(s32* ctx, int channel, int size, UNK_T callback)
 {
     s32 read_idx = hsd_804D7990;
     u8* base = hsd_804D1138;
@@ -119,10 +119,10 @@ int hsd_803B29D8(s32* arg0, int arg1, int arg2, UNK_T arg3)
     {
         s32 next = write_idx + 1;
         entry->type = 1;
-        entry->f1 = (s32)arg0;
-        entry->f2 = arg1;
-        entry->f3 = arg2;
-        entry->f5 = (s32)arg3;
+        entry->f1 = (s32) ctx;
+        entry->f2 = channel;
+        entry->f3 = size;
+        entry->f5 = (s32) callback;
         hsd_804D7994 = next % 32;
     }
 
@@ -163,9 +163,9 @@ int hsd_803B2A4C(s32* arg0, int arg1, int arg2, void (*arg3)(int, int))
     return 0;
 }
 
-int hsd_803B2ADC(s32* arg0, UNK_T arg1)
+int hsd_803B2ADC(s32* ctx, UNK_T data)
 {
-    memcpy(&arg0[236], arg1, 18);
-    arg0[9] = hsd_803AC340(&arg0[236]);
+    memcpy(&ctx[236], data, 18);
+    ctx[9] = hsd_803AC340(&ctx[236]);
     return 0;
 }
