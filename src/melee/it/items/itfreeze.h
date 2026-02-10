@@ -8,7 +8,7 @@
 #include "it/items/types.h"
 
 /* 28EB88 */ UNK_RET it_8028EB88(UNK_PARAMS);
-/* 28EC98 */ UNK_RET it_8028EC98(UNK_PARAMS);
+/* 28EC98 */ void it_8028EC98(Item_GObj* gobj, f32 vel);
 /* 28ECE0 */ void it_8028ECE0(Item_GObj* gobj);
 /* 28ECF0 */ Item* it_8028ECF0(Item_GObj* gobj, Vec3* v);
 /* 28ED10 */ void itFreeze_Logic17_Destroyed(Item_GObj*);
@@ -35,11 +35,11 @@
 /* 28F3EC */ bool itFreeze_Logic17_Reflected(Item_GObj*);
 /* 28F40C */ bool itFreeze_Logic17_ShieldBounced(Item_GObj*);
 /* 28F42C */ bool itFreeze_Logic17_DmgReceived(Item_GObj*);
-/* 28F434 */ UNK_RET it_8028F434(UNK_PARAMS);
+/* 28F434 */ void it_8028F434(Item_GObj*, f32 vel, Item_GObj* ref_gobj);
 /* 28F4AC */ bool itFreeze_UnkMotion4_Anim(Item_GObj* gobj);
 /* 28F4B4 */ void itFreeze_UnkMotion4_Phys(Item_GObj* gobj);
 /* 28F560 */ bool itFreeze_UnkMotion4_Coll(Item_GObj* gobj);
-/* 28F7C8 */ UNK_RET it_8028F7C8(UNK_PARAMS);
+/* 28F7C8 */ void it_8028F7C8(Item_GObj* gobj);
 /* 28F828 */ bool itFreeze_UnkMotion5_Anim(Item_GObj* gobj);
 /* 28F830 */ void itFreeze_UnkMotion5_Phys(Item_GObj* gobj);
 /* 28F834 */ bool itFreeze_UnkMotion5_Coll(Item_GObj* gobj);

@@ -430,6 +430,8 @@ struct grIceMt_GroundVars {
     /* +0 gp+D8 */ u32 xF0; // padding
     /* +0 gp+D8 */ s16 xF4[2];
     /* +0 gp+D8 */ HSD_GObj* xF8[5];
+    /* +0 gp+D8 */ s16 x10C;
+    /* +0 gp+D8 */ s16 x10E;
 };
 struct grIceMt_GroundVars2 {
     /* +0 gp+C4 */ f32 xC4;
@@ -751,8 +753,9 @@ struct grGreens_GroundVars {
 };
 
 struct grMuteCity_GroundVars {
-    /* +0x00 gp+C4) */ u32 xC4;
-    /* +0x00 gp+C8) */ u32 xC8;
+    /* +0x00 gp+C4) */ s16 xC4;
+    /* +0x02 gp+C6) */ s16 xC6;
+    /* +0x04 gp+C8) */ u32 xC8;
     /* +0x00 gp+CC) */ u32 xCC;
     /* +0x00 gp+D0) */ struct {
         u8 b0 : 1;

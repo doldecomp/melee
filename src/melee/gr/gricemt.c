@@ -638,12 +638,13 @@ bool grIceMt_801F8154(Ground_GObj* param1)
     return false;
 }
 
-/// #grIceMt_801F815C
 void grIceMt_801F815C(Ground_GObj* param1)
 {
+    Ground* gp = GET_GROUND(param1);
+    grIceMt_801F929C(param1, &gp->gv.icemt.xF8[2]);
+    grIceMt_801F929C(param1, &gp->gv.icemt.x10E);
     grIceMt_801F98A8(param1);
     Ground_801C2FE0(param1);
-    return;
 }
 
 /// #grIceMt_801F81B4

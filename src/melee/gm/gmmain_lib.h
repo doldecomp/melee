@@ -148,7 +148,7 @@
 /* 15EEB4 */ void gmMainLib_8015EEB4(void);
 /* 15EEC8 */ void gmMainLib_8015EEC8(void);
 /* 15EF30 */ void gmMainLib_8015EF30(struct gmMainLib_8015EF30_s* arg0);
-/* 15EF84 */ UNK_RET InitializePersistentNameData(UNK_PARAMS);
+/* 15EF84 */ void InitializePersistentNameData(s32);
 /* 15F150 */ UNK_RET gmMainLib_8015F150(UNK_PARAMS);
 /* 15F260 */ UNK_RET gmMainLib_8015F260(UNK_PARAMS);
 /* 15F464 */ void gmMainLib_8015F464(void);
