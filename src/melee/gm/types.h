@@ -671,7 +671,7 @@ struct Unk1PData {
     /* 01 */ u8 color;
     /* 02 */ u8 cpu_level;
     /* 03 */ u8 slot;
-    /* 04 */ u8 x4; // EntryName Slot
+    /* 04 */ u8 x4; ///< EntryName Slot
     /* 05 */ u8 stocks;
     /* 06 */ u8 x6;
     /* 07 */ u8 x7;
