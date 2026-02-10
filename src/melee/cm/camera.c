@@ -902,7 +902,7 @@ void Camera_8002A28C(CameraBounds* arg0)
 }
 
 /// @note doesnt check all stages...
-// probably was a bandaid for problem stages
+/// probably was a bandaid for problem stages
 inline float get_stage_floor_height(InternalStageId stage_id)
 {
     float height = -F32_MAX;
@@ -1607,7 +1607,7 @@ s32 Camera_8002BA00(s32 slot, s32 arg1)
     return Camera_8002BA00(slot, arg1);
 }
 
-// Camera_PauseZoom
+/// Camera_PauseZoom
 void Camera_8002BAA8(f32 zoom_amt)
 {
     Vec3 offset;
@@ -1683,7 +1683,7 @@ s32 Camera_8002BC78(Vec3* forward, Vec3* up, Vec3* right)
     return clamp_result;
 }
 
-// Camera_PauseRotate
+/// Camera_PauseRotate
 void Camera_8002BD88(f32 x, f32 y)
 {
     f32 scale;
@@ -1741,9 +1741,9 @@ void Camera_8002BD88(f32 x, f32 y)
 
     if (x != 0.0F) {
         // scale = x * ((view_dir * cm_803BCCA0._44[0x1E]) +
-        // cm_803BCCA0._44[0x1F]);
-        // TODO :: cant figure out how to get it to run the same logic as the y
-        // case without it allocating stack space for it
+        // cm_803BCCA0._44[0x1F]); ///< @todo :: cant figure out how to get it
+        // to run the same logic as the y case without it allocating stack
+        // space for it
         scale = x * ((view_dir * 0.025F) + 0.2F); // fake
         right.x *= -scale;
         right.y *= -scale;
@@ -2901,7 +2901,7 @@ void Camera_8002F760(s8 arg0, s8 arg1)
     Camera_8002F4D4(arg0, arg1, 1);
 }
 
-// Camera_SetModeTraining
+/// Camera_SetModeTraining
 void Camera_8002F784(s8 slot, s8 arg1)
 {
     cm_80452C68.mode = CAMERA_TRAINING_MENU;
@@ -3461,7 +3461,7 @@ bool Camera_80030BA8(void)
     return cm_80452C68.x39A_b2;
 }
 
-// Camera_ToScreen
+/// Camera_ToScreen
 bool Camera_80030BBC(Point3d* arg0, S32Vec2* arg1)
 {
     Point3d point;
@@ -3502,7 +3502,7 @@ bool Camera_80030CD8(CmSubject* arg0, S32Vec2* arg1)
     return Camera_80030BBC(&arg0->x1C, arg1);
 }
 
-// Camera_IsSubjectOnScreen
+/// Camera_IsSubjectOnScreen
 bool Camera_80030CFC(CmSubject* cam_box, f32 tolerance)
 {
     HSD_CObj* cobj;

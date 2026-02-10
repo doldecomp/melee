@@ -80,7 +80,7 @@
 #include <baselib/random.h>
 #include <MSL/math.h>
 
-// External variables from ftKb_Init.c
+/// External variables from ftKb_Init.c
 extern bool ftKb_Init_803CB490[];
 
 struct ftKb_Init_803CB4EC_t {
@@ -89,7 +89,7 @@ struct ftKb_Init_803CB4EC_t {
 };
 extern struct ftKb_Init_803CB4EC_t ftKb_Init_803CB4EC;
 
-// Forward declarations
+/// Forward declarations
 void fn_800F9260(HSD_GObj*);
 void fn_800F64C8(Fighter_GObj*, float);
 void fn_800F6178(HSD_GObj* gobj);
@@ -331,7 +331,7 @@ void ftKb_SpecialHi1_Phys(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftCo_DatAttrs* temp_r30 = &fp->co_attrs;
     ftKb_DatAttrs* dat_attr = fp->dat_attrs;
-    PAD_STACK(4); // Todo: Remove This
+    PAD_STACK(4); ///< @todo Remove This
     ft_80084FA8(gobj);
     ftCommon_8007CADC(fp, 0.0f,
                       temp_r30->air_drift_stick_mul *
@@ -345,7 +345,7 @@ void ftKb_SpecialHi2_Phys(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftCo_DatAttrs* temp_r30 = &fp->co_attrs;
     ftKb_DatAttrs* dat_attr = fp->dat_attrs;
-    PAD_STACK(4); // Todo: Remove This
+    PAD_STACK(4); ///< @todo Remove This
     ft_80085134(gobj);
     ftCommon_8007CADC(fp, 0.0f,
                       temp_r30->air_drift_stick_mul *

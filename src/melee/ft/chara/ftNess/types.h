@@ -101,7 +101,7 @@ union ftNess_MotionVars {
     } speciallw;
 };
 
-// Special Attributes
+/// Special Attributes
 
 typedef struct ftNessAttributes {
     // Neutral Special - PK Flash

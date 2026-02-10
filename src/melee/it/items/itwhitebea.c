@@ -115,8 +115,8 @@ void it_802E3784(Item_GObj* gobj, Item_GObj* ref_gobj)
     it_8026B894(gobj, ref_gobj);
 }
 
-// This function only called by itFreeze_Logic17_PickedUp from itfreeze, so
-// using those item vars
+/// This function only called by itFreeze_Logic17_PickedUp from itfreeze, so
+/// using those item vars
 void it_802E37A4(Item_GObj* gobj)
 {
     if (gobj != NULL) {

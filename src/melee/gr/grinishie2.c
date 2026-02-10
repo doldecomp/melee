@@ -239,10 +239,10 @@ bool grInishie2_801FCF24(Ground_GObj* gobj)
     return 0;
 }
 
-// TODO: this stage and mushroom kingdom 1 both change the music when there's
-// less than 20 seconds, since this function is copy-pasted from
-// grInishie1_801FCB10 then Ground_801C5A94 is probably getting a stage
-// identifier of some kind
+/// @todo this stage and mushroom kingdom 1 both change the music when there's
+/// less than 20 seconds, since this function is copy-pasted from
+/// grInishie1_801FCB10 then Ground_801C5A94 is probably getting a stage
+/// identifier of some kind
 void grInishie2_801FCF2C(HSD_GObj* gobj)
 {
     int time_remaining;
@@ -367,8 +367,7 @@ void grInishie2_801FD224(Ground_GObj* gobj)
     Ground_801C2FE0(gobj);
 
     gp = gobj->user_data;
-    if (grAnime_801C83D0(gobj, 0, 1)) {
-        // TODO: union irregularity
+    if (grAnime_801C83D0(gobj, 0, 1)) { ///< @todo union irregularity
         Ground* gp_2 = GET_GROUND(gp->gv.inishie22.xCC);
         if (gp->gv.inishie2.xC8 == 0) {
             gp_2->gv.inishie2.xC4_flags.b6 = 1;
@@ -445,7 +444,7 @@ void grInishie2_801FD4CC(HSD_GObj* gobj)
     mpLib_80057BC0(0xE);
 }
 
-// probably chooses which side to spawn Birdo on
+/// probably chooses which side to spawn Birdo on
 void grInishie2_801FD4F0(Ground_GObj* gobj)
 {
     Vec3 vec;
@@ -693,8 +692,7 @@ void grInishie2_801FDED8(Ground_GObj* gobj)
         var_r0 = 1;
     } else {
         var_r0 = 0;
-    }
-    // TODO: union irregularity
+    } ///< @todo union irregularity
     if ((var_r0 != 0) && gp->gv.inishie23.xC8_flags.b0) {
         HSD_GObj* gobj_2 = gp->gv.inishie22.xC4;
         Ground* gp_2 = GET_GROUND(gobj_2);

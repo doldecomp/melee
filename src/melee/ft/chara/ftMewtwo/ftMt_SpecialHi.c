@@ -134,13 +134,13 @@ void ftMt_SpecialAirHiStart_Anim(HSD_GObj* gobj)
     }
 }
 
-// Mewtwo's grounded Teleport Start IASA callback
+/// Mewtwo's grounded Teleport Start IASA callback
 void ftMt_SpecialHiStart_IASA(HSD_GObj* gobj) {}
 
-// Mewtwo's aerial Teleport Start IASA callback
+/// Mewtwo's aerial Teleport Start IASA callback
 void ftMt_SpecialAirHiStart_IASA(HSD_GObj* gobj) {}
 
-// Mewtwo's grounded Teleport Start Physics callback
+/// Mewtwo's grounded Teleport Start Physics callback
 void ftMt_SpecialHiStart_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
@@ -242,19 +242,19 @@ void ftMt_SpecialAirHiLost_Anim(HSD_GObj* gobj)
     }
 }
 
-// Mewtwo's grounded Teleport Zoom IASA callback
+/// Mewtwo's grounded Teleport Zoom IASA callback
 void ftMt_SpecialHiLost_IASA(HSD_GObj* gobj) {}
 
-// Mewtwo's aerial Teleport Zoom IASA callback
+/// Mewtwo's aerial Teleport Zoom IASA callback
 void ftMt_SpecialAirHiLost_IASA(HSD_GObj* gobj) {}
 
-// Mewtwo's grounded Teleport Zoom Physics callback
+/// Mewtwo's grounded Teleport Zoom Physics callback
 void ftMt_SpecialHiLost_Phys(HSD_GObj* gobj)
 {
     ftCommon_ApplyGroundMovement(gobj);
 }
 
-// Mewtwo's aerial Teleport Zoom Physics callback
+/// Mewtwo's aerial Teleport Zoom Physics callback
 void ftMt_SpecialAirHiLost_Phys(HSD_GObj* gobj) {}
 
 /// Mewtwo's grounded Teleport Zoom Collision callback
@@ -563,13 +563,13 @@ void ftMt_SpecialAirHi_Anim(HSD_GObj* gobj)
     }
 }
 
-// Mewtwo's grounded Teleport End IASA callback
+/// Mewtwo's grounded Teleport End IASA callback
 void ftMt_SpecialHi_IASA(HSD_GObj* gobj) {}
 
-// Mewtwo's aerial Teleport End IASA callback
+/// Mewtwo's aerial Teleport End IASA callback
 void ftMt_SpecialAirHi_IASA(HSD_GObj* gobj) {}
 
-// Mewtwo's grounded Teleport End Physics callback
+/// Mewtwo's grounded Teleport End Physics callback
 void ftMt_SpecialHi_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);

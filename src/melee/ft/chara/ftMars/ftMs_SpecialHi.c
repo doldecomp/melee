@@ -16,8 +16,8 @@
 #include <common_structs.h>
 #include <dolphin/mtx.h>
 
-// 80138208 00134DE8
-// https://decomp.me/scratch/lrV6F
+/// 80138208 00134DE8
+/// https://decomp.me/scratch/lrV6F
 void ftMs_SpecialHi_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -32,8 +32,8 @@ void ftMs_SpecialHi_Enter(HSD_GObj* gobj)
     ftAnim_8006EBA4(gobj);
 }
 
-// 8013826C 00134E4C
-// https://decomp.me/scratch/PuVdx
+/// 8013826C 00134E4C
+/// https://decomp.me/scratch/PuVdx
 void ftMs_SpecialAirHi_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -53,8 +53,8 @@ void ftMs_SpecialAirHi_Enter(HSD_GObj* gobj)
     ftAnim_8006EBA4(gobj);
 }
 
-// 801382E8 00134EC8
-// https://decomp.me/scratch/56Ycw
+/// 801382E8 00134EC8
+/// https://decomp.me/scratch/56Ycw
 void ftMs_SpecialHi_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -67,8 +67,8 @@ void ftMs_SpecialHi_Anim(HSD_GObj* gobj)
     }
 }
 
-// 80138348 00134F28
-// https://decomp.me/scratch/WdpFi
+/// 80138348 00134F28
+/// https://decomp.me/scratch/WdpFi
 void ftMs_SpecialAirHi_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -109,8 +109,8 @@ void ftMs_SpecialHi_IASA(HSD_GObj* gobj)
     }
 }
 
-// 801384F0 001350D0
-// https://decomp.me/scratch/2yXhH
+/// 801384F0 001350D0
+/// https://decomp.me/scratch/2yXhH
 void ftMs_SpecialAirHi_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -134,8 +134,8 @@ void ftMs_SpecialAirHi_IASA(HSD_GObj* gobj)
     }
 }
 
-// 80138638 00135218
-// https://decomp.me/scratch/Wx1iY
+/// 80138638 00135218
+/// https://decomp.me/scratch/Wx1iY
 void ftMs_SpecialHi_Phys(HSD_GObj* gobj)
 {
     struct ftCo_DatAttrs* attr2;
@@ -175,8 +175,8 @@ void ftMs_SpecialHi_Phys(HSD_GObj* gobj)
     }
 }
 
-// 8013873C 0013531C
-// https://decomp.me/scratch/9gz2V
+/// 8013873C 0013531C
+/// https://decomp.me/scratch/9gz2V
 void ftMs_SpecialAirHi_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -214,8 +214,8 @@ void ftMs_SpecialAirHi_Phys(HSD_GObj* gobj)
     }
 }
 
-// 80138884 00135464
-// https://decomp.me/scratch/NTb4a
+/// 80138884 00135464
+/// https://decomp.me/scratch/NTb4a
 void ftMs_SpecialHi_80138884(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
@@ -223,8 +223,8 @@ void ftMs_SpecialHi_80138884(HSD_GObj* gobj)
     ftCo_LandingFallSpecial_Enter(gobj, false, da->x2C);
 }
 
-// 801388B4 00135494
-// https://decomp.me/scratch/3MMkJ
+/// 801388B4 00135494
+/// https://decomp.me/scratch/3MMkJ
 void ftMs_SpecialHi_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
@@ -242,8 +242,8 @@ void ftMs_SpecialHi_Coll(HSD_GObj* gobj)
     }
 }
 
-// 80138940 00135520
-// https://decomp.me/scratch/QEKrM
+/// 80138940 00135520
+/// https://decomp.me/scratch/QEKrM
 void ftMs_SpecialAirHi_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;

@@ -81,7 +81,7 @@ void ftCo_800C0764(Ground_GObj* arg0, u32 arg1, void* arg2)
 }
 
 /// @todo pretty sure arg2 is a ftDevice callback, but unsure if its
-// always of type ftDevice_Callback0.
+/// always of type ftDevice_Callback0.
 void ftCo_800C07F8(Ground_GObj* arg0, u32 arg1, void* arg2)
 {
     struct ftDeviceUnk3* temp_r6;

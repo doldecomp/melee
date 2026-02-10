@@ -904,8 +904,7 @@ s32 it_802A3E50(ItemLink* item_link, enum FighterKind arg1, f32 arg8)
     ItemLink* item_link_next_2;
     f32 temp_f2;
 
-    CollData* coll;
-    // @todo: This is seemingly the wrong struct; there should
+    CollData* coll; ///< @todo This is seemingly the wrong struct; there should
     // be floats at 0x8, 0xC, 0x14, 0x18
     mp_UnkStruct0* mp_island;
     bool flag;
@@ -1380,7 +1379,7 @@ void it_802A5770_inline(ItemLink* link_1, itLinkHookshotAttributes* arg2,
     }
 }
 
-// definitely attributes
+/// definitely attributes
 void it_802A5770(ItemLink* link_0, Vec3* arg1, itLinkHookshotAttributes* arg2,
                  Fighter* arg3)
 {
@@ -1991,8 +1990,8 @@ void it_802A7A04(HSD_GObj* arg0)
     lk_attr = fp->dat_attrs;
 
     Item_80268E5C(arg0, 8, ITEM_ANIM_UPDATE);
-    itLinkHookshot_Logic20_PickedUp_inline(arg0);
-    // @todo: should this be its own struct?
+    itLinkHookshot_Logic20_PickedUp_inline(
+        arg0); ///< @todo should this be its own struct?
     fp->mv.lk.specialn.x0.y = lk_attr->xB8;
 }
 

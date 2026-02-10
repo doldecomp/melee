@@ -16,9 +16,9 @@
 
 #include <dolphin/mtx.h>
 
-// 0x8014A848
-// https://decomp.me/scratch/hi2oZ // Spawn Fire Attack Torch and set up
-// callbacks
+/// 0x8014A848
+/// https://decomp.me/scratch/hi2oZ // Spawn Fire Attack Torch and set up
+/// callbacks
 void ftGw_ItemTorchSetup(HSD_GObj* gobj)
 {
     Vec3 sp10;
@@ -43,8 +43,8 @@ void ftGw_ItemTorchSetup(HSD_GObj* gobj)
     fp->accessory4_cb = NULL;
 }
 
-// 0x8014A904
-// https://decomp.me/scratch/rtVt4 // Set flags on Mr. Game & Watch's Torch
+/// 0x8014A904
+/// https://decomp.me/scratch/rtVt4 // Set flags on Mr. Game & Watch's Torch
 void ftGw_AttackS4_ItemTorchSetFlag(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -52,8 +52,8 @@ void ftGw_AttackS4_ItemTorchSetFlag(HSD_GObj* gobj)
     fp->fv.gw.x2254_fireGObj = NULL;
 }
 
-// 0x8014A938
-// https://decomp.me/scratch/mIWB3 // Remove Mr. Game & Watch's Torch
+/// 0x8014A938
+/// https://decomp.me/scratch/mIWB3 // Remove Mr. Game & Watch's Torch
 void ftGw_AttackS4_ItemTorchOnDamage(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -66,8 +66,8 @@ void ftGw_AttackS4_ItemTorchOnDamage(HSD_GObj* gobj)
     }
 }
 
-// 0x8014A990
-// https://decomp.me/scratch/Y9bAE // Apply hitlag to Mr. Game & Watch's item
+/// 0x8014A990
+/// https://decomp.me/scratch/Y9bAE // Apply hitlag to Mr. Game & Watch's item
 void ftGw_AttackS4_ItemTorchEnterHitlag(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -76,8 +76,8 @@ void ftGw_AttackS4_ItemTorchEnterHitlag(HSD_GObj* gobj)
     }
 }
 
-// 0x8014A9C0
-// https://decomp.me/scratch/OGia3 // End hitlag for Mr. Game & Watch's item
+/// 0x8014A9C0
+/// https://decomp.me/scratch/OGia3 // End hitlag for Mr. Game & Watch's item
 void ftGw_AttackS4_ItemTorchExitHitlag(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -86,9 +86,9 @@ void ftGw_AttackS4_ItemTorchExitHitlag(HSD_GObj* gobj)
     }
 }
 
-// 0x8014A9F0
-// https://decomp.me/scratch/cYfwo // Check if Mr. Game & Watch is performing
-// Forward Smash
+/// 0x8014A9F0
+/// https://decomp.me/scratch/cYfwo // Check if Mr. Game & Watch is performing
+/// Forward Smash
 bool ftGw_AttackS4_ItemCheckTorchRemove(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -100,9 +100,9 @@ bool ftGw_AttackS4_ItemCheckTorchRemove(HSD_GObj* gobj)
     return true;
 }
 
-// 0x8014AA10
-// https://decomp.me/scratch/GDWNx // Mr. Game & Watch's Forward Smash Action
-// State handler
+/// 0x8014AA10
+/// https://decomp.me/scratch/GDWNx // Mr. Game & Watch's Forward Smash Action
+/// State handler
 void ftGw_AttackS4_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -117,9 +117,9 @@ void ftGw_AttackS4_Enter(HSD_GObj* gobj)
     fp->accessory4_cb = ftGw_ItemTorchSetup;
 }
 
-// 0x8014AA88
-// https://decomp.me/scratch/41MqW // Mr. Game & Watch's Forward Smash
-// Animation callback
+/// 0x8014AA88
+/// https://decomp.me/scratch/41MqW // Mr. Game & Watch's Forward Smash
+/// Animation callback
 void ftGw_AttackS4_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -127,9 +127,9 @@ void ftGw_AttackS4_Anim(HSD_GObj* gobj)
     }
 }
 
-// 0x8014AAC4
-// https://decomp.me/scratch/njlQ8 // Mr. Game & Watch's Forward Smash IASA
-// callback
+/// 0x8014AAC4
+/// https://decomp.me/scratch/njlQ8 // Mr. Game & Watch's Forward Smash IASA
+/// callback
 void ftGw_AttackS4_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -139,17 +139,17 @@ void ftGw_AttackS4_IASA(HSD_GObj* gobj)
     }
 }
 
-// 0x8014AAF4
-// https://decomp.me/scratch/hNIyC // Mr. Game & Watch's Forward Smash Physics
-// callback
+/// 0x8014AAF4
+/// https://decomp.me/scratch/hNIyC // Mr. Game & Watch's Forward Smash Physics
+/// callback
 void ftGw_AttackS4_Phys(HSD_GObj* gobj)
 {
     ft_80084FA8(gobj);
 }
 
-// 0x8014AB14
-// https://decomp.me/scratch/OHANe
-// Mr. Game & Watch's Forward Smash Collision callback
+/// 0x8014AB14
+/// https://decomp.me/scratch/OHANe
+/// Mr. Game & Watch's Forward Smash Collision callback
 void ftGw_AttackS4_Coll(HSD_GObj* gobj)
 {
     ft_80084104(gobj);

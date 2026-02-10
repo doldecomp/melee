@@ -38,8 +38,8 @@
 /* 271D2C */ static void it_80271D2C(Item_GObj* arg_item_gobj);
 /* 271F78 */ static void it_80271F78(Item_GObj* arg_item_gobj);
 
-// static s8 it_803F1360[0x16] = "damage log over %d!!\n";
-// static s8 it_803F1378[9] = "itcoll.c";
+/// static s8 it_803F1360[0x16] = "damage log over %d!!\n";
+/// static s8 it_803F1378[9] = "itcoll.c";
 static u32 it_803F1384[20] = {
     /* unable to generate initializer: unknown type */
     1000, // .4byte 0x000003E8
@@ -67,29 +67,29 @@ static u32 it_803F1384[20] = {
     // over!\n"
 };
 
-// static s8 it_804D5170 = "0";
-// static s8 it_804D5174[7] = "jobj.h";
-// static s8 it_804D517C[5] = "jobj";
-// extern u32 it_804D6D18;
+/// static s8 it_804D5170 = "0";
+/// static s8 it_804D5174[7] = "jobj.h";
+/// static s8 it_804D517C[5] = "jobj";
+/// extern u32 it_804D6D18;
 extern u8 it_804D6D1C[4];
-// static f32 it_804DC6C8 = 0.0;
-// static f32 it_804DC6D0[2] = { 176.0, -0.0 };
-// static f32 it_804DC6D8 = 0.5;
-// static f32 it_804DC6DC = -1.0;
-// static f32 it_804DC6E0 = 1.0;
-// static f32 it_804DC6E4 = 0x7F7FFFFF;
-// static f32 it_804DC6E8 = 0.01;
-// static f32 it_804DC6F0[2] = { 176.0, 0.0 };
-// static f32 it_804DC6F8 = 2 * M_PI;
-// static f32 it_804DC700 = 0.001;
-// static f32 it_804DC704 = 0.999;
+/// static f32 it_804DC6C8 = 0.0;
+/// static f32 it_804DC6D0[2] = { 176.0, -0.0 };
+/// static f32 it_804DC6D8 = 0.5;
+/// static f32 it_804DC6DC = -1.0;
+/// static f32 it_804DC6E0 = 1.0;
+/// static f32 it_804DC6E4 = 0x7F7FFFFF;
+/// static f32 it_804DC6E8 = 0.01;
+/// static f32 it_804DC6F0[2] = { 176.0, 0.0 };
+/// static f32 it_804DC6F8 = 2 * M_PI;
+/// static f32 it_804DC700 = 0.001;
+/// static f32 it_804DC704 = 0.999;
 
-// struct LogEntry {
-//     s32 x0, x4, x8, xC;
-// };
-// static const int n_log_entries = 15;
-// static const int it_804A0E70_entries = 15;
-// extern struct LogEntry it_804A0E70[n_log_entries];
+/// struct LogEntry {
+///     s32 x0, x4, x8, xC;
+/// };
+/// static const int n_log_entries = 15;
+/// static const int it_804A0E70_entries = 15;
+/// extern struct LogEntry it_804A0E70[n_log_entries];
 extern struct HSD_ObjAllocUnk7 it_804A0E70[15];
 
 void it_8026F9AC(s32 arg0, void* fighter, HitCapsule* hit, HurtCapsule* hurt)

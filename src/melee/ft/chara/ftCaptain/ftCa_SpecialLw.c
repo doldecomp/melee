@@ -23,10 +23,10 @@
 #include <common_structs.h>
 #include <dolphin/mtx.h>
 
-// /* literal */ float const ftCa_SpecialHi_804D9220 = 0.0F;
-// /* literal */ float const ftCa_SpecialHi_804D9224 = 0.01745329238474369f;
-// /* literal */ float const ftCa_SpecialHi_804D9228 = 1;
-// /* literal */ float const ftCa_SpecialHi_804D922C = -1;
+/// /* literal */ float const ftCa_SpecialHi_804D9220 = 0.0F;
+/// /* literal */ float const ftCa_SpecialHi_804D9224 = 0.01745329238474369f;
+/// /* literal */ float const ftCa_SpecialHi_804D9228 = 1;
+/// /* literal */ float const ftCa_SpecialHi_804D922C = -1;
 
 static inline bool ftCa_Special_Inline_Check_Flag(Fighter* fp)
 {

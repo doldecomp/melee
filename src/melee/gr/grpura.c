@@ -163,7 +163,7 @@ HSD_GObj* grPura_80211E08(int gobj_id)
     } else {
         // clang-format off
 //#line 241 "grizumi.c"
-//        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, __LINE__, gobj_id);
+///        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, __LINE__, gobj_id);
         // clang-format on
         OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grpura.c", 241,
                  gobj_id);

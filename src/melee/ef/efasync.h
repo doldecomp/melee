@@ -16,7 +16,8 @@
 /* 067688 */ void efAsync_80067688(void*);
 /* 0676F0 */ void efAsync_Spawn(HSD_GObj*, void*, u32, u32, HSD_JObj*, ...);
 // /* 0676F0 */ void efAsync_Spawn(HSD_GObj*, struct ef_UnkStruct3*, enum_t,
-// u32, HSD_JObj*, ...);
+// u32,
+//                                 HSD_JObj*, ...);
 /* 0676F0 */ void efAsync_80067980(void);
 
 #endif

@@ -50,14 +50,14 @@
 
 #define FTPART_INVALID 0xFF
 
-// Table in PlCo.dat
+/// Table in PlCo.dat
 struct FighterPartsTable {
     u8* joint_to_part;
     u8* part_to_joint;
     u32 parts_num;
 };
 
-// Points to data in PlCo.dat
+/// Points to data in PlCo.dat
 struct ftCommonData {
     /*   +0 */ float x0;
     /*   +4 */ float x4;
