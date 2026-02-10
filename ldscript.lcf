@@ -7,7 +7,7 @@ text : origin = 0x80003100
 SECTIONS {
 GROUP:{
 .init ALIGN(0x20):{}
-/* @todo should be extab and extabindex */
+/* TODO: should be extab and extabindex */
 extab_ ALIGN(0x20):{}
 extabindex_ ALIGN(0x20):{}
 .text ALIGN(0x20):{}
