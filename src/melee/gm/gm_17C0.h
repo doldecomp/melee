@@ -60,8 +60,8 @@
 /* 17E76C */ u8 gm_8017E76C(u8 difficulty, u8 stage_slot, u8 arg2);
 /* 17E7A0 */ void gm_8017E7A0(u8);
 /* 17E7E0 */ bool gm_8017E7E0(void);
-/* 17E7FC */ void gm_8017E7FC(int);
-/* 17E8A4 */ void fn_8017E8A4(int);
+/* 17E7FC */ void gm_8017E7FC(u8);
+/* 17E8A4 */ void fn_8017E8A4(u8);
 /* 17EB30 */ UnkAllstarData* gm_8017EB30(void);
 /* 17EB3C */ u8 gm_8017EB3C(u8, u8);
 /* 17EB64 */ u8 gm_8017EB64(u8 difficulty, u8 stage_slot, u8 arg2);

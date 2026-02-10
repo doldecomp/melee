@@ -22,6 +22,7 @@
 #include <melee/gr/ground.h>
 #include <melee/gr/grpushon.h>
 #include <melee/gr/stage.h>
+#include <melee/if/ifstatus.h>
 #include <melee/it/item.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lb_00F9.h>
@@ -35,13 +36,12 @@
 #include <melee/pl/player.h>
 #include <melee/sc/types.h>
 #include <melee/ty/toy.h>
-#include <melee/if/ifstatus.h>
 
-typedef struct lbl_804706D8_t{
+typedef struct lbl_804706D8_t {
     s16 x0;
     u8 x2;
     u8 x3;
-}lbl_804706D8_t;
+} lbl_804706D8_t;
 
 lbl_804706D8_t lbl_804706D8[12];
 
@@ -729,7 +729,8 @@ bool fn_8017E160(void)
     return false;
 }
 
-void fn_8017E21C(void) {
+void fn_8017E21C(void)
+{
     int i;
     for (i = 0; i < 12; i++) {
         lbl_804706D8[i].x0 = -1;
@@ -752,7 +753,7 @@ s8 gm_8017E280(u16 arg0, u32 arg1)
         if (var_r7[index].x0 == -1) {
             var_r7[index].x0 = arg0;
             var_r7[index].x2 = arg1;
-            return (u8)arg1;
+            return (u8) arg1;
         }
     }
     return -1;
@@ -764,7 +765,7 @@ void fn_8017E3C8(void)
 {
     int i = 0;
     PAD_STACK(8);
-    for(i = 0; i < 12; i++) {
+    for (i = 0; i < 12; i++) {
         if (lbl_804706D8[i].x0 != -1) {
             Trophy_SetUnlockState(lbl_804706D8[i].x0, lbl_804706D8[i].x2);
         }
@@ -873,7 +874,8 @@ u8 gm_8017E76C(u8 difficulty, u8 stage_slot, u8 arg2)
     return lbl_803D7AC0[stage_slot + difficulty * 5].pad_6[0x10 + (arg2 * 3)];
 }
 
-void gm_8017E7A0(u8 arg0) {
+void gm_8017E7A0(u8 arg0)
+{
     if (arg0 == 1) {
         Player_LoseStock(0);
         ifStatus_802F6948(0);
