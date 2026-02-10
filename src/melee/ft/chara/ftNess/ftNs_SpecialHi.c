@@ -176,8 +176,8 @@ inline bool check_distance(Vec3* pos, Vec2* pair)
 }
 
 /// 0x80117BBC
-/// https://decomp.me/scratch/xTtbs // Very confusing and fabricated match based
-/// on auto-decomp // https://decomp.me/scratch/hwphL // Proper match
+/// https://decomp.me/scratch/xTtbs // Very confusing and fabricated match
+/// based on auto-decomp // https://decomp.me/scratch/hwphL // Proper match
 bool ftNs_SpecialHi_ItemPKThunder_CheckNessCollide(HSD_GObj* gobj)
 {
     u8 unused0[8];

@@ -555,8 +555,8 @@ void ftFx_SpecialHiLanding_Anim(HSD_GObj* gobj)
 }
 
 /// 0x800E7E78
-/// https://decomp.me/scratch/COhLZ // Fox & Falco's aerial Firefox/Firebird End
-/// Animation callback
+/// https://decomp.me/scratch/COhLZ // Fox & Falco's aerial Firefox/Firebird
+/// End Animation callback
 void ftFx_SpecialHiFall_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -613,8 +613,8 @@ void ftFx_SpecialHiLanding_Coll(HSD_GObj* gobj)
 }
 
 /// 0x800E7FA0
-/// https://decomp.me/scratch/0Veb7 // Fox & Falco's aerial Firefox/Firebird End
-/// Collision callback
+/// https://decomp.me/scratch/0Veb7 // Fox & Falco's aerial Firefox/Firebird
+/// End Collision callback
 void ftFx_SpecialHiFall_Coll(HSD_GObj* gobj)
 {
     u8 _[8];
@@ -629,8 +629,8 @@ void ftFx_SpecialHiFall_Coll(HSD_GObj* gobj)
 }
 
 /// 0x800E7FF0
-/// https://decomp.me/scratch/IQ1YX // Fox & Falco's aerial Firefox/Firebird End
-/// Motion State handler
+/// https://decomp.me/scratch/IQ1YX // Fox & Falco's aerial Firefox/Firebird
+/// End Motion State handler
 void ftFx_SpecialHiFall_Enter(HSD_GObj* gobj)
 {
     ftCommon_8007D7FC(GET_FIGHTER(gobj));

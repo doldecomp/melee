@@ -812,8 +812,8 @@ void ftMt_SpecialNLoop_IASA(HSD_GObj* gobj)
 }
 
 /// 0x8014800C
-/// https://decomp.me/scratch/w0g66 // Mewtwo's grounded Shadow Ball Full Charge
-/// IASA callback
+/// https://decomp.me/scratch/w0g66 // Mewtwo's grounded Shadow Ball Full
+/// Charge IASA callback
 void ftMt_SpecialNLoopFull_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);

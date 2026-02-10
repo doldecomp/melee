@@ -170,7 +170,8 @@ void ftGw_Attack11_Enter(HSD_GObj* gobj)
 }
 
 /// 0x8014C138
-/// https://decomp.me/scratch/BKUIu // Mr. Game & Watch's Jab Animation callback
+/// https://decomp.me/scratch/BKUIu // Mr. Game & Watch's Jab Animation
+/// callback
 void ftGw_Attack11_Anim(HSD_GObj* gobj)
 {
     u8 _[8];

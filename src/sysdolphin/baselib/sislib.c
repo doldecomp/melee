@@ -207,8 +207,7 @@ void HSD_SisLib_803A594C(void* ptr)
         }
         HSD_SisLib_804D7970 = alloc_cur;
         alloc_cur->data_0 = old_next;
-        HSD_SisLib_804D7970->data_1 =
-            (HSD_Text*) (HSD_SisLib_804D7970 + 1);
+        HSD_SisLib_804D7970->data_1 = (HSD_Text*) (HSD_SisLib_804D7970 + 1);
         HSD_SisLib_804D7970->size = new_size;
         return;
     }
@@ -715,9 +714,11 @@ HSD_Text* HSD_SisLib_803A6754(int font_idx, s32 context_id)
     buffer = HSD_SisLib_803A5798(0x80);
     alloc->data_1 = buffer;
     alloc->data_0 = (sislib_UnkAllocData*) buffer;
-    alloc->size = 0x80; ///< @todo This being a byte store means one of my assumptions is wrong;
+    alloc->size = 0x80; ///< @todo This being a byte store means one of my
+                        ///< assumptions is wrong;
     // maybe this is a different struct.
-    *(u8*) &alloc->data_0->data_0 = 0; ///< @todo Do any other Data struct usages have a 0xC member?
+    *(u8*) &alloc->data_0->data_0 =
+        0; ///< @todo Do any other Data struct usages have a 0xC member?
     *(&alloc->size + 1) = 0;
     HSD_SisLib_803A6368(text, 0);
     text->sis_buffer = (SIS*) alloc->data_1;

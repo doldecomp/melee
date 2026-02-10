@@ -1990,7 +1990,8 @@ void it_802A7A04(HSD_GObj* arg0)
     lk_attr = fp->dat_attrs;
 
     Item_80268E5C(arg0, 8, ITEM_ANIM_UPDATE);
-    itLinkHookshot_Logic20_PickedUp_inline(arg0); ///< @todo should this be its own struct?
+    itLinkHookshot_Logic20_PickedUp_inline(
+        arg0); ///< @todo should this be its own struct?
     fp->mv.lk.specialn.x0.y = lk_attr->xB8;
 }
 

@@ -185,10 +185,10 @@ void HSD_SObjLib_803A54EC(HSD_GObj* gobj, int unused)
         GXSetCurrentMtx(0);
         HSD_CObjGetViewingMtx(HSD_CObjGetCurrent(), viewmtx);
         GXLoadPosMtxImm(viewmtx, 0);
-        GXSetTexCoordGen2(GX_TEXCOORD0, GX_TG_MTX2x4, GX_TG_TEX0,
-                          GX_IDENTITY, GX_FALSE, GX_PTIDENTITY);
-        GXSetTexCoordGen2(GX_TEXCOORD1, GX_TG_MTX2x4, GX_TG_TEX0,
-                          GX_IDENTITY, GX_FALSE, GX_PTIDENTITY);
+        GXSetTexCoordGen2(GX_TEXCOORD0, GX_TG_MTX2x4, GX_TG_TEX0, GX_IDENTITY,
+                          GX_FALSE, GX_PTIDENTITY);
+        GXSetTexCoordGen2(GX_TEXCOORD1, GX_TG_MTX2x4, GX_TG_TEX0, GX_IDENTITY,
+                          GX_FALSE, GX_PTIDENTITY);
         HSD_SetupChannel(&data->x78_chan0);
         HSD_SetupChannel(&data->xA8_chan1);
         HSD_StateSetNumChans(1);
@@ -214,9 +214,9 @@ void HSD_SObjLib_803A55DC(HSD_GObj* gobj, int width, int height, int priority)
     f32 near_val = roll;
     f32 far_val = 0.5F;
     f32 top = roll;
-    f32 bottom = (f32) -(s32)(u16) height;
+    f32 bottom = (f32) - (s32) (u16) height;
     f32 left = roll;
-    f32 right = (f32)(u16) width;
+    f32 right = (f32) (u16) width;
 
     viewport.left = 0;
     viewport.right = width;

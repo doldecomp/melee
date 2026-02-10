@@ -42,8 +42,8 @@ void ftFx_SpecialS_CreateGFX(HSD_GObj* gobj)
 }
 
 /// 0x800E9E78
-/// https://decomp.me/scratch/Er9l6 // Check if Fox or Falco are in any of their
-/// Illusion/Phantasm Motion States
+/// https://decomp.me/scratch/Er9l6 // Check if Fox or Falco are in any of
+/// their Illusion/Phantasm Motion States
 bool ftFx_SpecialS_CheckGhostRemove(HSD_GObj* gobj)
 {
     /// @todo @c enum
@@ -64,7 +64,8 @@ s32 ftFx_SpecialS_GetCmdVar2(HSD_GObj* gobj)
 }
 
 /// 0x800E9EAC
-/// https://decomp.me/scratch/IjtLj // Copy state variables into SpecialS struct
+/// https://decomp.me/scratch/IjtLj // Copy state variables into SpecialS
+/// struct
 void ftFx_SpecialS_CopyGhostPosIndexed(HSD_GObj* gobj, s32 index,
                                        Vec3* ghostPos)
 {

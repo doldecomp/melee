@@ -369,8 +369,8 @@ void ftGw_AttackAirN_IASA(HSD_GObj* gobj)
 }
 
 /// 0x8014B760
-/// https://decomp.me/scratch/EBIVr // Mr. Game & Watch's Neutral Aerial Physics
-/// callback
+/// https://decomp.me/scratch/EBIVr // Mr. Game & Watch's Neutral Aerial
+/// Physics callback
 void ftGw_AttackAirN_Phys(HSD_GObj* gobj)
 {
     ft_80084DB0(gobj);
@@ -550,8 +550,8 @@ void ftGw_LandingAirHi_Enter(HSD_GObj* gobj)
 }
 
 /// 0x8014BAF8
-/// https://decomp.me/scratch/8ClCw // Mr. Game & Watch's Neutral Aerial Landing
-/// prefunction
+/// https://decomp.me/scratch/8ClCw // Mr. Game & Watch's Neutral Aerial
+/// Landing prefunction
 static void ftGw_LandingAirN_Init(HSD_GObj* gobj)
 {
     Fighter* fp = getFighter(gobj);
@@ -561,8 +561,8 @@ static void ftGw_LandingAirN_Init(HSD_GObj* gobj)
 }
 
 /// 0x8014BB24
-/// https://decomp.me/scratch/xQdJ2 // Mr. Game & Watch's Neutral Aerial Landing
-/// Animation callback
+/// https://decomp.me/scratch/xQdJ2 // Mr. Game & Watch's Neutral Aerial
+/// Landing Animation callback
 void ftGw_LandingAirN_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -580,16 +580,16 @@ void ftGw_LandingAirN_IASA(HSD_GObj* gobj)
 }
 
 /// 0x8014BB74
-/// https://decomp.me/scratch/SqMil // Mr. Game & Watch's Neutral Aerial Landing
-/// Physics callback
+/// https://decomp.me/scratch/SqMil // Mr. Game & Watch's Neutral Aerial
+/// Landing Physics callback
 void ftGw_LandingAirN_Phys(HSD_GObj* gobj)
 {
     ftCo_Landing_Phys(gobj);
 }
 
 /// 0x8014BB94
-/// https://decomp.me/scratch/2K68T // Mr. Game & Watch's Neutral Aerial Landing
-/// Collision callback
+/// https://decomp.me/scratch/2K68T // Mr. Game & Watch's Neutral Aerial
+/// Landing Collision callback
 void ftGw_LandingAirN_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);

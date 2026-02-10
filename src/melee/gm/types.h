@@ -736,7 +736,7 @@ struct UnkAllstarData {
     /* +68*/ UNK_T x68;
     /* +6C*/ u32 _6C;
     /* +70*/ u32 _70;
-    /* +74*/ u16 x74; ///< current percent
+    /* +74*/ u16 x74;    ///< current percent
     /* +76*/ u8 x76[24]; ///< character id array
     /* +8E*/ u8 x8E[2];
     /* +90*/ u8 x90[4];
@@ -971,7 +971,7 @@ struct MenuExitData {
 };
 STATIC_ASSERT(sizeof(struct MenuExitData) == 0x4);
 
-typedef struct gm_803DDEC8Struct{
+typedef struct gm_803DDEC8Struct {
     u8 x0;
     u8 x1_b0 : 1;
     u8 x1_b1 : 1;
@@ -983,6 +983,6 @@ typedef struct gm_803DDEC8Struct{
     u8 x1_b7 : 1;
     u8 x2[0xC - 0x2];
     void* xC;
-}gm_803DDEC8Struct;
+} gm_803DDEC8Struct;
 
 #endif

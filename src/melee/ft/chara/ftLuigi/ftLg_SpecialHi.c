@@ -196,8 +196,8 @@ void ftLg_SpecialAirHi_IASA(HSD_GObj* gobj)
 }
 
 /// 0x801443E8
-/// https://decomp.me/scratch/TmnDt // Luigi's grounded Super Jump Punch Physics
-/// callback
+/// https://decomp.me/scratch/TmnDt // Luigi's grounded Super Jump Punch
+/// Physics callback
 void ftLg_SpecialHi_Phys(HSD_GObj* gobj)
 {
     if ((s32) GET_FIGHTER(gobj)->ground_or_air == GA_Air) {
@@ -257,8 +257,8 @@ void ftLg_SpecialHi_Coll(HSD_GObj* gobj)
 }
 
 /// 0x80144554
-/// https://decomp.me/scratch/h03kd // Luigi's aerial Super Jump Punch Collision
-/// callback
+/// https://decomp.me/scratch/h03kd // Luigi's aerial Super Jump Punch
+/// Collision callback
 void ftLg_SpecialAirHi_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);

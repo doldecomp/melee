@@ -71,9 +71,8 @@ void it_80295F38(Item_GObj* gobj)
         launch_pos = ip->pos;
         launch_pos.x += 8.0f * cosf(angle);
         launch_pos.y += 8.0f * sinf(angle);
-        ftCo_800C92E4(ip->xDD4_itemVar.tarucann.x20,
-                      &launch_pos, &ip->pos, &params,
-                      (f32) (180.0 / M_PI) * angle);
+        ftCo_800C92E4(ip->xDD4_itemVar.tarucann.x20, &launch_pos, &ip->pos,
+                      &params, (f32) (180.0 / M_PI) * angle);
         it_802975F4(gobj);
     }
 }

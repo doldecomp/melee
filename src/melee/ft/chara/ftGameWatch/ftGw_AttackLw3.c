@@ -135,8 +135,8 @@ bool ftGw_AttackLw3_ItemCheckManholeRemove(HSD_GObj* gobj)
 }
 
 /// 0x8014ADB8
-/// https://decomp.me/scratch/rGgyM // Mr. Game & Watch's Down Tilt Motion State
-/// Handler
+/// https://decomp.me/scratch/rGgyM // Mr. Game & Watch's Down Tilt Motion
+/// State Handler
 void ftGw_AttackLw3_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);

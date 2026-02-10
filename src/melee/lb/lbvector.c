@@ -156,9 +156,9 @@ static float cos(float angle)
 }
 
 /// 8000D8F4
-/// Rotates v by angle about the given axis. The axis must have unit length, the
-/// angle is in radians. Rotation is oriented such that rotating (1,0,0) about
-/// the (0,0,1) axis results in (0,1,0).
+/// Rotates v by angle about the given axis. The axis must have unit length,
+/// the angle is in radians. Rotation is oriented such that rotating (1,0,0)
+/// about the (0,0,1) axis results in (0,1,0).
 void lbVector_RotateAboutUnitAxis(Vec3* v, Vec3* axis, float angle)
 {
     // The implementation is unnecessarily complex. the idea is to reduce the
@@ -255,8 +255,8 @@ float dummy(void)
     return 2.0f;
 } // needed here to force order of floats in .sdata2 section
 
-/// 8000DC6C - compute a -= 2*<a,b>*b. When b has unit length, this mirrors a at
-/// the plane that is perpendicular to b and contains the origin.
+/// 8000DC6C - compute a -= 2*<a,b>*b. When b has unit length, this mirrors a
+/// at the plane that is perpendicular to b and contains the origin.
 void lbVector_Mirror(Vec3* a, Vec3* unit_mirror_axis)
 {
     float f =

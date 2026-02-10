@@ -348,7 +348,8 @@ static void ftGw_SpecialS_GroundToAir(HSD_GObj* gobj)
     ftGameWatch_SpecialS_SetCall(gobj);
 }
 
-/// 0x8014CB44 - Mr. Game & Watch's air -> ground Judgement Motion State Handler
+/// 0x8014CB44 - Mr. Game & Watch's air -> ground Judgement Motion State
+/// Handler
 static void ftGw_SpecialAirS_AirToGround(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);

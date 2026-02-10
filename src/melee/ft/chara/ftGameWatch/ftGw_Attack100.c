@@ -16,8 +16,8 @@
 #include <stddef.h>
 
 /// 0x8014C1E8
-/// https://decomp.me/scratch/AyScb // Mr. Game & Watch's Rapid Jab Start Action
-/// State handler
+/// https://decomp.me/scratch/AyScb // Mr. Game & Watch's Rapid Jab Start
+/// Action State handler
 void ftGw_Attack100Start_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);

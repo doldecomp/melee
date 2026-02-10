@@ -28,7 +28,8 @@ static inline void mnHyaku_8024C68C_inline(HSD_JObj* jobj, s32 val)
     f32 temp_f31 = mn_8022F298(jobj);
     HSD_JObjReqAnimAll(jobj, mnHyaku_803EF680[val]);
     HSD_JObjAnimAll(jobj);
-    HSD_JObjReqAnimAll(jobj, temp_f31); ///< @todo 0xFF seems to signal a "stopped" animation
+    HSD_JObjReqAnimAll(
+        jobj, temp_f31); ///< @todo 0xFF seems to signal a "stopped" animation
     mn_8022F3D8(jobj, 0xFF, MOBJ_MASK);
     HSD_JObjAnimAll(jobj);
 }

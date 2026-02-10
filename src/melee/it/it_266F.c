@@ -490,7 +490,8 @@ void it_8026CF04(void)
     s32 temp_r8;
     u8* temp_r30; ///< @todo probably a double somewhere
     temp_r4 = it_804D6D28->x128 + it_804D6D28->x12C + it_804D6D28->x130 +
-              it_804D6D28->x134; ///< @todo Investigate why it_804A0E30 is used instead of it_804A0E60.
+              it_804D6D28->x134; ///< @todo Investigate why it_804A0E30 is used
+                                 ///< instead of it_804A0E60.
     if (temp_r4 != 0) {
         it_804A0E60.x8 = temp_r4;
         it_804A0E60.x0 = 4U;
@@ -606,7 +607,9 @@ void it_8026D018(void)
                 }
             }
             it_8026CF04();
-            HSD_GObjProc_8038FD54(GObj_Create(5U, 7U, 0U), fn_8026C88C, 0U); ///< @todo Make a FLT_RAND(min, max) define or inline
+            HSD_GObjProc_8038FD54(
+                GObj_Create(5U, 7U, 0U), fn_8026C88C,
+                0U); ///< @todo Make a FLT_RAND(min, max) define or inline
             temp_r29 = it_804D6D28 + ((gm_8016AE80() * 8) + 0xFC);
             it_804A0E30.x0 =
                 ((temp_r29[4] - temp_r29[0]) * HSD_Randf()) + temp_r29[0];

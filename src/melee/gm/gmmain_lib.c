@@ -1050,7 +1050,8 @@ void gmMainLib_8015FA34(int arg0)
         gm_8017297C();
         gm_801741FC();
     }
-    lbAudioAx_80028690(); ///< @todo the call to gmMainLib_8015CC40 shouldn't be inlined
+    lbAudioAx_80028690(); ///< @todo the call to gmMainLib_8015CC40 shouldn't
+                          ///< be inlined
     gmMainLib_8015F500();
 }
 

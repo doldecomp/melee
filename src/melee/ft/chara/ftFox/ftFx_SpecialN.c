@@ -60,8 +60,8 @@ void ftFx_SpecialN_ItGetHoldJoint(HSD_GObj* gobj, Vec3* pos)
 }
 
 /// 0x800E5D90
-/// https://decomp.me/scratch/DRgo9 // Fox & Falco's Blaster OnMotionStateChange
-/// function
+/// https://decomp.me/scratch/DRgo9 // Fox & Falco's Blaster
+/// OnMotionStateChange function
 void ftFx_SpecialN_OnChangeAction(HSD_GObj* gobj)
 {
     PAD_STACK(8);
@@ -82,8 +82,8 @@ bool ftFx_SpecialN_CheckRemoveBlaster(HSD_GObj* gobj)
 }
 
 /// 0x800E5DE4 - shoutouts to Olifre for figuring this one out!
-/// https://decomp.me/scratch/aatYF // Get msid for Fox/Falco moves that require
-/// the Blaster item
+/// https://decomp.me/scratch/aatYF // Get msid for Fox/Falco moves that
+/// require the Blaster item
 s32 ftFx_SpecialN_GetBlasterAction(HSD_GObj* gobj)
 {
     s32 msid = 9;
@@ -584,8 +584,8 @@ void ftFx_SpecialAirNEnd_Anim(HSD_GObj* gobj)
 }
 
 /// 0x800E6AB4
-/// https://decomp.me/scratch/7JCEh // Fox & Falco's grounded Blaster Start IASA
-/// callback
+/// https://decomp.me/scratch/7JCEh // Fox & Falco's grounded Blaster Start
+/// IASA callback
 void ftFx_SpecialNStart_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);

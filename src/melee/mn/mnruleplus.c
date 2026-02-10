@@ -183,7 +183,8 @@ static s32 mn_804DBE48 = 0x02030506;
 ///     if (temp_r3_3 == NULL) {
 ///         OSReport(&(mn_803ED1D0 + 0x138)->unk0, (u32) (u64) temp_ret,
 ///         (bitwise f32) temp_ret);
-///         __assert(&(mn_803ED1D0 + 0x150)->unk0, 0x3DFU, mn_803ED1D0 + 0x160);
+///         __assert(&(mn_803ED1D0 + 0x150)->unk0, 0x3DFU, mn_803ED1D0 +
+///         0x160);
 ///     }
 ///     GObj_InitUserData(sp94, 0U, HSD_Free, temp_r3_3);
 ///     temp_r3_3->menu_kind = mn_804A04F0.cur_menu;
@@ -322,10 +323,8 @@ static s32 mn_804DBE48 = 0x02030506;
 ///                 var_r29_3 = var_r19;
 /// loop_66:
 ///                 if (var_r31_3 < (s32) *var_r24_2) {
-///                     lb_80011E24(temp_r3_5, var_r29_3 + 0x34, var_r31_3, -1);
-///                     var_r29_3 += 4;
-///                     var_r31_3 += 1;
-///                     goto loop_66;
+///                     lb_80011E24(temp_r3_5, var_r29_3 + 0x34, var_r31_3,
+///                     -1); var_r29_3 += 4; var_r31_3 += 1; goto loop_66;
 ///                 }
 ///                 if (var_r27 != 0) {
 ///                     if ((var_r27 >= 0) && (var_r27 < 5)) {
@@ -337,8 +336,8 @@ static s32 mn_804DBE48 = 0x02030506;
 ///                             var_r4_2 = mn_803ED1D0 + ((mn_803ED1D0 +
 ///                             ((var_r27 * 2) & 0x1FE))->unk119 * 0xC) + 0xA0;
 ///                         } else {
-///                             var_r4_2 = mn_803ED1D0 + ((temp_r4 - 1) * 0xC) +
-///                             0xA0;
+///                             var_r4_2 = mn_803ED1D0 + ((temp_r4 - 1) * 0xC)
+///                             + 0xA0;
 ///                         }
 ///                         HSD_JObjReqAnimAll(temp_r3_5, var_r4_2->unk4);
 ///                         HSD_JObjAnimAll(temp_r3_5);
@@ -348,7 +347,8 @@ static s32 mn_804DBE48 = 0x02030506;
 ///                     var_r29_4 = 0;
 ///                     sp14 = mn_804DBE48;
 ///                     do {
-///                         temp_r3_6 = HSD_JObjLoadJoint(MenMainNmRl_Top.unk0);
+///                         temp_r3_6 =
+///                         HSD_JObjLoadJoint(MenMainNmRl_Top.unk0);
 ///                         HSD_JObjAddAnimAll(temp_r3_6, MenMainNmRl_Top.unk4,
 ///                         MenMainNmRl_Top.unk8, MenMainNmRl_Top.unkC);
 ///                         HSD_JObjAddChild(*(temp_r3_3 + ((*var_r31_4 * 4) +

@@ -800,8 +800,8 @@ void AXDriver_8038DA70(const char* path, void (*callback)(void))
     alignedSize = (AXDriver_804D779C + 0x1F) & ~0x1F;
     AXDriver_804D7798 = HSD_AudioMalloc(alignedSize);
     AXDriver_804D77EC = 0;
-    DVDReadAsyncPrio(&fileInfo, AXDriver_804D7798, alignedSize, 0,
-                     fn_8038DA5C, 2);
+    DVDReadAsyncPrio(&fileInfo, AXDriver_804D7798, alignedSize, 0, fn_8038DA5C,
+                     2);
 
     while (AXDriver_804D77EC == 0) {
         callback();
@@ -809,19 +809,19 @@ void AXDriver_8038DA70(const char* path, void (*callback)(void))
 
     DVDClose(&fileInfo);
 
-    AXDriver_804D77A0 = ((s32*)AXDriver_804D7798)[0];
+    AXDriver_804D77A0 = ((s32*) AXDriver_804D7798)[0];
     if (AXDriver_804D77A0 != 0) {
-        ptr = (void*)((u8*)AXDriver_804D7798 + 4);
+        ptr = (void*) ((u8*) AXDriver_804D7798 + 4);
     } else {
         ptr = NULL;
     }
     offset = AXDriver_804D77A0 * 4 + 4;
     AXDriver_804D77A4 = ptr;
 
-    AXDriver_804D77A8 = *(s32*)((u8*)AXDriver_804D7798 + offset);
+    AXDriver_804D77A8 = *(s32*) ((u8*) AXDriver_804D7798 + offset);
     offset += 4;
     if (AXDriver_804D77A8 != 0) {
-        ptr = (u8*)AXDriver_804D7798 + offset;
+        ptr = (u8*) AXDriver_804D7798 + offset;
     } else {
         ptr = NULL;
     }
@@ -831,26 +831,25 @@ void AXDriver_8038DA70(const char* path, void (*callback)(void))
     i = 0;
     while (i < AXDriver_804D77A8) {
         i++;
-        *(u32*)((u8*)AXDriver_804D77AC + j) +=
-            (u32)AXDriver_804D7798 & ~3u;
+        *(u32*) ((u8*) AXDriver_804D77AC + j) += (u32) AXDriver_804D7798 & ~3u;
         j += 4;
     }
 
     offset += AXDriver_804D77A8 * 4;
-    AXDriver_804D77B0 = *(s32*)((u8*)AXDriver_804D7798 + offset);
+    AXDriver_804D77B0 = *(s32*) ((u8*) AXDriver_804D7798 + offset);
     offset += 4;
     if (AXDriver_804D77B0 != 0) {
-        ptr = (u8*)AXDriver_804D7798 + offset;
+        ptr = (u8*) AXDriver_804D7798 + offset;
     } else {
         ptr = NULL;
     }
     offset += AXDriver_804D77B0 * 4;
     AXDriver_804D77B4 = ptr;
 
-    AXDriver_804D77B8 = *(s32*)((u8*)AXDriver_804D7798 + offset);
+    AXDriver_804D77B8 = *(s32*) ((u8*) AXDriver_804D7798 + offset);
     offset += 4;
     if (AXDriver_804D77B8 != 0) {
-        ptr = (u8*)AXDriver_804D7798 + offset;
+        ptr = (u8*) AXDriver_804D7798 + offset;
     } else {
         ptr = NULL;
     }
@@ -859,16 +858,15 @@ void AXDriver_8038DA70(const char* path, void (*callback)(void))
     j = i;
     while (i < AXDriver_804D77B8) {
         i++;
-        *(u32*)((u8*)AXDriver_804D77BC + j) +=
-            (u32)AXDriver_804D7798 & ~3u;
+        *(u32*) ((u8*) AXDriver_804D77BC + j) += (u32) AXDriver_804D7798 & ~3u;
         j += 4;
     }
 
     offset += AXDriver_804D77B8 * 4;
-    AXDriver_804D77C0 = *(s32*)((u8*)AXDriver_804D7798 + offset);
+    AXDriver_804D77C0 = *(s32*) ((u8*) AXDriver_804D7798 + offset);
     offset += 4;
     if (AXDriver_804D77C0 != 0) {
-        ptr = (u8*)AXDriver_804D7798 + offset;
+        ptr = (u8*) AXDriver_804D7798 + offset;
     } else {
         ptr = NULL;
     }
@@ -877,8 +875,7 @@ void AXDriver_8038DA70(const char* path, void (*callback)(void))
     j = i;
     while (i < AXDriver_804D77C0) {
         i++;
-        *(u32*)((u8*)AXDriver_804D77C4 + j) +=
-            (u32)AXDriver_804D7798 & ~3u;
+        *(u32*) ((u8*) AXDriver_804D77C4 + j) += (u32) AXDriver_804D7798 & ~3u;
         j += 4;
     }
 }
@@ -1004,10 +1001,14 @@ static const RevHiDims revhi_dims = {
 };
 
 static const s32 revstd_dims[] = {
-    0x6FD, 0x7CF, 0x1B1, 0x95,
+    0x6FD,
+    0x7CF,
+    0x1B1,
+    0x95,
 };
 
-/// @todo Currently 53.61% match - needs struct copy and computation order fixes
+/// @todo Currently 53.61% match - needs struct copy and computation order
+/// fixes
 s32 AXDriver_8038E034(AXDriverAuxType type, void* param)
 {
     s32 result;
@@ -1025,13 +1026,12 @@ s32 AXDriver_8038E034(AXDriverAuxType type, void* param)
     case AXDRIVER_AUX_OFF:
         break;
 
-    case AXDRIVER_AUX_REVERB_HI:
-    {
+    case AXDRIVER_AUX_REVERB_HI: {
         RevHiDims tmp;
 
         tmp = revhi_dims;
-        predelay = (s32)(32000.0F *
-            ((struct AXFX_REVERBHI*)param)->preDelay);
+        predelay =
+            (s32) (32000.0F * ((struct AXFX_REVERBHI*) param)->preDelay);
 
         s0 = (tmp.v[0] + 2) * 4;
         s1 = (tmp.v[1] + 2) * 4;
@@ -1040,24 +1040,23 @@ s32 AXDriver_8038E034(AXDriverAuxType type, void* param)
         s4 = (tmp.v[4] + 2) * 4;
         s5 = (tmp.v[5] + 2) * 4;
 
-        result += s0 + s3 + s1 + s4 + s2 + s5 +
-                  (tmp.v[5] + 2) * 4 + predelay * 4;
-        result += s0 + s3 + s1 + s4 + s2 + s5 +
-                  (tmp.v[6] + 2) * 4 + predelay * 4;
-        result += s0 + s3 + s1 + s4 + s2 + s5 +
-                  (tmp.v[7] + 2) * 4 + predelay * 4;
+        result +=
+            s0 + s3 + s1 + s4 + s2 + s5 + (tmp.v[5] + 2) * 4 + predelay * 4;
+        result +=
+            s0 + s3 + s1 + s4 + s2 + s5 + (tmp.v[6] + 2) * 4 + predelay * 4;
+        result +=
+            s0 + s3 + s1 + s4 + s2 + s5 + (tmp.v[7] + 2) * 4 + predelay * 4;
         break;
     }
 
-    case AXDRIVER_AUX_REVERB_STD:
-    {
+    case AXDRIVER_AUX_REVERB_STD: {
         s0 = (revstd_dims[0] + 2) * 4;
         s1 = (revstd_dims[1] + 2) * 4;
         s2 = (revstd_dims[2] + 2) * 4;
         s3 = (revstd_dims[3] + 2) * 4;
 
-        predelay = (s32)(32000.0F *
-            ((struct AXFX_REVERBSTD*)param)->preDelay);
+        predelay =
+            (s32) (32000.0F * ((struct AXFX_REVERBSTD*) param)->preDelay);
 
         result = s0 + s2 + s1 + s3 + predelay * 4;
         result += s0 + s2 + s1 + s3 + predelay * 4;
@@ -1069,9 +1068,8 @@ s32 AXDriver_8038E034(AXDriverAuxType type, void* param)
         result = 0x1680;
         break;
 
-    case AXDRIVER_AUX_DELAY:
-    {
-        struct AXFX_DELAY* delay = (struct AXFX_DELAY*)param;
+    case AXDRIVER_AUX_DELAY: {
+        struct AXFX_DELAY* delay = (struct AXFX_DELAY*) param;
         s32 ch0, ch1, ch2;
 
         ch0 = ((delay->delay[0] - 5) * 32 + 159) / 160 * 640;
