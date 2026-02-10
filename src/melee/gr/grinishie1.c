@@ -34,7 +34,7 @@
     while (true) {                                                            \
     }
 
-// these inlines are probably shared in other places
+/// these inlines are probably shared in other places
 static inline s32 test_random(s32 val)
 {
     return ((val != 0) ? HSD_Randi(val) : 0);
@@ -127,7 +127,7 @@ StageCallbacks grI1_803E48F4[] = {
 
 void grInishie1_801FA908(bool arg) {}
 
-// corresponds with the 3 - 13 - 3 block pattern on the stage
+/// corresponds with the 3 - 13 - 3 block pattern on the stage
 #define BLOCK_COUNT 19
 
 struct block_table_struct {
@@ -611,8 +611,8 @@ void grInishie1_801FB3F0(HSD_GObj* gobj)
     }
 }
 
-// gives item from hatena block upwards velocity, maybe handles spawning it as
-// well
+/// gives item from hatena block upwards velocity, maybe handles spawning it as
+/// well
 void grInishie1_801FBA34(HSD_GObj* gobj, HSD_JObj* jobj)
 {
     Vec3 sp1C;
@@ -623,7 +623,7 @@ void grInishie1_801FBA34(HSD_GObj* gobj, HSD_JObj* jobj)
     it_8026F7C8(&sp1C, &vec, 0);
 }
 
-// creates a hatena block
+/// creates a hatena block
 void grInishie1_801FBAA0(HSD_GObj* gobj, s32 index)
 {
     HSD_JObj* hatena_jobj;

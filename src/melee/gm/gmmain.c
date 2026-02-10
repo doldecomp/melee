@@ -71,7 +71,7 @@ static void gmMain_8015FD24(void)
 
 static void gmMain_8015FDA0(u32 arg) {}
 
-// set debug level
+/// set debug level
 static void gmMain_8015FDA4(void)
 {
     if (DVDConvertPathToEntrynum("/develop.ini") != -1) {

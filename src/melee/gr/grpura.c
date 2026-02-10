@@ -163,7 +163,7 @@ HSD_GObj* grPura_80211E08(int gobj_id)
     } else {
         // clang-format off
 //#line 241 "grizumi.c"
-//        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, __LINE__, gobj_id);
+///        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, __LINE__, gobj_id);
         // clang-format on
         OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grpura.c", 241,
                  gobj_id);
@@ -399,11 +399,10 @@ bool grPura_802130C8(Vec3* a, int num, HSD_JObj* joint)
     return true;
 }
 
-/// #fn_802130D0
 void fn_802130D0(HSD_GObj* arg0, int arg1)
 {
-    HSD_ImageDesc* image = grPu_803E6E20;
-    HSD_MObjSetToonTextureImage(image);
+    PAD_STACK(8);
+    HSD_MObjSetToonTextureImage(&grPu_803E7620);
     grDisplay_801C5DB0(arg0, arg1);
     HSD_MObjSetToonTextureImage(0);
 }

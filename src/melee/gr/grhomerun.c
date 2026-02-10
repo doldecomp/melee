@@ -63,7 +63,13 @@ void grHomeRun_8021DEE8(Ground_GObj* arg) {}
 
 void grHomeRun_8021DEEC(Ground_GObj* arg) {}
 
-/// #grHomeRun_8021DEF0
+void grHomeRun_8021DEF0(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    grAnime_801C8138(gobj, gp->map_id, 0);
+    gp->gv.unk.xC8 = 0;
+    gp->gv.unk.xCC = (int) Ground_801C3FA4(gobj, 1);
+}
 
 bool grHomeRun_8021DF48(Ground_GObj* arg)
 {
@@ -95,7 +101,13 @@ void grHomeRun_8021E06C(Ground_GObj* arg) {}
 
 void grHomeRun_8021E070(Ground_GObj* arg) {}
 
-/// #grHomeRun_8021E074
+void grHomeRun_8021E074(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    grAnime_801C8138(gobj, gp->map_id, 0);
+    gp->gv.unk.xC8 = 0;
+    gp->gv.unk.xCC = (int) Ground_801C3FA4(gobj, 1);
+}
 
 bool grHomeRun_8021E0CC(Ground_GObj* arg)
 {
@@ -127,7 +139,13 @@ void grHomeRun_8021E1F0(Ground_GObj* arg) {}
 
 void grHomeRun_8021E1F4(Ground_GObj* arg) {}
 
-/// #grHomeRun_8021E1F8
+void grHomeRun_8021E1F8(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    grAnime_801C8138(gobj, gp->map_id, 0);
+    gp->gv.unk.xC8 = 0;
+    gp->gv.unk.xCC = (int) Ground_801C3FA4(gobj, 1);
+}
 
 bool grHomeRun_8021E250(Ground_GObj* arg)
 {
@@ -159,7 +177,13 @@ void grHomeRun_8021E374(Ground_GObj* arg) {}
 
 void grHomeRun_8021E378(Ground_GObj* arg) {}
 
-/// #grHomeRun_8021E37C
+void grHomeRun_8021E37C(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    grAnime_801C8138(gobj, gp->map_id, 0);
+    gp->gv.unk.xC8 = 0;
+    gp->gv.unk.xCC = (int) Ground_801C3FA4(gobj, 1);
+}
 
 bool grHomeRun_8021E3D4(Ground_GObj* arg)
 {
@@ -202,7 +226,7 @@ void grHomeRun_8021EAF8(void)
     stage_info.flags |= (1 << 7);
 }
 
-// Copies the main camera into a target camera
+/// Copies the main camera into a target camera
 void fn_8021EB10(HSD_GObj* target_cam_gobj)
 {
     HSD_GObj* main_cam_gobj;

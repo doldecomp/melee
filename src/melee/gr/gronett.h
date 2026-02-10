@@ -37,7 +37,7 @@
 /* 1E43E0 */ void grOnett_801E43E0(Ground_GObj*);
 /* 1E502C */ void grOnett_801E502C(Ground_GObj*);
 /* 1E5030 */ UNK_RET grOnett_801E5030(UNK_PARAMS);
-/* 1E5140 */ UNK_RET grOnett_801E5140(UNK_PARAMS);
+/* 1E5140 */ void grOnett_801E5140(s32 idx);
 /* 1E5194 */ UNK_RET grOnett_801E5194(UNK_PARAMS);
 /* 1E5214 */ UNK_RET grOnett_801E5214(UNK_PARAMS);
 /* 1E54B4 */ void grOnett_801E54B4(Ground*, s32, CollData*, s32,

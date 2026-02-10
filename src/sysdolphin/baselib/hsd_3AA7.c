@@ -21,7 +21,7 @@ typedef struct CardBufEntry {
 
 /// #hsd_803AAA48
 
-// @TODO: Currently 91.67% match - volatile load scheduling in critical section
+/// @todo Currently 91.67% match - volatile load scheduling in critical section
 s32 fn_803AC168(s32* cmd_buf)
 {
     BOOL state;
@@ -101,8 +101,8 @@ void fn_803AC334(void)
     hsd_804D7998 = -1;
 }
 
-// @TODO: Currently 99.50% match - return expression register allocation (add
-// dest r6 vs r3)
+/// @todo Currently 99.50% match - return expression register allocation (add
+/// dest r6 vs r3)
 int hsd_803AC340(void* header)
 {
     u8* data = header;
@@ -159,7 +159,7 @@ void hsd_803AC3E0(struct hsd_803AC3E0_arg0_t* file_desc, int file_idx,
 
 /// #hsd_803AC558
 
-// @TODO: Currently 97.73% match - register allocation in arg1==0 path
+/// @todo Currently 97.73% match - register allocation in arg1==0 path
 u32 fn_803AC634(struct hsd_803AC3E0_arg0_t* file_desc, s32 file_idx)
 {
     if (file_desc->x4C[file_idx] <= 0) {
@@ -218,13 +218,13 @@ s32 fn_803ACB74(s32 seq_a, s32 seq_b)
     return diff;
 }
 
-// @TODO: Currently 75.56% match - mwcc reassociates addition order
+/// @todo Currently 75.56% match - mwcc reassociates addition order
 s32 fn_803ACBE8(CardState* state, s32 block_idx)
 {
     u32 size = state->x8;
     return (s32) (size * (block_idx + (state->x24 + size + 0x2F) / size - 1));
 }
-// @TODO: Currently 95.90% match - arg0/arg1 register swap (r27/r22 vs r26/r27)
+/// @todo Currently 95.90% match - arg0/arg1 register swap (r27/r22 vs r26/r27)
 s32 fn_803ACC0C(CardState* state, s32 block_idx, s32 file_id, s32 seq_num,
                 void* expected_data, s32 data_size)
 {
@@ -285,8 +285,8 @@ s32 fn_803ACC0C(CardState* state, s32 block_idx, s32 file_id, s32 seq_num,
     return 0;
 }
 
-// @TODO: Currently 95.49% match - compiler hoists state+0x370 to r31, shifting
-// regalloc
+/// @todo Currently 95.49% match - compiler hoists state+0x370 to r31, shifting
+/// regalloc
 s32 fn_803ACD58(CardState* state, void* icon_data, void* file_data)
 {
     s32 icon_size;
@@ -381,8 +381,8 @@ s32 fn_803ACD58(CardState* state, void* icon_data, void* file_data)
     return 0;
 }
 
-// @TODO: Currently 93.89% match - mwcc reassociates addition order in loop
-// cond
+/// @todo Currently 93.89% match - mwcc reassociates addition order in loop
+/// cond
 s32 fn_803ACF30(CardState* state, s32 file_id, s32 seq_num, s32 version)
 {
     s32 buf[9];
@@ -405,8 +405,8 @@ s32 fn_803ACF30(CardState* state, s32 file_id, s32 seq_num, s32 version)
     return 0;
 }
 
-// @TODO: Currently 87.18% match - expression ordering and stbx vs stb+disp in
-// byte stores
+/// @todo Currently 87.18% match - expression ordering and stbx vs stb+disp in
+/// byte stores
 s32 fn_803ACFC0(CardState* state, s32 block_idx, s32 file_id, s32 seq_num,
                 void* payload, s32 payload_size, s32 version)
 {
@@ -496,8 +496,8 @@ s32 fn_803ACFC0(CardState* state, s32 block_idx, s32 file_id, s32 seq_num,
 
 /// #fn_803AD16C
 
-// @TODO: Currently 93.46% match - stwx vs stw+disp in rollback, reg swap in
-// 2nd path
+/// @todo Currently 93.46% match - stwx vs stw+disp in rollback, reg swap in
+/// 2nd path
 s32 fn_803ADE4C(s32 card_state, s32 channel, s32 callback)
 {
     s32 buf1[9];
@@ -562,8 +562,8 @@ s32 fn_803ADE4C(s32 card_state, s32 channel, s32 callback)
 
 /// #fn_803B1338
 
-// @TODO: Currently 90.28% match - stwx vs stw+disp in rollback (same as
-// fn_803ADE4C)
+/// @todo Currently 90.28% match - stwx vs stw+disp in rollback (same as
+/// fn_803ADE4C)
 s32 fn_803B1F78(CardState* state, s32 channel, s32 file_id, s32 seq_num,
                 s32 callback)
 {
@@ -661,8 +661,8 @@ s32 fn_803B1F78(CardState* state, s32 channel, s32 file_id, s32 seq_num,
     return 0;
 }
 
-// @TODO: Currently 94.85% match - stwx vs stw+disp in rollback (same as
-// fn_803ADE4C)
+/// @todo Currently 94.85% match - stwx vs stw+disp in rollback (same as
+/// fn_803ADE4C)
 s32 fn_803B21E8(s32 card_state, s32 file_id, s32 seq_num, s32 callback)
 {
     s32 buf[9];
@@ -737,7 +737,7 @@ void hsd_803B24E4(s32* ctx, int channel, int file_no, void* work_buf)
 
 /// #hsd_803B2550
 
-// @TODO: Currently 90.00% match - same regalloc issue as fn_803ACBE8
+/// @todo Currently 90.00% match - same regalloc issue as fn_803ACBE8
 s32 hsd_803B2674(CardState* state)
 {
     u32 blocks;
@@ -748,7 +748,7 @@ s32 hsd_803B2674(CardState* state)
     return (s32) blocks;
 }
 
-// @TODO: Currently 87.04% match - result saved to r27 instead of staying in r3
+/// @todo Currently 87.04% match - result saved to r27 instead of staying in r3
 s32 fn_803B26CC(CardState* state, s32 file_id, s32 seq_num, s32 version,
                 s32 callback)
 {

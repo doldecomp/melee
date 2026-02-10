@@ -556,11 +556,13 @@ struct Item {
         itGShell_ItemVars gshell, zgshell, zrshell;
         itRShell_ItemVars rshell;
         itGamewatchrescue_ItemVars gamewatchrescue;
+        itGreatFoxLaser_ItemVars greatfoxlaser;
         itHassam_ItemVars hassam;
         itHeart_ItemVars heart;
         itHeiho_ItemVars heiho;
         it_266F_ItemVars it_266F;
-        it_279D_ItemVars it_279D, mewtwoshadowball;
+        it_279D_ItemVars it_279D;
+        itMewtwoShadowball_ItemVars mewtwoshadowball;
         it_27B5_ItemVars it_27B5;
         it_27CE_ItemVars it_27CE;
         it_27CF_ItemVars it_27CF;
@@ -578,6 +580,7 @@ struct Item {
         itLGunBeam_ItemVars lgunbeam;
         itLGunRay_ItemVars lgunray;
         itLinkArrow_ItemVars linkarrow;
+        itLugia_ItemVars lugia;
         itLinkBomb_ItemVars linkbomb;
         itLinkBoomerang_ItemVars linkboomerang;
         itLinkBow_ItemVars linkbow;
@@ -588,6 +591,7 @@ struct Item {
         itNokoNoko_ItemVars nokonoko;
         itNessbat_ItemVars nessbat;
         itOctarock_ItemVars octarock;
+        itOldkuri_ItemVars oldkuri;
         itOldottosea_ItemVars oldottosea;
         itPatapata_ItemVars patapata;
         itPeachTurnip_ItemVars peachturnip;
@@ -600,6 +604,7 @@ struct Item {
         itPokemon_ItemVars pokemon;
         itHitodeman_ItemVars hitodeman;
         itSamusBomb_ItemVars samusbomb;
+        itSamusChargeshot_ItemVars samuschargeshot;
         itSamusGrapple_ItemVars samusgrapple;
         itSeakChain_ItemVars seakchain;
         itSeakNeedleThrown_ItemVars seakneedlethrown;
@@ -624,8 +629,11 @@ struct Item {
         itKoopaFlame_ItemVars koopaflame;
         itFreezer_ItemVars freezer;
         itFushigibana_ItemVars fushigibana;
+        itGamewatchchef_ItemVars gamewatchchef;
         itkireihana_ItemVars kireihana;
         itThunder_ItemVars thunder;
+        itTools_ItemVars tools;
+        itUnknown_ItemVars unknown;
         u8 _[0xFCC - 0xDD4];
     } xDD4_itemVar;
 };

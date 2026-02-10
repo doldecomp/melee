@@ -55,7 +55,7 @@ static bool decrease_lifetimer(Item_GObj* item_gobj)
     return false;
 }
 
-// Peach_TurnipTypeDecide - Weighted random selection
+/// Peach_TurnipTypeDecide - Weighted random selection
 s32 it_802BD32C(Item_GObj* item_gobj)
 {
     s32 i, rand, sum, tmp, cum_odds, ret;
@@ -100,7 +100,7 @@ void itPeachTurnip_Logic56_Destroyed(Item_GObj* item_gobj)
     }
 }
 
-// Peach_SpawnAndGiveTurnip
+/// Peach_SpawnAndGiveTurnip
 Item_GObj* it_802BD4AC(Item_GObj* item_gobj, Vec3* pos, Fighter_Part part,
                        ItemKind kind, f32 fdir)
 {
@@ -155,7 +155,7 @@ Item_GObj* it_802BD4AC(Item_GObj* item_gobj, Vec3* pos, Fighter_Part part,
     return spawn_gobj;
 }
 
-// ItemOnSpawn_Turnip
+/// ItemOnSpawn_Turnip
 void itPeachTurnip_Logic56_PickedUp(Item_GObj* item_gobj)
 {
     Item* item;
@@ -219,7 +219,7 @@ bool itPeachturnip_UnkMotion3_Anim(Item_GObj* item_gobj)
     return decrease_lifetimer(item_gobj);
 }
 
-// ProjectilePhysics_TurnipVelocity
+/// ProjectilePhysics_TurnipVelocity
 void itPeachturnip_UnkMotion3_Phys(Item_GObj* item_gobj)
 {
     ItemAttr* attr;

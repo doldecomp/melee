@@ -239,7 +239,7 @@ static MotionFlags const Ft_MF_Unk30 = 1 << 30;
 /// Unused?
 static MotionFlags const Ft_MF_Unk31 = 1 << 31;
 
-// Ledge Grab Macros
+/// Ledge Grab Macros
 
 #define CLIFFCATCH_BOTH 0
 #define CLIFFCATCH_LEFT -1

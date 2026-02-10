@@ -7,10 +7,14 @@
 
 #include "it/items/types.h"
 
+#include "lb/forward.h"
+
 /* 2B3EFC */ u32 it_802B3EFC(Item_GObj* gobj);
-/* 2B3F20 */ UNK_RET it_802B3F20(UNK_PARAMS);
-/* 2B3F88 */ UNK_RET it_802B3F88(UNK_PARAMS);
-/* 2B4224 */ UNK_RET it_802B4224(UNK_PARAMS);
+/* 2B3F20 */ void it_802B3F20(Item_GObj*, Vec3*);
+/* 2B3F88 */ void it_802B3F88(Item_GObj* gobj, Vec3* pos, CollData* coll,
+                              Vec3* vel);
+/* 2B4224 */ Item_GObj* it_802B4224(HSD_GObj* owner, Item_GObj* gobj,
+                                    Vec3* pos, s32 kind, f32 facing_dir);
 /* 2B43B0 */ void it_802B43B0(Item_GObj* gobj);
 /* 2B43D0 */ UNK_RET it_802B43D0(UNK_PARAMS);
 /* 2B4450 */ bool itPikachutjoltair_UnkMotion0_Anim(Item_GObj* gobj);

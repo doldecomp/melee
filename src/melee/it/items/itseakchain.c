@@ -3,6 +3,7 @@
 #include "it/items/itseakchain.static.h"
 
 #include "baselib/jobj.h"
+#include "ft/ftcoll.h"
 
 #include "it/forward.h"
 
@@ -90,9 +91,21 @@ void it_2725_Logic54_PickedUp(Item_GObj* gobj)
     item->on_accessory = fn_802BB428;
 }
 
-/// #it_802BCED4
+void it_802BCED4(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ftColl_8007AFF8(ip->xDD4_itemVar.seakchain.x8);
+    Item_80268E5C(gobj, 3, ITEM_ANIM_UPDATE);
+    ip->on_accessory = (HSD_GObjEvent) fn_802BB694;
+}
 
-/// #it_802BCF2C
+void it_802BCF2C(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ftColl_8007AFF8(ip->xDD4_itemVar.seakchain.x8);
+    Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
+    ip->on_accessory = (HSD_GObjEvent) fn_802BB574;
+}
 
 void it_802BCF84(Item_GObj* gobj)
 {

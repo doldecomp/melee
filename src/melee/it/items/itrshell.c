@@ -11,15 +11,16 @@
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/itcoll.h"
 #include "it/item.h"
 #include "MSL/math.h"
-#include "it/itcoll.h"
 #include "sysdolphin/baselib/random.h"
 
 typedef struct itRShell_Attrs {
-    char pad0[0x4];
+    float x0;
     float x4;
-    char pad8[0x10 - 0x8];
+    float x8;
+    float xC;
     float x10;
     Vec3 x14;
     float x20;
@@ -32,6 +33,7 @@ typedef struct itRShell_Attrs {
     char pad40[0x44 - 0x40];
     float x44;
     Vec x48;
+    s32 x54;
 } itRShell_Attrs;
 
 void it_8028CFE0(Item_GObj* gobj)
@@ -93,14 +95,12 @@ void it_8028D100(Item_GObj* gobj)
 
 set_vel:
     did_hit = 1;
-    ip->x40_vel.x =
-        -ip->xCCC_incDamageDirection * (ip->xCA0 * attrs->x20);
+    ip->x40_vel.x = -ip->xCCC_incDamageDirection * (ip->xCA0 * attrs->x20);
     goto check_speed;
 
 add_vel:
     it_8028D390(gobj);
-    ip->x40_vel.x +=
-        -ip->xCCC_incDamageDirection * (ip->xCA0 * attrs->x24);
+    ip->x40_vel.x += -ip->xCCC_incDamageDirection * (ip->xCA0 * attrs->x24);
     goto check_speed;
 
 check_speed:
@@ -234,7 +234,33 @@ void fn_8028D4A8(Item_GObj* gobj)
     it_80272980(gobj);
 }
 
-/// #it_8028D4E4
+void it_8028D4E4(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    f32 vel;
+    itRShell_Attrs* attrs;
+    f32 abs_vel;
+
+    vel = ip->x40_vel.x;
+    attrs = ip->xC4_article_data->x4_specialAttributes;
+
+    if (vel < 0.0f) {
+        abs_vel = -vel;
+    } else {
+        abs_vel = vel;
+    }
+
+    if (abs_vel > attrs->xC) {
+        s32 sign;
+        if (vel < 0.0f) {
+            sign = -1;
+        } else {
+            sign = 1;
+        }
+        ip->x40_vel.x = (f32) sign;
+        ip->x40_vel.x *= attrs->xC;
+    }
+}
 
 f32 it_8028D56C(Item_GObj* gobj, f32 f1, f32 f2)
 {
@@ -244,9 +270,36 @@ f32 it_8028D56C(Item_GObj* gobj, f32 f1, f32 f2)
     return f * attrs->x14.z;
 }
 
-/// #it_3F14_Logic15_Spawned
+void it_3F14_Logic15_Spawned(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itRShell_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    ip->xDD4_itemVar.rshell.xDD4 = attrs->x0;
+    it_80275174(gobj, ip->xDD4_itemVar.rshell.xDD4);
+    ip->xDD4_itemVar.rshell.xDEC = attrs->x54;
+    ip->xDD4_itemVar.rshell.xDF0 = 0;
+    ip->xDD4_itemVar.rshell.xDD8 = attrs->x3C;
+    ip->xDD4_itemVar.rshell.xDE8 = 1;
+    ip->xDD4_itemVar.rshell.xDF4_b0 = 0;
+    ip->xDD4_itemVar.rshell.xDE0 = 0.0f;
+    it_8028D7F0(gobj);
+}
 
-/// #it_8028D62C
+void it_8028D62C(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itRShell_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    it_8026B390(gobj);
+    it_80275414(gobj);
+    it_802756E0(gobj);
+    ip->x40_vel.z = 0.0f;
+    ip->x40_vel.y = 0.0f;
+    ip->x40_vel.x = 0.0f;
+    ip->xDD4_itemVar.rshell.xDD8 = attrs->x3C;
+    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+    it_80274CAC(gobj);
+    ip->jumped_on = it_8028E6C0;
+}
 
 bool itRshell_UnkMotion0_Anim(Item_GObj* gobj)
 {
@@ -314,9 +367,28 @@ bool itRshell_UnkMotion2_Anim(Item_GObj* gobj)
 
 void itRshell_UnkMotion2_Phys(Item_GObj* gobj) {}
 
-/// #it_3F14_Logic15_Thrown
+void it_3F14_Logic15_Thrown(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itRShell_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    ip->xDD4_itemVar.rshell.xDE8 = 1;
+    ip->xDD4_itemVar.rshell.xDD8 = attrs->x3C;
+    Item_80268E5C(gobj, 3, 6);
+    Item_8026AE84(ip, 0xF2, 0x7F, 0x40);
+}
 
-/// #itRshell_UnkMotion3_Anim
+bool itRshell_UnkMotion3_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->xDD4_itemVar.rshell.xDD8 <= 0.0f) {
+        if (!ip->xDCD_flag.b5) {
+            it_80275444(gobj);
+        }
+    } else {
+        ip->xDD4_itemVar.rshell.xDD8 -= 1.0f;
+    }
+    return false;
+}
 
 void itRshell_UnkMotion3_Phys(Item_GObj* gobj)
 {
@@ -339,7 +411,18 @@ void it_3F14_Logic15_Dropped(Item_GObj* gobj)
     Item_80268E5C(gobj, 4, 6);
 }
 
-/// #itRshell_UnkMotion4_Anim
+bool itRshell_UnkMotion4_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->xDD4_itemVar.rshell.xDD8 <= 0.0f) {
+        if (!ip->xDCD_flag.b5) {
+            it_80275444(gobj);
+        }
+    } else {
+        ip->xDD4_itemVar.rshell.xDD8 -= 1.0f;
+    }
+    return false;
+}
 
 void itRshell_UnkMotion4_Phys(Item_GObj* gobj)
 {
@@ -364,7 +447,27 @@ bool itRshell_UnkMotion4_Coll(Item_GObj* gobj)
 
 /// #it_8028E170
 
-/// #itRshell_UnkMotion6_Anim
+#pragma push
+#pragma dont_inline on
+bool itRshell_UnkMotion6_Anim(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    if (!(ip->xDD4_itemVar.rshell.xDD4 <= 0.0f)) {
+        ip->xDD4_itemVar.rshell.xDD4 -= 1.0f;
+        if (ip->xDD4_itemVar.rshell.xDD8 <= 0.0f) {
+            if (!ip->xDCD_flag.b5) {
+                it_80275444(gobj);
+            }
+        } else {
+            ip->xDD4_itemVar.rshell.xDD8 -= 1.0f;
+        }
+        if (ip->msid == 5) {
+            it_8028CFE0(gobj);
+        }
+    }
+    return false;
+}
+#pragma pop
 
 void itRshell_UnkMotion6_Phys(Item_GObj* gobj)
 {

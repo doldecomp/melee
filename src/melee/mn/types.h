@@ -16,7 +16,7 @@ typedef struct {
     u8 unk3;
     HSD_Text* text;
 } Menu;
-// size 0x8
+/// size 0x8
 
 struct CountEntry {
     u8 id;
@@ -167,7 +167,7 @@ struct StartMeleeRules {
     void (*x44)(void); // on VS match start callback
     void (*x48)(void); // ingame pre-frame callback
     void (*x4C)(void); // ingame post-frame callback
-    void (*x50)(int);  // on VS match end callback
+    void (*x50)(u8);   // on VS match end callback
     struct {
         u8 pad_x0[0x10];
         u8 x10_b0 : 1;

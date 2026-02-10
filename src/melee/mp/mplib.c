@@ -324,7 +324,7 @@ int mpLineGetPrev(int line_id)
     return groundCollLine[line_id].x0->prev_id0;
 }
 
-// remap point p from line a to line b
+/// remap point p from line a to line b
 static void mpRemap2d(float* x_out, float* y_out, float ax0, float ay0,
                       float ax1, float ay1, float bx0, float by0, float bx1,
                       float by1, float px, float py)
@@ -656,7 +656,7 @@ int mpLib_8004E684_RightWall(int line_id, Vec3* vec, float* x_out,
     return line_id;
 }
 
-// direction dependent line intersection
+/// direction dependent line intersection
 bool mpLineIntersection(float a0x, float a0y, float a1x, float a1y, float b0x,
                         float b0y, float b1x, float b1y, float* int_x,
                         float* int_y)
@@ -765,7 +765,7 @@ bool mpLineIntersection(float a0x, float a0y, float a1x, float a1y, float b0x,
     }
 }
 
-// line intersection between a and b, where a is a horizontal line
+/// line intersection between a and b, where a is a horizontal line
 bool mpLineIntersectionH(float* int_x, float* int_y, float a0x, float a0y,
                          float a1x, float b0x, float b0y, float b1x, float b1y)
 {
@@ -1480,7 +1480,7 @@ bool mpCheckCeilingRemap(float ax, float ay, float bx, float by, Vec3* vec_out,
     return r27;
 }
 
-// line intersection between a and b, where a is a vertical line
+/// line intersection between a and b, where a is a vertical line
 bool mpLineIntersectionV(float* int_x, float* int_y, float a0x, float a0y,
                          float a1y, float b0x, float b0y, float b1x, float b1y)
 {
@@ -3545,7 +3545,7 @@ static inline HSD_JObj* jobj_parent(HSD_JObj* jobj)
     return jobj->parent;
 }
 
-// what even is this lol
+/// what even is this lol
 void mpLib_800552B0(int joint_id, HSD_JObj* jobj, int z)
 {
     s32 i;
@@ -4708,81 +4708,81 @@ static struct mpLib_803BF248_t_x4* mpLib_803BF1F8[20] = {
     &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
 };
 
-// clang-format off
+/// clang-format off
 static struct mpLib_803BF248_t mpLib_803BF248[0x47] = {
-    { InternalStageID_Unk00,    &mpLib_803BDC18 },
-    { InternalStageID_Unk01,    &mpLib_803BDC68 },
-    { CASTLE,                   &mpLib_803BDCB8 },
-    { RCRUISE,                  &mpLib_803BDD08 },
-    { KONGO,                    &mpLib_803BDD58 },
-    { GARDEN,                   &mpLib_803BDDA8 },
-    { GREATBAY,                 &mpLib_803BDDF8 },
-    { SHRINE,                   &mpLib_803BDE48 },
-    { ZEBES,                    &mpLib_803BDE98 },
-    { KRAID,                    &mpLib_803BDEE8 },
-    { STORY,                    &mpLib_803BDF38 },
-    { YORSTER,                  &mpLib_803BDF88 },
-    { IZUMI,                    &mpLib_803BDFD8 },
-    { GREENS,                   &mpLib_803BE028 },
-    { CORNERIA,                 &mpLib_803BE078 },
-    { VENOM,                    &mpLib_803BE0C8 },
-    { PSTADIUM,                 &mpLib_803BE118 },
-    { PURA,                     &mpLib_803BE168 },
-    { MUTECITY,                 &mpLib_803BE1B8 },
-    { BIGBLUE,                  &mpLib_803BE208 },
-    { ONETT,                    &mpLib_803BE258 },
-    { FOURSIDE,                 &mpLib_803BE2A8 },
-    { ICEMTN,                   &mpLib_803BE2F8 },
-    { InternalStageID_Unk23,    &mpLib_803BE348 },
-    { INISHIE1,                 &mpLib_803BE398 },
-    { INISHIE2,                 &mpLib_803BE3E8 },
-    { InternalStageID_Unk26,    &mpLib_803BE438 },
-    { FLATZONE,                 &mpLib_803BE488 },
-    { OLDPUPUPU,                &mpLib_803BE4D8 },
-    { OLDYOSHI,                 &mpLib_803BE528 },
-    { OLDKONGO,                 &mpLib_803BE578 },
-    { SHRINEROUTE,              &mpLib_803BE5C8 },
-    { STAGEKIND_UNK32,          &mpLib_803BE618 },
-    { STAGEKIND_UNK33,          &mpLib_803BE668 },
-    { STAGEKIND_UNK34,          &mpLib_803BE6B8 },
-    { STAGEKIND_UNK35,          &mpLib_803BE708 },
-    { STAGEKIND_UNK36,          &mpLib_803BE758 },
-    { STAGEKIND_UNK37,          &mpLib_803BE7A8 },
-    { STAGEKIND_UNK38,          &mpLib_803BE7F8 },
-    { STAGEKIND_UNK39,          &mpLib_803BE848 },
-    { 0x28,                     &mpLib_803BE898 },
-    { 0x29,                     &mpLib_803BE8E8 },
-    { 0x2A,                     &mpLib_803BE938 },
-    { 0x2B,                     &mpLib_803BE988 },
-    { 0x2C,                     &mpLib_803BE9D8 },
-    { 0x2D,                     &mpLib_803BEA28 },
-    { 0x2E,                     &mpLib_803BEA78 },
-    { 0x2F,                     &mpLib_803BEAC8 },
-    { 0x30,                     &mpLib_803BEB18 },
-    { 0x31,                     &mpLib_803BEB68 },
-    { 0x32,                     &mpLib_803BEBB8 },
-    { 0x33,                     &mpLib_803BEC08 },
-    { 0x34,                     &mpLib_803BEC58 },
-    { 0x35,                     &mpLib_803BECA8 },
-    { 0x36,                     &mpLib_803BECF8 },
-    { 0x37,                     &mpLib_803BED48 },
-    { 0x38,                     &mpLib_803BED98 },
-    { 0x39,                     &mpLib_803BEDE8 },
-    { 0x3A,                     &mpLib_803BEE38 },
-    { 0x3B,                     &mpLib_803BEE88 },
-    { 0x3C,                     &mpLib_803BEED8 },
-    { 0x3D,                     &mpLib_803BEF28 },
-    { 0x3E,                     &mpLib_803BEF78 },
-    { 0x3F,                     &mpLib_803BEFC8 },
-    { 0x40,                     &mpLib_803BF018 },
-    { 0x41,                     &mpLib_803BF068 },
-    { 0x42,                     &mpLib_803BF0B8 },
-    { HOMERUN,                  &mpLib_803BF108 },
-    { 0x44,                     &mpLib_803BF158 },
-    { 0x45,                     &mpLib_803BF1A8 },
-    { 0x46,                     &mpLib_803BF1F8 },
+    { InternalStageID_Unk00, &mpLib_803BDC18 },
+    { InternalStageID_Unk01, &mpLib_803BDC68 },
+    { CASTLE, &mpLib_803BDCB8 },
+    { RCRUISE, &mpLib_803BDD08 },
+    { KONGO, &mpLib_803BDD58 },
+    { GARDEN, &mpLib_803BDDA8 },
+    { GREATBAY, &mpLib_803BDDF8 },
+    { SHRINE, &mpLib_803BDE48 },
+    { ZEBES, &mpLib_803BDE98 },
+    { KRAID, &mpLib_803BDEE8 },
+    { STORY, &mpLib_803BDF38 },
+    { YORSTER, &mpLib_803BDF88 },
+    { IZUMI, &mpLib_803BDFD8 },
+    { GREENS, &mpLib_803BE028 },
+    { CORNERIA, &mpLib_803BE078 },
+    { VENOM, &mpLib_803BE0C8 },
+    { PSTADIUM, &mpLib_803BE118 },
+    { PURA, &mpLib_803BE168 },
+    { MUTECITY, &mpLib_803BE1B8 },
+    { BIGBLUE, &mpLib_803BE208 },
+    { ONETT, &mpLib_803BE258 },
+    { FOURSIDE, &mpLib_803BE2A8 },
+    { ICEMTN, &mpLib_803BE2F8 },
+    { InternalStageID_Unk23, &mpLib_803BE348 },
+    { INISHIE1, &mpLib_803BE398 },
+    { INISHIE2, &mpLib_803BE3E8 },
+    { InternalStageID_Unk26, &mpLib_803BE438 },
+    { FLATZONE, &mpLib_803BE488 },
+    { OLDPUPUPU, &mpLib_803BE4D8 },
+    { OLDYOSHI, &mpLib_803BE528 },
+    { OLDKONGO, &mpLib_803BE578 },
+    { SHRINEROUTE, &mpLib_803BE5C8 },
+    { STAGEKIND_UNK32, &mpLib_803BE618 },
+    { STAGEKIND_UNK33, &mpLib_803BE668 },
+    { STAGEKIND_UNK34, &mpLib_803BE6B8 },
+    { STAGEKIND_UNK35, &mpLib_803BE708 },
+    { STAGEKIND_UNK36, &mpLib_803BE758 },
+    { STAGEKIND_UNK37, &mpLib_803BE7A8 },
+    { STAGEKIND_UNK38, &mpLib_803BE7F8 },
+    { STAGEKIND_UNK39, &mpLib_803BE848 },
+    { 0x28, &mpLib_803BE898 },
+    { 0x29, &mpLib_803BE8E8 },
+    { 0x2A, &mpLib_803BE938 },
+    { 0x2B, &mpLib_803BE988 },
+    { 0x2C, &mpLib_803BE9D8 },
+    { 0x2D, &mpLib_803BEA28 },
+    { 0x2E, &mpLib_803BEA78 },
+    { 0x2F, &mpLib_803BEAC8 },
+    { 0x30, &mpLib_803BEB18 },
+    { 0x31, &mpLib_803BEB68 },
+    { 0x32, &mpLib_803BEBB8 },
+    { 0x33, &mpLib_803BEC08 },
+    { 0x34, &mpLib_803BEC58 },
+    { 0x35, &mpLib_803BECA8 },
+    { 0x36, &mpLib_803BECF8 },
+    { 0x37, &mpLib_803BED48 },
+    { 0x38, &mpLib_803BED98 },
+    { 0x39, &mpLib_803BEDE8 },
+    { 0x3A, &mpLib_803BEE38 },
+    { 0x3B, &mpLib_803BEE88 },
+    { 0x3C, &mpLib_803BEED8 },
+    { 0x3D, &mpLib_803BEF28 },
+    { 0x3E, &mpLib_803BEF78 },
+    { 0x3F, &mpLib_803BEFC8 },
+    { 0x40, &mpLib_803BF018 },
+    { 0x41, &mpLib_803BF068 },
+    { 0x42, &mpLib_803BF0B8 },
+    { HOMERUN, &mpLib_803BF108 },
+    { 0x44, &mpLib_803BF158 },
+    { 0x45, &mpLib_803BF1A8 },
+    { 0x46, &mpLib_803BF1F8 },
 };
-// clang-format on
+/// clang-format on
 
 float mpLib_800569EC(u32 unk)
 {
@@ -5576,8 +5576,8 @@ bool mpCheckedBounding(void)
     return didCheckBounding;
 }
 
-// takes a bounding box and checks each joint to see if they're within range
-// if they are outside the bounding box, they are marked as too far
+/// takes a bounding box and checks each joint to see if they're within range
+/// if they are outside the bounding box, they are marked as too far
 void mpBoundingCheck(float left, float bottom, float right, float top)
 {
     CollJoint* curr = jointListStart;
@@ -6537,7 +6537,7 @@ static const GXColor mpLib_804D8148 = { 0x80, 0xC0, 0xC0, 0xFF };
 static const GXColor mpLib_804D814C = { 0xC0, 0xFF, 0xFF, 0x80 };
 static const GXColor mpLib_804D8150 = { 0x40, 0x40, 0xFF, 0x00 };
 
-// blast zones, camera bounds, etc
+/// blast zones, camera bounds, etc
 void mpLib_DrawZones(void)
 {
     u8 _3[0x4];

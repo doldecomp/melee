@@ -66,8 +66,8 @@ HudIndex* ifStatus_802F4910(void)
     return &ifStatus_HudInfo;
 }
 
-// "jobj.h" @ lbl_804D57B0
-// "jobj" @ lbl_804D57B8
+/// "jobj.h" @ lbl_804D57B0
+/// "jobj" @ lbl_804D57B8
 #define ASSERT_NOT_NULL(value, line)                                          \
     if (value == NULL) {                                                      \
         __assert("jobj.h", line, "jobj");                                     \
@@ -601,8 +601,8 @@ static inline HSD_GObj* nth_node(HSD_GObj* node, s32 n)
     return node;
 }
 
-// 99.81% match
-// https://decomp.me/scratch/XGFpw
+/// 99.81% match
+/// https://decomp.me/scratch/XGFpw
 HSD_GObj* ifStatus_802F6194(HSD_GObj* node, s32 n)
 {
     HSD_GObj* gx;
@@ -679,7 +679,7 @@ void ifStatus_802F6804(void)
     } while (i < 6);
 }
 
-// Hide Percentage Digits
+/// Hide Percentage Digits
 void ifStatus_802F6898(void)
 {
     s32 i;
@@ -689,7 +689,7 @@ void ifStatus_802F6898(void)
     }
 }
 
-// Show All Percentage Digits
+/// Show All Percentage Digits
 void ifStatus_802F68F0(void)
 {
     s32 i;
@@ -906,7 +906,7 @@ void ifStatus_802F7134(void)
     }
 }
 
-// free
+/// free
 void ifStatus_802F7220(void)
 {
     s32 i;

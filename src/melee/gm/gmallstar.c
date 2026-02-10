@@ -1,7 +1,9 @@
 #include "gmallstar.h"
+
 #include "gm/gmallstar.static.h"
 
 #include "gm_unsplit.h"
+
 #include "baselib/random.h"
 #include "gr/ground.h"
 
@@ -451,9 +453,9 @@ void gm_801B60A4_OnLoad(void)
 
     {
         gm_80490940_t* p = gm_80490940;
-        char* pp = (char*)p;
+        char* pp = (char*) p;
         int i = 25;
-        while(i--) {
+        while (i--) {
             *(pp++) = 0;
         }
     }
@@ -516,7 +518,7 @@ void gm_801B60A4_OnLoad(void)
 
         temp = 0x1A;
         if (i < temp) {
-            u8* q = ((u8*)p) + i;
+            u8* q = ((u8*) p) + i;
             i = temp - i;
             do {
                 *(q++ + 0x76) = temp;

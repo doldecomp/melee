@@ -145,7 +145,7 @@ void ftAnim_8006DF0C(Fighter* fp)
     }
 }
 
-// load bearing, fixes float order
+/// load bearing, fixes float order
 static void scale_inline(float scale, Vec3* sp38)
 {
     float f1 = 1.0F / scale;
@@ -377,7 +377,7 @@ void ftAnim_8006E9B4(Fighter_GObj* gobj)
     fp->cur_anim_frame = ftAnim_8006F3DC(gobj);
 }
 
-// Process animation?
+/// Process animation?
 void ftAnim_8006EBA4(Fighter_GObj* gobj)
 {
     ftAnim_8006E9B4(gobj);
@@ -1190,7 +1190,7 @@ void ftAnim_80070904(Fighter* fp, Fighter_Part start, HSD_AnimJoint* animjoint)
 
 void ftAnim_80070A10(Fighter* ft, Fighter_Part part, FigaTree* tree)
 {
-    /// @todo: inline this
+    /// @todo inline this
     // ftAnim_8006F7C8(fp, part, true, tree);
     s8* nodes;
     FigaTrack* tracks;
@@ -1335,7 +1335,7 @@ void ftAnim_80070E74(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     int i;
     for (i = 0; i < (int) ARRAY_SIZE(fp->x8B0); i++) {
-        /// @todo: inline #ftAnim_80070C48 here?
+        /// @todo inline #ftAnim_80070C48 here?
         struct Fighter_x8B0_t* r7 = &fp->x8B0[i];
         if (r7->x10 != -1) {
             ftAnim_ApplyPartAnim(gobj, i, r7->x10, 0.0F);

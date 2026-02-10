@@ -472,10 +472,14 @@ typedef struct itPeachTurnip_ItemVars {
 } itPeachTurnip_ItemVars;
 
 typedef struct itPikachutJoltGround_ItemVars {
-    /* +0 +DD4 */ char pad_0[0x8];
-    /* +8 +DDC */ UNK_T unk_8;
-    /* +C +DE0 */ char pad_1[0x8];
+    /* +0 +DD4 */ f32 xDD4;
+    /* +4 +DD8 */ char pad_0[0x4];
+    /* +8 +DDC */ Item_GObj* xDDC;
+    /* +C +DE0 */ s32 xDE0;
+    /* +10 +DE4 */ s32 xDE4;
     /* +14 +DE8 */ Vec3 xDE8;
+    /* +20 +DF4 */ Vec3 xDF4;
+    /* +2C +E00 */ Vec3 xE00;
 } itPikachutJoltGround_ItemVars;
 
 typedef struct itPikachutJoltAir_ItemVars {
@@ -497,6 +501,13 @@ typedef struct itPikachuthunder_ItemVars {
     /* +38 +E0C */ Item_GObj* x38;
 } itPikachuthunder_ItemVars;
 
+typedef struct itPikachutJoltGroundAttributes {
+    /* +0 */ char pad_0[0x4];
+    /* +4 */ f32 x4;
+    /* +8 */ f32 x8;
+    /* +C */ f32 xC;
+} itPikachutJoltGroundAttributes;
+
 typedef struct itPikachuthunderAttributes {
     /* +0 */ f32 x0;
     /* +4 */ f32 x4;
@@ -507,6 +518,12 @@ typedef struct itSamusBomb_ItemVars {
     /* +0 +DD4 */ char pad_0[0x4];
     /* +4 +DD8 */ s32 xDD8;
 } itSamusBomb_ItemVars;
+
+typedef struct itSamusChargeshot_ItemVars {
+    /* +0 +DD4 */ s32 x0;
+    /* +4 +DD8 */ f32 x4;
+    /* +8 +DDC */ f32 x8;
+} itSamusChargeshot_ItemVars;
 
 typedef struct itSamusGrapple_ItemVars {
     /* +0 +DD4 */ f32 x0;
@@ -560,5 +577,48 @@ typedef struct itUnk4_ItemVars {
     /*  +18 ip+DEC */ u8 xDEC_b1 : 1;
     /*  +1C ip+DF0 */ Mtx xDF0;
 } itUnk4_ItemVars;
+
+typedef struct itGamewatchchef_ItemVars {
+    /* +0 ip+DD4 */ s32 x0;
+    /* +4 ip+DD8 */ s32 x4;
+} itGamewatchchef_ItemVars;
+
+typedef struct itGamewatchchefAttrEntry {
+    /* +0 */ f32 x0;
+    /* +4 */ f32 x4;
+    /* +8 */ f32 x8;
+    /* +C */ f32 xC;
+    /* +10 */ f32 x10;
+} itGamewatchchefAttrEntry;
+
+typedef struct itGamewatchchefAttributes {
+    /* +0 */ void* x0;
+    /* +4 */ f32 x4;
+    /* +8 */ f32 x8;
+    /* +C */ f32 xC;
+    /* +10 */ itGamewatchchefAttrEntry entries[1];
+} itGamewatchchefAttributes;
+
+typedef struct itTools_ItemVars {
+    /* +0 ip+DD4 */ s32 x0;
+} itTools_ItemVars;
+
+typedef struct itToolsAttrEntry {
+    /* +0 */ f32 x0;
+    /* +4 */ f32 x4;
+    /* +8 */ f32 x8;
+    /* +C */ f32 xC;
+    /* +10 */ f32 x10;
+    /* +14 */ f32 x14;
+    /* +18 */ f32 x18;
+} itToolsAttrEntry;
+
+typedef struct itToolsAttributes {
+    /* +0 */ f32 x0;
+    /* +4 */ f32 x4;
+    /* +8 */ f32 x8;
+    /* +C */ f32 xC;
+    /* +10 */ itToolsAttrEntry entries[1];
+} itToolsAttributes;
 
 #endif

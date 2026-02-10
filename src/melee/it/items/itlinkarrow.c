@@ -23,7 +23,7 @@
 
 #include <math.h>
 
-// @todo: Remove these once lbcoll is matched.
+/// @todo Remove these once lbcoll is matched.
 static inline void fake_HSD_JObjSetRotation(HSD_JObj* jobj, Quaternion* rotate)
 {
     HSD_ASSERT(618, jobj);
@@ -269,8 +269,7 @@ inline HSD_JObj* it_802A850C_inline(HSD_Joint* joint)
     HSD_JObj* var_r30;
     if (joint != NULL) {
         var_r30 = HSD_JObjLoadJoint(joint);
-    } else {
-        // @todo: This should just return uninitialized, but the
+    } else { ///< @todo This should just return uninitialized, but the
         // formatter doesn't like it.
         return NULL;
     }
@@ -412,7 +411,7 @@ void itLinkArrow_Logic98_PickedUp(Item_GObj* gobj)
     Item_80268E5C((HSD_GObj*) gobj, 0, ITEM_ANIM_UPDATE);
 }
 
-// Item could be passed to influence stack
+/// Item could be passed to influence stack
 static void inline itLinkarrow_UnkMotion1_Anim_inline_s_2(HSD_GObj* gobj,
                                                           Item* item)
 {
@@ -677,8 +676,7 @@ void it_802A9458(HSD_GObj* gobj)
     Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
     HSD_JObjSetRotationZ(jobj, item->xDD4_itemVar.linkarrow.x94);
     it_802A8330(gobj);
-    switch (item->kind) {
-    // @todo: replace with enum names
+    switch (item->kind) { ///< @todo replace with enum names
     case It_Kind_Link_Arrow:
     case It_Kind_Kirby_LinkArrow:
         Item_8026AE84(item, 0x27152, 0x7F, 0x40);
