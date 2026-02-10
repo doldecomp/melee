@@ -1381,4 +1381,16 @@ typedef struct itUnknownAttributes {
     /* +18 */ s32 x18;
 } itUnknownAttributes;
 
+typedef struct itLugia_ItemVars {
+    /* +00 ip+DD4 */ u8 x0_pad[0x7C];
+    /* +7C ip+E50 */ Vec3 xE50;
+} itLugia_ItemVars;
+
+typedef struct itGreatFoxLaser_ItemVars {
+    /* +00 ip+DD4 */ u8 x0_pad[0x34];
+    /* +34 ip+E08 */ s16 x34;
+    /* +36 ip+E0A */ s16 x36;
+    /* +38 ip+E0C */ UNK_T x38;
+} itGreatFoxLaser_ItemVars;
+
 #endif

@@ -642,7 +642,7 @@ void grIceMt_801F815C(Ground_GObj* param1)
 {
     Ground* gp = GET_GROUND(param1);
     grIceMt_801F929C(param1, &gp->gv.icemt.xF8[2]);
-    grIceMt_801F929C(param1, (u8*) gp + 0x10E);
+    grIceMt_801F929C(param1, &gp->gv.icemt.x10E);
     grIceMt_801F98A8(param1);
     Ground_801C2FE0(param1);
 }

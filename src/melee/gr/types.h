@@ -430,6 +430,8 @@ struct grIceMt_GroundVars {
     /* +0 gp+D8 */ u32 xF0; // padding
     /* +0 gp+D8 */ s16 xF4[2];
     /* +0 gp+D8 */ HSD_GObj* xF8[5];
+    /* +0 gp+D8 */ s16 x10C;
+    /* +0 gp+D8 */ s16 x10E;
 };
 struct grIceMt_GroundVars2 {
     /* +0 gp+C4 */ f32 xC4;

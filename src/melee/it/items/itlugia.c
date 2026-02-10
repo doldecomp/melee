@@ -54,7 +54,7 @@ void it_802D1580(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itLugiaAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
-    ip->xDD4_itemVar.foxblaster.xE50.x = -attrs->x4;
+    ip->xDD4_itemVar.lugia.xE50.x = -attrs->x4;
     Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
     ip->entered_hitlag = efLib_PauseAll;
     ip->exited_hitlag = efLib_ResumeAll;

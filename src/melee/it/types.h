@@ -556,6 +556,7 @@ struct Item {
         itGShell_ItemVars gshell, zgshell, zrshell;
         itRShell_ItemVars rshell;
         itGamewatchrescue_ItemVars gamewatchrescue;
+        itGreatFoxLaser_ItemVars greatfoxlaser;
         itHassam_ItemVars hassam;
         itHeart_ItemVars heart;
         itHeiho_ItemVars heiho;
@@ -579,6 +580,7 @@ struct Item {
         itLGunBeam_ItemVars lgunbeam;
         itLGunRay_ItemVars lgunray;
         itLinkArrow_ItemVars linkarrow;
+        itLugia_ItemVars lugia;
         itLinkBomb_ItemVars linkbomb;
         itLinkBoomerang_ItemVars linkboomerang;
         itLinkBow_ItemVars linkbow;
