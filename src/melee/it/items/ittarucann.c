@@ -113,6 +113,7 @@ void it_3F14_Logic5_Spawned(Item_GObj* gobj)
     ip->xDAC_itcmd_var0 = 0;
     ip->xDB0_itcmd_var1 = 0;
     ip->xDD4_itemVar.tarucann.x0 = 0;
+    /// @todo float regswap. same as in it_3F14_Logic2_Spawned
     temp = 0.34906584f * HSD_Randf();
     ip->xDD4_itemVar.tarucann.x8 = temp + 1.3089969f;
     ip->xDD4_itemVar.tarucann.xC = 0.0f;
