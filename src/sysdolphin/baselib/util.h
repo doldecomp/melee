@@ -18,6 +18,9 @@ extern Mtx HSD_identityMtx;
 
 #define FLT_MIN 1.17549435e-38f
 
+#define DEG_TO_RAD 0.017453292519943295
+#define RAD_TO_DEG 57.29577951308232
+
 static inline int vec_normalize_check(Vec3* src, Vec3* dst)
 {
     if (!src || !dst) {
