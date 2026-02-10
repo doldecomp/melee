@@ -40,7 +40,7 @@ void ftPr_SpecialS_8013D658(HSD_GObj* gobj)
 
 void ftPr_SpecialS_8013D764(HSD_GObj* gobj)
 {
-    /// @todo Named flags.
+    /// @@todo Named flags.
     static u32 const mf = (1 << 1) | (1 << 4) | (1 << 7) | (1 << 9) |
                           (1 << 18) | (1 << 19) | (1 << 22) | (1 << 26) |
                           (1 << 27);
@@ -134,7 +134,7 @@ static inline void setupPurinCallbacks(HSD_GObj* gobj)
 
 void ftPr_SpecialNStart_Anim(HSD_GObj* gobj)
 {
-    /// @todo Named flags.
+    /// @@todo Named flags.
     static u32 const mf = (1 << 1) | (1 << 4) | (1 << 18);
     Fighter* fp = GET_FIGHTER(gobj);
     PAD_STACK(4 * 4);
@@ -163,7 +163,7 @@ void ftPr_SpecialNStart_Anim(HSD_GObj* gobj)
 
 void ftPr_SpecialAirNStart_Anim(HSD_GObj* gobj)
 {
-    /// @todo Named flags.
+    /// @@todo Named flags.
     static u32 const mf = (1 << 1) | (1 << 4) | (1 << 18);
     Fighter* fp = GET_FIGHTER(gobj);
     PAD_STACK(4 * 4);
@@ -301,7 +301,7 @@ void ftPr_SpecialNHit_Phys(HSD_GObj* gobj)
 
 void ftPr_SpecialNStart_Coll(HSD_GObj* gobj)
 {
-    /// @todo Named flags.
+    /// @@todo Named flags.
     static u32 const mf = (1 << 1) | (1 << 4) | (1 << 7) | (1 << 12) |
                           (1 << 14) | (1 << 18) | (1 << 19) | (1 << 22) |
                           (1 << 26) | (1 << 27);
@@ -339,7 +339,7 @@ void ftPr_SpecialNStart_Coll(HSD_GObj* gobj)
 
 void ftPr_SpecialNEnd_Coll(Fighter_GObj* gobj)
 {
-    /// @todo Named flags.
+    /// @@todo Named flags.
     static u32 const mf = (1 << 1) | (1 << 4) | (1 << 7) | (1 << 12) |
                           (1 << 14) | (1 << 18) | (1 << 19) | (1 << 22) |
                           (1 << 26) | (1 << 27);
@@ -360,10 +360,10 @@ void ftPr_SpecialNEnd_Coll(Fighter_GObj* gobj)
 
 /// #ftPr_SpecialAirNStartTurn_Coll
 
-/// @todo Maybe shared inline with #ftPr_SpecialNEnd_Coll?
+/// @@todo Maybe shared inline with #ftPr_SpecialNEnd_Coll?
 void ftPr_SpecialAirNEnd_Coll(Fighter_GObj* gobj)
 {
-    /// @todo Named flags.
+    /// @@todo Named flags.
     static u32 const mf = (1 << 1) | (1 << 4) | (1 << 7) | (1 << 12) |
                           (1 << 14) | (1 << 18) | (1 << 19) | (1 << 22) |
                           (1 << 26) | (1 << 27);

@@ -23,7 +23,7 @@
 /* 09E7B4 */ void ftCo_8009E7B4(Fighter* fp, u8 (*)[2]);
 /* 09EAF8 */ void ftCo_8009EAF8(HSD_GObj* gobj);
 
-/// @todo
+/// @@todo
 /* 09CB40 */ static void ftCo_8009CB40(Fighter* fp, ssize_t bone_idx, bool,
                                        FigaTree*);
 /* 09D18C */ static void ftCo_8009D18C(Fighter* fp);

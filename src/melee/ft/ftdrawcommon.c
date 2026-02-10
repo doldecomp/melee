@@ -358,7 +358,7 @@ static inline void ftDrawCommon_80080E18_inline2(HSD_GObj* gobj, Fighter* old)
     Vec3* pos;
 
     MtxPtr matrix = HSD_CObjGetInvViewingMtxPtr(Camera_800310B8());
-    /// @todo this seems to be using the wrong common attributes
+    /// @@todo this seems to be using the wrong common attributes
     PSMTXMultVec(matrix, (Vec3*) &old->mv.co.walk.fast_anim_frame,
                  &fp->cur_pos);
     pos = &fp->cur_pos;

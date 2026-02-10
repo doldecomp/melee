@@ -109,7 +109,7 @@ void ftMh_WalkLoop_Anim(HSD_GObj* gobj)
     Vec3 pos;
     Vec3 vel;
 
-    /// @todo #GET_FIGHTER uses slightly too much stack; inline issue.
+    /// @@todo #GET_FIGHTER uses slightly too much stack; inline issue.
     Fighter* fp = gobj->user_data;
     ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
 
@@ -144,7 +144,7 @@ void ftMh_WalkLoop_IASA(HSD_GObj* gobj)
 
 void ftMh_WalkLoop_Phys(HSD_GObj* gobj)
 {
-    /// @todo #GET_FIGHTER
+    /// @@todo #GET_FIGHTER
     Fighter* fp = gobj->user_data;
     ftData* data = fp->ft_data;
     ftMasterHand_SpecialAttrs* da = data->ext_attr;

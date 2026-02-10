@@ -79,7 +79,7 @@ void ftMh_TagGrab_Phys(HSD_GObj* gobj)
 
 void ftMh_TagGrab_Coll(HSD_GObj* gobj) {}
 
-/// @todo Fix weird forward declaration
+/// @@todo Fix weird forward declaration
 extern const float neg1;
 
 void ftMh_TagSqueeze_Anim(HSD_GObj* gobj)

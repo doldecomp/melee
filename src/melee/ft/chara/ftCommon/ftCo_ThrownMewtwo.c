@@ -15,7 +15,7 @@
 void ftCo_800BD0E8(Fighter_GObj* gobj, FtMotionId msid)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-/// @todo #SOLUTION 0
+/// @@todo #SOLUTION 0
 #define SOLUTION 1
 #if SOLUTION == 0
     ftCo_Thrown_Enter(gobj, msid,

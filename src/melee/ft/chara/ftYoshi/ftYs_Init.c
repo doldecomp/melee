@@ -38,7 +38,7 @@
 #include <baselib/debug.h>
 #include <baselib/mobj.h>
 
-/// @todo Belongs in #ftYs_Guard.c?
+/// @@todo Belongs in #ftYs_Guard.c?
 /* 3B75C0 */ Vec3 const ftYs_Unk1_803B75C0 = { 0 };
 
 #undef __FILE__
@@ -168,7 +168,7 @@ MotionState ftYs_Init_MotionStateTable[ftYs_MS_SelfCount] = {
     },
     {
         // ftYs_MS_SpecialAirN1_1 = 352
-        /// @todo Fix names, this is SpecialN
+        /// @@todo Fix names, this is SpecialN
         ftYs_SM_SpecialAirN1_1,
         ftYs_MF_SpecialS,
         FtMoveId_SpecialN << 24,
@@ -257,7 +257,7 @@ MotionState ftYs_Init_MotionStateTable[ftYs_MS_SelfCount] = {
     },
     {
         // ftYs_MS_SpecialAirSStart_1 = 360
-        /// @todo Fix names, this is SpecialS
+        /// @@todo Fix names, this is SpecialS
         ftYs_SM_SpecialAirSStart,
         ftYs_MF_SpecialHi,
         FtMoveId_SpecialS << 24,

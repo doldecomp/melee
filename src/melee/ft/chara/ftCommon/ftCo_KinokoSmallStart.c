@@ -59,7 +59,7 @@ bool Fighter_PoisonMushroomApply(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
 
-    /// @todo Float hack
+    /// @@todo Float hack
     (void) 1.0f;
     (void) 0.0f;
 

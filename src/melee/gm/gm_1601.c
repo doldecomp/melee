@@ -1749,7 +1749,7 @@ void gm_80167BC8(VsModeData* vs_data)
                 gmMainLib_8015CE44(i, (s32) vs_data->data.players[i].xA);
             if (handicap != NULL) {
                 vs_data->data.players[i].handicap = *handicap;
-                // TODO :: fix these to actually get the offensive and
+                // @todo :: fix these to actually get the offensive and
                 // defensive ratios just not sure how to setup the structs
                 vs_data->data.players[i].x18 = lbl_803B7930[(u8) *handicap].x;
                 vs_data->data.players[i].x1C = lbl_803B7930[(u8) *handicap].y;
@@ -1773,7 +1773,7 @@ void gm_80167BC8(VsModeData* vs_data)
     vs_data->data.rules.xB = (s8) prefs->item_freq;
     prefs = gmMainLib_8015CC58();
 
-    // TODO :: some weird item copy thing that needs to be fixed
+    // @todo :: some weird item copy thing that needs to be fixed
     i = 0;
     do {
         if ((s32) lbl_803B7844[i] != 0x23) {

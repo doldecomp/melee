@@ -1,5 +1,5 @@
 /**
- * @todo this file also contains the OnEnter callback for MN_DEBUG_MENU,
+ * @@todo this file also contains the OnEnter callback for MN_DEBUG_MENU,
  * which should probably be split out into a separate file
  */
 

@@ -41,7 +41,7 @@ struct Ground_GObj {
 typedef HSD_GObj Ground_GObj;
 #endif
 
-/// @todo Finish values, use @c PascalCase
+/// @@todo Finish values, use @c PascalCase
 typedef enum InternalStageId {
     InternalStageID_Unk00,
     InternalStageID_Unk01,

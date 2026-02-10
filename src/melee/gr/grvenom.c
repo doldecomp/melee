@@ -22,7 +22,7 @@
 #include <baselib/random.h>
 
 /// Forward declaration of grVe_Data for use by multiple functions
-/// TODO: This struct should be defined in gr/types.h or a proper header
+/// @todo: This struct should be defined in gr/types.h or a proper header
 typedef struct grVe_Data {
     char x0[0x44];
     StageCallbacks callbacks[1]; // at offset 0x44
@@ -33,7 +33,7 @@ typedef struct grVe_Data {
 
 extern grVe_Data grVe_803E5348;
 
-/// TODO: Move these local structs to proper headers
+/// @todo: Move these local structs to proper headers
 typedef struct grVe_ExtData {
     char pad[0x20];
     void* x20[3];
@@ -71,7 +71,7 @@ typedef struct grVe_GroundData {
 void grVenom_80203B14(bool arg) {}
 
 /// grVenom_80203B18
-/// @TODO: Currently 88.51% match - needs control flow/register allocation fix
+/// @@todo: Currently 88.51% match - needs control flow/register allocation fix
 /// Stage initialization function for Venom
 
 extern f32 grVe_804DB738;
@@ -269,7 +269,7 @@ void grVenom_80203FCC(Ground_GObj* arg) {}
 
 void grVenom_80203FD0(Ground_GObj* arg) {}
 
-/// @TODO: Currently 99.90% match - needs minor register allocation fix
+/// @@todo: Currently 99.90% match - needs minor register allocation fix
 void grVenom_80203FD4(Ground_GObj* gobj)
 {
     HSD_JObj* jobj1;
@@ -351,7 +351,7 @@ bool grVenom_8020427C(Ground_GObj* arg)
 }
 
 /// grVenom_80204284
-/// @TODO: Currently 97.29% match - needs minor register allocation fix
+/// @@todo: Currently 97.29% match - needs minor register allocation fix
 void grVenom_80204284(Ground_GObj* gobj)
 {
     Ground* gp;
@@ -404,7 +404,7 @@ void grVenom_80204284(Ground_GObj* gobj)
 
 void grVenom_80204424(Ground_GObj* arg) {}
 
-/// @TODO: Currently 99.70% match - needs register allocation fix
+/// @@todo: Currently 99.70% match - needs register allocation fix
 /// FAKE MATCH: grVenom_GroundVars has wrong types for this function
 void grVenom_80204428(Ground_GObj* gobj)
 {
@@ -451,7 +451,7 @@ extern GXColor grVe_804DB7DC;
 extern GXColor grVe_804DB7E0;
 extern GXColor grVe_804DB7E4;
 
-/// TODO: grVenom_GroundVars in types.h has xE0 as f32, but this function
+/// @todo: grVenom_GroundVars in types.h has xE0 as f32, but this function
 /// treats it as a bitfield. The struct needs to be updated.
 typedef struct GroundVenom_ForLighting {
     char pad[0xE0];
@@ -610,8 +610,8 @@ bool grVenom_802052D8(Ground_GObj* arg)
     return false;
 }
 
-/// @TODO: Currently 99.92% match - needs minor register allocation fix
-/// TODO: VenomSpawnData struct should be defined in gr/types.h or grvenom.h
+/// @@todo: Currently 99.92% match - needs minor register allocation fix
+/// @todo: VenomSpawnData struct should be defined in gr/types.h or grvenom.h
 typedef struct {
     u8 pad[0x218];
     f32 x;
@@ -656,7 +656,7 @@ void grVenom_802052E0(Ground_GObj* gobj, Vec3* pos)
 }
 
 /// grVenom_802053B0
-/// @TODO: Currently 92.15% match - needs register allocation fix
+/// @@todo: Currently 92.15% match - needs register allocation fix
 /// Needs: grVe_804DB740 extern float
 
 extern f32 grVe_804DB740;
@@ -801,7 +801,7 @@ bool grVenom_80205750(Ground_GObj* arg)
 void grVenom_80205AD0(Ground_GObj* arg) {}
 
 /// grVenom_80205AD4
-/// @TODO: Currently 92.66% match - needs minor code ordering fix
+/// @@todo: Currently 92.66% match - needs minor code ordering fix
 void grVenom_80205AD4(Ground_GObj* gobj)
 {
     u8* base;
@@ -938,7 +938,7 @@ void grVenom_80206870(Ground_GObj* arg) {}
 
 #if 0
 /// grVenom_80206874
-/// @TODO: Currently 32.92% match - below 50% threshold, needs significant work
+/// @@todo: Currently 32.92% match - below 50% threshold, needs significant work
 void grVenom_80206874(Ground_GObj* gobj)
 {
     u8* base;
@@ -998,7 +998,7 @@ void grVenom_80206874(Ground_GObj* gobj)
         *(s32*)&gp->gv.venom.xE4 = -1;
     }
 
-    // TODO: Need grVe_804D6A30 struct with cam_zoom_rate at 0x34
+    // @todo: Need grVe_804D6A30 struct with cam_zoom_rate at 0x34
     // scaled = scale_factor * grVe_804D6A30->cam_zoom_rate;
     // HSD_JObjSetScaleX/Y/Z(jobj, scaled);
 }

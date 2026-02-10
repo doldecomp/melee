@@ -435,7 +435,7 @@ union ftCommon_MotionVars {
     } capturewait;
 };
 
-/// @todo Fake, need to find real size of #HitCapsule
+/// @@todo Fake, need to find real size of #HitCapsule
 struct SmallerHitCapsule {
     /*  +0 */ HitCapsuleState state;
     /*  +4 */ u32 x4;

@@ -389,7 +389,7 @@ void ftMt_SpecialAirHi_AirToGround(HSD_GObj* gobj)
 
 static inline void ftMewtwo_SpecialHi_SetVars(HSD_GObj* gobj)
 {
-    /// @todo This is like three functions in one. Split it.
+    /// @@todo This is like three functions in one. Split it.
     Fighter* fp = getFighter(gobj);
     ftMewtwoAttributes* mewtwoAttrs = mewtwoAttrs = getFtSpecialAttrsD(fp);
     fp = GET_FIGHTER(gobj);
@@ -412,7 +412,7 @@ static inline void ftMewtwo_SpecialHi_SetVars(HSD_GObj* gobj)
 /// Mewtwo's grounded Teleport Zoom Motion State handler
 void ftMt_SpecialHi_Enter(HSD_GObj* gobj)
 {
-    /// @todo Shared @c inline with #ftMt_SpecialAirHi_Enter.
+    /// @@todo Shared @c inline with #ftMt_SpecialAirHi_Enter.
     Fighter* fp = fp = GET_FIGHTER(gobj);
     ftMewtwoAttributes* mewtwoAttrs = mewtwoAttrs = getFtSpecialAttrsD(fp);
     CollData* collData = collData = getFtColl(fp);
@@ -427,7 +427,7 @@ void ftMt_SpecialHi_Enter(HSD_GObj* gobj)
     stick_x *= stick_x;
     stick_y *= stick_y;
 
-    /// @todo Probably a missing @c inline function.
+    /// @@todo Probably a missing @c inline function.
     mewtwoAttrs = mewtwoAttrs = getFtSpecialAttrsD(fp);
 
     sqrt_stick = sqrtf(stick_x + stick_y);
@@ -506,7 +506,7 @@ void ftMt_SpecialAirHi_Enter(HSD_GObj* gobj)
     if (sqrt_stick > mewtwoAttrs->x58_MEWTWO_TELEPORT_STICK_RANGE_MIN) {
         stick_x = stickGetDir(fp->input.lstick.x, 0);
 
-        /// @todo Express as a fraction or something.
+        /// @@todo Express as a fraction or something.
         if (stick_x > stick_epsilon) {
             ftCommon_UpdateFacing(fp);
         }

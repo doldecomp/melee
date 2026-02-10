@@ -20,7 +20,7 @@
 #include <MSL/math.h>
 #include <MSL/math_ppc.h>
 
-/// @todo Lots of 6s in here
+/// @@todo Lots of 6s in here
 /// pl_8004049C seems to indicate it might have actually been `Gm_Player_NumMax`
 
 /* 03D514 */ static void plBonusLib_8003D514(int);
@@ -570,7 +570,7 @@ void pl_8003E978(int slot, bool fp_x221F_b4, Item_GObj* item_gobj, float y0,
                  float arg4, float arg5, float arg6, float x1, float y1,
                  float frame_speed_mul)
 {
-    /// @todo Not actually sure what the second argument should be
+    /// @@todo Not actually sure what the second argument should be
     fn_8003E998(slot, fp_x221F_b4);
 }
 

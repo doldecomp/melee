@@ -46,7 +46,7 @@ static float ftCaptain_SpecialN_GetAngleVel(Fighter* fp)
 {
     ftCaptain_DatAttrs* da = fp->dat_attrs;
     {
-        /// @todo Join declarations and assignments somehow.
+        /// @@todo Join declarations and assignments somehow.
         float max;
         float stick_y = stickGetDir(fp->input.lstick.y, 0);
         float min;
@@ -63,7 +63,7 @@ static float ftCaptain_SpecialN_GetAngleVel(Fighter* fp)
             stick_y = -stick_y;
         }
         {
-            /// @todo Eliminate @c f.
+            /// @@todo Eliminate @c f.
             float f = deg_to_rad;
             return f * (stick_y * da->specialn_angle_diff / (max - min));
         }
@@ -117,7 +117,7 @@ void ftCa_SpecialN_IASA(HSD_GObj* gobj) {}
 void ftCa_SpecialAirN_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    /// @todo Fake double assignment.
+    /// @@todo Fake double assignment.
     ftCaptain_DatAttrs* da = da = getFtSpecialAttrs(fp);
     if (fp->cmd_vars[0] != 0) {
         fp->cmd_vars[0] = 0;
@@ -169,7 +169,7 @@ void ftCa_SpecialN_Phys(HSD_GObj* gobj)
 void ftCa_SpecialAirN_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    /// @todo Fake double assignment.
+    /// @@todo Fake double assignment.
     ftCaptain_DatAttrs* da = da = getFtSpecialAttrs(fp);
     doPhys(gobj);
     switch (fp->cmd_vars[1]) {
@@ -191,7 +191,7 @@ void ftCa_SpecialAirN_Phys(HSD_GObj* gobj)
     }
 }
 
-/// @todo Share with #ftCa_Init_MotionStateTable
+/// @@todo Share with #ftCa_Init_MotionStateTable
 static u32 const transition_flags =
     Ft_MF_KeepGfx | Ft_MF_SkipMatAnim | Ft_MF_SkipRumble | Ft_MF_UpdateCmd |
     Ft_MF_SkipColAnim | Ft_MF_SkipItemVis | Ft_MF_Unk19 |

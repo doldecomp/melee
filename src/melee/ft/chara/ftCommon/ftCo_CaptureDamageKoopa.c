@@ -36,7 +36,7 @@ static inline void inlineA0(Fighter_GObj* gobj, HSD_GObjEvent cb)
         cb(gobj);
         return;
     }
-    /// @todo #ftCo_CaptureWaitKoopa_Anim
+    /// @@todo #ftCo_CaptureWaitKoopa_Anim
     ftCo_800BC458(gobj);
     if (fp->grab_timer <= 0) {
         ftCo_800DA698(fp->victim_gobj, false);
@@ -58,7 +58,7 @@ void ftCo_CaptureDamageKoopa_Phys(Fighter_GObj* gobj) {}
 
 void ftCo_CaptureDamageKoopa_Coll(Fighter_GObj* gobj) {}
 
-/// @todo Shared code with #ftCo_800BC9C8. Simple @c inline doesn't work.
+/// @@todo Shared code with #ftCo_800BC9C8. Simple @c inline doesn't work.
 void ftCo_800BCAF4(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);

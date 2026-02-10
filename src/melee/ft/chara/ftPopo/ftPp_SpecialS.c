@@ -198,7 +198,7 @@ void ftPp_SpecialS_Enter(Fighter_GObj* gobj)
     inlineA0(gobj);
 }
 
-/// @todo Can probably share some more code with #inlineA2
+/// @@todo Can probably share some more code with #inlineA2
 static inline void inlineB0(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);

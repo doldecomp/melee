@@ -17,7 +17,7 @@
 #pragma dont_inline on
 void ftMh_MS_389_80150C8C(HSD_GObj* gobj)
 {
-    /// @todo the @c #pragma above is preventing use of #GET_FIGHTER.
+    /// @@todo the @c #pragma above is preventing use of #GET_FIGHTER.
     Fighter* fp = gobj->user_data;
     if (fp->fv.mh.x2258 == ftMh_MS_Wait1_0 ||
         fp->fv.mh.x2258 == ftMh_MS_Wait1_2)
@@ -91,7 +91,7 @@ void ftMh_Wait1_2_Anim(HSD_GObj* gobj)
 
 void ftMh_Wait1_2_Phys(HSD_GObj* gobj)
 {
-    /// @todo #GET_FIGHTER
+    /// @@todo #GET_FIGHTER
     Fighter* fp = gobj->user_data;
     ftData* data = fp->ft_data;
     ftMasterHand_SpecialAttrs* da = data->ext_attr;

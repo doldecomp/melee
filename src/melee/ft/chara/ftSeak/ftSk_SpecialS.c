@@ -29,7 +29,7 @@
 #include <trigf.h>
 #include <baselib/jobj.h>
 
-/// @todo Fix common data struct
+/// @@todo Fix common data struct
 #define COMMON_DATA_F32 ((float*) p_ftCommonData)
 
 void ftSk_SpecialS_80110490(Fighter* fp)
@@ -275,7 +275,7 @@ void ftSk_SpecialS_80110AEC(HSD_GObj* gobj)
     {
         Fighter* fp_2 = GET_FIGHTER(gobj);
 
-        /// @todo The inlines in this file are wrong; this block should be
+        /// @@todo The inlines in this file are wrong; this block should be
         ///       #ftSk_SpecialS_ZeroHitboxPositions.
         for (i = 0; i < 4; i++) {
             fp_2->x914[i].x58.x = 0;
@@ -526,7 +526,7 @@ bool ftSk_SpecialS_CheckInitChain(HSD_GObj* gobj)
     ftSeakAttributes* specialAttributes = fp->dat_attrs;
     fp->mv.sk.specials.x0 += 1;
 
-    /// @todo Probably an inline.
+    /// @@todo Probably an inline.
     if (fp->mv.sk.specials.x0 == specialAttributes->x1C) {
         u8 unused2[12];
         Fighter* fp2 = gobj->user_data;
@@ -800,7 +800,7 @@ void ftSk_SpecialAirS_Coll(HSD_GObj* gobj)
 
 void ftSk_SpecialS_80111830(HSD_GObj* gobj)
 {
-    /// @todo Split into two functions, one with @var fp and one with @var fp2
+    /// @@todo Split into two functions, one with @var fp and one with @var fp2
     Vec3 vec0;
     Vec3 vec1;
     Fighter* fp2;
@@ -894,7 +894,7 @@ void ftSk_SpecialSEnd_Anim(HSD_GObj* gobj)
                 it_802BCF84(item_gobj);
             }
 
-            /// @todo Split inner function
+            /// @@todo Split inner function
             goto inner_ret;
         }
 

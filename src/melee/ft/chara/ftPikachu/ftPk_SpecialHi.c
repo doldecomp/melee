@@ -30,7 +30,7 @@
 #include <baselib/jobj.h>
 #include <baselib/random.h>
 
-/// @todo Move elsewhere.
+/// @@todo Move elsewhere.
 #define MAX_STICK_MAG 0.999f
 
 /// points velocity toward facing direction
@@ -47,7 +47,7 @@ void ftPk_SpecialHi_Enter(HSD_GObj* gobj)
 {
     u8 _[8];
 
-    /// @todo Can't move below @c fp.
+    /// @@todo Can't move below @c fp.
     ftPikachuAttributes* sa;
 
     Fighter* fp = GET_FIGHTER(gobj);
@@ -71,7 +71,7 @@ void ftPk_SpecialAirHi_Enter(HSD_GObj* gobj)
 {
     u8 _[8];
 
-    /// @todo Can't move below @c fp.
+    /// @@todo Can't move below @c fp.
     ftPikachuAttributes* sa;
 
     Fighter* fp = GET_FIGHTER(gobj);
@@ -148,7 +148,7 @@ void ftPk_SpecialAirHiStart0_Coll(HSD_GObj* gobj)
     if (ft_CheckGroundAndLedge(gobj, fp->facing_dir < 0 ? -1 : +1)) {
         ftPk_SpecialHi_ChangeMotion_Unk01(gobj);
     } else if (!ftCliffCommon_80081298(gobj)) {
-        /// @todo Fix weird control flow.
+        /// @@todo Fix weird control flow.
         return;
     }
 }
@@ -314,7 +314,7 @@ void ftPk_SpecialHiStart1_Coll(HSD_GObj* gobj)
 
     u8 _[20];
 
-    /// @todo Eliminate cast (by changing type of field)
+    /// @@todo Eliminate cast (by changing type of field)
     if (!ft_80082888(gobj, (ftCollisionBox*) &pika_attr->height_attributes)) {
         if (collData->env_flags & Collide_LeftWallMask ||
             collData->env_flags & Collide_RightWallMask)
@@ -473,7 +473,7 @@ void ftPk_SpecialHi_ChangeMotion_Unk03(HSD_GObj* gobj)
     HSD_JObjSetScale(jobj, &scl);
 }
 
-/// @todo What.
+/// @@todo What.
 static inline float get_max_and_fill_stack(void)
 {
     float stack[7];
@@ -757,7 +757,7 @@ void ftPk_SpecialHiEnd_Coll(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftPikachuAttributes* pika_attr = fp->dat_attrs;
 
-    /// @todo Eliminate cast (by changing type of
+    /// @@todo Eliminate cast (by changing type of
     ///       #ftPikachuAttributes::height_attributes)
     ftCollisionBox* box = (ftCollisionBox*) &pika_attr->height_attributes;
 
@@ -771,7 +771,7 @@ void ftPk_SpecialAirHiEnd_Coll(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftPikachuAttributes* pika_attr = fp->dat_attrs;
 
-    /// @todo Eliminate cast (by changing type of
+    /// @@todo Eliminate cast (by changing type of
     ///       #ftPikachuAttributes::height_attributes)
     ftCollisionBox* box = (ftCollisionBox*) &pika_attr->height_attributes;
 
@@ -780,7 +780,7 @@ void ftPk_SpecialAirHiEnd_Coll(HSD_GObj* gobj)
     if (ft_8008239C(gobj, fp->facing_dir, box)) {
         ftCo_LandingFallSpecial_Enter(gobj, false, pika_attr->xB0);
     } else if (!ftCliffCommon_80081298(gobj)) {
-        /// @todo Fix weird control flow.
+        /// @@todo Fix weird control flow.
         return;
     };
 }

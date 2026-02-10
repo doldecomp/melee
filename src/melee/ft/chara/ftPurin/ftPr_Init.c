@@ -463,7 +463,7 @@ void ftPr_Init_8013C360(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (ftPr_Init_803D05B4[fp->x619_costume_id]) {
-        /// @todo clean up memory accesses - this looks similar to
+        /// @@todo clean up memory accesses - this looks similar to
         /// ftKb_SpecialN_800EFB4C
         UNK_T* items = fp->ft_data->x48_items;
         UNK_T* items_shifted = items[1];
@@ -539,7 +539,7 @@ HSD_JObj* ftPr_Init_UnkMotionStates6(HSD_GObj* gobj)
         return fp->fv.pr.x223C;
     }
 
-    /// @todo What???
+    /// @@todo What???
     return (HSD_JObj*) gobj;
 }
 

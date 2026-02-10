@@ -116,7 +116,7 @@ bool itHarisen_UnkMotion6_Anim(Item_GObj* gobj)
 void itHarisen_UnkMotion6_Phys(Item_GObj* gobj) {}
 
 /// Reset harisen scale and animation speed when dropped.
-/// @todo Fake match: the `ip = gobj->user_data` reload at line 126 suggests an
+/// @@todo Fake match: the `ip = gobj->user_data` reload at line 126 suggests an
 /// inline function boundary. The pattern `ip->scl = ...; it_8026B390(gobj);`
 /// is likely wrapped in an inline like:
 ///   static inline void itResetScaleAndFlag(Item_GObj* gobj) {

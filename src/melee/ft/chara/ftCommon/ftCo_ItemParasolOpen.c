@@ -64,7 +64,7 @@ void ft_800CEF08(Fighter_GObj* gobj)
     ft_800CEF08_inline1(fp, p_ftCommonData->x59C);
 }
 
-/// @todo What is this copypasta...
+/// @@todo What is this copypasta...
 void ftCo_800CEFE0(Fighter_GObj* gobj, int arg1)
 {
     Fighter* fp = GET_FIGHTER(gobj);

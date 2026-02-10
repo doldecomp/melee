@@ -85,7 +85,7 @@ void ftYs_Init_8012BDA0(Fighter_GObj* gobj)
 
 void ftYs_Init_8012BE3C(HSD_GObj* gobj)
 {
-    /// @todo Some kind of inline here.
+    /// @@todo Some kind of inline here.
     ftCo_DatAttrs_xBC_t* xBC;
     Fighter* fp = GET_FIGHTER(gobj);
     ftParts_80074B0C(gobj, 0, 0);
@@ -280,7 +280,7 @@ void ftYs_Shield_8012C49C(HSD_GObj* gobj)
             ssize_t bone_idx = ftParts_GetBoneIndex(fp0, 4);
             Fighter* fp1 = GET_FIGHTER(gobj);
 
-            /// @todo Why is this still using @c fp0?
+            /// @@todo Why is this still using @c fp0?
             HSD_JObj* jobj = fp0->parts[bone_idx].joint;
 
             efAsync_Spawn(gobj, &fp1->x60C, 4U, 1231, jobj, co_xBC);

@@ -135,7 +135,7 @@ s32 ftNs_AttackHi4_YoyoCheckEnvColl(HSD_GObj* gobj, Vec3* ECBUnk,
 
     {
         s32 retval;
-        /// @todo Define flags.
+        /// @@todo Define flags.
         retval = 0;
         if (coll.env_flags & Collide_FloorMask) {
             retval |= 32768;
@@ -157,7 +157,7 @@ s32 ftNs_AttackHi4_YoyoCheckEnvColl(HSD_GObj* gobj, Vec3* ECBUnk,
     }
 }
 
-/// @todo Remove @c dont_inline.
+/// @@todo Remove @c dont_inline.
 ///       This is probably a result of incorrectly splitting out the function.
 #pragma push
 #pragma dont_inline on
@@ -166,7 +166,7 @@ void ftNs_AttackHi4_YoyoSetUnkPos(HSD_GObj* gobj, Vec3* pos)
     Vec3 sp20;
     Vec3 sp14;
 
-    /// @todo #GET_FIGHTER is prevented by @c dont_inline.
+    /// @@todo #GET_FIGHTER is prevented by @c dont_inline.
     Fighter* fp = gobj->user_data;
 
     CollData* collData = &fp->coll_data;
@@ -196,7 +196,7 @@ void ftNs_AttackHi4_YoyoSetHitPos(HSD_GObj* gobj)
 
     u8 _[4];
 
-    /// @todo Can't move below @c fp.
+    /// @@todo Can't move below @c fp.
     CollData* collData;
 
     Fighter* fp = GET_FIGHTER(gobj);
@@ -226,7 +226,7 @@ void ftNs_AttackHi4_YoyoSetHitPosUnk(HSD_GObj* gobj, float pos_unk)
     Vec3 sp18;
     float pos_update;
 
-    /// @todo Can't move below @c fp.
+    /// @@todo Can't move below @c fp.
     CollData* collData;
 
     Fighter* fp = GET_FIGHTER(gobj);
@@ -322,7 +322,7 @@ void ftNs_AttackHi4_YoyoApplySmash(HSD_GObj* gobj)
 
     Vec3 sp18;
 
-    /// @todo Stack is too messed up for #GET_FIGHTER.
+    /// @@todo Stack is too messed up for #GET_FIGHTER.
     Fighter* fp = gobj->user_data;
 
     HSD_GObj* temp_yoyo;
@@ -433,7 +433,7 @@ bool ftNs_AttackHi4_YoyoThink_IsRemove(HSD_GObj* gobj)
     HSD_GObj* yoyo_GObj;
     itYoyoAttributes* yoyo_attr;
 
-    /// @todo Stack is too messed up for #GET_FIGHTER.
+    /// @@todo Stack is too messed up for #GET_FIGHTER.
     Fighter* fp = gobj->user_data;
 
     s32 yoyoDespawnFrame;
@@ -645,7 +645,7 @@ void ftNs_AttackHi4_YoyoStartTimedRehit(HSD_GObj* gobj)
 }
 
 /**
- * @todo #ftNs_AttackHi4_Anim literally won't match under any circumstances
+ * @@todo #ftNs_AttackHi4_Anim literally won't match under any circumstances
  *       unless this inline is used to get @c Fighter*.
  */
 static Fighter* GetFighterData(HSD_GObj* gobj)

@@ -76,7 +76,7 @@ void ftDk_SpecialAirS_Phys(HSD_GObj* gobj)
     ftCommon_ApplyFrictionAir(
         fp, donkey_attr->SpecialS.x40_MOMENTUM_TRANSITION_MODIFIER);
     if (fp->cmd_vars[0] != 0) {
-        /// @todo Fix control flow.
+        /// @@todo Fix control flow.
     }
 }
 

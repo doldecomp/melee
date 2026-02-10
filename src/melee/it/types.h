@@ -135,7 +135,7 @@ struct ItemAttr {
 
 /// @sz{8}
 struct ItemDynamics {
-    /// @todo Combine with ftDynamics? Can see in it_8027163C that this struct
+    /// @@todo Combine with ftDynamics? Can see in it_8027163C that this struct
     /// does not work perfectly
     /// @at{0} @sz{4}
     int count;
@@ -430,7 +430,7 @@ struct Item {
     HSD_GObjPredicate collided;
 
     /// @at{D20} @sz{4}
-    /// @todo What does this mean?
+    /// @@todo What does this mean?
     HSD_GObjEvent on_accessory;
 
     /// @at{D24} @sz{4}
@@ -439,7 +439,7 @@ struct Item {
 
     /// @at{D28} @sz{4}
     /// @brief Runs after applying hitlag in damage.
-    /// @todo What function is @c 8026a62c?
+    /// @@todo What function is @c 8026a62c?
     HSD_GObjEvent entered_hitlag;
 
     // 0xd2c, runs after exiting hitlag in hitlag, update proc 8026a200
@@ -447,7 +447,7 @@ struct Item {
 
     /// @at{D28} @sz{4}
     /// @brief Runs when the item is jumped on.
-    /// @todo What function is @c 80269bac?
+    /// @@todo What function is @c 80269bac?
     HSD_GObjPredicate jumped_on;
 
     /// @at{D34} @sz{4}

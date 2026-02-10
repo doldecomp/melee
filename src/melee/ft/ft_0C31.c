@@ -228,7 +228,7 @@ static inline void ftCo_800C6AFC_dontinline(HSD_JObj* jobj)
     ftCo_800C6AFC_please_dontinline(jobj);
 }
 
-/// @todo figure out proper inlining for this function
+/// @@todo figure out proper inlining for this function
 inline void fake_HSD_JObjSetTranslate(HSD_JObj* jobj, Vec3* translate)
 {
 #undef __FILE__
@@ -402,7 +402,7 @@ void ftCo_800C703C(Fighter_GObj* gobj)
     fp->dmg.x1948 = fp->dmg.x194C = p_ftCommonData->x6CC;
 }
 
-/// @todo #ftCo_800C6150
+/// @@todo #ftCo_800C6150
 void ftCo_800C7070(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -702,7 +702,7 @@ void ftCo_800C8064(void)
     ft_804D6580 = var_r0;
 }
 
-/// @todo maybe uses a shared inline with ftmetal functions?
+/// @@todo maybe uses a shared inline with ftmetal functions?
 void ft_800C80A4(Fighter* fp)
 {
     size_t i;

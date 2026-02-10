@@ -1,5 +1,5 @@
 /// @file
-/// @todo Delete this.
+/// @@todo Delete this.
 #ifndef _common_structs_h_
 #define _common_structs_h_
 
@@ -16,7 +16,7 @@
 #define SFX_PAN_MID 0x40U
 
 /// HSD_PAD
-/// @todo @c PascalCase members
+/// @@todo @c PascalCase members
 typedef u32 HSD_Pad;
 
 #define HSD_PAD_DPADLEFT (1 << 0)
@@ -46,7 +46,7 @@ typedef u32 HSD_Pad;
 
 /// From Ness's Yo-Yo collision check
 
-/// @todo These (and #CollData::env_flags) should be a bitfield struct
+/// @@todo These (and #CollData::env_flags) should be a bitfield struct
 #define Collide_LeftWallPush 0x1
 #define Collide_LeftWallHug 0x20
 #define Collide_LeftWallMask 0x3F

@@ -1150,7 +1150,7 @@ void mn_8022ADD8(HSD_GObj* gp, bool selection_changed)
     case MENU_STATE_ENTER_TO:
     case MENU_STATE_EXIT_TO:
     case MENU_STATE_5:
-        /// @todo there is probably a inline for this whole block
+        /// @@todo there is probably a inline for this whole block
         // seeing how we get the user data again here.
         // GetAnimStartFrame and GetAnimEndFrame are probably fake?
         data = gp->user_data;
@@ -1213,7 +1213,7 @@ void fn_8022AF10(HSD_GObj* gp)
 /// of objects (animations, text)
 void fn_8022AFEC(HSD_GObj* gp)
 {
-    /// @todo figure out the inlines
+    /// @@todo figure out the inlines
     MainMenuData* data;
     MainMenuData* data2;
     HSD_GObjProc* think;
@@ -1323,7 +1323,7 @@ void fn_8022AFEC(HSD_GObj* gp)
             }
         }
         if ((u8) selection_changed != false) {
-            /// @todo problem spot
+            /// @@todo problem spot
             mn_80229F60(
                 gp,
                 sp20[mn_80229A04_dontinline(mn_804A04F0.cur_menu,
@@ -2648,7 +2648,7 @@ void mn_8022DB10(HSD_GObj* gp)
         *selection_ptr = hovered_selection;
         HSD_GObj_80390CD4(mn_8022B3A0(1));
         HSD_GObjPLink_80390228(HSD_GObj_804D781C);
-        /// @todo casting u64 here makes it match, but i dont know why
+        /// @@todo casting u64 here makes it match, but i dont know why
         if ((temp_r28 = mn_803EB6B0[(u64) menu_kind].think)) {
             temp_r3_2 =
                 HSD_GObjProc_8038FD54(GObj_Create(0, 1, 0x80), temp_r28, 0);

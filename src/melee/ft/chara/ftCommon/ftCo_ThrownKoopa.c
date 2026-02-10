@@ -31,7 +31,7 @@ void ftCo_800BCE64(Fighter_GObj* gobj, FtMotionId msid)
                            Ft_MF_UpdateCmd | Ft_MF_SkipItemVis | Ft_MF_Unk19 |
                            Ft_MF_SkipModelPartVis | Ft_MF_SkipModelFlags |
                            Ft_MF_Unk27;
-/// @todo Use #ftCo_Thrown_Enter.
+/// @@todo Use #ftCo_Thrown_Enter.
 #define SOLUTION 1
 #if SOLUTION == 0
     ftCo_Thrown_Enter(gobj, msid, mf, fp->cur_anim_frame);

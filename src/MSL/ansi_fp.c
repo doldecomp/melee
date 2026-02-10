@@ -5,7 +5,7 @@
 #define __HI(x) (((s32*) &x)[0])
 #define __LO(x) (((s32*) &x)[1])
 
-/// TODO: somehow make this work with math.h
+/// @todo: somehow make this work with math.h
 inline int _fpclassify(double x)
 {
     switch (__HI(x) & 0x7FF00000) {

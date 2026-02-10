@@ -156,7 +156,7 @@ void mnSnap_80253184(void)
     }
 }
 
-/// @todo The HSD_ASSERT chain (lines 193-199) is an inline from tobj.h.
+/// @@todo The HSD_ASSERT chain (lines 193-199) is an inline from tobj.h.
 /// Polls card read result and updates thumbnail display.
 static void mnSnap_8025329C(void)
 {

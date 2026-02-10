@@ -1051,7 +1051,7 @@ void HSD_LObjAddAnimAll(HSD_LObj* lobj, HSD_LightAnim* lanim)
 static void LObjRelease(HSD_Class* o)
 {
     HSD_LObj* lobj = HSD_LOBJ(o);
-    ///@todo Unused stack
+    ///@@todo Unused stack
     u8 _[8];
 
     HSD_AObjRemove(lobj->aobj);

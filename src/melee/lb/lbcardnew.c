@@ -517,7 +517,7 @@ int lb_8001ACEC(UNK_T file_entries)
         int unk0, unk4, unk8;
     }* entries = file_entries;
 
-    // TODO this seems fake
+    // @todo this seems fake
     volatile int cached_flag;
     volatile int pad_stack;
     volatile int cached_data;
@@ -555,7 +555,7 @@ int lb_8001AE38(UNK_T file_entries)
         int unk0, unk4, unk8;
     }* entries = file_entries;
 
-    // TODO this seems fake
+    // @todo this seems fake
     volatile int cached_flag;
     volatile int pad_stack;
     volatile int cached_data;

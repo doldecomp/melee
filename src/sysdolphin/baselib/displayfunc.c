@@ -418,7 +418,7 @@ void _HSD_ZListSort(void)
     if (zsort_sorting) {
         zlist_texedge_top =
             zlist_sort(zlist_texedge_top, zlist_texedge_nb,
-                       0x3C); /// @todo Create and use an offsetof macro to get
+                       0x3C); /// @@todo Create and use an offsetof macro to get
                               /// ZList sort.texedge and sort.xlu
         zlist_xlu_top = zlist_sort(zlist_xlu_top, zlist_xlu_nb, 0x40);
     }

@@ -95,7 +95,7 @@ static bool grTCaptain_8021FCFC(void)
 
 static HSD_GObj* grTCaptain_8021FD04(int gobj_id)
 {
-    /// @todo Can't move below @c callbacks.
+    /// @@todo Can't move below @c callbacks.
     HSD_GObj* gobj;
 
     StageCallbacks* callbacks = &grTCa_803E8608[gobj_id];

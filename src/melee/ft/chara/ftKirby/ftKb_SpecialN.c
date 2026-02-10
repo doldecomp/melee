@@ -331,7 +331,7 @@ void ftKb_SpecialHi1_Phys(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftCo_DatAttrs* temp_r30 = &fp->co_attrs;
     ftKb_DatAttrs* dat_attr = fp->dat_attrs;
-    PAD_STACK(4); // Todo: Remove This
+    PAD_STACK(4); // @todo: Remove This
     ft_80084FA8(gobj);
     ftCommon_8007CADC(fp, 0.0f,
                       temp_r30->air_drift_stick_mul *
@@ -345,7 +345,7 @@ void ftKb_SpecialHi2_Phys(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftCo_DatAttrs* temp_r30 = &fp->co_attrs;
     ftKb_DatAttrs* dat_attr = fp->dat_attrs;
-    PAD_STACK(4); // Todo: Remove This
+    PAD_STACK(4); // @todo: Remove This
     ft_80085134(gobj);
     ftCommon_8007CADC(fp, 0.0f,
                       temp_r30->air_drift_stick_mul *
@@ -1770,7 +1770,7 @@ void fn_800F6A5C(HSD_GObj* gobj)
 /// Fighter_CollGround_PassLedgeCB
 static void fn_800F6AC8(HSD_GObj* gobj)
 {
-    /// @todo Named flags.
+    /// @@todo Named flags.
     static u32 const mf = (1 << 1) | (1 << 4) | (1 << 7) | (1 << 12) |
                           (1 << 14) | (1 << 18) | (1 << 19) | (1 << 22) |
                           (1 << 26) | (1 << 27);

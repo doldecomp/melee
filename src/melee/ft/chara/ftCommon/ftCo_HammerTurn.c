@@ -28,7 +28,7 @@ bool ftCo_800C576C(Fighter_GObj* gobj)
 
 void ftCo_800C57B4(Fighter_GObj* gobj)
 {
-    /// @todo Cannot move below @c fp, which suggests an inline
+    /// @@todo Cannot move below @c fp, which suggests an inline
     u32 flags;
     Fighter* fp = GET_FIGHTER(gobj);
     flags = ftCo_800C54C4(fp);

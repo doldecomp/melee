@@ -85,7 +85,7 @@ struct UNK_SAMUS_S1 {
 };
 
 union ftSamus_MotionVars {
-    /// @todo Proper state name.
+    /// @@todo Proper state name.
     struct ftSamus_State2Vars {
         s32 x0;
     } unk2;
@@ -104,12 +104,12 @@ union ftSamus_MotionVars {
         float x8;
     } grapple;
 
-    /// @todo Proper state name.
+    /// @@todo Proper state name.
     struct ftSamus_State5Vars {
         s32 x0;
     } unk5;
 
-    /// @todo Proper state name.
+    /// @@todo Proper state name.
     struct ftSamus_State6Vars {
         s32 x0;
     } unk6;

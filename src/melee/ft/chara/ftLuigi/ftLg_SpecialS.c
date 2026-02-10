@@ -65,7 +65,7 @@ void ftLg_SpecialS_Enter(HSD_GObj* gobj)
 {
     u8 _[8];
 
-    /// @todo Shared @c inline with #ftLg_SpecialAirS_Enter.
+    /// @@todo Shared @c inline with #ftLg_SpecialAirS_Enter.
     Fighter* fp = GET_FIGHTER(gobj);
     ftLuigiAttributes* sa = fp->dat_attrs;
 
@@ -205,7 +205,7 @@ void ftLg_SpecialSHold_Anim(HSD_GObj* gobj)
 {
     u8 _[8];
 
-    /// @todo Shared @c inline with #ftLg_SpecialAirSHold_Anim.
+    /// @@todo Shared @c inline with #ftLg_SpecialAirSHold_Anim.
     Fighter* fp = GET_FIGHTER(gobj);
     ftLuigiAttributes* sa = fp->dat_attrs;
 
@@ -318,7 +318,7 @@ void ftLg_SpecialSHold_Enter(HSD_GObj* gobj)
 {
     u8 _[8];
 
-    /// @todo Shared @c inline with #ftLg_SpecialAirSHold_Enter.
+    /// @@todo Shared @c inline with #ftLg_SpecialAirSHold_Enter.
 
     Fighter_ChangeMotionState(gobj, ftLg_MS_SpecialSHold, Ft_MF_KeepSfx, 0, 1,
                               0, NULL);
@@ -345,7 +345,7 @@ void ftLg_SpecialAirSHold_Enter(HSD_GObj* gobj)
 /// Luigi's grounded Green Missile Launch Animation callback
 void ftLg_SpecialS_Anim(HSD_GObj* gobj)
 {
-    /// @todo Shared @c inline with #ftLg_SpecialAirS_Anim.
+    /// @@todo Shared @c inline with #ftLg_SpecialAirS_Anim.
     u8 _[8];
 
     Fighter* fp = GET_FIGHTER(gobj);
@@ -424,7 +424,7 @@ void ftLg_SpecialAirS_Coll(HSD_GObj* gobj)
     }
 }
 
-/// @todo Combine common flags with #transition_flags0.
+/// @@todo Combine common flags with #transition_flags0.
 static u32 const transition_flags2 =
     Ft_MF_KeepGfx | Ft_MF_KeepColAnimHitStatus | Ft_MF_SkipMatAnim |
     Ft_MF_UpdateCmd | Ft_MF_SkipColAnim | Ft_MF_SkipItemVis | Ft_MF_Unk19 |
@@ -459,7 +459,7 @@ static inline void ftLuigi_SpecialS_RemoveGFX(HSD_GObj* gobj)
 
 static inline void ftLuigi_SpecialS_Setup(HSD_GObj* gobj)
 {
-    /// @todo Use #GET_FIGHTER.
+    /// @@todo Use #GET_FIGHTER.
     Fighter* fp = getFighter(gobj);
 
     if (!fp->x2219_b0) {
@@ -698,7 +698,7 @@ void ftLg_SpecialAirS2_Coll(HSD_GObj* gobj)
     }
 }
 
-/// @todo Combine common flags with #transition_flags0.
+/// @@todo Combine common flags with #transition_flags0.
 static u32 const transition_flags3 =
     Ft_MF_KeepGfx | Ft_MF_SkipHit | Ft_MF_SkipMatAnim | Ft_MF_UpdateCmd |
     Ft_MF_SkipColAnim | Ft_MF_SkipItemVis | Ft_MF_Unk19 |

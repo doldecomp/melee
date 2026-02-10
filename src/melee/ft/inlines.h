@@ -31,7 +31,7 @@
         *da = backup;                                                         \
     } while (0)
 
-/// @todo Remove declarations. Doesn't really need to be a macro.
+/// @@todo Remove declarations. Doesn't really need to be a macro.
 #define COPY_ATTRS(gobj, attributeName)                                       \
     Fighter* fp = GET_FIGHTER(gobj);                                          \
     attributeName* sA2 = (attributeName*) fp->dat_attrs;                      \
@@ -211,7 +211,7 @@ static inline CollData* Fighter_GetCollData(Fighter* fp)
     return &fp->coll_data;
 }
 
-/// @todo This and #ftCheckThrowB3, etc. are probably one macro or something.
+/// @@todo This and #ftCheckThrowB3, etc. are probably one macro or something.
 static inline bool ftCheckThrowB0(Fighter* fp)
 {
     if (fp->throw_flags_b0) {
@@ -269,7 +269,7 @@ static inline int ftGetFacingDirInt2(Fighter_GObj* gobj)
 #define CLIFFCATCH_U(fp)                                                      \
     ((fp)->facing_dir != 1.0f) ? CLIFFCATCH_LEFT : CLIFFCATCH_RIGHT
 
-/// @todo Fix naming.
+/// @@todo Fix naming.
 #define gmScriptEventCast(p_event, type) ((type*) p_event)
 #define gmScriptEventUpdatePtr(event, type)                                   \
     (event = (void*) ((uintptr_t) event + 4))

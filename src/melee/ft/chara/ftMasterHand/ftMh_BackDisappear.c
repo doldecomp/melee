@@ -105,7 +105,7 @@ static inline float my_lbVector_Len(Vec3* vec)
 
 void ftMh_Wait1_1_Phys(HSD_GObj* gobj)
 {
-    /// @todo #GET_FIGHTER doesn't fit the stack.
+    /// @@todo #GET_FIGHTER doesn't fit the stack.
     Fighter* fp = gobj->user_data;
     ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
     float len;

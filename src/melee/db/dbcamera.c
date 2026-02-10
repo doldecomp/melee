@@ -13,7 +13,7 @@
 
 /* 4A03C0 */ static char db_CameraInfoDisplay_buf[0xC0];
 
-/// TODO does the padding mean this should be in another file before this one?
+/// @todo does the padding mean this should be in another file before this one?
 static struct {
     u32 MiscStageVisualsStatus;
     u32 unused;
@@ -364,7 +364,7 @@ static void fn_80227904(HSD_GObj* camera, int port)
     f32 cstick_y;
     u32 buttons;
 
-    // TODO port should probably be a u8, but it's difficult
+    // @todo port should probably be a u8, but it's difficult
     // to match all the functions that call this
     port &= 0xFF;
 

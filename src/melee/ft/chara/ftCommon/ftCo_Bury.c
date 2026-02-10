@@ -81,7 +81,7 @@ void ftCo_800C08A0(Fighter_GObj* gobj, Fighter_GObj* arg1, DynamicsDesc* arg2,
         p_hurt = &fp->hurt_capsules[0];
         ftColl_80076764(3, arg3, arg1, arg2, fp, p_hurt);
 
-        /// @todo Eliminate cast
+        /// @@todo Eliminate cast
         lbColl_80008D30(&hit, (lbColl_80008D30_arg1*) arg2);
 
         ftColl_80078384(fp, p_hurt, &hit);
@@ -182,7 +182,7 @@ void ftCo_800C0B20(Fighter_GObj* gobj)
                 FighterHurtCapsule* hurt = &fp->hurt_capsules[0];
                 ftColl_80076764(3, 1, 0, unk_anim, fp, hurt);
 
-                /// @todo Eliminate cast
+                /// @@todo Eliminate cast
                 lbColl_80008D30(&hit, (lbColl_80008D30_arg1*) unk_anim);
 
                 ftColl_80078384(fp, hurt, &hit);

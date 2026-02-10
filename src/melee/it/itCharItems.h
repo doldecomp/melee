@@ -1,5 +1,5 @@
 /// @file
-/// @todo Restructure this, possibly items/chara/types.h
+/// @@todo Restructure this, possibly items/chara/types.h
 #ifndef MELEE_IT_ITCHARITEMS_H
 #define MELEE_IT_ITCHARITEMS_H
 

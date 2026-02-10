@@ -1112,7 +1112,7 @@ void fn_80175D34(void)
     HSD_Text* ko_count;
     HSD_Text* ko_time;
     s32 i;
-    PAD_STACK(8); // TODO :: why does this have so much stack space
+    PAD_STACK(8); // @todo :: why does this have so much stack space
 
     lb_8000B1CC(lbl_8046DBE8.x24, NULL, &pos);
 

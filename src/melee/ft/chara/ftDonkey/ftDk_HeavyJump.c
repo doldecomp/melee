@@ -26,7 +26,7 @@ void ftDk_HeavyJump_Coll(HSD_GObj* gobj)
 
 void ftDk_MS_348_800E04A4(HSD_GObj* gobj, s32 arg1)
 {
-    /// @todo #GET_FIGHTER
+    /// @@todo #GET_FIGHTER
     Fighter* fp = gobj->user_data;
     ftDonkeyAttributes* donkey_attr = getFtSpecialAttrs2CC(fp);
     ftDonkeyAttributes* donkey_attr2;

@@ -94,7 +94,7 @@ static void setupParasol(HSD_GObj* gobj)
     ftPe_8011D518(gobj);
 }
 
-/// @todo Can maybe use #ensureUnkItem?
+/// @@todo Can maybe use #ensureUnkItem?
 void ftPe_8011D598(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -231,7 +231,7 @@ void ftPe_SpecialAirHiStart_Anim(HSD_GObj* gobj)
 
 void ftPe_SpecialHiStart_IASA(HSD_GObj* gobj)
 {
-    /// @todo #GET_FIGHTER
+    /// @@todo #GET_FIGHTER
     Fighter* fp = gobj->user_data;
     ftPe_DatAttrs* da = fp->dat_attrs;
     float abs_lstick_x = ABS(fp->input.lstick.x);

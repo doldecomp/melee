@@ -23,7 +23,7 @@
 
 #include <math.h>
 
-/// @todo: Remove these once lbcoll is matched.
+/// @@todo: Remove these once lbcoll is matched.
 static inline void fake_HSD_JObjSetRotation(HSD_JObj* jobj, Quaternion* rotate)
 {
     HSD_ASSERT(618, jobj);
@@ -270,7 +270,7 @@ inline HSD_JObj* it_802A850C_inline(HSD_Joint* joint)
     if (joint != NULL) {
         var_r30 = HSD_JObjLoadJoint(joint);
     } else {
-        // @todo: This should just return uninitialized, but the
+        // @@todo: This should just return uninitialized, but the
         // formatter doesn't like it.
         return NULL;
     }
@@ -678,7 +678,7 @@ void it_802A9458(HSD_GObj* gobj)
     HSD_JObjSetRotationZ(jobj, item->xDD4_itemVar.linkarrow.x94);
     it_802A8330(gobj);
     switch (item->kind) {
-    // @todo: replace with enum names
+    // @@todo: replace with enum names
     case It_Kind_Link_Arrow:
     case It_Kind_Kirby_LinkArrow:
         Item_8026AE84(item, 0x27152, 0x7F, 0x40);

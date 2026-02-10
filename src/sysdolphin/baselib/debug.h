@@ -14,7 +14,7 @@ ATTRIBUTE_NORETURN void __assert(char*, u32, char*);
 void HSD_LogInit(void);
 ATTRIBUTE_NORETURN void HSD_Panic(char*, u32, char*);
 
-/// @todo Take @c file as another arg, ignore it if @c BUGFIX.
+/// @@todo Take @c file as another arg, ignore it if @c BUGFIX.
 #ifndef BUGFIX
 #define HSD_ASSERT(line, cond)                                                \
     ((cond) ? ((void) 0) : __assert(__FILE__, line, #cond))

@@ -224,7 +224,7 @@ void ftSs_SpecialLw_Coll(HSD_GObj* gobj)
     u8 _[8];
 
     if (fp->cmd_vars[0]) {
-        /// @todo Remove cast.
+        /// @@todo Remove cast.
         if (!ft_80082888(gobj,
                          (ftCollisionBox*) &samus_attr->height_attributes))
         {

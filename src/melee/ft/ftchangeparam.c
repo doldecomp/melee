@@ -121,7 +121,7 @@ void ftCo_800D0CBC(Fighter_GObj* fgp)
     count = temp_r30->x28;
 
     if (scale != 1.0f) {
-        /// @todo figure out the correct args
+        /// @@todo figure out the correct args
         scale = ftCo_CalcYScaledKnockback(1.0f, scale, Fighter_804D6524->x28);
     }
 
@@ -166,7 +166,7 @@ void ftCo_800D105C(Fighter_GObj* fgp)
     ftDonkeyAttributes* attr;
     f32 var_f1;
     f32 temp_f1;
-    PAD_STACK(36); /// @todo fix stack
+    PAD_STACK(36); /// @@todo fix stack
 
     fp = GET_FIGHTER(fgp);
     fp->co_attrs = *fp->ft_data->x0;

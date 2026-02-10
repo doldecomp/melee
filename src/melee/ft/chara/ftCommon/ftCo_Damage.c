@@ -115,7 +115,7 @@ void ftCo_Damage_CalcKnockback(Fighter* fp)
     if (!fp->dmg.kb_applied) {
         return;
     }
-    /// @todo Probably a @c switch.
+    /// @@todo Probably a @c switch.
     if (fp->motion_id == ftCo_MS_Squat) {
         goto squat;
     }
@@ -765,7 +765,7 @@ static bool inlineB0(Fighter_GObj* gobj)
     return false;
 }
 
-/// @todo Inline depth.
+/// @@todo Inline depth.
 #pragma push
 #pragma inline_depth(1)
 void ftCo_8008EB58(Fighter_GObj* gobj)
@@ -985,7 +985,7 @@ void ftCo_Damage_Anim(Fighter_GObj* gobj)
     }
 }
 
-/// @todo Some kind of missing @c bool inline
+/// @@todo Some kind of missing @c bool inline
 bool doIasa(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;

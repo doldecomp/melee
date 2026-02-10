@@ -195,7 +195,7 @@ bool ftCo_800952DC(Fighter_GObj* gobj)
     return false;
 }
 
-/// @todo A lot of shared code with #ftCo_80094EA4.
+/// @@todo A lot of shared code with #ftCo_80094EA4.
 bool ftCo_80095328(Fighter_GObj* gobj, bool* arg1)
 {
     float angle;
@@ -343,7 +343,7 @@ void ftCo_800957F4(Fighter_GObj* gobj, int msid)
     ftCo_80095EFC((HSD_GObj*) gobj);
 }
 
-/// @todo Mostly just an inline of #ftCo_800957F4.
+/// @@todo Mostly just an inline of #ftCo_800957F4.
 void ftCo_800958FC(HSD_GObj* gobj, FtMotionId msid)
 {
     Fighter* temp_r4;

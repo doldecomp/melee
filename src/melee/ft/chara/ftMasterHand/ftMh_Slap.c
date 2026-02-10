@@ -43,7 +43,7 @@ void ftMh_MS_349_80151CA8(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, ftMh_MS_WalkShoot, 0, 0, 1, 0, 0);
     ftAnim_8006EBA4(gobj);
 
-    /// @todo The code matches, but is this right?
+    /// @@todo The code matches, but is this right?
     fp->cur_pos.y = da->x50.x;
 
     fp->self_vel.x = 0;

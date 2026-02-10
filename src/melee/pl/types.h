@@ -24,7 +24,7 @@ struct plAllocInfo {
     };
 };
 
-/// @todo Probably the same struct as #plAllocInfo, figure out how to make them
+/// @@todo Probably the same struct as #plAllocInfo, figure out how to make them
 ///       work as one.
 struct plAllocInfo2 {
     FighterKind internal_id;
@@ -57,7 +57,7 @@ struct plAttackStats {
 struct plActionStats {
     /*   +0 */ struct plAttackStats attacks;
     /* +1AC */ struct plAttackStats hits;
-    /// @todo i dont think this is a union but in-game, x358 follows
+    /// @@todo i dont think this is a union but in-game, x358 follows
     // the pattern for plAttackStats... but pl_800386D8 directly references
     // x3E8. it doesnt really make sense that it would split the enum at
     // StatsAttack_KbSpecialNMt

@@ -170,7 +170,7 @@ void it_802A0534(Item_GObj* gobj, Point3d* arg1)
         it_80275158(gobj, attrs->x0);
     }
 
-    angle = 0; // TODO
+    angle = 0; // @todo
     ip->xDD4_itemVar.linkboomerang.xF74 = angle;
     norm_xF74(ip);
     ip->xB8_itemLogicTable->thrown(gobj);
@@ -238,7 +238,7 @@ void it_802A0930(Item_GObj* gobj)
             if (hobj != NULL) {
                 HSD_JObjAnimAll(hobj);
 
-                // TODO: probably indexing into a Vec3[] field of linkboomerang
+                // @todo: probably indexing into a Vec3[] field of linkboomerang
                 v = M2C_FIELD(&ip->xDD4_itemVar.linkboomerang, Vec3**,
                               i * 0xC * 0xFF);
                 HSD_JObjSetTranslate(hobj, v);

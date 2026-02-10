@@ -318,7 +318,7 @@ HSD_GObj* it_8026B5E4(Vec3* vector, Vec3* vector2,
 #if false
 
 /**
- * @todo Missing third argument passed to #ftLib_80086368.
+ * @@todo Missing third argument passed to #ftLib_80086368.
  * @brief Unknown item camera check 2?
  */
 HSD_GObj* it_8026B634(Vec3* vector, Vec3* vector2, HSD_GObj* gobj)
@@ -649,7 +649,7 @@ void it_8026B9A8(HSD_GObj* gobj, HSD_GObj* arg1, Fighter_Part arg2)
 
     ItemStateDesc* state_desc;
 
-    /// @todo Not enough stack for #GET_JOBJ.
+    /// @@todo Not enough stack for #GET_JOBJ.
     HSD_JObj* jobj0 = gobj->hsd_obj;
 
     state_desc = &states->x0_itemStateDesc[ip->anim_id];
@@ -736,7 +736,7 @@ void it_8026BB88(HSD_GObj* gobj, Vec3* pos)
     Item* ip = GET_ITEM(gobj);
     ftECB* ecb = &ip->x378_itemColl.ecb;
 
-    /// @todo Why is this always zero? Stripped something?
+    /// @@todo Why is this always zero? Stripped something?
     f32 offset_xz = 0.0f;
 
     f32 offset_y = 0.5f * (ecb->top.y + ecb->bottom.y);
@@ -753,7 +753,7 @@ void it_8026BBCC(HSD_GObj* gobj, Vec3* pos)
     CollData* coll_data = &ip->x378_itemColl;
     ftECB* ecb = &coll_data->xE4_ecb;
 
-    /// @todo Why is this always zero? Stripped something?
+    /// @@todo Why is this always zero? Stripped something?
     f32 offset_xz = 0.0f;
 
     f32 offset_y = 0.5f * (ecb->top.y + ecb->bottom.y);
@@ -876,7 +876,7 @@ void it_8026BDB4(HSD_GObj* gobj) // Toggle 0x1A of 0xDC8 word OFF
 /// Toggles several item flags.
 void it_8026BDCC(HSD_GObj* gobj)
 {
-    /// @todo Each of these is an inlined function. Some are already defined.
+    /// @@todo Each of these is an inlined function. Some are already defined.
     {
         Item* ip = GET_ITEM(gobj);
         ip->xDD0_flag.b3 = false;
@@ -906,7 +906,7 @@ void it_8026BDCC(HSD_GObj* gobj)
 /// Toggle several item flags. The inverse of #it_8026BDCC.
 void it_8026BE28(HSD_GObj* gobj)
 {
-    /// @todo Each of these is an inlined function. Some are already defined.
+    /// @@todo Each of these is an inlined function. Some are already defined.
     {
         Item* ip = GET_ITEM(gobj);
         ip->xDD0_flag.b3 = true;
@@ -1156,7 +1156,7 @@ HSD_GObj* it_8026C258(Vec3* pos, f32 facing_dir)
 
         // Decide lock-on type for Samus Missile?
         if ((hold_kind == ITEM_UNK_MATO || hold_kind == ITEM_UNK_LOCKON ||
-             /// @todo Why is this cast to @c short necessary?
+             /// @@todo Why is this cast to @c short necessary?
              (short) (hold_kind == ITEM_UNK_ENEMY) ||
              hold_kind == ITEM_UNK_7) &&
             ip->grab_victim == NULL &&

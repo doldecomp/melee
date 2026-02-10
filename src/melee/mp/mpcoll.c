@@ -43,7 +43,7 @@ int mpColl_804D64AC;
 int mpColl_804D6488;
 int mpColl_804D648C;
 
-/// @todo float order hack
+/// @@todo float order hack
 const float mpColl_804D7F9C = -F32_MAX;
 const float mpColl_804D7FA0 = F32_MAX;
 const float flt_804D7FF8 = 5.0F;
@@ -51,7 +51,7 @@ const f64 flt_804D8000 = -0.75;
 const f64 flt_804D8008 = 0.75;
 const float flt_804D8010 = -3.0F;
 
-/// @todo float order hack
+/// @@todo float order hack
 const float flt_804D7FD8 = 6.0F;
 
 #define CollisionFlagAir_StayAirborne 0x1
@@ -818,7 +818,7 @@ void mpCollEnd(CollData* coll, bool arg1, bool arg2)
 }
 
 #define SOLUTION 0
-/// @todo dummy stack in #mpCollEnd_inline2 breaks this function
+/// @@todo dummy stack in #mpCollEnd_inline2 breaks this function
 void mpColl_80043558(CollData* coll, int line_id)
 {
 #if SOLUTION == 0

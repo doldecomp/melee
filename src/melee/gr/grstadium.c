@@ -1,4 +1,4 @@
-/// @todo this file needs to be named "grpstadium.c" for asserts, oops!
+/// @@todo this file needs to be named "grpstadium.c" for asserts, oops!
 #include "grstadium.h"
 
 #include "dolphin/gx/GXStruct.h"
@@ -289,7 +289,7 @@ void fn_801D13C8(Ground_GObj* gobj)
     gp->u.stadium.xC4_b0 = false;
 }
 
-/// @todo this is a commonly used inline; it should be moved to random.h
+/// @@todo this is a commonly used inline; it should be moved to random.h
 inline int randi(int i)
 {
     if (i != 0) {
@@ -919,7 +919,7 @@ typedef struct TextWrapper {
     HSD_Text* x1C;
 } TextWrapper;
 
-/// @todo can these inlines be merged?
+/// @@todo can these inlines be merged?
 inline int randi_between_2(int a, int b)
 {
     int result = b;
@@ -1307,7 +1307,7 @@ void fn_801D3084(HSD_GObj* gobj, int unused)
     }
 }
 
-/// @todo these are commonly used inlines; they should be moved to jobj.h
+/// @@todo these are commonly used inlines; they should be moved to jobj.h
 
 inline HSD_JObj* jobj_next(HSD_JObj* jobj)
 {
@@ -1438,7 +1438,7 @@ bool grStadium_801D32D0(Ground_GObj* gobj)
 
 static const GXColor grPs_804DAF3C = { 0xFF, 0xFF, 0xFF, 0xFF };
 
-/// @todo is there a way to prevent these being upcast to double
+/// @@todo is there a way to prevent these being upcast to double
 /// when passed to variadic sislib functions?
 extern const float grPs_804DAF2C;
 extern const float grPs_804DAF30;
@@ -1457,7 +1457,7 @@ extern const float grPs_804DAF68;
 extern const float grPs_804DAF6C;
 extern const float grPs_804DAF74;
 
-/// @todo This is only size 0x100 in the object, but a single
+/// @@todo This is only size 0x100 in the object, but a single
 /// TextGlyphTexture is size 0x200. Should TextGlyphTexture be smaller?
 static TextGlyphTexture grPs_8049F040;
 

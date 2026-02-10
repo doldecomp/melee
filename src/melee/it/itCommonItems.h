@@ -1,5 +1,5 @@
 /// @file
-/// @todo Restructure this, possibly items/common/types.h
+/// @@todo Restructure this, possibly items/common/types.h
 #ifndef MELEE_IT_ITCOMMONITEMS_H
 #define MELEE_IT_ITCOMMONITEMS_H
 

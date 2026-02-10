@@ -778,7 +778,7 @@ HSD_JObj* HSD_JObjRemove(HSD_JObj* jobj)
     return child;
 }
 
-/// @todo Regswaps
+/// @@todo Regswaps
 void HSD_JObjRemoveAll(HSD_JObj* jobj)
 {
     HSD_JObj* prev;
@@ -1111,7 +1111,7 @@ HSD_JObj* jobj_get_effector_checked(HSD_JObj* eff)
 
 extern const Vec3 HSD_JObj_803B94C4;
 
-/// @todo Variables @c var_f27 and @c var_f28 are used uninitialized
+/// @@todo Variables @c var_f27 and @c var_f28 are used uninitialized
 ///       whenever 'if' condition is false.
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wsometimes-uninitialized"

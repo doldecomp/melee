@@ -32,7 +32,7 @@
 
 void ftFx_SpecialN_FtGetHoldJoint(HSD_GObj* gobj, Vec3* pos)
 {
-    /// @todo Shared @c inline with #ftFx_SpecialN_ItGetHoldJoint.
+    /// @@todo Shared @c inline with #ftFx_SpecialN_ItGetHoldJoint.
     Vec3 sp14;
 
     // Double fp init otherwise this will not match when inlined
@@ -180,7 +180,7 @@ u32 falcoSFX[2] = { 100099, 100102 };
 /// https://decomp.me/scratch/iPgDc // Create Blaster Shot Item
 void ftFx_SpecialN_CreateBlasterShot(HSD_GObj* gobj)
 {
-    /** @todo Shared @c inline with #ftFx_SpecialNLoop_Anim and
+    /** @@todo Shared @c inline with #ftFx_SpecialNLoop_Anim and
      * #ftFx_SpecialAirNLoop_Anim.
      */
     Vec3 sp2C;
@@ -192,7 +192,7 @@ void ftFx_SpecialN_CreateBlasterShot(HSD_GObj* gobj)
 
     PAD_STACK(4);
 
-    /// @todo Seems fake, probably one or more missing @c inline functions.
+    /// @@todo Seems fake, probably one or more missing @c inline functions.
     fp = fp = GET_FIGHTER(gobj);
 
     da = getFtSpecialAttrs(fp);
@@ -374,7 +374,7 @@ void ftFx_SpecialNLoop_Anim(HSD_GObj* gobj)
         f64 launchAngle;
         FighterKind ftKind;
 
-        /// @todo Fake assignment.
+        /// @@todo Fake assignment.
         fp = fp = GET_FIGHTER(gobj);
 
         da = getFtSpecialAttrs(fp);
@@ -510,12 +510,12 @@ void ftFx_SpecialAirNLoop_Anim(HSD_GObj* gobj)
         ftFox_DatAttrs* da;
         Fighter* fp;
 
-        /// @todo Fake assignment.
+        /// @@todo Fake assignment.
         fp = fp = GET_FIGHTER(gobj);
 
         da = getFtSpecialAttrs(fp);
 
-        /// @todo Unused assignment.
+        /// @@todo Unused assignment.
         {
             Fighter* _ = GET_FIGHTER(gobj);
         }

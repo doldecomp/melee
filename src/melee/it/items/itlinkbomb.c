@@ -31,7 +31,7 @@ ItemStateTable it_803F6888[] = {
       itLinkbomb_UnkMotion6_Coll },
 };
 
-/// @todo This uses the de-duplicated function ftCo_800C6AFC
+/// @@todo This uses the de-duplicated function ftCo_800C6AFC
 /// which is likely an inline from a header file.
 /// Come back to this once lbcoll is matched.
 

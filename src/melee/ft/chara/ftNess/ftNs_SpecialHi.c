@@ -522,11 +522,11 @@ void ftNs_SpecialAirHiStart_Enter(
     ftAnim_8006EBA4(gobj);
 }
 
-/// @todo Rewrite this.
+/// @@todo Rewrite this.
 void ftNs_SpecialHi_Enter(
     HSD_GObj* gobj) // Ness's grounded PK Thunder 2 Motion State handler
 {
-    /// @todo Try to move these close to usage
+    /// @@todo Try to move these close to usage
     Vec3 sp40;
     ftNessAttributes* ness_attr2;
     Fighter* fighter_data2;

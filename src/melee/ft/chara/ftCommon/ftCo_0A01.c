@@ -1961,7 +1961,7 @@ Item* ftCo_800A5F4C(Fighter* fp, ItemKind arg1)
     }
     closest_ip = NULL;
     for (cur = HSD_GObj_Entities->items; cur != NULL; cur = cur->next) {
-        /// @todo stupid stack padding hack
+        /// @@todo stupid stack padding hack
         cur_ip = GET_ITEM(cur);
         cur_ip = GET_ITEM(cur);
         cur_ip = GET_ITEM(cur);
@@ -4237,7 +4237,7 @@ static inline void ftCo_800B0760_dontinline(Fighter* fp)
     ftCo_800B0760(fp);
 }
 
-/// @todo Maybe a macro?
+/// @@todo Maybe a macro?
 static inline u8 inlineM0(float x)
 {
     if (x >= 0) {
@@ -4353,7 +4353,7 @@ bool ftCo_800B0CA8(Fighter* fp0, Fighter* fp1)
                 var_r0_3 = 0;
             }
             if (var_r0_3 != 0) {
-                /// @todo fakematched control flow
+                /// @@todo fakematched control flow
             jmp_9c:
                 return false;
             }

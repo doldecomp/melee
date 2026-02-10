@@ -6,7 +6,7 @@
 #include <MSL/math_ppc.h>
 #include <MSL/trigf.h>
 
-/// @TODO: Currently 95.55% match - stack frame 8 bytes too large (80 vs 72)
+/// @@todo: Currently 95.55% match - stack frame 8 bytes too large (80 vs 72)
 s32 MatToQuat(Mtx m, Quaternion* q)
 {
     int nxt[] = { 1, 2, 0 };
@@ -88,7 +88,7 @@ s32 HSD_QuatLib_8037EB28(Mtx m, Vec3* euler)
     return 0;
 }
 
-/// @TODO: Currently 87.16% match - temp register allocation (f3/f5, f4/f6
+/// @@todo: Currently 87.16% match - temp register allocation (f3/f5, f4/f6
 /// swapped) likely due to mwcc scheduler behavior
 s32 HSD_QuatLib_8037EC4C(Quaternion* p, Quaternion* q, Quaternion* out)
 {

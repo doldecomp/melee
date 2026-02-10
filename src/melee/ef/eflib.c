@@ -534,7 +534,7 @@ Effect* efLib_8005BE88(int arg0, HSD_GObj* parent_gobj)
     }
     {
         HSD_GObj* ret_gobj;
-        { ///@ todo Inline that returns @c ret_gobj?
+        { ///@ @todo Inline that returns @c ret_gobj?
             u8 p_link;
             if (arg0 >= 27 || arg0 < 25) {
                 p_link = 11;

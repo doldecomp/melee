@@ -27,14 +27,14 @@ typedef struct SIS {
     /*0x04*/ TextGlyphTexture* textures;
 } SIS;
 
-/// @todo: give actual names?
+/// @@todo: give actual names?
 struct sislib_UnkAllocData {
     sislib_UnkAllocData* data_0;
     HSD_Text* data_1;
     u32 size;
 };
 
-/// @todo: this is the same as above, but just more generic...
+/// @@todo: this is the same as above, but just more generic...
 /// proper types will have to be sorted out later, as well as merging the two
 /// structs.
 typedef struct sisLib_803A7664_t {

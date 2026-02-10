@@ -278,7 +278,7 @@ void fn_80185D64(void)
     ftDemo_ObjAllocInit();
     Player_InitAllPlayers();
 
-    /// @todo fix pointer arithmetic
+    /// @@todo fix pointer arithmetic
     /// is this indicative of an inner struct starting at xE4?
     ptr = (u8*) &lbl_804735E8.xE4;
     for (i = 0; i < lbl_804735E8.xEF; i++) {

@@ -1501,7 +1501,7 @@ bool lbColl_80007AFC(HitCapsule* a, HitCapsule* b, float x, float y)
 
 bool lbColl_80007B78(Mtx a, struct Fighter_x1614_t* b, float x, float y)
 {
-    /// @todo Eliminate casts.
+    /// @@todo Eliminate casts.
     return lbColl_800067F8(&b->x14, &b->x8, (Vec3*) &a[1][1], (Vec3*) &a[0][2],
                            &b->x20, (Vec3*) &a[1][4], b->x0 * y, a[0][0] * x,
                            x);

@@ -59,7 +59,7 @@ DSError TRKSuppAccessFile(u32 file_handle, u8* data, size_t* count,
                 replyLength = 0;
                 replyIOResult = 0;
 
-                //! TODO: fake match
+                //! @todo: fake match
                 error =
                     (0, TRKRequestSend(buffer, &replyBufferId, read ? 5 : 5, 3,
                                        !(read && file_handle == 0)));

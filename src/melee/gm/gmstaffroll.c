@@ -330,7 +330,7 @@ void gm_801AC6D8_OnEnter(void* unused)
         gm_8016895C(jobj, gm_804D6844[0], 0);
         HSD_JObjReqAnimAll(jobj, 0.0F);
         {
-            /// @todo Length of #gm_804D6844 is 10
+            /// @@todo Length of #gm_804D6844 is 10
             for (i = 1; i < 10; i++) {
                 HSD_JObj* jobj = HSD_JObjLoadJoint(gm_804D6844[i]->joint);
                 gm_8016895C(jobj, gm_804D6844[i], 0);

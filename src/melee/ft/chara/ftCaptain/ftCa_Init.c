@@ -281,7 +281,7 @@ static char gy_dat[] = "PlCaGy.dat";
 static char gy_joint[] = "PlyCaptain5KGy_Share_joint";
 
 #ifdef BUGFIX
-/// @todo What.
+/// @@todo What.
 char re_dat[] = "PlCaRe.dat";
 #else
 char re_dat[] = "PlCaRe.";

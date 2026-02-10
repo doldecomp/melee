@@ -46,7 +46,7 @@ void ftFx_SpecialS_CreateGFX(HSD_GObj* gobj)
 /// Illusion/Phantasm Motion States
 bool ftFx_SpecialS_CheckGhostRemove(HSD_GObj* gobj)
 {
-    /// @todo @c enum
+    /// @@todo @c enum
     enum_t msid = GET_FIGHTER(gobj)->motion_id;
 
     if (msid >= ftFx_MS_SpecialSStart && msid <= ftFx_MS_SpecialAirSEnd) {

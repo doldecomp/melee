@@ -34,7 +34,7 @@ typedef struct _ftMapping {
     s8 has_transformation;
 } ftMapping;
 
-/// TODO delete after fixing functions that use this
+/// @todo delete after fixing functions that use this
 struct Unk_Struct_w_Array {
     char some_str[8 + 4]; //"PdPm.dat"
     char another_str[16 + 4];
@@ -87,7 +87,7 @@ HSD_ObjAllocData Player_AllocData;
 
 pl_804D6470_t* pl_804D6470;
 
-/// @todo This can be used in more places when functions are fixed to use
+/// @@todo This can be used in more places when functions are fixed to use
 ///       correct structs.
 static inline bool hasExtraFighterId(ftMapping* data)
 {
@@ -242,7 +242,7 @@ void Player_80031AD0(int slot)
     first_struct.has_transformation = false;
     first_struct.x5 = -1;
 
-    /// @todo Eliminate cast.
+    /// @@todo Eliminate cast.
     player->player_entity[0] = Fighter_Create(&first_struct);
     player->player_state = 2;
 
@@ -261,7 +261,7 @@ void Player_80031AD0(int slot)
         second_struct.has_transformation = has_transformation;
         second_struct.x5 = -1;
 
-        /// @todo Eliminate cast.
+        /// @@todo Eliminate cast.
         player->player_entity[1] = Fighter_Create(&second_struct);
 
         if (player->player_state != 1) {
@@ -358,7 +358,7 @@ void Player_80031FB0(int slot, s32 entity_index)
     }
 }
 
-/// new match decomp.me/scratch/oHfiV  TODO
+/// new match decomp.me/scratch/oHfiV  @todo
 //// old match decomp.me/scratch/8otnq
 void Player_80032070(int slot, bool bool_arg)
 {
@@ -1907,7 +1907,7 @@ void Player_80036978(s32 slot, s32 arg1)
     Player_CheckSlot(slot);
     player = &player_slots[slot];
 
-    /// @todo Eliminate cast.
+    /// @@todo Eliminate cast.
     ftLib_80086B90(player->player_entity[player->transformed[0]],
                    (Vec3*) arg1);
 }

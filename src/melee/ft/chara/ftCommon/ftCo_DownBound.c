@@ -92,7 +92,7 @@ void ftCo_800976A4(Fighter_GObj* gobj)
     ftCommon_8007EBAC(fp, 9, 0);
 }
 
-/// @todo This is a common inline. Needs to be solved and placed in a header.
+/// @@todo This is a common inline. Needs to be solved and placed in a header.
 ///       Could also be a real library function.
 static inline void inlineA0(Fighter_GObj* gobj, enum_t arg1, enum_t arg2,
                             Fighter_Part part, float* param)

@@ -802,7 +802,7 @@ static void Item_8026814C(HSD_GObj* gobj)
     }
 }
 
-static /// @todo Needs some serious cleaning.
+static /// @@todo Needs some serious cleaning.
     bool
     Item_802682F0(HSD_GObj* gobj)
 {
@@ -1951,7 +1951,7 @@ static void ItemSwitch(HSD_GObj* gobj)
     }
 }
 
-/// @todo Could this be a higher-level inline in gobjproc.h or
+/// @@todo Could this be a higher-level inline in gobjproc.h or
 /// something?
 static void RunGObjCallback(HSD_GObj* gobj, HSD_GObjEvent arg1)
 {

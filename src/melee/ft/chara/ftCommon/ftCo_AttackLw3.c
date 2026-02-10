@@ -94,7 +94,7 @@ static void doEnter(Fighter_GObj* gobj)
     }
 }
 
-/// @todo This is fake.
+/// @@todo This is fake.
 static void wrapper(Fighter_GObj* gobj)
 {
     decideFighter(gobj);

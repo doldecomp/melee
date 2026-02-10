@@ -169,7 +169,7 @@ void ftKp_SpecialS_8013319C(HSD_GObj* gobj)
 
 void ftKp_SpecialS_8013322C(HSD_GObj* gobj)
 {
-    /// @todo @c fp0 cannot move below @c fp1, which is very strange.
+    /// @@todo @c fp0 cannot move below @c fp1, which is very strange.
     ///       Perhaps there is a temporary @c Fighter* somewhere.
     Fighter* fp0;
     Fighter* fp1 = GET_FIGHTER(gobj);
@@ -232,7 +232,7 @@ void ftKp_SpecialS_80133398(HSD_GObj* gobj)
 
     ftCo_Fall_Enter(gobj);
 }
-/// @todo Combine common flags with #transition_flags0.
+/// @@todo Combine common flags with #transition_flags0.
 static u32 const transition_flags2 =
     Ft_MF_SkipMatAnim | Ft_MF_SkipColAnim | Ft_MF_SkipItemVis | Ft_MF_Unk19 |
     Ft_MF_SkipModelPartVis | Ft_MF_SkipModelFlags;
@@ -360,7 +360,7 @@ void ftKp_SpecialSHit_Anim(HSD_GObj* gobj)
             fp1->mv.kp.unk1.x4 = true;
 
             {
-                /// @todo Combine @c fp0 with other branch somehow
+                /// @@todo Combine @c fp0 with other branch somehow
                 fp0 = GET_FIGHTER(gobj);
 
                 if ((signed) fp0->mv.kp.unk1.x4 != false) {
@@ -381,7 +381,7 @@ void ftKp_SpecialSHit_Anim(HSD_GObj* gobj)
             ftCo_800BC9C8(fp1->victim_gobj);
 
         } else {
-            /// @todo Combine @c fp0 with other branch somehow
+            /// @@todo Combine @c fp0 with other branch somehow
             fp0 = GET_FIGHTER(gobj);
             Fighter_ChangeMotionState(gobj, 350, transition_flags3,
                                       fp0->cur_anim_frame, 1.0F, 0.0F, 0);
@@ -516,7 +516,7 @@ inline void ftKoopa_SpecialS_ChangeAction(HSD_GObj* gobj,
     }
 }
 
-/// @todo Shared inline with #ftKp_SpecialAirSHit_IASA.
+/// @@todo Shared inline with #ftKp_SpecialAirSHit_IASA.
 void ftKp_SpecialSHit_IASA(HSD_GObj* gobj)
 {
     s32 facing_dir = ftKp_SpecialS_set_dir(gobj);
@@ -528,7 +528,7 @@ void ftKp_SpecialSHit_IASA(HSD_GObj* gobj)
     }
 }
 
-/// @todo Shared inline with #ftKp_SpecialSHit_IASA.
+/// @@todo Shared inline with #ftKp_SpecialSHit_IASA.
 void ftKp_SpecialAirSHit_IASA(HSD_GObj* gobj)
 {
     s32 facing_dir = ftKp_SpecialS_set_dir(gobj);

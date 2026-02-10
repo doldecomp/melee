@@ -81,7 +81,7 @@ struct ftKb_SpecialNMs_DatAttrs {
 };
 STATIC_ASSERT(sizeof(struct ftKb_SpecialNMs_DatAttrs) == 0x14);
 
-/// @todo Every hat is its own struct.
+/// @@todo Every hat is its own struct.
 struct ftKb_DatAttrs {
     // Midair Jumps
     /*   +0 */ u32 jumpaerial_turn_duration;

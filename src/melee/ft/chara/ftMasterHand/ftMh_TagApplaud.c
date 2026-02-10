@@ -26,7 +26,7 @@ void ftMh_TagApplaud_Anim(HSD_GObj* gobj)
         fp->cmd_vars[1] = 0;
     }
 
-    /// @todo  inlined? possibly shared with ftMh_TagCrush_Anim
+    /// @@todo  inlined? possibly shared with ftMh_TagCrush_Anim
     if ((ftBossLib_8015C31C() != 0) || (ftBossLib_8015C3A0() != 0) ||
         (!ftAnim_IsFramesRemaining(gobj)))
     {

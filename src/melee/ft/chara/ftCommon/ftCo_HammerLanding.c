@@ -12,7 +12,7 @@
 
 void ftCo_HammerLanding_Enter(Fighter_GObj* gobj)
 {
-    /// @todo Cannot move below @c fp, which suggests an inline
+    /// @@todo Cannot move below @c fp, which suggests an inline
     u32 flags;
     Fighter* fp = GET_FIGHTER(gobj);
     fp->mv.co.hammerlanding.x4 = p_ftCommonData->x6B4;

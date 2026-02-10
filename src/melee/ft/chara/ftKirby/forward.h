@@ -9,7 +9,7 @@
 typedef struct Fighter ftKb_Fighter;
 typedef struct ftKb_DatAttrs ftKb_DatAttrs;
 
-/// @todo Clean up factorization
+/// @@todo Clean up factorization
 
 static MotionFlags const ftKb_MF_MultiJump =
     Ft_MF_KeepGfx | Ft_MF_SkipHit | Ft_MF_SkipAnimVel | Ft_MF_Unk06;

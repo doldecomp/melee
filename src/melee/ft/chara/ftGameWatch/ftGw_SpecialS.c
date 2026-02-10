@@ -106,7 +106,7 @@ static void ftGw_SpecialS_ItemJudgementExitHitlag(HSD_GObj* gobj)
 /// his SpecialS Motion States
 bool ftGw_SpecialS_ItemCheckJudgementRemove(HSD_GObj* gobj)
 {
-    /// @todo @c enum
+    /// @@todo @c enum
     enum_t msid = GET_FIGHTER(gobj)->motion_id;
 
     if (msid >= ftGw_MS_SpecialS1 && msid <= ftGw_MS_SpecialAirS9) {
@@ -118,7 +118,7 @@ bool ftGw_SpecialS_ItemCheckJudgementRemove(HSD_GObj* gobj)
 
 int ftGw_SpecialS_GetRandomInt(HSD_GObj* gobj)
 {
-    /// @todo #getFighter can be factored out somehow.
+    /// @@todo #getFighter can be factored out somehow.
     Fighter* fp = getFighter(gobj);
     ftGameWatchAttributes* sa = getFtSpecialAttrs(fp);
 
@@ -187,7 +187,7 @@ void ftGw_SpecialS_Enter(HSD_GObj* gobj)
 
     GET_FIGHTER(gobj)->self_vel.y = 0.0f;
 
-    /// @todo Shared @c inline with #ftGw_SpecialAirS_Enter.
+    /// @@todo Shared @c inline with #ftGw_SpecialAirS_Enter.
     ftGw_SpecialS_GetRandomInt(gobj);
     Fighter_ChangeMotionState(gobj,
                               fp->fv.gw.x222C_judgeVar1 + ftGw_MS_SpecialS1, 0,

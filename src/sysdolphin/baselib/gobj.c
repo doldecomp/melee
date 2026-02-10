@@ -207,7 +207,7 @@ void HSD_GObj_LObjCallback(HSD_GObj* gobj, int unused)
 void HSD_GObj_JObjCallback(HSD_GObj* gobj, int arg1)
 {
     HSD_JObj* jobj = gobj->hsd_obj;
-    /// @todo don't inline #HSD_GObj_80390EB8
+    /// @@todo don't inline #HSD_GObj_80390EB8
     ///       is there a file boundary between #HSD_GObj_80390EB8 and
     ///       #HSD_GObj_JObjCallback?
 #pragma push

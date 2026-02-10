@@ -97,7 +97,7 @@ static bool checkFacingDir(Fighter* fp)
     }
 }
 
-/// @todo Can maybe be combined with #ftCo_AttackS4_CheckInput
+/// @@todo Can maybe be combined with #ftCo_AttackS4_CheckInput
 bool ftCo_AttackS4_8008C114(Fighter_GObj* gobj)
 {
     float stick_x_sign, stick_angle;

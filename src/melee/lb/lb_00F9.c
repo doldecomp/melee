@@ -82,7 +82,7 @@ static inline struct lb_80011A50_t* inlineA0(void)
         return NULL;
     }
     {
-        /// @todo inline appears in #lb_800115F4
+        /// @@todo inline appears in #lb_800115F4
         struct lb_80011A50_t* temp = lb_804D63B0;
         lb_804D63AC = ret->next;
         lb_804D63B0 = ret;
@@ -234,7 +234,7 @@ static inline double inlineB0(void)
                 var_r3->next = prev->next;
             }
             {
-                /// @todo inline appears in #lb_800115F4
+                /// @@todo inline appears in #lb_800115F4
                 struct lb_80011A50_t* temp = lb_804D63AC;
                 lb_804D63AC = prev;
                 prev->next = temp;

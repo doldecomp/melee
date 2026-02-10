@@ -173,7 +173,7 @@ static void handleAirColl(HSD_GObj* gobj)
 
 static void handleColl(HSD_GObj* gobj)
 {
-    /// @todo #GET_FIGHTER
+    /// @@todo #GET_FIGHTER
     Fighter* fp = gobj->user_data;
     ftCommon_8007D7FC(fp);
     Fighter_ChangeMotionState(gobj, ftPe_MS_SpecialLw, coll_mf,

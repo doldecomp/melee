@@ -485,7 +485,7 @@ struct ftCommonData {
     /* +6CC */ int x6CC;
     /* +6D0 */ float x6D0;
     /* +6D4 */ UNK_T x6D4;
-    /// @todo expand to actual size
+    /// @@todo expand to actual size
     /* +6D8 */ void* x6D8[1];
     /* +6DC */ GXColor x6DC_colorsByPlayer[4];
     /* +6EC */ u8 x6EC[0x6F0 - 0x6EC];
@@ -656,7 +656,7 @@ struct ftData {
     /* +3C */ struct UnkFloat6_Camera* x3C;
     /* +40 */ struct itPickup* x40;
     /* +44 */ ftData_x44_t* x44;
-    /* +48 */ UNK_T* x48_items; ///< @todo might be similar to KirbyHat? see
+    /* +48 */ UNK_T* x48_items; ///< @@todo might be similar to KirbyHat? see
                                 ///< ftPr_Init_8013C360
     /* +4C */ FtSFX* x4C_sfx;
     /* +50 */ Vec2* x50;
@@ -861,7 +861,7 @@ struct MotionState {
     enum_t x4_flags;
 
     union {
-        /// @todo Try to match without this being a @c union.
+        /// @@todo Try to match without this being a @c union.
         u32 _;
         struct {
             u8 move_id : 8;
@@ -909,7 +909,7 @@ struct Fighter_DemoStrings {
     char* vi_wait_filename;
 };
 
-/// @todo Rename this and its members; investigate using it elsewhere.
+/// @@todo Rename this and its members; investigate using it elsewhere.
 /* fp+2070 */ union Struct2070 {
     /* fp+2070 */ struct {
         /* fp+2070 */ s8 x2070;
@@ -931,7 +931,7 @@ struct Fighter_DemoStrings {
     /* fp+2070 */ s32 x2070_int;
 };
 
-/// @todo See if this should likewise be instituted for item->xD94 thru
+/// @@todo See if this should likewise be instituted for item->xD94 thru
 /// xDA4_word/xDA8_short
 /* fp+2074 */ struct Struct2074 {
     /* fp+2074 */ Vec2 x2074_vec;
@@ -1325,7 +1325,7 @@ struct Fighter {
         /* +14 */ float x14;
         /* +18 */ Vec3 x18;
         /* +24 */ u8 pad[0x28 - 0x24];
-    } x1670[1]; ///< @todo figure out proper size
+    } x1670[1]; ///< @@todo figure out proper size
     /* fp+1674 */ u8 filler_x1674[0x1828 - 0x1670 - 0x28];
     /* fp+1828 */ enum_t x1828;
     /* fp+182C */ struct dmg {
@@ -1836,7 +1836,7 @@ typedef struct ArticleDynamicBones {
 } ArticleDynamicBones;
 
 typedef struct ftDynamics {
-    /// @todo Very similar to #ItemDynamics.
+    /// @@todo Very similar to #ItemDynamics.
     struct {
         /*  +0 */ int dynamicsNum;
         /*  +4 */ ArticleDynamicBones* ftDynamicBones;
@@ -1872,12 +1872,12 @@ typedef struct DmgLogEntry {
     /*  +0 */ enum EntityKind x0;
     /*  +4 */ FighterKind kind;
     /*  +8 */ HSD_GObj* gobj;
-    /// @todo Might be a fake union
+    /// @@todo Might be a fake union
     /*  +C */ union {
         HitCapsule* hit0;
         DynamicsDesc* unk_anim0;
     };
-    /// @todo Might be a fake union
+    /// @@todo Might be a fake union
     /* +10 */ union {
         HitCapsule* hit1;
         FighterHurtCapsule* hurt1;

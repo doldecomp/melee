@@ -44,8 +44,8 @@ void HSD_SObjLib_803A44A4(void)
     HSD_ObjAllocInit(&HSD_SObjLib_804D10E0, 0x9C, 4);
 }
 
-/* @TODO: 99.56% match - needs register allocation fix (r4 vs r5 for cur) */
-/* @TODO: 99.56% match - needs register allocation fix (r4 vs r5 for cur) */
+/* @@todo: 99.56% match - needs register allocation fix (r4 vs r5 for cur) */
+/* @@todo: 99.56% match - needs register allocation fix (r4 vs r5 for cur) */
 void HSD_SObjLib_803A44D4(HSD_GObj* gobj, HSD_SObj* sobj, u8 priority)
 {
     HSD_SObj* cur;
@@ -201,7 +201,7 @@ void HSD_SObjLib_803A54EC(HSD_GObj* gobj, int unused)
     HSD_StateSetZMode(1, 3, 1);
 }
 
-/* @TODO: 99.84% match - near_val variable forces 6 FPR saves but adds
+/* @@todo: 99.84% match - near_val variable forces 6 FPR saves but adds
  * 4 bytes to stack, shifting local offsets by 4 */
 void HSD_SObjLib_803A55DC(HSD_GObj* gobj, int width, int height, int priority)
 {

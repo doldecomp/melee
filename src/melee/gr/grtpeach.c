@@ -118,7 +118,7 @@ bool grTPeach_80222950(void)
 
 Ground_GObj* grTPeach_80222958(int index)
 {
-    /// @todo Can't move below @c callbacks.
+    /// @@todo Can't move below @c callbacks.
     HSD_GObj* gobj;
 
     StageCallbacks* callbacks = &grTPe_803E90F0[index];

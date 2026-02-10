@@ -12,12 +12,12 @@
 
 extern StageInfo stage_info;
 
-/// @todo Bad split?
+/// @@todo Bad split?
 /* static */ extern UnkStage6B0 grDatFiles_803E0848;
 
 static UnkArchiveStruct grDatFiles_8049EE10[4];
 
-/// @todo Bad split?
+/// @@todo Bad split?
 /* static */ extern UnkStageDat grDatFiles_803E0924;
 
 void grDatFiles_801C5FC0(HSD_Archive* archive, void* data, u32 length)

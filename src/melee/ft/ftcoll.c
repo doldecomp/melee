@@ -132,7 +132,7 @@ void ftColl_8007646C(Item_GObj* attackItem, Fighter_GObj* victim)
 /// Check to end combo for victim
 void ftColl_800764DC(Fighter_GObj* gobj)
 {
-    /// @todo #GET_FIGHTER adds an instruction
+    /// @@todo #GET_FIGHTER adds an instruction
     Fighter* fp = gobj->user_data;
     if (fp->x2098 != 0) {
         fp->x2098--;
@@ -297,13 +297,13 @@ void ftColl_800768A0(Fighter* fp, HitCapsule* dst)
     lbColl_80008440(dst);
 }
 
-/// @todo Probably the same function as #inlineA1
+/// @@todo Probably the same function as #inlineA1
 static inline void inlineA0(Fighter* fp0, Fighter* fp1, HitCapsule* hit1,
                             Vec3* ef_pos, float dmg)
 {
     int int_dmg;
 
-    /// @todo <tt>int_dmg = getEnvDmg(dmg);</tt>
+    /// @@todo <tt>int_dmg = getEnvDmg(dmg);</tt>
     if (dmg) {
         if ((int) dmg) {
             int_dmg = dmg;
@@ -315,7 +315,7 @@ static inline void inlineA0(Fighter* fp0, Fighter* fp1, HitCapsule* hit1,
     }
 
     {
-        /// @todo <tt>ftColl_80076808(fp1, hit1, 3, fp0, true);</tt>
+        /// @@todo <tt>ftColl_80076808(fp1, hit1, 3, fp0, true);</tt>
         size_t i;
         s8 j;
         for (i = 0, j = 0; i < ARRAY_SIZE(fp1->x914); i++, j++) {
@@ -354,7 +354,7 @@ static inline bool inlineA1(Fighter* fp0, HitCapsule* hit0, Fighter* fp1,
     size_t i;
     int int_dmg;
 
-    /// @todo <tt>int_dmg = getEnvDmg(dmg);</tt>
+    /// @@todo <tt>int_dmg = getEnvDmg(dmg);</tt>
     if (dmg) {
         if ((int) dmg) {
             int_dmg = dmg;
@@ -366,7 +366,7 @@ static inline bool inlineA1(Fighter* fp0, HitCapsule* hit0, Fighter* fp1,
     }
 
     {
-        /// @todo <tt>ftColl_80076808(fp1, hit1, 3, fp0, false);</tt>
+        /// @@todo <tt>ftColl_80076808(fp1, hit1, 3, fp0, false);</tt>
         for (i = 0; i < ARRAY_SIZE(fp0->x914); i++) {
             HitCapsule* hit;
             hit = &fp0->x914[i];
@@ -506,7 +506,7 @@ struct ftCollSFX lbl_803C0C40 = {
     0x8D, 0x8E, 0x8C, 0x6B, 0x6C, 0x6D,
 };
 
-/// @todo #ftColl_80076808
+/// @@todo #ftColl_80076808
 inline void inlineB0(Fighter* fp0, HitCapsule* hitbox, Fighter* fp1, int arg3,
                      bool (*cb)(HitCapsule* hit, int arg1, void* fp))
 {
@@ -666,7 +666,7 @@ bool ftColl_80076ED8(Fighter* fp0, HitCapsule* hit0, Fighter* fp1,
 #ifdef BUGFIX
             inner_ret = false;
 #endif
-            { /// @todo inline
+            { /// @@todo inline
                 if (inlineB2(fp1, dmg, int_dmg)) {
                     Fighter* fp = fp0;
                     if (fp0->x1064_thrownHitbox.owner != NULL) {
@@ -1367,7 +1367,7 @@ void ftColl_8007B128(Fighter_GObj* fighter_gobj, int bone_id,
     HSD_ASSERT(2184, 0);
 }
 
-/// @todo @p shield is #AbsorbDesc, and #AbsorbDesc is part of #ShieldDesc
+/// @@todo @p shield is #AbsorbDesc, and #AbsorbDesc is part of #ShieldDesc
 void ftColl_8007B1B8(Fighter_GObj* gobj, ShieldDesc* shield, HSD_GObjEvent cb)
 {
     Fighter* fp = GET_FIGHTER(gobj);

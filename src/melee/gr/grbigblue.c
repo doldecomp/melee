@@ -457,7 +457,7 @@ void grBigBlue_801E68B8(Ground_GObj* gobj)
     gp->gv.bigblue.xCC = NULL;
 }
 
-/// @TODO: Currently 99.98% match - near-perfect
+/// @@todo: Currently 99.98% match - near-perfect
 void grBigBlue_801E6904(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
@@ -515,7 +515,7 @@ bool grBigBlue_801E6C58(Ground_GObj* arg)
 
 void grBigBlue_801E855C(Ground_GObj* arg) {}
 
-/// @TODO: Currently 87.65% match - register allocation and stack offset
+/// @@todo: Currently 87.65% match - register allocation and stack offset
 void fn_801E8560(Ground* gp, s32 param, CollData* coll, s32 time_param,
                  s32 env, f32 force)
 {
@@ -582,7 +582,7 @@ void fn_801E8560(Ground* gp, s32 param, CollData* coll, s32 time_param,
     }
 }
 
-/// @TODO: Currently 90.70% match - needs register allocation fix
+/// @@todo: Currently 90.70% match - needs register allocation fix
 bool grBigBlue_801E8794(void* exclude, Vec3* pos, bool checkSecondary,
                         f32 rangeX, f32 rangeY)
 {
@@ -682,7 +682,7 @@ void* grBigBlue_801E89DC(int arg)
     return *(void**) (gp + 0xC8);
 }
 
-/// @TODO: Currently 79.9% match - platform/store use lwzx/stwx instead of
+/// @@todo: Currently 79.9% match - platform/store use lwzx/stwx instead of
 /// add+lwz/stw (addressing mode difference), candPtr init missing slwi+add
 void grBigBlue_801E8A1C(int idx)
 {
@@ -735,7 +735,7 @@ void grBigBlue_801E8A1C(int idx)
     }
 }
 
-/// @TODO: Currently 94.71% match - needs pointer advancement and i variable
+/// @@todo: Currently 94.71% match - needs pointer advancement and i variable
 f32 grBigBlue_801E8B84(f32 right, f32 left, f32 bottom, f32 top)
 {
     u8* gp = (u8*) GET_GROUND(Ground_801C2BA4(0x21));
@@ -915,7 +915,7 @@ bool grBigBlue_801EAB50(Vec3* pos, s32 flag, f32 rangeX, f32 rangeY)
     return result;
 }
 
-/// @TODO: Currently 98.17% match - car section generates fnmsubs instead of
+/// @@todo: Currently 98.17% match - car section generates fnmsubs instead of
 /// fmuls+fsubs; compiler fuses multiply-subtract differently than target
 s32 grBigBlue_801EACE8(HSD_JObj* exclude, Vec3* point, f32* out_y,
                        f32 half_range_x, f32 half_range_y)
@@ -1024,7 +1024,7 @@ s32 grBigBlue_801EACE8(HSD_JObj* exclude, Vec3* point, f32* out_y,
     return 0;
 }
 
-/// @TODO: Currently 94.90% match - needs bitfield struct for rlwimi
+/// @@todo: Currently 94.90% match - needs bitfield struct for rlwimi
 /// generation and stack frame fix (120 vs 112 bytes)
 void grBigBlue_801EB004(Ground_GObj* gobj)
 {
@@ -1138,7 +1138,7 @@ void grBigBlue_801EB004(Ground_GObj* gobj)
     }
 }
 
-/// @TODO: Currently partial match - needs register allocation and
+/// @@todo: Currently partial match - needs register allocation and
 /// bitfield rlwimi fixes.
 void grBigBlue_801EB4AC(Ground_GObj* gobj)
 {
@@ -1437,7 +1437,7 @@ f32 grBigBlue_801EC58C(Vec3* pos, Vec3* normal_out, f32 half_height)
     return max_y;
 }
 
-/// @TODO: Currently 90.40% match - needs register allocation fix (stmw r24 vs
+/// @@todo: Currently 90.40% match - needs register allocation fix (stmw r24 vs
 /// r23) and bitfield write pattern fix (rlwinm+ori vs rlwimi)
 #pragma push
 #pragma fp_contract on
@@ -1602,7 +1602,7 @@ void grBigBlue_801EC6C0(Ground_GObj* gobj)
 
 /// #grBigBlue_801ECB50
 
-/// @TODO: Currently partial match - complex car physics simulation
+/// @@todo: Currently partial match - complex car physics simulation
 #pragma push
 #pragma fp_contract on
 void grBigBlue_801ED694(Ground_GObj* gobj, s32 lane)
@@ -1980,7 +1980,7 @@ heading_converge:
 }
 #pragma pop
 
-/// @TODO: Currently 87.41% match - compiler CSEs gp+offset into one register
+/// @@todo: Currently 87.41% match - compiler CSEs gp+offset into one register
 /// (4 NV regs) instead of keeping them separate (5 NV regs, stmw r27)
 s32 grBigBlue_801EDF44(Ground_GObj* gobj, s32 index)
 {
@@ -2159,7 +2159,7 @@ s32 grBigBlue_801EDF44(Ground_GObj* gobj, s32 index)
 
 /// #grBigBlue_801EE398
 
-/// @TODO: Currently 83.62% match - compiler CSEs gp+offset into one register
+/// @@todo: Currently 83.62% match - compiler CSEs gp+offset into one register
 /// (3 NV regs) instead of keeping them separate (4 NV regs with r28 for case 4)
 #pragma push
 #pragma fp_contract on
@@ -2392,7 +2392,7 @@ bool grBigBlue_801EEF00(Ground_GObj* gobj, s32 index)
 }
 #pragma pop
 
-/// @TODO: Currently 98.03% match - float register allocation off by 1
+/// @@todo: Currently 98.03% match - float register allocation off by 1
 void grBigBlue_801EF424(Ground_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
@@ -2464,7 +2464,7 @@ void grBigBlue_801EF424(Ground_GObj* gobj)
     }
 }
 
-/// @TODO: Currently 99.98% match - assert string relocation offset
+/// @@todo: Currently 99.98% match - assert string relocation offset
 void fn_801EF60C(Ground* gp, s32 joint_id, CollData* coll, s32 time_param,
                  s32 env, f32 force)
 {
@@ -2507,7 +2507,7 @@ void fn_801EF60C(Ground* gp, s32 joint_id, CollData* coll, s32 time_param,
     }
 }
 
-/// @TODO: Currently 96.3% match - needs separate float literals for x vs y/z
+/// @@todo: Currently 96.3% match - needs separate float literals for x vs y/z
 void grBigBlue_801EF7D8(Vec3* pos)
 {
     HSD_GObj* gobj = Ground_801C2BA4(0x22);

@@ -54,7 +54,7 @@ void HSD_FogSet(HSD_Fog* fog)
         } else {
             Mtx44 mtx = { 0 };
 
-            /// @todo Eliminate cast
+            /// @@todo Eliminate cast
             GXGetProjectionv((f32*) &proj);
 
             switch ((s32) proj.x0) {
