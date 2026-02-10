@@ -36,7 +36,7 @@ typedef struct mnDiagram_804A076C_t {
 } mnDiagram_804A076C_t;
 STATIC_ASSERT(sizeof(mnDiagram_804A076C_t) == 0x78);
 
-/// Archive asset pointers struct (for mnDiagram_802437E8)
+/// Archive asset pointers struct (for mnDiagram_Init)
 /// Cast from &mnDiagram_804A0750 to access asset arrays
 typedef struct mnDiagram_Assets {
     /* 0x00 */ u8 sorted_fighters[0x19];
@@ -465,11 +465,11 @@ u8 mnDiagram_GetNextFighterIndex(s32 idx)
 
 /// @brief Gets play time for a specific fighter under a name tag.
 /// @param name_idx Name tag index.
-/// @param fighter_idx Fighter index (0-24).
+/// @param row_idx Fighter index (0-24).
 /// @return Play time in seconds for this fighter under this name.
-u32 mnDiagram_GetNamePlayTimeByFighter(int name_idx, int fighter_idx)
+u32 mnDiagram_GetNamePlayTimeByFighter(int name_idx, int row_idx)
 {
-    return GetPersistentNameData(name_idx)->play_time_by_fighter[fighter_idx];
+    return GetPersistentNameData(name_idx)->play_time_by_fighter[row_idx];
 }
 
 typedef struct RankEntry {
@@ -497,6 +497,19 @@ static inline int CountTiedFighters(int name, int min_fighter, u32 min_time)
 }
 
 static inline int CheckAllZeroPlayTime(int name_idx)
+{
+    int i;
+    for (i = 0; i < 0x19; i++) {
+        if (GetPersistentNameData(name_idx)->play_time_by_fighter[i] != 0U) {
+            return 0;
+        }
+    }
+    return 1;
+}
+
+// todo: this has gotta be fake - but i couldn't get the
+// other one to work for both functions
+static inline int CheckAllZeroPlayTime_u8(u8 name_idx)
 {
     int i = 0;
     int offset = i;
@@ -589,39 +602,21 @@ int mnDiagram_GetRankedFighterForName(int rank, int name_idx,
 u8 mnDiagram_GetLeastPlayedFighter(u8 name_idx)
 {
     int i;
-    int name;
-    int offset;
-    int result;
     int min_fighter;
     int count;
 
     // Check if all play times are zero
-    i = 0;
-    name = name_idx;
-    offset = i;
-    for (;;) {
-        if (GetPersistentNameData(name)->play_time_by_fighter[i] != 0U) {
-            result = 0;
-            break;
-        }
-        i++;
-        offset += 4;
-        if (i >= 0x19) {
-            result = 1;
-            break;
-        }
-    }
-    if (result != 0) {
+    if (CheckAllZeroPlayTime_u8(name_idx) != 0) {
         return 0x19;
     }
 
     // Find fighter with minimum play time
     min_fighter = 0;
     for (i = 1; i < 0x19; i++) {
-        if (mn_IsFighterUnlocked(i) != 0) {
-            if (GetPersistentNameData(name)
+        if (mn_IsFighterUnlocked(i)) {
+            if (GetPersistentNameData(name_idx)
                     ->play_time_by_fighter[min_fighter] >
-                GetPersistentNameData(name)->play_time_by_fighter[i])
+                GetPersistentNameData(name_idx)->play_time_by_fighter[i])
             {
                 min_fighter = i;
             }
@@ -632,7 +627,7 @@ u8 mnDiagram_GetLeastPlayedFighter(u8 name_idx)
     count = 0;
     for (i = 0; i < 0x19; i++) {
         if (mn_IsFighterUnlocked(i) != 0 &&
-            GetPersistentNameData(name)->play_time_by_fighter[i] == 0U)
+            GetPersistentNameData(name_idx)->play_time_by_fighter[i] == 0U)
         {
             count++;
         }
@@ -645,8 +640,9 @@ u8 mnDiagram_GetLeastPlayedFighter(u8 name_idx)
     count = 0;
     for (i = 0; i < 0x19; i++) {
         if (mn_IsFighterUnlocked(i) != 0 && i != min_fighter) {
-            if (GetPersistentNameData(name)->play_time_by_fighter[i] ==
-                GetPersistentNameData(name)->play_time_by_fighter[min_fighter])
+            if (GetPersistentNameData(name_idx)->play_time_by_fighter[i] ==
+                GetPersistentNameData(name_idx)
+                    ->play_time_by_fighter[min_fighter])
             {
                 count++;
             }
@@ -659,7 +655,10 @@ u8 mnDiagram_GetLeastPlayedFighter(u8 name_idx)
     return min_fighter;
 }
 
-void mnDiagram_8023FA6C(void)
+/// @brief Sorts fighters by total KOs in descending order.
+/// @details Uses selection sort to rank fighters by their cumulative KO count
+///          against all unlocked fighters. Results stored in sorted_fighters.
+void mnDiagram_SortFightersByKOs(void)
 {
     u32 totals[0x19];
     int i, j;
@@ -701,7 +700,10 @@ void mnDiagram_8023FA6C(void)
     }
 }
 
-void mnDiagram_8023FC28(void)
+/// @brief Sorts player names by total KOs in descending order.
+/// @details Uses selection sort to rank names by their cumulative KO count
+///          against all valid names. Results stored in sorted_names.
+void mnDiagram_SortNamesByKOs(void)
 {
     u32 totals[0x78];
     int i, j;
@@ -761,13 +763,19 @@ int mnDiagram_CountUnlockedFighters(void)
 
 void mnDiagram_PopupInputProc(HSD_GObj* gobj)
 {
+    HSD_GObjProc* proc;
     Diagram* data = mnDiagram_804D6C10->user_data;
     u32 input = mn_80229624(4);
+    PAD_STACK(8);
+
+    mn_804A04F0.buttons = input;
+
     if (input & 0x20) {
         lbAudioAx_80024030(0);
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
-        HSD_GObjProc_8038FD54(gobj, (void (*)(HSD_GObj*)) mnDiagram_InputProc,
-                              0);
+        proc = HSD_GObjProc_8038FD54(
+            gobj, (void (*)(HSD_GObj*)) mnDiagram_InputProc, 0);
+        proc->flags_3 = HSD_GObj_804D783C;
         HSD_GObjPLink_80390228(data->popup_gobj);
         data->popup_gobj = NULL;
     }
@@ -775,28 +783,118 @@ void mnDiagram_PopupInputProc(HSD_GObj* gobj)
 
 void mnDiagram_InputProc(HSD_GObj* gobj)
 {
+    HSD_GObjProc* proc;
+    u8* base = (u8*) &mnDiagram_804A0750;
     Diagram* data = mnDiagram_804D6C10->user_data;
     u32 input = mn_80229624(4);
+    s32 is_name_mode = 0;
+    s32 row_idx;
+    s32 col_idx;
+    s32 count;
+    s32 new_pos;
+    u8* ptr;
+    u8* iter;
+    u8 result;
+    PAD_STACK(80);
+
+    mn_804A04F0.buttons = input;
 
     if (input & 0x10) {
+        // A button - open popup
         lbAudioAx_80024030(1);
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
-        HSD_GObjProc_8038FD54(
+        proc = HSD_GObjProc_8038FD54(
             gobj, (void (*)(HSD_GObj*)) mnDiagram_PopupInputProc, 0);
+        proc->flags_3 = HSD_GObj_804D783C;
         if (data->is_name_mode != 0) {
-            u8 col_idx = (u8) data->name_cursor_pos;
-            u8 row_idx = data->name_cursor_pos >> 8;
-            mnDiagram_80241310(col_idx, row_idx, 1);
+            // Name mode - find position in sorted names
+            row_idx = (u8) data->name_cursor_pos;
+            col_idx = (u8) mn_804A04F0.hovered_selection;
+            ptr = base + row_idx + 0x1C;
+            while (col_idx > 0) {
+                row_idx++;
+                ptr++;
+                if (row_idx >= 0x78) {
+                    col_idx = 0x78;
+                    goto name_col_done;
+                }
+                if (GetNameText(*ptr) != NULL) {
+                    col_idx--;
+                }
+            }
+            col_idx = base[row_idx + 0x1C];
+        name_col_done:
+            new_pos = (s32) mn_804A04F0.hovered_selection >> 8;
+            row_idx = (s32) data->name_cursor_pos >> 8;
+            ptr = base + row_idx + 0x1C;
+            while (new_pos > 0) {
+                row_idx++;
+                ptr++;
+                if (row_idx >= 0x78) {
+                    result = 0x78;
+                    goto name_row_done;
+                }
+                if (GetNameText(*ptr) != NULL) {
+                    new_pos--;
+                }
+            }
+            result = base[row_idx + 0x1C];
+        name_row_done:
+            mnDiagram_CreatePopup((u8) col_idx, result, 1);
         } else {
-            u8 col_idx = (u8) data->fighter_cursor_pos;
-            u8 row_idx = data->fighter_cursor_pos >> 8;
-            mnDiagram_80241310(col_idx, row_idx, 0);
+            // Fighter mode - find position in sorted fighters
+            row_idx = (u8) data->fighter_cursor_pos;
+            col_idx = (u8) mn_804A04F0.hovered_selection;
+            ptr = base + row_idx;
+            while (col_idx >= 0) {
+                if (col_idx == 0) {
+                    result = base[row_idx];
+                    goto fighter_col_done;
+                }
+                iter = ptr;
+                row_idx++;
+                iter++;
+                ptr++;
+                if (row_idx >= 0x19) {
+                    result = 0x19;
+                    goto fighter_col_done;
+                }
+                if (mn_IsFighterUnlocked(*iter) != 0) {
+                    col_idx--;
+                }
+            }
+        fighter_col_done:
+            new_pos = (s32) mn_804A04F0.hovered_selection >> 8;
+            row_idx = (s32) data->fighter_cursor_pos >> 8;
+            ptr = base + row_idx;
+            while (new_pos >= 0) {
+                if (new_pos == 0) {
+                    col_idx = base[row_idx];
+                    goto fighter_row_done;
+                }
+                iter = ptr;
+                row_idx++;
+                iter++;
+                ptr++;
+                if (row_idx >= 0x19) {
+                    col_idx = 0x19;
+                    goto fighter_row_done;
+                }
+                if (mn_IsFighterUnlocked(*iter) != 0) {
+                    new_pos--;
+                }
+            }
+        fighter_row_done:
+            mnDiagram_CreatePopup(result, (u8) col_idx, 0);
         }
         return;
     }
+
     if (input & 0x20) {
+        // B button - exit menu
         lbAudioAx_80024030(0);
-        mn_804A04F0.entering_menu = 0;
+        mn_804A04F0.entering_menu = is_name_mode;
+        data = mnDiagram_804D6C10->user_data;
         gmMainLib_8015CC34()->xE = (u8) (data->fighter_cursor_pos >> 8);
         gmMainLib_8015CC34()->xF = (u8) data->fighter_cursor_pos;
         gmMainLib_8015CC34()->unk_x10 = (u8) (data->name_cursor_pos >> 8);
@@ -805,8 +903,11 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
         mn_80229894(0x1C, 0, 3);
         return;
     }
+
     if (input & 0xC0) {
+        // L/R buttons - switch screens
         lbAudioAx_80024030(1);
+        data = mnDiagram_804D6C10->user_data;
         gmMainLib_8015CC34()->xE = (u8) (data->fighter_cursor_pos >> 8);
         gmMainLib_8015CC34()->xF = (u8) data->fighter_cursor_pos;
         gmMainLib_8015CC34()->unk_x10 = (u8) (data->name_cursor_pos >> 8);
@@ -820,45 +921,439 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
         }
         return;
     }
+
     if (input & 0xC00) {
+        // Toggle name/fighter mode
         if (GetNameCount() == 0) {
             lbAudioAx_80024030(3);
             return;
         }
         lbAudioAx_80024030(1);
-        data->is_name_mode = (data->is_name_mode == 0) ? 1 : 0;
-        mnDiagram_UpdateScrollArrowVisibility(
-            mnDiagram_804D6C10, mnDiagram_CountUnlockedFighters());
+        if (data->is_name_mode == 0) {
+            is_name_mode = 1;
+        }
+        data->is_name_mode = is_name_mode;
         if (data->is_name_mode != 0) {
-            mnDiagram_80241730(mnDiagram_804D6C10, (u8) data->name_cursor_pos,
-                               data->name_cursor_pos >> 8);
+            count = GetNameCount();
+            if ((u8) mn_804A04F0.hovered_selection >= count) {
+                mn_804A04F0.hovered_selection =
+                    (mn_804A04F0.hovered_selection & 0xFF00) |
+                    (u8) (count - 1);
+            }
+            if ((s32) mn_804A04F0.hovered_selection >> 8 >= count) {
+                mn_804A04F0.hovered_selection =
+                    ((count - 1) << 8) | ((u8) mn_804A04F0.hovered_selection);
+            }
+            mnDiagram_UpdateScrollArrowVisibility(mnDiagram_804D6C10, count);
+            mnDiagram_UpdateGridDisplay(mnDiagram_804D6C10,
+                                        (u8) data->name_cursor_pos,
+                                        data->name_cursor_pos >> 8);
         } else {
-            mnDiagram_80241730(mnDiagram_804D6C10,
-                               (u8) data->fighter_cursor_pos,
-                               data->fighter_cursor_pos >> 8);
+            count = 0;
+            for (col_idx = 0; col_idx < 0x19; col_idx++) {
+                if (mn_IsFighterUnlocked(col_idx) != 0) {
+                    count++;
+                }
+            }
+            if ((u8) mn_804A04F0.hovered_selection >= count) {
+                mn_804A04F0.hovered_selection =
+                    (mn_804A04F0.hovered_selection & 0xFF00) |
+                    (u8) (count - 1);
+            }
+            if ((s32) mn_804A04F0.hovered_selection >> 8 >= count) {
+                mn_804A04F0.hovered_selection =
+                    ((count - 1) << 8) | ((u8) mn_804A04F0.hovered_selection);
+            }
+            mnDiagram_UpdateScrollArrowVisibility(mnDiagram_804D6C10, count);
+            mnDiagram_UpdateGridDisplay(mnDiagram_804D6C10,
+                                        (u8) data->fighter_cursor_pos,
+                                        data->fighter_cursor_pos >> 8);
         }
         return;
     }
+
     // D-pad navigation
     if (data->is_name_mode != 0) {
+        // Name mode navigation
+        count = GetNameCount();
         if (input & 1) {
-            lbAudioAx_80024030(2);
+            // Left
+            col_idx = (u8) mn_804A04F0.hovered_selection;
+            if (col_idx > 0) {
+                new_pos = col_idx - 1;
+                if (count > new_pos) {
+                    lbAudioAx_80024030(2);
+                    mn_804A04F0.hovered_selection =
+                        (mn_804A04F0.hovered_selection & 0xFF00) |
+                        (u8) new_pos;
+                    return;
+                }
+            }
+            if (count > 10) {
+                row_idx = (u8) data->name_cursor_pos;
+                new_pos = row_idx;
+                while (new_pos > 0) {
+                    new_pos--;
+                    if (GetNameText((u8) new_pos) != NULL) {
+                        break;
+                    }
+                    if (new_pos < 0) {
+                        new_pos = row_idx;
+                        break;
+                    }
+                }
+                if (row_idx != new_pos) {
+                    lbAudioAx_80024030(2);
+                    data->name_cursor_pos =
+                        (data->name_cursor_pos & 0xFF00) | (u8) new_pos;
+                    mnDiagram_UpdateGridDisplay(mnDiagram_804D6C10,
+                                                (u8) data->name_cursor_pos,
+                                                data->name_cursor_pos >> 8);
+                }
+            }
         } else if (input & 2) {
-            lbAudioAx_80024030(2);
+            // Right
+            col_idx = (u8) mn_804A04F0.hovered_selection;
+            if (col_idx < 9) {
+                new_pos = col_idx + 1;
+                if (count > new_pos) {
+                    lbAudioAx_80024030(2);
+                    mn_804A04F0.hovered_selection =
+                        (mn_804A04F0.hovered_selection & 0xFF00) |
+                        (u8) new_pos;
+                    return;
+                }
+            }
+            if (count > 10) {
+                row_idx = (u8) data->name_cursor_pos;
+                new_pos = row_idx;
+                while (new_pos < 0x78) {
+                    new_pos++;
+                    if (new_pos >= 0x78) {
+                        new_pos = row_idx;
+                        break;
+                    }
+                    if (GetNameText((u8) new_pos) != NULL) {
+                        break;
+                    }
+                }
+                result = (u8) new_pos;
+                if (row_idx != result) {
+                    // Check if we have enough items to scroll
+                    col_idx = 10;
+                    ptr = base + row_idx + 0x1C;
+                    while (col_idx > 0) {
+                        row_idx++;
+                        ptr++;
+                        if (row_idx >= 0x78) {
+                            result = 0x78;
+                            break;
+                        }
+                        if (GetNameText(*ptr) != NULL) {
+                            col_idx--;
+                            if (col_idx <= 0) {
+                                result = base[row_idx + 0x1C];
+                                break;
+                            }
+                        }
+                    }
+                    if (result != 0x78) {
+                        lbAudioAx_80024030(2);
+                        data->name_cursor_pos =
+                            (data->name_cursor_pos & 0xFF00) | (u8) new_pos;
+                        mnDiagram_UpdateGridDisplay(
+                            mnDiagram_804D6C10, (u8) data->name_cursor_pos,
+                            data->name_cursor_pos >> 8);
+                    }
+                }
+            }
         } else if (input & 4) {
-            lbAudioAx_80024030(2);
+            // Up
+            row_idx = (s32) mn_804A04F0.hovered_selection >> 8;
+            if (row_idx > 0) {
+                new_pos = row_idx - 1;
+                if (count > new_pos) {
+                    lbAudioAx_80024030(2);
+                    mn_804A04F0.hovered_selection =
+                        ((u8) mn_804A04F0.hovered_selection) | (new_pos << 8);
+                    return;
+                }
+            }
+            if (count > 7) {
+                row_idx = (s32) data->name_cursor_pos >> 8;
+                new_pos = row_idx;
+                while (new_pos > 0) {
+                    new_pos--;
+                    if (GetNameText((u8) new_pos) != NULL) {
+                        break;
+                    }
+                    if (new_pos < 0) {
+                        new_pos = row_idx;
+                        break;
+                    }
+                }
+                if (row_idx != new_pos) {
+                    lbAudioAx_80024030(2);
+                    data->name_cursor_pos =
+                        ((u8) data->name_cursor_pos) | ((u8) new_pos << 8);
+                    mnDiagram_UpdateGridDisplay(mnDiagram_804D6C10,
+                                                (u8) data->name_cursor_pos,
+                                                data->name_cursor_pos >> 8);
+                }
+            }
         } else if (input & 8) {
-            lbAudioAx_80024030(2);
+            // Down
+            row_idx = (s32) mn_804A04F0.hovered_selection >> 8;
+            if (row_idx < 6) {
+                new_pos = row_idx + 1;
+                if (count > new_pos) {
+                    lbAudioAx_80024030(2);
+                    mn_804A04F0.hovered_selection =
+                        ((u8) mn_804A04F0.hovered_selection) | (new_pos << 8);
+                    return;
+                }
+            }
+            if (count > 7) {
+                row_idx = (s32) data->name_cursor_pos >> 8;
+                new_pos = row_idx;
+                while (new_pos < 0x78) {
+                    new_pos++;
+                    if (new_pos >= 0x78) {
+                        new_pos = row_idx;
+                        break;
+                    }
+                    if (GetNameText((u8) new_pos) != NULL) {
+                        break;
+                    }
+                }
+                result = (u8) new_pos;
+                if (row_idx != result) {
+                    // Check boundary
+                    col_idx = 7;
+                    ptr = base + row_idx + 0x1C;
+                    while (col_idx > 0) {
+                        row_idx++;
+                        ptr++;
+                        if (row_idx >= 0x78) {
+                            result = 0x78;
+                            break;
+                        }
+                        if (GetNameText(*ptr) != NULL) {
+                            col_idx--;
+                            if (col_idx <= 0) {
+                                result = base[row_idx + 0x1C];
+                                break;
+                            }
+                        }
+                    }
+                    if (result != 0x78) {
+                        lbAudioAx_80024030(2);
+                        data->name_cursor_pos =
+                            ((u8) data->name_cursor_pos) | ((u8) new_pos << 8);
+                        mnDiagram_UpdateGridDisplay(
+                            mnDiagram_804D6C10, (u8) data->name_cursor_pos,
+                            data->name_cursor_pos >> 8);
+                    }
+                }
+            }
         }
     } else {
+        // Fighter mode navigation
+        count = 0;
+        for (col_idx = 0; col_idx < 0x19; col_idx++) {
+            if (mn_IsFighterUnlocked(col_idx) != 0) {
+                count++;
+            }
+        }
         if (input & 1) {
-            lbAudioAx_80024030(2);
+            // Left
+            col_idx = (u8) mn_804A04F0.hovered_selection;
+            if (col_idx > 0) {
+                new_pos = col_idx - 1;
+                if (count > new_pos) {
+                    lbAudioAx_80024030(2);
+                    mn_804A04F0.hovered_selection =
+                        (mn_804A04F0.hovered_selection & 0xFF00) |
+                        (u8) new_pos;
+                    return;
+                }
+            }
+            if (count > 10) {
+                row_idx = (u8) data->fighter_cursor_pos;
+                ptr = base + row_idx;
+                new_pos = row_idx;
+                while (new_pos > 0) {
+                    new_pos--;
+                    ptr--;
+                    if (mn_IsFighterUnlocked(*ptr) != 0) {
+                        break;
+                    }
+                    if (new_pos < 0) {
+                        new_pos = row_idx;
+                        break;
+                    }
+                }
+                if (row_idx != new_pos) {
+                    lbAudioAx_80024030(2);
+                    data->fighter_cursor_pos =
+                        (data->fighter_cursor_pos & 0xFF00) | (u8) new_pos;
+                    mnDiagram_UpdateGridDisplay(mnDiagram_804D6C10,
+                                                (u8) data->fighter_cursor_pos,
+                                                data->fighter_cursor_pos >> 8);
+                }
+            }
         } else if (input & 2) {
-            lbAudioAx_80024030(2);
+            // Right
+            col_idx = (u8) mn_804A04F0.hovered_selection;
+            if (col_idx < 9) {
+                new_pos = col_idx + 1;
+                if (count > new_pos) {
+                    lbAudioAx_80024030(2);
+                    mn_804A04F0.hovered_selection =
+                        (mn_804A04F0.hovered_selection & 0xFF00) |
+                        (u8) new_pos;
+                    return;
+                }
+            }
+            if (count > 10) {
+                row_idx = (u8) data->fighter_cursor_pos;
+                ptr = base + row_idx;
+                new_pos = row_idx;
+                while (new_pos < 0x19) {
+                    new_pos++;
+                    ptr++;
+                    if (new_pos >= 0x19) {
+                        new_pos = row_idx;
+                        break;
+                    }
+                    if (mn_IsFighterUnlocked(*ptr) != 0) {
+                        break;
+                    }
+                }
+                result = (u8) new_pos;
+                if (row_idx != result) {
+                    // Check boundary
+                    col_idx = 10;
+                    ptr = base + row_idx;
+                    while (col_idx > 0) {
+                        if (col_idx == 0) {
+                            result = base[row_idx];
+                            break;
+                        }
+                        row_idx++;
+                        ptr++;
+                        if (row_idx >= 0x19) {
+                            result = 0x19;
+                            break;
+                        }
+                        if (mn_IsFighterUnlocked(*ptr) != 0) {
+                            col_idx--;
+                        }
+                    }
+                    if (result != 0x19) {
+                        lbAudioAx_80024030(2);
+                        data->fighter_cursor_pos =
+                            (data->fighter_cursor_pos & 0xFF00) | (u8) new_pos;
+                        mnDiagram_UpdateGridDisplay(
+                            mnDiagram_804D6C10, (u8) data->fighter_cursor_pos,
+                            data->fighter_cursor_pos >> 8);
+                    }
+                }
+            }
         } else if (input & 4) {
-            lbAudioAx_80024030(2);
+            // Up
+            row_idx = (s32) mn_804A04F0.hovered_selection >> 8;
+            if (row_idx > 0) {
+                new_pos = row_idx - 1;
+                if (count > new_pos) {
+                    lbAudioAx_80024030(2);
+                    mn_804A04F0.hovered_selection =
+                        ((u8) mn_804A04F0.hovered_selection) | (new_pos << 8);
+                    return;
+                }
+            }
+            if (count > 7) {
+                row_idx = (s32) data->fighter_cursor_pos >> 8;
+                ptr = base + row_idx;
+                new_pos = row_idx;
+                while (new_pos > 0) {
+                    new_pos--;
+                    ptr--;
+                    if (mn_IsFighterUnlocked(*ptr) != 0) {
+                        break;
+                    }
+                    if (new_pos < 0) {
+                        new_pos = row_idx;
+                        break;
+                    }
+                }
+                if (row_idx != new_pos) {
+                    lbAudioAx_80024030(2);
+                    data->fighter_cursor_pos =
+                        ((u8) data->fighter_cursor_pos) | ((u8) new_pos << 8);
+                    mnDiagram_UpdateGridDisplay(mnDiagram_804D6C10,
+                                                (u8) data->fighter_cursor_pos,
+                                                data->fighter_cursor_pos >> 8);
+                }
+            }
         } else if (input & 8) {
-            lbAudioAx_80024030(2);
+            // Down
+            row_idx = (s32) mn_804A04F0.hovered_selection >> 8;
+            if (row_idx < 6) {
+                new_pos = row_idx + 1;
+                if (count > new_pos) {
+                    lbAudioAx_80024030(2);
+                    mn_804A04F0.hovered_selection =
+                        ((u8) mn_804A04F0.hovered_selection) | (new_pos << 8);
+                    return;
+                }
+            }
+            if (count > 7) {
+                row_idx = (s32) data->fighter_cursor_pos >> 8;
+                ptr = base + row_idx;
+                new_pos = row_idx;
+                while (new_pos < 0x19) {
+                    new_pos++;
+                    ptr++;
+                    if (new_pos >= 0x19) {
+                        new_pos = row_idx;
+                        break;
+                    }
+                    if (mn_IsFighterUnlocked(*ptr) != 0) {
+                        break;
+                    }
+                }
+                result = (u8) new_pos;
+                if (row_idx != result) {
+                    // Check boundary
+                    col_idx = 7;
+                    ptr = base + row_idx;
+                    while (col_idx > 0) {
+                        if (col_idx == 0) {
+                            result = base[row_idx];
+                            break;
+                        }
+                        row_idx++;
+                        ptr++;
+                        if (row_idx >= 0x19) {
+                            result = 0x19;
+                            break;
+                        }
+                        if (mn_IsFighterUnlocked(*ptr) != 0) {
+                            col_idx--;
+                        }
+                    }
+                    if (result != 0x19) {
+                        lbAudioAx_80024030(2);
+                        data->fighter_cursor_pos =
+                            ((u8) data->fighter_cursor_pos) |
+                            ((u8) new_pos << 8);
+                        mnDiagram_UpdateGridDisplay(
+                            mnDiagram_804D6C10, (u8) data->fighter_cursor_pos,
+                            data->fighter_cursor_pos >> 8);
+                    }
+                }
+            }
         }
     }
 }
@@ -936,9 +1431,15 @@ void mnDiagram_PopupAnimProc(void* arg0)
     data->text[3]->pos_z = pos.z;
 }
 
-void mnDiagram_80240D94(void* arg0, s32 arg1, s32 arg2, s32 arg3)
+/// @brief Sets up text elements for the popup detail window.
+/// @param gobj The popup GObj.
+/// @param col_idx Column index (fighter/name index for column).
+/// @param row_idx Row index (fighter/name index for row).
+/// @param is_name_mode 1 for name mode, 0 for fighter mode.
+void mnDiagram_PopupSetupText(void* gobj, s32 col_idx, s32 row_idx,
+                              s32 is_name_mode)
 {
-    mnDiagram_PopupData* data = ((HSD_GObj*) arg0)->user_data;
+    mnDiagram_PopupData* data = ((HSD_GObj*) gobj)->user_data;
     Point3d pos;
     char buf[8];
     u16 kos;
@@ -955,13 +1456,13 @@ void mnDiagram_80240D94(void* arg0, s32 arg1, s32 arg2, s32 arg3)
     text->default_alignment = 0;
     *(s32*) &text->text_color = mnDiagram_804D4FA0;
 
-    if (arg3 != 0) {
-        HSD_SisLib_803A6B98(text, 0.0f, 0.0f, GetNameText((u8) arg1));
+    if (is_name_mode != 0) {
+        HSD_SisLib_803A6B98(text, 0.0f, 0.0f, GetNameText((u8) col_idx));
     } else {
-        gm_80160C90(text, gm_8016400C((u8) arg1), 0);
+        gm_80160C90(text, gm_8016400C((u8) col_idx), 0);
     }
 
-    if ((arg3 != 0) && (arg1 != arg2)) {
+    if ((is_name_mode != 0) && (col_idx != row_idx)) {
         text = HSD_SisLib_803A6754(0, 1);
         data->text[2] = text;
         lb_8000B1CC(data->jobjs[10], &mnDiagram_803EE728[2], &pos);
@@ -971,7 +1472,7 @@ void mnDiagram_80240D94(void* arg0, s32 arg1, s32 arg2, s32 arg3)
         text->pos_y = -pos.y;
         text->pos_z = pos.z;
         text->default_alignment = 1;
-        HSD_SisLib_803A6B98(text, 0.0f, 0.0f, GetNameText((u8) arg2));
+        HSD_SisLib_803A6B98(text, 0.0f, 0.0f, GetNameText((u8) row_idx));
 
         text = HSD_SisLib_803A6754(0, 1);
         data->text[4] = text;
@@ -982,10 +1483,10 @@ void mnDiagram_80240D94(void* arg0, s32 arg1, s32 arg2, s32 arg3)
         text->pos_y = -pos.y;
         text->pos_z = pos.z;
         text->default_alignment = 1;
-        HSD_SisLib_803A6B98(text, 0.0f, 0.0f, GetNameText((u8) arg2));
+        HSD_SisLib_803A6B98(text, 0.0f, 0.0f, GetNameText((u8) row_idx));
     }
 
-    if ((arg3 == 0) || (arg1 != arg2)) {
+    if ((is_name_mode == 0) || (col_idx != row_idx)) {
         text = HSD_SisLib_803A6754(0, 1);
         data->text[1] = text;
         lb_8000B1CC(data->jobjs[11], &mnDiagram_803EE728[1], &pos);
@@ -996,10 +1497,10 @@ void mnDiagram_80240D94(void* arg0, s32 arg1, s32 arg2, s32 arg3)
         text->pos_y = -pos.y;
         text->pos_z = pos.z;
 
-        if (arg3 != 0) {
-            kos = GetPersistentNameData(arg1)->vs_kos[arg2];
+        if (is_name_mode != 0) {
+            kos = GetPersistentNameData(col_idx)->vs_kos[row_idx];
         } else {
-            kos = GetPersistentFighterData(arg1)->fighter_kos[arg2];
+            kos = GetPersistentFighterData(col_idx)->fighter_kos[row_idx];
         }
         mnDiagram_IntToStr(buf, kos);
         HSD_SisLib_803A6B98(text, 0.0f, 0.0f, buf);
@@ -1007,20 +1508,20 @@ void mnDiagram_80240D94(void* arg0, s32 arg1, s32 arg2, s32 arg3)
 
     text = HSD_SisLib_803A6754(0, 1);
     data->text[3] = text;
-    if (arg1 == arg2) {
+    if (col_idx == row_idx) {
         lb_8000B1CC(data->jobjs[13], &mnDiagram_803EE728[1], &pos);
-        if (arg3 != 0) {
-            sd_count = GetPersistentNameData(arg1)->sd_count;
+        if (is_name_mode != 0) {
+            sd_count = GetPersistentNameData(col_idx)->sd_count;
         } else {
-            sd_count = GetPersistentFighterData(arg1)->sd_count;
+            sd_count = GetPersistentFighterData(col_idx)->sd_count;
         }
         mnDiagram_IntToStr(buf, sd_count);
     } else {
         lb_8000B1CC(data->jobjs[3], &mnDiagram_803EE728[1], &pos);
-        if (arg3 != 0) {
-            kos = GetPersistentNameData((u8) arg2)->vs_kos[arg1];
+        if (is_name_mode != 0) {
+            kos = GetPersistentNameData((u8) row_idx)->vs_kos[col_idx];
         } else {
-            kos = GetPersistentFighterData((u8) arg2)->fighter_kos[arg1];
+            kos = GetPersistentFighterData((u8) row_idx)->fighter_kos[col_idx];
         }
         mnDiagram_IntToStr(buf, kos);
     }
@@ -1033,7 +1534,11 @@ void mnDiagram_80240D94(void* arg0, s32 arg1, s32 arg2, s32 arg3)
     HSD_SisLib_803A6B98(text, 0.0f, 0.0f, buf);
 }
 
-void mnDiagram_80241310(s32 arg0, s32 arg1, s32 arg2)
+/// @brief Creates the popup detail window showing KO stats for a cell.
+/// @param col_idx Column index in the grid.
+/// @param row_idx Row index in the grid.
+/// @param is_name_mode 1 for name mode, 0 for fighter mode.
+void mnDiagram_CreatePopup(s32 col_idx, s32 row_idx, s32 is_name_mode)
 {
     Diagram* data;
     char* base;
@@ -1075,38 +1580,38 @@ void mnDiagram_80241310(s32 arg0, s32 arg1, s32 arg2)
 
     HSD_GObjProc_8038FD54(gobj, (void (*)(HSD_GObj*)) mnDiagram_PopupAnimProc,
                           0);
-    mnDiagram_80240D94(gobj, arg0, arg1, arg2);
+    mnDiagram_PopupSetupText(gobj, col_idx, row_idx, is_name_mode);
 
-    if (arg2 != 0) {
-        if (arg0 == arg1) {
+    if (is_name_mode != 0) {
+        if (col_idx == row_idx) {
             HSD_JObjSetFlagsAll(popup_data->jobjs[9], JOBJ_HIDDEN);
         }
-        if (arg0 == arg1) {
+        if (col_idx == row_idx) {
             HSD_JObjSetFlagsAll(popup_data->jobjs[1], JOBJ_HIDDEN);
         }
-        if (arg0 != arg1) {
+        if (col_idx != row_idx) {
             HSD_JObjSetFlagsAll(popup_data->jobjs[12], JOBJ_HIDDEN);
         }
     } else {
-        HSD_JObj* icon = mnDiagram_80242B38(arg0, 1);
+        HSD_JObj* icon = mnDiagram_CreateFighterIcon(col_idx, 1);
         mn_8022F3D8(icon, 1, TOBJ_MASK);
         mn_8022F3D8(icon, 0xA, TOBJ_MASK);
         HSD_JObjAddChild(popup_data->jobjs[7], icon);
 
-        icon = mnDiagram_80242B38(arg1, 1);
+        icon = mnDiagram_CreateFighterIcon(row_idx, 1);
         HSD_JObjSetTranslateX(icon, -1.0f);
         mn_8022F3D8(icon, 1, TOBJ_MASK);
         HSD_JObjAddChild(popup_data->jobjs[10], icon);
 
-        if (arg0 == arg1) {
+        if (col_idx == row_idx) {
             HSD_JObjSetFlagsAll(popup_data->jobjs[1], JOBJ_HIDDEN);
         } else {
-            icon = mnDiagram_80242B38(arg1, 1);
+            icon = mnDiagram_CreateFighterIcon(row_idx, 1);
             HSD_JObjSetTranslateX(icon, -1.0f);
             mn_8022F3D8(icon, 1, TOBJ_MASK);
             HSD_JObjAddChild(popup_data->jobjs[2], icon);
         }
-        if (arg0 != arg1) {
+        if (col_idx != row_idx) {
             HSD_JObjSetFlagsAll(popup_data->jobjs[12], JOBJ_HIDDEN);
         }
     }
@@ -1125,9 +1630,11 @@ static inline HSD_JObj* mnDiagram_GetJObjChild(HSD_JObj* jobj)
     return jobj->child;
 }
 
-void mnDiagram_80241668(void* arg0)
+/// @brief Clears grid content (JObj children and text labels).
+/// @param gobj The diagram GObj.
+void mnDiagram_ClearGridContent(void* gobj)
 {
-    mnDiagram_PopupData* data = mnDiagram_GetUserData(arg0);
+    mnDiagram_PopupData* data = mnDiagram_GetUserData(gobj);
     HSD_JObj* child;
 
     child = mnDiagram_GetJObjChild(data->jobjs[9]);
@@ -1155,31 +1662,45 @@ void mnDiagram_80241668(void* arg0)
     }
 }
 
-void mnDiagram_80241730(void* arg0, int arg1, int arg2)
+/// @brief Updates the grid display when cursor moves.
+/// @details Clears old content and redraws grid cells and headers.
+/// @param gobj The diagram GObj.
+/// @param col_idx Column scroll offset.
+/// @param row_idx Row scroll offset.
+void mnDiagram_UpdateGridDisplay(void* gobj, int col_idx, int row_idx)
 {
-    Diagram* data = ((HSD_GObj*) arg0)->user_data;
-    mnDiagram_80241668(arg0);
-    mnDiagram_8024227C(arg0, arg1, arg2, (u8) (data->is_name_mode == 1));
+    Diagram* data = ((HSD_GObj*) gobj)->user_data;
+    mnDiagram_ClearGridContent(gobj);
+    mnDiagram_DrawGridCells(gobj, col_idx, row_idx,
+                            (u8) (data->is_name_mode == 1));
     if (data->is_name_mode == 0) {
-        mnDiagram_80242C0C(arg0, arg1, arg2);
+        mnDiagram_DrawFighterHeaders(gobj, col_idx, row_idx);
     } else {
-        mnDiagram_802427B4(arg0, arg1, arg2);
+        mnDiagram_DrawNameHeaders(gobj, col_idx, row_idx);
     }
 }
 
+/// @brief Updates directional arrow visibility based on scroll position.
+/// @details Runs every frame to show/hide the 4 navigation arrows:
+///          - jobjs[3] (Right): Visible if more columns exist to the right
+///          - jobjs[4] (Up): Visible if row_scroll > 0 (rows scrolled off top)
+///          - jobjs[5] (Left): Visible if col_scroll > 0 (columns scrolled off left)
+///          - jobjs[6] (Down): Visible if more rows exist below
+///          The cursor_pos fields store scroll offset as (col_scroll << 8 | row_scroll),
+///          not the cursor position within the visible grid.
 #pragma push
 #pragma dont_reuse_strings off
-void mnDiagram_802417D0(HSD_GObj* gobj)
+void mnDiagram_UpdateScrollArrows(HSD_GObj* gobj)
 {
     u8 result2;
     Diagram* data = gobj->user_data;
     char* base = (char*) mnDiagram_803EE728;
     HSD_JObj* jobj;
+    int i;
     u8* sorted = (u8*) &mnDiagram_804A0750;
-    s32 i;
     u8* ptr;
     u8* ptr2;
-    s32 count;
+    int count;
     HSD_JObj* jobj2;
     u8 result;
     PAD_STACK(8);
@@ -1192,24 +1713,22 @@ void mnDiagram_802417D0(HSD_GObj* gobj)
         count = 10;
         i = (u8) data->name_cursor_pos;
         ptr = sorted + i;
-        ptr = ptr + 0x1C;
-    loop1:
-        ptr2 = ptr;
-    loop2:
-        i++;
-        ptr2++;
-        ptr++;
-        if (i >= 0x78) {
-            result = 0x78;
-        } else if (GetNameText(*ptr2) == NULL) {
-            goto loop2;
-        } else {
+        ptr = ptr + 28;
+        do {
+            ptr2 = ptr;
+            do {
+                i++;
+                ptr2++;
+                ptr++;
+                if (i >= 0x78) {
+                    result = 0x78;
+                    goto done_name;
+                }
+            } while (GetNameText(*ptr2) == NULL);
             count--;
-            if (count > 0) {
-                goto loop1;
-            }
-            result = sorted[i + 0x1C];
-        }
+        } while (count > 0);
+        result = sorted[i + 28];
+    done_name:
         if ((u8) result != 0x78) {
             HSD_JObjClearFlagsAll(jobj, 0x10U);
         } else {
@@ -1247,7 +1766,7 @@ void mnDiagram_802417D0(HSD_GObj* gobj)
         }
     }
 
-    // Left arrow (jobjs[4])
+    // Up arrow (jobjs[4]) - visible when row_scroll > 0 (rows scrolled off top)
     jobj2 = data->jobjs[4];
     mn_8022ED6C(jobj2, (AnimLoopSettings*) (base + 0x58));
     if (data->is_name_mode != 0) {
@@ -1261,7 +1780,7 @@ void mnDiagram_802417D0(HSD_GObj* gobj)
         HSD_JObjSetFlagsAll(jobj2, 0x10U);
     }
 
-    // Up arrow (jobjs[5])
+    // Left arrow (jobjs[5]) - visible when col_scroll > 0 (columns scrolled off left)
     jobj2 = data->jobjs[5];
     mn_8022ED6C(jobj2, (AnimLoopSettings*) (base + 0x58));
     if (data->is_name_mode != 0) {
@@ -1347,7 +1866,7 @@ void mnDiagram_ExitAnimProc(HSD_GObj* gobj)
     f32* table;
 
     data = gobj->user_data;
-    mnDiagram_802417D0(gobj);
+    mnDiagram_UpdateScrollArrows(gobj);
     jobj = data->jobj;
     table = mnDiagram_803EE774;
     if (mn_8022ED6C(jobj, (AnimLoopSettings*) table) >= table[1]) {
@@ -1355,9 +1874,12 @@ void mnDiagram_ExitAnimProc(HSD_GObj* gobj)
     }
 }
 
-/// @brief Updates scroll arrow visibility based on entry count.
-/// @details Hides vertical arrows if count <= 7 (fits in visible rows).
-///          Hides horizontal arrows if count <= 10 (fits in visible columns).
+/// @brief Sets initial scroll arrow visibility based on total entry count.
+/// @details Called once after intro animation. Sets visibility for:
+///          - jobjs[7]/[8]: Hidden if count <= 7 (unknown visual elements)
+///          - jobjs[5]/[6]: Hidden if count <= 10 (left/down arrows)
+///          Note: jobjs[5]/[6] are also updated every frame by mnDiagram_802417D0
+///          based on scroll position, which overrides this initial setting.
 /// @param gobj The diagram GObj containing arrow JObjs in user_data.
 /// @param count Number of entries (fighters or names) to display.
 void mnDiagram_UpdateScrollArrowVisibility(void* gobj, int count)
@@ -1392,7 +1914,7 @@ void mnDiagram_OnFrame(HSD_GObj* gobj)
 
     if ((mn_804A04F0.cur_menu != 0x1E) || (mn_804A04F0.x10 != 0)) {
         if (mn_804A04F0.cur_menu == 0x1E) {
-            mnDiagram_80241668(gobj);
+            mnDiagram_ClearGridContent(gobj);
             HSD_GObjPLink_80390228(gobj);
             return;
         }
@@ -1400,7 +1922,7 @@ void mnDiagram_OnFrame(HSD_GObj* gobj)
         proc = HSD_GObjProc_8038FD54(gobj, mnDiagram_ExitAnimProc, 0);
         proc->flags_3 = HSD_GObj_804D783C;
         HSD_JObjSetFlagsAll(data->jobjs[2], 0x10);
-        mnDiagram_80241668(gobj);
+        mnDiagram_ClearGridContent(gobj);
         return;
     }
 
@@ -1410,32 +1932,32 @@ void mnDiagram_OnFrame(HSD_GObj* gobj)
         {
             HSD_JObjClearFlagsAll(data->jobjs[2], 0x10);
             data->anim_state = 0;
-            mnDiagram_802433AC();
+            mnDiagram_CreateCursor();
             if (data->is_name_mode != 0) {
                 u16 indices = data->name_cursor_pos;
                 data2 = gobj->user_data;
                 row_idx = indices >> 8;
                 col_idx = (u8) indices;
-                mnDiagram_80241668(gobj);
-                mnDiagram_8024227C(gobj, col_idx, row_idx,
-                                   (u8) (data2->is_name_mode == 1));
+                mnDiagram_ClearGridContent(gobj);
+                mnDiagram_DrawGridCells(gobj, col_idx, row_idx,
+                                        (u8) (data2->is_name_mode == 1));
                 if (data2->is_name_mode == 0) {
-                    mnDiagram_80242C0C(gobj, col_idx, row_idx);
+                    mnDiagram_DrawFighterHeaders(gobj, col_idx, row_idx);
                 } else {
-                    mnDiagram_802427B4(gobj, col_idx, row_idx);
+                    mnDiagram_DrawNameHeaders(gobj, col_idx, row_idx);
                 }
             } else {
                 u16 indices = data->fighter_cursor_pos;
                 data2 = gobj->user_data;
                 row_idx = indices >> 8;
                 col_idx = (u8) indices;
-                mnDiagram_80241668(gobj);
-                mnDiagram_8024227C(gobj, col_idx, row_idx,
-                                   (u8) (data2->is_name_mode == 1));
+                mnDiagram_ClearGridContent(gobj);
+                mnDiagram_DrawGridCells(gobj, col_idx, row_idx,
+                                        (u8) (data2->is_name_mode == 1));
                 if (data2->is_name_mode == 0) {
-                    mnDiagram_80242C0C(gobj, col_idx, row_idx);
+                    mnDiagram_DrawFighterHeaders(gobj, col_idx, row_idx);
                 } else {
-                    mnDiagram_802427B4(gobj, col_idx, row_idx);
+                    mnDiagram_DrawNameHeaders(gobj, col_idx, row_idx);
                 }
             }
             if (data->is_name_mode != 0) {
@@ -1448,10 +1970,15 @@ void mnDiagram_OnFrame(HSD_GObj* gobj)
             HSD_JObjSetFlagsAll(data->jobjs[2], 0x10);
         }
     }
-    mnDiagram_802417D0(gobj);
+    mnDiagram_UpdateScrollArrows(gobj);
 }
 
-void mnDiagram_80241E78(void* arg0, u8 arg1, u8 arg2, s32 arg3)
+/// @brief Draws a number at a specific grid cell position.
+/// @param gobj The diagram GObj.
+/// @param col Column position in grid.
+/// @param row Row position in grid.
+/// @param value The number value to display.
+void mnDiagram_DrawCellNumber(void* gobj, u8 col, u8 row, s32 value)
 {
     Diagram* data;
     HSD_JObj* jobj;
@@ -1467,10 +1994,8 @@ void mnDiagram_80241E78(void* arg0, u8 arg1, u8 arg2, s32 arg3)
     f32 row_offset;
     f32 col_offset;
     f32 row_offset_adj;
-    u8 col = arg1;
-    u8 row = arg2;
 
-    data = ((HSD_GObj*) arg0)->user_data;
+    data = ((HSD_GObj*) gobj)->user_data;
     jobj = data->jobjs[11];
     jobj2 = data->jobjs[12];
     base = HSD_JObjGetTranslationX(jobj);
@@ -1486,14 +2011,14 @@ void mnDiagram_80241E78(void* arg0, u8 arg1, u8 arg2, s32 arg3)
     base = HSD_JObjGetTranslationY(jobj);
     y_offset = HSD_JObjGetTranslationY(jobj2) - base;
 
-    digit_count = mn_GetDigitCount(arg3);
+    digit_count = mn_GetDigitCount(value);
     row_offset = y_offset * (f32) row;
     col_offset = y_spacing * (f32) col;
     row_offset_adj = row_offset - 1.0f;
 
     joint_data = mnDiagram_804A07F4;
     for (i = 0; i < digit_count; i++) {
-        digit = mn_GetDigitAt(arg3, i);
+        digit = mn_GetDigitAt(value, i);
         jobj = HSD_JObjLoadJoint(joint_data[0]);
         HSD_JObjAddAnimAll(jobj, joint_data[1], joint_data[2], joint_data[3]);
         HSD_JObjReqAnimAll(jobj, (f32) digit);
@@ -1513,11 +2038,16 @@ void mnDiagram_80241E78(void* arg0, u8 arg1, u8 arg2, s32 arg3)
     }
 }
 
-void mnDiagram_8024227C(void* arg0, s32 arg1, s32 arg2, u8 arg3)
+/// @brief Draws all visible KO values in the grid cells.
+/// @param gobj The diagram GObj.
+/// @param col_offset Column scroll offset.
+/// @param row_offset Row scroll offset.
+/// @param is_name_mode 1 for name mode, 0 for fighter mode.
+void mnDiagram_DrawGridCells(void* arg0, s32 arg1, s32 arg2, u8 arg3)
 {
     register void* gobj = arg0;
-    register s32 arg1_r = arg1;
-    register s32 arg2_r = arg2;
+    register s32 col_offset = arg1;
+    register s32 row_offset = arg2;
     register u8 is_name = arg3;
     register u8* base = (u8*) &mnDiagram_804A0750;
     register s32 cap = 0xF423F;
@@ -1580,8 +2110,8 @@ void mnDiagram_8024227C(void* arg0, s32 arg1, s32 arg2, u8 arg3)
                     var_r3 = GetNameCount();
                     if (var_r3 > var_r22) {
                         var_r18 = var_r22;
-                        var_r19 = arg2_r;
-                        var_r16 = base + arg2_r + 0x1C;
+                        var_r19 = row_offset;
+                        var_r16 = base + row_offset + 0x1C;
                     loop_11:
                         if (var_r18 <= 0) {
                             var_r0 = *(base + var_r19 + 0x1C);
@@ -1614,8 +2144,8 @@ void mnDiagram_8024227C(void* arg0, s32 arg1, s32 arg2, u8 arg3)
                         if (var_r19_2 > cap) {
                             var_r19_2 = cap;
                         }
-                        mnDiagram_80241E78(gobj, (u8) var_r22, (u8) var_r30,
-                                           var_r19_2);
+                        mnDiagram_DrawCellNumber(gobj, (u8) var_r22,
+                                                 (u8) var_r30, var_r19_2);
                     }
                 } else {
                     var_r18_3 = 0;
@@ -1629,8 +2159,8 @@ void mnDiagram_8024227C(void* arg0, s32 arg1, s32 arg2, u8 arg3)
                     } while (var_r19_3 < 0x19);
                     if (var_r18_3 > var_r22) {
                         var_r19_4 = var_r22;
-                        var_r18_4 = arg2_r;
-                        var_r17_2 = base + arg2_r;
+                        var_r18_4 = row_offset;
+                        var_r17_2 = base + row_offset;
                     loop_33:
                         if (var_r19_4 >= 0) {
                             if (var_r19_4 == 0) {
@@ -1664,8 +2194,8 @@ void mnDiagram_8024227C(void* arg0, s32 arg1, s32 arg2, u8 arg3)
                             }
                             var_r18_5 += 1;
                         } while (var_r18_5 < 0x19);
-                        mnDiagram_80241E78(gobj, (u8) var_r22, (u8) var_r30,
-                                           var_r19_5);
+                        mnDiagram_DrawCellNumber(gobj, (u8) var_r22,
+                                                 (u8) var_r30, var_r19_5);
                     }
                 }
                 var_r22 += 1;
@@ -1679,8 +2209,8 @@ void mnDiagram_8024227C(void* arg0, s32 arg1, s32 arg2, u8 arg3)
                         (var_r3 = GetNameCount(), (var_r3 > var_r22_2)))
                     {
                         var_r19_6 = var_r30;
-                        var_r18_6 = arg1_r;
-                        var_r17_3 = base + arg1_r + 0x1C;
+                        var_r18_6 = col_offset;
+                        var_r17_3 = base + col_offset + 0x1C;
                     loop_52:
                         if (var_r19_6 <= 0) {
                             var_r0_2 = *(base + var_r18_6 + 0x1C);
@@ -1711,12 +2241,12 @@ void mnDiagram_8024227C(void* arg0, s32 arg1, s32 arg2, u8 arg3)
                                 }
                                 var_r18_7 += 1;
                             } while ((s32) var_r18_7 < 0x78);
-                            mnDiagram_80241E78(gobj, (u8) var_r22_2,
-                                               (u8) var_r30, var_r17_4);
+                            mnDiagram_DrawCellNumber(gobj, (u8) var_r22_2,
+                                                     (u8) var_r30, var_r17_4);
                         } else {
                             var_r18_8 = var_r22_2;
-                            var_r17_5 = arg2_r;
-                            var_r15 = base + arg2_r + 0x1C;
+                            var_r17_5 = row_offset;
+                            var_r15 = base + row_offset + 0x1C;
                         loop_66:
                             if (var_r18_8 <= 0) {
                                 var_r17_6 = *(base + var_r17_5 + 0x1C);
@@ -1737,7 +2267,7 @@ void mnDiagram_8024227C(void* arg0, s32 arg1, s32 arg2, u8 arg3)
                                     goto loop_62;
                                 }
                             }
-                            mnDiagram_80241E78(
+                            mnDiagram_DrawCellNumber(
                                 gobj, (u8) var_r22_2, (u8) var_r30,
                                 GetPersistentNameData((u8) var_r0_2)
                                     ->vs_kos[var_r17_6]);
@@ -1775,8 +2305,8 @@ void mnDiagram_8024227C(void* arg0, s32 arg1, s32 arg2, u8 arg3)
                     } else {
                     block_83:
                         var_r18_11 = var_r30;
-                        var_r17_9 = arg1_r;
-                        var_r16_5 = base + arg1_r;
+                        var_r17_9 = col_offset;
+                        var_r16_5 = base + col_offset;
                     loop_91:
                         if (var_r18_11 >= 0) {
                             if (var_r18_11 == 0) {
@@ -1814,12 +2344,12 @@ void mnDiagram_8024227C(void* arg0, s32 arg1, s32 arg2, u8 arg3)
                             if (var_r16_6 > cap) {
                                 var_r16_6 = cap;
                             }
-                            mnDiagram_80241E78(gobj, (u8) var_r22_3,
-                                               (u8) var_r30, var_r16_6);
+                            mnDiagram_DrawCellNumber(gobj, (u8) var_r22_3,
+                                                     (u8) var_r30, var_r16_6);
                         } else {
                             var_r18_12 = var_r22_3;
-                            var_r17_11 = arg2_r;
-                            var_r16_7 = base + arg2_r;
+                            var_r17_11 = row_offset;
+                            var_r16_7 = base + row_offset;
                         loop_108:
                             if (var_r18_12 >= 0) {
                                 if (var_r18_12 == 0) {
@@ -1843,7 +2373,7 @@ void mnDiagram_8024227C(void* arg0, s32 arg1, s32 arg2, u8 arg3)
                                     }
                                 }
                             }
-                            mnDiagram_80241E78(
+                            mnDiagram_DrawCellNumber(
                                 gobj, (u8) var_r22_3, (u8) var_r30,
                                 GetPersistentFighterData((u8) var_r23)
                                     ->fighter_kos[var_r24]);
@@ -1857,9 +2387,13 @@ void mnDiagram_8024227C(void* arg0, s32 arg1, s32 arg2, u8 arg3)
     } while (var_r30 <= 0xA);
 }
 
-void mnDiagram_802427B4(void* arg0, s32 arg1, s32 arg2)
+/// @brief Draws name text for row and column headers.
+/// @param gobj The diagram GObj.
+/// @param col_offset Column scroll offset.
+/// @param row_offset Row scroll offset.
+void mnDiagram_DrawNameHeaders(void* gobj, s32 col_offset, s32 row_offset)
 {
-    Diagram* data = ((HSD_GObj*) arg0)->user_data;
+    Diagram* data = ((HSD_GObj*) gobj)->user_data;
     HSD_Text* text;
     int i;
     int count;
@@ -1886,7 +2420,7 @@ void mnDiagram_802427B4(void* arg0, s32 arg1, s32 arg2)
     count = GetNameCount();
     for (i = 0; i < 7; i++) {
         if (count > i) {
-            name_id = mnDiagram_804A076C.sorted_names[arg2 + i];
+            name_id = mnDiagram_804A076C.sorted_names[row_offset + i];
             HSD_SisLib_803A6B98(text, (x_spacing * (f32) i) / 0.02f, 0.0f,
                                 GetNameText(name_id));
         }
@@ -1911,14 +2445,18 @@ void mnDiagram_802427B4(void* arg0, s32 arg1, s32 arg2)
 
     for (i = 0; i < 0xA; i++) {
         if (count > i) {
-            name_id = mnDiagram_804A076C.sorted_names[arg1 + i];
+            name_id = mnDiagram_804A076C.sorted_names[col_offset + i];
             HSD_SisLib_803A6B98(text, 0.0f, -((y_spacing * (f32) i) / 0.03f),
                                 GetNameText(name_id));
         }
     }
 }
 
-HSD_JObj* mnDiagram_80242B38(int idx, int arg1)
+/// @brief Creates a fighter icon JObj.
+/// @param row_idx Fighter index (internal character ID).
+/// @param mode Animation mode (0 or 1).
+/// @return The created fighter icon JObj.
+HSD_JObj* mnDiagram_CreateFighterIcon(int row_idx, int mode)
 {
     HSD_JObj* sp10;
     void** joint_data = mnDiagram_804A0804;
@@ -1927,7 +2465,7 @@ HSD_JObj* mnDiagram_80242B38(int idx, int arg1)
 
     temp_r3 = HSD_JObjLoadJoint(joint_data[0]);
     HSD_JObjAddAnimAll(temp_r3, joint_data[1], joint_data[2], joint_data[3]);
-    if (arg1 != 0) {
+    if (mode != 0) {
         var_f1 = 1.0f;
     } else {
         var_f1 = 0.0f;
@@ -1935,14 +2473,18 @@ HSD_JObj* mnDiagram_80242B38(int idx, int arg1)
     HSD_JObjReqAnimAll(temp_r3, var_f1);
     HSD_JObjAnimAll(temp_r3);
     lb_80011E24(temp_r3, &sp10, 2, -1);
-    HSD_JObjReqAnimAll(sp10, idx);
+    HSD_JObjReqAnimAll(sp10, row_idx);
     HSD_JObjAnimAll(sp10);
     return temp_r3;
 }
 
-void mnDiagram_80242C0C(void* arg0, int arg1, int arg2)
+/// @brief Draws fighter icons for row and column headers.
+/// @param gobj The diagram GObj.
+/// @param col_offset Column scroll offset.
+/// @param row_offset Row scroll offset.
+void mnDiagram_DrawFighterHeaders(void* gobj, int col_offset, int row_offset)
 {
-    Diagram* data = ((HSD_GObj*) arg0)->user_data;
+    Diagram* data = ((HSD_GObj*) gobj)->user_data;
     void** joint_data;
     HSD_JObj* jobj;
     HSD_JObj* sp_jobj;
@@ -1958,7 +2500,7 @@ void mnDiagram_80242C0C(void* arg0, int arg1, int arg2)
     for (i = 0; i < 7; i++) {
         count = mnDiagram_CountUnlockedFighters();
         if (count > i) {
-            fighter_id = mnDiagram_804A0750.sorted_fighters[arg2 + i];
+            fighter_id = mnDiagram_804A0750.sorted_fighters[row_offset + i];
             jobj = HSD_JObjLoadJoint(joint_data[0]);
             HSD_JObjAddAnimAll(jobj, joint_data[1], joint_data[2],
                                joint_data[3]);
@@ -1981,7 +2523,7 @@ void mnDiagram_80242C0C(void* arg0, int arg1, int arg2)
     for (i = 0; i < 0xA; i++) {
         count = mnDiagram_CountUnlockedFighters();
         if (count > i) {
-            fighter_id = mnDiagram_804A0750.sorted_fighters[arg1 + i];
+            fighter_id = mnDiagram_804A0750.sorted_fighters[col_offset + i];
             jobj = HSD_JObjLoadJoint(joint_data[0]);
             HSD_JObjAddAnimAll(jobj, joint_data[1], joint_data[2],
                                joint_data[3]);
@@ -2041,7 +2583,8 @@ void mnDiagram_CursorProc(HSD_GObj* gobj)
     HSD_JObjSetTranslateY(sp_jobj, y_pos);
 }
 
-void mnDiagram_802433AC(void)
+/// @brief Creates the cursor GObj for the diagram screen.
+void mnDiagram_CreateCursor(void)
 {
     void** joint_data;
     HSD_GObj* gobj;
@@ -2056,7 +2599,9 @@ void mnDiagram_802433AC(void)
     HSD_GObjProc_8038FD54(gobj, mnDiagram_CursorProc, 0);
 }
 
-void mnDiagram_80243434(u8 arg0)
+/// @brief Sets up the main diagram GObj and initializes state.
+/// @param anim_state Animation state (0 = normal, 1 = intro animation).
+void mnDiagram_Setup(u8 anim_state)
 {
     HSD_GObj* gobj;
     HSD_GObj* cursor_gobj;
@@ -2082,7 +2627,7 @@ void mnDiagram_80243434(u8 arg0)
     data = HSD_MemAlloc(sizeof(Diagram));
     data->saved_menu = mn_804A04F0.cur_menu;
     data->saved_selection = mn_804A04F0.hovered_selection;
-    data->anim_state = arg0;
+    data->anim_state = anim_state;
     data->fighter_cursor_pos = 0;
     data->name_cursor_pos = 0;
     data->popup_gobj = NULL;
@@ -2105,7 +2650,7 @@ void mnDiagram_80243434(u8 arg0)
     proc = HSD_GObjProc_8038FD54(gobj, (void (*)(HSD_GObj*)) mnDiagram_OnFrame,
                                  0);
 
-    if (arg0 == 0) {
+    if (anim_state == 0) {
         HSD_JObjReqAnimAll(data->jobjs[3], 9.0f);
         HSD_JObjAnimAll(data->jobjs[3]);
 
@@ -2142,24 +2687,24 @@ void mnDiagram_80243434(u8 arg0)
             indices = data->name_cursor_pos;
             col_idx = (u8) indices;
             row_idx = indices >> 8;
-            mnDiagram_80241668(gobj);
-            mnDiagram_8024227C(gobj, col_idx, row_idx, 1);
-            mnDiagram_802427B4(gobj, col_idx, row_idx);
+            mnDiagram_ClearGridContent(gobj);
+            mnDiagram_DrawGridCells(gobj, col_idx, row_idx, 1);
+            mnDiagram_DrawNameHeaders(gobj, col_idx, row_idx);
         } else {
             indices = data->fighter_cursor_pos;
             col_idx = (u8) indices;
             row_idx = indices >> 8;
-            mnDiagram_80241668(gobj);
-            mnDiagram_8024227C(gobj, col_idx, row_idx, 0);
-            mnDiagram_80242C0C(gobj, col_idx, row_idx);
+            mnDiagram_ClearGridContent(gobj);
+            mnDiagram_DrawGridCells(gobj, col_idx, row_idx, 0);
+            mnDiagram_DrawFighterHeaders(gobj, col_idx, row_idx);
         }
     }
 }
 
-/// Initialize VS Records diagram screen.
-/// @param arg0 If non-zero, load DAT archive symbols
-/// @param arg1 Initial mode (passed to mnDiagram_80243434)
-void mnDiagram_802437E8(s32 arg0, s32 arg1)
+/// @brief Initializes the VS Records diagram screen.
+/// @param load_dat If non-zero, load DAT archive symbols.
+/// @param anim_state Initial animation state (0 = normal, 1 = intro).
+void mnDiagram_Init(s32 load_dat, s32 anim_state)
 {
     mnDiagram_Assets* assets = (mnDiagram_Assets*) &mnDiagram_804A0750;
     HSD_GObjProc* proc;
@@ -2169,7 +2714,7 @@ void mnDiagram_802437E8(s32 arg0, s32 arg1)
     mn_804A04F0.x10 = 0;
     mn_804A04F0.hovered_selection = 0;
 
-    if (arg0) {
+    if (load_dat) {
         lbArchive_LoadSections(
             mn_804D6BB8, &assets->ConB1[0], "MenMainConB1_Top_joint",
             &assets->ConB1[1], "MenMainConB1_Top_animjoint", &assets->ConB1[2],
@@ -2199,9 +2744,9 @@ void mnDiagram_802437E8(s32 arg0, s32 arg1)
             "MenMainCursorB3_Top_joint", 0);
     }
 
-    mnDiagram_8023FA6C();
-    mnDiagram_8023FC28();
-    mnDiagram_80243434((u8) arg1);
+    mnDiagram_SortFightersByKOs();
+    mnDiagram_SortNamesByKOs();
+    mnDiagram_Setup(anim_state);
 
     proc = HSD_GObjProc_8038FD54(GObj_Create(0, 1, 0x80),
                                  (void (*)(HSD_GObj*)) mnDiagram_InputProc, 0);
