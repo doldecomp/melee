@@ -1,8 +1,8 @@
 #include "itgreatfoxlaser.h"
 
 #include "it/inlines.h"
-#include "it/item.h"
 #include "it/it_26B1.h"
+#include "it/item.h"
 
 UNK_T it_802EAF28(Item_GObj* item_gobj)
 {

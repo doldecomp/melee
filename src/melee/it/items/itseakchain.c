@@ -3,10 +3,10 @@
 #include "it/items/itseakchain.static.h"
 
 #include "baselib/jobj.h"
+#include "ft/ftcoll.h"
 
 #include "it/forward.h"
 
-#include "ft/ftcoll.h"
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/itCharItems.h"

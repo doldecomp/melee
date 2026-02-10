@@ -73,7 +73,7 @@ bool itOldkuri_UnkMotion3_Coll(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itOldkuriAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
-    ip->xDD4_itemVar.oldkuri.xDF8 = (s32)attr->xC;
+    ip->xDD4_itemVar.oldkuri.xDF8 = (s32) attr->xC;
     it_8026E414(gobj, it_802D747C);
     return it_8027C794(gobj);
 }
@@ -99,7 +99,7 @@ bool itOldkuri_UnkMotion4_Coll(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itOldkuriAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
-    ip->xDD4_itemVar.oldkuri.xDF8 = (s32)attr->xC;
+    ip->xDD4_itemVar.oldkuri.xDF8 = (s32) attr->xC;
     it_8026E414(gobj, it_802D747C);
     return it_8027C794(gobj);
 }

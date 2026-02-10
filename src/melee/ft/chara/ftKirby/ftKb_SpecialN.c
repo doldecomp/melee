@@ -1653,10 +1653,8 @@ void fn_800F64C8(Fighter_GObj* gobj, float anim_start)
     ftKb_DatAttrs* da = fp->dat_attrs;
     ftWalkCommon_800DFCA4(gobj, ftKb_MS_EatWalkSlow, Ft_MF_SkipModel,
                           anim_start, fp->fv.kb.xE8, fp->fv.kb.xEC,
-                          fp->fv.kb.xF0, ca->slow_walk_max,
-                          ca->mid_walk_point,
-                          ca->fast_walk_min,
-                          da->specialn_walk_speed);
+                          fp->fv.kb.xF0, ca->slow_walk_max, ca->mid_walk_point,
+                          ca->fast_walk_min, da->specialn_walk_speed);
     ftCommon_8007E2F4(fp, 0x1FF);
 }
 

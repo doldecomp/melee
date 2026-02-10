@@ -11,9 +11,9 @@
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/itcoll.h"
 #include "it/item.h"
 #include "MSL/math.h"
-#include "it/itcoll.h"
 #include "sysdolphin/baselib/random.h"
 
 typedef struct itRShell_Attrs {
@@ -95,14 +95,12 @@ void it_8028D100(Item_GObj* gobj)
 
 set_vel:
     did_hit = 1;
-    ip->x40_vel.x =
-        -ip->xCCC_incDamageDirection * (ip->xCA0 * attrs->x20);
+    ip->x40_vel.x = -ip->xCCC_incDamageDirection * (ip->xCA0 * attrs->x20);
     goto check_speed;
 
 add_vel:
     it_8028D390(gobj);
-    ip->x40_vel.x +=
-        -ip->xCCC_incDamageDirection * (ip->xCA0 * attrs->x24);
+    ip->x40_vel.x += -ip->xCCC_incDamageDirection * (ip->xCA0 * attrs->x24);
     goto check_speed;
 
 check_speed:

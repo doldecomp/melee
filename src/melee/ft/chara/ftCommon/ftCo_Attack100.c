@@ -1195,8 +1195,7 @@ void fn_800DB8A4(Fighter_GObj* gobj)
     Fighter* fp = gobj->user_data;
     fp->mv.co.capturewait.x0 += ftCo_804D90D8;
     fp->grab_timer -= p_ftCommonData->grab_timer_decrement;
-    fp->mv.co.capturewait.x8 =
-        ftCommon_GrabMash(fp, p_ftCommonData->x3A8);
+    fp->mv.co.capturewait.x8 = ftCommon_GrabMash(fp, p_ftCommonData->x3A8);
 }
 #pragma pop
 

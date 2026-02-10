@@ -1,17 +1,17 @@
 #include "itpikachutjoltground.h"
 
-#include <math.h>
-
-#include "MSL/trigf.h"
 #include "ef/eflib.h"
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
-#include "it/item.h"
 #include "it/itCharItems.h"
+#include "it/item.h"
 #include "it/items/itpikachutjoltair.h"
 #include "lb/lbvector.h"
+#include "MSL/trigf.h"
+
+#include <math.h>
 
 /* 2B37F0 */ static void itPikachutjoltground_UnkMotion1_Phys(Item_GObj*);
 
@@ -128,8 +128,7 @@ bool itPikachutjoltground_UnkMotion0_Coll(Item_GObj* gobj)
         ip2 = GET_ITEM(gobj);
         ground_angle = atan2f(ip2->xDD4_itemVar.pikachujoltground.xDF4.y,
                               ip2->xDD4_itemVar.pikachujoltground.xDF4.x);
-        angle_diff =
-            atan2f(ip2->x40_vel.y, ip2->x40_vel.x) - ground_angle;
+        angle_diff = atan2f(ip2->x40_vel.y, ip2->x40_vel.x) - ground_angle;
 
         while (angle_diff < 0.0f) {
             angle_diff += 2 * M_PI;
@@ -142,9 +141,8 @@ bool itPikachutjoltground_UnkMotion0_Coll(Item_GObj* gobj)
         } else {
             facing_dir = 1.0f;
         }
-        ip2->xDD4_itemVar.pikachujoltground.xDDC =
-            it_802B4224(ip2->owner, gobj, &ip2->pos, ip2->kind + 1,
-                        facing_dir);
+        ip2->xDD4_itemVar.pikachujoltground.xDDC = it_802B4224(
+            ip2->owner, gobj, &ip2->pos, ip2->kind + 1, facing_dir);
         ip->xDD4_itemVar.pikachujoltground.xE00 =
             ip->xDD4_itemVar.pikachujoltground.xDF4;
         if (ip->xDD4_itemVar.pikachujoltground.xDDC == NULL) {
@@ -179,9 +177,9 @@ bool itPikachutjoltground_UnkMotion1_Coll(Item_GObj* gobj)
             if (0.0f == attr->xC) {
                 flag = false;
             } else {
-                f32 angle = lbVector_Angle(
-                    &ip2->xDD4_itemVar.pikachujoltground.xDF4,
-                    &ip2->xDD4_itemVar.pikachujoltground.xE00);
+                f32 angle =
+                    lbVector_Angle(&ip2->xDD4_itemVar.pikachujoltground.xDF4,
+                                   &ip2->xDD4_itemVar.pikachujoltground.xE00);
                 f32 limit = attr->xC;
                 if (limit < 0.0f) {
                     limit = -limit;

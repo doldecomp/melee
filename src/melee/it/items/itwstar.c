@@ -43,9 +43,8 @@ HSD_AnimJoint* it_80294364(Item_GObj* gobj)
     picked = candidates[HSD_Randi(count)];
     it_804D6D00 = (s8) picked;
     ip->xDD4_itemVar.wstar.xDDC = picked;
-    Item_8026AE84(ip,
-                   attr->x28_entries[ip->xDD4_itemVar.wstar.xDDC].x4_sfx,
-                   0x7f, 0x40);
+    Item_8026AE84(ip, attr->x28_entries[ip->xDD4_itemVar.wstar.xDDC].x4_sfx,
+                  0x7f, 0x40);
     return attr->x28_entries[picked].x0_anim_joint;
 }
 

@@ -1,6 +1,5 @@
 #include "itsamuschargeshot.h"
 
-#include <math.h>
 #include <placeholder.h>
 #include <platform.h>
 
@@ -9,6 +8,8 @@
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
+
+#include <math.h>
 
 bool it_802B5518(Item_GObj* gobj, CollData* cd)
 {
@@ -58,12 +59,10 @@ bool itSamuschargeshot_UnkMotion0_Coll(Item_GObj* gobj)
 void itSamuschargeshot_UnkMotion8_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    ip->x40_vel.x =
-        ip->xDD4_itemVar.samuschargeshot.x8 *
-        cosf(ip->xDD4_itemVar.samuschargeshot.x4);
-    ip->x40_vel.y =
-        ip->xDD4_itemVar.samuschargeshot.x8 *
-        sinf(ip->xDD4_itemVar.samuschargeshot.x4);
+    ip->x40_vel.x = ip->xDD4_itemVar.samuschargeshot.x8 *
+                    cosf(ip->xDD4_itemVar.samuschargeshot.x4);
+    ip->x40_vel.y = ip->xDD4_itemVar.samuschargeshot.x8 *
+                    sinf(ip->xDD4_itemVar.samuschargeshot.x4);
 }
 
 bool itSamuschargeshot_UnkMotion8_Coll(Item_GObj* gobj)
