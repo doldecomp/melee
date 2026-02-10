@@ -34,6 +34,7 @@
 #include <melee/mp/mpcoll.h>
 #include <melee/pl/player.h>
 #include <melee/sc/types.h>
+#include <melee/ty/toy.h>
 
 typedef struct lbl_804706D8_t{
     s16 x0;
