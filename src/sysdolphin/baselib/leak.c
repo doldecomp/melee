@@ -28,7 +28,7 @@ extern HSD_LeakChecker HSD_Leak_80407B58;
 static char HSD_Leak_804D6000[] = " ";
 static char HSD_Leak_804D6004[] = "done.\n";
 
-/* @@todo: Currently ~97.2% match - register allocation differences
+/* @@todo Currently ~97.2% match - register allocation differences
  * remain: r28/r29 swap (scan_copy/cap_ptr), r21/r23 swap (heap_start_phys),
  * and r22/r27 swap (ofs/loop counter) in second half. */
 int HSD_Leak_80387DF8(int indent)

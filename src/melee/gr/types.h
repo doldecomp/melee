@@ -270,7 +270,7 @@ struct grKongo_GroundVars2 {
     f32 xE8;
 };
 
-/// @@todo: Investigate if these extra structs could be
+/// @@todo Investigate if these extra structs could be
 /// shared among stages/other things as more are decompiled.
 struct grKongo_GroundVars3 {
     /* gp+C4 */ s16 xC4;
@@ -461,7 +461,7 @@ typedef struct grInishie1_Block {
     s16 x22; // probably a timer for when a block first appears and flickers
 } grInishie1_Block;
 
-/// @todo: probably mistakes in this and Vars2
+/// @todo probably mistakes in this and Vars2
 typedef struct grInishie1_GroundVars {
     union {
         u32 xC4;
@@ -1054,7 +1054,7 @@ struct UnkBgmStruct {
     u8 pad[0x64 - 0x1A];
 };
 
-/// @todo: what is this struct?
+/// @todo what is this struct?
 struct UnkStage6B0 {
     f32 x0;
     s16 x4;

@@ -76,7 +76,7 @@ static HSD_Archive* HSD_SisLib_804D1110[5];
 SIS* HSD_SisLib_804D1124[5];
 s8 HSD_SisLib_804D6390[4] = { 0, 0, 0, 0 };
 
-/// @@todo: Currently 99.54% match - needs register allocation fix
+/// @@todo Currently 99.54% match - needs register allocation fix
 /// (var_r4 allocated to r3 instead of r4)
 /// a generic allocator used by multiple
 /// data types
@@ -168,7 +168,7 @@ void* HSD_SisLib_803A5798(s32 size)
     return best->data_1;
 }
 
-/// @@todo: Currently 92.39% match - needs register allocation fix in
+/// @@todo Currently 92.39% match - needs register allocation fix in
 /// coalesce block (new_size/old_next register assignment differs)
 void HSD_SisLib_803A594C(void* ptr)
 {
@@ -484,7 +484,7 @@ void HSD_SisLib_803A5FBC(void)
     HSD_Free(HSD_SisLib_804D796C);
 }
 
-/// @@todo: Currently 97.56% match - extra lwz reload optimized away by
+/// @@todo Currently 97.56% match - extra lwz reload optimized away by
 /// compiler after dual global store
 void HSD_SisLib_803A6048(u32 size)
 {
@@ -716,10 +716,10 @@ HSD_Text* HSD_SisLib_803A6754(int font_idx, s32 context_id)
     alloc->data_1 = buffer;
     alloc->data_0 = (sislib_UnkAllocData*) buffer;
     alloc->size = 0x80;
-    // @@todo: This being a byte store means one of my assumptions is wrong;
+    // @@todo This being a byte store means one of my assumptions is wrong;
     // maybe this is a different struct.
     *(u8*) &alloc->data_0->data_0 = 0;
-    // @@todo: Do any other Data struct usages have a 0xC member?
+    // @@todo Do any other Data struct usages have a 0xC member?
     *(&alloc->size + 1) = 0;
     HSD_SisLib_803A6368(text, 0);
     text->sis_buffer = (SIS*) alloc->data_1;
@@ -998,14 +998,14 @@ int HSD_SisLib_803A6B98(HSD_Text* text, float x, float y, const char* fmt, ...)
     u8* playhead;
     va_list args;
 
-    // @@todo: what size is this?
+    // @@todo what size is this?
     u8 sis_buf;
 
     encoded_len = 0; // some type of size
     alloc = text->alloc_data;
     sis_buf = 0;
     if (fmt) {
-        // @@todo: is this the correct usage of vaargs?
+        // @@todo is this the correct usage of vaargs?
         u8 buffer[256];
         va_start(args, fmt);
         vsnprintf((char*) buffer, -1, fmt, args);

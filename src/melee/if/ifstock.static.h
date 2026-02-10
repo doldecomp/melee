@@ -24,7 +24,7 @@ struct ifStock_804A1378_per_player {
     int stocks;
 };
 
-/// @todo: merge with IfStockUserData
+/// @todo merge with IfStockUserData
 struct ifStock_804A1378_x204 {
     unsigned char x0[0x54];
 };

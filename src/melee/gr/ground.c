@@ -520,7 +520,7 @@ static bool Ground_801C0A70(Vec3* pos)
             OLDPUPUPU,
             OLDYOSHI,
             OLDKONGO,
-            // @todo: what stages are these?
+            // @todo what stages are these?
             36,
             37,
         };

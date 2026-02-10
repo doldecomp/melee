@@ -20,7 +20,7 @@ typedef union {
     (raw_x & 0xFFFF)   // remaining 16 mantissa bits
 #define LN2 0.6931472f // natural logarithm of 2
 
-/// @todo: use standard library constants, because this definition seems to be
+/// @todo use standard library constants, because this definition seems to be
 /// platform dependant
 float float_nan = 0.0 / 0.0;
 float float_inf = 1.0e100 * 1.0e100;

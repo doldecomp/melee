@@ -106,7 +106,7 @@ extern HSD_GObj* HSD_GObj_804D781C;
 extern HSD_GObj** HSD_GObj_804D7820;
 extern HSD_GObj** HSD_GObj_804D7824;
 extern HSD_GObj** plinklow_gobjs;
-/// @todo: GObjList is a fake type, this is just a double pointer
+/// @todo GObjList is a fake type, this is just a double pointer
 /// (pointer to array of HSD_GObj*, indexed by p_link)
 extern HSD_GObjList* HSD_GObj_Entities;
 extern HSD_GObjProc* HSD_GObj_804D7830;

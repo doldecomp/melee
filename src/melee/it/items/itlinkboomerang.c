@@ -238,7 +238,7 @@ void it_802A0930(Item_GObj* gobj)
             if (hobj != NULL) {
                 HSD_JObjAnimAll(hobj);
 
-                // @todo: probably indexing into a Vec3[] field of linkboomerang
+                // @todo probably indexing into a Vec3[] field of linkboomerang
                 v = M2C_FIELD(&ip->xDD4_itemVar.linkboomerang, Vec3**,
                               i * 0xC * 0xFF);
                 HSD_JObjSetTranslate(hobj, v);
