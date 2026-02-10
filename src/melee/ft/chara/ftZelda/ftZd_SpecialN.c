@@ -111,8 +111,8 @@ void ftZd_SpecialN_Anim(HSD_GObj* gobj)
     }
 }
 
-// 8013AACC - 8013AB60 (148 bytes)
-// https://decomp.me/scratch/ttWvN
+/// 8013AACC - 8013AB60 (148 bytes)
+/// https://decomp.me/scratch/ttWvN
 void ftZd_SpecialAirN_Anim(HSD_GObj* gobj)
 {
     Fighter* fp;
@@ -147,15 +147,15 @@ void ftZd_SpecialAirN_IASA(HSD_GObj* gobj)
     return;
 }
 
-// 8013AB68 - 8013AB9C (52 bytes)
+/// 8013AB68 - 8013AB9C (52 bytes)
 void ftZd_SpecialN_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
     ftColl_8007AEF8(gobj);
 }
 
-// 8013AB9C - 8013AC10 (116 bytes)
-// https://decomp.me/scratch/juoPH
+/// 8013AB9C - 8013AC10 (116 bytes)
+/// https://decomp.me/scratch/juoPH
 void ftZd_SpecialAirN_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -178,8 +178,8 @@ void ftZd_SpecialAirN_Phys(HSD_GObj* gobj)
     ftColl_8007AEF8(gobj);
 }
 
-// 8013AC10 - 8013AC4C (60 bytes)
-// https://decomp.me/scratch/CT7dz
+/// 8013AC10 - 8013AC4C (60 bytes)
+/// https://decomp.me/scratch/CT7dz
 void ftZd_SpecialN_Coll(HSD_GObj* gobj)
 {
     if (!ft_80082708(gobj)) {
@@ -187,8 +187,8 @@ void ftZd_SpecialN_Coll(HSD_GObj* gobj)
     }
 }
 
-// 8013AC4C - 8013AC88 (60 bytes)
-// https://decomp.me/scratch/CT7dz
+/// 8013AC4C - 8013AC88 (60 bytes)
+/// https://decomp.me/scratch/CT7dz
 void ftZd_SpecialAirN_Coll(HSD_GObj* gobj)
 {
     if (ft_80081D0C(gobj) != 0) {

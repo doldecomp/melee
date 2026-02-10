@@ -64,7 +64,7 @@ HSD_FObj* fn_8001E60C(FigaTrack* track, s8 frames)
     return first;
 }
 
-// Duplicate of JObjSortAnim
+/// Duplicate of JObjSortAnim
 static inline void lbAnim_JObjSortAnim(HSD_AObj* aobj)
 {
     HSD_FObj* fobj;

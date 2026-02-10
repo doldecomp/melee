@@ -18,11 +18,14 @@ typedef struct HSD_TExpDag {
 } HSD_TExpDag;
 
 /* 385798 */ int assign_reg(int num, u32*, HSD_TExpDag* list, int* order);
-/* 385944 */ void order_dag(int, UNK_T, UNK_T, HSD_TExpDag*, int, int, int,
-                            int, UNK_T, UNK_T, UNK_T);
-/* 385B8C */ UNK_RET CalcDistance(UNK_PARAMS);
+/* 385944 */ void order_dag(int num, int* dep, int* full_dep,
+                            HSD_TExpDag* list, int depth, int node,
+                            int scheduled, int available, int* order,
+                            int* best_score, int* best_order);
+/* 385B8C */ void CalcDistance(HSD_TExp** tevs, int* dist, HSD_TExp* tev,
+                               int num, int depth);
 /* 385C60 */ int HSD_TExpMakeDag(HSD_TExp* root, HSD_TExpDag* list);
-/* 386100 */ void make_full_dependancy_mtx(int, UNK_T, UNK_T);
+/* 386100 */ void make_full_dependancy_mtx(int num, int* dep, int* full);
 /* 386230 */ UNK_RET fn_80386230(UNK_PARAMS);
 /* 386234 */ void HSD_TExpSchedule(int num, HSD_TExpDag* list,
                                    HSD_TExp** result, HSD_TExpRes* resource);

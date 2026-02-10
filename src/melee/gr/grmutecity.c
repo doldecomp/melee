@@ -6,6 +6,7 @@
 #include "forward.h"
 
 #include "gr/grdatfiles.h"
+#include "gr/grfzerocar.h"
 #include "gr/grmaterial.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
@@ -14,6 +15,8 @@
 
 #include <baselib/gobj.h>
 #include <baselib/lobj.h>
+
+extern s16 grMc_803E34A4[];
 
 static struct {
     int x0;
@@ -123,7 +126,13 @@ void grMuteCity_801F0444(Ground_GObj* arg) {}
 
 void grMuteCity_801F0448(Ground_GObj* arg) {}
 
-/// #grMuteCity_801F044C
+void grMuteCity_801F044C(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    grFZeroCar_801CAFBC(gobj, grMc_803E34A4, 0x1C, 0);
+    grMuteCity_801F0F4C(gobj);
+    gp->gv.mutecity.xC4 = 0;
+}
 
 bool grMuteCity_801F04A8(Ground_GObj* arg)
 {

@@ -667,8 +667,8 @@ u32* gmMainLib_8015D970(ssize_t idx)
     return &base[idx];
 }
 
-// https://decomp.me/scratch/CJy8X
-// register swap
+/// https://decomp.me/scratch/CJy8X
+/// register swap
 bool gmMainLib_8015D984(u32 arg0)
 {
     PAD_STACK(16);
@@ -1050,8 +1050,8 @@ void gmMainLib_8015FA34(int arg0)
         gm_8017297C();
         gm_801741FC();
     }
-    lbAudioAx_80028690();
-    // TODO the call to gmMainLib_8015CC40 shouldn't be inlined
+    lbAudioAx_80028690(); ///< @todo the call to gmMainLib_8015CC40 shouldn't
+                          ///< be inlined
     gmMainLib_8015F500();
 }
 

@@ -216,7 +216,7 @@ bool itCapsule_UnkMotion5_Coll(Item_GObj* gobj)
     return false;
 }
 
-// Incorrect stack offsets for inlined it_8027CF30
+/// Incorrect stack offsets for inlined it_8027CF30
 bool itCapsule_Logic0_DmgDealt(HSD_GObj* item_gobj)
 {
     Item* it = GET_ITEM(item_gobj);

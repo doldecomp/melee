@@ -88,7 +88,7 @@ Vec3* lbVector_CrossprodNormalized(Vec3* a, Vec3* b, Vec3* result)
     return result;
 }
 
-// 8000D620 - returns the angle between a and b
+/// 8000D620 - returns the angle between a and b
 float lbVector_Angle(Vec3* a, Vec3* b)
 {
     float lena_lenb = lbVector_Len(a) * lbVector_Len(b);
@@ -107,7 +107,7 @@ float lbVector_Angle(Vec3* a, Vec3* b)
     return 0.0f;
 }
 
-// 8000D790 - returns the angle between a and b
+/// 8000D790 - returns the angle between a and b
 float lbVector_AngleXY(Vec3* a, Vec3* b)
 {
     float lena_lenb = lbVector_Len_xy(a) * lbVector_Len_xy(b);
@@ -125,10 +125,10 @@ float lbVector_AngleXY(Vec3* a, Vec3* b)
     return 0.0f;
 }
 
-// Approximations of sine/cosine which are the best quintic approximations for
-// the x range (-pi,pi). They can be derived by using the Gran-Schmidt
-// Procedure, which is described in the following paper:
-// https://math.berkeley.edu/~arash/54/notes/6_4.pdf
+/// Approximations of sine/cosine which are the best quintic approximations for
+/// the x range (-pi,pi). They can be derived by using the Gran-Schmidt
+/// Procedure, which is described in the following paper:
+/// https://math.berkeley.edu/~arash/54/notes/6_4.pdf
 
 static float sin(float angle)
 {
@@ -155,10 +155,10 @@ static float cos(float angle)
            0.0056429998949170113f * angle * angle * angle * angle * angle;
 }
 
-// 8000D8F4
-// Rotates v by angle about the given axis. The axis must have unit length, the
-// angle is in radians. Rotation is oriented such that rotating (1,0,0) about
-// the (0,0,1) axis results in (0,1,0).
+/// 8000D8F4
+/// Rotates v by angle about the given axis. The axis must have unit length,
+/// the angle is in radians. Rotation is oriented such that rotating (1,0,0)
+/// about the (0,0,1) axis results in (0,1,0).
 void lbVector_RotateAboutUnitAxis(Vec3* v, Vec3* axis, float angle)
 {
     // The implementation is unnecessarily complex. the idea is to reduce the
@@ -255,8 +255,8 @@ float dummy(void)
     return 2.0f;
 } // needed here to force order of floats in .sdata2 section
 
-// 8000DC6C - compute a -= 2*<a,b>*b. When b has unit length, this mirrors a at
-// the plane that is perpendicular to b and contains the origin.
+/// 8000DC6C - compute a -= 2*<a,b>*b. When b has unit length, this mirrors a
+/// at the plane that is perpendicular to b and contains the origin.
 void lbVector_Mirror(Vec3* a, Vec3* unit_mirror_axis)
 {
     float f =
@@ -266,17 +266,17 @@ void lbVector_Mirror(Vec3* a, Vec3* unit_mirror_axis)
     a->y += unit_mirror_axis->y * f;
 }
 
-// 8000DCA8 - returns <a/|a|, b/|b|>, which is the cosine of the angle between
-// a and b.
+/// 8000DCA8 - returns <a/|a|, b/|b|>, which is the cosine of the angle between
+/// a and b.
 float lbVector_CosAngle(Vec3* a, Vec3* b)
 {
     return (a->x * b->x + a->y * b->y) / (sqrtf(a->x * a->x + a->y * a->y) *
                                           sqrtf(b->x * b->x + b->y * b->y));
 }
 
-// 8000DDAC - linearly interpolates between a and b as f goes from 0 to 1,
-// returns a + f*(b-a). The numerical error can be large for f=1 when b is
-// small compared to a.
+/// 8000DDAC - linearly interpolates between a and b as f goes from 0 to 1,
+/// returns a + f*(b-a). The numerical error can be large for f=1 when b is
+/// small compared to a.
 Vec3* lbVector_Lerp(Vec3* a, Vec3* b, Vec3* result, float f)
 {
     lbVector_Diff(b, a, result);
@@ -313,9 +313,9 @@ Vec3* lbVector_8000DE38(Mtx m, Vec3* v, float c)
     return v;
 }
 
-// 8000DF0C - computes euler angles phi_x,phi_y,phi_z that rotate the standard
-// basis (e1,e2,e3) onto the orthonormal basis (b,c,a) with 3 rotations about
-// the x,y,z axes in that order.
+/// 8000DF0C - computes euler angles phi_x,phi_y,phi_z that rotate the standard
+/// basis (e1,e2,e3) onto the orthonormal basis (b,c,a) with 3 rotations about
+/// the x,y,z axes in that order.
 Vec3* lbVector_EulerAnglesFromONB(Vec3* result_angles, Vec3* a, Vec3* b,
                                   Vec3* c)
 {
@@ -336,10 +336,10 @@ Vec3* lbVector_EulerAnglesFromONB(Vec3* result_angles, Vec3* a, Vec3* b,
     return result_angles;
 }
 
-// 8000DFF4 - returns lbVector_EulerAnglesFromONB(result_angles, a, c cross a,
-// c). When rotating about the x,y,z angles about the euler angles returned
-// from that function in that order, the standard basis (e1,e2,e3) is rotated
-// onto (c cross a,c,a).
+/// 8000DFF4 - returns lbVector_EulerAnglesFromONB(result_angles, a, c cross a,
+/// c). When rotating about the x,y,z angles about the euler angles returned
+/// from that function in that order, the standard basis (e1,e2,e3) is rotated
+/// onto (c cross a,c,a).
 Vec3* lbVector_EulerAnglesFromPartialONB(Vec3* result_angles, Vec3* a, Vec3* c)
 {
     Vec3 b;
@@ -350,7 +350,7 @@ Vec3* lbVector_EulerAnglesFromPartialONB(Vec3* result_angles, Vec3* a, Vec3* c)
     return result_angles;
 }
 
-// 8000E138
+/// 8000E138
 Vec3* lbVector_ApplyEulerRotation(Vec3* v, Vec3* angles)
 {
     lbVector_Rotate(v, 1, angles->x); // rotate about x-axis
@@ -359,13 +359,13 @@ Vec3* lbVector_ApplyEulerRotation(Vec3* v, Vec3* angles)
     return v;
 }
 
-// 8000E19C
+/// 8000E19C
 float lbVector_sqrtf_accurate(float x)
 {
     return sqrtf_accurate(x);
 }
 
-// 8000E210
+/// 8000E210
 Vec3* lbVector_WorldToScreen(HSD_CObj* cobj, const Vec3* pos3d,
                              Vec3* screenCoords, int d)
 {
@@ -449,11 +449,11 @@ Vec3* lbVector_WorldToScreen(HSD_CObj* cobj, const Vec3* pos3d,
     return screenCoords;
 }
 
-// 8000E530 - Sets m to the 3x3 euler matrix that rotates about the x,y,z axes
-// with angles angles.x, angles.y, angles.z in that order, that means
-// m = rotation_matrix_z(angles.z) * rotation_matrix_y(angles.y) *
-// rotation_matrix_x(angles.x) Column 4 of m is then set to (0,0,0) because
-// there is no translational component.
+/// 8000E530 - Sets m to the 3x3 euler matrix that rotates about the x,y,z axes
+/// with angles angles.x, angles.y, angles.z in that order, that means
+/// m = rotation_matrix_z(angles.z) * rotation_matrix_y(angles.y) *
+/// rotation_matrix_x(angles.x) Column 4 of m is then set to (0,0,0) because
+/// there is no translational component.
 void lbVector_CreateEulerMatrix(Mtx m, Vec3* angles)
 {
     float sx = sin(angles->x);
@@ -487,12 +487,12 @@ void lbVector_CreateEulerMatrix(Mtx m, Vec3* angles)
     m[2][3] = 0.0f;
 }
 
-// 8000E838 - This function seems to have a very specific use case and is only
-// used once in Camera_CheckToStopDrawingHighPoly(80030cfc), here's what it
-// does: Let u = b-a, then compute the intersection of the line through a with
-// direction u with the plane that contains c and is perpendicular to u. Write
-// the result to d. If u is numerically too small, set d=a instead. Return the
-// length of c-d.
+/// 8000E838 - This function seems to have a very specific use case and is only
+/// used once in Camera_CheckToStopDrawingHighPoly(80030cfc), here's what it
+/// does: Let u = b-a, then compute the intersection of the line through a with
+/// direction u with the plane that contains c and is perpendicular to u. Write
+/// the result to d. If u is numerically too small, set d=a instead. Return the
+/// length of c-d.
 float lbVector_8000E838(Vec3* a, Vec3* b, Vec3* c, Vec3* d)
 {
     Vec3 b_a;

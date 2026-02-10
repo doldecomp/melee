@@ -14,7 +14,7 @@ typedef struct TmBoxArrays {
     void* box4;
 } TmBoxArrays;
 
-/// TODO :: this isnt exactly right
+/// @todo :: this isnt exactly right
 typedef struct TmAnimTimers {
     u16 x0;
     u16 x2;

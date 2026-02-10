@@ -80,7 +80,7 @@
 #include <baselib/random.h>
 #include <MSL/math.h>
 
-// Forward declaration for function in ftKb_SpecialNZd.c
+/// Forward declaration for function in ftKb_SpecialNZd.c
 void fn_80105A34(Fighter_GObj*);
 
 void ftKb_SpecialNNs_800FEDD0(HSD_GObj* gobj)

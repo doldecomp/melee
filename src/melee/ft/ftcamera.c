@@ -19,7 +19,7 @@ void ftCamera_80076018(UnkFloat6_Camera* in, UnkFloat6_Camera* out, float mul)
     out->xC.z = in->xC.z * mul;
 }
 
-// Camera_CopyPlayerPositionToCameraBoxPosition
+/// Camera_CopyPlayerPositionToCameraBoxPosition
 void ftCamera_80076064(Fighter* fp)
 {
     CmSubject* camera_box;
@@ -48,8 +48,8 @@ void ftCamera_80076064(Fighter* fp)
     camera_box->x1C = camera_box->x10;
 }
 
-// Fighter_UpdateCameraBox
-// Camera_UpdatePlayerCameraBoxPosition
+/// Fighter_UpdateCameraBox
+/// Camera_UpdatePlayerCameraBoxPosition
 void ftCamera_UpdateCameraBox(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);

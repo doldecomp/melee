@@ -270,7 +270,7 @@ struct grKongo_GroundVars2 {
     f32 xE8;
 };
 
-/// @todo: Investigate if these extra structs could be
+/// @todo Investigate if these extra structs could be
 /// shared among stages/other things as more are decompiled.
 struct grKongo_GroundVars3 {
     /* gp+C4 */ s16 xC4;
@@ -430,6 +430,8 @@ struct grIceMt_GroundVars {
     /* +0 gp+D8 */ u32 xF0; // padding
     /* +0 gp+D8 */ s16 xF4[2];
     /* +0 gp+D8 */ HSD_GObj* xF8[5];
+    /* +0 gp+D8 */ s16 x10C;
+    /* +0 gp+D8 */ s16 x10E;
 };
 struct grIceMt_GroundVars2 {
     /* +0 gp+C4 */ f32 xC4;
@@ -461,7 +463,7 @@ typedef struct grInishie1_Block {
     s16 x22; // probably a timer for when a block first appears and flickers
 } grInishie1_Block;
 
-// TODO: probably mistakes in this and Vars2
+/// @todo probably mistakes in this and Vars2
 typedef struct grInishie1_GroundVars {
     union {
         u32 xC4;
@@ -511,7 +513,7 @@ struct grInishie1_GroundVars2 {
     s16 xC6;
 };
 
-// likely for question mark blocks
+/// likely for question mark blocks
 struct grInishie1_GroundVars3 {
     HSD_JObj* xC4;
     s32 xC8;
@@ -548,7 +550,7 @@ struct grOldKongo_GroundVars {
     void* xD4;
 };
 
-// likely for Cathrine (Birdo)
+/// likely for Cathrine (Birdo)
 struct grInishie2_GroundVars2 {
     Item_GObj* xC4;
     HSD_GObj* xC8;
@@ -589,7 +591,7 @@ struct grStadium_GroundVars {
     /* +4 gp+E8   */ HSD_GObj* xE8;
 };
 
-// Specific to the Pokemon Stadium jumbotron
+/// Specific to the Pokemon Stadium jumbotron
 struct grStadium_Display {
     /* C4:0 */ u8 xC4_b0 : 1;
     /* C4:1 */ u8 xC4_b1 : 1;
@@ -614,10 +616,10 @@ struct grStadium_Display {
     /* F8:2 */ u8 xF8_2 : 1;
 };
 
-// Unknown, but used for IDS:
-// 6
-// 9
-// and possibly more
+/// Unknown, but used for IDS:
+/// 6
+/// 9
+/// and possibly more
 struct grStadium_type9_GroundVars {
     /* C4:0 */ u8 xC4_b0 : 1;
     /* C4:1 */ u8 xC4_b1 : 1;
@@ -751,8 +753,9 @@ struct grGreens_GroundVars {
 };
 
 struct grMuteCity_GroundVars {
-    /* +0x00 gp+C4) */ u32 xC4;
-    /* +0x00 gp+C8) */ u32 xC8;
+    /* +0x00 gp+C4) */ s16 xC4;
+    /* +0x02 gp+C6) */ s16 xC6;
+    /* +0x04 gp+C8) */ u32 xC8;
     /* +0x00 gp+CC) */ u32 xCC;
     /* +0x00 gp+D0) */ struct {
         u8 b0 : 1;
@@ -1041,7 +1044,7 @@ struct Ground {
 };
 STATIC_ASSERT(sizeof(struct Ground) == 0x204);
 
-// Appears to be related to stage audio
+/// Appears to be related to stage audio
 struct UnkBgmStruct {
     s32 x0;
     s32 x4;
@@ -1054,7 +1057,7 @@ struct UnkBgmStruct {
     u8 pad[0x64 - 0x1A];
 };
 
-// TODO: what is this struct?
+/// @todo what is this struct?
 struct UnkStage6B0 {
     f32 x0;
     s16 x4;

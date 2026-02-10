@@ -33,7 +33,7 @@
 #include <MSL/stdio.h>
 #include <MSL/string.h>
 
-// .data
+/// .data
 /* 3F9FD0 */ static int un_803F9FD0;
 /* 3F9FDC */ static float un_803F9FDC;
 /* 3FA070 */ static int un_803FA070;
@@ -123,13 +123,13 @@
 /* 3FD29C */ extern char un_803FD29C[];
 /* 3FD2AC */ extern char un_803FD2AC[];
 
-// .sdata
+/// .sdata
 /* 4D5850 */ static int un_804D5850 = 0x7F;
 /* 4D5854 */ static int un_804D5854 = 0x7F;
 /* 4D5858 */ static int un_804D5858 = 0x7F;
 /* 4D585C */ static int un_804D585C = -1;
 
-// .sbss
+/// .sbss
 /* 4D6DA8 */ static int* un_804D6DA8;
 /* 4D6DAC */ static int un_804D6DAC;
 /* 4D6DB0 */ static int un_804D6DB0;
@@ -138,7 +138,7 @@
 /* 4D6DBC */ static int un_804D6DBC;
 /* 4D6DC0 */ static int un_804D6DC0;
 
-// .sbss (extern)
+/// .sbss (extern)
 /* 4D6DC8 */ extern s32 un_804D6DC8;
 /* 4D6DCC */ extern s32 un_804D6DCC;
 /* 4D6DD0 */ extern float un_804D6DD0;
@@ -159,7 +159,7 @@
 /* 4D6E10 */ extern s32 un_804D6E10;
 /* 4D6E14 */ extern s32 un_804D6E14;
 
-// .sdata (extern)
+/// .sdata (extern)
 /* 4D5908 */ extern s32 un_804D5908;
 /* 4D590C */ extern s32 un_804D590C;
 /* 4D5910 */ extern s32 un_804D5910;
@@ -168,10 +168,10 @@
 /* 4D5988 */ extern char un_804D5988[];
 /* 4D5990 */ extern char un_804D5990[];
 
-// .bss (extern)
+/// .bss (extern)
 /* 45A6C0 */ extern u8 gmMainLib_8045A6C0[];
 
-// .sdata2 (extern)
+/// .sdata2 (extern)
 /* 4DDC48 */ extern float un_804DDC48;
 /* 4DDC4C */ extern float un_804DDC4C;
 /* 4DDC50 */ extern float un_804DDC50;
@@ -466,7 +466,7 @@ s32 un_80300410(s32 arg0)
     return 0;
 }
 
-// these will try to inline un_802FFD94 otherwise
+/// these will try to inline un_802FFD94 otherwise
 #pragma push
 #pragma dont_inline on
 int un_80300480(int arg0)

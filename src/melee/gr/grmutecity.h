@@ -36,7 +36,7 @@
 /* 1F0948 */ void grMuteCity_801F0948(Ground_GObj*);
 /* 1F094C */ UNK_RET grMuteCity_801F094C(UNK_PARAMS);
 /* 1F0D20 */ void grMuteCity_801F0D20(Ground_GObj*);
-/* 1F0F4C */ UNK_RET grMuteCity_801F0F4C(UNK_PARAMS);
+/* 1F0F4C */ void grMuteCity_801F0F4C(Ground_GObj*);
 /* 1F106C */ UNK_RET grMuteCity_801F106C(UNK_PARAMS);
 /* 1F1328 */ UNK_RET grMuteCity_801F1328(UNK_PARAMS);
 /* 1F173C */ void grMuteCity_801F173C(float);

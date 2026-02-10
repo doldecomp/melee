@@ -932,9 +932,17 @@ u8 gm_8017ECA0(u8 difficulty, u8 stage_slot, u8 arg2)
     return lbl_803D85F0[stage_slot + difficulty * 5].pad_14[arg2 * 3];
 }
 
-/// #gm_8017ECD4
+u8 gm_8017ECD4(u8 difficulty, u8 stage_slot, u8 arg2)
+{
+    return lbl_803D85F0[stage_slot + ((u8) difficulty * 5)]
+        .pad_14[arg2 * 3 + 1];
+}
 
-/// #gm_8017ED08
+u8 gm_8017ED08(u8 difficulty, u8 stage_slot, u8 arg2)
+{
+    return lbl_803D85F0[stage_slot + ((u8) difficulty * 5)]
+        .pad_14[arg2 * 3 + 2];
+}
 
 f32 gm_8017ED3C(u8 difficulty, u8 stage_slot)
 {

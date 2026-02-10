@@ -8,12 +8,12 @@
 #include <sysdolphin/baselib/mtx.h>
 #include <MSL/trigf.h>
 
-// functions
+/// functions
 void HSD_MulColor(GXColor* arg0, GXColor* arg1, GXColor* dest);
 u32 HSD_GetNbBits(u32 arg0);
 s32 HSD_Index2PosNrmMtx(u32 arg0);
 
-// variables
+/// variables
 extern Mtx HSD_identityMtx;
 
 #define FLT_MIN 1.17549435e-38f

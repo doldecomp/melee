@@ -22,6 +22,8 @@ typedef struct {
 /* 4D2E70 */ extern u8 hsd_804D2E70[2084];
 /* 4D79A0 */ extern UNK_T hsd_804D79A0;
 /* 4D79A4 */ extern UNK_T hsd_804D79A4;
+/* 4D7990 */ extern s32 hsd_804D7990;
+/* 4D7994 */ extern s32 hsd_804D7994;
 /* 4D79A8 */ extern UNK_T hsd_804D79A8;
 
 #endif

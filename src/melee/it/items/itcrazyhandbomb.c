@@ -9,9 +9,21 @@
 #include "it/it_2725.h"
 #include "it/item.h"
 
+#include <baselib/jobj.h>
+
 /// #it_802F0F6C
 
-/// #it_802F1030
+void it_802F1030(Item_GObj* gobj)
+{
+    PAD_STACK(8);
+    HSD_JObjSetFlagsAll(gobj->hsd_obj, JOBJ_HIDDEN);
+    it_8026BD24(gobj);
+    it_8027518C(gobj);
+    it_80273454(gobj);
+    it_80272C08(gobj);
+    it_802756D0(gobj);
+    it_802F1344(gobj);
+}
 
 void itCrazyHandBomb_Logic86_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {

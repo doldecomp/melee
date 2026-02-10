@@ -203,8 +203,8 @@ void grBigBlueRoute_8020BC34(Ground_GObj* gobj)
     gp->gv.bigblueroute.xC4 = grBigBlueRoute_8020B9D4(4);
 }
 
-// @TODO: Currently 90.72% match - HSD_JObjGetTranslation inline hoists dest
-// pointer to r27 (target uses r0 for addic. + r30+offset for stores)
+/// @todo Currently 90.72% match - HSD_JObjGetTranslation inline hoists dest
+/// pointer to r27 (target uses r0 for addic. + r30+offset for stores)
 void grBigBlueRoute_8020BC68(Ground_GObj* gobj)
 {
     Vec3 origin;
@@ -271,8 +271,8 @@ extern f32 grBb_Route_804DB948;
 extern f32 grBb_Route_804DB94C;
 extern s16 grBb_Route_804D49EC;
 
-// @TODO: Currently 95.33% match - address caching in counter section,
-// minor register allocation in loop jobj load
+/// @todo Currently 95.33% match - address caching in counter section,
+/// minor register allocation in loop jobj load
 void grBigBlueRoute_8020BF38(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
@@ -358,7 +358,7 @@ void grBigBlueRoute_8020C210(Ground_GObj* gobj)
     HSD_Free((void*) gp->gv.bigblueroute.xC8);
 }
 
-// @TODO: Currently 96.39% match - r30/r31 register swap
+/// @todo Currently 96.39% match - r30/r31 register swap
 void grBigBlueRoute_8020C238(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
@@ -419,8 +419,8 @@ void grBigBlueRoute_8020C238(Ground_GObj* gobj)
 
 /// #grBigBlueRoute_8020C530
 
-// @TODO: Currently 91.77% match - register allocation (gp in r30 vs r31)
-// and cror+beq vs bge for float >= comparison.
+/// @todo Currently 91.77% match - register allocation (gp in r30 vs r31)
+/// and cror+beq vs bge for float >= comparison.
 void grBigBlueRoute_8020C85C(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
@@ -563,8 +563,8 @@ int grBigBlueRoute_8020DA9C(struct grBigBlueRoute_8020DA9C_t* desc)
     return desc->x8;
 }
 
-// @TODO: Currently 97.71% match - needs register allocation fix (r27/r30 swap
-// for arr/jobj)
+/// @todo Currently 97.71% match - needs register allocation fix (r27/r30 swap
+/// for arr/jobj)
 void grBigBlueRoute_8020DAB4(HSD_JObj** jobjs, f32 scale, int count)
 {
     int i;

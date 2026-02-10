@@ -39,7 +39,7 @@ void it_802CD4DC(Item_GObj* gobj, Item_GObj* ref_gobj)
     it_8026B894(gobj, ref_gobj);
 }
 
-// 99.63%
+/// 99.63%
 void it_802CD4FC(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
@@ -107,7 +107,7 @@ bool itSonans_Logic9_DmgDealt(Item_GObj* gobj)
     return false;
 }
 
-// 99.04%
+/// 99.04%
 bool it_802CD7D4(Item_GObj* gobj)
 {
     Item* item = GET_ITEM(gobj);

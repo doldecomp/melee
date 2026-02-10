@@ -6,7 +6,7 @@
 #include <melee/gm/types.h>
 #include <melee/lb/lblanguage.h>
 
-/// TODO :: figure out how to force the other functions not to inline this
+/// @todo :: figure out how to force the other functions not to inline this
 #pragma dont_inline on
 s32 fn_8017AD04(s32 arg0, s32 arg1)
 {
