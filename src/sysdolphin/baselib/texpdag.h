@@ -19,9 +19,9 @@ typedef struct HSD_TExpDag {
 
 /* 385798 */ int assign_reg(int num, u32*, HSD_TExpDag* list, int* order);
 /* 385944 */ void order_dag(int num, u32* dep, u32* full_dep,
-                            HSD_TExpDag* list, int depth, int node,
-                            int scheduled, int available, int* order,
-                            int* best_score, int* best_order);
+                            HSD_TExpDag* list, int depth, int idx,
+                            u32 done_set, u32 ready_set, int* order, int* min,
+                            int* min_order);
 /* 385B8C */ void CalcDistance(HSD_TExp** tevs, int* dist, HSD_TExp* tev,
                                int num, int depth);
 /* 385C60 */ int HSD_TExpMakeDag(HSD_TExp* root, HSD_TExpDag* list);

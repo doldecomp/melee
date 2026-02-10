@@ -64,8 +64,8 @@ int assign_reg(int num, u32* unused, HSD_TExpDag* list, int* order)
 }
 
 void order_dag(int num, u32* dep, u32* full_dep, HSD_TExpDag* list, int depth,
-               int node, int scheduled, int available, int* order,
-               int* best_score, int* best_order)
+               int idx, u32 done_set, u32 ready_set, int* order, int* min,
+               int* min_order)
 {
     HSD_TExpDag* dag;
     int new_scheduled;
@@ -77,14 +77,14 @@ void order_dag(int num, u32* dep, u32* full_dep, HSD_TExpDag* list, int depth,
     int n;
     int rem;
 
-    new_scheduled = scheduled | (1 << node);
-    new_available = available & ~(1 << node);
-    order[depth] = (u8) node;
+    new_scheduled = done_set | (1 << idx);
+    new_available = ready_set & ~(1 << idx);
+    order[depth] = (u8) idx;
 
     if (depth + 1 == num) {
         score = assign_reg(num, dep, list, order);
-        if (score < *best_score) {
-            *best_score = score;
+        if (score < *min) {
+            *min = score;
             i = 0;
             if (num > 0) {
                 rem = num - 8;
@@ -97,7 +97,7 @@ void order_dag(int num, u32* dep, u32* full_dep, HSD_TExpDag* list, int depth,
                 }
                 {
                     int* src = order;
-                    int* dst = best_order;
+                    int* dst = min_order;
 
                     do {
                         i += 8;
@@ -115,7 +115,7 @@ void order_dag(int num, u32* dep, u32* full_dep, HSD_TExpDag* list, int depth,
                 }
             remainder: {
                 int* src2 = order + i;
-                int* dst2 = best_order + i;
+                int* dst2 = min_order + i;
 
                 n = num - i;
                 if (i < num) {
@@ -129,7 +129,7 @@ void order_dag(int num, u32* dep, u32* full_dep, HSD_TExpDag* list, int depth,
             }
         }
     } else {
-        dep_bits = dep[node];
+        dep_bits = dep[idx];
         blocked = new_available | dep_bits;
         {
             u32* fp = full_dep;
@@ -144,18 +144,17 @@ void order_dag(int num, u32* dep, u32* full_dep, HSD_TExpDag* list, int depth,
                 n++;
             }
         }
-        dag = &list[node];
+        dag = &list[idx];
         new_available = blocked & ~dep_bits;
-        if (dag->nb_dep == 1 && (new_available & dep[node])) {
+        if (dag->nb_dep == 1 && (new_available & dep[idx])) {
             order_dag(num, dep, full_dep, list, depth + 1, dag->depend[0]->idx,
-                      new_scheduled, new_available, order, best_score,
-                      best_order);
+                      new_scheduled, new_available, order, min, min_order);
         } else {
             for (i = 0; i < num; i++) {
                 if (new_available & (1 << i)) {
                     order_dag(num, dep, full_dep, list, depth + 1, i,
-                              new_scheduled, new_available, order, best_score,
-                              best_order);
+                              new_scheduled, new_available, order, min,
+                              min_order);
                 }
             }
         }
@@ -195,6 +194,20 @@ void CalcDistance(HSD_TExp** tevs, int* dist, HSD_TExp* tev, int num,
 
 /// #HSD_TExpMakeDag
 
+static void make_dependancy_mtx(int num, HSD_TExpDag* list, u32* dep_mtx)
+{
+    HSD_TExpDag* dag;
+    int i, j;
+
+    for (i = 0; i < num; i++) {
+        dep_mtx[i] = 0;
+        dag = &list[i];
+        for (j = 0; j < dag->nb_dep; j++) {
+            dep_mtx[i] |= 1 << dag->depend[j]->idx;
+        }
+    }
+}
+
 void make_full_dependancy_mtx(int num, u32* dep, u32* full)
 {
     int i, j, k;
@@ -227,101 +240,58 @@ void make_full_dependancy_mtx(int num, u32* dep, u32* full)
 void fn_80386230(void) {}
 
 static u8 pad[0x44] = { 0 };
-static int HSD_TExpDag_80407AA0_44[4] = {
-    2,
-    4,
-    6,
-    0,
-};
-static int HSD_TExpDag_80407AA0_54[4] = {
-    3,
-    5,
-    7,
-    1,
-};
-static int HSD_TExpDag_80407AA0_64[8] = {
-    1,
-    2,
-    3,
-    0,
-};
 
 void HSD_TExpSchedule(int num, HSD_TExpDag* list, HSD_TExp** result,
                       HSD_TExpRes* resource)
 {
-    int* order_ptr;
-    HSD_TExp** result_ptr;
-    int count;
-    u8 c_dst_reg;
-    u8 a_dst_reg;
-    int j;
-    int idx;
-    int i;
+    static int c_in[4] = { GX_CC_C0, GX_CC_C1, GX_CC_C2, GX_CC_CPREV };
+    static int a_in[4] = { GX_CC_A0, GX_CC_A1, GX_CC_A2, GX_CC_APREV };
+    static int args[8] = { GX_CA_A0, GX_CA_A1, GX_CA_A2, GX_CA_APREV };
 
-    u32 dep_matrix[32];
+    u32 dep_mtx[32];
     u32 full_dep_matrix[32];
-    int work_order[32];
-    int best_order[32];
-    int best_score;
+    u32 order[32];
+    u32 min_order[32];
 
-    best_score = 5;
-    memset(best_order, 0, sizeof(best_order));
+    int i, j;
+    int min;
 
-    for (idx = 0; idx < num; idx++) {
-        HSD_TExpDag* dag = &list[idx];
-        dep_matrix[idx] = 0;
-        for (j = 0; j < dag->nb_dep; j++) {
-            dep_matrix[idx] |= 1 << dag->depend[j]->idx;
-        }
-    }
+    min = 5;
+    memset(min_order, 0, sizeof(min_order));
+    make_dependancy_mtx(num, list, dep_mtx);
+    make_full_dependancy_mtx(num, dep_mtx, full_dep_matrix);
+    order_dag(num, dep_mtx, full_dep_matrix, list, 0, 0, 0, 0, (int*) order,
+              &min, (int*) min_order);
 
-    make_full_dependancy_mtx(num, dep_matrix, full_dep_matrix);
-    // sp8 = &work_order;
-    order_ptr = best_order;
-    // spC = &best_score;
-    // sp10 = order_ptr;
-    order_dag(num, dep_matrix, full_dep_matrix, list, 0, 0, 0, 0, work_order,
-              &best_score, order_ptr);
-    result_ptr = result;
-    count = 0;
-    while (count < num) {
-        *result_ptr = (HSD_TExp*) list[*order_ptr].tev;
-        c_dst_reg = (*result_ptr)->tev.c_dst;
-        if (c_dst_reg != 0xFF) {
-            resource->reg[c_dst_reg + 4].color = 3;
+    for (i = 0; i < num; i++) {
+        result[i] = (HSD_TExp*) list[min_order[i]].tev;
+        if (result[i]->tev.c_dst != 0xFF) {
+            resource->reg[result[i]->tev.c_dst + 4].color = 3;
 
-            for (i = 0; i < 4; i++) {
-                if (HSD_TExpGetType((*result_ptr)->tev.c_in[i].exp) ==
-                    HSD_TE_TEV)
+            for (j = 0; j < 4; j++) {
+                if (HSD_TExpGetType(result[i]->tev.c_in[j].exp) == HSD_TE_TEV)
                 {
-                    if ((*result_ptr)->tev.c_in[i].sel == 1) {
-                        (*result_ptr)->tev.c_in[i].arg =
-                            HSD_TExpDag_80407AA0_44
-                                [(*result_ptr)->tev.c_in[i].exp->tev.c_dst];
+                    if (result[i]->tev.c_in[j].sel == 1) {
+                        result[i]->tev.c_in[j].arg =
+                            c_in[result[i]->tev.c_in[j].exp->tev.c_dst];
                     } else {
-                        (*result_ptr)->tev.c_in[i].arg =
-                            HSD_TExpDag_80407AA0_54
-                                [(*result_ptr)->tev.c_in[i].exp->tev.c_dst];
+                        result[i]->tev.c_in[j].arg =
+                            a_in[result[i]->tev.c_in[j].exp->tev.c_dst];
                     }
                 }
             }
         }
-        a_dst_reg = (*result_ptr)->tev.a_dst;
-        if (a_dst_reg != 0xFF) {
-            resource->reg[a_dst_reg + 4].alpha = 1;
+        if (result[i]->tev.a_dst != 0xFF) {
+            resource->reg[result[i]->tev.a_dst + 4].alpha = 1;
 
-            for (i = 0; i < 4; i++) {
-                if (HSD_TExpGetType((*result_ptr)->tev.a_in[i].exp) ==
-                    HSD_TE_TEV)
+            for (j = 0; j < 4; j++) {
+                if (HSD_TExpGetType(result[i]->tev.a_in[j].exp) == HSD_TE_TEV)
                 {
-                    (*result_ptr)->tev.a_in[i].arg = HSD_TExpDag_80407AA0_64
-                        [(*result_ptr)->tev.a_in[i].exp->tev.a_dst];
+                    result[i]->tev.a_in[j].arg =
+                        args[result[i]->tev.a_in[j].exp->tev.a_dst];
                 }
             }
         }
-        order_ptr += 1;
-        result_ptr += 1;
-        count += 1;
     }
 }
 
