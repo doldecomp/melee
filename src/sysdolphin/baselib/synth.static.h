@@ -47,11 +47,6 @@ static int hsd_SynthSFXBank[0x80 / 4];
 static int hsd_SynthSFXBankHead[0x84 / 4];
 static struct HSD_SynthSFXNode hsd_SynthSFXNodes[0x40];
 
-static struct {
-    /* 00 */ s32 x0;
-    /* 04 */ char pad[0x1C];
-} lbl_804C4540[3];
-
 static float HSD_Synth_804D6030 = 1.0f;
 
 static struct {
@@ -63,6 +58,11 @@ static struct {
 #define HSD_SYNTHSFXGROUP_MAX 0x100
 
 static int HSD_Synth_804C28E0_1844[HSD_SYNTHSFXGROUP_MAX];
+
+static struct {
+    /* 00 */ s32 x0;
+    /* 04 */ char pad[0x1C];
+} lbl_804C4540[3];
 
 static int hsd_SynthSFXBankNum;
 

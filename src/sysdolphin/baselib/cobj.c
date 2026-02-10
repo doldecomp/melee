@@ -658,6 +658,9 @@ static int roll2upvec(HSD_CObj* cobj, Vec3* up, float roll)
     Mtx m;
 
     int res = HSD_CObjGetEyeVector(cobj, &eye);
+    if (res != 0) {
+        return res;
+    }
     if (1.0 - fabsf_p(&eye.y) < 0.0001) {
         v0.x = sqrtf(eye.y * eye.y + eye.z * eye.z);
         v0.y = eye.y * (-eye.x / v0.x);

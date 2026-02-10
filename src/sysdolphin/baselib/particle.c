@@ -262,6 +262,8 @@ void fn_80392934(void)
 static s32 lbl_804D6088 = 4;
 static s32 lbl_804D608C = 1;
 
+#pragma push
+#pragma dont_inline on
 void fn_80392A08(int arg0, int arg1, int arg2)
 {
     lbl_804D6088 = arg0;
@@ -273,6 +275,7 @@ void fn_80392A08(int arg0, int arg1, int arg2)
     }
     hsd_804D7888 = arg2;
 }
+#pragma pop
 
 /// #fn_80392A3C
 
@@ -572,7 +575,7 @@ int hsd_80393A5C(char* filename, int data, int size)
     return size;
 }
 
-static struct {
+typedef struct {
     /* 00 */ u8 x0_b0 : 1;
     /* 00 */ u8 x0_b1 : 1;
     /* 04 */ u8* out_buf;
@@ -586,8 +589,9 @@ static struct {
     /* 18 */ int x18;
     /* 1C */ int x1C;
     /* 20 */ int x20;
-    /* 24 */ int x24;
-} hsd_804CF7E8;
+} ParticleConsoleState;
+
+extern ParticleConsoleState hsd_804CF7E8;
 
 void fn_80393C14(const u8* buf, size_t size)
 {
@@ -836,6 +840,8 @@ u8 hsd_80394128(s32 arg0, s32 arg1)
     return result;
 }
 #pragma pop
+
+ParticleConsoleState hsd_804CF7E8;
 
 /// #hsd_803941E8
 
@@ -2301,7 +2307,7 @@ void hsd_8039EE24(u32 arg0)
 }
 
 // @TODO: Currently 95.45% match - 2 dead beq instructions in target
-HSD_Generator* hsd_8039EFAC(s8 arg0, s32 arg1, s32 arg2, HSD_JObj* jobj)
+HSD_Generator* hsd_8039EFAC(s32 arg0, s32 arg1, s32 arg2, HSD_JObj* jobj)
 {
     HSD_Generator* gen;
 
@@ -2318,7 +2324,7 @@ HSD_Generator* hsd_8039EFAC(s8 arg0, s32 arg1, s32 arg2, HSD_JObj* jobj)
 /// #hsd_8039F05C
 
 // @TODO: Currently 95.83% match - dead beq instructions in target
-HSD_Generator* hsd_8039F6CC(s8 arg0, s32 arg1, s32 arg2, HSD_JObj* jobj)
+HSD_Generator* hsd_8039F6CC(s32 arg0, s32 arg1, s32 arg2, HSD_JObj* jobj)
 {
     HSD_Generator* gen;
 
