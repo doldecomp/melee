@@ -3,6 +3,6 @@
 
 #include <platform.h>
 
-float HSD_ByteCodeEval(u8* pc, float* args, u32 nb_args);
+float HSD_ByteCodeEval(u8* pc, float* args, int nb_args);
 
 #endif
