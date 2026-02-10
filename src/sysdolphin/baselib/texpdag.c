@@ -1,5 +1,6 @@
 #include "texpdag.h"
 
+#include "texp.h"
 #include "tobj.h"
 
 int assign_reg(int num, u32* unused, HSD_TExpDag* list, int* order)
@@ -392,87 +393,49 @@ int HSD_TExpSimplify(HSD_TExp* texp_)
 
 int HSD_TExpSimplify2(HSD_TExp* texp)
 {
-    HSD_TExp* child;
-    u8 sel;
+    HSD_TExp* src_exp;
+    u8 src_sel;
     int i;
-    int r3;
-    int r4;
-    int r5;
-    int r6;
 
     for (i = 0; i < 4; i++) {
-        child = texp->tev.c_in[i].exp;
-        sel = texp->tev.c_in[i].sel;
-        if (texp->tev.c_in[i].type == HSD_TE_TEV && sel == 1) {
-            r3 = 0;
-            r4 = 0;
-            r5 = 0;
-            r6 = 0;
-            if (child->tev.c_op == 0 && child->tev.c_in[0].sel == HSD_TE_0) {
-                r6 = 1;
-            }
-            if (r6 != 0 && child->tev.c_in[1].sel == HSD_TE_0) {
-                r5 = 1;
-            }
-            if (r5 != 0 && child->tev.c_bias == 0) {
-                r4 = 1;
-            }
-            if (r4 != 0 && child->tev.c_scale == 0) {
-                r3 = 1;
-            }
-            if (r3 != 0) {
-                switch (child->tev.c_in[3].type) {
-                case HSD_TE_KONST:
-                    if (texp->tev.kcsel == 0xFF) {
-                        texp->tev.kcsel = child->tev.kcsel;
-                    } else if (texp->tev.kcsel != child->tev.kcsel) {
-                        break;
-                    }
-                    /* fallthrough */
-                case HSD_TE_IMM:
-                    texp->tev.c_in[i] = child->tev.c_in[3];
-                    HSD_TExpRef(texp->tev.c_in[i].exp, texp->tev.c_in[i].sel);
-                    HSD_TExpUnref(child, sel);
+        src_exp = texp->tev.c_in[i].exp;
+        src_sel = texp->tev.c_in[i].sel;
+        if (texp->tev.c_in[i].type == HSD_TE_TEV && src_sel == 1 &&
+            IsThroughColor(src_exp))
+        {
+            switch (src_exp->tev.c_in[3].type) {
+            case HSD_TE_KONST:
+                if (texp->tev.kcsel == 0xFF) {
+                    texp->tev.kcsel = src_exp->tev.kcsel;
+                } else if (texp->tev.kcsel != src_exp->tev.kcsel) {
                     break;
                 }
+                /* fallthrough */
+            case HSD_TE_IMM:
+                texp->tev.c_in[i] = src_exp->tev.c_in[3];
+                HSD_TExpRef(texp->tev.c_in[i].exp, texp->tev.c_in[i].sel);
+                HSD_TExpUnref(src_exp, src_sel);
+                break;
             }
         }
     }
     for (i = 0; i < 4; i++) {
-        child = texp->tev.a_in[i].exp;
-        sel = texp->tev.a_in[i].sel;
-        if (texp->tev.a_in[i].type == HSD_TE_TEV) {
-            r3 = 0;
-            r4 = 0;
-            r5 = 0;
-            r6 = 0;
-            if (child->tev.a_op == 0 && child->tev.a_in[0].sel == HSD_TE_0) {
-                r6 = 1;
-            }
-            if (r6 != 0 && child->tev.a_in[1].sel == HSD_TE_0) {
-                r5 = 1;
-            }
-            if (r5 != 0 && child->tev.a_bias == 0) {
-                r4 = 1;
-            }
-            if (r4 != 0 && child->tev.a_scale == 0) {
-                r3 = 1;
-            }
-            if (r3 != 0) {
-                switch (child->tev.a_in[3].type) {
-                case HSD_TE_KONST:
-                    if (texp->tev.kasel == 0xFF) {
-                        texp->tev.kasel = child->tev.kasel;
-                    } else if (texp->tev.kasel != child->tev.kasel) {
-                        break;
-                    }
-                    /* fallthrough */
-                case HSD_TE_IMM:
-                    texp->tev.a_in[i] = child->tev.a_in[3];
-                    HSD_TExpRef(texp->tev.a_in[i].exp, texp->tev.a_in[i].sel);
-                    HSD_TExpUnref(child, sel);
+        src_exp = texp->tev.a_in[i].exp;
+        src_sel = texp->tev.a_in[i].sel;
+        if (texp->tev.a_in[i].type == HSD_TE_TEV && IsThroughAlpha(src_exp)) {
+            switch (src_exp->tev.a_in[3].type) {
+            case HSD_TE_KONST:
+                if (texp->tev.kasel == 0xFF) {
+                    texp->tev.kasel = src_exp->tev.kasel;
+                } else if (texp->tev.kasel != src_exp->tev.kasel) {
                     break;
                 }
+                /* fallthrough */
+            case HSD_TE_IMM:
+                texp->tev.a_in[i] = src_exp->tev.a_in[3];
+                HSD_TExpRef(texp->tev.a_in[i].exp, texp->tev.a_in[i].sel);
+                HSD_TExpUnref(src_exp, src_sel);
+                break;
             }
         }
     }
