@@ -1,6 +1,7 @@
 #include "grbigblue.h"
 
 #include "grbigblue.static.h"
+
 #include "grdisplay.h"
 #include "grfzerocar.h"
 #include "grmaterial.h"
@@ -8,11 +9,6 @@
 
 #include <platform.h>
 
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjproc.h>
-#include <baselib/jobj.h>
-#include <baselib/memory.h>
-#include <baselib/random.h>
 #include "cm/camera.h"
 #include "gm/gm_1A45.h"
 #include "gr/grzakogenerator.h"
@@ -29,6 +25,11 @@
 
 #include <math.h>
 #include <trigf.h>
+#include <baselib/gobjgxlink.h>
+#include <baselib/gobjproc.h>
+#include <baselib/jobj.h>
+#include <baselib/memory.h>
+#include <baselib/random.h>
 
 #define M_TAU 6.283185307179586
 
@@ -329,8 +330,8 @@ void grBigBlue_801E6298(Ground_GObj* gobj)
     jobj3 = Ground_801C3FA4(gobj, 3);
     jobj4 = Ground_801C3FA4(gobj, 4);
     jobj5 = Ground_801C3FA4(gobj, 2);
-    Ground_801C4E70(Ground_801C3FA4(gobj, 5), jobj5, jobj4, jobj3,
-                    jobj2, jobj1);
+    Ground_801C4E70(Ground_801C3FA4(gobj, 5), jobj5, jobj4, jobj3, jobj2,
+                    jobj1);
     gp->x11_flags.b012 = 2;
 }
 
@@ -392,8 +393,7 @@ void grBigBlue_801E6364(Ground_GObj* gobj)
         HSD_JObjReparent(cur, ((HSD_JObj**) gp->gv.bigblue.xC8)[i]);
         HSD_JObjSetRotationY(cur, rot_y);
 
-        scale.x = scale.y = scale.z =
-            Ground_801C0498() * grBb_804D69C8->xC;
+        scale.x = scale.y = scale.z = Ground_801C0498() * grBb_804D69C8->xC;
 
         HSD_JObjSetScale(((HSD_JObj**) gp->gv.bigblue.xC8)[i], &scale);
 
@@ -744,11 +744,8 @@ f32 grBigBlue_801E8B84(f32 right, f32 left, f32 bottom, f32 top)
 
     for (i = 0; i < 4; i++) {
         if ((unsigned) (gp[0xD4] >> 2 & 0x3F) != 1U) {
-            if (*(f32*) (gp + 0xE4) < right &&
-                *(f32*) (gp + 0xE4) > left)
-            {
-                if (*(f32*) (gp + 0xE0) < top &&
-                    *(f32*) (gp + 0xE0) > bottom)
+            if (*(f32*) (gp + 0xE4) < right && *(f32*) (gp + 0xE4) > left) {
+                if (*(f32*) (gp + 0xE0) < top && *(f32*) (gp + 0xE0) > bottom)
                 {
                     if (*(f32*) (gp + 0xE4) > result) {
                         result = *(f32*) (gp + 0xE4);
@@ -807,8 +804,7 @@ void grBigBlue_801E8D64(Ground_GObj* gobj)
     HSD_JObjSetTranslateZ(jobj, 0.0F);
 
     *(f32*) ((u8*) gp + 0xD8) = 0.0F;
-    *(s32*) ((u8*) gp + 0xC8) =
-        (s32) (grBb_804D69C8->xD8);
+    *(s32*) ((u8*) gp + 0xC8) = (s32) (grBb_804D69C8->xD8);
     *(u8*) ((u8*) gp + 0xC4) = 2;
 
     grAnime_801C8138(gobj, gp->map_id, 0);
@@ -1153,9 +1149,9 @@ void grBigBlue_801EB4AC(Ground_GObj* gobj)
 
     /* Hide current lane's jobj */
     HSD_JObjSetFlagsAll(
-        Ground_801C3FA4(gobj,
-            grBb_TrackEntries[
-                (*(u32*) (gp + 0xC4) >> 15) & 0x7F].jobj_index),
+        Ground_801C3FA4(
+            gobj,
+            grBb_TrackEntries[(*(u32*) (gp + 0xC4) >> 15) & 0x7F].jobj_index),
         JOBJ_HIDDEN);
 
     /* Copy current lane to previous lane: rlwimi hw, word, 23, 19, 25 */
@@ -1175,8 +1171,8 @@ void grBigBlue_801EB4AC(Ground_GObj* gobj)
     }
 
     /* Get new lane's jobj and position */
-    jobj = Ground_801C3FA4(gobj,
-        grBb_TrackEntries[gp[0xC6] & 0x7F].jobj_index);
+    jobj =
+        Ground_801C3FA4(gobj, grBb_TrackEntries[gp[0xC6] & 0x7F].jobj_index);
 
     lb_8000B1CC(jobj, NULL, &sp_pos);
     *(f32*) (gp + 0xC8) = sp_pos.x;
@@ -1210,15 +1206,13 @@ void grBigBlue_801EB4AC(Ground_GObj* gobj)
         } else {
             f32 scale = Ground_801C0498();
             f32 vel = *(f32*) (gp + 0xCC);
-            f32 neg_speed =
-                -(grBb_804D69C8->x4 * scale);
+            f32 neg_speed = -(grBb_804D69C8->x4 * scale);
 
             if (vel < neg_speed) {
                 *(s16*) (gp + 0xF0) = -1;
             } else {
                 f32 scale2 = Ground_801C0498();
-                f32 pos_speed =
-                    grBb_804D69C8->x8 * scale2;
+                f32 pos_speed = grBb_804D69C8->x8 * scale2;
 
                 if (vel > pos_speed) {
                     *(s16*) (gp + 0xF0) = 1;
@@ -1283,9 +1277,9 @@ void grBigBlue_801EB4AC(Ground_GObj* gobj)
             f32 vel = *(f32*) (gp + 0xCC);
             f32 speed = grBb_804D69C8->x8;
             f32 target = speed * scale + vel;
-            f32 pos = sp_pos.y +
-                grBb_TrackEntries[
-                    (*(u32*) (gp + 0xC4) >> 15) & 0x7F].delta.y +
+            f32 pos =
+                sp_pos.y +
+                grBb_TrackEntries[(*(u32*) (gp + 0xC4) >> 15) & 0x7F].delta.y +
                 entry->delta.y;
 
             if (pos < target) {
@@ -1308,12 +1302,9 @@ void grBigBlue_801EB4AC(Ground_GObj* gobj)
     HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
 
     /* Add current lane deltas (re-extract lane each time, no CSE) */
-    sp_pos.x +=
-        grBb_TrackEntries[(*(u32*) (gp + 0xC4) >> 15) & 0x7F].delta.x;
-    sp_pos.y +=
-        grBb_TrackEntries[(*(u32*) (gp + 0xC4) >> 15) & 0x7F].delta.y;
-    sp_pos.z +=
-        grBb_TrackEntries[(*(u32*) (gp + 0xC4) >> 15) & 0x7F].delta.z;
+    sp_pos.x += grBb_TrackEntries[(*(u32*) (gp + 0xC4) >> 15) & 0x7F].delta.x;
+    sp_pos.y += grBb_TrackEntries[(*(u32*) (gp + 0xC4) >> 15) & 0x7F].delta.y;
+    sp_pos.z += grBb_TrackEntries[(*(u32*) (gp + 0xC4) >> 15) & 0x7F].delta.z;
 
     /* Set translate on new jobj (inline expands assert + dirty) */
     HSD_JObjSetTranslate(jobj, &sp_pos);
@@ -1512,14 +1503,12 @@ void grBigBlue_801EC6C0(Ground_GObj* gobj)
 
             params = grBb_804D69C8;
             scale = Ground_801C0498();
-            lerp =
-                (f32) (k + 1) * ((f32) params->x1C * scale /
-                                 (f32) (params->x18 + 1));
+            lerp = (f32) (k + 1) *
+                   ((f32) params->x1C * scale / (f32) (params->x18 + 1));
 
             scale = Ground_801C0498();
             params = grBb_804D69C8;
-            *(f32*) (car + 0xE0) =
-                lerp + 0.5F * (-(f32) params->x1C * scale);
+            *(f32*) (car + 0xE0) = lerp + 0.5F * (-(f32) params->x1C * scale);
 
             scale = Ground_801C0498();
             params = grBb_804D69C8;
@@ -1527,21 +1516,18 @@ void grBigBlue_801EC6C0(Ground_GObj* gobj)
 
             scale = Ground_801C0498();
             params = grBb_804D69C8;
-            *(f32*) (car + 0xE4) =
-                params->x0 * scale + lerp;
+            *(f32*) (car + 0xE4) = params->x0 * scale + lerp;
 
             *(f32*) (car + 0xE8) = 0.0F;
 
             params = grBb_804D69C8;
             scale = Ground_801C0498();
-            lerp =
-                (f32) (k + 1) * ((f32) params->x1C * scale /
-                                 (f32) (params->x18 + 1));
+            lerp = (f32) (k + 1) *
+                   ((f32) params->x1C * scale / (f32) (params->x18 + 1));
 
             scale = Ground_801C0498();
             params = grBb_804D69C8;
-            *(f32*) (car + 0xD8) =
-                lerp + 0.5F * (-(f32) params->x1C * scale);
+            *(f32*) (car + 0xD8) = lerp + 0.5F * (-(f32) params->x1C * scale);
 
             *(f32*) (car + 0xDC) = 0.0F;
 
@@ -1663,9 +1649,8 @@ void grBigBlue_801ED694(Ground_GObj* gobj, s32 lane)
                 idx = 0;
                 if (st != 1 && st != 7 && st != 8) {
                     active++;
-                    if (idx != lane &&
-                        *(f32*) (gp + 0xE0) <
-                            *(f32*) (gp + lane_offset + 0xE0))
+                    if (idx != lane && *(f32*) (gp + 0xE0) <
+                                           *(f32*) (gp + lane_offset + 0xE0))
                     {
                         behind++;
                     }
@@ -1679,9 +1664,8 @@ void grBigBlue_801ED694(Ground_GObj* gobj, s32 lane)
                 idx = 1;
                 if (st != 1 && st != 7 && st != 8) {
                     active++;
-                    if (idx != lane &&
-                        *(f32*) (iter + 0xE0) <
-                            *(f32*) (gp + lane_offset + 0xE0))
+                    if (idx != lane && *(f32*) (iter + 0xE0) <
+                                           *(f32*) (gp + lane_offset + 0xE0))
                     {
                         behind++;
                     }
@@ -1695,9 +1679,8 @@ void grBigBlue_801ED694(Ground_GObj* gobj, s32 lane)
                 iter += 0x40;
                 if (st != 1 && st != 7 && st != 8) {
                     active++;
-                    if (idx != lane &&
-                        *(f32*) (iter + 0xE0) <
-                            *(f32*) (gp + lane_offset + 0xE0))
+                    if (idx != lane && *(f32*) (iter + 0xE0) <
+                                           *(f32*) (gp + lane_offset + 0xE0))
                     {
                         behind++;
                     }
@@ -1711,9 +1694,8 @@ void grBigBlue_801ED694(Ground_GObj* gobj, s32 lane)
                 iter += 0x40;
                 if (st != 1 && st != 7 && st != 8) {
                     active++;
-                    if (idx != lane &&
-                        *(f32*) (iter + 0xE0) <
-                            *(f32*) (gp + lane_offset + 0xE0))
+                    if (idx != lane && *(f32*) (iter + 0xE0) <
+                                           *(f32*) (gp + lane_offset + 0xE0))
                     {
                         behind++;
                     }
@@ -1724,8 +1706,8 @@ void grBigBlue_801ED694(Ground_GObj* gobj, s32 lane)
             {
                 f32 scale = Ground_801C0498();
                 s32 total = grBb_804D69C8->x1C;
-                rank_factor = (f32)(behind + 1) *
-                    ((f32)(active + 1) * scale / (f32) total);
+                rank_factor = (f32) (behind + 1) *
+                              ((f32) (active + 1) * scale / (f32) total);
             }
 
             {
@@ -1751,8 +1733,7 @@ void grBigBlue_801ED694(Ground_GObj* gobj, s32 lane)
     }
 
     /* Velocity update: vel += accel */
-    *(f32*) (gp + lane_offset + 0xFC) +=
-        *(f32*) (gp + lane_offset + 0x100);
+    *(f32*) (gp + lane_offset + 0xFC) += *(f32*) (gp + lane_offset + 0x100);
 
     /* Clamp velocity to +-max_speed*scale */
     {
@@ -1762,16 +1743,14 @@ void grBigBlue_801ED694(Ground_GObj* gobj, s32 lane)
 
         if (vel > max_spd * scale) {
             f32 s2 = Ground_801C0498();
-            *(f32*) (gp + lane_offset + 0xFC) =
-                grBb_804D69C8->x24 * s2;
+            *(f32*) (gp + lane_offset + 0xFC) = grBb_804D69C8->x24 * s2;
         } else {
             f32 s2 = Ground_801C0498();
             f32 lim = grBb_804D69C8->x24 * s2;
 
             if (vel < -lim) {
                 f32 s3 = Ground_801C0498();
-                *(f32*) (gp + lane_offset + 0xFC) =
-                    -(grBb_804D69C8->x24 * s3);
+                *(f32*) (gp + lane_offset + 0xFC) = -(grBb_804D69C8->x24 * s3);
             }
         }
     }
@@ -1780,9 +1759,8 @@ void grBigBlue_801ED694(Ground_GObj* gobj, s32 lane)
     {
         f32 vel = *(f32*) (gp + lane_offset + 0xFC);
         *(f32*) (gp + lane_offset + 0xDC) += vel;
-        *(f32*) (gp + lane_offset + 0xE0) =
-            *(f32*) (gp + lane_offset + 0xD8) +
-            *(f32*) (gp + lane_offset + 0xDC);
+        *(f32*) (gp + lane_offset + 0xE0) = *(f32*) (gp + lane_offset + 0xD8) +
+                                            *(f32*) (gp + lane_offset + 0xDC);
     }
 
     /* Height/bounce simulation */
@@ -1791,8 +1769,7 @@ void grBigBlue_801ED694(Ground_GObj* gobj, s32 lane)
         f32 grav = grBb_804D69C8->x48;
 
         *(f32*) (gp + lane_offset + 0xF4) += grav * scale;
-        *(f32*) (gp + lane_offset + 0xF8) +=
-            *(f32*) (gp + lane_offset + 0xF4);
+        *(f32*) (gp + lane_offset + 0xF8) += *(f32*) (gp + lane_offset + 0xF4);
 
         if (*(f32*) (gp + lane_offset + 0xF8) > 0.0F) {
             *(f32*) (gp + lane_offset + 0xF8) = 0.0F;
@@ -1803,8 +1780,7 @@ void grBigBlue_801ED694(Ground_GObj* gobj, s32 lane)
 
             if (*(f32*) (gp + lane_offset + 0xF8) < -(blim * s2)) {
                 f32 s3 = Ground_801C0498();
-                *(f32*) (gp + lane_offset + 0xF8) =
-                    -(grBb_804D69C8->x4C * s3);
+                *(f32*) (gp + lane_offset + 0xF8) = -(grBb_804D69C8->x4C * s3);
             }
         }
     } else {
@@ -1830,8 +1806,7 @@ void grBigBlue_801ED694(Ground_GObj* gobj, s32 lane)
             }
             {
                 f32 s4 = Ground_801C0498();
-                heading_val =
-                    grBb_804D69C8->x34 * s4 + rank_factor;
+                heading_val = grBb_804D69C8->x34 * s4 + rank_factor;
             }
         } else if (vel < 0.0F) {
             f32 s1 = Ground_801C0498();
@@ -1847,8 +1822,7 @@ void grBigBlue_801ED694(Ground_GObj* gobj, s32 lane)
             }
             {
                 f32 s4 = Ground_801C0498();
-                heading_val =
-                    grBb_804D69C8->x34 * s4 + rank_factor;
+                heading_val = grBb_804D69C8->x34 * s4 + rank_factor;
             }
         } else {
             f32 s1 = Ground_801C0498();
@@ -1871,12 +1845,11 @@ void grBigBlue_801ED694(Ground_GObj* gobj, s32 lane)
         f32 rotation;
         f32 ang_accel = grBb_804D69C8->x40;
 
-        *(f32*) (gp + lane_offset + 0x104) +=
-            (f32) 0.017453292F * ang_accel;
+        *(f32*) (gp + lane_offset + 0x104) += (f32) 0.017453292F * ang_accel;
         rotation = *(f32*) (gp + lane_offset + 0x104);
 
         if (rotation > M_TAU) {
-            rotation = (f32)(rotation - M_TAU);
+            rotation = (f32) (rotation - M_TAU);
             *(f32*) (gp + lane_offset + 0x104) = rotation;
         }
 
@@ -1896,9 +1869,8 @@ void grBigBlue_801ED694(Ground_GObj* gobj, s32 lane)
     /* Collision/grounding check */
     if ((gp[lane_offset + 0xD4] >> 1) & 1) {
         /* Grounded path */
-        ground_y = grBigBlue_801EC58C(
-            (Vec3*) (gp + lane_offset + 0xE0), &sp_vec,
-            (f32) 1.5707963F);
+        ground_y = grBigBlue_801EC58C((Vec3*) (gp + lane_offset + 0xE0),
+                                      &sp_vec, (f32) 1.5707963F);
 
         if (0.0F != ground_y && ground_y > rank_factor) {
             if (*(f32*) (gp + lane_offset + 0x10C) < 0.0F) {
@@ -1933,15 +1905,13 @@ void grBigBlue_801ED694(Ground_GObj* gobj, s32 lane)
             track_gp = (u8*) track_gobj->user_data;
             HSD_ASSERT(3256, track_gp);
             *(f32*) (gp + lane_offset + 0xE4) +=
-                *(f32*) (track_gp + 0xCC) -
-                *(f32*) (track_gp + 0xD8);
+                *(f32*) (track_gp + 0xCC) - *(f32*) (track_gp + 0xD8);
         }
     } else {
         /* Non-grounded path */
         f32 s = Ground_801C0498();
-        ground_y = grBigBlue_801EC58C(
-            (Vec3*) (gp + lane_offset + 0xE0), &sp_vec,
-            20.0F * s);
+        ground_y = grBigBlue_801EC58C((Vec3*) (gp + lane_offset + 0xE0),
+                                      &sp_vec, 20.0F * s);
 
         if (0.0F != ground_y) {
             f32 s2 = Ground_801C0498();
@@ -1950,8 +1920,7 @@ void grBigBlue_801ED694(Ground_GObj* gobj, s32 lane)
                 heading_osc + *(f32*) (gp + lane_offset + 0xF8) +
                 (drag * s2 + ground_y);
         } else {
-            gp[lane_offset + 0xD4] =
-                (gp[lane_offset + 0xD4] & ~0x02) | 0x02;
+            gp[lane_offset + 0xD4] = (gp[lane_offset + 0xD4] & ~0x02) | 0x02;
             {
                 f32 s2 = Ground_801C0498();
                 rank_factor = grBb_804D69C8->x84 * s2;
@@ -1967,9 +1936,7 @@ heading_converge:
         f32 smooth = grBb_804D69C8->x50;
         f31_rot += smooth * (angle - f31_rot);
     } else {
-        f32 target_angle =
-            (f32) 0.017453292F *
-            grBb_804D69C8->x58;
+        f32 target_angle = (f32) 0.017453292F * grBb_804D69C8->x58;
         f32 damp = grBb_804D69C8->x54;
         f31_rot += damp * (target_angle - f31_rot);
     }
@@ -1999,8 +1966,7 @@ s32 grBigBlue_801EDF44(Ground_GObj* gobj, s32 index)
         f32 blast = Stage_GetBlastZoneRightOffset();
         f32 scale = Ground_801C0498();
 
-        if (*(f32*) (gp + offset + 0xE0) >
-            blast + grBb_804D69C8->x68 * scale)
+        if (*(f32*) (gp + offset + 0xE0) > blast + grBb_804D69C8->x68 * scale)
         {
             if (0.0F != *(f32*) (gp + offset + 0xEC)) {
                 result = 9;
@@ -2014,8 +1980,7 @@ s32 grBigBlue_801EDF44(Ground_GObj* gobj, s32 index)
         f32 blast = Stage_GetBlastZoneLeftOffset();
         f32 scale = Ground_801C0498();
 
-        if (*(f32*) (gp + offset + 0xE0) <
-            blast - grBb_804D69C8->x68 * scale)
+        if (*(f32*) (gp + offset + 0xE0) < blast - grBb_804D69C8->x68 * scale)
         {
             if (0.0F != *(f32*) (gp + offset + 0xEC)) {
                 result = 9;
@@ -2189,12 +2154,10 @@ bool grBigBlue_801EEF00(Ground_GObj* gobj, s32 index)
             norm = abs_speed / (grBb_804D69C8->x28 * scale);
             if ((f32) * (s32*) (gp + offset + 0xF0) > norm) {
                 scale = Ground_801C0498();
-                *(f32*) (gp + offset + 0x100) =
-                    -(grBb_804D69C8->x28 * scale);
+                *(f32*) (gp + offset + 0x100) = -(grBb_804D69C8->x28 * scale);
             } else {
                 scale = Ground_801C0498();
-                *(f32*) (gp + offset + 0x100) =
-                    grBb_804D69C8->x28 * scale;
+                *(f32*) (gp + offset + 0x100) = grBb_804D69C8->x28 * scale;
             }
         } else {
             abs_speed = *(f32*) (gp + offset + 0xFC);
@@ -2205,12 +2168,10 @@ bool grBigBlue_801EEF00(Ground_GObj* gobj, s32 index)
             norm = abs_speed / (grBb_804D69C8->x28 * scale);
             if ((f32) * (s32*) (gp + offset + 0xF0) > norm) {
                 scale = Ground_801C0498();
-                *(f32*) (gp + offset + 0x100) =
-                    grBb_804D69C8->x28 * scale;
+                *(f32*) (gp + offset + 0x100) = grBb_804D69C8->x28 * scale;
             } else {
                 scale = Ground_801C0498();
-                *(f32*) (gp + offset + 0x100) =
-                    -(grBb_804D69C8->x28 * scale);
+                *(f32*) (gp + offset + 0x100) = -(grBb_804D69C8->x28 * scale);
             }
         }
         break;
@@ -2231,14 +2192,12 @@ bool grBigBlue_801EEF00(Ground_GObj* gobj, s32 index)
             if (*(f32*) (gp + offset + 0xE0) < Stage_GetCamBoundsRightOffset())
             {
                 scale = Ground_801C0498();
-                *(f32*) (gp + offset + 0x100) =
-                    grBb_804D69C8->x28 * scale;
+                *(f32*) (gp + offset + 0x100) = grBb_804D69C8->x28 * scale;
                 break;
             }
         }
         scale = Ground_801C0498();
-        *(f32*) (gp + offset + 0x100) =
-            -(grBb_804D69C8->x28 * scale);
+        *(f32*) (gp + offset + 0x100) = -(grBb_804D69C8->x28 * scale);
         break;
     }
 
@@ -2257,14 +2216,12 @@ bool grBigBlue_801EEF00(Ground_GObj* gobj, s32 index)
             if (*(f32*) (gp + offset + 0xE0) > Stage_GetCamBoundsLeftOffset())
             {
                 scale = Ground_801C0498();
-                *(f32*) (gp + offset + 0x100) =
-                    -(grBb_804D69C8->x28 * scale);
+                *(f32*) (gp + offset + 0x100) = -(grBb_804D69C8->x28 * scale);
                 break;
             }
         }
         scale = Ground_801C0498();
-        *(f32*) (gp + offset + 0x100) =
-            grBb_804D69C8->x28 * scale;
+        *(f32*) (gp + offset + 0x100) = grBb_804D69C8->x28 * scale;
         break;
     }
 
@@ -2287,8 +2244,7 @@ bool grBigBlue_801EEF00(Ground_GObj* gobj, s32 index)
         if (target > *(f32*) (gp + offset + 0xE0)) {
             if (*(f32*) (gp + offset + 0xFC) < 0.0F) {
                 scale = Ground_801C0498();
-                *(f32*) (gp + offset + 0x100) =
-                    grBb_804D69C8->x28 * scale;
+                *(f32*) (gp + offset + 0x100) = grBb_804D69C8->x28 * scale;
             } else {
                 f32 spd;
                 f32 pos;
@@ -2305,8 +2261,7 @@ bool grBigBlue_801EEF00(Ground_GObj* gobj, s32 index)
 
                 if (predicted < target) {
                     scale = Ground_801C0498();
-                    *(f32*) (gp + offset + 0x100) =
-                        grBb_804D69C8->x28 * scale;
+                    *(f32*) (gp + offset + 0x100) = grBb_804D69C8->x28 * scale;
                 } else {
                     scale = Ground_801C0498();
                     *(f32*) (gp + offset + 0x100) =
@@ -2316,8 +2271,7 @@ bool grBigBlue_801EEF00(Ground_GObj* gobj, s32 index)
         } else {
             if (*(f32*) (gp + offset + 0xFC) > 0.0F) {
                 scale = Ground_801C0498();
-                *(f32*) (gp + offset + 0x100) =
-                    -(grBb_804D69C8->x28 * scale);
+                *(f32*) (gp + offset + 0x100) = -(grBb_804D69C8->x28 * scale);
             } else {
                 f32 spd;
                 f32 pos;
@@ -2335,8 +2289,7 @@ bool grBigBlue_801EEF00(Ground_GObj* gobj, s32 index)
 
                 if (predicted < target) {
                     scale = Ground_801C0498();
-                    *(f32*) (gp + offset + 0x100) =
-                        grBb_804D69C8->x28 * scale;
+                    *(f32*) (gp + offset + 0x100) = grBb_804D69C8->x28 * scale;
                 } else {
                     scale = Ground_801C0498();
                     *(f32*) (gp + offset + 0x100) =
@@ -2363,16 +2316,14 @@ bool grBigBlue_801EEF00(Ground_GObj* gobj, s32 index)
     case 7: {
         f32 scale = Ground_801C0498();
 
-        *(f32*) (gp + offset + 0x100) =
-            grBb_804D69C8->x28 * scale;
+        *(f32*) (gp + offset + 0x100) = grBb_804D69C8->x28 * scale;
         break;
     }
 
     case 8: {
         f32 scale = Ground_801C0498();
 
-        *(f32*) (gp + offset + 0x100) =
-            -(grBb_804D69C8->x28 * scale);
+        *(f32*) (gp + offset + 0x100) = -(grBb_804D69C8->x28 * scale);
         break;
     }
 
@@ -2439,13 +2390,14 @@ void grBigBlue_801EF424(Ground_GObj* gobj)
                     absDiff = diff;
                 }
 
-                if (absDiff < Ground_801C0498() * (f32) grBb_804D69C8->x20)
-                {
+                if (absDiff < Ground_801C0498() * (f32) grBb_804D69C8->x20) {
                     f32 adjustment;
                     if (diff > zero) {
-                        adjustment = Ground_801C0498() * (f32) grBb_804D69C8->x20;
+                        adjustment =
+                            Ground_801C0498() * (f32) grBb_804D69C8->x20;
                     } else {
-                        adjustment = -(Ground_801C0498() * (f32) grBb_804D69C8->x20);
+                        adjustment =
+                            -(Ground_801C0498() * (f32) grBb_804D69C8->x20);
                     }
 
                     diff -= adjustment;

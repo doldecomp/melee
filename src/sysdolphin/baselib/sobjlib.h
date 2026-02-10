@@ -24,8 +24,8 @@ struct HSD_SObj {
 /* 3A44D4 */ UNK_RET HSD_SObjLib_803A44D4(UNK_PARAMS);
 /* 3A466C */ UNK_RET HSD_SObjLib_803A466C(UNK_PARAMS);
 /* 3A4740 */ void HSD_SObjLib_803A4740(HSD_JObj*);
-/* 3A477C */ HSD_SObj* HSD_SObjLib_803A477C(HSD_GObj*, int, int,
-                                                       int, int, int);
+/* 3A477C */ HSD_SObj* HSD_SObjLib_803A477C(HSD_GObj*, int, int, int, int,
+                                            int);
 /* 3A49E0 */ void HSD_SObjLib_803A49E0(HSD_GObj*, int);
 /* 3A4A68 */ UNK_RET HSD_SObjLib_803A4A68(UNK_PARAMS);
 /* 3A54EC */ void HSD_SObjLib_803A54EC(HSD_GObj*, int);
