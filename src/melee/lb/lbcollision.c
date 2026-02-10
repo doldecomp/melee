@@ -30,11 +30,11 @@
                                          MtxPtr arg6, Vec3* arg7, float* arg8,
                                          float scl, float arg10, float arg11);
 
-// .sdata
+/// .sdata
 static GXColor lbColl_804D36D4 = { 0, 0x80, 0xFF, 0x80 };
 static GXColor lbColl_804D36D8 = { 0, 0x40, 0x80, 0x80 };
 
-// .sdata2
+/// .sdata2
 float const lbColl_804D79F0 = 1e-5;
 float const lbColl_804D79F4 = -1e-5;
 float const lbColl_804D79F8 = 0;
@@ -51,7 +51,7 @@ float const lbColl_804D7A38 = 3;
 float const lbColl_804D7A3C = 0.5;
 float const lbColl_804D7A40 = 5;
 
-// .data
+/// .data
 int lbColl_803B9880[] = {
     0x00083D60, 0x00083D60, 0x00083D60, 0x0000005B, 0x0000005A, 0x00000059,
     0x00000058, 0x00000057, 0x00000056, 0x0000006F, 0x00000070, 0x00000071,
@@ -85,7 +85,7 @@ u8 lbl_803B9E20[0xA0] = { 0 };
 u8 lbColl_803B9EC0[0x60] = { 0 };
 u8 lbColl_803B9F20[0xA0] = { 0 };
 
-// .text
+/// .text
 
 int lbColl_80005BB0(HitCapsule* arg0, int arg1)
 {

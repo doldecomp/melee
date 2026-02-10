@@ -21,8 +21,8 @@
 #include <baselib/lobj.h>
 #include <baselib/random.h>
 
-// Forward declaration of grVe_Data for use by multiple functions
-// TODO: This struct should be defined in gr/types.h or a proper header
+/// Forward declaration of grVe_Data for use by multiple functions
+/// @todo This struct should be defined in gr/types.h or a proper header
 typedef struct grVe_Data {
     char x0[0x44];
     StageCallbacks callbacks[1]; // at offset 0x44
@@ -33,7 +33,7 @@ typedef struct grVe_Data {
 
 extern grVe_Data grVe_803E5348;
 
-// TODO: Move these local structs to proper headers
+/// @todo Move these local structs to proper headers
 typedef struct grVe_ExtData {
     char pad[0x20];
     void* x20[3];
@@ -70,9 +70,9 @@ typedef struct grVe_GroundData {
 
 void grVenom_80203B14(bool arg) {}
 
-// grVenom_80203B18
-// @TODO: Currently 88.51% match - needs control flow/register allocation fix
-// Stage initialization function for Venom
+/// grVenom_80203B18
+/// @todo Currently 88.51% match - needs control flow/register allocation fix
+/// Stage initialization function for Venom
 
 extern f32 grVe_804DB738;
 extern f32 grVe_804DB73C;
@@ -221,7 +221,7 @@ bool grVenom_80203EA4(void)
     return false;
 }
 
-// grVenom_80203EAC
+/// grVenom_80203EAC
 
 Ground_GObj* grVenom_80203EAC(int gobj_id)
 {
@@ -269,7 +269,7 @@ void grVenom_80203FCC(Ground_GObj* arg) {}
 
 void grVenom_80203FD0(Ground_GObj* arg) {}
 
-// @TODO: Currently 99.90% match - needs minor register allocation fix
+/// @todo Currently 99.90% match - needs minor register allocation fix
 void grVenom_80203FD4(Ground_GObj* gobj)
 {
     HSD_JObj* jobj1;
@@ -312,7 +312,7 @@ void fn_802040B4(Ground_GObj* gobj)
     }
 }
 
-// grVenom_802040F0
+/// grVenom_802040F0
 
 void grVenom_802040F0(Ground_GObj* gobj)
 {
@@ -350,8 +350,8 @@ bool grVenom_8020427C(Ground_GObj* arg)
     return false;
 }
 
-// grVenom_80204284
-// @TODO: Currently 97.29% match - needs minor register allocation fix
+/// grVenom_80204284
+/// @todo Currently 97.29% match - needs minor register allocation fix
 void grVenom_80204284(Ground_GObj* gobj)
 {
     Ground* gp;
@@ -381,9 +381,8 @@ void grVenom_80204284(Ground_GObj* gobj)
                 other_gobj = (Ground_GObj*) grVenom_80203EAC(1);
                 if (other_gobj != NULL) {
                     Ground* other_gp = GET_GROUND(other_gobj);
-                    grCorneria_801E25C4(other_gobj,
-                                        &other_gp->gv.venom.xC4, 4, 6,
-                                        0x6B6CC);
+                    grCorneria_801E25C4(other_gobj, &other_gp->gv.venom.xC4, 4,
+                                        6, 0x6B6CC);
                 }
             } else {
                 ifStatus_802F6898();
@@ -404,8 +403,8 @@ void grVenom_80204284(Ground_GObj* gobj)
 
 void grVenom_80204424(Ground_GObj* arg) {}
 
-// @TODO: Currently 99.70% match - needs register allocation fix
-// FAKE MATCH: grVenom_GroundVars has wrong types for this function
+/// @todo Currently 99.70% match - needs register allocation fix
+/// FAKE MATCH: grVenom_GroundVars has wrong types for this function
 void grVenom_80204428(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
@@ -443,16 +442,16 @@ bool grVenom_80204544(Ground_GObj* arg)
 
 void grVenom_80204B84(Ground_GObj* arg) {}
 
-// grVenom_80204B88
-// Updates Venom stage lighting colors based on environment state.
+/// grVenom_80204B88
+/// Updates Venom stage lighting colors based on environment state.
 
 extern GXColor grVe_804DB7D8;
 extern GXColor grVe_804DB7DC;
 extern GXColor grVe_804DB7E0;
 extern GXColor grVe_804DB7E4;
 
-// TODO: grVenom_GroundVars in types.h has xE0 as f32, but this function
-// treats it as a bitfield. The struct needs to be updated.
+/// @todo grVenom_GroundVars in types.h has xE0 as f32, but this function
+/// treats it as a bitfield. The struct needs to be updated.
 typedef struct GroundVenom_ForLighting {
     char pad[0xE0];
     struct {
@@ -555,9 +554,9 @@ void grVenom_80204DB0(Ground_GObj* gobj)
     un_802FF620();
 }
 
-// grVenom_80204DD4
-// Unit: main/melee/gr/grvenom
-// Manual expansion of HSD_JObjSetScaleX/Y without using inline functions
+/// grVenom_80204DD4
+/// Unit: main/melee/gr/grvenom
+/// Manual expansion of HSD_JObjSetScaleX/Y without using inline functions
 
 void grVenom_80204DD4(Ground_GObj* gobj)
 {
@@ -610,8 +609,8 @@ bool grVenom_802052D8(Ground_GObj* arg)
     return false;
 }
 
-// @TODO: Currently 99.92% match - needs minor register allocation fix
-// TODO: VenomSpawnData struct should be defined in gr/types.h or grvenom.h
+/// @todo Currently 99.92% match - needs minor register allocation fix
+/// @todo VenomSpawnData struct should be defined in gr/types.h or grvenom.h
 typedef struct {
     u8 pad[0x218];
     f32 x;
@@ -655,9 +654,9 @@ void grVenom_802052E0(Ground_GObj* gobj, Vec3* pos)
     }
 }
 
-// grVenom_802053B0
-// @TODO: Currently 92.15% match - needs register allocation fix
-// Needs: grVe_804DB740 extern float
+/// grVenom_802053B0
+/// @todo Currently 92.15% match - needs register allocation fix
+/// Needs: grVe_804DB740 extern float
 
 extern f32 grVe_804DB740;
 
@@ -760,7 +759,7 @@ void grVenom_802053B0(Ground_GObj* gobj)
 
 void grVenom_802056AC(Ground_GObj* arg) {}
 
-// grVenom_802056B0
+/// grVenom_802056B0
 
 extern int grVe_803E5380[];
 extern int grVe_803E5680[];
@@ -800,8 +799,8 @@ bool grVenom_80205750(Ground_GObj* arg)
 
 void grVenom_80205AD0(Ground_GObj* arg) {}
 
-// grVenom_80205AD4
-// @TODO: Currently 92.66% match - needs minor code ordering fix
+/// grVenom_80205AD4
+/// @todo Currently 92.66% match - needs minor code ordering fix
 void grVenom_80205AD4(Ground_GObj* gobj)
 {
     u8* base;
@@ -908,7 +907,7 @@ s32 grVenom_80205DF8(Vec3* pos)
     return 0;
 }
 
-// grVenom_80205E84
+/// grVenom_80205E84
 
 float Stage_GetBlastZoneBottomOffset(void);
 float Stage_GetBlastZoneLeftOffset(void);
@@ -937,8 +936,8 @@ s32 grVenom_80205E84(Vec2* pos)
 void grVenom_80206870(Ground_GObj* arg) {}
 
 #if 0
-// grVenom_80206874
-// @TODO: Currently 32.92% match - below 50% threshold, needs significant work
+/// grVenom_80206874
+/// @todo Currently 32.92% match - below 50% threshold, needs significant work
 void grVenom_80206874(Ground_GObj* gobj)
 {
     u8* base;
@@ -996,9 +995,7 @@ void grVenom_80206874(Ground_GObj* gobj)
     } else {
         *(s32*)&gp->gv.venom.xE0 = -1;
         *(s32*)&gp->gv.venom.xE4 = -1;
-    }
-
-    // TODO: Need grVe_804D6A30 struct with cam_zoom_rate at 0x34
+    } ///< @todo Need grVe_804D6A30 struct with cam_zoom_rate at 0x34
     // scaled = scale_factor * grVe_804D6A30->cam_zoom_rate;
     // HSD_JObjSetScaleX/Y/Z(jobj, scaled);
 }
@@ -1065,7 +1062,7 @@ bool grVenom_80206BF0(int arg0)
     return 1;
 }
 
-// grVenom_80206CB0
+/// grVenom_80206CB0
 
 void grVenom_80206CB0(s32 arg0)
 {

@@ -16,7 +16,7 @@ typedef struct {
     u8 unk3;
     HSD_Text* text;
 } Menu;
-// size 0x8
+/// size 0x8
 
 struct CountEntry {
     u8 id;

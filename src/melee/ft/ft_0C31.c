@@ -217,7 +217,7 @@ void ftCo_EntryStart_Coll(Fighter_GObj* gobj)
     }
 }
 
-// you have to ask the compiler nicely for it to work
+/// you have to ask the compiler nicely for it to work
 static inline void ftCo_800C6AFC_please_dontinline(HSD_JObj* jobj)
 {
     ftCo_800C6AFC(jobj);
@@ -228,7 +228,7 @@ static inline void ftCo_800C6AFC_dontinline(HSD_JObj* jobj)
     ftCo_800C6AFC_please_dontinline(jobj);
 }
 
-// @todo figure out proper inlining for this function
+/// @todo figure out proper inlining for this function
 inline void fake_HSD_JObjSetTranslate(HSD_JObj* jobj, Vec3* translate)
 {
 #undef __FILE__

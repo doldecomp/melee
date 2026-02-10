@@ -50,7 +50,7 @@
 /* 307E84 */ void fn_80307E84(HSD_GObj* gobj);
 /* 307F64 */ void un_80307F64(s32, s32);
 /* 30813C */ char* un_8030813C(s16 arg0,
-                               enum_t unused); /// TODO :: fill out the struct
+                               enum_t unused); /// @todo :: fill out the struct
                                                /// that this uses/returns
 /* 308250 */ UNK_RET un_80308250(UNK_PARAMS);
 /* 3082F8 */ void un_803082F8(s16 idx);

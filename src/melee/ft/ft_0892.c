@@ -27,7 +27,7 @@
 
 /// #ft_800895E0
 
-// Local struct with bitfields - reversed order for MWCC big-endian
+/// Local struct with bitfields - reversed order for MWCC big-endian
 typedef struct {
     s32 x0;
     s32 x4;
@@ -189,7 +189,7 @@ bool ft_8008A244(Fighter_GObj* gobj)
     return false;
 }
 
-// Seems to be called to end many actions if no frames are remaining
+/// Seems to be called to end many actions if no frames are remaining
 void ft_8008A2BC(HSD_GObj* gobj)
 {
     if (ftLib_800872A4(gobj) == FTKIND_MASTERH) {
@@ -206,7 +206,7 @@ void ft_8008A324(HSD_GObj* gobj)
     ft_8008A348(gobj, -1.0f);
 }
 
-// Transition state to ftCo_MS_Wait or otherwise neutral state
+/// Transition state to ftCo_MS_Wait or otherwise neutral state
 void ft_8008A348(Fighter_GObj* fighter_gobj, float anim_blend)
 {
     Fighter* fighter;

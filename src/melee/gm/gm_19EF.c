@@ -29,7 +29,7 @@ static struct {
     u16 x22;
 } lbl_80479A98;
 
-// seems to handle "Go!" animations, based on .dat filenames
+/// seems to handle "Go!" animations, based on .dat filenames
 
 /// #fn_8019F9C4
 

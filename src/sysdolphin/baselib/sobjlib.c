@@ -44,8 +44,8 @@ void HSD_SObjLib_803A44A4(void)
     HSD_ObjAllocInit(&HSD_SObjLib_804D10E0, 0x9C, 4);
 }
 
-/* @TODO: 99.56% match - needs register allocation fix (r4 vs r5 for cur) */
-/* @TODO: 99.56% match - needs register allocation fix (r4 vs r5 for cur) */
+/* @todo 99.56% match - needs register allocation fix (r4 vs r5 for cur) */
+/* @todo 99.56% match - needs register allocation fix (r4 vs r5 for cur) */
 void HSD_SObjLib_803A44D4(HSD_GObj* gobj, HSD_SObj* sobj, u8 priority)
 {
     HSD_SObj* cur;
@@ -185,10 +185,10 @@ void HSD_SObjLib_803A54EC(HSD_GObj* gobj, int unused)
         GXSetCurrentMtx(0);
         HSD_CObjGetViewingMtx(HSD_CObjGetCurrent(), viewmtx);
         GXLoadPosMtxImm(viewmtx, 0);
-        GXSetTexCoordGen2(GX_TEXCOORD0, GX_TG_MTX2x4, GX_TG_TEX0,
-                          GX_IDENTITY, GX_FALSE, GX_PTIDENTITY);
-        GXSetTexCoordGen2(GX_TEXCOORD1, GX_TG_MTX2x4, GX_TG_TEX0,
-                          GX_IDENTITY, GX_FALSE, GX_PTIDENTITY);
+        GXSetTexCoordGen2(GX_TEXCOORD0, GX_TG_MTX2x4, GX_TG_TEX0, GX_IDENTITY,
+                          GX_FALSE, GX_PTIDENTITY);
+        GXSetTexCoordGen2(GX_TEXCOORD1, GX_TG_MTX2x4, GX_TG_TEX0, GX_IDENTITY,
+                          GX_FALSE, GX_PTIDENTITY);
         HSD_SetupChannel(&data->x78_chan0);
         HSD_SetupChannel(&data->xA8_chan1);
         HSD_StateSetNumChans(1);
@@ -201,7 +201,7 @@ void HSD_SObjLib_803A54EC(HSD_GObj* gobj, int unused)
     HSD_StateSetZMode(1, 3, 1);
 }
 
-/* @TODO: 99.84% match - near_val variable forces 6 FPR saves but adds
+/* @todo 99.84% match - near_val variable forces 6 FPR saves but adds
  * 4 bytes to stack, shifting local offsets by 4 */
 void HSD_SObjLib_803A55DC(HSD_GObj* gobj, int width, int height, int priority)
 {
@@ -214,9 +214,9 @@ void HSD_SObjLib_803A55DC(HSD_GObj* gobj, int width, int height, int priority)
     f32 near_val = roll;
     f32 far_val = 0.5F;
     f32 top = roll;
-    f32 bottom = (f32) -(s32)(u16) height;
+    f32 bottom = (f32) - (s32) (u16) height;
     f32 left = roll;
-    f32 right = (f32)(u16) width;
+    f32 right = (f32) (u16) width;
 
     viewport.left = 0;
     viewport.right = width;

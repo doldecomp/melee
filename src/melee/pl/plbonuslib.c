@@ -21,7 +21,8 @@
 #include <MSL/math_ppc.h>
 
 /// @todo Lots of 6s in here
-// pl_8004049C seems to indicate it might have actually been `Gm_Player_NumMax`
+/// pl_8004049C seems to indicate it might have actually been
+/// `Gm_Player_NumMax`
 
 /* 03D514 */ static void plBonusLib_8003D514(int);
 
@@ -507,7 +508,7 @@ u32 pl_8003E420(int arg0)
     return sum;
 }
 
-// pl_8003E4A4
+/// pl_8003E4A4
 
 void pl_8003E70C(Item_GObj* igobj)
 {
@@ -837,7 +838,7 @@ void fn_8003EE2C(int arg0, int arg1)
     }
 }
 
-// fn_8003F294
+/// fn_8003F294
 
 void fn_8003F53C(int arg0, int arg1)
 {

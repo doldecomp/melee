@@ -132,7 +132,7 @@ void ftSk_SpecialAirHi_Enter(HSD_GObj* gobj)
 
 /// #ftSk_SpecialAirHi_Enter
 
-// Gelatart's scratch at https://decomp.me/scratch/ysptk
+/// Gelatart's scratch at https://decomp.me/scratch/ysptk
 void ftSk_SpecialHiStart_0_Anim(HSD_GObj* gobj)
 {
     if (ftAnim_IsFramesRemaining((Fighter_GObj*) gobj) == 0) {
@@ -140,8 +140,8 @@ void ftSk_SpecialHiStart_0_Anim(HSD_GObj* gobj)
     }
 }
 
-// Gelatart's scratch at https://decomp.me/scratch/Ws01S, forked from a
-// kipcode66 scratch
+/// Gelatart's scratch at https://decomp.me/scratch/Ws01S, forked from a
+/// kipcode66 scratch
 void ftSk_SpecialAirHiStart_0_Anim(HSD_GObj* gobj)
 {
     if (ftAnim_IsFramesRemaining((Fighter_GObj*) gobj) == 0) {
@@ -151,16 +151,16 @@ void ftSk_SpecialAirHiStart_0_Anim(HSD_GObj* gobj)
 
 void ftSk_SpecialHiStart_0_IASA(HSD_GObj* gobj) {}
 
-// Interrupt_SheikUpBStartAir
+/// Interrupt_SheikUpBStartAir
 void ftSk_SpecialAirHiStart_0_IASA(HSD_GObj* gobj) {}
 
-// Kipcode66's scratch at https://decomp.me/scratch/ANgXI seems to match this
+/// Kipcode66's scratch at https://decomp.me/scratch/ANgXI seems to match this
 void ftSk_SpecialHiStart_0_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C((Fighter_GObj*) gobj);
 }
 
-// Gelatart's scratch at https://decomp.me/scratch/8aRxF
+/// Gelatart's scratch at https://decomp.me/scratch/8aRxF
 void ftSk_SpecialAirHiStart_0_Phys(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -175,8 +175,8 @@ void ftSk_SpecialAirHiStart_0_Phys(HSD_GObj* gobj)
     ftCommon_8007D268(fp);
 }
 
-// Gelatart's scratch at https://decomp.me/scratch/xhYaR, forked from a
-// kipcode66 scratch
+/// Gelatart's scratch at https://decomp.me/scratch/xhYaR, forked from a
+/// kipcode66 scratch
 void ftSk_SpecialHiStart_0_Coll(HSD_GObj* gobj)
 {
     if (ft_80082708((Fighter_GObj*) gobj) == GA_Ground) {
@@ -184,7 +184,7 @@ void ftSk_SpecialHiStart_0_Coll(HSD_GObj* gobj)
     }
 }
 
-// Ribbanya's scratch at https://decomp.me/scratch/JHPTX seems to match this
+/// Ribbanya's scratch at https://decomp.me/scratch/JHPTX seems to match this
 void ftSk_SpecialAirHiStart_0_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -206,7 +206,7 @@ void ftSk_SpecialAirHiStart_0_Coll(HSD_GObj* gobj)
     }
 }
 
-// Kipcode66's scratch at https://decomp.me/scratch/eQhs5 seems to match this
+/// Kipcode66's scratch at https://decomp.me/scratch/eQhs5 seems to match this
 void ftSk_SpecialHi_80113324(Fighter_GObj* arg0)
 {
     Fighter* temp_r31;
@@ -218,7 +218,7 @@ void ftSk_SpecialHi_80113324(Fighter_GObj* arg0)
     temp_r31->accessory4_cb = fn_80112ED8;
 }
 
-// Kipcode66's scratch at https://decomp.me/scratch/Lda2E seems to match this
+/// Kipcode66's scratch at https://decomp.me/scratch/Lda2E seems to match this
 void ftSk_SpecialHi_80113390(Fighter_GObj* arg0)
 {
     Fighter* temp_r31;
@@ -230,7 +230,7 @@ void ftSk_SpecialHi_80113390(Fighter_GObj* arg0)
     temp_r31->accessory4_cb = fn_80112ED8;
 }
 
-// Kipcode66's scratch at https://decomp.me/scratch/6l76B seems to match this
+/// Kipcode66's scratch at https://decomp.me/scratch/6l76B seems to match this
 void ftSk_SpecialHiStart_1_Anim(HSD_GObj* gobj)
 {
     Fighter* fp;
@@ -243,10 +243,10 @@ void ftSk_SpecialHiStart_1_Anim(HSD_GObj* gobj)
     }
 }
 
-// Animation_SheikUpBTravel
+/// Animation_SheikUpBTravel
 
-// Gelatart's scratch at https://decomp.me/scratch/tHxCH, forked from a
-// kipcode66 scratch
+/// Gelatart's scratch at https://decomp.me/scratch/tHxCH, forked from a
+/// kipcode66 scratch
 void ftSk_SpecialAirHiStart_1_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -259,10 +259,10 @@ void ftSk_SpecialAirHiStart_1_Anim(HSD_GObj* gobj)
 
 void ftSk_SpecialHiStart_1_IASA(HSD_GObj* gobj) {}
 
-// Interrupt_SheikUpBTravelAir
+/// Interrupt_SheikUpBTravelAir
 void ftSk_SpecialAirHiStart_1_IASA(HSD_GObj* gobj) {}
 
-// Physics_SheikUpBTravelAir
+/// Physics_SheikUpBTravelAir
 
 void ftSk_SpecialHiStart_1_Phys(HSD_GObj* gobj)
 {
@@ -271,7 +271,7 @@ void ftSk_SpecialHiStart_1_Phys(HSD_GObj* gobj)
 
 void ftSk_SpecialAirHiStart_1_Phys(HSD_GObj* gobj) {}
 
-// Kipcode66's scratch at https://decomp.me/scratch/dULMS seems to match this
+/// Kipcode66's scratch at https://decomp.me/scratch/dULMS seems to match this
 void ftSk_SpecialHiStart_1_Coll(HSD_GObj* gobj)
 {
     s32 temp_r3;
@@ -371,9 +371,9 @@ void ftSk_SpecialAirHiStart_1_Coll(HSD_GObj* gobj)
     }
 }
 
-// AS_SheikUpBGroundtoAirFall?
-// PsiLupan's scratch at https://decomp.me/scratch/HAj21 seems to match this
-// Scratch has a comment defining static MotionFlags const coll_mf
+/// AS_SheikUpBGroundtoAirFall?
+/// PsiLupan's scratch at https://decomp.me/scratch/HAj21 seems to match this
+/// Scratch has a comment defining static MotionFlags const coll_mf
 void ftSk_SpecialHi_8011374C(Fighter_GObj* gobj)
 {
     u32 fighterFlags;
@@ -399,7 +399,7 @@ void ftSk_SpecialHi_8011374C(Fighter_GObj* gobj)
     fp->invisible = true;
 }
 
-// AS_SheikUpBLand
+/// AS_SheikUpBLand
 /*
 Vicious Grasshopper (anon)'s scratch at https://decomp.me/scratch/p2npY
 seems to match this.
@@ -432,7 +432,7 @@ void ftSk_SpecialHi_801137C8(Fighter_GObj* gobj)
     fp->invisible = true;
 }
 
-// AS_SheikUpBTravelGround
+/// AS_SheikUpBTravelGround
 static inline void inlineA0(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -521,7 +521,7 @@ void ftSk_SpecialHi_80113838(Fighter_GObj* gobj)
     ftSk_SpecialHi_80113A30(gobj);
 }
 
-// AS_SheikUpBTravelAir
+/// AS_SheikUpBTravelAir
 void ftSk_SpecialHi_80113A30(Fighter_GObj* gobj)
 {
     f32 stick_y;
@@ -574,8 +574,8 @@ void ftSk_SpecialHi_80113A30(Fighter_GObj* gobj)
     inlineA0(gobj);
 }
 
-// Grumpy Zebra (anon)'s fork at https://decomp.me/scratch/eGfdU of Gelatart's
-// scratch
+/// Grumpy Zebra (anon)'s fork at https://decomp.me/scratch/eGfdU of Gelatart's
+/// scratch
 void ftSk_SpecialHi_Anim(HSD_GObj* gobj)
 {
     FORCE_PAD_STACK_8;
@@ -585,7 +585,7 @@ void ftSk_SpecialHi_Anim(HSD_GObj* gobj)
     }
 }
 
-// Gelatart's scratch at https://decomp.me/scratch/2S6Ll
+/// Gelatart's scratch at https://decomp.me/scratch/2S6Ll
 void ftSk_SpecialAirHi_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -601,16 +601,16 @@ void ftSk_SpecialAirHi_Anim(HSD_GObj* gobj)
 
 void ftSk_SpecialHi_IASA(HSD_GObj* gobj) {}
 
-// Interrupt_SheikUpBEndAir
+/// Interrupt_SheikUpBEndAir
 void ftSk_SpecialAirHi_IASA(HSD_GObj* gobj) {}
 
-// Gelatart's scratch at https://decomp.me/scratch/dKeEf
+/// Gelatart's scratch at https://decomp.me/scratch/dKeEf
 void ftSk_SpecialHi_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C((Fighter_GObj*) gobj);
 }
 
-// Gelatart's scratch at https://decomp.me/scratch/rQtEW
+/// Gelatart's scratch at https://decomp.me/scratch/rQtEW
 void ftSk_SpecialAirHi_Phys(HSD_GObj* gobj)
 {
     u8 _[8];
@@ -631,7 +631,7 @@ void ftSk_SpecialAirHi_Phys(HSD_GObj* gobj)
     ftCommon_8007CEF4(fp);
 }
 
-// Gelatart's scratch at https://decomp.me/scratch/AWQjm
+/// Gelatart's scratch at https://decomp.me/scratch/AWQjm
 void ftSk_SpecialHi_Coll(HSD_GObj* gobj)
 {
     if (ft_800827A0((Fighter_GObj*) gobj) == 0) {
@@ -639,7 +639,7 @@ void ftSk_SpecialHi_Coll(HSD_GObj* gobj)
     }
 }
 
-// Gelatart's scratch at https://decomp.me/scratch/58XJm
+/// Gelatart's scratch at https://decomp.me/scratch/58XJm
 void ftSk_SpecialAirHi_Coll(HSD_GObj* gobj)
 {
     u8 _[8];
@@ -663,7 +663,7 @@ void ftSk_SpecialAirHi_Coll(HSD_GObj* gobj)
     }
 }
 
-// Gelatart's scratch at https://decomp.me/scratch/QTuAS
+/// Gelatart's scratch at https://decomp.me/scratch/QTuAS
 void ftSk_SpecialHi_80113E40(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -695,7 +695,7 @@ void ftSk_SpecialHi_80113EAC(Fighter_GObj* gobj)
     fp->gr_vel = fp->mv.co.common.x18 * attributes->x54;
 }
 
-// AS_SheikUpBFall
+/// AS_SheikUpBFall
 static void ftSk_SpecialHi_80113F68_inline(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);

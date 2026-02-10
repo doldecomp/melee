@@ -61,11 +61,11 @@ sislib_UnkAllocData* HSD_SisLib_804D7974;
 HSD_Text* HSD_SisLib_804D7978;
 sislib_UnkAlloc3* HSD_SisLib_804D797C;
 
-// extern ? *HSD_SisLib_804D796C;
-// extern u8 *HSD_SisLib_804D7978;
-// sislib_UnknownType001 HSD_SisLib_8040C490 = { 0, 1.0F };
+/// extern ? *HSD_SisLib_804D796C;
+/// extern u8 *HSD_SisLib_804D7978;
+/// sislib_UnknownType001 HSD_SisLib_8040C490 = { 0, 1.0F };
 
-// u8 HSD_SisLib_8040C490[0x60] = { 0 };
+/// u8 HSD_SisLib_8040C490[0x60] = { 0 };
 
 static f32
     HSD_SisLib_8040CB00; /* unable to generate initializer: unknown type */
@@ -76,10 +76,10 @@ static HSD_Archive* HSD_SisLib_804D1110[5];
 SIS* HSD_SisLib_804D1124[5];
 s8 HSD_SisLib_804D6390[4] = { 0, 0, 0, 0 };
 
-// @TODO: Currently 99.54% match - needs register allocation fix
-// (var_r4 allocated to r3 instead of r4)
-// a generic allocator used by multiple
-// data types
+/// @todo Currently 99.54% match - needs register allocation fix
+/// (var_r4 allocated to r3 instead of r4)
+/// a generic allocator used by multiple
+/// data types
 void* HSD_SisLib_803A5798(s32 size)
 {
     sislib_UnkAllocData* best;
@@ -168,8 +168,8 @@ void* HSD_SisLib_803A5798(s32 size)
     return best->data_1;
 }
 
-// @TODO: Currently 92.39% match - needs register allocation fix in
-// coalesce block (new_size/old_next register assignment differs)
+/// @todo Currently 92.39% match - needs register allocation fix in
+/// coalesce block (new_size/old_next register assignment differs)
 void HSD_SisLib_803A594C(void* ptr)
 {
     sislib_UnkAllocData* free_cur;
@@ -207,8 +207,7 @@ void HSD_SisLib_803A594C(void* ptr)
         }
         HSD_SisLib_804D7970 = alloc_cur;
         alloc_cur->data_0 = old_next;
-        HSD_SisLib_804D7970->data_1 =
-            (HSD_Text*) (HSD_SisLib_804D7970 + 1);
+        HSD_SisLib_804D7970->data_1 = (HSD_Text*) (HSD_SisLib_804D7970 + 1);
         HSD_SisLib_804D7970->size = new_size;
         return;
     }
@@ -484,8 +483,8 @@ void HSD_SisLib_803A5FBC(void)
     HSD_Free(HSD_SisLib_804D796C);
 }
 
-// @TODO: Currently 97.56% match - extra lwz reload optimized away by
-// compiler after dual global store
+/// @todo Currently 97.56% match - extra lwz reload optimized away by
+/// compiler after dual global store
 void HSD_SisLib_803A6048(u32 size)
 {
     sislib_UnkAllocData* alloc;
@@ -508,7 +507,7 @@ void HSD_SisLib_803A6048(u32 size)
     }
 }
 
-// GObj "remove" function callback
+/// GObj "remove" function callback
 void fn_803A60EC(void* gobj)
 {
     sislib_UnkAlloc3* curr = HSD_SisLib_804D797C;
@@ -715,11 +714,11 @@ HSD_Text* HSD_SisLib_803A6754(int font_idx, s32 context_id)
     buffer = HSD_SisLib_803A5798(0x80);
     alloc->data_1 = buffer;
     alloc->data_0 = (sislib_UnkAllocData*) buffer;
-    alloc->size = 0x80;
-    // @todo: This being a byte store means one of my assumptions is wrong;
+    alloc->size = 0x80; ///< @todo This being a byte store means one of my
+                        ///< assumptions is wrong;
     // maybe this is a different struct.
-    *(u8*) &alloc->data_0->data_0 = 0;
-    // @todo: Do any other Data struct usages have a 0xC member?
+    *(u8*) &alloc->data_0->data_0 =
+        0; ///< @todo Do any other Data struct usages have a 0xC member?
     *(&alloc->size + 1) = 0;
     HSD_SisLib_803A6368(text, 0);
     text->sis_buffer = (SIS*) alloc->data_1;
@@ -996,16 +995,13 @@ int HSD_SisLib_803A6B98(HSD_Text* text, float x, float y, const char* fmt, ...)
     u8 dead_r4_2;
     u8 dead_r6;
     u8* playhead;
-    va_list args;
-
-    // @todo: what size is this?
+    va_list args; ///< @todo what size is this?
     u8 sis_buf;
 
     encoded_len = 0; // some type of size
     alloc = text->alloc_data;
     sis_buf = 0;
-    if (fmt) {
-        // @todo: is this the correct usage of vaargs?
+    if (fmt) { ///< @todo is this the correct usage of vaargs?
         u8 buffer[256];
         va_start(args, fmt);
         vsnprintf((char*) buffer, -1, fmt, args);
@@ -1118,8 +1114,8 @@ int HSD_SisLib_803A6B98(HSD_Text* text, float x, float y, const char* fmt, ...)
     return (int) playhead;
 }
 
-// TODO there seems to be a file boundary before this function,
-// because its data section is 8-byte aligned after the previous C strings
+/// @todo there seems to be a file boundary before this function,
+/// because its data section is 8-byte aligned after the previous C strings
 u8* fn_803A6FEC(u8* sis_data, s32 entry_idx, s32* out_size)
 {
     s32 unused_r4;

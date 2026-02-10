@@ -243,7 +243,7 @@ inline void HSD_JObjSetupMatrix(HSD_JObj* jobj)
     HSD_JObjSetupMatrixSub(jobj);
 }
 
-// Why does this seem to be a define while the others are inline functions?
+/// Why does this seem to be a define while the others are inline functions?
 #define HSD_JObjSetMtxDirty(jobj)                                             \
     {                                                                         \
         if (jobj != NULL && !HSD_JObjMtxIsDirty(jobj)) {                      \

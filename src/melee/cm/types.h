@@ -179,17 +179,6 @@ struct Camera {
 };
 STATIC_ASSERT(sizeof(struct Camera) == 0x39C);
 
-// struct CameraUnkGlobals {
-//     /*  +0 */ float _0[11];
-//     /* +2C */ float x2C;
-//     /* +30 */ float x30;
-//     /* +34 */ float x34;
-//     /* +38 */ float x38;
-//     /* +3C */ float x3C;
-//     /* +40 */ float x40;
-//     /* +44 */ float _44[43];
-// };
-
 struct CameraUnkGlobals {
     /*  +0 */ float x0;
     /*  +4 */ float x4;

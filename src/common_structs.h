@@ -8,14 +8,14 @@
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
 
-// Most of these should be moved to independent headers once they are created
+/// Most of these should be moved to independent headers once they are created
 
-// SOUND EFFECTS
+/// SOUND EFFECTS
 
 #define SFX_VOLUME_MAX 0x7FU
 #define SFX_PAN_MID 0x40U
 
-// HSD_PAD
+/// HSD_PAD
 /// @todo @c PascalCase members
 typedef u32 HSD_Pad;
 
@@ -42,9 +42,9 @@ typedef u32 HSD_Pad;
 #define HSD_PAD_AB (HSD_PAD_A | HSD_PAD_B)
 #define HSD_PAD_XY (HSD_PAD_X | HSD_PAD_Y)
 
-// COLLISION FLAGS
+/// COLLISION FLAGS
 
-// From Ness's Yo-Yo collision check
+/// From Ness's Yo-Yo collision check
 
 /// @todo These (and #CollData::env_flags) should be a bitfield struct
 #define Collide_LeftWallPush 0x1

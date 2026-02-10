@@ -1,17 +1,16 @@
 #include "bytecode.h"
 
-#include <platform.h>
 #include <placeholder.h>
+#include <platform.h>
 
 #include "baselib/debug.h"
 #include "baselib/list.h"
 #include "baselib/random.h"
 
 #include <dolphin/os.h>
-
+#include <melee/lb/lb_00CE.h>
 #include <MSL/math.h>
 #include <MSL/trigf.h>
-#include <melee/lb/lb_00CE.h>
 
 typedef union {
     void* p;
@@ -71,8 +70,7 @@ float HSD_ByteCodeEval(u8* pc, float* args, u32 nb_args)
                     stack = HSD_SListRemove(stack);
                 }
                 break;
-            case 0x3C:
-            {
+            case 0x3C: {
                 HSD_SList* p = stack;
                 i = 0;
                 while (p != NULL && i < operand) {
@@ -80,12 +78,10 @@ float HSD_ByteCodeEval(u8* pc, float* args, u32 nb_args)
                     i++;
                 }
                 if (p == NULL) {
-                    OSReport("specified stack doesn't exist (%d).\n",
-                             operand);
+                    OSReport("specified stack doesn't exist (%d).\n", operand);
                     HSD_Panic("bytecode.c", 299, NULL);
                 } else {
-                    stack = HSD_SListAllocAndPrepend(
-                        stack, p->data);
+                    stack = HSD_SListAllocAndPrepend(stack, p->data);
                 }
                 break;
             }
@@ -236,13 +232,13 @@ float HSD_ByteCodeEval(u8* pc, float* args, u32 nb_args)
                 f32 val = ((ByteCodeVal*) &stack->data)->f;
                 if (val > 0.0F) {
                     f64 guess = __frsqrte((f64) val);
-                    guess = 0.5 * guess *
-                            -(((f64) val * (guess * guess)) - 3.0);
-                    guess = 0.5 * guess *
-                            -(((f64) val * (guess * guess)) - 3.0);
+                    guess =
+                        0.5 * guess * -(((f64) val * (guess * guess)) - 3.0);
+                    guess =
+                        0.5 * guess * -(((f64) val * (guess * guess)) - 3.0);
                     fv = (f32) ((f64) val *
-                               (0.5 * guess *
-                                -(((f64) val * (guess * guess)) - 3.0)));
+                                (0.5 * guess *
+                                 -(((f64) val * (guess * guess)) - 3.0)));
                     val = fv;
                 }
                 fv = val;
@@ -397,7 +393,7 @@ float HSD_ByteCodeEval(u8* pc, float* args, u32 nb_args)
                     }
                 }
                 fv = result;
-            stack->data = *(void**) &fv;
+                stack->data = *(void**) &fv;
             }
             break;
         case 0x33:
@@ -566,8 +562,7 @@ float HSD_ByteCodeEval(u8* pc, float* args, u32 nb_args)
             a = (s32) stack->data;
             stack = HSD_SListRemove(stack);
             b = (s32) stack->data;
-            stack->data =
-                (void*) (b + HSD_Randi((a - b) + 1));
+            stack->data = (void*) (b + HSD_Randi((a - b) + 1));
             break;
         default:
             OSReport("unexpected opcode 0x%x.\n");

@@ -6,7 +6,7 @@
 #include <MSL/math_ppc.h>
 #include <MSL/trigf.h>
 
-// @TODO: Currently 95.55% match - stack frame 8 bytes too large (80 vs 72)
+/// @todo Currently 95.55% match - stack frame 8 bytes too large (80 vs 72)
 s32 MatToQuat(Mtx m, Quaternion* q)
 {
     int nxt[] = { 1, 2, 0 };
@@ -21,12 +21,12 @@ s32 MatToQuat(Mtx m, Quaternion* q)
     int j;
     int k;
 
-    lenCol[0] = sqrtf(m[0][0] * m[0][0] + m[1][0] * m[1][0] +
-                       m[2][0] * m[2][0]);
-    lenCol[1] = sqrtf(m[0][1] * m[0][1] + m[1][1] * m[1][1] +
-                       m[2][1] * m[2][1]);
-    lenCol[2] = sqrtf(m[0][2] * m[0][2] + m[1][2] * m[1][2] +
-                       m[2][2] * m[2][2]);
+    lenCol[0] =
+        sqrtf(m[0][0] * m[0][0] + m[1][0] * m[1][0] + m[2][0] * m[2][0]);
+    lenCol[1] =
+        sqrtf(m[0][1] * m[0][1] + m[1][1] * m[1][1] + m[2][1] * m[2][1]);
+    lenCol[2] =
+        sqrtf(m[0][2] * m[0][2] + m[1][2] * m[1][2] + m[2][2] * m[2][2]);
 
     sc0 = m[0][0] / lenCol[0];
     sc1 = m[1][1] / lenCol[1];
@@ -56,12 +56,9 @@ s32 MatToQuat(Mtx m, Quaternion* q)
                   (m[k][k] / lenCol[k]));
         sc0 = 0.5F / s;
         q3[i] = 0.5F * s;
-        q->w = sc0 * ((m[k][j] / lenCol[j]) -
-                       (m[j][k] / lenCol[k]));
-        q3[j] = sc0 * ((m[j][i] / lenCol[i]) +
-                        (m[i][j] / lenCol[j]));
-        q3[k] = sc0 * ((m[k][i] / lenCol[i]) +
-                        (m[i][k] / lenCol[k]));
+        q->w = sc0 * ((m[k][j] / lenCol[j]) - (m[j][k] / lenCol[k]));
+        q3[j] = sc0 * ((m[j][i] / lenCol[i]) + (m[i][j] / lenCol[j]));
+        q3[k] = sc0 * ((m[k][i] / lenCol[i]) + (m[i][k] / lenCol[k]));
         q->x = q3[0];
         q->y = q3[1];
         q->z = q3[2];
@@ -88,8 +85,8 @@ s32 HSD_QuatLib_8037EB28(Mtx m, Vec3* euler)
     return 0;
 }
 
-// @TODO: Currently 87.16% match - temp register allocation (f3/f5, f4/f6
-// swapped) likely due to mwcc scheduler behavior
+/// @todo Currently 87.16% match - temp register allocation (f3/f5, f4/f6
+/// swapped) likely due to mwcc scheduler behavior
 s32 HSD_QuatLib_8037EC4C(Quaternion* p, Quaternion* q, Quaternion* out)
 {
     f32 py;
@@ -169,8 +166,7 @@ s32 EulerToQuat(Vec3* euler, Quaternion* q)
     return 0;
 }
 
-s32 HSD_QuatLib_8037EF28(Quaternion* p, Quaternion* q, Quaternion* out,
-                         f32 t)
+s32 HSD_QuatLib_8037EF28(Quaternion* p, Quaternion* q, Quaternion* out, f32 t)
 {
     f32 cosom;
     f32 t2;

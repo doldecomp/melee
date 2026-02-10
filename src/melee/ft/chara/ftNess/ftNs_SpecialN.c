@@ -22,7 +22,7 @@
 #include <common_structs.h>
 #include <dolphin/mtx.h>
 
-// SpecialN/SpecialAirN (PK Flash)
+/// SpecialN/SpecialAirN (PK Flash)
 #define FTNESS_SPECIALN_COLL_FLAG                                             \
     Ft_MF_SkipMatAnim | Ft_MF_SkipColAnim | Ft_MF_UpdateCmd |                 \
         Ft_MF_SkipItemVis | Ft_MF_Unk19 | Ft_MF_SkipModelPartVis |            \

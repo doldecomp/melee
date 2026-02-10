@@ -225,7 +225,7 @@ void hsd_80392474(void)
     hsd_804D7850 = 0;
 }
 
-// @TODO: Currently 97.38% match - beq vs bne+b for early return
+/// @todo Currently 97.38% match - beq vs bne+b for early return
 int fn_80392480(Event event, int priority)
 {
     HSD_SList* prev;
@@ -435,7 +435,7 @@ static s32 hsd_804CF740[16];
 
 extern int hsd_804D78A0;
 
-// @TODO: Currently 99.75% match - BSS relocation encoding difference
+/// @todo Currently 99.75% match - BSS relocation encoding difference
 bool hsd_803931A4(s32 exi_channel)
 {
     s32 channel;
@@ -507,7 +507,7 @@ void fn_803932D0(s32 type, u32 flags, s32 value)
     }
 }
 
-// @TODO: Currently 95.28% match - r30/r31 register swap and OSReport arg setup
+/// @todo Currently 95.28% match - r30/r31 register swap and OSReport arg setup
 s32 hsd_80393328(void)
 {
     s32 startTick;
@@ -564,7 +564,7 @@ void hsd_80393A54(int level)
     hsd_804D78C0 = level;
 }
 
-// @TODO: Currently 95.44% match - signed/unsigned float conversion swap
+/// @todo Currently 95.44% match - signed/unsigned float conversion swap
 int hsd_80393A5C(char* filename, int data, int size)
 {
     int ready;
@@ -658,7 +658,7 @@ void fn_80393C14(const u8* buf, size_t size)
     hsd_804CF7E8.x11 = line_len;
 }
 
-// @TODO: Currently 94.34% match - lbzu vs addi+lbz addressing pattern
+/// @todo Currently 94.34% match - lbzu vs addi+lbz addressing pattern
 s32 hsd_80393D2C(s32 enable)
 {
     s32 old = hsd_804CF7E8.x0_b1;
@@ -907,8 +907,8 @@ struct ParticleScreenState hsd_804CF810;
 
 extern u8 lbl_804088B8[];
 
-// @TODO: Currently 99.61% match - .bss.0 relocation symbol instead of
-// hsd_804CF810
+/// @todo Currently 99.61% match - .bss.0 relocation symbol instead of
+/// hsd_804CF810
 void hsd_80394314(void)
 {
     memset(&hsd_804CF810, 0, 0xD8);
@@ -941,8 +941,8 @@ void hsd_80394314(void)
     hsd_804CF810.xC4 = 0;
 }
 
-// @TODO: Currently 91.67% match - .bss.0 relocation causes add+lwz instead of
-// addi+lwzx
+/// @todo Currently 91.67% match - .bss.0 relocation causes add+lwz instead of
+/// addi+lwzx
 void hsd_80394434(void* text)
 {
     s32 x = hsd_804CF810.x4;
@@ -983,7 +983,7 @@ void hsd_80394434(void* text)
 
 /// #hsd_80394668
 
-// @TODO: Currently 83.27% match - instruction scheduling in loop bodies
+/// @todo Currently 83.27% match - instruction scheduling in loop bodies
 void hsd_80394950(OSContext* ctx)
 {
     OSContext tmp;
@@ -1028,7 +1028,7 @@ void hsd_80394950(OSContext* ctx)
     OSRestoreInterrupts(irq);
 }
 
-// @TODO: Currently 99.94% match - minor relocation difference
+/// @todo Currently 99.94% match - minor relocation difference
 void Exception_ReportStackTrace(OSContext* ctx, int max_depth)
 {
     u32 i;
@@ -1056,7 +1056,7 @@ void Exception_ReportStackTrace(OSContext* ctx, int max_depth)
 
 /// #Exception_ReportCodeline
 
-// @TODO: Currently 97.87% match - lwz r0 + mr r4 instead of lwz r4
+/// @todo Currently 97.87% match - lwz r0 + mr r4 instead of lwz r4
 void fn_80394DF4(void* node_ptr)
 {
     ExcptNode* node = node_ptr;
@@ -1166,7 +1166,7 @@ extern u8 lbl_8040AB20[];
 extern u8 lbl_8040B8AC[];
 extern u8 lbl_8040B904[];
 
-// @TODO: Currently 99.78% match - minor addressing difference
+/// @todo Currently 99.78% match - minor addressing difference
 void hsd_80395644(void)
 {
     void* saved;
@@ -1187,7 +1187,7 @@ void hsd_80395644(void)
     *p = saved;
 }
 
-// @TODO: Currently 99.78% match - minor addressing difference
+/// @todo Currently 99.78% match - minor addressing difference
 s32 hsd_803956D8(void* disp_ptr)
 {
     DispData* data = disp_ptr;
@@ -1219,7 +1219,7 @@ s32 hsd_803956D8(void* disp_ptr)
 
 /// #hsd_803957C0
 
-// @TODO: Currently 79.44% match - BSS layout offsets and epilogue ordering
+/// @todo Currently 79.44% match - BSS layout offsets and epilogue ordering
 #pragma push
 #pragma dont_inline on
 s32 hsd_80395970(void)
@@ -1336,7 +1336,7 @@ void fn_8039710C(void) {}
 
 /// #fn_80397374
 
-// @TODO: Currently 96.89% match - lwz directly to non-volatile + dead beq
+/// @todo Currently 96.89% match - lwz directly to non-volatile + dead beq
 void hsd_80397520(void* node_ptr)
 {
     PSNode* child1;
@@ -1685,7 +1685,7 @@ void hsd_803983A4(HSD_Generator* gen)
 
 static HSD_JObj* hsd_804D08E8[8];
 
-// @TODO: Currently 96.40% match - lis hoisting and r29/r30 register swap
+/// @todo Currently 96.40% match - lis hoisting and r29/r30 register swap
 void psInitDataBankLoad(int bank, int* cmdBank, int* texBank, u32* ref,
                         int* formBank)
 {
@@ -1743,7 +1743,7 @@ void psInitDataBank(int bank, int* cmdBank, int* texBank, u32* ref,
 
 /// #hsd_80398C04
 
-// @TODO: Currently 76.78% match - float stack parameter calling convention
+/// @todo Currently 76.78% match - float stack parameter calling convention
 void hsd_80398F0C(s32 bank, s32 id, s32 link_no, s32 pos_x, s32 pos_y,
                   s32 pos_z, s32 vel_x, s32 vel_y, f32 rate)
 {
@@ -1789,7 +1789,7 @@ s32 hsd_803991D8(HSD_Generator* gen, HSD_JObj* jobj, f32 force, f32 range)
 
 static void* hsd_804D0908[16];
 
-// @TODO: Currently 96.0% match - prologue instruction scheduling
+/// @todo Currently 96.0% match - prologue instruction scheduling
 void hsd_8039CEAC(u32 mask)
 {
     void** bins;
@@ -1826,8 +1826,8 @@ void hsd_8039CEAC(u32 mask)
     } while (i < 16);
 }
 
-// @TODO: Currently 96.59% match - instruction scheduling in address
-// computation
+/// @todo Currently 96.59% match - instruction scheduling in address
+/// computation
 void hsd_8039CF4C(s32 index, HSD_JObj* jobj)
 {
     if (index < 0 || index > 8) {
@@ -1867,7 +1867,7 @@ void hsd_8039D048(void* particle)
     }
 }
 
-// @TODO: Currently 93.38% match - BSS layout (offset) differences
+/// @todo Currently 93.38% match - BSS layout (offset) differences
 void hsd_8039D0A0(HSD_Generator* gen)
 {
     HSD_Particle* prev;
@@ -2122,7 +2122,7 @@ void hsd_8039D688(HSD_JObj* jobj, f32** unused1, s32 unused2)
     }
 }
 
-/// @TODO: Currently 94.68% match - Vec3 col stack offset wrong (sp+0x4C
+/// @todo Currently 94.68% match - Vec3 col stack offset wrong (sp+0x4C
 /// vs sp+0x1C), causing velocity transform scheduling differences
 void hsd_8039D71C(HSD_Generator* gen)
 {
@@ -2252,7 +2252,7 @@ HSD_Generator* hsd_8039D9C8(void)
 
 /// #hsd_8039DAD4
 
-// @TODO: Currently 98.57% match - register allocation (r30 vs r31 for gen)
+/// @todo Currently 98.57% match - register allocation (r30 vs r31 for gen)
 void hsd_8039EE24(u32 mask)
 {
     HSD_Generator* gen;
@@ -2309,7 +2309,7 @@ void hsd_8039EE24(u32 mask)
     }
 }
 
-// @TODO: Currently 95.45% match - 2 dead beq instructions in target
+/// @todo Currently 95.45% match - 2 dead beq instructions in target
 HSD_Generator* hsd_8039EFAC(s32 bank, s32 id, s32 link, HSD_JObj* jobj)
 {
     HSD_Generator* gen;
@@ -2326,7 +2326,7 @@ HSD_Generator* hsd_8039EFAC(s32 bank, s32 id, s32 link, HSD_JObj* jobj)
 
 /// #hsd_8039F05C
 
-// @TODO: Currently 95.83% match - dead beq instructions in target
+/// @todo Currently 95.83% match - dead beq instructions in target
 HSD_Generator* hsd_8039F6CC(s32 bank, s32 id, s32 link, HSD_JObj* jobj)
 {
     HSD_Generator* gen;

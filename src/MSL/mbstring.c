@@ -1,7 +1,7 @@
 #include "stdlib.h"
 
-// Widechar to multibyte string conversion,
-// doesn't care about proper conversion though?
+/// Widechar to multibyte string conversion,
+/// doesn't care about proper conversion though?
 size_t wcstombs(char* dest, const wchar_t* src, size_t max)
 {
     size_t i;

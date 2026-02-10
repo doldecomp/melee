@@ -957,7 +957,7 @@ typedef struct it_27CE_ItemVars {
     /* ip+DD4 */ void* attr;
 } it_27CE_ItemVars;
 
-// Should it_2F28 and it_27CF use the same structs?
+/// Should it_2F28 and it_27CF use the same structs?
 typedef struct it_27CF_ItemVars {
     f32 x0;
 } it_27CF_ItemVars;

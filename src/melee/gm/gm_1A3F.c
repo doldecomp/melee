@@ -297,7 +297,7 @@ u8 gm_801A43A0(u8 major_kind)
     return gm_80479D30.nums.pending_major;
 }
 
-// UnclePunch: Scene_Main
+/// UnclePunch: Scene_Main
 void gm_801A4510(void)
 {
     u32 unused;

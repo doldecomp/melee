@@ -113,18 +113,18 @@ void order_dag(int num, int* dep, int* full_dep, HSD_TExpDag* list, int depth,
                     } while (--n > 0);
                 }
             remainder: {
-                    int* src2 = order + i;
-                    int* dst2 = best_order + i;
+                int* src2 = order + i;
+                int* dst2 = best_order + i;
 
-                    n = num - i;
-                    if (i < num) {
-                        do {
-                            *dst2 = *src2;
-                            src2++;
-                            dst2++;
-                        } while (--n > 0);
-                    }
+                n = num - i;
+                if (i < num) {
+                    do {
+                        *dst2 = *src2;
+                        src2++;
+                        dst2++;
+                    } while (--n > 0);
                 }
+            }
             }
         }
     } else {
@@ -146,15 +146,15 @@ void order_dag(int num, int* dep, int* full_dep, HSD_TExpDag* list, int depth,
         dag = &list[node];
         new_available = blocked & ~dep_bits;
         if (dag->nb_dep == 1 && (new_available & dep[node])) {
-            order_dag(num, dep, full_dep, list, depth + 1,
-                      dag->depend[0]->idx, new_scheduled, new_available,
-                      order, best_score, best_order);
+            order_dag(num, dep, full_dep, list, depth + 1, dag->depend[0]->idx,
+                      new_scheduled, new_available, order, best_score,
+                      best_order);
         } else {
             for (i = 0; i < num; i++) {
                 if (new_available & (1 << i)) {
                     order_dag(num, dep, full_dep, list, depth + 1, i,
-                              new_scheduled, new_available, order,
-                              best_score, best_order);
+                              new_scheduled, new_available, order, best_score,
+                              best_order);
                 }
             }
         }
@@ -177,11 +177,11 @@ void CalcDistance(HSD_TExp** tevs, int* dist, HSD_TExp* tev, int num,
                 for (i = 0; i < 4; i++) {
                     if (tev->tev.c_in[i].type == 1) {
                         CalcDistance(tevs, dist, tev->tev.c_in[i].exp, num,
-                                    depth + 1);
+                                     depth + 1);
                     }
                     if (tev->tev.a_in[i].type == 1) {
                         CalcDistance(tevs, dist, tev->tev.a_in[i].exp, num,
-                                    depth + 1);
+                                     depth + 1);
                     }
                 }
             }

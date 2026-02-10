@@ -1069,7 +1069,7 @@ void HSD_CObjGetViewportf(HSD_CObj* cobj, HSD_RectF32* viewport)
 
 extern const f64 HSD_CObj_804DE4C8;
 
-// Uses s16 -> float cast literal
+/// Uses s16 -> float cast literal
 void HSD_CObjSetViewport(HSD_CObj* cobj, HSD_RectS16* viewport)
 {
     if (cobj == NULL) {

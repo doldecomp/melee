@@ -35,10 +35,10 @@
 #include <melee/pl/player.h>
 #include <melee/sc/types.h>
 
-typedef struct lbl_804706D8_t{
+typedef struct lbl_804706D8_t {
     s16 x0;
     s16 x2;
-}lbl_804706D8_t;
+} lbl_804706D8_t;
 
 lbl_804706D8_t lbl_804706D8[12];
 
@@ -702,7 +702,8 @@ bool fn_8017E160(void)
     return false;
 }
 
-void fn_8017E21C(void) {
+void fn_8017E21C(void)
+{
     int i;
     for (i = 0; i < 12; i++) {
         lbl_804706D8[i].x0 = -1;
@@ -852,14 +853,14 @@ u8 gm_8017ECA0(u8 difficulty, u8 stage_slot, u8 arg2)
 
 u8 gm_8017ECD4(u8 difficulty, u8 stage_slot, u8 arg2)
 {
-    return lbl_803D85F0[stage_slot + ((u8) difficulty * 5)].pad_14[arg2 * 3 +
-                                                                   1];
+    return lbl_803D85F0[stage_slot + ((u8) difficulty * 5)]
+        .pad_14[arg2 * 3 + 1];
 }
 
 u8 gm_8017ED08(u8 difficulty, u8 stage_slot, u8 arg2)
 {
-    return lbl_803D85F0[stage_slot + ((u8) difficulty * 5)].pad_14[arg2 * 3 +
-                                                                   2];
+    return lbl_803D85F0[stage_slot + ((u8) difficulty * 5)]
+        .pad_14[arg2 * 3 + 2];
 }
 
 f32 gm_8017ED3C(u8 difficulty, u8 stage_slot)

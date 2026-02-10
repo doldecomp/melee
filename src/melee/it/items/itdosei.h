@@ -7,8 +7,8 @@
 
 #include "it/items/types.h"
 
-// Keep this if it is NOT defined in itCommonItems.h or similar.
-// If you get a redefinition error for this too, remove it.
+/// Keep this if it is NOT defined in itCommonItems.h or similar.
+/// If you get a redefinition error for this too, remove it.
 typedef struct itDoseiAttributes {
     f32 unk0;
     f32 unk4;

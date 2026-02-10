@@ -51,9 +51,9 @@ static struct {
     int xE8; ///< game type
     u8 xEC;
     u8 xED;
-    u8 xEE; ///< roadmap (IrRdMap) progress
-    u8 xEF; ///< left char amt
-    u8 xF0; ///< right char amt
+    u8 xEE;    ///< roadmap (IrRdMap) progress
+    u8 xEF;    ///< left char amt
+    u8 xF0;    ///< right char amt
     u8 xF1[3]; ///< left char ids
     u8 xF4[3]; ///< right char ids
 } lbl_804735E8;

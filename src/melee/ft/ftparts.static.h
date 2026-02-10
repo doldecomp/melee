@@ -1,6 +1,6 @@
 #include <dolphin/mtx.h>
 
-// .bss
+/// .bss
 struct {
     Mtx mtx;
     u8 has_z_scale : 1;
