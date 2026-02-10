@@ -694,6 +694,9 @@ struct Unk1PData {
         /* 20 */ u32 x20;
         struct Unk1PData_x24 {
             /* 24 */ s8 ckind;
+            /* 25 */ u8 x1;
+            /* 26 */ u8 x2;
+            /* 27 */ u8 x3;
             /* 28 */ int x4;
             /* 2C */ int x8;
         } x24[3];
