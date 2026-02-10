@@ -1,15 +1,59 @@
 #include "hsd_3AA7.h"
 
 #include "hsd_3A94.h"
+#include "hsd_3B2E.h"
 
+#include <dolphin/card.h>
+#include <dolphin/os.h>
+
+/* 4D7980 */ static s32 hsd_804D7980;
 /* 4D7984 */ static volatile s32 hsd_804D7984;
 /* 4D7998 */ static s32 hsd_804D7998;
+/* 4D799C */ static s32 hsd_804D799C;
+
+typedef struct CardBufEntry {
+    s32 x0, x4, x8, xC;
+    s32 x10;
+    s32 x14, x18, x1C, x20;
+} CardBufEntry;
 
 /// #fn_803AA790
 
 /// #hsd_803AAA48
 
-/// #fn_803AC168
+// @TODO: Currently 91.67% match - volatile load scheduling in critical section
+s32 fn_803AC168(s32* arg0)
+{
+    BOOL state;
+    s32 mode;
+    s32 read_idx;
+    s32 old_entry;
+
+    state = OSDisableInterrupts();
+    read_idx = hsd_804D7980;
+    mode = hsd_804D799C;
+    old_entry = (s32) hsd_804D1148[hsd_804D7984][0];
+    OSRestoreInterrupts(state);
+
+    if (mode != 2) {
+        if (hsd_804D7984 == read_idx) {
+            if (mode != 0 || hsd_804D7984 != read_idx || old_entry != 0) {
+                return -265;
+            }
+        }
+    }
+
+    {
+        u8* dest = (u8*) hsd_804D1148 + hsd_804D7984 * 36;
+        hsd_804D7984 = (hsd_804D7984 + 1) % 128;
+        memcpy(dest, arg0, 36);
+    }
+
+    if (mode == 2) {
+        hsd_804D799C = 0;
+    }
+    return 0;
+}
 
 void fn_803AC258(s32 arg0, s32 arg1)
 {
@@ -57,7 +101,51 @@ void fn_803AC334(void)
     hsd_804D7998 = -1;
 }
 
-/// #hsd_803AC340
+// @TODO: Currently 99.50% match - return expression register allocation (add
+// dest r6 vs r3)
+int hsd_803AC340(void* arg0)
+{
+    u8* data = arg0;
+    int base_size;
+    int extra_size;
+    int has_small;
+    int i;
+
+    switch (data[0]) {
+    case 2:
+        base_size = 0x1800;
+        break;
+    case 1:
+        base_size = 0xE00;
+        break;
+    default:
+        base_size = 0;
+        break;
+    }
+
+    has_small = 0;
+    extra_size = 0;
+    i = 0;
+    while (i < 8 && data[i + 0xA] != 0) {
+        switch (data[i + 0x2]) {
+        case 2:
+            extra_size += 0x800;
+            break;
+        case 1:
+            has_small = 1;
+            extra_size += 0x400;
+            break;
+        }
+        i++;
+    }
+
+    if (has_small != 0) {
+        extra_size += 0x200;
+    }
+
+    extra_size += base_size;
+    return extra_size + 0x40;
+}
 
 void hsd_803AC3E0(struct hsd_803AC3E0_arg0_t* arg0, int arg1, int arg2,
                   int arg3, int arg4)
@@ -71,7 +159,33 @@ void hsd_803AC3E0(struct hsd_803AC3E0_arg0_t* arg0, int arg1, int arg2,
 
 /// #hsd_803AC558
 
-/// #fn_803AC634
+// @TODO: Currently 97.73% match - register allocation in arg1==0 path
+u32 fn_803AC634(struct hsd_803AC3E0_arg0_t* arg0, s32 arg1)
+{
+    if (arg0->x4C[arg1] <= 0) {
+        return 0;
+    }
+
+    if (arg1 == 0) {
+        u32 sector_size = arg0->x8;
+        u32 usable;
+        s32 remaining;
+
+        remaining = arg0->x4C[0] - (s32) ((sector_size - 0x20) -
+                                          (arg0->x24 + 48) % sector_size);
+        usable = sector_size - 0x20;
+        if (remaining <= 0) {
+            return 1;
+        }
+        return (u32) (remaining + sector_size - 0x21) / usable + 1;
+    }
+
+    {
+        u32 sector_size = arg0->x8;
+        return (u32) (arg0->x4C[arg1] + sector_size - 0x21) /
+               (sector_size - 0x20);
+    }
+}
 
 /// #fn_803AC6B8
 
@@ -103,25 +217,334 @@ s32 fn_803ACB74(s32 arg0, s32 arg1)
     return diff;
 }
 
-// @TODO: Currently 75.56% match - needs register allocation fix
+// @TODO: Currently 75.56% match - mwcc reassociates addition order
 s32 fn_803ACBE8(CardState* arg0, s32 arg1)
 {
-    u32 hdr = arg0->x24;
     u32 size = arg0->x8;
-    return (s32) (size * (arg1 + (hdr + size + 0x2F) / size - 1));
+    return (s32) (size * (arg1 + (arg0->x24 + size + 0x2F) / size - 1));
+}
+// @TODO: Currently 95.90% match - arg0/arg1 register swap (r27/r22 vs r26/r27)
+s32 fn_803ACC0C(CardState* arg0, s32 arg1, s32 arg2, s32 arg3, void* arg4,
+                s32 arg5)
+{
+    u32 sector_size;
+    s32 retries;
+    u8* buf;
+    s32 offset;
+    s32 result;
+    u8* data;
+    PAD_STACK(8);
+
+    if (arg5 == 0) {
+        return 0;
+    }
+
+    sector_size = arg0->x8;
+    retries = 0;
+    buf = arg0->x0;
+    offset = sector_size *
+             (arg1 + (arg0->x24 + sector_size + 0x2F) / sector_size - 1);
+
+    do {
+        result =
+            CARDRead((CARDFileInfo*) arg0->_pad1, buf, sector_size, offset);
+        if (result != -1) {
+            break;
+        }
+        retries++;
+    } while (retries < 10);
+
+    if (result < 0) {
+        return result;
+    }
+
+    if (arg1 == 0) {
+        offset = (arg0->x24 + 48) % arg0->x8;
+    } else {
+        offset = 0;
+    }
+
+    if (hsd_803B31CC(arg0->x0 + offset, arg0->x8 - offset) < 0) {
+        return 1;
+    }
+
+    data = arg0->x0 + offset;
+    if (arg2 != ((data[0x10] << 8) | data[0x11])) {
+        return 1;
+    }
+
+    if (arg3 != data[0x12]) {
+        return 1;
+    }
+
+    if (memcmp(arg4, data + 0x20, arg5) != 0) {
+        return 1;
+    }
+
+    return 0;
 }
 
-/// #fn_803ACC0C
+// @TODO: Currently 91.60% match - compiler hoists arg0+0x370 to r31, shifting
+// regalloc
+s32 fn_803ACD58(CardState* arg0, void* arg1, void* arg2)
+{
+    s32 icon_size;
+    s32 hdr_plus_icon;
+    s32 i;
 
-/// #fn_803ACD58
+    switch (*(u8*) ((u8*) arg0 + 0x3B0)) {
+    case 2:
+        icon_size = 0x1800;
+        break;
+    case 1:
+        icon_size = 0xE00;
+        break;
+    default:
+        icon_size = 0;
+        break;
+    }
 
-/// #fn_803ACF30
+    hdr_plus_icon = icon_size + 0x40;
 
-/// #fn_803ACFC0
+    for (i = 0; i < (arg0->x24 + arg0->x8 + 0x2F) / arg0->x8; i++) {
+        s32 offset;
+        u8* buf;
+        s32 retries;
+        s32 result;
+
+        offset = i * arg0->x8;
+        buf = arg0->x0;
+        retries = 0;
+
+        do {
+            result =
+                CARDRead((CARDFileInfo*) arg0->_pad1, buf, arg0->x8, offset);
+            if (result != -1) {
+                break;
+            }
+            retries++;
+        } while (retries < 10);
+
+        if (result < 0) {
+            return result;
+        }
+
+        if (i == 0) {
+            if (memcmp(arg0->x0, (u8*) arg0 + 0x370, 0x40) != 0) {
+                return 1;
+            }
+            if (icon_size > 0) {
+                if (memcmp(arg0->x0 + 0x40, arg1, icon_size) != 0) {
+                    return 1;
+                }
+            }
+            {
+                u32 data_size = arg0->x24;
+                u32 ss = arg0->x8;
+                if (data_size > ss) {
+                    if (memcmp(arg0->x0 + hdr_plus_icon, arg2,
+                               ss - hdr_plus_icon) != 0)
+                    {
+                        return 1;
+                    }
+                } else {
+                    if (memcmp(arg0->x0 + hdr_plus_icon, arg2,
+                               data_size - hdr_plus_icon) != 0)
+                    {
+                        return 1;
+                    }
+                }
+            }
+        } else {
+            u32 ss = arg0->x8;
+            s32 file_offset = i * ss;
+            u32 remaining = arg0->x24 - file_offset;
+            s32 data_offset = file_offset - 0x40 - icon_size;
+
+            if (remaining > ss) {
+                if (memcmp(arg0->x0, (u8*) arg2 + data_offset, ss) != 0) {
+                    return 1;
+                }
+            } else {
+                if (memcmp(arg0->x0, (u8*) arg2 + data_offset, remaining) != 0)
+                {
+                    return 1;
+                }
+            }
+        }
+    }
+
+    return 0;
+}
+
+// @TODO: Currently 93.89% match - mwcc reassociates addition order in loop
+// cond
+s32 fn_803ACF30(CardState* state, s32 arg1, s32 arg2, s32 arg3)
+{
+    s32 buf[9];
+    u32 i;
+    s32 ret;
+    PAD_STACK(4);
+
+    for (i = 0; i < (state->x24 + state->x8 + 0x2F) / state->x8; i++) {
+        buf[0] = 11;
+        buf[1] = (s32) state;
+        buf[2] = (s32) i;
+        buf[3] = arg1;
+        buf[4] = arg2;
+        buf[5] = arg3;
+        ret = fn_803AC168(buf);
+        if (ret < 0) {
+            return ret;
+        }
+    }
+    return 0;
+}
+
+// @TODO: Currently 87.18% match - expression ordering and stbx vs stb+disp in
+// byte stores
+s32 fn_803ACFC0(CardState* arg0, s32 arg1, s32 arg2, s32 arg3, void* arg4,
+                s32 arg5, s32 arg6)
+{
+    u32 sector_size;
+    s32 retries;
+    u8* buf;
+    s32 offset;
+    s32 result;
+    s32 hdr_offset;
+    u8* data;
+    PAD_STACK(8);
+
+    sector_size = arg0->x8;
+    {
+        u32 hdr_start = arg0->x24 + 48;
+        offset = sector_size *
+                 (arg1 + (hdr_start + sector_size - 1) / sector_size - 1);
+
+        if (arg1 == 0) {
+            if (arg2 != 0) {
+                return -257;
+            }
+
+            buf = arg0->x0;
+            hdr_offset = hdr_start % sector_size;
+            retries = 0;
+
+            do {
+                result = CARDRead((CARDFileInfo*) arg0->_pad1, buf,
+                                  sector_size, offset);
+                if (result != -1) {
+                    break;
+                }
+                retries++;
+            } while (retries < 10);
+
+            if (result < 0) {
+                return result;
+            }
+        } else {
+            hdr_offset = 0;
+        }
+    }
+
+    if (arg5 > 0) {
+        memcpy(arg0->x0 + hdr_offset + 0x20, arg4, arg5);
+    }
+
+    {
+        s32 remaining = (arg0->x8 - hdr_offset) - arg5 - 0x20;
+        if (remaining != 0) {
+            memset(arg0->x0 + arg5 + 0x20 + hdr_offset, 0, remaining);
+        }
+    }
+
+    memset(arg0->x0 + hdr_offset, 0, 0x20);
+
+    data = arg0->x0 + hdr_offset;
+    data[0x10] = (u8) (arg2 >> 8);
+
+    data = arg0->x0 + hdr_offset;
+    data[0x11] = (u8) arg2;
+
+    data = arg0->x0 + hdr_offset;
+    data[0x12] = (u8) arg3;
+
+    fn_803AC3F8(arg0, arg0->x0 + hdr_offset + 0x13, arg6);
+    hsd_803B2FA0(arg0->x0 + hdr_offset, arg0->x8 - hdr_offset);
+
+    {
+        u32 write_size = arg0->x8;
+        retries = 0;
+        buf = arg0->x0;
+
+        do {
+            result = CARDWrite((CARDFileInfo*) arg0->_pad1, buf, write_size,
+                               offset);
+            if (result != -1) {
+                break;
+            }
+            retries++;
+        } while (retries < 10);
+    }
+
+    return result;
+}
 
 /// #fn_803AD16C
 
-/// #fn_803ADE4C
+// @TODO: Currently 93.46% match - stwx vs stw+disp in rollback, reg swap in
+// 2nd path
+s32 fn_803ADE4C(s32 arg0, s32 arg1, s32 arg2)
+{
+    s32 buf1[9];
+    s32 buf2[9];
+    s32 result;
+    s32 saved;
+    s32 snap;
+    CardBufEntry* entries = (CardBufEntry*) hsd_804D1138;
+    PAD_STACK(16);
+
+    buf1[0] = 12;
+    buf1[1] = arg0;
+    hsd_804D7998 = hsd_804D7984;
+    buf1[2] = arg1;
+    result = fn_803AC168(buf1);
+    if (result < 0) {
+        snap = hsd_804D7998;
+        if (snap >= 0) {
+            saved = snap;
+            while (saved != hsd_804D7984) {
+                entries[saved].x10 = 0;
+                saved = (saved + 1) % 128;
+            }
+            hsd_804D7984 = snap;
+        }
+        return result;
+    }
+
+    buf2[0] = 17;
+    buf2[1] = arg0;
+    result = fn_803AC168(buf2);
+    if (result < 0) {
+        snap = hsd_804D7998;
+        if (snap >= 0) {
+            saved = snap;
+            while (saved != hsd_804D7984) {
+                entries[saved].x10 = 0;
+                saved = (saved + 1) % 128;
+            }
+            hsd_804D7984 = snap;
+        }
+        return result;
+    }
+
+    entries[0].x0 = 5;
+    entries[0].x4 = arg0;
+    entries[0].x8 = arg2;
+    entries[0].xC = 0;
+    hsd_804D7998 = -1;
+    return 0;
+}
 
 /// #fn_803ADF90
 
@@ -135,9 +558,166 @@ s32 fn_803ACBE8(CardState* arg0, s32 arg1)
 
 /// #fn_803B1338
 
-/// #fn_803B1F78
+// @TODO: Currently 90.28% match - stwx vs stw+disp in rollback (same as
+// fn_803ADE4C)
+s32 fn_803B1F78(CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
+{
+    s32 buf1[9];
+    s32 buf2[9];
+    s32 result;
+    s32 blocks;
+    s32 saved;
+    s32 snap;
+    CardBufEntry* entries = (CardBufEntry*) hsd_804D1138;
+    PAD_STACK(8);
 
-/// #fn_803B21E8
+    hsd_804D7998 = hsd_804D7984;
+    blocks = hsd_803B2674(arg0);
+    buf1[0] = 7;
+    buf1[1] = (s32) arg0;
+    buf1[2] = arg1;
+    buf1[3] = arg0->x8 * blocks;
+    result = fn_803AC168(buf1);
+    if (result < 0) {
+        snap = hsd_804D7998;
+        if (snap >= 0) {
+            saved = snap;
+            while (saved != hsd_804D7984) {
+                entries[saved].x10 = 0;
+                saved = (saved + 1) % 128;
+            }
+            hsd_804D7984 = snap;
+        }
+        return result;
+    }
+
+    result = fn_803B0E9C((s32) arg0, arg2, arg3, 1, 1);
+    if (result < 0) {
+        snap = hsd_804D7998;
+        if (snap >= 0) {
+            saved = snap;
+            while (saved != hsd_804D7984) {
+                entries[saved].x10 = 0;
+                saved = (saved + 1) % 128;
+            }
+            hsd_804D7984 = snap;
+        }
+        return result;
+    }
+
+    result = fn_803B1338((s32) arg0, 1);
+    if (result < 0) {
+        snap = hsd_804D7998;
+        if (snap >= 0) {
+            saved = snap;
+            while (saved != hsd_804D7984) {
+                entries[saved].x10 = 0;
+                saved = (saved + 1) % 128;
+            }
+            hsd_804D7984 = snap;
+        }
+        return result;
+    }
+
+    buf2[0] = 8;
+    buf2[1] = (s32) arg0;
+    result = fn_803AC168(buf2);
+    if (result < 0) {
+        snap = hsd_804D7998;
+        if (snap >= 0) {
+            saved = snap;
+            while (saved != hsd_804D7984) {
+                entries[saved].x10 = 0;
+                saved = (saved + 1) % 128;
+            }
+            hsd_804D7984 = snap;
+        }
+        return result;
+    }
+
+    entries[0].x0 = 6;
+    entries[0].x4 = (s32) arg0;
+    entries[0].x8 = arg4;
+    result = 0;
+    entries[0].xC = result;
+    if (result < 0) {
+        snap = hsd_804D7998;
+        if (snap >= 0) {
+            saved = snap;
+            while (saved != hsd_804D7984) {
+                entries[saved].x10 = 0;
+                saved = (saved + 1) % 128;
+            }
+            hsd_804D7984 = snap;
+        }
+        return 0;
+    }
+    hsd_804D7998 = -1;
+    return 0;
+}
+
+// @TODO: Currently 94.85% match - stwx vs stw+disp in rollback (same as
+// fn_803ADE4C)
+s32 fn_803B21E8(s32 arg0, s32 arg1, s32 arg2, s32 arg3)
+{
+    s32 buf[9];
+    s32 result;
+    s32 saved;
+    s32 snap;
+    CardBufEntry* entries = (CardBufEntry*) hsd_804D1138;
+    PAD_STACK(8);
+
+    hsd_804D7998 = hsd_804D7984;
+    result = fn_803B0E9C(arg0, arg1, arg2, 0, 1);
+    if (result < 0) {
+        snap = hsd_804D7998;
+        if (snap >= 0) {
+            saved = snap;
+            while (saved != hsd_804D7984) {
+                entries[saved].x10 = 0;
+                saved = (saved + 1) % 128;
+            }
+            hsd_804D7984 = snap;
+        }
+        return result;
+    }
+
+    buf[0] = 8;
+    buf[1] = arg0;
+    result = fn_803AC168(buf);
+    if (result < 0) {
+        snap = hsd_804D7998;
+        if (snap >= 0) {
+            saved = snap;
+            while (saved != hsd_804D7984) {
+                entries[saved].x10 = 0;
+                saved = (saved + 1) % 128;
+            }
+            hsd_804D7984 = snap;
+        }
+        return result;
+    }
+
+    entries[0].x0 = 7;
+    entries[0].x4 = arg0;
+    entries[0].x8 = arg3;
+    result = 0;
+    entries[0].xC = result;
+    if (result < 0) {
+        snap = hsd_804D7998;
+        if (snap >= 0) {
+            saved = snap;
+            while (saved != hsd_804D7984) {
+                entries[saved].x10 = 0;
+                saved = (saved + 1) % 128;
+            }
+            hsd_804D7984 = snap;
+        }
+        return 0;
+    }
+    hsd_804D7998 = -1;
+    return 0;
+}
 
 /// #hsd_803B2374
 
@@ -152,14 +732,62 @@ void hsd_803B24E4(s32* arg0, int arg1, int arg2, void* arg3)
 
 /// #hsd_803B2550
 
-// @TODO: Currently 85.23% match - same regalloc issue as fn_803ACBE8
+// @TODO: Currently 90.00% match - same regalloc issue as fn_803ACBE8
 s32 hsd_803B2674(CardState* arg0)
 {
     u32 blocks;
 
     arg0->x24 = hsd_803AC340((u8*) arg0 + 0x3B0);
     blocks = (arg0->x24 + arg0->x8 + 0x2F) / arg0->x8;
-    return blocks + fn_803AC7DC(arg0);
+    blocks += fn_803AC7DC(arg0);
+    return (s32) blocks;
 }
 
-/// #fn_803B26CC
+// @TODO: Currently 87.04% match - result saved to r27 instead of staying in r3
+s32 fn_803B26CC(CardState* state, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
+{
+    s32 buf[9];
+    u32 i;
+    s32 result;
+    s32 saved;
+    s32 snap;
+    CardBufEntry* entries = (CardBufEntry*) hsd_804D1138;
+    PAD_STACK(16);
+
+    state->x24 = hsd_803AC340((u8*) state + 0x3B0);
+    i = 0;
+    hsd_804D7998 = hsd_804D7984;
+
+    for (i = 0; i < (state->x24 + state->x8 + 0x2F) / state->x8; i++) {
+        buf[0] = 11;
+        buf[1] = (s32) state;
+        buf[2] = (s32) i;
+        buf[3] = arg1;
+        buf[4] = arg2;
+        buf[5] = arg3;
+        result = fn_803AC168(buf);
+        if (result < 0) {
+            break;
+        }
+    }
+
+    if (result < 0) {
+        snap = hsd_804D7998;
+        if (snap >= 0) {
+            saved = snap;
+            while (saved != hsd_804D7984) {
+                entries[saved].x10 = 0;
+                saved = (saved + 1) % 128;
+            }
+            hsd_804D7984 = snap;
+        }
+        return result;
+    }
+
+    entries[0].x0 = 5;
+    entries[0].x4 = (s32) state;
+    entries[0].x8 = arg4;
+    entries[0].xC = 0;
+    hsd_804D7998 = -1;
+    return 0;
+}

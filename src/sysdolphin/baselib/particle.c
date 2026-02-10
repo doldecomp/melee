@@ -3,15 +3,22 @@
 #include "particle.static.h"
 
 #include <dolphin/gx.h>
-#include <dolphin/os.h>
 #include <dolphin/gx/GXGeometry.h>
 #include <dolphin/mcc.h>
+#include <dolphin/os.h>
 #include <baselib/cobj.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjobject.h>
+#include <baselib/list.h>
+#include <baselib/memory.h>
+#include <baselib/mtx.h>
+#include <baselib/perf.h>
+#include <baselib/psappsrt.h>
 #include <baselib/psstructs.h>
+#include <baselib/random.h>
 #include <baselib/state.h>
+#include <baselib/video.h>
 #include <MetroTRK/ppc_reg.h>
 
 HSD_ObjAllocData hsd_804D0F60;
@@ -95,12 +102,65 @@ void hsd_80391A04(float scale_x, float scale_y, int line_width)
 
 /// #hsd_80391AC8
 
-/// #hsd_80391E18
+void hsd_80391E18(u8* list, f32 x1, f32 y1, f32 x2, f32 y2)
+{
+    f32 dx;
+    f32 dy;
+    f64 t;
+    f32 prev_x;
+    f32 prev_y;
+    u32 color;
+    u8 r, g, b, a;
+    PAD_STACK(8);
+
+    if (list == NULL) {
+        return;
+    }
+
+    prev_x = x1;
+    prev_y = y1;
+    dx = x2 - x1;
+    dy = y2 - y1;
+
+    for (;;) {
+        t = *(f32*) list;
+        color = *(u32*) (list + 4);
+        list += 8;
+
+        if (t < 0.0) {
+            break;
+        }
+
+        GXBegin(0xA8, 0, 2);
+
+        GXWGFifo.f32 = prev_x;
+        GXWGFifo.f32 = prev_y;
+
+        prev_x = t * dx + x1;
+        prev_y = t * dy + y1;
+
+        r = ((u8*) &color)[0];
+        g = ((u8*) &color)[1];
+        b = ((u8*) &color)[2];
+        a = ((u8*) &color)[3];
+
+        GXWGFifo.u8 = r;
+        GXWGFifo.u8 = g;
+        GXWGFifo.u8 = b;
+        GXWGFifo.u8 = a;
+
+        GXWGFifo.f32 = prev_x;
+        GXWGFifo.f32 = prev_y;
+        GXWGFifo.u8 = r;
+        GXWGFifo.u8 = g;
+        GXWGFifo.u8 = b;
+        GXWGFifo.u8 = a;
+    }
+}
 
 /// #hsd_80391F28
 
-void hsd_80392194(u8* dst, s32 flags, void* unused1, void* unused2,
-                   u8* src)
+void hsd_80392194(u8* dst, s32 flags, void* unused1, void* unused2, u8* src)
 {
     u8 b;
     dst[0] = src[0];
@@ -121,7 +181,37 @@ void hsd_80392474(void)
     hsd_804D7850 = 0;
 }
 
-/// #fn_80392480
+// @TODO: Currently 97.38% match - beq vs bne+b for early return
+int fn_80392480(Event arg0, int arg1)
+{
+    HSD_SList* prev;
+    HSD_SList* cur;
+    int* data;
+
+    prev = NULL;
+    cur = (HSD_SList*) hsd_804D7850;
+    while (cur != NULL) {
+        data = cur->data;
+        if (arg0 == (Event) data[0]) {
+            return (int) data;
+        }
+        if (data[1] <= arg1) {
+            prev = cur;
+        }
+        cur = cur->next;
+    }
+    data = HSD_MemAlloc(8);
+    data[0] = (int) arg0;
+    data[1] = arg1;
+    if (prev != NULL) {
+        return (int) HSD_SListAllocAndAppend(prev, data);
+    }
+    {
+        HSD_SList* result =
+            HSD_SListAllocAndPrepend((HSD_SList*) hsd_804D7850, data);
+        hsd_804D7850 = (u32) result;
+    }
+}
 
 #pragma push
 #pragma dont_inline on
@@ -133,7 +223,41 @@ void hsd_80392528(Event arg0)
 
 /// #hsd_8039254C
 
-/// #fn_80392934
+void fn_80392934(void)
+{
+    f32 cpu;
+    f32 draw;
+    f32 total;
+
+    cpu = HSD_PerfLastStat.cpu_time;
+    hsd_804D7858 = cpu;
+    draw = HSD_PerfLastStat.draw_time;
+    hsd_804D785C = draw;
+    total = HSD_PerfLastStat.total_time;
+    hsd_804D7860 = total;
+
+    if (hsd_804D7864 < cpu || hsd_804D7870-- < 0) {
+        hsd_804D7864 = cpu;
+        hsd_804D7870 = 60;
+    }
+    if (hsd_804D7868 < draw || hsd_804D7874-- < 0) {
+        hsd_804D7868 = draw;
+        hsd_804D7874 = 60;
+    }
+    if (hsd_804D786C < total || hsd_804D7878-- < 0) {
+        hsd_804D786C = total;
+        hsd_804D7878 = 60;
+    }
+    if (hsd_804D787C < cpu) {
+        hsd_804D787C = cpu;
+    }
+    if (hsd_804D7880 < draw) {
+        hsd_804D7880 = draw;
+    }
+    if (hsd_804D7884 < total) {
+        hsd_804D7884 = total;
+    }
+}
 
 static s32 lbl_804D6088 = 4;
 static s32 lbl_804D608C = 1;
@@ -158,7 +282,91 @@ s32 fn_80392CCC(s32 arg0)
     return 0;
 }
 
-/// #fn_80392CD8
+u8 fn_80392CD8(char* caller)
+{
+    char* msg;
+    u8 err;
+
+    err = MCCGetLastError();
+
+    switch (err) {
+    case 0:
+        return err;
+    case 1:
+        msg = "MCC is no initialize";
+        break;
+    case 2:
+        msg = "No responce";
+        break;
+    case 3:
+        msg = "PING error";
+        break;
+    case 4:
+        msg = "Could not initialize HIO";
+        break;
+    case 5:
+        msg = "Could not read HIO mailbox";
+        break;
+    case 6:
+        msg = "Could not write HIO mailbox";
+        break;
+    case 7:
+        msg = "Could not read HIO memory";
+        break;
+    case 8:
+        msg = "Could not write HIO memory";
+        break;
+    case 9:
+        msg = "Could not read HIO status";
+        break;
+    case 10:
+        msg = "Could not flush channelInfo";
+        break;
+    case 11:
+        msg = "Could not load channelInfo";
+        break;
+    case 12:
+        msg = "Not enough memory block";
+        break;
+    case 13:
+        msg = "Invalid function parameter";
+        break;
+    case 14:
+        msg = "Invalid channel parameter";
+        break;
+    case 15:
+        msg = "Invalid data size";
+        break;
+    case 16:
+        msg = "Invalid offset parameter";
+        break;
+    case 17:
+        msg = "Channel was (already) opened";
+        break;
+    case 18:
+        msg = "Channel was (already) closed";
+        break;
+    case 19:
+        msg = "Channel was (already) locked";
+        break;
+    case 20:
+        msg = "Channel was (already) unlocked";
+        break;
+    case 21:
+        msg = "Channel (read/write) busy";
+        break;
+    default:
+        msg = "Unknown error";
+        break;
+    }
+
+    if (caller != NULL) {
+        OSReport("%s: MCC Error, %s (%d)\n", caller, msg, err);
+    } else {
+        OSReport("MCC Error, %s (%d)\n", msg, err);
+    }
+    return err;
+}
 
 static s32 hsd_804CE728[0x106];
 
@@ -175,8 +383,6 @@ void fn_80392E2C(s32 arg0)
 
 /// #hsd_80392E80
 
-/// #hsd_803931A4
-
 typedef struct {
     s32 x0;
     u32 x4;
@@ -184,6 +390,64 @@ typedef struct {
 } ParticleLogEntry;
 
 static ParticleLogEntry hsd_804CEB40[0x100];
+static s32 hsd_804CF740[16];
+
+extern int hsd_804D78A0;
+
+// @TODO: Currently 99.75% match - BSS relocation encoding difference
+bool hsd_803931A4(s32 arg0)
+{
+    s32 channel;
+    PAD_STACK(16);
+
+    hsd_804CF740[0] = 0;
+    hsd_804CF740[1] = 0;
+    hsd_804CF740[2] = 0;
+    hsd_804CF740[3] = 0;
+    hsd_804CF740[4] = 0;
+    hsd_804CF740[5] = 0;
+    hsd_804CF740[6] = 0;
+    hsd_804CF740[7] = 0;
+    hsd_804CF740[8] = 0;
+    hsd_804CF740[9] = 0;
+    hsd_804CF740[10] = 0;
+    hsd_804CF740[11] = 0;
+    hsd_804CF740[12] = 0;
+    hsd_804CF740[13] = 0;
+    hsd_804CF740[14] = 0;
+    hsd_804CF740[15] = 0;
+    hsd_804CF740[0] = 1;
+    hsd_804CF740[8] = 1;
+    hsd_804CF740[15] = 1;
+
+    channel = arg0;
+
+    if (channel < 0) {
+        hsd_804D7894 = -1;
+        MCCEnumDevices((MCC_CBEnumDevices) fn_80392CCC);
+        channel = hsd_804D7894;
+        if ((s32) hsd_804D7894 < 0) {
+            channel = 0;
+        }
+    }
+
+    hsd_804D7890 = channel;
+    hsd_80393A54(1);
+    hsd_804D78A0 = 0;
+    hsd_804D7898 = 0;
+    hsd_804D789C = 0;
+    hsd_804D78BC = 0;
+    hsd_804D78B8 = 0;
+
+    if (MCCInit(hsd_804D7890, 0, (MCC_CBSysEvent) fn_80392E2C) == 0) {
+        OSReport("EXI_%d:not support USB (Error=%d)\n", channel,
+                 MCCGetLastError());
+        return 0;
+    }
+
+    OSReport("EXI initialized (EXI_%d)\n", channel);
+    return 1;
+}
 
 void fn_803932D0(s32 arg0, u32 arg1, s32 arg2)
 {
@@ -202,15 +466,45 @@ void fn_803932D0(s32 arg0, u32 arg1, s32 arg2)
     }
 }
 
-/// #hsd_80393328
+// @TODO: Currently 95.28% match - r30/r31 register swap and OSReport arg setup
+s32 hsd_80393328(void)
+{
+    s32 startTick;
+    u32 ticksPerUnit;
+    s32 result;
+
+    if (hsd_804D78B4 != 0) {
+        return 0;
+    }
+    hsd_804D78B4 = 1;
+    hsd_804D78B0 = HSD_Rand() % 255;
+    if (MCCNotify(0xF, hsd_804D78B0 + 256) == 0) {
+        OSReport("Error(0x%x) in MCCNotify.\n", MCCGetLastError());
+    }
+    result = 1;
+    startTick = OSGetTick();
+    ticksPerUnit = *(u32*) 0x800000F8 >> 2;
+    do {
+        hsd_80392E80();
+        if (hsd_804D78B0 == 0) {
+            result = 0;
+            break;
+        }
+    } while ((u32) (OSGetTick() - startTick) / ticksPerUnit < 3);
+
+    if (result != 0) {
+        hsd_804D78B4 = 0;
+        return 0;
+    }
+    hsd_804D78B4 = 0;
+    return 1;
+}
 
 /// #hsd_80393440
 
 void hsd_80393840(void) {}
 
 /// #hsd_80393844
-
-extern int hsd_804D78A0;
 
 bool hsd_80393A04(void)
 {
@@ -229,7 +523,54 @@ void hsd_80393A54(int arg0)
     hsd_804D78C0 = arg0;
 }
 
-/// #hsd_80393A5C
+// @TODO: Currently 95.44% match - signed/unsigned float conversion swap
+int hsd_80393A5C(char* filename, int data, int size)
+{
+    int ready;
+    s32 start;
+    int fd;
+    f32 written_f;
+    f32 elapsed;
+
+    if (hsd_804D78A0 == 0) {
+        ready = 0;
+    } else if (FIOQuery() == 0) {
+        ready = 0;
+        hsd_804D78A0 = 0;
+    } else {
+        ready = 1;
+    }
+
+    if (ready == 0) {
+        return -5;
+    }
+
+    if (*filename == '/') {
+        filename++;
+    }
+
+    start = OSGetTick();
+    fd = FIOFopen(filename, 0xA02);
+
+    if ((u32) (fd + 0x10000) == 0xFFFF) {
+        OSReport("cannot open file\n");
+        return -1;
+    }
+
+    written_f = (f32) (s32) FIOFwrite(fd, (void*) data, size);
+
+    if (written_f != (f32) (u32) size) {
+        OSReport("cannot save file\n");
+        FIOFclose(fd);
+        return (s32) written_f;
+    }
+
+    FIOFclose(fd);
+    elapsed = (f32) (OSGetTick() - start) / (f32) (*(u32*) 0x800000F8 >> 2);
+    OSReport("Done %s size:%d time:%f spped:%fkbps\n", filename, size, elapsed,
+             8.0F * (f32) (u32) size / elapsed * (1.0F / 1024.0F));
+    return size;
+}
 
 static struct {
     /* 00 */ u8 x0_b0 : 1;
@@ -245,6 +586,7 @@ static struct {
     /* 18 */ int x18;
     /* 1C */ int x1C;
     /* 20 */ int x20;
+    /* 24 */ int x24;
 } hsd_804CF7E8;
 
 void fn_80393C14(const u8* buf, size_t size)
@@ -289,7 +631,20 @@ void fn_80393C14(const u8* buf, size_t size)
     hsd_804CF7E8.x11 = var_r9;
 }
 
-/// #hsd_80393D2C
+// @TODO: Currently 94.34% match - lbzu vs addi+lbz addressing pattern
+s32 hsd_80393D2C(s32 arg0)
+{
+    s32 old = hsd_804CF7E8.x0_b1;
+
+    if (arg0 != 0) {
+        hsd_804CF7E8.x0_b1 = 1;
+        HSD_SetReportCallback(fn_80393C14);
+    } else {
+        hsd_804CF7E8.x0_b1 = 0;
+        HSD_SetReportCallback(NULL);
+    }
+    return old;
+}
 
 void hsd_80393DA0(u8* arg0, size_t arg1)
 {
@@ -303,6 +658,8 @@ void hsd_80393DA0(u8* arg0, size_t arg1)
     HSD_SetReportCallback(fn_80393C14);
 }
 
+#pragma push
+#pragma dont_inline on
 void hsd_80393E34(s32* arg0, s32* arg1)
 {
     if (arg0 != NULL) {
@@ -312,46 +669,582 @@ void hsd_80393E34(s32* arg0, s32* arg1)
         *arg1 = hsd_804CF7E8.x18;
     }
 }
+#pragma pop
 
-/// #hsd_80393E68
+#pragma push
+#pragma dont_inline on
+void hsd_80393E68(u32 arg0, u32 arg1)
+{
+    u32 byte_val;
+    u32 buf_size;
+    u8* out_buf;
+    u32 sum;
+    u32 pos;
+    u32 counter;
 
-/// #hsd_80393EF4
+    if (!hsd_804CF7E8.x0_b0) {
+        return;
+    }
 
-/// #hsd_80394068
+    byte_val = hsd_804CF7E8.x11;
+    buf_size = hsd_804CF7E8.buf_size;
+    out_buf = hsd_804CF7E8.out_buf;
+    sum = hsd_804CF7E8.xC + buf_size;
+    pos = byte_val;
+    counter = 0;
 
-/// #hsd_80394128
+    while (counter < arg1 && pos < buf_size) {
+        pos++;
+        byte_val = out_buf[(sum - pos) % buf_size];
+        counter++;
+        pos += byte_val;
+    }
+
+    hsd_804CF7E8.x18 = counter;
+    hsd_804CF7E8.x1C = pos;
+    hsd_804CF7E8.x20 = byte_val;
+
+    if (arg0 < byte_val) {
+        hsd_804CF7E8.x14 = arg0;
+    } else {
+        hsd_804CF7E8.x14 = byte_val;
+    }
+}
+#pragma pop
+
+#pragma push
+#pragma dont_inline on
+void hsd_80393EF4(int arg0, int arg1)
+{
+    u32 byte_val;
+    u32 buf_size;
+    u32 counter;
+    u32 pos;
+    u32 sum;
+    u8* out_buf;
+
+    if (!hsd_804CF7E8.x0_b0) {
+        return;
+    }
+
+    buf_size = hsd_804CF7E8.buf_size;
+
+    if ((u32) hsd_804CF7E8.x1C >= buf_size) {
+        hsd_80393E68(hsd_804CF7E8.x14 + arg0, hsd_804CF7E8.x18 + arg1);
+        return;
+    }
+
+    out_buf = hsd_804CF7E8.out_buf;
+    pos = hsd_804CF7E8.x1C;
+    byte_val = hsd_804CF7E8.x20;
+    sum = hsd_804CF7E8.xC + buf_size;
+
+    if (arg1 > 0) {
+        counter = 0;
+
+        while (counter < (u32) arg1 && pos < buf_size) {
+            pos++;
+            byte_val = out_buf[(sum - pos) % buf_size];
+            counter++;
+            pos += byte_val;
+        }
+
+        hsd_804CF7E8.x18 += counter;
+        hsd_804CF7E8.x1C = pos;
+
+        if (arg0 >= 0) {
+            hsd_804CF7E8.x14 += arg0;
+            if ((u32) hsd_804CF7E8.x14 > byte_val) {
+                hsd_804CF7E8.x14 = byte_val;
+            }
+        } else {
+            if ((u32) hsd_804CF7E8.x14 > (u32) -arg0) {
+                hsd_804CF7E8.x14 -= (u32) -arg0;
+            } else {
+                hsd_804CF7E8.x14 = 0;
+            }
+        }
+    } else if (arg1 < 0) {
+        if (arg0 < 0 && (u32) hsd_804CF7E8.x14 < (u32) -arg0) {
+            arg0 = 0;
+        } else {
+            arg0 = hsd_804CF7E8.x14 + arg0;
+        }
+
+        if (arg1 < 0 && (u32) hsd_804CF7E8.x18 < (u32) -arg1) {
+            arg1 = 0;
+        } else {
+            arg1 = hsd_804CF7E8.x18 + arg1;
+        }
+
+        hsd_80393E68(arg0, arg1);
+    }
+}
+#pragma pop
+
+#pragma push
+#pragma dont_inline on
+u8 hsd_80394068(void)
+{
+    u8 result;
+
+    if (!hsd_804CF7E8.x0_b0) {
+        return 0;
+    }
+    if ((u32) hsd_804CF7E8.x1C > hsd_804CF7E8.buf_size) {
+        return 0;
+    }
+    if ((u32) hsd_804CF7E8.x14 < (u32) hsd_804CF7E8.x20) {
+        result =
+            hsd_804CF7E8.out_buf[(hsd_804CF7E8.x14 +
+                                  (hsd_804CF7E8.xC + hsd_804CF7E8.buf_size -
+                                   hsd_804CF7E8.x1C)) %
+                                 hsd_804CF7E8.buf_size];
+        hsd_804CF7E8.x14++;
+    } else {
+        result = 0;
+        hsd_80393EF4(0, -1);
+        hsd_804CF7E8.x14 = 0;
+    }
+    return result;
+}
+#pragma pop
+
+#pragma push
+#pragma dont_inline on
+u8 hsd_80394128(s32 arg0, s32 arg1)
+{
+    u8 result;
+
+    hsd_80393E68(arg0, arg1);
+    if (!hsd_804CF7E8.x0_b0) {
+        result = 0;
+    } else if ((u32) hsd_804CF7E8.x1C > hsd_804CF7E8.buf_size) {
+        result = 0;
+    } else if ((u32) hsd_804CF7E8.x14 < (u32) hsd_804CF7E8.x20) {
+        u32 idx;
+        idx = (hsd_804CF7E8.x14 +
+               (hsd_804CF7E8.xC + hsd_804CF7E8.buf_size - hsd_804CF7E8.x1C)) %
+              hsd_804CF7E8.buf_size;
+        result = hsd_804CF7E8.out_buf[idx];
+        hsd_804CF7E8.x14++;
+    } else {
+        result = 0;
+        hsd_80393EF4(0, -1);
+        hsd_804CF7E8.x14 = 0;
+    }
+    return result;
+}
+#pragma pop
 
 /// #hsd_803941E8
 
-/// #hsd_80394314
+struct ParticleScreenState {
+    /* 0x00 */ u8 x0_b7 : 1;
+    /* 0x00 */ u8 x0_b6 : 1;
+    /* 0x00 */ u8 x0_b5 : 1;
+    /* 0x00 */ u8 x0_rest : 5;
+    /* 0x01 */ u8 _pad0[0x3];
+    /* 0x04 */ s32 x4;
+    /* 0x08 */ s32 x8;
+    /* 0x0C */ s32 x0C;
+    /* 0x10 */ s32 x10;
+    /* 0x14 */ s32 x14;
+    /* 0x18 */ s32 x18;
+    /* 0x1C */ s32 x1C;
+    /* 0x20 */ s32 x20;
+    /* 0x24 */ s32 x24;
+    /* 0x28 */ u32 x28;
+    /* 0x2C */ s32 x2C;
+    /* 0x30 */ void* x30;
+    /* 0x34 */ s32 x34;
+    /* 0x38 */ s32 x38;
+    /* 0x3C */ s32 x3C;
+    /* 0x40 */ s32 x40;
+    /* 0x44 */ s32 x44;
+    /* 0x48 */ s32 x48;
+    /* 0x4C */ void* x4C;
+    /* 0x50 */ void* x50;
+    /* 0x54 */ u8 _pad4[0x68];
+    /* 0xBC */ u32 xBC;
+    /* 0xC0 */ u8 _pad4b[0x4];
+    /* 0xC4 */ s32 xC4;
+    /* 0xC8 */ u8 _pad4c[0x8];
+    /* 0xD0 */ void* xD0;
+    /* 0xD4 */ u8 _pad5[0x4];
+};
+struct ParticleScreenState hsd_804CF810;
 
-/// #hsd_80394434
+extern u8 lbl_804088B8[];
+
+// @TODO: Currently 99.61% match - .bss.0 relocation symbol instead of
+// hsd_804CF810
+void hsd_80394314(void)
+{
+    memset(&hsd_804CF810, 0, 0xD8);
+    hsd_803941E8(&hsd_804CF810.x24, &hsd_804CF810.x2C);
+
+    {
+        s32 mode;
+        if (hsd_804CF810.x28 != 0) {
+            mode = 2;
+        } else {
+            mode = 1;
+        }
+        hsd_804CF810.x38 = mode;
+    }
+
+    hsd_804CF810.x34 = 0;
+    hsd_804CF810.x30 = &HSD_VIData;
+    hsd_804CF810.x3C = ((u16*) hsd_804CF810.x30)[2];
+    hsd_804CF810.x40 = ((u16*) hsd_804CF810.x30)[4];
+    hsd_804CF810.x44 = (((u16) hsd_804CF810.x3C + 15) * 2) & 0x1FFE0;
+    hsd_804CF810.x48 = hsd_804CF810.x44 * hsd_804CF810.x40;
+    hsd_804CF810.x4 = 0;
+    hsd_804CF810.x8 = hsd_804CF810.x40;
+    hsd_804CF810.x18 = 0;
+    hsd_804CF810.x14 = 0;
+    hsd_804CF810.x20 = (u32) (hsd_804CF810.x3C - 0x28) / 11;
+    hsd_804CF810.x1C = (u32) (hsd_804CF810.x40 - 0x50) / 14;
+    hsd_804CF810.x4C = lbl_804088B8;
+    hsd_804CF810.x50 = 0;
+    hsd_804CF810.xC4 = 0;
+}
+
+// @TODO: Currently 91.67% match - .bss.0 relocation causes add+lwz instead of
+// addi+lwzx
+void hsd_80394434(void* arg0)
+{
+    s32 x = hsd_804CF810.x4;
+    s32 y = hsd_804CF810.x8;
+    s32 mode = hsd_804CF810.x0_b7;
+    s32 interlace = hsd_804CF810.x0_b6;
+    u8* font = (u8*) hsd_804CF810.x4C;
+    s8* ptr = arg0;
+
+    while (*ptr != 0) {
+        switch (*ptr) {
+        case '\r':
+            break;
+        case '\n':
+            x = hsd_804CF810.x4;
+            y += 14;
+            /* fallthrough */
+        default:
+            if (mode != 0) {
+                hsd_803922FC(font + (*ptr & 0x7F) * 0x38, x, y, interlace,
+                             (&hsd_804CF810.x24)[hsd_804CF810.x34],
+                             hsd_804CF810.x3C, hsd_804CF810.x40,
+                             hsd_804CF810.x44, hsd_804CF810.x50);
+            } else {
+                hsd_803921B8(font + (*ptr & 0x7F) * 0x38, x, y,
+                             (&hsd_804CF810.x24)[hsd_804CF810.x34],
+                             hsd_804CF810.x3C, hsd_804CF810.x40,
+                             hsd_804CF810.x44, hsd_804CF810.x50);
+            }
+            x += 11;
+            break;
+        }
+        ptr++;
+    }
+}
 
 /// #hsd_80394544
 
 /// #hsd_80394668
 
-/// #hsd_80394950
+// @TODO: Currently 83.27% match - instruction scheduling in loop bodies
+void hsd_80394950(OSContext* ctx)
+{
+    OSContext tmp;
+    OSContext* saved;
+    BOOL irq;
+    s32 i;
+    u8* p;
 
-/// #Exception_ReportStackTrace
+    if (!(ctx->state & OS_CONTEXT_STATE_FPSAVED)) {
+        return;
+    }
+
+    irq = OSDisableInterrupts();
+    saved = OSGetCurrentContext();
+    OSClearContext(&tmp);
+    OSSetCurrentContext(&tmp);
+
+    OSReport("- FPR ---------------------------------\n");
+
+    i = 0;
+    p = (u8*) ctx;
+    do {
+        OSReport("R%02d=%08X:%08X (%e)\n", i, *(u32*) (p + 0x90),
+                 *(u32*) (p + 0x94), *(f64*) (p + 0x90));
+        i++;
+        p += 8;
+    } while (i < 32);
+
+    OSReport("- PSF ---------------------------------\n");
+
+    i = 0;
+    p = (u8*) ctx;
+    do {
+        OSReport("R%02d=%08X:%08X (%e, %e)\n", i, *(u32*) (p + 0x90),
+                 *(u32*) (p + 0x94), *(f32*) (p + 0x90), *(f32*) (p + 0x94));
+        i++;
+        p += 8;
+    } while (i < 32);
+
+    OSClearContext(&tmp);
+    OSSetCurrentContext(saved);
+    OSRestoreInterrupts(irq);
+}
+
+// @TODO: Currently 99.94% match - minor relocation difference
+void Exception_ReportStackTrace(OSContext* ctx, int max_depth)
+{
+    u32 i;
+    u32* sp;
+
+    OSReport("- STACK ---------------------------------\n");
+    OSReport(" Address:  Back Chain  LR Save\n");
+
+    sp = (u32*) ctx->gpr[1];
+    i = 0;
+
+    while (sp != NULL && (u32) (sp + 0x4000) != 0xFFFF && i < (u32) max_depth)
+    {
+        if ((u32) sp < 0x80000000u) {
+            break;
+        }
+        if ((s64) (u32) sp >= (s64) OSGetPhysicalMemSize() + 0x800000000) {
+            break;
+        }
+        OSReport("%08X:   %08X   %08X\n", sp, sp[0], sp[1]);
+        sp = (u32*) sp[0];
+        i++;
+    }
+}
 
 /// #Exception_ReportCodeline
 
-/// #fn_80394DF4
+typedef struct _ExcptNode {
+    /* 0x0 */ struct _ExcptNode* next;
+    /* 0x4 */ void (*callback)(struct _ExcptNode*);
+} ExcptNode;
 
-/// #hsd_80394E8C
+// @TODO: Currently 97.87% match - lwz r0 + mr r4 instead of lwz r4
+void fn_80394DF4(void* arg0)
+{
+    ExcptNode* node = arg0;
+    ExcptNode* head;
+    ExcptNode* prev;
+
+    if (node == NULL) {
+        return;
+    }
+    head = (ExcptNode*) hsd_804CF810.xD0;
+    if (head == NULL) {
+        return;
+    }
+    if (head == node) {
+        hsd_804CF810.xD0 = head->next;
+        node->next = NULL;
+        hsd_804CF810.x0_b5 = 1;
+        return;
+    }
+    prev = head;
+    while (prev != NULL) {
+        if (prev->next == node) {
+            prev->next = node->next;
+            node->next = NULL;
+            hsd_804CF810.x0_b5 = 1;
+            return;
+        }
+        prev = prev->next;
+    }
+}
+
+void hsd_80394E8C(void* arg0)
+{
+    void** head;
+    ExcptNode* node = arg0;
+
+    if (hsd_804D78C8 < 1) {
+        return;
+    }
+    head = (void**) &hsd_804CF810.xD0;
+    if (*head == arg0) {
+        return;
+    }
+    if (*head == NULL) {
+        *head = arg0;
+        node->next = NULL;
+    } else {
+        fn_80394DF4(arg0);
+        node->next = ((ExcptNode*) *head)->next;
+        ((ExcptNode*) *head)->next = NULL;
+        *head = arg0;
+    }
+    if (node->callback != NULL) {
+        node->callback(node);
+    }
+    hsd_804CF810.x0_b5 = 1;
+}
 
 /// #hsd_80394F48
 
-/// #hsd_80395550
+typedef struct _EventData {
+    /* 0x00 */ u8 _pad[0x10];
+    /* 0x10 */ u32* entries;
+    /* 0x14 */ s32 index;
+} EventData;
 
-/// #hsd_80395644
+s32 hsd_80395550(void* arg0)
+{
+    EventData* data = arg0;
+    u32 flags = hsd_804CF810.xBC;
+    u32 bit = 1;
 
-/// #hsd_803956D8
+    while (bit <= flags) {
+        switch (flags & bit) {
+        case 0x8: {
+            s32 counter = data->index;
+            if (counter > 0) {
+                data->index = counter - 1;
+            } else {
+                u32* base = data->entries;
+                s32 count = 0;
+                while (base[count + 1] != 0) {
+                    count++;
+                }
+                data->index = count;
+            }
+            return 1;
+        }
+        case 0x4: {
+            s32 idx = data->index;
+            u32* base = data->entries;
+            if (base[idx + 1] != 0) {
+                data->index = idx + 1;
+            } else {
+                data->index = 0;
+            }
+            return 1;
+        }
+        case 0x100:
+            return 2;
+        case 0x200:
+        case 0x1000:
+            return -1;
+        default:
+            bit <<= 1;
+            break;
+        }
+    }
+    return 0;
+}
+
+extern u8 lbl_8040AB20[];
+extern u8 lbl_8040B8AC[];
+extern u8 lbl_8040B904[];
+
+// @TODO: Currently 99.78% match - minor addressing difference
+void hsd_80395644(void)
+{
+    void* saved;
+    void** p = &hsd_804CF810.x50;
+    s32 val_x20;
+    s32 val_x1C;
+
+    PAD_STACK(16);
+    saved = *p;
+    *p = lbl_8040AB20;
+    val_x20 = hsd_804CF810.x20;
+    val_x1C = hsd_804CF810.x1C;
+    hsd_804CF810.x4 = (val_x20 - 21) * 11 + 20;
+    hsd_804CF810.x8 = (hsd_804CF810.x40 - 40) - (val_x1C + 1) * 14;
+    if (hsd_804D78C8 >= 1) {
+        hsd_80394434(lbl_8040B8AC);
+    }
+    *p = saved;
+}
+
+typedef struct _DispData {
+    /* 0x00 */ u8 _pad[0x10];
+    /* 0x10 */ s32 x10;
+} DispData;
+
+// @TODO: Currently 99.78% match - minor addressing difference
+s32 hsd_803956D8(void* arg0)
+{
+    DispData* data = arg0;
+    s32 val;
+
+    if (hsd_804CF810.xBC & 0x1000) {
+        hsd_80394E8C(lbl_8040B904);
+        hsd_804CF810.x14 = 0;
+        data->x10 = 0;
+        return 1;
+    }
+
+    val = data->x10;
+    if (val < 120) {
+        data->x10 = val + 1;
+        return 0;
+    }
+
+    data->x10 = 0;
+    hsd_804CF810.x14 += hsd_804CF810.x1C;
+    if (!(u8) hsd_80394128(0, hsd_804CF810.x14)) {
+        if (!(u8) hsd_80394128(0, hsd_804CF810.x14 + 1)) {
+            hsd_804CF810.x14 = 0;
+            hsd_80394E8C(lbl_8040B904);
+        }
+    }
+    return 1;
+}
 
 /// #hsd_803957C0
 
-/// #hsd_80395970
+// @TODO: Currently 79.44% match - BSS layout offsets and epilogue ordering
+#pragma push
+#pragma dont_inline on
+s32 hsd_80395970(void)
+{
+    s32 saved_x;
+    s32 saved_y;
+    s32 i;
+    s32 result;
+    u8 ch;
+
+    result = 0;
+    hsd_80393E34(&saved_x, &saved_y);
+    hsd_80393E68(hsd_804CF810.x0C + hsd_804CF810.x18,
+                 hsd_804CF810.x10 + hsd_804CF810.x14);
+
+    for (i = 0; i < 8; i++) {
+        ch = hsd_80394068();
+        if (ch == 0) {
+            ch = hsd_80394068();
+            if (ch == 0) {
+                break;
+            }
+        }
+        if (ch >= '0' && ch <= '9') {
+            result = (result << 4) + (ch - '0');
+        } else if (ch >= 'A' && ch <= 'F') {
+            result = (result << 4) + (ch - 'A' + 10);
+        } else if (ch >= 'a' && ch <= 'f') {
+            result = (result << 4) + (ch - 'a' + 10);
+        } else {
+            break;
+        }
+    }
+
+    hsd_80393E68(saved_x, saved_y);
+    return (result & 0x0FFFFFF0) | (s32) 0x80000000;
+}
+
+#pragma pop
 
 /// #hsd_80395A78
 
@@ -429,7 +1322,41 @@ void fn_8039710C(void) {}
 
 /// #fn_80397374
 
-/// #hsd_80397520
+typedef struct PSNode {
+    /* 0x00 */ struct PSNode* child;
+    /* 0x04 */ u8 _pad[4];
+    /* 0x08 */ void (*callback)(struct PSNode*);
+} PSNode;
+
+// @TODO: Currently 96.89% match - lwz directly to non-volatile + dead beq
+void hsd_80397520(void* arg0)
+{
+    PSNode* child1;
+    PSNode* child2;
+    PSNode* node = arg0;
+
+    if (node == NULL) {
+        return;
+    }
+    child1 = node->child;
+    if (child1 != NULL) {
+        child2 = child1->child;
+        if (child2 != NULL) {
+            if (child2->child != NULL) {
+                hsd_80397520(child2->child);
+            }
+            if (child2->callback != NULL) {
+                child2->callback(child2);
+            }
+        }
+        if (child1->callback != NULL) {
+            child1->callback(child1);
+        }
+    }
+    if (node->callback != NULL) {
+        node->callback(node);
+    }
+}
 
 /// #hsd_803975D4
 
@@ -705,31 +1632,219 @@ HSD_GObj* hsd_80398310(u16 arg0, u8 arg1, u8 arg2, u32 arg3)
     return temp_r3;
 }
 
-/// #hsd_803983A4
+void hsd_803983A4(HSD_Generator* gen)
+{
+    HSD_JObj* jobj;
 
-/// #psInitDataBankLoad
+    if (gen == NULL) {
+        return;
+    }
+
+    if (gen->kind & 0x800) {
+        return;
+    }
+
+    if (!(gen->type & 0x100)) {
+        return;
+    }
+
+    if ((jobj = gen->jobj) == NULL) {
+        return;
+    }
+
+    HSD_JObjSetupMatrix(jobj);
+
+    if (gen->type & 0x200) {
+        gen->pos.x = gen->jobj->mtx[0][3];
+        gen->pos.y = gen->jobj->mtx[1][3];
+        gen->pos.z = gen->jobj->mtx[2][3];
+    }
+
+    if (gen->type & 0x800) {
+        if (gen->appsrt != NULL && gen->appsrt->gp == gen) {
+            gen->appsrt->translate.x = gen->jobj->mtx[0][3];
+            gen->appsrt->translate.y = gen->jobj->mtx[1][3];
+            gen->appsrt->translate.z = gen->jobj->mtx[2][3];
+        }
+    }
+
+    if (gen->type & 0x1000) {
+        if (gen->appsrt != NULL && gen->appsrt->gp == gen) {
+            HSD_MtxGetScale(gen->jobj->mtx, &gen->appsrt->scale);
+        }
+    }
+}
+
+static HSD_JObj* hsd_804D08E8[8];
+
+// @TODO: Currently 96.40% match - lis hoisting and r29/r30 register swap
+void psInitDataBankLoad(int bank, int* cmdBank, int* texBank, u32* ref,
+                        int* formBank)
+{
+    s32* base = (s32*) hsd_804D08E8;
+    u16 version;
+
+    if (formBank != NULL && *formBank != *texBank) {
+        OSPanic("particle.c", 177,
+                "illigal form data (strange number of group)\n");
+    }
+
+    (base + bank)[0x60 / 4] = (s32) ref;
+    (base + bank)[0x164 / 4] = *texBank;
+    (base + bank)[0x268 / 4] = (s32) (texBank + 1);
+
+    if (formBank != NULL) {
+        (base + bank)[0x36C / 4] = (s32) (formBank + 1);
+    } else {
+        (base + bank)[0x36C / 4] = 0;
+    }
+
+    version = *(u16*) cmdBank;
+    switch (version) {
+    case 0:
+        (base + bank)[0x470 / 4] = cmdBank[1];
+        (base + bank)[0x574 / 4] = (s32) (cmdBank + 2);
+        break;
+    case 0x40:
+    case 0x41:
+    case 0x42:
+    case 0x43: {
+        s32 count = cmdBank[1];
+        (base + bank)[0x470 / 4] = cmdBank[2] + count;
+        (base + bank)[0x574 / 4] = (s32) (cmdBank + 3 - count);
+        break;
+    }
+    default:
+        OSPanic("particle.c", 207, "psInitDataBanks: unknown version\n");
+    }
+}
 
 /// #psInitDataBankLocate
 
-/// #psInitDataBank
+void psInitDataBank(int bank, int* cmdBank, int* texBank, u32* ref,
+                    int* formBank)
+{
+    if (bank < 65) {
+        psInitDataBankLocate((HSD_Archive*) cmdBank, (HSD_Archive*) texBank,
+                             formBank);
+        psInitDataBankLoad(bank, cmdBank, texBank, ref, formBank);
+    }
+}
 
 /// #hsd_80398A08
 
 /// #hsd_80398C04
 
-/// #hsd_80398F0C
+// @TODO: Currently 76.78% match - float stack parameter calling convention
+void hsd_80398F0C(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
+                  s32 arg6, s32 arg7, f32 arg8)
+{
+    hsd_80398C04(0, arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg8, arg7, 1);
+}
 
 /// #hsd_80398F8C
 
-/// #hsd_803991D8
+s32 hsd_803991D8(HSD_Generator* gen, HSD_JObj* jobj, f32 force, f32 range)
+{
+    f32 dx, dy, dz;
+    f32 dist_sq;
+    f32 scale;
+
+    if (jobj == NULL || range < 0.0F) {
+        return 0;
+    }
+
+    HSD_JObjSetupMatrix(jobj);
+
+    dx = jobj->mtx[0][3] - gen->fric;
+    dy = jobj->mtx[1][3] - gen->size;
+    dz = jobj->mtx[2][3] - gen->radius;
+    dist_sq = dx * dx + dy * dy + dz * dz;
+
+    if (dist_sq <= range * range) {
+        return 1;
+    }
+
+    if (dist_sq == 0.0F) {
+        return 0;
+    }
+
+    scale = force / dist_sq;
+    gen->pos.z += scale * dx;
+    gen->vel.x += scale * dy;
+    gen->vel.y += scale * dz;
+    return 0;
+}
 
 /// #hsd_8039930C
 
-/// #hsd_8039CEAC
+static void* hsd_804D0908[16];
 
-/// #hsd_8039CF4C
+// @TODO: Currently 96.0% match - prologue instruction scheduling
+void hsd_8039CEAC(u32 arg0)
+{
+    void** bins;
+    void* cur;
+    void* prev;
+    s32 i;
+    u32 bits;
+    void* next;
 
-static HSD_JObj* hsd_804D08E8[8];
+    bins = hsd_804D0908;
+    bits = arg0;
+    i = 0;
+    do {
+        if (!(bits & 0x10000)) {
+            cur = *bins;
+            prev = NULL;
+            while (cur != NULL) {
+                next = hsd_8039930C(cur, prev);
+                if (prev == NULL) {
+                    if (*bins != next) {
+                        prev = cur;
+                    }
+                } else {
+                    if (next != *(void**) prev) {
+                        prev = cur;
+                    }
+                }
+                cur = next;
+            }
+        }
+        i++;
+        bits >>= 1;
+        bins++;
+    } while (i < 16);
+}
+
+// @TODO: Currently 96.59% match - instruction scheduling in address
+// computation
+void hsd_8039CF4C(s32 arg0, HSD_JObj* jobj)
+{
+    if (arg0 < 0 || arg0 > 8) {
+        return;
+    }
+
+    if (arg0 != 0) {
+        HSD_JObj** p = &hsd_804D08E8[arg0];
+        HSD_JObj* old = *--p;
+        if (old != jobj) {
+            if (old != NULL) {
+                HSD_JObjUnref(jobj);
+            }
+            *p = jobj;
+            ref_INC(jobj);
+        }
+    } else {
+        s32 i;
+        for (i = 0; i < 8; i++) {
+            if (hsd_804D08E8[i] == jobj) {
+                HSD_JObjUnref(hsd_804D08E8[i]);
+                hsd_804D08E8[i] = NULL;
+            }
+        }
+    }
+}
 
 void hsd_8039D048(void* arg0)
 {
@@ -743,11 +1858,63 @@ void hsd_8039D048(void* arg0)
     }
 }
 
-/// #hsd_8039D0A0
-
-void hsd_8039D1E4(UNK_T arg0, int arg1)
+// @TODO: Currently 93.38% match - BSS layout (offset) differences
+void hsd_8039D0A0(HSD_Generator* gen)
 {
-    M2C_FIELD(arg0, int*, 0x58) = arg1;
+    HSD_Particle* prev;
+    HSD_Particle* prt;
+    HSD_Particle* next;
+    HSD_Particle** head;
+    u16 idnum;
+
+    prev = NULL;
+    idnum = gen->idnum;
+    head = (HSD_Particle**) &hsd_804D0908[gen->linkNo];
+    prt = (HSD_Particle*) *head;
+
+    while (prt != NULL) {
+        next = prt->next;
+        if (prt->idnum == idnum && prt->gen != NULL && prt->gen == gen) {
+            if (prt->gen != NULL && prt->gen->userfunc != NULL &&
+                prt->gen->userfunc->hookDelete != NULL)
+            {
+                prt->gen->userfunc->hookDelete(prt);
+            }
+
+            if (prev == NULL) {
+                *head = prt->next;
+            } else {
+                prev->next = prt->next;
+            }
+
+            if (prt->gen != NULL) {
+                prt->gen->numChild--;
+            }
+
+            if (prt->appsrt != NULL) {
+                psRemoveParticleAppSRT(prt);
+            }
+
+            if (prt->kind & 0x8000) {
+                HSD_JObj** jobj_ptr = &hsd_804D08E8[(prt->kind >> 12) & 7];
+                if (*jobj_ptr != NULL) {
+                    HSD_JObjUnref(*jobj_ptr);
+                    *jobj_ptr = NULL;
+                }
+            }
+
+            HSD_ObjFree(&hsd_804D0F60, prt);
+            hsd_804D78E2--;
+        } else {
+            prev = prt;
+        }
+        prt = next;
+    }
+}
+
+void hsd_8039D1E4(HSD_Generator* gen, void* userfunc)
+{
+    gen->userfunc = userfunc;
 }
 
 u16 hsd_8039D1EC(void)
@@ -759,7 +1926,40 @@ u16 hsd_8039D1EC(void)
     return hsd_804D78E0;
 }
 
-/// #hsd_8039D214
+void hsd_8039D214(HSD_Generator* gen)
+{
+    HSD_JObj* jobj;
+
+    if (!(gen->type & 0x100)) {
+        return;
+    }
+
+    if ((jobj = gen->jobj) == NULL) {
+        return;
+    }
+
+    HSD_JObjSetupMatrix(jobj);
+
+    if (gen->type & 0x200) {
+        gen->pos.x = gen->jobj->mtx[0][3];
+        gen->pos.y = gen->jobj->mtx[1][3];
+        gen->pos.z = gen->jobj->mtx[2][3];
+    }
+
+    if (gen->type & 0x800) {
+        if (gen->appsrt != NULL && gen->appsrt->gp == gen) {
+            gen->appsrt->translate.x = gen->jobj->mtx[0][3];
+            gen->appsrt->translate.y = gen->jobj->mtx[1][3];
+            gen->appsrt->translate.z = gen->jobj->mtx[2][3];
+        }
+    }
+
+    if (gen->type & 0x1000) {
+        if (gen->appsrt != NULL && gen->appsrt->gp == gen) {
+            HSD_MtxGetScale(gen->jobj->mtx, &gen->appsrt->scale);
+        }
+    }
+}
 
 void hsd_8039D354(u32 unused)
 {
@@ -775,9 +1975,75 @@ void hsd_8039D354(u32 unused)
     hsd_804D7900 = 0;
 }
 
-/// #hsd_8039D3AC
+HSD_Generator* hsd_8039D3AC(HSD_Generator* gen, HSD_Generator* prev)
+{
+    if (gen->type & 0x80) {
+        hsd_8039D0A0(gen);
+    }
+    if (gen->numChild != 0) {
+        gen->random = 0.0F;
+        gen->genLife = 1;
+        return gen;
+    }
+    if (gen->type & 0x100) {
+        if (gen->jobj != NULL) {
+            if (gen->type & 0x1800) {
+                HSD_psAppSRT* srt = gen->appsrt;
+                if (srt != NULL) {
+                    if (srt->gp == gen) {
+                        if (srt->usedCount != 1) {
+                            gen->random = 0.0F;
+                            gen->genLife = 1;
+                            return gen;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    if (prev == NULL) {
+        hsd_804D78FC = gen->next;
+    } else {
+        prev->next = gen->next;
+    }
+    if (gen->appsrt != NULL) {
+        psRemoveGeneratorSRT(gen);
+    }
+    if (gen->jobj != NULL) {
+        HSD_JObjUnref(gen->jobj);
+        gen->jobj = NULL;
+    }
+    HSD_ObjFree(&hsd_804D0F90, gen);
+    hsd_804D78E0--;
+    return prev;
+}
 
-/// #hsd_8039D4DC
+void hsd_8039D4DC(HSD_Generator* gen)
+{
+    HSD_Generator* cur;
+
+    cur = hsd_804D78FC;
+    hsd_804D78F8 = 0;
+    while (cur != NULL) {
+        if (cur == gen) {
+            hsd_804D78F8 =
+                (u32) hsd_8039D3AC(gen, (HSD_Generator*) hsd_804D78F8);
+            if (hsd_804D78F8 != 0) {
+                while (((HSD_Generator*) hsd_804D78F8)->next != NULL) {
+                    hsd_804D78F8 = (u32) ((HSD_Generator*) hsd_804D78F8)->next;
+                }
+            } else if (hsd_804D78FC != NULL) {
+                hsd_804D78F8 = (u32) hsd_804D78FC;
+                while (((HSD_Generator*) hsd_804D78F8)->next != NULL) {
+                    hsd_804D78F8 = (u32) ((HSD_Generator*) hsd_804D78F8)->next;
+                }
+            }
+            return;
+        }
+        hsd_804D78F8 = (u32) cur;
+        cur = cur->next;
+    }
+}
 
 void hsd_8039D580(HSD_JObj* jobj)
 {
@@ -796,20 +2062,274 @@ void hsd_8039D580(HSD_JObj* jobj)
     }
 }
 
-/// #hsd_8039D5DC
+void hsd_8039D5DC(HSD_JObj* jobj)
+{
+    HSD_Generator* next;
+    HSD_Generator* gen;
 
-/// #hsd_8039D688
+    if (jobj == NULL) {
+        return;
+    }
+    gen = hsd_804D78FC;
+    while (gen != NULL) {
+        next = gen->next;
+        if (gen->jobj == jobj) {
+            hsd_8039D4DC(gen);
+        }
+        gen = next;
+    }
+    if (jobj->flags & 0x1000) {
+        return;
+    }
+    jobj = jobj == NULL ? NULL : jobj->child;
+    while (jobj != NULL) {
+        hsd_8039D5DC(jobj);
+        jobj = jobj == NULL ? NULL : jobj->next;
+    }
+}
 
-/// #hsd_8039D71C
+void hsd_8039D688(HSD_JObj* jobj, f32** unused1, s32 unused2)
+{
+    HSD_Generator* next;
+    HSD_Generator* gen;
 
-/// #hsd_8039D9C8
+    gen = hsd_804D78FC;
+    hsd_804D78F8 = 0;
+    while (gen != NULL) {
+        next = gen->next;
+        if (gen->jobj == jobj) {
+            if (gen->appsrt != NULL) {
+                u16 type = gen->type;
+                if (type & 0x100) {
+                    gen->type = type | 0x80;
+                }
+            }
+            hsd_804D78F8 =
+                (u32) hsd_8039D3AC(gen, (HSD_Generator*) hsd_804D78F8);
+        } else {
+            hsd_804D78F8 = (u32) gen;
+        }
+        gen = next;
+    }
+}
+
+/// @TODO: Currently 94.68% match - Vec3 col stack offset wrong (sp+0x4C
+/// vs sp+0x1C), causing velocity transform scheduling differences
+void hsd_8039D71C(HSD_Generator* gen)
+{
+    HSD_JObj* jobj;
+    Vec3 col;
+    f32 col0_x, col0_y, col0_z;
+    f32 col1_x, col1_y, col1_z;
+    PAD_STACK(64);
+
+    if (!(gen->type & 0x100)) {
+        return;
+    }
+
+    if ((jobj = gen->jobj) == NULL) {
+        return;
+    }
+
+    HSD_JObjSetupMatrix(jobj);
+
+    if (gen->type & 0x200) {
+        gen->pos.x = gen->jobj->mtx[0][3];
+        gen->pos.y = gen->jobj->mtx[1][3];
+        gen->pos.z = gen->jobj->mtx[2][3];
+    }
+
+    if (gen->type & 0x800) {
+        if (gen->appsrt != NULL && gen->appsrt->gp == gen) {
+            gen->appsrt->translate.x = gen->jobj->mtx[0][3];
+            gen->appsrt->translate.y = gen->jobj->mtx[1][3];
+            gen->appsrt->translate.z = gen->jobj->mtx[2][3];
+        }
+    }
+
+    if (gen->type & 0x1000) {
+        if (gen->appsrt != NULL && gen->appsrt->gp == gen) {
+            HSD_MtxGetScale(gen->jobj->mtx, &gen->appsrt->scale);
+        }
+    }
+
+    col.x = jobj->mtx[0][0];
+    col.y = jobj->mtx[1][0];
+    col.z = jobj->mtx[2][0];
+    PSVECNormalize(&col, &col);
+    col0_x = col.x;
+    col0_y = col.y;
+    col0_z = col.z;
+
+    col.x = jobj->mtx[0][1];
+    col.y = jobj->mtx[1][1];
+    col.z = jobj->mtx[2][1];
+    PSVECNormalize(&col, &col);
+    col1_x = col.x;
+    col1_y = col.y;
+    col1_z = col.z;
+
+    col.x = jobj->mtx[0][2];
+    col.y = jobj->mtx[1][2];
+    col.z = jobj->mtx[2][2];
+    PSVECNormalize(&col, &col);
+
+    {
+        f32 vy = gen->vel.y;
+        f32 vx = gen->vel.x;
+        f32 vz = gen->vel.z;
+        gen->vel.x = col1_x * vy + col0_x * vx + col.x * vz;
+        gen->vel.y = col1_y * vy + col0_y * vx + col.y * vz;
+        gen->vel.z = col1_z * vy + col0_z * vx + col.z * vz;
+    }
+
+    if ((gen->type & 0xF) == 1) {
+        f32 ay = gen->aux.line.y2;
+        f32 ax = gen->aux.line.x2;
+        f32 az = gen->aux.line.z2;
+        gen->aux.line.x2 =
+            jobj->mtx[0][1] * ay + jobj->mtx[0][0] * ax + jobj->mtx[0][2] * az;
+        gen->aux.line.y2 =
+            jobj->mtx[1][1] * ay + jobj->mtx[1][0] * ax + jobj->mtx[1][2] * az;
+        gen->aux.line.z2 =
+            jobj->mtx[2][1] * ay + jobj->mtx[2][0] * ax + jobj->mtx[2][2] * az;
+    }
+}
+
+static u16 lbl_804D6368 = 0x100;
+
+HSD_Generator* hsd_8039D9C8(void)
+{
+    HSD_Generator* gen;
+    PAD_STACK(8);
+
+    gen = HSD_ObjAlloc(&hsd_804D0F90);
+    if (gen != NULL) {
+        memset(gen, 0, 0x94);
+    }
+    if (gen == NULL) {
+        return NULL;
+    }
+
+    hsd_804D78E0++;
+    if (hsd_804D78E0 > hsd_804D78DA) {
+        hsd_804D78DA = hsd_804D78E0;
+    }
+
+    if ((HSD_Generator*) hsd_804D78F8 == NULL ||
+        ((HSD_Generator*) hsd_804D78F8)->next == NULL)
+    {
+        if (hsd_804D78FC == NULL) {
+            gen->next = NULL;
+            hsd_804D78FC = gen;
+        } else {
+            gen->next = hsd_804D78FC->next;
+            hsd_804D78FC->next = gen;
+        }
+    } else {
+        gen->next = ((HSD_Generator*) hsd_804D78F8)->next->next;
+        ((HSD_Generator*) hsd_804D78F8)->next->next = gen;
+    }
+
+    lbl_804D6368++;
+    if (lbl_804D6368 < 0x100) {
+        lbl_804D6368 = 0x100;
+    }
+    gen->idnum = lbl_804D6368;
+    gen->appsrt = NULL;
+    gen->userfunc = NULL;
+    return gen;
+}
 
 /// #hsd_8039DAD4
 
-/// #hsd_8039EE24
+// @TODO: Currently 98.57% match - register allocation (r30 vs r31 for gen)
+void hsd_8039EE24(u32 arg0)
+{
+    HSD_Generator* gen;
 
-/// #hsd_8039EFAC
+    while (hsd_804D78F4 != 0) {
+        gen = (HSD_Generator*) ((HSD_SList*) hsd_804D78F4)->data;
+        hsd_8039D71C(gen);
+        hsd_804D78F4 = (u32) HSD_SListRemove((HSD_SList*) hsd_804D78F4);
+        if (gen->jobj != NULL) {
+            HSD_JObjUnref(gen->jobj);
+            gen->jobj = NULL;
+        }
+    }
+
+    gen = hsd_804D78FC;
+    hsd_804D78F8 = 0;
+
+    while (gen != NULL) {
+        if (arg0 & (1 << (gen->linkNo + 16))) {
+            hsd_804D78F8 = (u32) gen;
+            gen = gen->next;
+            continue;
+        }
+        if (gen->kind & 0x800) {
+            hsd_804D78F8 = (u32) gen;
+            gen = gen->next;
+            continue;
+        }
+        hsd_8039D214(gen);
+        if (gen->random < 0.0F) {
+            gen->count -= gen->random;
+        } else {
+            gen->count += gen->random * HSD_Randf();
+        }
+        if (gen->count >= 1.0F) {
+            gen->count = hsd_8039DAD4(gen);
+        }
+        if (gen->genLife != 0) {
+            u16 life = gen->genLife - 1;
+            gen->genLife = life;
+            if (life == 0) {
+                hsd_804D78F8 =
+                    (u32) hsd_8039D3AC(gen, (HSD_Generator*) hsd_804D78F8);
+                if (hsd_804D78F8 != 0) {
+                    gen = ((HSD_Generator*) hsd_804D78F8)->next;
+                } else {
+                    gen = hsd_804D78FC;
+                }
+                continue;
+            }
+        }
+        hsd_804D78F8 = (u32) gen;
+        gen = gen->next;
+    }
+}
+
+// @TODO: Currently 95.45% match - 2 dead beq instructions in target
+HSD_Generator* hsd_8039EFAC(s8 arg0, s32 arg1, s32 arg2, HSD_JObj* jobj)
+{
+    HSD_Generator* gen;
+
+    gen = hsd_8039F05C(arg0, arg1, arg2);
+    if (gen == NULL) {
+        return NULL;
+    }
+    gen->jobj = jobj;
+    ref_INC(jobj);
+    gen->type |= (gen->kind & 0x20000) ? 0x500 : 0x700;
+    return gen;
+}
 
 /// #hsd_8039F05C
 
-/// #hsd_8039F6CC
+// @TODO: Currently 95.83% match - dead beq instructions in target
+HSD_Generator* hsd_8039F6CC(s8 arg0, s32 arg1, s32 arg2, HSD_JObj* jobj)
+{
+    HSD_Generator* gen;
+
+    gen = hsd_8039F05C(arg0, arg1, arg2);
+    if (gen == NULL) {
+        return NULL;
+    }
+    gen->jobj = jobj;
+    ref_INC(jobj);
+    gen->type |= (gen->kind & 0x20000) ? 0x500 : 0x700;
+    hsd_804D78F4 =
+        (u32) HSD_SListAllocAndAppend((HSD_SList*) hsd_804D78F4, gen);
+    return gen;
+}

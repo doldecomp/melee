@@ -913,17 +913,29 @@ void HSD_SynthResetStreamCounters(int arg0, int arg1, void* buf, bool b)
     HSD_Synth_804D7778 = 0;
 }
 
-/// #HSD_Synth_8038AD74
+extern s32 HSD_Synth_804D7764;
+
+void HSD_Synth_8038AD74(u32 arg0, uintptr_t src)
+{
+    HSD_DevComRequest(HSD_Synth_804D7764, src,
+                      HSD_Synth_804D7780 + ((u32) HSD_Synth_804D7768 << 16),
+                      lbl_804C4540[HSD_Synth_804D7768].x0, 0x23, 0,
+                      HSD_SynthResetStreamCounters, 0);
+}
 
 /// #HSD_Synth_8038ADD0(void)
 
 /// #HSD_Synth_8038B120
 
-/// #HSD_SynthPStreamFirstHakoHeaderCallback
+void HSD_SynthPStreamFirstHakoHeaderCallback(void)
+{
+    HSD_DevComRequest(HSD_Synth_804D7764, 0xA0,
+                      HSD_Synth_804D7780 + ((u32) HSD_Synth_804D7768 << 16),
+                      lbl_804C4540[HSD_Synth_804D7768].x0, 0x23, 0,
+                      (HSD_DevComCallback) HSD_Synth_8038B120, 0);
+}
 
 /// #HSD_SynthPStreamHeaderCallback
-
-extern s32 HSD_Synth_804D7764;
 
 static inline void HSD_Synth_8038B5AC_inline(void)
 {
