@@ -63,7 +63,7 @@ int assign_reg(int num, u32* unused, HSD_TExpDag* list, int* order)
     return (4 - min_color_reg) + (4 - min_alpha_reg);
 }
 
-void order_dag(int num, int* dep, int* full_dep, HSD_TExpDag* list, int depth,
+void order_dag(int num, u32* dep, u32* full_dep, HSD_TExpDag* list, int depth,
                int node, int scheduled, int available, int* order,
                int* best_score, int* best_order)
 {
@@ -82,7 +82,7 @@ void order_dag(int num, int* dep, int* full_dep, HSD_TExpDag* list, int depth,
     order[depth] = (u8) node;
 
     if (depth + 1 == num) {
-        score = assign_reg(num, (u32*) dep, list, order);
+        score = assign_reg(num, dep, list, order);
         if (score < *best_score) {
             *best_score = score;
             i = 0;
@@ -132,7 +132,7 @@ void order_dag(int num, int* dep, int* full_dep, HSD_TExpDag* list, int depth,
         dep_bits = dep[node];
         blocked = new_available | dep_bits;
         {
-            int* fp = full_dep;
+            u32* fp = full_dep;
 
             dep_bits = 0;
             n = 0;
@@ -195,74 +195,33 @@ void CalcDistance(HSD_TExp** tevs, int* dist, HSD_TExp* tev, int num,
 
 /// #HSD_TExpMakeDag
 
-void make_full_dependancy_mtx(int num, int* dep, int* full)
+void make_full_dependancy_mtx(int num, u32* dep, u32* full)
 {
-    int* src;
-    int* dst;
-    int* row;
-    int changed;
-    int rem;
-    int i;
-    int j;
-    int old;
-    int n;
+    int i, j, k;
+    bool changed;
+    u32 bits;
+    u32 flag;
+    u32 old;
 
-    i = 0;
-    if (num > 0) {
-        rem = num - 8;
-        if (num <= 8) {
-            goto remainder;
-        }
-        n = (u32) (rem + 7) >> 3;
-        if (rem <= 0) {
-            goto remainder;
-        }
-        src = dep;
-        dst = full;
-        do {
-            i += 8;
-            dst[0] = src[0];
-            dst[1] = src[1];
-            dst[2] = src[2];
-            dst[3] = src[3];
-            dst[4] = src[4];
-            dst[5] = src[5];
-            dst[6] = src[6];
-            dst[7] = src[7];
-            src += 8;
-            dst += 8;
-        } while (--n > 0);
-    remainder:
-        n = num - i;
-        src = dep + i;
-        dst = full + i;
-        if (i < num) {
-            do {
-                *dst = *src;
-                src++;
-                dst++;
-            } while (--n > 0);
-        }
+    for (i = 0; i < num; i++) {
+        full[i] = dep[i];
     }
     do {
-        row = full;
-        changed = 0;
-        j = 0;
-        while (j < num) {
-            n = *row;
-            for (i = 0; i < num; i++) {
-                if ((1 << j) & full[i]) {
-                    old = full[i];
-                    full[i] = old | n;
-                    if (old != full[i]) {
-                        changed = 1;
+        changed = false;
+        for (j = 0; j < num; j++) {
+            bits = full[j];
+            for (k = 0; k < num; k++) {
+                flag = (1 << j);
+                if ((flag & full[k]) != 0) {
+                    u32 old = full[k];
+                    full[k] |= bits;
+                    if (old != full[k]) {
+                        changed = true;
                     }
                 }
             }
-            row++;
-            j++;
         }
-    } while (changed != 0);
+    } while (changed != false);
 }
 
 void fn_80386230(void) {}
@@ -299,8 +258,8 @@ void HSD_TExpSchedule(int num, HSD_TExpDag* list, HSD_TExp** result,
     int idx;
     int i;
 
-    int dep_matrix[32];
-    int full_dep_matrix[32];
+    u32 dep_matrix[32];
+    u32 full_dep_matrix[32];
     int work_order[32];
     int best_order[32];
     int best_score;
