@@ -1444,8 +1444,9 @@ void ft_80085030(Fighter_GObj* gobj, float gr_friction, float facing_dir)
 
 void ft_80085088(Fighter_GObj* gobj)
 {
+    ftCo_DatAttrs* co_attrs;
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCo_DatAttrs* co_attrs = &fp->co_attrs;
+    co_attrs = &fp->co_attrs;
 
     ft_800850E0(gobj, co_attrs->gr_friction, fp->facing_dir);
 }
