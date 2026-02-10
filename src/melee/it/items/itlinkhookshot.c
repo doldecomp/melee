@@ -1380,7 +1380,7 @@ void it_802A5770_inline(ItemLink* link_1, itLinkHookshotAttributes* arg2,
     }
 }
 
-// definitely attributes
+/// definitely attributes
 void it_802A5770(ItemLink* link_0, Vec3* arg1, itLinkHookshotAttributes* arg2,
                  Fighter* arg3)
 {

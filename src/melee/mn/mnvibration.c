@@ -5,10 +5,10 @@
 #include <melee/lb/lbarchive.h>
 #include <melee/mn/mnmain.h>
 
-// --- Externs ---
+/// --- Externs ---
 extern long HSD_GObj_804D783C;
 
-// --- Local Helper Structs ---
+/// --- Local Helper Structs ---
 typedef struct MnVibrationAssets {
     void* SCl_Top_joint; // 0x00
     u8 pad4[0xC];
@@ -28,7 +28,7 @@ typedef struct MnVibrationAssets {
 
 MnVibrationAssets mnVibration_804A0868;
 
-// --- Function Implementation ---
+/// --- Function Implementation ---
 
 void mnVibration_80249174(int arg0)
 {

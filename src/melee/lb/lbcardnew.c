@@ -617,8 +617,8 @@ int lb_8001B068(void)
     return lb_80432A68.unk_34;
 }
 
-// UnclePunch map calls this "MemoryCard_ScanForSnapshots"
-// Stubbing it out for now
+/// UnclePunch map calls this "MemoryCard_ScanForSnapshots"
+/// Stubbing it out for now
 int lb_8001B14C(void)
 {
     lb_80432A68.unk_34 = 0;

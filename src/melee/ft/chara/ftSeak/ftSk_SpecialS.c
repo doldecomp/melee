@@ -974,7 +974,7 @@ void ftSk_SpecialSEnd_Coll(HSD_GObj* gobj)
     }
 }
 
-// Collision_SheikChainAir
+/// Collision_SheikChainAir
 void ftSk_SpecialAirSEnd_Coll(HSD_GObj* gobj)
 {
     if (ft_80081D0C(gobj)) {
@@ -1006,7 +1006,7 @@ void ftSk_SpecialS_80111CB0(HSD_GObj* gobj)
     }
 }
 
-// AS_SheikRetractChainGround
+/// AS_SheikRetractChainGround
 void ftSk_SpecialS_80111D54(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);

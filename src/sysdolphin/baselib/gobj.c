@@ -84,7 +84,7 @@ void HSD_GObj_80390CD4(HSD_GObj* gobj)
     }
 }
 
-// GObj_RunProcs
+/// GObj_RunProcs
 void HSD_GObj_80390CFC(void)
 {
     s32 i;
@@ -140,7 +140,7 @@ void HSD_GObj_80390CFC(void)
     }
 }
 
-// GObj_GetFlagFromArray
+/// GObj_GetFlagFromArray
 u32 HSD_GObj_80390EB8(s32 i)
 {
     return HSD_GObj_804085F0[i];
@@ -154,7 +154,7 @@ inline void render_gobj(HSD_GObj* cur, int i)
     HSD_GObj_804D7814 = saved;
 }
 
-// GObj_SetTextureCamera
+/// GObj_SetTextureCamera
 void HSD_GObj_80390ED0(HSD_GObj* gobj, u32 mask)
 {
     s32 i = 0;
@@ -182,7 +182,7 @@ void HSD_GObj_80390ED0(HSD_GObj* gobj, u32 mask)
     }
 }
 
-// GObj_RunGXLinkMaxCallbacks
+/// GObj_RunGXLinkMaxCallbacks
 void HSD_GObj_80390FC0(void)
 {
     HSD_GObj* saved;

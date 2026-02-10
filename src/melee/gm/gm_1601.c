@@ -2147,7 +2147,7 @@ void gm_80168F88(void)
     lbAudioAx_80027648();
 }
 
-// UnclePunch: Audio_LoadAnnouncer
+/// UnclePunch: Audio_LoadAnnouncer
 void gm_80168FC4(void)
 {
     lbAudioAx_80026F2C(0x12);

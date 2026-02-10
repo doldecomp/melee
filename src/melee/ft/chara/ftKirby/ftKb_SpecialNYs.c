@@ -80,10 +80,10 @@
 #include <baselib/random.h>
 #include <MSL/math.h>
 
-// Extern for float in ftKb_Init.c
+/// Extern for float in ftKb_Init.c
 extern f32 ftKb_Init_804D9570;
 
-// Forward declarations for static functions
+/// Forward declarations for static functions
 static void fn_801095DC(HSD_GObj*);
 static void fn_80109680(HSD_GObj*);
 static void fn_80109714(HSD_GObj*);
@@ -92,7 +92,7 @@ static void fn_8010C288(HSD_GObj* gobj);
 void fn_8010C44C(HSD_GObj* gobj);
 void fn_8010CD88(HSD_GObj* gobj);
 
-// Forward declarations for local functions
+/// Forward declarations for local functions
 void fn_8010A930(Fighter_GObj*, Fighter_GObj*);
 void fn_8010B1F4(Fighter_GObj* gobj);
 void fn_8010B2E8(Fighter_GObj* gobj);

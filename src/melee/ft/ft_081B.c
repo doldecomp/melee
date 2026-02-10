@@ -552,7 +552,7 @@ void ftCo_AirCatchHit_Coll(Fighter_GObj* gobj)
     }
 }
 
-// void ft_80082C74(Fighter_GObj* gobj, void (*arg1)(Fighter_GObj*))
+/// void ft_80082C74(Fighter_GObj* gobj, void (*arg1)(Fighter_GObj*))
 void ft_80082C74(Fighter_GObj* gobj, HSD_GObjEvent cb)
 {
     bool var_r0 = ft_80081D0C(gobj);

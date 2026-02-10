@@ -46,12 +46,12 @@ struct fn_80166CBC_arg0_t {
 };
 STATIC_ASSERT(sizeof(struct fn_80166CBC_arg0_t) == 0xA8);
 
-// struct ResultsData {
-//     /*  +0 */ char pad_0[0x94];
-//     /* +94 */ int x94;
-//     /* +98 */ char pad_98[0x5A8 - 0x98];
-// };
-// STATIC_ASSERT(sizeof(struct ResultsData) == 0x5A8);
+/// struct ResultsData {
+///     /*  +0 */ char pad_0[0x94];
+///     /* +94 */ int x94;
+///     /* +98 */ char pad_98[0x5A8 - 0x98];
+/// };
+/// STATIC_ASSERT(sizeof(struct ResultsData) == 0x5A8);
 
 struct lbl_8046B668_t {
     /* 0x00 */ char pad_0[0x1C];

@@ -61,11 +61,11 @@ sislib_UnkAllocData* HSD_SisLib_804D7974;
 HSD_Text* HSD_SisLib_804D7978;
 sislib_UnkAlloc3* HSD_SisLib_804D797C;
 
-// extern ? *HSD_SisLib_804D796C;
-// extern u8 *HSD_SisLib_804D7978;
-// sislib_UnknownType001 HSD_SisLib_8040C490 = { 0, 1.0F };
+/// extern ? *HSD_SisLib_804D796C;
+/// extern u8 *HSD_SisLib_804D7978;
+/// sislib_UnknownType001 HSD_SisLib_8040C490 = { 0, 1.0F };
 
-// u8 HSD_SisLib_8040C490[0x60] = { 0 };
+/// u8 HSD_SisLib_8040C490[0x60] = { 0 };
 
 static f32
     HSD_SisLib_8040CB00; /* unable to generate initializer: unknown type */
@@ -76,10 +76,10 @@ static HSD_Archive* HSD_SisLib_804D1110[5];
 SIS* HSD_SisLib_804D1124[5];
 s8 HSD_SisLib_804D6390[4] = { 0, 0, 0, 0 };
 
-// @TODO: Currently 99.54% match - needs register allocation fix
-// (var_r4 allocated to r3 instead of r4)
-// a generic allocator used by multiple
-// data types
+/// @TODO: Currently 99.54% match - needs register allocation fix
+/// (var_r4 allocated to r3 instead of r4)
+/// a generic allocator used by multiple
+/// data types
 void* HSD_SisLib_803A5798(s32 size)
 {
     sislib_UnkAllocData* best;
@@ -168,8 +168,8 @@ void* HSD_SisLib_803A5798(s32 size)
     return best->data_1;
 }
 
-// @TODO: Currently 92.39% match - needs register allocation fix in
-// coalesce block (new_size/old_next register assignment differs)
+/// @TODO: Currently 92.39% match - needs register allocation fix in
+/// coalesce block (new_size/old_next register assignment differs)
 void HSD_SisLib_803A594C(void* ptr)
 {
     sislib_UnkAllocData* free_cur;
@@ -484,8 +484,8 @@ void HSD_SisLib_803A5FBC(void)
     HSD_Free(HSD_SisLib_804D796C);
 }
 
-// @TODO: Currently 97.56% match - extra lwz reload optimized away by
-// compiler after dual global store
+/// @TODO: Currently 97.56% match - extra lwz reload optimized away by
+/// compiler after dual global store
 void HSD_SisLib_803A6048(u32 size)
 {
     sislib_UnkAllocData* alloc;
@@ -508,7 +508,7 @@ void HSD_SisLib_803A6048(u32 size)
     }
 }
 
-// GObj "remove" function callback
+/// GObj "remove" function callback
 void fn_803A60EC(void* gobj)
 {
     sislib_UnkAlloc3* curr = HSD_SisLib_804D797C;
@@ -1118,8 +1118,8 @@ int HSD_SisLib_803A6B98(HSD_Text* text, float x, float y, const char* fmt, ...)
     return (int) playhead;
 }
 
-// TODO there seems to be a file boundary before this function,
-// because its data section is 8-byte aligned after the previous C strings
+/// TODO there seems to be a file boundary before this function,
+/// because its data section is 8-byte aligned after the previous C strings
 u8* fn_803A6FEC(u8* sis_data, s32 entry_idx, s32* out_size)
 {
     s32 unused_r4;

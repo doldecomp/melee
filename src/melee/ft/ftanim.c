@@ -145,7 +145,7 @@ void ftAnim_8006DF0C(Fighter* fp)
     }
 }
 
-// load bearing, fixes float order
+/// load bearing, fixes float order
 static void scale_inline(float scale, Vec3* sp38)
 {
     float f1 = 1.0F / scale;
@@ -377,7 +377,7 @@ void ftAnim_8006E9B4(Fighter_GObj* gobj)
     fp->cur_anim_frame = ftAnim_8006F3DC(gobj);
 }
 
-// Process animation?
+/// Process animation?
 void ftAnim_8006EBA4(Fighter_GObj* gobj)
 {
     ftAnim_8006E9B4(gobj);

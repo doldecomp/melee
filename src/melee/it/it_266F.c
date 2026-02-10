@@ -56,15 +56,15 @@ static s32 it_803B85F0[4];
 
 static U8Vec4 it_804D5168 = { 0xFF, 0x40, 0x80, 0x80 };
 
-// static f64 it_804DC698 = S32_TO_F32;
-// static f32 it_804DC6A0 = 0.0f;
-// static f32 it_804DC6A4 = 0.99f;
-// static f32 it_804DC6A8 = 0.0f;
-// static f32 it_804DC6AC = 0.00001f;
-// static f64 it_804DC6B0 = 0.0f;
-// static f32 it_804DC6B8 = 0.0f;
-// static f32 it_804DC6BC = 2.0f;
-// static Vec2 it_804DC6C0 = { 0.5f, 0.0f };
+/// static f64 it_804DC698 = S32_TO_F32;
+/// static f32 it_804DC6A0 = 0.0f;
+/// static f32 it_804DC6A4 = 0.99f;
+/// static f32 it_804DC6A8 = 0.0f;
+/// static f32 it_804DC6AC = 0.00001f;
+/// static f64 it_804DC6B0 = 0.0f;
+/// static f32 it_804DC6B8 = 0.0f;
+/// static f32 it_804DC6BC = 2.0f;
+/// static Vec2 it_804DC6C0 = { 0.5f, 0.0f };
 
 void it_8026C47C(struct it_8026C47C_arg0_t* arg_struct)
 {
@@ -163,7 +163,7 @@ s32 it_8026C530(s32 arg0, HSD_ObjAllocUnk6* arg1, s32 arg2, s32 arg3)
     return it_8026C530(arg0, arg1, temp_r7, arg3);
 }
 
-// argument is definitely size 0x10
+/// argument is definitely size 0x10
 u8 it_8026C65C(HSD_ObjAllocUnk6* arg_struct)
 {
     s32 rand_int;
@@ -205,8 +205,8 @@ bool it_8026C704(void)
     return chk;
 }
 
-// Decides item kind for spawned items - not sure in which context (i.e from
-// pokeballs, from capsules, thin air, etc.)
+/// Decides item kind for spawned items - not sure in which context (i.e from
+/// pokeballs, from capsules, thin air, etc.)
 ItemKind it_8026C75C(HSD_ObjAllocUnk6* arg_struct)
 {
     s32 temp_r0;
@@ -248,7 +248,7 @@ ItemKind it_8026C75C(HSD_ObjAllocUnk6* arg_struct)
     return kind;
 }
 
-// .L_8026C88C
+/// .L_8026C88C
 void fn_8026C88C(HSD_GObj* gobj)
 {
     HSD_ObjAllocUnk4* it_804A0E30_ = &it_804A0E30;
@@ -355,7 +355,7 @@ bool it_8026CB3C(Vec3* vec)
     return true;
 }
 
-// Builds some structs for items
+/// Builds some structs for items
 void it_8026CB9C(s32* arg0, u64 arg2, f32 arg8)
 {
     s32 struct_size;
@@ -416,7 +416,7 @@ void it_8026CB9C(s32* arg0, u64 arg2, f32 arg8)
     }
 }
 
-// extern HSD_ObjAllocUnk4 it_804A0E30;
+/// extern HSD_ObjAllocUnk4 it_804A0E30;
 void it_8026CD50(s32* arg0, u64 arg1, f32 arg2)
 {
     s16 var_r25;
@@ -483,7 +483,7 @@ void it_8026CD50(s32* arg0, u64 arg1, f32 arg2)
     }
 }
 
-// Builds structs for monster items
+/// Builds structs for monster items
 void it_8026CF04(void)
 {
     s16 temp_r4;
@@ -624,7 +624,7 @@ void it_8026D018(void)
 #endif
 }
 
-// Spawn item of specified kind at specified position (but no z-offset)
+/// Spawn item of specified kind at specified position (but no z-offset)
 bool it_8026D258(Vec3* pos, ItemKind kind)
 {
     SpawnItem spawn;
@@ -1679,8 +1679,8 @@ void it_8026EC54(HSD_GObj* gobj, u16 arg1, u8* arg2)
     }
 }
 
-// arg1 is some kind of enum type? It gets passed to functions that check if
-// it's 0 or 2 to run
+/// arg1 is some kind of enum type? It gets passed to functions that check if
+/// it's 0 or 2 to run
 bool it_8026ECE0(Item_GObj* gobj, u32 arg1)
 {
     Item* ip;

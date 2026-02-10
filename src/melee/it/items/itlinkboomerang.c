@@ -442,7 +442,7 @@ bool itLinkboomerang_UnkMotion2_Anim(Item_GObj* gobj)
     return it_802A0C34(gobj);
 }
 
-// NOTE: identical to itLinkboomerang_UnkMotion1_Phys
+/// NOTE: identical to itLinkboomerang_UnkMotion1_Phys
 void itLinkboomerang_UnkMotion2_Phys(Item_GObj* gobj)
 {
     Item* ip;
@@ -710,7 +710,7 @@ bool it_802A1F08(Item_GObj* gobj)
     return false;
 }
 
-// NOTE: identical to it_802A1F08
+/// NOTE: identical to it_802A1F08
 bool it_802A1FA8(Item_GObj* gobj)
 {
     Item* ip;
@@ -729,7 +729,7 @@ bool it_802A1FA8(Item_GObj* gobj)
     return false;
 }
 
-// NOTE: identical to it_802A1F08
+/// NOTE: identical to it_802A1F08
 bool itLinkBoomerang_Logic18_Absorbed(Item_GObj* gobj)
 {
     Item* ip;
@@ -783,7 +783,7 @@ bool it_802A20E8(Item_GObj* gobj)
     return false;
 }
 
-// NOTE: identical to it_802A1F08 except for the msid check
+/// NOTE: identical to it_802A1F08 except for the msid check
 bool it_802A2288(Item_GObj* gobj)
 {
     Item* ip;

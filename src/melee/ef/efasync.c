@@ -158,7 +158,7 @@
 /* 4D64F0 */ extern s32 efLib_804D64F0;
 /* 4D8208 */ static f64 efAsync_804D8208 = 2 * M_PI;
 
-// Effect* efAsync_80063930(s32 gfx_id, HSD_GObj* arg_gobj, va_list arg2) {
+/// Effect* efAsync_80063930(s32 gfx_id, HSD_GObj* arg_gobj, va_list arg2) {
 #if 1
 void* efAsync_80063930(s32 gfx_id, HSD_GObj* arg_gobj, void* vlist)
 {
@@ -1419,7 +1419,7 @@ void efAsync_8006744C(HSD_GObj* gobj, ef_UnkStruct3* arg1)
 }
 
 void efAsync_80067624(HSD_GObj* gobj, void* arg_struct)
-// void efAsync_80067624(HSD_GObj* gobj, ef_UnkStruct3* arg_struct)
+/// void efAsync_80067624(HSD_GObj* gobj, ef_UnkStruct3* arg_struct)
 {
     ef_UnkStruct3* temp_r31;
     ef_UnkStruct3* var_r4;
@@ -1434,7 +1434,7 @@ void efAsync_80067624(HSD_GObj* gobj, void* arg_struct)
 }
 
 void efAsync_80067688(void* arg_struct)
-// void efAsync_80067688(ef_UnkStruct3* arg_struct)
+/// void efAsync_80067688(ef_UnkStruct3* arg_struct)
 {
     ef_UnkStruct3* temp_r30;
     ef_UnkStruct3* var_r4;

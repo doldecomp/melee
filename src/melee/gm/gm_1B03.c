@@ -81,7 +81,7 @@ static UNK_T gm_804D6898[0x4 / 4];
 static UNK_T gm_804D689C[0x8 / 4];
 static UNK_T gm_804D68A4[0x8 / 4];
 
-// file boundary?
+/// file boundary?
 static UNK_T gm_804D68A4_pad[0x4 / 4];
 
 MinorScene gm_803DD6D0_MinorScenes[] = {

@@ -13,7 +13,7 @@
 
 /* 4A03C0 */ static char db_CameraInfoDisplay_buf[0xC0];
 
-// TODO does the padding mean this should be in another file before this one?
+/// TODO does the padding mean this should be in another file before this one?
 static struct {
     u32 MiscStageVisualsStatus;
     u32 unused;
@@ -357,7 +357,7 @@ static void fn_802277E8(HSD_GObj* arg0, int port)
     }
 }
 
-// Debug_UpdateCamera
+/// Debug_UpdateCamera
 static void fn_80227904(HSD_GObj* camera, int port)
 {
     f32 cstick_x;
@@ -383,7 +383,7 @@ static void fn_80227904(HSD_GObj* camera, int port)
     db_CameraInfoDisplayTimer = 0x3C;
 }
 
-// Debug_OrbitAroundInterest
+/// Debug_OrbitAroundInterest
 void fn_802279E8(HSD_GObj* camera, Vec3* camera_pos, Vec3* camera_interest,
                  f32 cstick_x, f32 cstick_y)
 {
@@ -419,7 +419,7 @@ void fn_802279E8(HSD_GObj* camera, Vec3* camera_pos, Vec3* camera_interest,
     }
 }
 
-// Debug_UpdateFreecamRotation
+/// Debug_UpdateFreecamRotation
 static void fn_80227B64(HSD_GObj* camera, f32 cstick_x, f32 cstick_y)
 {
     if ((cstick_x != 0.0F) || (cstick_y != 0.0F)) {
@@ -451,7 +451,7 @@ void fn_80227BA8(HSD_GObj* camera, Vec3* arg1, f32 arg2, f32 arg3)
     }
 }
 
-// Debug_UpdateFreecamDolly
+/// Debug_UpdateFreecamDolly
 static void fn_80227CAC(HSD_GObj* camera, f32 cstick_y)
 {
     Vec3 forward;
@@ -531,7 +531,7 @@ static void fn_80227EB0(HSD_GObj* arg0, Vec3* arg1, Vec3* arg2, f32 arg8,
     }
 }
 
-// Debug_UpdateFreecamPosition
+/// Debug_UpdateFreecamPosition
 static void fn_80227FE0(HSD_GObj* camera, f32 cstick_x, f32 cstick_y)
 {
     Vec3 up_vec;

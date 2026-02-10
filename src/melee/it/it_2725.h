@@ -25,7 +25,7 @@
 /* 272860 */ void it_80272860(Item_GObj*, f32, f32);
 /* 2728C8 */ void it_802728C8(Item_GObj*);
 /* 272940 */ void it_80272940(Item_GObj*);
-// /* 272980 */ void it_80272980(Item_GObj*, f32);
+/// /* 272980 */ void it_80272980(Item_GObj*, f32);
 /* 272980 */ void it_80272980(Item_GObj*);
 /* 272A18 */ void it_80272A18(HSD_JObj* item_jobj);
 /* 272A3C */ void it_80272A3C(HSD_JObj* item_jobj);
@@ -52,7 +52,7 @@
 /* 27327C */ void it_8027327C(Item_GObj*, enum_t ID1, enum_t ID2);
 /* 2732E4 */ void it_802732E4(Item*, s32);
 /* 273318 */ void it_80273318(Item_GObj*, HSD_Joint*, s32);
-// /* 273318 */ void it_80273318(Item_GObj*, HSD_Joint*);
+/// /* 273318 */ void it_80273318(Item_GObj*, HSD_Joint*);
 /* 273408 */ void it_80273408(Item_GObj*);
 /* 273454 */ void it_80273454(Item_GObj*);
 /* 27346C */ void it_8027346C(Item_GObj*);
@@ -222,7 +222,7 @@
 /* 27B070 */ void it_8027B070(Item_GObj*, Fighter_GObj*);
 /* 27B0C4 */ void it_8027B0C4(Item_GObj*, SpawnItem*);
 /* 27B1F4 */ void it_8027B1F4(Item_GObj*);
-// /* 27B1F4 */ void it_8027B1F4(Item_GObj*, int);
+/// /* 27B1F4 */ void it_8027B1F4(Item_GObj*, int);
 /* 27B288 */ void it_8027B288(Item_GObj*, u32);
 /* 27B330 */ void it_8027B330(Item_GObj*, u32);
 /* 27B378 */ void it_8027B378(Fighter_GObj*, Item_GObj*, f32);

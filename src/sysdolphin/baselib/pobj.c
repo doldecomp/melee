@@ -645,7 +645,7 @@ static void get_shape_normal_xyz(HSD_ShapeSet* shape_set, int shape_id,
     }
 }
 
-// https://decomp.me/scratch/aleJ2
+/// https://decomp.me/scratch/aleJ2
 static void get_shape_nbt_xyz(HSD_ShapeSet* shape_set, int shape_id,
                               int arrayidx, float* dst)
 {

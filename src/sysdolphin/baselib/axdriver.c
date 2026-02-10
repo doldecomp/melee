@@ -773,8 +773,8 @@ static void fn_8038DA5C(s32 result, DVDFileInfo* fileInfo)
     }
 }
 
-// @TODO: Currently 97.58% match - register allocation in section 1 and 2
-// parsing blocks (r0/r3 swap for count/ptr, r4/r5 swap for base pointer)
+/// @TODO: Currently 97.58% match - register allocation in section 1 and 2
+/// parsing blocks (r0/r3 swap for count/ptr, r4/r5 swap for base pointer)
 void AXDriver_8038DA70(const char* path, void (*callback)(void))
 {
     DVDFileInfo fileInfo;
@@ -1007,7 +1007,7 @@ static const s32 revstd_dims[] = {
     0x6FD, 0x7CF, 0x1B1, 0x95,
 };
 
-// @TODO: Currently 53.61% match - needs struct copy and computation order fixes
+/// @TODO: Currently 53.61% match - needs struct copy and computation order fixes
 s32 AXDriver_8038E034(AXDriverAuxType type, void* param)
 {
     s32 result;

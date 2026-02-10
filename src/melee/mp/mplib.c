@@ -324,7 +324,7 @@ int mpLineGetPrev(int line_id)
     return groundCollLine[line_id].x0->prev_id0;
 }
 
-// remap point p from line a to line b
+/// remap point p from line a to line b
 static void mpRemap2d(float* x_out, float* y_out, float ax0, float ay0,
                       float ax1, float ay1, float bx0, float by0, float bx1,
                       float by1, float px, float py)
@@ -656,7 +656,7 @@ int mpLib_8004E684_RightWall(int line_id, Vec3* vec, float* x_out,
     return line_id;
 }
 
-// direction dependent line intersection
+/// direction dependent line intersection
 bool mpLineIntersection(float a0x, float a0y, float a1x, float a1y, float b0x,
                         float b0y, float b1x, float b1y, float* int_x,
                         float* int_y)
@@ -765,7 +765,7 @@ bool mpLineIntersection(float a0x, float a0y, float a1x, float a1y, float b0x,
     }
 }
 
-// line intersection between a and b, where a is a horizontal line
+/// line intersection between a and b, where a is a horizontal line
 bool mpLineIntersectionH(float* int_x, float* int_y, float a0x, float a0y,
                          float a1x, float b0x, float b0y, float b1x, float b1y)
 {
@@ -1480,7 +1480,7 @@ bool mpCheckCeilingRemap(float ax, float ay, float bx, float by, Vec3* vec_out,
     return r27;
 }
 
-// line intersection between a and b, where a is a vertical line
+/// line intersection between a and b, where a is a vertical line
 bool mpLineIntersectionV(float* int_x, float* int_y, float a0x, float a0y,
                          float a1y, float b0x, float b0y, float b1x, float b1y)
 {
@@ -3545,7 +3545,7 @@ static inline HSD_JObj* jobj_parent(HSD_JObj* jobj)
     return jobj->parent;
 }
 
-// what even is this lol
+/// what even is this lol
 void mpLib_800552B0(int joint_id, HSD_JObj* jobj, int z)
 {
     s32 i;
@@ -4708,7 +4708,7 @@ static struct mpLib_803BF248_t_x4* mpLib_803BF1F8[20] = {
     &mpLib_803BDAB8, &mpLib_803BDB10, &mpLib_803BDB68, &mpLib_803BDBC0,
 };
 
-// clang-format off
+/// clang-format off
 static struct mpLib_803BF248_t mpLib_803BF248[0x47] = {
     { InternalStageID_Unk00,    &mpLib_803BDC18 },
     { InternalStageID_Unk01,    &mpLib_803BDC68 },
@@ -4782,7 +4782,7 @@ static struct mpLib_803BF248_t mpLib_803BF248[0x47] = {
     { 0x45,                     &mpLib_803BF1A8 },
     { 0x46,                     &mpLib_803BF1F8 },
 };
-// clang-format on
+/// clang-format on
 
 float mpLib_800569EC(u32 unk)
 {
@@ -5576,8 +5576,8 @@ bool mpCheckedBounding(void)
     return didCheckBounding;
 }
 
-// takes a bounding box and checks each joint to see if they're within range
-// if they are outside the bounding box, they are marked as too far
+/// takes a bounding box and checks each joint to see if they're within range
+/// if they are outside the bounding box, they are marked as too far
 void mpBoundingCheck(float left, float bottom, float right, float top)
 {
     CollJoint* curr = jointListStart;
@@ -6537,7 +6537,7 @@ static const GXColor mpLib_804D8148 = { 0x80, 0xC0, 0xC0, 0xFF };
 static const GXColor mpLib_804D814C = { 0xC0, 0xFF, 0xFF, 0x80 };
 static const GXColor mpLib_804D8150 = { 0x40, 0x40, 0xFF, 0x00 };
 
-// blast zones, camera bounds, etc
+/// blast zones, camera bounds, etc
 void mpLib_DrawZones(void)
 {
     u8 _3[0x4];

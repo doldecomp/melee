@@ -39,8 +39,8 @@ typedef enum _StageSelectMode {
     StageSelectMode_Loser
 } StageSelectMode;
 
-// Not same as CharacterKind bc not as many characters as icons (missing Sheik,
-// Master Hand, etc)
+/// Not same as CharacterKind bc not as many characters as icons (missing Sheik,
+/// Master Hand, etc)
 typedef enum CSSIconHud {
     ICONHUD_CAPTAIN = 0x00,
     ICONHUD_DONKEY = 0x01,

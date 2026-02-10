@@ -27,7 +27,7 @@ typedef struct SIS {
     /*0x04*/ TextGlyphTexture* textures;
 } SIS;
 
-// @todo: give actual names?
+/// @todo: give actual names?
 struct sislib_UnkAllocData {
     sislib_UnkAllocData* data_0;
     HSD_Text* data_1;
@@ -152,6 +152,6 @@ void HSD_SisLib_803A5F50(s32);
 void HSD_SisLib_803A5FBC(void);
 void fn_803A60EC(void*);
 u8* fn_803A6FEC(u8*, s32, s32*);
-// void *HSD_SisLib_803A84BC(HSD_GObj *, s32);
+/// void *HSD_SisLib_803A84BC(HSD_GObj *, s32);
 
 #endif

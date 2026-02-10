@@ -11,7 +11,7 @@
 HSD_ObjAllocData HSD_Mtx_804C2310;
 HSD_ObjAllocData HSD_Mtx_804C233C;
 
-// Calculates the determinant of the top 3x3 section of a 3x4 matrix
+/// Calculates the determinant of the top 3x3 section of a 3x4 matrix
 inline f32 HSD_CalcDeterminantMatrix3x4(Mtx m)
 {
     return m[0][0] * m[1][1] * m[2][2] + m[0][1] * m[1][2] * m[2][0] +
@@ -57,7 +57,7 @@ void HSD_MtxInverse(Mtx src, Mtx dest)
                    (-dest[2][0] * src[0][3] - dest[2][1] * src[1][3]));
 }
 
-// https://decomp.me/scratch/kalJY
+/// https://decomp.me/scratch/kalJY
 void HSD_MtxInverseConcat(Mtx inv, Mtx src, Mtx dest)
 {
     Mtx m;
@@ -266,7 +266,7 @@ void HSD_MtxGetRotation(Mtx m, Vec3* vec)
     vec->z = 0;
 }
 
-// These parameters may not be right
+/// These parameters may not be right
 void HSD_MtxGetTranslate(Mtx mat, Vec3* vec)
 {
     vec->x = mat[0][3];
@@ -434,7 +434,7 @@ void HSD_MtxSRTQuat(Mtx arg0, Vec3* arg1, Quaternion* arg2, Vec3* arg3,
     MTXConcat(temp, arg0, arg0);
 }
 
-// might be a fakematch?
+/// might be a fakematch?
 void HSD_MtxScaledAdd(Mtx arg0, Mtx arg1, Mtx arg2, f32 arg3)
 {
     f32* arr0 = (f32*) &arg0[0][0];

@@ -34,7 +34,7 @@ static inline void mnHyaku_8024C68C_inline(HSD_JObj* jobj, s32 val)
     HSD_JObjAnimAll(jobj);
 }
 
-// these are most likely ids to text
+/// these are most likely ids to text
 static u8 vals[] = { 0xAB, 0xAC, 0xAD, 0xAE, 0xAF, 0xB0, 0x00, 0x00 };
 
 static inline void mnHyaku_8024C68C_inline_2(HSD_GObj* gobj)

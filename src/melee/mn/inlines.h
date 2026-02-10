@@ -43,8 +43,8 @@ static inline u64 Menu_GetInputsForPort(s32 i)
     return mn_804A04F0.buttons = mn_80229624(i);
 }
 
-// @todo: The functions `fn_8017435C`, `fn_80174338`, and `fn_80174380` are
-// probably deduplicated clones of these.
+/// @todo: The functions `fn_8017435C`, `fn_80174338`, and `fn_80174380` are
+/// probably deduplicated clones of these.
 
 static inline void sfxBack(void)
 {
@@ -71,7 +71,7 @@ static inline void Menu_InitCenterText(Menu* menu, u8 val)
     HSD_SisLib_803A6368(text, val);
 }
 
-// @todo: One of these inlines is probably correct
+/// @todo: One of these inlines is probably correct
 
 static inline void inline_test_3(HSD_JObj* jobj, f32 val, u8 loops,
                                  HSD_TypeMask type)

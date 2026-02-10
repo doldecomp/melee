@@ -107,8 +107,8 @@ extern MotionState* ftData_CharacterStateTables[FTKIND_MAX];
 
 extern StageInfo stage_info; // from asm/melee/gm_1A36.s
 
-// ==== fighter.c variables ====
-// =============================
+/// ==== fighter.c variables ====
+/// =============================
 
 const Vec3 Fighter_803B7488 = { 0.0f, 0.0f, 0.0f };
 const Vec3 vec3_803B7494 = { 0.0f, 0.0f, 0.0f };
@@ -120,12 +120,12 @@ HSD_ObjAllocData fighter_dobj_list_alloc_data;
 HSD_ObjAllocData fighter_x2040_alloc_data;
 HSD_ObjAllocData fighter_x59C_alloc_data;
 
-// TODO: verify that this is really a spawn number counter, then rename this
-// var globally
+/// TODO: verify that this is really a spawn number counter, then rename this
+/// var globally
 u32 Fighter_804D64F8 = 0;
 #define g_spawnNumCounter Fighter_804D64F8
 
-// the following seems to be an array, initialized in reverse in
+/// the following seems to be an array, initialized in reverse in
 struct Fighter_804D64FC_t* Fighter_804D64FC = NULL;
 CrowdConfig* gCrowdConfig = NULL;
 HSD_Joint* Fighter_804D6504 = NULL;
@@ -818,8 +818,8 @@ void Fighter_UnkInitLoad_80068914(Fighter_GObj* gobj,
     fp->x2229_b3 = 0;
 }
 
-// increments the spawn number, returns the spawn number value before
-// incrementing
+/// increments the spawn number, returns the spawn number value before
+/// incrementing
 u32 Fighter_NewSpawn_80068E40(void)
 {
     u32 spawnNum = g_spawnNumCounter++;
@@ -1717,7 +1717,7 @@ void Fighter_8006ABA0(Fighter_GObj* gobj)
     }
 }
 
-// https://decomp.me/scratch/A7CgG
+/// https://decomp.me/scratch/A7CgG
 void Fighter_UnkIncrementCounters_8006ABEC(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -1754,8 +1754,8 @@ void Fighter_UnkIncrementCounters_8006ABEC(Fighter_GObj* gobj)
     }
 }
 
-// the stick pairs seen in input structs might make more sense as an array of
-// 2, or a struct of 2 floats.. if it still matches.
+/// the stick pairs seen in input structs might make more sense as an array of
+/// 2, or a struct of 2 floats.. if it still matches.
 #define SET_STICKS(stickXPtr, stickYPtr, x, y)                                \
     do {                                                                      \
         float* stickX = (float*) &stickXPtr;                                  \

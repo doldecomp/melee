@@ -23,7 +23,7 @@
 
 #include <math.h>
 
-// @todo: Remove these once lbcoll is matched.
+/// @todo: Remove these once lbcoll is matched.
 static inline void fake_HSD_JObjSetRotation(HSD_JObj* jobj, Quaternion* rotate)
 {
     HSD_ASSERT(618, jobj);
@@ -412,7 +412,7 @@ void itLinkArrow_Logic98_PickedUp(Item_GObj* gobj)
     Item_80268E5C((HSD_GObj*) gobj, 0, ITEM_ANIM_UPDATE);
 }
 
-// Item could be passed to influence stack
+/// Item could be passed to influence stack
 static void inline itLinkarrow_UnkMotion1_Anim_inline_s_2(HSD_GObj* gobj,
                                                           Item* item)
 {

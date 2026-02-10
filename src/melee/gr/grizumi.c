@@ -39,7 +39,7 @@
 #include <baselib/tobj.h>
 #include <baselib/wobj.h> // IWYU pragma: keep
 
-// context stuff
+/// context stuff
 typedef struct FountainParams {
     float x0;
     int x4;
@@ -172,13 +172,13 @@ StageData grIz_803E0E5C = {
     3,
 };
 
-// functions start here
+/// functions start here
 void grIzumi_801CBB84(bool x)
 {
     return;
 }
 
-// https://decomp.me/scratch/94sPw
+/// https://decomp.me/scratch/94sPw
 void grIzumi_801CBB88(void)
 {
     HSD_GObj* r3;
@@ -194,7 +194,7 @@ void grIzumi_801CBB88(void)
     Ground_801C3BB4();
 }
 
-// https://decomp.me/scratch/4u5TX
+/// https://decomp.me/scratch/4u5TX
 void grIzumi_UnkStage0_OnLoad(void)
 {
     HSD_GObj* gobj;
@@ -215,7 +215,7 @@ void grIzumi_UnkStage0_OnLoad(void)
     }
 }
 
-// https://decomp.me/scratch/9AxrD
+/// https://decomp.me/scratch/9AxrD
 void grIzumi_UnkStage0_OnStart(void)
 {
     grZakoGenerator_801CAE04(0);
@@ -226,7 +226,7 @@ bool grIzumi_801CBCE0(void)
     return false;
 }
 
-// https://decomp.me/scratch/FVXdq
+/// https://decomp.me/scratch/FVXdq
 HSD_GObj* grIzumi_801CBCE8(int gobj_id)
 {
     HSD_GObj* gobj;
@@ -255,7 +255,7 @@ HSD_GObj* grIzumi_801CBCE8(int gobj_id)
     } else {
         // clang-format off
 //#line 241 "grizumi.c"
-//        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, __LINE__, gobj_id);
+///        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, __LINE__, gobj_id);
         // clang-format on
         OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grizumi.c", 241,
                  gobj_id);
@@ -264,7 +264,7 @@ HSD_GObj* grIzumi_801CBCE8(int gobj_id)
     return gobj;
 }
 
-// https://decomp.me/scratch/BcUJr
+/// https://decomp.me/scratch/BcUJr
 void grIzumi_801CBDD4(Ground_GObj* gobj)
 {
     grAnime_801C8138(gobj, GET_GROUND(gobj)->map_id, 0);
@@ -307,7 +307,7 @@ void grIzumi_801CBE60(Ground_GObj* gobj)
     return;
 }
 
-// https://decomp.me/scratch/VuF6U
+/// https://decomp.me/scratch/VuF6U
 void grIzumi_801CBE64(Ground_GObj* gobj)
 {
     HSD_TObj* tobj;
@@ -328,9 +328,9 @@ void grIzumi_801CBE64(Ground_GObj* gobj)
         tobj->flags = (tobj->flags & ~0x1FF) | 0x103;
     } else {
         // clang-format off
-// this breaks the line numbers in compile errors >:(
+/// this breaks the line numbers in compile errors >:(
 //#line 387 "grizumi.c"
-//        OSReport("%s:%d:Warning: not found tobj !\n", __FILE__, __LINE__);
+///        OSReport("%s:%d:Warning: not found tobj !\n", __FILE__, __LINE__);
         // clang-format on
         OSReport("%s:%d:Warning: not found tobj !\n", "grizumi.c", 387);
     }

@@ -48,7 +48,7 @@ const int FILE_EXTENSION_LENGTH = 4; // ".usd" or ".dat"
 const int MAX_BASENAME_LENGTH = MAX_FILENAME_LENGTH - FILE_EXTENSION_LENGTH;
 static char lbFile_80432058[MAX_FILENAME_LENGTH];
 
-// append file extension (if needed)
+/// append file extension (if needed)
 char* lbFile_80016204(const char* basename)
 {
     const char* cur = basename;

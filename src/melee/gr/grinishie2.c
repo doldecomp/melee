@@ -239,10 +239,10 @@ bool grInishie2_801FCF24(Ground_GObj* gobj)
     return 0;
 }
 
-// TODO: this stage and mushroom kingdom 1 both change the music when there's
-// less than 20 seconds, since this function is copy-pasted from
-// grInishie1_801FCB10 then Ground_801C5A94 is probably getting a stage
-// identifier of some kind
+/// TODO: this stage and mushroom kingdom 1 both change the music when there's
+/// less than 20 seconds, since this function is copy-pasted from
+/// grInishie1_801FCB10 then Ground_801C5A94 is probably getting a stage
+/// identifier of some kind
 void grInishie2_801FCF2C(HSD_GObj* gobj)
 {
     int time_remaining;
@@ -445,7 +445,7 @@ void grInishie2_801FD4CC(HSD_GObj* gobj)
     mpLib_80057BC0(0xE);
 }
 
-// probably chooses which side to spawn Birdo on
+/// probably chooses which side to spawn Birdo on
 void grInishie2_801FD4F0(Ground_GObj* gobj)
 {
     Vec3 vec;

@@ -80,7 +80,7 @@
 #include <baselib/random.h>
 #include <MSL/math.h>
 
-// External variables from ftKb_Init.c
+/// External variables from ftKb_Init.c
 extern bool ftKb_Init_803CB490[];
 
 struct ftKb_Init_803CB4EC_t {
@@ -89,7 +89,7 @@ struct ftKb_Init_803CB4EC_t {
 };
 extern struct ftKb_Init_803CB4EC_t ftKb_Init_803CB4EC;
 
-// Forward declarations
+/// Forward declarations
 void fn_800F9260(HSD_GObj*);
 void fn_800F64C8(Fighter_GObj*);
 void fn_800F6178(HSD_GObj* gobj);

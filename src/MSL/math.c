@@ -20,21 +20,21 @@ typedef union {
     (raw_x & 0xFFFF)   // remaining 16 mantissa bits
 #define LN2 0.6931472f // natural logarithm of 2
 
-// TODO: use standard library constants, because this definition seems to be
-// platform dependant
+/// TODO: use standard library constants, because this definition seems to be
+/// platform dependant
 float float_nan = 0.0 / 0.0;
 float float_inf = 1.0e100 * 1.0e100;
 
-// Math lookup tables - defined in math_data.c
-// Keeping them in a separate compilation unit prevents the compiler from
-// hoisting array base addresses, which is needed to match the original code.
+/// Math lookup tables - defined in math_data.c
+/// Keeping them in a separate compilation unit prevents the compiler from
+/// hoisting array base addresses, which is needed to match the original code.
 extern const float __ln_F[];
 extern const float __one_over_F[];
 extern const float __sincos_on_quadrant[];
 extern const float __sincos_poly[];
 
-// logf Taylor series coefficients - stored as u32 bit patterns in math_data.c
-// to get the right codegen (lwz load from global)
+/// logf Taylor series coefficients - stored as u32 bit patterns in math_data.c
+/// to get the right codegen (lwz load from global)
 extern const u32 __logf_C0_bits; // 0xBF000030 = -0.500003F
 extern const u32 __logf_C1_bits; // 0x3EAA9F44 = 0.333329856F
 

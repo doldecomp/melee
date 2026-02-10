@@ -102,7 +102,7 @@ static inline void Player_CheckSlot(int slot)
     }
 }
 
-// Matches when everything is moved over
+/// Matches when everything is moved over
 StaticPlayer* Player_GetPtrForSlot(int slot)
 {
     Player_CheckSlot(slot);
