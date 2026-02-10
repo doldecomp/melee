@@ -22,6 +22,7 @@
 #include <melee/gr/ground.h>
 #include <melee/gr/grpushon.h>
 #include <melee/gr/stage.h>
+#include <melee/if/ifstatus.h>
 #include <melee/it/item.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lb_00F9.h>
@@ -34,10 +35,12 @@
 #include <melee/mp/mpcoll.h>
 #include <melee/pl/player.h>
 #include <melee/sc/types.h>
+#include <melee/ty/toy.h>
 
 typedef struct lbl_804706D8_t {
     s16 x0;
-    s16 x2;
+    u8 x2;
+    u8 x3;
 } lbl_804706D8_t;
 
 lbl_804706D8_t lbl_804706D8[12];
@@ -612,7 +615,31 @@ u8 gm_8017DB78(gm_8017DB6C_arg0_t* arg0, int index)
 
 /// #gm_8017DB88
 
-/// #fn_8017DD7C
+u8 fn_8017DD7C(PlayerInitData* arg0, Unk1PData_x24* arg1)
+{
+    s32 index = 1;
+    int i;
+    for (i = 0; i < 3; i++) {
+        if (arg1[i].ckind != CHKIND_NONE) {
+            gm_8016795C(&arg0[index]);
+            arg0[index].c_kind = arg1[i].ckind;
+            arg0[index].slot_type = 1;
+            arg0[index].stocks = 1;
+            arg0[index].team = arg0->team;
+            arg0[index].color = arg1[i].x1;
+            arg0[index].xE = arg1[i].x3;
+            arg0[index].cpu_level = arg1[i].x2;
+            arg0[index].x18 = arg1[i].x4;
+            arg0[index].x1C = arg1[i].x8;
+            arg0[index].xD_b1 = 1;
+            if (arg0[index].c_kind == CKIND_GKOOPS) {
+                arg0[index].xC_b1 = 0;
+            }
+            index++;
+        }
+    }
+    return index - 1;
+}
 
 /// #fn_8017DE54
 
@@ -710,11 +737,40 @@ void fn_8017E21C(void)
     }
 }
 
-/// #gm_8017E280
+s8 gm_8017E280(u16 arg0, u32 arg1)
+{
+    lbl_804706D8_t* var_r7 = lbl_804706D8;
+    s32 index;
+    index = 0;
+    for (index = 0; index < 12; index++) {
+        if (arg0 == var_r7[index].x0) {
+            var_r7[index].x2 += arg1;
+            return var_r7[index].x2;
+        }
+    }
+    index = 0;
+    for (index = 0; index < 12; index++) {
+        if (var_r7[index].x0 == -1) {
+            var_r7[index].x0 = arg0;
+            var_r7[index].x2 = arg1;
+            return (u8) arg1;
+        }
+    }
+    return -1;
+}
 
 /// #fn_8017E318
 
-/// #fn_8017E3C8
+void fn_8017E3C8(void)
+{
+    int i = 0;
+    PAD_STACK(8);
+    for (i = 0; i < 12; i++) {
+        if (lbl_804706D8[i].x0 != -1) {
+            Trophy_SetUnlockState(lbl_804706D8[i].x0, lbl_804706D8[i].x2);
+        }
+    }
+}
 
 UnkAdventureData* gm_8017E424(void)
 {
@@ -726,7 +782,14 @@ u8 gm_8017E430(void)
     return lbl_80472C30.x0.slot;
 }
 
-/// #gm_8017E440
+u8 gm_8017E440(void)
+{
+    UnkAdventureData* r31 = &lbl_80472C30;
+    if (gm_801677F8(r31->x0.slot, r31->x0.x4) == false) {
+        return 4;
+    }
+    return r31->x0.slot;
+}
 
 u8 gm_8017E48C(MinorScene* scene)
 {
@@ -740,7 +803,18 @@ u8 gm_8017E48C(MinorScene* scene)
     return count;
 }
 
-/// #gm_8017E4C4
+struct gm_803DE650_t* gm_8017E4C4(u8 arg0)
+{
+    struct gm_803DE650_t* var_r4 = gm_803DE650;
+    u8 temp;
+    while (var_r4->x0 != 0xFF) {
+        if (var_r4->x0 == arg0) {
+            return var_r4;
+        }
+        var_r4++;
+    }
+    return NULL;
+}
 
 /// Get adventure stage kind for given difficulty and stage slot.
 /// The (u8) cast on difficulty is required - these functions are called
@@ -800,7 +874,14 @@ u8 gm_8017E76C(u8 difficulty, u8 stage_slot, u8 arg2)
     return lbl_803D7AC0[stage_slot + difficulty * 5].pad_6[0x10 + (arg2 * 3)];
 }
 
-/// #gm_8017E7A0
+void gm_8017E7A0(u8 arg0)
+{
+    if (arg0 == 1) {
+        Player_LoseStock(0);
+        ifStatus_802F6948(0);
+        ifStatus_802F6E3C(0);
+    }
+}
 
 bool gm_8017E7E0(void)
 {
