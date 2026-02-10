@@ -688,9 +688,30 @@ typedef struct itNokoNoko_DatAttrs {
     f32 x8;
 } itNokoNoko_DatAttrs;
 
+typedef struct itTaruAttributes {
+    /* +00 */ s32 x0;
+    /* +04 */ s32 x4;
+    /* +08 */ f32 x8;
+    /* +0C */ f32 xC;
+    /* +10 */ f32 x10;
+    /* +14 */ f32 x14;
+    /* +18 */ f32 x18;
+    /* +1C */ f32 x1C;
+    /* +20 */ f32 x20;
+    /* +24 */ f32 x24;
+    /* +28 */ f32 x28;
+    /* +2C */ f32 x2C;
+    /* +30 */ f32 x30;
+    /* +34 */ f32 x34;
+} itTaruAttributes;
+
 typedef struct itTaru_ItemVars {
-    s32 xDD4;
-    s32 xDD8;
+    /* +0  ip+DD4 */ s32 xDD4;
+    /* +4  ip+DD8 */ s32 xDD8;
+    /* +8  ip+DDC */ f32 xDDC;
+    /* +C  ip+DE0 */ f32 xDE0;
+    /* +10 ip+DE4 */ f32 xDE4;
+    /* +14 ip+DE8 */ Vec3 xDE8;
 } itTaru_ItemVars;
 
 typedef struct itTarucann_ItemVars {
