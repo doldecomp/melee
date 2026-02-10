@@ -11,8 +11,8 @@
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
-#include "it/itCommonItems.h"
 #include "it/itcoll.h"
+#include "it/itCommonItems.h"
 #include "it/item.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
@@ -77,8 +77,7 @@ void it_802874F0(Item_GObj* gobj)
                 var_f1 = -var_f1;
             }
             if (var_f1 < attr->x2C) {
-                ip->xDD4_itemVar.taru.xDE4 +=
-                    temp_f2 * attr->x24;
+                ip->xDD4_itemVar.taru.xDE4 += temp_f2 * attr->x24;
             }
         } else {
             temp_f1 = ip->xDD4_itemVar.taru.xDE4;
@@ -110,9 +109,8 @@ void it_802874F0(Item_GObj* gobj)
         ip->x40_vel.x =
             ip->xDD4_itemVar.taru.xDE4 * ip->xDD4_itemVar.taru.xDE8.y;
         var_f2 = inline_fabsf(ip->xDD4_itemVar.taru.xDE4);
-        ip->xDD4_itemVar.taru.xDE0 =
-            (0.12217305f * var_f2 * -ip->facing_dir) +
-            ip->xDD4_itemVar.taru.xDE0;
+        ip->xDD4_itemVar.taru.xDE0 = (0.12217305f * var_f2 * -ip->facing_dir) +
+                                     ip->xDD4_itemVar.taru.xDE0;
     } else {
         ip->xDD4_itemVar.taru.xDE0 =
             (0.10471976f * -ip->facing_dir) + ip->xDD4_itemVar.taru.xDE0;
@@ -123,9 +121,9 @@ void it_80287690(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
-    f32 step = 1.5707964f /
-               ((itTaruAttributes*) ip->xC4_article_data->x4_specialAttributes)
-                   ->x18;
+    f32 step =
+        1.5707964f /
+        ((itTaruAttributes*) ip->xC4_article_data->x4_specialAttributes)->x18;
     HSD_JObj* child = HSD_JObjGetChild(jobj);
     f32 var_f31;
     f32 rot;
@@ -353,8 +351,7 @@ void it_802881B4(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     PAD_STACK(8);
-    lb_8000B804(gobj->hsd_obj,
-                ip->xC4_article_data->x10_modelDesc->x0_joint);
+    lb_8000B804(gobj->hsd_obj, ip->xC4_article_data->x10_modelDesc->x0_joint);
     it_802881FC(gobj);
 }
 
@@ -581,7 +578,8 @@ static inline bool itTaru_RandCheck(itTaruAttributes* attr)
     return false;
 }
 
-static inline void it_3F14_Logic2_inline(Item_GObj* gobj, Item* ip, itTaruAttributes* attr)
+static inline void it_3F14_Logic2_inline(Item_GObj* gobj, Item* ip,
+                                         itTaruAttributes* attr)
 {
     efSync_Spawn(0x427, gobj, &ip->pos);
     if (itTaru_RandCheck(attr)) {
@@ -665,8 +663,7 @@ bool it_3F14_Logic2_DmgReceived(Item_GObj* gobj)
                 }
             } else if ((u32) (ip->msid - 4) <= 1u) {
                 ip->xDD4_itemVar.taru.xDE4 =
-                    (-ip->xCCC_incDamageDirection *
-                     (ip->xCA0 * attr->x10)) +
+                    (-ip->xCCC_incDamageDirection * (ip->xCA0 * attr->x10)) +
                     ip->xDD4_itemVar.taru.xDE4;
                 it_8027236C(gobj);
                 it_80275444(gobj);
