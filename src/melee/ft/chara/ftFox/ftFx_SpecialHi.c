@@ -28,10 +28,10 @@
         Ft_MF_SkipItemVis | Ft_MF_Unk19 | Ft_MF_SkipModelPartVis |            \
         Ft_MF_SkipModelFlags | Ft_MF_Unk27
 
-/// @@todo Move elsewhere.
+/// @todo Move elsewhere.
 #define HALF_PI32 (1.5707963705062866f)
 
-/// @@todo Move elsewhere.
+/// @todo Move elsewhere.
 #define DOUBLE_PI32 (6.2831854820251465f)
 
 void ftFx_SpecialHi_CreateLaunchGFX(HSD_GObj* gobj)
@@ -179,7 +179,7 @@ void ftFx_SpecialHiHoldAir_Coll(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     s32 facingDir;
 
-    /// @@todo Ternary operator should be possible here somehow.
+    /// @todo Ternary operator should be possible here somehow.
     if (fp->facing_dir < 0.0f) {
         facingDir = -1;
     } else {
@@ -226,7 +226,7 @@ void ftFx_SpecialHi_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    /// @@todo Common inline with #ftFx_SpecialAirHi_Anim.
+    /// @todo Common inline with #ftFx_SpecialAirHi_Anim.
     fp->mv.fx.SpecialHi.travelFrames--;
 
     if (fp->mv.fx.SpecialHi.travelFrames <= 0) {
@@ -267,7 +267,7 @@ void ftFx_SpecialAirHi_IASA(HSD_GObj* gobj)
 
 void ftFx_SpecialHi_Phys(HSD_GObj* gobj)
 {
-    /// @@todo Possibly common inline with #ftFx_SpecialAirHi_Phys.
+    /// @todo Possibly common inline with #ftFx_SpecialAirHi_Phys.
     Fighter* fp = GET_FIGHTER(gobj);
     ftFox_DatAttrs* da = getFtSpecialAttrs(fp);
 
@@ -332,7 +332,7 @@ static inline bool ftFox_SpecialHi_IsBound(HSD_GObj* gobj)
     }
 }
 
-/// @@todo Rework this entire match.
+/// @todo Rework this entire match.
 void ftFx_SpecialAirHi_Coll(HSD_GObj* gobj)
 {
     float facingDir;
@@ -358,7 +358,7 @@ void ftFx_SpecialAirHi_Coll(HSD_GObj* gobj)
 
     /** @remarks Not a single line of this entire function makes the slightest
      * sliver of sense but it matches so whatever :D
-     * @@todo This match is definitely fake.
+     * @todo This match is definitely fake.
      */
     if (ftCliffCommon_80081298(gobj) == false) {
         s32 envFlags = collData->env_flags;

@@ -63,7 +63,7 @@ static inline float my_lbVector_Len(Vec3* vec)
     return my_sqrtf(vec->x * vec->x + vec->y * vec->y + vec->z * vec->z);
 }
 
-/// @@todo Figure out how to use #GET_JOBJ instead.
+/// @todo Figure out how to use #GET_JOBJ instead.
 static inline HSD_JObj* get_jobj(HSD_GObj* gobj)
 {
     return gobj->hsd_obj;
@@ -1973,7 +1973,7 @@ void ftCh_Wait1_1_Anim(HSD_GObj* gobj)
 
     if (fp->cmd_vars[0] != 0) {
         Vec3 scl;
-        /// @@todo #GET_JOBJ
+        /// @todo #GET_JOBJ
         HSD_JObj* jobj = get_jobj(gobj);
         if (--fp->mv.ch.ch_backcrush.x5C < 0) {
             fp->cmd_vars[0] = 0;

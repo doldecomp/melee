@@ -75,7 +75,7 @@ static void ftMh_MS_347_80151AC8(HSD_GObj* gobj);
 void ftMh_SweepLoop_Anim(HSD_GObj* gobj)
 {
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        /// @@todo #GET_FIGHTER
+        /// @todo #GET_FIGHTER
         Fighter* fp = gobj->user_data;
         Vec3 pos;
 

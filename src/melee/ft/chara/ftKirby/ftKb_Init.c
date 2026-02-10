@@ -3041,7 +3041,7 @@ Vec3 const ftKb_Init_803B757C = { 0, 4, 0 };
 
 void ftKb_Init_800EE528(void)
 {
-    /// @@todo Bad cast.
+    /// @todo Bad cast.
     s32* number_list = (s32*) &ft_80459B88.x0;
     ftKirby_UnkArrayThing** struct_list = ftKb_Init_803C9FC8;
 
@@ -3287,7 +3287,7 @@ HSD_JObj* ftKb_Init_UnkMotionStates6(Fighter_GObj* gobj)
         return fp->fv.kb.hat.jobj;
     }
 
-    /// @@todo What???
+    /// @todo What???
     return (HSD_JObj*) gobj;
 }
 
@@ -5796,7 +5796,7 @@ void fn_800F6A5C(HSD_GObj* gobj)
 /// Fighter_CollGround_PassLedgeCB
 static void fn_800F6AC8(HSD_GObj* gobj)
 {
-    /// @@todo Named flags.
+    /// @todo Named flags.
     static u32 const mf = (1 << 1) | (1 << 4) | (1 << 7) | (1 << 12) |
                           (1 << 14) | (1 << 18) | (1 << 19) | (1 << 22) |
                           (1 << 26) | (1 << 27);
@@ -8056,7 +8056,7 @@ void ftKb_SpecialNNs_800FED38(HSD_GObj* gobj)
                               0, NULL);
     fp->cmd_vars[0] = fp->cmd_vars[1] = fp->cmd_vars[2] = fp->cmd_vars[3] = 0;
     {
-        /// @@todo @c da can't move below @c fp
+        /// @todo @c da can't move below @c fp
         ftKb_DatAttrs* da;
         Fighter* fp = GET_FIGHTER(gobj);
         PAD_STACK(4 * 4);
@@ -8081,7 +8081,7 @@ void ftKb_SpecialNNs_800FEDD0(HSD_GObj* gobj)
     fp->cmd_vars[0] = fp->cmd_vars[1] = fp->cmd_vars[2] = fp->cmd_vars[3] = 0;
     fp->self_vel.y = 0;
     {
-        /// @@todo @c da can't move below @c fp
+        /// @todo @c da can't move below @c fp
         ftKb_DatAttrs* da;
         Fighter* fp = GET_FIGHTER(gobj);
         PAD_STACK(4 * 4);
@@ -11584,7 +11584,7 @@ void ftKb_PeSpecialAirLw_Coll(HSD_GObj* gobj)
 
 void ftKb_SpecialNPe_8010C8D8(HSD_GObj* gobj)
 {
-    /// @@todo Flag names.
+    /// @todo Flag names.
     static u32 const mf = (1 << 2) | (1 << 3) | (1 << 7) | (1 << 12) |
                           (1 << 14) | (1 << 18) | (1 << 19) | (1 << 22) |
                           (1 << 26) | (1 << 27);
@@ -11597,7 +11597,7 @@ void ftKb_SpecialNPe_8010C8D8(HSD_GObj* gobj)
         fp->cmd_vars[0] = 2;
     }
     {
-        /// @@todo @c da can't move below @c fp
+        /// @todo @c da can't move below @c fp
         ftKb_DatAttrs* da;
         Fighter* fp = GET_FIGHTER(gobj);
         da = fp->dat_attrs;
@@ -11620,7 +11620,7 @@ void ftKb_SpecialNPe_8010C8D8(HSD_GObj* gobj)
 
 void ftKb_SpecialNPe_8010C9CC(HSD_GObj* gobj)
 {
-    /// @@todo Named flags.
+    /// @todo Named flags.
     static u32 const mf = (1 << 2) | (1 << 3) | (1 << 7) | (1 << 12) |
                           (1 << 14) | (1 << 18) | (1 << 19) | (1 << 22) |
                           (1 << 26) | (1 << 27);
@@ -11630,7 +11630,7 @@ void ftKb_SpecialNPe_8010C9CC(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, ftKb_MS_PeSpecialLw, mf,
                               fp->cur_anim_frame, 1, 0, NULL);
     {
-        /// @@todo @c da can't move below @c fp
+        /// @todo @c da can't move below @c fp
         ftKb_DatAttrs* da;
         Fighter* fp = GET_FIGHTER(gobj);
         PAD_STACK(4 * 2);
@@ -11708,7 +11708,7 @@ void ftKb_PeSpecialAirLwHit_Coll(HSD_GObj* gobj)
 
 void ftKb_SpecialNGw_8010CC6C(HSD_GObj* gobj)
 {
-    /// @@todo Named flags.
+    /// @todo Named flags.
     static u32 const mf = (1 << 2) | (1 << 3) | (1 << 7) | (1 << 12) |
                           (1 << 14) | (1 << 18) | (1 << 19) | (1 << 22) |
                           (1 << 26) | (1 << 27);
@@ -11721,7 +11721,7 @@ void ftKb_SpecialNGw_8010CC6C(HSD_GObj* gobj)
 
 void ftKb_SpecialNGw_8010CCD4(HSD_GObj* gobj)
 {
-    /// @@todo Named flags.
+    /// @todo Named flags.
     static u32 const mf = (1 << 2) | (1 << 3) | (1 << 7) | (1 << 12) |
                           (1 << 14) | (1 << 18) | (1 << 19) | (1 << 22) |
                           (1 << 26) | (1 << 27);

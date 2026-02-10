@@ -285,7 +285,7 @@ void ftGw_SpecialAirN_AirToGround(HSD_GObj* gobj)
 /// Motion State handler
 void ftGw_SpecialN_Loop(HSD_GObj* gobj, float anim_frame)
 {
-    /// @@todo Shared @c inline with #ftGw_SpecialAirN_Loop.
+    /// @todo Shared @c inline with #ftGw_SpecialAirN_Loop.
     Fighter* fp = fp = GET_FIGHTER(gobj);
 
     u8 _[4];

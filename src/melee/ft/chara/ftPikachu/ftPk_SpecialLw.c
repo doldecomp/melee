@@ -108,7 +108,7 @@ void ftPk_SpecialLw_SpawnEffect(HSD_GObj* gobj)
     {
         u8 _[4];
 
-        /// @@todo Result of an inner function.
+        /// @todo Result of an inner function.
         bool result;
         if (fp->throw_flags_b0) {
             fp->throw_flags_b0 = false;
@@ -160,7 +160,7 @@ void ftPk_SpecialAirLw_Enter(HSD_GObj* gobj)
 
 void ftPk_SpecialLw_ChangeMotion_Unk00(HSD_GObj* gobj)
 {
-    /// @@todo #GET_FIGHTER
+    /// @todo #GET_FIGHTER
     Fighter* fp = gobj->user_data;
     ftCommon_8007D7FC(fp);
     Fighter_ChangeMotionState(gobj, 359, 206327942, fp->cur_anim_frame, 1.0f,
@@ -178,7 +178,7 @@ void ftPk_SpecialLw_ChangeMotion_Unk01(HSD_GObj* gobj)
 
 void ftPk_SpecialLw_ChangeMotion_Unk02(HSD_GObj* gobj)
 {
-    /// @@todo #GET_FIGHTER
+    /// @todo #GET_FIGHTER
     Fighter* fp = gobj->user_data;
     ftCommon_8007D7FC(fp);
     Fighter_ChangeMotionState(gobj, 360, 206329998, fp->cur_anim_frame, 1.0f,
@@ -200,7 +200,7 @@ void ftPk_SpecialLw_ChangeMotion_Unk03(HSD_GObj* gobj)
 
 void ftPk_SpecialLw_ChangeMotion_Unk04(HSD_GObj* gobj)
 {
-    /// @@todo #GET_FIGHTER
+    /// @todo #GET_FIGHTER
     Fighter* fp = gobj->user_data;
     ftCommon_8007D7FC(fp);
     Fighter_ChangeMotionState(gobj, 361, 206327950, fp->cur_anim_frame, 1.0f,
@@ -218,7 +218,7 @@ void ftPk_SpecialLw_ChangeMotion_Unk05(HSD_GObj* gobj)
 
 void ftPk_SpecialLw_ChangeMotion_Unk06(HSD_GObj* gobj)
 {
-    /// @@todo #GET_FIGHTER
+    /// @todo #GET_FIGHTER
     Fighter* fp = gobj->user_data;
     ftCommon_8007D7FC(fp);
     Fighter_ChangeMotionState(gobj, 362, 206327942, fp->cur_anim_frame, 1.0f,

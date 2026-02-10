@@ -30,7 +30,7 @@ ColorOverlay* ftCo_800C0674(Fighter_GObj* gobj)
     return ftCo_800C0658(GET_FIGHTER(gobj));
 }
 
-/// @@todo Wrong return type. Union?
+/// @todo Wrong return type. Union?
 enum_t ftCo_800C0694(Fighter* fp)
 {
     return ftCo_800C0658(fp)->x28_colanim.i;
@@ -80,12 +80,12 @@ void ftCo_800C0764(Ground_GObj* arg0, u32 arg1, void* arg2)
     __assert("ftdevice.c", 0x6FU, "0");
 }
 
-/// @@todo pretty sure arg2 is a ftDevice callback, but unsure if its
+/// @todo pretty sure arg2 is a ftDevice callback, but unsure if its
 /// always of type ftDevice_Callback0.
 void ftCo_800C07F8(Ground_GObj* arg0, u32 arg1, void* arg2)
 {
     struct ftDeviceUnk3* temp_r6;
-    /// @@todo is supposed to load in ft_80459A8C, which is ft_80459A68[3]
+    /// @todo is supposed to load in ft_80459A8C, which is ft_80459A68[3]
     if (ft_80459A68[3].ground == NULL) {
         temp_r6 = &ft_80459A68[3];
         temp_r6->ground = arg0;

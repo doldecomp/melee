@@ -21,7 +21,7 @@
 #include <dolphin/mtx.h>
 #include <dolphin/os.h>
 
-/// @@todo Several differently-signed comparisons appear in asserts, likely
+/// @todo Several differently-signed comparisons appear in asserts, likely
 ///       indicating the sign of one of the variables is declared incorrectly
 #pragma clang diagnostic ignored "-Wsign-compare"
 
@@ -1092,7 +1092,7 @@ static void SetupSharedVtxModelMtx(HSD_PObj* pobj, Mtx vmtx, Mtx pmtx,
         }
     }
     if (flags | SETUP_JOINT1) {
-        ///@@todo Unused stack
+        ///@todo Unused stack
         u8 _[4];
         HSD_JObjSetupMatrix(pobj->u.jobj);
         PSMTXConcat(vmtx, pobj->u.jobj->mtx, m);

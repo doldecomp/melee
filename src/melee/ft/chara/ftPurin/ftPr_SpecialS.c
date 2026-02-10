@@ -24,19 +24,19 @@
 #include <baselib/jobj.h>
 #include <baselib/objalloc.h>
 
-/// @@todo Float order hack.
+/// @todo Float order hack.
 static float forceFloatOrder0(void)
 {
     return 0;
 }
 
-/// @@todo Float order hack.
+/// @todo Float order hack.
 static float forceFloatOrder1(void)
 {
     return deg_to_rad;
 }
 
-/// @@todo Float order hack.
+/// @todo Float order hack.
 static float forceFloatOrder2(void)
 {
     return 1;

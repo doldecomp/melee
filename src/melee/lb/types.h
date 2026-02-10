@@ -950,8 +950,8 @@ struct CommandInfo {
     f32 timer;       // 0x00
     f32 frame_count; // 0x04
     union {
-        u32* ptr[1]; ///< @@todo Hack to match #Command_04
-        /// @@todo eventually clean this up, probably have each struct as its
+        u32* ptr[1]; ///< @todo Hack to match #Command_04
+        /// @todo eventually clean this up, probably have each struct as its
         /// own union?
         union CmdUnion {
             struct Command_00 Command_00;

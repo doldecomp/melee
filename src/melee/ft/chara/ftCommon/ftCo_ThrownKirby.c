@@ -67,7 +67,7 @@ void ftCo_800BDA50(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->fv.kb.hat.kind != FTKIND_KIRBY) {
-        /// @@todo Which @c mv is this?
+        /// @todo Which @c mv is this?
         fp->mv.co.thrownkirby.x18_b1 = true;
     }
 }
@@ -139,7 +139,7 @@ void ftCo_800BDB58(Fighter_GObj* gobj, Fighter_GObj* thrower_gobj)
     inlineB2(gobj, thrower_gobj, &scale, ftCo_MS_ThrownKirbyStar,
              ftKb_SpecialN_800F58AC, ftKb_SpecialN_800F5A88);
 
-    /// @@todo Possibly another callback in #inlineB2
+    /// @todo Possibly another callback in #inlineB2
     ftColl_8007ABD0(fp->x914, inlineB1(gobj), gobj);
 
     ftKb_SpecialN_800F5820(thrower_gobj, &fp->mv.co.thrownkirby.coll_box,
@@ -181,7 +181,7 @@ void ftCo_ThrownKirbyStar_Phys(Fighter_GObj* gobj)
     }
 }
 
-/// @@todo Shared code with #ftCo_ThrownCopyStar_Coll but an inline uses too
+/// @todo Shared code with #ftCo_ThrownCopyStar_Coll but an inline uses too
 ///       much stack.
 void ftCo_ThrownKirbyStar_Coll(Fighter_GObj* gobj)
 {
@@ -206,7 +206,7 @@ void ftCo_800BE000(Fighter_GObj* gobj, Fighter_GObj* thrower_gobj)
     inlineB2(gobj, thrower_gobj, &scale, ftCo_MS_ThrownCopyStar,
              ftKb_SpecialN_800F58D8, ftKb_SpecialN_800F5AB0);
 
-    /// @@todo Possibly another callback in #inlineB2
+    /// @todo Possibly another callback in #inlineB2
     ftColl_8007AFF8(gobj);
 
     ftKb_SpecialN_800F5820(thrower_gobj, &fp->mv.co.thrownkirby.coll_box,
@@ -228,7 +228,7 @@ void ftCo_ThrownCopyStar_Phys(Fighter_GObj* gobj)
     }
 }
 
-/// @@todo Shared code with #ftCo_ThrownKirbyStar_Coll but an inline uses too
+/// @todo Shared code with #ftCo_ThrownKirbyStar_Coll but an inline uses too
 ///       much stack.
 void ftCo_ThrownCopyStar_Coll(Fighter_GObj* gobj)
 {

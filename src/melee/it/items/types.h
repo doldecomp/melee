@@ -7,7 +7,7 @@
 #include "it/items/forward.h" // IWYU pragma: export
 #include <baselib/forward.h>
 
-/// @@todo Size unknown.
+/// @todo Size unknown.
 struct ItemStateTable {
     /// @at{0} @sz{4}
     enum_t anim_id;

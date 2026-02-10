@@ -343,7 +343,7 @@ void ftSk_SpecialAirHiStart_1_Coll(HSD_GObj* gobj)
     }
 
     if (!ftCliffCommon_80081298(gobj)) {
-        /// @@todo float hack
+        /// @todo float hack
         (void) 0.0f;
         (void) 1.0f;
         (void) S32_TO_F32;

@@ -29,7 +29,7 @@ bool ftMh_MS_343_80151428(Vec3* vec)
 
 inline void func_80151484_inline1(HSD_GObj* gobj)
 {
-    /// @@todo #GET_FIGHTER
+    /// @todo #GET_FIGHTER
     Fighter* fp = gobj->user_data;
     ftMasterHand_SpecialAttrs* da = fp->ft_data->ext_attr;
     fp->self_vel.x = fp->self_vel.y = fp->self_vel.z = 0;

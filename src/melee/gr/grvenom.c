@@ -71,7 +71,7 @@ typedef struct grVe_GroundData {
 void grVenom_80203B14(bool arg) {}
 
 /// grVenom_80203B18
-/// @@todo Currently 88.51% match - needs control flow/register allocation fix
+/// @todo Currently 88.51% match - needs control flow/register allocation fix
 /// Stage initialization function for Venom
 
 extern f32 grVe_804DB738;
@@ -269,7 +269,7 @@ void grVenom_80203FCC(Ground_GObj* arg) {}
 
 void grVenom_80203FD0(Ground_GObj* arg) {}
 
-/// @@todo Currently 99.90% match - needs minor register allocation fix
+/// @todo Currently 99.90% match - needs minor register allocation fix
 void grVenom_80203FD4(Ground_GObj* gobj)
 {
     HSD_JObj* jobj1;
@@ -351,7 +351,7 @@ bool grVenom_8020427C(Ground_GObj* arg)
 }
 
 /// grVenom_80204284
-/// @@todo Currently 97.29% match - needs minor register allocation fix
+/// @todo Currently 97.29% match - needs minor register allocation fix
 void grVenom_80204284(Ground_GObj* gobj)
 {
     Ground* gp;
@@ -404,7 +404,7 @@ void grVenom_80204284(Ground_GObj* gobj)
 
 void grVenom_80204424(Ground_GObj* arg) {}
 
-/// @@todo Currently 99.70% match - needs register allocation fix
+/// @todo Currently 99.70% match - needs register allocation fix
 /// FAKE MATCH: grVenom_GroundVars has wrong types for this function
 void grVenom_80204428(Ground_GObj* gobj)
 {
@@ -610,7 +610,7 @@ bool grVenom_802052D8(Ground_GObj* arg)
     return false;
 }
 
-/// @@todo Currently 99.92% match - needs minor register allocation fix
+/// @todo Currently 99.92% match - needs minor register allocation fix
 /// @todo VenomSpawnData struct should be defined in gr/types.h or grvenom.h
 typedef struct {
     u8 pad[0x218];
@@ -656,7 +656,7 @@ void grVenom_802052E0(Ground_GObj* gobj, Vec3* pos)
 }
 
 /// grVenom_802053B0
-/// @@todo Currently 92.15% match - needs register allocation fix
+/// @todo Currently 92.15% match - needs register allocation fix
 /// Needs: grVe_804DB740 extern float
 
 extern f32 grVe_804DB740;
@@ -801,7 +801,7 @@ bool grVenom_80205750(Ground_GObj* arg)
 void grVenom_80205AD0(Ground_GObj* arg) {}
 
 /// grVenom_80205AD4
-/// @@todo Currently 92.66% match - needs minor code ordering fix
+/// @todo Currently 92.66% match - needs minor code ordering fix
 void grVenom_80205AD4(Ground_GObj* gobj)
 {
     u8* base;
@@ -938,7 +938,7 @@ void grVenom_80206870(Ground_GObj* arg) {}
 
 #if 0
 /// grVenom_80206874
-/// @@todo Currently 32.92% match - below 50% threshold, needs significant work
+/// @todo Currently 32.92% match - below 50% threshold, needs significant work
 void grVenom_80206874(Ground_GObj* gobj)
 {
     u8* base;

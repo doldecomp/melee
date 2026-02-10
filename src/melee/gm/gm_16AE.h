@@ -80,7 +80,7 @@
 /* 16C5C0 */ bool gm_8016C5C0(int pl_slot);
 /* 16C658 */ int gm_8016C658(int);
 
-/// @@todo should take Fighter_GObj*? See ftCo_800A53DC
+/// @todo should take Fighter_GObj*? See ftCo_800A53DC
 /* 16C6C0 */ /* static */ s32 gm_8016C6C0(Item_GObj*);
 /* 16C6C0 */ s32 gm_8016C6C0(Item_GObj*);
 /* 16C75C */ /* static */ int gm_8016C75C(HSD_GObj*);

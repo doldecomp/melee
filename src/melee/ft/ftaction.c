@@ -257,7 +257,7 @@ void ftAction_80071028(Fighter_GObj* gobj, CommandInfo* cmd)
             unk = cmd->u->spawn_gfx_1.unkFloat;
 
             NEXT_CMD(cmd);
-            /// @@todo i believe they are actually read in reverse order, maybe
+            /// @todo i believe they are actually read in reverse order, maybe
             // ftCo_8009F834 also reads them in reverse.
             // double check this in-game eventually...
             offset.x = (1 / 256.0f) * cmd->u->spawn_gfx_2.offsetZ;
@@ -297,7 +297,7 @@ void ftAction_8007121C(Fighter_GObj* gobj, CommandInfo* cmd)
     PAD_STACK(8);
 
     fp = GET_FIGHTER(gobj);
-    /// @@todo this matches but isnt pretty. maybe an inline/macro as
+    /// @todo this matches but isnt pretty. maybe an inline/macro as
     // we dont have enough stack in general?
     skip = (struct spawn_hitbox_skip*) cmd->u;
     if ((skip->xF_b4) && (fp->x1064_thrownHitbox.owner == NULL)) {
@@ -453,7 +453,7 @@ void ftAction_80071810(Fighter_GObj* gobj, CommandInfo* cmd)
 }
 
 /// Set one of #Fighter::cmd_vars
-/// @@todo Heavily suggests that #Fighter::cmd_vars is not an array.
+/// @todo Heavily suggests that #Fighter::cmd_vars is not an array.
 void ftAction_80071820(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -749,7 +749,7 @@ void ftAction_80071FA0(Fighter_GObj* gobj, CommandInfo* cmd)
 
 void ftAction_80071FC8(Fighter_GObj* gobj, CommandInfo* cmd)
 {
-    /// @@todo way too much stack
+    /// @todo way too much stack
     Fighter* fp;
     s32 rand;
     s32 sfx_id;
@@ -894,7 +894,7 @@ void ftAction_80072320(Fighter_GObj* gobj, CommandInfo* cmd)
                                    temp_r8, temp_r9, temp_r10, sp8, spC));
             break;
         }
-        /// @@todo cant get the b instruction to generate here and in case 6
+        /// @todo cant get the b instruction to generate here and in case 6
         ft_kind = fp->kind;
         if (ft_kind == FTKIND_GAMEWATCH ||
             (ft_kind < FTKIND_GAMEWATCH && (ft_kind != FTKIND_SAMUS)))
@@ -1123,7 +1123,7 @@ void ftAction_80072CB0(Fighter_GObj* gobj, CommandInfo* cmd)
 
 void ftAction_80072CD8(Fighter_GObj* gobj, CommandInfo* cmd)
 {
-    /// @@todo too much stack
+    /// @todo too much stack
     int gfx_id;
     int sp64;
     int sp60;
@@ -1142,7 +1142,7 @@ void ftAction_80072CD8(Fighter_GObj* gobj, CommandInfo* cmd)
     sp60 = 1;
 
     if (ft_80084BFC(gobj, &sp64, &sp60, &gfx_id) != false) {
-        /// @@todo not sure how to actually handle this...
+        /// @todo not sure how to actually handle this...
         if (sp64 != -1) {
             _cmd.u = (union CmdUnion*) &sp2C;
             sp2C.x0 = *(u32*) cmd->u;
@@ -1183,7 +1183,7 @@ void ftAction_80072E24(Fighter_GObj* gobj, CommandInfo* cmd)
 
 void ftAction_80072E4C(Fighter_GObj* gobj, CommandInfo* cmd)
 {
-    /// @@todo same issues as ftAction_80072CD8
+    /// @todo same issues as ftAction_80072CD8
     int sp64;
     int sp60;
     int gfx_id;
@@ -1246,7 +1246,7 @@ void ftAction_80072FE0(Fighter_GObj* gobj, CommandInfo* cmd)
 
 void ftAction_80073008(Fighter_GObj* gobj, CommandInfo* cmd)
 {
-    /// @@todo cant seem to get the float to int, and there is a
+    /// @todo cant seem to get the float to int, and there is a
     // bunch of unused stack...
     f32 charge_frames;
     f32 charge_rate;

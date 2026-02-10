@@ -360,7 +360,7 @@ static void doHitColl(HSD_GObj* gobj)
     setupHitColl(gobj);
 }
 
-/// @@todo Can maybe me combined with #doAirColl.
+/// @todo Can maybe me combined with #doAirColl.
 void doAirHitColl(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);

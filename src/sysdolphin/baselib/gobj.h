@@ -60,7 +60,7 @@ typedef struct _HSD_GObjLibInitDataType {
     u64* unk_2;       // 804CE388
 } HSD_GObjLibInitDataType;
 
-/// @@todo Belongs in `melee/` somewhere
+/// @todo Belongs in `melee/` somewhere
 typedef struct _HSD_GObjList {
     /*  +0 */ HSD_GObj* x0;
     /*  +4 */ HSD_GObj* x4;

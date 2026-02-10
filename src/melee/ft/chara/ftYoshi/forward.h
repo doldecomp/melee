@@ -7,7 +7,7 @@
 struct S_UNK_YOSHI1;
 typedef struct ftYs_DatAttrs ftYs_DatAttrs;
 
-/// @@todo Fix names
+/// @todo Fix names
 static MotionFlags const ftYs_MF_Special =
     Ft_MF_SkipModel | Ft_MF_SkipItemVis | Ft_MF_UnkUpdatePhys |
     Ft_MF_FreezeState;

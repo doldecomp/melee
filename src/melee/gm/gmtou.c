@@ -307,7 +307,7 @@ void fn_8019CFA4(HSD_GObj* gobj)
     HSD_JObj* jobj;
 
     data = GetTmData();
-    /// @@todo is there a different inline here? seems cursed
+    /// @todo is there a different inline here? seems cursed
     jobj = HSD_JObjGetNext(HSD_JObjGetNext(HSD_JObjGetChild(GET_JOBJ(gobj))));
     // jobj = GET_JOBJ(gobj);
 

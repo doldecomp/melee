@@ -90,7 +90,7 @@ void ftKb_SpecialNNs_800FEDD0(HSD_GObj* gobj)
     fp->cmd_vars[0] = fp->cmd_vars[1] = fp->cmd_vars[2] = fp->cmd_vars[3] = 0;
     fp->self_vel.y = 0;
     {
-        /// @@todo @c da can't move below @c fp
+        /// @todo @c da can't move below @c fp
         ftKb_DatAttrs* da;
         Fighter* fp = GET_FIGHTER(gobj);
         PAD_STACK(4 * 4);

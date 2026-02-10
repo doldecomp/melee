@@ -27,7 +27,7 @@
 #include <baselib/random.h>
 #include <MetroTRK/intrinsics.h>
 
-/// @@todo Float reorder hack
+/// @todo Float reorder hack
 static float get_zero(void)
 {
     return 0.0f;
@@ -162,7 +162,7 @@ HSD_GObj* ftBossLib_8015C244(HSD_GObj* arg0, Vec3* arg1)
 
 bool ftBossLib_8015C270(void)
 {
-    /// @@todo Get msid
+    /// @todo Get msid
     if (ftBossLib_8015C44C(FTKIND_MASTERH) == 0x157) {
         return 1;
     }
@@ -172,7 +172,7 @@ bool ftBossLib_8015C270(void)
 
 bool ftBossLib_8015C2A8(void)
 {
-    /// @@todo Get msid
+    /// @todo Get msid
     if (ftBossLib_8015C44C(FTKIND_CREZYH) == 0x183) {
         return true;
     }
@@ -182,7 +182,7 @@ bool ftBossLib_8015C2A8(void)
 
 bool ftBossLib_8015C2E0(void)
 {
-    /// @@todo Get ASIDs
+    /// @todo Get ASIDs
     enum_t msid = ftBossLib_8015C44C(FTKIND_MASTERH);
     if (msid == 0x158 || msid == 0x159) {
         return true;
@@ -193,7 +193,7 @@ bool ftBossLib_8015C2E0(void)
 
 bool ftBossLib_8015C31C(void)
 {
-    /// @@todo Get ASIDs
+    /// @todo Get ASIDs
     enum_t msid = ftBossLib_8015C44C(FTKIND_CREZYH);
     if (msid == 0x181 || msid == 0x182) {
         return true;
@@ -324,7 +324,7 @@ ftMasterHand_SpecialAttrs* ftBossLib_8015C6BC(void)
         }
 
         {
-            /// @@todo Can be #GET_FIGHTER when inlines are fixed.
+            /// @todo Can be #GET_FIGHTER when inlines are fixed.
             Fighter* fp = gobj->user_data;
             if (fp == NULL) {
                 return NULL;

@@ -72,7 +72,7 @@ void grKongo_801D55D4(Ground_GObj* arg)
     return;
 }
 
-/// @@todo Investigate these types of patterns in
+/// @todo Investigate these types of patterns in
 /// other files; the Randi check with zero is probably
 /// its own thing
 static inline s32 random_adder_b(s32 a, s32 b)

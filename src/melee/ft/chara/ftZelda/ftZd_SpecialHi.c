@@ -322,7 +322,7 @@ void ftZd_SpecialAirHiStart_1_Coll(HSD_GObj* gobj)
 
     Fighter* fp = GET_FIGHTER(gobj);
 
-    /// @@todo @c sa can't move below @c coll_data,
+    /// @todo @c sa can't move below @c coll_data,
     ///       which suggests a function boundary.
     ftZelda_DatAttrs* sa;
     CollData* coll_data = &fp->coll_data;

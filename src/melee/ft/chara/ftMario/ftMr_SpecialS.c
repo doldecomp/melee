@@ -41,7 +41,7 @@ void ftMr_SpecialS_CreateCape(HSD_GObj* gobj)
     ftMario_DatAttrs* sa = fp->dat_attrs;
 
     if (!fp->cmd_vars[2]) {
-        /// @@todo Can't move below @c _.
+        /// @todo Can't move below @c _.
         Vec3 coords;
 
         u8 _[4];
@@ -186,7 +186,7 @@ void ftMr_SpecialS_Phys(HSD_GObj* gobj)
     u8 unused0[4];
 
     {
-        /// @@todo Cannot be moved above @c unused0 or below @c unused1.
+        /// @todo Cannot be moved above @c unused0 or below @c unused1.
         Vec3 coords;
 
         u8 unused1[16];

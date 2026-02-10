@@ -102,7 +102,7 @@ void it_8027D820(Item_GObj* igp)
 void fn_8027DAC8(Item_GObj* igp)
 {
     Item* ip = GET_ITEM(igp);
-    /// @@todo cant figure out the correct inline for this.
+    /// @todo cant figure out the correct inline for this.
     PAD_STACK(8);
 
     it_8026B390(igp);
@@ -194,7 +194,7 @@ bool itBombhei_UnkMotion8_Anim(Item_GObj* igp)
 {
     Item* ip = GET_ITEM(igp);
 
-    /// @@todo this inline is incorrect
+    /// @todo this inline is incorrect
     inline_UnkMotion8_Anim(igp);
 
     if (ip->xDD4_itemVar.bombhei.xDE0 != 0) {

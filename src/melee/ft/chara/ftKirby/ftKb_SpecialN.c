@@ -1770,7 +1770,7 @@ void fn_800F6A5C(HSD_GObj* gobj)
 /// Fighter_CollGround_PassLedgeCB
 static void fn_800F6AC8(HSD_GObj* gobj)
 {
-    /// @@todo Named flags.
+    /// @todo Named flags.
     static u32 const mf = (1 << 1) | (1 << 4) | (1 << 7) | (1 << 12) |
                           (1 << 14) | (1 << 18) | (1 << 19) | (1 << 22) |
                           (1 << 26) | (1 << 27);

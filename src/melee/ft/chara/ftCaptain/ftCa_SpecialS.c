@@ -112,7 +112,7 @@ static inline void setupAirStart(HSD_GObj* gobj)
     fp->post_hitlag_cb = efLib_ResumeAll;
     fp->hurtbox_detect_cb = ftCa_SpecialS_OnDetect;
     {
-        /// @@todo Too much stack for #resetVel.
+        /// @todo Too much stack for #resetVel.
         Vec3* vel = &fp->self_vel;
         vel->x = vel->y = vel->z = 0;
     }
@@ -161,7 +161,7 @@ void ftCa_SpecialS_OnDetect(HSD_GObj* gobj)
     if (fp->cmd_vars[0] != 0) {
         HSD_GObj* detected_gobj = fp->unk_gobj;
         if (fp->unk_gobj->classifier == HSD_GOBJ_CLASS_FIGHTER) {
-            /// @@todo It might be possible to merge this with the below branch.
+            /// @todo It might be possible to merge this with the below branch.
             switch (fp->motion_id) {
             case ftCa_MS_SpecialSStart: {
                 onDetectGround(gobj);

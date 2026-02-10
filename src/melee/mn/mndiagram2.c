@@ -59,7 +59,7 @@ typedef union {
 } mnDiagram2_SortEntry;
 
 /// Container struct with JObj at offset 0x10.
-/// @@todo Identify the actual type - may be archive-related.
+/// @todo Identify the actual type - may be archive-related.
 typedef struct {
     /* 0x00 */ char x0[0x10];
     /* 0x10 */ HSD_JObj* jobj;

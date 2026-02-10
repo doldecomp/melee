@@ -1,5 +1,5 @@
 /// @file
-/// @@todo A lot of duplicate code here, can maybe be cleaned up with inlines.
+/// @todo A lot of duplicate code here, can maybe be cleaned up with inlines.
 #include "itsword.h"
 
 #include "types.h" // IWYU pragma: keep
@@ -130,7 +130,7 @@ void it_80285024(Item_GObj* gobj, int arg1)
         ip->xDD4_itemVar.sword.x4;
 }
 
-/// @@todo Shared code with #it_802851FC.
+/// @todo Shared code with #it_802851FC.
 void it_80285084(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
@@ -160,7 +160,7 @@ void it_80285084(Item_GObj* gobj)
     }
 }
 
-/// @@todo Shared code with #it_802851FC.
+/// @todo Shared code with #it_802851FC.
 void it_80285140(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);

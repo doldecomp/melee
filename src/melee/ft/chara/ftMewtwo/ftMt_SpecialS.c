@@ -232,7 +232,7 @@ void ftMt_SpecialS_GroundToAir(HSD_GObj* gobj)
 /// State handler
 void ftMt_SpecialAirS_AirToGround(HSD_GObj* gobj)
 {
-    /// @@todo #GET_FIGHTER
+    /// @todo #GET_FIGHTER
     Fighter* fp = gobj->user_data;
 
     ftCommon_8007D7FC(fp);

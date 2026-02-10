@@ -626,7 +626,7 @@ void ftDk_Init_UnkMotionStates4(HSD_GObj* gobj)
 
 void ftDk_Init_OnLoad(HSD_GObj* gobj)
 {
-    /// @@todo #GET_FIGHTER
+    /// @todo #GET_FIGHTER
     Fighter* fp = gobj->user_data;
     ftData* ftdata = fp->ft_data;
     ftDonkeyAttributes* ftData_attr = ftdata->ext_attr;

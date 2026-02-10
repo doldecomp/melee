@@ -37,7 +37,7 @@ static IntroData gm_804D68E0;
 /// in multiples of 8. Skipping to the next block goes on to the next stage.
 #define NEXT_SCENEBLOCK_AFTER(x) (((x) + 8) & ~(8 - 1))
 
-/// @@todo fill this out with the rest of the scenes
+/// @todo fill this out with the rest of the scenes
 enum {
     ADVENTURE_INTRO = 0x0,
     ADVENTURE_MUSHROOM_KINGDOM,

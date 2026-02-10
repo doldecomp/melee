@@ -271,7 +271,7 @@ void ftCommon_ApplyFrictionAir(Fighter* fp, float friction)
 }
 
 #define SOLUTION 0
-/// @@todo This surely calls #ftCommon_ApplyFrictionAir somehow...
+/// @todo This surely calls #ftCommon_ApplyFrictionAir somehow...
 void ftCommon_8007CEF4(Fighter* fp)
 {
 #if SOLUTION == 0
@@ -1535,7 +1535,7 @@ void ftCommon_8007FA58(Fighter_GObj* gobj, Item_GObj* arg1)
     Fighter* fp = gobj->user_data;
     Vec3 vec;
 
-    /// @@todo This is an inline.
+    /// @todo This is an inline.
     {
         Fighter* fp2 = fp;
 

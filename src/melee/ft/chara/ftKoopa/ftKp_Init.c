@@ -352,7 +352,7 @@ void ftKp_Init_OnLoadForGKoopa(Fighter* fp)
 
 void ftKp_Init_OnLoad(HSD_GObj* gobj)
 {
-    /// @@todo #GET_FIGHTER is 8 bytes too much stack but it should be possible
+    /// @todo #GET_FIGHTER is 8 bytes too much stack but it should be possible
     Fighter* fp = gobj->user_data;
 
     ftData* ftDataInfo = fp->ft_data;

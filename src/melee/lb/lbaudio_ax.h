@@ -9,7 +9,7 @@
 
 #include <baselib/gobj.h>
 
-/// @@todo Create an @c enum for SFX IDs.
+/// @todo Create an @c enum for SFX IDs.
 #define SFX_NONE -1
 
 /* 02305C */ int lbAudioAx_8002305C(int, int);

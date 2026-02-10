@@ -68,7 +68,7 @@ struct _m2c_stack_ftCo_800A3554 {
 /* 0B07FC */ void ftCo_800B3900(Fighter_GObj* gobj);
 /* 0B0858 */ UNK_RET ftCo_800B3958(UNK_PARAMS);
 
-/// @@todo Static functions belong in #ftCo_0A01.c
+/// @todo Static functions belong in #ftCo_0A01.c
 /* 09D044 */ static void ftCo_800A0148(Fighter*);
 /* 09D06C */ static void ftCo_800AC7D4(Fighter*);
 /* 09D280 */ static void ftCo_800A0384(Fighter* fp);

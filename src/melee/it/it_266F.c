@@ -283,7 +283,7 @@ void fn_8026C88C(HSD_GObj* gobj)
                     }
                 }
             }
-            // @@todo Make a FLT_RAND(min, max) define or inline
+            // @todo Make a FLT_RAND(min, max) define or inline
             temp_r29 = ((s32*) it_804D6D28) + (gm_8016AE80() * 2) + 0x3F;
             *it_804A0E30_x0 =
                 (temp_r29[1] - temp_r29[0]) * HSD_Randf() + temp_r29[0];
@@ -491,10 +491,10 @@ void it_8026CF04(void)
     s32 temp_r8;
     u8* temp_r30;
 
-    // @@todo probably a double somewhere
+    // @todo probably a double somewhere
     temp_r4 = it_804D6D28->x128 + it_804D6D28->x12C + it_804D6D28->x130 +
               it_804D6D28->x134;
-    // @@todo Investigate why it_804A0E30 is used instead of it_804A0E60.
+    // @todo Investigate why it_804A0E30 is used instead of it_804A0E60.
     if (temp_r4 != 0) {
         it_804A0E60.x8 = temp_r4;
         it_804A0E60.x0 = 4U;
@@ -558,7 +558,7 @@ void it_8026D018(void)
             it_8026CF04();
             HSD_GObjProc_8038FD54(GObj_Create(5U, 7U, 0U), fn_8026C88C, 0U);
             {
-                // @@todo Make a FLT_RAND(min, max) define or inline
+                // @todo Make a FLT_RAND(min, max) define or inline
                 f32* temp_r29 =
                     ((f32*) it_804D6D28) + (gm_8016AE80() * 8) + 0xFC;
                 it_804A0E30.x0 =
@@ -613,7 +613,7 @@ void it_8026D018(void)
             it_8026CF04();
             HSD_GObjProc_8038FD54(GObj_Create(5U, 7U, 0U), fn_8026C88C, 0U);
 
-            // @@todo Make a FLT_RAND(min, max) define or inline
+            // @todo Make a FLT_RAND(min, max) define or inline
             temp_r29 = it_804D6D28 + ((gm_8016AE80() * 8) + 0xFC);
             it_804A0E30.x0 =
                 ((temp_r29[4] - temp_r29[0]) * HSD_Randf()) + temp_r29[0];
@@ -1626,7 +1626,7 @@ void it_8026EB18(HSD_GObj* gobj, s32 arg1, Vec3* arg2)
         HSD_CObj* cobj = HSD_CObjGetCurrent();
         MtxPtr temp_r30 = (MtxPtr) &cobj->view_mtx;
         {
-            // @@todo This appears in several places in the codebase,
+            // @todo This appears in several places in the codebase,
             // it's probably an inline
             Mtx m;
             PAD_STACK(1 * 4);
@@ -1883,7 +1883,7 @@ void it_8026EECC(HSD_GObj* gobj, int arg1)
                     pos.x = pos.y = pos.z = 0.0F;
                 }
 
-                // @@todo This could just be one big function call.
+                // @todo This could just be one big function call.
                 ip = gobj->user_data;
                 switch (Camera_80031060()) {
                 case 1:

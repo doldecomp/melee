@@ -7,7 +7,7 @@
 
 #include <dolphin/pad.h>
 
-/// @@todo Circular dependency
+/// @todo Circular dependency
 #include "baselib/rumble.h"
 
 #define PAD_ERR_NO_CONTROLLER -1

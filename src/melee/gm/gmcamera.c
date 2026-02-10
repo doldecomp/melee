@@ -35,14 +35,14 @@ typedef struct _SisLibUnkStruct2 {
     /*0x08*/ u8* x08_arr; // Unknown length as of right now
 } SisLibUnkStruct2;
 
-/// @@todo #SIS
+/// @todo #SIS
 typedef struct _SisLibUnkStruct {
     /*0x00*/ u8 x0_padding[0xC - 0x0];
     /*0x0C*/ SisLibUnkStruct2* x0C_ptr;
     /*0x10*/ u8 x10_padding[0x14 - 0x10];
 } SisLibUnkStruct;
 
-/// @@todo #HSD_SisLib_804D1124 is of type #SIS.
+/// @todo #HSD_SisLib_804D1124 is of type #SIS.
 /// extern SisLibUnkStruct HSD_SisLib_804D1124;
 
 gmCameraUnkFuncTable gmCamera_803DA6B4[9] = {

@@ -122,7 +122,7 @@ static StageCallbacks grNBa_803E7DA0[7] = {
     },
 };
 
-/// @@todo Not ideal @c clang-format behavior.
+/// @todo Not ideal @c clang-format behavior.
 /// Removing the trailing comma is arguably worse.
 StageData grNBa_803E7E38 = {
     0x00000024,
@@ -291,7 +291,7 @@ static void grBattle_8021A20C(Ground_GObj* gobj)
 
     Ground* gp = gobj->user_data;
 
-    /// @@todo Missing cast
+    /// @todo Missing cast
     UNK_T hsd_obj = gobj->hsd_obj;
 
     grAnime_801C8138(gobj, gp->map_id, 0);

@@ -2,7 +2,7 @@
 
 #include <platform.h>
 
-/// @@todo Circular dependency
+/// @todo Circular dependency
 #include "controller.h" // IWYU pragma: keep
 
 #include <dolphin/os/OSInterrupt.h>

@@ -200,7 +200,7 @@ void HSD_SynthSFXUnloadBank(int bank_id)
     hsd_SynthSFXBank[bank_id] = hsd_SynthSFXBankHead[bank_id];
 }
 
-/// @@todo Currently 97.2% match - add instruction uses r4 instead of r5
+/// @todo Currently 97.2% match - add instruction uses r4 instead of r5
 /// as destination (register allocation swap for prev/cur)
 void HSD_Synth_80388DC8(int sfx_id)
 {
@@ -226,7 +226,7 @@ void HSD_Synth_80388E08(int sfx_id)
         pcur = &HSD_Synth_804C2AE0[i];
         while (*pcur != NULL) {
             cur = *pcur;
-            /// @@todo AXVPB prev must be a signed int type, not a pointer
+            /// @todo AXVPB prev must be a signed int type, not a pointer
             if ((int) cur->prev == sfx_id) {
                 HSD_SynthSFXUnloadBank_inline(cur);
                 *pcur = cur->next;
@@ -307,7 +307,7 @@ void HSD_SynthSFXStopNode(struct HSD_SynthSFXNode* node)
     }
 }
 
-/// @@todo Currently ~90% match - second loop uses pointer arithmetic instead of
+/// @todo Currently ~90% match - second loop uses pointer arithmetic instead of
 /// indexed store (stwx). Stack frame is 8 bytes too large.
 void dropcallback(void* dropped)
 {
@@ -368,7 +368,7 @@ static AXPBMIX lbl_80407FB4 = { 0 };
 
 static AXPBSRC HSD_Synth_80407FD8 = { 1, 0, 0, { 0, 0, 0, 0 } };
 
-/// @@todo Currently 95.4% match - register allocation shifted by 1
+/// @todo Currently 95.4% match - register allocation shifted by 1
 /// (r29 reuse for loop counter and computation missing)
 int HSD_Synth_80389334(int sfx_id, u8 vol, u8 vol2, u8 pan, int priority,
                        u8 itd_flag, float pitch1, float pitch2, float mix_main,
@@ -466,7 +466,7 @@ int HSD_Synth_80389334(int sfx_id, u8 vol, u8 vol2, u8 pan, int priority,
             while (loop_idx < sfx_entry->unk8) {
                 AXSetVoicePriority(*voice_ptr, priority);
                 AXSetVoiceVe(*voice_ptr, &ve);
-                /// @@todo Type pun writes ratioHi+ratioLo as u32; no union in
+                /// @todo Type pun writes ratioHi+ratioLo as u32; no union in
                 /// AXPBSRC. Needed for match - AXPBSRC lacks a u32 ratio
                 /// field.
                 *(u32*) &HSD_Synth_80407FD8.ratioHi =
@@ -480,7 +480,7 @@ int HSD_Synth_80389334(int sfx_id, u8 vol, u8 vol2, u8 pan, int priority,
                 voice_ptr += 1;
                 sample_data =
                     (void*) ((u8*) sample_data +
-                             0x40); ///< @@todo what is going on here...
+                             0x40); ///< @todo what is going on here...
                 loop_idx += 1;
             }
             HSD_Synth_804D7750 += 0x40;

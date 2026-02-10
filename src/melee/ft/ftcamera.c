@@ -55,7 +55,7 @@ void ftCamera_UpdateCameraBox(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     CmSubject* camera_box = fp->x890_cameraBox;
 
-    ///@@todo lol
+    ///@todo lol
     fp->facing_dir + 1.0f;
 
     {
@@ -72,7 +72,7 @@ void ftCamera_UpdateCameraBox(HSD_GObj* gobj)
             camera_box->x28 = -1.0f;
         }
 
-        /// @@todo this line changes everything lol
+        /// @todo this line changes everything lol
         cam_floats.xC;
 
         camera_box->x10.x = fp->cur_pos.x;

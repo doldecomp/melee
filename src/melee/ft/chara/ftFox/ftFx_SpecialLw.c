@@ -31,7 +31,7 @@
 
 void ftFx_SpecialLw_CreateLoopGFX(HSD_GObj* gobj)
 {
-    /// @@todo Shared @c inline with #ftFx_SpecialLw_CreateStartGFX.
+    /// @todo Shared @c inline with #ftFx_SpecialLw_CreateStartGFX.
     Fighter* fp = gobj->user_data;
 
     if (fp->x2219_b0 == false) {
@@ -262,7 +262,7 @@ void ftFx_SpecialAirLwStart_AirToGround(HSD_GObj* gobj)
 
 void ftFx_SpecialLwLoop_Anim(HSD_GObj* gobj)
 {
-    /// @@todo Shared @c inline with #ftFx_SpecialAirLwLoop_Anim.
+    /// @todo Shared @c inline with #ftFx_SpecialAirLwLoop_Anim.
     Fighter* fp = GET_FIGHTER(gobj);
     if ((fp->input.held_inputs & HSD_PAD_B) == false) {
         fp->mv.fx.SpecialLw.isRelease = true;
@@ -364,7 +364,7 @@ static inline void ftFox_SpecialLw_InlinePhys(HSD_GObj* gobj)
     ca = getFtAttrs(fp);
     da = getFtSpecialAttrs(fp);
 
-    /// @@todo Shared @c inline with other functions in this file.
+    /// @todo Shared @c inline with other functions in this file.
     if (fp->mv.fx.SpecialLw.gravityDelay != 0) {
         fp->mv.fx.SpecialLw.gravityDelay--;
     } else {
@@ -497,7 +497,7 @@ static inline void ftFox_SpecialLw_Turn_Inline(HSD_GObj* gobj)
 
 void ftFx_SpecialLwTurn_Anim(HSD_GObj* gobj)
 {
-    /// @@todo Shared @c inline with #ftFx_SpecialAirLwTurn_Anim.
+    /// @todo Shared @c inline with #ftFx_SpecialAirLwTurn_Anim.
     Fighter* fp = GET_FIGHTER(gobj);
 
     u8 _[16];

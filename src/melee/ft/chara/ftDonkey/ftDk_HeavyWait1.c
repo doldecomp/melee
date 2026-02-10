@@ -31,7 +31,7 @@ void ftDk_HeavyWait1_Coll(HSD_GObj* gobj)
 
 void ftDk_MS_346_800E05E4(HSD_GObj* gobj)
 {
-    /// @@todo #GET_FIGHTER
+    /// @todo #GET_FIGHTER
     Fighter* fp = gobj->user_data;
     ftDonkeyAttributes* donkey_attr = getFtSpecialAttrs2CC(fp);
     fp->mv.dk.unk8.x4 = donkey_attr->cargo_hold.x28_LANDING_LAG;

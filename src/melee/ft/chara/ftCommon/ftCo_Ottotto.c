@@ -139,7 +139,7 @@ void ftCo_OttottoWait_IASA(Fighter_GObj* gobj)
 
 void ftCo_OttottoWait_Phys(HSD_GObj* gobj) {}
 
-/// @@todo Shared code with #ftCo_Ottotto_Coll
+/// @todo Shared code with #ftCo_Ottotto_Coll
 void ftCo_OttottoWait_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;

@@ -327,7 +327,7 @@ void ftSk_SpecialAirNEnd_Phys(Fighter_GObj* gobj)
 
 void ftSk_SpecialNStart_Coll(Fighter_GObj* gobj)
 {
-    /// @@todo Named flags.
+    /// @todo Named flags.
     static u32 const mf = (1 << 7) | (1 << 12) | (1 << 14) | (1 << 18) |
                           (1 << 19) | (1 << 22) | (1 << 26) | (1 << 27);
     Fighter* fp = GET_FIGHTER(gobj);
@@ -344,7 +344,7 @@ void ftSk_SpecialNStart_Coll(Fighter_GObj* gobj)
 
 void ftSk_SpecialNLoop_Coll(Fighter_GObj* gobj)
 {
-    /// @@todo Named flags.
+    /// @todo Named flags.
     static u32 const mf = (1 << 7) | (1 << 12) | (1 << 14) | (1 << 18) |
                           (1 << 19) | (1 << 22) | (1 << 26) | (1 << 27);
     Fighter* fp = GET_FIGHTER(gobj);
@@ -397,7 +397,7 @@ void ftSk_SpecialNEnd_Coll(Fighter_GObj* gobj)
 
 static inline void doColl(Fighter_GObj* gobj, ftSeak_MotionState msid)
 {
-    /// @@todo Named flags.
+    /// @todo Named flags.
     static u32 const mf = (1 << 7) | (1 << 12) | (1 << 14) | (1 << 18) |
                           (1 << 19) | (1 << 22) | (1 << 26) | (1 << 27);
     Fighter* fp = GET_FIGHTER(gobj);

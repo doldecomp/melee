@@ -76,7 +76,7 @@ bool ftLib_IsCrazyHandPresent(void)
 
 HSD_GObj* ftLib_80086198(HSD_GObj* gobj)
 {
-    /// @@todo Figure out how these are really declared
+    /// @todo Figure out how these are really declared
     Fighter* fp;
     HSD_GObj* cur;
     HSD_GObj* result;
@@ -912,7 +912,7 @@ HSD_GObj* ftLib_8008741C(u32 i)
     for (cur = HSD_GObj_Entities->fighters; cur != NULL; cur = cur->next) {
         Fighter* fp = GET_FIGHTER(cur);
 
-        /// @@todo Is @c i really #u32?
+        /// @todo Is @c i really #u32?
         if ((unsigned) fp->x8_spawnNum == i) {
             return cur;
         }

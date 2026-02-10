@@ -124,7 +124,7 @@ static inline float my_lbVector_Len(Vec3* vec)
 
 void ftMh_FingerGun1_Phys(HSD_GObj* gobj)
 {
-    /// @@todo Not enough stack for #GET_FIGHTER; inline issue.
+    /// @todo Not enough stack for #GET_FIGHTER; inline issue.
     Fighter* fp = gobj->user_data;
 
     ftMasterHand_SpecialAttrs* da;

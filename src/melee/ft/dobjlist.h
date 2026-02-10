@@ -7,7 +7,7 @@
 #include <sysdolphin/baselib/forward.h>
 
 /**
- * @@todo This was split out of ft/types.h to break a circular dependency with
+ * @todo This was split out of ft/types.h to break a circular dependency with
  * fighter-specific types.h headers. Figure out a better place for it.
  */
 

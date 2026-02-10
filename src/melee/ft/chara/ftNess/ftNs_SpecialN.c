@@ -93,19 +93,19 @@ void ftNs_SpecialN_ItemPKFlushSetNULL(HSD_GObj* gobj)
     }
 }
 
-/// @@todo Float order hack.
+/// @todo Float order hack.
 static float return_void(void)
 {
     return 0.0f;
 }
 
-/// @@todo Float order hack.
+/// @todo Float order hack.
 static float return_void2(void)
 {
     return 3.0f;
 }
 
-/// @@todo Float order hack.
+/// @todo Float order hack.
 static float return_void3(void)
 {
     return 1.0f;
@@ -203,7 +203,7 @@ void ftNs_SpecialNStart_Anim(HSD_GObj* gobj)
     {
         Fighter* fp = GET_FIGHTER(gobj);
         if (fp->fv.ns.pkflash_gobj == NULL) {
-            /// @@todo Can't move below @c _.
+            /// @todo Can't move below @c _.
             Vec3 vec;
 
             u8 _[20];
@@ -431,7 +431,7 @@ void ftNs_SpecialNRelease_IASA(HSD_GObj* gobj)
         fp->mv.ns.specialn.charge_release_delay--;
 
         {
-            /// @@todo Nested return value
+            /// @todo Nested return value
             bool result;
             if (fp->mv.ns.specialn.charge_release_delay <= 0) {
                 fp->mv.ns.specialn.charge_release_delay = 0;
@@ -485,7 +485,7 @@ void ftNs_SpecialAirNRelease_IASA(HSD_GObj* gobj)
         fp->mv.ns.specialn.charge_release_delay - 1;
 
     {
-        /// @@todo Nested return value
+        /// @todo Nested return value
         bool result;
 
         if (fp->mv.ns.specialn.charge_release_delay <= 0) {

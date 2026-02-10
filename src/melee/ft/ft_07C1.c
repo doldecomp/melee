@@ -99,7 +99,7 @@ static inline void inlineA0(Fighter* fp0, Fighter* fp1, HitCapsule* hit1)
     }
 }
 
-/// @@todo This is just the same inline twice.
+/// @todo This is just the same inline twice.
 void ft_8007C2E0(Fighter* fp0, HitCapsule* hit0, Fighter* fp1,
                  HitCapsule* hit1)
 {

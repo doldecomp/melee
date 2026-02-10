@@ -125,7 +125,7 @@ void ftMs_SpecialAirNStart_Coll(HSD_GObj* gobj)
 
 void ftMs_SpecialN_80136A1C(HSD_GObj* gobj)
 {
-    /// @@todo Named flags.
+    /// @todo Named flags.
     static u32 const mf = (1 << 2) | (1 << 7) | (1 << 12) | (1 << 14) |
                           (1 << 18) | (1 << 19) | (1 << 22) | (1 << 26) |
                           (1 << 27);
@@ -137,7 +137,7 @@ void ftMs_SpecialN_80136A1C(HSD_GObj* gobj)
 
 void ftMs_SpecialN_80136A7C(HSD_GObj* gobj)
 {
-    /// @@todo Named flags.
+    /// @todo Named flags.
     static u32 const mf = (1 << 2) | (1 << 7) | (1 << 12) | (1 << 14) |
                           (1 << 18) | (1 << 19) | (1 << 22) | (1 << 26) |
                           (1 << 27);
@@ -227,7 +227,7 @@ void ftMs_SpecialAirNLoop_Coll(HSD_GObj* gobj)
 
 void ftMs_SpecialN_80136DB4(HSD_GObj* gobj)
 {
-    /// @@todo Named flags.
+    /// @todo Named flags.
     static u32 const mf = (1 << 1) | (1 << 2) | (1 << 7) | (1 << 9) |
                           (1 << 11) | (1 << 12) | (1 << 14) | (1 << 18) |
                           (1 << 19) | (1 << 22) | (1 << 26) | (1 << 27);
@@ -239,7 +239,7 @@ void ftMs_SpecialN_80136DB4(HSD_GObj* gobj)
 
 void ftMs_SpecialN_80136E14(HSD_GObj* gobj)
 {
-    /// @@todo Named flags.
+    /// @todo Named flags.
     static u32 const mf = (1 << 1) | (1 << 2) | (1 << 7) | (1 << 9) |
                           (1 << 11) | (1 << 12) | (1 << 14) | (1 << 18) |
                           (1 << 19) | (1 << 22) | (1 << 26) | (1 << 27);
@@ -333,7 +333,7 @@ void ftMs_SpecialAirNEnd_Coll(HSD_GObj* gobj)
 
 void ftMs_SpecialN_801371FC(HSD_GObj* gobj)
 {
-    /// @@todo Named flags.
+    /// @todo Named flags.
     static u32 const mf = (1 << 1) | (1 << 2) | (1 << 3) | (1 << 7) |
                           (1 << 12) | (1 << 14) | (1 << 18) | (1 << 19) |
                           (1 << 22) | (1 << 26) | (1 << 27);
@@ -354,7 +354,7 @@ void ftMs_SpecialN_801371FC(HSD_GObj* gobj)
 
 void ftMs_SpecialN_801372A8(HSD_GObj* gobj)
 {
-    /// @@todo Named flags.
+    /// @todo Named flags.
     static u32 const mf = (1 << 1) | (1 << 2) | (1 << 3) | (1 << 7) |
                           (1 << 12) | (1 << 14) | (1 << 18) | (1 << 19) |
                           (1 << 22) | (1 << 26) | (1 << 27);

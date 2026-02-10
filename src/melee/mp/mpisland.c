@@ -136,7 +136,7 @@ void mpIsland_8005A728(void)
             } else {
                 v17 = 0;
             }
-            /// @@todo Rewrite as a struct ptr
+            /// @todo Rewrite as a struct ptr
             // *(int*) (v11 + 0x20) = v17;
             // *(int*) v11 = 0;
             // *(short*) (v11 + 0x24) = v7;

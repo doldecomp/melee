@@ -1314,7 +1314,7 @@ void ftKb_PeSpecialAirLw_Coll(HSD_GObj* gobj)
 
 void ftKb_SpecialNPe_8010C8D8(HSD_GObj* gobj)
 {
-    /// @@todo Flag names.
+    /// @todo Flag names.
     static u32 const mf = (1 << 2) | (1 << 3) | (1 << 7) | (1 << 12) |
                           (1 << 14) | (1 << 18) | (1 << 19) | (1 << 22) |
                           (1 << 26) | (1 << 27);
@@ -1327,7 +1327,7 @@ void ftKb_SpecialNPe_8010C8D8(HSD_GObj* gobj)
         fp->cmd_vars[0] = 2;
     }
     {
-        /// @@todo @c da can't move below @c fp
+        /// @todo @c da can't move below @c fp
         ftKb_DatAttrs* da;
         Fighter* fp = GET_FIGHTER(gobj);
         da = fp->dat_attrs;
@@ -1350,7 +1350,7 @@ void ftKb_SpecialNPe_8010C8D8(HSD_GObj* gobj)
 
 void ftKb_SpecialNPe_8010C9CC(HSD_GObj* gobj)
 {
-    /// @@todo Named flags.
+    /// @todo Named flags.
     static u32 const mf = (1 << 2) | (1 << 3) | (1 << 7) | (1 << 12) |
                           (1 << 14) | (1 << 18) | (1 << 19) | (1 << 22) |
                           (1 << 26) | (1 << 27);
@@ -1360,7 +1360,7 @@ void ftKb_SpecialNPe_8010C9CC(HSD_GObj* gobj)
     Fighter_ChangeMotionState(gobj, ftKb_MS_PeSpecialLw, mf,
                               fp->cur_anim_frame, 1, 0, NULL);
     {
-        /// @@todo @c da can't move below @c fp
+        /// @todo @c da can't move below @c fp
         ftKb_DatAttrs* da;
         Fighter* fp = GET_FIGHTER(gobj);
         PAD_STACK(4 * 2);
@@ -1438,7 +1438,7 @@ void ftKb_PeSpecialAirLwHit_Coll(HSD_GObj* gobj)
 
 void ftKb_SpecialNGw_8010CC6C(HSD_GObj* gobj)
 {
-    /// @@todo Named flags.
+    /// @todo Named flags.
     static u32 const mf = (1 << 2) | (1 << 3) | (1 << 7) | (1 << 12) |
                           (1 << 14) | (1 << 18) | (1 << 19) | (1 << 22) |
                           (1 << 26) | (1 << 27);
@@ -1451,7 +1451,7 @@ void ftKb_SpecialNGw_8010CC6C(HSD_GObj* gobj)
 
 void ftKb_SpecialNGw_8010CCD4(HSD_GObj* gobj)
 {
-    /// @@todo Named flags.
+    /// @todo Named flags.
     static u32 const mf = (1 << 2) | (1 << 3) | (1 << 7) | (1 << 12) |
                           (1 << 14) | (1 << 18) | (1 << 19) | (1 << 22) |
                           (1 << 26) | (1 << 27);

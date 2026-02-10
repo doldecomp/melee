@@ -1,4 +1,4 @@
-/// @@todo Move to C file
+/// @todo Move to C file
 #ifndef __GALE01_1A3680
 #define __GALE01_1A3680
 

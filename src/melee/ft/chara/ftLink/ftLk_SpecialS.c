@@ -234,7 +234,7 @@ void ftLk_SpecialS_Enter(HSD_GObj* gobj)
     fp->accessory4_cb = onAccessory4;
 }
 
-/// @@todo Share code with #ftLk_SpecialS_Enter. A simple inline won't work.
+/// @todo Share code with #ftLk_SpecialS_Enter. A simple inline won't work.
 void ftLk_SpecialAirS_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -421,7 +421,7 @@ void ftLk_SpecialS2_Coll(HSD_GObj* gobj)
     }
 }
 
-/// @@todo Share code with #ftLk_SpecialS1_Coll.
+/// @todo Share code with #ftLk_SpecialS1_Coll.
 void ftLk_SpecialS1Empty_Coll(HSD_GObj* gobj)
 {
     if (!ft_80082708(gobj)) {

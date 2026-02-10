@@ -70,7 +70,7 @@ int ftCo_80091A4C(Fighter_GObj* gobj)
     return false;
 }
 
-/// @@todo @c inline of #ftCo_80091A4C and something else.
+/// @todo @c inline of #ftCo_80091A4C and something else.
 bool ftCo_80091AD8(Fighter_GObj* gobj, int mv_x20)
 {
     u8 _[16] = { 0 };
@@ -522,7 +522,7 @@ void ftCo_GuardOff_IASA(Fighter_GObj* gobj)
 {
     u8 _[8] = { 0 };
     Fighter* fp = gobj->user_data;
-    /// @@todo #RETURN_IF chain
+    /// @todo #RETURN_IF chain
     if (!fp->mv.co.guard.x1C ||
         (!ftCo_SpecialS_CheckInput(gobj) && !ftCo_Attack100_CheckInput(gobj) &&
          !ftCo_800D6824(gobj) && !ftCo_800D68C0(gobj) &&
@@ -605,7 +605,7 @@ void ftCo_80092F2C(HSD_GObj* gobj, bool arg1)
                 var_f2 *= p_ftCommonData->x2BC;
             }
             {
-                /// @@todo What happens to this value?
+                /// @todo What happens to this value?
                 float temp_f0 = p_ftCommonData->x298;
                 if (var_f2 > temp_f0) {
                     var_f2 = temp_f0;
@@ -649,7 +649,7 @@ void ftCo_800932DC(Fighter_GObj* gobj)
             fp->cur_pos.x += fp->coll_data.floor.normal.y * scl;
             fp->cur_pos.y += -fp->coll_data.floor.normal.x * scl;
 
-            /// @@todo Fake.
+            /// @todo Fake.
             !gobj;
         }
     }
@@ -759,7 +759,7 @@ void ftCo_8009388C(HSD_GObj* gobj)
     ftCo_8009370C(gobj, ftCo_80093790);
 }
 
-/// @@todo Shares a lot of code with #ftCo_800923B4
+/// @todo Shares a lot of code with #ftCo_800923B4
 void ftCo_800939B4(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
@@ -779,7 +779,7 @@ void ftCo_800939B4(Fighter_GObj* gobj)
     ftCo_800923B4(gobj);
 }
 
-/// @@todo Shared code with #ftCo_8009388C.
+/// @todo Shared code with #ftCo_8009388C.
 void ftCo_80093A50(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
@@ -828,7 +828,7 @@ void ftCo_GuardReflect_Anim(HSD_GObj* gobj)
 void ftCo_GuardReflect_IASA(HSD_GObj* gobj)
 {
     u8 _[16] = { 0 };
-    /// @@todo Inline depth.
+    /// @todo Inline depth.
     RETURN_IF(inlineC0(gobj, ftCo_80092BE8));
     RETURN_IF(ftCo_8009515C(gobj));
     RETURN_IF(ftCo_8009980C(gobj));

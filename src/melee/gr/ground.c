@@ -165,7 +165,7 @@ static StageData* Ground_803DFEDC[] = {
 
 static u8* Ground_804D6950;
 
-/// @@todo Move elsewhere.
+/// @todo Move elsewhere.
 static inline f32 fabsf(f32 x)
 {
     if (x < 0) {
@@ -1147,7 +1147,7 @@ f32 Ground_801C20D0(void)
     return stage_info.cam_info.cam_vertical_tilt;
 }
 
-/// @@todo attempt decomp once param types are known
+/// @todo attempt decomp once param types are known
 char lightset[9] = "lightset";
 char plightset[10] = "*lightset";
 
@@ -1199,7 +1199,7 @@ static const int BGM_Undefined = -1;
 static bool Ground_801C24F8(s32 arg0, u32 arg1, s32* arg2)
 {
     bool temp_r25;
-    /// @@todo @c phi_r30 probably belongs to an @c inline.
+    /// @todo @c phi_r30 probably belongs to an @c inline.
     UnkBgmStruct* phi_r30;
     UnkBgmStruct* phi_r30_0 = stage_info.param->xB0;
     enum_t bgm = BGM_Undefined;
@@ -1287,7 +1287,7 @@ static bool Ground_801C24F8(s32 arg0, u32 arg1, s32* arg2)
                 if (arg1 & 1) {
                     bgm = phi_r30->xC;
                 } else if (arg1 & 2) {
-                    /// @@todo Weird comparison, but typing #UnkBgmStruct::x10
+                    /// @todo Weird comparison, but typing #UnkBgmStruct::x10
                     /// as @c signed doesn't match and neither does typing
                     /// #BGM_Undefined as @c unsigned.
                     if (phi_r30->x10 != (unsigned) BGM_Undefined) {
@@ -1315,7 +1315,7 @@ static bool Ground_801C24F8(s32 arg0, u32 arg1, s32* arg2)
                 bgm = phi_r30->x4;
                 stage_info.unk8C.b0 = false;
             } else if (arg1 & 2) {
-                /// @@todo Even weirder.
+                /// @todo Even weirder.
                 if ((unsigned) phi_r30->x8 != (unsigned) BGM_Undefined) {
                     bgm = phi_r30->x8;
                     stage_info.unk8C.b0 = true;
@@ -1562,13 +1562,13 @@ bool Ground_801C2FE0(Ground_GObj* arg0)
 
 bool Ground_801C3128(s32 arg0, void (*arg1)(int))
 {
-    /// @@todo Unused variable; is this an argument?
+    /// @todo Unused variable; is this an argument?
     StageData* stage_data;
     bool result;
     mpGetGroundCollJoint();
     result = false;
     {
-        /// @@todo @c cur cannot be swapped below @c max, hinting at a missing
+        /// @todo @c cur cannot be swapped below @c max, hinting at a missing
         /// @c inline function.
         S16Vec3* cur;
         int max = Ground_803DFEDC[stage_info.internal_stage_id]->x30;
@@ -1623,14 +1623,14 @@ void Ground_801C32AC(s32 arg0)
 
 s32 Ground_801C32D4(s32 arg0, s32 arg1)
 {
-    /// @@todo Shared @c inline with #Ground_801C33C0.
+    /// @todo Shared @c inline with #Ground_801C33C0.
     u8 _[4];
     s32 result;
     int max;
     S16Vec3* cur;
     int i;
     mpGetGroundCollJoint();
-    /// @@todo Might be an @c inline starting here.
+    /// @todo Might be an @c inline starting here.
     max = Ground_803DFEDC[stage_info.internal_stage_id]->x30;
     cur = Ground_803DFEDC[stage_info.internal_stage_id]->x2C;
     result = -1;
@@ -1665,7 +1665,7 @@ s32 Ground_801C33C0(s32 arg0, s32 arg1)
     S16Vec3* cur;
     int i;
     mpGetGroundCollJoint();
-    /// @@todo Might be an @c inline starting here.
+    /// @todo Might be an @c inline starting here.
     max = Ground_803DFEDC[stage_info.internal_stage_id]->x30;
     cur = Ground_803DFEDC[stage_info.internal_stage_id]->x2C;
     result = -1;
@@ -2158,7 +2158,7 @@ HSD_JObj* Ground_801C3FA4(HSD_GObj* gobj, int depth)
     return jobj;
 }
 
-/// @@todo Why isn't this emitted to @c jobj.c?
+/// @todo Why isn't this emitted to @c jobj.c?
 HSD_JObj* Ground_801C4100(HSD_JObj* jobj)
 {
     if (!(jobj->flags & JOBJ_INSTANCE) && HSD_JObjGetChild(jobj) != NULL) {
@@ -2181,7 +2181,7 @@ HSD_JObj* Ground_801C4100(HSD_JObj* jobj)
 s32 Ground_801C4210(void)
 {
     u8 _[8];
-    /// @@todo With a hard-coded range for @c i, very unlikely it's not
+    /// @todo With a hard-coded range for @c i, very unlikely it's not
     /// returning
     ///       an @c enum. Probably preset joints (accesses a list of
     ///       #HSD_JObj).
@@ -2781,7 +2781,7 @@ void Ground_801C5414(int arg0, int arg1)
 }
 
 /// @file
-/// @@todo Don't hardcode 8
+/// @todo Don't hardcode 8
 void Ground_801C5440(Ground* gp, s32 i, u32 arg2)
 {
     if (i < 0 || i >= 8) {

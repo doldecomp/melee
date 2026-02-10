@@ -117,7 +117,7 @@ typedef enum MenuState {
 } MenuState;
 
 /// @brief selection refers to the invidual options inside menus/submenus
-/// @@todo should these be moved into their respective TU's?
+/// @todo should these be moved into their respective TU's?
 typedef enum MainMenuSelection {
     SEL_MAIN_1P = 0,
     SEL_MAIN_VS = 1,

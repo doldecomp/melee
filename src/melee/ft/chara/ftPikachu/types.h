@@ -75,12 +75,12 @@ typedef struct _ftPikachuAttributes {
 } ftPikachuAttributes;
 
 union ftPikachu_MotionVars {
-    /// @@todo Proper state name.
+    /// @todo Proper state name.
     struct ftPikachu_State2Vars {
         s32 x0;
     } unk2;
 
-    /// @@todo Proper state name.
+    /// @todo Proper state name.
     struct ftPikachu_State3Vars {
         s32 x0;
     } unk3;

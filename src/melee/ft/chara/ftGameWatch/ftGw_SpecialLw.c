@@ -28,7 +28,7 @@ void ftGw_SpecialLw_ItemPanicSetup(HSD_GObj* gobj)
     Fighter* fp = getFighter(gobj);
 
     if (fp->fv.gw.x2268_panicGObj == NULL) {
-        /// @@todo Can't move below @c _.
+        /// @todo Can't move below @c _.
         Vec3 vec;
 
         u8 _[16];
@@ -94,7 +94,7 @@ void ftGw_SpecialLw_ItemPanicExitHitlag(HSD_GObj* gobj)
 bool ftGw_SpecialLw_ItemCheckPanicRemove(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    /// @@todo @c enum
+    /// @todo @c enum
     enum_t msid = fp->motion_id;
 
     if (msid >= ftGw_MS_SpecialLwShoot && msid <= ftGw_MS_SpecialAirLwShoot) {
@@ -113,7 +113,7 @@ void ftGw_SpecialLw_UpdateBucketModel(HSD_GObj* gobj)
 
     switch (fp->fv.gw.x2238_panicCharge) {
     case ftGw_Panic_Empty:
-        /// @@todo @c enum for parts
+        /// @todo @c enum for parts
         ftParts_80074B0C(gobj, 6, -1);
         ftParts_80074B0C(gobj, 7, -1);
         ftParts_80074B0C(gobj, 8, -1);
@@ -208,10 +208,10 @@ void ftGw_SpecialLw_Anim(HSD_GObj* gobj)
 {
     u8 _[8];
 
-    /// @@todo Shared @c inline with #ftGw_SpecialAirLw_Anim.
+    /// @todo Shared @c inline with #ftGw_SpecialAirLw_Anim.
     Fighter* fp = GET_FIGHTER(gobj);
 
-    /// @@todo Frame number constant
+    /// @todo Frame number constant
     if (fp->cur_anim_frame == anim_update_frame &&
         !fp->mv.gw.SpecialLw.isRelease)
     {
@@ -250,7 +250,7 @@ void ftGw_SpecialLw_IASA(HSD_GObj* gobj)
 {
     u8 _[8];
 
-    /// @@todo Shared @c inline with #ftGw_SpecialAirLw_IASA.
+    /// @todo Shared @c inline with #ftGw_SpecialAirLw_IASA.
     Fighter* fp = GET_FIGHTER(gobj);
 
     {
@@ -425,7 +425,7 @@ static inline void ftGameWatch_SpecialLw_UpdateVarsAction(HSD_GObj* gobj)
     }
 }
 
-/// @@todo Combine common flags with #transition_flags0.
+/// @todo Combine common flags with #transition_flags0.
 static u32 const transition_flags1 =
     Ft_MF_KeepGfx | Ft_MF_SkipHit | Ft_MF_SkipMatAnim | Ft_MF_SkipColAnim |
     Ft_MF_UpdateCmd | Ft_MF_SkipItemVis | Ft_MF_Unk19 |
@@ -551,7 +551,7 @@ void ftGw_SpecialLw_AbsorbThink_DecideAction(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
 
-    /// @@todo @c enum
+    /// @todo @c enum
     enum_t msid;
 
     fp->fv.gw.x2238_panicCharge += fp->AbsorbAttr.x1A48_hitsTaken;
@@ -588,7 +588,7 @@ void ftGw_SpecialLwShoot_Anim(HSD_GObj* gobj)
 {
     u8 _[8];
 
-    /// @@todo Shared @c inline with #ftGw_SpecialAirLwShoot_Anim.
+    /// @todo Shared @c inline with #ftGw_SpecialAirLwShoot_Anim.
     ftGameWatch_SpecialLwShoot_ApplyDamage(gobj);
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
@@ -676,8 +676,8 @@ void ftGw_SpecialLwShoot_ReleaseOil(HSD_GObj* gobj)
 {
     u8 _[8];
 
-    /// @@todo Shared @c inline with #ftGw_SpecialAirLwShoot_ReleaseOil
-    /// @@todo Please for the love of god stop copy-pasting code
+    /// @todo Shared @c inline with #ftGw_SpecialAirLwShoot_ReleaseOil
+    /// @todo Please for the love of god stop copy-pasting code
 
     Fighter_ChangeMotionState(gobj, ftGw_MS_SpecialLwShoot, 0, 0, 1, 0, NULL);
 

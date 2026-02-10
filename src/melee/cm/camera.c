@@ -202,7 +202,7 @@ void Camera_800290D4(CmSubject* subject)
 
 s32 Camera_80029124(Vec3* subject_pos, s32 distance)
 {
-    /// @@todo lots of ways to match this without the padding
+    /// @todo lots of ways to match this without the padding
     u8 _PAD[4];
     s32 result;
     f32 slope;
@@ -625,7 +625,7 @@ void Camera_80029AAC(CameraBounds* bounds, CameraTransformState* transform,
     offset_y = transform->target_interest.y - transform->interest.y;
 
     globals = &cm_803BCCA0;
-    /// @@todo this makes it match, but its weird to pass in x38 as a param
+    /// @todo this makes it match, but its weird to pass in x38 as a param
     follow_speed = get_follow_speed(globals->x38, spread, globals);
     delta = get_delta(cm_80452C68.x2BC);
 
@@ -832,7 +832,7 @@ void Camera_8002A0C0(CameraBounds* bounds, CameraTransformState* state)
     var_f31 = cm_80452C68.xA4 * cm_80452C68.xAC * 10.0f;
     var_f30 = cm_80452C68.xA8 * cm_80452C68.xAC * 10.0f;
 
-    /// @@todo figure out how to get cm_803BCCA0 to load into r3
+    /// @todo figure out how to get cm_803BCCA0 to load into r3
     if (gm_8016B41C() != 0) {
         var_f31 *= cm_803BCCA0.xE8;
         var_f30 *= cm_803BCCA0.xE8;
@@ -1391,7 +1391,7 @@ void Camera_8002B3D4(void* arg0)
         ((p1_fgp = Ground_801C57A4(), p1_fgp != NULL)))
     {
         ftLib_80086644(p1_fgp, &fighter_pos);
-        /// @@todo inline?
+        /// @todo inline?
         var_f1 = fighter_pos.z;
         var_r0 = abs_threshold_inline(var_f1, 30.0f);
         // if (var_f1 < 0.0f) {
@@ -1511,7 +1511,7 @@ void Camera_8002B694(CameraInputs* inputs, s32 slot)
         return;
     }
     if (slot == 4) {
-        /// @@todo there is probably a bigger inline
+        /// @todo there is probably a bigger inline
         for (var_r4 = 0; var_r4 < 4; var_r4++) {
             pad = get_slot_pad(var_r4);
             temp_x = get_stick_x(pad);
@@ -1795,7 +1795,7 @@ void Camera_8002C010(f32 farg0, f32 farg1)
     }
 
     if (farg0 != 0.0f) {
-        /// @@todo not really sure how to get the same output as the if above
+        /// @todo not really sure how to get the same output as the if above
         // temp_f1_2 = (var_f30 * cm_803BCCA0.xB4) + cm_803BCCA0.xB8;
         temp_f1 = -(farg0 * var_f30);
         right.x *= temp_f1;

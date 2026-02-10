@@ -67,7 +67,7 @@ void ftLk_SpecialN_UnsetArrow(Fighter_GObj* gobj)
         if (fp != NULL && fp->fv.lk.arrow_gobj != NULL) {
             fp->fv.lk.arrow_gobj = NULL;
             if (fp->fv.lk.boomerang_gobj == NULL && fp->fv.lk.x14 == NULL) {
-                /// @@todo Does this actually do anything? Doesn't seem to
+                /// @todo Does this actually do anything? Doesn't seem to
                 /// return @c bool.
                 ftLk_Init_BoomerangExists(gobj);
             }
@@ -84,7 +84,7 @@ void ftLk_SpecialN_UnsetFv14(Fighter_GObj* gobj)
             if (fp->fv.lk.boomerang_gobj == NULL &&
                 fp->fv.lk.arrow_gobj == NULL)
             {
-                /// @@todo Does this actually do anything? Doesn't seem to
+                /// @todo Does this actually do anything? Doesn't seem to
                 /// return @c bool.
                 ftLk_Init_BoomerangExists(gobj);
             }
@@ -172,7 +172,7 @@ void ftLk_SpecialN_Enter(Fighter_GObj* gobj)
     ftLk_DatAttrs* da = fp->dat_attrs;
     fp->mv.lk.specialn.x0.x = fp->mv.lk.specialn.x0.y = 0.0f;
 
-    /// @@todo Float order hack
+    /// @todo Float order hack
     (void) (5 * deg_to_rad);
 
     fp->mv.lk.specialn.unk_timer = 0;
@@ -191,7 +191,7 @@ void ftLk_SpecialN_Enter(Fighter_GObj* gobj)
     }
 }
 
-/// @@todo Share more code with #ftLk_SpecialN_Enter.
+/// @todo Share more code with #ftLk_SpecialN_Enter.
 void ftLk_SpecialAirN_Enter(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -289,7 +289,7 @@ static inline void inlineA3(Fighter_GObj* gobj)
         if (fp != NULL && fp->fv.lk.arrow_gobj != NULL) {
             fp->fv.lk.arrow_gobj = NULL;
             if (fp->fv.lk.boomerang_gobj == NULL && fp->fv.lk.x14 == NULL) {
-                /// @@todo Does this actually do anything? Doesn't seem to
+                /// @todo Does this actually do anything? Doesn't seem to
                 /// return @c bool.
                 ftLk_Init_BoomerangExists(gobj);
             }
@@ -302,7 +302,7 @@ static inline void inlineA3(Fighter_GObj* gobj)
             if (fp->fv.lk.boomerang_gobj == NULL &&
                 fp->fv.lk.arrow_gobj == NULL)
             {
-                /// @@todo Does this actually do anything? Doesn't seem to
+                /// @todo Does this actually do anything? Doesn't seem to
                 /// return @c bool.
                 ftLk_Init_BoomerangExists(gobj);
             }
@@ -425,7 +425,7 @@ void ftLk_SpecialNStart_IASA(Fighter_GObj* gobj)
         if (fp->mv.lk.specialn.x0.y > da->x0) {
             fp->mv.lk.specialn.x0.y = da->x0;
         }
-        /// @@todo Shared with #ftLk_SpecialNLoop_IASA
+        /// @todo Shared with #ftLk_SpecialNLoop_IASA
         if (!(fp->input.held_inputs & HSD_PAD_B)) {
             Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialNEnd, mf, 0, 1, 0,
                                       NULL);
@@ -455,7 +455,7 @@ void ftLk_SpecialNEnd_IASA(Fighter_GObj* gobj) {}
 
 void ftLk_SpecialAirNStart_IASA(Fighter_GObj* gobj)
 {
-    /// @@todo Same as #ftLk_SpecialNStart_IASA with different MSID
+    /// @todo Same as #ftLk_SpecialNStart_IASA with different MSID
     Fighter* fp = GET_FIGHTER(gobj);
     ftLk_DatAttrs* da = fp->dat_attrs;
     if (fp->mv.lk.specialn.x0.x != 0) {
@@ -599,7 +599,7 @@ void ftLk_SpecialAirNLoop_Coll(Fighter_GObj* gobj)
     doAirColl(gobj, ftLk_MS_SpecialNLoop);
 }
 
-/// @@todo Combine with #ftLk_SpecialNEnd_Coll.
+/// @todo Combine with #ftLk_SpecialNEnd_Coll.
 void ftLk_SpecialAirNEnd_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);

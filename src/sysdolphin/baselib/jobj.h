@@ -251,7 +251,7 @@ inline void HSD_JObjSetupMatrix(HSD_JObj* jobj)
         }                                                                     \
     }
 
-/// @@todo See #lb_800117F4
+/// @todo See #lb_800117F4
 static inline void HSD_JObjSetMtxDirtyInline(HSD_JObj* jobj)
 {
     if (jobj != NULL && !HSD_JObjMtxIsDirty(jobj)) {
@@ -429,7 +429,7 @@ static inline void HSD_JObjGetTranslation(HSD_JObj* jobj, Vec3* translate)
     *translate = jobj->translate;
 }
 
-///@@todo Likely fake but needed by vi0502 as there is a usage of
+///@todo Likely fake but needed by vi0502 as there is a usage of
 /// HSD_JObjGetTranslation that lacks the 2nd assert
 static inline void HSD_JObjGetTranslation2(HSD_JObj* jobj, Vec3* translate)
 {

@@ -401,7 +401,7 @@ void ftpickupitem_80094D90(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     ftCo_8009750C(gobj);
-    /// @@todo #ftpickupitem_80094DF8
+    /// @todo #ftpickupitem_80094DF8
     if (fp->item_gobj != NULL) {
         ftpickupitem_80094B6C(gobj, fp->item_gobj);
     }

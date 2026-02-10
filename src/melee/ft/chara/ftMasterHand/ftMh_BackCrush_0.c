@@ -16,7 +16,7 @@
 
 void ftMh_BackPunch_Coll(HSD_GObj* gobj) {}
 
-/// @@todo Figure out how to use #GET_JOBJ instead.
+/// @todo Figure out how to use #GET_JOBJ instead.
 static inline HSD_JObj* get_jobj(HSD_GObj* gobj)
 {
     return gobj->hsd_obj;
@@ -24,7 +24,7 @@ static inline HSD_JObj* get_jobj(HSD_GObj* gobj)
 
 void ftMh_MS_370_80153D2C(HSD_GObj* gobj)
 {
-    /// @@todo #GET_FIGHTER and #GET_JOBJ both cause regswaps here,
+    /// @todo #GET_FIGHTER and #GET_JOBJ both cause regswaps here,
     ///       but they probably shouldn't.
     Fighter* fp = gobj->user_data;
     HSD_JObj* jobj = get_jobj(gobj);
@@ -75,7 +75,7 @@ void ftMh_BackCrush_Anim(HSD_GObj* gobj)
 
     if (fp->cmd_vars[0] != 0) {
         Vec3 scl;
-        /// @@todo #GET_JOBJ
+        /// @todo #GET_JOBJ
         HSD_JObj* jobj = get_jobj(gobj);
         if (--fp->mv.mh.unk0.x70 < 0) {
             fp->cmd_vars[0] = 0;

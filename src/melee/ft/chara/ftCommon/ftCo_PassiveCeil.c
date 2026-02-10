@@ -32,7 +32,7 @@ bool ftCo_800C23A0(Fighter_GObj* gobj)
     return false;
 }
 
-/// @@todo Shared code with #ftCo_800C1E64.
+/// @todo Shared code with #ftCo_800C1E64.
 void ftCo_800C23FC(Fighter_GObj* gobj)
 {
     Vec3 ef_offset;

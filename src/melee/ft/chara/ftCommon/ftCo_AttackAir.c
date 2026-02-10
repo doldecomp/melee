@@ -33,7 +33,7 @@
 
 /* 08CE0C */ static void decideFighter(Fighter_GObj* gobj);
 
-/// @@todo This probably doesn't exist; see #ftCo_AttackAir_CheckItemThrowInput.
+/// @todo This probably doesn't exist; see #ftCo_AttackAir_CheckItemThrowInput.
 static bool checkItemThrowInput(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -55,7 +55,7 @@ static bool checkItemThrowInput(Fighter_GObj* gobj)
 }
 
 /**
- * @@todo This is exactly #checkItemThrowInput but it uses too much stack for
+ * @todo This is exactly #checkItemThrowInput but it uses too much stack for
  *       #ftCo_AttackAirLw_IASA to call it.
  */
 bool ftCo_AttackAir_CheckItemThrowInput(Fighter_GObj* gobj)

@@ -22,21 +22,21 @@ union ftDonkey_MotionVars {
         s32 x0;
     } speciallw;
 
-    /// @@todo Rename to correct state.
+    /// @todo Rename to correct state.
     struct ftDonkey_State5Vars {
         bool x0;
         s32 x4;
         float x8;
     } unk5;
 
-    /// @@todo Rename to correct state.
+    /// @todo Rename to correct state.
     struct ftDonkey_State7Vars {
         s32 x0;
         s32 x4;
         float x8;
     } unk7;
 
-    /// @@todo Rename to correct state.
+    /// @todo Rename to correct state.
     struct ftDonkey_State8Vars {
         s32 x0;
         float x4;

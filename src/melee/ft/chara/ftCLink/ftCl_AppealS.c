@@ -17,7 +17,7 @@
 
 void ftCl_AppealS_Anim(HSD_GObj* gobj)
 {
-    /// @@todo There might be only one @c Fighter* here.
+    /// @todo There might be only one @c Fighter* here.
     Fighter* fp0;
     Fighter* fp1;
 

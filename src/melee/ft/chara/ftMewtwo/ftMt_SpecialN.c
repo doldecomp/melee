@@ -265,7 +265,7 @@ void ftMt_SpecialN_ReleaseShadowBall(HSD_GObj* gobj)
 
     u8 _[16];
 
-    /// @@todo Missing @c inline function(s).
+    /// @todo Missing @c inline function(s).
     fp = fp = getFighter(gobj);
     mewtwoAttrs = mewtwoAttrs = getFtSpecialAttrsD(fp);
 
@@ -293,7 +293,7 @@ void ftMt_SpecialN_ReleaseShadowBall(HSD_GObj* gobj)
                 temp_fp->fv.mt.x2230_shadowHeldGObj = NULL;
             }
             if (gobj != NULL) {
-                /// @@todo Missing @c inline function(s).
+                /// @todo Missing @c inline function(s).
                 fp2 = fp2 = getFighter(gobj);
 
                 if (fp2->fv.mt.x2238_shadowBallGObj != NULL) {

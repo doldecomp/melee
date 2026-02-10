@@ -799,7 +799,7 @@ void grIceMt_801F87C8(Ground_GObj* param1)
     return;
 }
 
-/// @@todo Rename: This is callback3 (destroy) for row 5 in grIm_803E4718.
+/// @todo Rename: This is callback3 (destroy) for row 5 in grIm_803E4718.
 /// Destroys HSD_GObj* stored in icemt.xF8[0-4].
 void grIceMt_801F87FC(Ground_GObj* gobj)
 {

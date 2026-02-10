@@ -134,7 +134,7 @@ bool grTMewtwo_8022227C(void)
 
 Ground_GObj* grTMewtwo_80222284(int index)
 {
-    /// @@todo Can't move below @c callbacks.
+    /// @todo Can't move below @c callbacks.
     HSD_GObj* gobj;
 
     StageCallbacks* callbacks = &grTMewtwo_803E8F70[index];

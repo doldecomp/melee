@@ -98,7 +98,7 @@ void ftPe_Float_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     if (!ftCo_SpecialAir_CheckInput(gobj) && !ftPe_8011BE80(gobj)) {
-        /// @@todo Call #checkContinueFloatInput
+        /// @todo Call #checkContinueFloatInput
         bool float_input =
             fp->input.lstick.y >= p_ftCommonData->tap_jump_threshold ||
             fp->input.held_inputs & HSD_PAD_XY;

@@ -70,7 +70,7 @@ bool ftCo_8009AAFC(Fighter_GObj* gobj, int arg1, float stick_x, float angle)
     return false;
 }
 
-/// @@todo Shared code with #ftCo_8009AEA4.
+/// @todo Shared code with #ftCo_8009AEA4.
 void ftCo_8009AB9C(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;

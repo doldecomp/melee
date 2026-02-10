@@ -1,5 +1,5 @@
 /**
- * @@todo also contains Target scenes, maybe gmstadium is a better name,
+ * @todo also contains Target scenes, maybe gmstadium is a better name,
  * since these are all in the single player "stadium" menu
  */
 #include "gmmultiman.h"

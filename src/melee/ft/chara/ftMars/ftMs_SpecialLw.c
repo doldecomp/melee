@@ -204,11 +204,11 @@ void ftMs_SpecialLwHit_Anim(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     s32 sv1 = fp->mv.ms.speciallw.x0;
 
-    /// @@todo required for some reason
+    /// @todo required for some reason
     fp->mv.ms.speciallw.x0;
 
     if (sv1 > 0 && ftLib_800872A4(gobj) == FTKIND_EMBLEM) {
-/// @@todo register swap:
+/// @todo register swap:
 #if SOLUTION == 0
         for (idx = 0; idx < 4; idx++) {
             if (fp->x914[idx].state == HitCapsule_Enabled) {
@@ -249,11 +249,11 @@ void ftMs_SpecialAirLwHit_Anim(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     s32 sv1 = fp->mv.ms.speciallw.x0;
 
-    /// @@todo required for some reason
+    /// @todo required for some reason
     fp->mv.ms.speciallw.x0;
 
     if (sv1 > 0 && ftLib_800872A4(gobj) == FTKIND_EMBLEM) {
-/// @@todo register swap:
+/// @todo register swap:
 #if SOLUTION == 0
         for (idx = 0; idx < 4; idx++) {
             if (fp->x914[idx].state == HitCapsule_Enabled) {

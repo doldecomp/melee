@@ -749,7 +749,7 @@ void ifStatus_802F69C0(s32 player_idx, s32 arg1)
         gm_8016B8D4(player_idx, Player_GetPlayerSlotType(player_idx));
     }
 
-    /// @@todo Inline with callback arg
+    /// @todo Inline with callback arg
     if (big_thing->x24C8.x0_0 != 1 && big_thing->x24C8.x2_5 != 0 &&
         &if_802F7BB4 != NULL)
     {
@@ -784,7 +784,7 @@ void ifStatus_802F6AF8(s32 player_idx)
         gm_8016B8D4(player_idx, Player_GetPlayerSlotType(player_idx));
     }
 
-    /// @@todo Inline with callback arg
+    /// @todo Inline with callback arg
     if (big_thing->x24C8.x0_0 != 1 && big_thing->x24C8.x2_5 != 0 &&
         &if_802F7AF8 != NULL)
     {
@@ -819,7 +819,7 @@ void ifStatus_802F6C04(s32 player_idx)
         gm_8016B8D4(player_idx, Player_GetPlayerSlotType(player_idx));
     }
 
-    /// @@todo Inline with callback arg
+    /// @todo Inline with callback arg
     if (big_thing->x24C8.x0_0 != 1 && big_thing->x24C8.x2_5 != 0 &&
         &if_802F7C30 != NULL)
     {
@@ -854,7 +854,7 @@ void ifStatus_802F6D10(s32 player_idx)
         gm_8016B8D4(player_idx, Player_GetPlayerSlotType(player_idx));
     }
 
-    /// @@todo Inline with callback arg
+    /// @todo Inline with callback arg
     if (big_thing->x24C8.x0_0 != 1 && big_thing->x24C8.x2_5 != 0 &&
         &if_802F7D08 != NULL)
     {

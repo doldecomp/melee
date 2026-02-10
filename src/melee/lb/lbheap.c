@@ -58,7 +58,7 @@ void lbHeap_80015900(void)
     aram_lo = (u32*) lbHeap_80431FA0.aram_lo;
     aram_hi = (u32*) lbHeap_80431FA0.aram_hi;
 
-    /// @@todo this loop isnt entirely right, its purpose is to calculate where
+    /// @todo this loop isnt entirely right, its purpose is to calculate where
     // the main heap can be allocated. This currently checks heaps 2 and 3,
     // then 2 and 1... checking 2 twice.
     for (i = 2; i > 0; i--) {

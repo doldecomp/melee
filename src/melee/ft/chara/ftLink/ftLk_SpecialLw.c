@@ -117,7 +117,7 @@ static MotionFlags const coll_mf = Ft_MF_SkipMatAnim | Ft_MF_SkipColAnim |
                                    Ft_MF_Unk19 | Ft_MF_SkipModelPartVis |
                                    Ft_MF_SkipModelFlags | Ft_MF_Unk27;
 
-/// @@todo Verify MSID.
+/// @todo Verify MSID.
 void ftLk_SpecialLw_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -129,7 +129,7 @@ void ftLk_SpecialLw_Coll(HSD_GObj* gobj)
     }
 }
 
-/// @@todo Verify MSID.
+/// @todo Verify MSID.
 void ftLk_SpecialAirLw_Coll(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
