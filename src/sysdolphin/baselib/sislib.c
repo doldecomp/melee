@@ -715,11 +715,9 @@ HSD_Text* HSD_SisLib_803A6754(int font_idx, s32 context_id)
     buffer = HSD_SisLib_803A5798(0x80);
     alloc->data_1 = buffer;
     alloc->data_0 = (sislib_UnkAllocData*) buffer;
-    alloc->size = 0x80;
-    // @todo This being a byte store means one of my assumptions is wrong;
+    alloc->size = 0x80; ///< @todo This being a byte store means one of my assumptions is wrong;
     // maybe this is a different struct.
-    *(u8*) &alloc->data_0->data_0 = 0;
-    // @todo Do any other Data struct usages have a 0xC member?
+    *(u8*) &alloc->data_0->data_0 = 0; ///< @todo Do any other Data struct usages have a 0xC member?
     *(&alloc->size + 1) = 0;
     HSD_SisLib_803A6368(text, 0);
     text->sis_buffer = (SIS*) alloc->data_1;
@@ -996,16 +994,13 @@ int HSD_SisLib_803A6B98(HSD_Text* text, float x, float y, const char* fmt, ...)
     u8 dead_r4_2;
     u8 dead_r6;
     u8* playhead;
-    va_list args;
-
-    // @todo what size is this?
+    va_list args; ///< @todo what size is this?
     u8 sis_buf;
 
     encoded_len = 0; // some type of size
     alloc = text->alloc_data;
     sis_buf = 0;
-    if (fmt) {
-        // @todo is this the correct usage of vaargs?
+    if (fmt) { ///< @todo is this the correct usage of vaargs?
         u8 buffer[256];
         va_start(args, fmt);
         vsnprintf((char*) buffer, -1, fmt, args);

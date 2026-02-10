@@ -163,8 +163,7 @@ void Fighter_800679B0(void)
     ft_8008549C();
     ftCo_8009F4A4();
     ftCo_800C8064();
-    ftCo_800C8F6C();
-    // @todo &fighter_alloc_data+2, +3, +4 are not defined in the fighter.s
+    ftCo_800C8F6C(); ///< @todo &fighter_alloc_data+2, +3, +4 are not defined in the fighter.s
     // data section, how does this work?
     HSD_ObjAllocInit(&fighter_parts_alloc_data, /*size*/ 0x8c0, /*align*/ 4);
     HSD_ObjAllocInit(&fighter_dobj_list_alloc_data, /*size*/ 0x1f0,
@@ -2278,9 +2277,7 @@ void Fighter_procUpdate(Fighter_GObj* gobj)
         VEC_CLEAR(fp->x74_anim_vel);
 
         // copy selfVel into a stack storage variable
-        selfVel = fp->self_vel;
-
-        // @todo these double_lower_32bit variables are probably integer
+        selfVel = fp->self_vel; ///< @todo these double_lower_32bit variables are probably integer
         // counters that get decremented each frame, but I was not able to
         // trigger the following condition. The double value construction then
         // is only used as an interpolation tool between selfVel and some
@@ -2373,9 +2370,7 @@ void Fighter_procUpdate(Fighter_GObj* gobj)
 
     fp->cur_pos.x += windOffset.x;
     fp->cur_pos.y += windOffset.y;
-    fp->cur_pos.z += windOffset.z;
-
-    // @todo do the bitflag tests here tell us if the player is dead?
+    fp->cur_pos.z += windOffset.z; ///< @todo do the bitflag tests here tell us if the player is dead?
     ftCo_800D3158(gobj);
 
     if (fp->x2225_b0) {
@@ -2741,9 +2736,7 @@ void Fighter_UnkRecursiveFunc_8006D044(Fighter_GObj* gobj)
     fp->x2219_b5 = 1;
 
     if (fp->x1A5C && !fp->x2219_b7) {
-        Fighter_GObj* new_gobj = gobj;
-
-        // @todo What is going on here?
+        Fighter_GObj* new_gobj = gobj; ///< @todo What is going on here?
         setBit(new_gobj = fp->x1A5C);
 
         Fighter_UnkRecursiveFunc_8006D044(new_gobj);

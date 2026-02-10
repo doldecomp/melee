@@ -550,8 +550,7 @@ void grIzumi_801CC358(Ground_GObj* gobj)
         gp->gv.izumi3.xC6 =
             rand_inline(grIz_804D6968->x50, grIz_804D6968->x4C);
         HSD_JObjSetFlagsAll(jobj, 0x10);
-        HSD_JObjRemoveAnimAll(jobj);
-        // @todo float load order (41c)
+        HSD_JObjRemoveAnimAll(jobj); ///< @todo float load order (41c)
         f = HSD_JObjGetTranslationY(jobj);
         f += -1.0;
         HSD_JObjSetTranslateY(gp->gv.izumi3.xCC, f);

@@ -515,9 +515,7 @@ int lb_8001ACEC(UNK_T file_entries)
     int i;
     struct {
         int unk0, unk4, unk8;
-    }* entries = file_entries;
-
-    // @todo this seems fake
+    }* entries = file_entries; ///< @todo this seems fake
     volatile int cached_flag;
     volatile int pad_stack;
     volatile int cached_data;
@@ -553,9 +551,7 @@ int lb_8001AE38(UNK_T file_entries)
     int i;
     struct {
         int unk0, unk4, unk8;
-    }* entries = file_entries;
-
-    // @todo this seems fake
+    }* entries = file_entries; ///< @todo this seems fake
     volatile int cached_flag;
     volatile int pad_stack;
     volatile int cached_data;

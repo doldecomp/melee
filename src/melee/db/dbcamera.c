@@ -362,9 +362,7 @@ static void fn_80227904(HSD_GObj* camera, int port)
 {
     f32 cstick_x;
     f32 cstick_y;
-    u32 buttons;
-
-    // @todo port should probably be a u8, but it's difficult
+    u32 buttons; ///< @todo port should probably be a u8, but it's difficult
     // to match all the functions that call this
     port &= 0xFF;
 

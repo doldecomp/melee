@@ -996,9 +996,7 @@ void grVenom_80206874(Ground_GObj* gobj)
     } else {
         *(s32*)&gp->gv.venom.xE0 = -1;
         *(s32*)&gp->gv.venom.xE4 = -1;
-    }
-
-    // @todo Need grVe_804D6A30 struct with cam_zoom_rate at 0x34
+    } ///< @todo Need grVe_804D6A30 struct with cam_zoom_rate at 0x34
     // scaled = scale_factor * grVe_804D6A30->cam_zoom_rate;
     // HSD_JObjSetScaleX/Y/Z(jobj, scaled);
 }

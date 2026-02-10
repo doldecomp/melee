@@ -331,7 +331,7 @@ void ftKb_SpecialHi1_Phys(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftCo_DatAttrs* temp_r30 = &fp->co_attrs;
     ftKb_DatAttrs* dat_attr = fp->dat_attrs;
-    PAD_STACK(4); // @todo Remove This
+    PAD_STACK(4); ///< @todo Remove This
     ft_80084FA8(gobj);
     ftCommon_8007CADC(fp, 0.0f,
                       temp_r30->air_drift_stick_mul *
@@ -345,7 +345,7 @@ void ftKb_SpecialHi2_Phys(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftCo_DatAttrs* temp_r30 = &fp->co_attrs;
     ftKb_DatAttrs* dat_attr = fp->dat_attrs;
-    PAD_STACK(4); // @todo Remove This
+    PAD_STACK(4); ///< @todo Remove This
     ft_80085134(gobj);
     ftCommon_8007CADC(fp, 0.0f,
                       temp_r30->air_drift_stick_mul *

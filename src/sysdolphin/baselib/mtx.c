@@ -74,7 +74,7 @@ void HSD_MtxInverseConcat(Mtx inv, Mtx src, Mtx dest)
     f32 temp10;
     f32 temp11;
     f32 temp12;
-    f32 new_var; // @todo try to get rid of this
+    f32 new_var; ///< @todo try to get rid of this
 
     det = HSD_CalcDeterminantMatrix3x4(inv);
 

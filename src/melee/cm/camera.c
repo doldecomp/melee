@@ -1741,8 +1741,7 @@ void Camera_8002BD88(f32 x, f32 y)
 
     if (x != 0.0F) {
         // scale = x * ((view_dir * cm_803BCCA0._44[0x1E]) +
-        // cm_803BCCA0._44[0x1F]);
-        // @todo :: cant figure out how to get it to run the same logic as the y
+        // cm_803BCCA0._44[0x1F]); ///< @todo :: cant figure out how to get it to run the same logic as the y
         // case without it allocating stack space for it
         scale = x * ((view_dir * 0.025F) + 0.2F); // fake
         right.x *= -scale;
