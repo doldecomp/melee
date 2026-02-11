@@ -902,6 +902,13 @@ struct ShyGuys {
     /* +4 gp+C8 */ int timer;
 };
 
+struct grShrineroute_GroundVars {
+    /* +0 gp+C4 */ u8 _[0x4];
+    /* +4 gp+C8 */ u16 xC8;
+    /* +6 gp+CA */ u16 xCA;
+    /* +8 gp+CA */ u16 xCC;
+};
+
 struct Battlefield {
     /* +0 gp+C4 */ int bg_state;
     /* +4 gp+C8 */ int curr_bg;
@@ -1027,6 +1034,7 @@ struct Ground {
             struct grPura_GroundVars pura;
             struct grPura_GroundVars2 pura2;
             struct grRCruise_GroundVars rcruise;
+            struct grShrineroute_GroundVars shrineroute;
             struct grSmashTaunt_GroundVars smashtaunt;
             struct GroundVars_unk unk;
             struct grVenom_GroundVars venom;

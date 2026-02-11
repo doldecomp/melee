@@ -214,7 +214,24 @@ bool grShrineRoute_80208F0C(Ground_GObj* arg)
     return false;
 }
 
-/// #fn_80208F14
+bool grShrineRoute_80208F14(void)
+{
+    HSD_GObj* gobj;
+    Ground* gp;
+
+    gobj = Ground_801C2BA4(4);
+    if (gobj != NULL) {
+        gp = GET_GROUND(gobj);
+        if (gp != NULL) {
+            if (gp->gv.shrineroute.xCA != 0) {
+                if (gp->gv.shrineroute.xCC != 0) {
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
+}
 
 /// #grShrineRoute_80208F70
 

@@ -23,7 +23,7 @@
 /* 208A38 */ UNK_RET fn_80208A38(UNK_PARAMS);
 /* 208D14 */ void grShrineRoute_80208D14(Ground_GObj*);
 /* 208F0C */ bool grShrineRoute_80208F0C(Ground_GObj*);
-/* 208F14 */ UNK_RET fn_80208F14(UNK_PARAMS);
+/* 208F14 */ bool grShrineRoute_80208F14(void);
 /* 208F70 */ void grShrineRoute_80208F70(Ground_GObj*);
 /* 209AEC */ void grShrineRoute_80209AEC(Ground_GObj*);
 /* 209AF0 */ void grShrineRoute_80209AF0(Ground_GObj*);
@@ -46,7 +46,7 @@
 /* 20AD58 */ UNK_RET fn_8020AD58(UNK_PARAMS);
 /* 20AE08 */ UNK_RET fn_8020AE08(UNK_PARAMS);
 /* 20AF38 */ UNK_RET grShrineRoute_8020AF38(UNK_PARAMS);
-/* 20B020 */ UNK_RET grShrineRoute_8020B020(UNK_PARAMS);
+/* 20B020 */ void grShrineRoute_8020B020(HSD_GObj* gobj, int r4, bool hide);
 /* 20B0AC */ UNK_RET grShrineRoute_8020B0AC(UNK_PARAMS);
 /* 20B104 */ DynamicsDesc* grShrineRoute_8020B104(enum_t);
 /* 20B10C */ bool grShrineRoute_8020B10C(Vec3*, int arg, HSD_JObj* jobj);
