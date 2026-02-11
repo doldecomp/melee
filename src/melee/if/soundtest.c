@@ -163,9 +163,7 @@
 /* 4D5908 */ extern s32 un_804D5908;
 /* 4D590C */ extern s32 un_804D590C;
 /* 4D5910 */ extern s32 un_804D5910;
-/* 4D5978 */ extern char un_804D5978[];
-/* 4D5980 */ extern char un_804D5980[];
-/* 4D5988 */ extern char un_804D5988[];
+
 /* 4D5990 */ extern char un_804D5990[];
 
 /// .bss (extern)
@@ -1149,7 +1147,7 @@ int un_80301634(void)
     void* r31;
     void* r3;
 
-    OSReport(un_804D5978);
+    OSReport("<Init>\n");
     lb_8001C550();
     lb_8001D164(0);
     r31 = HSD_MemAlloc(lbSnap_8001E210());
@@ -1211,7 +1209,7 @@ int un_80301800(int arg0)
     if (arg0 != 1) {
         return 0;
     }
-    OSReport(un_804D5980);
+    OSReport("<Save>\n");
     lb_8001CE00();
     return 0;
 }
@@ -1221,7 +1219,7 @@ int un_80301840(int arg0)
     if (arg0 != 1) {
         return 0;
     }
-    OSReport(un_804D5988);
+    OSReport("<Load>\n");
     {
         s32 result = lb_8001CBBC();
         gmMainLib_8015FA34(result);
@@ -1283,7 +1281,7 @@ int un_80301964(int arg0)
             GObj_SetupGXLink(gobj, HSD_SObjLib_803A49E0, 0x12, 0);
             un_803FD274 = un_804D6E04;
             sobj =
-                HSD_SObjLib_803A477C(gobj, (s32) un_804D5990, 0, 0, 0x80, 0);
+                HSD_SObjLib_803A477C(gobj, (int) un_804D5990, 0, 0, 0x80, 0);
             sobj->x10 = un_804DDC4C;
             sobj->x14 = un_804DDC50;
             sobj->x40 |= 2;
@@ -1304,16 +1302,14 @@ int un_80301A64(int arg0)
 
     OSReport(un_803FD29C);
     result = lbSnap_8001D5FC(0, un_804D6E10);
-    if (result != 0xB) {
-        return 0;
-    }
+    if (result == 0xB) {
+        do {
+            result = lb_8001B6F8();
+        } while (result == 0xB);
 
-    do {
-        result = lb_8001B6F8();
-    } while (result == 0xB);
-
-    if (result == 0) {
-        lbSnap_8001D40C(0);
+        if (result == 0) {
+            lbSnap_8001D40C(0);
+        }
     }
     return 0;
 }
