@@ -10,11 +10,16 @@
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
 #include "lb/lb_00B0.h"
+#include "mp/mplib.h"
 
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 #include <baselib/random.h>
+
+s16 grSh_Route_803E58E0[8] = {
+    0x33, 0x4F, 0x65, 0x66, 0x73, 0x74, 0x83, 0x00
+};
 
 StageCallbacks grSh_Route_803E58F0[7] = {
     {
@@ -299,7 +304,14 @@ bool fn_8020AD24(bool arg)
 
 /// #grShrineRoute_8020B020
 
-/// #grShrineRoute_8020B0AC
+void grShrineRoute_8020B0AC(void)
+{
+    u32 i;
+
+    for (i = 0; i < 7; i++) {
+        mpLib_800575B0(grSh_Route_803E58E0[i]);
+    }
+}
 
 DynamicsDesc* grShrineRoute_8020B104(enum_t arg)
 {

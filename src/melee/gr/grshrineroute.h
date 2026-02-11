@@ -47,7 +47,7 @@
 /* 20AE08 */ UNK_RET fn_8020AE08(UNK_PARAMS);
 /* 20AF38 */ UNK_RET grShrineRoute_8020AF38(UNK_PARAMS);
 /* 20B020 */ void grShrineRoute_8020B020(HSD_GObj* gobj, int r4, bool hide);
-/* 20B0AC */ UNK_RET grShrineRoute_8020B0AC(UNK_PARAMS);
+/* 20B0AC */ void grShrineRoute_8020B0AC(void);
 /* 20B104 */ DynamicsDesc* grShrineRoute_8020B104(enum_t);
 /* 20B10C */ bool grShrineRoute_8020B10C(Vec3*, int arg, HSD_JObj* jobj);
 
