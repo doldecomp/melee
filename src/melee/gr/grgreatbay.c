@@ -24,6 +24,7 @@
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
+#include <baselib/jobj.h>
 #include <baselib/random.h>
 
 S16Vec3 grGb_803E3E60[] = { { 0, 2, 49 }, { 1, 1, 2 },  { 2, 1, 3 },
@@ -209,7 +210,7 @@ void grGreatBay_801F451C(Ground_GObj* gobj)
 
 void fn_801F4520(HSD_GObj* gobj)
 {
-    ftCo_800C07F8(gobj, 6, fn_801F6708);
+    ftCo_800C07F8(gobj, 6, grGreatBay_801F6708);
 }
 
 void grGreatBay_801F454C(Ground_GObj* gobj)
@@ -354,11 +355,34 @@ void grGreatBay_801F5D48(Ground_GObj* gobj)
     return;
 }
 
-/// #grGreatBay_801F5D4C
+void grGreatBay_801F5D4C(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    HSD_JObj* jobj;
+    PAD_STACK(16);
+
+    mpJointSetCb1(0, gp, grGreatBay_801F60C4);
+    jobj = Ground_801C3FA4(gobj, 49);
+    gp->gv.greatbay3.jobj = jobj;
+    if (jobj != NULL) {
+        gp->gv.greatbay3.translation.x =
+            HSD_JObjGetTranslationX(gp->gv.greatbay3.jobj);
+        gp->gv.greatbay3.translation.y =
+            HSD_JObjGetTranslationY(gp->gv.greatbay3.jobj);
+    } else {
+        HSD_ASSERT(1132, 0);
+    }
+    gp->gv.greatbay3.translation.z = 0.0f;
+    gp->gv.greatbay3.xD0 = 0.0f;
+    gp->gv.greatbay3.xD4 = 0.0f;
+    gp->gv.greatbay3.xD8 = 0.0f;
+    gp->gv.greatbay3.xDC = 0.0f;
+    gp->gv.greatbay3.xE0 = 0.0f;
+}
 
 /// #grGreatBay_801F5E28
 
-/// #fn_801F60C4
+/// #grGreatBay_801F60C4
 
 /// #grGreatBay_801F62F8
 
@@ -368,7 +392,7 @@ void grGreatBay_801F5D48(Ground_GObj* gobj)
 
 /// #grGreatBay_801F66A4
 
-/// #fn_801F6708
+/// #grGreatBay_801F6708
 
 void grGreatBay_801F67A4(Vec3* vec, f32 arg8)
 {

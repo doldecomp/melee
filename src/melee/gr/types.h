@@ -407,6 +407,17 @@ struct grGreatBay_GroundVars2 {
     s32 x14;
     u32 x18;
     f32 x1C;
+    HSD_JObj* jobj;
+};
+
+struct grGreatBay_GroundVars3 {
+    Vec3 translation;
+    f32 xD0;
+    f32 xD4;
+    f32 xD8;
+    f32 xDC;
+    f32 xE0;
+    HSD_JObj* jobj;
 };
 
 struct grGarden_GroundVars { // Cranky Kong
@@ -976,6 +987,7 @@ struct Ground {
             struct grCorneria_GroundVars corneria;
             struct grGreatBay_GroundVars greatbay;
             struct grGreatBay_GroundVars2 greatbay2;
+            struct grGreatBay_GroundVars3 greatbay3;
             struct grFigureGet_GroundVars figureget;
             struct GroundVars_flatzone flatzone;
             struct GroundVars_flatzone2 flatzone2;

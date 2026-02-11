@@ -54,12 +54,13 @@
 /* 1F5D48 */ void grGreatBay_801F5D48(Ground_GObj*);
 /* 1F5D4C */ void grGreatBay_801F5D4C(HSD_GObj*);
 /* 1F5E28 */ void grGreatBay_801F5E28(HSD_GObj*);
-/* 1F60C4 */ UNK_RET fn_801F60C4(UNK_PARAMS);
+/* 1F60C4 */ void grGreatBay_801F60C4(Ground*, s32, CollData*, s32,
+                                      mpLib_GroundEnum, f32);
 /* 1F62F8 */ UNK_RET grGreatBay_801F62F8(UNK_PARAMS);
 /* 1F63F4 */ UNK_RET grGreatBay_801F63F4(UNK_PARAMS);
 /* 1F660C */ UNK_RET grGreatBay_801F660C(UNK_PARAMS);
 /* 1F66A4 */ UNK_RET grGreatBay_801F66A4(UNK_PARAMS);
-/* 1F6708 */ UNK_RET fn_801F6708(UNK_PARAMS);
+/* 1F6708 */ UNK_RET grGreatBay_801F6708(UNK_PARAMS);
 /* 1F67A4 */ void grGreatBay_801F67A4(Vec3*, f32);
 /* 1F680C */ DynamicsDesc* grGreatBay_801F680C(enum_t);
 /* 1F6814 */ bool grGreatBay_801F6814(Vec3*, int _, HSD_JObj*);
