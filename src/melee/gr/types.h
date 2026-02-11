@@ -390,11 +390,35 @@ struct grSmashTaunt_GroundVars {
 };
 
 struct grGreatBay_GroundVars {
-    u8 _0[0x10];
-    u32 x10;
+    u8 xC4;
+    u8 _[9];
+    s32 x10;
     s32 x14;
     u32 x18;
     f32 x1C;
+    f32 x20;
+};
+
+struct grGreatBay_GroundVars2 {
+    HSD_GObj* gobj5;
+    HSD_GObj* gobj6;
+    HSD_GObj* gobj7;
+    HSD_GObj* gobj8;
+    s16 x10;
+    s32 x14;
+    u32 x18;
+    f32 x1C;
+    HSD_JObj* jobj;
+};
+
+struct grGreatBay_GroundVars3 {
+    Vec3 translation;
+    f32 xD0;
+    f32 xD4;
+    f32 xD8;
+    f32 xDC;
+    f32 xE0;
+    HSD_JObj* jobj;
 };
 
 struct grGarden_GroundVars { // Cranky Kong
@@ -963,6 +987,8 @@ struct Ground {
             struct grCastle_GroundVars castle;
             struct grCorneria_GroundVars corneria;
             struct grGreatBay_GroundVars greatbay;
+            struct grGreatBay_GroundVars2 greatbay2;
+            struct grGreatBay_GroundVars3 greatbay3;
             struct grFigureGet_GroundVars figureget;
             struct GroundVars_flatzone flatzone;
             struct GroundVars_flatzone2 flatzone2;

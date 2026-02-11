@@ -1,11 +1,15 @@
 #include "grmutecity.h"
 
 #include "grmutecity.static.h"
+
+#include "types.h"
+
 #include <platform.h>
 
 #include "forward.h"
 
 #include "gr/grdatfiles.h"
+#include "gr/grdisplay.h"
 #include "gr/grfzerocar.h"
 #include "gr/grmaterial.h"
 #include "gr/grzakogenerator.h"
@@ -14,9 +18,303 @@
 #include "lb/lb_00F9.h"
 
 #include <baselib/gobj.h>
+#include <baselib/gobjgxlink.h>
+#include <baselib/gobjproc.h>
 #include <baselib/lobj.h>
 
 extern s16 grMc_803E34A4[];
+
+static StageCallbacks grMc_803E30C4[39] = {
+    {
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        0,
+    },
+    {
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        0,
+    },
+    {
+        grMuteCity_801F044C,
+        grMuteCity_801F04A8,
+        grMuteCity_801F04B0,
+        grMuteCity_801F04B4,
+        0,
+    },
+    {
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        0,
+    },
+    {
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        0,
+    },
+    {
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        0,
+    },
+    {
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        0,
+    },
+    {
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        0,
+    },
+    {
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        0,
+    },
+    {
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        0,
+    },
+    {
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        0,
+    },
+    {
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        0,
+    },
+    {
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        0,
+    },
+    {
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        0,
+    },
+    {
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        0,
+    },
+    {
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        0,
+    },
+    {
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        0,
+    },
+    {
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        0,
+    },
+    {
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        0,
+    },
+    {
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        0,
+    },
+    {
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        0,
+    },
+    {
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        0,
+    },
+    {
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        0,
+    },
+    {
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        0,
+    },
+    {
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        0,
+    },
+    {
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        0,
+    },
+    {
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        0,
+    },
+    {
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        0,
+    },
+    {
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        0,
+    },
+    {
+        grMuteCity_801F01B4,
+        grMuteCity_801F0288,
+        grMuteCity_801F0290,
+        grMuteCity_801F040C,
+        0,
+    },
+    {
+        grMuteCity_801EFDF8,
+        grMuteCity_801F0118,
+        grMuteCity_801F0120,
+        grMuteCity_801F01B0,
+        0xC0000000,
+    },
+    {
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        0,
+    },
+    {
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        0,
+    },
+    {
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        0,
+    },
+    {
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        0,
+    },
+    {
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        0,
+    },
+    {
+        grMuteCity_801F0410,
+        grMuteCity_801F043C,
+        grMuteCity_801F0444,
+        grMuteCity_801F0448,
+        0,
+    },
+    {
+        grMuteCity_801F0410,
+        grMuteCity_801F043C,
+        grMuteCity_801F0444,
+        grMuteCity_801F0448,
+        0,
+    },
+    {
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        0,
+    },
+};
+
+StageData grMc_803E33DC = {
+    0x00000024,
+    grMc_803E30C4,
+    "/GrMc.dat",
+    grMuteCity_801EFC6C,
+    grMuteCity_801EFC68,
+    grMuteCity_801EFCDC,
+    grMuteCity_801EFCE0,
+    grMuteCity_801EFD04,
+    grMuteCity_801F2BBC,
+    grMuteCity_801F2C10,
+    0x00000001,
+    NULL,
+    3,
+};
 
 static struct {
     int x0;
@@ -53,7 +351,37 @@ bool grMuteCity_801EFD04(void)
     return false;
 }
 
-/// #grMuteCity_801EFD0C
+HSD_GObj* grMuteCity_801EFD0C(int gobj_id)
+{
+    HSD_GObj* gobj;
+    StageCallbacks* callbacks = &grMc_803E30C4[gobj_id];
+
+    gobj = Ground_801C14D0(gobj_id);
+
+    if (gobj != NULL) {
+        Ground* gp = gobj->user_data;
+        gp->x8_callback = NULL;
+        gp->xC_callback = NULL;
+        GObj_SetupGXLink(gobj, grDisplay_801C5DB0, 3, 0);
+
+        if (callbacks->callback3 != NULL) {
+            gp->x1C_callback = callbacks->callback3;
+        }
+
+        if (callbacks->callback0 != NULL) {
+            callbacks->callback0(gobj);
+        }
+
+        if (callbacks->callback2 != NULL) {
+            HSD_GObjProc_8038FD54(gobj, callbacks->callback2, 4);
+        }
+
+    } else {
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 292, gobj_id);
+    }
+
+    return gobj;
+}
 
 /// #grMuteCity_801EFDF8
 
