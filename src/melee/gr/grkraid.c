@@ -7,6 +7,7 @@
 #include "baselib/forward.h"
 #include "forward.h"
 
+#include "ft/ftlib.h"
 #include "gr/granime.h"
 #include "gr/grdisplay.h"
 #include "gr/ground.h"
@@ -236,6 +237,23 @@ void grKraid_801FF068(HSD_GObj* gobj, int val)
 }
 
 /// #grKraid_801FF0E0
+bool grKraid_801FF0E0(Ground_GObj* gobj, int flag)
+{
+    Ground* gp = GET_GROUND(gobj);
+    int val;
+    bool comp;
+
+    if (flag == 1) {
+        val = 0x9e;
+    } else {
+        val = 0x82;
+    }
+    comp = gp->gv.kraid2.xC >= val ? true : false;
+    if (comp != false) {
+        ftLib_80086C9C(0xC, 0x0);
+    }
+    return comp;
+}
 
 void grKraid_801FF14C(Ground_GObj* gobj)
 {

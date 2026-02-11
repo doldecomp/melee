@@ -295,6 +295,11 @@ struct grKraid_GroundVars {
     /*  + gp+D0 */ f32 xC;
 };
 
+struct grKraid_GroundVars2 {
+    /*  + gp+C4 */ u8 _[0xC];
+    /*  + gp+D0 */ s32 xC;
+};
+
 struct grCorneria_GroundVars {
     union {
         struct {
@@ -1015,6 +1020,7 @@ struct Ground {
             struct grKongo_GroundVars2 kongo2;
             struct grKongo_GroundVars3 kongo3;
             struct grKraid_GroundVars kraid;
+            struct grKraid_GroundVars2 kraid2;
             struct grMuteCity_GroundVars mutecity;
             struct grMuteCity_GroundVars2 mutecity2;
             struct grOnett_GroundVars onett;
