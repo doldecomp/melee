@@ -105,9 +105,9 @@ struct HSD_JObj;
 #define HSD_JOBJ_METHOD(o) HSD_JOBJ_INFO((o)->object.parent.class_info)
 
 struct HSD_JObj {
-    /* +0 */ HSD_Obj object;
-    /* +8 */ HSD_JObj* next;
-    /* +C */ HSD_JObj* parent;
+    /*  +0 */ HSD_Obj object;
+    /*  +8 */ HSD_JObj* next;
+    /*  +C */ HSD_JObj* parent;
     /* +10 */ HSD_JObj* child;
     /* +14 */ u32 flags;
     /* +18 */ union {

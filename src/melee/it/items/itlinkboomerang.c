@@ -149,9 +149,9 @@ static void loop_lb_8000BA0C(Item* ip, HSD_JObj* hobj, f32 arg1)
     }
 }
 
-void it_802A0534(Item_GObj* gobj, Point3d* arg1)
+void it_802A0534(Item_GObj* gobj, Vec3* arg1)
 {
-    Point3d sp20;
+    Vec3 sp20;
     HSD_JObj* hobj;
     HSD_JObj* child;
     Item* ip;
@@ -475,7 +475,7 @@ static void clamp_pi_tau(f32* angle)
 
 f32 it_802A13EC(Item_GObj* gobj)
 {
-    Point3d sp14;
+    Vec3 sp14;
     Item* ip;
     f32 ret;
     f32 dx;
@@ -512,7 +512,7 @@ f32 it_802A13EC(Item_GObj* gobj)
     return ret;
 }
 
-void it_802A15EC(Item_GObj* gobj, Point3d* arg1)
+void it_802A15EC(Item_GObj* gobj, Vec3* arg1)
 {
     Item* ip;
     f32 angle;
@@ -533,7 +533,7 @@ void it_802A15EC(Item_GObj* gobj, Point3d* arg1)
     }
 }
 
-static void it_802A15EC_no_inline(Item_GObj* gobj, Point3d* arg1)
+static void it_802A15EC_no_inline(Item_GObj* gobj, Vec3* arg1)
 {
     it_802A15EC(gobj, arg1);
 }

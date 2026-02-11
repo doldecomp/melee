@@ -3260,7 +3260,7 @@ bool Camera_80030178(void)
     return false;
 }
 
-Point3d* Camera_8003019C(void)
+Vec3* Camera_8003019C(void)
 {
     return &ftLib_80086B74(Player_GetEntity(cm_80453004.ply_slot))->x1C;
 }
@@ -3462,9 +3462,9 @@ bool Camera_80030BA8(void)
 }
 
 /// Camera_ToScreen
-bool Camera_80030BBC(Point3d* arg0, S32Vec2* arg1)
+bool Camera_80030BBC(Vec3* arg0, S32Vec2* arg1)
 {
-    Point3d point;
+    Vec3 point;
     HSD_CObj* cobj;
     Scissor scissor;
     s32 px;
@@ -3506,10 +3506,10 @@ bool Camera_80030CD8(CmSubject* arg0, S32Vec2* arg1)
 bool Camera_80030CFC(CmSubject* cam_box, f32 tolerance)
 {
     HSD_CObj* cobj;
-    Point3d eye_pos;
-    Point3d interest;
-    Point3d sp38;
-    Point3d sp20;
+    Vec3 eye_pos;
+    Vec3 interest;
+    Vec3 sp38;
+    Vec3 sp20;
     f32 range;
     PAD_STACK(14);
 

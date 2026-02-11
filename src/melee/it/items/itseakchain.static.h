@@ -35,9 +35,45 @@ struct _m2c_stack_fn_802BB784 {
 }; /* size = 0x68 */
 STATIC_ASSERT(sizeof(struct _m2c_stack_fn_802BB784) == 0x68);
 
+struct _m2c_stack_fn_802BB574 {
+    /* 0x00 */ char pad_0[0x10];
+    /* 0x10 */ Mtx mtx;
+    /* 0x40 */ Vec3 vec;
+    /* 0x4C */ char pad_4C[0x1C];
+};
+STATIC_ASSERT(sizeof(struct _m2c_stack_fn_802BB574) == 0x68);
+
+struct _m2c_stack_fn_802BB44C {
+    /* 0x00 */ char pad_0[0x10];
+    /* 0x10 */ Mtx mtx;
+    /* 0x40 */ Vec3 vec;
+    /* 0x4C */ char pad_4C[0x1C];
+};
+STATIC_ASSERT(sizeof(struct _m2c_stack_fn_802BB44C) == 0x68);
+
+struct _m2c_stack_it_802BCB88 {
+    /* 0x00 */ char pad_0[0x18];
+    /* 0x18 */ Mtx mtx;
+    /* 0x48 */ Vec3 delta;
+    /* 0x54 */ Vec3 pos0;
+    /* 0x60 */ Vec3 pos1;
+    /* 0x6C */ Vec3 pos2;
+    /* 0x78 */ char pad_78[0x28];
+}; /* size = 0xA0 */
+STATIC_ASSERT(sizeof(struct _m2c_stack_it_802BCB88) == 0xA0);
+
+struct _m2c_stack_it_802BCFC4 {
+    /* 0x00 */ char pad_0[0x1C];
+    /* 0x1C */ Mtx mtx;        /* inferred */
+    /* 0x4C */ char pad_4C[8]; /* maybe part of sp48[3]? */
+    /* 0x54 */ Vec3 pos;       /* inferred */
+    /* 0x60 */ char pad_60[0x20];
+}; /* size = 0x80 */
+STATIC_ASSERT(sizeof(struct _m2c_stack_it_802BCFC4) == 0x80);
+
 Vec3 it_803B868C = { 0 };
 
 /* 2BC080 */ void it_802BC080(ItemLink*, Vec3*, Item*);
-/* 2BCB88 */ int it_802BCB88(Item*, Vec3*);
+/* 2BCB88 */ void it_802BCB88(Item*, Vec3*);
 
 #endif

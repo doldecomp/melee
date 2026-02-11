@@ -6288,21 +6288,21 @@ void it_80275328(HSD_GObj* gobj, ItemLink* arg1)
 {
     arg1->prev = NULL;
     arg1->next = NULL;
-    arg1->x8_vel.z = 0.0f;
-    arg1->x8_vel.y = 0.0f;
-    arg1->x8_vel.x = 0.0f;
+    arg1->vel.z = 0.0f;
+    arg1->vel.y = 0.0f;
+    arg1->vel.x = 0.0f;
     arg1->pos.z = 0.0f;
     arg1->pos.y = 0.0f;
     arg1->pos.x = 0.0f;
-    arg1->x20_vec.z = 0.0f;
-    arg1->x20_vec.y = 0.0f;
-    arg1->x20_vec.x = 0.0f;
-    arg1->flag0 = 0;
-    arg1->flag1 = 0;
-    arg1->flag2 = 0;
-    arg1->unk = 0;
-    arg1->x1D0_GObj = gobj;
-    arg1->x1D4_JObj = NULL;
+    arg1->x20.z = 0.0f;
+    arg1->x20.y = 0.0f;
+    arg1->x20.x = 0.0f;
+    arg1->x2C_b0 = 0;
+    arg1->x2C_b1 = 0;
+    arg1->x2C_b2 = 0;
+    arg1->x1CC = 0;
+    arg1->gobj = gobj;
+    arg1->jobj = NULL;
 }
 
 void it_80275390(Item_GObj* item_gobj)

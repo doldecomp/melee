@@ -218,25 +218,25 @@ typedef struct {
     u32 x0;
 } itKirbyHammer_ItemVars;
 
-typedef struct ItemLink // user_data struct of GObj class 7
-{
-    struct ItemLink* prev;
-    struct ItemLink* next;
-    Vec3 x8_vel;
-    Vec3 pos;
-    Vec3 x20_vec; // Previous position?
-    u8 flag0 : 1;
-    u8 flag1 : 1;
-    u8 flag2 : 1;
-    u8 flag3 : 1;
-    u8 flag4 : 1;
-    u8 flag5 : 1;
-    u8 flag6 : 1;
-    u8 flag7 : 1;
-    CollData x30_collData;
-    s32 unk;
-    HSD_GObj* x1D0_GObj; ///< @todo GObj or JObj?
-    HSD_JObj* x1D4_JObj;
+/// user_data struct of GObj class 7
+typedef struct ItemLink {
+    /*   +0 */ struct ItemLink* prev;
+    /*   +4 */ struct ItemLink* next;
+    /*   +8 */ Vec3 vel;
+    /*   +C */ Vec3 pos;
+    /*  +20 */ Vec3 x20; ///< Previous position?
+    /*  +2C:0 */ u8 x2C_b0 : 1;
+    /*  +2C:1 */ u8 x2C_b1 : 1;
+    /*  +2C:2 */ u8 x2C_b2 : 1;
+    /*  +2C:3 */ u8 x2C_b3 : 1;
+    /*  +2C:4 */ u8 x2C_b4 : 1;
+    /*  +2C:5 */ u8 x2C_b5 : 1;
+    /*  +2C:6 */ u8 x2C_b6 : 1;
+    /*  +2C:7 */ u8 x2C_b7 : 1;
+    /*  +30 */ CollData coll_data;
+    /* +1CC */ s32 x1CC;
+    /* +1D0 */ HSD_GObj* gobj;
+    /* +1D4 */ HSD_JObj* jobj;
 } ItemLink;
 STATIC_ASSERT(sizeof(struct ItemLink) == 0x1D8);
 
@@ -545,15 +545,19 @@ typedef struct itSeakNeedleThrown_ItemVars {
 } itSeakNeedleThrown_ItemVars;
 
 typedef struct itSeakChain_ItemVars {
-    /* +0 +DD4 */ ItemLink* x0;
-    /* +0 +DD8 */ ItemLink* x4;
-    /* +8 +DDC */ Fighter_GObj* x8;
+    /* +0 ip+DD4 */ ItemLink* x0;
+    /* +0 ip+DD8 */ ItemLink* x4;
+    /* +8 ip+DDC */ Fighter_GObj* x8;
 } itSeakChain_ItemVars;
 
 typedef struct itSeakChain_Attrs {
-    /*  +0 */ char pad_0[0x54];
+    /*  +0 */ int x0;
+    /*  +4 */ float x4;
+    /*  +8 */ char pad_8[0x54 - 0x8];
     /* +54 */ float x54;
+    /* +58 */ float x58;
 } itSeakChain_Attrs;
+STATIC_ASSERT(sizeof(struct itSeakChain_Attrs) == 0x5C);
 
 typedef struct itZeldaDinFireExplode_ItemVars {
     /* +0 ip+DD4 */ f32 xDD4;
