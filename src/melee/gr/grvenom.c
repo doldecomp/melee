@@ -2,6 +2,7 @@
 
 #include <platform.h>
 
+#include "baselib/sislib.h"
 #include "gr/grcorneria.h"
 #include "gr/grdisplay.h"
 #include "gr/grzakogenerator.h"

@@ -2,6 +2,7 @@
 
 #include <platform.h>
 
+#include "baselib/sislib.h"
 #include "cm/camera.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
