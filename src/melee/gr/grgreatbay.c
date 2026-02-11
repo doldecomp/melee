@@ -8,7 +8,9 @@
 
 #include "forward.h"
 
+#include "ft/ft_0877.h"
 #include "ft/ftdevice.h"
+#include "ft/ftlib.h"
 #include "gr/granime.h"
 #include "gr/grdisplay.h"
 #include "gr/grlib.h"
@@ -409,7 +411,28 @@ bool grGreatBay_801F66A4(void)
     return false;
 }
 
-/// #grGreatBay_801F6708
+bool grGreatBay_801F6708(u32 unk, HSD_GObj* gobj)
+{
+    Vec3 current;
+    Vec3 previous;
+    f32 arg;
+    PAD_STACK(8);
+
+    ftLib_80086644(gobj, &current);
+    ftLib_80086684(gobj, &previous);
+    if (ft_80087838(gobj) == false) {
+        if (current.y < -5.0f) {
+            if (previous.y > -5.0f) {
+                arg = ftLib_80086B80(gobj) / 10.0f;
+                current.y = -5.0f;
+                grGreatBay_801F67A4(&current, arg);
+                Ground_801C53EC(0x57E40);
+            }
+        }
+    }
+
+    return false;
+}
 
 void grGreatBay_801F67A4(Vec3* vec, f32 arg8)
 {
