@@ -5963,9 +5963,8 @@ void mpLib_DrawSnapping(void)
             }
 
             if (itGetKind(item_r28) == It_Kind_Link_HShot) {
-                mpLib_DrawEcbs(
-                    &GET_ITEM(item_r28)
-                         ->xDD4_itemVar.linkhookshot.x0->x30_collData);
+                mpLib_DrawEcbs(&GET_ITEM(item_r28)
+                                    ->xDD4_itemVar.linkhookshot.x0->coll_data);
             }
         }
     }

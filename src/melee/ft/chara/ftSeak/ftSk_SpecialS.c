@@ -514,73 +514,71 @@ void ftSk_SpecialAirS_Enter(HSD_GObj* gobj)
 
 bool ftSk_SpecialS_CheckInitChain(HSD_GObj* gobj)
 {
-    u8 unused0[4];
-
-    Vec3 vec0;
-
-    u8 unused1[4];
-
-    Vec3 vec1;
-
-    Fighter* fp = gobj->user_data;
-    ftSeakAttributes* specialAttributes = fp->dat_attrs;
-    fp->mv.sk.specials.x0 += 1;
-
-    /// @todo Probably an inline.
-    if (fp->mv.sk.specials.x0 == specialAttributes->x1C) {
-        u8 unused2[12];
-        Fighter* fp2 = gobj->user_data;
-
-        lb_8000B1CC(fp2->parts[FtPart_L3rdNa].joint, NULL, &vec1);
-
-        fp2->fv.sk.x8 = it_802BB290(gobj, &vec1, fp2->facing_dir);
-
-        fp2->x1984_heldItemSpec = fp2->fv.sk.x8;
-
-        if (fp2->fv.sk.x8 != NULL) {
-            fp2->death2_cb = &ftSk_Init_80110198;
-            fp2->take_dmg_cb = &ftSk_Init_80110198;
-        }
-
-        fp2->pre_hitlag_cb = &ftSk_SpecialS_80110EE8;
-        fp2->post_hitlag_cb = &ftSk_SpecialS_ChainSomething;
-        fp->mv.sk.specials.x1C = specialAttributes->x18;
-
-        if (fp->fv.sk.x8 == NULL) {
-            if (fp->ground_or_air == GA_Air) {
-                ftCo_Fall_Enter(gobj);
-            } else {
-                ft_8008A2BC(gobj);
-            }
-        }
-    }
-
-    if (fp->mv.sk.specials.x0 == specialAttributes->x1C + 1) {
-        static Vec3 const vec0_init = { 1.8, 0, 0 };
-
-        vec0 = vec0_init;
+    PAD_STACK(2 * 4);
+    {
+        Vec3 vec0;
+        PAD_STACK(1 * 4);
         {
-            HSD_GObj* item_gobj = fp->fv.sk.x8;
-            Item* item_data = item_gobj->user_data;
-            Article* article = item_data->xC4_article_data;
-            itChainSegment* chainSegment = article->x4_specialAttributes;
+            Fighter* fp = GET_FIGHTER(gobj);
+            ftSeakAttributes* specialAttributes = fp->dat_attrs;
+            Vec3 vec1;
+            fp->mv.sk.specials.x0 += 1;
 
-            vec0.x = chainSegment->x50;
+            /// @todo Probably an inline.
+            if (fp->mv.sk.specials.x0 == specialAttributes->x1C) {
+                {
+                    Fighter* fp = GET_FIGHTER(gobj);
 
-            {
-                float x;
-                x = vec0.x;
-                vec0.x *= item_data->facing_dir;
-                it_802BCFC4(item_gobj, &vec0.x, chainSegment, item_data, x);
+                    lb_8000B1CC(fp->parts[FtPart_L3rdNa].joint, NULL, &vec1);
+                    fp->fv.sk.x8 = it_802BB290(gobj, &vec1, fp->facing_dir);
+                    fp->x1984_heldItemSpec = fp->fv.sk.x8;
+
+                    if (fp->fv.sk.x8 != NULL) {
+                        fp->death2_cb = &ftSk_Init_80110198;
+                        fp->take_dmg_cb = &ftSk_Init_80110198;
+                    }
+
+                    fp->pre_hitlag_cb = &ftSk_SpecialS_80110EE8;
+                    fp->post_hitlag_cb = &ftSk_SpecialS_ChainSomething;
+                }
+                fp->mv.sk.specials.x1C = specialAttributes->x18;
+
+                if (fp->fv.sk.x8 == NULL) {
+                    if (fp->ground_or_air == GA_Air) {
+                        ftCo_Fall_Enter(gobj);
+                    } else {
+                        ft_8008A2BC(gobj);
+                    }
+                }
             }
+
+            if (fp->mv.sk.specials.x0 == specialAttributes->x1C + 1) {
+                static Vec3 const vec0_init = { 1.8f, 0.0f, 0.0f };
+
+                vec0 = vec0_init;
+                {
+                    HSD_GObj* item_gobj = fp->fv.sk.x8;
+                    Item* item_data = item_gobj->user_data;
+                    Article* article = item_data->xC4_article_data;
+                    itChainSegment* chainSegment =
+                        article->x4_specialAttributes;
+
+                    vec0.x = chainSegment->x50;
+
+                    {
+                        vec0.x *= item_data->facing_dir;
+                        it_802BCFC4(item_gobj, &vec0);
+                    }
+                }
+            }
+
+            if (fp->mv.sk.specials.x0 > specialAttributes->x20) {
+                return true;
+            }
+
+            return false;
         }
     }
-
-    if (fp->mv.sk.specials.x0 > specialAttributes->x20) {
-        return true;
-    }
-
-    return false;
 }
 
 void ftSk_SpecialSStart_Anim(HSD_GObj* gobj)

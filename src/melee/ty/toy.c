@@ -2864,8 +2864,8 @@ void un_80312018_OnFrame(void)
 /* 91.8% match */
 void un_80312050(void)
 {
-    Point3d interest;
-    Point3d sp98;
+    Vec3 interest;
+    Vec3 sp98;
     Mtx viewMtx;
     Vec3 up;
     Vec3 left;

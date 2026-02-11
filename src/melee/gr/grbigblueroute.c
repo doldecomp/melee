@@ -72,7 +72,7 @@ void grBigBlueRoute_8020B89C(void)
 
 void grBigBlueRoute_8020B920(void)
 {
-    Point3d fighter_pos;
+    Vec3 fighter_pos;
     HSD_GObj* fighter;
 
     fighter = Ground_801C57A4();

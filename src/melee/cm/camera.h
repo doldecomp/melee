@@ -113,7 +113,7 @@
 /* 030B7C */ bool Camera_80030B7C(void);
 /* 030B90 */ void Camera_80030B90(bool);
 /* 030BA8 */ bool Camera_80030BA8(void);
-/* 030BBC */ bool Camera_80030BBC(Point3d*, S32Vec2*);
+/* 030BBC */ bool Camera_80030BBC(Vec3*, S32Vec2*);
 /* 030CD8 */ bool Camera_80030CD8(CmSubject*, S32Vec2*);
 /* 030CFC */ bool Camera_80030CFC(CmSubject*, float);
 /* 030DE4 */ void Camera_80030DE4(f32, f32);
