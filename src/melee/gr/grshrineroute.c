@@ -1,15 +1,88 @@
 #include "grshrineroute.h"
 
 #include "ground.h"
+#include "types.h"
 
 #include <platform.h>
 
+#include "gr/grdisplay.h"
 #include "gr/grmaterial.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
 #include "lb/lb_00B0.h"
 
+#include <baselib/gobj.h>
+#include <baselib/gobjgxlink.h>
+#include <baselib/gobjproc.h>
 #include <baselib/random.h>
+
+StageCallbacks grSh_Route_803E58F0[7] = {
+    {
+        grShrineRoute_802089AC,
+        grShrineRoute_802089D8,
+        grShrineRoute_802089E0,
+        grShrineRoute_802089E4,
+        0,
+    },
+    {
+        grShrineRoute_8020A868,
+        grShrineRoute_8020A894,
+        grShrineRoute_8020A89C,
+        grShrineRoute_8020A8A0,
+        0,
+    },
+    {
+        grShrineRoute_802089E8,
+        grShrineRoute_80208A28,
+        grShrineRoute_80208A30,
+        grShrineRoute_80208A34,
+        0,
+    },
+    {
+        grShrineRoute_8020A868,
+        grShrineRoute_8020A894,
+        grShrineRoute_8020A89C,
+        grShrineRoute_8020A8A0,
+        0,
+    },
+    {
+        grShrineRoute_80208D14,
+        grShrineRoute_80208F0C,
+        grShrineRoute_80208F70,
+        grShrineRoute_80209AEC,
+        0xC0000000,
+    },
+    {
+        grShrineRoute_80209AF0,
+        grShrineRoute_80209BE4,
+        grShrineRoute_80209BEC,
+        grShrineRoute_8020A100,
+        0,
+    },
+    {
+        grShrineRoute_8020A104,
+        grShrineRoute_8020A214,
+        grShrineRoute_8020A21C,
+        grShrineRoute_8020A864,
+        0,
+    },
+};
+
+StageData grSh_Route_803E5988 = {
+    (1 << 4),
+    grSh_Route_803E58F0,
+    "/GrNSr.dat",
+    grShrineRoute_802087BC,
+    grShrineRoute_802087B8,
+    grShrineRoute_8020882C,
+    grShrineRoute_80208850,
+    grShrineRoute_802088B8,
+    grShrineRoute_8020B104,
+    grShrineRoute_8020B10C,
+    (1 << 0),
+    NULL,
+    0,
+};
 
 static struct {
     int x0;
@@ -72,7 +145,33 @@ bool grShrineRoute_802088B8(void)
     return false;
 }
 
-/// #grShrineRoute_802088C0
+HSD_GObj* grShrineRoute_802088C0(int gobj_id)
+{
+    HSD_GObj* gobj;
+    StageCallbacks* callbacks = &grSh_Route_803E58F0[gobj_id];
+
+    gobj = Ground_801C14D0(gobj_id);
+
+    if (gobj != NULL) {
+        Ground* gp = gobj->user_data;
+        gp->x8_callback = NULL;
+        gp->xC_callback = NULL;
+        GObj_SetupGXLink(gobj, grDisplay_801C5DB0, 3, 0);
+        if (callbacks->callback3 != NULL) {
+            gp->x1C_callback = callbacks->callback3;
+        }
+        if (callbacks->callback0 != NULL) {
+            callbacks->callback0(gobj);
+        }
+        if (callbacks->callback2 != NULL) {
+            HSD_GObjProc_8038FD54(gobj, callbacks->callback2, 4);
+        }
+    } else {
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 271, gobj_id);
+    }
+
+    return gobj;
+}
 
 void grShrineRoute_802089AC(Ground_GObj* gobj)
 {
