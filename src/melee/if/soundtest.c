@@ -1328,16 +1328,14 @@ int un_80301AD4(int arg0)
 
     OSReport(un_803FD2AC);
     result = lbSnap_8001D7B0(0, un_804D6E14, un_804D6E10);
-    if (result != 0xB) {
-        return 0;
-    }
+    if (result == 0xB) {
+        do {
+            result = lb_8001B6F8();
+        } while (result == 0xB);
 
-    do {
-        result = lb_8001B6F8();
-    } while (result == 0xB);
-
-    if (result == 0) {
-        lbSnap_8001D40C(0);
+        if (result == 0) {
+            lbSnap_8001D40C(0);
+        }
     }
     return 0;
 }
