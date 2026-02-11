@@ -4,14 +4,16 @@
 
 #include <platform.h>
 
-#include "baselib/forward.h"
+#include "forward.h"
 
+#include "ft/ftlib.h"
 #include "gr/granime.h"
 #include "gr/grdisplay.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
 
+#include <baselib/controller.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
@@ -50,6 +52,7 @@ StageData grKr_803E4D0C = {
 };
 
 static grKr_804D6A08_t* grKr_804D6A08;
+static int grKr_804D6A0C;
 
 void grKraid_801FDFF8(bool unused)
 {
@@ -135,14 +138,34 @@ void grKraid_801FE1E8(Ground_GObj* gobj)
     return;
 }
 
-/// #grKraid_801FE1EC
+void grKraid_801FE1EC(Ground_GObj* gobj)
+{
+    Ground* gp = gobj->user_data;
+    Vec3 scale;
+
+    scale.x = scale.y = scale.z = Ground_801C0498();
+    HSD_JObjSetScale(GET_JOBJ(gobj), &scale);
+    gp->x11_flags.b012 = 1;
+}
 
 bool grKraid_801FE2C8(Ground_GObj* gobj)
 {
     return false;
 }
 
-/// #grKraid_801FE2D0
+void grKraid_801FE2D0(Ground_GObj* gobj)
+{
+    HSD_PadStatus* master = HSD_PadMasterStatus;
+    Ground* gp = GET_GROUND(gobj);
+    if ((master[1].trigger & PAD_BUTTON_A) != 0) {
+        grKr_804D6A0C += 1;
+        if (grKr_804D6A0C > 6) {
+            grKr_804D6A0C = 0;
+        }
+        OSReport("*** Req Effect Anime %d\n", grKr_804D6A0C);
+        grAnime_801C8138(gobj, gp->map_id, grKr_804D6A0C);
+    }
+}
 
 void grKraid_801FE35C(Ground_GObj* gobj)
 {
@@ -227,6 +250,23 @@ void grKraid_801FF068(HSD_GObj* gobj, int val)
 }
 
 /// #grKraid_801FF0E0
+bool grKraid_801FF0E0(Ground_GObj* gobj, int flag)
+{
+    Ground* gp = GET_GROUND(gobj);
+    int val;
+    bool comp;
+
+    if (flag == 1) {
+        val = 0x9e;
+    } else {
+        val = 0x82;
+    }
+    comp = gp->gv.kraid2.xC >= val ? true : false;
+    if (comp != false) {
+        ftLib_80086C9C(0xC, 0x0);
+    }
+    return comp;
+}
 
 void grKraid_801FF14C(Ground_GObj* gobj)
 {

@@ -295,6 +295,11 @@ struct grKraid_GroundVars {
     /*  + gp+D0 */ f32 xC;
 };
 
+struct grKraid_GroundVars2 {
+    /*  + gp+C4 */ u8 _[0xC];
+    /*  + gp+D0 */ s32 xC;
+};
+
 struct grCorneria_GroundVars {
     union {
         struct {
@@ -897,6 +902,13 @@ struct ShyGuys {
     /* +4 gp+C8 */ int timer;
 };
 
+struct grShrineroute_GroundVars {
+    /* +0 gp+C4 */ u8 _[0x4];
+    /* +4 gp+C8 */ u16 xC8;
+    /* +6 gp+CA */ u16 xCA;
+    /* +8 gp+CA */ u16 xCC;
+};
+
 struct Battlefield {
     /* +0 gp+C4 */ int bg_state;
     /* +4 gp+C8 */ int curr_bg;
@@ -1015,12 +1027,14 @@ struct Ground {
             struct grKongo_GroundVars2 kongo2;
             struct grKongo_GroundVars3 kongo3;
             struct grKraid_GroundVars kraid;
+            struct grKraid_GroundVars2 kraid2;
             struct grMuteCity_GroundVars mutecity;
             struct grMuteCity_GroundVars2 mutecity2;
             struct grOnett_GroundVars onett;
             struct grPura_GroundVars pura;
             struct grPura_GroundVars2 pura2;
             struct grRCruise_GroundVars rcruise;
+            struct grShrineroute_GroundVars shrineroute;
             struct grSmashTaunt_GroundVars smashtaunt;
             struct GroundVars_unk unk;
             struct grVenom_GroundVars venom;
