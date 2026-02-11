@@ -390,7 +390,8 @@ struct grSmashTaunt_GroundVars {
 };
 
 struct grGreatBay_GroundVars {
-    u8 _[10];
+    u8 xC4;
+    u8 _[9];
     s32 x10;
     s32 x14;
     u32 x18;

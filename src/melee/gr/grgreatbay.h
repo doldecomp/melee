@@ -59,7 +59,7 @@
 /* 1F62F8 */ UNK_RET grGreatBay_801F62F8(UNK_PARAMS);
 /* 1F63F4 */ UNK_RET grGreatBay_801F63F4(UNK_PARAMS);
 /* 1F660C */ UNK_RET grGreatBay_801F660C(UNK_PARAMS);
-/* 1F66A4 */ UNK_RET grGreatBay_801F66A4(UNK_PARAMS);
+/* 1F66A4 */ bool grGreatBay_801F66A4(void);
 /* 1F6708 */ UNK_RET grGreatBay_801F6708(UNK_PARAMS);
 /* 1F67A4 */ void grGreatBay_801F67A4(Vec3*, f32);
 /* 1F680C */ DynamicsDesc* grGreatBay_801F680C(enum_t);
