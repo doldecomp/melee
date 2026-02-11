@@ -4,7 +4,6 @@
 
 #include <platform.h>
 
-#include "baselib/forward.h"
 #include "forward.h"
 
 #include "ft/ftlib.h"
@@ -14,6 +13,7 @@
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
 
+#include <baselib/controller.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
@@ -52,6 +52,7 @@ StageData grKr_803E4D0C = {
 };
 
 static grKr_804D6A08_t* grKr_804D6A08;
+static int grKr_804D6A0C;
 
 void grKraid_801FDFF8(bool unused)
 {
@@ -152,7 +153,19 @@ bool grKraid_801FE2C8(Ground_GObj* gobj)
     return false;
 }
 
-/// #grKraid_801FE2D0
+void grKraid_801FE2D0(Ground_GObj* gobj)
+{
+    HSD_PadStatus* master = HSD_PadMasterStatus;
+    Ground* gp = GET_GROUND(gobj);
+    if ((master[1].trigger & PAD_BUTTON_A) != 0) {
+        grKr_804D6A0C += 1;
+        if (grKr_804D6A0C > 6) {
+            grKr_804D6A0C = 0;
+        }
+        OSReport("*** Req Effect Anime %d\n", grKr_804D6A0C);
+        grAnime_801C8138(gobj, gp->map_id, grKr_804D6A0C);
+    }
+}
 
 void grKraid_801FE35C(Ground_GObj* gobj)
 {
