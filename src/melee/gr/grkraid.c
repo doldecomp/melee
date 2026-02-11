@@ -5,6 +5,7 @@
 #include <platform.h>
 
 #include "baselib/forward.h"
+#include "forward.h"
 
 #include "gr/granime.h"
 #include "gr/grdisplay.h"
@@ -135,7 +136,15 @@ void grKraid_801FE1E8(Ground_GObj* gobj)
     return;
 }
 
-/// #grKraid_801FE1EC
+void grKraid_801FE1EC(Ground_GObj* gobj)
+{
+    Ground* gp = gobj->user_data;
+    Vec3 scale;
+
+    scale.x = scale.y = scale.z = Ground_801C0498();
+    HSD_JObjSetScale(GET_JOBJ(gobj), &scale);
+    gp->x11_flags.b012 = 1;
+}
 
 bool grKraid_801FE2C8(Ground_GObj* gobj)
 {
