@@ -2,6 +2,7 @@
 
 #include "grcorneria.static.h"
 
+#include "baselib/sislib.h"
 #include "cm/camera.h"
 #include "gm/gm_17C0.h"
 #include "gm/gm_1A45.h"
@@ -538,7 +539,7 @@ HSD_Generator* grCorneria_801E2454(Vec3* vec)
 
 HSD_Generator* grCorneria_801E2480(Vec3* vec)
 {
-    grLib_801C96F8(0x7530, 0x1E, vec);
+    return grLib_801C96F8(0x7530, 0x1E, vec);
 }
 
 /// This triggers for both Corneria and Venom
