@@ -293,7 +293,7 @@ void grInishie2_801FD018(HSD_GObj* gobj)
 
 void grInishie2_801FD0B4(HSD_GObj* gobj)
 {
-    Ground* gp = gobj->user_data;
+    Ground* gp = GET_GROUND(gobj);
 
     if (gp->gv.inishie2.xC4_flags.b1) {
         s16 timer = gp->gv.inishie2.xC6--;
@@ -302,7 +302,7 @@ void grInishie2_801FD0B4(HSD_GObj* gobj)
             mpLib_80057BC0(12);
             gp->gv.inishie2.xC4_flags.b1 = 0;
             if (new_gobj != NULL) {
-                Ground* new_gp = new_gobj->user_data;
+                Ground* new_gp = GET_GROUND(new_gobj);
                 new_gp->gv.inishie22.xCC = gobj;
             }
         }
@@ -315,7 +315,7 @@ void grInishie2_801FD0B4(HSD_GObj* gobj)
             mpLib_80057BC0(13);
             gp->gv.inishie2.xC4_flags.b2 = 0;
             if (new_gobj != NULL) {
-                Ground* new_gp = new_gobj->user_data;
+                Ground* new_gp = GET_GROUND(new_gobj);
                 new_gp->gv.inishie22.xCC = gobj;
             }
         }
