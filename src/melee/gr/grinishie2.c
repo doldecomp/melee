@@ -347,9 +347,9 @@ bool grInishie2_801FD21C(Ground_GObj* gobj)
 
 void grInishie2_801FD224(Ground_GObj* gobj)
 {
-    Ground* gp = gobj->user_data;
+    Ground* gp = GET_GROUND(gobj);
 
-    if (!gp->gv.inishie2.xC4_flags.b1) {
+    if (!gp->gv.inishie2.xC4_flags.b0) {
         s16 counter = gp->gv.inishie2.xC6;
         gp->gv.inishie2.xC6 = counter - 1;
 
@@ -360,23 +360,23 @@ void grInishie2_801FD224(Ground_GObj* gobj)
                 mpJointListAdd(0xD);
             }
 
-            gp->gv.inishie2.xC4_flags.b1 = 1;
+            gp->gv.inishie2.xC4_flags.b0 = 1;
         }
     }
 
     Ground_801C2FE0(gobj);
 
-    gp = gobj->user_data;
+    gp = GET_GROUND(gobj);
     if (grAnime_801C83D0(gobj, 0, 1)) { ///< @todo union irregularity
         Ground* gp_2 = GET_GROUND(gp->gv.inishie22.xCC);
         if (gp->gv.inishie2.xC8 == 0) {
-            gp_2->gv.inishie2.xC4_flags.b6 = 1;
+            gp_2->gv.inishie2.xC4_flags.b1 = 1;
             gp_2->gv.inishie2.xC6 =
-                grI2_804D6A00->unk0 + test_random(grI2_804D6A00->unk2);
+                grI2_804D6A00->unk0 + test_random((int) grI2_804D6A00->unk2);
         } else {
-            gp_2->gv.inishie2.xC4_flags.b5 = 1;
+            gp_2->gv.inishie2.xC4_flags.b2 = 1;
             gp_2->gv.inishie2.xC8 =
-                grI2_804D6A00->unk4 + test_random(grI2_804D6A00->unk6);
+                grI2_804D6A00->unk4 + test_random((int) grI2_804D6A00->unk6);
         }
 
         Ground_801C4A08(gobj);
