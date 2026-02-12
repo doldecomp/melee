@@ -212,7 +212,9 @@ void grInishie1_801FAAD8(Ground_GObj* gobj) {}
 void grInishie1_801FAADC(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
-    Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+
+    Ground_801C2ED0(jobj, gp->map_id);
     grAnime_801C8138(gobj, gp->map_id, 0);
     grInishie1_801FAD84(gobj);
     grInishie1_801FC018(gobj);

@@ -10,7 +10,6 @@
 #include "gm/gm_unsplit.h"
 #include "gr/granime.h"
 #include "gr/grdisplay.h"
-#include "gr/grlib.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
