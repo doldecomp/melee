@@ -206,31 +206,22 @@ void grInishie2_801FCDFC(Ground_GObj* gobj) {}
 
 void grInishie2_801FCE00(Ground_GObj* gobj) {}
 
-void grInishie2_801FCE04(Ground_GObj* arg0)
+void grInishie2_801FCE04(Ground_GObj* gobj)
 {
-    HSD_JObj* temp_r27;
-    HSD_JObj* temp_r28;
-    HSD_JObj* temp_r29;
-    HSD_JObj* temp_r30;
-    HSD_JObj* temp_r31;
     Ground* gp;
 
-    gp = arg0->user_data;
-    grAnime_801C7FF8(arg0, 1, 7, 0, 0.0f, 1.0f);
-    grAnime_801C7FF8(arg0, 6, 7, 1, 0.0f, 1.0f);
-    grAnime_801C7FF8(arg0, 5, 7, 2, 0.0f, 1.0f);
+    gp = GET_GROUND(gobj);
+    grAnime_801C7FF8(gobj, 1, 7, 0, 0.0f, 1.0f);
+    grAnime_801C7FF8(gobj, 6, 7, 1, 0.0f, 1.0f);
+    grAnime_801C7FF8(gobj, 5, 7, 2, 0.0f, 1.0f);
     gp->x8_callback = NULL;
     gp->xC_callback = NULL;
-    grInishie2_801FD018(arg0);
-    grInishie2_801FD368(arg0);
-    grInishie2_801FD744(arg0);
-    temp_r27 = Ground_801C3FA4(arg0, 0xD);
-    temp_r28 = Ground_801C3FA4(arg0, 0xA);
-    temp_r29 = Ground_801C3FA4(arg0, 0xB);
-    temp_r30 = Ground_801C3FA4(arg0, 8);
-    temp_r31 = Ground_801C3FA4(arg0, 0xC);
-    Ground_801C4E70(Ground_801C3FA4(arg0, 9), temp_r31, temp_r30, temp_r29,
-                    temp_r28, temp_r27);
+    grInishie2_801FD018(gobj);
+    grInishie2_801FD368(gobj);
+    grInishie2_801FD744(gobj);
+    Ground_801C4E70(Ground_801C3FA4(gobj, 9), Ground_801C3FA4(gobj, 0xC),
+                    Ground_801C3FA4(gobj, 8), Ground_801C3FA4(gobj, 0xB),
+                    Ground_801C3FA4(gobj, 0xA), Ground_801C3FA4(gobj, 0xD));
     gp->gv.inishie2.xC4_flags.b0 = 0;
 }
 
