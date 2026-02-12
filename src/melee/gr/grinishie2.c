@@ -111,7 +111,7 @@ typedef struct grInishie2_thing {
     s16 unkE;
     s16 unk10[2];
     Vec3 unk14[2];
-    s32 unk2C;
+    f32 unk2C;
     Vec3 unk30[2];
 } grInishie2_thing;
 
@@ -474,21 +474,21 @@ bool grInishie2_801FD64C(Ground_GObj* gobj)
     return 0;
 }
 
-void grInishie2_801FD654(Ground_GObj* arg0)
+void grInishie2_801FD654(Ground_GObj* gobj)
 {
     Vec3 vec;
     Ground* gp;
-    Item_GObj* birdo_gobj;
-    HSD_JObj* temp_r31;
-    temp_r31 = arg0->hsd_obj;
-    gp = GET_GROUND(arg0);
-    birdo_gobj = gp->gv.inishie22.xC4;
-    if (birdo_gobj != 0U) {
-        it_802ECD1C(birdo_gobj, &vec);
-        vec.x += grI2_804D6A00->unk14[1].x;
-        HSD_JObjSetTranslate(temp_r31, &vec);
+    HSD_JObj* jobj;
+    PAD_STACK(4);
+
+    jobj = GET_JOBJ(gobj);
+    gp = GET_GROUND(gobj);
+    if (gp->gv.inishie22.xC4 != 0) {
+        it_802ECD1C(gp->gv.inishie22.xC4, &vec);
+        vec.y += grI2_804D6A00->unk2C;
+        HSD_JObjSetTranslate(jobj, &vec);
     }
-    Ground_801C2FE0(arg0);
+    Ground_801C2FE0(gobj);
 }
 
 void grInishie2_801FD740(Ground_GObj* gobj) {}
