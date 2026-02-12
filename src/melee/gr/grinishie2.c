@@ -324,12 +324,13 @@ void grInishie2_801FD0B4(HSD_GObj* gobj)
 
 void grInishie2_801FD198(Ground_GObj* gobj)
 {
-    Ground* gp = gobj->user_data;
+    Ground* gp = GET_GROUND(gobj);
+    HSD_JObj* jobj = GET_JOBJ(gobj);
 
-    Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
+    Ground_801C2ED0(jobj, gp->map_id);
     grAnime_801C8138(gobj, gp->map_id, 0);
 
-    gp->gv.inishie2.xC4_flags.b7 = 0;
+    gp->gv.inishie2.xC4_flags.b0 = 0;
 
     gp->gv.inishie2.xC8 = gp->map_id - 3;
     gp->gv.inishie2.xC6 = grI2_804D6A00->unk10[gp->gv.inishie2.xC8];
