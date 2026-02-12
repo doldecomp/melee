@@ -534,10 +534,10 @@ void grInishie2_801FD824(HSD_GObj* gobj)
 {
     Vec3 spawn_pos;
     s32 spawn_side;
-    HSD_JObj* jobj;
     Ground* gp;
+    PAD_STACK(0x10);
 
-    gp = gobj->user_data;
+    gp = GET_GROUND(gobj);
     spawn_side = HSD_Randi(2);
 
     mpJointListAdd(0);
@@ -554,22 +554,21 @@ void grInishie2_801FD824(HSD_GObj* gobj)
     spawn_pos.z = grI2_804D6A00->unk30[spawn_side].z;
 
     if (spawn_side == 0) {
-        gp->gv.inishie23.xC8_flags.b4 = 1;
+        gp->gv.inishie23.xC8_flags.b3 = 1;
     } else {
-        gp->gv.inishie23.xC8_flags.b4 = 0;
+        gp->gv.inishie23.xC8_flags.b3 = 0;
     }
 
-    grAnime_801C8138(gobj, gp->map_id, gp->gv.inishie23.xC8_flags.b4);
+    grAnime_801C8138(gobj, gp->map_id, gp->gv.inishie23.xC8_flags.b3);
 
-    gp->gv.inishie23.xC8_flags.b6 = 1;
-    gp->gv.inishie23.xC8_flags.b7 = 0;
-    gp->gv.inishie23.xC8_flags.b5 = 0;
+    gp->gv.inishie23.xC8_flags.b1 = 1;
+    gp->gv.inishie23.xC8_flags.b0 = 0;
+    gp->gv.inishie23.xC8_flags.b2 = 0;
 
     gp->gv.inishie2.xCA = 0;
     gp->gv.inishie2.xD8 = spawn_pos;
 
-    jobj = Ground_801C3FA4(gobj, 0);
-    HSD_JObjSetTranslate(jobj, &spawn_pos);
+    HSD_JObjSetTranslate(Ground_801C3FA4(gobj, 0), &spawn_pos);
 }
 
 void grInishie2_801FD9EC(HSD_GObj* gobj)
