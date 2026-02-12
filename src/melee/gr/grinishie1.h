@@ -48,7 +48,7 @@
 /* 1FC4A0 */ void grInishie1_801FC4A0(HSD_GObj*);
 /* 1FC664 */ void grInishie1_801FC664(HSD_GObj*);
 /* 1FC9AC */ void fn_801FC9AC(Ground*, s32, s32, s32, enum mpLib_GroundEnum);
-/* 1FCAAC */ s32 grInishie1_801FCAAC(s32);
+/* 1FCAAC */ bool grInishie1_801FCAAC(int);
 /* 1FCB10 */ void grInishie1_801FCB10(HSD_GObj*);
 /* 1FCBB0 */ DynamicsDesc* grInishie1_801FCBB0(enum_t);
 /* 1FCBB8 */ bool grInishie1_801FCBB8(Vec3*, int arg, HSD_JObj* jobj);

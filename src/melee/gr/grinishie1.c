@@ -6,6 +6,9 @@
 #include "cm/camera.h"
 #include "ef/efsync.h"
 #include "gm/gm_unsplit.h"
+
+#include "gr/forward.h"
+
 #include "gr/grdisplay.h"
 #include "gr/grlib.h"
 #include "gr/grmaterial.h"
@@ -828,7 +831,23 @@ void fn_801FBEB8(Ground* gr, s32 block_id, CollData* arg2, s32 arg3,
 
 /// #fn_801FC9AC
 
-/// #grInishie1_801FCAAC
+bool grInishie1_801FCAAC(int line_id)
+{
+    if (stage_info.internal_stage_id == INISHIE1 && line_id != -1) {
+        int result;
+        u32 joint;
+
+        joint = mpJointFromLine(line_id) - 20;
+        result = 1;
+        if (joint > 1) {
+            result = 0;
+        }
+        if (result != 0) {
+            return true;
+        }
+    }
+    return false;
+}
 
 void grInishie1_801FCB10(HSD_GObj* gobj)
 {
