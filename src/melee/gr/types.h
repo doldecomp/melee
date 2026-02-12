@@ -564,6 +564,8 @@ struct grInishie2_GroundVars {
     s16 xC8;
     s16 xCA;
     s16 xCC;
+    u32 xD0;
+    u32 xD4;
     Vec3 xD8;
 };
 
