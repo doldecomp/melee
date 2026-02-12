@@ -282,9 +282,9 @@ void grInishie2_801FD018(HSD_GObj* gobj)
     gp->gv.inishie2.xC4_flags.b1 = 1;
     gp->gv.inishie2.xC4_flags.b2 = 1;
     gp->gv.inishie2.xC6 =
-        grI2_804D6A00->unk0 + test_random(grI2_804D6A00->unk2);
+        grI2_804D6A00->unk0 + test_random((int) grI2_804D6A00->unk2);
     gp->gv.inishie2.xC8 =
-        grI2_804D6A00->unk4 + test_random(grI2_804D6A00->unk6);
+        grI2_804D6A00->unk4 + test_random((int) grI2_804D6A00->unk6);
 }
 
 void grInishie2_801FD0B4(HSD_GObj* gobj)
