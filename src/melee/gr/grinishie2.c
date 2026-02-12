@@ -495,16 +495,12 @@ void grInishie2_801FD740(Ground_GObj* gobj) {}
 
 void grInishie2_801FD744(HSD_GObj* gobj)
 {
-    Ground* gp = gobj->user_data;
-    s32 rand_max;
-    s32 rand_val;
+    Ground* gp = GET_GROUND(gobj);
 
-    gp->gv.inishie2.xC4_flags.b3 = 1;
+    gp->gv.inishie2.xC4_flags.b4 = 1;
 
-    rand_max = grI2_804D6A00->unkE;
-    rand_val = test_random(rand_max);
-
-    gp->gv.inishie2.xCC = grI2_804D6A00->unkC + rand_val;
+    gp->gv.inishie2.xCC =
+        grI2_804D6A00->unkC + test_random((int) grI2_804D6A00->unkE);
 }
 
 void grInishie2_801FD7A8(HSD_GObj* gobj)
