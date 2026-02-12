@@ -398,14 +398,14 @@ void grInishie2_801FD3CC(HSD_GObj* gobj)
 {
     HSD_GObj* gobj_2;
     s16 counter;
-    Ground* gp = gobj->user_data;
+    Ground* gp = GET_GROUND(gobj);
 
-    if (gp->gv.inishie2.xC4_flags.b5) {
+    if (gp->gv.inishie2.xC4_flags.b3) {
         counter = gp->gv.inishie2.xCA;
         gp->gv.inishie2.xCA = counter - 1;
         if (counter < 0) {
             gobj_2 = grInishie2_801FCCDC(0xF);
-            gp->gv.inishie2.xC4_flags.b5 = 0;
+            gp->gv.inishie2.xC4_flags.b3 = 0;
             if (gobj_2 != NULL) {
                 Ground* gp_2 = gobj_2->user_data;
                 gp_2->gv.inishie22.xC8 = gobj;
