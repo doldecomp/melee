@@ -832,12 +832,13 @@ void fn_801FBEB8(Ground* gr, s32 block_id, CollData* arg2, s32 arg3,
 
 void grInishie1_801FCB10(HSD_GObj* gobj)
 {
-    int time_remaining;
+    Ground* gp;
+    u32 time_remaining;
     s32 var_r3;
 
-    Ground* gp = gobj->user_data;
+    gp = GET_GROUND(gobj);
     if (gp->gv.inishie2.xC4_flags.b0 == 0) {
-        if (GetMatchTimer(&time_remaining) != 0) {
+        if (GetMatchTimer((int*) &time_remaining) != 0) {
             if (time_remaining < 20) {
                 s32 temp_r3 = Ground_801C5A94();
                 if (temp_r3 == 0x29) {
