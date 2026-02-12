@@ -1,6 +1,10 @@
 #include "gr/grinishie2.h"
 
+#include "placeholder.h"
+
 #include <platform.h>
+
+#include "baselib/forward.h"
 
 #include "cm/camera.h"
 #include "gm/gm_unsplit.h"
@@ -662,29 +666,25 @@ bool grInishie2_801FDED0(Ground_GObj* gobj)
     return 0;
 }
 
-void grInishie2_801FDED8(Ground_GObj* gobj)
+static inline bool checkBlastZone(Vec3* pos)
 {
-    Vec3 sp1C;
-    s32 var_r0;
-    Ground* gp;
-    void* temp_r4;
-    Ground* parent_gp;
-
-    Ground_801C2FE0(gobj);
-    grInishie2_801FD9EC(gobj);
-
-    gp = gobj->user_data;
-
-    lb_8000B1CC(Ground_801C3FA4(gobj, 0), NULL, &sp1C);
-
-    if (sp1C.x > Stage_GetBlastZoneRightOffset()) {
-        var_r0 = 1;
-    } else if (sp1C.x < Stage_GetBlastZoneLeftOffset()) {
-        var_r0 = 1;
+    if (pos->x > Stage_GetBlastZoneRightOffset()) {
+        return true;
+    } else if (pos->x < Stage_GetBlastZoneLeftOffset()) {
+        return true;
     } else {
-        var_r0 = 0;
-    } ///< @todo union irregularity
-    if ((var_r0 != 0) && gp->gv.inishie23.xC8_flags.b0) {
+        return false;
+    }
+}
+
+static inline void grInishie2_801FDED8_inline(HSD_GObj* gobj)
+{
+    Vec3 pos;
+    Ground* gp = GET_GROUND(gobj);
+
+    lb_8000B1CC(Ground_801C3FA4(gobj, 0), NULL, &pos);
+
+    if ((checkBlastZone(&pos) != 0) && gp->gv.inishie23.xC8_flags.b0) {
         HSD_GObj* gobj_2 = gp->gv.inishie22.xC4;
         Ground* gp_2 = GET_GROUND(gobj_2);
         gp_2->gv.inishie2.xC4_flags.b4 = 1;
@@ -693,6 +693,14 @@ void grInishie2_801FDED8(Ground_GObj* gobj)
                    grInishie2_801FDFB4(grI2_804D6A00->unkE));
         Ground_801C4A08(gobj);
     }
+}
+
+void grInishie2_801FDED8(Ground_GObj* gobj)
+{
+    Ground_801C2FE0(gobj);
+    grInishie2_801FD9EC(gobj);
+
+    grInishie2_801FDED8_inline(gobj);
 }
 
 s32 grInishie2_801FDFB4(s32 arg0)
