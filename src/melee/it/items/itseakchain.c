@@ -103,10 +103,10 @@ void fn_802BB44C(Item_GObj* gobj)
 
 void fn_802BB574(Item_GObj* gobj)
 {
-    Mtx mtx;
     Vec3 vec;
     Item* ip = GET_ITEM(gobj);
     itSeakChain_Attrs* sa = ip->xC4_article_data->x4_specialAttributes;
+    Mtx mtx;
     ItemLink* link = ip->xDD4_itemVar.seakchain.x0;
 
     PSMTXIdentity(mtx);
