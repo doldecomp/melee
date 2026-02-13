@@ -547,7 +547,7 @@ typedef struct itSeakNeedleThrown_ItemVars {
 typedef struct itSeakChain_ItemVars {
     /* +0 ip+DD4 */ ItemLink* x0;
     /* +0 ip+DD8 */ ItemLink* x4;
-    /* +8 ip+DDC */ Fighter_GObj* x8;
+    /* +8 ip+DDC */ Fighter_GObj* parent_gobj;
 } itSeakChain_ItemVars;
 
 typedef struct itSeakChain_Attrs {

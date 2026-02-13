@@ -530,7 +530,7 @@ bool ftSk_SpecialS_CheckInitChain(HSD_GObj* gobj)
                     Fighter* fp = GET_FIGHTER(gobj);
 
                     lb_8000B1CC(fp->parts[FtPart_L3rdNa].joint, NULL, &vec1);
-                    fp->fv.sk.x8 = it_802BB290(gobj, &vec1, fp->facing_dir);
+                    fp->fv.sk.x8 = itSeakChain_Spawn(gobj, &vec1, fp->facing_dir);
                     fp->x1984_heldItemSpec = fp->fv.sk.x8;
 
                     if (fp->fv.sk.x8 != NULL) {

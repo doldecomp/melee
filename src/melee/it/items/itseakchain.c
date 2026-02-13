@@ -11,16 +11,23 @@
 #include "dolphin/mtx.h"
 #include "ft/ftcoll.h"
 #include "ft/ftlib.h"
+#include "ft/inlines.h"
+
+#include "ftSeak/forward.h"
+
 #include "ftSeak/ftSk_SpecialS.h"
 
 #include "it/forward.h"
 
 #include "it/inlines.h"
 #include "it/it_26B1.h"
+#include "it/it_2725.h"
 #include "it/itCharItems.h"
 #include "it/item.h"
 #include "it/items/itlinkhookshot.h"
+#include "lb/lbaudio_ax.h"
 #include "lb/lbvector.h"
+#include "mp/mpcoll.h"
 
 void it_802BAEEC(Item_GObj* gobj)
 {
@@ -42,7 +49,7 @@ static void inlineA0(Item_GObj* gobj)
             ftSk_SpecialS_80110E4C(ip->owner);
         }
         ip->owner = NULL;
-        ip->xDD4_itemVar.seakchain.x8 = NULL;
+        ip->xDD4_itemVar.seakchain.parent_gobj = NULL;
         {
             ItemLink* cur;
             for (cur = ip->xDD4_itemVar.seakchain.x0; cur != NULL;) {
@@ -62,7 +69,78 @@ void it_802BB20C(Item_GObj* gobj)
     }
 }
 
-/// #it_802BB290
+Item_GObj* itSeakChain_Spawn(Fighter_GObj* parent_gobj, Point3d* arg1,
+                             f32 facing_dir)
+{
+    SpawnItem spawn;
+    Fighter* fp;
+    Item* ip;
+    Item_GObj* gobj;
+    s32 var_ctr;
+    void* var_r3;
+
+    fp = GET_FIGHTER(parent_gobj);
+    spawn.kind = It_Kind_Seak_Chain;
+    spawn.prev_pos = *arg1;
+    spawn.pos = spawn.prev_pos;
+    spawn.facing_dir = facing_dir;
+    spawn.x3C_damage = 0;
+    spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;
+    spawn.x0_parent_gobj = parent_gobj;
+    spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
+    spawn.x44_flag.b0 = true;
+    spawn.x40 = 0;
+    gobj = Item_80268B18(&spawn);
+    if (gobj != NULL) {
+        ip = GET_ITEM(gobj);
+        ip->xDD4_itemVar.seakchain.parent_gobj = parent_gobj;
+        ip->xDD4_itemVar.seakchain.x0 = NULL;
+        ip->xDD4_itemVar.seakchain.x4 = NULL;
+        if (0 < 0xF) {
+            /// @todo Probably a for loop along a Vec3 array at the end of
+            ///       #itSeakChain_ItemVars
+            M2C_FIELD(ip, f32*, 0xDF8) = 0.0f;
+            M2C_FIELD(ip, f32*, 0xDF4) = 0.0f;
+            M2C_FIELD(ip, f32*, 0xDF0) = 0.0f;
+            M2C_FIELD(ip, f32*, 0xE04) = 0.0f;
+            M2C_FIELD(ip, f32*, 0xE00) = 0.0f;
+            M2C_FIELD(ip, f32*, 0xDFC) = 0.0f;
+            M2C_FIELD(ip, f32*, 0xE10) = 0.0f;
+            M2C_FIELD(ip, f32*, 0xE0C) = 0.0f;
+            M2C_FIELD(ip, f32*, 0xE08) = 0.0f;
+            M2C_FIELD(ip, f32*, 0xE1C) = 0.0f;
+            M2C_FIELD(ip, f32*, 0xE18) = 0.0f;
+            M2C_FIELD(ip, f32*, 0xE14) = 0.0f;
+            M2C_FIELD(ip, f32*, 0xE28) = 0.0f;
+            M2C_FIELD(ip, f32*, 0xE24) = 0.0f;
+            M2C_FIELD(ip, f32*, 0xE20) = 0.0f;
+            M2C_FIELD(ip, f32*, 0xE34) = 0.0f;
+            M2C_FIELD(ip, f32*, 0xE30) = 0.0f;
+            M2C_FIELD(ip, f32*, 0xE2C) = 0.0f;
+            M2C_FIELD(ip, f32*, 0xE40) = 0.0f;
+            M2C_FIELD(ip, f32*, 0xE3C) = 0.0f;
+            M2C_FIELD(ip, f32*, 0xE38) = 0.0f;
+            M2C_FIELD(ip, f32*, 0xE4C) = 0.0f;
+            M2C_FIELD(ip, f32*, 0xE48) = 0.0f;
+            M2C_FIELD(ip, f32*, 0xE44) = 0.0f;
+            var_r3 = ip + (8 * 0xC);
+            var_ctr = 0xF - 8;
+            if (8 < 0xF) {
+                do {
+                    M2C_FIELD(var_r3, f32*, 0xDF8) = 0.0f;
+                    M2C_FIELD(var_r3, f32*, 0xDF4) = 0.0f;
+                    M2C_FIELD(var_r3, f32*, 0xDF0) = 0.0f;
+                    // var_r3 += 0xC;
+                    var_ctr -= 1;
+                } while (var_ctr != 0);
+            }
+        }
+        it_80272A3C(GET_JOBJ(gobj));
+        it_802BAF2C(ip, fp->parts[FtPart_L3rdNa].joint);
+        Item_8026AB54(gobj, parent_gobj, FtPart_L3rdNa);
+    }
+    return gobj;
+}
 
 void fn_802BB428(Item_GObj* gobj)
 {
@@ -89,7 +167,7 @@ void fn_802BB44C(Item_GObj* gobj)
     vec.x = mtx[0][3];
     vec.y = mtx[1][3];
     vec.z = mtx[2][3];
-    switch (it_802BBD64(link, &vec, sa)) {
+    switch (it_802BBD64(link, &vec, mtx)) {
     case 1:
         link->vel.x *= -sa->x58;
         it_802BCF2C(gobj);
@@ -118,7 +196,7 @@ void fn_802BB574(Item_GObj* gobj)
     vec.x = mtx[0][3];
     vec.y = mtx[1][3];
     vec.z = mtx[2][3];
-    switch (it_802BBED0(link, &vec, sa)) {
+    switch (it_802BBED0(link, &vec, mtx)) {
     case 1:
         link->vel.x *= -sa->x58;
         break;
@@ -202,7 +280,51 @@ bool itSeakchain_UnkMotion4_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #it_802BB938
+int it_802BB938(ItemLink* link, int arg1, float arg2)
+{
+    CollData* temp_r31;
+    ItemLink* temp_r5;
+    s32 temp_r3_2;
+    s32 temp_r3_3;
+    u8 temp_r3;
+    u8 temp_r4;
+
+    temp_r31 = &link->coll_data;
+    temp_r5 = link->next;
+    if ((temp_r5 != NULL) && temp_r5->x2C_b0) {
+        temp_r31->last_pos = temp_r5->pos;
+    } else {
+        temp_r31->last_pos = temp_r31->cur_pos;
+    }
+    temp_r31->cur_pos = link->pos;
+    if (mpColl_80048844(temp_r31, arg2) != 0) {
+        temp_r3 = M2C_FIELD(link, u8*, 0x2C);
+        if (!((temp_r3 >> 6) & 1) && (arg1 != 0) && !((temp_r3 >> 5) & 1)) {
+            lbAudioAx_800237A8(0x41F45, 0x7F, 0x40);
+            link->x2C_b2 = true;
+        }
+        link->x2C_b1 = true;
+    } else {
+        link->x2C_b1 = false;
+        temp_r4 = M2C_FIELD(link, u8*, 0x2C);
+        temp_r3_2 = (temp_r4 >> 5) & 1;
+        if (temp_r3_2 != 0) {
+            M2C_FIELD(link, u8*, 0x2C) =
+                (temp_r4 & ~0x20) | (((temp_r3_2 - 1) << 5) & 0x20);
+        }
+    }
+    temp_r3_3 = temp_r31->env_flags;
+    if (temp_r3_3 & 0x18000) {
+        temp_r31->cur_pos.x = link->pos.x;
+    } else if (temp_r3_3 & 0xFFF) {
+        ItemLink* next = link->next;
+        if (next != NULL && next->x2C_b0 && link->prev != NULL) {
+            temp_r31->cur_pos.y += arg2;
+        }
+    }
+    link->pos = temp_r31->cur_pos;
+    return temp_r31->env_flags & 0x18FFF;
+}
 
 s32 it_802BBAEC(ItemLink* link, s32 arg1, f32 arg2)
 {
@@ -241,9 +363,9 @@ int it_802BBC38(ItemLink* link, Vec3* offset, Mtx arg2, f32 scale)
     ItemLink* cur = link->prev;
     ItemLink* prev = link;
     int ret = it_802A3C98(&prev->pos, offset, &origin);
-    prev->pos.x = (origin.x * scale) + offset->x;
-    prev->pos.y = (origin.y * scale) + offset->y;
-    prev->pos.z = (origin.z * scale) + offset->z;
+    prev->pos.x = origin.x * scale + offset->x;
+    prev->pos.y = origin.y * scale + offset->y;
+    prev->pos.z = origin.z * scale + offset->z;
     for (; cur != NULL; prev = cur, cur = cur->prev) {
         float temp_ret;
         cur->vel.y -= arg2[1][2];
@@ -261,9 +383,102 @@ int it_802BBC38(ItemLink* link, Vec3* offset, Mtx arg2, f32 scale)
     return ret;
 }
 
-/// #it_802BBD64
+enum_t it_802BBD64(ItemLink* link, Vec3* arg1, f32 (*arg2)[4])
+{
+    PAD_STACK(4 * 4);
+    {
+        Vec3 vec;
+        ItemLink* cur = link;
+        ItemLink* prev = link->next;
 
-/// #it_802BBED0
+        it_802A4420(link);
+        {
+            int temp_r29 = it_802BB938(cur, 1, arg2[0][1]) & 0xFFF;
+            goto loop;
+        loop_body: {
+            if (prev->x2C_b0) {
+                if (it_802A3C98(&prev->pos, &cur->pos, &vec) > arg2[0][1]) {
+                    prev->pos.x = vec.x * arg2[0][1] + cur->pos.x;
+                    prev->pos.y = vec.y * arg2[0][1] + cur->pos.y;
+                    prev->pos.z = vec.z * arg2[0][1] + cur->pos.z;
+                }
+                it_802A43EC(prev);
+            } else {
+                if (it_802A3C98(arg1, &cur->pos, &vec) > arg2[0][1]) {
+                    prev->pos.x = vec.x * arg2[0][1] + cur->pos.x;
+                    prev->pos.y = vec.y * arg2[0][1] + cur->pos.y;
+                    prev->pos.z = vec.z * arg2[0][1] + cur->pos.z;
+                    prev->x2C_b0 = true;
+                    it_802A43B8(prev);
+                } else {
+                    if (temp_r29 != 0) {
+                        return 1;
+                    }
+                    return 0;
+                }
+            }
+            cur = prev;
+            prev = prev->next;
+        }
+        loop:
+            if (prev != NULL) {
+                goto loop_body;
+            }
+            it_802BBB0C(cur, arg1, arg2, arg2[0][1]);
+            return 2;
+        }
+    }
+}
+
+enum_t it_802BBED0(ItemLink* link, Point3d* arg1, f32 (*mtx)[4])
+{
+    Point3d pos;
+    ItemLink *cur = link, *prev = link->next;
+
+    link->vel.y -= mtx[1][2];
+    it_802A4420(cur);
+
+    {
+        float vel_scale = 1.0f;
+        int temp_r29 = it_802BB938(cur, 1, mtx[0][1]) & 0xFFF;
+    loop_body: {
+        if (prev == NULL) {
+            it_802BBB0C(cur, arg1, mtx, mtx[0][1]);
+            return 2;
+        }
+        if (prev->x2C_b0) {
+            prev->vel.y = -((mtx[1][2] * vel_scale) - prev->vel.y);
+            vel_scale *= mtx[1][2];
+            it_802A4420(prev);
+            if (it_802A3C98(&prev->pos, &cur->pos, &pos) > mtx[0][1]) {
+                prev->pos.x = pos.x * mtx[0][1] + cur->pos.x;
+                prev->pos.y = pos.y * mtx[0][1] + cur->pos.y;
+                prev->pos.z = pos.z * mtx[0][1] + cur->pos.z;
+            }
+            it_802A43EC(prev);
+            goto block_10;
+        }
+        {
+            f32 temp_f2_2 = mtx[0][1];
+            if (it_802A3C98(arg1, &cur->pos, &pos) > temp_f2_2) {
+                prev->pos.x = pos.x * temp_f2_2 + cur->pos.x;
+                prev->pos.y = pos.y * mtx[0][1] + cur->pos.y;
+                prev->pos.z = pos.z * mtx[0][1] + cur->pos.z;
+                prev->x2C_b0 = true;
+                it_802A43B8(prev);
+            block_10:
+                cur = prev;
+                prev = prev->next;
+                goto loop_body;
+            }
+            if (temp_r29 != 0) {
+                return 1;
+            }
+        }
+    }
+    }
+    return 0;
+}
 
 /// #it_802BC080
 
@@ -361,14 +576,14 @@ void it_802BCB88(Item* arg0, Vec3* arg1)
                             int i;
                             for (i = divisor; i > count / stride; i--) {
                                 ftSk_SpecialS_UpdateHitboxes(
-                                    arg0->xDD4_itemVar.seakchain.x8,
+                                    arg0->xDD4_itemVar.seakchain.parent_gobj,
                                     &translate, i - 1);
                             }
                         }
                         if (link->prev == NULL) {
                             ftSk_SpecialS_UpdateHitboxes(
-                                arg0->xDD4_itemVar.seakchain.x8, &translate,
-                                divisor);
+                                arg0->xDD4_itemVar.seakchain.parent_gobj,
+                                &translate, divisor);
                         }
                         ++count;
                         {
@@ -413,7 +628,7 @@ void it_802BCED4(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     PAD_STACK(2 * 4);
-    ftColl_8007AFF8(ip->xDD4_itemVar.seakchain.x8);
+    ftColl_8007AFF8(ip->xDD4_itemVar.seakchain.parent_gobj);
     Item_80268E5C(gobj, 3, ITEM_ANIM_UPDATE);
     ip->on_accessory = fn_802BB694;
 }
@@ -422,7 +637,7 @@ void it_802BCF2C(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     PAD_STACK(2 * 4);
-    ftColl_8007AFF8(ip->xDD4_itemVar.seakchain.x8);
+    ftColl_8007AFF8(ip->xDD4_itemVar.seakchain.parent_gobj);
     Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
     ip->on_accessory = fn_802BB574;
 }
@@ -458,7 +673,7 @@ void it_802BCFC4(Item_GObj* gobj, Vec3* vel)
                 pos.z = mtx[2][3];
                 link->pos = pos;
             }
-            it_8026BB68(ip->xDD4_itemVar.seakchain.x8,
+            it_8026BB68(ip->xDD4_itemVar.seakchain.parent_gobj,
                         &link->coll_data.cur_pos);
             link->coll_data.last_pos = link->coll_data.cur_pos;
             link->x2C_b0 = true;
@@ -473,7 +688,7 @@ void itSeakChain_Logic54_EvtUnk(Item_GObj* gobj, Fighter_GObj* ref_gobj)
 {
     Item* item = GET_ITEM(gobj);
     it_8026B894(gobj, ref_gobj);
-    if (item->xDD4_itemVar.seakchain.x8 == ref_gobj) {
-        item->xDD4_itemVar.seakchain.x8 = NULL;
+    if (item->xDD4_itemVar.seakchain.parent_gobj == ref_gobj) {
+        item->xDD4_itemVar.seakchain.parent_gobj = NULL;
     }
 }
