@@ -8,6 +8,11 @@
 
 #include "baselib/jobj.h"
 
+struct hsd_804D0F60_t {
+    HSD_ObjAllocData alloc_data;
+    UNK_T pad;
+};
+
 /* 391580 */ void DrawRectangle(float x, float y, float w, float h,
                                 GXColor* color);
 /* 391664 */ f32 DrawASCII(int chr, float x, float y, GXColor* color);
@@ -139,23 +144,8 @@
 /* 39EFAC */ HSD_Generator* hsd_8039EFAC(s32, s32, s32, HSD_JObj*);
 /* 39F05C */ HSD_Generator* hsd_8039F05C(s8, s32, s32);
 /* 39F6CC */ HSD_Generator* hsd_8039F6CC(s32, s32, s32, HSD_JObj*);
-/* 4D78B0 */ extern s32 hsd_804D78B0;
-/* 4D78B4 */ extern s32 hsd_804D78B4;
-/* 4D0F60 */ extern HSD_ObjAllocData hsd_804D0F60;
-/* 4D0F90 */ extern HSD_ObjAllocData hsd_804D0F90;
-/* 4D78D0 */ extern u32 hsd_804D78D0;
-/* 4D78D4 */ extern u32 hsd_804D78D4;
-/* 4D78D8 */ extern u16 hsd_804D78D8;
-/* 4D78DE */ extern u16 hsd_804D78DE;
-/* 4D78DA */ extern u16 hsd_804D78DA;
-/* 4D78E0 */ extern u16 hsd_804D78E0;
-/* 4D78E2 */ extern u16 hsd_804D78E2;
-/* 4D78E8 */ extern u32 hsd_804D78E8;
-/* 4D78EC */ extern u32 hsd_804D78EC;
-/* 4D78F0 */ extern u32 hsd_804D78F0;
-/* 4D78F4 */ extern u32 hsd_804D78F4;
-/* 4D78F8 */ extern u32 hsd_804D78F8;
-/* 4D78FC */ extern HSD_Generator* hsd_804D78FC;
-/* 4D7900 */ extern u32 hsd_804D7900;
+
+/* 4D0F60 */ extern struct hsd_804D0F60_t hsd_804D0F60;
+/* 4D0F90 */ extern struct hsd_804D0F60_t hsd_804D0F90;
 
 #endif

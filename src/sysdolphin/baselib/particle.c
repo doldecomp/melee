@@ -31,24 +31,8 @@ typedef struct {
     s32 x8;
 } ParticleLogEntry;
 
-typedef struct {
-    /* 00 */ u8 x0_b0 : 1;
-    /* 00 */ u8 x0_b1 : 1;
-    /* 04 */ u8* out_buf;
-    /* 08 */ u32 buf_size;
-    /* 0C */ int xC;
-    /* 10 */ u8 x10;
-    /* 11 */ u8 x11;
-    /* 12 */ u8 x12;
-    /* 13 */ u8 x13;
-    /* 14 */ int x14;
-    /* 18 */ int x18;
-    /* 1C */ int x1C;
-    /* 20 */ int x20;
-} ParticleConsoleState;
-
 typedef struct _ExcptNode {
-    /* 0x0 */ struct _ExcptNode* next;
+    /* 0x1 */ struct _ExcptNode* next;
     /* 0x4 */ void (*callback)(struct _ExcptNode*);
 } ExcptNode;
 
@@ -100,9 +84,6 @@ struct EventPriority {
     Event event;
     int priority;
 };
-
-HSD_ObjAllocData hsd_804D0F60;
-HSD_ObjAllocData hsd_804D0F90;
 
 void DrawRectangle(f32 x_min, f32 y_min, f32 w, f32 h, GXColor* color)
 {
@@ -1650,8 +1631,6 @@ int hsd_80393A5C(char* filename, int data, int size)
     return size;
 }
 
-extern ParticleConsoleState hsd_804CF7E8;
-
 void fn_80393C14(const u8* buf, size_t size)
 {
     int i;
@@ -1738,7 +1717,7 @@ void hsd_80393E34(s32* col_out, s32* row_out)
 #pragma dont_inline on
 void hsd_80393E68(u32 col, u32 row)
 {
-    ParticleConsoleState* sp = &hsd_804CF7E8;
+    struct ParticleConsoleState* sp = &hsd_804CF7E8;
     u32 byte_val;
     u32 buf_size;
     u8* out_buf;
@@ -1786,7 +1765,7 @@ void hsd_80393EF4(int col_delta, int row_delta)
     u32 pos;
     u32 sum;
     u8* out_buf;
-    ParticleConsoleState* sp = &hsd_804CF7E8;
+    struct ParticleConsoleState* sp = &hsd_804CF7E8;
 
     if (!sp->x0_b0) {
         return;
@@ -1879,7 +1858,7 @@ u8 hsd_80394068(void)
 #pragma dont_inline on
 u8 hsd_80394128(s32 col, s32 row)
 {
-    ParticleConsoleState* sp = &hsd_804CF7E8;
+    struct ParticleConsoleState* sp = &hsd_804CF7E8;
     u8 result;
 
     hsd_80393E68(col, row);
@@ -1899,8 +1878,6 @@ u8 hsd_80394128(s32 col, s32 row)
     return result;
 }
 #pragma pop
-
-ParticleConsoleState hsd_804CF7E8;
 
 // @TODO: Currently 85.87% match - needs control flow fix
 s32 hsd_803941E8(void* xfb_out_ptr, void* xfb_cur_ptr)
@@ -1976,43 +1953,6 @@ s32 hsd_803941E8(void* xfb_out_ptr, void* xfb_cur_ptr)
     }
     return 1;
 }
-
-struct ParticleScreenState {
-    /* 0x00 */ u8 x0_b7 : 1;
-    /* 0x00 */ u8 x0_b6 : 1;
-    /* 0x00 */ u8 x0_b5 : 1;
-    /* 0x00 */ u8 x0_rest : 5;
-    /* 0x01 */ u8 _pad0[0x3];
-    /* 0x04 */ s32 x4;
-    /* 0x08 */ s32 x8;
-    /* 0x0C */ s32 x0C;
-    /* 0x10 */ s32 x10;
-    /* 0x14 */ s32 x14;
-    /* 0x18 */ s32 x18;
-    /* 0x1C */ s32 x1C;
-    /* 0x20 */ s32 x20;
-    /* 0x24 */ s32 x24;
-    /* 0x28 */ u32 x28;
-    /* 0x2C */ s32 x2C;
-    /* 0x30 */ void* x30;
-    /* 0x34 */ s32 x34;
-    /* 0x38 */ s32 x38;
-    /* 0x3C */ s32 x3C;
-    /* 0x40 */ s32 x40;
-    /* 0x44 */ s32 x44;
-    /* 0x48 */ s32 x48;
-    /* 0x4C */ void* x4C;
-    /* 0x50 */ void* x50;
-    /* 0x54 */ u8 _pad4[0x68];
-    /* 0xBC */ u32 xBC;
-    /* 0xC0 */ u32 xC0;
-    /* 0xC4 */ s32 xC4;
-    /* 0xC8 */ s32 xC8;
-    /* 0xCC */ s32 xCC;
-    /* 0xD0 */ void* xD0;
-    /* 0xD4 */ void* xD4;
-};
-struct ParticleScreenState hsd_804CF810;
 
 extern u8 lbl_804088B8[];
 
@@ -4900,7 +4840,7 @@ HSD_Particle* hsd_80398C04(HSD_Particle** head, int linkNo, int bank, u32 kind,
     HSD_Particle** slot;
     s16 cmd_wait;
 
-    pp = HSD_ObjAlloc(&hsd_804D0F60);
+    pp = HSD_ObjAlloc(&hsd_804D0F60.alloc_data);
     if (pp != NULL) {
         memset(pp, 0, 0x98);
     }
@@ -5128,13 +5068,6 @@ s32 hsd_803991D8(HSD_Generator* gen, HSD_JObj* jobj, f32 force, f32 range)
     gen->vel.y += scale * dz;
     return 0;
 }
-
-void* hsd_804D0908[146];
-
-HSD_PSTexGroup** psTexGroupArray[65];
-HSD_PSCmdList** psCmdListArray[65];
-int psNumCmdList[65];
-u32* ptclref[65];
 
 // @TODO: Currently 93.95% match - register allocation differences (stmw
 // r20 vs r21), r27/r28 swap, and PC advance codegen patterns
@@ -7260,7 +7193,7 @@ do_life:
 
             /* Free particle */
             hsd_8039D048(pp);
-            HSD_ObjFree(&hsd_804D0F60, pp);
+            HSD_ObjFree(&hsd_804D0F60.alloc_data, pp);
             numActiveParticles--;
             return next_pp;
         }
@@ -7498,7 +7431,7 @@ void hsd_8039D0A0(HSD_Generator* gen)
                 }
             }
 
-            HSD_ObjFree(&hsd_804D0F60, prt);
+            HSD_ObjFree(&hsd_804D0F60.alloc_data, prt);
             hsd_804D78E2--;
         } else {
             prev = prt;
@@ -7558,7 +7491,7 @@ void hsd_8039D214(HSD_Generator* gen)
 
 void hsd_8039D354(u32 unused)
 {
-    HSD_ObjAllocInit(&hsd_804D0F90, 0x94, 4);
+    HSD_ObjAllocInit(&hsd_804D0F90.alloc_data, 0x94, 4);
     hsd_804D78FC = NULL;
     hsd_804D78E0 = 0;
     hsd_804D78DA = 0;
@@ -7608,7 +7541,7 @@ HSD_Generator* hsd_8039D3AC(HSD_Generator* gen, HSD_Generator* prev)
         HSD_JObjUnref(gen->jobj);
         gen->jobj = NULL;
     }
-    HSD_ObjFree(&hsd_804D0F90, gen);
+    HSD_ObjFree(&hsd_804D0F90.alloc_data, gen);
     hsd_804D78E0--;
     return prev;
 }
@@ -7800,7 +7733,7 @@ HSD_Generator* hsd_8039D9C8(void)
     HSD_Generator* gen;
     PAD_STACK(8);
 
-    gen = HSD_ObjAlloc(&hsd_804D0F90);
+    gen = HSD_ObjAlloc(&hsd_804D0F90.alloc_data);
     if (gen != NULL) {
         memset(gen, 0, 0x94);
     }
