@@ -289,15 +289,15 @@ struct HSD_Generator {
     } aux; // 0x60
 };
 
-extern u32* ptclref[64];
+extern u32* ptclref[65];
 
-extern int psNumTexGroup[64];
-extern HSD_PSTexGroup** psTexGroupArray[64];
+extern int psNumTexGroup[65];
+extern HSD_PSTexGroup** psTexGroupArray[65];
 
-extern HSD_PSFormGroup** psFormGroupArray[64];
+extern HSD_PSFormGroup** psFormGroupArray[65];
 
-extern int psNumCmdList[64];
-extern HSD_PSCmdList** psCmdListArray[64];
+extern int psNumCmdList[65];
+extern HSD_PSCmdList** psCmdListArray[65];
 
 extern u16 numActiveParticles;
 extern u16 numPeakParticles;
