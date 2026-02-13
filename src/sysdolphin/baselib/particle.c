@@ -680,7 +680,6 @@ block_1: {
     if (event != (Event) ret->next) {
         if (((struct EventPriority*) ret)->priority <= priority) {
             prev = cur;
-        end:;
         }
         cur = cur->next;
     loop_5:
