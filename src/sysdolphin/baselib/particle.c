@@ -65,6 +65,11 @@ typedef struct PSNode {
     /* 0x08 */ void (*callback)(struct PSNode*);
 } PSNode;
 
+struct EventPriority {
+    Event event;
+    int priority;
+};
+
 HSD_ObjAllocData hsd_804D0F60;
 HSD_ObjAllocData hsd_804D0F90;
 
@@ -222,39 +227,39 @@ void hsd_80392194(u8* dst, s32 flags, void* unused1, void* unused2, u8* src)
 
 void hsd_80392474(void)
 {
-    hsd_804D7850 = 0;
+    hsd_804D7850 = NULL;
 }
 
-/// @todo Currently 97.38% match - beq vs bne+b for early return
-int fn_80392480(Event event, int priority)
+HSD_SList* fn_80392480(Event event, int priority)
 {
-    HSD_SList* prev;
-    HSD_SList* cur;
-    int* data;
+    HSD_SList* prev = NULL;
+    HSD_SList* cur = hsd_804D7850;
 
-    prev = NULL;
-    cur = (HSD_SList*) hsd_804D7850;
-    while (cur != NULL) {
-        data = cur->data;
-        if (event == (Event) data[0]) {
-            return (int) data;
-        }
-        if (data[1] <= priority) {
+    goto loop_5;
+block_1: {
+    HSD_SList* ret = cur->data;
+    if (event != (Event) ret->next) {
+        if (((struct EventPriority*) ret)->priority <= priority) {
             prev = cur;
         }
         cur = cur->next;
+    loop_5:
+        if (cur != NULL) {
+            goto block_1;
+        }
+        {
+            struct EventPriority* data = HSD_MemAlloc(8);
+            data->event = event;
+            data->priority = priority;
+            if (prev != NULL) {
+                return HSD_SListAllocAndAppend(prev, data);
+            }
+            ret = HSD_SListAllocAndPrepend(hsd_804D7850, data);
+        }
+        hsd_804D7850 = ret;
     }
-    data = HSD_MemAlloc(8);
-    data[0] = (int) event;
-    data[1] = priority;
-    if (prev != NULL) {
-        return (int) HSD_SListAllocAndAppend(prev, data);
-    }
-    {
-        HSD_SList* result =
-            HSD_SListAllocAndPrepend((HSD_SList*) hsd_804D7850, data);
-        hsd_804D7850 = (u32) result;
-    }
+    return ret;
+}
 }
 
 #pragma push

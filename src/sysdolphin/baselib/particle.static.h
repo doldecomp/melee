@@ -16,7 +16,7 @@
 /* 4D7880 */ static f32 hsd_804D7880;
 /* 4D7884 */ static f32 hsd_804D7884;
 /* 4D7888 */ static s32 hsd_804D7888;
-/* 4D7850 */ static int hsd_804D7850;
+/* 4D7850 */ static HSD_SList* hsd_804D7850;
 /* 4D7890 */ static s32 hsd_804D7890;
 /* 4D7894 */ static int hsd_804D7894;
 /* 4D7898 */ static s32 hsd_804D7898;

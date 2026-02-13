@@ -21,7 +21,7 @@
 /* 3922FC */ void hsd_803922FC(void*, s32, s32, s32, s32, s32, s32, s32,
                                void*);
 /* 392474 */ UNK_RET hsd_80392474(UNK_PARAMS);
-/* 392480 */ int fn_80392480(Event, int);
+/* 392480 */ HSD_SList* fn_80392480(Event event, int priority);
 /* 392528 */ void hsd_80392528(Event);
 /* 39254C */ UNK_RET hsd_8039254C(UNK_PARAMS);
 /* 392934 */ UNK_RET fn_80392934(UNK_PARAMS);
