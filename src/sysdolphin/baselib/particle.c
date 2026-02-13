@@ -96,6 +96,11 @@ typedef struct {
     /* 0x08 */ u8 content[0x80];
 } PerfDispItem;
 
+struct EventPriority {
+    Event event;
+    int priority;
+};
+
 HSD_ObjAllocData hsd_804D0F60;
 HSD_ObjAllocData hsd_804D0F90;
 
@@ -601,8 +606,8 @@ void hsd_803921B8(void* bitmap, s32 x, s32 y, s32 dst, s32 w, s32 h,
 }
 
 // @TODO: Currently 85% match - needs register allocation fixes
-void hsd_803922FC(void* bitmap, s32 x, s32 y, s32 parity, s32 dst,
-                  s32 w, s32 h, s32 stride, void* tbl)
+void hsd_803922FC(void* bitmap, s32 x, s32 y, s32 parity, s32 dst, s32 w,
+                  s32 h, s32 stride, void* tbl)
 {
     volatile s32 v_stride;
     volatile s32 v_h;
@@ -680,40 +685,40 @@ void hsd_803922FC(void* bitmap, s32 x, s32 y, s32 parity, s32 dst,
 
 void hsd_80392474(void)
 {
-    hsd_804D7850 = 0;
+    hsd_804D7850 = NULL;
 }
 
-// @TODO: Currently 99.64% match - r3/r4 register swap for loop-local data
-int fn_80392480(Event event, int priority)
+HSD_SList* fn_80392480(Event event, int priority)
 {
     HSD_SList* prev = NULL;
-    HSD_SList* cur;
-    int* data;
+    HSD_SList* cur = hsd_804D7850;
 
-    cur = (HSD_SList*) hsd_804D7850;
-    while (cur != NULL) {
-        data = cur->data;
-        /* Logically: if (event == data[0] || data[1] <= priority) prev = cur */
-        if (event == (Event) data[0]) {
-            goto end;
-        }
-        if (data[1] <= priority) {
+    goto loop_5;
+block_1: {
+    HSD_SList* ret = cur->data;
+    if (event != (Event) ret->next) {
+        if (((struct EventPriority*) ret)->priority <= priority) {
             prev = cur;
         end:;
         }
         cur = cur->next;
+    loop_5:
+        if (cur != NULL) {
+            goto block_1;
+        }
+        {
+            struct EventPriority* data = HSD_MemAlloc(8);
+            data->event = event;
+            data->priority = priority;
+            if (prev != NULL) {
+                return HSD_SListAllocAndAppend(prev, data);
+            }
+            ret = HSD_SListAllocAndPrepend(hsd_804D7850, data);
+        }
+        hsd_804D7850 = ret;
     }
-    data = HSD_MemAlloc(8);
-    data[0] = (int) event;
-    data[1] = priority;
-    if (prev != NULL) {
-        return (int) HSD_SListAllocAndAppend(prev, data);
-    }
-    {
-        HSD_SList* result =
-            HSD_SListAllocAndPrepend((HSD_SList*) hsd_804D7850, data);
-        hsd_804D7850 = (u32) result;
-    }
+    return ret;
+}
 }
 
 #pragma push
@@ -807,9 +812,8 @@ void hsd_8039254C(void)
                     col_pos = 0;
                     if (lbl_804D6080.a != 0) {
                         bg_col1 = lbl_804D6080;
-                        DrawRectangle(-10.0F,
-                                      (10.0F * line) - 5.0F, 620.0F, 10.0F,
-                                      p_bg_col1);
+                        DrawRectangle(-10.0F, (10.0F * line) - 5.0F, 620.0F,
+                                      10.0F, p_bg_col1);
                     }
                 }
                 hsd_80391A04(6, 10.0F, 10.0F);
@@ -823,9 +827,8 @@ void hsd_8039254C(void)
                     line = (f32) ((f64) line - 0.5);
                     if (lbl_804D6080.a != 0) {
                         bg_col2 = lbl_804D6080;
-                        DrawRectangle(-10.0F,
-                                      (10.0F * line) - 5.0F, 620.0F, 5.0F,
-                                      p_bg_col2);
+                        DrawRectangle(-10.0F, (10.0F * line) - 5.0F, 620.0F,
+                                      5.0F, p_bg_col2);
                     }
                 }
                 hsd_80391A04(24, 10.0F, 10.0F);
@@ -845,8 +848,7 @@ void hsd_8039254C(void)
                         line = (f32) ((f64) line - 0.5);
                         if (lbl_804D6080.a != 0) {
                             bg_col3 = lbl_804D6080;
-                            DrawRectangle(-10.0F,
-                                          (10.0F * line) - 5.0F,
+                            DrawRectangle(-10.0F, (10.0F * line) - 5.0F,
                                           620.0F, 5.0F, p_bg_col3);
                         }
                     }
@@ -858,9 +860,8 @@ void hsd_8039254C(void)
                         f32 prev_x;
                         prev_x = bar_x;
                         bar_col = *(GXColor*) &bar_ptr->content.bars[0].color;
-                        bar_x +=
-                            (600.0F / (f32) total_ticks) *
-                            (f32) bar_ptr->content.bars[0].count;
+                        bar_x += (600.0F / (f32) total_ticks) *
+                                 (f32) bar_ptr->content.bars[0].count;
                         hsd_80391F28(p_bar_col, prev_x, bar_y, bar_x, bar_y,
                                      (f32) bar_ptr->content.bars[0].count);
                         bar_ptr = (DispItem*) ((u8*) bar_ptr + 8);
@@ -938,7 +939,8 @@ static s32 lbl_804D609C = 0x00FFFFFF;
 static s32 lbl_804D60A0 = 0x8080FF;
 static s32 lbl_804D60A4 = (s32) 0xC0C000FF;
 
-// @TODO: Currently 89.63% match - needs register allocation and expression fixes
+// @TODO: Currently 89.63% match - needs register allocation and expression
+// fixes
 void* fn_80392A3C(void)
 {
     s32* bars;
@@ -1004,8 +1006,8 @@ void* fn_80392A3C(void)
         sprintf((char*) &entry->content,
                 "\\c00ff00%2.3f \\cffffff%2.3f \\c00ffff%2.3f  "
                 "\\c00ff00%2.3f \\cffffff%2.3f \\c00ffff%2.3f",
-                hsd_804D7858, hsd_804D785C, hsd_804D7860,
-                hsd_804D7864, hsd_804D7868, hsd_804D786C);
+                hsd_804D7858, hsd_804D785C, hsd_804D7860, hsd_804D7864,
+                hsd_804D7868, hsd_804D786C);
         entry->next = &hsd_804CE3F8[count + 1];
         count++;
         if (hsd_804D7888 != 0) {
@@ -1186,8 +1188,8 @@ void hsd_80392E80(void)
                 FIOExit();
                 hsd_804D78A0 = 0;
                 MCCExit();
-                if (MCCInit(hsd_804D7890, 0,
-                            (MCC_CBSysEvent) fn_80392E2C) == 0)
+                if (MCCInit(hsd_804D7890, 0, (MCC_CBSysEvent) fn_80392E2C) ==
+                    0)
                 {
                     OSReport("MCCInit Failed.\n");
                 }
@@ -1196,8 +1198,8 @@ void hsd_80392E80(void)
                 waiting = 1;
                 startTick = OSGetTick();
                 for (;;) {
-                    if (MCCGetConnectionStatus(0xF,
-                            (enum MCC_CONNECT*) &status) != 0 &&
+                    if (MCCGetConnectionStatus(
+                            0xF, (enum MCC_CONNECT*) &status) != 0 &&
                         status == 3)
                     {
                         waiting = 0;
@@ -1251,8 +1253,8 @@ void hsd_80392E80(void)
                 FIOExit();
                 hsd_804D78A0 = 0;
                 MCCExit();
-                if (MCCInit(hsd_804D7890, 0,
-                            (MCC_CBSysEvent) fn_80392E2C) == 0)
+                if (MCCInit(hsd_804D7890, 0, (MCC_CBSysEvent) fn_80392E2C) ==
+                    0)
                 {
                     OSReport("MCCInit Failed.\n");
                 }
@@ -1336,7 +1338,8 @@ void fn_803932D0(s32 type, u32 flags, s32 value)
     }
 }
 
-// @TODO: Currently 99.71% match - r30/r31 register swap (startTick/ticksPerUnit)
+// @TODO: Currently 99.71% match - r30/r31 register swap
+// (startTick/ticksPerUnit)
 s32 hsd_80393328(void)
 {
     u32 ticksPerUnit;
@@ -1454,8 +1457,7 @@ void hsd_80393440(void* request, void* response)
             ((u16*) response)[3] = (u16) 0x8001;
             MCCWrite(0xF, (hsd_804D78AC << 5) + 0x1000, response, 0x20, 0);
             if (MCCNotify(0xF, hsd_804D78AC + 0x80) == 0) {
-                OSReport("Error(0x%x) in MCCNotify.\n",
-                         MCCGetLastError());
+                OSReport("Error(0x%x) in MCCNotify.\n", MCCGetLastError());
             }
             hsd_804D78AC = (hsd_804D78AC + 1) % 128;
             return;
@@ -1473,8 +1475,7 @@ void hsd_80393440(void* request, void* response)
             ((u16*) response)[3] = (u16) (free_blocks + 0x8010);
             MCCWrite(0xF, (hsd_804D78AC << 5) + 0x1000, response, 0x20, 0);
             if (MCCNotify(0xF, hsd_804D78AC + 0x80) == 0) {
-                OSReport("Error(0x%x) in MCCNotify.\n",
-                         MCCGetLastError());
+                OSReport("Error(0x%x) in MCCNotify.\n", MCCGetLastError());
             }
             hsd_804D78AC = (hsd_804D78AC + 1) % 128;
             return;
@@ -1500,8 +1501,7 @@ void hsd_80393440(void* request, void* response)
             ((u16*) response)[3] = (u16) 0x8002;
             MCCWrite(0xF, (hsd_804D78AC << 5) + 0x1000, response, 0x20, 0);
             if (MCCNotify(0xF, hsd_804D78AC + 0x80) == 0) {
-                OSReport("Error(0x%x) in MCCNotify.\n",
-                         MCCGetLastError());
+                OSReport("Error(0x%x) in MCCNotify.\n", MCCGetLastError());
             }
             hsd_804D78AC = (hsd_804D78AC + 1) % 128;
             return;
@@ -1556,8 +1556,7 @@ void hsd_80393844(void)
 
         if ((value & 0xFFFFFF00) == 0x100) {
             if (MCCNotify(0xF, (u8) value | 0x200) == 0) {
-                OSReport("Error(0x%x) in MCCNotify.\n",
-                         MCCGetLastError());
+                OSReport("Error(0x%x) in MCCNotify.\n", MCCGetLastError());
             }
         } else if ((value & 0xFFFFFF00) == 0x200) {
             if ((u32) hsd_804D78B0 == (u8) value) {
@@ -1574,8 +1573,7 @@ void hsd_80393844(void)
                 *(s32*) resp_buf = *(s32*) req_buf;
                 resp_buf[5] = req_buf[5];
                 if (req_buf[5] < 0x20U) {
-                    void (*fn)(void*, void*) =
-                        lbl_8040A93C[req_buf[5]];
+                    void (*fn)(void*, void*) = lbl_8040A93C[req_buf[5]];
                     if (fn != NULL) {
                         fn(req_buf, resp_buf);
                     }
@@ -1602,7 +1600,8 @@ void hsd_80393A54(int level)
     hsd_804D78C0 = level;
 }
 
-// @TODO: Currently 95.53% match - lis hoisting, extra li r0, BSS relocation encoding
+// @TODO: Currently 95.53% match - lis hoisting, extra li r0, BSS relocation
+// encoding
 int hsd_80393A5C(char* filename, int data, int size)
 {
     int ready;
@@ -1889,8 +1888,7 @@ u8 hsd_80394128(s32 col, s32 row)
     } else if ((u32) sp->x1C > sp->buf_size) {
         result = 0;
     } else if ((u32) sp->x14 < (u32) sp->x20) {
-        result = sp->out_buf[(sp->x14 +
-                              (sp->xC + sp->buf_size - sp->x1C)) %
+        result = sp->out_buf[(sp->x14 + (sp->xC + sp->buf_size - sp->x1C)) %
                              sp->buf_size];
         sp->x14++;
     } else {
@@ -2076,14 +2074,12 @@ void hsd_80394434(void* text)
         default:
             if (mode != 0) {
                 hsd_803922FC(font + (*ptr & 0x7F) * 0x38, x, y, interlace,
-                             (&sp->x24)[sp->x34],
-                             sp->x3C, sp->x40,
-                             sp->x44, sp->x50);
+                             (&sp->x24)[sp->x34], sp->x3C, sp->x40, sp->x44,
+                             sp->x50);
             } else {
                 hsd_803921B8(font + (*ptr & 0x7F) * 0x38, x, y,
-                             (&sp->x24)[sp->x34],
-                             sp->x3C, sp->x40,
-                             sp->x44, sp->x50);
+                             (&sp->x24)[sp->x34], sp->x3C, sp->x40, sp->x44,
+                             sp->x50);
             }
             x += 11;
             break;
@@ -2093,9 +2089,9 @@ void hsd_80394434(void* text)
 }
 
 // @TODO: Currently 91.32% match - needs register allocation fix
-void hsd_80394544(s32 col, s32 row, u32 num_cols, u32 num_rows,
-                  s32 x, s32 y, s32 xfb_buf, s32 xfb_w, s32 xfb_h,
-                  s32 xfb_stride, s32 font_data, void* color_data)
+void hsd_80394544(s32 col, s32 row, u32 num_cols, u32 num_rows, s32 x, s32 y,
+                  s32 xfb_buf, s32 xfb_w, s32 xfb_h, s32 xfb_stride,
+                  s32 font_data, void* color_data)
 {
     struct ParticleScreenState* sp = &hsd_804CF810;
     s32 mode;
@@ -2121,13 +2117,12 @@ void hsd_80394544(s32 col, s32 row, u32 num_cols, u32 num_rows,
                 break;
             }
             if (mode != 0) {
-                hsd_803922FC((void*) (font_data + (ch & 0x7F) * 0x38),
-                             cur_x, y, interlace, xfb_buf, xfb_w,
-                             xfb_stride, xfb_h, color_data);
+                hsd_803922FC((void*) (font_data + (ch & 0x7F) * 0x38), cur_x,
+                             y, interlace, xfb_buf, xfb_w, xfb_stride, xfb_h,
+                             color_data);
             } else {
-                hsd_803921B8((void*) (font_data + (ch & 0x7F) * 0x38),
-                             cur_x, y, xfb_buf, xfb_w, xfb_stride,
-                             xfb_h, color_data);
+                hsd_803921B8((void*) (font_data + (ch & 0x7F) * 0x38), cur_x,
+                             y, xfb_buf, xfb_w, xfb_stride, xfb_h, color_data);
             }
             cur_x += 11;
             c++;
@@ -2243,17 +2238,13 @@ void hsd_80394668(void)
                 sp->x4 = cur_x;
                 sp->x8 = (sp->x40 - 0x28) - y_off;
                 if (sp->x0_b7 != 0) {
-                    hsd_803922FC(
-                        (void*) ((u8*) sp->x4C + 0x700),
-                        sp->x4, sp->x8, sp->x0_b6,
-                        (&sp->x24)[sp->x34],
-                        sp->x3C, sp->x40, sp->x44, sp->x50);
+                    hsd_803922FC((void*) ((u8*) sp->x4C + 0x700), sp->x4,
+                                 sp->x8, sp->x0_b6, (&sp->x24)[sp->x34],
+                                 sp->x3C, sp->x40, sp->x44, sp->x50);
                 } else {
-                    hsd_803921B8(
-                        (void*) ((u8*) sp->x4C + 0x700),
-                        sp->x4, sp->x8,
-                        (&sp->x24)[sp->x34],
-                        sp->x3C, sp->x40, sp->x44, sp->x50);
+                    hsd_803921B8((void*) ((u8*) sp->x4C + 0x700), sp->x4,
+                                 sp->x8, (&sp->x24)[sp->x34], sp->x3C, sp->x40,
+                                 sp->x44, sp->x50);
                 }
                 cur_x += 11;
                 col++;
@@ -2336,9 +2327,9 @@ void Exception_ReportStackTrace(OSContext* ctx, int max_depth)
     }
 }
 
-// @TODO: Currently 99.81% match - instructions match, string relocations differ
-void Exception_ReportCodeline(u16 error, int dsisr, int dar,
-                             OSContext* ctx)
+// @TODO: Currently 99.81% match - instructions match, string relocations
+// differ
+void Exception_ReportCodeline(u16 error, int dsisr, int dar, OSContext* ctx)
 {
     char* exception_type;
     char* around_or_at;
@@ -2358,10 +2349,9 @@ void Exception_ReportCodeline(u16 error, int dsisr, int dar,
         return;
     case 2:
         OSReport("(DSI)\n");
-        OSReport(
-            "Instruction at %08X (read from SRR0) attempted\n"
-            "to access invalid address %08X (read from DAR)\n",
-            ctx->srr0, dar);
+        OSReport("Instruction at %08X (read from SRR0) attempted\n"
+                 "to access invalid address %08X (read from DAR)\n",
+                 ctx->srr0, dar);
         if (dsisr & 0x02000000) {
             OSReport("Store operation.\n");
         } else {
@@ -2371,8 +2361,7 @@ void Exception_ReportCodeline(u16 error, int dsisr, int dar,
             OSReport("No appropriate page entry or DBAT exist.\n");
         }
         if (dsisr & 0x08000000) {
-            OSReport(
-                "Memory access is not permitted by the page or DBAT.\n");
+            OSReport("Memory access is not permitted by the page or DBAT.\n");
         }
         if (dsisr & 0x400000) {
             OSReport("DABR match occurs.\n");
@@ -2380,10 +2369,9 @@ void Exception_ReportCodeline(u16 error, int dsisr, int dar,
         return;
     case 3:
         OSReport("(ISI)\n");
-        OSReport(
-            "Attempted to fetch instruction from invalid address\n"
-            "%08X (read from SRR0)\n",
-            ctx->srr0);
+        OSReport("Attempted to fetch instruction from invalid address\n"
+                 "%08X (read from SRR0)\n",
+                 ctx->srr0);
         if (ctx->srr1 & 0x40000000) {
             OSReport("No appropriate page entry or IBAT exist.\n");
         }
@@ -2391,8 +2379,7 @@ void Exception_ReportCodeline(u16 error, int dsisr, int dar,
             OSReport("Illegal address.\n");
         }
         if (ctx->srr1 & 0x08000000) {
-            OSReport(
-                "Memory access is not permitted by the page or IBAT.\n");
+            OSReport("Memory access is not permitted by the page or IBAT.\n");
         }
         break;
     case 4:
@@ -2400,18 +2387,16 @@ void Exception_ReportCodeline(u16 error, int dsisr, int dar,
         return;
     case 5:
         OSReport("(ALIGNMNET)\n");
-        OSReport(
-            "Instruction at %08X (read from SRR0) attempted\n"
-            "to access unaligned address %08X (read from DAR)\n",
-            ctx->srr0, dar);
+        OSReport("Instruction at %08X (read from SRR0) attempted\n"
+                 "to access unaligned address %08X (read from DAR)\n",
+                 ctx->srr0, dar);
         return;
     case 6:
         OSReport("(PROGRAM)\n");
         srr1 = ctx->srr1;
         around_or_at = (srr1 & 0x10000) ? "around" : "at";
         if (srr1 & 0x100000) {
-            exception_type =
-                "IEEE floating point enabled program exception";
+            exception_type = "IEEE floating point enabled program exception";
         } else if (srr1 & 0x80000) {
             exception_type = "Illegal instruction";
         } else if (srr1 & 0x40000) {
@@ -2421,8 +2406,8 @@ void Exception_ReportCodeline(u16 error, int dsisr, int dar,
         } else {
             exception_type = "Unknown type of program exception";
         }
-        OSReport("%s %s %08X (read from SRR0)\n", exception_type,
-                 around_or_at, ctx->srr0);
+        OSReport("%s %s %08X (read from SRR0)\n", exception_type, around_or_at,
+                 ctx->srr0);
         return;
     case 7:
         OSReport("(FLOATING POINT)\n");
@@ -2516,7 +2501,8 @@ void hsd_80394E8C(void* node_ptr)
 extern u8 lbl_8040AB00[];
 extern u8 lbl_8040AB20[];
 
-// @TODO: Currently 92.89% match - ASM bytes identical, capped by relocation diffs
+// @TODO: Currently 92.89% match - ASM bytes identical, capped by relocation
+// diffs
 void hsd_80394F48(void* data)
 {
     void* base_color = lbl_8040AB00;
@@ -2559,10 +2545,8 @@ void hsd_80394F48(void* data)
         hsd_803922FC((void*) ((u8*) sp->x4C + 0x968), *px4, *px8, b6,
                      (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
     } else {
-        hsd_803921B8((void*) ((u8*) sp->x4C + 0x968),
-                     *px4, *px8,
-                     (&sp->x24)[sp->x34],
-                     sp->x3C, *px40, sp->x44, *px50);
+        hsd_803921B8((void*) ((u8*) sp->x4C + 0x968), *px4, *px8,
+                     (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
     }
 
     i = 0;
@@ -2573,10 +2557,8 @@ void hsd_80394F48(void* data)
             hsd_803922FC((void*) ((u8*) sp->x4C + 0x9D8), *px4, *px8, b6,
                          (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
         } else {
-            hsd_803921B8((void*) ((u8*) sp->x4C + 0x9D8),
-                         *px4, *px8,
-                         (&sp->x24)[sp->x34],
-                         sp->x3C, *px40, sp->x44, *px50);
+            hsd_803921B8((void*) ((u8*) sp->x4C + 0x9D8), *px4, *px8,
+                         (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
         }
         i++;
         *px4 += 11;
@@ -2587,10 +2569,8 @@ void hsd_80394F48(void* data)
         hsd_803922FC((void*) ((u8*) sp->x4C + 0x968), *px4, *px8, b6,
                      (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
     } else {
-        hsd_803921B8((void*) ((u8*) sp->x4C + 0x968),
-                     *px4, *px8,
-                     (&sp->x24)[sp->x34],
-                     sp->x3C, *px40, sp->x44, *px50);
+        hsd_803921B8((void*) ((u8*) sp->x4C + 0x968), *px4, *px8,
+                     (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
     }
 
     *px4 += 11;
@@ -2609,10 +2589,8 @@ void hsd_80394F48(void* data)
             hsd_803922FC((void*) ((u8*) sp->x4C + 0x1B20), *px4, *px8, b6,
                          (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
         } else {
-            hsd_803921B8((void*) ((u8*) sp->x4C + 0x1B20),
-                         *px4, *px8,
-                         (&sp->x24)[sp->x34],
-                         sp->x3C, *px40, sp->x44, *px50);
+            hsd_803921B8((void*) ((u8*) sp->x4C + 0x1B20), *px4, *px8,
+                         (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
         }
 
         if (i == dp->index) {
@@ -2632,10 +2610,8 @@ void hsd_80394F48(void* data)
             hsd_803922FC((void*) ((u8*) sp->x4C + 0x1B20), *px4, *px8, b6,
                          (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
         } else {
-            hsd_803921B8((void*) ((u8*) sp->x4C + 0x1B20),
-                         *px4, *px8,
-                         (&sp->x24)[sp->x34],
-                         sp->x3C, *px40, sp->x44, *px50);
+            hsd_803921B8((void*) ((u8*) sp->x4C + 0x1B20), *px4, *px8,
+                         (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
         }
         i++;
     }
@@ -2649,10 +2625,8 @@ void hsd_80394F48(void* data)
         hsd_803922FC((void*) ((u8*) sp->x4C + 0x968), *px4, *px8, b6,
                      (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
     } else {
-        hsd_803921B8((void*) ((u8*) sp->x4C + 0x968),
-                     *px4, *px8,
-                     (&sp->x24)[sp->x34],
-                     sp->x3C, *px40, sp->x44, *px50);
+        hsd_803921B8((void*) ((u8*) sp->x4C + 0x968), *px4, *px8,
+                     (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
     }
 
     {
@@ -2660,15 +2634,13 @@ void hsd_80394F48(void* data)
         *px4 += 11;
         while (j < num_entries) {
             if (sp->x0_b7 != 0) {
-                hsd_803922FC((void*) ((u8*) sp->x4C + 0x9D8),
-                             *px4, *px8, sp->x0_b6,
-                             (&sp->x24)[sp->x34],
-                             sp->x3C, *px40, sp->x44, *px50);
+                hsd_803922FC((void*) ((u8*) sp->x4C + 0x9D8), *px4, *px8,
+                             sp->x0_b6, (&sp->x24)[sp->x34], sp->x3C, *px40,
+                             sp->x44, *px50);
             } else {
-                hsd_803921B8((void*) ((u8*) sp->x4C + 0x9D8),
-                             *px4, *px8,
-                             (&sp->x24)[sp->x34],
-                             sp->x3C, *px40, sp->x44, *px50);
+                hsd_803921B8((void*) ((u8*) sp->x4C + 0x9D8), *px4, *px8,
+                             (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44,
+                             *px50);
             }
             j++;
             *px4 += 11;
@@ -2680,10 +2652,8 @@ void hsd_80394F48(void* data)
         hsd_803922FC((void*) ((u8*) sp->x4C + 0x968), *px4, *px8, b6,
                      (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
     } else {
-        hsd_803921B8((void*) ((u8*) sp->x4C + 0x968),
-                     *px4, *px8,
-                     (&sp->x24)[sp->x34],
-                     sp->x3C, *px40, sp->x44, *px50);
+        hsd_803921B8((void*) ((u8*) sp->x4C + 0x968), *px4, *px8,
+                     (&sp->x24)[sp->x34], sp->x3C, *px40, sp->x44, *px50);
     }
 
     *px4 += 11;
@@ -2794,8 +2764,7 @@ s32 hsd_803956D8(void* disp_ptr)
     return 0;
 }
 
-static char* lbl_804D62C8 =
-    "<<PUSH START BUTTON TO SEE INSTRUCTION>>";
+static char* lbl_804D62C8 = "<<PUSH START BUTTON TO SEE INSTRUCTION>>";
 
 // @TODO: Currently 73.00% match - ASM bytes identical, capped by .bss.0
 // relocation symbol mismatch
@@ -2836,12 +2805,12 @@ void hsd_803957C0(u8 input)
 
     if (sp->x0_b7) {
         hsd_803922FC((void*) ((u8*) sp->x4C + (ch & 0x7F) * 0x38), sp->x4,
-                     sp->x8, sp->x0_b6, (&sp->x24)[sp->x34], sp->x3C,
-                     sp->x40, sp->x44, sp->x50);
+                     sp->x8, sp->x0_b6, (&sp->x24)[sp->x34], sp->x3C, sp->x40,
+                     sp->x44, sp->x50);
     } else {
         hsd_803921B8((void*) ((u8*) sp->x4C + (ch & 0x7F) * 0x38), sp->x4,
-                     sp->x8, (&sp->x24)[sp->x34], sp->x3C, sp->x40,
-                     sp->x44, sp->x50);
+                     sp->x8, (&sp->x24)[sp->x34], sp->x3C, sp->x40, sp->x44,
+                     sp->x50);
     }
 
     if ((u32) sp->xD0 == saved_ch) {
@@ -2949,8 +2918,7 @@ s32 hsd_80395A78(void)
             } else {
                 goto next_bit;
             }
-            while (!(u8) hsd_80394128(*pxC + *px18,
-                                       *px10 + *px14)) {
+            while (!(u8) hsd_80394128(*pxC + *px18, *px10 + *px14)) {
                 if (*pxC > 0) {
                     *pxC = *pxC - 1;
                 } else if (*px18 > 0) {
@@ -2968,8 +2936,7 @@ s32 hsd_80395A78(void)
             } else {
                 new_scroll += 1;
             }
-            if ((u8) hsd_80394128(new_col_u + new_scroll,
-                                   *px10 + *px14)) {
+            if ((u8) hsd_80394128(new_col_u + new_scroll, *px10 + *px14)) {
                 *pxC = new_col_u;
                 *px18 = new_scroll;
                 return 1;
@@ -3160,11 +3127,9 @@ void hsd_80396130(void)
     PAD_STACK(16);
 }
 
-static char* lbl_804D62CC =
-    "+- MEMORY DUMP ------------------------------+";
+static char* lbl_804D62CC = "+- MEMORY DUMP ------------------------------+";
 static char* lbl_804D62D0 = "|%08X=%08X:%08X:%08X:%08X|";
-static char* lbl_804D62D4 =
-    "+--------------------------------------------+";
+static char* lbl_804D62D4 = "+--------------------------------------------+";
 
 // @TODO: Currently 83.94% match - needs register allocation fix
 void hsd_80396188(void)
@@ -3196,7 +3161,8 @@ void hsd_80396188(void)
         {
             u32 memsize = OSGetPhysicalMemSize();
             addr = (u32*) ((((u32) addr & 0x0FFFFFFF) + memsize + 0x10) %
-                           memsize + 0x80000000);
+                               memsize +
+                           0x80000000);
         }
         i++;
     } while (i < 4);
@@ -3396,8 +3362,7 @@ void hsd_80396884(void)
     u8 ch;
 
     x_base = (sp->x20 - 30) / 2;
-    sprintf(buf, "| INPUT ADDRESS : 8%07lX |",
-            lbl_8040BC3C.x10 & 0x0FFFFFFF);
+    sprintf(buf, "| INPUT ADDRESS : 8%07lX |", lbl_8040BC3C.x10 & 0x0FFFFFFF);
     saved = sp->x50;
     sp->x50 = lbl_8040AB00;
     sp->x4 = x_base * 11 + 20;
@@ -3427,7 +3392,8 @@ void hsd_80396884(void)
     sp->x50 = saved;
 }
 
-// @TODO: Currently 95.60% match - ps_remove_node inline scheduling, branch offsets
+// @TODO: Currently 95.60% match - ps_remove_node inline scheduling, branch
+// offsets
 s32 hsd_80396A20(void* data)
 {
     struct ParticleScreenState* sp = &hsd_804CF810;
@@ -3439,12 +3405,12 @@ s32 hsd_80396A20(void* data)
     while (bit <= sp->xBC) {
         switch (sp->xBC & bit) {
         case 0x8:
-            lbl_8040BC3C.x10 = (val & ~mask) |
-                ((((val >> shift) - 1) & 0xF) << shift);
+            lbl_8040BC3C.x10 =
+                (val & ~mask) | ((((val >> shift) - 1) & 0xF) << shift);
             return 1;
         case 0x4:
-            lbl_8040BC3C.x10 = (val & ~mask) |
-                ((((val >> shift) + 1) & 0xF) << shift);
+            lbl_8040BC3C.x10 =
+                (val & ~mask) | ((((val >> shift) + 1) & 0xF) << shift);
             return 1;
         case 0x1:
             if (lbl_8040BC3C.x14 > 0) {
@@ -3490,7 +3456,8 @@ s32 hsd_80396A20(void* data)
     return 0;
 }
 
-// @TODO: Currently 96.49% match - ps_remove_node inline scheduling (addi/lwz order)
+// @TODO: Currently 96.49% match - ps_remove_node inline scheduling (addi/lwz
+// order)
 s32 hsd_80396C78(void* data)
 {
     struct ParticleScreenState* sp = &hsd_804CF810;
@@ -3626,9 +3593,8 @@ void hsd_80396E40(s32 keycode)
         } else {
             var_s = 's';
         }
-        sprintf(buf,
-                "| %ld BL xxxxxxxxxxx  %c%c %c%c%c%c %s |",
-                i, (int) var_s, (int) var_u, (int) var_w, (int) var_i,
+        sprintf(buf, "| %ld BL xxxxxxxxxxx  %c%c %c%c%c%c %s |", i,
+                (int) var_s, (int) var_u, (int) var_w, (int) var_i,
                 (int) var_m, (int) var_g, perm);
         ptr = buf;
         for (j = 0; j < 11; j++) {
@@ -3644,8 +3610,8 @@ void hsd_80396E40(s32 keycode)
         *px8 = (*px40 - 0x28) - (row + 1) * 14;
         row--;
         hsd_80394434(buf);
-        sprintf(buf, "|   BEPI %08lX BRPN %08lX |",
-                bat_l & 0xFFFC0000, bat_u & 0xFFFC0000);
+        sprintf(buf, "|   BEPI %08lX BRPN %08lX |", bat_l & 0xFFFC0000,
+                bat_u & 0xFFFC0000);
         *px4 = 0x106;
         *px8 = (*px40 - 0x28) - (row + 1) * 14;
         row--;
@@ -3785,7 +3751,8 @@ void hsd_80397110(void)
     *px50 = saved;
 }
 
-// @TODO: Currently 98.13% match - ps_remove_node inline scheduling (addi/lwz order)
+// @TODO: Currently 98.13% match - ps_remove_node inline scheduling (addi/lwz
+// order)
 s32 fn_80397374(void* data)
 {
     struct ParticleScreenState* sp = &hsd_804CF810;
@@ -3885,7 +3852,8 @@ void hsd_803975D4(void)
         sp->xC4 = 1;
     } else if (sp->xC4 != 0) {
         OSResetSystem(1, 0, 0);
-        for (;;) {}
+        for (;;) {
+        }
     }
     cur_pads = (PADStatus*) ((u8*) sp + 0x54);
     memcpy((u8*) cur_pads + 0x30, cur_pads, 0x30);
@@ -3909,15 +3877,12 @@ void hsd_803975D4(void)
     port = 0;
     if (((s8) ((PADStatus*) ((u8*) sp + 0x84))[0].err != 0 ||
          (s8) cur_pads[0].err != 0) &&
-        (port = 1,
-         ((s8) ((PADStatus*) ((u8*) sp + 0x84))[1].err != 0 ||
-          (s8) cur_pads[1].err != 0)) &&
-        (port = 2,
-         ((s8) ((PADStatus*) ((u8*) sp + 0x84))[2].err != 0 ||
-          (s8) cur_pads[2].err != 0)) &&
-        (port = 3,
-         ((s8) ((PADStatus*) ((u8*) sp + 0x84))[3].err != 0 ||
-          (s8) cur_pads[3].err != 0)))
+        (port = 1, ((s8) ((PADStatus*) ((u8*) sp + 0x84))[1].err != 0 ||
+                    (s8) cur_pads[1].err != 0)) &&
+        (port = 2, ((s8) ((PADStatus*) ((u8*) sp + 0x84))[2].err != 0 ||
+                    (s8) cur_pads[2].err != 0)) &&
+        (port = 3, ((s8) ((PADStatus*) ((u8*) sp + 0x84))[3].err != 0 ||
+                    (s8) cur_pads[3].err != 0)))
     {
         port = 4;
     }
@@ -3929,10 +3894,10 @@ void hsd_803975D4(void)
     *(s32*) ((u8*) sp + 0xB4) = port;
     buttons = cur_pads[*(s32*) ((u8*) sp + 0xB4)].button;
     sp->xC0 = buttons;
-    new_press = buttons &
-                (((PADStatus*) ((u8*) sp + 0x84))[*(s32*) ((u8*) sp + 0xB4)]
-                     .button ^
-                 buttons);
+    new_press =
+        buttons &
+        (((PADStatus*) ((u8*) sp + 0x84))[*(s32*) ((u8*) sp + 0xB4)].button ^
+         buttons);
     if (new_press != 0) {
         *(s32*) ((u8*) sp + 0xB8) = 0;
     } else if (cur_pads[*(s32*) ((u8*) sp + 0xB4)].button != 0) {
@@ -3958,102 +3923,122 @@ void* fn_80397814(void* arg)
 
     /* Wait for first retrace */
     retrace = VIGetRetraceCount();
-    do { } while (VIGetRetraceCount() == retrace);
+    do {
+    } while (VIGetRetraceCount() == retrace);
 
     retrace = VIGetRetraceCount();
     do {
         hsd_803975D4();
-        do { } while (VIGetRetraceCount() == retrace);
+        do {
+        } while (VIGetRetraceCount() == retrace);
         retrace = VIGetRetraceCount();
     } while (*keybuf != 0);
 
     retrace = VIGetRetraceCount();
-    do { } while (VIGetRetraceCount() == retrace);
+    do {
+    } while (VIGetRetraceCount() == retrace);
 
     retrace = VIGetRetraceCount();
     do {
         hsd_803975D4();
-        do { } while (VIGetRetraceCount() == retrace);
+        do {
+        } while (VIGetRetraceCount() == retrace);
         retrace = VIGetRetraceCount();
     } while (*keybuf != 0x70);
 
     retrace = VIGetRetraceCount();
-    do { } while (VIGetRetraceCount() == retrace);
+    do {
+    } while (VIGetRetraceCount() == retrace);
 
     retrace = VIGetRetraceCount();
     do {
         hsd_803975D4();
-        do { } while (VIGetRetraceCount() == retrace);
+        do {
+        } while (VIGetRetraceCount() == retrace);
         retrace = VIGetRetraceCount();
     } while (*keybuf != 0);
 
     retrace = VIGetRetraceCount();
-    do { } while (VIGetRetraceCount() == retrace);
+    do {
+    } while (VIGetRetraceCount() == retrace);
 
     retrace = VIGetRetraceCount();
     do {
         hsd_803975D4();
-        do { } while (VIGetRetraceCount() == retrace);
+        do {
+        } while (VIGetRetraceCount() == retrace);
         retrace = VIGetRetraceCount();
     } while (*keybuf != 0x808);
 
     retrace = VIGetRetraceCount();
-    do { } while (VIGetRetraceCount() == retrace);
+    do {
+    } while (VIGetRetraceCount() == retrace);
 
     retrace = VIGetRetraceCount();
     do {
         hsd_803975D4();
-        do { } while (VIGetRetraceCount() == retrace);
+        do {
+        } while (VIGetRetraceCount() == retrace);
         retrace = VIGetRetraceCount();
     } while (*keybuf != 0);
 
     retrace = VIGetRetraceCount();
-    do { } while (VIGetRetraceCount() == retrace);
+    do {
+    } while (VIGetRetraceCount() == retrace);
 
     retrace = VIGetRetraceCount();
     do {
         hsd_803975D4();
-        do { } while (VIGetRetraceCount() == retrace);
+        do {
+        } while (VIGetRetraceCount() == retrace);
         retrace = VIGetRetraceCount();
     } while (*keybuf != 0x104);
 
     retrace = VIGetRetraceCount();
-    do { } while (VIGetRetraceCount() == retrace);
+    do {
+    } while (VIGetRetraceCount() == retrace);
 
     retrace = VIGetRetraceCount();
     do {
         hsd_803975D4();
-        do { } while (VIGetRetraceCount() == retrace);
+        do {
+        } while (VIGetRetraceCount() == retrace);
         retrace = VIGetRetraceCount();
     } while (*keybuf != 0);
 
     retrace = VIGetRetraceCount();
-    do { } while (VIGetRetraceCount() == retrace);
+    do {
+    } while (VIGetRetraceCount() == retrace);
 
     retrace = VIGetRetraceCount();
     do {
         hsd_803975D4();
-        do { } while (VIGetRetraceCount() == retrace);
+        do {
+        } while (VIGetRetraceCount() == retrace);
         retrace = VIGetRetraceCount();
     } while (*keybuf != 0x201);
 
     retrace = VIGetRetraceCount();
-    do { } while (VIGetRetraceCount() == retrace);
+    do {
+    } while (VIGetRetraceCount() == retrace);
 
     retrace = VIGetRetraceCount();
     do {
         hsd_803975D4();
-        do { } while (VIGetRetraceCount() == retrace);
+        do {
+        } while (VIGetRetraceCount() == retrace);
         retrace = VIGetRetraceCount();
     } while (*keybuf != 0);
 
     retrace = VIGetRetraceCount();
-    do { } while (VIGetRetraceCount() == retrace);
+    do {
+    } while (VIGetRetraceCount() == retrace);
 
     retrace = VIGetRetraceCount();
     do {
         hsd_803975D4();
-        do { } while (VIGetRetraceCount() == retrace);
+        do {
+        } while (VIGetRetraceCount() == retrace);
         retrace = VIGetRetraceCount();
     } while (*keybuf != 0x402);
 
@@ -4110,8 +4095,8 @@ void* fn_80397814(void* arg)
         void* node;
 
         hsd_80394544(*x18_ptr, *x14_ptr, *x20_ptr, *nrows_ptr, 20,
-                     *fb_ptr - 40, fb_array[*col_ptr], *x3C_ptr,
-                     *fb_ptr, *fb2_ptr, (s32) lbl_804088B8, NULL);
+                     *fb_ptr - 40, fb_array[*col_ptr], *x3C_ptr, *fb_ptr,
+                     *fb2_ptr, (s32) lbl_804088B8, NULL);
 
         *c8_ptr = 0;
         *cc_ptr = *nrows_ptr - 1;
@@ -4139,7 +4124,8 @@ void* fn_80397814(void* arg)
         VIFlush();
 
         retrace2 = VIGetRetraceCount();
-        do { } while (VIGetRetraceCount() == retrace2);
+        do {
+        } while (VIGetRetraceCount() == retrace2);
         retrace2 = VIGetRetraceCount();
         lbl_ptr = lbl_804088B8;
 
@@ -4160,7 +4146,7 @@ void* fn_80397814(void* arg)
             result = 0;
             while (disp_node != NULL && !(*(u8*) sp & (1 << 5))) {
                 void* (*render_cb)(void*) =
-                    *(void* (**)(void*))((u8*) disp_node + 0xC);
+                    *(void* (**) (void*) )((u8*) disp_node + 0xC);
                 if (render_cb != NULL) {
                     result = (s32) render_cb(disp_node);
                     if (result != 0) {
@@ -4183,11 +4169,9 @@ void* fn_80397814(void* arg)
 
                 hsd_80394668();
 
-                hsd_80394544(*x18_ptr, *x14_ptr, *x20_ptr, *nrows_ptr,
-                             20, *fb_ptr - 40,
-                             fb_array[*col_ptr], *x3C_ptr,
-                             *fb_ptr, *fb2_ptr,
-                             (s32) lbl_ptr, NULL);
+                hsd_80394544(*x18_ptr, *x14_ptr, *x20_ptr, *nrows_ptr, 20,
+                             *fb_ptr - 40, fb_array[*col_ptr], *x3C_ptr,
+                             *fb_ptr, *fb2_ptr, (s32) lbl_ptr, NULL);
 
                 *c8_ptr = 0;
                 *cc_ptr = *nrows_ptr - 1;
@@ -4216,7 +4200,8 @@ void* fn_80397814(void* arg)
                 VIFlush();
             }
 
-            do { } while (VIGetRetraceCount() == retrace2);
+            do {
+            } while (VIGetRetraceCount() == retrace2);
             retrace2 = VIGetRetraceCount();
         }
     }
@@ -4679,10 +4664,8 @@ done_cmd:
                 {
                     s32 ti;
                     s32 ofs;
-                    for (ti = 0, ofs = 0; (u32) ti < tg->num; ti++, ofs += 4)
-                    {
-                        s32* entry_ptr =
-                            (s32*) ((u8*) tg + 24 + ofs);
+                    for (ti = 0, ofs = 0; (u32) ti < tg->num; ti++, ofs += 4) {
+                        s32* entry_ptr = (s32*) ((u8*) tg + 24 + ofs);
                         if (*entry_ptr != 0) {
                             *entry_ptr += (s32) texBank;
                         }
@@ -4712,13 +4695,9 @@ done_cmd:
                     s32 ofs;
                     ti = (s32) tg->num;
                     ofs = ti * 4;
-                    for (; (u32) ti < tg->num + tg->palnum;
-                         ti++, ofs += 4)
-                    {
-                        HSD_PSTexGroup* tg2 =
-                            (HSD_PSTexGroup*) cur[0];
-                        s32* entry_ptr =
-                            (s32*) ((u8*) tg2 + 24 + ofs);
+                    for (; (u32) ti < tg->num + tg->palnum; ti++, ofs += 4) {
+                        HSD_PSTexGroup* tg2 = (HSD_PSTexGroup*) cur[0];
+                        s32* entry_ptr = (s32*) ((u8*) tg2 + 24 + ofs);
                         if (*entry_ptr != 0) {
                             *entry_ptr += (s32) texBank;
                         }
@@ -4729,13 +4708,9 @@ done_cmd:
                     s32 ofs;
                     ti = (s32) tg->num;
                     ofs = ti * 4;
-                    for (; (u32) ti < tg->num * 2;
-                         ti++, ofs += 4)
-                    {
-                        HSD_PSTexGroup* tg2 =
-                            (HSD_PSTexGroup*) cur[0];
-                        s32* entry_ptr =
-                            (s32*) ((u8*) tg2 + 24 + ofs);
+                    for (; (u32) ti < tg->num * 2; ti++, ofs += 4) {
+                        HSD_PSTexGroup* tg2 = (HSD_PSTexGroup*) cur[0];
+                        s32* entry_ptr = (s32*) ((u8*) tg2 + 24 + ofs);
                         if (*entry_ptr != 0) {
                             *entry_ptr += (s32) texBank;
                         }
@@ -4766,8 +4741,7 @@ done_cmd:
             }
             groups[0] += (s32) formBank;
             {
-                HSD_PSFormGroup* fg =
-                    (HSD_PSFormGroup*) groups[0];
+                HSD_PSFormGroup* fg = (HSD_PSFormGroup*) groups[0];
                 s32* p2 = (s32*) fg;
                 s32 fi;
                 for (fi = 0; (u32) fi < fg->num; fi++) {
@@ -4916,11 +4890,11 @@ void hsd_80398A08(u32 unused)
 }
 
 // @TODO: Currently 99.63% match - asm bytes identical, relocation differences
-HSD_Particle* hsd_80398C04(HSD_Particle** head, int linkNo, int bank,
-                           u32 kind, u16 texGroup, u8* list, int life,
-                           int palflag, f32 x, f32 y, f32 z, f32 vx,
-                           f32 vy, f32 vz, f32 size, f32 grav, f32 fric,
-                           HSD_Generator* gp, int flgInterpret)
+HSD_Particle* hsd_80398C04(HSD_Particle** head, int linkNo, int bank, u32 kind,
+                           u16 texGroup, u8* list, int life, int palflag,
+                           f32 x, f32 y, f32 z, f32 vx, f32 vy, f32 vz,
+                           f32 size, f32 grav, f32 fric, HSD_Generator* gp,
+                           int flgInterpret)
 {
     HSD_Particle* pp;
     HSD_Particle** slot;
@@ -5044,15 +5018,14 @@ HSD_Particle* hsd_80398C04(HSD_Particle** head, int linkNo, int bank,
 
 #pragma push
 #pragma dont_inline on
-void hsd_80398F0C(s32 linkNo, s32 bank, s32 kind, u16 texGroup,
-                  s32 cmdList, s32 life, s32 zero, s32 gen,
-                  f32 pos_x, f32 pos_y, f32 pos_z,
-                  f32 vel_x, f32 vel_y, f32 vel_z,
-                  f32 fric, f32 rate, f32 angle3)
+void hsd_80398F0C(s32 linkNo, s32 bank, s32 kind, u16 texGroup, s32 cmdList,
+                  s32 life, s32 zero, s32 gen, f32 pos_x, f32 pos_y, f32 pos_z,
+                  f32 vel_x, f32 vel_y, f32 vel_z, f32 fric, f32 rate,
+                  f32 angle3)
 {
-    hsd_80398C04(0, linkNo, bank, kind, texGroup, (u8*) cmdList, life,
-                 zero, pos_x, pos_y, pos_z, vel_x, vel_y, vel_z, fric,
-                 rate, angle3, (HSD_Generator*) gen, 1);
+    hsd_80398C04(0, linkNo, bank, kind, texGroup, (u8*) cmdList, life, zero,
+                 pos_x, pos_y, pos_z, vel_x, vel_y, vel_z, fric, rate, angle3,
+                 (HSD_Generator*) gen, 1);
 }
 #pragma pop
 
@@ -5179,7 +5152,7 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
     HSD_PSTexGroup* tg;
     PAD_STACK(464);
 
-#define fval (*(f32*)&hsd_804D78D0)
+#define fval (*(f32*) &hsd_804D78D0)
 
     /* Early exit: bit 11 of kind set */
     if (pp->kind & 0x800) {
@@ -5190,7 +5163,7 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
 
     /* Size interpolation */
     if (pp->sizeCount != 0) {
-        pp->size += (pp->sizeTarget - pp->size) / (f32)pp->sizeCount;
+        pp->size += (pp->sizeTarget - pp->size) / (f32) pp->sizeCount;
         pp->sizeCount--;
     }
 
@@ -5250,8 +5223,7 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
 
     /* Rotate interpolation */
     if (pp->rotateCount != 0) {
-        pp->rotate += (pp->rotateTarget - pp->rotate) /
-                      (f32)pp->rotateCount;
+        pp->rotate += (pp->rotateTarget - pp->rotate) / (f32) pp->rotateCount;
         pp->rotateCount--;
     }
 
@@ -5280,8 +5252,7 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
             case 0x00:
                 /* Wait/nop: operand is wait count */
                 break;
-            case 0x40:
-            {
+            case 0x40: {
                 /* Texture command */
                 u8 pn = *pc++;
                 pp->poseNum = pn;
@@ -5318,31 +5289,31 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                 /* Set position */
                 if (opcode & 1) {
                     u8* _p = pc + 1;
-                    ((u8*)&fval)[0] = pc[0];
+                    ((u8*) &fval)[0] = pc[0];
                     _p += 3;
-                    ((u8*)&fval)[1] = pc[1];
-                    ((u8*)&fval)[2] = pc[2];
-                    ((u8*)&fval)[3] = pc[3];
+                    ((u8*) &fval)[1] = pc[1];
+                    ((u8*) &fval)[2] = pc[2];
+                    ((u8*) &fval)[3] = pc[3];
                     pc = _p;
                     pp->pos.x = fval;
                 }
                 if (opcode & 2) {
                     u8* _p = pc + 1;
-                    ((u8*)&fval)[0] = pc[0];
+                    ((u8*) &fval)[0] = pc[0];
                     _p += 3;
-                    ((u8*)&fval)[1] = pc[1];
-                    ((u8*)&fval)[2] = pc[2];
-                    ((u8*)&fval)[3] = pc[3];
+                    ((u8*) &fval)[1] = pc[1];
+                    ((u8*) &fval)[2] = pc[2];
+                    ((u8*) &fval)[3] = pc[3];
                     pc = _p;
                     pp->pos.y = fval;
                 }
                 if (opcode & 4) {
                     u8* _p = pc + 1;
-                    ((u8*)&fval)[0] = pc[0];
+                    ((u8*) &fval)[0] = pc[0];
                     _p += 3;
-                    ((u8*)&fval)[1] = pc[1];
-                    ((u8*)&fval)[2] = pc[2];
-                    ((u8*)&fval)[3] = pc[3];
+                    ((u8*) &fval)[1] = pc[1];
+                    ((u8*) &fval)[2] = pc[2];
+                    ((u8*) &fval)[3] = pc[3];
                     pc = _p;
                     pp->pos.z = fval;
                 }
@@ -5351,26 +5322,26 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
             case 0x88:
                 /* Add to position */
                 if (opcode & 1) {
-                    ((u8*)&fval)[0] = pc[0];
-                    ((u8*)&fval)[1] = pc[1];
-                    ((u8*)&fval)[2] = pc[2];
-                    ((u8*)&fval)[3] = pc[3];
+                    ((u8*) &fval)[0] = pc[0];
+                    ((u8*) &fval)[1] = pc[1];
+                    ((u8*) &fval)[2] = pc[2];
+                    ((u8*) &fval)[3] = pc[3];
                     pc += 4;
                     pp->pos.x += fval;
                 }
                 if (opcode & 2) {
-                    ((u8*)&fval)[0] = pc[0];
-                    ((u8*)&fval)[1] = pc[1];
-                    ((u8*)&fval)[2] = pc[2];
-                    ((u8*)&fval)[3] = pc[3];
+                    ((u8*) &fval)[0] = pc[0];
+                    ((u8*) &fval)[1] = pc[1];
+                    ((u8*) &fval)[2] = pc[2];
+                    ((u8*) &fval)[3] = pc[3];
                     pc += 4;
                     pp->pos.y += fval;
                 }
                 if (opcode & 4) {
-                    ((u8*)&fval)[0] = pc[0];
-                    ((u8*)&fval)[1] = pc[1];
-                    ((u8*)&fval)[2] = pc[2];
-                    ((u8*)&fval)[3] = pc[3];
+                    ((u8*) &fval)[0] = pc[0];
+                    ((u8*) &fval)[1] = pc[1];
+                    ((u8*) &fval)[2] = pc[2];
+                    ((u8*) &fval)[3] = pc[3];
                     pc += 4;
                     pp->pos.z += fval;
                 }
@@ -5379,26 +5350,26 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
             case 0x90:
                 /* Set velocity */
                 if (opcode & 1) {
-                    ((u8*)&fval)[0] = pc[0];
-                    ((u8*)&fval)[1] = pc[1];
-                    ((u8*)&fval)[2] = pc[2];
-                    ((u8*)&fval)[3] = pc[3];
+                    ((u8*) &fval)[0] = pc[0];
+                    ((u8*) &fval)[1] = pc[1];
+                    ((u8*) &fval)[2] = pc[2];
+                    ((u8*) &fval)[3] = pc[3];
                     pc += 4;
                     pp->vel.x = fval;
                 }
                 if (opcode & 2) {
-                    ((u8*)&fval)[0] = pc[0];
-                    ((u8*)&fval)[1] = pc[1];
-                    ((u8*)&fval)[2] = pc[2];
-                    ((u8*)&fval)[3] = pc[3];
+                    ((u8*) &fval)[0] = pc[0];
+                    ((u8*) &fval)[1] = pc[1];
+                    ((u8*) &fval)[2] = pc[2];
+                    ((u8*) &fval)[3] = pc[3];
                     pc += 4;
                     pp->vel.y = fval;
                 }
                 if (opcode & 4) {
-                    ((u8*)&fval)[0] = pc[0];
-                    ((u8*)&fval)[1] = pc[1];
-                    ((u8*)&fval)[2] = pc[2];
-                    ((u8*)&fval)[3] = pc[3];
+                    ((u8*) &fval)[0] = pc[0];
+                    ((u8*) &fval)[1] = pc[1];
+                    ((u8*) &fval)[2] = pc[2];
+                    ((u8*) &fval)[3] = pc[3];
                     pc += 4;
                     pp->vel.z = fval;
                 }
@@ -5407,26 +5378,26 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
             case 0x98:
                 /* Add to velocity */
                 if (opcode & 1) {
-                    ((u8*)&fval)[0] = pc[0];
-                    ((u8*)&fval)[1] = pc[1];
-                    ((u8*)&fval)[2] = pc[2];
-                    ((u8*)&fval)[3] = pc[3];
+                    ((u8*) &fval)[0] = pc[0];
+                    ((u8*) &fval)[1] = pc[1];
+                    ((u8*) &fval)[2] = pc[2];
+                    ((u8*) &fval)[3] = pc[3];
                     pc += 4;
                     pp->vel.x += fval;
                 }
                 if (opcode & 2) {
-                    ((u8*)&fval)[0] = pc[0];
-                    ((u8*)&fval)[1] = pc[1];
-                    ((u8*)&fval)[2] = pc[2];
-                    ((u8*)&fval)[3] = pc[3];
+                    ((u8*) &fval)[0] = pc[0];
+                    ((u8*) &fval)[1] = pc[1];
+                    ((u8*) &fval)[2] = pc[2];
+                    ((u8*) &fval)[3] = pc[3];
                     pc += 4;
                     pp->vel.y += fval;
                 }
                 if (opcode & 4) {
-                    ((u8*)&fval)[0] = pc[0];
-                    ((u8*)&fval)[1] = pc[1];
-                    ((u8*)&fval)[2] = pc[2];
-                    ((u8*)&fval)[3] = pc[3];
+                    ((u8*) &fval)[0] = pc[0];
+                    ((u8*) &fval)[1] = pc[1];
+                    ((u8*) &fval)[2] = pc[2];
+                    ((u8*) &fval)[3] = pc[3];
                     pc += 4;
                     pp->vel.z += fval;
                 }
@@ -5443,10 +5414,10 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                             pp->sizeCount = cnt;
                         }
                     }
-                    ((u8*)&fval)[0] = pc[0];
-                    ((u8*)&fval)[1] = pc[1];
-                    ((u8*)&fval)[2] = pc[2];
-                    ((u8*)&fval)[3] = pc[3];
+                    ((u8*) &fval)[0] = pc[0];
+                    ((u8*) &fval)[1] = pc[1];
+                    ((u8*) &fval)[2] = pc[2];
+                    ((u8*) &fval)[3] = pc[3];
                     pc += 4;
                     pp->sizeTarget = fval;
                     if (pp->sizeCount == 0) {
@@ -5462,10 +5433,10 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
 
             case 0xA2:
                 /* Set gravity */
-                ((u8*)&fval)[0] = pc[0];
-                ((u8*)&fval)[1] = pc[1];
-                ((u8*)&fval)[2] = pc[2];
-                ((u8*)&fval)[3] = pc[3];
+                ((u8*) &fval)[0] = pc[0];
+                ((u8*) &fval)[1] = pc[1];
+                ((u8*) &fval)[2] = pc[2];
+                ((u8*) &fval)[3] = pc[3];
                 pc += 4;
                 pp->grav = fval;
                 if (pp->grav == 0.0F) {
@@ -5477,10 +5448,10 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
 
             case 0xA3:
                 /* Set friction */
-                ((u8*)&fval)[0] = pc[0];
-                ((u8*)&fval)[1] = pc[1];
-                ((u8*)&fval)[2] = pc[2];
-                ((u8*)&fval)[3] = pc[3];
+                ((u8*) &fval)[0] = pc[0];
+                ((u8*) &fval)[1] = pc[1];
+                ((u8*) &fval)[2] = pc[2];
+                ((u8*) &fval)[3] = pc[3];
                 pc += 4;
                 pp->fric = fval;
                 if (pp->fric == 1.0F) {
@@ -5519,11 +5490,10 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                                 palflag = 0;
                             }
                             child = psGenerateParticle0(
-                                pp, linkNo, bank,
-                                cl->kind, cl->texGroup, cl->cmdList,
-                                cl->life, 0.0F, 0.0F, 0.0F,
-                                cl->vx, cl->vy, cl->vz, cl->size,
-                                cl->grav, cl->fric, palflag, NULL, 0);
+                                pp, linkNo, bank, cl->kind, cl->texGroup,
+                                cl->cmdList, cl->life, 0.0F, 0.0F, 0.0F,
+                                cl->vx, cl->vy, cl->vz, cl->size, cl->grav,
+                                cl->fric, palflag, NULL, 0);
                         }
                     }
                     if (child != NULL) {
@@ -5576,11 +5546,10 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                                 palflag = 0;
                             }
                             child = psGenerateParticle0(
-                                pp, linkNo, bank,
-                                cl->kind, cl->texGroup, cl->cmdList,
-                                cl->life, 0.0F, 0.0F, 0.0F,
-                                cl->vx, cl->vy, cl->vz, cl->size,
-                                cl->grav, cl->fric, palflag, NULL, 0);
+                                pp, linkNo, bank, cl->kind, cl->texGroup,
+                                cl->cmdList, cl->life, 0.0F, 0.0F, 0.0F,
+                                cl->vx, cl->vy, cl->vz, cl->size, cl->grav,
+                                cl->fric, palflag, NULL, 0);
                         }
                     }
                     if (child != NULL) {
@@ -5663,8 +5632,7 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     idx = (pc[0] << 8) + pc[1];
                     flags = pc[2];
                     pc += 3;
-                    gchild =
-                        hsd_8039F05C(pp->linkNo, pp->bank, idx);
+                    gchild = hsd_8039F05C(pp->linkNo, pp->bank, idx);
                     if (gchild == NULL) {
                         break;
                     }
@@ -5729,8 +5697,7 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                         idx = ptclref[pp->bank][idx];
                     }
 
-                    gchild =
-                        hsd_8039F05C(pp->linkNo, pp->bank, idx);
+                    gchild = hsd_8039F05C(pp->linkNo, pp->bank, idx);
                     if (gchild == NULL) {
                         break;
                     }
@@ -5788,8 +5755,8 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     baseLife = (pc[0] << 8) + pc[1];
                     randomRange = (pc[2] << 8) + pc[3];
                     pc += 4;
-                    pp->life = baseLife +
-                               (s32)((f32)randomRange * HSD_Randf());
+                    pp->life =
+                        baseLife + (s32) ((f32) randomRange * HSD_Randf());
                 }
                 break;
 
@@ -5797,7 +5764,7 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                 /* Conditional kill */
                 {
                     u8 threshold = *pc++;
-                    if (threshold >= (s32)(256.0F * HSD_Randf())) {
+                    if (threshold >= (s32) (256.0F * HSD_Randf())) {
                         pp->life = 1;
                         goto exit_loop;
                     }
@@ -5806,29 +5773,29 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
 
             case 0xA8:
                 /* Position random offset */
-                ((u8*)&fval)[0] = *pc++;
-                ((u8*)&fval)[1] = *pc++;
-                ((u8*)&fval)[2] = *pc++;
-                ((u8*)&fval)[3] = *pc++;
+                ((u8*) &fval)[0] = *pc++;
+                ((u8*) &fval)[1] = *pc++;
+                ((u8*) &fval)[2] = *pc++;
+                ((u8*) &fval)[3] = *pc++;
                 pp->pos.x += 2.0F * fval * HSD_Randf() - fval;
-                ((u8*)&fval)[0] = *pc++;
-                ((u8*)&fval)[1] = *pc++;
-                ((u8*)&fval)[2] = *pc++;
-                ((u8*)&fval)[3] = *pc++;
+                ((u8*) &fval)[0] = *pc++;
+                ((u8*) &fval)[1] = *pc++;
+                ((u8*) &fval)[2] = *pc++;
+                ((u8*) &fval)[3] = *pc++;
                 pp->pos.y += 2.0F * fval * HSD_Randf() - fval;
-                ((u8*)&fval)[0] = *pc++;
-                ((u8*)&fval)[1] = *pc++;
-                ((u8*)&fval)[2] = *pc++;
-                ((u8*)&fval)[3] = *pc++;
+                ((u8*) &fval)[0] = *pc++;
+                ((u8*) &fval)[1] = *pc++;
+                ((u8*) &fval)[2] = *pc++;
+                ((u8*) &fval)[3] = *pc++;
                 pp->pos.z += 2.0F * fval * HSD_Randf() - fval;
                 break;
 
             case 0xA9:
                 /* Call force function with float parameter */
-                ((u8*)&fval)[0] = pc[0];
-                ((u8*)&fval)[1] = pc[1];
-                ((u8*)&fval)[2] = pc[2];
-                ((u8*)&fval)[3] = pc[3];
+                ((u8*) &fval)[0] = pc[0];
+                ((u8*) &fval)[1] = pc[1];
+                ((u8*) &fval)[2] = pc[2];
+                ((u8*) &fval)[3] = pc[3];
                 pc += 4;
                 hsd_80398F8C(pp, fval);
                 break;
@@ -5847,8 +5814,7 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     randomRange = (pc[2] << 8) + pc[3];
                     pc += 4;
 
-                    idx = baseIdx +
-                          (s32)((f32)randomRange * HSD_Randf());
+                    idx = baseIdx + (s32) ((f32) randomRange * HSD_Randf());
 
                     if (ptclref[pp->bank] != NULL) {
                         idx = ptclref[pp->bank][idx];
@@ -5867,19 +5833,17 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                         if (cl == NULL) {
                             child = NULL;
                         } else {
-                            tg = psTexGroupArray[bank]
-                                                [cl->texGroup];
+                            tg = psTexGroupArray[bank][cl->texGroup];
                             if (tg != NULL) {
                                 palflag = tg->palflag;
                             } else {
                                 palflag = 0;
                             }
                             child = psGenerateParticle0(
-                                pp, linkNo, bank,
-                                cl->kind, cl->texGroup, cl->cmdList,
-                                cl->life, 0.0F, 0.0F, 0.0F,
-                                cl->vx, cl->vy, cl->vz, cl->size,
-                                cl->grav, cl->fric, palflag, NULL, 0);
+                                pp, linkNo, bank, cl->kind, cl->texGroup,
+                                cl->cmdList, cl->life, 0.0F, 0.0F, 0.0F,
+                                cl->vx, cl->vy, cl->vz, cl->size, cl->grav,
+                                cl->fric, palflag, NULL, 0);
                         }
                     }
                     if (child != NULL) {
@@ -5904,10 +5868,10 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
 
             case 0xAB:
                 /* Velocity scale */
-                ((u8*)&fval)[0] = pc[0];
-                ((u8*)&fval)[1] = pc[1];
-                ((u8*)&fval)[2] = pc[2];
-                ((u8*)&fval)[3] = pc[3];
+                ((u8*) &fval)[0] = pc[0];
+                ((u8*) &fval)[1] = pc[1];
+                ((u8*) &fval)[2] = pc[2];
+                ((u8*) &fval)[3] = pc[3];
                 pc += 4;
                 pp->vel.x *= fval;
                 pp->vel.y *= fval;
@@ -5926,15 +5890,15 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                             pp->sizeCount = cnt;
                         }
                     }
-                    ((u8*)&fval)[0] = pc[0];
-                    ((u8*)&fval)[1] = pc[1];
-                    ((u8*)&fval)[2] = pc[2];
-                    ((u8*)&fval)[3] = pc[3];
+                    ((u8*) &fval)[0] = pc[0];
+                    ((u8*) &fval)[1] = pc[1];
+                    ((u8*) &fval)[2] = pc[2];
+                    ((u8*) &fval)[3] = pc[3];
                     pp->sizeTarget = fval;
-                    ((u8*)&fval)[0] = pc[4];
-                    ((u8*)&fval)[1] = pc[5];
-                    ((u8*)&fval)[2] = pc[6];
-                    ((u8*)&fval)[3] = pc[7];
+                    ((u8*) &fval)[0] = pc[4];
+                    ((u8*) &fval)[1] = pc[5];
+                    ((u8*) &fval)[2] = pc[6];
+                    ((u8*) &fval)[3] = pc[7];
                     range = fval;
                     pc += 8;
                     pp->sizeTarget += range * HSD_Randf();
@@ -5978,14 +5942,13 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     if (srt == NULL) {
                         break;
                     }
-                    if ((u8)srt->xA2 != 0) {
+                    if ((u8) srt->xA2 != 0) {
                         break;
                     }
                     hsd_803983A4(srt->gp);
                     srt = pp->appsrt;
-                    HSD_MtxSRT(srt->mmtx, &srt->scale,
-                               (Vec3*)&srt->rot, &srt->translate,
-                               NULL);
+                    HSD_MtxSRT(srt->mmtx, &srt->scale, (Vec3*) &srt->rot,
+                               &srt->translate, NULL);
                     pp->pos.x = pp->appsrt->mmtx[0][1] * pp->pos.y +
                                 pp->appsrt->mmtx[0][0] * pp->pos.x +
                                 pp->appsrt->mmtx[0][2] * pp->pos.z +
@@ -6008,18 +5971,18 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     s32 step;
 
                     if (pp->aCmpCount != 0) {
-                        step = ((s32)pp->aCmpRemain << 16) /
-                               (s32)pp->aCmpCount;
+                        step =
+                            ((s32) pp->aCmpRemain << 16) / (s32) pp->aCmpCount;
                         pp->aCmpParam1 =
-                            (u8)((((s32)pp->aCmpParam1Target << 16) +
-                                  step * ((s32)pp->aCmpParam1 -
-                                          (s32)pp->aCmpParam1Target)) >>
-                                 16);
+                            (u8) ((((s32) pp->aCmpParam1Target << 16) +
+                                   step * ((s32) pp->aCmpParam1 -
+                                           (s32) pp->aCmpParam1Target)) >>
+                                  16);
                         pp->aCmpParam2 =
-                            (u8)((((s32)pp->aCmpParam2Target << 16) +
-                                  step * ((s32)pp->aCmpParam2 -
-                                          (s32)pp->aCmpParam2Target)) >>
-                                 16);
+                            (u8) ((((s32) pp->aCmpParam2Target << 16) +
+                                   step * ((s32) pp->aCmpParam2 -
+                                           (s32) pp->aCmpParam2Target)) >>
+                                  16);
                     }
                     {
                         pp->aCmpCount = *pc++;
@@ -6066,10 +6029,10 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                             pp->rotateCount = cnt;
                         }
                     }
-                    ((u8*)&fval)[0] = pc[0];
-                    ((u8*)&fval)[1] = pc[1];
-                    ((u8*)&fval)[2] = pc[2];
-                    ((u8*)&fval)[3] = pc[3];
+                    ((u8*) &fval)[0] = pc[0];
+                    ((u8*) &fval)[1] = pc[1];
+                    ((u8*) &fval)[2] = pc[2];
+                    ((u8*) &fval)[3] = pc[3];
                     pc += 4;
                     pp->rotateTarget += fval;
                     if (pp->rotateCount == 0) {
@@ -6091,8 +6054,7 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                         break;
                     }
                     HSD_JObjSetupMatrix(jobj);
-                    vel_mag_sq = pp->vel.x * pp->vel.x +
-                                 pp->vel.y * pp->vel.y;
+                    vel_mag_sq = pp->vel.x * pp->vel.x + pp->vel.y * pp->vel.y;
                     dx = jobj->mtx[0][3] - pp->pos.x;
                     vel_mag_sq += pp->vel.z * pp->vel.z;
                     dy = jobj->mtx[1][3] - pp->pos.y;
@@ -6119,21 +6081,20 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     int idx = *pc++;
                     f32 force, range;
 
-                    ((u8*)&fval)[0] = *pc++;
-                    ((u8*)&fval)[1] = *pc++;
-                    ((u8*)&fval)[2] = *pc++;
-                    ((u8*)&fval)[3] = *pc++;
+                    ((u8*) &fval)[0] = *pc++;
+                    ((u8*) &fval)[1] = *pc++;
+                    ((u8*) &fval)[2] = *pc++;
+                    ((u8*) &fval)[3] = *pc++;
                     force = fval;
-                    ((u8*)&fval)[0] = *pc++;
-                    ((u8*)&fval)[1] = *pc++;
-                    ((u8*)&fval)[2] = *pc++;
-                    ((u8*)&fval)[3] = *pc++;
+                    ((u8*) &fval)[0] = *pc++;
+                    ((u8*) &fval)[1] = *pc++;
+                    ((u8*) &fval)[2] = *pc++;
+                    ((u8*) &fval)[3] = *pc++;
                     range = fval;
                     {
-                        HSD_JObj* jobj =
-                            hsd_804D08E8[idx + pp->pJObjOfs];
-                        if (hsd_803991D8((HSD_Generator*)pp,
-                                         jobj, force, range) != 0)
+                        HSD_JObj* jobj = hsd_804D08E8[idx + pp->pJObjOfs];
+                        if (hsd_803991D8((HSD_Generator*) pp, jobj, force,
+                                         range) != 0)
                         {
                             pp->life = 1;
                             goto exit_loop;
@@ -6164,21 +6125,17 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                         if (cl == NULL) {
                             child = NULL;
                         } else {
-                            tg = psTexGroupArray[bank]
-                                                [cl->texGroup];
+                            tg = psTexGroupArray[bank][cl->texGroup];
                             if (tg != NULL) {
                                 palflag = tg->palflag;
                             } else {
                                 palflag = 0;
                             }
                             child = psGenerateParticle0(
-                                pp, linkNo, bank,
-                                cl->kind, cl->texGroup,
-                                cl->cmdList, cl->life,
-                                0.0F, 0.0F, 0.0F,
-                                cl->vx, cl->vy, cl->vz,
-                                cl->size, cl->grav, cl->fric,
-                                palflag, NULL, 0);
+                                pp, linkNo, bank, cl->kind, cl->texGroup,
+                                cl->cmdList, cl->life, 0.0F, 0.0F, 0.0F,
+                                cl->vx, cl->vy, cl->vz, cl->size, cl->grav,
+                                cl->fric, palflag, NULL, 0);
                         }
                     }
                     if (child != NULL) {
@@ -6230,21 +6187,17 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                         if (cl == NULL) {
                             child = NULL;
                         } else {
-                            tg = psTexGroupArray[bank]
-                                                [cl->texGroup];
+                            tg = psTexGroupArray[bank][cl->texGroup];
                             if (tg != NULL) {
                                 palflag = tg->palflag;
                             } else {
                                 palflag = 0;
                             }
                             child = psGenerateParticle0(
-                                pp, linkNo, bank,
-                                cl->kind, cl->texGroup,
-                                cl->cmdList, cl->life,
-                                0.0F, 0.0F, 0.0F,
-                                cl->vx, cl->vy, cl->vz,
-                                cl->size, cl->grav, cl->fric,
-                                palflag, NULL, 0);
+                                pp, linkNo, bank, cl->kind, cl->texGroup,
+                                cl->cmdList, cl->life, 0.0F, 0.0F, 0.0F,
+                                cl->vx, cl->vy, cl->vz, cl->size, cl->grav,
+                                cl->fric, palflag, NULL, 0);
                         }
                     }
                     if (child != NULL) {
@@ -6279,77 +6232,77 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     f32 val;
 
                     if (pp->primColCount != 0) {
-                        step = ((s32)pp->primColRemain << 16) /
-                               (s32)pp->primColCount;
+                        step = ((s32) pp->primColRemain << 16) /
+                               (s32) pp->primColCount;
                         pp->primCol.r =
-                            (u8)((((s32)pp->primColTarget.r << 16) +
-                                  step * ((s32)pp->primCol.r -
-                                          (s32)pp->primColTarget.r)) >>
-                                 16);
+                            (u8) ((((s32) pp->primColTarget.r << 16) +
+                                   step * ((s32) pp->primCol.r -
+                                           (s32) pp->primColTarget.r)) >>
+                                  16);
                         pp->primCol.g =
-                            (u8)((((s32)pp->primColTarget.g << 16) +
-                                  step * ((s32)pp->primCol.g -
-                                          (s32)pp->primColTarget.g)) >>
-                                 16);
+                            (u8) ((((s32) pp->primColTarget.g << 16) +
+                                   step * ((s32) pp->primCol.g -
+                                           (s32) pp->primColTarget.g)) >>
+                                  16);
                         pp->primCol.b =
-                            (u8)((((s32)pp->primColTarget.b << 16) +
-                                  step * ((s32)pp->primCol.b -
-                                          (s32)pp->primColTarget.b)) >>
-                                 16);
+                            (u8) ((((s32) pp->primColTarget.b << 16) +
+                                   step * ((s32) pp->primCol.b -
+                                           (s32) pp->primColTarget.b)) >>
+                                  16);
                         pp->primCol.a =
-                            (u8)((((s32)pp->primColTarget.a << 16) +
-                                  step * ((s32)pp->primCol.a -
-                                          (s32)pp->primColTarget.a)) >>
-                                 16);
+                            (u8) ((((s32) pp->primColTarget.a << 16) +
+                                   step * ((s32) pp->primCol.a -
+                                           (s32) pp->primColTarget.a)) >>
+                                  16);
                     }
 
                     rand_val = HSD_Randf();
-                    delta = (s8)*pc++;
-                    rand_val *= (f32)(delta * 2);
-                    val = (f32)pp->primColTarget.r + rand_val;
+                    delta = (s8) *pc++;
+                    rand_val *= (f32) (delta * 2);
+                    val = (f32) pp->primColTarget.r + rand_val;
                     if (val < 0.0F) {
                         val = 0.0F;
                     }
                     if (val > 255.0F) {
                         val = 255.0F;
                     }
-                    pp->primColTarget.r = (u8)(s32)val;
+                    pp->primColTarget.r = (u8) (s32) val;
 
                     rand_val = HSD_Randf();
-                    delta = (s8)*pc++;
-                    rand_val *= (f32)(delta * 2);
-                    val = (f32)pp->primColTarget.g + rand_val;
+                    delta = (s8) *pc++;
+                    rand_val *= (f32) (delta * 2);
+                    val = (f32) pp->primColTarget.g + rand_val;
                     if (val < 0.0F) {
                         val = 0.0F;
                     }
                     if (val > 255.0F) {
                         val = 255.0F;
                     }
-                    pp->primColTarget.g = (u8)(s32)val;
+                    pp->primColTarget.g = (u8) (s32) val;
 
                     rand_val = HSD_Randf();
-                    delta = (s8)*pc++;
-                    rand_val *= (f32)(delta * 2);
-                    val = (f32)pp->primColTarget.b + rand_val;
+                    delta = (s8) *pc++;
+                    rand_val *= (f32) (delta * 2);
+                    val = (f32) pp->primColTarget.b + rand_val;
                     if (val < 0.0F) {
                         val = 0.0F;
                     }
                     if (val > 255.0F) {
                         val = 255.0F;
                     }
-                    pp->primColTarget.b = (u8)(s32)val;
+                    pp->primColTarget.b = (u8) (s32) val;
 
                     rand_val = HSD_Randf();
-                    delta = (s8)*pc++;
-                    rand_val *= (f32)(delta * 2);
-                    val = (f32)pp->primColTarget.a + rand_val;
+                    delta = (s8) *pc++;
+                    rand_val *= (f32) (delta * 2);
+                    val = (f32) pp->primColTarget.a + rand_val;
                     if (val < 0.0F) {
                         val = 0.0F;
                     }
                     if (val > 255.0F) {
                         val = 255.0F;
                     }
-                    pp->primColTarget.a = (u8)(s32)val;
+                    pp->primColTarget.a = (u8) (s32) val;
 
                     if (pp->primColCount == 0) {
                         pp->primCol = pp->primColTarget;
@@ -6368,77 +6321,77 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     f32 val;
 
                     if (pp->envColCount != 0) {
-                        step = ((s32)pp->envColRemain << 16) /
-                               (s32)pp->envColCount;
+                        step = ((s32) pp->envColRemain << 16) /
+                               (s32) pp->envColCount;
                         pp->envCol.r =
-                            (u8)((((s32)pp->envColTarget.r << 16) +
-                                  step * ((s32)pp->envCol.r -
-                                          (s32)pp->envColTarget.r)) >>
-                                 16);
+                            (u8) ((((s32) pp->envColTarget.r << 16) +
+                                   step * ((s32) pp->envCol.r -
+                                           (s32) pp->envColTarget.r)) >>
+                                  16);
                         pp->envCol.g =
-                            (u8)((((s32)pp->envColTarget.g << 16) +
-                                  step * ((s32)pp->envCol.g -
-                                          (s32)pp->envColTarget.g)) >>
-                                 16);
+                            (u8) ((((s32) pp->envColTarget.g << 16) +
+                                   step * ((s32) pp->envCol.g -
+                                           (s32) pp->envColTarget.g)) >>
+                                  16);
                         pp->envCol.b =
-                            (u8)((((s32)pp->envColTarget.b << 16) +
-                                  step * ((s32)pp->envCol.b -
-                                          (s32)pp->envColTarget.b)) >>
-                                 16);
+                            (u8) ((((s32) pp->envColTarget.b << 16) +
+                                   step * ((s32) pp->envCol.b -
+                                           (s32) pp->envColTarget.b)) >>
+                                  16);
                         pp->envCol.a =
-                            (u8)((((s32)pp->envColTarget.a << 16) +
-                                  step * ((s32)pp->envCol.a -
-                                          (s32)pp->envColTarget.a)) >>
-                                 16);
+                            (u8) ((((s32) pp->envColTarget.a << 16) +
+                                   step * ((s32) pp->envCol.a -
+                                           (s32) pp->envColTarget.a)) >>
+                                  16);
                     }
 
                     rand_val = HSD_Randf();
-                    delta = (s8)*pc++;
-                    rand_val *= (f32)(delta * 2);
-                    val = (f32)pp->envColTarget.r + rand_val;
+                    delta = (s8) *pc++;
+                    rand_val *= (f32) (delta * 2);
+                    val = (f32) pp->envColTarget.r + rand_val;
                     if (val < 0.0F) {
                         val = 0.0F;
                     }
                     if (val > 255.0F) {
                         val = 255.0F;
                     }
-                    pp->envColTarget.r = (u8)(s32)val;
+                    pp->envColTarget.r = (u8) (s32) val;
 
                     rand_val = HSD_Randf();
-                    delta = (s8)*pc++;
-                    rand_val *= (f32)(delta * 2);
-                    val = (f32)pp->envColTarget.g + rand_val;
+                    delta = (s8) *pc++;
+                    rand_val *= (f32) (delta * 2);
+                    val = (f32) pp->envColTarget.g + rand_val;
                     if (val < 0.0F) {
                         val = 0.0F;
                     }
                     if (val > 255.0F) {
                         val = 255.0F;
                     }
-                    pp->envColTarget.g = (u8)(s32)val;
+                    pp->envColTarget.g = (u8) (s32) val;
 
                     rand_val = HSD_Randf();
-                    delta = (s8)*pc++;
-                    rand_val *= (f32)(delta * 2);
-                    val = (f32)pp->envColTarget.b + rand_val;
+                    delta = (s8) *pc++;
+                    rand_val *= (f32) (delta * 2);
+                    val = (f32) pp->envColTarget.b + rand_val;
                     if (val < 0.0F) {
                         val = 0.0F;
                     }
                     if (val > 255.0F) {
                         val = 255.0F;
                     }
-                    pp->envColTarget.b = (u8)(s32)val;
+                    pp->envColTarget.b = (u8) (s32) val;
 
                     rand_val = HSD_Randf();
-                    delta = (s8)*pc++;
-                    rand_val *= (f32)(delta * 2);
-                    val = (f32)pp->envColTarget.a + rand_val;
+                    delta = (s8) *pc++;
+                    rand_val *= (f32) (delta * 2);
+                    val = (f32) pp->envColTarget.a + rand_val;
                     if (val < 0.0F) {
                         val = 0.0F;
                     }
                     if (val > 255.0F) {
                         val = 255.0F;
                     }
-                    pp->envColTarget.a = (u8)(s32)val;
+                    pp->envColTarget.a = (u8) (s32) val;
 
                     if (pp->envColCount == 0) {
                         pp->envCol = pp->envColTarget;
@@ -6455,9 +6408,8 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
 
                     pp->poseNum = *pc++;
                     randRange = *pc++;
-                    pp->poseNum = (u8)(s32)((f32)randRange *
-                                            HSD_Randf() +
-                                            (f32)pp->poseNum);
+                    pp->poseNum = (u8) (s32) ((f32) randRange * HSD_Randf() +
+                                              (f32) pp->poseNum);
                     {
                         u8 bank = pp->bank;
                         u8 tgIdx = pp->texGroup;
@@ -6466,12 +6418,8 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
 
                         tga = psTexGroupArray[bank];
                         texGrp = tga[tgIdx];
-                        if (texGrp != NULL &&
-                            texGrp->texTable != NULL)
-                        {
-                            if (texGrp->texTable[pp->poseNum] !=
-                                NULL)
-                            {
+                        if (texGrp != NULL && texGrp->texTable != NULL) {
+                            if (texGrp->texTable[pp->poseNum] != NULL) {
                                 pp->kind |= DispTexture;
                             }
                         }
@@ -6485,21 +6433,19 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     f32 base_speed, random_range, target_speed;
                     f32 mag;
 
-                    ((u8*)&fval)[0] = pc[0];
-                    ((u8*)&fval)[1] = pc[1];
-                    ((u8*)&fval)[2] = pc[2];
-                    ((u8*)&fval)[3] = pc[3];
+                    ((u8*) &fval)[0] = pc[0];
+                    ((u8*) &fval)[1] = pc[1];
+                    ((u8*) &fval)[2] = pc[2];
+                    ((u8*) &fval)[3] = pc[3];
                     base_speed = fval;
-                    ((u8*)&fval)[0] = pc[4];
-                    ((u8*)&fval)[1] = pc[5];
-                    ((u8*)&fval)[2] = pc[6];
-                    ((u8*)&fval)[3] = pc[7];
+                    ((u8*) &fval)[0] = pc[4];
+                    ((u8*) &fval)[1] = pc[5];
+                    ((u8*) &fval)[2] = pc[6];
+                    ((u8*) &fval)[3] = pc[7];
                     random_range = fval;
                     pc += 8;
-                    target_speed =
-                        base_speed + random_range * HSD_Randf();
-                    mag = pp->vel.x * pp->vel.x +
-                          pp->vel.y * pp->vel.y +
+                    target_speed = base_speed + random_range * HSD_Randf();
+                    mag = pp->vel.x * pp->vel.x + pp->vel.y * pp->vel.y +
                           pp->vel.z * pp->vel.z;
                     mag = sqrtf(mag);
                     if (mag > 0.0F) {
@@ -6513,20 +6459,20 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
 
             case 0xBE:
                 /* Velocity component multiply */
-                ((u8*)&fval)[0] = pc[0];
-                ((u8*)&fval)[1] = pc[1];
-                ((u8*)&fval)[2] = pc[2];
-                ((u8*)&fval)[3] = pc[3];
+                ((u8*) &fval)[0] = pc[0];
+                ((u8*) &fval)[1] = pc[1];
+                ((u8*) &fval)[2] = pc[2];
+                ((u8*) &fval)[3] = pc[3];
                 pp->vel.x *= fval;
-                ((u8*)&fval)[0] = pc[4];
-                ((u8*)&fval)[1] = pc[5];
-                ((u8*)&fval)[2] = pc[6];
-                ((u8*)&fval)[3] = pc[7];
+                ((u8*) &fval)[0] = pc[4];
+                ((u8*) &fval)[1] = pc[5];
+                ((u8*) &fval)[2] = pc[6];
+                ((u8*) &fval)[3] = pc[7];
                 pp->vel.y *= fval;
-                ((u8*)&fval)[0] = pc[8];
-                ((u8*)&fval)[1] = pc[9];
-                ((u8*)&fval)[2] = pc[10];
-                ((u8*)&fval)[3] = pc[11];
+                ((u8*) &fval)[0] = pc[8];
+                ((u8*) &fval)[1] = pc[9];
+                ((u8*) &fval)[2] = pc[10];
+                ((u8*) &fval)[3] = pc[11];
                 pc += 12;
                 pp->vel.z *= fval;
                 break;
@@ -6535,8 +6481,7 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                 /* JObj offset */
                 {
                     u8 idx = *pc++;
-                    pp->kind |= (((idx + pp->pJObjOfs) & 7) << 12) |
-                                0x8000;
+                    pp->kind |= (((idx + pp->pJObjOfs) & 7) << 12) | 0x8000;
                 }
                 break;
 
@@ -6547,28 +6492,28 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     u16 cnt;
 
                     if (pp->primColCount != 0) {
-                        step = ((s32)pp->primColRemain << 16) /
-                               (s32)pp->primColCount;
+                        step = ((s32) pp->primColRemain << 16) /
+                               (s32) pp->primColCount;
                         pp->primCol.r =
-                            (u8)((((s32)pp->primColTarget.r << 16) +
-                                  step * ((s32)pp->primCol.r -
-                                          (s32)pp->primColTarget.r)) >>
-                                 16);
+                            (u8) ((((s32) pp->primColTarget.r << 16) +
+                                   step * ((s32) pp->primCol.r -
+                                           (s32) pp->primColTarget.r)) >>
+                                  16);
                         pp->primCol.g =
-                            (u8)((((s32)pp->primColTarget.g << 16) +
-                                  step * ((s32)pp->primCol.g -
-                                          (s32)pp->primColTarget.g)) >>
-                                 16);
+                            (u8) ((((s32) pp->primColTarget.g << 16) +
+                                   step * ((s32) pp->primCol.g -
+                                           (s32) pp->primColTarget.g)) >>
+                                  16);
                         pp->primCol.b =
-                            (u8)((((s32)pp->primColTarget.b << 16) +
-                                  step * ((s32)pp->primCol.b -
-                                          (s32)pp->primColTarget.b)) >>
-                                 16);
+                            (u8) ((((s32) pp->primColTarget.b << 16) +
+                                   step * ((s32) pp->primCol.b -
+                                           (s32) pp->primColTarget.b)) >>
+                                  16);
                         pp->primCol.a =
-                            (u8)((((s32)pp->primColTarget.a << 16) +
-                                  step * ((s32)pp->primCol.a -
-                                          (s32)pp->primColTarget.a)) >>
-                                 16);
+                            (u8) ((((s32) pp->primColTarget.a << 16) +
+                                   step * ((s32) pp->primCol.a -
+                                           (s32) pp->primColTarget.a)) >>
+                                  16);
                     }
                     pp->primColCount = *pc++;
                     cnt = pp->primColCount;
@@ -6605,28 +6550,28 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     u16 cnt;
 
                     if (pp->envColCount != 0) {
-                        step = ((s32)pp->envColRemain << 16) /
-                               (s32)pp->envColCount;
+                        step = ((s32) pp->envColRemain << 16) /
+                               (s32) pp->envColCount;
                         pp->envCol.r =
-                            (u8)((((s32)pp->envColTarget.r << 16) +
-                                  step * ((s32)pp->envCol.r -
-                                          (s32)pp->envColTarget.r)) >>
-                                 16);
+                            (u8) ((((s32) pp->envColTarget.r << 16) +
+                                   step * ((s32) pp->envCol.r -
+                                           (s32) pp->envColTarget.r)) >>
+                                  16);
                         pp->envCol.g =
-                            (u8)((((s32)pp->envColTarget.g << 16) +
-                                  step * ((s32)pp->envCol.g -
-                                          (s32)pp->envColTarget.g)) >>
-                                 16);
+                            (u8) ((((s32) pp->envColTarget.g << 16) +
+                                   step * ((s32) pp->envCol.g -
+                                           (s32) pp->envColTarget.g)) >>
+                                  16);
                         pp->envCol.b =
-                            (u8)((((s32)pp->envColTarget.b << 16) +
-                                  step * ((s32)pp->envCol.b -
-                                          (s32)pp->envColTarget.b)) >>
-                                 16);
+                            (u8) ((((s32) pp->envColTarget.b << 16) +
+                                   step * ((s32) pp->envCol.b -
+                                           (s32) pp->envColTarget.b)) >>
+                                  16);
                         pp->envCol.a =
-                            (u8)((((s32)pp->envColTarget.a << 16) +
-                                  step * ((s32)pp->envCol.a -
-                                          (s32)pp->envColTarget.a)) >>
-                                 16);
+                            (u8) ((((s32) pp->envColTarget.a << 16) +
+                                   step * ((s32) pp->envCol.a -
+                                           (s32) pp->envColTarget.a)) >>
+                                  16);
                     }
                     pp->envColCount = *pc++;
                     cnt = pp->envColCount;
@@ -6665,134 +6610,134 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     f32 val;
 
                     if (pp->primColCount != 0) {
-                        step = ((s32)pp->primColRemain << 16) /
-                               (s32)pp->primColCount;
+                        step = ((s32) pp->primColRemain << 16) /
+                               (s32) pp->primColCount;
                         pp->primCol.r =
-                            (u8)((((s32)pp->primColTarget.r << 16) +
-                                  step * ((s32)pp->primCol.r -
-                                          (s32)pp->primColTarget.r)) >>
-                                 16);
+                            (u8) ((((s32) pp->primColTarget.r << 16) +
+                                   step * ((s32) pp->primCol.r -
+                                           (s32) pp->primColTarget.r)) >>
+                                  16);
                         pp->primCol.g =
-                            (u8)((((s32)pp->primColTarget.g << 16) +
-                                  step * ((s32)pp->primCol.g -
-                                          (s32)pp->primColTarget.g)) >>
-                                 16);
+                            (u8) ((((s32) pp->primColTarget.g << 16) +
+                                   step * ((s32) pp->primCol.g -
+                                           (s32) pp->primColTarget.g)) >>
+                                  16);
                         pp->primCol.b =
-                            (u8)((((s32)pp->primColTarget.b << 16) +
-                                  step * ((s32)pp->primCol.b -
-                                          (s32)pp->primColTarget.b)) >>
-                                 16);
+                            (u8) ((((s32) pp->primColTarget.b << 16) +
+                                   step * ((s32) pp->primCol.b -
+                                           (s32) pp->primColTarget.b)) >>
+                                  16);
                         pp->primCol.a =
-                            (u8)((((s32)pp->primColTarget.a << 16) +
-                                  step * ((s32)pp->primCol.a -
-                                          (s32)pp->primColTarget.a)) >>
-                                 16);
+                            (u8) ((((s32) pp->primColTarget.a << 16) +
+                                   step * ((s32) pp->primCol.a -
+                                           (s32) pp->primColTarget.a)) >>
+                                  16);
                     }
                     if (pp->envColCount != 0) {
-                        step = ((s32)pp->envColRemain << 16) /
-                               (s32)pp->envColCount;
+                        step = ((s32) pp->envColRemain << 16) /
+                               (s32) pp->envColCount;
                         pp->envCol.r =
-                            (u8)((((s32)pp->envColTarget.r << 16) +
-                                  step * ((s32)pp->envCol.r -
-                                          (s32)pp->envColTarget.r)) >>
-                                 16);
+                            (u8) ((((s32) pp->envColTarget.r << 16) +
+                                   step * ((s32) pp->envCol.r -
+                                           (s32) pp->envColTarget.r)) >>
+                                  16);
                         pp->envCol.g =
-                            (u8)((((s32)pp->envColTarget.g << 16) +
-                                  step * ((s32)pp->envCol.g -
-                                          (s32)pp->envColTarget.g)) >>
-                                 16);
+                            (u8) ((((s32) pp->envColTarget.g << 16) +
+                                   step * ((s32) pp->envCol.g -
+                                           (s32) pp->envColTarget.g)) >>
+                                  16);
                         pp->envCol.b =
-                            (u8)((((s32)pp->envColTarget.b << 16) +
-                                  step * ((s32)pp->envCol.b -
-                                          (s32)pp->envColTarget.b)) >>
-                                 16);
+                            (u8) ((((s32) pp->envColTarget.b << 16) +
+                                   step * ((s32) pp->envCol.b -
+                                           (s32) pp->envColTarget.b)) >>
+                                  16);
                         pp->envCol.a =
-                            (u8)((((s32)pp->envColTarget.a << 16) +
-                                  step * ((s32)pp->envCol.a -
-                                          (s32)pp->envColTarget.a)) >>
-                                 16);
+                            (u8) ((((s32) pp->envColTarget.a << 16) +
+                                   step * ((s32) pp->envCol.a -
+                                           (s32) pp->envColTarget.a)) >>
+                                  16);
                     }
 
                     rand_val = HSD_Randf();
 
-                    delta = (s8)*pc++;
-                    rand_val *= (f32)(delta * 2);
-                    val = rand_val + (f32)pp->primColTarget.r;
+                    delta = (s8) *pc++;
+                    rand_val *= (f32) (delta * 2);
+                    val = rand_val + (f32) pp->primColTarget.r;
                     if (val < 0.0F) {
                         val = 0.0F;
                     }
                     if (val > 255.0F) {
                         val = 255.0F;
                     }
-                    pp->primColTarget.r = (u8)(s32)val;
-                    val = rand_val + (f32)pp->envColTarget.r;
+                    pp->primColTarget.r = (u8) (s32) val;
+                    val = rand_val + (f32) pp->envColTarget.r;
                     if (val < 0.0F) {
                         val = 0.0F;
                     }
                     if (val > 255.0F) {
                         val = 255.0F;
                     }
-                    pp->envColTarget.r = (u8)(s32)val;
+                    pp->envColTarget.r = (u8) (s32) val;
 
                     rand_val = HSD_Randf();
-                    delta = (s8)*pc++;
-                    rand_val *= (f32)(delta * 2);
-                    val = rand_val + (f32)pp->primColTarget.g;
+                    delta = (s8) *pc++;
+                    rand_val *= (f32) (delta * 2);
+                    val = rand_val + (f32) pp->primColTarget.g;
                     if (val < 0.0F) {
                         val = 0.0F;
                     }
                     if (val > 255.0F) {
                         val = 255.0F;
                     }
-                    pp->primColTarget.g = (u8)(s32)val;
-                    val = rand_val + (f32)pp->envColTarget.g;
+                    pp->primColTarget.g = (u8) (s32) val;
+                    val = rand_val + (f32) pp->envColTarget.g;
                     if (val < 0.0F) {
                         val = 0.0F;
                     }
                     if (val > 255.0F) {
                         val = 255.0F;
                     }
-                    pp->envColTarget.g = (u8)(s32)val;
+                    pp->envColTarget.g = (u8) (s32) val;
 
                     rand_val = HSD_Randf();
-                    delta = (s8)*pc++;
-                    rand_val *= (f32)(delta * 2);
-                    val = rand_val + (f32)pp->primColTarget.b;
+                    delta = (s8) *pc++;
+                    rand_val *= (f32) (delta * 2);
+                    val = rand_val + (f32) pp->primColTarget.b;
                     if (val < 0.0F) {
                         val = 0.0F;
                     }
                     if (val > 255.0F) {
                         val = 255.0F;
                     }
-                    pp->primColTarget.b = (u8)(s32)val;
-                    val = rand_val + (f32)pp->envColTarget.b;
+                    pp->primColTarget.b = (u8) (s32) val;
+                    val = rand_val + (f32) pp->envColTarget.b;
                     if (val < 0.0F) {
                         val = 0.0F;
                     }
                     if (val > 255.0F) {
                         val = 255.0F;
                     }
-                    pp->envColTarget.b = (u8)(s32)val;
+                    pp->envColTarget.b = (u8) (s32) val;
 
                     rand_val = HSD_Randf();
-                    delta = (s8)*pc++;
-                    rand_val *= (f32)(delta * 2);
-                    val = rand_val + (f32)pp->primColTarget.a;
+                    delta = (s8) *pc++;
+                    rand_val *= (f32) (delta * 2);
+                    val = rand_val + (f32) pp->primColTarget.a;
                     if (val < 0.0F) {
                         val = 0.0F;
                     }
                     if (val > 255.0F) {
                         val = 255.0F;
                     }
-                    pp->primColTarget.a = (u8)(s32)val;
-                    val = rand_val + (f32)pp->envColTarget.a;
+                    pp->primColTarget.a = (u8) (s32) val;
+                    val = rand_val + (f32) pp->envColTarget.a;
                     if (val < 0.0F) {
                         val = 0.0F;
                     }
                     if (val > 255.0F) {
                         val = 255.0F;
                     }
-                    pp->envColTarget.a = (u8)(s32)val;
+                    pp->envColTarget.a = (u8) (s32) val;
 
                     if (pp->primColCount == 0) {
                         pp->primCol = pp->primColTarget;
@@ -6818,54 +6763,54 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
 
                     /* Interpolate primCol */
                     if (pp->primColCount != 0) {
-                        step = ((s32)pp->primColRemain << 16) /
-                               (s32)pp->primColCount;
+                        step = ((s32) pp->primColRemain << 16) /
+                               (s32) pp->primColCount;
                         pp->primCol.r =
-                            (u8)((((s32)pp->primColTarget.r << 16) +
-                                  step * ((s32)pp->primCol.r -
-                                          (s32)pp->primColTarget.r)) >>
-                                 16);
+                            (u8) ((((s32) pp->primColTarget.r << 16) +
+                                   step * ((s32) pp->primCol.r -
+                                           (s32) pp->primColTarget.r)) >>
+                                  16);
                         pp->primCol.g =
-                            (u8)((((s32)pp->primColTarget.g << 16) +
-                                  step * ((s32)pp->primCol.g -
-                                          (s32)pp->primColTarget.g)) >>
-                                 16);
+                            (u8) ((((s32) pp->primColTarget.g << 16) +
+                                   step * ((s32) pp->primCol.g -
+                                           (s32) pp->primColTarget.g)) >>
+                                  16);
                         pp->primCol.b =
-                            (u8)((((s32)pp->primColTarget.b << 16) +
-                                  step * ((s32)pp->primCol.b -
-                                          (s32)pp->primColTarget.b)) >>
-                                 16);
+                            (u8) ((((s32) pp->primColTarget.b << 16) +
+                                   step * ((s32) pp->primCol.b -
+                                           (s32) pp->primColTarget.b)) >>
+                                  16);
                         pp->primCol.a =
-                            (u8)((((s32)pp->primColTarget.a << 16) +
-                                  step * ((s32)pp->primCol.a -
-                                          (s32)pp->primColTarget.a)) >>
-                                 16);
+                            (u8) ((((s32) pp->primColTarget.a << 16) +
+                                   step * ((s32) pp->primCol.a -
+                                           (s32) pp->primColTarget.a)) >>
+                                  16);
                     }
 
                     /* Interpolate envCol */
                     if (pp->envColCount != 0) {
-                        step = ((s32)pp->envColRemain << 16) /
-                               (s32)pp->envColCount;
+                        step = ((s32) pp->envColRemain << 16) /
+                               (s32) pp->envColCount;
                         pp->envCol.r =
-                            (u8)((((s32)pp->envColTarget.r << 16) +
-                                  step * ((s32)pp->envCol.r -
-                                          (s32)pp->envColTarget.r)) >>
-                                 16);
+                            (u8) ((((s32) pp->envColTarget.r << 16) +
+                                   step * ((s32) pp->envCol.r -
+                                           (s32) pp->envColTarget.r)) >>
+                                  16);
                         pp->envCol.g =
-                            (u8)((((s32)pp->envColTarget.g << 16) +
-                                  step * ((s32)pp->envCol.g -
-                                          (s32)pp->envColTarget.g)) >>
-                                 16);
+                            (u8) ((((s32) pp->envColTarget.g << 16) +
+                                   step * ((s32) pp->envCol.g -
+                                           (s32) pp->envColTarget.g)) >>
+                                  16);
                         pp->envCol.b =
-                            (u8)((((s32)pp->envColTarget.b << 16) +
-                                  step * ((s32)pp->envCol.b -
-                                          (s32)pp->envColTarget.b)) >>
-                                 16);
+                            (u8) ((((s32) pp->envColTarget.b << 16) +
+                                   step * ((s32) pp->envCol.b -
+                                           (s32) pp->envColTarget.b)) >>
+                                  16);
                         pp->envCol.a =
-                            (u8)((((s32)pp->envColTarget.a << 16) +
-                                  step * ((s32)pp->envCol.a -
-                                          (s32)pp->envColTarget.a)) >>
-                                 16);
+                            (u8) ((((s32) pp->envColTarget.a << 16) +
+                                   step * ((s32) pp->envCol.a -
+                                           (s32) pp->envColTarget.a)) >>
+                                  16);
                     }
 
                     /* Read timing and flags from bytecode */
@@ -6874,87 +6819,88 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
 
                     /* Compute scale from timing */
                     if (timing != 0) {
-                        scale = (f32)(s32)((f32)(timing + 1) *
-                                HSD_Randf()) / (f32)timing;
+                        scale =
+                            (f32) (s32) ((f32) (timing + 1) * HSD_Randf()) /
+                            (f32) timing;
                     } else {
                         scale = HSD_Randf();
                     }
 
                     /* R channel delta */
                     if (flags & 0x01) {
-                        delta = (s8)*pc++;
-                        delta_float = scale * (f32)(delta * 2);
+                        delta = (s8) *pc++;
+                        delta_float = scale * (f32) (delta * 2);
                         if (flags & 0x10) {
-                            val = delta_float + (f32)pp->primColTarget.r;
+                            val = delta_float + (f32) pp->primColTarget.r;
                             if (val < 0.0F) {
                                 val = 0.0F;
                             }
                             if (val > 255.0F) {
                                 val = 255.0F;
                             }
-                            pp->primColTarget.r = (u8)(s32)val;
+                            pp->primColTarget.r = (u8) (s32) val;
                         }
                         if (flags & 0x20) {
-                            val = delta_float + (f32)pp->envColTarget.r;
+                            val = delta_float + (f32) pp->envColTarget.r;
                             if (val < 0.0F) {
                                 val = 0.0F;
                             }
                             if (val > 255.0F) {
                                 val = 255.0F;
                             }
-                            pp->envColTarget.r = (u8)(s32)val;
+                            pp->envColTarget.r = (u8) (s32) val;
                         }
                     }
 
                     /* G channel delta */
                     if (flags & 0x02) {
-                        delta = (s8)*pc++;
-                        delta_float = scale * (f32)(delta * 2);
+                        delta = (s8) *pc++;
+                        delta_float = scale * (f32) (delta * 2);
                         if (flags & 0x10) {
-                            val = delta_float + (f32)pp->primColTarget.g;
+                            val = delta_float + (f32) pp->primColTarget.g;
                             if (val < 0.0F) {
                                 val = 0.0F;
                             }
                             if (val > 255.0F) {
                                 val = 255.0F;
                             }
-                            pp->primColTarget.g = (u8)(s32)val;
+                            pp->primColTarget.g = (u8) (s32) val;
                         }
                         if (flags & 0x20) {
-                            val = delta_float + (f32)pp->envColTarget.g;
+                            val = delta_float + (f32) pp->envColTarget.g;
                             if (val < 0.0F) {
                                 val = 0.0F;
                             }
                             if (val > 255.0F) {
                                 val = 255.0F;
                             }
-                            pp->envColTarget.g = (u8)(s32)val;
+                            pp->envColTarget.g = (u8) (s32) val;
                         }
                     }
 
                     /* B channel delta */
                     if (flags & 0x04) {
-                        delta = (s8)*pc++;
-                        delta_float = scale * (f32)(delta * 2);
+                        delta = (s8) *pc++;
+                        delta_float = scale * (f32) (delta * 2);
                         if (flags & 0x10) {
-                            val = delta_float + (f32)pp->primColTarget.b;
+                            val = delta_float + (f32) pp->primColTarget.b;
                             if (val < 0.0F) {
                                 val = 0.0F;
                             }
                             if (val > 255.0F) {
                                 val = 255.0F;
                             }
-                            pp->primColTarget.b = (u8)(s32)val;
+                            pp->primColTarget.b = (u8) (s32) val;
                         }
                         if (flags & 0x20) {
-                            val = delta_float + (f32)pp->envColTarget.b;
+                            val = delta_float + (f32) pp->envColTarget.b;
                             if (val < 0.0F) {
                                 val = 0.0F;
                             }
                             if (val > 255.0F) {
                                 val = 255.0F;
                             }
-                            pp->envColTarget.b = (u8)(s32)val;
+                            pp->envColTarget.b = (u8) (s32) val;
                         }
                     }
 
@@ -6962,30 +6908,29 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     if (flags & 0x08) {
                         f32 a_rand;
                         a_rand = HSD_Randf();
-                        delta = (s8)*pc++;
+                        delta = (s8) *pc++;
                         delta_float =
-                            (f32)(s32)((f32)(timing + 1) * a_rand) /
-                            (f32)timing *
-                            (f32)(delta * 2);
+                            (f32) (s32) ((f32) (timing + 1) * a_rand) /
+                            (f32) timing * (f32) (delta * 2);
                         if (flags & 0x10) {
-                            val = delta_float + (f32)pp->primColTarget.a;
+                            val = delta_float + (f32) pp->primColTarget.a;
                             if (val < 0.0F) {
                                 val = 0.0F;
                             }
                             if (val > 255.0F) {
                                 val = 255.0F;
                             }
-                            pp->primColTarget.a = (u8)(s32)val;
+                            pp->primColTarget.a = (u8) (s32) val;
                         }
                         if (flags & 0x20) {
-                            val = delta_float + (f32)pp->envColTarget.a;
+                            val = delta_float + (f32) pp->envColTarget.a;
                             if (val < 0.0F) {
                                 val = 0.0F;
                             }
                             if (val > 255.0F) {
                                 val = 255.0F;
                             }
-                            pp->envColTarget.a = (u8)(s32)val;
+                            pp->envColTarget.a = (u8) (s32) val;
                         }
                     }
 
@@ -7017,10 +6962,10 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                 /* UserData set */
                 {
                     int idx = *pc++;
-                    ((u8*)&fval)[0] = pc[0];
-                    ((u8*)&fval)[1] = pc[1];
-                    ((u8*)&fval)[2] = pc[2];
-                    ((u8*)&fval)[3] = pc[3];
+                    ((u8*) &fval)[0] = pc[0];
+                    ((u8*) &fval)[1] = pc[1];
+                    ((u8*) &fval)[2] = pc[2];
+                    ((u8*) &fval)[3] = pc[3];
                     pc += 4;
                     if (pp->gen->userfunc != NULL &&
                         pp->gen->userfunc->setUserData != NULL)
@@ -7104,10 +7049,10 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
 
             case 0xE8:
                 /* Trail control */
-                ((u8*)&fval)[0] = pc[0];
-                ((u8*)&fval)[1] = pc[1];
-                ((u8*)&fval)[2] = pc[2];
-                ((u8*)&fval)[3] = pc[3];
+                ((u8*) &fval)[0] = pc[0];
+                ((u8*) &fval)[1] = pc[1];
+                ((u8*) &fval)[2] = pc[2];
+                ((u8*) &fval)[3] = pc[3];
                 pc += 4;
                 if (fval < 0.0F) {
                     pp->kind &= ~Trail;
@@ -7125,18 +7070,16 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     u8 flags;
 
                     if (pp->matColCount != 0) {
-                        step = ((s32)pp->matColRemain << 16) /
-                               (s32)pp->matColCount;
-                        pp->matRGB =
-                            (u8)((((s32)pp->matRGBTarget << 16) +
-                                  step * ((s32)pp->matRGB -
-                                          (s32)pp->matRGBTarget)) >>
-                                 16);
-                        pp->matA =
-                            (u8)((((s32)pp->matATarget << 16) +
-                                  step * ((s32)pp->matA -
-                                          (s32)pp->matATarget)) >>
-                                 16);
+                        step = ((s32) pp->matColRemain << 16) /
+                               (s32) pp->matColCount;
+                        pp->matRGB = (u8) ((((s32) pp->matRGBTarget << 16) +
+                                            step * ((s32) pp->matRGB -
+                                                    (s32) pp->matRGBTarget)) >>
+                                           16);
+                        pp->matA = (u8) ((((s32) pp->matATarget << 16) +
+                                          step * ((s32) pp->matA -
+                                                  (s32) pp->matATarget)) >>
+                                         16);
                     }
                     pp->matColCount = *pc++;
                     cnt = pp->matColCount;
@@ -7169,18 +7112,16 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     u8 flags;
 
                     if (pp->ambColCount != 0) {
-                        step = ((s32)pp->ambColRemain << 16) /
-                               (s32)pp->ambColCount;
-                        pp->ambRGB =
-                            (u8)((((s32)pp->ambRGBTarget << 16) +
-                                  step * ((s32)pp->ambRGB -
-                                          (s32)pp->ambRGBTarget)) >>
-                                 16);
-                        pp->ambA =
-                            (u8)((((s32)pp->ambATarget << 16) +
-                                  step * ((s32)pp->ambA -
-                                          (s32)pp->ambATarget)) >>
-                                 16);
+                        step = ((s32) pp->ambColRemain << 16) /
+                               (s32) pp->ambColCount;
+                        pp->ambRGB = (u8) ((((s32) pp->ambRGBTarget << 16) +
+                                            step * ((s32) pp->ambRGB -
+                                                    (s32) pp->ambRGBTarget)) >>
+                                           16);
+                        pp->ambA = (u8) ((((s32) pp->ambATarget << 16) +
+                                          step * ((s32) pp->ambA -
+                                                  (s32) pp->ambATarget)) >>
+                                         16);
                     }
                     pp->ambColCount = *pc++;
                     cnt = pp->ambColCount;
@@ -7213,24 +7154,23 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     int timing;
                     f32 result;
 
-                    ((u8*)&fval)[0] = pc[0];
-                    ((u8*)&fval)[1] = pc[1];
-                    ((u8*)&fval)[2] = pc[2];
-                    ((u8*)&fval)[3] = pc[3];
+                    ((u8*) &fval)[0] = pc[0];
+                    ((u8*) &fval)[1] = pc[1];
+                    ((u8*) &fval)[2] = pc[2];
+                    ((u8*) &fval)[3] = pc[3];
                     base_val = fval;
-                    ((u8*)&fval)[0] = pc[4];
-                    ((u8*)&fval)[1] = pc[5];
-                    ((u8*)&fval)[2] = pc[6];
-                    ((u8*)&fval)[3] = pc[7];
+                    ((u8*) &fval)[0] = pc[4];
+                    ((u8*) &fval)[1] = pc[5];
+                    ((u8*) &fval)[2] = pc[6];
+                    ((u8*) &fval)[3] = pc[7];
                     range_val = fval;
                     timing = pc[8];
                     pc += 9;
 
                     if (timing != 0) {
-                        s32 randi = (s32)((f32)(timing + 1) *
-                                         HSD_Randf());
-                        result = base_val + range_val * (f32)randi /
-                                 (f32)timing;
+                        s32 randi = (s32) ((f32) (timing + 1) * HSD_Randf());
+                        result =
+                            base_val + range_val * (f32) randi / (f32) timing;
                     } else {
                         result = base_val + range_val * HSD_Randf();
                     }
@@ -7242,7 +7182,7 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
             case 0xFA:
                 /* Loop mark */
                 pp->loopCount = *pc++;
-                pp->cmdLoopPtr = (u16)(pc - pp->cmdList);
+                pp->cmdLoopPtr = (u16) (pc - pp->cmdList);
                 break;
 
             case 0xFB:
@@ -7254,7 +7194,7 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
 
             case 0xFC:
                 /* Mark set */
-                pp->cmdMarkPtr = (u16)(pc - pp->cmdList);
+                pp->cmdMarkPtr = (u16) (pc - pp->cmdList);
                 break;
 
             case 0xFD:
@@ -7281,7 +7221,7 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
 
 exit_loop:
     /* Save bytecode state */
-    pp->cmdPtr = (u16)(pc - pp->cmdList);
+    pp->cmdPtr = (u16) (pc - pp->cmdList);
     pp->cmdWait = operand;
 
 do_life:
@@ -7310,11 +7250,8 @@ do_life:
 
             /* Free appsrt */
             if (pp->appsrt != NULL) {
-                if (psRemoveParticleAppSRT(pp) == 0 &&
-                    prev == NULL)
-                {
-                    HSD_Particle* head =
-                        hsd_804D0908[pp->linkNo];
+                if (psRemoveParticleAppSRT(pp) == 0 && prev == NULL) {
+                    HSD_Particle* head = hsd_804D0908[pp->linkNo];
                     if (head != next_pp) {
                         next_pp = head;
                     }
@@ -7417,16 +7354,13 @@ do_life:
             HSD_JObjSetupMatrix(jobj);
 
             jobj = *jobj_slot;
-            HSD_JObjAddTranslationX(jobj,
-                                    pp->pos.x - jobj->mtx[0][3]);
+            HSD_JObjAddTranslationX(jobj, pp->pos.x - jobj->mtx[0][3]);
 
             jobj = *jobj_slot;
-            HSD_JObjAddTranslationY(jobj,
-                                    pp->pos.y - jobj->mtx[1][3]);
+            HSD_JObjAddTranslationY(jobj, pp->pos.y - jobj->mtx[1][3]);
 
             jobj = *jobj_slot;
-            HSD_JObjAddTranslationZ(jobj,
-                                    pp->pos.z - jobj->mtx[2][3]);
+            HSD_JObjAddTranslationZ(jobj, pp->pos.z - jobj->mtx[2][3]);
         }
     }
 
@@ -7963,8 +7897,8 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
 
     /* JObj-based rotation: type & 0x100 and jobj!=NULL and type & 0x400
        and !(kind & 0x3C000) */
-    if ((gen->type & 0x100) && gen->jobj != NULL &&
-        (gen->type & 0x400) && !(gen->kind & 0x30000))
+    if ((gen->type & 0x100) && gen->jobj != NULL && (gen->type & 0x400) &&
+        !(gen->kind & 0x30000))
     {
         PSMTXCopy((void*) ((u8*) gen->jobj + 0x44), jobj_mtx);
 
@@ -8057,8 +7991,8 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
                 elevation = -1.5707964F;
             }
         } else {
-            elevation = atan2f(vel_norm.x,
-                               vel_norm.z * sin_az + vel_norm.y * cos_az);
+            elevation =
+                atan2f(vel_norm.x, vel_norm.z * sin_az + vel_norm.y * cos_az);
         }
         sin_el = sinf(elevation);
         {
@@ -8121,19 +8055,19 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
             f32 min_a = gen->aux.disc.minAngle;
             f32 rnd = HSD_Randf();
             f32 range = gen->aux.disc.maxAngle - min_a;
-            angle_step = range / (f32)(s32) gen->count;
+            angle_step = range / (f32) (s32) gen->count;
             cur_angle = angle_step * rnd + min_a;
         } else if (shape == 6 || shape == 7) {
             f32 min_a = gen->aux.cone.minAngle;
             f32 rnd = HSD_Randf();
             f32 range = gen->aux.cone.maxAngle - min_a;
-            angle_step = range / (f32)(s32) gen->count;
+            angle_step = range / (f32) (s32) gen->count;
             cur_angle = angle_step * rnd + min_a;
         } else {
             f32 rnd = HSD_Randf();
-            cur_angle = (f32)((f64) 6.2831855F * (f64) rnd);
-            angle_step = (f32)((f64) 6.2831855F /
-                               (f64)(f32)(s32) gen->count);
+            cur_angle = (f32) ((f64) 6.2831855F * (f64) rnd);
+            angle_step =
+                (f32) ((f64) 6.2831855F / (f64) (f32) (s32) gen->count);
         }
     }
 
@@ -8145,8 +8079,7 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
         case 3:
         case 4:
         case 6:
-        case 7:
-        {
+        case 7: {
             /* Compute radius */
             if (gen->radius < 0.0F) {
                 sin_az = -gen->radius;
@@ -8177,10 +8110,12 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
                         if (gen->aux.cone.height >= 0.0F) {
                             cone_angle = -gen->angle;
                         } else {
-                            cone_angle = (f32)(M_PI - gen->angle);
+                            cone_angle = (f32) (M_PI - gen->angle);
                         }
                     } else {
-                        cone_angle = (f32)(M_PI - atan2f(gen->aux.cone.height, sin_az)) - gen->angle;
+                        cone_angle = (f32) (M_PI - atan2f(gen->aux.cone.height,
+                                                          sin_az)) -
+                                     gen->angle;
                     }
                 } else {
                     cur_angle = gen->aux.cone.minAngle;
@@ -8197,23 +8132,25 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
                         if (gen->aux.cone.height >= 0.0F) {
                             cone_angle = gen->angle;
                         } else {
-                            cone_angle = (f32)(M_PI + gen->angle);
+                            cone_angle = (f32) (M_PI + gen->angle);
                         }
                     } else {
-                        cone_angle = gen->angle + (f32)(M_PI - atan2f(gen->aux.cone.height, sin_az));
+                        cone_angle = gen->angle +
+                                     (f32) (M_PI - atan2f(gen->aux.cone.height,
+                                                          sin_az));
                     }
                 }
             } else if ((gen->type & 0xF) == 7) {
                 /* Shape 7 */
                 if (gen->angle < 0.0F) {
-                    cone_angle = (f32)(M_PI - gen->angle);
+                    cone_angle = (f32) (M_PI - gen->angle);
                     cur_angle += angle_step;
                 } else {
                     cur_angle = gen->aux.disc.minAngle;
                     {
                         f32 rnd = HSD_Randf();
                         f32 range = gen->aux.disc.maxAngle - cur_angle;
-                        cone_angle = (f32)(M_PI + gen->angle);
+                        cone_angle = (f32) (M_PI + gen->angle);
                         cur_angle = range * rnd + cur_angle;
                     }
                 }
@@ -8282,9 +8219,9 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
             /* Spawn particle */
             hsd_80398F0C(gen->linkNo, gen->bank, gen->kind, gen->texGroup,
                          (s32) gen->cmdList, gen->life, 0, (s32) gen,
-                         emit_pos.x, emit_pos.y, emit_pos.z,
-                         vel_out.x, vel_out.y, vel_out.z,
-                         gen->size, gen->grav, gen->fric);
+                         emit_pos.x, emit_pos.y, emit_pos.z, vel_out.x,
+                         vel_out.y, vel_out.z, gen->size, gen->grav,
+                         gen->fric);
             break;
         }
 
@@ -8304,9 +8241,9 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
 
             hsd_80398F0C(gen->linkNo, gen->bank, gen->kind, gen->texGroup,
                          (s32) gen->cmdList, gen->life, 0, (s32) gen,
-                         emit_pos.x, emit_pos.y, emit_pos.z,
-                         vel_out.x, vel_out.y, vel_out.z,
-                         gen->size, gen->grav, gen->fric);
+                         emit_pos.x, emit_pos.y, emit_pos.z, vel_out.x,
+                         vel_out.y, vel_out.z, gen->size, gen->grav,
+                         gen->fric);
             break;
         }
 
@@ -8321,14 +8258,13 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
                 cur_angle += angle_step;
             } else {
                 f32 rnd = HSD_Randf();
-                cur_angle = (f32)(M_PI * 2.0 * (f64) rnd);
+                cur_angle = (f32) (M_PI * 2.0 * (f64) rnd);
             }
             gen->aux.line.x2 = vel_mag_sq;
             hsd_80398F0C(gen->linkNo, gen->bank, gen->kind | 4, gen->texGroup,
-                         (s32) gen->cmdList, gen->life, 0, (s32) gen,
-                         0.0F, 0.0F, 0.0F,
-                         cur_angle, sin_az, 0.0F,
-                         gen->size, angle1, angle3);
+                         (s32) gen->cmdList, gen->life, 0, (s32) gen, 0.0F,
+                         0.0F, 0.0F, cur_angle, sin_az, 0.0F, gen->size,
+                         angle1, angle3);
             break;
         }
 
@@ -8513,9 +8449,9 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
 
             hsd_80398F0C(gen->linkNo, gen->bank, gen->kind, gen->texGroup,
                          (s32) gen->cmdList, gen->life, 0, (s32) gen,
-                         emit_pos.x, emit_pos.y, emit_pos.z,
-                         vel_out.x, vel_out.y, vel_out.z,
-                         gen->size, gen->grav, gen->fric);
+                         emit_pos.x, emit_pos.y, emit_pos.z, vel_out.x,
+                         vel_out.y, vel_out.z, gen->size, gen->grav,
+                         gen->fric);
             break;
         }
 
@@ -8542,18 +8478,36 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
                     e = 0.5 * e * -(rnd * (e * e) - 3.0);
                     rnd = (f32) (rnd * e);
                 }
-                radius = (f32)(M_PI * rnd);
+                radius = (f32) (M_PI * rnd);
                 {
                     f32 rnd2 = HSD_Randf();
                     if (rnd2 < 0.5F) {
-                        radius = (f32)(M_PI - radius);
+                        radius = (f32) (M_PI - radius);
                     }
                 }
                 goto sphere_common;
             }
-sphere_random:
-            {
-                f32 rnd = HSD_Randf();
+        sphere_random: {
+            f32 rnd = HSD_Randf();
+            if (rnd > 0.0F) {
+                f64 e = __frsqrte(rnd);
+                e = 0.5 * e * -(rnd * (e * e) - 3.0);
+                e = 0.5 * e * -(rnd * (e * e) - 3.0);
+                e = 0.5 * e * -(rnd * (e * e) - 3.0);
+                rnd = (f32) (rnd * e);
+            }
+            radius = gen->aux.cone.height * rnd;
+        }
+        sphere_common: {
+            f32 rnd = HSD_Randf();
+            f32 az_angle;
+            f32 r2 = gen->radius;
+            az_angle = (f32) ((f64) M_PI * 2.0 * (f64) rnd);
+            cone_angle = (f32) ((f64) (2.0 * M_PI) * az_angle);
+
+            if (r2 < 0.0F) {
+                sin_az = -r2;
+            } else {
                 if (rnd > 0.0F) {
                     f64 e = __frsqrte(rnd);
                     e = 0.5 * e * -(rnd * (e * e) - 3.0);
@@ -8561,29 +8515,9 @@ sphere_random:
                     e = 0.5 * e * -(rnd * (e * e) - 3.0);
                     rnd = (f32) (rnd * e);
                 }
-                radius = gen->aux.cone.height * rnd;
+                sin_az = r2 * rnd;
             }
-sphere_common:
-            {
-                f32 rnd = HSD_Randf();
-                f32 az_angle;
-                f32 r2 = gen->radius;
-                az_angle = (f32)((f64) M_PI * 2.0 * (f64) rnd);
-                cone_angle = (f32)((f64)(2.0 * M_PI) * az_angle);
-
-                if (r2 < 0.0F) {
-                    sin_az = -r2;
-                } else {
-                    if (rnd > 0.0F) {
-                        f64 e = __frsqrte(rnd);
-                        e = 0.5 * e * -(rnd * (e * e) - 3.0);
-                        e = 0.5 * e * -(rnd * (e * e) - 3.0);
-                        e = 0.5 * e * -(rnd * (e * e) - 3.0);
-                        rnd = (f32) (rnd * e);
-                    }
-                    sin_az = r2 * rnd;
-                }
-            }
+        }
             {
                 f32 cos_r;
                 f32 sin_r;
@@ -8617,9 +8551,9 @@ sphere_common:
 
             hsd_80398F0C(gen->linkNo, gen->bank, gen->kind, gen->texGroup,
                          (s32) gen->cmdList, gen->life, 0, (s32) gen,
-                         emit_pos.x, emit_pos.y, emit_pos.z,
-                         vel_out.x, vel_out.y, vel_out.z,
-                         gen->size, gen->grav, gen->fric);
+                         emit_pos.x, emit_pos.y, emit_pos.z, vel_out.x,
+                         vel_out.y, vel_out.z, gen->size, gen->grav,
+                         gen->fric);
             break;
         }
 
@@ -8739,7 +8673,7 @@ HSD_Generator* hsd_8039F05C(s8 linkNo, s32 bank, s32 idx)
 
     cmdListArr = psCmdListArray[bank];
     ofs = idx * 4;
-    if ((u32) *((s32*) cmdListArr + idx) == 0) {
+    if ((u32) * ((s32*) cmdListArr + idx) == 0) {
         return NULL;
     }
 
@@ -8773,7 +8707,6 @@ HSD_Generator* hsd_8039F05C(s8 linkNo, s32 bank, s32 idx)
             if (f1 < 0.0F) {
                 f3 = 1.0F;
                 if ((1.0F + f1) > 1.1920929e-7F) {
-
                 } else {
                     f3 = 0.0F;
                 }
@@ -8813,12 +8746,9 @@ HSD_Generator* hsd_8039F05C(s8 linkNo, s32 bank, s32 idx)
             break;
         }
         case 1:
-            gen->aux.line.x2 =
-                ((HSD_PSCmdList**) cmdListArr)[idx]->param1;
-            gen->aux.line.y2 =
-                ((HSD_PSCmdList**) cmdListArr)[idx]->param2;
-            gen->aux.line.z2 =
-                ((HSD_PSCmdList**) cmdListArr)[idx]->param3;
+            gen->aux.line.x2 = ((HSD_PSCmdList**) cmdListArr)[idx]->param1;
+            gen->aux.line.y2 = ((HSD_PSCmdList**) cmdListArr)[idx]->param2;
+            gen->aux.line.z2 = ((HSD_PSCmdList**) cmdListArr)[idx]->param3;
             break;
         case 6:
         case 7: {
@@ -8832,8 +8762,7 @@ HSD_Generator* hsd_8039F05C(s8 linkNo, s32 bank, s32 idx)
                 gen->aux.cone.maxAngle =
                     ((HSD_PSCmdList**) cmdListArr)[idx]->param2;
             }
-            gen->aux.cone.height =
-                ((HSD_PSCmdList**) cmdListArr)[idx]->param3;
+            gen->aux.cone.height = ((HSD_PSCmdList**) cmdListArr)[idx]->param3;
             break;
         }
         case 5: {
@@ -8910,8 +8839,7 @@ HSD_Generator* hsd_8039F05C(s8 linkNo, s32 bank, s32 idx)
                     gen->aux.sphere.lonMid = -1.5707964F;
                 }
             } else {
-                gen->aux.sphere.lonMid =
-                    atan2f(gen->vel.z, gen->vel.x);
+                gen->aux.sphere.lonMid = atan2f(gen->vel.z, gen->vel.x);
             }
             gen->aux.sphere.latRange =
                 ((HSD_PSCmdList**) cmdListArr)[idx]->param1;
