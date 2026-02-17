@@ -39,7 +39,17 @@ bool it_802B5518(Item_GObj* gobj, CollData* cd)
 
 /// #it_2725_Logic108_Destroyed
 
-/// #it_802B5974
+void it_802B5974(Item_GObj* gobj)
+{
+    Item* ip;
+
+    if (gobj != NULL) {
+        ip = GET_ITEM(gobj);
+        efLib_DestroyAll((HSD_GObj*) gobj);
+        ip->xDD4_itemVar.samuschargeshot.x28 = 0;
+        Item_8026A8EC(gobj);
+    }
+}
 
 /// #it_2725_Logic108_PickedUp
 
