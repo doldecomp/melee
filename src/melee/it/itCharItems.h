@@ -523,6 +523,8 @@ typedef struct itSamusChargeshot_ItemVars {
     /* +0 +DD4 */ s32 x0;
     /* +4 +DD8 */ f32 x4;
     /* +8 +DDC */ f32 x8;
+    /* +C */ char pad_8[0xDFC - 0xDE0];
+    /* +28 +DFC */ s32 x28;
 } itSamusChargeshot_ItemVars;
 
 typedef struct itSamusGrapple_ItemVars {

@@ -6,6 +6,9 @@
 #include "it/types.h"
 
 #include "lb/forward.h"
+
+#include "lb/lb_00F9.h"
+
 #include <baselib/forward.h>
 
 #include <baselib/dobj.h>
@@ -300,7 +303,12 @@ void grMaterial_801C94D8(void* obj)
     }
 }
 
-/// #grMaterial_801C95C4
+void grMaterial_801C95C4(HSD_GObj* gobj)
+{
+    Ground* gp = gobj->user_data;
+    lb_80014498((ColorOverlay*) ((u8*) gp + 0x40));
+    gp->x10_flags.b4 = 1;
+}
 
 /// #grMaterial_801C9604
 
