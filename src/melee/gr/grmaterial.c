@@ -6,6 +6,9 @@
 #include "it/types.h"
 
 #include "lb/forward.h"
+
+#include "lb/lb_00F9.h"
+
 #include <baselib/forward.h>
 
 #include <baselib/dobj.h>
