@@ -18,6 +18,7 @@
 #include "lb/lb_00F9.h"
 #include "lb/lbarchive.h"
 #include "lb/lbaudio_ax.h"
+#include "mn/inlines.h"
 #include "mn/mndiagram2.h"
 #include "mn/mndiagram3.h"
 #include "mn/mnmain.h"
@@ -79,7 +80,7 @@ static u8 mnDiagram_803EE74C[0x1C] = {
     0x18, 0x13, 0x14, 0x17, 0x16, 0,   0,   0,
 };
 
-static Vec3 mnDiagram_803EE728[3] = {
+static Point3d mnDiagram_803EE728[3] = {
     { 4.0F, 1.0F, 0.0F },
     { -3.0F, 0.8F, 0.0F },
     { -1.0F, 0.7F, 0.0F },
@@ -745,6 +746,7 @@ void mnDiagram_8023FC28(void)
 
 /// @brief Counts the number of unlocked fighters.
 /// @return Number of unlocked fighters.
+#pragma dont_inline on
 int mnDiagram_CountUnlockedFighters(void)
 {
     int i;
@@ -758,16 +760,19 @@ int mnDiagram_CountUnlockedFighters(void)
     }
     return count;
 }
+#pragma dont_inline reset
 
 void mnDiagram_PopupInputProc(HSD_GObj* gobj)
 {
+    HSD_GObjProc* proc;
     Diagram* data = mnDiagram_804D6C10->user_data;
-    u32 input = mn_80229624(4);
-    if (input & 0x20) {
+    u64 input = Menu_GetAllInputs();
+    if ((u32) input & 0x20) {
         lbAudioAx_80024030(0);
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
-        HSD_GObjProc_8038FD54(gobj, (void (*)(HSD_GObj*)) mnDiagram_InputProc,
-                              0);
+        proc = HSD_GObjProc_8038FD54(
+            gobj, (void (*)(HSD_GObj*)) mnDiagram_InputProc, 0);
+        proc->flags_3 = HSD_GObj_804D783C;
         HSD_GObjPLink_80390228(data->popup_gobj);
         data->popup_gobj = NULL;
     }
@@ -775,14 +780,16 @@ void mnDiagram_PopupInputProc(HSD_GObj* gobj)
 
 void mnDiagram_InputProc(HSD_GObj* gobj)
 {
+    HSD_GObjProc* proc;
     Diagram* data = mnDiagram_804D6C10->user_data;
-    u32 input = mn_80229624(4);
+    u64 input = Menu_GetAllInputs();
 
-    if (input & 0x10) {
+    if ((u32) input & 0x10) {
         lbAudioAx_80024030(1);
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
-        HSD_GObjProc_8038FD54(
+        proc = HSD_GObjProc_8038FD54(
             gobj, (void (*)(HSD_GObj*)) mnDiagram_PopupInputProc, 0);
+        proc->flags_3 = HSD_GObj_804D783C;
         if (data->is_name_mode != 0) {
             u8 col_idx = (u8) data->name_cursor_pos;
             u8 row_idx = data->name_cursor_pos >> 8;
@@ -887,59 +894,75 @@ void mnDiagram_PopupCleanup(void* arg0)
 
 typedef struct mnDiagram_PopupData {
     /* 0x00 */ HSD_JObj* jobjs[14];
-    /* 0x38 */ HSD_Text* text[6];
+    /* 0x38 */ HSD_Text* text[5];
 } mnDiagram_PopupData;
 
 void mnDiagram_PopupAnimProc(void* arg0)
 {
     mnDiagram_PopupData* data = ((HSD_GObj*) arg0)->user_data;
-    Vec3 pos;
+    HSD_Text* text;
+    char* base = (char*) mnDiagram_803EE728;
+    Point3d pos;
+    f32 anim_frame;
+    PAD_STACK(24);
 
     HSD_JObjAnimAll(data->jobjs[5]);
-    lb_8000B1CC(data->jobjs[8], mnDiagram_803EE728, &pos);
-    data->text[0]->pos_x = pos.x;
-    data->text[0]->pos_y = -pos.y;
-    data->text[0]->pos_z = pos.z;
+
+    text = data->text[0];
+    lb_8000B1CC(data->jobjs[8], (Point3d*) base, &pos);
+    text->pos_x = pos.x;
+    text->pos_y = -pos.y;
+    text->pos_z = pos.z;
+    text->default_alignment = 0;
 
     HSD_JObjAnim(data->jobjs[9]);
     if (data->text[1] != NULL) {
-        lb_8000B1CC(data->jobjs[11], &mnDiagram_803EE728[1], &pos);
+        lb_8000B1CC(data->jobjs[11], (Point3d*) (base + 0xC), &pos);
         data->text[1]->pos_x = pos.x;
         data->text[1]->pos_y = -pos.y;
         data->text[1]->pos_z = pos.z;
+        text->default_alignment = 1;
     }
     if (data->text[2] != NULL) {
-        lb_8000B1CC(data->jobjs[10], &mnDiagram_803EE728[2], &pos);
+        lb_8000B1CC(data->jobjs[10], (Point3d*) (base + 0x18), &pos);
         data->text[2]->pos_x = pos.x;
         data->text[2]->pos_y = -pos.y;
         data->text[2]->pos_z = pos.z;
+        text->default_alignment = 1;
     }
 
     HSD_JObjAnim(data->jobjs[1]);
-    lb_8000B1CC(data->jobjs[3], &mnDiagram_803EE728[1], &pos);
+    lb_8000B1CC(data->jobjs[3], (Point3d*) (base + 0xC), &pos);
     data->text[3]->pos_x = pos.x;
     data->text[3]->pos_y = -pos.y;
     data->text[3]->pos_z = pos.z;
+    text->default_alignment = 1;
 
     if (data->text[4] != NULL) {
-        lb_8000B1CC(data->jobjs[2], &mnDiagram_803EE728[2], &pos);
+        lb_8000B1CC(data->jobjs[2], (Point3d*) (base + 0x18), &pos);
         data->text[4]->pos_x = pos.x;
         data->text[4]->pos_y = -pos.y;
         data->text[4]->pos_z = pos.z;
+        text->default_alignment = 1;
     }
 
-    mn_8022EFD8(data->jobjs[12],
-                (AnimLoopSettings*) (mnDiagram_803EE728 + 0x64));
-    lb_8000B1CC(data->jobjs[13], &mnDiagram_803EE728[1], &pos);
+    anim_frame =
+        mn_8022EFD8(data->jobjs[12], (AnimLoopSettings*) (base + 0x64));
+    lb_8000B1CC(data->jobjs[13], (Point3d*) (base + 0xC), &pos);
     data->text[3]->pos_x = pos.x;
     data->text[3]->pos_y = -pos.y;
     data->text[3]->pos_z = pos.z;
+    text->default_alignment = 1;
+
+    if (anim_frame == *(f32*) (base + 0x68)) {
+        HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
+    }
 }
 
 void mnDiagram_80240D94(void* arg0, s32 arg1, s32 arg2, s32 arg3)
 {
     mnDiagram_PopupData* data = ((HSD_GObj*) arg0)->user_data;
-    Vec3 pos;
+    Point3d pos;
     char buf[8];
     u16 kos;
     u16 sd_count;
@@ -1388,7 +1411,6 @@ void mnDiagram_OnFrame(HSD_GObj* gobj)
     u8 col_idx;
     s32 row_idx;
     int count;
-    PAD_STACK(0x28);
 
     if ((mn_804A04F0.cur_menu != 0x1E) || (mn_804A04F0.x10 != 0)) {
         if (mn_804A04F0.cur_menu == 0x1E) {
@@ -1451,11 +1473,11 @@ void mnDiagram_OnFrame(HSD_GObj* gobj)
     mnDiagram_802417D0(gobj);
 }
 
-void mnDiagram_80241E78(void* arg0, u8 arg1, u8 arg2, s32 arg3)
+void mnDiagram_80241E78(void* arg0, u8 arg1, u8 arg2, int arg3)
 {
-    Diagram* data;
     HSD_JObj* jobj;
     HSD_JObj* jobj2;
+    Diagram* data;
     void** joint_data;
     s32 digit_count;
     s32 digit;
@@ -1471,24 +1493,25 @@ void mnDiagram_80241E78(void* arg0, u8 arg1, u8 arg2, s32 arg3)
     u8 row = arg2;
 
     data = ((HSD_GObj*) arg0)->user_data;
+
     jobj = data->jobjs[11];
-    jobj2 = data->jobjs[12];
     base = HSD_JObjGetTranslationX(jobj);
+    jobj2 = data->jobjs[12];
     x_spacing = HSD_JObjGetTranslationX(jobj2) - base;
 
     jobj = data->jobjs[7];
-    jobj2 = data->jobjs[8];
     base = HSD_JObjGetTranslationX(jobj);
+    jobj2 = data->jobjs[8];
     y_spacing = HSD_JObjGetTranslationX(jobj2) - base;
 
     jobj = data->jobjs[9];
-    jobj2 = data->jobjs[10];
     base = HSD_JObjGetTranslationY(jobj);
+    jobj2 = data->jobjs[10];
     y_offset = HSD_JObjGetTranslationY(jobj2) - base;
 
     digit_count = mn_GetDigitCount(arg3);
-    row_offset = y_offset * (f32) row;
     col_offset = y_spacing * (f32) col;
+    row_offset = y_offset * (f32) row;
     row_offset_adj = row_offset - 1.0f;
 
     joint_data = mnDiagram_804A07F4;

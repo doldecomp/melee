@@ -475,6 +475,24 @@ struct Diagram2 {
     /* 0xC4 */ HSD_Text* header_text;    ///< entity name header
 };
 
+/// User data for VS Records page 3 (stat rankings screen)
+/// Total size: 0x78 bytes
+struct Diagram3 {
+    /* 0x00 */ u8 saved_menu;
+    /* 0x01 */ u8 saved_selection;
+    /* 0x02 */ u8 pad_2[2];
+    /* 0x04 */ u8 scroll_offset;
+    /* 0x05 */ u8 anim_state;
+    /* 0x06 */ u8 is_name_mode;
+    /* 0x07 */ u8 pad_7;
+    /* 0x08 */ HSD_JObj* jobjs[10];
+    /* 0x30 */ HSD_Text* row_labels[10];
+    /* 0x58 */ HSD_Text* title_text;
+    /* 0x5C */ HSD_Text* value_text;
+    /* 0x60 */ HSD_Text* row_icons[5];
+    /* 0x74 */ HSD_GObj* popup_gobj;
+};
+
 /// VS Records stat types for mnDiagram2 (page 2 of VS Records menu).
 /// Fighter mode shows stats 0x00-0x14 (21 types).
 /// Name mode shows stats 0x00-0x17 (24 types, including character icon stats).
