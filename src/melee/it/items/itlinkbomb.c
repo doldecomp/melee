@@ -31,9 +31,9 @@ ItemStateTable it_803F6888[] = {
       itLinkbomb_UnkMotion6_Coll },
 };
 
-// @todo This uses the de-duplicated function ftCo_800C6AFC
-// which is likely an inline from a header file.
-// Come back to this once lbcoll is matched.
+/// @todo This uses the de-duplicated function ftCo_800C6AFC
+/// which is likely an inline from a header file.
+/// Come back to this once lbcoll is matched.
 
 static inline void fake_HSD_JObjAddTranslationY(HSD_JObj* jobj, float y)
 {
@@ -431,10 +431,10 @@ static inline void itLinkbomb_UnkMotion1_Anim_fake(HSD_GObj* gobj)
     itLinkbomb_UnkMotion1_Anim_fake_2(gobj);
 }
 
-// This should have a non-inlined it_8029DB5C, presumably expanded from
-// itLinkbomb_UnkMotion1_Anim, but I can't figure out how to get a match for
-// itLinkbomb_UnkMotion1_Anim that calls it_8029DB5C. Not sure if that's
-// related to the unused item/specialattributes.
+/// This should have a non-inlined it_8029DB5C, presumably expanded from
+/// itLinkbomb_UnkMotion1_Anim, but I can't figure out how to get a match for
+/// itLinkbomb_UnkMotion1_Anim that calls it_8029DB5C. Not sure if that's
+/// related to the unused item/specialattributes.
 bool itLinkbomb_UnkMotion3_Anim(HSD_GObj* gobj)
 {
     Item* item;
@@ -509,8 +509,8 @@ void it_8029F18C(HSD_GObj* gobj)
     it_8029D9A4(gobj, 4, 0);
 }
 
-// This regswap may or may not be related to the fake inline for it_8029DB5C,
-// but every other function matches with it.
+/// This regswap may or may not be related to the fake inline for it_8029DB5C,
+/// but every other function matches with it.
 bool itLinkbomb_UnkMotion4_Anim(HSD_GObj* gobj)
 {
     Article* article;
@@ -636,7 +636,7 @@ bool it_8029F960(Item_GObj* gobj)
     return 0;
 }
 
-bool it_2725_Logic16_DmgReceived(Item_GObj* gobj)
+bool itLinkBomb_Logic16_DmgReceived(Item_GObj* gobj)
 {
     Item* item;
     f32 temp_f1;
@@ -665,7 +665,7 @@ bool it_2725_Logic16_DmgReceived(Item_GObj* gobj)
     return 0;
 }
 
-void it_2725_Logic16_EnteredAir(Item_GObj* gobj)
+void itLinkBomb_Logic16_EnteredAir(Item_GObj* gobj)
 {
     Item_80268E5C(gobj, 6, ITEM_ANIM_UPDATE);
 }
@@ -707,18 +707,18 @@ bool itLinkbomb_UnkMotion6_Coll(Item_GObj* gobj)
     return 0;
 }
 
-bool it_2725_Logic16_Reflected(Item_GObj* gobj)
+bool itLinkBomb_Logic16_Reflected(Item_GObj* gobj)
 {
     return it_80273030(gobj);
 }
 
-bool it_2725_Logic16_HitShield(Item_GObj* gobj)
+bool itLinkBomb_Logic16_HitShield(Item_GObj* gobj)
 {
     itColl_BounceOffVictim(gobj);
     return 0;
 }
 
-bool it_2725_Logic16_ShieldBounced(Item_GObj* gobj)
+bool itLinkBomb_Logic16_ShieldBounced(Item_GObj* gobj)
 {
     return itColl_BounceOffShield(gobj);
 }

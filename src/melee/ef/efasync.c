@@ -158,7 +158,7 @@
 /* 4D64F0 */ extern s32 efLib_804D64F0;
 /* 4D8208 */ static f64 efAsync_804D8208 = 2 * M_PI;
 
-// Effect* efAsync_80063930(s32 gfx_id, HSD_GObj* arg_gobj, va_list arg2) {
+/// Effect* efAsync_80063930(s32 gfx_id, HSD_GObj* arg_gobj, va_list arg2) {
 #if 1
 void* efAsync_80063930(s32 gfx_id, HSD_GObj* arg_gobj, void* vlist)
 {
@@ -1324,40 +1324,34 @@ void efAsync_8006730C(HSD_Archive* archive, u8* data, u32 length, int index)
     }
 }
 
-void efAsync_8006737C(s8 arg_index)
+void efAsync_8006737C(int arg_index)
 {
     struct _struct_efAsync_803C025C_0xC* spC;
     struct _struct_efAsync_803C025C_0xC* temp_r31;
-    int index;
+    temp_r31 = &efAsync_803C025C[arg_index];
 
-    index = arg_index;
-    temp_r31 = &efAsync_803C025C[index];
-    if (index >= 50) {
+    if (arg_index >= 50 || arg_index < 0) {
         return;
     }
-    if (index >= 0) {
-        if (temp_r31->ef_DAT_file == NULL) {
-            return;
-        }
-        if (temp_r31->unk8) {
-            return;
-        }
-        {
-            bool chk = lbArchive_80017040(NULL, temp_r31->ef_DAT_file, &spC,
-                                          temp_r31->effDataTable_name, 0);
-            char* DAT_filename = spC->ef_DAT_file;
-            char* effDateTable_name = spC->effDataTable_name;
-            if ((u32) DAT_filename | (u32) effDateTable_name) {
-                if (chk) {
-                    psInitDataBankLoad(index, (void*) DAT_filename,
-                                       (void*) effDateTable_name, NULL, NULL);
-                } else {
-                    psInitDataBank(index, (void*) DAT_filename,
-                                   (void*) effDateTable_name, NULL, NULL);
-                }
+    if (temp_r31->ef_DAT_file == NULL) {
+        return;
+    }
+    if (temp_r31->unk8) {
+        return;
+    }
+    {
+        bool chk = lbArchive_80017040(NULL, temp_r31->ef_DAT_file, &spC,
+                                      temp_r31->effDataTable_name, 0);
+        if ((u32) spC->ef_DAT_file | (u32) spC->effDataTable_name) {
+            if (chk) {
+                psInitDataBankLoad(arg_index, (void*) spC->ef_DAT_file,
+                                   (void*) spC->effDataTable_name, NULL, NULL);
+            } else {
+                psInitDataBank(arg_index, (void*) spC->ef_DAT_file,
+                               (void*) spC->effDataTable_name, NULL, NULL);
             }
-            temp_r31->unk8 = (void*) ((u8*) spC + 8);
         }
+        temp_r31->unk8 = (void*) ((u8*) spC + 8);
     }
 }
 
@@ -1419,7 +1413,7 @@ void efAsync_8006744C(HSD_GObj* gobj, ef_UnkStruct3* arg1)
 }
 
 void efAsync_80067624(HSD_GObj* gobj, void* arg_struct)
-// void efAsync_80067624(HSD_GObj* gobj, ef_UnkStruct3* arg_struct)
+/// void efAsync_80067624(HSD_GObj* gobj, ef_UnkStruct3* arg_struct)
 {
     ef_UnkStruct3* temp_r31;
     ef_UnkStruct3* var_r4;
@@ -1434,7 +1428,7 @@ void efAsync_80067624(HSD_GObj* gobj, void* arg_struct)
 }
 
 void efAsync_80067688(void* arg_struct)
-// void efAsync_80067688(ef_UnkStruct3* arg_struct)
+/// void efAsync_80067688(ef_UnkStruct3* arg_struct)
 {
     ef_UnkStruct3* temp_r30;
     ef_UnkStruct3* var_r4;

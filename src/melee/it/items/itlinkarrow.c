@@ -23,7 +23,7 @@
 
 #include <math.h>
 
-// @todo: Remove these once lbcoll is matched.
+/// @todo Remove these once lbcoll is matched.
 static inline void fake_HSD_JObjSetRotation(HSD_JObj* jobj, Quaternion* rotate)
 {
     HSD_ASSERT(618, jobj);
@@ -269,8 +269,7 @@ inline HSD_JObj* it_802A850C_inline(HSD_Joint* joint)
     HSD_JObj* var_r30;
     if (joint != NULL) {
         var_r30 = HSD_JObjLoadJoint(joint);
-    } else {
-        // @todo: This should just return uninitialized, but the
+    } else { ///< @todo This should just return uninitialized, but the
         // formatter doesn't like it.
         return NULL;
     }
@@ -365,7 +364,7 @@ void it_802A850C(Item_GObj* gobj, Vec3* arg1, Vec3* arg2, f32 arg3, f32 arg4,
     }
 }
 
-void it_2725_Logic98_Destroyed(Item_GObj* gobj)
+void itLinkArrow_Logic98_Destroyed(Item_GObj* gobj)
 {
     Item* item;
     enum ItemKind temp_r0;
@@ -407,12 +406,12 @@ void it_802A8A7C(Item_GObj* gobj)
     }
 }
 
-void it_2725_Logic98_PickedUp(Item_GObj* gobj)
+void itLinkArrow_Logic98_PickedUp(Item_GObj* gobj)
 {
     Item_80268E5C((HSD_GObj*) gobj, 0, ITEM_ANIM_UPDATE);
 }
 
-// Item could be passed to influence stack
+/// Item could be passed to influence stack
 static void inline itLinkarrow_UnkMotion1_Anim_inline_s_2(HSD_GObj* gobj,
                                                           Item* item)
 {
@@ -677,8 +676,7 @@ void it_802A9458(HSD_GObj* gobj)
     Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
     HSD_JObjSetRotationZ(jobj, item->xDD4_itemVar.linkarrow.x94);
     it_802A8330(gobj);
-    switch (item->kind) {
-    // @todo: replace with enum names
+    switch (item->kind) { ///< @todo replace with enum names
     case It_Kind_Link_Arrow:
     case It_Kind_Kirby_LinkArrow:
         Item_8026AE84(item, 0x27152, 0x7F, 0x40);
@@ -817,7 +815,7 @@ bool itLinkarrow_UnkMotion4_Coll(HSD_GObj* gobj)
     return 1;
 }
 
-bool it_2725_Logic98_DmgDealt(Item_GObj* gobj)
+bool itLinkArrow_Logic98_DmgDealt(Item_GObj* gobj)
 {
     Item* item;
     itLinkArrowAttributes* attr;
@@ -828,14 +826,14 @@ bool it_2725_Logic98_DmgDealt(Item_GObj* gobj)
     return 1;
 }
 
-bool it_2725_Logic98_Clanked(Item_GObj* gobj)
+bool itLinkArrow_Logic98_Clanked(Item_GObj* gobj)
 {
     f32 pad;
     it_802A8330(gobj);
     return 1;
 }
 
-bool it_2725_Logic98_HitShield(Item_GObj* gobj)
+bool itLinkArrow_Logic98_HitShield(Item_GObj* gobj)
 {
     f32 sp28;
     f32 sp24;
@@ -868,7 +866,7 @@ bool it_2725_Logic98_HitShield(Item_GObj* gobj)
             item->x40_vel.y = 0.0f;
             item->x40_vel.x = 0.0f;
             Item_80268E5C((HSD_GObj*) gobj, 2, ITEM_ANIM_UPDATE);
-            it_2725_Logic98_Clanked(gobj);
+            itLinkArrow_Logic98_Clanked(gobj);
             item->xDD4_itemVar.linkarrow.xC4 = item->xCF4_fighterGObjUnk;
             temp_f31 = ftLib_800869D4(item->xDD4_itemVar.linkarrow.xC4);
             item->xDD4_itemVar.linkarrow.xD4 =
@@ -893,7 +891,7 @@ bool it_2725_Logic98_HitShield(Item_GObj* gobj)
     return 1;
 }
 
-bool it_2725_Logic98_Reflected(Item_GObj* gobj)
+bool itLinkArrow_Logic98_Reflected(Item_GObj* gobj)
 {
     Item* item;
     HSD_JObj* jobj;
@@ -927,7 +925,7 @@ bool it_2725_Logic98_Reflected(Item_GObj* gobj)
     return 0;
 }
 
-void it_2725_Logic98_EvtUnk(Item_GObj* gobj, Item_GObj* arg1)
+void itLinkArrow_Logic98_EvtUnk(Item_GObj* gobj, Item_GObj* arg1)
 {
     it_8026B894(gobj, (HSD_GObj*) arg1);
 }

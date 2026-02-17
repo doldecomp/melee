@@ -64,7 +64,7 @@ ItemStateTable it_803F5468[] = {
     },
 };
 
-void it_3F14_Logic0_Spawned(Item_GObj* item_gobj)
+void itCapsule_Logic0_Spawned(Item_GObj* item_gobj)
 {
     Item* it = GET_ITEM(item_gobj);
     it->xDD4_itemVar.capsule.x0 = 0;
@@ -161,7 +161,7 @@ bool itCapsule_UnkMotion4_Coll(Item_GObj* gobj)
     return 0;
 }
 
-void it_3F14_Logic0_PickedUp(Item_GObj* gobj)
+void itCapsule_Logic0_PickedUp(Item_GObj* gobj)
 {
     Item_80268E5C(gobj, 2, 2);
 }
@@ -173,12 +173,12 @@ bool itCapsule_UnkMotion2_Anim(Item_GObj* gobj)
 
 void itCapsule_UnkMotion2_Phys(Item_GObj* gobj) {}
 
-void it_3F14_Logic0_Dropped(Item_GObj* gobj)
+void itCapsule_Logic0_Dropped(Item_GObj* gobj)
 {
     Item_80268E5C(gobj, 4, 6);
 }
 
-void it_3F14_Logic0_Thrown(Item_GObj* gobj)
+void itCapsule_Logic0_Thrown(Item_GObj* gobj)
 {
     Item_80268E5C(gobj, 3, 6);
 }
@@ -216,8 +216,8 @@ bool itCapsule_UnkMotion5_Coll(Item_GObj* gobj)
     return false;
 }
 
-// Incorrect stack offsets for inlined it_8027CF30
-bool it_3F14_Logic0_DmgDealt(HSD_GObj* item_gobj)
+/// Incorrect stack offsets for inlined it_8027CF30
+bool itCapsule_Logic0_DmgDealt(HSD_GObj* item_gobj)
 {
     Item* it = GET_ITEM(item_gobj);
 
@@ -227,7 +227,7 @@ bool it_3F14_Logic0_DmgDealt(HSD_GObj* item_gobj)
     return it->xDD4_itemVar.capsule.x0;
 }
 
-static bool it_3F14_Logic0_DmgDealt_autoinlined(Item_GObj* item_gobj)
+static bool itCapsule_Logic0_DmgDealt_autoinlined(Item_GObj* item_gobj)
 {
     Item* it = GET_ITEM(item_gobj);
     if (it->msid != 5) {
@@ -236,12 +236,12 @@ static bool it_3F14_Logic0_DmgDealt_autoinlined(Item_GObj* item_gobj)
     return it->xDD4_itemVar.capsule.x0;
 }
 
-bool it_3F14_Logic0_DmgReceived(Item_GObj* item_gobj)
+bool itCapsule_Logic0_DmgReceived(Item_GObj* item_gobj)
 {
-    return it_3F14_Logic0_DmgDealt_autoinlined(item_gobj);
+    return itCapsule_Logic0_DmgDealt_autoinlined(item_gobj);
 }
 
-void it_3F14_Logic0_EnteredAir(Item_GObj* item_gobj)
+void itCapsule_Logic0_EnteredAir(Item_GObj* item_gobj)
 {
     Item_80268E5C(item_gobj, 6, ITEM_ANIM_UPDATE);
 }
@@ -259,17 +259,17 @@ bool itCapsule_UnkMotion6_Coll(Item_GObj* item_gobj)
     return false;
 }
 
-bool it_3F14_Logic0_Clanked(Item_GObj* item_gobj)
+bool itCapsule_Logic0_Clanked(Item_GObj* item_gobj)
 {
-    return it_3F14_Logic0_DmgDealt_autoinlined(item_gobj);
+    return itCapsule_Logic0_DmgDealt_autoinlined(item_gobj);
 }
 
-bool it_3F14_Logic0_Reflected(Item_GObj* item_gobj)
+bool itCapsule_Logic0_Reflected(Item_GObj* item_gobj)
 {
-    return it_3F14_Logic0_DmgDealt_autoinlined(item_gobj);
+    return itCapsule_Logic0_DmgDealt_autoinlined(item_gobj);
 }
 
-bool it_3F14_Logic0_HitShield(Item_GObj* item_gobj)
+bool itCapsule_Logic0_HitShield(Item_GObj* item_gobj)
 {
     Item* it = GET_ITEM(item_gobj);
     if (it->msid == 3) {
@@ -279,7 +279,7 @@ bool it_3F14_Logic0_HitShield(Item_GObj* item_gobj)
     return false;
 }
 
-bool it_3F14_Logic0_ShieldBounced(Item_GObj* item_gobj)
+bool itCapsule_Logic0_ShieldBounced(Item_GObj* item_gobj)
 {
     Item* it = GET_ITEM(item_gobj);
     if (it->msid == 3 || it->msid == 4) {
@@ -288,7 +288,7 @@ bool it_3F14_Logic0_ShieldBounced(Item_GObj* item_gobj)
     return false;
 }
 
-void it_3F14_Logic0_EvtUnk(Item_GObj* item_gobj, HSD_GObj* ref)
+void itCapsule_Logic0_EvtUnk(Item_GObj* item_gobj, HSD_GObj* ref)
 {
     it_8026B894(item_gobj, ref);
 }

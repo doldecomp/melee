@@ -12,12 +12,12 @@
 
 /// #it_8029B0C8
 
-void it_3F14_Logic42_Destroyed(Item_GObj* gobj)
+void itEvYoshiEgg_Logic42_Destroyed(Item_GObj* gobj)
 {
     gm_801BEB68(1);
 }
 
-void it_3F14_Logic42_Spawned(Item_GObj* gobj)
+void itEvYoshiEgg_Logic42_Spawned(Item_GObj* gobj)
 {
     Item* it = GET_ITEM((HSD_GObj*) gobj);
     // This should be EvYoshiEgg
@@ -70,7 +70,7 @@ bool itEvyoshiegg_UnkMotion1_Coll(Item_GObj* gobj)
     return false;
 }
 
-void it_3F14_Logic42_PickedUp(Item_GObj* gobj)
+void itEvYoshiEgg_Logic42_PickedUp(Item_GObj* gobj)
 {
     Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
 }
@@ -82,12 +82,12 @@ bool itEvyoshiegg_UnkMotion2_Anim(Item_GObj* gobj)
 
 void itEvyoshiegg_UnkMotion2_Phys(Item_GObj* gobj) {}
 
-void it_3F14_Logic42_Dropped(Item_GObj* gobj)
+void itEvYoshiEgg_Logic42_Dropped(Item_GObj* gobj)
 {
-    it_3F14_Logic42_Thrown(gobj);
+    itEvYoshiEgg_Logic42_Thrown(gobj);
 }
 
-void it_3F14_Logic42_Thrown(Item_GObj* gobj)
+void itEvYoshiEgg_Logic42_Thrown(Item_GObj* gobj)
 {
     Item_80268E5C(gobj, 3, 6);
 }
@@ -117,17 +117,38 @@ bool itEvyoshiegg_UnkMotion5_Coll(Item_GObj* gobj)
     return false;
 }
 
-/// #it_3F14_Logic42_DmgDealt
+static inline bool itEvyoshiegg_BounceOff(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->x40_vel.x = 0.0f;
+    ip->x40_vel.y = 1.5f;
+    Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
+    return false;
+}
 
-/// #it_3F14_Logic42_Clanked
+bool it_3F14_Logic42_DmgDealt(Item_GObj* gobj)
+{
+    return itEvyoshiegg_BounceOff(gobj);
+}
 
-/// #it_3F14_Logic42_HitShield
+bool it_3F14_Logic42_Clanked(Item_GObj* gobj)
+{
+    return itEvyoshiegg_BounceOff(gobj);
+}
 
-/// #it_3F14_Logic42_Reflected
+bool it_3F14_Logic42_HitShield(Item_GObj* gobj)
+{
+    return itEvyoshiegg_BounceOff(gobj);
+}
+
+bool it_3F14_Logic42_Reflected(Item_GObj* gobj)
+{
+    return itEvyoshiegg_BounceOff(gobj);
+}
 
 /// #it_3F14_Logic42_DmgReceived
 
-void it_3F14_Logic42_EnteredAir(Item_GObj* gobj)
+void itEvYoshiEgg_Logic42_EnteredAir(Item_GObj* gobj)
 {
     Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
 }
@@ -145,7 +166,7 @@ bool itEvyoshiegg_UnkMotion4_Coll(Item_GObj* gobj)
     return false;
 }
 
-void it_3F14_Logic42_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
+void itEvYoshiEgg_Logic42_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }

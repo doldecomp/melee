@@ -88,7 +88,7 @@ void it_802F13B4(Item_GObj* gobj, int arg1)
     it_8026EECC(gobj, arg1);
 }
 
-void it_2725_Logic116_Spawned(Item_GObj* gobj)
+void itCoin_Logic116_Spawned(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
 
@@ -98,7 +98,7 @@ void it_2725_Logic116_Spawned(Item_GObj* gobj)
     it_802F1588(gobj);
 }
 
-void it_2725_Logic116_Destroyed(Item_GObj* gobj)
+void itCoin_Logic116_Destroyed(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
 
@@ -179,7 +179,7 @@ bool itCoin_UnkMotion1_Coll(Item_GObj* gobj)
     return false;
 }
 
-void it_2725_Logic116_PickedUp(Item_GObj* gobj)
+void itCoin_Logic116_PickedUp(Item_GObj* gobj)
 {
     HSD_JObj* jobj = GET_JOBJ(gobj);
     HSD_JObj* child = HSD_JObjGetChild(jobj);
@@ -195,12 +195,12 @@ bool itCoin_UnkMotion2_Anim(Item_GObj* gobj)
 
 void itCoin_UnkMotion2_Phys(Item_GObj* gobj) {}
 
-void it_2725_Logic116_EvtUnk(Item_GObj* gobj, Item_GObj* ref)
+void itCoin_Logic116_EvtUnk(Item_GObj* gobj, Item_GObj* ref)
 {
     it_8026B894(gobj, ref);
 }
 
-bool it_2725_Logic116_DmgReceived(Item_GObj* gobj)
+bool itCoin_Logic116_DmgReceived(Item_GObj* gobj)
 {
     Item* ip;
     itCoinAttributes* attr;
@@ -284,7 +284,7 @@ bool itCoin_UnkMotion3_Coll(Item_GObj* gobj)
     return false;
 }
 
-void it_2725_Logic116_Thrown(Item_GObj* gobj)
+void itCoin_Logic116_Thrown(Item_GObj* gobj)
 {
     HSD_JObj* jobj = GET_JOBJ(gobj);
     PAD_STACK(16);
@@ -312,7 +312,7 @@ bool itCoin_UnkMotion4_Coll(Item_GObj* gobj)
     return false;
 }
 
-void it_2725_Logic116_EnteredAir(Item_GObj* gobj)
+void itCoin_Logic116_EnteredAir(Item_GObj* gobj)
 {
     Item* ip;
     f32 item_dir;

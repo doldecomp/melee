@@ -43,7 +43,7 @@ ItemStateTable it_803F5CC8[] = {
       itLgun_UnkMotion5_Coll },
 };
 
-void it_3F14_Logic16_Spawned(Item_GObj* gobj)
+void itLGun_Logic16_Spawned(Item_GObj* gobj)
 {
     Item* ip = gobj->user_data;
     ItLGunAttr* item_spec_attr = ip->xC4_article_data->x4_specialAttributes;
@@ -60,7 +60,7 @@ void it_8028E774(Item_GObj* gobj, Vec3* arg1)
     arg1->z = da->pos.z;
 }
 
-// Decrease ammo and fire/spawn lgunray
+/// Decrease ammo and fire/spawn lgunray
 void it_8028E79C(Item_GObj* gobj, Vec3* pos, f32 facing_dir)
 {
     Item* ip = GET_ITEM(gobj);
@@ -117,7 +117,7 @@ bool itLgun_UnkMotion4_Coll(HSD_GObj* gobj)
     return it_8026DF34(gobj);
 }
 
-void it_3F14_Logic16_PickedUp(Item_GObj* gobj)
+void itLGun_Logic16_PickedUp(Item_GObj* gobj)
 {
     Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
 }
@@ -147,12 +147,12 @@ bool itLgun_UnkMotion3_Anim(Item_GObj* gobj)
 
 void itLgun_UnkMotion3_Phys(Item_GObj* gobj) {}
 
-void it_3F14_Logic16_Dropped(Item_GObj* gobj)
+void itLGun_Logic16_Dropped(Item_GObj* gobj)
 {
     Item_80268E5C(gobj, 4, 6);
 }
 
-void it_3F14_Logic16_Thrown(Item_GObj* gobj)
+void itLGun_Logic16_Thrown(Item_GObj* gobj)
 {
     Item_80268E5C(gobj, 4, 6);
 }
@@ -165,35 +165,35 @@ void itLgun_UnkMotion4_Phys(Item_GObj* gobj)
     it_80274658(gobj, it_804D6D28->x68_float);
 }
 
-bool it_3F14_Logic16_DmgDealt(Item_GObj* gobj)
+bool itLGun_Logic16_DmgDealt(Item_GObj* gobj)
 {
     itColl_BounceOffVictim(gobj);
     return false;
 }
 
-bool it_3F14_Logic16_Clanked(Item_GObj* gobj)
+bool itLGun_Logic16_Clanked(Item_GObj* gobj)
 {
     itColl_BounceOffVictim((Item_GObj*) gobj);
     return false;
 }
 
-bool it_3F14_Logic16_HitShield(Item_GObj* gobj)
+bool itLGun_Logic16_HitShield(Item_GObj* gobj)
 {
     itColl_BounceOffVictim(gobj);
     return false;
 }
 
-bool it_3F14_Logic16_Reflected(Item_GObj* gobj)
+bool itLGun_Logic16_Reflected(Item_GObj* gobj)
 {
     return it_80273030(gobj);
 }
 
-bool it_3F14_Logic16_ShieldBounced(Item_GObj* gobj)
+bool itLGun_Logic16_ShieldBounced(Item_GObj* gobj)
 {
     return itColl_BounceOffShield(gobj);
 }
 
-void it_3F14_Logic16_EnteredAir(Item_GObj* gobj)
+void itLGun_Logic16_EnteredAir(Item_GObj* gobj)
 {
     Item_80268E5C(gobj, 5, ITEM_ANIM_UPDATE);
 }
@@ -211,7 +211,7 @@ bool itLgun_UnkMotion5_Coll(Item_GObj* gobj)
     return false;
 }
 
-void it_3F14_Logic16_EvtUnk(Item_GObj* gobj, HSD_GObj* ref_gobj)
+void itLGun_Logic16_EvtUnk(Item_GObj* gobj, HSD_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }

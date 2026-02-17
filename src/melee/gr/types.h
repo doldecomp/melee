@@ -270,7 +270,7 @@ struct grKongo_GroundVars2 {
     f32 xE8;
 };
 
-/// @todo: Investigate if these extra structs could be
+/// @todo Investigate if these extra structs could be
 /// shared among stages/other things as more are decompiled.
 struct grKongo_GroundVars3 {
     /* gp+C4 */ s16 xC4;
@@ -293,6 +293,11 @@ struct grKraid_GroundVars {
     /*  + gp+C8 */ f32 x4;
     /*  + gp+CC */ f32 x8;
     /*  + gp+D0 */ f32 xC;
+};
+
+struct grKraid_GroundVars2 {
+    /*  + gp+C4 */ u8 _[0xC];
+    /*  + gp+D0 */ s32 xC;
 };
 
 struct grCorneria_GroundVars {
@@ -390,11 +395,35 @@ struct grSmashTaunt_GroundVars {
 };
 
 struct grGreatBay_GroundVars {
-    u8 _0[0x10];
-    u32 x10;
+    u8 xC4;
+    u8 _[9];
+    s32 x10;
     s32 x14;
     u32 x18;
     f32 x1C;
+    f32 x20;
+};
+
+struct grGreatBay_GroundVars2 {
+    HSD_GObj* gobj5;
+    HSD_GObj* gobj6;
+    HSD_GObj* gobj7;
+    HSD_GObj* gobj8;
+    s16 x10;
+    s32 x14;
+    u32 x18;
+    f32 x1C;
+    HSD_JObj* jobj;
+};
+
+struct grGreatBay_GroundVars3 {
+    Vec3 translation;
+    f32 xD0;
+    f32 xD4;
+    f32 xD8;
+    f32 xDC;
+    f32 xE0;
+    HSD_JObj* jobj;
 };
 
 struct grGarden_GroundVars { // Cranky Kong
@@ -430,6 +459,8 @@ struct grIceMt_GroundVars {
     /* +0 gp+D8 */ u32 xF0; // padding
     /* +0 gp+D8 */ s16 xF4[2];
     /* +0 gp+D8 */ HSD_GObj* xF8[5];
+    /* +0 gp+D8 */ s16 x10C;
+    /* +0 gp+D8 */ s16 x10E;
 };
 struct grIceMt_GroundVars2 {
     /* +0 gp+C4 */ f32 xC4;
@@ -461,7 +492,7 @@ typedef struct grInishie1_Block {
     s16 x22; // probably a timer for when a block first appears and flickers
 } grInishie1_Block;
 
-// TODO: probably mistakes in this and Vars2
+/// @todo probably mistakes in this and Vars2
 typedef struct grInishie1_GroundVars {
     union {
         u32 xC4;
@@ -511,7 +542,7 @@ struct grInishie1_GroundVars2 {
     s16 xC6;
 };
 
-// likely for question mark blocks
+/// likely for question mark blocks
 struct grInishie1_GroundVars3 {
     HSD_JObj* xC4;
     s32 xC8;
@@ -533,10 +564,24 @@ struct grInishie2_GroundVars {
     s16 xC8;
     s16 xCA;
     s16 xCC;
+    u32 xD0;
+    u32 xD4;
     Vec3 xD8;
 };
 
-// likely for Cathrine (Birdo)
+struct grOldKongo_GroundVars {
+    u8 xC4;
+    u8 xC5;
+    s16 xC6;
+    s16 xC8;
+    s16 xCA;
+    s16 xCC;
+    s16 xCE;
+    void* xD0;
+    void* xD4;
+};
+
+/// likely for Cathrine (Birdo)
 struct grInishie2_GroundVars2 {
     Item_GObj* xC4;
     HSD_GObj* xC8;
@@ -577,7 +622,7 @@ struct grStadium_GroundVars {
     /* +4 gp+E8   */ HSD_GObj* xE8;
 };
 
-// Specific to the Pokemon Stadium jumbotron
+/// Specific to the Pokemon Stadium jumbotron
 struct grStadium_Display {
     /* C4:0 */ u8 xC4_b0 : 1;
     /* C4:1 */ u8 xC4_b1 : 1;
@@ -602,10 +647,10 @@ struct grStadium_Display {
     /* F8:2 */ u8 xF8_2 : 1;
 };
 
-// Unknown, but used for IDS:
-// 6
-// 9
-// and possibly more
+/// Unknown, but used for IDS:
+/// 6
+/// 9
+/// and possibly more
 struct grStadium_type9_GroundVars {
     /* C4:0 */ u8 xC4_b0 : 1;
     /* C4:1 */ u8 xC4_b1 : 1;
@@ -628,6 +673,20 @@ struct grZebes_GroundVars {
 
 struct grZebes_GroundVars2 {
     /*  +0 gp+C4 */ u16 xC4;
+};
+
+struct grRCruise_GroundVars {
+    /* +00 gp+C4 */ char pad_0[0x14];
+    /* +14 gp+D8 */ f32 x14;
+    /* +18 gp+DC */ f32 x18;
+    /* +1C gp+E0 */ f32 x1C;
+    /* +20 gp+E4 */ f32 x20;
+    /* +24 gp+E8 */ f32 x24;
+    /* +28 gp+EC */ f32 x28;
+    /* +2C gp+F0 */ s32 x2C;
+    /* +30 gp+F4 */ s32 x30;
+    /* +34 gp+F8 */ s32 x34;
+    /* +38 gp+FC */ s32 x38;
 };
 
 struct grFigureGet_GroundVars {
@@ -725,8 +784,9 @@ struct grGreens_GroundVars {
 };
 
 struct grMuteCity_GroundVars {
-    /* +0x00 gp+C4) */ u32 xC4;
-    /* +0x00 gp+C8) */ u32 xC8;
+    /* +0x00 gp+C4) */ s16 xC4;
+    /* +0x02 gp+C6) */ s16 xC6;
+    /* +0x04 gp+C8) */ u32 xC8;
     /* +0x00 gp+CC) */ u32 xCC;
     /* +0x00 gp+D0) */ struct {
         u8 b0 : 1;
@@ -779,12 +839,42 @@ struct grOnett_GroundVars {
     /*  +0 gp+104:0 */ CmSubject* x104;
 };
 
+/// Used by multiple Big Blue Ground subtypes (track, road, car gobjs).
+/// Different gobjs interpret the same offsets differently.
+///
+/// Track gobj (ID 32): uses xC8 as HSD_JObj*[30], xCC as u8[30] flags.
+/// Road gobj (ID 34): uses xCC as f32 velocity, xD0/xD8 for position.
+/// Car gobj (ID 33): per-lane data at 0x40-byte stride from gp+D4,
+///   with fields: state(+0), target(+4), delta(+8), pos Vec3(+C),
+///   lateral(+20), direction(+2C), gravity(+30), height(+34),
+///   velocity(+38), accel(+3C), rotation(+40), amplitude(+44),
+///   angular_vel(+48).
 struct grBigBlue_GroundVars {
-    /*  +0 gp+C4:0 */ u8 x0_b0 : 1;
+    /*  +0 gp+C4 */ u8 x0_b0 : 1;
+    /* pad */ char pad_1[3];
+    /*  +4 gp+C8 */ void* xC8;
+    /*  +8 gp+CC */ void* xCC;
+    /*  +C gp+D0 */ f32 xD0;
+    /* +10 gp+D4 */ HSD_JObj* x10;
+    /* +14 gp+D8 */ HSD_JObj* x14;
+    /* +18 gp+DC */ HSD_JObj* x18;
+    /* pad */ char pad_3[4];
+    /* +20 gp+E4 */ u8 x20;
+    /* +21 gp+E5 */ u8 x21;
 };
 
 struct grBigBlueRoute_GroundVars {
     /* +0 gp+C4 */ HSD_GObj* xC4;
+    /* +4 gp+C8 */ void* xC8;
+    /* +8 gp+CC */ HSD_Spline* xCC;
+    /* +C gp+D0 */ HSD_Spline* xD0;
+    /* +10 gp+D4 */ HSD_Spline* xD4;
+    /* +14 gp+D8 */ Vec3 xD8;
+    /* +20 gp+E4 */ Vec3 xE4;
+    /* +2C gp+F0 */ Vec3 xF0;
+    /* +38 gp+FC */ Vec3 xFC;
+    /* +44 gp+108 */ s16 x108;
+    /* +46 gp+10A */ s16 x10A;
 };
 
 struct grCastle_GroundVars {
@@ -812,6 +902,13 @@ struct ShyGuys {
     /* +0 gp+C4 */ s8 count;
     /* +1 gp+C5 */ s8 pattern;
     /* +4 gp+C8 */ int timer;
+};
+
+struct grShrineroute_GroundVars {
+    /* +0 gp+C4 */ u8 _[0x4];
+    /* +4 gp+C8 */ u16 xC8;
+    /* +6 gp+CA */ u16 xCA;
+    /* +8 gp+CA */ u16 xCC;
 };
 
 struct Battlefield {
@@ -904,6 +1001,8 @@ struct Ground {
             struct grCastle_GroundVars castle;
             struct grCorneria_GroundVars corneria;
             struct grGreatBay_GroundVars greatbay;
+            struct grGreatBay_GroundVars2 greatbay2;
+            struct grGreatBay_GroundVars3 greatbay3;
             struct grFigureGet_GroundVars figureget;
             struct GroundVars_flatzone flatzone;
             struct GroundVars_flatzone2 flatzone2;
@@ -922,6 +1021,7 @@ struct Ground {
             struct grInishie2_GroundVars inishie2;
             struct grInishie2_GroundVars2 inishie22;
             struct grInishie2_GroundVars3 inishie23;
+            struct grOldKongo_GroundVars oldkongo;
             struct GroundVars_izumi izumi;
             struct GroundVars_izumi2 izumi2;
             struct GroundVars_izumi3 izumi3;
@@ -929,11 +1029,14 @@ struct Ground {
             struct grKongo_GroundVars2 kongo2;
             struct grKongo_GroundVars3 kongo3;
             struct grKraid_GroundVars kraid;
+            struct grKraid_GroundVars2 kraid2;
             struct grMuteCity_GroundVars mutecity;
             struct grMuteCity_GroundVars2 mutecity2;
             struct grOnett_GroundVars onett;
             struct grPura_GroundVars pura;
             struct grPura_GroundVars2 pura2;
+            struct grRCruise_GroundVars rcruise;
+            struct grShrineroute_GroundVars shrineroute;
             struct grSmashTaunt_GroundVars smashtaunt;
             struct GroundVars_unk unk;
             struct grVenom_GroundVars venom;
@@ -983,7 +1086,7 @@ struct Ground {
 };
 STATIC_ASSERT(sizeof(struct Ground) == 0x204);
 
-// Appears to be related to stage audio
+/// Appears to be related to stage audio
 struct UnkBgmStruct {
     s32 x0;
     s32 x4;
@@ -996,7 +1099,7 @@ struct UnkBgmStruct {
     u8 pad[0x64 - 0x1A];
 };
 
-// TODO: what is this struct?
+/// @todo what is this struct?
 struct UnkStage6B0 {
     f32 x0;
     s16 x4;

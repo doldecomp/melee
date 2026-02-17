@@ -29,7 +29,11 @@ struct lbl_8046B488_t {
     /* 0x010:5 */ u8 unk_10_b5 : 1;
     /* 0x010:6 */ u8 unk_10_b6 : 1;
     /* 0x010:7 */ u8 unk_10_b7 : 1;
-    /* 0x011 */ char pad_11[0x1B8 - 0x11];
+    /* 0x011 */ char pad_11[0x20 - 0x11];
+    /* 0x020 */ s8 x20[0xA2 - 0x20];
+    /* 0x0A2 */ s8 xA2[0x124 - 0xA2];
+    /* 0x124 */ s8 x124[0x1A6 - 0x124];
+    /* 0x1A6 */ s8 x1A6[0x1B8 - 0x1A6];
     /* 0x1B8 */ int (*x1B8)(void);
     /* 0x1BC */ char pad_1BC[0x1E0 - 0x1BC];
 }; /* size = 0x1E0 */
@@ -42,12 +46,12 @@ struct fn_80166CBC_arg0_t {
 };
 STATIC_ASSERT(sizeof(struct fn_80166CBC_arg0_t) == 0xA8);
 
-// struct ResultsData {
-//     /*  +0 */ char pad_0[0x94];
-//     /* +94 */ int x94;
-//     /* +98 */ char pad_98[0x5A8 - 0x98];
-// };
-// STATIC_ASSERT(sizeof(struct ResultsData) == 0x5A8);
+/// struct ResultsData {
+///     /*  +0 */ char pad_0[0x94];
+///     /* +94 */ int x94;
+///     /* +98 */ char pad_98[0x5A8 - 0x98];
+/// };
+/// STATIC_ASSERT(sizeof(struct ResultsData) == 0x5A8);
 
 struct lbl_8046B668_t {
     /* 0x00 */ char pad_0[0x1C];

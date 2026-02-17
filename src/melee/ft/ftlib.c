@@ -114,7 +114,7 @@ HSD_GObj* ftLib_80086198(HSD_GObj* gobj)
     return result;
 }
 
-// get closest opposing fp?
+/// get closest opposing fp?
 HSD_GObj* ftLib_8008627C(Vec3* pos, HSD_GObj* gobj)
 {
     Vec3 cur_v;
@@ -164,7 +164,7 @@ HSD_GObj* ftLib_8008627C(Vec3* pos, HSD_GObj* gobj)
     return result;
 }
 
-// get closest opposing fp, on given side (left/right)
+/// get closest opposing fp, on given side (left/right)
 HSD_GObj* ftLib_80086368(Vec3* v, HSD_GObj* gobj, float facing_dir)
 {
     Vec3 sp24;
@@ -289,7 +289,7 @@ void ftLib_800865D8(HSD_GObj* gobj, float* x, float* y)
     *y = fp->input.lstick.y;
 }
 
-void* ftLib_800865F0(HSD_GObj* gobj)
+HSD_JObj* ftLib_800865F0(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return fp->parts[ftParts_GetBoneIndex(fp, 4)].joint;
@@ -956,7 +956,7 @@ void ftLib_800874CC(HSD_GObj* gobj, void* arg1, s32 arg2)
 }
 
 void ftLib_80087508(s8 ft_kind, u8 arg1)
-// void ftLib_80087508(FighterKind ft_kind, u8 arg1)
+/// void ftLib_80087508(FighterKind ft_kind, u8 arg1)
 {
     ftData_8008572C(ft_kind);
     efAsync_8006737C(ftData_UnkBytePerCharacter[ft_kind]);
@@ -966,7 +966,7 @@ void ftLib_80087508(s8 ft_kind, u8 arg1)
 }
 
 void ftLib_80087574(s8 ft_kind)
-// void ftLib_80087574(FighterKind ft_kind)
+/// void ftLib_80087574(FighterKind ft_kind)
 {
     u8 i;
     ftData_8008572C(ft_kind);

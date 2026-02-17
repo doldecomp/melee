@@ -7,8 +7,8 @@
 
 #include "it/items/types.h"
 
-// Keep this if it is NOT defined in itCommonItems.h or similar.
-// If you get a redefinition error for this too, remove it.
+/// Keep this if it is NOT defined in itCommonItems.h or similar.
+/// If you get a redefinition error for this too, remove it.
 typedef struct itDoseiAttributes {
     f32 unk0;
     f32 unk4;
@@ -68,11 +68,11 @@ typedef struct itDoseiAttributes {
 /* 283960 */ void itDosei_UnkMotion11_Phys(Item_GObj* gobj);
 /* 283990 */ bool itDosei_UnkMotion11_Coll(Item_GObj* gobj);
 /* 2839BC */ bool it_3F14_Logic7_DmgDealt(Item_GObj*);
-/* 283A3C */ bool it_3F14_Logic7_Reflected(Item_GObj*);
-/* 283A5C */ bool it_3F14_Logic7_Clanked(Item_GObj*);
-/* 283A80 */ bool it_3F14_Logic7_HitShield(Item_GObj*);
-/* 283AA4 */ bool it_3F14_Logic7_ShieldBounced(Item_GObj*);
-/* 283AC4 */ void it_3F14_Logic7_EvtUnk(Item_GObj*, Item_GObj*);
+/* 283A3C */ bool itDosei_Logic7_Reflected(Item_GObj*);
+/* 283A5C */ bool itDosei_Logic7_Clanked(Item_GObj*);
+/* 283A80 */ bool itDosei_Logic7_HitShield(Item_GObj*);
+/* 283AA4 */ bool itDosei_Logic7_ShieldBounced(Item_GObj*);
+/* 283AC4 */ void itDosei_Logic7_EvtUnk(Item_GObj*, Item_GObj*);
 /* 3F55D0 */ extern ItemStateTable it_803F55D0[];
 
 #endif

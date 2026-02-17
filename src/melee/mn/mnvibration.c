@@ -24,7 +24,7 @@
 #include <baselib/memory.h>
 #include <baselib/sislib.h>
 
-// --- Externs ---
+/// --- Externs ---
 extern long HSD_GObj_804D783C;
 void lb_8001CE00(void);
 
@@ -90,7 +90,7 @@ static s32 mnVibration_804D4FF0;
 // --- Globals ---
 HSD_GObj* mnVibration_804D6C28;
 
-// --- Local Helper Structs ---
+/// --- Local Helper Structs ---
 typedef struct MnVibrationAssets {
     void* SCl_Top_joint; // 0x00
     u8 pad4[0xC];
@@ -131,7 +131,7 @@ MnVibrationJointAssets mnVibration_804A0878;
 MnVibrationJointAssets mnVibration_804A0888;
 MnVibrationJointAssets mnVibration_804A0898;
 
-// --- Function Implementation ---
+/// --- Function Implementation ---
 
 HSD_JObj* mnVibration_802474C4(s32 count)
 {

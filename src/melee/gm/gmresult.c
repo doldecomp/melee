@@ -3,7 +3,6 @@
 #include "gm/gmresult.static.h"
 
 #include "gm_unsplit.h"
-#include "gm/gm_1601.h"
 #include "gmresultplayer.h"
 
 #include "baselib/dobj.h"
@@ -14,6 +13,7 @@
 #include "baselib/jobj.h"
 #include "dolphin/gx/GXStruct.h"
 #include "dolphin/types.h"
+#include "gm/gm_1601.h"
 #include "gm/types.h"
 #include "if/ifcoget.h"
 #include "lb/lb_00B0.h"
@@ -261,22 +261,70 @@ void fn_80174468(u8 slot, HSD_Text* text1, HSD_Text* text2, HSD_Text* text3,
             loop_ptr = me->x44C[slot].x0;
             do {
                 loop_val = *loop_ptr;
-                if (loop_val != 0) { loop_n--; if (loop_n == 0) goto found1; }
-                loop_val = *++loop_ptr; loop_i++;
-                if (loop_val != 0) { loop_n--; if (loop_n == 0) goto found1; }
-                loop_val = *++loop_ptr; loop_i++;
-                if (loop_val != 0) { loop_n--; if (loop_n == 0) goto found1; }
-                loop_val = *++loop_ptr; loop_i++;
-                if (loop_val != 0) { loop_n--; if (loop_n == 0) goto found1; }
-                loop_val = *++loop_ptr; loop_i++;
-                if (loop_val != 0) { loop_n--; if (loop_n == 0) goto found1; }
-                loop_val = *++loop_ptr; loop_i++;
-                if (loop_val != 0) { loop_n--; if (loop_n == 0) goto found1; }
-                loop_val = *++loop_ptr; loop_i++;
-                if (loop_val != 0) { loop_n--; if (loop_n == 0) goto found1; }
-                loop_val = *++loop_ptr; loop_i++;
-                if (loop_val != 0) { loop_n--; if (loop_n == 0) goto found1; }
-                loop_ptr++; loop_i++;
+                if (loop_val != 0) {
+                    loop_n--;
+                    if (loop_n == 0) {
+                        goto found1;
+                    }
+                }
+                loop_val = *++loop_ptr;
+                loop_i++;
+                if (loop_val != 0) {
+                    loop_n--;
+                    if (loop_n == 0) {
+                        goto found1;
+                    }
+                }
+                loop_val = *++loop_ptr;
+                loop_i++;
+                if (loop_val != 0) {
+                    loop_n--;
+                    if (loop_n == 0) {
+                        goto found1;
+                    }
+                }
+                loop_val = *++loop_ptr;
+                loop_i++;
+                if (loop_val != 0) {
+                    loop_n--;
+                    if (loop_n == 0) {
+                        goto found1;
+                    }
+                }
+                loop_val = *++loop_ptr;
+                loop_i++;
+                if (loop_val != 0) {
+                    loop_n--;
+                    if (loop_n == 0) {
+                        goto found1;
+                    }
+                }
+                loop_val = *++loop_ptr;
+                loop_i++;
+                if (loop_val != 0) {
+                    loop_n--;
+                    if (loop_n == 0) {
+                        goto found1;
+                    }
+                }
+                loop_val = *++loop_ptr;
+                loop_i++;
+                if (loop_val != 0) {
+                    loop_n--;
+                    if (loop_n == 0) {
+                        goto found1;
+                    }
+                }
+                loop_val = *++loop_ptr;
+                loop_i++;
+                if (loop_val != 0) {
+                    loop_n--;
+                    if (loop_n == 0) {
+                        goto found1;
+                    }
+                }
+                loop_ptr++;
+                loop_i++;
             } while (--loop_outer);
         found1:
             idx = fn_8016F1F0(loop_i);
@@ -286,7 +334,7 @@ void fn_80174468(u8 slot, HSD_Text* text1, HSD_Text* text2, HSD_Text* text3,
 
     if (list->mode == 2 || entry->check != NULL) {
         if (list->mode != 2) {
-            result = ((s32 (*)(u8)) entry->check)(slot);
+            result = ((s32(*)(u8)) entry->check)(slot);
             if (result < 0) {
                 value_id = HSD_SisLib_803A6B98(text3, const_zero, const_neg30,
                                                "%s", &lbl_804D3F8C);
@@ -305,22 +353,70 @@ void fn_80174468(u8 slot, HSD_Text* text1, HSD_Text* text2, HSD_Text* text3,
                 loop_ptr = me->x44C[slot].x0;
                 do {
                     loop_val = *loop_ptr;
-                    if (loop_val != 0) { loop_n--; if (loop_n == 0) goto found2; }
-                    loop_val = *++loop_ptr; loop_i++;
-                    if (loop_val != 0) { loop_n--; if (loop_n == 0) goto found2; }
-                    loop_val = *++loop_ptr; loop_i++;
-                    if (loop_val != 0) { loop_n--; if (loop_n == 0) goto found2; }
-                    loop_val = *++loop_ptr; loop_i++;
-                    if (loop_val != 0) { loop_n--; if (loop_n == 0) goto found2; }
-                    loop_val = *++loop_ptr; loop_i++;
-                    if (loop_val != 0) { loop_n--; if (loop_n == 0) goto found2; }
-                    loop_val = *++loop_ptr; loop_i++;
-                    if (loop_val != 0) { loop_n--; if (loop_n == 0) goto found2; }
-                    loop_val = *++loop_ptr; loop_i++;
-                    if (loop_val != 0) { loop_n--; if (loop_n == 0) goto found2; }
-                    loop_val = *++loop_ptr; loop_i++;
-                    if (loop_val != 0) { loop_n--; if (loop_n == 0) goto found2; }
-                    loop_ptr++; loop_i++;
+                    if (loop_val != 0) {
+                        loop_n--;
+                        if (loop_n == 0) {
+                            goto found2;
+                        }
+                    }
+                    loop_val = *++loop_ptr;
+                    loop_i++;
+                    if (loop_val != 0) {
+                        loop_n--;
+                        if (loop_n == 0) {
+                            goto found2;
+                        }
+                    }
+                    loop_val = *++loop_ptr;
+                    loop_i++;
+                    if (loop_val != 0) {
+                        loop_n--;
+                        if (loop_n == 0) {
+                            goto found2;
+                        }
+                    }
+                    loop_val = *++loop_ptr;
+                    loop_i++;
+                    if (loop_val != 0) {
+                        loop_n--;
+                        if (loop_n == 0) {
+                            goto found2;
+                        }
+                    }
+                    loop_val = *++loop_ptr;
+                    loop_i++;
+                    if (loop_val != 0) {
+                        loop_n--;
+                        if (loop_n == 0) {
+                            goto found2;
+                        }
+                    }
+                    loop_val = *++loop_ptr;
+                    loop_i++;
+                    if (loop_val != 0) {
+                        loop_n--;
+                        if (loop_n == 0) {
+                            goto found2;
+                        }
+                    }
+                    loop_val = *++loop_ptr;
+                    loop_i++;
+                    if (loop_val != 0) {
+                        loop_n--;
+                        if (loop_n == 0) {
+                            goto found2;
+                        }
+                    }
+                    loop_val = *++loop_ptr;
+                    loop_i++;
+                    if (loop_val != 0) {
+                        loop_n--;
+                        if (loop_n == 0) {
+                            goto found2;
+                        }
+                    }
+                    loop_ptr++;
+                    loop_i++;
                 } while (--loop_outer);
             found2:
                 stat_value = *(s32*) &me->x44C[slot].x0[loop_i * 4 + 0x104];
@@ -329,9 +425,8 @@ void fn_80174468(u8 slot, HSD_Text* text1, HSD_Text* text2, HSD_Text* text3,
                                                    const_neg30, "%s%d",
                                                    &lbl_804D3FA0, -stat_value);
                 } else {
-                    value_id = HSD_SisLib_803A6B98(text3, const_zero,
-                                                   const_neg30, "%d",
-                                                   stat_value);
+                    value_id = HSD_SisLib_803A6B98(
+                        text3, const_zero, const_neg30, "%d", stat_value);
                 }
             } else {
                 value_id = HSD_SisLib_803A6B98(text3, const_zero, const_neg30,
@@ -340,14 +435,16 @@ void fn_80174468(u8 slot, HSD_Text* text1, HSD_Text* text2, HSD_Text* text3,
         }
         if (list->mode != 2) {
             if (entry->get != NULL) {
-                label_id = HSD_SisLib_803A6B98(text2, const_zero, const_neg30,
-                                               "%s", ((u8* (*)(u8)) entry->get)(slot));
+                label_id =
+                    HSD_SisLib_803A6B98(text2, const_zero, const_neg30, "%s",
+                                        ((u8 * (*) (u8)) entry->get)(slot));
             }
         }
     } else if (list->mode != 2) {
         if (entry->get != NULL) {
-            label_id = HSD_SisLib_803A6B98(text2, const_zero, const_neg30,
-                                           "%s", ((u8* (*)(u8)) entry->get)(slot));
+            label_id =
+                HSD_SisLib_803A6B98(text2, const_zero, const_neg30, "%s",
+                                    ((u8 * (*) (u8)) entry->get)(slot));
         }
     }
 
@@ -376,8 +473,7 @@ void* fn_801748EC(void* list_, s32 mode, s32 idx)
         goto loop_start;
         do {
             list++;
-        loop_start:
-            ;
+        loop_start:;
         } while (list->x0 != mode);
         return list;
     }
@@ -549,30 +645,33 @@ void fn_80174B4C(ResultsData* data, s32 slot)
             }
         }
 
-        pdata->stats_text[0][count] = HSD_SisLib_803A5ACC(
-            0, 0, pos_x, -pos_y, pos_z, 11.0F, 10.0F);
+        pdata->stats_text[0][count] =
+            HSD_SisLib_803A5ACC(0, 0, pos_x, -pos_y, pos_z, 11.0F, 10.0F);
         pdata->stats_text[0][count]->default_fitting = 1;
         pdata->stats_text[0][count]->x34.x = 0.05F;
         pdata->stats_text[0][count]->x34.y = 0.0546875F;
-        pdata->stats_text[0][count]->render_callback = (void (*)(void*)) fn_801749B8;
+        pdata->stats_text[0][count]->render_callback =
+            (void (*)(void*)) fn_801749B8;
 
         pdata->stats_text[1][count] = HSD_SisLib_803A6754(0, 0);
         pdata->stats_text[1][count]->pos_x = pos_x;
         pdata->stats_text[1][count]->pos_y = -pos_y;
         pdata->stats_text[1][count]->pos_z = pos_z;
-        pdata->stats_text[1][count]->render_callback = (void (*)(void*)) fn_801749B8;
+        pdata->stats_text[1][count]->render_callback =
+            (void (*)(void*)) fn_801749B8;
 
         pdata->stats_text[2][count] = HSD_SisLib_803A6754(0, 0);
         pdata->stats_text[2][count]->pos_x = 11.0F + pos_x;
         pdata->stats_text[2][count]->pos_y = -pos_y;
         pdata->stats_text[2][count]->pos_z = pos_z;
-        pdata->stats_text[2][count]->render_callback = (void (*)(void*)) fn_801749B8;
+        pdata->stats_text[2][count]->render_callback =
+            (void (*)(void*)) fn_801749B8;
         pdata->stats_text[2][count]->default_alignment = 2;
 
         pos_y -= 1.75F;
         fn_80174468(slot, pdata->stats_text[0][count],
-                    pdata->stats_text[1][count],
-                    pdata->stats_text[2][count], list, entry_idx);
+                    pdata->stats_text[1][count], pdata->stats_text[2][count],
+                    list, entry_idx);
         entry_idx++;
         entry_offset += 0x10;
         count++;
@@ -806,17 +905,16 @@ void fn_801756E0(s32 slot)
         if (var_r6 < 0) {
             var_r6 = -var_r6;
         }
-        var_r28 = HSD_SisLib_803A6B98(
-            lbl_8046DBE8.player_data[slot].ko_time, 0.0F, -30.0F, "%s%d",
-            &lbl_804D3FA0, var_r6);
+        var_r28 =
+            HSD_SisLib_803A6B98(lbl_8046DBE8.player_data[slot].ko_time, 0.0F,
+                                -30.0F, "%s%d", &lbl_804D3FA0, var_r6);
     } else if (0 < var_r6) {
-        var_r28 = HSD_SisLib_803A6B98(
-            lbl_8046DBE8.player_data[slot].ko_time, 0.0F, -30.0F, "%s%d",
-            &lbl_804D3FA4, var_r6);
+        var_r28 =
+            HSD_SisLib_803A6B98(lbl_8046DBE8.player_data[slot].ko_time, 0.0F,
+                                -30.0F, "%s%d", &lbl_804D3FA4, var_r6);
     } else {
-        var_r28 = HSD_SisLib_803A6B98(
-            lbl_8046DBE8.player_data[slot].ko_time, 0.0F, -30.0F, "%d",
-            var_r6);
+        var_r28 = HSD_SisLib_803A6B98(lbl_8046DBE8.player_data[slot].ko_time,
+                                      0.0F, -30.0F, "%d", var_r6);
     }
     goto end_common;
 
@@ -824,8 +922,8 @@ grey_out:
     sp10.r = 0xA0;
     sp10.g = 0xA0;
     sp10.b = 0xA0;
-    var_r28 = HSD_SisLib_803A6B98(lbl_8046DBE8.player_data[slot].ko_time,
-                                  0.0F, -30.0F, "%s", &lbl_804D3FA0);
+    var_r28 = HSD_SisLib_803A6B98(lbl_8046DBE8.player_data[slot].ko_time, 0.0F,
+                                  -30.0F, "%s", &lbl_804D3FA0);
 end_common:
     HSD_SisLib_803A7548(lbl_8046DBE8.player_data[slot].ko_time, var_r28, 0.08F,
                         0.08F);
@@ -897,9 +995,9 @@ void fn_80175880(s32 slot)
     }
     minutes = seconds / 60;
     new_var2 = minutes * 60;
-    var_r30 = HSD_SisLib_803A6B98(lbl_8046DBE8.player_data[slot].ko_time, 0.0F,
-                                  -30.0F, "%02d:%02d", minutes,
-                                  seconds - new_var2);
+    var_r30 =
+        HSD_SisLib_803A6B98(lbl_8046DBE8.player_data[slot].ko_time, 0.0F,
+                            -30.0F, "%02d:%02d", minutes, seconds - new_var2);
     goto end_common;
 
 show_normal:
@@ -956,16 +1054,16 @@ void fn_80175A94(s32 slot, Vec3* position)
         sp14 = fn_8017507C(slot);
         if (me->player_standings[slot].slot_type != 3) {
             fn_8017ADA8(slot);
-            var_r29 = HSD_SisLib_803A6B98(
-                lbl_8046DBE8.player_data[slot].ko_time, 0.0F, -30.0F, "%d",
-                fn_8017AD78(slot));
+            var_r29 =
+                HSD_SisLib_803A6B98(lbl_8046DBE8.player_data[slot].ko_time,
+                                    0.0F, -30.0F, "%d", fn_8017AD78(slot));
         } else {
             sp14.r = 0xA0;
             sp14.g = 0xA0;
             sp14.b = 0xA0;
-            var_r29 = HSD_SisLib_803A6B98(
-                lbl_8046DBE8.player_data[slot].ko_time, 0.0F, -30.0F, "%s",
-                &lbl_804D3FA0);
+            var_r29 =
+                HSD_SisLib_803A6B98(lbl_8046DBE8.player_data[slot].ko_time,
+                                    0.0F, -30.0F, "%s", &lbl_804D3FA0);
         }
         HSD_SisLib_803A7548(lbl_8046DBE8.player_data[slot].ko_time, var_r29,
                             0.09F, 0.08F);
@@ -1014,7 +1112,7 @@ void fn_80175D34(void)
     HSD_Text* ko_count;
     HSD_Text* ko_time;
     s32 i;
-    PAD_STACK(8); // TODO :: why does this have so much stack space
+    PAD_STACK(8); ///< @todo :: why does this have so much stack space
 
     lb_8000B1CC(lbl_8046DBE8.x24, NULL, &pos);
 

@@ -18,7 +18,7 @@
 #include <baselib/gobjproc.h>
 #include <baselib/jobj.h>
 
-// Orphaned data strings from original ROM
+/// Orphaned data strings from original ROM
 static char lbl_803F9780[] = "ScInfStc_scene_models";
 static char lbl_803F9798[] = "translate";
 

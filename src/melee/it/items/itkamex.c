@@ -146,17 +146,17 @@ bool itKamex_UnkMotion3_Coll(Item_GObj* gobj)
 
 /// #it_2725_Logic31_Spawned
 
-bool it_2725_Logic31_HitShield(Item_GObj* arg0)
+bool itKamex_Logic31_HitShield(Item_GObj* arg0)
 {
     return true;
 }
 
-bool it_2725_Logic31_DmgDealt(Item_GObj* arg0)
+bool itKamex_Logic31_DmgDealt(Item_GObj* arg0)
 {
     return false;
 }
 
-void it_2725_Logic31_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
+void itKamex_Logic31_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }

@@ -8,6 +8,7 @@
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/itCommonItems.h"
 #include "it/item.h"
 
 /// #it_2725_Logic18_Spawned
@@ -50,7 +51,14 @@ bool itHouou_UnkMotion1_Coll(Item_GObj* gobj)
     return false;
 }
 
-/// #it_802D2668
+void it_802D2668(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->xDD4_itemVar.pokemon.xE44 = 0.0f;
+    Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
+    ip->entered_hitlag = efLib_PauseAll;
+    ip->exited_hitlag = efLib_ResumeAll;
+}
 
 bool itHouou_UnkMotion2_Anim(Item_GObj* gobj)
 {
@@ -114,7 +122,15 @@ bool itHouou_UnkMotion3_Coll(Item_GObj* gobj)
     return false;
 }
 
-/// #it_802D290C
+void it_802D290C(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itHououAttr* attr = ip->xC4_article_data->x4_specialAttributes;
+    Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
+    ip->entered_hitlag = efLib_PauseAll;
+    ip->exited_hitlag = efLib_ResumeAll;
+    ip->xDD4_itemVar.pokemon.xE44 = attr->x18;
+}
 
 bool itHouou_UnkMotion4_Anim(Item_GObj* gobj)
 {
@@ -200,7 +216,19 @@ bool it_802D2D04(Item_GObj* gobj)
 
 /// #it_802D2D2C
 
-/// #it_2725_Logic42_Spawned
+void it_2725_Logic42_Spawned(Item_GObj* item_gobj)
+{
+    Item* item;
+    itHououAttr* attr;
+    PAD_STACK(8);
+
+    item = GET_ITEM((HSD_GObj*) item_gobj);
+    attr = item->xC4_article_data->x4_specialAttributes;
+    item->xD44_lifeTimer = attr->timer;
+    it_80274740(item_gobj);
+    it_802D2EF0(item_gobj);
+    it_8026B3A8(item_gobj);
+}
 
 void it_802D2ED0(Item_GObj* gobj, Item_GObj* ref_gobj)
 {

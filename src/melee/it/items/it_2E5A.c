@@ -229,7 +229,7 @@ s32 it_802E5F8C(Item_GObj* item_gobj, Vec3* pos, s32 arg2, s32 arg3, f32 arg4,
     return it_802E609C(&vars, &sp2C);
 }
 
-// s32 it_802E609C(Fighter* fighter, SpawnItem* spawn) {
+/// s32 it_802E609C(Fighter* fighter, SpawnItem* spawn) {
 s32 it_802E609C(it_802E5FXX_struct* vars, SpawnItem* spawn)
 {
     Item_GObj* spawn_gobj;
@@ -260,8 +260,8 @@ s32 it_802E609C(it_802E5FXX_struct* vars, SpawnItem* spawn)
     return var_r30;
 }
 
-// void it_802E614C(Item_GObj* arg0, Item_GObj* arg1, Vec3* arg2, f32* arg3,
-// void* arg4) {
+/// void it_802E614C(Item_GObj* arg0, Item_GObj* arg1, Vec3* arg2, f32* arg3,
+/// void* arg4) {
 inline void it_802E614C(Item_GObj* parent_gobj1, Item_GObj* parent_gobj2,
                         SpawnItem* spawn, Vec3* pos, Vec3* vel)
 {
@@ -296,7 +296,7 @@ s32 it_802E61C4(Item_GObj* item_gobj, s32 arg1, s32 arg2)
     return var_r29;
 }
 
-// void it_802E628C(Item_GObj* item_gobj, f64 arg8, f32 arg9) {
+/// void it_802E628C(Item_GObj* item_gobj, f64 arg8, f32 arg9) {
 void it_802E628C(Item_GObj* item_gobj, f32 arg8, f32 arg9)
 {
     Item* item;
@@ -652,7 +652,7 @@ bool it_2E5A_UnkMotion2_Coll(HSD_GObj* item_gobj)
     return false;
 }
 
-bool it_2725_Logic115_DmgDealt(Item_GObj* item_gobj)
+bool it_2E5A_Logic115_DmgDealt(Item_GObj* item_gobj)
 {
     lbAudioAx_80023870(0x93, 0x7F, 0x40, 0x1A);
     return true;
@@ -672,7 +672,7 @@ void it_802E6A74(HSD_GObj* gobj)
     }
 }
 
-void it_2725_Logic115_EvtUnk(Item_GObj* item_gobj, HSD_GObj* ref_gobj)
+void it_2E5A_Logic115_EvtUnk(Item_GObj* item_gobj, HSD_GObj* ref_gobj)
 {
     it_8026B894(item_gobj, ref_gobj);
 }

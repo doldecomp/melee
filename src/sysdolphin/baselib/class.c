@@ -239,7 +239,7 @@ void hsdFreeMemPiece(void* mem, s32 size)
     }
 }
 
-// _hsdClassAlloc
+/// _hsdClassAlloc
 HSD_Class* _hsdClassAlloc(HSD_ClassInfo* info)
 {
     HSD_Class* mem_piece = hsdAllocMemPiece(info->head.obj_size);

@@ -116,7 +116,7 @@ void it_802D6850(Item_GObj* gobj, Item_GObj* ref_gobj)
     it_8026B894(gobj, ref_gobj);
 }
 
-void it_2725_Logic28_Spawned(Item_GObj* gobj)
+void itMaril_Logic28_Spawned(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itMarilAttributes* attr = ip->xC4_article_data->x4_specialAttributes;

@@ -6,6 +6,7 @@
 
 #include "ft/ftdevice.h"
 #include "gr/granime.h"
+#include "gr/grmaterial.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
@@ -36,7 +37,6 @@ void grOldKongo_8020F46C(void)
 
 void grOldKongo_8020F4E4(void) {}
 
-/// #grOldKongo_8020F4E8
 void grOldKongo_8020F4E8(void)
 {
     HSD_GObj* gobj;
@@ -116,12 +116,24 @@ void grOldKongo_80210450(Ground_GObj* arg) {}
 void grOldKongo_802105AC(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
-    if (gp->gv.inishie2.xC6 == 1) {
-        gp->gv.inishie2.xC6 = 2;
+    if (gp->gv.oldkongo.xC6 == 1) {
+        gp->gv.oldkongo.xC6 = 2;
     }
 }
 
-/// #grOldKongo_802105C8
+void grOldKongo_802105C8(HSD_GObj* gobj)
+{
+    Ground* gp = gobj->user_data;
+    if (gp->gv.oldkongo.xC6 != 1) {
+        return;
+    }
+    HSD_ASSERT(751, gp->gv.oldkongo.xD4);
+    if (((u8*) gp->gv.oldkongo.xD4)[2] == 8) {
+        gp->gv.oldkongo.xC6 = 0;
+        gp->gv.oldkongo.xD4 = NULL;
+        grMaterial_801C95C4(gobj);
+    }
+}
 
 /// #grOldKongo_80210650
 

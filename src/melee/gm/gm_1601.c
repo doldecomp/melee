@@ -888,7 +888,15 @@ long gm_80162A4C(s32 amount)
 
 /// #gm_80162A98
 
-/// #gm_80162B4C
+void gm_80162B4C(s32 amount)
+{
+    u32* ptr;
+    u32 sum;
+
+    ptr = gmMainLib_8015CDBC();
+    sum = *ptr + amount;
+    *ptr = (sum > (u32) -1) ? (u32) -1 : sum;
+}
 
 void gm_80162B98(void)
 {
@@ -1740,8 +1748,9 @@ void gm_80167BC8(VsModeData* vs_data)
             handicap =
                 gmMainLib_8015CE44(i, (s32) vs_data->data.players[i].xA);
             if (handicap != NULL) {
-                vs_data->data.players[i].handicap = *handicap;
-                // TODO :: fix these to actually get the offensive and
+                vs_data->data.players[i].handicap =
+                    *handicap; ///< @todo :: fix these to actually get the
+                               ///< offensive and
                 // defensive ratios just not sure how to setup the structs
                 vs_data->data.players[i].x18 = lbl_803B7930[(u8) *handicap].x;
                 vs_data->data.players[i].x1C = lbl_803B7930[(u8) *handicap].y;
@@ -1763,9 +1772,8 @@ void gm_80167BC8(VsModeData* vs_data)
     vs_data->data.rules.x1_7 = (rules->friendly_fire & 1);
     vs_data->data.rules.x30 = 0.1f * rules->damage_ratio;
     vs_data->data.rules.xB = (s8) prefs->item_freq;
-    prefs = gmMainLib_8015CC58();
-
-    // TODO :: some weird item copy thing that needs to be fixed
+    prefs = gmMainLib_8015CC58(); ///< @todo :: some weird item copy thing that
+                                  ///< needs to be fixed
     i = 0;
     do {
         if ((s32) lbl_803B7844[i] != 0x23) {
@@ -2139,7 +2147,7 @@ void gm_80168F88(void)
     lbAudioAx_80027648();
 }
 
-// UnclePunch: Audio_LoadAnnouncer
+/// UnclePunch: Audio_LoadAnnouncer
 void gm_80168FC4(void)
 {
     lbAudioAx_80026F2C(0x12);
@@ -2272,22 +2280,30 @@ int gm_801694A0(HSD_GObj* arg0)
 
 UNK_T gm_80169520(void)
 {
-    return &M2C_FIELD(&lbl_8046B488, UNK_T*, 0x20);
+    return lbl_8046B488.x20;
 }
 
 UNK_T gm_80169530(void)
 {
-    return &M2C_FIELD(&lbl_8046B488, UNK_T*, 0xA2);
+    return lbl_8046B488.xA2;
 }
 
 UNK_T gm_80169540(void)
 {
-    return &M2C_FIELD(&lbl_8046B488, UNK_T*, 0x124);
+    return lbl_8046B488.x124;
 }
 
-/// #fn_80169550
+void fn_80169550(int slot)
+{
+    s8 idx = lbl_8046B488.x1A6[slot];
+    lbl_8046B488.x20[idx] = -1;
+}
 
-/// #fn_80169574
+void fn_80169574(ssize_t size, void* buf)
+{
+    memzero(buf, size);
+    ((s8*) buf)[size] = -2;
+}
 
 /// #fn_801695BC
 

@@ -38,6 +38,7 @@ static struct {
     int x0;
     HSD_JObj* x4[0xF];
 } lbl_804735A8;
+/// @brief related to 1p splash screen
 static struct {
     HSD_ImageDesc x40[3];
     HSD_ImageDesc x88[3];
@@ -46,15 +47,18 @@ static struct {
     u8 xE1;
     u8 xE2;
     u8 xE3;
-    int xE4;
-    int xE8;
+    int xE4; ///< related to model scale
+    int xE8; ///< game type
     u8 xEC;
     u8 xED;
-    u8 xEE;
-    u8 xEF;
-    u8 xF0;
-    u8 xF1;
+    u8 xEE;    ///< roadmap (IrRdMap) progress
+    u8 xEF;    ///< left char amt
+    u8 xF0;    ///< right char amt
+    u8 xF1[3]; ///< left char ids
+    u8 xF4[3]; ///< right char ids
 } lbl_804735E8;
+
+static HSD_Archive* lbl_804D65F4;
 
 static struct {
     u8 pad[0x6A8];
@@ -249,11 +253,55 @@ void fn_8018575C(HSD_GObj* gobj)
 
 /// #fn_801857C4
 
-/// #fn_801859C8
+void fn_801859C8(HSD_GObj* gobj)
+{
+    HSD_SObj* sobj = gobj->hsd_obj;
+
+    while (sobj != NULL) {
+        if (sobj->x48 != 0) {
+            sobj->x48--;
+            if (sobj->x48 == 0) {
+                sobj->x40 &= ~1;
+            }
+        }
+        sobj = sobj->next;
+    }
+}
 
 /// #fn_80185A0C
 
-/// #fn_80185D64
+void fn_80185D64(void)
+{
+    int i;
+    u8* ptr;
+
+    ftDemo_ObjAllocInit();
+    Player_InitAllPlayers();
+
+    /// @todo fix pointer arithmetic
+    /// is this indicative of an inner struct starting at xE4?
+    ptr = (u8*) &lbl_804735E8.xE4;
+    for (i = 0; i < lbl_804735E8.xEF; i++) {
+        /// how do i access this sanely?
+        // its clearly iterating through xF1
+        u8 chr = ptr[0x0D];
+        if (chr != CHKIND_MAX) {
+            Player_80036E20(chr, lbl_804D65F4, 1);
+        }
+        ptr++;
+    }
+
+    ptr = (u8*) &lbl_804735E8.xE4;
+    for (i = 0; i < lbl_804735E8.xF0; i++) {
+        if (ptr[0x10] == CKIND_GKOOPS) {
+            ptr[0x10] = CKIND_KOOPA;
+        }
+        if (ptr[0x10] != CHKIND_MAX) {
+            Player_80036E20(ptr[0x10], lbl_804D65F4, 1);
+        }
+        ptr++;
+    }
+}
 
 /// #fn_80185E34
 
@@ -465,9 +513,25 @@ void fn_80187C9C(HSD_GObj* gobj, int arg1)
 
 /// #gm_80187F48_OnEnter
 
-/// #gm_80188364_OnLeave
+static HSD_Archive* lbl_804D6620;
 
-/// #gm_8018838C_OnFrame
+void gm_80188364_OnLeave(void* arg0)
+{
+    HSD_Archive** var = &lbl_804D6620;
+    lbArchive_80016EFC(*var);
+}
+
+static struct {
+    u8 pad[0x36];
+    u8 x36;
+} lbl_804736C0;
+
+void gm_8018838C_OnFrame(void)
+{
+    if (((u8) lbl_804736C0.x36 >> 2U) & 1) {
+        gm_801A4B60();
+    }
+}
 
 /// #gm_801883C0
 
@@ -529,11 +593,20 @@ f32 gm_8018A1D8(u8 difficulty, u8 stage_slot)
            100.0F;
 }
 
-/// #gm_8018A228
+u8 gm_8018A228(u8 difficulty, u8 stage_slot, u8 idx)
+{
+    return lbl_803D9910[stage_slot + (difficulty * 5)].pad_6[idx * 3];
+}
 
-/// #gm_8018A25C
+u8 gm_8018A25C(u8 difficulty, u8 stage_slot, u8 arg2)
+{
+    return lbl_803D9910[stage_slot + difficulty * 5].pad_6[arg2 * 3 + 1];
+}
 
-/// #gm_8018A290
+u8 gm_8018A290(u8 difficulty, u8 stage_slot, u8 idx)
+{
+    return lbl_803D9910[stage_slot + (difficulty * 5)].pad_6[2 + idx * 3];
+}
 
 f32 gm_8018A2C4(u8 difficulty, u8 stage_slot)
 {

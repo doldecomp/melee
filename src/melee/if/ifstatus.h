@@ -11,8 +11,8 @@
 #include <baselib/forward.h>
 
 /* 2F4910 */ HudIndex* ifStatus_802F4910(void);
-/* 2F4B84 */ void ifStatus_802F4B84(void);
-/* 2F4EDC */ void ifStatus_802F4EDC(void);
+/* 2F4B84 */ void ifStatus_802F4B84(IfDamageState* state, s32 is_stamina);
+/* 2F4EDC */ void ifStatus_802F4EDC(HSD_GObj* gobj);
 /* 2F5B48 */ void ifStatus_802F5B48(void);
 /* 2F5DE0 */ void ifStatus_802F5DE0(HSD_GObj* player, s32 arg1);
 /* 2F5E50 */ void ifStatus_802F5E50(HSD_GObj* gobj, s32 arg1);

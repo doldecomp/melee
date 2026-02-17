@@ -1,11 +1,17 @@
 #include "itgamewatchchef.h"
 
+#include "math.h"
+
+#include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/item.h"
+
+#include <baselib/jobj.h>
 
 /// #it_802C837C
 
-bool it_2725_Logic112_DmgDealt(Item_GObj* gobj)
+bool itGameWatchChef_Logic112_DmgDealt(Item_GObj* gobj)
 {
     it_802C875C(gobj);
     return false;
@@ -15,11 +21,28 @@ bool it_2725_Logic112_DmgDealt(Item_GObj* gobj)
 
 /// #itGamewatchchef_UnkMotion0_Anim
 
-/// #itGamewatchchef_UnkMotion0_Phys
+void itGamewatchchef_UnkMotion0_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itGamewatchchefAttributes* attrs =
+        ip->xC4_article_data->x4_specialAttributes;
+    s32 index = ip->xDD4_itemVar.gamewatchchef.x4;
+    it_80272860(gobj, attrs->entries[index].x8, attrs->entries[index].xC);
+}
 
 /// #itGamewatchchef_UnkMotion0_Coll
 
-/// #it_802C875C
+void it_802C875C(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itGamewatchchefAttributes* attrs =
+        ip->xC4_article_data->x4_specialAttributes;
+    PAD_STACK(8);
+    ip->x40_vel.y = 0.0f;
+    ip->x40_vel.x = 0.0f;
+    it_80275158(gobj, attrs->xC);
+    Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
+}
 
 /// #itGamewatchchef_UnkMotion1_Anim
 
@@ -27,20 +50,50 @@ void itGamewatchchef_UnkMotion1_Phys(Item_GObj* gobj) {}
 
 /// #itGamewatchchef_UnkMotion1_Coll
 
-/// #it_2725_Logic112_Clanked
+bool it_2725_Logic112_Clanked(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itGamewatchchefAttributes* attrs =
+        ip->xC4_article_data->x4_specialAttributes;
+    PAD_STACK(16);
+    ip->x40_vel.y = 0.0f;
+    ip->x40_vel.x = 0.0f;
+    it_80275158(gobj, attrs->xC);
+    Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
+    return false;
+}
 
-/// #it_2725_Logic112_HitShield
+bool it_2725_Logic112_HitShield(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itGamewatchchefAttributes* attrs =
+        ip->xC4_article_data->x4_specialAttributes;
+    PAD_STACK(16);
+    ip->x40_vel.y = 0.0f;
+    ip->x40_vel.x = 0.0f;
+    it_80275158(gobj, attrs->xC);
+    Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
+    return false;
+}
 
 /// #it_2725_Logic112_Absorbed
 
-bool it_2725_Logic112_ShieldBounced(Item_GObj* gobj)
+bool itGameWatchChef_Logic112_ShieldBounced(Item_GObj* gobj)
 {
     return itColl_BounceOffShield(gobj);
 }
 
-/// #it_2725_Logic112_Reflected
+bool itGameWatchChef_Logic112_Reflected(Item_GObj* gobj)
+{
+    const f32 PI_2 = M_PI / 2;
+    Item* ip = GET_ITEM(gobj);
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+    it_80273030(gobj);
+    HSD_JObjSetRotationY(jobj, PI_2 * ip->facing_dir);
+    return false;
+}
 
-void it_2725_Logic112_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
+void itGameWatchChef_Logic112_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }

@@ -12,6 +12,7 @@ typedef struct _HSD_PerfStat {
 } HSD_PerfStat;
 
 extern HSD_PerfStat HSD_PerfCurrentStat;
+extern HSD_PerfStat HSD_PerfLastStat;
 
 void HSD_PerfInitStat(void);
 void HSD_PerfSetStartTime(void);

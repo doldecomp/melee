@@ -34,7 +34,7 @@ typedef struct _ftMapping {
     s8 has_transformation;
 } ftMapping;
 
-/// TODO delete after fixing functions that use this
+/// @todo delete after fixing functions that use this
 struct Unk_Struct_w_Array {
     char some_str[8 + 4]; //"PdPm.dat"
     char another_str[16 + 4];
@@ -102,7 +102,7 @@ static inline void Player_CheckSlot(int slot)
     }
 }
 
-// Matches when everything is moved over
+/// Matches when everything is moved over
 StaticPlayer* Player_GetPtrForSlot(int slot)
 {
     Player_CheckSlot(slot);
@@ -358,7 +358,7 @@ void Player_80031FB0(int slot, s32 entity_index)
     }
 }
 
-/// new match decomp.me/scratch/oHfiV  TODO
+/// new match decomp.me/scratch/oHfiV  @todo
 //// old match decomp.me/scratch/8otnq
 void Player_80032070(int slot, bool bool_arg)
 {
@@ -2075,7 +2075,7 @@ void Player_80036E20(CharacterKind ckind, HSD_Archive* archive, s32 arg2)
     }
 }
 
-s32 Player_80036EA0(s32 slot)
+HSD_JObj* Player_80036EA0(s32 slot)
 {
     StaticPlayer* player;
     HSD_GObj* entity;
@@ -2085,11 +2085,10 @@ s32 Player_80036EA0(s32 slot)
     entity = player->player_entity[player->transformed[0]];
 
     if (entity) {
-        /// @todo Eliminate cast.
-        return (s32) ftLib_800865F0(entity);
+        return ftLib_800865F0(entity);
     }
 
-    return 0;
+    return NULL;
 }
 
 void Player_80036F34(s32 slot, s32 arg1)

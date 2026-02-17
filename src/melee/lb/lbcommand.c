@@ -53,7 +53,7 @@ void Command_04(CommandInfo* info)
     info->loop_count -= 2;
 }
 
-// Subroutine
+/// Subroutine
 void Command_05(CommandInfo* info)
 {
     NEXT_CMD(info);

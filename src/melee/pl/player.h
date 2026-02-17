@@ -310,7 +310,7 @@ void Player_InitAllPlayers(void);
 void Player_80036DA4(void);
 void Player_80036DD8(void);
 void Player_80036E20(CharacterKind ckind, HSD_Archive* archive, s32 arg2);
-s32 Player_80036EA0(s32 slot);
+HSD_JObj* Player_80036EA0(s32 slot);
 void Player_80036F34(s32 slot, s32 arg1);
 void Player_80037054(s32 slot, s32 arg1);
 void Player_SetOtherStamina(s32 slot, s32 stamina);

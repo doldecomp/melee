@@ -2,6 +2,8 @@
 
 #include "it/inlines.h"
 #include "it/it_26B1.h"
+#include "it/it_2725.h"
+#include "it/item.h"
 #include "it/types.h"
 
 #include <baselib/gobj.h>
@@ -18,11 +20,30 @@ s32 it_802B1FC8(Item_GObj* gobj)
     return it_802B22B8(gobj);
 }
 
-/// #it_802B1FE8
+void it_802B1FE8(Item_GObj* gobj, Vec3* pos)
+{
+    Item* ip = GET_ITEM(gobj);
+    itPikachuthunderAttributes* attrs =
+        ip->xC4_article_data->x4_specialAttributes;
+    f32 scale = ip->xDD4_itemVar.pikachuthunder.x18;
+    f32 offset = -attrs->x8;
+
+    offset *= scale;
+    *pos = ip->pos;
+    pos->y += offset;
+}
 
 /// #it_2725_Logic39_Destroyed
 
-/// #it_802B2080
+void it_802B2080(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itPikachuthunderAttributes* attrs =
+        ip->xC4_article_data->x4_specialAttributes;
+    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+    it_80275158(gobj, attrs->x0);
+    it_8026BB44(gobj);
+}
 
 /// #itPikachuthunder_UnkMotion0_Anim
 
@@ -44,27 +65,27 @@ bool itPikachuthunder_UnkMotion1_Anim(Item_GObj* gobj)
 
 /// #itPikachuthunder_UnkMotion2_Anim
 
-bool it_2725_Logic39_DmgDealt(Item_GObj* arg0)
+bool itPikachuThunder_Logic39_DmgDealt(Item_GObj* arg0)
 {
     return false;
 }
 
-bool it_2725_Logic39_HitShield(Item_GObj* arg0)
+bool itPikachuThunder_Logic39_HitShield(Item_GObj* arg0)
 {
     return false;
 }
 
-bool it_2725_Logic39_Clanked(Item_GObj* arg0)
+bool itPikachuThunder_Logic39_Clanked(Item_GObj* arg0)
 {
     return false;
 }
 
-bool it_2725_Logic39_Absorbed(Item_GObj* arg0)
+bool itPikachuThunder_Logic39_Absorbed(Item_GObj* arg0)
 {
     return false;
 }
 
-void it_2725_Logic39_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
+void itPikachuThunder_Logic39_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     Item* ip = GET_ITEM(gobj);
     if (ip->xDD4_itemVar.pikachuthunder.x38 == ref_gobj) {

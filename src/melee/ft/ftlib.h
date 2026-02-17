@@ -17,7 +17,7 @@
 /* 0865C0 */ float ftLib_800865C0(HSD_GObj*);
 /* 0865CC */ s32 ftLib_800865CC(HSD_GObj*);
 /* 0865D8 */ void ftLib_800865D8(HSD_GObj*, float*, float*);
-/* 0865F0 */ void* ftLib_800865F0(HSD_GObj*);
+/* 0865F0 */ HSD_JObj* ftLib_800865F0(HSD_GObj*);
 /* 086630 */ void* ftLib_80086630(Fighter_GObj*, Fighter_Part part);
 /* 086644 */ void ftLib_80086644(HSD_GObj*, Vec3*);
 /* 086664 */ void ftLib_80086664(HSD_GObj*, Vec3*);
@@ -94,9 +94,9 @@
 /* 0874BC */ s32 ftLib_800874BC(HSD_GObj*);
 /* 0874CC */ void ftLib_800874CC(HSD_GObj*, void*, s32);
 /* 087508 */ void ftLib_80087508(s8, u8);
-// /* 087508 */ void ftLib_80087508(FighterKind, u8);
+/// /* 087508 */ void ftLib_80087508(FighterKind, u8);
 /* 087574 */ void ftLib_80087574(s8);
-// /* 087574 */ void ftLib_80087574(FighterKind);
+/// /* 087574 */ void ftLib_80087574(FighterKind);
 /* 087610 */ void ftLib_80087610(u8);
 /* 0876B4 */ void ftLib_800876B4(HSD_GObj*);
 /* 0876D4 */ bool ftLib_800876D4(HSD_GObj*);

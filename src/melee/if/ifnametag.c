@@ -31,17 +31,17 @@
 #include <MSL/stdio.h>
 #include <MSL/string.h>
 
-// .data
-// IfAll.dat::ScInfPnm_scene_models
-//  0- 3 - 1P      - Red, Blue, Yellow, Green
-//  4- 7 - 2P      - Red, Blue, Yellow, Green
-//  8-11 - 3P      - Red, Blue, Yellow, Green
-// 12-15 - 4P      - Red, Blue, Yellow, Green
-// 16-19 - CP      - Red, Blue, Gray,   Green
-// 20-23 - Nametag - Red, Blue, Yellow, Green
-// 24-27 - Heart   - Red, Blue, Yellow, Green
-// 28    - Nametag - Gray
-// 29-30 - Empty   - Gray
+/// .data
+/// IfAll.dat::ScInfPnm_scene_models
+///  0- 3 - 1P      - Red, Blue, Yellow, Green
+///  4- 7 - 2P      - Red, Blue, Yellow, Green
+///  8-11 - 3P      - Red, Blue, Yellow, Green
+/// 12-15 - 4P      - Red, Blue, Yellow, Green
+/// 16-19 - CP      - Red, Blue, Gray,   Green
+/// 20-23 - Nametag - Red, Blue, Yellow, Green
+/// 24-27 - Heart   - Red, Blue, Yellow, Green
+/// 28    - Nametag - Gray
+/// 29-30 - Empty   - Gray
 /* 3F98B8 */ static float un_803F98B8[5][5] = {
     {
         0.0,  // 1P Red
@@ -116,19 +116,19 @@
     640.0f
 };
 
-// .bss
+/// .bss
 /* 4A1ED0 */ static StaticModelDesc un_804A1ED0;
 /* 4A1EE0 */ static HSD_GObj* un_804A1EE0[PL_SLOT_MAX];
 /* 4A1EF8 */ static int un_804A1EF8[PL_SLOT_MAX];
 
-// .sbss
+/// .sbss
 /* 4D6D68 */ static HSD_GObj* un_804D6D68;
 /* 4D6D6C */ static u8 un_804D6D6C;
 /* 4D6D70 */ static u8 un_804D6D70[PL_SLOT_MAX];
 /* 4D6D78 */ static HSD_Text* un_804D6D78;
 /* 4D6D7C */ static int un_804D6D7C;
 
-// NameTag_Create and un_802FD28C will try to inline this otherwise
+/// NameTag_Create and un_802FD28C will try to inline this otherwise
 #pragma push
 #pragma dont_inline on
 float un_802FC9B4(unsigned char slot, unsigned char arg1, unsigned char arg2,
@@ -182,7 +182,7 @@ void fn_802FCAC4(HSD_GObj* gobj, int pass)
     }
 }
 
-// un_802FD4C8 will try to inline this otherwise
+/// un_802FD4C8 will try to inline this otherwise
 #pragma push
 #pragma dont_inline on
 void un_802FCBA0(void)

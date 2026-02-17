@@ -1,11 +1,14 @@
 #include "itwhitebea.h"
 
+#include "cm/camera.h"
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
+#include "it/items/itfreeze.h"
 #include "it/types.h"
+#include "sysdolphin/baselib/random.h"
 
 /// #it_802E31F8
 
@@ -70,7 +73,15 @@ bool itOldottosea_UnkMotion10_Coll(Item_GObj* gobj)
     return it_8027C79C(gobj);
 }
 
-/// #it_2725_Logic3_Destroyed
+void it_2725_Logic3_Destroyed(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if ((u32) ip->xDD4_itemVar.whitebea.x20 != 0U) {
+        it_8028ECE0((HSD_GObj*) ip->xDD4_itemVar.whitebea.x20);
+    }
+    it_802E37A4(gobj);
+    it_2725_Logic9_Destroyed(gobj);
+}
 
 void it_802E3528(Item_GObj* gobj)
 {
@@ -104,8 +115,8 @@ void it_802E3784(Item_GObj* gobj, Item_GObj* ref_gobj)
     it_8026B894(gobj, ref_gobj);
 }
 
-// This function only called by it_3F14_Logic17_PickedUp from itfreeze, so
-// using those item vars
+/// This function only called by itFreeze_Logic17_PickedUp from itfreeze, so
+/// using those item vars
 void it_802E37A4(Item_GObj* gobj)
 {
     if (gobj != NULL) {
@@ -115,7 +126,29 @@ void it_802E37A4(Item_GObj* gobj)
 
 /// #it_802E37BC
 
-/// #it_802E3884
+bool it_802E3884(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itWhiteBeaAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+    PAD_STACK(16);
+    ip->init_facing_dir = ip->facing_dir;
+    ip->xC9C += it_8027CBFC(gobj);
+    if (ip->xC9C > *attr->x0 || ip->msid == 9) {
+        it_8027C9D8(ip);
+        it_802756D0(gobj);
+        it_80275474(gobj);
+        it_8027CE44(gobj);
+        Camera_80030E44(2, &ip->pos);
+        if (HSD_Randf() < it_804D6D40[2]) {
+            it_802E4980(gobj);
+        } else {
+            it_802E48B4(gobj);
+        }
+    } else {
+        it_802E3ED0(gobj);
+    }
+    return false;
+}
 
 void fn_802E398C(Item_GObj* gobj)
 {
@@ -147,7 +180,18 @@ bool itWhitebea_UnkMotion0_Coll(Item_GObj* gobj)
 
 /// #itWhitebea_UnkMotion1_Phys
 
-/// #itWhitebea_UnkMotion1_Coll
+bool itWhitebea_UnkMotion1_Coll(Item_GObj* gobj)
+{
+    PAD_STACK(8);
+    if (it_8026D8A4(gobj, it_802E4190) != 0) {
+        if (it_80276308(gobj) != 0) {
+            it_802E4190(gobj);
+        }
+    } else {
+        it_802E3DA0(gobj);
+    }
+    return it_8027C794(gobj);
+}
 
 /// #it_802E3DA0
 
@@ -213,7 +257,13 @@ bool itWhitebea_UnkMotion2_Coll(Item_GObj* gobj)
     return it_8027C794(gobj);
 }
 
-/// #it_802E436C
+void it_802E436C(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    it_802762B0(ip);
+    Item_80268E5C(gobj, 5, ITEM_ANIM_UPDATE);
+    ip->xDD4_itemVar.whitebea.x40 = 0x14;
+}
 
 /// #itWhitebea_UnkMotion5_Anim
 
@@ -259,7 +309,7 @@ bool itWhitebea_UnkMotion7_Coll(Item_GObj* gobj)
     return it_8027C794(gobj);
 }
 
-void it_2725_Logic9_PickedUp(Item_GObj* gobj)
+void itWhiteBea_Logic9_PickedUp(Item_GObj* gobj)
 {
     Item_80268E5C(gobj, 8, ITEM_ANIM_UPDATE);
 }
@@ -276,7 +326,14 @@ void itWhitebea_UnkMotion8_Phys(Item_GObj* gobj) {}
 
 /// #it_2725_Logic9_Dropped
 
-/// #it_2725_Logic9_Thrown
+void it_2725_Logic9_Thrown(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    it_8027CB3C(gobj);
+    ip->xDD4_itemVar.whitebea.x40 = 0;
+    ip->xDD4_itemVar.whitebea.x3C = 1;
+    Item_80268E5C(gobj, 9, ITEM_ANIM_UPDATE);
+}
 
 bool itWhitebea_UnkMotion9_Anim(Item_GObj* gobj)
 {

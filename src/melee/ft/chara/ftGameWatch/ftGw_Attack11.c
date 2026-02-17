@@ -17,8 +17,8 @@
 
 #include <dolphin/mtx.h>
 
-// 0x8014BDB0
-// https://decomp.me/scratch/7BADg // Create Insecticide Spray Item
+/// 0x8014BDB0
+/// https://decomp.me/scratch/7BADg // Create Insecticide Spray Item
 void ftGw_Attack11_ItemGreenhouseSetup(HSD_GObj* gobj)
 {
     Vec3 sp10;
@@ -47,8 +47,8 @@ void ftGw_Attack11_ItemGreenhouseSetup(HSD_GObj* gobj)
     fp->accessory4_cb = NULL;
 }
 
-// 0x8014BE84
-// https://decomp.me/scratch/H3n4O // Decide Jab attack
+/// 0x8014BE84
+/// https://decomp.me/scratch/H3n4O // Decide Jab attack
 void ftGw_Attack11_DecideAction(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -78,9 +78,9 @@ void ftGw_Attack11_DecideAction(HSD_GObj* gobj)
     }
 }
 
-// 0x8014BF48
-// https://decomp.me/scratch/zLba7 // Set flags on Mr. Game & Watch's
-// Insecticide Sprayer
+/// 0x8014BF48
+/// https://decomp.me/scratch/zLba7 // Set flags on Mr. Game & Watch's
+/// Insecticide Sprayer
 void ftGw_Attack11_ItemGreenhouseSetFlag(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -89,9 +89,9 @@ void ftGw_Attack11_ItemGreenhouseSetFlag(HSD_GObj* gobj)
     fp->fv.gw.x224C_greenhouseGObj = NULL;
 }
 
-// 0x8014BF7C
-// https://decomp.me/scratch/2RDRo // Remove Mr. Game & Watch's Insecticide
-// Sprayer
+/// 0x8014BF7C
+/// https://decomp.me/scratch/2RDRo // Remove Mr. Game & Watch's Insecticide
+/// Sprayer
 void ftGw_Attack11_ItemGreenhouseRemove(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -104,9 +104,9 @@ void ftGw_Attack11_ItemGreenhouseRemove(HSD_GObj* gobj)
     }
 }
 
-// 0x8014BFD4
-// https://decomp.me/scratch/zVtUN // Apply hitlag to Mr. Game & Watch's
-// Insecticide Sprayer
+/// 0x8014BFD4
+/// https://decomp.me/scratch/zVtUN // Apply hitlag to Mr. Game & Watch's
+/// Insecticide Sprayer
 void ftGw_Attack11_ItemGreenhouseEnterHitlag(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -115,7 +115,7 @@ void ftGw_Attack11_ItemGreenhouseEnterHitlag(HSD_GObj* gobj)
     }
 }
 
-// 0x8014C004 - Remove hitlag for Mr. Game & Watch's Insecticide Sprayer
+/// 0x8014C004 - Remove hitlag for Mr. Game & Watch's Insecticide Sprayer
 void ftGw_Attack11_ItemGreenhouseExitHitlag(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -124,9 +124,9 @@ void ftGw_Attack11_ItemGreenhouseExitHitlag(HSD_GObj* gobj)
     }
 }
 
-// 0x8014C034
-// https://decomp.me/scratch/Nkgz4 // Check if Mr. Game & Watch is in any of
-// his jab action states
+/// 0x8014C034
+/// https://decomp.me/scratch/Nkgz4 // Check if Mr. Game & Watch is in any of
+/// his jab action states
 bool ftGw_Attack11_ItemGreenhouse_CheckAll(HSD_GObj* gobj)
 {
     s32 msid = GET_FIGHTER(gobj)->motion_id;
@@ -136,7 +136,7 @@ bool ftGw_Attack11_ItemGreenhouse_CheckAll(HSD_GObj* gobj)
     return true;
 }
 
-// 0x8014C05C - Check if Mr. Game & Watch is performing Jab 1 (Attack11)
+/// 0x8014C05C - Check if Mr. Game & Watch is performing Jab 1 (Attack11)
 bool ftGw_Attack11_ItemGreenhouse_CheckAttack11(HSD_GObj* gobj)
 {
     if (GET_FIGHTER(gobj)->motion_id != ftGw_MS_Attack11) {
@@ -145,9 +145,9 @@ bool ftGw_Attack11_ItemGreenhouse_CheckAttack11(HSD_GObj* gobj)
     return false;
 }
 
-// 0x8014C07C
-// https://decomp.me/scratch/OYf9U // Mr. Game & Watch's Jab Motion State
-// handler
+/// 0x8014C07C
+/// https://decomp.me/scratch/OYf9U // Mr. Game & Watch's Jab Motion State
+/// handler
 void ftGw_Attack11_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -169,8 +169,9 @@ void ftGw_Attack11_Enter(HSD_GObj* gobj)
     }
 }
 
-// 0x8014C138
-// https://decomp.me/scratch/BKUIu // Mr. Game & Watch's Jab Animation callback
+/// 0x8014C138
+/// https://decomp.me/scratch/BKUIu // Mr. Game & Watch's Jab Animation
+/// callback
 void ftGw_Attack11_Anim(HSD_GObj* gobj)
 {
     u8 _[8];
@@ -180,19 +181,19 @@ void ftGw_Attack11_Anim(HSD_GObj* gobj)
     }
 }
 
-// 0x8014C174 - Mr. Game & Watch's Jab IASA callback
+/// 0x8014C174 - Mr. Game & Watch's Jab IASA callback
 void ftGw_Attack11_IASA(HSD_GObj* gobj)
 {
     ftCo_Attack11_IASA(gobj);
 }
 
-// 0x8014C194 - Mr. Game & Watch's Jab Physics callback
+/// 0x8014C194 - Mr. Game & Watch's Jab Physics callback
 void ftGw_Attack11_Phys(HSD_GObj* gobj)
 {
     ft_80084FA8(gobj);
 }
 
-// 0x8014C1B4 - Mr. Game & Watch's Jab Collision callback
+/// 0x8014C1B4 - Mr. Game & Watch's Jab Collision callback
 void ftGw_Attack11_Coll(HSD_GObj* gobj)
 {
     ft_80084104(gobj);

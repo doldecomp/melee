@@ -2,33 +2,41 @@
 
 #include "it/inlines.h"
 #include "it/it_26B1.h"
+#include "it/item.h"
 
 UNK_T it_802EAF28(Item_GObj* item_gobj)
 {
-    return M2C_FIELD(&GET_ITEM(item_gobj)->xDD4_itemVar._, UNK_T*, 0x38);
+    return GET_ITEM(item_gobj)->xDD4_itemVar.greatfoxlaser.x38;
 }
 
 /// #it_802EAF34
 
 /// #it_802EB1EC
 
-/// #it_802EB268
+void it_802EB268(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    it_8026B3A8(gobj);
+    ip->xDD4_itemVar.greatfoxlaser.x36 = 60;
+    ip->xDD4_itemVar.greatfoxlaser.x34 = 0;
+    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+}
 
 /// #itGreatfoxlaser_UnkMotion1_Anim
 
 /// #itGreatfoxlaser_UnkMotion1_Phys
 
-bool it_2725_Logic27_DmgDealt(Item_GObj* item_gobj)
+bool itGreatFoxLaser_Logic27_DmgDealt(Item_GObj* item_gobj)
 {
     return false;
 }
 
-bool it_2725_Logic27_Clanked(Item_GObj* item_gobj)
+bool itGreatFoxLaser_Logic27_Clanked(Item_GObj* item_gobj)
 {
     return false;
 }
 
-bool it_2725_Logic27_Absorbed(Item_GObj* item_gobj)
+bool itGreatFoxLaser_Logic27_Absorbed(Item_GObj* item_gobj)
 {
     return false;
 }

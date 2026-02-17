@@ -4,6 +4,7 @@
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/item.h"
 
 /// #it_802C4D10
 
@@ -39,7 +40,13 @@ bool it_802C4F50(Item_GObj* gobj, CollData* cd)
 
 /// #it_802C573C
 
-/// #it_2725_Logic101_PickedUp
+void it_2725_Logic101_PickedUp(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    PAD_STACK(0x18);
+    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+    ip->xDD4_itemVar.mewtwoshadowball.x50 = 0.0F;
+}
 
 /// #itMewtwoshadowball_UnkMotion0_Anim
 
@@ -67,7 +74,13 @@ void itMewtwoshadowball_UnkMotion9_Phys(Item_GObj* gobj) {}
 
 /// #itMewtwoshadowball_UnkMotion9_Coll
 
-/// #fn_802C5E18
+void fn_802C5E18(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->xDD4_itemVar.mewtwoshadowball.x20++;
+    ip->xDD4_itemVar.mewtwoshadowball.x20 =
+        ip->xDD4_itemVar.mewtwoshadowball.x20 % 3;
+}
 
 /// #it_802C5E5C
 
@@ -84,31 +97,31 @@ bool itMewtwoshadowball_UnkMotion17_Coll(Item_GObj* gobj)
     return false;
 }
 
-bool it_2725_Logic101_DmgDealt(Item_GObj* arg0)
+bool itMewtwoShadowball_Logic101_DmgDealt(Item_GObj* arg0)
 {
     return true;
 }
 
-bool it_2725_Logic101_Clanked(Item_GObj* arg0)
+bool itMewtwoShadowball_Logic101_Clanked(Item_GObj* arg0)
 {
     return true;
 }
 
-bool it_2725_Logic101_Absorbed(Item_GObj* arg0)
+bool itMewtwoShadowball_Logic101_Absorbed(Item_GObj* arg0)
 {
     return true;
 }
 
 /// #it_2725_Logic101_Reflected
 
-bool it_2725_Logic101_HitShield(Item_GObj* arg0)
+bool itMewtwoShadowball_Logic101_HitShield(Item_GObj* arg0)
 {
     return true;
 }
 
 /// #it_2725_Logic101_ShieldBounced
 
-void it_2725_Logic101_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
+void itMewtwoShadowball_Logic101_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }

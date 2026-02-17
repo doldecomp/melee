@@ -79,7 +79,7 @@ static u8 mnDiagram_803EE74C[0x1C] = {
     0x18, 0x13, 0x14, 0x17, 0x16, 0,   0,   0,
 };
 
-static Point3d mnDiagram_803EE728[3] = {
+static Vec3 mnDiagram_803EE728[3] = {
     { 4.0F, 1.0F, 0.0F },
     { -3.0F, 0.8F, 0.0F },
     { -1.0F, 0.7F, 0.0F },
@@ -893,7 +893,7 @@ typedef struct mnDiagram_PopupData {
 void mnDiagram_PopupAnimProc(void* arg0)
 {
     mnDiagram_PopupData* data = ((HSD_GObj*) arg0)->user_data;
-    Point3d pos;
+    Vec3 pos;
 
     HSD_JObjAnimAll(data->jobjs[5]);
     lb_8000B1CC(data->jobjs[8], mnDiagram_803EE728, &pos);
@@ -939,7 +939,7 @@ void mnDiagram_PopupAnimProc(void* arg0)
 void mnDiagram_80240D94(void* arg0, s32 arg1, s32 arg2, s32 arg3)
 {
     mnDiagram_PopupData* data = ((HSD_GObj*) arg0)->user_data;
-    Point3d pos;
+    Vec3 pos;
     char buf[8];
     u16 kos;
     u16 sd_count;

@@ -13,7 +13,7 @@
 
 /// #it_80299C48
 
-void it_3F14_Logic40_Spawned(Item_GObj* gobj)
+void itHammerHead_Logic40_Spawned(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itHammerheadAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
@@ -22,7 +22,7 @@ void it_3F14_Logic40_Spawned(Item_GObj* gobj)
 
 /// #it_80299D7C
 
-void it_3F14_Logic40_PickedUp(Item_GObj* gobj)
+void itHammerHead_Logic40_PickedUp(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itHammerheadAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
@@ -37,7 +37,7 @@ bool itHammerhead_UnkMotion1_Anim(Item_GObj* gobj)
 
 void itHammerhead_UnkMotion1_Phys(Item_GObj* gobj) {}
 
-void it_3F14_Logic40_Dropped(Item_GObj* gobj)
+void itHammerHead_Logic40_Dropped(Item_GObj* gobj)
 {
     it_3F14_Logic40_Thrown(gobj);
 }
@@ -63,7 +63,20 @@ void it_80299F94(Item_GObj* gobj)
     it_80299FB4(gobj);
 }
 
-/// #it_80299FB4
+static inline Item* it_80299FB4_get(Item_GObj* gobj)
+{
+    return GET_ITEM(gobj);
+}
+
+void it_80299FB4(Item_GObj* gobj)
+{
+    Item* ip = it_80299FB4_get(gobj);
+
+    ip->x40_vel.y = 0.0F;
+    ip->x40_vel.x = 0.0F;
+    it_8026B390(gobj);
+    Item_80268E5C(gobj, 3, 1);
+}
 
 /// #itHammerhead_UnkMotion3_Anim
 
@@ -75,33 +88,33 @@ bool itHammerhead_UnkMotion3_Coll(Item_GObj* gobj)
     return false;
 }
 
-bool it_3F14_Logic40_DmgDealt(Item_GObj* arg0)
+bool itHammerHead_Logic40_DmgDealt(Item_GObj* arg0)
 {
     return false;
 }
 
-bool it_3F14_Logic40_Clanked(Item_GObj* arg0)
+bool itHammerHead_Logic40_Clanked(Item_GObj* arg0)
 {
     return false;
 }
 
-bool it_3F14_Logic40_HitShield(Item_GObj* arg0)
+bool itHammerHead_Logic40_HitShield(Item_GObj* arg0)
 {
     return false;
 }
 
-bool it_3F14_Logic40_Reflected(Item_GObj* gobj)
+bool itHammerHead_Logic40_Reflected(Item_GObj* gobj)
 {
     it_80273030(gobj);
     return false;
 }
 
-bool it_3F14_Logic40_DmgReceived(Item_GObj* arg0)
+bool itHammerHead_Logic40_DmgReceived(Item_GObj* arg0)
 {
     return false;
 }
 
-void it_3F14_Logic40_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
+void itHammerHead_Logic40_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }

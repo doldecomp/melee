@@ -5,6 +5,8 @@
 #include "ft/chara/ftSamus/types.h"
 #include "ft/fighter.h"
 #include "ft/ftcoll.h"
+#include "ft/inlines.h"
+#include "ftSamus/types.h"
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/itCharItems.h"
@@ -13,7 +15,7 @@
 #include <baselib/gobj.h>
 #include <baselib/gobjplink.h>
 
-void it_2725_Logic53_Spawned(Item_GObj* gobj)
+void itSamusGrapple_Logic53_Spawned(Item_GObj* gobj)
 {
     GET_ITEM(gobj)->xDD4_itemVar.samusgrapple.unk_10 = NULL;
 }
@@ -24,31 +26,28 @@ void it_2725_Logic53_Spawned(Item_GObj* gobj)
 
 /// #it_802B75FC
 
-void it_802B7B84(Item_GObj* arg0)
+void it_802B7B84(Item_GObj* gobj)
 {
-    Item* item;
-    Fighter* fp;
-    HSD_GObj* gobj;
-    ItemLink* item_link;
-
-    if (arg0 != NULL) {
-        item = arg0->user_data;
-        if (item != NULL) {
-            if (item->xDD4_itemVar.samusgrapple.x8 != NULL) {
-                fp = GET_FIGHTER(item->xDD4_itemVar.samusgrapple.x8);
+    if (gobj != NULL) {
+        Item* ip = GET_ITEM(gobj);
+        if (ip != NULL) {
+            if (ip->xDD4_itemVar.samusgrapple.x8 != NULL) {
+                Fighter* fp = GET_FIGHTER(ip->xDD4_itemVar.samusgrapple.x8);
                 if (fp != NULL) {
-                    item->xDD4_itemVar.samusgrapple.unk_10 = NULL;
+                    ip->xDD4_itemVar.samusgrapple.unk_10 = NULL;
                     fp->fv.ss.x223C = 0;
                     fp->accessory2_cb = 0;
                     fp->death1_cb = 0;
                     fp->accessory3_cb = 0;
-                    item_link = item->xDD4_itemVar.linkhookshot.x0;
-                    while (item_link != NULL) {
-                        gobj = item_link->x1D0_GObj;
-                        item_link = item_link->next;
-                        HSD_GObjPLink_80390228(gobj);
+                    {
+                        ItemLink* cur = ip->xDD4_itemVar.linkhookshot.x0;
+                        while (cur != NULL) {
+                            HSD_GObj* link_gobj = cur->gobj;
+                            cur = cur->next;
+                            HSD_GObjPLink_80390228(link_gobj);
+                        }
+                        Item_8026A8EC(gobj);
                     }
-                    Item_8026A8EC(arg0);
                 }
             }
         }
@@ -142,7 +141,7 @@ void itSamusgrapple_UnkMotion8_Phys(Item_GObj* gobj)
 
 /// #it_802BA760
 
-void it_2725_Logic53_PickedUp(Item_GObj* gobj)
+void itSamusGrapple_Logic53_PickedUp(Item_GObj* gobj)
 {
     PAD_STACK(16);
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
@@ -187,7 +186,7 @@ void it_802BAAE4(Item_GObj* gobj, Vec3* vel, f32 unused)
 {
     Item* ip = GET_ITEM(gobj);
     ItemLink* link = ip->xDD4_itemVar.linkhookshot.x0;
-    link->x8_vel = *vel;
+    link->vel = *vel;
     Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
     it_802A2428(gobj);
 }
@@ -234,22 +233,18 @@ void it_802BAC3C(Fighter_GObj* gobj)
 
 void it_802BAC80(Fighter_GObj* gobj)
 {
-    Item* ip;
-    Fighter* fp;
-
-    fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     if (fp->fv.ss.x223C != NULL) {
-        ip = GET_ITEM((HSD_GObj*) fp->fv.ss.x223C);
-        if (ip->xDD4_itemVar.samusgrapple.unk_10 != NULL) {
-            ((void (*)(Item_GObj*)) ip->xDD4_itemVar.samusgrapple.unk_10)(
-                fp->fv.ss.x223C);
+        Item* item = GET_ITEM(fp->fv.ss.x223C);
+        if (item->xDD4_itemVar.samusgrapple.unk_10) {
+            item->xDD4_itemVar.samusgrapple.unk_10(fp->fv.ss.x223C);
         }
     }
 }
 
 /// #it_802BACC4
 
-void it_2725_Logic53_EvtUnk(Item_GObj* gobj, Item_GObj* arg1)
+void itSamusGrapple_Logic53_EvtUnk(Item_GObj* gobj, Item_GObj* arg1)
 {
     Item* item = GET_ITEM(gobj);
     it_8026B894(gobj, arg1);

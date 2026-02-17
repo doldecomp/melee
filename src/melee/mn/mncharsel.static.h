@@ -27,13 +27,13 @@ static u8 mnCharSel_804D6CF6;
 static u8 mnCharSel_804D6CF8;
 static s8 mnCharSel_804D6CF9;
 
-// Can't be enum bc float, but reused values
+/// Can't be enum bc float, but reused values
 #define ICONROWHT_TOP_TOP 20.0F
 #define ICONROWHT_MID_TOP 13.0F
 #define ICONROWHT_BTM_TOP 6.0F
 #define ICONROWHT_BTM_BTM (-1.0F)
 
-// Can't be enum bc float, but reused values
+/// Can't be enum bc float, but reused values
 #define ICONBNDS_COL0_L (-30.0F)
 #define ICONBNDS_COL1_L (-24.4F)
 #define ICONBNDS_COL2_L (-17.4F)

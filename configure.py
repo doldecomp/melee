@@ -729,6 +729,12 @@ config.libs = [
             Object(NonMatching, "melee/ft/chara/ftLink/ftLk_SpecialN.c"),
             # Kirby
             Object(NonMatching, "melee/ft/chara/ftKirby/ftKb_Init.c"),
+            Object(NonMatching, "melee/ft/chara/ftKirby/ftKb_SpecialN.c"),
+            Object(NonMatching, "melee/ft/chara/ftKirby/ftKb_SpecialNPk.c"),
+            Object(NonMatching, "melee/ft/chara/ftKirby/ftKb_SpecialNFx.c"),
+            Object(NonMatching, "melee/ft/chara/ftKirby/ftKb_SpecialNNs.c"),
+            Object(NonMatching, "melee/ft/chara/ftKirby/ftKb_SpecialNZd.c"),
+            Object(NonMatching, "melee/ft/chara/ftKirby/ftKb_SpecialNYs.c"),
             # Donkey Kong
             Object(Matching, "melee/ft/chara/ftDonkey/ftDk_Init.c"),
             Object(Matching, "melee/ft/chara/ftDonkey/ftDk_SpecialLw.c"),
@@ -1223,7 +1229,7 @@ config.libs = [
             Object(Matching, "melee/it/items/itentei.c"),
             Object(Matching, "melee/it/items/itraikou.c"),
             Object(Matching, "melee/it/items/itsuikun.c"),
-            Object(NonMatching, "melee/it/items/itkireihana.c"),
+            Object(Matching, "melee/it/items/itkireihana.c"),
             Object(Matching, "melee/it/items/itmarumine.c"),
             Object(NonMatching, "melee/it/items/itlugia.c"),
             Object(NonMatching, "melee/it/items/ithouou.c"),
@@ -1356,6 +1362,7 @@ config.libs = [
             Object(Matching, "MSL/float.c"),
             Object(Matching, "MSL/trigf.c"),
             Object(NonMatching, "MSL/math.c"),
+            Object(NonMatching, "MSL/math_data.c"),
         ],
     ),
     TRKLib(
@@ -1630,7 +1637,7 @@ config.libs = [
             Object(Matching, "sysdolphin/baselib/gobjobject.c"),
             Object(Matching, "sysdolphin/baselib/gobjuserdata.c"),
             Object(Matching, "sysdolphin/baselib/gobj.c"),
-            Object(NonMatching, "sysdolphin/baselib/gobjinit.c"),
+            Object(Matching, "sysdolphin/baselib/gobjinit.c"),
             Object(NonMatching, "sysdolphin/baselib/particle.c"),
             Object(NonMatching, "sysdolphin/baselib/psdisp.c"),
             Object(Matching, "sysdolphin/baselib/psdisptev.c", extra_cflags=["-Cpp_exceptions on"]),

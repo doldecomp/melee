@@ -6,9 +6,9 @@
 #include "it/item.h"
 #include "it/items/types.h"
 
-void it_2725_Logic21_Spawned(Item_GObj*);
+void itTogepy_Logic21_Spawned(Item_GObj*);
 void it_802D3728(Item_GObj*);
-void it_2725_Logic21_EvtUnk(Item_GObj*, Item_GObj*);
+void itTogepy_Logic21_EvtUnk(Item_GObj*, Item_GObj*);
 bool itTogepy_UnkMotion1_Anim(Item_GObj*);
 void itTogepy_UnkMotion1_Phys(Item_GObj*);
 bool itTogepy_UnkMotion1_Coll(Item_GObj*);

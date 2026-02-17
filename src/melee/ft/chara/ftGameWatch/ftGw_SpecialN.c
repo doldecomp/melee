@@ -97,9 +97,9 @@ static inline void ftGameWatch_SpecialN_SetVars(HSD_GObj* gobj)
     fp->accessory4_cb = ftGw_SpecialN_CreateSausage;
 }
 
-// 0x8014E644
-// https://decomp.me/scratch/VyJIm // Mr. Game & Watch's grounded Chef Action
-// State handler
+/// 0x8014E644
+/// https://decomp.me/scratch/VyJIm // Mr. Game & Watch's grounded Chef Action
+/// State handler
 void ftGw_SpecialN_Enter(HSD_GObj* gobj)
 {
     GET_FIGHTER(gobj)->self_vel.y = 0.0f;
@@ -109,9 +109,9 @@ void ftGw_SpecialN_Enter(HSD_GObj* gobj)
     ftGameWatch_SpecialN_SetVars(gobj);
 }
 
-// 0x8014E6C0
-// https://decomp.me/scratch/VyJIm // Mr. Game & Watch's aerial Chef Action
-// State handler
+/// 0x8014E6C0
+/// https://decomp.me/scratch/VyJIm // Mr. Game & Watch's aerial Chef Action
+/// State handler
 void ftGw_SpecialAirN_Enter(HSD_GObj* gobj)
 {
     GET_FIGHTER(gobj)->self_vel.y = 0.0f;
@@ -137,9 +137,9 @@ static inline void ftGameWatch_SpecialN_ChefLoop(HSD_GObj* gobj)
     }
 }
 
-// 0x8014E73C
-// https://decomp.me/scratch/thHUb // Mr. Game & Watch's grounded Chef
-// Animation callback
+/// 0x8014E73C
+/// https://decomp.me/scratch/thHUb // Mr. Game & Watch's grounded Chef
+/// Animation callback
 void ftGw_SpecialN_Anim(HSD_GObj* gobj)
 {
     u8 _[20];
@@ -167,9 +167,9 @@ static inline void ftGameWatch_SpecialAirN_ChefLoop(HSD_GObj* gobj)
     }
 }
 
-// 0x8014E7DC
-// https://decomp.me/scratch/DA54p // Mr. Game & Watch's aerial Chef Animation
-// callback
+/// 0x8014E7DC
+/// https://decomp.me/scratch/DA54p // Mr. Game & Watch's aerial Chef Animation
+/// callback
 void ftGw_SpecialAirN_Anim(HSD_GObj* gobj)
 {
     u8 _[20];
@@ -180,9 +180,9 @@ void ftGw_SpecialAirN_Anim(HSD_GObj* gobj)
     }
 }
 
-// 0x8014E87C
-// https://decomp.me/scratch/bwVYE // Mr. Game & Watch's grounded Chef IASA
-// callback
+/// 0x8014E87C
+/// https://decomp.me/scratch/bwVYE // Mr. Game & Watch's grounded Chef IASA
+/// callback
 void ftGw_SpecialN_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = fp = GET_FIGHTER(gobj);
@@ -198,9 +198,9 @@ void ftGw_SpecialN_IASA(HSD_GObj* gobj)
     }
 }
 
-// 0x8014E900
-// https://decomp.me/scratch/jOJ8s // Mr. Game & Watch's aerial Chef IASA
-// callback
+/// 0x8014E900
+/// https://decomp.me/scratch/jOJ8s // Mr. Game & Watch's aerial Chef IASA
+/// callback
 void ftGw_SpecialAirN_IASA(HSD_GObj* gobj)
 {
     Fighter* fp = fp = GET_FIGHTER(gobj);
@@ -216,21 +216,21 @@ void ftGw_SpecialAirN_IASA(HSD_GObj* gobj)
     }
 }
 
-// 0x8014E984 - Mr. Game & Watch's grounded Chef Physics callback
+/// 0x8014E984 - Mr. Game & Watch's grounded Chef Physics callback
 void ftGw_SpecialN_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
-// 0x8014E9A4 - Mr. Game & Watch's aerial Chef Physics callback
+/// 0x8014E9A4 - Mr. Game & Watch's aerial Chef Physics callback
 void ftGw_SpecialAirN_Phys(HSD_GObj* gobj)
 {
     ft_80084EEC(gobj);
 }
 
-// 0x8014E9C4
-// https://decomp.me/scratch/SfsYX // Mr. Game & Watch's grounded Chef
-// Collision callback
+/// 0x8014E9C4
+/// https://decomp.me/scratch/SfsYX // Mr. Game & Watch's grounded Chef
+/// Collision callback
 void ftGw_SpecialN_Coll(HSD_GObj* gobj)
 {
     if (ft_800827A0(gobj) == false) {
@@ -238,9 +238,9 @@ void ftGw_SpecialN_Coll(HSD_GObj* gobj)
     }
 }
 
-// 0x8014EA00
-// https://decomp.me/scratch/3uVog // Mr. Game & Watch's aerial Chef Collision
-// callback
+/// 0x8014EA00
+/// https://decomp.me/scratch/3uVog // Mr. Game & Watch's aerial Chef Collision
+/// callback
 void ftGw_SpecialAirN_Coll(HSD_GObj* gobj)
 {
     if (ft_80081D0C(gobj) != false) {
@@ -254,9 +254,9 @@ static u32 const transition_flags =
     Ft_MF_SkipItemVis | Ft_MF_Unk19 | Ft_MF_SkipModelPartVis |
     Ft_MF_SkipModelFlags | Ft_MF_Unk27;
 
-// 0x8014EA3C
-// https://decomp.me/scratch/mtcx1 // Mr. Game & Watch's ground -> air Chef
-// Motion State handler
+/// 0x8014EA3C
+/// https://decomp.me/scratch/mtcx1 // Mr. Game & Watch's ground -> air Chef
+/// Motion State handler
 void ftGw_SpecialN_GroundToAir(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -267,9 +267,9 @@ void ftGw_SpecialN_GroundToAir(HSD_GObj* gobj)
     GET_FIGHTER(gobj)->accessory4_cb = &ftGw_SpecialN_CreateSausage;
 }
 
-// 0x8014EAAC
-// https://decomp.me/scratch/SLxV6 // Mr. Game & Watch's air -> ground Chef
-// Motion State handler
+/// 0x8014EAAC
+/// https://decomp.me/scratch/SLxV6 // Mr. Game & Watch's air -> ground Chef
+/// Motion State handler
 void ftGw_SpecialAirN_AirToGround(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -280,9 +280,9 @@ void ftGw_SpecialAirN_AirToGround(HSD_GObj* gobj)
     GET_FIGHTER(gobj)->accessory4_cb = &ftGw_SpecialN_CreateSausage;
 }
 
-// 0x8014EB1C
-// https://decomp.me/scratch/KLilJ // Mr. Game & Watch's grounded Chef Loop
-// Motion State handler
+/// 0x8014EB1C
+/// https://decomp.me/scratch/KLilJ // Mr. Game & Watch's grounded Chef Loop
+/// Motion State handler
 void ftGw_SpecialN_Loop(HSD_GObj* gobj, float anim_frame)
 {
     /// @todo Shared @c inline with #ftGw_SpecialAirN_Loop.
@@ -303,9 +303,9 @@ void ftGw_SpecialN_Loop(HSD_GObj* gobj, float anim_frame)
     fp->accessory4_cb = ftGw_SpecialN_CreateSausage;
 }
 
-// 0x8014EB8C
-// https://decomp.me/scratch/KLilJ // Mr. Game & Watch's aerial Chef Loop
-// Motion State handler
+/// 0x8014EB8C
+/// https://decomp.me/scratch/KLilJ // Mr. Game & Watch's aerial Chef Loop
+/// Motion State handler
 void ftGw_SpecialAirN_Loop(HSD_GObj* gobj, float anim_frame)
 {
     Fighter* fp = fp = GET_FIGHTER(gobj);

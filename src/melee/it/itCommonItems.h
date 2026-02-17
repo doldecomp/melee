@@ -112,7 +112,50 @@ typedef struct itBox_ItemVars {
 typedef struct itWstar_ItemVars {
     f32 xDD4;
     f32 xDD8;
+    s32 xDDC;
 } itWstar_ItemVars;
+
+typedef struct itWstarAttrEntry {
+    /* +0 */ HSD_AnimJoint* x0_anim_joint;
+    /* +4 */ enum_t x4_sfx;
+} itWstarAttrEntry;
+
+typedef struct itWstarAttributes {
+    /* +0 */ f32 x0;
+    /* +4 */ f32 x4;
+    /* +8 */ f32 x8;
+    /* +C */ f32 xC;
+    /* +10 */ f32 x10;
+    /* +14 */ f32 x14;
+    /* +18 */ f32 x18;
+    /* +1C */ f32 x1C;
+    /* +20 */ f32 x20;
+    /* +24 */ s32 x24_count;
+    /* +28 */ itWstarAttrEntry x28_entries[1];
+} itWstarAttributes;
+
+typedef struct itKyasarin_ItemVars {
+    /* +0  ip+DD4 */ char pad_0[0x20];
+    /* +20 ip+DF4 */ HSD_GObj* x20;
+    /* +24 ip+DF8 */ f32 x24;
+} itKyasarin_ItemVars;
+
+typedef struct itKyasarinAttributes {
+    /* +0 */ s32* x0;
+    /* +4 */ f32 x4;
+    /* +8 */ f32 x8;
+} itKyasarinAttributes;
+
+typedef struct itHououAttr {
+    /* +00 */ f32 timer;
+    /* +04 */ u8 x4_pad[0x14];
+    /* +18 */ f32 x18;
+} itHououAttr;
+
+typedef struct itLugiaAttributes {
+    /* +0 */ f32 x0;
+    /* +4 */ f32 x4;
+} itLugiaAttributes;
 
 /// Box/Crate item attributes loaded from .dat file
 typedef struct itBoxAttributes {
@@ -343,9 +386,11 @@ typedef struct itWhispyAppleAttributes {
 } itWhispyAppleAttributes;
 
 typedef struct itFreeze_ItemVars {
-    /*  +0 */ s32 x0;
+    /*  +0 */ f32 x0;
     /*  +4 */ Vec3 x4;
-    /* +10 */ u8 pad[0xC];
+    /* +10 */ f32 x10;
+    /* +14 */ f32 x14;
+    /* +18 */ s32 x18;
     /* +1C */ Item_GObj* unk_1C;
     /* +20 */ UNK_T x20;
 } itFreeze_ItemVars;
@@ -380,8 +425,12 @@ typedef struct {
 typedef struct itLikelike_ItemVars {
     /*  +0 ip+DD4 */ char pad_0[0x18];
     /* +18 ip+DEC */ s32 x18;
-    /* +1C ip+DF0 */ char pad_1C[0x30];
+    /* +1C ip+DF0 */ char pad_1C[0x1C];
+    /* +38 ip+E0C */ s32 x38;
+    /* +3C ip+E10 */ s32 x3C;
+    /* +40 ip+E14 */ char pad_40[0xC];
     /* +4C ip+E20 */ s32 x4C;
+    /* +50 ip+E24 */ HSD_GObj* x50;
 } itLikelike_ItemVars;
 
 typedef struct {
@@ -406,8 +455,13 @@ typedef struct {
 } itTomatoVars;
 
 typedef struct itTincle_ItemVars {
-    /*  +0 ip+DD4 */ u8 x0[0x54 - 0x0];
-    /* +54 ip+E28 */ float x54;
+    /*  +0 ip+DD4 */ u8 pad[0x20];
+    /* +20 ip+DF4 */ s32 x20;
+    /* +24 ip+DF8 */ u8 pad1[0x2C];
+    /* +50 ip+E24 */ f32 x50;
+    /* +54 ip+E28 */ f32 x54;
+    /* +58 ip+E2C */ u8 pad2[0x4];
+    /* +5C ip+E30 */ f32 x5C;
 } itTincle_ItemVars;
 
 typedef struct {
@@ -427,7 +481,7 @@ typedef struct {
     /* ip+DEC */ unsigned char xDEC_b7 : 1;
     /* ip+DF0 */ s32 xDF0;
     /* ip+DF4 */ float xDF4;
-    /* ip+DF8 */ char pad_DF8[0xDFC - 0xDF8];
+    /* ip+DF8 */ float xDF8;
     /* ip+DFC */ float xDFC;
     /* ip+E00 */ char pad_E00[0xE04 - 0xE00];
     /* ip+E04 */ float xE04;
@@ -454,6 +508,28 @@ typedef struct {
     /* ip+E20 */ Vec3 vel;
 } itGShell_ItemVars;
 STATIC_ASSERT(sizeof(itGShell_ItemVars) == 88);
+
+typedef struct {
+    /* ip+DD4 */ f32 xDD4;
+    /* ip+DD8 */ f32 xDD8;
+    /* ip+DDC */ f32 xDDC;
+    /* ip+DE0 */ f32 xDE0;
+    /* ip+DE4 */ f32 xDE4;
+    /* ip+DE8 */ s32 xDE8;
+    /* ip+DEC */ s32 xDEC;
+    /* ip+DF0 */ s32 xDF0;
+    /* ip+DF4 */ unsigned char xDF4_b0 : 1;
+    /* ip+DF4 */ unsigned char xDF4_b1 : 1;
+    /* ip+DF4 */ unsigned char xDF4_b2 : 1;
+    /* ip+DF4 */ unsigned char xDF4_b3 : 1;
+    /* ip+DF4 */ unsigned char xDF4_b4 : 1;
+    /* ip+DF4 */ unsigned char xDF4_b5 : 1;
+    /* ip+DF4 */ unsigned char xDF4_b6 : 1;
+    /* ip+DF4 */ unsigned char xDF4_b7 : 1;
+    /* ip+DF5 */ char pad_DF5[0xE20 - 0xDF5];
+    /* ip+E20 */ Vec3 vel;
+} itRShell_ItemVars;
+STATIC_ASSERT(sizeof(itRShell_ItemVars) == 88);
 
 typedef struct {
     u8 _pad[0x14];
@@ -500,7 +576,17 @@ typedef struct {
     u8 padding[0xE34 - 0xDD8];
     s32 timer;
     int x64;
+    int x68;
+    int x6C;
+    f32 xE44;
 } itPokemon_ItemVars;
+
+typedef struct itHitodeman_ItemVars {
+    /*  +0 ip+DD4 */ u8 pad[0x88];
+    /* +88 ip+E5C */ s32 xE5C;
+    /* +8C ip+E60 */ u8 pad2[0x4];
+    /* +90 ip+E64 */ HSD_GObj* xE64;
+} itHitodeman_ItemVars;
 
 typedef struct {
     int x0;
@@ -637,16 +723,66 @@ typedef struct itNokoNoko_DatAttrs {
     f32 x8;
 } itNokoNoko_DatAttrs;
 
+typedef struct itTaruAttributes {
+    /* +00 */ s32 x0;
+    /* +04 */ s32 x4;
+    /* +08 */ f32 x8;
+    /* +0C */ f32 xC;
+    /* +10 */ f32 x10;
+    /* +14 */ f32 x14;
+    /* +18 */ f32 x18;
+    /* +1C */ f32 x1C;
+    /* +20 */ f32 x20;
+    /* +24 */ f32 x24;
+    /* +28 */ f32 x28;
+    /* +2C */ f32 x2C;
+    /* +30 */ f32 x30;
+    /* +34 */ f32 x34;
+} itTaruAttributes;
+
 typedef struct itTaru_ItemVars {
-    s32 xDD4;
-    s32 xDD8;
+    /* +0  ip+DD4 */ s32 xDD4;
+    /* +4  ip+DD8 */ s32 xDD8;
+    /* +8  ip+DDC */ f32 xDDC;
+    /* +C  ip+DE0 */ f32 xDE0;
+    /* +10 ip+DE4 */ f32 xDE4;
+    /* +14 ip+DE8 */ Vec3 xDE8;
 } itTaru_ItemVars;
 
+typedef struct itTarucann_ItemVars {
+    /*  +0 ip+DD4 */ s32 x0;
+    /*  +4 ip+DD8 */ s32 x4;
+    /*  +8 ip+DDC */ f32 x8;
+    /*  +C ip+DE0 */ f32 xC;
+    /* +10 ip+DE4 */ f32 x10;
+    /* +14 ip+DE8 */ Vec3 x14;
+    /* +20 ip+DF4 */ Fighter_GObj* x20;
+    /* +24 ip+DF8 */ s32 x24;
+    /* +28 ip+DFC */ f32 x28;
+} itTarucann_ItemVars;
+
 typedef struct itTaruCann_DatAttrs {
-    /*  +0 */ char pad_0[0x24];
+    /* +00 */ f32 x0;
+    /* +04 */ char pad_4[0x4];
+    /* +08 */ f32 x8;
+    /* +0C */ f32 xC;
+    /* +10 */ f32 x10;
+    /* +14 */ f32 x14;
+    /* +18 */ f32 x18;
+    /* +1C */ f32 x1C;
+    /* +20 */ f32 x20;
     /* +24 */ f32 x24;
     /* +28 */ int x28;
     /* +2C */ int x2C;
+    /* +30 */ u32 x30;
+    /* +34 */ int x34;
+    /* +38 */ u32 x38;
+    /* +3C */ u32 x3C;
+    /* +40 */ u32 x40;
+    /* +44 */ u32 x44;
+    /* +48 */ f32 x48;
+    /* +4C */ f32 x4C;
+    /* +50 */ f32 x50;
 } itTaruCann_DatAttrs;
 
 typedef struct itKusudama_ItemVars {
@@ -678,7 +814,7 @@ typedef struct itKlap_ItemVars {
     /* +14 ip+DE8 */ f32 x14;
     /* +18 ip+DEC */ f32 x18;
     /* +1C ip+DF0 */ f32 x1C;
-    /* +20 ip+DF4 */ f32 x20;
+    /* +20 ip+DF4 */ HSD_GObj* x20;
     /* +24 ip+DF8 */ f32 x24;
     /* +28 ip+DFC */ f32 x28;
 } itKlap_ItemVars;
@@ -815,6 +951,24 @@ typedef struct it_279D_ItemVars {
     /* ip+E30 */ s32 x5C;
 } it_279D_ItemVars;
 
+typedef struct itMewtwoShadowball_ItemVars {
+    /* ip+DD4 */ s32 x0;
+    /* ip+DD8 */ Vec3 x4;
+    /* ip+DE4 */ s32 x10[3];
+    /* ip+DF0 */ s32 x1C;
+    /* ip+DF4 */ s32 x20;
+    /* ip+DF8 */ f32 x24;
+    /* ip+DFC */ s32 x28;
+    /* ip+E00 */ f32 x2C[6];
+    /* ip+E18 */ f32 x44;
+    /* ip+E1C */ f32 x48;
+    /* ip+E20 */ f32 x4C;
+    /* ip+E24 */ f32 x50;
+    /* ip+E28 */ s32 x54;
+    /* ip+E2C */ s32 x58;
+    /* ip+E30 */ s32 x5C;
+} itMewtwoShadowball_ItemVars;
+
 typedef struct it_279D_DatAttrs {
     f32 x0;
     f32 x4;
@@ -877,7 +1031,7 @@ typedef struct it_27CE_ItemVars {
     /* ip+DD4 */ void* attr;
 } it_27CE_ItemVars;
 
-// Should it_2F28 and it_27CF use the same structs?
+/// Should it_2F28 and it_27CF use the same structs?
 typedef struct it_27CF_ItemVars {
     f32 x0;
 } it_27CF_ItemVars;
@@ -1010,12 +1164,13 @@ typedef struct itWhiteBea_ItemVars {
     /* +20 ip+DF4 */ UNK_T x20;
     /* +24 ip+DF8 */ char pad_24[0x4];
     /* +28 ip+DFC */ s32 x28;
-    /* +2C ip+E00 */ char pad_2C[0x14];
+    /* +2C ip+E00 */ char pad_2C[0x10];
+    /* +3C ip+E10 */ s32 x3C;
     /* +40 ip+E14 */ s32 x40;
 } itWhiteBea_ItemVars;
 
 typedef struct itWhiteBeaAttributes {
-    /* +0 */ char pad_0[0x4];
+    /* +0 */ s32* x0;
     /* +4 */ f32 x4;
 } itWhiteBeaAttributes;
 
@@ -1119,9 +1274,40 @@ typedef struct itOctarockAttributes {
 } itOctarockAttributes;
 
 typedef struct itOldottosea_ItemVars {
-    /* 0x00 */ u8 pad[0x28];
+    /* 0x00 */ u8 pad[0x20];
+    /* 0x20 */ s32 x20;
+    /* 0x24 */ u8 pad1[0x4];
     /* 0x28 */ s32 x28;
 } itOldottosea_ItemVars;
+
+typedef struct itPatapata_ItemVars {
+    /* 0x00 */ u8 pad[0x20];
+    /* 0x20 */ s32 x20;
+    /* 0x24 */ s32 x24;
+    /* 0x28 */ s32 x28;
+    /* 0x2C */ f32 x2C;
+    /* 0x30 */ f32 x30;
+    /* 0x34 */ u8 pad1[0x40 - 0x34];
+    /* 0x40 */ s32 x40;
+} itPatapata_ItemVars;
+
+typedef struct itPatapataDatAttrs {
+    /* 0x00 */ u8 pad[0x4];
+    /* 0x04 */ f32 x4;
+} itPatapataDatAttrs;
+
+typedef struct itPatapataAttributes {
+    /* 0x00 */ itPatapataDatAttrs* x0;
+    /* 0x04 */ f32 x4;
+    /* 0x08 */ f32 x8;
+    /* 0x0C */ f32 xC;
+    /* 0x10 */ s32 x10;
+    /* 0x14 */ f32 x14;
+    /* 0x18 */ f32 x18;
+    /* 0x1C */ s32 x1C;
+    /* 0x20 */ f32 x20;
+    /* 0x24 */ s32 x24;
+} itPatapataAttributes;
 
 typedef struct itOldottoseaAttributes {
     /* 0x00 */ s32* x0;
@@ -1152,5 +1338,76 @@ typedef struct itFushigibanaAttributes {
     f32 x4;
     f32 x8;
 } itFushigibanaAttributes;
+
+typedef struct itkireihana_ItemVars {
+    /* xDD4 */ f32 x0;
+    /* xDD8 */ u32 x4;
+    /* xDDC */ f32 x8;
+    /* xDD8 */ u8 pad[0x60 - 0xC];
+    /* xE34 */ f32 fall_speed;
+    /* xE38 */ int timer_unk0;
+    /* xE3C */ int timer_unk1;
+    /* xE40 */ int timer_unk2;
+    /* xE44 */ f32 x70;
+} itkireihana_ItemVars;
+
+typedef struct itkireihanaAttributes {
+    f32 x0;
+    u32 x4;
+    u32 x8;
+    u32 xC;
+} itkireihanaAttributes;
+
+typedef struct itThunder_ItemVars {
+    /* xDD8 */ u8 pad[0x60 - 0x0];
+    /* xE34 */ u32 x60;
+    /* xE38 */ u32 x64;
+    /* xE3C */ f32 x68;
+} itThunder_ItemVars;
+
+typedef struct itThunderPokemonAttributes {
+    f32 x0;
+    u32 x4;
+    u32 x8;
+    u32 xC;
+} itThunderPokemonAttributes;
+
+typedef struct itOldkuri_ItemVars {
+    /* +00 */ char pad[0x18];
+    /* +18 */ s32 xDEC;
+    /* +1C */ char pad2[0x4];
+    /* +20 */ f32 xDF4;
+    /* +24 */ s32 xDF8;
+    /* +28 */ s32 xDFC;
+} itOldkuri_ItemVars;
+
+typedef struct itUnknown_ItemVars {
+    /* +00 ip+DD4 */ char pad_0[0x60];
+    /* +60 ip+E34 */ f32 x60;
+    /* +64 ip+E38 */ s32 x64;
+    /* +68 ip+E3C */ s32 x68;
+} itUnknown_ItemVars;
+
+typedef struct itUnknownAttributes {
+    /* +00 */ f32 x0;
+    /* +04 */ f32 x4;
+    /* +08 */ char pad_8[0x4];
+    /* +0C */ f32 xC;
+    /* +10 */ f32 x10;
+    /* +14 */ char pad_14[0x4];
+    /* +18 */ s32 x18;
+} itUnknownAttributes;
+
+typedef struct itLugia_ItemVars {
+    /* +00 ip+DD4 */ u8 x0_pad[0x7C];
+    /* +7C ip+E50 */ Vec3 xE50;
+} itLugia_ItemVars;
+
+typedef struct itGreatFoxLaser_ItemVars {
+    /* +00 ip+DD4 */ u8 x0_pad[0x34];
+    /* +34 ip+E08 */ s16 x34;
+    /* +36 ip+E0A */ s16 x36;
+    /* +38 ip+E0C */ UNK_T x38;
+} itGreatFoxLaser_ItemVars;
 
 #endif

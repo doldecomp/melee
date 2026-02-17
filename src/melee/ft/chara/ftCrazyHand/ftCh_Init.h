@@ -224,7 +224,7 @@
 /* 15B844 */ void ftCo_CaptureWaitCrazyHand_IASA(HSD_GObj* gobj);
 /* 15B848 */ void ftCo_CaptureWaitCrazyHand_Phys(HSD_GObj* gobj);
 /* 15B84C */ void ftCo_CaptureWaitCrazyHand_Coll(HSD_GObj* gobj);
-/* 15B850 */ void ftCh_GrabUnk1_8015B850(HSD_GObj* gobj);
+/* 15B850 */ void ftCh_GrabUnk1_8015B850(HSD_GObj* gobj, FtMotionId msid);
 /* 15B8EC */ void ftCo_ThrownCrazyHand_Anim(HSD_GObj* gobj);
 /* 15B8F0 */ void ftCo_ThrownCrazyHand_IASA(HSD_GObj* gobj);
 /* 15B8F4 */ void ftCo_ThrownCrazyHand_Phys(HSD_GObj* gobj);

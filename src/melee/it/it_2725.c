@@ -267,7 +267,7 @@ extern const Vec3 it_803B85A8[6];
 extern s64 it_803B85F0;
 extern s64 it_803B85F8;
 
-// Common items
+/// Common items
 struct sdata_ItemGXLink it_803F1418[43] = {
     it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
     it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
@@ -284,47 +284,47 @@ struct ItemLogicTable it_803F14C4[ARRAY_SIZE(it_803F1418)] = {
     {
         // Capsule
         it_803F5468,
-        it_3F14_Logic0_Spawned,
+        itCapsule_Logic0_Spawned,
         NULL,
-        it_3F14_Logic0_PickedUp,
-        it_3F14_Logic0_Dropped,
-        it_3F14_Logic0_Thrown,
-        it_3F14_Logic0_DmgDealt,
-        it_3F14_Logic0_DmgReceived,
-        it_3F14_Logic0_EnteredAir,
-        it_3F14_Logic0_Reflected,
-        it_3F14_Logic0_Clanked,
+        itCapsule_Logic0_PickedUp,
+        itCapsule_Logic0_Dropped,
+        itCapsule_Logic0_Thrown,
+        itCapsule_Logic0_DmgDealt,
+        itCapsule_Logic0_DmgReceived,
+        itCapsule_Logic0_EnteredAir,
+        itCapsule_Logic0_Reflected,
+        itCapsule_Logic0_Clanked,
         NULL,
-        it_3F14_Logic0_ShieldBounced,
-        it_3F14_Logic0_HitShield,
-        it_3F14_Logic0_EvtUnk,
+        itCapsule_Logic0_ShieldBounced,
+        itCapsule_Logic0_HitShield,
+        itCapsule_Logic0_EvtUnk,
     },
     {
         // Box
         it_803F5850,
-        it_3F14_Logic1_Spawned,
-        it_3F14_Logic1_Destroyed,
-        it_3F14_Logic1_PickedUp,
-        it_3F14_Logic1_Dropped,
-        it_3F14_Logic1_Thrown,
-        it_3F14_Logic1_DmgDealt,
-        it_3F14_Logic1_DmgReceived,
-        it_3F14_Logic1_EnteredAir,
-        it_3F14_Logic1_Reflected,
-        it_3F14_Logic1_Clanked,
+        itBox_Logic1_Spawned,
+        itBox_Logic1_Destroyed,
+        itBox_Logic1_PickedUp,
+        itBox_Logic1_Dropped,
+        itBox_Logic1_Thrown,
+        itBox_Logic1_DmgDealt,
+        itBox_Logic1_DmgReceived,
+        itBox_Logic1_EnteredAir,
+        itBox_Logic1_Reflected,
+        itBox_Logic1_Clanked,
         NULL,
         NULL,
-        it_3F14_Logic1_HitShield,
-        it_3F14_Logic1_EvtUnk,
+        itBox_Logic1_HitShield,
+        itBox_Logic1_EvtUnk,
     },
     {
         // Taru
         it_803F58E0,
         it_3F14_Logic2_Spawned,
         NULL,
-        it_3F14_Logic2_PickedUp,
-        it_3F14_Logic2_Dropped,
-        it_3F14_Logic2_Thrown,
+        itTaru_Logic2_PickedUp,
+        itTaru_Logic2_Dropped,
+        itTaru_Logic2_Thrown,
         it_3F14_Logic2_DmgDealt,
         it_3F14_Logic2_DmgReceived,
         NULL,
@@ -333,79 +333,79 @@ struct ItemLogicTable it_803F14C4[ARRAY_SIZE(it_803F1418)] = {
         NULL,
         NULL,
         it_3F14_Logic2_HitShield,
-        it_3F14_Logic2_EvtUnk,
+        itTaru_Logic2_EvtUnk,
     },
     {
         // Egg
         it_803F5988,
-        it_3F14_Logic3_Spawned,
+        itEgg_Logic3_Spawned,
         NULL,
-        it_3F14_Logic3_PickedUp,
-        it_3F14_Logic3_Dropped,
-        it_3F14_Logic3_Thrown,
-        it_3F14_Logic3_DmgDealt,
-        it_3F14_Logic3_DmgReceived,
-        it_3F14_Logic3_EnteredAir,
-        it_3F14_Logic3_Reflected,
-        it_3F14_Logic3_Clanked,
+        itEgg_Logic3_PickedUp,
+        itEgg_Logic3_Dropped,
+        itEgg_Logic3_Thrown,
+        itEgg_Logic3_DmgDealt,
+        itEgg_Logic3_DmgReceived,
+        itEgg_Logic3_EnteredAir,
+        itEgg_Logic3_Reflected,
+        itEgg_Logic3_Clanked,
         NULL,
         NULL,
-        it_3F14_Logic3_HitShield,
-        it_3F14_Logic3_EvtUnk,
+        itEgg_Logic3_HitShield,
+        itEgg_Logic3_EvtUnk,
     },
     {
         // Kusudama
         it_803F59F8,
-        it_3F14_Logic4_Spawned,
+        itKusudama_Logic4_Spawned,
         NULL,
-        it_3F14_Logic4_PickedUp,
-        it_3F14_Logic4_Dropped,
-        it_3F14_Logic4_Thrown,
-        it_3F14_Logic4_DmgDealt,
-        it_3F14_Logic4_DmgReceived,
+        itKusudama_Logic4_PickedUp,
+        itKusudama_Logic4_Dropped,
+        itKusudama_Logic4_Thrown,
+        itKusudama_Logic4_DmgDealt,
+        itKusudama_Logic4_DmgReceived,
         NULL,
-        it_3F14_Logic4_Reflected,
-        it_3F14_Logic4_Clanked,
+        itKusudama_Logic4_Reflected,
+        itKusudama_Logic4_Clanked,
         NULL,
         NULL,
-        it_3F14_Logic4_HitShield,
-        it_3F14_Logic4_EvtUnk,
+        itKusudama_Logic4_HitShield,
+        itKusudama_Logic4_EvtUnk,
     },
     {
         // TaruCann
         it_803F63C0,
         it_3F14_Logic5_Spawned,
         it_3F14_Logic5_Destroyed,
-        it_3F14_Logic5_PickedUp,
+        itTaruCann_Logic5_PickedUp,
         it_3F14_Logic5_Dropped,
         it_3F14_Logic5_Thrown,
-        it_3F14_Logic5_DmgDealt,
+        itTaruCann_Logic5_DmgDealt,
         NULL,
         NULL,
-        it_3F14_Logic5_Reflected,
-        it_3F14_Logic5_Clanked,
+        itTaruCann_Logic5_Reflected,
+        itTaruCann_Logic5_Clanked,
         NULL,
         NULL,
-        it_3F14_Logic5_HitShield,
-        it_3F14_Logic5_EvtUnk,
+        itTaruCann_Logic5_HitShield,
+        itTaruCann_Logic5_EvtUnk,
     },
     {
         // BombHei
         it_803F54D8,
-        it_3F14_Logic6_Spawned,
+        itBombhei_Logic6_Spawned,
         NULL,
-        it_3F14_Logic6_PickedUp,
+        itBombhei_Logic6_PickedUp,
         it_3F14_Logic6_Dropped,
         it_3F14_Logic6_Thrown,
         it_3F14_Logic6_DmgDealt,
         it_3F14_Logic6_DmgReceived,
         it_3F14_Logic6_EnteredAir,
-        it_3F14_Logic6_Reflected,
-        it_3F14_Logic6_Clanked,
+        itBombhei_Logic6_Reflected,
+        itBombhei_Logic6_Clanked,
         NULL,
         it_3F14_Logic6_ShieldBounced,
         it_3F14_Logic6_HitShield,
-        it_3F14_Logic6_EvtUnk,
+        itBombhei_Logic6_EvtUnk,
     },
     {
         // Dosei
@@ -418,58 +418,58 @@ struct ItemLogicTable it_803F14C4[ARRAY_SIZE(it_803F1418)] = {
         it_3F14_Logic7_DmgDealt,
         it_3F14_Logic7_DmgReceived,
         it_3F14_Logic7_EnteredAir,
-        it_3F14_Logic7_Reflected,
-        it_3F14_Logic7_Clanked,
+        itDosei_Logic7_Reflected,
+        itDosei_Logic7_Clanked,
         NULL,
-        it_3F14_Logic7_ShieldBounced,
-        it_3F14_Logic7_HitShield,
-        it_3F14_Logic7_EvtUnk,
+        itDosei_Logic7_ShieldBounced,
+        itDosei_Logic7_HitShield,
+        itDosei_Logic7_EvtUnk,
     },
     {
         // Heart
         it_803F56C8,
-        it_3F14_Logic8_Spawned,
-        it_3F14_Logic8_Destroyed,
-        it_3F14_Logic8_PickedUp,
-        it_3F14_Logic8_Dropped,
+        itHeart_Logic8_Spawned,
+        itHeart_Logic8_Destroyed,
+        itHeart_Logic8_PickedUp,
+        itHeart_Logic8_Dropped,
         NULL,
         NULL,
         NULL,
-        it_3F14_Logic8_EnteredAir,
+        itHeart_Logic8_EnteredAir,
         NULL,
         NULL,
         NULL,
         NULL,
         NULL,
-        it_3F14_Logic8_EvtUnk,
+        itHeart_Logic8_EvtUnk,
     },
     {
         // Tomato
         it_803F5740,
-        it_3F14_Logic9_Spawned,
-        it_3F14_Logic9_Destroyed,
-        it_3F14_Logic9_PickedUp,
-        it_3F14_Logic9_Dropped,
+        itTomato_Logic9_Spawned,
+        itTomato_Logic9_Destroyed,
+        itTomato_Logic9_PickedUp,
+        itTomato_Logic9_Dropped,
         NULL,
         NULL,
         NULL,
-        it_3F14_Logic9_EnteredAir,
+        itTomato_Logic9_EnteredAir,
         NULL,
         NULL,
         NULL,
         NULL,
         NULL,
-        it_3F14_Logic9_EvtUnk,
+        itTomato_Logic9_EvtUnk,
     },
     {
         // Star
         it_803F57A0,
-        it_3F14_Logic10_Spawned,
+        itStar_Logic10_Spawned,
         NULL,
         NULL,
         NULL,
         NULL,
-        it_3F14_Logic10_DmgDealt,
+        itStar_Logic10_DmgDealt,
         NULL,
         NULL,
         NULL,
@@ -477,143 +477,141 @@ struct ItemLogicTable it_803F14C4[ARRAY_SIZE(it_803F1418)] = {
         NULL,
         NULL,
         NULL,
-        it_3F14_Logic10_EvtUnk,
+        itStar_Logic10_EvtUnk,
     },
     {
         // Bat
         it_803F57B0,
-        it_3F14_Logic11_Spawned,
+        itBat_Logic11_Spawned,
         NULL,
-        it_3F14_Logic11_PickedUp,
-        it_3F14_Logic11_Dropped,
-        it_3F14_Logic11_Thrown,
-        it_3F14_Logic11_DmgDealt,
+        itBat_Logic11_PickedUp,
+        itBat_Logic11_Dropped,
+        itBat_Logic11_Thrown,
+        itBat_Logic11_DmgDealt,
         NULL,
-        it_3F14_Logic11_EnteredAir,
-        it_3F14_Logic11_Reflected,
-        it_3F14_Logic11_Clanked,
+        itBat_Logic11_EnteredAir,
+        itBat_Logic11_Reflected,
+        itBat_Logic11_Clanked,
         NULL,
-        it_3F14_Logic11_ShieldBounced,
-        it_3F14_Logic11_HitShield,
-        it_3F14_Logic11_EvtUnk,
+        itBat_Logic11_ShieldBounced,
+        itBat_Logic11_HitShield,
+        itBat_Logic11_EvtUnk,
     },
     {
         // Sword
         it_803F5800,
-        it_3F14_Logic12_Spawned,
+        itSword_Logic12_Spawned,
         NULL,
-        it_3F14_Logic12_PickedUp,
-        it_3F14_Logic12_Dropped,
-        it_3F14_Logic12_Thrown,
-        it_3F14_Logic12_DmgDealt,
+        itSword_Logic12_PickedUp,
+        itSword_Logic12_Dropped,
+        itSword_Logic12_Thrown,
+        itSword_Logic12_DmgDealt,
         NULL,
-        it_3F14_Logic12_EnteredAir,
-        it_3F14_Logic12_Reflected,
-        it_3F14_Logic12_Clanked,
+        itSword_Logic12_EnteredAir,
+        itSword_Logic12_Reflected,
+        itSword_Logic12_Clanked,
         NULL,
-        it_3F14_Logic12_ShieldBounced,
-        it_3F14_Logic12_HitShield,
-        it_3F14_Logic12_EvtUnk,
+        itSword_Logic12_ShieldBounced,
+        itSword_Logic12_HitShield,
+        itSword_Logic12_EvtUnk,
     },
     {
         // Parasol
         it_803F5AB0,
-        it_3F14_Logic13_Spawned,
+        itParasol_Logic13_Spawned,
         NULL,
-        it_3F14_Logic13_PickedUp,
-        it_3F14_Logic13_Dropped,
-        it_3F14_Logic13_Thrown,
-        it_3F14_Logic13_DmgDealt,
+        itParasol_Logic13_PickedUp,
+        itParasol_Logic13_Dropped,
+        itParasol_Logic13_Thrown,
+        itParasol_Logic13_DmgDealt,
         NULL,
-        it_3F14_Logic13_EnteredAir,
-        it_3F14_Logic13_Reflected,
-        it_3F14_Logic13_Clanked,
+        itParasol_Logic13_EnteredAir,
+        itParasol_Logic13_Reflected,
+        itParasol_Logic13_Clanked,
         NULL,
-        it_3F14_Logic13_ShieldBounced,
-        it_3F14_Logic13_HitShield,
-        it_3F14_Logic13_EvtUnk,
+        itParasol_Logic13_ShieldBounced,
+        itParasol_Logic13_HitShield,
+        itParasol_Logic13_EvtUnk,
     },
     {
         // G Shell
         it_803F5BA8,
-        it_3F14_Logic14_Spawned,
+        itGShell_Logic14_Spawned,
         NULL,
-        it_3F14_Logic14_PickedUp,
-        it_3F14_Logic14_Dropped,
-        it_3F14_Logic14_Thrown,
-        it_3F14_Logic14_DmgDealt,
-        it_3F14_Logic14_DmgReceived,
-        it_3F14_Logic14_EnteredAir,
-        it_3F14_Logic14_Reflected,
-        it_3F14_Logic14_Clanked,
+        itGShell_Logic14_PickedUp,
+        itGShell_Logic14_Dropped,
+        itGShell_Logic14_Thrown,
+        itGShell_Logic14_DmgDealt,
+        itGShell_Logic14_DmgReceived,
+        itGShell_Logic14_EnteredAir,
+        itGShell_Logic14_Reflected,
+        itGShell_Logic14_Clanked,
         NULL,
-        it_3F14_Logic14_ShieldBounced,
-        it_3F14_Logic14_HitShield,
-        it_3F14_Logic14_EvtUnk,
+        itGShell_Logic14_ShieldBounced,
+        itGShell_Logic14_HitShield,
+        itGShell_Logic14_EvtUnk,
     },
     {
         // R Shell
         it_803F5C48,
         it_3F14_Logic15_Spawned,
         NULL,
-        it_3F14_Logic15_PickedUp,
+        itRShell_Logic15_PickedUp,
         it_3F14_Logic15_Dropped,
         it_3F14_Logic15_Thrown,
         it_3F14_Logic15_DmgDealt,
         it_3F14_Logic15_DmgReceived,
         it_3F14_Logic15_EnteredAir,
-        it_3F14_Logic15_Reflected,
-        it_3F14_Logic15_Clanked,
+        itRShell_Logic15_Reflected,
+        itRShell_Logic15_Clanked,
         NULL,
-        it_3F14_Logic15_ShieldBounced,
+        itRShell_Logic15_ShieldBounced,
         it_3F14_Logic15_HitShield,
-        it_3F14_Logic15_EvtUnk,
+        itRShell_Logic15_EvtUnk,
     },
     {
         // L Gun
         it_803F5CC8,
-        it_3F14_Logic16_Spawned,
+        itLGun_Logic16_Spawned,
         NULL,
-        it_3F14_Logic16_PickedUp,
-        it_3F14_Logic16_Dropped,
-        it_3F14_Logic16_Thrown,
-        it_3F14_Logic16_DmgDealt,
+        itLGun_Logic16_PickedUp,
+        itLGun_Logic16_Dropped,
+        itLGun_Logic16_Thrown,
+        itLGun_Logic16_DmgDealt,
         NULL,
-        it_3F14_Logic16_EnteredAir,
-        it_3F14_Logic16_Reflected,
-        it_3F14_Logic16_Clanked,
+        itLGun_Logic16_EnteredAir,
+        itLGun_Logic16_Reflected,
+        itLGun_Logic16_Clanked,
         NULL,
-        it_3F14_Logic16_ShieldBounced,
-        it_3F14_Logic16_HitShield,
-        it_3F14_Logic16_EvtUnk,
+        itLGun_Logic16_ShieldBounced,
+        itLGun_Logic16_HitShield,
+        itLGun_Logic16_EvtUnk,
     },
     {
         // Freeze
         it_803F5D28,
         it_3F14_Logic17_Spawned,
-        it_3F14_Logic17_Destroyed,
-        it_3F14_Logic17_PickedUp,
-        it_3F14_Logic17_Dropped,
-        it_3F14_Logic17_Thrown,
-        it_3F14_Logic17_DmgDealt,
-        it_3F14_Logic17_DmgReceived,
+        itFreeze_Logic17_Destroyed,
+        itFreeze_Logic17_PickedUp,
+        itFreeze_Logic17_Dropped,
+        itFreeze_Logic17_Thrown,
+        itFreeze_Logic17_DmgDealt,
+        itFreeze_Logic17_DmgReceived,
         NULL,
-        it_3F14_Logic17_Reflected,
-        it_3F14_Logic17_Clanked,
-        it_3F14_Logic17_Absorbed,
-        it_3F14_Logic17_ShieldBounced,
-        it_3F14_Logic17_HitShield,
-        it_3F14_Logic17_EvtUnk,
+        itFreeze_Logic17_Reflected,
+        itFreeze_Logic17_Clanked,
+        itFreeze_Logic17_Absorbed,
+        itFreeze_Logic17_ShieldBounced,
+        itFreeze_Logic17_HitShield,
+        itFreeze_Logic17_EvtUnk,
     },
     {
         // Foods
         it_803F5DB0,
-        it_3F14_Logic18_Spawned,
+        itFoods_Logic18_Spawned,
         NULL,
-        it_3F14_Logic18_PickedUp,
-        it_3F14_Logic18_Dropped,
-        NULL,
-        NULL,
+        itFoods_Logic18_PickedUp,
+        itFoods_Logic18_Dropped,
         NULL,
         NULL,
         NULL,
@@ -621,143 +619,145 @@ struct ItemLogicTable it_803F14C4[ARRAY_SIZE(it_803F1418)] = {
         NULL,
         NULL,
         NULL,
-        it_3F14_Logic18_EvtUnk,
+        NULL,
+        NULL,
+        itFoods_Logic18_EvtUnk,
     },
     {
         // MSBomb
         ItemStateTable_MsBomb,
-        it_3F14_Logic19_Spawned,
+        itMSBomb_Logic19_Spawned,
         NULL,
-        it_3F14_Logic19_PickedUp,
-        it_3F14_Logic19_Dropped,
-        it_3F14_Logic19_Thrown,
-        it_3F14_Logic19_DmgDealt,
-        it_3F14_Logic19_DmgReceived,
-        it_3F14_Logic19_EnteredAir,
-        it_3F14_Logic19_Reflected,
-        it_3F14_Logic19_Clanked,
+        itMSBomb_Logic19_PickedUp,
+        itMSBomb_Logic19_Dropped,
+        itMSBomb_Logic19_Thrown,
+        itMSBomb_Logic19_DmgDealt,
+        itMSBomb_Logic19_DmgReceived,
+        itMSBomb_Logic19_EnteredAir,
+        itMSBomb_Logic19_Reflected,
+        itMSBomb_Logic19_Clanked,
         NULL,
-        it_3F14_Logic19_ShieldBounced,
-        it_3F14_Logic19_HitShield,
-        it_3F14_Logic19_EvtUnk,
+        itMSBomb_Logic19_ShieldBounced,
+        itMSBomb_Logic19_HitShield,
+        itMSBomb_Logic19_EvtUnk,
     },
     {
         // Flipper
         it_803F5EA8,
-        it_3F14_Logic20_Spawned,
+        itFlipper_Logic20_Spawned,
         NULL,
-        it_3F14_Logic20_PickedUp,
-        it_3F14_Logic20_Dropped,
-        it_3F14_Logic20_Thrown,
+        itFlipper_Logic20_PickedUp,
+        itFlipper_Logic20_Dropped,
+        itFlipper_Logic20_Thrown,
         it_3F14_Logic20_DmgDealt,
         it_3F14_Logic20_DmgReceived,
-        it_3F14_Logic20_EnteredAir,
-        it_3F14_Logic20_Reflected,
+        itFlipper_Logic20_EnteredAir,
+        itFlipper_Logic20_Reflected,
         it_3F14_Logic20_Clanked,
         NULL,
-        it_3F14_Logic20_ShieldBounced,
+        itFlipper_Logic20_ShieldBounced,
         it_3F14_Logic20_HitShield,
-        it_3F14_Logic20_EvtUnk,
+        itFlipper_Logic20_EvtUnk,
     },
     {
         // S_Scope
         it_803F5F40,
-        it_3F14_Logic21_Spawned,
+        itSScope_Logic21_Spawned,
         NULL,
-        it_3F14_Logic21_PickedUp,
-        it_3F14_Logic21_Dropped,
-        it_3F14_Logic21_Thrown,
-        it_3F14_Logic21_DmgDealt,
+        itSScope_Logic21_PickedUp,
+        itSScope_Logic21_Dropped,
+        itSScope_Logic21_Thrown,
+        itSScope_Logic21_DmgDealt,
         NULL,
-        it_3F14_Logic21_EnteredAir,
-        it_3F14_Logic21_Reflected,
-        it_3F14_Logic21_Clanked,
+        itSScope_Logic21_EnteredAir,
+        itSScope_Logic21_Reflected,
+        itSScope_Logic21_Clanked,
         NULL,
-        it_3F14_Logic21_ShieldBounced,
-        it_3F14_Logic21_HitShield,
-        it_3F14_Logic21_EvtUnk,
+        itSScope_Logic21_ShieldBounced,
+        itSScope_Logic21_HitShield,
+        itSScope_Logic21_EvtUnk,
     },
     {
         // StarRod
         it_803F5F90,
-        it_3F14_Logic22_Spawned,
+        itStarRod_Logic22_Spawned,
         NULL,
-        it_3F14_Logic22_PickedUp,
-        it_3F14_Logic22_Dropped,
-        it_3F14_Logic22_Thrown,
-        it_3F14_Logic22_DmgDealt,
+        itStarRod_Logic22_PickedUp,
+        itStarRod_Logic22_Dropped,
+        itStarRod_Logic22_Thrown,
+        itStarRod_Logic22_DmgDealt,
         NULL,
-        it_3F14_Logic22_EnteredAir,
-        it_3F14_Logic22_Reflected,
-        it_3F14_Logic22_Clanked,
+        itStarRod_Logic22_EnteredAir,
+        itStarRod_Logic22_Reflected,
+        itStarRod_Logic22_Clanked,
         NULL,
-        it_3F14_Logic22_ShieldBounced,
-        it_3F14_Logic22_HitShield,
-        it_3F14_Logic22_EvtUnk,
+        itStarRod_Logic22_ShieldBounced,
+        itStarRod_Logic22_HitShield,
+        itStarRod_Logic22_EvtUnk,
     },
     {
         // LipStick
         it_803F6310,
-        it_3F14_Logic23_Spawned,
+        itLipstick_Logic23_Spawned,
         NULL,
-        it_3F14_Logic23_PickedUp,
-        it_3F14_Logic23_Dropped,
-        it_3F14_Logic23_Thrown,
-        it_3F14_Logic23_DmgDealt,
+        itLipstick_Logic23_PickedUp,
+        itLipstick_Logic23_Dropped,
+        itLipstick_Logic23_Thrown,
+        itLipstick_Logic23_DmgDealt,
         NULL,
-        it_3F14_Logic23_EnteredAir,
-        it_3F14_Logic23_Reflected,
-        it_3F14_Logic23_Clanked,
+        itLipstick_Logic23_EnteredAir,
+        itLipstick_Logic23_Reflected,
+        itLipstick_Logic23_Clanked,
         NULL,
-        it_3F14_Logic23_ShieldBounced,
-        it_3F14_Logic23_HitShield,
-        it_3F14_Logic23_EvtUnk,
+        itLipstick_Logic23_ShieldBounced,
+        itLipstick_Logic23_HitShield,
+        itLipstick_Logic23_EvtUnk,
     },
     {
         // Harisen
         it_803F5FF0,
-        it_3F14_Logic24_Spawned,
+        itHarisen_Logic24_Spawned,
         NULL,
-        it_3F14_Logic24_PickedUp,
-        it_3F14_Logic24_Dropped,
-        it_3F14_Logic24_Thrown,
-        it_3F14_Logic24_DmgDealt,
+        itHarisen_Logic24_PickedUp,
+        itHarisen_Logic24_Dropped,
+        itHarisen_Logic24_Thrown,
+        itHarisen_Logic24_DmgDealt,
         NULL,
-        it_3F14_Logic24_EnteredAir,
-        it_3F14_Logic24_Reflected,
-        it_3F14_Logic24_Clanked,
+        itHarisen_Logic24_EnteredAir,
+        itHarisen_Logic24_Reflected,
+        itHarisen_Logic24_Clanked,
         NULL,
-        it_3F14_Logic24_ShieldBounced,
-        it_3F14_Logic24_HitShield,
-        it_3F14_Logic24_EvtUnk,
+        itHarisen_Logic24_ShieldBounced,
+        itHarisen_Logic24_HitShield,
+        itHarisen_Logic24_EvtUnk,
     },
     {
         // F Flower
         it_803F6090,
-        it_3F14_Logic25_Spawned,
+        itFFlower_Logic25_Spawned,
         NULL,
-        it_3F14_Logic25_PickedUp,
-        it_3F14_Logic25_Dropped,
-        it_3F14_Logic25_Thrown,
-        it_3F14_Logic25_DmgDealt,
+        itFFlower_Logic25_PickedUp,
+        itFFlower_Logic25_Dropped,
+        itFFlower_Logic25_Thrown,
+        itFFlower_Logic25_DmgDealt,
         NULL,
-        it_3F14_Logic25_EnteredAir,
-        it_3F14_Logic25_Reflected,
-        it_3F14_Logic25_Clanked,
+        itFFlower_Logic25_EnteredAir,
+        itFFlower_Logic25_Reflected,
+        itFFlower_Logic25_Clanked,
         NULL,
-        it_3F14_Logic25_ShieldBounced,
-        it_3F14_Logic25_HitShield,
-        it_3F14_Logic25_EvtUnk,
+        itFFlower_Logic25_ShieldBounced,
+        itFFlower_Logic25_HitShield,
+        itFFlower_Logic25_EvtUnk,
     },
     {
         // Kinoko
         it_803F6110,
-        it_3F14_Logic26_Spawned,
+        itKinoko_Logic26_Spawned,
         NULL,
         NULL,
         NULL,
         NULL,
-        it_3F14_Logic26_DmgDealt,
+        itKinoko_Logic26_DmgDealt,
         NULL,
         NULL,
         NULL,
@@ -765,17 +765,17 @@ struct ItemLogicTable it_803F14C4[ARRAY_SIZE(it_803F1418)] = {
         NULL,
         NULL,
         NULL,
-        it_3F14_Logic26_EvtUnk,
+        itKinoko_Logic26_EvtUnk,
     },
     {
         // DKinoko
         it_803F6130,
-        it_3F14_Logic27_Spawned,
+        itDKinoko_Logic27_Spawned,
         NULL,
         NULL,
         NULL,
         NULL,
-        it_3F14_Logic27_DmgDealt,
+        itDKinoko_Logic27_DmgDealt,
         NULL,
         NULL,
         NULL,
@@ -783,115 +783,115 @@ struct ItemLogicTable it_803F14C4[ARRAY_SIZE(it_803F1418)] = {
         NULL,
         NULL,
         NULL,
-        it_3F14_Logic27_EvtUnk,
+        itDKinoko_Logic27_EvtUnk,
     },
     {
         // Hammer
         it_803F6150,
-        it_3F14_Logic28_Spawned,
+        itHammer_Logic28_Spawned,
         NULL,
-        it_3F14_Logic28_PickedUp,
-        it_3F14_Logic28_Dropped,
-        NULL,
-        NULL,
-        NULL,
-        it_3F14_Logic28_EnteredAir,
+        itHammer_Logic28_PickedUp,
+        itHammer_Logic28_Dropped,
         NULL,
         NULL,
         NULL,
+        itHammer_Logic28_EnteredAir,
         NULL,
         NULL,
-        it_3F14_Logic28_EvtUnk,
+        NULL,
+        NULL,
+        NULL,
+        itHammer_Logic28_EvtUnk,
     },
     {
         // WStar
         it_803F61B0,
-        it_3F14_Logic29_Spawned,
+        itWStar_Logic29_Spawned,
         NULL,
         it_3F14_Logic29_PickedUp,
-        it_3F14_Logic29_Dropped,
+        itWStar_Logic29_Dropped,
         NULL,
         NULL,
         NULL,
-        it_3F14_Logic29_EnteredAir,
+        itWStar_Logic29_EnteredAir,
         NULL,
         NULL,
         NULL,
         NULL,
         NULL,
-        it_3F14_Logic30_EvtUnk,
+        itWStar_Logic30_EvtUnk,
     },
     {
         // ScBall
         it_803F6220,
-        it_3F14_Logic30_Spawned,
+        itScball_Logic30_Spawned,
         NULL,
-        it_3F14_Logic30_PickedUp,
-        it_3F14_Logic30_Dropped,
-        it_3F14_Logic30_Thrown,
-        it_3F14_Logic30_DmgDealt,
+        itScball_Logic30_PickedUp,
+        itScball_Logic30_Dropped,
+        itScball_Logic30_Thrown,
+        itScball_Logic30_DmgDealt,
         NULL,
-        it_3F14_Logic30_EnteredAir,
-        it_3F14_Logic30_Reflected,
-        it_3F14_Logic30_Clanked,
+        itScball_Logic30_EnteredAir,
+        itScball_Logic30_Reflected,
+        itScball_Logic30_Clanked,
         NULL,
-        it_3F14_Logic30_ShieldBounced,
-        it_3F14_Logic30_HitShield,
-        it_3F14_Logic30_EvtUnk,
+        itRabbitC_Logic30_ShieldBounced,
+        itScball_Logic30_HitShield,
+        itWStar_Logic30_EvtUnk,
     },
     {
         // RabbitC
         it_803F6270,
-        it_3F14_Logic31_Spawned,
+        itRabbitC_Logic31_Spawned,
         NULL,
-        it_3F14_Logic31_PickedUp,
-        it_3F14_Logic31_Dropped,
-        NULL,
-        NULL,
-        NULL,
-        it_3F14_Logic31_EnteredAir,
+        itRabbitC_Logic31_PickedUp,
+        itRabbitC_Logic31_Dropped,
         NULL,
         NULL,
         NULL,
+        itRabbitC_Logic31_EnteredAir,
         NULL,
         NULL,
-        it_3F14_Logic31_EvtUnk,
+        NULL,
+        NULL,
+        NULL,
+        itRabbitC_Logic31_EvtUnk,
     },
     {
         // MetalB
         it_803F62C0,
-        it_3F14_Logic32_Spawned,
+        itMetalB_Logic32_Spawned,
         NULL,
-        it_3F14_Logic32_PickedUp,
-        it_3F14_Logic32_Dropped,
-        NULL,
-        NULL,
-        it_3F14_Logic32_DmgReceived,
-        it_3F14_Logic32_EnteredAir,
+        itMetalB_Logic32_PickedUp,
+        itMetalB_Logic32_Dropped,
         NULL,
         NULL,
+        itMetalB_Logic32_DmgReceived,
+        itMetalB_Logic32_EnteredAir,
         NULL,
         NULL,
         NULL,
-        it_3F14_Logic32_EvtUnk,
+        NULL,
+        NULL,
+        itMetalB_Logic32_EvtUnk,
     },
     {
         // Spycloak
         it_803F6370,
-        it_3F14_Logic33_Spawned,
+        itSpyCloak_Logic33_Spawned,
         NULL,
-        it_3F14_Logic33_PickedUp,
-        it_3F14_Logic33_Dropped,
-        NULL,
-        NULL,
-        NULL,
-        it_3F14_Logic33_EnteredAir,
+        itSpyCloak_Logic33_PickedUp,
+        itSpyCloak_Logic33_Dropped,
         NULL,
         NULL,
         NULL,
+        itSpyCloak_Logic33_EnteredAir,
         NULL,
         NULL,
-        it_3F14_Logic33_EvtUnk,
+        NULL,
+        NULL,
+        NULL,
+        itSpyCloak_Logic33_EvtUnk,
     },
     {
         // M Ball
@@ -919,15 +919,15 @@ struct ItemLogicTable it_803F14C4[ARRAY_SIZE(it_803F1418)] = {
         NULL,
         NULL,
         NULL,
-        it_3F14_Logic35_DmgDealt,
+        itLGunRay_Logic35_DmgDealt,
         NULL,
         NULL,
-        it_3F14_Logic35_Reflected,
-        it_3F14_Logic35_Clanked,
-        it_3F14_Logic35_Absorbed,
-        it_3F14_Logic35_ShieldBounced,
-        it_3F14_Logic35_HitShield,
-        it_3F14_Logic35_EvtUnk,
+        itLGunRay_Logic35_Reflected,
+        itLGunRay_Logic35_Clanked,
+        itLGunRay_Logic35_Absorbed,
+        itLGunRay_Logic35_ShieldBounced,
+        itLGunRay_Logic35_HitShield,
+        itLGunRay_Logic35_EvtUnk,
     },
     {
         // Star Rod Star
@@ -937,15 +937,15 @@ struct ItemLogicTable it_803F14C4[ARRAY_SIZE(it_803F1418)] = {
         NULL,
         NULL,
         NULL,
-        it_3F14_Logic36_DmgDealt,
+        itStarRodStar_Logic36_DmgDealt,
         NULL,
         NULL,
-        it_3F14_Logic36_Reflected,
-        it_3F14_Logic36_Clanked,
-        it_3F14_Logic36_Absorbed,
-        it_3F14_Logic36_ShieldBounced,
-        it_3F14_Logic36_HitShield,
-        it_3F14_Logic36_EvtUnk,
+        itStarRodStar_Logic36_Reflected,
+        itStarRodStar_Logic36_Clanked,
+        itStarRodStar_Logic36_Absorbed,
+        itStarRodStar_Logic36_ShieldBounced,
+        itStarRodStar_Logic36_HitShield,
+        itStarRodStar_Logic36_EvtUnk,
     },
     {
         // LipStick Spore
@@ -955,15 +955,15 @@ struct ItemLogicTable it_803F14C4[ARRAY_SIZE(it_803F1418)] = {
         NULL,
         NULL,
         NULL,
-        it_3F14_Logic37_DmgDealt,
+        itLipstickSpore_Logic37_DmgDealt,
         NULL,
         NULL,
-        it_3F14_Logic37_Reflected,
-        it_3F14_Logic37_Clanked,
-        it_3F14_Logic37_Absorbed,
-        it_3F14_Logic37_ShieldBounced,
-        it_3F14_Logic37_HitShield,
-        it_3F14_Logic37_EvtUnk,
+        itLipstickSpore_Logic37_Reflected,
+        itLipstickSpore_Logic37_Clanked,
+        itLipstickSpore_Logic37_Absorbed,
+        itLipstickSpore_Logic37_ShieldBounced,
+        itLipstickSpore_Logic37_HitShield,
+        itLipstickSpore_Logic37_EvtUnk,
     },
     {
         // S Scope Beam
@@ -973,15 +973,15 @@ struct ItemLogicTable it_803F14C4[ARRAY_SIZE(it_803F1418)] = {
         NULL,
         NULL,
         NULL,
-        it_3F14_Logic38_DmgDealt,
+        itSScopeBeam_Logic38_DmgDealt,
         NULL,
         NULL,
-        it_3F14_Logic38_Reflected,
-        it_3F14_Logic38_Clanked,
-        it_3F14_Logic38_Absorbed,
-        it_3F14_Logic38_ShieldBounced,
-        it_3F14_Logic38_HitShield,
-        it_3F14_Logic38_EvtUnk,
+        itSScopeBeam_Logic38_Reflected,
+        itSScopeBeam_Logic38_Clanked,
+        itSScopeBeam_Logic38_Absorbed,
+        itSScopeBeam_Logic38_ShieldBounced,
+        itSScopeBeam_Logic38_HitShield,
+        itSScopeBeam_Logic38_EvtUnk,
     },
     {
         // L Gun Beam
@@ -991,106 +991,106 @@ struct ItemLogicTable it_803F14C4[ARRAY_SIZE(it_803F1418)] = {
         NULL,
         NULL,
         NULL,
-        it_3F14_Logic39_DmgDealt,
+        itLGunBeam_Logic39_DmgDealt,
         NULL,
         NULL,
-        it_3F14_Logic39_Reflected,
-        it_3F14_Logic39_Clanked,
-        it_3F14_Logic39_Absorbed,
-        it_3F14_Logic39_ShieldBounced,
-        it_3F14_Logic39_HitShield,
-        it_3F14_Logic39_EvtUnk,
+        itLGunBeam_Logic39_Reflected,
+        itLGunBeam_Logic39_Clanked,
+        itLGunBeam_Logic39_Absorbed,
+        itLGunBeam_Logic39_ShieldBounced,
+        itLGunBeam_Logic39_HitShield,
+        itLGunBeam_Logic39_EvtUnk,
     },
     {
         // Hammer Head
         it_803F6640,
-        it_3F14_Logic40_Spawned,
+        itHammerHead_Logic40_Spawned,
         NULL,
-        it_3F14_Logic40_PickedUp,
-        it_3F14_Logic40_Dropped,
+        itHammerHead_Logic40_PickedUp,
+        itHammerHead_Logic40_Dropped,
         it_3F14_Logic40_Thrown,
-        it_3F14_Logic40_DmgDealt,
-        it_3F14_Logic40_DmgReceived,
+        itHammerHead_Logic40_DmgDealt,
+        itHammerHead_Logic40_DmgReceived,
         NULL,
-        it_3F14_Logic40_Reflected,
-        it_3F14_Logic40_Clanked,
+        itHammerHead_Logic40_Reflected,
+        itHammerHead_Logic40_Clanked,
         NULL,
         NULL,
-        it_3F14_Logic40_HitShield,
-        it_3F14_Logic40_EvtUnk,
+        itHammerHead_Logic40_HitShield,
+        itHammerHead_Logic40_EvtUnk,
     },
     {
         // F Flower Flame
         it_803F66C8,
-        it_3F14_Logic41_Spawned,
+        itFFlowerFlame_Logic41_Spawned,
         NULL,
-        it_3F14_Logic41_PickedUp,
-        it_3F14_Logic41_Dropped,
-        NULL,
-        NULL,
-        NULL,
-        it_3F14_Logic41_EnteredAir,
+        itFFlowerFlame_Logic41_PickedUp,
+        itFFlowerFlame_Logic41_Dropped,
         NULL,
         NULL,
         NULL,
+        itFFlowerFlame_Logic41_EnteredAir,
         NULL,
         NULL,
-        it_3F14_Logic41_EvtUnk,
+        NULL,
+        NULL,
+        NULL,
+        itFFlowerFlame_Logic41_EvtUnk,
     },
     {
         // EvYoshiEgg
         it_803F6728,
-        it_3F14_Logic42_Spawned,
-        it_3F14_Logic42_Destroyed,
-        it_3F14_Logic42_PickedUp,
-        it_3F14_Logic42_Dropped,
-        it_3F14_Logic42_Thrown,
+        itEvYoshiEgg_Logic42_Spawned,
+        itEvYoshiEgg_Logic42_Destroyed,
+        itEvYoshiEgg_Logic42_PickedUp,
+        itEvYoshiEgg_Logic42_Dropped,
+        itEvYoshiEgg_Logic42_Thrown,
         it_3F14_Logic42_DmgDealt,
         it_3F14_Logic42_DmgReceived,
-        it_3F14_Logic42_EnteredAir,
+        itEvYoshiEgg_Logic42_EnteredAir,
         it_3F14_Logic42_Reflected,
         it_3F14_Logic42_Clanked,
         NULL,
         NULL,
         it_3F14_Logic42_HitShield,
-        it_3F14_Logic42_EvtUnk,
+        itEvYoshiEgg_Logic42_EvtUnk,
     },
 };
 
-// static char it_803F1ED8[]; // unsure of type
-// static char it_803F1EE4[]; // unsure of type
-// static char it_803F1EF0[]; // unsure of type
-// static char it_803F1F00[] = "!(jobj->flags & JOBJ_USE_QUATERNION)"; // ?
-// "translate" static char it_803F1F0C[] = "!(jobj->flags &
-// JOBJ_USE_QUATERNION)"; // ?
+/// static char it_803F1ED8[]; // unsure of type
+/// static char it_803F1EE4[]; // unsure of type
+/// static char it_803F1EF0[]; // unsure of type
+/// static char it_803F1F00[] = "!(jobj->flags & JOBJ_USE_QUATERNION)"; // ?
+/// "translate" static char it_803F1F0C[] = "!(jobj->flags &
+/// JOBJ_USE_QUATERNION)"; // ?
 
-// char it_803F1F38[];
+/// char it_803F1F38[];
 char* it_803F1F38;
-// char it_803F1F58[];
+/// char it_803F1F58[];
 char* it_803F1F58;
 
 HSD_ClassInfo it_803F1F90;
-//  = {
-//     (struct _HSD_ClassInfoHead) {
-//         it_80277D08, // void (*info_init)(void);
-//         0x00000000, // u32 flags;
-//         0x00000000, // char* library_name;
-//         0x00000000, // char* class_name;
-//         0x00000000, // s16 obj_size;
-//         0x00000000, // s16 info_size;
-//         0x00000000, // struct _HSD_ClassInfo* parent;
-//         0x00000000, // struct _HSD_ClassInfo* next;
-//         0x00000000, // struct _HSD_ClassInfo* child;
-//         0x00000000, // u32 nb_exist;
-//         0x00000000, // u32 nb_peak;
-//     },
-//     0x00000000, // HSD_Class* (*alloc)(struct _HSD_ClassInfo* c);
-//     0x00000000, // int (*init)(struct _HSD_Class* c);
-//     0x00000000, // void (*release)(struct _HSD_Class* c);
-//     0x00000000, // void (*destroy)(struct _HSD_Class* c);
-//     0x00000000, // void (*amnesia)(struct _HSD_ClassInfo* c);
-//     // ... lots more data, but no other struct elements to put them in
-// };
+///  = {
+///     (struct _HSD_ClassInfoHead) {
+///         it_80277D08, // void (*info_init)(void);
+///         0x00000000, // u32 flags;
+///         0x00000000, // char* library_name;
+///         0x00000000, // char* class_name;
+///         0x00000000, // s16 obj_size;
+///         0x00000000, // s16 info_size;
+///         0x00000000, // struct _HSD_ClassInfo* parent;
+///         0x00000000, // struct _HSD_ClassInfo* next;
+///         0x00000000, // struct _HSD_ClassInfo* child;
+///         0x00000000, // u32 nb_exist;
+///         0x00000000, // u32 nb_peak;
+///     },
+///     0x00000000, // HSD_Class* (*alloc)(struct _HSD_ClassInfo* c);
+///     0x00000000, // int (*init)(struct _HSD_Class* c);
+///     0x00000000, // void (*release)(struct _HSD_Class* c);
+///     0x00000000, // void (*destroy)(struct _HSD_Class* c);
+///     0x00000000, // void (*amnesia)(struct _HSD_ClassInfo* c);
+///     // ... lots more data, but no other struct elements to put them in
+/// };
 
 void* jumptable_803F20E0[114];
 
@@ -1105,7 +1105,7 @@ static ItCmd it_803F22A8[16] = {
 char it_803F22E8;
 char it_803F2300;
 
-// Pokemon items
+/// Pokemon items
 struct sdata_ItemGXLink it_803F2310[47] = {
     it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
     it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
@@ -1124,7 +1124,7 @@ ItemLogicTable it_803F23CC[ARRAY_SIZE(it_803F2310)] = {
         // Tosakinto (Goldeen)
         it_803F7A48,
         it_802C8F4C,
-        it_2725_Logic0_Destroyed,
+        itTosakinto_Logic0_Destroyed,
         NULL,
         NULL,
         NULL,
@@ -1154,13 +1154,13 @@ ItemLogicTable it_803F23CC[ARRAY_SIZE(it_803F2310)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic1_EvtUnk,
+        itChicorita_Logic1_EvtUnk,
     },
     {
         // Kabigon (Snorlax)
         it_803F7AD8,
         it_802C9D40,
-        it_2725_Logic2_Destroyed,
+        itKabigon_Logic2_Destroyed,
         NULL,
         NULL,
         NULL,
@@ -1231,7 +1231,7 @@ ItemLogicTable it_803F23CC[ARRAY_SIZE(it_803F2310)] = {
     {
         // Fire (Moltres)
         it_803F7C10,
-        it_2725_Logic6_Spawned,
+        itFire_Logic6_Spawned,
         NULL,
         NULL,
         NULL,
@@ -1244,12 +1244,12 @@ ItemLogicTable it_803F23CC[ARRAY_SIZE(it_803F2310)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic6_EvtUnk,
+        itFire_Logic6_EvtUnk,
     },
     {
         // Thunder (Zapdos)
         it_803F7C40,
-        it_2725_Logic7_Spawned,
+        itThunder_Logic7_Spawned,
         NULL,
         NULL,
         NULL,
@@ -1290,7 +1290,7 @@ ItemLogicTable it_803F23CC[ARRAY_SIZE(it_803F2310)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic9_DmgDealt,
+        itSonans_Logic9_DmgDealt,
         it_802CD7D4,
         NULL,
         NULL,
@@ -1375,7 +1375,7 @@ ItemLogicTable it_803F23CC[ARRAY_SIZE(it_803F2310)] = {
     {
         // Suikun (Suicune)
         it_803F7E08,
-        it_2725_Logic14_Spawned,
+        itSuikun_Logic14_Spawned,
         NULL,
         NULL,
         NULL,
@@ -1393,7 +1393,7 @@ ItemLogicTable it_803F23CC[ARRAY_SIZE(it_803F2310)] = {
     {
         // Kireihana (Bellossom)
         it_803F7E28,
-        it_2725_Logic15_Spawned,
+        itKireihana_Logic15_Spawned,
         NULL,
         NULL,
         NULL,
@@ -1406,12 +1406,12 @@ ItemLogicTable it_803F23CC[ARRAY_SIZE(it_803F2310)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic15_EvtUnk,
+        itKireihana_Logic15_EvtUnk,
     },
     {
         // Marumine (Electrode)
         it_803F7E78,
-        it_2725_Logic16_Spawned,
+        itMarumine_Logic16_Spawned,
         NULL,
         it_802D0D18,
         it_802D0E30,
@@ -1442,7 +1442,7 @@ ItemLogicTable it_803F23CC[ARRAY_SIZE(it_803F2310)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic17_EvtUnk,
+        itLugia_Logic17_EvtUnk,
     },
     {
         // Houou (Ho-oh)
@@ -1478,12 +1478,12 @@ ItemLogicTable it_803F23CC[ARRAY_SIZE(it_803F2310)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic19_EvtUnk,
+        itMetamon_Logic19_EvtUnk,
     },
     {
         // Pippi (Clefairy)
         it_803F7FF8,
-        it_2725_Logic20_Spawned,
+        itPippi_Logic20_Spawned,
         NULL,
         NULL,
         NULL,
@@ -1501,7 +1501,7 @@ ItemLogicTable it_803F23CC[ARRAY_SIZE(it_803F2310)] = {
     {
         // Togepy
         it_803F8058,
-        it_2725_Logic21_Spawned,
+        itTogepy_Logic21_Spawned,
         NULL,
         NULL,
         NULL,
@@ -1514,12 +1514,12 @@ ItemLogicTable it_803F23CC[ARRAY_SIZE(it_803F2310)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic21_EvtUnk,
+        itTogepy_Logic21_EvtUnk,
     },
     {
         // Mew
         it_803F80C8,
-        it_2725_Logic22_Spawned,
+        itMew_Logic22_Spawned,
         NULL,
         NULL,
         NULL,
@@ -1537,7 +1537,7 @@ ItemLogicTable it_803F23CC[ARRAY_SIZE(it_803F2310)] = {
     {
         // Cerebi
         it_803F80F8,
-        it_2725_Logic23_Spawned,
+        itCerebi_Logic23_Spawned,
         NULL,
         NULL,
         NULL,
@@ -1591,7 +1591,7 @@ ItemLogicTable it_803F23CC[ARRAY_SIZE(it_803F2310)] = {
     {
         // Porygon2
         it_803F8250,
-        it_2725_Logic26_Spawned,
+        itPorygon2_Logic26_Spawned,
         NULL,
         NULL,
         NULL,
@@ -1627,7 +1627,7 @@ ItemLogicTable it_803F23CC[ARRAY_SIZE(it_803F2310)] = {
     {
         // Maril
         it_803F82B0,
-        it_2725_Logic28_Spawned,
+        itMaril_Logic28_Spawned,
         NULL,
         NULL,
         NULL,
@@ -1645,7 +1645,7 @@ ItemLogicTable it_803F23CC[ARRAY_SIZE(it_803F2310)] = {
     {
         // Fushigibana (Venusaur)
         it_803F82F0,
-        it_2725_Logic29_Spawned,
+        itFushigibana_Logic29_Spawned,
         NULL,
         NULL,
         NULL,
@@ -1658,25 +1658,25 @@ ItemLogicTable it_803F23CC[ARRAY_SIZE(it_803F2310)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic29_EvtUnk,
+        itOldKuri_Logic29_EvtUnk,
     },
     {
         // Chicorita leaf
         it_803F7AC8,
-        it_2725_Logic30_Spawned,
+        itChicoritaLeaf_Logic30_Spawned,
         NULL,
         NULL,
         NULL,
         NULL,
-        it_2725_Logic30_HitShield,
+        itChicoritaLeaf_Logic30_HitShield,
         NULL,
         NULL,
-        it_2725_Logic30_Reflected,
-        it_2725_Logic30_HitShield,
-        it_2725_Logic30_HitShield,
+        itChicoritaLeaf_Logic30_Reflected,
+        itChicoritaLeaf_Logic30_HitShield,
+        itChicoritaLeaf_Logic30_HitShield,
         NULL,
-        it_2725_Logic30_HitShield,
-        it_2725_Logic30_EvtUnk,
+        itChicoritaLeaf_Logic30_HitShield,
+        itChicoritaLeaf_Logic30_EvtUnk,
     },
     {
         // Kamex hydro pump
@@ -1686,15 +1686,15 @@ ItemLogicTable it_803F23CC[ARRAY_SIZE(it_803F2310)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic31_DmgDealt,
+        itKamex_Logic31_DmgDealt,
         NULL,
         NULL,
         NULL,
         NULL,
         NULL,
         NULL,
-        it_2725_Logic31_HitShield,
-        it_2725_Logic31_EvtUnk,
+        itKamex_Logic31_HitShield,
+        itKamex_Logic31_EvtUnk,
     },
     {
         // Matadogas gas 1
@@ -1712,7 +1712,7 @@ ItemLogicTable it_803F23CC[ARRAY_SIZE(it_803F2310)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic33_EvtUnk,
+        itMatadogas_Logic33_EvtUnk,
     },
     {
         // Matadogas gas 2
@@ -1730,12 +1730,12 @@ ItemLogicTable it_803F23CC[ARRAY_SIZE(it_803F2310)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic33_EvtUnk,
+        itMatadogas_Logic33_EvtUnk,
     },
     {
         // Lizardon flame 1
         it_803F7C00,
-        it_2725_Logic34_Spawned,
+        itLizardon_Logic34_Spawned,
         NULL,
         NULL,
         NULL,
@@ -1743,17 +1743,17 @@ ItemLogicTable it_803F23CC[ARRAY_SIZE(it_803F2310)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic37_Reflected,
+        itLizardon_Logic37_Reflected,
         NULL,
-        it_2725_Logic37_Absorbed,
+        itLizardon_Logic37_Absorbed,
         NULL,
-        it_2725_Logic37_HitShield,
-        it_2725_Logic37_EvtUnk,
+        itLizardon_Logic37_HitShield,
+        itLizardon_Logic37_EvtUnk,
     },
     {
         // Lizardon flame 2
         it_803F7C00,
-        it_2725_Logic35_Spawned,
+        itLizardon_Logic35_Spawned,
         NULL,
         NULL,
         NULL,
@@ -1761,17 +1761,17 @@ ItemLogicTable it_803F23CC[ARRAY_SIZE(it_803F2310)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic37_Reflected,
+        itLizardon_Logic37_Reflected,
         NULL,
-        it_2725_Logic37_Absorbed,
+        itLizardon_Logic37_Absorbed,
         NULL,
-        it_2725_Logic37_HitShield,
-        it_2725_Logic37_EvtUnk,
+        itLizardon_Logic37_HitShield,
+        itLizardon_Logic37_EvtUnk,
     },
     {
         // Lizardon flame 3
         it_803F7C00,
-        it_2725_Logic36_Spawned,
+        itLizardon_Logic36_Spawned,
         NULL,
         NULL,
         NULL,
@@ -1779,17 +1779,17 @@ ItemLogicTable it_803F23CC[ARRAY_SIZE(it_803F2310)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic37_Reflected,
+        itLizardon_Logic37_Reflected,
         NULL,
-        it_2725_Logic37_Absorbed,
+        itLizardon_Logic37_Absorbed,
         NULL,
-        it_2725_Logic37_HitShield,
-        it_2725_Logic37_EvtUnk,
+        itLizardon_Logic37_HitShield,
+        itLizardon_Logic37_EvtUnk,
     },
     {
         // Lizardon flame 4
         it_803F7C00,
-        it_2725_Logic37_Spawned,
+        itLizardon_Logic37_Spawned,
         NULL,
         NULL,
         NULL,
@@ -1797,12 +1797,12 @@ ItemLogicTable it_803F23CC[ARRAY_SIZE(it_803F2310)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic37_Reflected,
+        itLizardon_Logic37_Reflected,
         NULL,
-        it_2725_Logic37_Absorbed,
+        itLizardon_Logic37_Absorbed,
         NULL,
-        it_2725_Logic37_HitShield,
-        it_2725_Logic37_EvtUnk,
+        itLizardon_Logic37_HitShield,
+        itLizardon_Logic37_EvtUnk,
     },
     {
         // Unknown swarm (mini-unowns)
@@ -1820,12 +1820,12 @@ ItemLogicTable it_803F23CC[ARRAY_SIZE(it_803F2310)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic38_EvtUnk,
+        itUnknown_Logic38_EvtUnk,
     },
     {
         // Lugia aeroblast 1
         it_803F7F48,
-        it_2725_Logic39_Spawned,
+        itLugia_Logic39_Spawned,
         NULL,
         NULL,
         NULL,
@@ -1843,7 +1843,7 @@ ItemLogicTable it_803F23CC[ARRAY_SIZE(it_803F2310)] = {
     {
         // Lugia aeroblast 2
         it_803F7F48,
-        it_2725_Logic40_Spawned,
+        itLugia_Logic40_Spawned,
         NULL,
         NULL,
         NULL,
@@ -1861,7 +1861,7 @@ ItemLogicTable it_803F23CC[ARRAY_SIZE(it_803F2310)] = {
     {
         // Lugia aeroblast 3
         it_803F7F48,
-        it_2725_Logic41_Spawned,
+        itLugia_Logic41_Spawned,
         NULL,
         NULL,
         NULL,
@@ -1907,7 +1907,7 @@ ItemLogicTable it_803F23CC[ARRAY_SIZE(it_803F2310)] = {
         NULL,
         it_802D4F28,
         NULL,
-        it_2725_Logic43_Absorbed,
+        itHitodeman_Logic43_Absorbed,
         it_802D4F08,
         it_802D4F50,
         it_802D4F58,
@@ -1915,20 +1915,20 @@ ItemLogicTable it_803F23CC[ARRAY_SIZE(it_803F2310)] = {
     {
         // Lucky egg
         it_803F8200,
-        it_2725_Logic44_Spawned,
+        itLucky_Logic44_Spawned,
         NULL,
-        it_2725_Logic44_PickedUp,
-        it_2725_Logic44_Dropped,
-        NULL,
-        NULL,
-        NULL,
-        it_2725_Logic44_EnteredAir,
+        itLucky_Logic44_PickedUp,
+        itLucky_Logic44_Dropped,
         NULL,
         NULL,
         NULL,
+        itLucky_Logic44_EnteredAir,
         NULL,
         NULL,
-        it_2725_Logic44_EvtUnk,
+        NULL,
+        NULL,
+        NULL,
+        itLucky_Logic44_EvtUnk,
     },
     {
         // Hinoarashi flame
@@ -1993,7 +1993,7 @@ static ItemKind it_803F2ED0[22] = {
     0x00,
 };
 
-// Character-specific items
+/// Character-specific items
 struct sdata_ItemGXLink it_803F2F28[118] = {
     it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
     it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
@@ -2033,7 +2033,7 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         it_803F8320,
         it_802D73F0,
         it_2725_Logic9_Destroyed,
-        it_2725_Logic0_PickedUp,
+        itOldKuri_Logic0_PickedUp,
         it_2725_Logic0_Dropped,
         it_2725_Logic0_Thrown,
         NULL,
@@ -2050,10 +2050,10 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         // Leadead
         it_803F8EB0,
         it_802E8BCC,
-        it_2725_Logic1_Destroyed,
-        it_2725_Logic1_PickedUp,
-        it_2725_Logic1_Dropped,
-        it_2725_Logic1_Thrown,
+        itLeadead_Logic1_Destroyed,
+        itLeadead_Logic1_PickedUp,
+        itLeadead_Logic1_Dropped,
+        itLeadead_Logic1_Thrown,
         NULL,
         it_802E8CD8,
         NULL,
@@ -2069,9 +2069,9 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         it_803F8B48,
         it_802E4A44,
         it_2725_Logic9_Destroyed,
-        it_2725_Logic2_PickedUp,
-        it_2725_Logic2_Dropped,
-        it_2725_Logic2_Thrown,
+        itOctarock_Logic2_PickedUp,
+        itOctarock_Logic2_Dropped,
+        itOctarock_Logic2_Thrown,
         NULL,
         it_802E4B00,
         NULL,
@@ -2126,15 +2126,15 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic87_DmgDealt,
+        itMarioFireball_Logic87_DmgDealt,
         NULL,
         NULL,
-        it_2725_Logic87_Reflected,
-        it_2725_Logic87_Clanked,
-        it_2725_Logic87_Absorbed,
-        it_2725_Logic87_ShieldBounced,
-        it_2725_Logic87_HitShield,
-        it_2725_Logic87_EvtUnk,
+        itMarioFireball_Logic87_Reflected,
+        itMarioFireball_Logic87_Clanked,
+        itMarioFireball_Logic87_Absorbed,
+        itMarioFireball_Logic87_ShieldBounced,
+        itMarioFireball_Logic87_HitShield,
+        itMarioFireball_Logic87_EvtUnk,
     },
     {
         // Dr Mario pill
@@ -2162,22 +2162,22 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic7_DmgDealt,
+        itKirbyCutterBeam_Logic7_DmgDealt,
         NULL,
         NULL,
         it_2725_Logic7_Reflected,
-        it_2725_Logic7_Clanked,
-        it_2725_Logic7_Absorbed,
+        itKirbyCutterBeam_Logic7_Clanked,
+        itKirbyCutterBeam_Logic7_Absorbed,
         it_2725_Logic7_ShieldBounced,
-        it_2725_Logic7_HitShield,
+        itKirbyCutterBeam_Logic7_HitShield,
         it_8029C4B4,
     },
     {
         // Kirby hammer
         it_803F6C98,
         NULL,
-        it_2725_Logic8_Destroyed,
-        it_2725_Logic8_PickedUp,
+        itKirbyHammer_Logic8_Destroyed,
+        itKirbyHammer_Logic8_PickedUp,
         NULL,
         NULL,
         NULL,
@@ -2232,15 +2232,15 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic94_Clanked,
+        itFoxLaser_Logic94_Clanked,
         NULL,
         NULL,
-        it_2725_Logic94_Reflected,
-        it_2725_Logic94_Clanked,
-        it_2725_Logic94_Absorbed,
-        it_2725_Logic94_ShieldBounced,
-        it_2725_Logic94_HitShield,
-        it_2725_Logic94_EvtUnk,
+        itFoxLaser_Logic94_Reflected,
+        itFoxLaser_Logic94_Clanked,
+        itFoxLaser_Logic94_Absorbed,
+        itFoxLaser_Logic94_ShieldBounced,
+        itFoxLaser_Logic94_HitShield,
+        itFoxLaser_Logic94_EvtUnk,
     },
     {
         // Falco laser
@@ -2250,25 +2250,25 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic94_Clanked,
+        itFoxLaser_Logic94_Clanked,
         NULL,
         NULL,
-        it_2725_Logic94_Reflected,
-        it_2725_Logic94_Clanked,
-        it_2725_Logic94_Absorbed,
-        it_2725_Logic94_ShieldBounced,
-        it_2725_Logic94_HitShield,
-        it_2725_Logic94_EvtUnk,
+        itFoxLaser_Logic94_Reflected,
+        itFoxLaser_Logic94_Clanked,
+        itFoxLaser_Logic94_Absorbed,
+        itFoxLaser_Logic94_ShieldBounced,
+        itFoxLaser_Logic94_HitShield,
+        itFoxLaser_Logic94_EvtUnk,
     },
     {
         // Fox illusion
         it_803F6818,
         NULL,
-        it_2725_Logic14_Destroyed,
+        itFoxIllusion_Logic14_Destroyed,
         NULL,
         NULL,
         NULL,
-        it_2725_Logic14_DmgDealt,
+        itFoxIllusion_Logic14_DmgDealt,
         NULL,
         NULL,
         NULL,
@@ -2282,11 +2282,11 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         // Falco phantasm
         it_803F6818,
         NULL,
-        it_2725_Logic14_Destroyed,
+        itFoxIllusion_Logic14_Destroyed,
         NULL,
         NULL,
         NULL,
-        it_2725_Logic14_DmgDealt,
+        itFoxIllusion_Logic14_DmgDealt,
         NULL,
         NULL,
         NULL,
@@ -2305,13 +2305,13 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         it_8029EC34,
         it_8029E5D0,
         it_8029F960,
-        it_2725_Logic16_DmgReceived,
-        it_2725_Logic16_EnteredAir,
-        it_2725_Logic16_Reflected,
+        itLinkBomb_Logic16_DmgReceived,
+        itLinkBomb_Logic16_EnteredAir,
+        itLinkBomb_Logic16_Reflected,
         NULL,
         NULL,
-        it_2725_Logic16_ShieldBounced,
-        it_2725_Logic16_HitShield,
+        itLinkBomb_Logic16_ShieldBounced,
+        itLinkBomb_Logic16_HitShield,
         it_8029FD84,
     },
     {
@@ -2323,20 +2323,20 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         it_8029EC34,
         it_8029E5D0,
         it_8029F960,
-        it_2725_Logic16_DmgReceived,
-        it_2725_Logic16_EnteredAir,
-        it_2725_Logic16_Reflected,
+        itLinkBomb_Logic16_DmgReceived,
+        itLinkBomb_Logic16_EnteredAir,
+        itLinkBomb_Logic16_Reflected,
         NULL,
         NULL,
-        it_2725_Logic16_ShieldBounced,
-        it_2725_Logic16_HitShield,
+        itLinkBomb_Logic16_ShieldBounced,
+        itLinkBomb_Logic16_HitShield,
         it_8029FD84,
     },
     {
         // Link boomerang
         it_803F6920,
         NULL,
-        it_2725_Logic18_Destroyed,
+        itLinkBoomerang_Logic18_Destroyed,
         it_802A0E70,
         it_802A0F84,
         it_802A0F88,
@@ -2345,7 +2345,7 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         it_802A20E8,
         it_802A1FA8,
-        it_2725_Logic18_Absorbed,
+        itLinkBoomerang_Logic18_Absorbed,
         it_802A2320,
         it_802A2288,
         it_802A23CC,
@@ -2354,7 +2354,7 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         // Young Link boomerang
         it_803F6920,
         NULL,
-        it_2725_Logic18_Destroyed,
+        itLinkBoomerang_Logic18_Destroyed,
         it_802A0E70,
         it_802A0F84,
         it_802A0F88,
@@ -2363,7 +2363,7 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         it_802A20E8,
         it_802A1FA8,
-        it_2725_Logic18_Absorbed,
+        itLinkBoomerang_Logic18_Absorbed,
         it_802A2320,
         it_802A2288,
         it_802A23CC,
@@ -2373,7 +2373,7 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         it_803F6998,
         it_802A2418,
         NULL,
-        it_2725_Logic20_PickedUp,
+        itLinkHookshot_Logic20_PickedUp,
         NULL,
         NULL,
         NULL,
@@ -2391,7 +2391,7 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         it_803F6998,
         NULL,
         NULL,
-        it_2725_Logic20_PickedUp,
+        itLinkHookshot_Logic20_PickedUp,
         NULL,
         NULL,
         NULL,
@@ -2408,37 +2408,37 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         // Link arrow
         it_803F6A28,
         NULL,
-        it_2725_Logic98_Destroyed,
-        it_2725_Logic98_PickedUp,
+        itLinkArrow_Logic98_Destroyed,
+        itLinkArrow_Logic98_PickedUp,
         NULL,
         NULL,
-        it_2725_Logic98_DmgDealt,
+        itLinkArrow_Logic98_DmgDealt,
         NULL,
         NULL,
-        it_2725_Logic98_Reflected,
-        it_2725_Logic98_Clanked,
+        itLinkArrow_Logic98_Reflected,
+        itLinkArrow_Logic98_Clanked,
         NULL,
         NULL,
-        it_2725_Logic98_HitShield,
-        it_2725_Logic98_EvtUnk,
+        itLinkArrow_Logic98_HitShield,
+        itLinkArrow_Logic98_EvtUnk,
     },
     {
         // Young Link arrow
         it_803F6A28,
         NULL,
-        it_2725_Logic98_Destroyed,
-        it_2725_Logic98_PickedUp,
+        itLinkArrow_Logic98_Destroyed,
+        itLinkArrow_Logic98_PickedUp,
         NULL,
         NULL,
-        it_2725_Logic98_DmgDealt,
+        itLinkArrow_Logic98_DmgDealt,
         NULL,
         NULL,
-        it_2725_Logic98_Reflected,
-        it_2725_Logic98_Clanked,
+        itLinkArrow_Logic98_Reflected,
+        itLinkArrow_Logic98_Clanked,
         NULL,
         NULL,
-        it_2725_Logic98_HitShield,
-        it_2725_Logic98_EvtUnk,
+        itLinkArrow_Logic98_HitShield,
+        itLinkArrow_Logic98_EvtUnk,
     },
     {
         // Ness PK fire
@@ -2451,11 +2451,11 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         it_2725_Logic23_DmgDealt,
         NULL,
         NULL,
-        it_2725_Logic23_Reflected,
+        itNessPKFire_Logic23_Reflected,
         it_2725_Logic23_Clanked,
-        it_2725_Logic23_Absorbed,
+        itNessPKFire_Logic23_Absorbed,
         it_2725_Logic23_ShieldBounced,
-        it_2725_Logic23_HitShield,
+        itNessPKFire_Logic23_HitShield,
         it_802AA474,
     },
     {
@@ -2487,12 +2487,12 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic102_Reflected,
-        it_2725_Logic102_Clanked,
-        it_2725_Logic102_Absorbed,
+        itNessPKFlush_Logic102_Reflected,
+        itNessPKFlush_Logic102_Clanked,
+        itNessPKFlush_Logic102_Absorbed,
         NULL,
         NULL,
-        it_2725_Logic102_EvtUnk,
+        itNessPKFlush_Logic102_EvtUnk,
     },
     {
         // Ness PK thunder ball
@@ -2502,7 +2502,7 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic26_DmgDealt,
+        itNessPKThunderball_Logic26_DmgDealt,
         NULL,
         NULL,
         it_802AC098,
@@ -2589,7 +2589,7 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         it_803F6CA8,
         NULL,
         NULL,
-        it_2725_Logic96_PickedUp,
+        itFoxBlaster_Logic96_PickedUp,
         NULL,
         NULL,
         NULL,
@@ -2600,14 +2600,14 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic96_EvtUnk,
+        itFoxBlaster_Logic96_EvtUnk,
     },
     {
         // Falco blaster
         it_803F6CA8,
         NULL,
         NULL,
-        it_2725_Logic96_PickedUp,
+        itFoxBlaster_Logic96_PickedUp,
         NULL,
         NULL,
         NULL,
@@ -2618,14 +2618,14 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic96_EvtUnk,
+        itFoxBlaster_Logic96_EvtUnk,
     },
     {
         // Link bow
         it_803F6E98,
         NULL,
-        it_2725_Logic100_Destroyed,
-        it_2725_Logic100_PickedUp,
+        itLinkBow_Logic100_Destroyed,
+        itLinkBow_Logic100_PickedUp,
         NULL,
         NULL,
         NULL,
@@ -2636,14 +2636,14 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic100_EvtUnk,
+        itLinkBow_Logic100_EvtUnk,
     },
     {
         // Young Link bow
         it_803F6E98,
         NULL,
-        it_2725_Logic100_Destroyed,
-        it_2725_Logic100_PickedUp,
+        itLinkBow_Logic100_Destroyed,
+        itLinkBow_Logic100_PickedUp,
         NULL,
         NULL,
         NULL,
@@ -2654,7 +2654,7 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic100_EvtUnk,
+        itLinkBow_Logic100_EvtUnk,
     },
     {
         // Ness PK flush explode
@@ -2668,17 +2668,17 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic103_Clanked,
-        it_2725_Logic103_Absorbed,
-        it_2725_Logic103_ShieldBounced,
-        it_2725_Logic103_HitShield,
-        it_2725_Logic103_EvtUnk,
+        itNessPKFlushExplode_Logic103_Clanked,
+        itNessPKFlushExplode_Logic103_Absorbed,
+        itNessPKFlushExplode_Logic103_ShieldBounced,
+        itNessPKFlushExplode_Logic103_HitShield,
+        itNessPKFlushExplode_Logic103_EvtUnk,
     },
     {
         // Sheik needle thrown
         it_803F6F50,
         NULL,
-        it_2725_Logic109_Destroyed,
+        itSeakNeedleThrown_Logic109_Destroyed,
         NULL,
         NULL,
         NULL,
@@ -2690,14 +2690,14 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         it_2725_Logic109_ShieldBounced,
         it_2725_Logic109_HitShield,
-        it_2725_Logic109_EvtUnk,
+        itSeakNeedleThrown_Logic109_EvtUnk,
     },
     {
         // Sheik needle held
         it_803F70A8,
         NULL,
         NULL,
-        it_2725_Logic110_PickedUp,
+        itSeakNeedleHeld_Logic110_PickedUp,
         NULL,
         NULL,
         NULL,
@@ -2708,7 +2708,7 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic110_EvtUnk,
+        itSeakNeedleHeld_Logic110_EvtUnk,
     },
     {
         // Pikachu thunder
@@ -2718,15 +2718,15 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic39_DmgDealt,
+        itPikachuThunder_Logic39_DmgDealt,
         NULL,
         NULL,
         NULL,
-        it_2725_Logic39_Clanked,
-        it_2725_Logic39_Absorbed,
+        itPikachuThunder_Logic39_Clanked,
+        itPikachuThunder_Logic39_Absorbed,
         NULL,
-        it_2725_Logic39_HitShield,
-        it_2725_Logic39_EvtUnk,
+        itPikachuThunder_Logic39_HitShield,
+        itPikachuThunder_Logic39_EvtUnk,
     },
     {
         // Pichu thunder
@@ -2736,21 +2736,21 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic39_DmgDealt,
+        itPikachuThunder_Logic39_DmgDealt,
         NULL,
         NULL,
         NULL,
-        it_2725_Logic39_Clanked,
-        it_2725_Logic39_Absorbed,
+        itPikachuThunder_Logic39_Clanked,
+        itPikachuThunder_Logic39_Absorbed,
         NULL,
-        it_2725_Logic39_HitShield,
-        it_2725_Logic39_EvtUnk,
+        itPikachuThunder_Logic39_HitShield,
+        itPikachuThunder_Logic39_EvtUnk,
     },
     {
         // Mario cape
         it_803F70F8,
         NULL,
-        it_2725_Logic41_Destroyed,
+        itMarioCape_Logic41_Destroyed,
         it_2725_Logic41_PickedUp,
         NULL,
         NULL,
@@ -2768,7 +2768,7 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         // Dr Mario cape
         it_803F70F8,
         NULL,
-        it_2725_Logic41_Destroyed,
+        itMarioCape_Logic41_Destroyed,
         it_2725_Logic41_PickedUp,
         NULL,
         NULL,
@@ -2790,7 +2790,7 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic42_DmgDealt,
+        itSeakVanish_Logic42_DmgDealt,
         NULL,
         NULL,
         NULL,
@@ -2805,7 +2805,7 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         it_803F7118,
         NULL,
         NULL,
-        it_2725_Logic43_PickedUp,
+        itYoshiEggThrow_Logic43_PickedUp,
         NULL,
         NULL,
         it_802B2C04,
@@ -2827,14 +2827,14 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic114_DmgReceived,
+        it_27CF_Logic114_DmgReceived,
         NULL,
         NULL,
         NULL,
         NULL,
         NULL,
         NULL,
-        it_2725_Logic114_EvtUnk,
+        it_27CF_Logic114_EvtUnk,
     },
     {
         // Yoshi star
@@ -2870,7 +2870,7 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         it_2725_Logic106_Absorbed,
         it_2725_Logic106_ShieldBounced,
         it_2725_Logic106_HitShield,
-        it_2725_Logic106_EvtUnk,
+        itPikachuTJoltGround_Logic106_EvtUnk,
     },
     {
         // Pikachu tjolt air
@@ -2888,7 +2888,7 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         it_2725_Logic107_Absorbed,
         it_2725_Logic107_ShieldBounced,
         it_2725_Logic107_HitShield,
-        it_2725_Logic107_EvtUnk,
+        itPikachuTJoltAir_Logic107_EvtUnk,
     },
     {
         // Pichu tjolt ground
@@ -2906,7 +2906,7 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         it_2725_Logic106_Absorbed,
         it_2725_Logic106_ShieldBounced,
         it_2725_Logic106_HitShield,
-        it_2725_Logic106_EvtUnk,
+        itPikachuTJoltGround_Logic106_EvtUnk,
     },
     {
         // Pichu tjolt air
@@ -2924,7 +2924,7 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         it_2725_Logic107_Absorbed,
         it_2725_Logic107_ShieldBounced,
         it_2725_Logic107_HitShield,
-        it_2725_Logic107_EvtUnk,
+        itPikachuTJoltAir_Logic107_EvtUnk,
     },
     {
         // Samus bomb
@@ -2934,15 +2934,15 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic50_DmgDealt,
+        itSamusBomb_Logic50_DmgDealt,
         NULL,
-        it_2725_Logic50_EnteredAir,
+        itSamusBomb_Logic50_EnteredAir,
         it_2725_Logic50_Reflected,
-        it_2725_Logic50_Clanked,
+        itSamusBomb_Logic50_Clanked,
         NULL,
-        it_2725_Logic50_ShieldBounced,
-        it_2725_Logic50_HitShield,
-        it_2725_Logic50_EvtUnk,
+        itSamusBomb_Logic50_ShieldBounced,
+        itSamusBomb_Logic50_HitShield,
+        itSamusBomb_Logic50_EvtUnk,
     },
     {
         // Samus charge shot
@@ -2952,15 +2952,15 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         it_2725_Logic108_PickedUp,
         NULL,
         NULL,
-        it_2725_Logic108_DmgDealt,
+        itSamusChargeshot_Logic108_DmgDealt,
         NULL,
         NULL,
         it_2725_Logic108_Reflected,
-        it_2725_Logic108_Clanked,
-        it_2725_Logic108_Absorbed,
+        itSamusChargeshot_Logic108_Clanked,
+        itSamusChargeshot_Logic108_Absorbed,
         it_2725_Logic108_ShieldBounced,
-        it_2725_Logic108_HitShield,
-        it_2725_Logic108_EvtUnk,
+        itSamusChargeshot_Logic108_HitShield,
+        itSamusChargeshot_Logic108_EvtUnk,
     },
     {
         // Samus missile
@@ -2983,11 +2983,9 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
     {
         // Samus grapple beam
         it_803F73A8,
-        it_2725_Logic53_Spawned,
+        itSamusGrapple_Logic53_Spawned,
         NULL,
-        it_2725_Logic53_PickedUp,
-        NULL,
-        NULL,
+        itSamusGrapple_Logic53_PickedUp,
         NULL,
         NULL,
         NULL,
@@ -2996,7 +2994,9 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic53_EvtUnk,
+        NULL,
+        NULL,
+        itSamusGrapple_Logic53_EvtUnk,
     },
     {
         // Sheik chain
@@ -3014,7 +3014,7 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic54_EvtUnk,
+        itSeakChain_Logic54_EvtUnk,
     },
     {
         // Peach explode
@@ -3024,7 +3024,7 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic55_DmgDealt,
+        itPeachExplode_Logic55_DmgDealt,
         NULL,
         NULL,
         NULL,
@@ -3032,25 +3032,25 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic55_EvtUnk,
+        itPeachExplode_Logic55_EvtUnk,
     },
     {
         // Peach turnip
         it_803F74A8,
         NULL,
-        it_2725_Logic56_Destroyed,
-        it_2725_Logic56_PickedUp,
-        it_2725_Logic56_Dropped,
-        it_2725_Logic56_Thrown,
-        it_2725_Logic56_DmgDealt,
+        itPeachTurnip_Logic56_Destroyed,
+        itPeachTurnip_Logic56_PickedUp,
+        itPeachTurnip_Logic56_Dropped,
+        itPeachTurnip_Logic56_Thrown,
+        itPeachTurnip_Logic56_DmgDealt,
         NULL,
         NULL,
-        it_2725_Logic56_Reflected,
-        it_2725_Logic56_Clanked,
+        itPeachTurnip_Logic56_Reflected,
+        itPeachTurnip_Logic56_Clanked,
         NULL,
-        it_2725_Logic56_ShieldBounced,
-        it_2725_Logic56_HitShield,
-        it_2725_Logic56_EvtUnk,
+        itPeachTurnip_Logic56_ShieldBounced,
+        itPeachTurnip_Logic56_HitShield,
+        itPeachTurnip_Logic56_EvtUnk,
     },
     {
         // Bowser flame
@@ -3060,15 +3060,15 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic111_DmgDealt,
+        itKoopaFlame_Logic111_DmgDealt,
         NULL,
         NULL,
-        it_2725_Logic111_Reflected,
-        it_2725_Logic111_Clanked,
-        it_2725_Logic111_Absorbed,
-        it_2725_Logic111_ShieldBounced,
-        it_2725_Logic111_HitShield,
-        it_2725_Logic111_EvtUnk,
+        itKoopaFlame_Logic111_Reflected,
+        itKoopaFlame_Logic111_Clanked,
+        itKoopaFlame_Logic111_Absorbed,
+        itKoopaFlame_Logic111_ShieldBounced,
+        itKoopaFlame_Logic111_HitShield,
+        itKoopaFlame_Logic111_EvtUnk,
     },
     {
         // Ness bat
@@ -3086,14 +3086,14 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic58_EvtUnk,
+        itNessBat_Logic58_EvtUnk,
     },
     {
         // Ness yo-yo
         it_803F7558,
         NULL,
         NULL,
-        it_2725_Logic59_PickedUp,
+        itNessYoyo_Logic59_PickedUp,
         NULL,
         NULL,
         NULL,
@@ -3110,8 +3110,8 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         // Peach parasol
         it_803F74F8,
         NULL,
-        it_2725_Logic60_Destroyed,
-        it_2725_Logic60_PickedUp,
+        itPeachParasol_Logic60_Destroyed,
+        itPeachParasol_Logic60_PickedUp,
         NULL,
         NULL,
         NULL,
@@ -3122,14 +3122,14 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic60_EvtUnk,
+        itPeachParasol_Logic60_EvtUnk,
     },
     {
         // Peach toad
         it_803F7528,
         NULL,
-        it_2725_Logic91_Destroyed,
-        it_2725_Logic91_PickedUp,
+        itPeachToad_Logic91_Destroyed,
+        itPeachToad_Logic91_PickedUp,
         NULL,
         NULL,
         NULL,
@@ -3140,7 +3140,7 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic91_EvtUnk,
+        itPeachToad_Logic91_EvtUnk,
     },
     {
         // Luigi fireball
@@ -3150,15 +3150,15 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic89_DmgDealt,
+        itLuigiFireball_Logic89_DmgDealt,
         NULL,
         NULL,
-        it_2725_Logic89_Reflected,
-        it_2725_Logic89_Clanked,
-        it_2725_Logic89_Absorbed,
-        it_2725_Logic89_ShieldBounced,
-        it_2725_Logic89_HitShield,
-        it_2725_Logic89_EvtUnk,
+        itLuigiFireball_Logic89_Reflected,
+        itLuigiFireball_Logic89_Clanked,
+        itLuigiFireball_Logic89_Absorbed,
+        itLuigiFireball_Logic89_ShieldBounced,
+        itLuigiFireball_Logic89_HitShield,
+        itLuigiFireball_Logic89_EvtUnk,
     },
     {
         // Ice Climbers ice
@@ -3168,15 +3168,15 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic90_DmgDealt,
+        itClimbersIce_Logic90_DmgDealt,
         NULL,
         NULL,
-        it_2725_Logic90_Reflected,
-        it_2725_Logic90_Clanked,
-        it_2725_Logic90_Absorbed,
-        it_2725_Logic90_ShieldBounced,
+        itClimbersIce_Logic90_Reflected,
+        itClimbersIce_Logic90_Clanked,
+        itClimbersIce_Logic90_Absorbed,
+        itClimbersIce_Logic90_ShieldBounced,
         it_2725_Logic90_HitShield,
-        it_2725_Logic90_EvtUnk,
+        itClimbersIce_Logic90_EvtUnk,
     },
     {
         // Ice Climbers blizzard
@@ -3200,25 +3200,25 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         // Zelda din fire
         ItemStateTable_ZeldaDinFire,
         NULL,
-        it_2725_Logic65_Destroyed,
+        itZeldaDinFire_Logic65_Destroyed,
         NULL,
         NULL,
         NULL,
         NULL,
         NULL,
         NULL,
-        it_2725_Logic65_Reflected,
-        it_2725_Logic65_Clanked,
-        it_2725_Logic65_Absorbed,
+        itZeldaDinFire_Logic65_Reflected,
+        itZeldaDinFire_Logic65_Clanked,
+        itZeldaDinFire_Logic65_Absorbed,
         NULL,
         NULL,
-        it_2725_Logic65_EvtUnk,
+        itZeldaDinFire_Logic65_EvtUnk,
     },
     {
         // Zelda din fire explode
         it_803F7740,
         NULL,
-        it_2725_Logic66_Destroyed,
+        itZeldaDinFireExplode_Logic66_Destroyed,
         NULL,
         NULL,
         NULL,
@@ -3226,29 +3226,29 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic66_Clanked,
-        it_2725_Logic66_Absorbed,
-        it_2725_Logic66_ShieldBounced,
-        it_2725_Logic66_HitShield,
-        it_2725_Logic66_EvtUnk,
+        itZeldaDinFireExplode_Logic66_Clanked,
+        itZeldaDinFireExplode_Logic66_Absorbed,
+        itZeldaDinFireExplode_Logic66_ShieldBounced,
+        itZeldaDinFireExplode_Logic66_HitShield,
+        itZeldaDinFireExplode_Logic66_EvtUnk,
     },
     {
         // Mewtwo disable
         it_803F7750,
         NULL,
-        it_2725_Logic67_Destroyed,
+        itMewtwoDisable_Logic67_Destroyed,
         NULL,
         NULL,
         NULL,
-        it_2725_Logic67_DmgDealt,
+        itMewtwoDisable_Logic67_DmgDealt,
         NULL,
         NULL,
-        it_2725_Logic67_Reflected,
-        it_2725_Logic67_Clanked,
-        it_2725_Logic67_Absorbed,
-        it_2725_Logic67_ShieldBounced,
-        it_2725_Logic67_HitShield,
-        it_2725_Logic67_EvtUnk,
+        itMewtwoDisable_Logic67_Reflected,
+        itMewtwoDisable_Logic67_Clanked,
+        itMewtwoDisable_Logic67_Absorbed,
+        itMewtwoDisable_Logic67_ShieldBounced,
+        itMewtwoDisable_Logic67_HitShield,
+        itMewtwoDisable_Logic67_EvtUnk,
     },
     {
         // Peach toad spore
@@ -3258,15 +3258,15 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic92_DmgDealt,
+        itPeachToadSpore_Logic92_DmgDealt,
         NULL,
         NULL,
-        it_2725_Logic68_Reflected,
-        it_2725_Logic68_Clanked,
-        it_2725_Logic68_Absorbed,
-        it_2725_Logic68_ShieldBounced,
-        it_2725_Logic68_HitShield,
-        it_2725_Logic92_EvtUnk,
+        itPeachToadSpore_Logic68_Reflected,
+        itPeachToadSpore_Logic68_Clanked,
+        itPeachToadSpore_Logic68_Absorbed,
+        itPeachToadSpore_Logic68_ShieldBounced,
+        itPeachToadSpore_Logic68_HitShield,
+        itPeachToadSpore_Logic92_EvtUnk,
     },
     {
         // Mewtwo shadow ball
@@ -3276,15 +3276,15 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         it_2725_Logic101_PickedUp,
         NULL,
         NULL,
-        it_2725_Logic101_DmgDealt,
+        itMewtwoShadowball_Logic101_DmgDealt,
         NULL,
         NULL,
         it_2725_Logic101_Reflected,
-        it_2725_Logic101_Clanked,
-        it_2725_Logic101_Absorbed,
+        itMewtwoShadowball_Logic101_Clanked,
+        itMewtwoShadowball_Logic101_Absorbed,
         it_2725_Logic101_ShieldBounced,
-        it_2725_Logic101_HitShield,
-        it_2725_Logic101_EvtUnk,
+        itMewtwoShadowball_Logic101_HitShield,
+        itMewtwoShadowball_Logic101_EvtUnk,
     },
     {
         // Ice Climbers string (belay)
@@ -3326,8 +3326,8 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         // Game & Watch manhole
         it_803F78D8,
         NULL,
-        it_2725_Logic72_Destroyed,
-        it_2725_Logic72_PickedUp,
+        itGameWatchManhole_Logic72_Destroyed,
+        itGameWatchManhole_Logic72_PickedUp,
         NULL,
         NULL,
         NULL,
@@ -3338,7 +3338,7 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic72_EvtUnk,
+        itGameWatchManhole_Logic72_EvtUnk,
     },
     {
         // Game & Watch fire
@@ -3362,8 +3362,8 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         // Game & Watch parachute
         it_803F78F8,
         NULL,
-        it_2725_Logic74_Destroyed,
-        it_2725_Logic74_PickedUp,
+        itGameWatchParachute_Logic74_Destroyed,
+        itGameWatchParachute_Logic74_PickedUp,
         NULL,
         NULL,
         NULL,
@@ -3374,14 +3374,14 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic74_EvtUnk,
+        itGameWatchParachute_Logic74_EvtUnk,
     },
     {
         // Game & Watch turtle
         it_803F7918,
         NULL,
-        it_2725_Logic75_Destroyed,
-        it_2725_Logic75_PickedUp,
+        itGameWatchTurtle_Logic75_Destroyed,
+        itGameWatchTurtle_Logic75_PickedUp,
         NULL,
         NULL,
         NULL,
@@ -3392,14 +3392,14 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic75_EvtUnk,
+        itGameWatchTurtle_Logic75_EvtUnk,
     },
     {
         // Game & Watch breath
         it_803F7938,
         NULL,
-        it_2725_Logic76_Destroyed,
-        it_2725_Logic76_PickedUp,
+        itGameWatchBreath_Logic76_Destroyed,
+        itGameWatchBreath_Logic76_PickedUp,
         NULL,
         NULL,
         NULL,
@@ -3410,13 +3410,13 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic76_EvtUnk,
+        itGameWatchBreath_Logic76_EvtUnk,
     },
     {
         // Game & Watch judge
         it_803F7968,
         NULL,
-        it_2725_Logic77_Destroyed,
+        itGameWatchJudge_Logic77_Destroyed,
         it_2725_Logic77_PickedUp,
         NULL,
         NULL,
@@ -3428,14 +3428,14 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic77_EvtUnk,
+        itGameWatchJudge_Logic77_EvtUnk,
     },
     {
         // Game & Watch panic
         it_803F79A0,
         NULL,
-        it_2725_Logic78_Destroyed,
-        it_2725_Logic78_PickedUp,
+        itGameWatchPanic_Logic78_Destroyed,
+        itGameWatchPanic_Logic78_PickedUp,
         NULL,
         NULL,
         NULL,
@@ -3446,7 +3446,7 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic78_EvtUnk,
+        itGameWatchPanic_Logic78_EvtUnk,
     },
     {
         // Game & Watch chef
@@ -3456,15 +3456,15 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic112_DmgDealt,
+        itGameWatchChef_Logic112_DmgDealt,
         NULL,
         NULL,
-        it_2725_Logic112_Reflected,
+        itGameWatchChef_Logic112_Reflected,
         it_2725_Logic112_Clanked,
         it_2725_Logic112_Absorbed,
-        it_2725_Logic112_ShieldBounced,
+        itGameWatchChef_Logic112_ShieldBounced,
         it_2725_Logic112_HitShield,
-        it_2725_Logic112_EvtUnk,
+        itGameWatchChef_Logic112_EvtUnk,
     },
     {
         // Young Link milk
@@ -3482,7 +3482,7 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic80_EvtUnk,
+        itCLinkMilk_Logic80_EvtUnk,
     },
     {
         // Game & Watch rescue
@@ -3500,7 +3500,7 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic81_EvtUnk,
+        itGameWatchRescue_Logic81_EvtUnk,
     },
     {
         // Master Hand laser
@@ -3518,7 +3518,7 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic84_EvtUnk,
+        itMasterHandLaser_Logic84_EvtUnk,
     },
     {
         // Master Hand bullet
@@ -3528,15 +3528,15 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic83_DmgDealt,
+        itMasterHandBullet_Logic83_DmgDealt,
         NULL,
         NULL,
-        it_2725_Logic83_Reflected,
-        it_2725_Logic83_Clanked,
-        it_2725_Logic83_Absorbed,
-        it_2725_Logic83_ShieldBounced,
-        it_2725_Logic83_HitShield,
-        it_2725_Logic85_EvtUnk,
+        itMasterHandBullet_Logic83_Reflected,
+        itMasterHandBullet_Logic83_Clanked,
+        itMasterHandBullet_Logic83_Absorbed,
+        itMasterHandBullet_Logic83_ShieldBounced,
+        itMasterHandBullet_Logic83_HitShield,
+        itMasterHandBullet_Logic85_EvtUnk,
     },
     {
         // Crazy Hand laser
@@ -3554,7 +3554,7 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic84_EvtUnk,
+        itMasterHandLaser_Logic84_EvtUnk,
     },
     {
         // Crazy Hand bullet
@@ -3572,7 +3572,7 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic85_EvtUnk,
+        itMasterHandBullet_Logic85_EvtUnk,
     },
     {
         // Crazy Hand bomb
@@ -3582,15 +3582,15 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic86_DmgDealt,
+        itCrazyHandBomb_Logic86_DmgDealt,
         NULL,
         NULL,
-        it_2725_Logic86_Reflected,
+        itCrazyHandBomb_Logic86_Reflected,
         NULL,
         NULL,
         NULL,
         NULL,
-        it_2725_Logic86_EvtUnk,
+        itCrazyHandBomb_Logic86_EvtUnk,
     },
     {
         it_803F6788,
@@ -3599,15 +3599,15 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic87_DmgDealt,
+        itMarioFireball_Logic87_DmgDealt,
         NULL,
         NULL,
-        it_2725_Logic87_Reflected,
-        it_2725_Logic87_Clanked,
-        it_2725_Logic87_Absorbed,
-        it_2725_Logic87_ShieldBounced,
-        it_2725_Logic87_HitShield,
-        it_2725_Logic87_EvtUnk,
+        itMarioFireball_Logic87_Reflected,
+        itMarioFireball_Logic87_Clanked,
+        itMarioFireball_Logic87_Absorbed,
+        itMarioFireball_Logic87_ShieldBounced,
+        itMarioFireball_Logic87_HitShield,
+        itMarioFireball_Logic87_EvtUnk,
     },
     {
         it_803F75D0,
@@ -3633,15 +3633,15 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic89_DmgDealt,
+        itLuigiFireball_Logic89_DmgDealt,
         NULL,
         NULL,
-        it_2725_Logic89_Reflected,
-        it_2725_Logic89_Clanked,
-        it_2725_Logic89_Absorbed,
-        it_2725_Logic89_ShieldBounced,
-        it_2725_Logic89_HitShield,
-        it_2725_Logic89_EvtUnk,
+        itLuigiFireball_Logic89_Reflected,
+        itLuigiFireball_Logic89_Clanked,
+        itLuigiFireball_Logic89_Absorbed,
+        itLuigiFireball_Logic89_ShieldBounced,
+        itLuigiFireball_Logic89_HitShield,
+        itLuigiFireball_Logic89_EvtUnk,
     },
     {
         it_803F7668,
@@ -3650,21 +3650,21 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic90_DmgDealt,
+        itClimbersIce_Logic90_DmgDealt,
         NULL,
         NULL,
-        it_2725_Logic90_Reflected,
-        it_2725_Logic90_Clanked,
-        it_2725_Logic90_Absorbed,
-        it_2725_Logic90_ShieldBounced,
+        itClimbersIce_Logic90_Reflected,
+        itClimbersIce_Logic90_Clanked,
+        itClimbersIce_Logic90_Absorbed,
+        itClimbersIce_Logic90_ShieldBounced,
         it_2725_Logic90_HitShield,
-        it_2725_Logic90_EvtUnk,
+        itClimbersIce_Logic90_EvtUnk,
     },
     {
         it_803F7528,
         NULL,
-        it_2725_Logic91_Destroyed,
-        it_2725_Logic91_PickedUp,
+        itPeachToad_Logic91_Destroyed,
+        itPeachToad_Logic91_PickedUp,
         NULL,
         NULL,
         NULL,
@@ -3675,7 +3675,7 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic91_EvtUnk,
+        itPeachToad_Logic91_EvtUnk,
     },
     {
         it_803F7548,
@@ -3684,7 +3684,7 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic92_DmgDealt,
+        itPeachToadSpore_Logic92_DmgDealt,
         NULL,
         NULL,
         NULL,
@@ -3692,7 +3692,7 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic92_EvtUnk,
+        itPeachToadSpore_Logic92_EvtUnk,
     },
     {
         it_803F67D0,
@@ -3701,15 +3701,15 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic94_Clanked,
+        itFoxLaser_Logic94_Clanked,
         NULL,
         NULL,
-        it_2725_Logic94_Reflected,
-        it_2725_Logic94_Clanked,
-        it_2725_Logic94_Absorbed,
-        it_2725_Logic94_ShieldBounced,
-        it_2725_Logic94_HitShield,
-        it_2725_Logic94_EvtUnk,
+        itFoxLaser_Logic94_Reflected,
+        itFoxLaser_Logic94_Clanked,
+        itFoxLaser_Logic94_Absorbed,
+        itFoxLaser_Logic94_ShieldBounced,
+        itFoxLaser_Logic94_HitShield,
+        itFoxLaser_Logic94_EvtUnk,
     },
     {
         it_803F67D0,
@@ -3718,21 +3718,21 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic94_Clanked,
+        itFoxLaser_Logic94_Clanked,
         NULL,
         NULL,
-        it_2725_Logic94_Reflected,
-        it_2725_Logic94_Clanked,
-        it_2725_Logic94_Absorbed,
-        it_2725_Logic94_ShieldBounced,
-        it_2725_Logic94_HitShield,
-        it_2725_Logic94_EvtUnk,
+        itFoxLaser_Logic94_Reflected,
+        itFoxLaser_Logic94_Clanked,
+        itFoxLaser_Logic94_Absorbed,
+        itFoxLaser_Logic94_ShieldBounced,
+        itFoxLaser_Logic94_HitShield,
+        itFoxLaser_Logic94_EvtUnk,
     },
     {
         it_803F6CA8,
         NULL,
         NULL,
-        it_2725_Logic96_PickedUp,
+        itFoxBlaster_Logic96_PickedUp,
         NULL,
         NULL,
         NULL,
@@ -3743,13 +3743,13 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic96_EvtUnk,
+        itFoxBlaster_Logic96_EvtUnk,
     },
     {
         it_803F6CA8,
         NULL,
         NULL,
-        it_2725_Logic96_PickedUp,
+        itFoxBlaster_Logic96_PickedUp,
         NULL,
         NULL,
         NULL,
@@ -3760,47 +3760,47 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic96_EvtUnk,
+        itFoxBlaster_Logic96_EvtUnk,
     },
     {
         it_803F6A28,
         NULL,
-        it_2725_Logic98_Destroyed,
-        it_2725_Logic98_PickedUp,
+        itLinkArrow_Logic98_Destroyed,
+        itLinkArrow_Logic98_PickedUp,
         NULL,
         NULL,
-        it_2725_Logic98_DmgDealt,
+        itLinkArrow_Logic98_DmgDealt,
         NULL,
         NULL,
-        it_2725_Logic98_Reflected,
-        it_2725_Logic98_Clanked,
+        itLinkArrow_Logic98_Reflected,
+        itLinkArrow_Logic98_Clanked,
         NULL,
         NULL,
-        it_2725_Logic98_HitShield,
-        it_2725_Logic98_EvtUnk,
+        itLinkArrow_Logic98_HitShield,
+        itLinkArrow_Logic98_EvtUnk,
     },
     {
         it_803F6A28,
         NULL,
-        it_2725_Logic98_Destroyed,
-        it_2725_Logic98_PickedUp,
+        itLinkArrow_Logic98_Destroyed,
+        itLinkArrow_Logic98_PickedUp,
         NULL,
         NULL,
-        it_2725_Logic98_DmgDealt,
+        itLinkArrow_Logic98_DmgDealt,
         NULL,
         NULL,
-        it_2725_Logic98_Reflected,
-        it_2725_Logic98_Clanked,
+        itLinkArrow_Logic98_Reflected,
+        itLinkArrow_Logic98_Clanked,
         NULL,
         NULL,
-        it_2725_Logic98_HitShield,
-        it_2725_Logic98_EvtUnk,
+        itLinkArrow_Logic98_HitShield,
+        itLinkArrow_Logic98_EvtUnk,
     },
     {
         it_803F6E98,
         NULL,
-        it_2725_Logic100_Destroyed,
-        it_2725_Logic100_PickedUp,
+        itLinkBow_Logic100_Destroyed,
+        itLinkBow_Logic100_PickedUp,
         NULL,
         NULL,
         NULL,
@@ -3811,13 +3811,13 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic100_EvtUnk,
+        itLinkBow_Logic100_EvtUnk,
     },
     {
         it_803F6E98,
         NULL,
-        it_2725_Logic100_Destroyed,
-        it_2725_Logic100_PickedUp,
+        itLinkBow_Logic100_Destroyed,
+        itLinkBow_Logic100_PickedUp,
         NULL,
         NULL,
         NULL,
@@ -3828,7 +3828,7 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic100_EvtUnk,
+        itLinkBow_Logic100_EvtUnk,
     },
     {
         it_803F7760,
@@ -3837,15 +3837,15 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         it_2725_Logic101_PickedUp,
         NULL,
         NULL,
-        it_2725_Logic101_DmgDealt,
+        itMewtwoShadowball_Logic101_DmgDealt,
         NULL,
         NULL,
         it_2725_Logic101_Reflected,
-        it_2725_Logic101_Clanked,
-        it_2725_Logic101_Absorbed,
+        itMewtwoShadowball_Logic101_Clanked,
+        itMewtwoShadowball_Logic101_Absorbed,
         it_2725_Logic101_ShieldBounced,
-        it_2725_Logic101_HitShield,
-        it_2725_Logic101_EvtUnk,
+        itMewtwoShadowball_Logic101_HitShield,
+        itMewtwoShadowball_Logic101_EvtUnk,
     },
     {
         it_803F6B70,
@@ -3857,12 +3857,12 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic102_Reflected,
-        it_2725_Logic102_Clanked,
-        it_2725_Logic102_Absorbed,
+        itNessPKFlush_Logic102_Reflected,
+        itNessPKFlush_Logic102_Clanked,
+        itNessPKFlush_Logic102_Absorbed,
         NULL,
         NULL,
-        it_2725_Logic102_EvtUnk,
+        itNessPKFlush_Logic102_EvtUnk,
     },
     {
         it_803F6F40,
@@ -3875,11 +3875,11 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic103_Clanked,
-        it_2725_Logic103_Absorbed,
-        it_2725_Logic103_ShieldBounced,
-        it_2725_Logic103_HitShield,
-        it_2725_Logic103_EvtUnk,
+        itNessPKFlushExplode_Logic103_Clanked,
+        itNessPKFlushExplode_Logic103_Absorbed,
+        itNessPKFlushExplode_Logic103_ShieldBounced,
+        itNessPKFlushExplode_Logic103_HitShield,
+        itNessPKFlushExplode_Logic103_EvtUnk,
     },
     {
         it_803F7190,
@@ -3896,7 +3896,7 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         it_2725_Logic106_Absorbed,
         it_2725_Logic106_ShieldBounced,
         it_2725_Logic106_HitShield,
-        it_2725_Logic106_EvtUnk,
+        itPikachuTJoltGround_Logic106_EvtUnk,
     },
     {
         it_803F71D8,
@@ -3913,7 +3913,7 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         it_2725_Logic107_Absorbed,
         it_2725_Logic107_ShieldBounced,
         it_2725_Logic107_HitShield,
-        it_2725_Logic107_EvtUnk,
+        itPikachuTJoltAir_Logic107_EvtUnk,
     },
     {
         it_803F7190,
@@ -3930,7 +3930,7 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         it_2725_Logic106_Absorbed,
         it_2725_Logic106_ShieldBounced,
         it_2725_Logic106_HitShield,
-        it_2725_Logic106_EvtUnk,
+        itPikachuTJoltGround_Logic106_EvtUnk,
     },
     {
         it_803F71D8,
@@ -3947,7 +3947,7 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         it_2725_Logic107_Absorbed,
         it_2725_Logic107_ShieldBounced,
         it_2725_Logic107_HitShield,
-        it_2725_Logic107_EvtUnk,
+        itPikachuTJoltAir_Logic107_EvtUnk,
     },
     {
         it_803F7288,
@@ -3956,20 +3956,20 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         it_2725_Logic108_PickedUp,
         NULL,
         NULL,
-        it_2725_Logic108_DmgDealt,
+        itSamusChargeshot_Logic108_DmgDealt,
         NULL,
         NULL,
         it_2725_Logic108_Reflected,
-        it_2725_Logic108_Clanked,
-        it_2725_Logic108_Absorbed,
+        itSamusChargeshot_Logic108_Clanked,
+        itSamusChargeshot_Logic108_Absorbed,
         it_2725_Logic108_ShieldBounced,
-        it_2725_Logic108_HitShield,
-        it_2725_Logic108_EvtUnk,
+        itSamusChargeshot_Logic108_HitShield,
+        itSamusChargeshot_Logic108_EvtUnk,
     },
     {
         it_803F6F50,
         NULL,
-        it_2725_Logic109_Destroyed,
+        itSeakNeedleThrown_Logic109_Destroyed,
         NULL,
         NULL,
         NULL,
@@ -3981,13 +3981,13 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         it_2725_Logic109_ShieldBounced,
         it_2725_Logic109_HitShield,
-        it_2725_Logic109_EvtUnk,
+        itSeakNeedleThrown_Logic109_EvtUnk,
     },
     {
         it_803F70A8,
         NULL,
         NULL,
-        it_2725_Logic110_PickedUp,
+        itSeakNeedleHeld_Logic110_PickedUp,
         NULL,
         NULL,
         NULL,
@@ -3998,7 +3998,7 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic110_EvtUnk,
+        itSeakNeedleHeld_Logic110_EvtUnk,
     },
     {
         ItemStateTable_KoopaFlame,
@@ -4007,15 +4007,15 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic111_DmgDealt,
+        itKoopaFlame_Logic111_DmgDealt,
         NULL,
         NULL,
-        it_2725_Logic111_Reflected,
-        it_2725_Logic111_Clanked,
-        it_2725_Logic111_Absorbed,
-        it_2725_Logic111_ShieldBounced,
-        it_2725_Logic111_HitShield,
-        it_2725_Logic111_EvtUnk,
+        itKoopaFlame_Logic111_Reflected,
+        itKoopaFlame_Logic111_Clanked,
+        itKoopaFlame_Logic111_Absorbed,
+        itKoopaFlame_Logic111_ShieldBounced,
+        itKoopaFlame_Logic111_HitShield,
+        itKoopaFlame_Logic111_EvtUnk,
     },
     {
         it_803F79E0,
@@ -4024,21 +4024,21 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic112_DmgDealt,
+        itGameWatchChef_Logic112_DmgDealt,
         NULL,
         NULL,
-        it_2725_Logic112_Reflected,
+        itGameWatchChef_Logic112_Reflected,
         it_2725_Logic112_Clanked,
         it_2725_Logic112_Absorbed,
-        it_2725_Logic112_ShieldBounced,
+        itGameWatchChef_Logic112_ShieldBounced,
         it_2725_Logic112_HitShield,
-        it_2725_Logic112_EvtUnk,
+        itGameWatchChef_Logic112_EvtUnk,
     },
     {
         it_803F7958,
         NULL,
-        it_2725_Logic113_Destroyed,
-        it_2725_Logic113_PickedUp,
+        itKirbyGameWatchChefPan_Logic113_Destroyed,
+        itKirbyGameWatchChefPan_Logic113_PickedUp,
         NULL,
         NULL,
         NULL,
@@ -4049,7 +4049,7 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic113_EvtUnk,
+        itKirbyGameWatchChefPan_Logic113_EvtUnk,
     },
     {
         it_803F94A0,
@@ -4059,14 +4059,14 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic114_DmgReceived,
+        it_27CF_Logic114_DmgReceived,
         NULL,
         NULL,
         NULL,
         NULL,
         NULL,
         NULL,
-        it_2725_Logic114_EvtUnk,
+        it_27CF_Logic114_EvtUnk,
     },
     {
         // Unk4
@@ -4076,7 +4076,7 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic115_DmgDealt,
+        it_2E5A_Logic115_DmgDealt,
         NULL,
         NULL,
         NULL,
@@ -4084,25 +4084,25 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic115_EvtUnk,
+        it_2E5A_Logic115_EvtUnk,
     },
     {
         // Coin
         it_803F93C8,
-        it_2725_Logic116_Spawned,
-        it_2725_Logic116_Destroyed,
-        it_2725_Logic116_PickedUp,
-        it_2725_Logic116_Thrown,
-        it_2725_Logic116_Thrown,
+        itCoin_Logic116_Spawned,
+        itCoin_Logic116_Destroyed,
+        itCoin_Logic116_PickedUp,
+        itCoin_Logic116_Thrown,
+        itCoin_Logic116_Thrown,
         NULL,
-        it_2725_Logic116_DmgReceived,
-        it_2725_Logic116_EnteredAir,
-        NULL,
-        NULL,
+        itCoin_Logic116_DmgReceived,
+        itCoin_Logic116_EnteredAir,
         NULL,
         NULL,
         NULL,
-        it_2725_Logic116_EvtUnk,
+        NULL,
+        NULL,
+        itCoin_Logic116_EvtUnk,
     },
     {
         // Pokemon random
@@ -4112,19 +4112,19 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic117_DmgDealt,
-        it_2725_Logic117_DmgReceived,
+        it_2E6A_Logic117_DmgDealt,
+        it_2E6A_Logic117_DmgReceived,
         NULL,
         NULL,
         NULL,
         NULL,
         NULL,
         NULL,
-        it_2725_Logic117_EvtUnk,
+        it_2E6A_Logic117_EvtUnk,
     },
 };
 
-// Monster and Stage-specific Items
+/// Monster and Stage-specific Items
 struct sdata_ItemGXLink it_803F4CA8[30] = {
     it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
     it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
@@ -4198,7 +4198,7 @@ struct ItemLogicTable it_803F4D20[ARRAY_SIZE(it_803F4CA8)] = {
         it_802DD59C,
         it_802DD67C,
         NULL,
-        it_2725_Logic3_DmgReceived,
+        itNokonoko_Logic3_DmgReceived,
         NULL,
         NULL,
         NULL,
@@ -4212,7 +4212,7 @@ struct ItemLogicTable it_803F4D20[ARRAY_SIZE(it_803F4CA8)] = {
         it_803F88C0,
         it_802E05A0,
         it_2725_Logic9_Destroyed,
-        it_2725_Logic4_PickedUp,
+        itPatapata_Logic4_PickedUp,
         it_2725_Logic4_Dropped,
         it_2725_Logic4_Thrown,
         NULL,
@@ -4229,10 +4229,10 @@ struct ItemLogicTable it_803F4D20[ARRAY_SIZE(it_803F4CA8)] = {
         // Like-Like (likelike)
         it_803F8468,
         it_802D9BA8,
-        it_2725_Logic5_Destroyed,
-        it_2725_Logic5_PickedUp,
+        itLikeLike_Logic5_Destroyed,
+        itLikeLike_Logic5_PickedUp,
         it_2725_Logic5_Dropped,
-        it_2725_Logic5_Thrown,
+        itLikeLike_Logic5_Thrown,
         NULL,
         it_2725_Logic5_DmgReceived,
         NULL,
@@ -4302,7 +4302,7 @@ struct ItemLogicTable it_803F4D20[ARRAY_SIZE(it_803F4CA8)] = {
         it_803F8A88,
         it_802E37BC,
         it_2725_Logic9_Destroyed,
-        it_2725_Logic9_PickedUp,
+        itWhiteBea_Logic9_PickedUp,
         it_2725_Logic9_Dropped,
         it_2725_Logic9_Thrown,
         NULL,
@@ -4319,7 +4319,7 @@ struct ItemLogicTable it_803F4D20[ARRAY_SIZE(it_803F4CA8)] = {
         // Klaptrap (klap)
         it_803F8940,
         it_802E1820,
-        it_2725_Logic10_Destroyed,
+        itKlap_Logic10_Destroyed,
         NULL,
         NULL,
         NULL,
@@ -4337,17 +4337,17 @@ struct ItemLogicTable it_803F4D20[ARRAY_SIZE(it_803F4CA8)] = {
         // Green Shell (zgshell)
         it_803F86C8,
         it_802DE040,
-        it_2725_Logic11_Destroyed,
+        itZGShell_Logic11_Destroyed,
         it_2725_Logic11_PickedUp,
-        it_2725_Logic11_Dropped,
-        it_2725_Logic11_Thrown,
-        it_2725_Logic11_DmgDealt,
-        it_2725_Logic11_DmgReceived,
+        itZGShell_Logic11_Dropped,
+        itZGShell_Logic11_Thrown,
+        itZGShell_Logic11_DmgDealt,
+        itZGShell_Logic11_DmgReceived,
         it_2725_Logic11_EnteredAir,
-        it_2725_Logic11_Reflected,
+        itZGShell_Logic11_Reflected,
         it_2725_Logic11_Clanked,
         NULL,
-        it_2725_Logic11_ShieldBounced,
+        itZGShell_Logic11_ShieldBounced,
         it_2725_Logic11_HitShield,
         it_802DFED4,
     },
@@ -4355,18 +4355,18 @@ struct ItemLogicTable it_803F4D20[ARRAY_SIZE(it_803F4CA8)] = {
         // Red Shell (green act) (zrshell)
         it_803F87F0,
         it_802E02E8,
-        it_2725_Logic12_Destroyed,
-        it_2725_Logic12_PickedUp,
-        it_2725_Logic12_Dropped,
-        it_2725_Logic12_Thrown,
-        it_2725_Logic12_DmgDealt,
-        it_2725_Logic12_DmgReceived,
-        it_2725_Logic12_EnteredAir,
-        it_2725_Logic12_Reflected,
-        it_2725_Logic12_Clanked,
+        itZRShell_Logic12_Destroyed,
+        itZRShell_Logic12_PickedUp,
+        itZRShell_Logic12_Dropped,
+        itZRShell_Logic12_Thrown,
+        itZRShell_Logic12_DmgDealt,
+        itZRShell_Logic12_DmgReceived,
+        itZRShell_Logic12_EnteredAir,
+        itZRShell_Logic12_Reflected,
+        itZRShell_Logic12_Clanked,
         NULL,
-        it_2725_Logic12_ShieldBounced,
-        it_2725_Logic12_HitShield,
+        itZRShell_Logic12_ShieldBounced,
+        itZRShell_Logic12_HitShield,
         it_802E0468,
     },
     {
@@ -4377,8 +4377,8 @@ struct ItemLogicTable it_803F4D20[ARRAY_SIZE(it_803F4CA8)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic13_DmgDealt,
-        it_2725_Logic13_DmgReceived,
+        itTincle_Logic13_DmgDealt,
+        itTincle_Logic13_DmgReceived,
         NULL,
         NULL,
         NULL,
@@ -4451,7 +4451,7 @@ struct ItemLogicTable it_803F4D20[ARRAY_SIZE(it_803F4CA8)] = {
         it_802EEB28,
         it_802EEED0,
         NULL,
-        it_2725_Logic18_EnteredAir,
+        itWhispyApple_Logic18_EnteredAir,
         it_802EEF10,
         it_802EEED8,
         NULL,
@@ -4469,7 +4469,7 @@ struct ItemLogicTable it_803F4D20[ARRAY_SIZE(it_803F4CA8)] = {
         it_802EEB28,
         it_802EEED0,
         NULL,
-        it_2725_Logic18_EnteredAir,
+        itWhispyApple_Logic18_EnteredAir,
         it_802EEF10,
         it_802EEED8,
         NULL,
@@ -4539,13 +4539,13 @@ struct ItemLogicTable it_803F4D20[ARRAY_SIZE(it_803F4CA8)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic22_DmgDealt,
-        it_2725_Logic22_DmgReceived,
+        itTools_Logic22_DmgDealt,
+        itTools_Logic22_DmgReceived,
         NULL,
-        it_2725_Logic22_Reflected,
+        itTools_Logic22_Reflected,
         it_2725_Logic22_Clanked,
         it_2725_Logic22_Absorbed,
-        it_2725_Logic22_ShieldBounced,
+        itTools_Logic22_ShieldBounced,
         it_2725_Logic22_HitShield,
         it_802EFA24,
     },
@@ -4589,7 +4589,7 @@ struct ItemLogicTable it_803F4D20[ARRAY_SIZE(it_803F4CA8)] = {
         // Birdo (Kyasarin)
         it_803F90D0,
         it_802ECE90,
-        it_2725_Logic25_Destroyed,
+        itKyasarin_Logic25_Destroyed,
         NULL,
         NULL,
         NULL,
@@ -4629,12 +4629,12 @@ struct ItemLogicTable it_803F4D20[ARRAY_SIZE(it_803F4CA8)] = {
         NULL,
         NULL,
         NULL,
-        it_2725_Logic27_DmgDealt,
+        itGreatFoxLaser_Logic27_DmgDealt,
         NULL,
         NULL,
         it_2725_Logic27_Reflected,
-        it_2725_Logic27_Clanked,
-        it_2725_Logic27_Absorbed,
+        itGreatFoxLaser_Logic27_Clanked,
+        itGreatFoxLaser_Logic27_Absorbed,
         NULL,
         NULL,
         it_802EB5A8,
@@ -4644,16 +4644,16 @@ struct ItemLogicTable it_803F4D20[ARRAY_SIZE(it_803F4CA8)] = {
         it_803F9328,
         NULL,
         NULL,
-        it_2725_Logic28_PickedUp,
-        it_2725_Logic28_Dropped,
-        it_2725_Logic28_Thrown,
+        itKyasarinEgg_Logic28_PickedUp,
+        itKyasarinEgg_Logic28_Dropped,
+        itKyasarinEgg_Logic28_Thrown,
         it_2725_Logic28_DmgDealt,
         it_802F022C,
         NULL,
         it_2725_Logic28_Reflected,
         it_2725_Logic28_Clanked,
         NULL,
-        it_2725_Logic28_ShieldBounced,
+        itKyasarinEgg_Logic28_ShieldBounced,
         it_2725_Logic28_HitShield,
         it_802F0320,
     },
@@ -4681,94 +4681,94 @@ static char it_803F5428;
 HSD_ObjAllocUnk4 it_804A0E30;
 HSD_ObjAllocUnk6 it_804A0E50;
 HSD_ObjAllocUnk6 it_804A0E60;
-// u8 it_804A0E70[0xF0];
-// Article* it_804A0F60[30];
-// static char it_804D5188[] = "src/sysdolphin/baselib/jobj.h"; // ?
-// static char it_804D5190[] = "jobj";
+/// u8 it_804A0E70[0xF0];
+/// Article* it_804A0F60[30];
+/// static char it_804D5188[] = "src/sysdolphin/baselib/jobj.h"; // ?
+/// static char it_804D5190[] = "jobj";
 static char it_804D5198;
-// static char it_804D519C[]; // Not sure of type
-// static char it_804D51A4[]; // Not sure of type
+/// static char it_804D519C[]; // Not sure of type
+/// static char it_804D51A4[]; // Not sure of type
 static char it_804D51B8;
 static char it_804D51C0;
 static ItCmd it_804D51C8[2] = {
     it_80279AF0,
     it_80279B10,
 };
-// static char it_804D51D0[]; // Not sure of type
-// static char it_804D51D8[]; // Not sure of type
-// static char it_804D51E0[];
-// static char it_804D51E8[];
+/// static char it_804D51D0[]; // Not sure of type
+/// static char it_804D51D8[]; // Not sure of type
+/// static char it_804D51E0[];
+/// static char it_804D51E8[];
 
-// s8 it_804D6D00; // Not sure of type
+/// s8 it_804D6D00; // Not sure of type
 struct Fighter_804D653C_t* it_804D6D04;
-// s32 it_804D6D08; // Not sure of type
-// s32 it_804D6D0C; // Not sure of type
-// u32 it_804D6D10; // Not sure of type
-// u32it_804D6D14; // Not sure of type
-// u32 it_804D6D18; // Not sure of type
-// u8 it_804D6D1C; // Not sure of type
-// Article* it_804D6D20[]; // Not sure of type
-// Article** it_804D6D24;
-// ItemCommonData* it_804D6D28; // 8 bytes instead of 4 for some reason
-// Article** it_804D6D30; // 8 bytes instead of 4 for some reason
-// Article** it_804D6D38; // 8 bytes instead of 4 for some reason
+/// s32 it_804D6D08; // Not sure of type
+/// s32 it_804D6D0C; // Not sure of type
+/// u32 it_804D6D10; // Not sure of type
+/// u32it_804D6D14; // Not sure of type
+/// u32 it_804D6D18; // Not sure of type
+/// u8 it_804D6D1C; // Not sure of type
+/// Article* it_804D6D20[]; // Not sure of type
+/// Article** it_804D6D24;
+/// ItemCommonData* it_804D6D28; // 8 bytes instead of 4 for some reason
+/// Article** it_804D6D30; // 8 bytes instead of 4 for some reason
+/// Article** it_804D6D38; // 8 bytes instead of 4 for some reason
 f32* it_804D6D40;
 
-// static f32 it_804DC708 = 0.0f;
-// static f32 it_804DC70C = 0.00001f;
-// static f32 it_804DC710 = 1.0f;
-// static f32 it_804DC714 = -1.0f;
-// static f64 it_804DC718 = M_PI_2;
-// static f64 const it_804DC720 = U32_TO_F32;
-// static f32 it_804DC728 = 0.01f;
-// static f32 it_804DC72C = deg_to_rad;
-// static f32 it_804DC730 = 1.0f;
-// static f32 it_804DC734 = 0.0f;
-// static f32 it_804DC738 = 1.0f;
+/// static f32 it_804DC708 = 0.0f;
+/// static f32 it_804DC70C = 0.00001f;
+/// static f32 it_804DC710 = 1.0f;
+/// static f32 it_804DC714 = -1.0f;
+/// static f64 it_804DC718 = M_PI_2;
+/// static f64 const it_804DC720 = U32_TO_F32;
+/// static f32 it_804DC728 = 0.01f;
+/// static f32 it_804DC72C = deg_to_rad;
+/// static f32 it_804DC730 = 1.0f;
+/// static f32 it_804DC734 = 0.0f;
+/// static f32 it_804DC738 = 1.0f;
 extern f32 it_804DC73C; // = 0.0f;
-// static f32 it_804DC740 = -1.0f;
+/// static f32 it_804DC740 = -1.0f;
 static f32 it_804DC744 = 1.0f;
-// static f64 const it_804DC748 = S32_TO_F32;
-// static f32 it_804DC750 = 1.5f;
-// static f32 it_804DC754 = 0.00001f;
-// static f64 it_804DC758 = 0.5f;
-// static f64 it_804DC760 = 3.0f;
-// static f32 it_804DC768 = 0.85f;
+/// static f64 const it_804DC748 = S32_TO_F32;
+/// static f32 it_804DC750 = 1.5f;
+/// static f32 it_804DC754 = 0.00001f;
+/// static f64 it_804DC758 = 0.5f;
+/// static f64 it_804DC760 = 3.0f;
+/// static f32 it_804DC768 = 0.85f;
 static const f32 it_804DC76C = 0.01f;
 static f32 it_804DC770 = 0.0f;
-// static f32 it_804DC774 = 1.0f;
-// static f32 it_804DC778 = 2.0f;
-// static f32 it_804DC77C = 0.5f;
-// static f64 it_804DC780 = M_PI;
-// static f64 it_804DC788 = 0.0f;
-// static f32 it_804DC790 = 0.003906f;
-// static f64 it_804DC798 = U32_TO_F32;
-// static f64 it_804DC7A0 = S32_TO_F32;
-// static f32 it_804DC7A8 = 1.0f;
-// static f32 it_804DC7AC = 0.0f;
-// static f32 it_804DC7B0 = F32_MAX;
-// static f32 it_804DC7B8 = 0.0f;
-// static f32 it_804DC7BC = -1.0f;
-// static f32 it_804DC7C0 = 1.0f;
-// static f32 it_804DC7C4 = 0.001f;
-// static f64 it_804DC7C8 = M_PI_2;
-// static f32 it_804DC7D0 = 0.0f;
-// static f32 it_804DC7D4 = 1.0f;
-// static f32 it_804DC7D8 = deg_to_rad;
-// static f64 it_804DC7E0 = S32_TO_F32;
-// static f32 it_804DC7E8 = M_PI_2;
-// static f32 it_804DC7EC = 0.1f;
-// static f64 it_804DC7F0 = 10.0f;
+/// static f32 it_804DC774 = 1.0f;
+/// static f32 it_804DC778 = 2.0f;
+/// static f32 it_804DC77C = 0.5f;
+/// static f64 it_804DC780 = M_PI;
+/// static f64 it_804DC788 = 0.0f;
+/// static f32 it_804DC790 = 0.003906f;
+/// static f64 it_804DC798 = U32_TO_F32;
+/// static f64 it_804DC7A0 = S32_TO_F32;
+/// static f32 it_804DC7A8 = 1.0f;
+/// static f32 it_804DC7AC = 0.0f;
+/// static f32 it_804DC7B0 = F32_MAX;
+/// static f32 it_804DC7B8 = 0.0f;
+/// static f32 it_804DC7BC = -1.0f;
+/// static f32 it_804DC7C0 = 1.0f;
+/// static f32 it_804DC7C4 = 0.001f;
+/// static f64 it_804DC7C8 = M_PI_2;
+/// static f32 it_804DC7D0 = 0.0f;
+/// static f32 it_804DC7D4 = 1.0f;
+/// static f32 it_804DC7D8 = deg_to_rad;
+/// static f64 it_804DC7E0 = S32_TO_F32;
+/// static f32 it_804DC7E8 = M_PI_2;
+/// static f32 it_804DC7EC = 0.1f;
+/// static f64 it_804DC7F0 = 10.0f;
 static const f64 it_804DC7F8 = 0.5f;
-// static f32 it_804DC800 = 30.0f;
-// static f32 it_804DC804= 10.0f;
-// static f64 it_804DC808 = M_PI_2;
-// static f32 it_804DC810 = deg_to_rad;
-// static f64 it_804DC818 = 3.0f;
-// static f32 it_804DC820 = -1.0f;
-// static f32 0.00000000680742f = 0.00000000680742f;
-// static f32 it_804DC828 = 2.0f;
-// static f32 it_804DC82C = 0.5f;
+/// static f32 it_804DC800 = 30.0f;
+/// static f32 it_804DC804= 10.0f;
+/// static f64 it_804DC808 = M_PI_2;
+/// static f32 it_804DC810 = deg_to_rad;
+/// static f64 it_804DC818 = 3.0f;
+/// static f32 it_804DC820 = -1.0f;
+/// static f32 0.00000000680742f = 0.00000000680742f;
+/// static f32 it_804DC828 = 2.0f;
+/// static f32 it_804DC82C = 0.5f;
 
 typedef enum PokemonKind {
     Pokemon_ID_Tosakinto,   // Goldeen (Tosakinto)
@@ -4918,7 +4918,7 @@ Fighter* it_80272818(Item* item)
         ->fighter;
 }
 
-// Returns Item_GObj of the specified kind if part of HSD_GObj_Entities->items
+/// Returns Item_GObj of the specified kind if part of HSD_GObj_Entities->items
 Item_GObj* it_80272828(ItemKind kind)
 {
     Item_GObj* item_gobj_return;
@@ -4994,7 +4994,7 @@ void it_80272940(Item_GObj* item_gobj)
     HSD_JObjClearFlagsAll(item_jobj2, 0x10U);
 }
 
-// void it_80272980(Item_GObj* item_gobj, f32 arg1) {
+/// void it_80272980(Item_GObj* item_gobj, f32 arg1) {
 void it_80272980(Item_GObj* item_gobj)
 {
     f32 dir;
@@ -6288,21 +6288,21 @@ void it_80275328(HSD_GObj* gobj, ItemLink* arg1)
 {
     arg1->prev = NULL;
     arg1->next = NULL;
-    arg1->x8_vel.z = 0.0f;
-    arg1->x8_vel.y = 0.0f;
-    arg1->x8_vel.x = 0.0f;
+    arg1->vel.z = 0.0f;
+    arg1->vel.y = 0.0f;
+    arg1->vel.x = 0.0f;
     arg1->pos.z = 0.0f;
     arg1->pos.y = 0.0f;
     arg1->pos.x = 0.0f;
-    arg1->x20_vec.z = 0.0f;
-    arg1->x20_vec.y = 0.0f;
-    arg1->x20_vec.x = 0.0f;
-    arg1->flag0 = 0;
-    arg1->flag1 = 0;
-    arg1->flag2 = 0;
-    arg1->unk = 0;
-    arg1->x1D0_GObj = gobj;
-    arg1->x1D4_JObj = NULL;
+    arg1->x20.z = 0.0f;
+    arg1->x20.y = 0.0f;
+    arg1->x20.x = 0.0f;
+    arg1->x2C_b0 = 0;
+    arg1->x2C_b1 = 0;
+    arg1->x2C_b2 = 0;
+    arg1->x1CC = 0;
+    arg1->gobj = gobj;
+    arg1->jobj = NULL;
 }
 
 void it_80275390(Item_GObj* item_gobj)
@@ -6878,7 +6878,7 @@ void it_80276174(Item_GObj* item_gobj, Vec3* pos)
     }
 }
 
-// bool it_80276214(Item_GObj* item_gobj) {}
+/// bool it_80276214(Item_GObj* item_gobj) {}
 void it_80276214(Item_GObj* item_gobj)
 {
     Item* item;
@@ -8223,7 +8223,7 @@ void it_80278574(HSD_GObj* gobj, GXColor* arg1)
 }
 
 #if 0
-// load ItCo.dat/usd ?
+/// load ItCo.dat/usd ?
 void it_8027870C(s32 arg0) {
     if (lbLang_IsSettingUS() != 0) {
         lbArchive_80017040(0, &it_803F1EE4, &it_804D6D20, &it_803F1EF0, 0);
@@ -9961,10 +9961,10 @@ void it_8027B964(Item_GObj* item_gobj, bool chk)
     item->x40_vel = sp14;
 }
 
-// static inline u32 copy(u32 len, Vec3* src, Vec3* dst) {
-//     *dst = *src;
-//     return len;
-// }
+/// static inline u32 copy(u32 len, Vec3* src, Vec3* dst) {
+///     *dst = *src;
+///     return len;
+/// }
 
 int it_8027BA54(HSD_GObj* item_gobj, Vec3* arg1)
 {
@@ -10098,13 +10098,13 @@ block_7:
     HSD_JObjSetRotationZ(item_jobj, sp74.z);
 }
 
-// Might take in and pass more vars
+/// Might take in and pass more vars
 void it_8027C0A8(Item_GObj* item_gobj, f32 arg4, f32 arg5)
 {
     it_8027BBF4(item_gobj, false, arg4, arg5);
 }
 
-// Might take in and pass more vars
+/// Might take in and pass more vars
 void it_8027C0CC(Item_GObj* item_gobj, f32 arg4, f32 arg5)
 {
     it_8027BBF4(item_gobj, true, arg4, arg5);
@@ -10450,7 +10450,7 @@ void it_8027CE44(Item_GObj* item_gobj)
 #pragma push
 #pragma dont_inline on
 
-// Appears to be a function for Game&Watch items
+/// Appears to be a function for Game&Watch items
 void it_8027CE64(Item_GObj* item_gobj, HSD_GObj* fighter_gobj,
                  void* arg_attr_address)
 {

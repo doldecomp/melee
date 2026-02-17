@@ -23,9 +23,9 @@
 /* 18569C */ void fn_8018569C(HSD_GObj*);
 /* 18575C */ void fn_8018575C(HSD_GObj*);
 /* 1857C4 */ void fn_801857C4(HSD_GObj*);
-/* 1859C8 */ UNK_RET fn_801859C8(UNK_PARAMS);
+/* 1859C8 */ void fn_801859C8(HSD_GObj*);
 /* 185A0C */ UNK_RET fn_80185A0C(UNK_PARAMS);
-/* 185D64 */ UNK_RET fn_80185D64(UNK_PARAMS);
+/* 185D64 */ void fn_80185D64(void);
 /* 185E34 */ UNK_RET fn_80185E34(UNK_PARAMS);
 /* 185F5C */ UNK_RET fn_80185F5C(UNK_PARAMS);
 /* 186080 */ UNK_RET fn_80186080(UNK_PARAMS);
@@ -68,9 +68,9 @@
 /* 18A160 */ u8 gm_8018A160(u8, u8);
 /* 18A188 */ f32 gm_8018A188(u8, u8);
 /* 18A1D8 */ f32 gm_8018A1D8(u8, u8);
-/* 18A228 */ UNK_RET gm_8018A228(UNK_PARAMS);
-/* 18A25C */ UNK_RET gm_8018A25C(UNK_PARAMS);
-/* 18A290 */ UNK_RET gm_8018A290(UNK_PARAMS);
+/* 18A228 */ u8 gm_8018A228(u8 difficulty, u8 stage_slot, u8 idx);
+/* 18A25C */ u8 gm_8018A25C(u8 difficulty, u8 stage_slot, u8 arg2);
+/* 18A290 */ u8 gm_8018A290(u8 difficulty, u8 stage_slot, u8 idx);
 /* 18A2C4 */ f32 gm_8018A2C4(u8, u8);
 /* 18A314 */ f32 gm_8018A314(u8, u8);
 /* 18A364 */ void fn_8018A364(int);

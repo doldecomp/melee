@@ -13,9 +13,10 @@ typedef struct itOldkuriAttributes {
     s32* x0;
     f32 x4;
     f32 x8;
+    f32 xC;
 } itOldkuriAttributes;
 
-void it_2725_Logic29_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
+void itOldKuri_Logic29_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }
@@ -68,7 +69,14 @@ void itOldkuri_UnkMotion3_Phys(Item_GObj* gobj)
     it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
 }
 
-/// #itOldkuri_UnkMotion3_Coll
+bool itOldkuri_UnkMotion3_Coll(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itOldkuriAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+    ip->xDD4_itemVar.oldkuri.xDF8 = (s32) attr->xC;
+    it_8026E414(gobj, it_802D747C);
+    return it_8027C794(gobj);
+}
 
 /// #it_802D7AF0
 
@@ -87,9 +95,16 @@ void itOldkuri_UnkMotion4_Phys(Item_GObj* gobj)
     it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
 }
 
-/// #itOldkuri_UnkMotion4_Coll
+bool itOldkuri_UnkMotion4_Coll(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itOldkuriAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+    ip->xDD4_itemVar.oldkuri.xDF8 = (s32) attr->xC;
+    it_8026E414(gobj, it_802D747C);
+    return it_8027C794(gobj);
+}
 
-void it_2725_Logic0_PickedUp(Item_GObj* gobj)
+void itOldKuri_Logic0_PickedUp(Item_GObj* gobj)
 {
     it_80275474(gobj);
     it_80274740(gobj);
@@ -102,7 +117,15 @@ void itOldkuri_UnkMotion5_Phys(Item_GObj* gobj) {}
 
 /// #it_2725_Logic0_Dropped
 
-/// #it_2725_Logic0_Thrown
+void it_2725_Logic0_Thrown(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    it_8027CB3C(gobj);
+    it_80274C88(gobj);
+    ip->xDD4_itemVar.oldkuri.xDF8 = 0;
+    Item_80268E5C(gobj, 6, ITEM_ANIM_UPDATE);
+    it_8027C56C(gobj, 0.0f);
+}
 
 bool itOldkuri_UnkMotion6_Anim(Item_GObj* gobj)
 {
@@ -149,9 +172,22 @@ bool itOldkuri_UnkMotion9_Coll(Item_GObj* gobj)
 
 /// #it_802D8098
 
-/// #it_802D813C
+void it_802D813C(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    ip->x40_vel.x = ip->x40_vel.y = ip->x40_vel.z = 0.0F;
+    it_8027C0A8(gobj, 0.0F, 0.0F);
+    Item_80268E5C(gobj, 7, 2);
+}
 
-/// #itOldkuri_UnkMotion7_Anim
+bool itOldkuri_UnkMotion7_Anim(Item_GObj* gobj)
+{
+    if (it_80272C6C(gobj) == 0) {
+        it_8027CC88(gobj);
+        return true;
+    }
+    return false;
+}
 
 void itOldkuri_UnkMotion7_Phys(Item_GObj* gobj) {}
 

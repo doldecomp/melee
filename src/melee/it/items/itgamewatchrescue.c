@@ -163,7 +163,8 @@ bool itGamewatchrescue_UnkMotion1_Coll(Item_GObj* gobj)
     return false;
 }
 
-void it_2725_Logic81_EvtUnk(Item_GObj* item_gobj1, Item_GObj* item_gobj2)
+void itGameWatchRescue_Logic81_EvtUnk(Item_GObj* item_gobj1,
+                                      Item_GObj* item_gobj2)
 {
     it_8026B894(item_gobj1, item_gobj2);
 }

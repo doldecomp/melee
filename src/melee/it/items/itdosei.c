@@ -11,7 +11,7 @@
 
 #include <math.h>
 
-// Explicit declaration for external function
+/// Explicit declaration for external function
 extern void Item_80268E5C(Item_GObj* gobj, int arg1, int arg2);
 
 /// #it_3F14_Logic7_Spawned
@@ -300,29 +300,29 @@ bool itDosei_UnkMotion11_Coll(Item_GObj* gobj)
 
 /// #it_3F14_Logic7_DmgDealt
 
-bool it_3F14_Logic7_Reflected(Item_GObj* gobj)
+bool itDosei_Logic7_Reflected(Item_GObj* gobj)
 {
     return it_80273030(gobj);
 }
 
-bool it_3F14_Logic7_Clanked(Item_GObj* gobj)
+bool itDosei_Logic7_Clanked(Item_GObj* gobj)
 {
     itColl_BounceOffVictim(gobj);
     return false;
 }
 
-bool it_3F14_Logic7_HitShield(Item_GObj* gobj)
+bool itDosei_Logic7_HitShield(Item_GObj* gobj)
 {
     itColl_BounceOffVictim(gobj);
     return false;
 }
 
-bool it_3F14_Logic7_ShieldBounced(Item_GObj* gobj)
+bool itDosei_Logic7_ShieldBounced(Item_GObj* gobj)
 {
     return itColl_BounceOffShield(gobj);
 }
 
-void it_3F14_Logic7_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
+void itDosei_Logic7_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }

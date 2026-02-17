@@ -12,7 +12,7 @@ ItemStateTable it_803F6C98[] = {
     { 0, NULL, NULL, NULL },
 };
 
-void it_2725_Logic8_Destroyed(Item_GObj* gobj)
+void itKirbyHammer_Logic8_Destroyed(Item_GObj* gobj)
 {
     Item* it = GET_ITEM((HSD_GObj*) gobj);
 
@@ -72,7 +72,7 @@ Item_GObj* it_802ADC54(HSD_GObj* parent, Vec3* pos, Fighter_Part sfx, u32 vars,
     return item_gobj;
 }
 
-void it_2725_Logic8_PickedUp(Item_GObj* gobj)
+void itKirbyHammer_Logic8_PickedUp(Item_GObj* gobj)
 {
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
 }

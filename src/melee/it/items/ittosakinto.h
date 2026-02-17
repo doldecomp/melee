@@ -19,7 +19,7 @@
 /* 2C9468 */ void it_802C9468(Item_GObj* gobj);
 /* 2C94A8 */ void itTosakinto_UnkMotion3_Phys(Item_GObj* gobj);
 /* 2C94D8 */ bool itTosakinto_UnkMotion3_Coll(Item_GObj* gobj);
-/* 2C9504 */ void it_2725_Logic0_Destroyed(Item_GObj* gobj);
+/* 2C9504 */ void itTosakinto_Logic0_Destroyed(Item_GObj* gobj);
 /* 3F7A48 */ extern ItemStateTable it_803F7A48[];
 
 #endif

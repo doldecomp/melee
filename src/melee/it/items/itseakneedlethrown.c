@@ -10,7 +10,7 @@
 
 /// #it_802AFEA8
 
-void it_2725_Logic109_Destroyed(Item_GObj* gobj)
+void itSeakNeedleThrown_Logic109_Destroyed(Item_GObj* gobj)
 {
     GET_ITEM(gobj)->owner = NULL;
 }
@@ -19,7 +19,12 @@ void it_2725_Logic109_Destroyed(Item_GObj* gobj)
 
 /// #it_802B00F4
 
-/// #itSeakneedlethrown_UnkMotion0_Anim
+bool itSeakneedlethrown_UnkMotion0_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->xDD4_itemVar.seakneedlethrown.xDE4 = ip->pos;
+    return it_80273130(gobj);
+}
 
 /// #itSeakneedlethrown_UnkMotion1_Anim
 
@@ -87,7 +92,7 @@ bool itSeakneedlethrown_UnkMotion3_Coll(Item_GObj* gobj)
 
 /// #it_2725_Logic109_HitShield
 
-void it_2725_Logic109_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
+void itSeakNeedleThrown_Logic109_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }

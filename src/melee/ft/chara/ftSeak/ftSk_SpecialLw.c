@@ -52,7 +52,7 @@ static void ftSk_unk_inline(Vec3* v)
     lb_800119DC(v, 0x78, 0.4F, 0.003F, M_PI / 3);
 }
 
-// Sheik_AS_361_Transform_Grounded
+/// Sheik_AS_361_Transform_Grounded
 void ftSk_SpecialLw_Enter(Fighter_GObj* gobj)
 {
     Vec3 sp20;
@@ -75,7 +75,7 @@ void ftSk_SpecialLw_Enter(Fighter_GObj* gobj)
     fp->accessory4_cb = &fn_80114034;
 }
 
-// Sheik_AS_363_Transform_Aerial
+/// Sheik_AS_363_Transform_Aerial
 void ftSk_SpecialAirLw_Enter(Fighter_GObj* gobj)
 {
     Vec3 sp20;
@@ -99,7 +99,7 @@ void ftSk_SpecialAirLw_Enter(Fighter_GObj* gobj)
     fp->accessory4_cb = &fn_80114034;
 }
 
-// Animation_SheikTransformStartGround
+/// Animation_SheikTransformStartGround
 void ftSk_SpecialLw_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -240,7 +240,7 @@ void ftSk_SpecialLw_801146EC(Fighter_GObj* gobj)
     fp->accessory4_cb = fn_801140B0;
 }
 
-// AS_SheikFinishTransformation
+/// AS_SheikFinishTransformation
 void ftSk_SpecialLw_80114758(Fighter_GObj* gobj)
 {
     s32 var_r4;

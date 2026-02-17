@@ -8,8 +8,8 @@
 #include "it/items/types.h"
 
 /* 2E1820 */ void it_802E1820(Item_GObj*);
-/* 2E1874 */ void it_2725_Logic10_Destroyed(Item_GObj*);
-/* 2E18B4 */ UNK_RET it_802E18B4(UNK_PARAMS);
+/* 2E1874 */ void itKlap_Logic10_Destroyed(Item_GObj*);
+/* 2E18B4 */ Item_GObj* it_802E18B4(Item_GObj* gobj);
 /* 2E1930 */ void it_802E1930(Item_GObj*);
 /* 2E1968 */ bool itKlap_UnkMotion1_Anim(Item_GObj* gobj);
 /* 2E1970 */ void itKlap_UnkMotion1_Phys(Item_GObj* gobj);
@@ -20,7 +20,7 @@
 /* 2E1D2C */ void itKlap_UnkMotion2_Phys(Item_GObj* gobj);
 /* 2E1E54 */ bool itKlap_UnkMotion2_Coll(Item_GObj* gobj);
 /* 2E1E5C */ bool it_2725_Logic10_DmgReceived(Item_GObj*);
-/* 2E1E94 */ UNK_RET it_802E1E94(UNK_PARAMS);
+/* 2E1E94 */ void it_802E1E94(Item_GObj* gobj);
 /* 2E1F2C */ bool itKlap_UnkMotion4_Anim(Item_GObj* gobj);
 /* 2E1F34 */ void itKlap_UnkMotion4_Phys(Item_GObj* gobj);
 /* 2E20D0 */ bool itKlap_UnkMotion4_Coll(Item_GObj* gobj);

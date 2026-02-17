@@ -13,17 +13,40 @@
 #include "it/it_2725.h"
 #include "it/item.h"
 
+#include <baselib/random.h>
+
+typedef struct {
+    u8 _pad[0x40];
+    s32 x40;
+    s32 x44;
+    u8 _pad2[0x4];
+    f32 x4C;
+} itHitodemanAttributes;
+
 /// #it_2725_Logic24_Spawned
 
 void it_802D43AC(void) {}
 
-/// #it_802D43B0
+void it_802D43B0(Item_GObj* gobj, Item_GObj* ref_gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    it_8026B894(gobj, ref_gobj);
+    ip->xDD4_itemVar.hitodeman.xE64 = NULL;
+    ip->xDAC_itcmd_var0 = 1;
+}
 
 /// #it_802D43EC
 
 /// #it_802D4494
 
-/// #it_802D4510
+void it_802D4510(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itHitodemanAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    PAD_STACK(8);
+    ip->xDD4_itemVar.hitodeman.xE5C =
+        attrs->x44 + HSD_Randi(attrs->x40 - attrs->x44);
+}
 
 /// #it_802D4564
 
@@ -48,11 +71,6 @@ void it_802D4990(Item_GObj* gobj)
 }
 
 /// #itHitodeman_UnkMotion1_Anim
-
-typedef struct {
-    u8 _pad[0x4C];
-    f32 x4C;
-} itHitodemanAttributes;
 
 void itHitodeman_UnkMotion1_Phys(Item_GObj* gobj)
 {
@@ -112,7 +130,7 @@ bool it_802D4F28(Item_GObj* gobj)
     return it_8027AE34(gobj);
 }
 
-bool it_2725_Logic43_Absorbed(Item_GObj* arg0)
+bool itHitodeman_Logic43_Absorbed(Item_GObj* arg0)
 {
     return true;
 }
@@ -142,7 +160,21 @@ void it_802D4F78(Item_GObj* gobj)
     efSync_Spawn(0x46C, gobj, jobj, &f);
 }
 
-/// #it_802D4FFC
+bool it_802D4FFC(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    f32 timer;
+
+    timer = ip->xD44_lifeTimer - 1.0F;
+    ip->xD44_lifeTimer = timer;
+    if (timer <= 0.0F) {
+        return true;
+    }
+    if (ip->xDB4_itcmd_var2 != 0) {
+        return true;
+    }
+    return false;
+}
 
 void it_802D5044(Item_GObj* gobj) {}
 

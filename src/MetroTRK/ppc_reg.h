@@ -72,7 +72,7 @@ typedef struct StopInfo_PPC {
 } StopInfo_PPC; // size = 0x0A
 
 //
-// Info stored in NotifyException message.
+/// Info stored in NotifyException message.
 //
 
 typedef StopInfo_PPC ExceptionInfo_PPC;
@@ -87,7 +87,7 @@ typedef InstructionType BreakpointRestore;
 
 #define TRK_EXTENDED2_SIZE (sizeof(Extended2Type))
 
-// Special purpose registers
+/// Special purpose registers
 #define SPR_XER 1
 
 #define SPR_LR 8
@@ -218,7 +218,7 @@ typedef InstructionType BreakpointRestore;
 
 #define SPR_PIR 1023
 
-// MSR Register bits
+/// MSR Register bits
 #define COND_EQ 2
 #define MSR_SE 0x0400 /* SE bit of MSR (bit 21) */
 #define MSR_EE 0x8000 /* EE bit of MSR (bit 16) */
