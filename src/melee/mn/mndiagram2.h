@@ -25,7 +25,7 @@
 /* 244D80 */ void mnDiagram2_UpdateScrollArrows(HSD_GObj* gobj);
 /* 244F68 */ void mnDiagram2_Think(HSD_GObj* gobj);
 /* 245028 */ void mnDiagram2_FreeUserData(Diagram2* data);
-/* 245068 */ void mnDiagram2_InitUserData(void* arg);
+/* 245068 */ void mnDiagram2_InitUserData(void* arg, int unused);
 /* 245178 */ void mnDiagram2_Create(int arg0);
 /* 2453B0 */ void mnDiagram2_Init(void);
 /* 24541C */ u8 mnDiagram2_GetRankedFighter(u8 stat_type, u8 rank);
