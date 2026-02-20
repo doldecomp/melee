@@ -2,9 +2,8 @@
 
 #include <dolphin/os.h>
 
-s32 lbArq_80014ABC(UNK_T arg0)
-{
-    return M2C_FIELD(arg0, s32*, 4);
+u32 lbArq_80014ABC(lbArqNode* arg0) {
+    return arg0->state;
 }
 
 void lbArq_80014AC4(lbArqHandle* handle)
