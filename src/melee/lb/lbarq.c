@@ -2,7 +2,8 @@
 
 #include <dolphin/os.h>
 
-u32 lbArq_80014ABC(lbArqNode* arg0) {
+u32 lbArq_80014ABC(lbArqNode* arg0)
+{
     return arg0->state;
 }
 
