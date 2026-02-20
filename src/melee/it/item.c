@@ -1163,7 +1163,7 @@ void Item_80268E40(Item* item_data, struct ItemStateDesc* itemStateDesc)
 
 extern struct Fighter_804D653C_t* it_804D6D04;
 
-// Change item state
+/// Change item state
 void Item_80268E5C(HSD_GObj* gobj, enum_t msid, Item_StateChangeFlags flags)
 {
     Vec3 sp4C;
@@ -1460,7 +1460,7 @@ void Item_80269978(HSD_GObj* gobj)
     }
 }
 
-// this function is where the item accessory callback is called if it exists
+/// this function is where the item accessory callback is called if it exists
 static void Item_80269A9C(HSD_GObj* gobj)
 {
     Item* item_data = (Item*) HSD_GObjGetUserData(gobj);
@@ -2029,7 +2029,7 @@ void Item_8026A8EC(Item_GObj* gobj)
     HSD_GObjPLink_80390228(gobj);
 }
 
-// Pick up item
+/// Pick up item
 void Item_8026AB54(Item_GObj* gobj, HSD_GObj* owner_gobj, Fighter_Part part)
 {
     Item* item_data = (Item*) HSD_GObjGetUserData(gobj);

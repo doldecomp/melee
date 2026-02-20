@@ -18,7 +18,7 @@
 #include <dolphin/mtx.h>
 #include <MSL/trigf.h>
 
-// https://decomp.me/scratch/apf7Y
+/// https://decomp.me/scratch/apf7Y
 void ftNs_SpecialS_ItemPKFireSpawn(
     HSD_GObj* gobj) //* Ness's PK Fire spawn function, stored as Accessory4
                     // and summoned with Subaction Event 0x60 *//
@@ -73,8 +73,8 @@ void ftNs_SpecialS_ItemPKFireSpawn(
     }
 }
 
-// 0x80116C94
-// https://decomp.me/scratch/XdzmF
+/// 0x80116C94
+/// https://decomp.me/scratch/XdzmF
 void ftNs_SpecialS_Enter(
     HSD_GObj* gobj) // Ness's grounded PK Fire Motion State handler
 {
@@ -90,8 +90,8 @@ void ftNs_SpecialS_Enter(
         ftNs_SpecialS_ItemPKFireSpawn; // Store PK Fire spawn function
 }
 
-// 0x80116D04
-// https://decomp.me/scratch/fnaSW
+/// 0x80116D04
+/// https://decomp.me/scratch/fnaSW
 void ftNs_SpecialAirS_Enter(
     HSD_GObj* gobj) // Ness's aerial PK Fire Motion State handler
 {
@@ -106,8 +106,8 @@ void ftNs_SpecialAirS_Enter(
     fp->accessory4_cb = ftNs_SpecialS_ItemPKFireSpawn;
 }
 
-// 0x80116D74
-// https://decomp.me/scratch/5NxzS
+/// 0x80116D74
+/// https://decomp.me/scratch/5NxzS
 void ftNs_SpecialS_Anim(
     HSD_GObj* gobj) // Ness's grounded PK Fire Animation callback
 {
@@ -116,8 +116,8 @@ void ftNs_SpecialS_Anim(
     }
 }
 
-// 0x80116DB0
-// https://decomp.me/scratch/iFFHn
+/// 0x80116DB0
+/// https://decomp.me/scratch/iFFHn
 void ftNs_SpecialAirS_Anim(
     HSD_GObj* gobj) // Ness's aerial PK Fire Animation callback
 {
@@ -126,24 +126,24 @@ void ftNs_SpecialAirS_Anim(
     }
 }
 
-// 0x80116DEC
-// https://decomp.me/scratch/iCZHk
+/// 0x80116DEC
+/// https://decomp.me/scratch/iCZHk
 void ftNs_SpecialS_Phys(
     HSD_GObj* gobj) // Ness's grounded PK Fire Physics callback
 {
     ft_80084F3C(gobj);
 }
 
-// 0x80116E0C
-// https://decomp.me/scratch/ATut0
+/// 0x80116E0C
+/// https://decomp.me/scratch/ATut0
 void ftNs_SpecialAirS_Phys(
     HSD_GObj* gobj) // Ness's aerial PK Fire Physics callback
 {
     ft_80084EEC(gobj);
 }
 
-// 0x80116E2C
-// https://decomp.me/scratch/gi1NE
+/// 0x80116E2C
+/// https://decomp.me/scratch/gi1NE
 void ftNs_SpecialS_Coll(
     HSD_GObj* gobj) // Ness's grounded PK Fire Collision callback
 {
@@ -152,8 +152,8 @@ void ftNs_SpecialS_Coll(
     }
 }
 
-// 0x80116E68
-// https://decomp.me/scratch/AEWUO
+/// 0x80116E68
+/// https://decomp.me/scratch/AEWUO
 void ftNs_SpecialAirS_Coll(
     HSD_GObj* gobj) // Ness's aerial PK Fire Collision callback
 {

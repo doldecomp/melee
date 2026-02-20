@@ -33,7 +33,7 @@
 #include <MSL/stdio.h>
 #include <MSL/string.h>
 
-// .data
+/// .data
 /* 3F9FD0 */ static int un_803F9FD0;
 /* 3F9FDC */ static float un_803F9FDC;
 /* 3FA070 */ static int un_803FA070;
@@ -123,13 +123,13 @@
 /* 3FD29C */ extern char un_803FD29C[];
 /* 3FD2AC */ extern char un_803FD2AC[];
 
-// .sdata
+/// .sdata
 /* 4D5850 */ static int un_804D5850 = 0x7F;
 /* 4D5854 */ static int un_804D5854 = 0x7F;
 /* 4D5858 */ static int un_804D5858 = 0x7F;
 /* 4D585C */ static int un_804D585C = -1;
 
-// .sbss
+/// .sbss
 /* 4D6DA8 */ static int* un_804D6DA8;
 /* 4D6DAC */ static int un_804D6DAC;
 /* 4D6DB0 */ static int un_804D6DB0;
@@ -138,7 +138,7 @@
 /* 4D6DBC */ static int un_804D6DBC;
 /* 4D6DC0 */ static int un_804D6DC0;
 
-// .sbss (extern)
+/// .sbss (extern)
 /* 4D6DC8 */ extern s32 un_804D6DC8;
 /* 4D6DCC */ extern s32 un_804D6DCC;
 /* 4D6DD0 */ extern float un_804D6DD0;
@@ -159,19 +159,17 @@
 /* 4D6E10 */ extern s32 un_804D6E10;
 /* 4D6E14 */ extern s32 un_804D6E14;
 
-// .sdata (extern)
+/// .sdata (extern)
 /* 4D5908 */ extern s32 un_804D5908;
 /* 4D590C */ extern s32 un_804D590C;
 /* 4D5910 */ extern s32 un_804D5910;
-/* 4D5978 */ extern char un_804D5978[];
-/* 4D5980 */ extern char un_804D5980[];
-/* 4D5988 */ extern char un_804D5988[];
+
 /* 4D5990 */ extern char un_804D5990[];
 
-// .bss (extern)
+/// .bss (extern)
 /* 45A6C0 */ extern u8 gmMainLib_8045A6C0[];
 
-// .sdata2 (extern)
+/// .sdata2 (extern)
 /* 4DDC48 */ extern float un_804DDC48;
 /* 4DDC4C */ extern float un_804DDC4C;
 /* 4DDC50 */ extern float un_804DDC50;
@@ -466,7 +464,7 @@ s32 un_80300410(s32 arg0)
     return 0;
 }
 
-// these will try to inline un_802FFD94 otherwise
+/// these will try to inline un_802FFD94 otherwise
 #pragma push
 #pragma dont_inline on
 int un_80300480(int arg0)
@@ -1149,7 +1147,7 @@ int un_80301634(void)
     void* r31;
     void* r3;
 
-    OSReport(un_804D5978);
+    OSReport("<Init>\n");
     lb_8001C550();
     lb_8001D164(0);
     r31 = HSD_MemAlloc(lbSnap_8001E210());
@@ -1211,7 +1209,7 @@ int un_80301800(int arg0)
     if (arg0 != 1) {
         return 0;
     }
-    OSReport(un_804D5980);
+    OSReport("<Save>\n");
     lb_8001CE00();
     return 0;
 }
@@ -1221,7 +1219,7 @@ int un_80301840(int arg0)
     if (arg0 != 1) {
         return 0;
     }
-    OSReport(un_804D5988);
+    OSReport("<Load>\n");
     {
         s32 result = lb_8001CBBC();
         gmMainLib_8015FA34(result);
@@ -1283,7 +1281,7 @@ int un_80301964(int arg0)
             GObj_SetupGXLink(gobj, HSD_SObjLib_803A49E0, 0x12, 0);
             un_803FD274 = un_804D6E04;
             sobj =
-                HSD_SObjLib_803A477C(gobj, (s32) un_804D5990, 0, 0, 0x80, 0);
+                HSD_SObjLib_803A477C(gobj, (int) un_804D5990, 0, 0, 0x80, 0);
             sobj->x10 = un_804DDC4C;
             sobj->x14 = un_804DDC50;
             sobj->x40 |= 2;
@@ -1304,16 +1302,14 @@ int un_80301A64(int arg0)
 
     OSReport(un_803FD29C);
     result = lbSnap_8001D5FC(0, un_804D6E10);
-    if (result != 0xB) {
-        return 0;
-    }
+    if (result == 0xB) {
+        do {
+            result = lb_8001B6F8();
+        } while (result == 0xB);
 
-    do {
-        result = lb_8001B6F8();
-    } while (result == 0xB);
-
-    if (result == 0) {
-        lbSnap_8001D40C(0);
+        if (result == 0) {
+            lbSnap_8001D40C(0);
+        }
     }
     return 0;
 }
@@ -1328,16 +1324,14 @@ int un_80301AD4(int arg0)
 
     OSReport(un_803FD2AC);
     result = lbSnap_8001D7B0(0, un_804D6E14, un_804D6E10);
-    if (result != 0xB) {
-        return 0;
-    }
+    if (result == 0xB) {
+        do {
+            result = lb_8001B6F8();
+        } while (result == 0xB);
 
-    do {
-        result = lb_8001B6F8();
-    } while (result == 0xB);
-
-    if (result == 0) {
-        lbSnap_8001D40C(0);
+        if (result == 0) {
+            lbSnap_8001D40C(0);
+        }
     }
     return 0;
 }

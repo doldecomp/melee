@@ -167,7 +167,7 @@ void ftCo_80099564(Fighter_GObj* gobj)
     ftCo_Escape_Anim(gobj);
 }
 
-/// todo Shared code with #ftCo_Escape_Anim.
+/// @todo Shared code with #ftCo_Escape_Anim.
 void ftCo_80099644(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;

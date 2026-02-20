@@ -6,9 +6,15 @@
 #include <dolphin/gx/GXStruct.h>
 
 struct lbl_804333E0_t {
-    /* 0x000 */ char pad_0[0x84];
-    /* 0x084 */ s32 unk_84;        /* inferred */
-    /* 0x088 */ char pad_88[0x80]; /* maybe part of unk_84[0x21]? */
+    /* 0x000 */ char pad_0[0x78];
+    /* 0x078 */ s32 unk_78;
+    /* 0x07C */ s32 unk_7C;
+    /* 0x080 */ s32 unk_80;
+    /* 0x084 */ s32 unk_84;
+    /* 0x088 */ s32 unk_88;
+    /* 0x08C */ char pad_8C[0x4];
+    /* 0x090 */ s32 unk_90;
+    /* 0x094 */ char pad_94[0x74];
     /* 0x108 */ s32 unk_108;
     /* 0x10C */ s32 unk_10C;
     /* 0x110 */ s32 unk_110;
@@ -50,5 +56,18 @@ STATIC_ASSERT(sizeof(struct lbl_804335B8_t) == 0xA0);
 
 /* 4335B8 */ static struct lbl_804335B8_t lbl_804335B8;
 /* 4D7CE0 */ static float lbl_804D7CE0;
+
+struct lbl_803BAFE8_t {
+    /* 0x00 */ s32 x0;
+    /* 0x04 */ u16 x4;
+    /* 0x06 */ u16 x6;
+    /* 0x08 */ s32 x8;
+    /* 0x0C */ s32 xC;
+    /* 0x10 */ s32 x10;
+    /* 0x14 */ s32 x14;
+}; /* size = 0x18 */
+
+/* 3BAFE8 */ extern struct lbl_803BAFE8_t lbl_803BAFE8;
+/* 4D3834 */ extern s32 lbl_804D3834;
 
 #endif

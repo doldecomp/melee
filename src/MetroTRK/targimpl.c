@@ -45,7 +45,7 @@ static void TRKExceptionHandler(u16);
 void TRKInterruptHandlerEnableInterrupts(void);
 static void GetThreadInfo(int*, int*);
 
-// Instruction macros
+/// Instruction macros
 #define INSTR_NOP 0x60000000
 #define INSTR_BLR 0x4E800020
 #define INSTR_PSQ_ST(psr, offset, rDest, w, gqr)                              \

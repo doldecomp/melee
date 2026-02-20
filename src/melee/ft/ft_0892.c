@@ -18,6 +18,8 @@
 #include "ftLink/ftLk_AttackAir.h"
 #include "ftMasterHand/ftMh_Wait1_2.h"
 #include "it/items/itpeachparasol.h"
+#include "pl/plattack.h"
+#include "pl/pltrick.h"
 
 #include <baselib/gobj.h>
 
@@ -27,7 +29,7 @@
 
 /// #ft_800895E0
 
-// Local struct with bitfields - reversed order for MWCC big-endian
+/// Local struct with bitfields - reversed order for MWCC big-endian
 typedef struct {
     s32 x0;
     s32 x4;
@@ -73,7 +75,14 @@ void ft_80089768(Vec2* ptr)
     s->x11_b3 = 0;
 }
 
-/// #ft_80089824
+void ft_80089824(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    fp->x2070 = fp->x2070;
+    ft_80089460(fp);
+    fp->x2074.x2088 = plAttack_80037B08();
+    pl_80037C60(gobj, 0);
+}
 
 union Struct2070* ft_80089884(Fighter_GObj* gobj)
 {
@@ -189,7 +198,7 @@ bool ft_8008A244(Fighter_GObj* gobj)
     return false;
 }
 
-// Seems to be called to end many actions if no frames are remaining
+/// Seems to be called to end many actions if no frames are remaining
 void ft_8008A2BC(HSD_GObj* gobj)
 {
     if (ftLib_800872A4(gobj) == FTKIND_MASTERH) {
@@ -206,7 +215,7 @@ void ft_8008A324(HSD_GObj* gobj)
     ft_8008A348(gobj, -1.0f);
 }
 
-// Transition state to ftCo_MS_Wait or otherwise neutral state
+/// Transition state to ftCo_MS_Wait or otherwise neutral state
 void ft_8008A348(Fighter_GObj* fighter_gobj, float anim_blend)
 {
     Fighter* fighter;

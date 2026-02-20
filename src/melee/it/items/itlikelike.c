@@ -26,7 +26,15 @@ void it_802D9B78(Item_GObj* gobj)
 
 /// #it_2725_Logic5_DmgReceived
 
-/// #it_802D9DDC
+void it_802D9DDC(Item_GObj* gobj)
+{
+    PAD_STACK(16);
+    it_8027CAD8(gobj);
+    it_8026D5CC(gobj);
+    it_8027C0A8(gobj, 0.0f, 5.0f);
+    it_80275270(gobj);
+    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+}
 
 bool itLikelike_UnkMotion0_Anim(Item_GObj* gobj)
 {
@@ -110,7 +118,16 @@ bool itLikelike_UnkMotion5_Coll(Item_GObj* gobj)
     return it_8027C794(gobj);
 }
 
-/// #it_802DABC0
+void it_802DABC0(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->xDD4_itemVar.likelike.x38 = 0;
+    ip->xDD4_itemVar.likelike.x4C = 0;
+    ip->xDD4_itemVar.likelike.x3C = 0;
+    it_80273454(gobj);
+    it_802762B0(ip);
+    Item_80268E5C(gobj, 0x11, ITEM_ANIM_UPDATE);
+}
 
 /// #itLikelike_UnkMotion17_Anim
 

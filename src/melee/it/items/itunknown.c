@@ -17,7 +17,13 @@ void it_802CE7D0(Item_GObj* gobj, Item_GObj* ref_gobj)
 
 /// #itUnknown_UnkMotion0_Anim
 
-/// #itUnknown_UnkMotion0_Phys
+void itUnknown_UnkMotion0_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itUnknownAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+    it_80272860(gobj, attr->xC, attr->x10);
+    ip->x40_vel.x += attr->x4 * ip->xDD4_itemVar.unknown.x60;
+}
 
 bool itUnknown_UnkMotion0_Coll(Item_GObj* gobj)
 {

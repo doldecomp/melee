@@ -15,9 +15,9 @@ bool ftCo_800CECE8(Fighter_GObj* gobj)
     return false;
 }
 
-// This atrocious-looking code is the only way I could get the compiler
-// to spit out the redundant branch instructions found in the assembly.
-// Otherwise a simple switch statement is functionally equivalent.
+/// This atrocious-looking code is the only way I could get the compiler
+/// to spit out the redundant branch instructions found in the assembly.
+/// Otherwise a simple switch statement is functionally equivalent.
 void ftCo_800CED30(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);

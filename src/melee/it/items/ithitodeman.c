@@ -13,6 +13,16 @@
 #include "it/it_2725.h"
 #include "it/item.h"
 
+#include <baselib/random.h>
+
+typedef struct {
+    u8 _pad[0x40];
+    s32 x40;
+    s32 x44;
+    u8 _pad2[0x4];
+    f32 x4C;
+} itHitodemanAttributes;
+
 /// #it_2725_Logic24_Spawned
 
 void it_802D43AC(void) {}
@@ -29,7 +39,14 @@ void it_802D43B0(Item_GObj* gobj, Item_GObj* ref_gobj)
 
 /// #it_802D4494
 
-/// #it_802D4510
+void it_802D4510(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itHitodemanAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    PAD_STACK(8);
+    ip->xDD4_itemVar.hitodeman.xE5C =
+        attrs->x44 + HSD_Randi(attrs->x40 - attrs->x44);
+}
 
 /// #it_802D4564
 
@@ -54,11 +71,6 @@ void it_802D4990(Item_GObj* gobj)
 }
 
 /// #itHitodeman_UnkMotion1_Anim
-
-typedef struct {
-    u8 _pad[0x4C];
-    f32 x4C;
-} itHitodemanAttributes;
 
 void itHitodeman_UnkMotion1_Phys(Item_GObj* gobj)
 {

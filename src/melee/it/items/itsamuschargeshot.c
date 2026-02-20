@@ -3,11 +3,16 @@
 #include <placeholder.h>
 #include <platform.h>
 
+#include "ef/eflib.h"
+
 #include "it/forward.h"
 
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
+#include "it/item.h"
+
+#include <math.h>
 
 bool it_802B5518(Item_GObj* gobj, CollData* cd)
 {
@@ -37,7 +42,17 @@ bool it_802B5518(Item_GObj* gobj, CollData* cd)
 
 /// #it_2725_Logic108_Destroyed
 
-/// #it_802B5974
+void it_802B5974(Item_GObj* gobj)
+{
+    Item* ip;
+
+    if (gobj != NULL) {
+        ip = GET_ITEM(gobj);
+        efLib_DestroyAll((HSD_GObj*) gobj);
+        ip->xDD4_itemVar.samuschargeshot.x28 = 0;
+        Item_8026A8EC(gobj);
+    }
+}
 
 /// #it_2725_Logic108_PickedUp
 
@@ -54,7 +69,14 @@ bool itSamuschargeshot_UnkMotion0_Coll(Item_GObj* gobj)
 
 /// #itSamuschargeshot_UnkMotion8_Anim
 
-/// #itSamuschargeshot_UnkMotion8_Phys
+void itSamuschargeshot_UnkMotion8_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->x40_vel.x = ip->xDD4_itemVar.samuschargeshot.x8 *
+                    cosf(ip->xDD4_itemVar.samuschargeshot.x4);
+    ip->x40_vel.y = ip->xDD4_itemVar.samuschargeshot.x8 *
+                    sinf(ip->xDD4_itemVar.samuschargeshot.x4);
+}
 
 bool itSamuschargeshot_UnkMotion8_Coll(Item_GObj* gobj)
 {

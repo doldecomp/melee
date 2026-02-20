@@ -14,7 +14,7 @@
 /// .bss
 /* 452C68 */ static Camera cm_80452C68;
 
-// .data
+/// .data
 /* 3BCB18 */ static CameraModeCallbacks cm_803BCB18 = { Camera_8002B3D4,
                                                         Camera_8002CDDC,
                                                         Camera_8002D318,
@@ -53,16 +53,16 @@
 /* 3BCBF8 */ static char cm_803BCBF8[0x1B] = "fov_d<MTXDegToRad(90.0F)";
 /* 3BCC14 */ static char cm_803BCC14[0x1B] = "fov_r<MTXDegToRad(90.0F)";
 /* 3BCC30 */ static char cm_803BCC30[0x1B] = "fov_l<MTXDegToRad(90.0F)";
-// /* 3BCC4C */ static void* jumptable_803BCC4C[8] = {
-//     (void*)0x8002a4f8,
-//     (void*)0x8002a554,
-//     (void*)0x8002a6c0,
-//     (void*)0x8002a6c0,
-//     (void*)0x8002a52c,
-//     (void*)0x8002a6c0,
-//     (void*)0x8002a700,
-//     (void*)0x8002a728,
-// };
+/// /* 3BCC4C */ static void* jumptable_803BCC4C[8] = {
+///     (void*)0x8002a4f8,
+///     (void*)0x8002a554,
+///     (void*)0x8002a6c0,
+///     (void*)0x8002a6c0,
+///     (void*)0x8002a52c,
+///     (void*)0x8002a6c0,
+///     (void*)0x8002a700,
+///     (void*)0x8002a728,
+/// };
 /* 3BCC70 */ static char lbl_803BCC70[0x17] = "rate>0.0F&&rate<=1.0F";
 /* 3BCC88 */ static char lbl_803BCC88[0x17] = "snapshot! ptr=%08x\n";
 

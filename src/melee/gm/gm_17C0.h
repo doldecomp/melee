@@ -29,7 +29,7 @@
 /* 17DB6C */ u8 gm_8017DB6C(gm_8017DB6C_arg0_t* arg0, int index);
 /* 17DB78 */ u8 gm_8017DB78(gm_8017DB6C_arg0_t* arg0, int index);
 /* 17DB88 */ UNK_RET gm_8017DB88(UNK_PARAMS);
-/* 17DD7C */ UNK_RET fn_8017DD7C(UNK_PARAMS);
+/* 17DD7C */ u8 fn_8017DD7C(PlayerInitData* arg0, Unk1PData_x24* arg1);
 /* 17DE54 */ UNK_RET fn_8017DE54(UNK_PARAMS);
 /* 17DEC8 */ Unk1PData* fn_8017DEC8(int);
 /* 17DF28 */ Unk1PData* fn_8017DF28(void);
@@ -39,9 +39,9 @@
 /* 17E0E4 */ int fn_8017E0E4(void);
 /* 17E160 */ bool fn_8017E160(void);
 /* 17E21C */ void fn_8017E21C(void);
-/* 17E280 */ UNK_T gm_8017E280(u16, bool);
+/* 17E280 */ s8 gm_8017E280(u16, u32);
 /* 17E318 */ UNK_RET fn_8017E318(UNK_PARAMS);
-/* 17E3C8 */ UNK_RET fn_8017E3C8(UNK_PARAMS);
+/* 17E3C8 */ void fn_8017E3C8(void);
 /* 17E424 */ UnkAdventureData* gm_8017E424(void);
 /* 17E430 */ u8 gm_8017E430(void); ///< returns a player slot
 /* 17E440 */ u8 gm_8017E440(void);
@@ -58,9 +58,9 @@
 /* 17E704 */ u8 gm_8017E704(u8 difficulty, u8 stage_slot, u8 arg2);
 /* 17E738 */ u8 gm_8017E738(u8 difficulty, u8 stage_slot, u8 arg2);
 /* 17E76C */ u8 gm_8017E76C(u8 difficulty, u8 stage_slot, u8 arg2);
-/* 17E7A0 */ void gm_8017E7A0(int);
+/* 17E7A0 */ void gm_8017E7A0(u8);
 /* 17E7E0 */ bool gm_8017E7E0(void);
-/* 17E7FC */ void gm_8017E7FC(int);
+/* 17E7FC */ void gm_8017E7FC(u8);
 /* 17E8A4 */ void fn_8017E8A4(int);
 /* 17EB30 */ UnkAllstarData* gm_8017EB30(void);
 /* 17EB3C */ u8 gm_8017EB3C(u8, u8);
@@ -70,8 +70,8 @@
 /* 17EC00 */ f32 gm_8017EC00(u8, u8);
 /* 17EC50 */ f32 gm_8017EC50(u8, u8);
 /* 17ECA0 */ u8 gm_8017ECA0(u8 difficulty, u8 stage_slot, u8 arg2);
-/* 17ECD4 */ UNK_RET gm_8017ECD4(UNK_PARAMS);
-/* 17ED08 */ UNK_RET gm_8017ED08(UNK_PARAMS);
+/* 17ECD4 */ u8 gm_8017ECD4(u8 difficulty, u8 stage_slot, u8 arg2);
+/* 17ED08 */ u8 gm_8017ED08(u8 difficulty, u8 stage_slot, u8 arg2);
 /* 17ED3C */ f32 gm_8017ED3C(u8, u8);
 /* 17ED8C */ f32 gm_8017ED8C(u8, u8);
 /* 17EDDC */ bool fn_8017EDDC(void);

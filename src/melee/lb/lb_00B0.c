@@ -258,7 +258,7 @@ void lbDObjSetRateAll(HSD_DObj* dobj, float val)
     }
 }
 
-// (exact copy of above, but with HSD_AObjReqAnim)
+/// (exact copy of above, but with HSD_AObjReqAnim)
 void lbDObjReqAnimAll(HSD_DObj* dobj, float val)
 {
     if (dobj == NULL) {

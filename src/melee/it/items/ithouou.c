@@ -51,7 +51,14 @@ bool itHouou_UnkMotion1_Coll(Item_GObj* gobj)
     return false;
 }
 
-/// #it_802D2668
+void it_802D2668(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->xDD4_itemVar.pokemon.xE44 = 0.0f;
+    Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
+    ip->entered_hitlag = efLib_PauseAll;
+    ip->exited_hitlag = efLib_ResumeAll;
+}
 
 bool itHouou_UnkMotion2_Anim(Item_GObj* gobj)
 {
@@ -115,7 +122,15 @@ bool itHouou_UnkMotion3_Coll(Item_GObj* gobj)
     return false;
 }
 
-/// #it_802D290C
+void it_802D290C(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itHououAttr* attr = ip->xC4_article_data->x4_specialAttributes;
+    Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
+    ip->entered_hitlag = efLib_PauseAll;
+    ip->exited_hitlag = efLib_ResumeAll;
+    ip->xDD4_itemVar.pokemon.xE44 = attr->x18;
+}
 
 bool itHouou_UnkMotion4_Anim(Item_GObj* gobj)
 {

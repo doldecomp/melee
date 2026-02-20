@@ -21,8 +21,8 @@
 #include <melee/lb/types.h>
 #include <melee/sc/types.h>
 
-// Filename is just a guess, based on some strings in the file
-// Seems to be Tournament game code
+/// Filename is just a guess, based on some strings in the file
+/// Seems to be Tournament game code
 
 extern TmBoxArrays* lbl_804771B8;
 extern HSD_Archive* lbl_804D6638;

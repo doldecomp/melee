@@ -1252,7 +1252,7 @@ void un_80306D14(void)
         lbAudioAx_800237A8(0xAB, 0x7F, 0x40);
     }
 }
-// Attempt 7: Try struct-based array access
+/// Attempt 7: Try struct-based array access
 
 /* 82.6% match */
 void un_80306D70(s32 arg0)
@@ -2864,8 +2864,8 @@ void un_80312018_OnFrame(void)
 /* 91.8% match */
 void un_80312050(void)
 {
-    Point3d interest;
-    Point3d sp98;
+    Vec3 interest;
+    Vec3 sp98;
     Mtx viewMtx;
     Vec3 up;
     Vec3 left;

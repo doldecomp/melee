@@ -50,7 +50,15 @@ bool itLugia_UnkMotion1_Coll(Item_GObj* gobj)
     return false;
 }
 
-/// #it_802D1580
+void it_802D1580(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itLugiaAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    ip->xDD4_itemVar.lugia.xE50.x = -attrs->x4;
+    Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
+    ip->entered_hitlag = efLib_PauseAll;
+    ip->exited_hitlag = efLib_ResumeAll;
+}
 
 bool itLugia_UnkMotion2_Anim(Item_GObj* gobj)
 {

@@ -26,7 +26,7 @@ void ftCo_800CE620(HSD_GObj*); /* extern */
 void ftCo_800CE650(HSD_GObj*); /* extern */
 void it_8028E938(Item_GObj*);  /* extern */
 
-// grounded
+/// grounded
 void ftCo_Attack_800CDD14(Fighter_GObj* fighter_gobj)
 {
     Fighter* fighter = GET_FIGHTER(fighter_gobj);
@@ -46,7 +46,7 @@ void ftCo_Attack_800CDD14(Fighter_GObj* fighter_gobj)
     }
 }
 
-// in air
+/// in air
 void ftCo_800CDDA0(Fighter_GObj* fighter_gobj)
 {
     Fighter* fighter = GET_FIGHTER(fighter_gobj);
@@ -104,7 +104,7 @@ void ftCo_800CDE94(Fighter* fighter, Vec3* arg1, Vec3* arg2)
     MTXMultVec(HSD_JObjGetMtxPtr(fighterbone_jobj), &pos, arg2);
 }
 
-// grounded
+/// grounded
 void ftCo_800CDF5C(Fighter_GObj* fighter_gobj)
 {
     Fighter* fighter;
@@ -125,7 +125,7 @@ void ftCo_800CDF5C(Fighter_GObj* fighter_gobj)
     }
 }
 
-// in air
+/// in air
 void ftCo_800CE010(Fighter_GObj* fighter_gobj)
 {
     Fighter* fighter;
@@ -147,7 +147,7 @@ void ftCo_800CE010(Fighter_GObj* fighter_gobj)
     }
 }
 
-// landing?
+/// landing?
 void ftCo_800CE0CC(HSD_GObj* fighter_gobj)
 {
     Fighter* fighter;
@@ -169,7 +169,7 @@ void ftCo_800CE0CC(HSD_GObj* fighter_gobj)
     fighter->accessory4_cb = ftCo_800CE1D4;
 }
 
-// Entering air?
+/// Entering air?
 void ftCo_800CE14C(HSD_GObj* fighter_gobj)
 {
     Fighter* fighter;
@@ -192,7 +192,7 @@ void ftCo_800CE14C(HSD_GObj* fighter_gobj)
     fighter->accessory4_cb = ftCo_800CE1D4;
 }
 
-// LGun accessory4 callback function (ran after fire input already processed)
+/// LGun accessory4 callback function (ran after fire input already processed)
 #pragma push
 #pragma dont_inline on
 void ftCo_800CE1D4(HSD_GObj* fighter_gobj)
@@ -331,7 +331,7 @@ void ft_800CE5A0(Fighter_GObj* fighter_gobj)
     fighter->take_dmg_cb = ftCo_800CE620;
 }
 
-// Local function?
+/// Local function?
 void ftCo_800CE620(HSD_GObj* fighter_gobj)
 {
     Fighter* fighter = GET_FIGHTER(fighter_gobj);

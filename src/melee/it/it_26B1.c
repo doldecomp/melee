@@ -866,7 +866,7 @@ void it_8026BD9C(HSD_GObj* gobj)
     ip->xDC8_word.flags.x1A = true;
 }
 
-// 0x8026BDB4 // Identical to previous function except for the toggle bit
+/// 0x8026BDB4 // Identical to previous function except for the toggle bit
 void it_8026BDB4(HSD_GObj* gobj) // Toggle 0x1A of 0xDC8 word OFF
 {
     Item* ip = GET_ITEM(gobj);

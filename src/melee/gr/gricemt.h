@@ -126,7 +126,7 @@ extern f32 grIm_804DB570;
 /* 1F91A4 */ void fn_801F91A4(void);
 /* 1F91A8 */ HSD_GObj* fn_801F91A8(HSD_GObj*);
 /* 1F91EC */ UNK_RET grIceMt_801F91EC(HSD_GObj*);
-/* 1F929C */ void grIceMt_801F929C(HSD_GObj* arg0);
+/* 1F929C */ void grIceMt_801F929C(HSD_GObj* arg0, void* arg1);
 /* 1F9338 */ void fn_801F9338(Ground*, int, CollData*, s32, mpLib_GroundEnum,
                               float);
 /* 1F9448 */ void fn_801F9448(Ground*, int, CollData*, s32, mpLib_GroundEnum,

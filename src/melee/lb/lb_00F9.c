@@ -339,7 +339,7 @@ bool lb_800117F4(DynamicsDesc* arg0, GXColor* arg1, GXColor* arg2, int arg3,
     return true;
 }
 
-void lb_800119DC(Point3d* arg0, int arg1, float arg2, float arg3, float arg4)
+void lb_800119DC(Vec3* arg0, int arg1, float arg2, float arg3, float arg4)
 {
     struct lb_80011A50_t sp1C;
     sp1C.x0 = 2;

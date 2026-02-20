@@ -84,7 +84,7 @@ void fn_8012EC7C(Fighter_GObj* gobj)
 
 void fn_8012EDE8(Fighter_GObj* gobj)
 {
-    Point3d sp18;
+    Vec3 sp18;
     Fighter* fp = GET_FIGHTER(gobj);
     FtMotionId motion = fp->motion_id;
     if ((motion != 0x16B) && ((motion >= 0x16B) || (motion != 0x167))) {
