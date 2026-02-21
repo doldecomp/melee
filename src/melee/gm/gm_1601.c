@@ -4,6 +4,7 @@
 
 #include "gm_unsplit.h"
 #include "gmmain_lib.h"
+#include "gmstamina.h"
 #include "runtime.h"
 #include "stddef.h"
 
@@ -1618,9 +1619,14 @@ void gm_80167320(int slot, bool arg1)
     }
 }
 
-/// #gm_80167470
-
-/// #gm_801674C4
+void gm_80167470(s32 arg0, s32 arg1)
+{
+    if ((s32) gm_801A4310() != 0x1F) {
+        return;
+    } else {
+        gm_801B97C4(arg0, arg1);
+    }
+}
 
 /// #fn_8016758C
 

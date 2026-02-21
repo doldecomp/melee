@@ -169,7 +169,7 @@ struct lbl_8046B488_t;
 /* 167194 */ int fn_80167194(MatchEnd*);
 /* 16719C */ void fn_8016719C(s32, s32);
 /* 167320 */ void gm_80167320(int slot, bool);
-/* 167470 */ void gm_80167470(int, bool);
+/* 167470 */ void gm_80167470(long, long);
 /* 1674C4 */ UNK_RET gm_801674C4(UNK_PARAMS);
 /* 16758C */ void fn_8016758C(void);
 /* 167638 */ s32 fn_80167638(s32, Vec3*, Vec3*);
