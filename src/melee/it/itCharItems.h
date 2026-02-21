@@ -525,8 +525,8 @@ typedef struct itSamusBombAttributes {
 } itSamusBombAttributes;
 
 typedef struct itSamusBomb_ItemVars {
-    /* +0 +DD4 */ char pad_0[0x4];
-    /* +4 +DD8 */ s32 xDD8;
+    /* +0 +DD4 */ bool x0;
+    /* +4 +DD8 */ Fighter_GObj* owner;
 } itSamusBomb_ItemVars;
 
 typedef struct itSamusChargeshot_ItemVars {

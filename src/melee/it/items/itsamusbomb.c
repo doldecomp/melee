@@ -48,7 +48,7 @@ void it_802B4BA0(Item_GObj* gobj)
 
     ip->x40_vel.y = ip->xCC_item_attr->x18;
     ip->xDB4_itcmd_var2 = 0;
-    ip->xDD4_itemVar.bombhei.xDD8 = (long) ip->owner;
+    ip->xDD4_itemVar.samusbomb.owner = ip->owner;
     it_80275158(gobj, attr->x0);
     it_8026B3A8(gobj);
     Item_80268E5C((HSD_GObj*) gobj, 1, ITEM_ANIM_UPDATE);
@@ -195,7 +195,7 @@ bool it_2725_Logic50_Reflected(Item_GObj* gobj)
     if (yvel < 0.0f) {
         ip->x40_vel.y = -yvel * ip->xC70;
     }
-    ip->xDD4_itemVar.bombhei.xDD8 = 0;
+    ip->xDD4_itemVar.samusbomb.owner = NULL;
     return false;
 }
 
@@ -212,7 +212,7 @@ void it_802B53CC(Item_GObj* gobj)
     it_8026BD24(gobj);
     it_8027518C(gobj);
     ip->on_accessory = it_802B5478;
-    ip->xDD4_itemVar.bombhei.xDD4 = 1;
+    ip->xDD4_itemVar.samusbomb.x0 = true;
 }
 
 bool itSamusbomb_UnkMotion3_Anim(Item_GObj* gobj)
@@ -224,14 +224,14 @@ void it_802B5478(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
 
-    if (ip->xDD4_itemVar.bombhei.xDD4 != 0) {
-        ip->xDD4_itemVar.bombhei.xDD4 = 0;
+    if (ip->xDD4_itemVar.samusbomb.x0) {
+        ip->xDD4_itemVar.samusbomb.x0 = false;
 
-        if (ip->xDD4_itemVar.bombhei.xDD8 != NULL &&
+        if (ip->xDD4_itemVar.samusbomb.owner != NULL &&
             ftSs_Init_80128A1C(gobj, ip->x5D4_hitboxes, ip->scl))
         {
-            ftSs_Init_80128944((HSD_GObj*) ip->xDD4_itemVar.bombhei.xDD8,
-                               ip->pos.x, ip->x5D4_hitboxes[0].hit.scale);
+            ftSs_Init_80128944(ip->xDD4_itemVar.samusbomb.owner, ip->pos.x,
+                               ip->x5D4_hitboxes[0].hit.scale);
         }
     }
 }
@@ -240,5 +240,5 @@ void itSamusBomb_Logic50_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     Item* ip = GET_ITEM(gobj);
     it_8026B894(gobj, ref_gobj);
-    ip->xDD4_itemVar.samusbomb.xDD8 = 0;
+    ip->xDD4_itemVar.samusbomb.owner = NULL;
 }
