@@ -84,7 +84,7 @@ struct lbl_8046B488_t;
 /* 162F18 */ bool gm_80162F18(void);
 /* 162F68 */ u8 gm_80162F68(void);
 /* 162FD0 */ int gm_80162FD0(u8);
-/* 162FF4 */ UNK_RET fn_80162FF4(s8 ckind, int);
+/* 162FF4 */ long fn_80162FF4(u8 ckind, unsigned long);
 /* 163040 */ int gm_80163040(void);
 /* 1630C4 */ bool fn_801630C4(void);
 /* 163114 */ bool gm_80163114(void);

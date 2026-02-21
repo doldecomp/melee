@@ -997,7 +997,17 @@ int gm_80162FD0(u8 i)
     return *gmMainLib_8015D310(i);
 }
 
-/// #fn_80162FF4
+s32 fn_80162FF4(u8 ckind, u32 arg1)
+{
+    long* temp_r3;
+
+    temp_r3 = gmMainLib_8015D310(gm_80164024(ckind));
+    if (*temp_r3 < arg1) {
+        *temp_r3 = arg1;
+        return 1;
+    }
+    return 0;
+}
 
 /// #gm_80163040
 
