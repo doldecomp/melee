@@ -1140,7 +1140,26 @@ u32 gm_801631CC(u8 i)
     return *gmMainLib_8015D06C(i);
 }
 
-/// #gm_801631F0
+u32 gm_801631F0(void)
+{
+    u32 var_r0;
+    u32 var_r29;
+    s32 var_r30;
+
+    var_r30 = 0;
+    var_r29 = 0;
+    do {
+        if ((u32) (var_r29 + *gmMainLib_8015D06C((u8) var_r30)) > (u32) -1) {
+            var_r0 = (u32) -1;
+        } else {
+            var_r0 = var_r29 + *gmMainLib_8015D06C((u8) var_r30);
+        }
+        var_r30 += 1;
+        var_r29 = var_r0;
+    } while (var_r30 < 0x19);
+
+    return var_r29;
+}
 
 u16 gm_80163274(u8 i)
 {
