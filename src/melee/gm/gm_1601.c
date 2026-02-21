@@ -1064,7 +1064,22 @@ bool gm_80163114(void)
     return true;
 }
 
-/// #gm_80163164
+u8 gm_80163164(void)
+{
+    s32 i;
+    u8 min;
+
+    i = 0;
+    min = 4;
+    do {
+        if (min > (u8) *gmMainLib_8015D3E4((u8) i)) {
+            min = *gmMainLib_8015D3E4((u8) i);
+        }
+        i += 1;
+    } while (i < 0x19);
+
+    return min;
+}
 
 u32 gm_801631CC(u8 i)
 {
