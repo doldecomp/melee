@@ -2453,7 +2453,7 @@ void fn_8016A488(s32 arg0)
 void gm_8016A92C(StartMeleeRules* arg0)
 {
     lbl_8046B668[0]->unk1C = -2;
-    arg0->x58 = (UNK_T) &lbl_8046B668;
+    arg0->x58 = &lbl_8046B668;
 }
 
 bool gm_8016A944(void)
