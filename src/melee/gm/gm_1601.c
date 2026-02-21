@@ -1256,7 +1256,11 @@ void gm_801641E4(u8 stage, u8 enable)
     }
 }
 
-/// #gm_80164250
+s32 gm_80164250(u16 mask)
+{
+    return ((1 << mask) & gmMainLib_8015CC58()->stage_mask);
+}
+
 
 /// #fn_801642A0
 
