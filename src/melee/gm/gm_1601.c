@@ -1029,7 +1029,13 @@ u16 gm_80163274(u8 i)
 
 /// #gm_80163298
 
-/// #gm_8016332C
+s32 gm_8016332C(u8 arg0)
+{
+    if (!gmMainLib_8015D48C(arg0)) {
+        return *gmMainLib_8015D438(arg0);
+    }
+    return -1;
+}
 
 /// #gm_80163374
 

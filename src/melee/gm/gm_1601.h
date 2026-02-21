@@ -93,7 +93,7 @@ struct lbl_8046B488_t;
 /* 1631F0 */ u32 gm_801631F0(void);
 /* 163274 */ u16 gm_80163274(u8);
 /* 163298 */ UNK_RET gm_80163298(s8 c_kind, int);
-/* 16332C */ int gm_8016332C(int);
+/* 16332C */ long gm_8016332C(u8);
 /* 163374 */ void gm_80163374(int, void*, void*, void*, void*);
 /* 1634D4 */ int gm_801634D4(void*, void*, void*, void*);
 /* 16365C */ bool gm_8016365C(u8);
