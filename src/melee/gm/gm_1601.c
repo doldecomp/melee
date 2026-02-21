@@ -1049,7 +1049,13 @@ bool gm_8016365C(u8 arg0)
     return false;
 }
 
-/// #gm_80163690
+s32 gm_80163690(u8 arg0)
+{
+    if (gmMainLib_8015D6BC(arg0) == 0) {
+        return *gmMainLib_8015D6A4(arg0);
+    }
+    return -1;
+}
 
 /// #gm_801636D8
 
