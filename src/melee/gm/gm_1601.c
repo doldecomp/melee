@@ -851,7 +851,38 @@ u32 gm_8016279C(void)
 
 /// #gm_80162800
 
-/// #gm_801628C4
+void gm_801628C4(u32 arg0, u32 arg1)
+{
+    s32 temp_r31;
+    struct gmm_retval_ED98* temp_r3_3;
+    u32 var_r4;
+    u32* temp_r3;
+
+    temp_r3 = gmMainLib_8015CD14();
+    var_r4 = (u32) -1;
+    if ((*temp_r3 + arg0) > (u32) -1) {
+    } else {
+        var_r4 = *temp_r3 + arg0;
+    }
+    *temp_r3 = var_r4;
+
+    temp_r3 = gmMainLib_8015CD20();
+    temp_r31 = arg0 * arg1;
+    var_r4 = (u32) -1;
+    if ((*temp_r3 + temp_r31) > (u32) -1) {
+    } else {
+        var_r4 = *temp_r3 + temp_r31;
+    }
+    *temp_r3 = var_r4;
+
+    temp_r3_3 = gmMainLib_8015ED98();
+    var_r4 = (u32) -1;
+    if ((temp_r3_3->x4 + temp_r31) > (u32) -1) {
+    } else {
+        var_r4 = temp_r3_3->x4 + temp_r31;
+    }
+    temp_r3_3->x4 = var_r4;
+}
 
 long gm_80162968(u32 seconds)
 {
