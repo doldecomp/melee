@@ -1256,16 +1256,16 @@ void efLib_8005DBC0(HSD_Particle* particle)
 ///     s8* temp_r6;
 
 ///     temp_r6 = "Duplicate Free %08X\n";
-///     if ((u32) arg0->unk20 == (u32) (hsd_804D0E5C->unk258 + 0x3C)) {
+///     if ((u32) arg0->unk20 == (u32) (ptclref->unk258 + 0x3C)) {
 ///         hsd_8039D1E4(arg0, (s32) (temp_r6 + 0x70));
 ///     }
-///     if ((u32) arg0->unk20 == (u32) (hsd_804D0E5C->unk25C + 0x3C)) {
+///     if ((u32) arg0->unk20 == (u32) (ptclref->unk25C + 0x3C)) {
 ///         hsd_8039D1E4(arg0, (s32) (temp_r6 + 0x70));
 ///     }
-///     if ((u32) arg0->unk20 == (u32) (hsd_804D0E5C->unk260 + 0x3C)) {
+///     if ((u32) arg0->unk20 == (u32) (ptclref->unk260 + 0x3C)) {
 ///         hsd_8039D1E4(arg0, (s32) (temp_r6 + 0x70));
 ///     }
-///     if ((u32) arg0->unk20 == (u32) (hsd_804D0E5C->unk86C + 0x3C)) {
+///     if ((u32) arg0->unk20 == (u32) (ptclref->unk86C + 0x3C)) {
 ///         hsd_8039D1E4(arg0, (s32) (temp_r6 + 0x70));
 ///     }
 /// }

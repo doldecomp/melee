@@ -289,21 +289,6 @@ struct HSD_Generator {
     } aux; // 0x60
 };
 
-extern u32* ptclref[64];
-
-extern int psNumTexGroup[64];
-extern HSD_PSTexGroup** psTexGroupArray[64];
-
-extern HSD_PSFormGroup** psFormGroupArray[64];
-
-extern int psNumCmdList[64];
-extern HSD_PSCmdList** psCmdListArray[64];
-
-extern u16 numActiveParticles;
-extern u16 numPeakParticles;
-
-extern int (**psCallback)(HSD_Particle* part);
-
 #define PS_TEXDIRECTION
 #ifdef PS_TEXDIRECTION
 extern int texc[4][4];

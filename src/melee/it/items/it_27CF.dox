@@ -143,7 +143,7 @@ void it_802BAEEC(Item_GObj*);
 void it_802BAF0C(Item_GObj*);
 void it_802BCFC4(Item_GObj* gobj, f32* arg1, itChainSegment* chainSegment,
                  Item* item_data, f32 arg4);
-HSD_GObj* it_802BB290(Item_GObj* gobj, Vec3* arg1, f32 facing_dir);
+HSD_GObj* itSeakChain_Spawn(Item_GObj* gobj, Vec3* arg1, f32 facing_dir);
 void it_802BCF84(Item_GObj*);
 void it_802BD158(Item_GObj* gobj, Vec3*, int, float);
 
