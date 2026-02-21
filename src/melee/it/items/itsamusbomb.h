@@ -9,9 +9,8 @@
 
 #include <dolphin/mtx.h>
 
-/* 2B4AC8 */ void it_802B4AC8(Item_GObj* gobj, Vec3*, float facing_dir,
-                              float x);
-/* 2B4BA0 */ UNK_RET it_802B4BA0(UNK_PARAMS);
+/* 2B4AC8 */ Item_GObj* it_802B4AC8(Item_GObj* gobj, Vec3* pos, float facing_dir, float ignored);
+/* 2B4BA0 */ void it_802B4BA0(Item_GObj* arg0);
 /* 2B4C10 */ void it_802B4C10(Item_GObj* gobj);
 /* 2B4C38 */ bool itSamusbomb_UnkMotion0_Anim(Item_GObj* gobj);
 /* 2B4CC4 */ void itSamusbomb_UnkMotion0_Phys(Item_GObj* gobj);
@@ -31,7 +30,7 @@
 /* 2B5374 */ bool it_2725_Logic50_Reflected(Item_GObj*);
 /* 2B53CC */ void it_802B53CC(Item_GObj*);
 /* 2B5458 */ bool itSamusbomb_UnkMotion3_Anim(Item_GObj* gobj);
-/* 2B5478 */ UNK_RET it_802B5478(UNK_PARAMS);
+/* 2B5478 */ void it_802B5478(Item_GObj* gobj);
 /* 2B54E4 */ void itSamusBomb_Logic50_EvtUnk(Item_GObj*, Item_GObj*);
 /* 3F7220 */ extern ItemStateTable it_803F7220[];
 
