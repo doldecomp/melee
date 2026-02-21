@@ -2687,7 +2687,31 @@ s32 fn_801695BC(u8 arg0, s8 arg1, s8 arg2, u8* arg3, u8* arg4)
     return (s32) temp_r3;
 }
 
-/// #fn_801697FC
+s32 fn_801697FC(u8 arg0, s8 arg1, s8 arg2, s8 arg3, u8* arg4)
+{
+    s32 var_r4;
+    s8 var_r28;
+    u8 temp_r3;
+    u8* var_r3;
+
+    var_r28 = arg1;
+    temp_r3 = gm_80169238(arg0);
+    if ((s8) arg0 != 0x21) {
+        if ((arg2 == (s8) arg0) && (var_r28 == arg3)) {
+            var_r28 = (var_r28 + 1) % temp_r3;
+        }
+        var_r4 = 0;
+    loop_6:
+        var_r3 = (u8*) arg4 + var_r4;
+        if ((s8) *var_r3 != -2) {
+            *var_r3 = (u8) var_r28;
+            var_r4 += 1;
+            goto loop_6;
+        }
+        return (s32) var_r3;
+    }
+    return (s32) temp_r3;
+}
 
 s32 fn_8016989C(u8* arg0, s32 arg1, s32 arg2, u8* arg3, u8* arg4)
 {
