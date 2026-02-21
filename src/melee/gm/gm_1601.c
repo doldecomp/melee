@@ -997,16 +997,16 @@ int gm_80162FD0(u8 i)
     return *gmMainLib_8015D310(i);
 }
 
-s32 fn_80162FF4(u8 ckind, u32 arg1)
+bool fn_80162FF4(u8 ckind, u32 arg1)
 {
-    long* temp_r3;
+    s32* temp_r3;
 
     temp_r3 = gmMainLib_8015D310(gm_80164024(ckind));
     if (*temp_r3 < arg1) {
         *temp_r3 = arg1;
-        return 1;
+        return true;
     }
-    return 0;
+    return false;
 }
 
 /// #gm_80163040
@@ -1258,7 +1258,7 @@ void gm_801641E4(u8 stage, u8 enable)
 
 s32 gm_80164250(u16 mask)
 {
-    return ((1 << mask) & gmMainLib_8015CC58()->stage_mask);
+    return (1 << mask) & gmMainLib_8015CC58()->stage_mask;
 }
 
 /// #fn_801642A0
@@ -2456,12 +2456,12 @@ void gm_8016A92C(StartMeleeRules* arg0)
     arg0->x58 = (int) &lbl_8046B668;
 }
 
-s32 gm_8016A944(void)
+bool gm_8016A944(void)
 {
-    if ((u32) gm_8016AE50()->x58 != 0U) {
-        return 1;
+    if (gm_8016AE50()->x58 != NULL) {
+        return true;
     }
-    return 0;
+    return false;
 }
 
 UNK_T gm_8016A97C(void)

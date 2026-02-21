@@ -84,7 +84,7 @@ struct lbl_8046B488_t;
 /* 162F18 */ bool gm_80162F18(void);
 /* 162F68 */ u8 gm_80162F68(void);
 /* 162FD0 */ int gm_80162FD0(u8);
-/* 162FF4 */ long fn_80162FF4(u8 ckind, unsigned long);
+/* 162FF4 */ int fn_80162FF4(u8 ckind, unsigned long);
 /* 163040 */ int gm_80163040(void);
 /* 1630C4 */ bool fn_801630C4(void);
 /* 163114 */ bool gm_80163114(void);
@@ -244,7 +244,7 @@ gm_80167BC8(struct VsModeData*); // inits VsModeData from game rules
 /* 16A488 */ void fn_8016A488(long);
 /* 16A4C8 */ UNK_RET fn_8016A4C8(UNK_PARAMS);
 /* 16A92C */ void gm_8016A92C(StartMeleeRules*);
-/* 16A944 */ long gm_8016A944(UNK_PARAMS);
+/* 16A944 */ int gm_8016A944(UNK_PARAMS);
 /* 16A97C */ void* gm_8016A97C(void);
 /* 16A98C */ UNK_T gm_8016A98C(void);
 /* 16A998 */ long gm_8016A998(s8, s8);
