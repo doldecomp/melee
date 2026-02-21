@@ -2477,11 +2477,8 @@ UNK_T gm_8016A98C(void)
 s32 gm_8016A998(s8 arg0, s8 arg1)
 {
     s32 var_ctr;
-    gm_8016A998_t** base_ptr;
-    
-    base_ptr = lbl_8046B668;
     for (var_ctr = 0; var_ctr < 0x1B; var_ctr++) {
-        gm_8016A998_t* slot = (gm_8016A998_t*)(base_ptr + var_ctr);
+        gm_8016A998_t* slot = (gm_8016A998_t*)(lbl_8046B668 + var_ctr);
         
         if (slot->unk1C == -2) {
             slot->unk1D = 0xFEu; 
