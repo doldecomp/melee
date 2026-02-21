@@ -214,7 +214,7 @@ gm_80167BC8(struct VsModeData*); // inits VsModeData from game rules
 /* 169394 */ s32 gm_80169394(void);
 /* 1693BC */ bool gm_801693BC(int);
 /* 169434 */ void fn_80169434(s32 arg0);
-/* 169444 */ bool fn_80169444(int);
+/* 169444 */ bool fn_80169444(long);
 /* 1694A0 */ int gm_801694A0(HSD_GObj*);
 /* 169520 */ void* gm_80169520(void);
 /* 169530 */ void* gm_80169530(void);

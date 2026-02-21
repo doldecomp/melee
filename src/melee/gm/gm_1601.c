@@ -2318,8 +2318,18 @@ void fn_80169434(s32 arg0)
     M2C_FIELD(&lbl_8046B488, s32*, 0x1B8) = arg0;
 }
 
-/// #fn_80169444
+bool fn_80169444(s32 arg0)
+{
+    struct lbl_8046B488_t* gp = &lbl_8046B488;
 
+    if (gp->x1B8 != NULL) {
+        if (gp->x1B8() == 1) {
+            gp->x1B8 = NULL;
+            return true;
+        }
+    }
+    return false;
+}
 int gm_801694A0(HSD_GObj* arg0)
 {
     int i;
