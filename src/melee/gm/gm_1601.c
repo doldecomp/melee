@@ -1516,7 +1516,38 @@ bool gm_80164840(u8 ckind)
 
 /// #gm_80164910
 
-/// #gm_80164A0C
+s32 gm_80164A0C(u8 arg0)
+{
+    const u8* var_r4;
+    s32 var_ctr;
+    s32 var_r3;
+    u16* temp_r31;
+    u8 var_r0;
+    u8 key;
+
+    temp_r31 = gmMainLib_8015ED8C();
+    key = ((const u8*) lbl_803B75F8)[arg0 + 0x2AC];
+
+    var_r4 = (const u8*) lbl_803B75F8 + 0x2D0;
+    var_r3 = 0;
+    for (var_ctr = 0xB; var_ctr != 0; var_ctr -= 1) {
+        if (key == var_r4[1]) {
+            var_r3 = (s32) ((const u8*) lbl_803B75F8 + (var_r3 * 6));
+            var_r0 = *(u8*) (var_r3 + 0x2D0);
+            goto done;
+        }
+        var_r4 += 6;
+        var_r3 += 1;
+    }
+
+    var_r0 = 0xB;
+
+done:
+    if (var_r0 != 0xB) {
+        *temp_r31 &= (u16) ~(1ULL << var_r0);
+    }
+    return var_r3;
+}
 
 /// Are all unlockable characters unlocked?
 bool gm_80164ABC(void)
