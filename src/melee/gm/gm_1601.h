@@ -101,7 +101,7 @@ struct lbl_8046B488_t;
 /* 1636D8 */ void gm_801636D8(int, void*, void*, void*, void*);
 /* 163838 */ int gm_80163838(void*, void*, void*, void*);
 /* 1639C0 */ bool gm_801639C0(u8);
-/* 1639F4 */ int gm_801639F4(int);
+/* 1639F4 */ int gm_801639F4(u8);
 /* 163A3C */ void gm_80163A3C(int, void*, void*, void*, void*);
 /* 163B9C */ int gm_80163B9C(void*, void*, void*, void*);
 /* 163D24 */ bool fn_80163D24(void);
