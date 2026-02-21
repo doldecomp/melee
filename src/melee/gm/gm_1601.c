@@ -911,7 +911,17 @@ int gm_80162BD8(u8 arg0)
     return *gmMainLib_8015D0C0(arg0);
 }
 
-/// #fn_80162BFC
+bool fn_80162BFC(s8 ckind, int arg1)
+{
+    int* temp_r3;
+
+    temp_r3 = (int* ) gmMainLib_8015D0C0(gm_80164024((u8) ckind));
+    if ((u32) *temp_r3 < (u32) arg1) {
+        *temp_r3 = arg1;
+        return true;
+    }
+    return false;
+}
 
 /// #gm_80162C48
 
