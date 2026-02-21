@@ -29,10 +29,10 @@ Item_GObj* it_802B4AC8(Fighter_GObj* gobj, Vec3* pos, f32 facing_dir, f32 ignore
     if (n != NULL) {
         it_802B4BA0(n);
         db_80225DD8(n, gobj);
-		return n;
+        return n;
     } else {
-		return NULL;
-	}
+        return NULL;
+    }
 }
 
 void it_802B4BA0(Item_GObj* gobj)
@@ -58,7 +58,7 @@ bool itSamusbomb_UnkMotion0_Anim(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     f32 lifeTimer = ip->xD44_lifeTimer;
-	HSD_GObj* item_gobj = gobj->hsd_obj;
+    HSD_GObj* item_gobj = gobj->hsd_obj;
 
     itSamusBombAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
 
@@ -71,7 +71,7 @@ bool itSamusbomb_UnkMotion0_Anim(Item_GObj* gobj)
     } else {
         ip->xD44_lifeTimer = ip->xD44_lifeTimer - 1.0f;
     }
-	return false;
+    return false;
 }
 
 
@@ -144,7 +144,7 @@ void itSamusbomb_UnkMotion2_Phys(Item_GObj* gobj)
         lbVector_NormalizeXY(&ip->x7C);
         mult = attr->xC;
         ip->x7C.x *= mult;
-    	ip->x7C.y *= mult;
+        ip->x7C.y *= mult;
     }
 }
 
