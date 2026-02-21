@@ -20,7 +20,7 @@
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftSamus/types.h"
-#include "it/items/itsamuschargeshot.h"
+#include "it/items/itsamusmissile.h"
 #include "lb/lb_00B0.h"
 
 #include <baselib/forward.h>

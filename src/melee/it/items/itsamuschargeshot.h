@@ -31,7 +31,6 @@
 /* 2B613C */ bool itSamusChargeshot_Logic108_HitShield(Item_GObj*);
 /* 2B6144 */ bool it_2725_Logic108_ShieldBounced(Item_GObj*);
 /* 2B62B0 */ void itSamusChargeshot_Logic108_EvtUnk(Item_GObj*, Item_GObj*);
-/* 2B62D0 */ void it_802B62D0(Item_GObj*, Vec3* pos, bool, float facing_dir);
 /* 3F7288 */ extern ItemStateTable it_803F7288[];
 
 #endif

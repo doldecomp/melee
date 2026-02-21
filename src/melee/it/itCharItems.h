@@ -548,6 +548,22 @@ typedef struct itSamusGrapple_ItemVars {
     /* +16 ip+DEA */ u8 x16;
 } itSamusGrapple_ItemVars;
 
+typedef struct itSamusMissileAttributes {
+    /* +0 */ f32 pad_0[0xC];
+    /* +30 */ f32 x30;
+    /* +34 */ f32 x34;
+    /* +38 */ f32 x38;
+    /* +3C */ f32 x3C;
+} itSamusMissileAttributes;
+
+typedef struct itSamusMissile_ItemVars {
+    /* +0 +DD4 */ s32 xDD4;
+    /* +4 +DD8 */ s32 xDD8;
+    /* +8 +DDC */ s32 xDDC;
+    /* +C +DE0 */ HSD_GObj* xDE0;
+    /* +10 +DE4 */ HSD_GObj* xDE4;
+} itSamusMissile_ItemVars;
+
 typedef struct itSeakNeedleThrown_ItemVars {
     /*  +0 ip+DD4 */ char pad_0[0x4];
     /*  +4 ip+DD8 */ f32 xDD8;
