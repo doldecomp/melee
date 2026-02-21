@@ -163,7 +163,7 @@ inline void isSamusmissile_MotionAnim(Item_GObj* gobj)
     Fighter_GObj* temp_r3;
     Item* ip;
 
-    it_802B63F8(temp_r3);
+    it_802B63F8(gobj);
     ip = GET_ITEM(gobj);
     if (ip->xDB8_itcmd_var3 == 0U) {
         temp_r3 = ip->xDD4_itemVar.samusmissile.xDE0;
@@ -316,7 +316,7 @@ void it_2725_Logic52_EvtUnk(Item_GObj* gobj, Item_GObj* arg1)
     Item* ip = GET_ITEM(gobj);
 
     it_8026B894(gobj, (HSD_GObj* ) arg1);
-    if ((ip->xDD4_itemVar.samusmissile.xDE0 == arg1)) {
+    if (ip->xDD4_itemVar.samusmissile.xDE0 == arg1) {
         ip->xDD4_itemVar.samusmissile.xDE0 = NULL;
     }
 }
