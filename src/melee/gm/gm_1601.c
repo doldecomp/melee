@@ -1166,7 +1166,28 @@ u16 gm_80163274(u8 i)
     return *gmMainLib_8015D7EC(i);
 }
 
-/// #gm_80163298
+s32 gm_80163298(s8 c_kind, s32 arg1)
+{
+    s16* temp_r29;
+    s32 temp_r30;
+    u8 temp_r3;
+    u32* slot;
+
+    temp_r3 = gm_80164024((u8) c_kind);
+    temp_r29 = gmMainLib_8015D7EC(temp_r3);
+    temp_r30 = ((temp_r3 * 4) & 0x3FC) + 0x114;
+
+    slot = (u32*) ((u8*) gmMainLib_8015EDBC() + temp_r30);
+    if (*slot < (u16) arg1) {
+        *slot = (u16) arg1;
+    }
+
+    if ((u16) *temp_r29 < (u16) arg1) {
+        *temp_r29 = (s16) arg1;
+        return 1;
+    }
+    return 0;
+}
 
 s32 gm_8016332C(u8 arg0)
 {
