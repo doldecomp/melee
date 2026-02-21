@@ -507,7 +507,8 @@ struct lbl_8046B6A0_t {
         u8 x4_b7 : 1;
         u8 x5;
         u16 x6;
-        u16 x8;
+        u8 x8;
+        u8 x9;
         u8 respawn_timer;
         u8 xB;
         u16 xC;

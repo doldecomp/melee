@@ -89,6 +89,15 @@ struct PlayerInitData {
     /*0x20*/ float x20;
 };
 
+struct lbl_8046B668_t {
+    /* 0x00 */ u8 unk0;
+    /* 0x01 */ char pad_1[0x1B];
+    /* 0x1C */ s8 unk1C;
+    /* 0x1D */ s8 unk1D;
+    /* 0x20 */ char pad_20[0x38 - 0x1E];
+};
+STATIC_ASSERT(sizeof(struct lbl_8046B668_t) == 0x38);
+
 struct StartMeleeRules {
     u32 x0_0 : 3; // match mode? 1 = stock mode, 2 = coin mode?
     u32 x0_3 : 3;
@@ -173,7 +182,7 @@ struct StartMeleeRules {
         u8 x10_b0 : 1;
         u8 x10_b1 : 1;
     }* x54;
-    int x58;
+    struct lbl_8046B668_t (*x58)[27];
     u8 pad_x5C[0x60 - 0x5C];
 };
 
