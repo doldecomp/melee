@@ -1,14 +1,20 @@
 #include "itsamusbomb.h"
 
+#include "math_ppc.h"
+
 #include <placeholder.h>
 #include <platform.h>
 
+#include "baselib/mtx.h"
+#include "db/db.h"
+#include "ftSamus/ftSs_Init.h"
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
-
+#include "lb/lb_00B0.h"
+#include "lb/lbvector.h"
 
 Item_GObj* it_802B4AC8(Fighter_GObj* gobj, Vec3* pos, f32 facing_dir)
 {
@@ -42,12 +48,11 @@ void it_802B4BA0(Item_GObj* gobj)
 
     ip->x40_vel.y = ip->xCC_item_attr->x18;
     ip->xDB4_itcmd_var2 = 0;
-    ip->xDD4_itemVar.bombhei.xDD8 = (long)ip->owner;
+    ip->xDD4_itemVar.bombhei.xDD8 = (long) ip->owner;
     it_80275158(gobj, attr->x0);
     it_8026B3A8(gobj);
-    Item_80268E5C((HSD_GObj* ) gobj, 1, ITEM_ANIM_UPDATE);
+    Item_80268E5C((HSD_GObj*) gobj, 1, ITEM_ANIM_UPDATE);
 }
-
 
 void it_802B4C10(Item_GObj* gobj)
 {
@@ -57,23 +62,20 @@ void it_802B4C10(Item_GObj* gobj)
 bool itSamusbomb_UnkMotion0_Anim(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    f32 lifeTimer = ip->xD44_lifeTimer;
-    HSD_GObj* item_gobj = gobj->hsd_obj;
-
+    HSD_JObj* jobj = GET_JOBJ(gobj);
     itSamusBombAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
 
-    if (lifeTimer <= attr->x4) {
-        lb_8000BA0C(item_gobj, attr->x8);
+    if (ip->xD44_lifeTimer <= attr->x4) {
+        lb_8000BA0C(jobj, attr->x8);
     }
 
     if (ip->xD44_lifeTimer <= 0.0f) {
         it_802B53CC(gobj);
     } else {
-        ip->xD44_lifeTimer = ip->xD44_lifeTimer - 1.0f;
+        --ip->xD44_lifeTimer;
     }
     return false;
 }
-
 
 void itSamusbomb_UnkMotion0_Phys(Item_GObj* gobj) {}
 
@@ -117,6 +119,7 @@ static inline float my_sqrtf(float x)
     static const double _three = 3.0;
 
     volatile float y;
+
     if (x > 0) {
         double guess = __frsqrte((double) x);
         guess = _half * guess * (_three - guess * guess * x);
@@ -131,23 +134,18 @@ static inline float my_sqrtf(float x)
 
 void itSamusbomb_UnkMotion2_Phys(Item_GObj* gobj)
 {
-    Item* ip =  GET_ITEM(gobj);
+    Item* ip = GET_ITEM(gobj);
     itSamusBombAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
-
-    f32 x = ip->x7C.x;
-    f32 y = ip->x7C.y;
-
-    f32 dist_squared = (x * x) + (y * y);
-    f32 mult;
-
-    if (my_sqrtf(dist_squared) > attr->xC) {
-        lbVector_NormalizeXY(&ip->x7C);
-        mult = attr->xC;
-        ip->x7C.x *= mult;
-        ip->x7C.y *= mult;
+    if (my_sqrtf(VEC2_SQ_LEN(ip->x7C)) > attr->xC) {
+        f32 mult;
+        {
+            lbVector_NormalizeXY(&ip->x7C);
+            mult = attr->xC;
+            ip->x7C.x *= mult;
+            ip->x7C.y *= mult;
+        }
     }
 }
-
 
 bool itSamusbomb_UnkMotion2_Coll(Item_GObj* gobj)
 {
@@ -201,7 +199,6 @@ bool it_2725_Logic50_Reflected(Item_GObj* gobj)
     return false;
 }
 
-
 void it_802B53CC(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
@@ -218,7 +215,6 @@ void it_802B53CC(Item_GObj* gobj)
     ip->xDD4_itemVar.bombhei.xDD4 = 1;
 }
 
-
 bool itSamusbomb_UnkMotion3_Anim(Item_GObj* gobj)
 {
     return it_802751D8(gobj);
@@ -231,13 +227,14 @@ void it_802B5478(Item_GObj* gobj)
     if (ip->xDD4_itemVar.bombhei.xDD4 != 0) {
         ip->xDD4_itemVar.bombhei.xDD4 = 0;
 
-        if ((HSD_GObj*)ip->xDD4_itemVar.bombhei.xDD8 != NULL && ftSs_Init_80128A1C(gobj, ip->x5D4_hitboxes, ip->scl)) {
-            ftSs_Init_80128944((HSD_GObj*) ip->xDD4_itemVar.bombhei.xDD8, ip->pos.x, ip->x5D4_hitboxes[0].hit.scale);
+        if (ip->xDD4_itemVar.bombhei.xDD8 != NULL &&
+            ftSs_Init_80128A1C(gobj, ip->x5D4_hitboxes, ip->scl))
+        {
+            ftSs_Init_80128944((HSD_GObj*) ip->xDD4_itemVar.bombhei.xDD8,
+                               ip->pos.x, ip->x5D4_hitboxes[0].hit.scale);
         }
     }
 }
-
-
 
 void itSamusBomb_Logic50_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
