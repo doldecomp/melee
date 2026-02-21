@@ -1432,7 +1432,7 @@ s32 gm_80164250(u16 mask)
     return (1 << mask) & gmMainLib_8015CC58()->stage_mask;
 }
 
-s32 fn_801642A0(void)
+bool fn_801642A0(void)
 {
     s32 var_r30;
     s32 var_r29;
@@ -1453,9 +1453,9 @@ s32 fn_801642A0(void)
     } while (var_r29 < 0x1D);
 
     if (var_r30 > 1) {
-        return 0;
+        return false;
     }
-    return 1;
+    return true;
 }
 
 /// #gm_80164330
