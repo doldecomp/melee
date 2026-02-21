@@ -62,8 +62,8 @@ STATIC_ASSERT(sizeof(struct fn_80166CBC_arg0_t) == 0xA8);
 typedef struct gm_8016A998_s {
     /* 0x00 */ u8 unk0;
     /* 0x01 */ char pad_1[0x1B];
-    /* 0x1C */ s8 unk1C;        
-    /* 0x1D */ s8 unk1D;         
+    /* 0x1C */ s8 unk1C;
+    /* 0x1D */ s8 unk1D;
 } gm_8016A998_t;
 
 

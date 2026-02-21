@@ -2479,9 +2479,9 @@ s32 gm_8016A998(s8 arg0, s8 arg1)
     s32 var_ctr;
     for (var_ctr = 0; var_ctr < 0x1B; var_ctr++) {
         gm_8016A998_t* slot = (gm_8016A998_t*)(lbl_8046B668 + var_ctr);
-        
+
         if (slot->unk1C == -2) {
-            slot->unk1D = 0xFEu; 
+            slot->unk1D = 0xFEu;
             slot->unk1C = arg1;
             slot->unk0 = (u8)arg0;
             return var_ctr;
