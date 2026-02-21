@@ -5,27 +5,23 @@
 #include "gm_unsplit.h"
 #include "gmmain_lib.h"
 #include "gmstamina.h"
-#include "runtime.h"
 #include "stddef.h"
 
 #include "baselib/gobjplink.h"
 #include "baselib/particle.h"
 #include "cm/camera.h"
-#include "db/db.h"
-#include "ef/efasync.h"
-#include "ef/eflib.h"
+
+#include "gm/forward.h"
+
 #include "gr/ground.h"
 #include "gr/stage.h"
 #include "if/ifstatus.h"
-#include "it/item.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
-#include "lb/lb_0192.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lblanguage.h"
 #include "lb/lbtime.h"
 #include "mn/mnstagesel.h"
-#include "mp/mpcoll.h"
 #include "pl/player.h"
 #include "sc/types.h"
 #include "ty/toy.h"
@@ -947,7 +943,7 @@ bool fn_80162BFC(s8 ckind, int arg1)
 {
     int* temp_r3;
 
-    temp_r3 = (int* ) gmMainLib_8015D0C0(gm_80164024((u8) ckind));
+    temp_r3 = (int*) gmMainLib_8015D0C0(gm_80164024((u8) ckind));
     if ((u32) *temp_r3 < (u32) arg1) {
         *temp_r3 = arg1;
         return true;
@@ -2903,7 +2899,7 @@ void fn_8016A488(s32 arg0)
 
 void gm_8016A92C(StartMeleeRules* arg0)
 {
-    lbl_8046B668[0]->unk1C = -2;
+    lbl_8046B668[0].unk1C = -2;
     arg0->x58 = &lbl_8046B668;
 }
 
@@ -2920,22 +2916,22 @@ UNK_T gm_8016A97C(void)
     return &M2C_FIELD(&lbl_8046B668, UNK_T*, 0x1C);
 }
 
-UNK_T gm_8016A98C(void)
+struct lbl_8046B668_t (*gm_8016A98C(void))[NUM_LBL_8046B668]
 {
     return &lbl_8046B668;
 }
 
-s32 gm_8016A998(s8 arg0, s8 arg1)
+int gm_8016A998(s8 arg0, s8 arg1)
 {
-    s32 var_ctr;
-    for (var_ctr = 0; var_ctr < ARRAY_SIZE(lbl_8046B668); var_ctr++) {
-        gm_8016A998_t* slot = (gm_8016A998_t*)(lbl_8046B668 + var_ctr);
+    int i;
+    for (i = 0; i < ARRAY_SIZE(lbl_8046B668); i++) {
+        struct lbl_8046B668_t* slot = &lbl_8046B668[i];
 
         if (slot->unk1C == -2) {
             slot->unk1D = 0xFEu;
             slot->unk1C = arg1;
-            slot->unk0 = (u8)arg0;
-            return var_ctr;
+            slot->unk0 = (u8) arg0;
+            return i;
         }
     }
     return -1;

@@ -1,6 +1,8 @@
 #ifndef MELEE_GM_FORWARD_H
 #define MELEE_GM_FORWARD_H
 
+#define NUM_LBL_8046B668 27
+
 typedef enum MajorSceneKind {
     /* 00 */ MJ_TITLE,
     /* 01 */ MJ_MENU,

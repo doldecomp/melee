@@ -11,6 +11,9 @@
 #include "ft/forward.h"
 #include "gm/forward.h"
 #include "mn/forward.h"
+
+#include "mn/types.h"
+
 #include "sc/forward.h"
 
 #include <printf.h>
@@ -247,8 +250,8 @@ gm_80167BC8(struct VsModeData*); // inits VsModeData from game rules
 /* 16A92C */ void gm_8016A92C(StartMeleeRules*);
 /* 16A944 */ bool gm_8016A944(UNK_PARAMS);
 /* 16A97C */ void* gm_8016A97C(void);
-/* 16A98C */ UNK_T gm_8016A98C(void);
-/* 16A998 */ long gm_8016A998(s8, s8);
+/* 16A98C */ struct lbl_8046B668_t (*gm_8016A98C(void))[NUM_LBL_8046B668];
+/* 16A998 */ int gm_8016A998(s8, s8);
 /* 16A9E8 */ UNK_RET gm_8016A9E8(UNK_PARAMS);
 /* 16AC44 */ UNK_RET gm_8016AC44(s8 ckind, s8 costume_id);
 
