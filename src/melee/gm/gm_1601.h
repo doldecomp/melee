@@ -189,7 +189,7 @@ gm_80167BC8(struct VsModeData*); // inits VsModeData from game rules
 /* 1685D4 */ s8 gm_801685D4(u8, u8);
 /* 168638 */ void gm_80168638(MatchEnd*);
 /* 168710 */ void gm_80168710(MatchEnd*, VsModeData*);
-/* 1688AC */ int gm_801688AC(MatchEnd*);
+/* 1688AC */ long gm_801688AC(MatchEnd*);
 /* 168940 */ int gm_80168940(MatchEnd*);
 /* 16895C */ void gm_8016895C(HSD_JObj*, DynamicModelDesc*, int idx);
 /* 1689E4 */ void fn_801689E4(HSD_JObj*, DynamicModelDesc*, int);

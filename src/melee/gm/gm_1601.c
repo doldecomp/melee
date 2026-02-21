@@ -2161,9 +2161,32 @@ s8 gm_801685D4(u8 arg0, u8 arg1)
 /// #gm_80168638
 
 /// #gm_80168710
+s32 gm_801688AC(MatchEnd* arg0)
+{
+    u16 sum = 0;
+    struct MatchPlayerData* p = arg0->player_standings;
 
-/// #gm_801688AC
+    if ((u8) p[0].slot_type == 0) {
+        sum = p[0].xE;
+    }
+    if ((u8) p[1].slot_type == 0) {
+        sum += p[1].xE;
+    }
+    if ((u8) p[2].slot_type == 0) {
+        sum += p[2].xE;
+    }
+    if ((u8) p[3].slot_type == 0) {
+        sum += p[3].xE;
+    }
+    if ((u8) p[4].slot_type == 0) {
+        sum += p[4].xE;
+    }
+    if ((u8) p[5].slot_type == 0) {
+        sum += p[5].xE;
+    }
 
+    return (s32) sum;
+}
 int gm_80168940(MatchEnd* match_end)
 {
     if (match_end->player_standings[0].slot_type == 0) {
