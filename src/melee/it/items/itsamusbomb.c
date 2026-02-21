@@ -38,12 +38,12 @@ Item_GObj* it_802B4AC8(Fighter_GObj* gobj, Vec3* pos, f32 facing_dir, f32 ignore
 void it_802B4BA0(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itUnkAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+    itSamusBombAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
 
     ip->x40_vel.y = ip->xCC_item_attr->x18;
     ip->xDB4_itcmd_var2 = 0;
     ip->xDD4_itemVar.bombhei.xDD8 = (long)ip->owner;
-    it_80275158(gobj, attr->x0_float);
+    it_80275158(gobj, attr->x0);
     it_8026B3A8(gobj);
     Item_80268E5C((HSD_GObj* ) gobj, 1, ITEM_ANIM_UPDATE);
 }
@@ -60,9 +60,9 @@ bool itSamusbomb_UnkMotion0_Anim(Item_GObj* gobj)
     f32 lifeTimer = ip->xD44_lifeTimer;
 	HSD_GObj* item_gobj = gobj->hsd_obj;
 
-    itUnkAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+    itSamusBombAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
 
-    if (lifeTimer <= attr->x4_float) {
+    if (lifeTimer <= attr->x4) {
         lb_8000BA0C(item_gobj, attr->x8);
     }
 
@@ -132,7 +132,7 @@ static inline float my_sqrtf(float x)
 void itSamusbomb_UnkMotion2_Phys(Item_GObj* gobj)
 {
     Item* ip =  GET_ITEM(gobj);
-    itUnkAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+    itSamusBombAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
 
     f32 x = ip->x7C.x;
     f32 y = ip->x7C.y;
