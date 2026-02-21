@@ -19,32 +19,22 @@
 
 #include <dolphin/mtx.h>
 
-void ftSs_SpecialLw_8012ADF0(HSD_GObj* gobj)
+void ftSs_SpecialLw_8012ADF0(Fighter_GObj* gobj)
 {
-    Vec3 vec;
-    bool bool1;
-    Fighter* fp = getFighter(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     ftSs_DatAttrs* samus_attr = fp->dat_attrs;
-
-    u8 _[8];
-
-    if (fp->throw_flags_b0) {
-        fp->throw_flags_b0 = 0;
-        bool1 = 1;
-    } else {
-        bool1 = 0;
-    }
-    if (bool1) {
-        float vec_x;
+    if (ftCheckThrowB0(fp)) {
+        Vec3 vec;
+        PAD_STACK(4);
         lb_8000B1CC(fp->parts[FtPart_TopN].joint, NULL, &vec);
-        vec_x = samus_attr->x74_vec.x;
-        vec.x += (vec_x * fp->facing_dir);
+        vec.x += samus_attr->x74_vec.x * fp->facing_dir;
         vec.y += samus_attr->x74_vec.y;
         vec.z += samus_attr->x74_vec.z;
-        it_802B4AC8(gobj, &vec, fp->facing_dir, vec_x);
+        it_802B4AC8(gobj, &vec, fp->facing_dir);
         fp->accessory4_cb = NULL;
     }
 }
+
 
 void ftSs_SpecialLw_8012AEBC(HSD_GObj* gobj)
 {
