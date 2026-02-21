@@ -241,10 +241,10 @@ gm_80167BC8(struct VsModeData*); // inits VsModeData from game rules
 /* 16A434 */ void gm_8016A434(void);
 /* 16A450 */ void fn_8016A450(void);
 /* 16A46C */ void fn_8016A46C(void);
-/* 16A488 */ UNK_RET fn_8016A488(UNK_PARAMS);
+/* 16A488 */ UNK_RET fn_8016A488(long);
 /* 16A4C8 */ UNK_RET fn_8016A4C8(UNK_PARAMS);
 /* 16A92C */ void gm_8016A92C(StartMeleeRules*);
-/* 16A944 */ bool gm_8016A944(UNK_PARAMS);
+/* 16A944 */ long gm_8016A944(UNK_PARAMS);
 /* 16A97C */ void* gm_8016A97C(void);
 /* 16A98C */ UNK_T gm_8016A98C(void);
 /* 16A998 */ UNK_RET gm_8016A998(UNK_PARAMS);

@@ -2400,7 +2400,12 @@ void fn_8016A46C(void)
     lbl_8046B488.unk_10_b6 = 1;
 }
 
-/// #fn_8016A488
+void fn_8016A488(s32 arg0)
+{
+    if (gm_8016AE44()->hud_enabled) {
+        Player_80031848(arg0);
+    }
+}
 
 /// #fn_8016A4C8
 
@@ -2410,7 +2415,13 @@ void gm_8016A92C(StartMeleeRules* arg0)
     arg0->x58 = (int) &lbl_8046B668;
 }
 
-/// #gm_8016A944
+s32 gm_8016A944(void)
+{
+    if ((u32) gm_8016AE50()->x58 != 0U) {
+        return 1;
+    }
+    return 0;
+}
 
 UNK_T gm_8016A97C(void)
 {
