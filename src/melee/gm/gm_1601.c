@@ -1380,7 +1380,31 @@ s32 gm_80164250(u16 mask)
     return (1 << mask) & gmMainLib_8015CC58()->stage_mask;
 }
 
-/// #fn_801642A0
+s32 fn_801642A0(void)
+{
+    s32 var_r30;
+    s32 var_r29;
+    u8 var_r0;
+
+    var_r30 = 0;
+    var_r29 = 0;
+    do {
+        if ((1 << (u16) var_r29) & gmMainLib_8015CC58()->stage_mask) {
+            var_r0 = 1;
+        } else {
+            var_r0 = 0;
+        }
+        if (var_r0 != 0) {
+            var_r30 += 1;
+        }
+        var_r29 += 1;
+    } while (var_r29 < 0x1D);
+
+    if (var_r30 > 1) {
+        return 0;
+    }
+    return 1;
+}
 
 /// #gm_80164330
 
