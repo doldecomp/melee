@@ -514,9 +514,19 @@ typedef struct itPikachuthunderAttributes {
     /* +8 ip+DDC */ f32 x8;
 } itPikachuthunderAttributes;
 
+typedef struct itSamusBombAttributes {
+    /* +0 */ f32 x0;
+    /* +4 */ f32 x4;
+    /* +8 */ f32 x8;
+    /* +C */ f32 xC;
+    /* +10 */ f32 x10;
+    /* +14 */ f32 x14;
+    /* +18 */ f32 x18;
+} itSamusBombAttributes;
+
 typedef struct itSamusBomb_ItemVars {
-    /* +0 +DD4 */ char pad_0[0x4];
-    /* +4 +DD8 */ s32 xDD8;
+    /* +0 +DD4 */ bool x0;
+    /* +4 +DD8 */ Fighter_GObj* owner;
 } itSamusBomb_ItemVars;
 
 typedef struct itSamusChargeshot_ItemVars {

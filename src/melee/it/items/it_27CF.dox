@@ -128,7 +128,7 @@ HSD_GObj* it_802C4A40(Item_GObj*, Vec3*, f32);
 void it_802C573C(Item_GObj*);
 HSD_GObj* it_802C5000(Item_GObj*, Vec3*, s32, s32, f32);
 void it_802C519C(Item_GObj*, Vec3*, s32, s32, f32, f32);
-void it_802B4AC8(Item_GObj* gobj, Vec3*, f32 facing_dir, f32 x);
+void it_802B4AC8(Item_GObj* gobj, Vec3*, f32 facing_dir);
 void it_802C53F0(Item_GObj*, Vec3*, f32, f32, f32);
 s32 it_802E5F8C(Item_GObj*, Vec3*, s32, bool, f32, f32);
 void it_802950D4(Item_GObj*, bool);
