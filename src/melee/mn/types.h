@@ -173,7 +173,7 @@ struct StartMeleeRules {
         u8 x10_b0 : 1;
         u8 x10_b1 : 1;
     }* x54;
-    int x58;
+    UNK_T x58;
     u8 pad_x5C[0x60 - 0x5C];
 };
 
