@@ -911,7 +911,17 @@ int gm_80162BD8(u8 arg0)
     return *gmMainLib_8015D0C0(arg0);
 }
 
-/// #fn_80162BFC
+bool fn_80162BFC(s8 ckind, int arg1)
+{
+    int* temp_r3;
+
+    temp_r3 = (int* ) gmMainLib_8015D0C0(gm_80164024((u8) ckind));
+    if ((u32) *temp_r3 < (u32) arg1) {
+        *temp_r3 = arg1;
+        return true;
+    }
+    return false;
+}
 
 /// #gm_80162C48
 
@@ -944,7 +954,17 @@ int gm_80162DD4(u8 i)
     return *gmMainLib_8015D1E8(i);
 }
 
-/// #fn_80162DF8
+s32 fn_80162DF8(u8 ckind, u32 arg1)
+{
+    s32* temp_r3;
+
+    temp_r3 = gmMainLib_8015D1E8(gm_80164024(ckind));
+    if (*temp_r3 < arg1) {
+        *temp_r3 = arg1;
+        return 1;
+    }
+    return 0;
+}
 
 /// #gm_80162E44
 
@@ -977,7 +997,17 @@ int gm_80162FD0(u8 i)
     return *gmMainLib_8015D310(i);
 }
 
-/// #fn_80162FF4
+s32 fn_80162FF4(u8 ckind, u32 arg1)
+{
+    long* temp_r3;
+
+    temp_r3 = gmMainLib_8015D310(gm_80164024(ckind));
+    if (*temp_r3 < arg1) {
+        *temp_r3 = arg1;
+        return 1;
+    }
+    return 0;
+}
 
 /// #gm_80163040
 
@@ -1019,7 +1049,13 @@ u16 gm_80163274(u8 i)
 
 /// #gm_80163298
 
-/// #gm_8016332C
+s32 gm_8016332C(u8 arg0)
+{
+    if (!gmMainLib_8015D48C(arg0)) {
+        return *gmMainLib_8015D438(arg0);
+    }
+    return -1;
+}
 
 /// #gm_80163374
 
@@ -1033,7 +1069,13 @@ bool gm_8016365C(u8 arg0)
     return false;
 }
 
-/// #gm_80163690
+s32 gm_80163690(u8 arg0)
+{
+    if (!gmMainLib_8015D6BC(arg0)) {
+        return *gmMainLib_8015D6A4(arg0);
+    }
+    return -1;
+}
 
 /// #gm_801636D8
 
@@ -1047,7 +1089,13 @@ bool gm_801639C0(u8 arg0)
     return false;
 }
 
-/// #gm_801639F4
+int gm_801639F4(u8 arg0)
+{
+    if (!gmMainLib_8015D710(arg0)) {
+        return *gmMainLib_8015D6F8(arg0);
+    }
+    return -1;
+}
 
 /// #gm_80163A3C
 
@@ -1208,7 +1256,11 @@ void gm_801641E4(u8 stage, u8 enable)
     }
 }
 
-/// #gm_80164250
+s32 gm_80164250(u16 mask)
+{
+    return ((1 << mask) & gmMainLib_8015CC58()->stage_mask);
+}
+
 
 /// #fn_801642A0
 
@@ -2390,7 +2442,12 @@ void fn_8016A46C(void)
     lbl_8046B488.unk_10_b6 = 1;
 }
 
-/// #fn_8016A488
+void fn_8016A488(s32 arg0)
+{
+    if (gm_8016AE44()->hud_enabled) {
+        Player_80031848(arg0);
+    }
+}
 
 /// #fn_8016A4C8
 
@@ -2400,7 +2457,13 @@ void gm_8016A92C(StartMeleeRules* arg0)
     arg0->x58 = (int) &lbl_8046B668;
 }
 
-/// #gm_8016A944
+s32 gm_8016A944(void)
+{
+    if ((u32) gm_8016AE50()->x58 != 0U) {
+        return 1;
+    }
+    return 0;
+}
 
 UNK_T gm_8016A97C(void)
 {
