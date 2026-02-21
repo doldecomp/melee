@@ -138,12 +138,10 @@ void itSamusbomb_UnkMotion2_Phys(Item_GObj* gobj)
     itSamusBombAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
     if (my_sqrtf(VEC2_SQ_LEN(ip->x7C)) > attr->xC) {
         f32 mult;
-        {
-            lbVector_NormalizeXY(&ip->x7C);
-            mult = attr->xC;
-            ip->x7C.x *= mult;
-            ip->x7C.y *= mult;
-        }
+        lbVector_NormalizeXY(&ip->x7C);
+        mult = attr->xC;
+        ip->x7C.x *= mult;
+        ip->x7C.y *= mult;
     }
 }
 
