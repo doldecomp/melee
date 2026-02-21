@@ -1076,7 +1076,25 @@ bool fn_80162FF4(u8 ckind, u32 arg1)
     return false;
 }
 
-/// #gm_80163040
+s32 gm_80163040(void)
+{
+    s32 var_r0;
+    s32 var_r29;
+    s32 var_r30;
+
+    var_r30 = 0;
+    var_r29 = 0;
+    do {
+        if ((u32) (var_r29 + *gmMainLib_8015D310((u8) var_r30)) > (u32) -1) {
+            var_r0 = -1;
+        } else {
+            var_r0 = var_r29 + *gmMainLib_8015D310((u8) var_r30);
+        }
+        var_r30 += 1;
+        var_r29 = var_r0;
+    } while (var_r30 < 0x19);
+    return var_r29;
+}
 
 bool fn_801630C4(void)
 {
