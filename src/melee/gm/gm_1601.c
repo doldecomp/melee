@@ -1261,7 +1261,6 @@ s32 gm_80164250(u16 mask)
     return ((1 << mask) & gmMainLib_8015CC58()->stage_mask);
 }
 
-
 /// #fn_801642A0
 
 /// #gm_80164330
@@ -2453,7 +2452,7 @@ void fn_8016A488(s32 arg0)
 
 void gm_8016A92C(StartMeleeRules* arg0)
 {
-    lbl_8046B668.unk_1C = -2;
+    lbl_8046B668[0]->unk1C = -2;
     arg0->x58 = (int) &lbl_8046B668;
 }
 
@@ -2475,7 +2474,24 @@ UNK_T gm_8016A98C(void)
     return &lbl_8046B668;
 }
 
-/// #gm_8016A998
+s32 gm_8016A998(s8 arg0, s8 arg1)
+{
+    s32 var_ctr;
+    gm_8016A998_t** base_ptr;
+    
+    base_ptr = lbl_8046B668;
+    for (var_ctr = 0; var_ctr < 0x1B; var_ctr++) {
+        gm_8016A998_t* slot = (gm_8016A998_t*)(base_ptr + var_ctr);
+        
+        if (slot->unk1C == -2) {
+            slot->unk1D = 0xFEu; 
+            slot->unk1C = arg1;
+            slot->unk0 = (u8)arg0;
+            return var_ctr;
+        }
+    }
+    return -1;
+}
 
 /// #gm_8016A9E8
 
