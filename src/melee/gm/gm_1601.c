@@ -2214,7 +2214,7 @@ void gm_80168FC4(void)
 }
 
 /// #fn_80169000
-
+#pragma dont_inline on
 u8 gm_80169238(u8 ckind)
 {
     if (ckind >= ARRAY_SIZE(lbl_803D51A0)) {
@@ -2222,6 +2222,7 @@ u8 gm_80169238(u8 ckind)
     }
     return lbl_803D51A0[ckind].ncolors;
 }
+#pragma dont_inline reset
 
 u8 gm_80169264(u8 ckind)
 {
@@ -2372,11 +2373,149 @@ void fn_80169574(ssize_t size, void* buf)
     ((s8*) buf)[size] = -2;
 }
 
-/// #fn_801695BC
+s32 fn_801695BC(u8 arg0, s8 arg1, s8 arg2, u8* arg3, u8* arg4)
+{
+    u8 sp1C[0x0C];
+    s32 temp_r3_2;
+    s32 var_ctr_2;
+    s32 var_r28;
+    s32 var_r28_2;
+    s32 var_r7_2;
+    s32 var_r8;
+    s8 temp_r0;
+    s8 temp_r3_3;
+    s8 temp_r4;
+    s8 temp_r4_3;
+    s8 temp_r5;
+    s8 var_r7;
+    u32 var_ctr;
+    u8 temp_r0_2;
+    u8 temp_r3;
+    u8 temp_r3_4;
+    u8* temp_r4_2;
+    u8* temp_r6;
+    u8* var_r27;
+    u8* var_r3;
+    u8* var_r3_2;
+    u8* var_r6;
+    u8* temp_r27;
+
+    temp_r3 = gm_80169238(arg0);
+    if ((s8) arg0 != 0x21) {
+        var_r7 = 0;
+        if (temp_r3 > 0) {
+            temp_r3_2 = (s32) temp_r3 - 8;
+            if ((s32) temp_r3 > 8) {
+                var_ctr = (u32) (temp_r3_2 + 7) >> 3;
+                var_r6 = &sp1C[0];
+                if (temp_r3_2 > 0) {
+                    do {
+                        var_r6[0] = (u8) var_r7;
+                        var_r6[1] = (u8) (var_r7 + 1);
+                        temp_r5 = var_r7 + 4;
+                        var_r6[2] = (u8) (var_r7 + 2);
+                        temp_r4 = var_r7 + 5;
+                        temp_r3_3 = var_r7 + 6;
+                        var_r6[3] = (u8) (var_r7 + 3);
+                        temp_r0 = var_r7 + 7;
+                        var_r7 += 8;
+                        var_r6[4] = (u8) temp_r5;
+                        var_r6[5] = (u8) temp_r4;
+                        var_r6[6] = (u8) temp_r3_3;
+                        var_r6[7] = (u8) temp_r0;
+                        var_r6 += 8;
+                        var_ctr -= 1;
+                    } while (var_ctr != 0);
+                }
+            }
+            var_r3_2 = &sp1C[var_r7];
+            var_ctr_2 = (s32) temp_r3 - (s32) var_r7;
+            if ((s32) var_r7 < (s32) temp_r3) {
+                do {
+                    *var_r3_2 = (u8) var_r7;
+                    var_r3_2 += 1;
+                    var_r7 += 1;
+                    var_ctr_2 -= 1;
+                } while (var_ctr_2 != 0);
+            }
+        }
+
+        if (arg1 == (s8) arg0) {
+            sp1C[(s8) arg2] = 0xFF;
+        }
+
+        var_r27 = &sp1C[0];
+        var_r28 = 0;
+    loop_12:
+        if (var_r28 < (s32) temp_r3) {
+            temp_r4_2 = &sp1C[HSD_Randi((s32) temp_r3)];
+            temp_r3_4 = *temp_r4_2;
+            var_r28 += 1;
+            *temp_r4_2 = *var_r27;
+            *var_r27 = temp_r3_4;
+            var_r27 += 1;
+            goto loop_12;
+        }
+
+        var_r3 = arg3;
+        var_r8 = 0;
+        var_r7_2 = 0;
+    loop_19:
+        temp_r6 = &arg4[var_r7_2];
+        if ((s8) *temp_r6 != -2) {
+            if ((s8) arg0 == (s8) *var_r3) {
+                if ((s8) sp1C[var_r8 % temp_r3] == -1) {
+                    var_r8 += 1;
+                }
+                temp_r0_2 = sp1C[var_r8 % temp_r3];
+                var_r8 += 1;
+                *temp_r6 = temp_r0_2;
+            }
+            var_r7_2 += 1;
+            var_r3 += 1;
+            goto loop_19;
+        }
+
+        var_r28_2 = 1;
+    loop_26:
+        temp_r27 = &arg4[var_r28_2];
+        if ((s8) temp_r27[0] != -2) {
+            var_r3 = &arg3[var_r28_2];
+            if (((s8) arg0 == (s8) var_r3[0]) &&
+                ((s8) arg0 == (s8) var_r3[-1]))
+            {
+                var_r3 = (u8*) HSD_Randi(2);
+                if (var_r3 != NULL) {
+                    temp_r4_3 = (s8) temp_r27[0];
+                    temp_r27[0] = temp_r27[-1];
+                    temp_r27[-1] = (u8) temp_r4_3;
+                }
+            }
+            var_r28_2 += 1;
+            goto loop_26;
+        }
+        return (s32) var_r3;
+    }
+    return (s32) temp_r3;
+}
 
 /// #fn_801697FC
 
-/// #fn_8016989C
+s32 fn_8016989C(u8* arg0, s32 arg1, s32 arg2, u8* arg3, u8* arg4)
+{
+    s32 temp_r3;
+    s32 var_r30;
+    u8* var_r31;
+
+    var_r31 = arg0;
+    var_r30 = 0;
+    do {
+        temp_r3 = fn_801695BC(*var_r31, arg1, arg2, arg3, arg4);
+        var_r30 += 1;
+        var_r31 += 1;
+    } while (var_r30 < 3);
+    return temp_r3;
+}
 
 /// #fn_80169900
 
