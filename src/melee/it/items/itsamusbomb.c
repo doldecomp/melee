@@ -10,7 +10,7 @@
 #include "it/item.h"
 
 
-Item_GObj* it_802B4AC8(Fighter_GObj* gobj, Vec3* pos, f32 facing_dir, f32 ignored)
+Item_GObj* it_802B4AC8(Fighter_GObj* gobj, Vec3* pos, f32 facing_dir)
 {
     HSD_GObj* n;
     SpawnItem si;

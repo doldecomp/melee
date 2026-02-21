@@ -9,7 +9,7 @@
 
 #include <dolphin/mtx.h>
 
-/* 2B4AC8 */ Item_GObj* it_802B4AC8(Item_GObj* gobj, Vec3* pos, float facing_dir, float ignored);
+/* 2B4AC8 */ Item_GObj* it_802B4AC8(Item_GObj* gobj, Vec3* pos, float facing_dir);
 /* 2B4BA0 */ void it_802B4BA0(Item_GObj* arg0);
 /* 2B4C10 */ void it_802B4C10(Item_GObj* gobj);
 /* 2B4C38 */ bool itSamusbomb_UnkMotion0_Anim(Item_GObj* gobj);
