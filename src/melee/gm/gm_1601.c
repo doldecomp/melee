@@ -1854,24 +1854,12 @@ void gm_80167470(s32 arg0, s32 arg1)
 void fn_8016758C(void)
 {
     lbl_8046B6A0_t* mi = gm_8016AE44();
+    int i;
 
-    if (mi->FighterMatchInfo[0].x8 != 0) {
-        mi->FighterMatchInfo[0].x8--;
-    }
-    if (mi->FighterMatchInfo[1].x8 != 0) {
-        mi->FighterMatchInfo[1].x8--;
-    }
-    if (mi->FighterMatchInfo[2].x8 != 0) {
-        mi->FighterMatchInfo[2].x8--;
-    }
-    if (mi->FighterMatchInfo[3].x8 != 0) {
-        mi->FighterMatchInfo[3].x8--;
-    }
-    if (mi->FighterMatchInfo[4].x8 != 0) {
-        mi->FighterMatchInfo[4].x8--;
-    }
-    if (mi->FighterMatchInfo[5].x8 != 0) {
-        mi->FighterMatchInfo[5].x8--;
+    for (i = 0; i < ARRAY_SIZE(mi->FighterMatchInfo); i++) {
+        if (mi->FighterMatchInfo[i].x8 != 0) {
+            mi->FighterMatchInfo[i].x8--;
+        }
     }
 }
 
