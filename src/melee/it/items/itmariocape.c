@@ -11,8 +11,6 @@ HSD_GObj* it_802B2560(Item_GObj* arg0, f32 farg0, Vec3* arg1, enum Fighter_Part 
 {
     SpawnItem spawn;
     Item_GObj* temp_r3;
-    
-
     spawn.kind = arg3;
     spawn.prev_pos = *arg1;
     spawn.pos = spawn.prev_pos;
