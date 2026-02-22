@@ -6,6 +6,7 @@
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
+#include "db/db.h"
 
 HSD_GObj* it_802B2560(Item_GObj* arg0, f32 farg0, Vec3* arg1, enum Fighter_Part arg2, u32 arg3)
 {
