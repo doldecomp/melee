@@ -644,17 +644,16 @@ struct MatchEnd {
     /* 0x0F */ u8 loser;
     /* 0x10 */ u8 winners[6];
     /* 0x16 */ u8 team_winners[5];
-    /* 0x1B */ struct MatchTeamData team_standings[5]; // 0xC * 5 = 0x3C
-    /* 0x57 */ u8 x57_pad;
+    /* 0x1B */ struct MatchTeamData team_standings[5];     // 0xC * 5 = 0x3C
     /* 0x58 */ struct MatchPlayerData player_standings[6]; // 0xA8 * 6 = 0x3F0
-    /* 0x448 */ u8 _x448[4];
+    /* 0x448 */ u8 _x448[4]; // offset by 1 because of the previous struct
     /* 0x44c */ struct UnkResultPlayerData {
         u8 x0[0x100];
         char pad_x100[0x508 - 0x100];
     } x44C[4]; // 0x508 * 4 = 0x1420
     /* 0x186C */ u8 pad_x186C[0x227C - 0x186C];
 };
-STATIC_ASSERT(sizeof(struct MatchEnd) == 0x2280);
+STATIC_ASSERT(sizeof(struct MatchEnd) == 0x227C);
 
 struct MatchExitInfo {
     int x0;
