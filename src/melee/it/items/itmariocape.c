@@ -7,6 +7,33 @@
 #include "it/it_2725.h"
 #include "it/item.h"
 
+HSD_GObj* it_802B2560(Item_GObj* arg0, f32 farg0, Vec3* arg1, enum Fighter_Part arg2, u32 arg3)
+{
+    SpawnItem spawn;
+    Item_GObj* temp_r3;
+    
+
+    spawn.kind = arg3;
+    spawn.prev_pos = *arg1;
+    spawn.pos = spawn.prev_pos;
+    spawn.facing_dir = farg0;
+    spawn.x3C_damage = 0;
+    spawn.vel.z = 0;
+    spawn.vel.y = 0;
+    spawn.vel.x = 0;
+    spawn.x0_parent_gobj = arg0;
+    spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
+    spawn.x44_flag.b0 = true;
+    spawn.x40 = 0;
+    temp_r3 = Item_80268B18(&spawn);
+    if(temp_r3 != NULL){
+        Item_8026AB54(temp_r3, arg0, arg2);
+        db_80225DD8(temp_r3, arg0);
+        return temp_r3;
+    }
+    return NULL;
+}
+
 void it_802B2674(Item_GObj* item_gobj)
 {
     int pad[1];
