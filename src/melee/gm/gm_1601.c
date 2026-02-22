@@ -2915,7 +2915,40 @@ s32 fn_8016989C(u8* arg0, s32 arg1, s32 arg2, u8* arg3, u8* arg4)
 
 /// #fn_80169F50
 
-/// #fn_8016A09C
+void fn_8016A09C(void)
+{
+    s32 var_r29;
+    s32 var_r30;
+    s32 var_r31;
+    PAD_STACK(4);
+
+    var_r29 = 0;
+    gm_8016AE44();
+    lbl_8046B488.unk_10_b1 = 1;
+    var_r30 = 0;
+    lbl_8046B488.unk_10_b0 = 0;
+loop_1:
+    if (Player_GetPlayerSlotType(var_r30) == Gm_PKind_NA) {
+        if (var_r29 < (s32) lbl_8046B488.x9) {
+            Player_SetFlagsBit1(var_r30);
+            var_r29 += 1;
+            goto block_4;
+        }
+    } else {
+    block_4:
+        var_r30 += 1;
+        if (var_r30 < 6) {
+            goto loop_1;
+        }
+    }
+    var_r31 = 0;
+    do {
+        if (Player_GetFlagsBit1(var_r31) != 0) {
+            Player_SetTeam(var_r31, 4);
+        }
+        var_r31 += 1;
+    } while (var_r31 < 6);
+}
 
 void gm_8016A164(void)
 {
