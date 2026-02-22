@@ -1055,10 +1055,14 @@ void gm_80162B4C(s32 amount)
 
 void gm_80162B98(void)
 {
-    u32* temp_r3;
+    u32 result;
+    u32 val;
+    u32* ptr;
 
-    temp_r3 = gmMainLib_8015CD8C();
-    *temp_r3 = MAX(*temp_r3 + 1, -1);
+    ptr = gmMainLib_8015CD8C();
+    val = *ptr;
+    result = (val + 1 > (u32) -1) ? (u32) -1 : val + 1;
+    *ptr = result;
 }
 
 int gm_80162BD8(u8 arg0)

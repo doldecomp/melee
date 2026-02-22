@@ -78,6 +78,16 @@ bool itTincle_UnkMotion2_Anim(Item_GObj* gobj)
     return false;
 }
 
+bool itTincle_UnkMotion2_Coll(Item_GObj* gobj)
+{
+    extern void it_802EC870(Item_GObj*, int);
+    PAD_STACK(8);
+    if (it_8026DAA8(gobj) != 0) {
+        it_802EC870(gobj, 1);
+    }
+    return false;
+}
+
 /// #itTincle_UnkMotion2_Phys
 
 /// #itTincle_UnkMotion2_Coll

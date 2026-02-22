@@ -3275,6 +3275,15 @@ void ftKb_Init_UnkMotionStates5(void)
     Player_80031DC8(ftKb_SpecialN_800EED50);
 }
 
+void ftKb_SpecialN_800EEEC4(HSD_GObj* gobj, FighterKind kind)
+{
+    HSD_GObjEvent cb;
+
+    if ((cb = ftKb_Init_803C9CC8[kind * 2 + 1]) != NULL) {
+        cb(gobj);
+    }
+}
+
 /// #ftKb_SpecialN_800EEEC4
 
 /// #ftKb_UnkMtxFunc0

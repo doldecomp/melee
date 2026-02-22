@@ -132,6 +132,18 @@ void itFlipper_Logic20_Thrown(Item_GObj* gobj)
     Item_80268E5C(gobj, 3, ITEM_ANIM_UPDATE | ITEM_DROP_UPDATE);
 }
 
+bool itFlipper_UnkMotion3_Anim(Item_GObj* gobj)
+{
+    extern void it_80291254(Item_GObj*);
+    Item* ip = GET_ITEM(gobj);
+
+    ip->xDD4_itemVar.flipper.xDD4--;
+    if (ip->xDD4_itemVar.flipper.xDD4 <= 0) {
+        it_80291254(gobj);
+    }
+    return false;
+}
+
 /// #itFlipper_UnkMotion3_Anim
 
 /// #itFlipper_UnkMotion3_Phys

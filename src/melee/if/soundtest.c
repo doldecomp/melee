@@ -665,6 +665,8 @@ s32 un_803009E0(void)
 int un_80300A88(void)
 {
     switch (un_804D6DD8) {
+    case 2:
+        break;
     case 3:
         if (un_804D6DCC >= 1) {
             un_804D6DCC = 1;
