@@ -6,6 +6,8 @@
 
 #include "it/items/types.h"
 
+HSD_GObj* it_802B2560(Item_GObj*, f32, Vec3*, enum Fighter_Part, u32)
+
 /* 2B2644 */ void itMarioCape_Logic41_Destroyed(Item_GObj*);
 /* 2B2674 */ void it_802B2674(Item_GObj*);
 /* 2B26C0 */ void it_802B26C0(Item_GObj* gobj);
