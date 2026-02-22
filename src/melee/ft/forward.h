@@ -299,6 +299,7 @@ typedef enum Fighter_Part {
     FtPart_RHandNb,
     FtPart_ThrowN,
     FtPart_TransN2,
+    FtPart_56 = 56,
     FtPart_109 = 109,
 } Fighter_Part;
 

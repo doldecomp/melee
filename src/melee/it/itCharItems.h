@@ -568,11 +568,11 @@ typedef struct itSamusMissileAttributes {
 } itSamusMissileAttributes;
 
 typedef struct itSamusMissile_ItemVars {
-    /* +0 +DD4 */ s32 xDD4;
-    /* +4 +DD8 */ s32 xDD8;
-    /* +8 +DDC */ f32 xDDC;
-    /* +C +DE0 */ HSD_GObj* xDE0;
-    /* +10 +DE4 */ HSD_GObj* xDE4;
+    /* +0 +DD4 */ bool is_smash_missile;
+    /* +4 +DD8 */ s32 x4;
+    /* +8 +DDC */ f32 x8;
+    /* +C +DE0 */ Fighter_GObj* owner;
+    /* +10 +DE4 */ HSD_GObj* x10;
 } itSamusMissile_ItemVars;
 
 typedef struct itSeakNeedleThrown_ItemVars {
