@@ -248,7 +248,9 @@ static const s16 lbl_803B7A00[] = {
     0x0029, 0x002C, 0x0044, 0x0047, 0x003E, 0x004D, 0x004A, 0x0041, 0xFFFF,
     0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0x0000, 0x0000,
 };
-
+/* 3D5590 */ static const s8 lbl_803D5590[0xC] = "\\cffff00%2d";
+/* 3D559C */ static const s8 lbl_803D559C[0xC] = "\\ce0e0ff%5d";
+/* 46B378 */ static struct lbl_8046B378_t lbl_8046B378;
 /* 46B488 */ static struct lbl_8046B488_t lbl_8046B488;
 /* 46B668 */ static struct lbl_8046B668_t lbl_8046B668[NUM_LBL_8046B668];
 /* 4D6598 */ static s8 lbl_804D6598;

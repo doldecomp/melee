@@ -27,6 +27,7 @@
 #include "ty/toy.h"
 
 #include <m2c_macros.h>
+#include <baselib/video.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/random.h>
 #include <melee/gm/gm_1A45.h>
@@ -1639,7 +1640,29 @@ void fn_801652B0(s32 arg0, s32 arg1)
     Camera_8002F9E4(arg0, arg1);
 }
 
-/// #fn_801652D8
+void* fn_801652D8(void)
+{
+    u32 val;
+    s32 idx;
+    PerfLabelLine* lines = &lbl_8046B378.line0;
+
+    lines[0].unk_04 = 0;
+
+    idx = 0;
+    sprintf(lines[idx].text, "\\cffff00%2d", HSD_VIData.perf.frame_renew);
+
+    lines[0].next = &lines[1];
+
+    val = gm_801A4BB8();
+
+    idx = 1;
+    sprintf(lines[idx].text, "\\ce0e0ff%5d", val);
+
+    lines[1].next = (PerfLabelLine*) ((u8*) &lbl_8046B378 + 0x110);
+    lines[1].next = NULL;
+
+    return &lbl_8046B378;
+}
 
 /// creates the develop mode stress test
 HSD_GObj* gm_80165388(u16 arg0, u8 arg1, u8 arg2, s32 arg3)
