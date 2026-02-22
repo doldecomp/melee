@@ -205,7 +205,7 @@ gm_80167BC8(struct VsModeData*); // inits VsModeData from game rules
 /* 168F7C */ UNK_RET fn_80168F7C(UNK_PARAMS);
 /* 168F88 */ void gm_80168F88(void);
 /* 168FC4 */ void gm_80168FC4(void);
-/* 169000 */ UNK_RET fn_80169000(UNK_PARAMS);
+/* 169000 */ UNK_RET fn_80169000(void* arg0, void* arg1);
 /* 169238 */ u8 gm_80169238(u8);
 /* 169264 */ u8 gm_80169264(u8);
 /* 169290 */ u8 gm_80169290(u8);

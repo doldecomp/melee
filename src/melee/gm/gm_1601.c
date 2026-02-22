@@ -1521,8 +1521,6 @@ bool fn_801642A0(void)
 
 /// #gm_80164330
 
-/// #gm_80164430
-
 /// #gm_80164504
 
 /// Are all stages unlocked?
@@ -2335,7 +2333,32 @@ s8 gm_801685D4(u8 arg0, u8 arg1)
     return 0;
 }
 
-/// #gm_80168638
+void gm_80168638(MatchEnd* arg0)
+{
+    u8 spC[4];
+    s32 i;
+    s8* temp_r3;
+
+    if ((u8) gmMainLib_8015CC34()->handicap == 1) {
+        for (i = 0; i < 4; i++) {
+            temp_r3 = gmMainLib_8015CE44(i, arg0->player_standings[i].x5C);
+            if (temp_r3 != NULL) {
+                spC[i] = (u8) *temp_r3;
+            } else {
+                spC[i] = 5;
+            }
+        }
+        fn_80169000(arg0, spC);
+        for (i = 0; i < 4; i++) {
+            if ((u8) arg0->player_standings[i].x58 != 3) {
+                temp_r3 = gmMainLib_8015CE44(i, arg0->player_standings[i].x5C);
+                if (temp_r3 != NULL) {
+                    *temp_r3 = (s8) spC[i];
+                }
+            }
+        }
+    }
+}
 
 /// #gm_80168710
 
