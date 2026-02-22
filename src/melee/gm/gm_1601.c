@@ -2340,7 +2340,7 @@ void gm_80168638(MatchEnd* arg0)
 s32 gm_801688AC(MatchEnd* arg0)
 {
     u32 i;
-    u16 sum = 0;
+    u32 sum = 0;
     struct MatchPlayerData* p = arg0->player_standings;
     for (i = 0; i < 6; i++) {
         if (arg0->player_standings[i].slot_type == 0) {
