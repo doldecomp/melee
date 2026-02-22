@@ -2348,29 +2348,16 @@ void gm_80168638(MatchEnd* arg0)
 
 s32 gm_801688AC(MatchEnd* arg0)
 {
+    u32 i;
     u16 sum = 0;
     struct MatchPlayerData* p = arg0->player_standings;
-
-    if ((u8) p[0].slot_type == 0) {
-        sum = p[0].xE;
-    }
-    if ((u8) p[1].slot_type == 0) {
-        sum += p[1].xE;
-    }
-    if ((u8) p[2].slot_type == 0) {
-        sum += p[2].xE;
-    }
-    if ((u8) p[3].slot_type == 0) {
-        sum += p[3].xE;
-    }
-    if ((u8) p[4].slot_type == 0) {
-        sum += p[4].xE;
-    }
-    if ((u8) p[5].slot_type == 0) {
-        sum += p[5].xE;
+    for (i = 0; i < 6; i++) {
+        if (arg0->player_standings[i].slot_type == 0) {
+            sum += arg0->player_standings[i].xE;
+        }
     }
 
-    return (s32) sum;
+    return sum;
 }
 int gm_80168940(MatchEnd* match_end)
 {
