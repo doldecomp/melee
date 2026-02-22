@@ -1706,12 +1706,13 @@ void* fn_801652D8(void)
 {
     u32 val;
     s32 idx;
+    HSD_VIInfo* vi = &HSD_VIData;
     PerfLabelLine* lines = &lbl_8046B378.line0;
 
     lines[0].unk_04 = 0;
 
     idx = 0;
-    sprintf(lines[idx].text, lbl_803D5590, HSD_VIData.perf.frame_renew);
+    sprintf(lines[idx].text, lbl_803D5590, vi->perf.frame_renew);
 
     lines[0].next = &lines[1];
 
@@ -1720,7 +1721,7 @@ void* fn_801652D8(void)
     idx = 1;
     sprintf(lines[idx].text, lbl_803D559C, val);
 
-    lines[1].next = (PerfLabelLine*) ((u8*) &lbl_8046B378 + 0x110);
+    lines[1].next = &lines[2];
     lines[1].next = NULL;
 
     return &lbl_8046B378;
