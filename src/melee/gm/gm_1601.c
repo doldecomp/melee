@@ -1707,14 +1707,14 @@ void* fn_801652D8(void)
     lines[0].unk_04 = 0;
 
     idx = 0;
-    sprintf(lines[idx].text, lbl_803D5590, vi->perf.frame_renew);
+    sprintf(lines[idx].text, lbl_803D5590, (int) vi->perf.frame_renew);
 
     lines[0].next = &lines[1];
 
     val = gm_801A4BB8();
 
     idx = 1;
-    sprintf(lines[idx].text, lbl_803D559C, val);
+    sprintf(lines[idx].text, lbl_803D559C, (int) val);
 
     lines[1].next = &lines[2];
     lines[1].next = NULL;
