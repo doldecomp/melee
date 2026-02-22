@@ -846,7 +846,37 @@ u32 gm_8016279C(void)
            *(u32*) gmMainLib_8015CD5C();
 }
 
-/// #gm_80162800
+u32 gm_80162800(MatchEnd* arg0)
+{
+    // This is wrong? It indexes by +0x100 but the MatchPlayerData is only 0xA8
+    // big
+    u32 temp_r0;
+    u32 var_r4;
+    u32 var_r5;
+    u32* temp_r3;
+    struct MatchPlayerData* currentPlayer;
+    int i;
+
+    temp_r3 = gmMainLib_8015CD08();
+    var_r5 = 0;
+    currentPlayer = &arg0->player_standings[0];
+
+    for (i = 0; i < 6; i++) {
+        if ((u8) currentPlayer->slot_type == 0) {
+            var_r5 += 1;
+        }
+        currentPlayer++;
+    }
+
+    var_r4 = -1U;
+    temp_r0 = *temp_r3 + var_r5;
+    if (temp_r0 > -1U) {
+    } else {
+        var_r4 = temp_r0;
+    }
+    *temp_r3 = var_r4;
+    return var_r5;
+}
 
 void gm_801628C4(u32 arg0, u32 arg1)
 {
