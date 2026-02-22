@@ -856,28 +856,16 @@ void gm_801628C4(u32 arg0, u32 arg1)
     u32* temp_r3;
 
     temp_r3 = gmMainLib_8015CD14();
-    var_r4 = (u32) -1;
-    if ((*temp_r3 + arg0) > (u32) -1) {
-    } else {
-        var_r4 = *temp_r3 + arg0;
-    }
+    var_r4 = MAX((*temp_r3 + arg0), (u32) -1);
     *temp_r3 = var_r4;
 
     temp_r3 = gmMainLib_8015CD20();
     temp_r31 = arg0 * arg1;
-    var_r4 = (u32) -1;
-    if ((*temp_r3 + temp_r31) > (u32) -1) {
-    } else {
-        var_r4 = *temp_r3 + temp_r31;
-    }
+    var_r4 = MAX((*temp_r3 + temp_r31), (u32) -1);
     *temp_r3 = var_r4;
 
     temp_r3_3 = gmMainLib_8015ED98();
-    var_r4 = (u32) -1;
-    if ((temp_r3_3->x4 + temp_r31) > (u32) -1) {
-    } else {
-        var_r4 = temp_r3_3->x4 + temp_r31;
-    }
+    var_r4 = MAX(temp_r3_3->x4 + temp_r31, (u32) -1);
     temp_r3_3->x4 = var_r4;
 }
 
