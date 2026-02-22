@@ -16,10 +16,17 @@
 #define NUM_UNLOCKABLE_STAGES 11
 
 struct lbl_8046B488_t {
-    /* 0x000 */ char pad_0[0x7];
+    /* 0x000 */ u8 x0;
+    /* 0x001 */ u8 x1;
+    /* 0x002 */ u8 x2;
+    /* 0x003 */ u8 pad_3[0x7 - 0x3];
     /* 0x007 */ u8 x7;
     /* 0x008 */ u8 x8;
-    /* 0x009 */ char pad_9[0x0F - 0x9];
+    /* 0x009 */ u8 x9;
+    /* 0x00A */ u8 xA;
+    /* 0x00B */ char pad_B[0xD - 0xB];
+    /* 0x00D */ u8 xD;
+    /* 0x00E */ u8 pad_E;
     /* 0x00F */ u8 xF;
     /* 0x010:0 */ u8 unk_10_b0 : 1;
     /* 0x010:1 */ u8 unk_10_b1 : 1;

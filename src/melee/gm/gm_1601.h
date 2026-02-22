@@ -173,7 +173,7 @@ struct lbl_8046B488_t;
 /* 16719C */ void fn_8016719C(s32, s32);
 /* 167320 */ void gm_80167320(int slot, bool);
 /* 167470 */ void gm_80167470(long, long);
-/* 1674C4 */ UNK_RET gm_801674C4(UNK_PARAMS);
+/* 1674C4 */ void gm_801674C4(s8, u8, s8, s8, s32);
 /* 16758C */ void fn_8016758C(void);
 /* 167638 */ s32 fn_80167638(s32, Vec3*, Vec3*);
 /* 1677C0 */ void gm_801677C0(struct gm_801677C0_s* arg0);
@@ -228,7 +228,8 @@ gm_80167BC8(struct VsModeData*); // inits VsModeData from game rules
 /* 1697FC */ long fn_801697FC(unsigned char, signed char, signed char,
                               signed char, unsigned char*);
 /* 16989C */ long fn_8016989C(unsigned char*, long, long, u8*, u8*);
-/* 169900 */ UNK_RET fn_80169900(UNK_PARAMS);
+/* 169900 */ UNK_RET fn_80169900(unsigned char, struct lbl_8046B488_t*,
+                                 signed char*, signed char*);
 /* 169A84 */ UNK_RET fn_80169A84(UNK_PARAMS);
 /* 169C54 */ UNK_RET fn_80169C54(s8, s8);
 /* 169F50 */ UNK_RET fn_80169F50(s8, s8);

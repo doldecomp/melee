@@ -1934,7 +1934,29 @@ void gm_80167470(s32 arg0, s32 arg1)
     }
 }
 
-/// #gm_801674C4
+void gm_801674C4(s8 arg0, u8 arg1, s8 arg2, s8 arg3, s32 arg4)
+{
+    s8 temp_r31;
+    struct lbl_8046B488_t* temp_r3;
+
+    temp_r3 = fn_80169364();
+    temp_r3->x0 = arg0;
+    temp_r3->x1 = 0x21;
+    temp_r3->x2 = 0x21;
+    temp_r3->x7 = arg1;
+    temp_r3->x8 = arg1;
+    temp_r3->x9 = arg2;
+    temp_r3->xA = arg3;
+    PAD_STACK(10);
+    temp_r3->unk_10_b2 = 1;
+    fn_80169574((s32) temp_r3->x7, temp_r3->x20);
+    fn_80169900(temp_r3->xD, temp_r3, temp_r3->xA2, temp_r3->x20);
+    temp_r31 = Player_GetCostumeId(0);
+    fn_8016989C((u8*) temp_r3, (s32) Player_GetPlayerCharacter(0),
+                (s32) temp_r31, (u8*) temp_r3->xA2, (u8*) temp_r3->x20);
+    fn_8016A09C();
+    fn_80169434(arg4);
+}
 
 void fn_8016758C(void)
 {
@@ -2613,7 +2635,7 @@ struct lbl_8046B488_t* fn_80169364(void)
 
 u8 gm_80169370(s32 arg0)
 {
-    return lbl_8046B488.pad_0[arg0];
+    return ((u8*) &lbl_8046B488)[arg0];
 }
 
 int gm_80169384(void)
