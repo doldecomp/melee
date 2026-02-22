@@ -848,49 +848,32 @@ u32 gm_8016279C(void)
 
 u32 gm_80162800(MatchEnd* arg0)
 {
-    // This is wrong? It indexes by +0x100 but the MatchPlayerData is only 0xA8
-    // big
-    // Maybe this indexes 0x100 - 0xA8 = 0x58 into the next object?
     u32 temp_r0;
     u32 var_r4;
-    u32 var_r5;
+    u32 count;
     u32* temp_r3;
     u32* temp_r4;
     u32* temp_r4_2;
     u32* temp_r4_3;
+    u32 i;
 
     temp_r3 = gmMainLib_8015CD08();
-    var_r5 = 0;
-    if ((u8) arg0->player_standings[0].slot_type == 0) {
-        var_r5 = 1;
-    }
-    temp_r4 = &arg0->player_standings[0].x50;
-    if ((u8) arg0->player_standings[1].slot_type == 0) {
-        var_r5 += 1;
-    }
-    temp_r4_2 = temp_r4 + 0xA8;
-    if ((u8) temp_r4 + 0x100 == 0) {
-        var_r5 += 1;
-    }
-    temp_r4_3 = temp_r4_2 + 0xA8;
-    if ((u8) temp_r4_2 + 0x100 == 0) {
-        var_r5 += 1;
-    }
-    if ((u8) temp_r4_3 + 0x100 == 0) {
-        var_r5 += 1;
-    }
-    if ((u8) (temp_r4_3 + 0xA8) + 0x100 == 0) {
-        var_r5 += 1;
+    count = 0;
+    for (i = 0; i < 6; i++) {
+        if (arg0->player_standings[i].slot_type == 0) {
+            count++;
+        }
     }
     var_r4 = -1U;
-    temp_r0 = *temp_r3 + var_r5;
+    temp_r0 = *temp_r3 + count;
     if (temp_r0 > -1U) {
     } else {
         var_r4 = temp_r0;
     }
     *temp_r3 = var_r4;
-    return var_r5;
+    return count;
 }
+
 void gm_801628C4(u32 arg0, u32 arg1)
 {
     s32 temp_r31;
