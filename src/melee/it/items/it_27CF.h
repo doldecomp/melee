@@ -27,7 +27,6 @@
 /* 2AE8A8 */ Item_GObj* it_802AE8A8(float, Fighter_GObj*, Vec3*, Fighter_Part,
                                     ItemKind);
 /* 2AEAB4 */ void it_802AEAB4(Item_GObj*);
-/* 2B2560 */ HSD_GObj* it_802B2560(Item_GObj*, float, Vec3*, long, u32);
 /* 2B2674 */ void it_802B2674(Item_GObj*);
 /* 2B26C0 */ void it_802B26C0(Item_GObj*);
 /* 2B26E0 */ void it_802B26E0(Item_GObj*);
