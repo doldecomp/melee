@@ -257,7 +257,7 @@ static const s16 lbl_803B7A00[] = {
 };
 /* 3D5590 */ static const char lbl_803D5590[0xC] = "\\cffff00%2d";
 /* 3D559C */ static const char lbl_803D559C[0xC] = "\\ce0e0ff%5d";
-/* 4DA258 */ static const f64 lbl_804DA258 = 4503601774854144.0; 
+/* 4DA258 */ static const f64 lbl_804DA258 = 4503601774854144.0;
 /* 4DA250 */ static const f32 lbl_804DA250 = 99.0f;
 /* 4DA254 */ static const f32 lbl_804DA254 = 59.0f;
 /* 46B378 */ static struct lbl_8046B378_t lbl_8046B378;
