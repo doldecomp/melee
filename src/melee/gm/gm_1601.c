@@ -1256,24 +1256,26 @@ u16 gm_80163274(u8 i)
     return *gmMainLib_8015D7EC(i);
 }
 
-bool gm_80163298(s8 c_kind, s32 arg1)
+bool gm_80163298(s8 c_kind, u16 arg1)
 {
-    s16* temp_r29;
-    s32 temp_r30;
-    u8 temp_r3;
-    u32* slot;
+    u16 r31;
+    s32 r30;
+    s16* r29;
+    u8* r3;
 
-    temp_r3 = gm_80164024((u8) c_kind);
-    temp_r29 = gmMainLib_8015D7EC(temp_r3);
-    temp_r30 = ((temp_r3 * 4) & 0x3FC) + 0x114;
+    r30 = gm_80164024((u8) c_kind);
+    r29 = gmMainLib_8015D7EC((u8) r30);
+    r3 = (u8*) gmMainLib_8015EDBC();
+    r30 = ((r30 << 2) & 0x3FCu) + 0x114;
+    r31 = (u16) arg1;
 
-    slot = (u32*) ((u8*) gmMainLib_8015EDBC() + temp_r30);
-    if (*slot < (u16) arg1) {
-        *slot = (u16) arg1;
+    if (*(u32*) (r3 + r30) < (u32) r31) {
+        r3 = (u8*) gmMainLib_8015EDBC();
+        *(u32*) (r3 + r30) = (u32) r31;
     }
 
-    if ((u16) *temp_r29 < (u16) arg1) {
-        *temp_r29 = (s16) arg1;
+    if (*(u16*) r29 < (u16) arg1) {
+        *r29 = arg1;
         return true;
     }
     return false;
