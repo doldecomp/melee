@@ -166,7 +166,6 @@ block_6:
         ip->xDD4_itemVar.samusmissile.x8 -= M2C_FIELD(sa, f32*, 0x18);
         goto block_11;
     }
-block_9:
     if (!(vec0.y < 0.001f)) {
         goto block_11;
     }
