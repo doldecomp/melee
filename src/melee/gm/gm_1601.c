@@ -848,13 +848,9 @@ u32 gm_8016279C(void)
 
 u32 gm_80162800(MatchEnd* arg0)
 {
-    u32 temp_r0;
-    u32 var_r4;
     u32 count;
     u32* temp_r3;
-    u32* temp_r4;
-    u32* temp_r4_2;
-    u32* temp_r4_3;
+    u32 sum;
     u32 i;
 
     temp_r3 = gmMainLib_8015CD08();
@@ -864,13 +860,8 @@ u32 gm_80162800(MatchEnd* arg0)
             count++;
         }
     }
-    var_r4 = -1U;
-    temp_r0 = *temp_r3 + count;
-    if (temp_r0 > -1U) {
-    } else {
-        var_r4 = temp_r0;
-    }
-    *temp_r3 = var_r4;
+    sum = *temp_r3 + count;
+    *temp_r3 = (sum > -1) ? -1 : sum;
     return count;
 }
 
