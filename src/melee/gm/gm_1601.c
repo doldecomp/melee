@@ -1668,14 +1668,14 @@ void* fn_801652D8(void)
     lines[0].unk_04 = 0;
 
     idx = 0;
-    sprintf(lines[idx].text, "\\cffff00%2d", HSD_VIData.perf.frame_renew);
+    sprintf(lines[idx].text, lbl_803D5590, HSD_VIData.perf.frame_renew);
 
     lines[0].next = &lines[1];
 
     val = gm_801A4BB8();
 
     idx = 1;
-    sprintf(lines[idx].text, "\\ce0e0ff%5d", val);
+    sprintf(lines[idx].text, lbl_803D559C, val);
 
     lines[1].next = (PerfLabelLine*) ((u8*) &lbl_8046B378 + 0x110);
     lines[1].next = NULL;
