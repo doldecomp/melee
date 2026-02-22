@@ -1263,7 +1263,28 @@ s32 gm_8016332C(u8 arg0)
     return -1;
 }
 
-/// #gm_80163374
+void gm_80163374(s32 arg0, u8* arg1, u8* arg2, u8* arg3, u8* arg4)
+{
+    s32 temp_r0;
+    u32 val;
+
+    if (gmMainLib_8015D48C(arg0) != 0) {
+        val = *gmMainLib_8015D438(arg0);
+        temp_r0 = val / 60;
+        if (arg1 != NULL) {
+            *arg1 = (u8) ((temp_r0 / 60) / 60);
+        }
+        if (arg2 != NULL) {
+            *arg2 = (u8) ((temp_r0 / 60) % 60);
+        }
+        if (arg3 != NULL) {
+            *arg3 = (u8) (temp_r0 % 60);
+        }
+        if (arg4 != NULL) {
+            *arg4 = (u8) ((lbl_804DA250 * (f32) (val % 60)) / lbl_804DA254);
+        }
+    }
+}
 
 /// #gm_801634D4
 
