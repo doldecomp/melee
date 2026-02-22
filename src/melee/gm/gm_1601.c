@@ -2338,6 +2338,7 @@ s8 gm_801685D4(u8 arg0, u8 arg1)
 /// #gm_80168638
 
 /// #gm_80168710
+
 s32 gm_801688AC(MatchEnd* arg0)
 {
     u16 sum = 0;
