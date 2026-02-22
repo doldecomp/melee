@@ -915,7 +915,38 @@ long gm_80162A4C(s32 amount)
     *ptr = MAX(*ptr + amount, (u32) -1);
 }
 
-/// #gm_80162A98
+s32 gm_80162A98(s32 arg0)
+{
+    struct gmm_x1868_1A8_t* temp_r3;
+    u32 temp_r0;
+    u32 var_r31;
+    u32 var_r31_2;
+    u32 var_r4;
+    u32* temp_r3_2;
+
+    temp_r3_2 = gmMainLib_8015CDB0();
+    var_r4 = -1U;
+    temp_r0 = *temp_r3_2 + arg0;
+    if (temp_r0 > -1U) {
+    } else {
+        var_r4 = temp_r0;
+    }
+    *temp_r3_2 = var_r4;
+    var_r31 = -1;
+    if ((u32) (arg0 + gmMainLib_8015EDBC()->xC) > -1U) {
+    } else {
+        var_r31 = arg0 + gmMainLib_8015EDBC()->xC;
+    }
+    gmMainLib_8015EDBC()->xC = var_r31;
+    var_r31_2 = -1;
+    if ((u32) (arg0 + gmMainLib_8015EDC8()->x0) > -1U) {
+    } else {
+        var_r31_2 = arg0 + gmMainLib_8015EDC8()->x0;
+    }
+    temp_r3 = gmMainLib_8015EDC8();
+    temp_r3->x0 = var_r31_2;
+    return (s32) temp_r3;
+}
 
 void gm_80162B4C(s32 amount)
 {
