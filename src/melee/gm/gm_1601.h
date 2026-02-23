@@ -106,7 +106,7 @@ struct lbl_8046B488_t;
 /* 1639C0 */ bool gm_801639C0(u8);
 /* 1639F4 */ int gm_801639F4(u8);
 /* 163A3C */ void gm_80163A3C(int, void*, void*, void*, void*);
-/* 163B9C */ int gm_80163B9C(void*, void*, void*, void*);
+/* 163B9C */ bool gm_80163B9C(u8*, s8*, s8*, s8*);
 /* 163D24 */ bool fn_80163D24(void);
 /* 163D74 */ bool fn_80163D74(void);
 /* 163DC4 */ u16 gm_Get3MinMultimanHighscore(u8);
