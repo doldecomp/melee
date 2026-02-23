@@ -236,7 +236,7 @@ typedef struct itTomato_ItemVars {
             u8 b5 : 1;
             u8 b6 : 1;
             u8 b7 : 1;
-        }bits;
+        } bits;
         u8 raw;
     } x4;
     u32 x8;

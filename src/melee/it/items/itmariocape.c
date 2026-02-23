@@ -1,15 +1,16 @@
 #include "itmariocape.h"
 
+#include "db/db.h"
+#include "ef/efasync.h"
 #include "ft/chara/ftMario/ftMr_SpecialS.h"
 #include "ft/ftlib.h"
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
-#include "db/db.h"
-#include "ef/efasync.h"
 
-HSD_GObj* it_802B2560(Item_GObj* arg0, f32 farg0, Vec3* arg1, enum Fighter_Part arg2, u32 arg3)
+HSD_GObj* it_802B2560(Item_GObj* arg0, f32 farg0, Vec3* arg1,
+                      enum Fighter_Part arg2, u32 arg3)
 {
     SpawnItem spawn;
     Item_GObj* temp_r3;
@@ -26,7 +27,7 @@ HSD_GObj* it_802B2560(Item_GObj* arg0, f32 farg0, Vec3* arg1, enum Fighter_Part 
     spawn.x44_flag.b0 = true;
     spawn.x40 = 0;
     temp_r3 = Item_80268B18(&spawn);
-    if(temp_r3 != NULL){
+    if (temp_r3 != NULL) {
         Item_8026AB54(temp_r3, arg0, arg2);
         db_80225DD8(temp_r3, arg0);
         return temp_r3;
@@ -79,23 +80,25 @@ bool itMariocape_UnkMotion1_Anim(HSD_GObj* gobj)
     Item* item = GET_ITEM(gobj);
     bool BoolVar;
     PAD_STACK(8);
-    if(item->xDAC_itcmd_var0 != 0){
+    if (item->xDAC_itcmd_var0 != 0) {
         item->xDAC_itcmd_var0 = 0;
-        efAsync_Spawn(gobj, &GET_ITEM(gobj)->xBC0, 0, 0x47d, item->xBBC_dynamicBoneTable->bones[16]);
+        efAsync_Spawn(gobj, &GET_ITEM(gobj)->xBC0, 0, 0x47d,
+                      item->xBBC_dynamicBoneTable->bones[16]);
     }
-    if(item->xDB0_itcmd_var1 != 0){
+    if (item->xDB0_itcmd_var1 != 0) {
         item->xDB0_itcmd_var1 = 0;
-        efAsync_Spawn(gobj, &GET_ITEM(gobj)->xBC0, 0, 0x47e, item->xBBC_dynamicBoneTable->bones[6]);
+        efAsync_Spawn(gobj, &GET_ITEM(gobj)->xBC0, 0, 0x47e,
+                      item->xBBC_dynamicBoneTable->bones[6]);
     }
     ip = GET_ITEM(gobj);
-    if(ip->owner != 0){
+    if (ip->owner != 0) {
         BoolVar = ftMr_SpecialS_CheckItemCapeRemove(ip->owner);
-    }else{
+    } else {
         BoolVar = true;
     }
-    if(BoolVar != 0){
+    if (BoolVar != 0) {
         ip = GET_ITEM(gobj);
-        if(ip->owner != 0){
+        if (ip->owner != 0) {
             ftMr_SpecialS_Reset(ip->owner);
         }
         return true;

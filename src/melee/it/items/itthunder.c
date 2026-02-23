@@ -72,15 +72,18 @@ bool itThunder_UnkMotion1_Coll(Item_GObj* gobj)
     return false;
 }
 
-void it_802CCBF8(Item_GObj* gobj) {
+void it_802CCBF8(Item_GObj* gobj)
+{
     Item* item = GET_ITEM(gobj);
     f32 out = 1.0f;
-    if(item->xDD4_itemVar.thunder.x64) {
-        if(item->xDD4_itemVar.thunder.x60 <= 0){
+    if (item->xDD4_itemVar.thunder.x64) {
+        if (item->xDD4_itemVar.thunder.x60 <= 0) {
             item->xDD4_itemVar.thunder.x64 = 0;
-            efSync_Spawn(0x460, gobj, item->xBBC_dynamicBoneTable->bones[2], &out);
-        }else {
-            item->xDD4_itemVar.thunder.x60 = item->xDD4_itemVar.thunder.x60 - 1;
+            efSync_Spawn(0x460, gobj, item->xBBC_dynamicBoneTable->bones[2],
+                         &out);
+        } else {
+            item->xDD4_itemVar.thunder.x60 =
+                item->xDD4_itemVar.thunder.x60 - 1;
         }
     }
 }

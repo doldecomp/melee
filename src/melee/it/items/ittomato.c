@@ -1,11 +1,11 @@
 #include "ittomato.h"
 
 #include "baselib/jobj.h"
+#include "gm/gm_1832.h"
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
-#include "gm/gm_1832.h"
 #include "it/itCommonItems.h"
 #include "it/item.h"
 
@@ -97,7 +97,7 @@ void itTomato_Logic9_Spawned(Item_GObj* gobj)
 
 void itTomato_Logic9_Destroyed(Item_GObj* gobj)
 {
-  Item* item = GET_ITEM(gobj);
+    Item* item = GET_ITEM(gobj);
 
     if (item->xDD4_itemVar.tomato.x4.bits.b0) {
         gm_80473A18.x90[item->xDD4_itemVar.tomato.x8] = 0;
