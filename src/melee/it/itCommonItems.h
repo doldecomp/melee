@@ -1367,8 +1367,8 @@ typedef struct itThunder_ItemVars {
 
 typedef struct itThunderPokemonAttributes {
     f32 x0;
-    u32 x4;
-    u32 x8;
+    f32 x4;
+    f32 x8;
     u32 xC;
 } itThunderPokemonAttributes;
 
