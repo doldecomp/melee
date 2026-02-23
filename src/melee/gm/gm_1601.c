@@ -1546,7 +1546,11 @@ void gm_801641E4(u8 stage, u8 enable)
 
 s32 gm_80164250(u16 mask)
 {
-    return (1 << mask) & gmMainLib_8015CC58()->stage_mask;
+    bool tmp = (1 << mask) & gmMainLib_8015CC58()->stage_mask;
+    if (tmp) {
+        return 1;
+    }
+    return 0;
 }
 
 bool fn_801642A0(void)
