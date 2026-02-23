@@ -1359,7 +1359,7 @@ int gm_801639F4(u8 arg0)
 
 /// #gm_80163A3C
 
-bool gm_80163B9C(u8* arg0, s8* arg1, s8* arg2, s8* arg3)
+bool gm_80163B9C(u8* arg0, u8* arg1, u8* arg2, u8* arg3)
 {
     s32 i;
     u32 total_frames;
