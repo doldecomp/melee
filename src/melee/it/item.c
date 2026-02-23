@@ -1020,7 +1020,7 @@ static HSD_GObj* Item_8026862C(SpawnItem* spawnItem)
 }
 
 /// Item spawn prefunction - spawn airborne
-HSD_GObj* Item_80268B18(SpawnItem* spawnItem)
+Item_GObj* Item_80268B18(SpawnItem* spawnItem)
 {
     spawnItem->x48_ground_or_air = GA_Air;
     spawnItem->x10 = 0;
