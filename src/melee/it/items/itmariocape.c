@@ -7,6 +7,7 @@
 #include "it/it_2725.h"
 #include "it/item.h"
 #include "db/db.h"
+#include "ef/efasync.h"
 
 HSD_GObj* it_802B2560(Item_GObj* arg0, f32 farg0, Vec3* arg1, enum Fighter_Part arg2, u32 arg3)
 {
@@ -70,6 +71,36 @@ void it_2725_Logic41_PickedUp(Item_GObj* gobj)
         Item_802694CC(gobj);
         it_80274574(gobj);
     }
+}
+
+bool itMariocape_UnkMotion1_Anim(HSD_GObj* gobj)
+{
+    Item* ip;
+    Item* item = GET_ITEM(gobj);
+    bool BoolVar;
+    PAD_STACK(8);
+    if(item->xDAC_itcmd_var0 != 0){
+        item->xDAC_itcmd_var0 = 0;
+        efAsync_Spawn(gobj, &GET_ITEM(gobj)->xBC0, 0, 0x47d, item->xBBC_dynamicBoneTable->bones[16]);
+    }
+    if(item->xDB0_itcmd_var1 != 0){
+        item->xDB0_itcmd_var1 = 0;
+        efAsync_Spawn(gobj, &GET_ITEM(gobj)->xBC0, 0, 0x47e, item->xBBC_dynamicBoneTable->bones[6]);
+    }
+    ip = GET_ITEM(gobj);
+    if(ip->owner != 0){
+        BoolVar = ftMr_SpecialS_CheckItemCapeRemove(ip->owner);
+    }else{
+        BoolVar = true;
+    }
+    if(BoolVar != 0){
+        ip = GET_ITEM(gobj);
+        if(ip->owner != 0){
+            ftMr_SpecialS_Reset(ip->owner);
+        }
+        return true;
+    }
+    return false;
 }
 
 void it_802B2870(Item_GObj* gobj, Item_GObj* ref_gobj)
