@@ -88,12 +88,11 @@ void itHeart_Logic8_Spawned(Item_GObj* gobj)
     it_80283DD4(gobj);
 }
 
-void itHeart_Logic8_Destroyed(Item_GObj* arg0)
+void itHeart_Logic8_Destroyed(Item_GObj* gobj)
 {
-    Item* temp_r4;
-    temp_r4 = arg0->user_data;
-    if (temp_r4->xDD4_itemVar.heart.xDD8.b0) {
-        gm_80473A18.x90[temp_r4->xDD4_itemVar.heart.xDDC] = 0;
+    Item* ip = GET_ITEM(gobj);
+    if (ip->xDD4_itemVar.heart.xDD8.b0) {
+        gm_80473A18.x90[ip->xDD4_itemVar.heart.xDDC] = 0;
     }
 }
 

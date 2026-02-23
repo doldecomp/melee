@@ -225,26 +225,14 @@ typedef struct HeartContainerAttr {
 } HeartContainerAttr;
 
 typedef struct itTomato_ItemVars {
-    /* DD4 */ s32 heal_amount;
-    /* DD8 */ union {
-        struct {
-            s8 b0 : 1;
-            u8 b1 : 1;
-            u8 b2 : 1;
-            u8 b3 : 1;
-            u8 b4 : 1;
-            u8 b5 : 1;
-            u8 b6 : 1;
-            u8 b7 : 1;
-        } bits;
-        u8 raw;
-    } x4;
-    u32 x8;
+    /* +0   ip+DD4   */ s32 heal_amount;
+    /* +4:0 ip+DD8:0 */ bool x4_b0 : 1;
+    /* +8   ip+DDC   */ u32 x8;
 } itTomato_ItemVars;
 
 typedef struct {
-    int x0;
-    int x4;
+    int heal_amount_0;
+    int heal_amount_1;
     int x8;
     int xC;
     int x10;
