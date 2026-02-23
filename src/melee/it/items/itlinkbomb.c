@@ -190,7 +190,7 @@ void it_8029DB5C(HSD_GObj* gobj)
 
 static inline void it_8029DD58_inline(Item* item, itLinkBombAttributes* attr,
                                       Item_GObj* fighter_gobj,
-                                      Item_GObj* temp_r3, u8 arg2)
+                                      Item_GObj* temp_r3, u32 arg2)
 {
     f32 temp_f2;
     it_80275158(temp_r3, attr->lifetime);
@@ -204,7 +204,7 @@ static inline void it_8029DD58_inline(Item* item, itLinkBombAttributes* attr,
     Item_8026AB54(temp_r3, fighter_gobj, arg2);
 }
 
-HSD_GObj* it_8029DD58(Item_GObj* fighter_gobj, Vec3* arg1, u8 arg2, int arg3,
+HSD_GObj* it_8029DD58(Item_GObj* fighter_gobj, Vec3* arg1, u32 arg2, int arg3,
                       f32 arg4)
 {
     Item_GObj* temp_r3;
