@@ -843,9 +843,10 @@ void gm_80162574(u8 arg0, u8 arg1)
 
 u32 gm_8016279C(void)
 {
-    return *(u32*) gmMainLib_8015CD2C() + *(u32*) gmMainLib_8015CD38() +
-           *(u32*) gmMainLib_8015CD44() + *(u32*) gmMainLib_8015CD50() +
-           *(u32*) gmMainLib_8015CD5C();
+    u32 tmp = *(u32*) gmMainLib_8015CD2C() + *(u32*) gmMainLib_8015CD38() +
+              *(u32*) gmMainLib_8015CD44() + *(u32*) gmMainLib_8015CD50() +
+              *(u32*) gmMainLib_8015CD5C();
+    return tmp;
 }
 
 u32 gm_80162800(MatchEnd* arg0)
