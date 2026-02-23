@@ -994,20 +994,18 @@ bool fn_80162BFC(s8 ckind, int arg1)
 s32 gm_80162C48(void)
 {
     s32 var_r0;
+    s32 i;
     s32 var_r29;
-    u8 i;
 
-    i = 0;
     var_r29 = 0;
-    do {
+    for (i = 0; i < 0x19; i++) {
         if ((u32) (var_r29 + *gmMainLib_8015D0C0(i)) > -1U) {
             var_r0 = -1;
         } else {
             var_r0 = var_r29 + *gmMainLib_8015D0C0(i);
         }
-        i += 1;
         var_r29 = var_r0;
-    } while ((s32) i < 0x19);
+    };
     return var_r29;
 }
 
