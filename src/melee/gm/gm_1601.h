@@ -98,7 +98,7 @@ struct lbl_8046B488_t;
 /* 163298 */ int gm_80163298(s8 c_kind, u16);
 /* 16332C */ long gm_8016332C(u8);
 /* 163374 */ void gm_80163374(long, u8*, u8*, u8*, u8*);
-/* 1634D4 */ int gm_801634D4(void*, void*, void*, void*);
+/* 1634D4 */ bool gm_801634D4(u8*, u8*, u8*, u8*);
 /* 16365C */ bool gm_8016365C(u8);
 /* 163690 */ long gm_80163690(u8);
 /* 1636D8 */ void gm_801636D8(int, void*, void*, void*, void*);

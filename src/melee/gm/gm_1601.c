@@ -1288,7 +1288,39 @@ void gm_80163374(s32 arg0, u8* arg1, u8* arg2, u8* arg3, u8* arg4)
     }
 }
 
-/// #gm_801634D4
+bool gm_801634D4(u8* arg0, u8* arg1, u8* arg2, u8* arg3)
+{
+    u32 total_frames;
+    s8 i;
+    s32 frames;
+
+    total_frames = 0;
+    i = 0;
+    do {
+        if (gmMainLib_8015D48C(i) == 0) {
+            return false;
+        }
+        total_frames += *gmMainLib_8015D438((u8) i);
+        i += 1;
+    } while (i < 0x19);
+
+    frames = total_frames / 60;
+
+    if (arg0 != NULL) {
+        *arg0 = (u8) ((frames / 60) / 60);
+    }
+    if (arg1 != NULL) {
+        *arg1 = (u8) ((frames / 60) % 60);
+    }
+    if (arg2 != NULL) {
+        *arg2 = (u8) (frames % 60);
+    }
+    if (arg3 != NULL) {
+        *arg3 = (u8) ((99.0f * (f32) (total_frames % 60)) / 59.0f);
+    }
+
+    return true;
+}
 
 bool gm_8016365C(u8 arg0)
 {
