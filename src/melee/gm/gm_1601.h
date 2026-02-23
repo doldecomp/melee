@@ -225,8 +225,8 @@ gm_80167BC8(struct VsModeData*); // inits VsModeData from game rules
 /* 169550 */ void fn_80169550(int slot);
 /* 169574 */ void fn_80169574(ssize_t size, void* buf);
 /* 1695BC */ long fn_801695BC(u8, s32, s32, u8*, u8*);
-/* 1697FC */ long fn_801697FC(unsigned char, signed char, signed char,
-                              signed char, unsigned char*);
+/* 1697FC */ u8 fn_801697FC(signed char, signed char, signed char, signed char,
+                            unsigned char*);
 /* 16989C */ long fn_8016989C(unsigned char*, long, long, u8*, u8*);
 /* 169900 */ UNK_RET fn_80169900(unsigned char, struct lbl_8046B488_t*,
                                  signed char*, signed char*);
