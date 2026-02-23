@@ -50,7 +50,7 @@ struct lbl_8046B488_t;
 /* 1609E0 */ const char* fn_801609E0(u8 ckind);
 /* 160A60 */ const char* gm_80160A60(int);
 /* 160B40 */ UNK_RET gm_80160B40(HSD_Text*, u8, u8);
-/* 160C90 */ void gm_80160C90(HSD_Text* text, u8 fighter_id, s32 arg2);
+/* 160C90 */ void gm_80160C90(HSD_Text* text, u8 fighter_id, bool arg2);
 /* 160DE8 */ UNK_RET fn_80160DE8(UNK_PARAMS);
 /* 160F58 */ float fn_80160F58(u8 ckind);
 /* 161004 */ UNK_RET fn_80161004(UNK_PARAMS);
@@ -196,7 +196,7 @@ gm_80167BC8(struct VsModeData*); // inits VsModeData from game rules
 /* 168940 */ int gm_80168940(MatchEnd*);
 /* 16895C */ void gm_8016895C(HSD_JObj*, DynamicModelDesc*, int idx);
 /* 1689E4 */ void fn_801689E4(HSD_JObj*, DynamicModelDesc*, int);
-/* 168A6C */ UNK_RET fn_80168A6C(UNK_PARAMS);
+/* 168A6C */ s32 fn_80168A6C(void*, void*, s32);
 /* 168B34 */ float gm_80168B34(CharacterKind, int, int);
 /* 168BF8 */ float gm_80168BF8(int);
 /* 168C5C */ void gm_80168C5C(u32);
