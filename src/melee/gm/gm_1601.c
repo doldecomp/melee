@@ -727,22 +727,24 @@ const char* gm_80160A60(int arg0)
 
 void gm_80160B40(HSD_Text* text, u8 ckind, u8 arg2)
 {
+    HSD_Text* tmp_text = text;
+    u8 tmp_ckind = ckind;
     f32 var_f31;
     const char* str;
 
     if (lbLang_IsSavedLanguageUS()) {
-        text->default_kerning = 1;
+        tmp_text->default_kerning = 1;
     }
-    str = arg2 ? fn_801609E0(ckind) : gm_80160980(ckind);
+    str = arg2 ? fn_801609E0(tmp_ckind) : gm_80160980(tmp_ckind);
     if (lbLang_IsSavedLanguageUS()) {
-        bool tmp = arg2 && lbl_803D50E4[ckind] != NULL;
-        var_f31 = tmp ? lbl_803B7784[ckind] : lbl_803B767C[ckind];
+        bool tmp = arg2 && lbl_803D50E4[tmp_ckind] != NULL;
+        var_f31 = tmp ? lbl_803B7784[tmp_ckind] : lbl_803B767C[tmp_ckind];
     } else {
-        bool tmp = arg2 && lbl_803D5060[ckind] != NULL;
-        var_f31 = tmp ? lbl_803B7700[ckind] : lbl_803B75F8[ckind];
+        bool tmp = arg2 && lbl_803D5060[tmp_ckind] != NULL;
+        var_f31 = tmp ? lbl_803B7700[tmp_ckind] : lbl_803B75F8[tmp_ckind];
     }
-    HSD_SisLib_803A6B98(text, 0.0F, 0.0F, str);
-    text->font_size.x *= var_f31;
+    HSD_SisLib_803A6B98(tmp_text, 0.0F, 0.0F, str);
+    tmp_text->font_size.x *= var_f31;
 }
 
 /// #gm_80160C90
