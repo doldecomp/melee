@@ -185,7 +185,7 @@ typedef struct itHeart_ItemVars {
     s32 xDD4_heal;
     union {
         struct {
-            u8 b0 : 1;
+            s8 b0 : 1;
             u8 b1 : 1;
             u8 b2 : 1;
             u8 b3 : 1;
