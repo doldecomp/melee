@@ -12,6 +12,7 @@ HSD_GObj* it_802B2560(Item_GObj*, f32, Vec3*, enum Fighter_Part, u32);
 /* 2B26C0 */ void it_802B26C0(Item_GObj* gobj);
 /* 2B26E0 */ void it_802B26E0(Item_GObj* gobj);
 /* 2B2700 */ void it_2725_Logic41_PickedUp(Item_GObj*);
+bool itMariocape_UnkMotion1_Anim(HSD_GObj* gobj);
 /* 2B2870 */ void it_802B2870(Item_GObj*, Item_GObj*);
 /* 3F70F8 */ extern ItemStateTable it_803F70F8[];
 
