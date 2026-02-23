@@ -2813,7 +2813,7 @@ void fn_80169574(ssize_t size, void* buf)
     ((s8*) buf)[size] = -2;
 }
 
-s32 fn_801695BC(u8 arg0, s8 arg1, s8 arg2, u8* arg3, u8* arg4)
+s32 fn_801695BC(u8 arg0, s32 arg1, s32 arg2, u8* arg3, u8* arg4)
 {
     u8 sp1C[0x0C];
     s32 temp_r3_2;
@@ -2967,17 +2967,15 @@ s32 fn_801697FC(u8 arg0, s8 arg1, s8 arg2, s8 arg3, u8* arg4)
 
 s32 fn_8016989C(u8* arg0, s32 arg1, s32 arg2, u8* arg3, u8* arg4)
 {
-    s32 temp_r3;
-    s32 var_r30;
     u8* var_r31;
+    s32 i;
+    s32 temp_r3;
 
     var_r31 = arg0;
-    var_r30 = 0;
-    do {
+    for (i = 0; i < 3; i++) {
         temp_r3 = fn_801695BC(*var_r31, arg1, arg2, arg3, arg4);
-        var_r30 += 1;
         var_r31 += 1;
-    } while (var_r30 < 3);
+    };
     return temp_r3;
 }
 
