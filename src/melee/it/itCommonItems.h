@@ -1360,8 +1360,8 @@ typedef struct itkireihanaAttributes {
 
 typedef struct itThunder_ItemVars {
     /* xDD8 */ u8 pad[0x60 - 0x0];
-    /* xE34 */ u32 x60;
-    /* xE38 */ u32 x64;
+    /* xE34 */ s32 x60;
+    /* xE38 */ s32 x64;
     /* xE3C */ f32 x68;
 } itThunder_ItemVars;
 
