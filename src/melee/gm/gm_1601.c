@@ -1068,20 +1068,21 @@ s32 fn_80162DF8(u8 ckind, u32 arg1)
 s32 gm_80162E44(void)
 {
     s32 var_r0;
+    int i;
     s32 var_r29;
-    s32 var_r30;
 
-    var_r30 = 0;
     var_r29 = 0;
-    do {
-        if ((u32) (var_r29 + *gmMainLib_8015D1E8((u8) var_r30)) > (u32) -1) {
+    for (i = 0; i < 0x19; i++) {
+        // Could maybe be replaced by
+        // MIN((u32) (var_r29 + *gmMainLib_8015D1E8((u8) i)), (u32)-1)?
+        // Doing so breaks 100% match tho, so eh
+        if ((u32) (var_r29 + *gmMainLib_8015D1E8((u8) i)) > (u32) -1) {
             var_r0 = -1;
         } else {
-            var_r0 = var_r29 + *gmMainLib_8015D1E8((u8) var_r30);
+            var_r0 = var_r29 + *gmMainLib_8015D1E8((u8) i);
         }
-        var_r30 += 1;
         var_r29 = var_r0;
-    } while (var_r30 < 0x19);
+    };
     return var_r29;
 }
 
