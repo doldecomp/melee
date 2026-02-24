@@ -3103,18 +3103,12 @@ u8 fn_801697FC(s8 arg0, s8 arg1, s8 arg2, s8 arg3, u8* arg4)
     return temp_r3;
 }
 
-s32 fn_8016989C(u8* arg0, s32 arg1, s32 arg2, u8* arg3, u8* arg4)
+void fn_8016989C(u8* arg0, s32 arg1, s32 arg2, u8* arg3, u8* arg4)
 {
-    u8* var_r31;
     s32 i;
-    s32 temp_r3;
-
-    var_r31 = arg0;
     for (i = 0; i < 3; i++) {
-        temp_r3 = fn_801695BC(*var_r31, arg1, arg2, arg3, arg4);
-        var_r31 += 1;
+        fn_801695BC(arg0[i], arg1, arg2, arg3, arg4);
     };
-    return temp_r3;
 }
 
 /// #fn_80169900
