@@ -1398,19 +1398,18 @@ void gm_80163374(u8 arg0, u8* arg1, u8* arg2, u8* arg3, u8* arg4)
 
 bool gm_801634D4(u8* arg0, u8* arg1, u8* arg2, u8* arg3)
 {
-    u32 total_frames;
-    s8 i;
+    u32 total_frames = 0;
+    s32 i;
     s32 frames;
 
-    total_frames = 0;
-    i = 0;
-    do {
-        if (gmMainLib_8015D48C(i) == 0) {
+    for (i = 0; i < 0x19; i++) {
+        if (gmMainLib_8015D48C(i) != 0) {
+            total_frames += *gmMainLib_8015D438((u8) i);
+        } else {
             return false;
         }
-        total_frames += *gmMainLib_8015D438((u8) i);
-        i += 1;
-    } while (i < 0x19);
+    }
+
 
     frames = total_frames / 60;
 
