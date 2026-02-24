@@ -1786,7 +1786,17 @@ bool gm_80164ABC(void)
 
 /// #fn_80164B48
 
-/// #gm_80164F18
+void gm_80164F18(void)
+{
+    u16* ptr;
+    u32 i;
+
+    ptr = gmMainLib_8015ED8C();
+
+    for (i = 0; i < 11; i++) {
+        *ptr |= (u16)(1LL << i);
+    }
+}
 
 void gm_8016505C(void)
 {
