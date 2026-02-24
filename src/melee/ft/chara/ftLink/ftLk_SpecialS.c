@@ -51,7 +51,7 @@ void on21EC(HSD_GObj* gobj)
     if (ABS(fp->input.lstick.x) >= p_ftCommonData->x3C &&
         fp->x673 < p_ftCommonData->x40 + p_ftCommonData->x44)
     {
-        fp->x2070.x2072_b4 = true;
+        fp->x2070.count_thrown_items = true;
         fp->fv.lk.x4 = true;
     } else {
         fp->fv.lk.x4 = false;
