@@ -90,11 +90,8 @@ struct PlayerInitData {
 };
 
 struct lbl_8046B668_t {
-    /* 0x00 */ u8 unk0;
-    /* 0x01 */ char pad_1[0x1B];
-    /* 0x1C */ s8 unk1C;
-    /* 0x1D */ s8 unk1D;
-    /* 0x20 */ char pad_20[0x38 - 0x1E];
+    /* 0x00 */ s8 arr1[0x1C];
+    /* 0x1C */ s8 arr2[0x1C];
 };
 STATIC_ASSERT(sizeof(struct lbl_8046B668_t) == 0x38);
 
@@ -195,7 +192,7 @@ struct StartMeleeRules {
         u8 x10_b0 : 1;
         u8 x10_b1 : 1;
     }* x54;
-    struct lbl_8046B668_t (*x58)[27];
+    struct lbl_8046B668_t *x58;
     u8 pad_x5C[0x60 - 0x5C];
 };
 

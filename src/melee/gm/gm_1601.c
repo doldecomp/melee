@@ -1004,18 +1004,16 @@ void gm_801628C4(u32 arg0, u32 arg1)
 
 long gm_80162968(u32 seconds)
 {
-    u32* ptr;
+    u32* ptr = gmMainLib_8015CD74();
 
-    ptr = gmMainLib_8015CD74();
-    *ptr = MAX(*ptr + seconds, (u32) -1);
+    *ptr = ((*ptr + seconds) > -1) ? -1 : (*ptr + seconds);
 }
 
 long gm_801629B4(s32 amount)
 {
-    u32* ptr;
+    u32* ptr = gmMainLib_8015CD80();
 
-    ptr = gmMainLib_8015CD80();
-    *ptr = MAX(*ptr + amount, (u32) -1);
+    *ptr = ((*ptr + amount) > -1) ? -1 : (*ptr + amount);
 }
 
 long gm_80162A00(void)
@@ -1025,7 +1023,7 @@ long gm_80162A00(void)
 
     a = *(u32*) gmMainLib_8015CD14();
     b = *(u32*) gmMainLib_8015CD74();
-    return MAX(a + b, (u32) -1);
+    return a + b > -1 ? -1 : a + b;
 }
 
 long gm_80162A4C(s32 amount)
@@ -1033,7 +1031,7 @@ long gm_80162A4C(s32 amount)
     u32* ptr;
 
     ptr = gmMainLib_8015CDA4();
-    *ptr = MAX(*ptr + amount, (u32) -1);
+    *ptr = ((*ptr + amount) > -1) ? -1 : (*ptr + amount);
 }
 
 s32 gm_80162A98(s32 arg0)
@@ -3204,7 +3202,7 @@ void fn_8016A488(s32 arg0)
 
 void gm_8016A92C(StartMeleeRules* arg0)
 {
-    lbl_8046B668[0].unk1C = -2;
+    lbl_8046B668.arr2[0] = -2;
     arg0->x58 = &lbl_8046B668;
 }
 
@@ -3221,7 +3219,7 @@ UNK_T gm_8016A97C(void)
     return &M2C_FIELD(&lbl_8046B668, UNK_T*, 0x1C);
 }
 
-struct lbl_8046B668_t (*gm_8016A98C(void))[NUM_LBL_8046B668]
+struct lbl_8046B668_t* gm_8016A98C(void)
 {
     return &lbl_8046B668;
 }
@@ -3229,13 +3227,12 @@ struct lbl_8046B668_t (*gm_8016A98C(void))[NUM_LBL_8046B668]
 int gm_8016A998(s8 arg0, s8 arg1)
 {
     int i;
-    for (i = 0; i < ARRAY_SIZE(lbl_8046B668); i++) {
-        struct lbl_8046B668_t* slot = &lbl_8046B668[i];
-
-        if (slot->unk1C == -2) {
-            slot->unk1D = 0xFEu;
-            slot->unk1C = arg1;
-            slot->unk0 = (u8) arg0;
+    struct lbl_8046B668_t* ptr = &lbl_8046B668;
+    for (i = 0; i < 27; i++) {
+        if (ptr->arr2[i] == -2) {
+            ptr->arr2[i + 1] = -2;
+            ptr->arr2[i] = arg1;
+            ptr->arr1[i] = (u8) arg0;
             return i;
         }
     }
