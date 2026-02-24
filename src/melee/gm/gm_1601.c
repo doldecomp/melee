@@ -2509,7 +2509,7 @@ void gm_80168638(MatchEnd* arg0)
 
     if ((u8) gmMainLib_8015CC34()->handicap == 1) {
         for (i = 0; i < 4; i++) {
-            temp_r3 = gmMainLib_8015CE44(i, arg0->player_standings[i].x5C);
+            temp_r3 = gmMainLib_8015CE44(i, arg0->player_standings[i].x4);
             if (temp_r3 != NULL) {
                 spC[i] = (u8) *temp_r3;
             } else {
@@ -2518,8 +2518,8 @@ void gm_80168638(MatchEnd* arg0)
         }
         fn_80169000(arg0, spC);
         for (i = 0; i < 4; i++) {
-            if ((u8) arg0->player_standings[i].x58 != 3) {
-                temp_r3 = gmMainLib_8015CE44(i, arg0->player_standings[i].x5C);
+            if ((u8) arg0->player_standings[i].slot_type != 3) {
+                temp_r3 = gmMainLib_8015CE44(i, arg0->player_standings[i].x4);
                 if (temp_r3 != NULL) {
                     *temp_r3 = (s8) spC[i];
                 }
