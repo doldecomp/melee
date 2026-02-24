@@ -1374,7 +1374,7 @@ s32 gm_8016332C(u8 arg0)
     return -1;
 }
 
-void gm_80163374(s32 arg0, u8* arg1, u8* arg2, u8* arg3, u8* arg4)
+void gm_80163374(u8 arg0, u8* arg1, u8* arg2, u8* arg3, u8* arg4)
 {
     s32 temp_r0;
     u32 val;
