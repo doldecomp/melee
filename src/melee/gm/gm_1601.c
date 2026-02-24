@@ -1992,8 +1992,30 @@ u8 fn_801654A0(MatchEnd* match_end)
 
 /// #fn_80165AC0
 
-/// #fn_80165D60
+MatchEnd* fn_80165D60(MatchEnd* arg0)
+{
+    s32 i;
+    s32 j;
 
+    for (i = 0; i < 6; i++) {
+        if ((u8) arg0->player_standings[i].slot_type != 3) {
+            arg0->player_standings[i].is_small_loser =
+                arg0->player_standings[i].is_big_loser;
+            for (j = 0; j < 6; j++) {
+                if ((u8) arg0->player_standings[j].slot_type != 3 && i != j &&
+                    (u8) arg0->player_standings[i].is_big_loser ==
+                        (u8) arg0->player_standings[j].is_big_loser &&
+                    arg0->player_standings[i].x30 <
+                        arg0->player_standings[j].x30)
+                {
+                    arg0->player_standings[i].is_small_loser++;
+                }
+            }
+        }
+    }
+
+    return arg0;
+}
 /// #fn_80165E7C
 
 /// #fn_80165FA4
