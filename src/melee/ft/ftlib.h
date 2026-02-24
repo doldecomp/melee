@@ -12,7 +12,7 @@
 /* 086140 */ bool ftLib_IsCrazyHandPresent(void);
 /* 086198 */ HSD_GObj* ftLib_80086198(HSD_GObj*);
 /* 08627C */ HSD_GObj* ftLib_8008627C(Vec3* pos, HSD_GObj*);
-/* 086368 */ HSD_GObj* ftLib_80086368(Vec3*, HSD_GObj*, float);
+/* 086368 */ Fighter_GObj* ftLib_80086368(Vec3*, Fighter_GObj*, float);
 /* 0864A8 */ float ftLib_800864A8(Vec3*, HSD_GObj*);
 /* 0865C0 */ float ftLib_800865C0(HSD_GObj*);
 /* 0865CC */ s32 ftLib_800865CC(HSD_GObj*);

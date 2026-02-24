@@ -1,6 +1,7 @@
 #include "ittomato.h"
 
 #include "baselib/jobj.h"
+#include "gm/gm_1832.h"
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
@@ -43,12 +44,12 @@ ItemStateTable it_803F5740[] = {
       itTomato_UnkMotion5_Coll },
 };
 
-Item_GObj* it_802841B4(Item_GObj* gobj, Vec3* pos, s32 arg2)
+Item_GObj* it_802841B4(Fighter_GObj* parent_gobj, Vec3* pos, s32 arg2)
 {
     SpawnItem spawn;
-    Item_GObj* item_gobj = NULL;
+    Item_GObj* gobj = NULL;
 
-    if (gobj != NULL) {
+    if (parent_gobj != NULL) {
         spawn.kind = It_Kind_Tomato;
         spawn.prev_pos = *pos;
         spawn.prev_pos.z = 0.0F;
@@ -60,36 +61,36 @@ Item_GObj* it_802841B4(Item_GObj* gobj, Vec3* pos, s32 arg2)
         spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
         spawn.x44_flag.b0 = true;
         spawn.x40 = 0;
-        item_gobj = Item_80268B18(&spawn);
+        gobj = Item_80268B18(&spawn);
     }
-    if (item_gobj != NULL) {
-        Item* it = GET_ITEM(item_gobj);
-        it->xDD4_itemVar.tomato.x4.b0 = true;
-        it->xDD4_itemVar.tomato.x8 = arg2;
+    if (gobj != NULL) {
+        Item* ip = GET_ITEM(gobj);
+        ip->xDD4_itemVar.tomato.x4_b0 = true;
+        ip->xDD4_itemVar.tomato.x8 = arg2;
     }
-    return item_gobj;
+    return gobj;
 }
 
 void it_8028428C(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    ip->xDD4_itemVar.tomato.heal_amount =
-        M2C_FIELD(ip->xC4_article_data->x4_specialAttributes, s32*, 4);
+    MaximTomatoSpecialAttr* sa = ip->xC4_article_data->x4_specialAttributes;
+    ip->xDD4_itemVar.tomato.heal_amount = sa->heal_amount_1;
 }
 
 void itTomato_Logic9_Spawned(Item_GObj* gobj)
 {
-    Item* item = GET_ITEM(gobj);
-    MaximTomatoSpecialAttr* sa = item->xC4_article_data->x4_specialAttributes;
+    Item* ip = GET_ITEM(gobj);
+    MaximTomatoSpecialAttr* sa = ip->xC4_article_data->x4_specialAttributes;
 
     it_8026B390(gobj);
-    item->x40_vel.x = 0.0F;
-    item->x40_vel.y = sa->x14;
-    item->x40_vel.z = 0.0F;
+    ip->x40_vel.x = 0.0F;
+    ip->x40_vel.y = sa->x14;
+    ip->x40_vel.z = 0.0F;
 
-    item->xDD4_itemVar.tomato.heal_amount = sa->x0;
-    item->xDD4_itemVar.tomato.x4.b0 = false;
-    item->xDD4_itemVar.tomato.x8 = 0;
+    ip->xDD4_itemVar.tomato.heal_amount = sa->heal_amount_0;
+    ip->xDD4_itemVar.tomato.x4_b0 = false;
+    ip->xDD4_itemVar.tomato.x8 = 0;
 
     it_80284358(gobj);
 }
@@ -97,13 +98,10 @@ void itTomato_Logic9_Spawned(Item_GObj* gobj)
 void itTomato_Logic9_Destroyed(Item_GObj* gobj)
 {
     Item* item = GET_ITEM(gobj);
-    // if ((((temp_r4->xDD4_itemVar.Egg.filler[4] << 0x18) & 0xC0000000) >>
-    //      0x1F) != 0)
-    // {
-    //     M2C_FIELD(
-    //         (&gm_80473A18 + M2C_BITWISE(s32,
-    //         temp_r4->xDD4_itemVar.star.x8)), s8*, 0x90) = 0;
-    // }
+
+    if (item->xDD4_itemVar.tomato.x4_b0) {
+        gm_80473A18.x90[item->xDD4_itemVar.tomato.x8] = 0;
+    }
 }
 
 void it_80284358(Item_GObj* gobj)
@@ -163,10 +161,8 @@ bool itTomato_UnkMotion4_Anim(Item_GObj* gobj)
 
 void itTomato_UnkMotion4_Phys(Item_GObj* gobj)
 {
-    ItemAttr* attr;
-
-    Item* item = GET_ITEM(gobj);
-    attr = item->xCC_item_attr;
+    Item* ip = GET_ITEM(gobj);
+    ItemAttr* attr = ip->xCC_item_attr;
     it_80272860(gobj, attr->x10_fall_speed, attr->x14_fall_speed_max);
 }
 
@@ -179,9 +175,9 @@ bool itTomato_UnkMotion4_Coll(Item_GObj* gobj)
 void itTomato_Logic9_PickedUp(Item_GObj* gobj)
 {
     HSD_JObj* jobj = GET_JOBJ(gobj);
-    HSD_JObj* jobj2 = HSD_JObjGetChild(jobj);
+    HSD_JObj* child = HSD_JObjGetChild(jobj);
 
-    HSD_JObjClearFlagsAll(jobj2, 0x10);
+    HSD_JObjClearFlagsAll(child, JOBJ_HIDDEN);
     Item_80268E5C(gobj, 3, ITEM_ANIM_UPDATE);
 }
 
@@ -198,8 +194,8 @@ void itTomato_Logic9_Dropped(Item_GObj* gobj)
     HSD_JObj* jobj2 = HSD_JObjGetChild(jobj);
 
     it_8026B390(gobj);
-    HSD_JObjClearFlagsAll(jobj2, 0x10);
-    Item_80268E5C(gobj, 4, 6);
+    HSD_JObjClearFlagsAll(jobj2, JOBJ_HIDDEN);
+    Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE | ITEM_DROP_UPDATE);
 }
 
 void itTomato_Logic9_EnteredAir(Item_GObj* gobj)

@@ -37,8 +37,7 @@
 /* 26B594 */ bool it_8026B594(Item_GObj* gobj);
 /* 26B5E4 */ HSD_GObj* it_8026B5E4(Vec3* vector, Vec3* vector2,
                                    Item_GObj* gobj);
-/* 26B634 */ HSD_GObj* it_8026B634(Vec3* vector, Vec3* vector2,
-                                   Item_GObj* gobj);
+/* 26B634 */ Fighter_GObj* it_8026B634(Vec3*, Vec3*, Item_GObj*, float);
 /* 26B684 */ float it_8026B684(Vec3* pos);
 /* 26B6A8 */ float it_8026B6A8(Vec3* pos, HSD_GObj* arg);
 /* 26B6C8 */ bool it_8026B6C8(Item_GObj* gobj);

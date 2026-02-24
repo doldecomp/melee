@@ -185,7 +185,7 @@ typedef struct itHeart_ItemVars {
     s32 xDD4_heal;
     union {
         struct {
-            u8 b0 : 1;
+            s8 b0 : 1;
             u8 b1 : 1;
             u8 b2 : 1;
             u8 b3 : 1;
@@ -225,26 +225,14 @@ typedef struct HeartContainerAttr {
 } HeartContainerAttr;
 
 typedef struct itTomato_ItemVars {
-    s32 heal_amount;
-    union {
-        struct {
-            u8 b0 : 1;
-            u8 b1 : 1;
-            u8 b2 : 1;
-            u8 b3 : 1;
-            u8 b4 : 1;
-            u8 b5 : 1;
-            u8 b6 : 1;
-            u8 b7 : 1;
-        };
-        u32 flags;
-    } x4;
-    s32 x8;
+    /* +0   ip+DD4   */ s32 heal_amount;
+    /* +4:0 ip+DD8:0 */ bool x4_b0 : 1;
+    /* +8   ip+DDC   */ u32 x8;
 } itTomato_ItemVars;
 
 typedef struct {
-    int x0;
-    int x4;
+    int heal_amount_0;
+    int heal_amount_1;
     int x8;
     int xC;
     int x10;
@@ -1360,15 +1348,15 @@ typedef struct itkireihanaAttributes {
 
 typedef struct itThunder_ItemVars {
     /* xDD8 */ u8 pad[0x60 - 0x0];
-    /* xE34 */ u32 x60;
-    /* xE38 */ u32 x64;
+    /* xE34 */ s32 x60;
+    /* xE38 */ s32 x64;
     /* xE3C */ f32 x68;
 } itThunder_ItemVars;
 
 typedef struct itThunderPokemonAttributes {
     f32 x0;
-    u32 x4;
-    u32 x8;
+    f32 x4;
+    f32 x8;
     u32 xC;
 } itThunderPokemonAttributes;
 

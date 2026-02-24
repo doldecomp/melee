@@ -29,7 +29,11 @@ typedef struct BgFlashData {
 
 extern BgFlashData lbl_80433658;
 
+#include <baselib/cobj.h>
 #include <baselib/gobj.h>
+#include <baselib/gobjgxlink.h>
+#include <baselib/gobjobject.h>
+#include <baselib/gobjproc.h>
 #include <baselib/objalloc.h>
 #include <melee/lb/lb_00F9.h>
 
@@ -65,7 +69,11 @@ typedef struct BgFlashData2 {
     s32 x34;
     s32 x38;
     s32 x3C;
+    HSD_GObj* x40;
+    HSD_GObj* x44;
 } BgFlashData2;
+
+extern HSD_CObjDesc lbl_803BB028;
 
 /// #fn_8001FC08
 
@@ -174,7 +182,25 @@ void fn_800208B0(u8 arg0)
 
 /// #lbBgFlash_800208EC
 
-/// #lbBgFlash_800209F4
+void lbBgFlash_800209F4(void)
+{
+    BgFlashData2* flash = (BgFlashData2*) &lbl_80433658;
+    HSD_GObj** gobj1_slot;
+    HSD_GObj** gobj2_slot;
+
+    flash->x44 = GObj_Create(0x14, 0x16, 0);
+    gobj1_slot = &flash->x44;
+    HSD_GObjObject_80390A70(*gobj1_slot, HSD_GObj_804D784B,
+                            HSD_CObjLoadDesc(&lbl_803BB028));
+    GObj_SetupGXLinkMax(*gobj1_slot, HSD_GObj_803910D8, 0xa);
+    (*gobj1_slot)->gxlink_prios = 0x10000;
+    flash->x40 = GObj_Create(0x15, 0x16, 2);
+    gobj2_slot = &flash->x40;
+    GObj_SetupGXLink(*gobj2_slot, (GObj_RenderFunc) fn_8001FEC4, 0x10, 0xa);
+    HSD_GObjProc_8038FD54(*gobj2_slot, (HSD_GObjEvent) fn_800204C8, 0);
+    lbl_80433658.state.active = 1;
+    lbl_80433658.state.mode = 0;
+}
 
 /// #fn_80020AEC
 

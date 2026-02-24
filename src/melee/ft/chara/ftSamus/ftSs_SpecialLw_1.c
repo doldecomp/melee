@@ -35,7 +35,6 @@ void ftSs_SpecialLw_8012ADF0(Fighter_GObj* gobj)
     }
 }
 
-
 void ftSs_SpecialLw_8012AEBC(HSD_GObj* gobj)
 {
     ftHurtboxInit hurt;
