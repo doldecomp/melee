@@ -1693,11 +1693,11 @@ bool gm_80164600(void)
 
 void gm_8016468C(void)
 {
-    s32 i;
+    u32 i;
     u16* ptr = gmMainLib_8015EDA4();
 
     for (i = 0; i < 11; i++) {
-        *ptr |= (u16) (1LL << i);
+        *ptr |=  1LL << i;
     }
 }
 
