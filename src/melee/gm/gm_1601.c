@@ -847,7 +847,7 @@ int gm_801623D8(void)
 
 void gm_801623FC(int arg0)
 {
-    s32* temp_r30;
+    u32* temp_r30;
     u32 var_r29;
     u32* temp_r31;
     u32* temp_r3;
@@ -868,7 +868,60 @@ void gm_801623FC(int arg0)
     *temp_r30 = (s32) var_r29;
 }
 
-/// #gm_8016247C
+s32 gm_8016247C(s32 arg0)
+{
+    u32 var_r4;
+    u32 var_r3;
+    u32 var_r28;
+    u32 var_r29;
+    u32* temp_r31;
+    u32* temp_r5;
+    u32* temp_r30_2;
+    u32* temp_r3;
+    u32 temp_r0;
+    u32 temp_r0_2;
+    s32 temp_r29 = *gmMainLib_8015CCF0();
+    u32* temp_r30 = gmMainLib_8015CCFC();
+    PAD_STACK(8);
+
+    var_r4 = -1U;
+    temp_r5 = &gmMainLib_8015EDBC()->x14;
+
+    temp_r0 = *temp_r30 + arg0;
+    if (temp_r0 <= -1U) {
+        var_r4 = temp_r0;
+    }
+    *temp_r30 = var_r4;
+
+    var_r3 = -1U;
+    temp_r0_2 = *temp_r5 + arg0;
+    if (temp_r0_2 <= -1U) {
+        var_r3 = temp_r0_2;
+    }
+
+    var_r28 = temp_r29 + arg0;
+    *temp_r5 = var_r3;
+    if (var_r28 > 0x270FU) {
+        var_r28 = 0x270FU;
+    }
+    var_r29 = var_r28;
+
+    temp_r30_2 = gmMainLib_8015CCF0();
+    temp_r31 = gmMainLib_8015CCFC();
+    temp_r3 = &gmMainLib_8015EDBC()->x14;
+
+    if (var_r28 > (u32) *temp_r31) {
+        *temp_r31 = var_r28;
+    }
+    if (var_r28 > (u32) *temp_r3) {
+        *temp_r3 = var_r28;
+    }
+    if (var_r28 > 0x270FU) {
+        var_r29 = 0x270FU;
+    }
+    *temp_r30_2 = var_r29;
+    return (s32) var_r28;
+}
 
 void gm_80162574(u8 arg0, u8 arg1)
 {

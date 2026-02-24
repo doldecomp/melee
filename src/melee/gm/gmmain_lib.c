@@ -124,7 +124,7 @@ void* gmMainLib_8015CCE4(void)
     return &gmMainLib_804D3EE0->unk_44;
 }
 
-void* gmMainLib_8015CCF0(void)
+u32* gmMainLib_8015CCF0(void)
 {
     return &gmMainLib_804D3EE0->thing.x1A48;
 }

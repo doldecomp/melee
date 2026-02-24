@@ -61,7 +61,7 @@ struct lbl_8046B488_t;
 /* 1623A4 */ s32 gm_801623A4(MatchEnd*);
 /* 1623D8 */ int gm_801623D8(void);
 /* 1623FC */ UNK_RET gm_801623FC(int);
-/* 16247C */ UNK_RET gm_8016247C(int);
+/* 16247C */ long gm_8016247C(long);
 /* 162574 */ void gm_80162574(u8, u8);
 /* 16260C */ void gm_8016260C(u8, u8);
 /* 16279C */ u32 gm_8016279C(void);
