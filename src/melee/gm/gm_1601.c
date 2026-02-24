@@ -983,23 +983,22 @@ u32 gm_80162800(MatchEnd* arg0)
 
 void gm_801628C4(u32 arg0, u32 arg1)
 {
-    s32 temp_r31;
-    struct gmm_retval_ED98* temp_r3_3;
-    u32 var_r4;
-    u32* temp_r3;
+    u32* p;
+    u32 v;
+    struct gmm_retval_ED98* s;
 
-    temp_r3 = gmMainLib_8015CD14();
-    var_r4 = MAX((*temp_r3 + arg0), (u32) -1);
-    *temp_r3 = var_r4;
+    p = gmMainLib_8015CD14();
+    v = *p + arg0;
+    *p = (v > (u32)-1) ? (u32)-1 : v;
 
-    temp_r3 = gmMainLib_8015CD20();
-    temp_r31 = arg0 * arg1;
-    var_r4 = MAX((*temp_r3 + temp_r31), (u32) -1);
-    *temp_r3 = var_r4;
+    p = gmMainLib_8015CD20();
+    v = *p + (arg0 * arg1);
+    *p = (v > (u32)-1) ? (u32)-1 : v;
 
-    temp_r3_3 = gmMainLib_8015ED98();
-    var_r4 = MAX(temp_r3_3->x4 + temp_r31, (u32) -1);
-    temp_r3_3->x4 = var_r4;
+
+    s = gmMainLib_8015ED98();
+    v = s->x4 + (arg0 * arg1);   // recompute here (don’t carry across call)
+    s->x4 = (v > (u32)-1) ? (u32)-1 : v;
 }
 
 long gm_80162968(u32 seconds)
@@ -1317,23 +1316,22 @@ u32 gm_801631CC(u8 i)
 
 u32 gm_801631F0(void)
 {
-    u32 var_r0;
-    u32 var_r29;
-    s32 var_r30;
+    s32 i = 0;
+    u32 sum = 0;
+    u32 tmp;
 
-    var_r30 = 0;
-    var_r29 = 0;
-    do {
-        if ((u32) (var_r29 + *gmMainLib_8015D06C((u8) var_r30)) > (u32) -1) {
-            var_r0 = (u32) -1;
+    for (; i < 0x19; i++) {
+        tmp = sum + *gmMainLib_8015D06C((u8)i);
+
+        if (tmp > (u32)-1) {
+            tmp = (u32)-1;
         } else {
-            var_r0 = var_r29 + *gmMainLib_8015D06C((u8) var_r30);
+            tmp = sum + *gmMainLib_8015D06C((u8)i);
         }
-        var_r30 += 1;
-        var_r29 = var_r0;
-    } while (var_r30 < 0x19);
+        sum = tmp;
+    }
 
-    return var_r29;
+    return sum;
 }
 
 u16 gm_80163274(u8 i)
@@ -1343,24 +1341,25 @@ u16 gm_80163274(u8 i)
 
 bool gm_80163298(s8 c_kind, u16 arg1)
 {
-    u16 r31;
-    s32 r30;
-    s16* r29;
-    u8* r3;
+    u16 v1;
+    s8 v2;
+    s16* v3;
+    u32 v4;
+    u32 v5;
 
-    r30 = gm_80164024((u8) c_kind);
-    r29 = gmMainLib_8015D7EC((u8) r30);
-    r3 = (u8*) gmMainLib_8015EDBC();
-    r30 = ((r30 << 2) & 0x3FCu) + 0x114;
-    r31 = (u16) arg1;
+    v2 = gm_80164024((u8) c_kind);
+    v3 = gmMainLib_8015D7EC((u8) v2);
+    v4 = (u32) gmMainLib_8015EDBC();
+    v5 = ((v2 << 2) & 0x3FC) + 0x114;
+    v1 = (u16) arg1;
 
-    if (*(u32*) (r3 + r30) < (u32) r31) {
-        r3 = (u8*) gmMainLib_8015EDBC();
-        *(u32*) (r3 + r30) = (u32) r31;
+    if (*(u32*) (v4 + v5) < (u32) v1) {
+        v4 = (u32) gmMainLib_8015EDBC();
+        *(u32*) (v4 + v5) = (u32) v1;
     }
 
-    if (*(u16*) r29 < (u16) arg1) {
-        *r29 = arg1;
+    if (*(u16*) v3 < (u16) arg1) {
+        *v3 = arg1;
         return true;
     }
     return false;
