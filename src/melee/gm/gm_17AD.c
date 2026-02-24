@@ -350,7 +350,7 @@ s32 fn_8017B598(s32 arg0)
     s32 var_r3;
 
     me = fn_80174274();
-    var_r3 = me->player_standings[arg0].pad_x30[4];
+    var_r3 = me->player_standings[arg0].x30;
     if (var_r3 > 999999) {
         var_r3 = 999999;
     } else if (var_r3 < -999999) {
