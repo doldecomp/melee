@@ -323,7 +323,7 @@ void it_802A850C(Item_GObj* gobj, Vec3* arg1, Vec3* arg2, f32 arg3, f32 arg4,
         (item->owner == item->xDD4_itemVar.linkarrow.xE0))
     {
         it_802A8C7C(gobj);
-        data = ftLib_80086630(item->xDD4_itemVar.linkarrow.xE0,
+        data = (u8*) ftLib_80086630(item->xDD4_itemVar.linkarrow.xE0,
                               (enum Fighter_Part) item->xDC4);
         matrix = (Mtx*) (data + 0x44);
         HSD_MtxGetRotation(*matrix, &rot);

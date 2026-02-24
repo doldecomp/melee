@@ -530,25 +530,35 @@ typedef struct itSamusBomb_ItemVars {
 } itSamusBomb_ItemVars;
 
 typedef struct itSamusChargeshot_ItemVars {
-    /* +0 +DD4 */ s32 x0;
-    /* +4 +DD8 */ f32 x4;
-    /* +8 +DDC */ f32 x8;
-    /* +C +DE0 */ s32 xC;
-    /* +10 +DE4 */ s32 x10;
-    /* +14 +DE8 */ s32 x14;
-    /* +18 +DEC */ s32 x18;
-    /* +1C +DF0 */ s32 x1C;
-    /* +20 +DF4 */ s32 x20;
-    /* +24 +DF8 */ s32 x24;
-    /* +28 +DFC */ s32 x28;
-    /* +2C +E00 */ Fighter_GObj* x2C;
+    /* +0  +DD4 */ u32 xDD4_pad;
+    /* +4  +DD8 */ f32 xDD8;
+    /* +8  +DDC */ f32 xDDC;
+    /* +C  +DE0 */ f32 xDE0;
+    /* +10 +DE4 */ f32 xDE4;
+    /* +14 +DE8 */ s32 xDE8;
+    /* +18 +DEC */ s32 xDEC;
+    /* +1C +DF0 */ s32 xDF0;
+    /* +20 +DF4 */ s32 xDF4;
+    /* +24 +DF8 */ s32 xDF8;
+    /* +28 +DFC */ s32 xDFC;
+    /* +2C +E00 */ Fighter_GObj* xE00;
+    /* +30 +E04 */ f32 xE04;
+    /* +34 +E08 */ u32 pad1[9];
+    /* +78 +E2C */ f32 xE2C;
+    /* +7C +E30 */ f32 xE30;
+    /* +80 +E34 */ f32 xE34;
+    /* +84 +E38 */ u32 padding[15];/* gap 0x84–0xC0 (0x3C bytes) */
 } itSamusChargeshot_ItemVars;
 
 typedef struct itSamusChargeShot_Attributes {
     /* +0 */ f32 lifetime;
     /* +4 */ u32 x4;
-    /* +8 */ u32 x8;
-    /* +C */ u32 xC;
+    /* +8 */ f32 x8;
+    /* +C */ f32 xC;
+    /* +10 */ f32 x10;
+    /* +14 */ f32 x14;
+    /* +18 */ f32 x18;
+    /* +1C */ f32 x1C;
 } itSamusChargeShot_Attributes;
 
 typedef struct itSamusGrapple_ItemVars {
