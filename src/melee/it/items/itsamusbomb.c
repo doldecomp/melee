@@ -90,7 +90,94 @@ void it_802B4CF4(Item_GObj* gobj)
     Item_80268E5C(gobj, 1, 0x11);
 }
 
-/// #itSamusbomb_UnkMotion1_Anim
+
+bool itSamusbomb_UnkMotion1_Anim(Item_GObj* gobj)
+{
+    HSD_JObj* hsd = gobj->hsd_obj;
+    Item* ip = GET_ITEM(gobj);
+    Item* ip2;
+    itSamusBombAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+
+    f32 lifeTimer;
+    f32 vel_x;
+    PAD_STACK(0x10);
+
+    if (ip->xD44_lifeTimer <= attr->x4) {
+        lb_8000BA0C(hsd, attr->x8);
+    }
+    lifeTimer = ip->xD44_lifeTimer;
+    if (lifeTimer <= 0.0f) {
+        it_802B53CC(gobj);
+    } else {
+        ip->xD44_lifeTimer = lifeTimer - 1.0f;
+    }
+
+    ip2 = GET_ITEM(gobj);
+    vel_x = ip2->x40_vel.x;
+    if (vel_x < 0.0f) {
+        vel_x = -vel_x;
+    }
+    if (!(vel_x < 0.0001f)) {
+        it_80272980(gobj);
+        if (ip2->facing_dir == 1.0f) {
+            if (hsd == NULL) {
+                __assert("jobj.h", 0x294U, "jobj");
+            }
+            if (hsd->flags & 0x20000) {
+                __assert("jobj.h", 0x295U, "!(jobj->flags & JOBJ_USE_QUATERNION)");
+            }
+            hsd->rotate.y = 0.0f;
+            if (!(hsd->flags & 0x02000000)) {
+                if (hsd != NULL) {
+                    if (hsd == NULL) {
+                        __assert("jobj.h", 0x234U, "jobj");
+                    }
+                    {
+                        u32 flags;
+                        s32 c;
+                        flags = hsd->flags;
+                        c = 0;
+                        if (!(flags & 0x800000) && (flags & 0x40)) {
+                            c = 1;
+                        }
+                        if (c == 0) {
+                            HSD_JObjSetMtxDirtySub(hsd);
+                        }
+                    }
+                }
+            }
+        } else {
+            if (hsd == NULL) {
+                __assert("jobj.h", 0x294U, "jobj");
+            }
+            if (hsd->flags & 0x20000) {
+                __assert("jobj.h", 0x295U, "!(jobj->flags & JOBJ_USE_QUATERNION)");
+            }
+            hsd->rotate.y = 3.1415927f;
+            if (!(hsd->flags & 0x02000000)) {
+                if (hsd != NULL) {
+                    if (hsd == NULL) {
+                        __assert("jobj.h", 0x234U, "jobj");
+                    }
+                    {
+                        u32 flags;
+                        s32 c;
+                        flags = hsd->flags;
+                        c = 0;
+                        if (!(flags & 0x800000) && (flags & 0x40)) {
+                            c = 1;
+                        }
+                        if (c == 0) {
+                            HSD_JObjSetMtxDirtySub(hsd);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return 0;
+}
+
 
 void itSamusbomb_UnkMotion1_Phys(Item_GObj* gobj)
 {
@@ -110,7 +197,92 @@ void itSamusBomb_Logic50_EnteredAir(Item_GObj* gobj)
     Item_80268E5C(gobj, 2, 0x11);
 }
 
-/// #itSamusbomb_UnkMotion2_Anim
+bool itSamusbomb_UnkMotion2_Anim(Item_GObj* gobj)
+{
+    HSD_JObj* hsd = gobj->hsd_obj;
+    Item* ip = GET_ITEM(gobj);
+    Item* ip2;
+    itSamusBombAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+
+    f32 lifeTimer;
+    f32 vel_x;
+    PAD_STACK(0x08);
+
+    if (ip->xD44_lifeTimer <= attr->x4) {
+        lb_8000BA0C(hsd, attr->x8);
+    }
+    lifeTimer = ip->xD44_lifeTimer;
+    if (lifeTimer <= 0.0f) {
+        it_802B53CC(gobj);
+    } else {
+        ip->xD44_lifeTimer = lifeTimer - 1.0f;
+    }
+
+    ip2 = GET_ITEM(gobj);
+    vel_x = ip2->x40_vel.x;
+    if (vel_x < 0.0f) {
+        vel_x = -vel_x;
+    }
+    if (!(vel_x < 0.0001f)) {
+        it_80272980(gobj);
+        if (ip2->facing_dir == 1.0f) {
+            if (hsd == NULL) {
+                __assert("jobj.h", 0x294U, "jobj");
+            }
+            if (hsd->flags & 0x20000) {
+                __assert("jobj.h", 0x295U, "!(jobj->flags & JOBJ_USE_QUATERNION)");
+            }
+            hsd->rotate.y = 0.0f;
+            if (!(hsd->flags & 0x02000000)) {
+                if (hsd != NULL) {
+                    if (hsd == NULL) {
+                        __assert("jobj.h", 0x234U, "jobj");
+                    }
+                    {
+                        u32 flags;
+                        s32 c;
+                        flags = hsd->flags;
+                        c = 0;
+                        if (!(flags & 0x800000) && (flags & 0x40)) {
+                            c = 1;
+                        }
+                        if (c == 0) {
+                            HSD_JObjSetMtxDirtySub(hsd);
+                        }
+                    }
+                }
+            }
+        } else {
+            if (hsd == NULL) {
+                __assert("jobj.h", 0x294U, "jobj");
+            }
+            if (hsd->flags & 0x20000) {
+                __assert("jobj.h", 0x295U, "!(jobj->flags & JOBJ_USE_QUATERNION)");
+            }
+            hsd->rotate.y = 3.1415927f;
+            if (!(hsd->flags & 0x02000000)) {
+                if (hsd != NULL) {
+                    if (hsd == NULL) {
+                        __assert("jobj.h", 0x234U, "jobj");
+                    }
+                    {
+                        u32 flags;
+                        s32 c;
+                        flags = hsd->flags;
+                        c = 0;
+                        if (!(flags & 0x800000) && (flags & 0x40)) {
+                            c = 1;
+                        }
+                        if (c == 0) {
+                            HSD_JObjSetMtxDirtySub(hsd);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return 0;
+}
 
 /// NOTE: 4 iterations instead of the usual 3
 static inline float my_sqrtf(float x)
