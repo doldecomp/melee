@@ -1378,7 +1378,7 @@ void gm_80163374(u8 arg0, u8* arg1, u8* arg2, u8* arg3, u8* arg4)
             *arg3 = (u8) (temp_r0 % 60);
         }
         if (arg4 != NULL) {
-            *arg4 = (u8) ((lbl_804DA250 * (f32) (val % 60)) / lbl_804DA254);
+            *arg4 = (u8) ((99.0f * (f32) (val % 60)) / 59.0f);
         }
     }
 }
@@ -1702,7 +1702,7 @@ bool gm_80164330(u8 arg0)
         }
     }
     if (total_stages_on == 0) {
-        OSReport(lbl_803D5558);
+        OSReport("RandomStageSwitch All-Off!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
     }
     if ((1 << arg0) & gmMainLib_8015CC58()->stage_mask) {
         return true;
@@ -1918,14 +1918,14 @@ void* fn_801652D8(void)
     lines[0].unk_04 = 0;
 
     idx = 0;
-    sprintf(lines[idx].text, lbl_803D5590, (int) vi->perf.frame_renew);
+    sprintf(lines[idx].text, "\\cffff00%2d", (int) vi->perf.frame_renew);
 
     lines[0].next = &lines[1];
 
     val = gm_801A4BB8();
 
     idx = 1;
-    sprintf(lines[idx].text, lbl_803D559C, (int) val);
+    sprintf(lines[idx].text, "\\ce0e0ff%5d", (int) val);
 
     lines[1].next = &lines[2];
     lines[1].next = NULL;
