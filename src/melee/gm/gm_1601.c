@@ -1673,7 +1673,42 @@ bool fn_801642A0(void)
     return true;
 }
 
-/// #gm_80164330
+// RandomStageSwitch
+bool gm_80164330(u8 arg0)
+{
+    s32 total_stages_on;
+    struct gmm_x1CB0* temp_ret;
+    s32 i;
+    u8 var_r0;
+
+    if (gm_80164430(lbl_803B7808[arg0]) == 0) {
+        return false;
+    }
+    if (gmMainLib_8015EE44() == 0) {
+        return true;
+    }
+
+    total_stages_on = 0;
+    i = 0;
+    for (i = 0; i < 0x1D; i++) {
+        temp_ret = gmMainLib_8015CC58();
+        if ((1 << i) & temp_ret->stage_mask) {
+            var_r0 = 1;
+        } else {
+            var_r0 = 0;
+        }
+        if (var_r0 != 0) {
+            total_stages_on = 1;
+        }
+    }
+    if (total_stages_on == 0) {
+        OSReport(lbl_803D5558);
+    }
+    if ((1 << arg0) & gmMainLib_8015CC58()->stage_mask) {
+        return true;
+    }
+    return false;
+}
 
 /// #gm_80164504
 
@@ -1794,7 +1829,7 @@ void gm_80164F18(void)
     ptr = gmMainLib_8015ED8C();
 
     for (i = 0; i < 11; i++) {
-        *ptr |= (u16)(1LL << i);
+        *ptr |= (u16) (1LL << i);
     }
 }
 

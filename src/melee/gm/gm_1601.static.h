@@ -255,6 +255,8 @@ static const s16 lbl_803B7A00[] = {
     0x0029, 0x002C, 0x0044, 0x0047, 0x003E, 0x004D, 0x004A, 0x0041, 0xFFFF,
     0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0x0000, 0x0000,
 };
+/* 3D5558 */ static char lbl_803D5558[0x35] =
+    "RandomStageSwitch All-Off!!!!!!!!!!!!!!!!!!!!!!!!!!\n";
 /* 3D5590 */ static const char lbl_803D5590[0xC] = "\\cffff00%2d";
 /* 3D559C */ static const char lbl_803D559C[0xC] = "\\ce0e0ff%5d";
 /* 4DA258 */ static const f64 lbl_804DA258 = 4503601774854144.0;
@@ -265,5 +267,4 @@ static const s16 lbl_803B7A00[] = {
 /* 46B668 */ static struct lbl_8046B668_t lbl_8046B668;
 /* 4D6598 */ static s8 lbl_804D6598;
 /* 4D659A */ static u16 lbl_804D659A;
-
 #endif
