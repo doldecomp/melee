@@ -1691,7 +1691,15 @@ bool gm_80164600(void)
     return true;
 }
 
-/// #gm_8016468C
+void gm_8016468C(void)
+{
+    s32 i;
+    u16* ptr = gmMainLib_8015EDA4();
+
+    for (i = 0; i < 11; i++) {
+        *ptr |= (u16) (1LL << i);
+    }
+}
 
 void gm_801647D0(void)
 {
