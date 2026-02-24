@@ -1033,37 +1033,24 @@ long gm_80162A4C(s32 amount)
     *ptr = ((*ptr + amount) > -1) ? -1 : (*ptr + amount);
 }
 
-s32 gm_80162A98(s32 arg0)
+struct gmm_x1868_1A8_t* gm_80162A98(s32 arg0)
 {
     struct gmm_x1868_1A8_t* temp_r3;
-    u32 temp_r0;
-    u32 var_r31;
     u32 var_r31_2;
-    u32 var_r4;
-    u32* temp_r3_2;
+    u32 var_r31;
+    s32* temp_r3_2 = gmMainLib_8015CDB0();
 
-    temp_r3_2 = gmMainLib_8015CDB0();
-    var_r4 = -1U;
-    temp_r0 = *temp_r3_2 + arg0;
-    if (temp_r0 > -1U) {
-    } else {
-        var_r4 = temp_r0;
-    }
-    *temp_r3_2 = var_r4;
-    var_r31 = -1;
-    if ((u32) (arg0 + gmMainLib_8015EDBC()->xC) > -1U) {
-    } else {
-        var_r31 = arg0 + gmMainLib_8015EDBC()->xC;
-    }
+    *temp_r3_2 = MAX(*temp_r3_2 + arg0, -1U);
+
+    var_r31 = MAX((u32) (arg0 + gmMainLib_8015EDBC()->xC), -1U);
+
     gmMainLib_8015EDBC()->xC = var_r31;
-    var_r31_2 = -1;
-    if ((u32) (arg0 + gmMainLib_8015EDC8()->x0) > -1U) {
-    } else {
-        var_r31_2 = arg0 + gmMainLib_8015EDC8()->x0;
-    }
+
+    var_r31_2 = MAX((u32) (arg0 + gmMainLib_8015EDC8()->x0), -1U);
+
     temp_r3 = gmMainLib_8015EDC8();
     temp_r3->x0 = var_r31_2;
-    return (s32) temp_r3;
+    return temp_r3;
 }
 
 void gm_80162B4C(s32 amount)
