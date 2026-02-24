@@ -533,9 +533,23 @@ typedef struct itSamusChargeshot_ItemVars {
     /* +0 +DD4 */ s32 x0;
     /* +4 +DD8 */ f32 x4;
     /* +8 +DDC */ f32 x8;
-    /* +C */ char pad_8[0xDFC - 0xDE0];
+    /* +C +DE0 */ s32 xC;
+    /* +10 +DE4 */ s32 x10;
+    /* +14 +DE8 */ s32 x14;
+    /* +18 +DEC */ s32 x18;
+    /* +1C +DF0 */ s32 x1C;
+    /* +20 +DF4 */ s32 x20;
+    /* +24 +DF8 */ s32 x24;
     /* +28 +DFC */ s32 x28;
+    /* +2C +E00 */ Fighter_GObj* x2C;
 } itSamusChargeshot_ItemVars;
+
+typedef struct itSamusChargeShot_Attributes {
+    /* +0 */ f32 lifetime;
+    /* +4 */ u32 x4;
+    /* +8 */ u32 x8;
+    /* +C */ u32 xC;
+} itSamusChargeShot_Attributes;
 
 typedef struct itSamusGrapple_ItemVars {
     /*  +0 ip+DD4 */ f32 x0;

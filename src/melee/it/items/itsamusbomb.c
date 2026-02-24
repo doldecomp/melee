@@ -93,7 +93,7 @@ void it_802B4CF4(Item_GObj* gobj)
 
 bool itSamusbomb_UnkMotion1_Anim(Item_GObj* gobj)
 {
-    HSD_JObj* hsd = gobj->hsd_obj;
+    HSD_JObj* jobj = GET_JOBJ(gobj);
     Item* ip = GET_ITEM(gobj);
     Item* ip2;
     itSamusBombAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
@@ -103,7 +103,7 @@ bool itSamusbomb_UnkMotion1_Anim(Item_GObj* gobj)
     PAD_STACK(0x10);
 
     if (ip->xD44_lifeTimer <= attr->x4) {
-        lb_8000BA0C(hsd, attr->x8);
+        lb_8000BA0C(jobj, attr->x8);
     }
     lifeTimer = ip->xD44_lifeTimer;
     if (lifeTimer <= 0.0f) {
@@ -120,55 +120,55 @@ bool itSamusbomb_UnkMotion1_Anim(Item_GObj* gobj)
     if (!(vel_x < 0.0001f)) {
         it_80272980(gobj);
         if (ip2->facing_dir == 1.0f) {
-            if (hsd == NULL) {
+            if (jobj == NULL) {
                 __assert("jobj.h", 0x294U, "jobj");
             }
-            if (hsd->flags & 0x20000) {
+            if (jobj->flags & 0x20000) {
                 __assert("jobj.h", 0x295U, "!(jobj->flags & JOBJ_USE_QUATERNION)");
             }
-            hsd->rotate.y = 0.0f;
-            if (!(hsd->flags & 0x02000000)) {
-                if (hsd != NULL) {
-                    if (hsd == NULL) {
+            jobj->rotate.y = 0.0f;
+            if (!(jobj->flags & 0x02000000)) {
+                if (jobj != NULL) {
+                    if (jobj == NULL) {
                         __assert("jobj.h", 0x234U, "jobj");
                     }
                     {
                         u32 flags;
                         s32 c;
-                        flags = hsd->flags;
+                        flags = jobj->flags;
                         c = 0;
                         if (!(flags & 0x800000) && (flags & 0x40)) {
                             c = 1;
                         }
                         if (c == 0) {
-                            HSD_JObjSetMtxDirtySub(hsd);
+                            HSD_JObjSetMtxDirtySub(jobj);
                         }
                     }
                 }
             }
         } else {
-            if (hsd == NULL) {
+            if (jobj == NULL) {
                 __assert("jobj.h", 0x294U, "jobj");
             }
-            if (hsd->flags & 0x20000) {
+            if (jobj->flags & 0x20000) {
                 __assert("jobj.h", 0x295U, "!(jobj->flags & JOBJ_USE_QUATERNION)");
             }
-            hsd->rotate.y = 3.1415927f;
-            if (!(hsd->flags & 0x02000000)) {
-                if (hsd != NULL) {
-                    if (hsd == NULL) {
+            jobj->rotate.y = 3.1415927f;
+            if (!(jobj->flags & 0x02000000)) {
+                if (jobj != NULL) {
+                    if (jobj == NULL) {
                         __assert("jobj.h", 0x234U, "jobj");
                     }
                     {
                         u32 flags;
                         s32 c;
-                        flags = hsd->flags;
+                        flags = jobj->flags;
                         c = 0;
                         if (!(flags & 0x800000) && (flags & 0x40)) {
                             c = 1;
                         }
                         if (c == 0) {
-                            HSD_JObjSetMtxDirtySub(hsd);
+                            HSD_JObjSetMtxDirtySub(jobj);
                         }
                     }
                 }
@@ -199,7 +199,7 @@ void itSamusBomb_Logic50_EnteredAir(Item_GObj* gobj)
 
 bool itSamusbomb_UnkMotion2_Anim(Item_GObj* gobj)
 {
-    HSD_JObj* hsd = gobj->hsd_obj;
+    HSD_JObj* jobj = GET_JOBJ(gobj);
     Item* ip = GET_ITEM(gobj);
     Item* ip2;
     itSamusBombAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
@@ -209,7 +209,7 @@ bool itSamusbomb_UnkMotion2_Anim(Item_GObj* gobj)
     PAD_STACK(0x08);
 
     if (ip->xD44_lifeTimer <= attr->x4) {
-        lb_8000BA0C(hsd, attr->x8);
+        lb_8000BA0C(jobj, attr->x8);
     }
     lifeTimer = ip->xD44_lifeTimer;
     if (lifeTimer <= 0.0f) {
@@ -226,55 +226,55 @@ bool itSamusbomb_UnkMotion2_Anim(Item_GObj* gobj)
     if (!(vel_x < 0.0001f)) {
         it_80272980(gobj);
         if (ip2->facing_dir == 1.0f) {
-            if (hsd == NULL) {
+            if (jobj == NULL) {
                 __assert("jobj.h", 0x294U, "jobj");
             }
-            if (hsd->flags & 0x20000) {
+            if (jobj->flags & 0x20000) {
                 __assert("jobj.h", 0x295U, "!(jobj->flags & JOBJ_USE_QUATERNION)");
             }
-            hsd->rotate.y = 0.0f;
-            if (!(hsd->flags & 0x02000000)) {
-                if (hsd != NULL) {
-                    if (hsd == NULL) {
+            jobj->rotate.y = 0.0f;
+            if (!(jobj->flags & 0x02000000)) {
+                if (jobj != NULL) {
+                    if (jobj == NULL) {
                         __assert("jobj.h", 0x234U, "jobj");
                     }
                     {
                         u32 flags;
                         s32 c;
-                        flags = hsd->flags;
+                        flags = jobj->flags;
                         c = 0;
                         if (!(flags & 0x800000) && (flags & 0x40)) {
                             c = 1;
                         }
                         if (c == 0) {
-                            HSD_JObjSetMtxDirtySub(hsd);
+                            HSD_JObjSetMtxDirtySub(jobj);
                         }
                     }
                 }
             }
         } else {
-            if (hsd == NULL) {
+            if (jobj == NULL) {
                 __assert("jobj.h", 0x294U, "jobj");
             }
-            if (hsd->flags & 0x20000) {
+            if (jobj->flags & 0x20000) {
                 __assert("jobj.h", 0x295U, "!(jobj->flags & JOBJ_USE_QUATERNION)");
             }
-            hsd->rotate.y = 3.1415927f;
-            if (!(hsd->flags & 0x02000000)) {
-                if (hsd != NULL) {
-                    if (hsd == NULL) {
+            jobj->rotate.y = 3.1415927f;
+            if (!(jobj->flags & 0x02000000)) {
+                if (jobj != NULL) {
+                    if (jobj == NULL) {
                         __assert("jobj.h", 0x234U, "jobj");
                     }
                     {
                         u32 flags;
                         s32 c;
-                        flags = hsd->flags;
+                        flags = jobj->flags;
                         c = 0;
                         if (!(flags & 0x800000) && (flags & 0x40)) {
                             c = 1;
                         }
                         if (c == 0) {
-                            HSD_JObjSetMtxDirtySub(hsd);
+                            HSD_JObjSetMtxDirtySub(jobj);
                         }
                     }
                 }

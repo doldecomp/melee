@@ -19,11 +19,11 @@
 /* 2B5A98 */ bool itSamuschargeshot_UnkMotion0_Anim(Item_GObj* gobj);
 /* 2B5CB0 */ void itSamuschargeshot_UnkMotion0_Phys(Item_GObj* gobj);
 /* 2B5CB4 */ bool itSamuschargeshot_UnkMotion0_Coll(Item_GObj* gobj);
-/* 2B5CBC */ UNK_RET it_802B5CBC(UNK_PARAMS);
+/* 2B5CBC */ void it_802B5CBC(Item_GObj* gobj);
 /* 2B5D54 */ bool itSamuschargeshot_UnkMotion8_Anim(Item_GObj* gobj);
 /* 2B5E50 */ void itSamuschargeshot_UnkMotion8_Phys(Item_GObj* gobj);
 /* 2B5EA0 */ bool itSamuschargeshot_UnkMotion8_Coll(Item_GObj* gobj);
-/* 2B5EDC */ UNK_RET it_802B5EDC(UNK_PARAMS);
+/* 2B5EDC */ void it_802B5EDC(Item_GObj* gobj);
 /* 2B5FD8 */ bool itSamusChargeshot_Logic108_DmgDealt(Item_GObj*);
 /* 2B5FE0 */ bool itSamusChargeshot_Logic108_Clanked(Item_GObj*);
 /* 2B5FE8 */ bool itSamusChargeshot_Logic108_Absorbed(Item_GObj*);
