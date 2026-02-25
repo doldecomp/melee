@@ -93,8 +93,7 @@ void it_802B56E4(Item_GObj* gobj, Vec3* vec, f32 farg0, f32 farg1, f32 farg2)
     Item* ip = GET_ITEM(gobj);
     itSamusChargeShot_Attributes* attr =
         ip->xC4_article_data->x4_specialAttributes;
-
-    PAD_STACK(0X8);
+    PAD_STACK(8);
 
     ip->xDD4_itemVar.samuschargeshot.xDD8 = farg0;
     it_80275158(gobj, attr->lifetime);
@@ -104,48 +103,50 @@ void it_802B56E4(Item_GObj* gobj, Vec3* vec, f32 farg0, f32 farg1, f32 farg2)
     if (farg1 > farg2) {
         farg1 = farg2;
     }
-    ip->xDD4_itemVar.samuschargeshot.xDEC = (s32) farg1;
-    ip->xDD4_itemVar.samuschargeshot.xDF0 = (s32) farg2;
-    if ((ip->xDD4_itemVar.samuschargeshot.xE00 != NULL) &&
-        (ip->owner == ip->xDD4_itemVar.samuschargeshot.xE00))
+    ip->xDD4_itemVar.samuschargeshot.xDEC = farg1;
+    ip->xDD4_itemVar.samuschargeshot.xDF0 = farg2;
     {
-        it_802B5CBC(gobj);
+        if (ip->xDD4_itemVar.samuschargeshot.xE00 != NULL &&
+            ip->owner == ip->xDD4_itemVar.samuschargeshot.xE00)
         {
-            Vec3 sp2C;
-            Vec3 sp20;
+            it_802B5CBC(gobj);
+            {
+                Vec3 sp2C;
+                Vec3 sp20;
 
-            HSD_MtxGetRotation(
-                ftLib_80086630(ip->xDD4_itemVar.samuschargeshot.xE00,
-                               (enum Fighter_Part) ip->xDC4)
-                    ->mtx,
-                &sp2C);
-            sp20.z = 0.0f;
-            sp20.y = 0.0f;
-            sp20.x = 0.0f;
-            it_8027429C(gobj, &sp20);
+                HSD_MtxGetRotation(
+                    ftLib_80086630(ip->xDD4_itemVar.samuschargeshot.xE00,
+                                   ip->xDC4)
+                        ->mtx,
+                    &sp2C);
+                sp20.x = sp20.y = sp20.z = 0.0f;
+                it_8027429C(gobj, &sp20);
+            }
+            ip->xDC8_word.flags.x14 = 0;
+            it_8026B3A8(gobj);
+            ip->xDD4_itemVar.samuschargeshot.xDDC =
+                (farg1 * ((attr->xC - attr->x8) / farg2)) + attr->x8;
+            ip->xDD4_itemVar.samuschargeshot.xDF8 =
+                (u32) ((farg1 * ((attr->x14 - attr->x10) / farg2)) +
+                       attr->x10);
+            ip->xDD4_itemVar.samuschargeshot.xDE0 = 0.0f;
+            ip->xDD4_itemVar.samuschargeshot.xDE4 =
+                (ip->xDD4_itemVar.samuschargeshot.xDEC *
+                 ((attr->x1C - attr->x18) /
+                  ip->xDD4_itemVar.samuschargeshot.xDF0)) +
+                attr->x18;
+            ip->xDD4_itemVar.samuschargeshot.xDF4 = 0;
+            ip->facing_dir =
+                ftLib_800865C0(ip->xDD4_itemVar.samuschargeshot.xE00);
+            ip->pos = *vec;
+            ip->xDD4_itemVar.samuschargeshot.xDFC = 0;
+            ip->x40_vel.x = ip->xDD4_itemVar.samuschargeshot.xDDC *
+                            cosf(ip->xDD4_itemVar.samuschargeshot.xDD8);
+            ip->x40_vel.y = ip->xDD4_itemVar.samuschargeshot.xDDC *
+                            sinf(ip->xDD4_itemVar.samuschargeshot.xDD8);
+            ip->x40_vel.z = 0.0f;
+            ip->xDD4_itemVar.samuschargeshot.xDE8 = 1;
         }
-        ip->xDC8_word.flags.x14 = 0;
-        it_8026B3A8(gobj);
-        ip->xDD4_itemVar.samuschargeshot.xDDC =
-            (farg1 * ((attr->xC - attr->x8) / farg2)) + attr->x8;
-        ip->xDD4_itemVar.samuschargeshot.xDF8 =
-            (u32) ((farg1 * ((attr->x14 - attr->x10) / farg2)) + attr->x10);
-        ip->xDD4_itemVar.samuschargeshot.xDE0 = 0.0f;
-        ip->xDD4_itemVar.samuschargeshot.xDE4 =
-            (ip->xDD4_itemVar.samuschargeshot.xDEC *
-             ((attr->x1C - attr->x18) /
-              ip->xDD4_itemVar.samuschargeshot.xDF0)) +
-            attr->x18;
-        ip->xDD4_itemVar.samuschargeshot.xDF4 = 0;
-        ip->facing_dir = ftLib_800865C0(ip->xDD4_itemVar.samuschargeshot.xE00);
-        ip->pos = *vec;
-        ip->xDD4_itemVar.samuschargeshot.xDFC = 0;
-        ip->x40_vel.x = ip->xDD4_itemVar.samuschargeshot.xDDC *
-                        cosf(ip->xDD4_itemVar.samuschargeshot.xDD8);
-        ip->x40_vel.y = ip->xDD4_itemVar.samuschargeshot.xDDC *
-                        sinf(ip->xDD4_itemVar.samuschargeshot.xDD8);
-        ip->x40_vel.z = 0.0f;
-        ip->xDD4_itemVar.samuschargeshot.xDE8 = 1;
     }
 }
 
@@ -234,7 +235,7 @@ void it_802B5CBC(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     itSamusChargeShot_Attributes* attr =
         ip->xC4_article_data->x4_specialAttributes;
-    HSD_GObjEvent event;
+    PAD_STACK(4);
 
     it_80275158(gobj, attr->lifetime);
     efLib_DestroyAll(gobj);
