@@ -971,22 +971,21 @@ u32 gm_80162800(MatchEnd* arg0)
 
 void gm_801628C4(u32 arg0, u32 arg1)
 {
-    u32* p;
-    u32 v;
-    struct gmm_retval_ED98* s;
+    u32* temp_r3;
+    u32 var_r4;
+    struct gmm_retval_ED98* temp_r3_3;
 
-    p = gmMainLib_8015CD14();
-    v = *p + arg0;
-    *p = (v > (u32)-1) ? (u32)-1 : v;
+    temp_r3 = gmMainLib_8015CD14();
+    var_r4 = *temp_r3 + arg0;
+    *temp_r3 = (var_r4 > (u32) -1) ? (u32) -1 : var_r4;
 
-    p = gmMainLib_8015CD20();
-    v = *p + (arg0 * arg1);
-    *p = (v > (u32)-1) ? (u32)-1 : v;
+    temp_r3 = gmMainLib_8015CD20();
+    var_r4 = *temp_r3 + (arg0 * arg1);
+    *temp_r3 = (var_r4 > (u32) -1) ? (u32) -1 : var_r4;
 
-
-    s = gmMainLib_8015ED98();
-    v = s->x4 + (arg0 * arg1);   // recompute here (don’t carry across call)
-    s->x4 = (v > (u32)-1) ? (u32)-1 : v;
+    temp_r3_3 = gmMainLib_8015ED98();
+    var_r4 = temp_r3_3->x4 + (arg0 * arg1);
+    temp_r3_3->x4 = (var_r4 > (u32) -1) ? (u32) -1 : var_r4;
 }
 
 long gm_80162968(u32 seconds)
