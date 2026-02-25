@@ -891,7 +891,7 @@ s32 gm_8016247C(s32 arg0)
 
     var_r3 = MAX(-1U, *temp_r5 + arg0);
     *temp_r5 = var_r3;
-    
+
     var_r28 = MIN(0x270FU, temp_r29 + arg0);
     var_r29 = var_r28;
 
