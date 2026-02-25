@@ -1,9 +1,11 @@
 #include "itsamusbomb.h"
 
+#include "math.h"
 #include "math_ppc.h"
 
 #include <placeholder.h>
 #include <platform.h>
+#include "it/forward.h"
 
 #include "baselib/mtx.h"
 #include "db/db.h"
@@ -16,26 +18,26 @@
 #include "lb/lb_00B0.h"
 #include "lb/lbvector.h"
 
-Item_GObj* it_802B4AC8(Fighter_GObj* gobj, Vec3* pos, f32 facing_dir)
+Item_GObj* it_802B4AC8(Fighter_GObj* parent_gobj, Vec3* pos, f32 facing_dir)
 {
-    HSD_GObj* n;
+    Item_GObj* gobj;
     SpawnItem si;
     si.kind = It_Kind_Samus_Bomb;
     si.prev_pos = *pos;
     si.prev_pos.z = 0.0f;
-    it_8026BB68(gobj, &si.pos);
+    it_8026BB68(parent_gobj, &si.pos);
     si.facing_dir = facing_dir;
     si.x3C_damage = 0;
     si.vel.x = si.vel.y = si.vel.z = 0.0f;
-    si.x0_parent_gobj = gobj;
+    si.x0_parent_gobj = parent_gobj;
     si.x4_parent_gobj2 = si.x0_parent_gobj;
     si.x44_flag.b0 = true;
     si.x40 = 0;
-    n = Item_80268B18(&si);
-    if (n != NULL) {
-        it_802B4BA0(n);
-        db_80225DD8(n, gobj);
-        return n;
+    gobj = Item_80268B18(&si);
+    if (gobj != NULL) {
+        it_802B4BA0(gobj);
+        db_80225DD8(gobj, parent_gobj);
+        return gobj;
     } else {
         return NULL;
     }
@@ -59,8 +61,20 @@ void it_802B4C10(Item_GObj* gobj)
     Item_80268E5C(gobj, 0, 0x11);
 }
 
-bool itSamusbomb_UnkMotion0_Anim(Item_GObj* gobj)
-{
+inline void itSamusBomb_UnkMotion_Process(Item_GObj* gobj){
+    Item* ip = GET_ITEM(gobj);
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+    if (!(ABS(ip->x40_vel.x) < 0.0001f)) {
+        it_80272980(gobj);
+        if (ip->facing_dir == 1.0f) {
+            HSD_JObjSetRotationY(jobj, 0.0f);
+        } else {
+            HSD_JObjSetRotationY(jobj, M_PI);
+        }
+    }
+}
+
+inline void itSamusBomb_UnkMotion_PreProcess(Item_GObj* gobj) {
     Item* ip = GET_ITEM(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
     itSamusBombAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
@@ -74,6 +88,12 @@ bool itSamusbomb_UnkMotion0_Anim(Item_GObj* gobj)
     } else {
         --ip->xD44_lifeTimer;
     }
+}
+
+
+bool itSamusbomb_UnkMotion0_Anim(Item_GObj* gobj)
+{
+    itSamusBomb_UnkMotion_PreProcess(gobj);
     return false;
 }
 
@@ -93,89 +113,10 @@ void it_802B4CF4(Item_GObj* gobj)
 
 bool itSamusbomb_UnkMotion1_Anim(Item_GObj* gobj)
 {
-    HSD_JObj* jobj = GET_JOBJ(gobj);
-    Item* ip = GET_ITEM(gobj);
-    Item* ip2;
-    itSamusBombAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+    itSamusBomb_UnkMotion_PreProcess(gobj);
+    itSamusBomb_UnkMotion_Process(gobj);
 
-    f32 lifeTimer;
-    f32 vel_x;
-    PAD_STACK(0x10);
-
-    if (ip->xD44_lifeTimer <= attr->x4) {
-        lb_8000BA0C(jobj, attr->x8);
-    }
-    lifeTimer = ip->xD44_lifeTimer;
-    if (lifeTimer <= 0.0f) {
-        it_802B53CC(gobj);
-    } else {
-        ip->xD44_lifeTimer = lifeTimer - 1.0f;
-    }
-
-    ip2 = GET_ITEM(gobj);
-    vel_x = ip2->x40_vel.x;
-    if (vel_x < 0.0f) {
-        vel_x = -vel_x;
-    }
-    if (!(vel_x < 0.0001f)) {
-        it_80272980(gobj);
-        if (ip2->facing_dir == 1.0f) {
-            if (jobj == NULL) {
-                __assert("jobj.h", 0x294U, "jobj");
-            }
-            if (jobj->flags & 0x20000) {
-                __assert("jobj.h", 0x295U, "!(jobj->flags & JOBJ_USE_QUATERNION)");
-            }
-            jobj->rotate.y = 0.0f;
-            if (!(jobj->flags & 0x02000000)) {
-                if (jobj != NULL) {
-                    if (jobj == NULL) {
-                        __assert("jobj.h", 0x234U, "jobj");
-                    }
-                    {
-                        u32 flags;
-                        s32 c;
-                        flags = jobj->flags;
-                        c = 0;
-                        if (!(flags & 0x800000) && (flags & 0x40)) {
-                            c = 1;
-                        }
-                        if (c == 0) {
-                            HSD_JObjSetMtxDirtySub(jobj);
-                        }
-                    }
-                }
-            }
-        } else {
-            if (jobj == NULL) {
-                __assert("jobj.h", 0x294U, "jobj");
-            }
-            if (jobj->flags & 0x20000) {
-                __assert("jobj.h", 0x295U, "!(jobj->flags & JOBJ_USE_QUATERNION)");
-            }
-            jobj->rotate.y = 3.1415927f;
-            if (!(jobj->flags & 0x02000000)) {
-                if (jobj != NULL) {
-                    if (jobj == NULL) {
-                        __assert("jobj.h", 0x234U, "jobj");
-                    }
-                    {
-                        u32 flags;
-                        s32 c;
-                        flags = jobj->flags;
-                        c = 0;
-                        if (!(flags & 0x800000) && (flags & 0x40)) {
-                            c = 1;
-                        }
-                        if (c == 0) {
-                            HSD_JObjSetMtxDirtySub(jobj);
-                        }
-                    }
-                }
-            }
-        }
-    }
-    return 0;
+    return false;
 }
 
 
@@ -199,89 +140,9 @@ void itSamusBomb_Logic50_EnteredAir(Item_GObj* gobj)
 
 bool itSamusbomb_UnkMotion2_Anim(Item_GObj* gobj)
 {
-    HSD_JObj* jobj = GET_JOBJ(gobj);
-    Item* ip = GET_ITEM(gobj);
-    Item* ip2;
-    itSamusBombAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
-
-    f32 lifeTimer;
-    f32 vel_x;
-    PAD_STACK(0x08);
-
-    if (ip->xD44_lifeTimer <= attr->x4) {
-        lb_8000BA0C(jobj, attr->x8);
-    }
-    lifeTimer = ip->xD44_lifeTimer;
-    if (lifeTimer <= 0.0f) {
-        it_802B53CC(gobj);
-    } else {
-        ip->xD44_lifeTimer = lifeTimer - 1.0f;
-    }
-
-    ip2 = GET_ITEM(gobj);
-    vel_x = ip2->x40_vel.x;
-    if (vel_x < 0.0f) {
-        vel_x = -vel_x;
-    }
-    if (!(vel_x < 0.0001f)) {
-        it_80272980(gobj);
-        if (ip2->facing_dir == 1.0f) {
-            if (jobj == NULL) {
-                __assert("jobj.h", 0x294U, "jobj");
-            }
-            if (jobj->flags & 0x20000) {
-                __assert("jobj.h", 0x295U, "!(jobj->flags & JOBJ_USE_QUATERNION)");
-            }
-            jobj->rotate.y = 0.0f;
-            if (!(jobj->flags & 0x02000000)) {
-                if (jobj != NULL) {
-                    if (jobj == NULL) {
-                        __assert("jobj.h", 0x234U, "jobj");
-                    }
-                    {
-                        u32 flags;
-                        s32 c;
-                        flags = jobj->flags;
-                        c = 0;
-                        if (!(flags & 0x800000) && (flags & 0x40)) {
-                            c = 1;
-                        }
-                        if (c == 0) {
-                            HSD_JObjSetMtxDirtySub(jobj);
-                        }
-                    }
-                }
-            }
-        } else {
-            if (jobj == NULL) {
-                __assert("jobj.h", 0x294U, "jobj");
-            }
-            if (jobj->flags & 0x20000) {
-                __assert("jobj.h", 0x295U, "!(jobj->flags & JOBJ_USE_QUATERNION)");
-            }
-            jobj->rotate.y = 3.1415927f;
-            if (!(jobj->flags & 0x02000000)) {
-                if (jobj != NULL) {
-                    if (jobj == NULL) {
-                        __assert("jobj.h", 0x234U, "jobj");
-                    }
-                    {
-                        u32 flags;
-                        s32 c;
-                        flags = jobj->flags;
-                        c = 0;
-                        if (!(flags & 0x800000) && (flags & 0x40)) {
-                            c = 1;
-                        }
-                        if (c == 0) {
-                            HSD_JObjSetMtxDirtySub(jobj);
-                        }
-                    }
-                }
-            }
-        }
-    }
-    return 0;
+    itSamusBomb_UnkMotion_PreProcess(gobj);
+    itSamusBomb_UnkMotion_Process(gobj);
+    return false;
 }
 
 /// NOTE: 4 iterations instead of the usual 3

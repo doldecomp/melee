@@ -23,9 +23,8 @@
 #include <math.h>
 #include <trigf.h>
 
-#define TAU 6.283185307179586
-#define PI 3.141592653589793
-#define HALF_PI 1.5707963267948966
+#define M_TAU 6.283185307179586
+
 
 bool it_802B5518(Item_GObj* gobj, CollData* cd)
 {
@@ -94,8 +93,6 @@ HSD_GObj* it_802B55C8(Fighter_GObj* gobj, Vec3* pos,
 void it_802B56E4(Item_GObj* gobj, Vec3* vec, f32 farg0,
                  f32 farg1, f32 farg2)
 {
-    Vec3 sp2C;
-    Vec3 sp20;
     Item* ip = GET_ITEM(gobj);
     itSamusChargeShot_Attributes* attr =
         ip->xC4_article_data->x4_specialAttributes;
@@ -116,15 +113,20 @@ void it_802B56E4(Item_GObj* gobj, Vec3* vec, f32 farg0,
         (ip->owner == ip->xDD4_itemVar.samuschargeshot.xE00))
     {
         it_802B5CBC(gobj);
-        HSD_MtxGetRotation(
-            ftLib_80086630(ip->xDD4_itemVar.samuschargeshot.xE00,
-                           (enum Fighter_Part) ip->xDC4)
-                ->mtx,
-            &sp2C);
-        sp20.z = 0.0f;
-        sp20.y = 0.0f;
-        sp20.x = 0.0f;
-        it_8027429C(gobj, &sp20);
+        {
+            Vec3 sp2C;
+            Vec3 sp20;
+
+            HSD_MtxGetRotation(
+                ftLib_80086630(ip->xDD4_itemVar.samuschargeshot.xE00,
+                            (enum Fighter_Part) ip->xDC4)
+                    ->mtx,
+                &sp2C);
+            sp20.z = 0.0f;
+            sp20.y = 0.0f;
+            sp20.x = 0.0f;
+            it_8027429C(gobj, &sp20);
+        }
         ip->xDC8_word.flags.x14 = 0;
         it_8026B3A8(gobj);
         ip->xDD4_itemVar.samuschargeshot.xDDC =
@@ -196,30 +198,17 @@ void it_802B5974(Item_GObj* gobj)
 
 void it_2725_Logic108_PickedUp(Item_GObj* gobj)
 {
-    HSD_JObj* jobj = GET_JOBJ(gobj);
-    HSD_JObj* child;
     Item* ip = GET_ITEM(gobj);
-    enum ItemKind kind;
-
-    if (!jobj) {
-        child = NULL;
-    } else {
-        child = jobj->child;
-    }
-    if (!child) {
-        child = NULL;
-    } else {
-        child = child->child;
-    }
+    HSD_JObj* grandchild = itGetJObjGrandchild(gobj);
 
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
     switch (ip->kind) {
         case It_Kind_Samus_Charge:
-            efSync_Spawn(0x47F, (HSD_GObj* ) gobj, child);
+            efSync_Spawn(0x47F, (HSD_GObj* ) gobj, grandchild);
             ip->xDD4_itemVar.samuschargeshot.xDFC = 1;
             return;
         case It_Kind_Kirby_SamusCharge:
-            efSync_Spawn(0x4A1, (HSD_GObj* ) gobj, child);
+            efSync_Spawn(0x4A1, (HSD_GObj* ) gobj, grandchild);
             ip->xDD4_itemVar.samuschargeshot.xDFC = 1;
             return;
     }
@@ -228,38 +217,13 @@ void it_2725_Logic108_PickedUp(Item_GObj* gobj)
 
 bool itSamuschargeshot_UnkMotion8_Anim(Item_GObj* gobj)
 {
-    Item* ip = GET_ITEM(gobj);
+    Vec3 scale;
+    Item* ip  = GET_ITEM(gobj);
     HSD_JObj* grandchild = itGetJObjGrandchild(gobj);
 
-    f32 temp = *(f32*) &ip->xDD4_itemVar.samuschargeshot.xDE4;
-    Vec3 scale;
-    scale.z = temp;
-    scale.y = temp;
-    scale.x = temp;
+    scale.x = scale.y = scale.z = ip->xDD4_itemVar.samuschargeshot.xDE4;
 
-    if (grandchild == NULL) {
-        __assert("jobj.h", 0x2F8U, "jobj");
-    }
-
-    grandchild->scale = scale;
-
-    if (!(grandchild->flags & 0x02000000)) {
-        if (grandchild != NULL) {
-            if (grandchild == NULL) {
-                __assert("jobj.h", 0x234U, "jobj");
-            }
-            {
-                u32 flags = grandchild->flags;
-                s32 c2 = 0;
-                if (!(flags & 0x800000) && (flags & 0x40)) {
-                    c2 = 1;
-                }
-                if (c2 == 0) {
-                    HSD_JObjSetMtxDirtySub(grandchild);
-                }
-            }
-        }
-    }
+    HSD_JObjSetScale(grandchild, &scale);
     return it_80273130(gobj);
 }
 
@@ -289,8 +253,6 @@ void it_802B5CBC(Item_GObj* gobj)
     Item_80268E5C(gobj, ip->xDD4_itemVar.samuschargeshot.xDEC + 1, ITEM_ANIM_UPDATE);
     ip->on_accessory = it_802B5EDC;
 }
-
-/// #itSamuschargeshot_UnkMotion8_Anim
 
 void itSamuschargeshot_UnkMotion8_Phys(Item_GObj* gobj)
 {
@@ -358,39 +320,17 @@ bool it_2725_Logic108_Reflected(Item_GObj* gobj)
     f32 pi_over_two_x_facing_dir;
 
     ip->facing_dir = -ip->facing_dir;
-    pi_over_two_x_facing_dir = (f32) (HALF_PI * (f64) ip->facing_dir);
-    if (jobj == NULL) {
-        __assert("jobj.h", 0x294U, "jobj");
-    }
-    if (jobj->flags & 0x20000) {
-        __assert("jobj.h", 0x295U, "!(jobj->flags & JOBJ_USE_QUATERNION)");
-    }
-    jobj->rotate.y = pi_over_two_x_facing_dir;
-    if (!(jobj->flags & 0x02000000)) {
-        if (jobj != NULL) {
-            if (jobj == NULL) {
-                __assert("jobj.h", 0x234U, "jobj");
-            }
-            {
-                s32 c = 0;
-                u32 flags = jobj->flags;
-                if (!(flags & 0x800000) && (flags & 0x40)) {
-                    c = 1;
-                }
-                if (c == 0) {
-                    HSD_JObjSetMtxDirtySub(jobj);
-                }
-            }
-        }
-    }
-    ip->xDD4_itemVar.samuschargeshot.xDD8 = (f32) ((f64) ip->xDD4_itemVar.samuschargeshot.xDD8 + PI);
+    pi_over_two_x_facing_dir = (f32) (M_PI_2 * (f64) ip->facing_dir);
+    HSD_JObjSetRotationY(jobj, pi_over_two_x_facing_dir);
+
+    ip->xDD4_itemVar.samuschargeshot.xDD8 += M_PI;
     while (ip->xDD4_itemVar.samuschargeshot.xDD8 < 0.0f) {
-        ip->xDD4_itemVar.samuschargeshot.xDD8 = (f32) ((f64) ip->xDD4_itemVar.samuschargeshot.xDD8 + TAU);
+        ip->xDD4_itemVar.samuschargeshot.xDD8 += M_TAU;
     }
-    while (ip->xDD4_itemVar.samuschargeshot.xDD8 > TAU) {
-        ip->xDD4_itemVar.samuschargeshot.xDD8 = (f32) ((f64) ip->xDD4_itemVar.samuschargeshot.xDD8 - TAU);
+    while (ip->xDD4_itemVar.samuschargeshot.xDD8 > M_TAU) {
+        ip->xDD4_itemVar.samuschargeshot.xDD8 -= M_TAU;
     }
-    return 0;
+    return false;
 }
 
 
@@ -408,41 +348,16 @@ bool it_2725_Logic108_ShieldBounced(Item_GObj* gobj)
     lbVector_Mirror(&ip->x40_vel, &ip->xC58);
     ip->xDD4_itemVar.samuschargeshot.xDD8 = atan2f(ip->x40_vel.y, ip->x40_vel.x);
     while (ip->xDD4_itemVar.samuschargeshot.xDD8 < 0.0f) {
-        ip->xDD4_itemVar.samuschargeshot.xDD8 = (f32) ((f64) ip->xDD4_itemVar.samuschargeshot.xDD8 + TAU);
+        ip->xDD4_itemVar.samuschargeshot.xDD8 += M_TAU;
     }
-    while (ip->xDD4_itemVar.samuschargeshot.xDD8 > TAU) {
-        ip->xDD4_itemVar.samuschargeshot.xDD8 = (f32) ((f64) ip->xDD4_itemVar.samuschargeshot.xDD8 - TAU);
+    while (ip->xDD4_itemVar.samuschargeshot.xDD8 > M_TAU) {
+        ip->xDD4_itemVar.samuschargeshot.xDD8 -= M_TAU;
     }
 
     ip->facing_dir = (ip->x40_vel.x >= 0.0f) ? 1.0f : -1.0f;
-    pi_over_two_x_facing_dir = (f32) (1.5707963267948966 * (f64) ip->facing_dir);
-    if (jobj == NULL) {
-        __assert("jobj.h", 0x294U, "jobj");
-    }
-    if (jobj->flags & 0x20000) {
-        __assert("jobj.h", 0x295U, "!(jobj->flags & JOBJ_USE_QUATERNION)");
-    }
-    jobj->rotate.y = pi_over_two_x_facing_dir;
-    if (!(jobj->flags & 0x02000000)) {
-        if (jobj != NULL) {
-            if (jobj == NULL) {
-                __assert("jobj.h", 0x234U, "jobj");
-            }
-            {
-                s32 c;
-                u32 flags;
-                flags = jobj->flags;
-                c = 0;
-                if (!(flags & 0x800000) && (flags & 0x40)) {
-                    c = 1;
-                }
-                if (c == 0) {
-                    HSD_JObjSetMtxDirtySub(jobj);
-                }
-            }
-        }
-    }
-    return 0;
+    pi_over_two_x_facing_dir = (f32) (M_PI_2 * (f64) ip->facing_dir);
+    HSD_JObjSetRotationY(jobj, pi_over_two_x_facing_dir);
+    return false;
 }
 
 void itSamusChargeshot_Logic108_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
