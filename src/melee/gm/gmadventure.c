@@ -1,6 +1,7 @@
 #include "gmadventure.h"
 
 #include "gm_unsplit.h"
+#include "placeholder.h"
 
 #include <sysdolphin/baselib/random.h>
 #include <melee/gm/gmmain_lib.h>
@@ -1504,7 +1505,7 @@ void gm_801B4974(MinorScene* arg0)
                 temp_r29->x4C(count, temp_r29->x0.cpu_level, 0),
                 temp_r25_2->x4, gm_8017BE8C(temp_r25_2->xA), 1, 0, 1,
                 temp_r29->x64(count, temp_r29->x0.cpu_level),
-                temp_r29->x68(count, temp_r29->x0.cpu_level));
+                temp_r29->x68(count, temp_r29->x0.cpu_level), -1, -1);
 
     temp_r29->x0.xC.x11 = 1;
     temp_r28->x3 = *temp_r24_2;
@@ -1527,7 +1528,7 @@ static inline void inline0(MinorScene* scene)
                     adv_data->x4C(count, adv_data->x0.cpu_level, 0),
                     temp_r29->x4, gm_8017BE8C(temp_r29->xA), 1, 0, 1,
                     adv_data->x64(count, adv_data->x0.cpu_level),
-                    adv_data->x68(count, adv_data->x0.cpu_level));
+                    adv_data->x68(count, adv_data->x0.cpu_level), -1, -1);
         adv_data->x0.xC.x11 = 1;
     }
 }
