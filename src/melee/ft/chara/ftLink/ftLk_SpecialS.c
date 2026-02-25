@@ -161,7 +161,7 @@ float calcAnglePos(HSD_GObj* gobj, Vec3* pos, float dist)
         }
     }
     if (angle < 0) {
-        angle += 2 * M_PI;
+        angle += M_TAU;
     }
     return angle;
 }

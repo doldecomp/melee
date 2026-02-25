@@ -201,10 +201,10 @@ s32 it_802E5F8C(Item_GObj* item_gobj, Vec3* pos, s32 arg2, s32 arg3, f32 arg4,
     it_802E614C(NULL, item_gobj, &sp2C, pos, &vel);
     angle = M_PI_2 + arg4;
     while (angle < 0.0f) {
-        angle += 2 * M_PI;
+        angle += M_TAU;
     }
-    while (angle > 2 * M_PI) {
-        angle -= 2 * M_PI;
+    while (angle > M_TAU) {
+        angle -= M_TAU;
     }
     if (angle > M_PI) {
         dir = -1.0f;

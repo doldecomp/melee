@@ -231,7 +231,7 @@ void itBox_UnkMotion1_Phys(Item_GObj* gobj)
     HSD_JObj* jobj = GET_JOBJ(gobj);
     Item* ip = GET_ITEM(gobj);
     ItemAttr* attr = ip->xCC_item_attr;
-    double const tau = 2 * M_PI;
+    double const tau = M_TAU;
 
     it_80272860(gobj, attr->x10_fall_speed, attr->x14_fall_speed_max);
 

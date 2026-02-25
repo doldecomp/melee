@@ -9,6 +9,7 @@
 #define MSL_LO(x) *(1 + (int*) &x)
 
 #define M_PI 3.14159265358979323846
+#define M_TAU 6.283185307179586
 #define M_PI_2 (M_PI / 2)
 #define M_PI_3 (M_PI / 3)
 

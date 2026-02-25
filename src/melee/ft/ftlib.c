@@ -295,7 +295,7 @@ HSD_JObj* ftLib_800865F0(HSD_GObj* gobj)
     return fp->parts[ftParts_GetBoneIndex(fp, 4)].joint;
 }
 
-void* ftLib_80086630(HSD_GObj* gobj, Fighter_Part part)
+HSD_JObj* ftLib_80086630(HSD_GObj* gobj, Fighter_Part part)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return fp->parts[part].joint;
