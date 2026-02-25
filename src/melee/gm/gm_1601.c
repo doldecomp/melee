@@ -882,28 +882,16 @@ s32 gm_8016247C(s32 arg0)
     u32 temp_r0_2;
     s32 temp_r29 = *gmMainLib_8015CCF0();
     u32* temp_r30 = gmMainLib_8015CCFC();
-    PAD_STACK(8);
 
-    var_r4 = -1U;
     temp_r5 = &gmMainLib_8015EDBC()->x14;
 
-    temp_r0 = *temp_r30 + arg0;
-    if (temp_r0 <= -1U) {
-        var_r4 = temp_r0;
-    }
+    var_r4 = MAX(-1U, *temp_r30 + arg0);
     *temp_r30 = var_r4;
 
-    var_r3 = -1U;
-    temp_r0_2 = *temp_r5 + arg0;
-    if (temp_r0_2 <= -1U) {
-        var_r3 = temp_r0_2;
-    }
-
-    var_r28 = temp_r29 + arg0;
+    var_r3 = MAX(-1U, *temp_r5 + arg0);
     *temp_r5 = var_r3;
-    if (var_r28 > 0x270FU) {
-        var_r28 = 0x270FU;
-    }
+    
+    var_r28 = MIN(0x270FU, temp_r29 + arg0);
     var_r29 = var_r28;
 
     temp_r30_2 = gmMainLib_8015CCF0();
