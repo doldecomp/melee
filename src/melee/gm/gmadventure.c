@@ -1,7 +1,6 @@
 #include "gmadventure.h"
 
 #include "gm_unsplit.h"
-#include "placeholder.h"
 
 #include <sysdolphin/baselib/random.h>
 #include <melee/gm/gmmain_lib.h>
