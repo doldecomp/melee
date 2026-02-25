@@ -8,6 +8,7 @@
 #include "stddef.h"
 
 #include "baselib/gobjplink.h"
+#include "baselib/jobj.h"
 #include "baselib/particle.h"
 #include "cm/camera.h"
 
@@ -3246,36 +3247,30 @@ s32 fn_80169900(u8 arg0, struct lbl_8046B488_t* arg1, s8* arg2, s8* arg3)
 void fn_8016A09C(void)
 {
     s32 var_r29;
-    s32 var_r30;
-    s32 var_r31;
+    s32 i;
+    s32 j;
     PAD_STACK(4);
-
     var_r29 = 0;
+
     gm_8016AE44();
     lbl_8046B488.unk_10_b1 = 1;
-    var_r30 = 0;
     lbl_8046B488.unk_10_b0 = 0;
-loop_1:
-    if (Player_GetPlayerSlotType(var_r30) == Gm_PKind_NA) {
-        if (var_r29 < (s32) lbl_8046B488.x9) {
-            Player_SetFlagsBit1(var_r30);
-            var_r29 += 1;
-            goto block_4;
-        }
-    } else {
-    block_4:
-        var_r30 += 1;
-        if (var_r30 < 6) {
-            goto loop_1;
+
+    for (i = 0; i < 6; i++) {
+        if (Player_GetPlayerSlotType(i) == Gm_PKind_NA) {
+            if (var_r29 >= (s32) lbl_8046B488.x9) {
+                break;
+            }
+            Player_SetFlagsBit1(i);
+            var_r29++;
         }
     }
-    var_r31 = 0;
-    do {
-        if (Player_GetFlagsBit1(var_r31) != 0) {
-            Player_SetTeam(var_r31, 4);
+
+    for (j = 0; j < 6; j++) {
+        if (Player_GetFlagsBit1(j) != 0) {
+            Player_SetTeam(j, 4);
         }
-        var_r31 += 1;
-    } while (var_r31 < 6);
+    }
 }
 
 void gm_8016A164(void)
