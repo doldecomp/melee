@@ -3,16 +3,18 @@
 #include <placeholder.h>
 #include <platform.h>
 
+#include "baselib/forward.h"
+
 #include "baselib/gobj.h"
 #include "baselib/mtx.h"
 #include "ef/eflib.h"
 #include "ef/efsync.h"
-
-#include "baselib/forward.h"
-#include "it/forward.h"
-#include "ft/chara/ftSamus/ftSs_SpecialN.h"
 #include "ft/chara/ftKirby/ftKb_Init.h"
+#include "ft/chara/ftSamus/ftSs_SpecialN.h"
 #include "ft/ftlib.h"
+
+#include "it/forward.h"
+
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
@@ -22,9 +24,6 @@
 
 #include <math.h>
 #include <trigf.h>
-
-#define M_TAU 6.283185307179586
-
 
 bool it_802B5518(Item_GObj* gobj, CollData* cd)
 {
@@ -48,9 +47,8 @@ bool it_802B5518(Item_GObj* gobj, CollData* cd)
     return ret;
 }
 
-HSD_GObj* it_802B55C8(Fighter_GObj* gobj, Vec3* pos,
-                       enum Fighter_Part arg2, s32 arg3,
-                       f32 facing_dir)
+HSD_GObj* it_802B55C8(Fighter_GObj* gobj, Vec3* pos, enum Fighter_Part arg2,
+                      s32 arg3, f32 facing_dir)
 {
     SpawnItem si;
     HSD_GObj* n;
@@ -90,8 +88,7 @@ HSD_GObj* it_802B55C8(Fighter_GObj* gobj, Vec3* pos,
     return (HSD_GObj*) n;
 }
 
-void it_802B56E4(Item_GObj* gobj, Vec3* vec, f32 farg0,
-                 f32 farg1, f32 farg2)
+void it_802B56E4(Item_GObj* gobj, Vec3* vec, f32 farg0, f32 farg1, f32 farg2)
 {
     Item* ip = GET_ITEM(gobj);
     itSamusChargeShot_Attributes* attr =
@@ -119,7 +116,7 @@ void it_802B56E4(Item_GObj* gobj, Vec3* vec, f32 farg0,
 
             HSD_MtxGetRotation(
                 ftLib_80086630(ip->xDD4_itemVar.samuschargeshot.xE00,
-                            (enum Fighter_Part) ip->xDC4)
+                               (enum Fighter_Part) ip->xDC4)
                     ->mtx,
                 &sp2C);
             sp20.z = 0.0f;
@@ -132,25 +129,21 @@ void it_802B56E4(Item_GObj* gobj, Vec3* vec, f32 farg0,
         ip->xDD4_itemVar.samuschargeshot.xDDC =
             (farg1 * ((attr->xC - attr->x8) / farg2)) + attr->x8;
         ip->xDD4_itemVar.samuschargeshot.xDF8 =
-            (u32) ((farg1 * ((attr->x14 - attr->x10) / farg2)) +
-                   attr->x10);
+            (u32) ((farg1 * ((attr->x14 - attr->x10) / farg2)) + attr->x10);
         ip->xDD4_itemVar.samuschargeshot.xDE0 = 0.0f;
         ip->xDD4_itemVar.samuschargeshot.xDE4 =
             (ip->xDD4_itemVar.samuschargeshot.xDEC *
              ((attr->x1C - attr->x18) /
-             ip->xDD4_itemVar.samuschargeshot.xDF0)) +
+              ip->xDD4_itemVar.samuschargeshot.xDF0)) +
             attr->x18;
         ip->xDD4_itemVar.samuschargeshot.xDF4 = 0;
-        ip->facing_dir =
-            ftLib_800865C0(ip->xDD4_itemVar.samuschargeshot.xE00);
+        ip->facing_dir = ftLib_800865C0(ip->xDD4_itemVar.samuschargeshot.xE00);
         ip->pos = *vec;
         ip->xDD4_itemVar.samuschargeshot.xDFC = 0;
-        ip->x40_vel.x =
-            ip->xDD4_itemVar.samuschargeshot.xDDC *
-            cosf(ip->xDD4_itemVar.samuschargeshot.xDD8);
-        ip->x40_vel.y =
-            ip->xDD4_itemVar.samuschargeshot.xDDC *
-            sinf(ip->xDD4_itemVar.samuschargeshot.xDD8);
+        ip->x40_vel.x = ip->xDD4_itemVar.samuschargeshot.xDDC *
+                        cosf(ip->xDD4_itemVar.samuschargeshot.xDD8);
+        ip->x40_vel.y = ip->xDD4_itemVar.samuschargeshot.xDDC *
+                        sinf(ip->xDD4_itemVar.samuschargeshot.xDD8);
         ip->x40_vel.z = 0.0f;
         ip->xDD4_itemVar.samuschargeshot.xDE8 = 1;
     }
@@ -165,15 +158,19 @@ void it_2725_Logic108_Destroyed(Item_GObj* gobj)
         ip = GET_ITEM(gobj);
         efLib_DestroyAll((HSD_GObj*) gobj);
         if (ip->xDD4_itemVar.samuschargeshot.xDE8 == 0) {
-            if ((ip->xDD4_itemVar.samuschargeshot.xE00 != NULL) && (ip->owner == ip->xDD4_itemVar.samuschargeshot.xE00)) {
+            if ((ip->xDD4_itemVar.samuschargeshot.xE00 != NULL) &&
+                (ip->owner == ip->xDD4_itemVar.samuschargeshot.xE00))
+            {
                 temp_r0 = ip->kind;
                 switch (temp_r0) {
-                    case It_Kind_Samus_Charge:
-                        ftSs_SpecialN_801291F0(ip->xDD4_itemVar.samuschargeshot.xE00);
-                        break;
-                    case It_Kind_Kirby_SamusCharge:
-                        ftKb_SpecialNSs_800FCD04(ip->xDD4_itemVar.samuschargeshot.xE00);
-                        break;
+                case It_Kind_Samus_Charge:
+                    ftSs_SpecialN_801291F0(
+                        ip->xDD4_itemVar.samuschargeshot.xE00);
+                    break;
+                case It_Kind_Kirby_SamusCharge:
+                    ftKb_SpecialNSs_800FCD04(
+                        ip->xDD4_itemVar.samuschargeshot.xE00);
+                    break;
                 }
             }
             ip->xDD4_itemVar.samuschargeshot.xE00 = 0;
@@ -182,7 +179,6 @@ void it_2725_Logic108_Destroyed(Item_GObj* gobj)
         ip->xDC8_word.flags.x13 = 0;
     }
 }
-
 
 void it_802B5974(Item_GObj* gobj)
 {
@@ -203,22 +199,21 @@ void it_2725_Logic108_PickedUp(Item_GObj* gobj)
 
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
     switch (ip->kind) {
-        case It_Kind_Samus_Charge:
-            efSync_Spawn(0x47F, (HSD_GObj* ) gobj, grandchild);
-            ip->xDD4_itemVar.samuschargeshot.xDFC = 1;
-            return;
-        case It_Kind_Kirby_SamusCharge:
-            efSync_Spawn(0x4A1, (HSD_GObj* ) gobj, grandchild);
-            ip->xDD4_itemVar.samuschargeshot.xDFC = 1;
-            return;
+    case It_Kind_Samus_Charge:
+        efSync_Spawn(0x47F, (HSD_GObj*) gobj, grandchild);
+        ip->xDD4_itemVar.samuschargeshot.xDFC = 1;
+        return;
+    case It_Kind_Kirby_SamusCharge:
+        efSync_Spawn(0x4A1, (HSD_GObj*) gobj, grandchild);
+        ip->xDD4_itemVar.samuschargeshot.xDFC = 1;
+        return;
     }
 }
-
 
 bool itSamuschargeshot_UnkMotion8_Anim(Item_GObj* gobj)
 {
     Vec3 scale;
-    Item* ip  = GET_ITEM(gobj);
+    Item* ip = GET_ITEM(gobj);
     HSD_JObj* grandchild = itGetJObjGrandchild(gobj);
 
     scale.x = scale.y = scale.z = ip->xDD4_itemVar.samuschargeshot.xDE4;
@@ -237,7 +232,8 @@ bool itSamuschargeshot_UnkMotion0_Coll(Item_GObj* gobj)
 void it_802B5CBC(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itSamusChargeShot_Attributes* attr = ip->xC4_article_data->x4_specialAttributes;
+    itSamusChargeShot_Attributes* attr =
+        ip->xC4_article_data->x4_specialAttributes;
     HSD_GObjEvent event;
 
     it_80275158(gobj, attr->lifetime);
@@ -250,7 +246,8 @@ void it_802B5CBC(Item_GObj* gobj)
     if (ip->xDD4_itemVar.samuschargeshot.xDEC >= 8) {
         ip->xDD4_itemVar.samuschargeshot.xDEC = 7;
     }
-    Item_80268E5C(gobj, ip->xDD4_itemVar.samuschargeshot.xDEC + 1, ITEM_ANIM_UPDATE);
+    Item_80268E5C(gobj, ip->xDD4_itemVar.samuschargeshot.xDEC + 1,
+                  ITEM_ANIM_UPDATE);
     ip->on_accessory = it_802B5EDC;
 }
 
@@ -282,14 +279,14 @@ void it_802B5EDC(Item_GObj* gobj)
         (ip->xDD4_itemVar.samuschargeshot.xDF4 == 0))
     {
         switch (ip->kind) {
-            case It_Kind_Samus_Charge:
-                efSync_Spawn(0x480, gobj, jobj);
-                efSync_Spawn(0x481, gobj, jobj);
-                break;
-            case It_Kind_Kirby_SamusCharge:
-                efSync_Spawn(0x4A2, gobj, jobj);
-                efSync_Spawn(0x4A3, gobj, jobj);
-                break;
+        case It_Kind_Samus_Charge:
+            efSync_Spawn(0x480, gobj, jobj);
+            efSync_Spawn(0x481, gobj, jobj);
+            break;
+        case It_Kind_Kirby_SamusCharge:
+            efSync_Spawn(0x4A2, gobj, jobj);
+            efSync_Spawn(0x4A3, gobj, jobj);
+            break;
         }
     }
     ip->xDD4_itemVar.samuschargeshot.xDF4 =
@@ -333,7 +330,6 @@ bool it_2725_Logic108_Reflected(Item_GObj* gobj)
     return false;
 }
 
-
 bool itSamusChargeshot_Logic108_HitShield(Item_GObj* arg0)
 {
     return true;
@@ -346,7 +342,8 @@ bool it_2725_Logic108_ShieldBounced(Item_GObj* gobj)
     f32 pi_over_two_x_facing_dir;
 
     lbVector_Mirror(&ip->x40_vel, &ip->xC58);
-    ip->xDD4_itemVar.samuschargeshot.xDD8 = atan2f(ip->x40_vel.y, ip->x40_vel.x);
+    ip->xDD4_itemVar.samuschargeshot.xDD8 =
+        atan2f(ip->x40_vel.y, ip->x40_vel.x);
     while (ip->xDD4_itemVar.samuschargeshot.xDD8 < 0.0f) {
         ip->xDD4_itemVar.samuschargeshot.xDD8 += M_TAU;
     }

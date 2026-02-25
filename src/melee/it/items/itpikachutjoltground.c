@@ -131,10 +131,10 @@ bool itPikachutjoltground_UnkMotion0_Coll(Item_GObj* gobj)
         angle_diff = atan2f(ip2->x40_vel.y, ip2->x40_vel.x) - ground_angle;
 
         while (angle_diff < 0.0f) {
-            angle_diff += 2 * M_PI;
+            angle_diff += M_TAU;
         }
-        while (angle_diff > 2 * M_PI) {
-            angle_diff -= 2 * M_PI;
+        while (angle_diff > M_TAU) {
+            angle_diff -= M_TAU;
         }
         if (angle_diff < M_PI) {
             facing_dir = -1.0f;

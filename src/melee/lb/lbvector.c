@@ -133,9 +133,9 @@ float lbVector_AngleXY(Vec3* a, Vec3* b)
 static float sin(float angle)
 {
     if (angle > M_PI) {
-        angle -= 2 * M_PI;
+        angle -= M_TAU;
     } else if (angle < -M_PI) {
-        angle += 2 * M_PI;
+        angle += M_TAU;
     }
     return 0.9878619909286499f * angle -
            0.15527099370956421f * angle * angle * angle +
@@ -146,9 +146,9 @@ static float cos(float angle)
 {
     angle += M_PI / 2;
     if (angle > M_PI) {
-        angle -= 2 * M_PI;
+        angle -= M_TAU;
     } else if (angle < -M_PI) {
-        angle += 2 * M_PI;
+        angle += M_TAU;
     }
     return 0.9878619909286499f * angle -
            0.15527099370956421f * angle * angle * angle +

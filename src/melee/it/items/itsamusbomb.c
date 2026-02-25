@@ -5,11 +5,13 @@
 
 #include <placeholder.h>
 #include <platform.h>
-#include "it/forward.h"
 
 #include "baselib/mtx.h"
 #include "db/db.h"
 #include "ftSamus/ftSs_Init.h"
+
+#include "it/forward.h"
+
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
@@ -61,7 +63,8 @@ void it_802B4C10(Item_GObj* gobj)
     Item_80268E5C(gobj, 0, 0x11);
 }
 
-inline void itSamusBomb_UnkMotion_Process(Item_GObj* gobj){
+inline void itSamusBomb_UnkMotion_Process(Item_GObj* gobj)
+{
     Item* ip = GET_ITEM(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
     if (!(ABS(ip->x40_vel.x) < 0.0001f)) {
@@ -74,7 +77,8 @@ inline void itSamusBomb_UnkMotion_Process(Item_GObj* gobj){
     }
 }
 
-inline void itSamusBomb_UnkMotion_PreProcess(Item_GObj* gobj) {
+inline void itSamusBomb_UnkMotion_PreProcess(Item_GObj* gobj)
+{
     Item* ip = GET_ITEM(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
     itSamusBombAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
@@ -89,7 +93,6 @@ inline void itSamusBomb_UnkMotion_PreProcess(Item_GObj* gobj) {
         --ip->xD44_lifeTimer;
     }
 }
-
 
 bool itSamusbomb_UnkMotion0_Anim(Item_GObj* gobj)
 {
@@ -110,7 +113,6 @@ void it_802B4CF4(Item_GObj* gobj)
     Item_80268E5C(gobj, 1, 0x11);
 }
 
-
 bool itSamusbomb_UnkMotion1_Anim(Item_GObj* gobj)
 {
     itSamusBomb_UnkMotion_PreProcess(gobj);
@@ -118,7 +120,6 @@ bool itSamusbomb_UnkMotion1_Anim(Item_GObj* gobj)
 
     return false;
 }
-
 
 void itSamusbomb_UnkMotion1_Phys(Item_GObj* gobj)
 {

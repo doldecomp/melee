@@ -10,10 +10,10 @@
 static inline void normalizeAngle(f32* angle)
 {
     while (*angle < 0.0F) {
-        *angle += 2 * M_PI;
+        *angle += M_TAU;
     }
-    while (*angle > 2 * M_PI) {
-        *angle -= 2 * M_PI;
+    while (*angle > M_TAU) {
+        *angle -= M_TAU;
     }
 }
 

@@ -68,7 +68,7 @@ static float return_float5(void) // -25248
 
 static f64 return_float6(void) // -25236
 {
-    return 2 * M_PI;
+    return M_TAU;
 }
 
 static f64 return_float7(void) // -25228
@@ -337,29 +337,29 @@ static void ftNs_SpecialAirHi_CollisionModVel(
 
     fp = GET_FIGHTER(gobj);
     while (fp->mv.ns.specialhi.aerialVel < 0.0f) {
-        fp->mv.ns.specialhi.aerialVel += 2 * M_PI;
+        fp->mv.ns.specialhi.aerialVel += M_TAU;
     }
-    while (fp->mv.ns.specialhi.aerialVel > 2 * M_PI) {
-        fp->mv.ns.specialhi.aerialVel -= 2 * M_PI;
+    while (fp->mv.ns.specialhi.aerialVel > M_TAU) {
+        fp->mv.ns.specialhi.aerialVel -= M_TAU;
     }
     if (coll_data->env_flags & Collide_LeftWallMask) {
         phi_f1 = atan2f(coll_data->left_facing_wall.normal.y,
                         coll_data->left_facing_wall.normal.x);
         while (phi_f1 < 0.0f) {
-            phi_f1 += 2 * M_PI;
+            phi_f1 += M_TAU;
         }
 
-        while (phi_f1 > 2 * M_PI) {
-            phi_f1 -= 2 * M_PI;
+        while (phi_f1 > M_TAU) {
+            phi_f1 -= M_TAU;
         }
         phi_f3 = M_PI + fp->mv.ns.specialhi.aerialVel;
 
         while (phi_f3 < 0.0f) {
-            phi_f3 += 2 * M_PI;
+            phi_f3 += M_TAU;
         }
 
-        while (phi_f3 > 2 * M_PI) {
-            phi_f3 -= 2 * M_PI;
+        while (phi_f3 > M_TAU) {
+            phi_f3 -= M_TAU;
         }
         if ((phi_f3 - phi_f1) < 0.0f) {
             phi_f1 += M_PI / 2;
@@ -373,11 +373,11 @@ static void ftNs_SpecialAirHi_CollisionModVel(
         phi_f3 = M_PI + phi_f1;
 
         while (phi_f3 < 0.0f) {
-            phi_f3 += 2 * M_PI;
+            phi_f3 += M_TAU;
         }
 
-        while (phi_f3 > 2 * M_PI) {
-            phi_f3 -= 2 * M_PI;
+        while (phi_f3 > M_TAU) {
+            phi_f3 -= M_TAU;
         }
         if ((fp->mv.ns.specialhi.aerialVel - phi_f3) < 0.0f) {
             phi_f1 += M_PI / 2;

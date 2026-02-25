@@ -8190,7 +8190,7 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
                 cur_angle += angle_step;
             } else {
                 f32 rnd = HSD_Randf();
-                cur_angle = (f32) (M_PI * 2.0 * (f64) rnd);
+                cur_angle = (f32) (M_TAU * (f64) rnd);
             }
             gen->aux.line.x2 = vel_mag_sq;
             hsd_80398F0C(gen->linkNo, gen->bank, gen->kind | 4, gen->texGroup,
@@ -8434,8 +8434,8 @@ f32 hsd_8039DAD4(HSD_Generator* gen)
             f32 rnd = HSD_Randf();
             f32 az_angle;
             f32 r2 = gen->radius;
-            az_angle = (f32) ((f64) M_PI * 2.0 * (f64) rnd);
-            cone_angle = (f32) ((f64) (2.0 * M_PI) * az_angle);
+            az_angle = (f32) ((f64) M_TAU * (f64) rnd);
+            cone_angle = (f32) ((f64) M_TAU * az_angle);
 
             if (r2 < 0.0F) {
                 sin_az = -r2;
