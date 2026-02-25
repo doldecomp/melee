@@ -547,7 +547,7 @@ typedef struct itSamusChargeshot_ItemVars {
     /* +78 +E2C */ f32 xE2C;
     /* +7C +E30 */ f32 xE30;
     /* +80 +E34 */ f32 xE34;
-    /* +84 +E38 */ u32 padding[15];/* gap 0x84–0xC0 (0x3C bytes) */
+    /* +84 +E38 */ u32 padding[15]; /* gap 0x84-0xC0 (0x3C bytes) */
 } itSamusChargeshot_ItemVars;
 
 typedef struct itSamusChargeShot_Attributes {
