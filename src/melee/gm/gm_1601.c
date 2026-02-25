@@ -2038,7 +2038,63 @@ float fn_80166A8C(register Vec3* src, register Vec3* dst)
 }
 #endif
 
-/// #gm_80166A98
+// Probably some code to setup or end a 4 player match?
+s32 gm_80166A98(MatchEnd* arg0, s32 arg1, s8 arg2, u8 arg3, s8 arg4, u8 arg5,
+                s8 arg6, u8 arg7, u8 arg_sp8, u8 arg_spC)
+{
+    struct HSD_PadStatus* pad_status;
+    u32 i;
+
+    memzero(arg0, 0x227C);
+    pad_status = &HSD_PadMasterStatus[0];
+
+    arg0->result = 1;
+    arg0->x5 = 0;
+    arg0->is_teams = 0;
+
+    arg0->player_standings[0].character_kind = arg2;
+    arg0->player_standings[1].character_kind = arg4;
+    arg0->player_standings[2].character_kind = arg6;
+    arg0->player_standings[3].character_kind = arg_sp8;
+
+    // Apply player color to all 4 players?
+    for (i = 0; i < 4; i++) {
+        arg0->player_standings[i].character_kind |= (arg1 << 2) & 0xFC;
+    }
+
+    arg0->player_standings[0].score = 0xA - arg3;
+    arg0->player_standings[1].score = 0xA - arg5;
+    arg0->player_standings[2].score = 0xA - arg7;
+    arg0->player_standings[3].score = 0xA - arg_spC;
+    arg0->player_standings[0].x30 = 0xA - arg3;
+    arg0->player_standings[1].x30 = 0xA - arg5;
+    arg0->player_standings[2].x30 = 0xA - arg7;
+    arg0->player_standings[3].x30 = 0xA - arg_spC;
+
+    for (i = 0; i < 4; i++) {
+        arg0->player_standings[i].x30 += 6 - i;
+        if (arg0->player_standings[i].character_kind == 0x21) {
+            arg0->player_standings[i].slot_type = 3;
+        } else if (pad_status[i].err != 0) {
+            arg0->player_standings[i].slot_type = 1;
+        } else {
+            arg0->player_standings[i].slot_type = 0;
+        }
+
+        if (arg0->player_standings[i].character_kind == 0x13) {
+            arg0->player_standings[i].character_kind = 0x12;
+            arg0->player_standings[i].character_id = 7;
+        }
+    }
+
+    arg0->player_standings[4].slot_type = 3;
+    arg0->player_standings[5].slot_type = 3;
+    fn_80165AC0(arg0);
+    fn_80165D60(arg0);
+    fn_80165E7C(arg0);
+    fn_80165FA4(arg0);
+    return fn_801661E0(arg0);
+}
 
 u8 fn_80166CBC(struct fn_80166CBC_arg0_t* arg0, ssize_t index)
 {
