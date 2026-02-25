@@ -3133,7 +3133,66 @@ void fn_8016989C(u8* arg0, s32 arg1, s32 arg2, u8* arg3, u8* arg4)
     };
 }
 
-/// #fn_80169900
+#pragma push
+#pragma dont_inline on
+s32 fn_80169900(u8 arg0, struct lbl_8046B488_t* arg1, s8* arg2, s8* arg3)
+{
+    s32 var_r28 = 0;
+
+    switch ((s32) arg0) {
+    case 0: {
+        s8* src = arg3;
+        s8* dst = arg2;
+        while (*src != -2) {
+            *dst = (s8) arg1->x0;
+            src += 1;
+            dst += 1;
+        }
+        break;
+    }
+    case 1: {
+        s8* dst = arg2;
+        s8* src = arg3;
+        while (*src != -2) {
+            if (HSD_Randi(2) != 0) {
+                *dst = arg1->x0;
+            } else {
+                *dst = arg1->x1;
+            }
+            src += 1;
+            dst += 1;
+        }
+        break;
+    }
+    case 2: {
+        s32 var_r27 = HSD_Randi(5);
+        while (arg3[var_r28] != -2) {
+            if (var_r27 != 0) {
+                var_r27 -= 1;
+                arg2[var_r28] = arg1->x0;
+            } else {
+                var_r27 = 5;
+                if (HSD_Randi(2) != 0) {
+                    if ((s32) arg1->x1 != 0x21 && gm_80164840(arg1->x1)) {
+                        arg2[var_r28] = arg1->x1;
+                    } else {
+                        arg2[var_r28] = arg1->x0;
+                    }
+                } else {
+                    if ((s32) arg1->x2 != 0x21 && gm_80164840(arg1->x2)) {
+                        arg2[var_r28] = arg1->x2;
+                    } else {
+                        arg2[var_r28] = arg1->x0;
+                    }
+                }
+            }
+            var_r28 += 1;
+        }
+        break;
+    }
+    }
+}
+#pragma pop
 
 /// #fn_80169A84
 

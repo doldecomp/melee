@@ -16,9 +16,9 @@
 #define NUM_UNLOCKABLE_STAGES 11
 
 struct lbl_8046B488_t {
-    /* 0x000 */ u8 x0;
-    /* 0x001 */ u8 x1;
-    /* 0x002 */ u8 x2;
+    /* 0x000 */ s8 x0;
+    /* 0x001 */ s8 x1;
+    /* 0x002 */ s8 x2;
     /* 0x003 */ u8 pad_3[0x7 - 0x3];
     /* 0x007 */ u8 x7;
     /* 0x008 */ u8 x8;
