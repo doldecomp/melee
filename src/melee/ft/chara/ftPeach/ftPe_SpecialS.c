@@ -40,7 +40,7 @@ static void reset(HSD_GObj* gobj)
     fp->self_vel.x = 0;
     fp->x6A4_transNOffset.x = 0;
     if (fp->x673 < da->x30) {
-        fp->x2070.x2072_b4 = true;
+        fp->x2070.count_thrown_items = true;
         fp->mv.pe.specials.x0 = true;
     } else {
         fp->mv.pe.specials.x0 = false;
