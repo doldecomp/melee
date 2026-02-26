@@ -350,7 +350,19 @@ bool itLikelike_UnkMotion19_Coll(Item_GObj* gobj)
     return it_8027C824(gobj, NULL);
 }
 
-/// #it_802DC0AC
+void it_802DC0AC(Item_GObj* gobj)
+{
+    Item* temp_r31;
+    itLikelikeAttributes* temp_r30;
+    PAD_STACK(8);
+    temp_r31 = GET_ITEM(gobj);
+    temp_r30 = temp_r31->xC4_article_data->x4_specialAttributes;
+    it_80273454(gobj);
+    temp_r31->xDD4_itemVar.likelike.x4C = temp_r30->x4;
+    temp_r31->xDD4_itemVar.likelike.x3C = 0.0f;
+    Item_80268E5C(gobj, 6, ITEM_ANIM_UPDATE);
+}
+
 
 bool itLikelike_UnkMotion6_Anim(Item_GObj* gobj)
 {
