@@ -1298,12 +1298,12 @@ u32 gm_801631F0(void)
     u32 tmp;
 
     for (; i < 0x19; i++) {
-        tmp = sum + *gmMainLib_8015D06C((u8)i);
+        tmp = sum + *gmMainLib_8015D06C((u8) i);
 
-        if (tmp > (u32)-1) {
-            tmp = (u32)-1;
+        if (tmp > (u32) -1) {
+            tmp = (u32) -1;
         } else {
-            tmp = sum + *gmMainLib_8015D06C((u8)i);
+            tmp = sum + *gmMainLib_8015D06C((u8) i);
         }
         sum = tmp;
     }
@@ -1386,7 +1386,6 @@ bool gm_801634D4(u8* arg0, u8* arg1, u8* arg2, u8* arg3)
             return false;
         }
     }
-
 
     frames = total_frames / 60;
 
@@ -1722,7 +1721,7 @@ void gm_8016468C(void)
     u16* ptr = gmMainLib_8015EDA4();
 
     for (i = 0; i < 11; i++) {
-        *ptr |=  1LL << i;
+        *ptr |= 1LL << i;
     }
 }
 
