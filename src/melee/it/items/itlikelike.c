@@ -4,10 +4,11 @@
 #include <platform.h>
 
 #include "it/inlines.h"
+#include "it/itCommonItems.h"
 #include "it/it_266F.h"
-#include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
+#include "ft/ft_0C31.h"
 
 #define GET_ATTRS(ip)                                                         \
     ((itLikelikeAttributes*) ip->xC4_article_data->x4_specialAttributes)
@@ -19,7 +20,7 @@ void it_802D9B78(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     itLikelikeAttributes* attrs = GET_ATTRS(ip);
     ip->facing_dir = -ip->facing_dir;
-    ip->x40_vel.x = ip->facing_dir * attrs->x0->x4;
+    ip->x40_vel.x = ip->facing_dir * attrs->x4;
 }
 
 /// #it_802D9BA8
@@ -246,7 +247,27 @@ bool itLikelike_UnkMotion13_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itLikelike_UnkMotion13_Phys
+void itLikelike_UnkMotion13_Phys(Item_GObj* gobj)
+{
+    Item* item = GET_ITEM(gobj);
+
+    s32 timer = item->xDD4_itemVar.likelike.x4C;
+    itLikelikeAttributes* attr =
+        item->xC4_article_data->x4_specialAttributes;
+
+    if (timer == 0) {
+        item->xDD4_itemVar.likelike.x4C =
+            attr->x3D_reset_timer;
+
+        ftCo_800C7C60(
+            (Fighter_GObj*)item->grab_victim,
+            attr->x3E_damage_amount
+        );
+    } else {
+        item->xDD4_itemVar.likelike.x4C = timer - 1;
+    }
+}
+
 
 bool itLikelike_UnkMotion13_Coll(Item_GObj* gobj)
 {
