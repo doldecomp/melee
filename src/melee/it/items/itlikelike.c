@@ -292,7 +292,7 @@ void itLikeLike_Logic5_PickedUp(Item_GObj* gobj)
 
 bool itLikelike_UnkMotion18_Anim(Item_GObj* gobj)
 {
-    PAD_STACK(8);
+    PAD_STACK(16);
     if (!it_80272C6C(gobj)) {
         it_802DBAF0(gobj, 0, 1);
         Item_80268E5C(gobj, 0x12, ITEM_ANIM_UPDATE);
