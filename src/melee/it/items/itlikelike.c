@@ -103,7 +103,22 @@ bool itLikelike_UnkMotion5_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itLikelike_UnkMotion5_Phys
+void itLikelike_UnkMotion5_Phys(Item_GObj* gobj)
+{
+
+    Item* item = GET_ITEM(gobj);
+    ItemAttr* temp_r4;
+    PAD_STACK(8);
+
+    if (((s32) item->msid == 5) && (it_802D9A2C(gobj) != 0)) {
+        it_802DB398(gobj);
+        return;
+    }
+    temp_r4 = item->xCC_item_attr;
+    it_80272860(gobj, temp_r4->x10_fall_speed, temp_r4->x14_fall_speed_max);
+}
+
+
 
 bool itLikelike_UnkMotion4_Coll(Item_GObj* gobj)
 {

@@ -7,7 +7,7 @@
 
 #include "it/items/types.h"
 
-/* 2D9A2C */ UNK_RET it_802D9A2C(UNK_PARAMS);
+/* 2D9A2C */ bool it_802D9A2C(Item_GObj* gobj);
 /* 2D9B78 */ void it_802D9B78(Item_GObj*);
 /* 2D9BA8 */ void it_802D9BA8(Item_GObj*);
 /* 2D9CC4 */ bool it_2725_Logic5_DmgReceived(Item_GObj*);
@@ -50,7 +50,7 @@
 /* 2DB138 */ void itLikelike_UnkMotion8_Phys(Item_GObj* gobj);
 /* 2DB2B0 */ bool itLikelike_UnkMotion8_Coll(Item_GObj* gobj);
 /* 2DB358 */ void it_802DB358(Item_GObj* gobj);
-/* 2DB398 */ UNK_RET it_802DB398(UNK_PARAMS);
+/* 2DB398 */ UNK_RET it_802DB398(Item_GObj* gobj);
 /* 2DB464 */ bool itLikelike_UnkMotion12_Anim(Item_GObj* gobj);
 /* 2DB500 */ void itLikelike_UnkMotion12_Phys(Item_GObj* gobj);
 /* 2DB570 */ bool itLikelike_UnkMotion12_Coll(Item_GObj* gobj);
