@@ -161,7 +161,20 @@ void it_802DABC0(Item_GObj* gobj)
     Item_80268E5C(gobj, 0x11, ITEM_ANIM_UPDATE);
 }
 
-/// #itLikelike_UnkMotion17_Anim
+bool itLikelike_UnkMotion17_Anim(Item_GObj* gobj)
+{
+    PAD_STACK(16);
+    if (it_80272C6C(gobj) == 0) {
+        it_8026D5CC(gobj);
+        it_8027CAD8(gobj);
+        it_8026D5CC(gobj);
+        it_8027C0A8(gobj, 0.0f, 5.0f);
+        it_80275270(gobj);
+        Item_80268E5C((HSD_GObj* ) gobj, 0, ITEM_ANIM_UPDATE);
+    }
+    return false;
+}
+
 
 void itLikelike_UnkMotion17_Phys(Item_GObj* gobj)
 {
