@@ -223,7 +223,17 @@ void itLikelike_UnkMotion16_Phys(Item_GObj* gobj) {}
 
 /// #itLikelike_UnkMotion16_Coll
 
-/// #it_802DB074
+void it_802DB074(HSD_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itLikelikeAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+    PAD_STACK(8);
+    ip->facing_dir = ip->xDD4_itemVar.likelike.x3C;
+    ip->x40_vel.x = ip->facing_dir * attr->x4 * 2.0f;
+    ip->xDD4_itemVar.likelike.x4C_cooldown = 0x1E;
+    Item_80268E5C(gobj, 8, ITEM_ANIM_UPDATE);
+}
+
 
 bool itLikelike_UnkMotion8_Anim(Item_GObj* gobj)
 {
