@@ -46,7 +46,21 @@ bool itLikelike_UnkMotion0_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itLikelike_UnkMotion0_Phys
+void itLikelike_UnkMotion0_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    s32 timer = ip->xDD4_itemVar.likelike.x4C_cooldown;
+    if (timer == 0) {
+        if (ip->xDD4_itemVar.likelike.x38 == 1) {
+            it_802DA4C0(gobj);
+        } else {
+            it_802DA104(gobj);
+        }
+    } else {
+        ip->xDD4_itemVar.likelike.x4C_cooldown =  timer - 1;
+    }
+    it_8027C0A8(gobj, 0.0f, 5.0f);
+}
 
 /// #itLikelike_UnkMotion0_Coll
 
@@ -106,15 +120,15 @@ bool itLikelike_UnkMotion5_Anim(Item_GObj* gobj)
 void itLikelike_UnkMotion5_Phys(Item_GObj* gobj)
 {
 
-    Item* item = GET_ITEM(gobj);
+    Item* ip = GET_ITEM(gobj);
     ItemAttr* temp_r4;
     PAD_STACK(8);
 
-    if (((s32) item->msid == 5) && (it_802D9A2C(gobj) != 0)) {
+    if (((s32) ip->msid == 5) && (it_802D9A2C(gobj) != 0)) {
         it_802DB398(gobj);
         return;
     }
-    temp_r4 = item->xCC_item_attr;
+    temp_r4 = ip->xCC_item_attr;
     it_80272860(gobj, temp_r4->x10_fall_speed, temp_r4->x14_fall_speed_max);
 }
 
@@ -138,7 +152,7 @@ void it_802DABC0(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     ip->xDD4_itemVar.likelike.x38 = 0;
-    ip->xDD4_itemVar.likelike.x4C = 0;
+    ip->xDD4_itemVar.likelike.x4C_cooldown = 0;
     ip->xDD4_itemVar.likelike.x3C = 0;
     it_80273454(gobj);
     it_802762B0(ip);
@@ -223,16 +237,16 @@ void it_802DB358(Item_GObj* gobj)
 
 void itLikelike_UnkMotion12_Phys(Item_GObj* gobj)
 {
-    Item* item = GET_ITEM(gobj);
+    Item* ip = GET_ITEM(gobj);
     ItemAttr* temp_r4_2;
 
-    item = gobj->user_data;
-    if ((enum GroundOrAir) item->ground_or_air == GA_Air) {
-        temp_r4_2 = item->xCC_item_attr;
+    ip = gobj->user_data;
+    if ((enum GroundOrAir) ip->ground_or_air == GA_Air) {
+        temp_r4_2 = ip->xCC_item_attr;
         it_80272860(gobj, temp_r4_2->x10_fall_speed, temp_r4_2->x14_fall_speed_max);
         return;
     }
-    it_8027C8D0(&item->x40_vel, &item->x378_itemColl.floor.normal, item->facing_dir);
+    it_8027C8D0(&ip->x40_vel, &ip->x378_itemColl.floor.normal, ip->facing_dir);
     it_8027C0A8(gobj, 0.0f, 5.0f);
 }
 
@@ -268,11 +282,11 @@ bool itLikelike_UnkMotion10_Coll(Item_GObj* gobj)
 
 void it_802DB8A8(Item_GObj* gobj)
 {
-    Item* item = GET_ITEM(gobj);
+    Item* ip = GET_ITEM(gobj);
     PAD_STACK(16);
     it_80273454(gobj);
-    item->xDD4_itemVar.likelike.x4C = 0.0f;
-    Item_8026AE84(item, 0x13B, 0x7FU, 0x40U);
+    ip->xDD4_itemVar.likelike.x4C_cooldown = 0.0f;
+    Item_8026AE84(ip, 0x13B, 0x7FU, 0x40U);
     it_80275258(gobj);
     Item_80268E5C( gobj, 0xD, ITEM_ANIM_UPDATE);
 }
@@ -289,22 +303,22 @@ bool itLikelike_UnkMotion13_Anim(Item_GObj* gobj)
 
 void itLikelike_UnkMotion13_Phys(Item_GObj* gobj)
 {
-    Item* item = GET_ITEM(gobj);
+    Item* ip = GET_ITEM(gobj);
 
-    s32 timer = item->xDD4_itemVar.likelike.x4C;
+    s32 timer = ip->xDD4_itemVar.likelike.x4C_cooldown;
     itLikelikeAttributes* attr =
-        item->xC4_article_data->x4_specialAttributes;
+        ip->xC4_article_data->x4_specialAttributes;
 
     if (timer == 0) {
-        item->xDD4_itemVar.likelike.x4C =
+        ip->xDD4_itemVar.likelike.x4C_cooldown =
             attr->x3D_reset_timer;
 
         ftCo_800C7C60(
-            (Fighter_GObj*)item->grab_victim,
+            (Fighter_GObj*)ip->grab_victim,
             attr->x3E_damage_amount
         );
     } else {
-        item->xDD4_itemVar.likelike.x4C = timer - 1;
+        ip->xDD4_itemVar.likelike.x4C_cooldown = timer - 1;
     }
 }
 
@@ -369,7 +383,7 @@ void itLikeLike_Logic5_Thrown(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     it_8027CB3C(gobj);
-    ip->xDD4_itemVar.likelike.x4C = 0;
+    ip->xDD4_itemVar.likelike.x4C_cooldown = 0;
     Item_80268E5C(gobj, 0x13, ITEM_ANIM_UPDATE);
 }
 
@@ -398,7 +412,7 @@ void it_802DC0AC(Item_GObj* gobj)
     temp_r31 = GET_ITEM(gobj);
     temp_r30 = temp_r31->xC4_article_data->x4_specialAttributes;
     it_80273454(gobj);
-    temp_r31->xDD4_itemVar.likelike.x4C = temp_r30->x4;
+    temp_r31->xDD4_itemVar.likelike.x4C_cooldown = temp_r30->x4;
     temp_r31->xDD4_itemVar.likelike.x3C = 0.0f;
     Item_80268E5C(gobj, 6, ITEM_ANIM_UPDATE);
 }
