@@ -221,7 +221,22 @@ void it_802DB358(Item_GObj* gobj)
 
 /// #itLikelike_UnkMotion12_Anim
 
-/// #itLikelike_UnkMotion12_Phys
+void itLikelike_UnkMotion12_Phys(Item_GObj* gobj)
+{
+    Item* item = GET_ITEM(gobj);
+    ItemAttr* temp_r4_2;
+
+    item = gobj->user_data;
+    if ((enum GroundOrAir) item->ground_or_air == GA_Air) {
+        temp_r4_2 = item->xCC_item_attr;
+        it_80272860(gobj, temp_r4_2->x10_fall_speed, temp_r4_2->x14_fall_speed_max);
+        return;
+    }
+    it_8027C8D0(&item->x40_vel, &item->x378_itemColl.floor.normal, item->facing_dir);
+    it_8027C0A8(gobj, 0.0f, 5.0f);
+}
+
+
 
 /// #itLikelike_UnkMotion12_Coll
 
