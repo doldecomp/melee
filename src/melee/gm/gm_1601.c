@@ -3275,6 +3275,8 @@ void fn_8016A09C(void)
     }
 }
 
+/// @todo Offset mismatch indicates a TU split between #lbl_8046B378 and
+///       #lbl_8046B488
 void gm_8016A164(void)
 {
     int i;
