@@ -883,6 +883,7 @@ s32 gm_8016247C(s32 arg0)
     u32 temp_r0_2;
     s32 temp_r29 = *gmMainLib_8015CCF0();
     u32* temp_r30 = gmMainLib_8015CCFC();
+    s32 ret;
 
     temp_r5 = &gmMainLib_8015EDBC()->x14;
 
@@ -893,6 +894,7 @@ s32 gm_8016247C(s32 arg0)
     *temp_r5 = var_r3;
 
     var_r28 = MIN(0x270FU, temp_r29 + arg0);
+    ret = (s32) var_r28;
     var_r29 = var_r28;
 
     temp_r30_2 = gmMainLib_8015CCF0();
@@ -909,7 +911,7 @@ s32 gm_8016247C(s32 arg0)
         var_r29 = 0x270FU;
     }
     *temp_r30_2 = var_r29;
-    return (s32) var_r28;
+    return (s32) ret;
 }
 
 void gm_80162574(u8 arg0, u8 arg1)
@@ -981,7 +983,7 @@ void gm_801628C4(u32 arg0, u32 arg1)
     *temp_r3 = (var_r4 > (u32) -1) ? (u32) -1 : var_r4;
 
     temp_r3 = gmMainLib_8015CD20();
-    var_r4 = *temp_r3 + (arg0 * arg1);
+    var_r4 = (0, *temp_r3 + (arg0 * arg1));
     *temp_r3 = (var_r4 > (u32) -1) ? (u32) -1 : var_r4;
 
     temp_r3_3 = gmMainLib_8015ED98();
@@ -1716,7 +1718,7 @@ bool gm_80164600(void)
 
 void gm_8016468C(void)
 {
-    u32 i;
+    int i;
     u16* ptr = gmMainLib_8015EDA4();
 
     for (i = 0; i < 11; i++) {
@@ -1812,7 +1814,7 @@ bool gm_80164ABC(void)
 void gm_80164F18(void)
 {
     u16* ptr;
-    u32 i;
+    int i;
 
     ptr = gmMainLib_8015ED8C();
 
@@ -3179,7 +3181,7 @@ void fn_8016989C(u8* arg0, s32 arg1, s32 arg2, u8* arg3, u8* arg4)
 
 #pragma push
 #pragma dont_inline on
-s32 fn_80169900(u8 arg0, struct lbl_8046B488_t* arg1, s8* arg2, s8* arg3)
+void fn_80169900(u8 arg0, struct lbl_8046B488_t* arg1, s8* arg2, s8* arg3)
 {
     s32 var_r28 = 0;
 
@@ -3246,8 +3248,8 @@ s32 fn_80169900(u8 arg0, struct lbl_8046B488_t* arg1, s8* arg2, s8* arg3)
 
 void fn_8016A09C(void)
 {
-    s32 var_r29;
     s32 i;
+    s32 var_r29;
     s32 j;
     PAD_STACK(4);
     var_r29 = 0;
@@ -3258,7 +3260,7 @@ void fn_8016A09C(void)
 
     for (i = 0; i < 6; i++) {
         if (Player_GetPlayerSlotType(i) == Gm_PKind_NA) {
-            if (var_r29 >= (s32) lbl_8046B488.x9) {
+            if (var_r29 >= (j = (s32) lbl_8046B488.x9)) {
                 break;
             }
             Player_SetFlagsBit1(i);
