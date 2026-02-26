@@ -39,7 +39,7 @@ void ftSk_SpecialS_80110490(Fighter* fp)
     v2 = atan2f(fp->input.lstick.y, (fp->input.lstick.x * fp->facing_dir));
 
     if (v2 < 0) {
-        v2 += (float) M_PI * 2;
+        v2 += (float) M_TAU;
     }
 
     v3 = v2 * rad_to_deg;

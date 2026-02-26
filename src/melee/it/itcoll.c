@@ -80,7 +80,7 @@ extern u8 it_804D6D1C[4];
 /// static f32 it_804DC6E4 = 0x7F7FFFFF;
 /// static f32 it_804DC6E8 = 0.01;
 /// static f32 it_804DC6F0[2] = { 176.0, 0.0 };
-/// static f32 it_804DC6F8 = 2 * M_PI;
+/// static f32 it_804DC6F8 = M_TAU;
 /// static f32 it_804DC700 = 0.001;
 /// static f32 it_804DC704 = 0.999;
 
@@ -1341,12 +1341,12 @@ void it_80271830(Item* item, f32 arg_angle)
     sp20.z = 1.0f;
     while (angle < 0.0f) {
         // angle = (f32) ((f64) angle + 6.283185307179586);
-        angle += 2 * M_PI;
+        angle += M_TAU;
     }
     // while (angle > (f32) 6.283185307179586) {
-    while (angle > (2 * M_PI)) {
+    while (angle > (M_TAU)) {
         // angle = (f32) ((f64) angle - 6.283185307179586);
-        angle -= 2 * M_PI;
+        angle -= M_TAU;
     }
     sp68.y = item->xBEC.top;
     sp68.z = 0.0f;

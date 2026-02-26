@@ -156,7 +156,7 @@
 /* 4D39F8 */ static s8 efAsync_804D39F8 = 48;
 /* 4D64E8 */ extern s32 efLib_804D64E8;
 /* 4D64F0 */ extern s32 efLib_804D64F0;
-/* 4D8208 */ static f64 efAsync_804D8208 = 2 * M_PI;
+/* 4D8208 */ static f64 efAsync_804D8208 = M_TAU;
 
 /// Effect* efAsync_80063930(s32 gfx_id, HSD_GObj* arg_gobj, va_list arg2) {
 #if 1
@@ -252,7 +252,7 @@ void* efAsync_80063930(s32 gfx_id, HSD_GObj* arg_gobj, ...)
         ret_obj = efLib_8005C814(8, arg_gobj, va_arg(vlist, Vec3*));
         if (ret_obj != NULL) {
             ((Effect*) ret_obj)->x28 |= 0x80;
-            f32_1 = (2 * M_PI * HSD_Randf());
+            f32_1 = (M_TAU * HSD_Randf());
             jobj_1 = GET_JOBJ(((Effect*) ret_obj)->gobj);
             HSD_JObjSetRotationZ(jobj_1, f32_1);
         }
@@ -281,7 +281,7 @@ void* efAsync_80063930(s32 gfx_id, HSD_GObj* arg_gobj, ...)
     case 0x3EE:
         ret_obj = efLib_8005C814(0x27, arg_gobj, va_arg(vlist, Vec3*));
         if (ret_obj != NULL) {
-            f32_1 = (2 * M_PI * HSD_Randf());
+            f32_1 = (M_TAU * HSD_Randf());
             jobj_1 = GET_JOBJ(((Effect*) ret_obj)->gobj);
             HSD_JObjSetRotationZ(jobj_1, f32_1);
         }
@@ -774,7 +774,7 @@ void* efAsync_80063930(s32 gfx_id, HSD_GObj* arg_gobj, ...)
             ((Effect*) ret_obj)->x10 = efLib_8005E648;
             ((Effect*) ret_obj)->x24 = 0x28;
             ((Effect*) ret_obj)->translate.y = (0.4f * HSD_Randf()) + 2.8f;
-            f32_1 = (2 * M_PI * HSD_Randf());
+            f32_1 = (M_TAU * HSD_Randf());
             jobj_1 = GET_JOBJ(((Effect*) ret_obj)->gobj);
             HSD_JObjSetRotationY(jobj_1, f32_1);
             if (u32_1 != 0) {
