@@ -10,6 +10,8 @@
 #include "it/item.h"
 #include "ft/ft_0C31.h"
 
+#include <baselib/random.h>
+
 #define GET_ATTRS(ip)                                                         \
     ((itLikelikeAttributes*) ip->xC4_article_data->x4_specialAttributes)
 
@@ -330,7 +332,19 @@ bool itLikelike_UnkMotion13_Coll(Item_GObj* gobj)
     return it_8027C794(gobj);
 }
 
-/// #it_802DB9F4
+void it_802DB9F4(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    PAD_STACK(16);
+    it_80273454(gobj);
+    ip->xDD4_itemVar.likelike.x4C_cooldown = 0.0f;
+    if (HSD_Randi(2) != 0) {
+        Item_80268E5C(gobj, 0xE, ITEM_ANIM_UPDATE);
+        return;
+    }
+    Item_80268E5C(gobj, 0xF, ITEM_ANIM_UPDATE);
+}
+
 
 /// #it_802DBA68
 
