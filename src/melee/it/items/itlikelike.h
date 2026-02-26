@@ -62,7 +62,7 @@
 /* 2DB7CC */ bool itLikelike_UnkMotion10_Anim(Item_GObj* gobj);
 /* 2DB868 */ void itLikelike_UnkMotion10_Phys(Item_GObj* gobj);
 /* 2DB86C */ bool itLikelike_UnkMotion10_Coll(Item_GObj* gobj);
-/* 2DB8A8 */ UNK_RET it_802DB8A8(UNK_PARAMS);
+/* 2DB8A8 */ void it_802DB8A8(Item_GObj* gobj);
 /* 2DB914 */ bool itLikelike_UnkMotion13_Anim(Item_GObj* gobj);
 /* 2DB95C */ void itLikelike_UnkMotion13_Phys(Item_GObj* gobj);
 /* 2DB9B8 */ bool itLikelike_UnkMotion13_Coll(Item_GObj* gobj);

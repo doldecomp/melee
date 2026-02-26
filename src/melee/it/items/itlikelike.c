@@ -236,7 +236,17 @@ bool itLikelike_UnkMotion10_Coll(Item_GObj* gobj)
     return it_8027C794(gobj);
 }
 
-/// #it_802DB8A8
+void it_802DB8A8(Item_GObj* gobj)
+{
+    Item* item = GET_ITEM(gobj);
+    PAD_STACK(16);
+    it_80273454(gobj);
+    item->xDD4_itemVar.likelike.x4C = 0.0f;
+    Item_8026AE84(item, 0x13B, 0x7FU, 0x40U);
+    it_80275258(gobj);
+    Item_80268E5C( gobj, 0xD, ITEM_ANIM_UPDATE);
+}
+
 
 bool itLikelike_UnkMotion13_Anim(Item_GObj* gobj)
 {
