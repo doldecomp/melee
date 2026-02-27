@@ -403,8 +403,8 @@ typedef struct {
 } itMBallAttributes;
 
 typedef struct {
-    /* 0x00 */ Vec3 x0;
-    /* 0x0C */ u8 pad_C[0x18 - 0x0C];
+    /* 0x00 */ Vec3* x0;
+    /* 0x04 */ u8 pad_4[0x18 - 0x04];
     /* 0x18 */ s32 x18;
     /* 0x1C */ u8 pad_1C[0x3D - 0x1C];
     /* 0x3D */ s8 x3D_reset_timer;
