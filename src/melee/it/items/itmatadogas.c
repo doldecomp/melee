@@ -24,19 +24,7 @@ void it_802CAFD4(Item_GObj* gobj)
     item->xDD4_itemVar.matadogas.x64 = 0;
     it_80279CDC(gobj, attrs->x0);
     it_802CB350(gobj);
-    if(jobj == NULL){
-        __assert("jobj.h", 0x294, "jobj");
-    }
-    if((jobj->flags & 0x20000) != 0){
-        __assert("jobj.h", 0x295, "!(jobj->flags & JOBJ_USE_QUATERNION)");
-    }
-    jobj->rotate.y = 0;
-    if((jobj->flags & 0x2000000) == 0 && jobj != NULL){
-        if(jobj == NULL){
-             __assert("jobj.h", 0x234, "jobj");
-        }
-        inline0(jobj);
-    }
+    HSD_JObjSetRotationY(jobj, 0.0f);
     Item_8026AE84(item, 0x2715, 0x7f, 0x40);
 }
 
