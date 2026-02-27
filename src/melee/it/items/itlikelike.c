@@ -74,7 +74,23 @@ bool itLikelike_UnkMotion7_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itLikelike_UnkMotion7_Phys
+void itLikelike_UnkMotion7_Phys(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    Article* article_data = ip->xC4_article_data;
+    itLikelikeAttributes* attrs = article_data->x4_specialAttributes;
+    s32 timer = ip->xDD4_itemVar.likelike.x4C_cooldown;
+
+    if (timer <= 0) {
+        if (it_802D9A2C(gobj) != 0) {
+            it_802DB074(gobj);
+            return;
+        }
+        ip->xDD4_itemVar.likelike.x4C_cooldown = attrs->x18;
+        return;
+    }
+    ip->xDD4_itemVar.likelike.x4C_cooldown = timer - 1;
+}
 
 /// #itLikelike_UnkMotion7_Coll
 

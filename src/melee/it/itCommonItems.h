@@ -405,7 +405,9 @@ typedef struct {
 typedef struct {
     /* 0x00 */ f32 x0;
     /* 0x04 */ f32 x4;
-    /* 0x08 */ u8 pad[0x3D - 0x08];
+    /* 0x08 */ u8 pad_8[0x18 - 0x08];
+    /* 0x18 */ s32 x18;
+    /* 0x1C */ u8 pad_1C[0x3D - 0x1C];
     /* 0x3D */ s8 x3D_reset_timer;
     /* 0x3E */ s8 x3E_damage_amount;
 } itLikelikeAttributes;
