@@ -495,12 +495,10 @@ bool itLikelike_UnkMotion13_Anim(Item_GObj* gobj)
 void itLikelike_UnkMotion13_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-
-    s32 timer = ip->xDD4_itemVar.likelike.x4C_cooldown;
     itLikelikeAttributes* attr =
         ip->xC4_article_data->x4_specialAttributes;
-
-    if (timer == 0) {
+    PAD_STACK(8);
+    if (ip->xDD4_itemVar.likelike.x4C_cooldown == 0) {
         ip->xDD4_itemVar.likelike.x4C_cooldown =
             attr->x3D_reset_timer;
 
@@ -509,7 +507,7 @@ void itLikelike_UnkMotion13_Phys(Item_GObj* gobj)
             attr->x3E_damage_amount
         );
     } else {
-        ip->xDD4_itemVar.likelike.x4C_cooldown = timer - 1;
+        ip->xDD4_itemVar.likelike.x4C_cooldown = ip->xDD4_itemVar.likelike.x4C_cooldown - 1;
     }
 }
 
