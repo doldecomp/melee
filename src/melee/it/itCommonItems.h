@@ -403,9 +403,8 @@ typedef struct {
 } itMBallAttributes;
 
 typedef struct {
-    /* 0x00 */ f32 x0;
-    /* 0x04 */ f32 x4;
-    /* 0x08 */ u8 pad_8[0x18 - 0x08];
+    /* 0x00 */ Vec3 x0;
+    /* 0x0C */ u8 pad_C[0x18 - 0x0C];
     /* 0x18 */ s32 x18;
     /* 0x1C */ u8 pad_1C[0x3D - 0x1C];
     /* 0x3D */ s8 x3D_reset_timer;
@@ -422,7 +421,8 @@ typedef struct itLikelike_ItemVars {
     /* +2C ip+E00 */ char pad_2C[0xC];
     /* +38 ip+E0C */ s32 x38;
     /* +3C ip+E10 */ s32 x3C;
-    /* +40 ip+E14 */ char pad_40[0x8];
+    /* +40 ip+E14 */ s32 x40;
+    /* +44 ip+E18 */ s32 x44;
     /* +48 ip+E1C */ s32 x48;
     /* +4C ip+E20 */ s32 x4C_cooldown;
     /* +50 ip+E24 */ HSD_GObj* x50;
