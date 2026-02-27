@@ -415,7 +415,19 @@ bool itLikelike_UnkMotion9_Coll(Item_GObj* gobj)
     return it_8027C794(gobj);
 }
 
-/// #it_802DB74C
+void it_802DB74C(Item_GObj* gobj)
+{
+    Item* ip;
+    PAD_STACK(8);
+
+    ip = GET_ITEM(gobj);
+    it_80273454(gobj);
+    Item_80268E5C((HSD_GObj* ) gobj, 0xA, ITEM_ANIM_UPDATE);
+    Item_8026AE84(ip, 0x139, 0x7FU, 0x40U);
+    it_80274F28(ip, 1, (void (*)(HSD_GObj*)) it_802DB358, (void (*)(HSD_GObj*, HSD_GObj*)) ftCo_800C78B0);
+    ip->xDD4_itemVar.likelike.x50 = NULL;
+}
+
 
 /// #itLikelike_UnkMotion10_Anim
 
