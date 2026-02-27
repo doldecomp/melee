@@ -51,9 +51,9 @@ bool itLikelike_UnkMotion0_Anim(Item_GObj* gobj)
 
 void itLikelike_UnkMotion0_Phys(Item_GObj* gobj)
 {
-    Item* ip = GET_ITEM(gobj);
+    Item* ip = HSD_GObjGetUserData(gobj);
     s32 timer = ip->xDD4_itemVar.likelike.x4C_cooldown;
-    if (timer == 0) {
+    if (!timer) {
         if (ip->xDD4_itemVar.likelike.x38 == 1) {
             it_802DA4C0(gobj);
         } else {
