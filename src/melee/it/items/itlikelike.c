@@ -518,7 +518,22 @@ void it_802DB9F4(Item_GObj* gobj)
 }
 
 
-/// #it_802DBA68
+void it_802DBA68(Item_GObj* gobj)
+{
+    Item* ip;
+    PAD_STACK(24);
+
+    ip = GET_ITEM(gobj);
+    it_80273454(gobj);
+    it_802DBAF0(gobj, 0, 1);
+    ip->xDD4_itemVar.likelike.x4C_cooldown = 0x78;
+    it_8027CAD8(gobj);
+    it_8026D5CC(gobj);
+    it_8027C0A8(gobj, 0.0f, 5.0f);
+    it_80275270(gobj);
+    Item_80268E5C((HSD_GObj* ) gobj, 0, ITEM_ANIM_UPDATE);
+}
+
 
 /// #it_802DBAF0
 
