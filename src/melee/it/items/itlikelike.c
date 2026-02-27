@@ -205,8 +205,8 @@ block_15:
 void it_802DA8D8(Item_GObj* gobj)
 {
     Item* ip;
+    unsigned char _[8];
     itECB ecb;
-    PAD_STACK(8);
 
     ip = GET_ITEM(gobj);
     it_802762B0(ip);
