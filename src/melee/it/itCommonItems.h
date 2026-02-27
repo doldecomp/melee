@@ -1408,5 +1408,7 @@ typedef struct itMatadogas_ItemVars {
 typedef struct itMatadogasAttributes {
     f32 x0;
     f32 x4;
+    f32 x8;
+    f32 xC;
 } itMatadogasAttributes;
 #endif
