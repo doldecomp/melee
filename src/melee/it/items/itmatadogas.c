@@ -11,17 +11,6 @@
 #include "it/it_2725.h"
 #include "it/item.h"
 
-static inline void inline0(HSD_JObj* jobj)
-{
-    s32 temp_r3 = 0;
-    if((jobj->flags & 0x800000) == 0 && (jobj->flags & 0x40) != 0){
-        temp_r3 = 1;
-    }
-    if(temp_r3 == 0){
-        HSD_JObjSetMtxDirtySub(jobj);
-    }
-}
-
 void it_802CAFD4(Item_GObj* gobj)
 {
     HSD_JObj* jobj;
