@@ -9,6 +9,7 @@
 #include "it/it_2725.h"
 #include "it/item.h"
 #include "ft/ft_0C31.h"
+#include "mp/mpcoll.h"
 
 #include <baselib/random.h>
 
@@ -122,7 +123,68 @@ bool itLikelike_UnkMotion2_Anim(Item_GObj* gobj)
 
 /// #itLikelike_UnkMotion2_Phys
 
-/// #itLikelike_UnkMotion2_Coll
+bool itLikelike_UnkMotion2_Coll(Item_GObj* gobj)
+{
+    CollData* temp_r31;
+    Item* temp_r30;
+    f32 temp_f3;
+    s32 temp_r3;
+    f32 var_f1;
+    f32 var_f2;
+    s32 coll_result;
+    itLikelikeAttributes** temp_r29;
+    PAD_STACK(32);
+
+    temp_r30 = gobj->user_data;
+    temp_r31 = &temp_r30->x378_itemColl;
+    temp_r29 = (itLikelikeAttributes**) temp_r30->xC4_article_data->x4_specialAttributes;
+    it_80276214(gobj);
+    coll_result = mpColl_8004C750(temp_r31);
+    *(s32*)&temp_r30->pos.x = *(s32*)&temp_r31->cur_pos.x;
+    *(s32*)&temp_r30->pos.y = *(s32*)&temp_r31->cur_pos.y;
+    *(s32*)&temp_r30->pos.z = *(s32*)&temp_r31->cur_pos.z;
+    if (coll_result != 0) {
+        temp_r30->xC30 = temp_r31->ceiling.index;
+    }
+    if (it_802762D8(gobj) != 0) {
+        temp_r30->facing_dir = -temp_r30->facing_dir;
+        temp_r30->x40_vel.x *= -1.0f;
+    } else if (it_80276308(gobj) != 0) {
+        temp_r30->facing_dir = -temp_r30->facing_dir;
+        temp_r30->x40_vel.x *= -1.0f;
+    } else {
+        var_f2 = temp_r30->xDD4_itemVar.likelike.x20 - temp_r30->pos.x;
+        if (var_f2 < 0.0f) {
+            var_f2 = -var_f2;
+        }
+        temp_f3 = (*temp_r29)->x4 * 0.5f;
+        if (var_f2 < temp_f3) {
+            var_f1 = temp_r30->xDD4_itemVar.likelike.x24 - temp_r30->pos.y;
+            if (var_f1 < 0.0f) {
+                var_f1 = -var_f1;
+            }
+            if (var_f1 < temp_f3) {
+                temp_r3 = temp_r30->xDD4_itemVar.likelike.x48;
+                if (temp_r3 >= 4) {
+                    temp_r30->facing_dir = -temp_r30->facing_dir;
+                    temp_r30->x40_vel.x = temp_r30->facing_dir * (*temp_r29)->x4;
+                    temp_r30->xDD4_itemVar.likelike.x48 = 0;
+                } else {
+                    temp_r30->xDD4_itemVar.likelike.x48 = temp_r3 + 1;
+                }
+            } else {
+                goto block_15;
+            }
+        } else {
+block_15:
+            temp_r30->xDD4_itemVar.likelike.x48 = 0;
+        }
+    }
+    *(s32*)&temp_r30->xDD4_itemVar.likelike.x20 = *(s32*)&temp_r30->pos.x;
+    *(s32*)&temp_r30->xDD4_itemVar.likelike.x24 = *(s32*)&temp_r30->pos.y;
+    *(s32*)&temp_r30->xDD4_itemVar.likelike.x28 = *(s32*)&temp_r30->pos.z;
+    return it_8027C794(gobj);
+}
 
 /// #it_802DA8D8
 
