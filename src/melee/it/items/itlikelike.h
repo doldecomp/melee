@@ -54,7 +54,7 @@
 /* 2DB464 */ bool itLikelike_UnkMotion12_Anim(Item_GObj* gobj);
 /* 2DB500 */ void itLikelike_UnkMotion12_Phys(Item_GObj* gobj);
 /* 2DB570 */ bool itLikelike_UnkMotion12_Coll(Item_GObj* gobj);
-/* 2DB5F0 */ UNK_RET it_802DB5F0(UNK_PARAMS);
+/* 2DB5F0 */ void it_802DB5F0(Item_GObj* gobj);
 /* 2DB670 */ bool itLikelike_UnkMotion9_Anim(Item_GObj* gobj);
 /* 2DB70C */ void itLikelike_UnkMotion9_Phys(Item_GObj* gobj);
 /* 2DB710 */ bool itLikelike_UnkMotion9_Coll(Item_GObj* gobj);
