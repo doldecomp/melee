@@ -126,7 +126,24 @@ bool itLikelike_UnkMotion1_Anim(Item_GObj* gobj)
 
 /// #itLikelike_UnkMotion1_Coll
 
-/// #it_802DA4C0
+void it_802DA4C0(Item_GObj* gobj)
+{
+    Item* temp_r31;
+    itLikelikeAttributes* temp_r30;
+    PAD_STACK(16);
+
+    temp_r31 = gobj->user_data;
+    temp_r30 = temp_r31->xC4_article_data->x4_specialAttributes;
+    temp_r31->x40_vel.x = temp_r31->facing_dir * temp_r30->x0->y;
+    temp_r31->x40_vel.y = 0.0f;
+    temp_r31->x40_vel.z = 0.0f;
+    it_802756E0(gobj);
+    temp_r31->xDD4_itemVar.likelike.x4C_cooldown = temp_r30->x18;
+    temp_r31->xDD4_itemVar.likelike.x44 = 0x3c;
+    temp_r31->xDD4_itemVar.likelike.x48 = 0;
+    Item_80268E5C((HSD_GObj* ) gobj, 2, ITEM_UNK_0x1);
+}
+
 
 bool itLikelike_UnkMotion2_Anim(Item_GObj* gobj)
 {
