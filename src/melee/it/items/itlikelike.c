@@ -186,7 +186,21 @@ block_15:
     return it_8027C794(gobj);
 }
 
-/// #it_802DA8D8
+void it_802DA8D8(Item_GObj* gobj)
+{
+    Item* ip;
+    itECB ecb;
+    PAD_STACK(8);
+
+    ip = GET_ITEM(gobj);
+    it_802762B0(ip);
+    ecb = ip->xC1C;
+    ecb.bottom = ecb.top;
+    ecb.top = ip->xC1C.bottom;
+    it_80275D5C(gobj, &ecb);
+    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+}
+
 
 /// #it_802DA960
 
