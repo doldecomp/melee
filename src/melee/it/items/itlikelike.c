@@ -80,9 +80,8 @@ void itLikelike_UnkMotion7_Phys(Item_GObj* gobj)
     Item* ip = gobj->user_data;
     Article* article_data = ip->xC4_article_data;
     itLikelikeAttributes* attrs = article_data->x4_specialAttributes;
-    s32 timer = ip->xDD4_itemVar.likelike.x4C_cooldown;
 
-    if (timer <= 0) {
+    if (ip->xDD4_itemVar.likelike.x4C_cooldown <= 0) {
         if (it_802D9A2C(gobj) != 0) {
             it_802DB074(gobj);
             return;
@@ -90,7 +89,7 @@ void itLikelike_UnkMotion7_Phys(Item_GObj* gobj)
         ip->xDD4_itemVar.likelike.x4C_cooldown = attrs->x18;
         return;
     }
-    ip->xDD4_itemVar.likelike.x4C_cooldown = timer - 1;
+    ip->xDD4_itemVar.likelike.x4C_cooldown = ip->xDD4_itemVar.likelike.x4C_cooldown - 1;
 }
 
 /// #itLikelike_UnkMotion7_Coll
