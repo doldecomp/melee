@@ -293,7 +293,22 @@ void itLikelike_UnkMotion12_Phys(Item_GObj* gobj)
 
 
 
-/// #itLikelike_UnkMotion12_Coll
+bool itLikelike_UnkMotion12_Coll(Item_GObj* gobj)
+{
+    Item* temp_r3;
+
+    temp_r3 = GET_ITEM(gobj);
+
+    if ((enum GroundOrAir) temp_r3->ground_or_air == GA_Air) {
+        if (it_8026DA08(gobj) != 0) {
+            it_802762B0(temp_r3);
+            it_80273454(gobj);
+        }
+    } else {
+        it_8026D6F4(gobj, (void (*)(HSD_GObj*)) it_802DAA10);
+    }
+    return it_8027C794(gobj);
+}
 
 /// #it_802DB5F0
 
