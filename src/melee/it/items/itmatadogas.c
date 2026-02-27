@@ -10,7 +10,45 @@
 #include "it/it_2725.h"
 #include "it/item.h"
 
-/// #it_802CAFD4
+static inline void inline0(HSD_JObj* jobj)
+{
+    s32 temp_r3 = 0;
+    if((jobj->flags & 0x800000) == 0 && (jobj->flags & 0x40) != 0){
+        temp_r3 = 1;
+    }
+    if(temp_r3 == 0){
+        HSD_JObjSetMtxDirtySub(jobj);
+    }
+}
+
+void it_802CAFD4(Item_GObj* gobj)
+{
+    HSD_JObj* jobj;
+    Item* item;
+    itMatadogasAttributes* attrs;
+    item = gobj->user_data;
+    jobj = gobj->hsd_obj;
+    attrs = item->xC4_article_data->x4_specialAttributes;
+    item->xDAC_itcmd_var0 = 0;
+    item->xDD4_itemVar.matadogas.x60 = (s32) attrs->x4;
+    item->xDD4_itemVar.matadogas.x64 = 0;
+    it_80279CDC(gobj, attrs->x0);
+    it_802CB350(gobj);
+    if(jobj == NULL){
+        __assert("jobj.h", 0x294, "jobj");
+    }
+    if((jobj->flags & 0x20000) != 0){
+        __assert("jobj.h", 0x295, "!(jobj->flags & JOBJ_USE_QUATERNION)");
+    }
+    jobj->rotate.y = 0;
+    if((jobj->flags & 0x2000000) == 0 && jobj != NULL){
+        if(jobj == NULL){
+             __assert("jobj.h", 0x234, "jobj");
+        }
+        inline0(jobj);
+    }
+    Item_8026AE84(item, 0x2715, 0x7f, 0x40);
+}
 
 void it_802CB0F4(Item_GObj* gobj) {}
 
