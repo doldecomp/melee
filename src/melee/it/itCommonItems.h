@@ -1411,4 +1411,5 @@ typedef struct itMatadogasAttributes {
     f32 x8;
     f32 xC;
 } itMatadogasAttributes;
+
 #endif
