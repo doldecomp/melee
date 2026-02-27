@@ -1398,4 +1398,18 @@ typedef struct itGreatFoxLaser_ItemVars {
     /* +38 ip+E0C */ UNK_T x38;
 } itGreatFoxLaser_ItemVars;
 
+typedef struct itMatadogas_ItemVars {
+    /* +00 ip+DD4 */ char pad_0[0x60];
+    /* +60 ip+E34 */ s32 x60;
+    /* +64 ip+E38 */ s32 x64;
+    /* +68 ip+E3C */ s32 x68;
+} itMatadogas_ItemVars;
+
+typedef struct itMatadogasAttributes {
+    f32 x0;
+    f32 x4;
+    f32 x8;
+    f32 xC;
+} itMatadogasAttributes;
+
 #endif
