@@ -405,7 +405,9 @@ typedef struct {
 typedef struct {
     /* 0x00 */ Vec3* x0;
     /* 0x04 */ s32 x4;
-    /* 0x08 */ u8 pad_8[0x18 - 0x08];
+    /* 0x08 */ s32 x8;
+    /* 0x0C */ s32 xC;
+    /* 0x10 */ u8 pad_10[0x18 - 0x10];
     /* 0x18 */ s32 x18;
     /* 0x1C */ u8 pad_1C[0x38 - 0x1C];
     /* 0x38 */ f32 x38;
@@ -427,6 +429,7 @@ typedef struct itLikelike_ItemVars {
     /* +48 ip+E1C */ s32 x48;
     /* +4C ip+E20 */ s32 x4C_cooldown;
     /* +50 ip+E24 */ HSD_GObj* x50;
+    /* +54 ip+E28 */ HurtCapsule* x54;
 } itLikelike_ItemVars;
 
 typedef struct {

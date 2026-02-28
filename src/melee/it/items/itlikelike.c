@@ -5,6 +5,8 @@
 #include "cm/camera.h"
 #include "it/inlines.h"
 #include "it/itCommonItems.h"
+#include "it/itcoll.h"
+#include "it/it_26B1.h"
 #include "it/it_266F.h"
 #include "it/it_2725.h"
 #include "it/item.h"
@@ -27,7 +29,36 @@ void it_802D9B78(Item_GObj* gobj)
     ip->x40_vel.x = ip->facing_dir * attrs->x0->y;
 }
 
-/// #it_802D9BA8
+void it_802D9BA8(Item_GObj* gobj)
+{
+    Item* ip;
+    itLikelikeAttributes* attr;
+    PAD_STACK(8);
+
+    ip = gobj->user_data;
+    attr = ip->xC4_article_data->x4_specialAttributes;
+    it_8027B730(gobj);
+    ip->facing_dir = it_8026B684(&ip->pos);
+    it_8027C56C(gobj, 0.0f);
+    ip->xD5C = 0;
+    ip->xDC8_word.flags.x15 = 0;
+    it_8027542C(gobj);
+    it_80275270(gobj);
+    ip->xDD4_itemVar.likelike.x44 = 1;
+    ip->xDD4_itemVar.likelike.x4C_cooldown = 0;
+    ip->xDD4_itemVar.likelike.x50 = NULL;
+    it_80271590(gobj, 0, (HurtCapsule*) &ip->xDD4_itemVar.likelike.x54);
+    ip->xDD4_itemVar.likelike.x20 = ip->pos;
+    ip->xDD4_itemVar.likelike.x38 = HSD_Randi(2);
+    ip->pos.y -= 40.0f;
+    ip->xDD4_itemVar.likelike.x4C_cooldown = attr->x8 + HSD_Randi(attr->xC - attr->x8);
+    if (ip->xDD4_itemVar.likelike.x38 == 0) {
+        it_802DA960(gobj);
+        return;
+    }
+    it_802DAD18((HSD_GObj* ) gobj);
+}
+
 
 // What is this? Where do i put it? I see there's others in other places too, 
 // but there it's a f32* and we add +4 to it
