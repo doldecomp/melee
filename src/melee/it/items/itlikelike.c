@@ -675,8 +675,8 @@ void it_802DC0AC(Item_GObj* gobj)
     temp_r31 = GET_ITEM(gobj);
     temp_r30 = temp_r31->xC4_article_data->x4_specialAttributes;
     it_80273454(gobj);
-    temp_r31->xDD4_itemVar.likelike.x4C_cooldown = temp_r30->x0->y;
-    temp_r31->xDD4_itemVar.likelike.x3C = 0.0f;
+    temp_r31->xDD4_itemVar.likelike.x4C_cooldown = temp_r30->x4;
+    temp_r31->xDD4_itemVar.likelike.x3C = 0;
     Item_80268E5C(gobj, 6, ITEM_ANIM_UPDATE);
 }
 
