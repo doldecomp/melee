@@ -270,6 +270,7 @@ bool itLikelike_UnkMotion5_Coll(Item_GObj* gobj)
 void it_802DABC0(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
+    PAD_STACK(24);
     ip->xDD4_itemVar.likelike.x38 = 0;
     ip->xDD4_itemVar.likelike.x4C_cooldown = 0;
     ip->xDD4_itemVar.likelike.x3C = 0;
