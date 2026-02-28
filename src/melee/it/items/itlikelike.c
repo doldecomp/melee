@@ -485,7 +485,47 @@ void it_802DAE6C(Item_GObj* gobj)
     Item_80268E5C(gobj, 0x10, ITEM_ANIM_UPDATE);
 }
 
-/// #itLikelike_UnkMotion16_Anim
+
+bool itLikelike_UnkMotion16_Anim(Item_GObj* gobj)
+{
+    Item* temp_r30 = GET_ITEM(gobj);
+    Item* temp_r30_2;
+    Item* temp_r31_2;
+    itLikelikeAttributes* temp_r30_3;
+    itLikelikeAttributes* temp_r31;
+    PAD_STACK(0x10);
+
+    if (it_80272C6C(gobj) == 0) {
+        temp_r30->facing_dir = it_8026B684(&temp_r30->pos);
+        if (temp_r30->xDD4_itemVar.likelike.x38 == 0) {
+            temp_r30_2 = GET_ITEM(gobj);
+            temp_r31 = temp_r30_2->xC4_article_data->x4_specialAttributes;
+            temp_r30_2->x40_vel.x = temp_r30_2->facing_dir * temp_r31->x0->y;
+            temp_r30_2->x40_vel.z = 0.0f;
+            temp_r30_2->x40_vel.y = 0.0f;
+            it_802756E0(gobj);
+            temp_r30_2->xDD4_itemVar.likelike.x4C = temp_r31->x18;
+            temp_r30_2->xDD4_itemVar.likelike.x44 = 0x3C;
+            temp_r30_2->xDD4_itemVar.likelike.x48 = 0;
+            Item_80268E5C(gobj, 1, ITEM_UNK_0x1);
+        } else {
+            temp_r31_2 = GET_ITEM(gobj);
+            temp_r30_3 = temp_r31_2->xC4_article_data->x4_specialAttributes;
+            // This line is to get 100%
+            if (temp_r30_3->x0->y && temp_r30_3->x0->y){};
+            temp_r31_2->x40_vel.x = temp_r31_2->facing_dir * temp_r30_3->x0->y;
+            temp_r31_2->x40_vel.y = 0;
+            temp_r31_2->x40_vel.z = 0;
+            it_802756E0(gobj);
+            temp_r31_2->xDD4_itemVar.likelike.x4C = temp_r30_3->x18;
+            temp_r31_2->xDD4_itemVar.likelike.x44 = 0x3C;
+            temp_r31_2->xDD4_itemVar.likelike.x48 = 0;
+            Item_80268E5C( gobj, 2, ITEM_UNK_0x1);
+        }
+    }
+    return false;
+}
+
 
 void itLikelike_UnkMotion16_Phys(Item_GObj* gobj) {}
 
