@@ -60,7 +60,7 @@ void it_802D9BA8(Item_GObj* gobj)
 }
 
 
-// What is this? Where do i put it? I see there's others in other places too, 
+// What is this? Where do i put it? I see there's others in other places too,
 // but there it's a f32* and we add +4 to it
 Vec3* it_804D6D40;
 bool it_2725_Logic5_DmgReceived(Item_GObj* gobj)
