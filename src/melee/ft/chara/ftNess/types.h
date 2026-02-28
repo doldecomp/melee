@@ -23,20 +23,23 @@ struct ftNess_FighterVars {
     /* 0x224C */ u32 pkthunder_gfx;
 };
 
+struct ftNess_YoyoVars {
+    /// 0x2340 - Current frame of Up/Down Smash animation as an integer
+    s32 yoyoCurrentFrame;
+    /// 0x2344 - Frames until Up/Down Smash hitbox automatically refreshes;
+    /// part of why the Yo-Yo Glitch occurs
+    s32 yoyoRehitTimer;
+    /// 0x2348 - bool to indicate whether Ness can charge the Yo-Yo
+    bool isChargeDisable;
+    /// 0x234C - bool to indicate whether Yo-Yo hitbox position should
+    /// update based on raw Vec3 input (false) or modified calculations
+    /// (true)
+    bool isPosUpdateMod;
+};
+
 union ftNess_MotionVars {
-    struct ftNess_YoyoVars {
-        /// 0x2340 - Current frame of Up/Down Smash animation as an integer
-        s32 yoyoCurrentFrame;
-        /// 0x2344 - Frames until Up/Down Smash hitbox automatically refreshes;
-        /// part of why the Yo-Yo Glitch occurs
-        s32 yoyoRehitTimer;
-        /// 0x2348 - bool to indicate whether Ness can charge the Yo-Yo
-        bool isChargeDisable;
-        /// 0x234C - bool to indicate whether Yo-Yo hitbox position should
-        /// update based on raw Vec3 input (false) or modified calculations
-        /// (true)
-        bool isPosUpdateMod;
-    } attackhi4, attacklw4;
+    struct ftNess_YoyoVars attackhi4;
+    struct ftNess_YoyoVars attacklw4;
 
     struct ftNess_SpecialNVars {
         /// 0x2340 - Number of frames Ness remains in the "charge loop"
