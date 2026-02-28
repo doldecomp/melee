@@ -427,7 +427,28 @@ bool itLikelike_UnkMotion8_Anim(Item_GObj* gobj)
 
 /// #itLikelike_UnkMotion8_Phys
 
-/// #itLikelike_UnkMotion8_Coll
+bool itLikelike_UnkMotion8_Coll(Item_GObj* gobj)
+{
+    CollData* temp_r31;
+    Item* ip = ip = GET_ITEM(gobj);
+    s32 temp_cr0_eq;
+    PAD_STACK(0x20);
+
+    if (ip->xDD4_itemVar.likelike.x38 == 1) {
+        temp_r31 = &ip->x378_itemColl;
+        it_80276214(gobj);
+        temp_cr0_eq = mpColl_8004C750(temp_r31);
+        ip->pos = temp_r31->cur_pos;
+        if (temp_cr0_eq != 0) {
+            ip->xC30 = temp_r31->ceiling.index;
+        }
+        it_802762D8(gobj);
+    } else {
+        it_8026D6F4(gobj, (void (*)(HSD_GObj*)) it_802DAA10);
+    }
+    return it_8027C794(gobj);
+}
+
 
 void it_802DB358(Item_GObj* gobj)
 {
