@@ -714,7 +714,6 @@ bool itLikelike_UnkMotion9_Coll(Item_GObj* gobj)
 void it_802DB74C(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    ;
     PAD_STACK(8);
 
     it_80273454(gobj);

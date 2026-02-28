@@ -22,7 +22,7 @@
 /* 2DA194 */ bool itLikelike_UnkMotion1_Anim(Item_GObj* gobj);
 /* 2DA1DC */ void itLikelike_UnkMotion1_Phys(Item_GObj* gobj);
 /* 2DA348 */ bool itLikelike_UnkMotion1_Coll(Item_GObj* gobj);
-/* 2DA4C0 */ UNK_RET it_802DA4C0(Item_GObj* gobj);
+/* 2DA4C0 */ void it_802DA4C0(Item_GObj* gobj);
 /* 2DA550 */ bool itLikelike_UnkMotion2_Anim(Item_GObj* gobj);
 /* 2DA598 */ void itLikelike_UnkMotion2_Phys(Item_GObj* gobj);
 /* 2DA730 */ bool itLikelike_UnkMotion2_Coll(Item_GObj* gobj);
@@ -45,12 +45,12 @@
 /* 2DAEA8 */ bool itLikelike_UnkMotion16_Anim(Item_GObj* gobj);
 /* 2DAFC8 */ void itLikelike_UnkMotion16_Phys(Item_GObj* gobj);
 /* 2DAFCC */ bool itLikelike_UnkMotion16_Coll(Item_GObj* gobj);
-/* 2DB074 */ UNK_RET it_802DB074(Item_GObj* gobj);
+/* 2DB074 */ void it_802DB074(Item_GObj* gobj);
 /* 2DB0F0 */ bool itLikelike_UnkMotion8_Anim(Item_GObj* gobj);
 /* 2DB138 */ void itLikelike_UnkMotion8_Phys(Item_GObj* gobj);
 /* 2DB2B0 */ bool itLikelike_UnkMotion8_Coll(Item_GObj* gobj);
 /* 2DB358 */ void it_802DB358(Item_GObj* gobj);
-/* 2DB398 */ UNK_RET it_802DB398(Item_GObj* gobj);
+/* 2DB398 */ void it_802DB398(Item_GObj* gobj);
 /* 2DB464 */ bool itLikelike_UnkMotion12_Anim(Item_GObj* gobj);
 /* 2DB500 */ void itLikelike_UnkMotion12_Phys(Item_GObj* gobj);
 /* 2DB570 */ bool itLikelike_UnkMotion12_Coll(Item_GObj* gobj);
@@ -58,7 +58,7 @@
 /* 2DB670 */ bool itLikelike_UnkMotion9_Anim(Item_GObj* gobj);
 /* 2DB70C */ void itLikelike_UnkMotion9_Phys(Item_GObj* gobj);
 /* 2DB710 */ bool itLikelike_UnkMotion9_Coll(Item_GObj* gobj);
-/* 2DB74C */ UNK_RET it_802DB74C(Item_GObj* gobj);
+/* 2DB74C */ void it_802DB74C(Item_GObj* gobj);
 /* 2DB7CC */ bool itLikelike_UnkMotion10_Anim(Item_GObj* gobj);
 /* 2DB868 */ void itLikelike_UnkMotion10_Phys(Item_GObj* gobj);
 /* 2DB86C */ bool itLikelike_UnkMotion10_Coll(Item_GObj* gobj);
@@ -66,7 +66,7 @@
 /* 2DB914 */ bool itLikelike_UnkMotion13_Anim(Item_GObj* gobj);
 /* 2DB95C */ void itLikelike_UnkMotion13_Phys(Item_GObj* gobj);
 /* 2DB9B8 */ bool itLikelike_UnkMotion13_Coll(Item_GObj* gobj);
-/* 2DB9F4 */ UNK_RET it_802DB9F4(Item_GObj* arg0);
+/* 2DB9F4 */ void it_802DB9F4(Item_GObj* arg0);
 /* 2DBA68 */ void it_802DBA68(Item_GObj*);
 /* 2DBAF0 */ void it_802DBAF0(Item_GObj*, s32, s32);
 /* 2DBC68 */ bool itLikelike_UnkMotion14_Anim(Item_GObj* gobj);
