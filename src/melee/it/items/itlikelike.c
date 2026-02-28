@@ -15,6 +15,7 @@
 #include "it/itcoll.h"
 #include "it/itCommonItems.h"
 #include "it/item.h"
+#include "lb/lb_00B0.h"
 #include "mp/mpcoll.h"
 
 #include <baselib/random.h>
@@ -1019,7 +1020,47 @@ void it_802DBA68(Item_GObj* gobj)
 }
 
 
-/// #it_802DBAF0
+void it_802DBAF0(Item_GObj* arg0, s32 arg1, s32 arg2)
+{
+    f32 sp2C;
+    f32 sp28;
+    Vec3 vec;
+    Vec3 sp18;
+    HSD_GObj* temp_r4;
+    Item* ip;
+    itLikelikeAttributes* attr;
+
+    ip = GET_ITEM(arg0);
+    attr = GET_ATTRS(ip);
+    if ((s32) ip->msid != 8) {
+        temp_r4 = ip->grab_victim;
+        if ((temp_r4 != NULL) && (temp_r4 == ip->xDD4_itemVar.likelike.x50)) {
+            vec.x = 0.0f;
+            vec.y = 0.5f * (ip->x378_itemColl.ecb.top.y + ip->x378_itemColl.ecb.bottom.y);
+            vec.z = 0.0f;
+            vec.x += ip->pos.x;
+            vec.y += ip->pos.y;
+            vec.z += ip->pos.z;
+            lb_8000B1CC(it_80272CC0(arg0, 8), NULL, &vec);
+            if (arg1 == 0) {
+
+            } else if ((f32) arg1 == -1.0f) {
+
+            }
+
+            if (arg2 != 0) {
+                ftCo_800C7B0C(ip->grab_victim, &sp18, &vec, (lbColl_80008D30_arg1* )attr + 0x64, 0.0f);
+            } else {
+                ftCo_800C7B0C(ip->grab_victim, &sp18, &vec, (lbColl_80008D30_arg1*) attr + 0x40, 0.0f);
+            }
+            ip->xDD4_itemVar.foxblaster.xE20.y = 0.0f;
+            ip->atk_victim = NULL;
+            ip->grab_victim = NULL;
+            Item_8026AE84(ip, 0x13A, 0x7FU, 0x40U);
+        }
+    }
+}
+
 
 bool itLikelike_UnkMotion14_Anim(Item_GObj* gobj)
 {
