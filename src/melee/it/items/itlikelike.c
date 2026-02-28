@@ -289,7 +289,26 @@ void it_802DA960(Item_GObj* gobj)
 }
 
 
-/// #it_802DAA10
+void it_802DAA10(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itECB ecb;
+    PAD_STACK(0x10);
+    it_802DBAF0(gobj, 1, 1);
+    it_802762BC(ip);
+    if (ip->xDD4_itemVar.likelike.x38 == 1) {
+        ecb = ip->xC1C;
+        ecb.top = ip->xC1C.bottom;
+        ecb.top = ip->xC1C.bottom;
+        it_80275D5C(gobj, &ecb);
+    }
+    it_8027C56C(gobj, 0.0f);
+    ip->xDD4_itemVar.likelike.x38 = 0;
+    ip->xDD4_itemVar.likelike.x4C_cooldown = 0;
+    it_80273454(gobj);
+    Item_80268E5C((HSD_GObj* ) gobj, 5, ITEM_ANIM_UPDATE);
+}
+
 
 bool itLikelike_UnkMotion5_Anim(Item_GObj* gobj)
 {
