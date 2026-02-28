@@ -31,12 +31,10 @@ void it_802D9B78(Item_GObj* gobj)
 
 void it_802D9BA8(Item_GObj* gobj)
 {
-    Item* ip;
-    itLikelikeAttributes* attr;
+    Item* ip = GET_ITEM(gobj);
+    itLikelikeAttributes* attr = GET_ATTRS(ip);
     PAD_STACK(8);
 
-    ip = gobj->user_data;
-    attr = ip->xC4_article_data->x4_specialAttributes;
     it_8027B730(gobj);
     ip->facing_dir = it_8026B684(&ip->pos);
     it_8027C56C(gobj, 0.0f);
@@ -65,12 +63,10 @@ void it_802D9BA8(Item_GObj* gobj)
 Vec3* it_804D6D40;
 bool it_2725_Logic5_DmgReceived(Item_GObj* gobj)
 {
-    Item* ip;
-    itLikelikeAttributes* attr;
+    Item* ip = GET_ITEM(gobj);
+    itLikelikeAttributes* attr = GET_ATTRS(ip);
     PAD_STACK(16);
 
-    ip = GET_ITEM(gobj);
-    attr = ip->xC4_article_data->x4_specialAttributes;
     it_802DBAF0(gobj, 0, 1);
     ip->init_facing_dir = ip->facing_dir;
     ip->xC9C = ip->xC9C + it_8027CBFC(gobj);
@@ -122,7 +118,7 @@ void itLikelike_UnkMotion0_Phys(Item_GObj* gobj)
             it_802DA104(gobj);
         }
     } else {
-        ip->xDD4_itemVar.likelike.x4C =  timer - 1;
+        ip->xDD4_itemVar.likelike.x4C = timer - 1;
     }
     it_8027C0A8(gobj, 0.0f, 5.0f);
 }
@@ -160,9 +156,8 @@ bool itLikelike_UnkMotion7_Anim(Item_GObj* gobj)
 
 void itLikelike_UnkMotion7_Phys(Item_GObj* gobj)
 {
-    Item* ip = gobj->user_data;
-    Article* article_data = ip->xC4_article_data;
-    itLikelikeAttributes* attrs = article_data->x4_specialAttributes;
+    Item* ip = GET_ITEM(gobj);
+    itLikelikeAttributes* attrs = GET_ATTRS(ip);
 
     if (ip->xDD4_itemVar.likelike.x4C <= 0) {
         if (it_802D9A2C(gobj) != 0) {
@@ -200,12 +195,10 @@ bool itLikelike_UnkMotion7_Coll(Item_GObj* gobj)
 
 void it_802DA104(Item_GObj* gobj)
 {
-    Item* ip;
-    itLikelikeAttributes* attr;
+    Item* ip = GET_ITEM(gobj);
+    itLikelikeAttributes* attr = GET_ATTRS(ip);
     PAD_STACK(16);
 
-    ip = GET_ITEM(gobj);
-    attr = ip->xC4_article_data->x4_specialAttributes;
     ip->x40_vel.x = ip->facing_dir * attr->x0->y;
     ip->x40_vel.z = 0.0f;
     ip->x40_vel.y = 0.0f;
@@ -232,19 +225,17 @@ bool itLikelike_UnkMotion1_Anim(Item_GObj* gobj)
 
 void it_802DA4C0(Item_GObj* gobj)
 {
-    Item* temp_r31;
-    itLikelikeAttributes* temp_r30;
-    PAD_STACK(16);
+    Item* ip = GET_ITEM(gobj);
+    itLikelikeAttributes* attr = GET_ATTRS(ip);
+    PAD_STACK(0x10);
 
-    temp_r31 = gobj->user_data;
-    temp_r30 = temp_r31->xC4_article_data->x4_specialAttributes;
-    temp_r31->x40_vel.x = temp_r31->facing_dir * temp_r30->x0->y;
-    temp_r31->x40_vel.y = 0.0f;
-    temp_r31->x40_vel.z = 0.0f;
+    ip->x40_vel.x = ip->facing_dir * attr->x0->y;
+    ip->x40_vel.y = 0.0f;
+    ip->x40_vel.z = 0.0f;
     it_802756E0(gobj);
-    temp_r31->xDD4_itemVar.likelike.x4C = temp_r30->x18;
-    temp_r31->xDD4_itemVar.likelike.x44 = 0x3c;
-    temp_r31->xDD4_itemVar.likelike.x48 = 0;
+    ip->xDD4_itemVar.likelike.x4C = attr->x18;
+    ip->xDD4_itemVar.likelike.x44 = 0x3c;
+    ip->xDD4_itemVar.likelike.x48 = 0;
     Item_80268E5C((HSD_GObj* ) gobj, 2, ITEM_UNK_0x1);
 }
 
@@ -263,54 +254,52 @@ bool itLikelike_UnkMotion2_Anim(Item_GObj* gobj)
 bool itLikelike_UnkMotion2_Coll(Item_GObj* gobj)
 {
     CollData* temp_r31;
-    Item* temp_r30;
+    Item* ip = GET_ITEM(gobj);
     f32 temp_f3;
     s32 temp_r3;
     f32 var_f1;
     f32 var_f2;
     s32 coll_result;
-    itLikelikeAttributes* temp_r29;
+    itLikelikeAttributes* attr = GET_ATTRS(ip);
     PAD_STACK(24);
 
-    temp_r30 = gobj->user_data;
-    temp_r31 = &temp_r30->x378_itemColl;
-    temp_r29 = temp_r30->xC4_article_data->x4_specialAttributes;
+    temp_r31 = &ip->x378_itemColl;
     it_80276214(gobj);
     coll_result = mpColl_8004C750(temp_r31);
-    temp_r30->pos = temp_r31->cur_pos;
+    ip->pos = temp_r31->cur_pos;
     if (coll_result != 0) {
-        temp_r30->xC30 = temp_r31->ceiling.index;
+        ip->xC30 = temp_r31->ceiling.index;
     }
     if (it_802762D8(gobj) != 0) {
-        temp_r30->facing_dir = -temp_r30->facing_dir;
-        temp_r30->x40_vel.x *= -1.0f;
+        ip->facing_dir = -ip->facing_dir;
+        ip->x40_vel.x *= -1.0f;
     } else if (it_80276308(gobj) != 0) {
-        temp_r30->facing_dir = -temp_r30->facing_dir;
-        temp_r30->x40_vel.x *= -1.0f;
+        ip->facing_dir = -ip->facing_dir;
+        ip->x40_vel.x *= -1.0f;
     } else {
-        var_f2 = ABS(temp_r30->xDD4_itemVar.likelike.x20.x - temp_r30->pos.x);
+        var_f2 = ABS(ip->xDD4_itemVar.likelike.x20.x - ip->pos.x);
         temp_f3 = 0.5f;
-        temp_f3 = temp_r29->x0->y * temp_f3;
+        temp_f3 = attr->x0->y * temp_f3;
         if (var_f2 < temp_f3) {
-            var_f1 = ABS(temp_r30->xDD4_itemVar.likelike.x20.y - temp_r30->pos.y);
+            var_f1 = ABS(ip->xDD4_itemVar.likelike.x20.y - ip->pos.y);
             if (var_f1 < temp_f3) {
-                temp_r3 = temp_r30->xDD4_itemVar.likelike.x48;
+                temp_r3 = ip->xDD4_itemVar.likelike.x48;
                 if (temp_r3 >= 4) {
-                    temp_r30->facing_dir = -temp_r30->facing_dir;
-                    temp_r30->x40_vel.x = temp_r30->facing_dir * temp_r29->x0->y;
-                    temp_r30->xDD4_itemVar.likelike.x48 = 0;
+                    ip->facing_dir = -ip->facing_dir;
+                    ip->x40_vel.x = ip->facing_dir * attr->x0->y;
+                    ip->xDD4_itemVar.likelike.x48 = 0;
                 } else {
-                    temp_r30->xDD4_itemVar.likelike.x48 = temp_r3 + 1;
+                    ip->xDD4_itemVar.likelike.x48 = temp_r3 + 1;
                 }
             } else {
                 goto block_15;
             }
         } else {
 block_15:
-            temp_r30->xDD4_itemVar.likelike.x48 = 0;
+    ip->xDD4_itemVar.likelike.x48 = 0;
         }
     }
-    temp_r30->xDD4_itemVar.likelike.x20 = temp_r30->pos;
+    ip->xDD4_itemVar.likelike.x20 = ip->pos;
     return it_8027C794(gobj);
 }
 
@@ -488,38 +477,39 @@ void it_802DAE6C(Item_GObj* gobj)
 
 bool itLikelike_UnkMotion16_Anim(Item_GObj* gobj)
 {
-    Item* temp_r30 = GET_ITEM(gobj);
-    Item* temp_r30_2;
-    Item* temp_r31_2;
-    itLikelikeAttributes* temp_r30_3;
-    itLikelikeAttributes* temp_r31;
+    Item* ip = GET_ITEM(gobj);
+    Item* ip2;
+    Item* ip3;
+    itLikelikeAttributes* attr;
+    itLikelikeAttributes* attr2;
     PAD_STACK(0x10);
 
     if (it_80272C6C(gobj) == 0) {
-        temp_r30->facing_dir = it_8026B684(&temp_r30->pos);
-        if (temp_r30->xDD4_itemVar.likelike.x38 == 0) {
-            temp_r30_2 = GET_ITEM(gobj);
-            temp_r31 = temp_r30_2->xC4_article_data->x4_specialAttributes;
-            temp_r30_2->x40_vel.x = temp_r30_2->facing_dir * temp_r31->x0->y;
-            temp_r30_2->x40_vel.z = 0.0f;
-            temp_r30_2->x40_vel.y = 0.0f;
+        ip->facing_dir = it_8026B684(&ip->pos);
+        if (ip->xDD4_itemVar.likelike.x38 == 0) {
+            ip2 = GET_ITEM(gobj);
+            attr2 = GET_ATTRS(ip2);
+            ip2->x40_vel.x = ip2->facing_dir * attr2->x0->y;
+            ip2->x40_vel.z = 0.0f;
+            ip2->x40_vel.y = 0.0f;
             it_802756E0(gobj);
-            temp_r30_2->xDD4_itemVar.likelike.x4C = temp_r31->x18;
-            temp_r30_2->xDD4_itemVar.likelike.x44 = 0x3C;
-            temp_r30_2->xDD4_itemVar.likelike.x48 = 0;
+            ip2->xDD4_itemVar.likelike.x4C = attr2->x18;
+            ip2->xDD4_itemVar.likelike.x44 = 0x3C;
+            ip2->xDD4_itemVar.likelike.x48 = 0;
             Item_80268E5C(gobj, 1, ITEM_UNK_0x1);
         } else {
-            temp_r31_2 = GET_ITEM(gobj);
-            temp_r30_3 = temp_r31_2->xC4_article_data->x4_specialAttributes;
+            ip3 = GET_ITEM(gobj);
+            attr = GET_ATTRS(ip3);
             // This line is to get 100%
-            if (temp_r30_3->x0->y && temp_r30_3->x0->y){};
-            temp_r31_2->x40_vel.x = temp_r31_2->facing_dir * temp_r30_3->x0->y;
-            temp_r31_2->x40_vel.y = 0;
-            temp_r31_2->x40_vel.z = 0;
+            if (attr->x0->y && attr->x0->y) {
+            };
+            ip3->x40_vel.x = ip3->facing_dir * attr->x0->y;
+            ip3->x40_vel.y = 0;
+            ip3->x40_vel.z = 0;
             it_802756E0(gobj);
-            temp_r31_2->xDD4_itemVar.likelike.x4C = temp_r30_3->x18;
-            temp_r31_2->xDD4_itemVar.likelike.x44 = 0x3C;
-            temp_r31_2->xDD4_itemVar.likelike.x48 = 0;
+            ip3->xDD4_itemVar.likelike.x4C = attr->x18;
+            ip3->xDD4_itemVar.likelike.x44 = 0x3C;
+            ip3->xDD4_itemVar.likelike.x48 = 0;
             Item_80268E5C( gobj, 2, ITEM_UNK_0x1);
         }
     }
@@ -555,7 +545,7 @@ bool itLikelike_UnkMotion16_Coll(Item_GObj* gobj)
 void it_802DB074(HSD_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itLikelikeAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+    itLikelikeAttributes* attr = GET_ATTRS(ip);
     PAD_STACK(8);
     ip->facing_dir = ip->xDD4_itemVar.likelike.x3C;
     ip->x40_vel.x = ip->facing_dir * attr->x0->y * 2.0f;
@@ -616,9 +606,9 @@ void it_802DB398(Item_GObj* gobj)
     Item_8026AE84(ip, 0x139, 0x7FU, 0x40U);
     it_80275258(gobj);
     if (ip->facing_dir == 1.0f) {
-        Item_80268E5C((HSD_GObj* ) gobj, 0xB, ITEM_ANIM_UPDATE);
+        Item_80268E5C(gobj, 0xB, ITEM_ANIM_UPDATE);
     } else {
-        Item_80268E5C((HSD_GObj* ) gobj, 0xC, ITEM_ANIM_UPDATE);
+        Item_80268E5C(gobj, 0xC, ITEM_ANIM_UPDATE);
     }
     it_80274F28(ip, 1, (void (*)(HSD_GObj*)) it_802DB358, (void (*)(HSD_GObj*, HSD_GObj*)) ftCo_800C78B0);
 }
@@ -650,7 +640,6 @@ void itLikelike_UnkMotion12_Phys(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     ItemAttr* temp_r4_2;
 
-    ip = gobj->user_data;
     if ((enum GroundOrAir) ip->ground_or_air == GA_Air) {
         temp_r4_2 = ip->xCC_item_attr;
         it_80272860(gobj, temp_r4_2->x10_fall_speed, temp_r4_2->x14_fall_speed_max);
@@ -694,13 +683,12 @@ void it_802DB5F0(Item_GObj* gobj)
 
 bool itLikelike_UnkMotion9_Anim(Item_GObj* gobj)
 {
-    Item* temp_r31;
+    Item* ip = GET_ITEM(gobj);
     PAD_STACK(16);
 
-    temp_r31 = GET_ITEM(gobj);
     if (it_80272C6C(gobj) == 0) {
         it_8026D5CC(gobj);
-        if (temp_r31->xDD4_itemVar.likelike.x50 != 0U) {
+        if (ip->xDD4_itemVar.likelike.x50 != 0U) {
             it_802DB8A8(gobj);
         } else {
             it_8027CAD8(gobj);
@@ -725,10 +713,10 @@ bool itLikelike_UnkMotion9_Coll(Item_GObj* gobj)
 
 void it_802DB74C(Item_GObj* gobj)
 {
-    Item* ip;
+    Item* ip = GET_ITEM(gobj);
+    ;
     PAD_STACK(8);
 
-    ip = GET_ITEM(gobj);
     it_80273454(gobj);
     Item_80268E5C((HSD_GObj* ) gobj, 0xA, ITEM_ANIM_UPDATE);
     Item_8026AE84(ip, 0x139, 0x7FU, 0x40U);
@@ -738,10 +726,9 @@ void it_802DB74C(Item_GObj* gobj)
 
 bool itLikelike_UnkMotion10_Anim(Item_GObj* gobj)
 {
-    Item* ip;
+    Item* ip = GET_ITEM(gobj);
     PAD_STACK(16);
 
-    ip = GET_ITEM(gobj);
     if (it_80272C6C(gobj) == 0) {
         it_8026D5CC(gobj);
         if (ip->xDD4_itemVar.likelike.x50 != 0U) {
@@ -790,8 +777,7 @@ bool itLikelike_UnkMotion13_Anim(Item_GObj* gobj)
 void itLikelike_UnkMotion13_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itLikelikeAttributes* attr =
-        ip->xC4_article_data->x4_specialAttributes;
+    itLikelikeAttributes* attr = GET_ATTRS(ip);
     PAD_STACK(8);
     if (ip->xDD4_itemVar.likelike.x4C == 0) {
         ip->xDD4_itemVar.likelike.x4C =
@@ -852,7 +838,7 @@ bool itLikelike_UnkMotion14_Anim(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     s32 temp_r3;
     PAD_STACK(0x18);
-    if (ip->xDD4_itemVar.likelike.x4C == ((itLikelikeAttributes *) ip->xC4_article_data->x4_specialAttributes)->x38) {
+    if (ip->xDD4_itemVar.likelike.x4C == GET_ATTRS(ip)->x38) {
         it_802DBAF0(gobj, 1, 0);
     }
     temp_r3 = ip->xDD4_itemVar.likelike.x4C;
@@ -883,7 +869,7 @@ bool itLikelike_UnkMotion15_Anim(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     s32 temp_r3;
     PAD_STACK(0x18);
-    if (ip->xDD4_itemVar.likelike.x4C == ((itLikelikeAttributes *) ip->xC4_article_data->x4_specialAttributes)->x38) {
+    if (ip->xDD4_itemVar.likelike.x4C == GET_ATTRS(ip)->x38) {
         it_802DBAF0(gobj, -1, 0);
     }
     temp_r3 = ip->xDD4_itemVar.likelike.x4C;
@@ -934,10 +920,9 @@ void it_2725_Logic5_Dropped(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     itECB ebc;
     Item* ip2;
-    itLikelikeAttributes* attr;
+    itLikelikeAttributes* attr = GET_ATTRS(ip);
     PAD_STACK(8);
 
-    attr = ip->xC4_article_data->x4_specialAttributes;
     it_8027CBA4(gobj);
     ip->xDD4_itemVar.likelike.x4C = attr->x4;
     ip2 = GET_ITEM(gobj);
@@ -982,14 +967,12 @@ bool itLikelike_UnkMotion19_Coll(Item_GObj* gobj)
 
 void it_802DC0AC(Item_GObj* gobj)
 {
-    Item* temp_r31;
-    itLikelikeAttributes* temp_r30;
+    Item* ip = GET_ITEM(gobj);
+    itLikelikeAttributes* attr = GET_ATTRS(ip);
     PAD_STACK(8);
-    temp_r31 = GET_ITEM(gobj);
-    temp_r30 = temp_r31->xC4_article_data->x4_specialAttributes;
     it_80273454(gobj);
-    temp_r31->xDD4_itemVar.likelike.x4C = temp_r30->x4;
-    temp_r31->xDD4_itemVar.likelike.x3C = 0;
+    ip->xDD4_itemVar.likelike.x4C = attr->x4;
+    ip->xDD4_itemVar.likelike.x3C = 0;
     Item_80268E5C(gobj, 6, ITEM_ANIM_UPDATE);
 }
 
