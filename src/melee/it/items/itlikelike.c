@@ -4,6 +4,7 @@
 
 #include <placeholder.h>
 #include <platform.h>
+#include "it/forward.h"
 
 #include "cm/camera.h"
 #include "ft/ft_0C31.h"
@@ -323,46 +324,51 @@ bool itLikelike_UnkMotion1_Coll(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     Item* ip2;
+    Item_GObj *new_var;
     itLikelikeAttributes* attrs = GET_ATTRS(ip);
     f32 temp_f3;
     s32 temp_r3;
     f32 var_f1;
     f32 var_f2;
-
+    new_var = gobj;
     if (it_8026D8A4(gobj, (void (*)(HSD_GObj*)) it_802D9B78) != 0) {
-        if (it_80276308(gobj) != 0) {
-            // TODO: Is this flip maybe an inline function?
-            ip2 = GET_ITEM(gobj);
-            ip2->facing_dir = -ip2->facing_dir;
-            ip2->x40_vel.x = ip2->facing_dir * attrs->x0->y;
+        if (it_80276308(new_var) != 0) {
+            ip2 = new_var->user_data;
+            {
+                itLikelikeAttributes* a2 = GET_ATTRS(ip2);
+                ip2->facing_dir = -ip2->facing_dir;
+                ip2->x40_vel.x = ip2->facing_dir * a2->x0->y;
+            }
         } else {
             var_f2 = ABS(ip->xDD4_itemVar.likelike.x20.x - ip->pos.x);
-            temp_f3 = attrs->x0->y * 0.5f;
+            temp_f3 = 0.5f * attrs->x0->y;
             if (var_f2 < temp_f3) {
                 var_f1 = ABS(ip->xDD4_itemVar.likelike.x20.y - ip->pos.y);
                 if (var_f1 < temp_f3) {
                     temp_r3 = ip->xDD4_itemVar.likelike.x48;
                     if (temp_r3 >= 4) {
-                        ip2 = GET_ITEM(gobj);
-                        ip2->facing_dir = -ip2->facing_dir;
-                        ip2->x40_vel.x = ip2->facing_dir * attrs->x0->y;
+                        ip2 = gobj->user_data;
+                        {
+                            itLikelikeAttributes* a2 = GET_ATTRS(ip2);
+                            ip2->facing_dir = -ip2->facing_dir;
+                            ip2->x40_vel.x = ip2->facing_dir * a2->x0->y;
+                        }
                         ip2->xDD4_itemVar.likelike.x48 = 0;
                     } else {
                         ip->xDD4_itemVar.likelike.x48 = temp_r3 + 1;
                     }
-                } else {
-                    ip->xDD4_itemVar.likelike.x48 = 0;
+                    goto done;
                 }
-            } else {
-                ip->xDD4_itemVar.likelike.x48 = 0;
             }
+            ip->xDD4_itemVar.likelike.x48 = 0;
         }
     } else {
         it_802DAA10(gobj);
     }
 
+done:
     ip->xDD4_itemVar.likelike.x20 = ip->pos;
-    return it_8027C794(gobj);
+    return it_8027C794(new_var);
 }
 
 void it_802DA4C0(Item_GObj* gobj)
