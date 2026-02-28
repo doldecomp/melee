@@ -777,7 +777,31 @@ bool itLikelike_UnkMotion18_Anim(Item_GObj* gobj)
 
 void itLikelike_UnkMotion18_Phys(Item_GObj* gobj) {}
 
-/// #it_2725_Logic5_Dropped
+void it_2725_Logic5_Dropped(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itECB ebc;
+    Item* ip2;
+    itLikelikeAttributes* attr;
+    PAD_STACK(8);
+
+    attr = ip->xC4_article_data->x4_specialAttributes;
+    it_8027CBA4(gobj);
+    ip->xDD4_itemVar.likelike.x4C_cooldown = attr->x4;
+    ip2 = GET_ITEM(gobj);
+    it_802762BC(ip2);
+    if (ip2->xDD4_itemVar.likelike.x38 == 1) {
+        ebc = ip2->xC1C;
+        ebc.top = ip2->xC1C.bottom;
+        ebc.top = ip2->xC1C.bottom;
+        it_80275D5C(gobj, &ebc);
+        it_8027C56C(gobj, 0.0f);
+    }
+    ip2->xDD4_itemVar.likelike.x38 = 0;
+    it_80273454(gobj);
+    Item_80268E5C((HSD_GObj* ) gobj, 4, ITEM_ANIM_UPDATE);
+}
+
 
 void itLikeLike_Logic5_Thrown(Item_GObj* gobj)
 {
