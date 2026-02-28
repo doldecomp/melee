@@ -632,9 +632,12 @@ bool itLikelike_UnkMotion17_Coll(Item_GObj* gobj)
 
 void it_802DAD18(HSD_GObj* gobj)
 {
+    // One regswap (r30 vs r31) away from a match
     HSD_JObj* temp_r31 = GET_JOBJ(gobj);
-    Item* ip = GET_ITEM(gobj);
-    PAD_STACK(0x20);
+    Item* ip = HSD_GObjGetUserData(gobj);
+    do {
+        UNUSED unsigned char _[0x20];
+    } while (M_PI * ((0, 0)));
 
     HSD_JObjSetRotationZ(temp_r31, M_PI);
     ip->xDCE_flag.b7 = 1;
