@@ -12,7 +12,7 @@ humanfriendly==10.0
     # via -r reqs/misc.in
 mistletoe==1.4.0
     # via -r reqs/misc.in
-prettytable==3.11.0
+prettytable==3.14.0
     # via -r reqs/misc.in
 smmap==5.0.1
     # via gitdb
