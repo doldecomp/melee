@@ -284,7 +284,7 @@ struct gmm_x1868 {
     /* 0x01D4 */ s32 x1A3C;
     /* 0x01D8 */ s32 x1A40;
     /* 0x01DC */ s32 x1A44;
-    /* 0x01E0 */ s32 x1A48;
+    /* 0x01E0 */ u32 x1A48;
     /* 0x01E4 */ s32 x1A4C;
     /* 0x01E8 */ s32 x1A50;
     /* 0x01EC */ int x1A54;
@@ -570,12 +570,13 @@ typedef struct gm_803DF94C_t {
 } gm_803DF94C_t;
 
 struct MatchTeamData {
-    int score;
-    int subscore;
-    u8 is_big_loser;
-    u8 is_small_loser;
-    u8 active;
-};
+    /* 0x00 */ int score;
+    /* 0x04 */ int subscore;
+    /* 0x08 */ u8 is_big_loser;
+    /* 0x09 */ u8 is_small_loser;
+    /* 0x0A */ u8 active;
+}; // padded to 0x0C
+STATIC_ASSERT(sizeof(struct MatchTeamData) == 0xC);
 
 struct MatchPlayerData {
     u8 slot_type;
@@ -600,7 +601,9 @@ struct MatchPlayerData {
     int x24;
     u32 x28;
     int score;
-    u8 pad_x30[0x40 - 0x30];
+    u32 x30;
+    u8 x34;
+    u8 x35_pad[0x40 - 0x35];
     u32 x40;
     u32 x44;
     u32 x48;
@@ -628,29 +631,31 @@ struct MatchPlayerData {
     int xA0;
     u32 xA4;
 };
+STATIC_ASSERT(sizeof(struct MatchPlayerData) == 0xA8);
 
 struct MatchEnd {
-    u32 x0; ///< timer
-    u8 result;
-    u8 x5;
-    u8 is_teams;
-    u8 x7;
-    u32 frame_count;
-    u8 xC;
-    u8 n_winners;
-    u8 n_team_winners;
-    u8 loser;
-    u8 winners[6];
-    u8 team_winners[5];
-    struct MatchTeamData team_standings[5];
-    struct MatchPlayerData player_standings[6];
-    u8 _x448[4];
-    struct UnkResultPlayerData {
+    /* 0x00 */ u32 x0; ///< timer
+    /* 0x04 */ u8 result;
+    /* 0x05 */ u8 x5;
+    /* 0x06 */ u8 is_teams;
+    /* 0x07 */ u8 x7;
+    /* 0x08 */ u32 frame_count;
+    /* 0x0C */ u8 xC;
+    /* 0x0D */ u8 n_winners;
+    /* 0x0E */ u8 n_team_winners;
+    /* 0x0F */ u8 loser;
+    /* 0x10 */ u8 winners[6];
+    /* 0x16 */ u8 team_winners[5];
+    /* 0x1B */ struct MatchTeamData team_standings[5];     // 0xC * 5 = 0x3C
+    /* 0x58 */ struct MatchPlayerData player_standings[6]; // 0xA8 * 6 = 0x3F0
+    /* 0x448 */ u8 _x448[4]; // offset by 1 because of the previous struct
+    /* 0x44c */ struct UnkResultPlayerData {
         u8 x0[0x100];
         char pad_x100[0x508 - 0x100];
-    } x44C[4];
-    u8 pad_x186C[0x227C - 0x186C];
+    } x44C[4]; // 0x508 * 4 = 0x1420
+    /* 0x186C */ u8 pad_x186C[0x227C - 0x186C];
 };
+STATIC_ASSERT(sizeof(struct MatchEnd) == 0x227C);
 
 struct MatchExitInfo {
     int x0;

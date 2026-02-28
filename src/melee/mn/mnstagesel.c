@@ -37,7 +37,7 @@ int mnStageSel_802599EC(void)
 
     for (i = 0; i < NUM_STAGES; i++) {
         if (mnStageSel_803F06D0[i].x4 >= 0 &&
-            gm_80164330(mnStageSel_803F06D0[i].xA))
+            (u8) gm_80164330(mnStageSel_803F06D0[i].xA))
         {
             break;
         }
@@ -55,7 +55,7 @@ int mnStageSel_802599EC(void)
         }
         for (i = 0; i < NUM_STAGES; i++) {
             if (mnStageSel_803F06D0[i].x4 == 0 &&
-                gm_80164330(mnStageSel_803F06D0[i].xA))
+                (u8) gm_80164330(mnStageSel_803F06D0[i].xA))
             {
                 var_r29 = false;
             }
@@ -65,7 +65,7 @@ int mnStageSel_802599EC(void)
         int tmp = HSD_Randi(NUM_STAGES);
         i = tmp;
         if (mnStageSel_803F06D0[i].x4 == 0) {
-            if (gm_80164330(mnStageSel_803F06D0[i].xA)) {
+            if ((u8) gm_80164330(mnStageSel_803F06D0[i].xA)) {
                 break;
             }
         }

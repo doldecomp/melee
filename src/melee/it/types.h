@@ -634,6 +634,7 @@ struct Item {
         itThunder_ItemVars thunder;
         itTools_ItemVars tools;
         itUnknown_ItemVars unknown;
+        itMatadogas_ItemVars matadogas;
         u8 _[0xFCC - 0xDD4];
     } xDD4_itemVar;
 };
