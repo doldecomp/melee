@@ -98,7 +98,7 @@ void it_802D9BA8(Item_GObj* gobj)
         it_802DA960(gobj);
         return;
     }
-    it_802DAD18((HSD_GObj* ) gobj);
+    it_802DAD18(gobj);
 }
 
 
@@ -513,14 +513,15 @@ void it_802DA8D8(Item_GObj* gobj)
 void it_802DA960(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
+    UNUSED u8 _1[0x8];
     itECB ecb;
-    PAD_STACK(0x10);
+    UNUSED u8 _2[0x8];
 
     it_802762BC(ip);
     if (ip->xDD4_itemVar.likelike.x38 == 1) {
         ecb = ip->xC1C;
-        ecb.top = ecb.bottom;
-        ecb.bottom = ip->xC1C.bottom;
+        ecb.bottom = ecb.top;
+        ecb.top = ip->xC1C.bottom;
         it_80275D5C(gobj, &ecb);
         it_8027C56C(gobj, 0.0f);
     }
