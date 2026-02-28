@@ -736,7 +736,27 @@ void it_802DBA68(Item_GObj* gobj)
 
 /// #it_802DBAF0
 
-/// #itLikelike_UnkMotion14_Anim
+bool itLikelike_UnkMotion14_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    s32 temp_r3;
+    PAD_STACK(0x18);
+    if (ip->xDD4_itemVar.likelike.x4C_cooldown == ((itLikelikeAttributes *) ip->xC4_article_data->x4_specialAttributes)->x38) {
+        it_802DBAF0(gobj, 1, 0);
+    }
+    temp_r3 = ip->xDD4_itemVar.likelike.x4C_cooldown;
+    if (temp_r3 >= 0x28) {
+        ip->xDD4_itemVar.likelike.x4C_cooldown = 0x78;
+        it_8027CAD8(gobj);
+        it_8026D5CC(gobj);
+        it_8027C0A8(gobj, 0.0f, 5.0f);
+        it_80275270(gobj);
+        Item_80268E5C((HSD_GObj* ) gobj, 0, ITEM_ANIM_UPDATE);
+    } else {
+        ip->xDD4_itemVar.likelike.x4C_cooldown = temp_r3 + 1;
+    }
+    return false;
+}
 
 void itLikelike_UnkMotion14_Phys(Item_GObj* gobj) {}
 
