@@ -1023,7 +1023,46 @@ bool itLikelike_UnkMotion6_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itLikelike_UnkMotion6_Phys
+void itLikelike_UnkMotion6_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    s32 temp_r3;
+    itLikelikeAttributes* attr;
+    itECB ecb;
+    PAD_STACK(0x20);
+
+    temp_r3 = ip->xDD4_itemVar.likelike.x4C;
+    if (temp_r3 == 0) {
+        if (ip->xDD4_itemVar.likelike.x38 == 0) {
+            attr = GET_ATTRS(ip);
+            ip->x40_vel.x = ip->facing_dir * attr->x0->y;
+            ip->x40_vel.z = 0.0f;
+            ip->x40_vel.y = 0.0f;
+            it_802756E0(gobj);
+            ip->xDD4_itemVar.likelike.x44 = 0x3C;
+            ip->xDD4_itemVar.likelike.x48 = 0;
+            ip->xDD4_itemVar.likelike.x4C = attr->x18;
+            Item_80268E5C((HSD_GObj*) gobj, 1, ITEM_UNK_0x1);
+            return;
+        }
+        it_802DBAF0(gobj, 1, 1);
+        it_802762BC(ip);
+        if (ip->xDD4_itemVar.likelike.x38 == 1) {
+            ecb = ip->xC1C;
+            // TODO: change once stack issues fixed
+            ecb.top = ip->xC1C.bottom;
+            ecb.top = ip->xC1C.bottom;
+            it_80275D5C(gobj, &ecb);
+        }
+        it_8027C56C(gobj, 0.0f);
+        ip->xDD4_itemVar.likelike.x38 = 0;
+        ip->xDD4_itemVar.likelike.x4C = 0;
+        it_80273454(gobj);
+        Item_80268E5C((HSD_GObj*) gobj, 5, ITEM_ANIM_UPDATE);
+        return;
+    }
+    ip->xDD4_itemVar.likelike.x4C = temp_r3 - 1;
+}
 
 bool itLikelike_UnkMotion6_Coll(Item_GObj* gobj)
 {

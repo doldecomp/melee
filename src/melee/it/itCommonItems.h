@@ -427,7 +427,7 @@ typedef struct itLikelike_ItemVars {
     /* +2C ip+E00 */ char pad_2C[0xC];
     /* +38 ip+E0C */ s32 x38;
     /* +3C ip+E10 */ s32 x3C;
-    /* +40 ip+E14 */ s32 x40;
+    /* +40 ip+E14 */ s32 x40; // x40, x44, x48 are likely some form of S32Vec
     /* +44 ip+E18 */ s32 x44;
     /* +48 ip+E1C */ s32 x48;
     /* +4C ip+E20 */ s32 x4C;
