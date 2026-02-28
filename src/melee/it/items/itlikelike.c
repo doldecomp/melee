@@ -495,7 +495,23 @@ void it_802DB358(Item_GObj* gobj)
     it_80274ECC(gobj, true);
 }
 
-/// #it_802DB398
+void it_802DB398(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    PAD_STACK(0x18);
+
+    ip->facing_dir = ip->xDD4_itemVar.likelike.x3C;
+    ip->xDD4_itemVar.likelike.x50 = NULL;
+    Item_8026AE84(ip, 0x139, 0x7FU, 0x40U);
+    it_80275258(gobj);
+    if (ip->facing_dir == 1.0f) {
+        Item_80268E5C((HSD_GObj* ) gobj, 0xB, ITEM_ANIM_UPDATE);
+    } else {
+        Item_80268E5C((HSD_GObj* ) gobj, 0xC, ITEM_ANIM_UPDATE);
+    }
+    it_80274F28(ip, 1, (void (*)(HSD_GObj*)) it_802DB358, (void (*)(HSD_GObj*, HSD_GObj*)) ftCo_800C78B0);
+}
+
 
 bool itLikelike_UnkMotion12_Anim(Item_GObj* gobj)
 {
