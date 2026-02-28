@@ -387,7 +387,17 @@ bool itLikelike_UnkMotion17_Coll(Item_GObj* gobj)
     return it_8027C794(gobj);
 }
 
-/// #it_802DAD18
+void it_802DAD18(HSD_GObj* gobj)
+{
+    HSD_JObj* temp_r31 = GET_JOBJ(gobj);
+    Item* ip = GET_ITEM(gobj);
+    PAD_STACK(0x20);
+
+    HSD_JObjSetRotationZ(temp_r31, M_PI);
+    ip->xDCE_flag.b7 = 1;
+    Item_80268E5C(gobj, 3, ITEM_ANIM_UPDATE);
+}
+
 
 bool itLikelike_UnkMotion3_Anim(Item_GObj* gobj)
 {
