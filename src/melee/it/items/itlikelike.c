@@ -1023,13 +1023,12 @@ void it_802DBA68(Item_GObj* gobj)
 
 void it_802DBAF0(Item_GObj* arg0, s32 arg1, s32 arg2)
 {
-    f32 sp2C;
-    f32 sp28;
     Vec3 vec;
     Vec3 sp18;
     HSD_GObj* temp_r4;
     Item* ip;
     itLikelikeAttributes* attr;
+    f32 fval;
 
     ip = GET_ITEM(arg0);
     attr = GET_ATTRS(ip);
@@ -1042,26 +1041,32 @@ void it_802DBAF0(Item_GObj* arg0, s32 arg1, s32 arg2)
             vec.x += ip->pos.x;
             vec.y += ip->pos.y;
             vec.z += ip->pos.z;
-            lb_8000B1CC(it_80272CC0(arg0, 8), NULL, &vec);
+            lb_8000B1CC(it_80272CC0(arg0, 8), NULL, &sp18);
             if (arg1 == 0) {
-
+                fval = 0.0f;
             } else if ((f32) arg1 == -1.0f) {
-
-            }
-
-            if (arg2 != 0) {
-                ftCo_800C7B0C(ip->grab_victim, &sp18, &vec, (lbColl_80008D30_arg1* )attr + 0x64, 0.0f);
+                fval = attr->x30;
             } else {
-                ftCo_800C7B0C(ip->grab_victim, &sp18, &vec, (lbColl_80008D30_arg1*) attr + 0x40, 0.0f);
+                fval = attr->x34;
             }
-            ip->xDD4_itemVar.foxblaster.xE20.y = 0.0f;
+
+            // TODO: fix pointer hacks
+            if (arg2 != 0) {
+                ftCo_800C7B0C(ip->grab_victim, &sp18, &vec,
+                              (lbColl_80008D30_arg1*) ((u8*) attr + 0x64),
+                              fval);
+            } else {
+                ftCo_800C7B0C(ip->grab_victim, &sp18, &vec,
+                              (lbColl_80008D30_arg1*) ((u8*) attr + 0x40),
+                              fval);
+            }
+            ip->xDD4_itemVar.likelike.x50 = NULL;
             ip->atk_victim = NULL;
             ip->grab_victim = NULL;
             Item_8026AE84(ip, 0x13A, 0x7FU, 0x40U);
         }
     }
 }
-
 
 bool itLikelike_UnkMotion14_Anim(Item_GObj* gobj)
 {
