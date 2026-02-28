@@ -16,6 +16,7 @@
 #include "it/itCommonItems.h"
 #include "it/item.h"
 #include "lb/lb_00B0.h"
+#include "lb/types.h"
 #include "mp/mpcoll.h"
 
 #include <baselib/random.h>
@@ -1385,4 +1386,53 @@ void itLikeLike_Logic5_Destroyed(Item_GObj* gobj)
     it_2725_Logic9_Destroyed(gobj);
 }
 
-/// #it_802DC4BC
+Vec3 it_803B86D8;
+
+Item_GObj* it_802DC4BC(s32 arg0, Vec3* arg1)
+{
+    // one r29-r30 regswap away from being solved
+    Vec3 sp50;
+    HSD_JObj* temp_r29;
+    itECB sp40;
+    Item* temp_r30;
+    Item* temp_r3_2;
+    Item_GObj* temp_r3;
+    s32 temp_cr0_eq;
+    s32 var_r3;
+    u32 temp_r4;
+    PAD_STACK(0x16);
+
+    sp50 = it_803B86D8;
+    temp_r3 = it_8027B5B0(It_Kind_Likelike, arg1, NULL, (Vec3*) &sp50, 1);
+    if (temp_r3 != NULL) {
+        temp_r3_2 = GET_ITEM(temp_r3);
+        temp_r3_2->xDD4_itemVar.likelike.x38 = arg0;
+        it_802762BC(temp_r3_2);
+        if (arg0 == 0) {
+            temp_r30 = GET_ITEM(temp_r3);
+            it_802DBAF0(temp_r3, 1, 1);
+            it_802762BC(temp_r30);
+            if (temp_r30->xDD4_itemVar.likelike.x38 == 1) {
+                sp40 = temp_r30->xC1C;
+                sp40.bottom = sp40.top;
+                sp40.top = temp_r30->xC1C.bottom;
+                it_80275D5C(temp_r3, &sp40);
+            }
+            it_8027C56C(temp_r3, 0.0f);
+            temp_r30->xDD4_itemVar.likelike.x38 = 0;
+            temp_r30->xDD4_itemVar.likelike.x4C = 0;
+            it_80273454(temp_r3);
+            Item_80268E5C((HSD_GObj*) temp_r3, 5, ITEM_ANIM_UPDATE);
+        } else {
+            if (temp_r3->hsd_obj && temp_r3->hsd_obj) {
+            }
+            temp_r29 = temp_r3->hsd_obj;
+            temp_r30 = GET_ITEM(temp_r3);
+
+            HSD_JObjSetRotationZ(temp_r29, M_PI);
+            temp_r30->xDCE_flag.b7 = 1;
+            Item_80268E5C((HSD_GObj*) temp_r3, 3, ITEM_ANIM_UPDATE);
+        }
+    }
+    return temp_r3;
+}
