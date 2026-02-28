@@ -25,7 +25,22 @@
 #include "sysdolphin/baselib/random.h"
 
 #include <baselib/jobj.h>
-
+S16Vec3 grI2_803E4A60[] = {
+    {  0,  1,  1 },
+    { 12,  3,  1 },
+    { 13,  4,  1 },
+    { 14, 15,  0 },
+    {  3,  5,  0 },
+    {  4,  6,  0 },
+    {  5,  7,  0 },
+    {  6,  8,  0 },
+    {  7,  9,  0 },
+    {  8, 10,  0 },
+    {  9, 11,  0 },
+    { 10, 12,  0 },
+    { 11, 13,  0 },
+    {  2, 14,  0 }
+};
 StageCallbacks grI2_803E4AB4[] = {
     {
         grInishie2_801FCDC8,
@@ -91,6 +106,48 @@ StageCallbacks grI2_803E4AB4[] = {
         0,
     },
     {
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        0,
+    },
+    {
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        0,
+    },
+    {
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        0,
+    },
+    {
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        0,
+    },
+    {
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        0,
+    },
+    {
+        NULL,
+        NULL,
+        NULL,
+        NULL,
+        0,
+    },
+    {
         grInishie2_801FD4F0,
         grInishie2_801FD64C,
         grInishie2_801FD654,
@@ -99,7 +156,23 @@ StageCallbacks grI2_803E4AB4[] = {
     },
 };
 
-typedef struct grInishie2_thing {
+StageData grI2_803E4C00 = {
+    0x19,
+    grI2_803E4AB4,
+    "/GrI2.dat",
+    grInishie2_801FCBC4,
+    grInishie2_801FCBC0,
+    grInishie2_801FCCAC,
+    grInishie2_801FCCB0,
+    grInishie2_801FCCD4,
+    grInishie2_801FDFE8,
+    grInishie2_801FDFF0,
+    1,
+    grI2_803E4A60,
+    14,
+};
+
+typedef struct grInishie2_params {
     s16 unk0;
     s16 unk2;
     s16 unk4;
@@ -112,9 +185,11 @@ typedef struct grInishie2_thing {
     Vec3 unk14[2];
     f32 unk2C;
     Vec3 unk30[2];
-} grInishie2_thing;
+    s16 unk48;
+    s16 unk4A;
+} grInishie2_params;
 
-grInishie2_thing* grI2_804D6A00;
+grInishie2_params* grI2_804D6A00;
 
 void grInishie2_801FCBC0(bool arg) {}
 
@@ -187,7 +262,7 @@ HSD_GObj* grInishie2_801FCCDC(int gobj_id)
         }
 
     } else {
-        OSReport("%s:%d: couldn’t get gobj(id=%d)\n", "grinishie2.c", 254,
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grinishie2.c", 254,
                  gobj_id);
     }
 
@@ -582,7 +657,7 @@ void grInishie2_801FD9EC(HSD_GObj* gobj)
     gp = gobj->user_data;
 
     if (grAnime_801C83D0(gobj, 1, 1) != 0) {
-        if (gp->gv.inishie23.xC8_flags.b6) {
+        if (gp->gv.inishie23.xC8_flags.b1) {
             f32 temp_f = gp->gv.inishie23.xD8.x + gp->gv.inishie23.xCC.x;
 
             if (temp_f > Stage_GetCamBoundsRightOffset()) {
@@ -594,13 +669,13 @@ void grInishie2_801FD9EC(HSD_GObj* gobj)
             }
 
             if (var_r0 == 0) {
-                gp->gv.inishie23.xC8_flags.b6 = 0;
+                gp->gv.inishie23.xC8_flags.b1 = 0;
             }
 
         } else {
-            if (!gp->gv.inishie23.xC8_flags.b5) {
+            if (!gp->gv.inishie23.xC8_flags.b2) {
                 if ((s16) gp->gv.inishie23.xCA < 2) {
-                    gp->gv.inishie23.xC8_flags.b4 ^= 1;
+                    gp->gv.inishie23.xC8_flags.b3 ^= 1;
                 } else {
                     f32 temp_f =
                         gp->gv.inishie23.xD8.x + gp->gv.inishie23.xCC.x;
@@ -614,17 +689,17 @@ void grInishie2_801FD9EC(HSD_GObj* gobj)
                     }
 
                     if (var_r3 != 0) {
-                        gp->gv.inishie23.xC8_flags.b5 = 1;
-                        gp->gv.inishie23.xC8_flags.b4 = (var_r3 == 2);
-                        gp->gv.inishie23.xC8_flags.b7 = 1;
+                        gp->gv.inishie23.xC8_flags.b2 = 1;
+                        gp->gv.inishie23.xC8_flags.b3 = (var_r3 == 2);
+                        gp->gv.inishie23.xC8_flags.b0 = 1;
                     } else {
-                        temp_r0 = grI2_804D6A00->unk30[1].y +
-                                  grI2_804D6A00->unk30[1].z;
+                        temp_r0 = grI2_804D6A00->unk48 +
+                                  grI2_804D6A00->unk4A;
 
                         var_r3_2 = test_random(temp_r0);
 
-                        if (var_r3_2 >= (s16) grI2_804D6A00->unk30[1].x) {
-                            gp->gv.inishie23.xC8_flags.b4 ^= 1;
+                        if (var_r3_2 >= (s16) grI2_804D6A00->unk48) {
+                            gp->gv.inishie23.xC8_flags.b3 ^= 1;
                         }
                     }
                 }
@@ -632,14 +707,14 @@ void grInishie2_801FD9EC(HSD_GObj* gobj)
             gp->gv.inishie23.xCA += 1;
         }
 
-        grAnime_801C8138(gobj, gp->map_id, gp->gv.inishie23.xC8_flags.b4);
+        grAnime_801C8138(gobj, gp->map_id, gp->gv.inishie23.xC8_flags.b3);
 
         jobj = Ground_801C3FA4(gobj, 0);
-        HSD_JObjSetTranslate(jobj, &gp->gv.inishie23.xCC);
+        HSD_JObjSetTranslate(jobj, &gp->gv.inishie23.xD8);
         HSD_JObjAddTranslationX(jobj, gp->gv.inishie23.xCC.x);
-        HSD_JObjAddTranslationX(jobj, gp->gv.inishie23.xCC.y);
-        HSD_JObjAddTranslationX(jobj, gp->gv.inishie23.xCC.z);
-        HSD_JObjGetTranslation(jobj, &gp->gv.inishie23.xCC);
+        HSD_JObjAddTranslationY(jobj, gp->gv.inishie23.xCC.y);
+        HSD_JObjAddTranslationZ(jobj, gp->gv.inishie23.xCC.z);
+        HSD_JObjGetTranslation(jobj, &gp->gv.inishie23.xD8);
 
         return;
     }
