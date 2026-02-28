@@ -1,17 +1,20 @@
 #include "itlikelike.h"
 
+#include "math.h"
+
 #include <placeholder.h>
 #include <platform.h>
+
 #include "cm/camera.h"
-#include "it/inlines.h"
-#include "it/itCommonItems.h"
-#include "it/itcoll.h"
-#include "it/it_26B1.h"
-#include "it/it_266F.h"
-#include "it/it_2725.h"
-#include "it/item.h"
 #include "ft/ft_0C31.h"
-#include "math.h"
+#include "ft/ftlib.h"
+#include "it/inlines.h"
+#include "it/it_266F.h"
+#include "it/it_26B1.h"
+#include "it/it_2725.h"
+#include "it/itcoll.h"
+#include "it/itCommonItems.h"
+#include "it/item.h"
 #include "mp/mpcoll.h"
 
 #include <baselib/random.h>
@@ -19,7 +22,46 @@
 #define GET_ATTRS(ip)                                                         \
     ((itLikelikeAttributes*) ip->xC4_article_data->x4_specialAttributes)
 
-/// #it_802D9A2C
+bool it_802D9A2C(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itLikelikeAttributes* attr = GET_ATTRS(ip);
+    HSD_GObj* temp_r3;
+    s32 var_r28;
+    Vec3 sp10;
+    f32 var_f1;
+    f32 var_f2;
+
+    ip->xDD4_itemVar.likelike.x3C = 0;
+    if (ip->msid == 7) {
+        var_r28 = (s32) attr->x20;
+    } else {
+        var_r28 = (s32) attr->x1C;
+    }
+    temp_r3 = ftLib_8008627C(&ip->pos, NULL);
+    if (temp_r3 != NULL) {
+        if (it_8027CA7C(temp_r3) != 0) {
+            return ip->xDD4_itemVar.likelike.x3C;
+        }
+        ftLib_80086644(temp_r3, &sp10);
+        var_f2 = ABS(sp10.x - ip->pos.x);
+        if (var_f2 < (f32) var_r28) {
+            var_f1 = sp10.y - ip->pos.y;
+            if (var_f1 < 0.0f) {
+                var_f1 = -var_f1;
+            }
+            if (var_f1 < attr->x24) {
+                ip->xDD4_itemVar.likelike.x50 = temp_r3;
+                if (sp10.x < ip->pos.x) {
+                    ip->xDD4_itemVar.likelike.x3C = -1;
+                } else {
+                    ip->xDD4_itemVar.likelike.x3C = 1;
+                }
+            }
+        }
+    }
+    return ip->xDD4_itemVar.likelike.x3C;
+}
 
 void it_802D9B78(Item_GObj* gobj)
 {

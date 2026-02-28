@@ -409,7 +409,10 @@ typedef struct {
     /* 0x0C */ s32 xC;
     /* 0x10 */ u8 pad_10[0x18 - 0x10];
     /* 0x18 */ s32 x18;
-    /* 0x1C */ u8 pad_1C[0x38 - 0x1C];
+    /* 0x1C */ f32 x1C;
+    /* 0x20 */ f32 x20;
+    /* 0x24 */ f32 x24;
+    /* 0x28 */ u8 pad_28[0x38 - 0x28];
     /* 0x38 */ f32 x38;
     /* 0x3C */ u8 pad_3C;
     /* 0x3D */ s8 x3D_reset_timer;
