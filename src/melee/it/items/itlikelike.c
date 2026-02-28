@@ -25,6 +25,14 @@
 #define GET_ATTRS(ip)                                                         \
     ((itLikelikeAttributes*) ip->xC4_article_data->x4_specialAttributes)
 
+// Can't inline this in inlines.h because of dynamic GET_ATTRS
+static inline void itSwapVelocity(Item* ip){
+    itLikelikeAttributes* attr = GET_ATTRS(ip);
+    ip->facing_dir = -ip->facing_dir;
+    ip->x40_vel.x = ip->facing_dir * attr->x0->y;
+}
+
+
 bool it_802D9A2C(Item_GObj* gobj)
 {
     Item* ip = HSD_GObjGetUserData(gobj);
@@ -69,9 +77,7 @@ bool it_802D9A2C(Item_GObj* gobj)
 void it_802D9B78(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itLikelikeAttributes* attrs = GET_ATTRS(ip);
-    ip->facing_dir = -ip->facing_dir;
-    ip->x40_vel.x = ip->facing_dir * attrs->x0->y;
+    itSwapVelocity(ip);
 }
 
 void it_802D9BA8(Item_GObj* gobj)
@@ -334,11 +340,7 @@ bool itLikelike_UnkMotion1_Coll(Item_GObj* gobj)
     if (it_8026D8A4(gobj, (void (*)(HSD_GObj*)) it_802D9B78) != 0) {
         if (it_80276308(new_var) != 0) {
             ip2 = new_var->user_data;
-            {
-                itLikelikeAttributes* a2 = GET_ATTRS(ip2);
-                ip2->facing_dir = -ip2->facing_dir;
-                ip2->x40_vel.x = ip2->facing_dir * a2->x0->y;
-            }
+            itSwapVelocity(ip2);
         } else {
             var_f2 = ABS(ip->xDD4_itemVar.likelike.x20.x - ip->pos.x);
             temp_f3 = 0.5f * attrs->x0->y;
@@ -348,11 +350,7 @@ bool itLikelike_UnkMotion1_Coll(Item_GObj* gobj)
                     temp_r3 = ip->xDD4_itemVar.likelike.x48;
                     if (temp_r3 >= 4) {
                         ip2 = gobj->user_data;
-                        {
-                            itLikelikeAttributes* a2 = GET_ATTRS(ip2);
-                            ip2->facing_dir = -ip2->facing_dir;
-                            ip2->x40_vel.x = ip2->facing_dir * a2->x0->y;
-                        }
+                        itSwapVelocity(ip2);
                         ip2->xDD4_itemVar.likelike.x48 = 0;
                     } else {
                         ip->xDD4_itemVar.likelike.x48 = temp_r3 + 1;
