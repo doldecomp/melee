@@ -186,7 +186,8 @@ bool itLikelike_UnkMotion2_Coll(Item_GObj* gobj)
         temp_r30->x40_vel.x *= -1.0f;
     } else {
         var_f2 = ABS(temp_r30->xDD4_itemVar.likelike.x20.x - temp_r30->pos.x);
-        temp_f3 = temp_r29->x0->y * 0.5f;
+        temp_f3 = 0.5f;
+        temp_f3 = temp_r29->x0->y * temp_f3;
         if (var_f2 < temp_f3) {
             var_f1 = ABS(temp_r30->xDD4_itemVar.likelike.x20.y - temp_r30->pos.y);
             if (var_f1 < temp_f3) {
