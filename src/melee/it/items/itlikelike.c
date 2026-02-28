@@ -66,7 +66,31 @@ void itLikelike_UnkMotion0_Phys(Item_GObj* gobj)
     it_8027C0A8(gobj, 0.0f, 5.0f);
 }
 
-/// #itLikelike_UnkMotion0_Coll
+bool itLikelike_UnkMotion0_Coll(Item_GObj* gobj)
+{
+    CollData* temp_r31;
+    s32 temp_cr0_eq;
+    Item* temp_r30 = GET_ITEM(gobj);
+    PAD_STACK(0x20);
+    
+    // to make permuter happy:
+    temp_r30->xDD4_itemVar = temp_r30->xDD4_itemVar;
+
+    if (temp_r30->xDD4_itemVar.likelike.x38 == 1) {
+        temp_r31 = &temp_r30->x378_itemColl;
+        it_80276214(gobj);
+        temp_cr0_eq = mpColl_8004C750(temp_r31);
+        temp_r30->pos = temp_r31->cur_pos;
+        if (temp_cr0_eq != 0) {
+            temp_r30->xC30 = temp_r31->ceiling.index;
+        }
+        it_802762D8(gobj);
+    } else {
+        it_8026D6F4(gobj, (void (*)(HSD_GObj*)) it_802DAA10);
+    }
+    return it_8027C794(gobj);
+}
+
 
 bool itLikelike_UnkMotion7_Anim(Item_GObj* gobj)
 {
