@@ -2,7 +2,7 @@
 
 #include <placeholder.h>
 #include <platform.h>
-
+#include "cm/camera.h"
 #include "it/inlines.h"
 #include "it/itCommonItems.h"
 #include "it/it_266F.h"
@@ -29,7 +29,37 @@ void it_802D9B78(Item_GObj* gobj)
 
 /// #it_802D9BA8
 
-/// #it_2725_Logic5_DmgReceived
+// What is this? Where do i put it? I see there's others in other places too, 
+// but there it's a f32* and we add +4 to it
+Vec3* it_804D6D40;
+bool it_2725_Logic5_DmgReceived(Item_GObj* gobj)
+{
+    Item* ip;
+    itLikelikeAttributes* attr;
+    PAD_STACK(16);
+
+    ip = GET_ITEM(gobj);
+    attr = ip->xC4_article_data->x4_specialAttributes;
+    it_802DBAF0(gobj, 0, 1);
+    ip->init_facing_dir = ip->facing_dir;
+    ip->xC9C = ip->xC9C + it_8027CBFC(gobj);
+    if ((ip->xC9C > attr->x4) || (ip->msid == 0x13)) {
+        it_8027C9D8(ip);
+        it_802756D0(gobj);
+        it_80275474(gobj);
+        it_8027CE44(gobj);
+        Camera_80030E44(2, &ip->pos);
+        if (HSD_Randf() < it_804D6D40->z) {
+            it_802DC3DC(gobj);
+        } else {
+            it_802DC310(gobj);
+        }
+    } else {
+        it_802DC0AC(gobj);
+    }
+    return false;
+}
+
 
 void it_802D9DDC(Item_GObj* gobj)
 {
