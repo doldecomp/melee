@@ -1203,11 +1203,11 @@ void itLikelike_UnkMotion18_Phys(Item_GObj* gobj) {}
 
 void it_2725_Logic5_Dropped(Item_GObj* gobj)
 {
-    Item* ip = GET_ITEM(gobj);
     itECB ebc;
+    Item* ip = GET_ITEM(gobj);
     Item* ip2;
     itLikelikeAttributes* attr = GET_ATTRS(ip);
-    PAD_STACK(8);
+    UNUSED u8 _[0xC];
 
     it_8027CBA4(gobj);
     ip->xDD4_itemVar.likelike.x4C = attr->x4;
@@ -1215,7 +1215,7 @@ void it_2725_Logic5_Dropped(Item_GObj* gobj)
     it_802762BC(ip2);
     if (ip2->xDD4_itemVar.likelike.x38 == 1) {
         ebc = ip2->xC1C;
-        ebc.top = ip2->xC1C.bottom;
+        ebc.bottom = ebc.top;
         ebc.top = ip2->xC1C.bottom;
         it_80275D5C(gobj, &ebc);
         it_8027C56C(gobj, 0.0f);
