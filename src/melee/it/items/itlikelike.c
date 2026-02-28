@@ -703,7 +703,56 @@ bool itLikelike_UnkMotion8_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itLikelike_UnkMotion8_Phys
+void itLikelike_UnkMotion8_Phys(Item_GObj* gobj)
+{
+    Vec3 sp30;
+    Item* temp_r31;
+    s32 temp_r3;
+    HSD_GObj* temp_r3_2;
+    f32 var_f1;
+    PAD_STACK(0x18);
+
+    temp_r31 = gobj->user_data;
+    temp_r3 = temp_r31->xDD4_itemVar.likelike.x4C;
+    if (temp_r3 == 0) {
+        temp_r31->xDD4_itemVar.likelike.x50 = 0;
+        it_8027CAD8(gobj);
+        it_8026D5CC(gobj);
+        it_8027C0A8(gobj, 0.0f, 5.0f);
+        it_80275270(gobj);
+        Item_80268E5C((HSD_GObj*) gobj, 0, ITEM_ANIM_UPDATE);
+        return;
+    }
+    temp_r31->xDD4_itemVar.likelike.x4C = temp_r3 - 1;
+    temp_r3_2 = temp_r31->xDD4_itemVar.likelike.x50;
+    // permuter slop for 100%
+    if (!GET_ITEM(gobj) && !GET_ITEM(gobj)) {
+    }
+    if (temp_r3_2 != NULL) {
+        ftLib_80086644(temp_r3_2, &sp30);
+        var_f1 = ABS(temp_r31->pos.x - sp30.x);
+        if (var_f1 < 15.0f) {
+            it_80275258(gobj);
+            if ((f32) temp_r31->xDD4_itemVar.likelike.x3C == 1.0f) {
+                it_802DB5F0(gobj);
+                return;
+            }
+            it_802DB74C(gobj);
+            return;
+        }
+    } else {
+        temp_r31->xDD4_itemVar.likelike.x4C = 0x78;
+        it_8027CAD8(gobj);
+        it_8026D5CC(gobj);
+        it_8027C0A8(gobj, 0.0f, 5.0f);
+        it_80275270(gobj);
+        Item_80268E5C((HSD_GObj*) gobj, 0, ITEM_ANIM_UPDATE);
+        return;
+    }
+    it_8027C8D0(&temp_r31->x40_vel, &temp_r31->x378_itemColl.floor.normal,
+                temp_r31->facing_dir);
+    it_8027C0CC(gobj, 0.0f, 5.0f);
+}
 
 bool itLikelike_UnkMotion8_Coll(Item_GObj* gobj)
 {
