@@ -26,7 +26,7 @@
 
 bool it_802D9A2C(Item_GObj* gobj)
 {
-    Item* ip = GET_ITEM(gobj);
+    Item* ip = HSD_GObjGetUserData(gobj);
     itLikelikeAttributes* attr = GET_ATTRS(ip);
     HSD_GObj* temp_r3;
     s32 var_r28;
