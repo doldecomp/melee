@@ -390,7 +390,56 @@ bool itLikelike_UnkMotion2_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itLikelike_UnkMotion2_Phys
+void itLikelike_UnkMotion2_Phys(Item_GObj* gobj)
+{
+    bool var_r31;
+    Vec3 sp14;
+    HSD_GObj* temp_r3_2;
+    Item* ip;
+    f32 temp_f2;
+    f32 var_f1;
+    itLikelikeAttributes* attr;
+
+    ip = GET_ITEM(gobj);
+    attr = GET_ATTRS(ip);
+    if (ip->xDD4_itemVar.likelike.x4C == 0) {
+        var_r31 = false;
+        temp_r3_2 = ftLib_8008627C(&ip->pos, NULL);
+        if (temp_r3_2 != NULL) {
+            ftLib_80086644(temp_r3_2, &sp14);
+            var_f1 = ABS(sp14.x - ip->pos.x);
+            if (var_f1 < attr->x28) {
+                var_f1 = ABS(sp14.y - ip->pos.y);
+                if (var_f1 < attr->x2C) {
+                    var_r31 = true;
+                }
+            }
+        }
+        if (var_r31) {
+            ip->xDD4_itemVar.likelike.x3C = 1;
+            it_802DAA10(gobj);
+            return;
+        }
+        if (HSD_Randi(3) != 0) {
+            ip->xDD4_itemVar.likelike.x4C = attr->x18;
+            goto block_15;
+        }
+        it_802DAE6C(gobj);
+        return;
+    }
+    ip->xDD4_itemVar.likelike.x4C = ip->xDD4_itemVar.likelike.x4C - 1;
+block_15:
+    ip->x40_vel.x = ip->facing_dir * attr->x0->y;
+    temp_f2 = ip->facing_dir;
+    if (((temp_f2 > 0.0f) && (ip->x70_nudge.x < 0.0f)) ||
+        ((temp_f2 < 0.0f) && (ip->x70_nudge.x > 0.0f)))
+    {
+        ip->facing_dir = -temp_f2;
+        ip->x40_vel.x *= -1.0f;
+    }
+    it_8027C8D0(&ip->x40_vel, &ip->x378_itemColl.floor.normal, ip->facing_dir);
+    it_8027C0CC(gobj, 0.0f, 5.0f);
+}
 
 bool itLikelike_UnkMotion2_Coll(Item_GObj* gobj)
 {
