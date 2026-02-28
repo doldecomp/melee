@@ -427,7 +427,7 @@ typedef struct itLikelike_ItemVars {
     /* +40 ip+E14 */ s32 x40;
     /* +44 ip+E18 */ s32 x44;
     /* +48 ip+E1C */ s32 x48;
-    /* +4C ip+E20 */ s32 x4C_cooldown;
+    /* +4C ip+E20 */ s32 x4C;
     /* +50 ip+E24 */ HSD_GObj* x50;
     /* +54 ip+E28 */ HurtCapsule* x54;
 } itLikelike_ItemVars;
