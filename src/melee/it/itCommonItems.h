@@ -418,8 +418,8 @@ typedef struct {
     /* 0x34 */ f32 x34;
     /* 0x38 */ f32 x38;
     /* 0x3C */ s8 x3C;
-    /* 0x3D */ s8 x3D_reset_timer;
-    /* 0x3E */ s8 x3E_damage_amount;
+    /* 0x3D */ s8 x3D;
+    /* 0x3E */ s8 x3E;
 } itLikelikeAttributes;
 
 typedef struct itLikelike_ItemVars {
