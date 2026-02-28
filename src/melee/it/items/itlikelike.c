@@ -1277,7 +1277,7 @@ void itLikelike_UnkMotion6_Phys(Item_GObj* gobj)
     itLikelikeAttributes* attr;
     Item* ip = GET_ITEM(gobj);
     s32 temp_r3;
-    PAD_STACK(0x20);
+    PAD_STACK(0x1C);
 
     temp_r3 = ip->xDD4_itemVar.likelike.x4C;
     if (ip->xDD4_itemVar.likelike.x4C == 0) {
