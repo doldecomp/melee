@@ -70,11 +70,8 @@ bool itLikelike_UnkMotion0_Coll(Item_GObj* gobj)
 {
     CollData* temp_r31;
     s32 temp_cr0_eq;
-    Item* ip = GET_ITEM(gobj);
+    Item* ip = ip = GET_ITEM(gobj);
     PAD_STACK(0x20);
-    
-    // to make permuter happy:
-    ip->xDD4_itemVar = ip->xDD4_itemVar;
 
     if (ip->xDD4_itemVar.likelike.x38 == 1) {
         temp_r31 = &ip->x378_itemColl;
@@ -120,11 +117,9 @@ void itLikelike_UnkMotion7_Phys(Item_GObj* gobj)
 bool itLikelike_UnkMotion7_Coll(Item_GObj* gobj)
 {
     CollData* temp_r31;
-    Item* ip = GET_ITEM(gobj);
+    Item* ip = ip = GET_ITEM(gobj);
     s32 temp_cr0_eq;
     PAD_STACK(0x20);
-    // To make permuter happy:
-    ip->xDD4_itemVar = ip->xDD4_itemVar;
 
     if (ip->xDD4_itemVar.likelike.x38 == 1) {
         temp_r31 = &ip->x378_itemColl;
@@ -386,7 +381,28 @@ void it_802DAE6C(Item_GObj* gobj)
 
 void itLikelike_UnkMotion16_Phys(Item_GObj* gobj) {}
 
-/// #itLikelike_UnkMotion16_Coll
+bool itLikelike_UnkMotion16_Coll(Item_GObj* gobj)
+{
+    CollData* temp_r31;
+    Item* ip = ip = GET_ITEM(gobj);
+    s32 temp_cr0_eq;
+    PAD_STACK(0x20);
+
+    if (ip->xDD4_itemVar.likelike.x38 == 0) {
+        it_8026D6F4(gobj, (void (*)(HSD_GObj*)) it_802DAA10);
+    } else {
+        temp_r31 = &ip->x378_itemColl;
+        it_80276214(gobj);
+        temp_cr0_eq = mpColl_8004C750(temp_r31);
+        ip->pos = temp_r31->cur_pos;
+        if (temp_cr0_eq != 0) {
+            ip->xC30 = temp_r31->ceiling.index;
+        }
+        it_802762D8(gobj);
+    }
+    return it_8027C794(gobj);
+}
+
 
 void it_802DB074(HSD_GObj* gobj)
 {
