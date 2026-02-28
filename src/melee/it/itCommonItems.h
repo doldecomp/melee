@@ -403,22 +403,39 @@ typedef struct {
 } itMBallAttributes;
 
 typedef struct {
-    struct {
-        f32 x0;
-        f32 x4;
-    }* x0;
-    f32 x4;
+    /* 0x00 */ Vec3* x0;
+    /* 0x04 */ s32 x4;
+    /* 0x08 */ s32 x8;
+    /* 0x0C */ s32 xC;
+    /* 0x10 */ u8 pad_10[0x18 - 0x10];
+    /* 0x18 */ s32 x18;
+    /* 0x1C */ f32 x1C;
+    /* 0x20 */ f32 x20;
+    /* 0x24 */ f32 x24;
+    /* 0x28 */ f32 x28;
+    /* 0x2C */ f32 x2C;
+    /* 0x30 */ f32 x30;
+    /* 0x34 */ f32 x34;
+    /* 0x38 */ f32 x38;
+    /* 0x3C */ s8 x3C;
+    /* 0x3D */ s8 x3D;
+    /* 0x3E */ s8 x3E;
 } itLikelikeAttributes;
 
 typedef struct itLikelike_ItemVars {
     /*  +0 ip+DD4 */ char pad_0[0x18];
     /* +18 ip+DEC */ s32 x18;
-    /* +1C ip+DF0 */ char pad_1C[0x1C];
+    /* +1C ip+DF0 */ char pad_1C[0x4];
+    /* +20 ip+DF4 */ Vec3 x20;
+    /* +2C ip+E00 */ char pad_2C[0xC];
     /* +38 ip+E0C */ s32 x38;
     /* +3C ip+E10 */ s32 x3C;
-    /* +40 ip+E14 */ char pad_40[0xC];
+    /* +40 ip+E14 */ s32 x40; // x40, x44, x48 are likely some form of S32Vec
+    /* +44 ip+E18 */ s32 x44;
+    /* +48 ip+E1C */ s32 x48;
     /* +4C ip+E20 */ s32 x4C;
     /* +50 ip+E24 */ HSD_GObj* x50;
+    /* +54 ip+E28 */ HurtCapsule* x54;
 } itLikelike_ItemVars;
 
 typedef struct {
