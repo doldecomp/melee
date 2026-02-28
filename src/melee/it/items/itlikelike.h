@@ -97,6 +97,6 @@
 /* 2DC460 */ bool itLikelike_UnkMotion21_Coll(Item_GObj* gobj);
 /* 2DC480 */ void itLikeLike_Logic5_Destroyed(Item_GObj*);
 /* 2DC4BC */ Item_GObj* it_802DC4BC(s32 arg0, Vec3* arg1);
-extern ItemStateTable it_803F8468[];
-
+/* 3F8468 */ extern ItemStateTable it_803F8468[];
+/* 4D6D40 */ extern f32* it_804D6D40;
 #endif

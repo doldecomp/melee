@@ -108,10 +108,6 @@ void it_802D9BA8(Item_GObj* gobj)
     it_802DAD18(gobj);
 }
 
-
-// What is this? Where do i put it? I see there's others in other places too,
-// but there it's a f32* and we add +4 to it
-Vec3* it_804D6D40;
 bool it_2725_Logic5_DmgReceived(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
@@ -127,7 +123,7 @@ bool it_2725_Logic5_DmgReceived(Item_GObj* gobj)
         it_80275474(gobj);
         it_8027CE44(gobj);
         Camera_80030E44(2, &ip->pos);
-        if (HSD_Randf() < it_804D6D40->z) {
+        if (HSD_Randf() < *(it_804D6D40+4)) {
             it_802DC3DC(gobj);
         } else {
             it_802DC310(gobj);
