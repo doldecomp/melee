@@ -114,7 +114,7 @@ void fn_8027DAC8(Item_GObj* igp)
 
     it_8026B390(igp);
     itResetVelocity(ip);
-    itBombhei_UpdateStatePreserveBone_flags(igp, 0,ITEM_ANIM_UPDATE);
+    itBombhei_UpdateStatePreserveBone(igp, 0,ITEM_ANIM_UPDATE);
 }
 
 bool itBombhei_UnkMotion0_Anim(Item_GObj* igp)
@@ -151,7 +151,7 @@ void it_8027DE18(Item_GObj* igp)
         ip->xDD4_itemVar.bombhei.xDD4 = (s32) ap->x14;
     }
 
-    itBombhei_UpdateStatePreserveBone_flags(igp, 1, ITEM_ANIM_UPDATE);
+    itBombhei_UpdateStatePreserveBone(igp, 1, ITEM_ANIM_UPDATE);
 }
 
 bool itBombhei_UnkMotion1_Anim(Item_GObj* gobj)
@@ -190,10 +190,10 @@ void itBombhei_Logic6_PickedUp(Item_GObj* igp)
 
     if (ip->xDD4_itemVar.bombhei.xDE0 == 0) {
         ip->x5D0_animFrameSpeed = ap->x0;
-        itBombhei_UpdateStatePreserveBone_flags(igp, 7, ITEM_ANIM_UPDATE);
+        itBombhei_UpdateStatePreserveBone(igp, 7, ITEM_ANIM_UPDATE);
     } else {
         ip->x5D0_animFrameSpeed = 1.0f;
-        itBombhei_UpdateStatePreserveBone2_flags(igp, 8, ITEM_UNK_0x1);
+        itBombhei_UpdateStatePreserveBone(igp, 8, ITEM_UNK_0x1);
     }
 }
 
@@ -228,7 +228,7 @@ void it_8027E978(Item_GObj* arg0)
                                      (f64) ip->xDD4_itemVar.bombhei.xDD4);
     ip->xDD4_itemVar.bombhei.xDE4 = 1;
 
-    itBombhei_UpdateStatePreserveBone_flags(arg0, 3, ITEM_ANIM_UPDATE);
+    itBombhei_UpdateStatePreserveBone(arg0, 3, ITEM_ANIM_UPDATE);
 }
 
 bool itBombhei_UnkMotion3_Anim(Item_GObj* gobj)
@@ -284,7 +284,7 @@ void it_8027EE04(Item_GObj* arg0)
     ip->x40_vel.x = attrs->xC * ip->facing_dir;
     ip->xD5C = 0;
     it_80275444(arg0);
-    itBombhei_UpdateStatePreserveBone2_flags(arg0, 2, 0x1A);
+    itBombhei_UpdateStatePreserveBone(arg0, 2, 0x1A);
 }
 
 /// #itBombhei_UnkMotion2_Anim
@@ -317,7 +317,7 @@ bool itBombhei_UnkMotion2_Coll(Item_GObj* gobj)
         if (GET_ITEM(gobj)->msid == 3) {
             GET_ITEM(gobj)->xDD4_itemVar.bombhei.xDD4 = attr->x14;
         }
-        itBombhei_UpdateStatePreserveBone3(new_var, 1);
+        itBombhei_UpdateStatePreserveBoneFake(new_var, 1, ITEM_ANIM_UPDATE);
     }
     return false;
 }
@@ -330,7 +330,7 @@ void it_8027F42C(Item_GObj* arg0)
 
     temp_r31 = arg0->user_data;
     it_802762B0(temp_r31);
-    itBombhei_UpdateStatePreserveBone2_flags(arg0, 4, 0x12);
+    itBombhei_UpdateStatePreserveBone(arg0, 4, 0x12);
     temp_r31->x40_vel.x = 0.0f;
     temp_r31->xDD4_itemVar.bombhei.xDF4 = -temp_r31->facing_dir;
 }
@@ -393,7 +393,35 @@ bool itBombhei_UnkMotion6_Coll(Item_GObj* gobj)
 
 /// #it_3F14_Logic6_Thrown
 
-/// #itBombhei_UnkMotion10_Anim
+bool itBombhei_UnkMotion10_Anim(Item_GObj* gobj)
+{
+    HSD_JObj* temp_r31;
+    Item* temp_r30;
+    f32 temp_f1;
+    PAD_STACK(8);
+
+    temp_r30 = GET_ITEM(gobj);
+    if (it_80272C6C(gobj) == 0) {
+        temp_r31 = gobj->hsd_obj;
+        if (temp_r30->xDD4_itemVar.bombhei.xDE0 == 0) {
+            temp_r30->x5D0_animFrameSpeed = GET_ATTRS(temp_r30)->x0;
+            itBombhei_UpdateStatePreserveBoneFake(gobj, 9, 0x6);
+        } else {
+            temp_r30->x5D0_animFrameSpeed = 1.0f;
+            itBombhei_UpdateStatePreserveBoneFake(gobj, 0xA, 0x104);
+        }
+        it_80275474(gobj);
+        temp_f1 = temp_r30->xDD4_itemVar.bombhei.xDE8;
+        if (temp_f1 != 1.0f) {
+            it_80274484(gobj, temp_r31, temp_f1);
+        }
+    }
+    if (temp_r30->xDD4_itemVar.bombhei.xDE0 != 0) {
+        it_8027D820(gobj);
+    }
+    return false;
+}
+
 
 void itBombhei_UnkMotion10_Phys(Item_GObj* gobj)
 {
@@ -420,7 +448,7 @@ void fn_80280974(Item_GObj* arg0)
     ip->x40_vel.x = ap->xC * ip->facing_dir;
     ip->xD5C = 0;
     it_80275444(arg0);
-    itBombhei_UpdateStatePreserveBone3(arg0, 2);
+    itBombhei_UpdateStatePreserveBoneFake(arg0, 2, ITEM_ANIM_UPDATE);
 }
 
 bool itBombhei_UnkMotion10_Coll(Item_GObj* gobj)
