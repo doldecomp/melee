@@ -368,7 +368,38 @@ void it_8027F42C(Item_GObj* arg0)
     temp_r31->xDD4_itemVar.bombhei.xDF4 = -temp_r31->facing_dir;
 }
 
-/// #itBombhei_UnkMotion4_Anim
+bool itBombhei_UnkMotion4_Anim(Item_GObj* gobj)
+{
+    HSD_JObj* bone;
+    Item* ip;
+    f32 temp_f31;
+    itBombHeiAttributes* temp_r29;
+
+    ip = GET_ITEM(gobj);
+    if (it_80272C6C(gobj) == 0) {
+        ip->facing_dir = -ip->facing_dir;
+        ip = GET_ITEM(gobj);
+        temp_r29 = GET_ATTRS(ip);
+        it_8026B3A8(gobj);
+        ip->x40_vel.x = temp_r29->xC * ip->facing_dir;
+        ip->xD5C = 0;
+        it_80275444(gobj);
+        itBombhei_UpdateStatePreserveBoneFake(gobj, 2, 0x1A);
+    }
+    ip->xDD4_itemVar.bombhei.xDD4 -= 1;
+    ip->xDD4_itemVar.bombhei.xDEC -= 1.0f;
+    if (ip->xDD4_itemVar.bombhei.xDD4 <= 0) {
+        ip->facing_dir = ip->xDD4_itemVar.bombhei.xDF4;
+        it_8027F8E0(gobj);
+    }
+    ip = GET_ITEM(gobj);
+    temp_f31 = ip->xDD4_itemVar.bombhei.xDF8;
+    bone = ip->xBBC_dynamicBoneTable->bones[0xB];
+    HSD_JObjAddTranslationY(bone, temp_f31);
+    temp_f31 = ip->xDD4_itemVar.bombhei.xDFC;
+    HSD_JObjAddRotationX(bone, temp_f31);
+    return false;
+}
 
 void itBombhei_UnkMotion4_Phys(Item_GObj* gobj) {}
 
