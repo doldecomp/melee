@@ -118,24 +118,25 @@ bool it_27CF_UnkMotion0_Anim(HSD_GObj* item_gobj) {
 }
 
 #else
-/// bool it_27CF_UnkMotion1_Anim(Item_GObj* item_gobj) {
-bool it_27CF_UnkMotion1_Anim(HSD_GObj* item_gobj)
+bool it_27CF_UnkMotion1_Anim(HSD_GObj* gobj)
 {
-    Item* item;
+    Item* ip;
     f32 sp1C;
     HSD_JObj* item_jobj;
+    Item_GObj* item_gobj;
     PAD_STACK(10);
 
-    item = item_gobj->user_data;
-    item->xD44_lifeTimer -= 1.0f;
-    if (item->xD44_lifeTimer <= 0.0f) {
-        item = item_gobj->user_data;
-        item_jobj = item_gobj->hsd_obj;
+    ip = GET_ITEM(gobj);
+    ip->xD44_lifeTimer -= 1.0f;
+    if (ip->xD44_lifeTimer <= 0.0f) {
+        ip = gobj->user_data;
+        item_jobj = gobj->hsd_obj;
         sp1C = 1.0f;
-        Item_8026AE84(item, 280088, 127, 64);
-        efAsync_Spawn(item_gobj, &item->xBC0, 4U, 1231, item_gobj->hsd_obj,
-                      &sp1C);
-        it_802F3290((Item_GObj*) item_gobj);
+        Item_8026AE84(ip, 280088, 127, 64);
+        item_gobj = (Item_GObj*) gobj;
+        efAsync_Spawn(gobj, &((Item*) gobj->user_data)->xBC0, 4U, 1231,
+                      item_jobj, &sp1C);
+        it_802F3290(item_gobj);
     }
     return false;
 }
