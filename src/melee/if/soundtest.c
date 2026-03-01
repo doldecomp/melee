@@ -83,10 +83,10 @@
 } un_803FA258;
 /* 3FA348 */ static u16 un_803FA348;
 /* 3FA34C */ static u8 un_803FA34C;
-/* 3FA658 */ static int un_803FA658;
-/* 3FA8E8 */ static int un_803FA8E8;
+/* 3FA658 */ static u8 un_803FA658[0x290];
+/* 3FA8E8 */ static u8 un_803FA8E8[0x15C];
 /* 3FAA44 */ static u8 un_803FAA44[0xC0];
-/* 3FB168 */ static int un_803FB168;
+/* 3FB168 */ static u8 un_803FB168[0x4A4];
 /* 3FB60C */ static u8 un_803FB60C[0xE0];
 /* 3FB728 */ static u8 un_803FB728[0xC0];
 /* 3FB870 */ static u8 un_803FB870[0xE0];
