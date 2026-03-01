@@ -228,7 +228,19 @@ bool itBombhei_UnkMotion3_Coll(Item_GObj* gobj)
     return false;
 }
 
-/// #it_8027EE04
+void it_8027EE04(Item_GObj* arg0)
+{
+    Item* ip;
+    itBombHeiAttributes* attrs;
+
+    ip = GET_ITEM(arg0);
+    attrs = GET_ATTRS(ip);
+    it_8026B3A8(arg0);
+    ip->x40_vel.x = attrs->xC * ip->facing_dir;
+    ip->xD5C = 0;
+    it_80275444(arg0);
+    itBombhei_UpdateStatePreserveBone2_flags(arg0, 2, 0x1A);
+}
 
 /// #itBombhei_UnkMotion2_Anim
 
