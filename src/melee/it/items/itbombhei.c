@@ -545,7 +545,6 @@ void it_3F14_Logic6_Thrown(Item_GObj* arg0)
     Item* ip;
     f32 temp_f1;
     itBombHeiAttributes* temp_r3;
-    PAD_STACK(8);
 
     ip = GET_ITEM(arg0);
     temp_r29 = arg0->hsd_obj;
@@ -559,9 +558,8 @@ void it_3F14_Logic6_Thrown(Item_GObj* arg0)
     }
 
     it_80275474(arg0);
-    temp_f1 = ip->xDD4_itemVar.bombhei.xDE8;
-    if (1.0f != temp_f1) {
-        it_80274484(arg0, temp_r29, temp_f1);
+    if (ip->xDD4_itemVar.bombhei.xDE8 != 1.0f) {
+        it_80274484(arg0, temp_r29, ip->xDD4_itemVar.bombhei.xDE8);
     }
 }
 
