@@ -541,10 +541,10 @@ bool itBombhei_UnkMotion6_Coll(Item_GObj* gobj)
 
 void it_3F14_Logic6_Thrown(Item_GObj* arg0)
 {
-    HSD_JObj* temp_r29;
     Item* ip;
-    f32 temp_f1;
     itBombHeiAttributes* temp_r3;
+    HSD_JObj* temp_r29;
+    PAD_STACK(8);
 
     ip = GET_ITEM(arg0);
     temp_r29 = arg0->hsd_obj;
