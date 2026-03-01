@@ -231,7 +231,37 @@ void it_8027E978(Item_GObj* arg0)
     itBombhei_UpdateStatePreserveBone_flags(arg0, 3, ITEM_ANIM_UPDATE);
 }
 
-/// #itBombhei_UnkMotion3_Anim
+bool itBombhei_UnkMotion3_Anim(Item_GObj* gobj)
+{
+    HSD_JObj* temp_r0;
+    HSD_JObj* temp_r30_2;
+    Item* temp_r3;
+    f32 temp_f31;
+    PAD_STACK(8);
+
+    temp_r0 = gobj->hsd_obj;
+    temp_r3 = GET_ITEM(gobj);
+    temp_f31 = temp_r3->xDD4_itemVar.bombhei.xE04;
+    HSD_JObjAddRotationY(temp_r0, temp_f31);
+    temp_r3 = GET_ITEM(gobj);
+    temp_r3->xDD4_itemVar.bombhei.xDD4 -= 1;
+    temp_r3->xDD4_itemVar.bombhei.xDEC -= 1.0f;
+    if (temp_r3->xDD4_itemVar.bombhei.xDD4 <= 0) {
+        itBombHeiAttributes* attr = GET_ATTRS(temp_r3);
+        temp_r3->xDC8_word.flags.x19 = 1;
+        temp_r3->xDD4_itemVar.bombhei.xDD4 = attr->x14;
+        it_8027EE04(gobj);
+        Item_8026AE84(temp_r3, 0xF0, 0x7FU, 0x40U);
+    }
+    temp_r3 = GET_ITEM(gobj);
+    temp_f31 = temp_r3->xDD4_itemVar.bombhei.xDF8;
+    temp_r30_2 = temp_r3->xBBC_dynamicBoneTable->bones[0xB];
+    HSD_JObjAddTranslationY(temp_r30_2, temp_f31);
+    temp_f31 = temp_r3->xDD4_itemVar.bombhei.xDFC;
+    HSD_JObjAddRotationX(temp_r30_2, temp_f31);
+
+    return false;
+}
 
 void itBombhei_UnkMotion3_Phys(Item_GObj* gobj) {}
 
