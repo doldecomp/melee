@@ -219,9 +219,11 @@ bool grPura_80211FD0(Ground_GObj* arg0)
 
 void grPura_80211FD8(Ground_GObj* arg0)
 {
+    void grPura_80213030(Ground_GObj*);
+    
     grPura_80212EF4(arg0);
     Ground_801C2FE0(arg0);
-    // grPura_80213030(arg0);
+    grPura_80213030(arg0);
     mpLib_80055E24(0x18);
     lb_800115F4();
 }
