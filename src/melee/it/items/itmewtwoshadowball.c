@@ -63,7 +63,15 @@ bool itMewtwoshadowball_UnkMotion0_Coll(Item_GObj* gobj)
 
 /// #itMewtwoshadowball_UnkMotion8_Phys
 
-/// #itMewtwoshadowball_UnkMotion8_Coll
+bool itMewtwoshadowball_UnkMotion8_Coll(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    PAD_STACK(8);
+    if (it_802C4F50(gobj, &ip->x378_itemColl)) {
+        it_802C5E5C(gobj);
+    }
+    return false;
+}
 
 bool itMewtwoshadowball_UnkMotion9_Anim(Item_GObj* gobj)
 {
