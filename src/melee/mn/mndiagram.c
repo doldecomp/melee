@@ -894,7 +894,7 @@ void mnDiagram_PopupCleanup(void* arg0)
 
 typedef struct mnDiagram_PopupData {
     /* 0x00 */ HSD_JObj* jobjs[14];
-    /* 0x38 */ HSD_Text* text[5];
+    /* 0x38 */ HSD_Text* text[6];
 } mnDiagram_PopupData;
 
 void mnDiagram_PopupAnimProc(void* arg0)
