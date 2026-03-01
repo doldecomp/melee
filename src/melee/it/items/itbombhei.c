@@ -8,16 +8,19 @@
 #include <platform.h>
 
 #include "baselib/forward.h"
-#include "it/forward.h"
 
 #include "baselib/gobj.h"
 #include "baselib/jobj.h"
+
+#include "it/forward.h"
+
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/itCommonItems.h"
 #include "it/item.h"
+#include "lb/lb_00F9.h"
 
 #define GET_ATTRS(ip)                                                         \
     ((itBombHeiAttributes*) ip->xC4_article_data->x4_specialAttributes)
@@ -458,8 +461,35 @@ bool itBombhei_UnkMotion10_Coll(Item_GObj* gobj)
     it_8026E414(gobj, fn_80280974);
     return false;
 }
+Vec3 it_803B8600;
+void it_80280B60(Item_GObj* gobj)
+{
+    Vec sp48;
+    Vec3 sp3C;
+    HSD_JObj* temp_r29;
+    Item* temp_r30;
+    PAD_STACK(8);
 
-/// #it_80280B60
+    temp_r30 = gobj->user_data;
+    temp_r29 = gobj->hsd_obj;
+    if (temp_r30->xDC8_word.flags.x13) {
+        sp3C = it_803B8600;
+        it_8027429C(gobj, &sp3C);
+    }
+    it_8026B3A8(gobj);
+    HSD_JObjSetFlagsAll(temp_r29, 0x10U);
+    it_8026BD24(gobj);
+    it_8027518C(gobj);
+    temp_r30->x5D0_animFrameSpeed = 1.0f;
+    it_80273454(gobj);
+    temp_r30->xDD4_itemVar.bombhei.xDDC = 1;
+    it_80272C08(gobj);
+    it_802756D0(gobj);
+    it_80275444(gobj);
+    sp48 = temp_r30->pos;
+    lb_800119DC(&sp48, 0x78, 1.0f, 0.02f, 1.0471976f);
+    itBombhei_UpdateStatePreserveBone(gobj, 0xB, 0x12);
+}
 
 void it_80280DC0(Item_GObj* gobj)
 {
