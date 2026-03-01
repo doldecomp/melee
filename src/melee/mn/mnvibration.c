@@ -681,7 +681,8 @@ void fn_802487A8(HSD_GObj* gobj)
     var_r25 = mnVibration_804D4FE8;
     do {
         // Force mulli pattern with explicit offset computation
-        var_r3 = *((u8*)((u8*)HSD_PadCopyStatus + (u8)var_r23 * 0x44) + 0x41);
+        var_r3 =
+            *((u8*) ((u8*) HSD_PadCopyStatus + (u8) var_r23 * 0x44) + 0x41);
         if ((((s8) var_r3 != 0) && (temp_r31[var_r23 + 6] != 0)) ||
             (((s8) var_r3 == 0) && (temp_r31[var_r23 + 6] == 0)))
         {
@@ -866,9 +867,9 @@ void fn_80248A78(HSD_GObj* arg0)
             cursor_gobj = GObj_Create(6U, 7U, 0x80U);
             data2->cursor_gobj = cursor_gobj;
             loaded_joint = HSD_JObjLoadJoint(assets->SCl_Top_joint);
-            HSD_GObjObject_80390A70(
-                (HSD_GObj*) ((u8*) cursor_gobj + 0), HSD_GObj_804D7849,
-                (HSD_JObj*) ((u8*) loaded_joint + 0));
+            HSD_GObjObject_80390A70((HSD_GObj*) ((u8*) cursor_gobj + 0),
+                                    HSD_GObj_804D7849,
+                                    (HSD_JObj*) ((u8*) loaded_joint + 0));
             GObj_SetupGXLink(cursor_gobj, HSD_GObj_JObjCallback, 4U, 0x80U);
             HSD_GObjProc_8038FD54(cursor_gobj, fn_80248084, 0U);
             data3 = arg0->user_data;
