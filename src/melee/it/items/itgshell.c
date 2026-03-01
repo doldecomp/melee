@@ -384,7 +384,7 @@ void it_8028C3A8(Item_GObj* gobj)
     it_8026B3A8(gobj);
     it_80275474(gobj);
     it_80275414(gobj);
-    it_80275158(gobj, it_804D6D28->x30);
+    it_80275158(gobj, it_804D6D28->x30_lifetime);
     ip->xD5C = 0;
     ip->xDD4_itemVar.gshell.xDD8 = attrs->x24;
     ip->xDD4_itemVar.gshell.xDDC = attrs->x30;
@@ -473,7 +473,7 @@ void it_8028C898(Item_GObj* gobj)
     it_8026B3A8(gobj);
     it_80275474(gobj);
     it_80275414(gobj);
-    it_80275158(gobj, it_804D6D28->x30);
+    it_80275158(gobj, it_804D6D28->x30_lifetime);
     ip->xD5C = 0;
     ip->xDD4_itemVar.gshell.xDD8 = attrs->x24;
     ip->xDD4_itemVar.gshell.xDDC = attrs->x30;

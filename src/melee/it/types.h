@@ -695,7 +695,7 @@ struct ItemCommonData {
     u32 x24;
     u32 x28;
     u32 x2C;
-    u32 x30; // lifetime?
+    u32 x30_lifetime;
     u32 x34;
     u32 x38_float;
     s32 x3C_float;
