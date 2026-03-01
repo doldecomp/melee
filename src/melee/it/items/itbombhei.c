@@ -192,7 +192,7 @@ void itBombhei_Logic6_PickedUp(Item_GObj* igp)
         itBombhei_UpdateStatePreserveBone(igp, 7);
     } else {
         ip->x5D0_animFrameSpeed = 1.0f;
-        itBombhei_UpdateStatePreserveBone2(igp, 8);
+        itBombhei_UpdateStatePreserveBone2_flags(igp, 8, ITEM_UNK_0x1);
     }
 }
 
