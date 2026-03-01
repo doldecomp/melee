@@ -502,32 +502,27 @@ void fn_8028007C(Item_GObj* arg0)
 {
     Item* ip;
     itBombHeiAttributes* attr;
-    f32 var_f1;
+    PAD_STACK(8);
 
     ip = GET_ITEM(arg0);
     attr = GET_ATTRS(ip);
-    var_f1 = ABS(ip->xDD4_itemVar.bombhei.xE0C.x);
-    if (var_f1 > attr->x20.x) {
+    if (ABS(ip->xDD4_itemVar.bombhei.xE0C.x) > attr->x20.x ||
+        ABS(ip->xDD4_itemVar.bombhei.xE0C.y) > attr->x20.y) {
         it_80280DC0(arg0);
+        return;
+    }
+    ip->x40_vel.x = 0.0f;
+    it_8026B390(arg0);
+    if (ip->xDD4_itemVar.bombhei.xDE0 == 0) {
+        ip->xDD4_itemVar.bombhei.xDD4 = attr->x18;
+        ip->xDD4_itemVar.bombhei.xDD8 = 1;
+        ip->xD44_lifeTimer = it_804D6D28->x30_lifetime;
+        ip->xDD4_itemVar.bombhei.xDF0 = attr->x8;
+        ip->xDD4_itemVar.bombhei.xDE0 = 1;
+        itBombhei_UpdateStatePreserveBoneFake(arg0, 5,
+                                                ITEM_ANIM_UPDATE);
     } else {
-        var_f1 = ABS(ip->xDD4_itemVar.bombhei.xE0C.y);
-        if (var_f1 > attr->x20.y) {
-            it_80280DC0(arg0);
-        } else {
-            ip->x40_vel.x = 0.0f;
-            it_8026B390(arg0);
-            if (ip->xDD4_itemVar.bombhei.xDE0 == 0) {
-                ip->xDD4_itemVar.bombhei.xDD4 = attr->x18;
-                ip->xDD4_itemVar.bombhei.xDD8 = 1;
-                ip->xD44_lifeTimer = it_804D6D28->x30_lifetime;
-                ip->xDD4_itemVar.bombhei.xDF0 = attr->x8;
-                ip->xDD4_itemVar.bombhei.xDE0 = 1;
-                itBombhei_UpdateStatePreserveBoneFake(arg0, 5,
-                                                      ITEM_ANIM_UPDATE);
-            } else {
-                itBombhei_UpdateStatePreserveBoneFake(arg0, 5, ITEM_UNK_0x1);
-            }
-        }
+        itBombhei_UpdateStatePreserveBoneFake(arg0, 5, ITEM_UNK_0x1);
     }
 }
 
