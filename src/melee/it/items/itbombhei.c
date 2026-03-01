@@ -290,7 +290,37 @@ void it_8027EE04(Item_GObj* arg0)
     itBombhei_UpdateStatePreserveBone(arg0, 2, 0x1A);
 }
 
-/// #itBombhei_UnkMotion2_Anim
+bool itBombhei_UnkMotion2_Anim(Item_GObj* gobj)
+{
+    Item* ip;
+    f32 temp_f30;
+    f32 temp_f31;
+    itBombHeiAttributes* attrs;
+    HSD_JObj* temp_r30_2;
+
+    ip = GET_ITEM(gobj);
+    ip->xDD4_itemVar.bombhei.xDD4 -= 1;
+    ip->xDD4_itemVar.bombhei.xDEC -= 1.0f;
+    if ((s32) ip->xDD4_itemVar.bombhei.xDD4 <= 0) {
+        it_8027F8E0(gobj);
+    }
+    if (it_80272C6C(gobj) == 0) {
+        ip = GET_ITEM(gobj);
+        attrs = GET_ATTRS(ip);
+        it_8026B3A8(gobj);
+        ip->x40_vel.x = attrs->xC * ip->facing_dir;
+        ip->xD5C = 0;
+        it_80275444(gobj);
+        itBombhei_UpdateStatePreserveBoneFake(gobj, 2, 0x1A);
+    }
+    ip = GET_ITEM(gobj);
+    temp_f31 = ip->xDD4_itemVar.bombhei.xDF8;
+    temp_r30_2 = ip->xBBC_dynamicBoneTable->bones[0xB];
+    HSD_JObjAddTranslationY(temp_r30_2, temp_f31);
+    temp_f30 = ip->xDD4_itemVar.bombhei.xDFC;
+    HSD_JObjAddRotationX(temp_r30_2, temp_f30);
+    return false;
+}
 
 void itBombhei_UnkMotion2_Phys(Item_GObj* gobj) {}
 
