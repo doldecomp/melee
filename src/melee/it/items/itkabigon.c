@@ -45,7 +45,17 @@ void it_802C9E8C(Item_GObj* gobj)
 
 /// #itKabigon_UnkMotion0_Anim
 
-/// #itKabigon_UnkMotion0_Phys
+void itKabigon_UnkMotion0_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    
+    if (ip->xDB0_itcmd_var1 == 0) {
+        if (ip->ground_or_air == 1) {
+            ItemAttr* attrs = ip->xCC_item_attr;
+            it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
+        }
+    }
+}
 
 bool itKabigon_UnkMotion0_Coll(Item_GObj* gobj)
 {
