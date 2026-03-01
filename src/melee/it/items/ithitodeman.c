@@ -59,14 +59,14 @@ void it_802D43EC(Item_GObj* gobj)
     randf = HSD_Randf();
     diff = attrs->x8;
     diff = attrs->x4 - diff;
-    ip->xDD4_itemVar.hitodeman.x80 = diff * randf + attrs->x8;
+    ip->xDD4_itemVar.hitodeman.x60 = diff * randf + attrs->x8;
 
     randf = HSD_Randf();
     diff = attrs->xC - attrs->x10;
-    ip->xDD4_itemVar.hitodeman.x84 = diff * randf + attrs->x10;
+    ip->xDD4_itemVar.hitodeman.x64 = diff * randf + attrs->x10;
 
     if (HSD_Randi(2) != 0) {
-        ip->xDD4_itemVar.hitodeman.x80 *= -1.0f;
+        ip->xDD4_itemVar.hitodeman.x60 *= -1.0f;
     }
 }
 

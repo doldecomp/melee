@@ -594,10 +594,12 @@ typedef struct {
 
 typedef struct itHitodeman_ItemVars {
     /*  +0 ip+DD4 */ char pad_0[0x60];
-    /* +60 ip+E34 */ float x80;
-    /* +64 ip+E38 */ float x84;
-    /* +68 ip+E3C */ s32 x88;
-    /* +6C ip+E40 */ char pad_6C[0x24];
+    /* +60 ip+E34 */ float x60;
+    /* +64 ip+E38 */ float x64;
+    /* +68 ip+E3C */ s32 x68;
+    /* +6C ip+E40 */ char pad_6C[0x1C];
+    /* +88 ip+E5C */ s32 x88;
+    /* +8C ip+E60 */ char pad_8C[0x4];
     /* +90 ip+E64 */ HSD_GObj* x90;
 } itHitodeman_ItemVars;
 
