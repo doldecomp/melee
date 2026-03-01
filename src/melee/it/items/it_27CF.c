@@ -45,11 +45,11 @@ void it_802F2F34(HSD_GObj* gobj, it_27CF_DatAttrs* attr)
     spawn.x40 = 0;
     item_gobj = Item_80268B18(&spawn);
     if (item_gobj != NULL) {
-        item = GET_ITEM( item_gobj);
+        item = GET_ITEM(item_gobj);
         item->xDD4_itemVar.it_27CF.x0 = attr->float3;
         item->xC98 = attr->x24;
         it_80275158(item_gobj, attr->lifetime);
-        it_802F3020( item_gobj);
+        it_802F3020(item_gobj);
     }
 }
 
@@ -58,8 +58,8 @@ void it_802F3020(HSD_GObj* item_gobj)
     Item* item;
 
     item = GET_ITEM(item_gobj);
-    it_8026B3A8((Item_GObj*) item_gobj);
-    Item_80268E5C((HSD_GObj*) item_gobj, 1, ITEM_ANIM_UPDATE);
+    it_8026B3A8(item_gobj);
+    Item_80268E5C(item_gobj, 1, ITEM_ANIM_UPDATE);
     item->xDCE_flag.b7 = 0;
 }
 
