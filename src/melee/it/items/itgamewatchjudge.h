@@ -7,6 +7,7 @@
 
 /* 2C7A54 */ void itGameWatchJudge_Logic77_Destroyed(Item_GObj*);
 /* 2C7A84 */ void it_802C7A84(Item_GObj*);
+/* 2C78B8 */ void it_802C78B8(Item_GObj*);
 /* 2C7AD0 */ void it_802C7AD0(Item_GObj*);
 /* 2C7AF0 */ void it_802C7AF0(Item_GObj*);
 /* 2C7B10 */ void it_2725_Logic77_PickedUp(Item_GObj*);
