@@ -19,6 +19,7 @@
 /* 1C7FF8 */ void grAnime_801C7FF8(HSD_GObj*, int, int, int, float, float);
 /* 1C8098 */ void grAnime_801C8098(HSD_GObj*, int, int, int, float, float);
 /* 1C8138 */ void grAnime_801C8138(HSD_GObj*, enum_t, bool);
+/* 1C8578 */ HSD_Joint* grAnime_801C8578(void*, s32*);
 /* 1C8318 */ HSD_AObj* grAnime_801C8318(HSD_GObj*, int, u32);
 /* 1C83D0 */ bool grAnime_801C83D0(HSD_GObj*, bool, enum_t);
 /* 1C84A4 */ bool grAnime_801C84A4(HSD_GObj*, s32, s32);
