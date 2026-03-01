@@ -593,12 +593,12 @@ typedef struct {
 } itPokemon_ItemVars;
 
 typedef struct itHitodeman_ItemVars {
-    /*  +0 ip+DD4 */ u8 pad[0x88];
-    float xE34;
-    float xE38;
-    /* +88 ip+E5C */ s32 xE5C;
-    /* +8C ip+E60 */ u8 pad2[0x4];
-    /* +90 ip+E64 */ HSD_GObj* xE64;
+    /*  +0 ip+DD4 */ char pad_0[0x80];
+    /* +80 ip+E54 */ float x80;
+    /* +84 ip+E58 */ float x84;
+    /* +88 ip+E5C */ s32 x88;
+    /* +8C ip+E60 */ char pad_8C[0x4];
+    /* +90 ip+E64 */ HSD_GObj* x90;
 } itHitodeman_ItemVars;
 
 typedef struct {

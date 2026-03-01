@@ -37,7 +37,7 @@ void it_802D43B0(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     Item* ip = GET_ITEM(gobj);
     it_8026B894(gobj, ref_gobj);
-    ip->xDD4_itemVar.hitodeman.xE64 = NULL;
+    ip->xDD4_itemVar.hitodeman.x90 = NULL;
     ip->xDAC_itcmd_var0 = 1;
 }
 
@@ -51,22 +51,22 @@ void it_802D43EC(Item_GObj* gobj)
 
     owner_gobj = ftLib_80086198(ip->owner);
     if (owner_gobj != NULL) {
-        ip->xDD4_itemVar.hitodeman.xE64 = owner_gobj;
+        ip->xDD4_itemVar.hitodeman.x90 = owner_gobj;
     } else {
-        ip->xDD4_itemVar.hitodeman.xE64 = ip->owner;
+        ip->xDD4_itemVar.hitodeman.x90 = ip->owner;
     }
 
     randf = HSD_Randf();
     diff = attrs->x8;
     diff = attrs->x4 - diff;
-    ip->xDD4_itemVar.hitodeman.xE34 = diff * randf + attrs->x8;
+    ip->xDD4_itemVar.hitodeman.x80 = diff * randf + attrs->x8;
 
     randf = HSD_Randf();
     diff = attrs->xC - attrs->x10;
-    ip->xDD4_itemVar.hitodeman.xE38 = diff * randf + attrs->x10;
+    ip->xDD4_itemVar.hitodeman.x84 = diff * randf + attrs->x10;
 
     if (HSD_Randi(2) != 0) {
-        ip->xDD4_itemVar.hitodeman.xE34 *= -1.0f;
+        ip->xDD4_itemVar.hitodeman.x80 *= -1.0f;
     }
 }
 
@@ -77,7 +77,7 @@ void it_802D4510(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     itHitodemanAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
     PAD_STACK(8);
-    ip->xDD4_itemVar.hitodeman.xE5C =
+    ip->xDD4_itemVar.hitodeman.x88 =
         attrs->x44 + HSD_Randi(attrs->x40 - attrs->x44);
 }
 
