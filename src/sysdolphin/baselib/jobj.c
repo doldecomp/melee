@@ -1096,8 +1096,8 @@ inline HSD_JObj* jobj_get_effector(HSD_JObj* jobj)
     return NULL;
 }
 
-// Note: this must not be declared inline, so that
-// the "eff" assertion string data is placed before "robj".
+/// Note: this must not be declared inline, so that
+/// the "eff" assertion string data is placed before "robj".
 HSD_JObj* jobj_get_effector_checked(HSD_JObj* eff)
 {
     eff = jobj_get_effector(eff);

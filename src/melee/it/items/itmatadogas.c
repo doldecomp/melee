@@ -12,7 +12,22 @@
 
 #include <baselib/random.h>
 
-/// #it_802CAFD4
+void it_802CAFD4(Item_GObj* gobj)
+{
+    HSD_JObj* jobj;
+    Item* item;
+    itMatadogasAttributes* attrs;
+    item = gobj->user_data;
+    jobj = gobj->hsd_obj;
+    attrs = item->xC4_article_data->x4_specialAttributes;
+    item->xDAC_itcmd_var0 = 0;
+    item->xDD4_itemVar.matadogas.x60 = (s32) attrs->x4;
+    item->xDD4_itemVar.matadogas.x64 = 0;
+    it_80279CDC(gobj, attrs->x0);
+    it_802CB350(gobj);
+    HSD_JObjSetRotationY(jobj, 0.0f);
+    Item_8026AE84(item, 0x2715, 0x7f, 0x40);
+}
 
 void it_802CB0F4(Item_GObj* gobj) {}
 
@@ -54,10 +69,8 @@ void it_802CB2B0(Item_GObj* gobj)
     if (ip->xDAC_itcmd_var0 != 0) {
         itMatadogasAttributes* attrs =
             ip->xC4_article_data->x4_specialAttributes;
-        s32 timer = ip->xDD4_itemVar.matadogas.x60 - 1;
-        ip->xDD4_itemVar.matadogas.x60 = timer;
-        if (timer == 0) {
-            ip->xDD4_itemVar.matadogas.x60 = (s32) attrs->x4;
+        if (--ip->xDD4_itemVar.matadogas.x60 == 0) {
+            ip->xDD4_itemVar.matadogas.x60 = attrs->x4;
             if (HSD_Randi(2) == 0) {
                 it_802CB4F0(gobj, 0xC1, attrs->x8);
             } else {

@@ -23,11 +23,11 @@ struct Allocator {
 
 /* 015320 */ static void lbMemory_80015320(int, Handle*, int, int);
 
-// lbMemory_804318B0
+/// lbMemory_804318B0
 static struct Allocator g_alloc;
 STATIC_ASSERT(sizeof(g_alloc) == 0x6F0);
 
-// might need to change to take lvalue instead of pointer if codegen is bad
+/// might need to change to take lvalue instead of pointer if codegen is bad
 #define PUSH_HANDLE(list, handle)                                             \
     do {                                                                      \
         handle->x0_next = *list;                                              \
@@ -39,7 +39,7 @@ STATIC_ASSERT(sizeof(g_alloc) == 0x6F0);
         *list = handle->x0_next;                                              \
     } while (0)
 
-// pops handle from freelist and sets the popped regions's bounds
+/// pops handle from freelist and sets the popped regions's bounds
 static inline Handle* new_handle(void* arenaLo, void* arenaHi)
 {
     Handle* h;
@@ -75,9 +75,9 @@ Handle* lbMemory_80014E24(void* arenaLo, void* arenaHi)
     return new_handle(arenaLo, arenaHi);
 }
 
-// moves a list of handles into x62C
-// then pushes the head to free_heap
-// why does it start at handle->xC_prev?
+/// moves a list of handles into x62C
+/// then pushes the head to free_heap
+/// why does it start at handle->xC_prev?
 void lbMemory_80014EEC(Handle* handle)
 {
     Handle* iter;
@@ -115,7 +115,7 @@ loop:
     return sum;
 }
 
-// malloc
+/// malloc
 Handle* lbMemory_80014FC8(Handle* arg0, u32 size)
 {
     void* lo;
@@ -222,14 +222,14 @@ u32 lbMemory_8001529C(Handle* h, void* arg1, u32 arg2)
     return 0;
 }
 
-// getArenaBounds
+/// getArenaBounds
 void lbMemory_800154BC(uintptr_t* arenaLo, uintptr_t* arenaHi)
 {
     *arenaLo = (uintptr_t) g_alloc.x0_arenaLo;
     *arenaHi = (uintptr_t) g_alloc.x4_arenaHi;
 }
 
-// same as lbMemory_80014E24, but sets to x69C to the popped handle
+/// same as lbMemory_80014E24, but sets to x69C to the popped handle
 Handle* lbMemory_800154D4(void* arenaLo, void* arenaHi)
 {
     g_alloc.x69C = new_handle(arenaLo, arenaHi);

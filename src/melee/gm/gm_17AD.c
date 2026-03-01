@@ -6,7 +6,7 @@
 #include <melee/gm/types.h>
 #include <melee/lb/lblanguage.h>
 
-/// TODO :: figure out how to force the other functions not to inline this
+/// @todo :: figure out how to force the other functions not to inline this
 #pragma dont_inline on
 s32 fn_8017AD04(s32 arg0, s32 arg1)
 {
@@ -350,7 +350,7 @@ s32 fn_8017B598(s32 arg0)
     s32 var_r3;
 
     me = fn_80174274();
-    var_r3 = me->player_standings[arg0].pad_x30[4];
+    var_r3 = me->player_standings[arg0].x34;
     if (var_r3 > 999999) {
         var_r3 = 999999;
     } else if (var_r3 < -999999) {

@@ -15,12 +15,13 @@
 #include "ft/ftanim.h"
 #include "ft/ftcolanim.h"
 #include "ft/ftcommon.h"
+#include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Escape.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_FallSpecial.h"
 #include "ftSamus/types.h"
-#include "it/items/itsamuschargeshot.h"
+#include "it/items/itsamusmissile.h"
 #include "lb/lb_00B0.h"
 
 #include <baselib/forward.h>
@@ -422,30 +423,24 @@ int ftSs_SpecialS_8012A068(HSD_GObj* gobj)
 
 static void ftSs_SpecialS_8012A168(HSD_GObj* gobj, Vec3* spawnlocation);
 
-void ftSs_SpecialS_8012A074(HSD_GObj* gobj)
+void ftSs_SpecialS_8012A074(Fighter_GObj* gobj)
 {
-    bool bool1;
-    Fighter* fp = getFighter(gobj);
+    Fighter* fp = GET_FIGHTER(gobj);
     ftSs_DatAttrs* samus_attr = fp->dat_attrs;
 
-    if (fp->throw_flags_b0) {
-        fp->throw_flags_b0 = 0;
-        bool1 = 1;
-    } else {
-        bool1 = 0;
-    }
-    if (bool1) {
+    if (ftCheckThrowB0(fp)) {
         Vec3 position;
         fp->fv.ss.x2238++;
-        lb_8000B1CC(fp->parts[56].joint, NULL, &position);
-        position.x += (samus_attr->x34 * fp->facing_dir);
+        lb_8000B1CC(fp->parts[FtPart_56].joint, NULL, &position);
+        position.x += samus_attr->x34 * fp->facing_dir;
 
-        if ((fp->motion_id == 349) || (fp->motion_id == 351)) {
-            u8 _[8];
-
-            it_802B62D0(gobj, &position, 0, fp->facing_dir);
+        if (fp->motion_id == ftSs_MS_SpecialS ||
+            fp->motion_id == ftSs_MS_SpecialAirS)
+        {
+            PAD_STACK(4);
+            it_802B62D0(gobj, &position, false, fp->facing_dir);
         } else {
-            it_802B62D0(gobj, &position, 1, fp->facing_dir);
+            it_802B62D0(gobj, &position, true, fp->facing_dir);
         }
 
         ftSs_SpecialS_8012A168(gobj, &position);

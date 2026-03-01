@@ -45,7 +45,7 @@ void ftMr_SpecialAirHi_Enter(HSD_GObj* gobj)
     ftAnim_8006EBA4(gobj);
 }
 
-// 0x800E1B24
+/// 0x800E1B24
 void ftMr_SpecialHi_Anim(HSD_GObj* gobj)
 {
     Fighter* fp;
@@ -59,7 +59,7 @@ void ftMr_SpecialHi_Anim(HSD_GObj* gobj)
     }
 }
 
-// 0x800E1B84
+/// 0x800E1B84
 void ftMr_SpecialAirHi_Anim(HSD_GObj* gobj)
 {
     u8 _[8];

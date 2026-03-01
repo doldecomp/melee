@@ -50,14 +50,14 @@
 
 #define FTPART_INVALID 0xFF
 
-// Table in PlCo.dat
+/// Table in PlCo.dat
 struct FighterPartsTable {
     u8* joint_to_part;
     u8* part_to_joint;
     u32 parts_num;
 };
 
-// Points to data in PlCo.dat
+/// Points to data in PlCo.dat
 struct ftCommonData {
     /*   +0 */ float x0;
     /*   +4 */ float x4;
@@ -921,11 +921,11 @@ struct Fighter_DemoStrings {
         /* fp+2072:0 */ u8 x2072_b0 : 1;
         /* fp+2072:1 */ u8 x2072_b1 : 1;
         /* fp+2072:2 */ u8 x2072_b2 : 1;
-        /* fp+2072:3 */ u8 x2072_b3 : 1;
-        /* fp+2072:4 */ u8 x2072_b4 : 1;
-        /* fp+2072:5 */ u8 x2072_b5 : 1;
-        /* fp+2072:6 */ u8 x2072_b6 : 1;
-        /* fp+2072:7 */ u8 x2072_b7 : 1;
+        /* fp+2072:3 */ u8 count_x1A4 : 1;
+        /* fp+2072:4 */ u8 count_thrown_items : 1;
+        /* fp+2072:5 */ u8 count_aerials : 1;
+        /* fp+2072:6 */ u8 count_x1A0 : 1;
+        /* fp+2072:7 */ u8 count_specials : 1;
         /* fp+2073 */ u8 x2073;
     };
     /* fp+2070 */ s32 x2070_int;

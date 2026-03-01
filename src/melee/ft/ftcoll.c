@@ -43,10 +43,10 @@
 
 /* 07A06C */ static void ftColl_8007A06C(float facing_dir, DmgLogEntry** log,
                                          int idx, bool);
-// /* 076808 */ static void ftColl_80076808(Fighter* fp, HitCapsule* hit, int,
-//                                          Fighter* victim, bool);
+/// /* 076808 */ static void ftColl_80076808(Fighter* fp, HitCapsule* hit, int,
+///                                          Fighter* victim, bool);
 
-// .data
+/// .data
 int ftColl_803C0C40[] = { 141, 142, 143 };
 int ftColl_803C0C4C[] = { 107, 108, 109 };
 
@@ -63,16 +63,16 @@ struct UnkSize320_t {
     u8 x0[0x320];
 };
 
-// .bss
+/// .bss
 static DmgLogEntry dmg_log0[20];
 struct DmgLogEntry dmg_log1[20];
 
-// .sbss
+/// .sbss
 static size_t dmg_log0_idx;
 static size_t dmg_log1_idx;
 static s8 ftColl_804D6560[8];
 
-// .sdata2
+/// .sdata2
 float const ftColl_804D82E0 = 0;
 float const ftColl_804D82E4 = 500;
 float const ftColl_804D82E8 = 0.5;

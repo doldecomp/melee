@@ -13,23 +13,23 @@ int pl_80037B2C(struct plActionStats* arg0, int h_player, int idx)
     }
 }
 
-void pl_80037BC0(struct plAttackStats* stats, union Struct2070* info)
+void pl_80037BC0(struct plAttackStats* stats, union Struct2070* ev)
 {
     stats->total++;
-    stats->by_attack_counts[info->x2073]++;
-    if (info->x2072_b4) {
+    stats->by_attack_counts[ev->x2073]++;
+    if (ev->count_thrown_items) {
         stats->thrown_item_count++;
     }
-    if (info->x2072_b5) {
+    if (ev->count_aerials) {
         stats->aerials_count++;
     }
-    if (info->x2072_b7) {
+    if (ev->count_specials) {
         stats->specials_count++;
     }
-    if (info->x2072_b6) {
+    if (ev->count_x1A0) {
         stats->x1A0_count++;
     }
-    if (info->x2072_b3) {
+    if (ev->count_x1A4) {
         stats->x1A4_count++;
     }
 }

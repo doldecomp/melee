@@ -11,7 +11,7 @@
 
 #include <math.h>
 
-// Explicit declaration for external function
+/// Explicit declaration for external function
 extern void Item_80268E5C(Item_GObj* gobj, int arg1, int arg2);
 
 /// #it_3F14_Logic7_Spawned

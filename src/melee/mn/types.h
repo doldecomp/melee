@@ -16,7 +16,7 @@ typedef struct {
     u8 unk3;
     HSD_Text* text;
 } Menu;
-// size 0x8
+/// size 0x8
 
 struct CountEntry {
     u8 id;
@@ -88,6 +88,25 @@ struct PlayerInitData {
     /*0x1C*/ float x1C; ///< defense ratio
     /*0x20*/ float x20;
 };
+
+struct lbl_8046B668_t {
+    /* 0x00 */ s8 arr1[0x1C];
+    /* 0x1C */ s8 arr2[0x1C];
+};
+STATIC_ASSERT(sizeof(struct lbl_8046B668_t) == 0x38);
+
+typedef struct PerfLabelLine {
+    /* 0x00 */ struct PerfLabelLine* next;
+    /* 0x04 */ s32 unk_04;
+    /* 0x08 */ char text[0x80];
+} PerfLabelLine; /* size = 0x88 */
+STATIC_ASSERT(sizeof(PerfLabelLine) == 0x88);
+
+typedef struct lbl_8046B378_t {
+    /* 0x000 */ PerfLabelLine line0;
+    /* 0x088 */ PerfLabelLine line1;
+} lbl_8046B378_t; /* size = 0x110 */
+STATIC_ASSERT(sizeof(lbl_8046B378_t) == 0x110);
 
 struct StartMeleeRules {
     u32 x0_0 : 3; // match mode? 1 = stock mode, 2 = coin mode?
@@ -167,13 +186,13 @@ struct StartMeleeRules {
     void (*x44)(void); // on VS match start callback
     void (*x48)(void); // ingame pre-frame callback
     void (*x4C)(void); // ingame post-frame callback
-    void (*x50)(int);  // on VS match end callback
+    void (*x50)(u8);   // on VS match end callback
     struct {
         u8 pad_x0[0x10];
         u8 x10_b0 : 1;
         u8 x10_b1 : 1;
     }* x54;
-    int x58;
+    struct lbl_8046B668_t* x58;
     u8 pad_x5C[0x60 - 0x5C];
 };
 
@@ -473,6 +492,24 @@ struct Diagram2 {
     /* 0x74 */ HSD_Text* row_values[10]; ///< stat value text
     /* 0x9C */ HSD_Text* row_icons[10];  ///< optional stat icons
     /* 0xC4 */ HSD_Text* header_text;    ///< entity name header
+};
+
+/// User data for VS Records page 3 (stat rankings screen)
+/// Total size: 0x78 bytes
+struct Diagram3 {
+    /* 0x00 */ u8 saved_menu;
+    /* 0x01 */ u8 saved_selection;
+    /* 0x02 */ u8 pad_2[2];
+    /* 0x04 */ u8 scroll_offset;
+    /* 0x05 */ u8 anim_state;
+    /* 0x06 */ u8 is_name_mode;
+    /* 0x07 */ u8 pad_7;
+    /* 0x08 */ HSD_JObj* jobjs[10];
+    /* 0x30 */ HSD_Text* row_labels[10];
+    /* 0x58 */ HSD_Text* title_text;
+    /* 0x5C */ HSD_Text* value_text;
+    /* 0x60 */ HSD_Text* row_icons[5];
+    /* 0x74 */ HSD_GObj* popup_gobj;
 };
 
 /// VS Records stat types for mnDiagram2 (page 2 of VS Records menu).

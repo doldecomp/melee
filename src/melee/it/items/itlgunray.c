@@ -147,10 +147,10 @@ bool itLGunRay_Logic35_Reflected(Item_GObj* gobj)
     ip->xDD4_itemVar.lgunray.angle += M_PI;
 
     while (ip->xDD4_itemVar.lgunray.angle < 0.0f) {
-        ip->xDD4_itemVar.lgunray.angle += 2 * M_PI;
+        ip->xDD4_itemVar.lgunray.angle += M_TAU;
     }
-    while (ip->xDD4_itemVar.lgunray.angle > 2 * M_PI) {
-        ip->xDD4_itemVar.lgunray.angle -= 2 * M_PI;
+    while (ip->xDD4_itemVar.lgunray.angle > M_TAU) {
+        ip->xDD4_itemVar.lgunray.angle -= M_TAU;
     }
 
     return false;
@@ -164,10 +164,10 @@ bool itLGunRay_Logic35_ShieldBounced(Item_GObj* gobj)
     ip->xDD4_itemVar.lgunray.scale = scale;
     ip->xDD4_itemVar.lgunray.angle = atan2f(ip->x40_vel.y, ip->x40_vel.x);
     while (ip->xDD4_itemVar.lgunray.angle < 0.0f) {
-        ip->xDD4_itemVar.lgunray.angle += 2 * M_PI;
+        ip->xDD4_itemVar.lgunray.angle += M_TAU;
     }
-    while (ip->xDD4_itemVar.lgunray.angle > 2 * M_PI) {
-        ip->xDD4_itemVar.lgunray.angle -= 2 * M_PI;
+    while (ip->xDD4_itemVar.lgunray.angle > M_TAU) {
+        ip->xDD4_itemVar.lgunray.angle -= M_TAU;
     }
     return false;
 }

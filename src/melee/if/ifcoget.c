@@ -28,7 +28,7 @@
 #include <MSL/stdio.h>
 #include <MSL/string.h>
 
-// .data
+/// .data
 /* 3F9E08 */ static struct {
     struct {
         unsigned char b0 : 1;
@@ -46,7 +46,7 @@
 /* 3F9E60 */ static HSD_CObjDesc un_803F9E60 = { 0 };
 /* 3F9ED4 */ static HSD_LightDesc un_803F9ED4 = { 0 };
 
-// .bss
+/// .bss
 struct un_804A1F58_x8_t {
     HSD_GObj* x0;
     HSD_Text* x4;
@@ -58,7 +58,7 @@ struct un_804A1F58_x8_t {
     struct un_804A1F58_x8_t x8;
 } un_804A1F58[6];
 
-// .sbss
+/// .sbss
 /* 4D6DA0 */ static void* un_804D6DA0;
 /* 4D6DA4 */ static SceneDesc* un_804D6DA4;
 

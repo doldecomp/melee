@@ -22,7 +22,7 @@
 #include <MSL/stdio.h>
 #include <MSL/string.h>
 
-// .data
+/// .data
 /* 3FDC20 */ static HSD_WObjDesc devtext_eyepos = {
     NULL, { 0.0f, 40.241424560546875f, 300.2409973144531f }, NULL
 };
@@ -51,10 +51,10 @@
     1.3636000156402588f,
 };
 
-// .bss
+/// .bss
 /* 4A1FD8 */ static DevText devtext_pool[32];
 
-// .sbss
+/// .sbss
 /* 4D6E18 */ static DevText* devtext_drawlist;
 /* 4D6E1C */ static HSD_GObj* devtext_gobj;
 /* 4D6E20 */ static HSD_CObj* devtext_cobj;

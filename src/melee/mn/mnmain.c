@@ -1210,7 +1210,7 @@ void fn_8022AF10(HSD_GObj* gp)
 }
 
 /// @brief main menu think func that handles the updating
-// of objects (animations, text)
+/// of objects (animations, text)
 void fn_8022AFEC(HSD_GObj* gp)
 {
     /// @todo figure out the inlines
@@ -3069,8 +3069,8 @@ float mn_8022EE84(HSD_JObj* arg0, AnimLoopSettings* arg1,
 }
 
 /// @brief updates a jobjs looping animation.
-// if the end frame is -0.1f, the animation will stop after reaching the end
-// frame.
+/// if the end frame is -0.1f, the animation will stop after reaching the end
+/// frame.
 /// @param arg0 HSD_JObj
 /// @param arg1 AnimLoopSettings
 float mn_8022EFD8(HSD_JObj* arg0, AnimLoopSettings* arg1)
@@ -3276,7 +3276,7 @@ void mn_8022F4CC(void)
 }
 #pragma pop
 
-// void fn_8022F538(HSD_GObj*) { OSPanic(__FILE__, __LINE__, "not implemented:
-// fn_8022F538\n"); } void mn_8022FB88() { OSPanic(__FILE__, __LINE__, "not
-// implemented: mn_8022FB88\n"); } void mn_8022FD18() { OSPanic(__FILE__,
-// __LINE__, "not implemented: mn_8022FD18\n"); }
+/// void fn_8022F538(HSD_GObj*) { OSPanic(__FILE__, __LINE__, "not implemented:
+/// fn_8022F538\n"); } void mn_8022FB88() { OSPanic(__FILE__, __LINE__, "not
+/// implemented: mn_8022FB88\n"); } void mn_8022FD18() { OSPanic(__FILE__,
+/// __LINE__, "not implemented: mn_8022FD18\n"); }

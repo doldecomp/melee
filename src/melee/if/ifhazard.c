@@ -12,7 +12,7 @@
 #include <baselib/gobjproc.h>
 #include <baselib/jobj.h>
 
-// .sbss
+/// .sbss
 /* 4D6D80 */ static HSD_GObj* un_804D6D80;
 /* 4D6D84 */ static int un_804D6D84;
 /* 4D6D88 */ static s32 un_804D6D88;

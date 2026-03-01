@@ -464,7 +464,7 @@ void ftYs_Init_OnDeath(HSD_GObj* gobj)
     fp->fv.ys.x2238 = 0;
 }
 
-// https://decomp.me/scratch/5TPxg
+/// https://decomp.me/scratch/5TPxg
 void ftYs_Init_OnLoad(HSD_GObj* gobj)
 {
     void** item_list;

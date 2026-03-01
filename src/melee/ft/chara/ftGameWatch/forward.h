@@ -68,7 +68,7 @@ static MotionFlags const ftGw_MF_SpecialLw =
 static MotionFlags const ftGw_MF_SpecialAirLw =
     ftGw_MF_SpecialLw | Ft_MF_SkipParasol;
 
-// Mr. Game & Watch Motion State IDs
+/// Mr. Game & Watch Motion State IDs
 typedef enum ftGameWatch_MotionState {
     ftGw_MS_Attack11 = ftCo_MS_Count,
     ftGw_MS_Attack100Start,

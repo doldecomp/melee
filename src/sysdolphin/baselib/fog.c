@@ -161,7 +161,7 @@ void HSD_FogAdjInit(HSD_FogAdj* adj, HSD_FogAdjDesc* desc)
     }
 }
 
-// HSD_FogAddAnim ?
+/// HSD_FogAddAnim ?
 void HSD_Fog_8037DE7C(HSD_Fog* fog, HSD_AObjDesc* desc)
 {
     if (fog != NULL) {

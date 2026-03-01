@@ -87,7 +87,7 @@ void fn_8018A970(int arg0)
 
 /// #fn_8018DF68
 
-// @TODO: Currently 98.8% match - permuter couldn't improve beyond score 140
+/// @todo Currently 98.8% match - permuter couldn't improve beyond score 140
 void fn_8018E46C(HSD_GObj* gobj, int unused)
 {
     void* data;
@@ -466,7 +466,7 @@ int fn_8018F808(void)
     return noerrcount;
 }
 
-// @TODO: Currently 78.75% match - needs register allocation fix
+/// @todo Currently 78.75% match - needs register allocation fix
 void fn_8018F888(void)
 {
     s32 idx;
@@ -602,7 +602,7 @@ done2:
     *(base + idx2 * 0xDC + 0xFD) = 0;
 }
 
-/// @TODO: Currently 84.63% match - needs loop pattern fix
+/// @todo Currently 84.63% match - needs loop pattern fix
 
 void fn_8018FA24(void)
 {
@@ -1040,7 +1040,7 @@ void fn_801910E0(HSD_GObj* gobj)
     *counter = *counter + 1;
 }
 
-// @TODO: Currently 83.05% match - compiler generates different register usage
+/// @todo Currently 83.05% match - compiler generates different register usage
 void fn_80191154(HSD_GObj* gobj)
 {
     TmData* tm;
@@ -1071,7 +1071,7 @@ void fn_80191154(HSD_GObj* gobj)
     (*xE_ptr)++;
 }
 
-// @TODO: Currently 78.85% match - needs register allocation fix
+/// @todo Currently 78.85% match - needs register allocation fix
 void fn_80191240(HSD_GObj* gobj)
 {
     TmData* tm;
@@ -1157,7 +1157,7 @@ void fn_80191678(HSD_GObj* gobj)
     HSD_JObjSetFlagsAll(jobj, 0x10);
 }
 
-/// @TODO: Currently 89.68% match - permuter couldn't improve
+/// @todo Currently 89.68% match - permuter couldn't improve
 /// Updates menu option selection animation.
 void fn_8019175C(void* gobj)
 {
@@ -1391,7 +1391,7 @@ void fn_80191CA4(HSD_GObj* gobj)
 /// Updates tournament menu cursor JObj visibility and position.
 /// #fn_8019237C
 
-/// @TODO: Currently 92.46% match - permuter couldn't improve
+/// @todo Currently 92.46% match - permuter couldn't improve
 void fn_8019249C(HSD_GObj* gobj)
 {
     TmData* tmdata;
@@ -1456,7 +1456,7 @@ void fn_80192690(HSD_GObj* gobj)
 }
 #pragma pop
 
-/// @TODO: Currently 96.8% match - permuter couldn't improve
+/// @todo Currently 96.8% match - permuter couldn't improve
 void fn_80192758(HSD_GObj* gobj)
 {
     TmData* tmdata;
@@ -1556,7 +1556,7 @@ void fn_80193230(void)
 
 extern u8 lbl_803D9F80[];
 
-/// @TODO: Currently 87.58% match - permuter couldn't improve
+/// @todo Currently 87.58% match - permuter couldn't improve
 void fn_801949B4(s32* arg0, u32 arg1, u32 arg2)
 {
     u8* table;
@@ -1628,7 +1628,7 @@ void fn_801949B4(s32* arg0, u32 arg1, u32 arg2)
     }
 }
 
-/// @TODO: Currently 84.75% match - needs register allocation fix
+/// @todo Currently 84.75% match - needs register allocation fix
 void fn_80194BC4(s32* arg0, u32 arg1, u32 arg2)
 {
     int* match_type_ptr;
@@ -1705,7 +1705,7 @@ void fn_80194BC4(s32* arg0, u32 arg1, u32 arg2)
     }
 }
 
-// @TODO: Currently 97.2% match - permuter couldn't improve
+/// @todo Currently 97.2% match - permuter couldn't improve
 /// Handles button input for tournament mode menu navigation.
 void fn_80194D84(s32* state, u32 buttons, u32 trigger)
 {
@@ -1767,7 +1767,7 @@ void fn_80194D84(s32* state, u32 buttons, u32 trigger)
 
 static s32 lbl_804D6654;
 
-/// @TODO: Currently 93.5% match - permuter couldn't improve
+/// @todo Currently 93.5% match - permuter couldn't improve
 /// Handles name entry/selection input for tournament mode.
 void fn_80195AF0(s32* state_ptr, u32 buttons, u32 trigger)
 {
@@ -1843,7 +1843,7 @@ void fn_80195AF0(s32* state_ptr, u32 buttons, u32 trigger)
 
 /// #fn_80195CCC
 
-// @TODO: Currently 96.88% match - needs minor register allocation fix
+/// @todo Currently 96.88% match - needs minor register allocation fix
 /// Handles confirm/cancel input for tournament start.
 /// Type casts used to match target sth instruction patterns.
 void fn_8019610C(s32* state, u32 buttons, u32 trigger)
@@ -2040,7 +2040,7 @@ void fn_801965C4(void)
     gm_801A4B60();
 }
 
-// @TODO: Currently 83.98% match - needs register allocation fix
+/// @todo Currently 83.98% match - needs register allocation fix
 /// Randomly assigns bracket positions for tournament seeding.
 void fn_80196684(s32 bracket_idx)
 {
@@ -2098,7 +2098,7 @@ void fn_80196684(s32 bracket_idx)
 
 extern u8 lbl_803DA0D0[];
 
-// @TODO: Currently 95.92% match - needs minor register allocation fix
+/// @todo Currently 95.92% match - needs minor register allocation fix
 s32 fn_80196CF8(void)
 {
     TmData* tmdata;
@@ -2346,7 +2346,7 @@ void fn_80197D4C(HSD_GObj* gobj)
     }
 }
 
-// @TODO: Currently 69.71% match - needs register allocation fix
+/// @todo Currently 69.71% match - needs register allocation fix
 /// Updates player HUD element visibility and position.
 void fn_80197E18(HSD_GObj* gobj)
 {
@@ -2393,7 +2393,7 @@ void fn_80197E18(HSD_GObj* gobj)
     fn_8018FDC4(jobj, x_pos, 666.0F, 666.0F);
 }
 
-// @TODO: Currently 70.24% match - needs register allocation fix
+/// @todo Currently 70.24% match - needs register allocation fix
 /// Updates JObj visibility based on menu option and player state.
 void fn_80197FD8(HSD_GObj* gobj)
 {
@@ -2449,7 +2449,7 @@ void fn_80197FD8(HSD_GObj* gobj)
     }
 }
 
-/// @TODO: Currently 55.88% match - needs significant rework
+/// @todo Currently 55.88% match - needs significant rework
 /// Updates player cursor animation and position.
 void fn_801981A0(HSD_GObj* gobj)
 {
@@ -2586,8 +2586,8 @@ void fn_80198BA0(void)
     }
 }
 
-// @TODO: Currently 99.63% match - permuter couldn't improve (instruction
-// scheduling)
+/// @todo Currently 99.63% match - permuter couldn't improve (instruction
+/// scheduling)
 /// Initializes tournament mode text displays.
 void fn_80198C60(void)
 {
@@ -2622,7 +2622,7 @@ extern SceneDesc* lbl_804D666C;
 
 /// #fn_8019A158
 
-// @TODO: Currently 98.36% match - needs branch pattern fix (beq+b vs bne)
+/// @todo Currently 98.36% match - needs branch pattern fix (beq+b vs bne)
 #pragma dont_inline on
 void fn_8019A71C(s32* state)
 {
@@ -2683,7 +2683,7 @@ void gm_8019A828(void)
 
 /// #fn_8019AF50
 
-// @TODO: Currently 89.97% match - permuter couldn't improve
+/// @todo Currently 89.97% match - permuter couldn't improve
 /// Per-frame update for tournament mode menu.
 void gm_8019B2DC_OnFrame(void)
 {
@@ -2767,7 +2767,7 @@ void fn_8019B81C(s32* state)
 
 extern SceneDesc* lbl_804D6670;
 
-// @TODO: Currently 92% match - instruction scheduling issue (lfs/lbz order)
+/// @todo Currently 92% match - instruction scheduling issue (lfs/lbz order)
 /// Sets up tournament bracket display with entrant data.
 void fn_8019B860(TmData* tm)
 {

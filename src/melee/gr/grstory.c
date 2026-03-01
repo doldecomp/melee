@@ -224,8 +224,8 @@ void grStory_801E33E0(Ground_GObj* gobj)
 
 void grStory_801E3414(Ground_GObj* gobj) {}
 
-// floating point random number centered at 0
-// with an amplitude of 1
+/// floating point random number centered at 0
+/// with an amplitude of 1
 inline f32 frand_amp1(void)
 {
     return 2.0F * (HSD_Randf() - 0.5F);

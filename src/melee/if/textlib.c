@@ -31,7 +31,7 @@
 #include <MSL/stdio.h>
 #include <MSL/string.h>
 
-// ?
+/// ?
 /* 4D6E18 */ extern DevText* devtext_drawlist;
 /* 4D6E38 */ extern DevText* devtext_poolhead;
 unsigned short un_804A26B8[1000];
@@ -46,10 +46,10 @@ struct idk un_803B87DC;
 struct idk un_803B87A8;
 unsigned char un_804D6E4C;
 
-// .bss
+/// .bss
 /* 4A2688 */ static HSD_ObjAllocData un_804A2688;
 
-// .sbss
+/// .sbss
 /* 4D6E44 */ static struct un_80304138_objalloc_t* un_804D6E44;
 
 GXColor white = { 0xFF, 0xFF, 0xFF, 0xFF };

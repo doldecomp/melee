@@ -107,8 +107,8 @@ extern MotionState* ftData_CharacterStateTables[FTKIND_MAX];
 
 extern StageInfo stage_info; // from asm/melee/gm_1A36.s
 
-// ==== fighter.c variables ====
-// =============================
+/// ==== fighter.c variables ====
+/// =============================
 
 const Vec3 Fighter_803B7488 = { 0.0f, 0.0f, 0.0f };
 const Vec3 vec3_803B7494 = { 0.0f, 0.0f, 0.0f };
@@ -120,12 +120,12 @@ HSD_ObjAllocData fighter_dobj_list_alloc_data;
 HSD_ObjAllocData fighter_x2040_alloc_data;
 HSD_ObjAllocData fighter_x59C_alloc_data;
 
-// TODO: verify that this is really a spawn number counter, then rename this
-// var globally
+/// @todo verify that this is really a spawn number counter, then rename this
+/// var globally
 u32 Fighter_804D64F8 = 0;
 #define g_spawnNumCounter Fighter_804D64F8
 
-// the following seems to be an array, initialized in reverse in
+/// the following seems to be an array, initialized in reverse in
 struct Fighter_804D64FC_t* Fighter_804D64FC = NULL;
 CrowdConfig* gCrowdConfig = NULL;
 HSD_Joint* Fighter_804D6504 = NULL;
@@ -163,8 +163,8 @@ void Fighter_800679B0(void)
     ft_8008549C();
     ftCo_8009F4A4();
     ftCo_800C8064();
-    ftCo_800C8F6C();
-    // @TODO: &fighter_alloc_data+2, +3, +4 are not defined in the fighter.s
+    ftCo_800C8F6C(); ///< @todo &fighter_alloc_data+2, +3, +4 are not defined
+                     ///< in the fighter.s
     // data section, how does this work?
     HSD_ObjAllocInit(&fighter_parts_alloc_data, /*size*/ 0x8c0, /*align*/ 4);
     HSD_ObjAllocInit(&fighter_dobj_list_alloc_data, /*size*/ 0x1f0,
@@ -818,8 +818,8 @@ void Fighter_UnkInitLoad_80068914(Fighter_GObj* gobj,
     fp->x2229_b3 = 0;
 }
 
-// increments the spawn number, returns the spawn number value before
-// incrementing
+/// increments the spawn number, returns the spawn number value before
+/// incrementing
 u32 Fighter_NewSpawn_80068E40(void)
 {
     u32 spawnNum = g_spawnNumCounter++;
@@ -1717,7 +1717,7 @@ void Fighter_8006ABA0(Fighter_GObj* gobj)
     }
 }
 
-// https://decomp.me/scratch/A7CgG
+/// https://decomp.me/scratch/A7CgG
 void Fighter_UnkIncrementCounters_8006ABEC(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -1754,8 +1754,8 @@ void Fighter_UnkIncrementCounters_8006ABEC(Fighter_GObj* gobj)
     }
 }
 
-// the stick pairs seen in input structs might make more sense as an array of
-// 2, or a struct of 2 floats.. if it still matches.
+/// the stick pairs seen in input structs might make more sense as an array of
+/// 2, or a struct of 2 floats.. if it still matches.
 #define SET_STICKS(stickXPtr, stickYPtr, x, y)                                \
     do {                                                                      \
         float* stickX = (float*) &stickXPtr;                                  \
@@ -2278,9 +2278,8 @@ void Fighter_procUpdate(Fighter_GObj* gobj)
         VEC_CLEAR(fp->x74_anim_vel);
 
         // copy selfVel into a stack storage variable
-        selfVel = fp->self_vel;
-
-        // TODO: these double_lower_32bit variables are probably integer
+        selfVel = fp->self_vel; ///< @todo these double_lower_32bit variables
+                                ///< are probably integer
         // counters that get decremented each frame, but I was not able to
         // trigger the following condition. The double value construction then
         // is only used as an interpolation tool between selfVel and some
@@ -2373,9 +2372,8 @@ void Fighter_procUpdate(Fighter_GObj* gobj)
 
     fp->cur_pos.x += windOffset.x;
     fp->cur_pos.y += windOffset.y;
-    fp->cur_pos.z += windOffset.z;
-
-    // TODO: do the bitflag tests here tell us if the player is dead?
+    fp->cur_pos.z += windOffset.z; ///< @todo do the bitflag tests here tell us
+                                   ///< if the player is dead?
     ftCo_800D3158(gobj);
 
     if (fp->x2225_b0) {
@@ -2741,9 +2739,7 @@ void Fighter_UnkRecursiveFunc_8006D044(Fighter_GObj* gobj)
     fp->x2219_b5 = 1;
 
     if (fp->x1A5C && !fp->x2219_b7) {
-        Fighter_GObj* new_gobj = gobj;
-
-        // @todo What is going on here?
+        Fighter_GObj* new_gobj = gobj; ///< @todo What is going on here?
         setBit(new_gobj = fp->x1A5C);
 
         Fighter_UnkRecursiveFunc_8006D044(new_gobj);

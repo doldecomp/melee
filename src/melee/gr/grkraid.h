@@ -42,7 +42,7 @@ typedef struct grKr_804D6A08_t {
 /* 1FEA00 */ void grKraid_801FEA00(Ground_GObj*);
 /* 1FEE54 */ UNK_RET grKraid_801FEE54(UNK_PARAMS);
 /* 1FF068 */ void grKraid_801FF068(HSD_GObj*, int);
-/* 1FF0E0 */ UNK_RET grKraid_801FF0E0(UNK_PARAMS);
+/* 1FF0E0 */ bool grKraid_801FF0E0(Ground_GObj*, int flag);
 /* 1FF14C */ void grKraid_801FF14C(Ground_GObj*);
 /* 1FF150 */ void grKraid_801FF150(void);
 /* 1FF154 */ DynamicsDesc* grKraid_801FF154(enum_t);

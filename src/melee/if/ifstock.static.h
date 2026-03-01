@@ -24,7 +24,7 @@ struct ifStock_804A1378_per_player {
     int stocks;
 };
 
-// TODO: merge with IfStockUserData
+/// @todo merge with IfStockUserData
 struct ifStock_804A1378_x204 {
     unsigned char x0[0x54];
 };
@@ -59,7 +59,7 @@ struct ifStock_804A1ACC {
     HSD_GObj* x10C[130];
 };
 
-// .bss
+/// .bss
 struct ifStock_804A1378 ifStock_804A1378;
 struct ifStock_804A1774 ifStock_804A1774;
 HSD_GObj* ifStock_804A1A8C[16];

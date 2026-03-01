@@ -7,13 +7,15 @@
 #include "it/item.h"
 #include "it/items/itwhitebea.h"
 
+#include <MSL/math.h>
+
 /// #it_8028EB88
 
 void it_8028EC98(Item_GObj* gobj, f32 vel)
 {
     Item* ip = GET_ITEM(gobj);
     ip->xDD4_itemVar.freeze.x10 = vel;
-    it_80275158(gobj, (f32) it_804D6D28->x30);
+    it_80275158(gobj, (f32) it_804D6D28->x30_lifetime);
 }
 
 void it_8028ECE0(Item_GObj* gobj)
@@ -227,20 +229,10 @@ void itFreeze_UnkMotion4_Phys(Item_GObj* gobj)
     }
 
     decel = ip->xDD4_itemVar.freeze.x14;
-
-    if (decel < 0.0f) {
-        abs_decel = -decel;
-    } else {
-        abs_decel = decel;
-    }
+    abs_decel = ABS(decel);
 
     vel = ip->x40_vel.x;
-
-    if (vel < 0.0f) {
-        abs_vel = -vel;
-    } else {
-        abs_vel = vel;
-    }
+    abs_vel = ABS(vel);
 
     if (abs_vel < abs_decel) {
         ip->x40_vel.x = 0.0f;
@@ -248,15 +240,9 @@ void itFreeze_UnkMotion4_Phys(Item_GObj* gobj)
     }
 
     if (vel > 0.0f) {
-        if (decel < 0.0f) {
-            decel = -decel;
-        }
-        ip->x40_vel.x -= decel;
+        ip->x40_vel.x -= ABS(decel);
     } else {
-        if (decel < 0.0f) {
-            decel = -decel;
-        }
-        ip->x40_vel.x += decel;
+        ip->x40_vel.x += ABS(decel);
     }
 }
 

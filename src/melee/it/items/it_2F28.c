@@ -22,7 +22,7 @@ extern float it_802758D4(Item_GObj*);            /* extern */
 static void it_802F2A58(Item_GObj*);             /* static */
 static bool it_2F28_UnkMotion0_Anim(Item_GObj*); /* static */
 static void it_2F28_UnkMotion0_Phys(HSD_GObj*);  /* static */
-// static bool it_2F28_UnkMotion0_Coll(HSD_GObj*); /* static */
+/// static bool it_2F28_UnkMotion0_Coll(HSD_GObj*); /* static */
 static bool it_2F28_UnkMotion0_Coll(Item_GObj*); /* static */
 
 ItemStateTable it_803F9470[] = {
@@ -119,7 +119,7 @@ void it_2F28_UnkMotion0_Phys(HSD_GObj* item_gobj)
 }
 
 bool it_2F28_UnkMotion0_Coll(Item_GObj* item_gobj)
-// bool it_2F28_UnkMotion0_Coll(HSD_GObj* item_gobj)
+/// bool it_2F28_UnkMotion0_Coll(HSD_GObj* item_gobj)
 {
     if (it_8026DFB0(item_gobj) != 0) {
         // if (it_8026DFB0((Item_GObj*) item_gobj) != 0) {

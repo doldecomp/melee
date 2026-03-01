@@ -18,8 +18,6 @@
 /* 2841B4 */ HSD_GObj* it_802841B4(HSD_GObj*, Vec3*, s32);
 /* 28428C */ void it_8028428C(Item_GObj*);
 /* 29D968 */ void it_8029D968(Item_GObj*);
-/* 29DD58 */ HSD_GObj* it_8029DD58(Item_GObj* fighter_gobj, Vec3*, u8, int,
-                                   float);
 /* 2A850C */ void it_802A850C(Item_GObj*, Vec3*, Vec3*, float, float, float);
 /* 2A8A7C */ void it_802A8A7C(Item_GObj* gobj);
 /* 2ADDD0 */ void it_802ADDD0(Item_GObj*, s32);
@@ -29,7 +27,6 @@
 /* 2AE8A8 */ Item_GObj* it_802AE8A8(float, Fighter_GObj*, Vec3*, Fighter_Part,
                                     ItemKind);
 /* 2AEAB4 */ void it_802AEAB4(Item_GObj*);
-/* 2B2560 */ HSD_GObj* it_802B2560(Item_GObj*, float, Vec3*, long, u32);
 /* 2B2674 */ void it_802B2674(Item_GObj*);
 /* 2B26C0 */ void it_802B26C0(Item_GObj*);
 /* 2B26E0 */ void it_802B26E0(Item_GObj*);

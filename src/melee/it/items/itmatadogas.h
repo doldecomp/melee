@@ -19,7 +19,7 @@
 /* 2CB3B4 */ bool itMatadogas_UnkMotion2_Anim(Item_GObj* gobj);
 /* 2CB3D8 */ void itMatadogas_UnkMotion2_Phys(Item_GObj* gobj);
 /* 2CB4C8 */ bool itMatadogas_UnkMotion2_Coll(Item_GObj* gobj);
-/* 2CB4F0 */ void it_802CB4F0(Item_GObj* gobj, s32 arg1, f32 arg2);
+/* 2CB4F0 */ void it_802CB4F0(Item_GObj*, s32, f32);
 /* 2CB690 */ void it_2725_Logic32_Spawned(Item_GObj*);
 /* 2CB704 */ void it_2725_Logic33_Spawned(Item_GObj*);
 /* 2CB778 */ void itMatadogas_Logic33_EvtUnk(Item_GObj*, Item_GObj*);

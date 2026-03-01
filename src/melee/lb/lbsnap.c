@@ -168,8 +168,8 @@ int lbSnap_8001D7B0(int chan, int index, int jndex)
     }
 }
 
-// RGB5A3:  A RRRRR GGGGG BBBBB
-// RGB565:   RRRRR GGGGGG BBBBB
+/// RGB5A3:  A RRRRR GGGGG BBBBB
+/// RGB565:   RRRRR GGGGGG BBBBB
 
 #define RGB5A3_MASK_A (0x8000)
 #define RGB5A3_MASK_R (0x7C00)

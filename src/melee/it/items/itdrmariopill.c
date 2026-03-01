@@ -60,7 +60,7 @@ ItemStateTable it_803F75D0[] = {
       itDrMarioPill_Motion6_Coll },
 };
 
-// NOTE: 4 iterations instead of the usual 3
+/// NOTE: 4 iterations instead of the usual 3
 static inline float my_sqrtf(float x)
 {
     static const double _half = .5;
@@ -447,7 +447,7 @@ bool itDrMarioPill_Reflected(Item_GObj* gobj)
     return it_80273030(gobj);
 }
 
-// NOTE: identical to itDrMarioPill_DmgDealt
+/// NOTE: identical to itDrMarioPill_DmgDealt
 bool itDrMarioPill_Clanked(Item_GObj* gobj)
 {
     Item* ip;
@@ -458,7 +458,7 @@ bool itDrMarioPill_Clanked(Item_GObj* gobj)
     return true;
 }
 
-// NOTE: identical to itDrMarioPill_DmgDealt
+/// NOTE: identical to itDrMarioPill_DmgDealt
 bool itDrMarioPill_HitShield(Item_GObj* gobj)
 {
     Item* ip;
@@ -469,7 +469,7 @@ bool itDrMarioPill_HitShield(Item_GObj* gobj)
     return true;
 }
 
-// NOTE: identical to itDrMarioPill_DmgDealt
+/// NOTE: identical to itDrMarioPill_DmgDealt
 bool itDrMarioPill_Absorbed(Item_GObj* gobj)
 {
     Item* ip;
@@ -480,7 +480,7 @@ bool itDrMarioPill_Absorbed(Item_GObj* gobj)
     return true;
 }
 
-// NOTE: identical to itDrMarioPill_DmgDealt
+/// NOTE: identical to itDrMarioPill_DmgDealt
 bool itDrMarioPill_ShieldBounced(Item_GObj* gobj)
 {
     Item* ip;

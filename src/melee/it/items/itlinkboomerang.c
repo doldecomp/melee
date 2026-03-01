@@ -149,9 +149,9 @@ static void loop_lb_8000BA0C(Item* ip, HSD_JObj* hobj, f32 arg1)
     }
 }
 
-void it_802A0534(Item_GObj* gobj, Point3d* arg1)
+void it_802A0534(Item_GObj* gobj, Vec3* arg1)
 {
-    Point3d sp20;
+    Vec3 sp20;
     HSD_JObj* hobj;
     HSD_JObj* child;
     Item* ip;
@@ -170,7 +170,7 @@ void it_802A0534(Item_GObj* gobj, Point3d* arg1)
         it_80275158(gobj, attrs->x0);
     }
 
-    angle = 0; // TODO
+    angle = 0; ///< @todo
     ip->xDD4_itemVar.linkboomerang.xF74 = angle;
     norm_xF74(ip);
     ip->xB8_itemLogicTable->thrown(gobj);
@@ -236,9 +236,8 @@ void it_802A0930(Item_GObj* gobj)
                                ((i == 1) && (ip->xDB4_itcmd_var2 == 2))))
         {
             if (hobj != NULL) {
-                HSD_JObjAnimAll(hobj);
-
-                // TODO: probably indexing into a Vec3[] field of linkboomerang
+                HSD_JObjAnimAll(hobj); ///< @todo probably indexing into a
+                                       ///< Vec3[] field of linkboomerang
                 v = M2C_FIELD(&ip->xDD4_itemVar.linkboomerang, Vec3**,
                               i * 0xC * 0xFF);
                 HSD_JObjSetTranslate(hobj, v);
@@ -442,7 +441,7 @@ bool itLinkboomerang_UnkMotion2_Anim(Item_GObj* gobj)
     return it_802A0C34(gobj);
 }
 
-// NOTE: identical to itLinkboomerang_UnkMotion1_Phys
+/// NOTE: identical to itLinkboomerang_UnkMotion1_Phys
 void itLinkboomerang_UnkMotion2_Phys(Item_GObj* gobj)
 {
     Item* ip;
@@ -476,7 +475,7 @@ static void clamp_pi_tau(f32* angle)
 
 f32 it_802A13EC(Item_GObj* gobj)
 {
-    Point3d sp14;
+    Vec3 sp14;
     Item* ip;
     f32 ret;
     f32 dx;
@@ -513,7 +512,7 @@ f32 it_802A13EC(Item_GObj* gobj)
     return ret;
 }
 
-void it_802A15EC(Item_GObj* gobj, Point3d* arg1)
+void it_802A15EC(Item_GObj* gobj, Vec3* arg1)
 {
     Item* ip;
     f32 angle;
@@ -534,7 +533,7 @@ void it_802A15EC(Item_GObj* gobj, Point3d* arg1)
     }
 }
 
-static void it_802A15EC_no_inline(Item_GObj* gobj, Point3d* arg1)
+static void it_802A15EC_no_inline(Item_GObj* gobj, Vec3* arg1)
 {
     it_802A15EC(gobj, arg1);
 }
@@ -710,7 +709,7 @@ bool it_802A1F08(Item_GObj* gobj)
     return false;
 }
 
-// NOTE: identical to it_802A1F08
+/// NOTE: identical to it_802A1F08
 bool it_802A1FA8(Item_GObj* gobj)
 {
     Item* ip;
@@ -729,7 +728,7 @@ bool it_802A1FA8(Item_GObj* gobj)
     return false;
 }
 
-// NOTE: identical to it_802A1F08
+/// NOTE: identical to it_802A1F08
 bool itLinkBoomerang_Logic18_Absorbed(Item_GObj* gobj)
 {
     Item* ip;
@@ -783,7 +782,7 @@ bool it_802A20E8(Item_GObj* gobj)
     return false;
 }
 
-// NOTE: identical to it_802A1F08 except for the msid check
+/// NOTE: identical to it_802A1F08 except for the msid check
 bool it_802A2288(Item_GObj* gobj)
 {
     Item* ip;

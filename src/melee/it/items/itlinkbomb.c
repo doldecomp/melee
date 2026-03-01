@@ -31,9 +31,9 @@ ItemStateTable it_803F6888[] = {
       itLinkbomb_UnkMotion6_Coll },
 };
 
-// @todo This uses the de-duplicated function ftCo_800C6AFC
-// which is likely an inline from a header file.
-// Come back to this once lbcoll is matched.
+/// @todo This uses the de-duplicated function ftCo_800C6AFC
+/// which is likely an inline from a header file.
+/// Come back to this once lbcoll is matched.
 
 static inline void fake_HSD_JObjAddTranslationY(HSD_JObj* jobj, float y)
 {
@@ -190,7 +190,7 @@ void it_8029DB5C(HSD_GObj* gobj)
 
 static inline void it_8029DD58_inline(Item* item, itLinkBombAttributes* attr,
                                       Item_GObj* fighter_gobj,
-                                      Item_GObj* temp_r3, u8 arg2)
+                                      Item_GObj* temp_r3, u32 arg2)
 {
     f32 temp_f2;
     it_80275158(temp_r3, attr->lifetime);
@@ -204,7 +204,7 @@ static inline void it_8029DD58_inline(Item* item, itLinkBombAttributes* attr,
     Item_8026AB54(temp_r3, fighter_gobj, arg2);
 }
 
-HSD_GObj* it_8029DD58(Item_GObj* fighter_gobj, Vec3* arg1, u8 arg2, int arg3,
+HSD_GObj* it_8029DD58(Item_GObj* fighter_gobj, Vec3* arg1, u32 arg2, int arg3,
                       f32 arg4)
 {
     Item_GObj* temp_r3;
@@ -431,10 +431,10 @@ static inline void itLinkbomb_UnkMotion1_Anim_fake(HSD_GObj* gobj)
     itLinkbomb_UnkMotion1_Anim_fake_2(gobj);
 }
 
-// This should have a non-inlined it_8029DB5C, presumably expanded from
-// itLinkbomb_UnkMotion1_Anim, but I can't figure out how to get a match for
-// itLinkbomb_UnkMotion1_Anim that calls it_8029DB5C. Not sure if that's
-// related to the unused item/specialattributes.
+/// This should have a non-inlined it_8029DB5C, presumably expanded from
+/// itLinkbomb_UnkMotion1_Anim, but I can't figure out how to get a match for
+/// itLinkbomb_UnkMotion1_Anim that calls it_8029DB5C. Not sure if that's
+/// related to the unused item/specialattributes.
 bool itLinkbomb_UnkMotion3_Anim(HSD_GObj* gobj)
 {
     Item* item;
@@ -509,8 +509,8 @@ void it_8029F18C(HSD_GObj* gobj)
     it_8029D9A4(gobj, 4, 0);
 }
 
-// This regswap may or may not be related to the fake inline for it_8029DB5C,
-// but every other function matches with it.
+/// This regswap may or may not be related to the fake inline for it_8029DB5C,
+/// but every other function matches with it.
 bool itLinkbomb_UnkMotion4_Anim(HSD_GObj* gobj)
 {
     Article* article;

@@ -117,40 +117,33 @@ bool itEvyoshiegg_UnkMotion5_Coll(Item_GObj* gobj)
     return false;
 }
 
-bool it_3F14_Logic42_DmgDealt(Item_GObj* gobj)
+static inline bool itEvyoshiegg_BounceOff(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     ip->x40_vel.x = 0.0f;
     ip->x40_vel.y = 1.5f;
     Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
     return false;
+}
+
+bool it_3F14_Logic42_DmgDealt(Item_GObj* gobj)
+{
+    return itEvyoshiegg_BounceOff(gobj);
 }
 
 bool it_3F14_Logic42_Clanked(Item_GObj* gobj)
 {
-    Item* ip = GET_ITEM(gobj);
-    ip->x40_vel.x = 0.0f;
-    ip->x40_vel.y = 1.5f;
-    Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
-    return false;
+    return itEvyoshiegg_BounceOff(gobj);
 }
 
 bool it_3F14_Logic42_HitShield(Item_GObj* gobj)
 {
-    Item* ip = GET_ITEM(gobj);
-    ip->x40_vel.x = 0.0f;
-    ip->x40_vel.y = 1.5f;
-    Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
-    return false;
+    return itEvyoshiegg_BounceOff(gobj);
 }
 
 bool it_3F14_Logic42_Reflected(Item_GObj* gobj)
 {
-    Item* ip = GET_ITEM(gobj);
-    ip->x40_vel.x = 0.0f;
-    ip->x40_vel.y = 1.5f;
-    Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
-    return false;
+    return itEvyoshiegg_BounceOff(gobj);
 }
 
 /// #it_3F14_Logic42_DmgReceived

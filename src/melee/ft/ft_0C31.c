@@ -217,7 +217,7 @@ void ftCo_EntryStart_Coll(Fighter_GObj* gobj)
     }
 }
 
-// you have to ask the compiler nicely for it to work
+/// you have to ask the compiler nicely for it to work
 static inline void ftCo_800C6AFC_please_dontinline(HSD_JObj* jobj)
 {
     ftCo_800C6AFC(jobj);
@@ -228,7 +228,7 @@ static inline void ftCo_800C6AFC_dontinline(HSD_JObj* jobj)
     ftCo_800C6AFC_please_dontinline(jobj);
 }
 
-// @todo figure out proper inlining for this function
+/// @todo figure out proper inlining for this function
 inline void fake_HSD_JObjSetTranslate(HSD_JObj* jobj, Vec3* translate)
 {
 #undef __FILE__
@@ -652,7 +652,8 @@ void fn_800C7AE0(Fighter_GObj* gobj)
     it_8026B294(fp->mv.co.captureleadead.x0, &fp->cur_pos);
 }
 
-UNK_RET ftCo_800C7B0C(UNK_PARAMS)
+UNK_RET ftCo_800C7B0C(Fighter_GObj* arg0, void* arg1, void* arg2,
+                      lbColl_80008D30_arg1* arg3, f32 farg0)
 {
     NOT_IMPLEMENTED;
 }

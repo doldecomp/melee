@@ -80,7 +80,7 @@
 #include <baselib/random.h>
 #include <MSL/math.h>
 
-// Forward declarations for functions called before definition
+/// Forward declarations for functions called before definition
 void fn_80105AB0(Fighter_GObj*);
 void fn_80105A34(Fighter_GObj*);
 void fn_801090D4(Fighter_GObj*);

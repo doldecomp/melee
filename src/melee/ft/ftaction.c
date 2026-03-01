@@ -388,8 +388,8 @@ void ftAction_8007162C(Fighter_GObj* gobj, CommandInfo* cmd)
 }
 
 /// @remarks after each CommandInfo function, there seems to be
-// a function that has the ability to skip it (ftAction_800715EC's usage)
-// unsure if theyre all actually called
+/// a function that has the ability to skip it (ftAction_800715EC's usage)
+/// unsure if theyre all actually called
 void ftAction_8007168C(Fighter_GObj* gobj, CommandInfo* cmd)
 {
     SKIP_CMD(cmd, 1);

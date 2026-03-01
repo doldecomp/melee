@@ -218,25 +218,25 @@ typedef struct {
     u32 x0;
 } itKirbyHammer_ItemVars;
 
-typedef struct ItemLink // user_data struct of GObj class 7
-{
-    struct ItemLink* prev;
-    struct ItemLink* next;
-    Vec3 x8_vel;
-    Vec3 pos;
-    Vec3 x20_vec; // Previous position?
-    u8 flag0 : 1;
-    u8 flag1 : 1;
-    u8 flag2 : 1;
-    u8 flag3 : 1;
-    u8 flag4 : 1;
-    u8 flag5 : 1;
-    u8 flag6 : 1;
-    u8 flag7 : 1;
-    CollData x30_collData;
-    s32 unk;
-    HSD_GObj* x1D0_GObj;
-    HSD_JObj* x1D4_JObj;
+/// user_data struct of GObj class 7
+typedef struct ItemLink {
+    /*   +0 */ struct ItemLink* prev;
+    /*   +4 */ struct ItemLink* next;
+    /*   +8 */ Vec3 vel;
+    /*   +C */ Vec3 pos;
+    /*  +20 */ Vec3 x20; ///< Previous position?
+    /*  +2C:0 */ u8 x2C_b0 : 1;
+    /*  +2C:1 */ u8 x2C_b1 : 1;
+    /*  +2C:2 */ u8 x2C_b2 : 1;
+    /*  +2C:3 */ u8 x2C_b3 : 1;
+    /*  +2C:4 */ u8 x2C_b4 : 1;
+    /*  +2C:5 */ u8 x2C_b5 : 1;
+    /*  +2C:6 */ u8 x2C_b6 : 1;
+    /*  +2C:7 */ u8 x2C_b7 : 1;
+    /*  +30 */ CollData coll_data;
+    /* +1CC */ s32 x1CC;
+    /* +1D0 */ HSD_GObj* gobj;
+    /* +1D4 */ HSD_JObj* jobj;
 } ItemLink;
 STATIC_ASSERT(sizeof(struct ItemLink) == 0x1D8);
 
@@ -483,22 +483,22 @@ typedef struct itPikachutJoltGround_ItemVars {
 } itPikachutJoltGround_ItemVars;
 
 typedef struct itPikachutJoltAir_ItemVars {
-    /* +0 +DD4 */ char pad_0[0x4];
-    /* +4 +DD8 */ u32 xDD8;
+    /* +0 ip+DD4 */ char pad_0[0x4];
+    /* +4 ip+DD8 */ u32 xDD8;
 } itPikachutJoltAir_ItemVars;
 
 typedef struct itPikachuthunder_ItemVars {
-    /* +0 +DD4 */ s32 x0;
-    /* +4 +DD8 */ s32 x4;
-    /* +8 +DDC */ s32 x8;
-    /* +C +DE0 */ f32 xC;
-    /* +10 +DE4 */ f32 x10;
-    /* +14 +DE8 */ f32 x14;
-    /* +18 +DEC */ f32 x18;
-    /* +1C +DF0 */ Vec3 x1C;
-    /* +28 +DFC */ Vec3 x28;
-    /* +34 +E08 */ Item_GObj* x34;
-    /* +38 +E0C */ Item_GObj* x38;
+    /* +0 ip+DD4 */ s32 x0;
+    /* +4 ip+DD8 */ s32 x4;
+    /* +8 ip+DDC */ s32 x8;
+    /* +C ip+DE0 */ f32 xC;
+    /* +10 ip+DE4 */ f32 x10;
+    /* +14 ip+DE8 */ f32 x14;
+    /* +18 ip+DEC */ f32 x18;
+    /* +1C ip+DF0 */ Vec3 x1C;
+    /* +28 ip+DFC */ Vec3 x28;
+    /* +34 ip+E08 */ Item_GObj* x34;
+    /* +38 ip+E0C */ Item_GObj* x38;
 } itPikachuthunder_ItemVars;
 
 typedef struct itPikachutJoltGroundAttributes {
@@ -509,52 +509,118 @@ typedef struct itPikachutJoltGroundAttributes {
 } itPikachutJoltGroundAttributes;
 
 typedef struct itPikachuthunderAttributes {
+    /* +0 ip+DD4 */ f32 x0;
+    /* +4 ip+DD8 */ f32 x4;
+    /* +8 ip+DDC */ f32 x8;
+} itPikachuthunderAttributes;
+
+typedef struct itSamusBombAttributes {
     /* +0 */ f32 x0;
     /* +4 */ f32 x4;
     /* +8 */ f32 x8;
-} itPikachuthunderAttributes;
+    /* +C */ f32 xC;
+    /* +10 */ f32 x10;
+    /* +14 */ f32 x14;
+    /* +18 */ f32 x18;
+} itSamusBombAttributes;
 
 typedef struct itSamusBomb_ItemVars {
-    /* +0 +DD4 */ char pad_0[0x4];
-    /* +4 +DD8 */ s32 xDD8;
+    /* +0 +DD4 */ bool x0;
+    /* +4 +DD8 */ Fighter_GObj* owner;
 } itSamusBomb_ItemVars;
 
 typedef struct itSamusChargeshot_ItemVars {
-    /* +0 +DD4 */ s32 x0;
-    /* +4 +DD8 */ f32 x4;
-    /* +8 +DDC */ f32 x8;
+    /* +0  +DD4 */ u32 xDD4_pad;
+    /* +4  +DD8 */ f32 xDD8;
+    /* +8  +DDC */ f32 xDDC;
+    /* +C  +DE0 */ f32 xDE0;
+    /* +10 +DE4 */ f32 xDE4;
+    /* +14 +DE8 */ s32 xDE8;
+    /* +18 +DEC */ s32 xDEC;
+    /* +1C +DF0 */ s32 xDF0;
+    /* +20 +DF4 */ s32 xDF4;
+    /* +24 +DF8 */ s32 xDF8;
+    /* +28 +DFC */ s32 xDFC;
+    /* +2C +E00 */ Fighter_GObj* xE00;
+    /* +30 +E04 */ f32 xE04;
+    /* +34 +E08 */ u32 pad1[9];
+    /* +78 +E2C */ f32 xE2C;
+    /* +7C +E30 */ f32 xE30;
+    /* +80 +E34 */ f32 xE34;
+    /* +84 +E38 */ u32 padding[15]; /* gap 0x84-0xC0 (0x3C bytes) */
 } itSamusChargeshot_ItemVars;
 
+typedef struct itSamusChargeShot_Attributes {
+    /* +0 */ f32 lifetime;
+    /* +4 */ u32 x4;
+    /* +8 */ f32 x8;
+    /* +C */ f32 xC;
+    /* +10 */ f32 x10;
+    /* +14 */ f32 x14;
+    /* +18 */ f32 x18;
+    /* +1C */ f32 x1C;
+} itSamusChargeShot_Attributes;
+
 typedef struct itSamusGrapple_ItemVars {
-    /* +0 +DD4 */ f32 x0;
-    /* +4 +DD8 */ f32 x4;
-    /* +8 +DDC */ HSD_GObj* x8;
-    /* +C +DE0 */ HSD_JObj* xC;
-    /* +10 +DE4 */ void (*unk_10)(Item_GObj*);
-    /* +14 +DE8 */ u8 x14;
-    /* +15 +DE9 */ u8 x15;
-    /* +16 +DEA */ u8 x16;
+    /*  +0 ip+DD4 */ f32 x0;
+    /*  +4 ip+DD8 */ f32 x4;
+    /*  +8 ip+DDC */ HSD_GObj* x8;
+    /*  +C ip+DE0 */ HSD_JObj* xC;
+    /* +10 ip+DE4 */ void (*unk_10)(Item_GObj*);
+    /* +14 ip+DE8 */ u8 x14;
+    /* +15 ip+DE9 */ u8 x15;
+    /* +16 ip+DEA */ u8 x16;
 } itSamusGrapple_ItemVars;
 
+typedef struct itSamusMissileAttributes {
+    /* +0 */ f32 x0;
+    /* +4 */ f32 x4;
+    /* +8 */ f32 x8;
+    /* +C */ f32 xC;
+    /* +10 */ f32 x10;
+    /* +14 */ f32 x14;
+    /* +18 */ f32 x18;
+    /* +1C */ f32 x1C;
+    /* +20 */ f32 x20;
+    /* +24 */ f32 x24;
+    /* +28 */ f32 x28;
+    /* +2C */ f32 x2C;
+    /* +30 */ f32 x30;
+    /* +34 */ f32 x34;
+    /* +38 */ f32 x38;
+    /* +3C */ f32 x3C;
+} itSamusMissileAttributes;
+
+typedef struct itSamusMissile_ItemVars {
+    /* +0 +DD4 */ bool is_smash_missile;
+    /* +4 +DD8 */ s32 x4;
+    /* +8 +DDC */ f32 x8;
+    /* +C +DE0 */ Fighter_GObj* owner;
+    /* +10 +DE4 */ HSD_GObj* x10;
+} itSamusMissile_ItemVars;
+
 typedef struct itSeakNeedleThrown_ItemVars {
-    /* +0 +DD4 */ char pad_0[0x4];
-    /* +4 +DD8 */ f32 xDD8;
-    /* +8 +DDC */ f32 xDDC;
-    /* +C +DE0 */ f32 xDE0;
-    /* +10 +DE4 */ Vec3 xDE4;
+    /*  +0 ip+DD4 */ char pad_0[0x4];
+    /*  +4 ip+DD8 */ f32 xDD8;
+    /*  +8 ip+DDC */ f32 xDDC;
+    /*  +C ip+DE0 */ f32 xDE0;
+    /* +10 ip+DE4 */ Vec3 xDE4;
 } itSeakNeedleThrown_ItemVars;
 
-struct itSeakChain_ItemVars_x0_t {
-    /*   +0 */ char pad_0[0x1D0];
-    /* +1D0 */ HSD_JObj* x1D0;
-    /* +1D4 */ HSD_JObj* x1D4;
-};
-
 typedef struct itSeakChain_ItemVars {
-    /* +0 +DD4 */ struct itSeakChain_ItemVars_x0_t* x0;
-    /* +0 +DD8 */ UNK_T x4;
-    /* +8 +DDC */ HSD_GObj* x8;
+    /* +0 ip+DD4 */ ItemLink* x0;
+    /* +0 ip+DD8 */ ItemLink* x4;
+    /* +8 ip+DDC */ Fighter_GObj* parent_gobj;
 } itSeakChain_ItemVars;
+
+typedef struct itSeakChain_Attrs {
+    /*  +0 */ int x0;
+    /*  +4 */ float x4;
+    /*  +8 */ char pad_8[0x54 - 0x8];
+    /* +54 */ float x54;
+    /* +58 */ float x58;
+} itSeakChain_Attrs;
+STATIC_ASSERT(sizeof(struct itSeakChain_Attrs) == 0x5C);
 
 typedef struct itZeldaDinFireExplode_ItemVars {
     /* +0 ip+DD4 */ f32 xDD4;

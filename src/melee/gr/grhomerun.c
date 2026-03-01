@@ -2,6 +2,7 @@
 
 #include <platform.h>
 
+#include "baselib/sislib.h"
 #include "cm/camera.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
@@ -226,7 +227,7 @@ void grHomeRun_8021EAF8(void)
     stage_info.flags |= (1 << 7);
 }
 
-// Copies the main camera into a target camera
+/// Copies the main camera into a target camera
 void fn_8021EB10(HSD_GObj* target_cam_gobj)
 {
     HSD_GObj* main_cam_gobj;

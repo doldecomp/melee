@@ -201,7 +201,7 @@ void ftPk_SpecialN_80124DC8(HSD_GObj* gobj)
     pika_attr_1C = pika_attr->x1C;
     if (fighter_x673_byte < pika_attr_1C) {
         fp->mv.pk.unk2.x0 = pika_attr->x20;
-        fp->x2070.x2072_b4 = 1;
+        fp->x2070.count_thrown_items = 1;
     } else {
         fp->mv.pk.unk2.x0 = 0;
     }

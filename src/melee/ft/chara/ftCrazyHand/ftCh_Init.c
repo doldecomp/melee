@@ -101,10 +101,6 @@ extern f32 ftCh_Init_804DA080;
 extern f32 ftCh_Init_804DA084;
 extern f32 ftCh_Init_804DA0E0;
 extern f32 ftCh_Init_804DA0E4;
-extern f32 ftCh_Init_804DA168;
-extern f32 ftCh_Init_804DA16C;
-extern f32 ftCh_Init_804DA170;
-extern f32 ftCh_Init_804DA174;
 extern f32 ftCh_Init_804DA178;
 extern f32 ftCh_Init_804DA17C;
 
@@ -2193,8 +2189,7 @@ void ftCh_Init_8015A3F4(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     fp->cmd_vars[1] = 0;
     fp->x1A5C = ftBossLib_8015C3E8(FTKIND_MASTERH);
-    Fighter_ChangeMotionState(gobj, 0x17A, 0, ftCh_Init_804DA168,
-                              ftCh_Init_804DA16C, ftCh_Init_804DA168, NULL);
+    Fighter_ChangeMotionState(gobj, 0x17A, 0, 0.0f, 1.0f, 0.0f, NULL);
     ftAnim_8006EBA4(gobj);
 }
 
@@ -2237,8 +2232,7 @@ void ftCh_Init_8015A560(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     fp->cmd_vars[1] = 0;
     fp->x1A5C = ftBossLib_8015C3E8(FTKIND_MASTERH);
-    Fighter_ChangeMotionState(gobj, 0x17B, 0, ftCh_Init_804DA170,
-                              ftCh_Init_804DA174, ftCh_Init_804DA170, NULL);
+    Fighter_ChangeMotionState(gobj, 0x17B, 0, 0.0f, 1.0f, 0.0f, NULL);
     ftAnim_8006EBA4(gobj);
 }
 

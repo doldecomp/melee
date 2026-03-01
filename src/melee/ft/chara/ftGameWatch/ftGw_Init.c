@@ -594,23 +594,23 @@ void ftGw_Init_OnItemInvisible(HSD_GObj* gobj)
     Fighter_OnItemInvisible(gobj, 1);
 }
 
-// 0x8014A6E0
-// https://decomp.me/scratch/ibIxi // Make held item visible (restores picked
-// up item's hand held animation)
+/// 0x8014A6E0
+/// https://decomp.me/scratch/ibIxi // Make held item visible (restores picked
+/// up item's hand held animation)
 void ftGw_Init_OnItemVisible(HSD_GObj* gobj)
 {
     Fighter_OnItemVisible(gobj, 1);
 }
 
-// 0x8014A728
-// https://decomp.me/scratch/LR8f5 // OnDropItem callback
+/// 0x8014A728
+/// https://decomp.me/scratch/LR8f5 // OnDropItem callback
 void ftGw_Init_OnItemDrop(HSD_GObj* gobj, bool dropItemFlag)
 {
     Fighter_OnItemDrop(gobj, dropItemFlag, 1, 1);
 }
 
-// 0x8014A77C
-// https://decomp.me/scratch/SX2FV // Set Oil Panic Color Overlay
+/// 0x8014A77C
+/// https://decomp.me/scratch/SX2FV // Set Oil Panic Color Overlay
 void ftGw_Init_UnkMotionStates4(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -620,16 +620,16 @@ void ftGw_Init_UnkMotionStates4(HSD_GObj* gobj)
     }
 }
 
-// 0x8014A7B4
-// https://decomp.me/scratch/RJvAe // Copy Special Attributes from DAT file
-// struct to Fighter*
+/// 0x8014A7B4
+/// https://decomp.me/scratch/RJvAe // Copy Special Attributes from DAT file
+/// struct to Fighter*
 void ftGw_Init_LoadSpecialAttrs(HSD_GObj* gobj)
 {
     COPY_ATTRS(gobj, ftGameWatchAttributes);
 }
 
-// 0x8014A7F4
-// https://decomp.me/scratch/PFWrJ // Apply color to Mr. Game & Watch's items?
+/// 0x8014A7F4
+/// https://decomp.me/scratch/PFWrJ // Apply color to Mr. Game & Watch's items?
 void ftGw_Init_8014A7F4(HSD_GObj* gobj, ItemModStruct* item_mod)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -638,9 +638,9 @@ void ftGw_Init_8014A7F4(HSD_GObj* gobj, ItemModStruct* item_mod)
     item_mod->x0_unk = gawAttrs->x4_GAMEWATCH_COLOR[fp->x619_costume_id];
 }
 
-// 0x8014A814
-// https://decomp.me/scratch/BRo1r // Apply alt color to Mr. Game & Watch's
-// items?
+/// 0x8014A814
+/// https://decomp.me/scratch/BRo1r // Apply alt color to Mr. Game & Watch's
+/// items?
 void ftGw_Init_8014A814(HSD_GObj* gobj, ItemModStruct* item_mod)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -649,8 +649,8 @@ void ftGw_Init_8014A814(HSD_GObj* gobj, ItemModStruct* item_mod)
     item_mod->x0_unk = gawAttrs->x14_GAMEWATCH_OUTLINE;
 }
 
-// 0x8014A828
-// https://decomp.me/scratch/muS2N // Mr. Game & Watch's OnAbsorb callback
+/// 0x8014A828
+/// https://decomp.me/scratch/muS2N // Mr. Game & Watch's OnAbsorb callback
 void ftGw_Init_OnAbsorb(HSD_GObj* gobj)
 {
     ftGw_SpecialLw_AbsorbThink_DecideAction(gobj);

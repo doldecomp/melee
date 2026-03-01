@@ -17,12 +17,12 @@
 #include <baselib/random.h>
 
 typedef struct {
-    u8 _pad0[0x4];
-    f32 x4;
-    f32 x8;
-    f32 xC;
-    f32 x10;
-    u8 _pad1[0x2C];
+    UNK_T x0;
+    float x4;
+    float x8;
+    float xC;
+    float x10;
+    char pad_0[0x40 - 0x14];
     s32 x40;
     s32 x44;
     u8 _pad2[0x4];

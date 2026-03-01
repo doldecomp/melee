@@ -163,9 +163,7 @@ void fn_80252C50(HSD_GObj* gobj)
         }
         --o->x44;
         return;
-    }
-
-    // TODO some GC/Wii decomp members are suspicious of this block.
+    } ///< @todo some GC/Wii decomp members are suspicious of this block.
     // Investigate further Context: inadvertent hack to remove an extra `li
     // r29,0` operation using i = 0
     i = 0;
@@ -184,8 +182,7 @@ void fn_80252C50(HSD_GObj* gobj)
         HSD_GObjPLink_80390228(o->x4C);
         o->x4C = NULL;
         return;
-    }
-    // TODO inline button getter
+    } ///< @todo inline button getter
     if (g_debugLevel >= 3 && HSD_PadCopyStatus->button & 0x40 &&
         HSD_PadCopyStatus->button & 0x20 && HSD_PadCopyStatus->button & 0x100)
     {
@@ -200,7 +197,7 @@ void fn_80252C50(HSD_GObj* gobj)
             mnInfoBonus_802529B4();
         }
     } else if (((u64) temp_r3 & 2) != 0 &&
-               mnInfoBonus_802528F8_wrapper() /* TODO don't inline! */ > 5)
+               mnInfoBonus_802528F8_wrapper() /* @todo don't inline! */ > 5)
     {
         lbAudioAx_80024030(2);
         ++o->x0;

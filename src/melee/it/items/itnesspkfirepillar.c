@@ -105,8 +105,8 @@ bool itNesspkfirepillar_UnkMotion0_Anim(Item_GObj* item_gobj)
     return itNesspkfirepillar_INLINE_Anim_SetScale(item_gobj, scale);
 }
 
-//! @bug Unintentionally sets the item to be in the air (see
-//! itNokonoko_UnkMotion5_Phys)
+/// @bug Unintentionally sets the item to be in the air (see
+/// itNokonoko_UnkMotion5_Phys)
 void itNesspkfirepillar_UnkMotion0_Phys(Item_GObj* item_gobj)
 {
     Item* item = GET_ITEM(item_gobj);
@@ -116,8 +116,8 @@ void itNesspkfirepillar_UnkMotion0_Phys(Item_GObj* item_gobj)
     }
 }
 
-//! @bug Unintentionally sets the item to be in the air (see
-//! itNokonoko_UnkMotion5_Coll)
+/// @bug Unintentionally sets the item to be in the air (see
+/// itNokonoko_UnkMotion5_Coll)
 bool itNesspkfirepillar_UnkMotion0_Coll(Item_GObj* item_gobj)
 {
     Item* item = GET_ITEM(item_gobj);
