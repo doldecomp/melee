@@ -92,11 +92,12 @@ typedef struct itBombHeiAttributes {
     /*  +0  */ float x0;
     /*  +4  */ float x4;
     /*  +8  */ float x8;
-    /*  +C  */ s32 xC;
+    /*  +C  */ float xC;
     /* +10  */ float x10;
     /* +14  */ float x14;
     /* +18  */ float x18;
     /* +1C  */ float x1C;
+    /* +20  */ Vec3 x20;
 } itBombHeiAttributes;
 
 typedef struct itBox_ItemVars {

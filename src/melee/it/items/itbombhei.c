@@ -1,6 +1,9 @@
 #include "itbombhei.h"
 
 #include "itbombhei.static.h"
+
+#include "math.h"
+
 #include <placeholder.h>
 #include <platform.h>
 
@@ -14,6 +17,9 @@
 #include "it/it_2725.h"
 #include "it/itCommonItems.h"
 #include "it/item.h"
+
+#define GET_ATTRS(ip)                                                         \
+    ((itBombHeiAttributes*) ip->xC4_article_data->x4_specialAttributes)
 
 Item_GObj* it_8027D670(Vec3* pos)
 {
@@ -299,7 +305,26 @@ void itBombhei_UnkMotion10_Phys(Item_GObj* gobj)
     it_80274658(gobj, it_804D6D28->x68_float);
 }
 
-/// #fn_80280974
+void fn_80280974(Item_GObj* arg0)
+{
+    Item* ip;
+    itBombHeiAttributes* ap;
+    PAD_STACK(8);
+
+    ip = GET_ITEM(arg0);
+    ap = GET_ATTRS(ip);
+    if (ABS(ip->xDD4_itemVar.bombhei.xE0C.x) > ap->x20.x ||
+        ABS(ip->xDD4_itemVar.bombhei.xE0C.y) > ap->x20.y)
+    {
+        it_80280DC0(arg0);
+        return;
+    }
+    it_8026B3A8(arg0);
+    ip->x40_vel.x = ap->xC * ip->facing_dir;
+    ip->xD5C = 0;
+    it_80275444(arg0);
+    itBombhei_UpdateStatePreserveBone3(arg0, 2);
+}
 
 bool itBombhei_UnkMotion10_Coll(Item_GObj* gobj)
 {
