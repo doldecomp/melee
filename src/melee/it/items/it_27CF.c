@@ -91,8 +91,7 @@ void it_27CF_UnkMotion1_Phys(HSD_GObj* item_gobj)
     ItemAttr* attr;
 
     attr = GET_ITEM(item_gobj)->xCC_item_attr;
-    it_80272860(item_gobj, attr->x10_fall_speed,
-                attr->x14_fall_speed_max);
+    it_80272860(item_gobj, attr->x10_fall_speed, attr->x14_fall_speed_max);
 }
 
 bool it_27CF_UnkMotion1_Coll(HSD_GObj* item_gobj)

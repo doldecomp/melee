@@ -79,11 +79,11 @@ typedef struct itBombHei_ItemVars {
     /* +14 */ float xDE8;
     /* +18 */ float xDEC;
     /* +1C */ float xDF0;
-    /* +20 */ s32 xDF4;
+    /* +20 */ float xDF4;
     /* +24 */ float xDF8;
     /* +28 */ float xDFC;
     /* +2C */ s32 _E00;
-    /* +30 */ s32 _E04;
+    /* +30 */ f32 xE04;
     /* +34 */ s32 _E08;
     /* +38 */ Vec3 xE0C;
 } itBombHei_ItemVars;
@@ -92,11 +92,12 @@ typedef struct itBombHeiAttributes {
     /*  +0  */ float x0;
     /*  +4  */ float x4;
     /*  +8  */ float x8;
-    /*  +C  */ s32 xC;
+    /*  +C  */ float xC;
     /* +10  */ float x10;
     /* +14  */ float x14;
     /* +18  */ float x18;
     /* +1C  */ float x1C;
+    /* +20  */ Vec3 x20;
 } itBombHeiAttributes;
 
 typedef struct itBox_ItemVars {

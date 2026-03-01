@@ -53,7 +53,8 @@
 /* 0C7AD8 */ void ftCo_CaptureLikelike_Phys(Fighter_GObj* gobj);
 /* 0C7ADC */ void ftCo_CaptureLikelike_Coll(Fighter_GObj* gobj);
 /* 0C7AE0 */ void fn_800C7AE0(Fighter_GObj* gobj);
-/* 0C7B0C */ UNK_RET ftCo_800C7B0C(Fighter_GObj* arg0, void* arg1, void* arg2, lbColl_80008D30_arg1* arg3, f32 farg0);
+/* 0C7B0C */ UNK_RET ftCo_800C7B0C(Fighter_GObj* arg0, void* arg1, void* arg2,
+                                   lbColl_80008D30_arg1* arg3, f32 farg0);
 /* 0C7C60 */ void ftCo_800C7C60(Fighter_GObj* gobj, int damage_amount);
 /* 0C7CA0 */ bool ftCo_800C7CA0(Fighter_GObj* gobj);
 /* 0C7FC8 */ void ftCo_DownReflect_Anim(Fighter_GObj* gobj);
