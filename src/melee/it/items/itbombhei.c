@@ -464,7 +464,26 @@ bool itBombhei_UnkMotion5_Coll(Item_GObj* gobj)
     return false;
 }
 
-/// #fn_8027FCA8
+void fn_8027FCA8(Item_GObj* arg0)
+{
+    Item* ip;
+    itBombHeiAttributes* attrs;
+
+    ip = GET_ITEM(arg0);
+    attrs = GET_ATTRS(ip);
+    ip->x40_vel.x = 0.0f;
+    it_8026B390(arg0);
+    if (ip->xDD4_itemVar.bombhei.xDE0 == 0) {
+        ip->xDD4_itemVar.bombhei.xDD4 = attrs->x18;
+        ip->xDD4_itemVar.bombhei.xDD8 = 1;
+        ip->xD44_lifeTimer = (f32) it_804D6D28->x30_lifetime;
+        ip->xDD4_itemVar.bombhei.xDF0 = attrs->x8;
+        ip->xDD4_itemVar.bombhei.xDE0 = 1;
+        itBombhei_UpdateStatePreserveBone(arg0, 6, ITEM_ANIM_UPDATE);
+    } else {
+        itBombhei_UpdateStatePreserveBone(arg0, 6, ITEM_UNK_0x1);
+    }
+}
 
 bool itBombhei_UnkMotion6_Anim(Item_GObj* gobj)
 {
