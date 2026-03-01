@@ -216,7 +216,22 @@ bool itBombhei_UnkMotion8_Anim(Item_GObj* igp)
 
 void itBombhei_UnkMotion8_Phys(Item_GObj* gobj) {}
 
-/// #it_3F14_Logic6_Dropped
+void it_3F14_Logic6_Dropped(Item_GObj* arg0)
+{
+    Item* ip;
+    itBombHeiAttributes* attrs;
+    ip = GET_ITEM(arg0);
+    attrs = GET_ATTRS(ip);
+    ip->xDC8_word.flags.x19 = 1;
+    ip->xDC8_word.flags.x17 = 1;
+    if (ip->xDD4_itemVar.bombhei.xDE0 == 0) {
+        ip->x5D0_animFrameSpeed = attrs->x0;
+        itBombhei_UpdateStatePreserveBone(arg0, 9, 6);
+    } else {
+        ip->x5D0_animFrameSpeed = 1.0f;
+        itBombhei_UpdateStatePreserveBone(arg0, 0xA, 5);
+    }
+}
 
 void it_8027E978(Item_GObj* arg0)
 {
