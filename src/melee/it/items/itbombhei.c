@@ -234,7 +234,36 @@ bool itBombhei_UnkMotion3_Coll(Item_GObj* gobj)
 
 void itBombhei_UnkMotion2_Phys(Item_GObj* gobj) {}
 
-/// #itBombhei_UnkMotion2_Coll
+bool itBombhei_UnkMotion2_Coll(Item_GObj* gobj)
+{
+    Item* ip;
+    Item_GObj* new_var;
+
+    s32 temp_r0;
+    itBombHeiAttributes* attr;
+
+    if (it_8026D8A4(gobj, (void (*)(HSD_GObj*)) it_8027F42C) != 0) {
+        if (it_80276308(gobj) != 0) {
+            it_8027F42C(gobj);
+        }
+        it_80276CB8(gobj);
+    } else {
+        ip = GET_ITEM(gobj);
+        temp_r0 = ip->msid;
+        attr = GET_ATTRS(ip);
+        if ((temp_r0 == 3) || (temp_r0 == 0)) {
+            ip->xDC8_word.flags.x19 = 1;
+            ip->xDC8_word.flags.x17 = 1;
+            it_80274740(gobj);
+        }
+        new_var = gobj;
+        if (GET_ITEM(gobj)->msid == 3) {
+            GET_ITEM(gobj)->xDD4_itemVar.bombhei.xDD4 = attr->x14;
+        }
+        itBombhei_UpdateStatePreserveBone3(new_var, 1);
+    }
+    return false;
+}
 
 /// #it_8027F42C
 
