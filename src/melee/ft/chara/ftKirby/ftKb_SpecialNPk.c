@@ -837,7 +837,45 @@ void ftKb_LkSpecialAirNEnd_Phys(Fighter_GObj* gobj)
 
 /// #ftKb_SpecialNSs_800FCC6C
 
-/// #ftKb_SpecialNSs_800FCCBC
+bool ftKb_SpecialNSs_800FCCBC(Fighter_GObj* gobj)
+{
+    Fighter* fp;
+    s32 motion_id;
+    
+    if (!gobj) {
+        goto end_true;
+    }
+    
+    fp = GET_FIGHTER(gobj);
+    motion_id = fp->motion_id;
+    
+    if (motion_id == 0x199) {
+        goto ret_true;
+    }
+    
+    if (motion_id >= 0x199) {
+        goto check_upper;
+    }
+    
+    if (motion_id >= 0x197) {
+        goto ret_false;
+    }
+    goto ret_true;
+    
+check_upper:
+    if (motion_id >= 0x19D) {
+        goto ret_true;
+    }
+    
+ret_false:
+    return false;
+    
+ret_true:
+    return true;
+    
+end_true:
+    return true;
+}
 
 void ftKb_SpecialNSs_800FCD04(Fighter_GObj* gobj)
 {
