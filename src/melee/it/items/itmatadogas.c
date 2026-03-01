@@ -2,7 +2,6 @@
 
 #include <placeholder.h>
 #include <platform.h>
-#include <baselib/random.h>
 
 #include "ef/eflib.h"
 #include "it/inlines.h"
@@ -10,6 +9,8 @@
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
+
+#include <baselib/random.h>
 
 void it_802CAFD4(Item_GObj* gobj)
 {
@@ -66,7 +67,8 @@ void it_802CB2B0(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     PAD_STACK(8);
     if (ip->xDAC_itcmd_var0 != 0) {
-        itMatadogasAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+        itMatadogasAttributes* attrs =
+            ip->xC4_article_data->x4_specialAttributes;
         if (--ip->xDD4_itemVar.matadogas.x60 == 0) {
             ip->xDD4_itemVar.matadogas.x60 = attrs->x4;
             if (HSD_Randi(2) == 0) {

@@ -117,7 +117,7 @@ void fn_8027DAC8(Item_GObj* igp)
 
     it_8026B390(igp);
     itResetVelocity(ip);
-    itBombhei_UpdateStatePreserveBone(igp, 0,ITEM_ANIM_UPDATE);
+    itBombhei_UpdateStatePreserveBone(igp, 0, ITEM_ANIM_UPDATE);
 }
 
 bool itBombhei_UnkMotion0_Anim(Item_GObj* igp)
@@ -507,7 +507,8 @@ void fn_8028007C(Item_GObj* arg0)
     ip = GET_ITEM(arg0);
     attr = GET_ATTRS(ip);
     if (ABS(ip->xDD4_itemVar.bombhei.xE0C.x) > attr->x20.x ||
-        ABS(ip->xDD4_itemVar.bombhei.xE0C.y) > attr->x20.y) {
+        ABS(ip->xDD4_itemVar.bombhei.xE0C.y) > attr->x20.y)
+    {
         it_80280DC0(arg0);
         return;
     }
@@ -519,8 +520,7 @@ void fn_8028007C(Item_GObj* arg0)
         ip->xD44_lifeTimer = it_804D6D28->x30_lifetime;
         ip->xDD4_itemVar.bombhei.xDF0 = attr->x8;
         ip->xDD4_itemVar.bombhei.xDE0 = 1;
-        itBombhei_UpdateStatePreserveBoneFake(arg0, 5,
-                                                ITEM_ANIM_UPDATE);
+        itBombhei_UpdateStatePreserveBoneFake(arg0, 5, ITEM_ANIM_UPDATE);
     } else {
         itBombhei_UpdateStatePreserveBoneFake(arg0, 5, ITEM_UNK_0x1);
     }
@@ -586,7 +586,6 @@ bool itBombhei_UnkMotion10_Anim(Item_GObj* gobj)
     }
     return false;
 }
-
 
 void itBombhei_UnkMotion10_Phys(Item_GObj* gobj)
 {
