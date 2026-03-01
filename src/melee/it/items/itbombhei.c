@@ -351,7 +351,21 @@ bool itBombhei_UnkMotion11_Coll(Item_GObj* gobj)
     return false;
 }
 
-/// #it_3F14_Logic6_EnteredAir
+void it_3F14_Logic6_EnteredAir(Item_GObj* arg0)
+{
+    HSD_JObj* temp_r31;
+    f32 temp_f30;
+    f32 temp_f31;
+    DynamicBoneTable* new_var;
+    PAD_STACK(0x18);
+
+    temp_r31 = (new_var = GET_ITEM(arg0)->xBBC_dynamicBoneTable)->bones[0xB];
+    temp_f31 = HSD_JObjGetTranslationY(temp_r31);
+    temp_f30 = HSD_JObjGetRotationX(temp_r31);
+    Item_80268E5C((HSD_GObj*) arg0, 0xC, ITEM_ANIM_UPDATE);
+    HSD_JObjSetTranslateY(temp_r31, temp_f31);
+    HSD_JObjSetRotationX(temp_r31, temp_f30);
+}
 
 bool itBombhei_UnkMotion12_Anim(Item_GObj* gobj)
 {
