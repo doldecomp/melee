@@ -53,3 +53,19 @@ path/to/file.cpp: [file attributes]
 - `rename:` Writes this section under a different name when generating the split object. Used for `.ctors$10`, etc.
 - `common` Only valid for `.bss`. See [Common BSS](common_bss.md).
 - `skip` Skips this data when writing the object file. Used for ignoring data that's linker-generated.
+
+#### `Sections:` header (REL modules only)
+
+REL modules can specify fixed virtual addresses for sections using a `Sections:` block at the top of the file. This is useful for projects where REL modules load at known addresses, allowing symbols and splits to use absolute addresses instead of section-relative ones.
+
+```yaml
+Sections:
+    .text       type:code vaddr:0x805A1234
+    .data       type:data vaddr:0x805B0000
+
+path/to/file.cpp:
+    .text       start:0x805A1234 end:0x805A2000
+```
+
+- `type:` The section type. `code` or `data`.
+- `vaddr:` The fixed virtual address of the section. When set, split and symbol addresses are written as absolute addresses.

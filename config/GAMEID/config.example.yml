@@ -92,6 +92,10 @@ fill_gaps: true
 # Individual symbols can be excluded using `noexport` in the symbols file.
 export_all: true
 
+# (optional) By default, local symbols referenced by other translation units
+# are promoted to global scope. Set to false to disable this behavior.
+globalize_symbols: true
+
 # (optional) Custom template for `ldscript.lcf`. Avoid unless necessary.
 # See https://github.com/encounter/decomp-toolkit/blob/main/assets/ldscript.lcf
 ldscript_template: config/GAMEID/module/ldscript.tpl
@@ -106,6 +110,13 @@ ldscript_template: config/GAMEID/module/ldscript.tpl
 # Alternatively, you can set extab_padding on any affected objects in
 # configure.py, in order to exactly match the original DOL.
 clean_extab: false
+
+# (optional) Skip control flow analysis for specific address ranges.
+# Useful for problematic code regions where analysis gets stuck.
+# Ensure no `function` symbols exist in symbols.txt for the affected range.
+skip_cfa_ranges:
+- start: .text:0x80001234
+  end: .text:0x80002000
 
 # (optional) Configuration for modules.
 modules:
@@ -155,6 +166,10 @@ extract:
   # `SomeSymbol!.section:0x80001234`
   symbol: SomeSymbol
 
+  # (optional) Rename the symbol when extracting.
+  # Useful for symbols with generated suffixes, e.g. `test$1234` -> `test`.
+  rename: SomeSymbol
+
   # (optional) The path to extract raw binary data to.
   # Path is relative to `build/GAMEID/bin`.
   binary: Lib/SomeSymbol.bin
@@ -163,6 +178,20 @@ extract:
   # In a C/C++ file, the symbol can be included with `#include "Lib/SomeSymbol.inc"`.
   # Path is relative to `build/GAMEID/include`.
   header: Lib/SomeSymbol.inc
+
+  # (optional) Controls the format of the extracted header.
+  # "symbol" (default) - Emits a C array named after the symbol.
+  # "raw" - Emits a raw byte array without symbol naming.
+  # "none" - Do not generate a header.
+  header_type: symbol
+
+  # (optional) The path to extract relocation info as JSON.
+  # Path is relative to `build/GAMEID/bin`.
+  relocations: Lib/SomeSymbol_relocs.json
+
+  # (optional) Passthrough fields for external asset processing tools.
+  custom_type: texture
+  custom_data: { format: RGBA8 }
 
 # (optional) Block relocations from or to specific addresses.
 # For modules, this goes in the module's configuration above.

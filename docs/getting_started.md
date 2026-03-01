@@ -6,7 +6,11 @@ See [Dependencies](dependencies.md) first.
 
 2. Rename `orig/GAMEID` to the game's ID. (For example, `GLZE01` for _The Legend of Zelda: The Wind Waker_.)
 
-3. Extract your game to `orig/[GAMEID]`. In Dolphin, use "Extract Entire Disc" for GameCube games, or use "Data Partition" -> "Extract Entire Partition" for Wii games.
+3. Place your game files in `orig/[GAMEID]`. There are two options:
+
+   - **Disc image (recommended):** Place the disc image (ISO, GCM, RVZ, WBFS, CISO, GCZ, NFS, TGC, or WAD) directly in `orig/[GAMEID]`. When `object_base` is set in `config.yml`, decomp-toolkit will automatically read files from the disc image. Objects will be extracted to the filesystem on first build, so the disc image can be deleted afterward to save space.
+
+   - **Extracted files:** In Dolphin, use "Extract Entire Disc" for GameCube games, or use "Data Partition" -> "Extract Entire Partition" for Wii games.
 
 4. Rename `config/GAMEID` to the game's ID and modify `config/[GAMEID]/config.yml` appropriately, using [`config.example.yml`](/config/GAMEID/config.example.yml) as a reference. If the game doesn't use RELs, the `modules` list in `config.yml` can be removed.
 
