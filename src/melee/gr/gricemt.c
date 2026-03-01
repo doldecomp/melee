@@ -982,19 +982,19 @@ void fn_801F91A4(void) {}
 HSD_GObj* fn_801F91A8(HSD_GObj* gobj)
 {
     Ground* gp;
-    s16 xE0_val;
     s32 index;
     s32 result;
+    s16* xAC;
 
     gp = gobj->user_data;
-    xE0_val = gp->gv.icemt.xE0;
-    index = grIm_804D69F4->xAC[xE0_val];
+    xAC = grIm_804D69F4->xAC;
+    index = xAC[gp->gv.icemt.xE0];
     result = index;
     if (result == -1) {
         return (HSD_GObj*) result;
     }
     result = grIm_803E4068[index].id;
-    gp->gv.icemt.xE0 = xE0_val + 1;
+    gp->gv.icemt.xE0++;
     return (HSD_GObj*) result;
 }
 
