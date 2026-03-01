@@ -39,6 +39,8 @@
 #include <dolphin/mtx.h>
 #include <MetroTRK/intrinsics.h>
 
+/* 156F6C */ static void fn_80156F6C(HSD_GObj* gobj);
+
 static inline float my_sqrtf(float x)
 {
     static const double _half = .5;

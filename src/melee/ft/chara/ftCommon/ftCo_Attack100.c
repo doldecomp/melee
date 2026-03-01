@@ -71,7 +71,11 @@
 #include <melee/pl/plbonuslib.h>
 #include <melee/pl/plstale.h>
 
+/* 0D769C */ static FtMotionId fn_800D769C(Fighter* ft, FtMotionId msid);
+/* 0D84D4 */ static void fn_800D84D4(Fighter_GObj*, int);
 /* 0D8BFC */ static void fn_800D8BFC(Fighter_GObj* arg0);
+/* 0D949C */ static void fn_800D949C(void);
+/* 0D9C64 */ static void fn_800D9C64(Fighter_GObj* gobj);
 /* 0D9CE8 */ static void fn_800D9CE8(Fighter_GObj* arg0);
 /* 0DA054 */ void fn_800DA054(Fighter_GObj* gobj);
 /* 0DAADC */ static void fn_800DAADC(Fighter_GObj* arg0, Fighter_GObj* arg1);
@@ -79,8 +83,6 @@
 /* 0DAEEC */ void fn_800DAEEC(Fighter_GObj* gobj);
 /* 0DB230 */ static void fn_800DB230(Fighter_GObj* gobj);
 /* 0DBBF8 */ void fn_800DBBF8(Fighter_GObj* gobj);
-/* 0D949C */ static void fn_800D949C(void);
-/* 0D9C64 */ static void fn_800D9C64(Fighter_GObj* gobj);
 
 extern f32 ftCo_804D90D0; // 0.0f
 extern f32 ftCo_804D90D4; // Decrement value
@@ -680,10 +682,6 @@ void ftCo_ItemScopeAirFire_Coll(Fighter_GObj* gobj)
 {
     ft_80082C74(gobj, fn_800D8268);
 }
-
-/// #fn_800D84D4
-
-static void fn_800D84D4(Fighter_GObj*, int);
 
 void fn_800D86B8(Fighter_GObj* gobj)
 {
