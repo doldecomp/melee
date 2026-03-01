@@ -8,6 +8,7 @@
 #include <platform.h>
 
 #include "baselib/forward.h"
+#include "it/forward.h"
 
 #include "baselib/gobj.h"
 #include "baselib/jobj.h"
@@ -113,7 +114,7 @@ void fn_8027DAC8(Item_GObj* igp)
 
     it_8026B390(igp);
     itResetVelocity(ip);
-    itBombhei_UpdateStatePreserveBone(igp, 0);
+    itBombhei_UpdateStatePreserveBone_flags(igp, 0,ITEM_UNK_0x1);
 }
 
 bool itBombhei_UnkMotion0_Anim(Item_GObj* igp)
@@ -150,7 +151,7 @@ void it_8027DE18(Item_GObj* igp)
         ip->xDD4_itemVar.bombhei.xDD4 = (s32) ap->x14;
     }
 
-    itBombhei_UpdateStatePreserveBone(igp, 1);
+    itBombhei_UpdateStatePreserveBone_flags(igp, 1, ITEM_UNK_0x1);
 }
 
 bool itBombhei_UnkMotion1_Anim(Item_GObj* gobj)
@@ -189,7 +190,7 @@ void itBombhei_Logic6_PickedUp(Item_GObj* igp)
 
     if (ip->xDD4_itemVar.bombhei.xDE0 == 0) {
         ip->x5D0_animFrameSpeed = ap->x0;
-        itBombhei_UpdateStatePreserveBone(igp, 7);
+        itBombhei_UpdateStatePreserveBone_flags(igp, 7, ITEM_UNK_0x1);
     } else {
         ip->x5D0_animFrameSpeed = 1.0f;
         itBombhei_UpdateStatePreserveBone2_flags(igp, 8, ITEM_UNK_0x1);
@@ -227,7 +228,7 @@ void it_8027E978(Item_GObj* arg0)
                                      (f64) ip->xDD4_itemVar.bombhei.xDD4);
     ip->xDD4_itemVar.bombhei.xDE4 = 1;
 
-    itBombhei_UpdateStatePreserveBone(arg0, 3);
+    itBombhei_UpdateStatePreserveBone_flags(arg0, 3, ITEM_UNK_0x1);
 }
 
 /// #itBombhei_UnkMotion3_Anim

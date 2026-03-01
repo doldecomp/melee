@@ -34,8 +34,8 @@ static inline HSD_JObj* itGetDynamicBone(Item_GObj* igp, u32 bone_id)
     return GET_ITEM(igp)->xBBC_dynamicBoneTable->bones[bone_id];
 }
 
-static inline void itBombhei_UpdateStatePreserveBone(Item_GObj* igp,
-                                                     int anim_id)
+static inline void itBombhei_UpdateStatePreserveBone_flags(Item_GObj* igp,
+                                                     int anim_id, int flags)
 {
     Item* ip = GET_ITEM(igp);
     HSD_JObj* jobj = ip->xBBC_dynamicBoneTable->bones[0xB];
@@ -44,7 +44,7 @@ static inline void itBombhei_UpdateStatePreserveBone(Item_GObj* igp,
 
     y = HSD_JObjGetTranslationY(jobj);
     x = HSD_JObjGetRotationX(jobj);
-    Item_80268E5C((HSD_GObj*) igp, anim_id, ITEM_ANIM_UPDATE);
+    Item_80268E5C((HSD_GObj*) igp, anim_id, flags);
     HSD_JObjSetTranslateY(jobj, y);
     HSD_JObjSetRotationX(jobj, x);
 }
