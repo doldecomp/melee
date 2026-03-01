@@ -60,7 +60,6 @@ void it_802D2668(Item_GObj* gobj)
     ip->exited_hitlag = efLib_ResumeAll;
 }
 
-
 bool itHouou_UnkMotion2_Anim(Item_GObj* gobj)
 {
     HSD_JObj* bone;

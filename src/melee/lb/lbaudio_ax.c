@@ -1037,10 +1037,10 @@ bool fn_800259EC(HSD_GObj* gobj)
 
     if (1.0f == ud->x3C) {
         ud->x2C.pan = fn_800250A0(ud->current_frame, ud->end_frame,
-                                   ud->pan_left, ud->pan_right);
+                                  ud->pan_left, ud->pan_right);
     } else {
         ud->x2C.pan = 0x7F - fn_800250A0(ud->current_frame, ud->end_frame,
-                                          ud->pan_left, ud->pan_right);
+                                         ud->pan_left, ud->pan_right);
     }
 
 end:
@@ -1078,10 +1078,10 @@ bool fn_80025A98(HSD_GObj* gobj)
 
     if (1.0f == ud->x3C) {
         ud->x2C.pan = fn_800250A0(ud->current_frame, ud->end_frame,
-                                   ud->pan_left, ud->pan_right);
+                                  ud->pan_left, ud->pan_right);
     } else {
         ud->x2C.pan = 0x7F - fn_800250A0(ud->current_frame, ud->end_frame,
-                                          ud->pan_left, ud->pan_right);
+                                         ud->pan_left, ud->pan_right);
     }
 
 end:

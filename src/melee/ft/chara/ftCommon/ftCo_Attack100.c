@@ -697,8 +697,8 @@ void fn_800D86B8(Fighter_GObj* gobj)
 void fn_800D86E0(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    Fighter_ChangeMotionState(gobj, fn_800D769C(fp, ftCo_MS_ItemScopeEnd),
-                              0, 0.0F, 1.0F, 0.0F, NULL);
+    Fighter_ChangeMotionState(gobj, fn_800D769C(fp, ftCo_MS_ItemScopeEnd), 0,
+                              0.0F, 1.0F, 0.0F, NULL);
     fp->take_dmg_cb = fn_800D8378;
 }
 
@@ -999,8 +999,8 @@ void fn_800DA4FC(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->gr_vel = 0.0F;
-    Fighter_ChangeMotionState(gobj, ftCo_MS_CatchAttack, 0, 0.0F, 1.0F,
-                              0.0F, NULL);
+    Fighter_ChangeMotionState(gobj, ftCo_MS_CatchAttack, 0, 0.0F, 1.0F, 0.0F,
+                              NULL);
     fp->accessory1_cb = fn_800DA678;
     fp->take_dmg_cb = fn_800DA668;
     ftCommon_8007E2F4(fp, 0x1FF);

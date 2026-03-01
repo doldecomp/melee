@@ -3291,8 +3291,7 @@ HSD_JObj* ftKb_Init_UnkMotionStates6(Fighter_GObj* gobj)
     return (HSD_JObj*) gobj;
 }
 
-void ftKb_SpecialN_800EF040(Fighter_GObj* gobj, int arg1,
-                            KirbyHatStruct* hat)
+void ftKb_SpecialN_800EF040(Fighter_GObj* gobj, int arg1, KirbyHatStruct* hat)
 {
     u32 mask = (u32) hat->hat_dynamics[1];
     if (mask != 0) {

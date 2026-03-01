@@ -44,8 +44,7 @@ void it_802D758C(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itOldkuriAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
-    ip->xDD4_itemVar.oldkuri.xDF4 =
-        ip->facing_dir * ((f32*) attr->x0)[1];
+    ip->xDD4_itemVar.oldkuri.xDF4 = ip->facing_dir * ((f32*) attr->x0)[1];
     ip->x40_vel.x = ip->xDD4_itemVar.oldkuri.xDF4;
     ip->x40_vel.z = 0.0f;
     ip->x40_vel.y = 0.0f;
@@ -64,8 +63,7 @@ void it_802D775C(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itOldkuriAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
-    ip->xDD4_itemVar.oldkuri.xDF4 =
-        ip->facing_dir * ((f32*) attr->x0)[1];
+    ip->xDD4_itemVar.oldkuri.xDF4 = ip->facing_dir * ((f32*) attr->x0)[1];
     ip->x40_vel.x = ip->xDD4_itemVar.oldkuri.xDF4;
     ip->x40_vel.z = 0.0f;
     ip->x40_vel.y = 0.0f;
@@ -99,7 +97,7 @@ bool itOldkuri_UnkMotion3_Coll(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itOldkuriAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
-    ip->xDD4_itemVar.oldkuri.xDF8 = (s32)attr->xC;
+    ip->xDD4_itemVar.oldkuri.xDF8 = (s32) attr->xC;
     it_8026E414(gobj, it_802D747C);
     return it_8027C794(gobj);
 }
@@ -125,7 +123,7 @@ bool itOldkuri_UnkMotion4_Coll(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itOldkuriAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
-    ip->xDD4_itemVar.oldkuri.xDF8 = (s32)attr->xC;
+    ip->xDD4_itemVar.oldkuri.xDF8 = (s32) attr->xC;
     it_8026E414(gobj, it_802D747C);
     return it_8027C794(gobj);
 }

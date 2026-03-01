@@ -1859,8 +1859,7 @@ void un_80308250(u8* arg0, s32 arg1, s32 arg2)
 
     if (arg2 == 0) {
         *(HSD_Archive**) (arg0 + 0x14) = lbArchive_LoadSymbols(
-            *(char**) (arg0 + 0x8), &sym,
-            *(char**) (arg0 + 0xC), 0);
+            *(char**) (arg0 + 0x8), &sym, *(char**) (arg0 + 0xC), 0);
     }
 }
 

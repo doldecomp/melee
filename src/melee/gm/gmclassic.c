@@ -356,17 +356,20 @@ void gmClassic_801B3DD8(MinorScene* scene)
     lbDvd_800174BC();
 }
 
-void gmClassic_801B3E44(MinorScene* scene) {
+void gmClassic_801B3E44(MinorScene* scene)
+{
     CSSData* temp_r30 = gm_801A4284(scene);
     gmm_x0_528_t* temp_r29 = gmMainLib_8015CDC8();
     UnkAllstarData* temp_r31 = gm_8017EB30();
     gm_803DDEC8Struct* r4 = &gmClassic_803DDEC8;
     if (temp_r30->pending_scene_change == 2) {
-        //This only happens when, instead of pressing start to begin the game, we press back to exit.
+        // This only happens when, instead of pressing start to begin the game,
+        // we press back to exit.
         gm_801A42F8(1);
         return;
     }
-    gm_801B0730(temp_r30, &temp_r29->c_kind, &temp_r29->stocks, &temp_r29->color, &temp_r29->x4, &temp_r29->cpu_level);
+    gm_801B0730(temp_r30, &temp_r29->c_kind, &temp_r29->stocks,
+                &temp_r29->color, &temp_r29->x4, &temp_r29->cpu_level);
     temp_r31->x0.ckind = temp_r29->c_kind;
     temp_r31->x0.color = temp_r29->color;
     temp_r31->x0.cpu_level = temp_r29->cpu_level;

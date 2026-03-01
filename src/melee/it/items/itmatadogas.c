@@ -52,7 +52,8 @@ void it_802CB2B0(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     PAD_STACK(8);
     if (ip->xDAC_itcmd_var0 != 0) {
-        itMatadogasAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+        itMatadogasAttributes* attrs =
+            ip->xC4_article_data->x4_specialAttributes;
         s32 timer = ip->xDD4_itemVar.matadogas.x60 - 1;
         ip->xDD4_itemVar.matadogas.x60 = timer;
         if (timer == 0) {

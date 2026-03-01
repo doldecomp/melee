@@ -864,7 +864,8 @@ void gm_801628C4(u32 arg0, u32 arg1)
     *ptr = ((*ptr + product) > (u32) -1) ? (u32) -1 : (*ptr + product);
 
     ptr3 = gmMainLib_8015ED98();
-    ptr3->x4 = ((ptr3->x4 + product) > (u32) -1) ? (u32) -1 : (ptr3->x4 + product);
+    ptr3->x4 =
+        ((ptr3->x4 + product) > (u32) -1) ? (u32) -1 : (ptr3->x4 + product);
 }
 
 long gm_80162968(u32 seconds)

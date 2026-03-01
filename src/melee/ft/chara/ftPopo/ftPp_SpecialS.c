@@ -845,8 +845,7 @@ void ftPp_SpecialHiStart_0_Phys(Fighter_GObj* gobj)
             if (nn_fp->motion_id >= ftPp_MS_SpecialHi_0 &&
                 nn_fp->motion_id <= ftPp_MS_SpecialHi_5)
             {
-                lb_8000B1CC(nn_fp->parts[FtPart_L4thNb].joint, NULL,
-                            &sp);
+                lb_8000B1CC(nn_fp->parts[FtPart_L4thNb].joint, NULL, &sp);
             }
         }
     }
@@ -937,8 +936,7 @@ void ftPp_SpecialHiThrow_0_Phys(Fighter_GObj* gobj)
             if (nn_fp->motion_id >= ftPp_MS_SpecialHi_0 &&
                 nn_fp->motion_id <= ftPp_MS_SpecialHi_5)
             {
-                lb_8000B1CC(nn_fp->parts[FtPart_L4thNb].joint, NULL,
-                            &sp);
+                lb_8000B1CC(nn_fp->parts[FtPart_L4thNb].joint, NULL, &sp);
             }
         }
     }
@@ -1196,8 +1194,7 @@ void ftPp_SpecialHiThrow2_Phys(Fighter_GObj* gobj)
             if (nn_fp->motion_id >= ftPp_MS_SpecialHi_0 &&
                 nn_fp->motion_id <= ftPp_MS_SpecialHi_5)
             {
-                lb_8000B1CC(nn_fp->parts[FtPart_L4thNb].joint, NULL,
-                            &sp);
+                lb_8000B1CC(nn_fp->parts[FtPart_L4thNb].joint, NULL, &sp);
             }
         }
     }

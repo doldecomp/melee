@@ -1,9 +1,7 @@
 #include "mnnamenew.h"
 
-#include "mn/mnmain.h"
-
 #include "lb/lblanguage.h"
-
+#include "mn/mnmain.h"
 #include "sysdolphin/baselib/memory.h"
 #include "sysdolphin/baselib/sislib.h"
 

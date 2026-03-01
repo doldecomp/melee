@@ -10,7 +10,6 @@
 #include "it/itCommonItems.h"
 #include "it/item.h"
 #include "it/items/itwhitebea.h"
-
 #include "mp/mpcoll.h"
 
 /// #it_802E2470

@@ -3,12 +3,11 @@
 #include "gm/gm_1A3F.h"
 #include "gm/gm_1A45.h"
 #include "if/textlib.h"
+#include "lb/lblanguage.h"
 #include "ty/toy.h"
 #include "ty/tyfigupon.h"
 #include "ty/tylist.h"
 #include "ty/types.h"
-
-#include "lb/lblanguage.h"
 
 #include <baselib/random.h>
 

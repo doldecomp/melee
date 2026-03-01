@@ -601,8 +601,7 @@ s32 grCorneria_801E2598(u32 arg0, u32 arg1)
 
 void grCorneria_801E2738(HSD_GObj* gobj, void* ptr, u32 idx1, u32 idx2)
 {
-    grCorneria_801E25C4(gobj, ptr,
-                        grCn_803E1D38.entries[idx1][idx2].data[0],
+    grCorneria_801E25C4(gobj, ptr, grCn_803E1D38.entries[idx1][idx2].data[0],
                         grCn_803E1D38.entries[idx1][idx2].data[1],
                         grCn_803E1D38.entries[idx1][idx2].data[2]);
 }
