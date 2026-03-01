@@ -64,6 +64,22 @@ static inline void itBombhei_UpdateStatePreserveBone2(Item_GObj* igp,
     HSD_JObjSetRotationX(jobj, x);
 }
 
+static inline void itBombhei_UpdateStatePreserveBone2_flags(Item_GObj* igp,
+                                                            int anim_id,
+                                                            int flags)
+{
+    Item* ip = GET_ITEM(igp);
+    HSD_JObj* jobj = ip->xBBC_dynamicBoneTable->bones[0xB];
+    f32 x;
+    f32 y;
+
+    y = HSD_JObjGetTranslationY(jobj);
+    x = HSD_JObjGetRotationX(jobj);
+    Item_80268E5C((HSD_GObj*) igp, anim_id, flags);
+    HSD_JObjSetTranslateY(jobj, y);
+    HSD_JObjSetRotationX(jobj, x);
+}
+
 static inline void itBombhei_UpdateStatePreserveBone3(Item_GObj* igp,
                                                       int anim_id)
 {

@@ -79,7 +79,7 @@ typedef struct itBombHei_ItemVars {
     /* +14 */ float xDE8;
     /* +18 */ float xDEC;
     /* +1C */ float xDF0;
-    /* +20 */ s32 xDF4;
+    /* +20 */ float xDF4;
     /* +24 */ float xDF8;
     /* +28 */ float xDFC;
     /* +2C */ s32 _E00;

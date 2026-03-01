@@ -265,7 +265,18 @@ bool itBombhei_UnkMotion2_Coll(Item_GObj* gobj)
     return false;
 }
 
-/// #it_8027F42C
+void it_8027F42C(Item_GObj* arg0)
+{
+    HSD_JObj* temp_r30;
+    Item* temp_r31;
+    PAD_STACK(8);
+
+    temp_r31 = arg0->user_data;
+    it_802762B0(temp_r31);
+    itBombhei_UpdateStatePreserveBone2_flags(arg0, 4, 0x12);
+    temp_r31->x40_vel.x = 0.0f;
+    temp_r31->xDD4_itemVar.bombhei.xDF4 = -temp_r31->facing_dir;
+}
 
 /// #itBombhei_UnkMotion4_Anim
 
