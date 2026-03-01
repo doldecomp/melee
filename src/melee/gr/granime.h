@@ -23,6 +23,6 @@
 /* 1C8318 */ HSD_AObj* grAnime_801C8318(HSD_GObj*, int, u32);
 /* 1C83D0 */ bool grAnime_801C83D0(HSD_GObj*, bool, enum_t);
 /* 1C84A4 */ bool grAnime_801C84A4(HSD_GObj*, s32, s32);
+/* 1C86D4 */ void grAnime_801C86D4(s32, HSD_GObj*, s32);
 /* 1C8780 */ void grAnime_801C8780(HSD_GObj*, u32, u32, f32, f32);
-
 #endif
