@@ -214,7 +214,21 @@ void itBombhei_UnkMotion8_Phys(Item_GObj* gobj) {}
 
 /// #it_3F14_Logic6_Dropped
 
-/// #it_8027E978
+void it_8027E978(Item_GObj* arg0)
+{
+    Item* ip;
+    itBombHeiAttributes* attrs;
+
+    ip = GET_ITEM(arg0);
+    attrs = GET_ATTRS(ip);
+    it_802762B0(ip);
+    ip->xDD4_itemVar.bombhei.xDD4 = (s32) attrs->x4;
+    ip->xDD4_itemVar.bombhei.xE04 = ((M_PI / 2 * (f64) ip->facing_dir) /
+                                     (f64) ip->xDD4_itemVar.bombhei.xDD4);
+    ip->xDD4_itemVar.bombhei.xDE4 = 1;
+
+    itBombhei_UpdateStatePreserveBone(arg0, 3);
+}
 
 /// #itBombhei_UnkMotion3_Anim
 
