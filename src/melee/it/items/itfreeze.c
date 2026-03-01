@@ -15,7 +15,7 @@ void it_8028EC98(Item_GObj* gobj, f32 vel)
 {
     Item* ip = GET_ITEM(gobj);
     ip->xDD4_itemVar.freeze.x10 = vel;
-    it_80275158(gobj, (f32) it_804D6D28->x30);
+    it_80275158(gobj, (f32) it_804D6D28->x30_lifetime);
 }
 
 void it_8028ECE0(Item_GObj* gobj)

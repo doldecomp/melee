@@ -135,7 +135,7 @@
 /* 4D7EC0 */ float const cm_804D7EC0 = 4.0f;
 /* 4D7EC8 */ f64 const cm_804D7EC8 = M_PI / 8;
 /* 4D7ED0 */ f64 const cm_804D7ED0 = M_PI / 16;
-/* 4D7ED8 */ f64 const cm_804D7ED8 = M_PI * 2;
+/* 4D7ED8 */ f64 const cm_804D7ED8 = M_TAU;
 /* 4D7EE0 */ f64 const cm_804D7EE0 = M_PI;
 /* 4D7EE8 */ f64 const cm_804D7EE8 = 0.0001f;
 /* 4D7EF0 */ double const cm_804D7EF0 = 0.0f;

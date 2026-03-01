@@ -12,7 +12,7 @@
 /* 29D968 */ void it_8029D968(Item_GObj*);
 /* 29D9A4 */ void it_8029D9A4(HSD_GObj*, enum_t, Item_StateChangeFlags);
 /* 29DB5C */ void it_8029DB5C(HSD_GObj*);
-/* 29DD58 */ HSD_GObj* it_8029DD58(Item_GObj* fighter_gobj, Vec3*, u8, int,
+/* 29DD58 */ HSD_GObj* it_8029DD58(Item_GObj* fighter_gobj, Vec3*, u32, int,
                                    f32);
 /* 29DEB0 */ void it_8029DEB0(HSD_GObj*);
 /* 29E074 */ bool itLinkbomb_UnkMotion0_Anim(HSD_GObj*);

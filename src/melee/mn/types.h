@@ -89,6 +89,25 @@ struct PlayerInitData {
     /*0x20*/ float x20;
 };
 
+struct lbl_8046B668_t {
+    /* 0x00 */ s8 arr1[0x1C];
+    /* 0x1C */ s8 arr2[0x1C];
+};
+STATIC_ASSERT(sizeof(struct lbl_8046B668_t) == 0x38);
+
+typedef struct PerfLabelLine {
+    /* 0x00 */ struct PerfLabelLine* next;
+    /* 0x04 */ s32 unk_04;
+    /* 0x08 */ char text[0x80];
+} PerfLabelLine; /* size = 0x88 */
+STATIC_ASSERT(sizeof(PerfLabelLine) == 0x88);
+
+typedef struct lbl_8046B378_t {
+    /* 0x000 */ PerfLabelLine line0;
+    /* 0x088 */ PerfLabelLine line1;
+} lbl_8046B378_t; /* size = 0x110 */
+STATIC_ASSERT(sizeof(lbl_8046B378_t) == 0x110);
+
 struct StartMeleeRules {
     u32 x0_0 : 3; // match mode? 1 = stock mode, 2 = coin mode?
     u32 x0_3 : 3;
@@ -173,7 +192,7 @@ struct StartMeleeRules {
         u8 x10_b0 : 1;
         u8 x10_b1 : 1;
     }* x54;
-    int x58;
+    struct lbl_8046B668_t* x58;
     u8 pad_x5C[0x60 - 0x5C];
 };
 

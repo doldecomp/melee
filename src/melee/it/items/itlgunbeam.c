@@ -38,10 +38,10 @@ void it_802993E0(Item_GObj* gobj, s32 flags)
     Vec3 pos;
     pos.x = pos.y = pos.z = 0.0f;
     while (item->xDD4_itemVar.lgunbeam.angle0 < -M_PI) {
-        item->xDD4_itemVar.lgunbeam.angle0 += 2 * M_PI;
+        item->xDD4_itemVar.lgunbeam.angle0 += M_TAU;
     }
     while (item->xDD4_itemVar.lgunbeam.angle0 > +M_PI) {
-        item->xDD4_itemVar.lgunbeam.angle0 -= 2 * M_PI;
+        item->xDD4_itemVar.lgunbeam.angle0 -= M_TAU;
     }
     if (flags & (1 << 0)) {
         pos.x += item->x378_itemColl.floor.normal.x;
@@ -74,10 +74,10 @@ void it_80299528(Item_GObj* gobj, s32 arg1)
                               ip->xDD4_itemVar.lgunbeam.velocity.y) -
                        angle1;
         while (angle2 > M_PI) {
-            angle2 -= 2 * M_PI;
+            angle2 -= M_TAU;
         }
         while (angle2 < -M_PI) {
-            angle2 += 2 * M_PI;
+            angle2 += M_TAU;
         }
         {
             float var_f1;
@@ -108,10 +108,10 @@ void it_80299528(Item_GObj* gobj, s32 arg1)
             ip->xDD4_itemVar.lgunbeam.angle0 -= var_f1;
         }
         while (ip->xDD4_itemVar.lgunbeam.angle0 < -M_PI) {
-            ip->xDD4_itemVar.lgunbeam.angle0 += 2 * M_PI;
+            ip->xDD4_itemVar.lgunbeam.angle0 += M_TAU;
         }
         while (ip->xDD4_itemVar.lgunbeam.angle0 > +M_PI) {
-            ip->xDD4_itemVar.lgunbeam.angle0 -= 2 * M_PI;
+            ip->xDD4_itemVar.lgunbeam.angle0 -= M_TAU;
         }
     }
 }
@@ -164,10 +164,10 @@ void it_802996D0(HSD_GObj* owner_gobj, Vec3* pos, u32 arg2, f32 facing_dir)
                 item->xDD4_itemVar.lgunbeam.angle0 = angle;
             }
             while (item->xDD4_itemVar.lgunbeam.angle0 < -M_PI) {
-                item->xDD4_itemVar.lgunbeam.angle0 += 2 * M_PI;
+                item->xDD4_itemVar.lgunbeam.angle0 += M_TAU;
             }
             while (item->xDD4_itemVar.lgunbeam.angle0 > M_PI) {
-                item->xDD4_itemVar.lgunbeam.angle0 -= 2 * M_PI;
+                item->xDD4_itemVar.lgunbeam.angle0 -= M_TAU;
             }
             item->xDD4_itemVar.lgunbeam.xE04 = 0.0f;
             item->xDCC_flag.b3 = false;
@@ -243,10 +243,10 @@ bool itLgunbeam_UnkMotion0_Coll(HSD_GObj* gobj)
     s32 flags = 0;
     Item* ip = GET_ITEM(gobj);
     while (ip->xDD4_itemVar.lgunbeam.angle0 < -M_PI) {
-        ip->xDD4_itemVar.lgunbeam.angle0 += 2 * M_PI;
+        ip->xDD4_itemVar.lgunbeam.angle0 += M_TAU;
     }
     while (ip->xDD4_itemVar.lgunbeam.angle0 > +M_PI) {
-        ip->xDD4_itemVar.lgunbeam.angle0 -= 2 * M_PI;
+        ip->xDD4_itemVar.lgunbeam.angle0 -= M_TAU;
     }
     {
         ip->x378_itemColl.ecb_source.up = 3.0f;
@@ -285,10 +285,10 @@ bool itLGunBeam_Logic39_Reflected(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     ip->xDD4_itemVar.lgunbeam.angle0 += M_PI;
     while (ip->xDD4_itemVar.lgunbeam.angle0 < -M_PI) {
-        ip->xDD4_itemVar.lgunbeam.angle0 += 2 * M_PI;
+        ip->xDD4_itemVar.lgunbeam.angle0 += M_TAU;
     }
     while (ip->xDD4_itemVar.lgunbeam.angle0 > +M_PI) {
-        ip->xDD4_itemVar.lgunbeam.angle0 -= 2 * M_PI;
+        ip->xDD4_itemVar.lgunbeam.angle0 -= M_TAU;
     }
     ip->facing_dir = -ip->facing_dir;
     ip->x40_vel.x = -ip->x40_vel.x;

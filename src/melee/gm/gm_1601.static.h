@@ -16,10 +16,21 @@
 #define NUM_UNLOCKABLE_STAGES 11
 
 struct lbl_8046B488_t {
-    /* 0x000 */ char pad_0[0x7];
+    /* 0x000 */ s8 x0;
+    /* 0x001 */ s8 x1;
+    /* 0x002 */ s8 x2;
+    /* 0x003 */ s8 x3;
+    /* 0x004 */ s8 x4;
+    /* 0x005 */ s8 x5;
+    /* 0x006 */ u8 x6;
     /* 0x007 */ u8 x7;
     /* 0x008 */ u8 x8;
-    /* 0x009 */ char pad_9[0x0F - 0x9];
+    /* 0x009 */ u8 x9;
+    /* 0x00A */ u8 xA;
+    /* 0x00B */ u8 xB;
+    /* 0x00C */ u8 xC;
+    /* 0x00D */ u8 xD;
+    /* 0x00E */ u8 xE;
     /* 0x00F */ u8 xF;
     /* 0x010:0 */ u8 unk_10_b0 : 1;
     /* 0x010:1 */ u8 unk_10_b1 : 1;
@@ -29,11 +40,19 @@ struct lbl_8046B488_t {
     /* 0x010:5 */ u8 unk_10_b5 : 1;
     /* 0x010:6 */ u8 unk_10_b6 : 1;
     /* 0x010:7 */ u8 unk_10_b7 : 1;
-    /* 0x011 */ char pad_11[0x20 - 0x11];
+    /* 0x011 */ char pad_11[0x14 - 0x11];
+    /* 0x014 */ f32 x14;
+    /* 0x018 */ f32 x18;
+    /* 0x01C */ f32 x1C;
     /* 0x020 */ s8 x20[0xA2 - 0x20];
     /* 0x0A2 */ s8 xA2[0x124 - 0xA2];
     /* 0x124 */ s8 x124[0x1A6 - 0x124];
-    /* 0x1A6 */ s8 x1A6[0x1B8 - 0x1A6];
+    /* 0x1A6 */ s8 x1A6[0x1AC - 0x1A6];
+    /* 0x1AC */ u8 x1AC;
+    /* 0x1AD */ u8 x1AD;
+    /* 0x1AE */ s8 x1AE[0x1B2 - 0x1AE];
+    /* 0x1B2 */ u8 x1B2;
+    /* 0x1AE */ s8 x1B3[0x1B8 - 0x1B3];
     /* 0x1B8 */ int (*x1B8)(void);
     /* 0x1BC */ char pad_1BC[0x1E0 - 0x1BC];
 }; /* size = 0x1E0 */
@@ -52,13 +71,6 @@ STATIC_ASSERT(sizeof(struct fn_80166CBC_arg0_t) == 0xA8);
 ///     /* +98 */ char pad_98[0x5A8 - 0x98];
 /// };
 /// STATIC_ASSERT(sizeof(struct ResultsData) == 0x5A8);
-
-struct lbl_8046B668_t {
-    /* 0x00 */ char pad_0[0x1C];
-    /* 0x1C */ s8 unk_1C;         /* inferred */
-    /* 0x1D */ char pad_1D[0x1B]; /* maybe part of unk_1C[0x1C]? */
-}; /* size = 0x38 */
-STATIC_ASSERT(sizeof(struct lbl_8046B668_t) == 0x38);
 
 struct lbl_80473700_t {
     /* +0 */ char pad_0[0x114];
@@ -255,10 +267,9 @@ static const s16 lbl_803B7A00[] = {
     0x0029, 0x002C, 0x0044, 0x0047, 0x003E, 0x004D, 0x004A, 0x0041, 0xFFFF,
     0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0x0000, 0x0000,
 };
-
+/* 46B378 */ static struct lbl_8046B378_t lbl_8046B378;
 /* 46B488 */ static struct lbl_8046B488_t lbl_8046B488;
 /* 46B668 */ static struct lbl_8046B668_t lbl_8046B668;
 /* 4D6598 */ static s8 lbl_804D6598;
 /* 4D659A */ static u16 lbl_804D659A;
-
 #endif

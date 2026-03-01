@@ -39,7 +39,7 @@ void ftSk_SpecialS_80110490(Fighter* fp)
     v2 = atan2f(fp->input.lstick.y, (fp->input.lstick.x * fp->facing_dir));
 
     if (v2 < 0) {
-        v2 += (float) M_PI * 2;
+        v2 += (float) M_TAU;
     }
 
     v3 = v2 * rad_to_deg;
@@ -530,7 +530,8 @@ bool ftSk_SpecialS_CheckInitChain(HSD_GObj* gobj)
                     Fighter* fp = GET_FIGHTER(gobj);
 
                     lb_8000B1CC(fp->parts[FtPart_L3rdNa].joint, NULL, &vec1);
-                    fp->fv.sk.x8 = itSeakChain_Spawn(gobj, &vec1, fp->facing_dir);
+                    fp->fv.sk.x8 =
+                        itSeakChain_Spawn(gobj, &vec1, fp->facing_dir);
                     fp->x1984_heldItemSpec = fp->fv.sk.x8;
 
                     if (fp->fv.sk.x8 != NULL) {
