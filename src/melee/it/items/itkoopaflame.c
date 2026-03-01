@@ -47,20 +47,20 @@ ItemStateTable ItemStateTable_KoopaFlame[] = {
 static inline void clamp_angle(float* f)
 {
     while (*f < -M_PI) {
-        *f += 2 * M_PI;
+        *f += M_TAU;
     }
     while (*f > M_PI) {
-        *f -= 2 * M_PI;
+        *f -= M_TAU;
     }
 }
 
 static inline void clamp_angle_2(float* f)
 {
     while (*f > M_PI) {
-        *f -= 2 * M_PI;
+        *f -= M_TAU;
     }
     while (*f < -M_PI) {
-        *f += 2 * M_PI;
+        *f += M_TAU;
     }
 }
 

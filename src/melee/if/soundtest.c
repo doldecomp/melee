@@ -750,7 +750,7 @@ bool un_80300C3C(bool update_scene)
 bool un_80300C80(int arg0)
 {
     if (arg0 == 1) {
-        int* ptr = gmMainLib_8015CCF0();
+        u32* ptr = gmMainLib_8015CCF0();
         *ptr = un_804D6DDC * 10;
         un_803124BC();
         gm_801A42F8(1);

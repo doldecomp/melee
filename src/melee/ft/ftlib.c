@@ -165,7 +165,7 @@ HSD_GObj* ftLib_8008627C(Vec3* pos, HSD_GObj* gobj)
 }
 
 /// get closest opposing fp, on given side (left/right)
-HSD_GObj* ftLib_80086368(Vec3* v, HSD_GObj* gobj, float facing_dir)
+Fighter_GObj* ftLib_80086368(Vec3* v, Fighter_GObj* gobj, float facing_dir)
 {
     Vec3 sp24;
     float dx, dy, diff;
@@ -295,7 +295,7 @@ HSD_JObj* ftLib_800865F0(HSD_GObj* gobj)
     return fp->parts[ftParts_GetBoneIndex(fp, 4)].joint;
 }
 
-void* ftLib_80086630(HSD_GObj* gobj, Fighter_Part part)
+HSD_JObj* ftLib_80086630(HSD_GObj* gobj, Fighter_Part part)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     return fp->parts[part].joint;

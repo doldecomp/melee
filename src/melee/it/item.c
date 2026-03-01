@@ -602,7 +602,7 @@ static void Item_80267AA8(HSD_GObj* gobj, SpawnItem* spawnItem)
     item_data->xCB8_outDamageDirection = 0.0f;
     item_data->xC68 = 0.0f;
     item_data->xCD0 = 0.0f;
-    it_80275158(gobj, it_804D6D28->x30);
+    it_80275158(gobj, it_804D6D28->x30_lifetime);
     item_data->xDD0_flag.b3 = false;
     item_data->spin_spd = item_data->xCC_item_attr->xC_spin_speed;
     item_data->xDC8_word.flags.x19 = item_data->xCC_item_attr->x1_3;
@@ -1020,7 +1020,7 @@ static HSD_GObj* Item_8026862C(SpawnItem* spawnItem)
 }
 
 /// Item spawn prefunction - spawn airborne
-HSD_GObj* Item_80268B18(SpawnItem* spawnItem)
+Item_GObj* Item_80268B18(SpawnItem* spawnItem)
 {
     spawnItem->x48_ground_or_air = GA_Air;
     spawnItem->x10 = 0;

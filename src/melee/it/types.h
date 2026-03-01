@@ -605,6 +605,7 @@ struct Item {
         itSamusBomb_ItemVars samusbomb;
         itSamusChargeshot_ItemVars samuschargeshot;
         itSamusGrapple_ItemVars samusgrapple;
+        itSamusMissile_ItemVars samusmissile;
         itSeakChain_ItemVars seakchain;
         itSeakNeedleThrown_ItemVars seakneedlethrown;
         itSonans_ItemVars sonans;
@@ -633,6 +634,7 @@ struct Item {
         itThunder_ItemVars thunder;
         itTools_ItemVars tools;
         itUnknown_ItemVars unknown;
+        itMatadogas_ItemVars matadogas;
         u8 _[0xFCC - 0xDD4];
     } xDD4_itemVar;
 };
@@ -693,7 +695,7 @@ struct ItemCommonData {
     u32 x24;
     u32 x28;
     u32 x2C;
-    u32 x30; // lifetime?
+    u32 x30_lifetime;
     u32 x34;
     u32 x38_float;
     s32 x3C_float;

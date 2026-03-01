@@ -35,7 +35,7 @@ static inline HSD_JObj* itGetDynamicBone(Item_GObj* igp, u32 bone_id)
 }
 
 static inline void itBombhei_UpdateStatePreserveBone(Item_GObj* igp,
-                                                     int anim_id)
+                                                     int anim_id, int flags)
 {
     Item* ip = GET_ITEM(igp);
     HSD_JObj* jobj = ip->xBBC_dynamicBoneTable->bones[0xB];
@@ -44,13 +44,13 @@ static inline void itBombhei_UpdateStatePreserveBone(Item_GObj* igp,
 
     y = HSD_JObjGetTranslationY(jobj);
     x = HSD_JObjGetRotationX(jobj);
-    Item_80268E5C((HSD_GObj*) igp, anim_id, ITEM_ANIM_UPDATE);
+    Item_80268E5C((HSD_GObj*) igp, anim_id, flags);
     HSD_JObjSetTranslateY(jobj, y);
     HSD_JObjSetRotationX(jobj, x);
 }
 
-static inline void itBombhei_UpdateStatePreserveBone2(Item_GObj* igp,
-                                                      int anim_id)
+static inline void
+itBombhei_UpdateStatePreserveBoneFake(Item_GObj* igp, int anim_id, int flags)
 {
     Item* ip = GET_ITEM(igp);
     HSD_JObj* jobj = ip->xBBC_dynamicBoneTable->bones[0xB];
@@ -59,37 +59,7 @@ static inline void itBombhei_UpdateStatePreserveBone2(Item_GObj* igp,
 
     y = HSD_JObjGetTranslationY(jobj);
     x = HSD_JObjGetRotationX(jobj);
-    Item_80268E5C((HSD_GObj*) igp, anim_id, ITEM_UNK_0x1);
-    HSD_JObjSetTranslateY(jobj, y);
-    HSD_JObjSetRotationX(jobj, x);
-}
-
-static inline void itBombhei_UpdateStatePreserveBone3(Item_GObj* igp,
-                                                      int anim_id)
-{
-    Item* ip = GET_ITEM(igp);
-    HSD_JObj* jobj = ip->xBBC_dynamicBoneTable->bones[0xB];
-    f32 x;
-    f32 y;
-
-    y = HSD_JObjGetTranslationY(jobj);
-    x = HSD_JObjGetRotationX(jobj);
-    Item_80268E5C((HSD_GObj*) igp, anim_id, ITEM_ANIM_UPDATE);
-    fake_HSD_JObjSetTranslateY(jobj, y);
-    fake_HSD_JObjSetRotationX(jobj, x);
-}
-
-static inline void itBombhei_UpdateStatePreserveBone4(Item_GObj* igp,
-                                                      int anim_id)
-{
-    Item* ip = GET_ITEM(igp);
-    HSD_JObj* jobj = ip->xBBC_dynamicBoneTable->bones[0xB];
-    f32 x;
-    f32 y;
-
-    y = HSD_JObjGetTranslationY(jobj);
-    x = HSD_JObjGetRotationX(jobj);
-    Item_80268E5C((HSD_GObj*) igp, anim_id, ITEM_UNK_0x1);
+    Item_80268E5C((HSD_GObj*) igp, anim_id, flags);
     fake_HSD_JObjSetTranslateY(jobj, y);
     fake_HSD_JObjSetRotationX(jobj, x);
 }
@@ -130,10 +100,10 @@ static inline void inline_UnkMotion8_Anim(Item_GObj* igp)
 
         if (ip->xDD4_itemVar.bombhei.xDE0 == 0) {
             ip->x5D0_animFrameSpeed = ap->x0;
-            itBombhei_UpdateStatePreserveBone3(igp, 7);
+            itBombhei_UpdateStatePreserveBoneFake(igp, 7, ITEM_ANIM_UPDATE);
         } else {
             ip->x5D0_animFrameSpeed = 1.0f;
-            itBombhei_UpdateStatePreserveBone4(igp, 8);
+            itBombhei_UpdateStatePreserveBoneFake(igp, 8, ITEM_UNK_0x1);
         }
     }
 }

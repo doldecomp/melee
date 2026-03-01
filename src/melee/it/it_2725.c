@@ -5784,7 +5784,7 @@ void it_802742F4(Item_GObj* item_gobj, HSD_GObj* gobj, Fighter_Part ftpart)
         it_80279BBC(item);
     }
     if (item->kind < It_Kind_L_Gun_Ray) { // If a common item
-        it_80275158(item_gobj, it_804D6D28->x30);
+        it_80275158(item_gobj, it_804D6D28->x30_lifetime);
     }
     it_80274F48(item_gobj,
                 item->xC4_article_data->x10_modelDesc->x8_bone_attach_id, gobj,

@@ -717,7 +717,7 @@ void fn_802FA8C0(HSD_GObj* arg)
     int k = 0;
     int i;
     signed char* a97c = gm_8016A97C();
-    signed char* a98c = gm_8016A98C();
+    signed char* a98c = (signed char*) gm_8016A98C();
     float x = -21.0f;
     float y = 11.0f;
     for (i = 0; i < 0x82; i++) {
@@ -762,7 +762,7 @@ void fn_802FAC34(HSD_GObj* arg)
         if (ifStock_804A1ACC.x0 == 0) {
             ifStock_804A1ACC.x0 = 1;
             q = gm_8016A97C();
-            w = gm_8016A98C();
+            w = (char*) gm_8016A98C();
             for (i = 0; i < 130; i++) {
                 ifStock_804A1ACC.x10C[i + 1] = NULL;
                 ifStock_804A1ACC.x1[i] = q[i];
