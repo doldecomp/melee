@@ -89,7 +89,16 @@ bool it_2725_Logic107_Absorbed(Item_GObj* gobj)
 
 /// #it_2725_Logic107_Reflected
 
-/// #it_2725_Logic107_HitShield
+bool it_2725_Logic107_HitShield(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    it_802725D4(gobj);
+    if (ip->xDD4_itemVar.pikachujoltair.xDD8 != 0) {
+        it_802B3544((Item_GObj*) ip->xDD4_itemVar.pikachujoltair.xDD8);
+        ip->xDD4_itemVar.pikachujoltair.xDD8 = 0;
+    }
+    return true;
+}
 
 /// #it_2725_Logic107_ShieldBounced
 
