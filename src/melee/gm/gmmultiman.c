@@ -581,8 +581,6 @@ void gm_801B6BE8(MinorScene* scene)
     if (temp_r30->x0_0) {
         temp_r30->x4 = *temp_r29;
         gm_80181B64(temp_r31->data.players[0].c_kind, 0x21, temp_r30->x4);
-        /*
-         */
     } else {
         temp_r30->x2 = *temp_r29;
         gm_80181AC8(temp_r31->data.players[0].c_kind, 0x21, temp_r30->x2);

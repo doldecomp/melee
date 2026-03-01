@@ -1111,7 +1111,7 @@ s32 gm_80181A34(void)
 
 extern u8 lbl_803D8D08[];
 
-void gm_80181AC8(int c_kind, int arg1, s16 arg2)
+void gm_80181AC8(int c_kind, int arg1, u16 arg2)
 {
     u8* base;
 
