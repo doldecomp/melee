@@ -418,11 +418,15 @@ bool un_803002FC(bool update_scene)
 
 s32 un_80300338(void)
 {
-    u8* src = &gmMainLib_8045A6C0[un_803FA128.x220 + 0x1868];
-    un_803FA128.x224 = src[0];
-    un_803FA128.x225 = src[1];
-    un_803FA128.x226 = src[2];
-    un_803FA128.x227 = src[3];
+    u8* src;
+    
+    src = gmMainLib_8045A6C0;
+    src = src + un_803FA128.x220;
+    
+    un_803FA128.x224 = src[0x1868];
+    un_803FA128.x225 = src[0x1869];
+    un_803FA128.x226 = src[0x186A];
+    un_803FA128.x227 = src[0x186B];
     return 0;
 }
 
