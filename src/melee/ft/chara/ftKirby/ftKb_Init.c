@@ -3826,20 +3826,17 @@ void ftKb_SpecialN_800F0F5C(Fighter_GObj* gobj)
     ftKb_SpecialN_800EFAF0_inline(gobj);
     ftCo_UnloadDynamicBones(fp);
 }
-
+#pragma push
+#pragma dont_inline on
 void ftKb_SpecialN_800F0FC0(Fighter_GObj* gobj)
 {
     u8 sp14[0x90];
-
-    Fighter* fp = fp = GET_FIGHTER(gobj);
+    Fighter* fp = fp = gobj->user_data;
     KirbyHatStruct* temp_r29;
-
-    PAD_STACK(4);
-
+    PAD_STACK(8);
     if (fp->fv.kb.hat.x14.data != NULL) {
         return;
     }
-
     temp_r29 = ft_80459B88.hats[FTKIND_CAPTAIN];
     ftKb_SpecialN_800EF040(gobj, 3, temp_r29);
     fp->fv.kb.hat.x14.data = HSD_ObjAlloc(&fighter_x2040_alloc_data);
@@ -3853,6 +3850,7 @@ void ftKb_SpecialN_800F0FC0(Fighter_GObj* gobj)
     ftAnim_80070200(fp, (ftData_x8_x8*) &temp_r29->desc.vis_table,
                     &fp->fv.kb.x44, &fp->fv.kb.hat.x14);
 }
+#pragma pop
 
 void ftKb_SpecialN_800F10A4(Fighter_GObj* gobj)
 {
@@ -3879,18 +3877,17 @@ void ftKb_SpecialN_800F12C8(Fighter_GObj* gobj)
 
 /// Load Dr. Mario's hat for Kirby copy ability.
 /// @note The self-assignment `fp = fp` is required for register allocation.
+#pragma push
+#pragma dont_inline on
 void ftKb_SpecialN_800F130C(Fighter_GObj* gobj)
 {
     u8 sp14[0x90];
-    Fighter* fp = fp = GET_FIGHTER(gobj);
+    Fighter* fp = fp = gobj->user_data;
     KirbyHatStruct* temp_r29;
-
-    PAD_STACK(4);
-
+    PAD_STACK(8);
     if (fp->fv.kb.hat.x14.data != NULL) {
         return;
     }
-
     temp_r29 = ft_80459B88.hats[FTKIND_DRMARIO];
     ftKb_SpecialN_800EF040(gobj, 0x16, temp_r29);
     fp->fv.kb.hat.x14.data = HSD_ObjAlloc(&fighter_x2040_alloc_data);
@@ -3904,6 +3901,7 @@ void ftKb_SpecialN_800F130C(Fighter_GObj* gobj)
     ftAnim_80070200(fp, (ftData_x8_x8*) &temp_r29->desc.vis_table,
                     &fp->fv.kb.x44, &fp->fv.kb.hat.x14);
 }
+#pragma pop
 
 void ftKb_SpecialN_800F13F0(Fighter_GObj* gobj)
 {
