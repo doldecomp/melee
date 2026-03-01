@@ -45,52 +45,6 @@ HSD_GObj* it_802C7774(float facing_dir, HSD_GObj* parent_gobj, Vec3* pos,
     return NULL;
 }
 
-void it_802C7A84(Item_GObj* item_gobj)
-{
-    int pad[1];
-    Item* item = GET_ITEM(item_gobj);
-
-    if (item != NULL) {
-        if (item->owner != NULL) {
-            ftGw_SpecialS_ItemJudgementSetFlag(item->owner);
-        }
-        Item_8026A8EC(item_gobj);
-    }
-}
-
-void itGameWatchJudge_Logic77_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
-{
-    it_8026B894(gobj, ref_gobj);
-}
-
-void it_802C7AD0(Item_GObj* gobj)
-{
-    it_8026B724(gobj);
-}
-
-void it_802C7AF0(Item_GObj* gobj)
-{
-    it_8026B73C(gobj);
-}
-
-void itGameWatchJudge_Logic77_Destroyed(Item_GObj* gobj)
-{
-    Item* ip = GET_ITEM(gobj);
-    if (ip->owner != NULL) {
-        ftGw_SpecialS_ItemJudgementSetFlag(ip->owner);
-    }
-}
-
-void it_2725_Logic77_PickedUp(Item_GObj* item_gobj)
-{
-    Item* it = GET_ITEM(item_gobj);
-    it->xDB0_itcmd_var1 = 0;
-    it->xDAC_itcmd_var0 = 0;
-    if (it->owner != NULL) {
-        Item_80268E5C(item_gobj, 0, ITEM_ANIM_UPDATE);
-    }
-}
-
 void it_802C78B8(Item_GObj* item_gobj)
 {
     HSD_GObj* owner;
@@ -109,4 +63,89 @@ void it_802C78B8(Item_GObj* item_gobj)
             HSD_JObjSetRotationY(child, 0.0f);
         }
     }
+}
+
+void itGameWatchJudge_Logic77_Destroyed(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->owner != NULL) {
+        ftGw_SpecialS_ItemJudgementSetFlag(ip->owner);
+    }
+}
+
+void it_802C7A84(Item_GObj* item_gobj)
+{
+    int pad[1];
+    Item* item = GET_ITEM(item_gobj);
+
+    if (item != NULL) {
+        if (item->owner != NULL) {
+            ftGw_SpecialS_ItemJudgementSetFlag(item->owner);
+        }
+        Item_8026A8EC(item_gobj);
+    }
+}
+
+void it_802C7AD0(Item_GObj* gobj)
+{
+    it_8026B724(gobj);
+}
+
+void it_802C7AF0(Item_GObj* gobj)
+{
+    it_8026B73C(gobj);
+}
+
+void it_2725_Logic77_PickedUp(Item_GObj* item_gobj)
+{
+    Item* it = GET_ITEM(item_gobj);
+    it->xDB0_itcmd_var1 = 0;
+    it->xDAC_itcmd_var0 = 0;
+    if (it->owner != NULL) {
+        Item_80268E5C(item_gobj, 0, ITEM_ANIM_UPDATE);
+    }
+}
+
+bool itGamewatchjudge_UnkMotion0_Anim(Item_GObj* item_gobj)
+{
+    HSD_GObj* owner;
+    HSD_JObj* jobj;
+    HSD_JObj* child;
+    f32 facing;
+    Item* new_var;
+    PAD_STACK(8);
+
+    owner = GET_ITEM(item_gobj)->owner;
+    jobj = GET_JOBJ(item_gobj);
+    if (owner != NULL) {
+        facing = ftLib_800865C0(owner);
+        child = itGetJObjGrandchild((Item_GObj*) jobj);
+        if (facing == 1.0f) {
+            HSD_JObjSetRotationY(child, M_PI);
+        } else {
+            HSD_JObjSetRotationY(child, 0.0f);
+        }
+    }
+    owner = (new_var = GET_ITEM(item_gobj))->owner;
+    {
+        bool remove;
+        if (owner != NULL) {
+            remove = ftGw_SpecialS_ItemCheckJudgementRemove(owner);
+        } else {
+            remove = true;
+        }
+        if (remove) {
+            owner = GET_ITEM(item_gobj)->owner;
+            if (owner != NULL) {
+                ftGw_SpecialS_ItemJudgementSetFlag(owner);
+            }
+            return true;
+        }
+    }
+    return false;
+}
+
+void itGameWatchJudge_Logic77_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
+{
+    it_8026B894(gobj, ref_gobj);
 }
