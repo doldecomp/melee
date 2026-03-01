@@ -100,7 +100,16 @@ bool it_2725_Logic107_HitShield(Item_GObj* gobj)
     return true;
 }
 
-/// #it_2725_Logic107_ShieldBounced
+bool it_2725_Logic107_ShieldBounced(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    it_802725D4(gobj);
+    if (ip->xDD4_itemVar.pikachujoltair.xDD8 != 0) {
+        it_802B3544((Item_GObj*) ip->xDD4_itemVar.pikachujoltair.xDD8);
+        ip->xDD4_itemVar.pikachujoltair.xDD8 = 0;
+    }
+    return true;
+}
 
 void itPikachuTJoltAir_Logic107_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
