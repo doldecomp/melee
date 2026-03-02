@@ -2071,6 +2071,20 @@ void ftKb_SpecialNLoop_IASA(Fighter_GObj* gobj)
 
 /// #ftKb_SpecialAirNLoop_IASA
 
+void ftKb_SpecialAirNLoop_IASA(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    if (fp->fv.kb.xE4 != 0) {
+        fp->fv.kb.xE4--;
+        return;
+    }
+
+    if ((fp->input.held_inputs & 0x200) == 0) {
+        Fighter_ChangeMotionState(gobj, ftKb_MS_SpecialAirNEnd, 0, 0.0f, 1.0f, 0.0f, NULL);
+    }
+}
+
 /// #ftKb_EatWait_IASA
 
 /// #ftKb_SpecialAirNCaptureWait_IASA
