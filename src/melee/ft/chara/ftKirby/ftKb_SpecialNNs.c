@@ -81,7 +81,6 @@
 #include <MSL/math.h>
 
 /// Forward declaration for function in ftKb_SpecialNZd.c
-void fn_80105A34(Fighter_GObj*);
 
 void ftKb_SpecialNNs_800FEDD0(HSD_GObj* gobj)
 {
@@ -1110,7 +1109,20 @@ void ftKb_PrSpecialAirNEndR_Coll(Fighter_GObj* gobj)
 
 /// #ftKb_PrSpecialNHit_Coll
 
-/// #fn_80105978
+void fn_80105A34(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    if (!fp->x2219_b0) {
+        FighterBone* bone = fp->parts;
+        efSync_Spawn(0x4B6, gobj, bone[1].joint);
+        fp->x2219_b0 = true;
+    }
+
+    fp->pre_hitlag_cb = efLib_PauseAll;
+    fp->post_hitlag_cb = efLib_ResumeAll;
+    fp->accessory4_cb = NULL;
+}
 
 void fn_80105AB0(Fighter_GObj*);
 
