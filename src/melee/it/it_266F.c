@@ -101,64 +101,43 @@ void it_8026C47C(struct it_8026C47C_arg0_t* arg_struct)
 s32 it_8026C530(s32 arg0, HSD_ObjAllocUnk6* arg1, s32 arg2, s32 arg3)
 {
     u16* temp_r10;
-    s32 temp_r5;
     s32 temp_r6;
     s32 temp_r7;
-    // s32 temp_r7_2;
-    s32 temp_r7_3;
-    // s32 temp_r8;
-    s32 temp_r9;
-    s32 temp_r9_2;
+    s32 mid;
+    u16* temp_r9;
     s32 var_r5;
 
     var_r5 = arg2;
-    // temp_r8 = arg3 - 1;
     if (var_r5 == (arg3 - 1)) {
         return var_r5;
     }
     temp_r10 = arg1->xC;
-    temp_r9 = (var_r5 + arg3) / 2;
-    // temp_r7_2 = temp_r9 * 2;
-    // temp_r7_2 = temp_r9;
-    // if ((s32) *(temp_r10 + temp_r7_2) > arg0) {
-    // if (((s32) *temp_r10[temp_r7_2])->x0 > arg0) {
-    if (temp_r10[temp_r9] > arg0) {
-        if (var_r5 == (temp_r9 - 1)) {
-        } else {
-            temp_r6 = (var_r5 + temp_r9) / 2;
-            temp_r7_3 = temp_r6 * 1;
-            // if ((s32) *(temp_r10 + temp_r7_3) > arg0) {
-            // if (temp_r10[temp_r7_3]->x0 > arg0) {
-            if (temp_r10[temp_r7_3] > arg0) {
+    mid = (var_r5 + arg3) / 2;
+    if (temp_r10[mid] > arg0) {
+        if (var_r5 != (mid - 1)) {
+            temp_r6 = (var_r5 + mid) / 2;
+            if (temp_r10[temp_r6] > arg0) {
                 var_r5 = it_8026C530(arg0, arg1, var_r5, temp_r6);
-                // } else if ((s32) (temp_r10 + temp_r7_3)->unk2 > arg0) {
-                // } else if (temp_r10[temp_r7_3]->x2 > arg0) {
-            } else if (temp_r10[temp_r7_3] > arg0) {
+            } else if (temp_r10[temp_r6 + 1] > arg0) {
                 var_r5 = temp_r6;
             } else {
-                var_r5 = it_8026C530(arg0, arg1, temp_r6, temp_r9);
+                var_r5 = it_8026C530(arg0, arg1, temp_r6, mid);
             }
         }
         return var_r5;
     }
-    temp_r9_2 = (s32) temp_r10 + 2;
-    // temp_r9_2 = temp_r10->x2;
-    // if ((s32) *(temp_r9_2 + temp_r7_2) > arg0) {
-    if ((temp_r9_2 + temp_r9) > arg0) {
-        return temp_r9;
+    temp_r9 = temp_r10 + 1;
+    if (temp_r9[mid] > arg0) {
+        return mid;
     }
-    if (temp_r9 == arg3 - 1) {
-        return temp_r9;
+    if (mid == (arg3 - 1)) {
+        return mid;
     }
-    temp_r7 = (s32) (temp_r9 + arg3) / 2;
-    // temp_r5 = temp_r7 * 2;
-    temp_r5 = temp_r7;
-    // if ((s32) *(temp_r10 + temp_r5) > arg0) {
-    if (temp_r10[temp_r5] > arg0) {
-        return it_8026C530(arg0, arg1, temp_r9, temp_r7);
+    temp_r7 = (mid + arg3) / 2;
+    if (temp_r10[temp_r7] > arg0) {
+        return it_8026C530(arg0, arg1, mid, temp_r7);
     }
-    // if ((s32) *(temp_r9_2 + temp_r5) > arg0) {
-    if ((temp_r9_2 + temp_r5) > arg0) {
+    if (temp_r9[temp_r7] > arg0) {
         return temp_r7;
     }
     return it_8026C530(arg0, arg1, temp_r7, arg3);
