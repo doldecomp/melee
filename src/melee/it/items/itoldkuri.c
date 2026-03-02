@@ -143,7 +143,15 @@ void itOldKuri_Logic0_PickedUp(Item_GObj* gobj)
     Item_80268E5C(gobj, 5, ITEM_ANIM_UPDATE);
 }
 
-/// #itOldkuri_UnkMotion5_Anim
+bool itOldkuri_UnkMotion5_Anim(Item_GObj* gobj)
+{
+    if (!it_80272C6C(gobj)) {
+        it_80275474(gobj);
+        it_80274740(gobj);
+        Item_80268E5C(gobj, 5, 2);
+    }
+    return false;
+}
 
 void itOldkuri_UnkMotion5_Phys(Item_GObj* gobj) {}
 
