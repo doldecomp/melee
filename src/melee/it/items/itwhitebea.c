@@ -177,7 +177,22 @@ bool itWhitebea_UnkMotion0_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itWhitebea_UnkMotion0_Phys
+void itWhitebea_UnkMotion0_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    PAD_STACK(8);
+    
+    if (ip->xDD4_itemVar.whitebea.x40 == 0) {
+        int rand = HSD_Randi(2);
+        if (ip->xDD4_itemVar.whitebea.x3C != 0 || rand != 0) {
+            it_802E3AC8(gobj);
+            return;
+        }
+        it_802E436C(gobj);
+    } else {
+        ip->xDD4_itemVar.whitebea.x40--;
+    }
+}
 
 bool itWhitebea_UnkMotion0_Coll(Item_GObj* gobj)
 {
