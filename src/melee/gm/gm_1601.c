@@ -2212,6 +2212,7 @@ void gm_80167470(s32 arg0, s32 arg1)
 void gm_801674C4(s8 arg0, u8 arg1, s8 arg2, s8 arg3, s32 arg4)
 {
     s8 temp_r31;
+    struct lbl_8046B488_t *new_var;
     struct lbl_8046B488_t* temp_ptr;
 
     temp_ptr = fn_80169364();
@@ -2223,12 +2224,13 @@ void gm_801674C4(s8 arg0, u8 arg1, s8 arg2, s8 arg3, s32 arg4)
     temp_ptr->x9 = arg2;
     temp_ptr->xA = arg3;
     PAD_STACK(10);
-    temp_ptr->unk_10_b2 = 1;
-    fn_80169574((s32) temp_ptr->x7, temp_ptr->x20);
-    fn_80169900(temp_ptr->xD, temp_ptr, temp_ptr->xA2, temp_ptr->x20);
+    new_var = temp_ptr;
+    new_var->unk_10_b2 = 1;
+    fn_80169574((s32) new_var->x7, new_var->x20);
+    fn_80169900(new_var->xD, new_var, temp_ptr->xA2, new_var->x20);
     temp_r31 = Player_GetCostumeId(0);
-    fn_8016989C((u8*) temp_ptr, (s8) Player_GetPlayerCharacter(0),
-                (s32) temp_r31, (u8*) temp_ptr->xA2, (u8*) temp_ptr->x20);
+    fn_8016989C((u8*) new_var, (s8) Player_GetPlayerCharacter(0),
+                (s32) temp_r31, (u8*) new_var->xA2, (u8*) temp_ptr->x20);
     fn_8016A09C();
     fn_80169434(arg4);
 }
