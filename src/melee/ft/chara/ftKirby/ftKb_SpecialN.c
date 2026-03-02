@@ -252,7 +252,18 @@ void ftKb_SpecialHi4_Anim(Fighter_GObj* gobj)
     }
 }
 
-/// #ftKb_SpecialAirHi1_Anim
+void ftKb_SpecialAirHi1_Anim(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        Fighter_ChangeMotionState(gobj, ftKb_MS_SpecialAirHi2, 0xA,
+                                  0.0f, 1.0f, 0.0f, NULL);
+        fp->pre_hitlag_cb = efLib_PauseAll;
+        fp->post_hitlag_cb = efLib_ResumeAll;
+        fp->mv.kb.specialn_pe.facing_dir = 0;
+    }
+}
 
 /// #ftKb_SpecialAirHi2_Anim
 
