@@ -833,7 +833,31 @@ void ftKb_LkSpecialAirNEnd_Phys(Fighter_GObj* gobj)
 
 /// #ftKb_LkSpecialAirNEnd_Coll
 
-/// #ftKb_SpecialNSs_800FCC14
+long ftKb_SpecialNSs_800FCC14(Fighter_GObj* gobj, long* out1, long* out2)
+{
+    Fighter* fp;
+    ftKb_DatAttrs* da;
+    PAD_STACK(8);
+    
+    if (gobj == NULL) {
+        goto return_error;
+    }
+    
+    fp = GET_FIGHTER(gobj);
+    da = fp->dat_attrs;
+    
+    if (fp->fv.kb.xA4 == NULL) {
+        return -1;
+    }
+    
+    *out1 = fp->fv.kb.xA8;
+    *out2 = (long)da->specialn_ss_charge_time;
+    
+    return 0;
+
+return_error:
+    return -1;
+}
 
 /// #ftKb_SpecialNSs_800FCC6C
 
