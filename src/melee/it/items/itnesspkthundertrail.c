@@ -8,7 +8,23 @@
 
 /// #it_802AC43C
 
-/// #it_802AC58C
+void it_802AC58C(Item_GObj* gobj)
+{
+    register Item* ip;
+    register u8 byte;
+    register int zero;
+    
+    if (gobj != NULL) {
+        ip = gobj->user_data;
+        it_802725D4(gobj);
+        zero = 0;
+        ((int*)ip)[0xDD4/4] = zero;
+        ((int*)ip)[0x518/4] = zero;
+        byte = ((u8*)ip)[0xDCA];
+        asm { rlwimi byte, zero, 4, 27, 27 }
+        ((u8*)ip)[0xDCA] = byte;
+    }
+}
 
 void it_802AC5D8(Item_GObj* gobj)
 {
