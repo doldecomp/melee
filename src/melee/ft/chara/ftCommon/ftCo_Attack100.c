@@ -909,7 +909,19 @@ bool fn_800D952C(Fighter_GObj* gobj)
 
 /// #fn_800D9C64
 
-/// #ftCo_800D9C98
+void ftCo_800D9C98(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    if (fp->fv.ss.x223C != NULL) {
+        it_802B7B84(fp->fv.ss.x223C);
+        fp->fv.ss.x223C = NULL;
+    }
+
+    *(s32*)((u8*)fp + 0x21E4) = 0;
+    *(s32*)((u8*)fp + 0x21F0) = 0;
+    *(s32*)((u8*)fp + 0x21DC) = 0;
+}
 
 void fn_800D9CE8(Fighter_GObj* arg0)
 {
