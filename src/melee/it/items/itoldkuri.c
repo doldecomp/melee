@@ -102,7 +102,15 @@ bool itOldkuri_UnkMotion3_Coll(Item_GObj* gobj)
     return it_8027C794(gobj);
 }
 
-/// #it_802D7AF0
+void it_802D7AF0(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->facing_dir > 0.0f) {
+        it_802D848C(gobj, 4, 0x12);
+    } else {
+        it_802D848C(gobj, 3, 0x12);
+    }
+}
 
 bool itOldkuri_UnkMotion4_Anim(Item_GObj* gobj)
 {
