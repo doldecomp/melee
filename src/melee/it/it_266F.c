@@ -1367,6 +1367,7 @@ void it_8026E414(Item_GObj* item_gobj, HSD_GObjEvent arg1)
     CollData* coll;
     Item* item;
     bool chk;
+    bool new_var;
     PAD_STACK(28);
 
     item = item_gobj->user_data;
@@ -1379,10 +1380,11 @@ void it_8026E414(Item_GObj* item_gobj, HSD_GObjEvent arg1)
     }
     chk = chk | it_80276308(item_gobj);
     chk = chk | it_802763E0(item_gobj);
-    if (chk & 0xE) {
-        it_80276FC4(item_gobj, chk);
+    new_var = chk;
+    if (new_var & 0xE) {
+        it_80276FC4(item_gobj, new_var);
     }
-    if (chk & 1) {
+    if (new_var & 1) {
         it_80275DFC(item_gobj);
         it_802762B0(item);
         arg1((HSD_GObj*) item_gobj);
