@@ -69,11 +69,12 @@ static U8Vec4 it_804D5168 = { 0xFF, 0x40, 0x80, 0x80 };
 void it_8026C47C(struct it_8026C47C_arg0_t* arg_struct)
 {
     u32 it_kind;
+    u32 new_var;
     s32 var_r29; // Hold Kind??
     s32* var_r28;
     PAD_STACK(8);
 
-    it_kind = It_Kind_Capsule;
+    it_kind = (new_var = It_Kind_Capsule);
     var_r29 = 0;
     var_r28 = &arg_struct->unk0;
     arg_struct->unk0 = 0;
