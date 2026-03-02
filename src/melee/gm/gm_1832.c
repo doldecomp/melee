@@ -552,7 +552,21 @@ int gm_80188454(int idx)
 
 /// #fn_8018846C
 
-/// #fn_801884F8
+int fn_801884F8(void)
+{
+    int result;
+    int* ptr = lbl_80473700;
+    
+    result = pl_80041300(0);
+    if (result != 0) {
+        ptr[65] = result;
+        ptr[66] = 1;
+    }
+    if (ptr[66] != 0) {
+        result = ptr[65];
+    }
+    return result;
+}
 
 /// #fn_80188550
 
