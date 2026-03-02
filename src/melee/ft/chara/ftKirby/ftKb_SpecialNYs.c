@@ -385,7 +385,6 @@ void fn_80109A84(HSD_GObj* gobj)
 void fn_80109B00(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    volatile long long pad;
     ftCommon_8007D7FC(fp);
     Fighter_ChangeMotionState(gobj, ftKb_MS_YsSpecialNCapture1_0, 0x0C4C5092,
                               fp->cur_anim_frame, 1.0f, 0.0f, NULL);
