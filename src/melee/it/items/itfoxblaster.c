@@ -150,6 +150,8 @@ void it_802ADF10(HSD_GObj* item_gobj)
 {
     Vec3 ft_cur_pos;
     Vec3 ft_hold_joint_pos;
+    // TODO: probably a fake-improvement? idiomatic way is
+    // with the for loop, but can't get it to 100% match yet
     int new_var2;
     Vec3 it_hold_joint_pos;
     Item* item = GET_ITEM(item_gobj);
