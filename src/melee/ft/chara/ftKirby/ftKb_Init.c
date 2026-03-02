@@ -3944,6 +3944,15 @@ void ftKb_SpecialN_Enter(Fighter_GObj* gobj)
 }
 
 /// #ftKb_SpecialAirN_Enter
+void ftKb_SpecialAirN_Enter(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (ftKb_Init_803C9E54[fp->fv.kb.hat.kind] != NULL) {
+        ftKb_Init_803C9E54[fp->fv.kb.hat.kind](gobj);
+    } else {
+        ftKb_SpecialN_800F6070(gobj);
+    }
+}
 
 /// #ftKb_SpecialN_800F16D0
 
