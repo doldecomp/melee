@@ -85,7 +85,19 @@ bool itOldottosea_UnkMotion4_Coll(Item_GObj* gobj)
 
 /// #it_802E2C80
 
-/// #itOldottosea_UnkMotion5_Anim
+bool itOldottosea_UnkMotion5_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    
+    if (!it_80272C6C(gobj)) {
+        if (ip->ground_or_air == GA_Air) {
+            Item_80268E5C(gobj, 5, 2);
+        } else {
+            it_802E2DF4(gobj);
+        }
+    }
+    return false;
+}
 
 void itOldottosea_UnkMotion5_Phys(Item_GObj* gobj)
 {
