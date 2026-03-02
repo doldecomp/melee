@@ -85,7 +85,17 @@ HSD_GObj* it_802AB568(Item_GObj* gobj)
 
 /// #itNesspkthunderball_UnkMotion0_Phys
 
-/// #itNesspkthunderball_UnkMotion0_Coll
+bool itNesspkthunderball_UnkMotion0_Coll(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    PAD_STACK(8);
+
+    if (it_802AB4B8(gobj, &ip->x378_itemColl)) {
+        it_802725D4(gobj);
+        return true;
+    }
+    return false;
+}
 
 bool itNessPKThunderball_Logic26_DmgDealt(Item_GObj* gobj)
 {
