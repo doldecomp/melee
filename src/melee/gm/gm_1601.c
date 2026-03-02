@@ -14,6 +14,7 @@
 
 #include "gm/forward.h"
 
+#include "gm/types.h"
 #include "gr/ground.h"
 #include "gr/stage.h"
 #include "if/ifstatus.h"
@@ -1318,25 +1319,26 @@ u16 gm_80163274(u8 i)
 
 bool gm_80163298(s8 c_kind, u16 arg1)
 {
-    u16 v1;
-    s8 v2;
-    s16* v3;
-    u32 v4;
-    u32 v5;
+    u8 index;
+    s16* record;
+    u32 save_data;
+    u32 offset;
+    u16 score;
 
-    v2 = gm_80164024((u8) c_kind);
-    v3 = gmMainLib_8015D7EC((u8) v2);
-    v4 = (u32) gmMainLib_8015EDBC();
-    v5 = ((v2 << 2) & 0x3FC) + 0x114;
-    v1 = (u16) arg1;
+    index = gm_80164024((u8) c_kind);
+    record = gmMainLib_8015D7EC((u8) index);
+    save_data = (u32) gmMainLib_8015EDBC();
+    offset = ((index << 2) & 0x3FC) + 0x114;
+    score = (u16) arg1;
 
-    if (*(u32*) (v4 + v5) < (u32) v1) {
-        v4 = (u32) gmMainLib_8015EDBC();
-        *(u32*) (v4 + v5) = (u32) v1;
+    // POTENTIAL TODO: get rid of pointer math: seems hard with the addi + lwzx
+    if (*(u32*) (save_data + offset) < (u32) score) {
+        save_data = (u32) gmMainLib_8015EDBC();
+        *(u32*) (save_data + offset) = (u32) score;
     }
 
-    if (*(u16*) v3 < (u16) arg1) {
-        *v3 = arg1;
+    if (*(u16*) record < (u16) arg1) {
+        *record = arg1;
         return true;
     }
     return false;
