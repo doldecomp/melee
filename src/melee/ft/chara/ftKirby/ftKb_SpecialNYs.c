@@ -425,19 +425,13 @@ void fn_80109BF8(HSD_GObj* gobj)
 
 void fn_80109C74(HSD_GObj* gobj)
 {
-    void* new_var2;
     Fighter* fp = GET_FIGHTER(gobj);
-    Fighter* new_var3;
-    Fighter* new_var;
-    new_var2 = NULL;
     ftCommon_8007D7FC(fp);
     Fighter_ChangeMotionState(gobj, ftKb_MS_YsSpecialNCapture2_1, 0x0C4C5092,
-                              fp->cur_anim_frame, 1.0f, 0.0f, new_var2);
+                              fp->cur_anim_frame, 1.0f, 0.0f, NULL);
     fp = GET_FIGHTER(gobj);
-    new_var3 = fp;
-    new_var = new_var3;
-    new_var->death2_cb = ftKb_Init_800EE74C;
-    new_var->take_dmg_cb = ftKb_Init_800EE7B8;
+    fp->death2_cb = ftKb_Init_800EE74C;
+    fp->take_dmg_cb = ftKb_Init_800EE7B8;
 }
 
 void fn_80109CF0(HSD_GObj* gobj)
