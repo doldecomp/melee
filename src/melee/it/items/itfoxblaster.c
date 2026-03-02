@@ -150,6 +150,9 @@ void it_802ADF10(HSD_GObj* item_gobj)
 {
     Vec3 ft_cur_pos;
     Vec3 ft_hold_joint_pos;
+    // TODO: probably a fake-improvement? idiomatic way is
+    // with the for loop, but can't get it to 100% match yet
+    int new_var2;
     Vec3 it_hold_joint_pos;
     Item* item = GET_ITEM(item_gobj);
 
@@ -188,6 +191,7 @@ void it_802ADF10(HSD_GObj* item_gobj)
         case It_Kind_Kirby_FalcoBlaster:
             ftKb_SpecialNFx_800FDC00(item->xDD4_itemVar.foxblaster.owner,
                                      &ft_hold_joint_pos);
+            new_var2 = 0;
             item->xDD4_itemVar.foxblaster.xE14.x =
                 ft_hold_joint_pos.x - ft_cur_pos.x;
             item->xDD4_itemVar.foxblaster.xE14.y =
@@ -200,7 +204,7 @@ void it_802ADF10(HSD_GObj* item_gobj)
             item->xDD4_itemVar.foxblaster.angle =
                 atan2f(ft_hold_joint_pos.y - it_hold_joint_pos.y,
                        ft_hold_joint_pos.x - it_hold_joint_pos.x);
-            item->xDD4_itemVar.foxblaster.xDFC = 0;
+            item->xDD4_itemVar.foxblaster.xDFC = new_var2;
 
             item->xDD4_itemVar.foxblaster.xDE4 =
                 (s32) efSync_Spawn(1196, item_gobj, &ft_hold_joint_pos,
@@ -273,7 +277,7 @@ void it_802ADF10(HSD_GObj* item_gobj)
 
         item = GET_ITEM(item_gobj);
         item->xDD4_itemVar.foxblaster.xDE4 = 0;
-        item->xDD4_itemVar.foxblaster.xDFC = 0;
+        item->xDD4_itemVar.foxblaster.xDFC = new_var2;
         item->xDD4_itemVar.foxblaster.angle =
             item->xDD4_itemVar.foxblaster.xE14.x =
                 item->xDD4_itemVar.foxblaster.xE14.y =

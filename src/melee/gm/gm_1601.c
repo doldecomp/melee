@@ -14,6 +14,7 @@
 
 #include "gm/forward.h"
 
+#include "gm/types.h"
 #include "gr/ground.h"
 #include "gr/stage.h"
 #include "if/ifstatus.h"
@@ -1026,7 +1027,6 @@ long gm_80162A4C(s32 amount)
 struct gmm_x1868_1A8_t* gm_80162A98(s32 arg0)
 {
     struct gmm_x1868_1A8_t* temp_r3;
-    u32 var_r31_2;
     u32 var_r31;
     s32* temp_r3_2 = gmMainLib_8015CDB0();
 
@@ -1036,10 +1036,10 @@ struct gmm_x1868_1A8_t* gm_80162A98(s32 arg0)
 
     gmMainLib_8015EDBC()->xC = var_r31;
 
-    var_r31_2 = MAX((u32) (arg0 + gmMainLib_8015EDC8()->x0), -1U);
+    var_r31 = MAX((u32) (arg0 + gmMainLib_8015EDC8()->x0), -1U);
 
     temp_r3 = gmMainLib_8015EDC8();
-    temp_r3->x0 = var_r31_2;
+    temp_r3->x0 = var_r31;
     return temp_r3;
 }
 
@@ -1318,25 +1318,26 @@ u16 gm_80163274(u8 i)
 
 bool gm_80163298(s8 c_kind, u16 arg1)
 {
-    u16 v1;
-    s8 v2;
-    s16* v3;
-    u32 v4;
-    u32 v5;
+    u8 index;
+    s16* record;
+    u32 save_data;
+    u32 offset;
+    u16 score;
 
-    v2 = gm_80164024((u8) c_kind);
-    v3 = gmMainLib_8015D7EC((u8) v2);
-    v4 = (u32) gmMainLib_8015EDBC();
-    v5 = ((v2 << 2) & 0x3FC) + 0x114;
-    v1 = (u16) arg1;
+    index = gm_80164024((u8) c_kind);
+    record = gmMainLib_8015D7EC((u8) index);
+    save_data = (u32) gmMainLib_8015EDBC();
+    offset = ((index << 2) & 0x3FC) + 0x114;
+    score = (u16) arg1;
 
-    if (*(u32*) (v4 + v5) < (u32) v1) {
-        v4 = (u32) gmMainLib_8015EDBC();
-        *(u32*) (v4 + v5) = (u32) v1;
+    // POTENTIAL TODO: get rid of pointer math: seems hard with the addi + lwzx
+    if (*(u32*) (save_data + offset) < (u32) score) {
+        save_data = (u32) gmMainLib_8015EDBC();
+        *(u32*) (save_data + offset) = (u32) score;
     }
 
-    if (*(u16*) v3 < (u16) arg1) {
-        *v3 = arg1;
+    if (*(u16*) record < (u16) arg1) {
+        *record = arg1;
         return true;
     }
     return false;
@@ -2201,34 +2202,35 @@ void gm_80167320(int slot, bool arg1)
 
 void gm_80167470(s32 arg0, s32 arg1)
 {
-    if ((s32) gm_801A4310() == 0x1F) {
-        return;
+    switch ((s32) gm_801A4310()) {
+    case 0x1F:
+        gm_801B97C4(arg0, arg1);
+        break;
     }
-    gm_801B97C4(arg0, arg1);
 }
 
 void gm_801674C4(s8 arg0, u8 arg1, s8 arg2, s8 arg3, s32 arg4)
 {
     s8 temp_r31;
-    struct lbl_8046B488_t* temp_r3;
+    struct lbl_8046B488_t *new_var;
     struct lbl_8046B488_t* temp_ptr;
 
-    temp_r3 = fn_80169364();
-    temp_r3->x0 = arg0;
-    temp_r3->x1 = 0x21;
-    temp_r3->x2 = 0x21;
-    temp_ptr = temp_r3;
+    temp_ptr = fn_80169364();
+    temp_ptr->x0 = arg0;
+    temp_ptr->x1 = 0x21;
+    temp_ptr->x2 = 0x21;
     temp_ptr->x7 = arg1;
     temp_ptr->x8 = arg1;
     temp_ptr->x9 = arg2;
     temp_ptr->xA = arg3;
     PAD_STACK(10);
-    temp_ptr->unk_10_b2 = 1;
-    fn_80169574((s32) temp_ptr->x7, temp_ptr->x20);
-    fn_80169900(temp_ptr->xD, temp_ptr, temp_ptr->xA2, temp_ptr->x20);
+    new_var = temp_ptr;
+    new_var->unk_10_b2 = 1;
+    fn_80169574((s32) new_var->x7, new_var->x20);
+    fn_80169900(new_var->xD, new_var, temp_ptr->xA2, new_var->x20);
     temp_r31 = Player_GetCostumeId(0);
-    fn_8016989C((u8*) temp_ptr, (s32) Player_GetPlayerCharacter(0),
-                (s32) temp_r31, (u8*) temp_ptr->xA2, (u8*) temp_ptr->x20);
+    fn_8016989C((u8*) new_var, (s8) Player_GetPlayerCharacter(0),
+                (s32) temp_r31, (u8*) new_var->xA2, (u8*) temp_ptr->x20);
     fn_8016A09C();
     fn_80169434(arg4);
 }
@@ -3018,10 +3020,10 @@ void fn_80169550(int slot)
     lbl_8046B488.x20[idx] = -1;
 }
 
-void fn_80169574(ssize_t size, void* buf)
+void fn_80169574(ssize_t size, s8* buf)
 {
     memzero(buf, size);
-    ((s8*) buf)[size] = -2;
+    buf[size] = -2;
 }
 
 s32 fn_801695BC(u8 arg0, s32 arg1, s32 arg2, u8* arg3, u8* arg4)
@@ -3421,7 +3423,7 @@ void fn_8016A46C(void)
 
 void fn_8016A488(s32 arg0)
 {
-    if (gm_8016AE44()->hud_enabled) {
+    if (gm_8016AE44()->hud_enabled == true) {
         Player_80031848(arg0);
     }
 }
