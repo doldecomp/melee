@@ -170,23 +170,24 @@ u8 it_8026C65C(HSD_ObjAllocUnk6* arg_struct)
     s32 temp_r6;
     s32 var_r3;
     u16* temp_r5;
+    s32 count;
+    temp_r6 = (s32) arg_struct->x8;
 
-    rand_int = HSD_Randi((s32) arg_struct->x8);
-    if ((arg_struct->x0 - 1) == 0) {
+
+    count = arg_struct->x0;
+    rand_int = HSD_Randi(temp_r6);
+    if ((count - 1) == 0) {
         var_r3 = 0;
     } else {
         temp_r5 = arg_struct->xC;
-        temp_r6 = arg_struct->x0 / 2;
+        temp_r6 = count / 2;
         if (temp_r5[temp_r6] > rand_int) {
             var_r3 = it_8026C530(rand_int, arg_struct, 0, temp_r6);
-            // } else if (temp_r5[temp_r6].unk2 > rand_int) {
-            // } else if (temp_r5[temp_r6] > rand_int) {
-            // } else if ((&temp_r5[temp_r6] + 2) > rand_int) {
-        } else if ((arg_struct->x0 << 2) > rand_int) {
+        } else if (temp_r5[temp_r6 + 1] > rand_int) {
             var_r3 = temp_r6;
         } else {
             var_r3 =
-                it_8026C530(rand_int, arg_struct, temp_r6, arg_struct->x0);
+                it_8026C530(rand_int, arg_struct, temp_r6, count);
         }
     }
     return arg_struct->x4[var_r3];
