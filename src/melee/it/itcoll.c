@@ -162,6 +162,8 @@ void it_8026FC00(Item* arg_item, HitCapsule* arg_hit, s32 arg2, Fighter* arg3)
 
     if (arg_item->xAC4_ignoreItemID != 0) {
         HSD_GObj* item_gobj = HSD_GObj_Entities->items;
+        if (item_gobj->next) {
+        }
         while (item_gobj != NULL) {
             Item* item = GET_ITEM(item_gobj);
             if (item->xAC4_ignoreItemID == arg_item->xAC4_ignoreItemID) {
