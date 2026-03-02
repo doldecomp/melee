@@ -3018,10 +3018,10 @@ void fn_80169550(int slot)
     lbl_8046B488.x20[idx] = -1;
 }
 
-void fn_80169574(ssize_t size, void* buf)
+void fn_80169574(ssize_t size, s8* buf)
 {
     memzero(buf, size);
-    ((s8*) buf)[size] = -2;
+    buf[size] = -2;
 }
 
 s32 fn_801695BC(u8 arg0, s32 arg1, s32 arg2, u8* arg3, u8* arg4)
