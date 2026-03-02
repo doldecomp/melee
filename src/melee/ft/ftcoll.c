@@ -1211,19 +1211,15 @@ void ftColl_8007AB48(Fighter_GObj* gobj)
 
 extern void ftColl_8007A06C_real(Fighter_GObj*, void*, DmgLogEntry*, size_t, int);
 
+extern void ftColl_8007A06C_alt(Fighter_GObj*, void*, void*, size_t, int);
+
+extern void ftColl_8007A06C_alt(Fighter_GObj*, void*, void*, size_t, int);
+
 void ftColl_8007AB80(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->dmg.x187c = 0.0f;
-    
-    // The declaration is wrong - cast the parameters to match what's expected
-    ftColl_8007A06C(
-        *(float*)&gobj,                    // gobj reinterpreted as float
-        (DmgLogEntry**)((char*)fp + 0x1870), // pointer to facing_dir_1
-        (int)dmg_log1,                      // dmg_log1 cast to int
-        0                                   // false
-    );
-    
+    ftColl_8007A06C_alt(gobj, (char*)fp + 0x1870, dmg_log1, dmg_log1_idx, 0);
     fp->dmg.x18a0 = fp->dmg.x187c;
 }
 
