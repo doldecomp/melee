@@ -1397,6 +1397,7 @@ void it_8026E4D0(Item_GObj* item_gobj, HSD_GObjEvent arg1)
     HSD_JObj* item_jobj;
     Item* item;
     bool chk;
+    bool new_var;
     PAD_STACK(34);
 
     item = item_gobj->user_data;
@@ -1409,14 +1410,15 @@ void it_8026E4D0(Item_GObj* item_gobj, HSD_GObjEvent arg1)
     }
     chk = chk | it_80276308(item_gobj);
     chk = chk | it_802763E0(item_gobj);
-    if (chk & 0xE) {
-        it_80276FC4(item_gobj, chk);
+    new_var = chk;
+    if (new_var & 0xE) {
+        it_80276FC4(item_gobj, new_var);
     }
-    if (chk & 1) {
+    if (new_var & 1) {
         item_jobj = item_gobj->hsd_obj;
         it_80275DFC(item_gobj);
         it_802762B0(item);
-        arg1((HSD_GObj*) item_gobj);
+        arg1(item_gobj);
         it_80272F7C(item_jobj, item->xCC_item_attr->x60_scale);
     }
 }
