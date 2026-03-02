@@ -809,12 +809,15 @@ void grIceMt_801F87C8(Ground_GObj* param1)
 /// Destroys HSD_GObj* stored in icemt.xF8[0-4].
 void grIceMt_801F87FC(Ground_GObj* gobj)
 {
-    Ground* gp = gobj->user_data;
+    u32 unused[2];
     int i;
+    Ground* gp;
+    
+    gp = gobj->user_data;
+    
     for (i = 0; i < 5; i++) {
-        HSD_GObj* temp;
-        if ((temp = gp->gv.icemt.xF8[i]) != NULL) {
-            grMaterial_801C8CDC(temp);
+        if (gp->gv.icemt.xF8[i] != NULL) {
+            grMaterial_801C8CDC(gp->gv.icemt.xF8[i]);
         }
     }
 }
