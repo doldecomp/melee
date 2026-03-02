@@ -2201,10 +2201,11 @@ void gm_80167320(int slot, bool arg1)
 
 void gm_80167470(s32 arg0, s32 arg1)
 {
-    if ((s32) gm_801A4310() == 0x1F) {
-        return;
+    switch ((s32) gm_801A4310()) {
+    case 0x1F:
+        gm_801B97C4(arg0, arg1);
+        break;
     }
-    gm_801B97C4(arg0, arg1);
 }
 
 void gm_801674C4(s8 arg0, u8 arg1, s8 arg2, s8 arg3, s32 arg4)
