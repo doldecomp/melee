@@ -411,7 +411,23 @@ void ftCo_800D47B8(Fighter_GObj* gobj)
 
 /// #ftCo_DeadUpFall_Phys
 
-/// #fn_800D4DD4
+void fn_800D4DD4(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* temp_r31 = fp;
+    f32 bottom_offset;
+    
+    switch (temp_r31->mv.co.unk_deadup.x44) {
+    case 3:
+        bottom_offset = Stage_GetCamBoundsBottomOffset();
+        if (temp_r31->cur_pos.y < bottom_offset) {
+            ftCommon_8007E2FC(gobj);
+        }
+        break;
+    default:
+        break;
+    }
+}
 
 void ftCo_DeadUpFall_Cam(Fighter_GObj* gobj)
 {
