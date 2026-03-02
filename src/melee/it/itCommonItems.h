@@ -463,7 +463,11 @@ typedef struct {
 typedef struct itTincle_ItemVars {
     /*  +0 ip+DD4 */ u8 pad[0x20];
     /* +20 ip+DF4 */ s32 x20;
-    /* +24 ip+DF8 */ u8 pad1[0x2C];
+    /* +24 ip+DF8 */ u8 pad1[0x8];
+    /* +2C ip+E00 */ s32 x2C;
+    /* +30 ip+E04 */ u8 pad1b[0x8];
+    /* +38 ip+E0C */ f32 x38;
+    /* +3C ip+E10 */ u8 pad1c[0x14];
     /* +50 ip+E24 */ f32 x50;
     /* +54 ip+E28 */ f32 x54;
     /* +58 ip+E2C */ u8 pad2[0x4];
@@ -499,7 +503,8 @@ typedef struct {
     /* ip+E08 */ unsigned char xE08_b5 : 1;
     /* ip+E08 */ unsigned char xE08_b6 : 1;
     /* ip+E08 */ unsigned char xE08_b7 : 1;
-    /* ip+E09 */ char pad_E09[0xE10 - 0xE09];
+    /* ip+E09 */ char pad_E09[0xE0C - 0xE09];
+    /* ip+E0C */ int xE0C;
     /* ip+E10 */ int xE10;
     /* ip+E14 */ char pad_E14[0xE1C - 0xE14];
     /* ip+E1C */ unsigned char xE1C_b0 : 1;
@@ -588,10 +593,14 @@ typedef struct {
 } itPokemon_ItemVars;
 
 typedef struct itHitodeman_ItemVars {
-    /*  +0 ip+DD4 */ u8 pad[0x88];
-    /* +88 ip+E5C */ s32 xE5C;
-    /* +8C ip+E60 */ u8 pad2[0x4];
-    /* +90 ip+E64 */ HSD_GObj* xE64;
+    /*  +0 ip+DD4 */ char pad_0[0x60];
+    /* +60 ip+E34 */ float x60;
+    /* +64 ip+E38 */ float x64;
+    /* +68 ip+E3C */ s32 x68;
+    /* +6C ip+E40 */ char pad_6C[0x1C];
+    /* +88 ip+E5C */ s32 x88;
+    /* +8C ip+E60 */ char pad_8C[0x4];
+    /* +90 ip+E64 */ HSD_GObj* x90;
 } itHitodeman_ItemVars;
 
 typedef struct {
@@ -1364,6 +1373,13 @@ typedef struct itkireihanaAttributes {
     u32 xC;
 } itkireihanaAttributes;
 
+typedef struct itMatadogasAttributes {
+    /* +00 */ f32 x0;
+    /* +04 */ f32 x4;
+    /* +08 */ f32 x8;
+    /* +0C */ f32 xC;
+} itMatadogasAttributes;
+
 typedef struct itThunder_ItemVars {
     /* xDD8 */ u8 pad[0x60 - 0x0];
     /* xE34 */ s32 x60;
@@ -1404,6 +1420,12 @@ typedef struct itUnknownAttributes {
     /* +18 */ s32 x18;
 } itUnknownAttributes;
 
+typedef struct itCrazyHandBombAttributes {
+    /* +00 */ f32 x0;
+    /* +04 */ f32 x4;
+    /* +08 */ f32 x8;
+} itCrazyHandBombAttributes;
+
 typedef struct itLugia_ItemVars {
     /* +00 ip+DD4 */ u8 x0_pad[0x7C];
     /* +7C ip+E50 */ Vec3 xE50;
@@ -1422,12 +1444,5 @@ typedef struct itMatadogas_ItemVars {
     /* +64 ip+E38 */ s32 x64;
     /* +68 ip+E3C */ s32 x68;
 } itMatadogas_ItemVars;
-
-typedef struct itMatadogasAttributes {
-    f32 x0;
-    f32 x4;
-    f32 x8;
-    f32 xC;
-} itMatadogasAttributes;
 
 #endif

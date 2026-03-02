@@ -103,7 +103,17 @@ bool itZrshell_UnkMotion0_Anim(Item_GObj* arg0)
     return false;
 }
 
-/// #itZrshell_UnkMotion0_Phys
+void itZrshell_UnkMotion0_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    int counter = ip->xDD4_itemVar.zgshell.xE0C;
+    itGShell_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    if ((f32) counter > attrs->x2C) {
+        it_802DF230(gobj);
+    } else {
+        ip->xDD4_itemVar.zgshell.xE0C = counter + 1;
+    }
+}
 
 bool itZrshell_UnkMotion0_Coll(Item_GObj* gobj)
 {
@@ -162,7 +172,17 @@ bool itZrshell_UnkMotion2_Anim(Item_GObj* arg0)
     return false;
 }
 
-/// #itZrshell_UnkMotion2_Phys
+void itZrshell_UnkMotion2_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    int counter = ip->xDD4_itemVar.zgshell.xE0C;
+    itGShell_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    if ((f32) counter > attrs->x2C) {
+        it_802DF230(gobj);
+    } else {
+        ip->xDD4_itemVar.zgshell.xE0C = counter + 1;
+    }
+}
 
 void itZGShell_Logic11_Thrown(Item_GObj* gobj)
 {

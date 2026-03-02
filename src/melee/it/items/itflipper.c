@@ -9,6 +9,7 @@
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
+#include "lb/lbvector.h"
 
 /* 0x802910B8 */ void itFlipper_Logic20_Thrown(Item_GObj* gobj);
 
@@ -35,7 +36,25 @@ void itFlipper_Logic20_Spawned(Item_GObj* gobj)
 
 /// #it_80290CE8
 
-/// #it_80290DD4
+void it_80290DD4(Item_GObj* gobj, s32 kind, Vec3* pos)
+{
+    Item* ip = GET_ITEM(gobj);
+    Vec3 vec;
+
+    vec.z = 0.0f;
+    vec.y = 0.0f;
+    vec.x = 0.0f;
+
+    if (kind == 0x14) {
+        vec.x = ip->pos.x - pos->x;
+        vec.y = ip->pos.y - pos->y;
+        lbVector_NormalizeXY(&vec);
+        vec.x *= 0.2f;
+        vec.y *= 0.2f;
+        ip->x40_vel.x += vec.x;
+        ip->x40_vel.y += vec.y;
+    }
+}
 
 void it_80290E78(Item_GObj* gobj)
 {

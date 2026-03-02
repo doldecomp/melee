@@ -10,7 +10,7 @@
 /* 2D42C4 */ void it_2725_Logic24_Spawned(Item_GObj*);
 /* 2D43AC */ UNK_RET it_802D43AC(UNK_PARAMS);
 /* 2D43B0 */ void it_802D43B0(Item_GObj*, Item_GObj*);
-/* 2D43EC */ UNK_RET it_802D43EC(UNK_PARAMS);
+/* 2D43EC */ void it_802D43EC(Item_GObj* gobj);
 /* 2D4494 */ UNK_RET it_802D4494(UNK_PARAMS);
 /* 2D4510 */ void it_802D4510(Item_GObj* gobj);
 /* 2D4564 */ bool it_802D4564(Item_GObj* gobj);

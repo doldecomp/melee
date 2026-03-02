@@ -204,12 +204,9 @@ void grPura_80211F60(Ground_GObj* arg0) {}
 
 void grPura_80211F64(Ground_GObj* arg0) {}
 
-/// #grPura_80211F68
 void grPura_80211F68(Ground_GObj* arg0)
 {
-    Ground* gp = arg0->user_data;
-    Ground_801C2ED0(arg0->hsd_obj, gp->map_id);
-    grAnime_801C8138(arg0, gp->map_id, 0);
+    Ground_JObjInline1(arg0);
     grPura_80212CD4(arg0);
     grPura_802125F0(arg0);
     grPura_80212FC0(arg0);

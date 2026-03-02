@@ -16,6 +16,8 @@
 #include <baselib/jobj.h>
 #include <baselib/psstructs.h>
 
+static void* grCs_804D6970;
+
 unkCastleCallback grCs_803B7F28[] = {
     grCastle_801D0550, grCastle_801D059C, grCastle_801D05E8,
     grCastle_801D0634, grCastle_801D0680,
@@ -149,7 +151,15 @@ bool grCastle_801CE3A4(Ground_GObj* gobj)
 
 void grCastle_801CE7E4(Ground_GObj* gobj) {}
 
-/// #grCastle_801CE7E8
+void grCastle_801CE7E8(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    Ground_801C2ED0(GET_JOBJ(gobj), gp->map_id);
+    gp->gv.castle.xC4 = 0;
+    gp->gv.castle.xC8 =
+        *(s16*) ((u8*) grCs_804D6970 + gp->gv.castle.xC4 * 2 + 0x12C);
+    grAnime_801C8138(gobj, gp->map_id, gp->gv.castle.xC4);
+}
 
 bool grCastle_801CE858(Ground_GObj* gobj)
 {

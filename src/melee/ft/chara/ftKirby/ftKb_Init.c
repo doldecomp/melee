@@ -3291,7 +3291,24 @@ HSD_JObj* ftKb_Init_UnkMotionStates6(Fighter_GObj* gobj)
     return (HSD_JObj*) gobj;
 }
 
-/// #ftKb_SpecialN_800EF040
+void ftKb_SpecialN_800EF040(Fighter_GObj* gobj, int arg1, KirbyHatStruct* hat)
+{
+    u32 mask = (u32) hat->hat_dynamics[1];
+    if (mask != 0) {
+        Fighter* fp = GET_FIGHTER(gobj);
+        struct Fighter_804D6540_t* ft_data = Fighter_804D6540[fp->kind];
+        int count = ft_data->x4;
+        HSD_Joint* joint =
+            ((HSD_Joint**) ftKb_Init_803C9FC8[arg1])[fp->x619_costume_id * 2];
+        struct Fighter_804D6540_x0_t* parts = ft_data->x0;
+        int i;
+        for (i = 0; i < count; i++, parts++) {
+            if ((1 << i) & mask) {
+                ftParts_800753D4(fp, parts, joint);
+            }
+        }
+    }
+}
 
 /// #ftKb_SpecialN_800EF0E4
 
@@ -3809,20 +3826,17 @@ void ftKb_SpecialN_800F0F5C(Fighter_GObj* gobj)
     ftKb_SpecialN_800EFAF0_inline(gobj);
     ftCo_UnloadDynamicBones(fp);
 }
-
+#pragma push
+#pragma dont_inline on
 void ftKb_SpecialN_800F0FC0(Fighter_GObj* gobj)
 {
     u8 sp14[0x90];
-
-    Fighter* fp = fp = GET_FIGHTER(gobj);
+    Fighter* fp = fp = gobj->user_data;
     KirbyHatStruct* temp_r29;
-
-    PAD_STACK(4);
-
+    PAD_STACK(8);
     if (fp->fv.kb.hat.x14.data != NULL) {
         return;
     }
-
     temp_r29 = ft_80459B88.hats[FTKIND_CAPTAIN];
     ftKb_SpecialN_800EF040(gobj, 3, temp_r29);
     fp->fv.kb.hat.x14.data = HSD_ObjAlloc(&fighter_x2040_alloc_data);
@@ -3836,6 +3850,7 @@ void ftKb_SpecialN_800F0FC0(Fighter_GObj* gobj)
     ftAnim_80070200(fp, (ftData_x8_x8*) &temp_r29->desc.vis_table,
                     &fp->fv.kb.x44, &fp->fv.kb.hat.x14);
 }
+#pragma pop
 
 void ftKb_SpecialN_800F10A4(Fighter_GObj* gobj)
 {
@@ -3862,18 +3877,17 @@ void ftKb_SpecialN_800F12C8(Fighter_GObj* gobj)
 
 /// Load Dr. Mario's hat for Kirby copy ability.
 /// @note The self-assignment `fp = fp` is required for register allocation.
+#pragma push
+#pragma dont_inline on
 void ftKb_SpecialN_800F130C(Fighter_GObj* gobj)
 {
     u8 sp14[0x90];
-    Fighter* fp = fp = GET_FIGHTER(gobj);
+    Fighter* fp = fp = gobj->user_data;
     KirbyHatStruct* temp_r29;
-
-    PAD_STACK(4);
-
+    PAD_STACK(8);
     if (fp->fv.kb.hat.x14.data != NULL) {
         return;
     }
-
     temp_r29 = ft_80459B88.hats[FTKIND_DRMARIO];
     ftKb_SpecialN_800EF040(gobj, 0x16, temp_r29);
     fp->fv.kb.hat.x14.data = HSD_ObjAlloc(&fighter_x2040_alloc_data);
@@ -3887,6 +3901,7 @@ void ftKb_SpecialN_800F130C(Fighter_GObj* gobj)
     ftAnim_80070200(fp, (ftData_x8_x8*) &temp_r29->desc.vis_table,
                     &fp->fv.kb.x44, &fp->fv.kb.hat.x14);
 }
+#pragma pop
 
 void ftKb_SpecialN_800F13F0(Fighter_GObj* gobj)
 {

@@ -54,7 +54,7 @@
 /* 2E43C0 */ bool itWhitebea_UnkMotion5_Anim(Item_GObj* gobj);
 /* 2E4424 */ void itWhitebea_UnkMotion5_Phys(Item_GObj* gobj);
 /* 2E4428 */ bool itWhitebea_UnkMotion5_Coll(Item_GObj* gobj);
-/* 2E4464 */ UNK_RET it_802E4464(UNK_PARAMS);
+/* 2E4464 */ void it_802E4464(Item_GObj*);
 /* 2E44E4 */ bool itWhitebea_UnkMotion6_Anim(Item_GObj* gobj);
 /* 2E44EC */ void itWhitebea_UnkMotion6_Phys(Item_GObj* gobj);
 /* 2E451C */ bool itWhitebea_UnkMotion6_Coll(Item_GObj* gobj);

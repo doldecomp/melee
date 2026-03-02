@@ -3150,25 +3150,24 @@ s32 fn_801695BC(u8 arg0, s32 arg1, s32 arg2, u8* arg3, u8* arg4)
     return (s32) temp_r3;
 }
 
-u8 fn_801697FC(s8 arg0, s8 arg1, s8 arg2, s8 arg3, u8* arg4)
+#pragma dont_inline on
+void fn_801697FC(s8 character, s8 costume, s8 new_character, s8 new_costume,
+                 s8* buf)
 {
-    s8 var_r28 = arg1;
-    u8 temp_r3 = gm_80169238(arg0);
-    s32 i;
-    if (arg0 != 0x21) {
-        if ((arg2 == arg0) && (var_r28 == arg3)) {
-            var_r28 = (var_r28 + 1) % temp_r3;
-        }
+    u8 ncolors = gm_80169238(character);
+    int i;
 
-        for (i = 0; (s8) arg4[i] != -2; i++) {
-            arg4[i] = (u8) var_r28;
-        }
-
-        return arg4[i];
+    if (character == 0x21) {
+        return;
     }
-
-    return temp_r3;
+    if (new_character == character && costume == new_costume) {
+        costume = (s8) ((costume + 1) % ncolors);
+    }
+    for (i = 0; (s8) buf[i] != -2; i++) {
+        buf[i] = costume;
+    }
 }
+#pragma dont_inline reset
 
 void fn_8016989C(u8* arg0, s32 arg1, s32 arg2, u8* arg3, u8* arg4)
 {
@@ -3381,8 +3380,7 @@ s32 gm_8016A22C(s8 k0, s8 k1, s8 k2, u8 a3, u8 a4, int a5, int mode, int a7,
         for (i = 0; i < 3; i++) {
             fn_801697FC(
                 kinds[i], lbl_8046B488.xC, p87, p8b,
-                (u8*) lbl_8046B488
-                    .x20); // This was being inlined, hence the no-inline
+                lbl_8046B488.x20); // This was being inlined, hence the no-inline
         }
         break;
     }

@@ -47,7 +47,7 @@
 /* 2DEF78 */ bool itZrshell_UnkMotion9_Anim(Item_GObj*);
 /* 2DEF80 */ void itZrshell_UnkMotion9_Phys(Item_GObj*);
 /* 2DF104 */ bool itZrshell_UnkMotion9_Coll(Item_GObj*);
-/* 2DF230 */ UNK_RET it_802DF230(UNK_PARAMS);
+/* 2DF230 */ void it_802DF230(Item_GObj*);
 /* 2DF724 */ bool itZrshell_UnkMotion11_Anim(Item_GObj*);
 /* 2DF93C */ void itZrshell_UnkMotion11_Phys(Item_GObj*);
 /* 2DF970 */ bool itZrshell_UnkMotion11_Coll(Item_GObj*);

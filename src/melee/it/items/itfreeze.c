@@ -223,9 +223,12 @@ void itFreeze_UnkMotion4_Phys(Item_GObj* gobj)
     f32 vel;
     f32 abs_vel;
 
-    if (ip->xDD4_itemVar.freeze.x10 != 0.0f) {
-        ip->x40_vel.x = ip->xDD4_itemVar.freeze.x10;
-        ip->xDD4_itemVar.freeze.x10 = 0.0f;
+    {
+        f32 x10 = ip->xDD4_itemVar.freeze.x10;
+        if (x10) {
+            ip->x40_vel.x = x10;
+            ip->xDD4_itemVar.freeze.x10 = 0.0f * 0.0f;
+        }
     }
 
     decel = ip->xDD4_itemVar.freeze.x14;
@@ -240,9 +243,15 @@ void itFreeze_UnkMotion4_Phys(Item_GObj* gobj)
     }
 
     if (vel > 0.0f) {
-        ip->x40_vel.x -= ABS(decel);
+        if (ip->xDD4_itemVar.freeze.x14 < 0.0f) {
+            decel = -decel;
+        }
+        ip->x40_vel.x -= decel;
     } else {
-        ip->x40_vel.x += ABS(decel);
+        if (decel < 0.0f) {
+            decel = -decel;
+        }
+        ip->x40_vel.x += decel;
     }
 }
 
