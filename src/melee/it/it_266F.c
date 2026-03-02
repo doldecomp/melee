@@ -1102,12 +1102,12 @@ void it_8026E0F4(Item_GObj* gobj)
 
 inline bool it_8026E_inline(Item_GObj* gobj)
 {
+    Item* ip = GET_ITEM((HSD_GObj*) gobj);
     bool cond;
     CollData* coll;
-    Item* ip;
-    PAD_STACK(26);
+    bool cond2;
+    PAD_STACK(24);
 
-    ip = GET_ITEM((HSD_GObj*) gobj);
     coll = &ip->x378_itemColl;
     it_80276214(gobj);
     cond = mpColl_800471F8(coll);
@@ -1115,9 +1115,20 @@ inline bool it_8026E_inline(Item_GObj* gobj)
     if (cond) {
         ip->xC30 = coll->floor.index;
     }
-    cond |= it_80276308(gobj);
-    cond |= it_802763E0(gobj);
+    cond2 = cond;
+    cond2 |= it_80276308(gobj);
+    cond2 |= it_802763E0(gobj);
+    cond = cond2;
     return cond & 0xF;
+}
+
+bool it_8026E15C_inline1(Item_GObj* gobj)
+{
+    return it_8026DDFC(gobj);
+}
+bool it_8026E15C_inline2(Item_GObj* gobj)
+{
+    return it_8026DD5C(gobj);
 }
 
 void it_8026E15C(Item_GObj* gobj, HSD_GObjEvent arg1)
@@ -1129,9 +1140,9 @@ void it_8026E15C(Item_GObj* gobj, HSD_GObjEvent arg1)
     if (res) {
         it_80276FC4(gobj, res);
         if (res & 1) {
-            if (it_8026DDFC(gobj) && it_8026DC24(gobj)) {
+            if (it_8026E15C_inline1(gobj) && it_8026DC24(gobj)) {
                 it_802725D4(gobj);
-                res2 = it_8026DD5C(gobj);
+                res2 = it_8026E15C_inline2(gobj);
             } else {
                 res2 = false;
             }

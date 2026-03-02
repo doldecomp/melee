@@ -82,4 +82,6 @@
 
 
 bool it_8026E248_inline(Item_GObj* gobj);
+bool it_8026E15C_inline1(Item_GObj* gobj);
+bool it_8026E15C_inline2(Item_GObj* gobj);
 #endif
