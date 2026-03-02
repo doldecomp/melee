@@ -60,7 +60,7 @@
 /* 26E7E0 */ void it_8026E7E0(Item_GObj*, HSD_GObjEvent);
 /* 26E8C4 */ void it_8026E8C4(Item_GObj*, HSD_GObjEvent, HSD_GObjEvent);
 /* 26E9A4 */ bool it_8026E9A4(HSD_GObj*, Vec3*, Vec3*, Vec3*);
-/* 26EA20 */ bool it_8026EA20(HSD_GObj*, Vec3*, Vec3*, Vec3*, UNK_T*,
+/* 26EA20 */ bool it_8026EA20(HSD_GObj*, Vec3*, Vec3*, Vec3*, int*,
                               u32* flags_out);
 /* 26EA9C */ bool it_8026EA9C(HSD_GObj*, Vec3*, Vec3*, Vec3*, int*,
                               u32* flags_out, s32);
