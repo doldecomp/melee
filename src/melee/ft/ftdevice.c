@@ -56,7 +56,20 @@ void ftCo_800C06C0(void)
 
 void ftCo_800C06E8(Ground_GObj* gobj, int arg1, void* func)
 {
-    NOT_IMPLEMENTED;
+    struct ftDeviceUnk3* base = ft_80459A68;
+    int i;
+    
+    for (i = 0; i < 1; i++) {
+        if (base[i].ground == NULL) {
+            base[i].ground = gobj;
+            base[i].type = arg1;
+            base[i].active_cb = func;
+            ft_804D6578.x0++;
+            return;
+        }
+    }
+    OSReport("fighter chk device coll func num over!\n");
+    __assert("ftdevice.c", 0x49, "0");
 }
 
 void ftCo_800C0764(Ground_GObj* arg0, u32 arg1, void* arg2)
