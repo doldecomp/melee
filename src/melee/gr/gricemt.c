@@ -1192,13 +1192,17 @@ int grIceMt_801FA500(HSD_GObj* param1)
 /// #grIceMt_801FA6D8
 void grIceMt_801FA6D8(HSD_GObj* param1)
 {
-    if ((Stage_80225194() == 76) && (Ground_801C2BA4(10)) &&
-        GET_GROUND(param1))
-    {
-        Ground* gp = GET_GROUND(param1);
-        // if (param1->user_data) {
-        gp->gv.icemt.xCE = grIm_804D69F4->x3A; // gp->xC_callback;
-        //}
+    HSD_GObj* gobj;
+    Ground* gp;
+
+    if (Stage_80225194() == 0x4C) {
+        gobj = Ground_801C2BA4(0xA);
+        if (gobj != NULL) {
+            gp = gobj->user_data;
+            if (gp != NULL) {
+                gp->gv.icemt.xCE = grIm_804D69F4->x3A;
+            }
+        }
     }
 }
 
