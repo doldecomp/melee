@@ -1302,16 +1302,16 @@ float ftKb_SpecialN_800F58AC(Fighter_GObj* gobj, Vec3* victim_self_vel,
 float ftKb_SpecialN_800F58D8(Fighter_GObj* gobj, Vec3* victim_self_vel,
                              float victim_facing_dir)
 {
-    float new_var;
     Fighter* fp = GET_FIGHTER(gobj);
     ftKb_DatAttrs* da = fp->dat_attrs;
-    new_var = 0.0F;
-    victim_self_vel->x = victim_facing_dir *
-                         da->specialn_swallow_star_vertical_velocity *
-                         cosf(da->specialn_spit_out_release_angle);
-    victim_self_vel->y = da->specialn_swallow_star_vertical_velocity *
+    float cos_val = cosf(da->specialn_spit_out_release_angle);
+    float temp = da->specialn_swallow_star_vertical_velocity * cos_val;
+    
+    victim_self_vel->x = victim_facing_dir * temp;
+    victim_self_vel->y = da->specialn_swallow_star_vertical_velocity * 
                          sinf(da->specialn_spit_out_release_angle);
-    victim_self_vel->z = new_var;
+    victim_self_vel->z = 0.0f;
+    
     return da->specialn_swallow_star_gravity;
 }
 
