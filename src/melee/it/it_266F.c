@@ -1370,7 +1370,7 @@ bool it_8026E32C(Item_GObj* item_gobj, HSD_GObjEvent arg1)
                 chk2 = false;
             }
             if (chk2) {
-                arg1((HSD_GObj*) item_gobj);
+                arg1(item_gobj);
             }
         }
     }
