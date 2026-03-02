@@ -1002,13 +1002,10 @@ bool it_8026DDFC(Item_GObj* gobj)
     return true;
 }
 
-#pragma push
-#pragma dont_inline on
 bool it_8026DE98(Item_GObj* gobj)
 {
     return it_8026DDFC(gobj);
 }
-#pragma pop
 
 bool it_8026DF34(Item_GObj* gobj)
 {
