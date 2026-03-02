@@ -147,6 +147,20 @@ typedef struct itKyasarinAttributes {
     /* +8 */ f32 x8;
 } itKyasarinAttributes;
 
+typedef struct itKyasarinEgg_ItemVars {
+    /* +0  ip+DD4 */ char pad_0[0x20];
+    /* +20 ip+DF4 */ s32 x20;
+    /* +24 ip+DF8 */ f32 x24;
+} itKyasarinEgg_ItemVars;
+
+typedef struct itKyasarinEggAttributes {
+    /* +0  */ s32* x0;
+    /* +4  */ f32 x4;
+    /* +8  */ f32 x8;
+    /* +C  */ s32 xC;
+    /* +10 */ s32 x10;
+} itKyasarinEggAttributes;
+
 typedef struct itHououAttr {
     /* +00 */ f32 timer;
     /* +04 */ u8 x4_pad[0x14];

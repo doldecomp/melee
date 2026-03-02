@@ -574,6 +574,7 @@ struct Item {
         itKoopaFlame_ItemVars koopaflame;
         itKusudama_ItemVars kusudama;
         itKyasarin_ItemVars kyasarin;
+        itKyasarinEgg_ItemVars kyasarinEgg;
         itLeadead_ItemVars leadead;
         itLGun_ItemVars lgun;
         itLGunBeam_ItemVars lgunbeam;
