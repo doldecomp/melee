@@ -19,7 +19,24 @@ static inline void normalizeAngle(f32* angle)
 
 /// #it_802AB3F0
 
-/// #it_802AB468
+void it_802AB468(Item_GObj* gobj, f32* out, s32 unused)
+{
+    Item* ip;
+
+    if (gobj != NULL) {
+        ip = GET_ITEM(gobj);
+        if (ip != NULL) {
+            if (out == NULL) return;
+            *out = *(f32*)&ip->xDD4_itemVar.pkthunder.xEEC;
+            return;
+        }
+        if (out == NULL) return;
+        *out = 0.0f;
+        return;
+    }
+    if (out == NULL) return;
+    *out = 0.0f;
+}
 
 bool it_802AB4B8(Item_GObj* gobj, CollData* cd)
 {
