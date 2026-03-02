@@ -27,6 +27,20 @@ void it_802B2B08(Item_GObj* item_gobj)
     it_80275158(item_gobj, *unkc4_unk4);
 }
 
+bool itYoshieggthrow_UnkMotion1_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    f32* base = (f32*)ip;
+    
+    if (base[0xD44/4] <= 0.0f) {
+        it_802B2C38(gobj);
+    } else {
+        base[0xD44/4] -= 1.0f;
+    }
+    
+    return false;
+}
+
 bool itYoshieggthrow_UnkMotion1_Coll(Item_GObj* gobj)
 {
     it_8026E5A0(gobj, it_802B2C38);
