@@ -1027,7 +1027,6 @@ long gm_80162A4C(s32 amount)
 struct gmm_x1868_1A8_t* gm_80162A98(s32 arg0)
 {
     struct gmm_x1868_1A8_t* temp_r3;
-    u32 var_r31_2;
     u32 var_r31;
     s32* temp_r3_2 = gmMainLib_8015CDB0();
 
@@ -1037,10 +1036,10 @@ struct gmm_x1868_1A8_t* gm_80162A98(s32 arg0)
 
     gmMainLib_8015EDBC()->xC = var_r31;
 
-    var_r31_2 = MAX((u32) (arg0 + gmMainLib_8015EDC8()->x0), -1U);
+    var_r31 = MAX((u32) (arg0 + gmMainLib_8015EDC8()->x0), -1U);
 
     temp_r3 = gmMainLib_8015EDC8();
-    temp_r3->x0 = var_r31_2;
+    temp_r3->x0 = var_r31;
     return temp_r3;
 }
 
