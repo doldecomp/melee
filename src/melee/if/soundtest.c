@@ -432,13 +432,18 @@ s32 un_80300338(void)
 
 s32 un_80300378(void)
 {
-    u8* src;
+    u8* ptr;
+    
     un_803FA128.x220 &= 0xFFFE;
-    src = &gmMainLib_8045A6C0[un_803FA128.x220 + 0x1868];
-    un_803FA128.x224 = src[0];
-    un_803FA128.x225 = src[1];
-    un_803FA128.x226 = src[2];
-    un_803FA128.x227 = src[3];
+    
+    ptr = gmMainLib_8045A6C0;
+    ptr = ptr + un_803FA128.x220;
+    
+    un_803FA128.x224 = ptr[0x1868];
+    un_803FA128.x225 = ptr[0x1869];
+    un_803FA128.x226 = ptr[0x186A];
+    un_803FA128.x227 = ptr[0x186B];
+    
     return 0;
 }
 
