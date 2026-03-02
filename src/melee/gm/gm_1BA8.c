@@ -1359,7 +1359,28 @@ u8 gm_801BEBC0(u8 arg0)
     return i;
 }
 
-/// #gm_801BEBF8
+u8 gm_801BEBF8(u8 arg0)
+{
+    u8* table = gm_803DF918;
+    u8 i;
+    struct gm_804D6900_t** array = gm_804D6900;
+    struct gm_804D6900_t* entry;
+    u8* ptr;
+
+    for (i = 0; i < 0x33; i++) {
+        if (arg0 == table[i]) {
+            break;
+        }
+    }
+
+    entry = array[i];
+    if (entry == NULL) {
+        return 0x21;
+    }
+
+    ptr = *(u8**)((u8*)entry + 0x14);
+    return *ptr;
+}
 
 UNK_T gm_801BEC54(void)
 {
