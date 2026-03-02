@@ -122,7 +122,7 @@ void it_802E2DF4(Item_GObj* gobj)
 {
     Item* ip = gobj->user_data;
     if (ip->xCCC_incDamageDirection == ip->facing_dir) {
-        it_802E3098();
+        it_802E3098(gobj);
         return;
     }
     it_802E27B4(gobj);
@@ -136,7 +136,25 @@ void it_802E2DF4(Item_GObj* gobj)
 
 /// #itOldottosea_UnkMotion7_Coll
 
-/// #it_802E3098
+void it_802E3098(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    s32 val;
+    
+    ip->x40_vel.z = 0.0f;
+    ip->x40_vel.y = 0.0f;
+    ip->x40_vel.x = 0.0f;
+    
+    if (lbLang_IsSettingJP()) {
+        val = 0x37;
+    } else {
+        val = 0x28;
+    }
+    ip->xDD4_itemVar.oldottosea.x28 = val;
+    
+    Item_80268E5C(gobj, 3, 2);
+    it_8026BDB4(gobj);
+}
 
 bool itOldottosea_UnkMotion3_Anim(Item_GObj* gobj)
 {

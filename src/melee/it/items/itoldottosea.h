@@ -28,7 +28,7 @@
 /* 2E2E90 */ bool itOldottosea_UnkMotion7_Anim(Item_GObj* gobj);
 /* 2E2F08 */ void itOldottosea_UnkMotion7_Phys(Item_GObj* gobj);
 /* 2E3024 */ bool itOldottosea_UnkMotion7_Coll(Item_GObj* gobj);
-/* 2E3098 */ UNK_RET it_802E3098(UNK_PARAMS);
+/* 2E3098 */ void it_802E3098(Item_GObj* gobj);
 /* 2E3110 */ bool itOldottosea_UnkMotion3_Anim(Item_GObj* gobj);
 /* 2E31B8 */ void itOldottosea_UnkMotion3_Phys(Item_GObj* gobj);
 /* 2E31BC */ bool itOldottosea_UnkMotion3_Coll(Item_GObj* gobj);
