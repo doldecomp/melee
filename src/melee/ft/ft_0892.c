@@ -77,8 +77,12 @@ void ft_80089768(Vec2* ptr)
 
 void ft_80089824(Fighter_GObj* gobj)
 {
-    Fighter* fp = GET_FIGHTER(gobj);
-    fp->x2070 = fp->x2070;
+    Fighter* fp;
+    s32 temp;
+    
+    fp = GET_FIGHTER(gobj);
+    ((s32*)&temp)[0] = fp->x2070.x2070_int;
+    fp->x2070.x2070_int = ((s32*)&temp)[0];
     ft_80089460(fp);
     fp->x2074.x2088 = plAttack_80037B08();
     pl_80037C60(gobj, 0);
