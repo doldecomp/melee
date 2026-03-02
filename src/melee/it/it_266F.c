@@ -1326,13 +1326,19 @@ void it_8026E8C4(Item_GObj* item_gobj, HSD_GObjEvent arg1, HSD_GObjEvent arg2) {
     }
 }
 #else
+
+bool it_8026E32C_inline(Item_GObj* gobj)
+{
+    return it_8026DD5C(gobj);
+}
 bool it_8026E32C(Item_GObj* item_gobj, HSD_GObjEvent arg1)
 {
     CollData* coll;
     Item* item;
     bool chk;
     bool chk2;
-    PAD_STACK(38);
+    bool new_var;
+    PAD_STACK(42);
 
     item = item_gobj->user_data;
     coll = &item->x378_itemColl;
@@ -1344,13 +1350,14 @@ bool it_8026E32C(Item_GObj* item_gobj, HSD_GObjEvent arg1)
     }
     chk = chk | it_80276308(item_gobj);
     chk = chk | it_802763E0(item_gobj);
-    if (chk & 0xF) {
-        it_80276FC4(item_gobj, chk);
-        if (chk & 1) {
+    new_var = chk;
+    if (new_var & 0xF) {
+        it_80276FC4(item_gobj, new_var);
+        if (new_var & 1) {
             item = item_gobj->user_data;
             item->xD50_landNum += 1;
             if (it_8026DC24(item_gobj)) {
-                chk2 = it_8026DD5C(item_gobj);
+                chk2 = it_8026E32C_inline(item_gobj);
             } else {
                 chk2 = false;
             }
