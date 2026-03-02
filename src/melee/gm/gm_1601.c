@@ -3421,7 +3421,7 @@ void fn_8016A46C(void)
 
 void fn_8016A488(s32 arg0)
 {
-    if (gm_8016AE44()->hud_enabled) {
+    if (gm_8016AE44()->hud_enabled == true) {
         Player_80031848(arg0);
     }
 }
