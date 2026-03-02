@@ -1002,10 +1002,13 @@ bool it_8026DDFC(Item_GObj* gobj)
     return true;
 }
 
+#pragma push
+#pragma dont_inline on
 bool it_8026DE98(Item_GObj* gobj)
 {
     return it_8026DDFC(gobj);
 }
+#pragma pop
 
 bool it_8026DF34(Item_GObj* gobj)
 {
@@ -1139,6 +1142,11 @@ void it_8026E15C(Item_GObj* gobj, HSD_GObjEvent arg1)
     }
 }
 
+bool it_8026E248_inline(Item_GObj* gobj)
+{
+    return it_8026DD5C(gobj);
+}
+
 void it_8026E248(Item_GObj* gobj, HSD_GObjEvent arg1)
 {
     bool res2;
@@ -1149,7 +1157,7 @@ void it_8026E248(Item_GObj* gobj, HSD_GObjEvent arg1)
         it_80276FC4(gobj, res);
         if (res & 1) {
             if (it_8026DE98(gobj) && it_8026DC24(gobj)) {
-                res2 = it_8026DD5C(gobj);
+                res2 = it_8026E248_inline(gobj);
             } else {
                 res2 = false;
             }
