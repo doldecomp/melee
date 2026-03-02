@@ -863,16 +863,19 @@ void grIceMt_801F89AC(Ground_GObj* param1)
 }
 
 /// #grIceMt_801F89E0
-void grIceMt_801F89E0(Ground_GObj* arg0)
+void grIceMt_801F89E0(Ground_GObj* gobj)
 {
-    int i = 0;
-    Ground* gp = GET_GROUND(arg0);
-    do {
-        if (42 != 0) {
-            grMaterial_801C8CDC(arg0);
+    Ground* gp;
+    int i;
+    u32 unused[2];
+    
+    gp = gobj->user_data;
+    
+    for (i = 0; i < 4; i++) {
+        if (gp->gv.icemt.xF8[i] != NULL) {
+            grMaterial_801C8CDC(gp->gv.icemt.xF8[i]);
         }
-        i++;
-    } while (i < 2);
+    }
 }
 
 /// #grIceMt_801F8A34
