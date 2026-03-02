@@ -2494,7 +2494,27 @@ static void fn_800F98F4(Fighter_GObj*);
 
 /// #ftKb_SpecialNLg_800F951C
 
-/// #ftKb_SpecialNLg_800F9598
+void ftKb_SpecialNLg_800F9598(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp2;
+    s32 motion_id;
+    f32 anim_frame;
+    
+    ftCommon_8007D7FC(fp);
+    
+    fp2 = gobj->user_data;
+    motion_id = 0x18F;
+    anim_frame = fp->cur_anim_frame;
+    
+    if (fp2->fv.kb.hat.kind != 0) {
+        motion_id = 0x200;
+    }
+    
+    Fighter_ChangeMotionState(gobj, motion_id, 0x5000,
+                              anim_frame, 1.0f, 0.0f, NULL);
+    fp->accessory4_cb = fn_800F9260;
+}
 
 void ftKb_SpecialNLg_800F9614(Fighter_GObj* gobj)
 {
