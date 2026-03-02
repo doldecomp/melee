@@ -629,21 +629,24 @@ null_return:
 /// @brief Clears Mewtwo copy ability state and effects.
 void ftKb_SpecialNMt_80107040(Fighter_GObj* gobj)
 {
-    Vec2 unused;
     Fighter* fp;
+    
     if (gobj == NULL) {
         return;
     }
+    
     fp = GET_FIGHTER(gobj);
-    if (fp->fv.kb.x98 != 0) {
-        fp->fv.kb.x98 = 0;
+    if (fp->fv.kb.x98 != NULL) {
+        fp->fv.kb.x98 = NULL;
     }
+    
     if (gobj == NULL) {
         return;
     }
+    
     fp = GET_FIGHTER(gobj);
     efLib_DestroyAll(gobj);
-    fp->fv.kb.xA0 = 0;
+    fp->fv.kb.xA0 = NULL;
 }
 
 /// @brief Full cleanup of Mewtwo copy ability state.
