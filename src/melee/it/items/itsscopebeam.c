@@ -39,7 +39,28 @@ void it_80298DEC(Fighter_GObj* gobj, Vec* vec, int arg2, float arg3)
 
 /// #it_80298ED0
 
-/// #itSscopebeam_UnkMotion9_Anim
+bool itSscopebeam_UnkMotion9_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    s32 index = ip->xDD4_itemVar.starrodstar.x0;
+    HSD_FObj* fobj = ip->xC4_article_data->x4_specialAttributes;
+    f32* frame_data = (f32*)((u8*)fobj + index * 0xC);
+
+    if (ip->xD44_lifeTimer == frame_data[2]) {
+        if (ip->x5D4_hitboxes[0].hit.state >= 1) {
+            ip->x5D4_hitboxes[0].hit.scale = ip->x5D4_hitboxes[0].hit.scale * frame_data[1];
+        }
+    }
+
+    ip->xD44_lifeTimer = ip->xD44_lifeTimer - 1.0f;
+
+    if (ip->xD44_lifeTimer <= 0.0f) {
+        ip->xD44_lifeTimer = 0.0f;
+        return true;
+    }
+
+    return false;
+}
 
 void itSscopebeam_UnkMotion9_Phys(Item_GObj* gobj) {}
 
