@@ -1430,11 +1430,12 @@ void it_80271A58(Item_GObj* item_gobj)
     Item* item;
     HSD_JObj* jobj;
 
-    item = item_gobj->user_data;
+    item = GET_ITEM(item_gobj);
     item->xBEC = item->xBDC;
     if ((item->facing_dir == 1.0f) && (item->xDC8_word.flags.x19 == 1)) {
-        item->xBEC.left = -item->xBEC.left;
-        item->xBEC.right = -item->xBEC.right;
+        f32 temp = -item->xBEC.right;
+        item->xBEC.right = -item->xBEC.left;
+        item->xBEC.left = temp;
     }
     jobj = it_802746F8(item_gobj);
     if (item->xDC8_word.flags.x17 == 0) {
