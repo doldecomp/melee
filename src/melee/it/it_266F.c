@@ -165,7 +165,7 @@ s32 it_8026C530(s32 arg0, HSD_ObjAllocUnk6* arg1, s32 arg2, s32 arg3)
 }
 
 /// argument is definitely size 0x10
-u8 it_8026C65C(HSD_ObjAllocUnk6* arg_struct)
+int it_8026C65C(HSD_ObjAllocUnk6* arg_struct)
 {
     s32 rand_int;
     s32 temp_r6;
