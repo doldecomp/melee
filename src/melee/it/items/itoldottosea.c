@@ -83,7 +83,21 @@ bool itOldottosea_UnkMotion4_Coll(Item_GObj* gobj)
     return it_802E35CC(gobj);
 }
 
-/// #it_802E2C80
+void it_802E2C80(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+
+    it_802762BC(ip);
+
+    if (it_8027B798(gobj, &ip->x40_vel) != 0) {
+        it_802762BC(ip);
+    } else {
+        it_802762B0(ip);
+    }
+
+    ip->facing_dir = ip->init_facing_dir;
+    Item_80268E5C(gobj, 5, 2);
+}
 
 bool itOldottosea_UnkMotion5_Anim(Item_GObj* gobj)
 {
