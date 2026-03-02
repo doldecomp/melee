@@ -181,27 +181,30 @@ void it_8026FCF8(Item* arg_item, HitCapsule* arg_hit)
     HSD_GObj* item_gobj;
     HitCapsule* hit;
     bool chk;
-    u32 index;
     Item* item;
-    PAD_STACK(4);
+    PAD_STACK(8);
 
-#if 0
     if (arg_item->xAC4_ignoreItemID != 0U) {
         item_gobj = HSD_GObj_Entities->items;
         while (item_gobj != NULL) {
             item = GET_ITEM(item_gobj);
             if (item->xAC4_ignoreItemID == arg_item->xAC4_ignoreItemID) {
-                index = 0U;
+                u32 i;
+
                 chk = false;
-                while (!chk && index < 4U) {
-                    hit = &item->x5D4_hitboxes[index].hit;
-                    if ((hit != arg_hit) && (hit->state != HitCapsule_Disabled) && (hit->x4 == arg_hit->x4)) {
+                for (i = 0; i < ARRAY_SIZE(item->x5D4_hitboxes); i++) {
+                    hit = &item->x5D4_hitboxes[i].hit;
+                    if ((hit != arg_hit) &&
+                        (hit->state != HitCapsule_Disabled) &&
+                        (hit->x4 == arg_hit->x4))
+                    {
                         lbColl_CopyHitCapsule(hit, arg_hit);
                         chk = true;
-                        return;
+                        break;
                     }
-                    index++;
+                    chk = false;
                 }
+
                 if (chk) {
                     return;
                 }
@@ -210,86 +213,6 @@ void it_8026FCF8(Item* arg_item, HitCapsule* arg_hit)
         }
     }
     lbColl_80008440(arg_hit);
-    return;
-#elif 0
-    if (arg_item->xAC4_ignoreItemID != 0U) {
-        item_gobj = HSD_GObj_Entities->items;
-        while (item_gobj != NULL) {
-            item = GET_ITEM(item_gobj);
-            if (item->xAC4_ignoreItemID == arg_item->xAC4_ignoreItemID) {
-                chk = false;
-                for (index = 0U; index < 4U; index++) {
-                    hit = &item->x5D4_hitboxes[index].hit;
-                    if ((hit != arg_hit) &&
-                        (hit->state != HitCapsule_Disabled) &&
-                        (hit->x4 == arg_hit->x4))
-                    {
-                        lbColl_CopyHitCapsule(hit, arg_hit);
-                        return;
-                    }
-                }
-            }
-            item_gobj = item_gobj->next;
-        }
-    }
-    lbColl_80008440(arg_hit);
-    return;
-#else
-    if (arg_item->xAC4_ignoreItemID != 0U) {
-        item_gobj = HSD_GObj_Entities->items;
-        while (item_gobj != NULL) {
-            item = GET_ITEM(item_gobj);
-            if (item->xAC4_ignoreItemID == arg_item->xAC4_ignoreItemID) {
-                index = 0U;
-                hit = &item->x5D4_hitboxes[index].hit;
-                if ((hit != arg_hit) && (hit->state != HitCapsule_Disabled) &&
-                    (hit->x4 == arg_hit->x4))
-                {
-                    lbColl_CopyHitCapsule(hit, arg_hit);
-                    chk = true;
-                } else {
-                    index++;
-                    hit = &item->x5D4_hitboxes[index].hit;
-                    if ((hit != arg_hit) &&
-                        (hit->state != HitCapsule_Disabled) &&
-                        (hit->x4 == arg_hit->x4))
-                    {
-                        lbColl_CopyHitCapsule(hit, arg_hit);
-                        chk = true;
-                    } else {
-                        index++;
-                        hit = &item->x5D4_hitboxes[index].hit;
-                        if ((hit != arg_hit) &&
-                            (hit->state != HitCapsule_Disabled) &&
-                            (hit->x4 == arg_hit->x4))
-                        {
-                            lbColl_CopyHitCapsule(hit, arg_hit);
-                            chk = true;
-                        } else {
-                            index++;
-                            hit = &item->x5D4_hitboxes[index].hit;
-                            if ((hit != arg_hit) &&
-                                (hit->state != HitCapsule_Disabled) &&
-                                (hit->x4 == arg_hit->x4))
-                            {
-                                lbColl_CopyHitCapsule(hit, arg_hit);
-                                chk = true;
-                            } else {
-                                chk = false;
-                            }
-                        }
-                    }
-                }
-                if (chk) {
-                    return;
-                }
-            }
-            item_gobj = item_gobj->next;
-        }
-    }
-    lbColl_80008440(arg_hit);
-    return;
-#endif
 }
 
 void it_8026FE68(Item* arg_item0, HitCapsule* hit1, Item* arg_item2,
