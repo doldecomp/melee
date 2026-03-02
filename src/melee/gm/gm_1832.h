@@ -49,7 +49,7 @@
 /* 187F48 */ void gm_80187F48_OnEnter(UNK_T);
 /* 188364 */ void gm_80188364_OnLeave(UNK_T);
 /* 18838C */ void gm_8018838C_OnFrame(void);
-/* 1883C0 */ UNK_RET gm_801883C0(UNK_PARAMS);
+/* 1883C0 */ f32 gm_801883C0(void);
 /* 18841C */ bool gm_8018841C(void);
 /* 188454 */ int gm_80188454(int idx);
 /* 18846C */ UNK_RET fn_8018846C(UNK_PARAMS);
