@@ -1531,12 +1531,15 @@ void it_8026E71C(Item_GObj* item_gobj, HSD_GObjEvent arg1)
     }
 }
 
+#pragma push
+#pragma dont_inline on
 void it_8026E7E0(Item_GObj* item_gobj, HSD_GObjEvent arg1)
 {
     CollData* coll;
     Item* item;
     bool chk;
     bool chk2;
+    bool new_var;
     PAD_STACK(30);
 
     item = item_gobj->user_data;
@@ -1549,21 +1552,22 @@ void it_8026E7E0(Item_GObj* item_gobj, HSD_GObjEvent arg1)
     }
     chk = chk | it_80276308(item_gobj);
     chk = chk | it_802763E0(item_gobj);
-    // chk &= 0xC;
-    if (chk & 0xC) {
-        it_80276D9C(item_gobj, chk);
+    new_var = chk;
+    if (new_var & 0xC) {
+        it_80276D9C(item_gobj, new_var);
     }
-    if (chk & 1) {
+    if (new_var & 1) {
         if (it_8026DE98(item_gobj) && it_8026DC24(item_gobj)) {
-            chk2 = it_8026DD5C(item_gobj);
+            new_var = it_8026DD5C(item_gobj);
         } else {
-            chk2 = false;
+            new_var = false;
         }
-        if (chk2) {
-            arg1((HSD_GObj*) item_gobj);
+        if (new_var) {
+            arg1(item_gobj);
         }
     }
 }
+#pragma pop
 
 void it_8026E8C4(Item_GObj* item_gobj, HSD_GObjEvent arg1, HSD_GObjEvent arg2)
 {
