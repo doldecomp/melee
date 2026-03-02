@@ -202,6 +202,18 @@ void ftKb_AttackDashAir_800F22D4(Fighter_GObj* gobj)
 
 /// #ftKb_SpecialHi2_Anim
 
+void ftKb_SpecialHi2_Anim(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        ftCommon_8007D5D4(fp);
+        Fighter_ChangeMotionState(gobj, 0x187, 0xA, 0.0f, 1.0f, 0.0f, NULL);
+        fp->pre_hitlag_cb = efLib_PauseAll;
+        fp->post_hitlag_cb = efLib_ResumeAll;
+    }
+}
+
 void ftKb_SpecialHi3_Anim(Fighter_GObj* gobj) {}
 
 void ftKb_SpecialAirHiEnd_IASA(Fighter_GObj* gobj) {}
