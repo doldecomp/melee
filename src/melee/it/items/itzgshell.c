@@ -165,7 +165,14 @@ bool itZrshell_UnkMotion1_Coll(Item_GObj* gobj)
     return false;
 }
 
-/// #it_2725_Logic11_PickedUp
+void it_2725_Logic11_PickedUp(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    it_80275474(gobj);
+    M2C_FIELD(ip, s32*, 0xE0C) = 0;
+    ip->xDD4_itemVar.zgshell.xE1C_b0 = 0;
+    Item_80268E5C(gobj, 2, 2);
+}
 
 bool itZrshell_UnkMotion2_Anim(Item_GObj* arg0)
 {
