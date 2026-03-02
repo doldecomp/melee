@@ -91,23 +91,24 @@ static void lbRefract_ReadTexCoordRGBA8(lbRefract_CallbackData* data, s32 row,
                                         u32 col, u32* out_r, u32* out_g,
                                         u8* out_b, u8* out_a)
 {
-    s32 base_offset;
-    s32 pixel_offset;
+    s32 offset;
+    u8* base;
 
-    base_offset = data->buffer + (((col >> 2U) * data->row_stride) +
-                                  ((row * 0x10) & 0xFFFFFFC0));
-    pixel_offset = ((row & 3) + ((col * 4) & 0xC)) * 2;
+    base = (u8*) data->buffer + ((col >> 2) * data->row_stride) +
+           ((row << 4) & 0xFFFFFFC0);
+    offset = ((row & 3) + ((col & 3) << 2)) << 1;
+    
     if (out_a != NULL) {
-        *out_a = base_offset + pixel_offset;
+        *(u32*)out_a = base[offset];
     }
     if (out_r != NULL) {
-        *out_r = base_offset + pixel_offset + 0x01;
+        *(u32*)out_r = (base + offset)[1];
     }
     if (out_g != NULL) {
-        *out_g = base_offset + pixel_offset + 0x20;
+        *(u32*)out_g = (base + offset)[0x20];
     }
     if (out_b != NULL) {
-        *out_b = (s32) (base_offset + pixel_offset + 0x21);
+        *(u32*)out_b = (base + offset)[0x21];
     }
 }
 
