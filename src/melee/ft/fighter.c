@@ -347,7 +347,7 @@ void Fighter_UnkInitReset_80067C98(Fighter* fp)
     fp->dmg.x1954 = 0;
     fp->dmg.x1958 = 0;
 
-    fp->x221A_b2 = 0;
+    fp->allow_sdi = 0;
 
     fp->dmg.x195c_hitlag_frames = 0;
 
@@ -1408,7 +1408,7 @@ void Fighter_8006A1BC(Fighter_GObj* gobj)
             fp->dmg.x1954 -= 1.0f;
             if (fp->dmg.x1954 <= 0.0f) {
                 fp->dmg.x1954 = 0.0f;
-                if (!fp->x221A_b2 && !fp->x2219_b7) {
+                if (!fp->allow_sdi && !fp->x2219_b7) {
                     Fighter_8006D10C(gobj);
                 }
             }
@@ -1430,7 +1430,7 @@ void Fighter_8006A1BC(Fighter_GObj* gobj)
                 if ((!fp->dmg.x1954) && !fp->x2219_b7) {
                     Fighter_8006D10C(gobj);
                 }
-                fp->x221A_b2 = 0;
+                fp->allow_sdi = 0;
             }
         }
         ftCo_800C37A0(gobj);
@@ -2713,7 +2713,7 @@ void Fighter_8006CFE0(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->x2219_b7) {
-        if (!fp->x221A_b2) {
+        if (!fp->allow_sdi) {
             if (!fp->dmg.x1954) {
                 Fighter_8006D10C(gobj);
             }
@@ -2760,7 +2760,7 @@ static void Fighter_8006D10C_Inline1(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (fp->x2219_b7) {
-        if (!fp->x221A_b2 && !fp->dmg.x1954) {
+        if (!fp->allow_sdi && !fp->dmg.x1954) {
             if (fp->post_hitlag_cb) {
                 fp->post_hitlag_cb(gobj);
             }
@@ -2958,7 +2958,7 @@ void Fighter_ProcessHit_8006D1EC(Fighter_GObj* gobj)
                     fp->dmg.x195c_hitlag_frames =
                         p_ftCommonData->x194_unkHitLagFrames;
                 }
-                fp->x221A_b2 = 1;
+                fp->allow_sdi = 1;
                 if (bool2) {
                     fp->x221A_b3 = 1;
                 }
