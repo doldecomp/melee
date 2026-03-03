@@ -571,22 +571,21 @@ void ftCo_Damage_OnEveryHitlag(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     if (fp->x221A_b2) {
-        float lstick_x = fp->input.lstick.x;
-        float lstick_y = fp->input.lstick.y;
         float cd_x4B0 = p_ftCommonData->x4B0;
-        if (lstick_x * lstick_x + lstick_y * lstick_y == cd_x4B0 * cd_x4B0) {
-            s32 cd_x4B4 = p_ftCommonData->x4B4;
+        float x_sq = fp->input.lstick.x * fp->input.lstick.x;
+        float y_sq = fp->input.lstick.y * fp->input.lstick.y;
+        if (x_sq + y_sq >= cd_x4B0 * cd_x4B0) {
 #if SOLUTION == 0
-            if (((M2C_FIELD(fp, u8*, 0x670) < cd_x4B4) ||
-                 M2C_FIELD(fp, u8*, 0x671) < cd_x4B4))
+            if (((M2C_FIELD(fp, u8*, 0x670) < p_ftCommonData->x4B4) ||
+                 M2C_FIELD(fp, u8*, 0x671) < p_ftCommonData->x4B4))
 #else
-            if (((fp->x670_timer_lstick_tilt_x < cd_x4B4) ||
-                 fp->x671_timer_lstick_tilt_y < cd_x4B4))
+            if (((fp->x670_timer_lstick_tilt_x < p_ftCommonData->x4B4) ||
+                 fp->x671_timer_lstick_tilt_y < p_ftCommonData->x4B4))
 #endif
             {
                 float cd_x4B8 = p_ftCommonData->x4B8;
-                float scaled_lstick_x = lstick_x * cd_x4B8;
-                float scaled_lstick_y = lstick_y * cd_x4B8;
+                float scaled_lstick_x = fp->input.lstick.x * cd_x4B8;
+                float scaled_lstick_y = fp->input.lstick.y * cd_x4B8;
                 fp->cur_pos.x += scaled_lstick_x;
                 fp->cur_pos.y += scaled_lstick_y;
 #if SOLUTION == 0
