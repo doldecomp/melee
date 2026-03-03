@@ -566,48 +566,29 @@ bool ftCo_Damage_CheckAirMotion(Fighter* fp)
     }
 }
 
-#define SOLUTION 1
 void ftCo_Damage_OnEveryHitlag(Fighter_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     if (fp->x221A_b2) {
         float cd_x4B0 = p_ftCommonData->x4B0;
-        float x_sq = fp->input.lstick.x * fp->input.lstick.x;
-        float y_sq = fp->input.lstick.y * fp->input.lstick.y;
-        if (x_sq + y_sq >= cd_x4B0 * cd_x4B0) {
-#if SOLUTION == 0
-            if (((M2C_FIELD(fp, u8*, 0x670) < p_ftCommonData->x4B4) ||
-                 M2C_FIELD(fp, u8*, 0x671) < p_ftCommonData->x4B4))
-#else
-            if (((fp->x670_timer_lstick_tilt_x < p_ftCommonData->x4B4) ||
-                 fp->x671_timer_lstick_tilt_y < p_ftCommonData->x4B4))
-#endif
+        if (VEC2_SQ_LEN(fp->input.lstick) >= cd_x4B0 * cd_x4B0) {
+            if (fp->x670_timer_lstick_tilt_x < p_ftCommonData->x4B4 ||
+                fp->x671_timer_lstick_tilt_y < p_ftCommonData->x4B4)
             {
-                float cd_x4B8 = p_ftCommonData->x4B8;
-                float scaled_lstick_x = fp->input.lstick.x * cd_x4B8;
-                float scaled_lstick_y = fp->input.lstick.y * cd_x4B8;
+                float scaled_lstick_x =
+                    fp->input.lstick.x * p_ftCommonData->x4B8;
+                float scaled_lstick_y =
+                    fp->input.lstick.y * p_ftCommonData->x4B8;
                 fp->cur_pos.x += scaled_lstick_x;
                 fp->cur_pos.y += scaled_lstick_y;
-#if SOLUTION == 0
-                M2C_FIELD(fp, u8*, 0x670) = 0xFE;
-                M2C_FIELD(fp, u8*, 0x671) = 0xFE;
-#else
-                fp->x670_timer_lstick_tilt_x = 0xFE;
-                fp->x671_timer_lstick_tilt_y = 0xFE;
-#endif
-#if SOLUTION == 0
-                pl_800401F0(fp->player_id,
-                            (M2C_FIELD(fp, u8*, 0x221F) >> 3) & 1,
-                            scaled_lstick_x, scaled_lstick_y);
-#else
+                fp->x670_timer_lstick_tilt_x = 254;
+                fp->x671_timer_lstick_tilt_y = 254;
                 pl_800401F0(fp->player_id, fp->x221F_b4, scaled_lstick_x,
                             scaled_lstick_y);
-#endif
             }
         }
     }
 }
-#undef SOLUTION
 
 void ftCo_8008E5A4(Fighter* fp)
 {
