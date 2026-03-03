@@ -192,8 +192,8 @@ bool un_802FF884(char* unused)
 
 int un_802FF88C(void)
 {
-    un_804D6DB8 = 0;
     un_804D5858 = 0x7F;
+    un_804D6DB8 = 0;
     un_804D5854 = 0x7F;
     un_804D5850 = 0x7F;
     un_804D6DB4 = 0;
@@ -640,16 +640,26 @@ bool un_803009A4(bool update_scene)
     return false;
 }
 
+inline float inline_fn(u32 arg0)
+{
+    return (float) (arg0 / 100U);
+}
+
 s32 un_803009E0(void)
 {
+    s32 *new_var;
     switch (un_804D6DD8) {
-    case 2: {
-        u32 val = (u32) *gmMainLib_8015D06C((u8) un_804D6DC8);
-        un_804D6DD0 = (float) (val / 100U);
+    case 2:
+        new_var = gmMainLib_8015D06C((u8) un_804D6DC8);
+    {
+        u32 val = (u32) (*new_var);
+        un_804D6DD0 = inline_fn(val);
         break;
     }
-    case 3: {
-        s32 result = gmMainLib_8015D48C((u8) un_804D6DC8);
+
+    case 3:
+    {
+        s32 result = gmMainLib_8015D48C(un_804D6DC8);
         gmMainLib_8015D4E8((u8) un_804D6DC8, result);
         un_804D6DCC = result;
         break;

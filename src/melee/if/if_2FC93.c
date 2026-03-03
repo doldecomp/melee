@@ -92,6 +92,8 @@ void un_802FD9D8(unsigned char slot)
         if (un_804A1F10.x2C[i] == slot) {
             un_804A1F10.x24[slot] = 0;
             un_804A1F10.x28[i] = 0;
+            i++;
+            i--;
         }
     }
 }

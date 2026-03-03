@@ -259,17 +259,22 @@ void un_802FF620(void)
 void un_802FF6A0(void)
 {
     HSD_GObj* gobj = GObj_Create(HSD_GOBJ_CLASS_LIGHT, 3, 0);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784A,
-                            HSD_LObjLoadDesc(&un_803F9ED4));
+    HSD_LObj *new_var;
+    new_var = HSD_LObjLoadDesc(&un_803F9ED4);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784A, new_var);
     GObj_SetupGXLink(gobj, HSD_GObj_LObjCallback, 0, 0);
+}
+
+inline HSD_CObj *inline_fn()
+{
+    return HSD_CObjLoadDesc(&un_803F9E60);
 }
 
 void un_802FF710(void)
 {
     HSD_GObj* gobj = GObj_Create(HSD_GOBJ_CLASS_CAMERA, 20, 0);
     if (gobj) {
-        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B,
-                                HSD_CObjLoadDesc(&un_803F9E60));
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, inline_fn());
         GObj_SetupGXLinkMax(gobj, HSD_GObj_803910D8, 11);
         gobj->gxlink_prios = 0x20000;
     }

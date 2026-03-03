@@ -280,18 +280,19 @@ s32 it_802E61C4(Item_GObj* item_gobj, s32 arg1, s32 arg2)
 {
     Item* item;
     it_2E5A_DatAttrs_2* attr;
+    f32 new_var;
     s32 var_r29;
     f32 temp_f1;
-
     item = GET_ITEM((HSD_GObj*) item_gobj);
     attr = item->xC4_article_data->x4_specialAttributes;
-
     var_r29 = arg1 * ((f32*) &attr[1])[arg2];
-    temp_f1 = attr->x24 * HSD_Randf();
-    var_r29 = var_r29 * (0.01F * temp_f1 + 1.0F);
-
+    new_var = HSD_Randf();
+    temp_f1 = attr->x24 * new_var;
+    var_r29 *= (0.01F * temp_f1) + 1.0F;
     if (var_r29 < 1) {
-        var_r29 = 1;
+        do {
+            var_r29 = 1;
+        } while (0);
     }
     return var_r29;
 }
@@ -314,11 +315,12 @@ void it_802E628C(Item_GObj* item_gobj, f32 arg8, f32 arg9)
     temp_f2 = attr->xC;
     temp_f0 = M_PI_3;
     temp_f1 = arg8 - M_PI_2;
+    temp_f0 = M_PI;
     // var_f30 = temp_f31 * attr->xC * item->facing_dir;
     var_f30 = temp_f31 * temp_f2;
     var_f30 *= item->facing_dir;
-    if (((arg8 >= M_PI_3) && (arg8 <= 2 * M_PI_3)) ||
-        ((arg8 >= 2 * M_PI_3) && (arg8 <= 5 * M_PI_3)))
+    if (((arg8 >= (temp_f0 / 3)) && (arg8 <= (2 * (temp_f0 / 3)))) ||
+        ((arg8 >= (2 * (temp_f0 / 3))) && (arg8 <= (5 * (temp_f0 / 3)))))
     {
         var_f30 += attr->x10 * cosf((temp_f1));
     }
@@ -548,9 +550,9 @@ bool it_2E5A_UnkMotion1_Anim(HSD_GObj* item_gobj)
 {
     f32 var_f2;
     Item* item;
-
+    f32 *new_var;
     item = GET_ITEM(item_gobj);
-    var_f2 = item->x40_vel.y;
+    var_f2 = *(new_var = &item->x40_vel.y);
     if (var_f2 < 0.0f) {
         var_f2 = -var_f2;
     }

@@ -74,7 +74,7 @@ struct EventData;
 /* 1BEE58 */ void gm_801BEE58(MinorScene*);
 /* 1BEE9C */ void gm_801BEE9C(MinorScene*);
 /* 1BEF84 */ void gm_801BEF84(MinorScene*);
-/* 1BEFA4 */ void gm_801BEFA4(s8 ckind);
+/* 1BEFA4 */ void gm_801BEFA4(volatile int ckind);
 /* 1BEFB0 */ CharacterKind gm_801BEFB0(void);
 /* 1BEFC0 */ void gm_801BEFC0(int);
 /* 1BEFD0 */ int gm_801BEFD0(void);

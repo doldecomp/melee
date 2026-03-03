@@ -288,9 +288,8 @@ void mnDiagram3_80246D40(HSD_GObj* gobj)
         HSD_JObjClearFlagsAll(jobj, 0x10);
     } else {
         HSD_JObjSetFlagsAll(jobj, 0x10);
+        jobj = data->jobjs[4];
     }
-
-    jobj = data->jobjs[4];
     mn_8022ED6C(jobj, &mnDiagram3_803EEC1C);
 
     if (data->scroll_offset != 0) {

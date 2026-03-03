@@ -738,13 +738,15 @@ int lb_8001B8C8(int chan)
 
 int lb_8001B99C(int chan, const char* filename, UNK_T status_out)
 {
+    int new_var;
     lb_80019EF0(chan, 0, status_out, 0);
     setup_task(0, 0x10000);
     setup_task(1, 0x201);
     lb_8001A4CC_dontinline(filename, 0);
     setup_task(3, -1);
+    new_var = 0x10;
     strncpy(setup_task(5, 0xE)->x10, filename, 0x20);
-    return lb_80019CB0(0x10);
+    return lb_80019CB0(new_var);
 }
 
 int lb_8001BA44(int chan, const char* filename, UNK_T status_out)

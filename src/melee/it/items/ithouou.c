@@ -224,6 +224,8 @@ void it_2725_Logic42_Spawned(Item_GObj* item_gobj)
 
     item = GET_ITEM((HSD_GObj*) item_gobj);
     attr = item->xC4_article_data->x4_specialAttributes;
+    if ((item_gobj && item_gobj) && item_gobj) {
+    }
     item->xD44_lifeTimer = attr->timer;
     it_80274740(item_gobj);
     it_802D2EF0(item_gobj);

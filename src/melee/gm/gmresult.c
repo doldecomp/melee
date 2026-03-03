@@ -480,7 +480,7 @@ void* fn_801748EC(void* list_, s32 mode, s32 idx)
     return &lbl_8046E190[idx];
 }
 
-void fn_80174920(struct ResultsPlayerData* data)
+unsigned int fn_80174920(struct ResultsPlayerData* data)
 {
     s32 i;
 
@@ -498,6 +498,7 @@ void fn_80174920(struct ResultsPlayerData* data)
             data->stats_text[2][i] = NULL;
         }
     }
+    return 0;
 }
 
 void fn_801749B8(HSD_GObj* unused)
