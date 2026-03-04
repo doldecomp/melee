@@ -1215,7 +1215,6 @@ config.libs = [
             # Pokémon
             Object(Matching, "melee/it/items/ittosakinto.c"),
             Object(NonMatching, "melee/it/items/itchicorita.c"),
-            Object(NonMatching, "melee/it/items/itchicoritaleaf.c"),
             Object(NonMatching, "melee/it/items/itkabigon.c"),
             Object(NonMatching, "melee/it/items/itkamex.c"),
             Object(NonMatching, "melee/it/items/itmatadogas.c"),

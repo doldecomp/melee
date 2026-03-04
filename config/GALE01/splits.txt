@@ -3538,12 +3538,8 @@ melee/it/items/ittosakinto.c:
 	.sdata2     start:0x804DD318 end:0x804DD330
 
 melee/it/items/itchicorita.c:
-	.text       start:0x802C9588 end:0x802C9B20
-	.data       start:0x803F7A98 end:0x803F7AC8
-
-melee/it/items/itchicoritaleaf.c:
-	.text       start:0x802C9B20 end:0x802C9D40
-	.data       start:0x803F7AC8 end:0x803F7AD8
+	.text       start:0x802C9588 end:0x802C9D40
+	.data       start:0x803F7A98 end:0x803F7AD8
 	.sdata2     start:0x804DD330 end:0x804DD338
 
 melee/it/items/itkabigon.c:
