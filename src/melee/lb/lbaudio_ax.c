@@ -1252,6 +1252,14 @@ end:
 
 /// #fn_800262A0
 
+void fn_800263B4(void* obj) {
+    //Is this basically just lbAudioAx_ObjFree?
+    if (obj != NULL) {
+        void* p = obj;
+        HSD_ObjFree(&lbl_80433710, p);
+    }
+}
+
 /// @brief Free an object from the audio allocator pool.
 void lbAudioAx_ObjFree(void* obj)
 {
