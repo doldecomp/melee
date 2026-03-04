@@ -20,6 +20,16 @@
 #include "lb/lb_00B0.h"
 #include "lb/lbvector.h"
 
+ItemStateTable it_803F7220[] = {
+    { 0, itSamusbomb_UnkMotion0_Anim, itSamusbomb_UnkMotion0_Phys,
+      itSamusbomb_UnkMotion0_Coll },
+    { 0, itSamusbomb_UnkMotion1_Anim, itSamusbomb_UnkMotion1_Phys,
+      itSamusbomb_UnkMotion1_Coll },
+    { 0, itSamusbomb_UnkMotion2_Anim, itSamusbomb_UnkMotion2_Phys,
+      itSamusbomb_UnkMotion2_Coll },
+    { 1, itSamusbomb_UnkMotion3_Anim, NULL, NULL }
+};
+
 Item_GObj* it_802B4AC8(Fighter_GObj* parent_gobj, Vec3* pos, f32 facing_dir)
 {
     Item_GObj* gobj;
