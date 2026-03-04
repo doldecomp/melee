@@ -6,8 +6,8 @@
 #include "baselib/jobj.h"
 #include "baselib/random.h"
 #include "cm/camera.h"
-#include "ef/eflib.h"
 #include "ef/efsync.h"
+#include "gr/grkongo.h"
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
@@ -36,7 +36,7 @@ void itBox_Logic1_Destroyed(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     if (ip->xDD4_itemVar.box.spawned_gobj != NULL) {
-        efLib_DestroyAll(ip->xDD4_itemVar.box.spawned_gobj);
+        grKongo_801D8058(ip->xDD4_itemVar.box.spawned_gobj);
         ip->xDD4_itemVar.box.spawned_gobj = NULL;
     }
 }
