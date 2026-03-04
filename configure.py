@@ -185,7 +185,7 @@ config.compilers_tag = "20251118"
 config.dtk_tag = "v1.8.3"
 config.objdiff_tag = "v3.6.1"
 config.sjiswrap_tag = "v1.2.2"
-config.wibo_tag = "1.0.3"
+config.wibo_tag = "0.7.0"
 
 # Project
 config.config_path = Path("config") / config.version / "config.yml"
@@ -1108,12 +1108,12 @@ config.libs = [
             Object(Matching, "melee/it/items/itcapsule.c"),
             Object(NonMatching, "melee/it/items/itbombhei.c"),
             Object(NonMatching, "melee/it/items/itdosei.c"),
-            Object(Matching, "melee/it/items/itheart.c"),
-            Object(Matching, "melee/it/items/ittomato.c"),
+            Object(NonMatching, "melee/it/items/itheart.c"),
+            Object(NonMatching, "melee/it/items/ittomato.c"),
             Object(Matching, "melee/it/items/itstar.c"),
             Object(Matching, "melee/it/items/itbat.c"),
             Object(Matching, "melee/it/items/itsword.c"),
-            Object(Matching, "melee/it/items/itbox.c"),
+            Object(NonMatching, "melee/it/items/itbox.c"),
             Object(NonMatching, "melee/it/items/ittaru.c"),
             Object(Matching, "melee/it/items/itegg.c"),
             Object(NonMatching, "melee/it/items/itkusudama.c"),
@@ -1127,7 +1127,7 @@ config.libs = [
             Object(NonMatching, "melee/it/items/itflipper.c"),
             Object(NonMatching, "melee/it/items/itsscope.c"),
             Object(Matching, "melee/it/items/itstarrod.c"),
-            Object(Matching, "melee/it/items/itharisen.c"),
+            Object(NonMatching, "melee/it/items/itharisen.c"),
             Object(Matching, "melee/it/items/itfflower.c"),
             Object(Matching, "melee/it/items/itkinoko.c"),
             Object(Matching, "melee/it/items/itdkinoko.c"),
@@ -1136,7 +1136,7 @@ config.libs = [
             Object(Matching, "melee/it/items/itscball.c"),
             Object(Matching, "melee/it/items/itrabbitc.c"),
             Object(Matching, "melee/it/items/itmetalb.c"),
-            Object(Matching, "melee/it/items/itlipstick.c"),
+            Object(NonMatching, "melee/it/items/itlipstick.c"),
             Object(Matching, "melee/it/items/itspycloak.c"),
             Object(NonMatching, "melee/it/items/ittarucann.c"),
             Object(Matching, "melee/it/items/itmball.c"),
@@ -1173,7 +1173,7 @@ config.libs = [
             Object(NonMatching, "melee/it/items/itseakneedleheld.c"),
             Object(Matching, "melee/it/items/itseakvanish.c"),
             Object(NonMatching, "melee/it/items/itpikachuthunder.c"),
-            Object(Matching, "melee/it/items/itmariocape.c"),
+            Object(NonMatching, "melee/it/items/itmariocape.c"),
             Object(NonMatching, "melee/it/items/ityoshieggthrow.c"),
             Object(Matching, "melee/it/items/ityoshistar.c"),
             Object(NonMatching, "melee/it/items/itpikachutjoltground.c"),
@@ -1212,13 +1212,14 @@ config.libs = [
             Object(NonMatching, "melee/it/items/itclinkmilk.c"),
             # Pokémon
             Object(Matching, "melee/it/items/ittosakinto.c"),
-            Object(Matching, "melee/it/items/itchicorita.c"),
+            Object(NonMatching, "melee/it/items/itchicorita.c"),
+            Object(NonMatching, "melee/it/items/itchicoritaleaf.c"),
             Object(NonMatching, "melee/it/items/itkabigon.c"),
             Object(NonMatching, "melee/it/items/itkamex.c"),
             Object(NonMatching, "melee/it/items/itmatadogas.c"),
             Object(Matching, "melee/it/items/itlizardon.c"),
             Object(Matching, "melee/it/items/itfire.c"),
-            Object(Matching, "melee/it/items/itthunder.c"),
+            Object(NonMatching, "melee/it/items/itthunder.c"),
             Object(Matching, "melee/it/items/itfreezer.c"),
             Object(NonMatching, "melee/it/items/itsonans.c"),
             Object(Matching, "melee/it/items/ithassam.c"),
@@ -1240,7 +1241,7 @@ config.libs = [
             Object(Matching, "melee/it/items/itporygon2.c"),
             Object(NonMatching, "melee/it/items/ithinoarashi.c"),
             Object(Matching, "melee/it/items/itmaril.c"),
-            Object(Matching, "melee/it/items/itfushigibana.c"),
+            Object(NonMatching, "melee/it/items/itfushigibana.c"),
             # Indivudal items
             Object(NonMatching, "melee/it/items/itoldkuri.c"),
             Object(Matching, "melee/it/items/itmato.c"),
