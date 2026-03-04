@@ -1347,14 +1347,14 @@ void fn_800DC014(Fighter_GObj* gobj)
     }
 }
 
-s32 fn_800DC044(Fighter_GObj* gobj) {
+s32 fn_800DC044(Fighter_GObj* gobj)
+{
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->input.lstick.y >= p_ftCommonData->tap_jump_threshold) {
         return 1;
     }
     return 0;
 }
-
 
 /// #fn_800DC070
 
