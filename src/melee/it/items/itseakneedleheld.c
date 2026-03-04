@@ -65,14 +65,12 @@ Item_GObj* it_802B19AC(HSD_GObj* fighter_gobj, Vec3* cur_pos, u32 part,
     PAD_STACK(2 * 4);
 
     spawn.kind = kind;
-    spawn.pos = *cur_pos;
-    spawn.pos.z = it_804DCF88;
-    spawn.prev_pos = spawn.pos;
+    spawn.prev_pos = *cur_pos;
+    spawn.prev_pos.z = it_804DCF88;
+    spawn.pos = spawn.prev_pos;
     spawn.facing_dir = facing_dir;
     spawn.x3C_damage = 0;
-    spawn.vel.x = it_804DCF88;
-    spawn.vel.y = it_804DCF88;
-    spawn.vel.z = it_804DCF88;
+    spawn.vel.z = spawn.vel.y = spawn.vel.x = it_804DCF88;
     spawn.x0_parent_gobj = fighter_gobj;
     spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
     spawn.x44_flag.b0 = true;
