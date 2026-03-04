@@ -15,7 +15,7 @@ ItemStateTable it_803F82F0[] = {
       itFushigibana_UnkMotion0_Coll },
     { 1, itFushigibana_UnkMotion1_Anim, itFushigibana_UnkMotion1_Phys,
       itFushigibana_UnkMotion1_Coll },
-    { 2, itFushigibana_UnkMotion2_Anim, itFushigibana_UnkMotion2_Phys,
+    { -1, itFushigibana_UnkMotion2_Anim, itFushigibana_UnkMotion2_Phys,
       itFushigibana_UnkMotion2_Coll }
 };
 
