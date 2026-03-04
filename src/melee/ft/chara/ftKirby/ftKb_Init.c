@@ -7019,11 +7019,6 @@ void ftKb_SpecialNKp_800FA8B4(Fighter_GObj* gobj)
     fp->mv.kb.specialn_kp.x0[3] = 0;
 }
 
-inline Fighter* inline_fn(void* arg0)
-{
-    return (Fighter*) arg0;
-}
-
 void ftKb_SpecialNKp_800FA958(Fighter_GObj* gobj)
 {
     Fighter* fp;
@@ -9298,7 +9293,7 @@ void ftKb_ZdSpecialN_Anim(Fighter_GObj* gobj)
     }
 }
 
-inline u32* inline_fn(Fighter* arg0)
+inline u32* inline_fn_zd(Fighter* arg0)
 {
     return arg0->cmd_vars;
 }
@@ -9313,13 +9308,13 @@ void ftKb_ZdSpecialAirN_Anim(Fighter_GObj* gobj)
     new_var = 1U;
     da = fp->dat_attrs;
 
-    if (inline_fn(fp)[0] == new_var) {
+    if (inline_fn_zd(fp)[0] == new_var) {
         fp->cmd_vars[0] = 2U;
         ftColl_CreateReflectHit(gobj, &da->specialn_zd_reflectdesc,
                                 fn_80105FEC);
     }
 
-    if (inline_fn(fp)[0] == 0) {
+    if (inline_fn_zd(fp)[0] == 0) {
         fp->reflecting = false;
     }
 
@@ -10014,7 +10009,7 @@ void ftKb_MtSpecialAirNLoopFull_Anim(Fighter_GObj* gobj)
     ft->fv.kb.x9C = da->specialn_mt_charge_time;
 }
 
-inline Item_GObj *inline_fn(Item_GObj *arg0)
+inline Item_GObj *inline_fn_item(Item_GObj *arg0)
 {
     return arg0;
 }
@@ -10024,7 +10019,7 @@ void ftKb_MtSpecialAirNCancel_Anim(Fighter_GObj* gobj)
     int new_var;
     if (gobj != NULL) {
         Fighter* fp = GET_FIGHTER(gobj);
-        new_var = inline_fn(fp->fv.kb.x98) != 0;
+        new_var = inline_fn_item(fp->fv.kb.x98) != 0;
         if (new_var) {
             it_802C573C(fp->fv.kb.x98);
             fp->fv.kb.x98 = 0;
@@ -10040,7 +10035,7 @@ void ftKb_MtSpecialAirNCancel_Anim(Fighter_GObj* gobj)
     }
 }
 
-inline float inline_fn(ftKb_DatAttrs *arg0)
+inline float inline_fn_mt(ftKb_DatAttrs *arg0)
 {
     return arg0->specialn_mt_freefall_toggle;
 }
@@ -10055,11 +10050,11 @@ void ftKb_MtSpecialAirNEnd_Anim(Fighter_GObj* gobj)
     ftKb_SpecialNMt_801071FC(gobj);
     new_var = da;
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        if (inline_fn(new_var) == 0.0f) {
+        if (inline_fn_mt(new_var) == 0.0f) {
             ftCo_Fall_Enter(gobj);
             return;
         }
-        ftCo_80096900(gobj, 1, 0, true, 1.0f, inline_fn(da));
+        ftCo_80096900(gobj, 1, 0, true, 1.0f, inline_fn_mt(da));
     }
 }
 

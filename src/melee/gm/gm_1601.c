@@ -2975,14 +2975,12 @@ void fn_80169434(s32 arg0)
 bool fn_80169444(s32 arg0)
 {
     struct lbl_8046B488_t* gp = &lbl_8046B488;
-    struct lbl_8046B488_t* new_var;
-    new_var = gp;
-    if (new_var->x1B8 != NULL) {
-        if (new_var->x1B8() == 1) {
-            new_var->x1B8 = NULL;
+
+    if (gp->x1B8 != NULL) {
+        if (gp->x1B8() == 1) {
+            gp->x1B8 = NULL;
             return true;
         }
-        return false;
     }
     return false;
 }
