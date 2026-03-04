@@ -9,6 +9,24 @@
 #include "it/it_2725.h"
 #include "it/item.h"
 
+ItemStateTable it_803F5FF0[] = {
+    { -1, itHarisen_UnkMotion0_Anim, itHarisen_UnkMotion0_Phys,
+      itHarisen_UnkMotion0_Coll },
+    { -1, itHarisen_UnkMotion8_Anim, itHarisen_UnkMotion1_Phys,
+      itHarisen_UnkMotion1_Coll },
+    { -1, itHarisen_UnkMotion6_Anim, itHarisen_UnkMotion6_Phys, NULL },
+    { 0, itHarisen_UnkMotion6_Anim, itHarisen_UnkMotion6_Phys, NULL },
+    { 1, itHarisen_UnkMotion6_Anim, itHarisen_UnkMotion6_Phys, NULL },
+    { 2, itHarisen_UnkMotion6_Anim, itHarisen_UnkMotion6_Phys, NULL },
+    { 3, itHarisen_UnkMotion6_Anim, itHarisen_UnkMotion6_Phys, NULL },
+    { 4, itHarisen_UnkMotion8_Anim, itHarisen_UnkMotion8_Phys,
+      itHarisen_UnkMotion7_Coll },
+    { 4, itHarisen_UnkMotion8_Anim, itHarisen_UnkMotion8_Phys,
+      itHarisen_UnkMotion8_Coll },
+    { -1, itHarisen_UnkMotion9_Anim, itHarisen_UnkMotion9_Phys,
+      itHarisen_UnkMotion9_Coll },
+};
+
 void it_802927E8(Item_GObj* gobj)
 {
     Item* ip = gobj->user_data;
