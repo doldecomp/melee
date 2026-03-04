@@ -51,6 +51,7 @@ MWCC_FLAGS = [
     "-DM2CTX",
 ]
 
+
 def pcpp_import(in_file: Path, quiet: bool) -> str:
     import traceback, copy, io, re
     from pcpp.preprocessor import Preprocessor, OutputDirective, Action
@@ -60,7 +61,7 @@ def pcpp_import(in_file: Path, quiet: bool) -> str:
             super(CmdPreprocessor, self).__init__()
 
             # Override Preprocessor instance variables
-            version='1.30'
+            version = "1.30"
             self.define("__PCPP_VERSION__ " + version)
             self.define("__PCPP_ALWAYS_FALSE__ 0")
             self.define("__PCPP_ALWAYS_TRUE__ 1")
@@ -99,50 +100,76 @@ def pcpp_import(in_file: Path, quiet: bool) -> str:
 
             string_buffer = io.StringIO()
             try:
-                with open(input_file, 'r') as file:
+                with open(input_file, "r") as file:
                     file_content = file.read()
                     self.parse(file_content)
                 self.write(string_buffer)
             except:
-                print(traceback.print_exc(10), file = sys.stderr)
-                print("\nINTERNAL PREPROCESSOR ERROR AT AROUND %s:%d, FATALLY EXITING NOW\n"
-                    % (self.lastdirective.source, self.lastdirective.lineno), file = sys.stderr)
+                print(traceback.print_exc(10), file=sys.stderr)
+                print(
+                    "\nINTERNAL PREPROCESSOR ERROR AT AROUND %s:%d, FATALLY EXITING NOW\n"
+                    % (self.lastdirective.source, self.lastdirective.lineno),
+                    file=sys.stderr,
+                )
                 sys.exit(-99)
             finally:
                 self.output_string = string_buffer.getvalue()
 
-        def on_unknown_macro_in_defined_expr(self,tok):
+        def on_unknown_macro_in_defined_expr(self, tok):
             if tok.value in self.undefines:
                 return False
             if tok.value in self.passthru_keywords:
                 return None  # Pass through as expanded as possible
             return super(CmdPreprocessor, self).on_unknown_macro_in_defined_expr(tok)
 
-        def on_unknown_macro_in_expr(self,ident):
+        def on_unknown_macro_in_expr(self, ident):
             if ident in self.undefines:
                 return super(CmdPreprocessor, self).on_unknown_macro_in_expr(ident)
             if ident in self.passthru_keywords:
                 return None  # Pass through as expanded as possible
             return super(CmdPreprocessor, self).on_unknown_macro_in_expr(ident)
 
-        def on_unknown_macro_function_in_expr(self,ident):
+        def on_unknown_macro_function_in_expr(self, ident):
             if ident in self.undefines:
-                return super(CmdPreprocessor, self).on_unknown_macro_function_in_expr(ident)
+                return super(CmdPreprocessor, self).on_unknown_macro_function_in_expr(
+                    ident
+                )
             if ident in self.passthru_keywords:
                 return None  # Pass through as expanded as possible
             return super(CmdPreprocessor, self).on_unknown_macro_function_in_expr(ident)
 
-        def on_directive_handle(self,directive,toks,ifpassthru,precedingtoks):
+        def on_directive_handle(self, directive, toks, ifpassthru, precedingtoks):
             if ifpassthru:
-                if directive.value == 'if' or directive.value == 'elif' or directive == 'else' or directive.value == 'endif':
-                    self.bypass_ifpassthru = len([tok for tok in toks if tok.value == '__PCPP_ALWAYS_FALSE__' or tok.value == '__PCPP_ALWAYS_TRUE__']) > 0
-                if not self.bypass_ifpassthru and (directive.value == 'define' or directive.value == 'undef'):
+                if (
+                    directive.value == "if"
+                    or directive.value == "elif"
+                    or directive == "else"
+                    or directive.value == "endif"
+                ):
+                    self.bypass_ifpassthru = (
+                        len(
+                            [
+                                tok
+                                for tok in toks
+                                if tok.value == "__PCPP_ALWAYS_FALSE__"
+                                or tok.value == "__PCPP_ALWAYS_TRUE__"
+                            ]
+                        )
+                        > 0
+                    )
+                if not self.bypass_ifpassthru and (
+                    directive.value == "define" or directive.value == "undef"
+                ):
                     if toks[0].value != self.potential_include_guard:
-                        raise OutputDirective(Action.IgnoreAndPassThrough)  # Don't execute anything with effects when inside an #if expr with undefined macro
-            super(CmdPreprocessor, self).on_directive_handle(directive,toks,ifpassthru,precedingtoks)
+                        raise OutputDirective(
+                            Action.IgnoreAndPassThrough
+                        )  # Don't execute anything with effects when inside an #if expr with undefined macro
+            super(CmdPreprocessor, self).on_directive_handle(
+                directive, toks, ifpassthru, precedingtoks
+            )
             return None  # Pass through defines
 
-        def on_comment(self,tok):
+        def on_comment(self, tok):
             return True  # Pass through comments
 
     p = CmdPreprocessor(in_file)
@@ -152,6 +179,7 @@ def pcpp_import(in_file: Path, quiet: bool) -> str:
 def write_header(path: Path):
     files = sorted({f"#include <{file.relative_to(src)}>" for file in src.rglob("*.h")})
     path.write_text("\n".join(files), encoding="utf-8")
+
 
 def try_import(c_command: List[str], quiet: bool):
     try:
@@ -172,6 +200,7 @@ def try_import(c_command: List[str], quiet: bool):
 
     return out_text
 
+
 def mwcc_import(in_file: Path, quiet: bool) -> str:
     c_command = [str(mwcc_command), *MWCC_FLAGS, "-E", str(in_file)]
 
@@ -180,6 +209,7 @@ def mwcc_import(in_file: Path, quiet: bool) -> str:
         c_command = [wine] + c_command
 
     return try_import(c_command, quiet)
+
 
 def main():
     import argparse
