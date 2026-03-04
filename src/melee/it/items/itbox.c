@@ -574,7 +574,7 @@ bool itBox_UnkMotion8_Anim(Item_GObj* gobj)
 }
 
 #define DEG_TO_RAD 0.01745329238474369
-#define MAX_ROT_VEL 0.05235987901687622
+#define MAX_ROT_VEL 0.05235987715423107
 #define TAU 6.2831853071795862
 
 /// Physics for floating box (state 8). Randomly adjusts rotation velocities
