@@ -108,46 +108,41 @@ bool itChicorita_UnkMotion0_Anim(HSD_GObj* item_gobj)
     return false;
 }
 
-void itChicorita_UnkMotion0_Phys(HSD_GObj* item_gobj)
+static inline void itChicorita_Phys(HSD_GObj* item_gobj)
 {
     Item* item;
-    ItemAttr* attr;
-    f32 fall_speed;
+    f32 chicorita_fall_speed;
     s32 fall_speed_dir;
-    f32 item_vel_y;
     s32 item_vel_y_dir;
 
     item = item_gobj->user_data;
-    it_8027A344((Item_GObj*) item_gobj);
+    it_8027A344(item_gobj);
     if (item->ground_or_air == GA_Air) {
-        attr = item->xCC_item_attr;
-        fall_speed = attr->x10_fall_speed;
-        if (fall_speed < 0.0f) {
-            fall_speed_dir = -1;
-        } else {
-            fall_speed_dir = 1;
-        }
-        item_vel_y = item->xDD4_itemVar.chicorita.x64;
-        if (item_vel_y < 0.0f) {
-            item_vel_y_dir = -1;
-        } else {
-            item_vel_y_dir = 1;
-        }
+        fall_speed_dir = item->xCC_item_attr->x10_fall_speed < 0.0f ? -1 : 1;
+        chicorita_fall_speed = item->xDD4_itemVar.chicorita.x64;
+        item_vel_y_dir = chicorita_fall_speed < 0.0f ? -1 : 1;
         if (item_vel_y_dir != fall_speed_dir) {
-            if (item_vel_y < 0.0f) {
-                item_vel_y = -item_vel_y;
+            if (chicorita_fall_speed < 0.0f) {
+                chicorita_fall_speed = -chicorita_fall_speed;
             }
-            if (item_vel_y < attr->x14_fall_speed_max) {
-                goto block_11;
+            if (chicorita_fall_speed < item->xCC_item_attr->x14_fall_speed_max)
+            {
+            block_11:
+                item->xDD4_itemVar.chicorita.x64 -=
+                    item->xCC_item_attr->x10_fall_speed;
             }
         } else {
-        block_11:
-            item->xDD4_itemVar.chicorita.x64 -= fall_speed;
+            goto block_11;
         }
         item->x40_vel.y = item->xDD4_itemVar.chicorita.x64;
         return;
     }
     item->xDD4_itemVar.chicorita.x64 = 0.0f;
+}
+
+void itChicorita_UnkMotion0_Phys(HSD_GObj* item_gobj)
+{
+    itChicorita_Phys(item_gobj);
 }
 
 bool itChicorita_UnkMotion0_Coll(HSD_GObj* item_gobj)
@@ -195,44 +190,7 @@ bool itChicorita_UnkMotion1_Anim(HSD_GObj* item_gobj)
 
 void itChicorita_UnkMotion1_Phys(HSD_GObj* item_gobj)
 {
-    Item* item;
-    ItemAttr* attr;
-    f32 fall_speed;
-    s32 fall_speed_dir;
-    f32 item_vel_y;
-    s32 item_vel_y_dir;
-
-    item = item_gobj->user_data;
-    it_8027A344((Item_GObj*) item_gobj);
-    if (item->ground_or_air == GA_Air) {
-        attr = item->xCC_item_attr;
-        fall_speed = attr->x10_fall_speed;
-        if (fall_speed < 0.0f) {
-            fall_speed_dir = -1;
-        } else {
-            fall_speed_dir = 1;
-        }
-        item_vel_y = item->xDD4_itemVar.chicorita.x64;
-        if (item_vel_y < 0.0f) {
-            item_vel_y_dir = -1;
-        } else {
-            item_vel_y_dir = 1;
-        }
-        if (item_vel_y_dir != fall_speed_dir) {
-            if (item_vel_y < 0.0f) {
-                item_vel_y = -item_vel_y;
-            }
-            if (item_vel_y < attr->x14_fall_speed_max) {
-                goto block_11;
-            }
-        } else {
-        block_11:
-            item->xDD4_itemVar.chicorita.x64 -= fall_speed;
-        }
-        item->x40_vel.y = item->xDD4_itemVar.chicorita.x64;
-        return;
-    }
-    item->xDD4_itemVar.chicorita.x64 = 0.0f;
+    itChicorita_Phys(item_gobj);
 }
 
 bool itChicorita_UnkMotion1_Coll(HSD_GObj* item_gobj)
