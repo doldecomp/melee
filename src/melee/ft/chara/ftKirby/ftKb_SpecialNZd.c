@@ -160,7 +160,7 @@ void ftKb_ZdSpecialAirN_Anim(Fighter_GObj *gobj)
     Fighter *fp;
     volatile unsigned int pad;
     ftKb_DatAttrs *da;
-    char new_var;
+    u8 new_var;
     fp = (Fighter *) HSD_GObjGetUserData(gobj);
     da = fp->dat_attrs;
     new_var = 0;
