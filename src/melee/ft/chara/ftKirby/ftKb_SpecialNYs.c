@@ -265,8 +265,7 @@ static void fn_80109680(HSD_GObj* gobj)
     fp->x2222_b2 = new_var;
     ftCommon_8007E2F4(fp, 0x1FF);
     ftCommon_8007E2FC(gobj);
-    fp = GET_FIGHTER(gobj);
-    new_var2 = fp;
+    fp = (new_var2 = (Fighter *) HSD_GObjGetUserData(gobj));
     new_var2->death2_cb = ftKb_Init_800EE74C;
     fp->take_dmg_cb = ftKb_Init_800EE7B8;
 }
@@ -401,8 +400,7 @@ void fn_80109B7C(HSD_GObj* gobj)
     void* new_var;
     volatile unsigned short pad;
     void* new_var2;
-    new_var2 = NULL;
-    new_var = new_var2;
+    new_var = (new_var2 = NULL);
     ftCommon_8007D5D4(fp);
     Fighter_ChangeMotionState(gobj, ftKb_MS_YsSpecialAirN2_1, 0x0C4C5092,
                               fp->cur_anim_frame, 1.0f, 0.0f, new_var);
@@ -418,11 +416,10 @@ void fn_80109BF8(HSD_GObj* gobj)
     ftCommon_8007D5D4(fp);
     Fighter_ChangeMotionState(gobj, ftKb_MS_YsSpecialAirN2_0, 0x0C4C5092,
                               fp->cur_anim_frame, 1.0f, 0.0f, NULL);
-    fp = GET_FIGHTER(gobj);
+    fp = (new_var = GET_FIGHTER(gobj));
     fp->death2_cb = ftKb_Init_800EE74C;
     if (gobj) {
     }
-    new_var = fp;
     /// FAKE MATCH: comma operator required for regalloc
     new_var->take_dmg_cb = (0, ftKb_Init_800EE7B8);
 }
