@@ -599,6 +599,10 @@ typedef struct itSamusMissile_ItemVars {
     /* +10 +DE4 */ HSD_GObj* x10;
 } itSamusMissile_ItemVars;
 
+typedef struct itSeakNeedleHeld_ItemVars {
+    /* +0 ip+DD4 */ Fighter_GObj* xDD4_fighter;
+} itSeakNeedleHeld_ItemVars;
+
 typedef struct itSeakNeedleThrown_ItemVars {
     /*  +0 ip+DD4 */ char pad_0[0x4];
     /*  +4 ip+DD8 */ f32 xDD8;

@@ -9,7 +9,7 @@
 
 #include <dolphin/mtx.h>
 
-/* 2B18B0 */ UNK_RET it_802B18B0(UNK_PARAMS);
+/* 2B18B0 */ void it_802B18B0(Item_GObj* gobj);
 /* 2B19AC */ Item_GObj* it_802B19AC(HSD_GObj*, Vec3* cur_pos, u32, u32,
                                     float facing_dir);
 /* 2B1AAC */ void itSeakNeedleHeld_Logic110_PickedUp(Item_GObj*);
