@@ -172,9 +172,9 @@
 /* 0DBD50 */ void ftCo_CaptureWaitLw_Phys(Fighter_GObj* gobj);
 /* 0DBE9C */ void ftCo_CaptureWaitLw_Coll(Fighter_GObj* gobj);
 /* 0DBED4 */ UNK_RET fn_800DBED4(UNK_PARAMS);
-/* 0DC014 */ void fn_800DC014(Fighter_GObj*);
-/* 0DC044 */ s32 fn_800DC044(Fighter_GObj* gobj);
-/* 0DC070 */ void fn_800DC070(Fighter_GObj*);
+/* 0DC014 */ void fn_800DC014(Fighter_GObj* gobj);
+/* 0DC044 */ bool fn_800DC044(Fighter_GObj* gobj);
+/* 0DC070 */ void fn_800DC070(Fighter_GObj* gobj);
 /* 0DC110 */ void ftCo_CaptureJump_Anim(Fighter_GObj* gobj);
 /* 0DC160 */ void ftCo_CaptureJump_IASA(Fighter_GObj* gobj);
 /* 0DC224 */ void ftCo_CaptureJump_Phys(Fighter_GObj* gobj);
