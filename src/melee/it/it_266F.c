@@ -153,7 +153,6 @@ int it_8026C65C(HSD_ObjAllocUnk6* arg_struct)
     s32 count;
     temp_r6 = (s32) arg_struct->x8;
 
-
     count = arg_struct->x0;
     rand_int = HSD_Randi(temp_r6);
     if ((count - 1) == 0) {
@@ -166,8 +165,7 @@ int it_8026C65C(HSD_ObjAllocUnk6* arg_struct)
         } else if (temp_r5[temp_r6 + 1] > rand_int) {
             var_r3 = temp_r6;
         } else {
-            var_r3 =
-                it_8026C530(rand_int, arg_struct, temp_r6, count);
+            var_r3 = it_8026C530(rand_int, arg_struct, temp_r6, count);
         }
     }
     return arg_struct->x4[var_r3];

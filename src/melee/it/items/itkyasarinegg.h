@@ -5,7 +5,7 @@
 #include "it/items/types.h"
 
 extern ItemStateTable it_803F9328[];
-void it_802EFA44(Item_GObj*,Vec*,float);
+void it_802EFA44(Item_GObj*, Vec*, float);
 void it_802EFB0C(Item_GObj*);
 void itKyasarinEgg_Logic28_PickedUp(Item_GObj*);
 void itKyasarinEgg_Logic28_Dropped(Item_GObj*);

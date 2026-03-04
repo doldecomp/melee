@@ -481,9 +481,11 @@ void ftCo_Rebirth_Coll(HSD_GObj* gobj)
 void fn_800D55B4(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
+    Fighter* new_var;
     HSD_GObj* other_gobj = Player_GetEntityAtIndex(fp->player_id, 0);
     Fighter* other_fp = other_gobj->user_data;
-    if (other_fp->cur_pos.y > fp->cur_pos.y) {
+    new_var = other_fp;
+    if (new_var->cur_pos.y > fp->cur_pos.y) {
         fp->cur_pos.y = other_fp->cur_pos.y;
     }
 }

@@ -4922,12 +4922,14 @@ Fighter* it_80272818(Item* item)
 Item_GObj* it_80272828(ItemKind kind)
 {
     Item_GObj* item_gobj_return;
+    Item* new_var2;
     Item_GObj* item_gobj_check;
-
+    void* new_var;
     item_gobj_return = NULL;
     item_gobj_check = (Item_GObj*) HSD_GObj_Entities->items;
     while (item_gobj_check != NULL) {
-        if (((Item*) item_gobj_check->user_data)->kind == kind) {
+        new_var2 = (Item*) (new_var = item_gobj_check->user_data);
+        if (new_var2->kind == kind) {
             item_gobj_return = item_gobj_check;
         }
 
@@ -6527,7 +6529,7 @@ void it_80275788(Item_GObj* item_gobj)
     item = item_gobj->user_data;
     state = 4;
     for (var_ctr = 0U; var_ctr < 4U; var_ctr++) {
-        hitcapsule = &item->x5D4_hitboxes[var_ctr].hit;
+        hitcapsule = (0, &item->x5D4_hitboxes[var_ctr].hit);
         if (hitcapsule->state != HitCapsule_Disabled) {
             hitcapsule->state = state;
             item->xDAA_flag.b2 = 1;

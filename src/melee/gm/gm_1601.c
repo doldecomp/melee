@@ -2212,7 +2212,7 @@ void gm_80167470(s32 arg0, s32 arg1)
 void gm_801674C4(s8 arg0, u8 arg1, s8 arg2, s8 arg3, s32 arg4)
 {
     s8 temp_r31;
-    struct lbl_8046B488_t *new_var;
+    struct lbl_8046B488_t* new_var;
     struct lbl_8046B488_t* temp_ptr;
 
     temp_ptr = fn_80169364();
@@ -3382,7 +3382,8 @@ s32 gm_8016A22C(s8 k0, s8 k1, s8 k2, u8 a3, u8 a4, int a5, int mode, int a7,
         for (i = 0; i < 3; i++) {
             fn_801697FC(
                 kinds[i], lbl_8046B488.xC, p87, p8b,
-                lbl_8046B488.x20); // This was being inlined, hence the no-inline
+                lbl_8046B488
+                    .x20); // This was being inlined, hence the no-inline
         }
         break;
     }

@@ -1383,7 +1383,7 @@ void mnDiagram2_ClearDetailView(HSD_GObj* gobj)
     void* tmp;
     HSD_JObj* jobj;
 
-    ptr = data = (Diagram2DetailView*) HSD_GObjGetUserData(gobj);
+    ptr = (data = HSD_GObjGetUserData(gobj));
 
     if (data->title_text != NULL) {
         HSD_SisLib_803A5CC4(data->title_text);
