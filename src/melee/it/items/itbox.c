@@ -6,8 +6,8 @@
 #include "baselib/jobj.h"
 #include "baselib/random.h"
 #include "cm/camera.h"
-#include "ef/eflib.h"
 #include "ef/efsync.h"
+#include "gr/grkongo.h"
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
@@ -23,23 +23,20 @@
 
 static double const ROT_VEL_SCALE = 0.03490658476948738;
 
-void itBox_Logic1_Spawned(Item_GObj* gobj)
-{
-    Item* ip = GET_ITEM(gobj);
-    ip->xDCE_flag.b7 = 0;
-    ip->xDD4_itemVar.box.opened = 0;
-    ip->xDD4_itemVar.box.spawned_gobj = NULL;
-    it_8028655C(gobj);
-}
-
-void itBox_Logic1_Destroyed(Item_GObj* gobj)
-{
-    Item* ip = GET_ITEM(gobj);
-    if (ip->xDD4_itemVar.box.spawned_gobj != NULL) {
-        efLib_DestroyAll(ip->xDD4_itemVar.box.spawned_gobj);
-        ip->xDD4_itemVar.box.spawned_gobj = NULL;
-    }
-}
+ItemStateTable it_803F5850[] = {
+    { -1, itBox_UnkMotion0_Anim, itBox_UnkMotion0_Phys,
+      itBox_UnkMotion0_Coll },
+    { -1, itBox_UnkMotion4_Anim, itBox_UnkMotion1_Phys,
+      itBox_UnkMotion1_Coll },
+    { -1, itBox_UnkMotion2_Anim, itBox_UnkMotion2_Phys, NULL },
+    { 0, itBox_UnkMotion4_Anim, itBox_UnkMotion4_Phys, itBox_UnkMotion3_Coll },
+    { 0, itBox_UnkMotion4_Anim, itBox_UnkMotion4_Phys, itBox_UnkMotion4_Coll },
+    { 0, itBox_UnkMotion5_Anim, itBox_UnkMotion5_Phys, itBox_UnkMotion5_Coll },
+    { 1, itBox_UnkMotion6_Anim, itBox_UnkMotion6_Phys, itBox_UnkMotion6_Coll },
+    { 2, itBox_UnkMotion7_Anim, itBox_UnkMotion7_Phys, itBox_UnkMotion7_Coll },
+    { -1, itBox_UnkMotion8_Anim, itBox_UnkMotion8_Phys,
+      itBox_UnkMotion8_Coll },
+};
 
 /// Spawn a box accessory item that follows the parent item.
 /// Returns the spawned gobj, or NULL if parent is invalid.
@@ -86,6 +83,24 @@ Item_GObj* it_80286088(Item_GObj* parent_gobj)
         }
     }
     return result;
+}
+
+void itBox_Logic1_Spawned(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->xDCE_flag.b7 = 0;
+    ip->xDD4_itemVar.box.opened = 0;
+    ip->xDD4_itemVar.box.spawned_gobj = NULL;
+    it_8028655C(gobj);
+}
+
+void itBox_Logic1_Destroyed(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->xDD4_itemVar.box.spawned_gobj != NULL) {
+        grKongo_801D8058(ip->xDD4_itemVar.box.spawned_gobj);
+        ip->xDD4_itemVar.box.spawned_gobj = NULL;
+    }
 }
 
 /// Spawn item(s) from box based on weighted random roll.
@@ -559,7 +574,7 @@ bool itBox_UnkMotion8_Anim(Item_GObj* gobj)
 }
 
 #define DEG_TO_RAD 0.01745329238474369
-#define MAX_ROT_VEL 0.05235987901687622
+#define MAX_ROT_VEL 0.05235987715423107
 #define TAU 6.2831853071795862
 
 /// Physics for floating box (state 8). Randomly adjusts rotation velocities
