@@ -418,7 +418,10 @@ typedef struct {
 } itMBallAttributes;
 
 typedef struct {
-    /* 0x00 */ Vec3* x0;
+    union {
+        Vec3* x0_f32;
+        S32Vec3* x0_s32;
+    } x0;
     /* 0x04 */ s32 x4;
     /* 0x08 */ s32 x8;
     /* 0x0C */ s32 xC;
