@@ -35,7 +35,6 @@
 #include "it/items/itcapsule.h"
 #include "it/items/itcerebi.h"
 #include "it/items/itchicorita.h"
-#include "it/items/itchicoritaleaf.h"
 #include "it/items/itclimbersblizzard.h"
 #include "it/items/itclimbersice.h"
 #include "it/items/itclimbersstring.h"
