@@ -78,8 +78,14 @@ def sjiswrap_url(tag: str) -> str:
 
 
 def wibo_url(tag: str) -> str:
+    uname = platform.uname()
+    arch = uname.machine.lower()
+    system = uname.system.lower()
+    if system == "darwin":
+        arch = "macos"
+
     repo = "https://github.com/decompals/wibo"
-    return f"{repo}/releases/download/{tag}/wibo"
+    return f"{repo}/releases/download/{tag}/wibo-{arch}"
 
 
 TOOLS: Dict[str, Callable[[str], str]] = {
@@ -130,7 +136,7 @@ def main() -> None:
         try:
             import certifi
             import ssl
-        except:
+        except ImportError:
             print(
                 '"certifi" module not found. Please install it using "python -m pip install certifi".'
             )

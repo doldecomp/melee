@@ -105,7 +105,7 @@ parser.add_argument(
     "--ninja",
     metavar="BINARY",
     type=Path,
-    help="path to ninja binary (optional)"
+    help="path to ninja binary (optional)",
 )
 parser.add_argument(
     "--verbose",
@@ -180,12 +180,12 @@ if not config.non_matching:
     config.asm_dir = None
 
 # Tool versions
-config.binutils_tag = "2.42-1"
-config.compilers_tag = "20250520"
-config.dtk_tag = "v1.6.2"
-config.objdiff_tag = "v3.0.0"
-config.sjiswrap_tag = "v1.2.1"
-config.wibo_tag = "0.7.0"
+config.binutils_tag = "2.42-2"
+config.compilers_tag = "20251118"
+config.dtk_tag = "v1.8.3"
+config.objdiff_tag = "v3.6.1"
+config.sjiswrap_tag = "v1.2.2"
+config.wibo_tag = "1.0.3"
 
 # Project
 config.config_path = Path("config") / config.version / "config.yml"
