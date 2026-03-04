@@ -77,7 +77,6 @@
 /* 025E38 */ bool fn_80025E38(HSD_GObj* gobj);
 /* 025FAC */ void fn_80025FAC(HSD_GObj* gobj, void* userdata, void* params);
 /* 0262A0 */ void fn_800262A0(HSD_GObj* gobj);
-/* 0263B4 */ void fn_800263B4(void* obj);
 /* 0263B4 */ void lbAudioAx_ObjFree(void* obj);
 /* 0263E8 */ HSD_GObj* lbAudioAx_800263E8(float, HSD_GObj*, int, int, int, int,
                                           int, int, int, int, int);
