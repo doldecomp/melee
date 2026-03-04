@@ -344,9 +344,7 @@ def Lib(
     return lib
 
 
-def DolphinLib(
-    lib_name: str, objects: Objects, fix_epilogue=False
-) -> Library:
+def DolphinLib(lib_name: str, objects: Objects, fix_epilogue=False) -> Library:
     cflags = cflags_base + [
         "-requireprotos",
         "-fp_contract off",
@@ -1640,7 +1638,11 @@ config.libs = [
             Object(Matching, "sysdolphin/baselib/gobjinit.c"),
             Object(NonMatching, "sysdolphin/baselib/particle.c"),
             Object(NonMatching, "sysdolphin/baselib/psdisp.c"),
-            Object(Matching, "sysdolphin/baselib/psdisptev.c", extra_cflags=["-Cpp_exceptions on"]),
+            Object(
+                Matching,
+                "sysdolphin/baselib/psdisptev.c",
+                extra_cflags=["-Cpp_exceptions on"],
+            ),
             Object(NonMatching, "sysdolphin/baselib/psappsrt.c"),
             Object(NonMatching, "sysdolphin/baselib/sobjlib.c"),
             Object(NonMatching, "sysdolphin/baselib/sislib.c"),
@@ -1650,7 +1652,11 @@ config.libs = [
             Object(NonMatching, "sysdolphin/baselib/hsd_3B27.c"),
             Object(NonMatching, "sysdolphin/baselib/hsd_3B2B.c"),
             Object(NonMatching, "sysdolphin/baselib/hsd_3B2E.c"),
-            Object(Matching, "sysdolphin/baselib/hsd_3B33.c", extra_cflags=["-Cpp_exceptions on"]),
+            Object(
+                Matching,
+                "sysdolphin/baselib/hsd_3B33.c",
+                extra_cflags=["-Cpp_exceptions on"],
+            ),
             Object(NonMatching, "sysdolphin/baselib/hsd_3B34.c"),
         ],
     ),

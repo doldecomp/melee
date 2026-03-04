@@ -62,7 +62,9 @@ def find_nm_tool() -> str:
     if system_nm:
         return system_nm
 
-    raise RuntimeError("No suitable nm tool found. Install powerpc-eabi-nm or ensure nm is in PATH.")
+    raise RuntimeError(
+        "No suitable nm tool found. Install powerpc-eabi-nm or ensure nm is in PATH."
+    )
 
 
 def parse_configure() -> dict[str, ObjectFile]:
@@ -339,7 +341,9 @@ def print_leaves(
 ) -> None:
     """Print leaf NonMatching files, ranked by complexity."""
     print(f"\nLeaf NonMatching files ({len(leaves)} files):")
-    print("These can potentially be converted to Matching without breaking other NonMatching files.")
+    print(
+        "These can potentially be converted to Matching without breaking other NonMatching files."
+    )
     print("Sorted by external symbol count (fewer = easier to convert).\n")
 
     for path, undefined_count in leaves:
@@ -518,7 +522,7 @@ def main() -> None:
         print_all(objects, deps, rdeps)
         leaves = find_leaves(objects, rdeps, args.matching)
         if args.limit > 0:
-            leaves = leaves[:args.limit]
+            leaves = leaves[: args.limit]
         print_leaves(leaves, objects)
     elif args.deps:
         print_deps(args.deps, deps, objects)
@@ -540,7 +544,7 @@ def main() -> None:
         # Default: show leaf NonMatching files
         leaves = find_leaves(objects, rdeps, args.matching)
         if args.limit > 0:
-            leaves = leaves[:args.limit]
+            leaves = leaves[: args.limit]
         print_leaves(leaves, objects)
 
 

@@ -200,12 +200,12 @@ class ProjectConfig:
         self.link_order_callback: Optional[Callable[[int, List[str]], List[str]]] = (
             None  # Callback to add/remove/reorder units within a module
         )
-        self.context_exclude_globs: List[
-            str
-        ] = []  # Globs to exclude from context files
-        self.context_defines: List[
-            str
-        ] = []  # Macros to define at the top of context files
+        self.context_exclude_globs: List[str] = (
+            []
+        )  # Globs to exclude from context files
+        self.context_defines: List[str] = (
+            []
+        )  # Macros to define at the top of context files
 
         # Progress output and report.json config
         self.progress = True  # Enable report.json generation and CLI progress output
