@@ -4922,9 +4922,9 @@ Fighter* it_80272818(Item* item)
 Item_GObj* it_80272828(ItemKind kind)
 {
     Item_GObj* item_gobj_return;
-    Item *new_var2;
+    Item* new_var2;
     Item_GObj* item_gobj_check;
-    void *new_var;
+    void* new_var;
     item_gobj_return = NULL;
     item_gobj_check = (Item_GObj*) HSD_GObj_Entities->items;
     while (item_gobj_check != NULL) {

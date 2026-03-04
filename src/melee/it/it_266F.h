@@ -79,8 +79,6 @@
 /* 26F8B4 */ bool it_8026F8B4(Item_GObj*, Vec3*, Vec3*, bool);
 /* 26F9A0 */ void it_8026F9A0(void);
 
-
-
 bool it_8026E15C_inline1(Item_GObj* gobj);
 bool it_8026E15C_inline2(Item_GObj* gobj);
 bool it_8026E248_inline(Item_GObj* gobj);

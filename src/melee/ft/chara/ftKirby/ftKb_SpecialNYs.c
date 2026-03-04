@@ -265,7 +265,7 @@ static void fn_80109680(HSD_GObj* gobj)
     fp->x2222_b2 = new_var;
     ftCommon_8007E2F4(fp, 0x1FF);
     ftCommon_8007E2FC(gobj);
-    fp = (new_var2 = (Fighter *) HSD_GObjGetUserData(gobj));
+    fp = (new_var2 = (Fighter*) HSD_GObjGetUserData(gobj));
     new_var2->death2_cb = ftKb_Init_800EE74C;
     fp->take_dmg_cb = ftKb_Init_800EE7B8;
 }

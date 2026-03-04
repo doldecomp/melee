@@ -271,7 +271,7 @@ void mnDiagram3_80246D40(HSD_GObj* gobj)
 {
     Diagram3* data;
     HSD_JObj* jobj;
-    HSD_JObj *new_var;
+    HSD_JObj* new_var;
 
     int limit;
 

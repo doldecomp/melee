@@ -550,7 +550,7 @@ bool it_2E5A_UnkMotion1_Anim(HSD_GObj* item_gobj)
 {
     f32 var_f2;
     Item* item;
-    f32 *new_var;
+    f32* new_var;
     item = GET_ITEM(item_gobj);
     var_f2 = *(new_var = &item->x40_vel.y);
     if (var_f2 < 0.0f) {

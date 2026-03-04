@@ -765,7 +765,7 @@ void ftKb_SpecialNLk800FB840(HSD_GObj* gobj)
 
 void ftKb_LkSpecialNEnd_Anim(Fighter_GObj* gobj)
 {
-    Fighter_GObj *new_var;
+    Fighter_GObj* new_var;
     if (!ftAnim_IsFramesRemaining(gobj)) {
         new_var = gobj;
         ftKb_SpecialNLk_UnsetBow(new_var);

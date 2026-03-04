@@ -2,6 +2,7 @@
 #define __GALE01_1CA394
 
 #include <platform.h>
+
 #include "baselib/forward.h"
 
 struct grZakoGenerator_Entry {

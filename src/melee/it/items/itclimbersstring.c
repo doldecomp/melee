@@ -20,12 +20,11 @@ void it_2725_Logic70_EvtUnk(Item_GObj* arg0, Item_GObj* arg1)
     }
 }
 
-
 void it_2725_Logic70_PickedUp(Item_GObj* gobj)
 {
     short pad;
-    void (*new_var)(Item_GObj *gobj);
-    Item *ip = gobj->user_data;
+    void (*new_var)(Item_GObj* gobj);
+    Item* ip = gobj->user_data;
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
     it_8026BB44(gobj);
     new_var = &fn_802C28B8;

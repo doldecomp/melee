@@ -640,21 +640,19 @@ bool un_803009A4(bool update_scene)
     return false;
 }
 
-
 s32 un_803009E0(void)
 {
-    s32 *new_var;
+    s32* new_var;
     switch (un_804D6DD8) {
     case 2:
         new_var = gmMainLib_8015D06C((u8) un_804D6DC8);
-    {
-        u32 val = (u32) (*new_var);
-        un_804D6DD0 = (float) (val / 100U);
-        break;
-    }
+        {
+            u32 val = (u32) (*new_var);
+            un_804D6DD0 = (float) (val / 100U);
+            break;
+        }
 
-    case 3:
-    {
+    case 3: {
         s32 result = gmMainLib_8015D48C((u8) un_804D6DC8);
         gmMainLib_8015D4E8((u8) un_804D6DC8, result);
         un_804D6DCC = result;

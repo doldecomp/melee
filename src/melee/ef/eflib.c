@@ -338,15 +338,15 @@ void efLib_ResumeAll(HSD_GObj* arg_gobj)
 
 /// Arg is type Effect*, but forced to be void to fit the function template in
 /// GObj_InitUserData
-inline HSD_ObjAllocData *Effect_RemoveUserData_inline()
+inline HSD_ObjAllocData* Effect_RemoveUserData_inline()
 {
     return &Effect_AllocData;
 }
 
 void Effect_RemoveUserData(void* effect)
 {
-    void *new_var;
-    void *new_var2;
+    void* new_var;
+    void* new_var2;
     new_var = (new_var2 = effect);
     if (((Effect*) new_var2)->gobj != NULL) {
         if (((Effect*) new_var)->x29 == 0) {
