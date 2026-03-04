@@ -40,17 +40,17 @@ path/to/file.cpp: [file attributes]
     ...
 ```
 
-- `path/to/file.cpp` The name of the source file, usually relative to `src`. The file does **not** need to exist to start.  
+- `path/to/file.cpp` The name of the source file, usually relative to `src`. The file does **not** need to exist to start.
   This corresponds to an entry in `configure.py` for specifying compiler flags and other options.
 
 ### File attributes
 
 - `comment:` Overrides the `mw_comment_version` setting in [`config.yml`](/config/GAMEID/config.example.yml) for this file. See [Comment section](comment_section.md).
-  - `comment:0` is used to disable `.comment` section generation for a file that wasn't compiled with `mwcc`.  
-  Example: `TRK_MINNOW_DOLPHIN/ppc/Export/targsupp.s: comment:0`  
+  - `comment:0` is used to disable `.comment` section generation for a file that wasn't compiled with `mwcc`.
+  Example: `TRK_MINNOW_DOLPHIN/ppc/Export/targsupp.s: comment:0`
   This file was assembled and only contains label symbols. Generating a `.comment` section for it will crash `mwld`.
 
-- `order:` Allows influencing the resolved link order of objects. This is **not required**, as decomp-toolkit will generate the link order automatically. This can be used to fine-tune the link order for ambiguous cases.  
+- `order:` Allows influencing the resolved link order of objects. This is **not required**, as decomp-toolkit will generate the link order automatically. This can be used to fine-tune the link order for ambiguous cases.
   Example:
   ```
   file1.cpp: order:0
