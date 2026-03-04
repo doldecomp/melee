@@ -132,7 +132,7 @@ void itHarisen_Logic24_Dropped(Item_GObj* gobj)
     ip->x5D0_animFrameSpeed = 1.0F;
     ip = gobj->user_data;
     ip->scl = ip->xCC_item_attr->x60_scale;
-    it_8026B390(gobj);
+    Item_8026849C(gobj);
     Item_80268E5C(gobj, 8, 6);
 }
 
