@@ -640,10 +640,6 @@ bool un_803009A4(bool update_scene)
     return false;
 }
 
-inline float un_803009E0_inline(u32 arg0)
-{
-    return (float) (arg0 / 100U);
-}
 
 s32 un_803009E0(void)
 {
@@ -653,13 +649,13 @@ s32 un_803009E0(void)
         new_var = gmMainLib_8015D06C((u8) un_804D6DC8);
     {
         u32 val = (u32) (*new_var);
-        un_804D6DD0 = un_803009E0_inline(val);
+        un_804D6DD0 = (float) (val / 100U);
         break;
     }
 
     case 3:
     {
-        s32 result = gmMainLib_8015D48C(un_804D6DC8);
+        s32 result = gmMainLib_8015D48C((u8) un_804D6DC8);
         gmMainLib_8015D4E8((u8) un_804D6DC8, result);
         un_804D6DCC = result;
         break;

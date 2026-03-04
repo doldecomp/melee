@@ -423,18 +423,15 @@ void grFourside_801F3274(Ground_GObj* gobj)
 
 void grFourside_801F37F8(Ground_GObj* arg) {}
 
-/// #grFourside_801F37FC
-inline Ground_GObj* grFourside_801F37FC_inline(Ground_GObj *arg0)
-{
-    return arg0;
-}
 
 void grFourside_801F37FC(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    HSD_JObj* jobj = grFourside_801F37FC_inline(gobj)->hsd_obj;
+    int new_var;
+    Ground *gp = (Ground *) HSD_GObjGetUserData(gobj);
+    HSD_JObj *jobj = gobj->hsd_obj;
     Ground_801C2ED0(jobj, gp->map_id);
-    gp->gv.foursideCrane.x4 = grFs_804D69D8->ufo_wait;
+    new_var = grFs_804D69D8->ufo_wait;
+    gp->gv.foursideCrane.x4 = new_var;
     gp->gv.foursideUfo.x0 = 0;
     gp->gv.foursideUfo.x1 = 0xff;
     gp->gv.foursideUfo.x8 = 0;
