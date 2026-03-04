@@ -20,14 +20,14 @@ void it_2725_Logic70_EvtUnk(Item_GObj* arg0, Item_GObj* arg1)
     }
 }
 
-inline void *inline_fn(void *arg0)
+inline void *it_2725_Logic70_PickedUp_inline(void *arg0)
 {
     return arg0;
 }
 
 void it_2725_Logic70_PickedUp(Item_GObj* gobj)
 {
-    Item* ip = inline_fn(gobj->user_data);
+    Item* ip = it_2725_Logic70_PickedUp_inline(gobj->user_data);
     Item_GObj *new_var;
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
     new_var = gobj;

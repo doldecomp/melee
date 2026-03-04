@@ -271,6 +271,8 @@ void mnDiagram3_80246D40(HSD_GObj* gobj)
 {
     Diagram3* data;
     HSD_JObj* jobj;
+    HSD_JObj *new_var;
+
     int limit;
 
     data = gobj->user_data;
@@ -288,14 +290,15 @@ void mnDiagram3_80246D40(HSD_GObj* gobj)
         HSD_JObjClearFlagsAll(jobj, 0x10);
     } else {
         HSD_JObjSetFlagsAll(jobj, 0x10);
-        jobj = data->jobjs[4];
     }
-    mn_8022ED6C(jobj, &mnDiagram3_803EEC1C);
+    jobj = data->jobjs[4];
+    new_var = jobj;
+    mn_8022ED6C(new_var, &mnDiagram3_803EEC1C);
 
     if (data->scroll_offset != 0) {
-        HSD_JObjClearFlagsAll(jobj, 0x10);
+        HSD_JObjClearFlagsAll(new_var, 0x10);
     } else {
-        HSD_JObjSetFlagsAll(jobj, 0x10);
+        HSD_JObjSetFlagsAll(new_var, 0x10);
     }
 }
 

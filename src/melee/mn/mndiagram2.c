@@ -1375,7 +1375,7 @@ void mnDiagram2_GetAggregatedFighterRank(u8* out, u8 type, u8 idx)
 
 /// @brief Clears the detail view by freeing text objects and removing JObj.
 /// @param gobj The GObj containing the detail view data
-inline Diagram2DetailView *inline_fn(HSD_GObj *arg0)
+inline Diagram2DetailView *mnDiagram2_ClearDetailView_inline(HSD_GObj *arg0)
 {
     return (Diagram2DetailView *) HSD_GObjGetUserData(arg0);
 }
@@ -1388,7 +1388,7 @@ void mnDiagram2_ClearDetailView(HSD_GObj* gobj)
     void* tmp;
     HSD_JObj* jobj;
 
-    ptr = data = inline_fn(gobj);
+    ptr = data = mnDiagram2_ClearDetailView_inline(gobj);
 
     if (data->title_text != NULL) {
         HSD_SisLib_803A5CC4(data->title_text);

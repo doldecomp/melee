@@ -338,7 +338,7 @@ void efLib_ResumeAll(HSD_GObj* arg_gobj)
 
 /// Arg is type Effect*, but forced to be void to fit the function template in
 /// GObj_InitUserData
-inline HSD_ObjAllocData *inline_fn()
+inline HSD_ObjAllocData *Effect_RemoveUserData_inline()
 {
     return &Effect_AllocData;
 }
@@ -354,7 +354,7 @@ void Effect_RemoveUserData(void* effect)
             } while (0);
             efLib_804D64EC--;
         }
-        HSD_ObjFree(inline_fn(), new_var);
+        HSD_ObjFree(Effect_RemoveUserData_inline(), new_var);
         return;
     }
     OSReport("Duplicate Free %08X\n", new_var);
