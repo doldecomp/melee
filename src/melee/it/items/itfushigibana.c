@@ -19,6 +19,26 @@ ItemStateTable it_803F82F0[] = {
       itFushigibana_UnkMotion2_Coll }
 };
 
+static void itFushigibana_UnkMotion1_Anim_inline1(Item_GObj* gobj)
+{
+    Item* item = GET_ITEM(gobj);
+    Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
+    item->entered_hitlag = efLib_PauseAll;
+    item->exited_hitlag = efLib_ResumeAll;
+    item->xDD4_itemVar.fushigibana.x60.b0 = true;
+}
+
+static bool itFushigibana_UnkMotion1_Anim_inline2(Item_GObj* gobj)
+{
+    Item* item = GET_ITEM(gobj);
+    item->xD44_lifeTimer -= 1.0f;
+    if (item->xD44_lifeTimer <= 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 void itFushigibana_Logic29_Spawned(Item_GObj* gobj)
 {
     Item* item = GET_ITEM(gobj);
@@ -74,26 +94,6 @@ void it_802D718C(Item_GObj* gobj)
     item->entered_hitlag = efLib_PauseAll;
     item->exited_hitlag = efLib_ResumeAll;
     item->xDD4_itemVar.fushigibana.x60.b0 = true;
-}
-
-static void itFushigibana_UnkMotion1_Anim_inline1(Item_GObj* gobj)
-{
-    Item* item = GET_ITEM(gobj);
-    Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
-    item->entered_hitlag = efLib_PauseAll;
-    item->exited_hitlag = efLib_ResumeAll;
-    item->xDD4_itemVar.fushigibana.x60.b0 = true;
-}
-
-static bool itFushigibana_UnkMotion1_Anim_inline2(Item_GObj* gobj)
-{
-    Item* item = GET_ITEM(gobj);
-    item->xD44_lifeTimer -= 1.0f;
-    if (item->xD44_lifeTimer <= 0) {
-        return true;
-    } else {
-        return false;
-    }
 }
 
 bool itFushigibana_UnkMotion1_Anim(Item_GObj* gobj)
