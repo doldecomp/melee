@@ -9,9 +9,6 @@
 #include "it/itCommonItems.h"
 #include "it/item.h"
 
-/* 2841B4 */ static Item_GObj* it_802841B4(Item_GObj* gobj, Vec3* arg1,
-                                           s32 arg2);
-/* 28428C */ static void it_8028428C(Item_GObj* gobj);
 /* 284358 */ static void it_80284358(Item_GObj* gobj);
 /* 284380 */ static bool itTomato_UnkMotion0_Anim(HSD_GObj* gobj);
 /* 284388 */ static void itTomato_UnkMotion0_Phys(Item_GObj* gobj);
