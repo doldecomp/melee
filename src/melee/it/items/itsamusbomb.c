@@ -146,32 +146,13 @@ bool itSamusbomb_UnkMotion2_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// NOTE: 4 iterations instead of the usual 3
-static inline float my_sqrtf(float x)
-{
-    static const double _half = .5;
-    static const double _three = 3.0;
-
-    volatile float y;
-
-    if (x > 0) {
-        double guess = __frsqrte((double) x);
-        guess = _half * guess * (_three - guess * guess * x);
-        guess = _half * guess * (_three - guess * guess * x);
-        guess = _half * guess * (_three - guess * guess * x);
-        guess = _half * guess * (_three - guess * guess * x);
-        y = (float) (x * guess);
-        return y;
-    }
-    return x;
-}
-
 void itSamusbomb_UnkMotion2_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itSamusBombAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
-    if (my_sqrtf(VEC2_SQ_LEN(ip->x7C)) > attr->xC) {
-        f32 mult;
+    f32 mult;
+
+    if (sqrtf_accurate(VEC2_SQ_LEN(ip->x7C)) > attr->xC) {
         lbVector_NormalizeXY(&ip->x7C);
         mult = attr->xC;
         ip->x7C.x *= mult;
@@ -260,7 +241,8 @@ void it_802B5478(Item_GObj* gobj)
         ip->xDD4_itemVar.samusbomb.x0 = false;
 
         if (ip->xDD4_itemVar.samusbomb.owner != NULL &&
-            ftSs_Init_80128A1C(gobj, ip->x5D4_hitboxes, ip->scl))
+            ftSs_Init_80128A1C(ip->xDD4_itemVar.samusbomb.owner,
+                               ip->x5D4_hitboxes, ip->scl))
         {
             ftSs_Init_80128944(ip->xDD4_itemVar.samusbomb.owner, ip->pos.x,
                                ip->x5D4_hitboxes[0].hit.scale);
