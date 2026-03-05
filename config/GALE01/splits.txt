@@ -3309,8 +3309,8 @@ melee/it/items/itseakneedlethrown.c:
 melee/it/items/itseakneedleheld.c:
 	.text       start:0x802B18B0 end:0x802B1C60
 	.data       start:0x803F70A8 end:0x803F70B8
-	.sdata      start:0x804D5468 end:0x804D5478
-	.sdata2     start:0x804DCF88 end:0x804DCF90
+	.sdata      start:0x804D5468 end:0x804D5475
+	.sdata2     start:0x804DCF88 end:0x804DCF8C
 
 melee/it/items/itseakvanish.c:
 	.text       start:0x802B1C60 end:0x802B1DEC

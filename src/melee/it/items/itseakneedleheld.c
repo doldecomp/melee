@@ -1,66 +1,68 @@
 #include "itseakneedleheld.h"
 
-#include "it/it_26B1.h"
-#include "it/item.h"
-#include "it/inlines.h"
-
-#include "ft/ftlib.h"
 #include "ft/chara/ftKirby/ftKb_Init.h"
 #include "ft/chara/ftSeak/ftSk_SpecialS.h"
 
+#include "ft/forward.h"
+
+#include "ft/ftlib.h"
+#include "it/inlines.h"
+#include "it/it_26B1.h"
+#include "it/item.h"
+
 #include <baselib/jobj.h>
+
+ItemStateTable it_803F70A8[] = {
+    {
+        -1,
+        itSeakneedleheld_UnkMotion0_Anim,
+        itSeakneedleheld_UnkMotion0_Phys,
+        itSeakneedleheld_UnkMotion0_Coll,
+    },
+};
 
 void it_802B18B0(Item_GObj* gobj)
 {
-    HSD_JObj* jobj;
-    Item* ip;
-    HSD_JObj* child;
-    HSD_JObj* needle;
-    Fighter_GObj* holder;
-    s32 count;
-    s32 i;
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+    Item* ip = GET_ITEM(gobj);
+    HSD_JObj* child = HSD_JObjGetChild(jobj);
+    HSD_JObj* needle = HSD_JObjGetChild(child);
+    Fighter_GObj* owner = ip->xDD4_itemVar.seakneedleheld.owner;
+    int count;
+    int i;
 
-    jobj = gobj->hsd_obj;
-    ip = GET_ITEM(gobj);
-
-    child = (jobj == NULL) ? NULL : jobj->child;
-    needle = (child == NULL) ? NULL : child->child;
-
-    holder = ip->xDD4_itemVar.seakneedleheld.xDD4_fighter;
-
-    if (holder == NULL) {
+    if (owner == NULL) {
         return;
     }
-    if (ip->owner != (HSD_GObj*) holder) {
+    if (ip->owner != owner) {
         return;
     }
 
     switch (ip->kind) {
     case It_Kind_Seak_NeedleHeld:
-        count = ftSk_SpecialS_80111FA0((HSD_GObj*) holder);
+        count = ftSk_SpecialS_80111FA0(owner);
         break;
     case It_Kind_Kirby_SeakNeedleHeld:
-        count = ftKb_SpecialNSk_80106020((HSD_GObj*) holder);
+        count = ftKb_SpecialNSk_80106020(owner);
+        break;
+    default:
         break;
     }
 
     for (i = 0; i < 6; i++) {
         if (i < count) {
-            HSD_JObjClearFlagsAll(needle, 0x10);
+            HSD_JObjClearFlagsAll(needle, JOBJ_HIDDEN);
         } else {
-            HSD_JObjSetFlagsAll(needle, 0x10);
+            HSD_JObjSetFlagsAll(needle, JOBJ_HIDDEN);
         }
-        needle = (needle == NULL) ? NULL : needle->next;
+        needle = HSD_JObjGetNext(needle);
     }
 }
 
-Item_GObj* it_802B19AC(HSD_GObj* fighter_gobj, Vec3* cur_pos, u32 part,
-                       u32 kind, float facing_dir)
+Item_GObj* it_802B19AC(Fighter_GObj* parent_gobj, Vec3* cur_pos,
+                       Fighter_Part part, ItemKind kind, float facing_dir)
 {
     SpawnItem spawn;
-    Item_GObj* gobj;
-    Item* ip;
-    PAD_STACK(2 * 4);
 
     spawn.kind = kind;
     spawn.prev_pos = *cur_pos;
@@ -68,25 +70,25 @@ Item_GObj* it_802B19AC(HSD_GObj* fighter_gobj, Vec3* cur_pos, u32 part,
     spawn.pos = spawn.prev_pos;
     spawn.facing_dir = facing_dir;
     spawn.x3C_damage = 0;
-    spawn.vel.z = spawn.vel.y = spawn.vel.x = 0.0f;
-    spawn.x0_parent_gobj = fighter_gobj;
+    spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;
+    spawn.x0_parent_gobj = parent_gobj;
     spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
     spawn.x44_flag.b0 = true;
     spawn.x40 = 0;
 
-    gobj = Item_80268B18(&spawn);
-    if (gobj != NULL) {
-        ip = GET_ITEM(gobj);
-        ip->xDB8_itcmd_var3 = 0;
-        ip->xDB4_itcmd_var2 = 0;
-        ip->xDB0_itcmd_var1 = 0;
-        ip->xDAC_itcmd_var0 = 0;
-        ip->xDCC_flag.b3 = false;
-        ip->xDD4_itemVar.seakneedleheld.xDD4_fighter =
-            (Fighter_GObj*) fighter_gobj;
-        Item_8026AB54(gobj, fighter_gobj, part);
+    {
+        Item_GObj* gobj = Item_80268B18(&spawn);
+        if (gobj != NULL) {
+            Item* ip = GET_ITEM(gobj);
+            PAD_STACK(2 * 4);
+            ip->xDAC_itcmd_var0 = ip->xDB0_itcmd_var1 = ip->xDB4_itcmd_var2 =
+                ip->xDB8_itcmd_var3 = 0;
+            ip->xDCC_flag.b3 = false;
+            ip->xDD4_itemVar.seakneedleheld.owner = parent_gobj;
+            Item_8026AB54(gobj, parent_gobj, part);
+        }
+        return gobj;
     }
-    return gobj;
 }
 
 void itSeakNeedleHeld_Logic110_PickedUp(Item_GObj* gobj)
@@ -96,48 +98,42 @@ void itSeakNeedleHeld_Logic110_PickedUp(Item_GObj* gobj)
 
 bool itSeakneedleheld_UnkMotion0_Anim(Item_GObj* gobj)
 {
-    HSD_JObj* root;
-    Item* ip;
-    HSD_JObj* jobj;
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+    Item* ip = GET_ITEM(gobj);
+    HSD_JObj* needle = HSD_JObjGetChild(jobj);
     Vec3 scale;
-    PAD_STACK(4 * 4);
+    PAD_STACK(3 * 4);
 
-    root = gobj->hsd_obj;
-    ip = GET_ITEM(gobj);
-
-    jobj = (root == NULL) ? NULL : root->child;
-
-    if (ip->xDD4_itemVar.seakneedleheld.xDD4_fighter == NULL) {
+    if (ip->xDD4_itemVar.seakneedleheld.owner == NULL) {
         goto ret_true;
     }
-    if (ip->owner !=
-        (HSD_GObj*) ip->xDD4_itemVar.seakneedleheld.xDD4_fighter)
-    {
+    if (ip->owner != ip->xDD4_itemVar.seakneedleheld.owner) {
         goto ret_false;
     }
 
     switch (ip->kind) {
     case It_Kind_Seak_NeedleHeld:
-        if (ftSk_SpecialS_80111F70(
-                (HSD_GObj*) ip->xDD4_itemVar.seakneedleheld.xDD4_fighter) == 1)
+        if (ftSk_SpecialS_80111F70(ip->xDD4_itemVar.seakneedleheld.owner) == 1)
         {
             return true;
         }
         break;
     case It_Kind_Kirby_SeakNeedleHeld:
-        if (ftKb_SpecialNSk_80105FF0(
-                (HSD_GObj*) ip->xDD4_itemVar.seakneedleheld.xDD4_fighter) == 1)
+        if (ftKb_SpecialNSk_80105FF0(ip->xDD4_itemVar.seakneedleheld.owner) ==
+            1)
         {
             return true;
         }
+        break;
+    default:
         break;
     }
 
     it_802B18B0(gobj);
 
     scale.x = scale.y = scale.z =
-        ftLib_800869D4((HSD_GObj*) ip->xDD4_itemVar.seakneedleheld.xDD4_fighter);
-    HSD_JObjSetScale(jobj, &scale);
+        ftLib_800869D4(ip->xDD4_itemVar.seakneedleheld.owner);
+    HSD_JObjSetScale(needle, &scale);
     goto ret_false;
 
 ret_true:

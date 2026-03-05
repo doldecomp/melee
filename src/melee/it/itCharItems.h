@@ -600,7 +600,7 @@ typedef struct itSamusMissile_ItemVars {
 } itSamusMissile_ItemVars;
 
 typedef struct itSeakNeedleHeld_ItemVars {
-    /* +0 ip+DD4 */ Fighter_GObj* xDD4_fighter;
+    /* +0 ip+DD4 */ Fighter_GObj* owner;
 } itSeakNeedleHeld_ItemVars;
 
 typedef struct itSeakNeedleThrown_ItemVars {

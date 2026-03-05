@@ -10,7 +10,8 @@
 #include <dolphin/mtx.h>
 
 /* 2B18B0 */ void it_802B18B0(Item_GObj* gobj);
-/* 2B19AC */ Item_GObj* it_802B19AC(HSD_GObj*, Vec3* cur_pos, u32, u32,
+/* 2B19AC */ Item_GObj* it_802B19AC(Fighter_GObj* parent_gobj, Vec3* cur_pos,
+                                    Fighter_Part part, ItemKind kind,
                                     float facing_dir);
 /* 2B1AAC */ void itSeakNeedleHeld_Logic110_PickedUp(Item_GObj*);
 /* 2B1AD4 */ bool itSeakneedleheld_UnkMotion0_Anim(Item_GObj* gobj);
