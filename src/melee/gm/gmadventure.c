@@ -1467,7 +1467,7 @@ void gm_801B4860(MinorScene* scene)
     gm_801B4860_inline1(scene);
 }
 
-void gm_8016A22C_inline(MinorScene* arg0, UnkAdventureData* temp_r29)
+static void gm_8016A22C_inline(MinorScene* arg0, UnkAdventureData* temp_r29)
 {
     u8 count = gm_8017E48C(arg0);
     struct gm_803DE650_t* temp_r25_2 = gm_8017E4C4(arg0->idx);
