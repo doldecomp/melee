@@ -60,10 +60,7 @@ bool grPushOn_802183DC(void)
     return false;
 }
 
-void grPushOn_802183E4(int arg)
-{
-    NOT_IMPLEMENTED;
-}
+/// #grPushOn_802183E4
 
 /// #grPushOn_802184CC
 
