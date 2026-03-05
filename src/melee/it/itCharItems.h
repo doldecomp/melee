@@ -484,7 +484,7 @@ typedef struct itPikachutJoltGround_ItemVars {
 
 typedef struct itPikachutJoltAir_ItemVars {
     /* +0 ip+DD4 */ char pad_0[0x4];
-    /* +4 ip+DD8 */ u32 xDD8;
+    /* +4 ip+DD8 */ Item_GObj* xDD8;
 } itPikachutJoltAir_ItemVars;
 
 typedef struct itPikachuthunder_ItemVars {

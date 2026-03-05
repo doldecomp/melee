@@ -54,6 +54,8 @@
 #include <melee/pl/plbonuslib.h>
 #include <melee/pl/plstale.h>
 
+/* 0D4DD4 */ static void fn_800D4DD4(Fighter_GObj* gobj);
+
 bool ftCo_800D3158(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);

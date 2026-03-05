@@ -351,7 +351,7 @@ typedef struct itFlipper_ItemVars {
     f32 xDE0;
     f32 xDE4;
     s32 xDE8;
-    s32 xDEC;
+    HSD_JObj* xDEC;
 } itFlipper_ItemVars;
 
 typedef struct itFlipper_DatAttrs {

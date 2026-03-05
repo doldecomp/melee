@@ -10,6 +10,7 @@
 #include "it/itCommonItems.h"
 #include "it/item.h"
 #include "it/items/itwhitebea.h"
+#include "lb/lblanguage.h"
 #include "mp/mpcoll.h"
 
 /// #it_802E2470

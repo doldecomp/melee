@@ -3,9 +3,13 @@
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
+#include "it/it_2725.h"
 #include "lb/lbvector.h"
 #include "MSL/math.h"
-#include "MSL/trigf.h"
+
+#include <trigf.h>
+
+/* 2AC000 */ static bool itNesspkthunderball_UnkMotion0_Coll(Item_GObj* gobj);
 
 static inline void normalizeAngle(f32* angle)
 {
@@ -26,15 +30,21 @@ void it_802AB468(Item_GObj* gobj, f32* out, s32 unused)
     if (gobj != NULL) {
         ip = GET_ITEM(gobj);
         if (ip != NULL) {
-            if (out == NULL) return;
-            *out = *(f32*)&ip->xDD4_itemVar.pkthunder.xEEC;
+            if (out == NULL) {
+                return;
+            }
+            *out = *(f32*) &ip->xDD4_itemVar.pkthunder.xEEC;
             return;
         }
-        if (out == NULL) return;
+        if (out == NULL) {
+            return;
+        }
         *out = 0.0f;
         return;
     }
-    if (out == NULL) return;
+    if (out == NULL) {
+        return;
+    }
     *out = 0.0f;
 }
 

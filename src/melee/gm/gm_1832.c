@@ -2,6 +2,8 @@
 
 #include "gm_unsplit.h"
 
+#include "pl/pl_040D.h"
+
 #include <math_ppc.h>
 #include <sysdolphin/baselib/fog.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
@@ -541,28 +543,28 @@ f32 gm_801883C0(void)
     void* ptr2;
     void* ptr3;
 
-    ptr = *(void**)((u8*)&lbl_804736C0 + 0x8);
+    ptr = *(void**) ((u8*) &lbl_804736C0 + 0x8);
     if (ptr == NULL) {
         goto return_default;
     }
 
-    ptr2 = *(void**)((u8*)ptr + 0x28);
+    ptr2 = *(void**) ((u8*) ptr + 0x28);
     goto check_ptr2;
 
 return_default:
     return lbl_804DA5E8;
 
 check_ptr2:
-    ptr3 = *(void**)((u8*)ptr2 + 0x24);
-    ptr3 = *(void**)((u8*)ptr3 + 0x18);
+    ptr3 = *(void**) ((u8*) ptr2 + 0x24);
+    ptr3 = *(void**) ((u8*) ptr3 + 0x18);
     if (ptr3 != NULL) {
-        return *(f32*)((u8*)ptr3 + 0x4);
+        return *(f32*) ((u8*) ptr3 + 0x4);
     }
 
-    ptr3 = *(void**)((u8*)ptr2 + 0x28);
-    ptr3 = *(void**)((u8*)ptr3 + 0x18);
+    ptr3 = *(void**) ((u8*) ptr2 + 0x28);
+    ptr3 = *(void**) ((u8*) ptr3 + 0x18);
     if (ptr3 != NULL) {
-        return *(f32*)((u8*)ptr3 + 0x4);
+        return *(f32*) ((u8*) ptr3 + 0x4);
     }
 
     return lbl_804DA5E8;

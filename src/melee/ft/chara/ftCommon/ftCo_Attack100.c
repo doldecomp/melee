@@ -23,6 +23,7 @@
 #include "ftCommon/ftCo_CaptureCut.h"
 #include "ftCommon/ftCo_ItemThrow.h"
 #include "ftCommon/ftCo_Throw.h"
+#include "it/items/itsamusgrapple.h"
 #include "it/items/itsscope.h"
 
 #include <math.h>
@@ -918,15 +919,12 @@ void ftCo_800D9C98(Fighter_GObj* gobj)
         fp->fv.ss.x223C = NULL;
     }
 
-    *(s32*)((u8*)fp + 0x21E4) = 0;
-    *(s32*)((u8*)fp + 0x21F0) = 0;
-    *(s32*)((u8*)fp + 0x21DC) = 0;
+    fp->death2_cb = NULL;
+    fp->take_dmg_2_cb = NULL;
+    fp->take_dmg_cb = NULL;
 }
 
-void fn_800D9CE8(Fighter_GObj* arg0)
-{
-    NOT_IMPLEMENTED;
-}
+/// #fn_800D9CE8
 
 /// #ftCo_CatchPull_Anim
 
@@ -956,7 +954,7 @@ void fn_800DA004(Fighter_GObj* gobj)
 void fn_800DA190(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    s32 state = *(s32*)((u8*)fp + 0x4);
+    s32 state = *(s32*) ((u8*) fp + 0x4);
 
     switch (state) {
     case 6:

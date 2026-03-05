@@ -1,5 +1,8 @@
 #include "lbmthp.static.h"
 
+#include "baselib/memory.h"
+#include "baselib/video.h"
+
 #include <dolphin/gx/GXTexture.h>
 #include <sysdolphin/baselib/sobjlib.h>
 #include <melee/lb/lbanim.h>
@@ -164,16 +167,16 @@ void lbMthp_8001F800(void)
     p_14C = &base->unk_14C;
 
     if (*p_14C != 0) {
-        *(s32*)((u8*)base + 0x70) = 0;
+        *(s32*) ((u8*) base + 0x70) = 0;
 
         while (fn_8001F294()) {
         }
 
-        OSCancelAlarm((OSAlarm*)((u8*)base + 0x150));
+        OSCancelAlarm((OSAlarm*) ((u8*) base + 0x150));
         HSD_VIWaitXFBFlush();
 
-        if (*(void**)((u8*)base + 0x140) != NULL) {
-            HSD_Free(*(void**)((u8*)base + 0x140));
+        if (*(void**) ((u8*) base + 0x140) != NULL) {
+            HSD_Free(*(void**) ((u8*) base + 0x140));
         }
 
         *p_14C = 0;

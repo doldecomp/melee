@@ -1,5 +1,8 @@
 #include "grcastle.h"
 
+#include "placeholder.h"
+
+#include "baselib/random.h"
 #include "ft/ftdevice.h"
 #include "ft/ftlib.h"
 #include "gr/grdisplay.h"
@@ -148,13 +151,17 @@ void grCastle_801CDFD8(Ground_GObj* gobj)
 
     // Set bit 7 at offset 0xDE
     one = 1;
-    byte = ((u8*)gp)[0xDE];
+    byte = ((u8*) gp)[0xDE];
+#ifdef MWERKS_GEKKO
     asm { rlwimi byte, one, 7, 24, 24 }
-    ((u8*)gp)[0xDE] = byte;
+#else
+    NOT_IMPLEMENTED;
+#endif
+    ((u8*) gp)[0xDE] = byte;
 
     // Get random range from params
     params = grCs_804D6970;
-    random_range = *(s16*)((u8*)params + 0xA);
+    random_range = *(s16*) ((u8*) params + 0xA);
 
     if (random_range != 0) {
         rand_result = HSD_Randi(random_range);
@@ -166,14 +173,14 @@ void grCastle_801CDFD8(Ground_GObj* gobj)
     params2 = grCs_804D6970;
     neg_one = -1;
     zero = 0;
-    base_value = *(s16*)((u8*)params2 + 0x8);
-    final_value = (s16)(base_value + rand_result);
+    base_value = *(s16*) ((u8*) params2 + 0x8);
+    final_value = (s16) (base_value + rand_result);
 
-    *(s16*)((u8*)gp + 0xD4) = final_value;
-    *(s16*)((u8*)gp + 0xDC) = neg_one;
-    *(s16*)((u8*)gp + 0xDA) = neg_one;
-    *(s16*)((u8*)gp + 0xD8) = neg_one;
-    *(s16*)((u8*)gp + 0xD6) = zero;
+    *(s16*) ((u8*) gp + 0xD4) = final_value;
+    *(s16*) ((u8*) gp + 0xDC) = neg_one;
+    *(s16*) ((u8*) gp + 0xDA) = neg_one;
+    *(s16*) ((u8*) gp + 0xD8) = neg_one;
+    *(s16*) ((u8*) gp + 0xD6) = zero;
 }
 
 /// #grCastle_801CE054

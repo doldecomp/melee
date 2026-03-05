@@ -4,8 +4,8 @@
 #include "it/it_26B1.h"
 #include "it/item.h"
 
-static void it_802C33B8(Item* item);
-static void fn_802C29E8(Item_GObj* gobj);
+/* 2C33B8 */ static void it_802C33B8(Item* item);
+/* 2C29E8 */ static void fn_802C29E8(Item_GObj* gobj);
 
 void fn_802C28B8(Item_GObj* gobj)
 {

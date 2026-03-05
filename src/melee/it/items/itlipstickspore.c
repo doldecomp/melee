@@ -9,9 +9,10 @@
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/item.h"
 #include "it/types.h"
-#include "MSL/trigf.h"
 
+#include <trigf.h>
 #include <baselib/gobj.h>
 
 /* 29A5F8 */ static bool itLipstickspore_UnkMotion1_Coll(Item_GObj* gobj);
@@ -32,7 +33,7 @@ void it_8029A498(Item_GObj* gobj)
     it_80275158(gobj, 1.0f);
     Item_80268E5C(gobj, 1, 2);
 
-    ip->xDCE_flag.b7 = FALSE;
+    ip->xDCE_flag.b7 = false;
 }
 
 bool itLipstickspore_UnkMotion0_Anim(Item_GObj* gobj)

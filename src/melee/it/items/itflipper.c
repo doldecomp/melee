@@ -9,6 +9,7 @@
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
+#include "lb/lb_00B0.h"
 #include "lb/lbvector.h"
 
 /* 0x802910B8 */ void itFlipper_Logic20_Thrown(Item_GObj* gobj);
@@ -134,7 +135,6 @@ void itFlipper_Logic20_Thrown(Item_GObj* gobj)
 
 bool itFlipper_UnkMotion3_Anim(Item_GObj* gobj)
 {
-    extern void it_80291254(Item_GObj*);
     Item* ip = GET_ITEM(gobj);
 
     ip->xDD4_itemVar.flipper.xDD4--;
@@ -167,8 +167,8 @@ void itFlipper_UnkMotion6_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     if (ip->xDD4_itemVar.flipper.xDE8 != 0) {
-        if ((HSD_GObj*)ip->xDD4_itemVar.flipper.xDEC != NULL) {
-            lb_8000B1CC((HSD_GObj*)ip->xDD4_itemVar.flipper.xDEC, 0, &ip->pos);
+        if (ip->xDD4_itemVar.flipper.xDEC != NULL) {
+            lb_8000B1CC(ip->xDD4_itemVar.flipper.xDEC, 0, &ip->pos);
         }
     }
 }

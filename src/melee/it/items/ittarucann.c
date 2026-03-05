@@ -20,6 +20,10 @@
 #include <baselib/jobj.h>
 #include <baselib/random.h>
 
+/// @todo Remove
+static f32 fake1(void);
+static f32 fake2(void);
+
 const lbColl_80008D30_arg1 it_803B8610 = {
     1, 1, 361, 0, 0, 180, 0, 1, 0,
 };
@@ -130,12 +134,12 @@ void it_3F14_Logic5_Destroyed(Item_GObj* gobj)
     }
 }
 
-static f32 fake1()
+static f32 fake1(void)
 {
     return -1.0f;
 }
 
-static f32 fake2()
+static f32 fake2(void)
 {
     return 1.3089969f;
 }

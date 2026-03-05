@@ -7,6 +7,8 @@
 #include "it/itCommonItems.h"
 #include "it/item.h"
 
+/* 2EC870 */ static void it_802EC870(Item_GObj*, int);
+
 /// #it_802EB5C8
 
 bool itTincle_Logic13_DmgReceived(Item_GObj* gobj)
@@ -80,7 +82,6 @@ bool itTincle_UnkMotion2_Anim(Item_GObj* gobj)
 
 bool itTincle_UnkMotion2_Coll(Item_GObj* gobj)
 {
-    extern void it_802EC870(Item_GObj*, int);
     PAD_STACK(8);
     if (it_8026DAA8(gobj) != 0) {
         it_802EC870(gobj, 1);
