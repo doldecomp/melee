@@ -10,8 +10,6 @@
 
 #include <baselib/jobj.h>
 
-f32 const it_804DCF88 = 0.0f;
-
 void it_802B18B0(Item_GObj* gobj)
 {
     HSD_JObj* jobj;
@@ -66,11 +64,11 @@ Item_GObj* it_802B19AC(HSD_GObj* fighter_gobj, Vec3* cur_pos, u32 part,
 
     spawn.kind = kind;
     spawn.prev_pos = *cur_pos;
-    spawn.prev_pos.z = it_804DCF88;
+    spawn.prev_pos.z = 0.0f;
     spawn.pos = spawn.prev_pos;
     spawn.facing_dir = facing_dir;
     spawn.x3C_damage = 0;
-    spawn.vel.z = spawn.vel.y = spawn.vel.x = it_804DCF88;
+    spawn.vel.z = spawn.vel.y = spawn.vel.x = 0.0f;
     spawn.x0_parent_gobj = fighter_gobj;
     spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
     spawn.x44_flag.b0 = true;
