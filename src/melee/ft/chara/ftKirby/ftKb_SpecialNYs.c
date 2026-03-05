@@ -810,7 +810,24 @@ void ftKb_MsSpecialAirNStart_Coll(Fighter_GObj* gobj)
 
 /// #ftKb_SpecialNMs_8010B868
 
-/// #ftKb_SpecialNMs_8010B8E0
+inline FtMotionId getSpecialMotionId(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (fp->fv.kb.hat.kind == FTKIND_MARS) {
+        return ftKb_MS_MsSpecialNStart;
+    } else {
+        return ftKb_MS_FeSpecialNStart;
+    }
+}
+
+void ftKb_SpecialNMs_8010B8E0(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    ftCommon_8007D7FC(fp);
+    Fighter_ChangeMotionState(gobj, getSpecialMotionId(gobj), 0x0C4C7084,
+                              fp->cur_anim_frame, 1.0f, 0.0f, NULL);
+}
 
 void ftKb_MsSpecialNLoop_Anim(Fighter_GObj* gobj)
 {
