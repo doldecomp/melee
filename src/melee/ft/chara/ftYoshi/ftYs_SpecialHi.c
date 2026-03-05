@@ -17,8 +17,8 @@
 
 #include "ftYoshi/ftYs_Init.h"
 #include "ftYoshi/types.h"
-#include "it/items/it_2F2B.h"
 #include "it/items/ityoshieggthrow.h"
+#include "it/items/ityoshitongue.h"
 
 #include <math.h>
 #include <dolphin/mtx.h>
