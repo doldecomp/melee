@@ -598,12 +598,10 @@ bool itGShell_Logic14_Reflected(Item_GObj* gobj)
     return false;
 }
 
-bool itGShell_Logic14_Clanked(Item_GObj* gobj)
+static inline void shellHit(HSD_GObj* gobj)
 {
-    itGShell_Attrs* attrs;
     Item* ip = GET_ITEM(gobj);
-    attrs = ip->xC4_article_data->x4_specialAttributes;
-    PAD_STACK(8);
+    itGShell_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
     it_802756D0(gobj);
     it_80275444(gobj);
     ip->x40_vel.x = -ip->x40_vel.x * attrs->xC * HSD_Randf();
@@ -620,33 +618,22 @@ bool itGShell_Logic14_Clanked(Item_GObj* gobj)
     it_80274C88(gobj);
     ip->xDD4_itemVar.gshell.xDEC_b3 = 1;
     ip->xDD4_itemVar.gshell.xDE4 = attrs->x2C;
+}
+
+bool itGShell_Logic14_Clanked(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    shellHit(gobj);
     return false;
 }
 
 bool itGShell_Logic14_HitShield(Item_GObj* gobj)
 {
-    itGShell_Attrs* attrs;
     Item* ip = GET_ITEM(gobj);
-    PAD_STACK(8);
     if (ip->msid == 3 || ip->msid == 4) {
         itColl_BounceOffVictim(gobj);
     } else if (ip->msid - 5u <= 3) {
-        attrs = ip->xC4_article_data->x4_specialAttributes;
-        it_802756D0(gobj);
-        it_80275444(gobj);
-        ip->x40_vel.x = -ip->x40_vel.x * attrs->xC * HSD_Randf();
-        ip->x40_vel.y = attrs->x10;
-        if (ip->xDD4_itemVar.gshell.xDEC_b0) {
-            ip->xDD4_itemVar.gshell.xDE8 =
-                HSD_Randi(it_804D6D28->x48_byte & 0xF);
-        } else {
-            ip->xDD4_itemVar.gshell.xDEC_b0 = 1;
-        }
-        it_802762BC(ip);
-        Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
-        it_80274C88(gobj);
-        ip->xDD4_itemVar.gshell.xDEC_b3 = 1;
-        ip->xDD4_itemVar.gshell.xDE4 = attrs->x2C;
+        shellHit(gobj);
     }
     return false;
 }
