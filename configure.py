@@ -1274,7 +1274,7 @@ config.libs = [
             Object(Matching, "melee/it/items/it_2F28.c"),
             Object(Matching, "melee/it/items/it_2F2B.c"),
             Object(Matching, "melee/it/items/itkirbyyoshispecialn.c"),
-            Object(NonMatching, "melee/it/items/it_27CF.c"),
+            Object(Matching, "melee/it/items/ityoshiegglay.c"),
         ],
     ),
     MeleeLib(

@@ -5,6 +5,7 @@
 
 #include "it/items/types.h"
 
+/* 2C6C38 */ HSD_GObj* it_802C6C38(Item_GObj*, Vec3*, enum_t part, float);
 /* 2C6D3C */ void itGameWatchParachute_Logic74_Destroyed(Item_GObj*);
 /* 2C6D6C */ void it_802C6D6C(Item_GObj*);
 /* 2C6DB8 */ void it_802C6DB8(Item_GObj*);

@@ -21,7 +21,7 @@
 #include "ftCommon/ftpickupitem.h"
 #include "ftFox/types.h"
 #include "it/it_26B1.h"
-#include "it/items/it_27CF.h"
+#include "it/items/itfoxblaster.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbrefract.h"
 

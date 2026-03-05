@@ -17,20 +17,11 @@
 #include <melee/it/item.h>
 #include <melee/lb/lbrefract.h>
 
-/* 2ADDD0 */ static void it_802ADDD0(Item_GObj* item_gobj, s32 visibility);
-/* 2ADEF0 */ static void it_802ADEF0(HSD_GObj* item_gobj);
-/* 2ADF10 */ static void it_802ADF10(HSD_GObj* item_gobj);
-/* 2AE1D0 */ static void it_802AE1D0(Item_GObj* item_gobj);
 /* 2AE200 */ void it_802AE200(Item_GObj* item_gobj);
 /* 2AE538 */ static void it_802AE538(Item_GObj* item_gobj);
 /* 2AE608 */ static void it_802AE608(Item_GObj* item_gobj);
 /* 2AE63C */ static void it_802AE63C(Item_GObj* item_gobj);
 /* 2AE7B8 */ static void it_802AE7B8(Item_GObj* item_gobj);
-/* 2AE8A8 */ static Item_GObj* it_802AE8A8(f32 facing_dir,
-                                           Fighter_GObj* fighter_gobj,
-                                           Vec3* arg2, Fighter_Part ft_part,
-                                           ItemKind it_kind);
-/* 2AEAB4 */ static void it_802AEAB4(Item_GObj* item_gobj);
 /* 2AEBCC */ static bool itFoxblaster_UnkMotion8_Anim(HSD_GObj* item_gobj);
 /* 2AEED4 */ static void itFoxblaster_UnkMotion8_Phys(HSD_GObj* item_gobj);
 /* 2AEF08 */ static bool itFoxblaster_UnkMotion8_Coll(HSD_GObj* item_gobj);
