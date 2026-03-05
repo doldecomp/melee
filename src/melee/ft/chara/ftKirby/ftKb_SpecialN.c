@@ -1324,7 +1324,7 @@ void ftKb_SpecialN_800F598C(Fighter_GObj* gobj, int arg1)
     ftKb_DatAttrs* da = fp->dat_attrs;
     if (fp->ground_or_air == GA_Ground) {
         new_var = (f32) arg1;
-        mpUpdateFloorSkip(&fp->coll_data);
+        ftKb_SpecialS_800F6BB0(gobj);
         fp->self_vel.y = da->specialn_stop_momentum * new_var;
     }
 }

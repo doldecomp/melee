@@ -400,22 +400,21 @@ void ftKb_SkSpecialAirNStart_Anim(Fighter_GObj* gobj)
 
 void ftKb_SkSpecialAirNLoop_Anim(Fighter_GObj* gobj)
 {
-    volatile unsigned char pad;
     Fighter* fp = GET_FIGHTER(gobj);
-    Fighter* new_var;
+    Fighter* new_var = fp;
+    PAD_STACK(8);
     switch (fp->mv.kb.specialhi.x8.i) {
     case 0:
-        ft_PlaySFX(fp, 270134, 127, 64);
+        ft_PlaySFX(new_var, 270134, 127, 64);
         break;
     }
     ++fp->mv.kb.specialhi.x8.i;
     if (fp->cur_anim_frame == 0) {
-        new_var = fp;
         ++fp->fv.kb.xB4;
         fp->mv.kb.specialhi.x8.i = 0;
         if (fp->fv.kb.xB4 > 6) {
-            new_var->fv.kb.xB4 = 6;
-            new_var->mv.kb.specialhi.x8.i = 100;
+            fp->fv.kb.xB4 = 6;
+            fp->mv.kb.specialhi.x8.i = 100;
             ftCo_800BFFD0(fp, 87, 0);
         }
     }
@@ -524,11 +523,12 @@ void ftKb_SkSpecialNCancel_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftKb_DatAttrs* da = fp->dat_attrs;
+    PAD_STACK(8);
     if (ft_80082708(gobj) == GA_Ground) {
         if (da->specialn_sk_freefall_toggle == 0.0F) {
             ftCo_Fall_Enter(gobj);
         } else {
-            ftCo_80096900(gobj, 1, 0, 1, 0.0F,
+            ftCo_80096900(gobj, 1, 0, 1, 1.0F,
                           da->specialn_sk_freefall_toggle);
         }
     }
@@ -538,13 +538,14 @@ void ftKb_SkSpecialNEnd_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftKb_DatAttrs* da = fp->dat_attrs;
+    PAD_STACK(16);
     if (ft_80082708(gobj) == GA_Ground) {
         fp->fv.kb.xB4 = 0;
         fp->mv.kb.specialhi.x4 = 0;
         if (da->specialn_sk_freefall_toggle == 0.0F) {
             ftCo_Fall_Enter(gobj);
         } else {
-            ftCo_80096900(gobj, 1, 0, 1, 0.0F,
+            ftCo_80096900(gobj, 1, 0, 1, 1.0F,
                           da->specialn_sk_freefall_toggle);
         }
     }
