@@ -540,7 +540,25 @@ void ftKb_YsSpecialAirN2_0_Coll(Fighter_GObj* gobj)
     ft_80082C74(gobj, fn_80109CF0);
 }
 
-/// #ftKb_SpecialNYs_8010A8BC
+void ftKb_SpecialNYs_8010A8BC(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    bool has_destroy_type;
+
+    if (fp->target_item_gobj != NULL) {
+        has_destroy_type = false;
+        if (fp->motion_id == ftKb_MS_YsSpecialNCapture1_1 ||
+            fp->motion_id == ftKb_MS_YsSpecialNCapture2_1 ||
+            fp->motion_id == ftKb_MS_YsSpecialAirNCapture1_1 ||
+            fp->motion_id == ftKb_MS_YsSpecialAirN2_1)
+        {
+            has_destroy_type = true;
+        }
+        it_802F2E7C(fp->target_item_gobj, has_destroy_type);
+        fp->x1A64 = NULL;
+        fp->target_item_gobj = NULL;
+    }
+}
 
 void fn_8010A930(Fighter_GObj* gobj, Fighter_GObj* attacker_gobj)
 {
