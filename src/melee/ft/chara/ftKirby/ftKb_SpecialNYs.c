@@ -294,7 +294,6 @@ static void fn_801097B8(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     int new_var;
-    long long pad;
     int new_var2;
     new_var2 = ftKb_MS_YsSpecialAirNCapture1_0;
     new_var = 0;
@@ -868,7 +867,7 @@ void ftKb_MsSpecialAirNLoop_Anim(Fighter_GObj* gobj)
     }
     fp->mv.kb.specialn_ms.cur_frame++;
     new_var = 1;
-    if (fp->mv.kb.specialn_ms.cur_frame > (*charge * 30)) {
+    if (fp->mv.kb.specialn_ms.cur_frame > (s32)(*charge * 30)) {
         fp->cmd_vars[0] = new_var;
         ftAnim_IsFramesRemaining(gobj);
     }
@@ -920,13 +919,11 @@ void ftKb_SpecialNMs_8010BB50(Fighter_GObj* gobj)
 {
     FtMotionId msid;
     Fighter* fp = GET_FIGHTER(gobj);
-    unsigned long long new_var;
     ftCommon_8007D5D4(fp);
     if ((s32) GET_FIGHTER(gobj)->fv.kb.hat.kind == FTKIND_MARS) {
         msid = ftKb_MS_MsSpecialAirNLoop;
     } else {
-        new_var = 0x217;
-        msid = new_var;
+        msid = ftKb_MS_FeSpecialAirNLoop;
     }
     Fighter_ChangeMotionState(gobj, msid, 0x0C4C7A86, fp->cur_anim_frame, 1.0f,
                               0.0f, NULL);

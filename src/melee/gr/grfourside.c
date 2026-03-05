@@ -181,6 +181,7 @@ void grFourside_801F2F34(Ground_GObj* gobj)
 {
     HSD_GObj* pHVar1;
     Ground* gp = GET_GROUND(gobj);
+    PAD_STACK(8);
     Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
     grAnime_801C8138(gobj, gp->map_id, 0);
     Ground_801C4E70(Ground_801C3FA4(gobj, 7), Ground_801C3FA4(gobj, 4),
@@ -256,6 +257,7 @@ void grFourside_801F3154(Ground_GObj* gobj)
     Ground* gp = GET_GROUND(gobj);
     HSD_JObj* jobj = gobj->hsd_obj;
     HSD_JObj* crane_iron = Ground_801C3FA4(gobj, 4);
+    PAD_STACK(8);
     Ground_801C2ED0(jobj, gp->map_id);
     grAnime_801C7FF8(gobj, 0, 7, 0, 0.0f, 0.0f);
     gp->gv.foursideCrane.x1.b0 = 0;

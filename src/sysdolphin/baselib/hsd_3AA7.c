@@ -143,7 +143,7 @@ int hsd_803AC340(void* header)
         extra_size += 0x200;
     }
 
-    extra_size += base_size;
+    extra_size = base_size + extra_size;
     return extra_size + 0x40;
 }
 

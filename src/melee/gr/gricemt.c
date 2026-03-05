@@ -445,6 +445,7 @@ void grIceMt_801F75FC(Ground_GObj* arg0)
     u32 iVar1;
     s16 val;
     Ground* gp = GET_GROUND(arg0);
+    PAD_STACK(8);
     memzero(&gp->gv.icemt.xDC, 0x18);
     memzero(&gp->gv.icemt.xF4, 0x14);
     do {
@@ -529,7 +530,7 @@ void grIceMt_801F785C(Ground_GObj* gobj)
     gp->gv.icemt.xD0 = -1;
     gp->gv.icemt.xD4 = grIm_804DB574;
 
-    ((UnkFlagStruct*) &gp->gv.icemt.xD8)->b7 = 1;
+    ((UnkFlagStruct*) &gp->gv.icemt.xD8)->b0 = 1;
 
     Ground_801C10B8(gobj, fn_801F77B0);
 }
@@ -811,10 +812,7 @@ void grIceMt_801F87FC(Ground_GObj* gobj)
 {
     u32 unused[2];
     int i;
-    Ground* gp;
-
-    gp = gobj->user_data;
-
+    Ground* gp = gobj->user_data;
     for (i = 0; i < 5; i++) {
         if (gp->gv.icemt.xF8[i] != NULL) {
             grMaterial_801C8CDC(gp->gv.icemt.xF8[i]);

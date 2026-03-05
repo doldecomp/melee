@@ -806,7 +806,7 @@ struct TmData {
     HSD_Text* x4E8[6];
     HSD_Text* x500[6];
     HSD_Text* x518[3];
-    u8 pad_x524[0x534 - 0x524];
+    HSD_Text* x524[4];
     HSD_Text* x534[3];
     u8 pad_x540[0x56B - 0x540];
 };

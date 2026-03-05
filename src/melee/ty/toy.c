@@ -834,7 +834,7 @@ s16 un_803062BC(s32 trophyId)
 
 void un_803062EC(s32 arg0, u32 arg1, f32 farg0)
 {
-    char sp14[80];
+    char sp14[72];
     TrophyData* td;
     s32 id;
 

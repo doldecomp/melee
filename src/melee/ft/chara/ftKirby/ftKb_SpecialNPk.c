@@ -282,6 +282,7 @@ void ftKb_SpecialNKp_800FA8B4(Fighter_GObj* gobj)
 {
     Fighter* fp;
     s32 msid = ftKb_MS_KpSpecialNStart;
+    PAD_STACK(8);
     switch ((s32) GET_FIGHTER(gobj)->fv.kb.hat.kind) {
     case FTKIND_KOOPA:
         break;
@@ -432,6 +433,7 @@ void ftKb_KpSpecialN_IASA(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftKb_DatAttrs* da = fp->dat_attrs;
+    PAD_STACK(24);
     if ((s32) fp->mv.kb.specialn_kp.x0[3] >=
         (s32) da->specialn_kp_b_button_check_frequency)
     {
@@ -485,6 +487,7 @@ void ftKb_KpSpecialAirN_IASA(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftKb_DatAttrs* da = fp->dat_attrs;
+    PAD_STACK(24);
     if ((s32) fp->mv.kb.specialn_kp.x0[3] >=
         (s32) da->specialn_kp_b_button_check_frequency)
     {
@@ -986,6 +989,7 @@ void ftKb_SpecialNSs_800FD020(Fighter_GObj* gobj)
 
 void ftKb_SsSpecialNCancel_Anim(Fighter_GObj* gobj)
 {
+    PAD_STACK(16);
     if (gobj != NULL) {
         Fighter* fp = GET_FIGHTER(gobj);
         if (fp->fv.kb.xA4 != 0) {

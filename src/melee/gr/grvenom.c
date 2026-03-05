@@ -280,6 +280,7 @@ void grVenom_80203FD4(Ground_GObj* gobj)
     HSD_JObj* jobj5;
     HSD_JObj* jobj6;
     Ground* gp = gobj->user_data;
+    PAD_STACK(8);
 
     grAnime_801C8138(gobj, gp->map_id, 0);
     gp->x11_flags.b012 = 2;

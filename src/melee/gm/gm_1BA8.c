@@ -1472,7 +1472,7 @@ void gm_801BEF84(MinorScene* arg)
 
 #pragma push
 #pragma dont_inline on
-void gm_801BEFA4(s8 ckind)
+void gm_801BEFA4(int ckind)
 {
     gm_8049C178[0] = ckind;
 }

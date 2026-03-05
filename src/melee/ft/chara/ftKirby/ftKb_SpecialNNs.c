@@ -353,7 +353,6 @@ void ftKb_NsSpecialAirNEnd_Coll(Fighter_GObj* gobj)
 static inline void ftKb_DkSpecialNStart_Coll_inline(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp = GET_FIGHTER(gobj);
     fp->death2_cb = (void (*)(HSD_GObj*)) ftKb_Init_800EE74C;
     fp->take_dmg_cb = (void (*)(HSD_GObj*)) ftKb_Init_800EE7B8;
     fp->pre_hitlag_cb = efLib_PauseAll;
@@ -380,8 +379,11 @@ void ftKb_DkSpecialNLoop_Anim(Fighter_GObj* gobj)
             Fighter* fighter2 = fp;
             ftCo_800BFFD0(fighter2, 58, 0);
             fp->fv.kb.xBC = da->specialn_dk_swings_to_full_charge;
-            fp->pre_hitlag_cb = NULL;
-            fp->post_hitlag_cb = NULL;
+            {
+                Fighter* fp2 = gobj->user_data;
+                fp2->pre_hitlag_cb = NULL;
+                fp2->post_hitlag_cb = NULL;
+            }
             ft_8008A2BC(gobj);
         }
     }
@@ -401,6 +403,7 @@ void ftKb_DkSpecialN_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftKb_DatAttrs* da = fp->dat_attrs;
+    PAD_STACK(24);
     if (fp->cmd_vars[0]) {
         if (fp->mv.dk.specialn.x8 == 0) {
             fp->mv.dk.specialn.x8++;
@@ -450,8 +453,11 @@ void ftKb_DkSpecialN_Anim(Fighter_GObj* gobj)
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
         fp->fv.kb.xBC = 0;
-        fp->pre_hitlag_cb = NULL;
-        fp->post_hitlag_cb = NULL;
+        {
+            Fighter* fp2 = gobj->user_data;
+            fp2->pre_hitlag_cb = NULL;
+            fp2->post_hitlag_cb = NULL;
+        }
         ft_8008A2BC(gobj);
     }
 }
@@ -459,7 +465,7 @@ void ftKb_DkSpecialN_Anim(Fighter_GObj* gobj)
 void ftKb_DkSpecialNFull_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    u8 _[8];
+    u8 _[32];
     if (fp->cmd_vars[0]) {
         if (fp->mv.dk.specialn.x8 == 0) {
             fp->mv.dk.specialn.x8++;
@@ -493,8 +499,11 @@ void ftKb_DkSpecialNFull_Anim(Fighter_GObj* gobj)
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
         fp->fv.kb.xBC = 0;
-        fp->pre_hitlag_cb = NULL;
-        fp->post_hitlag_cb = NULL;
+        {
+            Fighter* fp2 = gobj->user_data;
+            fp2->pre_hitlag_cb = NULL;
+            fp2->post_hitlag_cb = NULL;
+        }
         ft_8008A2BC(gobj);
     }
 }
@@ -520,8 +529,11 @@ void ftKb_DkSpecialAirNLoop_Anim(Fighter_GObj* gobj)
             Fighter* fighter2 = fp;
             ftCo_800BFFD0(fighter2, 58, 0);
             fp->fv.kb.xBC = new_var->specialn_dk_swings_to_full_charge;
-            fp->pre_hitlag_cb = NULL;
-            fp->post_hitlag_cb = NULL;
+            {
+                Fighter* fp2 = gobj->user_data;
+                fp2->pre_hitlag_cb = NULL;
+                fp2->post_hitlag_cb = NULL;
+            }
             ftCo_Fall_Enter(gobj);
         }
     }
@@ -542,6 +554,7 @@ void ftKb_DkSpecialAirN_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftKb_DatAttrs* da = fp->dat_attrs;
+    PAD_STACK(16);
     if (fp->cmd_vars[0]) {
         if (fp->mv.dk.specialn.x8 == 0) {
             fp->mv.dk.specialn.x8++;
@@ -577,8 +590,11 @@ void ftKb_DkSpecialAirN_Anim(Fighter_GObj* gobj)
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
         fp->fv.kb.xBC = 0;
-        fp->pre_hitlag_cb = NULL;
-        fp->post_hitlag_cb = NULL;
+        {
+            Fighter* fp2 = gobj->user_data;
+            fp2->pre_hitlag_cb = NULL;
+            fp2->post_hitlag_cb = NULL;
+        }
         if (da->specialn_dk_freefall_toggle == 0.0F) {
             ftCo_Fall_Enter(gobj);
         } else {
@@ -592,6 +608,7 @@ void ftKb_DkSpecialAirNFull_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftKb_DatAttrs* da = fp->dat_attrs;
+    PAD_STACK(16);
     if (fp->cmd_vars[0]) {
         if (fp->mv.dk.specialn.x8 == 0) {
             fp->mv.dk.specialn.x8++;
@@ -609,8 +626,11 @@ void ftKb_DkSpecialAirNFull_Anim(Fighter_GObj* gobj)
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
         fp->fv.kb.xBC = 0;
-        fp->pre_hitlag_cb = NULL;
-        fp->post_hitlag_cb = NULL;
+        {
+            Fighter* fp2 = gobj->user_data;
+            fp2->pre_hitlag_cb = NULL;
+            fp2->post_hitlag_cb = NULL;
+        }
         if (da->specialn_dk_freefall_toggle == 0.0F) {
             ftCo_Fall_Enter(gobj);
         } else {
