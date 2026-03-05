@@ -5,7 +5,6 @@
 #include <placeholder.h>
 #include <platform.h>
 
-#include "baselib/gobj.h"
 #include "cm/camera.h"
 #include "ft/ft_0C31.h"
 #include "ft/ftlib.h"
@@ -23,6 +22,7 @@
 #include "lb/types.h"
 #include "mp/mpcoll.h"
 
+#include <baselib/gobj.h>
 #include <baselib/random.h>
 
 #define GET_ATTRS(ip)                                                         \

@@ -6,7 +6,6 @@
 #include <placeholder.h>
 #include <platform.h>
 
-#include "baselib/mtx.h"
 #include "db/db.h"
 #include "ftSamus/ftSs_Init.h"
 
@@ -19,6 +18,8 @@
 #include "it/item.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbvector.h"
+
+#include <baselib/mtx.h>
 
 ItemStateTable it_803F7220[] = {
     { 0, itSamusbomb_UnkMotion0_Anim, itSamusbomb_UnkMotion0_Phys,
