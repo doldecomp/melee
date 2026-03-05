@@ -95,14 +95,14 @@ const f32 grPu_804DBA74 = 2.0;
 const f32 grPu_804DBA78 = 30.0;
 const f32 grPu_804DBA7C = -30.0;
 
+/* 4D6AA0 */ static HSD_GObj* grPu_804D6AA0;
+
 void grPura_80211D00(void)
 {
-    HSD_GObj* r3;
-
     Vec3 cam_offset;
     f32 fVar1;
 
-    Ground_801C49F8();
+    grPu_804D6AA0 = Ground_801C49F8();
     stage_info.unk8C.b4 = 0;
     stage_info.unk8C.b5 = 1;
     grPura_80211E08(0);
@@ -120,7 +120,7 @@ void grPura_80211D00(void)
     fVar1 = Stage_GetCamBoundsLeftOffset();
     Ground_801C38A0(grPu_804DBA58 * (fVar1 - cam_offset.x));
     fVar1 = Stage_GetCamBoundsRightOffset();
-    Ground_801C38AC(grPu_804DBA58 * ((fVar1 - cam_offset.x)));
+    Ground_801C38AC(grPu_804DBA58 * (fVar1 - cam_offset.x));
 }
 
 void grPura_80211DD8(void) {}

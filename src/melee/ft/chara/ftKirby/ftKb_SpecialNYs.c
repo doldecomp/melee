@@ -796,9 +796,9 @@ void ftKb_MsSpecialAirNStart_Coll(Fighter_GObj* gobj)
 
 void ftKb_MsSpecialNLoop_Anim(Fighter_GObj* gobj)
 {
+    u32* charge;
     Fighter* fp = GET_FIGHTER(gobj);
     ftKb_DatAttrs* da = fp->dat_attrs;
-    u32* charge;
     if (fp->fv.kb.hat.kind == FTKIND_MARS) {
         charge = &da->ms.charge_iterations;
     } else {
@@ -937,6 +937,7 @@ void ftKb_MsSpecialNEnd_Anim(Fighter_GObj* gobj)
     struct ftKb_SpecialNMs_DatAttrs* ms_da;
     s32 i;
     HitCapsule* hit;
+    PAD_STACK(24);
     if ((s32) fp->fv.kb.hat.kind == FTKIND_MARS) {
         ms_da = &da->ms;
     } else {
@@ -968,6 +969,7 @@ void ftKb_MsSpecialAirNEnd_Anim(Fighter_GObj* gobj)
     ftKb_DatAttrs* da = fp->dat_attrs;
     struct ftKb_SpecialNMs_DatAttrs* ms_da;
     HitCapsule* hit;
+    PAD_STACK(24);
     if ((s32) fp->fv.kb.hat.kind == FTKIND_MARS) {
         ms_da = &da->ms;
     } else {

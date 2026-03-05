@@ -1668,14 +1668,14 @@ bool fn_801642A0(void)
 }
 
 // RandomStageSwitch
-bool gm_80164330(u8 arg0)
+bool gm_80164330(s32 arg0)
 {
     s32 total_stages_on;
     struct gmm_x1CB0* temp_ret;
     s32 i;
     u8 var_r0;
 
-    if (gm_80164430(lbl_803B7808[arg0]) == 0) {
+    if (gm_80164430(lbl_803B7808[(u8) arg0]) == 0) {
         return false;
     }
     if (gmMainLib_8015EE44() == 0) {
@@ -1686,7 +1686,7 @@ bool gm_80164330(u8 arg0)
     i = 0;
     for (i = 0; i < 0x1D; i++) {
         temp_ret = gmMainLib_8015CC58();
-        if ((1 << i) & temp_ret->stage_mask) {
+        if (temp_ret->stage_mask & (1 << (u16) i)) {
             var_r0 = 1;
         } else {
             var_r0 = 0;
@@ -1698,7 +1698,7 @@ bool gm_80164330(u8 arg0)
     if (total_stages_on == 0) {
         OSReport("RandomStageSwitch All-Off!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
     }
-    if ((1 << arg0) & gmMainLib_8015CC58()->stage_mask) {
+    if ((1 << (u16) arg0) & gmMainLib_8015CC58()->stage_mask) {
         return true;
     }
     return false;

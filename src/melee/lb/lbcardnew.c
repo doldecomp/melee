@@ -670,13 +670,13 @@ int lb_8001B6F8(void)
     return result;
 }
 
-void lb_8001B760(int result)
+int lb_8001B760(int result)
 {
     if (result == 0xB) {
         do {
-            result = lb_8001B6F8();
-        } while (result == 0xB);
+        } while ((result = lb_8001B6F8()) == 0xB);
     }
+    return result;
 }
 
 inline struct CardTask* setup_task(int a, int b)
@@ -709,8 +709,7 @@ u32 lb_8001B7E0(int chan, char* filename, void* file_entries, void* save_data,
     result = lb_80019CB0(0x10);
     if (result == 0xB) {
         do {
-            result = lb_8001B6F8();
-        } while (result == 0xB);
+        } while ((result = lb_8001B6F8()) == 0xB);
     }
     return result;
 }
@@ -719,7 +718,7 @@ int lb_8001B8C8(int chan)
 {
     int unused_1;
     int unused_2;
-    int result;
+    s32 result;
     u8 _[0x18];
 
     lb_80019EF0(chan, 0, 0, 0);
@@ -730,8 +729,7 @@ int lb_8001B8C8(int chan)
     result = lb_80019CB0(0x10);
     if (result == 0xB) {
         do {
-            result = lb_8001B6F8();
-        } while (result == 0xB);
+        } while ((result = lb_8001B6F8()) == 0xB);
     }
     return result;
 }
@@ -754,8 +752,7 @@ int lb_8001BA44(int chan, const char* filename, UNK_T status_out)
     s32 result = lb_8001B99C(chan, filename, status_out);
     if (result == 0xB) {
         do {
-            result = lb_8001B6F8();
-        } while (result == 0xB);
+        } while ((result = lb_8001B6F8()) == 0xB);
     }
     return result;
 }
@@ -784,8 +781,7 @@ int lb_8001BC18(int chan, char* filename, void** file_entries, void* save_data,
                              write_buf, write_offset, write_len, status_out);
     if (result == 0xB) {
         do {
-            result = lb_8001B6F8();
-        } while (result == 0xB);
+        } while ((result = lb_8001B6F8()) == 0xB);
     }
     return result;
 }
@@ -810,8 +806,7 @@ int lb_8001BD34(int chan, const char* filename, UNK_T file_entries,
     result = lb_80019CB0(0x10);
     if (result == 0xB) {
         do {
-            result = lb_8001B6F8();
-        } while (result == 0xB);
+        } while ((result = lb_8001B6F8()) == 0xB);
     }
     return result;
 }
@@ -867,8 +862,7 @@ int lb_8001BFD8(int chan, UNK_T snap_buf, UNK_T snap_count, UNK_T snap_max)
     result = lb_80019CB0(0x10);
     if (result == 0xB) {
         do {
-            result = lb_8001B6F8();
-        } while (result == 0xB);
+        } while ((result = lb_8001B6F8()) == 0xB);
     }
     return result;
 }
@@ -936,8 +930,7 @@ int lb_8001C2D8(int chan, const char* company, const char* game_name,
     result = lb_80019CB0(0x10);
     if (result == 0xB) {
         do {
-            result = lb_8001B6F8();
-        } while (result == 0xB);
+        } while ((result = lb_8001B6F8()) == 0xB);
     }
     return result;
 }

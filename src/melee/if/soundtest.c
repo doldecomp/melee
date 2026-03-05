@@ -12,6 +12,7 @@
 #include "lb/lbcardnew.h"
 #include "lb/lblanguage.h"
 #include "lb/lbsnap.h"
+#include "placeholder.h"
 #include "ty/toy.h"
 #include "ty/tylist.h"
 
@@ -1166,6 +1167,7 @@ int un_80301634(void)
     HSD_GObj* gobj;
     void* r31;
     void* r3;
+    PAD_STACK(8);
 
     OSReport("<Init>\n");
     lb_8001C550();
@@ -1177,7 +1179,6 @@ int un_80301634(void)
     gobj = GObj_Create(0x13, 0x14, 0);
     HSD_SObjLib_803A55DC(gobj, 0x280, 0x1E0, 0xC);
     gobj->gxlink_prios = 0x40000;
-    gobj->user_data = NULL;
     un_804D6E08 = 0;
     return 0;
 }

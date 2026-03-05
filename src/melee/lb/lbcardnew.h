@@ -30,7 +30,7 @@
 /* 01B614 */ int lb_8001B614(const char* filename);
 /* 01B6E0 */ s32 lb_8001B6E0(s32 file_idx);
 /* 01B6F8 */ enum_t lb_8001B6F8(void);
-/* 01B760 */ void lb_8001B760(int result);
+/* 01B760 */ int lb_8001B760(int result);
 /* 01B7E0 */ u32 lb_8001B7E0(int chan, char* filename, void* file_entries,
                              void* save_data, int* status_out);
 /* 01B8C8 */ bool lb_8001B8C8(int chan);
