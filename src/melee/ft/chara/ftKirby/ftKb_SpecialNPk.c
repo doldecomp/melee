@@ -47,7 +47,6 @@
 #include "ftLink/types.h"
 #include "it/it_26B1.h"
 #include "it/item.h"
-#include "it/items/it_27CF.h"
 #include "it/items/it_2ADA.h"
 #include "it/items/it_2F28.h"
 #include "it/items/itclimbersice.h"
@@ -854,7 +853,7 @@ long ftKb_SpecialNSs_800FCC14(Fighter_GObj* gobj, long* out1, long* out2)
     }
 
     *out1 = fp->fv.kb.xA8;
-    *out2 = (long)da->specialn_ss_charge_time;
+    *out2 = (long) da->specialn_ss_charge_time;
 
     return 0;
 

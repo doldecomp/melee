@@ -3,76 +3,45 @@
 
 #include <placeholder.h>
 
-#include "cm/camera.h"
-#include "ef/efasync.h"
 #include "ef/eflib.h"
 #include "ef/efsync.h"
-#include "ft/chara/ftCommon/ftCo_CaptureWaitKirby.h"
 #include "ft/chara/ftCommon/ftCo_Damage.h"
-#include "ft/chara/ftCommon/ftCo_Escape.h"
 #include "ft/chara/ftCommon/ftCo_FallSpecial.h"
 #include "ft/chara/ftCommon/ftCo_Jump.h"
 #include "ft/chara/ftCommon/ftCo_KneeBend.h"
-#include "ft/chara/ftCommon/ftCo_Lift.h"
-#include "ft/chara/ftCommon/ftCo_Throw.h"
 #include "ft/chara/ftCommon/ftCo_Wait.h"
-#include "ft/chara/ftCommon/ftpickupitem.h"
 #include "ft/fighter.h"
 
 #include "ft/forward.h"
 
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
-#include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
-#include "ft/ft_0C31.h"
-#include "ft/ftcamera.h"
 #include "ft/ftcliffcommon.h"
-#include "ft/ftcolanim.h"
-#include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/ftdata.h"
-#include "ft/ftdynamics.h"
 #include "ft/ftparts.h"
 #include "ft/ftwalkcommon.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
-#include "ftCommon/ftCo_Attack100.h"
 #include "ftCommon/ftCo_CaptureKirby.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_Landing.h"
 
 #include "ftKirby/forward.h"
 
-#include "ftLink/types.h"
-#include "it/it_26B1.h"
-#include "it/item.h"
-#include "it/items/it_27CF.h"
 #include "it/items/it_2ADA.h"
 #include "it/items/it_2F28.h"
-#include "it/items/itclimbersice.h"
-#include "it/items/itgamewatchchef.h"
+#include "it/items/itfoxblaster.h"
 #include "it/items/itkirby_2F23.h"
 #include "it/items/itkirbycutterbeam.h"
-#include "it/items/itkirbygamewatchchefpan.h"
 #include "it/items/itkirbyhammer.h"
-#include "it/items/itkirbyyoshispecialn.h"
-#include "it/items/itlinkarrow.h"
-#include "it/items/itlinkbow.h"
-#include "it/items/itmewtwoshadowball.h"
-#include "it/items/itnesspkflush.h"
-#include "it/items/itpeachtoad.h"
-#include "it/items/itpeachtoadspore.h"
-#include "it/items/itpikachutjoltground.h"
-#include "it/items/itsamuschargeshot.h"
-#include "it/items/itseakneedleheld.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbanim.h"
 #include "lb/lbvector.h"
 #include "melee/lb/lbrefract.h"
 #include "mp/mpcoll.h"
 #include "mp/mplib.h"
-#include "pl/player.h"
 
 #include <common_structs.h>
 #include <stddef.h>
@@ -257,8 +226,8 @@ void ftKb_SpecialAirHi1_Anim(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        Fighter_ChangeMotionState(gobj, ftKb_MS_SpecialAirHi2, 0xA,
-                                  0.0f, 1.0f, 0.0f, NULL);
+        Fighter_ChangeMotionState(gobj, ftKb_MS_SpecialAirHi2, 0xA, 0.0f, 1.0f,
+                                  0.0f, NULL);
         fp->pre_hitlag_cb = efLib_PauseAll;
         fp->post_hitlag_cb = efLib_ResumeAll;
         fp->mv.kb.specialn_pe.facing_dir = 0;
@@ -436,8 +405,8 @@ void ftKb_SpecialAirHi3_Phys(Fighter_GObj* gobj)
 
     /// FAKE MATCH: comma operator required for regalloc
     ftCommon_8007D3A8(fp, 0.0f,
-                      ((0, fp->co_attrs.air_drift_stick_mul)) *
-                          dat_attr->specialhi_horizontal_momentum,
+                      ((0, fp->co_attrs.air_drift_stick_mul)) *dat_attr
+                          ->specialhi_horizontal_momentum,
                       fp->co_attrs.air_drift_max);
 }
 
@@ -2086,7 +2055,8 @@ void ftKb_SpecialNLoop_IASA(Fighter_GObj* gobj)
     }
 
     if ((fp->input.held_inputs & 0x200) == 0) {
-        Fighter_ChangeMotionState(gobj, ftKb_MS_SpecialNEnd, 0, 0.0f, 1.0f, 0.0f, NULL);
+        Fighter_ChangeMotionState(gobj, ftKb_MS_SpecialNEnd, 0, 0.0f, 1.0f,
+                                  0.0f, NULL);
     }
 }
 
@@ -2102,7 +2072,8 @@ void ftKb_SpecialAirNLoop_IASA(Fighter_GObj* gobj)
     }
 
     if ((fp->input.held_inputs & 0x200) == 0) {
-        Fighter_ChangeMotionState(gobj, ftKb_MS_SpecialAirNEnd, 0, 0.0f, 1.0f, 0.0f, NULL);
+        Fighter_ChangeMotionState(gobj, ftKb_MS_SpecialAirNEnd, 0, 0.0f, 1.0f,
+                                  0.0f, NULL);
     }
 }
 
@@ -2531,8 +2502,8 @@ void ftKb_SpecialNLg_800F9598(Fighter_GObj* gobj)
         motion_id = 0x200;
     }
 
-    Fighter_ChangeMotionState(gobj, motion_id, 0x5000,
-                              anim_frame, 1.0f, 0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, motion_id, 0x5000, anim_frame, 1.0f, 0.0f,
+                              NULL);
     fp->accessory4_cb = fn_800F9260;
 }
 

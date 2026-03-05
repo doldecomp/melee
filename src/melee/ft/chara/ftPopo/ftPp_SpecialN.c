@@ -12,14 +12,12 @@
 #include "ft/ft_0892.h"
 #include "ft/ftanim.h"
 #include "ft/types.h"
-#include "ftCommon/ftCo_Attack100.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_Landing.h"
 #include "ftPopo/types.h"
 
 #include "it/forward.h"
 
-#include "it/items/it_27CF.h"
 #include "it/items/itclimbersice.h"
 #include "lb/lb_00B0.h"
 

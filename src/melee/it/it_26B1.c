@@ -10,18 +10,20 @@
 #include "it/it_2725.h"
 #include "it/itCommonItems.h"
 #include "it/item.h"
-#include "it/items/it_27CF.h"
 #include "it/items/itbat.h"
 #include "it/items/itbombhei.h"
 #include "it/items/itbox.h"
 #include "it/items/itfflower.h"
 #include "it/items/itflipper.h"
+#include "it/items/itheart.h"
 #include "it/items/itkusudama.h"
+#include "it/items/itlinkbomb.h"
 #include "it/items/itmarumine.h"
 #include "it/items/itmsbomb.h"
 #include "it/items/itrabbitc.h"
 #include "it/items/itsscope.h"
 #include "it/items/itsword.h"
+#include "it/items/ittomato.h"
 #include "it/types.h"
 
 #include <baselib/forward.h>
@@ -902,7 +904,7 @@ HSD_GObj* it_8026BE84(BobOmbRain* bobOmbRain)
     Item* item_data_4;
     Item* item_data_5;
 
-    HSD_GObj* bobOmbGObj = NULL;
+    HSD_GObj* gobj = NULL;
 
     if (gm_8016B238() && bobOmbRain->x14 != 6) {
         return NULL;
@@ -913,48 +915,48 @@ HSD_GObj* it_8026BE84(BobOmbRain* bobOmbRain)
     switch (bobomb_id) {
     case 1:
         if (it_8026D324(true)) {
-            bobOmbGObj = it_80286088(bobOmbRain->x0);
+            gobj = it_80286088(bobOmbRain->x0);
         }
 
         break;
 
     case 20:
-        bobOmbGObj = it_80290938(bobOmbRain->x4);
+        gobj = it_80290938(bobOmbRain->x4);
         break;
 
     case 8:
-        bobOmbGObj =
+        gobj =
             it_80283AE4(bobOmbRain->x0, &bobOmbRain->x8_vec, bobOmbRain->x18);
-        if (bobOmbGObj != NULL) {
+        if (gobj != NULL) {
             u8 _[8];
 
-            ip = GET_ITEM(bobOmbGObj);
+            ip = GET_ITEM(gobj);
             kind0 = ip->kind;
             switch (kind0) {
             case It_Kind_Heart:
-                it_80283BD4(bobOmbGObj);
+                it_80283BD4(gobj);
                 break;
             case It_Kind_Tomato:
-                it_8028428C(bobOmbGObj);
+                it_8028428C(gobj);
                 break;
             }
         }
         break;
 
     case 9:
-        bobOmbGObj =
+        gobj =
             it_802841B4(bobOmbRain->x0, &bobOmbRain->x8_vec, bobOmbRain->x18);
-        if (bobOmbGObj != NULL) {
-            ip = GetItemData(bobOmbGObj);
+        if (gobj != NULL) {
+            ip = GetItemData(gobj);
             kind1 = ip->kind;
 
             switch (kind1) {
             case It_Kind_Heart:
-                it_80283BD4(bobOmbGObj);
+                it_80283BD4(gobj);
                 break;
 
             case It_Kind_Tomato:
-                it_8028428C(bobOmbGObj);
+                it_8028428C(gobj);
                 break;
             }
         }
@@ -962,46 +964,46 @@ HSD_GObj* it_8026BE84(BobOmbRain* bobOmbRain)
 
     case 4:
         if (it_8026D324(4)) {
-            bobOmbGObj = it_802896CC(&bobOmbRain->x8_vec);
-            if (bobOmbGObj != NULL) {
-                it_80274F10(bobOmbGObj);
+            gobj = it_802896CC(&bobOmbRain->x8_vec);
+            if (gobj != NULL) {
+                it_80274F10(gobj);
             }
         }
         break;
 
     case 12:
-        bobOmbGObj = itSword_Spawn(&bobOmbRain->x8_vec);
-        if (bobOmbGObj != NULL) {
-            it_80274F10(bobOmbGObj);
+        gobj = itSword_Spawn(&bobOmbRain->x8_vec);
+        if (gobj != NULL) {
+            it_80274F10(gobj);
         }
         break;
 
     case 21:
-        bobOmbGObj = it_80291BE0(&bobOmbRain->x8_vec);
-        if (bobOmbGObj != NULL) {
-            it_80274F10(bobOmbGObj);
+        gobj = it_80291BE0(&bobOmbRain->x8_vec);
+        if (gobj != NULL) {
+            it_80274F10(gobj);
         }
 
         break;
 
     case 25:
-        bobOmbGObj = it_80292D48(&bobOmbRain->x8_vec);
-        if (bobOmbGObj != NULL) {
-            it_80274F10(bobOmbGObj);
+        gobj = it_80292D48(&bobOmbRain->x8_vec);
+        if (gobj != NULL) {
+            it_80274F10(gobj);
         }
         break;
 
     case 31:
-        bobOmbGObj = it_80294DC0(&bobOmbRain->x8_vec);
-        if (bobOmbGObj != NULL) {
-            it_80274F10(bobOmbGObj);
+        gobj = it_80294DC0(&bobOmbRain->x8_vec);
+        if (gobj != NULL) {
+            it_80274F10(gobj);
         }
         break;
 
     case 11:
-        bobOmbGObj = it_80284854(&bobOmbRain->x8_vec);
-        if (bobOmbGObj != NULL) {
-            it_80274F10(bobOmbGObj);
+        gobj = it_80284854(&bobOmbRain->x8_vec);
+        if (gobj != NULL) {
+            it_80274F10(gobj);
         }
         break;
 
@@ -1009,28 +1011,28 @@ HSD_GObj* it_8026BE84(BobOmbRain* bobOmbRain)
         it_8027D670(&bobOmbRain->x8_vec);
 
     default:
-        bobOmbGObj = NULL;
+        gobj = NULL;
         break;
     }
 
-    if (bobOmbGObj != NULL && bobOmbRain->x1C.b0) {
-        ip = bobOmbGObj->user_data;
+    if (gobj != NULL && bobOmbRain->x1C.b0) {
+        ip = gobj->user_data;
         ip->xDD0_flag.b3 = true;
 
-        item_data_2 = bobOmbGObj->user_data;
+        item_data_2 = gobj->user_data;
         item_data_2->xDCC_flag.b3 = false;
 
-        item_data_3 = bobOmbGObj->user_data;
+        item_data_3 = gobj->user_data;
         item_data_3->xDCD_flag.b3 = true;
 
-        item_data_4 = bobOmbGObj->user_data;
+        item_data_4 = gobj->user_data;
         item_data_4->xDCD_flag.b4 = true;
 
-        item_data_5 = bobOmbGObj->user_data;
+        item_data_5 = gobj->user_data;
         item_data_5->xDC8_word.flags.x1A = false;
     }
 
-    return bobOmbGObj;
+    return gobj;
 }
 
 extern CollData* ftLib_80086984(HSD_GObj*);
