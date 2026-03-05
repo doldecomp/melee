@@ -617,6 +617,7 @@ struct Item {
         itSamusGrapple_ItemVars samusgrapple;
         itSamusMissile_ItemVars samusmissile;
         itSeakChain_ItemVars seakchain;
+        itSeakNeedleHeld_ItemVars seakneedleheld;
         itSeakNeedleThrown_ItemVars seakneedlethrown;
         itSonans_ItemVars sonans;
         itStar_ItemVars star;
