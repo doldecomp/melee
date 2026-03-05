@@ -1988,9 +1988,25 @@ void gm_801964A4_OnLeave(UNK_T arg)
     gm_8018F634()->x31 = lbl_804799B8.pad[0];
 }
 
-static s32 lbl_804D4194 = -1;
+void fn_80196510(void)
+{
+    int stage;
+    
+    gm_8018F634();
 
-/// #fn_80196510
+    while (1) {
+        stage = mnStageSel_8025BBD4();
+        lbl_804D4190 = stage;
+        if (lbl_804D4194 != lbl_804D4190) {
+            break;
+        }
+        if (fn_801642A0() != 0) {
+            break;
+        }
+    }
+
+    lbl_804D4194 = lbl_804D4190;
+}
 
 s32 fn_8019655C(void)
 {

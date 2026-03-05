@@ -2,6 +2,7 @@
 #include <melee/sc/types.h>
 
 static s32 lbl_804D4190 = 0xFFFFFFFF;
+static s32 lbl_804D4194 = -1;
 
 static HSD_Archive* lbl_804D6638;
 static HSD_Archive* lbl_804D6640;
