@@ -540,7 +540,25 @@ void ftKb_YsSpecialAirN2_0_Coll(Fighter_GObj* gobj)
     ft_80082C74(gobj, fn_80109CF0);
 }
 
-/// #ftKb_SpecialNYs_8010A8BC
+void ftKb_SpecialNYs_8010A8BC(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    bool has_destroy_type;
+
+    if (fp->target_item_gobj != NULL) {
+        has_destroy_type = false;
+        if (fp->motion_id == ftKb_MS_YsSpecialNCapture1_1 ||
+            fp->motion_id == ftKb_MS_YsSpecialNCapture2_1 ||
+            fp->motion_id == ftKb_MS_YsSpecialAirNCapture1_1 ||
+            fp->motion_id == ftKb_MS_YsSpecialAirN2_1)
+        {
+            has_destroy_type = true;
+        }
+        it_802F2E7C(fp->target_item_gobj, has_destroy_type);
+        fp->x1A64 = NULL;
+        fp->target_item_gobj = NULL;
+    }
+}
 
 void fn_8010A930(Fighter_GObj* gobj, Fighter_GObj* attacker_gobj)
 {
@@ -790,24 +808,58 @@ void ftKb_MsSpecialAirNStart_Coll(Fighter_GObj* gobj)
     }
 }
 
-/// #ftKb_SpecialNMs_8010B868
+inline FtMotionId getAirSpecialMotionId(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (fp->fv.kb.hat.kind == FTKIND_MARS) {
+        return ftKb_MS_MsSpecialAirNStart;
+    } else {
+        return ftKb_MS_FeSpecialAirNStart;
+    }
+}
 
-/// #ftKb_SpecialNMs_8010B8E0
+void ftKb_SpecialNMs_8010B868(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    ftCommon_8007D5D4(fp);
+    Fighter_ChangeMotionState(gobj, getAirSpecialMotionId(gobj), 0x0C4C7084,
+                              fp->cur_anim_frame, 1.0f, 0.0f, NULL);
+}
+
+inline FtMotionId getGroundSpecialMotionId(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (fp->fv.kb.hat.kind == FTKIND_MARS) {
+        return ftKb_MS_MsSpecialNStart;
+    } else {
+        return ftKb_MS_FeSpecialNStart;
+    }
+}
+
+void ftKb_SpecialNMs_8010B8E0(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    ftCommon_8007D7FC(fp);
+    Fighter_ChangeMotionState(gobj, getGroundSpecialMotionId(gobj), 0x0C4C7084,
+                              fp->cur_anim_frame, 1.0f, 0.0f, NULL);
+}
 
 void ftKb_MsSpecialNLoop_Anim(Fighter_GObj* gobj)
 {
-    u32* charge;
+    s32* charge;
     Fighter* fp = GET_FIGHTER(gobj);
     ftKb_DatAttrs* da = fp->dat_attrs;
     if (fp->fv.kb.hat.kind == FTKIND_MARS) {
-        charge = &da->ms.charge_iterations;
+        charge = (s32*) &da->ms.charge_iterations;
     } else {
-        charge = &da->fe.charge_iterations;
+        charge = (s32*) &da->fe.charge_iterations;
     }
     fp->mv.kb.specialn_ms.cur_frame++;
     if (fp->mv.kb.specialn_ms.cur_frame > (*charge * 30)) {
         fp->cmd_vars[0] = 1;
-        ftAnim_IsFramesRemaining(gobj);
+        ftKb_SpecialNPe_8010C148(gobj);
     }
 }
 
