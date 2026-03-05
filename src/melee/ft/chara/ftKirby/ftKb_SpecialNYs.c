@@ -814,18 +814,18 @@ void ftKb_MsSpecialAirNStart_Coll(Fighter_GObj* gobj)
 
 void ftKb_MsSpecialNLoop_Anim(Fighter_GObj* gobj)
 {
-    u32* charge;
+    s32* charge;
     Fighter* fp = GET_FIGHTER(gobj);
     ftKb_DatAttrs* da = fp->dat_attrs;
     if (fp->fv.kb.hat.kind == FTKIND_MARS) {
-        charge = &da->ms.charge_iterations;
+        charge = (s32*) &da->ms.charge_iterations;
     } else {
-        charge = &da->fe.charge_iterations;
+        charge = (s32*) &da->fe.charge_iterations;
     }
     fp->mv.kb.specialn_ms.cur_frame++;
     if (fp->mv.kb.specialn_ms.cur_frame > (*charge * 30)) {
         fp->cmd_vars[0] = 1;
-        ftAnim_IsFramesRemaining(gobj);
+        ftKb_SpecialNPe_8010C148(gobj);
     }
 }
 
