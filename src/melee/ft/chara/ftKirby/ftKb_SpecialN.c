@@ -47,7 +47,6 @@
 #include "ftLink/types.h"
 #include "it/it_26B1.h"
 #include "it/item.h"
-#include "it/items/it_27CF.h"
 #include "it/items/it_2ADA.h"
 #include "it/items/it_2F28.h"
 #include "it/items/itclimbersice.h"
@@ -257,8 +256,8 @@ void ftKb_SpecialAirHi1_Anim(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        Fighter_ChangeMotionState(gobj, ftKb_MS_SpecialAirHi2, 0xA,
-                                  0.0f, 1.0f, 0.0f, NULL);
+        Fighter_ChangeMotionState(gobj, ftKb_MS_SpecialAirHi2, 0xA, 0.0f, 1.0f,
+                                  0.0f, NULL);
         fp->pre_hitlag_cb = efLib_PauseAll;
         fp->post_hitlag_cb = efLib_ResumeAll;
         fp->mv.kb.specialn_pe.facing_dir = 0;
@@ -436,8 +435,8 @@ void ftKb_SpecialAirHi3_Phys(Fighter_GObj* gobj)
 
     /// FAKE MATCH: comma operator required for regalloc
     ftCommon_8007D3A8(fp, 0.0f,
-                      ((0, fp->co_attrs.air_drift_stick_mul)) *
-                          dat_attr->specialhi_horizontal_momentum,
+                      ((0, fp->co_attrs.air_drift_stick_mul)) *dat_attr
+                          ->specialhi_horizontal_momentum,
                       fp->co_attrs.air_drift_max);
 }
 
@@ -2086,7 +2085,8 @@ void ftKb_SpecialNLoop_IASA(Fighter_GObj* gobj)
     }
 
     if ((fp->input.held_inputs & 0x200) == 0) {
-        Fighter_ChangeMotionState(gobj, ftKb_MS_SpecialNEnd, 0, 0.0f, 1.0f, 0.0f, NULL);
+        Fighter_ChangeMotionState(gobj, ftKb_MS_SpecialNEnd, 0, 0.0f, 1.0f,
+                                  0.0f, NULL);
     }
 }
 
@@ -2102,7 +2102,8 @@ void ftKb_SpecialAirNLoop_IASA(Fighter_GObj* gobj)
     }
 
     if ((fp->input.held_inputs & 0x200) == 0) {
-        Fighter_ChangeMotionState(gobj, ftKb_MS_SpecialAirNEnd, 0, 0.0f, 1.0f, 0.0f, NULL);
+        Fighter_ChangeMotionState(gobj, ftKb_MS_SpecialAirNEnd, 0, 0.0f, 1.0f,
+                                  0.0f, NULL);
     }
 }
 
@@ -2531,8 +2532,8 @@ void ftKb_SpecialNLg_800F9598(Fighter_GObj* gobj)
         motion_id = 0x200;
     }
 
-    Fighter_ChangeMotionState(gobj, motion_id, 0x5000,
-                              anim_frame, 1.0f, 0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, motion_id, 0x5000, anim_frame, 1.0f, 0.0f,
+                              NULL);
     fp->accessory4_cb = fn_800F9260;
 }
 

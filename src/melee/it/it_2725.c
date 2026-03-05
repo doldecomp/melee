@@ -23,7 +23,6 @@
 
 #include "it/it_26B1.h"
 #include "it/itcoll.h"
-#include "it/items/it_27CF.h"
 #include "it/items/it_2ADA.h"
 #include "it/items/it_2E5A.h"
 #include "it/items/it_2E6A.h"
@@ -179,6 +178,7 @@
 #include "it/items/itwhispyapple.h"
 #include "it/items/itwhitebea.h"
 #include "it/items/itwstar.h"
+#include "it/items/ityoshiegglay.h"
 #include "it/items/ityoshieggthrow.h"
 #include "it/items/ityoshistar.h"
 #include "it/items/itzeldadinfire.h"
@@ -186,7 +186,6 @@
 #include "it/items/itzgshell.h"
 #include "it/items/itzrshell.h"
 #include "it/types.h"
-#include "items/it_27CF.h"
 #include "items/itbat.h"
 #include "items/itbombhei.h"
 #include "items/itbox.h"
@@ -234,6 +233,7 @@
 #include "items/ittarucann.h"
 #include "items/ittomato.h"
 #include "items/itwstar.h"
+#include "items/ityoshiegglay.h"
 #include "lb/inlines.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
@@ -5128,8 +5128,8 @@ HSD_JObj* it_80272CC0(Item_GObj* item_gobj, enum_t idx)
 /// Check if the HSD_GObj* class is an item
 bool it_80272D1C(Item_GObj* item_gobj)
 {
-    if ((item_gobj != NULL) &&
-        (item_gobj->classifier == HSD_GOBJ_CLASS_ITEM)) { // ITEM_UNK_ENEMY?
+    if ((item_gobj != NULL) && (item_gobj->classifier == HSD_GOBJ_CLASS_ITEM))
+    { // ITEM_UNK_ENEMY?
         return true;
     }
     return false;
@@ -5142,8 +5142,8 @@ s32 it_80272D40(Item_GObj* item_gobj)
     if (ftLib_80086960((HSD_GObj*) item_gobj)) {
         return 0;
     }
-    if ((item_gobj != NULL) &&
-        (item_gobj->classifier == HSD_GOBJ_CLASS_ITEM)) { // ITEM_UNK_ENEMY?
+    if ((item_gobj != NULL) && (item_gobj->classifier == HSD_GOBJ_CLASS_ITEM))
+    { // ITEM_UNK_ENEMY?
         chk = true;
     } else {
         chk = false;
@@ -9919,8 +9919,8 @@ bool it_8027B798(Item_GObj* item_gobj, Vec3* arg1)
         sp14.x = -temp_f30 * item->facing_dir;
         sp14.y = temp_f2;
         sp14.z = 0.0f;
-        if (lbVector_Angle(temp_r31_2, &sp14) <
-            1.5708f) { // Should this be M_PI_2?
+        if (lbVector_Angle(temp_r31_2, &sp14) < 1.5708f)
+        { // Should this be M_PI_2?
             ret_chk = true;
             arg1->x = sp14.x;
             arg1->y = sp14.y;

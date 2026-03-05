@@ -47,7 +47,6 @@
 #include "ftLink/types.h"
 #include "it/it_26B1.h"
 #include "it/item.h"
-#include "it/items/it_27CF.h"
 #include "it/items/it_2ADA.h"
 #include "it/items/it_2F28.h"
 #include "it/items/itclimbersice.h"
@@ -262,9 +261,7 @@ void ftKb_SpecialNSk_80105F3C(Fighter_GObj* gobj)
     }
 }
 
-void fn_80105FEC(Fighter_GObj* gobj)
-{
-}
+void fn_80105FEC(Fighter_GObj* gobj) {}
 
 bool ftKb_SpecialNSk_80105FF0(Fighter_GObj* gobj)
 {
