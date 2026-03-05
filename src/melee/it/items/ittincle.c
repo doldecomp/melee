@@ -235,7 +235,7 @@ bool itTincle_UnkMotion10_Anim(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     PAD_STACK(8);
-    
+
     if (it_80272C6C(gobj) == 0) {
         ip->xDD4_itemVar.tincle.x20--;
         if (ip->xDD4_itemVar.tincle.x20 != 0) {

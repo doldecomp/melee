@@ -168,7 +168,7 @@ void grCastle_801CDFD8(Ground_GObj* gobj)
     zero = 0;
     base_value = *(s16*)((u8*)params2 + 0x8);
     final_value = (s16)(base_value + rand_result);
-    
+
     *(s16*)((u8*)gp + 0xD4) = final_value;
     *(s16*)((u8*)gp + 0xDC) = neg_one;
     *(s16*)((u8*)gp + 0xDA) = neg_one;

@@ -1174,10 +1174,10 @@ void ftPp_SpecialAirHiThrow2_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp;
     ftIceClimberAttributes* da;
-    
+
     fp = GET_FIGHTER(gobj);
     da = fp->dat_attrs;
-    
+
     if (!ftAnim_IsFramesRemaining(gobj)) {
         ftCo_80096900(gobj, 0, 1, 0, da->x74, da->x78);
     } else {

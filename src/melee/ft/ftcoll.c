@@ -889,13 +889,13 @@ void ftColl_80078754(Fighter_GObj* arg0, Fighter_GObj* arg1, bool arg2)
     Fighter* fp0;
     Fighter* fp1;
     PAD_STACK(8);
-    
+
     fp0 = arg0->user_data;
     fp1 = arg1->user_data;
-    
+
     ftColl_8007861C(arg0, arg1, 1, fp0->kind, fp0->x2070.x2070_int, &fp0->x2074,
                     fp0->x2074.x2088, (void*)arg2, 0);
-    
+
     fp1->dmg.x18c4_source_ply = 6;
     fp1->dmg.x18C8 = -1;
 }

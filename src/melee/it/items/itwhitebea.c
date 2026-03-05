@@ -181,7 +181,7 @@ void itWhitebea_UnkMotion0_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     PAD_STACK(8);
-    
+
     if (ip->xDD4_itemVar.whitebea.x40 == 0) {
         int rand = HSD_Randi(2);
         if (ip->xDD4_itemVar.whitebea.x3C != 0 || rand != 0) {

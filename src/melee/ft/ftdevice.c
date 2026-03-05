@@ -58,7 +58,7 @@ void ftCo_800C06E8(Ground_GObj* gobj, int arg1, void* func)
 {
     struct ftDeviceUnk3* base = ft_80459A68;
     int i;
-    
+
     for (i = 0; i < 1; i++) {
         if (base[i].ground == NULL) {
             base[i].ground = gobj;

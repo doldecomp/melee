@@ -638,10 +638,10 @@ void ftCo_800C7A30(Fighter_GObj* gobj)
 void ftCo_CaptureLikelike_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    
+
     fp->grab_timer -= p_ftCommonData->x758;
     ftCommon_GrabMash(fp, p_ftCommonData->x75C);
-    
+
     if (*(int*)&fp->mv.co.mushroom.x4 == 0) {
         if (fp->grab_timer <= 0.0f) {
             void it_802DB9F4(Item_GObj*);

@@ -13,7 +13,7 @@ void it_802AC58C(Item_GObj* gobj)
     register Item* ip;
     register u8 byte;
     register int zero;
-    
+
     if (gobj != NULL) {
         ip = gobj->user_data;
         it_802725D4(gobj);

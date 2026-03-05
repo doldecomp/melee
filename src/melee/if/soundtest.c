@@ -419,10 +419,10 @@ bool un_803002FC(bool update_scene)
 s32 un_80300338(void)
 {
     u8* src;
-    
+
     src = gmMainLib_8045A6C0;
     src = src + un_803FA128.x220;
-    
+
     un_803FA128.x224 = src[0x1868];
     un_803FA128.x225 = src[0x1869];
     un_803FA128.x226 = src[0x186A];
@@ -433,34 +433,34 @@ s32 un_80300338(void)
 s32 un_80300378(void)
 {
     u8* ptr;
-    
+
     un_803FA128.x220 &= 0xFFFE;
-    
+
     ptr = gmMainLib_8045A6C0;
     ptr = ptr + un_803FA128.x220;
-    
+
     un_803FA128.x224 = ptr[0x1868];
     un_803FA128.x225 = ptr[0x1869];
     un_803FA128.x226 = ptr[0x186A];
     un_803FA128.x227 = ptr[0x186B];
-    
+
     return 0;
 }
 
 s32 un_803003C4(void)
 {
     u8* ptr;
-    
+
     un_803FA128.x220 &= 0xFFFC;
-    
+
     ptr = gmMainLib_8045A6C0;
     ptr = ptr + un_803FA128.x220;
-    
+
     un_803FA128.x224 = ptr[0x1868];
     un_803FA128.x225 = ptr[0x1869];
     un_803FA128.x226 = ptr[0x186A];
     un_803FA128.x227 = ptr[0x186B];
-    
+
     return 0;
 }
 

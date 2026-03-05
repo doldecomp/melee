@@ -418,7 +418,7 @@ void fn_800D4DD4(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     Fighter* temp_r31 = fp;
     f32 bottom_offset;
-    
+
     switch (temp_r31->mv.co.unk_deadup.x44) {
     case 3:
         bottom_offset = Stage_GetCamBoundsBottomOffset();

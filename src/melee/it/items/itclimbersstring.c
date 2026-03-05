@@ -25,7 +25,7 @@ void it_802C3810(Item_GObj* gobj)
 {
     Item* item;
     int unused[2];
-    
+
     item = gobj->user_data;
     Item_80268E5C(gobj, 2, 2);
     it_8026BB20(gobj);

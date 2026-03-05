@@ -26,12 +26,12 @@ void it_8029A498(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     PAD_STACK(16);
-    
+
     it_8026B3A8(gobj);
     it_80274740(gobj);
     it_80275158(gobj, 1.0f);
     Item_80268E5C(gobj, 1, 2);
-    
+
     ip->xDCE_flag.b7 = FALSE;
 }
 

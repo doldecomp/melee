@@ -79,7 +79,7 @@ void ft_80089824(Fighter_GObj* gobj)
 {
     Fighter* fp;
     s32 temp;
-    
+
     fp = GET_FIGHTER(gobj);
     ((s32*)&temp)[0] = fp->x2070.x2070_int;
     fp->x2070.x2070_int = ((s32*)&temp)[0];

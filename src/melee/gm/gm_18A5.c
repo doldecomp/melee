@@ -1991,7 +1991,7 @@ void gm_801964A4_OnLeave(UNK_T arg)
 void fn_80196510(void)
 {
     int stage;
-    
+
     gm_8018F634();
 
     while (1) {

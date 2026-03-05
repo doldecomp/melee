@@ -749,12 +749,12 @@ void hsd_803B24E4(s32* ctx, int channel, int file_no, void* work_buf)
 s32 hsd_803B2674(CardState* state)
 {
     s32 blocks;
-    
+
     state->x24 = hsd_803AC340((u8*) state + 0x3B0);
-    
+
     blocks = (0x2F + state->x24 + state->x8) / state->x8;
     blocks += fn_803AC7DC(state);
-    
+
     return blocks;
 }
 

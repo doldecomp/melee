@@ -41,24 +41,24 @@ bool itUnknown_UnkMotion1_Anim(Item_GObj* gobj)
     itUnknownAttributes* attr;
     s32 temp;
     s32 unused[2];
-    
+
     temp = ip->xDD4_itemVar.unknown.x64 - 1;
     ip->xDD4_itemVar.unknown.x64 = temp;
-    
+
     if (temp < 0) {
         it_802CED54(gobj);
-        
+
         temp = ip->xDD4_itemVar.unknown.x68 - 1;
         ip->xDD4_itemVar.unknown.x68 = temp;
-        
+
         if (temp == 0) {
             return true;
         }
-        
+
         attr = ip->xC4_article_data->x4_specialAttributes;
         ip->xDD4_itemVar.unknown.x64 = attr->x20 + HSD_Randi(attr->x1C);
     }
-    
+
     return false;
 }
 

@@ -31,13 +31,13 @@ bool itYoshieggthrow_UnkMotion1_Anim(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     f32* base = (f32*)ip;
-    
+
     if (base[0xD44/4] <= 0.0f) {
         it_802B2C38(gobj);
     } else {
         base[0xD44/4] -= 1.0f;
     }
-    
+
     return false;
 }
 

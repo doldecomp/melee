@@ -26,16 +26,16 @@ void mnGallery_80258D50(void* arg)
         HSD_GObj* gobj;
     }* data = arg;
     s32 zero;
-    
+
     if (data->unk0 != 0) {
         lbMthp_8001F800();
         lbAudioAx_800236DC();
         lbAudioAx_80023F28(gmMainLib_8015ECB0());
-        
+
         zero = 0;
         data->unk0 = zero;
         data->unk1 = zero;
-        
+
         if (data->gobj != NULL) {
             HSD_GObjPLink_80390228(data->gobj);
             data->gobj = NULL;

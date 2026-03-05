@@ -159,23 +159,23 @@ void lbMthp_8001F800(void)
 {
     struct lbl_804333E0_t* base;
     s32* p_14C;
-    
+
     base = &lbl_804333E0;
     p_14C = &base->unk_14C;
-    
+
     if (*p_14C != 0) {
         *(s32*)((u8*)base + 0x70) = 0;
-        
+
         while (fn_8001F294()) {
         }
-        
+
         OSCancelAlarm((OSAlarm*)((u8*)base + 0x150));
         HSD_VIWaitXFBFlush();
-        
+
         if (*(void**)((u8*)base + 0x140) != NULL) {
             HSD_Free(*(void**)((u8*)base + 0x140));
         }
-        
+
         *p_14C = 0;
     }
 }

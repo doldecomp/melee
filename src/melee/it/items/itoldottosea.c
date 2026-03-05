@@ -102,7 +102,7 @@ void it_802E2C80(Item_GObj* gobj)
 bool itOldottosea_UnkMotion5_Anim(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    
+
     if (!it_80272C6C(gobj)) {
         if (ip->ground_or_air == GA_Air) {
             Item_80268E5C(gobj, 5, 2);
@@ -154,18 +154,18 @@ void it_802E3098(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     s32 val;
-    
+
     ip->x40_vel.z = 0.0f;
     ip->x40_vel.y = 0.0f;
     ip->x40_vel.x = 0.0f;
-    
+
     if (lbLang_IsSettingJP()) {
         val = 0x37;
     } else {
         val = 0x28;
     }
     ip->xDD4_itemVar.oldottosea.x28 = val;
-    
+
     Item_80268E5C(gobj, 3, 2);
     it_8026BDB4(gobj);
 }

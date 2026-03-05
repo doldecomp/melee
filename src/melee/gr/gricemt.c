@@ -701,7 +701,7 @@ void grIceMt_801F8398(Ground_GObj* gobj)
     int i = 0;
     Ground* gp = gobj->user_data;
     u32 unused[2];
-    
+
     while (i < 4) {
         if (gp->gv.icemt.xF8[i] != NULL) {
             grMaterial_801C8CDC(gp->gv.icemt.xF8[i]);
@@ -755,9 +755,9 @@ void grIceMt_801F8608(Ground_GObj* gobj)
     s32 i;
     Ground* gp;
     u32 unused[2];
-    
+
     gp = gobj->user_data;
-    
+
     for (i = 0; i < 4; i++) {
         if (gp->gv.icemt.xF8[i] != NULL) {
             grMaterial_801C8CDC(gp->gv.icemt.xF8[i]);
@@ -812,9 +812,9 @@ void grIceMt_801F87FC(Ground_GObj* gobj)
     u32 unused[2];
     int i;
     Ground* gp;
-    
+
     gp = gobj->user_data;
-    
+
     for (i = 0; i < 5; i++) {
         if (gp->gv.icemt.xF8[i] != NULL) {
             grMaterial_801C8CDC(gp->gv.icemt.xF8[i]);
@@ -868,9 +868,9 @@ void grIceMt_801F89E0(Ground_GObj* gobj)
     Ground* gp;
     int i;
     u32 unused[2];
-    
+
     gp = gobj->user_data;
-    
+
     for (i = 0; i < 4; i++) {
         if (gp->gv.icemt.xF8[i] != NULL) {
             grMaterial_801C8CDC(gp->gv.icemt.xF8[i]);

@@ -630,20 +630,20 @@ null_return:
 void ftKb_SpecialNMt_80107040(Fighter_GObj* gobj)
 {
     Fighter* fp;
-    
+
     if (gobj == NULL) {
         return;
     }
-    
+
     fp = GET_FIGHTER(gobj);
     if (fp->fv.kb.x98 != NULL) {
         fp->fv.kb.x98 = NULL;
     }
-    
+
     if (gobj == NULL) {
         return;
     }
-    
+
     fp = GET_FIGHTER(gobj);
     efLib_DestroyAll(gobj);
     fp->fv.kb.xA0 = NULL;

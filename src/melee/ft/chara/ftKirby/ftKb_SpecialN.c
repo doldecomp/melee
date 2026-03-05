@@ -1329,12 +1329,12 @@ float ftKb_SpecialN_800F58D8(Fighter_GObj* gobj, Vec3* victim_self_vel,
     ftKb_DatAttrs* da = fp->dat_attrs;
     float cos_val = cosf(da->specialn_spit_out_release_angle);
     float temp = da->specialn_swallow_star_vertical_velocity * cos_val;
-    
+
     victim_self_vel->x = victim_facing_dir * temp;
-    victim_self_vel->y = da->specialn_swallow_star_vertical_velocity * 
+    victim_self_vel->y = da->specialn_swallow_star_vertical_velocity *
                          sinf(da->specialn_spit_out_release_angle);
     victim_self_vel->z = 0.0f;
-    
+
     return da->specialn_swallow_star_gravity;
 }
 
@@ -2523,17 +2523,17 @@ void ftKb_SpecialNLg_800F9598(Fighter_GObj* gobj)
     Fighter* fp2;
     s32 motion_id;
     f32 anim_frame;
-    
+
     ftCommon_8007D7FC(fp);
-    
+
     fp2 = gobj->user_data;
     motion_id = 0x18F;
     anim_frame = fp->cur_anim_frame;
-    
+
     if (fp2->fv.kb.hat.kind != 0) {
         motion_id = 0x200;
     }
-    
+
     Fighter_ChangeMotionState(gobj, motion_id, 0x5000,
                               anim_frame, 1.0f, 0.0f, NULL);
     fp->accessory4_cb = fn_800F9260;

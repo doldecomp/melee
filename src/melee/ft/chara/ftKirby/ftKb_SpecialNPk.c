@@ -838,21 +838,21 @@ long ftKb_SpecialNSs_800FCC14(Fighter_GObj* gobj, long* out1, long* out2)
     Fighter* fp;
     ftKb_DatAttrs* da;
     PAD_STACK(8);
-    
+
     if (gobj == NULL) {
         goto return_error;
     }
-    
+
     fp = GET_FIGHTER(gobj);
     da = fp->dat_attrs;
-    
+
     if (fp->fv.kb.xA4 == NULL) {
         return -1;
     }
-    
+
     *out1 = fp->fv.kb.xA8;
     *out2 = (long)da->specialn_ss_charge_time;
-    
+
     return 0;
 
 return_error:
@@ -865,38 +865,38 @@ bool ftKb_SpecialNSs_800FCCBC(Fighter_GObj* gobj)
 {
     Fighter* fp;
     s32 motion_id;
-    
+
     if (!gobj) {
         goto end_true;
     }
-    
+
     fp = GET_FIGHTER(gobj);
     motion_id = fp->motion_id;
-    
+
     if (motion_id == 0x199) {
         goto ret_true;
     }
-    
+
     if (motion_id >= 0x199) {
         goto check_upper;
     }
-    
+
     if (motion_id >= 0x197) {
         goto ret_false;
     }
     goto ret_true;
-    
+
 check_upper:
     if (motion_id >= 0x19D) {
         goto ret_true;
     }
-    
+
 ret_false:
     return false;
-    
+
 ret_true:
     return true;
-    
+
 end_true:
     return true;
 }
