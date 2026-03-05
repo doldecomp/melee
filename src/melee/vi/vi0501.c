@@ -32,15 +32,16 @@ static HSD_Archive* un_804D6F74;
 static HSD_Archive* un_804D6F78;
 static GXColor erase_colors_vi0501;
 static float un_804D6F80;
-SDATA static ViCharaDesc un_804D6F84;
+
+u8 un_804D6F84[8]; ///< @todo #ViCharaDesc?
 
 static Vec3 initial_pos = { 0.0f, 0.0f, 0.0f };
 
 void un_8031D9E4(int arg0, int arg1, int arg2)
 {
-    un_804D6F84.p1_char_index = arg0;
-    ((u8*) &un_804D6F84)[1] = arg1;
-    ((u8*) &un_804D6F84)[3] = arg2;
+    un_804D6F84[0] = arg0;
+    un_804D6F84[1] = arg1;
+    un_804D6F84[3] = arg2;
 }
 
 /// #un_8031D9F8

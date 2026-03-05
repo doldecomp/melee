@@ -1378,7 +1378,7 @@ u8 gm_801BEBF8(u8 arg0)
         return 0x21;
     }
 
-    ptr = *(u8**)((u8*)entry + 0x14);
+    ptr = *(u8**) ((u8*) entry + 0x14);
     return *ptr;
 }
 
@@ -1705,10 +1705,6 @@ u8 gm_801BF718(void)
 {
     return gm_8049E548.unk_E;
 }
-
-extern u8 un_804D6F3C[8];
-extern u8 un_804D6FD8[8];
-extern u8 un_804D6F84[8];
 
 void gm_801BF728(MinorScene* arg)
 {

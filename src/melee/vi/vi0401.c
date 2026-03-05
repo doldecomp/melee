@@ -38,12 +38,13 @@ static SceneDesc* un_804D6F50;
 static HSD_Archive* un_804D6F54;
 static HSD_JObj* un_804D6F58;
 static GXColor erase_colors_vi0401;
-SDATA static ViCharaDesc un_804D6F60;
+
+u8 un_804D6F60[8]; ///< @todo #ViCharaDesc?
 
 void vi0401_8031D020(int arg0, int arg1)
 {
-    ((u8*)&un_804D6F60)[0] = arg0;
-    ((u8*)&un_804D6F60)[1] = arg1;
+    ((u8*) &un_804D6F60)[0] = arg0;
+    ((u8*) &un_804D6F60)[1] = arg1;
 }
 
 void un_8031D030(CharacterKind char_kind, int costume)
