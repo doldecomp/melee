@@ -9,6 +9,7 @@
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
+#include "lb/lb_00B0.h"
 #include "lb/lbvector.h"
 
 /* 0x802910B8 */ void itFlipper_Logic20_Thrown(Item_GObj* gobj);
@@ -132,6 +133,17 @@ void itFlipper_Logic20_Thrown(Item_GObj* gobj)
     Item_80268E5C(gobj, 3, ITEM_ANIM_UPDATE | ITEM_DROP_UPDATE);
 }
 
+bool itFlipper_UnkMotion3_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+
+    ip->xDD4_itemVar.flipper.xDD4--;
+    if (ip->xDD4_itemVar.flipper.xDD4 <= 0) {
+        it_80291254(gobj);
+    }
+    return false;
+}
+
 /// #itFlipper_UnkMotion3_Anim
 
 /// #itFlipper_UnkMotion3_Phys
@@ -151,7 +163,15 @@ void it_8029131C(Item_GObj* gobj)
 
 /// #itFlipper_UnkMotion6_Anim
 
-/// #itFlipper_UnkMotion6_Phys
+void itFlipper_UnkMotion6_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->xDD4_itemVar.flipper.xDE8 != 0) {
+        if (ip->xDD4_itemVar.flipper.xDEC != NULL) {
+            lb_8000B1CC(ip->xDD4_itemVar.flipper.xDEC, 0, &ip->pos);
+        }
+    }
+}
 
 bool itFlipper_UnkMotion6_Coll(Item_GObj* gobj)
 {

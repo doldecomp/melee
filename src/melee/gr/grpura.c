@@ -22,6 +22,8 @@
 #include <baselib/tobj.h>
 #include <sysdolphin/baselib/dobj.h>
 
+/* 213030 */ static void grPura_80213030(void);
+
 StageCallbacks grPu_803E6800[] = {
     { grPura_80211EF0, grPura_80211F1C, grPura_80211F24, grPura_80211F28, 0 },
     { grPura_80212024, grPura_802120D8, grPura_802120E0, grPura_8021228C, 0 },
@@ -221,7 +223,7 @@ void grPura_80211FD8(Ground_GObj* arg0)
 {
     grPura_80212EF4(arg0);
     Ground_801C2FE0(arg0);
-    // grPura_80213030(arg0);
+    grPura_80213030();
     mpLib_80055E24(0x18);
     lb_800115F4();
 }
@@ -373,16 +375,27 @@ void grPura_80212EF4(HSD_GObj* arg0)
 
 /// #grPura_80212FC0
 
-void grPura_80213030(HSD_JObj* arg0, Vec3* arg1, Vec3* arg2)
+void grPura_80213030(void)
 {
-    u32 uVar1 = 0;
+    Point3d spC;
+    HSD_JObj* temp_r3;
+    u16* var_r31;
+    u32 var_r30;
+
+    var_r31 = &grPu_803E6C0C[0];
+    var_r30 = 0;
     do {
-        lb_8000B1CC(arg0, arg1, arg2);
-        uVar1++;
-    } while (uVar1 < 42);
+        temp_r3 = M2C_FIELD(var_r31, HSD_JObj**, 8);
+        if (temp_r3 != NULL) {
+            lb_8000B1CC(temp_r3, NULL, &spC);
+            mpVtxSetPos(M2C_FIELD(var_r31, s16*, 0), spC.x, spC.y);
+        }
+        var_r30 += 1;
+        var_r31 += 0xC;
+    } while (var_r30 < 0x2A);
     mpJointUpdateBounding(0);
     mpJointUpdateBounding(9);
-    mpJointUpdateBounding(24);
+    mpJointUpdateBounding(0x18);
     mpJointUpdateBounding(5);
 }
 

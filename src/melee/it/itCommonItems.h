@@ -165,6 +165,7 @@ typedef struct itHououAttr {
     /* +00 */ f32 timer;
     /* +04 */ u8 x4_pad[0x14];
     /* +18 */ f32 x18;
+    /* +1C */ f32 x1C;
 } itHououAttr;
 
 typedef struct itLugiaAttributes {
@@ -350,7 +351,7 @@ typedef struct itFlipper_ItemVars {
     f32 xDE0;
     f32 xDE4;
     s32 xDE8;
-    s32 xDEC;
+    HSD_JObj* xDEC;
 } itFlipper_ItemVars;
 
 typedef struct itFlipper_DatAttrs {
@@ -1435,6 +1436,8 @@ typedef struct itUnknownAttributes {
     /* +10 */ f32 x10;
     /* +14 */ char pad_14[0x4];
     /* +18 */ s32 x18;
+    /* +1C */ s32 x1C;
+    /* +20 */ s32 x20;
 } itUnknownAttributes;
 
 typedef struct itCrazyHandBombAttributes {

@@ -3,76 +3,28 @@
 
 #include <placeholder.h>
 
-#include "cm/camera.h"
-#include "ef/efasync.h"
 #include "ef/eflib.h"
 #include "ef/efsync.h"
-#include "ft/chara/ftCommon/ftCo_CaptureWaitKirby.h"
-#include "ft/chara/ftCommon/ftCo_Damage.h"
 #include "ft/chara/ftCommon/ftCo_Escape.h"
 #include "ft/chara/ftCommon/ftCo_FallSpecial.h"
-#include "ft/chara/ftCommon/ftCo_Jump.h"
-#include "ft/chara/ftCommon/ftCo_KneeBend.h"
-#include "ft/chara/ftCommon/ftCo_Lift.h"
-#include "ft/chara/ftCommon/ftCo_Throw.h"
-#include "ft/chara/ftCommon/ftCo_Wait.h"
-#include "ft/chara/ftCommon/ftpickupitem.h"
 #include "ft/fighter.h"
 
 #include "ft/forward.h"
 
 #include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
 #include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
-#include "ft/ft_0C31.h"
-#include "ft/ftcamera.h"
-#include "ft/ftcliffcommon.h"
 #include "ft/ftcolanim.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
-#include "ft/ftdata.h"
-#include "ft/ftdynamics.h"
-#include "ft/ftparts.h"
-#include "ft/ftwalkcommon.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
-#include "ftCommon/ftCo_Attack100.h"
-#include "ftCommon/ftCo_CaptureKirby.h"
 #include "ftCommon/ftCo_Fall.h"
-#include "ftCommon/ftCo_Landing.h"
 
 #include "ftKirby/forward.h"
 
-#include "ftLink/types.h"
-#include "it/it_26B1.h"
-#include "it/item.h"
-#include "it/items/it_27CF.h"
-#include "it/items/it_2ADA.h"
-#include "it/items/it_2F28.h"
-#include "it/items/itclimbersice.h"
-#include "it/items/itgamewatchchef.h"
-#include "it/items/itkirby_2F23.h"
-#include "it/items/itkirbycutterbeam.h"
-#include "it/items/itkirbygamewatchchefpan.h"
-#include "it/items/itkirbyhammer.h"
-#include "it/items/itkirbyyoshispecialn.h"
-#include "it/items/itlinkarrow.h"
-#include "it/items/itlinkbow.h"
-#include "it/items/itmewtwoshadowball.h"
 #include "it/items/itnesspkflush.h"
-#include "it/items/itpeachtoad.h"
-#include "it/items/itpeachtoadspore.h"
-#include "it/items/itpikachutjoltground.h"
-#include "it/items/itsamuschargeshot.h"
-#include "it/items/itseakneedleheld.h"
 #include "lb/lb_00B0.h"
-#include "lb/lbanim.h"
-#include "lb/lbvector.h"
-#include "melee/lb/lbrefract.h"
-#include "mp/mpcoll.h"
-#include "mp/mplib.h"
-#include "pl/player.h"
 
 #include <common_structs.h>
 #include <stddef.h>
@@ -80,8 +32,7 @@
 #include <baselib/random.h>
 #include <MSL/math.h>
 
-/// Forward declaration for function in ftKb_SpecialNZd.c
-void fn_80105A34(Fighter_GObj*);
+/* 105A34 */ static void fn_80105A34(Fighter_GObj* gobj);
 
 void ftKb_SpecialNNs_800FEDD0(HSD_GObj* gobj)
 {
@@ -1110,7 +1061,20 @@ void ftKb_PrSpecialAirNEndR_Coll(Fighter_GObj* gobj)
 
 /// #ftKb_PrSpecialNHit_Coll
 
-/// #fn_80105978
+void fn_80105A34(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    if (!fp->x2219_b0) {
+        FighterBone* bone = fp->parts;
+        efSync_Spawn(0x4B6, gobj, bone[1].joint);
+        fp->x2219_b0 = true;
+    }
+
+    fp->pre_hitlag_cb = efLib_PauseAll;
+    fp->post_hitlag_cb = efLib_ResumeAll;
+    fp->accessory4_cb = NULL;
+}
 
 void fn_80105AB0(Fighter_GObj*);
 

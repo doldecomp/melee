@@ -12,6 +12,7 @@
 #include "ft/ft_0C88.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
+#include "ft/ftwaitanim.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
 
@@ -30,6 +31,7 @@
 #include <melee/ft/chara/ftCommon/ftCo_AttackS4.h>
 #include <melee/ft/chara/ftCommon/ftCo_DamageIce.h>
 #include <melee/ft/chara/ftCommon/ftCo_Escape.h>
+#include <melee/ft/chara/ftCommon/ftCo_Fall.h>
 #include <melee/ft/chara/ftCommon/ftCo_FallSpecial.h>
 #include <melee/ft/chara/ftCommon/ftCo_Guard.h>
 #include <melee/ft/chara/ftCommon/ftCo_Lift.h>
@@ -51,6 +53,8 @@
 #include <melee/pl/player.h>
 #include <melee/pl/plbonuslib.h>
 #include <melee/pl/plstale.h>
+
+/* 0D4DD4 */ static void fn_800D4DD4(Fighter_GObj* gobj);
 
 bool ftCo_800D3158(Fighter_GObj* gobj)
 {
@@ -411,7 +415,23 @@ void ftCo_800D47B8(Fighter_GObj* gobj)
 
 /// #ftCo_DeadUpFall_Phys
 
-/// #fn_800D4DD4
+void fn_800D4DD4(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* temp_r31 = fp;
+    f32 bottom_offset;
+
+    switch (temp_r31->mv.co.unk_deadup.x44) {
+    case 3:
+        bottom_offset = Stage_GetCamBoundsBottomOffset();
+        if (temp_r31->cur_pos.y < bottom_offset) {
+            ftCommon_8007E2FC(gobj);
+        }
+        break;
+    default:
+        break;
+    }
+}
 
 void ftCo_DeadUpFall_Cam(Fighter_GObj* gobj)
 {
@@ -491,7 +511,16 @@ void fn_800D55B4(Fighter_GObj* gobj)
 }
 /// #ftCo_800D5600
 
-/// #ftCo_RebirthWait_Anim
+void ftCo_RebirthWait_Anim(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftCo_8008A7A8(gobj, fp->ft_data->x24);
+    fp->mv.co.common.x0 -= 1;
+    if (fp->mv.co.common.x0 == 0) {
+        ftColl_8007B7A4(gobj, p_ftCommonData->x5D8);
+        ftCo_Fall_Enter(gobj);
+    }
+}
 
 /// #ftCo_RebirthWait_IASA
 

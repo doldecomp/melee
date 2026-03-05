@@ -63,7 +63,7 @@ struct EventData;
 /* 1BEB8C */ bool gm_801BEB8C(u8);
 /* 1BEBA8 */ u8 gm_801BEBA8(u8);
 /* 1BEBC0 */ u8 gm_801BEBC0(u8);
-/* 1BEBF8 */ UNK_RET gm_801BEBF8(UNK_PARAMS);
+/* 1BEBF8 */ u8 gm_801BEBF8(u8 arg0);
 /* 1BEC54 */ void* gm_801BEC54(void);
 /* 1BEC80 */ void gm_801BEC80(MinorScene*);
 /* 1BECA8 */ void gm_801BECA8(MinorScene*);

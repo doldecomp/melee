@@ -180,17 +180,13 @@ void ftCo_80097AF4(Fighter_GObj* gobj)
 void ftCo_80097D40(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-#if SOLUTION == 0
-    ftCo_80097D88(gobj);
-#else
     u8 _[8] = { 0 };
     if (fp->x2228_b2) {
         ftCo_80097AF4(gobj);
     } else {
         ftCo_8009794C(gobj);
     }
-#endif
-    M2C_FIELD(fp, s8*, 0x2344) = 0;
+    fp->mv.co.downspot.x4 = 0;
 }
 #undef SOLUTION
 

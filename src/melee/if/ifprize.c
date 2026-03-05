@@ -161,10 +161,15 @@ void un_802FE6A8(void)
 
 void un_802FE8CC(void)
 {
-    if (un_803F9D48.x0a && un_803F9D48.x0b) {
-        un_803F9D48.x1 = 2;
-        HSD_SisLib_803A5F50(2);
+    if (un_803F9D48.x0a) {
+        if (un_803F9D48.x0b) {
+            goto execute;
+        }
     }
+    return;
+execute:
+    un_803F9D48.x1 = 2;
+    HSD_SisLib_803A5F50(2);
 }
 
 void un_802FE918(int a, int b, int c)

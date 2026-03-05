@@ -83,10 +83,10 @@
 } un_803FA258;
 /* 3FA348 */ static u16 un_803FA348;
 /* 3FA34C */ static u8 un_803FA34C;
-/* 3FA658 */ static int un_803FA658;
-/* 3FA8E8 */ static int un_803FA8E8;
+/* 3FA658 */ static u8 un_803FA658[0x290];
+/* 3FA8E8 */ static u8 un_803FA8E8[0x15C];
 /* 3FAA44 */ static u8 un_803FAA44[0xC0];
-/* 3FB168 */ static int un_803FB168;
+/* 3FB168 */ static u8 un_803FB168[0x4A4];
 /* 3FB60C */ static u8 un_803FB60C[0xE0];
 /* 3FB728 */ static u8 un_803FB728[0xC0];
 /* 3FB870 */ static u8 un_803FB870[0xE0];
@@ -418,35 +418,49 @@ bool un_803002FC(bool update_scene)
 
 s32 un_80300338(void)
 {
-    u8* src = &gmMainLib_8045A6C0[un_803FA128.x220 + 0x1868];
-    un_803FA128.x224 = src[0];
-    un_803FA128.x225 = src[1];
-    un_803FA128.x226 = src[2];
-    un_803FA128.x227 = src[3];
+    u8* src;
+
+    src = gmMainLib_8045A6C0;
+    src = src + un_803FA128.x220;
+
+    un_803FA128.x224 = src[0x1868];
+    un_803FA128.x225 = src[0x1869];
+    un_803FA128.x226 = src[0x186A];
+    un_803FA128.x227 = src[0x186B];
     return 0;
 }
 
 s32 un_80300378(void)
 {
-    u8* src;
+    u8* ptr;
+
     un_803FA128.x220 &= 0xFFFE;
-    src = &gmMainLib_8045A6C0[un_803FA128.x220 + 0x1868];
-    un_803FA128.x224 = src[0];
-    un_803FA128.x225 = src[1];
-    un_803FA128.x226 = src[2];
-    un_803FA128.x227 = src[3];
+
+    ptr = gmMainLib_8045A6C0;
+    ptr = ptr + un_803FA128.x220;
+
+    un_803FA128.x224 = ptr[0x1868];
+    un_803FA128.x225 = ptr[0x1869];
+    un_803FA128.x226 = ptr[0x186A];
+    un_803FA128.x227 = ptr[0x186B];
+
     return 0;
 }
 
 s32 un_803003C4(void)
 {
-    u8* src;
+    u8* ptr;
+
     un_803FA128.x220 &= 0xFFFC;
-    src = &gmMainLib_8045A6C0[un_803FA128.x220 + 0x1868];
-    un_803FA128.x224 = src[0];
-    un_803FA128.x225 = src[1];
-    un_803FA128.x226 = src[2];
-    un_803FA128.x227 = src[3];
+
+    ptr = gmMainLib_8045A6C0;
+    ptr = ptr + un_803FA128.x220;
+
+    un_803FA128.x224 = ptr[0x1868];
+    un_803FA128.x225 = ptr[0x1869];
+    un_803FA128.x226 = ptr[0x186A];
+    un_803FA128.x227 = ptr[0x186B];
+
     return 0;
 }
 
@@ -665,6 +679,8 @@ s32 un_803009E0(void)
 int un_80300A88(void)
 {
     switch (un_804D6DD8) {
+    case 2:
+        break;
     case 3:
         if (un_804D6DCC >= 1) {
             un_804D6DCC = 1;

@@ -4,7 +4,8 @@
 #include "it/it_26B1.h"
 #include "it/item.h"
 
-static void it_802C33B8(Item* item);
+/* 2C33B8 */ static void it_802C33B8(Item* item);
+/* 2C29E8 */ static void fn_802C29E8(Item_GObj* gobj);
 
 void fn_802C28B8(Item_GObj* gobj)
 {
@@ -18,6 +19,17 @@ void it_2725_Logic70_EvtUnk(Item_GObj* arg0, Item_GObj* arg1)
     if ((HSD_GObj*) ip->xDD4_itemVar.bombhei.xDE0 == arg1) {
         ip->xDD4_itemVar.bombhei.xDE0 = 0;
     }
+}
+
+void it_802C3810(Item_GObj* gobj)
+{
+    Item* item;
+    int unused[2];
+
+    item = gobj->user_data;
+    Item_80268E5C(gobj, 2, 2);
+    it_8026BB20(gobj);
+    item->on_accessory = fn_802C29E8;
 }
 
 void it_2725_Logic70_PickedUp(Item_GObj* gobj)

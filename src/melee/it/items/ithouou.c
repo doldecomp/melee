@@ -153,7 +153,20 @@ bool itHouou_UnkMotion4_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itHouou_UnkMotion4_Phys
+void itHouou_UnkMotion4_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itHououAttr* attr = ip->xC4_article_data->x4_specialAttributes;
+
+    it_8027A344(gobj);
+
+    ip->xDD4_itemVar.pokemon.xE44 += attr->x1C;
+    ip->x40_vel.y += ip->xDD4_itemVar.pokemon.xE44;
+
+    if (ip->pos.y < (*(f32*)((u8*)ip + 0xE3C)) - 1.0f) {
+        ip->x40_vel.y = 0.0f;
+    }
+}
 
 bool itHouou_UnkMotion4_Coll(Item_GObj* gobj)
 {

@@ -177,7 +177,22 @@ bool itWhitebea_UnkMotion0_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itWhitebea_UnkMotion0_Phys
+void itWhitebea_UnkMotion0_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    PAD_STACK(8);
+
+    if (ip->xDD4_itemVar.whitebea.x40 == 0) {
+        int rand = HSD_Randi(2);
+        if (ip->xDD4_itemVar.whitebea.x3C != 0 || rand != 0) {
+            it_802E3AC8(gobj);
+            return;
+        }
+        it_802E436C(gobj);
+    } else {
+        ip->xDD4_itemVar.whitebea.x40--;
+    }
+}
 
 bool itWhitebea_UnkMotion0_Coll(Item_GObj* gobj)
 {
@@ -227,7 +242,20 @@ bool itWhitebea_UnkMotion3_Coll(Item_GObj* gobj)
 
 /// #it_802E3ED0
 
-/// #itWhitebea_UnkMotion4_Anim
+bool itWhitebea_UnkMotion4_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    PAD_STACK(8);
+
+    if (it_80272C6C(gobj) == 0) {
+        if (ip->ground_or_air == GA_Air) {
+            Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
+        } else {
+            it_802E40A4(gobj);
+        }
+    }
+    return false;
+}
 
 void itWhitebea_UnkMotion4_Phys(Item_GObj* gobj)
 {
