@@ -1245,12 +1245,13 @@ f32 grKongo_801D8314(void)
                                     temp_r3_7 - grKg_804D6980->unk50;
                                 if (temp_r3_8 < 0) {
                                     var_f31 = -2.3561945f;
-                                } else if ((temp_r3_8 - grKg_804D6980->unk52) <
-                                           0)
-                                {
-                                    var_f31 = -3.1415927f;
                                 } else {
-                                    __assert("grkongo.c", 1753, "0");
+                                    temp_r3_8 -= grKg_804D6980->unk52;
+                                    if (temp_r3_8 < 0) {
+                                        var_f31 = -3.1415927f;
+                                    } else {
+                                        __assert("grkongo.c", 1753, "0");
+                                    }
                                 }
                             }
                         }

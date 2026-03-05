@@ -3972,7 +3972,7 @@ void ftKb_SpecialN_800F190C(Fighter_GObj* gobj, FighterKind kind)
     fp->fv.kb.ns_flash_gobj = NULL;
     fp->fv.kb.x80 = 0;
     fp->fv.kb.x84 = da->specialn_kp_max_fuel;
-    fp->fv.kb.x88 = da->specialn_kp_lowest_charge_graphic_size;
+    fp->fv.kb.x88 = da->specialn_kp_flame_scale;
     fp->fv.kb.x8C = 1.0F;
     fp->fv.kb.x90 = 1.0F;
     fp->fv.kb.x94 = 1.0F;

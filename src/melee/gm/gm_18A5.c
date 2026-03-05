@@ -2609,22 +2609,22 @@ void fn_80198C60(void)
 {
     TmData* td;
     HSD_Text* text;
-    HSD_Text** arr;
+
+    PAD_STACK(24);
 
     td = gm_8018F634();
-    arr = (HSD_Text**) ((u8*) td + 0x524);
-    arr[2] = HSD_SisLib_803A6754(0, (s32) lbl_804D663C);
-    text = arr[2];
+    td->x524[2] = HSD_SisLib_803A6754(0, (s32) lbl_804D663C);
+    text = td->x524[2];
     text->font_size.x = 0.054945F;
     text->font_size.y = 0.08F;
-    arr[2]->default_alignment = 1;
-    arr[2]->default_kerning = 1;
+    td->x524[2]->default_alignment = 1;
+    td->x524[2]->default_kerning = 1;
 
-    arr[3] = HSD_SisLib_803A6754(0, (s32) lbl_804D663C);
-    arr[3]->default_alignment = 1;
-    arr[3]->default_kerning = 1;
-    HSD_SisLib_803A6B98(arr[3], 320.0F, 250.0F, "    ");
-    HSD_SisLib_803A7548(arr[3], 0, 1.5F, 1.5F);
+    td->x524[3] = HSD_SisLib_803A6754(0, (s32) lbl_804D663C);
+    td->x524[3]->default_alignment = 1;
+    td->x524[3]->default_kerning = 1;
+    HSD_SisLib_803A6B98(td->x524[3], 320.0F, 250.0F, "    ");
+    HSD_SisLib_803A7548(td->x524[3], 0, 1.5F, 1.5F);
 }
 
 extern SceneDesc* lbl_804D666C;

@@ -198,7 +198,7 @@ s32 it_802E5F8C(Item_GObj* item_gobj, Vec3* pos, s32 arg2, s32 arg3, f32 arg4,
     Vec3 vel;
 
     vel.x = vel.y = vel.z = 0.0f;
-    it_802E614C(NULL, item_gobj, &sp2C, pos, &vel);
+    it_802E614C(item_gobj, item_gobj, &sp2C, pos, &vel);
     angle = M_PI_2 + arg4;
     while (angle < 0.0f) {
         angle += M_TAU;

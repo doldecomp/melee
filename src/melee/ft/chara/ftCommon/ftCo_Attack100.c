@@ -1276,7 +1276,6 @@ void fn_800DB8A4(Fighter_GObj* gobj)
 
 void ftCo_CaptureWaitHi_Anim(Fighter_GObj* gobj)
 {
-    u8 _[8];
     Fighter* fp;
     FighterOverlay* fp_ovl;
     f32 dec;

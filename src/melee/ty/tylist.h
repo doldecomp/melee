@@ -12,7 +12,7 @@ struct TyListState;
 /* 3124BC */ void un_803124BC(void);
 /* 31263C */ void un_8031263C(void);
 /* 3127D4 */ void un_803127D4(void);
-/* 312834 */ void un_80312834(char* buf, u32 num);
+/* 312834 */ char* un_80312834(char* buf, u32 num);
 /* 312904 */ void un_80312904(void*, s8);
 /* 312E88 */ void un_80312E88(struct TyListArg* arg, float delta);
 /* 313358 */ void un_80313358(struct TyListState* state, s8 arg2, s8 arg3,

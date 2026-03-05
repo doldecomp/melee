@@ -200,7 +200,6 @@ void fn_800FE0E0(Fighter_GObj* gobj)
 
 void ftKb_FxSpecialNEnd_Anim(Fighter_GObj* gobj)
 {
-    volatile short pad2;
     Fighter* fp = GET_FIGHTER(gobj);
 
     it_802ADDD0((Item_GObj*) fp->fv.kb.xB0, fp->cmd_vars[1]);
