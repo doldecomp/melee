@@ -102,10 +102,21 @@ void it_3F14_Logic5_Destroyed(Item_GObj* gobj)
     }
 }
 
+static f32 fake1()
+{
+    return -1.0f;
+}
+
+static f32 fake2()
+{
+    return 1.3089969f;
+}
+
 void it_3F14_Logic5_Spawned(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itTaruCann_DatAttrs* da = ip->xC4_article_data->x4_specialAttributes;
+    float temp_var;
     float temp;
     ip->facing_dir = -1.0f;
     ip->xD5C = 0;
@@ -115,7 +126,7 @@ void it_3F14_Logic5_Spawned(Item_GObj* gobj)
     ip->xDD4_itemVar.tarucann.x0 = 0;
     /// @todo float regswap. same as in it_3F14_Logic2_Spawned
     temp = 0.34906584f * HSD_Randf();
-    ip->xDD4_itemVar.tarucann.x8 = temp + 1.3089969f;
+    ip->xDD4_itemVar.tarucann.x8 = (temp_var = 1.3089969f) + temp;
     ip->xDD4_itemVar.tarucann.xC = 0.0f;
     ip->xDD4_itemVar.tarucann.x10 = 0.0f;
     ip->xDD4_itemVar.tarucann.x14.x = 0.0f;
