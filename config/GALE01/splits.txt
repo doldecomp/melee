@@ -1874,7 +1874,7 @@ melee/gm/gmregcommon.c:
 	.data       start:0x803D79F0 end:0x803D7A50
 	.sdata      start:0x804D4050 end:0x804D4058
 
-melee/gm/gm_17C0.c:
+melee/gm/gmregclear.c:
 	.text       start:0x8017C0C8 end:0x8018325C
 	.rodata     start:0x803B7C08 end:0x803B7C28
 	.data       start:0x803D7A50 end:0x803D9248
