@@ -1272,7 +1272,7 @@ config.libs = [
             Object(Matching, "melee/it/items/itcoin.c"),
             Object(NonMatching, "melee/it/items/itkirby_2F23.c"),
             Object(Matching, "melee/it/items/it_2F28.c"),
-            Object(Matching, "melee/it/items/it_2F2B.c"),
+            Object(Matching, "melee/it/items/ityoshitongue.c"),
             Object(Matching, "melee/it/items/itkirbyyoshispecialn.c"),
             Object(Matching, "melee/it/items/ityoshiegglay.c"),
         ],

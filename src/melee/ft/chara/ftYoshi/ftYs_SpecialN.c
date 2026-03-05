@@ -22,8 +22,8 @@
 #include "ftCommon/ftCo_YoshiEgg.h"
 #include "ftYoshi/ftYs_Init.h"
 #include "ftYoshi/types.h"
-#include "it/items/it_2F2B.h"
 #include "it/items/ityoshiegglay.h"
+#include "it/items/ityoshitongue.h"
 #include "lb/lb_00B0.h"
 
 #include <dolphin/mtx.h>
