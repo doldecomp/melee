@@ -163,8 +163,9 @@ void it_8028BC2C(Item_GObj* gobj)
         ip->x40_vel.x = -ip->x40_vel.x * attrs->xC * HSD_Randf();
         ip->x40_vel.y = attrs->x10;
         if (ip->xDD4_itemVar.gshell.xDEC_b0) {
-            ip->xDD4_itemVar.gshell.xDE8 =
-                HSD_Randi(it_804D6D28->x48_byte & 0xF);
+            u8 rand_max = it_804D6D28->x48_byte;
+            rand_max &= 0xF;
+            ip->xDD4_itemVar.gshell.xDE8 = HSD_Randi(rand_max);
         } else {
             ip->xDD4_itemVar.gshell.xDEC_b0 = 1;
         }
