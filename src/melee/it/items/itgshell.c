@@ -65,13 +65,16 @@ void it_8028B8D8(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itGShell_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    f32 temp;
     Vec v;
     HSD_JObj* jobj;
     PAD_STACK(4);
+
     if (ip->xDD4_itemVar.gshell.xDDC <= 0.0f) {
         jobj = GET_JOBJ(gobj);
         v = attrs->x34;
-        v.x *= -ip->facing_dir;
+        temp = -ip->facing_dir;
+        v.x *= temp;
         efAsync_Spawn(gobj, &GET_ITEM(gobj)->xBC0, 2, 1029, jobj, &v);
         ip->xDD4_itemVar.gshell.xDDC = attrs->x30;
     } else {
@@ -415,7 +418,6 @@ void it_8028C3A8(Item_GObj* gobj)
 bool itGshell_UnkMotion6_Anim(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    PAD_STACK(8);
     if (ip->xDD4_itemVar.gshell.xDD8 <= 0.0f) {
         if (!ip->xDCD_flag.b5) {
             it_80275444(gobj);
