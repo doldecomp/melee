@@ -119,7 +119,7 @@
 /* 0D9F94 */ void ftCo_CatchPull_Phys(Fighter_GObj* gobj);
 /* 0D9FDC */ void ftCo_CatchPull_Coll(Fighter_GObj* gobj);
 /* 0DA004 */ void fn_800DA004(Fighter_GObj* gobj);
-/* 0DA190 */ UNK_RET fn_800DA190(UNK_PARAMS);
+/* 0DA190 */ void fn_800DA190(Fighter_GObj* gobj);
 /* 0DA1D8 */ UNK_RET fn_800DA1D8(UNK_PARAMS);
 /* 0DA2B0 */ void fn_800DA2B0(Fighter_GObj*);
 /* 0DA318 */ void ftCo_CatchWait_Anim(Fighter_GObj* gobj);

@@ -953,7 +953,21 @@ void fn_800DA004(Fighter_GObj* gobj)
 
 /// #fn_800DA054
 
-/// #fn_800DA190
+void fn_800DA190(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    s32 state = *(s32*)((u8*)fp + 0x4);
+    
+    switch (state) {
+    case 6:
+    case 13:
+    case 20:
+        break;
+    default:
+        fn_800DA054(gobj);
+        break;
+    }
+}
 
 /// #fn_800DA1D8
 
