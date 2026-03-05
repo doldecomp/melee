@@ -1,5 +1,9 @@
 #include "ittarucann.h"
 
+#include "types.h"
+
+#include "baselib/forward.h"
+
 #include "cm/camera.h"
 #include "ef/efsync.h"
 #include "ft/chara/ftCommon/ftCo_Barrel.h"
@@ -16,8 +20,32 @@
 #include <baselib/jobj.h>
 #include <baselib/random.h>
 
-extern lbColl_80008D30_arg1 it_803B8610;
-extern Vec3 it_803B8634;
+const lbColl_80008D30_arg1 it_803B8610 = {
+    1, 1, 361, 0, 0, 180, 0, 1, 0,
+};
+const Vec3 it_803B8634 = { 0.0f, 1.0f, 0.0f };
+
+ItemStateTable it_803F63C0[] = {
+    { -1, itTarucann_UnkMotion0_Anim, itTarucann_UnkMotion0_Phys,
+      itTarucann_UnkMotion0_Coll },
+    { -1, itTarucann_UnkMotion1_Anim, itTarucann_UnkMotion1_Phys,
+      itTarucann_UnkMotion1_Coll },
+    { -1, itTarucann_UnkMotion2_Anim, itTarucann_UnkMotion2_Phys, NULL },
+    { 1, itTarucann_UnkMotion6_Anim, itTarucann_UnkMotion6_Phys,
+      itTarucann_UnkMotion6_Coll },
+    { 1, itTarucann_UnkMotion7_Anim,
+      (HSD_GObjEvent) itTarucann_UnkMotion7_Phys, itTarucann_UnkMotion7_Coll },
+    { 1, itTarucann_UnkMotion8_Anim, itTarucann_UnkMotion8_Phys,
+      itTarucann_UnkMotion8_Coll },
+    { 2, itTarucann_UnkMotion6_Anim, itTarucann_UnkMotion6_Phys,
+      itTarucann_UnkMotion6_Coll },
+    { 2, itTarucann_UnkMotion7_Anim,
+      (HSD_GObjEvent) itTarucann_UnkMotion7_Phys, itTarucann_UnkMotion7_Coll },
+    { 2, itTarucann_UnkMotion8_Anim, itTarucann_UnkMotion8_Phys,
+      itTarucann_UnkMotion8_Coll },
+    { 3, itTarucann_UnkMotion9_Anim, itTarucann_UnkMotion9_Phys,
+      itTarucann_UnkMotion9_Coll },
+};
 
 inline void inline_itTarucann_SetRotationZ(HSD_GObj* gobj)
 {
