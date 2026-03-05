@@ -115,7 +115,6 @@ void ftCo_800978D4(Fighter_GObj* gobj)
     ftCo_800976A4(gobj);
 }
 
-#pragma dont_inline on
 void ftCo_8009794C(Fighter_GObj* gobj)
 {
     u8 _[12] = { 0 };
@@ -140,7 +139,6 @@ void ftCo_8009794C(Fighter_GObj* gobj)
         ftCommon_8007CCE8(fp);
     }
 }
-#pragma dont_inline off
 
 void ftCo_80097AF4(Fighter_GObj* gobj)
 {

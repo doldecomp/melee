@@ -893,8 +893,8 @@ void ftColl_80078754(Fighter_GObj* arg0, Fighter_GObj* arg1, bool arg2)
     fp0 = arg0->user_data;
     fp1 = arg1->user_data;
 
-    ftColl_8007861C(arg0, arg1, 1, fp0->kind, fp0->x2070.x2070_int, &fp0->x2074,
-                    fp0->x2074.x2088, (void*)arg2, 0);
+    ftColl_8007861C(arg0, arg1, 1, fp0->kind, fp0->x2070.x2070_int,
+                    &fp0->x2074, fp0->x2074.x2088, (void*) arg2, 0);
 
     fp1->dmg.x18c4_source_ply = 6;
     fp1->dmg.x18C8 = -1;
@@ -1209,7 +1209,8 @@ void ftColl_8007AB48(Fighter_GObj* gobj)
                     (DmgLogEntry**) &dmg_log0, dmg_log0_idx, true);
 }
 
-extern void ftColl_8007A06C_real(Fighter_GObj*, void*, DmgLogEntry*, size_t, int);
+extern void ftColl_8007A06C_real(Fighter_GObj*, void*, DmgLogEntry*, size_t,
+                                 int);
 
 extern void ftColl_8007A06C_alt(Fighter_GObj*, void*, void*, size_t, int);
 
@@ -1219,7 +1220,7 @@ void ftColl_8007AB80(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->dmg.x187c = 0.0f;
-    ftColl_8007A06C_alt(gobj, (char*)fp + 0x1870, dmg_log1, dmg_log1_idx, 0);
+    ftColl_8007A06C_alt(gobj, (char*) fp + 0x1870, dmg_log1, dmg_log1_idx, 0);
     fp->dmg.x18a0 = fp->dmg.x187c;
 }
 
@@ -1263,8 +1264,8 @@ void ftColl_8007AD18(Fighter* fp, HitCapsule* arg1)
         arg1->state = HitCapsule_Unk2;
         break;
     case HitCapsule_Unk2:
-        arg1->state = HitCapsule_Max;
-    case HitCapsule_Max:
+        arg1->state = HitCapsule_Unk3;
+    case HitCapsule_Unk3:
         arg1->x58 = arg1->x4C;
         if (arg1->x43_b1) {
             temp_f1 = 1.0f / fp->x34_scale.y;
