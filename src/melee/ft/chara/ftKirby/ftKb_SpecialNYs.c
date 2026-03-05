@@ -808,9 +808,26 @@ void ftKb_MsSpecialAirNStart_Coll(Fighter_GObj* gobj)
     }
 }
 
-/// #ftKb_SpecialNMs_8010B868
+inline FtMotionId getAirSpecialMotionId(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (fp->fv.kb.hat.kind == FTKIND_MARS) {
+        return ftKb_MS_MsSpecialAirNStart;
+    } else {
+        return ftKb_MS_FeSpecialAirNStart;
+    }
+}
 
-inline FtMotionId getSpecialMotionId(Fighter_GObj* gobj)
+void ftKb_SpecialNMs_8010B868(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    ftCommon_8007D5D4(fp);
+    Fighter_ChangeMotionState(gobj, getAirSpecialMotionId(gobj), 0x0C4C7084,
+                              fp->cur_anim_frame, 1.0f, 0.0f, NULL);
+}
+
+inline FtMotionId getGroundSpecialMotionId(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->fv.kb.hat.kind == FTKIND_MARS) {
@@ -825,7 +842,7 @@ void ftKb_SpecialNMs_8010B8E0(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, getSpecialMotionId(gobj), 0x0C4C7084,
+    Fighter_ChangeMotionState(gobj, getGroundSpecialMotionId(gobj), 0x0C4C7084,
                               fp->cur_anim_frame, 1.0f, 0.0f, NULL);
 }
 
