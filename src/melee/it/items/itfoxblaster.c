@@ -17,8 +17,7 @@
 #include <melee/it/item.h>
 #include <melee/lb/lbrefract.h>
 
-/* 2AE200 */ void it_802AE200(Item_GObj* item_gobj);
-/* 2AE608 */ static void it_802AE608(Item_GObj* item_gobj);
+/* 2AE200 */ static void it_802AE200(Item_GObj* item_gobj);
 /* 2AE63C */ static void it_802AE63C(Item_GObj* item_gobj);
 /* 2AE7B8 */ static void it_802AE7B8(Item_GObj* item_gobj);
 /* 2AEBCC */ static bool itFoxblaster_UnkMotion8_Anim(HSD_GObj* item_gobj);
