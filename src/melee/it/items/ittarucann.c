@@ -1,5 +1,9 @@
 #include "ittarucann.h"
 
+#include "types.h"
+
+#include "baselib/forward.h"
+
 #include "cm/camera.h"
 #include "ef/efsync.h"
 #include "ft/chara/ftCommon/ftCo_Barrel.h"
@@ -16,8 +20,32 @@
 #include <baselib/jobj.h>
 #include <baselib/random.h>
 
-extern lbColl_80008D30_arg1 it_803B8610;
-extern Vec3 it_803B8634;
+const lbColl_80008D30_arg1 it_803B8610 = {
+    1, 1, 361, 0, 0, 180, 0, 1, 0,
+};
+const Vec3 it_803B8634 = { 0.0f, 1.0f, 0.0f };
+
+ItemStateTable it_803F63C0[] = {
+    { -1, itTarucann_UnkMotion0_Anim, itTarucann_UnkMotion0_Phys,
+      itTarucann_UnkMotion0_Coll },
+    { -1, itTarucann_UnkMotion1_Anim, itTarucann_UnkMotion1_Phys,
+      itTarucann_UnkMotion1_Coll },
+    { -1, itTarucann_UnkMotion2_Anim, itTarucann_UnkMotion2_Phys, NULL },
+    { 1, itTarucann_UnkMotion6_Anim, itTarucann_UnkMotion6_Phys,
+      itTarucann_UnkMotion6_Coll },
+    { 1, itTarucann_UnkMotion7_Anim,
+      (HSD_GObjEvent) itTarucann_UnkMotion7_Phys, itTarucann_UnkMotion7_Coll },
+    { 1, itTarucann_UnkMotion8_Anim, itTarucann_UnkMotion8_Phys,
+      itTarucann_UnkMotion8_Coll },
+    { 2, itTarucann_UnkMotion6_Anim, itTarucann_UnkMotion6_Phys,
+      itTarucann_UnkMotion6_Coll },
+    { 2, itTarucann_UnkMotion7_Anim,
+      (HSD_GObjEvent) itTarucann_UnkMotion7_Phys, itTarucann_UnkMotion7_Coll },
+    { 2, itTarucann_UnkMotion8_Anim, itTarucann_UnkMotion8_Phys,
+      itTarucann_UnkMotion8_Coll },
+    { 3, itTarucann_UnkMotion9_Anim, itTarucann_UnkMotion9_Phys,
+      itTarucann_UnkMotion9_Coll },
+};
 
 inline void inline_itTarucann_SetRotationZ(HSD_GObj* gobj)
 {
@@ -102,10 +130,21 @@ void it_3F14_Logic5_Destroyed(Item_GObj* gobj)
     }
 }
 
+static f32 fake1()
+{
+    return -1.0f;
+}
+
+static f32 fake2()
+{
+    return 1.3089969f;
+}
+
 void it_3F14_Logic5_Spawned(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itTaruCann_DatAttrs* da = ip->xC4_article_data->x4_specialAttributes;
+    float temp_var;
     float temp;
     ip->facing_dir = -1.0f;
     ip->xD5C = 0;
@@ -115,7 +154,7 @@ void it_3F14_Logic5_Spawned(Item_GObj* gobj)
     ip->xDD4_itemVar.tarucann.x0 = 0;
     /// @todo float regswap. same as in it_3F14_Logic2_Spawned
     temp = 0.34906584f * HSD_Randf();
-    ip->xDD4_itemVar.tarucann.x8 = temp + 1.3089969f;
+    ip->xDD4_itemVar.tarucann.x8 = (temp_var = 1.3089969f) + temp;
     ip->xDD4_itemVar.tarucann.xC = 0.0f;
     ip->xDD4_itemVar.tarucann.x10 = 0.0f;
     ip->xDD4_itemVar.tarucann.x14.x = 0.0f;
@@ -204,10 +243,9 @@ void it_802962E0(Item_GObj* gobj)
         {
             ip->facing_dir = -ip->facing_dir;
         }
-        var_f1 = ip->xDD4_itemVar.tarucann.x10;
-        if (var_f1 < 0.0f) {
-            var_f1 = -var_f1;
-        }
+        var_f1 = ip->xDD4_itemVar.tarucann.x10 < 0.0f
+                     ? -ip->xDD4_itemVar.tarucann.x10
+                     : ip->xDD4_itemVar.tarucann.x10;
         temp_f2 = da->xC;
         if (var_f1 > temp_f2) {
             ip->xDD4_itemVar.tarucann.x10 = temp_f2 * ip->facing_dir;
