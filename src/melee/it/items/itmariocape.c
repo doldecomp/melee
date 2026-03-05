@@ -9,6 +9,11 @@
 #include "it/it_2725.h"
 #include "it/item.h"
 
+ItemStateTable it_803F70F8[] = {
+    { 0, itMariocape_UnkMotion1_Anim, NULL, NULL },
+    { 1, itMariocape_UnkMotion1_Anim, NULL, NULL },
+};
+
 Item_GObj* it_802B2560(Fighter_GObj* parent_gobj, float facing_dir, Vec3* pos,
                        Fighter_Part part, ItemKind kind)
 {
@@ -33,6 +38,14 @@ Item_GObj* it_802B2560(Fighter_GObj* parent_gobj, float facing_dir, Vec3* pos,
         return gobj;
     }
     return NULL;
+}
+
+void itMarioCape_Logic41_Destroyed(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->owner != NULL) {
+        ftMr_SpecialS_Reset(ip->owner);
+    }
 }
 
 void it_802B2674(Item_GObj* gobj)
@@ -122,12 +135,4 @@ bool itMariocape_UnkMotion1_Anim(Item_GObj* gobj)
 void it_802B2870(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
-}
-
-void itMarioCape_Logic41_Destroyed(Item_GObj* gobj)
-{
-    Item* ip = GET_ITEM(gobj);
-    if (ip->owner != NULL) {
-        ftMr_SpecialS_Reset(ip->owner);
-    }
 }

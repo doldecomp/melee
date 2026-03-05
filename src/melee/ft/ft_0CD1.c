@@ -54,7 +54,8 @@ void ftCo_800CD278(Fighter_GObj* gobj)
     if (fp->mv.co.swing.x4 != 4) {
         ft_80084FA8(gobj);
     } else {
-        ft_80085030(gobj, p_ftCommonData->x420 * fp->co_attrs.gr_friction,
+        ft_80085030(gobj,
+                    p_ftCommonData->x420 * ((0, fp->co_attrs.gr_friction)),
                     fp->facing_dir);
     }
 }

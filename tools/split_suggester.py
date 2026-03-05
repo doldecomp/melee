@@ -880,6 +880,7 @@ if __name__ == "__main__":
         sys.exit(code)
     except Exception as err:
         import traceback
+
         print(traceback.format_exc())
         print(err, file=sys.stderr)
         sys.exit(4)

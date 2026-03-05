@@ -29,3 +29,6 @@ indent_style = tab
 
 [*.go]
 indent_style = tab
+
+[*.md]
+indent_style = unset

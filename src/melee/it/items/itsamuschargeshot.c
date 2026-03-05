@@ -25,8 +25,6 @@
 #include <math.h>
 #include <trigf.h>
 
-#include <math.h>
-
 bool it_802B5518(Item_GObj* gobj, CollData* cd)
 {
     Item* ip = GET_ITEM(gobj);
