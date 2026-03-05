@@ -1,5 +1,5 @@
-#ifndef MELEE_GM_17C0_H
-#define MELEE_GM_17C0_H
+#ifndef MELEE_gmregclear_H
+#define MELEE_gmregclear_H
 
 #include <placeholder.h>
 #include <platform.h>

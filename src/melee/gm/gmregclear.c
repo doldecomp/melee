@@ -1,4 +1,4 @@
-#include "gm_17C0.h"
+#include "gmregclear.h"
 
 #include "gm_unsplit.h"
 #include "platform.h"

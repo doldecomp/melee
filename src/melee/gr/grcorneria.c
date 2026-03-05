@@ -4,8 +4,8 @@
 
 #include "baselib/sislib.h"
 #include "cm/camera.h"
-#include "gm/gm_17C0.h"
 #include "gm/gm_1A45.h"
+#include "gm/gmregclear.h"
 #include "gr/granime.h"
 #include "gr/grdisplay.h"
 #include "gr/grlib.h"

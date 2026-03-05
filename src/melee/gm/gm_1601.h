@@ -17,11 +17,11 @@
 #include "sc/forward.h"
 
 #include <printf.h>
-#include <melee/gm/gm_17C0.h>
+#include <melee/gm/gmregclear.h>
 
 struct lbl_8046B488_t;
 
-#include <melee/gm/gm_17C0.h>
+#include <melee/gm/gmregclear.h>
 
 /* 1601C4 */ int gm_801601C4(s8);
 /* 160244 */ int gm_80160244(s8);
