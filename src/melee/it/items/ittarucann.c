@@ -204,10 +204,9 @@ void it_802962E0(Item_GObj* gobj)
         {
             ip->facing_dir = -ip->facing_dir;
         }
-        var_f1 = ip->xDD4_itemVar.tarucann.x10;
-        if (var_f1 < 0.0f) {
-            var_f1 = -var_f1;
-        }
+        var_f1 = ip->xDD4_itemVar.tarucann.x10 < 0.0f
+                     ? -ip->xDD4_itemVar.tarucann.x10
+                     : ip->xDD4_itemVar.tarucann.x10;
         temp_f2 = da->xC;
         if (var_f1 > temp_f2) {
             ip->xDD4_itemVar.tarucann.x10 = temp_f2 * ip->facing_dir;
