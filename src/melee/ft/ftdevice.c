@@ -68,7 +68,7 @@ void ftCo_800C06E8(Ground_GObj* gobj, int arg1, void* func)
             return;
         }
     }
-    OSReport("fighter chk device coll func num over!\n");
+    OSReport("fighter chk device wind func num over!\n");
     __assert("ftdevice.c", 0x49, "0");
 }
 
@@ -89,7 +89,7 @@ void ftCo_800C0764(Ground_GObj* arg0, u32 arg1, void* arg2)
         }
         ptr++;
     }
-    OSReport("fighter chk device coll func num over!\n");
+    OSReport("fighter chk device catch func num over!\n");
     __assert("ftdevice.c", 0x6FU, "0");
 }
 

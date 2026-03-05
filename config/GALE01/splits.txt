@@ -3863,7 +3863,7 @@ melee/it/items/it_2F28.c:
 	.data       start:0x803F9470 end:0x803F9480
 	.sdata2     start:0x804DD9E8 end:0x804DDA08
 
-melee/it/items/it_2F2B.c:
+melee/it/items/ityoshitongue.c:
 	.text       start:0x802F2BFC end:0x802F2D98
 	.data       start:0x803F9480 end:0x803F9490
 	.sdata2     start:0x804DDA08 end:0x804DDA10
@@ -3873,7 +3873,7 @@ melee/it/items/itkirbyyoshispecialn.c:
 	.data       start:0x803F9490 end:0x803F94A0
 	.sdata2     start:0x804DDA10 end:0x804DDA18
 
-melee/it/items/it_27CF.c:
+melee/it/items/ityoshiegglay.c:
 	.text       start:0x802F2F34 end:0x802F3394
 	.data       start:0x803F94A0 end:0x803F94D0
 	.sdata2     start:0x804DDA18 end:0x804DDA30
