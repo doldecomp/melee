@@ -351,7 +351,56 @@ void ftKb_FxSpecialAirNStart_Anim(HSD_GObj* gobj)
     }
 }
 
-/// #ftKb_FxSpecialAirNLoop_Anim
+inline FtMotionId ftKbGetAirEndMotionId(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    FtMotionId msid = ftKb_MS_FxSpecialAirNEnd;
+    switch (fp->fv.kb.hat.kind) {
+    case FTKIND_FALCO:
+        msid = ftKb_MS_FcSpecialAirNEnd;
+        break;
+    case FTKIND_FOX:
+        msid = ftKb_MS_FxSpecialAirNEnd;
+        break;
+    }
+    return msid;
+}
+
+void ftFx_SpecialNLoop_Anim(HSD_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    HSD_GObj* temp;
+    PAD_STACK(8);
+
+    it_802ADDD0(fp->fv.kb.xB0, 1);
+    if (fp->cmd_vars[3] == 1 && fp->fv.kb.xB0 != NULL) {
+        fp->cmd_vars[3] = 0;
+        it_802AE538(fp->fv.kb.xB0);
+    }
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        if (fp->mv.fx.SpecialN.isBlasterLoop == true) {
+            fp->x21EC = ftKb_SpecialNFx_OnChangeAction;
+            Fighter_ChangeMotionState(
+                temp = gobj, ftKbGetAirLoopMotionId(gobj),
+                (Ft_MF_SkipAttackCount | Ft_MF_SkipModel | Ft_MF_KeepGfx), 0,
+                1, 0, NULL);
+            ftKb_SpecialNFx_SetCall(gobj);
+            fp->accessory4_cb = ftKb_SpecialNFx_CreateBlasterShot;
+            fp->mv.fx.SpecialN.isBlasterLoop = false;
+            it_802ADDD0(fp->fv.kb.xB0, 1);
+        } else {
+            Fighter_ChangeMotionState(gobj, ftKbGetAirEndMotionId(gobj),
+                                      (Ft_MF_SkipModel | Ft_MF_KeepGfx), 0, 1,
+                                      0, NULL);
+            ftKb_SpecialNFx_SetCall(gobj);
+            temp = fp->fv.kb.xB0;
+            fp->cmd_vars[1] = 1;
+            it_802ADDD0(temp, 1);
+        }
+        ftKb_SpecialNFx_SetCall(gobj);
+    }
+    ftKb_SpecialNFx_800FDF30(gobj);
+}
 
 void ftKb_FxSpecialAirNEnd_Anim(Fighter_GObj* gobj)
 {
