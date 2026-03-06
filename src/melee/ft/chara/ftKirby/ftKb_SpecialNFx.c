@@ -3,6 +3,8 @@
 
 #include <placeholder.h>
 
+#include "baselib/forward.h"
+
 #include "ft/chara/ftCommon/ftCo_FallSpecial.h"
 #include "ft/chara/ftCommon/ftpickupitem.h"
 #include "ft/fighter.h"
@@ -45,7 +47,7 @@ void ftKb_SpecialNFx_800FDC70(Fighter_GObj* gobj, Vec3* vec)
     vec->x = vec->y = vec->z = 0.0f;
 }
 
-void fn_800FDCE0(Fighter_GObj* gobj)
+void ftKb_SpecialNFx_CreateBlasterShot(Fighter_GObj* gobj)
 {
     FORCE_PAD_STACK_8;
 
@@ -245,7 +247,54 @@ void ftKb_FxSpecialNStart_Anim(HSD_GObj* gobj)
     }
 }
 
-/// #ftKb_FxSpecialNLoop_Anim
+inline FtMotionId ftKbGetEndMotionId(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    FtMotionId msid = ftKb_MS_FxSpecialNEnd;
+    switch (fp->fv.kb.hat.kind) {
+    case FTKIND_FALCO:
+        msid = ftKb_MS_FcSpecialNEnd;
+        break;
+    case FTKIND_FOX:
+        msid = ftKb_MS_FxSpecialNEnd;
+        break;
+    }
+    return msid;
+}
+
+void ftKb_FxSpecialNLoop_Anim(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    HSD_GObj* temp;
+
+    it_802ADDD0(fp->fv.kb.xB0, 1);
+    if (fp->cmd_vars[3] == 1 && fp->fv.kb.xB0 != NULL) {
+        fp->cmd_vars[3] = 0;
+        it_802AE538(fp->fv.kb.xB0);
+    }
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        if (fp->mv.fx.SpecialN.isBlasterLoop == true) {
+            fp->x21EC = ftKb_SpecialNFx_CreateBlasterShot;
+            Fighter_ChangeMotionState(
+                temp = gobj, ftKbGetLoopMotionId(gobj),
+                (Ft_MF_SkipAttackCount | Ft_MF_SkipModel | Ft_MF_KeepGfx), 0,
+                1, 0, NULL);
+            fp->accessory4_cb = fn_800FE0E0;
+            fp->mv.fx.SpecialN.isBlasterLoop = false;
+            it_802ADDD0(fp->fv.kb.xB0, 1);
+        } else {
+            HSD_GObj* temp;
+            Fighter_ChangeMotionState(gobj, ftKbGetEndMotionId(gobj),
+                                      (Ft_MF_SkipModel | Ft_MF_KeepGfx), 0, 1,
+                                      0, NULL);
+            temp = fp->fv.kb.xB0;
+            fp->cmd_vars[1] = 1;
+            it_802ADDD0(temp, 1);
+        }
+        ftKb_SpecialNFx_SetCall(gobj);
+    }
+    ftKb_SpecialNFx_800FDF30(gobj);
+}
 
 void ftKb_FxSpecialNEnd_Anim(Fighter_GObj* gobj)
 {
