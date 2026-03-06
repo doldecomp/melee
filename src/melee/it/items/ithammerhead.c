@@ -63,6 +63,20 @@ void itHammerHead_Logic40_Thrown(Item_GObj* gobj)
 }
 
 /// #itHammerhead_UnkMotion2_Anim
+bool itHammerhead_UnkMotion2_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+
+    ip->xD44_lifeTimer--;
+    if (ip->xD44_lifeTimer <= 0.0f) {
+        return true;
+    }
+
+    if (ip->xD44_lifeTimer <= it_804D6D28->x34) {
+        it_802728C8(gobj);
+    }
+    return false;
+}
 
 void itHammerhead_UnkMotion2_Phys(Item_GObj* gobj)
 {
