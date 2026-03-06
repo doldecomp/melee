@@ -20,7 +20,8 @@
 
 #include "it/items/itfoxblaster.h"
 #include "it/items/itnesspkflush.h"
-#include "melee/lb/lbrefract.h"
+#include "lb/lb_00B0.h"
+#include "lb/lbrefract.h"
 
 #include <common_structs.h>
 #include <stddef.h>
@@ -29,6 +30,21 @@
 #include <MSL/math.h>
 
 /// #ftKb_SpecialNFx_800FDC70
+void ftKb_SpecialNFx_800FDC70(Fighter_GObj* gobj, Vec3* vec)
+{
+    Vec3 pos1;
+    if (gobj != NULL) {
+        Fighter* fp = GET_FIGHTER(gobj);
+        if (fp != NULL) {
+            pos1.x = 0.0f;
+            pos1.y = 1.45f;
+            pos1.z = 0.016f;
+            lb_8000B1CC(fp->parts[FtPart_R3rdNa].joint, &pos1, vec);
+            return;
+        }
+    }
+    vec->x = vec->y = vec->z = 0.0f;
+}
 
 void fn_800FDCE0(Fighter_GObj* gobj)
 {
