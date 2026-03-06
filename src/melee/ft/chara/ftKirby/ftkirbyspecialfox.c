@@ -3,6 +3,8 @@
 
 #include <placeholder.h>
 
+#include "baselib/debug.h"
+
 #include "baselib/forward.h"
 
 #include "ft/chara/ftCommon/ftCo_FallSpecial.h"
@@ -14,6 +16,7 @@
 #include "ft/ft_081B.h"
 #include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
+#include "ft/ftparts.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Fall.h"
@@ -195,6 +198,13 @@ void ftKb_SpecialNFx_800FDEE0(Fighter_GObj* gobj)
     }
 }
 
+inline void ftKb_SpecialNFx_SetCall(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    fp->death2_cb = ftKb_Init_800EE74C;
+    fp->take_dmg_cb = ftKb_Init_800EE7B8;
+}
+
 /// #ftKb_SpecialNFx_800FDF30
 
 void ftKb_SpecialNFx_CreateBlasterShot(Fighter_GObj* gobj)
@@ -204,13 +214,63 @@ void ftKb_SpecialNFx_CreateBlasterShot(Fighter_GObj* gobj)
 
 /// #ftKb_SpecialNFx_800FE100
 
-/// #ftKb_SpecialNFx_800FE240
-
-inline void ftKb_SpecialNFx_SetCall(HSD_GObj* gobj)
+inline FtMotionId ftKbGetAirStartMotionId(HSD_GObj* gobj)
 {
-    Fighter* fp = fp = GET_FIGHTER(gobj);
-    fp->death2_cb = ftKb_Init_800EE74C;
-    fp->take_dmg_cb = ftKb_Init_800EE7B8;
+    Fighter* fp = GET_FIGHTER(gobj);
+    FtMotionId msid = ftKb_MS_FxSpecialAirNStart;
+    switch (fp->fv.kb.hat.kind) {
+    case FTKIND_FALCO:
+        msid = ftKb_MS_FcSpecialAirNStart;
+        break;
+    case FTKIND_FOX:
+        msid = ftKb_MS_FxSpecialAirNStart;
+        break;
+    }
+    return msid;
+}
+
+inline u32 ftKbGetBlasterId(Fighter* fp, ftKb_DatAttrs* da)
+{
+    u32 blaster_id;
+    switch (fp->fv.kb.hat.kind) {
+    case FTKIND_FOX:
+        blaster_id = da->specialn_fx_blaster_item_id;
+        break;
+    case FTKIND_FALCO:
+        blaster_id = da->specialn_fc_blaster_item_id;
+        break;
+    }
+    return blaster_id;
+}
+
+void ftKb_SpecialNFx_800FE240(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftKb_DatAttrs* da = fp->dat_attrs;
+    HSD_GObj* blasterGObj;
+
+    Fighter_ChangeMotionState(gobj, ftKbGetAirStartMotionId(gobj), 0.0f, 0.0f,
+                              1.0f, 0.0f, NULL);
+
+    fp->cmd_vars[3] = 0;
+    fp->cmd_vars[2] = 0;
+    fp->cmd_vars[1] = 0;
+    fp->cmd_vars[0] = 0;
+
+    ftAnim_8006EBA4(gobj);
+
+    fp->mv.fx.SpecialN.isBlasterLoop = false;
+    blasterGObj = it_802AE8A8(fp->facing_dir, gobj, &fp->cur_pos,
+                              FtPart_R3rdNa, ftKbGetBlasterId(fp, da));
+    fp->fv.kb.xB0 = blasterGObj;
+
+    if (blasterGObj != NULL) {
+        ftKb_SpecialNFx_SetCall(gobj);
+        return;
+    }
+
+    OSReport("ftToSpecialNFox::Caution!!!\n");
+    HSD_ASSERT(465, 0);
 }
 
 inline FtMotionId ftKbGetLoopMotionId(HSD_GObj* gobj)

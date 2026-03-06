@@ -1195,7 +1195,7 @@ melee/ft/chara/ftKirby/ftKb_SpecialNPk.c:
 	.text       start:0x800FA064 end:0x800FDC70
 	.sdata2     start:0x804D93E4 end:0x804D944C
 
-melee/ft/chara/ftKirby/ftKb_SpecialNFx.c:
+melee/ft/chara/ftKirby/ftkirbyspecialfox.c:
 	.text       start:0x800FDC70 end:0x800FEDD0
 	.sdata2     start:0x804D944C end:0x804D9474
 
