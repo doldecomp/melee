@@ -29,7 +29,6 @@
 #include <baselib/random.h>
 #include <MSL/math.h>
 
-/// #ftKb_SpecialNFx_800FDC70
 void ftKb_SpecialNFx_800FDC70(Fighter_GObj* gobj, Vec3* vec)
 {
     Vec3 pos1;
@@ -68,7 +67,6 @@ bool ftKb_SpecialNFx_800FDD14(Fighter_GObj* gobj)
     return true;
 }
 
-/// @todo Use enum values once ftKb_MS enum is fixed (#ftCo_MS_Count mismatch)
 ftFx_SpecialNIndex ftKb_SpecialNFx_800FDD4C(Fighter_GObj* gobj)
 {
     s32 msid = 9;
@@ -80,17 +78,17 @@ ftFx_SpecialNIndex ftKb_SpecialNFx_800FDD4C(Fighter_GObj* gobj)
             case FTKIND_FOX: {
                 s32 motion_id = fp->motion_id;
                 switch (motion_id) {
-                case 0x1A7: /* ftKb_MS_FxSpecialNStart */
-                case 0x1A8: /* ftKb_MS_FxSpecialNLoop */
-                case 0x1A9: /* ftKb_MS_FxSpecialNEnd */
-                case 0x1AA: /* ftKb_MS_FxSpecialAirNStart */
-                case 0x1AB: /* ftKb_MS_FxSpecialAirNLoop */
-                case 0x1AC: /* ftKb_MS_FxSpecialAirNEnd */
+                case ftKb_MS_FxSpecialNStart:
+                case ftKb_MS_FxSpecialNLoop:
+                case ftKb_MS_FxSpecialNEnd:
+                case ftKb_MS_FxSpecialAirNStart:
+                case ftKb_MS_FxSpecialAirNLoop:
+                case ftKb_MS_FxSpecialAirNEnd:
                     msid = motion_id - 0x1A7;
                     break;
-                case 0xDC: /* ftCo_MS_ThrowB */
-                case 0xDD: /* ftCo_MS_ThrowHi */
-                case 0xDE: /* ftCo_MS_ThrowLw */
+                case ftCo_MS_ThrowB:
+                case ftCo_MS_ThrowHi:
+                case ftCo_MS_ThrowLw:
                     msid = motion_id - 0xD6;
                     break;
                 }
@@ -99,17 +97,17 @@ ftFx_SpecialNIndex ftKb_SpecialNFx_800FDD4C(Fighter_GObj* gobj)
             case FTKIND_FALCO: {
                 s32 motion_id = fp->motion_id;
                 switch (motion_id) {
-                case 0x208: /* ftKb_MS_FcSpecialNStart */
-                case 0x209: /* ftKb_MS_FcSpecialNLoop */
-                case 0x20A: /* ftKb_MS_FcSpecialNEnd */
-                case 0x20B: /* ftKb_MS_FcSpecialAirNStart */
-                case 0x20C: /* ftKb_MS_FcSpecialAirNLoop */
-                case 0x20D: /* ftKb_MS_FcSpecialAirNEnd */
+                case ftKb_MS_FcSpecialNStart:
+                case ftKb_MS_FcSpecialNLoop:
+                case ftKb_MS_FcSpecialNEnd:
+                case ftKb_MS_FcSpecialAirNStart:
+                case ftKb_MS_FcSpecialAirNLoop:
+                case ftKb_MS_FcSpecialAirNEnd:
                     msid = motion_id - 0x208;
                     break;
-                case 0xDC: /* ftCo_MS_ThrowB */
-                case 0xDD: /* ftCo_MS_ThrowHi */
-                case 0xDE: /* ftCo_MS_ThrowLw */
+                case ftCo_MS_ThrowB:
+                case ftCo_MS_ThrowHi:
+                case ftCo_MS_ThrowLw:
                     msid = motion_id - 0xD6;
                     break;
                 }
@@ -121,7 +119,55 @@ ftFx_SpecialNIndex ftKb_SpecialNFx_800FDD4C(Fighter_GObj* gobj)
     return msid;
 }
 
-/// #ftKb_SpecialNFx_800FDDF4
+bool ftKb_SpecialNFx_800FDDF4(Fighter_GObj* gobj)
+{
+    if (gobj != NULL) {
+        Fighter* fp = GET_FIGHTER(gobj);
+        if (fp != NULL) {
+            switch (fp->fv.kb.hat.kind) {
+            case FTKIND_FOX: {
+                s32 motion_id = fp->motion_id;
+                switch (motion_id) {
+                case ftKb_MS_FxSpecialNStart:
+                case ftKb_MS_FxSpecialNLoop:
+                case ftKb_MS_FxSpecialNEnd:
+                case ftKb_MS_FxSpecialAirNStart:
+                case ftKb_MS_FxSpecialAirNLoop:
+                case ftKb_MS_FxSpecialAirNEnd:
+                case ftCo_MS_ThrowB:
+                case ftCo_MS_ThrowHi:
+                case ftCo_MS_ThrowLw:
+                    if (fp->x2070.x2071_b6) {
+                        return true;
+                    }
+                    return false;
+                }
+                break;
+            }
+            case FTKIND_FALCO: {
+                s32 motion_id = fp->motion_id;
+                switch (motion_id) {
+                case ftKb_MS_FcSpecialNStart:
+                case ftKb_MS_FcSpecialNLoop:
+                case ftKb_MS_FcSpecialNEnd:
+                case ftKb_MS_FcSpecialAirNStart:
+                case ftKb_MS_FcSpecialAirNLoop:
+                case ftKb_MS_FcSpecialAirNEnd:
+                case ftCo_MS_ThrowB:
+                case ftCo_MS_ThrowHi:
+                case ftCo_MS_ThrowLw:
+                    if (fp->x2070.x2071_b6) {
+                        return true;
+                    }
+                    return false;
+                }
+                break;
+            }
+            }
+        }
+    }
+    return true;
+}
 
 void ftKb_SpecialNFx_800FDEB4(Fighter_GObj* gobj)
 {
