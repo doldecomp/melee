@@ -1,5 +1,7 @@
 #include "ithammerhead.h"
 
+#include "common_structs.h"
+
 #include <placeholder.h>
 #include <platform.h>
 
@@ -20,7 +22,15 @@ void itHammerHead_Logic40_Spawned(Item_GObj* gobj)
     it_80275158(gobj, attrs->x4);
 }
 
-/// #it_80299D7C
+void it_80299D7C(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->ground_or_air != GA_Air) {
+        it_802762BC(ip);
+    }
+    it_8026B390(gobj);
+    Item_80268E5C(gobj, 0, ITEM_UNK_0x1 | ITEM_DROP_UPDATE);
+}
 
 void itHammerHead_Logic40_PickedUp(Item_GObj* gobj)
 {
