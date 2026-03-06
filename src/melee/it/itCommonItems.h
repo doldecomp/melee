@@ -458,7 +458,7 @@ typedef struct itLikelike_ItemVars {
 } itLikelike_ItemVars;
 
 typedef struct {
-    f32 x0;
+    f32 initial_velocity;
     f32 x4;
 } itHammerheadAttributes;
 
@@ -1224,6 +1224,11 @@ typedef struct itSScopeAttributes {
     /* +C */ char pad_xC[0x28];
     /* +34 */ Vec3 x34;
 } itSScopeAttributes;
+
+typedef struct itScopeBeam_ItemVars {
+    int x0;
+    float x4;
+} itScopeBeam_ItemVars;
 
 typedef struct itsonansAttributes {
     f32 x0;

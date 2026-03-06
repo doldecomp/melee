@@ -1007,7 +1007,7 @@ struct ItemLogicTable it_803F14C4[ARRAY_SIZE(it_803F1418)] = {
         NULL,
         itHammerHead_Logic40_PickedUp,
         itHammerHead_Logic40_Dropped,
-        it_3F14_Logic40_Thrown,
+        itHammerHead_Logic40_Thrown,
         itHammerHead_Logic40_DmgDealt,
         itHammerHead_Logic40_DmgReceived,
         NULL,
