@@ -13,7 +13,30 @@
 #include "it/it_2725.h"
 #include "it/item.h"
 
-/// #it_8029B0C8
+void itEvYoshiEgg_Spawn(Vec3* pos)
+{
+    SpawnItem spawn;
+    Item_GObj* gobj;
+    Item* it;
+    itEvYoshiEgg_ItemVars* attrs;
+
+    spawn.kind = It_Kind_EvYoshiEgg;
+    spawn.prev_pos = *pos;
+    spawn.pos = *pos;
+    spawn.facing_dir = 1.0f;
+    spawn.x3C_damage = 0;
+    spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;
+    spawn.x0_parent_gobj = NULL;
+    spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
+    spawn.x44_flag.b0 = 1;
+    spawn.x40 = 0;
+    gobj = Item_80268B18(&spawn);
+    if (gobj != NULL) {
+        it = GET_ITEM(gobj);
+        it_8029B268(gobj);
+        it->xDD4_itemVar.evyoshiegg.xDD4 = 0;
+    }
+}
 
 void itEvYoshiEgg_Logic42_Destroyed(Item_GObj* gobj)
 {

@@ -7,7 +7,7 @@
 
 #include "it/items/types.h"
 
-/* 29B0C8 */ UNK_RET it_8029B0C8(UNK_PARAMS);
+/* 29B0C8 */ void itEvYoshiEgg_Spawn(Vec3*);
 /* 29B188 */ void itEvYoshiEgg_Logic42_Destroyed(Item_GObj*);
 /* 29B1AC */ void itEvYoshiEgg_Logic42_Spawned(Item_GObj* gobj);
 /* 29B1D8 */ void it_8029B1D8(Item_GObj*);
