@@ -1147,7 +1147,7 @@ config.libs = [
             Object(Matching, "melee/it/items/ithammerhead.c"),
             Object(NonMatching, "melee/it/items/itlipstickspore.c"),
             Object(Matching, "melee/it/items/itfflowerflame.c"),
-            Object(NonMatching, "melee/it/items/itevyoshiegg.c"),
+            Object(Matching, "melee/it/items/itevyoshiegg.c"),
             # Fighter-related items
             Object(Matching, "melee/it/items/itmariofireball.c"),
             Object(NonMatching, "melee/it/items/itkirbycutterbeam.c"),

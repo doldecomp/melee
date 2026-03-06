@@ -17,6 +17,24 @@
 #include "it/itCommonItems.h"
 #include "it/item.h"
 
+#include "it/items/forward.h"
+
+#include <string.h>
+
+ItemStateTable it_803F6728[] = {
+    { -1, itEvyoshiegg_UnkMotion0_Anim, itEvyoshiegg_UnkMotion0_Phys,
+      itEvyoshiegg_UnkMotion0_Coll },
+    { -1, itEvyoshiegg_UnkMotion3_Anim, itEvyoshiegg_UnkMotion1_Phys,
+      itEvyoshiegg_UnkMotion1_Coll },
+    { -1, itEvyoshiegg_UnkMotion2_Anim, itEvyoshiegg_UnkMotion2_Phys, NULL },
+    { 0, itEvyoshiegg_UnkMotion3_Anim, itEvyoshiegg_UnkMotion3_Phys,
+      itEvyoshiegg_UnkMotion3_Coll },
+    { -1, itEvyoshiegg_UnkMotion4_Anim, itEvyoshiegg_UnkMotion4_Phys,
+      itEvyoshiegg_UnkMotion4_Coll },
+    { -1, itEvyoshiegg_UnkMotion5_Anim, itEvyoshiegg_UnkMotion5_Phys,
+      itEvyoshiegg_UnkMotion5_Coll },
+};
+
 void itEvYoshiEgg_Spawn(Vec3* pos)
 {
     SpawnItem spawn;
