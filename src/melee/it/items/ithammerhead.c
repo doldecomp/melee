@@ -2,8 +2,9 @@
 
 #include "common_structs.h"
 
-#include <placeholder.h>
 #include <platform.h>
+
+#include "db/db.h"
 
 #include "it/forward.h"
 
@@ -13,7 +14,36 @@
 #include "it/it_2725.h"
 #include "it/item.h"
 
-/// #it_80299C48
+void it_80299C48(Item_GObj* parent_gobj, Vec3* pos, Vec3* velocity,
+                 f32 facing_dir)
+{
+    SpawnItem spawn;
+    Item_GObj* gobj;
+    Item* it;
+    itHammerheadAttributes* attrs;
+
+    spawn.kind = It_Kind_Hammer_Head;
+    spawn.prev_pos = *pos;
+    spawn.prev_pos.z = 0.0f;
+    it_8026BB68(parent_gobj, &spawn.pos);
+    spawn.facing_dir = facing_dir;
+    spawn.x3C_damage = 0;
+    spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;
+    spawn.x0_parent_gobj = parent_gobj;
+    spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
+    spawn.x44_flag.b0 = 1;
+    spawn.x40 = 0;
+    gobj = Item_80268B18(&spawn);
+    if (gobj != NULL) {
+        it = GET_ITEM(gobj);
+        attrs = it->xC4_article_data->x4_specialAttributes;
+        it_80299D7C(gobj);
+        it->facing_dir = facing_dir;
+        it->x40_vel.x = velocity->x * attrs->initial_velocity * it->facing_dir;
+        it->x40_vel.y = velocity->y * attrs->initial_velocity + 0.5f;
+        db_80225DD8(gobj, parent_gobj);
+    }
+}
 
 void itHammerHead_Logic40_Spawned(Item_GObj* gobj)
 {

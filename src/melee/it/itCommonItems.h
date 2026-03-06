@@ -458,7 +458,7 @@ typedef struct itLikelike_ItemVars {
 } itLikelike_ItemVars;
 
 typedef struct {
-    f32 x0;
+    f32 initial_velocity;
     f32 x4;
 } itHammerheadAttributes;
 
