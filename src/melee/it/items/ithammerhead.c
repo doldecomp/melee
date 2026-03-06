@@ -14,6 +14,35 @@
 #include "it/it_2725.h"
 #include "it/item.h"
 
+#include "it/items/forward.h"
+
+ItemStateTable it_803F6640[] = {
+    {
+        -1,
+        itHammerhead_UnkMotion2_Anim,
+        itHammerhead_UnkMotion2_Phys,
+        itHammerhead_UnkMotion2_Coll,
+    },
+    {
+        -1,
+        itHammerhead_UnkMotion1_Anim,
+        itHammerhead_UnkMotion1_Phys,
+        NULL,
+    },
+    {
+        0,
+        itHammerhead_UnkMotion2_Anim,
+        itHammerhead_UnkMotion2_Phys,
+        itHammerhead_UnkMotion2_Coll,
+    },
+    {
+        -1,
+        itHammerhead_UnkMotion3_Anim,
+        itHammerhead_UnkMotion3_Phys,
+        itHammerhead_UnkMotion3_Coll,
+    },
+};
+
 void it_80299C48(Item_GObj* parent_gobj, Vec3* pos, Vec3* velocity,
                  f32 facing_dir)
 {
