@@ -51,7 +51,7 @@ struct ftKb_FighterVars {
     /* fp+22D0   */ UNK_T xA4;
     /* fp+22D4   */ int xA8;
     /* fp+22D8   */ UNK_T xAC;
-    /* fp+22DC   */ u32 xB0;
+    /* fp+22DC   */ HSD_GObj* xB0; ///< Fox/Falco blaster item
     /* fp+22E0   */ int xB4;
     /* fp+22E4   */ Item_GObj* xB8; ///< Sheik needle item
     /* fp+22E8   */ int xBC;

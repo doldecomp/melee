@@ -204,7 +204,46 @@ void fn_800FE0E0(Fighter_GObj* gobj)
 
 /// #ftKb_SpecialNFx_800FE240
 
-/// #ftKb_FxSpecialNStart_Anim
+inline void ftKb_SpecialNFx_SetCall(HSD_GObj* gobj)
+{
+    Fighter* fp = fp = GET_FIGHTER(gobj);
+    fp->death2_cb = ftKb_Init_800EE74C;
+    fp->take_dmg_cb = ftKb_Init_800EE7B8;
+}
+
+inline FtMotionId ftKbGetLoopMotionId(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    FtMotionId msid = ftKb_MS_FxSpecialNLoop;
+    switch (fp->fv.kb.hat.kind) {
+    case FTKIND_FALCO:
+        msid = ftKb_MS_FcSpecialNLoop;
+        break;
+    case FTKIND_FOX:
+        msid = ftKb_MS_FxSpecialNLoop;
+        break;
+    }
+    return msid;
+}
+
+void ftKb_FxSpecialNStart_Anim(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    it_802ADDD0(fp->fv.kb.xB0, 1);
+    if (fp->cmd_vars[3] == 1 && fp->fv.kb.xB0 != NULL) {
+        fp->cmd_vars[3] = 0;
+        it_802AE538(fp->fv.kb.xB0);
+    }
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        Fighter_ChangeMotionState(gobj, ftKbGetLoopMotionId(gobj),
+                                  (Ft_MF_SkipModel | Ft_MF_KeepGfx), 0, 1, 0,
+                                  NULL);
+        ftKb_SpecialNFx_SetCall(gobj);
+        fp->accessory4_cb = fn_800FE0E0;
+        it_802ADDD0(fp->fv.kb.xB0, 1);
+    }
+}
 
 /// #ftKb_FxSpecialNLoop_Anim
 
