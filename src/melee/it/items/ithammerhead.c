@@ -49,7 +49,17 @@ void itHammerhead_UnkMotion1_Phys(Item_GObj* gobj) {}
 
 void itHammerHead_Logic40_Dropped(Item_GObj* gobj)
 {
-    it_3F14_Logic40_Thrown(gobj);
+    itHammerHead_Logic40_Thrown(gobj);
+}
+
+void itHammerHead_Logic40_Thrown(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->ground_or_air != GA_Air) {
+        it_802762BC(ip);
+    }
+    it_8026B390(gobj);
+    Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE | ITEM_DROP_UPDATE);
 }
 
 /// #itHammerhead_UnkMotion2_Anim
@@ -94,7 +104,7 @@ void itHammerhead_UnkMotion3_Phys(Item_GObj* gobj) {}
 
 bool itHammerhead_UnkMotion3_Coll(Item_GObj* gobj)
 {
-    it_8026D62C(gobj, it_3F14_Logic40_Thrown);
+    it_8026D62C(gobj, itHammerHead_Logic40_Thrown);
     return false;
 }
 
