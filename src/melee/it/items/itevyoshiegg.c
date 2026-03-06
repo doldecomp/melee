@@ -4,6 +4,9 @@
 #include <platform.h>
 
 #include "gm/gm_1BA8.h"
+
+#include "it/forward.h"
+
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
@@ -20,8 +23,7 @@ void itEvYoshiEgg_Logic42_Destroyed(Item_GObj* gobj)
 void itEvYoshiEgg_Logic42_Spawned(Item_GObj* gobj)
 {
     Item* it = GET_ITEM((HSD_GObj*) gobj);
-    // This should be EvYoshiEgg
-    it->xDD4_itemVar.bombhei.xDD4 = 0;
+    it->xDD4_itemVar.evyoshiegg.xDD4 = 0;
     it_8029B268(gobj);
 }
 
@@ -109,6 +111,20 @@ bool itEvyoshiegg_UnkMotion3_Coll(Item_GObj* gobj)
 }
 
 /// #itEvyoshiegg_UnkMotion5_Anim
+bool itEvyoshiegg_UnkMotion5_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->xDD4_itemVar.evyoshiegg.xDD8 == 40) {
+        gm_801BEB68(1);
+    }
+    ip->xDD4_itemVar.evyoshiegg.xDD8 -= 1;
+
+    if (ip->xDD4_itemVar.evyoshiegg.xDD8 > 0) {
+        return false;
+    }
+
+    return true;
+}
 
 void itEvyoshiegg_UnkMotion5_Phys(Item_GObj* gobj) {}
 

@@ -549,6 +549,7 @@ struct Item {
         itDosei_ItemVars dosei;
         itDrMarioPill_ItemVars drmariopill;
         itEgg_ItemVars egg;
+        itEvYoshiEgg_ItemVars evyoshiegg;
         itFFlower_ItemVars fflower;
         itFFlowerFlame_ItemVars fflowerflame;
         itFlipper_ItemVars flipper;

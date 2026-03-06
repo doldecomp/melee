@@ -110,6 +110,11 @@ typedef struct itBox_ItemVars {
     /* +10 */ f32 rot_vel_y; ///< Rotation velocity around Y axis (wobble)
 } itBox_ItemVars;
 
+typedef struct itEvYoshiEgg_ItemVars {
+    /* +0 */ s32 xDD4;
+    /* +4 */ s32 xDD8;
+} itEvYoshiEgg_ItemVars;
+
 typedef struct itWstar_ItemVars {
     f32 xDD4;
     f32 xDD8;
