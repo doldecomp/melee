@@ -3,6 +3,9 @@
 #include <placeholder.h>
 #include <platform.h>
 
+#include "baselib/gobj.h"
+#include "baselib/jobj.h"
+#include "ef/efsync.h"
 #include "gm/gm_1BA8.h"
 
 #include "it/forward.h"
@@ -11,6 +14,7 @@
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/itCommonItems.h"
 #include "it/item.h"
 
 void itEvYoshiEgg_Spawn(Vec3* pos)
@@ -185,7 +189,41 @@ bool it_3F14_Logic42_Reflected(Item_GObj* gobj)
     return itEvyoshiegg_BounceOff(gobj);
 }
 
-/// #it_3F14_Logic42_DmgReceived
+static inline void dmgReceived(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    HSD_JObjSetFlagsAll(GET_JOBJ(gobj), JOBJ_HIDDEN);
+    it_802756D0(gobj);
+    ip->x40_vel.x = 0.0f;
+    ip->x40_vel.y = 0.0f;
+    ip->xDD4_itemVar.evyoshiegg.xDD4 = 1;
+    ip->xDD4_itemVar.evyoshiegg.xDD8 = 60;
+    it_8026B3A8(gobj);
+    Item_80268E5C(gobj, 5, ITEM_ANIM_UPDATE);
+}
+
+bool itEvYoshiEgg_Logic42_DmgReceived(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itEvYoshiEgg_DatAttrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    f32 val;
+    f32* unused;
+
+    if (ip->xDD4_itemVar.evyoshiegg.xDD4 != 0) {
+        return false;
+    }
+
+    if (ip->xC9C < attrs->x0) {
+        return false;
+    }
+
+    val = 1.5f;
+    efSync_Spawn(1231, gobj, &ip->pos, &val);
+    efSync_Spawn(1231, gobj, &ip->pos, &val);
+    Item_8026AE84(ip, 244, 0x7F, 0x40);
+    dmgReceived(gobj);
+    return false;
+}
 
 void itEvYoshiEgg_Logic42_EnteredAir(Item_GObj* gobj)
 {

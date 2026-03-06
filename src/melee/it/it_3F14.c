@@ -826,7 +826,7 @@
 ///         itEvYoshiEgg_Logic42_Dropped,
 ///         itEvYoshiEgg_Logic42_Thrown,
 ///         it_3F14_Logic42_DmgDealt,
-///         it_3F14_Logic42_DmgReceived,
+///         itEvYoshiEgg_Logic42_DmgReceived,
 ///         itEvYoshiEgg_Logic42_EnteredAir,
 ///         it_3F14_Logic42_Reflected,
 ///         it_3F14_Logic42_Clanked,
