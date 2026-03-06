@@ -62,7 +62,6 @@ void itHammerHead_Logic40_Thrown(Item_GObj* gobj)
     Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE | ITEM_DROP_UPDATE);
 }
 
-/// #itHammerhead_UnkMotion2_Anim
 bool itHammerhead_UnkMotion2_Anim(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
@@ -112,7 +111,20 @@ void it_80299FB4(Item_GObj* gobj)
     Item_80268E5C(gobj, 3, 1);
 }
 
-/// #itHammerhead_UnkMotion3_Anim
+bool itHammerhead_UnkMotion3_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+
+    ip->xD44_lifeTimer--;
+    if (ip->xD44_lifeTimer <= 0.0f) {
+        return true;
+    }
+
+    if (ip->xD44_lifeTimer <= it_804D6D28->x34) {
+        it_802728C8(gobj);
+    }
+    return false;
+}
 
 void itHammerhead_UnkMotion3_Phys(Item_GObj* gobj) {}
 
