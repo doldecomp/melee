@@ -476,7 +476,7 @@ inline FtMotionId ftKbGetAirEndMotionId(HSD_GObj* gobj)
     return msid;
 }
 
-void ftFx_SpecialNLoop_Anim(HSD_GObj* gobj)
+void ftKb_FxSpecialAirNLoop_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     HSD_GObj* temp;
