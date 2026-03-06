@@ -1225,6 +1225,11 @@ typedef struct itSScopeAttributes {
     /* +34 */ Vec3 x34;
 } itSScopeAttributes;
 
+typedef struct itScopeBeam_ItemVars {
+    int x0;
+    float x4;
+} itScopeBeam_ItemVars;
+
 typedef struct itsonansAttributes {
     f32 x0;
     f32 x4;
