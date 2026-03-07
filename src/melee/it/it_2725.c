@@ -5305,7 +5305,7 @@ void it_802732E4(Item* item, s32 arg1)
     }
 }
 
-void it_80273318(Item_GObj* item_gobj, HSD_Joint* joint, s32 arg2)
+void it_80273318(Item_GObj* item_gobj, HSD_Joint* joint)
 {
     Item* item = GET_ITEM(item_gobj);
     item->xC8_joint = joint;

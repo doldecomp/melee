@@ -1,5 +1,6 @@
 #include "it/items/itfoods.h"
 
+#include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
@@ -22,7 +23,7 @@
 /* 28FE14 */ void itFoods_UnkMotion3_Phys(Item_GObj* arg0);
 /* 28FE44 */ bool itFoods_UnkMotion3_Coll(Item_GObj* arg0);
 
-ItemStateTable it_803F83F0[] = {
+ItemStateTable it_803F5DB0[] = {
     { -1, itFoods_UnkMotion0_Anim, itFoods_UnkMotion0_Phys,
       itFoods_UnkMotion0_Coll },
     { -1, itFoods_UnkMotion1_Anim, itFoods_UnkMotion1_Phys,
@@ -73,9 +74,9 @@ HSD_GObj* it_8028FAF4(Item_GObj* arg0, Vec3* arg1)
     return gobj;
 }
 
-static s32 getRandMax(Item* ip)
+inline u32 getRandMax(Article* article)
 {
-    itFoodsAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+    itFoodsAttributes* attr = article->x4_specialAttributes;
     return attr->x0;
 }
 
@@ -83,12 +84,13 @@ void itFoods_Logic18_Spawned(HSD_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itFoodsAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
-    s32 rand = HSD_Randi(getRandMax(ip));
-    PAD_STACK(8);
+    s32 rand = HSD_Randi(getRandMax(ip->xC4_article_data));
+    s32 temp;
 
     ip->xDD4_itemVar.foods.heal_amount = attr[rand].x8;
     ip->xDD4_itemVar.foods.x0 = rand;
-    it_80273318(gobj, attr[rand].x4, rand);
+    temp = rand;
+    it_80273318(gobj, attr[temp].x4);
     it_8028FC5C(gobj);
 }
 
