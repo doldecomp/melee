@@ -29,6 +29,7 @@
 /* 1D93D8 */ static void grZebes_801D93D8(Ground_GObj* arg);
 /* 1D93DC */ void grZebes_801D93DC(Ground_GObj* gobj);
 /* 1D9408 */ static bool grZebes_801D9408(Ground_GObj* arg);
+/* 1D9410 */ static void grZebes_801D9410(Ground_GObj* arg);
 /* 1D94EC */ static void grZebes_801D94EC(Ground_GObj* arg);
 /* 1D94F0 */ static void fn_801D94F0(Ground_GObj* gobj);
 /* 1D95B0 */ static bool grZebes_801D95B0(Ground_GObj* arg);
@@ -44,7 +45,9 @@
 /* 1DA9F0 */ static void fn_801DA9F0(UNK_T arg0, Ground* gp, float y,
                                      float* x);
 /* 1DB3CC */ static void grZebes_801DB3CC(s32 arg);
+/* 1DC260 */ static void grZebes_801DC260(void);
 /* 1DC744 */ static void grZebes_801DC744(s32, s32, f32);
+/* 1DC9DC */ static void grZebes_801DC9DC(s32 arg);
 /* 1DCCB8 */ static DynamicsDesc* grZebes_801DCCB8(enum_t arg);
 /* 1DCCC0 */ static bool grZebes_801DCCC0(Vec3* arg, int arg0, HSD_JObj* jobj);
 
