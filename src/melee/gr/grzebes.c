@@ -20,6 +20,7 @@
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 #include <baselib/jobj.h>
+#include <baselib/lobj.h>
 #include <baselib/random.h>
 
 /* 1D84A0 */ static void grZebes_801D84A0(bool arg);
@@ -559,7 +560,41 @@ void grZebes_801DA0C4(f32 level)
     }
 }
 
-/// #grZebes_801DA254
+void grZebes_801DA254(Ground_GObj* gobj, f32 level)
+{
+    Ground* gp = GET_GROUND(gobj);
+    HSD_LObj* lobj = (HSD_LObj*) gp->gv.zebes4.xDC;
+
+    if (lobj == NULL) {
+        HSD_GObj* lgobj = HSD_GObj_804D7824[4];
+        if (lgobj != NULL) {
+            lobj = (HSD_LObj*) lgobj->hsd_obj;
+            while (lobj != NULL) {
+                if (lobj->flags & 1) {
+                    break;
+                }
+                lobj = HSD_LObjGetNext(lobj);
+            }
+        }
+        gp->gv.zebes4.xDC = (u32) lobj;
+    }
+
+    if (lobj != NULL) {
+        GXColor c1, c2;
+        f32 t;
+        GXColor result;
+
+        *(s32*) &c1 = 0xE6FF96FF;
+        *(s32*) &c2 = 0x1E1E00FF;
+
+        t = (level - grZe_804D6990->x90) / (grZe_804D6990->x8C - grZe_804D6990->x90);
+        result.r = (u8) (t * (f32) (c1.r - c2.r) + (f32) c2.r);
+        result.g = (u8) (t * (f32) (c1.g - c2.g) + (f32) c2.g);
+        result.b = (u8) (t * (f32) (c1.b - c2.b) + (f32) c2.b);
+        result.a = 0xFF;
+        HSD_LObjSetColor(lobj, result);
+    }
+}
 
 void grZebes_801DA3E8(void)
 {
