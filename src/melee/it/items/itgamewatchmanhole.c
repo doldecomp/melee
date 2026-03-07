@@ -12,11 +12,6 @@
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 
-HSD_GObj* it_802C65E4(Item_GObj* gobj, Vec* vec, enum Fighter_Part arg2,
-                      float arg3);
-void it_802C6764(Item_GObj* gobj);
-void it_802C6784(Item_GObj* gobj);
-void it_802C6718(Item_GObj* gobj);
 bool itGamewatchmanhole_UnkMotion0_Anim(Item_GObj* gobj);
 
 ItemStateTable it_803F78D8[] = { { 0, itGamewatchmanhole_UnkMotion0_Anim, 0,

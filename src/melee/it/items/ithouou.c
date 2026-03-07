@@ -153,7 +153,20 @@ bool itHouou_UnkMotion4_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itHouou_UnkMotion4_Phys
+void itHouou_UnkMotion4_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itHououAttr* attr = ip->xC4_article_data->x4_specialAttributes;
+
+    it_8027A344(gobj);
+
+    ip->xDD4_itemVar.pokemon.xE44 += attr->x1C;
+    ip->x40_vel.y += ip->xDD4_itemVar.pokemon.xE44;
+
+    if (ip->pos.y < (*(f32*)((u8*)ip + 0xE3C)) - 1.0f) {
+        ip->x40_vel.y = 0.0f;
+    }
+}
 
 bool itHouou_UnkMotion4_Coll(Item_GObj* gobj)
 {
@@ -224,6 +237,8 @@ void it_2725_Logic42_Spawned(Item_GObj* item_gobj)
 
     item = GET_ITEM((HSD_GObj*) item_gobj);
     attr = item->xC4_article_data->x4_specialAttributes;
+    if ((item_gobj && item_gobj) && item_gobj) {
+    }
     item->xD44_lifeTimer = attr->timer;
     it_80274740(item_gobj);
     it_802D2EF0(item_gobj);

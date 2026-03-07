@@ -1,4 +1,4 @@
-#include "gm_17C0.h"
+#include "gmregclear.h"
 
 #include "gm_unsplit.h"
 #include "platform.h"
@@ -1056,7 +1056,15 @@ Fighter_GObj* gm_80180AF4(void)
 
 /// #gm_80180BA0
 
-/// #fn_80180C14
+void fn_80180C14(HSD_GObj* gobj)
+{
+    HSD_JObj* jobj = gobj->hsd_obj;
+
+    if ((lbl_80472E48.pad_0[0] & 3) != 0) {
+        HSD_JObjClearFlagsAll(jobj, 0x10);
+        HSD_JObjAnimAll(jobj);
+    }
+}
 
 /// #fn_80180C60
 

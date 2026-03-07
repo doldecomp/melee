@@ -14,5 +14,6 @@
 /* 31DD14 */ void fn_8031DD14(HSD_GObj* gobj);
 /* 31DE58 */ void un_8031DE58_OnEnter(void* arg);
 /* 31E0F0 */ void vi_8031E0F0_OnFrame(void);
+/* 4D6F84 */ extern u8 un_804D6F84[8];
 
 #endif

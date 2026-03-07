@@ -17,11 +17,11 @@
 #include "sc/forward.h"
 
 #include <printf.h>
-#include <melee/gm/gm_17C0.h>
+#include <melee/gm/gmregclear.h>
 
 struct lbl_8046B488_t;
 
-#include <melee/gm/gm_17C0.h>
+#include <melee/gm/gmregclear.h>
 
 /* 1601C4 */ int gm_801601C4(s8);
 /* 160244 */ int gm_80160244(s8);
@@ -128,7 +128,7 @@ struct lbl_8046B488_t;
 /* 1641E4 */ void gm_801641E4(u8 stage, u8 enable);
 /* 164250 */ long gm_80164250(u16);
 /* 1642A0 */ bool fn_801642A0(void);
-/* 164330 */ bool gm_80164330(u8);
+/* 164330 */ bool gm_80164330(s32);
 /* 164430 */ bool gm_80164430(u16);
 /* 164504 */ int gm_80164504(u16);
 /* 164600 */ bool gm_80164600(void);
@@ -223,10 +223,10 @@ gm_80167BC8(struct VsModeData*); // inits VsModeData from game rules
 /* 169530 */ void* gm_80169530(void);
 /* 169540 */ void* gm_80169540(void);
 /* 169550 */ void fn_80169550(int slot);
-/* 169574 */ void fn_80169574(ssize_t size, void* buf);
+/* 169574 */ void fn_80169574(ssize_t size, s8* buf);
 /* 1695BC */ long fn_801695BC(u8, s32, s32, u8*, u8*);
-/* 1697FC */ void fn_801697FC(signed char, signed char, signed char, signed char,
-                            signed char*);
+/* 1697FC */ void fn_801697FC(signed char, signed char, signed char,
+                              signed char, signed char*);
 /* 16989C */ void fn_8016989C(unsigned char*, long, long, u8*, u8*);
 /* 169900 */ void fn_80169900(unsigned char, struct lbl_8046B488_t*,
                               signed char*, signed char*);

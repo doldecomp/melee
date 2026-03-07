@@ -350,9 +350,9 @@ struct ftCommonData {
     /* +4A4 */ float x4A4;
     /* +4A8 */ float x4A8;
     /* +4AC */ float x4AC;
-    /* +4B0 */ float x4B0;
-    /* +4B4 */ int x4B4;
-    /* +4B8 */ float x4B8;
+    /* +4B0 */ float sdi_min_stick_mag;
+    /* +4B4 */ int sdi_stick_window;
+    /* +4B8 */ float sdi_pos_scale;
     /* +4BC */ float x4BC;
     /* +4C0 */ float x4C0;
     /* +4C4 */ int x4C4;
@@ -1596,7 +1596,7 @@ struct Fighter {
 
     /* fp+221A:0 */ u8 x221A_b0 : 1;
     /* fp+221A:1 */ u8 x221A_b1 : 1;
-    /* fp+221A:2 */ u8 x221A_b2 : 1;
+    /* fp+221A:2 */ u8 allow_sdi : 1;
     /* fp+221A:3 */ u8 x221A_b3 : 1;
     /* fp+221A:4 */ u8 fall_fast : 1;
     /* fp+221A:5 */ u8 x221A_b5 : 1;

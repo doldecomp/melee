@@ -40,12 +40,12 @@
 /* 212CD4 */ UNK_RET grPura_80212CD4(HSD_GObj*);
 /* 212EF4 */ UNK_RET grPura_80212EF4(HSD_GObj*);
 /* 212FC0 */ UNK_RET grPura_80212FC0(HSD_GObj*);
-/* 213030 */ void grPura_80213030(HSD_JObj* arg0, Vec3* arg1, Vec3* arg2);
 /* 2130C0 */ DynamicsDesc* grPura_802130C0(enum_t);
 /* 2130C8 */ bool grPura_802130C8(Vec3* a, int, HSD_JObj*);
 /* 2130D0 */ UNK_RET fn_802130D0(HSD_GObj*, int);
 /* 213128 */ UNK_RET grPura_80213128(UNK_PARAMS);
 /* 213224 */ UNK_RET grPura_80213224(HSD_DObj*);
 /* 213250 */ UNK_RET grPura_80213250(HSD_JObj*);
+/* 3E6C0C */ extern u16 grPu_803E6C0C[266];
 
 #endif

@@ -17,20 +17,9 @@
 #include <melee/it/item.h>
 #include <melee/lb/lbrefract.h>
 
-/* 2ADDD0 */ static void it_802ADDD0(Item_GObj* item_gobj, s32 visibility);
-/* 2ADEF0 */ static void it_802ADEF0(HSD_GObj* item_gobj);
-/* 2ADF10 */ static void it_802ADF10(HSD_GObj* item_gobj);
-/* 2AE1D0 */ static void it_802AE1D0(Item_GObj* item_gobj);
-/* 2AE200 */ void it_802AE200(Item_GObj* item_gobj);
-/* 2AE538 */ static void it_802AE538(Item_GObj* item_gobj);
-/* 2AE608 */ static void it_802AE608(Item_GObj* item_gobj);
+/* 2AE200 */ static void it_802AE200(Item_GObj* item_gobj);
 /* 2AE63C */ static void it_802AE63C(Item_GObj* item_gobj);
 /* 2AE7B8 */ static void it_802AE7B8(Item_GObj* item_gobj);
-/* 2AE8A8 */ static Item_GObj* it_802AE8A8(f32 facing_dir,
-                                           Fighter_GObj* fighter_gobj,
-                                           Vec3* arg2, Fighter_Part ft_part,
-                                           ItemKind it_kind);
-/* 2AEAB4 */ static void it_802AEAB4(Item_GObj* item_gobj);
 /* 2AEBCC */ static bool itFoxblaster_UnkMotion8_Anim(HSD_GObj* item_gobj);
 /* 2AEED4 */ static void itFoxblaster_UnkMotion8_Phys(HSD_GObj* item_gobj);
 /* 2AEF08 */ static bool itFoxblaster_UnkMotion8_Coll(HSD_GObj* item_gobj);
@@ -150,6 +139,9 @@ void it_802ADF10(HSD_GObj* item_gobj)
 {
     Vec3 ft_cur_pos;
     Vec3 ft_hold_joint_pos;
+    // TODO: probably a fake-improvement? idiomatic way is
+    // with the for loop, but can't get it to 100% match yet
+    int new_var2;
     Vec3 it_hold_joint_pos;
     Item* item = GET_ITEM(item_gobj);
 
@@ -188,6 +180,7 @@ void it_802ADF10(HSD_GObj* item_gobj)
         case It_Kind_Kirby_FalcoBlaster:
             ftKb_SpecialNFx_800FDC00(item->xDD4_itemVar.foxblaster.owner,
                                      &ft_hold_joint_pos);
+            new_var2 = 0;
             item->xDD4_itemVar.foxblaster.xE14.x =
                 ft_hold_joint_pos.x - ft_cur_pos.x;
             item->xDD4_itemVar.foxblaster.xE14.y =
@@ -200,7 +193,7 @@ void it_802ADF10(HSD_GObj* item_gobj)
             item->xDD4_itemVar.foxblaster.angle =
                 atan2f(ft_hold_joint_pos.y - it_hold_joint_pos.y,
                        ft_hold_joint_pos.x - it_hold_joint_pos.x);
-            item->xDD4_itemVar.foxblaster.xDFC = 0;
+            item->xDD4_itemVar.foxblaster.xDFC = new_var2;
 
             item->xDD4_itemVar.foxblaster.xDE4 =
                 (s32) efSync_Spawn(1196, item_gobj, &ft_hold_joint_pos,
@@ -273,7 +266,7 @@ void it_802ADF10(HSD_GObj* item_gobj)
 
         item = GET_ITEM(item_gobj);
         item->xDD4_itemVar.foxblaster.xDE4 = 0;
-        item->xDD4_itemVar.foxblaster.xDFC = 0;
+        item->xDD4_itemVar.foxblaster.xDFC = new_var2;
         item->xDD4_itemVar.foxblaster.angle =
             item->xDD4_itemVar.foxblaster.xE14.x =
                 item->xDD4_itemVar.foxblaster.xE14.y =

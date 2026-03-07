@@ -621,14 +621,14 @@ void ftCo_80092F2C(HSD_GObj* gobj, bool arg1)
 void ftCo_80093240(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if (fp->x221A_b2 && fp->ground_or_air == GA_Ground) {
+    if (fp->allow_sdi && fp->ground_or_air == GA_Ground) {
         if ((fp->input.lstick.x < 0
                  ? -fp->input.lstick.x
-                 : fp->input.lstick.x) >= p_ftCommonData->x4B0 &&
-            fp->x670_timer_lstick_tilt_x < p_ftCommonData->x4B4)
+                 : fp->input.lstick.x) >= p_ftCommonData->sdi_min_stick_mag &&
+            fp->x670_timer_lstick_tilt_x < p_ftCommonData->sdi_stick_window)
         {
             float scl = p_ftCommonData->x4C0 *
-                        (fp->input.lstick.x * p_ftCommonData->x4B8);
+                        (fp->input.lstick.x * p_ftCommonData->sdi_pos_scale);
             fp->cur_pos.x += fp->coll_data.floor.normal.y * scl;
             fp->cur_pos.y += -fp->coll_data.floor.normal.x * scl;
             fp->x670_timer_lstick_tilt_x = 254;
@@ -642,7 +642,7 @@ void ftCo_800932DC(Fighter_GObj* gobj)
     if (fp->ground_or_air == GA_Ground) {
         if ((fp->input.lstick.x < 0
                  ? -fp->input.lstick.x
-                 : fp->input.lstick.x) >= p_ftCommonData->x4B0)
+                 : fp->input.lstick.x) >= p_ftCommonData->sdi_min_stick_mag)
         {
             float scl = p_ftCommonData->x4C0 *
                         (fp->input.lstick.x * p_ftCommonData->x4BC);
@@ -681,7 +681,7 @@ void ftCo_GuardSetOff_Phys(Fighter_GObj* gobj)
 void ftCo_GuardSetOff_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if (!(fp->x221A_b2)) {
+    if (!(fp->allow_sdi)) {
         ft_800845B4(gobj);
     } else {
         ft_80084104(gobj);

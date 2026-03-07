@@ -25,6 +25,7 @@
 #include "ftCommon/ftCo_CaptureCut.h"
 #include "ftCommon/ftCo_ItemThrow.h"
 #include "ftCommon/ftCo_Throw.h"
+#include "it/items/itsamusgrapple.h"
 #include "it/items/itsscope.h"
 #include "it/items/itlinkhookshot.h"
 #include "it/items/itsamusgrapple.h"
@@ -1405,7 +1406,6 @@ void fn_800D9C64(Fighter_GObj* gobj)
     }
 }
 
-/// #ftCo_800D9C98
 void ftCo_800D9C98(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -1414,53 +1414,15 @@ void ftCo_800D9C98(Fighter_GObj* gobj)
         it_802B7B84(fp->fv.ss.x223C);
         fp->fv.ss.x223C = NULL;
     }
+
     fp->death2_cb = NULL;
     fp->take_dmg_2_cb = NULL;
     fp->take_dmg_cb = NULL;
 }
 
-void fn_800D9CE8(Fighter_GObj* arg0)
-{
-    NOT_IMPLEMENTED;
-}
+/// #fn_800D9CE8
 
-void ftCo_CatchPull_Anim(Fighter_GObj* gobj)
-{
-    Fighter* fp = GET_FIGHTER(gobj);
-    bool advance_state = false;
-    PAD_STACK(8);
-
-    switch (fp->kind) {
-    case FTKIND_LINK:
-    case FTKIND_CLINK:
-        if (fp->fv.lk.xC == NULL) {
-            advance_state = true;
-            break;
-        }
-        if (GET_ITEM(fp->fv.lk.xC)->xDD4_itemVar.linkhookshot.x14 != 0) {
-            advance_state = true;
-        }
-        break;
-    case FTKIND_SAMUS:
-        if (fp->fv.ss.x223C == NULL) {
-            advance_state = true;
-            break;
-        }
-        if (GET_ITEM(fp->fv.ss.x223C)->xDD4_itemVar.samusgrapple.x14 != 0) {
-            advance_state = true;
-        }
-        break;
-    default:
-        if (!ftAnim_IsFramesRemaining(gobj) || ftCheckThrowB3(fp)) {
-            advance_state = true;
-        }
-        break;
-    }
-
-    if (advance_state) {
-        fn_800DA1D8(gobj);
-    }
-}
+/// #ftCo_CatchPull_Anim
 
 void ftCo_CatchPull_IASA(Fighter_GObj* gobj) {}
 
@@ -1484,15 +1446,15 @@ void fn_800DA004(Fighter_GObj* gobj)
 }
 
 
-
 void fn_800DA190(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
+    s32 state = *(s32*) ((u8*) fp + 0x4);
 
-    switch (fp->kind) {
-    case FTKIND_LINK:
-    case FTKIND_SAMUS:
-    case FTKIND_CLINK:
+    switch (state) {
+    case 6:
+    case 13:
+    case 20:
         break;
     default:
         fn_800DA054(gobj);
@@ -2019,7 +1981,6 @@ void fn_800DB8A4(Fighter_GObj* gobj)
 
 void ftCo_CaptureWaitHi_Anim(Fighter_GObj* gobj)
 {
-    u8 _[8];
     Fighter* fp;
     FighterOverlay* fp_ovl;
     f32 dec;
@@ -2220,7 +2181,14 @@ void fn_800DC014(Fighter_GObj* gobj)
     }
 }
 
-/// #fn_800DC044
+bool fn_800DC044(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (fp->input.lstick.y >= p_ftCommonData->tap_jump_threshold) {
+        return true;
+    }
+    return false;
+}
 
 /// #fn_800DC070
 

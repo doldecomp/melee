@@ -1,9 +1,11 @@
 #include "itunknown.h"
 
+#include "baselib/random.h"
 #include "ef/eflib.h"
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/itCommonItems.h"
 #include "it/item.h"
 
 /// #it_802CE710
@@ -33,6 +35,33 @@ bool itUnknown_UnkMotion0_Coll(Item_GObj* gobj)
 /// #it_802CE8D0
 
 /// #itUnknown_UnkMotion1_Anim
+
+bool itUnknown_UnkMotion1_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itUnknownAttributes* attr;
+    s32 temp;
+    s32 unused[2];
+
+    temp = ip->xDD4_itemVar.unknown.x64 - 1;
+    ip->xDD4_itemVar.unknown.x64 = temp;
+
+    if (temp < 0) {
+        it_802CED54(gobj);
+
+        temp = ip->xDD4_itemVar.unknown.x68 - 1;
+        ip->xDD4_itemVar.unknown.x68 = temp;
+
+        if (temp == 0) {
+            return true;
+        }
+
+        attr = ip->xC4_article_data->x4_specialAttributes;
+        ip->xDD4_itemVar.unknown.x64 = attr->x20 + HSD_Randi(attr->x1C);
+    }
+
+    return false;
+}
 
 void itUnknown_UnkMotion1_Phys(Item_GObj* gobj) {}
 

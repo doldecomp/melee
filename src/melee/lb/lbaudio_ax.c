@@ -1002,7 +1002,21 @@ ret_true:
 
 /// #fn_800256BC
 
-/// #fn_800259A0
+bool fn_800259A0(HSD_GObj* gobj)
+{
+    lbAudioAx_UserData* ud;
+
+    if (gobj != NULL) {
+        ud = gobj->user_data;
+        if (ud != NULL) {
+            if (ud->x44 == 0) {
+                ud->x44 = 1;
+                fn_800251EC(gobj);
+            }
+        }
+    }
+    return false;
+}
 
 #pragma dont_inline on
 bool fn_800259EC(HSD_GObj* gobj)

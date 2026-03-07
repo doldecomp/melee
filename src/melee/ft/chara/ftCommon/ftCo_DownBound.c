@@ -180,17 +180,13 @@ void ftCo_80097AF4(Fighter_GObj* gobj)
 void ftCo_80097D40(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-#if SOLUTION == 0
-    ftCo_80097D88(gobj);
-#else
     u8 _[8] = { 0 };
     if (fp->x2228_b2) {
         ftCo_80097AF4(gobj);
     } else {
         ftCo_8009794C(gobj);
     }
-#endif
-    M2C_FIELD(fp, s8*, 0x2344) = 0;
+    fp->mv.co.downspot.x4 = 0;
 }
 #undef SOLUTION
 
@@ -258,13 +254,14 @@ void ftCo_80097E8C(Fighter_GObj* gobj)
 void ftCo_80097F38(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    Fighter_ChangeMotionState(
-        gobj,
-        fp->motion_id == ftCo_MS_DownDamageU ? ftCo_MS_DownWaitU
-                                             : ftCo_MS_DownWaitD,
-        Ft_MF_SkipModel | Ft_MF_SkipMatAnim | Ft_MF_SkipNametagVis |
-            Ft_MF_KeepColAnimPartHitStatus,
-        0, 1, 0, NULL);
+    int new_var;
+    new_var = fp->motion_id == ftCo_MS_DownDamageU ? ftCo_MS_DownWaitU
+                                                   : ftCo_MS_DownWaitD;
+    Fighter_ChangeMotionState(gobj, new_var,
+                              Ft_MF_SkipModel | Ft_MF_SkipMatAnim |
+                                  Ft_MF_SkipNametagVis |
+                                  Ft_MF_KeepColAnimPartHitStatus,
+                              0, 1, 0, NULL);
     ftAnim_8006EBA4(gobj);
     ftCommon_8007E2F4(fp, 1);
 }

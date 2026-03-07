@@ -12,7 +12,7 @@
 
 /* 26C47C */ void it_8026C47C(struct it_8026C47C_arg0_t*);
 /* 26C530 */ s32 it_8026C530(s32, HSD_ObjAllocUnk6*, s32, s32);
-/* 26C65C */ u8 it_8026C65C(HSD_ObjAllocUnk6*);
+/* 26C65C */ int it_8026C65C(HSD_ObjAllocUnk6*);
 /* 26C704 */ bool it_8026C704(void);
 /* 26C75C */ ItemKind it_8026C75C(HSD_ObjAllocUnk6*);
 /* 26C88C */ void fn_8026C88C(HSD_GObj*);
@@ -60,7 +60,7 @@
 /* 26E7E0 */ void it_8026E7E0(Item_GObj*, HSD_GObjEvent);
 /* 26E8C4 */ void it_8026E8C4(Item_GObj*, HSD_GObjEvent, HSD_GObjEvent);
 /* 26E9A4 */ bool it_8026E9A4(HSD_GObj*, Vec3*, Vec3*, Vec3*);
-/* 26EA20 */ bool it_8026EA20(HSD_GObj*, Vec3*, Vec3*, Vec3*, UNK_T*,
+/* 26EA20 */ bool it_8026EA20(HSD_GObj*, Vec3*, Vec3*, Vec3*, int*,
                               u32* flags_out);
 /* 26EA9C */ bool it_8026EA9C(HSD_GObj*, Vec3*, Vec3*, Vec3*, int*,
                               u32* flags_out, s32);
@@ -79,4 +79,8 @@
 /* 26F8B4 */ bool it_8026F8B4(Item_GObj*, Vec3*, Vec3*, bool);
 /* 26F9A0 */ void it_8026F9A0(void);
 
+bool it_8026E15C_inline1(Item_GObj* gobj);
+bool it_8026E15C_inline2(Item_GObj* gobj);
+bool it_8026E248_inline(Item_GObj* gobj);
+bool it_8026E32C_inline(Item_GObj* gobj);
 #endif

@@ -25,7 +25,7 @@ extern HSD_DObjInfo hsdDObj;
 lbRefract_WriteTexCoordIA4(lbRefract_CallbackData* data, s32 row, u32 col,
                            u32 arg3, u8 arg4, u8 intensity, u8 alpha);
 /* 021F70 */ static UNK_RET fn_80021F70(UNK_PARAMS);
-/* 021FB4 */ static UNK_RET fn_80021FB4(UNK_PARAMS);
+/* 021FB4 */ static void fn_80021FB4(lbRefract_CallbackData* data, s32 row, u32 col, u8 arg3, u8 arg4, u8 arg5, u8 arg6);
 /* 021FF8 */ static UNK_RET fn_80021FF8(UNK_PARAMS);
 /* 02206C */ static UNK_RET fn_8002206C(UNK_PARAMS);
 /// @brief Display DObj then reset TEV/indirect stages for refraction cleanup.
@@ -57,42 +57,58 @@ static void lbRefract_WriteTexCoordIA4(lbRefract_CallbackData* data, s32 row,
                                        u32 col, u32 arg3, u8 arg4,
                                        u8 intensity, u8 alpha)
 {
-    struct {
-        u8 alpha;
-        u8 intensity;
-    }* pixel;
-    s32 row_stride = data->row_stride;
-    s32 tile_col = col >> 2;
-    s32 tile_base =
-        data->buffer + tile_col * row_stride + ((row << 3) & 0xFFFFFFE0);
-    s32 pixel_offset = ((row & 3) + ((col << 2) & 0xC)) << 1;
+    u8* base;
+    s32 offset;
 
-    pixel = (void*) (tile_base + pixel_offset);
-    pixel->alpha = alpha;
-    pixel->intensity = intensity;
+    (void) arg3;
+    (void) arg4;
+
+    base = (u8*) data->buffer + ((col >> 2) * data->row_stride) +
+           ((row * 8) & 0xFFFFFFE0);
+    row &= 3;
+    offset = (row + ((col * 4) & 0xC)) * 2;
+    base[offset] = alpha;
+    base += offset;
+    base[1] = intensity;
+}
+
+static void fn_80021FB4(lbRefract_CallbackData* data, s32 row, u32 col, u8 arg6, u8 arg7, u8 arg8, u8 arg9)
+{
+    u8* base;
+    s32 offset;
+
+    base = (u8*) data->buffer + ((col >> 2) * data->row_stride) + ((row << 4) & 0xFFFFFFC0);
+    row &= 3;
+    offset = (row + ((col << 2) & 0xC)) * 2;
+    base[offset] = arg9;
+    base += offset;
+    base[1] = arg6;
+    base[0x20] = arg7;
+    base[0x21] = arg8;
 }
 
 static void lbRefract_ReadTexCoordRGBA8(lbRefract_CallbackData* data, s32 row,
                                         u32 col, u32* out_r, u32* out_g,
                                         u8* out_b, u8* out_a)
 {
-    s32 base_offset;
-    s32 pixel_offset;
+    s32 offset;
+    u8* base;
 
-    base_offset = data->buffer + (((col >> 2U) * data->row_stride) +
-                                  ((row * 0x10) & 0xFFFFFFC0));
-    pixel_offset = ((row & 3) + ((col * 4) & 0xC)) * 2;
+    base = (u8*) data->buffer + ((col >> 2) * data->row_stride) +
+           ((row << 4) & 0xFFFFFFC0);
+    offset = ((row & 3) + ((col & 3) << 2)) << 1;
+
     if (out_a != NULL) {
-        *out_a = base_offset + pixel_offset;
+        *(u32*)out_a = base[offset];
     }
     if (out_r != NULL) {
-        *out_r = base_offset + pixel_offset + 0x01;
+        *(u32*)out_r = (base + offset)[1];
     }
     if (out_g != NULL) {
-        *out_g = base_offset + pixel_offset + 0x20;
+        *(u32*)out_g = (base + offset)[0x20];
     }
     if (out_b != NULL) {
-        *out_b = (s32) (base_offset + pixel_offset + 0x21);
+        *(u32*)out_b = (base + offset)[0x21];
     }
 }
 

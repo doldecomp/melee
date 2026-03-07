@@ -5,10 +5,27 @@
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
+
+#include "it/items/forward.h"
+
 #include "it/items/itlipstickspore.h"
 
 #define GET_ATTRS(ip)                                                         \
     ((itLipstickAttributes*) (ip)->xC4_article_data->x4_specialAttributes)
+
+ItemStateTable it_803F6310[] = {
+    { 0, itLipstick_UnkMotion0_Anim, itLipstick_UnkMotion0_Phys,
+      itLipstick_UnkMotion0_Coll },
+    { 0, itLipstick_UnkMotion4_Anim, itLipstick_UnkMotion1_Phys,
+      itLipstick_UnkMotion1_Coll },
+    { 0, itLipstick_UnkMotion2_Anim, itLipstick_UnkMotion2_Phys, NULL },
+    { 1, itLipstick_UnkMotion4_Anim, itLipstick_UnkMotion4_Phys,
+      itLipstick_UnkMotion3_Coll },
+    { 1, itLipstick_UnkMotion4_Anim, itLipstick_UnkMotion4_Phys,
+      itLipstick_UnkMotion4_Coll },
+    { 0, itLipstick_UnkMotion5_Anim, itLipstick_UnkMotion5_Phys,
+      itLipstick_UnkMotion5_Coll },
+};
 
 void itLipstick_Logic23_Spawned(Item_GObj* gobj)
 {

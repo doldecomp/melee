@@ -246,7 +246,26 @@ bool it_802D246C(Item_GObj* gobj)
     return false;
 }
 
-/// #it_802D24A0
+void it_802D24A0(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    f32* attrs = ip->xC4_article_data->x4_specialAttributes;
+    f32 multiplier = 1.0f;
+
+    switch (ip->kind) {
+    case 0xC8:
+        multiplier = attrs[1];
+        break;
+    case 0xC9:
+        multiplier = attrs[2];
+        break;
+    case 0xCA:
+        multiplier = attrs[3];
+        break;
+    }
+
+    ip->x40_vel.z *= multiplier;
+}
 
 bool it_802D24FC(Item_GObj* gobj)
 {

@@ -1,5 +1,5 @@
-#ifndef MELEE_GM_17C0_H
-#define MELEE_GM_17C0_H
+#ifndef MELEE_gmregclear_H
+#define MELEE_gmregclear_H
 
 #include <placeholder.h>
 #include <platform.h>
@@ -94,7 +94,7 @@
 /* 180AF4 */ Fighter_GObj* gm_80180AF4(void);
 /* 180B18 */ UNK_RET gm_80180B18(UNK_PARAMS);
 /* 180BA0 */ UNK_RET gm_80180BA0(UNK_PARAMS);
-/* 180C14 */ UNK_RET fn_80180C14(UNK_PARAMS);
+/* 180C14 */ void fn_80180C14(HSD_GObj* gobj);
 /* 180C60 */ UNK_RET fn_80180C60(UNK_PARAMS);
 /* 181598 */ UNK_RET fn_80181598(UNK_PARAMS);
 /* 181708 */ UNK_RET fn_80181708(UNK_PARAMS);

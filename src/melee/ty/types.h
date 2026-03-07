@@ -89,7 +89,7 @@ typedef struct TyListState {
     /* 0x29E */ u8 x29E;
     /* 0x29F */ u8 x29F;
     /* 0x2A0 */ u8 pad_2A0;
-    /* 0x2A1 */ u8 x2A1;
+    /* 0x2A1 */ s8 x2A1;
     /* 0x2A2 */ u8 pad_2A2[2];
     /* 0x2A4 */ float x2A4;
     /* 0x2A8 */ float x2A8;

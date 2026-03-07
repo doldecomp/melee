@@ -566,49 +566,27 @@ bool ftCo_Damage_CheckAirMotion(Fighter* fp)
     }
 }
 
-#define SOLUTION 1
 void ftCo_Damage_OnEveryHitlag(Fighter_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
-    if (fp->x221A_b2) {
-        float lstick_x = fp->input.lstick.x;
-        float lstick_y = fp->input.lstick.y;
-        float cd_x4B0 = p_ftCommonData->x4B0;
-        if (lstick_x * lstick_x + lstick_y * lstick_y == cd_x4B0 * cd_x4B0) {
-            s32 cd_x4B4 = p_ftCommonData->x4B4;
-#if SOLUTION == 0
-            if (((M2C_FIELD(fp, u8*, 0x670) < cd_x4B4) ||
-                 M2C_FIELD(fp, u8*, 0x671) < cd_x4B4))
-#else
-            if (((fp->x670_timer_lstick_tilt_x < cd_x4B4) ||
-                 fp->x671_timer_lstick_tilt_y < cd_x4B4))
-#endif
-            {
-                float cd_x4B8 = p_ftCommonData->x4B8;
-                float scaled_lstick_x = lstick_x * cd_x4B8;
-                float scaled_lstick_y = lstick_y * cd_x4B8;
-                fp->cur_pos.x += scaled_lstick_x;
-                fp->cur_pos.y += scaled_lstick_y;
-#if SOLUTION == 0
-                M2C_FIELD(fp, u8*, 0x670) = 0xFE;
-                M2C_FIELD(fp, u8*, 0x671) = 0xFE;
-#else
-                fp->x670_timer_lstick_tilt_x = 0xFE;
-                fp->x671_timer_lstick_tilt_y = 0xFE;
-#endif
-#if SOLUTION == 0
-                pl_800401F0(fp->player_id,
-                            (M2C_FIELD(fp, u8*, 0x221F) >> 3) & 1,
-                            scaled_lstick_x, scaled_lstick_y);
-#else
-                pl_800401F0(fp->player_id, fp->x221F_b4, scaled_lstick_x,
-                            scaled_lstick_y);
-#endif
-            }
-        }
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (fp->allow_sdi &&
+        VEC2_SQ_LEN(fp->input.lstick) >=
+            SQ(p_ftCommonData->sdi_min_stick_mag) &&
+        (fp->x670_timer_lstick_tilt_x < p_ftCommonData->sdi_stick_window ||
+         fp->x671_timer_lstick_tilt_y < p_ftCommonData->sdi_stick_window))
+    {
+        float scaled_lstick_x =
+            fp->input.lstick.x * p_ftCommonData->sdi_pos_scale;
+        float scaled_lstick_y =
+            fp->input.lstick.y * p_ftCommonData->sdi_pos_scale;
+        fp->cur_pos.x += scaled_lstick_x;
+        fp->cur_pos.y += scaled_lstick_y;
+        fp->x670_timer_lstick_tilt_x = 254;
+        fp->x671_timer_lstick_tilt_y = 254;
+        pl_800401F0(fp->player_id, fp->x221F_b4, scaled_lstick_x,
+                    scaled_lstick_y);
     }
 }
-#undef SOLUTION
 
 void ftCo_8008E5A4(Fighter* fp)
 {
@@ -660,7 +638,7 @@ void ftCo_Damage_OnExitHitlag(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     if (isPointInCircle(SQ(fp->input.lstick.x), SQ(fp->input.lstick.y),
-                        SQ(p_ftCommonData->x4B0)) ||
+                        SQ(p_ftCommonData->sdi_min_stick_mag)) ||
         ftCo_800DF608(fp))
     {
         float x, y;
@@ -714,7 +692,7 @@ void ftCo_8008E908(Fighter_GObj* gobj, float facing_dir)
 bool ftCo_8008E984(Fighter* fp)
 {
     if (fp->dmg.kb_applied == 0 ||
-        (fp->x221A_b2 && fp->x221A_b3 &&
+        (fp->allow_sdi && fp->x221A_b3 &&
          fp->dmg.kb_applied < fp->dmg.x18A8 + p_ftCommonData->x140))
     {
         return true;
@@ -757,7 +735,7 @@ static bool inlineB0(Fighter_GObj* gobj)
     if (kb_applied != 0) {
         return true;
     }
-    if (fp->x221A_b2 && fp->x221A_b3 &&
+    if (fp->allow_sdi && fp->x221A_b3 &&
         fp->dmg.kb_applied < fp->dmg.x18A8 + p_ftCommonData->x140)
     {
         return true;
@@ -854,7 +832,7 @@ void ftCo_8008EC90(Fighter_GObj* gobj)
                     other_fp->dmg.x195c_hitlag_frames = ftCommon_CalcHitlag(
                         fp->dmg.x183C_applied, other_fp->motion_id,
                         other_fp->x1960_vibrateMult);
-                    other_fp->x221A_b2 = true;
+                    other_fp->allow_sdi = true;
                     if (!other_fp->x2219_b5) {
                         if (other_fp->pre_hitlag_cb != NULL) {
                             other_fp->pre_hitlag_cb(gobj);

@@ -834,7 +834,7 @@ s16 un_803062BC(s32 trophyId)
 
 void un_803062EC(s32 arg0, u32 arg1, f32 farg0)
 {
-    char sp14[80];
+    char sp14[72];
     TrophyData* td;
     s32 id;
 
@@ -1210,13 +1210,13 @@ void un_80306C5C(void* arg0)
     TyLightData* base;
     HSD_GObj* data;
     u8* table;
+    unsigned char new_var;
     HSD_LObj* lobj;
     HSD_LObj* next;
     void* unused1;
     void* unused2;
-
     idx = 0;
-    offset = idx * 0xC;
+    offset = (new_var = idx) * 0xC;
     base = un_804D6ED4;
     data = base->gobj;
     table = (u8*) base + offset;
@@ -1232,6 +1232,7 @@ void un_80306C5C(void* arg0)
             next = lobj->next;
         }
         lobj = next;
+        data = base->gobj;
     }
 
     HSD_LObjAnimAll(((HSD_GObj*) arg0)->hsd_obj);

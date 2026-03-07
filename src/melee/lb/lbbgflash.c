@@ -3,7 +3,7 @@
  * @brief Background flash effects for dramatic game events.
  *
  * Provides full-screen color overlay flashes triggered by various game events.
- * Called from game mode code (gmallstar.c, gm_17C0.c, gm_1A4C.c, etc).
+ * Called from game mode code (gmallstar.c, gmregclear.c, gm_1A4C.c, etc).
  */
 
 #include "lbbgflash.h"

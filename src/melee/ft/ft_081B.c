@@ -140,7 +140,7 @@ bool ft_80081DD4(Fighter_GObj* gobj)
     coll = &fp->coll_data;
     fp->coll_data.last_pos = fp->coll_data.cur_pos;
     fp->coll_data.cur_pos = fp->cur_pos;
-    if (fp->x221A_b2) {
+    if (fp->allow_sdi) {
         var_r28 = mpColl_800477E0(coll);
     } else if (fp->x2064_ledgeCooldown != 0 || fp->x2224_b2) {
         var_r28 = mpColl_800471F8(coll);
@@ -184,7 +184,7 @@ bool ft_80081F2C(Fighter_GObj* gobj)
     coll = &fp->coll_data;
     fp->coll_data.last_pos = fp->coll_data.cur_pos;
     fp->coll_data.cur_pos = fp->cur_pos;
-    if (fp->x221A_b2) {
+    if (fp->allow_sdi) {
         var_r28 = mpColl_80048274(coll);
     } else if (fp->x2064_ledgeCooldown != 0 || fp->x2224_b2) {
         var_r28 = mpColl_80048160(coll);
@@ -227,7 +227,7 @@ bool ft_80082084(Fighter_GObj* gobj)
     coll = &fp->coll_data;
     fp->coll_data.last_pos = fp->coll_data.cur_pos;
     fp->coll_data.cur_pos = fp->cur_pos;
-    if (fp->x221A_b2) {
+    if (fp->allow_sdi) {
         var_r28 = mpColl_80048388(coll);
     } else if (fp->x2064_ledgeCooldown != 0 || fp->x2224_b2) {
         var_r28 = mpColl_80048768(coll);

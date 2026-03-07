@@ -11,7 +11,7 @@
 /* 29A218 */ void it_8029A218(HSD_GObj* owner, Vec3* pos, f32 facing_dir,
                               s32 arg4);
 /* 29A31C */ UNK_RET it_8029A31C(UNK_PARAMS);
-/* 29A498 */ UNK_RET it_8029A498(UNK_PARAMS);
+/* 29A498 */ void it_8029A498(Item_GObj* gobj);
 /* 29A504 */ bool itLipstickspore_UnkMotion0_Anim(Item_GObj* gobj);
 /* 29A524 */ void itLipstickspore_UnkMotion0_Phys(Item_GObj* gobj);
 /* 29A58C */ bool itLipstickspore_UnkMotion0_Coll(Item_GObj* gobj);
