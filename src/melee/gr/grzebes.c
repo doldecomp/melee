@@ -2278,11 +2278,9 @@ void grZebes_801DC9DC(s32 arg0)
 
     grZebes_801DC744(3, 1);
 
-    i = 0;
-    do {
+    for (i = 0; i < 100; i++) {
         grZebes_801DB3CC((HSD_GObj*) arg0);
-        i++;
-    } while (i < 100);
+    }
 }
 
 bool grZebes_801DCB64(Vec3* vec, int val)
