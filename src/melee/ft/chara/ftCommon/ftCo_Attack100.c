@@ -619,7 +619,8 @@ void fn_800D7938(Fighter_GObj* gobj)
         temp_r4 =
             it_80291DAC(temp_r31->item_gobj, (s32) ((FighterOverlay*) temp_r31)->x2340);
         if (temp_r4 != -1) {
-            it_80291F14(temp_r31->item_gobj, temp_r4);
+            ((void (*)(Item_GObj*, s32)) it_80291F14)(temp_r31->item_gobj,
+                                                      temp_r4);
         }
         ftCommon_8007E7E4(temp_r30, 1);
     }
