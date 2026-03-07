@@ -272,7 +272,23 @@ void grZebes_801DA3E8(void)
     grZe_804D6998 = 0;
 }
 
-/// #grZebes_801DA3F4
+void grZebes_801DA3F4(Vec3* pos)
+{
+    Ground_GObj* gobj;
+    HSD_JObj* jobj;
+
+    if (grZe_804D6998 < 10 &&
+        (gobj = grZebes_801D8558(5)) != NULL)
+    {
+        jobj = GET_JOBJ(gobj);
+        if (jobj != NULL) {
+            HSD_JObjSetTranslate(jobj, pos);
+            grZe_804D6998 += 1;
+            return;
+        }
+        Ground_801C4A08(gobj);
+    }
+}
 
 void grZebes_801DA4FC(Ground_GObj* gobj)
 {
