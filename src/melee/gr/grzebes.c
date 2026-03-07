@@ -54,7 +54,7 @@
                                      f32);
 /* 1DB3CC */ static void grZebes_801DB3CC(s32 arg);
 /* 1DC260 */ static void grZebes_801DC260(void);
-/* 1DC744 */ static void grZebes_801DC744(s32, s32, f32);
+/* 1DC744 */ static void grZebes_801DC744(s32, s32);
 /* 1DC9DC */ static void grZebes_801DC9DC(s32 arg);
 /* 1DCCB8 */ static DynamicsDesc* grZebes_801DCCB8(enum_t arg);
 /* 1DCCC0 */ static bool grZebes_801DCCC0(Vec3* arg, int arg0, HSD_JObj* jobj);
@@ -171,6 +171,8 @@ typedef struct grZe_AcidState {
     /* +1C */ Item_GObj* mat;
     /* +20 */ s32 anim_idx;
 } grZe_AcidState;
+
+extern const grZe_BubbleConfig grZe_803B8044;
 
 void grZebes_801D84A0(bool arg) {}
 
@@ -992,11 +994,89 @@ void grZebes_801DC260(void)
 
 /// #grZebes_801DC408
 
-/// #grZebes_801DC744
+void grZebes_801DC744(s32 arg0, s32 arg1)
+{
+    f32 scales[7];
+    Vec3* base = grZe_8049F140;
+    s32 i;
+
+    scales[0] = grZe_803B8044.scales[0];
+    scales[1] = grZe_803B8044.scales[1];
+    scales[2] = grZe_803B8044.scales[2];
+    scales[3] = grZe_803B8044.scales[3];
+    scales[4] = grZe_803B8044.scales[4];
+    scales[5] = grZe_803B8044.scales[5];
+    scales[6] = grZe_803B8044.scales[6];
+
+    if (arg0 & 1) {
+        f32 x_start = base[2].x;
+        f32 y_start = base[2].y;
+        f32 x_step = (base[3].x - x_start) / 6.0f;
+        f32 y_step = (base[3].y - y_start) / 6.0f;
+        f32* sp = &scales[0];
+
+        i = 0;
+        do {
+            grZebes_801DAE70(i, arg1,
+                x_step * (f32) i + x_start,
+                y_step * (f32) i + y_start,
+                *sp);
+            i++;
+            sp++;
+        } while (i < 7);
+    }
+
+    if (arg0 & 2) {
+        f32 p_x = base[2].x;
+        f32 y_min = base[2].y;
+        f32 bubble_r = grZe_804D6990->x74;
+        f32 x_base = p_x + bubble_r;
+        f32 x_range = (base[1].x - p_x) - 2.0f * bubble_r;
+        f32 y_range = base[1].y - y_min;
+        f64 mid_x = 0.5 * x_range + x_base;
+        f64 lo_x = 0.2 * x_range + x_base;
+        f64 hi_x, lo_y, hi_y, near_max_y, max_y;
+
+        grZebes_801DAE70(7, arg1,
+            (f32) mid_x,
+            (f32) (0.5 * y_range + y_min),
+            1.0f);
+
+        hi_y = 0.8 * y_range + y_min;
+        grZebes_801DAE70(8, arg1,
+            (f32) lo_x, (f32) hi_y, 1.2f);
+
+        hi_x = 0.8 * x_range + x_base;
+        lo_y = 0.2 * y_range + y_min;
+        grZebes_801DAE70(9, arg1,
+            (f32) hi_x, (f32) lo_y, 1.1f);
+
+        grZebes_801DAE70(10, arg1,
+            (f32) hi_x, (f32) hi_y, 1.1f);
+
+        grZebes_801DAE70(11, arg1,
+            (f32) mid_x, (f32) lo_y, 1.2f);
+
+        near_max_y = 0.9 * y_range + y_min;
+        grZebes_801DAE70(12, arg1,
+            (f32) mid_x, (f32) near_max_y, 1.3f);
+
+        grZebes_801DAE70(13, arg1,
+            (f32) mid_x, (f32) near_max_y, 1.3f);
+
+        max_y = (f64) y_min + (f64) y_range;
+        grZebes_801DAE70(14, arg1,
+            (f32) (0.6 * x_range + x_base),
+            (f32) max_y, 1.1f);
+
+        grZebes_801DAE70(15, arg1,
+            (f32) lo_x, (f32) max_y, 1.0f);
+    }
+}
 
 /// #grZebes_801DC9DC
 
-static const grZe_BubbleConfig grZe_803B8044 = {
+const grZe_BubbleConfig grZe_803B8044 = {
     { 1.0f, 1.1f, 1.0f, 1.2f, 1.1f, 1.0f, 1.0f },
     {
         { 7.59f, 2.5f, 0.0f },
@@ -1022,7 +1102,7 @@ void grZebes_801DC9DC(s32 arg0)
     grZe_8049F140[0] = grZe_803B8044.positions[0];
     grZe_8049F140[1] = grZe_803B8044.positions[1];
 
-    grZebes_801DC744(3, 1, grZe_803B8044.positions[1].x);
+    grZebes_801DC744(3, 1);
 
     i = 0;
     do {
