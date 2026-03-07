@@ -85,7 +85,51 @@ static u8 grZe_803E1B90[0xF0] = { 0 };
 static u8 grZe_803E1C80[0x6C] = { 0 };
 static u8 grZe_803E1CEC[0x3C] = { 0 };
 
-/* 4D6990 */ static HSD_GObj* grZe_804D6990;
+typedef struct grZe_AcidLevelEntry {
+    /* +0 */ s16 base;
+    /* +2 */ s16 delay_min;
+    /* +4 */ s16 delay_max;
+    /* +6 */ s16 level;
+} grZe_AcidLevelEntry;
+
+typedef struct grZe_YakumonoParam {
+    /* 0x00 */ f32 x00;
+    /* 0x04 */ f32 x04;
+    /* 0x08 */ f32 x08;
+    /* 0x0C */ f32 x0C;
+    /* 0x10 */ u8 x10;
+    /* 0x11 */ u8 pad_11[3];
+    /* 0x14 */ u8 pad_14[0x30 - 0x14];
+    /* 0x30 */ f32 x30;
+    /* 0x34 */ f32 x34;
+    /* 0x38 */ f32 x38;
+    /* 0x3C */ f32 x3C;
+    /* 0x40 */ f32 x40;
+    /* 0x44 */ f32 x44;
+    /* 0x48 */ f32 x48;
+    /* 0x4C */ f32 x4C;
+    /* 0x50 */ f32 x50;
+    /* 0x54 */ f32 x54;
+    /* 0x58 */ f32 x58;
+    /* 0x5C */ f32 x5C;
+    /* 0x60 */ f32 x60;
+    /* 0x64 */ f32 x64;
+    /* 0x68 */ f32 x68;
+    /* 0x6C */ f32 x6C;
+    /* 0x70 */ f32 x70;
+    /* 0x74 */ f32 x74;
+    /* 0x78 */ f32 x78;
+    /* 0x7C */ u8 pad_7C[0x88 - 0x7C];
+    /* 0x88 */ f32 x88;
+    /* 0x8C */ f32 x8C;
+    /* 0x90 */ f32 x90;
+    /* 0x94 */ f32 x94;
+    /* 0x98 */ f32 x98;
+    /* 0x9C */ f32 x9C;
+    /* 0xA0 */ grZe_AcidLevelEntry entries[30];
+} grZe_YakumonoParam;
+
+/* 4D6990 */ static grZe_YakumonoParam* grZe_804D6990;
 /* 4D6994 */ static s32 grZe_804D6994;
 /* 4D6998 */ static s16 grZe_804D6998;
 
@@ -112,6 +156,20 @@ typedef struct grZe_BubbleConfig {
     f32 scales[7];
     Vec3 positions[4];
 } grZe_BubbleConfig;
+
+typedef struct grZe_AcidState {
+    /* +00 */ u8 state;
+    /* +01 */ u8 next;
+    /* +02 */ s16 timer;
+    /* +04 */ f32 base_x;
+    /* +08 */ f32 offset;
+    /* +0C */ f32 velocity;
+    /* +10 */ f32 damage;
+    /* +14 */ HSD_JObj* jobj1;
+    /* +18 */ HSD_JObj* jobj2;
+    /* +1C */ Item_GObj* mat;
+    /* +20 */ s32 anim_idx;
+} grZe_AcidState;
 
 void grZebes_801D84A0(bool arg) {}
 
@@ -478,7 +536,137 @@ void grZebes_801DA4FC(Ground_GObj* gobj)
     Ground_801C4A08(gobj);
 }
 
-/// #grZebes_801DA528
+u8 grZebes_801DA528(HSD_GObj* arg0, void* arg1, s32 arg2, s32 arg3)
+{
+    grZe_AcidState* st = (grZe_AcidState*) arg1;
+
+    if (st->state != st->next) {
+        st->state = st->next;
+        switch (st->state) {
+        case 0:
+            grAnime_801C7FF8(arg0, st->anim_idx, 1, arg2, 0.0f, 1.0f);
+            grMaterial_801C8E08(st->mat);
+            st->timer = 0;
+            st->offset = 0.0f;
+            st->velocity = 0.0f;
+            break;
+        case 1:
+            grAnime_801C78FC(arg0, st->anim_idx, 1);
+            grMaterial_801C8E28((HSD_GObj*) st->mat);
+            break;
+        case 2: {
+            f32 mn = grZe_804D6990->x50;
+            st->timer = (s16) (((grZe_804D6990->x54 - mn) * HSD_Randf()) + mn);
+            break;
+        }
+        case 3:
+            grAnime_801C7FF8(arg0, st->anim_idx, 1, arg3, 0.0f, 1.0f);
+            grAnime_801C78FC(arg0, st->anim_idx, 1);
+            st->damage = 0.0f;
+            break;
+        }
+    }
+
+    switch (st->state) {
+    case 0: {
+        s16 t = st->timer;
+        st->timer = t + 1;
+        if ((f32) t > grZe_804D6990->x48) {
+            st->timer = 0;
+            st->damage -= 1.0f;
+            if (st->damage < 0.0f) {
+                st->damage = 0.0f;
+            }
+        }
+        {
+            f32 off = st->offset;
+            f32 thresh = grZe_804D6990->x44;
+            if (off > thresh) {
+                st->velocity -= grZe_804D6990->x38;
+            } else if (off < -thresh) {
+                st->velocity += grZe_804D6990->x38;
+            }
+        }
+        st->velocity *= (1.0f - grZe_804D6990->x3C);
+        {
+            f32 vel = st->velocity;
+            f32 max_vel = grZe_804D6990->x34;
+            if (vel > max_vel) {
+                st->velocity = max_vel;
+            } else if (vel < -max_vel) {
+                st->velocity = -max_vel;
+            }
+        }
+        st->offset += st->velocity;
+        {
+            f32 off = st->offset;
+            f32 max_off = grZe_804D6990->x30;
+            if (off > max_off) {
+                st->offset = max_off;
+            } else if (off < -max_off) {
+                st->offset = -max_off;
+            }
+        }
+        {
+            f32 abs_off = st->offset;
+            if (abs_off < 0.0f) {
+                abs_off = -abs_off;
+            }
+            if (abs_off < grZe_804D6990->x44) {
+                f32 abs_vel = st->velocity;
+                if (abs_vel < 0.0f) {
+                    abs_vel = -abs_vel;
+                }
+                if (abs_vel < grZe_804D6990->x40) {
+                    st->offset = 0.0f;
+                    st->velocity = 0.0f;
+                }
+            }
+        }
+        {
+            f32 new_x = st->base_x + st->offset;
+            HSD_JObjSetTranslateX(st->jobj1, new_x);
+        }
+        {
+            f32 new_x = st->base_x + st->offset;
+            HSD_JObjSetTranslateX(st->jobj2, new_x);
+        }
+        {
+            f32 dmg = st->damage;
+            f32 thr = grZe_804D6990->x4C;
+            f32 frame;
+            if (dmg > thr) {
+                frame = 30.0f;
+                st->next = 1;
+                Ground_801C53EC(0x61A86);
+                ftLib_80086C9C(1, 0x5A);
+            } else {
+                frame = (f32) ((f64) (dmg * thr) / 30.0);
+            }
+            grAnime_801C7B24(arg0, st->anim_idx, 1, frame);
+        }
+        break;
+    }
+    case 1:
+        if (grAnime_801C83D0(arg0, st->anim_idx, 1) != 0) {
+            st->next = 2;
+        }
+        break;
+    case 2:
+        st->timer -= 1;
+        if (st->timer < 0) {
+            st->next = 3;
+        }
+        break;
+    case 3:
+        if (grAnime_801C83D0(arg0, st->anim_idx, 1) != 0) {
+            st->next = 0;
+        }
+        break;
+    }
+
+    return st->state;
+}
 
 void fn_801DA9D8(Item_GObj* arg0, Ground* gp, Vec3* pos, HSD_GObj* fobj,
                  f32 slope)
@@ -785,7 +973,7 @@ bool grZebes_801DCBFC(Ground_GObj* gobj, HSD_GObj* fobj, void* arg)
     ftLib_80086684(fobj, &prev);
     prev.y += intercept;
     if (pos.y < slope) {
-        *(void**) arg = grZe_804D6990->user_data;
+        *(void**) arg = ((HSD_GObj*) grZe_804D6990)->user_data;
         if (prev.y > slope) {
             Ground_801C43A4(&pos);
             Ground_801C53EC(0x61A82);
