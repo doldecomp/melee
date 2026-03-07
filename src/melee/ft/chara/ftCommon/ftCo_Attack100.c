@@ -2253,6 +2253,8 @@ void ftCo_800DC284(Fighter_GObj* gobj)
 
 /// #ftCo_800DC284
 
+#pragma push
+#pragma dont_inline on
 void ftCo_CaptureDamageHi_Anim(Fighter_GObj* gobj)
 {
     fn_800DB8A4(gobj);
@@ -2312,6 +2314,7 @@ void ftCo_CaptureDamageLw_Anim(Fighter_GObj* gobj)
         fn_800DBAE4(gobj);
     }
 }
+#pragma pop
 
 void ftCo_CaptureDamageLw_IASA(Fighter_GObj* gobj) {}
 
