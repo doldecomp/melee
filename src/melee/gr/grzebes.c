@@ -13,6 +13,7 @@
 #include "gr/grzakogenerator.h"
 #include "gr/grmaterial.h"
 #include "gr/inlines.h"
+#include "lb/lb_00B0.h"
 
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
@@ -41,6 +42,7 @@
 /* 1D9F7C */ static bool grZebes_801D9F7C(Ground_GObj* arg);
 /* 1DA0C0 */ static void grZebes_801DA0C0(Ground_GObj* arg);
 /* 1DA3E8 */ static void grZebes_801DA3E8(void);
+/* 1DA528 */ static u8 grZebes_801DA528(HSD_GObj*, void*, s32, s32);
 /* 1DA9D8 */ static void fn_801DA9D8(Item_GObj* arg0, Ground* gp, Vec3* pos,
                                      HSD_GObj* fobj, f32 slope);
 /* 1DA9F0 */ static void fn_801DA9F0(Item_GObj* arg0, Ground* gp, Vec3* pos,
@@ -197,7 +199,7 @@ void grZebes_801D9100(HSD_GObj* gobj)
     gp->gv.zebes4.xDC = (u32) Ground_801C3FA4(gobj, 0x11);
     gp->gv.zebes4.xE0 = (u32) mat_gobj;
     gp->gv.zebes4.xE4 = 0xD;
-    gp->gv.zebes4.xE8 = 0.0f;
+    gp->gv.zebes4.xE8 = 0;
     gp->gv.zebes4.xEC =
         (u32) grZakoGenerator_801CA394((UNK_T) &grZe_803E1C80, 4,
                                        (UNK_T) grZebes_801DCBB0, 1.0f);
@@ -209,7 +211,43 @@ bool grZebes_801D9254(Ground_GObj* arg)
     return false;
 }
 
-/// #grZebes_801D925C
+static const Vec3 grZe_803B802C = { 24.1f, -4.6f, 0.0f };
+static const Vec3 grZe_803B8038 = { 24.05f, 2.2f, 0.0f };
+
+void grZebes_801D925C(HSD_GObj* gobj)
+{
+    Vec3 pos1;
+    Vec3 pos2;
+    f32 slope, intercept;
+    HSD_JObj* jobj;
+    Ground* gp = GET_GROUND(gobj);
+    s32 result = grZebes_801DA528(gobj, &gp->gv.zebes4, 1, 2);
+
+    if (gp->gv.zebes4.xE8 != result) {
+        gp->gv.zebes4.xE8 = result;
+        if (result == 1) {
+            grAnime_801C7FF8(gobj, 6, 1, 1, 30.0f, 1.0f);
+            grAnime_801C78FC(gobj, 6, 1U);
+        } else if (result == 3) {
+            grAnime_801C7FF8(gobj, 6, 1, 2, 0.0f, 1.0f);
+            grAnime_801C78FC(gobj, 6, 1U);
+        }
+    }
+
+    pos1 = grZe_803B802C;
+    pos2 = grZe_803B8038;
+
+    jobj = Ground_801C3FA4(gobj, 1);
+    if (jobj != NULL) {
+        lb_8000B1CC(jobj, &pos1, &grZe_8049F158[1]);
+        lb_8000B1CC(jobj, &pos2, &grZe_8049F140[1]);
+    }
+
+    Ground_801C4368(&slope, &intercept);
+    grZakoGenerator_801CA43C((void*) gp->gv.zebes4.xEC,
+                             Ground_801C3FA4(gobj, 1), slope);
+    Ground_801C2FE0((Ground_GObj*) gobj);
+}
 
 void grZebes_801D93D8(Ground_GObj* arg) {}
 
