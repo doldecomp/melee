@@ -8,6 +8,7 @@
 
 #include "ft/ftdevice.h"
 #include "ft/ftlib.h"
+#include "gr/grdatfiles.h"
 #include "gr/grdisplay.h"
 #include "gr/grlib.h"
 #include "gr/grmaterial.h"
@@ -493,7 +494,126 @@ void fn_801DA9F0(Item_GObj* arg0, Ground* gp, Vec3* pos, HSD_GObj* fobj,
     gp->gv.zebes.xC.x = pos->x;
 }
 
-/// #grZebes_801DAA08
+s32 grZebes_801DAA08(void)
+{
+    s32 indices[20];
+    s32 count = 0;
+    s32 idx = 0;
+    grZe_BubbleEntry* ptr = grZe_8049F170;
+    s32* ip = indices;
+    s32 ctr;
+
+    ctr = 4;
+    do {
+        if (ptr->active == 1 && idx != 0 && idx != 6 && ptr->unk04 == 0) {
+            *ip = idx;
+            ip++;
+            count++;
+        }
+        ptr++;
+        idx++;
+        if (ptr->active == 1 && idx != 0 && idx != 6 && ptr->unk04 == 0) {
+            *ip = idx;
+            ip++;
+            count++;
+        }
+        ptr++;
+        idx++;
+        if (ptr->active == 1 && idx != 0 && idx != 6 && ptr->unk04 == 0) {
+            *ip = idx;
+            ip++;
+            count++;
+        }
+        ptr++;
+        idx++;
+        if (ptr->active == 1 && idx != 0 && idx != 6 && ptr->unk04 == 0) {
+            *ip = idx;
+            ip++;
+            count++;
+        }
+        ptr++;
+        idx++;
+        if (ptr->active == 1 && idx != 0 && idx != 6 && ptr->unk04 == 0) {
+            *ip = idx;
+            ip++;
+            count++;
+        }
+        ptr++;
+        idx++;
+    } while (--ctr != 0);
+
+    if (count == 0) {
+        return 0;
+    }
+
+    {
+        s32 selected;
+        HSD_JObj* new_jobj;
+
+        if (count != 0) {
+            selected = HSD_Randi(count);
+        } else {
+            selected = 0;
+        }
+
+        selected = indices[selected];
+        new_jobj = Ground_801C13D0(2, 0);
+
+        if (new_jobj != NULL) {
+            grZe_BubbleEntry* sel = &grZe_8049F170[selected];
+            HSD_JObj* parent_child;
+            HSD_JObj* hsd_jobj;
+
+            sel->unk04 = (u32) new_jobj;
+
+            hsd_jobj = (HSD_JObj*) sel->gobj->hsd_obj;
+            if (hsd_jobj == NULL) {
+                parent_child = NULL;
+            } else {
+                parent_child = hsd_jobj->child;
+            }
+
+            HSD_JObjSetFlagsAll(parent_child, 0x10);
+            HSD_JObjAddChild(parent_child, (HSD_JObj*) sel->unk04);
+
+            {
+                u8* dat = (u8*) grDatFiles_801C6330(2)->unk4->unk8;
+                HSD_ShapeAnimJoint** sap =
+                    *(HSD_ShapeAnimJoint***) (dat + 0x74);
+                HSD_AnimJoint** ajp = *(HSD_AnimJoint***) (dat + 0x6C);
+                HSD_MatAnimJoint** mjp =
+                    *(HSD_MatAnimJoint***) (dat + 0x70);
+                HSD_ShapeAnimJoint* sa;
+                HSD_MatAnimJoint* ma;
+                HSD_AnimJoint* aj;
+
+                if (sap != NULL) {
+                    sa = *sap;
+                } else {
+                    sa = NULL;
+                }
+                if (mjp != NULL) {
+                    ma = *mjp;
+                } else {
+                    ma = NULL;
+                }
+                if (ajp != NULL) {
+                    aj = *ajp;
+                } else {
+                    aj = NULL;
+                }
+
+                HSD_JObjAddAnimAll((HSD_JObj*) sel->unk04, aj, ma, sa);
+            }
+
+            HSD_JObjReqAnimAll((HSD_JObj*) sel->unk04, 0.0f);
+            HSD_JObjAnimAll((HSD_JObj*) sel->unk04);
+            grAnime_801C78FC(sel->gobj, 0, 7);
+            return 1;
+        }
+    }
+    return 0;
+}
 
 void fn_801DAC90(Item_GObj* arg0, Ground* arg1, Vec3* arg2, HSD_GObj* arg3,
                  f32 arg4)
