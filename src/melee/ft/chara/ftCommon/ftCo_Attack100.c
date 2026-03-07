@@ -2299,8 +2299,6 @@ void ftCo_CaptureDamageLw_Anim(Fighter_GObj* gobj)
 }
 #pragma pop
 
-#pragma pop
-
 #pragma push
 #pragma dont_inline on
 void ftCo_CaptureDamageLw_IASA(Fighter_GObj* gobj) {}
