@@ -944,7 +944,60 @@ void gm_80162574(u8 arg0, u8 arg1)
     *ptr = val;
 }
 
-/// #gm_8016260C
+void gm_8016260C(u8 arg0, u8 arg1)
+{
+    u32* ptr;
+    u32 sum;
+
+    ptr = NULL;
+    if ((u8) (arg1 - 7) <= 1U) {
+        u32* counter = gmMainLib_8015CD68();
+        sum = *counter + 1;
+        *counter = (sum > (u32) -1) ? (u32) -1 : sum;
+        return;
+    }
+    if (gm_801A4310() == 0x1F) {
+        ptr = gmMainLib_8015CD5C();
+    } else {
+        switch (arg0) {
+        case 0:
+            ptr = gmMainLib_8015CD2C();
+            break;
+        case 1:
+            ptr = gmMainLib_8015CD38();
+            break;
+        case 2:
+        {
+            u32* save;
+            ptr = gmMainLib_8015CD44();
+            save = (u32*) gmMainLib_8015EDBC();
+            sum = save[1] + 1;
+            save[1] = (sum > (u32) -1) ? (u32) -1 : sum;
+            break;
+        }
+        case 3:
+            ptr = gmMainLib_8015CD50();
+            break;
+        }
+    }
+    sum = *ptr + 1;
+    *ptr = (sum > (u32) -1) ? (u32) -1 : sum;
+    {
+        u32* p = (u32*) gmMainLib_8015ED98();
+        sum = *p + 1;
+        *p = (sum > (u32) -1) ? (u32) -1 : sum;
+    }
+    {
+        u32* p = (u32*) gmMainLib_8015EDB0();
+        sum = *p + 1;
+        *p = (sum > (u32) -1) ? (u32) -1 : sum;
+    }
+    {
+        u32* p = (u32*) gmMainLib_8015EDBC();
+        sum = *p + 1;
+        *p = (sum > (u32) -1) ? (u32) -1 : sum;
+    }
+}
 
 u32 gm_8016279C(void)
 {
@@ -1426,9 +1479,60 @@ s32 gm_80163690(u8 arg0)
     return -1;
 }
 
-/// #gm_801636D8
+void gm_801636D8(u8 arg0, u8* arg1, u8* arg2, u8* arg3, u8* arg4)
+{
+    s32 temp_r0;
+    u32 val;
 
-/// #gm_80163838
+    if (gmMainLib_8015D6BC(arg0) != 0) {
+        val = *gmMainLib_8015D6A4(arg0);
+        temp_r0 = val / 60;
+        if (arg1 != NULL) {
+            *arg1 = (u8) ((temp_r0 / 60) / 60);
+        }
+        if (arg2 != NULL) {
+            *arg2 = (u8) ((temp_r0 / 60) % 60);
+        }
+        if (arg3 != NULL) {
+            *arg3 = (u8) (temp_r0 % 60);
+        }
+        if (arg4 != NULL) {
+            *arg4 = (u8) ((99.0f * (f32) (val % 60)) / 59.0f);
+        }
+    }
+}
+
+bool gm_80163838(u8* arg0, u8* arg1, u8* arg2, u8* arg3)
+{
+    u32 total_frames = 0;
+    s32 i;
+    s32 frames;
+
+    for (i = 0; i < 0x19; i++) {
+        if (gmMainLib_8015D6BC(i) != 0) {
+            total_frames += *gmMainLib_8015D6A4((u8) i);
+        } else {
+            return false;
+        }
+    }
+
+    frames = total_frames / 60;
+
+    if (arg0 != NULL) {
+        *arg0 = (u8) ((frames / 60) / 60);
+    }
+    if (arg1 != NULL) {
+        *arg1 = (u8) ((frames / 60) % 60);
+    }
+    if (arg2 != NULL) {
+        *arg2 = (u8) (frames % 60);
+    }
+    if (arg3 != NULL) {
+        *arg3 = (u8) ((99.0f * (f32) (total_frames % 60)) / 59.0f);
+    }
+
+    return true;
+}
 
 bool gm_801639C0(u8 arg0)
 {
@@ -1446,7 +1550,28 @@ int gm_801639F4(u8 arg0)
     return -1;
 }
 
-/// #gm_80163A3C
+void gm_80163A3C(u8 arg0, u8* arg1, u8* arg2, u8* arg3, u8* arg4)
+{
+    s32 temp_r0;
+    u32 val;
+
+    if (gmMainLib_8015D710(arg0) != 0) {
+        val = *gmMainLib_8015D6F8(arg0);
+        temp_r0 = val / 60;
+        if (arg1 != NULL) {
+            *arg1 = (u8) ((temp_r0 / 60) / 60);
+        }
+        if (arg2 != NULL) {
+            *arg2 = (u8) ((temp_r0 / 60) % 60);
+        }
+        if (arg3 != NULL) {
+            *arg3 = (u8) (temp_r0 % 60);
+        }
+        if (arg4 != NULL) {
+            *arg4 = (u8) ((99.0f * (f32) (val % 60)) / 59.0f);
+        }
+    }
+}
 
 bool gm_80163B9C(u8* arg0, u8* arg1, u8* arg2, u8* arg3)
 {
@@ -1699,6 +1824,31 @@ bool gm_80164330(s32 arg0)
         OSReport("RandomStageSwitch All-Off!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
     }
     if ((1 << (u16) arg0) & gmMainLib_8015CC58()->stage_mask) {
+        return true;
+    }
+    return false;
+}
+
+bool gm_80164430(u16 arg0)
+{
+    u16* temp_r31;
+    s32 i;
+    u8 stage_idx;
+    u8 unlock_bit;
+
+    temp_r31 = gmMainLib_8015EDA4();
+    stage_idx = Stage_8022519C(arg0);
+
+    for (i = 0; i < NUM_UNLOCKABLE_STAGES; i++) {
+        if ((s32) stage_idx == (s32) lbl_803B790C[i][1]) {
+            unlock_bit = lbl_803B790C[i][0];
+            goto found;
+        }
+    }
+    unlock_bit = NUM_UNLOCKABLE_STAGES;
+
+found:
+    if (unlock_bit == NUM_UNLOCKABLE_STAGES || (*temp_r31 & (1LL << unlock_bit))) {
         return true;
     }
     return false;
