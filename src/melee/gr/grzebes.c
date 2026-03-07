@@ -503,7 +503,61 @@ void grZebes_801D9F84(Ground_GObj* gobj)
 
 void grZebes_801DA0C0(Ground_GObj* arg) {}
 
-/// #grZebes_801DA0C4
+typedef struct grZe_ColorEntry {
+    f32 threshold;
+    f32 r;
+    f32 g;
+    f32 b;
+} grZe_ColorEntry;
+
+void grZebes_801DA0C4(f32 level)
+{
+    GXColor color;
+    grZe_ColorEntry* table =
+        (grZe_ColorEntry*) ((u8*) grZe_803E1A10 + 0x2D8);
+    f32* ptr = &table[1].threshold;
+    u32 idx = 0;
+
+    while (idx < 3U && level > *ptr) {
+        ptr = (f32*) ((u8*) ptr + 0x10);
+        idx++;
+    }
+
+    if ((s32) idx == 0) {
+        color.r = (u8) table[1].r;
+        color.g = (u8) table[1].g;
+        color.b = (u8) table[1].b;
+        color.a = 0xFF;
+        return;
+    }
+
+    if (idx == 3) {
+        color.r = (u8) table[3].r;
+        color.g = (u8) table[3].g;
+        color.b = (u8) table[3].b;
+        color.a = 0xFF;
+        return;
+    }
+
+    {
+        f32 t0 = table[idx].threshold;
+        f32 t = (level - t0) / (table[idx + 1].threshold - t0);
+
+        if (Ground_801C2090(&color)) {
+            f32 r0 = table[idx].r;
+            color.r = (u8) (t * (table[idx + 1].r - r0) + r0);
+            {
+                f32 g0 = table[idx].g;
+                color.g = (u8) (t * (table[idx + 1].g - g0) + g0);
+            }
+            {
+                f32 b0 = table[idx].b;
+                color.b = (u8) (t * (table[idx + 1].b - b0) + b0);
+            }
+            Ground_801C205C(&color);
+        }
+    }
+}
 
 /// #grZebes_801DA254
 
