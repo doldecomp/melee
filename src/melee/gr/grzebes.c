@@ -303,7 +303,6 @@ bool grZebes_801D8814(Ground_GObj* arg)
     return false;
 }
 
-/// #grZebes_801D881C
 void grZebes_801D881C(HSD_GObj* gobj)
 {
     Vec3 sp80;
@@ -1620,7 +1619,6 @@ s32 grZebes_801DB088(Ground* gp, s32 arg1)
     return result;
 }
 
-/// #grZebes_801DB3CC
 s32 grZebes_801DB3CC(HSD_GObj* gobj)
 {
     grZe_BubbleEntry* base = grZe_8049F170;
@@ -1856,7 +1854,6 @@ s32 grZebes_801DB3CC(HSD_GObj* gobj)
     return popped;
 }
 
-/// #grZebes_801DBB60
 s32 grZebes_801DBB60(s32 arg)
 {
     HSD_GObj* yaku = (HSD_GObj*) arg;
@@ -2231,7 +2228,6 @@ void grZebes_801DC744(s32 arg0, s32 arg1)
     }
 }
 
-/// #grZebes_801DC9DC
 
 const grZe_BubbleConfig grZe_803B8044 = {
     { 1.0f, 1.1f, 1.0f, 1.2f, 1.1f, 1.0f, 1.0f },
