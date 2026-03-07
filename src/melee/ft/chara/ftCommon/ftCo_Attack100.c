@@ -449,15 +449,6 @@ s32 ftCo_800D7268(Fighter* fp)
     return 0;
 }
 
-
-#pragma push
-#pragma dont_inline on
-
-
-#pragma pop
-
-
-
 void ftCo_JumpAerialF1_Anim(Fighter_GObj* gobj)
 {
     ftCo_DatAttrs* co;
@@ -2308,6 +2299,10 @@ void ftCo_CaptureDamageLw_Anim(Fighter_GObj* gobj)
 }
 #pragma pop
 
+#pragma pop
+
+#pragma push
+#pragma dont_inline on
 void ftCo_CaptureDamageLw_IASA(Fighter_GObj* gobj) {}
 
 static inline void ftCo_CaptureDamageLw_Phys_inline(Fighter_GObj* gobj)
