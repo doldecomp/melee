@@ -30,6 +30,9 @@ int grCn_803E2190[5] = { 0, 0, 1, 2, 5 };
 
 static u32 grCn_804D69A4;
 static int grCn_804D69AC;
+static void* grCn_804D69A0;
+static int grCn_804D69A8;
+static int grCn_804D69B0;
 
 /// #grCorneria_801DCCFC
 
@@ -293,7 +296,24 @@ s32 grCorneria_801DEC08(Vec3* pos)
     }
     return 0;
 }
-/// #grCorneria_801DEC94
+s32 grCorneria_801DEC94(Vec3* pos)
+{
+    if (pos->z > -30.0f) {
+        if (pos->x > Stage_GetBlastZoneRightOffset() - 30.0f) {
+            return 1;
+        }
+        if (pos->x < Stage_GetBlastZoneLeftOffset() + 30.0f) {
+            return 1;
+        }
+        if (pos->y > Stage_GetBlastZoneTopOffset() - 30.0f) {
+            return 1;
+        }
+        if (pos->y < Stage_GetBlastZoneBottomOffset() + 30.0f) {
+            return 1;
+        }
+    }
+    return 0;
+}
 
 /// #grCorneria_801DED50
 
@@ -451,7 +471,14 @@ bool grCorneria_801E0D28(Ground_GObj* arg)
     return false;
 }
 
-/// #grCorneria_801E0D30
+void grCorneria_801E0D30(Ground_GObj* gobj)
+{
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+    if (jobj != NULL) {
+        f32 y = -grCorneria_801E2EA0();
+        HSD_JObjSetTranslateY(jobj, y);
+    }
+}
 
 void grCorneria_801E0DE0(Ground_GObj* arg) {}
 
@@ -518,7 +545,18 @@ void grCorneria_801E12CC(Ground_GObj* arg) {}
 
 void fn_801E12D0(Item_GObj* gobj, Ground* gr) {}
 
-/// #fn_801E12D4
+void fn_801E12D4(Item_GObj* gobj, Ground* gr, Vec3* pos, HSD_GObj* attacker, f32 damage)
+{
+    extern char grCn_803E26C4[];
+
+    gr->gv.corneria.x114 += damage;
+    OSReport(grCn_803E26C4);
+    if (gr->gv.corneria.x114 >= M2C_FIELD(grCn_804D69A0, f32*, 0x38)) {
+        gr->gv.corneria.x108 = 4;
+        grMaterial_801C8E28(gr->gv.corneria.left_cannon);
+        grMaterial_801C8E28(gr->gv.corneria.right_cannon);
+    }
+}
 
 /// #grCorneria_801E1348
 
@@ -726,7 +764,40 @@ bool grCorneria_801E2D14(void)
     return false;
 }
 
-/// #grCorneria_801E2D90
+bool grCorneria_801E2D90(enum_t line_id)
+{
+    u32 joint;
+    s32 result;
+    s32 b, c, d, e;
+
+    if (stage_info.internal_stage_id == CORNERIA && line_id != -1) {
+        joint = mpJointFromLine(line_id);
+        result = 1;
+        b = result;
+        c = result;
+        d = result;
+        e = result;
+        if (joint > 1) {
+            e = 0;
+        }
+        if (e == 0 && (s32) joint != 2) {
+            d = 0;
+        }
+        if (d == 0 && (s32) joint != 5) {
+            c = 0;
+        }
+        if (c == 0 && (s32) joint != 6) {
+            b = 0;
+        }
+        if (b == 0 && (s32) joint != 7) {
+            result = 0;
+        }
+        if (result != 0) {
+            return true;
+        }
+    }
+    return false;
+}
 
 bool grCorneria_801E2E50(int line_id)
 {
