@@ -66,9 +66,24 @@ static StageCallbacks grZe_callbacks[] = {
 };
 
 /* 4D6990 */ static HSD_GObj* grZe_804D6990;
+/* 4D6994 */ static s32 grZe_804D6994;
 /* 4D6998 */ static s16 grZe_804D6998;
 
 extern f32 grZe_804DB0B0;
+
+typedef struct grZe_BubbleEntry {
+    /* 0x00 */ u8 active;
+    /* 0x01 */ u8 pad_01[7];
+    /* 0x08 */ f32 x;
+    /* 0x0C */ f32 y;
+    /* 0x10 */ f32 unk10;
+    /* 0x14 */ f32 unk14;
+    /* 0x18 */ f32 size;
+    /* 0x1C */ f32 unk1C;
+    /* 0x20 */ HSD_GObj* gobj;
+} grZe_BubbleEntry;
+
+/* 8049F170 */ static grZe_BubbleEntry grZe_8049F170[20];
 
 void grZebes_801D84A0(bool arg) {}
 
@@ -350,7 +365,31 @@ void fn_801DA9F0(UNK_T arg0, Ground* gp, float y, float* x)
 
 /// #grZebes_801DBB60
 
-/// #grZebes_801DC260
+void grZebes_801DC260(void)
+{
+    int i;
+    grZe_BubbleEntry* entry = grZe_8049F170;
+
+    for (i = 0; i < 20; i++, entry++) {
+        if (entry->active != 0) {
+            HSD_GObj* gobj = entry->gobj;
+            if (gobj != NULL) {
+                Vec3 v;
+                HSD_JObj* jobj = GET_JOBJ(gobj);
+
+                v.x = entry->x;
+                v.y = entry->y;
+                v.z = 0.0f;
+                HSD_JObjSetTranslate(jobj, &v);
+
+                v.x = entry->size;
+                v.y = entry->size;
+                v.z = entry->size;
+                HSD_JObjSetScale(jobj, &v);
+            }
+        }
+    }
+}
 
 /// #grZebes_801DC408
 
