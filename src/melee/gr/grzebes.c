@@ -31,6 +31,7 @@
 /* 1D94EC */ static void grZebes_801D94EC(Ground_GObj* arg);
 /* 1D94F0 */ static void fn_801D94F0(Ground_GObj* gobj);
 /* 1D95B0 */ static bool grZebes_801D95B0(Ground_GObj* arg);
+/* 1D95B8 */ static void grZebes_801D95B8(Ground_GObj* arg);
 /* 1D9754 */ static void grZebes_801D9754(Ground_GObj* arg);
 /* 1D99D8 */ static bool grZebes_801D99D8(Ground_GObj* arg);
 /* 1D9F2C */ static void grZebes_801D9F2C(Ground_GObj* arg);
@@ -191,7 +192,34 @@ bool grZebes_801D95B0(Ground_GObj* arg)
     return false;
 }
 
-/// #grZebes_801D95B8
+void grZebes_801D95B8(Ground_GObj* gobj)
+{
+    Vec3 pos;
+    Ground* gp = GET_GROUND(gobj);
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+    HSD_JObj* stored_jobj = (HSD_JObj*) gp->gv.zebes.x4;
+
+    if (stored_jobj != NULL) {
+        HSD_JObjGetTranslation2(stored_jobj, &pos);
+        HSD_JObjSetTranslate(jobj, &pos);
+    }
+    if (!gp->gv.zebes.x0_b0) {
+        if (gp->gv.zebes.xA > 0) {
+            gp->gv.zebes.xA--;
+            if (gp->gv.zebes.xA == 0) {
+                if (gp->gv.zebes.x8 > 0) {
+                    grAnime_801C8138(gobj, gp->map_id, 0);
+                    gp->gv.zebes.x8 = -1;
+                    return;
+                }
+                grAnime_801C8138(gobj, gp->map_id, 1);
+                gp->gv.zebes.x8 = 1;
+            }
+        } else if (grAnime_801C83D0(gobj, 0, 7) != 0) {
+            gp->gv.zebes.xA = (s16) (HSD_Randi(600) + 3000);
+        }
+    }
+}
 
 void grZebes_801D9754(Ground_GObj* arg) {}
 
