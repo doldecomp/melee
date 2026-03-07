@@ -85,10 +85,12 @@ void itFoods_Logic18_Spawned(HSD_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     itFoodsAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
     s32 rand = HSD_Randi(getRandMax(ip->xC4_article_data));
+    s32 temp;
 
     ip->xDD4_itemVar.foods.heal_amount = attr[rand].x8;
     ip->xDD4_itemVar.foods.x0 = rand;
-    it_80273318(gobj, attr[rand].x4);
+    temp = rand;
+    it_80273318(gobj, attr[temp].x4);
     it_8028FC5C(gobj);
 }
 
