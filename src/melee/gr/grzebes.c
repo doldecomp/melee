@@ -10,6 +10,8 @@
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
 
+#include <baselib/jobj.h>
+
 /* 1D84A0 */ static void grZebes_801D84A0(bool arg);
 /* 1D8528 */ static void grZebes_801D8528(void);
 /* 1D852C */ void grZebes_801D852C(void);
@@ -104,7 +106,17 @@ bool grZebes_801D9408(Ground_GObj* arg)
     return false;
 }
 
-/// #grZebes_801D9410
+void grZebes_801D9410(Ground_GObj* gobj)
+{
+    f32 slope, intercept;
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+
+    Ground_801C4368(&slope, &intercept);
+    HSD_JObjSetTranslateY(jobj, slope);
+    if (grAnime_801C83D0(gobj, 0, 7) != 0) {
+        grZebes_801DA4FC(gobj);
+    }
+}
 
 void grZebes_801D94EC(Ground_GObj* arg) {}
 
