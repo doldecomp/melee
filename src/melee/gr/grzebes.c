@@ -262,6 +262,7 @@ void grZebes_801D8644(HSD_GObj* gobj)
     HSD_JObj* child_jobj;
     Item_GObj* mat_gobj;
     Item_GObj* mat_gobj2;
+    PAD_STACK(8);
 
     gp->gv.zebes5.xF0 = (u32) grZebes_801D8558(7);
     Ground_801C2ED0(jobj, gp->map_id);
@@ -1437,7 +1438,7 @@ void fn_801DAC90(Item_GObj* arg0, Ground* arg1, Vec3* arg2, HSD_GObj* arg3,
 void grZebes_801DAE70(s32 arg0, u8 arg1, f32 x, f32 y, f32 scale)
 {
     grZe_BubbleEntry* entry = &grZe_8049F170[arg0];
-
+    PAD_STACK(0x10);
     if (entry->active == 0) {
         if (entry->gobj == NULL) {
             Ground_GObj* gobj;
