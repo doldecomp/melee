@@ -1723,7 +1723,7 @@ s32 grZebes_801DB3CC(HSD_GObj* gobj)
                 grZe_BubbleEntry* eb = &base[b];
                 int rem = 20 - b;
                 if (b < 20) {
-                    do {
+                    for (; rem != 0; eb++, b++, rem--) {
                         if (eb->active != 0) {
                             f32 dy = eb->y - ea->y;
                             f32 dx = eb->x - ea->x;
@@ -1787,10 +1787,7 @@ s32 grZebes_801DB3CC(HSD_GObj* gobj)
                                 }
                             }
                         }
-                        eb++;
-                        b++;
-                        rem--;
-                    } while (rem != 0);
+                    }
                 }
             }
         }
@@ -1906,8 +1903,7 @@ s32 grZebes_801DBB60(s32 arg)
         grZe_BubbleEntry* ei = bubbles;
         f32 x1, y1, x2, y2;
 
-        i = 0;
-        do {
+        for (i = 0; i < 20; i++, ei++) {
             if (ei->active == 1 && i != 0 && i != 6) {
                 s32 j = i + 1;
                 f32 ei_y = ei->y;
@@ -1916,7 +1912,7 @@ s32 grZebes_801DBB60(s32 arg)
                 s32 rem = 20 - j;
                 grZe_BubbleEntry* ej = &bubbles[j];
                 if (j < 20) {
-                    do {
+                    for (; rem != 0; ej++, j++, rem--) {
                         if (ej->active == 1 && j != 0 && j != 6) {
                             f32 ej_x = ej->x;
                             f32 ej_y = ej->y;
@@ -1937,15 +1933,10 @@ s32 grZebes_801DBB60(s32 arg)
                                 }
                             }
                         }
-                        ej++;
-                        j++;
-                        rem--;
-                    } while (rem != 0);
+                    }
                 }
             }
-            i++;
-            ei++;
-        } while (i < 20);
+        }
 
         if (max_dist_sq < 0.0f) {
             HSD_ASSERT(0x8D2, 0);
@@ -1965,7 +1956,7 @@ s32 grZebes_801DBB60(s32 arg)
 
             inv_len_sq = 1.0f / (dx * dx + dy * dy);
 
-            do {
+            for (k = 0; k < 20; k++, bp++) {
                 if (bp->active == 1 && k != 0 && k != 6) {
                     f32 by = bp->y;
                     f32 bx = bp->x;
@@ -2069,9 +2060,7 @@ s32 grZebes_801DBB60(s32 arg)
                         }
                     }
                 }
-                bp++;
-                k++;
-            } while (k < 20);
+            }
 
             grMaterial_801C8DE0((Item_GObj*) yaku, x1, y1, 0.0f, x2, y2,
                                0.0f, width);
@@ -2189,15 +2178,12 @@ void grZebes_801DC744(s32 arg0, s32 arg1)
         f32 y_step = (base[3].y - y_start) / 6.0f;
         f32* sp = &scales[0];
 
-        i = 0;
-        do {
+        for (i = 0; i < 7; i++, sp++) {
             grZebes_801DAE70(i, arg1,
                 x_step * (f32) i + x_start,
                 y_step * (f32) i + y_start,
                 *sp);
-            i++;
-            sp++;
-        } while (i < 7);
+        }
     }
 
     if (arg0 & 2) {
