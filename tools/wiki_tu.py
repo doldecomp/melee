@@ -76,16 +76,14 @@ def write(args):
         md = args.wiki_path.read_text()
         assignees = read_wiki(md)
 
-    print(
-        """# Translation Units
+    print("""# Translation Units
 
 Edit this page and fill in your own username to assign yourself to a file.
 
 Just write your username as plaintext and it will be formatted automatically later.
 
 File|Matched|Total|%|:grey_question:|Assignee<br>Discord|Assignee<br>GitHub
--|-|-|-|-|-|-"""
-    )
+-|-|-|-|-|-|-""")
     for unit in data["units"] or []:
 
         def friendly_size(value: int) -> str:

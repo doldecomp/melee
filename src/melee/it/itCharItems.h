@@ -484,7 +484,7 @@ typedef struct itPikachutJoltGround_ItemVars {
 
 typedef struct itPikachutJoltAir_ItemVars {
     /* +0 ip+DD4 */ char pad_0[0x4];
-    /* +4 ip+DD8 */ u32 xDD8;
+    /* +4 ip+DD8 */ Item_GObj* xDD8;
 } itPikachutJoltAir_ItemVars;
 
 typedef struct itPikachuthunder_ItemVars {
@@ -598,6 +598,10 @@ typedef struct itSamusMissile_ItemVars {
     /* +C +DE0 */ Fighter_GObj* owner;
     /* +10 +DE4 */ HSD_GObj* x10;
 } itSamusMissile_ItemVars;
+
+typedef struct itSeakNeedleHeld_ItemVars {
+    /* +0 ip+DD4 */ Fighter_GObj* owner;
+} itSeakNeedleHeld_ItemVars;
 
 typedef struct itSeakNeedleThrown_ItemVars {
     /*  +0 ip+DD4 */ char pad_0[0x4];

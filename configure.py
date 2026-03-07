@@ -105,7 +105,7 @@ parser.add_argument(
     "--ninja",
     metavar="BINARY",
     type=Path,
-    help="path to ninja binary (optional)"
+    help="path to ninja binary (optional)",
 )
 parser.add_argument(
     "--verbose",
@@ -180,11 +180,11 @@ if not config.non_matching:
     config.asm_dir = None
 
 # Tool versions
-config.binutils_tag = "2.42-1"
-config.compilers_tag = "20250520"
-config.dtk_tag = "v1.6.2"
-config.objdiff_tag = "v3.0.0"
-config.sjiswrap_tag = "v1.2.1"
+config.binutils_tag = "2.42-2"
+config.compilers_tag = "20251118"
+config.dtk_tag = "v1.8.3"
+config.objdiff_tag = "v3.6.1"
+config.sjiswrap_tag = "v1.2.2"
 config.wibo_tag = "0.7.0"
 
 # Project
@@ -344,9 +344,7 @@ def Lib(
     return lib
 
 
-def DolphinLib(
-    lib_name: str, objects: Objects, fix_epilogue=False
-) -> Library:
+def DolphinLib(lib_name: str, objects: Objects, fix_epilogue=False) -> Library:
     cflags = cflags_base + [
         "-requireprotos",
         "-fp_contract off",
@@ -660,7 +658,7 @@ config.libs = [
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_Fall.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_FallAerial.c"),
             Object(Matching, "melee/ft/ftswing.c"),
-            Object(NonMatching, "melee/ft/ft_0CD1.c"),
+            Object(Matching, "melee/ft/ft_0CD1.c"),
             Object(Matching, "melee/ft/ft_0CD3.c"),
             Object(Matching, "melee/ft/ftstarrodswing.c"),
             Object(Matching, "melee/ft/ftlipstickswing.c"),
@@ -731,7 +729,7 @@ config.libs = [
             Object(NonMatching, "melee/ft/chara/ftKirby/ftKb_Init.c"),
             Object(NonMatching, "melee/ft/chara/ftKirby/ftKb_SpecialN.c"),
             Object(NonMatching, "melee/ft/chara/ftKirby/ftKb_SpecialNPk.c"),
-            Object(NonMatching, "melee/ft/chara/ftKirby/ftKb_SpecialNFx.c"),
+            Object(NonMatching, "melee/ft/chara/ftKirby/ftkirbyspecialfox.c"),
             Object(NonMatching, "melee/ft/chara/ftKirby/ftKb_SpecialNNs.c"),
             Object(NonMatching, "melee/ft/chara/ftKirby/ftKb_SpecialNZd.c"),
             Object(NonMatching, "melee/ft/chara/ftKirby/ftKb_SpecialNYs.c"),
@@ -919,13 +917,13 @@ config.libs = [
             Object(Matching, "melee/gm/gm_17AD.c"),
             Object(Matching, "melee/gm/gm_17BA.c"),
             Object(NonMatching, "melee/gm/gmregcommon.c"),
-            Object(NonMatching, "melee/gm/gm_17C0.c"),
+            Object(NonMatching, "melee/gm/gmregclear.c"),
             Object(NonMatching, "melee/gm/gm_1832.c"),
             Object(NonMatching, "melee/gm/gm_18A5.c"),
             Object(NonMatching, "melee/gm/gmtou.c"),
             Object(NonMatching, "melee/gm/gm_19EF.c"),
             Object(Matching, "melee/gm/gmpause.c"),
-            Object(Equivalent, "melee/gm/gmtitle.c"),
+            Object(Matching, "melee/gm/gmtitle.c"),
             Object(NonMatching, "melee/gm/gmcamera.c"),
             Object(Matching, "melee/gm/gm_1A36.c"),
             Object(NonMatching, "melee/gm/gm_1A3F.c"),
@@ -947,7 +945,7 @@ config.libs = [
             Object(Matching, "melee/gm/gm_1AED.c"),
             Object(NonMatching, "melee/gm/gm_1B03.c"),
             Object(NonMatching, "melee/gm/gmclassic.c"),
-            Object(NonMatching, "melee/gm/gmadventure.c"),
+            Object(Matching, "melee/gm/gmadventure.c"),
             Object(NonMatching, "melee/gm/gmallstar.c"),
             Object(Matching, "melee/gm/gmmultiman.c"),
             Object(Matching, "melee/gm/gmsupersudden.c"),
@@ -1110,26 +1108,26 @@ config.libs = [
             Object(Matching, "melee/it/items/itcapsule.c"),
             Object(NonMatching, "melee/it/items/itbombhei.c"),
             Object(NonMatching, "melee/it/items/itdosei.c"),
-            Object(NonMatching, "melee/it/items/itheart.c"),
-            Object(NonMatching, "melee/it/items/ittomato.c"),
+            Object(Matching, "melee/it/items/itheart.c"),
+            Object(Matching, "melee/it/items/ittomato.c"),
             Object(Matching, "melee/it/items/itstar.c"),
             Object(Matching, "melee/it/items/itbat.c"),
             Object(Matching, "melee/it/items/itsword.c"),
-            Object(NonMatching, "melee/it/items/itbox.c"),
+            Object(Matching, "melee/it/items/itbox.c"),
             Object(NonMatching, "melee/it/items/ittaru.c"),
             Object(Matching, "melee/it/items/itegg.c"),
             Object(NonMatching, "melee/it/items/itkusudama.c"),
             Object(Matching, "melee/it/items/itparasol.c"),
-            Object(NonMatching, "melee/it/items/itgshell.c"),
+            Object(Matching, "melee/it/items/itgshell.c"),
             Object(NonMatching, "melee/it/items/itrshell.c"),
             Object(Matching, "melee/it/items/itlgun.c"),
             Object(NonMatching, "melee/it/items/itfreeze.c"),
-            Object(NonMatching, "melee/it/items/itfoods.c"),
+            Object(Matching, "melee/it/items/itfoods.c"),
             Object(Matching, "melee/it/items/itmsbomb.c"),
             Object(NonMatching, "melee/it/items/itflipper.c"),
             Object(NonMatching, "melee/it/items/itsscope.c"),
             Object(Matching, "melee/it/items/itstarrod.c"),
-            Object(NonMatching, "melee/it/items/itharisen.c"),
+            Object(Matching, "melee/it/items/itharisen.c"),
             Object(Matching, "melee/it/items/itfflower.c"),
             Object(Matching, "melee/it/items/itkinoko.c"),
             Object(Matching, "melee/it/items/itdkinoko.c"),
@@ -1138,18 +1136,18 @@ config.libs = [
             Object(Matching, "melee/it/items/itscball.c"),
             Object(Matching, "melee/it/items/itrabbitc.c"),
             Object(Matching, "melee/it/items/itmetalb.c"),
-            Object(NonMatching, "melee/it/items/itlipstick.c"),
+            Object(Matching, "melee/it/items/itlipstick.c"),
             Object(Matching, "melee/it/items/itspycloak.c"),
-            Object(NonMatching, "melee/it/items/ittarucann.c"),
+            Object(Matching, "melee/it/items/ittarucann.c"),
             Object(Matching, "melee/it/items/itmball.c"),
             Object(Matching, "melee/it/items/itlgunray.c"),
             Object(Matching, "melee/it/items/itstarrodstar.c"),
             Object(NonMatching, "melee/it/items/itsscopebeam.c"),
             Object(NonMatching, "melee/it/items/itlgunbeam.c"),
-            Object(NonMatching, "melee/it/items/ithammerhead.c"),
+            Object(Matching, "melee/it/items/ithammerhead.c"),
             Object(NonMatching, "melee/it/items/itlipstickspore.c"),
             Object(Matching, "melee/it/items/itfflowerflame.c"),
-            Object(NonMatching, "melee/it/items/itevyoshiegg.c"),
+            Object(Matching, "melee/it/items/itevyoshiegg.c"),
             # Fighter-related items
             Object(Matching, "melee/it/items/itmariofireball.c"),
             Object(NonMatching, "melee/it/items/itkirbycutterbeam.c"),
@@ -1172,15 +1170,15 @@ config.libs = [
             Object(Matching, "melee/it/items/itlinkbow.c"),
             Object(NonMatching, "melee/it/items/itnesspkflushexplode.c"),
             Object(NonMatching, "melee/it/items/itseakneedlethrown.c"),
-            Object(NonMatching, "melee/it/items/itseakneedleheld.c"),
+            Object(Matching, "melee/it/items/itseakneedleheld.c"),
             Object(Matching, "melee/it/items/itseakvanish.c"),
             Object(NonMatching, "melee/it/items/itpikachuthunder.c"),
-            Object(NonMatching, "melee/it/items/itmariocape.c"),
+            Object(Matching, "melee/it/items/itmariocape.c"),
             Object(NonMatching, "melee/it/items/ityoshieggthrow.c"),
             Object(Matching, "melee/it/items/ityoshistar.c"),
             Object(NonMatching, "melee/it/items/itpikachutjoltground.c"),
             Object(NonMatching, "melee/it/items/itpikachutjoltair.c"),
-            Object(NonMatching, "melee/it/items/itsamusbomb.c"),
+            Object(Matching, "melee/it/items/itsamusbomb.c"),
             Object(NonMatching, "melee/it/items/itsamuschargeshot.c"),
             Object(NonMatching, "melee/it/items/itsamusmissile.c"),
             Object(NonMatching, "melee/it/items/itsamusgrapple.c"),
@@ -1214,14 +1212,13 @@ config.libs = [
             Object(NonMatching, "melee/it/items/itclinkmilk.c"),
             # Pokémon
             Object(Matching, "melee/it/items/ittosakinto.c"),
-            Object(NonMatching, "melee/it/items/itchicorita.c"),
-            Object(NonMatching, "melee/it/items/itchicoritaleaf.c"),
+            Object(Matching, "melee/it/items/itchicorita.c"),
             Object(NonMatching, "melee/it/items/itkabigon.c"),
             Object(NonMatching, "melee/it/items/itkamex.c"),
             Object(NonMatching, "melee/it/items/itmatadogas.c"),
             Object(Matching, "melee/it/items/itlizardon.c"),
             Object(Matching, "melee/it/items/itfire.c"),
-            Object(NonMatching, "melee/it/items/itthunder.c"),
+            Object(Matching, "melee/it/items/itthunder.c"),
             Object(Matching, "melee/it/items/itfreezer.c"),
             Object(NonMatching, "melee/it/items/itsonans.c"),
             Object(Matching, "melee/it/items/ithassam.c"),
@@ -1243,7 +1240,7 @@ config.libs = [
             Object(Matching, "melee/it/items/itporygon2.c"),
             Object(NonMatching, "melee/it/items/ithinoarashi.c"),
             Object(Matching, "melee/it/items/itmaril.c"),
-            Object(NonMatching, "melee/it/items/itfushigibana.c"),
+            Object(Matching, "melee/it/items/itfushigibana.c"),
             # Indivudal items
             Object(NonMatching, "melee/it/items/itoldkuri.c"),
             Object(Matching, "melee/it/items/itmato.c"),
@@ -1261,23 +1258,23 @@ config.libs = [
             Object(NonMatching, "melee/it/items/it_2E5A.c"),
             Object(Matching, "melee/it/items/it_2E6A.c"),
             Object(NonMatching, "melee/it/items/itarwinglaser.c"),
-            Object(NonMatching, "melee/it/items/itoctarockstone.c"),
+            Object(Matching, "melee/it/items/itoctarockstone.c"),
             Object(Matching, "melee/it/items/itleadead.c"),
             Object(NonMatching, "melee/it/items/itgreatfoxlaser.c"),
             Object(NonMatching, "melee/it/items/ittincle.c"),
             Object(NonMatching, "melee/it/items/itkyasarin.c"),
             Object(Matching, "melee/it/items/itwhispyapple.c"),
             Object(NonMatching, "melee/it/items/ittools.c"),
-            Object(NonMatching, "melee/it/items/itkyasarinegg.c"),
+            Object(Matching, "melee/it/items/itkyasarinegg.c"),
             Object(NonMatching, "melee/it/items/itmasterhandlaser.c"),
             Object(Matching, "melee/it/items/itmasterhandbullet.c"),
             Object(NonMatching, "melee/it/items/itcrazyhandbomb.c"),
             Object(Matching, "melee/it/items/itcoin.c"),
             Object(NonMatching, "melee/it/items/itkirby_2F23.c"),
             Object(Matching, "melee/it/items/it_2F28.c"),
-            Object(Matching, "melee/it/items/it_2F2B.c"),
+            Object(Matching, "melee/it/items/ityoshitongue.c"),
             Object(Matching, "melee/it/items/itkirbyyoshispecialn.c"),
-            Object(NonMatching, "melee/it/items/it_27CF.c"),
+            Object(Matching, "melee/it/items/ityoshiegglay.c"),
         ],
     ),
     MeleeLib(
@@ -1640,7 +1637,11 @@ config.libs = [
             Object(Matching, "sysdolphin/baselib/gobjinit.c"),
             Object(NonMatching, "sysdolphin/baselib/particle.c"),
             Object(NonMatching, "sysdolphin/baselib/psdisp.c"),
-            Object(Matching, "sysdolphin/baselib/psdisptev.c", extra_cflags=["-Cpp_exceptions on"]),
+            Object(
+                Matching,
+                "sysdolphin/baselib/psdisptev.c",
+                extra_cflags=["-Cpp_exceptions on"],
+            ),
             Object(NonMatching, "sysdolphin/baselib/psappsrt.c"),
             Object(NonMatching, "sysdolphin/baselib/sobjlib.c"),
             Object(NonMatching, "sysdolphin/baselib/sislib.c"),
@@ -1650,7 +1651,11 @@ config.libs = [
             Object(NonMatching, "sysdolphin/baselib/hsd_3B27.c"),
             Object(NonMatching, "sysdolphin/baselib/hsd_3B2B.c"),
             Object(NonMatching, "sysdolphin/baselib/hsd_3B2E.c"),
-            Object(Matching, "sysdolphin/baselib/hsd_3B33.c", extra_cflags=["-Cpp_exceptions on"]),
+            Object(
+                Matching,
+                "sysdolphin/baselib/hsd_3B33.c",
+                extra_cflags=["-Cpp_exceptions on"],
+            ),
             Object(NonMatching, "sysdolphin/baselib/hsd_3B34.c"),
         ],
     ),

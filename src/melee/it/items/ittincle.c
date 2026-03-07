@@ -7,6 +7,8 @@
 #include "it/itCommonItems.h"
 #include "it/item.h"
 
+/* 2EC870 */ static void it_802EC870(Item_GObj*, int);
+
 /// #it_802EB5C8
 
 bool itTincle_Logic13_DmgReceived(Item_GObj* gobj)
@@ -74,6 +76,15 @@ bool itTincle_UnkMotion2_Anim(Item_GObj* gobj)
     PAD_STACK(8);
     if (!it_80272C6C(gobj)) {
         Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
+    }
+    return false;
+}
+
+bool itTincle_UnkMotion2_Coll(Item_GObj* gobj)
+{
+    PAD_STACK(8);
+    if (it_8026DAA8(gobj) != 0) {
+        it_802EC870(gobj, 1);
     }
     return false;
 }
@@ -220,6 +231,22 @@ bool itTincle_UnkMotion9_Coll(Item_GObj* gobj)
 /// #it_802EC4D0
 
 /// #itTincle_UnkMotion10_Anim
+
+bool itTincle_UnkMotion10_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    PAD_STACK(8);
+
+    if (it_80272C6C(gobj) == 0) {
+        ip->xDD4_itemVar.tincle.x20--;
+        if (ip->xDD4_itemVar.tincle.x20 != 0) {
+            Item_80268E5C(gobj, 10, 2);
+        } else {
+            it_802EC604(gobj);
+        }
+    }
+    return false;
+}
 
 void itTincle_UnkMotion10_Phys(Item_GObj* gobj) {}
 

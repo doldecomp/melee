@@ -5,6 +5,8 @@
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
 #include "lb/types.h"
+#include "cm/camera.h"
+#include "ft/ftlib.h"
 
 #include <baselib/random.h>
 
@@ -24,7 +26,19 @@ void grPushOn_802182C4(bool arg) {}
 
 /// #grPushOn_802182C8
 
-/// #grPushOn_80218330
+void grPushOn_80218330(void)
+{
+    HSD_GObj* gobj;
+    Vec3 vec;
+
+    grPushOn_802183E4(2);
+    gobj = Ground_801C57A4();
+    if (gobj != NULL) {
+        ftLib_80086644(gobj, &vec);
+        Ground_801C38BC(vec.x, vec.y);
+        Camera_8002F3AC();
+    }
+}
 
 void grPushOn_80218378(void)
 {

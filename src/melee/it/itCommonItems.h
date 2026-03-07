@@ -110,6 +110,16 @@ typedef struct itBox_ItemVars {
     /* +10 */ f32 rot_vel_y; ///< Rotation velocity around Y axis (wobble)
 } itBox_ItemVars;
 
+typedef struct itEvYoshiEgg_DatAttrs {
+    s32 x0;
+    u32* x4;
+} itEvYoshiEgg_DatAttrs;
+
+typedef struct itEvYoshiEgg_ItemVars {
+    /* +0 */ s32 xDD4;
+    /* +4 */ s32 xDD8;
+} itEvYoshiEgg_ItemVars;
+
 typedef struct itWstar_ItemVars {
     f32 xDD4;
     f32 xDD8;
@@ -147,10 +157,25 @@ typedef struct itKyasarinAttributes {
     /* +8 */ f32 x8;
 } itKyasarinAttributes;
 
+typedef struct itKyasarinEgg_ItemVars {
+    /* +0  ip+DD4 */ char pad_0[0x20];
+    /* +20 ip+DF4 */ s32 x20;
+    /* +24 ip+DF8 */ f32 x24;
+} itKyasarinEgg_ItemVars;
+
+typedef struct itKyasarinEggAttributes {
+    /* +0  */ s32* x0;
+    /* +4  */ f32 x4;
+    /* +8  */ f32 x8;
+    /* +C  */ s32 xC;
+    /* +10 */ s32 x10;
+} itKyasarinEggAttributes;
+
 typedef struct itHououAttr {
     /* +00 */ f32 timer;
     /* +04 */ u8 x4_pad[0x14];
     /* +18 */ f32 x18;
+    /* +1C */ f32 x1C;
 } itHououAttr;
 
 typedef struct itLugiaAttributes {
@@ -336,7 +361,7 @@ typedef struct itFlipper_ItemVars {
     f32 xDE0;
     f32 xDE4;
     s32 xDE8;
-    s32 xDEC;
+    HSD_JObj* xDEC;
 } itFlipper_ItemVars;
 
 typedef struct itFlipper_DatAttrs {
@@ -349,8 +374,8 @@ typedef struct itHarisen_DatAttrs {
 } itHarisen_DatAttrs;
 
 typedef struct itFoods_ItemVars {
-    /* +0 ip+DD4 */ s32 x0;
-    /* +4 ip+DD8 */ s32 heal_amount;
+    /* +0 ip+DD4 */ u32 x0;
+    /* +4 ip+DD8 */ u32 heal_amount;
 } itFoods_ItemVars;
 
 typedef struct itFoodsAttributes {
@@ -404,7 +429,10 @@ typedef struct {
 } itMBallAttributes;
 
 typedef struct {
-    /* 0x00 */ Vec3* x0;
+    union {
+        Vec3* x0_f32;
+        S32Vec3* x0_s32;
+    } x0;
     /* 0x04 */ s32 x4;
     /* 0x08 */ s32 x8;
     /* 0x0C */ s32 xC;
@@ -440,7 +468,7 @@ typedef struct itLikelike_ItemVars {
 } itLikelike_ItemVars;
 
 typedef struct {
-    f32 x0;
+    f32 initial_velocity;
     f32 x4;
 } itHammerheadAttributes;
 
@@ -1207,6 +1235,11 @@ typedef struct itSScopeAttributes {
     /* +34 */ Vec3 x34;
 } itSScopeAttributes;
 
+typedef struct itScopeBeam_ItemVars {
+    int x0;
+    float x4;
+} itScopeBeam_ItemVars;
+
 typedef struct itsonansAttributes {
     f32 x0;
     f32 x4;
@@ -1418,6 +1451,8 @@ typedef struct itUnknownAttributes {
     /* +10 */ f32 x10;
     /* +14 */ char pad_14[0x4];
     /* +18 */ s32 x18;
+    /* +1C */ s32 x1C;
+    /* +20 */ s32 x20;
 } itUnknownAttributes;
 
 typedef struct itCrazyHandBombAttributes {

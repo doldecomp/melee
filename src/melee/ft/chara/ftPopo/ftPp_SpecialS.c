@@ -1170,7 +1170,22 @@ void ftPp_SpecialHiThrow2_Anim(Fighter_GObj* gobj)
     }
 }
 
-/// #ftPp_SpecialAirHiThrow2_Anim
+void ftPp_SpecialAirHiThrow2_Anim(Fighter_GObj* gobj)
+{
+    Fighter* fp;
+    ftIceClimberAttributes* da;
+
+    fp = GET_FIGHTER(gobj);
+    da = fp->dat_attrs;
+
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        ftCo_80096900(gobj, 0, 1, 0, da->x74, da->x78);
+    } else {
+        Fighter* fp2 = GET_FIGHTER(gobj);
+        ++fp2->mv.pp.unk_80123954.x0;
+        ftPp_SpecialS_80120FE0(gobj);
+    }
+}
 
 void ftPp_SpecialHiThrow2_IASA(Fighter_GObj* gobj) {}
 

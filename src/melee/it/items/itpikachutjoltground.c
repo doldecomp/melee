@@ -9,9 +9,9 @@
 #include "it/item.h"
 #include "it/items/itpikachutjoltair.h"
 #include "lb/lbvector.h"
-#include "MSL/trigf.h"
 
 #include <math.h>
+#include <trigf.h>
 
 /* 2B37F0 */ static void itPikachutjoltground_UnkMotion1_Phys(Item_GObj*);
 
@@ -69,7 +69,7 @@ bool itPikachutjoltground_UnkMotion1_Anim(Item_GObj* gobj)
     if (gobj != NULL && ip != NULL) {
         if (air_gobj == NULL) {
             flag = true;
-        } else if (it_802B3EFC(air_gobj) != (u32) gobj) {
+        } else if (it_802B3EFC(air_gobj) != gobj) {
             flag = true;
         } else {
             flag = false;

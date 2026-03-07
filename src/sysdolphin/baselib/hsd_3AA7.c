@@ -143,7 +143,7 @@ int hsd_803AC340(void* header)
         extra_size += 0x200;
     }
 
-    extra_size += base_size;
+    extra_size = base_size + extra_size;
     return extra_size + 0x40;
 }
 
@@ -222,7 +222,15 @@ s32 fn_803ACB74(s32 seq_a, s32 seq_b)
 s32 fn_803ACBE8(CardState* state, s32 block_idx)
 {
     u32 size = state->x8;
-    return (s32) (size * (block_idx + (state->x24 + size + 0x2F) / size - 1));
+    u32 temp = state->x24 + size;
+    u32 num = temp + 0x2F;
+
+    temp = num / size;
+    {
+        u32 idx = temp - 1;
+        idx = block_idx + idx;
+        return size * idx;
+    }
 }
 /// @todo Currently 95.90% match - arg0/arg1 register swap (r27/r22 vs r26/r27)
 s32 fn_803ACC0C(CardState* state, s32 block_idx, s32 file_id, s32 seq_num,
@@ -740,12 +748,14 @@ void hsd_803B24E4(s32* ctx, int channel, int file_no, void* work_buf)
 /// @todo Currently 90.00% match - same regalloc issue as fn_803ACBE8
 s32 hsd_803B2674(CardState* state)
 {
-    u32 blocks;
+    s32 blocks;
 
     state->x24 = hsd_803AC340((u8*) state + 0x3B0);
-    blocks = (state->x24 + state->x8 + 0x2F) / state->x8;
+
+    blocks = (0x2F + state->x24 + state->x8) / state->x8;
     blocks += fn_803AC7DC(state);
-    return (s32) blocks;
+
+    return blocks;
 }
 
 /// @todo Currently 87.04% match - result saved to r27 instead of staying in r3

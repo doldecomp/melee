@@ -15,13 +15,13 @@ buildPythonPackage {
   src = fetchFromGitHub {
     owner = "matt-kempster";
     repo = "m2c";
-    rev = "f201e8861ba0143676f3078d7354d2f7255555b3";
-    hash = "sha256-WhXIeeiRLDeVSgbIuCAlJVTLHtFbJGsM+ACmhsAPUvk=";
+    rev = "900b0b6a55307f6cd1270023f641c7380083d8c7";
+    hash = "sha256-Lobxj10GM/AeExiX6utYKbzZoyjmHm/J+PG/WbhmorU=";
   };
 
   postPatch = ''
     substituteInPlace pyproject.toml \
-      --replace-fail 'graphviz = "^0.20.1"' ""
+      --replace-fail '"graphviz ~= 0.20.1",' ""
   '';
 
   pyproject = true;

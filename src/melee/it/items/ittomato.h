@@ -7,6 +7,8 @@
 
 #include "it/items/types.h"
 
+/* 2841B4 */ Item_GObj* it_802841B4(Item_GObj* gobj, Vec3* arg1, s32 arg2);
+/* 28428C */ void it_8028428C(Item_GObj* gobj);
 /* 2842A4 */ void itTomato_Logic9_Spawned(Item_GObj*);
 /* 284324 */ void itTomato_Logic9_Destroyed(Item_GObj*);
 /* 2844E4 */ void itTomato_Logic9_PickedUp(Item_GObj*);

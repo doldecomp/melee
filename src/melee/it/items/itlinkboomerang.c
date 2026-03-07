@@ -70,8 +70,8 @@ static inline void clamp_tau(f32* angle)
 
 static inline void norm_xF74(Item* ip)
 {
-    f32 angle;
-    if (ip->facing_dir != 1.0f) {
+    f64 angle;
+    if (ip->facing_dir == 1.0f) {
         angle = ip->xDD4_itemVar.linkboomerang.xF74;
     } else {
         angle = ip->xDD4_itemVar.linkboomerang.xF74 - M_PI;

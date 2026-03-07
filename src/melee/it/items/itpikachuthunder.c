@@ -45,7 +45,16 @@ void it_802B2080(Item_GObj* gobj)
     it_8026BB44(gobj);
 }
 
-/// #itPikachuthunder_UnkMotion0_Anim
+bool itPikachuthunder_UnkMotion0_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->xDD4_itemVar.pikachuthunder.x8 <= 0) {
+        it_802B211C(gobj);
+    } else {
+        ip->xDD4_itemVar.pikachuthunder.x8--;
+    }
+    return false;
+}
 
 /// #it_802B211C
 

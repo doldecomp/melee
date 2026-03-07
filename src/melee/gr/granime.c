@@ -785,4 +785,13 @@ void grAnime_801C86D4(s32 arg0, HSD_GObj* arg1, s32 arg2)
     HSD_JObjResetRST(Ground_801C3FA4(arg1, arg2), joint);
 }
 
-/// #grAnime_801C8780
+void grAnime_801C8780(HSD_GObj* gobj, u32 arg1, u32 arg2, f32 arg3, f32 arg4)
+{
+    UnkArchiveStruct* archive;
+
+    Ground_801C498C();
+    archive = grDatFiles_801C6330(arg1);
+    if (archive == NULL) {
+        __assert("granime.c", 0x617, "0");
+    }
+}

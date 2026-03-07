@@ -35,11 +35,13 @@ def has_function(obj_path: Path, function_name: str) -> bool:
                     return True
     return False
 
+
 def find_obj(root: Path, function_name: str) -> Optional[Path]:
     for p in root.rglob("*.o"):
         if has_function(p, function_name):
             return p.relative_to(root)
     return None
+
 
 def resolve_path(p: Path) -> str:
     return str(p.resolve())
@@ -77,7 +79,9 @@ def gen_ctx() -> None:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Decomp a function or translation unit using m2c")
+    parser = argparse.ArgumentParser(
+        description="Decomp a function or translation unit using m2c"
+    )
 
     _ = parser.add_argument(
         "m2c_input",
@@ -137,10 +141,13 @@ def main() -> None:
 
     if (obj_file := find_obj(OBJ_ROOT, m2c_input)) is not None:
         asm_file = ASM_ROOT / cast(Path, obj_file).with_suffix(".s")
-        m2c_args = [ "--function", m2c_input ]
+        m2c_args = ["--function", m2c_input]
     else:
         if args.write:
-            print(f"--write currently unimplemented with translation unit input", file=stderr)
+            print(
+                f"--write currently unimplemented with translation unit input",
+                file=stderr,
+            )
             sys.exit(1)
         is_function = False
         asm_file = ASM_ROOT / Path(m2c_input).with_suffix(".s")
@@ -151,7 +158,9 @@ def main() -> None:
             "-m",
             "m2c.main",
             *args.m2c_args,
-            "--knr", "--pointer", "left",
+            "--knr",
+            "--pointer",
+            "left",
             "--target",
             "ppc-mwcc-c",
             "--context",
@@ -227,9 +236,16 @@ def main() -> None:
 
             _ = src_file.write_text(result)
     else:
-        print(f"If a function was intended, then no function with the name <{m2c_input}> was found.", file=stderr)
-        print(f"If a TU was intended, then the expected asm file does not exist at path {asm_file}", file=stderr)
+        print(
+            f"If a function was intended, then no function with the name <{m2c_input}> was found.",
+            file=stderr,
+        )
+        print(
+            f"If a TU was intended, then the expected asm file does not exist at path {asm_file}",
+            file=stderr,
+        )
         sys.exit(1)
+
 
 if __name__ == "__main__":
     main()

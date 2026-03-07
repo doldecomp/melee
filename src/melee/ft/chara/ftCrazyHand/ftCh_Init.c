@@ -1052,6 +1052,17 @@ void ftCh_Slap_Phys(HSD_GObj* gobj)
 
 /// #fn_801577B4
 
+static void fn_801577B4(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftCrazyHand_DatAttrs* da = fp->ft_data->ext_attr;
+
+    if (fp->cur_pos.x > da->x3C) {
+        fp->self_vel.x = ftCh_Init_804DA080;
+        ftCh_Init_801577F8(gobj);
+    }
+}
+
 void ftCh_Init_801577F8(HSD_GObj* gobj)
 {
     Fighter_ChangeMotionState(gobj, ftMh_MS_Walk2, 0, ftCh_Init_804DA070,

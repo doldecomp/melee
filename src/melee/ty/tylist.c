@@ -157,7 +157,7 @@ void un_803127D4(void)
 }
 
 /// Formats a number into a string buffer using digit glyphs from the font.
-void un_80312834(char* buf, u32 num)
+char* un_80312834(char* buf, u32 num)
 {
     u8* lookup = ((SisFontData*) HSD_SisLib_804D1124[0])->digits;
     u32 idx;
@@ -184,6 +184,7 @@ void un_80312834(char* buf, u32 num)
     *buf++ = lookup[idx];
     *buf++ = lookup[idx + 1];
     *buf = 0;
+    return buf;
 }
 
 /// #un_80312904

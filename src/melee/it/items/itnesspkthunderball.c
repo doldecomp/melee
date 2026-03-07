@@ -3,9 +3,13 @@
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
+#include "it/it_2725.h"
 #include "lb/lbvector.h"
 #include "MSL/math.h"
-#include "MSL/trigf.h"
+
+#include <trigf.h>
+
+/* 2AC000 */ static bool itNesspkthunderball_UnkMotion0_Coll(Item_GObj* gobj);
 
 static inline void normalizeAngle(f32* angle)
 {
@@ -19,7 +23,30 @@ static inline void normalizeAngle(f32* angle)
 
 /// #it_802AB3F0
 
-/// #it_802AB468
+void it_802AB468(Item_GObj* gobj, f32* out, s32 unused)
+{
+    Item* ip;
+
+    if (gobj != NULL) {
+        ip = GET_ITEM(gobj);
+        if (ip != NULL) {
+            if (out == NULL) {
+                return;
+            }
+            *out = *(f32*) &ip->xDD4_itemVar.pkthunder.xEEC;
+            return;
+        }
+        if (out == NULL) {
+            return;
+        }
+        *out = 0.0f;
+        return;
+    }
+    if (out == NULL) {
+        return;
+    }
+    *out = 0.0f;
+}
 
 bool it_802AB4B8(Item_GObj* gobj, CollData* cd)
 {
@@ -68,7 +95,17 @@ HSD_GObj* it_802AB568(Item_GObj* gobj)
 
 /// #itNesspkthunderball_UnkMotion0_Phys
 
-/// #itNesspkthunderball_UnkMotion0_Coll
+bool itNesspkthunderball_UnkMotion0_Coll(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    PAD_STACK(8);
+
+    if (it_802AB4B8(gobj, &ip->x378_itemColl)) {
+        it_802725D4(gobj);
+        return true;
+    }
+    return false;
+}
 
 bool itNessPKThunderball_Logic26_DmgDealt(Item_GObj* gobj)
 {

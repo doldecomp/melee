@@ -9,7 +9,7 @@
 
 #include "lb/forward.h"
 
-/* 2B3EFC */ u32 it_802B3EFC(Item_GObj* gobj);
+/* 2B3EFC */ Item_GObj* it_802B3EFC(Item_GObj* gobj);
 /* 2B3F20 */ void it_802B3F20(Item_GObj*, Vec3*);
 /* 2B3F88 */ void it_802B3F88(Item_GObj* gobj, Vec3* pos, CollData* coll,
                               Vec3* vel);

@@ -12,7 +12,7 @@
 /* 218330 */ void grPushOn_80218330(void);
 /* 218378 */ void grPushOn_80218378(void);
 /* 2183DC */ bool grPushOn_802183DC(void);
-/* 2183E4 */ UNK_RET grPushOn_802183E4(UNK_PARAMS);
+/* 2183E4 */ void grPushOn_802183E4(int);
 /* 2184CC */ void grPushOn_802184CC(Ground_GObj*);
 /* 218590 */ bool grPushOn_80218590(Ground_GObj*);
 /* 218598 */ void grPushOn_80218598(Ground_GObj*);

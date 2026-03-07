@@ -51,7 +51,7 @@
 /* 27321C */ void it_8027321C(Item_GObj*);
 /* 27327C */ void it_8027327C(Item_GObj*, enum_t ID1, enum_t ID2);
 /* 2732E4 */ void it_802732E4(Item*, s32);
-/* 273318 */ void it_80273318(Item_GObj*, HSD_Joint*, s32);
+/* 273318 */ void it_80273318(Item_GObj*, HSD_Joint*);
 /// /* 273318 */ void it_80273318(Item_GObj*, HSD_Joint*);
 /* 273408 */ void it_80273408(Item_GObj*);
 /* 273454 */ void it_80273454(Item_GObj*);
