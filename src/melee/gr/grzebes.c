@@ -228,7 +228,38 @@ bool grZebes_801D9F7C(Ground_GObj* arg)
     return false;
 }
 
-/// #grZebes_801D9F84
+void grZebes_801D9F84(Ground_GObj* gobj)
+{
+    f32 slope;
+    f32 intercept;
+    Ground* gp = GET_GROUND(gobj);
+
+    switch (gp->gv.zebes2.xC4) {
+    case 0:
+        Ground_801C4368(&slope, &intercept);
+        if (slope > 5.0f) {
+            grAnime_801C7FF8(gobj, 3, 7, 2, 0.0f, 1.0f);
+            grAnime_801C78FC(gobj, 3, 7);
+            gp->gv.zebes2.xC4 = 1;
+            Ground_801C53EC(0x61A85);
+            return;
+        }
+        if (slope > -20.0f) {
+            grAnime_801C7FF8(gobj, 3, 7, 1, 0.0f, 1.0f);
+            grAnime_801C78FC(gobj, 3, 7);
+            gp->gv.zebes2.xC4 = 1;
+            Ground_801C53EC(0x61A85);
+            return;
+        }
+        return;
+    case 1:
+        if (grAnime_801C83D0(gobj, 3, 7) != 0) {
+            grAnime_801C7FF8(gobj, 3, 7, 0, 0.0f, 1.0f);
+            gp->gv.zebes2.xC4 = 0;
+        }
+        break;
+    }
+}
 
 void grZebes_801DA0C0(Ground_GObj* arg) {}
 

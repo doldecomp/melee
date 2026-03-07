@@ -673,7 +673,7 @@ struct grZebes_GroundVars {
 };
 
 struct grZebes_GroundVars2 {
-    /*  +0 gp+C4 */ u16 xC4;
+    /*  +0 gp+C4 */ s16 xC4;
 };
 
 struct grRCruise_GroundVars {
