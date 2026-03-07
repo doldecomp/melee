@@ -1106,12 +1106,10 @@ void grZebes_801DA254(Ground_GObj* gobj, f32 level)
     }
 
     if (lobj != NULL) {
-        GXColor c1, c2;
+        GXColor c1 = { 0xE6, 0xFF, 0x96, 0xFF };
+        GXColor c2 = { 0x1E, 0x1E, 0x00, 0xFF };
         f32 t;
         GXColor result;
-
-        *(s32*) &c1 = 0xE6FF96FF;
-        *(s32*) &c2 = 0x1E1E00FF;
 
         t = (level - grZe_804D6990->x90) / (grZe_804D6990->x8C - grZe_804D6990->x90);
         result.r = (u8) (t * (f32) (c1.r - c2.r) + (f32) c2.r);
