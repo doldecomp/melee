@@ -112,7 +112,17 @@ void fn_801D94F0(Ground_GObj* gobj)
     GET_GROUND(gobj)->gv.zebes.x0_b0 = false;
 }
 
-/// #grZebes_801D9508
+void grZebes_801D9508(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    HSD_GObj* map_a_gobj = Ground_801C2BA4(6);
+    HSD_ASSERT(909, map_a_gobj);
+    gp->gv.zebes.x4 = (u32) Ground_801C3FA4(map_a_gobj, 14);
+    gp->gv.zebes.x8 = 1;
+    gp->gv.zebes.xA = (s16) (HSD_Randi(600) + 3000);
+    gp->gv.zebes.x0_b0 = true;
+    Ground_801C10B8(gobj, fn_801D94F0);
+}
 
 bool grZebes_801D95B0(Ground_GObj* arg)
 {
