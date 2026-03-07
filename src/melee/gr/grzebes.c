@@ -1304,8 +1304,7 @@ s32 grZebes_801DAA08(void)
     s32* ip = indices;
     s32 ctr;
 
-    ctr = 4;
-    do {
+    for (ctr = 4; ctr != 0; ctr--) {
         if (ptr->active == 1 && idx != 0 && idx != 6 && ptr->unk04 == 0) {
             *ip = idx;
             ip++;
@@ -1341,7 +1340,7 @@ s32 grZebes_801DAA08(void)
         }
         ptr++;
         idx++;
-    } while (--ctr != 0);
+    }
 
     if (count == 0) {
         return 0;
