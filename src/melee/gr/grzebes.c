@@ -130,7 +130,9 @@ typedef struct grZe_YakumonoParam {
     /* 0x70 */ f32 x70;
     /* 0x74 */ f32 x74;
     /* 0x78 */ f32 x78;
-    /* 0x7C */ u8 pad_7C[0x88 - 0x7C];
+    /* 0x7C */ f32 x7C;
+    /* 0x80 */ f32 x80;
+    /* 0x84 */ f32 x84;
     /* 0x88 */ f32 x88;
     /* 0x8C */ f32 x8C;
     /* 0x90 */ f32 x90;
@@ -1622,6 +1624,243 @@ s32 grZebes_801DB088(Ground* gp, s32 arg1)
 }
 
 /// #grZebes_801DB3CC
+s32 grZebes_801DB3CC(HSD_GObj* gobj)
+{
+    grZe_BubbleEntry* base = grZe_8049F170;
+    grZe_BubbleEntry* ptr;
+    s32 popped = 0;
+    int i;
+
+    ptr = base;
+    for (i = 0; i < 20; i++, ptr++) {
+        if (ptr->active != 0) {
+            if (grZebes_801DB088((Ground*) gobj, i) != 0) {
+                popped = 1;
+            }
+        }
+    }
+
+    for (i = 0; i < 20; i++) {
+        if (base[i].active != 0) {
+            base[i].unk10 = 0.0f;
+            base[i].unk14 = -grZe_804D6990->x84;
+        }
+    }
+
+    {
+        grZe_BubbleEntry* cur = base;
+        int idx;
+        for (idx = 0; idx < 7; idx++, cur++) {
+            u8 active = cur->active;
+            if (active == 1 || active == 4) {
+                s32 neighbor_count = 0;
+                if (idx != 0 && idx != 6) {
+                    f32 fx = 0.0f;
+                    f32 fy = 0.0f;
+                    grZe_BubbleEntry* left = &base[idx - 1];
+                    if (left->active != 0) {
+                        f32 dy = left->y - cur->y;
+                        f32 dx = left->x - cur->x;
+                        f32 dist = dx * dx + dy * dy;
+                        if (dist > 0.0f) {
+                            dist = sqrtf(dist);
+                        }
+                        {
+                            f32 col_r = grZe_804D6990->x74;
+                            if (dist > col_r) {
+                                f32 max_force = grZe_804D6990->x80;
+                                f32 push = dist - col_r;
+                                if (push > max_force) {
+                                    push = max_force;
+                                }
+                                fx = (dx / dist) * push + 0.0f;
+                                fy = (dy / dist) * push + 0.0f;
+                            }
+                        }
+                        neighbor_count = 1;
+                    }
+                    {
+                        grZe_BubbleEntry* right = &base[idx + 1];
+                        if (right->active != 0) {
+                            f32 dy2 = right->y - cur->y;
+                            f32 dx2 = right->x - cur->x;
+                            f32 dist2 = dx2 * dx2 + dy2 * dy2;
+                            if (dist2 > 0.0f) {
+                                dist2 = sqrtf(dist2);
+                            }
+                            {
+                                f32 col_r2 = grZe_804D6990->x74;
+                                if (dist2 > col_r2) {
+                                    f32 max_force2 = grZe_804D6990->x80;
+                                    f32 push2 = dist2 - col_r2;
+                                    if (push2 > max_force2) {
+                                        push2 = max_force2;
+                                    }
+                                    fx += (dx2 / dist2) * push2;
+                                    fy += (dy2 / dist2) * push2;
+                                }
+                            }
+                            neighbor_count += 1;
+                        }
+                    }
+                    cur->x = cur->x + fx;
+                    cur->y = cur->y + fy;
+                    if (cur->active != 4 && neighbor_count != 2) {
+                        cur->active = 3;
+                        cur->timer = (s16) (HSD_Randi(0x3C) + 0xA);
+                    }
+                }
+            }
+        }
+    }
+
+    {
+        int a;
+        grZe_BubbleEntry* ea = base;
+        for (a = 0; a < 19; a++, ea++) {
+            if (ea->active != 0) {
+                int b = a + 1;
+                grZe_BubbleEntry* eb = &base[b];
+                int rem = 20 - b;
+                if (b < 20) {
+                    do {
+                        if (eb->active != 0) {
+                            f32 dy = eb->y - ea->y;
+                            f32 dx = eb->x - ea->x;
+                            f32 dist_sq = dx * dx + dy * dy;
+                            f32 dist;
+                            if (dist_sq > 0.0f) {
+                                dist = sqrtf(dist_sq);
+                            } else {
+                                dist = dist_sq;
+                            }
+                            {
+                                f32 raw_dist = dist;
+                                f32 avg_size = ea->size + eb->size;
+                                f32 col_rad =
+                                    grZe_804D6990->x74 * 0.5f * avg_size;
+                                if (dist < 0.001f) {
+                                    dy = 0.001f;
+                                    dx = 0.0f;
+                                    raw_dist = 0.001f;
+                                }
+                                if (raw_dist < col_rad) {
+                                    f32 strength =
+                                        (f32) ((f64) (f32) (((f64) (col_rad /
+                                                                     raw_dist) -
+                                                              1.0) *
+                                                             0.5) *
+                                               0.9);
+                                    if (a >= 7) {
+                                        f32 vy = -dy * strength;
+                                        f32 clamp_vy = vy;
+                                        if (vy < 0.0f) {
+                                            clamp_vy = 0.0f;
+                                        }
+                                        ea->unk10 += -dx * strength;
+                                        ea->unk14 += clamp_vy;
+                                    }
+                                    if (b >= 7) {
+                                        f32 vy2 = dy * strength;
+                                        if (vy2 < 0.0f) {
+                                            vy2 = 0.0f;
+                                        }
+                                        eb->unk10 += dx * strength;
+                                        eb->unk14 += vy2;
+                                    }
+                                } else if (!(raw_dist <
+                                             grZe_804D6990->x70 * 0.5f *
+                                                 avg_size) &&
+                                           raw_dist < grZe_804D6990->x6C *
+                                                          0.5f * avg_size)
+                                {
+                                    f32 attract =
+                                        grZe_804D6990->x78 / raw_dist;
+                                    if (a >= 7) {
+                                        ea->unk10 += dx * attract;
+                                        ea->unk14 += dy * attract;
+                                    }
+                                    if (b >= 7) {
+                                        eb->unk10 += -dx * attract;
+                                        eb->unk14 += -dy * attract;
+                                    }
+                                }
+                            }
+                        }
+                        eb++;
+                        b++;
+                        rem--;
+                    } while (rem != 0);
+                }
+            }
+        }
+    }
+
+    {
+        int k;
+        grZe_BubbleEntry* p = base;
+        for (k = 0; k < 20; k++, p++) {
+            if (p->active != 0) {
+                if (k == 0) {
+                    p->unk10 = 0.0f;
+                    p->unk14 = 0.0f;
+                    p->x = grZe_8049F158[0].x;
+                    p->y = grZe_8049F158[0].y;
+                } else if (k == 6) {
+                    p->unk10 = 0.0f;
+                    p->unk14 = 0.0f;
+                    p->x = grZe_8049F158[1].x;
+                    p->y = grZe_8049F158[1].y;
+                } else {
+                    f32 old_y = p->y;
+                    f32 old_x = p->x;
+                    f32 new_y = old_y + p->unk14;
+                    f32 new_x = old_x + p->unk10;
+                    if (new_y < grZe_8049F140[0].y &&
+                        new_x < grZe_8049F140[0].x)
+                    {
+                        if (old_y >= grZe_8049F140[0].y) {
+                            new_y = grZe_8049F140[0].y;
+                        } else if (old_x >= grZe_8049F140[0].x) {
+                            new_x = grZe_8049F140[0].x;
+                        }
+                    }
+                    if (new_y < grZe_8049F140[1].y &&
+                        new_x > grZe_8049F140[1].x)
+                    {
+                        if (old_y >= grZe_8049F140[1].y) {
+                            new_y = grZe_8049F140[1].y;
+                        } else if (old_x <= grZe_8049F140[1].x) {
+                            new_x = grZe_8049F140[1].x;
+                        }
+                    }
+                    p->x = new_x;
+                    p->y = new_y;
+                    {
+                        f32 vx = p->unk10;
+                        f32 max_v = grZe_804D6990->x88;
+                        if (vx > max_v) {
+                            p->unk10 = max_v;
+                        } else if (vx < -max_v) {
+                            p->unk10 = -max_v;
+                        }
+                    }
+                    {
+                        f32 vy = p->unk14;
+                        f32 max_v = grZe_804D6990->x88;
+                        if (vy > max_v) {
+                            p->unk14 = max_v;
+                        } else if (vy < -max_v) {
+                            p->unk14 = -max_v;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    return popped;
+}
 
 /// #grZebes_801DBB60
 
