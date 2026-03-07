@@ -43,6 +43,8 @@
                                      float z);
 /* 1DA9F0 */ static void fn_801DA9F0(UNK_T arg0, Ground* gp, float y,
                                      float* x);
+/* 1DB3CC */ static void grZebes_801DB3CC(s32 arg);
+/* 1DC744 */ static void grZebes_801DC744(s32, s32, f32);
 /* 1DCCB8 */ static DynamicsDesc* grZebes_801DCCB8(enum_t arg);
 /* 1DCCC0 */ static bool grZebes_801DCCC0(Vec3* arg, int arg0, HSD_JObj* jobj);
 
@@ -84,7 +86,14 @@ typedef struct grZe_BubbleEntry {
     /* 0x20 */ HSD_GObj* gobj;
 } grZe_BubbleEntry;
 
+/* 8049F140 */ static Vec3 grZe_8049F140[2];
+/* 8049F158 */ static Vec3 grZe_8049F158[2];
 /* 8049F170 */ static grZe_BubbleEntry grZe_8049F170[20];
+
+typedef struct grZe_BubbleConfig {
+    f32 scales[7];
+    Vec3 positions[4];
+} grZe_BubbleConfig;
 
 void grZebes_801D84A0(bool arg) {}
 
@@ -397,6 +406,41 @@ void grZebes_801DC260(void)
 /// #grZebes_801DC744
 
 /// #grZebes_801DC9DC
+
+static const grZe_BubbleConfig grZe_803B8044 = {
+    { 1.0f, 1.1f, 1.0f, 1.2f, 1.1f, 1.0f, 1.0f },
+    {
+        { 7.59f, 2.5f, 0.0f },
+        { 24.05f, 2.2f, 0.0f },
+        { 8.2f, -4.55f, 0.0f },
+        { 24.1f, -4.6f, 0.0f },
+    },
+};
+
+void grZebes_801DC9DC(s32 arg0)
+{
+    int i;
+
+    grZe_804D6994 = 0;
+
+    for (i = 0; i < 20; i++) {
+        grZe_8049F170[i].active = 0;
+        grZe_8049F170[i].gobj = NULL;
+    }
+
+    grZe_8049F158[0] = grZe_803B8044.positions[2];
+    grZe_8049F158[1] = grZe_803B8044.positions[3];
+    grZe_8049F140[0] = grZe_803B8044.positions[0];
+    grZe_8049F140[1] = grZe_803B8044.positions[1];
+
+    grZebes_801DC744(3, 1, grZe_803B8044.positions[1].x);
+
+    i = 0;
+    do {
+        grZebes_801DB3CC(arg0);
+        i++;
+    } while (i < 100);
+}
 
 bool grZebes_801DCB64(Vec3* vec, int val)
 {
