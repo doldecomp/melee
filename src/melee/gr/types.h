@@ -681,6 +681,23 @@ struct grZebes_GroundVars3 {
     /*  +4 gp+C8 */ s32 xC8;
 };
 
+struct grZebes_GroundVars4 {
+    /* +00 gp+C4 */ u8 xC4;
+    /* +01 gp+C5 */ u8 xC5;
+    /* +02 gp+C6 */ u8 xC6;
+    u8 pad_03;
+    /* +04 gp+C8 */ f32 xC8;
+    /* +08 gp+CC */ f32 xCC;
+    /* +0C gp+D0 */ f32 xD0;
+    /* +10 gp+D4 */ f32 xD4;
+    /* +14 gp+D8 */ u32 xD8;
+    /* +18 gp+DC */ u32 xDC;
+    /* +1C gp+E0 */ u32 xE0;
+    /* +20 gp+E4 */ s32 xE4;
+    /* +24 gp+E8 */ f32 xE8;
+    /* +28 gp+EC */ u32 xEC;
+};
+
 struct grRCruise_GroundVars {
     /* +00 gp+C4 */ char pad_0[0x14];
     /* +14 gp+D8 */ f32 x14;
@@ -1050,6 +1067,7 @@ struct Ground {
             struct grZebes_GroundVars zebes;
             struct grZebes_GroundVars2 zebes2;
             struct grZebes_GroundVars3 zebes3;
+            struct grZebes_GroundVars4 zebes4;
         } gv;
 
         /**

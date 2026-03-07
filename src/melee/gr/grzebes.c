@@ -11,6 +11,7 @@
 #include "gr/grdisplay.h"
 #include "gr/grlib.h"
 #include "gr/grzakogenerator.h"
+#include "gr/grmaterial.h"
 #include "gr/inlines.h"
 
 #include <baselib/gobjgxlink.h>
@@ -40,10 +41,10 @@
 /* 1D9F7C */ static bool grZebes_801D9F7C(Ground_GObj* arg);
 /* 1DA0C0 */ static void grZebes_801DA0C0(Ground_GObj* arg);
 /* 1DA3E8 */ static void grZebes_801DA3E8(void);
-/* 1DA9D8 */ static void fn_801DA9D8(UNK_T arg0, Ground* gp, float* y,
-                                     float z);
-/* 1DA9F0 */ static void fn_801DA9F0(UNK_T arg0, Ground* gp, float y,
-                                     float* x);
+/* 1DA9D8 */ static void fn_801DA9D8(Item_GObj* arg0, Ground* gp, Vec3* pos,
+                                     HSD_GObj* fobj, f32 slope);
+/* 1DA9F0 */ static void fn_801DA9F0(Item_GObj* arg0, Ground* gp, Vec3* pos,
+                                     HSD_GObj* fobj, f32 slope);
 /* 1DB3CC */ static void grZebes_801DB3CC(s32 arg);
 /* 1DC260 */ static void grZebes_801DC260(void);
 /* 1DC744 */ static void grZebes_801DC744(s32, s32, f32);
@@ -70,6 +71,13 @@ static StageCallbacks grZe_callbacks[] = {
     { NULL, NULL, NULL, NULL, { 0 } },
     { NULL, NULL, NULL, NULL, { 0 } },
 };
+
+static u8 grZe_803E1B20[0x0A] = { 0 };
+static u8 grZe_803E1B2C[0x58] = { 0 };
+static u8 grZe_803E1B84[0x0A] = "grzebes.c";
+static u8 grZe_803E1B90[0xF0] = { 0 };
+static u8 grZe_803E1C80[0x6C] = { 0 };
+static u8 grZe_803E1CEC[0x3C] = { 0 };
 
 /* 4D6990 */ static HSD_GObj* grZe_804D6990;
 /* 4D6994 */ static s32 grZe_804D6994;
@@ -163,7 +171,38 @@ bool grZebes_801D8814(Ground_GObj* arg)
 
 void grZebes_801D90FC(Ground_GObj* arg) {}
 
-/// #grZebes_801D9100
+void grZebes_801D9100(HSD_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+    HSD_JObj* child_jobj;
+    Item_GObj* mat_gobj;
+
+    grAnime_801C8138(gobj, gp->map_id, 0);
+    Ground_801C2ED0(jobj, gp->map_id);
+    child_jobj = Ground_801C3FA4(gobj, 0xF);
+    mat_gobj = grMaterial_801C8CFC(7, 0, gp, child_jobj, NULL, fn_801DA9F0,
+                                   NULL);
+    grMaterial_801C8DE0(mat_gobj, 0.0f, -5.0f, 0.0f, 0.0f, 5.0f, 0.0f,
+                        2.0f);
+    grMaterial_801C8E08(mat_gobj);
+    gp->gv.zebes4.xC4 = 0xFF;
+    gp->gv.zebes4.xC5 = 0;
+    gp->gv.zebes4.xC6 = 0;
+    gp->gv.zebes4.xC8 = HSD_JObjGetTranslationX(child_jobj);
+    gp->gv.zebes4.xCC = 0.0f;
+    gp->gv.zebes4.xD0 = 0.0f;
+    gp->gv.zebes4.xD4 = 0.0f;
+    gp->gv.zebes4.xD8 = (u32) child_jobj;
+    gp->gv.zebes4.xDC = (u32) Ground_801C3FA4(gobj, 0x11);
+    gp->gv.zebes4.xE0 = (u32) mat_gobj;
+    gp->gv.zebes4.xE4 = 0xD;
+    gp->gv.zebes4.xE8 = 0.0f;
+    gp->gv.zebes4.xEC =
+        (u32) grZakoGenerator_801CA394((UNK_T) &grZe_803E1C80, 4,
+                                       (UNK_T) grZebes_801DCBB0, 1.0f);
+    Ground_801C2FE0((Ground_GObj*) gobj);
+}
 
 bool grZebes_801D9254(Ground_GObj* arg)
 {
@@ -355,16 +394,18 @@ void grZebes_801DA4FC(Ground_GObj* gobj)
 
 /// #grZebes_801DA528
 
-void fn_801DA9D8(UNK_T arg0, Ground* gp, float* y, float z)
+void fn_801DA9D8(Item_GObj* arg0, Ground* gp, Vec3* pos, HSD_GObj* fobj,
+                 f32 slope)
 {
-    gp->gv.zebes.xC.z += z;
-    gp->gv.zebes.xC.y = *y;
+    gp->gv.zebes.xC.z += slope;
+    gp->gv.zebes.xC.y = pos->x;
 }
 
-void fn_801DA9F0(UNK_T arg0, Ground* gp, float y, float* x)
+void fn_801DA9F0(Item_GObj* arg0, Ground* gp, Vec3* pos, HSD_GObj* fobj,
+                 f32 slope)
 {
-    gp->gv.zebes.xC.y += y;
-    gp->gv.zebes.xC.x = *x;
+    gp->gv.zebes.xC.y += slope;
+    gp->gv.zebes.xC.x = pos->x;
 }
 
 /// #grZebes_801DAA08
