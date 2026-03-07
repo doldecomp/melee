@@ -4,19 +4,24 @@
 
 #include "forward.h"
 
+#include <dolphin/os.h>
+
 #include "ft/ftdevice.h"
 #include "ft/ftlib.h"
+#include "gr/grdisplay.h"
 #include "gr/grlib.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
 
+#include <baselib/gobjgxlink.h>
+#include <baselib/gobjproc.h>
 #include <baselib/jobj.h>
 
 /* 1D84A0 */ static void grZebes_801D84A0(bool arg);
 /* 1D8528 */ static void grZebes_801D8528(void);
 /* 1D852C */ void grZebes_801D852C(void);
 /* 1D8550 */ static bool grZebes_801D8550(void);
-/* 1D8558 */ static void grZebes_801D8558(int);
+/* 1D8558 */ static Ground_GObj* grZebes_801D8558(int);
 /* 1D8814 */ static bool grZebes_801D8814(Ground_GObj* arg);
 /* 1D90FC */ static void grZebes_801D90FC(Ground_GObj* arg);
 /* 1D9254 */ static bool grZebes_801D9254(Ground_GObj* arg);
@@ -38,6 +43,27 @@
                                      float* x);
 /* 1DCCB8 */ static DynamicsDesc* grZebes_801DCCB8(enum_t arg);
 /* 1DCCC0 */ static bool grZebes_801DCCC0(Vec3* arg, int arg0, HSD_JObj* jobj);
+
+static s16 grZe_803E1A10[] = {
+    1, 6, 21, 4, 6, 14, 3, 6,
+    1, 2, 7, 6, 5, 7, 1, 0,
+};
+
+static StageCallbacks grZe_callbacks[] = {
+    { NULL, NULL, NULL, NULL, { 0 } },
+    { NULL, NULL, NULL, NULL, { 0 } },
+    { NULL, NULL, NULL, NULL, { 0 } },
+    { NULL, NULL, NULL, NULL, { 0 } },
+    { NULL, NULL, NULL, NULL, { 0 } },
+    { NULL, NULL, NULL, NULL, { 0 } },
+    { NULL, NULL, NULL, NULL, { 0 } },
+    { NULL, NULL, NULL, NULL, { 0 } },
+    { NULL, NULL, NULL, NULL, { 0 } },
+    { NULL, NULL, NULL, NULL, { 0 } },
+    { NULL, NULL, NULL, NULL, { 0 } },
+    { NULL, NULL, NULL, NULL, { 0 } },
+};
+
 /* 4D6990 */ static HSD_GObj* grZe_804D6990;
 /* 4D6998 */ static s16 grZe_804D6998;
 
@@ -71,7 +97,30 @@ bool grZebes_801D8550(void)
     return false;
 }
 
-/// #grZebes_801D8558
+Ground_GObj* grZebes_801D8558(int id)
+{
+    Ground_GObj* gobj;
+    StageCallbacks* cbs = &grZe_callbacks[id];
+    gobj = Ground_801C14D0(id);
+    if (gobj != NULL) {
+        Ground* gp = GET_GROUND(gobj);
+        gp->x8_callback = NULL;
+        gp->xC_callback = NULL;
+        GObj_SetupGXLink(gobj, grDisplay_801C5DB0, 3, 0);
+        if (cbs->callback3 != NULL) {
+            gp->x1C_callback = cbs->callback3;
+        }
+        if (cbs->callback0 != NULL) {
+            cbs->callback0(gobj);
+        }
+        if (cbs->callback2 != NULL) {
+            HSD_GObjProc_8038FD54(gobj, cbs->callback2, 4);
+        }
+    } else {
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 256, id);
+    }
+    return gobj;
+}
 
 /// #grZebes_801D8644
 
