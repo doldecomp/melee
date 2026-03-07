@@ -2299,34 +2299,30 @@ void ftCo_CaptureDamageLw_Anim(Fighter_GObj* gobj)
 }
 #pragma pop
 
+#pragma push
+#pragma dont_inline on
 void ftCo_CaptureDamageLw_IASA(Fighter_GObj* gobj) {}
-
-static inline void ftCo_CaptureDamageLw_Phys_inline(Fighter_GObj* gobj)
-{
-    Fighter* fp2;
-    Vec3* pos;
-
-    if (fn_800DAD18(gobj)) {
-        Fighter* fp = GET_FIGHTER(gobj);
-        Fighter_ChangeMotionState(gobj, ftCo_MS_CaptureDamageHi,
-                                  Ft_MF_UpdateCmd, fp->cur_anim_frame, 1.0F,
-                                  0.0F, NULL);
-        fn_800DB5D8(gobj);
-        fn_800DAA40(gobj, fp->victim_gobj);
-
-        fp2 = GET_FIGHTER(gobj);
-        if (!fp2->x2226_b2) {
-            ft_80083C00(gobj, fn_800DC384);
-        }
-
-        pos = &fp->cur_pos;
-        HSD_JObjSetTranslate(GET_JOBJ(gobj), pos);
-    }
-}
 
 void ftCo_CaptureDamageLw_Phys(Fighter_GObj* gobj)
 {
-    ftCo_CaptureDamageLw_Phys_inline(gobj);
+    Fighter_GObj* temp_r30;
+    Fighter* temp_r31;
+    Vec3* pos;
+
+    temp_r30 = gobj;
+    if (fn_800DAD18(temp_r30)) {
+        temp_r31 = GET_FIGHTER(temp_r30);
+        Fighter_ChangeMotionState(temp_r30, ftCo_MS_CaptureDamageHi,
+                                  Ft_MF_UpdateCmd, temp_r31->cur_anim_frame,
+                                  1.0F, 0.0F, NULL);
+        fn_800DB5D8(temp_r30);
+        fn_800DAA40(temp_r30, temp_r31->victim_gobj);
+        if (!GET_FIGHTER(temp_r30)->x2226_b2) {
+            ft_80083C00(temp_r30, fn_800DC384);
+        }
+        pos = &temp_r31->cur_pos;
+        HSD_JObjSetTranslate(GET_JOBJ(temp_r30), pos);
+    }
 }
 
 void ftCo_CaptureDamageLw_Coll(Fighter_GObj* gobj)
@@ -2337,21 +2333,24 @@ void ftCo_CaptureDamageLw_Coll(Fighter_GObj* gobj)
     }
 }
 
-static inline void fn_800DC624_inline(HSD_GObj* gobj)
-{
-    Fighter* temp_r31 = GET_FIGHTER(gobj);
-    Fighter_ChangeMotionState(gobj, ftCo_MS_CaptureDamageHi, Ft_MF_UpdateCmd,
-                              temp_r31->cur_anim_frame, 1.0F, 0.0F, NULL);
-    fn_800DB5D8(gobj);
-    fn_800DAA40(gobj, temp_r31->victim_gobj);
-    if (!GET_FIGHTER(gobj)->x2226_b2) {
-        ft_80083C00(gobj, fn_800DC384);
-    }
-    HSD_JObjSetTranslate(GET_JOBJ(gobj), &temp_r31->cur_pos);
-}
-
 void fn_800DC624(HSD_GObj* gobj)
 {
-    PAD_STACK(4);
-    fn_800DC624_inline(gobj);
+    Fighter_GObj* temp_r30;
+    Fighter* temp_r31;
+    Vec3* pos;
+
+    temp_r30 = gobj;
+    temp_r31 = GET_FIGHTER(temp_r30);
+    Fighter_ChangeMotionState(temp_r30, ftCo_MS_CaptureDamageHi,
+                              Ft_MF_UpdateCmd, temp_r31->cur_anim_frame, 1.0F,
+                              0.0F, NULL);
+    fn_800DB5D8(temp_r30);
+    fn_800DAA40(temp_r30, temp_r31->victim_gobj);
+    if (!GET_FIGHTER(temp_r30)->x2226_b2) {
+        ft_80083C00(temp_r30, fn_800DC384);
+    }
+    pos = &temp_r31->cur_pos;
+    HSD_JObjSetTranslate(GET_JOBJ(temp_r30), pos);
 }
+
+#pragma pop
