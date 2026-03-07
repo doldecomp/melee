@@ -58,6 +58,7 @@
 #include <melee/ft/chara/ftCommon/ftpickupitem.h>
 #include <melee/ft/chara/ftGameWatch/ftGw_Attack100.h>
 #include <melee/ft/chara/ftKirby/ftKb_Init.h>
+#include <melee/ft/chara/ftLink/ftLk_Init.h>
 #include <melee/ft/chara/ftYoshi/ftYs_Init.h>
 #include <melee/ft/ft_0877.h>
 #include <melee/ft/ft_0881.h>
@@ -84,6 +85,7 @@
 /* 0D769C */ static FtMotionId fn_800D769C(Fighter* ft, FtMotionId msid);
 /* 0D84D4 */ static void fn_800D84D4(Fighter_GObj*, int);
 /* 0D8BFC */ static void fn_800D8BFC(Fighter_GObj* arg0);
+/* 0952DC */ bool ftCo_800952DC(Fighter_GObj* gobj);
 /* 0D949C */ static void fn_800D949C(Fighter_GObj* gobj);
 /* 0D9C64 */ static void fn_800D9C64(Fighter_GObj* gobj);
 /* 0D9CE8 */ static void fn_800D9CE8(Fighter_GObj* arg0);
@@ -610,7 +612,6 @@ void fn_800D7938(Fighter_GObj* gobj)
     Fighter_GObj* temp_r30;
     Fighter* temp_r31;
     s32 temp_r4;
-    extern void it_80291F14(Item_GObj*, s32);
 
     temp_r30 = gobj;
     temp_r31 = GET_FIGHTER(temp_r30);
