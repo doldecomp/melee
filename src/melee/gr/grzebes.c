@@ -446,7 +446,65 @@ void grZebes_801D9758(Ground_GObj* gobj)
     gp->gv.zebes.x4 = 1;
 }
 
-/// #grZebes_801D9798
+void grZebes_801D9798(HSD_GObj* gobj)
+{
+    Ground* gp = (Ground*) HSD_GObjGetUserData(gobj);
+    grZe_YakumonoParam* yak = grZe_804D6990;
+    grZe_AcidLevelEntry* entry;
+    s16 delay_max, delay_min;
+    s32 j;
+    HSD_JObj* jobj;
+
+    grAnime_801C8138(gobj, gp->map_id, 0);
+
+    *(s16*) &gp->gv.zebes5.xC4 = 0;
+
+    entry = &yak->entries[*(s16*) &gp->gv.zebes5.xC4];
+    delay_max = entry->delay_max;
+    delay_min = entry->delay_min;
+
+    if (delay_max > delay_min) {
+        s32 diff = delay_max - delay_min;
+        delay_max = delay_min + ((diff != 0) ? HSD_Randi(diff) : 0);
+    } else if (delay_max < delay_min) {
+        s32 diff = delay_min - delay_max;
+        delay_max += (diff != 0) ? HSD_Randi(diff) : 0;
+    }
+
+    *(s16*) &gp->gv.zebes5.xC6 =
+        (s16) (yak->entries[*(s16*) &gp->gv.zebes5.xC4].base + delay_max);
+    *(s32*) &gp->gv.zebes5.xC8 = 0;
+    gp->gv.zebes5.xCC = 0.0f;
+    gp->gv.zebes5.xD0 = 0.0f;
+    gp->gv.zebes5.xDC = 0;
+    gp->x11_flags.b012 = 1;
+
+    {
+        u8* p = (u8*) grZe_804D6990;
+        j = 0;
+        while (j < 0x1D &&
+               (*(s16*) (p + 0xA8) != 0 || *(s16*) (p + 0xAA) != 0 ||
+                *(s16*) (p + 0xAC) != 0 || *(s16*) (p + 0xAE) != 0))
+        {
+            p += 8;
+            j++;
+        }
+    }
+
+    gp->gv.zebes5.xD8 =
+        yak->x94 * HSD_Randf() + (f32) yak->entries[j].level;
+    gp->gv.zebes5.xD4 = gp->gv.zebes5.xD8;
+
+    jobj = Ground_801C3FA4(gobj, 0);
+    if (jobj != NULL) {
+        f32 level = gp->gv.zebes5.xD8;
+        HSD_JObjSetTranslateY(jobj, level);
+        Ground_801C438C(-55.0f + gp->gv.zebes5.xD8);
+        Ground_801C438C(-55.0f + gp->gv.zebes5.xD8);
+    }
+
+    Ground_801C10B8(gobj, (void (*)(HSD_GObj*)) grZebes_801D9758);
+}
 
 bool grZebes_801D99D8(Ground_GObj* arg)
 {
