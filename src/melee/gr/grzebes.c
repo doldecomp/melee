@@ -368,7 +368,24 @@ void fn_801DA9F0(UNK_T arg0, Ground* gp, float y, float* x)
 
 /// #grZebes_801DAA08
 
-/// #fn_801DAC90
+void fn_801DAC90(void)
+{
+    s32 found = -1;
+    s32 i;
+
+    for (i = 0; i < 20; i++) {
+        if (grZe_8049F170[i].active == 1 && i != 0 && i != 6) {
+            found = i;
+            break;
+        }
+    }
+
+    if (found != -1) {
+        grZe_8049F170[found].active = 2;
+        grZe_804D6994 = 0x78;
+        grZe_8049F170[found].unk1C = 0.001f;
+    }
+}
 
 /// #grZebes_801DAE70
 
