@@ -720,6 +720,7 @@ struct grZebes_GroundVars5 {
     /* +30 gp+F4 */ u32 xF4;
     /* +34 gp+F8 */ u32 xF8;
     /* +38 gp+FC */ u32 xFC;
+    /* +3C gp+100 */ u32 x100;
 };
 
 struct grRCruise_GroundVars {
