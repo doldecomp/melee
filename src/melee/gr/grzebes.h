@@ -14,7 +14,7 @@
 /* 1DA4FC */ void grZebes_801DA4FC(Ground_GObj*);
 /* 1DCB64 */ bool grZebes_801DCB64(Vec3*, int);
 /* 1DCBB0 */ bool grZebes_801DCBB0(Vec3*, int);
-/* 1DCBFC */ bool grZebes_801DCBFC(UNK_T);
+/* 1DCBFC */ bool grZebes_801DCBFC(Ground_GObj*, HSD_GObj*, void*);
 /* 1DCCC8 */ float grZebes_801DCCC8(void);
 
 #endif

@@ -5,6 +5,7 @@
 #include "forward.h"
 
 #include "ft/ftdevice.h"
+#include "ft/ftlib.h"
 #include "gr/grlib.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
@@ -241,7 +242,27 @@ bool grZebes_801DCBB0(Vec3* vec, int val)
     return false;
 }
 
-/// #grZebes_801DCBFC
+bool grZebes_801DCBFC(Ground_GObj* gobj, HSD_GObj* fobj, void* arg)
+{
+    Vec3 pos;
+    Vec3 prev;
+    f32 slope, intercept;
+
+    Ground_801C4368(&slope, &intercept);
+    ftLib_80086644(fobj, &pos);
+    ftLib_80086684(fobj, &prev);
+    prev.y += intercept;
+    if (pos.y < slope) {
+        *(void**) arg = grZe_804D6990->user_data;
+        if (prev.y > slope) {
+            Ground_801C43A4(&pos);
+            Ground_801C53EC(0x61A82);
+            Ground_801C53EC(0x66);
+        }
+        return true;
+    }
+    return false;
+}
 
 DynamicsDesc* grZebes_801DCCB8(enum_t arg)
 {
