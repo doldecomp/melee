@@ -79,7 +79,8 @@ extern f32 grZe_804DB0B0;
 
 typedef struct grZe_BubbleEntry {
     /* 0x00 */ u8 active;
-    /* 0x01 */ u8 pad_01[7];
+    /* 0x01 */ u8 pad_01[3];
+    /* 0x04 */ u32 unk04;
     /* 0x08 */ f32 x;
     /* 0x0C */ f32 y;
     /* 0x10 */ f32 unk10;
@@ -87,7 +88,7 @@ typedef struct grZe_BubbleEntry {
     /* 0x18 */ f32 size;
     /* 0x1C */ f32 unk1C;
     /* 0x20 */ HSD_GObj* gobj;
-} grZe_BubbleEntry;
+} grZe_BubbleEntry;;
 
 /* 8049F140 */ static Vec3 grZe_8049F140[2];
 /* 8049F158 */ static Vec3 grZe_8049F158[2];
@@ -387,7 +388,51 @@ void fn_801DAC90(void)
     }
 }
 
-/// #grZebes_801DAE70
+void grZebes_801DAE70(s32 arg0, u8 arg1, f32 x, f32 y, f32 scale)
+{
+    grZe_BubbleEntry* entry = &grZe_8049F170[arg0];
+
+    if (entry->active == 0) {
+        if (entry->gobj == NULL) {
+            Ground_GObj* gobj;
+
+            entry->x = x;
+            entry->y = y;
+            entry->unk10 = 0.0f;
+            entry->unk14 = 0.0f;
+            entry->unk1C = scale;
+            entry->size = scale;
+
+            if (arg0 == 0 || arg0 == 6) {
+                gobj = NULL;
+            } else {
+                gobj = grZebes_801D8558(3);
+                if (gobj != NULL) {
+                    HSD_JObj* jobj = GET_JOBJ(gobj);
+                    Ground* gp = GET_GROUND(gobj);
+                    Vec3 pos;
+
+                    pos.x = x;
+                    pos.y = y;
+                    pos.z = 0.0f;
+                    HSD_JObjSetTranslate(jobj, &pos);
+
+                    pos.x = scale;
+                    pos.y = scale;
+                    pos.z = 0.001f;
+                    HSD_JObjSetScale(jobj, &pos);
+
+                    gp->gv.zebes3.xC4 = 0;
+                    gp->gv.zebes3.xC8 = arg0;
+                }
+            }
+
+            entry->active = arg1;
+            entry->gobj = (HSD_GObj*) gobj;
+            grZe_8049F170[arg0].unk04 = 0;
+        }
+    }
+}
 
 /// #grZebes_801DB088
 

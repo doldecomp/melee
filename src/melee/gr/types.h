@@ -676,6 +676,11 @@ struct grZebes_GroundVars2 {
     /*  +0 gp+C4 */ s16 xC4;
 };
 
+struct grZebes_GroundVars3 {
+    /*  +0 gp+C4 */ s32 xC4;
+    /*  +4 gp+C8 */ s32 xC8;
+};
+
 struct grRCruise_GroundVars {
     /* +00 gp+C4 */ char pad_0[0x14];
     /* +14 gp+D8 */ f32 x14;
@@ -1044,6 +1049,7 @@ struct Ground {
             struct grYorster_GroundVars yorster;
             struct grZebes_GroundVars zebes;
             struct grZebes_GroundVars2 zebes2;
+            struct grZebes_GroundVars3 zebes3;
         } gv;
 
         /**
