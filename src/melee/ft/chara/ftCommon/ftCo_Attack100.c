@@ -1662,8 +1662,6 @@ float ftCo_800DA824(Fighter* fp)
 
 /// #fn_800DA8E4
 
-#pragma push
-#pragma dont_inline on
 void fn_800DAA40(Fighter_GObj* arg0, Fighter_GObj* arg1)
 {
     Vec3 sp18;
@@ -1679,7 +1677,6 @@ void fn_800DAA40(Fighter_GObj* arg0, Fighter_GObj* arg1)
         temp_r31->cur_pos.z += sp18.z;
     }
 }
-#pragma pop
 
 void fn_800DAADC(Fighter_GObj* arg0, Fighter_GObj* arg1)
 {
@@ -1708,8 +1705,6 @@ void fn_800DAC78(Fighter_GObj* gobj, Vec3* arg1)
     arg1->z = sp2C.z - sp20.z;
 }
 
-#pragma push
-#pragma dont_inline on
 static bool fn_800DAD18(Fighter_GObj* gobj)
 {
     Fighter* temp_r31;
@@ -1742,7 +1737,19 @@ static bool fn_800DAD18(Fighter_GObj* gobj)
     temp_r31->cur_pos.z += tmp.z;
     return var_r3;
 }
-#pragma pop
+
+void ftCo_CapturePulledHi_Coll(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (!fp->x2226_b2) {
+        ft_80083C00(gobj, fn_800DAECC);
+    }
+}
+
+static void fn_800DAECC(Fighter_GObj* gobj)
+{
+    fn_800DAEEC(gobj);
+}
 
 
 
@@ -1917,8 +1924,6 @@ void ftCo_800DB500(Fighter_GObj* gobj)
     }
 }
 
-#pragma push
-#pragma dont_inline on
 static void fn_800DB5D8(Fighter_GObj* gobj)
 {
     ftHurtboxInit sp18;
@@ -1939,7 +1944,6 @@ static void fn_800DB5D8(Fighter_GObj* gobj)
     }
     ftCommon_8007E2F4(fp, 0x1FF);
 }
-#pragma pop
 
 
 
