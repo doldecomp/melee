@@ -934,13 +934,6 @@ void fn_800D8140(Fighter_GObj* gobj, int arg1)
 #pragma push
 #pragma dont_inline on
 
-
-
-#pragma pop
-
-#pragma push
-#pragma dont_inline on
-
 void fn_800D8268(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
@@ -2306,10 +2299,6 @@ void fn_800DC404(Fighter_GObj* gobj)
     fn_800DB5D8(gobj);
     fn_800DAA40(gobj, fp->victim_gobj);
 }
-#pragma pop
-
-#pragma push
-#pragma dont_inline on
 void ftCo_CaptureDamageLw_Anim(Fighter_GObj* gobj)
 {
     fn_800DB8A4(gobj);
