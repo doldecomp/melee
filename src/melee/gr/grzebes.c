@@ -992,7 +992,66 @@ void grZebes_801DC260(void)
     }
 }
 
-/// #grZebes_801DC408
+void grZebes_801DC408(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+
+    if ((s16) gp->gv.zebes5.xC4 == 0) {
+        if (grZe_804D6994 != 0) {
+            grZe_804D6994 -= 1;
+            return;
+        }
+
+        gp->gv.zebes5.xF4 = (s16) (gp->gv.zebes5.xF4 - 1);
+        if ((s16) gp->gv.zebes5.xF4 < 0) {
+            s32 count = 0;
+            s32 first_free = -1;
+            s32 i;
+
+            for (i = 0; i < 20; i++) {
+                if (grZe_8049F170[i].active != 0) {
+                    count++;
+                } else if (first_free == -1) {
+                    first_free = i;
+                }
+            }
+
+            if (count < 15) {
+                Vec3* base = grZe_8049F140;
+                f32 y_min = base[2].y;
+                f32 bubble_r = grZe_804D6990->x74;
+                f32 x_base = base[2].x + bubble_r;
+                f32 x_range = -((2.0f * bubble_r) - (base[1].x - base[2].x));
+                f32 y_range = base[1].y - y_min;
+                f32 rscale = HSD_Randf();
+                f32 ry = HSD_Randf();
+
+                grZebes_801DAE70(first_free, 1,
+                    x_range * HSD_Randf() + x_base,
+                    y_range * ry + y_min,
+                    (f32) (0.5 * (f64) rscale + 1.0));
+                grZe_8049F170[first_free].size = 0.001f;
+                Ground_801C53EC(0x61A83);
+            }
+
+            {
+                f32 f_min = grZe_804D6990->x60;
+                f32 f_max = grZe_804D6990->x64;
+                s32 t_min = (s32) f_min;
+                s16 timer = (s16) f_max;
+
+                if ((s32) f_max > (s32) f_min) {
+                    s32 range = timer - t_min;
+                    timer = t_min + (range != 0 ? HSD_Randi(range) : 0);
+                } else if (timer < t_min) {
+                    s32 range = t_min - timer;
+                    timer += (range != 0 ? HSD_Randi(range) : 0);
+                }
+                gp->gv.zebes5.xF4 = timer;
+            }
+        }
+    }
+}
 
 void grZebes_801DC744(s32 arg0, s32 arg1)
 {
