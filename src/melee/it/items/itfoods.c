@@ -23,7 +23,7 @@
 /* 28FE14 */ void itFoods_UnkMotion3_Phys(Item_GObj* arg0);
 /* 28FE44 */ bool itFoods_UnkMotion3_Coll(Item_GObj* arg0);
 
-ItemStateTable it_803F83F0[] = {
+ItemStateTable it_803F5DB0[] = {
     { -1, itFoods_UnkMotion0_Anim, itFoods_UnkMotion0_Phys,
       itFoods_UnkMotion0_Coll },
     { -1, itFoods_UnkMotion1_Anim, itFoods_UnkMotion1_Phys,
