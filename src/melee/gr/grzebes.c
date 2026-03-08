@@ -666,6 +666,7 @@ void grZebes_801D9508(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     HSD_GObj* map_a_gobj = Ground_801C2BA4(6);
+    PAD_STACK(0x10);
     HSD_ASSERT(909, map_a_gobj);
     gp->gv.zebes.x4 = (u32) Ground_801C3FA4(map_a_gobj, 14);
     gp->gv.zebes.x8 = 1;
@@ -2068,8 +2069,8 @@ s32 grZebes_801DBB60(s32 arg)
 
 void grZebes_801DC260(void)
 {
-    int i;
     grZe_BubbleEntry* entry = grZe_8049F170;
+    int i;
     PAD_STACK(8);
 
     for (i = 0; i < 20; i++, entry++) {
