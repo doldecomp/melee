@@ -56,6 +56,8 @@ void mnGallery_8025896C(HSD_GObj* gobj, int render_pass)
     }
 }
 
+#pragma push
+#pragma opt_propagation off
 void mnGallery_80258A08(HSD_GObj* gobj, u16 width, u16 height, u32 priority)
 {
     extern Vec3 mnGallery_803B8538;
@@ -65,11 +67,12 @@ void mnGallery_80258A08(HSD_GObj* gobj, u16 width, u16 height, u32 priority)
     extern f64 mnGallery_804DC368;
     extern f64 mnGallery_804DC370;
     HSD_CObj* cobj;
-    register f32 zero = mnGallery_804DC360;
+    f32 zero = mnGallery_804DC360;
     f32 far;
-    f32 left;
+    f32 near_val = zero;
     f32 top;
     f32 bottom;
+    f32 left;
     f32 right;
     HSD_RectS16 viewport;
     Scissor scissor;
@@ -100,12 +103,13 @@ void mnGallery_80258A08(HSD_GObj* gobj, u16 width, u16 height, u32 priority)
     HSD_CObjSetEyePosition(cobj, &eye);
     HSD_CObjSetInterest(cobj, &interest);
     HSD_CObjSetRoll(cobj, zero);
-    HSD_CObjSetNear(cobj, zero);
+    HSD_CObjSetNear(cobj, near_val);
     HSD_CObjSetFar(cobj, far);
     HSD_CObjSetOrtho(cobj, top, bottom, left, right);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
     GObj_SetupGXLinkMax(gobj, mnGallery_8025896C, priority);
 }
+#pragma pop
 
 void mnGallery_80258BC4(void* arg)
 {
