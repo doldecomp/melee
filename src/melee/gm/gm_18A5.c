@@ -2347,10 +2347,18 @@ void fn_80191FD4(HSD_GObj* gobj)
     HSD_JObjClearFlagsAll(jobj, 0x10U);
 
     if ((s32) idx == 0x19) {
-        child = (jobj != NULL) ? jobj->child : NULL;
+        if (jobj == NULL) {
+            child = NULL;
+        } else {
+            child = jobj->child;
+        }
         fn_8019044C(child, 0.0f);
 
-        sibling = (child != NULL) ? child->next : NULL;
+        if (child == NULL) {
+            sibling = NULL;
+        } else {
+            sibling = child->next;
+        }
         slot = lbl_804799B8.x2 + lbl_804799B8.x3;
 
         if ((u8) tm->x37[slot].x4 != 0) {
@@ -2384,26 +2392,42 @@ void fn_80191FD4(HSD_GObj* gobj)
     }
 
     fn_8018FF9C(jobj, 0.9f, 0.9f, 666.0f);
-    child = (jobj != NULL) ? jobj->child : NULL;
+    if (jobj == NULL) {
+        child = NULL;
+    } else {
+        child = jobj->child;
+    }
 
+    hud = fn_8018F6DC(fn_8018F3BC((s32) idx));
     slot = lbl_804799B8.x2 + lbl_804799B8.x3;
-    if ((s32) tm->x37[slot].x2 ==
-        fn_8018F6DC(fn_8018F3BC((s32) idx)))
+    if ((s32) tm->x37[slot].x2 == hud)
     {
         fn_8019044C(child,
                     (f32) (lbl_804799B8.xA + 0xA));
     } else {
         hud = fn_8018F6DC(fn_8018F3BC((s32) idx));
-        if ((lbl_803D9D20.x72[hud] != 0) ||
-            (fn_8018F3D0(fn_8018F310(fn_8018F6FC(hud))) != 2))
         {
-            fn_8019044C(child, 0.0f);
-        } else {
-            HSD_JObjSetFlagsAll(child, 0x10U);
+            s32 flag;
+            if ((lbl_803D9D20.x72[hud] != 0) ||
+                (fn_8018F3D0(fn_8018F310(fn_8018F6FC(hud))) != 2))
+            {
+                flag = 1;
+            } else {
+                flag = 0;
+            }
+            if (flag == 0) {
+                HSD_JObjSetFlagsAll(child, 0x10U);
+            } else {
+                fn_8019044C(child, 0.0f);
+            }
         }
     }
 
-    sibling = (child != NULL) ? child->next : NULL;
+    if (child == NULL) {
+        sibling = NULL;
+    } else {
+        sibling = child->next;
+    }
     HSD_JObjClearFlagsAll(sibling, 0x10U);
 
     hud = fn_8018F6DC(fn_8018F3BC((s32) idx));
