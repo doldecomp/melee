@@ -2783,15 +2783,13 @@ void fn_8019B81C(s32* state)
 
 extern SceneDesc* lbl_804D6670;
 
-/// @todo Currently 92% match - instruction scheduling issue (lfs/lbz order)
-/// Sets up tournament bracket display with entrant data.
 void fn_8019B860(TmData* tm)
 {
     fn_8019A158();
     fn_80199AF0();
     fn_80198BA0();
     fn_8018F888();
-    fn_8018E618(tm->entrants, tm->x2C, 4.5F);
+    fn_8018E618(tm->entrants, (s32) tm->x2C, 4.5f);
     fn_8018E85C(*(int*) ((char*) lbl_804D6670->models + 0x10), tm->x2C);
     tm->cur_option = 0x20;
 }
