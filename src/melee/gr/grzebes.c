@@ -2245,6 +2245,7 @@ const grZe_BubbleConfig grZe_803B8044 = {
 void grZebes_801DC9DC(s32 arg0)
 {
     int i;
+    PAD_STACK(0x30);
 
     grZe_804D6994 = 0;
 
