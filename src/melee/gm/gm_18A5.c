@@ -1026,7 +1026,36 @@ static struct {
 } lbl_804799B8;
 
 /// Initializes the time menu state when entering the time selection screen.
-/// #gm_80190FE4
+void gm_80190FE4(int arg0)
+{
+    TmData* tm = gm_8018F634();
+
+    if (mn_8022F218() == 0) {
+        fn_80190174(lbl_804D664C->cameras->desc);
+        fn_801902F0(0);
+        fn_80193308();
+        fn_8019027C(lbl_804D664C->lights);
+        fn_80193230();
+
+        for (tm->cur_option = 0; tm->cur_option < 7; tm->cur_option++) {
+            fn_80190ABC(0);
+            fn_80190ABC(2);
+            fn_80190ABC(3);
+            fn_80190ABC(1);
+        }
+
+        tm->x20 = 0;
+        tm->cur_option = 0xC;
+
+        if (arg0 != 0x78) {
+            tm->x37[lbl_804799B8.pad[2] + lbl_804799B8.pad[3]].x9 =
+                (s16) arg0;
+        }
+
+        fn_80190ABC(5);
+        fn_80190ABC(6);
+    }
+}
 
 void fn_801910E0(HSD_GObj* gobj)
 {
