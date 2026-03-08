@@ -1410,7 +1410,49 @@ void fn_80191CA4(HSD_GObj* gobj)
 }
 
 /// GObj callback for tournament bracket slot UI elements.
-/// #fn_80191D38
+void fn_80191D38(HSD_GObj* gobj)
+{
+    TmData* tm;
+    u32 idx;
+    HSD_JObj* jobj;
+
+    tm = gm_8018F634();
+    idx = fn_8018F62C(gobj);
+    jobj = gobj->hsd_obj;
+
+    if (tm->cur_option <= 9) {
+        HSD_JObjSetFlagsAll(jobj, 0x10);
+        return;
+    }
+
+    HSD_JObjClearFlagsAll(jobj, 0x10);
+
+    if ((s32) idx < (s32) lbl_804799B8.pad[3] ||
+        (s32) idx >= (s32) tm->x2E ||
+        (s32) idx > (s32) (lbl_804799B8.pad[3] + 0xB))
+    {
+        HSD_JObjSetFlagsAll(jobj, 0x10);
+        return;
+    }
+
+    fn_8018FDC4(jobj, 666.0f,
+                -((2.6200008f * (f32) (idx - lbl_804799B8.pad[3])) -
+                  12.800008f),
+                0.1f);
+
+    if ((u8) tm->x37[idx].x4 != 0) {
+        fn_8019044C(jobj, 201.0f);
+    } else {
+        fn_8019044C(jobj, fn_8018F71C((s32) tm->x37[idx].x2,
+                                       (s32) tm->x37[idx].x6));
+    }
+
+    if (lbl_803D9D20.x72[tm->x37[idx].x2] != 0) {
+        HSD_JObjClearFlagsAll(jobj, 0x10);
+    } else {
+        HSD_JObjSetFlagsAll(jobj, 0x10);
+    }
+}
 
 /// Updates visibility and position of a tournament bracket player entry JObj.
 void fn_80191E9C(HSD_GObj* gobj)
