@@ -16,9 +16,25 @@ static struct {
     u8 x1;
     u8 pad2[0x32 - 0x2];
     u8 x32;
-    u8 pad33[0x5E - 0x33];
+    u8 pad33[0x4C - 0x33];
+    u8 x4C;
+    u8 pad4D[0x51 - 0x4D];
+    u8 x51;
+    u8 pad52[0x5E - 0x52];
     u8 x5E;
-    u8 pad5F[0xDC - 0x5F];
+    u8 pad5F[0x78 - 0x5F];
+    u8 x78;
+    u8 pad79[0x7D - 0x79];
+    u8 x7D;
+    u8 pad7E[0xA4 - 0x7E];
+    u8 xA4;
+    u8 padA5[0xA9 - 0xA5];
+    u8 xA9;
+    u8 padAA[0xD0 - 0xAA];
+    u8 xD0;
+    u8 padD1[0xD5 - 0xD1];
+    u8 xD5;
+    u8 padD6[0xDC - 0xD6];
 } lbl_80473AB8[0x40];
 
 TmData gm_804771C4;
