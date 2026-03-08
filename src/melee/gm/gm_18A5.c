@@ -144,7 +144,89 @@ void fn_8018DC18(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
     }
 }
 
-/// #fn_8018DF68
+void fn_8018DF68(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
+                 s32 arg5, s32 arg6, f32 farg0)
+{
+    u8* data = (u8*) arg0;
+    f32 thickness;
+    f32 neg_thickness;
+    s32 right;
+    s32 third;
+    s32 left_third;
+    s32 right_third;
+    s32 half;
+    s32 c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10;
+
+    c0 = 0xFFFF00FF;
+    c10 = 0xFFFF00FF;
+    thickness = M2C_FIELD(data, f32*, 0x1C);
+    c1 = 0xFFFF00FF;
+    DrawRectangle((f32) arg1, (f32) arg2, thickness, (f32) arg4,
+                  (GXColor*) &c1);
+
+    right = arg1 + arg3;
+    c2 = c10;
+    DrawRectangle((f32) right, (f32) arg2, thickness, (f32) arg4,
+                  (GXColor*) &c2);
+
+    third = arg3 / 3;
+    left_third = arg1 + third;
+    c3 = c10;
+    DrawRectangle((f32) left_third, (f32) arg2, thickness, (f32) arg4,
+                  (GXColor*) &c3);
+
+    right_third = right - third;
+    c4 = c10;
+    DrawRectangle((f32) right_third, (f32) arg2, thickness, (f32) arg4,
+                  (GXColor*) &c4);
+
+    neg_thickness = -thickness;
+    c5 = c10;
+    DrawRectangle((f32) arg1, (f32) arg5, (f32) arg3 + thickness,
+                  neg_thickness, (GXColor*) &c5);
+
+    if (data[0x21] == 0) {
+        if (data[0x4C] == 0) {
+            c6 = M2C_FIELD(data, s32*, 0x20);
+            DrawRectangle((f32) arg1, (f32) arg2, thickness, (f32) arg4,
+                          (GXColor*) &c6);
+            c7 = M2C_FIELD(data, s32*, 0x20);
+            DrawRectangle((f32) arg1, (f32) arg5,
+                          (f32) (arg3 / 2) + thickness, neg_thickness,
+                          (GXColor*) &c7);
+            return;
+        }
+        if (data[0x78] == 0) {
+            c8 = M2C_FIELD(data, s32*, 0x20);
+            DrawRectangle((f32) left_third, (f32) arg2, thickness,
+                          (f32) arg4, (GXColor*) &c8);
+            c0 = M2C_FIELD(data, s32*, 0x20);
+            DrawRectangle((f32) left_third, (f32) arg5,
+                          ((f32) (arg3 / 2) + thickness) - (f32) third,
+                          neg_thickness, (GXColor*) &c0);
+            return;
+        }
+        if (data[0xA4] == 0) {
+            c9 = M2C_FIELD(data, s32*, 0x20);
+            DrawRectangle((f32) right_third, (f32) arg2, thickness,
+                          (f32) arg4, (GXColor*) &c9);
+            half = arg3 / 2;
+            c10 = M2C_FIELD(data, s32*, 0x20);
+            DrawRectangle((f32) (arg1 + half), (f32) arg5,
+                          ((f32) half + thickness) - (f32) third,
+                          neg_thickness, (GXColor*) &c10);
+            return;
+        }
+        c0 = M2C_FIELD(data, s32*, 0x20);
+        DrawRectangle((f32) right, (f32) arg2, thickness, (f32) arg4,
+                      (GXColor*) &c0);
+        half = arg3 / 2;
+        c10 = M2C_FIELD(data, s32*, 0x20);
+        DrawRectangle((f32) (arg1 + half), (f32) arg5,
+                      (f32) half + thickness, neg_thickness,
+                      (GXColor*) &c10);
+    }
+}
 
 /// @todo Currently 98.8% match - permuter couldn't improve beyond score 140
 void fn_8018E46C(HSD_GObj* gobj, int unused)
@@ -2103,7 +2185,91 @@ void fn_80193230(void)
 }
 #pragma pop
 
-/// #fn_80193308
+static s32 lbl_804DA78C = 0x46DC46FF;
+
+void fn_80193308(void)
+{
+    s32 color;
+    TmData* tm;
+    HSD_Text* text;
+    HSD_Text** ptr;
+    f32 y;
+    s32 i;
+    s32 idx;
+    s32 count;
+
+    color = lbl_804DA78C;
+    tm = gm_8018F634();
+
+    tm->x4E0 = HSD_SisLib_803A5ACC(0, (s32) lbl_804D663C, 124.5f, 45.0f,
+                                     0.0f, 391.0f, 30.0f);
+    tm->x4E0->default_fitting = 1;
+    HSD_SisLib_803A6368(tm->x4E0, 0x4A);
+
+    tm->x4E4 = HSD_SisLib_803A5ACC(0, (s32) lbl_804D663C, 393.0f, 221.7f,
+                                     0.0f, 360.0f, 40.0f);
+    tm->x4E4->hidden = 1;
+
+    for (i = 0; i < 6; i++) {
+        tm->x4E8[i] = HSD_SisLib_803A5ACC(0, (s32) lbl_804D663C, 160.0f,
+                                            48.0f, 0.0f, 360.0f, 40.0f);
+        text = tm->x4E8[i];
+        text->pos_x = 123.0f;
+        y = (35.7f * (f32) i) + 113.0f;
+        text->pos_y = y;
+        text->pos_z = 0.0f;
+        tm->x4E8[i]->hidden = 1;
+        HSD_SisLib_803A6368(tm->x4E8[i], 0x5C);
+
+        tm->x500[i] = HSD_SisLib_803A5ACC(0, (s32) lbl_804D663C, 160.0f,
+                                            48.0f, 0.0f, 360.0f, 40.0f);
+        text = tm->x500[i];
+        text->pos_x = 343.0f;
+        text->pos_y = y;
+        text->pos_z = 0.0f;
+        tm->x500[i]->hidden = 1;
+        HSD_SisLib_803A6368(tm->x500[i], 0x53);
+    }
+
+    tm->x518[0] = HSD_SisLib_803A6754(0, (s32) lbl_804D663C);
+    text = tm->x518[0];
+    text->font_size.x = 0.5f;
+    text->font_size.y = 0.5f;
+    tm->x518[0]->default_kerning = 1;
+
+    count = 0;
+    idx = 1;
+    do {
+        ptr = &tm->x518[idx];
+        *ptr = HSD_SisLib_803A6754(0, (s32) lbl_804D663C);
+        text = *ptr;
+        text->font_size.x = 0.58f;
+        text->font_size.y = 0.55f;
+        (*ptr)->default_kerning = 1;
+        if (count != 0) {
+            *(s32*) &(*ptr)->text_color = color;
+        }
+        count += 1;
+        idx = 2;
+    } while (count < 2);
+
+    count = 0;
+    idx = 3;
+    do {
+        ptr = &tm->x518[idx];
+        *ptr = HSD_SisLib_803A6754(0, (s32) lbl_804D663C);
+        text = *ptr;
+        text->font_size.x = 0.85f;
+        text->font_size.y = 1.35f;
+        (*ptr)->default_kerning = 1;
+        (*ptr)->default_alignment = 1;
+        if (count != 0) {
+            *(s32*) &(*ptr)->text_color = color;
+        }
+        count += 1;
+        idx = 4;
+    } while (count < 2);
+}
 
 /// #fn_801935B8
 
@@ -3048,7 +3214,73 @@ void fn_801976D4(HSD_GObj* gobj)
 
 /// #fn_801977AC
 
-/// #fn_80197AF0
+void fn_80197AF0(HSD_GObj* gobj)
+{
+    TmData* tm;
+    u32 pnum;
+    HSD_JObj* jobj;
+    s32 in_range;
+    f32 x;
+    u8 players;
+    u8 state;
+    u16* counter;
+
+    tm = gm_8018F634();
+    pnum = fn_8018F62C(gobj);
+    jobj = gobj->hsd_obj;
+
+    if (((s32) gm_8018F634()->cur_option >= 0x1B) &&
+        ((s32) gm_8018F634()->cur_option <= 0x1E))
+    {
+        in_range = 1;
+    } else {
+        in_range = 0;
+    }
+
+    if (in_range == 0) {
+        HSD_JObjSetFlagsAll(jobj, 0x10U);
+        return;
+    }
+
+    HSD_JObjClearFlagsAll(jobj, 0x10U);
+
+    if (((s8) HSD_PadMasterStatus[(u8) pnum].err != 0) &&
+        ((u8) tm->x4B8[pnum].x0 != 1))
+    {
+        HSD_JObjSetFlagsAll(jobj, 0x10U);
+        return;
+    }
+
+    if ((u8) tm->x4B8[pnum].x0 == 1) {
+        HSD_JObjSetFlagsAll(jobj, 0x10U);
+    }
+
+    players = tm->x30;
+    if ((s32) players == 4) {
+        x = (13.0f * (f32) pnum) + -19.5f;
+    } else if ((s32) players == 3) {
+        x = 6.5f + ((13.0f * (f32) pnum) - 19.5f);
+    } else {
+        x = 6.5f + ((13.0f * (2.0f * (f32) pnum)) - 19.5f);
+    }
+
+    fn_8018FDC4(jobj, x, 666.0f, 666.0f);
+
+    if ((lbl_804799D8.x0[pnum * 6 + 0x44] != 6) ||
+        (state = lbl_804799D8.x0[pnum * 6 + 0x2D],
+         (state == 1) || (state == 2) || (state == 4)))
+    {
+        HSD_JObjSetFlagsAll(jobj, 0x10U);
+    }
+
+    counter = (u16*) &lbl_804799D8.x0[pnum * 2 + 0x12];
+    if (*counter < 0x258U) {
+        *counter = (u16) (*counter + 1);
+    } else {
+        *counter = 0U;
+    }
+    fn_8019044C(jobj, (f32) *counter);
+}
 
 /// Updates visibility of a menu JObj based on current menu option.
 void fn_80197D4C(HSD_GObj* gobj)

@@ -85,7 +85,7 @@ fn_8018F71C(int, int); ///< returns the frame for the tou css icon?
 /* 192BB0 */ void fn_80192BB0(void);
 /* 192E6C */ s32 fn_80192E6C(void);
 /* 193230 */ UNK_RET fn_80193230(UNK_PARAMS);
-/* 193308 */ UNK_RET fn_80193308(UNK_PARAMS);
+/* 193308 */ void fn_80193308(void);
 /* 1935B8 */ UNK_RET fn_801935B8(UNK_PARAMS);
 /* 1937C4 */ void fn_801937C4(s32* arg, u32 arg0, u32 arg01);
 /* 193B58 */ void fn_80193B58(s32* arg, u32 arg0, u32 arg01);
@@ -118,7 +118,7 @@ fn_8018F71C(int, int); ///< returns the frame for the tou css icon?
 /* 1975C8 */ void fn_801975C8(HSD_GObj*);
 /* 1976D4 */ void fn_801976D4(HSD_GObj*);
 /* 1977AC */ UNK_RET fn_801977AC(UNK_PARAMS);
-/* 197AF0 */ UNK_RET fn_80197AF0(UNK_PARAMS);
+/* 197AF0 */ void fn_80197AF0(HSD_GObj* gobj);
 /* 197D4C */ void fn_80197D4C(HSD_GObj*);
 /* 197E18 */ void fn_80197E18(HSD_GObj*);
 /* 197FD8 */ void fn_80197FD8(HSD_GObj*);
