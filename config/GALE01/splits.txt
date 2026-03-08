@@ -249,7 +249,7 @@ melee/ef/efsync.c:
 	.sdata      start:0x804D39C8 end:0x804D39D8
 	.sdata2     start:0x804D81A0 end:0x804D81D0
 
-melee/ef/ef_061D.c:
+melee/ef/efspecial.c:
 	.text       start:0x80061D70 end:0x80063930
 	.data       start:0x803BF9D0 end:0x803BFB00
 	.sdata      start:0x804D39D8 end:0x804D39E8

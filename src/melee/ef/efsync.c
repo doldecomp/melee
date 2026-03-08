@@ -2,6 +2,7 @@
 
 #include "efasync.h"
 #include "eflib.h"
+#include "efspecial.h"
 #include "efsync.h"
 #include "math.h"
 #include "placeholder.h"
@@ -21,7 +22,6 @@
 /// #include <cstddef>
 
 extern struct _struct_efAsync_803C025C_0xC efAsync_803C025C[51];
-extern Effect* ef_80061D70(s32, HSD_GObj*, void*);
 extern struct _struct_efLib_80458EE0_0x8 efLib_80458EE0[16];
 extern s32 efLib_804D64E8;
 extern s32 efLib_804D64F0;
@@ -106,8 +106,8 @@ void* efSync_Spawn(s32 arg_gfx_id, HSD_GObj* arg_gobj, ...)
         return efAsync_80063930(gfx_id, arg_gobj, vlist);
     }
     if (gfx_id < 0x4BA) {
-        // return ef_80061D70(gfx_id, arg_gobj, va_arg(vlist, void*));
-        return ef_80061D70(gfx_id, arg_gobj, vlist);
+        // return efSync_SpawnSpecial(gfx_id, arg_gobj, va_arg(vlist, void*));
+        return efSync_SpawnSpecial(gfx_id, arg_gobj, vlist);
     }
     efLib_804D64E8 = 1;
     switch (gfx_id) {
