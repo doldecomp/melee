@@ -5082,7 +5082,320 @@ void fn_80198D18(void)
     fn_80198BA0();
 }
 
-/// #fn_80198EBC
+extern SceneDesc* lbl_804D6674;
+extern f32 lbl_804DA7E0;
+extern f32 lbl_804DA7E4;
+extern f32 lbl_804DA7E8;
+extern f32 lbl_804DA7EC;
+extern f32 lbl_804DA7F0;
+extern f32 lbl_804DA808;
+extern f32 lbl_804DA818;
+extern f32 lbl_804DA828;
+extern f32 lbl_804DA834;
+extern f32 lbl_804DA840;
+extern f32 lbl_804DA844;
+extern f32 lbl_804DA848;
+extern f32 lbl_804DA84C;
+extern f32 lbl_804DA850;
+extern f32 lbl_804DA854;
+extern f32 lbl_804DA858;
+extern f32 lbl_804DA85C;
+extern f32 lbl_804DA860;
+extern f32 lbl_804DA864;
+extern f32 lbl_804DA868;
+extern f32 lbl_804DA86C;
+extern f32 lbl_804DA870;
+extern f32 lbl_804DA874;
+
+void fn_80198EBC(void)
+{
+    TmData* td;
+    HSD_GObj* gobj;
+    HSD_JObj* jobj;
+    HSD_JObj* jobj2;
+    HSD_JObj* c;
+    u8* table;
+    u8* ptr;
+    u8* ptr8;
+    s32 i, j;
+    f32 anim_rate;
+    f32 pos;
+    f32 hide_z, show_z;
+    f32 f_848, f_850, f_84C, f_854, f_7F0;
+    f32 f_858, f_834, f_85C;
+    f32 f_7E4, f_7E0, f_7E8, f_7EC;
+    f32 f_864;
+
+    table = lbl_803DA0D0;
+    td = gm_8018F634();
+    gm_8018F634();
+
+    gobj = fn_80190174(lbl_804D666C->cameras->desc);
+    fn_801901F8(lbl_804D666C->cameras->desc);
+    fn_801902F0((int) gobj);
+    fn_8019027C(lbl_804D666C->lights);
+
+    fn_8019035C(0, lbl_804D666C->models[5], 0, 0x1A, 2, 1, fn_80196DBC,
+                lbl_804DA808);
+    fn_8019035C(0, lbl_804D666C->models[4], 0, 0x1A, 2, 1, fn_80196E30,
+                lbl_804DA840);
+    fn_80198C60();
+
+    gobj = GObj_Create(0xE, 0x1A, 0);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7848,
+                            HSD_FogLoadDesc(lbl_804D666C->fogs[0].desc));
+    GObj_SetupGXLink(gobj, HSD_GObj_FogCallback, 0, 0);
+    fn_80198BA0();
+
+    hide_z = lbl_804DA828;
+    ptr = lbl_804799D8.x0;
+    ptr8 = ptr;
+    f_848 = lbl_804DA848;
+    f_850 = lbl_804DA850;
+    f_84C = lbl_804DA84C;
+    f_854 = lbl_804DA854;
+    f_7F0 = lbl_804DA7F0;
+    f_858 = lbl_804DA858;
+    f_834 = lbl_804DA834;
+    f_85C = lbl_804DA85C;
+    show_z = lbl_804DA808;
+    f_7E4 = lbl_804DA7E4;
+    f_7E0 = lbl_804DA7E0;
+    f_7E8 = lbl_804DA7E8;
+    f_7EC = lbl_804DA7EC;
+    f_864 = lbl_804DA864;
+
+    for (i = 0; i < td->x30; i++) {
+        if (td->x4B8[i].x0 == 0) {
+            anim_rate = (f32) i;
+        } else if (td->x4B8[i].x0 == 1) {
+            anim_rate = lbl_804DA844;
+        } else {
+            anim_rate = (f32) i;
+            td->x4B8[i].x0 = 0;
+            ptr[0x44] = 6;
+            ptr8[0x2D] = 4;
+        }
+
+        gobj = fn_8019035C(0, lbl_804D6674->models[12], 0, 0x1A, 2, 1,
+                           fn_80196FFC, anim_rate);
+        jobj = GET_JOBJ(gobj);
+        fn_8018FBD8(gobj, i);
+
+        if (jobj == NULL) {
+            c = NULL;
+        } else {
+            c = jobj->child;
+        }
+        HSD_MObjRemoveAnimByFlags(c->u.dobj->mobj, 4);
+
+        if (jobj == NULL) {
+            c = NULL;
+        } else {
+            c = jobj->child;
+        }
+        if (c == NULL) {
+            c = NULL;
+        } else {
+            c = c->next;
+        }
+        HSD_MObjRemoveAnimByFlags(c->u.dobj->mobj, 4);
+
+        if (jobj == NULL) {
+            c = NULL;
+        } else {
+            c = jobj->child;
+        }
+        if (c == NULL) {
+            c = NULL;
+        } else {
+            c = c->next;
+        }
+        if (c == NULL) {
+            c = NULL;
+        } else {
+            c = c->next;
+        }
+        HSD_MObjRemoveAnimByFlags(c->u.dobj->mobj, 4);
+
+        if (td->x30 == 4) {
+            pos = f_848 + (f_850 * (f32) i + f_84C);
+        } else if (td->x30 == 3) {
+            pos = f_848 + (f_850 * (f32) i + f_854);
+        } else {
+            pos = f_848 + (f_850 * (f_7F0 * (f32) i) + f_854);
+        }
+        pos -= f_834;
+        fn_8018ECA8(td->x4B8[i].x6, td->x4B8[i].x0, 5,
+                    f_858 * pos - f_85C, lbl_804DA860, 5);
+
+        ((u8*) td->x524[2])[0x4D] = 1;
+
+        gobj = fn_8019035C(0, lbl_804D6674->models[10], 0, 0x1A, 2, 1,
+                           fn_801973F8, anim_rate);
+        jobj = GET_JOBJ(gobj);
+        fn_8018FBD8(gobj, i);
+
+        if (jobj == NULL) {
+            c = NULL;
+        } else {
+            c = jobj->child;
+        }
+        jobj2 = c;
+
+        HSD_JObjSetTranslateZ(c, hide_z);
+
+        if (table[td->x4B8[i].x1] == 0) {
+            HSD_JObjSetTranslateZ(c, show_z);
+
+            for (j = 1; j <= 12; j++) {
+                if (jobj2 == NULL) {
+                    jobj2 = NULL;
+                } else {
+                    jobj2 = jobj2->next;
+                }
+                HSD_JObjSetTranslateZ(jobj2, hide_z);
+            }
+        } else {
+            for (j = 1; j <= 12; j++) {
+                if (jobj2 == NULL) {
+                    jobj2 = NULL;
+                } else {
+                    jobj2 = jobj2->next;
+                }
+                HSD_JObjSetTranslateZ(jobj2, hide_z);
+
+                if (table[td->x4B8[i].x1] == j) {
+                    HSD_JObjSetTranslateZ(jobj2, show_z);
+
+                    for (j++; j <= 12; j++) {
+                        if (jobj2 == NULL) {
+                            jobj2 = NULL;
+                        } else {
+                            jobj2 = jobj2->next;
+                        }
+                        HSD_JObjSetTranslateZ(jobj2, hide_z);
+                    }
+                    break;
+                }
+            }
+        }
+
+        gobj = fn_8019035C(0, lbl_804D6674->models[4], 0, 0x1A, 2, 1,
+                           fn_801975C8, anim_rate);
+        jobj = GET_JOBJ(gobj);
+        fn_8018FBD8(gobj, i);
+
+        if (td->x30 == 4) {
+            pos = f_7E4 * (f32) i + f_7E0;
+        } else if (td->x30 == 3) {
+            pos = f_7E8 + (f_7E4 * (f32) i - f_7EC);
+        } else {
+            pos = f_7E8 + (f_7E4 * (f_7F0 * (f32) i) - f_7EC);
+        }
+        fn_8018FDC4(jobj, pos - f_864, lbl_804DA868, lbl_804DA86C);
+
+        if (jobj == NULL) {
+            c = NULL;
+        } else {
+            c = jobj->child;
+        }
+        if (c == NULL) {
+            jobj = NULL;
+        } else {
+            jobj = c->next;
+        }
+        fn_8019044C(jobj, fn_8018F71C(td->x4B8[i].x1, td->x4B8[i].x3));
+
+        gobj = fn_8019035C(0, lbl_804D6674->models[9], 0, 0x1A, 2, 1,
+                           fn_801977AC, anim_rate);
+        jobj = GET_JOBJ(gobj);
+        fn_8018FBD8(gobj, i);
+        fn_8019044C(jobj, anim_rate);
+
+        gobj = fn_8019035C(0, lbl_804D6674->models[8], 0, 0x1A, 2, 1,
+                           fn_80197AF0, lbl_804DA808);
+        fn_8018FBD8(gobj, i);
+
+        gobj = fn_8019035C(0, lbl_804D6674->models[13], 0, 0x1A, 2, 1,
+                           fn_80197E18, anim_rate);
+        jobj = GET_JOBJ(gobj);
+        fn_8018FBD8(gobj, i);
+
+        if (td->x4B8[i].x0 == 1) {
+            fn_8019044C(jobj, (f32) td->x4B8[i].x4);
+        } else {
+            HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
+        }
+
+        if (td->x31 != 0) {
+            gobj = fn_8019035C(0, lbl_804D6674->models[11], 0, 0x1A, 2, 1,
+                               fn_80197FD8, anim_rate);
+            jobj = GET_JOBJ(gobj);
+            fn_8018FBD8(gobj, i);
+            fn_8019044C(jobj, (f32) td->x4B8[i].x5);
+        }
+
+        gobj = fn_8019035C(0, lbl_804D6674->models[7], 0, 0x1A, 2, 1,
+                           fn_801981A0, anim_rate);
+        jobj = GET_JOBJ(gobj);
+        fn_8018FBD8(gobj, i);
+        fn_8018FDC4(jobj, lbl_804DA870, lbl_804DA818, lbl_804DA874);
+
+        gobj = fn_8019035C(0, lbl_804D6674->models[14], 0, 0x1A, 2, 1,
+                           fn_801983E4, anim_rate);
+        fn_8018FBD8(gobj, i);
+
+        ptr++;
+        ptr8 += 6;
+    }
+
+    fn_8019035C(0, lbl_804D6674->models[5], 0, 0x1A, 2, 1, fn_801976D4,
+                lbl_804DA808);
+
+    gobj = fn_8019035C(0, lbl_804D6674->models[0], 0, 0x1A, 2, 1, NULL,
+                       lbl_804DA808);
+    {
+        HSD_JObj* j16;
+        j16 = GET_JOBJ(gobj);
+        if (j16 == NULL) {
+            j16 = NULL;
+        } else {
+            j16 = j16->child;
+        }
+        if (j16 == NULL) {
+            j16 = NULL;
+        } else {
+            j16 = j16->next;
+        }
+        if (j16 == NULL) {
+            j16 = NULL;
+        } else {
+            j16 = j16->next;
+        }
+        if (j16 == NULL) {
+            j16 = NULL;
+        } else {
+            j16 = j16->next;
+        }
+        if (j16 == NULL) {
+            j16 = NULL;
+        } else {
+            j16 = j16->next;
+        }
+
+        for (j = 0; j <= 40; j++) {
+            fn_8019044C(j16, (f32) (j + 10));
+            *(f32*) &table[0xE0] = HSD_JObjGetTranslationY(j16);
+            table += 4;
+        }
+    }
+
+    fn_8019035C(0, lbl_804D6674->models[6], 0, 0x1A, 2, 1, fn_80197D4C,
+                lbl_804DA808);
+    fn_8019035C(0, lbl_804D6674->models[2], 0, 0x1A, 3, 1,
+                (void (*)(HSD_GObj*)) fn_80198584, lbl_804DA808);
+}
 
 extern MatchEnd gm_80477738;
 extern SceneDesc* lbl_804D6670;

@@ -22,7 +22,7 @@
 /* 18E85C */ void fn_8018E85C(int, s32);
 /* 18EC48 */ UNK_RET fn_8018EC48(UNK_PARAMS);
 /* 18EC7C */ UNK_RET fn_8018EC7C(UNK_PARAMS);
-/* 18ECA8 */ UNK_RET fn_8018ECA8(UNK_PARAMS);
+/* 18ECA8 */ void fn_8018ECA8(u16, u8, s32, f32, f32, s32);
 /* 18F00C */ void fn_8018F00C(char*, s32);
 /* 18F1B0 */ s32 gm_8018F1B0(MatchEnd* me);
 /* 17F294 */ int fn_8017F294(void);
