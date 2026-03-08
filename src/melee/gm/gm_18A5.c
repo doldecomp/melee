@@ -1106,7 +1106,8 @@ void fn_80191240(HSD_GObj* gobj)
     TmData* tm;
     s32 val;
     HSD_JObj* jobj;
-    HSD_JObj* child;
+    HSD_JObj* first_child;
+    HSD_JObj* sibling;
 
     tm = gm_8018F634();
     val = fn_8018F62C(gobj);
@@ -1117,28 +1118,28 @@ void fn_80191240(HSD_GObj* gobj)
     }
     HSD_JObjClearFlagsAll(jobj, 0x10);
     if (jobj == NULL) {
-        child = NULL;
+        first_child = NULL;
     } else {
-        child = jobj->child;
+        first_child = jobj->child;
     }
-    if (child == NULL) {
-        child = NULL;
+    if (first_child == NULL) {
+        sibling = NULL;
     } else {
-        child = child->next;
+        sibling = first_child->next;
     }
     if (val == tm->cur_option) {
         if (lbl_804799B8.pad[7] != 0) {
-            fn_8019044C(jobj, 1.0F);
+            fn_8019044C(first_child, 1.0F);
             lbl_804799B8.pad[7] = lbl_804799B8.pad[7] - 1;
         } else {
-            fn_8019044C(jobj, 0.0F);
+            fn_8019044C(first_child, 0.0F);
         }
         if (lbl_804799B8.pad[8] != 0) {
-            fn_8019044C(child, 1.0F);
+            fn_8019044C(sibling, 1.0F);
             lbl_804799B8.pad[8] = lbl_804799B8.pad[8] - 1;
             return;
         }
-        fn_8019044C(child, 0.0F);
+        fn_8019044C(sibling, 0.0F);
         return;
     }
     if (val > tm->cur_option) {
