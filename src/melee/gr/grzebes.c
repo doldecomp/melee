@@ -594,8 +594,8 @@ void grZebes_801D9100(HSD_GObj* gobj)
     gp->gv.zebes4.xE4 = new_var;
     gp->gv.zebes4.xE8 = 0;
     gp->gv.zebes4.xEC =
-        (u32) grZakoGenerator_801CA394((UNK_T) &grZe_803E1C80, 4,
-                                       (UNK_T) grZebes_801DCBB0, 1.0f);
+        (u32) grZakoGenerator_801CA394((void*) &grZe_803E1C80, 4,
+                                       (void*) grZebes_801DCBB0, 1.0f);
     Ground_801C2FE0(new_var2);
 }
 
