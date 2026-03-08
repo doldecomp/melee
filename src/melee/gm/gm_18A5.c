@@ -486,6 +486,8 @@ void fn_8018DF68(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
     s32 half;
     s32 c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10;
 
+    PAD_STACK(8);
+
     c0 = 0xFFFF00FF;
     c10 = 0xFFFF00FF;
     thickness = M2C_FIELD(data, f32*, 0x1C);
@@ -1297,6 +1299,8 @@ void fn_8018FA24(void)
     s32 char_kind;
     s32 ctr;
 
+    PAD_STACK(8);
+
     ptr = (u8*) lbl_80473AB8;
     tmdata = ptr + 0x370C;
     slot = 0;
@@ -1398,6 +1402,8 @@ void fn_8018FBE0(s32 arg0, s32 arg1, s32 arg2, s8 arg3, s8 arg4, s16 arg5,
     s32 i;
     u8* ptr;
 
+    PAD_STACK(8);
+
     gm_804771C4.cur_option = arg0;
     *(s32*) &gm_804771C4._x1C = arg1;
     gm_804771C4.x20 = arg2;
@@ -1408,7 +1414,7 @@ void fn_8018FBE0(s32 arg0, s32 arg1, s32 arg2, s8 arg3, s8 arg4, s16 arg5,
         ptr[1] = (u8) arg4;
         ptr[2] = (u8) arg3;
         *(u16*) (ptr + 9) = (u16) arg5;
-        ptr[13] = (s8) i;
+        ptr[13] = (u8) i;
         ptr += 0x12;
     }
 }
@@ -2028,6 +2034,8 @@ void fn_8019175C(void* gobj)
     HSD_JObj* root_jobj;
     HSD_JObj* child;
     HSD_JObj** base;
+
+    PAD_STACK(8);
 
     tm = gm_8018F634();
     fn_8018F62C(gobj);
@@ -3487,6 +3495,8 @@ void fn_80195CCC(s32* arg, u32 buttons, u32 trigger)
     u8 count;
     s32 i;
     s32 unique;
+
+    PAD_STACK(16);
 
     if (buttons & 0x40001) {
         lbAudioAx_80024030(2);
