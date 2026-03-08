@@ -22,6 +22,7 @@
 #include <melee/lb/lb_00F9.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lbdvd.h>
 #include <melee/lb/lblanguage.h>
 #include <melee/mn/mnmain.h>
 #include <melee/mn/mnmainrule.h>
@@ -5041,7 +5042,167 @@ void gm_8019B2DC_OnFrame(void)
     fn_8019BA04(sp);
 }
 
-/// #fn_8019B458
+extern SceneDesc* lbl_804D6670;
+
+/// Transitions to results screen after a tournament match.
+/// Ranks players, preloads stage/character data, and starts audio.
+void fn_8019B458(s32* arg0)
+{
+    TmData* tm = (TmData*) arg0;
+    s32 i;
+    u8 rank = 0;
+    s32 x24;
+    u8* ptr;
+    TmData* td;
+
+    s32 costumes[4];
+    s32 charIDs[4];
+
+    tm->x24++;
+    *(u32*) &lbl_804799D8 = 0;
+    tm->pad_x34[0] = tm->x33;
+
+    td = gm_8018F634();
+    x24 = td->x24;
+    ptr = lbl_803DA0D0;
+    ptr += td->entrants * 6;
+
+    if (x24 > (s32) ptr[0x23]) {
+        rank = 6;
+    } else {
+        ptr += 5;
+        if (x24 <= (s32) ptr[0x1E]) {
+            rank = 5;
+        }
+        if (x24 <= (s32) (--ptr)[0x1E]) {
+            rank = 4;
+        }
+        if (x24 <= (s32) (--ptr)[0x1E]) {
+            rank = 3;
+        }
+        if (x24 <= (s32) (--ptr)[0x1E]) {
+            rank = 2;
+        }
+        if (x24 <= (s32) (--ptr)[0x1E]) {
+            rank = 1;
+        }
+        if (x24 <= (s32) (--ptr)[0x1E]) {
+            rank = 0;
+        }
+    }
+
+    tm->x33 = rank;
+
+    {
+        s32 match = fn_80196CF8();
+        TmData* td2 = gm_8018F634();
+        fn_80198D18();
+
+        {
+            HSD_GObj* gobj = fn_8019035C(
+                0, lbl_804D6670->models[3], match, 0x1A, 3, 1,
+                fn_80196EEC, 0.0f);
+
+            if ((s32) td2->pad_x34[0] == match) {
+                HSD_JObjSetFlagsAll(gobj->hsd_obj, 0x10U);
+            }
+        }
+
+        if (match < 4) {
+            lbl_804799D8.x1B = 0x50;
+        } else if (match == 4) {
+            lbl_804799D8.x1B = 0x5F;
+        } else {
+            lbl_804799D8.x1B = 0x61;
+        }
+
+        fn_80198BA0();
+        fn_8018E618(tm->entrants, (s32) tm->x2C, 4.5f);
+        fn_8018E85C((int) lbl_804D6670->models[4], tm->x2C);
+        fn_8018FA24();
+
+        tm->cur_option = 0x14;
+        tm->x2C = 0;
+
+        for (i = 0; i < 4; i++) {
+            if (tm->x4B8[i].x0 != 3) {
+                charIDs[i] = fn_8018F6FC(tm->x4B8[i].x1);
+                costumes[i] = tm->x4B8[i].x3;
+            }
+        }
+
+        {
+            InternalStageId stageID;
+
+            if ((tm->stage_selection_type == 0 && tm->x32 == 0) ||
+                tm->stage_selection_type == 1)
+            {
+                gm_8018F634();
+                do {
+                    lbl_804D4190 = fn_8018F4A0();
+                    if (lbl_804D4194 == lbl_804D4190) {
+                        if (fn_801642A0() != 0) {
+                            break;
+                        }
+                    } else {
+                        break;
+                    }
+                } while (true);
+                lbl_804D4194 = lbl_804D4190;
+                stageID = lbl_804D4190;
+            } else {
+                stageID = tm->x28;
+            }
+
+            {
+                PreloadCacheScene* scene = lbDvd_8001822C();
+                struct GameCache* gc = &scene->game_cache;
+                lbDvd_800174BC();
+
+                if (tm->x4B8[0].x0 != 3) {
+                    gc->entries[0].char_id = charIDs[0];
+                    gc->entries[0].color = costumes[0];
+                }
+
+                if (tm->x4B8[1].x0 != 3) {
+                    gc->entries[1].char_id = charIDs[1];
+                    gc->entries[1].color = costumes[1];
+                }
+
+                if (tm->x4B8[2].x0 != 3) {
+                    gc->entries[2].char_id = charIDs[2];
+                    gc->entries[2].color = costumes[2];
+                }
+
+                if (tm->x4B8[3].x0 != 3) {
+                    gc->entries[3].char_id = charIDs[3];
+                    gc->entries[3].color = costumes[3];
+                }
+
+                if (!((tm->stage_selection_type == 2 && tm->x32 == 0) ||
+                      tm->stage_selection_type == 3))
+                {
+                    gc->stage_id = stageID;
+                }
+
+                lbDvd_80018254();
+            }
+
+            {
+                u64 audio_mask = 0;
+                for (i = 0; i < 4; i++) {
+                    if (tm->x4B8[i].x0 != 3) {
+                        audio_mask |= lbAudioAx_80026E84(charIDs[i]);
+                    }
+                }
+                audio_mask |= lbAudioAx_80026EBC(stageID);
+                lbAudioAx_80026F2C(0x1C);
+                lbAudioAx_8002702C(0xC, audio_mask);
+                lbAudioAx_80027168();
+            }
+        }
+    }
+}
 
 /// Initializes match data and transitions to next state.
 /// Type cast used to match target stw instruction pattern.
