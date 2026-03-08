@@ -65,7 +65,7 @@
 /* 1DBB60 */ static s32 grZebes_801DBB60(s32 arg);
 /* 1DC260 */ static void grZebes_801DC260(void);
 /* 1DC408 */ static void grZebes_801DC408(Ground_GObj*);
-/* 1DC744 */ static void grZebes_801DC744(s32, s32);
+/* 1DC744 */ static void grZebes_801DC744(s32, u8);
 /* 1DC9DC */ static void grZebes_801DC9DC(s32 arg);
 /* 1DCCB8 */ static DynamicsDesc* grZebes_801DCCB8(enum_t arg);
 /* 1DCCC0 */ static bool grZebes_801DCCC0(Vec3* arg, int arg0, HSD_JObj* jobj);
@@ -2155,19 +2155,15 @@ void grZebes_801DC408(Ground_GObj* gobj)
     }
 }
 
-void grZebes_801DC744(s32 arg0, s32 arg1)
+void grZebes_801DC744(s32 arg0, u8 arg1)
 {
     f32 scales[7];
     Vec3* base = grZe_8049F140;
     s32 i;
 
-    scales[0] = grZe_803B8044.scales[0];
-    scales[1] = grZe_803B8044.scales[1];
-    scales[2] = grZe_803B8044.scales[2];
-    scales[3] = grZe_803B8044.scales[3];
-    scales[4] = grZe_803B8044.scales[4];
-    scales[5] = grZe_803B8044.scales[5];
-    scales[6] = grZe_803B8044.scales[6];
+    for (i = 0; i < 7; i++) {
+        scales[i] = grZe_803B8044.scales[i];
+    }
 
     if (arg0 & 1) {
         f32 x_start = base[2].x;
