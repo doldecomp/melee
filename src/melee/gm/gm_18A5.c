@@ -3278,10 +3278,12 @@ void fn_801953C8(s32* state_ptr, u32 buttons, u32 trigger)
                 candidate += 5;
             }
             adj = fn_8018F6DC(fn_8018F3BC(candidate));
-            if (lbl_803D9D20.x72[adj] != 0) {
-                occupied = 1;
-            } else if (fn_8018F3D0(fn_8018F310(fn_8018F6FC(adj))) == 2) {
-                occupied = 0;
+            if (lbl_803D9D20.x72[adj] == 0) {
+                if (fn_8018F3D0(fn_8018F310(fn_8018F6FC(adj))) != 2) {
+                    occupied = 1;
+                } else {
+                    occupied = 0;
+                }
             } else {
                 occupied = 1;
             }
@@ -3304,10 +3306,12 @@ void fn_801953C8(s32* state_ptr, u32 buttons, u32 trigger)
                 candidate -= 5;
             }
             adj = fn_8018F6DC(fn_8018F3BC(candidate));
-            if (lbl_803D9D20.x72[adj] != 0) {
-                occupied = 1;
-            } else if (fn_8018F3D0(fn_8018F310(fn_8018F6FC(adj))) == 2) {
-                occupied = 0;
+            if (lbl_803D9D20.x72[adj] == 0) {
+                if (fn_8018F3D0(fn_8018F310(fn_8018F6FC(adj))) != 2) {
+                    occupied = 1;
+                } else {
+                    occupied = 0;
+                }
             } else {
                 occupied = 1;
             }
@@ -3330,10 +3334,12 @@ void fn_801953C8(s32* state_ptr, u32 buttons, u32 trigger)
                 candidate += 25;
             }
             adj = fn_8018F6DC(fn_8018F3BC(candidate));
-            if (lbl_803D9D20.x72[adj] != 0) {
-                occupied = 1;
-            } else if (fn_8018F3D0(fn_8018F310(fn_8018F6FC(adj))) == 2) {
-                occupied = 0;
+            if (lbl_803D9D20.x72[adj] == 0) {
+                if (fn_8018F3D0(fn_8018F310(fn_8018F6FC(adj))) != 2) {
+                    occupied = 1;
+                } else {
+                    occupied = 0;
+                }
             } else {
                 occupied = 1;
             }
@@ -3357,10 +3363,12 @@ void fn_801953C8(s32* state_ptr, u32 buttons, u32 trigger)
                 candidate -= 25;
             }
             adj = fn_8018F6DC(fn_8018F3BC(candidate));
-            if (lbl_803D9D20.x72[adj] != 0) {
-                occupied = 1;
-            } else if (fn_8018F3D0(fn_8018F310(fn_8018F6FC(adj))) == 2) {
-                occupied = 0;
+            if (lbl_803D9D20.x72[adj] == 0) {
+                if (fn_8018F3D0(fn_8018F310(fn_8018F6FC(adj))) != 2) {
+                    occupied = 1;
+                } else {
+                    occupied = 0;
+                }
             } else {
                 occupied = 1;
             }
