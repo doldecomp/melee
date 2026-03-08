@@ -6,8 +6,10 @@
 #include <baselib/gobj.h>
 #include <baselib/memory.h>
 #include <sysdolphin/baselib/debug.h>
+#include <sysdolphin/baselib/random.h>
 
 #include "it/types.h"
+#include "it/item.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 
@@ -257,7 +259,7 @@ void grZakoGenerator_801CAC14(HSD_GObj* gobj)
     } else {
         s32 idx = *(s32*) ((u8*) ip + 0xDD8);
         if (idx != -1) {
-            lbl_8049F030.x4->entries[idx].x4 = 0;
+            lbl_8049F030.x4->entries[idx].x4 = NULL;
             lbl_8049F030.x4->entries[idx].x2 = 2;
         }
     }
