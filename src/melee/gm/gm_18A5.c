@@ -4759,10 +4759,9 @@ void fn_80198D18(void)
 
 /// @todo Currently 98.36% match - needs branch pattern fix (beq+b vs bne)
 #pragma dont_inline on
-void fn_8019A71C(s32* state)
+void fn_8019A71C(s32* state, u32 unused1, u32 unused2)
 {
     u32* counter = (u32*) &lbl_804799D8;
-    PAD_STACK(8);
 
     if (*state == 0x13) {
         fn_8019B458(state);
@@ -5145,6 +5144,7 @@ void gm_8019B2DC_OnFrame(void)
     s32* dest;
     TmData* ptr;
     s32 stage;
+    PAD_STACK(4);
 
     data = gm_8018F634();
     arg1 = fn_8018F674(4);
@@ -5157,7 +5157,7 @@ void gm_8019B2DC_OnFrame(void)
         cond = 0;
     }
     if (cond != 0) {
-        fn_8019A71C((s32*) data);
+        fn_8019A71C((s32*) data, arg1, arg2);
     } else {
         if (gm_8018F634()->cur_option >= 0x1B &&
             gm_8018F634()->cur_option <= 0x1E)

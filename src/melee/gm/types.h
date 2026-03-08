@@ -774,6 +774,7 @@ struct TmData {
     u8 x32;
     u8 x33;
     u8 pad_x34[0x37 - 0x34];
+#pragma pack(push, 1)
     struct TmUnkMenuData {
         u8 x0;
         u8 x1;
@@ -788,9 +789,10 @@ struct TmData {
         u8 xB;
         u8 xC;
         u8 xD;
-        u8 pad_xE[0x11 - 0xE];
+        u8 pad_xE[0x12 - 0xE];
     } x37[16]; ///< @todo needs to be larger, see gm_80190EA4
-    u8 pad_x158[0x4B8 - 0x158];
+#pragma pack(pop)
+    u8 pad_x157[0x4B8 - 0x157];
     struct UnkSelections {
         u8 x0; ///< slot type
         u8 x1; ///< CSSIconHud
