@@ -841,11 +841,16 @@ int fn_8018F310(int arg0)
 }
 #pragma pop
 
+#pragma push
+#pragma auto_inline off
 u8 fn_8018F3BC(s32 arg0)
 {
     return lbl_803D9D20.x59[arg0];
 }
+#pragma pop
 
+#pragma push
+#pragma auto_inline off
 int fn_8018F3D0(int arg0)
 {
     if (arg0 == 0xE || (arg0 >= 0x10 && arg0 <= 0x13) || arg0 == 0xA) {
@@ -856,6 +861,7 @@ int fn_8018F3D0(int arg0)
     }
     return 2;
 }
+#pragma pop
 
 int fn_8018F410(void)
 {
@@ -977,6 +983,8 @@ u32 fn_8018F6A8(int arg0)
     return gm_801A3680((u8) arg0);
 }
 
+#pragma push
+#pragma auto_inline off
 int fn_8018F6DC(int arg0)
 {
     if (arg0 >= 0x13) {
@@ -987,6 +995,7 @@ int fn_8018F6DC(int arg0)
     }
     return arg0;
 }
+#pragma pop
 
 #pragma push
 #pragma auto_inline off
@@ -1002,10 +1011,13 @@ CharacterKind fn_8018F6FC(CSSIconHud arg0)
 }
 #pragma pop
 
+#pragma push
+#pragma auto_inline off
 float fn_8018F71C(int arg0, int arg1)
 {
     return arg0 + arg1 * 0x1E;
 }
+#pragma pop
 
 #pragma push
 #pragma auto_inline off
@@ -1023,6 +1035,8 @@ int fn_8018F74C(void)
 }
 #pragma pop
 
+#pragma push
+#pragma auto_inline off
 int fn_8018F808(void)
 {
     int i;
@@ -1034,6 +1048,7 @@ int fn_8018F808(void)
     }
     return noerrcount;
 }
+#pragma pop
 
 /// @todo Currently 78.75% match - needs register allocation fix
 void fn_8018F888(void)
@@ -1271,10 +1286,13 @@ found:
     tmdata[0x30] = player_count;
 }
 
+#pragma push
+#pragma auto_inline off
 void fn_8018FBD8(void* arg0, s32 arg1)
 {
     M2C_FIELD(arg0, s32*, 0x2C) = arg1;
 }
+#pragma pop
 
 void fn_8018FBE0(s32 arg0, s32 arg1, s32 arg2, s8 arg3, s8 arg4, s16 arg5,
                  s8 arg6)
@@ -1329,6 +1347,8 @@ void fn_8018FF9C(HSD_JObj* jobj, float x, float y, float z)
 }
 #pragma pop
 
+#pragma push
+#pragma auto_inline off
 HSD_GObj* fn_80190174(HSD_CObjDesc* cobjdesc)
 {
     HSD_GObj* gobj = GObj_Create(0x13, 0x12, 0);
@@ -1338,6 +1358,7 @@ HSD_GObj* fn_80190174(HSD_CObjDesc* cobjdesc)
     gobj->gxlink_prios = 7;
     return gobj;
 }
+#pragma pop
 
 HSD_GObj* fn_801901F8(HSD_CObjDesc* cobjdesc)
 {
@@ -1349,6 +1370,8 @@ HSD_GObj* fn_801901F8(HSD_CObjDesc* cobjdesc)
     return gobj;
 }
 
+#pragma push
+#pragma auto_inline off
 void fn_8019027C(UNK_T lights)
 {
     HSD_GObj* gobj = GObj_Create(0xB, 0x1A, 0);
@@ -1356,10 +1379,13 @@ void fn_8019027C(UNK_T lights)
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784A, lobj);
     GObj_SetupGXLink(gobj, HSD_GObj_LObjCallback, 1, 0);
 }
+#pragma pop
 
 static HSD_GObj* lbl_804D663C;
 
 /// Initializes SIS library text rendering for tournament mode.
+#pragma push
+#pragma auto_inline off
 void fn_801902F0(int sis_param)
 {
     s32 value;
@@ -1373,7 +1399,10 @@ void fn_801902F0(int sis_param)
     lbl_804D663C = (HSD_GObj*) HSD_SisLib_803A611C(0, (HSD_GObj*) value, 9,
                                                    0x12, 0, 3, 0, 0x13);
 }
+#pragma pop
 
+#pragma push
+#pragma auto_inline off
 HSD_GObj* fn_8019035C(bool arg0, DynamicModelDesc* model, int arg2, int arg3,
                       int arg4, bool arg5, void (*arg6)(HSD_GObj*), f32 arg8)
 {
@@ -1394,6 +1423,7 @@ HSD_GObj* fn_8019035C(bool arg0, DynamicModelDesc* model, int arg2, int arg3,
     }
     return gobj;
 }
+#pragma pop
 
 #pragma dont_inline on
 void fn_8019044C(HSD_JObj* jobj, float arg1)
@@ -1403,6 +1433,8 @@ void fn_8019044C(HSD_JObj* jobj, float arg1)
 }
 #pragma dont_inline off
 
+#pragma push
+#pragma auto_inline off
 void fn_80190480(float arg8)
 {
     if ((int) arg8 == 0) {
@@ -1411,6 +1443,7 @@ void fn_80190480(float arg8)
     }
     HSD_CObjSetFov(lbl_803D9DD0.cobj, arg8);
 }
+#pragma pop
 
 void fn_801904D0(void)
 {
@@ -1419,6 +1452,8 @@ void fn_801904D0(void)
     HSD_CObjSetEyePosition(tmp->cobj, &lbl_803D9DD0.eye_position);
 }
 
+#pragma push
+#pragma auto_inline off
 void fn_80190520(f32 x, f32 y, f32 z)
 {
     Vec3 sp14;
@@ -1438,6 +1473,7 @@ void fn_80190520(f32 x, f32 y, f32 z)
         HSD_CObjSetEyePosition(tmp->cobj, &sp14);
     }
 }
+#pragma pop
 
 /// #fn_80190520
 
@@ -4586,6 +4622,8 @@ void fn_80198824(HSD_GObj* gobj)
 /// Initializes tournament mode match data.
 /// Initializes tournament mode match data structures.
 /// Type casts used to match target instruction patterns (stw/sth vs stb).
+#pragma push
+#pragma auto_inline off
 void fn_80198BA0(void)
 {
     TmData* td;
@@ -4632,6 +4670,7 @@ void fn_80198BA0(void)
         ptr++;
     }
 }
+#pragma pop
 
 /// @todo Currently 99.63% match - permuter couldn't improve (instruction
 /// scheduling)
