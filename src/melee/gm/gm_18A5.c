@@ -2145,58 +2145,42 @@ void fn_801965C4(void)
     gm_801A4B60();
 }
 
-/// @todo Currently 83.98% match - needs register allocation fix
 /// Randomly assigns bracket positions for tournament seeding.
 void fn_80196684(s32 bracket_idx)
 {
-    s32 rand_val;
-    u8* weight_c;
-    u8* weight_b;
-    u8* weight_a;
-    u8* bracket;
-    u8 weight_a_val;
+    u8* p = (u8*) &lbl_80473AB8[bracket_idx];
+    s32 rand_val = HSD_Randi(p[0x51] + p[0x7D] + p[0xA9]);
 
-    weight_c = (u8*) &lbl_80473AB8[bracket_idx];
-    weight_b = (u8*) &lbl_80473AB8[bracket_idx];
-    weight_c = &weight_c[0xA9];
-    weight_a = (u8*) &lbl_80473AB8[bracket_idx];
-    weight_b = &weight_b[0x7D];
-    weight_a = &weight_a[0x51];
-    rand_val = HSD_Randi(*weight_a + *weight_b + *weight_c);
-    weight_a_val = *weight_a;
-    if (rand_val < (s32) weight_a_val) {
-        bracket = (u8*) &lbl_80473AB8[bracket_idx];
-        bracket[0x4C] = 0;
-        if (HSD_Randi(*weight_b + *weight_c) < (s32) *weight_b) {
-            bracket[0x78] = 1;
-            bracket[0xA4] = 2;
+    if (rand_val < (s32) p[0x51]) {
+        p[0x4C] = 0;
+        if (HSD_Randi(p[0x7D] + p[0xA9]) < (s32) p[0x7D]) {
+            p[0x78] = 1;
+            p[0xA4] = 2;
             return;
         }
-        bracket[0x78] = 2;
-        bracket[0xA4] = 1;
+        p[0x78] = 2;
+        p[0xA4] = 1;
         return;
     }
-    if (rand_val < (s32) (weight_a_val + *weight_b)) {
-        bracket = (u8*) &lbl_80473AB8[bracket_idx];
-        bracket[0x78] = 0;
-        if (HSD_Randi(*weight_a + *weight_c) < (s32) *weight_a) {
-            bracket[0x4C] = 1;
-            bracket[0xA4] = 2;
+    if (rand_val < (s32) (p[0x51] + p[0x7D])) {
+        p[0x78] = 0;
+        if (HSD_Randi(p[0x51] + p[0xA9]) < (s32) p[0x51]) {
+            p[0x4C] = 1;
+            p[0xA4] = 2;
             return;
         }
-        bracket[0x4C] = 2;
-        bracket[0xA4] = 1;
+        p[0x4C] = 2;
+        p[0xA4] = 1;
         return;
     }
-    bracket = (u8*) &lbl_80473AB8[bracket_idx];
-    bracket[0xA4] = 0;
-    if (HSD_Randi(*weight_a + *weight_b) < (s32) *weight_a) {
-        bracket[0x4C] = 1;
-        bracket[0x78] = 2;
+    p[0xA4] = 0;
+    if (HSD_Randi(p[0x51] + p[0x7D]) < (s32) p[0x51]) {
+        p[0x4C] = 1;
+        p[0x78] = 2;
         return;
     }
-    bracket[0x4C] = 2;
-    bracket[0x78] = 1;
+    p[0x4C] = 2;
+    p[0x78] = 1;
 }
 
 /// #fn_801967E0
