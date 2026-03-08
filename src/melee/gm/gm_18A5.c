@@ -4140,6 +4140,9 @@ static union {
         u8 x4C;
         u8 x4D;
         u8 x4E[20];
+        u8 _pad4[0x64 - 0x62];
+        Vec3 x64;
+        Vec3 x70;
     };
 } lbl_804799D8;
 
@@ -4951,8 +4954,8 @@ void fn_80198824(HSD_GObj* gobj)
             HSD_JObjReqAnimAll(jobj, (f32) *frame_ctr);
             HSD_JObjAnimAll(jobj);
 
-            HSD_JObjSetTranslate(jobj, (Vec3*) &lbl_804799D8.x0[0x64]);
-            HSD_JObjSetScale(jobj, (Vec3*) &lbl_804799D8.x0[0x70]);
+            HSD_JObjSetTranslate(jobj, &lbl_804799D8.x64);
+            HSD_JObjSetScale(jobj, &lbl_804799D8.x70);
         }
     }
 }
