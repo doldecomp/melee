@@ -4566,7 +4566,7 @@ void fn_801985D4(HSD_GObj* gobj)
     } else {
         HSD_JObjSetTranslateZ(jobj, 0.0f);
 
-        if ((u32) lbl_804799D8.x0[0] < 0xAU) {
+        if (*(u32*) &lbl_804799D8.x0[0] < 0xAU) {
             lbl_804D667C = 1;
             return;
         }
@@ -4721,9 +4721,9 @@ void fn_80198D18(void)
     PAD_STACK(24);
 
     gm_8018F634();
-    fn_80190174(lbl_804D666C->cameras->desc);
+    gobj = fn_80190174(lbl_804D666C->cameras->desc);
     fn_801901F8(lbl_804D666C->cameras->desc);
-    fn_801902F0(0);
+    fn_801902F0((int) gobj);
     fn_8019027C(lbl_804D666C->lights);
     fn_8019035C(0, lbl_804D666C->models[5], 0, 0x1A, 2, 1, fn_80196DBC,
                 0.0f);
