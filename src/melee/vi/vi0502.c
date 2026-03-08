@@ -48,9 +48,12 @@ static ViCharaDesc* un_804D6FA8;
 
 void un_8031E110(int arg0, int arg1, int arg2)
 {
-    un_804D6FA8->p1_char_index = arg0;
-    un_804D6FA8->p1_costume_index = arg1;
-    un_804D6FA8->p2_costume_index = arg2;
+    u8* p;
+
+    *(u8*) &un_804D6FA8 = arg0;
+    p = (u8*) &un_804D6FA8;
+    p[1] = arg1;
+    p[3] = arg2;
 }
 
 void vi0502_8031E124(CharacterKind player_kind, int player_costume,

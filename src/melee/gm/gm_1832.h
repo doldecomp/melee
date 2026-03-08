@@ -49,11 +49,11 @@
 /* 187F48 */ void gm_80187F48_OnEnter(UNK_T);
 /* 188364 */ void gm_80188364_OnLeave(UNK_T);
 /* 18838C */ void gm_8018838C_OnFrame(void);
-/* 1883C0 */ UNK_RET gm_801883C0(UNK_PARAMS);
+/* 1883C0 */ f32 gm_801883C0(void);
 /* 18841C */ bool gm_8018841C(void);
 /* 188454 */ int gm_80188454(int idx);
 /* 18846C */ UNK_RET fn_8018846C(UNK_PARAMS);
-/* 1884F8 */ UNK_RET fn_801884F8(UNK_PARAMS);
+/* 1884F8 */ int fn_801884F8(void);
 /* 188550 */ UNK_RET fn_80188550(UNK_PARAMS);
 /* 188644 */ UNK_RET fn_80188644(UNK_PARAMS);
 /* 188738 */ UNK_RET fn_80188738(UNK_PARAMS);

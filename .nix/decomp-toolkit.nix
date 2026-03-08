@@ -7,13 +7,13 @@
 
 rustPlatform.buildRustPackage rec {
   pname = "decomp-toolkit";
-  version = "1.6.2";
+  version = "1.8.3";
 
   src = fetchFromGitHub {
     owner = "encounter";
     repo = "decomp-toolkit";
     rev = "v${version}";
-    hash = "sha256-5ujrgDvXs0dH0mub+l5MUuuiIU1OAYu6KgD8f50tcNw=";
+    hash = "sha256-MMD6iY6IpRPycRCoSnXKkcwpVnrDTKw0EDqgyPOAjcM=";
   };
 
   nativeBuildInputs = [

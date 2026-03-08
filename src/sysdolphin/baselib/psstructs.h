@@ -103,14 +103,12 @@ struct HSD_psAppSRT {
     float ssx; /* 0x64 */
     float ssy; /* 0x68 */
 
-    void (*freefunc)(struct HSD_psAppSRT* appSrt); /* 0x6C */
+    u8 x6C_fill[0x9C - 0x6C]; /* 0x6C */
 
-    u16 idnum;                /* 0x70 */
-    u8 billboard;             /* 0x72 */
-    u8 dummy;                 /* 0x73 */
-    u8 x31_fill[0xA2 - 0x74]; /* 0x74 */
-    s8 xA2; /* 0xA2 */        // This and preceding fill only added to match
-                              // grLib_801C96F8
+    void (*freefunc)(struct HSD_psAppSRT* appSrt); /* 0x9C */
+
+    u16 idnum; /* 0xA0 */
+    s8 xA2;    /* 0xA2 */
 };
 
 /* size: 0x98 */
@@ -290,21 +288,6 @@ struct HSD_Generator {
         auxSphere sphere;
     } aux; // 0x60
 };
-
-extern u32* ptclref[64];
-
-extern int psNumTexGroup[64];
-extern HSD_PSTexGroup** psTexGroupArray[64];
-
-extern HSD_PSFormGroup** psFormGroupArray[64];
-
-extern int psNumCmdList[64];
-extern HSD_PSCmdList** psCmdListArray[64];
-
-extern u16 numActiveParticles;
-extern u16 numPeakParticles;
-
-extern int (**psCallback)(HSD_Particle* part);
 
 #define PS_TEXDIRECTION
 #ifdef PS_TEXDIRECTION

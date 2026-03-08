@@ -130,7 +130,7 @@ struct HSD_TObj;
 #define tobj_bump(T) ((T)->flags & TEX_BUMP)
 #define TEX_MTX_DIRTY (1U << 31)
 
-// Texture Object
+/// Texture Object
 struct HSD_TObj {
     HSD_Obj parent;
     HSD_TObj* next;

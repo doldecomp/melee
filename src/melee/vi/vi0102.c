@@ -105,7 +105,7 @@ void vi0102_CameraCallback(HSD_GObj* gobj, int unused)
     }
 }
 
-// Used to force float ordering of file
+/// Used to force float ordering of file
 static f32 unused(void)
 {
     return 0.0f;

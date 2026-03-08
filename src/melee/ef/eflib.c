@@ -32,7 +32,7 @@
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 
-// #include <cstddef>
+/// #include <cstddef>
 #include <runtime.h>
 #include <trigf.h>
 #include <baselib/jobj.h>
@@ -44,16 +44,16 @@ struct UnkStruct8039EFAC {
     u16 unk16;
 };
 
-// static s8 efLib_803BF7A0[0x18] = "Duplicate Free %08X\n";
-// static s8 efLib_803BF7B8[0x4C] = "can't remove no force effect!\n\0\0error
-// no parent gobj!\n\0\0Over Anime Call\n"; static s8 efLib_803BF804[0xA] =
-// "translate"; static s8 efLib_803BF81C[0x2C] = "!(jobj->flags &
-// JOBJ_USE_QUATERNION)";
+/// static s8 efLib_803BF7A0[0x18] = "Duplicate Free %08X\n";
+/// static s8 efLib_803BF7B8[0x4C] = "can't remove no force effect!\n\0\0error
+/// no parent gobj!\n\0\0Over Anime Call\n"; static s8 efLib_803BF804[0xA] =
+/// "translate"; static s8 efLib_803BF81C[0x2C] = "!(jobj->flags &
+/// JOBJ_USE_QUATERNION)";
 extern struct _struct_efAsync_803C025C_0xC efAsync_803C025C[51];
 HSD_ObjAllocData Effect_AllocData;
 
 struct _struct_efLib_80458EE0_0x8 efLib_80458EE0[16];
-// static HSD_JObj** efLib_80458EE0;
+/// static HSD_JObj** efLib_80458EE0;
 
 struct struct_efLib_80458F60_0x8 {
     // Not sure about any of these types
@@ -336,19 +336,20 @@ void efLib_ResumeAll(HSD_GObj* arg_gobj)
     }
 }
 
-// Arg is type Effect*, but forced to be void to fit the function template in
-// GObj_InitUserData
 void Effect_RemoveUserData(void* effect)
 {
-    if (((Effect*) effect)->gobj != NULL) {
-        if (((Effect*) effect)->x29 == 0) {
+    Effect* ep;
+    Effect* new_var2;
+    ep = new_var2 = effect;
+    if (new_var2->gobj != NULL) {
+        if (ep->x29 == 0) {
             efLib_804D64EC--;
         }
-        HSD_ObjFree(&Effect_AllocData, effect);
-        return;
+        HSD_ObjFree(&Effect_AllocData, ep);
+    } else {
+        OSReport("Duplicate Free %08X\n", ep);
+        HSD_ASSERT(53, 0);
     }
-    OSReport("Duplicate Free %08X\n", effect);
-    __assert("eflib.c", 0x35U, "0");
 }
 
 #pragma dont_inline on
@@ -534,7 +535,7 @@ Effect* efLib_8005BE88(int arg0, HSD_GObj* parent_gobj)
     }
     {
         HSD_GObj* ret_gobj;
-        { ///@ todo Inline that returns @c ret_gobj?
+        { ///@ @todo Inline that returns @c ret_gobj?
             u8 p_link;
             if (arg0 >= 27 || arg0 < 25) {
                 p_link = 11;
@@ -685,7 +686,7 @@ Effect* efLib_8005C3DC(u32 arg0, HSD_GObj* arg_gobj, HSD_JObj* arg_jobj)
     return eff_1;
 }
 
-// #pragma dont_inline on
+/// #pragma dont_inline on
 Effect* efLib_8005C5C4(u32 arg0, HSD_GObj* arg_gobj, HSD_JObj* arg_jobj)
 {
     Vec3 sp2C;
@@ -725,7 +726,7 @@ Effect* efLib_8005C6F4(u32 arg0, HSD_GObj* arg_gobj, void* unused_arg)
     }
     return eff_1;
 }
-// #pragma dont_inline reset
+/// #pragma dont_inline reset
 
 Effect* efLib_8005C814(u32 arg0, HSD_GObj* arg_gobj, Vec3* arg_vec3)
 {
@@ -1000,11 +1001,11 @@ inline void efLib_8005D174_inline1(HSD_Generator* generator_1)
     }
 }
 
-// Sorry for the mess!!
-// The inlines were made for convenience of splitting up the inner chunks, not
-// by trying to mimic original inlining Likely need to be remade to match how
-// inlines were actually written For more work/alternatives for this function
-// that may be helpful, see https://decomp.me/scratch/VjlDJ
+/// Sorry for the mess!!
+/// The inlines were made for convenience of splitting up the inner chunks, not
+/// by trying to mimic original inlining Likely need to be remade to match how
+/// inlines were actually written For more work/alternatives for this function
+/// that may be helpful, see https://decomp.me/scratch/VjlDJ
 void efLib_8005D174(int arg0, s32 arg1, HSD_JObj* arg_jobj, s32 arg3)
 {
     // HSD_JObj* jobj_2;
@@ -1252,23 +1253,23 @@ void efLib_8005DBC0(HSD_Particle* particle)
     }
 }
 
-// void fn_8005DCD0(void* arg0) {
-//     s8* temp_r6;
+/// void fn_8005DCD0(void* arg0) {
+///     s8* temp_r6;
 
-//     temp_r6 = "Duplicate Free %08X\n";
-//     if ((u32) arg0->unk20 == (u32) (hsd_804D0E5C->unk258 + 0x3C)) {
-//         hsd_8039D1E4(arg0, (s32) (temp_r6 + 0x70));
-//     }
-//     if ((u32) arg0->unk20 == (u32) (hsd_804D0E5C->unk25C + 0x3C)) {
-//         hsd_8039D1E4(arg0, (s32) (temp_r6 + 0x70));
-//     }
-//     if ((u32) arg0->unk20 == (u32) (hsd_804D0E5C->unk260 + 0x3C)) {
-//         hsd_8039D1E4(arg0, (s32) (temp_r6 + 0x70));
-//     }
-//     if ((u32) arg0->unk20 == (u32) (hsd_804D0E5C->unk86C + 0x3C)) {
-//         hsd_8039D1E4(arg0, (s32) (temp_r6 + 0x70));
-//     }
-// }
+///     temp_r6 = "Duplicate Free %08X\n";
+///     if ((u32) arg0->unk20 == (u32) (ptclref->unk258 + 0x3C)) {
+///         hsd_8039D1E4(arg0, (s32) (temp_r6 + 0x70));
+///     }
+///     if ((u32) arg0->unk20 == (u32) (ptclref->unk25C + 0x3C)) {
+///         hsd_8039D1E4(arg0, (s32) (temp_r6 + 0x70));
+///     }
+///     if ((u32) arg0->unk20 == (u32) (ptclref->unk260 + 0x3C)) {
+///         hsd_8039D1E4(arg0, (s32) (temp_r6 + 0x70));
+///     }
+///     if ((u32) arg0->unk20 == (u32) (ptclref->unk86C + 0x3C)) {
+///         hsd_8039D1E4(arg0, (s32) (temp_r6 + 0x70));
+///     }
+/// }
 
 void efLib_8005DDB8(Effect* effect)
 {

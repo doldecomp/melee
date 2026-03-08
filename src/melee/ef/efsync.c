@@ -18,7 +18,7 @@
 #include "ef/forward.h"
 
 #include "ft/inlines.h"
-// #include <cstddef>
+/// #include <cstddef>
 
 extern struct _struct_efAsync_803C025C_0xC efAsync_803C025C[51];
 extern Effect* ef_80061D70(s32, HSD_GObj*, void*);
@@ -260,8 +260,8 @@ void* efSync_Spawn(s32 arg_gfx_id, HSD_GObj* arg_gobj, ...)
         if (ret_obj != NULL) {
             ((Effect*) ret_obj)->x10 = efLib_8005E950;
             ((Effect*) ret_obj)->x24 = 0x32;
-            f32_3 = 2 * M_PI * HSD_Randf();
-            f32_4 = 2 * M_PI * HSD_Randf();
+            f32_3 = M_TAU * HSD_Randf();
+            f32_4 = M_TAU * HSD_Randf();
             jobj_1 = GET_JOBJ(((Effect*) ret_obj)->gobj);
             HSD_JObjSetScaleX(jobj_1, f32_1);
             jobj_1 = GET_JOBJ(((Effect*) ret_obj)->gobj);

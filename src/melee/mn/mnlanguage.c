@@ -24,7 +24,7 @@ struct {
     HSD_ShapeAnimJoint* xC;
 } mnLanguage_804A08D8;
 
-// language id -> frame map
+/// language id -> frame map
 static f32 mnLanguage_804D5018[2] = { 1, 0 };
 
 static Vec3 mnLanguage_803EF5A0 = { 0, 19, -0.1 };
@@ -136,7 +136,7 @@ void fn_8024C2E8(HSD_GObj* gobj)
     }
 }
 
-// Must not be declared inline, for proper .sdata2 float ordering
+/// Must not be declared inline, for proper .sdata2 float ordering
 static void Menu_InitCenterText_noinline(Menu* menu, u8 val)
 {
     HSD_Text* text =

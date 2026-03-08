@@ -45,8 +45,8 @@ struct ef_UnkStruct1 {
     /* +C */ int xC;
 }; /* size = 0x10 */
 
-// Same as efAsync_80067980_objalloc_t ??
-// Same size as __va_list struct?
+/// Same as efAsync_80067980_objalloc_t ??
+/// Same size as __va_list struct?
 struct ef_UnkStruct3 {
     /* +0 */ ef_UnkStruct3* next; // actually next?
     /* +4 */ u8 eff_type;

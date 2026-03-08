@@ -1,15 +1,10 @@
-#include "it_2F2B.h"
+#include "ityoshitongue.h"
 
 #include <platform.h>
 
-#include "ft/chara/ftYoshi/ftYs_Guard.h"
 #include "ft/ftlib.h"
-
-#include "ftYoshi/forward.h"
-
 #include "ftYoshi/ftYs_SpecialN.h"
 #include "it/inlines.h"
-#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"

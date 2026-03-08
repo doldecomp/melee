@@ -519,8 +519,7 @@ static bool Ground_801C0A70(Vec3* pos)
             // FLATZONE disabled
             OLDPUPUPU,
             OLDYOSHI,
-            OLDKONGO,
-            // TODO: what stages are these?
+            OLDKONGO, ///< @todo what stages are these?
             36,
             37,
         };
@@ -1052,11 +1051,11 @@ void* Ground_801C1E84(void)
     return stage_info.x12C;
 }
 
-// void Camera_SetBackgroundColor(u8, u8, u8);     /* extern */
-// UnkStruct3* grDatFiles_801C6330(int); /* extern */
-// void Ground_801C1E2C(HSD_GObj*, int); /* extern */
-// extern s8 HSD_GObj_804D7848;
-// extern float @330;
+/// void Camera_SetBackgroundColor(u8, u8, u8);     /* extern */
+/// UnkStruct3* grDatFiles_801C6330(int); /* extern */
+/// void Ground_801C1E2C(HSD_GObj*, int); /* extern */
+/// extern s8 HSD_GObj_804D7848;
+/// extern float @330;
 
 inline HSD_FogDesc* foo(void)
 {
@@ -2499,7 +2498,7 @@ static inline void removeStageGObj(HSD_GObj* gobj)
     }
 }
 
-// Stage destroy ground gobj
+/// Stage destroy ground gobj
 void Ground_801C4A08(HSD_GObj* gobj)
 {
     UnkArchiveStruct* archive;

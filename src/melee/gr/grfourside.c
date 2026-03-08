@@ -181,6 +181,7 @@ void grFourside_801F2F34(Ground_GObj* gobj)
 {
     HSD_GObj* pHVar1;
     Ground* gp = GET_GROUND(gobj);
+    PAD_STACK(8);
     Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
     grAnime_801C8138(gobj, gp->map_id, 0);
     Ground_801C4E70(Ground_801C3FA4(gobj, 7), Ground_801C3FA4(gobj, 4),
@@ -256,6 +257,7 @@ void grFourside_801F3154(Ground_GObj* gobj)
     Ground* gp = GET_GROUND(gobj);
     HSD_JObj* jobj = gobj->hsd_obj;
     HSD_JObj* crane_iron = Ground_801C3FA4(gobj, 4);
+    PAD_STACK(8);
     Ground_801C2ED0(jobj, gp->map_id);
     grAnime_801C7FF8(gobj, 0, 7, 0, 0.0f, 0.0f);
     gp->gv.foursideCrane.x1.b0 = 0;
@@ -423,13 +425,14 @@ void grFourside_801F3274(Ground_GObj* gobj)
 
 void grFourside_801F37F8(Ground_GObj* arg) {}
 
-/// #grFourside_801F37FC
 void grFourside_801F37FC(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
+    int new_var;
+    Ground* gp = (Ground*) HSD_GObjGetUserData(gobj);
     HSD_JObj* jobj = gobj->hsd_obj;
     Ground_801C2ED0(jobj, gp->map_id);
-    gp->gv.foursideCrane.x4 = grFs_804D69D8->ufo_wait;
+    new_var = grFs_804D69D8->ufo_wait;
+    gp->gv.foursideCrane.x4 = new_var;
     gp->gv.foursideUfo.x0 = 0;
     gp->gv.foursideUfo.x1 = 0xff;
     gp->gv.foursideUfo.x8 = 0;

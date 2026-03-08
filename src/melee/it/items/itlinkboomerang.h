@@ -30,7 +30,7 @@
 /* 2A12DC */ bool itLinkboomerang_UnkMotion2_Anim(Item_GObj*);
 /* 2A12FC */ void itLinkboomerang_UnkMotion2_Phys(Item_GObj*);
 /* 2A13EC */ f32 it_802A13EC(Item_GObj*);
-/* 2A15EC */ void it_802A15EC(Item_GObj*, Point3d*);
+/* 2A15EC */ void it_802A15EC(Item_GObj*, Vec3*);
 /* 2A16E4 */ bool itLinkboomerang_UnkMotion2_Coll(Item_GObj*);
 /* 2A1948 */ void it_802A1948(Item_GObj*, s32);
 /* 2A19E0 */ void it_802A19E0(Item_GObj*);

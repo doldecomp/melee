@@ -23,12 +23,12 @@
 #include "lb/lbsnap.h"
 #include "mn/mnmain.h"
 
-// void* HSD_SisLib_803A5ACC(u8, int, float, float, float); /* extern */
-// void HSD_SisLib_803A6368(void*, u32);                    /* extern */
-// void HSD_SisLib_803A6530(u32, u32, u32);                 /* extern */
-// void HSD_SisLib_803A660C(u32, u32, u32);                 /* extern */
-// void HSD_SisLib_803A62A0(s32, char*, char*);
-// s32 HSD_SisLib_803A611C(int, u32, u16, u8, u8, u8, u8, u32);
+/// void* HSD_SisLib_803A5ACC(u8, int, float, float, float); /* extern */
+/// void HSD_SisLib_803A6368(void*, u32);                    /* extern */
+/// void HSD_SisLib_803A6530(u32, u32, u32);                 /* extern */
+/// void HSD_SisLib_803A660C(u32, u32, u32);                 /* extern */
+/// void HSD_SisLib_803A62A0(s32, char*, char*);
+/// s32 HSD_SisLib_803A611C(int, u32, u16, u8, u8, u8, u8, u32);
 
 typedef struct _SisLibUnkStruct2 {
     /*0x00*/ u8 x0_padding[0x8 - 0x0];
@@ -43,7 +43,7 @@ typedef struct _SisLibUnkStruct {
 } SisLibUnkStruct;
 
 /// @todo #HSD_SisLib_804D1124 is of type #SIS.
-// extern SisLibUnkStruct HSD_SisLib_804D1124;
+/// extern SisLibUnkStruct HSD_SisLib_804D1124;
 
 gmCameraUnkFuncTable gmCamera_803DA6B4[9] = {
     { { 1, 0, 0 }, gmCamera_801A26C0, gmCamera_801A2798 },
@@ -256,8 +256,10 @@ void gmCamera_801A26C0(void)
 
 void gmCamera_801A2798(void)
 {
+    unsigned int new_var;
     if (HSD_PadCopyStatus[3].trigger & 0x200) {
-        gmCamera_80479BC8.gcus.x14 = (gmCamera_80479BC8.gcus.x14 + 1) % 2;
+        new_var = gmCamera_80479BC8.gcus.x14 + 1;
+        gmCamera_80479BC8.gcus.x14 = new_var % 2;
         return;
     }
     if (HSD_PadCopyStatus[3].trigger & 0x10) {

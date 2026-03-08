@@ -1,45 +1,252 @@
 #include "itlikelike.h"
 
+#include "math.h"
+
 #include <placeholder.h>
 #include <platform.h>
+
+#include "cm/camera.h"
+#include "ft/ft_0C31.h"
+#include "ft/ftlib.h"
+
+#include "it/forward.h"
 
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/itcoll.h"
+#include "it/itCommonItems.h"
 #include "it/item.h"
+#include "lb/lb_00B0.h"
+#include "lb/types.h"
+#include "mp/mpcoll.h"
+
+#include <baselib/gobj.h>
+#include <baselib/random.h>
 
 #define GET_ATTRS(ip)                                                         \
     ((itLikelikeAttributes*) ip->xC4_article_data->x4_specialAttributes)
 
-/// #it_802D9A2C
+const Vec3 zero_vec = { 0.0f, 0.0f, 0.0f };
+
+ItemStateTable it_803F8468[] = {
+    { 0, itLikelike_UnkMotion0_Anim, itLikelike_UnkMotion0_Phys,
+      itLikelike_UnkMotion0_Coll },
+    { 0, itLikelike_UnkMotion1_Anim, itLikelike_UnkMotion1_Phys,
+      itLikelike_UnkMotion1_Coll },
+    { 0, itLikelike_UnkMotion2_Anim, itLikelike_UnkMotion2_Phys,
+      itLikelike_UnkMotion2_Coll },
+    { 0, itLikelike_UnkMotion3_Anim, itLikelike_UnkMotion3_Phys,
+      itLikelike_UnkMotion3_Coll },
+    { 0, itLikelike_UnkMotion5_Anim, itLikelike_UnkMotion5_Phys,
+      itLikelike_UnkMotion4_Coll },
+    { -1, itLikelike_UnkMotion5_Anim, itLikelike_UnkMotion5_Phys,
+      itLikelike_UnkMotion5_Coll },
+    { -1, itLikelike_UnkMotion6_Anim, itLikelike_UnkMotion6_Phys,
+      itLikelike_UnkMotion6_Coll },
+    { 1, itLikelike_UnkMotion7_Anim, itLikelike_UnkMotion7_Phys,
+      itLikelike_UnkMotion7_Coll },
+    { 0, itLikelike_UnkMotion8_Anim, itLikelike_UnkMotion8_Phys,
+      itLikelike_UnkMotion8_Coll },
+    { 3, itLikelike_UnkMotion9_Anim, itLikelike_UnkMotion9_Phys,
+      itLikelike_UnkMotion9_Coll },
+    { 2, itLikelike_UnkMotion10_Anim, itLikelike_UnkMotion10_Phys,
+      itLikelike_UnkMotion10_Coll },
+    { 3, itLikelike_UnkMotion12_Anim, itLikelike_UnkMotion12_Phys,
+      itLikelike_UnkMotion12_Coll },
+    { 2, itLikelike_UnkMotion12_Anim, itLikelike_UnkMotion12_Phys,
+      itLikelike_UnkMotion12_Coll },
+    { 4, itLikelike_UnkMotion13_Anim, itLikelike_UnkMotion13_Phys,
+      itLikelike_UnkMotion13_Coll },
+    { 5, itLikelike_UnkMotion14_Anim, itLikelike_UnkMotion14_Phys,
+      itLikelike_UnkMotion14_Coll },
+    { 6, itLikelike_UnkMotion15_Anim, itLikelike_UnkMotion15_Phys,
+      itLikelike_UnkMotion15_Coll },
+    { 7, itLikelike_UnkMotion16_Anim, itLikelike_UnkMotion16_Phys,
+      itLikelike_UnkMotion16_Coll },
+    { 8, itLikelike_UnkMotion17_Anim, itLikelike_UnkMotion17_Phys,
+      itLikelike_UnkMotion17_Coll },
+    { 1, itLikelike_UnkMotion18_Anim, itLikelike_UnkMotion18_Phys, NULL },
+    { 9, itLikelike_UnkMotion19_Anim, itLikelike_UnkMotion19_Phys,
+      itLikelike_UnkMotion19_Coll },
+    { -1, itLikelike_UnkMotion20_Anim, itLikelike_UnkMotion20_Phys,
+      itLikelike_UnkMotion20_Coll },
+    { -1, itLikelike_UnkMotion21_Anim, itLikelike_UnkMotion21_Phys,
+      itLikelike_UnkMotion21_Coll },
+};
+
+// Can't inline this in inlines.h because of dynamic GET_ATTRS
+static inline void itSwapVelocity(Item* ip)
+{
+    itLikelikeAttributes* attr = GET_ATTRS(ip);
+    ip->facing_dir = -ip->facing_dir;
+    ip->x40_vel.x = ip->facing_dir * attr->x0.x0_f32->y;
+}
+
+static inline void swapVelocity(HSD_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    itSwapVelocity(ip);
+}
+
+bool it_802D9A2C(Item_GObj* gobj)
+{
+    Item* ip = HSD_GObjGetUserData(gobj);
+    itLikelikeAttributes* attr = GET_ATTRS(ip);
+    HSD_GObj* temp_r3;
+    s32 var_r28;
+    Vec3 sp10;
+    f32 var_f1;
+    f32 var_f2;
+
+    ip->xDD4_itemVar.likelike.x3C = 0;
+    if (ip->msid == 7) {
+        var_r28 = attr->x20;
+    } else {
+        var_r28 = attr->x1C;
+    }
+    temp_r3 = ftLib_8008627C(&ip->pos, NULL);
+    if (temp_r3 != NULL) {
+        if (it_8027CA7C(temp_r3) != 0) {
+            return ip->xDD4_itemVar.likelike.x3C;
+        }
+        ftLib_80086644(temp_r3, &sp10);
+        var_f2 = ABS(sp10.x - ip->pos.x);
+        if (var_f2 < (f32) var_r28) {
+            var_f1 = sp10.y - ip->pos.y;
+            if (var_f1 < 0.0f) {
+                var_f1 = -var_f1;
+            }
+            if (var_f1 < attr->x24) {
+                ip->xDD4_itemVar.likelike.x50 = temp_r3;
+                if (sp10.x < ip->pos.x) {
+                    ip->xDD4_itemVar.likelike.x3C = -1;
+                } else {
+                    ip->xDD4_itemVar.likelike.x3C = 1;
+                }
+            }
+        }
+    }
+    return ip->xDD4_itemVar.likelike.x3C;
+}
 
 void it_802D9B78(Item_GObj* gobj)
 {
-    Item* ip = GET_ITEM(gobj);
-    itLikelikeAttributes* attrs = GET_ATTRS(ip);
-    ip->facing_dir = -ip->facing_dir;
-    ip->x40_vel.x = ip->facing_dir * attrs->x0->x4;
+    swapVelocity(gobj);
 }
 
-/// #it_802D9BA8
+void it_802D9BA8(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itLikelikeAttributes* attr = GET_ATTRS(ip);
+    PAD_STACK(8);
 
-/// #it_2725_Logic5_DmgReceived
+    it_8027B730(gobj);
+    ip->facing_dir = it_8026B684(&ip->pos);
+    it_8027C56C(gobj, 0.0f);
+    ip->xD5C = 0;
+    ip->xDC8_word.flags.x15 = 0;
+    it_8027542C(gobj);
+    it_80275270(gobj);
+    ip->xDD4_itemVar.likelike.x44 = 1;
+    ip->xDD4_itemVar.likelike.x4C = 0;
+    ip->xDD4_itemVar.likelike.x50 = NULL;
+    it_80271590(gobj, 0, (HurtCapsule*) &ip->xDD4_itemVar.likelike.x54);
+    ip->xDD4_itemVar.likelike.x20 = ip->pos;
+    ip->xDD4_itemVar.likelike.x38 = HSD_Randi(2);
+    ip->pos.y -= 40.0f;
+    ip->xDD4_itemVar.likelike.x4C = attr->x8 + HSD_Randi(attr->xC - attr->x8);
+    if (ip->xDD4_itemVar.likelike.x38 == 0) {
+        it_802DA960(gobj);
+        return;
+    }
+    it_802DAD18(gobj);
+}
 
-/// #it_802D9DDC
+bool it_2725_Logic5_DmgReceived(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itLikelikeAttributes* attr = GET_ATTRS(ip);
+    PAD_STACK(16);
+
+    it_802DBAF0(gobj, 0, 1);
+    ip->init_facing_dir = ip->facing_dir;
+    ip->xC9C = ip->xC9C + it_8027CBFC(gobj);
+    if ((ip->xC9C > attr->x0.x0_s32->x) || (ip->msid == 0x13)) {
+        it_8027C9D8(ip);
+        it_802756D0(gobj);
+        it_80275474(gobj);
+        it_8027CE44(gobj);
+        Camera_80030E44(2, &ip->pos);
+        if (HSD_Randf() < it_804D6D40[2]) {
+            it_802DC3DC(gobj);
+        } else {
+            it_802DC310(gobj);
+        }
+    } else {
+        it_802DC0AC(gobj);
+    }
+    return false;
+}
+
+void it_802D9DDC(Item_GObj* gobj)
+{
+    PAD_STACK(16);
+    it_8027CAD8(gobj);
+    it_8026D5CC(gobj);
+    it_8027C0A8(gobj, 0.0f, 5.0f);
+    it_80275270(gobj);
+    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+}
 
 bool itLikelike_UnkMotion0_Anim(Item_GObj* gobj)
 {
-    PAD_STACK(8);
+    Item* ip = GET_ITEM(gobj);
+
     if (!it_80272C6C(gobj)) {
         Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
     }
     return false;
 }
 
-/// #itLikelike_UnkMotion0_Phys
+void itLikelike_UnkMotion0_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
 
-/// #itLikelike_UnkMotion0_Coll
+    if (!ip->xDD4_itemVar.likelike.x4C) {
+        if (ip->xDD4_itemVar.likelike.x38 == 1) {
+            it_802DA4C0(gobj);
+        } else {
+            it_802DA104(gobj);
+        }
+    } else {
+        ip->xDD4_itemVar.likelike.x4C -= 1;
+    }
+    it_8027C0A8(gobj, 0.0f, 5.0f);
+}
+
+bool itLikelike_UnkMotion0_Coll(Item_GObj* gobj)
+{
+    CollData* temp_r31;
+    s32 temp_cr0_eq;
+    Item* ip = ip = GET_ITEM(gobj);
+    PAD_STACK(0x20);
+
+    if (ip->xDD4_itemVar.likelike.x38 == 1) {
+        temp_r31 = &ip->x378_itemColl;
+        it_80276214(gobj);
+        temp_cr0_eq = mpColl_8004C750(temp_r31);
+        ip->pos = temp_r31->cur_pos;
+        if (temp_cr0_eq != 0) {
+            ip->xC30 = temp_r31->ceiling.index;
+        }
+        it_802762D8(gobj);
+    } else {
+        it_8026D6F4(gobj, (void (*)(HSD_GObj*)) it_802DAA10);
+    }
+    return it_8027C794(gobj);
+}
 
 bool itLikelike_UnkMotion7_Anim(Item_GObj* gobj)
 {
@@ -49,11 +256,59 @@ bool itLikelike_UnkMotion7_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itLikelike_UnkMotion7_Phys
+void itLikelike_UnkMotion7_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itLikelikeAttributes* attrs = GET_ATTRS(ip);
 
-/// #itLikelike_UnkMotion7_Coll
+    if (ip->xDD4_itemVar.likelike.x4C <= 0) {
+        if (it_802D9A2C(gobj) != 0) {
+            it_802DB074(gobj);
+            return;
+        }
+        ip->xDD4_itemVar.likelike.x4C = attrs->x18;
+        return;
+    }
+    ip->xDD4_itemVar.likelike.x4C = ip->xDD4_itemVar.likelike.x4C - 1;
+}
 
-/// #it_802DA104
+bool itLikelike_UnkMotion7_Coll(Item_GObj* gobj)
+{
+    CollData* temp_r31;
+    Item* ip = ip = GET_ITEM(gobj);
+    s32 temp_cr0_eq;
+    PAD_STACK(0x20);
+
+    if (ip->xDD4_itemVar.likelike.x38 == 1) {
+        temp_r31 = &ip->x378_itemColl;
+        it_80276214(gobj);
+        temp_cr0_eq = mpColl_8004C750(temp_r31);
+        ip->pos = temp_r31->cur_pos;
+        if (temp_cr0_eq != 0) {
+            ip->xC30 = temp_r31->ceiling.index;
+        }
+        it_802762D8(gobj);
+    } else {
+        it_8026D6F4(gobj, (void (*)(HSD_GObj*)) it_802DAA10);
+    }
+    return it_8027C794(gobj);
+}
+
+void it_802DA104(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itLikelikeAttributes* attr = GET_ATTRS(ip);
+    PAD_STACK(16);
+
+    ip->x40_vel.x = ip->facing_dir * attr->x0.x0_f32->y;
+    ip->x40_vel.z = 0.0f;
+    ip->x40_vel.y = 0.0f;
+    it_802756E0(gobj);
+    ip->xDD4_itemVar.likelike.x4C = attr->x18;
+    ip->xDD4_itemVar.likelike.x44 = 0x3C;
+    ip->xDD4_itemVar.likelike.x48 = 0;
+    Item_80268E5C(gobj, 1, 1);
+}
 
 bool itLikelike_UnkMotion1_Anim(Item_GObj* gobj)
 {
@@ -64,11 +319,116 @@ bool itLikelike_UnkMotion1_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itLikelike_UnkMotion1_Phys
+void itLikelike_UnkMotion1_Phys(Item_GObj* gobj)
+{
+    itLikelikeAttributes* attr;
+    Item* ip;
+    Item* ip2;
+    f32 temp_f2;
+    s32 temp_r3;
+    Article* article;
+    s32 temp_r3_2;
+    itLikelikeAttributes* attr2;
+    PAD_STACK(8);
 
-/// #itLikelike_UnkMotion1_Coll
+    ip = GET_ITEM(gobj);
+    attr = (article = ip->xC4_article_data)->x4_specialAttributes;
 
-/// #it_802DA4C0
+    temp_r3 = ip->xDD4_itemVar.likelike.x44;
+    if (temp_r3 == 0) {
+        if (HSD_Randi(attr->x3C) != 0) {
+            ip->xDD4_itemVar.likelike.x44 = 0x3c;
+            goto block_5;
+        }
+        ip2 = GET_ITEM(gobj);
+        attr2 = GET_ATTRS(ip2);
+        it_80273454(gobj);
+        ip2->xDD4_itemVar.likelike.x4C = attr2->x18;
+        Item_80268E5C(gobj, 7, ITEM_ANIM_UPDATE);
+        return;
+    }
+    ip->xDD4_itemVar.likelike.x44 = temp_r3 - 1;
+block_5:
+    temp_r3_2 = ip->xDD4_itemVar.likelike.x4C;
+    if (temp_r3_2 == 0) {
+        if (it_802D9A2C(gobj) != 0) {
+            it_802DB074(gobj);
+            return;
+        }
+        if (HSD_Randi(3) != 0) {
+            ip->xDD4_itemVar.likelike.x4C = attr->x18;
+            goto block_12;
+        }
+        it_802DAE6C(gobj);
+        return;
+    }
+    ip->xDD4_itemVar.likelike.x4C = temp_r3_2 - 1;
+block_12:
+    temp_f2 = ip->facing_dir;
+    if (((temp_f2 > 0.0f) && (ip->x70_nudge.x < 0.0f)) ||
+        ((temp_f2 < 0.0f) && (ip->x70_nudge.x > 0.0f)))
+    {
+        ip->facing_dir = -temp_f2;
+        ip->x40_vel.x *= -1.0f;
+    }
+    it_8027C8D0(&ip->x40_vel, &ip->x378_itemColl.floor.normal, ip->facing_dir);
+    it_8027C0A8(gobj, 0.0f, 5.0f);
+}
+
+static inline void likelikeVelocity(HSD_GObj* gobj, Item* ip,
+                                    itLikelikeAttributes* attrs,
+                                    f32 multiplier)
+{
+    if (ABS(ip->xDD4_itemVar.likelike.x20.x - ip->pos.x) <
+            (attrs->x0.x0_f32->y * multiplier) &&
+        ABS(ip->xDD4_itemVar.likelike.x20.y - ip->pos.y) <
+            (attrs->x0.x0_f32->y * multiplier))
+    {
+        if (ip->xDD4_itemVar.likelike.x48 >= 4) {
+            swapVelocity(gobj);
+            ip->xDD4_itemVar.likelike.x48 = 0;
+        } else {
+            ip->xDD4_itemVar.likelike.x48 += 1;
+        }
+    } else {
+        ip->xDD4_itemVar.likelike.x48 = 0;
+    }
+}
+
+bool itLikelike_UnkMotion1_Coll(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itLikelikeAttributes* attrs = GET_ATTRS(ip);
+
+    if (it_8026D8A4(gobj, (HSD_GObjEvent) it_802D9B78) != 0) {
+        if (it_80276308(gobj) != 0) {
+            swapVelocity(gobj);
+        } else {
+            likelikeVelocity(gobj, ip, attrs, 0.5f);
+        }
+    } else {
+        it_802DAA10(gobj);
+    }
+
+    ip->xDD4_itemVar.likelike.x20 = ip->pos;
+    return it_8027C794(gobj);
+}
+
+void it_802DA4C0(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itLikelikeAttributes* attr = GET_ATTRS(ip);
+    PAD_STACK(0x10);
+
+    ip->x40_vel.x = ip->facing_dir * attr->x0.x0_f32->y;
+    ip->x40_vel.y = 0.0f;
+    ip->x40_vel.z = 0.0f;
+    it_802756E0(gobj);
+    ip->xDD4_itemVar.likelike.x4C = attr->x18;
+    ip->xDD4_itemVar.likelike.x44 = 0x3c;
+    ip->xDD4_itemVar.likelike.x48 = 0;
+    Item_80268E5C((HSD_GObj*) gobj, 2, ITEM_UNK_0x1);
+}
 
 bool itLikelike_UnkMotion2_Anim(Item_GObj* gobj)
 {
@@ -79,22 +439,177 @@ bool itLikelike_UnkMotion2_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itLikelike_UnkMotion2_Phys
+void itLikelike_UnkMotion2_Phys(Item_GObj* gobj)
+{
+    bool var_r31;
+    Vec3 sp14;
+    HSD_GObj* temp_r3_2;
+    Item* ip;
+    f32 temp_f2;
+    f32 var_f1;
+    itLikelikeAttributes* attr;
 
-/// #itLikelike_UnkMotion2_Coll
+    ip = GET_ITEM(gobj);
+    attr = GET_ATTRS(ip);
+    if (ip->xDD4_itemVar.likelike.x4C == 0) {
+        var_r31 = false;
+        temp_r3_2 = ftLib_8008627C(&ip->pos, NULL);
+        if (temp_r3_2 != NULL) {
+            ftLib_80086644(temp_r3_2, &sp14);
+            var_f1 = ABS(sp14.x - ip->pos.x);
+            if (var_f1 < attr->x28) {
+                var_f1 = ABS(sp14.y - ip->pos.y);
+                if (var_f1 < attr->x2C) {
+                    var_r31 = true;
+                }
+            }
+        }
+        if (var_r31) {
+            ip->xDD4_itemVar.likelike.x3C = 1;
+            it_802DAA10(gobj);
+            return;
+        }
+        if (HSD_Randi(3) != 0) {
+            ip->xDD4_itemVar.likelike.x4C = attr->x18;
+            goto block_15;
+        }
+        it_802DAE6C(gobj);
+        return;
+    }
+    ip->xDD4_itemVar.likelike.x4C = ip->xDD4_itemVar.likelike.x4C - 1;
+block_15:
+    ip->x40_vel.x = ip->facing_dir * attr->x0.x0_f32->y;
+    temp_f2 = ip->facing_dir;
+    if (((temp_f2 > 0.0f) && (ip->x70_nudge.x < 0.0f)) ||
+        ((temp_f2 < 0.0f) && (ip->x70_nudge.x > 0.0f)))
+    {
+        ip->facing_dir = -temp_f2;
+        ip->x40_vel.x *= -1.0f;
+    }
+    it_8027C8D0(&ip->x40_vel, &ip->x378_itemColl.floor.normal, ip->facing_dir);
+    it_8027C0CC(gobj, 0.0f, 5.0f);
+}
 
-/// #it_802DA8D8
+bool itLikelike_UnkMotion2_Coll(Item_GObj* gobj)
+{
+    CollData* temp_r31;
+    Item* ip = GET_ITEM(gobj);
+    f32 temp_f3;
+    s32 temp_r3;
+    s32 coll_result;
+    itLikelikeAttributes* attr = GET_ATTRS(ip);
+    PAD_STACK(24);
 
-/// #it_802DA960
+    temp_r31 = &ip->x378_itemColl;
+    it_80276214(gobj);
+    coll_result = mpColl_8004C750(temp_r31);
+    ip->pos = temp_r31->cur_pos;
+    if (coll_result != 0) {
+        ip->xC30 = temp_r31->ceiling.index;
+    }
+    if (it_802762D8(gobj) != 0) {
+        ip->facing_dir = -ip->facing_dir;
+        ip->x40_vel.x *= -1.0f;
+    } else if (it_80276308(gobj) != 0) {
+        ip->facing_dir = -ip->facing_dir;
+        ip->x40_vel.x *= -1.0f;
+    } else {
+        f32 half = 0.5f;
+        if (ABS(ip->xDD4_itemVar.likelike.x20.x - ip->pos.x) <
+                (attr->x0.x0_f32->y * half) &&
+            ABS(ip->xDD4_itemVar.likelike.x20.y - ip->pos.y) <
+                (attr->x0.x0_f32->y * half))
+        {
+            temp_r3 = ip->xDD4_itemVar.likelike.x48;
+            if (temp_r3 >= 4) {
+                ip->facing_dir = -ip->facing_dir;
+                ip->x40_vel.x = ip->facing_dir * attr->x0.x0_f32->y;
+                ip->xDD4_itemVar.likelike.x48 = 0;
+            } else {
+                ip->xDD4_itemVar.likelike.x48 = temp_r3 + 1;
+            }
+        } else {
+            ip->xDD4_itemVar.likelike.x48 = 0;
+        }
+    }
+    ip->xDD4_itemVar.likelike.x20 = ip->pos;
+    return it_8027C794(gobj);
+}
 
-/// #it_802DAA10
+void it_802DA8D8(Item_GObj* gobj)
+{
+    Item* ip;
+    unsigned char _[8];
+    itECB ecb;
+
+    ip = GET_ITEM(gobj);
+    it_802762B0(ip);
+    ecb = ip->xC1C;
+    ecb.bottom = ecb.top;
+    ecb.top = ip->xC1C.bottom;
+    it_80275D5C(gobj, &ecb);
+    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+}
+
+void it_802DA960(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    UNUSED u8 _1[0x8];
+    itECB ecb;
+    UNUSED u8 _2[0x8];
+
+    it_802762BC(ip);
+    if (ip->xDD4_itemVar.likelike.x38 == 1) {
+        ecb = ip->xC1C;
+        ecb.bottom = ecb.top;
+        ecb.top = ip->xC1C.bottom;
+        it_80275D5C(gobj, &ecb);
+        it_8027C56C(gobj, 0.0f);
+    }
+    ip->xDD4_itemVar.likelike.x38 = 0;
+    it_80273454(gobj);
+    Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
+}
+
+void it_802DAA10(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    unsigned char _[8];
+    itECB ecb;
+    PAD_STACK(8);
+    it_802DBAF0(gobj, 1, 1);
+    it_802762BC(ip);
+    if (ip->xDD4_itemVar.likelike.x38 == 1) {
+        ecb = ip->xC1C;
+        ecb.bottom = ecb.top;
+        ecb.top = ip->xC1C.bottom;
+        it_80275D5C(gobj, &ecb);
+    }
+    it_8027C56C(gobj, 0.0f);
+    ip->xDD4_itemVar.likelike.x38 = 0;
+    ip->xDD4_itemVar.likelike.x4C = 0;
+    it_80273454(gobj);
+    Item_80268E5C((HSD_GObj*) gobj, 5, ITEM_ANIM_UPDATE);
+}
 
 bool itLikelike_UnkMotion5_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-/// #itLikelike_UnkMotion5_Phys
+void itLikelike_UnkMotion5_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ItemAttr* temp_r4;
+    PAD_STACK(8);
+
+    if (((s32) ip->msid == 5) && (it_802D9A2C(gobj) != 0)) {
+        it_802DB398(gobj);
+        return;
+    }
+    temp_r4 = ip->xCC_item_attr;
+    it_80272860(gobj, temp_r4->x10_fall_speed, temp_r4->x14_fall_speed_max);
+}
 
 bool itLikelike_UnkMotion4_Coll(Item_GObj* gobj)
 {
@@ -110,9 +625,27 @@ bool itLikelike_UnkMotion5_Coll(Item_GObj* gobj)
     return it_8027C794(gobj);
 }
 
-/// #it_802DABC0
+void it_802DABC0(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    PAD_STACK(24);
+    ip->xDD4_itemVar.likelike.x38 = 0;
+    ip->xDD4_itemVar.likelike.x4C = 0;
+    ip->xDD4_itemVar.likelike.x3C = 0;
+    it_80273454(gobj);
+    it_802762B0(ip);
+    Item_80268E5C(gobj, 0x11, ITEM_ANIM_UPDATE);
+}
 
-/// #itLikelike_UnkMotion17_Anim
+bool itLikelike_UnkMotion17_Anim(Item_GObj* gobj)
+{
+    PAD_STACK(16);
+    if (it_80272C6C(gobj) == 0) {
+        it_8026D5CC(gobj);
+        it_802D9DDC(gobj);
+    }
+    return false;
+}
 
 void itLikelike_UnkMotion17_Phys(Item_GObj* gobj)
 {
@@ -128,7 +661,15 @@ bool itLikelike_UnkMotion17_Coll(Item_GObj* gobj)
     return it_8027C794(gobj);
 }
 
-/// #it_802DAD18
+void it_802DAD18(HSD_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    PAD_STACK(0x20);
+
+    HSD_JObjSetRotationZ(GET_JOBJ(gobj), M_PI);
+    ip->xDCE_flag.b7 = 1;
+    Item_80268E5C(gobj, 3, ITEM_ANIM_UPDATE);
+}
 
 bool itLikelike_UnkMotion3_Anim(Item_GObj* gobj)
 {
@@ -155,13 +696,81 @@ void it_802DAE6C(Item_GObj* gobj)
     Item_80268E5C(gobj, 0x10, ITEM_ANIM_UPDATE);
 }
 
-/// #itLikelike_UnkMotion16_Anim
+bool itLikelike_UnkMotion16_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    Item* ip2;
+    Item* ip3;
+    itLikelikeAttributes* attr;
+    itLikelikeAttributes* attr2;
+    PAD_STACK(0x10);
+
+    if (it_80272C6C(gobj) == 0) {
+        ip->facing_dir = it_8026B684(&ip->pos);
+        if (ip->xDD4_itemVar.likelike.x38 == 0) {
+            ip2 = GET_ITEM(gobj);
+            attr2 = GET_ATTRS(ip2);
+            ip2->x40_vel.x = ip2->facing_dir * attr2->x0.x0_f32->y;
+            ip2->x40_vel.z = 0.0f;
+            ip2->x40_vel.y = 0.0f;
+            it_802756E0(gobj);
+            ip2->xDD4_itemVar.likelike.x4C = attr2->x18;
+            ip2->xDD4_itemVar.likelike.x44 = 0x3C;
+            ip2->xDD4_itemVar.likelike.x48 = 0;
+            Item_80268E5C(gobj, 1, ITEM_UNK_0x1);
+        } else {
+            ip3 = GET_ITEM(gobj);
+            attr = GET_ATTRS(ip3);
+            // This line is to get 100%
+            if (attr->x0.x0_f32->y && attr->x0.x0_f32->y) {
+            };
+            ip3->x40_vel.x = ip3->facing_dir * attr->x0.x0_f32->y;
+            ip3->x40_vel.y = 0;
+            ip3->x40_vel.z = 0;
+            it_802756E0(gobj);
+            ip3->xDD4_itemVar.likelike.x4C = attr->x18;
+            ip3->xDD4_itemVar.likelike.x44 = 0x3C;
+            ip3->xDD4_itemVar.likelike.x48 = 0;
+            Item_80268E5C(gobj, 2, ITEM_UNK_0x1);
+        }
+    }
+    return false;
+}
 
 void itLikelike_UnkMotion16_Phys(Item_GObj* gobj) {}
 
-/// #itLikelike_UnkMotion16_Coll
+bool itLikelike_UnkMotion16_Coll(Item_GObj* gobj)
+{
+    CollData* temp_r31;
+    Item* ip = ip = GET_ITEM(gobj);
+    s32 temp_cr0_eq;
+    PAD_STACK(0x20);
 
-/// #it_802DB074
+    if (ip->xDD4_itemVar.likelike.x38 == 0) {
+        it_8026D6F4(gobj, (void (*)(HSD_GObj*)) it_802DAA10);
+    } else {
+        temp_r31 = &ip->x378_itemColl;
+        it_80276214(gobj);
+        temp_cr0_eq = mpColl_8004C750(temp_r31);
+        ip->pos = temp_r31->cur_pos;
+        if (temp_cr0_eq != 0) {
+            ip->xC30 = temp_r31->ceiling.index;
+        }
+        it_802762D8(gobj);
+    }
+    return it_8027C794(gobj);
+}
+
+void it_802DB074(HSD_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itLikelikeAttributes* attr = GET_ATTRS(ip);
+    PAD_STACK(8);
+    ip->facing_dir = ip->xDD4_itemVar.likelike.x3C;
+    ip->x40_vel.x = ip->facing_dir * attr->x0.x0_f32->y * 2.0f;
+    ip->xDD4_itemVar.likelike.x4C = 0x1E;
+    Item_80268E5C(gobj, 8, ITEM_ANIM_UPDATE);
+}
 
 bool itLikelike_UnkMotion8_Anim(Item_GObj* gobj)
 {
@@ -172,9 +781,69 @@ bool itLikelike_UnkMotion8_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itLikelike_UnkMotion8_Phys
+void itLikelike_UnkMotion8_Phys(Item_GObj* gobj)
+{
+    Vec3 sp30;
+    Item* ip;
+    s32 temp_r3;
+    HSD_GObj* temp_r3_2;
+    f32 var_f1;
+    PAD_STACK(0x18);
 
-/// #itLikelike_UnkMotion8_Coll
+    ip = gobj->user_data;
+    temp_r3 = ip->xDD4_itemVar.likelike.x4C;
+    if (temp_r3 == 0) {
+        ip->xDD4_itemVar.likelike.x50 = 0;
+        it_802D9DDC(gobj);
+        return;
+    }
+    ip->xDD4_itemVar.likelike.x4C = temp_r3 - 1;
+    temp_r3_2 = ip->xDD4_itemVar.likelike.x50;
+    // permuter slop for 100%
+    if (!GET_ITEM(gobj) && !GET_ITEM(gobj)) {
+    }
+    if (temp_r3_2 != NULL) {
+        ftLib_80086644(temp_r3_2, &sp30);
+        var_f1 = ABS(ip->pos.x - sp30.x);
+        if (var_f1 < 15.0f) {
+            it_80275258(gobj);
+            if ((f32) ip->xDD4_itemVar.likelike.x3C == 1.0f) {
+                it_802DB5F0(gobj);
+                return;
+            }
+            it_802DB74C(gobj);
+            return;
+        }
+    } else {
+        ip->xDD4_itemVar.likelike.x4C = 0x78;
+        it_802D9DDC(gobj);
+        return;
+    }
+    it_8027C8D0(&ip->x40_vel, &ip->x378_itemColl.floor.normal, ip->facing_dir);
+    it_8027C0CC(gobj, 0.0f, 5.0f);
+}
+
+bool itLikelike_UnkMotion8_Coll(Item_GObj* gobj)
+{
+    CollData* temp_r31;
+    Item* ip = ip = GET_ITEM(gobj);
+    s32 temp_cr0_eq;
+    PAD_STACK(0x20);
+
+    if (ip->xDD4_itemVar.likelike.x38 == 1) {
+        temp_r31 = &ip->x378_itemColl;
+        it_80276214(gobj);
+        temp_cr0_eq = mpColl_8004C750(temp_r31);
+        ip->pos = temp_r31->cur_pos;
+        if (temp_cr0_eq != 0) {
+            ip->xC30 = temp_r31->ceiling.index;
+        }
+        it_802762D8(gobj);
+    } else {
+        it_8026D6F4(gobj, (void (*)(HSD_GObj*)) it_802DAA10);
+    }
+    return it_8027C794(gobj);
+}
 
 void it_802DB358(Item_GObj* gobj)
 {
@@ -184,17 +853,99 @@ void it_802DB358(Item_GObj* gobj)
     it_80274ECC(gobj, true);
 }
 
-/// #it_802DB398
+void it_802DB398(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    PAD_STACK(0x18);
 
-/// #itLikelike_UnkMotion12_Anim
+    ip->facing_dir = ip->xDD4_itemVar.likelike.x3C;
+    ip->xDD4_itemVar.likelike.x50 = NULL;
+    Item_8026AE84(ip, 0x139, 0x7FU, 0x40U);
+    it_80275258(gobj);
+    if (ip->facing_dir == 1.0f) {
+        Item_80268E5C(gobj, 0xB, ITEM_ANIM_UPDATE);
+    } else {
+        Item_80268E5C(gobj, 0xC, ITEM_ANIM_UPDATE);
+    }
+    it_80274F28(ip, 1, (void (*)(HSD_GObj*)) it_802DB358,
+                (void (*)(HSD_GObj*, HSD_GObj*)) ftCo_800C78B0);
+}
 
-/// #itLikelike_UnkMotion12_Phys
+bool itLikelike_UnkMotion12_Anim(Item_GObj* gobj)
+{
+    Item* ip;
+    PAD_STACK(16);
 
-/// #itLikelike_UnkMotion12_Coll
+    ip = GET_ITEM(gobj);
+    if (it_80272C6C(gobj) == 0) {
+        it_8026D5CC(gobj);
+        if (ip->xDD4_itemVar.likelike.x50 != NULL) {
+            it_802DB8A8(gobj);
+        } else {
+            it_802D9DDC(gobj);
+        }
+    }
+    return false;
+}
 
-/// #it_802DB5F0
+void itLikelike_UnkMotion12_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ItemAttr* temp_r4_2;
 
-/// #itLikelike_UnkMotion9_Anim
+    if ((enum GroundOrAir) ip->ground_or_air == GA_Air) {
+        temp_r4_2 = ip->xCC_item_attr;
+        it_80272860(gobj, temp_r4_2->x10_fall_speed,
+                    temp_r4_2->x14_fall_speed_max);
+        return;
+    }
+    it_8027C8D0(&ip->x40_vel, &ip->x378_itemColl.floor.normal, ip->facing_dir);
+    it_8027C0A8(gobj, 0.0f, 5.0f);
+}
+
+bool itLikelike_UnkMotion12_Coll(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+
+    if ((enum GroundOrAir) ip->ground_or_air == GA_Air) {
+        if (it_8026DA08(gobj) != 0) {
+            it_802762B0(ip);
+            it_80273454(gobj);
+        }
+    } else {
+        it_8026D6F4(gobj, (void (*)(HSD_GObj*)) it_802DAA10);
+    }
+    return it_8027C794(gobj);
+}
+
+void it_802DB5F0(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    PAD_STACK(8);
+
+    it_80273454(gobj);
+    Item_80268E5C((HSD_GObj*) gobj, 9, ITEM_ANIM_UPDATE);
+    Item_8026AE84(ip, 0x139, 0x7FU, 0x40U);
+    it_80274F28(ip, 1, (void (*)(HSD_GObj*)) it_802DB358,
+                (void (*)(HSD_GObj*, HSD_GObj*)) ftCo_800C78B0);
+    ip->xDD4_itemVar.likelike.x50 = NULL;
+}
+
+bool itLikelike_UnkMotion9_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    PAD_STACK(16);
+
+    if (it_80272C6C(gobj) == 0) {
+        it_8026D5CC(gobj);
+        if (ip->xDD4_itemVar.likelike.x50 != 0U) {
+            it_802DB8A8(gobj);
+        } else {
+            it_802D9DDC(gobj);
+        }
+    }
+    return false;
+}
 
 void itLikelike_UnkMotion9_Phys(Item_GObj* gobj) {}
 
@@ -205,9 +956,34 @@ bool itLikelike_UnkMotion9_Coll(Item_GObj* gobj)
     return it_8027C794(gobj);
 }
 
-/// #it_802DB74C
+void it_802DB74C(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    PAD_STACK(8);
 
-/// #itLikelike_UnkMotion10_Anim
+    it_80273454(gobj);
+    Item_80268E5C((HSD_GObj*) gobj, 0xA, ITEM_ANIM_UPDATE);
+    Item_8026AE84(ip, 0x139, 0x7FU, 0x40U);
+    it_80274F28(ip, 1, (void (*)(HSD_GObj*)) it_802DB358,
+                (void (*)(HSD_GObj*, HSD_GObj*)) ftCo_800C78B0);
+    ip->xDD4_itemVar.likelike.x50 = NULL;
+}
+
+bool itLikelike_UnkMotion10_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    PAD_STACK(16);
+
+    if (it_80272C6C(gobj) == 0) {
+        it_8026D5CC(gobj);
+        if (ip->xDD4_itemVar.likelike.x50 != 0U) {
+            it_802DB8A8(gobj);
+        } else {
+            it_802D9DDC(gobj);
+        }
+    }
+    return false;
+}
 
 void itLikelike_UnkMotion10_Phys(Item_GObj* gobj) {}
 
@@ -218,7 +994,16 @@ bool itLikelike_UnkMotion10_Coll(Item_GObj* gobj)
     return it_8027C794(gobj);
 }
 
-/// #it_802DB8A8
+void it_802DB8A8(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    PAD_STACK(16);
+    it_80273454(gobj);
+    ip->xDD4_itemVar.likelike.x4C = 0.0f;
+    Item_8026AE84(ip, 0x13B, 0x7FU, 0x40U);
+    it_80275258(gobj);
+    Item_80268E5C(gobj, 0xD, ITEM_ANIM_UPDATE);
+}
 
 bool itLikelike_UnkMotion13_Anim(Item_GObj* gobj)
 {
@@ -229,7 +1014,19 @@ bool itLikelike_UnkMotion13_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itLikelike_UnkMotion13_Phys
+void itLikelike_UnkMotion13_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itLikelikeAttributes* attr = GET_ATTRS(ip);
+    PAD_STACK(8);
+    if (ip->xDD4_itemVar.likelike.x4C == 0) {
+        ip->xDD4_itemVar.likelike.x4C = attr->x3D;
+
+        ftCo_800C7C60((Fighter_GObj*) ip->grab_victim, attr->x3E);
+    } else {
+        ip->xDD4_itemVar.likelike.x4C = ip->xDD4_itemVar.likelike.x4C - 1;
+    }
+}
 
 bool itLikelike_UnkMotion13_Coll(Item_GObj* gobj)
 {
@@ -238,13 +1035,92 @@ bool itLikelike_UnkMotion13_Coll(Item_GObj* gobj)
     return it_8027C794(gobj);
 }
 
-/// #it_802DB9F4
+void it_802DB9F4(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    PAD_STACK(16);
+    it_80273454(gobj);
+    ip->xDD4_itemVar.likelike.x4C = 0.0f;
+    if (HSD_Randi(2) != 0) {
+        Item_80268E5C(gobj, 0xE, ITEM_ANIM_UPDATE);
+        return;
+    }
+    Item_80268E5C(gobj, 0xF, ITEM_ANIM_UPDATE);
+}
 
-/// #it_802DBA68
+void it_802DBA68(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    PAD_STACK(24);
+    it_80273454(gobj);
+    it_802DBAF0(gobj, 0, 1);
+    ip->xDD4_itemVar.likelike.x4C = 0x78;
+    it_802D9DDC(gobj);
+}
 
-/// #it_802DBAF0
+void it_802DBAF0(Item_GObj* arg0, s32 arg1, s32 arg2)
+{
+    Vec3 vec;
+    Vec3 sp18;
+    HSD_GObj* temp_r4;
+    Item* ip = GET_ITEM(arg0);
+    itLikelikeAttributes* attr = GET_ATTRS(ip);
+    f32 fval;
 
-/// #itLikelike_UnkMotion14_Anim
+    if ((s32) ip->msid != 8) {
+        temp_r4 = ip->grab_victim;
+        if ((temp_r4 != NULL) && (temp_r4 == ip->xDD4_itemVar.likelike.x50)) {
+            vec.x = 0.0f;
+            vec.y = 0.5f * (ip->x378_itemColl.ecb.top.y +
+                            ip->x378_itemColl.ecb.bottom.y);
+            vec.z = 0.0f;
+            vec.x += ip->pos.x;
+            vec.y += ip->pos.y;
+            vec.z += ip->pos.z;
+            lb_8000B1CC(it_80272CC0(arg0, 8), NULL, &sp18);
+            if (arg1 == 0) {
+                fval = 0.0f;
+            } else if ((f32) arg1 == -1.0f) {
+                fval = attr->x30;
+            } else {
+                fval = attr->x34;
+            }
+
+            // TODO: fix pointer hacks
+            if (arg2 != 0) {
+                ftCo_800C7B0C(ip->grab_victim, &sp18, &vec,
+                              (lbColl_80008D30_arg1*) ((u8*) attr + 0x64),
+                              fval);
+            } else {
+                ftCo_800C7B0C(ip->grab_victim, &sp18, &vec,
+                              (lbColl_80008D30_arg1*) ((u8*) attr + 0x40),
+                              fval);
+            }
+            ip->xDD4_itemVar.likelike.x50 = NULL;
+            ip->atk_victim = NULL;
+            ip->grab_victim = NULL;
+            Item_8026AE84(ip, 0x13A, 0x7FU, 0x40U);
+        }
+    }
+}
+
+bool itLikelike_UnkMotion14_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    s32 temp_r3;
+    PAD_STACK(0x18);
+    if (ip->xDD4_itemVar.likelike.x4C == GET_ATTRS(ip)->x38) {
+        it_802DBAF0(gobj, 1, 0);
+    }
+    temp_r3 = ip->xDD4_itemVar.likelike.x4C;
+    if (temp_r3 >= 0x28) {
+        ip->xDD4_itemVar.likelike.x4C = 0x78;
+        it_802D9DDC(gobj);
+    } else {
+        ip->xDD4_itemVar.likelike.x4C = temp_r3 + 1;
+    }
+    return false;
+}
 
 void itLikelike_UnkMotion14_Phys(Item_GObj* gobj) {}
 
@@ -255,7 +1131,23 @@ bool itLikelike_UnkMotion14_Coll(Item_GObj* gobj)
     return it_8027C794(gobj);
 }
 
-/// #itLikelike_UnkMotion15_Anim
+bool itLikelike_UnkMotion15_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    s32 temp_r3;
+    PAD_STACK(0x18);
+    if (ip->xDD4_itemVar.likelike.x4C == GET_ATTRS(ip)->x38) {
+        it_802DBAF0(gobj, -1, 0);
+    }
+    temp_r3 = ip->xDD4_itemVar.likelike.x4C;
+    if (temp_r3 >= 0x28) {
+        ip->xDD4_itemVar.likelike.x4C = 0x78;
+        it_802D9DDC(gobj);
+    } else {
+        ip->xDD4_itemVar.likelike.x4C = temp_r3 + 1;
+    }
+    return false;
+}
 
 void itLikelike_UnkMotion15_Phys(Item_GObj* gobj) {}
 
@@ -275,7 +1167,7 @@ void itLikeLike_Logic5_PickedUp(Item_GObj* gobj)
 
 bool itLikelike_UnkMotion18_Anim(Item_GObj* gobj)
 {
-    PAD_STACK(8);
+    PAD_STACK(16);
     if (!it_80272C6C(gobj)) {
         it_802DBAF0(gobj, 0, 1);
         Item_80268E5C(gobj, 0x12, ITEM_ANIM_UPDATE);
@@ -285,7 +1177,15 @@ bool itLikelike_UnkMotion18_Anim(Item_GObj* gobj)
 
 void itLikelike_UnkMotion18_Phys(Item_GObj* gobj) {}
 
-/// #it_2725_Logic5_Dropped
+void it_2725_Logic5_Dropped(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itLikelikeAttributes* attr = GET_ATTRS(ip);
+
+    it_8027CBA4(gobj);
+    ip->xDD4_itemVar.likelike.x4C = attr->x4;
+    it_802DA960(gobj);
+}
 
 void itLikeLike_Logic5_Thrown(Item_GObj* gobj)
 {
@@ -312,16 +1212,61 @@ bool itLikelike_UnkMotion19_Coll(Item_GObj* gobj)
     return it_8027C824(gobj, NULL);
 }
 
-/// #it_802DC0AC
+void it_802DC0AC(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itLikelikeAttributes* attr = GET_ATTRS(ip);
+    PAD_STACK(8);
+    it_80273454(gobj);
+    ip->xDD4_itemVar.likelike.x4C = attr->x4;
+    ip->xDD4_itemVar.likelike.x3C = 0;
+    Item_80268E5C(gobj, 6, ITEM_ANIM_UPDATE);
+}
 
 bool itLikelike_UnkMotion6_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-/// #itLikelike_UnkMotion6_Phys
+void itLikelike_UnkMotion6_Phys(Item_GObj* gobj)
+{
+    itLikelikeAttributes* attr;
+    Item* ip = GET_ITEM(gobj);
+    s32 temp_r3;
 
-/// #itLikelike_UnkMotion6_Coll
+    temp_r3 = ip->xDD4_itemVar.likelike.x4C;
+    if (ip->xDD4_itemVar.likelike.x4C == 0) {
+        if (ip->xDD4_itemVar.likelike.x38 == 0) {
+            it_802DA104(gobj);
+            return;
+        }
+        it_802DAA10(gobj);
+        return;
+    }
+    ip->xDD4_itemVar.likelike.x4C = temp_r3 - 1;
+}
+
+bool itLikelike_UnkMotion6_Coll(Item_GObj* gobj)
+{
+    CollData* temp_r31;
+    Item* ip = ip = GET_ITEM(gobj);
+    s32 temp_cr0_eq;
+    PAD_STACK(0x20);
+
+    if (ip->xDD4_itemVar.likelike.x38 == 1) {
+        temp_r31 = &ip->x378_itemColl;
+        it_80276214(gobj);
+        temp_cr0_eq = mpColl_8004C750(temp_r31);
+        ip->pos = temp_r31->cur_pos;
+        if (temp_cr0_eq != 0) {
+            ip->xC30 = temp_r31->ceiling.index;
+        }
+        it_802762D8(gobj);
+    } else {
+        it_8026D6F4(gobj, (void (*)(HSD_GObj*)) it_802DAA10);
+    }
+    return it_8027C794(gobj);
+}
 
 void it_802DC310(Item_GObj* gobj)
 {
@@ -378,4 +1323,24 @@ void itLikeLike_Logic5_Destroyed(Item_GObj* gobj)
     it_2725_Logic9_Destroyed(gobj);
 }
 
-/// #it_802DC4BC
+Item_GObj* it_802DC4BC(s32 arg0, Vec3* arg1)
+{
+    // one r29-r30 regswap away from being solved
+    Vec3 sp50;
+    Item* item;
+    Item_GObj* gobj;
+
+    sp50 = zero_vec;
+    gobj = it_8027B5B0(It_Kind_Likelike, arg1, NULL, (Vec3*) &sp50, 1);
+    if (gobj != NULL) {
+        item = GET_ITEM(gobj);
+        item->xDD4_itemVar.likelike.x38 = arg0;
+        it_802762BC(item);
+        if (arg0 == 0) {
+            it_802DAA10(gobj);
+        } else {
+            it_802DAD18(gobj);
+        }
+    }
+    return gobj;
+}

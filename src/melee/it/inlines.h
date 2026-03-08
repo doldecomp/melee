@@ -18,4 +18,23 @@ static inline void itResetVelocity(Item* ip)
     ip->x40_vel.x = ip->x40_vel.y = ip->x40_vel.z = 0.0F;
 }
 
+/// @todo Rename; probably gets a specific joint for items
+static inline HSD_JObj* itGetJObjGrandchild(Item_GObj* gobj)
+{
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+    HSD_JObj* child;
+
+    if (!jobj) {
+        child = NULL;
+    } else {
+        child = jobj->child;
+    }
+    if (!child) {
+        child = NULL;
+    } else {
+        child = child->child;
+    }
+    return child;
+}
+
 #endif

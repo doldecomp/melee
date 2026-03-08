@@ -65,13 +65,16 @@ void it_8028B8D8(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itGShell_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    f32 temp;
     Vec v;
     HSD_JObj* jobj;
     PAD_STACK(4);
+
     if (ip->xDD4_itemVar.gshell.xDDC <= 0.0f) {
         jobj = GET_JOBJ(gobj);
         v = attrs->x34;
-        v.x *= -ip->facing_dir;
+        temp = -ip->facing_dir;
+        v.x *= temp;
         efAsync_Spawn(gobj, &GET_ITEM(gobj)->xBC0, 2, 1029, jobj, &v);
         ip->xDD4_itemVar.gshell.xDDC = attrs->x30;
     } else {
@@ -163,8 +166,9 @@ void it_8028BC2C(Item_GObj* gobj)
         ip->x40_vel.x = -ip->x40_vel.x * attrs->xC * HSD_Randf();
         ip->x40_vel.y = attrs->x10;
         if (ip->xDD4_itemVar.gshell.xDEC_b0) {
-            ip->xDD4_itemVar.gshell.xDE8 =
-                HSD_Randi(it_804D6D28->x48_byte & 0xF);
+            u8 rand_max = it_804D6D28->x48_byte;
+            rand_max &= 0xF;
+            ip->xDD4_itemVar.gshell.xDE8 = HSD_Randi(rand_max);
         } else {
             ip->xDD4_itemVar.gshell.xDEC_b0 = 1;
         }
@@ -384,7 +388,7 @@ void it_8028C3A8(Item_GObj* gobj)
     it_8026B3A8(gobj);
     it_80275474(gobj);
     it_80275414(gobj);
-    it_80275158(gobj, it_804D6D28->x30);
+    it_80275158(gobj, it_804D6D28->x30_lifetime);
     ip->xD5C = 0;
     ip->xDD4_itemVar.gshell.xDD8 = attrs->x24;
     ip->xDD4_itemVar.gshell.xDDC = attrs->x30;
@@ -414,7 +418,6 @@ void it_8028C3A8(Item_GObj* gobj)
 bool itGshell_UnkMotion6_Anim(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    PAD_STACK(8);
     if (ip->xDD4_itemVar.gshell.xDD8 <= 0.0f) {
         if (!ip->xDCD_flag.b5) {
             it_80275444(gobj);
@@ -473,7 +476,7 @@ void it_8028C898(Item_GObj* gobj)
     it_8026B3A8(gobj);
     it_80275474(gobj);
     it_80275414(gobj);
-    it_80275158(gobj, it_804D6D28->x30);
+    it_80275158(gobj, it_804D6D28->x30_lifetime);
     ip->xD5C = 0;
     ip->xDD4_itemVar.gshell.xDD8 = attrs->x24;
     ip->xDD4_itemVar.gshell.xDDC = attrs->x30;
@@ -595,18 +598,18 @@ bool itGShell_Logic14_Reflected(Item_GObj* gobj)
     return false;
 }
 
-bool itGShell_Logic14_Clanked(Item_GObj* gobj)
+static inline void shellHit(HSD_GObj* gobj)
 {
-    itGShell_Attrs* attrs;
     Item* ip = GET_ITEM(gobj);
-    attrs = ip->xC4_article_data->x4_specialAttributes;
-    PAD_STACK(8);
+    itGShell_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
     it_802756D0(gobj);
     it_80275444(gobj);
     ip->x40_vel.x = -ip->x40_vel.x * attrs->xC * HSD_Randf();
     ip->x40_vel.y = attrs->x10;
     if (ip->xDD4_itemVar.gshell.xDEC_b0) {
-        ip->xDD4_itemVar.gshell.xDE8 = HSD_Randi(it_804D6D28->x48_byte & 0xF);
+        u8 rand_max = it_804D6D28->x48_byte;
+        rand_max &= 0xF;
+        ip->xDD4_itemVar.gshell.xDE8 = HSD_Randi(rand_max);
     } else {
         ip->xDD4_itemVar.gshell.xDEC_b0 = 1;
     }
@@ -615,33 +618,22 @@ bool itGShell_Logic14_Clanked(Item_GObj* gobj)
     it_80274C88(gobj);
     ip->xDD4_itemVar.gshell.xDEC_b3 = 1;
     ip->xDD4_itemVar.gshell.xDE4 = attrs->x2C;
+}
+
+bool itGShell_Logic14_Clanked(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    shellHit(gobj);
     return false;
 }
 
 bool itGShell_Logic14_HitShield(Item_GObj* gobj)
 {
-    itGShell_Attrs* attrs;
     Item* ip = GET_ITEM(gobj);
-    PAD_STACK(8);
     if (ip->msid == 3 || ip->msid == 4) {
         itColl_BounceOffVictim(gobj);
     } else if (ip->msid - 5u <= 3) {
-        attrs = ip->xC4_article_data->x4_specialAttributes;
-        it_802756D0(gobj);
-        it_80275444(gobj);
-        ip->x40_vel.x = -ip->x40_vel.x * attrs->xC * HSD_Randf();
-        ip->x40_vel.y = attrs->x10;
-        if (ip->xDD4_itemVar.gshell.xDEC_b0) {
-            ip->xDD4_itemVar.gshell.xDE8 =
-                HSD_Randi(it_804D6D28->x48_byte & 0xF);
-        } else {
-            ip->xDD4_itemVar.gshell.xDEC_b0 = 1;
-        }
-        it_802762BC(ip);
-        Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
-        it_80274C88(gobj);
-        ip->xDD4_itemVar.gshell.xDEC_b3 = 1;
-        ip->xDD4_itemVar.gshell.xDE4 = attrs->x2C;
+        shellHit(gobj);
     }
     return false;
 }

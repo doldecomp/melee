@@ -5,6 +5,7 @@ typedef struct AnimLoopSettings AnimLoopSettings;
 typedef struct CountEntry CountEntry;
 typedef struct Diagram Diagram;
 typedef struct Diagram2 Diagram2;
+typedef struct Diagram3 Diagram3;
 typedef struct CSSData CSSData;
 typedef struct CSSDoor CSSDoor;
 typedef struct CSSDoorsData CSSDoorsData;
@@ -39,8 +40,8 @@ typedef enum _StageSelectMode {
     StageSelectMode_Loser
 } StageSelectMode;
 
-// Not same as CharacterKind bc not as many characters as icons (missing Sheik,
-// Master Hand, etc)
+/// Not same as CharacterKind bc not as many characters as icons (missing
+/// Sheik, Master Hand, etc)
 typedef enum CSSIconHud {
     ICONHUD_CAPTAIN = 0x00,
     ICONHUD_DONKEY = 0x01,

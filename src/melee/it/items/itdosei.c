@@ -7,16 +7,29 @@
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/item.h"
 #include "lb/lb_00B0.h"
 
 #include <math.h>
 
-// Explicit declaration for external function
-extern void Item_80268E5C(Item_GObj* gobj, int arg1, int arg2);
+/* 282DE4 */ static void it_80282DE4(Item_GObj* gobj);
 
 /// #it_3F14_Logic7_Spawned
 
-/// #fn_80281390
+void fn_80281390(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->x40_vel.z = 0.0f;
+    ip->x40_vel.y = 0.0f;
+    ip->x40_vel.x = 0.0f;
+    Item_80268E5C(gobj, 0, 3);
+    {
+        HSD_JObj* jobj = gobj->hsd_obj;
+        ip->x5D0_animFrameSpeed = 1.0f;
+        lb_8000BA0C(jobj, 1.0f);
+    }
+    ip->owner = NULL;
+}
 
 /// #itDosei_UnkMotion0_Anim
 
@@ -151,7 +164,15 @@ void it_80282074(Item_GObj* gobj)
     ip->owner = NULL;
 }
 
-/// #itDosei_UnkMotion3_Anim
+bool itDosei_UnkMotion3_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->xDD4_itemVar.dosei.xDE4 = ip->pos;
+    if (it_80272C6C(gobj) == 0) {
+        Item_80268E5C(gobj, 3, ITEM_ANIM_UPDATE);
+    }
+    return false;
+}
 
 void itDosei_UnkMotion3_Phys(Item_GObj* gobj)
 {
@@ -239,9 +260,36 @@ bool itDosei_UnkMotion8_Coll(Item_GObj* gobj)
     return false;
 }
 
-/// #fn_80282CD4
+void fn_80282CD4(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->x40_vel.z = 0.0f;
+    ip->x40_vel.y = 0.0f;
+    ip->x40_vel.x = 0.0f;
+    it_802762B0(ip);
+    Item_80268E5C(gobj, 7, 3);
+    {
+        HSD_JObj* jobj = gobj->hsd_obj;
+        ip->x5D0_animFrameSpeed = 1.0f;
+        lb_8000BA0C(jobj, 1.0f);
+    }
+    ip->owner = NULL;
+}
 
-/// #itDosei_UnkMotion7_Anim
+bool itDosei_UnkMotion7_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+
+    ip->xDD4_itemVar.dosei.xDE4 = ip->pos;
+
+    if (ip->xDD4_itemVar.dosei.xDD4 > 0) {
+        ip->xDD4_itemVar.dosei.xDD4--;
+    } else {
+        it_80282DE4(gobj);
+    }
+
+    return false;
+}
 
 void itDosei_UnkMotion7_Phys(Item_GObj* gobj) {}
 
@@ -283,7 +331,15 @@ bool itDosei_UnkMotion10_Anim(Item_GObj* gobj)
 
 /// #it_3F14_Logic7_DmgReceived
 
-/// #itDosei_UnkMotion11_Anim
+bool itDosei_UnkMotion11_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->xDD4_itemVar.dosei.xDE4 = ip->pos;
+    if (it_80272C6C(gobj) == 0) {
+        Item_80268E5C(gobj, 11, ITEM_ANIM_UPDATE);
+    }
+    return false;
+}
 
 void itDosei_UnkMotion11_Phys(Item_GObj* gobj)
 {

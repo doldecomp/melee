@@ -21,7 +21,7 @@ ItemStateTable it_803F7740[] = { { 0, itZeldadinfireexplode_UnkMotion0_Anim,
                                    itZeldadinfireexplode_UnkMotion0_Phys,
                                    itZeldadinfireexplode_UnkMotion0_Coll } };
 
-Item_GObj* it_802C4580(Item_GObj* parent_gobj, HSD_GObj* arg1, Point3d* pos,
+Item_GObj* it_802C4580(Item_GObj* parent_gobj, HSD_GObj* arg1, Vec3* pos,
                        f32 facing_dir, f32 scale)
 {
     SpawnItem spawn;

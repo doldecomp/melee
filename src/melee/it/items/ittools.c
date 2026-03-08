@@ -3,6 +3,7 @@
 #include "math.h"
 
 #include "it/inlines.h"
+#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 
@@ -20,13 +21,45 @@ bool itTools_Logic22_DmgDealt(Item_GObj* gobj)
 
 /// #itTools_UnkMotion4_Anim
 
-/// #itTools_UnkMotion4_Phys
+void itTools_UnkMotion4_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itToolsAttrEntry* entry =
+        (itToolsAttrEntry*) ip->xC4_article_data->x4_specialAttributes;
+    entry += ip->xDD4_itemVar.tools.x0;
+    it_80272860(gobj, entry->x14, entry->x18);
+}
 
-/// #itTools_UnkMotion4_Coll
+bool itTools_UnkMotion4_Coll(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    PAD_STACK(8);
+    if (ip->x40_vel.x != 0.0f || ip->x40_vel.y != 0.0f) {
+        if (it_8026DAA8(gobj) & 3) {
+            it_802EF320(gobj);
+        }
+    }
+    return false;
+}
 
 /// #it_802EF320
 
-/// #itTools_UnkMotion9_Anim
+bool itTools_UnkMotion9_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->xD44_lifeTimer -= 1.0f;
+    if (ip->xD44_lifeTimer <= 0.0f) {
+        ip->xD44_lifeTimer = 0.0f;
+        return true;
+    }
+    if ((s32) ip->xD44_lifeTimer & 2) {
+        it_8026BB20(gobj);
+        it_80273670(gobj, ip->xDD4_itemVar.tools.x0 + 5, 0.0f);
+    } else {
+        it_8026BB44(gobj);
+    }
+    return false;
+}
 
 void itTools_UnkMotion9_Phys(Item_GObj* gobj) {}
 

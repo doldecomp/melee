@@ -105,9 +105,9 @@ struct HSD_JObj;
 #define HSD_JOBJ_METHOD(o) HSD_JOBJ_INFO((o)->object.parent.class_info)
 
 struct HSD_JObj {
-    /* +0 */ HSD_Obj object;
-    /* +8 */ HSD_JObj* next;
-    /* +C */ HSD_JObj* parent;
+    /*  +0 */ HSD_Obj object;
+    /*  +8 */ HSD_JObj* next;
+    /*  +C */ HSD_JObj* parent;
     /* +10 */ HSD_JObj* child;
     /* +14 */ u32 flags;
     /* +18 */ union {
@@ -243,7 +243,7 @@ inline void HSD_JObjSetupMatrix(HSD_JObj* jobj)
     HSD_JObjSetupMatrixSub(jobj);
 }
 
-// Why does this seem to be a define while the others are inline functions?
+/// Why does this seem to be a define while the others are inline functions?
 #define HSD_JObjSetMtxDirty(jobj)                                             \
     {                                                                         \
         if (jobj != NULL && !HSD_JObjMtxIsDirty(jobj)) {                      \

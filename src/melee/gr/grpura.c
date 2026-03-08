@@ -22,6 +22,8 @@
 #include <baselib/tobj.h>
 #include <sysdolphin/baselib/dobj.h>
 
+/* 213030 */ static void grPura_80213030(void);
+
 StageCallbacks grPu_803E6800[] = {
     { grPura_80211EF0, grPura_80211F1C, grPura_80211F24, grPura_80211F28, 0 },
     { grPura_80212024, grPura_802120D8, grPura_802120E0, grPura_8021228C, 0 },
@@ -93,14 +95,14 @@ const f32 grPu_804DBA74 = 2.0;
 const f32 grPu_804DBA78 = 30.0;
 const f32 grPu_804DBA7C = -30.0;
 
+/* 4D6AA0 */ static HSD_GObj* grPu_804D6AA0;
+
 void grPura_80211D00(void)
 {
-    HSD_GObj* r3;
-
     Vec3 cam_offset;
     f32 fVar1;
 
-    Ground_801C49F8();
+    grPu_804D6AA0 = Ground_801C49F8();
     stage_info.unk8C.b4 = 0;
     stage_info.unk8C.b5 = 1;
     grPura_80211E08(0);
@@ -118,7 +120,7 @@ void grPura_80211D00(void)
     fVar1 = Stage_GetCamBoundsLeftOffset();
     Ground_801C38A0(grPu_804DBA58 * (fVar1 - cam_offset.x));
     fVar1 = Stage_GetCamBoundsRightOffset();
-    Ground_801C38AC(grPu_804DBA58 * ((fVar1 - cam_offset.x)));
+    Ground_801C38AC(grPu_804DBA58 * (fVar1 - cam_offset.x));
 }
 
 void grPura_80211DD8(void) {}
@@ -163,7 +165,7 @@ HSD_GObj* grPura_80211E08(int gobj_id)
     } else {
         // clang-format off
 //#line 241 "grizumi.c"
-//        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, __LINE__, gobj_id);
+///        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, __LINE__, gobj_id);
         // clang-format on
         OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grpura.c", 241,
                  gobj_id);
@@ -204,12 +206,9 @@ void grPura_80211F60(Ground_GObj* arg0) {}
 
 void grPura_80211F64(Ground_GObj* arg0) {}
 
-/// #grPura_80211F68
 void grPura_80211F68(Ground_GObj* arg0)
 {
-    Ground* gp = arg0->user_data;
-    Ground_801C2ED0(arg0->hsd_obj, gp->map_id);
-    grAnime_801C8138(arg0, gp->map_id, 0);
+    Ground_JObjInline1(arg0);
     grPura_80212CD4(arg0);
     grPura_802125F0(arg0);
     grPura_80212FC0(arg0);
@@ -224,7 +223,7 @@ void grPura_80211FD8(Ground_GObj* arg0)
 {
     grPura_80212EF4(arg0);
     Ground_801C2FE0(arg0);
-    // grPura_80213030(arg0);
+    grPura_80213030();
     mpLib_80055E24(0x18);
     lb_800115F4();
 }
@@ -376,16 +375,27 @@ void grPura_80212EF4(HSD_GObj* arg0)
 
 /// #grPura_80212FC0
 
-void grPura_80213030(HSD_JObj* arg0, Vec3* arg1, Vec3* arg2)
+void grPura_80213030(void)
 {
-    u32 uVar1 = 0;
+    Point3d spC;
+    HSD_JObj* temp_r3;
+    u16* var_r31;
+    u32 var_r30;
+
+    var_r31 = &grPu_803E6C0C[0];
+    var_r30 = 0;
     do {
-        lb_8000B1CC(arg0, arg1, arg2);
-        uVar1++;
-    } while (uVar1 < 42);
+        temp_r3 = M2C_FIELD(var_r31, HSD_JObj**, 8);
+        if (temp_r3 != NULL) {
+            lb_8000B1CC(temp_r3, NULL, &spC);
+            mpVtxSetPos(M2C_FIELD(var_r31, s16*, 0), spC.x, spC.y);
+        }
+        var_r30 += 1;
+        var_r31 += 0xC;
+    } while (var_r30 < 0x2A);
     mpJointUpdateBounding(0);
     mpJointUpdateBounding(9);
-    mpJointUpdateBounding(24);
+    mpJointUpdateBounding(0x18);
     mpJointUpdateBounding(5);
 }
 
@@ -399,11 +409,10 @@ bool grPura_802130C8(Vec3* a, int num, HSD_JObj* joint)
     return true;
 }
 
-/// #fn_802130D0
 void fn_802130D0(HSD_GObj* arg0, int arg1)
 {
-    HSD_ImageDesc* image = grPu_803E6E20;
-    HSD_MObjSetToonTextureImage(image);
+    PAD_STACK(8);
+    HSD_MObjSetToonTextureImage(&grPu_803E7620);
     grDisplay_801C5DB0(arg0, arg1);
     HSD_MObjSetToonTextureImage(0);
 }

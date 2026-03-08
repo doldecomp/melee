@@ -39,6 +39,8 @@
 #include <dolphin/mtx.h>
 #include <MetroTRK/intrinsics.h>
 
+/* 156F6C */ static void fn_80156F6C(HSD_GObj* gobj);
+
 static inline float my_sqrtf(float x)
 {
     static const double _half = .5;
@@ -78,6 +80,8 @@ static inline HSD_JObj* get_jobj(HSD_GObj* gobj)
 /* 159908 */ static void fn_80159908(HSD_GObj* gobj);
 /* 1582D8 */ static void fn_801582D8(HSD_GObj* gobj);
 /* 158534 */ static void fn_80158534(HSD_GObj* gobj);
+/* 1587B0 */ static void fn_801587B0(HSD_GObj* gobj);
+/* 1588B8 */ static void fn_801588B8(HSD_GObj* gobj);
 /* 15868C */ static void ftCh_Init_8015868C(HSD_GObj* gobj);
 /* 15ABD0 */ static void ftCh_GrabUnk1_8015ABD0(HSD_GObj* gobj);
 /* 15AC50 */ static void ftCh_GrabUnk1_8015AC50(HSD_GObj* gobj);
@@ -91,10 +95,14 @@ static inline HSD_JObj* get_jobj(HSD_GObj* gobj)
 /* 1577B4 */ static void fn_801577B4(HSD_GObj* gobj);
 /* 159AA4 */ static void fn_80159AA4(HSD_GObj* gobj);
 
+extern f32 ftCh_Init_804DA068;
+extern f32 ftCh_Init_804DA06C;
 extern f32 ftCh_Init_804DA070;
 extern f32 ftCh_Init_804DA074;
 extern f32 ftCh_Init_804DA080;
 extern f32 ftCh_Init_804DA084;
+extern f32 ftCh_Init_804DA0E0;
+extern f32 ftCh_Init_804DA0E4;
 extern f32 ftCh_Init_804DA178;
 extern f32 ftCh_Init_804DA17C;
 
@@ -845,7 +853,15 @@ void ftCh_Wait1_0_Coll(HSD_GObj* gobj) {}
 
 /// #ftCh_Init_80156AD8
 
-/// #fn_80156F6C
+void fn_80156F6C(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftCrazyHand_DatAttrs* da = fp->ft_data->ext_attr;
+    Fighter_ChangeMotionState(gobj, ftMh_MS_Entry, 0, ftCh_Init_804DA068,
+                              ftCh_Init_804DA06C, ftCh_Init_804DA068, NULL);
+    ftAnim_8006EBA4(gobj);
+    fp->cur_pos.y = da->x20;
+}
 
 void ftCh_Entry_Anim(HSD_GObj* gobj)
 {
@@ -1026,9 +1042,26 @@ void ftCh_Slap_IASA(HSD_GObj* gobj)
     }
 }
 
-/// #ftCh_Slap_Phys
+void ftCh_Slap_Phys(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftCrazyHand_DatAttrs* da = fp->ft_data->ext_attr;
+    ft_80085134(gobj);
+    fp->self_vel.x += da->x40;
+}
 
 /// #fn_801577B4
+
+static void fn_801577B4(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftCrazyHand_DatAttrs* da = fp->ft_data->ext_attr;
+
+    if (fp->cur_pos.x > da->x3C) {
+        fp->self_vel.x = ftCh_Init_804DA080;
+        ftCh_Init_801577F8(gobj);
+    }
+}
 
 void ftCh_Init_801577F8(HSD_GObj* gobj)
 {
@@ -1470,7 +1503,17 @@ void ftCh_Poke2_Phys(HSD_GObj* gobj)
 
 void ftCh_Poke2_Coll(HSD_GObj* gobj) {}
 
-/// #fn_801587B0
+static void fn_801587B0(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    Fighter_ChangeMotionState(gobj, 0x169, 0, ftCh_Init_804DA0E0,
+                              ftCh_Init_804DA0E4, ftCh_Init_804DA0E0, NULL);
+    fp->cmd_vars[0] = 0;
+    fp->cmd_vars[1] = 0;
+    fp->cmd_vars[2] = 0;
+    fp->cmd_vars[3] = 0;
+    fp->accessory4_cb = fn_801588B8;
+}
 
 void ftCh_FingerBeamStart_Anim(HSD_GObj* gobj)
 {
@@ -2119,7 +2162,13 @@ void ftCh_Squeezing0_Phys(HSD_GObj* gobj)
 
 void ftCh_Squeezing0_Coll(HSD_GObj* gobj) {}
 
-/// #ftCh_Init_8015A2B0
+void ftCh_Init_8015A2B0(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    fp->x1A5C = ftBossLib_8015C3E8(FTKIND_MASTERH);
+    Fighter_ChangeMotionState(gobj, 0x179, 0, 0.0f, 1.0f, 0.0f, NULL);
+    ftAnim_8006EBA4(gobj);
+}
 
 void ftCh_Squeezing1_Anim(HSD_GObj* gobj)
 {
@@ -2148,7 +2197,14 @@ void ftCh_Squeezing1_Phys(HSD_GObj* gobj)
 
 void ftCh_Squeezing1_Coll(HSD_GObj* gobj) {}
 
-/// #ftCh_Init_8015A3F4
+void ftCh_Init_8015A3F4(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    fp->cmd_vars[1] = 0;
+    fp->x1A5C = ftBossLib_8015C3E8(FTKIND_MASTERH);
+    Fighter_ChangeMotionState(gobj, 0x17A, 0, 0.0f, 1.0f, 0.0f, NULL);
+    ftAnim_8006EBA4(gobj);
+}
 
 void ftCh_Squeeze_Anim(HSD_GObj* gobj)
 {
@@ -2184,7 +2240,14 @@ void ftCh_Squeeze_Phys(HSD_GObj* gobj)
 
 void ftCh_Squeeze_Coll(HSD_GObj* gobj) {}
 
-/// #ftCh_Init_8015A560
+void ftCh_Init_8015A560(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    fp->cmd_vars[1] = 0;
+    fp->x1A5C = ftBossLib_8015C3E8(FTKIND_MASTERH);
+    Fighter_ChangeMotionState(gobj, 0x17B, 0, 0.0f, 1.0f, 0.0f, NULL);
+    ftAnim_8006EBA4(gobj);
+}
 
 void ftCh_Throw_Anim(HSD_GObj* gobj)
 {
@@ -2237,7 +2300,16 @@ void ftCh_Slam_Phys(HSD_GObj* gobj)
 
 void ftCh_Slam_Coll(HSD_GObj* gobj) {}
 
-/// #ftCh_Fail_Anim
+void ftCh_Fail_Anim(HSD_GObj* gobj)
+{
+    PAD_STACK(8);
+    if (ftBossLib_8015C31C() || !ftAnim_IsFramesRemaining(gobj)) {
+        Fighter* fp = GET_FIGHTER(gobj);
+        Fighter_UnkSetFlag_8006CFBC(gobj);
+        fp->x1A5C = 0;
+        ftCh_GrabUnk1_8015BC88(gobj);
+    }
+}
 
 void ftCh_Fail_IASA(HSD_GObj* gobj)
 {

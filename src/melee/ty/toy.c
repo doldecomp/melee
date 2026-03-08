@@ -834,7 +834,7 @@ s16 un_803062BC(s32 trophyId)
 
 void un_803062EC(s32 arg0, u32 arg1, f32 farg0)
 {
-    char sp14[80];
+    char sp14[72];
     TrophyData* td;
     s32 id;
 
@@ -1210,13 +1210,13 @@ void un_80306C5C(void* arg0)
     TyLightData* base;
     HSD_GObj* data;
     u8* table;
+    unsigned char new_var;
     HSD_LObj* lobj;
     HSD_LObj* next;
     void* unused1;
     void* unused2;
-
     idx = 0;
-    offset = idx * 0xC;
+    offset = (new_var = idx) * 0xC;
     base = un_804D6ED4;
     data = base->gobj;
     table = (u8*) base + offset;
@@ -1232,6 +1232,7 @@ void un_80306C5C(void* arg0)
             next = lobj->next;
         }
         lobj = next;
+        data = base->gobj;
     }
 
     HSD_LObjAnimAll(((HSD_GObj*) arg0)->hsd_obj);
@@ -1252,7 +1253,7 @@ void un_80306D14(void)
         lbAudioAx_800237A8(0xAB, 0x7F, 0x40);
     }
 }
-// Attempt 7: Try struct-based array access
+/// Attempt 7: Try struct-based array access
 
 /* 82.6% match */
 void un_80306D70(s32 arg0)
@@ -1841,7 +1842,27 @@ char* un_8030813C(s16 arg0, enum_t unused)
     return ptr;
 }
 
-/// #un_80308250
+void un_80308250(u8* arg0, s32 arg1, s32 arg2)
+{
+    void* sym;
+    char* ptr;
+
+    ptr = un_8030813C(arg1, arg1);
+
+    if (*(HSD_Archive**) (arg0 + 0x14) != NULL) {
+        lbArchive_80016EFC(*(HSD_Archive**) (arg0 + 0x14));
+        *(HSD_Archive**) (arg0 + 0x14) = NULL;
+    }
+
+    *(char**) (arg0 + 0x8) = ptr + 4;
+    *(char**) (arg0 + 0xC) = ptr + 0x24;
+    *(u16*) (arg0 + 0x10) = arg1;
+
+    if (arg2 == 0) {
+        *(HSD_Archive**) (arg0 + 0x14) = lbArchive_LoadSymbols(
+            *(char**) (arg0 + 0x8), &sym, *(char**) (arg0 + 0xC), 0);
+    }
+}
 
 void un_803082F8(s16 idx)
 {
@@ -2864,8 +2885,8 @@ void un_80312018_OnFrame(void)
 /* 91.8% match */
 void un_80312050(void)
 {
-    Point3d interest;
-    Point3d sp98;
+    Vec3 interest;
+    Vec3 sp98;
     Mtx viewMtx;
     Vec3 up;
     Vec3 left;

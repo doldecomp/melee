@@ -2,6 +2,8 @@
 
 #include "it/inlines.h"
 #include "it/it_26B1.h"
+#include "it/it_2725.h"
+#include "it/item.h"
 #include "it/types.h"
 
 #include <baselib/gobj.h>
@@ -33,9 +35,26 @@ void it_802B1FE8(Item_GObj* gobj, Vec3* pos)
 
 /// #it_2725_Logic39_Destroyed
 
-/// #it_802B2080
+void it_802B2080(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itPikachuthunderAttributes* attrs =
+        ip->xC4_article_data->x4_specialAttributes;
+    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+    it_80275158(gobj, attrs->x0);
+    it_8026BB44(gobj);
+}
 
-/// #itPikachuthunder_UnkMotion0_Anim
+bool itPikachuthunder_UnkMotion0_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->xDD4_itemVar.pikachuthunder.x8 <= 0) {
+        it_802B211C(gobj);
+    } else {
+        ip->xDD4_itemVar.pikachuthunder.x8--;
+    }
+    return false;
+}
 
 /// #it_802B211C
 

@@ -1,5 +1,7 @@
 #include "itoctarockstone.h"
 
+#include "ft/ftlib.h"
+
 #include "it/forward.h"
 
 #include "it/inlines.h"
@@ -8,7 +10,7 @@
 #include "it/it_2725.h"
 #include "it/item.h"
 
-#include "it/items/forward.h"
+#include <baselib/random.h>
 
 ItemStateTable it_803F8E90[] = {
     { 0, itOctarockstone_UnkMotion0_Anim, itOctarockstone_UnkMotion0_Phys,
@@ -117,7 +119,48 @@ void itOctarockstone_802E89B0(Item_GObj* gobj, Item_GObj* ref_gobj)
     it_8026B894(gobj, ref_gobj);
 }
 
-/// #it_802E89D0
+static inline f32 getX(f32 x1, f32 x2)
+{
+    f32 res = x1 - x2;
+    if (res < 0.0f) {
+        return -res;
+    }
+    return res;
+}
+
+void it_802E89D0(Item_GObj* gobj, f32 horiz_speed, f32 min_vy, f32 max_vy)
+{
+    HSD_GObj* gp;
+    Item* ip = GET_ITEM(gobj);
+    Vec3 pos;
+    f32 x;
+    f32 speed;
+    float new_var;
+
+    ip->x40_vel.x = horiz_speed * ip->facing_dir;
+    ip->x40_vel.z = 0.0f;
+
+    gp = ftLib_8008627C(&ip->pos, NULL);
+    if (gp != NULL) {
+        ftLib_800866DC(gp, &pos);
+        x = getX(ip->pos.x, pos.x);
+        speed = x / horiz_speed;
+        x = (new_var = ip->xCC_item_attr->x10_fall_speed * (speed * speed));
+        x *= 0.5f;
+        ip->x40_vel.y = x / speed;
+        ip->x40_vel.y =
+            HSD_Randf() * ((pos.y - ip->pos.y) / 10.0f) + ip->x40_vel.y;
+
+        if (ip->x40_vel.y > max_vy) {
+            ip->x40_vel.y = max_vy;
+        }
+        if (ip->x40_vel.y < min_vy) {
+            ip->x40_vel.y = min_vy;
+        }
+        return;
+    }
+    ip->x40_vel.y = 0.0f;
+}
 
 /// @brief Spawn an Octarock stone projectile.
 /// @param gobj The parent Octarock gobj.

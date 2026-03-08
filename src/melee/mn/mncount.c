@@ -11,7 +11,7 @@
 extern s32 mnDiagram_GetFighterTotalKOs(s32);
 extern s32 mnDiagram_GetFighterTotalFalls(s32);
 
-// --- Internal Structs ---
+/// --- Internal Structs ---
 
 typedef struct LocalFighterData {
     char pad[0x34];
@@ -25,7 +25,7 @@ typedef struct LocalFighterData {
     u32 unk54;
 } LocalFighterData;
 
-// --- Function Implementation ---
+/// --- Function Implementation ---
 
 s32 mnCount_802502CC(s32 arg0)
 {

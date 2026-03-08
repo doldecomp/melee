@@ -23,7 +23,6 @@
 
 #include "it/it_26B1.h"
 #include "it/itcoll.h"
-#include "it/items/it_27CF.h"
 #include "it/items/it_2ADA.h"
 #include "it/items/it_2E5A.h"
 #include "it/items/it_2E6A.h"
@@ -35,7 +34,6 @@
 #include "it/items/itcapsule.h"
 #include "it/items/itcerebi.h"
 #include "it/items/itchicorita.h"
-#include "it/items/itchicoritaleaf.h"
 #include "it/items/itclimbersblizzard.h"
 #include "it/items/itclimbersice.h"
 #include "it/items/itclimbersstring.h"
@@ -180,6 +178,7 @@
 #include "it/items/itwhispyapple.h"
 #include "it/items/itwhitebea.h"
 #include "it/items/itwstar.h"
+#include "it/items/ityoshiegglay.h"
 #include "it/items/ityoshieggthrow.h"
 #include "it/items/ityoshistar.h"
 #include "it/items/itzeldadinfire.h"
@@ -187,7 +186,6 @@
 #include "it/items/itzgshell.h"
 #include "it/items/itzrshell.h"
 #include "it/types.h"
-#include "items/it_27CF.h"
 #include "items/itbat.h"
 #include "items/itbombhei.h"
 #include "items/itbox.h"
@@ -235,6 +233,7 @@
 #include "items/ittarucann.h"
 #include "items/ittomato.h"
 #include "items/itwstar.h"
+#include "items/ityoshiegglay.h"
 #include "lb/inlines.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
@@ -267,7 +266,7 @@ extern const Vec3 it_803B85A8[6];
 extern s64 it_803B85F0;
 extern s64 it_803B85F8;
 
-// Common items
+/// Common items
 struct sdata_ItemGXLink it_803F1418[43] = {
     it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
     it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
@@ -1008,7 +1007,7 @@ struct ItemLogicTable it_803F14C4[ARRAY_SIZE(it_803F1418)] = {
         NULL,
         itHammerHead_Logic40_PickedUp,
         itHammerHead_Logic40_Dropped,
-        it_3F14_Logic40_Thrown,
+        itHammerHead_Logic40_Thrown,
         itHammerHead_Logic40_DmgDealt,
         itHammerHead_Logic40_DmgReceived,
         NULL,
@@ -1046,7 +1045,7 @@ struct ItemLogicTable it_803F14C4[ARRAY_SIZE(it_803F1418)] = {
         itEvYoshiEgg_Logic42_Dropped,
         itEvYoshiEgg_Logic42_Thrown,
         it_3F14_Logic42_DmgDealt,
-        it_3F14_Logic42_DmgReceived,
+        itEvYoshiEgg_Logic42_DmgReceived,
         itEvYoshiEgg_Logic42_EnteredAir,
         it_3F14_Logic42_Reflected,
         it_3F14_Logic42_Clanked,
@@ -1057,40 +1056,40 @@ struct ItemLogicTable it_803F14C4[ARRAY_SIZE(it_803F1418)] = {
     },
 };
 
-// static char it_803F1ED8[]; // unsure of type
-// static char it_803F1EE4[]; // unsure of type
-// static char it_803F1EF0[]; // unsure of type
-// static char it_803F1F00[] = "!(jobj->flags & JOBJ_USE_QUATERNION)"; // ?
-// "translate" static char it_803F1F0C[] = "!(jobj->flags &
-// JOBJ_USE_QUATERNION)"; // ?
+/// static char it_803F1ED8[]; // unsure of type
+/// static char it_803F1EE4[]; // unsure of type
+/// static char it_803F1EF0[]; // unsure of type
+/// static char it_803F1F00[] = "!(jobj->flags & JOBJ_USE_QUATERNION)"; // ?
+/// "translate" static char it_803F1F0C[] = "!(jobj->flags &
+/// JOBJ_USE_QUATERNION)"; // ?
 
-// char it_803F1F38[];
+/// char it_803F1F38[];
 char* it_803F1F38;
-// char it_803F1F58[];
+/// char it_803F1F58[];
 char* it_803F1F58;
 
 HSD_ClassInfo it_803F1F90;
-//  = {
-//     (struct _HSD_ClassInfoHead) {
-//         it_80277D08, // void (*info_init)(void);
-//         0x00000000, // u32 flags;
-//         0x00000000, // char* library_name;
-//         0x00000000, // char* class_name;
-//         0x00000000, // s16 obj_size;
-//         0x00000000, // s16 info_size;
-//         0x00000000, // struct _HSD_ClassInfo* parent;
-//         0x00000000, // struct _HSD_ClassInfo* next;
-//         0x00000000, // struct _HSD_ClassInfo* child;
-//         0x00000000, // u32 nb_exist;
-//         0x00000000, // u32 nb_peak;
-//     },
-//     0x00000000, // HSD_Class* (*alloc)(struct _HSD_ClassInfo* c);
-//     0x00000000, // int (*init)(struct _HSD_Class* c);
-//     0x00000000, // void (*release)(struct _HSD_Class* c);
-//     0x00000000, // void (*destroy)(struct _HSD_Class* c);
-//     0x00000000, // void (*amnesia)(struct _HSD_ClassInfo* c);
-//     // ... lots more data, but no other struct elements to put them in
-// };
+///  = {
+///     (struct _HSD_ClassInfoHead) {
+///         it_80277D08, // void (*info_init)(void);
+///         0x00000000, // u32 flags;
+///         0x00000000, // char* library_name;
+///         0x00000000, // char* class_name;
+///         0x00000000, // s16 obj_size;
+///         0x00000000, // s16 info_size;
+///         0x00000000, // struct _HSD_ClassInfo* parent;
+///         0x00000000, // struct _HSD_ClassInfo* next;
+///         0x00000000, // struct _HSD_ClassInfo* child;
+///         0x00000000, // u32 nb_exist;
+///         0x00000000, // u32 nb_peak;
+///     },
+///     0x00000000, // HSD_Class* (*alloc)(struct _HSD_ClassInfo* c);
+///     0x00000000, // int (*init)(struct _HSD_Class* c);
+///     0x00000000, // void (*release)(struct _HSD_Class* c);
+///     0x00000000, // void (*destroy)(struct _HSD_Class* c);
+///     0x00000000, // void (*amnesia)(struct _HSD_ClassInfo* c);
+///     // ... lots more data, but no other struct elements to put them in
+/// };
 
 void* jumptable_803F20E0[114];
 
@@ -1105,7 +1104,7 @@ static ItCmd it_803F22A8[16] = {
 char it_803F22E8;
 char it_803F2300;
 
-// Pokemon items
+/// Pokemon items
 struct sdata_ItemGXLink it_803F2310[47] = {
     it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
     it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
@@ -1993,7 +1992,7 @@ static ItemKind it_803F2ED0[22] = {
     0x00,
 };
 
-// Character-specific items
+/// Character-specific items
 struct sdata_ItemGXLink it_803F2F28[118] = {
     it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
     it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
@@ -4124,7 +4123,7 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
     },
 };
 
-// Monster and Stage-specific Items
+/// Monster and Stage-specific Items
 struct sdata_ItemGXLink it_803F4CA8[30] = {
     it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
     it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC, it_8026EECC,
@@ -4681,94 +4680,94 @@ static char it_803F5428;
 HSD_ObjAllocUnk4 it_804A0E30;
 HSD_ObjAllocUnk6 it_804A0E50;
 HSD_ObjAllocUnk6 it_804A0E60;
-// u8 it_804A0E70[0xF0];
-// Article* it_804A0F60[30];
-// static char it_804D5188[] = "src/sysdolphin/baselib/jobj.h"; // ?
-// static char it_804D5190[] = "jobj";
+/// u8 it_804A0E70[0xF0];
+/// Article* it_804A0F60[30];
+/// static char it_804D5188[] = "src/sysdolphin/baselib/jobj.h"; // ?
+/// static char it_804D5190[] = "jobj";
 static char it_804D5198;
-// static char it_804D519C[]; // Not sure of type
-// static char it_804D51A4[]; // Not sure of type
+/// static char it_804D519C[]; // Not sure of type
+/// static char it_804D51A4[]; // Not sure of type
 static char it_804D51B8;
 static char it_804D51C0;
 static ItCmd it_804D51C8[2] = {
     it_80279AF0,
     it_80279B10,
 };
-// static char it_804D51D0[]; // Not sure of type
-// static char it_804D51D8[]; // Not sure of type
-// static char it_804D51E0[];
-// static char it_804D51E8[];
+/// static char it_804D51D0[]; // Not sure of type
+/// static char it_804D51D8[]; // Not sure of type
+/// static char it_804D51E0[];
+/// static char it_804D51E8[];
 
-// s8 it_804D6D00; // Not sure of type
+/// s8 it_804D6D00; // Not sure of type
 struct Fighter_804D653C_t* it_804D6D04;
-// s32 it_804D6D08; // Not sure of type
-// s32 it_804D6D0C; // Not sure of type
-// u32 it_804D6D10; // Not sure of type
-// u32it_804D6D14; // Not sure of type
-// u32 it_804D6D18; // Not sure of type
-// u8 it_804D6D1C; // Not sure of type
-// Article* it_804D6D20[]; // Not sure of type
-// Article** it_804D6D24;
-// ItemCommonData* it_804D6D28; // 8 bytes instead of 4 for some reason
-// Article** it_804D6D30; // 8 bytes instead of 4 for some reason
-// Article** it_804D6D38; // 8 bytes instead of 4 for some reason
+/// s32 it_804D6D08; // Not sure of type
+/// s32 it_804D6D0C; // Not sure of type
+/// u32 it_804D6D10; // Not sure of type
+/// u32it_804D6D14; // Not sure of type
+/// u32 it_804D6D18; // Not sure of type
+/// u8 it_804D6D1C; // Not sure of type
+/// Article* it_804D6D20[]; // Not sure of type
+/// Article** it_804D6D24;
+/// ItemCommonData* it_804D6D28; // 8 bytes instead of 4 for some reason
+/// Article** it_804D6D30; // 8 bytes instead of 4 for some reason
+/// Article** it_804D6D38; // 8 bytes instead of 4 for some reason
 f32* it_804D6D40;
 
-// static f32 it_804DC708 = 0.0f;
-// static f32 it_804DC70C = 0.00001f;
-// static f32 it_804DC710 = 1.0f;
-// static f32 it_804DC714 = -1.0f;
-// static f64 it_804DC718 = M_PI_2;
-// static f64 const it_804DC720 = U32_TO_F32;
-// static f32 it_804DC728 = 0.01f;
-// static f32 it_804DC72C = deg_to_rad;
-// static f32 it_804DC730 = 1.0f;
-// static f32 it_804DC734 = 0.0f;
-// static f32 it_804DC738 = 1.0f;
+/// static f32 it_804DC708 = 0.0f;
+/// static f32 it_804DC70C = 0.00001f;
+/// static f32 it_804DC710 = 1.0f;
+/// static f32 it_804DC714 = -1.0f;
+/// static f64 it_804DC718 = M_PI_2;
+/// static f64 const it_804DC720 = U32_TO_F32;
+/// static f32 it_804DC728 = 0.01f;
+/// static f32 it_804DC72C = deg_to_rad;
+/// static f32 it_804DC730 = 1.0f;
+/// static f32 it_804DC734 = 0.0f;
+/// static f32 it_804DC738 = 1.0f;
 extern f32 it_804DC73C; // = 0.0f;
-// static f32 it_804DC740 = -1.0f;
+/// static f32 it_804DC740 = -1.0f;
 static f32 it_804DC744 = 1.0f;
-// static f64 const it_804DC748 = S32_TO_F32;
-// static f32 it_804DC750 = 1.5f;
-// static f32 it_804DC754 = 0.00001f;
-// static f64 it_804DC758 = 0.5f;
-// static f64 it_804DC760 = 3.0f;
-// static f32 it_804DC768 = 0.85f;
+/// static f64 const it_804DC748 = S32_TO_F32;
+/// static f32 it_804DC750 = 1.5f;
+/// static f32 it_804DC754 = 0.00001f;
+/// static f64 it_804DC758 = 0.5f;
+/// static f64 it_804DC760 = 3.0f;
+/// static f32 it_804DC768 = 0.85f;
 static const f32 it_804DC76C = 0.01f;
 static f32 it_804DC770 = 0.0f;
-// static f32 it_804DC774 = 1.0f;
-// static f32 it_804DC778 = 2.0f;
-// static f32 it_804DC77C = 0.5f;
-// static f64 it_804DC780 = M_PI;
-// static f64 it_804DC788 = 0.0f;
-// static f32 it_804DC790 = 0.003906f;
-// static f64 it_804DC798 = U32_TO_F32;
-// static f64 it_804DC7A0 = S32_TO_F32;
-// static f32 it_804DC7A8 = 1.0f;
-// static f32 it_804DC7AC = 0.0f;
-// static f32 it_804DC7B0 = F32_MAX;
-// static f32 it_804DC7B8 = 0.0f;
-// static f32 it_804DC7BC = -1.0f;
-// static f32 it_804DC7C0 = 1.0f;
-// static f32 it_804DC7C4 = 0.001f;
-// static f64 it_804DC7C8 = M_PI_2;
-// static f32 it_804DC7D0 = 0.0f;
-// static f32 it_804DC7D4 = 1.0f;
-// static f32 it_804DC7D8 = deg_to_rad;
-// static f64 it_804DC7E0 = S32_TO_F32;
-// static f32 it_804DC7E8 = M_PI_2;
-// static f32 it_804DC7EC = 0.1f;
-// static f64 it_804DC7F0 = 10.0f;
+/// static f32 it_804DC774 = 1.0f;
+/// static f32 it_804DC778 = 2.0f;
+/// static f32 it_804DC77C = 0.5f;
+/// static f64 it_804DC780 = M_PI;
+/// static f64 it_804DC788 = 0.0f;
+/// static f32 it_804DC790 = 0.003906f;
+/// static f64 it_804DC798 = U32_TO_F32;
+/// static f64 it_804DC7A0 = S32_TO_F32;
+/// static f32 it_804DC7A8 = 1.0f;
+/// static f32 it_804DC7AC = 0.0f;
+/// static f32 it_804DC7B0 = F32_MAX;
+/// static f32 it_804DC7B8 = 0.0f;
+/// static f32 it_804DC7BC = -1.0f;
+/// static f32 it_804DC7C0 = 1.0f;
+/// static f32 it_804DC7C4 = 0.001f;
+/// static f64 it_804DC7C8 = M_PI_2;
+/// static f32 it_804DC7D0 = 0.0f;
+/// static f32 it_804DC7D4 = 1.0f;
+/// static f32 it_804DC7D8 = deg_to_rad;
+/// static f64 it_804DC7E0 = S32_TO_F32;
+/// static f32 it_804DC7E8 = M_PI_2;
+/// static f32 it_804DC7EC = 0.1f;
+/// static f64 it_804DC7F0 = 10.0f;
 static const f64 it_804DC7F8 = 0.5f;
-// static f32 it_804DC800 = 30.0f;
-// static f32 it_804DC804= 10.0f;
-// static f64 it_804DC808 = M_PI_2;
-// static f32 it_804DC810 = deg_to_rad;
-// static f64 it_804DC818 = 3.0f;
-// static f32 it_804DC820 = -1.0f;
-// static f32 0.00000000680742f = 0.00000000680742f;
-// static f32 it_804DC828 = 2.0f;
-// static f32 it_804DC82C = 0.5f;
+/// static f32 it_804DC800 = 30.0f;
+/// static f32 it_804DC804= 10.0f;
+/// static f64 it_804DC808 = M_PI_2;
+/// static f32 it_804DC810 = deg_to_rad;
+/// static f64 it_804DC818 = 3.0f;
+/// static f32 it_804DC820 = -1.0f;
+/// static f32 0.00000000680742f = 0.00000000680742f;
+/// static f32 it_804DC828 = 2.0f;
+/// static f32 it_804DC82C = 0.5f;
 
 typedef enum PokemonKind {
     Pokemon_ID_Tosakinto,   // Goldeen (Tosakinto)
@@ -4876,7 +4875,7 @@ void it_80272674(Item_GObj* item_gobj, s32 idx)
         hitbox->x58 = hitbox->x4C;
         lb_8000B1CC(hitbox->jobj, &hitbox->b_offset, &hitbox->x4C);
         /* fallthrough */
-    case 4: // HitCapsule_Max
+    case HitCapsule_Unk4:
     case HitCapsule_Disabled:
         return;
     }
@@ -4918,16 +4917,18 @@ Fighter* it_80272818(Item* item)
         ->fighter;
 }
 
-// Returns Item_GObj of the specified kind if part of HSD_GObj_Entities->items
+/// Returns Item_GObj of the specified kind if part of HSD_GObj_Entities->items
 Item_GObj* it_80272828(ItemKind kind)
 {
     Item_GObj* item_gobj_return;
+    Item* new_var2;
     Item_GObj* item_gobj_check;
-
+    void* new_var;
     item_gobj_return = NULL;
     item_gobj_check = (Item_GObj*) HSD_GObj_Entities->items;
     while (item_gobj_check != NULL) {
-        if (((Item*) item_gobj_check->user_data)->kind == kind) {
+        new_var2 = (Item*) (new_var = item_gobj_check->user_data);
+        if (new_var2->kind == kind) {
             item_gobj_return = item_gobj_check;
         }
 
@@ -4994,7 +4995,7 @@ void it_80272940(Item_GObj* item_gobj)
     HSD_JObjClearFlagsAll(item_jobj2, 0x10U);
 }
 
-// void it_80272980(Item_GObj* item_gobj, f32 arg1) {
+/// void it_80272980(Item_GObj* item_gobj, f32 arg1) {
 void it_80272980(Item_GObj* item_gobj)
 {
     f32 dir;
@@ -5304,7 +5305,7 @@ void it_802732E4(Item* item, s32 arg1)
     }
 }
 
-void it_80273318(Item_GObj* item_gobj, HSD_Joint* joint, s32 arg2)
+void it_80273318(Item_GObj* item_gobj, HSD_Joint* joint)
 {
     Item* item = GET_ITEM(item_gobj);
     item->xC8_joint = joint;
@@ -5784,7 +5785,7 @@ void it_802742F4(Item_GObj* item_gobj, HSD_GObj* gobj, Fighter_Part ftpart)
         it_80279BBC(item);
     }
     if (item->kind < It_Kind_L_Gun_Ray) { // If a common item
-        it_80275158(item_gobj, it_804D6D28->x30);
+        it_80275158(item_gobj, it_804D6D28->x30_lifetime);
     }
     it_80274F48(item_gobj,
                 item->xC4_article_data->x10_modelDesc->x8_bone_attach_id, gobj,
@@ -6288,21 +6289,21 @@ void it_80275328(HSD_GObj* gobj, ItemLink* arg1)
 {
     arg1->prev = NULL;
     arg1->next = NULL;
-    arg1->x8_vel.z = 0.0f;
-    arg1->x8_vel.y = 0.0f;
-    arg1->x8_vel.x = 0.0f;
+    arg1->vel.z = 0.0f;
+    arg1->vel.y = 0.0f;
+    arg1->vel.x = 0.0f;
     arg1->pos.z = 0.0f;
     arg1->pos.y = 0.0f;
     arg1->pos.x = 0.0f;
-    arg1->x20_vec.z = 0.0f;
-    arg1->x20_vec.y = 0.0f;
-    arg1->x20_vec.x = 0.0f;
-    arg1->flag0 = 0;
-    arg1->flag1 = 0;
-    arg1->flag2 = 0;
-    arg1->unk = 0;
-    arg1->x1D0_GObj = gobj;
-    arg1->x1D4_JObj = NULL;
+    arg1->x20.z = 0.0f;
+    arg1->x20.y = 0.0f;
+    arg1->x20.x = 0.0f;
+    arg1->x2C_b0 = 0;
+    arg1->x2C_b1 = 0;
+    arg1->x2C_b2 = 0;
+    arg1->x1CC = 0;
+    arg1->gobj = gobj;
+    arg1->jobj = NULL;
 }
 
 void it_80275390(Item_GObj* item_gobj)
@@ -6527,7 +6528,7 @@ void it_80275788(Item_GObj* item_gobj)
     item = item_gobj->user_data;
     state = 4;
     for (var_ctr = 0U; var_ctr < 4U; var_ctr++) {
-        hitcapsule = &item->x5D4_hitboxes[var_ctr].hit;
+        hitcapsule = (0, &item->x5D4_hitboxes[var_ctr].hit);
         if (hitcapsule->state != HitCapsule_Disabled) {
             hitcapsule->state = state;
             item->xDAA_flag.b2 = 1;
@@ -6878,7 +6879,7 @@ void it_80276174(Item_GObj* item_gobj, Vec3* pos)
     }
 }
 
-// bool it_80276214(Item_GObj* item_gobj) {}
+/// bool it_80276214(Item_GObj* item_gobj) {}
 void it_80276214(Item_GObj* item_gobj)
 {
     Item* item;
@@ -8223,7 +8224,7 @@ void it_80278574(HSD_GObj* gobj, GXColor* arg1)
 }
 
 #if 0
-// load ItCo.dat/usd ?
+/// load ItCo.dat/usd ?
 void it_8027870C(s32 arg0) {
     if (lbLang_IsSettingUS() != 0) {
         lbArchive_80017040(0, &it_803F1EE4, &it_804D6D20, &it_803F1EF0, 0);
@@ -9961,10 +9962,10 @@ void it_8027B964(Item_GObj* item_gobj, bool chk)
     item->x40_vel = sp14;
 }
 
-// static inline u32 copy(u32 len, Vec3* src, Vec3* dst) {
-//     *dst = *src;
-//     return len;
-// }
+/// static inline u32 copy(u32 len, Vec3* src, Vec3* dst) {
+///     *dst = *src;
+///     return len;
+/// }
 
 int it_8027BA54(HSD_GObj* item_gobj, Vec3* arg1)
 {
@@ -10098,13 +10099,13 @@ block_7:
     HSD_JObjSetRotationZ(item_jobj, sp74.z);
 }
 
-// Might take in and pass more vars
+/// Might take in and pass more vars
 void it_8027C0A8(Item_GObj* item_gobj, f32 arg4, f32 arg5)
 {
     it_8027BBF4(item_gobj, false, arg4, arg5);
 }
 
-// Might take in and pass more vars
+/// Might take in and pass more vars
 void it_8027C0CC(Item_GObj* item_gobj, f32 arg4, f32 arg5)
 {
     it_8027BBF4(item_gobj, true, arg4, arg5);
@@ -10242,7 +10243,7 @@ bool it_8027C824(Item_GObj* item_gobj, s32 (*arg_func)(Item_GObj*))
 
 void it_2725_Logic9_Destroyed(Item_GObj* item_gobj)
 {
-    grZakoGenerator_801CAC14();
+    grZakoGenerator_801CAC14((HSD_GObj*) item_gobj);
 }
 
 static inline float product_xyz(Vec3* a, Vec3* b)
@@ -10450,7 +10451,7 @@ void it_8027CE44(Item_GObj* item_gobj)
 #pragma push
 #pragma dont_inline on
 
-// Appears to be a function for Game&Watch items
+/// Appears to be a function for Game&Watch items
 void it_8027CE64(Item_GObj* item_gobj, HSD_GObj* fighter_gobj,
                  void* arg_attr_address)
 {

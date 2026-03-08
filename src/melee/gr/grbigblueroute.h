@@ -73,7 +73,7 @@ typedef struct {
 /* 20DD64 */ void grBigBlueRoute_8020DD64(Vec3*);
 /* 20DE48 */ DynamicModelDesc* grBigBlueRoute_8020DE48(void);
 /* 20DEAC */ UNK_RET fn_8020DEAC(UNK_PARAMS);
-/* 20DED4 */ void grBigBlueRoute_8020DED4(Point3d*);
+/* 20DED4 */ void grBigBlueRoute_8020DED4(Vec3*);
 /* 20DF78 */ DynamicsDesc* grBigBlueRoute_8020DF78(enum_t);
 /* 20DF80 */ bool grBigBlueRoute_8020DF80(Vec3*, int arg, HSD_JObj* jobj);
 

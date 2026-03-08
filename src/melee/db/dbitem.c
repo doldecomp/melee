@@ -184,7 +184,7 @@ void db_80225D64(Item_GObj* item, Fighter_GObj* owner)
     it->xDAA_byte |= db_ShowItemCollisionBubbles;
 }
 
-// TODO avoid auto-inlining into fn_CheckItemAndPokemonMenu
+/// @todo avoid auto-inlining into fn_CheckItemAndPokemonMenu
 #pragma push
 #pragma dont_inline on
 void fn_ToggleItemCollisionBubbles(void)

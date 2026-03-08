@@ -120,9 +120,9 @@ static void ftFx_SpecialLwLoop_Enter(HSD_GObj* gobj);
 /// Fox & Falco's aerial Reflector Loop Motion State handler
 static void ftFx_SpecialAirLwLoop_Enter(HSD_GObj* gobj);
 
-// 0x800E8694
-// https://decomp.me/scratch/isKUf // Fox & Falco's grounded Reflector Start
-// Animation callback
+/// 0x800E8694
+/// https://decomp.me/scratch/isKUf // Fox & Falco's grounded Reflector Start
+/// Animation callback
 void ftFx_SpecialLwStart_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -163,9 +163,9 @@ void ftFx_SpecialAirLwStart_Anim(HSD_GObj* gobj)
     }
 }
 
-// 0x800E87AC
-// https://decomp.me/scratch/CYqHS // Fox & Falco's grounded Reflector Start
-// IASA callback
+/// 0x800E87AC
+/// https://decomp.me/scratch/CYqHS // Fox & Falco's grounded Reflector Start
+/// IASA callback
 void ftFx_SpecialLwStart_IASA(HSD_GObj* gobj)
 {
     if (ftFx_SpecialLwStart_CheckPass(gobj)) {
@@ -173,7 +173,7 @@ void ftFx_SpecialLwStart_IASA(HSD_GObj* gobj)
     }
 }
 
-// 0x800E87D0 - Fox & Falco's aerial Reflector Start IASA callback
+/// 0x800E87D0 - Fox & Falco's aerial Reflector Start IASA callback
 void ftFx_SpecialAirLwStart_IASA(HSD_GObj* gobj)
 {
     return;
@@ -538,21 +538,21 @@ void ftFx_SpecialAirLwTurn_Anim(HSD_GObj* gobj)
     }
 }
 
-// 0x800E91FC - Fox & Falco's grounded Reflector Turn IASA callback
+/// 0x800E91FC - Fox & Falco's grounded Reflector Turn IASA callback
 void ftFx_SpecialLwTurn_IASA(HSD_GObj* gobj)
 {
     return;
 }
 
-// 0x800E9200 - Fox & Falco's aerial Reflector Turn IASA callback
+/// 0x800E9200 - Fox & Falco's aerial Reflector Turn IASA callback
 void ftFx_SpecialAirLwTurn_IASA(HSD_GObj* gobj)
 {
     return;
 }
 
-// 0x800E9204
-// https://decomp.me/scratch/sQ6Zw // Fox & Falco's grounded Reflector Turn
-// Physics callback
+/// 0x800E9204
+/// https://decomp.me/scratch/sQ6Zw // Fox & Falco's grounded Reflector Turn
+/// Physics callback
 void ftFx_SpecialLwTurn_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
@@ -578,9 +578,9 @@ void ftFx_SpecialAirLwTurn_Phys(HSD_GObj* gobj)
     ftColl_8007AEF8(gobj);
 }
 
-// 0x800E92AC
-// https://decomp.me/scratch/hKwfA // Fox & Falco's grounded Reflector Turn
-// Collision callback
+/// 0x800E92AC
+/// https://decomp.me/scratch/hKwfA // Fox & Falco's grounded Reflector Turn
+/// Collision callback
 void ftFx_SpecialLwTurn_Coll(HSD_GObj* gobj)
 {
     if (ft_80082708(gobj) == false) {
@@ -588,9 +588,9 @@ void ftFx_SpecialLwTurn_Coll(HSD_GObj* gobj)
     }
 }
 
-// 0x800E92E8
-// https://decomp.me/scratch/L0Bhg // Fox & Falco's aerial Reflector Turn
-// Collision callback
+/// 0x800E92E8
+/// https://decomp.me/scratch/L0Bhg // Fox & Falco's aerial Reflector Turn
+/// Collision callback
 void ftFx_SpecialAirLwTurn_Coll(HSD_GObj* gobj)
 {
     if (ft_80081D0C(gobj) != false) {
@@ -605,9 +605,9 @@ inline void ftFox_SpecialLw_SetReflectVars(HSD_GObj* gobj)
     fp->reflect_hit_cb = ftFx_SpecialLwHit_Enter;
 }
 
-// 0x800E9324
-// https://decomp.me/scratch/L2Rcy // Fox & Falco's ground -> air Reflector
-// Turn Motion State handler
+/// 0x800E9324
+/// https://decomp.me/scratch/L2Rcy // Fox & Falco's ground -> air Reflector
+/// Turn Motion State handler
 void ftFx_SpecialLwTurn_GroundToAir(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -619,9 +619,9 @@ void ftFx_SpecialLwTurn_GroundToAir(HSD_GObj* gobj)
     ftFox_SpecialLw_SetReflectVars(gobj);
 }
 
-// 0x800E93A4
-// https://decomp.me/scratch/BwZlC // Fox & Falco's air -> ground Reflector
-// Turn Motion State handler
+/// 0x800E93A4
+/// https://decomp.me/scratch/BwZlC // Fox & Falco's air -> ground Reflector
+/// Turn Motion State handler
 void ftFx_SpecialAirLwTurn_GroundToAir(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -645,9 +645,9 @@ inline void ftFox_SpecialLwTurn_SetVarAll(HSD_GObj* gobj)
     ftFx_SpecialLw_Turn(gobj);
 }
 
-// 0x800E942C
-// https://decomp.me/scratch/Hr5UW // Fox & Falco's Reflector Turn Motion State
-// handler
+/// 0x800E942C
+/// https://decomp.me/scratch/Hr5UW // Fox & Falco's Reflector Turn Motion
+/// State handler
 bool ftFx_SpecialLwTurn_Check(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
@@ -677,9 +677,9 @@ inline void ftFox_SpecialLwHit_CreateReflectInline(HSD_GObj* gobj)
                             ftFx_SpecialLwHit_Enter);
 }
 
-// 0x800E9564
-// https://decomp.me/scratch/R1XfY // Fox & Falco's Reflector Hit Motion State
-// handler
+/// 0x800E9564
+/// https://decomp.me/scratch/R1XfY // Fox & Falco's Reflector Hit Motion State
+/// handler
 bool ftFx_SpecialLwHit_Check(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
@@ -750,21 +750,21 @@ void ftFx_SpecialAirLwHit_Anim(HSD_GObj* gobj)
 }
 #pragma dont_inline off
 
-// 0x800E9844 - Fox & Falco's grounded Reflector Hit IASA callback
+/// 0x800E9844 - Fox & Falco's grounded Reflector Hit IASA callback
 void ftFx_SpecialLwHit_IASA(HSD_GObj* gobj)
 {
     return;
 }
 
-// 0x800E9848 - Fox & Falco's aerial Reflector Hit IASA callback
+/// 0x800E9848 - Fox & Falco's aerial Reflector Hit IASA callback
 void ftFx_SpecialAirLwHit_IASA(HSD_GObj* gobj)
 {
     return;
 }
 
-// 0x800E984C
-// https://decomp.me/scratch/P8Wyt // Fox & Falco's grounded Reflector Hit
-// Physics callback
+/// 0x800E984C
+/// https://decomp.me/scratch/P8Wyt // Fox & Falco's grounded Reflector Hit
+/// Physics callback
 void ftFx_SpecialLwHit_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
@@ -806,9 +806,9 @@ void ftFx_SpecialAirLwHit_Coll(HSD_GObj* gobj)
     }
 }
 
-// 0x800E996C
-// https://decomp.me/scratch/wnviJ // Fox & Falco's ground -> air Reflector Hit
-// Motion State handler
+/// 0x800E996C
+/// https://decomp.me/scratch/wnviJ // Fox & Falco's ground -> air Reflector
+/// Hit Motion State handler
 void ftFx_SpecialLwHit_GroundToAir(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
@@ -820,9 +820,9 @@ void ftFx_SpecialLwHit_GroundToAir(HSD_GObj* gobj)
     ftFx_SpecialLwHit_SetCall(gobj);
 }
 
-// 0x800E99D4
-// https://decomp.me/scratch/zXqEI // Fox & Falco's air -> ground Reflector Hit
-// Motion State handler
+/// 0x800E99D4
+/// https://decomp.me/scratch/zXqEI // Fox & Falco's air -> ground Reflector
+/// Hit Motion State handler
 void ftFx_SpecialAirLwHit_AirToGround(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
@@ -835,9 +835,9 @@ void ftFx_SpecialAirLwHit_AirToGround(HSD_GObj* gobj)
     ftFx_SpecialLwHit_SetCall(gobj);
 }
 
-// 0x800E9A44
-// https://decomp.me/scratch/XIxX1 // Toggle bit flag and set OnReflect
-// callback for Reflector
+/// 0x800E9A44
+/// https://decomp.me/scratch/XIxX1 // Toggle bit flag and set OnReflect
+/// callback for Reflector
 void ftFx_SpecialLwHit_SetCall(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -846,9 +846,9 @@ void ftFx_SpecialLwHit_SetCall(HSD_GObj* gobj)
     fp->reflect_hit_cb = ftFx_SpecialLwHit_Enter;
 }
 
-// 0x800E9A68
-// https://decomp.me/scratch/SyGv6 // Fox & Falco's Reflect Hit Motion State
-// handler
+/// 0x800E9A68
+/// https://decomp.me/scratch/SyGv6 // Fox & Falco's Reflect Hit Motion State
+/// handler
 void ftFx_SpecialLwHit_Enter(HSD_GObj* gobj)
 {
     Vec3 sp14;
@@ -902,13 +902,13 @@ void ftFx_SpecialLwEnd_IASA(HSD_GObj* gobj)
     return;
 }
 
-// 0x800E9BCC - Fox & Falco's aerial Reflector End IASA callback
+/// 0x800E9BCC - Fox & Falco's aerial Reflector End IASA callback
 void ftFx_SpecialAirLwEnd_IASA(HSD_GObj* gobj)
 {
     return;
 }
 
-// 0x800E9BD0 - Fox & Falco's grounded Reflector End Physics callback
+/// 0x800E9BD0 - Fox & Falco's grounded Reflector End Physics callback
 void ftFx_SpecialLwEnd_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
@@ -931,9 +931,9 @@ void ftFx_SpecialAirLwEnd_Phys(HSD_GObj* gobj)
     ftCommon_8007CF58(fp);
 }
 
-// 0x800E9C50
-// https://decomp.me/scratch/chekC // Fox & Falco's grounded Reflector End
-// Collision callback
+/// 0x800E9C50
+/// https://decomp.me/scratch/chekC // Fox & Falco's grounded Reflector End
+/// Collision callback
 void ftFx_SpecialLwEnd_Coll(HSD_GObj* gobj)
 {
     if (ft_80082708(gobj) == false) {
@@ -941,9 +941,9 @@ void ftFx_SpecialLwEnd_Coll(HSD_GObj* gobj)
     }
 }
 
-// 0x800E9C8C
-// https://decomp.me/scratch/t5ghA // Fox & Falco's aerial Reflector End
-// Collision callback
+/// 0x800E9C8C
+/// https://decomp.me/scratch/t5ghA // Fox & Falco's aerial Reflector End
+/// Collision callback
 void ftFx_SpecialAirLwEnd_Coll(HSD_GObj* gobj)
 {
     if (ft_80081D0C(gobj) != false) {
@@ -951,9 +951,9 @@ void ftFx_SpecialAirLwEnd_Coll(HSD_GObj* gobj)
     }
 }
 
-// 0x800E9CC8
-// https://decomp.me/scratch/xAGsZ // Fox & Falco's ground -> air Reflector End
-// Motion State handler
+/// 0x800E9CC8
+/// https://decomp.me/scratch/xAGsZ // Fox & Falco's ground -> air Reflector
+/// End Motion State handler
 void ftFx_SpecialLwEnd_GroundToAir(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
@@ -964,9 +964,9 @@ void ftFx_SpecialLwEnd_GroundToAir(HSD_GObj* gobj)
                               fp->cur_anim_frame, 1, 0, NULL);
 }
 
-// 0x800E9D24
-// https://decomp.me/scratch/pG1xg // Fox & Falco's air -> ground Reflector End
-// Motion State handler
+/// 0x800E9D24
+/// https://decomp.me/scratch/pG1xg // Fox & Falco's air -> ground Reflector
+/// End Motion State handler
 void ftFx_SpecialAirLwEnd_AirToGround(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
@@ -978,15 +978,15 @@ void ftFx_SpecialAirLwEnd_AirToGround(HSD_GObj* gobj)
     ftCommon_ClampAirDrift(fp);
 }
 
-// 0x800E9D88
-// https://decomp.me/scratch/oUZ7Q // Fox & Falco's grounded Reflector End
-// Motion State handler
+/// 0x800E9D88
+/// https://decomp.me/scratch/oUZ7Q // Fox & Falco's grounded Reflector End
+/// Motion State handler
 void ftFx_SpecialLwEnd_Enter(HSD_GObj* gobj)
 {
     Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialLwEnd, 0, 0, 1, 0, NULL);
 }
 
-// 0x800E9DC0 - Fox & Falco's aerial Reflector End Motion State handler
+/// 0x800E9DC0 - Fox & Falco's aerial Reflector End Motion State handler
 void ftFx_SpecialAirLwEnd_Enter(HSD_GObj* gobj)
 {
     Fighter_ChangeMotionState(gobj, ftFx_MS_SpecialAirLwEnd, 0, 0, 1, 0, NULL);

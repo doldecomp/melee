@@ -3,14 +3,62 @@
 #include <placeholder.h>
 #include <platform.h>
 
+#include "baselib/gobj.h"
+#include "baselib/jobj.h"
+#include "ef/efsync.h"
 #include "gm/gm_1BA8.h"
+
+#include "it/forward.h"
+
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/itCommonItems.h"
 #include "it/item.h"
 
-/// #it_8029B0C8
+#include "it/items/forward.h"
+
+#include <string.h>
+
+ItemStateTable it_803F6728[] = {
+    { -1, itEvyoshiegg_UnkMotion0_Anim, itEvyoshiegg_UnkMotion0_Phys,
+      itEvyoshiegg_UnkMotion0_Coll },
+    { -1, itEvyoshiegg_UnkMotion3_Anim, itEvyoshiegg_UnkMotion1_Phys,
+      itEvyoshiegg_UnkMotion1_Coll },
+    { -1, itEvyoshiegg_UnkMotion2_Anim, itEvyoshiegg_UnkMotion2_Phys, NULL },
+    { 0, itEvyoshiegg_UnkMotion3_Anim, itEvyoshiegg_UnkMotion3_Phys,
+      itEvyoshiegg_UnkMotion3_Coll },
+    { -1, itEvyoshiegg_UnkMotion4_Anim, itEvyoshiegg_UnkMotion4_Phys,
+      itEvyoshiegg_UnkMotion4_Coll },
+    { -1, itEvyoshiegg_UnkMotion5_Anim, itEvyoshiegg_UnkMotion5_Phys,
+      itEvyoshiegg_UnkMotion5_Coll },
+};
+
+void itEvYoshiEgg_Spawn(Vec3* pos)
+{
+    SpawnItem spawn;
+    Item_GObj* gobj;
+    Item* it;
+    itEvYoshiEgg_ItemVars* attrs;
+
+    spawn.kind = It_Kind_EvYoshiEgg;
+    spawn.prev_pos = *pos;
+    spawn.pos = *pos;
+    spawn.facing_dir = 1.0f;
+    spawn.x3C_damage = 0;
+    spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;
+    spawn.x0_parent_gobj = NULL;
+    spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
+    spawn.x44_flag.b0 = 1;
+    spawn.x40 = 0;
+    gobj = Item_80268B18(&spawn);
+    if (gobj != NULL) {
+        it = GET_ITEM(gobj);
+        it_8029B268(gobj);
+        it->xDD4_itemVar.evyoshiegg.xDD4 = 0;
+    }
+}
 
 void itEvYoshiEgg_Logic42_Destroyed(Item_GObj* gobj)
 {
@@ -20,8 +68,7 @@ void itEvYoshiEgg_Logic42_Destroyed(Item_GObj* gobj)
 void itEvYoshiEgg_Logic42_Spawned(Item_GObj* gobj)
 {
     Item* it = GET_ITEM((HSD_GObj*) gobj);
-    // This should be EvYoshiEgg
-    it->xDD4_itemVar.bombhei.xDD4 = 0;
+    it->xDD4_itemVar.evyoshiegg.xDD4 = 0;
     it_8029B268(gobj);
 }
 
@@ -109,6 +156,20 @@ bool itEvyoshiegg_UnkMotion3_Coll(Item_GObj* gobj)
 }
 
 /// #itEvyoshiegg_UnkMotion5_Anim
+bool itEvyoshiegg_UnkMotion5_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->xDD4_itemVar.evyoshiegg.xDD8 == 40) {
+        gm_801BEB68(1);
+    }
+    ip->xDD4_itemVar.evyoshiegg.xDD8 -= 1;
+
+    if (ip->xDD4_itemVar.evyoshiegg.xDD8 > 0) {
+        return false;
+    }
+
+    return true;
+}
 
 void itEvyoshiegg_UnkMotion5_Phys(Item_GObj* gobj) {}
 
@@ -117,15 +178,70 @@ bool itEvyoshiegg_UnkMotion5_Coll(Item_GObj* gobj)
     return false;
 }
 
-/// #it_3F14_Logic42_DmgDealt
+static inline bool itEvyoshiegg_BounceOff(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->x40_vel.x = 0.0f;
+    ip->x40_vel.y = 1.5f;
+    Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
+    return false;
+}
 
-/// #it_3F14_Logic42_Clanked
+bool it_3F14_Logic42_DmgDealt(Item_GObj* gobj)
+{
+    return itEvyoshiegg_BounceOff(gobj);
+}
 
-/// #it_3F14_Logic42_HitShield
+bool it_3F14_Logic42_Clanked(Item_GObj* gobj)
+{
+    return itEvyoshiegg_BounceOff(gobj);
+}
 
-/// #it_3F14_Logic42_Reflected
+bool it_3F14_Logic42_HitShield(Item_GObj* gobj)
+{
+    return itEvyoshiegg_BounceOff(gobj);
+}
 
-/// #it_3F14_Logic42_DmgReceived
+bool it_3F14_Logic42_Reflected(Item_GObj* gobj)
+{
+    return itEvyoshiegg_BounceOff(gobj);
+}
+
+static inline void dmgReceived(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    HSD_JObjSetFlagsAll(GET_JOBJ(gobj), JOBJ_HIDDEN);
+    it_802756D0(gobj);
+    ip->x40_vel.x = 0.0f;
+    ip->x40_vel.y = 0.0f;
+    ip->xDD4_itemVar.evyoshiegg.xDD4 = 1;
+    ip->xDD4_itemVar.evyoshiegg.xDD8 = 60;
+    it_8026B3A8(gobj);
+    Item_80268E5C(gobj, 5, ITEM_ANIM_UPDATE);
+}
+
+bool itEvYoshiEgg_Logic42_DmgReceived(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itEvYoshiEgg_DatAttrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    f32 val;
+    f32* unused;
+
+    if (ip->xDD4_itemVar.evyoshiegg.xDD4 != 0) {
+        return false;
+    }
+
+    if (ip->xC9C < attrs->x0) {
+        return false;
+    }
+
+    val = 1.5f;
+    efSync_Spawn(1231, gobj, &ip->pos, &val);
+    efSync_Spawn(1231, gobj, &ip->pos, &val);
+    Item_8026AE84(ip, 244, 0x7F, 0x40);
+    dmgReceived(gobj);
+    return false;
+}
 
 void itEvYoshiEgg_Logic42_EnteredAir(Item_GObj* gobj)
 {

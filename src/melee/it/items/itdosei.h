@@ -7,8 +7,8 @@
 
 #include "it/items/types.h"
 
-// Keep this if it is NOT defined in itCommonItems.h or similar.
-// If you get a redefinition error for this too, remove it.
+/// Keep this if it is NOT defined in itCommonItems.h or similar.
+/// If you get a redefinition error for this too, remove it.
 typedef struct itDoseiAttributes {
     f32 unk0;
     f32 unk4;
@@ -56,7 +56,6 @@ typedef struct itDoseiAttributes {
 /* 282D48 */ bool itDosei_UnkMotion7_Anim(Item_GObj* gobj);
 /* 282DA0 */ void itDosei_UnkMotion7_Phys(Item_GObj* gobj);
 /* 282DA4 */ bool itDosei_UnkMotion7_Coll(Item_GObj* gobj);
-/* 282DE4 */ UNK_RET it_80282DE4(UNK_PARAMS);
 /* 2830F4 */ bool itDosei_UnkMotion9_Anim(Item_GObj* gobj);
 /* 2832A8 */ void itDosei_UnkMotion9_Phys(Item_GObj* gobj);
 /* 2832AC */ bool itDosei_UnkMotion9_Coll(Item_GObj* gobj);

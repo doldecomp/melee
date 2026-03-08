@@ -50,14 +50,14 @@
 
 #define FTPART_INVALID 0xFF
 
-// Table in PlCo.dat
+/// Table in PlCo.dat
 struct FighterPartsTable {
     u8* joint_to_part;
     u8* part_to_joint;
     u32 parts_num;
 };
 
-// Points to data in PlCo.dat
+/// Points to data in PlCo.dat
 struct ftCommonData {
     /*   +0 */ float x0;
     /*   +4 */ float x4;
@@ -350,9 +350,9 @@ struct ftCommonData {
     /* +4A4 */ float x4A4;
     /* +4A8 */ float x4A8;
     /* +4AC */ float x4AC;
-    /* +4B0 */ float x4B0;
-    /* +4B4 */ int x4B4;
-    /* +4B8 */ float x4B8;
+    /* +4B0 */ float sdi_min_stick_mag;
+    /* +4B4 */ int sdi_stick_window;
+    /* +4B8 */ float sdi_pos_scale;
     /* +4BC */ float x4BC;
     /* +4C0 */ float x4C0;
     /* +4C4 */ int x4C4;
@@ -921,11 +921,11 @@ struct Fighter_DemoStrings {
         /* fp+2072:0 */ u8 x2072_b0 : 1;
         /* fp+2072:1 */ u8 x2072_b1 : 1;
         /* fp+2072:2 */ u8 x2072_b2 : 1;
-        /* fp+2072:3 */ u8 x2072_b3 : 1;
-        /* fp+2072:4 */ u8 x2072_b4 : 1;
-        /* fp+2072:5 */ u8 x2072_b5 : 1;
-        /* fp+2072:6 */ u8 x2072_b6 : 1;
-        /* fp+2072:7 */ u8 x2072_b7 : 1;
+        /* fp+2072:3 */ u8 count_x1A4 : 1;
+        /* fp+2072:4 */ u8 count_thrown_items : 1;
+        /* fp+2072:5 */ u8 count_aerials : 1;
+        /* fp+2072:6 */ u8 count_x1A0 : 1;
+        /* fp+2072:7 */ u8 count_specials : 1;
         /* fp+2073 */ u8 x2073;
     };
     /* fp+2070 */ s32 x2070_int;
@@ -1596,7 +1596,7 @@ struct Fighter {
 
     /* fp+221A:0 */ u8 x221A_b0 : 1;
     /* fp+221A:1 */ u8 x221A_b1 : 1;
-    /* fp+221A:2 */ u8 x221A_b2 : 1;
+    /* fp+221A:2 */ u8 allow_sdi : 1;
     /* fp+221A:3 */ u8 x221A_b3 : 1;
     /* fp+221A:4 */ u8 fall_fast : 1;
     /* fp+221A:5 */ u8 x221A_b5 : 1;

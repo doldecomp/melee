@@ -10,7 +10,6 @@
 #include "ft/ftcommon.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_Attack1.h"
-#include "ftCommon/ftCo_Attack100.h"
 #include "ftCommon/ftCo_AttackHi3.h"
 #include "ftCommon/ftCo_AttackHi4.h"
 #include "ftCommon/ftCo_AttackLw3.h"
@@ -26,7 +25,7 @@
 #include "ftCommon/ftpickupitem.h"
 #include "ftGameWatch/types.h"
 #include "it/it_26B1.h"
-#include "it/items/it_27CF.h"
+#include "it/items/itgamewatchmanhole.h"
 #include "lb/lb_00B0.h"
 
 #include <dolphin/mtx.h>
@@ -34,8 +33,8 @@
 static void ftGw_AttackLw3_ItemManholeExitHitlag(HSD_GObj*);
 static void ftGw_AttackLw3_ItemManholeEnterHitlag(HSD_GObj*);
 
-// 0x8014AB48
-// https://decomp.me/scratch/x73Hx // Create Manhole Item
+/// 0x8014AB48
+/// https://decomp.me/scratch/x73Hx // Create Manhole Item
 void ftGw_AttackLw3_ItemManholeSetup(HSD_GObj* gobj)
 {
     Vec3 sp10;
@@ -70,8 +69,8 @@ void ftGw_AttackLw3_ItemManholeSetup(HSD_GObj* gobj)
     fp->accessory4_cb = NULL;
 }
 
-// 0x8014AC40
-// https://decomp.me/scratch/JEvaL // Swap item GObj pointers
+/// 0x8014AC40
+/// https://decomp.me/scratch/JEvaL // Swap item GObj pointers
 void ftGw_AttackLw3_ItemManholeRemove(HSD_GObj* gobj)
 {
     HSD_GObj* manholeGObj;
@@ -89,8 +88,8 @@ void ftGw_AttackLw3_ItemManholeRemove(HSD_GObj* gobj)
     }
 }
 
-// 0x8014ACB0
-// https://decomp.me/scratch/09CUB // Remove Manhole on damage
+/// 0x8014ACB0
+/// https://decomp.me/scratch/09CUB // Remove Manhole on damage
 void ftGw_AttackLw3_ItemManholeOnDamage(HSD_GObj* gobj)
 {
     u8 _[8];
@@ -103,8 +102,8 @@ void ftGw_AttackLw3_ItemManholeOnDamage(HSD_GObj* gobj)
     }
 }
 
-// 0x8014AD38
-// https://decomp.me/scratch/Kw1d3 // Apply hitlag to Manhole item
+/// 0x8014AD38
+/// https://decomp.me/scratch/Kw1d3 // Apply hitlag to Manhole item
 static void ftGw_AttackLw3_ItemManholeEnterHitlag(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -113,7 +112,7 @@ static void ftGw_AttackLw3_ItemManholeEnterHitlag(HSD_GObj* gobj)
     }
 }
 
-// 0x8014AD68 - Remove hitlag from Manhole item
+/// 0x8014AD68 - Remove hitlag from Manhole item
 static void ftGw_AttackLw3_ItemManholeExitHitlag(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -122,9 +121,9 @@ static void ftGw_AttackLw3_ItemManholeExitHitlag(HSD_GObj* gobj)
     }
 }
 
-// 0x8014AD98
-// https://decomp.me/scratch/IERdX // Check if Mr. Game & Watch is performing
-// Down Tilt - remove if returns true
+/// 0x8014AD98
+/// https://decomp.me/scratch/IERdX // Check if Mr. Game & Watch is performing
+/// Down Tilt - remove if returns true
 bool ftGw_AttackLw3_ItemCheckManholeRemove(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -134,9 +133,9 @@ bool ftGw_AttackLw3_ItemCheckManholeRemove(HSD_GObj* gobj)
     return true;
 }
 
-// 0x8014ADB8
-// https://decomp.me/scratch/rGgyM // Mr. Game & Watch's Down Tilt Motion State
-// Handler
+/// 0x8014ADB8
+/// https://decomp.me/scratch/rGgyM // Mr. Game & Watch's Down Tilt Motion
+/// State Handler
 void ftGw_AttackLw3_Enter(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -150,9 +149,9 @@ void ftGw_AttackLw3_Enter(HSD_GObj* gobj)
     }
 }
 
-// 0x8014AE3C
-// https://decomp.me/scratch/h03Ja // Mr. Game & Watch's Down Tilt Animation
-// callback
+/// 0x8014AE3C
+/// https://decomp.me/scratch/h03Ja // Mr. Game & Watch's Down Tilt Animation
+/// callback
 void ftGw_AttackLw3_Anim(HSD_GObj* gobj)
 {
     u8 _[8];
@@ -182,17 +181,17 @@ void ftGw_AttackLw3_IASA(HSD_GObj* gobj)
     }
 }
 
-// 0x8014AF6C
-// https://decomp.me/scratch/Xp4C5 // Mr. Game & Watch's Down Tilt Physics
-// callback
+/// 0x8014AF6C
+/// https://decomp.me/scratch/Xp4C5 // Mr. Game & Watch's Down Tilt Physics
+/// callback
 void ftGw_AttackLw3_Phys(HSD_GObj* gobj)
 {
     ft_80084F3C(gobj);
 }
 
-// 0x8014AF8C
-// https://decomp.me/scratch/0stMN // Mr. Game & Watch's Down Tilt Collision
-// callback
+/// 0x8014AF8C
+/// https://decomp.me/scratch/0stMN // Mr. Game & Watch's Down Tilt Collision
+/// callback
 void ftGw_AttackLw3_Coll(HSD_GObj* gobj)
 {
     ft_80084104(gobj);

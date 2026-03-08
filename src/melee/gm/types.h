@@ -284,7 +284,7 @@ struct gmm_x1868 {
     /* 0x01D4 */ s32 x1A3C;
     /* 0x01D8 */ s32 x1A40;
     /* 0x01DC */ s32 x1A44;
-    /* 0x01E0 */ s32 x1A48;
+    /* 0x01E0 */ u32 x1A48;
     /* 0x01E4 */ s32 x1A4C;
     /* 0x01E8 */ s32 x1A50;
     /* 0x01EC */ int x1A54;
@@ -507,7 +507,8 @@ struct lbl_8046B6A0_t {
         u8 x4_b7 : 1;
         u8 x5;
         u16 x6;
-        u16 x8;
+        u8 x8;
+        u8 x9;
         u8 respawn_timer;
         u8 xB;
         u16 xC;
@@ -569,12 +570,13 @@ typedef struct gm_803DF94C_t {
 } gm_803DF94C_t;
 
 struct MatchTeamData {
-    int score;
-    int subscore;
-    u8 is_big_loser;
-    u8 is_small_loser;
-    u8 active;
-};
+    /* 0x00 */ int score;
+    /* 0x04 */ int subscore;
+    /* 0x08 */ u8 is_big_loser;
+    /* 0x09 */ u8 is_small_loser;
+    /* 0x0A */ u8 active;
+}; // padded to 0x0C
+STATIC_ASSERT(sizeof(struct MatchTeamData) == 0xC);
 
 struct MatchPlayerData {
     u8 slot_type;
@@ -599,7 +601,9 @@ struct MatchPlayerData {
     int x24;
     u32 x28;
     int score;
-    u8 pad_x30[0x40 - 0x30];
+    u32 x30;
+    u8 x34;
+    u8 x35_pad[0x40 - 0x35];
     u32 x40;
     u32 x44;
     u32 x48;
@@ -627,29 +631,31 @@ struct MatchPlayerData {
     int xA0;
     u32 xA4;
 };
+STATIC_ASSERT(sizeof(struct MatchPlayerData) == 0xA8);
 
 struct MatchEnd {
-    u32 x0; ///< timer
-    u8 result;
-    u8 x5;
-    u8 is_teams;
-    u8 x7;
-    u32 frame_count;
-    u8 xC;
-    u8 n_winners;
-    u8 n_team_winners;
-    u8 loser;
-    u8 winners[6];
-    u8 team_winners[5];
-    struct MatchTeamData team_standings[5];
-    struct MatchPlayerData player_standings[6];
-    u8 _x448[4];
-    struct UnkResultPlayerData {
+    /* 0x00 */ u32 x0; ///< timer
+    /* 0x04 */ u8 result;
+    /* 0x05 */ u8 x5;
+    /* 0x06 */ u8 is_teams;
+    /* 0x07 */ u8 x7;
+    /* 0x08 */ u32 frame_count;
+    /* 0x0C */ u8 xC;
+    /* 0x0D */ u8 n_winners;
+    /* 0x0E */ u8 n_team_winners;
+    /* 0x0F */ u8 loser;
+    /* 0x10 */ u8 winners[6];
+    /* 0x16 */ u8 team_winners[5];
+    /* 0x1B */ struct MatchTeamData team_standings[5];     // 0xC * 5 = 0x3C
+    /* 0x58 */ struct MatchPlayerData player_standings[6]; // 0xA8 * 6 = 0x3F0
+    /* 0x448 */ u8 _x448[4]; // offset by 1 because of the previous struct
+    /* 0x44c */ struct UnkResultPlayerData {
         u8 x0[0x100];
         char pad_x100[0x508 - 0x100];
-    } x44C[4];
-    u8 pad_x186C[0x227C - 0x186C];
+    } x44C[4]; // 0x508 * 4 = 0x1420
+    /* 0x186C */ u8 pad_x186C[0x227C - 0x186C];
 };
+STATIC_ASSERT(sizeof(struct MatchEnd) == 0x227C);
 
 struct MatchExitInfo {
     int x0;
@@ -671,7 +677,7 @@ struct Unk1PData {
     /* 01 */ u8 color;
     /* 02 */ u8 cpu_level;
     /* 03 */ u8 slot;
-    /* 04 */ u8 x4;
+    /* 04 */ u8 x4; ///< EntryName Slot
     /* 05 */ u8 stocks;
     /* 06 */ u8 x6;
     /* 07 */ u8 x7;
@@ -694,6 +700,9 @@ struct Unk1PData {
         /* 20 */ u32 x20;
         struct Unk1PData_x24 {
             /* 24 */ s8 ckind;
+            /* 25 */ u8 x1;
+            /* 26 */ u8 x2;
+            /* 27 */ u8 x3;
             /* 28 */ int x4;
             /* 2C */ int x8;
         } x24[3];
@@ -705,7 +714,7 @@ struct UnkAdventureData {
     /* 48 */ UNK_T x48;
     /* 4C */ u8 (*x4C)(u8, u8, u8);
     /* 50 */ UNK_T x50;
-    /* 54 */ UNK_T x54;
+    /* 54 */ u8 (*x54)(u8, u8, u8);
     /* 58 */ UNK_T x58;
     /* 5C */ UNK_T x5C;
     /* 60 */ UNK_T x60;
@@ -736,7 +745,7 @@ struct UnkAllstarData {
     /* +68*/ UNK_T x68;
     /* +6C*/ u32 _6C;
     /* +70*/ u32 _70;
-    /* +74*/ u16 x74; ///< current percent
+    /* +74*/ u16 x74;    ///< current percent
     /* +76*/ u8 x76[24]; ///< character id array
     /* +8E*/ u8 x8E[2];
     /* +90*/ u8 x90[4];
@@ -797,7 +806,7 @@ struct TmData {
     HSD_Text* x4E8[6];
     HSD_Text* x500[6];
     HSD_Text* x518[3];
-    u8 pad_x524[0x534 - 0x524];
+    HSD_Text* x524[4];
     HSD_Text* x534[3];
     u8 pad_x540[0x56B - 0x540];
 };
@@ -971,7 +980,7 @@ struct MenuExitData {
 };
 STATIC_ASSERT(sizeof(struct MenuExitData) == 0x4);
 
-typedef struct gm_803DDEC8Struct{
+typedef struct gm_803DDEC8Struct {
     u8 x0;
     u8 x1_b0 : 1;
     u8 x1_b1 : 1;
@@ -983,6 +992,6 @@ typedef struct gm_803DDEC8Struct{
     u8 x1_b7 : 1;
     u8 x2[0xC - 0x2];
     void* xC;
-}gm_803DDEC8Struct;
+} gm_803DDEC8Struct;
 
 #endif

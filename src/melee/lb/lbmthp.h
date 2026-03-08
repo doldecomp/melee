@@ -51,7 +51,7 @@ typedef struct THPDecComp {
 /* 01F294 */ s32 fn_8001F294(void);
 /* 01F2A4 */ UNK_RET fn_8001F2A4(UNK_PARAMS);
 /* 01F410 */ void lbMthp_8001F410(const char* filename, UNK_T, int, int, int);
-/* 01F578 */ UNK_RET lbMthp_8001F578(UNK_PARAMS);
+/* 01F578 */ void lbMthp_8001F578(void);
 /* 01F5C4 */ s32 lbMthp_8001F5C4(void);
 /* 01F5D4 */ s32 lbMthp_8001F5D4(void);
 /* 01F5E4 */ s32 lbMthp_8001F5E4(void);

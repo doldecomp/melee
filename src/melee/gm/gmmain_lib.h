@@ -18,7 +18,7 @@
 /* 15CC90 */ short* gmMainLib_8015CC90(void);
 /* 15CC9C */ struct NameTagData* GetPersistentNameData(s32);
 /* 15CCE4 */ void* gmMainLib_8015CCE4(void);
-/* 15CCF0 */ void* gmMainLib_8015CCF0(void);
+/* 15CCF0 */ u32* gmMainLib_8015CCF0(void);
 /* 15CCFC */ void* gmMainLib_8015CCFC(void);
 /* 15CD08 */ void* gmMainLib_8015CD08(void);
 /* 15CD14 */ void* gmMainLib_8015CD14(void);
@@ -34,7 +34,7 @@
 /* 15CD8C */ void* gmMainLib_8015CD8C(void);
 /* 15CD98 */ int* gmMainLib_8015CD98(void);
 /* 15CDA4 */ void* gmMainLib_8015CDA4(void);
-/* 15CDB0 */ void* gmMainLib_8015CDB0(void);
+/* 15CDB0 */ s32* gmMainLib_8015CDB0(void);
 /* 15CDBC */ void* gmMainLib_8015CDBC(void);
 /* 15CDC8 */ struct gmm_x0_528_t* gmMainLib_8015CDC8(void);
 /* 15CDD4 */ struct gmm_x0_528_t* gmMainLib_8015CDD4(void);
@@ -148,7 +148,7 @@
 /* 15EEB4 */ void gmMainLib_8015EEB4(void);
 /* 15EEC8 */ void gmMainLib_8015EEC8(void);
 /* 15EF30 */ void gmMainLib_8015EF30(struct gmMainLib_8015EF30_s* arg0);
-/* 15EF84 */ UNK_RET InitializePersistentNameData(UNK_PARAMS);
+/* 15EF84 */ void InitializePersistentNameData(s32);
 /* 15F150 */ UNK_RET gmMainLib_8015F150(UNK_PARAMS);
 /* 15F260 */ UNK_RET gmMainLib_8015F260(UNK_PARAMS);
 /* 15F464 */ void gmMainLib_8015F464(void);

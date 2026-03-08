@@ -26,31 +26,28 @@ void itSamusGrapple_Logic53_Spawned(Item_GObj* gobj)
 
 /// #it_802B75FC
 
-void it_802B7B84(Item_GObj* arg0)
+void it_802B7B84(Item_GObj* gobj)
 {
-    Item* item;
-    Fighter* fp;
-    HSD_GObj* gobj;
-    ItemLink* item_link;
-
-    if (arg0 != NULL) {
-        item = arg0->user_data;
-        if (item != NULL) {
-            if (item->xDD4_itemVar.samusgrapple.x8 != NULL) {
-                fp = GET_FIGHTER(item->xDD4_itemVar.samusgrapple.x8);
+    if (gobj != NULL) {
+        Item* ip = GET_ITEM(gobj);
+        if (ip != NULL) {
+            if (ip->xDD4_itemVar.samusgrapple.x8 != NULL) {
+                Fighter* fp = GET_FIGHTER(ip->xDD4_itemVar.samusgrapple.x8);
                 if (fp != NULL) {
-                    item->xDD4_itemVar.samusgrapple.unk_10 = NULL;
+                    ip->xDD4_itemVar.samusgrapple.unk_10 = NULL;
                     fp->fv.ss.x223C = 0;
                     fp->accessory2_cb = 0;
                     fp->death1_cb = 0;
                     fp->accessory3_cb = 0;
-                    item_link = item->xDD4_itemVar.linkhookshot.x0;
-                    while (item_link != NULL) {
-                        gobj = item_link->x1D0_GObj;
-                        item_link = item_link->next;
-                        HSD_GObjPLink_80390228(gobj);
+                    {
+                        ItemLink* cur = ip->xDD4_itemVar.linkhookshot.x0;
+                        while (cur != NULL) {
+                            HSD_GObj* link_gobj = cur->gobj;
+                            cur = cur->next;
+                            HSD_GObjPLink_80390228(link_gobj);
+                        }
+                        Item_8026A8EC(gobj);
                     }
-                    Item_8026A8EC(arg0);
                 }
             }
         }
@@ -189,7 +186,7 @@ void it_802BAAE4(Item_GObj* gobj, Vec3* vel, f32 unused)
 {
     Item* ip = GET_ITEM(gobj);
     ItemLink* link = ip->xDD4_itemVar.linkhookshot.x0;
-    link->x8_vel = *vel;
+    link->vel = *vel;
     Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
     it_802A2428(gobj);
 }

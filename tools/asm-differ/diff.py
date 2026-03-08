@@ -1309,7 +1309,7 @@ def parse_elf_rodata_references(
     data: bytes, config: Config
 ) -> List[Tuple[int, int, str]]:
     e_ident = data[:16]
-    if e_ident[:4] != b"\x7FELF":
+    if e_ident[:4] != b"\x7fELF":
         return []
 
     SHT_SYMTAB = 2

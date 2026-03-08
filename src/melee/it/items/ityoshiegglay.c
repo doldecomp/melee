@@ -1,0 +1,184 @@
+#include "ityoshiegglay.h"
+
+#include "ef/efasync.h"
+
+#include "it/forward.h"
+
+#include "it/inlines.h"
+#include "it/it_266F.h"
+#include "it/it_26B1.h"
+#include "it/it_2725.h"
+#include "it/itCommonItems.h"
+#include "it/item.h"
+#include "it/items/types.h"
+#include "it/types.h"
+
+#include <math_ppc.h>
+#include <baselib/gobj.h>
+#include <baselib/jobj.h>
+#include <melee/it/item.h>
+
+ItemStateTable it_803F94A0[] = {
+    { -1, it_27CF_UnkMotion0_Anim, it_27CF_UnkMotion0_Phys,
+      it_27CF_UnkMotion0_Coll },
+    { -1, it_27CF_UnkMotion1_Anim, it_27CF_UnkMotion1_Phys,
+      it_27CF_UnkMotion1_Coll },
+    { -1, it_27CF_UnkMotion2_Anim, NULL, NULL },
+};
+
+void it_802F2F34(HSD_GObj* gobj, it_27CF_DatAttrs* attr)
+{
+    Item* item;
+    Item_GObj* item_gobj;
+    SpawnItem spawn;
+
+    spawn.kind = attr->kind;
+    spawn.prev_pos = attr->pos;
+    spawn.prev_pos.z = 0.0f;
+    spawn.pos = spawn.prev_pos;
+    spawn.facing_dir = attr->float2;
+    spawn.x3C_damage = 0;
+    spawn.vel = attr->vel;
+    spawn.x0_parent_gobj = 0;
+    spawn.x4_parent_gobj2 = 0;
+    spawn.x44_flag.b0 = 1;
+    spawn.x40 = 0;
+    item_gobj = Item_80268B18(&spawn);
+    if (item_gobj != NULL) {
+        item = GET_ITEM(item_gobj);
+        item->xDD4_itemVar.it_27CF.x0 = attr->float3;
+        item->xC98 = attr->x24;
+        it_80275158(item_gobj, attr->lifetime);
+        it_802F3020(item_gobj);
+    }
+}
+
+void it_802F3020(HSD_GObj* item_gobj)
+{
+    Item* item;
+
+    item = GET_ITEM(item_gobj);
+    it_8026B3A8(item_gobj);
+    Item_80268E5C(item_gobj, 1, ITEM_ANIM_UPDATE);
+    item->xDCE_flag.b7 = 0;
+}
+
+bool it_27CF_UnkMotion1_Anim(HSD_GObj* gobj)
+{
+    Item* ip;
+    f32 sp1C;
+    HSD_JObj* item_jobj;
+    Item_GObj* item_gobj;
+    PAD_STACK(10);
+
+    ip = GET_ITEM(gobj);
+    ip->xD44_lifeTimer -= 1.0f;
+    if (ip->xD44_lifeTimer <= 0.0f) {
+        ip = gobj->user_data;
+        item_jobj = gobj->hsd_obj;
+        sp1C = 1.0f;
+        Item_8026AE84(ip, 280088, 127, 64);
+        item_gobj = (Item_GObj*) gobj;
+        efAsync_Spawn(gobj, &((Item*) gobj->user_data)->xBC0, 4U, 1231,
+                      item_jobj, &sp1C);
+        it_802F3290(item_gobj);
+    }
+    return false;
+}
+
+void it_27CF_UnkMotion1_Phys(HSD_GObj* item_gobj)
+{
+    ItemAttr* attr;
+
+    attr = GET_ITEM(item_gobj)->xCC_item_attr;
+    it_80272860(item_gobj, attr->x10_fall_speed, attr->x14_fall_speed_max);
+}
+
+bool it_27CF_UnkMotion1_Coll(HSD_GObj* item_gobj)
+{
+    it_8026E15C(item_gobj, it_802F317C);
+    return false;
+}
+
+void it_802F317C(HSD_GObj* item_gobj)
+{
+    Item* item;
+
+    item = GET_ITEM(item_gobj);
+    item->x40_vel.x = item->x40_vel.y = item->x40_vel.z = 0.0f;
+    Item_80268E5C(item_gobj, 0, ITEM_ANIM_UPDATE);
+}
+
+bool it_27CF_UnkMotion0_Anim(HSD_GObj* gobj)
+{
+    Item* ip;
+    f32 sp1C;
+    HSD_JObj* item_jobj;
+    Item_GObj* item_gobj;
+    PAD_STACK(10);
+
+    ip = GET_ITEM(gobj);
+    ip->xD44_lifeTimer -= 1.0f;
+    if (ip->xD44_lifeTimer <= 0.0f) {
+        ip = gobj->user_data;
+        item_jobj = gobj->hsd_obj;
+        sp1C = 1.0f;
+        Item_8026AE84(ip, 280088, 127, 64);
+        item_gobj = (Item_GObj*) gobj;
+        efAsync_Spawn(gobj, &((Item*) gobj->user_data)->xBC0, 4U, 1231,
+                      item_jobj, &sp1C);
+        it_802F3290(item_gobj);
+    }
+    return false;
+}
+
+void it_27CF_UnkMotion0_Phys(HSD_GObj* item_gobj)
+{
+    return;
+}
+
+bool it_27CF_UnkMotion0_Coll(HSD_GObj* item_gobj)
+{
+    it_8026D62C((Item_GObj*) item_gobj, it_802F3020);
+    return false;
+}
+
+void it_802F3290(Item_GObj* item_gobj)
+{
+    HSD_JObj* item_jobj;
+    Item* item;
+
+    item_jobj = GET_JOBJ(item_gobj);
+    item = GET_ITEM(item_gobj);
+    item->x40_vel.x = item->x40_vel.y = item->x40_vel.z = 0.0f;
+    item->xD44_lifeTimer = 40.0f;
+    HSD_JObjSetFlagsAll(item_jobj, 0x10U);
+    it_802756D0(item_gobj);
+    Item_80268E5C(item_gobj, 2, ITEM_ANIM_UPDATE);
+}
+
+bool it_27CF_UnkMotion2_Anim(HSD_GObj* item_gobj)
+{
+    Item* item;
+
+    item = GET_ITEM(item_gobj);
+    item->xD44_lifeTimer -= 1.0f;
+    if (item->xD44_lifeTimer <= 0.0f) {
+        return true;
+    }
+    return false;
+}
+
+bool it_27CF_Logic114_DmgReceived(Item_GObj* item_gobj)
+{
+    Item* item;
+
+    item = GET_ITEM(item_gobj);
+    item->xD44_lifeTimer -= item->xCA0 * item->xDD4_itemVar.it_27CF.x0;
+    return false;
+}
+
+void it_27CF_Logic114_EvtUnk(Item_GObj* item_gobj, HSD_GObj* ref_gobj)
+{
+    it_8026B894(item_gobj, ref_gobj);
+}

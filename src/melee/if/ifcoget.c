@@ -28,7 +28,7 @@
 #include <MSL/stdio.h>
 #include <MSL/string.h>
 
-// .data
+/// .data
 /* 3F9E08 */ static struct {
     struct {
         unsigned char b0 : 1;
@@ -46,7 +46,7 @@
 /* 3F9E60 */ static HSD_CObjDesc un_803F9E60 = { 0 };
 /* 3F9ED4 */ static HSD_LightDesc un_803F9ED4 = { 0 };
 
-// .bss
+/// .bss
 struct un_804A1F58_x8_t {
     HSD_GObj* x0;
     HSD_Text* x4;
@@ -58,7 +58,7 @@ struct un_804A1F58_x8_t {
     struct un_804A1F58_x8_t x8;
 } un_804A1F58[6];
 
-// .sbss
+/// .sbss
 /* 4D6DA0 */ static void* un_804D6DA0;
 /* 4D6DA4 */ static SceneDesc* un_804D6DA4;
 
@@ -259,17 +259,19 @@ void un_802FF620(void)
 void un_802FF6A0(void)
 {
     HSD_GObj* gobj = GObj_Create(HSD_GOBJ_CLASS_LIGHT, 3, 0);
-    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784A,
-                            HSD_LObjLoadDesc(&un_803F9ED4));
+    HSD_LObj* new_var;
+    new_var = HSD_LObjLoadDesc(&un_803F9ED4);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784A, new_var);
     GObj_SetupGXLink(gobj, HSD_GObj_LObjCallback, 0, 0);
 }
 
 void un_802FF710(void)
 {
-    HSD_GObj* gobj = GObj_Create(HSD_GOBJ_CLASS_CAMERA, 20, 0);
+    HSD_CObj* new_var;
+    HSD_GObj* gobj = GObj_Create(0x13, 20, 0);
     if (gobj) {
-        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B,
-                                HSD_CObjLoadDesc(&un_803F9E60));
+        new_var = HSD_CObjLoadDesc(&un_803F9E60);
+        HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, new_var);
         GObj_SetupGXLinkMax(gobj, HSD_GObj_803910D8, 11);
         gobj->gxlink_prios = 0x20000;
     }

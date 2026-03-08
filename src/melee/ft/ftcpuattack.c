@@ -1399,10 +1399,10 @@ void ftCo_800BA9A0(Fighter* fp)
     }
 }
 
-bool ftCo_800BB104(Fighter* fp, Fighter* arg1, Point3d* arg2, f32 arg3)
+bool ftCo_800BB104(Fighter* fp, Fighter* arg1, Vec3* arg2, f32 arg3)
 {
-    Point3d sp40;
-    Point3d sp34;
+    Vec3 sp40;
+    Vec3 sp34;
     Vec3 sp28;
 
     int i;

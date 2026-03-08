@@ -65,8 +65,18 @@ static void gmTitle_801A146C(HSD_GObj* gobj)
     mn_8022ED6C(GET_JOBJ(gobj), &gmTitle_803DA4FC);
 }
 
+static inline bool isActiveTitle()
+{
+    if (gm_801A4310() == MJ_TITLE ||
+        (gm_801A4310() == MJ_OPENING_MV && gm_801A42C4() == MN_VS))
+    {
+        return false;
+    }
+    return true;
+}
+
 /// Set up title screen animated background
-static inline void fn_801A1498_inline(void)
+static void fn_801A1498_inline(void)
 {
     bool var_r0;
     HSD_GObj* gobj = GObj_Create(0xE, 0xF, 0);
@@ -77,14 +87,7 @@ static inline void fn_801A1498_inline(void)
                        gmTitle_80479B38.matanim_joint,
                        gmTitle_80479B38.shapeanim_joint);
     HSD_GObjProc_8038FD54(gobj, gmTitle_801A146C, 0);
-    if (gm_801A4310() == MJ_TITLE ||
-        (gm_801A4310() == MJ_OPENING_MV && gm_801A42C4() == MN_VS))
-    {
-        var_r0 = false;
-    } else {
-        var_r0 = true;
-    }
-    if (var_r0 != 0) {
+    if (isActiveTitle() != 0) {
         HSD_JObjReqAnimAll(jobj, gmTitle_803DA4FC.start_frame);
     } else {
         HSD_JObjReqAnimAll(jobj, 130.0F);

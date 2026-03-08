@@ -38,8 +38,8 @@
 /* 271D2C */ static void it_80271D2C(Item_GObj* arg_item_gobj);
 /* 271F78 */ static void it_80271F78(Item_GObj* arg_item_gobj);
 
-// static s8 it_803F1360[0x16] = "damage log over %d!!\n";
-// static s8 it_803F1378[9] = "itcoll.c";
+/// static s8 it_803F1360[0x16] = "damage log over %d!!\n";
+/// static s8 it_803F1378[9] = "itcoll.c";
 static u32 it_803F1384[20] = {
     /* unable to generate initializer: unknown type */
     1000, // .4byte 0x000003E8
@@ -67,29 +67,29 @@ static u32 it_803F1384[20] = {
     // over!\n"
 };
 
-// static s8 it_804D5170 = "0";
-// static s8 it_804D5174[7] = "jobj.h";
-// static s8 it_804D517C[5] = "jobj";
-// extern u32 it_804D6D18;
+/// static s8 it_804D5170 = "0";
+/// static s8 it_804D5174[7] = "jobj.h";
+/// static s8 it_804D517C[5] = "jobj";
+/// extern u32 it_804D6D18;
 extern u8 it_804D6D1C[4];
-// static f32 it_804DC6C8 = 0.0;
-// static f32 it_804DC6D0[2] = { 176.0, -0.0 };
-// static f32 it_804DC6D8 = 0.5;
-// static f32 it_804DC6DC = -1.0;
-// static f32 it_804DC6E0 = 1.0;
-// static f32 it_804DC6E4 = 0x7F7FFFFF;
-// static f32 it_804DC6E8 = 0.01;
-// static f32 it_804DC6F0[2] = { 176.0, 0.0 };
-// static f32 it_804DC6F8 = 2 * M_PI;
-// static f32 it_804DC700 = 0.001;
-// static f32 it_804DC704 = 0.999;
+/// static f32 it_804DC6C8 = 0.0;
+/// static f32 it_804DC6D0[2] = { 176.0, -0.0 };
+/// static f32 it_804DC6D8 = 0.5;
+/// static f32 it_804DC6DC = -1.0;
+/// static f32 it_804DC6E0 = 1.0;
+/// static f32 it_804DC6E4 = 0x7F7FFFFF;
+/// static f32 it_804DC6E8 = 0.01;
+/// static f32 it_804DC6F0[2] = { 176.0, 0.0 };
+/// static f32 it_804DC6F8 = M_TAU;
+/// static f32 it_804DC700 = 0.001;
+/// static f32 it_804DC704 = 0.999;
 
-// struct LogEntry {
-//     s32 x0, x4, x8, xC;
-// };
-// static const int n_log_entries = 15;
-// static const int it_804A0E70_entries = 15;
-// extern struct LogEntry it_804A0E70[n_log_entries];
+/// struct LogEntry {
+///     s32 x0, x4, x8, xC;
+/// };
+/// static const int n_log_entries = 15;
+/// static const int it_804A0E70_entries = 15;
+/// extern struct LogEntry it_804A0E70[n_log_entries];
 extern struct HSD_ObjAllocUnk7 it_804A0E70[15];
 
 void it_8026F9AC(s32 arg0, void* fighter, HitCapsule* hit, HurtCapsule* hurt)
@@ -162,6 +162,8 @@ void it_8026FC00(Item* arg_item, HitCapsule* arg_hit, s32 arg2, Fighter* arg3)
 
     if (arg_item->xAC4_ignoreItemID != 0) {
         HSD_GObj* item_gobj = HSD_GObj_Entities->items;
+        if (item_gobj->next) {
+        }
         while (item_gobj != NULL) {
             Item* item = GET_ITEM(item_gobj);
             if (item->xAC4_ignoreItemID == arg_item->xAC4_ignoreItemID) {
@@ -179,27 +181,30 @@ void it_8026FCF8(Item* arg_item, HitCapsule* arg_hit)
     HSD_GObj* item_gobj;
     HitCapsule* hit;
     bool chk;
-    u32 index;
     Item* item;
-    PAD_STACK(4);
+    PAD_STACK(8);
 
-#if 0
     if (arg_item->xAC4_ignoreItemID != 0U) {
         item_gobj = HSD_GObj_Entities->items;
         while (item_gobj != NULL) {
             item = GET_ITEM(item_gobj);
             if (item->xAC4_ignoreItemID == arg_item->xAC4_ignoreItemID) {
-                index = 0U;
+                u32 i;
+
                 chk = false;
-                while (!chk && index < 4U) {
-                    hit = &item->x5D4_hitboxes[index].hit;
-                    if ((hit != arg_hit) && (hit->state != HitCapsule_Disabled) && (hit->x4 == arg_hit->x4)) {
+                for (i = 0; i < ARRAY_SIZE(item->x5D4_hitboxes); i++) {
+                    hit = &item->x5D4_hitboxes[i].hit;
+                    if ((hit != arg_hit) &&
+                        (hit->state != HitCapsule_Disabled) &&
+                        (hit->x4 == arg_hit->x4))
+                    {
                         lbColl_CopyHitCapsule(hit, arg_hit);
                         chk = true;
-                        return;
+                        break;
                     }
-                    index++;
+                    chk = false;
                 }
+
                 if (chk) {
                     return;
                 }
@@ -208,86 +213,6 @@ void it_8026FCF8(Item* arg_item, HitCapsule* arg_hit)
         }
     }
     lbColl_80008440(arg_hit);
-    return;
-#elif 0
-    if (arg_item->xAC4_ignoreItemID != 0U) {
-        item_gobj = HSD_GObj_Entities->items;
-        while (item_gobj != NULL) {
-            item = GET_ITEM(item_gobj);
-            if (item->xAC4_ignoreItemID == arg_item->xAC4_ignoreItemID) {
-                chk = false;
-                for (index = 0U; index < 4U; index++) {
-                    hit = &item->x5D4_hitboxes[index].hit;
-                    if ((hit != arg_hit) &&
-                        (hit->state != HitCapsule_Disabled) &&
-                        (hit->x4 == arg_hit->x4))
-                    {
-                        lbColl_CopyHitCapsule(hit, arg_hit);
-                        return;
-                    }
-                }
-            }
-            item_gobj = item_gobj->next;
-        }
-    }
-    lbColl_80008440(arg_hit);
-    return;
-#else
-    if (arg_item->xAC4_ignoreItemID != 0U) {
-        item_gobj = HSD_GObj_Entities->items;
-        while (item_gobj != NULL) {
-            item = GET_ITEM(item_gobj);
-            if (item->xAC4_ignoreItemID == arg_item->xAC4_ignoreItemID) {
-                index = 0U;
-                hit = &item->x5D4_hitboxes[index].hit;
-                if ((hit != arg_hit) && (hit->state != HitCapsule_Disabled) &&
-                    (hit->x4 == arg_hit->x4))
-                {
-                    lbColl_CopyHitCapsule(hit, arg_hit);
-                    chk = true;
-                } else {
-                    index++;
-                    hit = &item->x5D4_hitboxes[index].hit;
-                    if ((hit != arg_hit) &&
-                        (hit->state != HitCapsule_Disabled) &&
-                        (hit->x4 == arg_hit->x4))
-                    {
-                        lbColl_CopyHitCapsule(hit, arg_hit);
-                        chk = true;
-                    } else {
-                        index++;
-                        hit = &item->x5D4_hitboxes[index].hit;
-                        if ((hit != arg_hit) &&
-                            (hit->state != HitCapsule_Disabled) &&
-                            (hit->x4 == arg_hit->x4))
-                        {
-                            lbColl_CopyHitCapsule(hit, arg_hit);
-                            chk = true;
-                        } else {
-                            index++;
-                            hit = &item->x5D4_hitboxes[index].hit;
-                            if ((hit != arg_hit) &&
-                                (hit->state != HitCapsule_Disabled) &&
-                                (hit->x4 == arg_hit->x4))
-                            {
-                                lbColl_CopyHitCapsule(hit, arg_hit);
-                                chk = true;
-                            } else {
-                                chk = false;
-                            }
-                        }
-                    }
-                }
-                if (chk) {
-                    return;
-                }
-            }
-            item_gobj = item_gobj->next;
-        }
-    }
-    lbColl_80008440(arg_hit);
-    return;
-#endif
 }
 
 void it_8026FE68(Item* arg_item0, HitCapsule* hit1, Item* arg_item2,
@@ -1341,12 +1266,12 @@ void it_80271830(Item* item, f32 arg_angle)
     sp20.z = 1.0f;
     while (angle < 0.0f) {
         // angle = (f32) ((f64) angle + 6.283185307179586);
-        angle += 2 * M_PI;
+        angle += M_TAU;
     }
     // while (angle > (f32) 6.283185307179586) {
-    while (angle > (2 * M_PI)) {
+    while (angle > (M_TAU)) {
         // angle = (f32) ((f64) angle - 6.283185307179586);
-        angle -= 2 * M_PI;
+        angle -= M_TAU;
     }
     sp68.y = item->xBEC.top;
     sp68.z = 0.0f;
@@ -1428,11 +1353,12 @@ void it_80271A58(Item_GObj* item_gobj)
     Item* item;
     HSD_JObj* jobj;
 
-    item = item_gobj->user_data;
+    item = GET_ITEM(item_gobj);
     item->xBEC = item->xBDC;
     if ((item->facing_dir == 1.0f) && (item->xDC8_word.flags.x19 == 1)) {
-        item->xBEC.left = -item->xBEC.left;
-        item->xBEC.right = -item->xBEC.right;
+        f32 temp = -item->xBEC.right;
+        item->xBEC.right = -item->xBEC.left;
+        item->xBEC.left = temp;
     }
     jobj = it_802746F8(item_gobj);
     if (item->xDC8_word.flags.x17 == 0) {

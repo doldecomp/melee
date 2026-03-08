@@ -16,16 +16,14 @@
 #include "ft/ftparts.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
-#include "ftCommon/ftCo_Attack100.h"
-#include "ftCommon/ftCo_CaptureCut.h"
 #include "ftCommon/ftCo_CaptureYoshi.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_Throw.h"
 #include "ftCommon/ftCo_YoshiEgg.h"
 #include "ftYoshi/ftYs_Init.h"
 #include "ftYoshi/types.h"
-#include "it/items/it_27CF.h"
-#include "it/items/it_2F2B.h"
+#include "it/items/ityoshiegglay.h"
+#include "it/items/ityoshitongue.h"
 #include "lb/lb_00B0.h"
 
 #include <dolphin/mtx.h>

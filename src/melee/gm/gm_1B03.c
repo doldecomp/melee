@@ -81,7 +81,7 @@ static UNK_T gm_804D6898[0x4 / 4];
 static UNK_T gm_804D689C[0x8 / 4];
 static UNK_T gm_804D68A4[0x8 / 4];
 
-// file boundary?
+/// file boundary?
 static UNK_T gm_804D68A4_pad[0x4 / 4];
 
 MinorScene gm_803DD6D0_MinorScenes[] = {
@@ -1431,7 +1431,7 @@ void gm_801B18D4(MinorScene* arg0)
         smd->players[i] = gm_804876D8.players[i];
     }
 
-    /// TODO :: figure out how to call this not inlined
+    /// @todo :: figure out how to call this not inlined
     gm_801B0474(smd, &gm_80487810.match_end);
 }
 #pragma dont_inline reset

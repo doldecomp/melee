@@ -7,6 +7,8 @@
 #include "it/itCommonItems.h"
 #include "it/item.h"
 
+/* 2EC870 */ static void it_802EC870(Item_GObj*, int);
+
 /// #it_802EB5C8
 
 bool itTincle_Logic13_DmgReceived(Item_GObj* gobj)
@@ -78,6 +80,15 @@ bool itTincle_UnkMotion2_Anim(Item_GObj* gobj)
     return false;
 }
 
+bool itTincle_UnkMotion2_Coll(Item_GObj* gobj)
+{
+    PAD_STACK(8);
+    if (it_8026DAA8(gobj) != 0) {
+        it_802EC870(gobj, 1);
+    }
+    return false;
+}
+
 /// #itTincle_UnkMotion2_Phys
 
 /// #itTincle_UnkMotion2_Coll
@@ -119,7 +130,21 @@ bool itTincle_UnkMotion5_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itTincle_UnkMotion5_Phys
+void itTincle_UnkMotion5_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->x40_vel.y <= 0.0f) {
+        ip->x40_vel.z = 0.0f;
+        ip->x40_vel.y = 0.0f;
+        ip->x40_vel.x = 0.0f;
+        ip->xDD4_itemVar.tincle.x38 = 0.0f;
+        ip->xDD4_itemVar.tincle.x2C = 0;
+        ip->xDD4_itemVar.tincle.x20 = 0;
+        it_802EBA00(gobj);
+    } else {
+        ip->x40_vel.y += ip->xDD4_itemVar.tincle.x38;
+    }
+}
 
 bool itTincle_UnkMotion5_Coll(Item_GObj* gobj)
 {
@@ -127,9 +152,31 @@ bool itTincle_UnkMotion5_Coll(Item_GObj* gobj)
     return false;
 }
 
-/// #it_802EC18C
+void it_802EC18C(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    PAD_STACK(8);
+    ip->x40_vel.z = 0.0f;
+    ip->x40_vel.y = 0.0f;
+    ip->x40_vel.x = 0.0f;
+    it_802756D0(gobj);
+    ip->xDD4_itemVar.tincle.x20 = 3;
+    Item_80268E5C(gobj, 6, 0x12);
+    it_802EC9E8(gobj);
+}
 
-/// #it_802EC1F4
+void it_802EC1F4(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    PAD_STACK(8);
+    ip->x40_vel.z = 0.0f;
+    ip->x40_vel.y = 0.0f;
+    ip->x40_vel.x = 0.0f;
+    it_802756D0(gobj);
+    ip->xDD4_itemVar.tincle.x20 = 0;
+    Item_80268E5C(gobj, 7, 0x12);
+    it_802EC9E8(gobj);
+}
 
 /// #itTincle_UnkMotion7_Anim
 
@@ -185,6 +232,22 @@ bool itTincle_UnkMotion9_Coll(Item_GObj* gobj)
 
 /// #itTincle_UnkMotion10_Anim
 
+bool itTincle_UnkMotion10_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    PAD_STACK(8);
+
+    if (it_80272C6C(gobj) == 0) {
+        ip->xDD4_itemVar.tincle.x20--;
+        if (ip->xDD4_itemVar.tincle.x20 != 0) {
+            Item_80268E5C(gobj, 10, 2);
+        } else {
+            it_802EC604(gobj);
+        }
+    }
+    return false;
+}
+
 void itTincle_UnkMotion10_Phys(Item_GObj* gobj) {}
 
 bool itTincle_UnkMotion10_Coll(Item_GObj* gobj)
@@ -222,7 +285,21 @@ bool itTincle_UnkMotion12_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itTincle_UnkMotion12_Phys
+void itTincle_UnkMotion12_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->x40_vel.y <= 0.0f) {
+        ip->x40_vel.z = 0.0f;
+        ip->x40_vel.y = 0.0f;
+        ip->x40_vel.x = 0.0f;
+        ip->xDD4_itemVar.tincle.x38 = 0.0f;
+        ip->xDD4_itemVar.tincle.x2C = 0;
+        ip->xDD4_itemVar.tincle.x20 = 0;
+        it_802EBA00(gobj);
+    } else {
+        ip->x40_vel.y += ip->xDD4_itemVar.tincle.x38;
+    }
+}
 
 bool itTincle_UnkMotion12_Coll(Item_GObj* gobj)
 {

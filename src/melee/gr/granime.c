@@ -2,6 +2,7 @@
 
 #include <platform.h>
 
+#include "gr/grdatfiles.h"
 #include "gr/grmaterial.h"
 #include "gr/ground.h"
 #include "gr/inlines.h"
@@ -46,7 +47,7 @@
 /* 1C7228 */ static void grAnime_801C7228(HSD_JObj* obj, int flags, void* func,
                                           u32 type, void* param, int arg5);
 ///* 1C7B24 */ static void grAnime_801C7B24(HSD_GObj* gobj, int arg1, u32 arg2,
-//                                          f32 arg8);
+///                                          f32 arg8);
 /* 1C7BA0 */ static void grAnime_801C7BA0(HSD_GObj* gobj, int arg1, u32 arg2,
                                           f32 arg8);
 /* 1C82E8 */ static void fn_801C82E8(int arg0, int* arg1);
@@ -762,6 +763,35 @@ HSD_AObj* grAnime_801C8318(HSD_GObj* gobj, int arg1, u32 arg2)
 
 /// #grAnime_801C8578
 
-/// #grAnime_801C86D4
+void grAnime_801C86D4(s32 arg0, HSD_GObj* arg1, s32 arg2)
+{
+    struct {
+        s32 x0;
+        s32 x4;
+        s32 x8;
+        s32 xC;
+        s32 x10;
+    } sp;
+    HSD_Joint* joint;
+    UnkArchiveStruct* archive;
 
-/// #grAnime_801C8780
+    Ground_801C3FA4(arg1, arg2);
+    archive = grDatFiles_801C6330(arg0);
+    if (archive == NULL) {
+        __assert("granime.c", 0x602, "archive");
+    }
+    sp.x0 = arg2;
+    joint = (HSD_Joint*) grAnime_801C8578(archive->unk4->unk8[arg0].unk0, &sp);
+    HSD_JObjResetRST(Ground_801C3FA4(arg1, arg2), joint);
+}
+
+void grAnime_801C8780(HSD_GObj* gobj, u32 arg1, u32 arg2, f32 arg3, f32 arg4)
+{
+    UnkArchiveStruct* archive;
+
+    Ground_801C498C();
+    archive = grDatFiles_801C6330(arg1);
+    if (archive == NULL) {
+        __assert("granime.c", 0x617, "0");
+    }
+}

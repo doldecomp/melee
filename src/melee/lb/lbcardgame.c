@@ -38,7 +38,7 @@ static struct {
         UNK_T x8;
     } unk_arr[8];
 } lb_803BAB74 = {
-    0, // TODO
+    0, ///< @todo
 };
 
 void lb_8001C600(void)

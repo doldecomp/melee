@@ -8,7 +8,7 @@
 
 #include <platform.h>
 
-// __ln_F[n] = ln(1.0 + n/128) for n = 0 .. 128
+/// __ln_F[n] = ln(1.0 + n/128) for n = 0 .. 128
 const float __ln_F[0x81] = {
     0.0f,         0.0077821403f, 0.015504186f, 0.023167059f, 0.030771658f,
     0.038318865f, 0.045809537f,  0.053244516f, 0.06062462f,  0.06795066f,
@@ -38,7 +38,7 @@ const float __ln_F[0x81] = {
     0.68135923f,  0.685304f,     0.6892333f,   0.6931472f,
 };
 
-// __one_over_F[n] = 1.0 / (1.0 + n/128) for n = 0..128
+/// __one_over_F[n] = 1.0 / (1.0 + n/128) for n = 0..128
 const float __one_over_F[0x81] = {
     1.0f,        0.99224806f, 0.9846154f,  0.97709924f, 0.969697f,
     0.96240604f, 0.95522386f, 0.94814813f, 0.9411765f,  0.93430656f,
@@ -77,7 +77,7 @@ const float __sincos_poly[] = {
     0.7853982,
 };
 
-// logf Taylor series coefficients - stored as u32 bit patterns
-// so they can be loaded with lwz and then reinterpreted as floats
+/// logf Taylor series coefficients - stored as u32 bit patterns
+/// so they can be loaded with lwz and then reinterpreted as floats
 const u32 __logf_C0_bits = 0xBF000030; // -0.500003F
 const u32 __logf_C1_bits = 0x3EAA9F44; // 0.333329856F

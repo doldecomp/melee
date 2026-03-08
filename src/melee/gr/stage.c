@@ -99,7 +99,7 @@ f32 Stage_GetBlastZoneLeftOffset(void)
     return stage_info.blast_zone.left + stage_info.cam_info.cam_x_offset;
 }
 
-// named stGetPlyDeadUp according to an assert in ftcamera.c
+/// named stGetPlyDeadUp according to an assert in ftcamera.c
 f32 Stage_GetBlastZoneTopOffset(void)
 {
     return stage_info.blast_zone.top + stage_info.cam_info.cam_y_offset;

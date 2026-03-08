@@ -5,10 +5,13 @@
 
 #include "it/inlines.h"
 #include "it/it_266F.h"
+#include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/itCommonItems.h"
 #include "it/item.h"
 #include "it/items/itwhitebea.h"
+#include "lb/lblanguage.h"
+#include "mp/mpcoll.h"
 
 /// #it_802E2470
 
@@ -81,9 +84,35 @@ bool itOldottosea_UnkMotion4_Coll(Item_GObj* gobj)
     return it_802E35CC(gobj);
 }
 
-/// #it_802E2C80
+void it_802E2C80(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
 
-/// #itOldottosea_UnkMotion5_Anim
+    it_802762BC(ip);
+
+    if (it_8027B798(gobj, &ip->x40_vel) != 0) {
+        it_802762BC(ip);
+    } else {
+        it_802762B0(ip);
+    }
+
+    ip->facing_dir = ip->init_facing_dir;
+    Item_80268E5C(gobj, 5, 2);
+}
+
+bool itOldottosea_UnkMotion5_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+
+    if (!it_80272C6C(gobj)) {
+        if (ip->ground_or_air == GA_Air) {
+            Item_80268E5C(gobj, 5, 2);
+        } else {
+            it_802E2DF4(gobj);
+        }
+    }
+    return false;
+}
 
 void itOldottosea_UnkMotion5_Phys(Item_GObj* gobj)
 {
@@ -108,7 +137,7 @@ void it_802E2DF4(Item_GObj* gobj)
 {
     Item* ip = gobj->user_data;
     if (ip->xCCC_incDamageDirection == ip->facing_dir) {
-        it_802E3098();
+        it_802E3098(gobj);
         return;
     }
     it_802E27B4(gobj);
@@ -122,9 +151,47 @@ void it_802E2DF4(Item_GObj* gobj)
 
 /// #itOldottosea_UnkMotion7_Coll
 
-/// #it_802E3098
+void it_802E3098(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    s32 val;
 
-/// #itOldottosea_UnkMotion3_Anim
+    ip->x40_vel.z = 0.0f;
+    ip->x40_vel.y = 0.0f;
+    ip->x40_vel.x = 0.0f;
+
+    if (lbLang_IsSettingJP()) {
+        val = 0x37;
+    } else {
+        val = 0x28;
+    }
+    ip->xDD4_itemVar.oldottosea.x28 = val;
+
+    Item_80268E5C(gobj, 3, 2);
+    it_8026BDB4(gobj);
+}
+
+bool itOldottosea_UnkMotion3_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->xDD4_itemVar.oldottosea.x28 == 0) {
+        int int_dir;
+        ip->facing_dir = -ip->facing_dir;
+        if (-1.0f == ip->facing_dir) {
+            int_dir = -1;
+        } else {
+            int_dir = 1;
+        }
+        mpCollSetFacingDir(&ip->x378_itemColl, int_dir);
+    }
+    ip->xDD4_itemVar.oldottosea.x28--;
+    if (!it_80272C6C(gobj)) {
+        ip->xDD4_itemVar.oldottosea.x28 = 0;
+        it_8026BD9C(gobj);
+        it_802E27B4(gobj);
+    }
+    return false;
+}
 
 void itOldottosea_UnkMotion3_Phys(Item_GObj* gobj) {}
 

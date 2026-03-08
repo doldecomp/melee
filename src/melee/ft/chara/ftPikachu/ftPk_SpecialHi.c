@@ -33,7 +33,7 @@
 /// @todo Move elsewhere.
 #define MAX_STICK_MAG 0.999f
 
-// points velocity toward facing direction
+/// points velocity toward facing direction
 void ftPk_SpecialHi_UpdateVel(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -481,7 +481,7 @@ static inline float get_max_and_fill_stack(void)
     return MAX_STICK_MAG;
 }
 
-// grounded up b zip
+/// grounded up b zip
 void ftPk_SpecialHi_80126C0C(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -550,7 +550,7 @@ void ftPk_SpecialHi_80126C0C(HSD_GObj* gobj)
     ftPk_SpecialHi_80126E1C(gobj);
 }
 
-// aerial up b zip
+/// aerial up b zip
 void ftPk_SpecialHi_80126E1C(HSD_GObj* gobj)
 {
     float temp_f2_2;
@@ -640,7 +640,7 @@ static inline bool return_and_fill_stack(void)
     return 0;
 }
 
-// seems to check whether to perform a second up b zip
+/// seems to check whether to perform a second up b zip
 bool ftPk_SpecialHi_80127064(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;

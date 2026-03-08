@@ -26,7 +26,7 @@
 #include <MSL/stdio.h>
 #include <MSL/string.h>
 
-// .bss
+/// .bss
 /* 4A1F10 */ static struct un_804A1F10_t {
     DynamicModelDesc** x0;
     HSD_GObj* x4[4];
@@ -39,10 +39,10 @@
     unsigned char x32;
 } un_804A1F10;
 
-// .sdata2
+/// .sdata2
 /* 4DDBA8 */ static char un_804DDBA8[4] = { 0, 1, 2, 3 };
 
-// .sbss
+/// .sbss
 /* 4D6D90 */ static int un_804D6D90;
 
 void un_802FD910(void)
@@ -92,6 +92,8 @@ void un_802FD9D8(unsigned char slot)
         if (un_804A1F10.x2C[i] == slot) {
             un_804A1F10.x24[slot] = 0;
             un_804A1F10.x28[i] = 0;
+            i++;
+            i--;
         }
     }
 }

@@ -1195,7 +1195,7 @@ melee/ft/chara/ftKirby/ftKb_SpecialNPk.c:
 	.text       start:0x800FA064 end:0x800FDC70
 	.sdata2     start:0x804D93E4 end:0x804D944C
 
-melee/ft/chara/ftKirby/ftKb_SpecialNFx.c:
+melee/ft/chara/ftKirby/ftkirbyspecialfox.c:
 	.text       start:0x800FDC70 end:0x800FEDD0
 	.sdata2     start:0x804D944C end:0x804D9474
 
@@ -1823,10 +1823,10 @@ melee/gm/gmmain.c:
 
 melee/gm/gm_1601.c:
 	.text       start:0x801601C4 end:0x8016AE38
-	.rodata     start:0x803B75F8 end:0x803B7A60
+	.rodata     start:0x803B75F8 end:0x803B7A44
 	.data       start:0x803D4C38 end:0x803D5620
 	.bss        start:0x8046B378 end:0x8046B6A0
-	.sdata      start:0x804D3EF8 end:0x804D3F68
+	.sdata      start:0x804D3EF8 end:0x804D3F67
 	.sbss       start:0x804D6598 end:0x804D65A0
 	.sdata2     start:0x804DA230 end:0x804DA298
 
@@ -1838,7 +1838,7 @@ melee/gm/gm_16AE.c:
 
 melee/gm/gm_16F1.c:
 	.text       start:0x8016F180 end:0x80174274
-	.rodata     start:0x803B7A60 end:0x803B7B18
+	.rodata     start:0x803B7A44 end:0x803B7B18
 	.data       start:0x803D5648 end:0x803D6488
 	.bss        start:0x8046DBC8 end:0x8046DBE8
 	.sbss       start:0x804D65A0 end:0x804D65B8
@@ -1874,7 +1874,7 @@ melee/gm/gmregcommon.c:
 	.data       start:0x803D79F0 end:0x803D7A50
 	.sdata      start:0x804D4050 end:0x804D4058
 
-melee/gm/gm_17C0.c:
+melee/gm/gmregclear.c:
 	.text       start:0x8017C0C8 end:0x8018325C
 	.rodata     start:0x803B7C08 end:0x803B7C28
 	.data       start:0x803D7A50 end:0x803D9248
@@ -3309,8 +3309,8 @@ melee/it/items/itseakneedlethrown.c:
 melee/it/items/itseakneedleheld.c:
 	.text       start:0x802B18B0 end:0x802B1C60
 	.data       start:0x803F70A8 end:0x803F70B8
-	.sdata      start:0x804D5468 end:0x804D5478
-	.sdata2     start:0x804DCF88 end:0x804DCF90
+	.sdata      start:0x804D5468 end:0x804D5475
+	.sdata2     start:0x804DCF88 end:0x804DCF8C
 
 melee/it/items/itseakvanish.c:
 	.text       start:0x802B1C60 end:0x802B1DEC
@@ -3538,12 +3538,8 @@ melee/it/items/ittosakinto.c:
 	.sdata2     start:0x804DD318 end:0x804DD330
 
 melee/it/items/itchicorita.c:
-	.text       start:0x802C9588 end:0x802C9B20
-	.data       start:0x803F7A98 end:0x803F7AC8
-
-melee/it/items/itchicoritaleaf.c:
-	.text       start:0x802C9B20 end:0x802C9D40
-	.data       start:0x803F7AC8 end:0x803F7AD8
+	.text       start:0x802C9588 end:0x802C9D40
+	.data       start:0x803F7A98 end:0x803F7AD8
 	.sdata2     start:0x804DD330 end:0x804DD338
 
 melee/it/items/itkabigon.c:
@@ -3867,7 +3863,7 @@ melee/it/items/it_2F28.c:
 	.data       start:0x803F9470 end:0x803F9480
 	.sdata2     start:0x804DD9E8 end:0x804DDA08
 
-melee/it/items/it_2F2B.c:
+melee/it/items/ityoshitongue.c:
 	.text       start:0x802F2BFC end:0x802F2D98
 	.data       start:0x803F9480 end:0x803F9490
 	.sdata2     start:0x804DDA08 end:0x804DDA10
@@ -3877,7 +3873,7 @@ melee/it/items/itkirbyyoshispecialn.c:
 	.data       start:0x803F9490 end:0x803F94A0
 	.sdata2     start:0x804DDA10 end:0x804DDA18
 
-melee/it/items/it_27CF.c:
+melee/it/items/ityoshiegglay.c:
 	.text       start:0x802F2F34 end:0x802F3394
 	.data       start:0x803F94A0 end:0x803F94D0
 	.sdata2     start:0x804DDA18 end:0x804DDA30

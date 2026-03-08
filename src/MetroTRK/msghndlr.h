@@ -9,7 +9,7 @@
 
 typedef struct msgbuf_t {
     /* 0x00 */ u32 msgLength;
-    //! TODO: fix enum size shenanigans
+    /// @todo fix enum size shenanigans
     /* 0x04 */ union {
         u8 commandId;
         MessageCommandID commandIdInt;

@@ -25,9 +25,9 @@
 #include <melee/lb/types.h>
 #include <melee/mn/mnmain.h>
 
-// Random stage selection
-// Returns an internal stage ID - 2 (since first 2 internal stage IDs are
-// invalid)
+/// Random stage selection
+/// Returns an internal stage ID - 2 (since first 2 internal stage IDs are
+/// invalid)
 int mnStageSel_802599EC(void)
 {
     int var_r0;
@@ -37,7 +37,7 @@ int mnStageSel_802599EC(void)
 
     for (i = 0; i < NUM_STAGES; i++) {
         if (mnStageSel_803F06D0[i].x4 >= 0 &&
-            gm_80164330(mnStageSel_803F06D0[i].xA))
+            (u8) gm_80164330(mnStageSel_803F06D0[i].xA))
         {
             break;
         }
@@ -55,7 +55,7 @@ int mnStageSel_802599EC(void)
         }
         for (i = 0; i < NUM_STAGES; i++) {
             if (mnStageSel_803F06D0[i].x4 == 0 &&
-                gm_80164330(mnStageSel_803F06D0[i].xA))
+                (u8) gm_80164330(mnStageSel_803F06D0[i].xA))
             {
                 var_r29 = false;
             }
@@ -65,7 +65,7 @@ int mnStageSel_802599EC(void)
         int tmp = HSD_Randi(NUM_STAGES);
         i = tmp;
         if (mnStageSel_803F06D0[i].x4 == 0) {
-            if (gm_80164330(mnStageSel_803F06D0[i].xA)) {
+            if ((u8) gm_80164330(mnStageSel_803F06D0[i].xA)) {
                 break;
             }
         }
@@ -355,7 +355,7 @@ void fn_8025A974(HSD_GObj* gobj, int unused)
     HSD_FogSet(gobj->hsd_obj);
 }
 
-// OnLoad
+/// OnLoad
 /// #mnStageSel_8025A998_OnEnter
 
 extern HSD_CObjDesc* MenMain_cam;
@@ -743,7 +743,7 @@ static inline HSD_PadStatus* get_pad(u8 i)
     return &HSD_PadCopyStatus[i];
 }
 
-// OnFrame
+/// OnFrame
 void mnStageSel_8025B850_OnFrame(void)
 {
     if (mnStageSel_804D6C90->force_stage_id >= 0) {

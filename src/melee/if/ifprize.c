@@ -31,7 +31,7 @@
 #include <MSL/stdio.h>
 #include <MSL/string.h>
 
-// .data
+/// .data
 /* 3F9A00 */ static int un_803F9A00[] = {
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1,
     1, 1, 1, 3, 2, 2, 5, 5, 4, 6, 6, 8, 8, 8, 8, 8, 8, 8, 8,
@@ -78,11 +78,11 @@ struct un_803F9D48 {
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, { 0 }, 0, 0, 0x43, 0x44, 0x45,
 };
 
-// .sbss
+/// .sbss
 /* 4D6D98 */ static HSD_Archive* un_804D6D98;
 /* 4D6D9C */ static SceneDesc* un_804D6D9C;
 
-// un_802FEBE0_OnEnter will try to inline this otherwise
+/// un_802FEBE0_OnEnter will try to inline this otherwise
 #pragma push
 #pragma dont_inline on
 void un_802FE3F8(int a, int b, short* c, short* d)
@@ -161,10 +161,15 @@ void un_802FE6A8(void)
 
 void un_802FE8CC(void)
 {
-    if (un_803F9D48.x0a && un_803F9D48.x0b) {
-        un_803F9D48.x1 = 2;
-        HSD_SisLib_803A5F50(2);
+    if (un_803F9D48.x0a) {
+        if (un_803F9D48.x0b) {
+            goto execute;
+        }
     }
+    return;
+execute:
+    un_803F9D48.x1 = 2;
+    HSD_SisLib_803A5F50(2);
 }
 
 void un_802FE918(int a, int b, int c)

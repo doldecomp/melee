@@ -43,8 +43,7 @@
                                          FighterKind victim_kind);
 /* 0EEF04 */ void ftKb_UnkMtxFunc0(Fighter_GObj* gobj, int, Mtx);
 /* 0EF028 */ HSD_JObj* ftKb_Init_UnkMotionStates6(Fighter_GObj* gobj);
-/* 0EF040 */ UNK_RET ftKb_SpecialN_800EF040(Fighter_GObj*, int,
-                                            KirbyHatStruct*);
+/* 0EF040 */ void ftKb_SpecialN_800EF040(Fighter_GObj*, int, KirbyHatStruct*);
 /* 0EF0E4 */ UNK_RET ftKb_SpecialN_800EF0E4(Fighter_GObj*, int, u8*);
 /* 0EF35C */ UNK_RET ftKb_SpecialN_800EF35C(Fighter_GObj*, int, u8*);
 /* 0EF438 */ UNK_RET ftKb_SpecialN_800EF438(Fighter_GObj*, KirbyHatStruct*);
@@ -508,14 +507,14 @@
 /* 0FDB78 */ void ftKb_SsSpecialAirN_Coll(Fighter_GObj* gobj);
 /* 0FDC00 */ void ftKb_SpecialNFx_800FDC00(Fighter_GObj* gobj, Vec3* vec);
 /* 0FDC70 */ void ftKb_SpecialNFx_800FDC70(Fighter_GObj* gobj, Vec3* vec);
-/* 0FDCE0 */ void fn_800FDCE0(Fighter_GObj* gobj);
+/* 0FDCE0 */ void ftKb_SpecialNFx_OnChangeAction(Fighter_GObj* gobj);
 /* 0FDD14 */ bool ftKb_SpecialNFx_800FDD14(Fighter_GObj* gobj);
 /* 0FDD4C */ ftFx_SpecialNIndex ftKb_SpecialNFx_800FDD4C(Fighter_GObj* gobj);
 /* 0FDDF4 */ bool ftKb_SpecialNFx_800FDDF4(Fighter_GObj* gobj);
 /* 0FDEB4 */ void ftKb_SpecialNFx_800FDEB4(Fighter_GObj* gobj);
 /* 0FDEE0 */ void ftKb_SpecialNFx_800FDEE0(Fighter_GObj* gobj);
 /* 0FDF30 */ void ftKb_SpecialNFx_800FDF30(Fighter_GObj* gobj);
-/* 0FE0E0 */ void fn_800FE0E0(Fighter_GObj* gobj);
+/* 0FE0E0 */ void ftKb_SpecialNFx_CreateBlasterShot(Fighter_GObj* gobj);
 /* 0FE100 */ void ftKb_SpecialNFx_800FE100(Fighter_GObj* gobj);
 /* 0FE240 */ void ftKb_SpecialNFx_800FE240(Fighter_GObj* gobj);
 /* 0FE360 */ void ftKb_FxSpecialNStart_Anim(Fighter_GObj* gobj);

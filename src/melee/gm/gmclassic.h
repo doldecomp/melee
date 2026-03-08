@@ -4,6 +4,7 @@
 #include <placeholder.h>
 
 #include <melee/gm/forward.h>
+
 #include <melee/gm/types.h>
 
 /* 1B2BA4 */ UNK_RET gmClassic_801B2BA4(UNK_PARAMS);

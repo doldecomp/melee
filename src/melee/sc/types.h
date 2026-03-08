@@ -22,7 +22,7 @@ struct DynamicModelDesc {
     HSD_ShapeAnimJoint** shapeanims;
 };
 
-// The basis of a rendered scene, like a stage, menu, or HUD overlay
+/// The basis of a rendered scene, like a stage, menu, or HUD overlay
 struct SceneDesc {
     DynamicModelDesc** models;
     struct {

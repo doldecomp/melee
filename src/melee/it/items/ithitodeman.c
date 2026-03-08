@@ -5,6 +5,7 @@
 
 #include "ef/eflib.h"
 #include "ef/efsync.h"
+#include "ft/ftlib.h"
 
 #include "it/forward.h"
 
@@ -12,6 +13,21 @@
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
+
+#include <baselib/random.h>
+
+typedef struct {
+    UNK_T x0;
+    float x4;
+    float x8;
+    float xC;
+    float x10;
+    char pad_0[0x40 - 0x14];
+    s32 x40;
+    s32 x44;
+    u8 _pad2[0x4];
+    f32 x4C;
+} itHitodemanAttributes;
 
 /// #it_2725_Logic24_Spawned
 
@@ -21,15 +37,49 @@ void it_802D43B0(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     Item* ip = GET_ITEM(gobj);
     it_8026B894(gobj, ref_gobj);
-    ip->xDD4_itemVar.hitodeman.xE64 = NULL;
+    ip->xDD4_itemVar.hitodeman.x90 = NULL;
     ip->xDAC_itcmd_var0 = 1;
 }
 
-/// #it_802D43EC
+void it_802D43EC(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itHitodemanAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    HSD_GObj* owner_gobj;
+    f32 randf;
+    f32 diff;
+
+    owner_gobj = ftLib_80086198(ip->owner);
+    if (owner_gobj != NULL) {
+        ip->xDD4_itemVar.hitodeman.x90 = owner_gobj;
+    } else {
+        ip->xDD4_itemVar.hitodeman.x90 = ip->owner;
+    }
+
+    randf = HSD_Randf();
+    diff = attrs->x8;
+    diff = attrs->x4 - diff;
+    ip->xDD4_itemVar.hitodeman.x60 = diff * randf + attrs->x8;
+
+    randf = HSD_Randf();
+    diff = attrs->xC - attrs->x10;
+    ip->xDD4_itemVar.hitodeman.x64 = diff * randf + attrs->x10;
+
+    if (HSD_Randi(2) != 0) {
+        ip->xDD4_itemVar.hitodeman.x60 *= -1.0f;
+    }
+}
 
 /// #it_802D4494
 
-/// #it_802D4510
+void it_802D4510(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itHitodemanAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    PAD_STACK(8);
+    ip->xDD4_itemVar.hitodeman.x88 =
+        attrs->x44 + HSD_Randi(attrs->x40 - attrs->x44);
+}
 
 /// #it_802D4564
 
@@ -54,11 +104,6 @@ void it_802D4990(Item_GObj* gobj)
 }
 
 /// #itHitodeman_UnkMotion1_Anim
-
-typedef struct {
-    u8 _pad[0x4C];
-    f32 x4C;
-} itHitodemanAttributes;
 
 void itHitodeman_UnkMotion1_Phys(Item_GObj* gobj)
 {

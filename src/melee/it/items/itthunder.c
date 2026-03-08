@@ -94,7 +94,7 @@ void it_802CCC68(HSD_GObj* gobj)
     Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
     item->entered_hitlag = efLib_PauseAll;
     item->exited_hitlag = efLib_ResumeAll;
-    item->xDD4_itemVar.thunder.x68 = it_804DD3A8;
+    item->xDD4_itemVar.thunder.x68 = 0.0f;
     item->xDB0_itcmd_var1 = 0;
 }
 
@@ -108,28 +108,10 @@ static void itThunder_UnkMotion2_Anim_inline2(Item_GObj* gobj)
     item->xDB0_itcmd_var1 = 0;
 }
 
-static HSD_JObj* itThunder_UnkMotion2_Anim_inline(Item_GObj* gobj)
-{
-    HSD_JObj* jobj = GET_JOBJ(gobj);
-    HSD_JObj* child;
-
-    if (!jobj) {
-        child = NULL;
-    } else {
-        child = jobj->child;
-    }
-    if (!child) {
-        child = NULL;
-    } else {
-        child = child->child;
-    }
-    return child;
-}
-
 bool itThunder_UnkMotion2_Anim(Item_GObj* gobj)
 {
     Item* item = GET_ITEM(gobj);
-    it_8027A160(itThunder_UnkMotion2_Anim_inline(gobj), item);
+    it_8027A160(itGetJObjGrandchild(gobj), item);
     if (!it_80272C6C(gobj)) {
         itThunder_UnkMotion2_Anim_inline2(gobj);
     }

@@ -2,13 +2,7 @@
 #define __GALE01_1CA394
 
 #include <platform.h>
-
-struct ZakoElement {
-    /* +0 */ s16 x0;
-    /* +2 */ s16 x2;
-    /* +4 */ HSD_GObj* x4;
-    /* +8 */ s32 x8;
-};
+#include "baselib/forward.h"
 
 struct ZakoConfig {
     /* +0 */ void* x0;
@@ -20,8 +14,19 @@ struct ZakoConfig {
     /* +18 */ s32 x18;
 };
 
+struct grZakoGenerator_Entry {
+    /* +0x0 */ s16 x0;
+    /* +0x2 */ s16 x2;
+    /* +0x4 */ HSD_GObj* x4;
+    /* +0x8 */ s32 x8;
+};
+
 struct grZakoGenerator_Data {
-    /* +0x000 */ struct ZakoElement elements[81];
+    /* +0x000 */ struct grZakoGenerator_Entry entries[80];
+    /* +0x3C0 */ s16 x3C0;
+    /* +0x3C2 */ s16 x3C2;
+    /* +0x3C4 */ HSD_GObj* x3C4;
+    /* +0x3C8 */ s32 x3C8;
 };
 
 struct lbl_8049F030_t {

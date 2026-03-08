@@ -1,4 +1,4 @@
-#include "gm_17C0.h"
+#include "gmregclear.h"
 
 #include "gm_unsplit.h"
 #include "platform.h"
@@ -22,6 +22,7 @@
 #include <melee/gr/ground.h>
 #include <melee/gr/grpushon.h>
 #include <melee/gr/stage.h>
+#include <melee/if/ifstatus.h>
 #include <melee/it/item.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lb_00F9.h>
@@ -34,11 +35,13 @@
 #include <melee/mp/mpcoll.h>
 #include <melee/pl/player.h>
 #include <melee/sc/types.h>
+#include <melee/ty/toy.h>
 
-typedef struct lbl_804706D8_t{
+typedef struct lbl_804706D8_t {
     s16 x0;
-    s16 x2;
-}lbl_804706D8_t;
+    u8 x2;
+    u8 x3;
+} lbl_804706D8_t;
 
 lbl_804706D8_t lbl_804706D8[12];
 
@@ -518,7 +521,21 @@ void gm_8017CBAC(UnkAdventureData* arg0, gmm_x0_528_t* arg1, u8 arg2)
     gm_801A42D4();
 }
 
-/// #gm_8017CD94
+u8 gm_8017CD94(UnkAdventureData* arg0, int arg1, int arg2, int arg3)
+{
+    u8 num_colors;
+    u8 result;
+
+    num_colors = gm_80169238(arg1);
+    if (arg0->x54 != NULL) {
+        result = arg0->x54(arg2, arg0->x0.cpu_level, arg3);
+        if (num_colors != 0) {
+            return result % num_colors;
+        }
+        return 0;
+    }
+    return 0;
+}
 
 /// #gm_8017CE34
 
@@ -612,7 +629,31 @@ u8 gm_8017DB78(gm_8017DB6C_arg0_t* arg0, int index)
 
 /// #gm_8017DB88
 
-/// #fn_8017DD7C
+u8 fn_8017DD7C(PlayerInitData* arg0, Unk1PData_x24* arg1)
+{
+    s32 index = 1;
+    int i;
+    for (i = 0; i < 3; i++) {
+        if (arg1[i].ckind != CHKIND_NONE) {
+            gm_8016795C(&arg0[index]);
+            arg0[index].c_kind = arg1[i].ckind;
+            arg0[index].slot_type = 1;
+            arg0[index].stocks = 1;
+            arg0[index].team = arg0->team;
+            arg0[index].color = arg1[i].x1;
+            arg0[index].xE = arg1[i].x3;
+            arg0[index].cpu_level = arg1[i].x2;
+            arg0[index].x18 = arg1[i].x4;
+            arg0[index].x1C = arg1[i].x8;
+            arg0[index].xD_b1 = 1;
+            if (arg0[index].c_kind == CKIND_GKOOPS) {
+                arg0[index].xC_b1 = 0;
+            }
+            index++;
+        }
+    }
+    return index - 1;
+}
 
 /// #fn_8017DE54
 
@@ -702,18 +743,48 @@ bool fn_8017E160(void)
     return false;
 }
 
-void fn_8017E21C(void) {
+void fn_8017E21C(void)
+{
     int i;
     for (i = 0; i < 12; i++) {
         lbl_804706D8[i].x0 = -1;
     }
 }
 
-/// #gm_8017E280
+s8 gm_8017E280(u16 arg0, u32 arg1)
+{
+    lbl_804706D8_t* var_r7 = lbl_804706D8;
+    s32 index;
+    index = 0;
+    for (index = 0; index < 12; index++) {
+        if (arg0 == var_r7[index].x0) {
+            var_r7[index].x2 += arg1;
+            return var_r7[index].x2;
+        }
+    }
+    index = 0;
+    for (index = 0; index < 12; index++) {
+        if (var_r7[index].x0 == -1) {
+            var_r7[index].x0 = arg0;
+            var_r7[index].x2 = arg1;
+            return (u8) arg1;
+        }
+    }
+    return -1;
+}
 
 /// #fn_8017E318
 
-/// #fn_8017E3C8
+void fn_8017E3C8(void)
+{
+    int i = 0;
+    PAD_STACK(8);
+    for (i = 0; i < 12; i++) {
+        if (lbl_804706D8[i].x0 != -1) {
+            Trophy_SetUnlockState(lbl_804706D8[i].x0, lbl_804706D8[i].x2);
+        }
+    }
+}
 
 UnkAdventureData* gm_8017E424(void)
 {
@@ -725,7 +796,14 @@ u8 gm_8017E430(void)
     return lbl_80472C30.x0.slot;
 }
 
-/// #gm_8017E440
+u8 gm_8017E440(void)
+{
+    UnkAdventureData* r31 = &lbl_80472C30;
+    if (gm_801677F8(r31->x0.slot, r31->x0.x4) == false) {
+        return 4;
+    }
+    return r31->x0.slot;
+}
 
 u8 gm_8017E48C(MinorScene* scene)
 {
@@ -739,7 +817,18 @@ u8 gm_8017E48C(MinorScene* scene)
     return count;
 }
 
-/// #gm_8017E4C4
+struct gm_803DE650_t* gm_8017E4C4(u8 arg0)
+{
+    struct gm_803DE650_t* var_r4 = gm_803DE650;
+    u8 temp;
+    while (var_r4->x0 != 0xFF) {
+        if (var_r4->x0 == arg0) {
+            return var_r4;
+        }
+        var_r4++;
+    }
+    return NULL;
+}
 
 /// Get adventure stage kind for given difficulty and stage slot.
 /// The (u8) cast on difficulty is required - these functions are called
@@ -799,7 +888,14 @@ u8 gm_8017E76C(u8 difficulty, u8 stage_slot, u8 arg2)
     return lbl_803D7AC0[stage_slot + difficulty * 5].pad_6[0x10 + (arg2 * 3)];
 }
 
-/// #gm_8017E7A0
+void gm_8017E7A0(u8 arg0)
+{
+    if (arg0 == 1) {
+        Player_LoseStock(0);
+        ifStatus_802F6948(0);
+        ifStatus_802F6E3C(0);
+    }
+}
 
 bool gm_8017E7E0(void)
 {
@@ -852,14 +948,14 @@ u8 gm_8017ECA0(u8 difficulty, u8 stage_slot, u8 arg2)
 
 u8 gm_8017ECD4(u8 difficulty, u8 stage_slot, u8 arg2)
 {
-    return lbl_803D85F0[stage_slot + ((u8) difficulty * 5)].pad_14[arg2 * 3 +
-                                                                   1];
+    return lbl_803D85F0[stage_slot + ((u8) difficulty * 5)]
+        .pad_14[arg2 * 3 + 1];
 }
 
 u8 gm_8017ED08(u8 difficulty, u8 stage_slot, u8 arg2)
 {
-    return lbl_803D85F0[stage_slot + ((u8) difficulty * 5)].pad_14[arg2 * 3 +
-                                                                   2];
+    return lbl_803D85F0[stage_slot + ((u8) difficulty * 5)]
+        .pad_14[arg2 * 3 + 2];
 }
 
 f32 gm_8017ED3C(u8 difficulty, u8 stage_slot)
@@ -872,7 +968,19 @@ f32 gm_8017ED8C(u8 difficulty, u8 stage_slot)
     return lbl_803D85F0[stage_slot + difficulty * 5].scale1_pct / 100.0F;
 }
 
-/// #fn_8017EDDC
+bool fn_8017EDDC(void)
+{
+    UnkAllstarData* p;
+
+    if (gm_801A4310() == MJ_CLASSIC) {
+        p = &lbl_80472CB0;
+        if (p->x0.xC.xD == 0 && p->x0.cpu_level >= 2 && p->x0.xC.x20 < 0x5208)
+        {
+            return true;
+        }
+    }
+    return false;
+}
 
 /// #fn_8017EE40
 
@@ -948,7 +1056,15 @@ Fighter_GObj* gm_80180AF4(void)
 
 /// #gm_80180BA0
 
-/// #fn_80180C14
+void fn_80180C14(HSD_GObj* gobj)
+{
+    HSD_JObj* jobj = gobj->hsd_obj;
+
+    if ((lbl_80472E48.pad_0[0] & 3) != 0) {
+        HSD_JObjClearFlagsAll(jobj, 0x10);
+        HSD_JObjAnimAll(jobj);
+    }
+}
 
 /// #fn_80180C60
 
@@ -1001,9 +1117,63 @@ s32 gm_80181A34(void)
 
 /// #gm_80181A44
 
-/// #gm_80181AC8
+extern u8 lbl_803D8D08[];
 
-/// #gm_80181B64
+void gm_80181AC8(int c_kind, int arg1, u16 arg2)
+{
+    u8* base;
+
+    base = lbl_803D8D08;
+
+    switch (arg1) {
+    case 0x21:
+        ((s16*) (base + 0x88))[c_kind] = arg2;
+        break;
+    case 0x22:
+        ((s16*) (base + 0x148))[c_kind] = arg2;
+        break;
+    case 0x23:
+        ((s16*) (base + 0x208))[c_kind] = arg2;
+        break;
+    case 0x24:
+        ((s16*) (base + 0x2C8))[c_kind] = arg2;
+        break;
+    case 0x25:
+        ((s16*) (base + 0x388))[c_kind] = arg2;
+        break;
+    case 0x26:
+        ((s16*) (base + 0x448))[c_kind] = arg2;
+        break;
+    }
+}
+
+void gm_80181B64(int c_kind, int arg1, s32 arg2)
+{
+    u8* base;
+
+    base = lbl_803D8D08;
+
+    switch (arg1) {
+    case 0x21:
+        ((s32*) base)[c_kind] = arg2;
+        break;
+    case 0x22:
+        ((s32*) (base + 0xC0))[c_kind] = arg2;
+        break;
+    case 0x23:
+        ((s32*) (base + 0x180))[c_kind] = arg2;
+        break;
+    case 0x24:
+        ((s32*) (base + 0x240))[c_kind] = arg2;
+        break;
+    case 0x25:
+        ((s32*) (base + 0x300))[c_kind] = arg2;
+        break;
+    case 0x26:
+        ((s32*) (base + 0x3C0))[c_kind] = arg2;
+        break;
+    }
+}
 
 int fn_80181BFC(int* arg0)
 {

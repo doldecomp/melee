@@ -178,7 +178,7 @@ typedef u8 DSSupportMask[32]; /* 256 bits total */
 #endif
 #define DS_MIN_REPLY_WRITEMEMORY_LENGTH (DS_MIN_REPLY_LENGTH + 2)
 
-// Memory commands options
+/// Memory commands options
 #define DS_MSG_MEMORY_SEGMENTED 0x01 /* non-flat addr space */
 #define DS_MSG_MEMORY_EXTENDED 0x02  /* > 32-bit data addr */
 #define DS_MSG_MEMORY_PROTECTED 0x04 /* non-user memory */
@@ -191,7 +191,7 @@ typedef u8 DSSupportMask[32]; /* 256 bits total */
 #define TRK_MSG_HEADER_LENGTH DS_MSG_MEMORY_SPACE_DATA
 #define TRK_MSG_REPLY_HEADER_LENGTH (TRK_MSG_HEADER_LENGTH + DS_MIN_MSG_LENGTH)
 
-// Others
+/// Others
 
 #define DS_MSG_MEMORY_SPACE_MASK 0xC0
 
@@ -217,7 +217,7 @@ typedef u8 DSSupportMask[32]; /* 256 bits total */
 #endif
 #define DS_MIN_REPLY_WRITEREGISTERS_LENGTH DS_MIN_REPLY_LENGTH
 
-// Register commands options
+/// Register commands options
 typedef enum {
     kDSRegistersDefault = 0x0,   /* Default register block */
     kDSRegistersFP = 0x1,        /* floating point registers */
@@ -235,7 +235,7 @@ typedef enum {
 #define DS_MIN_MSG_STEP_LENGTH (DS_MIN_MSG_STEP_COUNT_LENGTH)
 #define DS_MIN_REPLY_STEP_LENGTH DS_MIN_REPLY_LENGTH
 
-// Step command options
+/// Step command options
 typedef enum {
     kDSStepIntoCount = 0x00, /* Exec count instructions & stop */
     kDSStepIntoRange = 0x01, /* Exec until PC is out of specified range */
@@ -266,7 +266,7 @@ typedef enum DSIOResult {
     kDSIOEOF = 0x02
 } DSIOResult;
 
-// Reply errors
+/// Reply errors
 typedef enum DSReplyError {
     kDSReplyNoError = 0x00,
     kDSReplyError = 0x01,

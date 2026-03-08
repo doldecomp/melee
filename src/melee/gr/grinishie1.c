@@ -6,6 +6,9 @@
 #include "cm/camera.h"
 #include "ef/efsync.h"
 #include "gm/gm_unsplit.h"
+
+#include "gr/forward.h"
+
 #include "gr/grdisplay.h"
 #include "gr/grlib.h"
 #include "gr/grmaterial.h"
@@ -34,7 +37,7 @@
     while (true) {                                                            \
     }
 
-// these inlines are probably shared in other places
+/// these inlines are probably shared in other places
 static inline s32 test_random(s32 val)
 {
     return ((val != 0) ? HSD_Randi(val) : 0);
@@ -94,6 +97,15 @@ Vec3 grI1_803B8268;
         }                                                                     \
     };
 
+#define DOBJ_CLEAR_LOOP(jobj)                                                 \
+    {                                                                         \
+        HSD_DObj* dobj = HSD_JObjGetDObj(jobj);                               \
+        while (dobj != NULL) {                                                \
+            HSD_DObjClearFlags(dobj, 1U);                                     \
+            dobj = (dobj != NULL) ? dobj->next : NULL;                        \
+        }                                                                     \
+    }
+
 StageCallbacks grI1_803E48F4[] = {
     {
         grInishie1_801FAAA0,
@@ -127,7 +139,7 @@ StageCallbacks grI1_803E48F4[] = {
 
 void grInishie1_801FA908(bool arg) {}
 
-// corresponds with the 3 - 13 - 3 block pattern on the stage
+/// corresponds with the 3 - 13 - 3 block pattern on the stage
 #define BLOCK_COUNT 19
 
 struct block_table_struct {
@@ -212,7 +224,9 @@ void grInishie1_801FAAD8(Ground_GObj* gobj) {}
 void grInishie1_801FAADC(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
-    Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+
+    Ground_801C2ED0(jobj, gp->map_id);
     grAnime_801C8138(gobj, gp->map_id, 0);
     grInishie1_801FAD84(gobj);
     grInishie1_801FC018(gobj);
@@ -611,8 +625,8 @@ void grInishie1_801FB3F0(HSD_GObj* gobj)
     }
 }
 
-// gives item from hatena block upwards velocity, maybe handles spawning it as
-// well
+/// gives item from hatena block upwards velocity, maybe handles spawning it as
+/// well
 void grInishie1_801FBA34(HSD_GObj* gobj, HSD_JObj* jobj)
 {
     Vec3 sp1C;
@@ -623,7 +637,7 @@ void grInishie1_801FBA34(HSD_GObj* gobj, HSD_JObj* jobj)
     it_8026F7C8(&sp1C, &vec, 0);
 }
 
-// creates a hatena block
+/// creates a hatena block
 void grInishie1_801FBAA0(HSD_GObj* gobj, s32 index)
 {
     HSD_JObj* hatena_jobj;
@@ -661,7 +675,7 @@ void grInishie1_801FBAA0(HSD_GObj* gobj, s32 index)
 void grInishie1_801FBC4C(HSD_GObj* gobj, u32 index)
 {
     Ground* gp = GET_GROUND(gobj);
-    DOBJ_LOOP(gp->gv.inishie1.blocks[index].jobj2);
+    DOBJ_CLEAR_LOOP(gp->gv.inishie1.blocks[index].jobj2);
     Ground_801C4A08(gp->gv.inishie1.blocks[index].hatena_gobj);
     gp->gv.inishie1.blocks[index].hatena_gobj = NULL;
 }
@@ -826,16 +840,33 @@ void fn_801FBEB8(Ground* gr, s32 block_id, CollData* arg2, s32 arg3,
 
 /// #fn_801FC9AC
 
-/// #grInishie1_801FCAAC
+bool grInishie1_801FCAAC(int line_id)
+{
+    if (stage_info.internal_stage_id == INISHIE1 && line_id != -1) {
+        int result;
+        u32 joint;
+
+        joint = mpJointFromLine(line_id) - 20;
+        result = 1;
+        if (joint > 1) {
+            result = 0;
+        }
+        if (result != 0) {
+            return true;
+        }
+    }
+    return false;
+}
 
 void grInishie1_801FCB10(HSD_GObj* gobj)
 {
-    int time_remaining;
+    Ground* gp;
+    u32 time_remaining;
     s32 var_r3;
 
-    Ground* gp = gobj->user_data;
+    gp = GET_GROUND(gobj);
     if (gp->gv.inishie2.xC4_flags.b0 == 0) {
-        if (GetMatchTimer(&time_remaining) != 0) {
+        if (GetMatchTimer((int*) &time_remaining) != 0) {
             if (time_remaining < 20) {
                 s32 temp_r3 = Ground_801C5A94();
                 if (temp_r3 == 0x29) {

@@ -12,6 +12,7 @@
 #include "lb/lbcardnew.h"
 #include "lb/lblanguage.h"
 #include "lb/lbsnap.h"
+#include "placeholder.h"
 #include "ty/toy.h"
 #include "ty/tylist.h"
 
@@ -33,7 +34,7 @@
 #include <MSL/stdio.h>
 #include <MSL/string.h>
 
-// .data
+/// .data
 /* 3F9FD0 */ static int un_803F9FD0;
 /* 3F9FDC */ static float un_803F9FDC;
 /* 3FA070 */ static int un_803FA070;
@@ -83,10 +84,10 @@
 } un_803FA258;
 /* 3FA348 */ static u16 un_803FA348;
 /* 3FA34C */ static u8 un_803FA34C;
-/* 3FA658 */ static int un_803FA658;
-/* 3FA8E8 */ static int un_803FA8E8;
+/* 3FA658 */ static u8 un_803FA658[0x290];
+/* 3FA8E8 */ static u8 un_803FA8E8[0x15C];
 /* 3FAA44 */ static u8 un_803FAA44[0xC0];
-/* 3FB168 */ static int un_803FB168;
+/* 3FB168 */ static u8 un_803FB168[0x4A4];
 /* 3FB60C */ static u8 un_803FB60C[0xE0];
 /* 3FB728 */ static u8 un_803FB728[0xC0];
 /* 3FB870 */ static u8 un_803FB870[0xE0];
@@ -123,13 +124,13 @@
 /* 3FD29C */ extern char un_803FD29C[];
 /* 3FD2AC */ extern char un_803FD2AC[];
 
-// .sdata
+/// .sdata
 /* 4D5850 */ static int un_804D5850 = 0x7F;
 /* 4D5854 */ static int un_804D5854 = 0x7F;
 /* 4D5858 */ static int un_804D5858 = 0x7F;
 /* 4D585C */ static int un_804D585C = -1;
 
-// .sbss
+/// .sbss
 /* 4D6DA8 */ static int* un_804D6DA8;
 /* 4D6DAC */ static int un_804D6DAC;
 /* 4D6DB0 */ static int un_804D6DB0;
@@ -138,7 +139,7 @@
 /* 4D6DBC */ static int un_804D6DBC;
 /* 4D6DC0 */ static int un_804D6DC0;
 
-// .sbss (extern)
+/// .sbss (extern)
 /* 4D6DC8 */ extern s32 un_804D6DC8;
 /* 4D6DCC */ extern s32 un_804D6DCC;
 /* 4D6DD0 */ extern float un_804D6DD0;
@@ -159,19 +160,17 @@
 /* 4D6E10 */ extern s32 un_804D6E10;
 /* 4D6E14 */ extern s32 un_804D6E14;
 
-// .sdata (extern)
+/// .sdata (extern)
 /* 4D5908 */ extern s32 un_804D5908;
 /* 4D590C */ extern s32 un_804D590C;
 /* 4D5910 */ extern s32 un_804D5910;
-/* 4D5978 */ extern char un_804D5978[];
-/* 4D5980 */ extern char un_804D5980[];
-/* 4D5988 */ extern char un_804D5988[];
+
 /* 4D5990 */ extern char un_804D5990[];
 
-// .bss (extern)
+/// .bss (extern)
 /* 45A6C0 */ extern u8 gmMainLib_8045A6C0[];
 
-// .sdata2 (extern)
+/// .sdata2 (extern)
 /* 4DDC48 */ extern float un_804DDC48;
 /* 4DDC4C */ extern float un_804DDC4C;
 /* 4DDC50 */ extern float un_804DDC50;
@@ -194,8 +193,8 @@ bool un_802FF884(char* unused)
 
 int un_802FF88C(void)
 {
-    un_804D6DB8 = 0;
     un_804D5858 = 0x7F;
+    un_804D6DB8 = 0;
     un_804D5854 = 0x7F;
     un_804D5850 = 0x7F;
     un_804D6DB4 = 0;
@@ -420,35 +419,49 @@ bool un_803002FC(bool update_scene)
 
 s32 un_80300338(void)
 {
-    u8* src = &gmMainLib_8045A6C0[un_803FA128.x220 + 0x1868];
-    un_803FA128.x224 = src[0];
-    un_803FA128.x225 = src[1];
-    un_803FA128.x226 = src[2];
-    un_803FA128.x227 = src[3];
+    u8* src;
+
+    src = gmMainLib_8045A6C0;
+    src = src + un_803FA128.x220;
+
+    un_803FA128.x224 = src[0x1868];
+    un_803FA128.x225 = src[0x1869];
+    un_803FA128.x226 = src[0x186A];
+    un_803FA128.x227 = src[0x186B];
     return 0;
 }
 
 s32 un_80300378(void)
 {
-    u8* src;
+    u8* ptr;
+
     un_803FA128.x220 &= 0xFFFE;
-    src = &gmMainLib_8045A6C0[un_803FA128.x220 + 0x1868];
-    un_803FA128.x224 = src[0];
-    un_803FA128.x225 = src[1];
-    un_803FA128.x226 = src[2];
-    un_803FA128.x227 = src[3];
+
+    ptr = gmMainLib_8045A6C0;
+    ptr = ptr + un_803FA128.x220;
+
+    un_803FA128.x224 = ptr[0x1868];
+    un_803FA128.x225 = ptr[0x1869];
+    un_803FA128.x226 = ptr[0x186A];
+    un_803FA128.x227 = ptr[0x186B];
+
     return 0;
 }
 
 s32 un_803003C4(void)
 {
-    u8* src;
+    u8* ptr;
+
     un_803FA128.x220 &= 0xFFFC;
-    src = &gmMainLib_8045A6C0[un_803FA128.x220 + 0x1868];
-    un_803FA128.x224 = src[0];
-    un_803FA128.x225 = src[1];
-    un_803FA128.x226 = src[2];
-    un_803FA128.x227 = src[3];
+
+    ptr = gmMainLib_8045A6C0;
+    ptr = ptr + un_803FA128.x220;
+
+    un_803FA128.x224 = ptr[0x1868];
+    un_803FA128.x225 = ptr[0x1869];
+    un_803FA128.x226 = ptr[0x186A];
+    un_803FA128.x227 = ptr[0x186B];
+
     return 0;
 }
 
@@ -466,7 +479,7 @@ s32 un_80300410(s32 arg0)
     return 0;
 }
 
-// these will try to inline un_802FFD94 otherwise
+/// these will try to inline un_802FFD94 otherwise
 #pragma push
 #pragma dont_inline on
 int un_80300480(int arg0)
@@ -644,12 +657,16 @@ bool un_803009A4(bool update_scene)
 
 s32 un_803009E0(void)
 {
+    s32* new_var;
     switch (un_804D6DD8) {
-    case 2: {
-        u32 val = (u32) *gmMainLib_8015D06C((u8) un_804D6DC8);
-        un_804D6DD0 = (float) (val / 100U);
-        break;
-    }
+    case 2:
+        new_var = gmMainLib_8015D06C((u8) un_804D6DC8);
+        {
+            u32 val = (u32) (*new_var);
+            un_804D6DD0 = (float) (val / 100U);
+            break;
+        }
+
     case 3: {
         s32 result = gmMainLib_8015D48C((u8) un_804D6DC8);
         gmMainLib_8015D4E8((u8) un_804D6DC8, result);
@@ -663,6 +680,8 @@ s32 un_803009E0(void)
 int un_80300A88(void)
 {
     switch (un_804D6DD8) {
+    case 2:
+        break;
     case 3:
         if (un_804D6DCC >= 1) {
             un_804D6DCC = 1;
@@ -752,7 +771,7 @@ bool un_80300C3C(bool update_scene)
 bool un_80300C80(int arg0)
 {
     if (arg0 == 1) {
-        int* ptr = gmMainLib_8015CCF0();
+        u32* ptr = gmMainLib_8015CCF0();
         *ptr = un_804D6DDC * 10;
         un_803124BC();
         gm_801A42F8(1);
@@ -1148,8 +1167,9 @@ int un_80301634(void)
     HSD_GObj* gobj;
     void* r31;
     void* r3;
+    PAD_STACK(8);
 
-    OSReport(un_804D5978);
+    OSReport("<Init>\n");
     lb_8001C550();
     lb_8001D164(0);
     r31 = HSD_MemAlloc(lbSnap_8001E210());
@@ -1159,7 +1179,6 @@ int un_80301634(void)
     gobj = GObj_Create(0x13, 0x14, 0);
     HSD_SObjLib_803A55DC(gobj, 0x280, 0x1E0, 0xC);
     gobj->gxlink_prios = 0x40000;
-    gobj->user_data = NULL;
     un_804D6E08 = 0;
     return 0;
 }
@@ -1211,7 +1230,7 @@ int un_80301800(int arg0)
     if (arg0 != 1) {
         return 0;
     }
-    OSReport(un_804D5980);
+    OSReport("<Save>\n");
     lb_8001CE00();
     return 0;
 }
@@ -1221,7 +1240,7 @@ int un_80301840(int arg0)
     if (arg0 != 1) {
         return 0;
     }
-    OSReport(un_804D5988);
+    OSReport("<Load>\n");
     {
         s32 result = lb_8001CBBC();
         gmMainLib_8015FA34(result);
@@ -1283,7 +1302,7 @@ int un_80301964(int arg0)
             GObj_SetupGXLink(gobj, HSD_SObjLib_803A49E0, 0x12, 0);
             un_803FD274 = un_804D6E04;
             sobj =
-                HSD_SObjLib_803A477C(gobj, (s32) un_804D5990, 0, 0, 0x80, 0);
+                HSD_SObjLib_803A477C(gobj, (int) un_804D5990, 0, 0, 0x80, 0);
             sobj->x10 = un_804DDC4C;
             sobj->x14 = un_804DDC50;
             sobj->x40 |= 2;
@@ -1304,16 +1323,14 @@ int un_80301A64(int arg0)
 
     OSReport(un_803FD29C);
     result = lbSnap_8001D5FC(0, un_804D6E10);
-    if (result != 0xB) {
-        return 0;
-    }
+    if (result == 0xB) {
+        do {
+            result = lb_8001B6F8();
+        } while (result == 0xB);
 
-    do {
-        result = lb_8001B6F8();
-    } while (result == 0xB);
-
-    if (result == 0) {
-        lbSnap_8001D40C(0);
+        if (result == 0) {
+            lbSnap_8001D40C(0);
+        }
     }
     return 0;
 }
@@ -1328,16 +1345,14 @@ int un_80301AD4(int arg0)
 
     OSReport(un_803FD2AC);
     result = lbSnap_8001D7B0(0, un_804D6E14, un_804D6E10);
-    if (result != 0xB) {
-        return 0;
-    }
+    if (result == 0xB) {
+        do {
+            result = lb_8001B6F8();
+        } while (result == 0xB);
 
-    do {
-        result = lb_8001B6F8();
-    } while (result == 0xB);
-
-    if (result == 0) {
-        lbSnap_8001D40C(0);
+        if (result == 0) {
+            lbSnap_8001D40C(0);
+        }
     }
     return 0;
 }

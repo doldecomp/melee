@@ -5,7 +5,9 @@
 #include <platform.h>
 
 #include "gr/grlib.h"
+#include "gr/ground.h"
 #include "gr/inlines.h"
+#include "lb/lb_00F9.h"
 
 void grRCruise_801FF164(bool arg) {}
 
@@ -65,11 +67,28 @@ bool grRCruise_801FF6CC(Ground_GObj* arg)
     return false;
 }
 
-/// #grRCruise_801FF6D4
+void grRCruise_801FF6D4(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    if (gp->gv.unk.xD4 == 0) {
+        grRCruise_80201588(gobj);
+        grRCruise_8020071C(gobj);
+        grRCruise_80200C04(gobj);
+    }
+    lb_800115F4();
+    grRCruise_80201110(gobj);
+    Ground_801C2FE0(gobj);
+}
 
 void grRCruise_801FF738(Ground_GObj* arg) {}
 
-/// #grRCruise_801FF73C
+void grRCruise_801FF73C(Ground_GObj* gobj)
+{
+    Ground* gp = gobj->user_data;
+    grAnime_801C8138(gobj, gp->map_id, 0);
+    HSD_JObjSetFlagsAll(gobj->hsd_obj, JOBJ_HIDDEN);
+    HSD_JObjClearFlagsAll(Ground_801C3FA4(gobj, 31), JOBJ_HIDDEN);
+}
 
 bool grRCruise_801FF794(Ground_GObj* arg)
 {
@@ -153,7 +172,18 @@ void grRCruise_80200540(Ground_GObj* gobj)
 
 /// #grRCruise_80201588
 
-/// #grRCruise_80201918
+void grRCruise_80201918(Vec3* vec)
+{
+    HSD_GObj* gobj = Ground_801C2BA4(3);
+    if (gobj != NULL) {
+        Ground* gp = gobj->user_data;
+        if (gp != NULL) {
+            *vec = *(Vec3*)((u8*)gp + 0xE0);
+            return;
+        }
+    }
+    vec->x = vec->y = vec->z = 0.0f;
+}
 
 /// #grRCruise_80201988
 

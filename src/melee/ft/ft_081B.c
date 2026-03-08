@@ -140,7 +140,7 @@ bool ft_80081DD4(Fighter_GObj* gobj)
     coll = &fp->coll_data;
     fp->coll_data.last_pos = fp->coll_data.cur_pos;
     fp->coll_data.cur_pos = fp->cur_pos;
-    if (fp->x221A_b2) {
+    if (fp->allow_sdi) {
         var_r28 = mpColl_800477E0(coll);
     } else if (fp->x2064_ledgeCooldown != 0 || fp->x2224_b2) {
         var_r28 = mpColl_800471F8(coll);
@@ -184,7 +184,7 @@ bool ft_80081F2C(Fighter_GObj* gobj)
     coll = &fp->coll_data;
     fp->coll_data.last_pos = fp->coll_data.cur_pos;
     fp->coll_data.cur_pos = fp->cur_pos;
-    if (fp->x221A_b2) {
+    if (fp->allow_sdi) {
         var_r28 = mpColl_80048274(coll);
     } else if (fp->x2064_ledgeCooldown != 0 || fp->x2224_b2) {
         var_r28 = mpColl_80048160(coll);
@@ -227,7 +227,7 @@ bool ft_80082084(Fighter_GObj* gobj)
     coll = &fp->coll_data;
     fp->coll_data.last_pos = fp->coll_data.cur_pos;
     fp->coll_data.cur_pos = fp->cur_pos;
-    if (fp->x221A_b2) {
+    if (fp->allow_sdi) {
         var_r28 = mpColl_80048388(coll);
     } else if (fp->x2064_ledgeCooldown != 0 || fp->x2224_b2) {
         var_r28 = mpColl_80048768(coll);
@@ -552,7 +552,7 @@ void ftCo_AirCatchHit_Coll(Fighter_GObj* gobj)
     }
 }
 
-// void ft_80082C74(Fighter_GObj* gobj, void (*arg1)(Fighter_GObj*))
+/// void ft_80082C74(Fighter_GObj* gobj, void (*arg1)(Fighter_GObj*))
 void ft_80082C74(Fighter_GObj* gobj, HSD_GObjEvent cb)
 {
     bool var_r0 = ft_80081D0C(gobj);
@@ -1423,8 +1423,9 @@ void ft_80084FA8(Fighter_GObj* gobj)
 
 void ft_80085004(Fighter_GObj* gobj)
 {
+    ftCo_DatAttrs* co_attrs;
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCo_DatAttrs* co_attrs = &fp->co_attrs;
+    co_attrs = &fp->co_attrs;
 
     ft_80085030(gobj, co_attrs->gr_friction, fp->facing_dir1);
 }
@@ -1443,17 +1444,20 @@ void ft_80085030(Fighter_GObj* gobj, float gr_friction, float facing_dir)
 
 void ft_80085088(Fighter_GObj* gobj)
 {
+    ftCo_DatAttrs* co_attrs;
     Fighter* fp = GET_FIGHTER(gobj);
-    ftCo_DatAttrs* co_attrs = &fp->co_attrs;
+    co_attrs = &fp->co_attrs;
 
     ft_800850E0(gobj, co_attrs->gr_friction, fp->facing_dir);
 }
 
 void ft_800850B4(Fighter_GObj* gobj)
 {
+    ftCo_DatAttrs* co_attrs;
     Fighter* fp = GET_FIGHTER(gobj);
-    float dir = fp->facing_dir1;
-    ft_800850E0(gobj, fp->co_attrs.gr_friction, dir);
+    co_attrs = &fp->co_attrs;
+
+    ft_800850E0(gobj, co_attrs->gr_friction, fp->facing_dir1);
 }
 
 void ft_800850E0(Fighter_GObj* gobj, float arg8, float arg9)

@@ -97,7 +97,7 @@ void pl_8003891C(int player)
 {
     int i;
     pl_StaleMoveTableExt_t* temp_r31;
-    /// @todo: This aint it
+    /// @todo This aint it
     volatile int temp_zero;
 
     temp_r31 = Player_GetStaleMoveTableIndexPtr2(player);
@@ -139,7 +139,7 @@ void pl_8003891C(int player)
     temp_r31->x0_staleMoveTable.xCAC = 6;
     temp_r31->x0_staleMoveTable.xCB4 = 0;
 
-    /// @todo: What?
+    /// @todo What?
     {
         temp_zero = 0;
         temp_r31->x0_staleMoveTable.xCB8 = 6;
