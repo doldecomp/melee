@@ -1285,6 +1285,8 @@ void fn_8018FBE0(s32 arg0, s32 arg1, s32 arg2, s8 arg3, s8 arg4, s16 arg5,
     }
 }
 
+#pragma push
+#pragma auto_inline off
 void fn_8018FDC4(HSD_JObj* jobj, float x, float y, float z)
 {
     if ((int) x != 666) {
@@ -1297,7 +1299,10 @@ void fn_8018FDC4(HSD_JObj* jobj, float x, float y, float z)
         HSD_JObjSetTranslateZ(jobj, z);
     }
 }
+#pragma pop
 
+#pragma push
+#pragma auto_inline off
 void fn_8018FF9C(HSD_JObj* jobj, float x, float y, float z)
 {
     if ((int) x != 666) {
@@ -1310,6 +1315,7 @@ void fn_8018FF9C(HSD_JObj* jobj, float x, float y, float z)
         HSD_JObjSetScaleZ(jobj, z);
     }
 }
+#pragma pop
 
 HSD_GObj* fn_80190174(HSD_CObjDesc* cobjdesc)
 {

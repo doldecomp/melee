@@ -11,7 +11,7 @@ static HSD_Archive* lbl_804D6648;
 static SceneDesc* lbl_804D664C;
 static SceneDesc* lbl_804D6650;
 
-static struct {
+typedef struct BracketEntry {
     u8 x0;
     u8 x1;
     u8 pad2[0x32 - 0x2];
@@ -35,7 +35,9 @@ static struct {
     u8 padD1[0xD5 - 0xD1];
     u8 xD5;
     u8 padD6[0xDC - 0xD6];
-} lbl_80473AB8[0x40];
+} BracketEntry;
+
+static BracketEntry lbl_80473AB8[0x40];
 
 TmData gm_804771C4;
 
