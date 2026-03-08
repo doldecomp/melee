@@ -65,11 +65,11 @@ void mnGallery_80258A08(HSD_GObj* gobj, u16 width, u16 height, u32 priority)
     extern f64 mnGallery_804DC368;
     extern f64 mnGallery_804DC370;
     HSD_CObj* cobj;
-    f32 zero;
+    register f32 zero = mnGallery_804DC360;
     f32 far;
+    f32 left;
     f32 top;
     f32 bottom;
-    f32 left;
     f32 right;
     HSD_RectS16 viewport;
     Scissor scissor;
@@ -78,7 +78,6 @@ void mnGallery_80258A08(HSD_GObj* gobj, u16 width, u16 height, u32 priority)
 
     eye = mnGallery_803B8538;
     interest = mnGallery_803B8544;
-    zero = mnGallery_804DC360;
     far = mnGallery_804DC364;
     bottom = (f32)(s32)-(s32)height;
     right = (f32)width;
@@ -349,41 +348,39 @@ void fn_802590C4(HSD_GObj* gobj)
         s32 frame;
         HSD_GObj* gobjs[2];
     };
-    HSD_JObj* jobj;
+    void* store;
+    void* ud;
     struct fn_802590C4_data* data;
-    struct fn_802590C4_data* ud;
-    struct fn_802590C4_data* store;
     s32 i;
-    u8 state;
+    s32 zero;
+    HSD_JObj* jobj;
 
-    jobj = gobj->hsd_obj;
     data = gobj->user_data;
-    state = data->state;
+    jobj = gobj->hsd_obj;
 
-    if (state == 3) {
+    if (data->state == 3) {
         return;
     }
 
-    if (state == 0) {
-        s32 frame = data->frame;
-        if (frame < 0x13) {
-            data->frame = frame + 1;
+    if (data->state == 0) {
+        if (data->frame < 0x13) {
+            data->frame = data->frame + 1;
         } else {
             data->state = 1;
         }
-    } else if (state == 2) {
-        s32 frame = data->frame;
-        if (frame < 0x1D) {
-            data->frame = frame + 1;
+    } else if (data->state == 2) {
+        if (data->frame < 0x1D) {
+            data->frame = data->frame + 1;
         } else {
             data->state = 4;
-            store = gobj->user_data;
-            ud = store;
+            ud = gobj->user_data;
+            store = ud;
             HSD_GObjPLink_80390228(gobj);
             i = 0;
+            zero = i;
             do {
-                HSD_GObjPLink_80390228(ud->gobjs[i]);
-                store->gobjs[i] = NULL;
+                HSD_GObjPLink_80390228(((struct fn_802590C4_data*)store)->gobjs[i]);
+                ((struct fn_802590C4_data*)ud)->gobjs[i] = (HSD_GObj*)zero;
                 i++;
             } while (i < 2);
         }
