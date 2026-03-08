@@ -637,9 +637,8 @@ static bool isPointInCircle(float x, float y, float radius)
 void ftCo_Damage_OnExitHitlag(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
-    if (isPointInCircle(SQ(fp->input.lstick.x), SQ(fp->input.lstick.y),
-                        SQ(p_ftCommonData->sdi_min_stick_mag)) ||
-        ftCo_800DF608(fp))
+    bool isPointInCircle = VEC2_SQ_LEN(fp->input.lstick) >= SQ(p_ftCommonData->sdi_min_stick_mag) ? true : false;
+    if (isPointInCircle || ftCo_800DF608(fp))
     {
         float x, y;
         if (ftCo_800DF608(fp)) {
@@ -1041,7 +1040,7 @@ void ftCo_Damage_Phys(Fighter_GObj* gobj)
 
 void ftCo_Damage_Coll(Fighter_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     if (fp->ground_or_air == GA_Ground) {
         ft_800848DC(gobj, ftCo_8008FC94);
     } else if (ft_80081DD4(gobj)) {
