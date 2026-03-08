@@ -608,32 +608,21 @@ void fn_8018E46C(HSD_GObj* gobj, int unused)
     }
 }
 
-extern s32 lbl_803B7CA8[14];
+typedef struct CamDesc { s32 d[14]; } CamDesc;
+extern CamDesc lbl_803B7CA8;
 
 /// Initializes the tournament bracket camera and optionally resets bracket data.
 /// Removes all existing GObjs from two entity lists, inits lbl_80473AB8 entries,
 /// creates camera GObj with CObjDesc loaded from lbl_803B7CA8 rodata.
 void fn_8018E618(int arg0, int arg1, f32 farg0)
 {
-    s32 sp[14];
+    CamDesc cam;
     HSD_GObj* gobj;
     HSD_GObj* tmp;
     s32 i;
+    PAD_STACK(8);
 
-    sp[0] = lbl_803B7CA8[0];
-    sp[1] = lbl_803B7CA8[1];
-    sp[2] = lbl_803B7CA8[2];
-    sp[3] = lbl_803B7CA8[3];
-    sp[4] = lbl_803B7CA8[4];
-    sp[5] = lbl_803B7CA8[5];
-    sp[6] = lbl_803B7CA8[6];
-    sp[7] = lbl_803B7CA8[7];
-    sp[8] = lbl_803B7CA8[8];
-    sp[9] = lbl_803B7CA8[9];
-    sp[10] = lbl_803B7CA8[10];
-    sp[11] = lbl_803B7CA8[11];
-    sp[12] = lbl_803B7CA8[12];
-    sp[13] = lbl_803B7CA8[13];
+    cam = lbl_803B7CA8;
 
     while ((tmp = M2C_FIELD(HSD_GObj_Entities, HSD_GObj**, 0x6C)) != NULL) {
         HSD_GObjPLink_80390228(tmp);
@@ -642,56 +631,61 @@ void fn_8018E618(int arg0, int arg1, f32 farg0)
         HSD_GObjPLink_80390228(tmp);
     }
 
-    if (arg1 != 0) {
+    {
         u8* ptr = (u8*) &lbl_80473AB8[0];
 
-        for (i = 0; i < 8; i++) {
-            ptr[0x000] = 0;
-            ptr[0x04E] = 3;
-            ptr[0x07A] = 3;
-            ptr[0x0A6] = 3;
-            ptr[0x0D2] = 3;
-            ptr[0x0DC] = 0;
-            ptr[0x12A] = 3;
-            ptr[0x156] = 3;
-            ptr[0x182] = 3;
-            ptr[0x1AE] = 3;
-            ptr[0x1B8] = 0;
-            ptr[0x206] = 3;
-            ptr[0x232] = 3;
-            ptr[0x25E] = 3;
-            ptr[0x28A] = 3;
-            ptr[0x294] = 0;
-            ptr[0x2E2] = 3;
-            ptr[0x30E] = 3;
-            ptr[0x33A] = 3;
-            ptr[0x366] = 3;
-            ptr[0x370] = 0;
-            ptr[0x3BE] = 3;
-            ptr[0x3EA] = 3;
-            ptr[0x416] = 3;
-            ptr[0x442] = 3;
-            ptr[0x44C] = 0;
-            ptr[0x49A] = 3;
-            ptr[0x4C6] = 3;
-            ptr[0x4F2] = 3;
-            ptr[0x51E] = 3;
-            ptr[0x528] = 0;
-            ptr[0x576] = 3;
-            ptr[0x5A2] = 3;
-            ptr[0x5CE] = 3;
-            ptr[0x5FA] = 3;
-            ptr[0x604] = 0;
-            ptr[0x652] = 3;
-            ptr[0x67E] = 3;
-            ptr[0x6AA] = 3;
-            ptr[0x6D6] = 3;
-            ptr += 0x6E0;
+        if (arg1 != 0) {
+            for (i = 0; i < 8; i++) {
+                ptr[0x000] = 0;
+                ptr[0x04E] = 3;
+                ptr[0x07A] = 3;
+                ptr[0x0A6] = 3;
+                ptr[0x0D2] = 3;
+                ptr[0x0DC] = 0;
+                ptr[0x12A] = 3;
+                ptr[0x156] = 3;
+                ptr[0x182] = 3;
+                ptr[0x1AE] = 3;
+                ptr[0x1B8] = 0;
+                ptr[0x206] = 3;
+                ptr[0x232] = 3;
+                ptr[0x25E] = 3;
+                ptr[0x28A] = 3;
+                ptr[0x294] = 0;
+                ptr[0x2E2] = 3;
+                ptr[0x30E] = 3;
+                ptr[0x33A] = 3;
+                ptr[0x366] = 3;
+                ptr[0x370] = 0;
+                ptr[0x3BE] = 3;
+                ptr[0x3EA] = 3;
+                ptr[0x416] = 3;
+                ptr[0x442] = 3;
+                ptr[0x44C] = 0;
+                ptr[0x49A] = 3;
+                ptr[0x4C6] = 3;
+                ptr[0x4F2] = 3;
+                ptr[0x51E] = 3;
+                ptr[0x528] = 0;
+                ptr[0x576] = 3;
+                ptr[0x5A2] = 3;
+                ptr[0x5CE] = 3;
+                ptr[0x5FA] = 3;
+                ptr[0x604] = 0;
+                ptr[0x652] = 3;
+                ptr[0x67E] = 3;
+                ptr[0x6AA] = 3;
+                ptr[0x6D6] = 3;
+                ptr += 0x6E0;
+            }
+        } else {
+            for (i = 0; i < 8; i++) {
+            }
         }
     }
 
     gobj = GObj_Create(9, 0x14, 1);
-    lbl_803D9DD0.cobj = HSD_CObjLoadDesc((HSD_CObjDesc*) &sp[0]);
+    lbl_803D9DD0.cobj = HSD_CObjLoadDesc((HSD_CObjDesc*) &cam);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, lbl_803D9DD0.cobj);
     GObj_SetupGXLinkMax(gobj, HSD_GObj_803910D8, 1);
     M2C_FIELD(gobj, u32*, 0x24) = 0x10;
