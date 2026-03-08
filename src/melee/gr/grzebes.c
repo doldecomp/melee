@@ -1091,13 +1091,8 @@ void grZebes_801DA0C4(f32 level)
 void grZebes_801DA254(Ground_GObj* gobj, f32 level)
 {
     Ground* gp = GET_GROUND(gobj);
-    int new_var;
     HSD_LObj* lobj = (HSD_LObj*) gp->gv.zebes4.xDC;
-    new_var = 0;
-    do {
-        UNUSED unsigned char _[(8)];
-    } while (new_var);
-
+    gp->gv.zebes4.xDC = (u32) lobj;
     if (lobj == NULL) {
         HSD_GObj* lgobj = HSD_GObj_804D7824[4];
         if (lgobj != NULL) {
@@ -1115,8 +1110,8 @@ void grZebes_801DA254(Ground_GObj* gobj, f32 level)
     if (lobj != NULL) {
         GXColor c1 = { 0xE6, 0xFF, 0x96, 0xFF };
         GXColor c2 = { 0x1E, 0x1E, 0x00, 0xFF };
-        f32 t;
         GXColor result;
+        f32 t;
 
         t = (level - grZe_804D6990->x90) / (grZe_804D6990->x8C - grZe_804D6990->x90);
         result.r = (u8) (t * (f32) (c1.r - c2.r) + (f32) c2.r);
@@ -1125,6 +1120,7 @@ void grZebes_801DA254(Ground_GObj* gobj, f32 level)
         result.a = 0xFF;
         HSD_LObjSetColor(lobj, result);
     }
+    PAD_STACK(8);
 }
 
 void grZebes_801DA3E8(void)
