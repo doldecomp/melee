@@ -3908,167 +3908,163 @@ void fn_80196684(s32 bracket_idx)
 s32 fn_801967E0(s32 arg0)
 {
     s32 rand;
-    u8 w0, w1, w2, w3;
+    BracketEntry* ent = &lbl_80473AB8[arg0];
 
-    w0 = lbl_80473AB8[arg0].x51;
-    w1 = lbl_80473AB8[arg0].x7D;
-    w2 = lbl_80473AB8[arg0].xA9;
-    w3 = lbl_80473AB8[arg0].xD5;
 
-    rand = HSD_Randi(w0 + w1 + w2 + w3);
+    rand = HSD_Randi(ent->x51 + ent->x7D + ent->xA9 + ent->xD5);
 
-    if (rand < (s32) w0) {
-        lbl_80473AB8[arg0].x4C = 0;
-        rand = HSD_Randi(w1 + w2 + w3);
-        if (rand < (s32) w1) {
-            lbl_80473AB8[arg0].x78 = 1;
-            rand = HSD_Randi(w2 + w3);
-            if (rand < (s32) w2) {
-                lbl_80473AB8[arg0].xA4 = 2;
-                lbl_80473AB8[arg0].xD0 = 3;
+    if (rand < (s32) ent->x51) {
+        ent->x4C = 0;
+        rand = HSD_Randi(ent->x7D + ent->xA9 + ent->xD5);
+        if (rand < (s32) ent->x7D) {
+            ent->x78 = 1;
+            rand = HSD_Randi(ent->xA9 + ent->xD5);
+            if (rand < (s32) ent->xA9) {
+                ent->xA4 = 2;
+                ent->xD0 = 3;
                 return rand;
             }
-            lbl_80473AB8[arg0].xA4 = 3;
-            lbl_80473AB8[arg0].xD0 = 2;
+            ent->xA4 = 3;
+            ent->xD0 = 2;
             return rand;
         }
-        if (rand < (s32) (w1 + w2)) {
-            lbl_80473AB8[arg0].xA4 = 1;
-            rand = HSD_Randi(w1 + w3);
-            if (rand < (s32) w1) {
-                lbl_80473AB8[arg0].x78 = 2;
-                lbl_80473AB8[arg0].xD0 = 3;
+        if (rand < (s32) (ent->x7D + ent->xA9)) {
+            ent->xA4 = 1;
+            rand = HSD_Randi(ent->x7D + ent->xD5);
+            if (rand < (s32) ent->x7D) {
+                ent->x78 = 2;
+                ent->xD0 = 3;
                 return rand;
             }
-            lbl_80473AB8[arg0].x78 = 3;
-            lbl_80473AB8[arg0].xD0 = 2;
+            ent->x78 = 3;
+            ent->xD0 = 2;
             return rand;
         }
-        lbl_80473AB8[arg0].xD0 = 1;
-        rand = HSD_Randi(w1 + w2);
-        if (rand < (s32) w2) {
-            lbl_80473AB8[arg0].x78 = 2;
-            lbl_80473AB8[arg0].xA4 = 3;
+        ent->xD0 = 1;
+        rand = HSD_Randi(ent->x7D + ent->xA9);
+        if (rand < (s32) ent->xA9) {
+            ent->x78 = 2;
+            ent->xA4 = 3;
             return rand;
         }
-        lbl_80473AB8[arg0].x78 = 3;
-        lbl_80473AB8[arg0].xA4 = 2;
+        ent->x78 = 3;
+        ent->xA4 = 2;
         return rand;
     }
 
-    if (rand < (s32) (w0 + w1)) {
-        lbl_80473AB8[arg0].x78 = 0;
-        rand = HSD_Randi(w0 + w2 + w3);
-        if (rand < (s32) w0) {
-            lbl_80473AB8[arg0].x4C = 1;
-            rand = HSD_Randi(w2 + w3);
-            if (rand < (s32) w2) {
-                lbl_80473AB8[arg0].xA4 = 2;
-                lbl_80473AB8[arg0].xD0 = 3;
+    if (rand < (s32) (ent->x51 + ent->x7D)) {
+        ent->x78 = 0;
+        rand = HSD_Randi(ent->x51 + ent->xA9 + ent->xD5);
+        if (rand < (s32) ent->x51) {
+            ent->x4C = 1;
+            rand = HSD_Randi(ent->xA9 + ent->xD5);
+            if (rand < (s32) ent->xA9) {
+                ent->xA4 = 2;
+                ent->xD0 = 3;
                 return rand;
             }
-            lbl_80473AB8[arg0].xA4 = 3;
-            lbl_80473AB8[arg0].xD0 = 2;
+            ent->xA4 = 3;
+            ent->xD0 = 2;
             return rand;
         }
-        if (rand < (s32) (w0 + w2)) {
-            lbl_80473AB8[arg0].xA4 = 1;
-            rand = HSD_Randi(w0 + w3);
-            if (rand < (s32) w0) {
-                lbl_80473AB8[arg0].x4C = 2;
-                lbl_80473AB8[arg0].xD0 = 3;
+        if (rand < (s32) (ent->x51 + ent->xA9)) {
+            ent->xA4 = 1;
+            rand = HSD_Randi(ent->x51 + ent->xD5);
+            if (rand < (s32) ent->x51) {
+                ent->x4C = 2;
+                ent->xD0 = 3;
                 return rand;
             }
-            lbl_80473AB8[arg0].x4C = 3;
-            lbl_80473AB8[arg0].xD0 = 2;
+            ent->x4C = 3;
+            ent->xD0 = 2;
             return rand;
         }
-        lbl_80473AB8[arg0].xD0 = 1;
-        rand = HSD_Randi(w0 + w2);
-        if (rand < (s32) w0) {
-            lbl_80473AB8[arg0].x4C = 2;
-            lbl_80473AB8[arg0].xA4 = 3;
+        ent->xD0 = 1;
+        rand = HSD_Randi(ent->x51 + ent->xA9);
+        if (rand < (s32) ent->x51) {
+            ent->x4C = 2;
+            ent->xA4 = 3;
             return rand;
         }
-        lbl_80473AB8[arg0].x4C = 3;
-        lbl_80473AB8[arg0].xA4 = 2;
+        ent->x4C = 3;
+        ent->xA4 = 2;
         return rand;
     }
 
-    if (rand < (s32) (w2 + w0 + w1)) {
-        lbl_80473AB8[arg0].xA4 = 0;
-        rand = HSD_Randi(w0 + w1 + w3);
-        if (rand < (s32) w0) {
-            lbl_80473AB8[arg0].x4C = 1;
-            rand = HSD_Randi(w1 + w3);
-            if (rand < (s32) w1) {
-                lbl_80473AB8[arg0].x78 = 2;
-                lbl_80473AB8[arg0].xD0 = 3;
+    if (rand < (s32) (ent->xA9 + ent->x51 + ent->x7D)) {
+        ent->xA4 = 0;
+        rand = HSD_Randi(ent->x51 + ent->x7D + ent->xD5);
+        if (rand < (s32) ent->x51) {
+            ent->x4C = 1;
+            rand = HSD_Randi(ent->x7D + ent->xD5);
+            if (rand < (s32) ent->x7D) {
+                ent->x78 = 2;
+                ent->xD0 = 3;
                 return rand;
             }
-            lbl_80473AB8[arg0].x78 = 3;
-            lbl_80473AB8[arg0].xD0 = 2;
+            ent->x78 = 3;
+            ent->xD0 = 2;
             return rand;
         }
-        if (rand < (s32) (w0 + w1)) {
-            lbl_80473AB8[arg0].x78 = 1;
-            rand = HSD_Randi(w0 + w3);
-            if (rand < (s32) w0) {
-                lbl_80473AB8[arg0].x4C = 2;
-                lbl_80473AB8[arg0].xD0 = 3;
+        if (rand < (s32) (ent->x51 + ent->x7D)) {
+            ent->x78 = 1;
+            rand = HSD_Randi(ent->x51 + ent->xD5);
+            if (rand < (s32) ent->x51) {
+                ent->x4C = 2;
+                ent->xD0 = 3;
                 return rand;
             }
-            lbl_80473AB8[arg0].x4C = 3;
-            lbl_80473AB8[arg0].xD0 = 2;
+            ent->x4C = 3;
+            ent->xD0 = 2;
             return rand;
         }
-        lbl_80473AB8[arg0].xD0 = 1;
-        rand = HSD_Randi(w0 + w1);
-        if (rand < (s32) w0) {
-            lbl_80473AB8[arg0].x4C = 2;
-            lbl_80473AB8[arg0].x78 = 3;
+        ent->xD0 = 1;
+        rand = HSD_Randi(ent->x51 + ent->x7D);
+        if (rand < (s32) ent->x51) {
+            ent->x4C = 2;
+            ent->x78 = 3;
             return rand;
         }
-        lbl_80473AB8[arg0].x4C = 3;
-        lbl_80473AB8[arg0].x78 = 2;
+        ent->x4C = 3;
+        ent->x78 = 2;
         return rand;
     }
 
-    lbl_80473AB8[arg0].xD0 = 0;
-    rand = HSD_Randi(w0 + w1 + w2);
-    if (rand < (s32) w0) {
-        lbl_80473AB8[arg0].x4C = 1;
-        rand = HSD_Randi(w1 + w2);
-        if (rand < (s32) w1) {
-            lbl_80473AB8[arg0].x78 = 2;
-            lbl_80473AB8[arg0].xA4 = 3;
+    ent->xD0 = 0;
+    rand = HSD_Randi(ent->x51 + ent->x7D + ent->xA9);
+    if (rand < (s32) ent->x51) {
+        ent->x4C = 1;
+        rand = HSD_Randi(ent->x7D + ent->xA9);
+        if (rand < (s32) ent->x7D) {
+            ent->x78 = 2;
+            ent->xA4 = 3;
             return rand;
         }
-        lbl_80473AB8[arg0].x78 = 3;
-        lbl_80473AB8[arg0].xA4 = 2;
+        ent->x78 = 3;
+        ent->xA4 = 2;
         return rand;
     }
-    if (rand < (s32) (w0 + w1)) {
-        lbl_80473AB8[arg0].x78 = 1;
-        rand = HSD_Randi(w0 + w2);
-        if (rand < (s32) w0) {
-            lbl_80473AB8[arg0].x4C = 2;
-            lbl_80473AB8[arg0].xA4 = 3;
+    if (rand < (s32) (ent->x51 + ent->x7D)) {
+        ent->x78 = 1;
+        rand = HSD_Randi(ent->x51 + ent->xA9);
+        if (rand < (s32) ent->x51) {
+            ent->x4C = 2;
+            ent->xA4 = 3;
             return rand;
         }
-        lbl_80473AB8[arg0].x4C = 3;
-        lbl_80473AB8[arg0].xA4 = 2;
+        ent->x4C = 3;
+        ent->xA4 = 2;
         return rand;
     }
-    lbl_80473AB8[arg0].xA4 = 1;
-    rand = HSD_Randi(w0 + w1);
-    if (rand < (s32) w0) {
-        lbl_80473AB8[arg0].x4C = 2;
-        lbl_80473AB8[arg0].x78 = 3;
+    ent->xA4 = 1;
+    rand = HSD_Randi(ent->x51 + ent->x7D);
+    if (rand < (s32) ent->x51) {
+        ent->x4C = 2;
+        ent->x78 = 3;
         return rand;
     }
-    lbl_80473AB8[arg0].x4C = 3;
-    lbl_80473AB8[arg0].x78 = 2;
+    ent->x4C = 3;
+    ent->x78 = 2;
     return rand;
 }
 
