@@ -563,8 +563,8 @@ void mnGallery_80259868(void)
     extern char mnGallery_803F0570[];
     extern void* mnGallery_804A0BA0[];
 
-    char* base = mnGallery_803F0570;
     void** arr = mnGallery_804A0BA0;
+    char* base = mnGallery_803F0570;
     HSD_Archive* archive;
     HSD_GObj* gobj;
     HSD_GObjProc* proc;
@@ -581,11 +581,11 @@ void mnGallery_80259868(void)
     }* inner;
     PAD_STACK(0x38);
 
-    mn_804D6BC8.cooldown = 5;
+    archive = mn_804D6BB8;
+    mn_804A04F0.hovered_selection = 0;
     mn_804A04F0.prev_menu = mn_804A04F0.cur_menu;
     mn_804A04F0.cur_menu = 0x1A;
-    mn_804A04F0.hovered_selection = 0;
-    archive = mn_804D6BB8;
+    mn_804D6BC8.cooldown = 5;
 
     lbArchive_LoadSections(archive, arr,
         base + 0x60,
