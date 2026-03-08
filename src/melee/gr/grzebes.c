@@ -558,18 +558,27 @@ void grZebes_801D90FC(Ground_GObj* arg) {}
 
 void grZebes_801D9100(HSD_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
-    HSD_JObj* jobj = GET_JOBJ(gobj);
+    // This is VERY MUCH permuterslop
+    // but 100% is 100% 
+    Item_GObj *new_var3;
     HSD_JObj* child_jobj;
+    Ground* gp = GET_GROUND(gobj);
+    int new_var;
+    HSD_JObj* jobj = GET_JOBJ(gobj);
     Item_GObj* mat_gobj;
+    Ground_GObj *new_var2;
 
     grAnime_801C8138(gobj, gp->map_id, 0);
     Ground_801C2ED0(jobj, gp->map_id);
-    child_jobj = Ground_801C3FA4(gobj, 0xF);
+    mat_gobj = gobj;
+    new_var3 = mat_gobj;
+    child_jobj = Ground_801C3FA4(new_var3, 0xF);
+
     mat_gobj = grMaterial_801C8CFC(7, 0, gp, child_jobj, NULL, fn_801DA9F0,
                                    NULL);
     grMaterial_801C8DE0(mat_gobj, 0.0f, -5.0f, 0.0f, 0.0f, 5.0f, 0.0f,
                         2.0f);
+    new_var2 = (Ground_GObj *) gobj;
     grMaterial_801C8E08(mat_gobj);
     gp->gv.zebes4.xC4 = 0xFF;
     gp->gv.zebes4.xC5 = 0;
@@ -579,14 +588,15 @@ void grZebes_801D9100(HSD_GObj* gobj)
     gp->gv.zebes4.xD0 = 0.0f;
     gp->gv.zebes4.xD4 = 0.0f;
     gp->gv.zebes4.xD8 = (u32) child_jobj;
+    new_var = 0xD;
     gp->gv.zebes4.xDC = (u32) Ground_801C3FA4(gobj, 0x11);
     gp->gv.zebes4.xE0 = (u32) mat_gobj;
-    gp->gv.zebes4.xE4 = 0xD;
+    gp->gv.zebes4.xE4 = new_var;
     gp->gv.zebes4.xE8 = 0;
     gp->gv.zebes4.xEC =
         (u32) grZakoGenerator_801CA394((UNK_T) &grZe_803E1C80, 4,
                                        (UNK_T) grZebes_801DCBB0, 1.0f);
-    Ground_801C2FE0((Ground_GObj*) gobj);
+    Ground_801C2FE0(new_var2);
 }
 
 bool grZebes_801D9254(Ground_GObj* arg)
