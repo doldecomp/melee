@@ -52,7 +52,7 @@
 /* 1D9F7C */ static bool grZebes_801D9F7C(Ground_GObj* arg);
 /* 1DA0C0 */ static void grZebes_801DA0C0(Ground_GObj* arg);
 /* 1DA3E8 */ static void grZebes_801DA3E8(void);
-/* 1DA528 */ static u8 grZebes_801DA528(HSD_GObj*, void*, s32, s32);
+/* 1DA528 */ static s32 grZebes_801DA528(HSD_GObj*, void*, s32, s32);
 /* 1DA9D8 */ static void fn_801DA9D8(Item_GObj* arg0, Ground* gp, Vec3* pos,
                                      HSD_GObj* fobj, f32 slope);
 /* 1DA9F0 */ static void fn_801DA9F0(Item_GObj* arg0, Ground* gp, Vec3* pos,
@@ -1155,7 +1155,7 @@ void grZebes_801DA4FC(Ground_GObj* gobj)
     Ground_801C4A08(gobj);
 }
 
-u8 grZebes_801DA528(HSD_GObj* arg0, void* arg1, s32 arg2, s32 arg3)
+s32 grZebes_801DA528(HSD_GObj* arg0, void* arg1, s32 arg2, s32 arg3)
 {
     grZe_AcidState* st = (grZe_AcidState*) arg1;
 
