@@ -83,7 +83,7 @@ fn_8018F71C(int, int); ///< returns the frame for the tou css icon?
 /* 192758 */ void fn_80192758(HSD_GObj*);
 /* 192938 */ UNK_RET fn_80192938(UNK_PARAMS);
 /* 192BB0 */ UNK_RET fn_80192BB0(UNK_PARAMS);
-/* 192E6C */ UNK_RET fn_80192E6C(UNK_PARAMS);
+/* 192E6C */ s32 fn_80192E6C(void);
 /* 193230 */ UNK_RET fn_80193230(UNK_PARAMS);
 /* 193308 */ UNK_RET fn_80193308(UNK_PARAMS);
 /* 1935B8 */ UNK_RET fn_801935B8(UNK_PARAMS);

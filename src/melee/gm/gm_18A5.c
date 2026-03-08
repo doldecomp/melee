@@ -83,7 +83,66 @@ void fn_8018A970(int arg0)
 
 /// #fn_8018D50C
 
-/// #fn_8018DC18
+void fn_8018DC18(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
+                 s32 arg5, s32 arg6, f32 farg0)
+{
+    u8* data = (u8*) arg0;
+    f32 thickness;
+    f32 neg_thickness;
+    s32 right;
+    s32 half;
+    s32 center;
+    s32 c0, c1, c2, c3, c4, c5, c6, c7, c8;
+
+    c0 = 0xFFFF00FF;
+    c8 = 0xFFFF00FF;
+    thickness = M2C_FIELD(data, f32*, 0x1C);
+    c1 = 0xFFFF00FF;
+    DrawRectangle((f32) arg1, (f32) arg2, thickness, (f32) arg4,
+                  (GXColor*) &c1);
+
+    right = arg1 + arg3;
+    c2 = c8;
+    DrawRectangle((f32) right, (f32) arg2, thickness, (f32) arg4,
+                  (GXColor*) &c2);
+
+    half = arg3 / 2;
+    center = arg1 + half;
+    c3 = c8;
+    DrawRectangle((f32) center, (f32) arg2, thickness, (f32) arg4,
+                  (GXColor*) &c3);
+
+    neg_thickness = -thickness;
+    c4 = c8;
+    DrawRectangle((f32) arg1, (f32) arg5, (f32) arg3 + thickness,
+                  neg_thickness, (GXColor*) &c4);
+
+    if (data[0x21] == 0) {
+        if (data[0x4C] == 0) {
+            c5 = M2C_FIELD(data, s32*, 0x20);
+            DrawRectangle((f32) arg1, (f32) arg2, thickness, (f32) arg4,
+                          (GXColor*) &c5);
+            c6 = M2C_FIELD(data, s32*, 0x20);
+            DrawRectangle((f32) arg1, (f32) arg5,
+                          (f32) half + thickness, neg_thickness,
+                          (GXColor*) &c6);
+            return;
+        }
+        if (data[0x78] == 0) {
+            c7 = M2C_FIELD(data, s32*, 0x20);
+            DrawRectangle((f32) center, (f32) arg2, thickness, (f32) arg4,
+                          (GXColor*) &c7);
+            return;
+        }
+        c0 = M2C_FIELD(data, s32*, 0x20);
+        DrawRectangle((f32) right, (f32) arg2, thickness, (f32) arg4,
+                      (GXColor*) &c0);
+        c8 = M2C_FIELD(data, s32*, 0x20);
+        DrawRectangle((f32) center, (f32) arg5,
+                      (f32) half + thickness, neg_thickness,
+                      (GXColor*) &c8);
+    }
+}
 
 /// #fn_8018DF68
 
@@ -1738,7 +1797,63 @@ void fn_80192758(HSD_GObj* gobj)
 
 /// #fn_80192BB0
 
-/// #fn_80192E6C
+s32 fn_80192E6C(void)
+{
+    HSD_GObj* gobj;
+    HSD_JObj* jobj;
+    s32 i;
+    s32 j;
+
+    fn_8019035C(1, lbl_804D6650->models[4], 0, 0x1A, 2, 1, fn_801918F0,
+                0.0f);
+    fn_8019035C(1, lbl_804D6650->models[7], 0, 0x1A, 2, 1, fn_80191A54,
+                0.0f);
+    fn_8019035C(1, lbl_804D6650->models[5], 0, 0x1A, 2, 1,
+                (void (*)(HSD_GObj*)) fn_80191B5C, 0.0f);
+    fn_8019035C(1, lbl_804D6650->models[0], 0, 0x1A, 2, 1, fn_80191CA4,
+                0.0f);
+    fn_8019035C(1, lbl_804D6650->models[6], 0, 0x1A, 2, 1, fn_8019237C,
+                0.0f);
+    fn_8019035C(1, lbl_804D6650->models[10], 0, 0x1A, 2, 1, fn_8019249C,
+                0.0f);
+    jobj = (HSD_JObj*) fn_8019035C(1, lbl_804D6650->models[2], 0, 0x1A, 2,
+                                    1, fn_80192758, 0.0f)->hsd_obj;
+    HSD_JObjSetFlagsAll(jobj, 0x10U);
+
+    for (i = 0; i < 0x40; i++) {
+        gobj = fn_8019035C(1, lbl_804D6650->models[8], 0, 0x1A, 2, 1,
+                           fn_80191D38, 0.0f);
+        fn_8018FDC4((HSD_JObj*) gobj->hsd_obj, -12.300001f, 12.800008f,
+                    666.0f);
+        fn_8018FBD8((void*) gobj, i);
+
+        gobj = fn_8019035C(1, lbl_804D6650->models[3], 0, 0x1A, 2, 1,
+                           fn_80191E9C, 0.0f);
+        jobj = (HSD_JObj*) gobj->hsd_obj;
+        HSD_JObjSetFlagsAll(jobj, 0x10U);
+        fn_8018FDC4(jobj, -12.300001f, 666.0f, 666.0f);
+        fn_8018FBD8((void*) gobj, i);
+    }
+
+    for (j = 0; j <= 0x19; j++) {
+        gobj = fn_8019035C(1, lbl_804D6650->models[9], 0, 0x1A, 2, 1,
+                           (void (*)(HSD_GObj*)) fn_80191FD4, (f32) j);
+        jobj = (HSD_JObj*) gobj->hsd_obj;
+        if (j != 0x19) {
+            fn_8018FF9C(jobj, 0.65f, 0.66f, 666.0f);
+            fn_8018FDC4(jobj,
+                        (6.0f * (f32) (j % 5)) + -3.0f,
+                        -((4.500006f * (f32) (j / 5)) - 2.3f),
+                        0.2f);
+        } else {
+            fn_8018FDC4(jobj, -1.0f, 10.099993f, 0.2f);
+        }
+        fn_8018FBD8((void*) gobj, j);
+    }
+
+    return (s32) fn_8019035C(1, lbl_804D6650->models[1], 0, 0x1A, 2, 1,
+                              fn_80192690, 0.0f);
+}
 
 #pragma push
 #pragma dont_inline on
@@ -2058,7 +2173,129 @@ void fn_80195AF0(s32* state_ptr, u32 buttons, u32 trigger)
     }
 }
 
-/// #fn_80195CCC
+void fn_80195CCC(s32* arg, u32 buttons, u32 trigger)
+{
+    u8* ptr = lbl_804799B8.pad;
+    u16* arr;
+    s32 selected;
+    s32 slot;
+    TmData* tm;
+    u8 count;
+    s32 i;
+    s32 unique;
+
+    if (buttons & 0x40001) {
+        lbAudioAx_80024030(2);
+        if ((ptr[5] % 4) != 0) {
+            ptr[5] = (u8) (ptr[5] - 1);
+            arr = (u16*) ((u8*) arg + (ptr[2] + ptr[3]) * 0x12);
+            arr[0x20] = (s16) (ptr[5] + (ptr[6] * 4));
+            fn_80190ABC(5);
+            fn_80190ABC(4);
+        }
+    } else if (buttons & 0x80002) {
+        lbAudioAx_80024030(2);
+        if (((s32) (ptr[5] % 4) < 3) &&
+            ((s32) (ptr[5] + ((ptr[6] * 4) + 1)) < GetNameCount()))
+        {
+            ptr[5] = (u8) (ptr[5] + 1);
+            arr = (u16*) ((u8*) arg + (ptr[2] + ptr[3]) * 0x12);
+            arr[0x20] = (s16) (ptr[5] + (ptr[6] * 4));
+            fn_80190ABC(5);
+            fn_80190ABC(4);
+        }
+    } else if (buttons & 0x10008) {
+        lbAudioAx_80024030(2);
+        if (((s32) ptr[5] / 4) != 0) {
+            ptr[5] = (u8) (ptr[5] - 4);
+            arr = (u16*) ((u8*) arg + (ptr[2] + ptr[3]) * 0x12);
+            arr[0x20] = (s16) (ptr[5] + (ptr[6] * 4));
+            fn_80190ABC(5);
+            fn_80190ABC(4);
+        } else if ((u8) ptr[6] != 0) {
+            ptr[6] = (u8) (ptr[6] - 1);
+            arr = (u16*) ((u8*) arg + (ptr[2] + ptr[3]) * 0x12);
+            arr[0x20] = (s16) (ptr[5] + (ptr[6] * 4));
+            fn_80190ABC(5);
+            fn_80190ABC(4);
+        }
+    } else if (buttons & 0x20004) {
+        lbAudioAx_80024030(2);
+        if ((s32) ((s32) ptr[5] / 4) < 8) {
+            if ((s32) (ptr[5] + ((ptr[6] * 4) + 4)) < GetNameCount()) {
+                ptr[5] = (u8) (ptr[5] + 4);
+                arr = (u16*) ((u8*) arg + (ptr[2] + ptr[3]) * 0x12);
+                arr[0x20] = (s16) (ptr[5] + (ptr[6] * 4));
+            }
+            fn_80190ABC(5);
+            fn_80190ABC(4);
+        } else if ((s32) (ptr[5] + ((ptr[6] * 4) + 4)) < GetNameCount()) {
+            ptr[6] = (u8) (ptr[6] + 1);
+            arr = (u16*) ((u8*) arg + (ptr[2] + ptr[3]) * 0x12);
+            arr[0x20] = (s16) (ptr[5] + (ptr[6] * 4));
+            fn_80190ABC(5);
+            fn_80190ABC(4);
+        }
+    }
+
+    if (trigger & 0x100) {
+        if (GetNameText(ptr[5] + (ptr[6] * 4)) != NULL) {
+            selected = ptr[5] + (ptr[6] * 4);
+            slot = ptr[2] + ptr[3];
+            tm = gm_8018F634();
+            count = tm->x2E;
+            unique = 0;
+            i = 0;
+            if ((s32) count > 0) {
+                for (;;) {
+                    if ((i != slot) &&
+                        (selected == (s32) tm->x37[unique].x9))
+                    {
+                        unique = 0;
+                        break;
+                    }
+                    unique++;
+                    i++;
+                    count--;
+                    if (count == 0) {
+                        unique = 1;
+                        break;
+                    }
+                }
+            } else {
+                unique = 1;
+            }
+            if (unique != 0) {
+                lbAudioAx_80024030(1);
+                arr = (u16*) ((u8*) arg +
+                              (lbl_804799B8.pad[2] + lbl_804799B8.pad[3]) *
+                                  0x12);
+                arr[0x20] =
+                    (s16) (lbl_804799B8.pad[5] + (lbl_804799B8.pad[6] * 4));
+                fn_80190ABC(5);
+                fn_80190ABC(6);
+                *arg = 0xC;
+                return;
+            }
+            lbAudioAx_80024030(3);
+            return;
+        }
+        lbAudioAx_80024030(3);
+        return;
+    }
+
+    if (trigger & 0x200) {
+        u16* arr2;
+
+        lbAudioAx_80024030(0);
+        arr2 = (u16*) ((u8*) arg +
+                        (lbl_804799B8.pad[2] + lbl_804799B8.pad[3]) * 0x12);
+        arr2[0x20] = arr2[0x21];
+        fn_80190ABC(5);
+        fn_80190ABC(6);
+        *arg = 0xE;
+    }
+}
 
 /// @todo Currently 96.88% match - needs minor register allocation fix
 /// Handles confirm/cancel input for tournament start.
