@@ -1423,8 +1423,8 @@ s32 grZebes_801DAA08(void)
 void fn_801DAC90(Item_GObj* arg0, Ground* arg1, Vec3* arg2, HSD_GObj* arg3,
                  f32 arg4)
 {
-    s32 found = -1;
     s32 i;
+    s32 found = -1;
 
     for (i = 0; i < 20; i++) {
         if (grZe_8049F170[i].active == 1 && i != 0 && i != 6) {
@@ -1437,6 +1437,8 @@ void fn_801DAC90(Item_GObj* arg0, Ground* arg1, Vec3* arg2, HSD_GObj* arg3,
         grZe_8049F170[found].active = 2;
         grZe_804D6994 = 0x78;
         grZe_8049F170[found].unk1C = 0.001f;
+        if (grZe_8049F170[i].active && grZe_8049F170[i].active){}
+
     }
 }
 
