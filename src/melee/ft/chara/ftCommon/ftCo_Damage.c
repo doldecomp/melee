@@ -625,19 +625,15 @@ void ftCo_8008E5A4(Fighter* fp)
     }
 }
 
-static bool isPointInCircle(float x, float y, float radius)
-{
-    if (x + y >= radius) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
 void ftCo_Damage_OnExitHitlag(Fighter_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
-    bool isPointInCircle = VEC2_SQ_LEN(fp->input.lstick) >= SQ(p_ftCommonData->sdi_min_stick_mag) ? true : false;
+    Fighter* fp = GET_FIGHTER(gobj);
+    bool isPointInCircle;
+    if (VEC2_SQ_LEN(fp->input.lstick) >= SQ(p_ftCommonData->sdi_min_stick_mag)) {
+        isPointInCircle = true;
+    } else {
+        isPointInCircle = false;
+    }
     if (isPointInCircle || ftCo_800DF608(fp))
     {
         float x, y;
