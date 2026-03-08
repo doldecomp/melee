@@ -1418,7 +1418,32 @@ void fn_80191CA4(HSD_GObj* gobj)
 /// #fn_80191FD4
 
 /// Updates tournament menu cursor JObj visibility and position.
-/// #fn_8019237C
+void fn_8019237C(HSD_GObj* gobj)
+{
+    TmData* tm;
+    HSD_JObj* jobj;
+
+    tm = gm_8018F634();
+    jobj = gobj->hsd_obj;
+
+    if (tm->cur_option <= 9) {
+        HSD_JObjSetFlagsAll(jobj, 0x10);
+        return;
+    }
+
+    HSD_JObjClearFlagsAll(jobj, 0x10);
+
+    if (tm->cur_option != 0xF) {
+        HSD_JObjSetFlagsAll(jobj, 0x10);
+        return;
+    }
+
+    fn_8019044C(jobj, (f32) lbl_804799B8.pad[0xA]);
+    fn_8018FDC4(jobj,
+                (7.1899996f * (f32) (lbl_804799B8.pad[5] % 4)) + -1.8f,
+                -((2.3f * (f32) ((s32) lbl_804799B8.pad[5] / 4)) - 2.7f),
+                666.0f);
+}
 
 /// @todo Currently 92.46% match - permuter couldn't improve
 void fn_8019249C(HSD_GObj* gobj)
