@@ -2928,11 +2928,129 @@ void fn_80194D84(s32* state, u32 buttons, u32 trigger)
     }
 }
 
-/// #fn_80194F30
+static s32 lbl_804D6654;
+
+/// Handles tournament settings menu input (entrant configuration).
+void fn_80194F30(s32* state_ptr, u32 buttons, u32 trigger)
+{
+    TmData* tm = (TmData*) state_ptr;
+    s32 idx;
+
+    if (trigger & 0x1000) {
+        lbAudioAx_80024030(1);
+        lbl_804D6654 = tm->cur_option;
+        tm->cur_option = 0x11;
+        return;
+    }
+
+    if (buttons & 0x40001) {
+        switch (tm->cur_option) {
+        case 12:
+            lbAudioAx_80024030(2);
+            tm->cur_option = 0xA;
+            break;
+        case 16:
+            lbAudioAx_80024030(2);
+            tm->cur_option = 0xC;
+            lbl_804799B8.pad[1] = 0;
+            break;
+        }
+    } else if (buttons & 0x80002) {
+        switch (tm->cur_option) {
+        case 11:
+            break;
+        case 10:
+            lbAudioAx_80024030(2);
+            tm->cur_option = 0xC;
+            break;
+        case 12:
+            if (lbl_804799B8.pad[0] != 0) {
+                lbAudioAx_80024030(2);
+                tm->cur_option = 0x10;
+            }
+            break;
+        }
+    } else if (buttons & 0x10008) {
+        idx = lbl_804799B8.pad[2] + lbl_804799B8.pad[3];
+        if (tm->cur_option != 0x10 || lbl_804799B8.pad[1] == 0) {
+            if (lbl_804799B8.pad[2] != 0) {
+                lbAudioAx_80024030(2);
+                lbl_804799B8.pad[2] -= 1;
+                fn_80190ABC(5);
+            } else if (lbl_804799B8.pad[3] != 0) {
+                lbAudioAx_80024030(2);
+                lbl_804799B8.pad[3] -= 1;
+                lbl_804799B8.pad[4] -= 1;
+                fn_80190ABC(5);
+                fn_80190ABC(6);
+            }
+        } else if (tm->x37[idx].x2 > 1) {
+            lbAudioAx_80024030(2);
+            tm->x37[idx].x2 -= 1;
+        }
+    } else if (buttons & 0x20004) {
+        idx = lbl_804799B8.pad[2] + lbl_804799B8.pad[3];
+        if (tm->cur_option != 0x10 || lbl_804799B8.pad[1] == 0) {
+            if (lbl_804799B8.pad[2] < 0xB) {
+                if (lbl_804799B8.pad[2] + lbl_804799B8.pad[3] < tm->x2E - 1) {
+                    lbAudioAx_80024030(2);
+                    lbl_804799B8.pad[2] += 1;
+                    fn_80190ABC(5);
+                }
+            } else if (lbl_804799B8.pad[2] + lbl_804799B8.pad[3] < tm->x2E - 1) {
+                lbAudioAx_80024030(2);
+                lbl_804799B8.pad[3] += 1;
+                lbl_804799B8.pad[4] += 1;
+                fn_80190ABC(5);
+                fn_80190ABC(6);
+            }
+        } else if (tm->x37[idx].x2 < 9) {
+            lbAudioAx_80024030(2);
+            tm->x37[idx].x2 += 1;
+        }
+    }
+
+    if (trigger & 0x100) {
+        idx = lbl_804799B8.pad[2] + lbl_804799B8.pad[3];
+        switch (tm->cur_option) {
+        case 12:
+        case 10:
+            lbAudioAx_80024030(1);
+            tm->x37[idx].x4 = tm->x37[idx].x3;
+            tm->x37[idx].x8 = tm->x37[idx].x7;
+            tm->x37[idx].xB = tm->x37[idx].x9;
+            tm->x37[idx].x6 = tm->x37[idx].x5;
+            tm->cur_option += 1;
+            return;
+        case 16:
+            if (lbl_804799B8.pad[0] != 1) {
+                if (lbl_804799B8.pad[1] != 1) {
+                    lbAudioAx_80024030(1);
+                }
+                lbl_804799B8.pad[1] = 1;
+                return;
+            }
+            break;
+        }
+    } else if (trigger & 0x200) {
+        lbAudioAx_80024030(0);
+        if (tm->cur_option != 0x10 || lbl_804799B8.pad[1] == 0) {
+            tm->cur_option = 6;
+            lbl_804799B8.xE = 0;
+            if (gm_804771C4.match_type == 0) {
+                TmData* tmdata = gm_8018F634();
+                fn_8018EC7C();
+                fn_8018E618(tmdata->entrants, 1, 4.5f);
+                fn_80190480(130.0f);
+                fn_80190520(-278.0f, 255.0f, 0.0f);
+            }
+        } else {
+            lbl_804799B8.pad[1] = 0;
+        }
+    }
+}
 
 /// #fn_801953C8
-
-static s32 lbl_804D6654;
 
 /// @todo Currently 93.5% match - permuter couldn't improve
 /// Handles name entry/selection input for tournament mode.
