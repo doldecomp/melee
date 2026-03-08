@@ -64,10 +64,7 @@ extern float MSL_TrigF_80400770[], MSL_TrigF_80400774[];
 #define NAN MSL_TrigF_80400770[0]
 #define INF MSL_TrigF_80400774[0]
 
-void lbRefract_80021CE8(void* data, s32 index)
-{
-    NOT_IMPLEMENTED;
-}
+/// #lbRefract_80021CE8
 
 static void lbRefract_WriteTexCoordIA4(lbRefract_CallbackData* data, s32 row,
                                        u32 col, u32 arg3, u8 arg4,
@@ -237,10 +234,7 @@ s32 lbRefract_8002219C(lbRefract_CallbackData* data, s32 buffer, s32 format,
     }
 }
 
-void lbRefract_800222A4(void)
-{
-    NOT_IMPLEMENTED;
-}
+/// #lbRefract_800222A4
 
 /// @brief Copy framebuffer to refraction source texture.
 void lbRefract_8002247C(HSD_CObj* cobj)
@@ -322,10 +316,7 @@ static void fn_80022650(void)
     ((HSD_DObjInfo*) &lbl_803BB0B0[0x168])->disp = lbRefract_DObjDispReset;
 }
 
-s32 lbRefract_PObjLoad(HSD_PObj* pobj, HSD_PObjDesc* desc)
-{
-    NOT_IMPLEMENTED;
-}
+/// #lbRefract_PObjLoad
 
 static void fn_80022940(void)
 {
@@ -338,10 +329,7 @@ static void fn_80022940(void)
     ((HSD_PObjInfo*) &lbl_803BB0B0[0x1AC])->load = lbRefract_PObjLoad;
 }
 
-void lbRefract_80022998(HSD_MObj* mobj, u32 rendermode, s8 arg2)
-{
-    NOT_IMPLEMENTED;
-}
+/// #lbRefract_80022998
 
 /// @brief Increment refraction effect user count.
 void lbRefract_80022BB8(void)
