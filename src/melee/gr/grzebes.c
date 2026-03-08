@@ -1090,8 +1090,12 @@ void grZebes_801DA0C4(f32 level)
 void grZebes_801DA254(Ground_GObj* gobj, f32 level)
 {
     Ground* gp = GET_GROUND(gobj);
+    int new_var;
     HSD_LObj* lobj = (HSD_LObj*) gp->gv.zebes4.xDC;
-    PAD_STACK(8);
+    new_var = 0;
+    do {
+        UNUSED unsigned char _[(8)];
+    } while (new_var);
 
     if (lobj == NULL) {
         HSD_GObj* lgobj = HSD_GObj_804D7824[4];
