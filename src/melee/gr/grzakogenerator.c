@@ -299,10 +299,9 @@ void grZakoGenerator_801CACB8(HSD_GObj* item_gobj)
     }
 }
 
-s32 fn_801CADBC(void)
+s32 fn_801CADBC(HSD_GObj* gobj)
 {
-    grZakoGenerator_801CA8B4(0);
-    return 0;
+    return grZakoGenerator_801CA8B4(0);
 }
 
 s32 grZakoGenerator_801CADE0(void)
