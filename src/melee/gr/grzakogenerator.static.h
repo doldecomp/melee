@@ -3,15 +3,25 @@
 
 #include <platform.h>
 
+struct ZakoElement {
+    /* +0 */ s16 x0;
+    /* +2 */ s16 x2;
+    /* +4 */ HSD_GObj* x4;
+    /* +8 */ s32 x8;
+};
+
+struct ZakoConfig {
+    /* +0 */ void* x0;
+    /* +4 */ void* x4;
+    /* +8 */ s32 x8;
+    /* +C */ void* xC;
+    /* +10 */ f32 x10;
+    /* +14 */ s32 x14;
+    /* +18 */ s32 x18;
+};
+
 struct grZakoGenerator_Data {
-    /* +0x000 */ s16 x0;
-    /* +0x002 */ s16 x2;
-    /* +0x004 */ s32 x4;
-    /* +0x008 */ char pad_8[0x3B8];
-    /* +0x3C0 */ s16 x3C0;
-    /* +0x3C2 */ s16 x3C2;
-    /* +0x3C4 */ s32 x3C4;
-    /* +0x3C8 */ s32 x3C8;
+    /* +0x000 */ struct ZakoElement elements[81];
 };
 
 struct lbl_8049F030_t {
