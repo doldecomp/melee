@@ -1152,7 +1152,92 @@ void fn_80191240(HSD_GObj* gobj)
     fn_8019044C(jobj, 0.0F);
 }
 
-/// #fn_801913BC
+/// Updates text visibility and menu state for tournament bracket options.
+void fn_801913BC(HSD_GObj* gobj)
+{
+    TmData* tm;
+    u32 idx;
+    HSD_JObj* jobj;
+    s32 cur;
+    u8* counter_ptr;
+
+    tm = gm_8018F634();
+    idx = fn_8018F62C(gobj);
+    jobj = gobj->hsd_obj;
+
+    if (tm->cur_option < 9) {
+        HSD_JObjClearFlagsAll(jobj, 0x10);
+
+        if ((s32) idx == 0) {
+            tm->x518[0]->hidden = 1;
+            tm->x518[1]->hidden = 1;
+            tm->x518[2]->hidden = 1;
+            tm->x524[0]->hidden = 1;
+            tm->x524[1]->hidden = 1;
+            tm->x4E0->hidden = 0;
+        }
+
+        if ((s32) idx <= tm->cur_option) {
+            tm->x4E8[idx]->hidden = 0;
+            tm->x500[idx]->hidden = 0;
+            if ((s32) idx < 3 && gm_804771C4.match_type == 0) {
+                tm->x4E4->hidden = 1;
+            } else {
+                tm->x4E4->hidden = 0;
+            }
+            if ((s32) idx == 5 && gm_804771C4.match_type != 0) {
+                tm->x4E8[idx]->hidden = 1;
+                tm->x500[idx]->hidden = 1;
+                HSD_JObjSetFlagsAll(jobj, 0x10);
+            }
+        } else {
+            tm->x4E8[idx]->hidden = 1;
+            tm->x500[idx]->hidden = 1;
+        }
+
+        if (tm->cur_option >= 3 && gm_804771C4.match_type == 0) {
+            tm->x4E4->hidden = 0;
+        } else {
+            tm->x4E4->hidden = 1;
+        }
+
+        cur = tm->cur_option;
+        if ((s32) idx == cur) {
+            counter_ptr = &lbl_804799B8.pad[0x10 + idx];
+            if (*counter_ptr >= 0x14U) {
+                *counter_ptr = 0xA;
+            }
+            fn_8019044C(jobj, (f32) *counter_ptr);
+            *counter_ptr = *counter_ptr + 1;
+            return;
+        }
+        if ((s32) idx > cur) {
+            HSD_JObjSetFlagsAll(jobj, 0x10);
+            return;
+        }
+        fn_8019044C(jobj, 0.0f);
+        return;
+    }
+
+    HSD_JObjSetFlagsAll(jobj, 0x10);
+    tm->x4E8[idx]->hidden = 1;
+    tm->x500[idx]->hidden = 1;
+    if ((s32) idx == 0) {
+        if (tm->cur_option > 9) {
+            tm->x518[1]->hidden = 0;
+            tm->x518[2]->hidden = 0;
+            tm->x524[0]->hidden = 0;
+            tm->x524[1]->hidden = 0;
+            if (tm->cur_option != 0xF) {
+                tm->x518[0]->hidden = 1;
+            } else {
+                tm->x518[0]->hidden = 0;
+            }
+        }
+        tm->x4E4->hidden = 1;
+        tm->x4E0->hidden = 1;
+    }
+}
 
 /// Updates the visibility and animation state of a Tournament Mode menu
 /// option.
@@ -2379,7 +2464,56 @@ void fn_80196EEC(HSD_GObj* gobj)
 /// #fn_80196FFC
 
 /// Updates visibility and position of a tournament menu JObj.
-/// #fn_801973F8
+void fn_801973F8(HSD_GObj* gobj)
+{
+    TmData* tm;
+    u32 pnum;
+    HSD_JObj* jobj;
+    f32 x;
+    s32 cond;
+    u8 player_count;
+
+    tm = gm_8018F634();
+    pnum = fn_8018F62C(gobj);
+    jobj = gobj->hsd_obj;
+
+    if (gm_8018F634()->cur_option >= 0x1B &&
+        gm_8018F634()->cur_option <= 0x1E)
+    {
+        cond = 1;
+    } else {
+        cond = 0;
+    }
+
+    if (cond == 0) {
+        HSD_JObjSetFlagsAll(jobj, 0x10);
+        return;
+    }
+
+    HSD_JObjClearFlagsAll(jobj, 0x10);
+
+    if ((s8) (u8) HSD_PadMasterStatus[(u8) pnum].err != 0 &&
+        tm->x4B8[pnum].x0 != 1)
+    {
+        HSD_JObjSetFlagsAll(jobj, 0x10);
+        return;
+    }
+
+    player_count = tm->x30;
+    if ((s32) player_count == 4) {
+        x = (13.0f * (f32) pnum) + -19.5f;
+    } else if ((s32) player_count == 3) {
+        x = 6.5f + ((13.0f * (f32) pnum) - 19.5f);
+    } else {
+        x = 6.5f + ((13.0f * (2.0f * (f32) pnum)) - 19.5f);
+    }
+
+    fn_8018FDC4(jobj, 4.5f + x, 5.5f, 666.0f);
+
+    if (lbl_804799D8.x0[pnum * 6 + 0x2D] == 4) {
+        HSD_JObjSetFlagsAll(jobj, 0x10);
+    }
+}
 
 /// Updates visibility of a tournament menu JObj based on current menu state.
 void fn_801975C8(HSD_GObj* gobj)
