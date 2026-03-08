@@ -586,37 +586,41 @@ void ifStatus_802F5EC0(void)
     NOT_IMPLEMENTED;
 }
 
-static inline HSD_GObj* nth_node(HSD_GObj* node, s32 n)
-{
-    s32 i;
-    HSD_GObj* cur = node;
-    for (i = 0; i < n && node; i++) {
-        if (cur == NULL) { // if (node == NULL)
-            cur = NULL;
-        } else {
-            cur = node->next;
-        }
-        node = cur;
-    }
-    return node;
-}
-
-/// 99.81% match
-/// https://decomp.me/scratch/XGFpw
 HSD_GObj* ifStatus_802F6194(HSD_GObj* node, s32 n)
 {
-    HSD_GObj* gx;
-
+    HSD_GObj* gx_head;
+    HSD_GObj* gx_next;
+    HSD_GObj* gx_cur;
+    s32 i;
     if ((node == NULL) || (n < 0)) {
         return NULL;
     }
     if (node == NULL) {
-        gx = NULL;
+        gx_head = NULL;
     } else {
-        gx = node->next_gx;
+        gx_head = node->next_gx;
     }
-    gx = nth_node(gx, n);
-    return gx;
+    gx_cur = gx_head;
+    i = 0;
+    goto check_done;
+
+advance_node:
+    if (gx_cur == NULL) {
+        gx_next = NULL;
+    } else {
+        gx_next = gx_cur->next;
+    }
+    gx_cur = gx_next;
+    i += 1;
+
+check_done:
+    if (i >= n) {
+        return gx_cur;
+    }
+    if (gx_cur != NULL) {
+        goto advance_node;
+    }
+    return gx_cur;
 }
 
 void ifStatus_802F61FC(void)
