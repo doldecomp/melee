@@ -1637,7 +1637,109 @@ void fn_80191E9C(HSD_GObj* gobj)
     fn_8019044C(jobj, (f32) tm->x37[idx].x1);
 }
 
-/// #fn_80191FD4
+void fn_80191FD4(HSD_GObj* gobj)
+{
+    TmData* tm;
+    HSD_JObj* jobj;
+    HSD_JObj* child;
+    HSD_JObj* sibling;
+    u32 idx;
+    s32 slot;
+    enum CSSIconHud hud;
+
+    tm = gm_8018F634();
+    jobj = gobj->hsd_obj;
+    idx = fn_8018F62C(gobj);
+
+    if ((s32) tm->cur_option <= 9) {
+        HSD_JObjSetFlagsAll(jobj, 0x10U);
+        return;
+    }
+
+    HSD_JObjClearFlagsAll(jobj, 0x10U);
+
+    if ((s32) idx == 0x19) {
+        child = (jobj != NULL) ? jobj->child : NULL;
+        fn_8019044C(child, 0.0f);
+
+        sibling = (child != NULL) ? child->next : NULL;
+        slot = lbl_804799B8.pad[2] + lbl_804799B8.pad[3];
+
+        if ((u8) tm->x37[slot].x4 != 0) {
+            fn_8019044C(sibling, 201.0f);
+            return;
+        }
+
+        fn_8019044C(sibling,
+                    fn_8018F71C((s32) tm->x37[slot].x2,
+                                (s32) tm->x37[slot].x6));
+        {
+            u8 chr = tm->x37[lbl_804799B8.pad[2] + lbl_804799B8.pad[3]].x2;
+            if (lbl_803D9D20.x72[chr] != 0) {
+                HSD_JObjClearFlagsAll(sibling, 0x10U);
+                return;
+            }
+            if (fn_8018F3D0(fn_8018F310(fn_8018F6FC((enum CSSIconHud) chr))) ==
+                1)
+            {
+                fn_8019044C(sibling, 200.0f);
+                return;
+            }
+            HSD_JObjSetFlagsAll(sibling, 0x10U);
+            return;
+        }
+    }
+
+    if ((s32) tm->cur_option != 0xB) {
+        HSD_JObjSetFlagsAll(jobj, 0x10U);
+        return;
+    }
+
+    fn_8018FF9C(jobj, 0.9f, 0.9f, 666.0f);
+    child = (jobj != NULL) ? jobj->child : NULL;
+
+    slot = lbl_804799B8.pad[2] + lbl_804799B8.pad[3];
+    if ((s32) tm->x37[slot].x2 ==
+        fn_8018F6DC(fn_8018F3BC((s32) idx)))
+    {
+        fn_8019044C(child,
+                    (f32) (lbl_804799B8.pad[0xA] + 0xA));
+    } else {
+        hud = fn_8018F6DC(fn_8018F3BC((s32) idx));
+        if ((lbl_803D9D20.x72[hud] != 0) ||
+            (fn_8018F3D0(fn_8018F310(fn_8018F6FC(hud))) != 2))
+        {
+            fn_8019044C(child, 0.0f);
+        } else {
+            HSD_JObjSetFlagsAll(child, 0x10U);
+        }
+    }
+
+    sibling = (child != NULL) ? child->next : NULL;
+    HSD_JObjClearFlagsAll(sibling, 0x10U);
+
+    hud = fn_8018F6DC(fn_8018F3BC((s32) idx));
+    if (lbl_803D9D20.x72[hud] != 0) {
+        slot = lbl_804799B8.pad[2] + lbl_804799B8.pad[3];
+        if ((s32) tm->x37[slot].x2 ==
+            fn_8018F6DC(fn_8018F3BC((s32) idx)))
+        {
+            fn_8019044C(sibling,
+                        (f32) ((tm->x37[slot].x6 * 0x1E) +
+                               fn_8018F6DC(fn_8018F3BC((s32) idx))));
+            return;
+        }
+        fn_8019044C(sibling,
+                    (f32) fn_8018F6DC(fn_8018F3BC((s32) idx)));
+        return;
+    }
+
+    if (fn_8018F3D0(fn_8018F310(fn_8018F3BC((s32) idx))) == 1) {
+        fn_8019044C(sibling, 200.0f);
+        return;
+    }
+    HSD_JObjSetFlagsAll(sibling, 0x10U);
+}
 
 /// Updates tournament menu cursor JObj visibility and position.
 void fn_8019237C(HSD_GObj* gobj)
@@ -1793,9 +1895,136 @@ void fn_80192758(HSD_GObj* gobj)
     }
 }
 
-/// #fn_80192938
+extern s32 lbl_804D665C;
 
-/// #fn_80192BB0
+s32 fn_80192938(void)
+{
+    TmData* tm;
+    s32 i;
+    s32 j;
+    s32 start;
+    s32 a, b;
+    u8 tmp;
+    u8 handicap;
+
+    tm = gm_8018F634();
+    lbl_804D6658 = 0;
+    tm->cur_option = 9;
+
+    if ((s32) gm_804771C4.match_type == 0) {
+        tm->x2E = lbl_803D9D20.x0[tm->entrants];
+        tm->x2F = (u8) tm->hmn_cpu_count;
+    } else {
+        tm->x2E = (u8) tm->combatants;
+        tm->x2F = (u8) tm->combatants;
+        tm->x30 = (u8) tm->entrants;
+    }
+
+    for (i = 0; i < 0x40; i++) {
+        tm->x37[i].x4 = 0;
+        tm->x37[i].xB = (u8) i;
+
+        if ((u8) gmMainLib_8015CC34()->handicap == 1) {
+            if ((s32) gm_804771C4.match_type == 0) {
+                gmMainLib_8015CC34()->handicap = 0;
+                tm->x37[i].x1 = 9;
+            } else {
+                tm->x37[i].x1 = 5;
+            }
+        } else {
+            tm->x37[i].x1 = 9;
+        }
+
+        tm->x37[i].x2 = fn_8018F410();
+        tm->x37[i].x6 = HSD_Randi(
+            (s32) gm_80169238(fn_8018F6FC((enum CSSIconHud) tm->x37[i].x2)));
+
+        if ((s32) (u8) i < (s32) tm->x2E) {
+            ((u8*) &tm->x37[i])[-1] = 1;
+            if ((s32) (u8) i < (s32) tm->x2F) {
+                tm->x37[i].x0 = 0;
+                tm->x37[i].x9 = (u16) (i + 0x320);
+            } else {
+                tm->x37[i].x0 = 1;
+                tm->x37[i].x9 = (u16) ((i + 0x384) - tm->x2F);
+                if (((s32) gm_804771C4.match_type == 0) &&
+                    ((s32) tm->cpu_level == 0))
+                {
+                    tm->x37[i].x0 = HSD_Randi(9) + 1;
+                } else {
+                    tm->x37[i].x0 = (u8) tm->cpu_level;
+                }
+            }
+        } else {
+            ((u8*) &tm->x37[i])[-1] = 0;
+            tm->x37[i].x0 = 3;
+            tm->x37[i].x9 = 0x3E7;
+        }
+    }
+
+    start = 0;
+    tm->x4B8[0].x2 = 0;
+    tm->x4B8[1].x2 = 0;
+    tm->x4B8[2].x2 = 0;
+    tm->x4B8[3].x2 = 0;
+
+    if ((s32) gm_804771C4.match_type == 0) {
+        if ((s32) lbl_804D665C < 2) {
+            start = 1;
+        }
+        for (j = 0; j < 0x3E8; j++) {
+            a = start + HSD_Randi(tm->x2E - start);
+            b = start + HSD_Randi(tm->x2E - start);
+            tmp = tm->x37[a].xB;
+            tm->x37[a].xB = tm->x37[b].xB;
+            tm->x37[b].xB = tmp;
+        }
+    }
+
+    lbl_804799B8.pad[2] = 0;
+    lbl_804799B8.pad[3] = 0;
+    lbl_804799B8.pad[4] = 0xB;
+    lbl_804799B8.pad[5] = 0;
+    lbl_804799B8.pad[6] = 0;
+    handicap = gmMainLib_8015CC34()->handicap;
+    lbl_804799B8.pad[0] = handicap;
+    tm->x24 = 0;
+    tm->pad_x34[0] = 0xFF;
+    tm->x33 = 0xFF;
+    return (s32) handicap;
+}
+
+void fn_80192BB0(void)
+{
+    HSD_GObj* gobj;
+    HSD_JObj* jobj;
+    s32 i;
+    f32 y;
+
+    fn_8019035C(1, lbl_804D664C->models[2], 0, 0x1A, 2, 1,
+                (void (*)(HSD_GObj*)) fn_8019175C, 0.0f);
+
+    for (i = 0; i < 6; i++) {
+        gobj = fn_8019035C(1, lbl_804D664C->models[3], 0, 0x1A, 2, 1,
+                           fn_80191240, 0.0f);
+        jobj = (HSD_JObj*) gobj->hsd_obj;
+        fn_8018FBD8((void*) gobj, i);
+        y = -((3.5f * (f32) i) - 11.5f);
+        HSD_JObjSetTranslateY(jobj, y);
+
+        gobj = fn_8019035C(1, lbl_804D664C->models[0], 0, 0x1A, 2, 1,
+                           fn_801913BC, 0.0f);
+        jobj = (HSD_JObj*) gobj->hsd_obj;
+        fn_8018FBD8((void*) gobj, i);
+        HSD_JObjSetTranslateY(jobj, y);
+
+        gobj = fn_8019035C(1, lbl_804D664C->models[1], 0, 0x1A, 2, 1,
+                           fn_80191678, 0.0f);
+        jobj = (HSD_JObj*) gobj->hsd_obj;
+        fn_8018FBD8((void*) gobj, i);
+        HSD_JObjSetTranslateY(jobj, y);
+    }
+}
 
 s32 fn_80192E6C(void)
 {
@@ -3162,7 +3391,42 @@ void fn_80198C60(void)
 extern SceneDesc* lbl_804D666C;
 
 /// Initializes the scene rendering components for the gm_18A5 game mode.
-/// #fn_80198D18
+void fn_80198D18(void)
+{
+    TmData* td;
+    HSD_Text* text;
+    HSD_GObj* gobj;
+
+    gm_8018F634();
+    fn_80190174(lbl_804D666C->cameras->desc);
+    fn_801901F8(lbl_804D666C->cameras->desc);
+    fn_801902F0(0);
+    fn_8019027C(lbl_804D666C->lights);
+    fn_8019035C(0, lbl_804D666C->models[5], 0, 0x1A, 2, 1, fn_80196DBC,
+                0.0f);
+    fn_8019035C(0, lbl_804D666C->models[4], 0, 0x1A, 2, 1, fn_80196E30,
+                80.0f);
+
+    td = gm_8018F634();
+    td->x524[2] = HSD_SisLib_803A6754(0, (s32) lbl_804D663C);
+    text = td->x524[2];
+    text->font_size.x = 0.054945f;
+    text->font_size.y = 0.08f;
+    td->x524[2]->default_alignment = 1;
+    td->x524[2]->default_kerning = 1;
+
+    td->x524[3] = HSD_SisLib_803A6754(0, (s32) lbl_804D663C);
+    td->x524[3]->default_alignment = 1;
+    td->x524[3]->default_kerning = 1;
+    HSD_SisLib_803A6B98(td->x524[3], 320.0f, 250.0f, "    ");
+    HSD_SisLib_803A7548(td->x524[3], 0, 1.5f, 1.5f);
+
+    gobj = GObj_Create(0xE, 0x1A, 0);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7848,
+                            HSD_FogLoadDesc(lbl_804D666C->fogs[0].desc));
+    GObj_SetupGXLink(gobj, HSD_GObj_FogCallback, 0, 0);
+    fn_80198BA0();
+}
 
 /// #fn_80198EBC
 
