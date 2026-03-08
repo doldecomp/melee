@@ -5130,6 +5130,111 @@ void fn_8019A86C(s32* arg0, u32 arg1, u32 arg2)
 
 /// #fn_8019AF50
 
+extern u8 lbl_804D6680[8];
+extern u8 lbl_803B7D04[20];
+
+/// Tournament match timer display/audio state machine.
+/// Handles match countdown, audio transitions, and end conditions.
+void fn_8019AF50(s32* arg0, u32 arg1, u32 arg2)
+{
+    typedef struct { s32 d[5]; } TimerFmt;
+    TimerFmt sp_buf;
+    TmData* tm = (TmData*) arg0;
+    u32* counter = (u32*) &lbl_804799D8;
+    s32 bracketIdx;
+    u32 buttons;
+
+    sp_buf = *(TimerFmt*) lbl_803B7D04;
+    bracketIdx = fn_8018F74C();
+
+    if (*arg0 == 0x1F) {
+        fn_8019B860(tm);
+    }
+
+    if (tm->x33 == 6) {
+        if (lbl_804D6680[0] == 2) {
+            if (lbAudioAx_80023730() == 0) {
+                lbAudioAx_80023F28(
+                    lbAudioAx_8002305C(fn_8018F6FC(lbl_804D6680[1]), 0));
+                lbl_804D6680[0] = 3;
+            }
+        } else if (lbl_804D6680[0] == 0) {
+            u8* bp = (u8*) &lbl_80473AB8[bracketIdx];
+            s32 j;
+
+            for (j = 0; j < 4; j++) {
+                if (bp[0x30] != 0 && bp[0x4C] == 0) {
+                    u8* entry = (u8*) &lbl_80473AB8[bracketIdx];
+                    lbl_804D6680[1] = entry[j * 0x2C + 0x4D];
+                    break;
+                }
+                bp += 0x2C;
+            }
+
+            lbAudioAx_80023F28(
+                fn_80160400(fn_8018F6FC(lbl_804D6680[1])));
+            lbl_804D6680[0] = 1;
+        } else if (lbl_804D6680[0] == 1) {
+            u8* timer_ptr = &lbl_804D6680[2];
+            if (*timer_ptr > 0x3C) {
+                lbl_804D6680[0] = 2;
+            }
+            (*timer_ptr)++;
+        }
+    }
+
+    if (lbl_804799D8.x0[0x4D] != 1) {
+        buttons = (u32) gm_801A36A0(lbl_804799D8.x0[0x4C]);
+    } else {
+        buttons = (u32) gm_801A36A0(4);
+    }
+
+    if (lbl_80473AB8[bracketIdx].x18 != 0) {
+        if (*counter < 0xFAU) {
+            (*counter)++;
+            if (*counter >= 0x64U) {
+                s32 count = (u32)(*counter - 0x64) / 15;
+                u8* base = (u8*) counter;
+                u8* dest = (u8*) &sp_buf;
+                s32 i;
+                for (i = 0; i < count; i++) {
+                    dest[0] = base[0x4E];
+                    dest[1] = base[0x4F];
+                    base += 2;
+                    dest += 2;
+                }
+            }
+            HSD_SisLib_803A70A0((void*) tm->x524[3], 0, &sp_buf);
+        } else {
+            *counter += 2;
+            if (lbl_804799D8.x0[0x4D] != 1) {
+                if (*counter > 0xFAU) {
+                    *counter = 0xFA;
+                }
+            }
+            HSD_SisLib_803A70A0((void*) tm->x524[3], 0, (u8*) counter + 0x4E);
+        }
+    } else {
+        if (*counter < 0xFAU) {
+            *counter = 0xFA;
+        }
+    }
+
+    if (*arg0 == 0x27) {
+        if (*counter >= 0xFAU) {
+            if (tm->x33 == 6) {
+                if (*counter >= 0x1C20U || (buttons & 0x1100)) {
+                    gm_801A42F8(1);
+                    gm_801A4B60();
+                }
+            } else {
+                fn_8018EC48();
+                *arg0 = 0x13;
+            }
+        }
+    }
+}
+
 /// @todo Currently 89.97% match - permuter couldn't improve
 /// Per-frame update for tournament mode menu.
 void gm_8019B2DC_OnFrame(void)

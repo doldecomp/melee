@@ -14,11 +14,16 @@ static SceneDesc* lbl_804D6650;
 typedef struct BracketEntry {
     u8 x0;
     u8 x1;
-    u8 pad2[0x32 - 0x2];
+    u8 pad2[0x18 - 0x2];
+    s32 x18;
+    u8 pad1C[0x30 - 0x1C];
+    u8 x30;
+    u8 pad31[0x32 - 0x31];
     u8 x32;
     u8 pad33[0x4C - 0x33];
     u8 x4C;
-    u8 pad4D[0x51 - 0x4D];
+    u8 x4D;
+    u8 pad4E[0x51 - 0x4E];
     u8 x51;
     u8 pad52[0x5E - 0x52];
     u8 x5E;
