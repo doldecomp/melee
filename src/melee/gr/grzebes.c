@@ -688,7 +688,7 @@ void grZebes_801D95B8(Ground_GObj* gobj)
     HSD_JObj* jobj = GET_JOBJ(gobj);
     HSD_JObj* stored_jobj = (HSD_JObj*) gp->gv.zebes.x4;
     int unused[4];
-    
+
     if (stored_jobj != NULL) {
         HSD_JObjGetTranslation2(stored_jobj, &pos);
         HSD_JObjSetTranslate(jobj, &pos);
