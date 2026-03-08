@@ -827,6 +827,8 @@ s32 gm_8018F1B0(MatchEnd* me)
     return 0;
 }
 
+#pragma push
+#pragma auto_inline off
 int fn_8018F310(int arg0)
 {
     int i;
@@ -837,6 +839,7 @@ int fn_8018F310(int arg0)
     }
     return -1;
 }
+#pragma pop
 
 u8 fn_8018F3BC(s32 arg0)
 {
@@ -887,6 +890,8 @@ int fn_8018F4A0(void)
 }
 
 /// Counts available tournament slots and returns the last found index.
+#pragma push
+#pragma auto_inline off
 s32 fn_8018F508(s32* out_index)
 {
     s32 count;
@@ -914,6 +919,7 @@ s32 fn_8018F508(s32* out_index)
 
     return count;
 }
+#pragma pop
 
 #pragma push
 #pragma dont_inline on
@@ -982,6 +988,8 @@ int fn_8018F6DC(int arg0)
     return arg0;
 }
 
+#pragma push
+#pragma auto_inline off
 CharacterKind fn_8018F6FC(CSSIconHud arg0)
 {
     if (arg0 >= 0x13) {
@@ -992,12 +1000,15 @@ CharacterKind fn_8018F6FC(CSSIconHud arg0)
     }
     return (CharacterKind) arg0;
 }
+#pragma pop
 
 float fn_8018F71C(int arg0, int arg1)
 {
     return arg0 + arg1 * 0x1E;
 }
 
+#pragma push
+#pragma auto_inline off
 int fn_8018F74C(void)
 {
     int i;
@@ -1010,6 +1021,7 @@ int fn_8018F74C(void)
 
     return i;
 }
+#pragma pop
 
 int fn_8018F808(void)
 {
