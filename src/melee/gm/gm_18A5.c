@@ -2648,7 +2648,52 @@ void fn_801981A0(HSD_GObj* gobj)
 }
 
 /// Updates the visibility and position of a player's controller indicator.
-/// #fn_801983E4
+void fn_801983E4(HSD_GObj* gobj)
+{
+    TmData* tm;
+    u32 pnum;
+    HSD_JObj* jobj;
+    f32 x;
+    s32 cond;
+    u8 player_count;
+
+    tm = gm_8018F634();
+    pnum = fn_8018F62C(gobj);
+    jobj = gobj->hsd_obj;
+
+    if (gm_8018F634()->cur_option >= 0x1B &&
+        gm_8018F634()->cur_option <= 0x1E)
+    {
+        cond = 1;
+    } else {
+        cond = 0;
+    }
+
+    if (cond == 0) {
+        HSD_JObjSetFlagsAll(jobj, 0x10);
+        return;
+    }
+
+    HSD_JObjClearFlagsAll(jobj, 0x10);
+
+    if ((s8) (u8) HSD_PadMasterStatus[(u8) pnum].err == 0 ||
+        tm->x4B8[pnum].x0 == 1)
+    {
+        HSD_JObjSetFlagsAll(jobj, 0x10);
+        return;
+    }
+
+    player_count = tm->x30;
+    if ((s32) player_count == 4) {
+        x = (13.0f * (f32) pnum) + -19.5f;
+    } else if ((s32) player_count == 3) {
+        x = 6.5f + ((13.0f * (f32) pnum) - 19.5f);
+    } else {
+        x = 6.5f + ((13.0f * (2.0f * (f32) pnum)) - 19.5f);
+    }
+
+    fn_8018FDC4(jobj, x, 666.0f, 0.01f);
+}
 
 void fn_80198584(ResultsData* results)
 {
