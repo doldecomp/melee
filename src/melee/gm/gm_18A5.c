@@ -2487,6 +2487,7 @@ void fn_8019249C(HSD_GObj* gobj)
     TmData* tmdata;
     HSD_JObj* jobj;
     HSD_JObj* child;
+    HSD_JObj* child2;
     int cur_option;
 
     tmdata = gm_8018F634();
@@ -2511,17 +2512,17 @@ void fn_8019249C(HSD_GObj* gobj)
     child = HSD_JObjGetNext(child);
     child = HSD_JObjGetNext(child);
     child = HSD_JObjGetNext(child);
-    child = HSD_JObjGetNext(child);
-    child = HSD_JObjGetNext(child);
-    child = HSD_JObjGetNext(child);
-    child = HSD_JObjGetNext(child);
+    child2 = HSD_JObjGetNext(child);
+    child2 = HSD_JObjGetNext(child2);
+    child2 = HSD_JObjGetNext(child2);
+    child2 = HSD_JObjGetNext(child2);
 
     if (cur_option == 0xD) {
         fn_8019044C(child, 0.0F);
-        fn_8019044C(child, (f32) (lbl_804799B8.xA + 10));
+        fn_8019044C(child2, (f32) (lbl_804799B8.xA + 10));
     } else {
         fn_8019044C(child, (f32) (lbl_804799B8.xA + 10));
-        fn_8019044C(child, 0.0F);
+        fn_8019044C(child2, 0.0F);
     }
 }
 
