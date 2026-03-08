@@ -1019,7 +1019,6 @@ void grZebes_801D9F84(Ground_GObj* gobj)
             grAnime_801C78FC(gobj, 3, 7);
             gp->gv.zebes2.xC4 = 1;
             Ground_801C53EC(0x61A85);
-            return;
         }
         return;
     case 1:
