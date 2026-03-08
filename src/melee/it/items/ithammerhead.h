@@ -13,12 +13,12 @@
 
 /* 299C48 */ void it_80299C48(HSD_GObj*, Vec3*, Vec3*, f32);
 /* 299D4C */ void itHammerHead_Logic40_Spawned(Item_GObj*);
-/* 299D7C */ UNK_RET it_80299D7C(UNK_PARAMS);
+/* 299D7C */ void it_80299D7C(Item_GObj*);
 /* 299DD0 */ void itHammerHead_Logic40_PickedUp(Item_GObj*);
 /* 299E1C */ bool itHammerhead_UnkMotion1_Anim(Item_GObj* gobj);
 /* 299E24 */ void itHammerhead_UnkMotion1_Phys(Item_GObj* gobj);
 /* 299E28 */ void itHammerHead_Logic40_Dropped(Item_GObj* gobj);
-/* 299E48 */ void it_3F14_Logic40_Thrown(Item_GObj*);
+/* 299E48 */ void itHammerHead_Logic40_Thrown(Item_GObj*);
 /* 299E9C */ bool itHammerhead_UnkMotion2_Anim(Item_GObj* gobj);
 /* 299F1C */ void itHammerhead_UnkMotion2_Phys(Item_GObj* gobj);
 /* 299F68 */ bool itHammerhead_UnkMotion2_Coll(Item_GObj* gobj);

@@ -336,19 +336,20 @@ void efLib_ResumeAll(HSD_GObj* arg_gobj)
     }
 }
 
-/// Arg is type Effect*, but forced to be void to fit the function template in
-/// GObj_InitUserData
 void Effect_RemoveUserData(void* effect)
 {
-    if (((Effect*) effect)->gobj != NULL) {
-        if (((Effect*) effect)->x29 == 0) {
+    Effect* ep;
+    Effect* new_var2;
+    ep = new_var2 = effect;
+    if (new_var2->gobj != NULL) {
+        if (ep->x29 == 0) {
             efLib_804D64EC--;
         }
-        HSD_ObjFree(&Effect_AllocData, effect);
-        return;
+        HSD_ObjFree(&Effect_AllocData, ep);
+    } else {
+        OSReport("Duplicate Free %08X\n", ep);
+        HSD_ASSERT(53, 0);
     }
-    OSReport("Duplicate Free %08X\n", effect);
-    __assert("eflib.c", 0x35U, "0");
 }
 
 #pragma dont_inline on

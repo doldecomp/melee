@@ -5,6 +5,8 @@
 
 #include "it/inlines.h"
 #include "it/it_26B1.h"
+#include "it/it_2725.h"
+#include "it/items/itpikachutjoltground.h"
 
 /* 2B45E8 */ static bool itPikachutjoltair_UnkMotion0_Coll(Item_GObj* gobj);
 
@@ -13,7 +15,7 @@ bool itPikachutjoltair_UnkMotion0_Coll(Item_GObj* gobj)
     return false;
 }
 
-u32 it_802B3EFC(Item_GObj* gobj)
+Item_GObj* it_802B3EFC(Item_GObj* gobj)
 {
     Item* ip;
 
@@ -54,17 +56,62 @@ void itPikachutjoltair_UnkMotion0_Phys(Item_GObj* gobj)
 
 /// #itPikachutjoltair_UnkMotion0_Coll
 
-/// #it_2725_Logic107_DmgDealt
+bool it_2725_Logic107_DmgDealt(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    it_802725D4(gobj);
+    if (ip->xDD4_itemVar.pikachujoltair.xDD8 != 0) {
+        it_802B3544(ip->xDD4_itemVar.pikachujoltair.xDD8);
+        ip->xDD4_itemVar.pikachujoltair.xDD8 = 0;
+    }
+    return true;
+}
 
-/// #it_2725_Logic107_Clanked
+bool it_2725_Logic107_Clanked(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    it_802725D4(gobj);
+    if (ip->xDD4_itemVar.pikachujoltair.xDD8 != 0) {
+        it_802B3544((Item_GObj*) ip->xDD4_itemVar.pikachujoltair.xDD8);
+        ip->xDD4_itemVar.pikachujoltair.xDD8 = 0;
+    }
+    return true;
+}
 
-/// #it_2725_Logic107_Absorbed
+bool it_2725_Logic107_Absorbed(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    it_802725D4(gobj);
+    if (ip->xDD4_itemVar.pikachujoltair.xDD8 != 0) {
+        it_802B3544((Item_GObj*) ip->xDD4_itemVar.pikachujoltair.xDD8);
+        ip->xDD4_itemVar.pikachujoltair.xDD8 = 0;
+    }
+    return true;
+}
 
 /// #it_2725_Logic107_Reflected
 
-/// #it_2725_Logic107_HitShield
+bool it_2725_Logic107_HitShield(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    it_802725D4(gobj);
+    if (ip->xDD4_itemVar.pikachujoltair.xDD8 != 0) {
+        it_802B3544((Item_GObj*) ip->xDD4_itemVar.pikachujoltair.xDD8);
+        ip->xDD4_itemVar.pikachujoltair.xDD8 = 0;
+    }
+    return true;
+}
 
-/// #it_2725_Logic107_ShieldBounced
+bool it_2725_Logic107_ShieldBounced(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    it_802725D4(gobj);
+    if (ip->xDD4_itemVar.pikachujoltair.xDD8 != 0) {
+        it_802B3544((Item_GObj*) ip->xDD4_itemVar.pikachujoltair.xDD8);
+        ip->xDD4_itemVar.pikachujoltair.xDD8 = 0;
+    }
+    return true;
+}
 
 void itPikachuTJoltAir_Logic107_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {

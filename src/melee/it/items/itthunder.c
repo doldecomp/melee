@@ -94,7 +94,7 @@ void it_802CCC68(HSD_GObj* gobj)
     Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
     item->entered_hitlag = efLib_PauseAll;
     item->exited_hitlag = efLib_ResumeAll;
-    item->xDD4_itemVar.thunder.x68 = it_804DD3A8;
+    item->xDD4_itemVar.thunder.x68 = 0.0f;
     item->xDB0_itcmd_var1 = 0;
 }
 

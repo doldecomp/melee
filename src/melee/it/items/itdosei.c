@@ -7,12 +7,12 @@
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/item.h"
 #include "lb/lb_00B0.h"
 
 #include <math.h>
 
-/// Explicit declaration for external function
-extern void Item_80268E5C(Item_GObj* gobj, int arg1, int arg2);
+/* 282DE4 */ static void it_80282DE4(Item_GObj* gobj);
 
 /// #it_3F14_Logic7_Spawned
 
@@ -276,7 +276,20 @@ void fn_80282CD4(Item_GObj* gobj)
     ip->owner = NULL;
 }
 
-/// #itDosei_UnkMotion7_Anim
+bool itDosei_UnkMotion7_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+
+    ip->xDD4_itemVar.dosei.xDE4 = ip->pos;
+
+    if (ip->xDD4_itemVar.dosei.xDD4 > 0) {
+        ip->xDD4_itemVar.dosei.xDD4--;
+    } else {
+        it_80282DE4(gobj);
+    }
+
+    return false;
+}
 
 void itDosei_UnkMotion7_Phys(Item_GObj* gobj) {}
 

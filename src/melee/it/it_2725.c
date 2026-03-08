@@ -23,7 +23,6 @@
 
 #include "it/it_26B1.h"
 #include "it/itcoll.h"
-#include "it/items/it_27CF.h"
 #include "it/items/it_2ADA.h"
 #include "it/items/it_2E5A.h"
 #include "it/items/it_2E6A.h"
@@ -35,7 +34,6 @@
 #include "it/items/itcapsule.h"
 #include "it/items/itcerebi.h"
 #include "it/items/itchicorita.h"
-#include "it/items/itchicoritaleaf.h"
 #include "it/items/itclimbersblizzard.h"
 #include "it/items/itclimbersice.h"
 #include "it/items/itclimbersstring.h"
@@ -180,6 +178,7 @@
 #include "it/items/itwhispyapple.h"
 #include "it/items/itwhitebea.h"
 #include "it/items/itwstar.h"
+#include "it/items/ityoshiegglay.h"
 #include "it/items/ityoshieggthrow.h"
 #include "it/items/ityoshistar.h"
 #include "it/items/itzeldadinfire.h"
@@ -187,7 +186,6 @@
 #include "it/items/itzgshell.h"
 #include "it/items/itzrshell.h"
 #include "it/types.h"
-#include "items/it_27CF.h"
 #include "items/itbat.h"
 #include "items/itbombhei.h"
 #include "items/itbox.h"
@@ -235,6 +233,7 @@
 #include "items/ittarucann.h"
 #include "items/ittomato.h"
 #include "items/itwstar.h"
+#include "items/ityoshiegglay.h"
 #include "lb/inlines.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
@@ -1008,7 +1007,7 @@ struct ItemLogicTable it_803F14C4[ARRAY_SIZE(it_803F1418)] = {
         NULL,
         itHammerHead_Logic40_PickedUp,
         itHammerHead_Logic40_Dropped,
-        it_3F14_Logic40_Thrown,
+        itHammerHead_Logic40_Thrown,
         itHammerHead_Logic40_DmgDealt,
         itHammerHead_Logic40_DmgReceived,
         NULL,
@@ -1046,7 +1045,7 @@ struct ItemLogicTable it_803F14C4[ARRAY_SIZE(it_803F1418)] = {
         itEvYoshiEgg_Logic42_Dropped,
         itEvYoshiEgg_Logic42_Thrown,
         it_3F14_Logic42_DmgDealt,
-        it_3F14_Logic42_DmgReceived,
+        itEvYoshiEgg_Logic42_DmgReceived,
         itEvYoshiEgg_Logic42_EnteredAir,
         it_3F14_Logic42_Reflected,
         it_3F14_Logic42_Clanked,
@@ -4876,7 +4875,7 @@ void it_80272674(Item_GObj* item_gobj, s32 idx)
         hitbox->x58 = hitbox->x4C;
         lb_8000B1CC(hitbox->jobj, &hitbox->b_offset, &hitbox->x4C);
         /* fallthrough */
-    case 4: // HitCapsule_Max
+    case HitCapsule_Unk4:
     case HitCapsule_Disabled:
         return;
     }
@@ -4922,12 +4921,14 @@ Fighter* it_80272818(Item* item)
 Item_GObj* it_80272828(ItemKind kind)
 {
     Item_GObj* item_gobj_return;
+    Item* new_var2;
     Item_GObj* item_gobj_check;
-
+    void* new_var;
     item_gobj_return = NULL;
     item_gobj_check = (Item_GObj*) HSD_GObj_Entities->items;
     while (item_gobj_check != NULL) {
-        if (((Item*) item_gobj_check->user_data)->kind == kind) {
+        new_var2 = (Item*) (new_var = item_gobj_check->user_data);
+        if (new_var2->kind == kind) {
             item_gobj_return = item_gobj_check;
         }
 
@@ -5304,7 +5305,7 @@ void it_802732E4(Item* item, s32 arg1)
     }
 }
 
-void it_80273318(Item_GObj* item_gobj, HSD_Joint* joint, s32 arg2)
+void it_80273318(Item_GObj* item_gobj, HSD_Joint* joint)
 {
     Item* item = GET_ITEM(item_gobj);
     item->xC8_joint = joint;
@@ -6527,7 +6528,7 @@ void it_80275788(Item_GObj* item_gobj)
     item = item_gobj->user_data;
     state = 4;
     for (var_ctr = 0U; var_ctr < 4U; var_ctr++) {
-        hitcapsule = &item->x5D4_hitboxes[var_ctr].hit;
+        hitcapsule = (0, &item->x5D4_hitboxes[var_ctr].hit);
         if (hitcapsule->state != HitCapsule_Disabled) {
             hitcapsule->state = state;
             item->xDAA_flag.b2 = 1;

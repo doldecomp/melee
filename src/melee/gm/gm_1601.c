@@ -1055,10 +1055,14 @@ void gm_80162B4C(s32 amount)
 
 void gm_80162B98(void)
 {
-    u32* temp_r3;
+    u32 result;
+    u32 val;
+    u32* ptr;
 
-    temp_r3 = gmMainLib_8015CD8C();
-    *temp_r3 = MAX(*temp_r3 + 1, -1);
+    ptr = gmMainLib_8015CD8C();
+    val = *ptr;
+    result = (val + 1 > (u32) -1) ? (u32) -1 : val + 1;
+    *ptr = result;
 }
 
 int gm_80162BD8(u8 arg0)
@@ -1664,14 +1668,14 @@ bool fn_801642A0(void)
 }
 
 // RandomStageSwitch
-bool gm_80164330(u8 arg0)
+bool gm_80164330(s32 arg0)
 {
     s32 total_stages_on;
     struct gmm_x1CB0* temp_ret;
     s32 i;
     u8 var_r0;
 
-    if (gm_80164430(lbl_803B7808[arg0]) == 0) {
+    if (gm_80164430(lbl_803B7808[(u8) arg0]) == 0) {
         return false;
     }
     if (gmMainLib_8015EE44() == 0) {
@@ -1682,7 +1686,7 @@ bool gm_80164330(u8 arg0)
     i = 0;
     for (i = 0; i < 0x1D; i++) {
         temp_ret = gmMainLib_8015CC58();
-        if ((1 << i) & temp_ret->stage_mask) {
+        if (temp_ret->stage_mask & (1 << (u16) i)) {
             var_r0 = 1;
         } else {
             var_r0 = 0;
@@ -1694,7 +1698,7 @@ bool gm_80164330(u8 arg0)
     if (total_stages_on == 0) {
         OSReport("RandomStageSwitch All-Off!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
     }
-    if ((1 << arg0) & gmMainLib_8015CC58()->stage_mask) {
+    if ((1 << (u16) arg0) & gmMainLib_8015CC58()->stage_mask) {
         return true;
     }
     return false;
@@ -2212,7 +2216,7 @@ void gm_80167470(s32 arg0, s32 arg1)
 void gm_801674C4(s8 arg0, u8 arg1, s8 arg2, s8 arg3, s32 arg4)
 {
     s8 temp_r31;
-    struct lbl_8046B488_t *new_var;
+    struct lbl_8046B488_t* new_var;
     struct lbl_8046B488_t* temp_ptr;
 
     temp_ptr = fn_80169364();
@@ -3382,7 +3386,8 @@ s32 gm_8016A22C(s8 k0, s8 k1, s8 k2, u8 a3, u8 a4, int a5, int mode, int a7,
         for (i = 0; i < 3; i++) {
             fn_801697FC(
                 kinds[i], lbl_8046B488.xC, p87, p8b,
-                lbl_8046B488.x20); // This was being inlined, hence the no-inline
+                lbl_8046B488
+                    .x20); // This was being inlined, hence the no-inline
         }
         break;
     }

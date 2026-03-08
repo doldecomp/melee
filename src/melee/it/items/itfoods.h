@@ -3,7 +3,6 @@
 
 #include "it/forward.h"
 
-#include "it/inlines.h"
 #include "it/items/types.h"
 
 /* 28F9D8 */ void it_8028F9D8(Item_GObj* arg0, Vec3* arg1, f32 arg8);

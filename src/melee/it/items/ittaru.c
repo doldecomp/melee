@@ -21,6 +21,7 @@
 void it_3F14_Logic2_Spawned(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
+    float new_var;
     float temp;
     ip->facing_dir = -1.0f;
     ip->xD5C = 0;
@@ -30,7 +31,7 @@ void it_3F14_Logic2_Spawned(Item_GObj* gobj)
     ip->xDD4_itemVar.taru.xDD4 = 0;
     /// @todo float regswap. same as in it_3F14_Logic5_Spawned
     temp = 0.34906584f * HSD_Randf();
-    ip->xDD4_itemVar.taru.xDDC = 1.3089969f + temp;
+    ip->xDD4_itemVar.taru.xDDC = (new_var = 1.3089969f) + temp;
     ip->xDD4_itemVar.taru.xDE0 = 0.0f;
     ip->xDD4_itemVar.taru.xDE4 = 0.0f;
     ip->xDD4_itemVar.taru.xDE8.x = 0.0f;

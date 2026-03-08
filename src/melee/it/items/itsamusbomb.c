@@ -6,7 +6,6 @@
 #include <placeholder.h>
 #include <platform.h>
 
-#include "baselib/mtx.h"
 #include "db/db.h"
 #include "ftSamus/ftSs_Init.h"
 
@@ -19,6 +18,18 @@
 #include "it/item.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbvector.h"
+
+#include <baselib/mtx.h>
+
+ItemStateTable it_803F7220[] = {
+    { 0, itSamusbomb_UnkMotion0_Anim, itSamusbomb_UnkMotion0_Phys,
+      itSamusbomb_UnkMotion0_Coll },
+    { 0, itSamusbomb_UnkMotion1_Anim, itSamusbomb_UnkMotion1_Phys,
+      itSamusbomb_UnkMotion1_Coll },
+    { 0, itSamusbomb_UnkMotion2_Anim, itSamusbomb_UnkMotion2_Phys,
+      itSamusbomb_UnkMotion2_Coll },
+    { 1, itSamusbomb_UnkMotion3_Anim, NULL, NULL }
+};
 
 Item_GObj* it_802B4AC8(Fighter_GObj* parent_gobj, Vec3* pos, f32 facing_dir)
 {
@@ -152,8 +163,9 @@ static inline float my_sqrtf(float x)
     static const double _half = .5;
     static const double _three = 3.0;
 
-    volatile float y;
+    u8 _[4] = { 0 };
 
+    volatile float y;
     if (x > 0) {
         double guess = __frsqrte((double) x);
         guess = _half * guess * (_three - guess * guess * x);
@@ -170,8 +182,9 @@ void itSamusbomb_UnkMotion2_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itSamusBombAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+    f32 mult;
+
     if (my_sqrtf(VEC2_SQ_LEN(ip->x7C)) > attr->xC) {
-        f32 mult;
         lbVector_NormalizeXY(&ip->x7C);
         mult = attr->xC;
         ip->x7C.x *= mult;
@@ -260,7 +273,8 @@ void it_802B5478(Item_GObj* gobj)
         ip->xDD4_itemVar.samusbomb.x0 = false;
 
         if (ip->xDD4_itemVar.samusbomb.owner != NULL &&
-            ftSs_Init_80128A1C(gobj, ip->x5D4_hitboxes, ip->scl))
+            ftSs_Init_80128A1C(ip->xDD4_itemVar.samusbomb.owner,
+                               ip->x5D4_hitboxes, ip->scl))
         {
             ftSs_Init_80128944(ip->xDD4_itemVar.samusbomb.owner, ip->pos.x,
                                ip->x5D4_hitboxes[0].hit.scale);

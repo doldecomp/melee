@@ -361,14 +361,20 @@ void grBigBlueRoute_8020C210(Ground_GObj* gobj)
 /// @todo Currently 96.39% match - r30/r31 register swap
 void grBigBlueRoute_8020C238(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
     HSD_JObj* root_jobj = gobj->hsd_obj;
+    HSD_JObj* jobj;
+    Ground* gp = gobj->user_data;
     Vec3 spline_pt;
     PAD_STACK(8);
 
     if (root_jobj != NULL) {
         f32 val;
-        HSD_JObj* jobj = root_jobj->child;
+
+        if (root_jobj == NULL) {
+            jobj = NULL;
+        } else {
+            jobj = root_jobj->child;
+        }
 
         while (jobj != NULL) {
             HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
@@ -382,10 +388,10 @@ void grBigBlueRoute_8020C238(Ground_GObj* gobj)
             val = grBb_Route_804D6A68->x4;
             HSD_JObjSetScaleZ(jobj, val);
 
-            if (jobj != NULL) {
-                jobj = jobj->next;
-            } else {
+            if (jobj == NULL) {
                 jobj = NULL;
+            } else {
+                jobj = jobj->next;
             }
         }
     }

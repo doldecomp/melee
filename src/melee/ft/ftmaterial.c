@@ -31,8 +31,7 @@
 
 void ftMaterial_800BF260(void)
 {
-    hsdInitClassInfo(&ftMObj.parent, &hsdMObj.parent,
-                     "sysdolphin_base_library", "ft_mobj", 80, 32);
+    hsdInitClassInfo(&ftMObj.parent, &hsdMObj.parent, (char*)&ftMObj + 0xDC, (char*)&ftCo_804D3C00, 0x50, 0x20);
     ftMObj.setup = ftMaterial_800BF2B8;
 }
 

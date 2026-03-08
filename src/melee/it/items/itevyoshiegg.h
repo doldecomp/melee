@@ -7,7 +7,7 @@
 
 #include "it/items/types.h"
 
-/* 29B0C8 */ UNK_RET it_8029B0C8(UNK_PARAMS);
+/* 29B0C8 */ void itEvYoshiEgg_Spawn(Vec3*);
 /* 29B188 */ void itEvYoshiEgg_Logic42_Destroyed(Item_GObj*);
 /* 29B1AC */ void itEvYoshiEgg_Logic42_Spawned(Item_GObj* gobj);
 /* 29B1D8 */ void it_8029B1D8(Item_GObj*);
@@ -32,7 +32,7 @@
 /* 29B4AC */ bool it_3F14_Logic42_Clanked(Item_GObj*);
 /* 29B4EC */ bool it_3F14_Logic42_HitShield(Item_GObj*);
 /* 29B52C */ bool it_3F14_Logic42_Reflected(Item_GObj*);
-/* 29B56C */ bool it_3F14_Logic42_DmgReceived(Item_GObj*);
+/* 29B56C */ bool itEvYoshiEgg_Logic42_DmgReceived(Item_GObj*);
 /* 29B670 */ void itEvYoshiEgg_Logic42_EnteredAir(Item_GObj*);
 /* 29B698 */ bool itEvyoshiegg_UnkMotion4_Anim(Item_GObj* gobj);
 /* 29B6A0 */ void itEvyoshiegg_UnkMotion4_Phys(Item_GObj* gobj);

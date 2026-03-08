@@ -240,8 +240,8 @@ void it_8028D4E4(Item_GObj* gobj)
     f32 vel;
     itRShell_Attrs* attrs;
     f32 abs_vel;
-
-    vel = ip->x40_vel.x;
+    abs_vel = ip->x40_vel.x;
+    vel = abs_vel;
     attrs = ip->xC4_article_data->x4_specialAttributes;
 
     if (vel < 0.0f) {

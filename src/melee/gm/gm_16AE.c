@@ -2080,8 +2080,8 @@ void gm_8016EC28_OnEnter(void* arg0)
 float gm_8016ECE8(void)
 {
     float var_f29;
-    int count;
     int i;
+    int count;
 
     count = 0;
     var_f29 = 0.0F;

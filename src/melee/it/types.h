@@ -549,6 +549,7 @@ struct Item {
         itDosei_ItemVars dosei;
         itDrMarioPill_ItemVars drmariopill;
         itEgg_ItemVars egg;
+        itEvYoshiEgg_ItemVars evyoshiegg;
         itFFlower_ItemVars fflower;
         itFFlowerFlame_ItemVars fflowerflame;
         itFlipper_ItemVars flipper;
@@ -616,7 +617,9 @@ struct Item {
         itSamusChargeshot_ItemVars samuschargeshot;
         itSamusGrapple_ItemVars samusgrapple;
         itSamusMissile_ItemVars samusmissile;
+        itScopeBeam_ItemVars scopebeam;
         itSeakChain_ItemVars seakchain;
+        itSeakNeedleHeld_ItemVars seakneedleheld;
         itSeakNeedleThrown_ItemVars seakneedlethrown;
         itSonans_ItemVars sonans;
         itStar_ItemVars star;

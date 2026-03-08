@@ -172,7 +172,18 @@ void grRCruise_80200540(Ground_GObj* gobj)
 
 /// #grRCruise_80201588
 
-/// #grRCruise_80201918
+void grRCruise_80201918(Vec3* vec)
+{
+    HSD_GObj* gobj = Ground_801C2BA4(3);
+    if (gobj != NULL) {
+        Ground* gp = gobj->user_data;
+        if (gp != NULL) {
+            *vec = *(Vec3*)((u8*)gp + 0xE0);
+            return;
+        }
+    }
+    vec->x = vec->y = vec->z = 0.0f;
+}
 
 /// #grRCruise_80201988
 

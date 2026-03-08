@@ -487,14 +487,12 @@ void HSD_SisLib_803A5FBC(void)
 /// compiler after dual global store
 void HSD_SisLib_803A6048(u32 size)
 {
-    sislib_UnkAllocData* alloc;
     int i;
 
     HSD_SisLib_804D7968 = size;
     HSD_SisLib_804D7974 = NULL;
-    alloc = HSD_MemAlloc(HSD_SisLib_804D7968);
-    HSD_SisLib_804D7970 = alloc;
-    HSD_SisLib_804D796C = alloc;
+    HSD_SisLib_804D796C = HSD_SisLib_804D7970 =
+        HSD_MemAlloc(HSD_SisLib_804D7968);
     HSD_SisLib_804D7970->data_0 = NULL;
     HSD_SisLib_804D7970->data_1 = (HSD_Text*) (HSD_SisLib_804D7970 + 1);
     HSD_SisLib_804D7970->size = HSD_SisLib_804D7968 - 0xC;

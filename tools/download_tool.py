@@ -130,7 +130,7 @@ def main() -> None:
         try:
             import certifi
             import ssl
-        except:
+        except ImportError:
             print(
                 '"certifi" module not found. Please install it using "python -m pip install certifi".'
             )

@@ -256,8 +256,10 @@ void gmCamera_801A26C0(void)
 
 void gmCamera_801A2798(void)
 {
+    unsigned int new_var;
     if (HSD_PadCopyStatus[3].trigger & 0x200) {
-        gmCamera_80479BC8.gcus.x14 = (gmCamera_80479BC8.gcus.x14 + 1) % 2;
+        new_var = gmCamera_80479BC8.gcus.x14 + 1;
+        gmCamera_80479BC8.gcus.x14 = new_var % 2;
         return;
     }
     if (HSD_PadCopyStatus[3].trigger & 0x10) {

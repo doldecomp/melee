@@ -1,5 +1,8 @@
 #include "lbmthp.static.h"
 
+#include "baselib/memory.h"
+#include "baselib/video.h"
+
 #include <dolphin/gx/GXTexture.h>
 #include <sysdolphin/baselib/sobjlib.h>
 #include <melee/lb/lbanim.h>
@@ -95,10 +98,7 @@ s32 fn_8001EBF0(THPDecComp* data)
 
 /// #fn_8001F13C
 
-s32 fn_8001F294(void)
-{
-    return lbl_804333E0.unk_110;
-}
+s32 fn_8001F294(void);
 
 /// #fn_8001F2A4
 
@@ -158,7 +158,35 @@ HSD_SObj* lbMthp_8001F624(HSD_GObj* gobj, int width, int height)
 
 /// #lbMthp_8001F67C
 
-/// #lbMthp_8001F800
+void lbMthp_8001F800(void)
+{
+    struct lbl_804333E0_t* base;
+    s32* p_14C;
+
+    base = &lbl_804333E0;
+    p_14C = &base->unk_14C;
+
+    if (*p_14C != 0) {
+        *(s32*) ((u8*) base + 0x70) = 0;
+
+        while (fn_8001F294()) {
+        }
+
+        OSCancelAlarm((OSAlarm*) ((u8*) base + 0x150));
+        HSD_VIWaitXFBFlush();
+
+        if (*(void**) ((u8*) base + 0x140) != NULL) {
+            HSD_Free(*(void**) ((u8*) base + 0x140));
+        }
+
+        *p_14C = 0;
+    }
+}
+
+s32 fn_8001F294(void)
+{
+    return lbl_804333E0.unk_110;
+}
 
 void lbMthp_8001F87C(void)
 {

@@ -51,9 +51,25 @@ void it_802ECFE0(Item_GObj* gobj)
     ip->xDD4_itemVar.kyasarin.x24 = attr->x8;
 }
 
-/// #itKyasarin_UnkMotion1_Anim
+bool itKyasarin_UnkMotion1_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->xDD4_itemVar.kyasarin.x24 = ip->xDD4_itemVar.kyasarin.x24 - 1.0f;
+    if (ip->xDD4_itemVar.kyasarin.x24 < 0.0f) {
+        it_802ED0D0(gobj);
+    }
+    return false;
+}
 
-/// #itKyasarin_UnkMotion3_Anim
+bool itKyasarin_UnkMotion3_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->xDD4_itemVar.kyasarin.x24 = ip->xDD4_itemVar.kyasarin.x24 - 1.0f;
+    if (ip->xDD4_itemVar.kyasarin.x24 < 0.0f) {
+        it_802ED25C(gobj);
+    }
+    return false;
+}
 
 void it_802ED0D0(Item_GObj* gobj)
 {

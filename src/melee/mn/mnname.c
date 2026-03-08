@@ -55,10 +55,7 @@ void fn_802377A4(void) {}
 
 bool IsNameValid(int slot)
 {
-    char* data = (char*) GetPersistentNameData((u8) slot);
-    char first_char = data[0x198];
-    char term = mnName_StringTerminator;
-    if (term == first_char) {
+    if (mnName_StringTerminator == (s8) GetPersistentNameData((u8) slot)->namedata[0]) {
         return false;
     }
     return true;

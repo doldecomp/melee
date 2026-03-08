@@ -188,8 +188,11 @@ void ftCo_800D105C(Fighter_GObj* fgp)
         fp->x294_itPickup.air_light_offset.y *= temp_f1;
         fp->x294_itPickup.air_light_offset.z *= temp_f1;
         fp->x294_itPickup.air_light_offset.w *= temp_f1;
-        fp->x2C4.x *= temp_f1;
-        fp->x2C4.y *= temp_f1;
+        {
+            f32 scale_y = fp->x34_scale.y;
+            fp->x2C4.x *= scale_y;
+            fp->x2C4.y *= scale_y;
+        }
     }
 
     /// if bunnyhood != NULL

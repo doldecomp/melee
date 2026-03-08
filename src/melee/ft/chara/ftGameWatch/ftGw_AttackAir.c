@@ -10,13 +10,12 @@
 
 #include "ftCommon/forward.h"
 
-#include "ftCommon/ftCo_Attack100.h"
 #include "ftCommon/ftCo_AttackAir.h"
 #include "ftCommon/ftCo_Landing.h"
 #include "ftCommon/ftCo_LandingAir.h"
 #include "ftGameWatch/types.h"
-#include "it/items/it_27CF.h"
 #include "it/items/itgamewatchbreath.h"
+#include "it/items/itgamewatchparachute.h"
 #include "it/items/itgamewatchturtle.h"
 #include "lb/lb_00B0.h"
 
