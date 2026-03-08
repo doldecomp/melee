@@ -1634,6 +1634,7 @@ s32 grZebes_801DB3CC(HSD_GObj* gobj)
     grZe_BubbleEntry* ptr;
     s32 popped = 0;
     int i;
+    PAD_STACK(0x10);
 
     ptr = base;
     for (i = 0; i < 20; i++, ptr++) {
