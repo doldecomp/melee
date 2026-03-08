@@ -257,13 +257,13 @@ static const struct {
 
 void grZebes_801D8644(HSD_GObj* gobj)
 {
-    Vec3 pos;
     Ground* gp = GET_GROUND(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
     HSD_JObj* child_jobj;
     Item_GObj* mat_gobj;
     Item_GObj* mat_gobj2;
-    PAD_STACK(8);
+    Vec3 pos;
+    UNUSED u8 _[4];
 
     gp->gv.zebes5.xF0 = (u32) grZebes_801D8558(7);
     Ground_801C2ED0(jobj, gp->map_id);
@@ -275,26 +275,27 @@ void grZebes_801D8644(HSD_GObj* gobj)
                         3.0f);
     grMaterial_801C8E08(mat_gobj);
     gp->gv.zebes5.xC4 = 0;
-    gp->gv.zebes5.xC6 = 0x00FF;
-    gp->gv.zebes5.xC8 = 0;
+    gp->gv.zebes5.xC8 = 0xFF;
+    gp->gv.zebes5.xC9 = 0;
+    gp->gv.zebes5.xCA = 0;
     gp->gv.zebes5.xCC = HSD_JObjGetTranslationX(child_jobj);
     gp->gv.zebes5.xD0 = 0.0f;
     gp->gv.zebes5.xD4 = 0.0f;
     gp->gv.zebes5.xD8 = 0.0f;
     gp->gv.zebes5.xDC = (u32) child_jobj;
     gp->gv.zebes5.xE0 = (u32) Ground_801C3FA4(gobj, 0x20);
-    gp->gv.zebes5.xE4 = (u32) mat_gobj;
+    gp->gv.zebes5.xE4 = (u32) (mat_gobj2 = mat_gobj);
+
     gp->gv.zebes5.xE8 = 0x1C;
     gp->gv.zebes5.xEC = 0;
     gp->gv.zebes5.xF4 = 0;
-    gp->gv.zebes5.xF6 = 0;
     pos = grZe_803B7FF0.zero;
     mat_gobj2 = grMaterial_801C8D44(0, 0, gp, &pos, 0, NULL, fn_801DAC90,
                                     NULL);
     grMaterial_801C8E08(mat_gobj2);
-    gp->gv.zebes5.xFC = (u32) mat_gobj2;
+    gp->gv.zebes5.x100 = (u32) mat_gobj2;
     grZebes_801DC9DC((s32) gobj);
-    gp->gv.zebes5.xF8 = (u32) grZakoGenerator_801CA394(
+    gp->gv.zebes5.xFC = (u32) grZakoGenerator_801CA394(
         (UNK_T) &grZe_803E1B90, 0xA, (UNK_T) grZebes_801DCB64, 1.0f);
     mpJointSetB10(0);
     Ground_801C2FE0((Ground_GObj*) gobj);
