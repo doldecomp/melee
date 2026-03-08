@@ -3212,7 +3212,196 @@ void fn_80194F30(s32* state_ptr, u32 buttons, u32 trigger)
     }
 }
 
-/// #fn_801953C8
+/// Handles character selection input for tournament bracket.
+void fn_801953C8(s32* state_ptr, u32 buttons, u32 trigger)
+{
+    TmData* tm = (TmData*) state_ptr;
+    s32 idx;
+    s32 cur_pos;
+    s32 candidate;
+    s32 group;
+    s32 step;
+    s32 adj;
+    s32 occupied;
+    s32 i;
+
+    idx = lbl_804799B8.x2 + lbl_804799B8.x3;
+    cur_pos = fn_8018F310(fn_8018F6FC(tm->x37[idx].x3));
+
+    if (trigger & 0x1000) {
+        lbAudioAx_80024030(0);
+        idx = lbl_804799B8.x2 + lbl_804799B8.x3;
+        tm->x37[idx].x3 = tm->x37[idx].x4;
+        idx = lbl_804799B8.x2 + lbl_804799B8.x3;
+        tm->x37[idx].x7 = tm->x37[idx].x8;
+        idx = lbl_804799B8.x2 + lbl_804799B8.x3;
+        tm->x37[idx].x5 = tm->x37[idx].x6;
+        lbl_804D6654 = *state_ptr;
+        *state_ptr = 0x11;
+        return;
+    }
+
+    if (buttons & 0x40001) {
+        group = (cur_pos / 5) * 5;
+        for (i = 1; i < 5; i++) {
+            candidate = cur_pos - i;
+            if (candidate < group) {
+                candidate += 5;
+            }
+            adj = fn_8018F6DC(fn_8018F3BC(candidate));
+            if (lbl_803D9D20.x72[adj] != 0) {
+                occupied = 1;
+            } else if (fn_8018F3D0(fn_8018F310(fn_8018F6FC(adj))) == 2) {
+                occupied = 0;
+            } else {
+                occupied = 1;
+            }
+            if (occupied) {
+                lbAudioAx_80024030(2);
+                idx = lbl_804799B8.x2 + lbl_804799B8.x3;
+                tm->x37[idx].x7 = 0;
+                idx = lbl_804799B8.x2 + lbl_804799B8.x3;
+                tm->x37[idx].x5 = 0;
+                idx = lbl_804799B8.x2 + lbl_804799B8.x3;
+                tm->x37[idx].x3 = fn_8018F6DC(fn_8018F3BC(candidate));
+                break;
+            }
+        }
+    } else if (buttons & 0x80002) {
+        group = ((cur_pos / 5) + 1) * 5;
+        for (i = 1; i < 5; i++) {
+            candidate = cur_pos + i;
+            if (candidate >= group) {
+                candidate -= 5;
+            }
+            adj = fn_8018F6DC(fn_8018F3BC(candidate));
+            if (lbl_803D9D20.x72[adj] != 0) {
+                occupied = 1;
+            } else if (fn_8018F3D0(fn_8018F310(fn_8018F6FC(adj))) == 2) {
+                occupied = 0;
+            } else {
+                occupied = 1;
+            }
+            if (occupied) {
+                lbAudioAx_80024030(2);
+                idx = lbl_804799B8.x2 + lbl_804799B8.x3;
+                tm->x37[idx].x7 = 0;
+                idx = lbl_804799B8.x2 + lbl_804799B8.x3;
+                tm->x37[idx].x5 = 0;
+                idx = lbl_804799B8.x2 + lbl_804799B8.x3;
+                tm->x37[idx].x3 = fn_8018F6DC(fn_8018F3BC(candidate));
+                break;
+            }
+        }
+    } else if (buttons & 0x10008) {
+        step = 5;
+        for (i = 1; i < 5; i++) {
+            candidate = cur_pos - step;
+            if (candidate < 0) {
+                candidate += 25;
+            }
+            adj = fn_8018F6DC(fn_8018F3BC(candidate));
+            if (lbl_803D9D20.x72[adj] != 0) {
+                occupied = 1;
+            } else if (fn_8018F3D0(fn_8018F310(fn_8018F6FC(adj))) == 2) {
+                occupied = 0;
+            } else {
+                occupied = 1;
+            }
+            if (occupied) {
+                lbAudioAx_80024030(2);
+                idx = lbl_804799B8.x2 + lbl_804799B8.x3;
+                tm->x37[idx].x7 = 0;
+                idx = lbl_804799B8.x2 + lbl_804799B8.x3;
+                tm->x37[idx].x5 = 0;
+                idx = lbl_804799B8.x2 + lbl_804799B8.x3;
+                tm->x37[idx].x3 = fn_8018F6DC(fn_8018F3BC(candidate));
+                break;
+            }
+            step += 5;
+        }
+    } else if (buttons & 0x20004) {
+        step = cur_pos + 5;
+        for (i = 1; i < 5; i++) {
+            candidate = step;
+            if (candidate >= 25) {
+                candidate -= 25;
+            }
+            adj = fn_8018F6DC(fn_8018F3BC(candidate));
+            if (lbl_803D9D20.x72[adj] != 0) {
+                occupied = 1;
+            } else if (fn_8018F3D0(fn_8018F310(fn_8018F6FC(adj))) == 2) {
+                occupied = 0;
+            } else {
+                occupied = 1;
+            }
+            if (occupied) {
+                lbAudioAx_80024030(2);
+                idx = lbl_804799B8.x2 + lbl_804799B8.x3;
+                tm->x37[idx].x7 = 0;
+                idx = lbl_804799B8.x2 + lbl_804799B8.x3;
+                tm->x37[idx].x5 = 0;
+                idx = lbl_804799B8.x2 + lbl_804799B8.x3;
+                tm->x37[idx].x3 = fn_8018F6DC(fn_8018F3BC(candidate));
+                break;
+            }
+            step += 5;
+        }
+    }
+
+    if (trigger & 0x100) {
+        if ((fn_8018F6A8(4) & 0x40) && (fn_8018F6A8(4) & 0x20) &&
+            gm_804771C4.match_type != 0)
+        {
+            idx = lbl_804799B8.x2 + lbl_804799B8.x3;
+            if (lbl_803D9D20.x72[tm->x37[idx].x3] == 0) {
+                lbAudioAx_80024030(3);
+                return;
+            }
+            lbAudioAx_80024030(1);
+            idx = lbl_804799B8.x2 + lbl_804799B8.x3;
+            tm->x37[idx].x5 = 1;
+            *state_ptr -= 1;
+            return;
+        }
+        idx = lbl_804799B8.x2 + lbl_804799B8.x3;
+        if (lbl_803D9D20.x72[tm->x37[idx].x3] == 0) {
+            lbAudioAx_80024030(3);
+            return;
+        }
+        lbAudioAx_80024030(1);
+        *state_ptr -= 1;
+        idx = lbl_804799B8.x2 + lbl_804799B8.x3;
+        if (tm->x37[idx].x5 != 0) {
+            tm->x37[idx].x5 = 0;
+        }
+    } else if (trigger & 0x200) {
+        lbAudioAx_80024030(0);
+        idx = lbl_804799B8.x2 + lbl_804799B8.x3;
+        tm->x37[idx].x3 = tm->x37[idx].x4;
+        idx = lbl_804799B8.x2 + lbl_804799B8.x3;
+        tm->x37[idx].x7 = tm->x37[idx].x8;
+        idx = lbl_804799B8.x2 + lbl_804799B8.x3;
+        tm->x37[idx].x5 = tm->x37[idx].x6;
+        *state_ptr -= 1;
+    } else if (trigger & 0x400) {
+        idx = lbl_804799B8.x2 + lbl_804799B8.x3;
+        adj = (u8) gm_80169238((u8) fn_8018F6FC(tm->x37[idx].x3));
+        idx = lbl_804799B8.x2 + lbl_804799B8.x3;
+        if ((s32) tm->x37[idx].x7 < adj - 1) {
+            lbAudioAx_80024030(2);
+            idx = lbl_804799B8.x2 + lbl_804799B8.x3;
+            tm->x37[idx].x7++;
+        }
+    } else if (trigger & 0x800) {
+        idx = lbl_804799B8.x2 + lbl_804799B8.x3;
+        if (tm->x37[idx].x7 != 0) {
+            lbAudioAx_80024030(2);
+            idx = lbl_804799B8.x2 + lbl_804799B8.x3;
+            tm->x37[idx].x7--;
+        }
+    }
+}
 
 /// @todo Currently 93.5% match - permuter couldn't improve
 /// Handles name entry/selection input for tournament mode.
