@@ -1090,6 +1090,7 @@ void grZebes_801DA254(Ground_GObj* gobj, f32 level)
 {
     Ground* gp = GET_GROUND(gobj);
     HSD_LObj* lobj = (HSD_LObj*) gp->gv.zebes4.xDC;
+    PAD_STACK(8);
 
     if (lobj == NULL) {
         HSD_GObj* lgobj = HSD_GObj_804D7824[4];
@@ -2069,6 +2070,7 @@ void grZebes_801DC260(void)
 {
     int i;
     grZe_BubbleEntry* entry = grZe_8049F170;
+    PAD_STACK(8);
 
     for (i = 0; i < 20; i++, entry++) {
         if (entry->active != 0) {
@@ -2285,6 +2287,8 @@ bool grZebes_801DCBB0(Vec3* vec, int val)
 
 bool grZebes_801DCBFC(Ground_GObj* gobj, HSD_GObj* fobj, void* arg)
 {
+    f32 unused;
+    f32 unused2;
     Vec3 pos;
     Vec3 prev;
     f32 slope, intercept;
