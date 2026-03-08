@@ -35,6 +35,20 @@ inline int mnInfoBonus_802528F8_inline(int j)
     return gm_8016F120(j);
 }
 
+inline void textSize(HSD_Text* text)
+{
+    text->font_size.x = 0.0521F;
+    text->font_size.y = 0.0521F;
+}
+
+static void textSetup(struct mnInfoBonus_804A09B0_t* o)
+{
+    o->x40 =
+        HSD_SisLib_803A5ACC(0, 1, -9.5F, 9.1F, 17.F, 364.68332F, 38.38772F);
+    textSize(o->x40);
+    HSD_SisLib_803A6368(o->x40, 0xA5);
+}
+
 int mnInfoBonus_802528F8(void)
 {
     int unused;
@@ -277,12 +291,12 @@ inline void mnInfoBonus_80252F8C_inline0(struct mnInfoBonus_804A09B0_t* o)
     StaticModelDesc* model_desc;
 
     model_desc = &o->x50;
-    gobj = GObj_Create(6U, 7U, 0x80U);
+    gobj = GObj_Create(6, 7, 0x80);
     o->x4C = gobj;
     jobj = HSD_JObjLoadJoint(model_desc->joint);
 
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
-    GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4U, 0x80U);
+    GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4, 0x80);
     HSD_JObjAddAnimAll(jobj, model_desc->animjoint, model_desc->matanim_joint,
                        model_desc->shapeanim_joint);
     HSD_JObjReqAnimAll(jobj, 0.F);
@@ -290,16 +304,10 @@ inline void mnInfoBonus_80252F8C_inline0(struct mnInfoBonus_804A09B0_t* o)
 
     HSD_JObjSetFlags(
         mnInfoBonus_inline_GetJObjNext(mnInfoBonus_inline_GetJObjChild(jobj)),
-        0x10U);
-    HSD_JObjSetFlags(mnInfoBonus_inline_GetJObjChild(jobj), 0x10U);
+        JOBJ_HIDDEN);
+    HSD_JObjSetFlags(mnInfoBonus_inline_GetJObjChild(jobj), JOBJ_HIDDEN);
     mnInfoBonus_inline_SetGObjFlag(
-        HSD_GObjProc_8038FD54(gobj, fn_80252E4C, 0U));
-}
-
-inline void mnInfoBonus_80252F8C_inline1(HSD_Text* text)
-{
-    text->font_size.x = 0.0521F;
-    text->font_size.y = 0.0521F;
+        HSD_GObjProc_8038FD54(gobj, fn_80252E4C, 0));
 }
 
 void mnInfoBonus_80252F8C(void)
@@ -327,8 +335,5 @@ void mnInfoBonus_80252F8C(void)
 
     mnInfoBonus_80252F8C_inline0(o);
 
-    o->x40 =
-        HSD_SisLib_803A5ACC(0, 1, -9.5F, 9.1F, 17.F, 364.68332F, 38.38772F);
-    mnInfoBonus_80252F8C_inline1(o->x40);
-    HSD_SisLib_803A6368(o->x40, 0xA5);
+    textSetup(o);
 }
