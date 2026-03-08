@@ -614,6 +614,8 @@ extern CamDesc lbl_803B7CA8;
 /// Initializes the tournament bracket camera and optionally resets bracket data.
 /// Removes all existing GObjs from two entity lists, inits lbl_80473AB8 entries,
 /// creates camera GObj with CObjDesc loaded from lbl_803B7CA8 rodata.
+#pragma push
+#pragma auto_inline off
 void fn_8018E618(int arg0, int arg1, f32 farg0)
 {
     CamDesc cam;
@@ -696,20 +698,27 @@ void fn_8018E618(int arg0, int arg1, f32 farg0)
     }
     fn_8018A970(arg0);
 }
+#pragma pop
 
 /// #fn_8018E85C
 
+#pragma push
+#pragma auto_inline off
 void fn_8018EC48(void)
 {
     mn_8022F138(0x19, 0x1C);
     mn_8022F138(0x12, 0x15);
 }
+#pragma pop
 
+#pragma push
+#pragma auto_inline off
 void fn_8018EC7C(void)
 {
     mn_8022F0F0(0x1B);
     mn_8022F0F0(0x14);
 }
+#pragma pop
 
 /// #fn_8018ECA8
 
@@ -1360,6 +1369,8 @@ HSD_GObj* fn_80190174(HSD_CObjDesc* cobjdesc)
 }
 #pragma pop
 
+#pragma push
+#pragma auto_inline off
 HSD_GObj* fn_801901F8(HSD_CObjDesc* cobjdesc)
 {
     HSD_GObj* gobj = GObj_Create(0x13, 0x15, 2);
@@ -1369,6 +1380,7 @@ HSD_GObj* fn_801901F8(HSD_CObjDesc* cobjdesc)
     gobj->gxlink_prios = 0xA;
     return gobj;
 }
+#pragma pop
 
 #pragma push
 #pragma auto_inline off
@@ -1690,7 +1702,7 @@ void gm_80190FE4(int arg0)
 
         if (arg0 != 0x78) {
             tm->x37[lbl_804799B8.x2 + lbl_804799B8.x3].x9 =
-                (s16) arg0;
+                arg0;
         }
 
         fn_80190ABC(5);
@@ -2614,6 +2626,7 @@ s32 fn_80192E6C(void)
     HSD_JObj* jobj;
     s32 i;
     s32 j;
+    PAD_STACK(16);
 
     fn_8019035C(1, lbl_804D6650->models[4], 0, 0x1A, 2, 1, fn_801918F0,
                 0.0f);
@@ -4705,6 +4718,7 @@ void fn_80198D18(void)
     TmData* td;
     HSD_Text* text;
     HSD_GObj* gobj;
+    PAD_STACK(24);
 
     gm_8018F634();
     fn_80190174(lbl_804D666C->cameras->desc);
