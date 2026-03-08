@@ -91,7 +91,8 @@ static StageCallbacks grZe_callbacks[] = {
 };
 
 static u8 grZe_803E1B20[0x0A] = { 0 };
-static u8 grZe_803E1B2C[0x58] = { 0 };
+static u8 grZe_803E1B2C[0x34] = { 0 };
+static char grZe_803E1B60[0x24] = "%s:%d: couldn t get gobj(id=%d)\n";
 static u8 grZe_803E1B84[0x0A] = "grzebes.c";
 static u8 grZe_803E1B90[0xF0] = { 0 };
 static u8 grZe_803E1C80[0x6C] = { 0 };
@@ -235,7 +236,7 @@ Ground_GObj* grZebes_801D8558(int id)
             HSD_GObjProc_8038FD54(gobj, cbs->callback2, 4);
         }
     } else {
-        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 256, id);
+        OSReport(grZe_803E1B60, grZe_803E1B84, 256, id);
     }
     return gobj;
 }
@@ -686,7 +687,8 @@ void grZebes_801D95B8(Ground_GObj* gobj)
     Ground* gp = GET_GROUND(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
     HSD_JObj* stored_jobj = (HSD_JObj*) gp->gv.zebes.x4;
-
+    int unused[4];
+    
     if (stored_jobj != NULL) {
         HSD_JObjGetTranslation2(stored_jobj, &pos);
         HSD_JObjSetTranslate(jobj, &pos);
