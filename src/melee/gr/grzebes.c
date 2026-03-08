@@ -2110,11 +2110,11 @@ void grZebes_801DC408(Ground_GObj* gobj)
             return;
         }
 
-        gp->gv.zebes5.xF6 = (s16) (gp->gv.zebes5.xF6 - 1);
-        if (gp->gv.zebes5.xF6 < 0) {
-            s32 count = 0;
+        gp->gv.zebes5.xF4 = (s16) (gp->gv.zebes5.xF4 - 1);
+        if (gp->gv.zebes5.xF4 < 0) {
             s32 first_free = -1;
             s32 i;
+            s32 count = 0;
 
             for (i = 0; i < 20; i++) {
                 if (grZe_8049F170[i].active != 0) {
@@ -2125,12 +2125,11 @@ void grZebes_801DC408(Ground_GObj* gobj)
             }
 
             if (count < 15) {
-                Vec3* base = grZe_8049F140;
-                f32 y_min = base[2].y;
+                f32 y_min = grZe_8049F158[0].y;
                 f32 bubble_r = grZe_804D6990->x74;
-                f32 x_base = base[2].x + bubble_r;
-                f32 x_range = -((2.0f * bubble_r) - (base[1].x - base[2].x));
-                f32 y_range = base[1].y - y_min;
+                f32 x_base = grZe_8049F158[0].x + bubble_r;
+                f32 x_range = -((2.0f * bubble_r) - (grZe_8049F140[1].x - grZe_8049F158[0].x));
+                f32 y_range = grZe_8049F140[1].y - y_min;
                 f32 rscale = HSD_Randf();
                 f32 ry = HSD_Randf();
 
@@ -2143,19 +2142,17 @@ void grZebes_801DC408(Ground_GObj* gobj)
             }
 
             {
-                f32 f_min = grZe_804D6990->x60;
-                f32 f_max = grZe_804D6990->x64;
-                s32 t_min = (s32) f_min;
-                s16 timer = (s16) f_max;
+                s32 t_min = (s32) grZe_804D6990->x60;
+                s32 timer = (s32) grZe_804D6990->x64;
 
-                if ((s32) f_max > (s32) f_min) {
+                if (timer > t_min) {
                     s32 range = timer - t_min;
                     timer = t_min + (range != 0 ? HSD_Randi(range) : 0);
                 } else if (timer < t_min) {
                     s32 range = t_min - timer;
                     timer += (range != 0 ? HSD_Randi(range) : 0);
                 }
-                gp->gv.zebes5.xF6 = timer;
+                gp->gv.zebes5.xF4 = (s16) timer;
             }
         }
     }
