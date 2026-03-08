@@ -700,7 +700,96 @@ void fn_8018E618(int arg0, int arg1, f32 farg0)
 }
 #pragma pop
 
-/// #fn_8018E85C
+void fn_8018E85C(int model, s32 flag)
+{
+    TmData* td;
+    u8* entry;
+    u8* sub;
+    s32 bracket_idx;
+    s32 outer_idx;
+    s32 inner_idx;
+    s32 j;
+    u8* ptr;
+    HSD_JObj* jobj;
+    HSD_GObj* gobj;
+    DynamicModelDesc* mdl = (DynamicModelDesc*) model;
+    s32 anim_frame;
+    f32 pos_multiplier;
+    f32 pos;
+    f32 final_pos;
+
+    td = gm_8018F634();
+    bracket_idx = 0;
+    entry = (u8*) lbl_80473AB8;
+
+    for (outer_idx = 0; outer_idx < 0x40; outer_idx++) {
+        if (entry[0] == 0) {
+            goto next_entry;
+        }
+        sub = entry;
+        for (inner_idx = 0; inner_idx < 4; inner_idx++) {
+            if (sub[0x30] == 0) {
+                goto next_sub;
+            }
+
+            if (flag != 0) {
+                ptr = (u8*) td;
+                for (j = 0; j < 64; j++) {
+                    if (ptr[0x44 + j * 0x12] == bracket_idx) {
+                        break;
+                    }
+                }
+                sub[0x50] = (u8) j;
+                ptr = (u8*) td + j * 0x12;
+                sub[0x4D] = ptr[0x3A];
+                sub[0x4E] = ptr[0x37];
+                sub[0x4F] = ptr[0x3E];
+                sub[0x51] = ptr[0x38];
+                sub[0x52] = ptr[0x39];
+                *(u16*) (sub + 0x54) = *(u16*) (ptr + 0x40);
+                bracket_idx++;
+            }
+
+            gobj = GObj_Create(0xE, 0x1B, 0);
+            *(HSD_GObj**) (sub + 0x2C) = gobj;
+            gobj = *(HSD_GObj**) (sub + 0x2C);
+            jobj = HSD_JObjLoadJoint(mdl->joint);
+            HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+            GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4, 2);
+            gm_8016895C(jobj, mdl, 0);
+
+            anim_frame = sub[0x4D] + sub[0x4F] * 0x1E;
+            HSD_JObjReqAnimAll(jobj, (f32) anim_frame);
+            HSD_JObjAnimAll(jobj);
+
+            if (outer_idx == fn_8018F74C()) {
+                pos_multiplier = 10.0f;
+            } else {
+                pos_multiplier = 7.0f;
+            }
+
+            pos = 0.0083f * (f32)(0x40 - (s32) td->x2E) + 1.0f;
+            final_pos = pos_multiplier * pos;
+            HSD_JObjSetTranslateX(jobj, final_pos);
+
+            pos = 0.0083f * (f32)(0x40 - (s32) td->x2E) + 1.0f;
+            final_pos = pos_multiplier * pos;
+            HSD_JObjSetTranslateY(jobj, final_pos);
+
+            if (td->cur_option < 0x1F) {
+                fn_8018AA74(jobj, outer_idx, inner_idx);
+            } else {
+                fn_8018FDC4(jobj, (f32) *(s32*) (sub + 0x44),
+                            -(f32) *(s32*) (sub + 0x48), 666.0f);
+            }
+
+        next_sub:
+            sub += 0x2C;
+        }
+    next_entry:
+        entry += 0xDC;
+    }
+}
 
 #pragma push
 #pragma auto_inline off
