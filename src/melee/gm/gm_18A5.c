@@ -2152,7 +2152,7 @@ void fn_80191CA4(HSD_GObj* gobj)
 void fn_80191D38(HSD_GObj* gobj)
 {
     TmData* tm;
-    u32 idx;
+    s32 idx;
     HSD_JObj* jobj;
 
     tm = gm_8018F634();
@@ -2197,7 +2197,7 @@ void fn_80191D38(HSD_GObj* gobj)
 void fn_80191E9C(HSD_GObj* gobj)
 {
     TmData* tm;
-    u32 idx;
+    s32 idx;
     HSD_JObj* jobj;
 
     tm = gm_8018F634();
@@ -2228,7 +2228,7 @@ void fn_80191E9C(HSD_GObj* gobj)
                 -((2.6200008f * (f32) (idx - lbl_804799B8.x3)) -
                   12.800008f),
                 0.1f);
-    fn_8019044C(jobj, (f32) tm->x37[idx].x1);
+    fn_8019044C(jobj, (f32) tm->x37[idx].x2);
 }
 
 void fn_80191FD4(HSD_GObj* gobj)
@@ -3909,8 +3909,7 @@ void fn_80196FFC(HSD_GObj* gobj)
 {
     TmData* tm;
     HSD_JObj* jobj;
-    u32 pnum;
-    s32 in_range;
+    s32 pnum;    s32 in_range;
     f32 x;
     u8 players;
     u8 state;
@@ -4028,7 +4027,7 @@ void fn_80196FFC(HSD_GObj* gobj)
 void fn_801973F8(HSD_GObj* gobj)
 {
     TmData* tm;
-    u32 pnum;
+    s32 pnum;
     HSD_JObj* jobj;
     f32 x;
     s32 cond;
@@ -4144,7 +4143,7 @@ void fn_801976D4(HSD_GObj* gobj)
 void fn_801977AC(HSD_GObj* gobj)
 {
     TmData* tm;
-    u32 pnum;
+    s32 pnum;
     HSD_JObj* jobj;
     s32 in_range;
     f32 x;
@@ -4218,7 +4217,7 @@ void fn_801977AC(HSD_GObj* gobj)
 void fn_80197AF0(HSD_GObj* gobj)
 {
     TmData* tm;
-    u32 pnum;
+    s32 pnum;
     HSD_JObj* jobj;
     s32 in_range;
     f32 x;
@@ -4267,9 +4266,10 @@ void fn_80197AF0(HSD_GObj* gobj)
 
     fn_8018FDC4(jobj, x, 666.0f, 666.0f);
 
-    if ((lbl_804799D8.x0[pnum * 6 + 0x44] != 6) ||
-        (state = lbl_804799D8.x0[pnum * 6 + 0x2D],
-         (state == 1) || (state == 2) || (state == 4)))
+    if (lbl_804799D8.x0[pnum + 0x44] != 6 ||
+        lbl_804799D8.x0[pnum * 6 + 0x2D] == 1 ||
+        lbl_804799D8.x0[pnum * 6 + 0x2D] == 2 ||
+        lbl_804799D8.x0[pnum * 6 + 0x2D] == 4)
     {
         HSD_JObjSetFlagsAll(jobj, 0x10U);
     }
@@ -4484,7 +4484,7 @@ void fn_801981A0(HSD_GObj* gobj)
 void fn_801983E4(HSD_GObj* gobj)
 {
     TmData* tm;
-    u32 pnum;
+    s32 pnum;
     HSD_JObj* jobj;
     f32 x;
     s32 cond;
