@@ -559,7 +559,7 @@ void grZebes_801D90FC(Ground_GObj* arg) {}
 void grZebes_801D9100(HSD_GObj* gobj)
 {
     // This is VERY MUCH permuterslop
-    // but 100% is 100% 
+    // but 100% is 100%
     Item_GObj *new_var3;
     HSD_JObj* child_jobj;
     Ground* gp = GET_GROUND(gobj);
