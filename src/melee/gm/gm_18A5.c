@@ -3385,6 +3385,174 @@ void fn_80196684(s32 bracket_idx)
 
 /// #fn_801967E0
 
+s32 fn_801967E0(s32 arg0)
+{
+    s32 rand;
+    u8 w0, w1, w2, w3;
+    u8* e = (u8*) &lbl_80473AB8[arg0];
+
+    w0 = e[0x51];
+    w1 = e[0x7D];
+    w2 = e[0xA9];
+    w3 = e[0xD5];
+
+    rand = HSD_Randi(w0 + w1 + w2 + w3);
+
+    if (rand < (s32) w0) {
+        e[0x4C] = 0;
+        rand = HSD_Randi(w1 + w2 + w3);
+        if (rand < (s32) w1) {
+            e[0x78] = 1;
+            rand = HSD_Randi(w2 + w3);
+            if (rand < (s32) w2) {
+                e[0xA4] = 2;
+                e[0xD0] = 3;
+                return rand;
+            }
+            e[0xA4] = 3;
+            e[0xD0] = 2;
+            return rand;
+        }
+        if (rand < (s32) (w1 + w2)) {
+            e[0xA4] = 1;
+            rand = HSD_Randi(w1 + w3);
+            if (rand < (s32) w1) {
+                e[0x78] = 2;
+                e[0xD0] = 3;
+                return rand;
+            }
+            e[0x78] = 3;
+            e[0xD0] = 2;
+            return rand;
+        }
+        e[0xD0] = 1;
+        rand = HSD_Randi(w1 + w2);
+        if (rand < (s32) w2) {
+            e[0x78] = 2;
+            e[0xA4] = 3;
+            return rand;
+        }
+        e[0x78] = 3;
+        e[0xA4] = 2;
+        return rand;
+    }
+
+    if (rand < (s32) (w0 + w1)) {
+        e[0x78] = 0;
+        rand = HSD_Randi(w0 + w2 + w3);
+        if (rand < (s32) w0) {
+            e[0x4C] = 1;
+            rand = HSD_Randi(w2 + w3);
+            if (rand < (s32) w2) {
+                e[0xA4] = 2;
+                e[0xD0] = 3;
+                return rand;
+            }
+            e[0xA4] = 3;
+            e[0xD0] = 2;
+            return rand;
+        }
+        if (rand < (s32) (w0 + w2)) {
+            e[0xA4] = 1;
+            rand = HSD_Randi(w0 + w3);
+            if (rand < (s32) w0) {
+                e[0x4C] = 2;
+                e[0xD0] = 3;
+                return rand;
+            }
+            e[0x4C] = 3;
+            e[0xD0] = 2;
+            return rand;
+        }
+        e[0xD0] = 1;
+        rand = HSD_Randi(w0 + w2);
+        if (rand < (s32) w0) {
+            e[0x4C] = 2;
+            e[0xA4] = 3;
+            return rand;
+        }
+        e[0x4C] = 3;
+        e[0xA4] = 2;
+        return rand;
+    }
+
+    if (rand < (s32) (w2 + w0 + w1)) {
+        e[0xA4] = 0;
+        rand = HSD_Randi(w0 + w1 + w3);
+        if (rand < (s32) w0) {
+            e[0x4C] = 1;
+            rand = HSD_Randi(w1 + w3);
+            if (rand < (s32) w1) {
+                e[0x78] = 2;
+                e[0xD0] = 3;
+                return rand;
+            }
+            e[0x78] = 3;
+            e[0xD0] = 2;
+            return rand;
+        }
+        if (rand < (s32) (w0 + w1)) {
+            e[0x78] = 1;
+            rand = HSD_Randi(w0 + w3);
+            if (rand < (s32) w0) {
+                e[0x4C] = 2;
+                e[0xD0] = 3;
+                return rand;
+            }
+            e[0x4C] = 3;
+            e[0xD0] = 2;
+            return rand;
+        }
+        e[0xD0] = 1;
+        rand = HSD_Randi(w0 + w1);
+        if (rand < (s32) w0) {
+            e[0x4C] = 2;
+            e[0x78] = 3;
+            return rand;
+        }
+        e[0x4C] = 3;
+        e[0x78] = 2;
+        return rand;
+    }
+
+    e[0xD0] = 0;
+    rand = HSD_Randi(w0 + w1 + w2);
+    if (rand < (s32) w0) {
+        e[0x4C] = 1;
+        rand = HSD_Randi(w1 + w2);
+        if (rand < (s32) w1) {
+            e[0x78] = 2;
+            e[0xA4] = 3;
+            return rand;
+        }
+        e[0x78] = 3;
+        e[0xA4] = 2;
+        return rand;
+    }
+    if (rand < (s32) (w0 + w1)) {
+        e[0x78] = 1;
+        rand = HSD_Randi(w0 + w2);
+        if (rand < (s32) w0) {
+            e[0x4C] = 2;
+            e[0xA4] = 3;
+            return rand;
+        }
+        e[0x4C] = 3;
+        e[0xA4] = 2;
+        return rand;
+    }
+    e[0xA4] = 1;
+    rand = HSD_Randi(w0 + w1);
+    if (rand < (s32) w0) {
+        e[0x4C] = 2;
+        e[0x78] = 3;
+        return rand;
+    }
+    e[0x4C] = 3;
+    e[0x78] = 2;
+    return rand;
+}
+
 extern u8 lbl_803DA0D0[];
 
 /// @todo Currently 95.92% match - needs minor register allocation fix
