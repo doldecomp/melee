@@ -131,7 +131,7 @@ HSD_GObj* it_802DD7F0(int, void*, int, int);
 HSD_GObj* it_802E16F8(int, void*, int);
 HSD_GObj* it_802DC4BC(int, void*, int);
 
-s32 grZakoGenerator_801CA8B4(HSD_GObj* gobj, int arg1)
+s32 grZakoGenerator_801CA8B4(int arg1)
 {
     struct StageZakoEntry {
         u8 x0, x1, x2, x3;
@@ -172,7 +172,7 @@ s32 grZakoGenerator_801CA8B4(HSD_GObj* gobj, int arg1)
 
                         if (kind >= 0xDC && kind <= 0xFB) {
                             if (element->x8 != -1) {
-                                spawned = Ground_801C58E0(lbl_8049F030.x0, element->x8, gobj);
+                                spawned = Ground_801C58E0(lbl_8049F030.x0, element->x8, NULL);
                             }
                         } else {
                             switch (kind) {
@@ -212,7 +212,7 @@ s32 grZakoGenerator_801CA8B4(HSD_GObj* gobj, int arg1)
 
                         if (kind >= 0xDC && kind <= 0xFB) {
                             if (data->x3C8 != -1) {
-                                spawned = Ground_801C58E0(lbl_8049F030.x0, data->x3C8, gobj);
+                                spawned = Ground_801C58E0(lbl_8049F030.x0, data->x3C8, NULL);
                             }
                         } else {
                             switch (kind) {
@@ -299,15 +299,15 @@ void grZakoGenerator_801CACB8(HSD_GObj* item_gobj)
     }
 }
 
-s32 fn_801CADBC(HSD_GObj* gobj)
+s32 fn_801CADBC(void)
 {
-    grZakoGenerator_801CA8B4(gobj, 0);
+    grZakoGenerator_801CA8B4(0);
     return 0;
 }
 
-s32 grZakoGenerator_801CADE0(HSD_GObj* gobj)
+s32 grZakoGenerator_801CADE0(void)
 {
-    return grZakoGenerator_801CA8B4(gobj, 1);
+    return grZakoGenerator_801CA8B4(1);
 }
 
 HSD_GObj* grZakoGenerator_801CAE04(void* arg0)
