@@ -4105,6 +4105,11 @@ static union {
         u8 x1A;
         u8 x1B;
         u8 x1C;
+        u8 _pad3[0x48 - 0x1D];
+        u8* x48;
+        u8 x4C;
+        u8 x4D;
+        u8 x4E[20];
     };
 } lbl_804799D8;
 
@@ -5193,7 +5198,256 @@ void fn_80199AF0(void)
     }
 }
 
-/// #fn_8019A158
+void fn_8019A158(void)
+{
+    TmData* td1;
+    TmData* td2;
+    s32 mode;
+    s32 slot;
+    s32 bracket_idx;
+    s32 result;
+    s32 local1, local2;
+    s32 i;
+    s32 counter;
+    u8* me;
+    u8* cursor;
+    PAD_STACK(16);
+
+    td1 = gm_8018F634();
+    lbl_804799D8.x48 = (u8*) &gm_80477738;
+    mode = 0;
+    *(u32*) lbl_804799D8.x0 = 0;
+
+    td2 = gm_8018F634();
+
+    result = fn_8018F508(&local1);
+    if (result == 1) {
+        mode = 1;
+    } else if (td2->x33 == 5) {
+        mode = 2;
+    }
+
+    me = lbl_804799D8.x48;
+    result = fn_8018F508(&local2);
+    if (result == 1) {
+        slot = local2;
+    } else {
+        slot = -1;
+        for (i = 0; i < 4; i++) {
+            if (me[0x58] != 3 && me[0x5E] == 0) {
+                slot = i;
+                break;
+            }
+            me += 0xA8;
+        }
+    }
+
+    bracket_idx = fn_8018F74C();
+
+    for (i = 0; i < 20; i++) {
+        lbl_804799D8.x4E[i] = 0;
+    }
+
+    if (mode == 1) {
+        BracketEntry* bracket = &lbl_80473AB8[bracket_idx];
+        u8* bp = (u8*) bracket;
+        u8* matched = bp + slot * 0x2C;
+
+        for (i = 0; i < 4; i++) {
+            if (i == slot) {
+                matched[0x4C] = 0;
+            } else {
+                bp[0x4C] = 3;
+            }
+            bp += 0x2C;
+        }
+    } else if (td1->x2D == 1) {
+        BracketEntry* bracket = &lbl_80473AB8[bracket_idx];
+        cursor = (u8*) bracket;
+
+        if (bracket->x4E == 3) {
+            bracket->x4C = 3;
+        } else {
+            me = lbl_804799D8.x48;
+            me[0x5D] = me[0x5E];
+            bracket->x4C = me[0x5E];
+            me = lbl_804799D8.x48;
+            if (me[0x5E] == 0) {
+                slot = 0;
+            }
+        }
+
+        {
+            u8 check = bracket->x7A;
+            cursor += 0x2C;
+            if (check == 3) {
+                cursor[0x4C] = 3;
+            } else {
+                me = lbl_804799D8.x48;
+                me += 0xA8;
+                me[0x5D] = me[0x5E];
+                cursor[0x4C] = me[0x5E];
+                me = lbl_804799D8.x48;
+                if (me[0x106] == 0) {
+                    slot = 1;
+                }
+            }
+        }
+
+        {
+            u8 check = cursor[0x7A];
+            cursor += 0x2C;
+            if (check == 3) {
+                cursor[0x4C] = 3;
+            } else {
+                me = lbl_804799D8.x48;
+                me += 0x150;
+                me[0x5D] = me[0x5E];
+                cursor[0x4C] = me[0x5E];
+                me = lbl_804799D8.x48;
+                if (me[0x1AE] == 0) {
+                    slot = 2;
+                }
+            }
+        }
+
+        {
+            u8 check = cursor[0x7A];
+            cursor += 0x2C;
+            if (check == 3) {
+                cursor[0x4C] = 3;
+            } else {
+                me = lbl_804799D8.x48;
+                me += 0x1F8;
+                me[0x5D] = me[0x5E];
+                cursor[0x4C] = me[0x5E];
+                me = lbl_804799D8.x48;
+                if (me[0x256] == 0) {
+                    slot = 3;
+                }
+            }
+        }
+    } else {
+        BracketEntry* bracket = &lbl_80473AB8[bracket_idx];
+        counter = 0;
+
+        if (bracket->x4E == 3) {
+            bracket->x4C = 4;
+        } else {
+            bracket->x4C = 0;
+            counter = 1;
+        }
+
+        cursor = (u8*) bracket + 0x2C;
+        if (bracket->x7A == 3) {
+            cursor[0x4C] = 4;
+        } else {
+            cursor[0x4C] = counter;
+            counter++;
+        }
+
+        {
+            u8 check = cursor[0x7A];
+            cursor += 0x2C;
+            if (check == 3) {
+                cursor[0x4C] = 4;
+            } else {
+                cursor[0x4C] = counter;
+                counter++;
+            }
+        }
+
+        {
+            u8 check = cursor[0x7A];
+            cursor += 0x2C;
+            if (check == 3) {
+                cursor[0x4C] = 4;
+            } else {
+                cursor[0x4C] = counter;
+                counter++;
+            }
+        }
+
+        switch (counter) {
+        case 3:
+            fn_80196684(bracket_idx);
+            break;
+        case 2: {
+            s32 rand_val = HSD_Randi(bracket->x51 + bracket->x7D);
+            if (rand_val < bracket->x51) {
+                bracket->x4C = 0;
+                bracket->x78 = 1;
+            } else {
+                bracket->x4C = 1;
+                bracket->x78 = 0;
+            }
+            break;
+        }
+        case 4:
+        case 5:
+            fn_801967E0(bracket_idx);
+            break;
+        }
+
+        me = lbl_804799D8.x48;
+        cursor = (u8*) &lbl_80473AB8[bracket_idx];
+        me[0x5D] = cursor[0x4C];
+        me = lbl_804799D8.x48;
+        me[0x5E] = cursor[0x4C];
+        me[0x105] = cursor[0x78];
+        me = lbl_804799D8.x48;
+        me[0x106] = cursor[0x78];
+        me[0x1AD] = cursor[0xA4];
+        me = lbl_804799D8.x48;
+        me[0x1AE] = cursor[0xA4];
+        me[0x255] = cursor[0xD0];
+        me = lbl_804799D8.x48;
+        me[0x256] = cursor[0xD0];
+
+        if (bracket->x4C == 0) {
+            slot = 0;
+        }
+        if (bracket->x78 == 0) {
+            slot = 1;
+        }
+        cursor = (u8*) bracket + 0x2C;
+        if (cursor[0x78] == 0) {
+            cursor += 0x2C;
+            slot = 2;
+        } else {
+            cursor += 0x2C;
+        }
+        if (cursor[0x78] == 0) {
+            slot = 3;
+        }
+    }
+
+    {
+        BracketEntry* bracket = &lbl_80473AB8[bracket_idx];
+        lbl_804799D8.x4C = slot;
+        cursor = (u8*) bracket + slot * 0x2C;
+        lbl_804799D8.x4D = cursor[0x4E];
+
+        if (lbl_804799D8.x4D == 0 && bracket->x18 != 0) {
+            u8 s = lbl_804799D8.x4C;
+            u16 val = td1->x4B8[s].x6;
+            if (val <= 0x78) {
+                gm_80167858(s, (s32) val, 0x1F, 0x78);
+            } else {
+                gm_80167858(s, 0x78, 0x1F, 0x78);
+            }
+        }
+
+        cursor = (u8*) &lbl_80473AB8[bracket_idx] + slot * 0x2C;
+        {
+            u8 model_idx = cursor[0x50];
+            fn_8018F00C((char*) lbl_804799D8.x4E,
+                         td1->x37[model_idx].x9);
+        }
+    }
+}
+
+/// #fn_8019A158_end
 
 /// @todo Currently 98.36% match - needs branch pattern fix (beq+b vs bne)
 #pragma dont_inline on
