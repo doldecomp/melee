@@ -79,9 +79,337 @@ void fn_8018A970(int arg0)
 
 /// #fn_8018B090
 
-/// #fn_8018C8D4
+static s32 lbl_804DA67C = (s32) 0xFFFF00FF;
 
-/// #fn_8018D50C
+/// Draws tournament bracket lines for different bracket types (0-3).
+void fn_8018C8D4(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
+                 s32 arg5, s32 arg6, f32 farg0)
+{
+    u8* data = (u8*) arg0;
+    f32 thickness;
+    f32 neg_thickness;
+    f32 total_width;
+    s32 half, center, right;
+    s32 half_h, third_h;
+    s32 mid_y, bot_y, two_third_y;
+    s32 c0, c1, c2, c3, c4, c5, c6, c7, c8, c9;
+    s32 c10, c11, c12, c13, c14, c15, c16, c17, c18, c19;
+    s32 c20, c21, c22, c23, c24, c25, c26, c27, c28, c29;
+    s32 c30, c31, c32, c33;
+
+    c0 = lbl_804DA67C;
+    thickness = M2C_FIELD(data, f32*, 0x1C);
+
+    switch ((s32) data[4]) {
+    case 0:
+        c1 = c0;
+        DrawRectangle((f32) arg1, (f32) arg2, thickness, (f32) arg4,
+                      (GXColor*) &c1);
+        if (data[0x21] == 0) {
+            c2 = M2C_FIELD(data, s32*, 0x20);
+            DrawRectangle((f32) arg1, (f32) arg2, thickness, (f32) arg4,
+                          (GXColor*) &c2);
+        }
+        return;
+
+    case 1:
+        c3 = c0;
+        DrawRectangle((f32) arg1, (f32) arg2, thickness, (f32) arg4,
+                      (GXColor*) &c3);
+        if (data[0x21] == 0) {
+            if (data[0x4C] == 0) {
+                half_h = arg4 / 2;
+                c4 = M2C_FIELD(data, s32*, 0x20);
+                DrawRectangle((f32) arg1, (f32) (arg2 + half_h), thickness,
+                              (f32) half_h, (GXColor*) &c4);
+                return;
+            }
+            c5 = M2C_FIELD(data, s32*, 0x20);
+            DrawRectangle((f32) arg1, (f32) arg2, thickness,
+                          (f32) (arg4 / 2), (GXColor*) &c5);
+        }
+        break;
+
+    case 2:
+        half = arg3 / 2;
+        center = arg1 + half;
+        half_h = arg4 / 2;
+        c6 = c0;
+        DrawRectangle((f32) center, (f32) arg2, thickness, (f32) half_h,
+                      (GXColor*) &c6);
+
+        neg_thickness = -thickness;
+        mid_y = arg2 + half_h;
+        c7 = c0;
+        DrawRectangle((f32) (arg1 + 0x2B), (f32) mid_y,
+                      ((f32) arg3 + thickness) - 43.0f, neg_thickness,
+                      (GXColor*) &c7);
+
+        c8 = c0;
+        DrawRectangle((f32) (arg1 + 0x2B), (f32) mid_y, thickness,
+                      (f32) half_h, (GXColor*) &c8);
+
+        right = arg1 + arg3;
+        c9 = c0;
+        DrawRectangle((f32) right, (f32) mid_y, thickness, (f32) half_h,
+                      (GXColor*) &c9);
+
+        if (data[0x21] == 0) {
+            if (data[0x4C] == 0) {
+                c10 = M2C_FIELD(data, s32*, 0x20);
+                DrawRectangle((f32) (arg1 + 0x2B), (f32) mid_y, thickness,
+                              (f32) half_h, (GXColor*) &c10);
+                c11 = M2C_FIELD(data, s32*, 0x20);
+                DrawRectangle((f32) (arg1 + 0x2B), (f32) mid_y,
+                              (f32) (half - 0x2B), neg_thickness,
+                              (GXColor*) &c11);
+                return;
+            }
+            if (data[0x78] == 0) {
+                c12 = M2C_FIELD(data, s32*, 0x20);
+                DrawRectangle((f32) right, (f32) mid_y, thickness,
+                              (f32) half_h, (GXColor*) &c12);
+                c13 = M2C_FIELD(data, s32*, 0x20);
+                DrawRectangle((f32) center, (f32) mid_y,
+                              (f32) half + thickness, neg_thickness,
+                              (GXColor*) &c13);
+                return;
+            }
+            c14 = M2C_FIELD(data, s32*, 0x20);
+            DrawRectangle((f32) center, (f32) arg2, thickness, (f32) half_h,
+                          (GXColor*) &c14);
+        }
+        break;
+
+    case 3:
+        half = arg3 / 2;
+        third_h = arg4 / 3;
+        center = arg1 + half;
+        mid_y = arg2 + third_h;
+
+        c15 = c0;
+        DrawRectangle((f32) center, (f32) mid_y, thickness,
+                      (f32) (third_h - 2), (GXColor*) &c15);
+
+        c16 = c0;
+        DrawRectangle((f32) arg1, (f32) arg2, thickness, (f32) third_h,
+                      (GXColor*) &c16);
+
+        right = arg1 + arg3;
+        c17 = c0;
+        DrawRectangle((f32) right, (f32) arg2, thickness, (f32) third_h,
+                      (GXColor*) &c17);
+
+        bot_y = (arg2 + arg4) - third_h;
+        c18 = c0;
+        DrawRectangle((f32) arg1, (f32) bot_y, thickness, (f32) third_h,
+                      (GXColor*) &c18);
+
+        c19 = c0;
+        DrawRectangle((f32) right, (f32) bot_y, thickness, (f32) third_h,
+                      (GXColor*) &c19);
+
+        neg_thickness = -thickness;
+        total_width = (f32) arg3 + thickness;
+        c20 = c0;
+        DrawRectangle((f32) arg1, (f32) mid_y, total_width, neg_thickness,
+                      (GXColor*) &c20);
+
+        c21 = c0;
+        DrawRectangle((f32) arg1, (f32) bot_y, total_width, neg_thickness,
+                      (GXColor*) &c21);
+
+        if (data[0x21] == 0) {
+            if (data[0x4C] == 0) {
+                two_third_y = arg2 + ((arg4 * 2) / 3);
+                c22 = M2C_FIELD(data, s32*, 0x20);
+                DrawRectangle((f32) arg1, (f32) two_third_y, thickness,
+                              (f32) third_h, (GXColor*) &c22);
+                c23 = M2C_FIELD(data, s32*, 0x20);
+                DrawRectangle((f32) arg1, (f32) two_third_y, (f32) half,
+                              neg_thickness, (GXColor*) &c23);
+                c24 = M2C_FIELD(data, s32*, 0x20);
+                DrawRectangle((f32) center, (f32) (arg2 + (arg4 / 2)),
+                              thickness, (f32) ((arg4 / 6) - 1),
+                              (GXColor*) &c24);
+                return;
+            }
+            if (data[0x78] == 0) {
+                two_third_y = arg2 + ((arg4 * 2) / 3);
+                c25 = M2C_FIELD(data, s32*, 0x20);
+                DrawRectangle((f32) right, (f32) two_third_y, thickness,
+                              (f32) third_h, (GXColor*) &c25);
+                c26 = M2C_FIELD(data, s32*, 0x20);
+                DrawRectangle((f32) center, (f32) two_third_y, (f32) half,
+                              neg_thickness, (GXColor*) &c26);
+                c27 = M2C_FIELD(data, s32*, 0x20);
+                DrawRectangle((f32) center, (f32) (arg2 + (arg4 / 2)),
+                              thickness, (f32) ((arg4 / 6) - 1),
+                              (GXColor*) &c27);
+                return;
+            }
+            if (data[0xA4] == 0) {
+                c28 = M2C_FIELD(data, s32*, 0x20);
+                DrawRectangle((f32) arg1, (f32) arg2, thickness,
+                              (f32) third_h, (GXColor*) &c28);
+                c29 = M2C_FIELD(data, s32*, 0x20);
+                DrawRectangle((f32) arg1, (f32) mid_y, (f32) half,
+                              neg_thickness, (GXColor*) &c29);
+                c30 = M2C_FIELD(data, s32*, 0x20);
+                DrawRectangle((f32) center, (f32) mid_y, thickness,
+                              (f32) ((arg4 / 6) - 1), (GXColor*) &c30);
+                return;
+            }
+            c31 = M2C_FIELD(data, s32*, 0x20);
+            DrawRectangle((f32) right, (f32) arg2, thickness,
+                          (f32) third_h, (GXColor*) &c31);
+            c32 = M2C_FIELD(data, s32*, 0x20);
+            DrawRectangle((f32) center, (f32) mid_y, (f32) half,
+                          neg_thickness, (GXColor*) &c32);
+            c33 = M2C_FIELD(data, s32*, 0x20);
+            DrawRectangle((f32) center, (f32) mid_y, thickness,
+                          (f32) ((arg4 / 6) - 1), (GXColor*) &c33);
+        }
+        break;
+    }
+}
+
+static s32 lbl_804DA684 = (s32) 0xFFFF00FF;
+
+/// Draws tournament bracket connector lines with optional tail segments.
+void fn_8018D50C(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
+                 s32 arg5, s32 arg6, f32 farg0)
+{
+    u8* data = (u8*) arg0;
+    TmData* tm;
+    f32 thickness;
+    f32 neg_thickness;
+    s32 right;
+    s32 bottom;
+    s32 c0, c1, c2, c3, c4, c5, c6, c7, c8, c9;
+    s32 c10, c11, c12, c13, c14, c15, c16, c17, c18, c19, c20;
+
+    tm = gm_8018F634();
+    c20 = lbl_804DA684;
+    c0 = lbl_804DA684;
+    thickness = M2C_FIELD(data, f32*, 0x1C);
+    c1 = lbl_804DA684;
+    DrawRectangle((f32) arg1, (f32) arg2, thickness, (f32) arg4,
+                  (GXColor*) &c1);
+
+    right = arg1 + arg3;
+    c2 = c0;
+    DrawRectangle((f32) right, (f32) arg2, thickness, (f32) arg4,
+                  (GXColor*) &c2);
+
+    neg_thickness = -thickness;
+    c3 = c0;
+    DrawRectangle((f32) arg1, (f32) arg5, (f32) arg3 + thickness,
+                  neg_thickness, (GXColor*) &c3);
+
+    if (data[0x21] == 0) {
+        if (data[0x4C] == 0) {
+            c4 = M2C_FIELD(data, s32*, 0x20);
+            DrawRectangle((f32) arg1, (f32) arg2, thickness, (f32) arg4,
+                          (GXColor*) &c4);
+            c5 = M2C_FIELD(data, s32*, 0x20);
+            DrawRectangle((f32) arg1, (f32) arg5,
+                          (f32) (arg3 / 2) + thickness, neg_thickness,
+                          (GXColor*) &c5);
+        } else {
+            c6 = M2C_FIELD(data, s32*, 0x20);
+            DrawRectangle((f32) right, (f32) arg2, thickness, (f32) arg4,
+                          (GXColor*) &c6);
+            {
+                s32 half2 = arg3 / 2;
+                c7 = M2C_FIELD(data, s32*, 0x20);
+                DrawRectangle((f32) (arg1 + half2), (f32) arg5,
+                              (f32) half2 + thickness, neg_thickness,
+                              (GXColor*) &c7);
+            }
+        }
+    }
+
+    switch (tm->entrants) {
+    case 1:
+        if (data[0x5E] != 0) {
+            bottom = arg2 + arg4;
+            c8 = c0;
+            DrawRectangle((f32) right, (f32) bottom, thickness, -70.0f,
+                          (GXColor*) &c8);
+            if (data[0x21] == 0 && data[0x4C] != 0) {
+                c9 = M2C_FIELD(data, s32*, 0x20);
+                DrawRectangle((f32) right, (f32) bottom, thickness, -70.0f,
+                              (GXColor*) &c9);
+            }
+        }
+        return;
+
+    case 3:
+        if (data[0x32] != 0) {
+            bottom = arg2 + arg4;
+            c10 = c0;
+            DrawRectangle((f32) arg1, (f32) bottom, thickness, -60.0f,
+                          (GXColor*) &c10);
+            if (data[0x21] == 0 && data[0x4C] == 0) {
+                c11 = M2C_FIELD(data, s32*, 0x20);
+                DrawRectangle((f32) arg1, (f32) bottom, thickness, -60.0f,
+                              (GXColor*) &c11);
+            }
+        } else if (data[0x5E] != 0) {
+            bottom = arg2 + arg4;
+            c12 = c0;
+            DrawRectangle((f32) right, (f32) bottom, thickness, -60.0f,
+                          (GXColor*) &c12);
+            if (data[0x21] == 0 && data[0x4C] != 0) {
+                c13 = M2C_FIELD(data, s32*, 0x20);
+                DrawRectangle((f32) right, (f32) bottom, thickness, -60.0f,
+                              (GXColor*) &c13);
+            }
+        }
+        break;
+
+    case 5:
+        if (data[0x5E] != 0) {
+            bottom = arg2 + arg4;
+            c14 = c0;
+            DrawRectangle((f32) right, (f32) bottom, thickness, -40.0f,
+                          (GXColor*) &c14);
+            if (data[0x21] == 0 && data[0x4C] != 0) {
+                c15 = M2C_FIELD(data, s32*, 0x20);
+                DrawRectangle((f32) right, (f32) bottom, thickness, -40.0f,
+                              (GXColor*) &c15);
+            }
+        }
+        break;
+
+    case 7:
+        if (data[0x5E] != 0) {
+            if (data[0x2] == 0) {
+                bottom = arg2 + arg4;
+                c16 = c0;
+                DrawRectangle((f32) right, (f32) bottom, thickness, -30.0f,
+                              (GXColor*) &c16);
+                if (data[0x21] == 0 && data[0x4C] != 0) {
+                    c17 = M2C_FIELD(data, s32*, 0x20);
+                    DrawRectangle((f32) right, (f32) bottom, thickness,
+                                  -30.0f, (GXColor*) &c17);
+                }
+            } else {
+                bottom = arg2 + 0x1E;
+                c18 = c0;
+                DrawRectangle((f32) right, (f32) bottom, thickness, -30.0f,
+                              (GXColor*) &c18);
+                if (data[0x21] == 0 && data[0x4C] != 0) {
+                    c19 = M2C_FIELD(data, s32*, 0x20);
+                    DrawRectangle((f32) right, (f32) bottom, thickness,
+                                  -30.0f, (GXColor*) &c19);
+                }
+            }
+        }
+        break;
+    }
+}
 
 void fn_8018DC18(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
                  s32 arg5, s32 arg6, f32 farg0)
@@ -279,7 +607,100 @@ void fn_8018E46C(HSD_GObj* gobj, int unused)
     }
 }
 
-/// #fn_8018E618
+extern s32 lbl_803B7CA8[14];
+
+/// Initializes the tournament bracket camera and optionally resets bracket data.
+/// Removes all existing GObjs from two entity lists, inits lbl_80473AB8 entries,
+/// creates camera GObj with CObjDesc loaded from lbl_803B7CA8 rodata.
+void fn_8018E618(int arg0, int arg1, f32 farg0)
+{
+    s32 sp[14];
+    HSD_GObj* gobj;
+    HSD_GObj* tmp;
+    s32 i;
+
+    sp[0] = lbl_803B7CA8[0];
+    sp[1] = lbl_803B7CA8[1];
+    sp[2] = lbl_803B7CA8[2];
+    sp[3] = lbl_803B7CA8[3];
+    sp[4] = lbl_803B7CA8[4];
+    sp[5] = lbl_803B7CA8[5];
+    sp[6] = lbl_803B7CA8[6];
+    sp[7] = lbl_803B7CA8[7];
+    sp[8] = lbl_803B7CA8[8];
+    sp[9] = lbl_803B7CA8[9];
+    sp[10] = lbl_803B7CA8[10];
+    sp[11] = lbl_803B7CA8[11];
+    sp[12] = lbl_803B7CA8[12];
+    sp[13] = lbl_803B7CA8[13];
+
+    while ((tmp = M2C_FIELD(HSD_GObj_Entities, HSD_GObj**, 0x6C)) != NULL) {
+        HSD_GObjPLink_80390228(tmp);
+    }
+    while ((tmp = M2C_FIELD(HSD_GObj_Entities, HSD_GObj**, 0x50)) != NULL) {
+        HSD_GObjPLink_80390228(tmp);
+    }
+
+    if (arg1 != 0) {
+        u8* ptr = (u8*) &lbl_80473AB8[0];
+
+        for (i = 0; i < 8; i++) {
+            ptr[0x000] = 0;
+            ptr[0x04E] = 3;
+            ptr[0x07A] = 3;
+            ptr[0x0A6] = 3;
+            ptr[0x0D2] = 3;
+            ptr[0x0DC] = 0;
+            ptr[0x12A] = 3;
+            ptr[0x156] = 3;
+            ptr[0x182] = 3;
+            ptr[0x1AE] = 3;
+            ptr[0x1B8] = 0;
+            ptr[0x206] = 3;
+            ptr[0x232] = 3;
+            ptr[0x25E] = 3;
+            ptr[0x28A] = 3;
+            ptr[0x294] = 0;
+            ptr[0x2E2] = 3;
+            ptr[0x30E] = 3;
+            ptr[0x33A] = 3;
+            ptr[0x366] = 3;
+            ptr[0x370] = 0;
+            ptr[0x3BE] = 3;
+            ptr[0x3EA] = 3;
+            ptr[0x416] = 3;
+            ptr[0x442] = 3;
+            ptr[0x44C] = 0;
+            ptr[0x49A] = 3;
+            ptr[0x4C6] = 3;
+            ptr[0x4F2] = 3;
+            ptr[0x51E] = 3;
+            ptr[0x528] = 0;
+            ptr[0x576] = 3;
+            ptr[0x5A2] = 3;
+            ptr[0x5CE] = 3;
+            ptr[0x5FA] = 3;
+            ptr[0x604] = 0;
+            ptr[0x652] = 3;
+            ptr[0x67E] = 3;
+            ptr[0x6AA] = 3;
+            ptr[0x6D6] = 3;
+            ptr += 0x6E0;
+        }
+    }
+
+    gobj = GObj_Create(9, 0x14, 1);
+    lbl_803D9DD0.cobj = HSD_CObjLoadDesc((HSD_CObjDesc*) &sp[0]);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, lbl_803D9DD0.cobj);
+    GObj_SetupGXLinkMax(gobj, HSD_GObj_803910D8, 1);
+    M2C_FIELD(gobj, u32*, 0x24) = 0x10;
+    M2C_FIELD(gobj, u32*, 0x20) = 0;
+
+    if (arg1 != 0) {
+        fn_8018A514(arg0, farg0);
+    }
+    fn_8018A970(arg0);
+}
 
 /// #fn_8018E85C
 
@@ -3722,7 +4143,52 @@ void fn_801985D4(HSD_GObj* gobj)
     }
 }
 
-/// #fn_80198824
+/// Animates and positions the tournament bracket results overlay JObj.
+/// Uses HSD_JObjSetTranslateZ for visibility, HSD_JObjSetTranslate/SetScale
+/// for positioning from lbl_804799D8 cached values.
+void fn_80198824(HSD_GObj* gobj)
+{
+    HSD_JObj* jobj;
+    s32 in_range;
+
+    gm_8018F634();
+    jobj = gobj->hsd_obj;
+
+    if ((s32) gm_8018F634()->cur_option >= 0x1F &&
+        (s32) gm_8018F634()->cur_option <= 0x27)
+    {
+        in_range = 1;
+    } else {
+        in_range = 0;
+    }
+
+    if (in_range == 0) {
+        HSD_JObjSetTranslateZ(jobj, 10000.0f);
+    } else {
+        HSD_JObjSetTranslateZ(jobj, 0.0f);
+
+        if (lbl_804D667C == 0) {
+            HSD_JObjSetTranslateZ(jobj, 10000.0f);
+        } else {
+            u32* frame_ctr = (u32*) &lbl_804799D8.x0[4];
+            u32 min_frame = *(u32*) &lbl_804799D8.x0[8];
+            u32 max_frame = *(u32*) &lbl_804799D8.x0[0xC];
+
+            if (*frame_ctr < min_frame) {
+                *frame_ctr = min_frame;
+            }
+            if (*frame_ctr < max_frame) {
+                *frame_ctr = *frame_ctr + 1;
+            }
+
+            HSD_JObjReqAnimAll(jobj, (f32) *frame_ctr);
+            HSD_JObjAnimAll(jobj);
+
+            HSD_JObjSetTranslate(jobj, (Vec3*) &lbl_804799D8.x0[0x64]);
+            HSD_JObjSetScale(jobj, (Vec3*) &lbl_804799D8.x0[0x70]);
+        }
+    }
+}
 
 /// Initializes tournament mode match data.
 /// Initializes tournament mode match data structures.

@@ -9,7 +9,7 @@
 #include <melee/sc/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
-/* 18A514 */ UNK_RET fn_8018A514(UNK_PARAMS);
+/* 18A514 */ void fn_8018A514(int, float);
 /* 18A970 */ void fn_8018A970(int);
 /* 18AA74 */ UNK_RET fn_8018AA74(UNK_PARAMS);
 /* 18B090 */ void fn_8018B090(HSD_GObj*);
@@ -126,7 +126,7 @@ fn_8018F71C(int, int); ///< returns the frame for the tou css icon?
 /* 1983E4 */ void fn_801983E4(HSD_GObj*);
 /* 198584 */ void fn_80198584(ResultsData*);
 /* 1985D4 */ void fn_801985D4(HSD_GObj* gobj);
-/* 198824 */ UNK_RET fn_80198824(UNK_PARAMS);
+/* 198824 */ void fn_80198824(HSD_GObj*);
 /* 198BA0 */ void fn_80198BA0(void);
 /* 198C60 */ void fn_80198C60(void);
 /* 198D18 */ void fn_80198D18(void);
