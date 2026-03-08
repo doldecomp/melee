@@ -4538,6 +4538,319 @@ void gm_8019A828(void)
 
 /// #fn_8019A86C
 
+void fn_8019A86C(s32* arg0, u32 arg1, u32 arg2)
+{
+    TmData* tm = (TmData*) arg0;
+    s32 var_r26 = 0;
+    s32 var_r28 = 0;
+    u8* d8 = lbl_804799D8.x0;
+    s32 i;
+
+    if (tm->cur_option == 0x1B) {
+        fn_8019B81C(arg0);
+    }
+
+    if (tm->cur_option == 0x1D) {
+        *(u32*) d8 += 1;
+        if ((arg2 & 0x600) || (*(u32*) d8 >= 0x12CU)) {
+            lbAudioAx_80024030(0);
+            mn_8022F138(0x19, 0x1C);
+            mn_8022F138(0x12, 0x15);
+            tm->x2D = 0;
+            tm->cur_option = 0x1F;
+        }
+        if (arg2 & 0x1100) {
+            TmData* t;
+            s32 stype;
+            s32 cond;
+
+            lbAudioAx_80024030(1);
+            t = gm_8018F634();
+            t->x2D = 1;
+            stype = t->stage_selection_type;
+            if ((stype == 2 && (u8) t->x32 == 0) || stype == 3) {
+                cond = 1;
+            } else {
+                cond = 0;
+            }
+            if (cond != 0) {
+                t->x32 = 1;
+                gm_SetScenePendingMinor(3U);
+                gm_801A4B60();
+                return;
+            }
+            if ((stype == 0 && (u8) t->x32 == 0) || stype == 1) {
+                cond = 1;
+            } else {
+                cond = 0;
+            }
+            if (cond != 0) {
+                t->x32 = 1;
+                t->x28 = (u32) lbl_804D4190;
+            }
+            gm_SetScenePendingMinor(4U);
+            gm_801A4B60();
+        }
+    } else {
+        u8 n_players = tm->x30;
+        u8* sel = (u8*) &tm->x4B8[0];
+        u8* pd = d8;
+        u8 pnum = 0;
+
+        if ((s32) n_players > 0) {
+            u8 cnt = n_players;
+            do {
+                if (sel[0] == 1) {
+                    var_r26 += 1;
+                } else {
+                    u8 err = (u8) HSD_PadMasterStatus[pnum].err;
+                    if ((s8) err != 0) {
+                        var_r28 = 1;
+                    }
+                    {
+                        u8 state = pd[0x2D];
+                        if (((state == 2 && (u8) pd[0x2B] >= 0x3CU) ||
+                             (state == 4 && (u8) pd[0x2B] == 0x82)) &&
+                            (s8) err == 0)
+                        {
+                            var_r26 += 1;
+                        }
+                    }
+                }
+                sel += 0xA;
+                pd += 6;
+                pnum += 1;
+                cnt -= 1;
+            } while (cnt != 0);
+        }
+
+        {
+            s32 cond3;
+            if ((fn_8018F640(4) & 0x1160) &&
+                ((u32)(fn_8018F6A8(4) & 0x1160) == 0x1160))
+            {
+                cond3 = 1;
+            } else {
+                cond3 = 0;
+            }
+            if (cond3 != 0 && var_r28 != 0) {
+                lbAudioAx_80024030(0);
+                HSD_SisLib_803A5E70();
+                mn_8022F138(0x19U, 0x1CU);
+                mn_8022F138(0x12U, 0x15U);
+                mn_8022F268();
+                gm_801A4B60();
+                gm_801A42F8(1);
+                return;
+            }
+        }
+
+        if (var_r26 == (s32) tm->x30) {
+            *(u32*) d8 += 1;
+            if (*(u32*) d8 >= 0x1EU) {
+                u8* sp = (u8*) &tm->x4B8[0];
+                u8* ap = d8;
+
+                for (i = 0; i < (s32) tm->x30; i++) {
+                    if (sp[0] == 0 && ap[0x2D] == 4) {
+                        sp[0] = 3;
+                    }
+                    sp += 0xA;
+                    ap += 6;
+                }
+
+                {
+                    TmData* t2 = gm_8018F634();
+                    u8* ent = (u8*) &lbl_80473AB8[fn_8018F74C()];
+                    s32 hmn_count = 0;
+                    s32 active_count = 0;
+
+                    ent[0x4E] = t2->x4B8[0].x0;
+                    ent[0x7A] = t2->x4B8[1].x0;
+                    ent[0xA6] = t2->x4B8[2].x0;
+                    ent[0xD2] = t2->x4B8[3].x0;
+
+                    {
+                        u8 s0 = tm->x4B8[0].x0;
+                        if (s0 == 0) hmn_count += 1;
+                        if (s0 != 3) active_count += 1;
+                    }
+                    {
+                        u8 s1 = tm->x4B8[1].x0;
+                        if (s1 == 0) hmn_count += 1;
+                        if (s1 != 3) active_count += 1;
+                    }
+                    {
+                        u8 s2 = tm->x4B8[2].x0;
+                        if (s2 == 0) hmn_count += 1;
+                        if (s2 != 3) active_count += 1;
+                    }
+                    {
+                        u8 s3 = tm->x4B8[3].x0;
+                        if (s3 == 0) hmn_count += 1;
+                        if (s3 != 3) active_count += 1;
+                    }
+
+                    if (active_count <= 1) {
+                        mn_8022F138(0x19, 0x1C);
+                        mn_8022F138(0x12, 0x15);
+                        tm->x2D = 0;
+                        tm->cur_option = 0x1F;
+                        return;
+                    }
+                    if (hmn_count == 0) {
+                        tm->cur_option = 0x1D;
+                        return;
+                    }
+
+                    {
+                        TmData* t3 = gm_8018F634();
+                        s32 stype2 = t3->stage_selection_type;
+                        s32 cond2;
+
+                        t3->x2D = 1;
+                        if ((stype2 == 2 && (u8) t3->x32 == 0) || stype2 == 3) {
+                            cond2 = 1;
+                        } else {
+                            cond2 = 0;
+                        }
+                        if (cond2 != 0) {
+                            t3->x32 = 1;
+                            gm_SetScenePendingMinor(3U);
+                            gm_801A4B60();
+                            return;
+                        }
+                        if ((stype2 == 0 && (u8) t3->x32 == 0) || stype2 == 1) {
+                            cond2 = 1;
+                        } else {
+                            cond2 = 0;
+                        }
+                        if (cond2 != 0) {
+                            t3->x32 = 1;
+                            t3->x28 = (u32) lbl_804D4190;
+                        }
+                        gm_SetScenePendingMinor(4U);
+                        gm_801A4B60();
+                    }
+                }
+            }
+        } else {
+            u8* sel2 = (u8*) &tm->x4B8[0];
+            u8* anim = d8;
+            u8* pdata = d8;
+
+            *(u32*) d8 = 0;
+
+            for (i = 0; i < (s32) tm->x30; i++) {
+                if ((s8)(u8) HSD_PadMasterStatus[(u8) i].err == 0 &&
+                    sel2[0] == 0)
+                {
+                    u32 buttons = fn_8018F640(i);
+
+                    if (buttons & 0x1100) {
+                        u8 astate = anim[0x44];
+
+                        lbAudioAx_80024030(1);
+                        if (astate == 7) {
+                            anim[0x44] = 6;
+                        } else if (astate == 8) {
+                            u8 np = gm_8018F634()->x30;
+                            u8* cp = d8;
+                            s32 count4 = 0;
+                            u8 cnt2 = np;
+
+                            if ((s32) np > 0) {
+                                do {
+                                    if (cp[0x2D] == 4) {
+                                        count4 += 1;
+                                    }
+                                    cp += 6;
+                                    cnt2 -= 1;
+                                } while (cnt2 != 0);
+                            }
+                            if (count4 < (s32)(tm->x30 - 1)) {
+                                anim[0x44] = 6;
+                                pdata[0x2D] = 4;
+                            }
+                        } else {
+                            u8 pstate = pdata[0x2D];
+                            switch (pstate) {
+                            case 4:
+                                pdata[0x2D] = 5;
+                                break;
+                            case 0:
+                            case 3:
+                            case 5:
+                            {
+                                u16 val = *(u16*)(sel2 + 6);
+                                if (val <= 0x78U) {
+                                    gm_80167858(i, (s32) val, 0xB, 0x14);
+                                } else {
+                                    gm_80167858(i, 0x78, 0xB, 0x14);
+                                }
+                                pdata[0x2D] = 1;
+                                break;
+                            }
+                            }
+                        }
+                    } else if (buttons & 0x400) {
+                        if (anim[0x44] != 6) {
+                            lbAudioAx_80024030(0);
+                            anim[0x44] = 6;
+                        } else {
+                            u8 pstate2 = pdata[0x2D];
+                            switch (pstate2) {
+                            case 0:
+                            case 3:
+                            case 5:
+                            {
+                                u8 np2 = gm_8018F634()->x30;
+                                u8* cp2 = d8;
+                                s32 count5 = 0;
+                                u8 cnt3 = np2;
+
+                                if ((s32) np2 > 0) {
+                                    do {
+                                        if (cp2[0x2D] == 4) {
+                                            count5 += 1;
+                                        }
+                                        cp2 += 6;
+                                        cnt3 -= 1;
+                                    } while (cnt3 != 0);
+                                }
+                                if (count5 < (s32)(tm->x30 - 1)) {
+                                    lbAudioAx_80024030(0);
+                                    anim[0x44] = 7;
+                                }
+                                break;
+                            }
+                            case 2:
+                                lbAudioAx_80024030(0);
+                                pdata[0x2D] = 3;
+                                pdata[0x2E] = 0;
+                                break;
+                            }
+                        }
+                    } else if ((buttons & 0x10000) || (buttons & 8)) {
+                        if (anim[0x44] == 8) {
+                            lbAudioAx_80024030(2);
+                            anim[0x44] = 7;
+                        }
+                    } else if (((buttons & 0x20000) || (buttons & 4)) &&
+                               anim[0x44] == 7)
+                    {
+                        lbAudioAx_80024030(2);
+                        anim[0x44] = 8;
+                    }
+                }
+                sel2 += 0xA;
+                anim += 1;
+                pdata += 6;
+            }
+        }
+    }
+}
+
 /// #fn_8019AF50
 
 /// @todo Currently 89.97% match - permuter couldn't improve
