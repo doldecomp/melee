@@ -1400,7 +1400,6 @@ void fn_8018FBE0(s32 arg0, s32 arg1, s32 arg2, s8 arg3, s8 arg4, s16 arg5,
                  s8 arg6)
 {
     s32 i;
-    u8* ptr;
 
     PAD_STACK(8);
 
@@ -1408,14 +1407,12 @@ void fn_8018FBE0(s32 arg0, s32 arg1, s32 arg2, s8 arg3, s8 arg4, s16 arg5,
     *(s32*) &gm_804771C4._x1C = arg1;
     gm_804771C4.x20 = arg2;
 
-    ptr = (u8*) &gm_804771C4.x37[0];
     for (i = 0; i < 64; i++) {
-        ptr[0] = (u8) arg6;
-        ptr[1] = (u8) arg4;
-        ptr[2] = (u8) arg3;
-        *(u16*) (ptr + 9) = (u16) arg5;
-        ptr[13] = (u8) i;
-        ptr += 0x12;
+        gm_804771C4.x37[i].x2 = (u8) arg3;
+        gm_804771C4.x37[i].x1 = (u8) arg4;
+        gm_804771C4.x37[i].xD = (u8) i;
+        gm_804771C4.x37[i].x9 = (u16) arg5;
+        gm_804771C4.x37[i].x0 = (u8) arg6;
     }
 }
 
