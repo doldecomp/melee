@@ -2021,9 +2021,10 @@ void fn_80191678(HSD_GObj* gobj)
 /// Updates menu option selection animation.
 void fn_8019175C(void* gobj)
 {
+    HSD_JObj* jobjs[3];
     HSD_JObj* first_child;
-    HSD_JObj* option_jobj_a;
-    HSD_JObj* option_jobj_b;
+    HSD_JObj* option_a;
+    HSD_JObj* option_b;
     u8* counter;
     s32 i;
     TmData* tm;
@@ -2051,11 +2052,12 @@ void fn_8019175C(void* gobj)
     } else {
         first_child = root_jobj->child;
     }
+    jobjs[2] = first_child;
 
-    if (first_child == NULL) {
+    if (jobjs[2] == NULL) {
         child = NULL;
     } else {
-        child = first_child->next;
+        child = jobjs[2]->next;
     }
 
     if (child == NULL) {
@@ -2065,16 +2067,18 @@ void fn_8019175C(void* gobj)
     }
 
     if (child == NULL) {
-        option_jobj_a = NULL;
+        option_a = NULL;
     } else {
-        option_jobj_a = child->next;
+        option_a = child->next;
     }
+    jobjs[0] = option_a;
 
-    if (option_jobj_a == NULL) {
-        option_jobj_b = NULL;
+    if (option_a == NULL) {
+        option_b = NULL;
     } else {
-        option_jobj_b = option_jobj_a->next;
+        option_b = jobjs[0]->next;
     }
+    jobjs[1] = option_b;
 
     if (tm->cur_option >= 6) {
         counter = &lbl_804799B8.xF;
@@ -2082,7 +2086,7 @@ void fn_8019175C(void* gobj)
             *counter = 0;
         }
         i = 0;
-        base = &option_jobj_a;
+        base = jobjs;
         do {
             if (i != tm->cur_option - 6) {
                 fn_8019044C(base[i], 0.0F);
