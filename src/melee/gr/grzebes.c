@@ -684,13 +684,12 @@ bool grZebes_801D95B0(Ground_GObj* arg)
 
 void grZebes_801D95B8(Ground_GObj* gobj)
 {
-    Vec3 pos;
     Ground* gp = GET_GROUND(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
     HSD_JObj* stored_jobj = (HSD_JObj*) gp->gv.zebes.x4;
-    int unused[4];
 
     if (stored_jobj != NULL) {
+        Vec3 pos;
         HSD_JObjGetTranslation2(stored_jobj, &pos);
         HSD_JObjSetTranslate(jobj, &pos);
     }
@@ -710,6 +709,7 @@ void grZebes_801D95B8(Ground_GObj* gobj)
             gp->gv.zebes.xA = (s16) (HSD_Randi(600) + 3000);
         }
     }
+    PAD_STACK(12);
 }
 
 void grZebes_801D9754(Ground_GObj* arg) {}
