@@ -4097,7 +4097,9 @@ s32 fn_80196CF8(void)
 static union {
     u8 x0[0x80];
     struct {
-        u8 _pad1[0x10];
+        u8 _pad0[0x8];
+        s32 x8;
+        s32 xC;
         u16 x10;
         u8 _pad2[0x8];
         u8 x1A;
@@ -4976,6 +4978,8 @@ void fn_80198BA0(void)
 /// @todo Currently 99.63% match - permuter couldn't improve (instruction
 /// scheduling)
 /// Initializes tournament mode text displays.
+#pragma push
+#pragma auto_inline off
 void fn_80198C60(void)
 {
     TmData* td;
@@ -4997,6 +5001,7 @@ void fn_80198C60(void)
     HSD_SisLib_803A6B98(td->x524[3], 320.0F, 250.0F, "    ");
     HSD_SisLib_803A7548(td->x524[3], 0, 1.5F, 1.5F);
 }
+#pragma pop
 
 extern SceneDesc* lbl_804D666C;
 
@@ -5041,7 +5046,152 @@ void fn_80198D18(void)
 
 /// #fn_80198EBC
 
-/// #fn_80199AF0
+extern MatchEnd gm_80477738;
+extern SceneDesc* lbl_804D6670;
+
+void fn_80199AF0(void)
+{
+    TmData* td1;
+    TmData* td2;
+    HSD_JObj* jobj;
+    HSD_JObj* next;
+    HSD_GObj* gobj;
+    s32 mode;
+    s32 slot;
+    s32 bracket_idx;
+    s32 result;
+    s32 i;
+    s32 local1;
+    s32 local2;
+    PAD_STACK(16);
+
+    td1 = gm_8018F634();
+    td2 = gm_8018F634();
+
+    result = fn_8018F508(&local1);
+    if (result == 1) {
+        result = 1;
+    } else if (td2->x33 == 5) {
+        result = 2;
+    } else {
+        result = 0;
+    }
+    mode = result;
+
+    result = fn_8018F508(&local2);
+    if (result == 1) {
+        slot = local2;
+    } else {
+        u8* p = (u8*) &gm_80477738;
+        if (p[0x58] != 3 && p[0x5E] == 0) {
+            slot = 0;
+        } else {
+            p += 0xA8;
+            if (p[0x58] != 3 && p[0x5E] == 0) {
+                slot = 1;
+            } else {
+                p += 0xA8;
+                if (p[0x58] != 3 && p[0x5E] == 0) {
+                    slot = 2;
+                } else {
+                    p += 0xA8;
+                    if (p[0x58] != 3 && p[0x5E] == 0) {
+                        slot = 3;
+                    } else {
+                        slot = -1;
+                    }
+                }
+            }
+        }
+    }
+
+    bracket_idx = fn_8018F74C();
+    gm_8018F634();
+
+    gobj = fn_80190174(lbl_804D666C->cameras->desc);
+    fn_801901F8(lbl_804D666C->cameras->desc);
+    fn_801902F0((int) gobj);
+    fn_8019027C(lbl_804D666C->lights);
+    fn_8019035C(0, lbl_804D666C->models[5], 0, 0x1A, 2, 1, fn_80196DBC,
+                0.0f);
+    fn_8019035C(0, lbl_804D666C->models[4], 0, 0x1A, 2, 1, fn_80196E30,
+                80.0f);
+
+    fn_80198C60();
+
+    gobj = GObj_Create(0xE, 0x1A, 0);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7848,
+                            HSD_FogLoadDesc(lbl_804D666C->fogs[0].desc));
+    GObj_SetupGXLink(gobj, HSD_GObj_FogCallback, 0, 0);
+    fn_80198BA0();
+
+    if (td1->x33 == 5) {
+        mode = 2;
+    }
+
+    if (mode != 2) {
+        if (lbl_80473AB8[bracket_idx].x18 == 0) {
+            return;
+        }
+    }
+
+    fn_8019035C(0, lbl_804D6670->models[0], mode, 0x1A, 3, 1, fn_801985D4,
+                0.0f);
+    gobj = fn_8019035C(0, lbl_804D6670->models[2], 0, 0x1A, 3, 1,
+                       fn_80198824, 0.0f);
+
+    if (gobj->hsd_obj == NULL) {
+        jobj = NULL;
+    } else {
+        jobj = ((HSD_JObj*) gobj->hsd_obj)->child;
+    }
+
+    lbl_804799D8.x8 = mode * 0x14;
+    if (mode == 2) {
+        lbl_804799D8.xC = 0x96;
+    } else {
+        lbl_804799D8.xC = mode * 0x14 + 0x13;
+    }
+
+    HSD_JObjSetTranslateZ(jobj, 10000.0f);
+
+    if (lbl_803DA0D0[td1->x4B8[slot].x1] == 0) {
+        HSD_JObjSetTranslateZ(jobj, 0.0f);
+        for (i = 1; i <= 12; i++) {
+            if (jobj == NULL) {
+                next = NULL;
+            } else {
+                next = jobj->next;
+            }
+            jobj = next;
+            HSD_JObjSetTranslateZ(next, 10000.0f);
+        }
+    } else {
+        for (i = 1; i <= 12; i++) {
+            if (jobj == NULL) {
+                next = NULL;
+            } else {
+                next = jobj->next;
+            }
+            jobj = next;
+            HSD_JObjSetTranslateZ(next, 10000.0f);
+
+            if ((s32) lbl_803DA0D0[td1->x4B8[slot].x1] == i) {
+                HSD_JObjSetTranslateZ(next, 0.0f);
+                for (slot = i + 1; slot <= 12; slot++) {
+                    if (jobj == NULL) {
+                        next = NULL;
+                    } else {
+                        next = jobj->next;
+                    }
+                    jobj = next;
+                    HSD_JObjSetTranslateZ(next, 10000.0f);
+                }
+                break;
+            }
+        }
+    }
+}
 
 /// #fn_8019A158
 
