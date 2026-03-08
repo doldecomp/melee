@@ -353,11 +353,11 @@ void fn_802590C4(HSD_GObj* gobj)
         HSD_GObj* gobjs[2];
     };
     void* store;
-    void* ud;
-    struct fn_802590C4_data* data;
     s32 i;
-    s32 zero;
+    struct fn_802590C4_data* data;
     HSD_JObj* jobj;
+    void* ud;
+    s32 zero;
 
     data = gobj->user_data;
     jobj = gobj->hsd_obj;
