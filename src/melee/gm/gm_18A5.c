@@ -176,7 +176,243 @@ void fn_8018A970(int arg0)
     }
 }
 
-/// #fn_8018AA74
+void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
+{
+    u8* entries = (u8*) lbl_80473AB8;
+    u8* entry;
+    u8* sub;
+    s32* p34;
+    s32* p3C;
+    s32* p44;
+    s32* p38;
+    s32* p40;
+    s32* p48;
+    u8 x3;
+
+    TmData* tm = gm_8018F634();
+
+    entry = entries + entry_idx * (s32) 0xDC;
+    sub = entries + entry_idx * (s32) 0xDC + slot_idx * (s32) 0x2C;
+
+    p34 = (s32*) (sub + 0x34);
+    p3C = (s32*) (sub + 0x3C);
+    p44 = (s32*) (sub + 0x44);
+    p38 = (s32*) (sub + 0x38);
+    p40 = (s32*) (sub + 0x40);
+    p48 = (s32*) (sub + 0x48);
+
+    if (entry[1] != 0) {
+        x3 = entry[3];
+        if (x3 == 0 && entry[4] != 0) {
+            switch (entry[4]) {
+            case 1: {
+                s32 xC = *(s32*) (entry + 0xC);
+                s32* pX18 = (s32*) (entry + 0x18);
+                s32* pX10 = (s32*) (entry + 0x10);
+                *p3C = xC;
+                *p44 = xC;
+                *p34 = xC;
+                {
+                    s32 x18 = *(s32*) (entry + 0x18);
+                    s32 x10 = *pX10;
+                    s32 val = x10 + x18 - slot_idx * x18;
+                    *p40 = val;
+                    *p48 = val;
+                    *p38 = val;
+                }
+                *p40 = *pX10 + *pX18 / 2;
+                break;
+            }
+            case 2:
+                switch (slot_idx) {
+                case 0: {
+                    s32 xC = *(s32*) (entry + 0xC);
+                    s32* pX10 = (s32*) (entry + 0x10);
+                    s32 val1 = xC + 0x2B;
+                    *p3C = val1;
+                    *p44 = val1;
+                    *p34 = val1;
+                    {
+                        s32 x10 = *(s32*) (entry + 0x10);
+                        s32 x18 = *(s32*) (entry + 0x18);
+                        s32 val2 = x10 + x18;
+                        *p40 = val2;
+                        *p48 = val2;
+                        *p38 = val2;
+                    }
+                    *p40 = *pX10 + *(s32*) (entry + 0x18) / 2;
+                    break;
+                }
+                case 1: {
+                    s32 xC = *(s32*) (entry + 0xC);
+                    s32 x14 = *(s32*) (entry + 0x14);
+                    s32* pX10 = (s32*) (entry + 0x10);
+                    s32* pX18 = (s32*) (entry + 0x18);
+                    s32 val1 = xC + x14;
+                    *p3C = val1;
+                    *p44 = val1;
+                    *p34 = val1;
+                    {
+                        s32 x10 = *(s32*) (entry + 0x10);
+                        s32 x18 = *pX18;
+                        s32 val2 = x10 + x18;
+                        *p40 = val2;
+                        *p48 = val2;
+                        *p38 = val2;
+                    }
+                    *p40 = *pX10 + *pX18 - *pX18 / 3;
+                    break;
+                }
+                default: {
+                    u8* ep = entries + entry_idx * (s32) 0xDC;
+                    s32 x14 = *(s32*) (ep + 0x14);
+                    s32 xC = *(s32*) (ep + 0xC);
+                    s32 val1 = xC + x14 / 2;
+                    *p3C = val1;
+                    *p44 = val1;
+                    *p34 = val1;
+                    {
+                        s32 x10 = *(s32*) (ep + 0x10);
+                        *p40 = x10;
+                        *p48 = x10;
+                        *p38 = x10;
+                    }
+                    *p40 = *(s32*) (ep + 0x10) + *(s32*) (ep + 0x18) / 2;
+                    break;
+                }
+                }
+                break;
+            case 3:
+                switch (slot_idx) {
+                case 0: {
+                    s32 xC = *(s32*) (entry + 0xC);
+                    s32* pX10 = (s32*) (entry + 0x10);
+                    s32* pX18 = (s32*) (entry + 0x18);
+                    *p3C = xC;
+                    *p44 = xC;
+                    *p34 = xC;
+                    {
+                        s32 x10 = *(s32*) (entry + 0x10);
+                        s32 x18 = *pX18;
+                        s32 val = x10 + x18;
+                        *p40 = val;
+                        *p48 = val;
+                        *p38 = val;
+                    }
+                    *p40 = *pX10 + *pX18 - *pX18 / 3;
+                    break;
+                }
+                case 1: {
+                    s32 xC = *(s32*) (entry + 0xC);
+                    s32 x14 = *(s32*) (entry + 0x14);
+                    s32* pX10 = (s32*) (entry + 0x10);
+                    s32* pX18 = (s32*) (entry + 0x18);
+                    s32 val1 = xC + x14;
+                    *p3C = val1;
+                    *p44 = val1;
+                    *p34 = val1;
+                    {
+                        s32 x10 = *(s32*) (entry + 0x10);
+                        s32 x18 = *pX18;
+                        s32 val = x10 + x18;
+                        *p40 = val;
+                        *p48 = val;
+                        *p38 = val;
+                    }
+                    *p40 = *pX10 + *pX18 - *pX18 / 3;
+                    break;
+                }
+                case 2: {
+                    s32 xC = *(s32*) (entry + 0xC);
+                    *p3C = xC;
+                    *p44 = xC;
+                    *p34 = xC;
+                    {
+                        s32 x10 = *(s32*) (entry + 0x10);
+                        *p40 = x10;
+                        *p48 = x10;
+                        *p38 = x10;
+                    }
+                    *p40 = *(s32*) (entry + 0x10) +
+                           *(s32*) (entry + 0x18) / 3;
+                    break;
+                }
+                default: {
+                    u8* ep = entries + entry_idx * (s32) 0xDC;
+                    s32 xC = *(s32*) (ep + 0xC);
+                    s32 x14 = *(s32*) (ep + 0x14);
+                    s32 val1 = xC + x14;
+                    *p3C = val1;
+                    *p44 = val1;
+                    *p34 = val1;
+                    {
+                        s32 x10 = *(s32*) (ep + 0x10);
+                        *p40 = x10;
+                        *p48 = x10;
+                        *p38 = x10;
+                    }
+                    *p40 = *(s32*) (ep + 0x10) +
+                           *(s32*) (ep + 0x18) / 3;
+                    break;
+                }
+                }
+                break;
+            }
+        } else {
+            u8* ep = entries + entry_idx * (s32) 0xDC;
+            s32 x14 = *(s32*) (ep + 0x14);
+            s32* pX18 = (s32*) (ep + 0x18);
+            s32 xC = *(s32*) (ep + 0xC);
+            s32 val1 = xC + slot_idx * (x14 / (s32) x3);
+            *p3C = val1;
+            *p44 = val1;
+            *p34 = val1;
+            {
+                s32 x18 = *(s32*) (ep + 0x18);
+                u8 x2 = ep[2];
+                s32 x10 = *(s32*) (ep + 0x10);
+                s32 val2 = x10 + x18 - x18 * x2;
+                *p40 = val2;
+                *p48 = val2;
+                *p38 = val2;
+            }
+            *p40 = *(s32*) (ep + 0x10) + *pX18 * ep[2];
+
+            if (entry[3] == 1) {
+                u8 tm_x2E = ((u8*) tm)[0x2E];
+                if (tm_x2E == 6) {
+                    if (entry_idx == 5 && slot_idx == 1) {
+                        *p48 += 0x46;
+                        *p38 = *p48;
+                    }
+                } else if (tm_x2E == 0xC) {
+                    if ((entry_idx == 0xA && slot_idx == 0) ||
+                        (entry_idx == 0xB && slot_idx == 1))
+                    {
+                        *p48 += 0x3C;
+                        *p38 = *p48;
+                    }
+                } else if (tm_x2E == 0x18) {
+                    if (entry_idx == 0x17 && slot_idx == 1) {
+                        *p48 += 0x28;
+                        *p38 = *p48;
+                    }
+                } else if (tm_x2E == 0x30) {
+                    if (entry_idx == 0x2E && slot_idx == 1) {
+                        *p48 += 0x1E;
+                        *p38 = *p48;
+                    } else if (entry_idx == 0x2F && slot_idx == 1) {
+                        *p48 -= 0x1E;
+                        *p38 = *p48;
+                    }
+                }
+            }
+        }
+    }
+
+    HSD_JObjSetTranslateX(jobj, (f32) *(s32*) (sub + 0x44));
+    HSD_JObjSetTranslateY(jobj, -(f32) *(s32*) (sub + 0x48));
+}
 
 /// #fn_8018B090
 
