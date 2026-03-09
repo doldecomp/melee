@@ -693,25 +693,23 @@ bool ftCo_8008E984(Fighter* fp)
 
 static inline void inlineF0(Fighter_GObj* gobj)
 {
+    Fighter* fp = GET_FIGHTER(gobj);
     ftCo_800C8D00(gobj);
-    {
-        Fighter* fp = gobj->user_data;
-        if (fp->motion_id == 0xe0 || fp->motion_id == 0xe1) {
-            ftCo_800DC284(gobj);
-        }
-        if (fp->motion_id == 0xe3 || fp->motion_id == 0xe4) {
-            ftCo_800DC3A4(gobj);
-        }
+    if (fp->motion_id == 0xe0 || fp->motion_id == 0xe1) {
+        ftCo_800DC284(gobj);
+    }
+    if (fp->motion_id == 0xe3 || fp->motion_id == 0xe4) {
+        ftCo_800DC3A4(gobj);
     }
 }
 
 void ftCo_8008E9D0(Fighter_GObj* gobj)
 {
-    u8 _[8] = { 0 };
-
     Fighter* fp = gobj->user_data;
+    float scaled_kb;
     inlineF0(gobj);
-    if (ftCo_8008DA4C(gobj, ftCo_8008D8E8(fp->dmg.kb_applied), 0)) {
+    scaled_kb = ftCo_ScaleBy154(fp->dmg.kb_applied);
+    if (ftCo_8008DA4C(gobj, fp->dmg.x1860_element, ftCo_8008D8E8(scaled_kb))) {
         ftCo_800C0408(gobj);
     }
     ftCommon_800804FC(fp);
