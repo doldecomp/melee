@@ -1337,8 +1337,8 @@ HSD_TObj* grStadium_801D3138(Ground_GObj* gobj, HSD_ImageDesc* desc,
                              HSD_MObj** arg2)
 {
     HSD_TObj* tobj;
-    HSD_DObj* dobj;
     HSD_JObj* jobj;
+    HSD_DObj* dobj;
     HSD_MObj* mobj;
 
     jobj = GET_JOBJ(gobj);
@@ -1346,6 +1346,8 @@ HSD_TObj* grStadium_801D3138(Ground_GObj* gobj, HSD_ImageDesc* desc,
         if (union_type_dobj(jobj)) {
             for (dobj = jobj->u.dobj; dobj != NULL; dobj = dobj->next) {
                 mobj = dobj->mobj;
+                if ((jobj->flags && jobj->flags)) {
+                }
                 if (mobj != NULL) {
                     tobj = mobj->tobj;
                     for (; tobj != NULL; tobj = tobj->next) {
