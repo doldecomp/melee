@@ -49,7 +49,103 @@ lbl_803D9FD8_fn lbl_803D9FD8[] = {
     fn_80195CCC, fn_80194F30, fn_8019610C, fn_8019610C,
 };
 
-/// #fn_8018A514
+void fn_8018A514(int count, float val)
+{
+    u8* lookup = (u8*) &lbl_803D9D20;
+    BracketEntry* entries = lbl_80473AB8;
+    s32 region;
+    u8* src;
+    s32 i;
+    s32 n;
+    u8* d;
+    u8* ptr;
+
+    if (count < 9) {
+        region = 0;
+    } else if (count >= 14) {
+        region = 2;
+    } else {
+        region = 1;
+    }
+
+    src = *(u8**) ((u8*) entries + region * 4 + 0x3700);
+
+    if (count < 9) {
+        ptr = lookup;
+        for (i = 0; i < count; i++) {
+            src += ptr[0x20] * 0x28;
+            ptr++;
+        }
+    } else if (count < 14) {
+        ptr = lookup + 9;
+        for (i = 9; i < count; i++) {
+            src += ptr[0x20] * 0x28;
+            ptr++;
+        }
+    } else {
+        ptr = lookup + 14;
+        for (i = 14; i < count; i++) {
+            src += ptr[0x20] * 0x28;
+            ptr++;
+        }
+    }
+
+    n = lookup[count + 0x20];
+    d = (u8*) entries;
+
+    for (i = 0; i < n; i++) {
+        d[0] = src[0];
+        d[1] = src[1];
+        d[2] = src[2];
+        d[3] = src[3];
+        d[4] = src[4];
+        d[5] = src[5];
+        d[6] = src[6];
+        *(f32*) (d + 0x1C) = val;
+        *(s32*) (d + 0x0C) = *(s32*) (src + 0x08);
+        *(s32*) (d + 0x14) = *(s32*) (src + 0x0C);
+        *(s32*) (d + 0x10) = *(s32*) (src + 0x10);
+        *(s32*) (d + 0x18) = *(s32*) (src + 0x14);
+        d[0x20] = src[0x18];
+        d[0x21] = src[0x1A];
+        d[0x22] = src[0x1C];
+        d[0x23] = src[0x1E];
+        d[0x24] = src[0x19];
+        d[0x25] = src[0x1B];
+        d[0x26] = src[0x1D];
+        d[0x27] = src[0x1F];
+        d[0x28] = src[0x20];
+        d[0x52] = 9;
+        d[0x32] = 0;
+        d[0x7E] = 9;
+        d[0x5E] = 0;
+        d[0xAA] = 9;
+        d[0x8A] = 0;
+        d[0xD6] = 9;
+        d[0xB6] = 0;
+        d[0x30] = src[0x21];
+        d[0x5C] = src[0x22];
+        d[0x88] = src[0x23];
+        d[0xB4] = src[0x24];
+        src += 0x28;
+        d += 0xDC;
+    }
+
+    if (region == 0) {
+        if (count == 1) {
+            entries[5].x5E = 1;
+        } else if (count == 3) {
+            entries[10].x32 = 1;
+            entries[11].x5E = 1;
+        } else if (count == 5) {
+            entries[23].x5E = 1;
+        } else if (count == 7) {
+            entries[46].x5E = 1;
+            entries[47].x5E = 1;
+        }
+    }
+    PAD_STACK(24);
+}
 
 void fn_8018A970(int arg0)
 {
