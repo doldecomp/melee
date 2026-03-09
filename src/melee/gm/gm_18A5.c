@@ -560,6 +560,8 @@ void fn_8018DF68(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
 }
 
 /// @todo Currently 98.8% match - permuter couldn't improve beyond score 140
+extern f32 lbl_804DA6A0; // 0.5f
+
 void fn_8018E46C(HSD_GObj* gobj, int unused)
 {
     void* data;
@@ -585,27 +587,27 @@ void fn_8018E46C(HSD_GObj* gobj, int unused)
     switch (data_u8[3]) {
     case 0:
         fn_8018C8D4(data,
-                    data_s32[0xC / 4] - (s32) (0.5F * data_f32[0x1C / 4]),
+                    data_s32[0xC / 4] - (s32) (lbl_804DA6A0 * data_f32[0x1C / 4]),
                     -data_s32[0x10 / 4], data_s32[0x14 / 4],
-                    -data_s32[0x18 / 4], r30, data_s32[0xC / 4], 0.5F);
+                    -data_s32[0x18 / 4], r30, data_s32[0xC / 4], lbl_804DA6A0);
         break;
     case 1:
         fn_8018D50C(data,
-                    data_s32[0xC / 4] - (s32) (0.5F * data_f32[0x1C / 4]),
+                    data_s32[0xC / 4] - (s32) (lbl_804DA6A0 * data_f32[0x1C / 4]),
                     -data_s32[0x10 / 4], data_s32[0x14 / 4],
-                    -data_s32[0x18 / 4], r30, data_s32[0xC / 4], 0.5F);
+                    -data_s32[0x18 / 4], r30, data_s32[0xC / 4], lbl_804DA6A0);
         break;
     case 2:
         fn_8018DC18(data,
-                    data_s32[0xC / 4] - (s32) (0.5F * data_f32[0x1C / 4]),
+                    data_s32[0xC / 4] - (s32) (lbl_804DA6A0 * data_f32[0x1C / 4]),
                     -data_s32[0x10 / 4], data_s32[0x14 / 4],
-                    -data_s32[0x18 / 4], r30, data_s32[0xC / 4], 0.5F);
+                    -data_s32[0x18 / 4], r30, data_s32[0xC / 4], lbl_804DA6A0);
         break;
     case 3:
         fn_8018DF68(data,
-                    data_s32[0xC / 4] - (s32) (0.5F * data_f32[0x1C / 4]),
+                    data_s32[0xC / 4] - (s32) (lbl_804DA6A0 * data_f32[0x1C / 4]),
                     -data_s32[0x10 / 4], data_s32[0x14 / 4],
-                    -data_s32[0x18 / 4], r30, data_s32[0xC / 4], 0.5F);
+                    -data_s32[0x18 / 4], r30, data_s32[0xC / 4], lbl_804DA6A0);
         break;
     }
 }
@@ -2920,7 +2922,55 @@ void fn_80193308(void)
     } while (count < 2);
 }
 
-/// #fn_801935B8
+extern u8 lbl_803D9F80[];
+extern f32 lbl_804DA6E8; // 0.0f
+
+#pragma push
+#pragma dont_inline on
+void fn_801935B8(void)
+{
+    TmData* tm;
+    HSD_GObj* gobj;
+    HSD_Fog* fog;
+    s32 i;
+
+    tm = gm_8018F634();
+    fn_8018FBE0(0, 0, 0, 5, 5, 0x3e7, 3);
+    fn_801902F0((s32) fn_80190174(lbl_804D664C->cameras->desc));
+    fn_80193308();
+    fn_8019027C(lbl_804D664C->lights);
+    fn_8019035C(0, lbl_804D664C->models[5], 0, 0x1A, 2, 1, fn_801910E0,
+                lbl_804DA6E8);
+    fn_8019035C(0, lbl_804D664C->models[4], 0, 0x1A, 2, 1, fn_80191154,
+                lbl_804DA6E8);
+    fn_80192BB0();
+    fn_80192E6C();
+    gobj = GObj_Create(0xE, 0x1A, 0);
+    fog = HSD_FogLoadDesc(lbl_804D664C->fogs[0].desc);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7848, fog);
+    GObj_SetupGXLink(gobj, HSD_GObj_FogCallback, 0, 0);
+
+    lbl_804D6658 = 0;
+    lbl_804799B8.xC_counter = 0;
+    lbl_804799B8.xE = 0;
+    lbl_804799B8.xF = 0;
+    lbl_804799B8.pad2[12] = 0;
+
+    for (i = 0; i < 6; i++) {
+        lbl_804799B8.pad2[i] = 0xa;
+        lbl_804799B8.pad2[i + 6] = 0;
+        (&tm->match_type)[i] = lbl_803D9F80[0x40 + i * 2];
+    }
+
+    lbl_804799B8.x1 = 0;
+    lbl_804799B8.x0 = gmMainLib_8015CC34()->handicap;
+
+    tm->x32 = 0;
+    for (i = 0; i < 25; i++) {
+        lbl_803D9D20.x72[i] = gm_80164840((u8) fn_8018F6FC(i));
+    }
+}
+#pragma pop
 
 /// #fn_801937C4
 
@@ -2929,8 +2979,6 @@ void fn_80193308(void)
 /// #fn_80193FCC
 
 /// #fn_80194658
-
-extern u8 lbl_803D9F80[];
 
 /// @todo Currently 87.58% match - permuter couldn't improve
 void fn_801949B4(s32* arg0, u32 arg1, u32 arg2)
@@ -4364,7 +4412,19 @@ void fn_80196FFC(HSD_GObj* gobj)
     fn_8019044C(jobj, (f32) lbl_804799D8.x0[pnum * 6 + 0x2B]);
 }
 
+extern f32 lbl_804DA7E0; // -19.5f
+extern f32 lbl_804DA7E4; // 13.0f
+extern f32 lbl_804DA7E8; // 6.5f
+extern f32 lbl_804DA7EC; // 19.5f
+extern f32 lbl_804DA7F0; // 2.0f
+extern f32 lbl_804DA810; // 4.5f
+extern f32 lbl_804DA814; // 5.5f
+extern f32 lbl_804DA818; // 666.0f
+extern f32 lbl_804DA81C; // 0.3f
+extern f32 lbl_804DA820; // 12.6f
+
 /// Updates visibility and position of a tournament menu JObj.
+
 void fn_801973F8(HSD_GObj* gobj)
 {
     TmData* tm;
@@ -4402,14 +4462,14 @@ void fn_801973F8(HSD_GObj* gobj)
 
     player_count = tm->x30;
     if ((s32) player_count == 4) {
-        x = (13.0f * (f32) pnum) + -19.5f;
+        x = (lbl_804DA7E4 * (f32) pnum) + lbl_804DA7E0;
     } else if ((s32) player_count == 3) {
-        x = 6.5f + ((13.0f * (f32) pnum) - 19.5f);
+        x = lbl_804DA7E8 + ((lbl_804DA7E4 * (f32) pnum) - lbl_804DA7EC);
     } else {
-        x = 6.5f + ((13.0f * (2.0f * (f32) pnum)) - 19.5f);
+        x = lbl_804DA7E8 + ((lbl_804DA7E4 * (lbl_804DA7F0 * (f32) pnum)) - lbl_804DA7EC);
     }
 
-    fn_8018FDC4(jobj, 4.5f + x, 5.5f, 666.0f);
+    fn_8018FDC4(jobj, lbl_804DA810 + x, lbl_804DA814, lbl_804DA818);
 
     if (lbl_804799D8.x0[pnum * 6 + 0x2D] == 4) {
         HSD_JObjSetFlagsAll(jobj, 0x10);
@@ -4480,15 +4540,6 @@ void fn_801976D4(HSD_GObj* gobj)
         *counter = *counter + 1;
     }
 }
-
-extern f32 lbl_804DA7E0; // -19.5f
-extern f32 lbl_804DA7E4; // 13.0f
-extern f32 lbl_804DA7E8; // 6.5f
-extern f32 lbl_804DA7EC; // 19.5f
-extern f32 lbl_804DA7F0; // 2.0f
-extern f32 lbl_804DA818; // 666.0f
-extern f32 lbl_804DA81C; // 0.3f
-extern f32 lbl_804DA820; // 12.6f
 
 void fn_801977AC(HSD_GObj* gobj)
 {
@@ -6537,7 +6588,6 @@ void fn_8019B81C(s32* state)
 }
 
 extern SceneDesc* lbl_804D6670;
-extern f32 lbl_804DA810;
 
 void fn_8019B860(TmData* tm)
 {
