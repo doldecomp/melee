@@ -382,28 +382,33 @@ void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
                 u8 tm_x2E = ((u8*) tm)[0x2E];
                 if (tm_x2E == 6) {
                     if (entry_idx == 5 && slot_idx == 1) {
-                        *p48 += 0x46;
-                        *p38 = *p48;
+                        s32 tmp = *p48 + 0x46;
+                        *p48 = tmp;
+                        *p38 = tmp;
                     }
                 } else if (tm_x2E == 0xC) {
                     if ((entry_idx == 0xA && slot_idx == 0) ||
                         (entry_idx == 0xB && slot_idx == 1))
                     {
-                        *p48 += 0x3C;
-                        *p38 = *p48;
+                        s32 tmp = *p48 + 0x3C;
+                        *p48 = tmp;
+                        *p38 = tmp;
                     }
                 } else if (tm_x2E == 0x18) {
                     if (entry_idx == 0x17 && slot_idx == 1) {
-                        *p48 += 0x28;
-                        *p38 = *p48;
+                        s32 tmp = *p48 + 0x28;
+                        *p48 = tmp;
+                        *p38 = tmp;
                     }
                 } else if (tm_x2E == 0x30) {
                     if (entry_idx == 0x2E && slot_idx == 1) {
-                        *p48 += 0x1E;
-                        *p38 = *p48;
+                        s32 tmp = *p48 + 0x1E;
+                        *p48 = tmp;
+                        *p38 = tmp;
                     } else if (entry_idx == 0x2F && slot_idx == 1) {
-                        *p48 -= 0x1E;
-                        *p38 = *p48;
+                        s32 tmp = *p48 - 0x1E;
+                        *p48 = tmp;
+                        *p38 = tmp;
                     }
                 }
             }
@@ -2015,6 +2020,7 @@ void gm_801905F0(StartMeleeData* arg0)
     GameRules* temp_r31 = gmMainLib_8015CC34();
     int i;
     TmVsData sp18;
+    PAD_STACK(8);
 
     gm_80168FC4();
     gm_80167A64(&arg0->rules);
