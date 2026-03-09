@@ -2545,6 +2545,8 @@ void fn_8019249C(HSD_GObj* gobj)
     }
 }
 
+extern f32 lbl_804DA760; // 0.3f
+
 #pragma push
 #pragma dont_inline on
 void fn_80192690(HSD_GObj* gobj)
@@ -2561,7 +2563,7 @@ void fn_80192690(HSD_GObj* gobj)
         HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
         return;
     }
-    fn_8018FDC4(jobj, 666.0F, 666.0F, 0.3F);
+    fn_8018FDC4(jobj, lbl_804DA734, lbl_804DA734, lbl_804DA760);
     fn_8019044C(jobj, tmdata->cur_option - 0x11);
 }
 #pragma pop
@@ -4815,6 +4817,8 @@ void fn_80197FD8(HSD_GObj* gobj)
     }
 }
 
+extern f32 lbl_804DA824; // 0.01f
+
 /// @todo Currently 55.88% match - needs significant rework
 /// Updates player cursor animation and position.
 void fn_801981A0(HSD_GObj* gobj)
@@ -4866,7 +4870,7 @@ void fn_801981A0(HSD_GObj* gobj)
         x_pos = lbl_804DA7E8 + ((lbl_804DA7E4 * (lbl_804DA7F0 * (f32) pnum)) - lbl_804DA7EC);
     }
 
-    fn_8018FDC4(jobj, x_pos, lbl_804DA818, 0.01F);
+    fn_8018FDC4(jobj, x_pos, lbl_804DA818, lbl_804DA824);
 
     player_ptr = (u8*) &lbl_804799D8 + pnum;
     counter = player_ptr[0x21];
@@ -4926,7 +4930,7 @@ void fn_801983E4(HSD_GObj* gobj)
         x = lbl_804DA7E8 + ((lbl_804DA7E4 * (lbl_804DA7F0 * (f32) pnum)) - lbl_804DA7EC);
     }
 
-    fn_8018FDC4(jobj, x, lbl_804DA818, 0.01f);
+    fn_8018FDC4(jobj, x, lbl_804DA818, lbl_804DA824);
 }
 
 void fn_80198584(ResultsData* results)
