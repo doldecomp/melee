@@ -356,8 +356,9 @@ void lb_800119DC(Vec3* arg0, int arg1, float arg2, float arg3, float arg4)
     lb_800100B0(&sp1C, arg2);
 }
 
-void lb_80011A50(Vec3* arg0, int arg1, float arg2, float arg3, float arg4,
-                 float arg5, float arg6, float arg7, float arg8)
+struct lb_80011A50_t* lb_80011A50(Vec3* arg0, int arg1, float arg2, float arg3,
+                                  float arg4, float arg5, float arg6,
+                                  float arg7, float arg8)
 {
     struct lb_80011A50_t x2C;
     x2C.x0 = 1;
@@ -371,7 +372,7 @@ void lb_80011A50(Vec3* arg0, int arg1, float arg2, float arg3, float arg4,
     x2C.x14 = arg6;
     x2C.x18 = arg7;
     x2C.x1C = arg8;
-    lb_800100B0(&x2C, arg2);
+    return lb_800100B0(&x2C, arg2);
 }
 
 enum_t lb_80011ABC(void)
