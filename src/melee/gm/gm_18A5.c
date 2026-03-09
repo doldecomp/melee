@@ -260,7 +260,7 @@ void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
                         *p48 = val2;
                         *p38 = val2;
                     }
-                    *p40 = *pX10 + *pX18 - *pX18 / 3;
+                    *p40 = *pX10 + *pX18 / 2;
                     break;
                 }
                 default: {
