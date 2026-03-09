@@ -1558,6 +1558,8 @@ void fn_801904D0(void)
 
 #pragma push
 #pragma auto_inline off
+extern f32 lbl_804DA6D4;
+
 void fn_80190520(f32 x, f32 y, f32 z)
 {
     Vec3 sp14;
@@ -1573,7 +1575,7 @@ void fn_80190520(f32 x, f32 y, f32 z)
         sp14.y = y;
         sp14.z = z;
         HSD_CObjSetInterest(tmp->cobj, &sp14);
-        sp14.z = 415.6922f + z;
+        sp14.z = lbl_804DA6D4 + z;
         HSD_CObjSetEyePosition(tmp->cobj, &sp14);
     }
 }
@@ -2246,6 +2248,12 @@ void fn_80191CA4(HSD_GObj* gobj)
     fn_8019044C(jobj, (f32) lbl_804D6658);
 }
 
+extern f32 lbl_804DA734; // 666.0f
+extern f32 lbl_804DA738; // 12.8f
+extern f32 lbl_804DA73C; // 2.62f
+extern f32 lbl_804DA740; // 0.1f
+extern f32 lbl_804DA744; // 201.0f
+
 /// GObj callback for tournament bracket slot UI elements.
 void fn_80191D38(HSD_GObj* gobj)
 {
@@ -2272,13 +2280,13 @@ void fn_80191D38(HSD_GObj* gobj)
         return;
     }
 
-    fn_8018FDC4(jobj, 666.0f,
-                -((2.6200008f * (f32) (idx - lbl_804799B8.x3)) -
-                  12.800008f),
-                0.1f);
+    fn_8018FDC4(jobj, lbl_804DA734,
+                -((lbl_804DA73C * (f32) (idx - lbl_804799B8.x3)) -
+                  lbl_804DA738),
+                lbl_804DA740);
 
     if ((u8) tm->x37[idx].x4 != 0) {
-        fn_8019044C(jobj, 201.0f);
+        fn_8019044C(jobj, lbl_804DA744);
     } else {
         fn_8019044C(jobj, fn_8018F71C((s32) tm->x37[idx].x2,
                                        (s32) tm->x37[idx].x6));
@@ -2322,10 +2330,10 @@ void fn_80191E9C(HSD_GObj* gobj)
         return;
     }
 
-    fn_8018FDC4(jobj, 666.0f,
-                -((2.6200008f * (f32) (idx - lbl_804799B8.x3)) -
-                  12.800008f),
-                0.1f);
+    fn_8018FDC4(jobj, lbl_804DA734,
+                -((lbl_804DA73C * (f32) (idx - lbl_804799B8.x3)) -
+                  lbl_804DA738),
+                lbl_804DA740);
     fn_8019044C(jobj, (f32) tm->x37[idx].x2);
 }
 
@@ -2457,6 +2465,11 @@ void fn_80191FD4(HSD_GObj* gobj)
     HSD_JObjSetFlagsAll(sibling, 0x10U);
 }
 
+extern f32 lbl_804DA750; // -1.8f
+extern f32 lbl_804DA754; // 7.19f
+extern f32 lbl_804DA758; // 2.7f
+extern f32 lbl_804DA75C; // 2.3f
+
 /// Updates tournament menu cursor JObj visibility and position.
 void fn_8019237C(HSD_GObj* gobj)
 {
@@ -2480,9 +2493,9 @@ void fn_8019237C(HSD_GObj* gobj)
 
     fn_8019044C(jobj, (f32) lbl_804799B8.xA);
     fn_8018FDC4(jobj,
-                (7.1899996f * (f32) (lbl_804799B8.x5 % 4)) + -1.8f,
-                -((2.3f * (f32) ((s32) lbl_804799B8.x5 / 4)) - 2.7f),
-                666.0f);
+                (lbl_804DA754 * (f32) (lbl_804799B8.x5 % 4)) + lbl_804DA750,
+                -((lbl_804DA75C * (f32) ((s32) lbl_804799B8.x5 / 4)) - lbl_804DA758),
+                lbl_804DA734);
 }
 
 /// @todo Currently 92.46% match - permuter couldn't improve
@@ -4468,6 +4481,15 @@ void fn_801976D4(HSD_GObj* gobj)
     }
 }
 
+extern f32 lbl_804DA7E0; // -19.5f
+extern f32 lbl_804DA7E4; // 13.0f
+extern f32 lbl_804DA7E8; // 6.5f
+extern f32 lbl_804DA7EC; // 19.5f
+extern f32 lbl_804DA7F0; // 2.0f
+extern f32 lbl_804DA818; // 666.0f
+extern f32 lbl_804DA81C; // 0.3f
+extern f32 lbl_804DA820; // 12.6f
+
 void fn_801977AC(HSD_GObj* gobj)
 {
     TmData* tm;
@@ -4498,14 +4520,14 @@ void fn_801977AC(HSD_GObj* gobj)
 
     players = tm->x30;
     if ((s32) players == 4) {
-        x = (13.0f * (f32) pnum) + -19.5f;
+        x = (lbl_804DA7E4 * (f32) pnum) + lbl_804DA7E0;
     } else if ((s32) players == 3) {
-        x = 6.5f + ((13.0f * (f32) pnum) - 19.5f);
+        x = lbl_804DA7E8 + ((lbl_804DA7E4 * (f32) pnum) - lbl_804DA7EC);
     } else {
-        x = 6.5f + ((13.0f * (2.0f * (f32) pnum)) - 19.5f);
+        x = lbl_804DA7E8 + ((lbl_804DA7E4 * (lbl_804DA7F0 * (f32) pnum)) - lbl_804DA7EC);
     }
 
-    fn_8018FDC4(jobj, 0.3f + x, 12.6f, 666.0f);
+    fn_8018FDC4(jobj, lbl_804DA81C + x, lbl_804DA820, lbl_804DA818);
 
     if (lbl_804799D8.x0[pnum * 6 + 0x2D] == 4) {
         u8* counter_ptr;
@@ -4531,14 +4553,14 @@ void fn_801977AC(HSD_GObj* gobj)
 
         players = tm->x30;
         if ((s32) players == 4) {
-            x = (13.0f * (f32) pnum) + -19.5f;
+            x = (lbl_804DA7E4 * (f32) pnum) + lbl_804DA7E0;
         } else if ((s32) players == 3) {
-            x = 6.5f + ((13.0f * (f32) pnum) - 19.5f);
+            x = lbl_804DA7E8 + ((lbl_804DA7E4 * (f32) pnum) - lbl_804DA7EC);
         } else {
-            x = 6.5f + ((13.0f * (2.0f * (f32) pnum)) - 19.5f);
+            x = lbl_804DA7E8 + ((lbl_804DA7E4 * (lbl_804DA7F0 * (f32) pnum)) - lbl_804DA7EC);
         }
 
-        fn_8018FDC4(jobj, 0.3f + x, 12.6f, 666.0f);
+        fn_8018FDC4(jobj, lbl_804DA81C + x, lbl_804DA820, lbl_804DA818);
     }
 }
 
@@ -4585,14 +4607,14 @@ void fn_80197AF0(HSD_GObj* gobj)
 
     players = tm->x30;
     if ((s32) players == 4) {
-        x = (13.0f * (f32) pnum) + -19.5f;
+        x = (lbl_804DA7E4 * (f32) pnum) + lbl_804DA7E0;
     } else if ((s32) players == 3) {
-        x = 6.5f + ((13.0f * (f32) pnum) - 19.5f);
+        x = lbl_804DA7E8 + ((lbl_804DA7E4 * (f32) pnum) - lbl_804DA7EC);
     } else {
-        x = 6.5f + ((13.0f * (2.0f * (f32) pnum)) - 19.5f);
+        x = lbl_804DA7E8 + ((lbl_804DA7E4 * (lbl_804DA7F0 * (f32) pnum)) - lbl_804DA7EC);
     }
 
-    fn_8018FDC4(jobj, x, 666.0f, 666.0f);
+    fn_8018FDC4(jobj, x, lbl_804DA818, lbl_804DA818);
 
     if (lbl_804799D8.x0[pnum + 0x44] != 6 ||
         lbl_804799D8.x0[pnum * 6 + 0x2D] == 1 ||
@@ -4677,13 +4699,13 @@ void fn_80197E18(HSD_GObj* gobj)
     }
 
     if ((s32) data->x30 == 4) {
-        x_pos = (13.0F * pnum) + (-19.5F);
+        x_pos = (lbl_804DA7E4 * pnum) + (lbl_804DA7E0);
     } else if ((s32) data->x30 == 3) {
-        x_pos = 6.5F + ((13.0F * pnum) - 19.5F);
+        x_pos = lbl_804DA7E8 + ((lbl_804DA7E4 * pnum) - lbl_804DA7EC);
     } else {
-        x_pos = 6.5F + ((13.0F * (2.0F * pnum)) - 19.5F);
+        x_pos = lbl_804DA7E8 + ((lbl_804DA7E4 * (lbl_804DA7F0 * pnum)) - lbl_804DA7EC);
     }
-    fn_8018FDC4(jobj, x_pos, 666.0F, 666.0F);
+    fn_8018FDC4(jobj, x_pos, lbl_804DA818, lbl_804DA818);
 }
 
 /// @todo Currently 70.24% match - needs register allocation fix
@@ -4731,14 +4753,14 @@ void fn_80197FD8(HSD_GObj* gobj)
         u8 num_players = tm_data->x30;
 
         if ((s32) num_players == 4) {
-            x_position = (13.0F * (f32) port) + -19.5F;
+            x_position = (lbl_804DA7E4 * (f32) port) + lbl_804DA7E0;
         } else if ((s32) num_players == 3) {
-            x_position = 6.5F + ((13.0F * (f32) port) - 19.5F);
+            x_position = lbl_804DA7E8 + ((lbl_804DA7E4 * (f32) port) - lbl_804DA7EC);
         } else {
-            x_position = 6.5F + ((13.0F * (2.0F * (f32) port)) - 19.5F);
+            x_position = lbl_804DA7E8 + ((lbl_804DA7E4 * (lbl_804DA7F0 * (f32) port)) - lbl_804DA7EC);
         }
 
-        fn_8018FDC4(jobj, x_position, 666.0F, 666.0F);
+        fn_8018FDC4(jobj, x_position, lbl_804DA818, lbl_804DA818);
     }
 }
 
@@ -4786,14 +4808,14 @@ void fn_801981A0(HSD_GObj* gobj)
     }
 
     if ((s32) data->x30 == 4) {
-        x_pos = (13.0F * (f32) pnum) + (-19.5F);
+        x_pos = (lbl_804DA7E4 * (f32) pnum) + (lbl_804DA7E0);
     } else if ((s32) data->x30 == 3) {
-        x_pos = 6.5F + ((13.0F * (f32) pnum) - 19.5F);
+        x_pos = lbl_804DA7E8 + ((lbl_804DA7E4 * (f32) pnum) - lbl_804DA7EC);
     } else {
-        x_pos = 6.5F + ((13.0F * (2.0F * (f32) pnum)) - 19.5F);
+        x_pos = lbl_804DA7E8 + ((lbl_804DA7E4 * (lbl_804DA7F0 * (f32) pnum)) - lbl_804DA7EC);
     }
 
-    fn_8018FDC4(jobj, x_pos, 666.0F, 0.01F);
+    fn_8018FDC4(jobj, x_pos, lbl_804DA818, 0.01F);
 
     player_ptr = (u8*) &lbl_804799D8 + pnum;
     counter = player_ptr[0x21];
@@ -4846,14 +4868,14 @@ void fn_801983E4(HSD_GObj* gobj)
 
     player_count = tm->x30;
     if ((s32) player_count == 4) {
-        x = (13.0f * (f32) pnum) + -19.5f;
+        x = (lbl_804DA7E4 * (f32) pnum) + lbl_804DA7E0;
     } else if ((s32) player_count == 3) {
-        x = 6.5f + ((13.0f * (f32) pnum) - 19.5f);
+        x = lbl_804DA7E8 + ((lbl_804DA7E4 * (f32) pnum) - lbl_804DA7EC);
     } else {
-        x = 6.5f + ((13.0f * (2.0f * (f32) pnum)) - 19.5f);
+        x = lbl_804DA7E8 + ((lbl_804DA7E4 * (lbl_804DA7F0 * (f32) pnum)) - lbl_804DA7EC);
     }
 
-    fn_8018FDC4(jobj, x, 666.0f, 0.01f);
+    fn_8018FDC4(jobj, x, lbl_804DA818, 0.01f);
 }
 
 void fn_80198584(ResultsData* results)
@@ -5042,6 +5064,13 @@ void fn_80198C60(void)
 #pragma pop
 
 extern SceneDesc* lbl_804D666C;
+extern f32 lbl_804DA808; // 0.0f
+extern f32 lbl_804DA82C; // 0.054945f
+extern f32 lbl_804DA830; // 0.08f
+extern f32 lbl_804DA834; // (float)
+extern f32 lbl_804DA838; // 250.0f
+extern f32 lbl_804DA83C; // 1.5f
+extern f32 lbl_804DA840; // (float)
 
 /// Initializes the scene rendering components for the gm_18A5 game mode.
 void fn_80198D18(void)
@@ -5057,23 +5086,23 @@ void fn_80198D18(void)
     fn_801902F0((int) gobj);
     fn_8019027C(lbl_804D666C->lights);
     fn_8019035C(0, lbl_804D666C->models[5], 0, 0x1A, 2, 1, fn_80196DBC,
-                0.0f);
+                lbl_804DA808);
     fn_8019035C(0, lbl_804D666C->models[4], 0, 0x1A, 2, 1, fn_80196E30,
-                80.0f);
+                lbl_804DA840);
 
     td = gm_8018F634();
     td->x524[2] = HSD_SisLib_803A6754(0, (s32) lbl_804D663C);
     text = td->x524[2];
-    text->font_size.x = 0.054945f;
-    text->font_size.y = 0.08f;
+    text->font_size.x = lbl_804DA82C;
+    text->font_size.y = lbl_804DA830;
     td->x524[2]->default_alignment = 1;
     td->x524[2]->default_kerning = 1;
 
     td->x524[3] = HSD_SisLib_803A6754(0, (s32) lbl_804D663C);
     td->x524[3]->default_alignment = 1;
     td->x524[3]->default_kerning = 1;
-    HSD_SisLib_803A6B98(td->x524[3], 320.0f, 250.0f, "    ");
-    HSD_SisLib_803A7548(td->x524[3], 0, 1.5f, 1.5f);
+    HSD_SisLib_803A6B98(td->x524[3], lbl_804DA834, lbl_804DA838, "    ");
+    HSD_SisLib_803A7548(td->x524[3], 0, lbl_804DA83C, lbl_804DA83C);
 
     gobj = GObj_Create(0xE, 0x1A, 0);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7848,
@@ -5083,16 +5112,7 @@ void fn_80198D18(void)
 }
 
 extern SceneDesc* lbl_804D6674;
-extern f32 lbl_804DA7E0;
-extern f32 lbl_804DA7E4;
-extern f32 lbl_804DA7E8;
-extern f32 lbl_804DA7EC;
-extern f32 lbl_804DA7F0;
-extern f32 lbl_804DA808;
-extern f32 lbl_804DA818;
 extern f32 lbl_804DA828;
-extern f32 lbl_804DA834;
-extern f32 lbl_804DA840;
 extern f32 lbl_804DA844;
 extern f32 lbl_804DA848;
 extern f32 lbl_804DA84C;
@@ -6517,6 +6537,7 @@ void fn_8019B81C(s32* state)
 }
 
 extern SceneDesc* lbl_804D6670;
+extern f32 lbl_804DA810;
 
 void fn_8019B860(TmData* tm)
 {
@@ -6524,7 +6545,7 @@ void fn_8019B860(TmData* tm)
     fn_80199AF0();
     fn_80198BA0();
     fn_8018F888();
-    fn_8018E618(tm->entrants, (s32) tm->x2C, 4.5f);
+    fn_8018E618(tm->entrants, tm->x2C, lbl_804DA810);
     fn_8018E85C(*(int*) ((char*) lbl_804D6670->models + 0x10), tm->x2C);
     tm->cur_option = 0x20;
 }
