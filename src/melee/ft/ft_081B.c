@@ -999,12 +999,34 @@ void ft_80083DCC(Fighter_GObj* gobj)
     ft_80081A00(gobj);
 }
 
+static inline bool ft_80083E64_inline(Fighter_GObj* gobj, ftCollisionBox* ecb)
+{
+    struct {
+        u8 pad[8];
+        ftCollisionBox collbox;
+    } sp;
+    bool temp_r31;
+    Fighter* fp = GET_FIGHTER(gobj);
+    CollData* coll = &fp->coll_data;
+    ftCollisionBox* box;
+
+    coll->last_pos = coll->cur_pos;
+    coll->cur_pos = fp->cur_pos;
+    box = ft_80082838(&sp.collbox, ecb, fp->facing_dir);
+    temp_r31 = mpColl_8004730C(coll, box);
+    fp->cur_pos = coll->cur_pos;
+    if (ft_80081A00(gobj)) {
+        return false;
+    }
+    if (temp_r31) {
+        return true;
+    }
+    return false;
+}
+
 void ft_80083E64(Fighter_GObj* gobj, ftCollisionBox* ecb, HSD_GObjEvent cb)
 {
-    bool do_cb = ft_800824A0(gobj, ecb);
-    PAD_STACK(8);
-
-    if (do_cb) {
+    if (ft_80083E64_inline(gobj, ecb)) {
         cb(gobj);
     }
 }
