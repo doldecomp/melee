@@ -3194,6 +3194,7 @@ s32 fn_80192938(void)
     s32 a, b;
     u8 tmp;
     u8 handicap;
+    PAD_STACK(8);
 
     tm = gm_8018F634();
     lbl_804D6658 = 0;
@@ -5137,6 +5138,7 @@ s32 fn_801967E0(s32 arg0)
 {
     s32 rand;
     BracketEntry* ent = &lbl_80473AB8[arg0];
+    PAD_STACK(0x10);
 
 
     rand = HSD_Randi(ent->x51 + ent->x7D + ent->xA9 + ent->xD5);
@@ -7095,6 +7097,7 @@ void fn_8019A86C(s32* arg0, u32 arg1, u32 arg2)
     s32 var_r28 = 0;
     u8* d8 = lbl_804799D8.x0;
     s32 i;
+    PAD_STACK(0x28);
 
     if (tm->cur_option == 0x1B) {
         fn_8019B81C(arg0);
@@ -7592,6 +7595,7 @@ void fn_8019B458(s32* arg0)
 
     s32 costumes[4];
     s32 charIDs[4];
+    PAD_STACK(0x10);
 
     tm->x24++;
     *(u32*) &lbl_804799D8 = 0;
