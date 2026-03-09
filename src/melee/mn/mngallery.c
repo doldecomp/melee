@@ -585,11 +585,11 @@ void mnGallery_80259868(void)
     }* inner;
     PAD_STACK(0x38);
 
-    archive = mn_804D6BB8;
-    mn_804A04F0.hovered_selection = 0;
-    mn_804A04F0.prev_menu = mn_804A04F0.cur_menu;
-    mn_804A04F0.cur_menu = 0x1A;
     mn_804D6BC8.cooldown = 5;
+    mn_804A04F0.prev_menu = mn_804A04F0.cur_menu;
+    mn_804A04F0.hovered_selection = 0;
+    mn_804A04F0.cur_menu = 0x1A;
+    archive = mn_804D6BB8;
 
     lbArchive_LoadSections(archive, arr,
         base + 0x60,
