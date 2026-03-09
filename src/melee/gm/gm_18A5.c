@@ -3477,6 +3477,7 @@ void fn_80193308(void)
         count += 1;
         idx = 4;
     } while (count < 2);
+    PAD_STACK(0x30);
 }
 
 extern u8 lbl_803D9F80[];
