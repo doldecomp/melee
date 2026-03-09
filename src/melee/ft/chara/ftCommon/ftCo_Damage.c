@@ -590,20 +590,17 @@ void ftCo_Damage_OnEveryHitlag(Fighter_GObj* gobj)
 
 void ftCo_8008E5A4(Fighter* fp)
 {
-    float lstick_x = fp->input.lstick.x;
-    if (lstick_x || fp->input.lstick.y) {
+    if (fp->input.lstick.x || fp->input.lstick.y) {
         float kb_x = fp->x8c_kb_vel.x;
         float kb_y = fp->x8c_kb_vel.y;
         float kb_vel_x_neg = -kb_x;
-        float kb_mag = SQ(kb_vel_x_neg) + SQ(kb_y);
+        float kb_mag = kb_vel_x_neg * kb_vel_x_neg + kb_y * kb_y;
         if (!(kb_mag < 0.00001f)) {
-            float lstick_y = fp->input.lstick.y;
-            float f3 = kb_y * lstick_x + kb_vel_x_neg * lstick_y;
-            float f30 = SQ(f3) / kb_mag;
-            Vec3 lstick_vec3;
-            Vec3 kb_vel_cross_lstick;
-            lstick_vec3.x = lstick_x;
-            lstick_vec3.y = lstick_y;
+            float f3 = kb_y * fp->input.lstick.x + kb_vel_x_neg * fp->input.lstick.y;
+            float f30 = f3 * f3 / kb_mag;
+            Vec3 lstick_vec3, kb_vel_cross_lstick;
+            lstick_vec3.x = fp->input.lstick.x;
+            lstick_vec3.y = fp->input.lstick.y;
             lstick_vec3.z = 0;
             PSVECCrossProduct(&fp->x8c_kb_vel, &lstick_vec3,
                               &kb_vel_cross_lstick);
@@ -612,8 +609,10 @@ void ftCo_8008E5A4(Fighter* fp)
             }
             {
                 float angle = atan2f(kb_y, kb_x);
-                float kb_mag = sqrtf(kb_x * kb_x + kb_y * kb_y);
-                angle += deg_to_rad * p_ftCommonData->x1A8 * f30;
+                float scale;
+                kb_mag = sqrtf(kb_x * kb_x + kb_y * kb_y);
+                scale = deg_to_rad * p_ftCommonData->x1A8;
+                angle += scale * f30;
                 fp->x8c_kb_vel.x = kb_mag * cosf(angle);
                 fp->x8c_kb_vel.y = kb_mag * sinf(angle);
             }
