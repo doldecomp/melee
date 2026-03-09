@@ -2324,9 +2324,9 @@ void gm_80190EA4(void)
 
     for (i = 0; i < 64; i++) {
         if (gmMainLib_8015CC34()->handicap == 1) {
-            tmdata->x37[i].x1 = 5;
+            tmdata->x37[i].x2 = 5;
         } else {
-            tmdata->x37[i].x1 = 9;
+            tmdata->x37[i].x2 = 9;
         }
     }
 }
