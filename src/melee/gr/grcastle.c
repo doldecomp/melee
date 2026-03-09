@@ -13,13 +13,12 @@
 #include "gr/inlines.h"
 #include "it/it_26B1.h"
 #include "lb/lb_00B0.h"
+#include "lb/lb_00F9.h"
 #include "mp/mplib.h"
 
 #include <dolphin/mtx.h>
 #include <baselib/jobj.h>
 #include <baselib/psstructs.h>
-
-static void* grCs_804D6970;
 
 unkCastleCallback grCs_803B7F28[] = {
     grCastle_801D0550, grCastle_801D059C, grCastle_801D05E8,
@@ -30,6 +29,17 @@ unkCastleCallback2 grCs_803B7F3C[] = {
     grCastle_801D06CC, grCastle_801D0744, grCastle_801D07BC,
     grCastle_801D0834, grCastle_801D08AC,
 };
+
+typedef struct grCastleParams {
+    s32 x0;
+    f32 x4;
+    s16 x8;
+    s16 xA;
+    s32 xC;
+} grCastleParams;
+
+static grCastleParams* grCs_804D6970;
+static struct lb_80011A50_t* grCs_804D6974;
 
 void grCastle_801CD338(bool arg0)
 {
@@ -45,7 +55,41 @@ void grCastle_801CD338(bool arg0)
     }
 }
 
-/// #grCastle_801CD37C
+void grCastle_801CD37C(void)
+{
+    PAD_STACK(4);
+    grCs_804D6970 = Ground_801C49F8();
+
+    stage_info.unk8C.b4 = 0;
+    stage_info.unk8C.b5 = 1;
+
+    grCastle_801CD4D0(0);
+    grCastle_801CD4D0(4);
+    grCastle_801CD4D0(3);
+    grCastle_801CD4D0(6);
+
+    mpLib_80057BC0(0);
+    mpLib_80057BC0(1);
+    mpLib_80057BC0(2);
+    mpLib_80057BC0(6);
+    mpLib_80057BC0(7);
+    mpLib_80057BC0(8);
+    mpLib_80057BC0(9);
+    mpLib_80057BC0(10);
+    mpLib_80057BC0(11);
+    mpLib_80057BC0(12);
+    mpLib_80057BC0(13);
+    mpLib_80057BC0(14);
+
+    Ground_801C39C0();
+    Ground_801C3BB4();
+    {
+        Vec3 vec = { 1.0f, 0.0f, 0.0f };
+        PAD_STACK(4);
+        grCs_804D6974 = lb_80011A50(&vec, -1, 0.5f, 0.0f, 1.0471976f,
+                                    -10000.0f, 10000.0f, 10000.0f, -10000.0f);
+    }
+}
 
 void grCastle_801CD4A0(void) {}
 
@@ -133,17 +177,15 @@ bool grCastle_801CDF54(Vec3* vec)
     return false;
 }
 
-extern void* grCs_804D6970;
-
 void grCastle_801CDFD8(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     register u8 byte;
     register s32 one;
-    void* params;
+    grCastleParams* params;
     s32 random_range;
     s32 rand_result;
-    void* params2;
+    grCastleParams* params2;
     s32 neg_one;
     s32 zero;
     s32 base_value;
@@ -161,7 +203,7 @@ void grCastle_801CDFD8(Ground_GObj* gobj)
 
     // Get random range from params
     params = grCs_804D6970;
-    random_range = *(s16*) ((u8*) params + 0xA);
+    random_range = params->xA;
 
     if (random_range != 0) {
         rand_result = HSD_Randi(random_range);
@@ -173,7 +215,7 @@ void grCastle_801CDFD8(Ground_GObj* gobj)
     params2 = grCs_804D6970;
     neg_one = -1;
     zero = 0;
-    base_value = *(s16*) ((u8*) params2 + 0x8);
+    base_value = params2->x8;
     final_value = (s16) (base_value + rand_result);
 
     *(s16*) ((u8*) gp + 0xD4) = final_value;

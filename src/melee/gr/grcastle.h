@@ -22,7 +22,7 @@ struct unkCastle {
 /* 1CD4A0 */ void grCastle_801CD4A0(void);
 /* 1CD4A4 */ void grCastle_801CD4A4(void);
 /* 1CD4C8 */ bool grCastle_801CD4C8(void);
-/* 1CD4D0 */ UNK_RET grCastle_801CD4D0(UNK_PARAMS);
+/* 1CD4D0 */ UNK_RET grCastle_801CD4D0(s32);
 /* 1CD5BC */ void grCastle_801CD5BC(Ground_GObj*);
 /* 1CD600 */ bool grCastle_801CD600(Ground_GObj*);
 /* 1CD608 */ void grCastle_801CD608(Ground_GObj*);
