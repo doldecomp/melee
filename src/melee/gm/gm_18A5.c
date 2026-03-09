@@ -3647,7 +3647,7 @@ void fn_80193B58(s32* arg0, u32 arg1, u32 arg2)
     }
 
     if (*mt == 0) {
-        clamp_val = MAX((s32) lbl_804D665C, 2);
+        clamp_val = MAX(2, (s32) lbl_804D665C);
         idx = arg0[0];
         ptr = arg0 + idx;
         val = *++ptr;
