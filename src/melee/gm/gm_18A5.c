@@ -3064,7 +3064,253 @@ void fn_801937C4(s32* arg0, u32 arg1, u32 arg2)
 
 /// #fn_80193B58
 
-/// #fn_80193FCC
+extern f32 lbl_804DA6D8; // 4.5f
+extern f32 lbl_804DA6DC; // 130.0f
+extern f32 lbl_804DA6E0; // -278.0f
+extern f32 lbl_804DA6E4; // 255.0f
+
+void fn_80193FCC(s32* arg0, u32 arg1, u32 arg2)
+{
+    u8* table = lbl_803D9F80;
+    s32 idx;
+    s32* ptr;
+    s32 val;
+    u8* entry;
+    s32 clamp_val;
+    int* mt = &gm_804771C4.match_type;
+    TmData* tm;
+
+    if (*mt != 0) {
+        lbl_804D665C = fn_8018F808();
+    }
+
+    if (*mt != 0) {
+        if (fn_8018F808() < 2) {
+            clamp_val = 2;
+        } else {
+            clamp_val = fn_8018F808();
+        }
+        idx = arg0[0];
+        ptr = arg0 + idx;
+        val = *++ptr;
+        if (val > clamp_val) {
+            *ptr = clamp_val;
+            fn_80190ABC(3);
+        }
+    }
+
+    if (arg1 & 0x40001) {
+        if (*mt != 0) {
+            idx = arg0[0];
+            entry = table + (idx << 1) + (*mt != 0);
+            ptr = arg0 + idx;
+            val = *++ptr;
+            if (val > (s32) entry[0x40]) {
+                *ptr = val - 1;
+                lbAudioAx_80024030(2);
+                lbl_804799B8.x7 = 5;
+            } else {
+                s32 max_plus1 = (s32) entry[0x4C] + 1;
+                if (clamp_val < max_plus1) {
+                    *ptr = clamp_val;
+                } else {
+                    *ptr = max_plus1;
+                }
+                idx = arg0[0];
+                entry = table + (idx << 1) + (*mt != 0);
+                val = arg0[idx + 1];
+                if (val != (s32) entry[0x40]) {
+                    lbAudioAx_80024030(2);
+                    lbl_804799B8.x7 = 5;
+                }
+            }
+        } else {
+            lbAudioAx_80024030(2);
+            lbl_804799B8.x7 = 5;
+            idx = arg0[0];
+            entry = table + (idx << 1) + (*mt != 0);
+            ptr = arg0 + idx;
+            val = *++ptr;
+            if (val > (s32) entry[0x40]) {
+                *ptr = val - 1;
+            } else {
+                *ptr = (s32) entry[0x4C];
+            }
+        }
+        if (*mt != 0) {
+            goto post_clamp;
+        }
+        {
+            u8 x30 = *(u8*) ((u8*) arg0 + 0x30);
+            switch (x30) {
+            case 2:
+                if (arg0[3] == 0x1F) {
+                    arg0[3] = 8;
+                }
+                break;
+            case 3:
+                if (arg0[3] == 8) {
+                    arg0[3] = 0xD;
+                }
+                break;
+            case 4:
+                if (arg0[3] == 0xD) {
+                    arg0[3] = 0x1F;
+                }
+                break;
+            }
+            tm = gm_8018F634();
+            fn_8018EC7C();
+            fn_8018E618(tm->entrants, 1, lbl_804DA6D8);
+            fn_80190480(lbl_804DA6DC);
+            fn_80190520(lbl_804DA6E0, lbl_804DA6E4, lbl_804DA6E8);
+        }
+    } else if (arg1 & 0x80002) {
+        if (*mt != 0) {
+            idx = arg0[0];
+            entry = table + (idx << 1) + (*mt != 0);
+            ptr = arg0 + idx;
+            val = *++ptr;
+            if (val < (s32) entry[0x4C] + 1) {
+                if (val + 1 <= clamp_val && val + 1 < arg0[2]) {
+                    *ptr = val + 1;
+                    lbAudioAx_80024030(2);
+                    lbl_804799B8.x8 = 5;
+                    goto after_right;
+                }
+                *ptr = (s32) entry[0x40];
+                idx = arg0[0];
+                val = arg0[idx + 1];
+                if (val != clamp_val) {
+                    lbAudioAx_80024030(2);
+                    lbl_804799B8.x8 = 5;
+                }
+            } else {
+                *ptr = (s32) entry[0x40];
+                idx = arg0[0];
+                entry = table + (idx << 1) + (*mt != 0);
+                val = arg0[idx + 1];
+                if (val != (s32) entry[0x4C] + 1) {
+                    lbAudioAx_80024030(2);
+                    lbl_804799B8.x8 = 5;
+                }
+            }
+        } else {
+            lbAudioAx_80024030(2);
+            lbl_804799B8.x8 = 5;
+            idx = arg0[0];
+            entry = table + (idx << 1) + (*mt != 0);
+            ptr = arg0 + idx;
+            val = *++ptr;
+            if (val < (s32) entry[0x4C]) {
+                if (*mt != 0) {
+                    if (val == arg0[2] - 1) {
+                        *ptr = (s32) entry[0x40];
+                        goto after_right;
+                    }
+                    *ptr = val + 1;
+                    goto after_right;
+                }
+                *ptr = val + 1;
+            } else {
+                *ptr = (s32) entry[0x40];
+            }
+        }
+    after_right:
+        if (*mt != 0) {
+            goto post_clamp;
+        }
+        {
+            u8 x30 = *(u8*) ((u8*) arg0 + 0x30);
+            switch (x30) {
+            case 2:
+                if (arg0[3] == 9) {
+                    arg0[3] = 0;
+                }
+                break;
+            case 3:
+                if (arg0[3] == 0xE) {
+                    arg0[3] = 9;
+                }
+                break;
+            case 4:
+                if (arg0[3] == 0) {
+                    arg0[3] = 0xE;
+                }
+                break;
+            }
+            tm = gm_8018F634();
+            fn_8018EC7C();
+            fn_8018E618(tm->entrants, 1, lbl_804DA6D8);
+            fn_80190480(lbl_804DA6DC);
+            fn_80190520(lbl_804DA6E0, lbl_804DA6E4, lbl_804DA6E8);
+        }
+    }
+
+post_clamp:
+    if (*mt != 0) {
+        if (arg0[3] > arg0[2] - 1) {
+            arg0[3] = arg0[2] - 1;
+        }
+        if (arg0[4] > arg0[3] - 1) {
+            arg0[4] = arg0[3] - 1;
+        }
+        if (arg0[4] > arg0[2] - arg0[3]) {
+            arg0[4] = arg0[2] - arg0[3];
+        }
+    }
+
+    if (*mt != 0) {
+        *(u8*) ((u8*) arg0 + 0x30) = (u8) arg0[3];
+    }
+
+    if (arg1 != 0) {
+        if ((arg1 | arg2) & 0x300) {
+            fn_80190ABC(0);
+            fn_80190ABC(2);
+            if (*mt == 0) {
+                if (arg2 & 0x100) {
+                    if ((s32) lbl_804D665C < 2) {
+                        arg0[4] = 1;
+                    } else {
+                        arg0[4] = (s32) ((u8*) &lbl_803D9D20)[arg0[3]];
+                    }
+                    fn_80190ABC(1);
+                }
+            }
+        }
+        fn_80190ABC(3);
+    }
+
+    if (arg2 & 0x100) {
+        lbAudioAx_80024030(1);
+        arg0[0] = arg0[0] + 1;
+    } else if (arg2 & 0x200) {
+        lbAudioAx_80024030(0);
+        arg0[0] = arg0[0] - 1;
+        if (*mt == 0) {
+            fn_8018EC7C();
+        }
+    }
+
+    if (arg2 != 0) {
+        if ((arg1 | arg2) & 0x300) {
+            fn_80190ABC(0);
+            fn_80190ABC(2);
+            if (*mt == 0) {
+                if (arg2 & 0x100) {
+                    if ((s32) lbl_804D665C < 2) {
+                        arg0[4] = 1;
+                    } else {
+                        arg0[4] = (s32) ((u8*) &lbl_803D9D20)[arg0[3]];
+                    }
+                    fn_80190ABC(1);
+                }
+            }
+        }
+        fn_80190ABC(3);
+    }
+}
 
 void fn_80194658(s32* arg0, u32 arg1, u32 arg2)
 {
