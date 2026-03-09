@@ -677,7 +677,7 @@ struct grZebes_GroundVars2 {
 };
 
 struct grZebes_GroundVars3 {
-    /*  +0 gp+C4 */ s32 xC4;
+    /*  +0 gp+C4 */ Item_GObj* xC4;
     /*  +4 gp+C8 */ s32 xC8;
 };
 

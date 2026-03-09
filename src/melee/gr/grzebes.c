@@ -153,7 +153,7 @@ typedef struct grZe_BubbleEntry {
     /* 0x00 */ u8 active;
     /* 0x01 */ u8 pad_01;
     /* 0x02 */ s16 timer;
-    /* 0x04 */ u32 unk04;
+    /* 0x04 */ HSD_JObj* x04;
     /* 0x08 */ f32 x;
     /* 0x0C */ f32 y;
     /* 0x10 */ f32 unk10;
@@ -1321,35 +1321,35 @@ s32 grZebes_801DAA08(void)
     s32 ctr;
 
     for (ctr = 4; ctr != 0; ctr--) {
-        if (ptr->active == 1 && idx != 0 && idx != 6 && ptr->unk04 == 0) {
+        if (ptr->active == 1 && idx != 0 && idx != 6 && ptr->x04 == NULL) {
             *ip = idx;
             ip++;
             count++;
         }
         ptr++;
         idx++;
-        if (ptr->active == 1 && idx != 0 && idx != 6 && ptr->unk04 == 0) {
+        if (ptr->active == 1 && idx != 0 && idx != 6 && ptr->x04 == NULL) {
             *ip = idx;
             ip++;
             count++;
         }
         ptr++;
         idx++;
-        if (ptr->active == 1 && idx != 0 && idx != 6 && ptr->unk04 == 0) {
+        if (ptr->active == 1 && idx != 0 && idx != 6 && ptr->x04 == NULL) {
             *ip = idx;
             ip++;
             count++;
         }
         ptr++;
         idx++;
-        if (ptr->active == 1 && idx != 0 && idx != 6 && ptr->unk04 == 0) {
+        if (ptr->active == 1 && idx != 0 && idx != 6 && ptr->x04 == NULL) {
             *ip = idx;
             ip++;
             count++;
         }
         ptr++;
         idx++;
-        if (ptr->active == 1 && idx != 0 && idx != 6 && ptr->unk04 == 0) {
+        if (ptr->active == 1 && idx != 0 && idx != 6 && ptr->x04 == NULL) {
             *ip = idx;
             ip++;
             count++;
@@ -1380,7 +1380,7 @@ s32 grZebes_801DAA08(void)
             HSD_JObj* parent_child;
             HSD_JObj* hsd_jobj;
 
-            sel->unk04 = (u32) new_jobj;
+            sel->x04 = new_jobj;
 
             hsd_jobj = (HSD_JObj*) sel->gobj->hsd_obj;
             if (hsd_jobj == NULL) {
@@ -1390,7 +1390,7 @@ s32 grZebes_801DAA08(void)
             }
 
             HSD_JObjSetFlagsAll(parent_child, 0x10);
-            HSD_JObjAddChild(parent_child, (HSD_JObj*) sel->unk04);
+            HSD_JObjAddChild(parent_child, sel->x04);
 
             {
                 u8* dat = (u8*) grDatFiles_801C6330(2)->unk4->unk8;
@@ -1419,11 +1419,11 @@ s32 grZebes_801DAA08(void)
                     aj = NULL;
                 }
 
-                HSD_JObjAddAnimAll((HSD_JObj*) sel->unk04, aj, ma, sa);
+                HSD_JObjAddAnimAll( sel->x04, aj, ma, sa);
             }
 
-            HSD_JObjReqAnimAll((HSD_JObj*) sel->unk04, 0.0f);
-            HSD_JObjAnimAll((HSD_JObj*) sel->unk04);
+            HSD_JObjReqAnimAll(sel->x04, 0.0f);
+            HSD_JObjAnimAll(sel->x04);
             grAnime_801C78FC(sel->gobj, 0, 7);
             return 1;
         }
@@ -1487,37 +1487,38 @@ void grZebes_801DAE70(s32 arg0, u8 arg1, f32 x, f32 y, f32 scale)
                     pos.z = 0.001f;
                     HSD_JObjSetScale(jobj, &pos);
 
-                    gp->gv.zebes3.xC4 = 0;
+                    gp->gv.zebes3.xC4 = NULL;
                     gp->gv.zebes3.xC8 = arg0;
                 }
             }
 
             entry->active = arg1;
             entry->gobj = (HSD_GObj*) gobj;
-            grZe_8049F170[arg0].unk04 = 0;
+            grZe_8049F170[arg0].x04 = NULL;
         }
     }
 }
 
 s32 grZebes_801DB088(Ground* gp, s32 arg1)
 {
+    u8 _[0x48];
     grZe_BubbleEntry* entry = &grZe_8049F170[arg1];
     s32 result = 0;
+    Item_GObj* mat;
+    Ground* bgp;
 
     if (entry->active != 0) {
-        HSD_GObj* bgobj = entry->gobj;
-
-        if (bgobj != NULL) {
-            Ground* bgp = (Ground*) HSD_GObjGetUserData(bgobj);
+        if (entry->gobj != NULL) {
+            bgp = GET_GROUND(entry->gobj);
 
             if (bgp != NULL) {
-                Item_GObj* mat = (Item_GObj*) bgp->gv.zebes3.xC4;
+                mat = bgp->gv.zebes3.xC4;
 
                 if (mat != NULL) {
                     if (entry->active == 1) {
                         grMaterial_801C8E08(mat);
                     } else {
-                        grMaterial_801C8E28((HSD_GObj*) mat);
+                        grMaterial_801C8E28(mat);
                     }
                 }
 
@@ -1536,13 +1537,13 @@ s32 grZebes_801DB088(Ground* gp, s32 arg1)
                     }
                 }
 
-                if ((HSD_JObj*) entry->unk04 != NULL &&
-                    grAnime_801C83D0(bgobj, 0, 7) != 0)
+                if (entry->x04 != NULL &&
+                    grAnime_801C83D0(entry->gobj, 0, 7) != 0)
                 {
-                    HSD_JObjRemoveAll((HSD_JObj*) entry->unk04);
-                    entry->unk04 = (u32) NULL;
+                    HSD_JObjRemoveAll( entry->x04);
+                    entry->x04 = NULL;
                     {
-                        HSD_JObj* jobj = (HSD_JObj*) bgobj->hsd_obj;
+                        HSD_JObj* jobj = (HSD_JObj*) entry->gobj->hsd_obj;
                         if (jobj != NULL) {
                             HSD_JObjClearFlagsAll(jobj, 0x10);
                         }
@@ -1554,11 +1555,11 @@ s32 grZebes_801DB088(Ground* gp, s32 arg1)
                     s16 t = entry->timer;
                     entry->timer = (s16) (t - 1);
                     if (t < 0) {
-                        Item_GObj* m = (Item_GObj*) bgp->gv.zebes3.xC4;
+                        Item_GObj* m = bgp->gv.zebes3.xC4;
                         if (m != NULL) {
-                            grMaterial_801C8CDC((HSD_GObj*) m);
+                            grMaterial_801C8CDC(m);
                         }
-                        Ground_801C4A08(bgobj);
+                        Ground_801C4A08(entry->gobj);
                         {
                             Vec3 pos;
                             pos.x = entry->x;
@@ -1568,17 +1569,17 @@ s32 grZebes_801DB088(Ground* gp, s32 arg1)
                         }
                         Ground_801C5440(gp, 0, 0x61A86);
                         entry->gobj = NULL;
-                        entry->unk04 = (u32) NULL;
+                        entry->x04 = NULL;
                         entry->active = 0;
                     }
                     break;
                 }
                 case 2: {
-                    Item_GObj* m = (Item_GObj*) bgp->gv.zebes3.xC4;
+                    Item_GObj* m = bgp->gv.zebes3.xC4;
                     if (m != NULL) {
-                        grMaterial_801C8CDC((HSD_GObj*) m);
+                        grMaterial_801C8CDC(m);
                     }
-                    Ground_801C4A08(bgobj);
+                    Ground_801C4A08(entry->gobj);
                     {
                         Vec3 pos;
                         pos.x = entry->x;
@@ -1587,19 +1588,23 @@ s32 grZebes_801DB088(Ground* gp, s32 arg1)
                         grLib_801C96F8(0x7530, 0x1E, &pos);
                     }
                     entry->gobj = NULL;
-                    entry->unk04 = (u32) NULL;
+                    entry->x04 = NULL;
                     entry->active = 0;
 
                     if (arg1 < 7 && arg1 != 0 && arg1 != 6) {
                         f32 best_dist = 64.0f;
                         s32 best_idx = -1;
                         s32 j;
+                        f32 ey = entry->y;
+                        f32 ex = entry->x;
 
                         for (j = 7; j < 20; j++) {
                             if (grZe_8049F170[j].active == 1) {
-                                f32 dx = grZe_8049F170[j].x - entry->x;
-                                f32 dy = grZe_8049F170[j].y - entry->y;
-                                f32 dist = dx * dx + dy * dy;
+                                f32 dx = grZe_8049F170[j].x - ex;
+                                f32 dy = grZe_8049F170[j].y - ey;
+                                f32 dx2 = dx * dx;
+                                f32 dy2 = dy * dy;
+                                f32 dist = dx2 + dy2;
                                 if (dist < best_dist) {
                                     best_idx = j;
                                     best_dist = dist;
@@ -1610,7 +1615,7 @@ s32 grZebes_801DB088(Ground* gp, s32 arg1)
                         if (best_idx != -1) {
                             grZe_BubbleEntry* src = &grZe_8049F170[best_idx];
                             entry->active = src->active;
-                            entry->unk04 = src->unk04;
+                            entry->x04 = src->x04;
                             entry->size = src->size;
                             entry->unk1C = src->unk1C;
                             entry->gobj = src->gobj;
