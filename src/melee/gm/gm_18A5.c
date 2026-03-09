@@ -4854,8 +4854,6 @@ void fn_80195CCC(s32* arg, u32 buttons, u32 trigger)
                 *arg = 0xC;
                 return;
             }
-            lbAudioAx_80024030(3);
-            return;
         }
         lbAudioAx_80024030(3);
         return;
