@@ -3204,8 +3204,9 @@ s32 fn_80192938(void)
         tm->x2E = lbl_803D9D20.x0[tm->entrants];
         tm->x2F = (u8) tm->hmn_cpu_count;
     } else {
-        tm->x2E = (u8) tm->combatants;
-        tm->x2F = (u8) tm->combatants;
+        u8 comb = (u8) tm->combatants;
+        tm->x2E = comb;
+        tm->x2F = comb;
         tm->x30 = (u8) tm->entrants;
     }
 
@@ -3228,9 +3229,9 @@ s32 fn_80192938(void)
         tm->x37[i].x6 = HSD_Randi(
             (s32) gm_80169238(fn_8018F6FC((enum CSSIconHud) tm->x37[i].x2)));
 
-        if ((s32) (u8) i < (s32) tm->x2E) {
+        if (i < (s32) tm->x2E) {
             ((u8*) &tm->x37[i])[-1] = 1;
-            if ((s32) (u8) i < (s32) tm->x2F) {
+            if (i < (s32) tm->x2F) {
                 tm->x37[i].x0 = 0;
                 tm->x37[i].x9 = (u16) (i + 0x320);
             } else {
