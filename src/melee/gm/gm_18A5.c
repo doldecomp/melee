@@ -2581,7 +2581,7 @@ void fn_80191678(HSD_GObj* gobj)
 
 /// @todo Currently 89.68% match - permuter couldn't improve
 /// Updates menu option selection animation.
-void fn_8019175C(void* gobj)
+void fn_8019175C(HSD_GObj* gobj)
 {
     HSD_JObj* jobjs[3];
     HSD_JObj* first_child;
@@ -2595,11 +2595,9 @@ void fn_8019175C(void* gobj)
     HSD_JObj* child;
     HSD_JObj** base;
 
-    PAD_STACK(8);
-
     tm = gm_8018F634();
     fn_8018F62C(gobj);
-    root_jobj = *(HSD_JObj**) ((u8*) gobj + 0x28);
+    root_jobj = GET_JOBJ(gobj->hsd_obj);
     jobj = root_jobj;
 
     if (tm->cur_option >= 9) {
