@@ -2088,13 +2088,13 @@ void grZebes_801DC260(void)
 {
     grZe_BubbleEntry* entry = grZe_8049F170;
     int i;
-    PAD_STACK(8);
 
     for (i = 0; i < 20; i++, entry++) {
         if (entry->active != 0) {
             HSD_GObj* gobj = entry->gobj;
             if (gobj != NULL) {
                 Vec3 v;
+                UNUSED u8 _[4];
                 HSD_JObj* jobj = GET_JOBJ(gobj);
 
                 v.x = entry->x;
