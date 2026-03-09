@@ -880,6 +880,8 @@ struct grBigBlueRoute_GroundVars {
 struct grCastle_GroundVars {
     /*  +0 gp+C4 */ u32 xC4;
     /*  +0 gp+C8 */ s16 xC8;
+    u8 pad[0xE0 - 0xCC];
+    /*  +0 gp+E0 */ HSD_Spline** xE0;
 };
 
 struct grPura_GroundVars {

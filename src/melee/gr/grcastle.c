@@ -1,8 +1,8 @@
 #include "grcastle.h"
 
 #include "placeholder.h"
+#include "types.h"
 
-#include "baselib/random.h"
 #include "ft/ftdevice.h"
 #include "ft/ftlib.h"
 #include "gr/grdisplay.h"
@@ -14,20 +14,91 @@
 #include "it/it_26B1.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
+#include "lb/types.h"
 #include "mp/mplib.h"
 
 #include <dolphin/mtx.h>
+#include <baselib/gobj.h>
+#include <baselib/gobjgxlink.h>
+#include <baselib/gobjproc.h>
 #include <baselib/jobj.h>
 #include <baselib/psstructs.h>
+#include <baselib/random.h>
+#include <baselib/spline.h>
 
-unkCastleCallback grCs_803B7F28[] = {
+const unkCastleCallback grCs_803B7F28[5] = {
     grCastle_801D0550, grCastle_801D059C, grCastle_801D05E8,
     grCastle_801D0634, grCastle_801D0680,
 };
 
-unkCastleCallback2 grCs_803B7F3C[] = {
+const unkCastleCallback2 grCs_803B7F3C[5] = {
     grCastle_801D06CC, grCastle_801D0744, grCastle_801D07BC,
     grCastle_801D0834, grCastle_801D08AC,
+};
+
+S16Vec3 grCs_803E0FE8[] = {
+    { 4, 6, 1 },
+    { 5, 6, 4 },
+};
+
+StageCallbacks grCs_803E0FF4[21] = {
+    { NULL, NULL, NULL, NULL, 0 },
+    { grCastle_801CE8E8, grCastle_801CE9E0, grCastle_801CE9E8,
+      grCastle_801CEAC8, 0 },
+    { grCastle_801CE7E8, grCastle_801CE858, grCastle_801CE860,
+      grCastle_801CE8E4, 0 },
+    { grCastle_801CD658, grCastle_801CD8A0, grCastle_801CD8A8,
+      grCastle_801CD960, 0 },
+    { grCastle_801CD5BC, grCastle_801CD600, grCastle_801CD608,
+      grCastle_801CD60C, 0 },
+    { grCastle_801CEACC, grCastle_801CEEFC, grCastle_801CEF04,
+      grCastle_801CF0F0, 0 },
+    { grCastle_801CDA0C, grCastle_801CDC3C, grCastle_801CDC44,
+      grCastle_801CDF50, 0 },
+    { grCastle_801CEACC, grCastle_801CEEFC, grCastle_801CEF04,
+      grCastle_801CF0F0, 0 },
+    { grCastle_801CE260, grCastle_801CE3A4, grCastle_801CE578,
+      grCastle_801CE7E4, 0 },
+    { grCastle_801CE260, grCastle_801CE3A4, grCastle_801CE578,
+      grCastle_801CE7E4, 0 },
+    { grCastle_801CE260, grCastle_801CE3A4, grCastle_801CE578,
+      grCastle_801CE7E4, 0 },
+    { grCastle_801CE260, grCastle_801CE3A4, grCastle_801CE578,
+      grCastle_801CE7E4, 0 },
+    { grCastle_801CE260, grCastle_801CE3A4, grCastle_801CE578,
+      grCastle_801CE7E4, 0 },
+    { grCastle_801CE260, grCastle_801CE3A4, grCastle_801CE578,
+      grCastle_801CE7E4, 0 },
+    { grCastle_801CE260, grCastle_801CE3A4, grCastle_801CE578,
+      grCastle_801CE7E4, 0 },
+    { grCastle_801CE260, grCastle_801CE3A4, grCastle_801CE578,
+      grCastle_801CE7E4, 0 },
+    { grCastle_801CE260, grCastle_801CE3A4, grCastle_801CE578,
+      grCastle_801CE7E4, 0 },
+    { grCastle_801CEACC, grCastle_801CEEFC, grCastle_801CEF04,
+      grCastle_801CF0F0, 0 },
+    { grCastle_801CF0F4, grCastle_801CF300, grCastle_801CF308,
+      grCastle_801CF74C, 0 },
+    { grCastle_801CF0F4, grCastle_801CF300, grCastle_801CF308,
+      grCastle_801CF74C, 0 },
+    { grCastle_801CF0F4, grCastle_801CF300, grCastle_801CF308,
+      grCastle_801CF74C, 0 },
+};
+
+StageData grCs_803E11A4 = {
+    (1 << 1),
+    grCs_803E0FF4,
+    "/GrCs.dat",
+    grCastle_801CD37C,
+    grCastle_801CD338,
+    grCastle_801CD4A0,
+    grCastle_801CD4A4,
+    grCastle_801CD4C8,
+    grCastle_801D0B04,
+    grCastle_801D0B0C,
+    (1 << 0),
+    grCs_803E0FE8,
+    2,
 };
 
 typedef struct grCastleParams {
@@ -37,6 +108,8 @@ typedef struct grCastleParams {
     s16 xA;
     s32 xC;
 } grCastleParams;
+
+static u8 grCs_804D45E4 = 1;
 
 static grCastleParams* grCs_804D6970;
 static struct lb_80011A50_t* grCs_804D6974;
@@ -103,7 +176,38 @@ bool grCastle_801CD4C8(void)
     return false;
 }
 
-/// #grCastle_801CD4D0
+HSD_GObj* grCastle_801CD4D0(int gobj_id)
+{
+    HSD_GObj* gobj;
+    StageCallbacks* callbacks = &grCs_803E0FF4[gobj_id];
+
+    gobj = Ground_801C14D0(gobj_id);
+
+    if (gobj != NULL) {
+        Ground* gp = gobj->user_data;
+        gp->x8_callback = NULL;
+        gp->xC_callback = NULL;
+        GObj_SetupGXLink(gobj, grDisplay_801C5DB0, 3, 0);
+
+        if (callbacks->callback3 != 0) {
+            gp->x1C_callback = (HSD_GObjEvent) callbacks->callback3;
+        }
+
+        if (callbacks->callback0 != NULL) {
+            callbacks->callback0(gobj);
+        }
+
+        if (callbacks->callback2 != NULL) {
+            HSD_GObjProc_8038FD54(gobj, callbacks->callback2, 4);
+        }
+
+    } else {
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grcastle.c", 297,
+                 gobj_id);
+    }
+
+    return gobj;
+}
 
 void grCastle_801CD5BC(Ground_GObj* gobj)
 {
@@ -135,7 +239,28 @@ bool grCastle_801CD8A0(Ground_GObj* gobj)
     return false;
 }
 
-/// #grCastle_801CD8A8
+void grCastle_801CD8A8(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    int i;
+
+    grCastle_801CF868();
+    grCastle_801CE19C(gobj);
+    Ground_801C2FE0(gobj);
+    lb_800115F4();
+    grCastle_801D0BBC();
+    for (i = 0; i < 12; i++) {
+        if (gp->gv.castle.xE0[i] != NULL) {
+            grCastle_801D0D84(gp->gv.castle.xE0[i]->totalLength);
+        }
+    }
+    for (i = 0; i < 12; i++) {
+        if (gp->gv.castle.xE0[i] != NULL) {
+            grLib_801C9B8C(&gp->gv.castle.xE0[i]);
+            grCastle_801D0D24();
+        }
+    }
+}
 
 /// #grCastle_801CD960
 
@@ -444,7 +569,14 @@ void grCastle_801D0A9C(Vec3* arg0, f32 arg8)
 
 /// #grCastle_801D0BBC
 
-/// #grCastle_801D0D24
+void grCastle_801D0D24()
+{
+    if (grCs_804D45E4 != 0) {
+        grCs_804D6974->unk_scale = 0.3 * HSD_Randf() + 0.2;
+    } else {
+        grCs_804D6974->unk_scale = 0.05 * HSD_Randf();
+    }
+}
 
 /// #grCastle_801D0D84
 
