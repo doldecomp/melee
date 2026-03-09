@@ -865,9 +865,7 @@ void ftCo_8008EC90(Fighter_GObj* gobj)
                 fp->x1828 = 1;
                 goto ret_A8C;
             }
-            if (inlineB0(gobj)) {
-                ftCo_8008E9D0(gobj);
-            }
+            ftCo_8008E9D0(gobj);
             goto ret_A8C;
         }
         if (other_fp->dmg.kb_applied) {
