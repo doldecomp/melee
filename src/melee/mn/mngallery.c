@@ -340,7 +340,6 @@ void fn_80258ED0(HSD_GObj* gobj)
 }
 
 #pragma push
-#pragma opt_propagation off
 void fn_802590C4(HSD_GObj* gobj)
 {
     extern f64 mnGallery_804DC368;
@@ -353,11 +352,11 @@ void fn_802590C4(HSD_GObj* gobj)
         HSD_GObj* gobjs[2];
     };
     void* store;
-    s32 i;
     struct fn_802590C4_data* data;
+    s32 zero;
+    s32 i;
     HSD_JObj* jobj;
     void* ud;
-    s32 zero;
 
     data = gobj->user_data;
     jobj = gobj->hsd_obj;
@@ -570,6 +569,7 @@ void mnGallery_80259868(void)
     void** arr = mnGallery_804A0BA0;
     char* base = mnGallery_803F0570;
     HSD_Archive* archive;
+    void** new_var;
     HSD_GObj* gobj;
     HSD_GObjProc* proc;
     HSD_Text* text;
@@ -585,10 +585,11 @@ void mnGallery_80259868(void)
     }* inner;
     PAD_STACK(0x38);
 
+    new_var = arr + 6;
     mn_804D6BC8.cooldown = 5;
     mn_804A04F0.prev_menu = mn_804A04F0.cur_menu;
-    mn_804A04F0.hovered_selection = 0;
     mn_804A04F0.cur_menu = 0x1A;
+    mn_804A04F0.hovered_selection = 0;
     archive = mn_804D6BB8;
 
     lbArchive_LoadSections(archive, arr,
@@ -598,7 +599,7 @@ void mnGallery_80259868(void)
         arr + 3, base + 0xB4,
         arr + 4, base + 0xD8,
         arr + 5, base + 0xF4,
-        arr + 6, base + 0x114,
+        new_var, base + 0x114,
         arr + 7, base + 0x138,
         0);
 
