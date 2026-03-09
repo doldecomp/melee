@@ -2980,7 +2980,125 @@ void fn_801935B8(void)
 
 /// #fn_80193FCC
 
-/// #fn_80194658
+void fn_80194658(s32* arg0, u32 arg1, u32 arg2)
+{
+    u8* table;
+    s32 idx;
+    s32* ptr;
+    s32 val;
+    s32 dir;
+    int* dir_ptr;
+    u8* entry;
+    s32 changed = 0;
+
+    table = lbl_803D9F80;
+    idx = arg0[0];
+    dir_ptr = &gm_804771C4.match_type;
+    dir = *dir_ptr;
+
+    ptr = arg0 + idx;
+    val = *(++ptr);
+
+    if (dir == 0) {
+        if (lbl_804D665C < 2) {
+            if (arg1 & 0x40001) {
+                if (val != 0) {
+                    *ptr = 0;
+                } else {
+                    *ptr = 1;
+                }
+                goto end;
+            }
+            if (arg1 & 0x80002) {
+                changed = 1;
+                if (val != 0) {
+                    *ptr = 0;
+                } else {
+                    *ptr = 1;
+                }
+                goto end;
+            }
+            goto end;
+        }
+    }
+
+    if (arg1 & 0x40001) {
+        entry = table + (idx << 1) + (dir != 0);
+        if (val > (s32) entry[0x40]) {
+            *ptr = *ptr - 1;
+        } else if (dir == 0) {
+            *ptr = (s32) ((u8*) &lbl_803D9D20)[arg0[3]];
+        } else {
+            *ptr = (s32) entry[0x4C];
+        }
+    } else if (arg1 & 0x80002) {
+        entry = table + (idx << 1) + (dir != 0);
+        changed = 1;
+        if (val < (s32) entry[0x4C]) {
+            *ptr = *ptr + 1;
+            if (*dir_ptr != 0) {
+                if (arg0[4] > arg0[3] - 1 ||
+                    arg0[4] > arg0[2] - arg0[3])
+                {
+                    arg0[arg0[0] + 1] = 1;
+                }
+            }
+        } else if (dir == 0) {
+            *ptr = (s32) entry[0x40];
+        } else {
+            *ptr = 1;
+        }
+    }
+
+end:
+    if (*dir_ptr == 0) {
+        if (arg0[4] > (s32) ((u8*) &lbl_803D9D20)[arg0[3]]) {
+            arg0[arg0[0] + 1] = 0;
+        }
+    } else {
+        if (arg0[4] > arg0[3] - 1) {
+            arg0[4] = arg0[3] - 1;
+        }
+        if (arg0[4] > arg0[2] - arg0[3]) {
+            arg0[4] = arg0[2] - arg0[3];
+        }
+    }
+
+    if (val != arg0[4]) {
+        lbAudioAx_80024030(2);
+        if (changed == 0) {
+            lbl_804799B8.x7 = 5;
+        } else {
+            lbl_804799B8.x8 = 5;
+        }
+    }
+
+    if (arg1 != 0) {
+        if ((arg1 | arg2) & 0x300) {
+            fn_80190ABC(0);
+            fn_80190ABC(2);
+        }
+        fn_80190ABC(3);
+        fn_80190ABC(1);
+    }
+
+    if (arg2 & 0x100) {
+        lbAudioAx_80024030(1);
+        arg0[0] = arg0[0] + 1;
+    } else if (arg2 & 0x200) {
+        lbAudioAx_80024030(0);
+        arg0[0] = arg0[0] - 1;
+    }
+
+    if (arg2 != 0) {
+        if ((arg1 | arg2) & 0x300) {
+            fn_80190ABC(0);
+            fn_80190ABC(2);
+        }
+        fn_80190ABC(3);
+        fn_80190ABC(1);
+    }
+}
 
 /// @todo Currently 87.58% match - permuter couldn't improve
 void fn_801949B4(s32* arg0, u32 arg1, u32 arg2)
