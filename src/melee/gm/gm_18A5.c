@@ -1359,7 +1359,7 @@ int fn_8018F310(int arg0)
 
 #pragma push
 #pragma auto_inline off
-u8 fn_8018F3BC(s32 arg0)
+int fn_8018F3BC(s32 arg0)
 {
     return lbl_803D9D20.x59[arg0];
 }

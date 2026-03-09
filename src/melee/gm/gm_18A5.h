@@ -27,7 +27,7 @@
 /* 18F1B0 */ s32 gm_8018F1B0(MatchEnd* me);
 /* 17F294 */ int fn_8017F294(void);
 /* 18F310 */ int fn_8018F310(int);
-/* 18F3BC */ u8 fn_8018F3BC(s32 arg0);
+/* 18F3BC */ int fn_8018F3BC(s32 arg0);
 /* 18F3D0 */ int fn_8018F3D0(int);
 /* 18F410 */ int fn_8018F410(void);
 /* 18F4A0 */ int fn_8018F4A0(void);
