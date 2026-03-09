@@ -1,5 +1,4 @@
-/// @todo this file needs to be named "grpstadium.c" for asserts, oops!
-#include "grstadium.h"
+#include "grpstadium.h"
 
 #include "dolphin/gx/GXStruct.h"
 
@@ -1296,13 +1295,9 @@ void fn_801D3084(HSD_GObj* gobj, int unused)
         lb_800122C8(&wrapper->desc, wrapper->x1A, wrapper->x1C, 0);
         wrapper->flag = true;
         vision_gobj = Ground_801C2BA4(PsType_Display);
-        if (vision_gobj == NULL) {
-            __assert("grpstadium.c", 0x703, "vision_gobj");
-        }
+        HSD_ASSERT(0x703, vision_gobj);
         gp2 = GET_GROUND(vision_gobj);
-        if (gp2 == NULL) {
-            __assert("grpstadium.c", 0x704, "gp2");
-        }
+        HSD_ASSERT(0x704, gp2);
         gp2->u.display.xF8_0 = true;
     }
 }
