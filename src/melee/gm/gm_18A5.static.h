@@ -16,7 +16,9 @@ typedef struct BracketEntry {
     u8 x1;
     u8 pad2[0x18 - 0x2];
     s32 x18;
-    u8 pad1C[0x30 - 0x1C];
+    u8 pad1C[0x21 - 0x1C];
+    u8 x21;
+    u8 pad22[0x30 - 0x22];
     u8 x30;
     u8 pad31[0x32 - 0x31];
     u8 x32;

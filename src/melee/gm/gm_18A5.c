@@ -1575,137 +1575,30 @@ int fn_8018F808(void)
 
 void fn_8018F888(void)
 {
-    s32 idx;
-    u8* ptr;
     u8* base;
-    s32 ctr;
-    u8 val;
-    s32 idx2;
+    s32 i;
 
     base = (u8*) lbl_80473AB8;
-    ctr = 8;
-    ptr = base;
-    idx = 0;
 
-loop1:
-    if (*(ptr + 0x1) != 0) {
-        goto done1;
-    }
-    val = *(ptr + 0xDD);
-    ptr += 0xDC;
-    idx += 1;
-    if (val != 0) {
-        goto done1;
-    }
-    val = *(ptr + 0xDD);
-    ptr += 0xDC;
-    idx += 1;
-    if (val != 0) {
-        goto done1;
-    }
-    val = *(ptr + 0xDD);
-    ptr += 0xDC;
-    idx += 1;
-    if (val != 0) {
-        goto done1;
-    }
-    val = *(ptr + 0xDD);
-    ptr += 0xDC;
-    idx += 1;
-    if (val != 0) {
-        goto done1;
-    }
-    val = *(ptr + 0xDD);
-    ptr += 0xDC;
-    idx += 1;
-    if (val != 0) {
-        goto done1;
-    }
-    val = *(ptr + 0xDD);
-    ptr += 0xDC;
-    idx += 1;
-    if (val != 0) {
-        goto done1;
-    }
-    val = *(ptr + 0xDD);
-    ptr += 0xDC;
-    idx += 1;
-    if (val != 0) {
-        goto done1;
-    }
-    ptr += 0xDC;
-    idx += 1;
-    ctr -= 1;
-    if (ctr != 0) {
-        goto loop1;
+    for (i = 0; i < 64; i++) {
+        if (lbl_80473AB8[i].x1 != 0) {
+            break;
+        }
     }
 
-done1:
-    idx2 = 0;
-    *(base + idx * 0xDC + 0x21) = 0;
+    lbl_80473AB8[i * 0xDC].x21 = 0;
 
     if (*(base + 0x373F) != 5) {
         return;
     }
 
-    ctr = 8;
-    ptr = base;
-
-loop2:
-    if (*(ptr + 0x1) != 0) {
-        goto done2;
-    }
-    val = *(ptr + 0xDD);
-    ptr += 0xDC;
-    idx2 += 1;
-    if (val != 0) {
-        goto done2;
-    }
-    val = *(ptr + 0xDD);
-    ptr += 0xDC;
-    idx2 += 1;
-    if (val != 0) {
-        goto done2;
-    }
-    val = *(ptr + 0xDD);
-    ptr += 0xDC;
-    idx2 += 1;
-    if (val != 0) {
-        goto done2;
-    }
-    val = *(ptr + 0xDD);
-    ptr += 0xDC;
-    idx2 += 1;
-    if (val != 0) {
-        goto done2;
-    }
-    val = *(ptr + 0xDD);
-    ptr += 0xDC;
-    idx2 += 1;
-    if (val != 0) {
-        goto done2;
-    }
-    val = *(ptr + 0xDD);
-    ptr += 0xDC;
-    idx2 += 1;
-    if (val != 0) {
-        goto done2;
-    }
-    val = *(ptr + 0xDD);
-    ptr += 0xDC;
-    idx2 += 1;
-    if (val != 0) {
-        goto done2;
-    }
-    ptr += 0xDC;
-    idx2 += 1;
-    ctr -= 1;
-    if (ctr != 0) {
-        goto loop2;
+    for (i = 0; i < 64; i++) {
+        if (lbl_80473AB8[i].x1 != 0) {
+            break;
+        }
     }
 
-done2:
-    *(base + idx2 * 0xDC + 0xFD) = 0;
+    *(base + i * 0xDC + 0xFD) = 0;
 }
 
 /// @todo Currently 84.63% match - needs loop pattern fix
