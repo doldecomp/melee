@@ -2376,7 +2376,6 @@ void fn_801910E0(HSD_GObj* gobj)
     *counter = *counter + 1;
 }
 
-/// @todo Currently 83.05% match - compiler generates different register usage
 void fn_80191154(HSD_GObj* gobj)
 {
     TmData* tm;
@@ -2846,14 +2845,14 @@ void fn_80191D38(HSD_GObj* gobj)
                   lbl_804DA738),
                 lbl_804DA740);
 
-    if ((u8) tm->x37[idx].x4 != 0) {
+    if ((u8) tm->x37[idx].x5 != 0) {
         fn_8019044C(jobj, lbl_804DA744);
     } else {
-        fn_8019044C(jobj, fn_8018F71C((s32) tm->x37[idx].x2,
-                                       (s32) tm->x37[idx].x6));
+        fn_8019044C(jobj, fn_8018F71C((s32) tm->x37[idx].x3,
+                                       (s32) tm->x37[idx].x7));
     }
 
-    if (lbl_803D9D20.x72[tm->x37[idx].x2] != 0) {
+    if (lbl_803D9D20.x72[tm->x37[idx].x3] != 0) {
         HSD_JObjClearFlagsAll(jobj, 0x10);
     } else {
         HSD_JObjSetFlagsAll(jobj, 0x10);
@@ -5316,6 +5315,7 @@ s32 fn_80196CF8(void)
     u8* ptr;
     s32 x24;
     s32 result;
+    s32 i;
 
     tmdata = gm_8018F634();
     offset = tmdata->entrants * 6;
@@ -5330,28 +5330,11 @@ s32 fn_80196CF8(void)
 
     ptr += 5;
 
-    if (x24 <= (s32) ptr[0x1E]) {
-        result = 5;
-    }
-
-    if (x24 <= (s32) (--ptr)[0x1E]) {
-        result = 4;
-    }
-
-    if (x24 <= (s32) (--ptr)[0x1E]) {
-        result = 3;
-    }
-
-    if (x24 <= (s32) (--ptr)[0x1E]) {
-        result = 2;
-    }
-
-    if (x24 <= (s32) (--ptr)[0x1E]) {
-        result = 1;
-    }
-
-    if (x24 <= (s32) (--ptr)[0x1E]) {
-        result = 0;
+    for (i = 5; i >= 0; i--) {
+        if (x24 <= (s32) ptr[0x1E]) {
+            result = i;
+        }
+        --ptr;
     }
 
     return result;
