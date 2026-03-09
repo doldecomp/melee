@@ -1394,6 +1394,8 @@ int fn_8018F410(void)
 
 /// #fn_8018F410
 
+#pragma push
+#pragma auto_inline off
 int fn_8018F4A0(void)
 {
     int temp_r3 = mnStageSel_8025BBD4();
@@ -1405,6 +1407,7 @@ int fn_8018F4A0(void)
     }
     return temp_r3;
 }
+#pragma pop
 
 /// Counts available tournament slots and returns the last found index.
 #pragma push
