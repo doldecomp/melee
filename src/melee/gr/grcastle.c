@@ -102,7 +102,8 @@ StageData grCs_803E11A4 = {
 };
 
 typedef struct grCastleParams {
-    s32 x0;
+    s16 x0;
+    s16 x2;
     f32 x4;
     s16 x8;
     s16 xA;
@@ -426,6 +427,23 @@ void grCastle_801CF74C(Ground_GObj* gobj) {}
 /// #grCastle_801CF750
 
 /// #grCastle_801CF7B0
+void grCastle_801CF7B0(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    s16 x0, x2;
+
+    gp->gv.castle2.xC4 = grCastle_801CD4D0(20);
+    gp->gv.castle2.xC8 = grCastle_801CD4D0(19);
+    gp->gv.castle2.xCC = grCastle_801CD4D0(18);
+    gp->gv.castle2.xD0 = -1;
+
+    x2 = grCs_804D6970->x2;
+    x0 = grCs_804D6970->x0;
+    gp->gv.castle2.xD2 = x2 > x0 ? x0 + (x2 - x0 != 0 ? HSD_Randi(x2 - x0) : 0)
+                         : x2 < x0
+                             ? x2 + (x0 - x2 != 0 ? HSD_Randi(x0 - x2) : 0)
+                             : x2;
+}
 
 /// #grCastle_801CF868
 
