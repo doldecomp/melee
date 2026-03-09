@@ -220,8 +220,7 @@ Ground_GObj* grStadium_801D10F8(StadiumGrType id)
             HSD_GObjProc_8038FD54(gobj, cb->callback2, 4);
         }
     } else {
-        OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grpstadium.c", 0x120,
-                 id);
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 0x120, id);
     }
     return gobj;
 }
@@ -914,8 +913,8 @@ void grStadium_801D2344(Ground_GObj* g)
 
 typedef struct TextWrapper {
     HSD_ImageDesc desc;
-    HSD_Text* x18;
-    HSD_Text* x1C;
+    HSD_Text* win_static_p;
+    HSD_Text* win_dynamic_p;
 } TextWrapper;
 
 /// @todo can these inlines be merged?
@@ -1075,8 +1074,8 @@ void grStadium_801D2528(Ground_GObj* gobj, int arg1, int arg2)
     case 17:
         gp->u.display.xE6 = 0x40;
         temp_r27_1 = gp->u.display.xD4->user_data;
-        HSD_SisLib_803A7664((void*) temp_r27_1->x1C);
-        HSD_SisLib_803A6368((void*) temp_r27_1->x18, 4);
+        HSD_SisLib_803A7664((void*) temp_r27_1->win_dynamic_p);
+        HSD_SisLib_803A6368((void*) temp_r27_1->win_static_p, 4);
         gp->u.display.xF8_0 = false;
         gp->u.display.xF8_1 = false;
         break;
@@ -1194,10 +1193,11 @@ HSD_GObj* grStadium_801D2BEC(void)
     HSD_SisLib_803A611C(1, gobj, 9, 0xD, 0, 1, 0, 1);
     HSD_SisLib_804D1124[1] =
         HSD_ArchiveGetPublicAddress(archive->unk0, "SIS_GrPStadiumData");
-    text->x18 = HSD_SisLib_803A5ACC(1, 0, 0.0F, 0.0F, 0.0F, 250.0F, 160.0F);
-    text->x1C = HSD_SisLib_803A6754(1, 0);
-    text->x1C->pos_z = 0.0F;
-    hsd_text = text->x1C;
+    text->win_static_p =
+        HSD_SisLib_803A5ACC(1, 0, 0.0F, 0.0F, 0.0F, 250.0F, 160.0F);
+    text->win_dynamic_p = HSD_SisLib_803A6754(1, 0);
+    text->win_dynamic_p->pos_z = 0.0F;
+    hsd_text = text->win_dynamic_p;
     hsd_text->box_size_x = 250.0F;
     hsd_text->box_size_y = 160.0F;
     return gobj;
@@ -1250,13 +1250,9 @@ void fn_801D2ED0(HSD_GObj* gobj, int unused)
     }
     lb_800122C8(&wrapper->desc, 0, 0, 1);
     vision_gobj = Ground_801C2BA4(PsType_Display);
-    if (vision_gobj == NULL) {
-        __assert("grpstadium.c", 0x6D2, "vision_gobj");
-    }
+    HSD_ASSERT(0x6D2, vision_gobj);
     gp2 = GET_GROUND(vision_gobj);
-    if (gp2 == NULL) {
-        __assert("grpstadium.c", 0x6D3, "gp2");
-    }
+    HSD_ASSERT(0x6D3, gp2);
     gp2->u.display.xF8_0 = true;
 }
 
@@ -1274,14 +1270,9 @@ void fn_801D2FD0(Ground_GObj* gobj, int unused)
     wrapper->flag = true;
 
     vision_gobj = Ground_801C2BA4(PsType_Display);
-    if (vision_gobj == NULL) {
-        __assert("grpstadium.c", 0x6EA, "vision_gobj");
-    }
-
+    HSD_ASSERT(0x6EA, vision_gobj);
     gp2 = GET_GROUND(vision_gobj);
-    if (gp2 == NULL) {
-        __assert("grpstadium.c", 0x6EB, "gp2");
-    }
+    HSD_ASSERT(0x6EB, gp2);
     gp2->u.display.xF8_0 = true;
 }
 
@@ -1481,13 +1472,9 @@ void grStadium_801D3460(Ground_GObj* gobj)
     gp = GET_GROUND(gobj);
     gp2 = gp->u.display.xD4->user_data;
     sp48 = grPs_804DAF3C;
-    if (gp2->x18 == NULL) {
-        __assert("grpstadium.c", 0x780U, "gp2->win_static_p");
-    }
-    if (gp2->x1C == NULL) {
-        __assert("grpstadium.c", 0x781U, "gp2->win_dynamic_p");
-    }
-    HSD_SisLib_803A7664(gp2->x1C);
+    HSD_ASSERT(0x780, gp2->win_static_p);
+    HSD_ASSERT(0x781, gp2->win_dynamic_p);
+    HSD_SisLib_803A7664(gp2->win_dynamic_p);
     temp_r29 = GET_GROUND(Ground_801C2BA4(2));
 
     HSD_SisLib_804D1124[1][2].textures = &grPs_8049F040;
@@ -1508,14 +1495,14 @@ void grStadium_801D3460(Ground_GObj* gobj)
     }
 
     HSD_SisLib_803A660C(1, 5, 7);
-    HSD_SisLib_803A6368(gp2->x18, 5);
-    gp2->x1C->default_kerning = 0;
+    HSD_SisLib_803A6368(gp2->win_static_p, 5);
+    gp2->win_dynamic_p->default_kerning = 0;
     if (lbLang_IsSavedLanguageJP() != 0) {
-        temp_r3 = gp2->x1C;
+        temp_r3 = gp2->win_dynamic_p;
         temp_r3->x34.x = 0.3125f;
         temp_r3->x34.y = 0.625f;
     } else {
-        temp_r3_2 = gp2->x1C;
+        temp_r3_2 = gp2->win_dynamic_p;
         temp_r3_2->x34.x = 0.26f;
         temp_r3_2->x34.y = 0.625f;
     }
@@ -1524,8 +1511,8 @@ void grStadium_801D3460(Ground_GObj* gobj)
     var_r28 = 0;
     sp48.b = 0xFF;
     var_r27 = 0;
-    gp2->x1C->text_color = sp48;
-    gp2->x1C->default_alignment = 1;
+    gp2->win_dynamic_p->text_color = sp48;
+    gp2->win_dynamic_p->default_alignment = 1;
 
     for (i = 0; i < 4; i++) {
         if (Player_GetPlayerSlotType(i) != Gm_PKind_NA) {
@@ -1537,36 +1524,46 @@ void grStadium_801D3460(Ground_GObj* gobj)
         }
     }
 
-    gp2->x1C->default_fitting = 1;
+    gp2->win_dynamic_p->default_fitting = 1;
     if (var_r28 == 1) {
-        HSD_SisLib_803A6B98(gp2->x1C, grPs_804DAF30, grPs_804DAF4C, sp38[0]);
+        HSD_SisLib_803A6B98(gp2->win_dynamic_p, grPs_804DAF30, grPs_804DAF4C,
+                            sp38[0]);
     } else if (var_r28 == 2) {
-        HSD_SisLib_803A6B98(gp2->x1C, grPs_804DAF2C, grPs_804DAF4C, sp38[0]);
-        HSD_SisLib_803A6B98(gp2->x1C, grPs_804DAF50, grPs_804DAF4C, sp38[1]);
+        HSD_SisLib_803A6B98(gp2->win_dynamic_p, grPs_804DAF2C, grPs_804DAF4C,
+                            sp38[0]);
+        HSD_SisLib_803A6B98(gp2->win_dynamic_p, grPs_804DAF50, grPs_804DAF4C,
+                            sp38[1]);
     } else if (var_r28 == 3) {
-        HSD_SisLib_803A6B98(gp2->x1C, grPs_804DAF2C, grPs_804DAF54, sp38[0]);
-        HSD_SisLib_803A6B98(gp2->x1C, grPs_804DAF50, grPs_804DAF54, sp38[1]);
-        HSD_SisLib_803A6B98(gp2->x1C, grPs_804DAF30, grPs_804DAF38, sp38[2]);
+        HSD_SisLib_803A6B98(gp2->win_dynamic_p, grPs_804DAF2C, grPs_804DAF54,
+                            sp38[0]);
+        HSD_SisLib_803A6B98(gp2->win_dynamic_p, grPs_804DAF50, grPs_804DAF54,
+                            sp38[1]);
+        HSD_SisLib_803A6B98(gp2->win_dynamic_p, grPs_804DAF30, grPs_804DAF38,
+                            sp38[2]);
     } else if (var_r28 == 4) {
-        HSD_SisLib_803A6B98(gp2->x1C, grPs_804DAF2C, grPs_804DAF54, sp38[0]);
-        HSD_SisLib_803A6B98(gp2->x1C, grPs_804DAF50, grPs_804DAF54, sp38[1]);
-        HSD_SisLib_803A6B98(gp2->x1C, grPs_804DAF2C, grPs_804DAF38, sp38[2]);
-        HSD_SisLib_803A6B98(gp2->x1C, grPs_804DAF50, grPs_804DAF38, sp38[3]);
+        HSD_SisLib_803A6B98(gp2->win_dynamic_p, grPs_804DAF2C, grPs_804DAF54,
+                            sp38[0]);
+        HSD_SisLib_803A6B98(gp2->win_dynamic_p, grPs_804DAF50, grPs_804DAF54,
+                            sp38[1]);
+        HSD_SisLib_803A6B98(gp2->win_dynamic_p, grPs_804DAF2C, grPs_804DAF38,
+                            sp38[2]);
+        HSD_SisLib_803A6B98(gp2->win_dynamic_p, grPs_804DAF50, grPs_804DAF38,
+                            sp38[3]);
     }
 
-    gp2->x1C->default_fitting = 0;
+    gp2->win_dynamic_p->default_fitting = 0;
     rules = gm_8016AE50();
-    temp_r4 = gp2->x1C;
+    temp_r4 = gp2->win_dynamic_p;
     temp_r4->x34.x = 0.625f;
     temp_r4->x34.y = 0.625f;
 
     if ((rules->x10 == 0) | !rules->x0_6) {
-        HSD_SisLib_803A6B98(gp2->x1C, grPs_804DAF58, grPs_804DAF5C,
+        HSD_SisLib_803A6B98(gp2->win_dynamic_p, grPs_804DAF58, grPs_804DAF5C,
                             "00:00 00");
         return;
     }
     temp_r29_2 = gm_8016AEEC();
-    HSD_SisLib_803A6B98(gp2->x1C, grPs_804DAF58, grPs_804DAF5C,
+    HSD_SisLib_803A6B98(gp2->win_dynamic_p, grPs_804DAF58, grPs_804DAF5C,
                         "%02d:%02d %02d", temp_r29_2 / 60, temp_r29_2 % 60,
                         gm_8016AF0C());
 }
@@ -1590,33 +1587,29 @@ void grStadium_801D384C(Ground_GObj* gobj)
     gp2 = temp_r3->user_data;
     sp2C = grPs_804DAF60;
     temp_r29 = gm_801694A0(temp_r3);
-    if (gp2->x18 == NULL) {
-        __assert("grpstadium.c", 0x812, "gp2->win_static_p");
-    }
-    if (gp2->x1C == NULL) {
-        __assert("grpstadium.c", 0x813, "gp2->win_dynamic_p");
-    }
-    HSD_SisLib_803A7664(gp2->x1C);
+    HSD_ASSERT(0x812, gp2->win_static_p);
+    HSD_ASSERT(0x813, gp2->win_dynamic_p);
+    HSD_SisLib_803A7664(gp2->win_dynamic_p);
     if (lbLang_IsSavedLanguageJP()) {
-        HSD_SisLib_803A6368(gp2->x18, 0xD);
-        gp2->x1C->default_kerning = 0;
-        temp_r3_2 = gp2->x1C;
+        HSD_SisLib_803A6368(gp2->win_static_p, 0xD);
+        gp2->win_dynamic_p->default_kerning = 0;
+        temp_r3_2 = gp2->win_dynamic_p;
         temp_r3_2->x34.x = 1.5f;
         temp_r3_2->x34.y = 1.5f;
-        temp_r6 = gp2->x1C;
+        temp_r6 = gp2->win_dynamic_p;
         temp_r6->text_color = sp2C;
-        gp2->x1C->default_alignment = 1;
-        HSD_SisLib_803A6B98(gp2->x1C, grPs_804DAF58, grPs_804DAF68, "%d",
-                            temp_r29, temp_r6);
+        gp2->win_dynamic_p->default_alignment = 1;
+        HSD_SisLib_803A6B98(gp2->win_dynamic_p, grPs_804DAF58, grPs_804DAF68,
+                            "%d", temp_r29, temp_r6);
     } else {
-        HSD_SisLib_803A6368(gp2->x18, 0xD);
-        gp2->x1C->default_kerning = 0;
-        temp_r3_3 = gp2->x1C;
+        HSD_SisLib_803A6368(gp2->win_static_p, 0xD);
+        gp2->win_dynamic_p->default_kerning = 0;
+        temp_r3_3 = gp2->win_dynamic_p;
         temp_r3_3->x34.x = 1.5f;
         temp_r3_3->x34.y = 1.5f;
-        gp2->x1C->text_color = sp2C;
-        HSD_SisLib_803A6B98(gp2->x1C, grPs_804DAF6C, grPs_804DAF68, "%3d",
-                            temp_r29);
+        gp2->win_dynamic_p->text_color = sp2C;
+        HSD_SisLib_803A6B98(gp2->win_dynamic_p, grPs_804DAF6C, grPs_804DAF68,
+                            "%3d", temp_r29);
     }
 }
 
@@ -1640,37 +1633,33 @@ void grStadium_801D3A0C(Ground_GObj* gobj)
     HSD_Text* temp_r3;
     Ground* gp = GET_GROUND(gobj);
     HSD_GObj* tmp = gp->u.display.xD4;
-    TextWrapper* temp_r30 = HSD_GObjGetUserData(tmp);
+    TextWrapper* gp2 = HSD_GObjGetUserData(tmp);
 
     sp24 = grPs_804DAF70;
     PAD_STACK(0x10);
 
-    if (temp_r30->x18 == NULL) {
-        __assert("grpstadium.c", 0x848, "gp2->win_static_p");
-    }
-    if (temp_r30->x1C == NULL) {
-        __assert("grpstadium.c", 0x849, "gp2->win_dynamic_p");
-    }
-    HSD_SisLib_803A7664(temp_r30->x1C);
-    HSD_SisLib_803A6368(temp_r30->x18, 3);
-    temp_r30->x1C->default_kerning = 1;
+    HSD_ASSERT(0x848, gp2->win_static_p);
+    HSD_ASSERT(0x849, gp2->win_dynamic_p);
+    HSD_SisLib_803A7664(gp2->win_dynamic_p);
+    HSD_SisLib_803A6368(gp2->win_static_p, 3);
+    gp2->win_dynamic_p->default_kerning = 1;
     sp24.r = 0xC0;
     sp24.g = 0xC0;
     sp24.b = 0xFF;
-    temp_r30->x1C->text_color = sp24;
-    temp_r30->x1C->default_alignment = 1;
+    gp2->win_dynamic_p->text_color = sp24;
+    gp2->win_dynamic_p->default_alignment = 1;
     if (gp->u.display.xF0 == Gm_PKind_Human) {
-        temp_r3 = temp_r30->x1C;
+        temp_r3 = gp2->win_dynamic_p;
         temp_r3->x34.x = 0.625F;
         temp_r3->x34.y = 1.5F;
-        HSD_SisLib_803A6B98(temp_r30->x1C, grPs_804DAF58, grPs_804DAF74,
+        HSD_SisLib_803A6B98(gp2->win_dynamic_p, grPs_804DAF58, grPs_804DAF74,
                             "Ｐｌａｙｅｒ %d Ｄｅｆｅａｔｅｄ",
                             gp->u.display.xEE + 1);
     } else {
-        temp_r3 = temp_r30->x1C;
+        temp_r3 = gp2->win_dynamic_p;
         temp_r3->x34.x = 0.42F;
         temp_r3->x34.y = 1.2F;
-        HSD_SisLib_803A6B98(temp_r30->x1C, grPs_804DAF58, grPs_804DAF74,
+        HSD_SisLib_803A6B98(gp2->win_dynamic_p, grPs_804DAF58, grPs_804DAF74,
                             "Computer Player Defeated");
     }
 }
@@ -1731,20 +1720,16 @@ void grStadium_801D3BBC(Ground_GObj* arg0)
     s32 var_r30_2;
     s8 temp_r25;
     u8 temp_r26;
-    TextWrapper* temp_r31;
+    TextWrapper* gp2;
     Ground* gp;
     HSD_GObj* text_gobj;
 
     var_r30 = 0;
     gp = GET_GROUND(arg0);
     text_gobj = gp->u.display.xD4;
-    temp_r31 = text_gobj->user_data;
-    if (temp_r31->x18 == NULL) {
-        __assert("grpstadium.c", 0x884U, "gp2->win_static_p");
-    }
-    if (temp_r31->x1C == NULL) {
-        __assert("grpstadium.c", 0x885U, "gp2->win_dynamic_p");
-    }
+    gp2 = text_gobj->user_data;
+    HSD_ASSERT(0x884, gp2->win_static_p);
+    HSD_ASSERT(0x885, gp2->win_dynamic_p);
     var_r25 = 0;
     do {
         if ((Player_GetPlayerSlotType(var_r25) != Gm_PKind_NA) &&
@@ -1757,33 +1742,33 @@ void grStadium_801D3BBC(Ground_GObj* arg0)
         }
         var_r25 += 1;
     } while (var_r25 < 6);
-    HSD_SisLib_803A7664(temp_r31->x1C);
+    HSD_SisLib_803A7664(gp2->win_dynamic_p);
 
     if (var_r30 == 1) {
-        HSD_SisLib_803A6368(temp_r31->x18, 0xE);
+        HSD_SisLib_803A6368(gp2->win_static_p, 0xE);
     } else if (var_r30 == 2) {
-        HSD_SisLib_803A6368(temp_r31->x18, 0xF);
+        HSD_SisLib_803A6368(gp2->win_static_p, 0xF);
     } else if (var_r30 == 3) {
-        HSD_SisLib_803A6368(temp_r31->x18, 0x10);
+        HSD_SisLib_803A6368(gp2->win_static_p, 0x10);
     } else if (var_r30 == 4) {
-        HSD_SisLib_803A6368(temp_r31->x18, 0x11);
+        HSD_SisLib_803A6368(gp2->win_static_p, 0x11);
     } else {
-        HSD_SisLib_803A6368(temp_r31->x18, 3);
+        HSD_SisLib_803A6368(gp2->win_static_p, 3);
         return;
     }
 
-    temp_r31->x1C->default_kerning = 0;
-    temp_r31->x1C->default_alignment = 1;
-    temp_r31->x1C->default_fitting = 1;
+    gp2->win_dynamic_p->default_kerning = 0;
+    gp2->win_dynamic_p->default_alignment = 1;
+    gp2->win_dynamic_p->default_fitting = 1;
     if (lbLang_IsSavedLanguageJP() != 0) {
-        temp_r3_2 = temp_r31->x1C;
+        temp_r3_2 = gp2->win_dynamic_p;
         temp_r3_2->x34.x = 1.0f;
         temp_r3_2->x34.y = 1.0f;
     } else {
-        temp_r3_3 = temp_r31->x1C;
+        temp_r3_3 = gp2->win_dynamic_p;
         temp_r3_3->x34.x = 0.8f;
         temp_r3_3->x34.y = 1.0f;
-        temp_r31->x1C->default_kerning = 1;
+        gp2->win_dynamic_p->default_kerning = 1;
     }
     sp28[1] = *(GXColor*) &grPs_803B7F8C[0];
     sp28[2] = *(GXColor*) &grPs_803B7F8C[1];
@@ -1818,10 +1803,10 @@ void grStadium_801D3BBC(Ground_GObj* arg0)
                 }
                 sp28[0].g = (u8) (s32) var_f0_3;
                 sp28[0].b = 0xFF;
-                temp_r31->x1C->text_color = sp28[0];
+                gp2->win_dynamic_p->text_color = sp28[0];
                 character_name = gm_80160A60(var_r30_2);
                 if (character_name != NULL) {
-                    HSD_SisLib_803A6B98(temp_r31->x1C, grPs_804DAF58,
+                    HSD_SisLib_803A6B98(gp2->win_dynamic_p, grPs_804DAF58,
                                         (f32) (temp_r29 + var_r28), "%s",
                                         character_name);
                 }
@@ -1839,28 +1824,24 @@ void grStadium_801D3F40(Ground_GObj* arg0, int arg1)
     TextWrapper* gp2 = text_gobj->user_data;
     PAD_STACK(8);
 
-    if (gp2->x18 == NULL) {
-        __assert("grpstadium.c", 0x8E8, "gp2->win_static_p");
-    }
-    if (gp2->x1C == 0U) {
-        __assert("grpstadium.c", 0x8E9, "gp2->win_dynamic_p");
-    }
-    HSD_SisLib_803A7664(gp2->x1C);
+    HSD_ASSERT(0x8E8, gp2->win_static_p);
+    HSD_ASSERT(0x8E9, gp2->win_dynamic_p);
+    HSD_SisLib_803A7664(gp2->win_dynamic_p);
     switch (arg1) {
     case 10:
-        HSD_SisLib_803A6368(gp2->x18, 0x12);
+        HSD_SisLib_803A6368(gp2->win_static_p, 0x12);
         return;
     case 11:
-        HSD_SisLib_803A6368(gp2->x18, 0x13);
+        HSD_SisLib_803A6368(gp2->win_static_p, 0x13);
         return;
     case 12:
-        HSD_SisLib_803A6368(gp2->x18, 0x14);
+        HSD_SisLib_803A6368(gp2->win_static_p, 0x14);
         return;
     case 13:
-        HSD_SisLib_803A6368(gp2->x18, 0x15);
+        HSD_SisLib_803A6368(gp2->win_static_p, 0x15);
         return;
     default:
-        HSD_SisLib_803A6368(gp2->x18, 3);
+        HSD_SisLib_803A6368(gp2->win_static_p, 3);
         return;
     }
 }
@@ -1907,14 +1888,10 @@ void grStadium_801D4194(Ground_GObj* arg0)
     TextWrapper* gp2 = text_gobj->user_data;
     PAD_STACK(4);
 
-    if (gp2->x18 == NULL) {
-        __assert("grpstadium.c", 0x950, "gp2->win_static_p");
-    }
-    if (gp2->x1C == NULL) {
-        __assert("grpstadium.c", 0x951, "gp2->win_dynamic_p");
-    }
-    HSD_SisLib_803A7664(gp2->x1C);
-    HSD_SisLib_803A6368(gp2->x18, 3);
+    HSD_ASSERT(0x950, gp2->win_static_p);
+    HSD_ASSERT(0x951, gp2->win_dynamic_p);
+    HSD_SisLib_803A7664(gp2->win_dynamic_p);
+    HSD_SisLib_803A6368(gp2->win_static_p, 3);
 }
 
 void fn_801D4220(int un0, int un1, UNK_T un2, bool cancelflag)
@@ -1922,38 +1899,28 @@ void fn_801D4220(int un0, int un1, UNK_T un2, bool cancelflag)
     Ground_GObj* map_gobj;
     Ground* gp;
 
-    if (cancelflag) {
-        __assert("grpstadium.c", 0x969, "!cancelflag");
-    }
+    HSD_ASSERT(0x969, !cancelflag);
     map_gobj = Ground_801C2BA4(2);
-    if (map_gobj == NULL) {
-        __assert("grpstadium.c", 0x96A, "map_gobj");
-    }
+    HSD_ASSERT(0x96A, map_gobj);
     gp = GET_GROUND(map_gobj);
-    if (gp == NULL) {
-        __assert("grpstadium.c", 0x96B, "gp");
-    }
+    HSD_ASSERT(0x96B, gp);
     gp->u.stadium.xC4_b1 = false;
 }
 
 bool grStadium_801D42B8(void)
 {
     HSD_GObj* map_gobj;
-    Ground* temp_r3_2;
+    Ground* gp;
 
     map_gobj = Ground_801C2BA4(2);
-    if (map_gobj == NULL) {
-        __assert("grpstadium.c", 0x978, "map_gobj");
-    }
-    temp_r3_2 = grStadium_801D4354(map_gobj);
-    if (temp_r3_2 == 0) {
-        __assert("grpstadium.c", 0x979, "gp");
-    }
-    if (temp_r3_2->u.stadium.xC4_b1) {
+    HSD_ASSERT(0x978, map_gobj);
+    gp = grStadium_801D4354(map_gobj);
+    HSD_ASSERT(0x979, gp);
+    if (gp->u.stadium.xC4_b1) {
         return false;
     }
-    temp_r3_2->u.stadium.xD0 = grDatFiles_801C6478(temp_r3_2->u.stadium.xCC,
-                                                   temp_r3_2->u.stadium.xC8);
+    gp->u.stadium.xD0 =
+        grDatFiles_801C6478(gp->u.stadium.xCC, gp->u.stadium.xC8);
     return true;
 }
 
@@ -2071,7 +2038,7 @@ void grStadium_801D4548(Ground_GObj* gobj)
     int temp_r0_3;
     HSD_GObj* temp_r3;
     int temp_r3_4;
-    HSD_GObj* temp_r3_5;
+    HSD_GObj* map_gobj;
     HSD_GObj* temp_r3_6;
     int temp_r3_8;
     int temp_r4_4;
@@ -2112,7 +2079,7 @@ void grStadium_801D4548(Ground_GObj* gobj)
     s32 var_r3_8;
     s32 var_r3_9;
     s32 var_r4;
-    Ground* temp_r27;
+    Ground* gp;
     HSD_JObj* temp_r27_4;
     Ground* temp_r3_2;
     Ground* temp_r3_9;
@@ -2166,22 +2133,17 @@ void grStadium_801D4548(Ground_GObj* gobj)
             } else if (var_r4 == 6) { // rock
                 var_r29 = 3;
             } else {
-                __assert("grpstadium.c", 0xA44, "0");
+                HSD_ASSERT(0xA44, 0);
             }
             grAnime_801C65B0(temp_r31->u.stadium.xD0);
             temp_r31->u.stadium.xD0 = NULL;
-            temp_r3_5 = Ground_801C2BA4(2);
-            if (temp_r3_5 == NULL) {
-                __assert("grpstadium.c", 0x99A, "map_gobj");
-            }
-            temp_r27 = GET_GROUND(temp_r3_5);
-            if (temp_r27 == NULL) {
-                __assert("grpstadium.c", 0x99B, "gp");
-            }
-            temp_r27->u.stadium.xC4_b1 = true;
-            lbFile_80016580(datfiles[var_r29], (u32) temp_r27->u.stadium.xCC,
-                            (void*) &temp_r27->u.stadium.xC8, fn_801D4220,
-                            NULL);
+            map_gobj = Ground_801C2BA4(2);
+            HSD_ASSERT(0x99A, map_gobj);
+            gp = GET_GROUND(map_gobj);
+            HSD_ASSERT(0x99B, gp);
+            gp->u.stadium.xC4_b1 = true;
+            lbFile_80016580(datfiles[var_r29], (u32) gp->u.stadium.xCC,
+                            (void*) &gp->u.stadium.xC8, fn_801D4220, NULL);
             temp_r31->u.stadium.xDC = 1;
             return;
         }
@@ -2210,7 +2172,7 @@ void grStadium_801D4548(Ground_GObj* gobj)
             } else if (var_r29 == 5) {
                 var_r29 = 2;
             } else {
-                __assert("grpstadium.c", 0xA44, "0");
+                HSD_ASSERT(0xA44, 0);
             }
 
             grStadium_801D2528(temp_r3_6, var_r29, 0);
