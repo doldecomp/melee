@@ -1075,6 +1075,7 @@ void ftCo_Damage_SetMv8FromKbThreshold(Fighter* fp)
 static inline void inlineD0(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
+    u8 _[12] = { 0 };
     if (fp->mv.co.damage.x8 != 0) {
         --fp->mv.co.damage.x8;
         if (fp->mv.co.damage.x8 == 0) {
@@ -1184,6 +1185,7 @@ void ftCo_80090184(Fighter_GObj* gobj)
 void ftCo_DamageFlyRoll_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
+    PAD_STACK(8);
     inlineD0(gobj);
     ftCo_8008F744(gobj);
     if (!fp->x221C_b6) {
