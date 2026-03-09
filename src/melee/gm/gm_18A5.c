@@ -31,6 +31,10 @@
 #include <melee/mn/mnstagesel.h>
 #include <melee/pl/player.h>
 
+extern char* lbl_804DA6B4;
+extern char* lbl_804DA6B8;
+extern char* lbl_804DA6BC;
+extern char* lbl_804DA6C0;
 extern char* lbl_804DA6C4;
 extern char* lbl_804DA6C8;
 extern char* lbl_804DA6CC;
@@ -813,7 +817,80 @@ void fn_8018EC7C(void)
 }
 #pragma pop
 
-/// #fn_8018ECA8
+void fn_8018ECA8(s32 char_id, s32 name_type, s32 jobj_idx1, f32 pos_x,
+                 f32 pos_y, s32 jobj_idx2)
+{
+    char* hmn_texts[2];
+    char* cpu_texts[2];
+    TmData* tm;
+    s32 is_us;
+    s32 num;
+
+    tm = gm_8018F634();
+
+    hmn_texts[0] = lbl_804DA6B4;
+    cpu_texts[0] = lbl_804DA6BC;
+    hmn_texts[1] = lbl_804DA6B8;
+    cpu_texts[1] = lbl_804DA6C0;
+
+    if (name_type == 0xFF) {
+        HSD_SisLib_803A6B98(tm->x518[jobj_idx1], pos_x, pos_y,
+                            GetNameText((u8) char_id));
+        return;
+    }
+
+    if (char_id >= 0x320) {
+        if (char_id < 0x384) {
+            num = char_id - 0x320;
+            if (num >= 10) {
+                is_us = !!lbLang_IsSavedLanguageUS();
+                hmn_texts[is_us][7] = (s8) (num / 10 + 0x30);
+                is_us = !!lbLang_IsSavedLanguageUS();
+                hmn_texts[is_us][8] = (s8) (num % 10 + 0x30);
+                is_us = !!lbLang_IsSavedLanguageUS();
+                hmn_texts[is_us][9] = 0;
+            } else {
+                is_us = !!lbLang_IsSavedLanguageUS();
+                hmn_texts[is_us][7] = (s8) (char_id - 0x2F0);
+                is_us = !!lbLang_IsSavedLanguageUS();
+                hmn_texts[is_us][8] = 0;
+            }
+            is_us = !!lbLang_IsSavedLanguageUS();
+            HSD_SisLib_803A6B98(tm->x518[jobj_idx1], pos_x, pos_y,
+                                hmn_texts[is_us]);
+            return;
+        }
+        if (char_id >= 0x3E7) {
+            return;
+        }
+        num = char_id - 0x384;
+        if (num >= 10) {
+            is_us = !!lbLang_IsSavedLanguageUS();
+            cpu_texts[is_us][7] = (s8) (num / 10 + 0x30);
+            is_us = !!lbLang_IsSavedLanguageUS();
+            cpu_texts[is_us][8] = (s8) (num % 10 + 0x30);
+            is_us = !!lbLang_IsSavedLanguageUS();
+            cpu_texts[is_us][9] = 0;
+        } else {
+            is_us = !!lbLang_IsSavedLanguageUS();
+            cpu_texts[is_us][7] = (s8) (char_id - 0x354);
+            is_us = !!lbLang_IsSavedLanguageUS();
+            cpu_texts[is_us][8] = 0;
+        }
+        is_us = !!lbLang_IsSavedLanguageUS();
+        HSD_SisLib_803A6B98(tm->x518[jobj_idx2], pos_x, pos_y,
+                            cpu_texts[is_us]);
+        return;
+    }
+
+    if (name_type == 0) {
+        HSD_SisLib_803A6B98(tm->x518[jobj_idx1], pos_x, pos_y,
+                            GetNameText((u8) char_id));
+    } else if (name_type == 1) {
+        HSD_SisLib_803A6B98(tm->x518[jobj_idx2], pos_x, pos_y,
+                            GetNameText((u8) char_id));
+    }
+}
 
 /// Formats a tournament slot display name into a destination buffer.
 void fn_8018F00C(char* dest, s32 slot_id)
@@ -1152,7 +1229,6 @@ int fn_8018F808(void)
 }
 #pragma pop
 
-/// @todo Currently 78.75% match - needs register allocation fix
 void fn_8018F888(void)
 {
     s32 idx;
@@ -1909,6 +1985,7 @@ void fn_801913BC(HSD_GObj* gobj)
     HSD_JObj* jobj;
     s32 cur;
     u8* counter_ptr;
+    PAD_STACK(0x60);
 
     tm = gm_8018F634();
     idx = fn_8018F62C(gobj);
