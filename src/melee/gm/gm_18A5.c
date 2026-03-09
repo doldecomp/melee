@@ -1789,7 +1789,163 @@ void gm_801905F0(StartMeleeData* arg0)
     fn_8019EF08(&sp18);
 }
 
-/// #fn_80190ABC
+struct Lbl804799B8_t {
+    u8 x0;
+    u8 x1;
+    u8 x2;
+    u8 x3;
+    u8 x4;
+    u8 x5;
+    u8 x6;
+    u8 x7;
+    u8 x8;
+    u8 x9;
+    u8 xA;
+    u8 xB;
+    u16 xC_counter;
+    u8 xE;
+    u8 xF;
+    u8 pad2[0x10];
+};
+static struct Lbl804799B8_t lbl_804799B8;
+
+extern u8 lbl_803D9F80[];
+extern f32 lbl_804DA6EC; // 537.0f
+extern f32 lbl_804DA6F0; // 149.0f
+extern f32 lbl_804DA6F4; // 409.0f
+extern f32 lbl_804DA6F8; // 47.0f
+extern f32 lbl_804DA6FC; // 143.0f
+extern f32 lbl_804DA700; // 183.0f
+extern f32 lbl_804DA704; // 48.6f
+extern f32 lbl_804DA708; // 514.0f
+extern f32 lbl_804DA70C; // 87.0f
+
+void fn_80190ABC(int mode)
+{
+    u8* table = lbl_803D9F80;
+    TmData* tm;
+    s32 cur_opt;
+    s32 opt;
+    s32 i;
+
+    tm = gm_8018F634();
+    cur_opt = tm->cur_option;
+    opt = MIN(cur_opt, 6);
+
+    if (opt == 6 && mode != 0 && cur_opt < 9) {
+        return;
+    }
+
+    switch (mode) {
+    case 0:
+    {
+        s32 flag = !!gm_804771C4.match_type;
+        HSD_SisLib_803A6368(tm->x4E0,
+            *(u16*) (table + opt * 4 + flag * 2));
+        break;
+    }
+    case 1:
+    {
+        s32 flag = !!gm_804771C4.match_type;
+        HSD_SisLib_803A6368(tm->x4E8[opt],
+            *(u16*) (table + opt * 4 + flag * 2 + 0x1C));
+        break;
+    }
+    case 2:
+    {
+        s32 display_val;
+        if (opt == 2 && gm_804771C4.match_type == 0) {
+            s32 val = (&tm->match_type)[opt];
+            switch (val) {
+            case 16:
+            case 17:
+                display_val = val + 0xE1;
+                break;
+            case 21:
+            case 22:
+                display_val = val + 0xDE;
+                break;
+            case 30:
+            case 31:
+                display_val = val + 0xD7;
+                break;
+            default:
+                display_val = lbl_803D9D20.x0[val] +
+                    *(u16*) (table + opt * 2 + 0x34);
+                break;
+            }
+        } else {
+            display_val = *(u16*) (table + opt * 2 + 0x34) +
+                (&tm->match_type)[opt];
+        }
+        HSD_SisLib_803A6368(tm->x500[opt], display_val);
+        break;
+    }
+    case 3:
+    {
+        s32 display_val = lbl_803D9D20.x0[tm->entrants] + 0xB0 -
+            tm->hmn_cpu_count;
+        HSD_SisLib_803A6368(tm->x4E4, display_val);
+        break;
+    }
+    case 4:
+    {
+        HSD_SisLib_803A7664(tm->x518[0]);
+        {
+            f32 f_col_mul = lbl_804DA6F0;
+            f32 f_col_add = lbl_804DA6EC;
+            f32 f_row_mul = lbl_804DA6F8;
+            f32 f_row_add = lbl_804DA6F4;
+            for (i = 0; i < 0x24; i++) {
+                s32 col = i % 4;
+                s32 row = i / 4;
+                f32 pos_x = f_col_mul * (f32) col + f_col_add;
+                f32 pos_y = f_row_mul * (f32) row + f_row_add;
+                fn_8018ECA8(i + lbl_804799B8.x6 * 4, 0xFF, 0, pos_x,
+                            pos_y, 0);
+            }
+        }
+        break;
+    }
+    case 5:
+    {
+        HSD_SisLib_803A7664(tm->x518[1]);
+        HSD_SisLib_803A7664(tm->x518[2]);
+        {
+            f32 f_mul = lbl_804DA704;
+            f32 f_add = lbl_804DA700;
+            for (i = 0; i < 12; i++) {
+                s32 idx = lbl_804799B8.x3 + i;
+                if (idx > lbl_804799B8.x4) {
+                    continue;
+                }
+                {
+                    f32 pos_y = f_mul * (f32) i + f_add;
+                    fn_8018ECA8(tm->x37[idx].x9, tm->x37[idx].x0, 1,
+                                lbl_804DA6FC, pos_y, 2);
+                    idx = lbl_804799B8.x3 + i;
+                    fn_8018ECA8(tm->x37[idx].x9, tm->x37[idx].x0, 1,
+                                lbl_804DA6FC, pos_y, 2);
+                }
+            }
+        }
+        break;
+    }
+    case 6:
+    {
+        s32 idx;
+        HSD_SisLib_803A7664(tm->x524[0]);
+        HSD_SisLib_803A7664(tm->x524[1]);
+        idx = lbl_804799B8.x2 + lbl_804799B8.x3;
+        fn_8018ECA8(tm->x37[idx].x9, tm->x37[idx].x0, 3, lbl_804DA708,
+                    lbl_804DA70C, 4);
+        idx = lbl_804799B8.x2 + lbl_804799B8.x3;
+        fn_8018ECA8(tm->x37[idx].x9, tm->x37[idx].x0, 3, lbl_804DA708,
+                    lbl_804DA70C, 4);
+        break;
+    }
+    }
+}
 
 #pragma push
 #pragma dont_inline on
@@ -1830,25 +1986,6 @@ void gm_80190EA4(void)
     }
 }
 #pragma pop
-
-static struct {
-    u8 x0;
-    u8 x1;
-    u8 x2;
-    u8 x3;
-    u8 x4;
-    u8 x5;
-    u8 x6;
-    u8 x7;
-    u8 x8;
-    u8 x9;
-    u8 xA;
-    u8 xB;
-    u16 xC_counter;
-    u8 xE;
-    u8 xF;
-    u8 pad2[0x10];
-} lbl_804799B8;
 
 /// Initializes the time menu state when entering the time selection screen.
 void gm_80190FE4(int arg0)
