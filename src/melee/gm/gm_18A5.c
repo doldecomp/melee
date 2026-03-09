@@ -2974,7 +2974,93 @@ void fn_801935B8(void)
 }
 #pragma pop
 
-/// #fn_801937C4
+void fn_801937C4(s32* arg0, u32 arg1, u32 arg2)
+{
+    u8* table;
+    s32 idx;
+    s32* ptr;
+    s32 val;
+    u8* entry;
+
+    table = lbl_803D9F80;
+
+    if (arg1 & 0x40001) {
+        lbAudioAx_80024030(2);
+        lbl_804799B8.x7 = 5;
+        idx = arg0[0];
+        entry = table + (idx << 1) + (gm_804771C4.match_type != 0);
+        ptr = arg0 + idx;
+        val = *++ptr;
+        if (val > (s32) entry[0x40]) {
+            *ptr = val - 1;
+        } else {
+            *ptr = (s32) entry[0x4C];
+        }
+    } else if (arg1 & 0x80002) {
+        lbAudioAx_80024030(2);
+        lbl_804799B8.x8 = 5;
+        idx = arg0[0];
+        entry = table + (idx << 1) + (gm_804771C4.match_type != 0);
+        ptr = arg0 + idx;
+        val = *++ptr;
+        if (val < (s32) entry[0x4C]) {
+            *ptr = val + 1;
+        } else {
+            *ptr = (s32) entry[0x40];
+        }
+    }
+
+    if (arg1 != 0) {
+        if ((arg1 | arg2) & 0x300) {
+            fn_80190ABC(0);
+            fn_80190ABC(2);
+        }
+        fn_80190ABC(3);
+    }
+
+    if (arg2 & 0x100) {
+        s32 j;
+        s32 remaining;
+        u8* tp;
+        s32* dp;
+
+        lbAudioAx_80024030(1);
+        idx = arg0[0];
+        arg0[0] = idx + 1;
+        idx = arg0[0];
+        tp = table + (idx << 1);
+        dp = arg0 + idx;
+        remaining = 6 - idx;
+        if (idx < 6) {
+            for (j = 0; j < remaining; j++) {
+                *++dp = tp[(gm_804771C4.match_type != 0) + 0x40];
+                tp += 2;
+            }
+        }
+        if (gm_804771C4.match_type == 0) {
+            if (fn_8018F808() < 2) {
+                idx = arg0[0];
+                arg0[idx + 1] = 2;
+            } else {
+                s32 count = fn_8018F808();
+                idx = arg0[0];
+                arg0[idx + 1] = count;
+            }
+        }
+    } else if (arg2 & 0x200) {
+        lbAudioAx_80024030(0);
+        gm_801A42F8(1);
+        gm_801A4B60();
+    }
+
+    if (arg2 != 0) {
+        if ((arg1 | arg2) & 0x300) {
+            fn_80190ABC(0);
+            fn_80190ABC(2);
+        }
+        fn_80190ABC(3);
+    }
+}
 
 /// #fn_80193B58
 
