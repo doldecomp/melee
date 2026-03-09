@@ -1486,6 +1486,8 @@ u32 fn_8018F674(int arg0)
 }
 #pragma dont_inline off
 
+#pragma push
+#pragma auto_inline off
 u32 fn_8018F6A8(int arg0)
 {
     if (arg0 >= 4) {
@@ -1493,6 +1495,7 @@ u32 fn_8018F6A8(int arg0)
     }
     return gm_801A3680((u8) arg0);
 }
+#pragma pop
 
 #pragma push
 #pragma auto_inline off
@@ -7103,8 +7106,7 @@ void fn_8019A86C(s32* arg0, u32 arg1, u32 arg2)
         *(u32*) d8 += 1;
         if ((arg2 & 0x600) || (*(u32*) d8 >= 0x12CU)) {
             lbAudioAx_80024030(0);
-            mn_8022F138(0x19, 0x1C);
-            mn_8022F138(0x12, 0x15);
+            fn_8018EC48();
             tm->x2D = 0;
             tm->cur_option = 0x1F;
         }
@@ -7185,8 +7187,8 @@ void fn_8019A86C(s32* arg0, u32 arg1, u32 arg2)
             if (cond3 != 0 && var_r28 != 0) {
                 lbAudioAx_80024030(0);
                 HSD_SisLib_803A5E70();
-                mn_8022F138(0x19U, 0x1CU);
-                mn_8022F138(0x12U, 0x15U);
+                mn_8022F138(0x19, 0x1C);
+                mn_8022F138(0x12, 0x15);
                 mn_8022F268();
                 gm_801A4B60();
                 gm_801A42F8(1);
@@ -7241,8 +7243,7 @@ void fn_8019A86C(s32* arg0, u32 arg1, u32 arg2)
                     }
 
                     if (active_count <= 1) {
-                        mn_8022F138(0x19, 0x1C);
-                        mn_8022F138(0x12, 0x15);
+                        fn_8018EC48();
                         tm->x2D = 0;
                         tm->cur_option = 0x1F;
                         return;
