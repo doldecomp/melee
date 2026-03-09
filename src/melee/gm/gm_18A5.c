@@ -3177,6 +3177,8 @@ void fn_80192758(HSD_GObj* gobj)
 
 extern s32 lbl_804D665C;
 
+#pragma push
+#pragma inline_depth(0)
 s32 fn_80192938(void)
 {
     TmData* tm;
@@ -3273,6 +3275,7 @@ s32 fn_80192938(void)
     tm->x33 = 0xFF;
     return (s32) handicap;
 }
+#pragma pop
 
 void fn_80192BB0(void)
 {
