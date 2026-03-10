@@ -36,7 +36,7 @@
 /* 239A24 */ void mnName_80239A24(HSD_GObj* gobj);
 /* 239EBC */ void mnName_80239EBC(HSD_JObj* jobj, f32 y);
 /* 239F5C */ void mnName_80239F5C(HSD_JObj* jobj, f32 x);
-/* 239FFC */ UNK_RET mnName_80239FFC(UNK_PARAMS);
+/* 239FFC */ void mnName_80239FFC(HSD_GObj* gobj);
 /* 23A058 */ void mnName_8023A058(HSD_GObj* gobj);
 /* 23A0BC */ UNK_RET fn_8023A0BC(UNK_PARAMS);
 /* 23A290 */ UNK_RET mnName_8023A290(UNK_PARAMS);
