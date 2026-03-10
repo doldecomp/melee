@@ -1189,7 +1189,7 @@ s32 grZebes_801DA528(HSD_GObj* arg0, void* arg1, s32 arg2, s32 arg3)
             break;
         case 2: {
             f32 r = HSD_Randf();
-            st->x02_timer = (s16)((grZe_804D6990->x50) + r * (grZe_804D6990->x54 - (grZe_804D6990->x50)));
+            st->x02_timer = (s16) (r * (grZe_804D6990->x54 - grZe_804D6990->x50) + grZe_804D6990->x50);
             break;
         }
         case 3:
@@ -1240,41 +1240,23 @@ s32 grZebes_801DA528(HSD_GObj* arg0, void* arg1, s32 arg2, s32 arg3)
                 st->x08_offset = -max_off;
             }
         }
-        {
-            f32 abs_off = st->x08_offset;
-            if (abs_off < 0.0f) {
-                abs_off = -abs_off;
-            }
-            if (abs_off < grZe_804D6990->x44) {
-                f32 abs_vel = st->x0C_velocity;
-                if (abs_vel < 0.0f) {
-                    abs_vel = -abs_vel;
-                }
-                if (abs_vel < grZe_804D6990->x40) {
-                    st->x08_offset = 0.0f;
-                    st->x0C_velocity = 0.0f;
-                }
+        if (ABS(st->x08_offset) < grZe_804D6990->x44) {
+            if (ABS(st->x0C_velocity) < grZe_804D6990->x40) {
+                st->x08_offset = 0.0f;
+                st->x0C_velocity = 0.0f;
             }
         }
+        HSD_JObjSetTranslateX(st->x14_jobj1, st->x04_base_x + st->x08_offset);
+        HSD_JObjSetTranslateX(st->x18_jobj2, st->x04_base_x + st->x08_offset);
         {
-            f32 new_x = st->x04_base_x + st->x08_offset;
-            HSD_JObjSetTranslateX(st->x14_jobj1, new_x);
-        }
-        {
-            f32 new_x = st->x04_base_x + st->x08_offset;
-            HSD_JObjSetTranslateX(st->x18_jobj2, new_x);
-        }
-        {
-            f32 dmg = st->x10_damage;
-            f32 thr = grZe_804D6990->x4C;
             f32 frame;
-            if (dmg > thr) {
+            if (st->x10_damage > grZe_804D6990->x4C) {
                 frame = 30.0f;
                 st->x01_next = 1;
                 Ground_801C53EC(0x61A86);
                 ftLib_80086C9C(1, 0x5A);
             } else {
-                frame = (f32) ((f64) (dmg * thr) / 30.0);
+                frame = (f32) ((f64) (st->x10_damage * grZe_804D6990->x4C) / 30.0);
             }
             grAnime_801C7B24(arg0, st->x20_anim_idx, 1, frame);
         }
