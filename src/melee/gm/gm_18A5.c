@@ -6163,8 +6163,6 @@ void fn_80198EBC(void)
     HSD_JObj* jobj;
     HSD_JObj* jobj2;
     HSD_JObj* c;
-    u8* ptr;
-    u8* ptr8;
     s32 i, j;
     f32 anim_rate;
     f32 pos;
@@ -6195,8 +6193,6 @@ void fn_80198EBC(void)
     fn_80198BA0();
 
     hide_z = lbl_804DA828;
-    ptr = (u8*) &lbl_804799D8;
-    ptr8 = ptr;
     f_848 = lbl_804DA848;
     f_850 = lbl_804DA850;
     f_84C = lbl_804DA84C;
@@ -6220,49 +6216,22 @@ void fn_80198EBC(void)
         } else {
             anim_rate = (f32) i;
             td->x4B8[i].x0 = 0;
-            ptr[0x44] = 6;
-            ptr8[0x2D] = 4;
+            lbl_804799D8.x44[i] = 6;
+            lbl_804799D8.x2A[i].state = 4;
         }
 
         gobj = fn_8019035C(0, lbl_804D6674->models[12], 0, 0x1A, 2, 1,
                            fn_80196FFC, anim_rate);
         jobj = GET_JOBJ(gobj);
         fn_8018FBD8(gobj, i);
-
-        if (jobj == NULL) {
-            c = NULL;
-        } else {
-            c = jobj->child;
-        }
+        c = HSD_JObjGetChild(jobj);
         HSD_MObjRemoveAnimByFlags(c->u.dobj->mobj, 4);
-
-        if (jobj == NULL) {
-            c = NULL;
-        } else {
-            c = jobj->child;
-        }
-        if (c == NULL) {
-            c = NULL;
-        } else {
-            c = c->next;
-        }
+        c = HSD_JObjGetChild(jobj);
+        c = HSD_JObjGetNext(c);
         HSD_MObjRemoveAnimByFlags(c->u.dobj->mobj, 4);
-
-        if (jobj == NULL) {
-            c = NULL;
-        } else {
-            c = jobj->child;
-        }
-        if (c == NULL) {
-            c = NULL;
-        } else {
-            c = c->next;
-        }
-        if (c == NULL) {
-            c = NULL;
-        } else {
-            c = c->next;
-        }
+        c = HSD_JObjGetChild(jobj);
+        c = HSD_JObjGetNext(c);
+        c = HSD_JObjGetNext(c);
         HSD_MObjRemoveAnimByFlags(c->u.dobj->mobj, 4);
 
         if (td->x30 == 4) {
@@ -6283,11 +6252,7 @@ void fn_80198EBC(void)
         jobj = GET_JOBJ(gobj);
         fn_8018FBD8(gobj, i);
 
-        if (jobj == NULL) {
-            c = NULL;
-        } else {
-            c = jobj->child;
-        }
+        c = HSD_JObjGetChild(jobj);
         jobj2 = c;
 
         HSD_JObjSetTranslateZ(c, hide_z);
@@ -6296,31 +6261,19 @@ void fn_80198EBC(void)
             HSD_JObjSetTranslateZ(c, show_z);
 
             for (j = 1; j <= 12; j++) {
-                if (jobj2 == NULL) {
-                    jobj2 = NULL;
-                } else {
-                    jobj2 = jobj2->next;
-                }
+                jobj2 = HSD_JObjGetNext(jobj2);
                 HSD_JObjSetTranslateZ(jobj2, hide_z);
             }
         } else {
             for (j = 1; j <= 12; j++) {
-                if (jobj2 == NULL) {
-                    jobj2 = NULL;
-                } else {
-                    jobj2 = jobj2->next;
-                }
+                jobj2 = HSD_JObjGetNext(jobj2);
                 HSD_JObjSetTranslateZ(jobj2, hide_z);
 
                 if (lbl_803DA0D0.icon_model_map[td->x4B8[i].x1] == j) {
                     HSD_JObjSetTranslateZ(jobj2, show_z);
 
                     for (j++; j <= 12; j++) {
-                        if (jobj2 == NULL) {
-                            jobj2 = NULL;
-                        } else {
-                            jobj2 = jobj2->next;
-                        }
+                        jobj2 = HSD_JObjGetNext(jobj2);
                         HSD_JObjSetTranslateZ(jobj2, hide_z);
                     }
                     break;
@@ -6342,16 +6295,8 @@ void fn_80198EBC(void)
         }
         fn_8018FDC4(jobj, pos - f_864, lbl_804DA868, lbl_804DA86C);
 
-        if (jobj == NULL) {
-            c = NULL;
-        } else {
-            c = jobj->child;
-        }
-        if (c == NULL) {
-            jobj = NULL;
-        } else {
-            jobj = c->next;
-        }
+        c = HSD_JObjGetChild(jobj);
+        jobj = HSD_JObjGetNext(c);
         fn_8019044C(jobj, fn_8018F71C(td->x4B8[i].x1, td->x4B8[i].x3));
 
         gobj = fn_8019035C(0, lbl_804D6674->models[9], 0, 0x1A, 2, 1,
@@ -6393,8 +6338,6 @@ void fn_80198EBC(void)
                            fn_801983E4, anim_rate);
         fn_8018FBD8(gobj, i);
 
-        ptr++;
-        ptr8 += 6;
     }
 
     fn_8019035C(0, lbl_804D6674->models[5], 0, 0x1A, 2, 1, fn_801976D4,
