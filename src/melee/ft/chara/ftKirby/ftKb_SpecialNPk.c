@@ -1202,4 +1202,20 @@ void ftKb_SsSpecialAirN_Coll(Fighter_GObj* gobj)
     }
 }
 
-/// #ftKb_SpecialNFx_800FDC00
+void ftKb_SpecialNFx_800FDC00(Fighter_GObj* gobj, Vec3* vec)
+{
+    if (gobj != NULL) {
+        Fighter* fp = GET_FIGHTER(gobj);
+        if (fp != NULL) {
+            Vec3 offset;
+            offset.x = 0.0f;
+            offset.y = 1.45f;
+            offset.z = 5.016f;
+            lb_8000B1CC(fp->parts[44].joint, &offset, vec);
+            return;
+        }
+    }
+    vec->z = 0.0f;
+    vec->y = 0.0f;
+    vec->x = 0.0f;
+}
