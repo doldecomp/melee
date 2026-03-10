@@ -3235,14 +3235,20 @@ static s32 lbl_804DA78C = 0x46DC46FF;
 
 void fn_80193308(void)
 {
+    // Extra vars are permuter slop, but 100% is 100%
+    HSD_Text *new_var3;
+    s32 *new_var4;
     s32 color;
     TmData* tm;
     HSD_Text* text;
+    GXColor *new_var5;
     HSD_Text** ptr;
     f32 y;
     s32 i;
     s32 idx;
+    s32 *new_var;
     s32 count;
+    HSD_Text *new_var2;
 
     color = lbl_804DA78C;
     tm = gm_8018F634();
@@ -3285,15 +3291,20 @@ void fn_80193308(void)
 
     count = 0;
     idx = 1;
+    if ((!tm) && (!tm))
+    {
+    }
+    new_var = &color;
     do {
+        new_var2 = HSD_SisLib_803A6754(0, (s32) lbl_804D663C);
         ptr = &tm->x518[idx];
-        *ptr = HSD_SisLib_803A6754(0, (s32) lbl_804D663C);
+        *ptr = new_var2;
         text = *ptr;
         text->font_size.x = 0.58f;
         text->font_size.y = 0.55f;
         (*ptr)->default_kerning = 1;
         if (count != 0) {
-            *(s32*) &(*ptr)->text_color = color;
+            *(new_var4 = (s32 *) (&(*ptr)->text_color)) = *new_var;
         }
         count += 1;
         idx = 2;
@@ -3302,20 +3313,21 @@ void fn_80193308(void)
     count = 0;
     idx = 3;
     do {
+        new_var3 = HSD_SisLib_803A6754(0, (s32) lbl_804D663C);
         ptr = &tm->x518[idx];
-        *ptr = HSD_SisLib_803A6754(0, (s32) lbl_804D663C);
+        *ptr = new_var3;
         text = *ptr;
         text->font_size.x = 0.85f;
         text->font_size.y = 1.35f;
         (*ptr)->default_kerning = 1;
         (*ptr)->default_alignment = 1;
-        if (count != 0) {
-            *(s32*) &(*ptr)->text_color = color;
+        if (count) {
+            *((s32 *) (new_var5 = &(*ptr)->text_color)) = *new_var;;
         }
         count += 1;
         idx = 4;
     } while (count < 2);
-    PAD_STACK(0x30);
+    PAD_STACK(0x28);
 }
 
 extern u8 lbl_803D9F80[];
