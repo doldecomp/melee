@@ -2245,7 +2245,7 @@ void fn_80191154(HSD_GObj* gobj)
     (*xE_ptr)++;
 }
 
-/// @todo Currently 78.85% match - needs register allocation fix
+/// @todo Currently 79.85% match - needs register allocation fix
 void fn_80191240(HSD_GObj* gobj)
 {
     TmData* tm;
@@ -6975,31 +6975,27 @@ void fn_8019A86C(s32* arg0, u32 arg1, u32 arg2)
         u8* pd = d8;
         u8 pnum = 0;
 
-        if ((s32) n_players > 0) {
-            u8 cnt = n_players;
-            do {
-                if (sel[0] == 1) {
-                    var_r26 += 1;
-                } else {
-                    u8 err = (u8) HSD_PadMasterStatus[pnum].err;
-                    if ((s8) err != 0) {
-                        var_r28 = 1;
-                    }
+        for (i = 0; i < (s32) n_players; i++) {
+            if (sel[0] == 1) {
+                var_r26 += 1;
+            } else {
+                u8 err = (u8) HSD_PadMasterStatus[pnum].err;
+                if ((s8) err != 0) {
+                    var_r28 = 1;
+                }
+                {
+                    u8 state = pd[0x2D];
+                    if (((state == 2 && (u8) pd[0x2B] >= 0x3CU) ||
+                         (state == 4 && (u8) pd[0x2B] == 0x82)) &&
+                        (s8) err == 0)
                     {
-                        u8 state = pd[0x2D];
-                        if (((state == 2 && (u8) pd[0x2B] >= 0x3CU) ||
-                             (state == 4 && (u8) pd[0x2B] == 0x82)) &&
-                            (s8) err == 0)
-                        {
-                            var_r26 += 1;
-                        }
+                        var_r26 += 1;
                     }
                 }
-                sel += 0xA;
-                pd += 6;
-                pnum += 1;
-                cnt -= 1;
-            } while (cnt != 0);
+            }
+            sel += 0xA;
+            pd += 6;
+            pnum += 1;
         }
 
         {
@@ -7134,16 +7130,13 @@ void fn_8019A86C(s32* arg0, u32 arg1, u32 arg2)
                             u8 np = gm_8018F634()->x30;
                             u8* cp = d8;
                             s32 count4 = 0;
-                            u8 cnt2 = np;
+                            s32 j;
 
-                            if ((s32) np > 0) {
-                                do {
-                                    if (cp[0x2D] == 4) {
-                                        count4 += 1;
-                                    }
-                                    cp += 6;
-                                    cnt2 -= 1;
-                                } while (cnt2 != 0);
+                            for (j = 0; j < (s32) np; j++) {
+                                if (cp[0x2D] == 4) {
+                                    count4 += 1;
+                                }
+                                cp += 6;
                             }
                             if (count4 < (s32)(tm->x30 - 1)) {
                                 anim[0x44] = 6;
@@ -7151,13 +7144,10 @@ void fn_8019A86C(s32* arg0, u32 arg1, u32 arg2)
                             }
                         } else {
                             u8 pstate = pdata[0x2D];
-                            switch (pstate) {
-                            case 4:
+                            if (pstate == 4) {
                                 pdata[0x2D] = 5;
-                                break;
-                            case 0:
-                            case 3:
-                            case 5:
+                            } else if (pstate == 0 || pstate == 3 ||
+                                       pstate == 5)
                             {
                                 u16 val = *(u16*)(sel2 + 6);
                                 if (val <= 0x78U) {
@@ -7166,8 +7156,6 @@ void fn_8019A86C(s32* arg0, u32 arg1, u32 arg2)
                                     gm_80167858(i, 0x78, 0xB, 0x14);
                                 }
                                 pdata[0x2D] = 1;
-                                break;
-                            }
                             }
                         }
                     } else if (buttons & 0x400) {
@@ -7176,36 +7164,28 @@ void fn_8019A86C(s32* arg0, u32 arg1, u32 arg2)
                             anim[0x44] = 6;
                         } else {
                             u8 pstate2 = pdata[0x2D];
-                            switch (pstate2) {
-                            case 0:
-                            case 3:
-                            case 5:
+                            if (pstate2 == 0 || pstate2 == 3 ||
+                                pstate2 == 5)
                             {
                                 u8 np2 = gm_8018F634()->x30;
                                 u8* cp2 = d8;
                                 s32 count5 = 0;
-                                u8 cnt3 = np2;
+                                s32 k;
 
-                                if ((s32) np2 > 0) {
-                                    do {
-                                        if (cp2[0x2D] == 4) {
-                                            count5 += 1;
-                                        }
-                                        cp2 += 6;
-                                        cnt3 -= 1;
-                                    } while (cnt3 != 0);
+                                for (k = 0; k < (s32) np2; k++) {
+                                    if (cp2[0x2D] == 4) {
+                                        count5 += 1;
+                                    }
+                                    cp2 += 6;
                                 }
                                 if (count5 < (s32)(tm->x30 - 1)) {
                                     lbAudioAx_80024030(0);
                                     anim[0x44] = 7;
                                 }
-                                break;
-                            }
-                            case 2:
+                            } else if (pstate2 == 2) {
                                 lbAudioAx_80024030(0);
                                 pdata[0x2D] = 3;
                                 pdata[0x2E] = 0;
-                                break;
                             }
                         }
                     } else if ((buttons & 0x10000) || (buttons & 8)) {
