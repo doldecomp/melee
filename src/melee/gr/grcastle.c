@@ -263,7 +263,16 @@ void grCastle_801CD8A8(Ground_GObj* gobj)
     }
 }
 
-/// #grCastle_801CD960
+void grCastle_801CD960(Ground_GObj* gobj)
+{
+    Ground* gp = gobj->user_data;
+    s32 i = 0;
+
+    do {
+        grLib_801C9B6C((u8*) gp + 0xE0 + i * 0x14);
+        i++;
+    } while (i < 12);
+}
 
 void grCastle_801CD9B4(Ground_GObj* gobj)
 {
