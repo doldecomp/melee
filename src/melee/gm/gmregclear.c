@@ -48,7 +48,9 @@ lbl_804706D8_t lbl_804706D8[12];
 struct lbl_80472D28_t {
     /*   +0 */ char pad_0[0x104];
     /* +104 */ int x104;
-    /* +108 */ char pad_108[0xE];
+    /* +108 */ char pad_108[0x2];
+    /* +10A */ s16 x10A;
+    /* +10C */ char pad_10C[0xA];
     /* +116 */ u8 x116;
 };
 
@@ -1034,7 +1036,19 @@ int fn_8017F008(void)
 
 /// #fn_8017F09C
 
-/// #fn_8017F14C
+s32 fn_8017F14C(void* arg0)
+{
+    struct lbl_80472D28_t* data = &lbl_80472D28;
+    if (gm_8016AE38()->x24C8.x4_7) {
+        s32 val = *(s32*) ((u8*) arg0 + 0x98);
+        s32 ret = val;
+        if (val > 9999) {
+            ret = 9999;
+        }
+        return ret * data->x10A;
+    }
+    return 0;
+}
 
 /// #fn_8017F1B8
 
