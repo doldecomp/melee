@@ -906,50 +906,44 @@ extern f32 lbl_804DA6A0; // 0.5f
 
 void fn_8018E46C(HSD_GObj* gobj, int unused)
 {
-    void* data;
+    BracketEntry* data;
     s32 temp;
     s32 r30;
-    u8* data_u8;
-    s32* data_s32;
-    f32* data_f32;
 
     data = gobj->user_data;
-    data_u8 = (u8*) data;
-    data_s32 = (s32*) data;
-    data_f32 = (f32*) data;
 
-    if (data_u8[2] != 0) {
-        temp = -(data_s32[0x10 / 4] + data_s32[0x18 / 4]);
+    if (data->x2 != 0) {
+        temp = -(data->x10 + data->x18);
     } else {
-        temp = -data_s32[0x10 / 4];
+        temp = -data->x10;
     }
     r30 = temp;
     HSD_FogSet(NULL);
     hsd_80391A04(1.0F, 1.0F, 1);
-    switch (data_u8[3]) {
+    switch (data->x3) {
     case 0:
         fn_8018C8D4(data,
-                    data_s32[0xC / 4] - (s32) (lbl_804DA6A0 * data_f32[0x1C / 4]),
-                    -data_s32[0x10 / 4], data_s32[0x14 / 4],
-                    -data_s32[0x18 / 4], r30, data_s32[0xC / 4], lbl_804DA6A0);
+                    data->xC - (s32) (lbl_804DA6A0 * data->x1C),
+                    -data->x10, data->x14,
+                    -data->x18, r30, data->xC, lbl_804DA6A0);
         break;
     case 1:
         fn_8018D50C(data,
-                    data_s32[0xC / 4] - (s32) (lbl_804DA6A0 * data_f32[0x1C / 4]),
-                    -data_s32[0x10 / 4], data_s32[0x14 / 4],
-                    -data_s32[0x18 / 4], r30, data_s32[0xC / 4], lbl_804DA6A0);
+                    data->xC - (s32) (lbl_804DA6A0 * data->x1C),
+                    -data->x10, data->x14,
+                    -data->x18, r30, data->xC, lbl_804DA6A0);
         break;
     case 2:
         fn_8018DC18(data,
-                    data_s32[0xC / 4] - (s32) (lbl_804DA6A0 * data_f32[0x1C / 4]),
-                    -data_s32[0x10 / 4], data_s32[0x14 / 4],
-                    -data_s32[0x18 / 4], r30, data_s32[0xC / 4], lbl_804DA6A0);
+                    data->xC - (s32) (lbl_804DA6A0 * data->x1C),
+                    -data->x10, data->x14,
+                    -data->x18, r30, data->xC, lbl_804DA6A0);
         break;
     case 3:
         fn_8018DF68(data,
-                    data_s32[0xC / 4] - (s32) (lbl_804DA6A0 * data_f32[0x1C / 4]),
-                    -data_s32[0x10 / 4], data_s32[0x14 / 4],
-                    -data_s32[0x18 / 4], r30, data_s32[0xC / 4], lbl_804DA6A0);
+                    data->xC - (s32) (lbl_804DA6A0 * data->x1C),
+                    -data->x10, data->x14,
+                    -data->x18, r30, data->xC, lbl_804DA6A0);
         break;
     }
 }
