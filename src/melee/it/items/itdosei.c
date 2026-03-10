@@ -43,7 +43,23 @@ bool itDosei_UnkMotion0_Coll(Item_GObj* gobj)
     return false;
 }
 
-/// #fn_80281734
+void fn_80281734(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    if (ip->facing_dir == 1.0f) {
+        if (ip->xDD4_itemVar.dosei.xDF8.x < 0.0f) {
+            it_80281C6C(gobj);
+            return;
+        }
+        it_802817A0(gobj);
+        return;
+    }
+    if (ip->xDD4_itemVar.dosei.xDF8.x > 0.0f) {
+        it_80281C6C(gobj);
+        return;
+    }
+    it_802817A0(gobj);
+}
 
 /// #it_802817A0
 
