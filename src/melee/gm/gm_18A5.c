@@ -1602,13 +1602,15 @@ void fn_8018FA24(void)
 {
     s32 player_count;
     s32 player_idx;
+    u8* tmdata;
     u8* dst;
-    struct BracketEntry* ptr;
+    u8* ptr;
     s32 i;
     s32 char_kind;
 
-    PAD_STACK(12);
+    PAD_STACK(8);
 
+    tmdata = (u8*) &gm_804771C4 + 0xc;
 
     for (i = 0; i < 64; i++) {
         if (lbl_80473AB8[i].x1 != 0) {
@@ -1616,18 +1618,18 @@ void fn_8018FA24(void)
         }
     }
 
-    // TODO: remove this pointer hackery
-    dst = (u8*) &gm_804771C4;
-    ptr = &lbl_80473AB8[i];
+    
+    dst = tmdata;
+    ptr = (u8*) lbl_80473AB8 + i * (s32) 0xDC;
     player_count = 0;
 
     for (player_idx = 0; player_idx < 4; player_idx++) {
-        dst[0x4B6] = ptr->x30;
-        dst[0x4B7] = ptr->x50;
-        *(u16*) (dst + 0x4BE) = *(u16*) (dst + 0x40 + ptr->x50 * 0x12);
-        dst[0x4BC] = ptr->x51;
-        dst[0x4BD] = ptr->x52;
-        dst[0x4B9] = ptr->x4D;
+        dst[0x4B6] = ptr[0x30];
+        dst[0x4B7] = ptr[0x50];
+        *(u16*) (dst + 0x4BE) = *(u16*) (tmdata + 0x40 + ptr[0x50] * 0x12);
+        dst[0x4BC] = ptr[0x51];
+        dst[0x4BD] = ptr[0x52];
+        dst[0x4B9] = ptr[0x4D];
         char_kind = dst[0x4B9];
         if (char_kind >= 0x13) {
             if (char_kind == 0x1D) {
@@ -1637,20 +1639,20 @@ void fn_8018FA24(void)
             }
         }
         Player_SetPlayerCharacter(player_idx, char_kind);
-        dst[0x4B8] = ptr->x4E;
+        dst[0x4B8] = ptr[0x4E];
         char_kind = dst[0x4B8];
         if ((u32) char_kind != 3) {
             player_count += 1;
         }
         Player_SetSlottype(player_idx, char_kind);
-        dst[0x4BB] = ptr->x4F;
+        dst[0x4BB] = ptr[0x4F];
         Player_SetCostumeId(player_idx, dst[0x4BB]);
-        dst[0x4BC] = ptr->x51;
+        dst[0x4BC] = ptr[0x51];
         ptr += 0x2C;
         dst += 0xA;
     }
 
-    dst[0x30] = player_count;
+    tmdata[0x30] = player_count;
 }
 
 #pragma push
