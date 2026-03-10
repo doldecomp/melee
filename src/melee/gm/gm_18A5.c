@@ -673,8 +673,7 @@ void fn_8018D50C(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
         }
     }
 
-    switch (tm->entrants) {
-    case 1:
+    if (tm->entrants == 1) {
         if (data[0x5E] != 0) {
             bottom = arg2 + arg4;
             c8 = c0;
@@ -687,8 +686,7 @@ void fn_8018D50C(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
             }
         }
         return;
-
-    case 3:
+    } else if (tm->entrants == 3) {
         if (data[0x32] != 0) {
             bottom = arg2 + arg4;
             c10 = c0;
@@ -710,9 +708,7 @@ void fn_8018D50C(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
                               (GXColor*) &c13);
             }
         }
-        break;
-
-    case 5:
+    } else if (tm->entrants == 5) {
         if (data[0x5E] != 0) {
             bottom = arg2 + arg4;
             c14 = c0;
@@ -724,9 +720,7 @@ void fn_8018D50C(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
                               (GXColor*) &c15);
             }
         }
-        break;
-
-    case 7:
+    } else if (tm->entrants == 7) {
         if (data[0x5E] != 0) {
             if (data[0x2] == 0) {
                 bottom = arg2 + arg4;
@@ -750,7 +744,6 @@ void fn_8018D50C(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
                 }
             }
         }
-        break;
     }
 }
 
