@@ -33,6 +33,23 @@ void lbArchive_InitializeDAT(HSD_Archive* archive, void* data, size_t length)
 }
 #pragma pop
 
+void lbArchive_LoadSections(HSD_Archive* archive, void** symbol, ...)
+{
+    const char* symbol_name;
+    va_list symbols;
+
+    va_start(symbols, symbol);
+    for (; symbol != NULL; symbol = va_arg(symbols, void**)) {
+        symbol_name = va_arg(symbols, const char*);
+        *symbol = NULL;
+        *symbol = HSD_ArchiveGetPublicAddress(archive, symbol_name);
+        if (*symbol == NULL) {
+            OSReport("Cannot find symbol %s.\n", symbol_name);
+        }
+    }
+    va_end(symbols);
+}
+
 static inline HSD_Archive* lbArchive_LoadArchive_inline(const char* filename)
 {
     HSD_Archive* archive;
