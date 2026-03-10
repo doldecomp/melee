@@ -434,7 +434,23 @@ bool grCastle_801CF300(Ground_GObj* gobj)
 
 void grCastle_801CF74C(Ground_GObj* gobj) {}
 
-/// #grCastle_801CF750
+void grCastle_801CF750(Ground* gp, s32 arg1, CollData* cd, s32 arg3,
+                       mpLib_GroundEnum arg4, f32 arg5)
+{
+    s32 idx;
+    PAD_STACK(16);
+
+    if (arg1 == 4) {
+        idx = 0;
+    } else {
+        idx = 1;
+    }
+
+    if ((s32) cd->x34_flags.b1234 == 1) {
+        gp = (Ground*) ((u8*) gp + idx * 16);
+        *(f32*) ((u8*) gp + 0xD0) += (f32) arg3;
+    }
+}
 
 /// #grCastle_801CF7B0
 void grCastle_801CF7B0(Ground_GObj* gobj)
