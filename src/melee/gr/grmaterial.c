@@ -17,7 +17,7 @@
 #include <baselib/jobj.h>
 
 /* 1C897C */ static void grMaterial_801C897C(HSD_JObj* jobj, u32 flags);
-/* 1C8D44 */ static Item_GObj*
+/* 1C8D44 */ Item_GObj*
 grMaterial_801C8D44(int arg0, int arg1, Ground* arg2, Vec3* arg3, int arg4,
                     void (*arg5)(Item_GObj*, Ground*),
                     void (*arg6)(Item_GObj*, Ground*, Vec3*, HSD_GObj*, f32),
