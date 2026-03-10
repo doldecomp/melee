@@ -324,7 +324,12 @@ StageData grMc_803E33DC = {
 
 static struct {
     int x0;
+    void* x4;
+    DynamicsDesc* x8;
+    DynamicsDesc* xC;
 }* grMc_804D69D0;
+
+static s32 grMc_804D69D4;
 
 static f32 light_ref_br = 40000.0f;
 static f32 light_ref_dist = 0.99f;
@@ -686,6 +691,20 @@ void grMuteCity_801F2AB0(s32 arg0, HSD_JObj* arg1)
 
 /// #fn_801F2B58
 
-/// #grMuteCity_801F2BBC
+DynamicsDesc* grMuteCity_801F2BBC(enum_t arg0)
+{
+    if (grMc_804D69D4 == 1) {
+        if (arg0 == 0x31) {
+            return grMc_804D69D0->x8;
+        }
+        if (arg0 == 0x35) {
+            return grMc_804D69D0->x8;
+        }
+        if ((u32) (arg0 - 0x32) <= 2) {
+            return grMc_804D69D0->xC;
+        }
+    }
+    return NULL;
+}
 
 /// #grMuteCity_801F2C10
