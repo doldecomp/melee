@@ -2081,7 +2081,41 @@ void ftKb_SpecialAirNLoop_IASA(Fighter_GObj* gobj)
 
 /// #ftKb_SpecialAirNCaptureWait_IASA
 
-/// #ftKb_EatWalk_IASA
+void ftKb_EatWalk_IASA(Fighter_GObj* gobj)
+{
+    ftCo_JumpInput jump_input;
+    s32 var;
+    PAD_STACK(8);
+
+    jump_input = ftCo_Jump_GetInput(gobj);
+    if (jump_input != JumpInput_None) {
+        Fighter* fp = GET_FIGHTER(gobj);
+        fp->mv.kb.specialhi.x4 = jump_input;
+        fp->mv.kb.specialhi.x0 = 0;
+        Fighter_ChangeMotionState(gobj, ftKb_MS_EatJump1,
+                                  Ft_MF_KeepGfx | Ft_MF_SkipModel |
+                                      Ft_MF_SkipMatAnim,
+                                  0, 1, 0, NULL);
+        ftKb_SpecialN_800F9070(gobj);
+        ftAnim_8006EBA4(gobj);
+        ftCommon_8007E2F4(fp, 0x1FF);
+        var = 1;
+    } else {
+        var = 0;
+    }
+    if (var == 0) {
+        if (ft_8008A1FC(gobj)) {
+            Fighter* fp = GET_FIGHTER(gobj);
+            Fighter_ChangeMotionState(gobj, ftKb_MS_EatWait,
+                                      Ft_MF_SkipModel, 0, 1, 0, NULL);
+            ftKb_SpecialN_800F9070(gobj);
+            ftAnim_8006EBA4(gobj);
+            ftCommon_8007E2F4(fp, 0x1FF);
+            return;
+        }
+        ftWalkCommon_800DFEC8(gobj, fn_800F64C8);
+    }
+}
 
 void ftKb_EatJump1_IASA(Fighter_GObj* gobj)
 {
