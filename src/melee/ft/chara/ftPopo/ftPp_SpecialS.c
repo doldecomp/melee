@@ -1121,7 +1121,16 @@ void ftPp_SpecialHiThrow_1_Phys(Fighter_GObj* gobj)
     ft_80084F3C(gobj);
 }
 
-/// #ftPp_SpecialAirHiThrow_1_Phys
+void ftPp_SpecialAirHiThrow_1_Phys(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftIceClimberAttributes* da = fp->dat_attrs;
+    PAD_STACK(8);
+    ftCommon_Fall(fp, da->xA8, da->xAC);
+    if (fp->self_vel.y < 0.0f) {
+        ftCommon_8007CEF4(fp);
+    }
+}
 
 void ftPp_SpecialHiThrow_1_Coll(Fighter_GObj* gobj)
 {
