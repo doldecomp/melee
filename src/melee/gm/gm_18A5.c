@@ -1380,7 +1380,7 @@ int fn_8018F410(void)
     int* temp_r30;
     int* temp_r29;
 
-    temp_r30 = &lbl_803D9F0C.x8;
+    temp_r30 = &lbl_803D9F0C.x0;
     temp_r29 = &lbl_803D9F0C.x4;
     do {
         temp_r3 = HSD_Randi(0x19);
@@ -5142,36 +5142,38 @@ s32 fn_801967E0(s32 arg0)
     return rand;
 }
 
-extern u8 lbl_803DA0D0[];
+struct lbl_803DA0D0_t {
+    /* 0x00 */ u8 icon_model_map[0x18];
+    /* 0x18 */ u8 pad_0x18[0x1E - 0x18];
+    /* 0x1E */ u8 rank_thresholds[32][6];
+    /* 0xDE */ u8 pad_0xDE[0xE0 - 0xDE];
+    /* 0xE0 */ f32 bounce_y[41];
+}; /* size = 0x184 */
+STATIC_ASSERT(sizeof(struct lbl_803DA0D0_t) == 0x184);
 
-/// @todo Currently 95.92% match - needs minor register allocation fix
+extern struct lbl_803DA0D0_t lbl_803DA0D0;
+
 s32 fn_80196CF8(void)
 {
     TmData* tmdata;
-    s32 offset;
-    u8* ptr;
     s32 x24;
     s32 result;
+    s32 entrants;
     s32 i;
 
     tmdata = gm_8018F634();
-    offset = tmdata->entrants * 6;
-    ptr = lbl_803DA0D0;
+    entrants = tmdata->entrants;
     x24 = tmdata->x24;
-    ptr += offset;
 
     result = 0;
-    if (x24 > (s32) ptr[0x23]) {
+    if (x24 > (s32) lbl_803DA0D0.rank_thresholds[entrants][5]) {
         return 6;
     }
 
-    ptr += 5;
-
     for (i = 5; i >= 0; i--) {
-        if (x24 <= (s32) ptr[0x1E]) {
+        if (x24 <= (s32) lbl_803DA0D0.rank_thresholds[entrants][i]) {
             result = i;
         }
-        --ptr;
     }
 
     return result;
@@ -5596,7 +5598,7 @@ void fn_801977AC(HSD_GObj* gobj)
         counter = *counter_ptr;
 
         HSD_JObjSetTranslateY(jobj,
-            *(f32*) (lbl_803DA0D0 + counter * 4 + 0xE0));
+            lbl_803DA0D0.bounce_y[counter]);
     } else {
         lbl_804799D8.x1D[pnum] = 0;
     }
@@ -6189,7 +6191,6 @@ void fn_80198EBC(void)
     HSD_JObj* jobj;
     HSD_JObj* jobj2;
     HSD_JObj* c;
-    u8* table;
     u8* ptr;
     u8* ptr8;
     s32 i, j;
@@ -6201,7 +6202,6 @@ void fn_80198EBC(void)
     f32 f_7E4, f_7E0, f_7E8, f_7EC;
     f32 f_864;
 
-    table = lbl_803DA0D0;
     td = gm_8018F634();
     gm_8018F634();
 
@@ -6320,7 +6320,7 @@ void fn_80198EBC(void)
 
         HSD_JObjSetTranslateZ(c, hide_z);
 
-        if (table[td->x4B8[i].x1] == 0) {
+        if (lbl_803DA0D0.icon_model_map[td->x4B8[i].x1] == 0) {
             HSD_JObjSetTranslateZ(c, show_z);
 
             for (j = 1; j <= 12; j++) {
@@ -6340,7 +6340,7 @@ void fn_80198EBC(void)
                 }
                 HSD_JObjSetTranslateZ(jobj2, hide_z);
 
-                if (table[td->x4B8[i].x1] == j) {
+                if (lbl_803DA0D0.icon_model_map[td->x4B8[i].x1] == j) {
                     HSD_JObjSetTranslateZ(jobj2, show_z);
 
                     for (j++; j <= 12; j++) {
@@ -6461,8 +6461,7 @@ void fn_80198EBC(void)
 
         for (j = 0; j <= 40; j++) {
             fn_8019044C(j16, (f32) (j + 10));
-            *(f32*) &table[0xE0] = HSD_JObjGetTranslationY(j16);
-            table += 4;
+            lbl_803DA0D0.bounce_y[j] = HSD_JObjGetTranslationY(j16);
         }
     }
 
@@ -6581,7 +6580,7 @@ void fn_80199AF0(void)
 
     HSD_JObjSetTranslateZ(jobj, 10000.0f);
 
-    if (lbl_803DA0D0[td1->x4B8[slot].x1] == 0) {
+    if (lbl_803DA0D0.icon_model_map[td1->x4B8[slot].x1] == 0) {
         HSD_JObjSetTranslateZ(jobj, 0.0f);
         for (i = 1; i <= 12; i++) {
             if (jobj == NULL) {
@@ -6602,7 +6601,7 @@ void fn_80199AF0(void)
             jobj = next;
             HSD_JObjSetTranslateZ(next, 10000.0f);
 
-            if ((s32) lbl_803DA0D0[td1->x4B8[slot].x1] == i) {
+            if ((s32) lbl_803DA0D0.icon_model_map[td1->x4B8[slot].x1] == i) {
                 HSD_JObjSetTranslateZ(next, 0.0f);
                 for (slot = i + 1; slot <= 12; slot++) {
                     if (jobj == NULL) {
@@ -7441,29 +7440,27 @@ void fn_8019B458(s32* arg0)
 
     td = gm_8018F634();
     x24 = td->x24;
-    ptr = lbl_803DA0D0;
-    ptr += td->entrants * 6;
+    ptr = lbl_803DA0D0.rank_thresholds[td->entrants];
 
-    if (x24 > (s32) ptr[0x23]) {
+    if (x24 > (s32) ptr[5]) {
         rank = 6;
     } else {
-        ptr += 5;
-        if (x24 <= (s32) ptr[0x1E]) {
+        if (x24 <= (s32) ptr[5]) {
             rank = 5;
         }
-        if (x24 <= (s32) (--ptr)[0x1E]) {
+        if (x24 <= (s32) ptr[4]) {
             rank = 4;
         }
-        if (x24 <= (s32) (--ptr)[0x1E]) {
+        if (x24 <= (s32) ptr[3]) {
             rank = 3;
         }
-        if (x24 <= (s32) (--ptr)[0x1E]) {
+        if (x24 <= (s32) ptr[2]) {
             rank = 2;
         }
-        if (x24 <= (s32) (--ptr)[0x1E]) {
+        if (x24 <= (s32) ptr[1]) {
             rank = 1;
         }
-        if (x24 <= (s32) (--ptr)[0x1E]) {
+        if (x24 <= (s32) ptr[0]) {
             rank = 0;
         }
     }
