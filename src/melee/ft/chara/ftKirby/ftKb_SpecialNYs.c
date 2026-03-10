@@ -5,6 +5,7 @@
 
 #include "ef/eflib.h"
 #include "ef/efsync.h"
+#include "ft/chara/ftCommon/ftCo_Bury.h"
 #include "ft/chara/ftCommon/ftCo_Lift.h"
 #include "ft/chara/ftCommon/ftCo_Throw.h"
 #include "ft/fighter.h"
@@ -636,7 +637,18 @@ void fn_8010B148(Fighter_GObj* gobj)
     ftCommon_8007D5D4(GET_FIGHTER(gobj));
 }
 
-/// #fn_8010B16C
+#pragma dont_inline on
+void fn_8010B16C(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    fp->grab_timer -=
+        fp->dmg.x1838_percentTemp * ftKb_SpecialNYs_80109380(gobj);
+    if ((s32) fp->dmg.x18CC == 3 && ftCo_800C0C88(fp->dmg.x18D0) != 0) {
+        fp->grab_timer = 0.0f;
+    }
+    fp->x1828 = 4;
+}
+#pragma dont_inline reset
 
 void fn_8010B1D4(Fighter_GObj* gobj)
 {
