@@ -861,7 +861,34 @@ return_error:
     return -1;
 }
 
-/// #ftKb_SpecialNSs_800FCC6C
+bool ftKb_SpecialNSs_800FCC6C(Fighter_GObj* gobj)
+{
+    Fighter* fp;
+
+    if (!gobj) {
+        goto end_true;
+    }
+
+    fp = GET_FIGHTER(gobj);
+
+    switch (fp->motion_id) {
+    case 0x197:
+    case 0x198:
+    case 0x199:
+    case 0x19A:
+    case 0x19B:
+    case 0x19C:
+        if (fp->x2070.x2071_b6) {
+            return true;
+        }
+        return false;
+    default:
+        return true;
+    }
+
+end_true:
+    return true;
+}
 
 bool ftKb_SpecialNSs_800FCCBC(Fighter_GObj* gobj)
 {
