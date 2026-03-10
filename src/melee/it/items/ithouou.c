@@ -10,6 +10,7 @@
 #include "it/it_2725.h"
 #include "it/itCommonItems.h"
 #include "it/item.h"
+#include "mp/mplib.h"
 
 /// #it_2725_Logic18_Spawned
 
@@ -276,7 +277,18 @@ bool it_802D2F3C(Item_GObj* gobj)
     return false;
 }
 
-/// #it_802D2F70
+void it_802D2F70(Item_GObj* gobj)
+{
+    Vec3 sp10;
+    Item* ip = GET_ITEM(gobj);
+
+    if (mpLib_80054ED8(ip->xDD4_itemVar.pokemon.timer)) {
+        mpGetSpeed(ip->xDD4_itemVar.pokemon.timer, &ip->pos, &sp10);
+        ip->pos.x += sp10.x;
+        ip->pos.y += sp10.y;
+        ip->pos.z += sp10.z;
+    }
+}
 
 bool it_802D2FE8(Item_GObj* gobj)
 {
