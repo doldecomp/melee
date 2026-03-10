@@ -11,6 +11,8 @@
 
 #include <baselib/random.h>
 
+extern char un_804D5AC0[];
+
 /// #un_803181BC
 
 void un_803182D4_OnFrame(void)
@@ -93,7 +95,60 @@ void* un_8031B9DC(s32 id)
 
 /// #un_8031BB34
 
-/// #un_8031BB94
+char* un_8031BB94(s8 idx)
+{
+    char* table[] = {
+        un_804D5AC0,
+        "ToyDspMycharaCmA_Top_matanim_joint",
+        "ToyDspMycharaCmB_Top_matanim_joint",
+        "ToyDspMycharaCmC_Top_matanim_joint",
+        "ToyDspMycharaCmD_Top_matanim_joint",
+        "ToyDspMycharaCmE_Top_matanim_joint",
+        "ToyDspMycharaR1A_Top_matanim_joint",
+        "ToyDspMycharaR1B_Top_matanim_joint",
+        "ToyDspMycharaR1C_Top_matanim_joint",
+        "ToyDspMycharaR1D_Top_matanim_joint",
+        "ToyDspMycharaR1E_Top_matanim_joint",
+        "ToyDspMycharaR2A_Top_matanim_joint",
+        "ToyDspMycharaR2B_Top_matanim_joint",
+        "ToyDspMycharaR2C_Top_matanim_joint",
+        "ToyDspMycharaR2D_Top_matanim_joint",
+        "ToyDspMycharaR2E_Top_matanim_joint",
+        "ToyDspMapA_Top_matanim_joint",
+        "ToyDspMapB_Top_matanim_joint",
+        "ToyDspMapC_Top_matanim_joint",
+        "ToyDspMapD_Top_matanim_joint",
+        "ToyDspMapE_Top_matanim_joint",
+        "ToyDspFgseriesA_Top_matanim_joint",
+        "ToyDspFgseriesB_Top_matanim_joint",
+        "ToyDspFgseriesC_Top_matanim_joint",
+        "ToyDspFgseriesD_Top_matanim_joint",
+        "ToyDspFgseriesE_Top_matanim_joint",
+        "ToyDspFgetcA_Top_matanim_joint",
+        "ToyDspFgetcB_Top_matanim_joint",
+        "ToyDspFgetcC_Top_matanim_joint",
+        "ToyDspFgetcD_Top_matanim_joint",
+        "ToyDspFgetcE_Top_matanim_joint",
+        "ToyDspPokemonA_Top_matanim_joint",
+        "ToyDspPokemonB_Top_matanim_joint",
+        "ToyDspPokemonC_Top_matanim_joint",
+        "ToyDspPokemonD_Top_matanim_joint",
+        "ToyDspPokemonE_Top_matanim_joint",
+        "ToyDspItemA_Top_matanim_joint",
+        "ToyDspItemB_Top_matanim_joint",
+        "ToyDspItemC_Top_matanim_joint",
+        "ToyDspItemD_Top_matanim_joint",
+        "ToyDspItemE_Top_matanim_joint",
+        un_804D5AC0,
+        un_804D5AC0,
+    };
+
+    if (idx == -1) {
+        idx = 0;
+    }
+
+    return table[idx];
+}
 
 /// #un_8031BBF4
 
