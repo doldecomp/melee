@@ -1575,10 +1575,7 @@ int fn_8018F808(void)
 
 void fn_8018F888(void)
 {
-    u8* base;
     s32 i;
-
-    base = (u8*) lbl_80473AB8;
 
     for (i = 0; i < 64; i++) {
         if (lbl_80473AB8[i].x1 != 0) {
@@ -1586,9 +1583,9 @@ void fn_8018F888(void)
         }
     }
 
-    lbl_80473AB8[i * 0xDC].x21 = 0;
+    lbl_80473AB8[i].x21 = 0;
 
-    if (*(base + 0x373F) != 5) {
+    if (gm_804771C4.x37->x8 != 5) {
         return;
     }
 
@@ -1598,7 +1595,7 @@ void fn_8018F888(void)
         }
     }
 
-    *(base + i * 0xDC + 0xFD) = 0;
+    lbl_80473AB8[i+1].x21 = 0;
 }
 
 /// @todo Currently 84.63% match - needs loop pattern fix
