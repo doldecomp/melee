@@ -219,21 +219,21 @@ s32 un_8031C354(s32 id, s32 (*buf)[], s32 max, s32 kind)
     count = 0;
     for (i = 0; i < 0x125; i++) {
         if (i == id) {
-            goto next;
+            continue;
         }
         if (un_80304CC8(i) == 0) {
-            goto next;
+            continue;
         }
         if (un_803049F4(i) == 0) {
-            goto next;
+            continue;
         }
         other = un_8031B9DC(i);
         val = (s32) un_803060BC(i, 6);
         if (((u8*) other)[4] != ((u8*) data)[4]) {
-            goto next;
+            continue;
         }
         if (val != kind) {
-            goto next;
+            continue;
         }
         count++;
         (*buf)[0] = i;
@@ -241,7 +241,6 @@ s32 un_8031C354(s32 id, s32 (*buf)[], s32 max, s32 kind)
         if (count >= max) {
             break;
         }
-    next:;
     }
 
     return count;
