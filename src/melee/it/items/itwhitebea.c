@@ -75,7 +75,15 @@ bool itOldottosea_UnkMotion9_Coll(Item_GObj* gobj)
     return it_8027C824(gobj, NULL);
 }
 
-/// #it_802E3400
+void it_802E3400(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->xDCC_flag.b3 = 1;
+    it_802762BC(ip);
+    it_8027B964(gobj, 0);
+    ip->xDD4_itemVar.whitebea.x18 = 0;
+    Item_80268E5C(gobj, 0xA, ITEM_ANIM_UPDATE);
+}
 
 bool itOldottosea_UnkMotion10_Anim(Item_GObj* gobj)
 {
