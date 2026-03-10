@@ -2194,13 +2194,12 @@ void grZebes_801DC744(s32 arg0, u8 arg1)
         f32 y_start = base[2].y;
         f32 x_step = (base[3].x - x_start) / 6.0f;
         f32 y_step = (base[3].y - y_start) / 6.0f;
-        f32* sp = &scales[0];
 
-        for (i = 0; i < 7; i++, sp++) {
+        for (i = 0; i < 7; i++) {
             grZebes_801DAE70(i, arg1,
                 x_step * (f32) i + x_start,
                 y_step * (f32) i + y_start,
-                *sp);
+                scales[i]);
         }
     }
 
@@ -2212,8 +2211,7 @@ void grZebes_801DC744(s32 arg0, u8 arg1)
         f32 x_range = (base[1].x - p_x) - 2.0f * bubble_r;
         f32 y_range = base[1].y - y_min;
         f64 mid_x = 0.5 * x_range + x_base;
-        f64 lo_x = 0.2 * x_range + x_base;
-        f64 hi_x, lo_y, hi_y, near_max_y, max_y;
+        f64 lo_x, hi_x, lo_y, hi_y, near_max_y, max_y;
 
         grZebes_801DAE70(7, arg1,
             (f32) mid_x,
@@ -2222,7 +2220,7 @@ void grZebes_801DC744(s32 arg0, u8 arg1)
 
         hi_y = 0.8 * y_range + y_min;
         grZebes_801DAE70(8, arg1,
-            (f32) lo_x, (f32) hi_y, 1.2f);
+            (f32) (0.2 * x_range + x_base), (f32) hi_y, 1.2f);
 
         hi_x = 0.8 * x_range + x_base;
         lo_y = 0.2 * y_range + y_min;
@@ -2248,10 +2246,9 @@ void grZebes_801DC744(s32 arg0, u8 arg1)
             (f32) max_y, 1.1f);
 
         grZebes_801DAE70(15, arg1,
-            (f32) lo_x, (f32) max_y, 1.0f);
+            (f32) (0.2 * x_range + x_base), (f32) max_y, 1.0f);
     }
 }
-
 
 const grZe_BubbleConfig grZe_803B8044 = {
     { 1.0f, 1.1f, 1.0f, 1.2f, 1.1f, 1.0f, 1.0f },
