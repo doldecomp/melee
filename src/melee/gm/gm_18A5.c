@@ -1040,7 +1040,7 @@ void fn_8018E618(int arg0, int arg1, f32 farg0)
 }
 #pragma pop
 
-void fn_8018E85C(int model, s32 flag)
+void fn_8018E85C(DynamicModelDesc* model, s32 flag)
 {
     TmData* td;
     u8* entry;
@@ -1052,7 +1052,7 @@ void fn_8018E85C(int model, s32 flag)
     u8* ptr;
     HSD_JObj* jobj;
     HSD_GObj* gobj;
-    DynamicModelDesc* mdl = (DynamicModelDesc*) model;
+    DynamicModelDesc* mdl = model;
     s32 anim_frame;
     f32 pos_multiplier;
     f32 pos;
@@ -7495,7 +7495,7 @@ void fn_8019B458(s32* arg0)
 
         fn_80198BA0();
         fn_8018E618(tm->entrants, (s32) tm->x2C, 4.5f);
-        fn_8018E85C((int) lbl_804D6670->models[4], tm->x2C);
+        fn_8018E85C(lbl_804D6670->models[4], tm->x2C);
         fn_8018FA24();
 
         tm->cur_option = 0x14;
@@ -7600,6 +7600,6 @@ void fn_8019B860(TmData* tm)
     fn_80198BA0();
     fn_8018F888();
     fn_8018E618(tm->entrants, tm->x2C, lbl_804DA810);
-    fn_8018E85C(*(int*) ((char*) lbl_804D6670->models + 0x10), tm->x2C);
+    fn_8018E85C(lbl_804D6670->models[4], tm->x2C);
     tm->cur_option = 0x20;
 }
