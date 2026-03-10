@@ -603,14 +603,8 @@ bool grZebes_801D9254(Ground_GObj* arg)
     return false;
 }
 
-static const Vec3 grZe_803B802C = { 24.1f, -4.6f, 0.0f };
-static const Vec3 grZe_803B8038 = { 24.05f, 2.2f, 0.0f };
-
 void grZebes_801D925C(HSD_GObj* gobj)
 {
-    Vec3 pos1;
-    Vec3 pos2;
-    f32 slope, intercept;
     HSD_JObj* jobj;
     Ground* gp = GET_GROUND(gobj);
     s32 result = grZebes_801DA528(gobj, &gp->gv.zebes4, 1, 2);
@@ -619,26 +613,31 @@ void grZebes_801D925C(HSD_GObj* gobj)
         gp->gv.zebes4.xE8 = result;
         if (result == 1) {
             grAnime_801C7FF8(gobj, 6, 1, 1, 30.0f, 1.0f);
-            grAnime_801C78FC(gobj, 6, 1U);
+            grAnime_801C78FC(gobj, 6, 1);
         } else if (result == 3) {
             grAnime_801C7FF8(gobj, 6, 1, 2, 0.0f, 1.0f);
-            grAnime_801C78FC(gobj, 6, 1U);
+            grAnime_801C78FC(gobj, 6, 1);
         }
     }
 
-    pos1 = grZe_803B802C;
-    pos2 = grZe_803B8038;
-
-    jobj = Ground_801C3FA4(gobj, 1);
-    if (jobj != NULL) {
-        lb_8000B1CC(jobj, &pos1, &grZe_8049F158[1]);
-        lb_8000B1CC(jobj, &pos2, &grZe_8049F140[1]);
+    {
+        Vec3 pos1 = { 24.1f, -4.6f, 0.0f };
+        Vec3 pos2 = { 24.05f, 2.2f, 0.0f };
+    
+        jobj = Ground_801C3FA4(gobj, 1);
+        if (jobj != NULL) {
+            lb_8000B1CC(jobj, &pos1, &grZe_8049F158[1]);
+            lb_8000B1CC(jobj, &pos2, &grZe_8049F140[1]);
+        }
     }
 
-    Ground_801C4368(&slope, &intercept);
-    grZakoGenerator_801CA43C((void*) gp->gv.zebes4.xEC,
-                             Ground_801C3FA4(gobj, 1), slope);
-    Ground_801C2FE0((Ground_GObj*) gobj);
+    {
+        f32 slope, intercept;
+        Ground_801C4368(&slope, &intercept);
+        grZakoGenerator_801CA43C((void*) gp->gv.zebes4.xEC,
+                                 Ground_801C3FA4(gobj, 1), slope);
+        Ground_801C2FE0((Ground_GObj*) gobj);
+    }
 }
 
 void grZebes_801D93D8(Ground_GObj* arg) {}
