@@ -1,5 +1,7 @@
 #include "itkabigon.h"
 
+#include "it/itCommonItems.h"
+
 #include <placeholder.h>
 #include <platform.h>
 
@@ -71,7 +73,20 @@ bool itKabigon_UnkMotion0_Coll(Item_GObj* gobj)
     return false;
 }
 
-/// #it_802CA014
+void it_802CA014(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    if (ip->xDB0_itcmd_var1 != 0) {
+        s32 timer;
+        timer = --ip->xDD4_itemVar.pokemon.xE44_s32;
+        if (timer == 0) {
+            itPokemonAttributes* attr =
+                ip->xC4_article_data->x4_specialAttributes;
+            it_802CA3F4(gobj);
+            ip->xDD4_itemVar.pokemon.xE44_s32 = attr->x14;
+        }
+    }
+}
 
 /// #it_802CA074
 

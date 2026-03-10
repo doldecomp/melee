@@ -143,7 +143,19 @@ void it_802E2DF4(Item_GObj* gobj)
     it_802E27B4(gobj);
 }
 
-/// #it_802E2E30
+void it_802E2E30(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    ip->x40_vel.z = 0.0f;
+    ip->x40_vel.y = 0.0f;
+    ip->x40_vel.x = 0.0f;
+    ip->xDD4_itemVar.oldottosea.x24 = 0;
+    if ((u32) ip->xDD4_itemVar.oldottosea.x20 != 0) {
+        Item_80268E5C(gobj, 7, ITEM_ANIM_UPDATE);
+    } else {
+        Item_80268E5C(gobj, 6, ITEM_ANIM_UPDATE);
+    }
+}
 
 /// #itOldottosea_UnkMotion7_Anim
 

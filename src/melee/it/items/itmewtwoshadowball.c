@@ -1,5 +1,6 @@
 #include "itmewtwoshadowball.h"
 
+#include "ef/eflib.h"
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
@@ -38,7 +39,15 @@ bool it_802C4F50(Item_GObj* gobj, CollData* cd)
 
 /// #it_2725_Logic101_Destroyed
 
-/// #it_802C573C
+void it_802C573C(Item_GObj* gobj)
+{
+    if (gobj != NULL) {
+        Item* ip = gobj->user_data;
+        efLib_DestroyAll(gobj);
+        ip->xDD4_itemVar.mewtwoshadowball.x28 = 0;
+        Item_8026A8EC(gobj);
+    }
+}
 
 void it_2725_Logic101_PickedUp(Item_GObj* gobj)
 {

@@ -6,6 +6,8 @@
 #include "it/item.h"
 #include "it/types.h"
 
+#include "ft/chara/ftPikachu/ftPk_SpecialLw.h"
+
 #include <baselib/gobj.h>
 
 int it_802B1DEC(Item_GObj* arg0)
@@ -33,7 +35,16 @@ void it_802B1FE8(Item_GObj* gobj, Vec3* pos)
     pos->y += offset;
 }
 
-/// #it_2725_Logic39_Destroyed
+void it_2725_Logic39_Destroyed(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->xDD4_itemVar.pikachuthunder.x0 == 0 &&
+        ip->xDD4_itemVar.pikachuthunder.x38 != NULL &&
+        !ftPk_SpecialLw_CheckProperty(ip->xDD4_itemVar.pikachuthunder.x38))
+    {
+        ftPk_SpecialLw_SetState_Unk0(ip->xDD4_itemVar.pikachuthunder.x38);
+    }
+}
 
 void it_802B2080(Item_GObj* gobj)
 {

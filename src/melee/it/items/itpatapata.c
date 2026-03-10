@@ -138,7 +138,18 @@ void it_2725_Logic4_Dropped(Item_GObj* gobj)
     Item_80268E5C(gobj, 7, ITEM_ANIM_UPDATE);
 }
 
-/// #itPatapata_UnkMotion7_Anim
+bool itPatapata_UnkMotion7_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    PAD_STACK(8);
+    if (ip->xDD4_itemVar.patapata.x28 <= 0) {
+        it_8027CAD8(gobj);
+        it_802E1648(gobj, 1, 2);
+    } else {
+        ip->xDD4_itemVar.patapata.x28 -= 1;
+    }
+    return false;
+}
 
 void itPatapata_UnkMotion7_Phys(Item_GObj* gobj) {}
 
