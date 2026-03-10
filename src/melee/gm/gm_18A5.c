@@ -4655,26 +4655,16 @@ void fn_80195CCC(s32* arg, u32 buttons, u32 trigger)
             slot = ptr[2] + ptr[3];
             tm = gm_8018F634();
             count = tm->x2E;
-            unique = 0;
-            i = 0;
+            unique = 1;
             if ((s32) count > 0) {
-                for (;;) {
+                for (i = 0; i < (s32) count; i++) {
                     if ((i != slot) &&
-                        (selected == (s32) tm->x37[unique].x9))
+                        (selected == (s32) tm->x37[i].x9))
                     {
                         unique = 0;
                         break;
                     }
-                    unique++;
-                    i++;
-                    count--;
-                    if (count == 0) {
-                        unique = 1;
-                        break;
-                    }
                 }
-            } else {
-                unique = 1;
             }
             if (unique != 0) {
                 lbAudioAx_80024030(1);
