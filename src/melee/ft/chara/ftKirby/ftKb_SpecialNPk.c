@@ -779,7 +779,30 @@ void ftKb_LkSpecialNEnd_Anim(Fighter_GObj* gobj)
 
 /// #ftKb_LkSpecialAirNLoop_Anim
 
-/// #ftKb_LkSpecialAirNEnd_Anim
+void ftKb_LkSpecialAirNEnd_Anim(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    ftKb_DatAttrs* da = fp->dat_attrs;
+    float freefall;
+    PAD_STACK(24);
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        ftKb_SpecialNLk_UnsetArrow(gobj);
+        ftKb_SpecialNLk_UnsetBow(gobj);
+        switch (fp->fv.kb.hat.kind) {
+        case FTKIND_LINK:
+            freefall = da->specialn_lk_freefall_toggle;
+            break;
+        case FTKIND_CLINK:
+            freefall = da->specialn_cl_freefall_toggle;
+            break;
+        }
+        if (freefall == 0.0f) {
+            ftCo_Fall_Enter(gobj);
+        } else {
+            ftCo_80096900(gobj, 1, 0, true, 1.0f, freefall);
+        }
+    }
+}
 
 /// #ftKb_LkSpecialNStart_IASA
 
