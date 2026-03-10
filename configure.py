@@ -1281,7 +1281,7 @@ config.libs = [
         "if (User interface)",
         [
             Object(Matching, "melee/if/ifall.c"),
-            Object(NonMatching, "melee/if/iftime.c"),
+            Object(Matching, "melee/if/iftime.c"),
             Object(NonMatching, "melee/if/ifstatus.c"),
             Object(NonMatching, "melee/if/if_2F72.c"),
             Object(NonMatching, "melee/if/ifstock.c"),
