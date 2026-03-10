@@ -173,7 +173,9 @@ typedef struct itKyasarinEggAttributes {
 
 typedef struct itHououAttr {
     /* +00 */ f32 timer;
-    /* +04 */ u8 x4_pad[0x14];
+    /* +04 */ u8 x4_pad[0xC];
+    /* +10 */ f32 x10;
+    /* +14 */ u8 x14_pad[0x4];
     /* +18 */ f32 x18;
     /* +1C */ f32 x1C;
 } itHououAttr;
