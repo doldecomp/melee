@@ -1627,7 +1627,7 @@ config.libs = [
             Object(Matching, "sysdolphin/baselib/debug.c"),
             Object(NonMatching, "sysdolphin/baselib/synth.c"),
             Object(NonMatching, "sysdolphin/baselib/axdriver.c"),
-            Object(NonMatching, "sysdolphin/baselib/devcom.c"),
+            Object(Matching, "sysdolphin/baselib/devcom.c"),
             Object(Matching, "sysdolphin/baselib/gobjproc.c"),
             Object(Matching, "sysdolphin/baselib/gobjplink.c"),
             Object(Matching, "sysdolphin/baselib/gobjgxlink.c"),
