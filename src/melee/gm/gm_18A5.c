@@ -1380,7 +1380,7 @@ int fn_8018F410(void)
     int* temp_r30;
     int* temp_r29;
 
-    temp_r30 = &lbl_803D9F0C.x0;
+    temp_r30 = &lbl_803D9F0C.x8;
     temp_r29 = &lbl_803D9F0C.x4;
     do {
         temp_r3 = HSD_Randi(0x19);
