@@ -3126,7 +3126,6 @@ void fn_80192BB0(void)
     HSD_GObj* gobj;
     HSD_JObj* jobj;
     s32 i;
-    f32 y;
 
     fn_8019035C(1, lbl_804D664C->models[2], 0, 0x1A, 2, 1,
                 (void (*)(HSD_GObj*)) fn_8019175C, 0.0f);
@@ -3136,20 +3135,19 @@ void fn_80192BB0(void)
                            fn_80191240, 0.0f);
         jobj = (HSD_JObj*) gobj->hsd_obj;
         fn_8018FBD8((void*) gobj, i);
-        y = -((3.5f * (f32) i) - 11.5f);
-        HSD_JObjSetTranslateY(jobj, y);
+        HSD_JObjSetTranslateY(jobj, -((3.5f * (f32) i) - 11.5f));
 
         gobj = fn_8019035C(1, lbl_804D664C->models[0], 0, 0x1A, 2, 1,
                            fn_801913BC, 0.0f);
         jobj = (HSD_JObj*) gobj->hsd_obj;
         fn_8018FBD8((void*) gobj, i);
-        HSD_JObjSetTranslateY(jobj, y);
+        HSD_JObjSetTranslateY(jobj, -((3.5f * (f32) i) - 11.5f));
 
         gobj = fn_8019035C(1, lbl_804D664C->models[1], 0, 0x1A, 2, 1,
                            fn_80191678, 0.0f);
         jobj = (HSD_JObj*) gobj->hsd_obj;
         fn_8018FBD8((void*) gobj, i);
-        HSD_JObjSetTranslateY(jobj, y);
+        HSD_JObjSetTranslateY(jobj, -((3.5f * (f32) i) - 11.5f));
     }
 }
 
