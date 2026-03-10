@@ -5,6 +5,7 @@
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
 #include "lb/types.h"
+#include "mp/mplib.h"
 #include "cm/camera.h"
 #include "ft/ftlib.h"
 
@@ -24,7 +25,15 @@ static struct {
 
 void grPushOn_802182C4(bool arg) {}
 
-/// #grPushOn_802182C8
+void grPushOn_802182C8(void)
+{
+    grPushOn_804D6AB8 = Ground_801C49F8();
+    stage_info.unk8C.b4 = false;
+    stage_info.unk8C.b5 = true;
+    grPushOn_802183E4(0);
+    grPushOn_802183E4(1);
+    mpLib_80057BC0(0);
+}
 
 void grPushOn_80218330(void)
 {
