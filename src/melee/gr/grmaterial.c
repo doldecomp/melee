@@ -316,7 +316,18 @@ void grMaterial_801C95C4(HSD_GObj* gobj)
     gp->x10_flags.b4 = 1;
 }
 
-/// #grMaterial_801C9604
+void grMaterial_801C9604(HSD_GObj* gobj, int arg1, bool arg2)
+{
+    Ground* gp = gobj->user_data;
+    ColorOverlay* co = (ColorOverlay*) ((u8*) gp + 0x40);
+    co->x4_pri = arg2;
+    co->x8_ptr1 = (union ColorOverlay_x8_t*) arg1;
+    co->x0_timer = 0;
+    co->xC_loop = 0;
+    co->x7C_color_enable = co->x7C_flag2 = 0;
+    gp->x10_flags.b4 = 0;
+    grMaterial_801C9698(gobj);
+}
 
 void fn_801C9664(Item_GObj* gobj, CommandInfo* cmd, int arg2)
 {
