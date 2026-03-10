@@ -38,7 +38,19 @@ void it_802ECEB0(Item_GObj* gobj)
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
 }
 
-/// #itKyasarin_UnkMotion0_Anim
+bool itKyasarin_UnkMotion0_Anim(Item_GObj* gobj)
+{
+    if (!it_80272C6C(gobj)) {
+        Item* ip = GET_ITEM(gobj);
+        itOldottoseaAttributes* attr =
+            ip->xC4_article_data->x4_specialAttributes;
+        ip->x40_vel.x = attr->x4 * ip->facing_dir;
+        ip->x40_vel.z = 0.0F;
+        ip->x40_vel.y = 0.0F;
+        Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+    }
+    return false;
+}
 
 /// #itKyasarin_UnkMotion0_Coll
 
