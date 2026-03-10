@@ -3155,10 +3155,13 @@ void fn_80192BB0(void)
 
 s32 fn_80192E6C(void)
 {
+    int new_var;
     HSD_GObj* gobj;
+    HSD_JObj *new_var3;
     HSD_JObj* jobj;
     s32 i;
     s32 j;
+    f32 new_var2;
     PAD_STACK(16);
 
     fn_8019035C(1, lbl_804D6650->models[4], 0, 0x1A, 2, 1, fn_801918F0,
@@ -3173,9 +3176,7 @@ s32 fn_80192E6C(void)
                 0.0f);
     fn_8019035C(1, lbl_804D6650->models[10], 0, 0x1A, 2, 1, fn_8019249C,
                 0.0f);
-    jobj = (HSD_JObj*) fn_8019035C(1, lbl_804D6650->models[2], 0, 0x1A, 2,
-                                    1, fn_80192758, 0.0f)->hsd_obj;
-    HSD_JObjSetFlagsAll(jobj, 0x10U);
+    HSD_JObjSetFlagsAll((HSD_JObj *) fn_8019035C(1, lbl_804D6650->models[2], 0, 0x1A, 2, 1, fn_80192758, 0.0f)->hsd_obj, 0x10U);
 
     for (i = 0; i < 0x40; i++) {
         gobj = fn_8019035C(1, lbl_804D6650->models[8], 0, 0x1A, 2, 1,
@@ -3193,17 +3194,18 @@ s32 fn_80192E6C(void)
     }
 
     for (j = 0; j <= 0x19; j++) {
-        gobj = fn_8019035C(1, lbl_804D6650->models[9], 0, 0x1A, 2, 1,
-                           (void (*)(HSD_GObj*)) fn_80191FD4, (f32) j);
+        new_var2 = (f32) j;
+        gobj = fn_8019035C(1, lbl_804D6650->models[9], 0, 0x1A, 2, 1, (void (*)(HSD_GObj *)) fn_80191FD4, new_var2);
         jobj = (HSD_JObj*) gobj->hsd_obj;
+        new_var3 = jobj;
         if (j != 0x19) {
-            fn_8018FF9C(jobj, 0.65f, 0.66f, 666.0f);
-            fn_8018FDC4(jobj,
+            fn_8018FF9C(new_var3, 0.65f, 0.66f, 666.0f);
+            fn_8018FDC4(new_var3,
                         (6.0f * (f32) (j % 5)) + -3.0f,
-                        -((4.500006f * (f32) (j / 5)) - 2.3f),
+                        -((4.500006f * (f32) (new_var = j / 5)) - 2.3f),
                         0.2f);
         } else {
-            fn_8018FDC4(jobj, -1.0f, 10.099993f, 0.2f);
+            fn_8018FDC4(new_var3, -1.0f, 10.099993f, 0.2f);
         }
         fn_8018FBD8((void*) gobj, j);
     }
