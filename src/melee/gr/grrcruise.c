@@ -4,6 +4,9 @@
 
 #include <platform.h>
 
+#include "cm/camera.h"
+#include "gm/gm_1A45.h"
+#include "gr/grdisplay.h"
 #include "gr/grlib.h"
 #include "gr/ground.h"
 #include "gr/inlines.h"
@@ -189,7 +192,13 @@ void grRCruise_80201918(Vec3* vec)
 
 /// #grRCruise_80201B60
 
-/// #fn_80201BE0
+void fn_80201BE0(HSD_GObj* gobj, s32 pass)
+{
+    if (gm_801A45E8(1) != 0 || gm_801A45E8(2) != 0 || Camera_8003010C() != 0) {
+        return;
+    }
+    grDisplay_801C5DB0(gobj, pass);
+}
 
 DynamicsDesc* grRCruise_80201C50(enum_t arg)
 {

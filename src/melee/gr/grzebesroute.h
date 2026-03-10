@@ -4,6 +4,8 @@
 #include <placeholder.h>
 
 #include "it/inlines.h"
+#include "lb/forward.h"
+#include "mp/forward.h"
 
 /* 20B160 */ void grZebesRoute_8020B160(bool);
 /* 20B164 */ void grZebesRoute_8020B164(void);
@@ -23,7 +25,8 @@
 /* 20B424 */ bool grZebesRoute_8020B424(Ground_GObj*);
 /* 20B42C */ void grZebesRoute_8020B42C(Ground_GObj*);
 /* 20B4D4 */ void grZebesRoute_8020B4D4(Ground_GObj*);
-/* 20B4D8 */ UNK_RET fn_8020B4D8(UNK_PARAMS);
+/* 20B4D8 */ void fn_8020B4D8(Ground*, s32, CollData*, s32, mpLib_GroundEnum,
+                              f32);
 /* 20B548 */ void grZebesRoute_8020B548(void);
 /* 20B854 */ DynamicsDesc* grZebesRoute_8020B854(enum_t);
 /* 20B85C */ bool grZebesRoute_8020B85C(Vec3*, int arg, HSD_JObj* jobj);

@@ -17,10 +17,16 @@ struct grPushOn_Entry {
     s16 x6;
 };
 
+struct grPushOn_Lookup {
+    s32 key;
+    s32 value;
+};
+
 static struct {
     char pad[0x18];
     bool x18;
-    struct grPushOn_Entry x1c[0x21];
+    struct grPushOn_Entry x1c[0x1E];
+    struct grPushOn_Lookup x10c[0x21];
 }* grPushOn_804D6AB8;
 
 void grPushOn_802182C4(bool arg) {}
@@ -143,7 +149,19 @@ void grPushOn_80219204(int arg0, int* out1, int* out2)
     *out2 = grPushOn_804D6AB8->x1c[idx].x4;
 }
 
-/// #grPushOn_80219230
+int grPushOn_80219230(int arg0)
+{
+    s32 i = 0;
+    s32 key;
+
+    while (i < 0x21 && (key = grPushOn_804D6AB8->x10c[i].key) != -1) {
+        if (key == arg0) {
+            return grPushOn_804D6AB8->x10c[i].value;
+        }
+        i++;
+    }
+    __assert("grpushon.c", 0x35DU, "0");
+}
 
 /// #fn_802192A4
 
