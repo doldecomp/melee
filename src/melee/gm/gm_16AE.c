@@ -18,7 +18,7 @@
 #include <melee/gm/gmmultiman.h>
 #include <melee/gm/gmpause.h>
 #include <melee/gr/ground.h>
-#include <melee/gr/grstadium.h>
+#include <melee/gr/grpstadium.h>
 #include <melee/gr/stage.h>
 #include <melee/if/ifall.h>
 #include <melee/if/ifhazard.h>
