@@ -159,9 +159,23 @@ void it_8029131C(Item_GObj* gobj)
 
 /// #it_80291344
 
-/// #itFlipper_UnkMotion5_Anim
+bool itFlipper_UnkMotion5_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->xDD4_itemVar.flipper.xDE4 != 0.0f) {
+        Item_80268E5C(gobj, 6, 0x12);
+    }
+    return it_80291344(gobj);
+}
 
-/// #itFlipper_UnkMotion6_Anim
+bool itFlipper_UnkMotion6_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->xDD4_itemVar.flipper.xDE4 == 0.0F) {
+        Item_80268E5C(gobj, 5, 0x12);
+    }
+    it_80291344(gobj);
+}
 
 void itFlipper_UnkMotion6_Phys(Item_GObj* gobj)
 {

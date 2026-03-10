@@ -125,7 +125,26 @@ bool it_802CB810(Item_GObj* gobj)
     return false;
 }
 
-/// #it_802CB844
+void it_802CB844(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    f32 scale = 0.0f;
+    ItemKind kind = ip->kind;
+    itMatadogasAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+
+    switch (kind) {
+    case 0xC1:
+        scale = attrs->x4;
+        break;
+    case 0xC2:
+        scale = attrs->x8;
+        break;
+    }
+
+    ip->x40_vel.x *= scale;
+    ip->x40_vel.y *= scale;
+    ip->x40_vel.z *= scale;
+}
 
 bool it_802CB8A4(Item_GObj* gobj)
 {

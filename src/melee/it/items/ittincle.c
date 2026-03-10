@@ -100,7 +100,18 @@ bool itTincle_UnkMotion3_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itTincle_UnkMotion3_Phys
+void itTincle_UnkMotion3_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->xDD4_itemVar.tincle.x20 == 0) {
+        ip->pos.y = ip->xDD4_itemVar.tincle.x4C;
+        ip->x40_vel.y = 0.0f;
+        it_802EBE5C(gobj);
+    } else {
+        ip->x40_vel.y += ip->xDD4_itemVar.tincle.x38;
+        ip->xDD4_itemVar.tincle.x20 -= 1;
+    }
+}
 
 bool itTincle_UnkMotion3_Coll(Item_GObj* gobj)
 {
