@@ -1618,7 +1618,7 @@ void fn_8018FA24(void)
         }
     }
 
-    
+
     dst = tmdata;
     ptr = (u8*) lbl_80473AB8 + i * (s32) 0xDC;
     player_count = 0;
