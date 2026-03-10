@@ -6163,6 +6163,7 @@ void fn_80198EBC(void)
     HSD_JObj* jobj;
     HSD_JObj* jobj2;
     HSD_JObj* c;
+    struct lbl_803DA0D0_t* da0d0;
     s32 i, j;
     f32 anim_rate;
     f32 pos;
@@ -6172,6 +6173,7 @@ void fn_80198EBC(void)
     f32 f_7E4, f_7E0, f_7E8, f_7EC;
     f32 f_864;
 
+    da0d0 = &lbl_803DA0D0;
     td = gm_8018F634();
     gm_8018F634();
 
@@ -6245,7 +6247,7 @@ void fn_80198EBC(void)
         fn_8018ECA8(td->x4B8[i].x6, td->x4B8[i].x0, 5,
                     f_858 * pos - f_85C, lbl_804DA860, 5);
 
-        ((u8*) td->x524[2])[0x4D] = 1;
+         td->x524[2]->hidden = true;
 
         gobj = fn_8019035C(0, lbl_804D6674->models[10], 0, 0x1A, 2, 1,
                            fn_801973F8, anim_rate);
@@ -6257,7 +6259,7 @@ void fn_80198EBC(void)
 
         HSD_JObjSetTranslateZ(c, hide_z);
 
-        if (lbl_803DA0D0.icon_model_map[td->x4B8[i].x1] == 0) {
+        if (da0d0->icon_model_map[td->x4B8[i].x1] == 0) {
             HSD_JObjSetTranslateZ(c, show_z);
 
             for (j = 1; j <= 12; j++) {
@@ -6269,7 +6271,7 @@ void fn_80198EBC(void)
                 jobj2 = HSD_JObjGetNext(jobj2);
                 HSD_JObjSetTranslateZ(jobj2, hide_z);
 
-                if (lbl_803DA0D0.icon_model_map[td->x4B8[i].x1] == j) {
+                if (da0d0->icon_model_map[td->x4B8[i].x1] == j) {
                     HSD_JObjSetTranslateZ(jobj2, show_z);
 
                     for (j++; j <= 12; j++) {
@@ -6348,35 +6350,16 @@ void fn_80198EBC(void)
     {
         HSD_JObj* j16;
         j16 = GET_JOBJ(gobj);
-        if (j16 == NULL) {
-            j16 = NULL;
-        } else {
-            j16 = j16->child;
-        }
-        if (j16 == NULL) {
-            j16 = NULL;
-        } else {
-            j16 = j16->next;
-        }
-        if (j16 == NULL) {
-            j16 = NULL;
-        } else {
-            j16 = j16->next;
-        }
-        if (j16 == NULL) {
-            j16 = NULL;
-        } else {
-            j16 = j16->next;
-        }
-        if (j16 == NULL) {
-            j16 = NULL;
-        } else {
-            j16 = j16->next;
-        }
 
+        j16 = HSD_JObjGetChild(j16);
+        j16 = HSD_JObjGetNext(j16);
+        j16 = HSD_JObjGetNext(j16);
+        j16 = HSD_JObjGetNext(j16);
+        j16 = HSD_JObjGetNext(j16);
+        j16 = HSD_JObjGetNext(j16);
         for (j = 0; j <= 40; j++) {
             fn_8019044C(j16, (f32) (j + 10));
-            lbl_803DA0D0.bounce_y[j] = HSD_JObjGetTranslationY(j16);
+            da0d0->bounce_y[j] = HSD_JObjGetTranslationY(j16);
         }
     }
 
