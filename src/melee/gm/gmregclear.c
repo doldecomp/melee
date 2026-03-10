@@ -655,7 +655,33 @@ u8 fn_8017DD7C(PlayerInitData* arg0, Unk1PData_x24* arg1)
     return index - 1;
 }
 
-/// #fn_8017DE54
+s32 fn_8017DE54(u8 arg0, u8* arg1)
+{
+    u8* p;
+    s32 count;
+
+    if (arg0 & 0x20) {
+        return 0;
+    }
+    if (arg0 & 0x10) {
+        count = 0;
+        if ((s32) arg1[0] != 0x21) {
+            count = 1;
+        }
+        p = &arg1[1];
+        if ((s32) *p != 0x21) {
+            count += 1;
+        }
+        if ((s32) p[1] != 0x21) {
+            count += 1;
+        }
+        return 3 - count;
+    }
+    if (arg0 & 2) {
+        return 2;
+    }
+    return 0;
+}
 
 Unk1PData* fn_8017DEC8(int arg0)
 {
