@@ -1019,7 +1019,7 @@ typedef struct itMewtwoShadowball_ItemVars {
     /* ip+E00 */ f32 x2C[6];
     /* ip+E18 */ f32 x44;
     /* ip+E1C */ f32 x48;
-    /* ip+E20 */ f32 x4C;
+    /* ip+E20 */ s32 x4C;
     /* ip+E24 */ f32 x50;
     /* ip+E28 */ s32 x54;
     /* ip+E2C */ s32 x58;

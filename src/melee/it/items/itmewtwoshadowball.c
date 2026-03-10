@@ -72,7 +72,17 @@ bool itMewtwoshadowball_UnkMotion0_Coll(Item_GObj* gobj)
 
 /// #itMewtwoshadowball_UnkMotion8_Anim
 
-/// #itMewtwoshadowball_UnkMotion8_Phys
+void itMewtwoshadowball_UnkMotion8_Phys(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    if (ip->xDD4_itemVar.mewtwoshadowball.x4C > 0) {
+        ip->x40_vel.x =
+            ip->xDD4_itemVar.mewtwoshadowball.x4.y * cosf(ip->xDD4_itemVar.mewtwoshadowball.x4.x);
+        ip->x40_vel.y =
+            ip->xDD4_itemVar.mewtwoshadowball.x4.y * sinf(ip->xDD4_itemVar.mewtwoshadowball.x4.x);
+    }
+    it_802C4D10(gobj);
+}
 
 bool itMewtwoshadowball_UnkMotion8_Coll(Item_GObj* gobj)
 {
