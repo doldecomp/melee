@@ -107,8 +107,6 @@ void HSD_DevComARAMWakeUp(void)
 {
     bool enabled;
     int req_idx;
-    void* buf;
-    u32 xfer_size;
     u32 xfer_size2;
     void (*arq_callback)(ARQRequest*);
     void (*arq_callback2)(ARQRequest*);
@@ -133,6 +131,7 @@ void HSD_DevComARAMWakeUp(void)
         req_idx = getRelayBufIdx();
         if (req_idx >= 0) {
             if (aramDC->type == 3) {
+                u32 xfer_size;
                 if (aramDC->size > DEVCOM_BUF_SIZE) {
                     arq_callback = HSD_DevComStdCallback;
                     xfer_size = DEVCOM_BUF_SIZE;
@@ -140,18 +139,15 @@ void HSD_DevComARAMWakeUp(void)
                     arq_callback = HSD_DevComARAMCallback;
                     xfer_size = aramDC->size;
                 }
-
                 {
-                    int* p = (int*) ((u8*) devComStatus +
-                                     (req_idx * DEVCOM_BUF_SIZE) + 0x20);
+                    int* p = HSD_DevCom_804C6330_bufs[req_idx];
                     int i;
                     for (i = 0x1000; i > 0; i--) {
                         *p++ = 0;
                     }
                 }
-                buf = HSD_DevCom_804C6330_bufs[req_idx];
-                DCStoreRange(buf, DEVCOM_BUF_SIZE);
-                ARQPostRequest(devComARQR[req_idx], 0, 0, 1, (u32) buf,
+                DCStoreRange(HSD_DevCom_804C6330_bufs[req_idx], DEVCOM_BUF_SIZE);
+                ARQPostRequest(devComARQR[req_idx], 0, 0, 1, (u32) HSD_DevCom_804C6330_bufs[req_idx],
                                aramDC->dest, xfer_size, arq_callback);
                 aramDC->dest += xfer_size;
                 aramDC->size -= xfer_size;
@@ -169,15 +165,13 @@ void HSD_DevComARAMWakeUp(void)
                                HSD_DevComARAMCallback);
                 aramstate = 1;
             } else if (aramDC->type == 0x1A) {
-                buf = HSD_DevCom_804C6330_bufs[req_idx];
-                DCInvalidateRange(buf, DEVCOM_BUF_SIZE);
+                DCInvalidateRange(HSD_DevCom_804C6330_bufs[req_idx], DEVCOM_BUF_SIZE);
                 ARQPostRequest(devComARQR[req_idx], 0, 1, 1, aramDC->src,
-                               (u32) buf, aramDC->size,
+                               (u32) HSD_DevCom_804C6330_bufs[req_idx], aramDC->size,
                                HSD_DevComARAMCallback);
                 aramstate = 1;
             } else if (aramDC->type == 0x1B) {
-                buf = HSD_DevCom_804C6330_bufs[req_idx];
-                DCInvalidateRange(buf, DEVCOM_BUF_SIZE);
+                DCInvalidateRange(HSD_DevCom_804C6330_bufs[req_idx], DEVCOM_BUF_SIZE);
                 if (aramDC->size > DEVCOM_BUF_SIZE) {
                     arq_callback2 = HSD_DevComStdCallback;
                     xfer_size2 = DEVCOM_BUF_SIZE;
@@ -186,8 +180,8 @@ void HSD_DevComARAMWakeUp(void)
                     xfer_size2 = aramDC->size;
                 }
                 ARQPostRequest(&devComARQR[req_idx][1], 0, 1, 1, aramDC->src,
-                               (u32) buf, xfer_size2, NULL);
-                ARQPostRequest(&devComARQR[req_idx][0], 0, 0, 1, (u32) buf,
+                               (u32) HSD_DevCom_804C6330_bufs[req_idx], xfer_size2, NULL);
+                ARQPostRequest(&devComARQR[req_idx][0], 0, 0, 1, (u32) HSD_DevCom_804C6330_bufs[req_idx],
                                aramDC->dest, xfer_size2, arq_callback2);
                 aramDC->src += xfer_size2;
                 aramDC->dest += xfer_size2;

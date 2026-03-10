@@ -7,7 +7,7 @@
 #include "grkongo.h"
 #include "grmaterial.h"
 #include "groldkongo.h"
-#include "grstadium.h"
+#include "grpstadium.h"
 #include "grzebes.h"
 #include "platform.h"
 #include "stage.h"
