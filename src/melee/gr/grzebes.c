@@ -1252,7 +1252,7 @@ s32 grZebes_801DA528(HSD_GObj* arg0, void* arg1, s32 arg2, s32 arg3)
                 }
             }
         }
-        
+
         HSD_JObjSetTranslateX(st->x14_jobj1, st->x04_base_x + st->x08_offset);
         HSD_JObjSetTranslateX(st->x18_jobj2, st->x04_base_x + st->x08_offset);
         {
