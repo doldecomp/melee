@@ -7,7 +7,7 @@
 #include "grkongo.h"
 #include "grmaterial.h"
 #include "groldkongo.h"
-#include "grstadium.h"
+#include "grpstadium.h"
 #include "grzebes.h"
 #include "platform.h"
 #include "stage.h"
@@ -1046,7 +1046,7 @@ void Ground_801C1E2C(HSD_GObj* gobj, int code)
     }
 }
 
-void* Ground_801C1E84(void)
+HSD_GObj* Ground_801C1E84(void)
 {
     return stage_info.x12C;
 }

@@ -2229,7 +2229,7 @@ melee/gr/grcastle.c:
 	.sbss       start:0x804D6970 end:0x804D6978
 	.sdata2     start:0x804DAE18 end:0x804DAEF8
 
-melee/gr/grstadium.c:
+melee/gr/grpstadium.c:
 	.text       start:0x801D1018 end:0x801D5238
 	.rodata     start:0x803B7F68 end:0x803B7FB0
 	.data       start:0x803E1248 end:0x803E16E0
