@@ -189,6 +189,8 @@ void ifTime_FreeCountdown(void)
     }
 }
 
+static char ifTime_804D5790[4] = "";
+
 void ifTime_UpdateTimers(HSD_GObj* arg0)
 {
     struct ifTime_data* x = &ifTime_data;
@@ -207,7 +209,7 @@ void ifTime_UpdateTimers(HSD_GObj* arg0)
             HSD_JObjLoadJoint(x->countdown_timer_models[0]->joint);
         if (jobj2 == NULL) {
             OSReport("Error : jobj dont't get (ifAddTimeDownModel)\n");
-            OSPanic("iftime.c", 300, "");
+            OSPanic("iftime.c", 300, ifTime_804D5790);
         }
         tmp = HSD_GObj_804D7849;
         HSD_GObjObject_80390A70(x->countdown_timer, tmp, jobj2);
@@ -242,17 +244,17 @@ void ifTime_CreateTimers(void)
         ifTime_data.countdown_timer = GObj_Create(HSD_GOBJ_CLASS_UI, 15, 0);
         if (ifTime_data.countdown_timer == NULL) {
             OSReport("Error : gobj dont't get (ifAddTime)\n");
-            OSPanic("iftime.c", 379, "");
+            OSPanic("iftime.c", 379, ifTime_804D5790);
         }
         gobj = GObj_Create(HSD_GOBJ_CLASS_UI, 16, 0);
         if (gobj == NULL) {
             OSReport("Error : gobj dont't get (ifAddTime)\n");
-            OSPanic("iftime.c", 383, "");
+            OSPanic("iftime.c", 383, ifTime_804D5790);
         }
         jobj = HSD_JObjLoadJoint(ifTime_match_timer_models.joint);
         if (jobj == NULL) {
             OSReport("Error : jobj dont't get (ifAddTime)\n");
-            OSPanic("iftime.c", 389, "");
+            OSPanic("iftime.c", 389, ifTime_804D5790);
         }
         HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
         GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 11, 0);
