@@ -231,8 +231,9 @@ void ifTime_CreateTimers(void)
     StartMeleeRules* rules = gm_8016AE50();
     HSD_GObj* gobj;
     HSD_JObj* jobj;
+    HSD_JObj* digit;
     int i;
-    DynamicModelDesc** ScInfTim_scene_models;
+    void *anims, *matanims, *shapeanims;
     if (!rules->x1_0 && !rules->x0_6) {
         ifTime_data.match_timer = NULL;
         return;
@@ -255,17 +256,18 @@ void ifTime_CreateTimers(void)
         }
         HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
         GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 11, 0);
-        lb_8000C07C(jobj, 0, ifTime_match_timer_models.anims,
-                    ifTime_match_timer_models.matanims,
-                    ifTime_match_timer_models.shapeanims);
+        anims = ifTime_match_timer_models.anims;
+        matanims = ifTime_match_timer_models.matanims;
+        shapeanims = ifTime_match_timer_models.shapeanims;
+        lb_8000C07C(jobj, 0, anims, matanims, shapeanims);
         HSD_JObjReqAnimAll(jobj, 0.0f);
         HSD_GObjProc_8038FD54(gobj, ifTime_UpdateTimers, 17);
         HSD_JObjSetTranslate(jobj, ifAll_802F3414());
-        jobj = HSD_JObjGetChild(jobj);
-        ifTime_data.digits[0] = jobj;
+        digit = HSD_JObjGetChild(jobj);
+        ifTime_data.digits[0] = digit;
         for (i = 1; i < 10; i++) {
-            jobj = HSD_JObjGetNext(jobj);
-            ifTime_data.digits[i] = jobj;
+            digit = HSD_JObjGetNext(digit);
+            ifTime_data.digits[i] = digit;
         }
         ifTime_data.match_timer = gobj;
     }
