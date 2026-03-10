@@ -689,7 +689,37 @@ void grMuteCity_801F2AB0(s32 arg0, HSD_JObj* arg1)
     }
 }
 
-/// #fn_801F2B58
+void fn_801F2B58(Ground* gp, s32 arg1, CollData* cd, s32 arg3,
+                 mpLib_GroundEnum arg4, f32 arg5)
+{
+    s32 b1234 = cd->x34_flags.b1234;
+
+    if (grMc_804D69D4 != 1) {
+        return;
+    }
+
+    if ((u32) (b1234 - 2) > 1 && b1234 != 5) {
+        return;
+    }
+
+    if (arg4 != mpLib_GroundEnum_Unk2) {
+        return;
+    }
+
+    if (cd->x0_gobj == NULL) {
+        return;
+    }
+
+    if (cd->x0_gobj->p_link != 9) {
+        return;
+    }
+
+    if (cd->x0_gobj == NULL) {
+        return;
+    }
+
+    cd->x34_flags.b7 = 1;
+}
 
 DynamicsDesc* grMuteCity_801F2BBC(enum_t arg0)
 {
