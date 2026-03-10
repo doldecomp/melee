@@ -52,7 +52,21 @@ bool itKyasarin_UnkMotion0_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itKyasarin_UnkMotion0_Coll
+bool itKyasarin_UnkMotion0_Coll(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itKyasarinAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+    if (ip->facing_dir == 1.0f) {
+        if (ip->pos.x >= attr->x2C) {
+            it_802ECFE0(gobj);
+        }
+    } else {
+        if (ip->pos.x <= attr->x28) {
+            it_802ECFE0(gobj);
+        }
+    }
+    return false;
+}
 
 void it_802ECFE0(Item_GObj* gobj)
 {
