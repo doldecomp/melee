@@ -220,7 +220,19 @@ bool itTincle_UnkMotion8_Coll(Item_GObj* gobj)
     return false;
 }
 
-/// #it_802EC3F4
+void it_802EC3F4(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    ip->x40_vel.z = 0.0f;
+    ip->x40_vel.y = 0.0f;
+    ip->x40_vel.x = 0.0f;
+    ip->xDC8_word.flags.x1A = 0;
+    ip->x70_nudge.z = 0.0f;
+    ip->x70_nudge.y = 0.0f;
+    ip->x70_nudge.x = 0.0f;
+    Item_80268E5C(gobj, 9, ITEM_ANIM_UPDATE);
+    it_802EC9E8(gobj);
+}
 
 bool itTincle_UnkMotion9_Anim(Item_GObj* gobj)
 {
