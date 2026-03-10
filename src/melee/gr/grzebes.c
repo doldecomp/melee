@@ -623,7 +623,7 @@ void grZebes_801D925C(HSD_GObj* gobj)
     {
         Vec3 pos1 = { 24.1f, -4.6f, 0.0f };
         Vec3 pos2 = { 24.05f, 2.2f, 0.0f };
-    
+
         jobj = Ground_801C3FA4(gobj, 1);
         if (jobj != NULL) {
             lb_8000B1CC(jobj, &pos1, &grZe_8049F158[1]);
