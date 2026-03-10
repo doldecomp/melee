@@ -5142,17 +5142,6 @@ s32 fn_801967E0(s32 arg0)
     return rand;
 }
 
-struct lbl_803DA0D0_t {
-    /* 0x00 */ u8 icon_model_map[0x18];
-    /* 0x18 */ u8 pad_0x18[0x1E - 0x18];
-    /* 0x1E */ u8 rank_thresholds[32][6];
-    /* 0xDE */ u8 pad_0xDE[0xE0 - 0xDE];
-    /* 0xE0 */ f32 bounce_y[41];
-}; /* size = 0x184 */
-STATIC_ASSERT(sizeof(struct lbl_803DA0D0_t) == 0x184);
-
-extern struct lbl_803DA0D0_t lbl_803DA0D0;
-
 s32 fn_80196CF8(void)
 {
     TmData* tmdata;

@@ -118,3 +118,14 @@ static u32 lbl_803D9E1C[] = {
 struct {
     int x0, x4, x8;
 } lbl_803D9F0C = { -1, -1, -1 };
+
+struct lbl_803DA0D0_t {
+    /* 0x00 */ u8 icon_model_map[0x18];
+    /* 0x18 */ u8 pad_0x18[0x1E - 0x18];
+    /* 0x1E */ u8 rank_thresholds[32][6];
+    /* 0xDE */ u8 pad_0xDE[0xE0 - 0xDE];
+    /* 0xE0 */ f32 bounce_y[41];
+}; /* size = 0x184 */
+STATIC_ASSERT(sizeof(struct lbl_803DA0D0_t) == 0x184);
+
+extern struct lbl_803DA0D0_t lbl_803DA0D0;
