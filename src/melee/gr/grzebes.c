@@ -196,7 +196,7 @@ typedef struct grZe_AcidState {
     /* +14 */ HSD_JObj* x14_jobj1;
     /* +18 */ HSD_JObj* x18_jobj2;
     /* +1C */ Item_GObj* x1C_mat;
-    /* +20 */ s32 x20_anim_idx;
+    /* +20 */ s16 x20_anim_idx;
 } grZe_AcidState;
 
 extern const grZe_BubbleConfig grZe_803B8044;
@@ -1188,8 +1188,8 @@ s32 grZebes_801DA528(HSD_GObj* arg0, void* arg1, s32 arg2, s32 arg3)
             grMaterial_801C8E28((HSD_GObj*) st->x1C_mat);
             break;
         case 2: {
-            f32 mn = grZe_804D6990->x50;
-            st->x02_timer = (s16) (((grZe_804D6990->x54 - mn) * HSD_Randf()) + mn);
+            f32 r = HSD_Randf();
+            st->x02_timer = (s16)((grZe_804D6990->x50) + r * (grZe_804D6990->x54 - (grZe_804D6990->x50)));
             break;
         }
         case 3:
@@ -1501,6 +1501,7 @@ s32 grZebes_801DB088(Ground* gp, s32 arg1)
                 }
 
                 {
+                    // Clamp
                     f32 speed = grZe_804D6990->x68;
                     f32 target = entry->x1C;
                     f32 current = entry->x18_size;
