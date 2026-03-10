@@ -340,6 +340,9 @@ void fn_80258ED0(HSD_GObj* gobj)
 }
 
 #pragma push
+#pragma optimization_level 2
+#pragma opt_strength_reduction on
+#pragma opt_propagation off
 void fn_802590C4(HSD_GObj* gobj)
 {
     extern f64 mnGallery_804DC368;
