@@ -80,7 +80,19 @@ bool grPushOn_80218670(Ground_GObj* arg)
     return false;
 }
 
-/// #fn_80218678
+bool fn_80218678(void)
+{
+    HSD_GObj* gobj = Ground_801C2BA4(1);
+    if (gobj != NULL) {
+        Ground* gp = gobj->user_data;
+        if (gp != NULL) {
+            if (gp->u.map.xC4_b0) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
 
 /// #grPushOn_802186C8
 
