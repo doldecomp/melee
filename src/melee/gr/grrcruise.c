@@ -4,6 +4,9 @@
 
 #include <platform.h>
 
+#include "cm/camera.h"
+#include "gm/gm_1A45.h"
+#include "gr/grdisplay.h"
 #include "gr/grlib.h"
 #include "gr/ground.h"
 #include "gr/inlines.h"
