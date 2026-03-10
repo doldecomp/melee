@@ -115,7 +115,17 @@ void it_2725_Logic32_Spawned(Item_GObj* gobj)
     it_802CB798(gobj);
 }
 
-/// #it_2725_Logic33_Spawned
+void it_2725_Logic33_Spawned(Item_GObj* gobj)
+{
+    UNUSED u32 _pad;
+    f32 scale;
+    HSD_JObj* jobj = gobj->hsd_obj;
+    PAD_STACK(4);
+    scale = 1.0f;
+    efSync_Spawn(0x45C, gobj, jobj, &scale);
+    efSync_Spawn(0x45E, gobj, jobj, &scale);
+    it_802CB798(gobj);
+}
 
 void itMatadogas_Logic33_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
