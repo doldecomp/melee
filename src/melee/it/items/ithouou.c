@@ -173,7 +173,15 @@ bool itHouou_UnkMotion4_Coll(Item_GObj* gobj)
     return false;
 }
 
-/// #it_802D2A58
+void it_802D2A58(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    Item_80268E5C(gobj, 5, ITEM_ANIM_UPDATE);
+    ip->entered_hitlag = efLib_PauseAll;
+    ip->exited_hitlag = efLib_ResumeAll;
+    ip->on_accessory = (HSD_GObjEvent) it_802D2B4C;
+    ip->xDCC_flag.b3 = true;
+}
 
 bool itHouou_UnkMotion5_Anim(Item_GObj* gobj)
 {
