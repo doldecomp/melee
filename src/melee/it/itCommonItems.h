@@ -152,9 +152,12 @@ typedef struct itKyasarin_ItemVars {
 } itKyasarin_ItemVars;
 
 typedef struct itKyasarinAttributes {
-    /* +0 */ s32* x0;
-    /* +4 */ f32 x4;
-    /* +8 */ f32 x8;
+    /* +0  */ s32* x0;
+    /* +4  */ f32 x4;
+    /* +8  */ f32 x8;
+    /* +C  */ u8 xC_pad[0x28 - 0xC];
+    /* +28 */ f32 x28;
+    /* +2C */ f32 x2C;
 } itKyasarinAttributes;
 
 typedef struct itKyasarinEgg_ItemVars {
@@ -173,7 +176,9 @@ typedef struct itKyasarinEggAttributes {
 
 typedef struct itHououAttr {
     /* +00 */ f32 timer;
-    /* +04 */ u8 x4_pad[0x14];
+    /* +04 */ u8 x4_pad[0xC];
+    /* +10 */ f32 x10;
+    /* +14 */ u8 x14_pad[0x4];
     /* +18 */ f32 x18;
     /* +1C */ f32 x1C;
 } itHououAttr;
@@ -1014,7 +1019,7 @@ typedef struct itMewtwoShadowball_ItemVars {
     /* ip+E00 */ f32 x2C[6];
     /* ip+E18 */ f32 x44;
     /* ip+E1C */ f32 x48;
-    /* ip+E20 */ f32 x4C;
+    /* ip+E20 */ s32 x4C;
     /* ip+E24 */ f32 x50;
     /* ip+E28 */ s32 x54;
     /* ip+E2C */ s32 x58;

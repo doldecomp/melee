@@ -7,6 +7,8 @@
 #include "it/it_2725.h"
 #include "it/item.h"
 
+#include <math.h>
+
 /// #it_802C4D10
 
 bool it_802C4F50(Item_GObj* gobj, CollData* cd)
@@ -70,7 +72,17 @@ bool itMewtwoshadowball_UnkMotion0_Coll(Item_GObj* gobj)
 
 /// #itMewtwoshadowball_UnkMotion8_Anim
 
-/// #itMewtwoshadowball_UnkMotion8_Phys
+void itMewtwoshadowball_UnkMotion8_Phys(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    if (ip->xDD4_itemVar.mewtwoshadowball.x4C > 0) {
+        ip->x40_vel.x =
+            ip->xDD4_itemVar.mewtwoshadowball.x4.y * cosf(ip->xDD4_itemVar.mewtwoshadowball.x4.x);
+        ip->x40_vel.y =
+            ip->xDD4_itemVar.mewtwoshadowball.x4.y * sinf(ip->xDD4_itemVar.mewtwoshadowball.x4.x);
+    }
+    it_802C4D10(gobj);
+}
 
 bool itMewtwoshadowball_UnkMotion8_Coll(Item_GObj* gobj)
 {
@@ -136,7 +148,18 @@ bool itMewtwoShadowball_Logic101_Absorbed(Item_GObj* arg0)
     return true;
 }
 
-/// #it_2725_Logic101_Reflected
+bool it_2725_Logic101_Reflected(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    ip->xDD4_itemVar.mewtwoshadowball.x4.x += M_PI;
+    while (ip->xDD4_itemVar.mewtwoshadowball.x4.x < 0.0f) {
+        ip->xDD4_itemVar.mewtwoshadowball.x4.x += M_TAU;
+    }
+    while (ip->xDD4_itemVar.mewtwoshadowball.x4.x > M_TAU) {
+        ip->xDD4_itemVar.mewtwoshadowball.x4.x -= M_TAU;
+    }
+    return false;
+}
 
 bool itMewtwoShadowball_Logic101_HitShield(Item_GObj* arg0)
 {

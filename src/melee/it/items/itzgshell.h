@@ -51,7 +51,7 @@
 /* 2DF724 */ bool itZrshell_UnkMotion11_Anim(Item_GObj*);
 /* 2DF93C */ void itZrshell_UnkMotion11_Phys(Item_GObj*);
 /* 2DF970 */ bool itZrshell_UnkMotion11_Coll(Item_GObj*);
-/* 2DF9F8 */ UNK_RET it_802DF9F8(UNK_PARAMS);
+/* 2DF9F8 */ void it_802DF9F8(Item_GObj*);
 /* 2DFA68 */ bool itZrshell_UnkMotion10_Anim(Item_GObj*);
 /* 2DFB90 */ void itZrshell_UnkMotion10_Phys(Item_GObj*);
 /* 2DFBAC */ bool itZrshell_UnkMotion10_Coll(Item_GObj*);
@@ -64,7 +64,7 @@
 /* 2DFE7C */ int fn_802DFE7C(Item_GObj* gobj);
 /* 2DFED4 */ void it_802DFED4(Item_GObj*, Item_GObj*);
 /* 2DFEF4 */ void itZGShell_Logic11_Destroyed(Item_GObj*);
-/* 2DFF14 */ UNK_RET it_802DFF14(UNK_PARAMS);
+/* 2DFF14 */ void it_802DFF14(Item_GObj*, s32);
 /* 2DFFB8 */ void it_802DFFB8(HSD_JObj*, Item*);
 /* 2E0100 */ Item_GObj* it_802E0100(s32, Vec3*, s32);
 /* 2E0408 */ bool itZRShell_Logic12_Clanked(Item_GObj*);
