@@ -701,9 +701,7 @@ struct grZebes_GroundVars4 {
 struct grZebes_GroundVars5 {
     /* +00 gp+C4 */ s16 xC4;
     /* +02 gp+C6 */ s16 xC6;
-    /* +04 gp+C8 */ u8 xC8;
-    /* +05 gp+C9 */ u8 xC9;
-    /* +06 gp+CA */ s16 xCA;
+    /* +04 gp+C8 */ u32 xC8;
     /* +08 gp+CC */ f32 xCC;
     /* +0C gp+D0 */ f32 xD0;
     /* +10 gp+D4 */ f32 xD4;
