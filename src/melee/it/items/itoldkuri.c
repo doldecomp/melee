@@ -83,7 +83,16 @@ bool itOldkuri_UnkMotion1_Anim(Item_GObj* gobj)
 
 /// #itOldkuri_UnkMotion1_Phys
 
-/// #itOldkuri_UnkMotion1_Coll
+bool itOldkuri_UnkMotion1_Coll(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    PAD_STACK(8);
+    it_8026D62C(gobj, it_802D7AF0);
+    if (it_80276308(gobj) == 4 && ip->xDD4_itemVar.oldkuri.xDFC != 0) {
+        it_802D775C(gobj);
+    }
+    return it_8027C794(gobj);
+}
 
 void it_802D775C(Item_GObj* gobj)
 {
