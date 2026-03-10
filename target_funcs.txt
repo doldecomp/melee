@@ -1,7 +1,7 @@
 file path: src/melee/gm/gm_18A5.c
 - [x] fn_8019B860         
 - [x] fn_8018F410         
-- [ ] fn_80196CF8         
+- [x] fn_80196CF8         
 - [ ] fn_80191154         
 - [ ] gm_801963B4_OnEnter 
 - [ ] gm_80190FE4         
