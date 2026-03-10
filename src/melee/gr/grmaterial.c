@@ -25,7 +25,7 @@ grMaterial_801C8D44(int arg0, int arg1, Ground* arg2, Vec3* arg3, int arg4,
 /* 1C8E48 */ static bool grMaterial_801C8E48(HSD_GObj* gobj);
 /* 1C8E74 */ static void grMaterial_801C8E74(void);
 /* 1C8EF8 */ static void fn_801C8EF8(HSD_MObj* mobj, u32 rendermode);
-/* 1C9490 */ void grMaterial_801C9490(HSD_JObj* jobj);
+/* 1C9490 */ void grMaterial_801C9490(Item_GObj* gobj, CommandInfo* cmd);
 /* 3E0A20 */ static HSD_MObjInfo grMaterial_803E0A20 = { 0 };
 /* 4D456C */ static ItCmd grMaterial_804D456C[1];
 
@@ -247,12 +247,18 @@ void grMaterial_801C8E74(void)
 
 /// #grMaterial_801C92C0
 
-void grMaterial_801C9470(HSD_JObj* jobj)
+void grMaterial_801C9470(Item_GObj* gobj, CommandInfo* cmd)
 {
-    grMaterial_801C9490(jobj);
+    grMaterial_801C9490(gobj, cmd);
 }
 
-/// #grMaterial_801C9490
+void grMaterial_801C9490(Item_GObj* gobj, CommandInfo* cmd)
+{
+    Ground* gp = gobj->user_data;
+    u32 val = (*(u16*) cmd->ptr[0] >> 2) & 0xFF;
+    *(f32*) ((u8*) gp + 0xC0) = (f32) val;
+    gp->x10_flags.b6 = 1;
+}
 
 void grMaterial_801C94D8(void* obj)
 {
