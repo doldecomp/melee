@@ -4,8 +4,17 @@
 #include <placeholder.h>
 
 #include <baselib/forward.h>
+#include <baselib/gobj.h>
+#include <baselib/jobj.h>
+#include <baselib/sislib.h>
 
 #include <stdbool.h>
+
+typedef struct MnName_GObj {
+    /* +00 */ HSD_GObj gobj;
+    /* +38 */ void* x38;
+    /* +3C */ HSD_Text* text;
+} MnName_GObj;
 
 /* 23749C */ UNK_RET mnName_8023749C(UNK_PARAMS);
 /* 23754C */ char* GetNameText(int slot);
