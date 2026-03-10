@@ -1,3 +1,5 @@
+#include "grdisplay.h"
+
 #include "inlines.h"
 
 #include "cm/camera.h"
@@ -18,7 +20,6 @@
 
 /* 1C5B90 */ static void grDisplay_801C5B90(HSD_JObj* jobj, Mtx vmtx, u32 arg2,
                                             u32 rendermode);
-/* 1C5F60 */ static void grDisplay_801C5F60(HSD_GObj* gobj, int code);
 /* 1C6620 */ static void grAnime_801C6620(HSD_PObj* arg0, HSD_ShapeAnim* arg1);
 
 void grDisplay_801C5B90(HSD_JObj* jobj, Mtx vmtx, u32 flags, u32 rendermode)
