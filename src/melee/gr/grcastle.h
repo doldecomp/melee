@@ -4,6 +4,7 @@
 #include <placeholder.h>
 
 #include "gr/forward.h"
+#include "it/forward.h"
 #include "lb/forward.h"
 #include "mp/forward.h"
 #include <baselib/forward.h>
@@ -69,7 +70,7 @@ struct unkCastle {
 /* 1CF7B0 */ void grCastle_801CF7B0(Ground_GObj*);
 /* 1CF868 */ UNK_RET grCastle_801CF868(UNK_PARAMS);
 /* 1CFAFC */ UNK_RET fn_801CFAFC(UNK_PARAMS);
-/* 1CFB68 */ UNK_RET fn_801CFB68(UNK_PARAMS);
+/* 1CFB68 */ void fn_801CFB68(Item_GObj*, Ground*, HSD_GObj*);
 /* 1CFBD4 */ UNK_RET grCastle_801CFBD4(UNK_PARAMS);
 /* 1D0298 */ UNK_RET grCastle_801D0298(UNK_PARAMS);
 /* 1D02B8 */ UNK_RET grCastle_801D02B8(UNK_PARAMS);
