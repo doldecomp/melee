@@ -1172,6 +1172,7 @@ void grZebes_801DA4FC(Ground_GObj* gobj)
 s32 grZebes_801DA528(HSD_GObj* arg0, void* arg1, s32 arg2, s32 arg3)
 {
     grZe_AcidState* st = (grZe_AcidState*) arg1;
+    f32 f0, f1;
 
     if (st->x00_state != st->x01_next) {
         st->x00_state = st->x01_next;
@@ -1188,8 +1189,9 @@ s32 grZebes_801DA528(HSD_GObj* arg0, void* arg1, s32 arg2, s32 arg3)
             grMaterial_801C8E28((HSD_GObj*) st->x1C_mat);
             break;
         case 2: {
-            f32 r = HSD_Randf();
-            st->x02_timer = (s16) (r * (grZe_804D6990->x54 - grZe_804D6990->x50) + grZe_804D6990->x50);
+            f1 = HSD_Randf();
+            f0 = (grZe_804D6990->x54 - grZe_804D6990->x50);
+            st->x02_timer = (s16)(f0 * f1 + grZe_804D6990->x50);
             break;
         }
         case 3:
@@ -1203,7 +1205,7 @@ s32 grZebes_801DA528(HSD_GObj* arg0, void* arg1, s32 arg2, s32 arg3)
     switch (st->x00_state) {
     case 0: {
         s16 t = st->x02_timer;
-        st->x02_timer = t + 1;
+        st->x02_timer += 1;
         if ((f32) t > grZe_804D6990->x48) {
             st->x02_timer = 0;
             st->x10_damage -= 1.0f;
@@ -1212,51 +1214,58 @@ s32 grZebes_801DA528(HSD_GObj* arg0, void* arg1, s32 arg2, s32 arg3)
             }
         }
         {
-            f32 off = st->x08_offset;
-            f32 thresh = grZe_804D6990->x44;
-            if (off > thresh) {
+            if (st->x08_offset > grZe_804D6990->x44) {
                 st->x0C_velocity -= grZe_804D6990->x38;
-            } else if (off < -thresh) {
+            } else if (st->x08_offset < -grZe_804D6990->x44) {
                 st->x0C_velocity += grZe_804D6990->x38;
             }
         }
         st->x0C_velocity *= (1.0f - grZe_804D6990->x3C);
         {
-            f32 vel = st->x0C_velocity;
-            f32 max_vel = grZe_804D6990->x34;
-            if (vel > max_vel) {
-                st->x0C_velocity = max_vel;
-            } else if (vel < -max_vel) {
-                st->x0C_velocity = -max_vel;
+            if (st->x0C_velocity > grZe_804D6990->x34) {
+                st->x0C_velocity = grZe_804D6990->x34;
+            } else if (st->x0C_velocity < -grZe_804D6990->x34) {
+                st->x0C_velocity = -grZe_804D6990->x34;
             }
         }
         st->x08_offset += st->x0C_velocity;
         {
-            f32 off = st->x08_offset;
-            f32 max_off = grZe_804D6990->x30;
-            if (off > max_off) {
-                st->x08_offset = max_off;
-            } else if (off < -max_off) {
-                st->x08_offset = -max_off;
+            if (st->x08_offset > grZe_804D6990->x30) {
+                st->x08_offset = grZe_804D6990->x30;
+            } else if (st->x08_offset < - grZe_804D6990->x30) {
+                st->x08_offset = -grZe_804D6990->x30;
             }
         }
-        if (ABS(st->x08_offset) < grZe_804D6990->x44) {
-            if (ABS(st->x0C_velocity) < grZe_804D6990->x40) {
-                st->x08_offset = 0.0f;
-                st->x0C_velocity = 0.0f;
+        {
+            f0 = st->x08_offset;
+            if (f0 < 0.0f) {
+                f0 = -f0;
+            }
+            if (f0 < grZe_804D6990->x44) {
+                f32 abs_vel = st->x0C_velocity;
+                if (abs_vel < 0.0f) {
+                    abs_vel = -abs_vel;
+                }
+                if (abs_vel < grZe_804D6990->x40) {
+                    st->x08_offset = 0.0f;
+                    st->x0C_velocity = 0.0f;
+                }
             }
         }
+        
         HSD_JObjSetTranslateX(st->x14_jobj1, st->x04_base_x + st->x08_offset);
         HSD_JObjSetTranslateX(st->x18_jobj2, st->x04_base_x + st->x08_offset);
         {
+            f32 dmg = st->x10_damage;
+            f32 thr = grZe_804D6990->x4C;
             f32 frame;
-            if (st->x10_damage > grZe_804D6990->x4C) {
+            if (dmg > thr) {
                 frame = 30.0f;
                 st->x01_next = 1;
                 Ground_801C53EC(0x61A86);
                 ftLib_80086C9C(1, 0x5A);
             } else {
-                frame = (f32) ((f64) (st->x10_damage * grZe_804D6990->x4C) / 30.0);
+                frame = (f32) ((f64) (dmg * thr) / 30.0);
             }
             grAnime_801C7B24(arg0, st->x20_anim_idx, 1, frame);
         }
