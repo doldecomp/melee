@@ -32,7 +32,20 @@ bool itOldkuri_UnkMotion0_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itOldkuri_UnkMotion0_Phys
+void itOldkuri_UnkMotion0_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->xDD4_itemVar.oldkuri.xDF8 == 0) {
+        if (ip->facing_dir == 1.0f) {
+            it_802D775C(gobj);
+        } else {
+            it_802D758C(gobj);
+        }
+    } else {
+        ip->xDD4_itemVar.oldkuri.xDF8--;
+    }
+    it_8027C0A8(gobj, 0.0f, 5.0f);
+}
 
 bool itOldkuri_UnkMotion0_Coll(Item_GObj* gobj)
 {
