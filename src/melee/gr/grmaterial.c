@@ -324,4 +324,10 @@ void fn_801C9664(Item_GObj* gobj, CommandInfo* cmd, int arg2)
     grMaterial_804D456C[idx](gobj, cmd);
 }
 
-/// #grMaterial_801C9698
+void grMaterial_801C9698(HSD_GObj* gobj)
+{
+    Ground* gp = gobj->user_data;
+    if (lb_80014258(gobj, (ColorOverlay*) ((u8*) gp + 0x40), fn_801C9664)) {
+        gp->x10_flags.b4 = 1;
+    }
+}
