@@ -13,12 +13,15 @@
 #include "gr/inlines.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
+#include "mp/forward.h"
 
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
 extern StageCallbacks grOy_803E6488[];
+typedef struct { s16 x; s16 y; } grOy_JointPair;
+extern grOy_JointPair grOy_803E6574[];
 
 static struct {
     int x0;
@@ -186,7 +189,32 @@ bool grOldYoshi_8020F080(Ground_GObj* arg)
 
 void grOldYoshi_8020F2A4(Ground_GObj* arg) {}
 
-/// #fn_8020F2A8
+void fn_8020F2A8(Ground* gp, s32 joint_id, CollData* cd, s32 arg3,
+                 mpLib_GroundEnum arg4, f32 arg5)
+{
+    s32 idx;
+    grOy_JointPair* p;
+
+    if ((s32) cd->x34_flags.b1234 != 1) {
+        return;
+    }
+
+    p = grOy_803E6574;
+    idx = 0;
+    if (joint_id != p[0].x) {
+        idx = 1;
+        if (joint_id != (++p)->x) {
+            idx = 2;
+            if (joint_id != (p + 1)->x) {
+                idx = 3;
+            }
+        }
+    }
+
+    if (idx != 3) {
+        gp->gv.oldyoshi.entries[idx].b4 = 1;
+    }
+}
 
 /// #grOldYoshi_8020F31C
 

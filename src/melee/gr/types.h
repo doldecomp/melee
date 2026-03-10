@@ -877,6 +877,17 @@ struct grOnett_AwningData {
     /* +0x14 */ u8 pad14[8];
 };
 
+struct grOldYoshi_Entry {
+    u8 b0123 : 4;
+    u8 b4 : 1;
+    u8 b567 : 3;
+    u8 pad[0x13];
+};
+
+struct grOldYoshi_GroundVars {
+    struct grOldYoshi_Entry entries[3];
+};
+
 struct grOnett_GroundVars {
     /*  +0 gp+C4:0 */ u8 x0_b0 : 1;
     u8 pad[0xCC - 0xC5];
@@ -1088,6 +1099,7 @@ struct Ground {
             struct grKraid_GroundVars2 kraid2;
             struct grMuteCity_GroundVars mutecity;
             struct grMuteCity_GroundVars2 mutecity2;
+            struct grOldYoshi_GroundVars oldyoshi;
             struct grOnett_GroundVars onett;
             struct grPura_GroundVars pura;
             struct grPura_GroundVars2 pura2;
