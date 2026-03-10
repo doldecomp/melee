@@ -3,11 +3,11 @@ file path: src/melee/gm/gm_18A5.c
 - [x] fn_8018F410         
 - [x] fn_80196CF8         
 - [x] fn_80191154         
-- [ ] gm_801963B4_OnEnter 
+- [x] gm_801963B4_OnEnter 
 - [x] gm_80190FE4         
-- [ ] fn_8019A71C         
-- [ ] fn_8019237C         
-- [ ] fn_80191E9C         
+- [x] fn_8019A71C         
+- [x] fn_8019237C         
+- [x] fn_80191E9C         
 - [x] fn_80196684
 - [ ] fn_80191D38         
 - [ ] fn_80191240         
