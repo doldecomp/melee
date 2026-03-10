@@ -556,6 +556,7 @@ struct Item {
         itFoods_ItemVars foods;
         itFoxBlaster_ItemVars foxblaster;
         itFoxIllusion_ItemVars foxillusion;
+        itArwingLaser_ItemVars arwinglaser;
         itFoxLaser_ItemVars foxlaser;
         itFreeze_ItemVars freeze;
         itFreezer_ItemVars freezer;
