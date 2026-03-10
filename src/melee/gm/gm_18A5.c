@@ -1598,82 +1598,36 @@ void fn_8018F888(void)
     lbl_80473AB8[i+1].x21 = 0;
 }
 
-/// @todo Currently 84.63% match - needs loop pattern fix
-
 void fn_8018FA24(void)
 {
     s32 player_count;
     s32 player_idx;
-    u8* tmdata;
     u8* dst;
-    u8* ptr;
-    s32 slot;
+    struct BracketEntry* ptr;
+    s32 i;
     s32 char_kind;
-    s32 ctr;
 
-    PAD_STACK(8);
+    PAD_STACK(12);
 
-    ptr = (u8*) lbl_80473AB8;
-    tmdata = ptr + 0x370C;
-    slot = 0;
 
-    ctr = 8;
-    do {
-        if (ptr[0x01] != 0) {
-            goto found;
+    for (i = 0; i < 64; i++) {
+        if (lbl_80473AB8[i].x1 != 0) {
+            break;
         }
-        ptr += 0xDC;
-        slot += 1;
-        if (ptr[0x01] != 0) {
-            goto found;
-        }
-        ptr += 0xDC;
-        slot += 1;
-        if (ptr[0x01] != 0) {
-            goto found;
-        }
-        ptr += 0xDC;
-        slot += 1;
-        if (ptr[0x01] != 0) {
-            goto found;
-        }
-        ptr += 0xDC;
-        slot += 1;
-        if (ptr[0x01] != 0) {
-            goto found;
-        }
-        ptr += 0xDC;
-        slot += 1;
-        if (ptr[0x01] != 0) {
-            goto found;
-        }
-        ptr += 0xDC;
-        slot += 1;
-        if (ptr[0x01] != 0) {
-            goto found;
-        }
-        ptr += 0xDC;
-        slot += 1;
-        if (ptr[0x01] != 0) {
-            goto found;
-        }
-        ptr += 0xDC;
-        slot += 1;
-    } while (--ctr != 0);
+    }
 
-found:
-    dst = tmdata;
-    ptr = (u8*) lbl_80473AB8 + slot * 0xDC;
+    // TODO: remove this pointer hackery
+    dst = (u8*) &gm_804771C4;
+    ptr = &lbl_80473AB8[i];
     player_count = 0;
-    player_idx = 0;
 
-    do {
-        dst[0x4B6] = ptr[0x30];
-        dst[0x4B7] = ptr[0x50];
-        *(u16*) (dst + 0x4BE) = *(u16*) (tmdata + 0x40 + ptr[0x50] * 0x12);
-        dst[0x4BC] = ptr[0x51];
-        dst[0x4BD] = ptr[0x52];
-        dst[0x4B9] = ptr[0x4D];
+    for (player_idx = 0; player_idx < 4; player_idx++) {
+        dst[0x4B6] = ptr->x30;
+        dst[0x4B7] = ptr->x50;
+        *(u16*) (dst + 0x4BE) = *(u16*) (dst + 0x40 + ptr->x50 * 0x12);
+        dst[0x4BC] = ptr->x51;
+        dst[0x4BD] = ptr->x52;
+        dst[0x4B9] = ptr->x4D;
         char_kind = dst[0x4B9];
         if (char_kind >= 0x13) {
             if (char_kind == 0x1D) {
@@ -1683,21 +1637,20 @@ found:
             }
         }
         Player_SetPlayerCharacter(player_idx, char_kind);
-        dst[0x4B8] = ptr[0x4E];
+        dst[0x4B8] = ptr->x4E;
         char_kind = dst[0x4B8];
-        if (char_kind != 3) {
+        if ((u32) char_kind != 3) {
             player_count += 1;
         }
         Player_SetSlottype(player_idx, char_kind);
-        dst[0x4BB] = ptr[0x4F];
+        dst[0x4BB] = ptr->x4F;
         Player_SetCostumeId(player_idx, dst[0x4BB]);
-        dst[0x4BC] = ptr[0x51];
-        player_idx += 1;
+        dst[0x4BC] = ptr->x51;
         ptr += 0x2C;
         dst += 0xA;
-    } while (player_idx < 4);
+    }
 
-    tmdata[0x30] = player_count;
+    dst[0x30] = player_count;
 }
 
 #pragma push
