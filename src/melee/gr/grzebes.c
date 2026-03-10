@@ -96,7 +96,20 @@ static char grZe_803E1B60[0x24] = "%s:%d: couldn t get gobj(id=%d)\n";
 static u8 grZe_803E1B84[0x0A] = "grzebes.c";
 static u8 grZe_803E1B90[0xF0] = { 0 };
 static u8 grZe_803E1C80[0x6C] = { 0 };
-static u8 grZe_803E1CEC[0x3C] = { 0 };
+static char grZe_803E1CEC[0xA] = "map_a_gobj";
+typedef struct grZe_ColorEntry {
+    f32 threshold;
+    f32 r;
+    f32 g;
+    f32 b;
+} grZe_ColorEntry;
+static grZe_ColorEntry grZe_803E1CF8[3] = {
+    { -320.0f, 0.0f, 0.0f, 0.0f },
+    { -80.0f, 1.0f, 20.0f, 30.0f },
+    { 90.0f, 90.0f, 75.0f, 0.0f },
+ };
+static char grZe_803E1CE0[0xC] = "sima_jobj";
+static char grZe_803E1D28[0xA] = "translate";
 
 typedef struct grZe_AcidLevelEntry {
     /* +0 */ s16 x0_base;
@@ -1045,56 +1058,48 @@ void grZebes_801D9F84(Ground_GObj* gobj)
 
 void grZebes_801DA0C0(Ground_GObj* arg) {}
 
-typedef struct grZe_ColorEntry {
-    f32 threshold;
-    f32 r;
-    f32 g;
-    f32 b;
-} grZe_ColorEntry;
-
 void grZebes_801DA0C4(f32 level)
 {
     GXColor color;
-    grZe_ColorEntry* table =
-        (grZe_ColorEntry*) ((u8*) grZe_803E1A10 + 0x2D8);
-    grZe_ColorEntry* ep = &table[1];
+    grZe_ColorEntry* table = grZe_803E1CF8;
     u32 idx = 0;
 
-    while (idx < 3U && level > ep->threshold) {
-        ep++;
+    while (idx < 3U && level > table[idx].threshold) {
         idx++;
     }
 
     if ((s32) idx == 0) {
-        color.r = (u8) table[1].r;
-        color.g = (u8) table[1].g;
-        color.b = (u8) table[1].b;
+        color.r = (u8) table[0].r;
+        color.g = (u8) table[0].g;
+        color.b = (u8) table[0].b;
         color.a = 0xFF;
         return;
     }
 
     if (idx == 3) {
-        color.r = (u8) table[3].r;
-        color.g = (u8) table[3].g;
-        color.b = (u8) table[3].b;
+        color.r = (u8) table[2].r;
+        color.g = (u8) table[2].g;
+        color.b = (u8) table[2].b;
         color.a = 0xFF;
         return;
     }
 
     {
-        f32 t0 = table[idx].threshold;
-        f32 t = (level - t0) / (table[idx + 1].threshold - t0);
+        f32 t0 = table[idx - 1].threshold;
+        f32 t  = (level - t0) /
+                (table[idx].threshold - t0);
 
         if (Ground_801C2090(&color)) {
-            f32 r0 = table[idx].r;
-            color.r = (u8) (t * (table[idx + 1].r - r0) + r0);
+            // This is clearly some inline lerp function, but I am unsure how to do that.
+            f32 r0 = table[idx - 1].r;
+            color.r = (u8) (t * (table[idx].r - r0) + r0);
             {
-                f32 g0 = table[idx].g;
-                color.g = (u8) (t * (table[idx + 1].g - g0) + g0);
+                f32 g0 = table[idx - 1].g;
+                color.g = (u8) (t * (table[idx].g - g0) + g0);
             }
             {
-                f32 b0 = table[idx].b;
-                color.b = (u8) (t * (table[idx + 1].b - b0) + b0);
+                f32 b0 = table[idx - 1].b;
+                color.b = (u8) (t * (table[idx].b - b0) + b0);
             }
             Ground_801C205C(&color);
         }
