@@ -448,7 +448,14 @@ void grCastle_801CF7B0(Ground_GObj* gobj)
 
 /// #grCastle_801CF868
 
-/// #fn_801CFAFC
+void fn_801CFAFC(Item_GObj* item, Ground* gp, Vec3* pos, HSD_GObj* gobj,
+                 f32 arg4)
+{
+    *(s16*) &gp->gv.castle2.xC4 = 4;
+    if (ftLib_80086960(gobj)) {
+        ftLib_80086A4C(gobj, (f32) grCs_804D6970->x4);
+    }
+}
 
 void fn_801CFB68(Item_GObj* item_gobj, Ground* gp, HSD_GObj* gobj)
 {
