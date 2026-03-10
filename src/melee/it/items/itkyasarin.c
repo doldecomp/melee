@@ -132,7 +132,19 @@ void it_802ED25C(Item_GObj* gobj)
     Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
 }
 
-/// #itKyasarin_UnkMotion4_Anim
+bool itKyasarin_UnkMotion4_Anim(Item_GObj* gobj)
+{
+    if (!it_80272C6C(gobj)) {
+        Item* ip = GET_ITEM(gobj);
+        itKyasarinAttributes* attr =
+            ip->xC4_article_data->x4_specialAttributes;
+        ip->x40_vel.x = attr->x4 * ip->facing_dir;
+        ip->x40_vel.z = 0.0F;
+        ip->x40_vel.y = 0.0F;
+        Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
+    }
+    return false;
+}
 
 /// #itKyasarin_UnkMotion4_Coll
 
