@@ -70,46 +70,13 @@
 /* 1DCCB8 */ static DynamicsDesc* grZebes_801DCCB8(enum_t arg);
 /* 1DCCC0 */ static bool grZebes_801DCCC0(Vec3* arg, int arg0, HSD_JObj* jobj);
 
-static s16 grZe_803E1A10[] = {
-    1, 6, 21, 4, 6, 14, 3, 6,
-    1, 2, 7, 6, 5, 7, 1, 0,
-};
 
-static StageCallbacks grZe_callbacks[] = {
-    { NULL, NULL, NULL, NULL, { 0 } },
-    { NULL, NULL, NULL, NULL, { 0 } },
-    { NULL, NULL, NULL, NULL, { 0 } },
-    { NULL, NULL, NULL, NULL, { 0 } },
-    { NULL, NULL, NULL, NULL, { 0 } },
-    { NULL, NULL, NULL, NULL, { 0 } },
-    { NULL, NULL, NULL, NULL, { 0 } },
-    { NULL, NULL, NULL, NULL, { 0 } },
-    { NULL, NULL, NULL, NULL, { 0 } },
-    { NULL, NULL, NULL, NULL, { 0 } },
-    { NULL, NULL, NULL, NULL, { 0 } },
-    { NULL, NULL, NULL, NULL, { 0 } },
-};
-
-static u8 grZe_803E1B20[0x0A] = { 0 };
-static u8 grZe_803E1B2C[0x34] = { 0 };
-static char grZe_803E1B60[0x24] = "%s:%d: couldn t get gobj(id=%d)\n";
-static u8 grZe_803E1B84[0x0A] = "grzebes.c";
-static u8 grZe_803E1B90[0xF0] = { 0 };
-static u8 grZe_803E1C80[0x6C] = { 0 };
-static char grZe_803E1CEC[0xA] = "map_a_gobj";
 typedef struct grZe_ColorEntry {
     f32 threshold;
     f32 r;
     f32 g;
     f32 b;
 } grZe_ColorEntry;
-static grZe_ColorEntry grZe_803E1CF8[3] = {
-    { -320.0f, 0.0f, 0.0f, 0.0f },
-    { -80.0f, 1.0f, 20.0f, 30.0f },
-    { 90.0f, 90.0f, 75.0f, 0.0f },
- };
-static char grZe_803E1CE0[0xC] = "sima_jobj";
-static char grZe_803E1D28[0xA] = "translate";
 
 typedef struct grZe_AcidLevelEntry {
     /* +0 */ s16 x0_base;
@@ -229,6 +196,21 @@ bool grZebes_801D8550(void)
     return false;
 }
 
+StageCallbacks grZe_callbacks[] = {
+    { NULL, NULL, NULL, NULL, { 0 } },
+    { NULL, NULL, NULL, NULL, { 0 } },
+    { NULL, NULL, NULL, NULL, { 0 } },
+    { NULL, NULL, NULL, NULL, { 0 } },
+    { NULL, NULL, NULL, NULL, { 0 } },
+    { NULL, NULL, NULL, NULL, { 0 } },
+    { NULL, NULL, NULL, NULL, { 0 } },
+    { NULL, NULL, NULL, NULL, { 0 } },
+    { NULL, NULL, NULL, NULL, { 0 } },
+    { NULL, NULL, NULL, NULL, { 0 } },
+    { NULL, NULL, NULL, NULL, { 0 } },
+    { NULL, NULL, NULL, NULL, { 0 } },
+};
+
 Ground_GObj* grZebes_801D8558(int id)
 {
     Ground_GObj* gobj;
@@ -249,7 +231,7 @@ Ground_GObj* grZebes_801D8558(int id)
             HSD_GObjProc_8038FD54(gobj, cbs->callback2, 4);
         }
     } else {
-        OSReport(grZe_803E1B60, grZe_803E1B84, 256, id);
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grzebes.c", 256, id);
     }
     return gobj;
 }
@@ -269,6 +251,8 @@ static const grZe_803B7FF0_t grZe_803B7FF0 = {
     { 8.589f, 1.215f, 0.0f },
     { 23.151f, 1.207f, 0.0f },
 };
+
+u8 grZe_803E1B90[0xF0] = { 0 };
 
 void grZebes_801D8644(HSD_GObj* gobj)
 {
@@ -568,6 +552,8 @@ void grZebes_801D881C(HSD_GObj* gobj)
 }
 
 void grZebes_801D90FC(Ground_GObj* arg) {}
+
+u8 grZe_803E1C80[0x6C] = { 0 };
 
 void grZebes_801D9100(HSD_GObj* gobj)
 {
@@ -1058,7 +1044,11 @@ void grZebes_801DA0C0(Ground_GObj* arg) {}
 void grZebes_801DA0C4(f32 level)
 {
     GXColor color;
-    grZe_ColorEntry* table = grZe_803E1CF8;
+    grZe_ColorEntry table[3] = {
+        { -320.0f, 0.0f, 0.0f, 0.0f },
+        { -80.0f, 1.0f, 20.0f, 30.0f },
+        { 90.0f, 90.0f, 75.0f, 0.0f },
+    };
     u32 idx = 0;
 
     while (idx < 3U && level > table[idx].threshold) {
