@@ -1,5 +1,8 @@
 #include "mnname.h"
 
+#include "mnmain.h"
+#include "mnnamenew.h"
+
 #include <baselib/jobj.h>
 #include <melee/gm/gmmain_lib.h>
 
@@ -76,7 +79,20 @@ void CreateNameAtIndex(s32 slot)
 
 /// #mnName_MainInput
 
-/// #fn_80238540
+void fn_80238540(HSD_GObj* gobj)
+{
+    switch ((s32) mn_804A04F0.x10) {
+    case 0:
+        mnName_MainInput(gobj);
+        break;
+    case 1:
+        mnNameNew_MainInput(gobj);
+        break;
+    case 2:
+        mnName_ConfirmNameDeleteInput(gobj);
+        break;
+    }
+}
 
 void mnName_802385A0(HSD_GObj* gobj)
 {
