@@ -196,7 +196,56 @@ s32 tyDisplay_8031C2EC(void)
     return un_80305058(2, 0, 1, 60.0f);
 }
 
-/// #un_8031C354
+s32 un_8031C354(s32 id, s32 (*buf)[], s32 max, s32 kind)
+{
+    void* data;
+    void* other;
+    s32 i;
+    s32 count;
+    s32 val;
+
+    PAD_STACK(8);
+
+    if (id == -1) {
+        return 0;
+    }
+
+    data = un_8031B9DC(id);
+
+    if (kind == 99) {
+        kind = (s32) un_803060BC(id, 6);
+    }
+
+    count = 0;
+    for (i = 0; i < 0x125; i++) {
+        if (i == id) {
+            goto next;
+        }
+        if (un_80304CC8(i) == 0) {
+            goto next;
+        }
+        if (un_803049F4(i) == 0) {
+            goto next;
+        }
+        other = un_8031B9DC(i);
+        val = (s32) un_803060BC(i, 6);
+        if (((u8*) other)[4] != ((u8*) data)[4]) {
+            goto next;
+        }
+        if (val != kind) {
+            goto next;
+        }
+        count++;
+        (*buf)[0] = i;
+        buf = (s32 (*)[]) ((u8*) buf + 4);
+        if (count >= max) {
+            break;
+        }
+    next:;
+    }
+
+    return count;
+}
 
 /// #un_8031C454
 
