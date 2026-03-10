@@ -150,7 +150,30 @@ char* un_8031BB94(s8 idx)
     return table[idx];
 }
 
-/// #un_8031BBF4
+s32 un_8031BBF4(s8 arg0)
+{
+    char* table[] = {
+        "TyQuesD.dat",  "TyMycCmA.dat", "TyMycCmB.dat",
+        "TyMycCmC.dat", "TyMycCmD.dat", "TyMycCmE.dat",
+        "TyMycR1A.dat", "TyMycR1B.dat", "TyMycR1C.dat",
+        "TyMycR1D.dat", "TyMycR1E.dat", "TyMycR2A.dat",
+        "TyMycR2B.dat", "TyMycR2C.dat", "TyMycR2D.dat",
+        "TyMycR2E.dat", "TyMapA.dat",   "TyMapB.dat",
+        "TyMapC.dat",   "TyMapD.dat",   "TyMapE.dat",
+        "TySeriA.dat",  "TySeriB.dat",  "TySeriC.dat",
+        "TySeriD.dat",  "TySeriE.dat",  "TyEtcA.dat",
+        "TyEtcB.dat",   "TyEtcC.dat",   "TyEtcD.dat",
+        "TyEtcE.dat",  "TyPokeA.dat",  "TyPokeB.dat",
+        "TyPokeC.dat",  "TyPokeD.dat",  "TyPokeE.dat",
+        "TyItemA.dat",  "TyItemB.dat",  "TyItemC.dat",
+        "TyItemD.dat",  "TyItemE.dat",  "TyStandD.dat",
+        "TyQuesD.dat",
+    };
+    if (arg0 == -1) {
+        arg0 = 0;
+    }
+    return (s32) table[arg0];
+}
 
 /// #un_8031BC54
 
