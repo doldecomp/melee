@@ -1319,47 +1319,21 @@ s32 grZebes_801DAA08(void)
 {
     s32 indices[20];
     s32 count = 0;
-    s32 idx = 0;
     grZe_BubbleEntry* ptr = grZe_8049F170;
     s32* ip = indices;
     s32 ctr;
-
+    s32 idx = 0;
+    u32 i;
     for (ctr = 4; ctr != 0; ctr--) {
-        if (ptr->x00_active == 1 && idx != 0 && idx != 6 && ptr->x04 == NULL) {
-            *ip = idx;
-            ip++;
-            count++;
+        for (i = 0 * 0; i < 5; i++) {
+            if (ptr->x00_active == 1 && idx != 0 && idx != 6 && ptr->x04 == NULL) {
+                *ip = idx;
+                ip++;
+                count++;
+            }
+            ptr++;
+            idx++;
         }
-        ptr++;
-        idx++;
-        if (ptr->x00_active == 1 && idx != 0 && idx != 6 && ptr->x04 == NULL) {
-            *ip = idx;
-            ip++;
-            count++;
-        }
-        ptr++;
-        idx++;
-        if (ptr->x00_active == 1 && idx != 0 && idx != 6 && ptr->x04 == NULL) {
-            *ip = idx;
-            ip++;
-            count++;
-        }
-        ptr++;
-        idx++;
-        if (ptr->x00_active == 1 && idx != 0 && idx != 6 && ptr->x04 == NULL) {
-            *ip = idx;
-            ip++;
-            count++;
-        }
-        ptr++;
-        idx++;
-        if (ptr->x00_active == 1 && idx != 0 && idx != 6 && ptr->x04 == NULL) {
-            *ip = idx;
-            ip++;
-            count++;
-        }
-        ptr++;
-        idx++;
     }
 
     if (count == 0) {
@@ -1384,9 +1358,9 @@ s32 grZebes_801DAA08(void)
             HSD_JObj* parent_child;
             HSD_JObj* hsd_jobj;
 
-            sel->x04 = new_jobj;
+            (&grZe_8049F170[selected])->x04 = new_jobj;
 
-            hsd_jobj = (HSD_JObj*) sel->x20_gobj->hsd_obj;
+            hsd_jobj = (HSD_JObj*) (&grZe_8049F170[selected])->x20_gobj->hsd_obj;
             if (hsd_jobj == NULL) {
                 parent_child = NULL;
             } else {
@@ -1394,10 +1368,10 @@ s32 grZebes_801DAA08(void)
             }
 
             HSD_JObjSetFlagsAll(parent_child, 0x10);
-            HSD_JObjAddChild(parent_child, sel->x04);
+            HSD_JObjAddChild(parent_child, (&grZe_8049F170[selected])->x04);
 
             {
-                u8* dat = (u8*) grDatFiles_801C6330(2)->unk4->unk8;
+                u8* dat = (0, (u8*) grDatFiles_801C6330(2)->unk4->unk8);
                 HSD_ShapeAnimJoint** sap =
                     *(HSD_ShapeAnimJoint***) (dat + 0x74);
                 HSD_AnimJoint** ajp = *(HSD_AnimJoint***) (dat + 0x6C);
@@ -1423,12 +1397,12 @@ s32 grZebes_801DAA08(void)
                     aj = NULL;
                 }
 
-                HSD_JObjAddAnimAll( sel->x04, aj, ma, sa);
+                HSD_JObjAddAnimAll( (&grZe_8049F170[selected])->x04, aj, ma, sa);
             }
 
-            HSD_JObjReqAnimAll(sel->x04, 0.0f);
-            HSD_JObjAnimAll(sel->x04);
-            grAnime_801C78FC(sel->x20_gobj, 0, 7);
+            HSD_JObjReqAnimAll((&grZe_8049F170[selected])->x04, 0.0f);
+            HSD_JObjAnimAll((&grZe_8049F170[selected])->x04);
+            grAnime_801C78FC((&grZe_8049F170[selected])->x20_gobj, 0, 7);
             return 1;
         }
     }
