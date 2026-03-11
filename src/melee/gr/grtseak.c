@@ -18,10 +18,10 @@
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
-/* 223864 */ static void grTSeak_80223864(bool);
-/* 223868 */ static void grTSeak_80223868(void);
-/* 2238D8 */ static void grTseak_UnkStage0_OnLoad(void);
-/* 2238DC */ static void grTseak_UnkStage0_OnStart(void);
+/* 223864 */ static void grTSeak_OnDemoInit(bool);
+/* 223868 */ static void grTSeak_OnInit(void);
+/* 2238D8 */ static void grTseak_OnLoad(void);
+/* 2238DC */ static void grTseak_OnStart(void);
 /* 223900 */ static bool grTSeak_80223900(void);
 /* 223908 */ static HSD_GObj* grTSeak_80223908(s32);
 /* 2239F0 */ static void grTSeak_802239F0(Ground_GObj*);
@@ -36,8 +36,8 @@
 /* 223B0C */ static bool grTSeak_80223B0C(Ground_GObj*);
 /* 223B14 */ static void grTSeak_80223B14(Ground_GObj*);
 /* 223B34 */ static void grTSeak_80223B34(Ground_GObj*);
-/* 223B38 */ static DynamicsDesc* grTSeak_80223B38(enum_t);
-/* 223B40 */ static bool grTSeak_80223B40(Vec3*, int, HSD_JObj*);
+/* 223B38 */ static DynamicsDesc* grTSeak_OnTouchLine(enum_t);
+/* 223B40 */ static bool grTSeak_OnCheckShadowRender(Vec3*, int, HSD_JObj*);
 
 static StageCallbacks grTSk_803E94B8[] = {
     {
@@ -68,19 +68,19 @@ StageData grTSk_803E9514 = {
     60,
     grTSk_803E94B8,
     "/GrTSk.dat",
-    grTSeak_80223868,
-    grTSeak_80223864,
-    grTseak_UnkStage0_OnLoad,
-    grTseak_UnkStage0_OnStart,
+    grTSeak_OnInit,
+    grTSeak_OnDemoInit,
+    grTseak_OnLoad,
+    grTseak_OnStart,
     grTSeak_80223900,
-    grTSeak_80223B38,
-    grTSeak_80223B40,
+    grTSeak_OnTouchLine,
+    grTSeak_OnCheckShadowRender,
     1,
 };
 
-void grTSeak_80223864(bool unk0) {}
+void grTSeak_OnDemoInit(bool unk0) {}
 
-void grTSeak_80223868(void)
+void grTSeak_OnInit(void)
 {
     stage_info.unk8C.b4 = false;
     stage_info.unk8C.b5 = true;
@@ -94,9 +94,9 @@ void grTSeak_80223868(void)
     Ground_801C42AC();
 }
 
-void grTseak_UnkStage0_OnLoad(void) {}
+void grTseak_OnLoad(void) {}
 
-void grTseak_UnkStage0_OnStart(void)
+void grTseak_OnStart(void)
 {
     grZakoGenerator_801CAE04(0);
 }
@@ -184,12 +184,12 @@ void grTSeak_80223B14(Ground_GObj* gobj)
 
 void grTSeak_80223B34(Ground_GObj* gobj) {}
 
-DynamicsDesc* grTSeak_80223B38(enum_t arg0)
+DynamicsDesc* grTSeak_OnTouchLine(enum_t arg0)
 {
     return NULL;
 }
 
-bool grTSeak_80223B40(Vec3* arg0, int arg1, HSD_JObj* arg2)
+bool grTSeak_OnCheckShadowRender(Vec3* arg0, int arg1, HSD_JObj* arg2)
 {
     return true;
 }
