@@ -28,9 +28,11 @@
 int grCn_803E1D80[3] = { 0, 0, 0 };
 int grCn_803E2190[5] = { 0, 0, 1, 2, 5 };
 
-static void* grCn_804D69A0;
 static u32 grCn_804D69A4;
 static int grCn_804D69AC;
+static void* grCn_804D69A0;
+static int grCn_804D69A8;
+static int grCn_804D69B0;
 
 /// #grCorneria_801DCCFC
 
@@ -294,7 +296,24 @@ s32 grCorneria_801DEC08(Vec3* pos)
     }
     return 0;
 }
-/// #grCorneria_801DEC94
+s32 grCorneria_801DEC94(Vec3* pos)
+{
+    if (pos->z > -30.0f) {
+        if (pos->x > Stage_GetBlastZoneRightOffset() - 30.0f) {
+            return 1;
+        }
+        if (pos->x < Stage_GetBlastZoneLeftOffset() + 30.0f) {
+            return 1;
+        }
+        if (pos->y > Stage_GetBlastZoneTopOffset() - 30.0f) {
+            return 1;
+        }
+        if (pos->y < Stage_GetBlastZoneBottomOffset() + 30.0f) {
+            return 1;
+        }
+    }
+    return 0;
+}
 
 /// #grCorneria_801DED50
 

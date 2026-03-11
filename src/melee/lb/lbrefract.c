@@ -12,33 +12,22 @@
 
 #include <math.h>
 #include <dolphin/gx/GXTexture.h>
-#include <baselib/class.h>
 #include <baselib/cobj.h>
 #include <baselib/debug.h>
 #include <baselib/dobj.h>
-#include <baselib/pobj.h>
 #include <baselib/state.h>
-#include <baselib/tobj.h>
 #include <MetroTRK/intrinsics.h>
 
-#include "lb/lbarchive.h"
-
 extern HSD_DObjInfo hsdDObj;
-
-static void fn_80022650(void);
-static void fn_80022940(void);
-
-extern u8 lbl_803BB0B0[];
-extern f32 lbl_803BB0E0[];
 
 /// @brief Write IA4 texture coordinate to refraction buffer.
 /* 021F34 */ static void
 lbRefract_WriteTexCoordIA4(lbRefract_CallbackData* data, s32 row, u32 col,
                            u32 arg3, u8 arg4, u8 intensity, u8 alpha);
-/* 021F70 */ static void fn_80021F70(lbRefract_CallbackData* data, s32 row, u32 col, u32 arg3, u8 arg4, u8 intensity, u8 alpha);
+/* 021F70 */ static UNK_RET fn_80021F70(UNK_PARAMS);
 /* 021FB4 */ static void fn_80021FB4(lbRefract_CallbackData* data, s32 row, u32 col, u8 arg3, u8 arg4, u8 arg5, u8 arg6);
-/* 021FF8 */ static void fn_80021FF8(lbRefract_CallbackData* data, s32 row, u32 col, u32* out_r, u32* out_g, u8* out_b, u8* out_a);
-/* 02206C */ static void fn_8002206C(lbRefract_CallbackData* data, s32 row, u32 col, u32* out_r, u32* out_g, u32* out_b, u32* out_a);
+/* 021FF8 */ static UNK_RET fn_80021FF8(UNK_PARAMS);
+/* 02206C */ static UNK_RET fn_8002206C(UNK_PARAMS);
 /// @brief Display DObj then reset TEV/indirect stages for refraction cleanup.
 /* 022608 */ static void lbRefract_DObjDispReset(HSD_DObj* dobj, Mtx vmtx,
                                                  Mtx pmtx, u32 rendermode);
@@ -64,8 +53,6 @@ extern float MSL_TrigF_80400770[], MSL_TrigF_80400774[];
 #define NAN MSL_TrigF_80400770[0]
 #define INF MSL_TrigF_80400774[0]
 
-/// #lbRefract_80021CE8
-
 static void lbRefract_WriteTexCoordIA4(lbRefract_CallbackData* data, s32 row,
                                        u32 col, u32 arg3, u8 arg4,
                                        u8 intensity, u8 alpha)
@@ -85,26 +72,6 @@ static void lbRefract_WriteTexCoordIA4(lbRefract_CallbackData* data, s32 row,
     base[1] = intensity;
 }
 
-static void fn_80021F70(lbRefract_CallbackData* data, s32 row, u32 col,
-                        u32 arg3, u8 arg4, u8 intensity, u8 alpha)
-{
-    u8* base;
-    s32 offset;
-
-    (void) alpha;
-
-    base = (u8*) data->buffer + ((col >> 2) * data->row_stride) +
-           ((row * 8) & 0xFFFFFFE0);
-    row &= 3;
-    offset = (row + ((col * 4) & 0xC)) * 2;
-    {
-        u32 rg = ((arg4 << 3) & 0x7E0);
-        u32 b = (u32) intensity >> 3;
-        rg |= ((arg3 << 8) & 0xF800);
-        *(u16*)(base + offset) = b | rg;
-    }
-}
-
 static void fn_80021FB4(lbRefract_CallbackData* data, s32 row, u32 col, u8 arg6, u8 arg7, u8 arg8, u8 arg9)
 {
     u8* base;
@@ -118,56 +85,6 @@ static void fn_80021FB4(lbRefract_CallbackData* data, s32 row, u32 col, u8 arg6,
     base[1] = arg6;
     base[0x20] = arg7;
     base[0x21] = arg8;
-}
-
-static void fn_80021FF8(lbRefract_CallbackData* data, s32 row, u32 col,
-                        u32* out_r, u32* out_g, u8* out_b, u8* out_a)
-{
-    u8* base;
-    s32 offset;
-
-    base = (u8*) data->buffer + ((col >> 2) * data->row_stride) +
-           ((row * 8) & 0xFFFFFFE0);
-    row &= 3;
-    offset = (row + ((col * 4) & 0xC)) * 2;
-    if (out_r != NULL) {
-        *out_r = 0xFF;
-    }
-    if (out_g != NULL) {
-        *out_g = 0xFF;
-    }
-    if (out_b != NULL) {
-        *(u32*)out_b = (base + offset)[1];
-    }
-    if (out_a != NULL) {
-        *(u32*)out_a = *(base + offset);
-    }
-}
-
-static void fn_8002206C(lbRefract_CallbackData* data, s32 row, u32 col,
-                        u32* out_r, u32* out_g, u32* out_b, u32* out_a)
-{
-    u16 val;
-    u8* base;
-    s32 offset;
-
-    base = (u8*) data->buffer + ((col >> 2) * data->row_stride) +
-           ((row * 8) & 0xFFFFFFE0);
-    row &= 3;
-    offset = (row + ((col * 4) & 0xC)) * 2;
-    val = *(u16*)(base + offset);
-    if (out_a != NULL) {
-        *out_a = 0xFF;
-    }
-    if (out_r != NULL) {
-        *out_r = (((val >> 8) & 0xF8) | (val & 0x8000)) ? 7 : 0;
-    }
-    if (out_g != NULL) {
-        *out_g = (((val >> 3) & 0xFC) | (val & 0x400)) ? 3 : 0;
-    }
-    if (out_b != NULL) {
-        *out_b = (val & 0xF8) ? 7 : 0;
-    }
 }
 
 static void lbRefract_ReadTexCoordRGBA8(lbRefract_CallbackData* data, s32 row,
@@ -233,8 +150,6 @@ s32 lbRefract_8002219C(lbRefract_CallbackData* data, s32 buffer, s32 format,
         return -1;
     }
 }
-
-/// #lbRefract_800222A4
 
 /// @brief Copy framebuffer to refraction source texture.
 void lbRefract_8002247C(HSD_CObj* cobj)
@@ -304,32 +219,6 @@ static void lbRefract_DObjDispReset(HSD_DObj* dobj, Mtx vmtx, Mtx pmtx,
     GXSetNumIndStages(0);
     HSD_StateInvalidate(-1);
 }
-
-static void fn_80022650(void)
-{
-    hsdInitClassInfo(
-        HSD_CLASS_INFO(&lbl_803BB0B0[0x168]),
-        HSD_CLASS_INFO(&hsdDObj),
-        (char*) &lbl_803BB0B0[0x1F4],
-        (char*) &lbl_803BB0B0[0x20C],
-        0x44, 0x18);
-    ((HSD_DObjInfo*) &lbl_803BB0B0[0x168])->disp = lbRefract_DObjDispReset;
-}
-
-/// #lbRefract_PObjLoad
-
-static void fn_80022940(void)
-{
-    hsdInitClassInfo(
-        HSD_CLASS_INFO(&lbl_803BB0B0[0x1AC]),
-        HSD_CLASS_INFO(&hsdPObj),
-        (char*) &lbl_803BB0B0[0x1F4],
-        (char*) &lbl_803BB0B0[0x21C],
-        0x48, 0x18);
-    ((HSD_PObjInfo*) &lbl_803BB0B0[0x1AC])->load = lbRefract_PObjLoad;
-}
-
-/// #lbRefract_80022998
 
 /// @brief Increment refraction effect user count.
 void lbRefract_80022BB8(void)

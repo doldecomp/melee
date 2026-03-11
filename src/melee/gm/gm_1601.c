@@ -944,60 +944,7 @@ void gm_80162574(u8 arg0, u8 arg1)
     *ptr = val;
 }
 
-void gm_8016260C(u8 arg0, u8 arg1)
-{
-    u32* ptr;
-    u32 sum;
-
-    ptr = NULL;
-    if ((u8) (arg1 - 7) <= 1U) {
-        u32* counter = gmMainLib_8015CD68();
-        sum = *counter + 1;
-        *counter = (sum > (u32) -1) ? (u32) -1 : sum;
-        return;
-    }
-    if (gm_801A4310() == 0x1F) {
-        ptr = gmMainLib_8015CD5C();
-    } else {
-        switch (arg0) {
-        case 0:
-            ptr = gmMainLib_8015CD2C();
-            break;
-        case 1:
-            ptr = gmMainLib_8015CD38();
-            break;
-        case 2:
-        {
-            u32* save;
-            ptr = gmMainLib_8015CD44();
-            save = (u32*) gmMainLib_8015EDBC();
-            sum = save[1] + 1;
-            save[1] = (sum > (u32) -1) ? (u32) -1 : sum;
-            break;
-        }
-        case 3:
-            ptr = gmMainLib_8015CD50();
-            break;
-        }
-    }
-    sum = *ptr + 1;
-    *ptr = (sum > (u32) -1) ? (u32) -1 : sum;
-    {
-        u32* p = (u32*) gmMainLib_8015ED98();
-        sum = *p + 1;
-        *p = (sum > (u32) -1) ? (u32) -1 : sum;
-    }
-    {
-        u32* p = (u32*) gmMainLib_8015EDB0();
-        sum = *p + 1;
-        *p = (sum > (u32) -1) ? (u32) -1 : sum;
-    }
-    {
-        u32* p = (u32*) gmMainLib_8015EDBC();
-        sum = *p + 1;
-        *p = (sum > (u32) -1) ? (u32) -1 : sum;
-    }
-}
+/// #gm_8016260C
 
 u32 gm_8016279C(void)
 {
