@@ -3,6 +3,7 @@
 #include "grzakogenerator.h"
 
 #include <platform.h>
+#include <sysdolphin/baselib/dobj.h>
 
 #include "cm/camera.h"
 #include "gm/gm_1A45.h"
@@ -190,7 +191,27 @@ void grRCruise_80201918(Vec3* vec)
 
 /// #grRCruise_80201988
 
-/// #grRCruise_80201B60
+void grRCruise_80201B60(HSD_JObj* jobj, s32 arg1)
+{
+    HSD_DObj* dobj;
+    HSD_DObj* next;
+    PAD_STACK(8);
+
+    dobj = HSD_JObjGetDObj(jobj);
+    while (dobj != NULL) {
+        if (arg1 != 0) {
+            HSD_DObjClearFlags(dobj, 1U);
+        } else {
+            HSD_DObjSetFlags(dobj, 1U);
+        }
+        if (dobj != NULL) {
+            next = dobj->next;
+        } else {
+            next = NULL;
+        }
+        dobj = next;
+    }
+}
 
 void fn_80201BE0(HSD_GObj* gobj, s32 pass)
 {
