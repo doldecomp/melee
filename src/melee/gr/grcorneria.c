@@ -28,11 +28,9 @@
 int grCn_803E1D80[3] = { 0, 0, 0 };
 int grCn_803E2190[5] = { 0, 0, 1, 2, 5 };
 
+static void* grCn_804D69A0;
 static u32 grCn_804D69A4;
 static int grCn_804D69AC;
-static void* grCn_804D69A0;
-static int grCn_804D69A8;
-static int grCn_804D69B0;
 
 /// #grCorneria_801DCCFC
 
