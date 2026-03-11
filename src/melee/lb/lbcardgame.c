@@ -227,7 +227,7 @@ void lb_8001CE00(void)
     if (!lb_80433318.enable) {
         __assert("lbcardgame.c", 0x2A3, "_p(enable)");
     }
-    *gmMainLib_8015CD98() += gmMainLib_8015FC74();
+    *gm_GetPowerTime() += gmMainLib_8015FC74();
     lb_80433318.xC = true;
 }
 

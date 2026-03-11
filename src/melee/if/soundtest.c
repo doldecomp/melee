@@ -803,11 +803,11 @@ void fn_80300CC8(int arg0)
         break;
     case 6:
         lbAudioAx_80024030(1);
-        r29 = gmMainLib_8015CD2C();
-        r30 = gmMainLib_8015CD38();
-        r31 = gmMainLib_8015CD44();
+        r29 = gmMainLib_GetTimeMatchTotal();
+        r30 = gmMainLib_GetStockMatchTotal();
+        r31 = gmMainLib_GetCoinMatchTotal();
         {
-            int* ptr = gmMainLib_8015CD50();
+            int* ptr = gmMainLib_GetBonusMatchTotal();
             *r29 = un_804D6DE0;
             *r30 = un_804D6DE4;
             *r31 = un_804D6DE8;
@@ -898,7 +898,7 @@ s32 un_80300F98(s32 arg0)
     s32* temp_r31;
 
     if (arg0 == 1) {
-        temp_r31 = gmMainLib_8015CDB0();
+        temp_r31 = gmMainLib_GetKOTotal();
         lbAudioAx_80024030(1);
         *temp_r31 = un_804D6DF4;
         gm_801A42F8(1);

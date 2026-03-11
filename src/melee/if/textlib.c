@@ -984,7 +984,7 @@ bool un_80304780(void)
     }
 }
 
-int un_80304870(void)
+int un_GetTrophyTotal(void)
 {
     if (gm_8016B498() || gm_801A4310() == MJ_TOY_LOTTERY) {
         return (short) un_804A284C[0x258 / 2];
