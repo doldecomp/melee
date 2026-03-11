@@ -26,7 +26,7 @@ typedef struct BracketEntry {
     s32 x14;
     s32 x18;
     f32 x1C;
-    u8 x20;
+    GXColor* x20;
     u8 x21;
     u8 pad22[0x30 - 0x22];
     u8 x30;
