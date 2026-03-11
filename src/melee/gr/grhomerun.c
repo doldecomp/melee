@@ -7,6 +7,7 @@
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
+#include "it/it_26B1.h"
 #include "lb/lb_00B0.h"
 
 void grHomeRun_8021C750(bool arg) {}
@@ -270,7 +271,18 @@ void fn_8021EB10(HSD_GObj* target_cam_gobj)
 
 /// #grHomeRun_8021EC58
 
-/// #grHomeRun_8021ED74
+void grHomeRun_8021ED74(void)
+{
+    BobOmbRain bobomb_rain;
+    HSD_JObj* jobj = Ground_801C2CF4(0x7F);
+    bobomb_rain.x0 = NULL;
+    bobomb_rain.x4 = NULL;
+    bobomb_rain.x14 = 0xB;
+    bobomb_rain.x18 = 0;
+    bobomb_rain.x1C.b0 = 1;
+    lb_8000B1CC(jobj, NULL, &bobomb_rain.x8_vec);
+    it_8026BE84(&bobomb_rain);
+}
 
 /// #grHomeRun_8021EDD4
 
