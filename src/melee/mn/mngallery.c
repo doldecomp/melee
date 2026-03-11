@@ -354,12 +354,12 @@ void fn_802590C4(HSD_GObj* gobj)
         s32 frame;
         HSD_GObj* gobjs[2];
     };
-    void* store;
+    struct fn_802590C4_data* store;
+    s32 i;
     struct fn_802590C4_data* data;
     s32 zero;
-    s32 i;
+    char* read_base;
     HSD_JObj* jobj;
-    void* ud;
 
     data = gobj->user_data;
     jobj = gobj->hsd_obj;
@@ -379,15 +379,16 @@ void fn_802590C4(HSD_GObj* gobj)
             data->frame = data->frame + 1;
         } else {
             data->state = 4;
-            ud = gobj->user_data;
-            store = ud;
+            store = gobj->user_data;
             HSD_GObjPLink_80390228(gobj);
+            read_base = (char*) store;
             i = 0;
             zero = i;
             do {
-                HSD_GObjPLink_80390228(((struct fn_802590C4_data*)store)->gobjs[i]);
-                ((struct fn_802590C4_data*)ud)->gobjs[i] = (HSD_GObj*)zero;
+                HSD_GObjPLink_80390228(*(HSD_GObj**) (read_base + 0x1C));
+                store->gobjs[i] = (HSD_GObj*) zero;
                 i++;
+                read_base += 4;
             } while (i < 2);
         }
     }
