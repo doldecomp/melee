@@ -5,6 +5,7 @@
 
 #include "gr/granime.h"
 #include "gr/ground.h"
+#include "gr/grmaterial.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
 #include "lb/lb_00B0.h"
@@ -160,7 +161,16 @@ bool grOldPupupu_80210D08(Ground_GObj* gobj)
 
 void grOldPupupu_8021110C(Ground_GObj* arg) {}
 
-/// #grOldPupupu_80211110
+void grOldPupupu_80211110(Ground_GObj* gobj)
+{
+    Ground* gp = gobj->user_data;
+    HSD_JObj* jobj = gobj->hsd_obj;
+    PAD_STACK(16);
+    grAnime_801C8138(gobj, gp->map_id, 0);
+    ((Ground*) gobj->user_data)->x10_flags.b2 = 0;
+    grMaterial_801C8858(jobj, 0x28000000U);
+    gp->x11_flags.b012 = 2;
+}
 
 bool grOldPupupu_8021118C(Ground_GObj* gobj)
 {

@@ -137,7 +137,18 @@ void grZebesRoute_8020B42C(Ground_GObj* gobj)
 
 void grZebesRoute_8020B4D4(Ground_GObj* arg) {}
 
-/// #fn_8020B4D8
+void fn_8020B4D8(Ground* gp, s32 arg1, CollData* coll, s32 arg3,
+                 mpLib_GroundEnum kind, f32 arg5)
+{
+    PAD_STACK(16);
+    if ((s32) coll->x34_flags.b1234 == 1) {
+        if (Ground_801C57A4() == coll->x0_gobj) {
+            if (kind == 1) {
+                stage_info.flags |= 0x10;
+            }
+        }
+    }
+}
 
 /// #grZebesRoute_8020B548
 

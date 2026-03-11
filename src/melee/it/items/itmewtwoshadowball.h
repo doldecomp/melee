@@ -9,7 +9,7 @@
 
 #include <dolphin/mtx.h>
 
-/* 2C4D10 */ UNK_RET it_802C4D10(UNK_PARAMS);
+/* 2C4D10 */ void it_802C4D10(Item_GObj*);
 /* 2C4F50 */ bool it_802C4F50(Item_GObj*, CollData*);
 /* 2C5000 */ HSD_GObj* it_802C5000(Item_GObj*, Vec3*, s32, s32, float);
 /* 2C519C */ void it_802C519C(Item_GObj*, Vec3*, s32, s32, float, float);

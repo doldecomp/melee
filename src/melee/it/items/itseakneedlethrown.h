@@ -14,8 +14,8 @@
 /* 2AFEA8 */ Item_GObj* it_802AFEA8(Item_GObj* gobj, Fighter_GObj* owner_gobj,
                                     u32);
 /* 2AFEF8 */ void itSeakNeedleThrown_Logic109_Destroyed(Item_GObj*);
-/* 2AFF08 */ UNK_RET it_802AFF08(UNK_PARAMS);
-/* 2B00F4 */ UNK_RET it_802B00F4(UNK_PARAMS);
+/* 2AFF08 */ void it_802AFF08(Item_GObj*, Fighter_GObj*);
+/* 2B00F4 */ void it_802B00F4(Item_GObj*, Fighter_GObj*);
 /* 2B0210 */ bool itSeakneedlethrown_UnkMotion0_Anim(Item_GObj* gobj);
 /* 2B024C */ bool itSeakneedlethrown_UnkMotion1_Anim(Item_GObj* gobj);
 /* 2B033C */ bool itSeakneedlethrown_UnkMotion2_Anim(Item_GObj* gobj);

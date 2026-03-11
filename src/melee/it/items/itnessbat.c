@@ -21,7 +21,18 @@ void it_802AD6B8(Item_GObj* gobj)
     }
 }
 
-/// #it_2725_Logic58_PickedUp
+void it_2725_Logic58_PickedUp(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if ((ip->xDAC_itcmd_var0 | ip->xDB0_itcmd_var1 | ip->xDB4_itcmd_var2 |
+         ip->xDB8_itcmd_var3) != 0)
+    {
+        Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
+    } else {
+        Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+    }
+    Item_802694CC(gobj);
+}
 
 /// #itNessbat_UnkMotion0_Anim
 
