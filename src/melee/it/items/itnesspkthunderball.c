@@ -21,7 +21,35 @@ static inline void normalizeAngle(f32* angle)
     }
 }
 
-/// #it_802AB3F0
+void it_802AB3F0(Item_GObj* gobj, void* out, s32 idx)
+{
+    Item* ip;
+
+    if (gobj != NULL) {
+        ip = gobj->user_data;
+        if (ip != NULL) {
+            if (out == NULL) {
+                return;
+            }
+            ip = (Item*) ((u8*) ip + idx * 0x18);
+            *(Vec3*) out = ip->xDD4_itemVar.pkthunder.xDEC;
+            return;
+        }
+        if (out == NULL) {
+            return;
+        }
+        ((Vec3*) out)->z = 0.0F;
+        ((Vec3*) out)->y = 0.0F;
+        ((Vec3*) out)->x = 0.0F;
+        return;
+    }
+    if (out == NULL) {
+        return;
+    }
+    ((Vec3*) out)->z = 0.0F;
+    ((Vec3*) out)->y = 0.0F;
+    ((Vec3*) out)->x = 0.0F;
+}
 
 void it_802AB468(Item_GObj* gobj, f32* out, s32 unused)
 {
