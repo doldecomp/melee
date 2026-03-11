@@ -184,8 +184,11 @@ typedef struct itHououAttr {
 } itHououAttr;
 
 typedef struct itLugiaAttributes {
-    /* +0 */ f32 x0;
-    /* +4 */ f32 x4;
+    /* +00 */ f32 x0;
+    /* +04 */ f32 x4;
+    /* +08 */ f32 x8;
+    /* +0C */ f32 xC;
+    /* +10 */ f32 x10;
 } itLugiaAttributes;
 
 /// Box/Crate item attributes loaded from .dat file
@@ -639,7 +642,8 @@ typedef struct itHitodeman_ItemVars {
     /* +60 ip+E34 */ float x60;
     /* +64 ip+E38 */ float x64;
     /* +68 ip+E3C */ s32 x68;
-    /* +6C ip+E40 */ char pad_6C[0x1C];
+    /* +6C ip+E40 */ char pad_6C[0x18];
+    /* +84 ip+E58 */ float x84;
     /* +88 ip+E5C */ s32 x88;
     /* +8C ip+E60 */ char pad_8C[0x4];
     /* +90 ip+E64 */ HSD_GObj* x90;
@@ -1229,6 +1233,8 @@ typedef struct itWhiteBea_ItemVars {
 typedef struct itWhiteBeaAttributes {
     /* +0 */ s32* x0;
     /* +4 */ f32 x4;
+    /* +8 */ char pad_x8[0xC];
+    /* +14 */ s16 x14;
 } itWhiteBeaAttributes;
 
 typedef struct itOctarock_ItemVars {
@@ -1476,7 +1482,9 @@ typedef struct itCrazyHandBombAttributes {
 } itCrazyHandBombAttributes;
 
 typedef struct itLugia_ItemVars {
-    /* +00 ip+DD4 */ u8 x0_pad[0x7C];
+    /* +00 ip+DD4 */ u8 x0_pad[0x60];
+    /* +60 ip+E34 */ s32 x60;
+    /* +64 ip+E38 */ u8 x64_pad[0x18];
     /* +7C ip+E50 */ Vec3 xE50;
 } itLugia_ItemVars;
 
