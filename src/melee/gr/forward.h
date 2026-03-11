@@ -133,6 +133,8 @@ typedef enum InternalStageId {
 
     SHRINEROUTE,
 
+    BATTLE = 36,
+
     STAGEKIND_UNK32,
     STAGEKIND_UNK33,
     STAGEKIND_UNK34,
@@ -142,8 +144,10 @@ typedef enum InternalStageId {
     STAGEKIND_UNK38,
     STAGEKIND_UNK39,
 
+    GRTSEAK = 60,
+
     /// Home run contest
-    HOMERUN = 0x43,
+    HOMERUN = 67,
 } InternalStageId;
 
 typedef struct unkCastle unkCastle;
