@@ -483,7 +483,15 @@ void ftCo_800D4F24(Fighter_GObj* gobj, int index)
 
 /// #ftCo_800D4FF4
 
-/// #ftCo_Rebirth_Anim
+void ftCo_Rebirth_Anim(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    ftCo_8008A7A8(gobj, fp->ft_data->x24);
+    fp->mv.co.common.x0 -= 1;
+    if (fp->mv.co.common.x0 == 0) {
+        ftCo_800D5600(gobj);
+    }
+}
 
 void ftCo_Rebirth_IASA(Fighter_GObj* gobj) {}
 

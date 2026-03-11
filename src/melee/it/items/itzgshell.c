@@ -358,7 +358,15 @@ void itZrshell_UnkMotion11_Phys(Item_GObj* gobj)
 
 /// #itZrshell_UnkMotion11_Coll
 
-/// #it_802DF9F8
+void it_802DF9F8(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    it_802762BC(ip);
+    ip->xDC8_word.flags.x1F = 0;
+    it_802DFF14(gobj, 0);
+    it_802756D0(gobj);
+    Item_80268E5C((HSD_GObj*) gobj, 0xA, ITEM_ANIM_UPDATE);
+}
 
 /// #itZrshell_UnkMotion10_Anim
 

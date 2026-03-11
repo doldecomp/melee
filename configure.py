@@ -724,7 +724,7 @@ config.libs = [
             Object(Matching, "melee/ft/chara/ftLink/ftLk_SpecialLw.c"),
             Object(Matching, "melee/ft/chara/ftLink/ftLk_SpecialHi.c"),
             Object(Matching, "melee/ft/chara/ftLink/ftLk_SpecialS.c"),
-            Object(NonMatching, "melee/ft/chara/ftLink/ftLk_SpecialN.c"),
+            Object(Matching, "melee/ft/chara/ftLink/ftLk_SpecialN.c"),
             # Kirby
             Object(NonMatching, "melee/ft/chara/ftKirby/ftKb_Init.c"),
             Object(NonMatching, "melee/ft/chara/ftKirby/ftKb_SpecialN.c"),
@@ -1281,7 +1281,7 @@ config.libs = [
         "if (User interface)",
         [
             Object(Matching, "melee/if/ifall.c"),
-            Object(NonMatching, "melee/if/iftime.c"),
+            Object(Matching, "melee/if/iftime.c"),
             Object(NonMatching, "melee/if/ifstatus.c"),
             Object(NonMatching, "melee/if/if_2F72.c"),
             Object(NonMatching, "melee/if/ifstock.c"),
@@ -1627,7 +1627,7 @@ config.libs = [
             Object(Matching, "sysdolphin/baselib/debug.c"),
             Object(NonMatching, "sysdolphin/baselib/synth.c"),
             Object(NonMatching, "sysdolphin/baselib/axdriver.c"),
-            Object(NonMatching, "sysdolphin/baselib/devcom.c"),
+            Object(Matching, "sysdolphin/baselib/devcom.c"),
             Object(Matching, "sysdolphin/baselib/gobjproc.c"),
             Object(Matching, "sysdolphin/baselib/gobjplink.c"),
             Object(Matching, "sysdolphin/baselib/gobjgxlink.c"),

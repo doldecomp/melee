@@ -80,7 +80,15 @@ bool itKamex_UnkMotion1_Coll(Item_GObj* gobj)
     return false;
 }
 
-/// #it_802CA8DC
+void it_802CA8DC(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    if (ip->xDBC_itcmd_var4.flags.x0) {
+        it_802CAB10(gobj);
+        ip->x40_vel.x = M2C_FIELD(ip, f32*, 0xE3C) * -ip->facing_dir;
+        ip->xDBC_itcmd_var4.flags.x0 = false;
+    }
+}
 
 void it_802CA938(Item_GObj* gobj)
 {

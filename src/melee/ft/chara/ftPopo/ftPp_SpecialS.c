@@ -1028,7 +1028,16 @@ void ftPp_SpecialHiStart_1_Phys(Fighter_GObj* gobj)
     ft_80084F3C(gobj);
 }
 
-/// #ftPp_SpecialAirHiStart_1_Phys
+void ftPp_SpecialAirHiStart_1_Phys(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    ftIceClimberAttributes* da = fp->dat_attrs;
+    PAD_STACK(8);
+    ftCommon_Fall(fp, da->xA8, da->xAC);
+    if (fp->self_vel.y < 0.0f) {
+        ftCommon_8007CEF4(fp);
+    }
+}
 
 void ftPp_SpecialHiStart_1_Coll(Fighter_GObj* gobj)
 {
@@ -1112,7 +1121,16 @@ void ftPp_SpecialHiThrow_1_Phys(Fighter_GObj* gobj)
     ft_80084F3C(gobj);
 }
 
-/// #ftPp_SpecialAirHiThrow_1_Phys
+void ftPp_SpecialAirHiThrow_1_Phys(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftIceClimberAttributes* da = fp->dat_attrs;
+    PAD_STACK(8);
+    ftCommon_Fall(fp, da->xA8, da->xAC);
+    if (fp->self_vel.y < 0.0f) {
+        ftCommon_8007CEF4(fp);
+    }
+}
 
 void ftPp_SpecialHiThrow_1_Coll(Fighter_GObj* gobj)
 {
@@ -1238,7 +1256,19 @@ void ftPp_SpecialHi_801227AC(Fighter_GObj* gobj)
 
 /// #ftPp_SpecialHi_8012280C
 
-/// #ftPp_SpecialHi_80122898
+void ftPp_SpecialHi_80122898(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    PAD_STACK(16);
+    if (fp->fv.pp.x2230_b0) {
+        efLib_DestroyAll(gobj);
+        fp = gobj->user_data;
+        fp->fv.pp.x2230_b0 = false;
+        fp->death2_cb = NULL;
+        fp->take_dmg_cb = NULL;
+        ftPartSetRotX(gobj->user_data, 0, 0.0f);
+    }
+}
 
 /// #ftPp_SpecialLw_Enter
 

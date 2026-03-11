@@ -28,6 +28,7 @@
 int grCn_803E1D80[3] = { 0, 0, 0 };
 int grCn_803E2190[5] = { 0, 0, 1, 2, 5 };
 
+static void* grCn_804D69A0;
 static u32 grCn_804D69A4;
 static int grCn_804D69AC;
 
@@ -518,7 +519,17 @@ void grCorneria_801E12CC(Ground_GObj* arg) {}
 
 void fn_801E12D0(Item_GObj* gobj, Ground* gr) {}
 
-/// #fn_801E12D4
+void fn_801E12D4(Item_GObj* gobj, Ground* gr, Vec3* pos, HSD_GObj* arg3,
+                  f32 damage)
+{
+    gr->gv.corneria.x114 += damage;
+    OSReport("*** Beam Damage! %f\n", damage);
+    if (gr->gv.corneria.x114 >= M2C_FIELD(grCn_804D69A0, f32*, 0x38)) {
+        gr->gv.corneria.x108 = 4;
+        grMaterial_801C8E28((HSD_GObj*) gr->gv.corneria.left_cannon);
+        grMaterial_801C8E28((HSD_GObj*) gr->gv.corneria.right_cannon);
+    }
+}
 
 /// #grCorneria_801E1348
 

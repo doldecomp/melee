@@ -152,9 +152,12 @@ typedef struct itKyasarin_ItemVars {
 } itKyasarin_ItemVars;
 
 typedef struct itKyasarinAttributes {
-    /* +0 */ s32* x0;
-    /* +4 */ f32 x4;
-    /* +8 */ f32 x8;
+    /* +0  */ s32* x0;
+    /* +4  */ f32 x4;
+    /* +8  */ f32 x8;
+    /* +C  */ u8 xC_pad[0x28 - 0xC];
+    /* +28 */ f32 x28;
+    /* +2C */ f32 x2C;
 } itKyasarinAttributes;
 
 typedef struct itKyasarinEgg_ItemVars {
@@ -173,7 +176,9 @@ typedef struct itKyasarinEggAttributes {
 
 typedef struct itHououAttr {
     /* +00 */ f32 timer;
-    /* +04 */ u8 x4_pad[0x14];
+    /* +04 */ u8 x4_pad[0xC];
+    /* +10 */ f32 x10;
+    /* +14 */ u8 x14_pad[0x4];
     /* +18 */ f32 x18;
     /* +1C */ f32 x1C;
 } itHououAttr;
@@ -309,6 +314,11 @@ typedef struct itLipstickAttributes {
     /* +0 */ s32 x0;
     /* +4 */ Vec3 x4;
 } itLipstickAttributes;
+
+typedef struct itLipstickSpore_ItemVars {
+    /* +0 */ s32 xDD4;
+    /* +4 */ f32 xDD8;
+} itLipstickSpore_ItemVars;
 
 /// Eggs spawned on Yoshi stages / by Chansey
 typedef struct itEgg_ItemVars {
@@ -495,7 +505,8 @@ typedef struct itTincle_ItemVars {
     /* +2C ip+E00 */ s32 x2C;
     /* +30 ip+E04 */ u8 pad1b[0x8];
     /* +38 ip+E0C */ f32 x38;
-    /* +3C ip+E10 */ u8 pad1c[0x14];
+    /* +3C ip+E10 */ u8 pad1c[0x10];
+    /* +4C ip+E20 */ f32 x4C;
     /* +50 ip+E24 */ f32 x50;
     /* +54 ip+E28 */ f32 x54;
     /* +58 ip+E2C */ u8 pad2[0x4];
@@ -617,7 +628,10 @@ typedef struct {
     int x64;
     int x68;
     int x6C;
-    f32 xE44;
+    union {
+        f32 xE44;
+        s32 xE44_s32;
+    };
 } itPokemon_ItemVars;
 
 typedef struct itHitodeman_ItemVars {
@@ -1005,7 +1019,7 @@ typedef struct itMewtwoShadowball_ItemVars {
     /* ip+E00 */ f32 x2C[6];
     /* ip+E18 */ f32 x44;
     /* ip+E1C */ f32 x48;
-    /* ip+E20 */ f32 x4C;
+    /* ip+E20 */ s32 x4C;
     /* ip+E24 */ f32 x50;
     /* ip+E28 */ s32 x54;
     /* ip+E2C */ s32 x58;
@@ -1324,7 +1338,7 @@ typedef struct itOctarockAttributes {
 typedef struct itOldottosea_ItemVars {
     /* 0x00 */ u8 pad[0x20];
     /* 0x20 */ s32 x20;
-    /* 0x24 */ u8 pad1[0x4];
+    /* 0x24 */ s32 x24;
     /* 0x28 */ s32 x28;
 } itOldottosea_ItemVars;
 
