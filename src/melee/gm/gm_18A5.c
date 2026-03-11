@@ -2240,7 +2240,7 @@ void fn_80191154(HSD_GObj* gobj)
     (*xE_ptr)++;
 }
 
-/// @todo Currently 79.85% match - BSS addressing causes extra register
+/// @todo Currently 79.85% match - needs register allocation fix
 void fn_80191240(HSD_GObj* gobj)
 {
     TmData* tm;
