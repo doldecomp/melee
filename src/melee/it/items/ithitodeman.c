@@ -136,7 +136,17 @@ bool itHitodeman_UnkMotion2_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itHitodeman_UnkMotion2_Phys
+void itHitodeman_UnkMotion2_Phys(Item_GObj* gobj)
+{
+    if (it_8027A09C(gobj)) {
+        Item* ip;
+        it_80273454(gobj);
+        ip = GET_ITEM(gobj);
+        Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+        ip->entered_hitlag = efLib_PauseAll;
+        ip->exited_hitlag = efLib_ResumeAll;
+    }
+}
 
 bool itHitodeman_UnkMotion2_Coll(Item_GObj* gobj)
 {

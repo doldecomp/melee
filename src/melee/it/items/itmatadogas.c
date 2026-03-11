@@ -4,6 +4,7 @@
 #include <platform.h>
 
 #include "ef/eflib.h"
+#include "ef/efsync.h"
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
@@ -104,9 +105,27 @@ bool itMatadogas_UnkMotion2_Coll(Item_GObj* gobj)
 
 /// #it_802CB4F0
 
-/// #it_2725_Logic32_Spawned
+void it_2725_Logic32_Spawned(Item_GObj* gobj)
+{
+    HSD_JObj* jobj = gobj->hsd_obj;
+    f32 scale = 1.0f;
+    PAD_STACK(4);
+    efSync_Spawn(0x45B, gobj, jobj, &scale);
+    efSync_Spawn(0x45D, gobj, jobj, &scale);
+    it_802CB798(gobj);
+}
 
-/// #it_2725_Logic33_Spawned
+void it_2725_Logic33_Spawned(Item_GObj* gobj)
+{
+    UNUSED u32 _pad;
+    f32 scale;
+    HSD_JObj* jobj = gobj->hsd_obj;
+    PAD_STACK(4);
+    scale = 1.0f;
+    efSync_Spawn(0x45C, gobj, jobj, &scale);
+    efSync_Spawn(0x45E, gobj, jobj, &scale);
+    it_802CB798(gobj);
+}
 
 void itMatadogas_Logic33_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
@@ -125,7 +144,26 @@ bool it_802CB810(Item_GObj* gobj)
     return false;
 }
 
-/// #it_802CB844
+void it_802CB844(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    f32 scale = 0.0f;
+    ItemKind kind = ip->kind;
+    itMatadogasAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+
+    switch (kind) {
+    case 0xC1:
+        scale = attrs->x4;
+        break;
+    case 0xC2:
+        scale = attrs->x8;
+        break;
+    }
+
+    ip->x40_vel.x *= scale;
+    ip->x40_vel.y *= scale;
+    ip->x40_vel.z *= scale;
+}
 
 bool it_802CB8A4(Item_GObj* gobj)
 {

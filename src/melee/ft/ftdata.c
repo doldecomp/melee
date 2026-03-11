@@ -1921,7 +1921,7 @@ void ftData_80085CD8(Fighter* fp, Fighter* arg1, int msid)
                 {
                     memcpy(fp->x59C, temp_r3_3->x59C, temp_r3->x8);
                     temp_r4 = fp->x59C;
-                    temp_ret = lbArchive_80017340(
+                    temp_ret = lbArchiveRelocate(
                         &sp14, temp_r4->x0, temp_r3->x8,
                         (intptr_t) temp_r4 - (intptr_t) temp_r3_3->x59C);
                     if (temp_ret == -1) {
@@ -1974,7 +1974,7 @@ FigaTree* ftData_80085E50(Fighter* arg0, int msid)
                 {
                     memcpy(arg0->x59C, temp_r3_3->x59C, temp_r3->x8);
                     temp_r4 = arg0->x59C;
-                    temp_ret = lbArchive_80017340(
+                    temp_ret = lbArchiveRelocate(
                         &sp10, temp_r4->x0, temp_r3->x8,
                         (intptr_t) temp_r4 - (intptr_t) temp_r3_3->x59C);
                     if (temp_ret == -1) {

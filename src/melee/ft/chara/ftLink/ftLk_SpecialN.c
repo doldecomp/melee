@@ -38,6 +38,13 @@ typedef enum cmd_var_idx {
     cmd_unk3,
 } cmd_var_idx;
 
+static MotionFlags const mf = Ft_MF_SkipModel | Ft_MF_SkipItemVis;
+
+static MotionFlags const coll_mf =
+    Ft_MF_SkipModel | Ft_MF_SkipMatAnim | Ft_MF_SkipColAnim | Ft_MF_UpdateCmd |
+    Ft_MF_SkipItemVis | Ft_MF_Unk19 | Ft_MF_SkipModelPartVis |
+    Ft_MF_SkipModelFlags | Ft_MF_Unk27;
+
 ftLk_SpecialNIndex ftLk_SpecialN_GetIndex(Fighter_GObj* gobj)
 {
     ftLk_SpecialNIndex result = ftLk_SpecialNIndex_None;
@@ -137,7 +144,7 @@ static inline void setCallbacks(Fighter_GObj* gobj)
     fp->death2_cb = ftLk_800EAF58;
 }
 
-static inline bool unkCondition(Fighter_GObj* gobj)
+static inline bool isDrawback(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftLk_DatAttrs* da = fp->dat_attrs;
@@ -165,10 +172,90 @@ static inline bool unkCondition(Fighter_GObj* gobj)
     return false;
 }
 
+static inline bool isDrawn(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftLk_DatAttrs* da = fp->dat_attrs;
+    Item_GObj* fv_x10;
+
+    if (fp->cmd_vars[cmd_unk0_bool] == 1) {
+        if (fp->fv.lk.arrow_gobj == NULL) {
+            Vec3 pos;
+
+            fp->cmd_vars[cmd_unk0_bool] = 0;
+            lb_8000B1CC(
+                fp->parts[ftParts_GetBoneIndex(fp, FtPart_LThumbNb)].joint,
+                NULL, &pos);
+            fv_x10 =
+                it_802A83E0(fp->facing_dir, gobj, &pos,
+                            ftParts_GetBoneIndex(fp, FtPart_LThumbNb), da->xC);
+            fp->fv.lk.arrow_gobj = fv_x10;
+            if (fv_x10 != NULL) {
+                setCallbacks(gobj);
+            } else {
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+static const Vec3 zero = { 0.0f, 0.0f, 0.0f };
+static const Vec3 zero2 = { 0.0f, 0.0f, 0.0f };
+static const Vec3 zero3 = { 0.0f, 0.0f, 0.0f };
+
+static inline void animate(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    FORCE_PAD_STACK_16;
+    FORCE_PAD_STACK_8;
+    FORCE_PAD_STACK_8;
+    {
+        Vec3 lpos = zero;
+        Vec3 rpos = zero2;
+        Vec3 root = zero3;
+
+        lb_8000B1CC(fp->parts[ftParts_GetBoneIndex(fp, FtPart_LThumbNb)].joint,
+                    NULL, &lpos);
+        lb_8000B1CC(fp->parts[ftParts_GetBoneIndex(fp, FtPart_RThumbNb)].joint,
+                    NULL, &rpos);
+        lb_8000B1CC(fp->parts->joint, NULL, &root);
+        fp->mv.lk.specialn.x8.y = rpos.x - root.x;
+        fp->mv.lk.specialn.x8.z = rpos.y - root.y;
+        fp->mv.lk.specialn.x14 = 0.0f;
+        fp->mv.lk.specialn.x8.x = atan2f(rpos.y - lpos.y, rpos.x - lpos.x);
+        if (fp->fv.lk.arrow_gobj != NULL) {
+            it_802A8398(fp->fv.lk.arrow_gobj, &rpos, &lpos);
+        }
+    }
+}
+
+static inline void animate_nopad(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    Vec3 lpos = zero;
+    Vec3 rpos = zero2;
+    Vec3 root = zero3;
+
+    lb_8000B1CC(fp->parts[ftParts_GetBoneIndex(fp, FtPart_LThumbNb)].joint,
+                NULL, &lpos);
+    lb_8000B1CC(fp->parts[ftParts_GetBoneIndex(fp, FtPart_RThumbNb)].joint,
+                NULL, &rpos);
+    lb_8000B1CC(fp->parts->joint, NULL, &root);
+    fp->mv.lk.specialn.x8.y = rpos.x - root.x;
+    fp->mv.lk.specialn.x8.z = rpos.y - root.y;
+    fp->mv.lk.specialn.x14 = 0.0f;
+    fp->mv.lk.specialn.x8.x = atan2f(rpos.y - lpos.y, rpos.x - lpos.x);
+    if (fp->fv.lk.arrow_gobj != NULL) {
+        it_802A8398(fp->fv.lk.arrow_gobj, &rpos, &lpos);
+    }
+}
+
 void ftLk_SpecialN_Enter(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftLk_DatAttrs* da = fp->dat_attrs;
+
     fp->mv.lk.specialn.x0.x = fp->mv.lk.specialn.x0.y = 0.0f;
 
     /// @todo Float order hack
@@ -183,18 +270,18 @@ void ftLk_SpecialN_Enter(Fighter_GObj* gobj)
     setCallbacks(gobj);
     ftAnim_SetAnimRate(gobj, da->specialn_anim_rate);
     ftAnim_8006EBA4(gobj);
-    if (unkCondition(gobj) == true) {
+    if (isDrawback(gobj) == true) {
         ftLk_SpecialN_UnsetArrow(gobj);
         ftLk_SpecialN_UnsetFv14(gobj);
         ft_8008A2BC(gobj);
     }
 }
 
-/// @todo Share more code with #ftLk_SpecialN_Enter.
 void ftLk_SpecialAirN_Enter(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftLk_DatAttrs* da = fp->dat_attrs;
+
     fp->mv.lk.specialn.x0.x = fp->mv.lk.specialn.x0.y = 0;
     fp->mv.lk.specialn.unk_timer = 0;
     fp->cmd_vars[0] = fp->cmd_vars[1] = fp->cmd_vars[2] = fp->cmd_vars[3] = 0;
@@ -203,7 +290,7 @@ void ftLk_SpecialAirN_Enter(Fighter_GObj* gobj)
     setCallbacks(gobj);
     ftAnim_SetAnimRate(gobj, da->specialn_anim_rate);
     ftAnim_8006EBA4(gobj);
-    if (unkCondition(gobj) == true) {
+    if (isDrawback(gobj) == true) {
         ftLk_SpecialN_UnsetArrow(gobj);
         ftLk_SpecialN_UnsetFv14(gobj);
         if (da->x8 == 0) {
@@ -214,108 +301,18 @@ void ftLk_SpecialAirN_Enter(Fighter_GObj* gobj)
     }
 }
 
-static MotionFlags const mf = Ft_MF_SkipModel | Ft_MF_SkipItemVis;
-
-static inline void inlineA0(Fighter_GObj* gobj)
+void ftLk_SpecialNStart_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftLk_DatAttrs* da = fp->dat_attrs;
     if (fp->cmd_vars[cmd_unk2] && fp->mv.lk.specialn.x0.x == 0) {
-        fp->mv.lk.specialn.x0.x = 1;
-        fp->cmd_vars[cmd_unk2] = 0;
+        fp->mv.lk.specialn.x0.x = 1.0f;
+        fp->cmd_vars[cmd_unk2] = false;
     }
     ftAnim_SetAnimRate(gobj, da->specialn_anim_rate);
-}
-
-static inline bool inlineA1(Fighter_GObj* gobj)
-{
-    Fighter* fp = GET_FIGHTER(gobj);
-    ftLk_DatAttrs* da = fp->dat_attrs;
-
-    if (fp->cmd_vars[cmd_unk0_bool] == 1 && fp->fv.lk.arrow_gobj == NULL) {
-        fp->cmd_vars[cmd_unk0_bool] = 0;
-        {
-            Vec3 vec3;
-            lb_8000B1CC(
-                fp->parts[ftParts_GetBoneIndex(fp, FtPart_LThumbNb)].joint,
-                NULL, &vec3);
-            {
-                Item_GObj* arrow_gobj = it_802A83E0(
-                    fp->facing_dir, gobj, &vec3,
-                    ftParts_GetBoneIndex(fp, FtPart_LThumbNb), da->xC);
-                fp->fv.lk.arrow_gobj = arrow_gobj;
-                if (arrow_gobj != NULL) {
-                    setCallbacks(gobj);
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-    return false;
-}
-
-static Vec3 const zero_a = { 0 };
-static Vec3 const zero_b = { 0 };
-static Vec3 const zero_c = { 0 };
-
-static inline void inlineA2(Fighter_GObj* gobj)
-{
-    Fighter* fp = GET_FIGHTER(gobj);
-    Vec3 a, b, c;
-    a = zero_a;
-    b = zero_b;
-    c = zero_c;
-
-    lb_8000B1CC(fp->parts[ftParts_GetBoneIndex(fp, FtPart_LThumbNb)].joint,
-                NULL, &a);
-    lb_8000B1CC(fp->parts[ftParts_GetBoneIndex(fp, FtPart_RThumbNb)].joint,
-                NULL, &b);
-    lb_8000B1CC(fp->parts->joint, NULL, &c);
-    fp->mv.lk.specialn.x8.y = b.x - c.x;
-    fp->mv.lk.specialn.x8.z = b.y - c.y;
-    fp->mv.lk.specialn.x14 = 0.0f;
-    fp->mv.lk.specialn.x8.x = atan2f(b.y - a.y, b.x - a.x);
-    if (fp->fv.lk.arrow_gobj != NULL) {
-        it_802A8398(fp->fv.lk.arrow_gobj, &b, &a);
-    }
-}
-
-static inline void inlineA3(Fighter_GObj* gobj)
-{
-    if (gobj != NULL) {
-        Fighter* fp = GET_FIGHTER(gobj);
-        if (fp != NULL && fp->fv.lk.arrow_gobj != NULL) {
-            fp->fv.lk.arrow_gobj = NULL;
-            if (fp->fv.lk.boomerang_gobj == NULL && fp->fv.lk.x14 == NULL) {
-                /// @todo Does this actually do anything? Doesn't seem to
-                /// return @c bool.
-                ftLk_Init_BoomerangExists(gobj);
-            }
-        }
-    }
-    if (gobj != NULL) {
-        Fighter* fp = GET_FIGHTER(gobj);
-        if (fp != NULL && fp->fv.lk.x14 != NULL) {
-            fp->fv.lk.x14 = NULL;
-            if (fp->fv.lk.boomerang_gobj == NULL &&
-                fp->fv.lk.arrow_gobj == NULL)
-            {
-                /// @todo Does this actually do anything? Doesn't seem to
-                /// return @c bool.
-                ftLk_Init_BoomerangExists(gobj);
-            }
-        }
-    }
-    ft_8008A2BC(gobj);
-}
-
-void ftLk_SpecialNStart_Anim(Fighter_GObj* gobj)
-{
-    inlineA0(gobj);
-    if (!inlineA1(gobj)) {
-        inlineA2(gobj);
-        if (ftAnim_IsFramesRemaining(gobj)) {
+    if (!isDrawn(gobj)) {
+        animate(gobj);
+        if (!ftAnim_IsFramesRemaining(gobj)) {
             Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialNLoop, mf, 0, 1, 0,
                                       NULL);
             setCallbacks(gobj);
@@ -330,16 +327,16 @@ void ftLk_SpecialNStart_Anim(Fighter_GObj* gobj)
 
 void ftLk_SpecialNLoop_Anim(Fighter_GObj* gobj)
 {
-    inlineA2(gobj);
+    animate_nopad(gobj);
 }
 
-static void setupParts(Fighter_GObj* gobj, bool arg1)
+static inline void setupParts(Fighter_GObj* gobj, bool arg1)
 {
     ftParts_80074A4C(gobj, 2, arg1);
     ftParts_80074B0C(gobj, 2, arg1);
 }
 
-static void updateParts(Fighter_GObj* gobj)
+static inline void updateParts(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->x221E_b3 == true && fp->mv.lk.specialn.unk_timer == 0) {
@@ -368,12 +365,13 @@ void ftLk_SpecialAirNStart_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftLk_DatAttrs* da = fp->dat_attrs;
-    if (fp->cmd_vars[cmd_unk1_bool] && fp->mv.lk.specialn.x0.x == 0) {
-        fp->mv.lk.specialn.x0.x = 0;
-        fp->cmd_vars[cmd_unk1_bool] = false;
+    if (fp->cmd_vars[cmd_unk2] && fp->mv.lk.specialn.x0.x == 0) {
+        fp->mv.lk.specialn.x0.x = 1.0f;
+        fp->cmd_vars[cmd_unk2] = false;
     }
-    if (!unkCondition(gobj)) {
-        inlineA2(gobj);
+
+    if (!isDrawn(gobj)) {
+        animate(gobj);
         if (!ftAnim_IsFramesRemaining(gobj)) {
             Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialAirNLoop, mf, 0, 1,
                                       0, NULL);
@@ -393,7 +391,7 @@ void ftLk_SpecialAirNStart_Anim(Fighter_GObj* gobj)
 
 void ftLk_SpecialAirNLoop_Anim(Fighter_GObj* gobj)
 {
-    inlineA2(gobj);
+    animate_nopad(gobj);
 }
 
 void ftLk_SpecialAirNEnd_Anim(Fighter_GObj* gobj)
@@ -508,16 +506,49 @@ void ftLk_SpecialAirNEnd_Phys(Fighter_GObj* gobj)
     ft_80084EEC(gobj);
 }
 
-static MotionFlags const coll_mf =
-    Ft_MF_SkipModel | Ft_MF_SkipMatAnim | Ft_MF_SkipColAnim | Ft_MF_UpdateCmd |
-    Ft_MF_SkipItemVis | Ft_MF_Unk19 | Ft_MF_SkipModelPartVis |
-    Ft_MF_SkipModelFlags | Ft_MF_Unk27;
+static inline void doEndColl(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftLk_DatAttrs* da = fp->dat_attrs;
+    Item_GObj* item_gobj;
+    FORCE_PAD_STACK_8;
+    FORCE_PAD_STACK_4;
+
+    if (fp->cmd_vars[cmd_unk1_bool] == true && fp->fv.lk.arrow_gobj != NULL) {
+        Vec3 rpos, lpos;
+
+        fp->cmd_vars[cmd_unk1_bool] = false;
+        lb_8000B1CC(fp->parts[ftParts_GetBoneIndex(fp, FtPart_RThumbNb)].joint,
+                    NULL, &rpos);
+        lb_8000B1CC(fp->parts[ftParts_GetBoneIndex(fp, FtPart_LThumbNb)].joint,
+                    NULL, &lpos);
+        rpos.z = lpos.z = 0;
+        item_gobj = fp->item_gobj;
+        it_802A850C(fp->fv.lk.arrow_gobj, &rpos, &lpos, 5 * deg_to_rad,
+                    fp->mv.lk.specialn.x0.y, da->x0);
+        ftLk_SpecialN_UnsetArrow(gobj);
+        fp->item_gobj = item_gobj;
+        ftpickupitem_80094818(gobj, false);
+    }
+}
 
 static void doColl(Fighter_GObj* gobj, FtMotionId msid)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (!ft_80082708(gobj)) {
         ftCommon_8007D5D4(fp);
+        Fighter_ChangeMotionState(gobj, msid, coll_mf, fp->cur_anim_frame,
+                                  1.0f, 0.0f, NULL);
+        setCallbacks(gobj);
+        ftAnim_8006EBA4(gobj);
+    }
+}
+
+static void doAirColl(Fighter_GObj* gobj, FtMotionId msid)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (ft_80081D0C(gobj) == GA_Air) {
+        ftCommon_8007D7FC(fp);
         Fighter_ChangeMotionState(gobj, msid, coll_mf, fp->cur_anim_frame,
                                   1.0f, 0.0f, NULL);
         setCallbacks(gobj);
@@ -535,34 +566,6 @@ void ftLk_SpecialNLoop_Coll(Fighter_GObj* gobj)
     doColl(gobj, ftLk_MS_SpecialAirNLoop);
 }
 
-static inline void doEndColl(Fighter_GObj* gobj)
-{
-    Fighter* fp = GET_FIGHTER(gobj);
-    ftLk_DatAttrs* da = fp->dat_attrs;
-    Item_GObj* item_gobj;
-    if (fp->cmd_vars[cmd_unk1_bool] == true && fp->fv.lk.arrow_gobj != NULL) {
-        fp->cmd_vars[cmd_unk1_bool] = false;
-        FORCE_PAD_STACK_8;
-        FORCE_PAD_STACK_4;
-        {
-            Vec3 rpos, lpos;
-            lb_8000B1CC(
-                fp->parts[ftParts_GetBoneIndex(fp, FtPart_RThumbNb)].joint,
-                NULL, &rpos);
-            lb_8000B1CC(
-                fp->parts[ftParts_GetBoneIndex(fp, FtPart_LThumbNb)].joint,
-                NULL, &lpos);
-            rpos.z = lpos.z = 0;
-            item_gobj = fp->item_gobj;
-            it_802A850C(fp->fv.lk.arrow_gobj, &rpos, &lpos, 5 * deg_to_rad,
-                        fp->mv.lk.specialn.x0.y, da->x0);
-            ftLk_SpecialN_UnsetArrow(gobj);
-            fp->item_gobj = item_gobj;
-        }
-        ftpickupitem_80094818(gobj, false);
-    }
-}
-
 void ftLk_SpecialNEnd_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -570,19 +573,7 @@ void ftLk_SpecialNEnd_Coll(Fighter_GObj* gobj)
     if (ft_80082708(gobj) == GA_Ground) {
         ftCommon_8007D5D4(fp);
         Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialAirNEnd, coll_mf,
-                                  fp->cur_anim_frame, 1, 0, NULL);
-        setCallbacks(gobj);
-        ftAnim_8006EBA4(gobj);
-    }
-}
-
-static void doAirColl(Fighter_GObj* gobj, FtMotionId msid)
-{
-    Fighter* fp = GET_FIGHTER(gobj);
-    if (ft_80081D0C(gobj) == GA_Air) {
-        ftCommon_8007D7FC(fp);
-        Fighter_ChangeMotionState(gobj, msid, coll_mf, fp->cur_anim_frame, 1,
-                                  0, NULL);
+                                  fp->cur_anim_frame, 1.0f, 0.0f, NULL);
         setCallbacks(gobj);
         ftAnim_8006EBA4(gobj);
     }
@@ -598,7 +589,6 @@ void ftLk_SpecialAirNLoop_Coll(Fighter_GObj* gobj)
     doAirColl(gobj, ftLk_MS_SpecialNLoop);
 }
 
-/// @todo Combine with #ftLk_SpecialNEnd_Coll.
 void ftLk_SpecialAirNEnd_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -606,7 +596,7 @@ void ftLk_SpecialAirNEnd_Coll(Fighter_GObj* gobj)
     if (ft_80081D0C(gobj) == GA_Air) {
         ftCommon_8007D7FC(fp);
         Fighter_ChangeMotionState(gobj, ftLk_MS_SpecialNEnd, coll_mf,
-                                  fp->cur_anim_frame, 1, 0, NULL);
+                                  fp->cur_anim_frame, 1.0f, 0.0f, NULL);
         setCallbacks(gobj);
         ftAnim_8006EBA4(gobj);
     }

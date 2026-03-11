@@ -779,7 +779,30 @@ void ftKb_LkSpecialNEnd_Anim(Fighter_GObj* gobj)
 
 /// #ftKb_LkSpecialAirNLoop_Anim
 
-/// #ftKb_LkSpecialAirNEnd_Anim
+void ftKb_LkSpecialAirNEnd_Anim(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    ftKb_DatAttrs* da = fp->dat_attrs;
+    float freefall;
+    PAD_STACK(24);
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        ftKb_SpecialNLk_UnsetArrow(gobj);
+        ftKb_SpecialNLk_UnsetBow(gobj);
+        switch (fp->fv.kb.hat.kind) {
+        case FTKIND_LINK:
+            freefall = da->specialn_lk_freefall_toggle;
+            break;
+        case FTKIND_CLINK:
+            freefall = da->specialn_cl_freefall_toggle;
+            break;
+        }
+        if (freefall == 0.0f) {
+            ftCo_Fall_Enter(gobj);
+        } else {
+            ftCo_80096900(gobj, 1, 0, true, 1.0f, freefall);
+        }
+    }
+}
 
 /// #ftKb_LkSpecialNStart_IASA
 
@@ -861,7 +884,34 @@ return_error:
     return -1;
 }
 
-/// #ftKb_SpecialNSs_800FCC6C
+bool ftKb_SpecialNSs_800FCC6C(Fighter_GObj* gobj)
+{
+    Fighter* fp;
+
+    if (!gobj) {
+        goto end_true;
+    }
+
+    fp = GET_FIGHTER(gobj);
+
+    switch (fp->motion_id) {
+    case 0x197:
+    case 0x198:
+    case 0x199:
+    case 0x19A:
+    case 0x19B:
+    case 0x19C:
+        if (fp->x2070.x2071_b6) {
+            return true;
+        }
+        return false;
+    default:
+        return true;
+    }
+
+end_true:
+    return true;
+}
 
 bool ftKb_SpecialNSs_800FCCBC(Fighter_GObj* gobj)
 {
@@ -1152,4 +1202,20 @@ void ftKb_SsSpecialAirN_Coll(Fighter_GObj* gobj)
     }
 }
 
-/// #ftKb_SpecialNFx_800FDC00
+void ftKb_SpecialNFx_800FDC00(Fighter_GObj* gobj, Vec3* vec)
+{
+    if (gobj != NULL) {
+        Fighter* fp = GET_FIGHTER(gobj);
+        if (fp != NULL) {
+            Vec3 offset;
+            offset.x = 0.0f;
+            offset.y = 1.45f;
+            offset.z = 5.016f;
+            lb_8000B1CC(fp->parts[44].joint, &offset, vec);
+            return;
+        }
+    }
+    vec->z = 0.0f;
+    vec->y = 0.0f;
+    vec->x = 0.0f;
+}
