@@ -132,7 +132,18 @@ void itMatadogas_Logic33_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
     it_8026B894(gobj, ref_gobj);
 }
 
-/// #it_802CB798
+void it_802CB798(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    itMatadogasAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    PAD_STACK(8);
+    ip->xD44_lifeTimer = attrs->x0;
+    it_80274740(gobj);
+    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+    ip->entered_hitlag = efLib_PauseAll;
+    ip->exited_hitlag = efLib_ResumeAll;
+    it_8026B3A8(gobj);
+}
 
 bool it_802CB810(Item_GObj* gobj)
 {

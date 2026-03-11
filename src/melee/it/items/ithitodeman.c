@@ -22,7 +22,9 @@ typedef struct {
     float x8;
     float xC;
     float x10;
-    char pad_0[0x40 - 0x14];
+    float x14;
+    float x18;
+    char pad_0[0x40 - 0x1C];
     s32 x40;
     s32 x44;
     u8 _pad2[0x4];
@@ -70,7 +72,15 @@ void it_802D43EC(Item_GObj* gobj)
     }
 }
 
-/// #it_802D4494
+void it_802D4494(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itHitodemanAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    s32 randi;
+    PAD_STACK(8);
+    randi = HSD_Randi((s32) (attrs->x14 - attrs->x18));
+    ip->xDD4_itemVar.hitodeman.x84 = attrs->x18 + (f32) randi;
+}
 
 void it_802D4510(Item_GObj* gobj)
 {
