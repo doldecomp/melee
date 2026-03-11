@@ -116,6 +116,8 @@ static u32 lbl_803D9E1C[] = {
     0x014000F0, 0x014000F0,
 };
 
+static u8 lbl_803D9E9C[0x70] = { 0 };
+
 struct {
     int x0, x4, x8;
 } lbl_803D9F0C = { -1, -1, -1 };
