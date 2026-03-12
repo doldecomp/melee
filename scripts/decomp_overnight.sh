@@ -22,7 +22,9 @@ set -euo pipefail
 
 cleanup() {
     trap - INT TERM EXIT
-    kill -- -$$ 2>/dev/null
+    # Kill all children and their descendants
+    pkill -P $$ 2>/dev/null
+    kill 0 2>/dev/null
     exit 1
 }
 trap cleanup INT TERM EXIT
@@ -462,35 +464,50 @@ Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>\"
             "$PROMPT" > "$FUNC_STREAM_LOG" 2>&1 &
         CLAUDE_PID=$!
 
-        # Tail the log with live summaries while claude runs
-        tail -f "$FUNC_STREAM_LOG" 2>/dev/null | python3 -u -c "
-import json, sys, signal
+        # Stream live summaries while claude runs (polls file, exits when claude dies)
+        python3 -u -c "
+import json, sys, signal, time, os
 signal.signal(signal.SIGINT, lambda *a: sys.exit(0))
 signal.signal(signal.SIGTERM, lambda *a: sys.exit(0))
-for line in sys.stdin:
+pos = 0
+log_file = '$FUNC_STREAM_LOG'
+pid = $CLAUDE_PID
+while True:
     try:
-        d = json.loads(line)
-        t = d.get('type','')
-        if t == 'assistant':
-            for c in d.get('message',{}).get('content',[]):
-                if c.get('type') == 'text' and c['text'].strip():
-                    print(f'  [claude] {c[\"text\"][:120]}', flush=True)
-                elif c.get('type') == 'tool_use':
-                    inp = c.get('input',{})
-                    name = c['name']
-                    desc = inp.get('description','') or inp.get('pattern','') or inp.get('file_path','') or ''
-                    print(f'  [{name}] {desc[:100]}', flush=True)
-        elif t == 'result':
-            s = d.get('subtype','')
-            print(f'  [result] {s}', flush=True)
-    except: pass
+        if os.path.exists(log_file):
+            with open(log_file) as f:
+                f.seek(pos)
+                for line in f:
+                    try:
+                        d = json.loads(line)
+                        t = d.get('type','')
+                        if t == 'assistant':
+                            for c in d.get('message',{}).get('content',[]):
+                                if c.get('type') == 'text' and c['text'].strip():
+                                    print(f'  [claude] {c[\"text\"][:120]}', flush=True)
+                                elif c.get('type') == 'tool_use':
+                                    inp = c.get('input',{})
+                                    name = c['name']
+                                    desc = inp.get('description','') or inp.get('pattern','') or inp.get('file_path','') or ''
+                                    print(f'  [{name}] {desc[:100]}', flush=True)
+                        elif t == 'result':
+                            s = d.get('subtype','')
+                            print(f'  [result] {s}', flush=True)
+                    except: pass
+                pos = f.tell()
+        # Check if claude is still running
+        os.kill(pid, 0)
+        time.sleep(0.5)
+    except ProcessLookupError:
+        break
+    except OSError:
+        break
 " &
         TAIL_PID=$!
 
         wait $CLAUDE_PID 2>/dev/null
         CLAUDE_EXIT=$?
-        kill $TAIL_PID 2>/dev/null
-        wait $TAIL_PID 2>/dev/null
+        kill $TAIL_PID 2>/dev/null; wait $TAIL_PID 2>/dev/null
         set -e
         log "  Claude session exited (code: $CLAUDE_EXIT)"
 
