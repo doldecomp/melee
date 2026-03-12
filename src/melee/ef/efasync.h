@@ -1,12 +1,9 @@
-#ifndef GALE01_063930
-#define GALE01_063930
-
-#include <placeholder.h>
-#include <platform.h>
+#ifndef MELEE_EF_EFASYNC_H
+#define MELEE_EF_EFASYNC_H
 
 #include <baselib/forward.h>
 
-/* 063930 */ void* efAsync_80063930(s32, HSD_GObj*, void*);
+/* 063930 */ void* efAsync_80063930(s32, HSD_GObj*, va_list);
 // /* 063930 */ void* efAsync_80063930(s32, HSD_GObj*, ...);
 /* 06729C */ void efAsync_8006729C(int);
 /* 06730C */ void efAsync_8006730C(HSD_Archive* archive, u8* data, u32 length,
