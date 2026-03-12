@@ -746,7 +746,25 @@ HSD_Generator* efLib_8005CC2C(s32 gfx_id, HSD_JObj* jobj)
     return generator;
 }
 
-HSD_Generator* efLib_8005CC84(s32 gfx_id, HSD_JObj* jobj);
+HSD_Generator* efLib_8005CC84(s32 gfx_id, HSD_JObj* jobj)
+{
+    HSD_Generator* generator = hsd_8039EFAC(0, gfx_id / 1000, gfx_id, jobj);
+    if (generator != NULL) {
+        HSD_psAppSRT* appsrt;
+        if ((appsrt = (generator)->appsrt) == NULL) {
+            appsrt = psAddGeneratorAppSRT_begin(generator, 0);
+        }
+        if (appsrt != NULL) {
+            appsrt->gp = generator;
+        } else {
+            hsd_8039D4DC(generator);
+            return NULL;
+        }
+        (generator)->type &= 0xFFFFF9FF;
+        (generator)->type |= PSAPPSRT_UNK_B11;
+    }
+    return generator;
+}
 
 HSD_Generator* efLib_8005CD2C(s32 gfx_id, va_list vlist, HSD_GObj* gobj)
 {
@@ -806,26 +824,6 @@ HSD_Generator* efLib_8005D044(s32 gfx_id, va_list vlist)
             direction < 0.0F ? -1.5707963267948966L : 1.5707963267948966L;
         generator->appsrt->scale.x = generator->appsrt->scale.y =
             generator->appsrt->scale.z = *va_arg(vlist, f32*);
-    }
-    return generator;
-}
-
-HSD_Generator* efLib_8005CC84(s32 gfx_id, HSD_JObj* jobj)
-{
-    HSD_Generator* generator = hsd_8039EFAC(0, gfx_id / 1000, gfx_id, jobj);
-    if (generator != NULL) {
-        HSD_psAppSRT* appsrt;
-        if ((appsrt = (generator)->appsrt) == NULL) {
-            appsrt = psAddGeneratorAppSRT_begin(generator, 0);
-        }
-        if (appsrt != NULL) {
-            appsrt->gp = generator;
-        } else {
-            hsd_8039D4DC(generator);
-            return NULL;
-        }
-        (generator)->type &= 0xFFFFF9FF;
-        (generator)->type |= PSAPPSRT_UNK_B11;
     }
     return generator;
 }
