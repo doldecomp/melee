@@ -147,6 +147,7 @@ typedef enum InternalStageId {
 
     GRTSEAK = 60,
     GRTYOSHI,
+    GRTZELDA,
 
     /// Home run contest
     HOMERUN = 67,
