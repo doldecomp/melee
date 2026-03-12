@@ -20,6 +20,13 @@
 
 set -euo pipefail
 
+cleanup() {
+    trap - INT TERM EXIT
+    kill -- -$$ 2>/dev/null
+    exit 1
+}
+trap cleanup INT TERM EXIT
+
 REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$REPO_ROOT"
 
@@ -58,8 +65,8 @@ past_cutoff() {
 
 # Resolve OAuth token (same logic as statusline.sh)
 get_oauth_token() {
-    if [ -n "$CLAUDE_CODE_OAUTH_TOKEN" ]; then
-        echo "$CLAUDE_CODE_OAUTH_TOKEN"
+    if [ -n "${CLAUDE_CODE_OAUTH_TOKEN:-}" ]; then
+        echo "${CLAUDE_CODE_OAUTH_TOKEN:-}"
         return 0
     fi
     if command -v security >/dev/null 2>&1; then
@@ -205,12 +212,28 @@ while true; do
 
     # 2. Build to make sure master is clean
     log "Building master to verify clean state..."
-    python3 configure.py --wrapper wine 2>&1 | tail -1
-    if ! ninja 2>&1 | tee -a "$MAIN_LOG" | tail -5; then
-        log "ERROR: Master doesn't build clean. Aborting."
-        exit 1
+    CURRENT_HEAD=$(git rev-parse HEAD)
+    if [ "$CURRENT_HEAD" != "${LAST_BUILT_HEAD:-}" ]; then
+        log "  Running configure.py..."
+        python3 configure.py --wrapper wine 2>&1 >> "$MAIN_LOG"
+        log "  Running ninja..."
+        ninja 2>&1 | python3 -u -c "
+import sys, re
+for line in sys.stdin:
+    m = re.match(r'\[(\d+)/(\d+)\]', line)
+    if m:
+        cur, total = int(m.group(1)), int(m.group(2))
+        pct = cur * 100 // total
+        filled = pct * 30 // 100
+        bar = '█' * filled + '░' * (30 - filled)
+        print(f'\r  [{bar}] {cur}/{total} ({pct}%)', end='', flush=True)
+print()
+" || { log "ERROR: Master doesn't build clean. Aborting."; exit 1; }
+        LAST_BUILT_HEAD=$CURRENT_HEAD
+        log "Master builds OK"
+    else
+        log "Master unchanged, skipping rebuild"
     fi
-    log "Master builds OK"
 
     # 3. Find stubs
     log "Finding stubs..."
@@ -360,7 +383,9 @@ WORKFLOW:
    ln -s $REPO_ROOT/build build
    ln -s $REPO_ROOT/tools tools
    ln -s $REPO_ROOT/.venv .venv
-   Then rebuild: python3 configure.py --wrapper wine 2>&1 | tail -1 && ninja 2>&1 | tail -5
+   cp $REPO_ROOT/build.ninja build.ninja
+   cp $REPO_ROOT/objdiff.json objdiff.json 2>/dev/null || true
+   DO NOT run configure.py — it is already done. Just use ninja to compile after editing.
 
 1. CLEAN UP m2c OUTPUT using patterns from the source file above:
    - Use gobj->user_data style (not GET_FIGHTER) when nearby functions do
@@ -374,7 +399,7 @@ WORKFLOW:
 2. IMPLEMENT: Replace the \"/// #$FUNC_NAME\" stub marker with your code.
    Update the header declaration if it uses UNK_RET/UNK_PARAMS.
 
-3. BUILD: python3 configure.py --wrapper wine 2>&1 | tail -1 && ninja 2>&1 | tail -10
+3. BUILD: ninja 2>&1 | tail -10
    The build MUST succeed (ninja exit code 0).
 
 4. CHECK MATCH (use absolute path to report.json since build/ is a symlink):
@@ -418,14 +443,48 @@ Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>\"
 
     while true; do
         set +e
+        log "  Claude session started..."
+
+        # Run claude in background so Ctrl+C reaches the script
         env -u CLAUDECODE -u ANTHROPIC_API_KEY claude -p \
             --model "$MODEL" \
             --permission-mode bypassPermissions \
             --verbose --output-format stream-json \
             -w "$BRANCH_NAME" \
-            "$PROMPT" > "$FUNC_STREAM_LOG" 2>&1
-        CLAUDE_EXIT=${PIPESTATUS[0]}
+            "$PROMPT" > "$FUNC_STREAM_LOG" 2>&1 &
+        CLAUDE_PID=$!
+
+        # Tail the log with live summaries while claude runs
+        tail -f "$FUNC_STREAM_LOG" 2>/dev/null | python3 -u -c "
+import json, sys, signal
+signal.signal(signal.SIGINT, lambda *a: sys.exit(0))
+signal.signal(signal.SIGTERM, lambda *a: sys.exit(0))
+for line in sys.stdin:
+    try:
+        d = json.loads(line)
+        t = d.get('type','')
+        if t == 'assistant':
+            for c in d.get('message',{}).get('content',[]):
+                if c.get('type') == 'text' and c['text'].strip():
+                    print(f'  [claude] {c[\"text\"][:120]}', flush=True)
+                elif c.get('type') == 'tool_use':
+                    inp = c.get('input',{})
+                    name = c['name']
+                    desc = inp.get('description','') or inp.get('pattern','') or inp.get('file_path','') or ''
+                    print(f'  [{name}] {desc[:100]}', flush=True)
+        elif t == 'result':
+            s = d.get('subtype','')
+            print(f'  [result] {s}', flush=True)
+    except: pass
+" &
+        TAIL_PID=$!
+
+        wait $CLAUDE_PID 2>/dev/null
+        CLAUDE_EXIT=$?
+        kill $TAIL_PID 2>/dev/null
+        wait $TAIL_PID 2>/dev/null
         set -e
+        log "  Claude session exited (code: $CLAUDE_EXIT)"
 
         # Check for rate limit in output (exclude normal status:"allowed" events)
         if grep -v '"status":"allowed"' "$FUNC_STREAM_LOG" 2>/dev/null | grep -qi "hit your limit\|rate.limit\|resets [0-9]"; then
@@ -485,6 +544,27 @@ for line in open('$FUNC_STREAM_LOG'):
                     print(f'>> {c[\"name\"]}({str(v[0])[:80] if v else \"\"})')
     except: pass
 " > "$FUNC_LOG" 2>/dev/null || true
+
+    # Sum token usage across all assistant messages
+    FUNC_TOKENS=$(python3 -c "
+import json
+input_t = output_t = cache_create = cache_read = 0
+for line in open('$FUNC_STREAM_LOG'):
+    try:
+        d = json.loads(line)
+        if d.get('type') == 'assistant':
+            u = d.get('message', {}).get('usage', {})
+            input_t += u.get('input_tokens', 0)
+            output_t += u.get('output_tokens', 0)
+            cache_create += u.get('cache_creation_input_tokens', 0)
+            cache_read += u.get('cache_read_input_tokens', 0)
+    except: pass
+total = input_t + output_t + cache_create + cache_read
+def fmt(n):
+    return f'{n/1000:.1f}k' if n >= 1000 else str(n)
+print(f'total={fmt(total)} in={fmt(input_t)} out={fmt(output_t)} cache_create={fmt(cache_create)} cache_read={fmt(cache_read)}')
+" 2>/dev/null || echo "tokens=unknown")
+    log "  [tokens] $FUNC_TOKENS"
 
     # Skip result parsing if we were rate limited — don't save progress so it's retried
     if [ "$RATE_LIMITED" = "true" ]; then
