@@ -293,11 +293,20 @@ struct grKraid_GroundVars {
     /*  + gp+C8 */ f32 x4;
     /*  + gp+CC */ f32 x8;
     /*  + gp+D0 */ f32 xC;
+    /*  + gp+D4 */ s32 x10;
 };
 
 struct grKraid_GroundVars2 {
-    /*  + gp+C4 */ u8 _[0xC];
+    /*  + gp+C4 */ s8 x0;
+    /*  + gp+C5 */ s8 x1;
+    /*  + gp+C6 */ s8 x2;
+    /*  + gp+C7 */ u8 x3;
+    /*  + gp+C8 */ s8 x4;
+    /*  + gp+C9 */ s8 x5;
+    /*  + gp+CC */ f32 x8;
     /*  + gp+D0 */ s32 xC;
+    /*  + gp+D4 */ HSD_JObj* x10;
+    /*  + gp+D8 */ HSD_JObj* x14;
 };
 
 struct grCorneria_GroundVars {
