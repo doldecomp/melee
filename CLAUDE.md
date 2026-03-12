@@ -98,6 +98,20 @@ After building, `objdiff.json` is generated. Use [objdiff](https://github.com/en
 
 Extract `main.dol` from a GALE01 ISO (via Dolphin Emulator) to `orig/GALE01/`.
 
+## Notes on Making Matches
+
+- Aim for **true matches** (code the developer would have written, e.g. `var->x3[i*2] = 3`) over **fake matches** (technically matching slop, e.g. `*(s16*) var+x3+i*2 = 3`).
+- Avoid raw pointer arithmetic — the original devs most likely didn't use it.
+- Convert `i=0; do { ...; i++; } while (i<10)` into `for (i=0; i<10; i++) { ... }`.
+- Avoid `goto`/labels — use control flow (`if`, `for`, `while`) instead.
+- For struct fields, label with local hex offset: `struct { /* 0x00 */ u16 x00; /* 0x02 */ u16 x02; }`. Optionally add global offset if relevant.
+- **Ignore register swaps** — if all instances of a register in the target map to a different register in our code, count it as matched (solved later via permuter).
+- When the stack is off by `n` bytes, use `PAD_STACK(n);` at the end of the stack.
+- Use `ABS(n)` for `x=n; if(x>0) x=-x` patterns.
+- Use `MIN(n,m)` / `MAX(n,m)` for clamping patterns.
+- New structs should be proper structs (not `extern u8[]`). Follow the naming scheme above and use `u8 pad_xx[n]` for padding.
+- To access fields inside `pad[...]`, split the pad: `pad_xx[n], var_to_use, pad_yy[m]`.
+
 ## Fighter Character Codes
 
 Mr (Mario), Lg (Luigi), Kb (Kirby), Pk (Pikachu), Ss (Samus), Lk (Link), Fx (Fox), Dk (Donkey Kong), Kp (Bowser), Pe (Peach), Ys (Yoshi), Fc (Falco), Ms (Marth), Gn (Ganondorf), Mt (Mewtwo), Zd (Zelda), Sk (Sheik), Pr (Jigglypuff), Cl (Young Link), Dr (Dr. Mario), Fe (Roy), Ca (Captain Falcon), Ns (Ness), Pc (Pichu)
