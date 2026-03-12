@@ -270,6 +270,9 @@ print(json.dumps(list(names)))
 ")
     log "Excluded $(echo "$EXCLUDED" | python3 -c "import json,sys; print(len(json.load(sys.stdin)))") functions from open PRs/issues"
 
+    # Collect functions that already have decomp branches (with or without worktree- prefix)
+    BRANCH_FUNCS=$(git branch --list 'decomp-*' 'worktree-decomp-*' 2>/dev/null | sed 's/^[* ]*//' | sed 's/^worktree-//' | sed 's/^decomp-//' | sort -u)
+
     # 5. Filter stubs: remove excluded, enforce size limit, exclude already-attempted, take top N
     TARGETS=$(python3 -c "
 import json, os
@@ -281,10 +284,12 @@ if os.path.exists(pf):
     with open(pf) as f:
         progress = json.load(f)
 already_tried = set(e['name'] for e in progress)
+branch_funcs = set('''$BRANCH_FUNCS'''.strip().splitlines())
 targets = [
     s for s in stubs
     if s['name'].lower() not in excluded
     and s['name'] not in already_tried
+    and s['name'] not in branch_funcs
     and s['size'] > 0
 ]
 targets.sort(key=lambda s: s['size'])
@@ -577,7 +582,9 @@ print(f'total={fmt(total)} in={fmt(input_t)} out={fmt(output_t)} cache_create={f
     fi
 
     # Parse result from Claude's output (check both readable and raw logs)
-    if grep -q "SUCCESS: $FUNC_NAME" "$FUNC_LOG" "$FUNC_STREAM_LOG" 2>/dev/null; then
+    # Use loose match — Claude sometimes truncates the function name
+    if grep -qi "SUCCESS" "$FUNC_LOG" "$FUNC_STREAM_LOG" 2>/dev/null && \
+       ! grep -qi "FAILURE" "$FUNC_LOG" "$FUNC_STREAM_LOG" 2>/dev/null; then
         log "  ✓ SUCCESS!"
 
         # Find the worktree branch (claude --worktree prefixes with "worktree-")
