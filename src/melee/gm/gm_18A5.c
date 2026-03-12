@@ -903,9 +903,11 @@ void fn_8018E46C(HSD_GObj* gobj, int unused)
 {
     BracketEntry* data;
     s32 temp;
+    int new_var;
     s32 r30;
 
     data = gobj->user_data;
+    data->x3 = data->x3;
 
     if (data->x2 != 0) {
         temp = -(data->x10 + data->x18);
@@ -935,10 +937,11 @@ void fn_8018E46C(HSD_GObj* gobj, int unused)
                     -data->x18, r30, data->xC, lbl_804DA6A0);
         break;
     case 3:
+    new_var = -data->x18;
         fn_8018DF68(data,
                     data->xC - (s32) (lbl_804DA6A0 * data->x1C),
                     -data->x10, data->x14,
-                    -data->x18, r30, data->xC, lbl_804DA6A0);
+                    new_var, r30, data->xC, lbl_804DA6A0);
         break;
     }
 }
