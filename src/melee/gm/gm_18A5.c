@@ -408,8 +408,8 @@ void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
         }
     }
 
-    HSD_JObjSetTranslateX(jobj, (f32) *(s32*) (sub + 0x44));
-    HSD_JObjSetTranslateY(jobj, -(f32) *(s32*) (sub + 0x48));
+    HSD_JObjSetTranslateX(jobj, (f32) *p44);
+    HSD_JObjSetTranslateY(jobj, -(f32) *p48);
 }
 
 /// #fn_8018B090
