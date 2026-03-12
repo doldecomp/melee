@@ -57,7 +57,7 @@ void fn_8018A514(int count, float val)
     u8* src;
     s32 i;
     s32 n;
-    u8* d;
+    BracketEntry* entry;
 
     if (count < 9) {
         region = 0;
@@ -84,44 +84,44 @@ void fn_8018A514(int count, float val)
     }
 
     n = lbl_803D9D20.x0[count + 0x20];
-    d = (u8*) entries;
+    entry = entries;
 
     for (i = 0; i < n; i++) {
-        d[0] = src[0];
-        d[1] = src[1];
-        d[2] = src[2];
-        d[3] = src[3];
-        d[4] = src[4];
-        d[5] = src[5];
-        d[6] = src[6];
-        *(f32*) (d + 0x1C) = val;
-        *(s32*) (d + 0x0C) = *(s32*) (src + 0x08);
-        *(s32*) (d + 0x14) = *(s32*) (src + 0x0C);
-        *(s32*) (d + 0x10) = *(s32*) (src + 0x10);
-        *(s32*) (d + 0x18) = *(s32*) (src + 0x14);
-        d[0x20] = src[0x18];
-        d[0x21] = src[0x1A];
-        d[0x22] = src[0x1C];
-        d[0x23] = src[0x1E];
-        d[0x24] = src[0x19];
-        d[0x25] = src[0x1B];
-        d[0x26] = src[0x1D];
-        d[0x27] = src[0x1F];
-        d[0x28] = src[0x20];
-        d[0x52] = 9;
-        d[0x32] = 0;
-        d[0x7E] = 9;
-        d[0x5E] = 0;
-        d[0xAA] = 9;
-        d[0x8A] = 0;
-        d[0xD6] = 9;
-        d[0xB6] = 0;
-        d[0x30] = src[0x21];
-        d[0x5C] = src[0x22];
-        d[0x88] = src[0x23];
-        d[0xB4] = src[0x24];
+        entry->x0 = src[0];
+        entry->x1 = src[1];
+        entry->x2 = src[2];
+        entry->x3 = src[3];
+        entry->x4 = src[4];
+        entry->x5 = src[5];
+        entry->x6 = src[6];
+        entry->x1C = val;
+        entry->xC = *(s32*) (src + 0x08);
+        entry->x14 = *(s32*) (src + 0x0C);
+        entry->x10 = *(s32*) (src + 0x10);
+        entry->x18 = *(s32*) (src + 0x14);
+        entry->x20.r = src[0x18];
+        entry->x20.g = src[0x1A];
+        entry->x20.b = src[0x1C];
+        entry->x20.a = src[0x1E];
+        entry->x24 = src[0x19];
+        entry->x25 = src[0x1B];
+        entry->x26 = src[0x1D];
+        entry->x27 = src[0x1F];
+        entry->x28 = src[0x20];
+        entry->x52 = 9;
+        entry->x32 = 0;
+        entry->x7E = 9;
+        entry->x5E = 0;
+        entry->xAA = 9;
+        entry->x8A = 0;
+        entry->xD6 = 9;
+        entry->xB6 = 0;
+        entry->x30 = src[0x21];
+        entry->x5C = src[0x22];
+        entry->x88 = src[0x23];
+        entry->xB4 = src[0x24];
         src += 0x28;
-        d += 0xDC;
+        entry++;
     }
 
     if (region == 0) {
