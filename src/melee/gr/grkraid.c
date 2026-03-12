@@ -399,7 +399,7 @@ void grKraid_801FE818(Ground_GObj* gobj)
     }
     gp->gv.kraid2.x0 = 0;
     gp->gv.kraid2.xC = grKr_804D6A08->kraid_wait_time +
-                       (grKr_804D6A08->kraid_wait_time_add != 0
+                       ((s32) grKr_804D6A08->kraid_wait_time_add != 0
                             ? HSD_Randi(grKr_804D6A08->kraid_wait_time_add)
                             : 0);
     gp->gv.kraid2.x8 = 0.0f;
@@ -513,7 +513,7 @@ void grKraid_801FEA00(Ground_GObj* gobj)
             HSD_JObjSetFlagsAll(Ground_801C2BA4(1)->hsd_obj, 0x10);
             gp->gv.kraid2.xC =
                 grKr_804D6A08->kraid_wait_time +
-                (grKr_804D6A08->kraid_wait_time_add != 0
+                ((s32) grKr_804D6A08->kraid_wait_time_add != 0
                      ? HSD_Randi(grKr_804D6A08->kraid_wait_time_add)
                      : 0);
             gp->gv.kraid2.x0 = 0;
