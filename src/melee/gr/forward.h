@@ -136,7 +136,7 @@ typedef enum InternalStageId {
     BATTLE = 36,
     LAST,
 
-    STAGEKIND_UNK32,
+    FIGUREGET,
     STAGEKIND_UNK33,
     STAGEKIND_UNK34,
     GRTCAPTAIN,
