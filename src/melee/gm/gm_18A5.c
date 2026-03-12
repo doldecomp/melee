@@ -2586,7 +2586,7 @@ void fn_80191B5C(void* gobj)
 
     timers = lbl_804799B8_data;
     tm = gm_8018F634();
-    jobj = *(HSD_JObj**) ((u8*) gobj + 0x28);
+    jobj = (HSD_JObj*) ((HSD_GObj*) gobj)->hsd_obj;
 
     if (tm->cur_option <= 9) {
         HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
@@ -3581,7 +3581,7 @@ void fn_80193B58(s32* arg0, u32 arg1, u32 arg2)
 
 post:
     if (*mt == 0) {
-        *(u8*) ((u8*) arg0 + 0x30) = (u8) arg0[2];
+        ((TmData*) arg0)->x30 = (u8) arg0[2];
     } else {
         if (arg0[3] > arg0[2] - 1) {
             arg0[3] = arg0[2] - 1;
@@ -3600,7 +3600,7 @@ post:
         lbAudioAx_80024030(1);
         arg0[0] = arg0[0] + 1;
         if (*mt == 0) {
-            u8 x30 = *(u8*) ((u8*) arg0 + 0x30);
+            u8 x30 = ((TmData*) arg0)->x30;
             if (x30 == 2) {
                 arg0[3] = 0;
             } else if (x30 == 3) {
@@ -3700,7 +3700,7 @@ void fn_80193FCC(s32* arg0, u32 arg1, u32 arg2)
             goto post_clamp;
         }
         {
-            u8 x30 = *(u8*) ((u8*) arg0 + 0x30);
+            u8 x30 = ((TmData*) arg0)->x30;
             switch (x30) {
             case 2:
                 if (arg0[3] == 0x1F) {
@@ -3780,7 +3780,7 @@ void fn_80193FCC(s32* arg0, u32 arg1, u32 arg2)
             goto post_clamp;
         }
         {
-            u8 x30 = *(u8*) ((u8*) arg0 + 0x30);
+            u8 x30 = ((TmData*) arg0)->x30;
             switch (x30) {
             case 2:
                 if (arg0[3] == 9) {
@@ -3820,7 +3820,7 @@ post_clamp:
     }
 
     if (*mt != 0) {
-        *(u8*) ((u8*) arg0 + 0x30) = (u8) arg0[3];
+        ((TmData*) arg0)->x30 = (u8) arg0[3];
     }
 
     if (arg1 != 0) {
@@ -5758,7 +5758,7 @@ void fn_80197FD8(HSD_GObj* gobj)
 
     tm_data = gm_8018F634();
     port = fn_8018F62C(gobj);
-    jobj = *(HSD_JObj**) ((u8*) gobj + 0x28);
+    jobj = (HSD_JObj*) gobj->hsd_obj;
 
     if (gm_8018F634()->cur_option >= 0x1B && gm_8018F634()->cur_option <= 0x1E)
     {
@@ -6953,14 +6953,14 @@ void fn_8019A86C(s32* arg0, u32 arg1, u32 arg2)
 
                 {
                     TmData* t2 = gm_8018F634();
-                    u8* ent = (u8*) &lbl_80473AB8[fn_8018F74C()];
+                    BracketEntry* ent = &lbl_80473AB8[fn_8018F74C()];
                     s32 hmn_count = 0;
                     s32 active_count = 0;
 
-                    ent[0x4E] = t2->x4B8[0].x0;
-                    ent[0x7A] = t2->x4B8[1].x0;
-                    ent[0xA6] = t2->x4B8[2].x0;
-                    ent[0xD2] = t2->x4B8[3].x0;
+                    ent->x4E = t2->x4B8[0].x0;
+                    ent->x7A = t2->x4B8[1].x0;
+                    ent->xA6 = t2->x4B8[2].x0;
+                    ent->xD2 = t2->x4B8[3].x0;
 
                     {
                         u8 s0 = tm->x4B8[0].x0;
