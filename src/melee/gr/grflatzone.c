@@ -39,7 +39,7 @@ static StageCallbacks grFz_803E7940[9] = {
 };
 
 StageData grFz_803E7A00 = {
-    27,
+    FLATZONE,
     grFz_803E7940,
     "/GrFz.dat",
     grFlatzone_80216E78,

@@ -52,7 +52,7 @@ static StageCallbacks grTZd_803E9638[4] = {
 };
 
 StageData grTZd_803E9694 = {
-    GRTZELDA,
+    TZELDA,
     grTZd_803E9638,
     "/GrTZd.dat",
     grTZelda_OnInit,

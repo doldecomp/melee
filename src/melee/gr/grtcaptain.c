@@ -53,7 +53,7 @@ static StageCallbacks grTCa_803E8608[] = {
 };
 
 StageData grTCa_803E8664 = {
-    GRTCAPTAIN,
+    TCAPTAIN,
     grTCa_803E8608,
     "/GrTCa.dat",
     grTCaptain_OnInit,

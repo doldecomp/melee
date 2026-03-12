@@ -44,7 +44,7 @@ typedef HSD_GObj Ground_GObj;
 /// @todo Finish values, use @c PascalCase
 typedef enum InternalStageId {
     InternalStageID_Unk00,
-    InternalStageID_Unk01,
+    TEST,
 
     /// Princess Peach's Castle
     CASTLE,
@@ -131,27 +131,49 @@ typedef enum InternalStageId {
     /// Kongo Jungle (64)
     OLDKONGO,
 
+    KINOKOROUTE,
     SHRINEROUTE,
+    ZEBESROUTE,
+    BIGBLUEROUTE,
 
-    BATTLE = 36,
+    InternalStageID_Unk35,
+
+    BATTLE,
     LAST,
-
     FIGUREGET,
-    STAGEKIND_UNK33,
-    STAGEKIND_UNK34,
-    GRTCAPTAIN,
-    STAGEKIND_UNK36,
-    STAGEKIND_UNK37,
-    STAGEKIND_UNK38,
-    STAGEKIND_UNK39,
-
-    GRTSAMUS = 59,
-    GRTSEAK,
-    GRTYOSHI,
-    GRTZELDA,
-
+    PUSHON,
+    TMARIO,
+    TCAPTAIN,
+    TCLINK,
+    TDONKEY,
+    TDRMARIO,
+    TFALCO,
+    TFOX,
+    TICECLIMBER,
+    TKIRBY,
+    TKOOPA,
+    TLINK,
+    TLUIGI,
+    TMARS,
+    TMEWTWO,
+    TNESS,
+    TPEACH,
+    TPICHU,
+    TPIKACHU,
+    TPURIN,
+    TSAMUS,
+    TSEAK,
+    TYOSHI,
+    TZELDA,
+    TGAMEWATCH,
+    TEMBLEM,
+    TGANON,
+    HEAL,
     /// Home run contest
-    HOMERUN = 67,
+    HOMERUN,
+    FIGURE1,
+    FIGURE2,
+    FIGURE3
 } InternalStageId;
 
 typedef struct unkCastle unkCastle;

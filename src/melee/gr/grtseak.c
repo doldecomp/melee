@@ -65,7 +65,7 @@ static StageCallbacks grTSk_803E94B8[] = {
 };
 
 StageData grTSk_803E9514 = {
-    GRTSEAK,
+    TSEAK,
     grTSk_803E94B8,
     "/GrTSk.dat",
     grTSeak_OnInit,

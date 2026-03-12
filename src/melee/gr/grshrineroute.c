@@ -74,7 +74,7 @@ StageCallbacks grSh_Route_803E58F0[7] = {
 };
 
 StageData grSh_Route_803E5988 = {
-    (1 << 4),
+    SHRINEROUTE,
     grSh_Route_803E58F0,
     "/GrNSr.dat",
     grShrineRoute_802087BC,

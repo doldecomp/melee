@@ -26,7 +26,7 @@ StageCallbacks grTPr_803E9338[] = {
 };
 
 StageData grTPr_803E9394 = {
-    58,
+    TPURIN,
     grTPr_803E9338,
     "/GrTPr.dat",
     grTPurin_80223164,

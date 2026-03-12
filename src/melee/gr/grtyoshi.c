@@ -65,7 +65,7 @@ static StageCallbacks grTYs_803E9578[] = {
 };
 
 StageData grTYs_803E95D4 = {
-    GRTYOSHI,
+    TYOSHI,
     grTYs_803E9578,
     "/GrTYs.dat",
     grTYoshi_OnInit,
