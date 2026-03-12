@@ -1020,8 +1020,8 @@ void fn_8018E618(int arg0, int arg1, f32 farg0)
     lbl_803D9DD0.cobj = HSD_CObjLoadDesc((HSD_CObjDesc*) &cam);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, lbl_803D9DD0.cobj);
     GObj_SetupGXLinkMax(gobj, HSD_GObj_803910D8, 1);
-    M2C_FIELD(gobj, u32*, 0x24) = 0x10;
-    M2C_FIELD(gobj, u32*, 0x20) = 0;
+    ((u32*) &gobj->gxlink_prios)[1] = 0x10;
+    ((u32*) &gobj->gxlink_prios)[0] = 0;
 
     if (arg1 != 0) {
         fn_8018A514(arg0, farg0);
