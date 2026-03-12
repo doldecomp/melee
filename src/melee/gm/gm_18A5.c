@@ -761,7 +761,6 @@ void fn_8018DC18(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
     s32 center;
     GXColor c0, c1, c2, c3, c4, c5, c6, c7, c8;
 
-    c0 = col;
     c8 = col;
     thickness = data->x1C;
     c1 = col;
