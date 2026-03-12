@@ -288,7 +288,7 @@ struct grKongo_GroundVars3 {
 };
 
 struct grKraid_GroundVars {
-    /*  + gp+C4 */ u8 x0;
+    /*  + gp+C4 */ s8 x0;
     /*  + gp+C5 */ s8 x1;
     /*  + gp+C8 */ f32 x4;
     /*  + gp+CC */ f32 x8;
@@ -1017,9 +1017,9 @@ struct Map_GroundVars {
 };
 
 struct grOldYoshi_Cloud {
-    u32 xC4_0123:4;
-    u32 xC4_4:1;
-    u32 xC4_567:8;
+    u32 xC4_0123 : 4;
+    u32 xC4_4 : 1;
+    u32 xC4_567 : 8;
     HSD_JObj* xC8;
     float xCC;
     float xD0;
@@ -1027,7 +1027,7 @@ struct grOldYoshi_Cloud {
 };
 
 struct grOldYoshi_Cloud_GroundVars {
-    struct grOldYoshi_Cloud cloud [3];
+    struct grOldYoshi_Cloud cloud[3];
 };
 
 struct grOldYoshi_Guest_GroundVars {
