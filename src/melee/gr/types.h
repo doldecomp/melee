@@ -145,7 +145,7 @@ typedef struct StageCallbacks {
 } StageCallbacks;
 
 typedef struct StageData {
-    u32 flags1;
+    u32 internal_stage_id;
     StageCallbacks* callbacks;
     char* data1;
     void (*callback0)(void);

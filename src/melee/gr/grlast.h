@@ -8,10 +8,10 @@
 
 #include <sysdolphin/baselib/jobj.h>
 
-/* 21A620 */ static void grLast_8021A620(bool);
-/* 21A740 */ static void grLast_8021A740(void);
-/* 21A7C4 */ static void grLast_UnkStage0_OnLoad(void);
-/* 21A7C8 */ static void grLast_UnkStage0_OnStart(void);
+/* 21A620 */ static void grLast_OnDemoInit(bool);
+/* 21A740 */ static void grLast_OnInit(void);
+/* 21A7C4 */ static void grLast_OnLoad(void);
+/* 21A7C8 */ static void grLast_OnStart(void);
 /* 21A7EC */ static bool grLast_8021A7EC(void);
 /* 21A7F4 */ static Ground_GObj* grLast_8021A7F4(int);
 /* 21A8E0 */ static void grLast_8021A8E0(Ground_GObj*);
@@ -26,7 +26,7 @@
 /* 21A99C */ static bool grLast_8021A99C(Ground_GObj*);
 /* 21A9A4 */ static void grLast_8021A9A4(Ground_GObj*);
 /* 21A9A8 */ static void grLast_8021A9A8(Ground_GObj*);
-/* 21A9AC */ static void fn_8021A9AC(Ground_GObj* gobj);
+/* 21A9AC */ static void grLast_8021A9AC(Ground_GObj* gobj);
 /* 21A9C4 */ static void grLast_8021A9C4(Ground_GObj*);
 /* 21AAA8 */ static bool grLast_8021AAA8(Ground_GObj*);
 /* 21AAB0 */ static void grLast_8021AAB0(Ground_GObj*);
@@ -62,7 +62,7 @@
 /* 21C500 */ static void grLast_8021C500(Ground_GObj*);
 /* 21C640 */ static void grLast_8021C640(void);
 /* 21C6AC */ static void grLast_8021C6AC(void);
-/* 21C740 */ static DynamicsDesc* grLast_8021C740(enum_t);
-/* 21C748 */ static bool grLast_8021C748(Vec3*, int, HSD_JObj*);
+/* 21C740 */ static DynamicsDesc* grLast_OnTouchLine(enum_t);
+/* 21C748 */ static bool grLast_OnCheckShadowRender(Vec3*, int, HSD_JObj*);
 
 #endif

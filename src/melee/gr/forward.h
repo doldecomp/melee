@@ -134,6 +134,7 @@ typedef enum InternalStageId {
     SHRINEROUTE,
 
     BATTLE = 36,
+    LAST,
 
     STAGEKIND_UNK32,
     STAGEKIND_UNK33,
