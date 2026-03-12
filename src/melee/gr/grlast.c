@@ -30,7 +30,7 @@ S16Vec grLast_804D4968[1] = { { 0, 3, 0 } };
 
 static int* grNLa_804D6AD0;
 
-static void grLast_OnDemoInit(bool arg0)
+static void grLast_OnDemoInit(int arg0)
 {
     Ground_GObj* gobj;
     Ground* gp;
