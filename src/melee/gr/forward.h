@@ -145,7 +145,8 @@ typedef enum InternalStageId {
     STAGEKIND_UNK38,
     STAGEKIND_UNK39,
 
-    GRTSEAK = 60,
+    GRTSAMUS = 59,
+    GRTSEAK,
     GRTYOSHI,
     GRTZELDA,
 
