@@ -52,7 +52,7 @@ static StageCallbacks grTLk_803E8D30[4] = {
 };
 
 StageData grTLk_803E8D8C = {
-    50,
+    TLINK,
     grTLk_803E8D30,
     "/GrTLk.dat",
     grTLink_80221930,

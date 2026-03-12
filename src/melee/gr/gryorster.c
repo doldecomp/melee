@@ -2,6 +2,8 @@
 
 #include <platform.h>
 
+#include "forward.h"
+
 #include "gr/grdisplay.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
@@ -21,7 +23,7 @@ StageCallbacks grYt_803E5198[2] = {
 };
 
 StageData grYt_803E51CC = {
-    11,
+    YORSTER,
     grYt_803E5198,
     "/GrYt.dat",
     grYorster_80201FA4,

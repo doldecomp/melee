@@ -86,7 +86,7 @@ StageCallbacks grCs_803E0FF4[21] = {
 };
 
 StageData grCs_803E11A4 = {
-    (1 << 1),
+    CASTLE,
     grCs_803E0FF4,
     "/GrCs.dat",
     grCastle_801CD37C,

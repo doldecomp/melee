@@ -19,10 +19,10 @@
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
-/* 219530 */ static void grFigureGet_80219530(bool);
-/* 219534 */ static void grFigureGet_80219534(void);
-/* 21959C */ static void grFigureget_UnkStage0_OnLoad(void);
-/* 2195A0 */ static void grFigureget_UnkStage0_OnStart(void);
+/* 219530 */ static void grFigureGet_OnDemoInit(int);
+/* 219534 */ static void grFigureGet_OnInit(void);
+/* 21959C */ static void grFigureGet_OnLoad(void);
+/* 2195A0 */ static void grFigureGet_OnStart(void);
 /* 2195C4 */ static bool grFigureGet_802195C4(void);
 /* 2195CC */ static HSD_GObj* grFigureGet_802195CC(int);
 /* 2196B4 */ static void grFigureGet_802196B4(Ground_GObj*);
@@ -33,8 +33,9 @@
 /* 219890 */ static bool grFigureGet_80219890(Ground_GObj*);
 /* 219898 */ static void grFigureGet_80219898(Ground_GObj*);
 /* 219B0C */ static void grFigureGet_80219B0C(Ground_GObj*);
-/* 219C88 */ static DynamicsDesc* grFigureGet_80219C88(enum_t);
-/* 219C90 */ static bool grFigureGet_80219C90(Vec3*, int, HSD_JObj*);
+/* 219C88 */ static DynamicsDesc* grFigureGet_OnTouchLine(enum_t);
+/* 219C90 */ static bool grFigureGet_OnCheckShadowRender(Vec3*, int,
+                                                         HSD_JObj*);
 
 static StageCallbacks grFigureGet_803E7D00[2] = {
     { grFigureGet_802196B4, grFigureGet_802196E0, grFigureGet_802196E8,
@@ -44,16 +45,16 @@ static StageCallbacks grFigureGet_803E7D00[2] = {
 };
 
 StageData grFigureGet_803E7D34 = {
-    0x26,
+    FIGUREGET,
     grFigureGet_803E7D00,
     "/GrNFg.dat",
-    grFigureGet_80219534,
-    grFigureGet_80219530,
-    grFigureget_UnkStage0_OnLoad,
-    grFigureget_UnkStage0_OnStart,
+    grFigureGet_OnInit,
+    grFigureGet_OnDemoInit,
+    grFigureGet_OnLoad,
+    grFigureGet_OnStart,
     grFigureGet_802195C4,
-    grFigureGet_80219C88,
-    grFigureGet_80219C90,
+    grFigureGet_OnTouchLine,
+    grFigureGet_OnCheckShadowRender,
     1,
     NULL,
     0,
@@ -63,9 +64,9 @@ extern UNK_T grFigureGet_804D6AC0;
 
 extern StageInfo stage_info;
 
-void grFigureGet_80219530(bool arg0) {}
+void grFigureGet_OnDemoInit(int unused) {}
 
-void grFigureGet_80219534(void)
+void grFigureGet_OnInit(void)
 {
     grFigureGet_804D6AC0 = Ground_801C49F8();
     stage_info.unk8C.b4 = 0;
@@ -76,9 +77,9 @@ void grFigureGet_80219534(void)
     Ground_801C3BB4();
 }
 
-void grFigureget_UnkStage0_OnLoad(void) {}
+void grFigureGet_OnLoad(void) {}
 
-void grFigureget_UnkStage0_OnStart(void)
+void grFigureGet_OnStart(void)
 {
     grZakoGenerator_801CAE04(0);
 }
@@ -110,8 +111,7 @@ HSD_GObj* grFigureGet_802195CC(int gobj_id)
             HSD_GObjProc_8038FD54(gobj, callbacks->callback2, 4);
         }
     } else {
-        OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grfigureget.c", 187,
-                 gobj_id);
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 187, gobj_id);
     }
 
     return gobj;
@@ -143,7 +143,7 @@ bool grFigureGet_80219890(Ground_GObj* gobj)
 
 void grFigureGet_80219B0C(Ground_GObj* gobj) {}
 
-/// #fn_80219B10
+/// #grFigureGet_80219B10
 
 void grFigureGet_80219C34(HSD_GObj* gobj)
 {
@@ -155,25 +155,25 @@ void grFigureGet_80219C34(HSD_GObj* gobj)
     gp->gv.figureget.xC += 1;
 }
 
-int grFigureGet_80219C50(HSD_GObj* gobj)
+bool grFigureGet_80219C50(HSD_GObj* gobj)
 {
     Ground* gp;
     if (gobj == NULL) {
-        return 0;
+        return false;
     }
     gp = GET_GROUND(gobj);
     if (gp->gv.figureget.x8 + gp->gv.figureget.xC >= 3) {
-        return 1;
+        return true;
     }
-    return 0;
+    return false;
 }
 
-DynamicsDesc* grFigureGet_80219C88(enum_t arg0)
+DynamicsDesc* grFigureGet_OnTouchLine(enum_t arg0)
 {
     return NULL;
 }
 
-bool grFigureGet_80219C90(Vec3* arg0, int arg1, HSD_JObj* arg2)
+bool grFigureGet_OnCheckShadowRender(Vec3* arg0, int arg1, HSD_JObj* arg2)
 {
     return true;
 }

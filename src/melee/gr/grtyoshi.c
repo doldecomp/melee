@@ -4,6 +4,7 @@
 #include "gr/grdisplay.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
+#include "gr/inlines.h"
 #include "gr/types.h"
 
 #include "lb/forward.h"
@@ -15,11 +16,12 @@
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
+#include <baselib/jobj.h>
 
-/* 223B48 */ static void grTYoshi_80223B48(bool);
-/* 223B4C */ static void grTYoshi_80223B4C(void);
-/* 223BBC */ static void grTyoshi_UnkStage0_OnLoad(void);
-/* 223BC0 */ static void grTyoshi_UnkStage0_OnStart(void);
+/* 223B48 */ static void grTYoshi_OnDemoInit(bool);
+/* 223B4C */ static void grTYoshi_OnInit(void);
+/* 223BBC */ static void grTYoshi_OnLoad(void);
+/* 223BC0 */ static void grTYoshi_OnStart(void);
 /* 223BE4 */ static bool grTYoshi_80223BE4(void);
 /* 223BEC */ static HSD_GObj* grTYoshi_80223BEC(int gobj_id);
 /* 223CD4 */ static void grTYoshi_80223CD4(Ground_GObj* gobj);
@@ -34,8 +36,8 @@
 /* 223DF0 */ static bool grTYoshi_80223DF0(Ground_GObj*);
 /* 223DF8 */ static void grTYoshi_80223DF8(Ground_GObj*);
 /* 223E18 */ static void grTYoshi_80223E18(Ground_GObj*);
-/* 223E1C */ static DynamicsDesc* grTYoshi_80223E1C(enum_t);
-/* 223E24 */ static bool grTYoshi_80223E24(Vec3*, int, HSD_JObj*);
+/* 223E1C */ static DynamicsDesc* grTYoshi_OnTouchLine(enum_t);
+/* 223E24 */ static bool grTYoshi_OnCheckShadowRender(Vec3*, int, HSD_JObj*);
 
 static StageCallbacks grTYs_803E9578[] = {
     {
@@ -63,25 +65,24 @@ static StageCallbacks grTYs_803E9578[] = {
 };
 
 StageData grTYs_803E95D4 = {
-    (1 << 0) | (1 << 2) | (1 << 3) | (1 << 4) | (1 << 5),
+    TYOSHI,
     grTYs_803E9578,
     "/GrTYs.dat",
-    grTYoshi_80223B4C,
-    grTYoshi_80223B48,
-    grTyoshi_UnkStage0_OnLoad,
-    grTyoshi_UnkStage0_OnStart,
+    grTYoshi_OnInit,
+    grTYoshi_OnDemoInit,
+    grTYoshi_OnLoad,
+    grTYoshi_OnStart,
     grTYoshi_80223BE4,
-    grTYoshi_80223E1C,
-    grTYoshi_80223E24,
+    grTYoshi_OnTouchLine,
+    grTYoshi_OnCheckShadowRender,
     (1 << 0),
     NULL,
     0,
 };
 
-extern StageInfo stage_info;
+static void grTYoshi_OnDemoInit(bool arg0) {}
 
-static void grTYoshi_80223B48(bool arg0) {}
-static void grTYoshi_80223B4C(void)
+static void grTYoshi_OnInit(void)
 {
     stage_info.unk8C.b4 = 0;
     stage_info.unk8C.b5 = 1;
@@ -93,15 +94,19 @@ static void grTYoshi_80223B4C(void)
     Ground_801C4210();
     Ground_801C42AC();
 }
-static void grTyoshi_UnkStage0_OnLoad(void) {}
-static void grTyoshi_UnkStage0_OnStart(void)
+
+static void grTYoshi_OnLoad(void) {}
+
+static void grTYoshi_OnStart(void)
 {
     grZakoGenerator_801CAE04(false);
 }
+
 static bool grTYoshi_80223BE4(void)
 {
     return false;
 }
+
 static HSD_GObj* grTYoshi_80223BEC(int gobj_id)
 {
     HSD_GObj* gobj;
@@ -123,15 +128,15 @@ static HSD_GObj* grTYoshi_80223BEC(int gobj_id)
             HSD_GObjProc_8038FD54(gobj, callbacks->callback2, 4);
         }
     } else {
-        OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grtyoshi.c", 0xc3,
-                 gobj_id);
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 195, gobj_id);
     }
 
     return gobj;
 }
+
 static void grTYoshi_80223CD4(Ground_GObj* gobj)
 {
-    Ground* gp = gobj->user_data;
+    Ground* gp = GET_GROUND(gobj);
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
@@ -146,10 +151,10 @@ static void grTYoshi_80223D0C(Ground_GObj* arg0) {}
 
 static void grTYoshi_80223D10(Ground_GObj* gobj)
 {
-    u8 _[8];
+    Ground* gp = GET_GROUND(gobj);
+    HSD_JObj* jobj = GET_JOBJ(gobj);
 
-    Ground* gp = gobj->user_data;
-    Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
+    Ground_801C2ED0(jobj, gp->map_id);
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
@@ -168,10 +173,10 @@ static void grTYoshi_80223D9C(Ground_GObj* arg0) {}
 
 static void grTYoshi_80223DA0(Ground_GObj* gobj)
 {
-    u8 _[8];
+    Ground* gp = GET_GROUND(gobj);
+    HSD_JObj* jobj = GET_JOBJ(gobj);
 
-    Ground* gp = gobj->user_data;
-    Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
+    Ground_801C2ED0(jobj, gp->map_id);
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
@@ -187,12 +192,12 @@ static void grTYoshi_80223DF8(Ground_GObj* arg0)
 
 static void grTYoshi_80223E18(Ground_GObj* arg0) {}
 
-static DynamicsDesc* grTYoshi_80223E1C(enum_t arg0)
+static DynamicsDesc* grTYoshi_OnTouchLine(enum_t arg0)
 {
     return NULL;
 }
 
-static bool grTYoshi_80223E24(Vec3* arg0, int arg1, HSD_JObj* arg2)
+static bool grTYoshi_OnCheckShadowRender(Vec3* arg0, int arg1, HSD_JObj* arg2)
 {
     return true;
 }

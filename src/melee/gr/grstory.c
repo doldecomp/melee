@@ -43,7 +43,7 @@ static struct {
 }* shyguy_vars;
 
 StageData grSt_803E274C = {
-    (1 << 1) | (1 << 3),
+    STORY,
     grSt_803E26F0,
     "/GrSt.dat",
     grStory_801E3030,

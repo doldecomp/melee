@@ -145,11 +145,11 @@ typedef struct StageCallbacks {
 } StageCallbacks;
 
 typedef struct StageData {
-    u32 flags1;
+    u32 internal_stage_id;
     StageCallbacks* callbacks;
     char* data1;
-    void (*callback0)(void);
-    void (*callback1)(int);
+    void (*OnInit)(void);
+    void (*OnDemoInit)(int);
     void (*OnLoad)(void);
     void (*OnStart)(void);
     bool (*callback4)(void);

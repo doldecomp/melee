@@ -36,16 +36,16 @@ StageCallbacks grKr_803E4C9C[5] = {
 };
 
 StageData grKr_803E4D0C = {
-    (1 << 3),
+    KRAID,
     grKr_803E4C9C,
     "/GrKr.dat",
-    grKraid_801FDFFC,
-    grKraid_801FDFF8,
-    grKraid_801FE094,
-    grKraid_801FE098,
+    grKraid_OnInit,
+    grKraid_OnDemoInit,
+    grKraid_OnLoad,
+    grKraid_OnStart,
     grKraid_801FE0BC,
-    grKraid_801FF154,
-    grKraid_801FF15C,
+    grKraid_OnTouchLine,
+    grKraid_OnCheckShadowRender,
     (1 << 0),
     grKr_803E4C78,
     6,
@@ -54,12 +54,12 @@ StageData grKr_803E4D0C = {
 static grKr_804D6A08_t* grKr_804D6A08;
 static int grKr_804D6A0C;
 
-void grKraid_801FDFF8(bool unused)
+void grKraid_OnDemoInit(int unused)
 {
     return;
 }
 
-void grKraid_801FDFFC(void)
+void grKraid_OnInit(void)
 {
     HSD_GObj* gobj;
 
@@ -77,9 +77,9 @@ void grKraid_801FDFFC(void)
     Ground_801C3BB4();
 }
 
-void grKraid_801FE094(void) {}
+void grKraid_OnLoad(void) {}
 
-void grKraid_801FE098(void)
+void grKraid_OnStart(void)
 {
     grZakoGenerator_801CAE04(0);
 }
@@ -249,7 +249,6 @@ void grKraid_801FF068(HSD_GObj* gobj, int val)
     gp->gv.kraid.x0 = 1;
 }
 
-/// #grKraid_801FF0E0
 bool grKraid_801FF0E0(Ground_GObj* gobj, int flag)
 {
     Ground* gp = GET_GROUND(gobj);
@@ -275,12 +274,12 @@ void grKraid_801FF14C(Ground_GObj* gobj)
 
 void grKraid_801FF150(void) {}
 
-DynamicsDesc* grKraid_801FF154(enum_t unused)
+DynamicsDesc* grKraid_OnTouchLine(enum_t unused)
 {
     return false;
 }
 
-bool grKraid_801FF15C(Vec3* a, int _, HSD_JObj* joint)
+bool grKraid_OnCheckShadowRender(Vec3* a, int _, HSD_JObj* joint)
 {
     return true;
 }
