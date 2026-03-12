@@ -789,7 +789,9 @@ struct TmData {
         u8 xB;
         u8 xC;
         u8 xD;
-        u8 pad_xE[0x12 - 0xE];
+        u8 xE;
+        u8 xF;
+        u8 pad_X10[0x12 - 0x10];
     } x37[64];
 #pragma pack(pop)
     u8 pad_x4B7[0x4B8 - 0x4B7];
