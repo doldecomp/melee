@@ -752,18 +752,19 @@ static GXColor col = { 255, 0, 255, 255 };
 void fn_8018DC18(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
                  s32 arg5, s32 arg6, f32 farg0)
 {
+    // TODO: Make arg0 BracketEntry (forward.h? idk how that works)
     BracketEntry* data = (BracketEntry*) arg0;
     f32 thickness;
     f32 neg_thickness;
     s32 right;
     s32 half;
     s32 center;
-    GXColor *c0, *c1, *c2, *c3, *c4, *c5, *c6, *c7, *c8;
+    GXColor c0, c1, c2, c3, c4, c5, c6, c7, c8;
 
-    c0 = &col;
-    c8 = &col;
+    c0 = col;
+    c8 = col;
     thickness = data->x1C;
-    c1 = &col;
+    c1 = col;
     DrawRectangle((f32) arg1, (f32) arg2, thickness, (f32) arg4,
                   (GXColor*) &c1);
 
@@ -783,7 +784,7 @@ void fn_8018DC18(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
     DrawRectangle((f32) arg1, (f32) arg5, (f32) arg3 + thickness,
                   neg_thickness, (GXColor*) &c4);
 
-    if (data->x21 == 0) {
+    if (data->x20.g == 0) {
         if (data->x4C == 0) {
             c5 = data->x20;
             DrawRectangle((f32) arg1, (f32) arg2, thickness, (f32) arg4,
@@ -1572,7 +1573,7 @@ void fn_8018F888(void)
         }
     }
 
-    lbl_80473AB8[i].x21 = 0;
+    lbl_80473AB8[i].x20.g = 0;
 
     if (gm_804771C4.x37->x8 != 5) {
         return;
@@ -1584,7 +1585,7 @@ void fn_8018F888(void)
         }
     }
 
-    lbl_80473AB8[i+1].x21 = 0;
+    lbl_80473AB8[i+1].x20.g = 0;
 }
 
 void fn_8018FA24(void)
