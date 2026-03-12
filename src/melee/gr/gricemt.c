@@ -892,7 +892,6 @@ bool grIceMt_801F8B08(Ground_GObj* arg0)
     return false;
 }
 
-/// #grIceMt_801F8B10
 void grIceMt_801F8B10(Ground_GObj* arg0)
 {
     HSD_JObj* jobj;
