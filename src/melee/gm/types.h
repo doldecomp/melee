@@ -761,7 +761,7 @@ struct TmData {
     int hmn_cpu_count;
     int stage_selection_type;
     int cpu_level;
-    u8 _x1C[0x20 - 0x1C];
+    s32 x1C;
     int x20;
     int x24;
     u32 x28; ///< stage id

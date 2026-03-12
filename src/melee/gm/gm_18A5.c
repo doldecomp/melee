@@ -1033,7 +1033,7 @@ void fn_8018E618(int arg0, int arg1, f32 farg0)
 void fn_8018E85C(DynamicModelDesc* model, s32 flag)
 {
     TmData* td;
-    u8* entry;
+    BracketEntry* entry;
     u8* sub;
     s32 bracket_idx;
     s32 outer_idx;
@@ -1050,13 +1050,13 @@ void fn_8018E85C(DynamicModelDesc* model, s32 flag)
 
     td = gm_8018F634();
     bracket_idx = 0;
-    entry = (u8*) lbl_80473AB8;
+    entry = lbl_80473AB8;
 
     for (outer_idx = 0; outer_idx < 0x40; outer_idx++) {
-        if (entry[0] == 0) {
+        if (entry->x0 == 0) {
             goto next_entry;
         }
-        sub = entry;
+        sub = (u8*) entry;
         for (inner_idx = 0; inner_idx < 4; inner_idx++) {
             if (sub[0x30] == 0) {
                 goto next_sub;
@@ -1117,7 +1117,7 @@ void fn_8018E85C(DynamicModelDesc* model, s32 flag)
             sub += 0x2C;
         }
     next_entry:
-        entry += 0xDC;
+        entry++;
     }
 }
 
@@ -1643,7 +1643,7 @@ void fn_8018FA24(void)
 #pragma auto_inline off
 void fn_8018FBD8(void* arg0, s32 arg1)
 {
-    M2C_FIELD(arg0, s32*, 0x2C) = arg1;
+    ((HSD_GObj*) arg0)->user_data = (void*) arg1;
 }
 #pragma pop
 
@@ -1655,7 +1655,7 @@ void fn_8018FBE0(s32 arg0, s32 arg1, s32 arg2, s8 arg3, s8 arg4, s16 arg5,
     PAD_STACK(8);
 
     gm_804771C4.cur_option = arg0;
-    *(s32*) &gm_804771C4._x1C = arg1;
+    gm_804771C4.x1C = arg1;
     gm_804771C4.x20 = arg2;
 
     for (i = 0; i < 64; i++) {
@@ -1748,7 +1748,7 @@ void fn_801902F0(int sis_param)
 
     value = sis_param;
     HSD_SisLib_803A5E70();
-    if (*(s32*) ((u8*) &gm_804771C4 + 0x1C) == 0) {
+    if (gm_804771C4.x1C == 0) {
         value = 0;
     }
     lbl_804D663C = (HSD_GObj*) HSD_SisLib_803A611C(0, (HSD_GObj*) value, 9,
