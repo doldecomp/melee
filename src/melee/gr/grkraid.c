@@ -289,23 +289,26 @@ void grKraid_801FE6D4(Ground_GObj* gobj)
     return;
 }
 
+static f32 getMapRotation()
+{
+    return ((grKr_804D6A08->map_rot_spd_max / grKr_804D6A08->map_rot_spd_min) /
+            132.0f) *
+           grKr_804D6A08->map_rot_spd_min;
+}
+
 void grKraid_801FE6D8(HSD_JObj* hand, float param2)
 {
     Ground* map = Ground_801C2BA4(3)->user_data;
     Vec handpos;
-    int useless;
+    f32 rot;
+
     if (map->gv.kraid.x4 == 0.0f) {
         map->gv.kraid.x4 = param2;
         lb_8000B1CC(hand, NULL, &handpos);
         OSReport("Kraid Hand Pos = %f\n", handpos.x);
 
-        map->gv.kraid.x8 = ((grKr_804D6A08->map_rot_spd_max /
-                             grKr_804D6A08->map_rot_spd_min) /
-                            132.0f) *
-                           grKr_804D6A08->map_rot_spd_max * handpos.x;
-        if (handpos.x < 0.0f) {
-            handpos.x = -handpos.x;
-        }
+        rot = getMapRotation();
+        map->gv.kraid.x8 = rot * ((handpos.x < 0.0f) ? -handpos.x : handpos.x);
         if (map->gv.kraid.x8 < grKr_804D6A08->map_rot_spd_min) {
             map->gv.kraid.x8 = grKr_804D6A08->map_rot_spd_min;
         }
@@ -325,12 +328,14 @@ void grKraid_801FE818(Ground_GObj* gobj)
     float fVar2;
     float fVar3;
     int iVar5;
+
     Ground* gp = GET_GROUND(gobj);
     gp->gv.kraid2.x10 = Ground_801C3FA4(gobj, 31);
     gp->gv.kraid2.x14 = Ground_801C3FA4(gobj, 47);
     fVar1 = 0.0f;
     gp->gv.kraid2.x4 = 0;
     gp->gv.kraid2.x3 = 0;
+
     fVar2 = grKr_804D6A08->kraid_pos_x[0];
     if (fVar2 < 0.0f) {
         gp->gv.kraid2.x3 = 0;
