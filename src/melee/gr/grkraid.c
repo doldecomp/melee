@@ -240,7 +240,8 @@ void grKraid_801FE440(Ground_GObj* gobj)
     Vec pos = { 0.0f, 0.0f, 0.0f };
     switch (gp->gv.kraid.x0) {
     case 0:
-        if (gp->gv.kraid.x4 != 0.0f) {
+        if (gp->gv.kraid.x4)
+        { /// @remark Explicit != 0.0f comparison leads to incorrect ordering
             gp->gv.kraid.x10 = rand_inline(grKr_804D6A08->map_time_max,
                                            grKr_804D6A08->map_time_min);
             gp->gv.kraid.x0 = 1;
