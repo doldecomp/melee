@@ -4,7 +4,6 @@
 
 #include <platform.h>
 
-#include "baselib/random.h"
 #include "cm/camera.h"
 
 #include "forward.h"
@@ -24,6 +23,7 @@
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 #include <baselib/jobj.h>
+#include <baselib/random.h>
 
 S16Vec3 grKr_803E4C78[] = { { 0, 3, 12 }, { 1, 3, 12 }, { 2, 3, 12 },
                             { 3, 3, 12 }, { 4, 3, 12 }, { 5, 3, 12 } };
