@@ -307,7 +307,7 @@ static StageCallbacks grMc_803E30C4[39] = {
 };
 
 StageData grMc_803E33DC = {
-    0x00000024,
+    MUTECITY,
     grMc_803E30C4,
     "/GrMc.dat",
     grMuteCity_801EFC6C,

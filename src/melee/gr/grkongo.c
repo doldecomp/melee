@@ -516,7 +516,7 @@ void grKongo_801D6074(Ground_GObj* arg0)
     temp_r31->gv.kongo3.xCA = 0;
     temp_r31->gv.kongo2.xD0 = -99999.0f;
     temp_r31->gv.kongo2.xD4 = 3.4028235e38f;
-    if ((enum InternalStageId) temp_r31->map_id == InternalStageID_Unk01) {
+    if ((enum InternalStageId) temp_r31->map_id == TEST) {
         temp_r31->gv.kongo.xCC = (f32) ((45.0 * HSD_Randf()) + -15.0);
     } else {
         temp_r31->gv.kongo.xCC = (f32) (9.0 * HSD_Randf());
@@ -540,9 +540,7 @@ void grKongo_801D6198(Ground_GObj* arg0)
         if (grAnime_801C83D0(arg0, 0, 1) != 0) {
             Ground_801C2ED0((HSD_JObj*) arg0->hsd_obj, temp_r3->map_id);
             Ground_801C2FE0(arg0);
-            if ((enum InternalStageId) temp_r3->map_id ==
-                InternalStageID_Unk01)
-            {
+            if ((enum InternalStageId) temp_r3->map_id == TEST) {
                 mpJointListAdd(0);
                 mpJointSetCb1(0, temp_r3, fn_801D7E60);
             } else {
@@ -565,9 +563,7 @@ void grKongo_801D6198(Ground_GObj* arg0)
             (grKongo_801D7F78(arg0) != 0))
         {
             grAnime_801C8138(arg0, temp_r3->map_id, 1);
-            if ((enum InternalStageId) temp_r3->map_id ==
-                InternalStageID_Unk01)
-            {
+            if ((enum InternalStageId) temp_r3->map_id == TEST) {
                 mpLib_80057BC0(0);
                 mpJointClearCb1(0);
             } else {

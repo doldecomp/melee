@@ -58,7 +58,7 @@ StageCallbacks grGb_803E3E84[11] = {
 };
 
 StageData grGb_803E3F6C = {
-    (1 << 1) | (1 << 3),
+    GREATBAY,
     grGb_803E3E84,
     "/GrGb.dat",
     grGreatBay_801F4240,

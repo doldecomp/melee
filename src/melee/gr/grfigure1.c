@@ -6,6 +6,7 @@
 #include "gr/grdisplay.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
+#include "gr/inlines.h"
 #include "gr/types.h"
 
 #include "lb/forward.h"
@@ -17,11 +18,12 @@
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
+#include <baselib/jobj.h>
 
-static void grFigure1_8020DFDC(bool);
-static void grFigure1_8020DFE0(void);
-static void grFigure1_UnkStage0_OnLoad(void);
-static void grFigure1_UnkStage0_OnStart(void);
+static void grFigure1_OnDemoInit(int);
+static void grFigure1_OnInit(void);
+static void grFigure1_OnLoad(void);
+static void grFigure1_OnStart(void);
 static bool grFigure1_8020E078(void);
 static HSD_GObj* grFigure1_8020E080(int);
 static void grFigure1_8020E168(Ground_GObj*);
@@ -36,8 +38,8 @@ static void grFigure1_8020E200(Ground_GObj*);
 static bool grFigure1_8020E250(Ground_GObj*);
 static void grFigure1_8020E258(Ground_GObj*);
 static void grFigure1_8020E25C(Ground_GObj*);
-static DynamicsDesc* grFigure1_8020E260(enum_t);
-static bool grFigure1_8020E268(Vec3*, int, HSD_JObj*);
+static DynamicsDesc* grFigure1_OnTouchLine(enum_t);
+static bool grFigure1_OnCheckShadowRender(Vec3*, int, HSD_JObj*);
 
 static StageCallbacks grEF1_803E6278[3] = {
     { grFigure1_8020E168, grFigure1_8020E194, grFigure1_8020E19C,
@@ -49,16 +51,16 @@ static StageCallbacks grEF1_803E6278[3] = {
 };
 
 StageData grEF1_803E62C0 = {
-    (1 << 2) | (1 << 6),
+    FIGURE1,
     grEF1_803E6278,
     "/GrEF1.dat",
-    grFigure1_8020DFE0,
-    grFigure1_8020DFDC,
-    grFigure1_UnkStage0_OnLoad,
-    grFigure1_UnkStage0_OnStart,
+    grFigure1_OnInit,
+    grFigure1_OnDemoInit,
+    grFigure1_OnLoad,
+    grFigure1_OnStart,
     grFigure1_8020E078,
-    grFigure1_8020E260,
-    grFigure1_8020E268,
+    grFigure1_OnTouchLine,
+    grFigure1_OnCheckShadowRender,
     (1 << 0),
     NULL,
     0,
@@ -68,9 +70,9 @@ UNK_T grEF1_804D6A70;
 
 extern StageInfo stage_info;
 
-static void grFigure1_8020DFDC(bool n) {}
+static void grFigure1_OnDemoInit(int unused) {}
 
-static void grFigure1_8020DFE0(void)
+static void grFigure1_OnInit(void)
 {
     grEF1_804D6A70 = Ground_801C49F8();
     stage_info.unk8C.b4 = false;
@@ -82,9 +84,9 @@ static void grFigure1_8020DFE0(void)
     Ground_801C3BB4();
 }
 
-static void grFigure1_UnkStage0_OnLoad(void) {}
+static void grFigure1_OnLoad(void) {}
 
-static void grFigure1_UnkStage0_OnStart(void)
+static void grFigure1_OnStart(void)
 {
     grZakoGenerator_801CAE04(false);
 }
@@ -116,8 +118,7 @@ static HSD_GObj* grFigure1_8020E080(int gobj_id)
             HSD_GObjProc_8038FD54(gobj, callbacks->callback2, 4);
         }
     } else {
-        OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grfigure1.c", 194,
-                 gobj_id);
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 194, gobj_id);
     }
 
     return gobj;
@@ -125,7 +126,7 @@ static HSD_GObj* grFigure1_8020E080(int gobj_id)
 
 static void grFigure1_8020E168(Ground_GObj* gobj)
 {
-    Ground* gp = gobj->user_data;
+    Ground* gp = GET_GROUND(gobj);
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
@@ -140,8 +141,10 @@ static void grFigure1_8020E1A0(Ground_GObj* arg0) {}
 
 static void grFigure1_8020E1A4(Ground_GObj* gobj)
 {
-    Ground* gp = gobj->user_data;
-    Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
+    Ground* gp = GET_GROUND(gobj);
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+
+    Ground_801C2ED0(jobj, gp->map_id);
 }
 
 static bool grFigure1_8020E1D0(Ground_GObj* arg0)
@@ -159,10 +162,10 @@ static void grFigure1_8020E1FC(Ground_GObj* arg0) {}
 
 static void grFigure1_8020E200(Ground_GObj* gobj)
 {
-    u8 _[8];
+    Ground* gp = GET_GROUND(gobj);
+    HSD_JObj* jobj = GET_JOBJ(gobj);
 
-    Ground* gp = gobj->user_data;
-    Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
+    Ground_801C2ED0(jobj, gp->map_id);
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
@@ -175,12 +178,12 @@ static void grFigure1_8020E258(Ground_GObj* gobj) {}
 
 static void grFigure1_8020E25C(Ground_GObj* arg0) {}
 
-static DynamicsDesc* grFigure1_8020E260(enum_t arg0)
+static DynamicsDesc* grFigure1_OnTouchLine(enum_t arg0)
 {
     return NULL;
 }
 
-static bool grFigure1_8020E268(Vec3* v, int n, HSD_JObj* o)
+static bool grFigure1_OnCheckShadowRender(Vec3* v, int n, HSD_JObj* o)
 {
     return true;
 }

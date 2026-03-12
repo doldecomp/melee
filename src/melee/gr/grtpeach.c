@@ -73,7 +73,7 @@ StageCallbacks grTPe_803E90F0[4] = {
 };
 
 StageData grTPe_803E914C = {
-    (1 << 0) | (1 << 1) | (1 << 2) | (1 << 4) | (1 << 5),
+    TPEACH,
     grTPe_803E90F0,
     "/GrTPe.dat",
     grTPeach_802228B8,

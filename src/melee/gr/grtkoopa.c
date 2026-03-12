@@ -52,7 +52,7 @@ static StageCallbacks grTKp_803E8C70[4] = {
 };
 
 StageData grTKp_803E8CCC = {
-    (1 << 0) | (1 << 4) | (1 << 5),
+    TKOOPA,
     grTKp_803E8C70,
     "/GrTKp.dat",
     grTKoopa_8022164C,

@@ -294,7 +294,24 @@ s32 grCorneria_801DEC08(Vec3* pos)
     }
     return 0;
 }
-/// #grCorneria_801DEC94
+s32 grCorneria_801DEC94(Vec3* pos)
+{
+    if (pos->z > -30.0f) {
+        if (pos->x > Stage_GetBlastZoneRightOffset() - 30.0f) {
+            return 1;
+        }
+        if (pos->x < Stage_GetBlastZoneLeftOffset() + 30.0f) {
+            return 1;
+        }
+        if (pos->y > Stage_GetBlastZoneTopOffset() - 30.0f) {
+            return 1;
+        }
+        if (pos->y < Stage_GetBlastZoneBottomOffset() + 30.0f) {
+            return 1;
+        }
+    }
+    return 0;
+}
 
 /// #grCorneria_801DED50
 

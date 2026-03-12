@@ -14,10 +14,10 @@ typedef struct grKr_804D6A08_t {
 
 } grKr_804D6A08_t;
 
-/* 1FDFF8 */ void grKraid_801FDFF8(bool);
-/* 1FDFFC */ void grKraid_801FDFFC(void);
-/* 1FE094 */ void grKraid_801FE094(void);
-/* 1FE098 */ void grKraid_801FE098(void);
+/* 1FDFF8 */ void grKraid_OnDemoInit(bool);
+/* 1FDFFC */ void grKraid_OnInit(void);
+/* 1FE094 */ void grKraid_OnLoad(void);
+/* 1FE098 */ void grKraid_OnStart(void);
 /* 1FE0BC */ bool grKraid_801FE0BC(void);
 /* 1FE0C4 */ HSD_GObj* grKraid_801FE0C4(int);
 /* 1FE1B0 */ void grKraid_801FE1B0(Ground_GObj*);
@@ -45,7 +45,7 @@ typedef struct grKr_804D6A08_t {
 /* 1FF0E0 */ bool grKraid_801FF0E0(Ground_GObj*, int flag);
 /* 1FF14C */ void grKraid_801FF14C(Ground_GObj*);
 /* 1FF150 */ void grKraid_801FF150(void);
-/* 1FF154 */ DynamicsDesc* grKraid_801FF154(enum_t);
-/* 1FF15C */ bool grKraid_801FF15C(Vec3*, int, HSD_JObj*);
+/* 1FF154 */ DynamicsDesc* grKraid_OnTouchLine(enum_t);
+/* 1FF15C */ bool grKraid_OnCheckShadowRender(Vec3*, int, HSD_JObj*);
 
 #endif

@@ -91,7 +91,7 @@
 /* 026E58 */ bool fn_80026E58(int);
 /* 026E84 */ u64 lbAudioAx_80026E84(CharacterKind);
 /* 026EBC */ u64 lbAudioAx_80026EBC(InternalStageId);
-/* 026F2C */ u64 lbAudioAx_80026F2C(s32);
+/* 026F2C */ void lbAudioAx_80026F2C(s32);
 /* 02702C */ void lbAudioAx_8002702C(s32, u64);
 /* 027168 */ void lbAudioAx_80027168(void);
 /* 027488 */ UNK_RET fn_80027488(UNK_PARAMS);
