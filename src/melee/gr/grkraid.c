@@ -533,11 +533,7 @@ void grKraid_801FEE54(HSD_GObj* gobj)
             iVar3 = HSD_Randi(6);
         } while (gp->gv.kraid2.x2 == iVar3);
     } else {
-        if (HSD_Randi(2) != 0) {
-            iVar3 = gp->gv.kraid2.x3;
-        } else {
-            iVar3 = gp->gv.kraid2.x4;
-        }
+        iVar3 = HSD_Randi(2) != 0 ? gp->gv.kraid2.x3 : gp->gv.kraid2.x4;
     }
     gp->gv.kraid2.x5 = 0;
     gp->gv.kraid2.x2 = iVar3;

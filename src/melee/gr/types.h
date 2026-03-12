@@ -300,7 +300,7 @@ struct grKraid_GroundVars2 {
     /*  + gp+C4 */ s8 x0;
     /*  + gp+C5 */ s8 x1;
     /*  + gp+C6 */ s8 x2;
-    /*  + gp+C7 */ u8 x3;
+    /*  + gp+C7 */ s8 x3;
     /*  + gp+C8 */ s8 x4;
     /*  + gp+C9 */ s8 x5;
     /*  + gp+CC */ f32 x8;
