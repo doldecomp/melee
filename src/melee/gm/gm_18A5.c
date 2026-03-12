@@ -3832,7 +3832,7 @@ post_clamp:
                     if ((s32) lbl_804D665C < 2) {
                         arg0[4] = 1;
                     } else {
-                        arg0[4] = (s32) ((u8*) &lbl_803D9D20)[arg0[3]];
+                        arg0[4] = (s32) lbl_803D9D20.x0[arg0[3]];
                     }
                     fn_80190ABC(1);
                 }
@@ -3861,7 +3861,7 @@ post_clamp:
                     if ((s32) lbl_804D665C < 2) {
                         arg0[4] = 1;
                     } else {
-                        arg0[4] = (s32) ((u8*) &lbl_803D9D20)[arg0[3]];
+                        arg0[4] = (s32) lbl_803D9D20.x0[arg0[3]];
                     }
                     fn_80190ABC(1);
                 }
@@ -3918,7 +3918,7 @@ void fn_80194658(s32* arg0, u32 arg1, u32 arg2)
         if (val > (s32) entry[0x40]) {
             *ptr = *ptr - 1;
         } else if (dir == 0) {
-            *ptr = (s32) ((u8*) &lbl_803D9D20)[arg0[3]];
+            *ptr = (s32) lbl_803D9D20.x0[arg0[3]];
         } else {
             *ptr = (s32) entry[0x4C];
         }
@@ -3943,7 +3943,7 @@ void fn_80194658(s32* arg0, u32 arg1, u32 arg2)
 
 end:
     if (*dir_ptr == 0) {
-        if (arg0[4] > (s32) ((u8*) &lbl_803D9D20)[arg0[3]]) {
+        if (arg0[4] > (s32) lbl_803D9D20.x0[arg0[3]]) {
             arg0[arg0[0] + 1] = 0;
         }
     } else {
