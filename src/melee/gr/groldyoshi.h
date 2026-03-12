@@ -4,8 +4,6 @@
 #include <placeholder.h>
 
 #include "it/inlines.h"
-#include "lb/forward.h"
-#include "mp/forward.h"
 
 /* 20E798 */ void grOldYoshi_8020E798(bool);
 /* 20E79C */ void grOldYoshi_8020E79C(void);
@@ -38,8 +36,8 @@
 /* 20F088 */ void grOldYoshi_8020F088(Ground_GObj*);
 /* 20F2A4 */ void grOldYoshi_8020F2A4(Ground_GObj*);
 /* 20F2A8 */ void fn_8020F2A8(Ground*, s32, CollData*, s32, mpLib_GroundEnum,
-                              f32);
-/* 20F31C */ UNK_RET grOldYoshi_8020F31C(UNK_PARAMS);
+                              float);
+/* 20F31C */ float grOldYoshi_8020F31C(float,float,float,float,float,float);
 /* 20F404 */ DynamicsDesc* grOldYoshi_8020F404(enum_t);
 /* 20F40C */ bool grOldYoshi_8020F40C(Vec3*, int arg, HSD_JObj* jobj);
 
