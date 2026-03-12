@@ -223,9 +223,7 @@ while true; do
         log "  Running configure.py..."
         python3 configure.py --wrapper wine 2>&1 >> "$MAIN_LOG"
         log "  Running ninja..."
-        ninja > /tmp/claude/ninja_output.log 2>&1 &
-        NINJA_PID=$!
-        tail -f /tmp/claude/ninja_output.log 2>/dev/null | python3 -u -c "
+        ninja 2>&1 | python3 -u -c "
 import sys, re, signal
 signal.signal(signal.SIGINT, lambda *a: sys.exit(0))
 for line in sys.stdin:
@@ -237,15 +235,7 @@ for line in sys.stdin:
         bar = '█' * filled + '░' * (30 - filled)
         print(f'\r  [{bar}] {cur}/{total} ({pct}%)', end='', flush=True)
 print()
-" &
-        PROGRESS_PID=$!
-        wait $NINJA_PID 2>/dev/null
-        NINJA_EXIT=$?
-        kill $PROGRESS_PID 2>/dev/null; wait $PROGRESS_PID 2>/dev/null
-        cat /tmp/claude/ninja_output.log >> "$MAIN_LOG"
-        if [ "$NINJA_EXIT" -ne 0 ]; then
-            log "ERROR: Master doesn't build clean. Aborting."; exit 1
-        fi
+" || { log "ERROR: Master doesn't build clean. Aborting."; exit 1; }
         LAST_BUILT_HEAD=$CURRENT_HEAD
         log "Master builds OK"
     else
