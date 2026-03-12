@@ -141,24 +141,24 @@ static StageCallbacks grPs_803E126C[] = {
 };
 
 StageData grPs_803E1334 = {
-    0x10,
+    PSTADIUM,
     grPs_803E126C,
     "/GrPs",
-    grStadium_801D101C,
-    grStadium_801D1018,
-    grStadium_UnkStage0_OnLoad,
-    grStadium_UnkStage0_OnStart,
+    grStadium_OnInit,
+    grStadium_OnDemoInit,
+    grStadium_OnLoad,
+    grStadium_OnStart,
     grStadium_801D10F0,
-    grStadium_801D50B8,
-    grStadium_801D50C0,
+    grStadium_OnTouchLine,
+    grStadium_OnCheckShadowRender,
     1,
     grPs_803E1248,
     ARRAY_SIZE(grPs_803E1248),
 };
 
-void grStadium_801D1018(bool unused) {}
+void grStadium_OnDemoInit(int unused) {}
 
-void grStadium_801D101C(void)
+void grStadium_OnInit(void)
 {
     yaku = Ground_801C49F8();
 
@@ -181,9 +181,9 @@ void grStadium_801D101C(void)
     mpLib_800581DC(6, 4);
 }
 
-void grStadium_UnkStage0_OnLoad(void) {}
+void grStadium_OnLoad(void) {}
 
-void grStadium_UnkStage0_OnStart(void)
+void grStadium_OnStart(void)
 {
     grZakoGenerator_801CAE04(0);
 }
@@ -2337,12 +2337,12 @@ void fn_801D5074(Ground_GObj* gobj, int arg1)
     grDisplay_801C5DB0(gobj, arg1);
 }
 
-DynamicsDesc* grStadium_801D50B8(enum_t unused)
+DynamicsDesc* grStadium_OnTouchLine(enum_t unused)
 {
     return NULL;
 }
 
-bool grStadium_801D50C0(Vec3* arg0, int arg1, HSD_JObj* jobj)
+bool grStadium_OnCheckShadowRender(Vec3* arg0, int arg1, HSD_JObj* jobj)
 {
     Vec3 sp14;
     lb_8000B1CC(jobj, NULL, &sp14);
