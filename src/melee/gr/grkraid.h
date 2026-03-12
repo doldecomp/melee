@@ -43,7 +43,7 @@ typedef struct grKr_804D6A08_t {
 /* 1FE438 */ bool grKraid_801FE438(Ground_GObj*);
 /* 1FE440 */ void grKraid_801FE440(Ground_GObj*);
 /* 1FE6D4 */ void grKraid_801FE6D4(Ground_GObj*);
-/* 1FE6D8 */ void grKraid_801FE6D8(HSD_JObj*,float);
+/* 1FE6D8 */ void grKraid_801FE6D8(HSD_JObj*, float);
 /* 1FE818 */ void grKraid_801FE818(Ground_GObj*);
 /* 1FE9F8 */ bool grKraid_801FE9F8(Ground_GObj*);
 /* 1FEA00 */ void grKraid_801FEA00(Ground_GObj*);
