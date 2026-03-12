@@ -428,10 +428,6 @@ Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>\"
    FAILURE: $FUNC_NAME best=XX.X%"
 
     check_usage
-    if [ "$USAGE_WEEKLY_PCT" -ge 95 ]; then
-        log "  Weekly usage at ${USAGE_WEEKLY_PCT}%, stopping to preserve quota."
-        break
-    fi
 
     log "  Spawning Claude session..."
     FUNC_STREAM_LOG="$LOG_DIR/${FUNC_NAME}_${TIMESTAMP}_stream.jsonl"
