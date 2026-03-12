@@ -52,14 +52,12 @@ lbl_803D9FD8_fn lbl_803D9FD8[] = {
 
 void fn_8018A514(int count, float val)
 {
-    u8* lookup = (u8*) &lbl_803D9D20;
     BracketEntry* entries = lbl_80473AB8;
     s32 region;
     u8* src;
     s32 i;
     s32 n;
     u8* d;
-    u8* ptr;
 
     if (count < 9) {
         region = 0;
@@ -72,26 +70,20 @@ void fn_8018A514(int count, float val)
     src = *(u8**) ((u8*) entries + region * 4 + 0x3700);
 
     if (count < 9) {
-        ptr = lookup;
         for (i = 0; i < count; i++) {
-            src += ptr[0x20] * 0x28;
-            ptr++;
+            src += lbl_803D9D20.x0[i + 0x20] * 0x28;
         }
     } else if (count < 14) {
-        ptr = lookup + 9;
         for (i = 9; i < count; i++) {
-            src += ptr[0x20] * 0x28;
-            ptr++;
+            src += lbl_803D9D20.x0[i + 0x20] * 0x28;
         }
     } else {
-        ptr = lookup + 14;
         for (i = 14; i < count; i++) {
-            src += ptr[0x20] * 0x28;
-            ptr++;
+            src += lbl_803D9D20.x0[i + 0x20] * 0x28;
         }
     }
 
-    n = lookup[count + 0x20];
+    n = lbl_803D9D20.x0[count + 0x20];
     d = (u8*) entries;
 
     for (i = 0; i < n; i++) {
