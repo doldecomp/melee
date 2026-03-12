@@ -420,7 +420,7 @@ static s32 lbl_804DA67C = (s32) 0xFFFF00FF;
 void fn_8018C8D4(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
                  s32 arg5, s32 arg6, f32 farg0)
 {
-    u8* data = (u8*) arg0;
+    BracketEntry* data = (BracketEntry*) arg0;
     f32 thickness;
     f32 neg_thickness;
     f32 total_width;
@@ -433,15 +433,15 @@ void fn_8018C8D4(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
     s32 c30, c31, c32, c33;
 
     c0 = lbl_804DA67C;
-    thickness = M2C_FIELD(data, f32*, 0x1C);
+    thickness = data->x1C;
 
-    switch ((s32) data[4]) {
+    switch ((s32) data->x4) {
     case 0:
         c1 = c0;
         DrawRectangle((f32) arg1, (f32) arg2, thickness, (f32) arg4,
                       (GXColor*) &c1);
-        if (data[0x21] == 0) {
-            c2 = M2C_FIELD(data, s32*, 0x20);
+        if (data->x20.g == 0) {
+            c2 = *(s32*) &data->x20;
             DrawRectangle((f32) arg1, (f32) arg2, thickness, (f32) arg4,
                           (GXColor*) &c2);
         }
@@ -451,15 +451,15 @@ void fn_8018C8D4(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
         c3 = c0;
         DrawRectangle((f32) arg1, (f32) arg2, thickness, (f32) arg4,
                       (GXColor*) &c3);
-        if (data[0x21] == 0) {
-            if (data[0x4C] == 0) {
+        if (data->x20.g == 0) {
+            if (data->x4C == 0) {
                 half_h = arg4 / 2;
-                c4 = M2C_FIELD(data, s32*, 0x20);
+                c4 = *(s32*) &data->x20;
                 DrawRectangle((f32) arg1, (f32) (arg2 + half_h), thickness,
                               (f32) half_h, (GXColor*) &c4);
                 return;
             }
-            c5 = M2C_FIELD(data, s32*, 0x20);
+            c5 = *(s32*) &data->x20;
             DrawRectangle((f32) arg1, (f32) arg2, thickness,
                           (f32) (arg4 / 2), (GXColor*) &c5);
         }
@@ -489,28 +489,28 @@ void fn_8018C8D4(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
         DrawRectangle((f32) right, (f32) mid_y, thickness, (f32) half_h,
                       (GXColor*) &c9);
 
-        if (data[0x21] == 0) {
-            if (data[0x4C] == 0) {
-                c10 = M2C_FIELD(data, s32*, 0x20);
+        if (data->x20.g == 0) {
+            if (data->x4C == 0) {
+                c10 = *(s32*) &data->x20;
                 DrawRectangle((f32) (arg1 + 0x2B), (f32) mid_y, thickness,
                               (f32) half_h, (GXColor*) &c10);
-                c11 = M2C_FIELD(data, s32*, 0x20);
+                c11 = *(s32*) &data->x20;
                 DrawRectangle((f32) (arg1 + 0x2B), (f32) mid_y,
                               (f32) (half - 0x2B), neg_thickness,
                               (GXColor*) &c11);
                 return;
             }
-            if (data[0x78] == 0) {
-                c12 = M2C_FIELD(data, s32*, 0x20);
+            if (data->x78 == 0) {
+                c12 = *(s32*) &data->x20;
                 DrawRectangle((f32) right, (f32) mid_y, thickness,
                               (f32) half_h, (GXColor*) &c12);
-                c13 = M2C_FIELD(data, s32*, 0x20);
+                c13 = *(s32*) &data->x20;
                 DrawRectangle((f32) center, (f32) mid_y,
                               (f32) half + thickness, neg_thickness,
                               (GXColor*) &c13);
                 return;
             }
-            c14 = M2C_FIELD(data, s32*, 0x20);
+            c14 = *(s32*) &data->x20;
             DrawRectangle((f32) center, (f32) arg2, thickness, (f32) half_h,
                           (GXColor*) &c14);
         }
@@ -554,54 +554,54 @@ void fn_8018C8D4(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
         DrawRectangle((f32) arg1, (f32) bot_y, total_width, neg_thickness,
                       (GXColor*) &c21);
 
-        if (data[0x21] == 0) {
-            if (data[0x4C] == 0) {
+        if (data->x20.g == 0) {
+            if (data->x4C == 0) {
                 two_third_y = arg2 + ((arg4 * 2) / 3);
-                c22 = M2C_FIELD(data, s32*, 0x20);
+                c22 = *(s32*) &data->x20;
                 DrawRectangle((f32) arg1, (f32) two_third_y, thickness,
                               (f32) third_h, (GXColor*) &c22);
-                c23 = M2C_FIELD(data, s32*, 0x20);
+                c23 = *(s32*) &data->x20;
                 DrawRectangle((f32) arg1, (f32) two_third_y, (f32) half,
                               neg_thickness, (GXColor*) &c23);
-                c24 = M2C_FIELD(data, s32*, 0x20);
+                c24 = *(s32*) &data->x20;
                 DrawRectangle((f32) center, (f32) (arg2 + (arg4 / 2)),
                               thickness, (f32) ((arg4 / 6) - 1),
                               (GXColor*) &c24);
                 return;
             }
-            if (data[0x78] == 0) {
+            if (data->x78 == 0) {
                 two_third_y = arg2 + ((arg4 * 2) / 3);
-                c25 = M2C_FIELD(data, s32*, 0x20);
+                c25 = *(s32*) &data->x20;
                 DrawRectangle((f32) right, (f32) two_third_y, thickness,
                               (f32) third_h, (GXColor*) &c25);
-                c26 = M2C_FIELD(data, s32*, 0x20);
+                c26 = *(s32*) &data->x20;
                 DrawRectangle((f32) center, (f32) two_third_y, (f32) half,
                               neg_thickness, (GXColor*) &c26);
-                c27 = M2C_FIELD(data, s32*, 0x20);
+                c27 = *(s32*) &data->x20;
                 DrawRectangle((f32) center, (f32) (arg2 + (arg4 / 2)),
                               thickness, (f32) ((arg4 / 6) - 1),
                               (GXColor*) &c27);
                 return;
             }
-            if (data[0xA4] == 0) {
-                c28 = M2C_FIELD(data, s32*, 0x20);
+            if (data->xA4 == 0) {
+                c28 = *(s32*) &data->x20;
                 DrawRectangle((f32) arg1, (f32) arg2, thickness,
                               (f32) third_h, (GXColor*) &c28);
-                c29 = M2C_FIELD(data, s32*, 0x20);
+                c29 = *(s32*) &data->x20;
                 DrawRectangle((f32) arg1, (f32) mid_y, (f32) half,
                               neg_thickness, (GXColor*) &c29);
-                c30 = M2C_FIELD(data, s32*, 0x20);
+                c30 = *(s32*) &data->x20;
                 DrawRectangle((f32) center, (f32) mid_y, thickness,
                               (f32) ((arg4 / 6) - 1), (GXColor*) &c30);
                 return;
             }
-            c31 = M2C_FIELD(data, s32*, 0x20);
+            c31 = *(s32*) &data->x20;
             DrawRectangle((f32) right, (f32) arg2, thickness,
                           (f32) third_h, (GXColor*) &c31);
-            c32 = M2C_FIELD(data, s32*, 0x20);
+            c32 = *(s32*) &data->x20;
             DrawRectangle((f32) center, (f32) mid_y, (f32) half,
                           neg_thickness, (GXColor*) &c32);
-            c33 = M2C_FIELD(data, s32*, 0x20);
+            c33 = *(s32*) &data->x20;
             DrawRectangle((f32) center, (f32) mid_y, thickness,
                           (f32) ((arg4 / 6) - 1), (GXColor*) &c33);
         }
