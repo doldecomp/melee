@@ -171,8 +171,8 @@ void fn_8018A970(int arg0)
 
 void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
 {
-    u8* entries = (u8*) lbl_80473AB8;
-    u8* entry;
+    BracketEntry* entries = lbl_80473AB8;
+    BracketEntry* entry;
     u8* sub;
     s32* p34;
     s32* p3C;
@@ -180,12 +180,13 @@ void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
     s32* p38;
     s32* p40;
     s32* p48;
+    u8* px3;
     u8 x3;
 
     TmData* tm = gm_8018F634();
 
-    entry = entries + entry_idx * (s32) 0xDC;
-    sub = entries + entry_idx * (s32) 0xDC + slot_idx * (s32) 0x2C;
+    entry = &entries[entry_idx];
+    sub = (u8*) entry + slot_idx * (s32) 0x2C;
 
     p34 = (s32*) (sub + 0x34);
     p3C = (s32*) (sub + 0x3C);
@@ -194,19 +195,20 @@ void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
     p40 = (s32*) (sub + 0x40);
     p48 = (s32*) (sub + 0x48);
 
-    if (entry[1] != 0) {
-        x3 = entry[3];
-        if (x3 == 0 && entry[4] != 0) {
-            switch (entry[4]) {
+    if (entry->x1 != 0) {
+        px3 = &entry->x3;
+        x3 = *px3;
+        if (x3 == 0 && entry->x4 != 0) {
+            switch (entry->x4) {
             case 1: {
-                s32 xC = *(s32*) (entry + 0xC);
-                s32* pX18 = (s32*) (entry + 0x18);
-                s32* pX10 = (s32*) (entry + 0x10);
+                s32 xC = entry->xC;
+                s32* pX18 = &entry->x18;
+                s32* pX10 = &entry->x10;
                 *p3C = xC;
                 *p44 = xC;
                 *p34 = xC;
                 {
-                    s32 x18 = *(s32*) (entry + 0x18);
+                    s32 x18 = entry->x18;
                     s32 x10 = *pX10;
                     s32 val = x10 + x18 - slot_idx * x18;
                     *p40 = val;
@@ -219,34 +221,34 @@ void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
             case 2:
                 switch (slot_idx) {
                 case 0: {
-                    s32 xC = *(s32*) (entry + 0xC);
-                    s32* pX10 = (s32*) (entry + 0x10);
+                    s32 xC = entry->xC;
+                    s32* pX10 = &entry->x10;
                     s32 val1 = xC + 0x2B;
                     *p3C = val1;
                     *p44 = val1;
                     *p34 = val1;
                     {
-                        s32 x10 = *(s32*) (entry + 0x10);
-                        s32 x18 = *(s32*) (entry + 0x18);
+                        s32 x10 = entry->x10;
+                        s32 x18 = entry->x18;
                         s32 val2 = x10 + x18;
                         *p40 = val2;
                         *p48 = val2;
                         *p38 = val2;
                     }
-                    *p40 = *pX10 + *(s32*) (entry + 0x18) / 2;
+                    *p40 = *pX10 + entry->x18 / 2;
                     break;
                 }
                 case 1: {
-                    s32 xC = *(s32*) (entry + 0xC);
-                    s32 x14 = *(s32*) (entry + 0x14);
-                    s32* pX10 = (s32*) (entry + 0x10);
-                    s32* pX18 = (s32*) (entry + 0x18);
+                    s32 xC = entry->xC;
+                    s32 x14 = entry->x14;
+                    s32* pX10 = &entry->x10;
+                    s32* pX18 = &entry->x18;
                     s32 val1 = xC + x14;
                     *p3C = val1;
                     *p44 = val1;
                     *p34 = val1;
                     {
-                        s32 x10 = *(s32*) (entry + 0x10);
+                        s32 x10 = entry->x10;
                         s32 x18 = *pX18;
                         s32 val2 = x10 + x18;
                         *p40 = val2;
@@ -257,20 +259,20 @@ void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
                     break;
                 }
                 default: {
-                    u8* ep = entries + entry_idx * (s32) 0xDC;
-                    s32 x14 = *(s32*) (ep + 0x14);
-                    s32 xC = *(s32*) (ep + 0xC);
+                    BracketEntry* ep = &entries[entry_idx];
+                    s32 x14 = ep->x14;
+                    s32 xC = ep->xC;
                     s32 val1 = xC + x14 / 2;
                     *p3C = val1;
                     *p44 = val1;
                     *p34 = val1;
                     {
-                        s32 x10 = *(s32*) (ep + 0x10);
+                        s32 x10 = ep->x10;
                         *p40 = x10;
                         *p48 = x10;
                         *p38 = x10;
                     }
-                    *p40 = *(s32*) (ep + 0x10) + *(s32*) (ep + 0x18) / 2;
+                    *p40 = ep->x10 + ep->x18 / 2;
                     break;
                 }
                 }
@@ -278,14 +280,14 @@ void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
             case 3:
                 switch (slot_idx) {
                 case 0: {
-                    s32 xC = *(s32*) (entry + 0xC);
-                    s32* pX10 = (s32*) (entry + 0x10);
-                    s32* pX18 = (s32*) (entry + 0x18);
+                    s32 xC = entry->xC;
+                    s32* pX10 = &entry->x10;
+                    s32* pX18 = &entry->x18;
                     *p3C = xC;
                     *p44 = xC;
                     *p34 = xC;
                     {
-                        s32 x10 = *(s32*) (entry + 0x10);
+                        s32 x10 = entry->x10;
                         s32 x18 = *pX18;
                         s32 val = x10 + x18;
                         *p40 = val;
@@ -296,16 +298,16 @@ void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
                     break;
                 }
                 case 1: {
-                    s32 xC = *(s32*) (entry + 0xC);
-                    s32 x14 = *(s32*) (entry + 0x14);
-                    s32* pX10 = (s32*) (entry + 0x10);
-                    s32* pX18 = (s32*) (entry + 0x18);
+                    s32 xC = entry->xC;
+                    s32 x14 = entry->x14;
+                    s32* pX10 = &entry->x10;
+                    s32* pX18 = &entry->x18;
                     s32 val1 = xC + x14;
                     *p3C = val1;
                     *p44 = val1;
                     *p34 = val1;
                     {
-                        s32 x10 = *(s32*) (entry + 0x10);
+                        s32 x10 = entry->x10;
                         s32 x18 = *pX18;
                         s32 val = x10 + x18;
                         *p40 = val;
@@ -316,63 +318,61 @@ void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
                     break;
                 }
                 case 2: {
-                    s32 xC = *(s32*) (entry + 0xC);
+                    s32 xC = entry->xC;
                     *p3C = xC;
                     *p44 = xC;
                     *p34 = xC;
                     {
-                        s32 x10 = *(s32*) (entry + 0x10);
+                        s32 x10 = entry->x10;
                         *p40 = x10;
                         *p48 = x10;
                         *p38 = x10;
                     }
-                    *p40 = *(s32*) (entry + 0x10) +
-                           *(s32*) (entry + 0x18) / 3;
+                    *p40 = entry->x10 + entry->x18 / 3;
                     break;
                 }
                 default: {
-                    u8* ep = entries + entry_idx * (s32) 0xDC;
-                    s32 xC = *(s32*) (ep + 0xC);
-                    s32 x14 = *(s32*) (ep + 0x14);
+                    BracketEntry* ep = &entries[entry_idx];
+                    s32 xC = ep->xC;
+                    s32 x14 = ep->x14;
                     s32 val1 = xC + x14;
                     *p3C = val1;
                     *p44 = val1;
                     *p34 = val1;
                     {
-                        s32 x10 = *(s32*) (ep + 0x10);
+                        s32 x10 = ep->x10;
                         *p40 = x10;
                         *p48 = x10;
                         *p38 = x10;
                     }
-                    *p40 = *(s32*) (ep + 0x10) +
-                           *(s32*) (ep + 0x18) / 3;
+                    *p40 = ep->x10 + ep->x18 / 3;
                     break;
                 }
                 }
                 break;
             }
         } else {
-            u8* ep = entries + entry_idx * (s32) 0xDC;
-            s32 x14 = *(s32*) (ep + 0x14);
-            s32* pX18 = (s32*) (ep + 0x18);
-            s32 xC = *(s32*) (ep + 0xC);
+            BracketEntry* ep = &entries[entry_idx];
+            s32 x14 = ep->x14;
+            s32* pX18 = &ep->x18;
+            s32 xC = ep->xC;
             s32 val1 = xC + slot_idx * (x14 / (s32) x3);
             *p3C = val1;
             *p44 = val1;
             *p34 = val1;
             {
-                s32 x18 = *(s32*) (ep + 0x18);
-                u8 x2 = ep[2];
-                s32 x10 = *(s32*) (ep + 0x10);
+                s32 x18 = ep->x18;
+                u8 x2 = ep->x2;
+                s32 x10 = ep->x10;
                 s32 val2 = x10 + x18 - x18 * x2;
                 *p40 = val2;
                 *p48 = val2;
                 *p38 = val2;
             }
-            *p40 = *(s32*) (ep + 0x10) + *pX18 * ep[2];
+            *p40 = ep->x10 + *pX18 * ep->x2;
 
-            if (entry[3] == 1) {
-                u8 tm_x2E = ((u8*) tm)[0x2E];
+            if (*px3 == 1) {
+                u8 tm_x2E = tm->x2E;
                 if (tm_x2E == 6) {
                     if (entry_idx == 5 && slot_idx == 1) {
                         s32 tmp = *p48 + 0x46;
