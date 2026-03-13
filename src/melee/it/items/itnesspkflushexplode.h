@@ -7,7 +7,8 @@
 
 #include "it/items/types.h"
 
-/* 2AF940 */ UNK_RET it_802AF940(UNK_PARAMS);
+/* 2AF940 */ Item_GObj* it_802AF940(Item_GObj*, Item_GObj*, Vec3*, ItemKind,
+                                    f32, f32);
 /* 2AFA2C */ void it_2725_Logic103_Destroyed(Item_GObj*);
 /* 2AFA70 */ UNK_RET it_802AFA70(UNK_PARAMS);
 /* 2AFBA4 */ bool itNesspkflushexplode_UnkMotion0_Anim(Item_GObj* gobj);
