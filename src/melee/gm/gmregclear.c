@@ -58,7 +58,8 @@ struct lbl_80472E48_t {
     /* 0x00 */ char pad_0[4];
     /* 0x04 */ s32 unk_4;        /* inferred */
     /* 0x08 */ s32 unk_8;        /* inferred */
-    /* 0x0C */ char pad_C[0x74]; /* maybe part of unk_8[0x1E]? */
+    /* 0x0C */ char pad_C[0x8];
+    /* 0x14 */ s32 x14[0x1B];
 }; /* size = 0x80 */
 STATIC_ASSERT(sizeof(struct lbl_80472E48_t) == 0x80);
 
@@ -657,7 +658,33 @@ u8 fn_8017DD7C(PlayerInitData* arg0, Unk1PData_x24* arg1)
     return index - 1;
 }
 
-/// #fn_8017DE54
+s32 fn_8017DE54(u8 arg0, u8* arg1)
+{
+    u8* p;
+    s32 count;
+
+    if (arg0 & 0x20) {
+        return 0;
+    }
+    if (arg0 & 0x10) {
+        count = 0;
+        if ((s32) arg1[0] != 0x21) {
+            count = 1;
+        }
+        p = &arg1[1];
+        if ((s32) *p != 0x21) {
+            count += 1;
+        }
+        if ((s32) p[1] != 0x21) {
+            count += 1;
+        }
+        return 3 - count;
+    }
+    if (arg0 & 2) {
+        return 2;
+    }
+    return 0;
+}
 
 Unk1PData* fn_8017DEC8(int arg0)
 {
@@ -1074,7 +1101,16 @@ Fighter_GObj* gm_80180AF4(void)
 
 /// #gm_80180B18
 
-/// #gm_80180BA0
+void gm_80180BA0(void)
+{
+    int i;
+
+    for (i = 0; i < 0x1B; i++) {
+        u8 idx = gm_80164024((u8) i);
+        *gmMainLib_8015D06C(gm_80164024((u8) i)) =
+            lbl_80472E48.x14[idx] * 0xA;
+    }
+}
 
 void fn_80180C14(HSD_GObj* gobj)
 {

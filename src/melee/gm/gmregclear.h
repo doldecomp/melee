@@ -30,7 +30,7 @@
 /* 17DB78 */ u8 gm_8017DB78(gm_8017DB6C_arg0_t* arg0, int index);
 /* 17DB88 */ UNK_RET gm_8017DB88(UNK_PARAMS);
 /* 17DD7C */ u8 fn_8017DD7C(PlayerInitData* arg0, Unk1PData_x24* arg1);
-/* 17DE54 */ UNK_RET fn_8017DE54(UNK_PARAMS);
+/* 17DE54 */ s32 fn_8017DE54(u8, u8*);
 /* 17DEC8 */ Unk1PData* fn_8017DEC8(int);
 /* 17DF28 */ Unk1PData* fn_8017DF28(void);
 /* 17DF90 */ u8 fn_8017DF90(void);
@@ -93,7 +93,7 @@
 /* 180AE4 */ s32 gm_80180AE4(void);
 /* 180AF4 */ Fighter_GObj* gm_80180AF4(void);
 /* 180B18 */ UNK_RET gm_80180B18(UNK_PARAMS);
-/* 180BA0 */ UNK_RET gm_80180BA0(UNK_PARAMS);
+/* 180BA0 */ void gm_80180BA0(void);
 /* 180C14 */ void fn_80180C14(HSD_GObj* gobj);
 /* 180C60 */ UNK_RET fn_80180C60(UNK_PARAMS);
 /* 181598 */ UNK_RET fn_80181598(UNK_PARAMS);
