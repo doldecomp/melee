@@ -204,12 +204,14 @@ def cmd_extract_log(stream_log, output_log):
         pass
 
 
-def cmd_filter_stubs(excluded_json, branch_funcs_str, progress_file):
-    """Filter stubs from stdin JSON, remove excluded/tried/branched, pick smallest.
+def cmd_filter_stubs(excluded_json, branch_funcs_str, progress_file, batch_size="1"):
+    """Filter stubs from stdin JSON, remove excluded/tried/branched.
 
     Reads stubs JSON array from stdin.
-    Prints JSON array with at most 1 target.
+    If batch_size > 1, picks up to that many small functions from the same file.
+    Prints JSON array of targets.
     """
+    batch_size = int(batch_size)
     stubs = json.load(sys.stdin)
     excluded = set(x.lower() for x in json.loads(excluded_json))
 
@@ -232,8 +234,88 @@ def cmd_filter_stubs(excluded_json, branch_funcs_str, progress_file):
         and s["size"] > 0
     ]
     targets.sort(key=lambda s: s["size"])
-    targets = targets[:1]
-    print(json.dumps(targets))
+
+    if batch_size <= 1 or not targets:
+        print(json.dumps(targets[:1]))
+        return
+
+    # Batch: pick up to batch_size small functions from the same file as the smallest
+    first = targets[0]
+    same_file = [s for s in targets if s["file"] == first["file"]]
+    # Only batch functions that are small (< 200 bytes)
+    batch = [s for s in same_file if s["size"] < 200][:batch_size]
+    if not batch:
+        batch = [first]
+    print(json.dumps(batch))
+
+
+def cmd_trim_context(c_file, *func_names):
+    """Print trimmed source context: stubs + nearby implemented functions for reference.
+
+    Shows each stub with surrounding context, plus up to 3 nearby implemented
+    functions as style examples. Much smaller than dumping the entire file.
+    """
+    try:
+        lines = Path(c_file).read_text().splitlines()
+    except FileNotFoundError:
+        print("(file not found)")
+        return
+
+    total = len(lines)
+    func_set = set(func_names)
+    include = set()
+
+    # Find stub locations and include ±5 lines around each
+    for i, line in enumerate(lines):
+        m = re.match(r"^/// #(\w+)\s*$", line)
+        if m and m.group(1) in func_set:
+            for j in range(max(0, i - 5), min(total, i + 6)):
+                include.add(j)
+
+    # Find implemented functions near the stubs as style examples
+    # Look for function definitions (type + name + open paren at start of line)
+    func_defs = []
+    for i, line in enumerate(lines):
+        if re.match(r"^\w[\w\s\*]*\w+\s*\(", line) and "{" in "\n".join(lines[i:i+3]):
+            # Find end of function (matching closing brace)
+            depth = 0
+            end = i
+            for j in range(i, min(total, i + 200)):
+                depth += lines[j].count("{") - lines[j].count("}")
+                if depth <= 0 and j > i:
+                    end = j
+                    break
+            func_defs.append((i, end))
+
+    # Pick up to 3 implemented functions closest to any stub
+    stub_lines = []
+    for i, line in enumerate(lines):
+        m = re.match(r"^/// #(\w+)\s*$", line)
+        if m and m.group(1) in func_set:
+            stub_lines.append(i)
+
+    if stub_lines and func_defs:
+        def dist_to_stubs(fd):
+            return min(abs(fd[0] - s) for s in stub_lines)
+        nearby = sorted(func_defs, key=dist_to_stubs)[:3]
+        for start, end in nearby:
+            for j in range(start, min(total, end + 1)):
+                include.add(j)
+
+    # Always include file header (includes, typedefs) — first 40 lines
+    for j in range(min(40, total)):
+        include.add(j)
+
+    # Print with ellipsis for gaps
+    sorted_lines = sorted(include)
+    prev = -2
+    for i in sorted_lines:
+        if i > prev + 1:
+            print(f"... (lines {prev + 2}-{i} omitted)")
+        print(f"{i + 1:4d}: {lines[i]}")
+        prev = i
+    if prev < total - 1:
+        print(f"... (lines {prev + 2}-{total} omitted)")
 
 
 def cmd_extract_asm(asm_file, func_name):
@@ -331,6 +413,7 @@ SUBCOMMANDS = {
     "token-usage": (cmd_token_usage, 1),
     "extract-log": (cmd_extract_log, 2),
     "filter-stubs": (cmd_filter_stubs, 3),
+    "trim-context": (cmd_trim_context, 1),  # additional args: func names
     "extract-asm": (cmd_extract_asm, 2),
     "cutoff-epoch": (cmd_cutoff_epoch, 1),
     "progress-save": (cmd_progress_save, 3),

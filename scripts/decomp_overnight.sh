@@ -56,6 +56,7 @@ SCAN_MODE=${SCAN_MODE:-default}
 CONTINUOUS=${CONTINUOUS:-false}
 CUTOFF_HOUR=${CUTOFF_HOUR:-8}
 AUTO_PUSH=${AUTO_PUSH:-false}
+BATCH_SIZE=${BATCH_SIZE:-5}
 PROGRESS_FILE="$LOG_DIR/progress_$(date +%Y%m%d).json"
 
 log() {
@@ -229,18 +230,29 @@ while true; do
     log "Building master to verify clean state..."
     CURRENT_HEAD=$(git rev-parse HEAD)
     if [ "$CURRENT_HEAD" != "${LAST_BUILT_HEAD:-}" ]; then
-        log "  Running configure.py..."
-        python3 configure.py --wrapper wine 2>&1 >> "$MAIN_LOG"
-        log "  Running ninja..."
-        set +o pipefail
-        ninja 2>&1 | python3 -u "$HELPERS" ninja-progress
-        NINJA_EXIT=${PIPESTATUS[0]}
-        set -o pipefail
-        if [ "$NINJA_EXIT" -ne 0 ]; then
-            log "ERROR: Master doesn't build clean. Aborting."; exit 1
+        # Check if any source files changed (skip rebuild for script-only changes)
+        SOURCE_CHANGED=true
+        if [ -n "${LAST_BUILT_HEAD:-}" ]; then
+            if ! git diff --name-only "$LAST_BUILT_HEAD" "$CURRENT_HEAD" | grep -qE '\.(c|h|cpp|hpp)$'; then
+                SOURCE_CHANGED=false
+            fi
+        fi
+        if [ "$SOURCE_CHANGED" = "true" ]; then
+            log "  Running configure.py..."
+            python3 configure.py --wrapper wine 2>&1 >> "$MAIN_LOG"
+            log "  Running ninja..."
+            set +o pipefail
+            ninja 2>&1 | python3 -u "$HELPERS" ninja-progress
+            NINJA_EXIT=${PIPESTATUS[0]}
+            set -o pipefail
+            if [ "$NINJA_EXIT" -ne 0 ]; then
+                log "ERROR: Master doesn't build clean. Aborting."; exit 1
+            fi
+            log "Master builds OK"
+        else
+            log "  Only non-source files changed, skipping rebuild"
         fi
         LAST_BUILT_HEAD=$CURRENT_HEAD
-        log "Master builds OK"
     else
         log "Master unchanged, skipping rebuild"
     fi
@@ -280,83 +292,105 @@ print(json.dumps(list(names)))
     # Collect functions that already have decomp branches (with or without worktree- prefix)
     BRANCH_FUNCS=$(git branch --list 'decomp-*' 'worktree-decomp-*' 2>/dev/null | sed 's/^[* ]*//' | sed 's/^worktree-//' | sed 's/^decomp-//' | sort -u)
 
-    # 5. Filter stubs: remove excluded, enforce size limit, exclude already-attempted, take top 1
-    TARGETS=$(echo "$STUBS_JSON" | python3 "$HELPERS" filter-stubs "$EXCLUDED" "$BRANCH_FUNCS" "$PROGRESS_FILE")
+    # 5. Filter stubs: remove excluded, enforce size limit, exclude already-attempted
+    TARGETS=$(echo "$STUBS_JSON" | python3 "$HELPERS" filter-stubs "$EXCLUDED" "$BRANCH_FUNCS" "$PROGRESS_FILE" "$BATCH_SIZE")
 
-    # 6. Pick the next function to decompile
-    STUB=$(echo "$TARGETS" | python3 -c "
+    # 6. Pick the next target(s) to decompile
+    BATCH=$(echo "$TARGETS" | python3 -c "
 import json, sys
 targets = json.load(sys.stdin)
 if not targets:
     sys.exit(1)
-print(json.dumps(targets[0]))
+print(json.dumps(targets))
 " 2>/dev/null) || {
         log "No targets to decompile."
         break
     }
 
-    FUNC_NAME=$(echo "$STUB" | python3 -c "import json,sys; print(json.load(sys.stdin)['name'])")
-    FUNC_SIZE=$(echo "$STUB" | python3 -c "import json,sys; print(json.load(sys.stdin)['size'])")
-    FUNC_FILE=$(echo "$STUB" | python3 -c "import json,sys; print(json.load(sys.stdin)['file'])")
-    FUNC_LINE=$(echo "$STUB" | python3 -c "import json,sys; print(json.load(sys.stdin)['line'])")
+    BATCH_COUNT=$(echo "$BATCH" | python3 -c "import json,sys; print(len(json.load(sys.stdin)))")
+    FIRST_NAME=$(echo "$BATCH" | python3 -c "import json,sys; print(json.load(sys.stdin)[0]['name'])")
+    FUNC_FILE=$(echo "$BATCH" | python3 -c "import json,sys; print(json.load(sys.stdin)[0]['file'])")
 
-    # Derive the asm file path from the C file path
+    # Derive paths from the file
     ASM_FILE="build/GALE01/asm/${FUNC_FILE#src/}"
     ASM_FILE="${ASM_FILE%.c}.s"
-
-    # Derive the object file path
     OBJ_FILE="build/GALE01/${FUNC_FILE%.c}.o"
+    COMMIT_PREFIX=$(echo "${FUNC_FILE#src/melee/}" | sed 's|/|_|g' | sed 's|\.c||')
+    HEADER_FILE="${FUNC_FILE%.c}.h"
 
-    BRANCH_NAME="decomp-$FUNC_NAME"
-    FUNC_LOG="$LOG_DIR/${FUNC_NAME}_$TIMESTAMP.log"
+    BRANCH_NAME="decomp-$FIRST_NAME"
+    FUNC_LOG="$LOG_DIR/${FIRST_NAME}_$TIMESTAMP.log"
 
+    # Build batch summary for logging
+    BATCH_NAMES=$(echo "$BATCH" | python3 -c "import json,sys; [print(f['name'],f['size']) for f in json.load(sys.stdin)]")
     log ""
-    log "━━━ $FUNC_NAME (${FUNC_SIZE} bytes) ━━━"
-    log "  File: $FUNC_FILE:$FUNC_LINE"
+    if [ "$BATCH_COUNT" -gt 1 ]; then
+        log "━━━ Batch of $BATCH_COUNT functions from $(basename "$FUNC_FILE") ━━━"
+    fi
+    echo "$BATCH_NAMES" | while read -r bname bsize; do
+        log "  $bname (${bsize} bytes)"
+    done
 
     # Check if branch already exists (local or remote)
     if git rev-parse --verify "$BRANCH_NAME" >/dev/null 2>&1 || \
        git ls-remote --heads origin "$BRANCH_NAME" 2>/dev/null | grep -q "$BRANCH_NAME"; then
         log "  Branch $BRANCH_NAME already exists, skipping"
-        progress_save "$FUNC_NAME" "skipped"
+        progress_save "$FIRST_NAME" "skipped"
         continue
     fi
 
-    COMMIT_PREFIX=$(echo "${FUNC_FILE#src/melee/}" | sed 's|/|_|g' | sed 's|\.c||')
-    HEADER_FILE="${FUNC_FILE%.c}.h"
-
-    # Pre-read all context in bash to avoid Claude tool-call round trips
-    CONTEXT_C=$(cat "$FUNC_FILE" 2>/dev/null || echo "(file not found)")
+    # Build trimmed context (stubs + nearby examples) instead of full file
+    ALL_FUNC_NAMES=$(echo "$BATCH" | python3 -c "import json,sys; print(' '.join(f['name'] for f in json.load(sys.stdin)))")
+    CONTEXT_C=$(python3 "$HELPERS" trim-context "$FUNC_FILE" $ALL_FUNC_NAMES 2>/dev/null || cat "$FUNC_FILE" 2>/dev/null || echo "(file not found)")
     CONTEXT_H=$(cat "$HEADER_FILE" 2>/dev/null || echo "(no header)")
 
-    # Extract just this function's assembly from the .s file
-    CONTEXT_ASM=$(python3 "$HELPERS" extract-asm "$ASM_FILE" "$FUNC_NAME" 2>/dev/null || echo "(asm extraction failed)")
+    # Build per-function context (asm + m2c for each target)
+    FUNC_SECTIONS=""
+    while IFS= read -r func_json; do
+        fname=$(echo "$func_json" | python3 -c "import json,sys; print(json.load(sys.stdin)['name'])")
+        fsize=$(echo "$func_json" | python3 -c "import json,sys; print(json.load(sys.stdin)['size'])")
+        fline=$(echo "$func_json" | python3 -c "import json,sys; print(json.load(sys.stdin)['line'])")
 
-    # Pre-run m2c decompilation
-    CONTEXT_M2C=$(python3 -m m2c.main --target ppc-mwcc-c \
-        --context "$REPO_ROOT/build/ctx.c" \
-        --function "$FUNC_NAME" \
-        "$REPO_ROOT/$ASM_FILE" 2>/dev/null || echo "(m2c failed)")
+        func_asm=$(python3 "$HELPERS" extract-asm "$ASM_FILE" "$fname" 2>/dev/null || echo "(asm extraction failed)")
+        func_m2c=$(python3 -m m2c.main --target ppc-mwcc-c \
+            --context "$REPO_ROOT/build/ctx.c" \
+            --function "$fname" \
+            "$REPO_ROOT/$ASM_FILE" 2>/dev/null || echo "(m2c failed)")
 
-    PROMPT="You are autonomously decompiling a function for the Melee decompilation project.
+        FUNC_SECTIONS="${FUNC_SECTIONS}
+--- $fname ($fsize bytes, stub at line $fline) ---
+
+ASSEMBLY:
+$func_asm
+
+m2c DECOMPILATION:
+$func_m2c
+"
+    done < <(echo "$BATCH" | python3 -c "import json,sys; [print(json.dumps(f)) for f in json.load(sys.stdin)]")
+
+    # Build the list of all function names for the prompt
+    ALL_NAMES_LIST=$(echo "$BATCH" | python3 -c "
+import json, sys
+for f in json.load(sys.stdin):
+    print(f'  - {f[\"name\"]} ({f[\"size\"]} bytes, stub marker /// #{f[\"name\"]} at line {f[\"line\"]})')
+")
+
+    PROMPT="You are autonomously decompiling functions for the Melee decompilation project.
 You must work completely autonomously — no human will intervene.
 
-TARGET: $FUNC_NAME
-FILE: $FUNC_FILE (stub marker at line $FUNC_LINE)
-SIZE: $FUNC_SIZE bytes
+TARGETS (decompile ALL of these):
+$ALL_NAMES_LIST
+FILE: $FUNC_FILE
 OBJ: $OBJ_FILE
 
-=== SOURCE FILE ($FUNC_FILE) ===
+=== SOURCE FILE (trimmed context with stubs and nearby examples) ===
 $CONTEXT_C
 
 === HEADER FILE ($HEADER_FILE) ===
 $CONTEXT_H
 
-=== ORIGINAL ASSEMBLY ===
-$CONTEXT_ASM
-
-=== m2c DECOMPILATION ===
-$CONTEXT_M2C
+=== PER-FUNCTION ASSEMBLY AND m2c OUTPUT ===
+$FUNC_SECTIONS
 
 WORKFLOW:
 
@@ -370,7 +404,7 @@ WORKFLOW:
    cp $REPO_ROOT/objdiff.json objdiff.json 2>/dev/null || true
    DO NOT run configure.py — it is already done. Just use ninja to compile after editing.
 
-1. CLEAN UP m2c OUTPUT using patterns from the source file above:
+1. FOR EACH FUNCTION, clean up the m2c output using patterns from the source context:
    - Use gobj->user_data style (not GET_FIGHTER) when nearby functions do
    - Replace hex motion state IDs with ftCo_MS_* enums — BUT VERIFY THE NUMERIC VALUE.
      Count from ftCo_MS_DeadDown=0 in ftCommon/forward.h. A wrong enum is a guaranteed mismatch.
@@ -379,42 +413,41 @@ WORKFLOW:
    - m2c \"&~1\" on a byte means clear LSB. In PPC bitfield order, LSB = x_b7 (NOT x_b0!)
    - Check if PAD_STACK(8) is needed by comparing frame sizes in the asm
 
-2. IMPLEMENT: Replace the \"/// #$FUNC_NAME\" stub marker with your code.
-   Update the header declaration if it uses UNK_RET/UNK_PARAMS.
+2. IMPLEMENT: Replace EACH \"/// #FUNC_NAME\" stub marker with your code.
+   Update header declarations if they use UNK_RET/UNK_PARAMS.
 
 3. BUILD just the target object: ninja $OBJ_FILE 2>&1 | tail -10
    Do NOT run a bare 'ninja' — it will rebuild everything due to worktree timestamps.
    The build MUST succeed (ninja exit code 0).
 
-4. CHECK MATCH (use absolute path to report.json since build/ is a symlink):
-   python3 -c \"import json; [print(fn) for u in json.load(open('$REPO_ROOT/build/GALE01/report.json'))['units'] for fn in u.get('functions',[]) if fn.get('name')=='$FUNC_NAME']\"
+4. CHECK MATCH for each function (use absolute path to report.json since build/ is a symlink):
+   python3 -c \"import json; [print(fn) for u in json.load(open('$REPO_ROOT/build/GALE01/report.json'))['units'] for fn in u.get('functions',[]) if fn.get('name') in {$(echo "$BATCH" | python3 -c "import json,sys; print(','.join(repr(f['name']) for f in json.load(sys.stdin)))")}]\"
 
 5. IF NOT 100%: Compare compiled vs original bytes to find exact differences.
    Use pyelftools to extract compiled bytes from $OBJ_FILE.
    Compare instruction-by-instruction with the original asm.
    Common fixes: wrong enum value, wrong bitfield bit, missing PAD_STACK, wrong inline usage.
 
-6. ITERATE up to 5 times. If still not 100%, give up.
+6. ITERATE up to 5 times per function. If still not 100%, revert ONLY that function's changes.
 
-7. IF 100% MATCH:
+7. FOR EACH FUNCTION AT 100% MATCH:
    - Run: git clang-format
-   - Stage and commit:
+   - Stage and commit EACH matched function separately:
      git add $FUNC_FILE \${FUNC_FILE%.c}.h
-     git commit -m \"$COMMIT_PREFIX: decompile $FUNC_NAME
+     git commit -m \"$COMMIT_PREFIX: decompile FUNC_NAME
 
 Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>\"
 
-8. IF NOT 100%: Revert ALL changes:
+8. FOR FUNCTIONS NOT AT 100%: Revert their changes:
    git checkout -- .
 
-9. OUTPUT on the very last line of your response, exactly one of:
-   SUCCESS: $FUNC_NAME 100% match
-   FAILURE: $FUNC_NAME best=XX.X%"
+9. OUTPUT on the very last line of your response, a summary like:
+   RESULTS: func1=SUCCESS func2=FAILURE(best=XX.X%) func3=SUCCESS"
 
     check_usage
 
     log "  Spawning Claude session..."
-    FUNC_STREAM_LOG="$LOG_DIR/${FUNC_NAME}_${TIMESTAMP}_stream.jsonl"
+    FUNC_STREAM_LOG="$LOG_DIR/${FIRST_NAME}_${TIMESTAMP}_stream.jsonl"
 
     MAX_RETRIES=5
     RETRY=0
@@ -467,7 +500,7 @@ Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>\"
         if grep -v '"status":"allowed"' "$FUNC_STREAM_LOG" 2>/dev/null | grep -qi "hit your limit\|rate.limit\|resets [0-9]"; then
             RETRY=$((RETRY + 1))
             if [ "$RETRY" -gt "$MAX_RETRIES" ]; then
-                log "  Rate limited $MAX_RETRIES times, giving up on $FUNC_NAME"
+                log "  Rate limited $MAX_RETRIES times, giving up"
                 RATE_LIMITED=true
                 break
             fi
@@ -498,7 +531,7 @@ Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>\"
         continue
     fi
 
-    # Parse result from stream JSON result event (not grep-based text matching)
+    # Parse result from stream JSON result event
     RESULT_LINE=$(python3 "$HELPERS" parse-result "$FUNC_STREAM_LOG" 2>/dev/null || echo "status=error")
     RESULT_STATUS=$(echo "$RESULT_LINE" | sed -n 's/^status=//p' | head -1)
 
@@ -513,7 +546,13 @@ Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>\"
 
             # Derive PR title from file path
             FILE_PREFIX=$(echo "${FUNC_FILE#src/melee/}" | sed 's|/.*||')
-            PR_TITLE="$FILE_PREFIX: decompile $FUNC_NAME"
+            if [ "$BATCH_COUNT" -gt 1 ]; then
+                PR_TITLE="$FILE_PREFIX: decompile $BATCH_COUNT functions"
+                PR_FUNCS=$(echo "$BATCH" | python3 -c "import json,sys; print('\n'.join(f'- \`{f[\"name\"]}\` ({f[\"size\"]} bytes)' for f in json.load(sys.stdin)))")
+            else
+                PR_TITLE="$FILE_PREFIX: decompile $FIRST_NAME"
+                PR_FUNCS="- Decompile \`$FIRST_NAME\` — 100% match"
+            fi
 
             log "  Creating PR..."
             PR_URL=$(gh pr create \
@@ -522,7 +561,7 @@ Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>\"
                 --title "$PR_TITLE" \
                 --body "$(cat <<EOF
 ## Summary
-- Decompile \`$FUNC_NAME\` ($FUNC_SIZE bytes) — 100% match
+$PR_FUNCS
 
 ## Verification
 - \`main.dol: OK\` (SHA1 verified)
@@ -537,16 +576,21 @@ EOF
         fi
         # Clean up worktree (branch with commit persists)
         cleanup_worktree "$BRANCH_NAME"
-        TOTAL_SUCCESSES=$((TOTAL_SUCCESSES + 1))
-        progress_save "$FUNC_NAME" "success"
+        TOTAL_SUCCESSES=$((TOTAL_SUCCESSES + BATCH_COUNT))
+        echo "$BATCH" | python3 -c "import json,sys; [None for f in json.load(sys.stdin)]" 2>/dev/null  # validate
+        while IFS= read -r fname; do
+            progress_save "$fname" "success"
+        done < <(echo "$BATCH" | python3 -c "import json,sys; [print(f['name']) for f in json.load(sys.stdin)]")
     else
         BEST=$(echo "$RESULT_LINE" | sed -n 's/.*best=//p' || echo "?")
         log "  ✗ FAILED (best: ${BEST}%)"
         # Clean up worktree and branch
         cleanup_worktree "$BRANCH_NAME"
         git branch -D "$BRANCH_NAME" 2>/dev/null || true
-        TOTAL_FAILURES=$((TOTAL_FAILURES + 1))
-        progress_save "$FUNC_NAME" "failure"
+        TOTAL_FAILURES=$((TOTAL_FAILURES + BATCH_COUNT))
+        while IFS= read -r fname; do
+            progress_save "$fname" "failure"
+        done < <(echo "$BATCH" | python3 -c "import json,sys; [print(f['name']) for f in json.load(sys.stdin)]")
     fi
 
     log "  Log: $FUNC_LOG"
