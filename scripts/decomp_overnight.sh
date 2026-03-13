@@ -382,7 +382,8 @@ WORKFLOW:
 2. IMPLEMENT: Replace the \"/// #$FUNC_NAME\" stub marker with your code.
    Update the header declaration if it uses UNK_RET/UNK_PARAMS.
 
-3. BUILD: ninja 2>&1 | tail -10
+3. BUILD just the target object: ninja $OBJ_FILE 2>&1 | tail -10
+   Do NOT run a bare 'ninja' — it will rebuild everything due to worktree timestamps.
    The build MUST succeed (ninja exit code 0).
 
 4. CHECK MATCH (use absolute path to report.json since build/ is a symlink):
