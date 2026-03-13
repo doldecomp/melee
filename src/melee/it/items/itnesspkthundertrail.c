@@ -7,6 +7,8 @@
 #include "it/it_2725.h"
 #include "it/item.h"
 
+#include <baselib/jobj.h>
+
 /// #it_802AC43C
 
 void it_802AC58C(Item_GObj* gobj)
@@ -47,7 +49,25 @@ void it_802AC604(Item_GObj* gobj)
     Item_80268E5C((HSD_GObj*) gobj, 0, ITEM_ANIM_UPDATE);
 }
 
-/// #itNesspkthundertrail_UnkMotion0_Anim
+bool itNesspkthundertrail_UnkMotion0_Anim(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    HSD_JObj* child = HSD_JObjGetChild(gobj->hsd_obj);
+
+    if (ip->xDD4_itemVar.bombhei.xDDC & 1) {
+        HSD_JObjSetFlagsAll(child, JOBJ_HIDDEN);
+    } else {
+        HSD_JObjClearFlagsAll(child, JOBJ_HIDDEN);
+    }
+
+    ip->xDD4_itemVar.bombhei.xDDC += 1;
+
+    if ((u32) ip->xDD4_itemVar.bombhei.xDD4 == 0U) {
+        return true;
+    }
+    return false;
+    PAD_STACK(8);
+}
 
 /// #itNesspkthundertrail_UnkMotion0_Phys
 
