@@ -126,7 +126,24 @@ bool itTincle_UnkMotion4_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itTincle_UnkMotion4_Phys
+void itTincle_UnkMotion4_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itTincleAttributes* sa = ip->xC4_article_data->x4_specialAttributes;
+    if (ip->xDD4_itemVar.tincle.x20 == 0) {
+        f32 dist;
+        ip->x40_vel.y = -sa->x48;
+        dist = ip->xDD4_itemVar.tincle.x4C - ip->pos.y;
+        if (dist < 0) {
+            dist = -dist;
+        }
+        if (dist > sa->x44) {
+            it_802EC18C(gobj);
+        }
+    } else {
+        ip->xDD4_itemVar.tincle.x20 -= 1;
+    }
+}
 
 bool itTincle_UnkMotion4_Coll(Item_GObj* gobj)
 {

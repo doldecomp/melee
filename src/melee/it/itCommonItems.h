@@ -518,6 +518,12 @@ typedef struct itTincle_ItemVars {
     /* +5C ip+E30 */ f32 x5C;
 } itTincle_ItemVars;
 
+typedef struct itTincleAttributes {
+    /* 0x00 */ u8 pad[0x44];
+    /* 0x44 */ f32 x44;
+    /* 0x48 */ f32 x48;
+} itTincleAttributes;
+
 typedef struct {
     /* ip+DD4 */ float xDD4;
     /* ip+DD8 */ float xDD8;
