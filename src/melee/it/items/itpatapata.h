@@ -14,7 +14,7 @@
 /* 2E0974 */ bool itPatapata_UnkMotion2_Anim(Item_GObj* gobj);
 /* 2E09BC */ void itPatapata_UnkMotion3_Phys(Item_GObj* gobj);
 /* 2E0B78 */ bool itPatapata_UnkMotion3_Coll(Item_GObj* gobj);
-/* 2E0D9C */ UNK_RET it_802E0D9C(UNK_PARAMS);
+/* 2E0D9C */ void it_802E0D9C(Item_GObj* gobj);
 /* 2E0E10 */ bool itPatapata_UnkMotion3_Anim(Item_GObj* gobj);
 /* 2E0EE0 */ bool it_2725_Logic4_DmgReceived(Item_GObj*);
 /* 2E0F1C */ bool it_802E0F1C(Item_GObj*);
