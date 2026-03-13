@@ -9,6 +9,7 @@
 #include <melee/gr/forward.h>
 #include <melee/it/forward.h>
 #include <melee/lb/forward.h>
+#include <melee/lb/types.h>
 #include <melee/sc/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
@@ -938,6 +939,11 @@ struct grCastle_GroundVars {
     /*  +0 gp+E0 */ HSD_Spline** xE0;
 };
 
+struct grCastle_GroundVars3 {
+    /* +00 gp+C4 */ u8 pad_0[0x1C];
+    /* +1C gp+E0 */ DynamicsDesc x1C[12];
+};
+
 struct grCastle_GroundVars2 {
     /*  +0 gp+C4 */ HSD_GObj* xC4;
     /*  +0 gp+C8 */ HSD_GObj* xC8;
@@ -1072,7 +1078,8 @@ struct Ground {
     int x68;
     int x6C;
     int x70;
-    char pad_40[0xC4 - 0x74];
+    char pad_74[0xC0 - 0x74];
+    f32 xC0;
 
     union {
         /// @todo This union is named 'u', from assert statements
@@ -1083,6 +1090,7 @@ struct Ground {
             struct grBigBlueRoute_GroundVars bigblueroute;
             struct grCastle_GroundVars castle;
             struct grCastle_GroundVars2 castle2;
+            struct grCastle_GroundVars3 castle3;
             struct grCorneria_GroundVars corneria;
             struct grGreatBay_GroundVars greatbay;
             struct grGreatBay_GroundVars2 greatbay2;

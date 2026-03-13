@@ -37,13 +37,6 @@ typedef struct itZGShell_Attrs {
     Vec x3C;
 } itZGShell_Attrs;
 
-typedef struct itGShell_HurtInit {
-    /* 0x00 */ s32 state;
-    /* 0x04 */ Vec3 a_offset;
-    /* 0x10 */ Vec3 b_offset;
-    /* 0x1C */ float scale;
-} itGShell_HurtInit;
-
 /* 2DFFA0 */ static void it_802DFFA0(Item_GObj* gobj);
 
 void it_802DDB38(Item_GObj* gobj)
@@ -191,7 +184,7 @@ void it_2725_Logic11_PickedUp(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     it_80275474(gobj);
-    M2C_FIELD(ip, s32*, 0xE0C) = 0;
+    ip->xDD4_itemVar.zgshell.xE0C = 0;
     ip->xDD4_itemVar.zgshell.xE1C_b0 = 0;
     Item_80268E5C(gobj, 2, 2);
 }
@@ -488,8 +481,7 @@ void itZGShell_Logic11_Destroyed(Item_GObj* gobj)
 void it_802DFF14(Item_GObj* gobj, s32 arg1)
 {
     Item* ip = GET_ITEM(gobj);
-    itGShell_HurtInit capsule =
-        M2C_FIELD(ip, itGShell_HurtInit*, 0xE2C);
+    itGShell_HurtInit capsule = ip->xDD4_itemVar.zgshell.x58_hurtInit;
     if (arg1 != 0) {
         capsule.a_offset.y = 6.0f;
         capsule.scale *= 2.0f;

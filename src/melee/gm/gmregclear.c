@@ -1010,11 +1010,17 @@ int fn_8017F008(void)
 
 /// #fn_8017F09C
 
+typedef struct fn_8017F14C_arg {
+    /* 0x00 */ char pad_0[0x98];
+    /* 0x98 */ s32 x98;
+} fn_8017F14C_arg;
+
 s32 fn_8017F14C(void* arg0)
 {
+    fn_8017F14C_arg* p = arg0;
     struct lbl_80472D28_t* data = &lbl_80472D28;
     if (gm_8016AE38()->x24C8.x4_7) {
-        s32 val = *(s32*) ((u8*) arg0 + 0x98);
+        s32 val = p->x98;
         s32 ret = val;
         if (val > 9999) {
             ret = 9999;

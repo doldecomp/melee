@@ -24,8 +24,8 @@ void it_802CA49C(Item_GObj* gobj)
     ip->xDD4_itemVar.pokemon.timer = -1;
     ip->xDBC_itcmd_var4.flags.x0 = false;
     ip->xDD4_itemVar.pokemon.x64 = 0;
-    M2C_FIELD(ip, f32*, 0xE3C) = 0.0f;
-    M2C_FIELD(ip, f32*, 0xE40) = 0.0f;
+    ip->xDD4_itemVar.pokemon.x68 = 0.0f;
+    ip->xDD4_itemVar.pokemon.x6C = 0.0f;
     it_80279CDC(gobj, sa->x0);
     it_802CAA40(gobj);
     Item_8026AE84(ip, 0x271E, 127, 64);
@@ -83,15 +83,12 @@ bool it_802CA654(Item_GObj* gobj)
 void it_802CA6A0(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    void* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itKamexAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
 
     if (ip->xDD4_itemVar.pokemon.timer == -1) {
-        ip->xDD4_itemVar.pokemon.timer =
-            M2C_FIELD(attrs, s32*, 0x4);
-        M2C_FIELD(ip, f32*, 0xE3C) =
-            M2C_FIELD(attrs, f32*, 0x18);
-        M2C_FIELD(ip, f32*, 0xE40) =
-            M2C_FIELD(attrs, f32*, 0x1C);
+        ip->xDD4_itemVar.pokemon.timer = attrs->timer;
+        ip->xDD4_itemVar.pokemon.x68 = attrs->x18;
+        ip->xDD4_itemVar.pokemon.x6C = attrs->x1C;
     }
     Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
     ip->entered_hitlag = efLib_PauseAll;
@@ -110,7 +107,7 @@ void itKamex_UnkMotion1_Phys(Item_GObj* gobj)
             (ip->x40_vel.x <= 0.0f && ip->facing_dir > 0.0f))
         {
             ip->x40_vel.x +=
-                M2C_FIELD(ip, f32*, 0xE40) * ip->facing_dir;
+                ip->xDD4_itemVar.pokemon.x6C * ip->facing_dir;
         }
     }
     if (ip->ground_or_air == GA_Air) {
@@ -134,7 +131,7 @@ void it_802CA8DC(Item_GObj* gobj)
     Item* ip = gobj->user_data;
     if (ip->xDBC_itcmd_var4.flags.x0) {
         it_802CAB10(gobj);
-        ip->x40_vel.x = M2C_FIELD(ip, f32*, 0xE3C) * -ip->facing_dir;
+        ip->x40_vel.x = ip->xDD4_itemVar.pokemon.x68 * -ip->facing_dir;
         ip->xDBC_itcmd_var4.flags.x0 = false;
     }
 }
