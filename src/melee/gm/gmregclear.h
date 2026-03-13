@@ -93,7 +93,7 @@
 /* 180AE4 */ s32 gm_80180AE4(void);
 /* 180AF4 */ Fighter_GObj* gm_80180AF4(void);
 /* 180B18 */ UNK_RET gm_80180B18(UNK_PARAMS);
-/* 180BA0 */ UNK_RET gm_80180BA0(UNK_PARAMS);
+/* 180BA0 */ void gm_80180BA0(void);
 /* 180C14 */ void fn_80180C14(HSD_GObj* gobj);
 /* 180C60 */ UNK_RET fn_80180C60(UNK_PARAMS);
 /* 181598 */ UNK_RET fn_80181598(UNK_PARAMS);
