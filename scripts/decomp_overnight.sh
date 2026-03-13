@@ -234,6 +234,7 @@ while true; do
         log "  Running configure.py..."
         python3 configure.py --wrapper wine 2>&1 >> "$MAIN_LOG"
         log "  Running ninja..."
+        set +o pipefail
         ninja 2>&1 | python3 -u -c "
 import sys, re, signal
 signal.signal(signal.SIGINT, lambda *a: sys.exit(0))
@@ -246,7 +247,12 @@ for line in sys.stdin:
         bar = '█' * filled + '░' * (30 - filled)
         print(f'\r  [{bar}] {cur}/{total} ({pct}%)', end='', flush=True)
 print()
-" || { log "ERROR: Master doesn't build clean. Aborting."; exit 1; }
+"
+        NINJA_EXIT=${PIPESTATUS[0]}
+        set -o pipefail
+        if [ "$NINJA_EXIT" -ne 0 ]; then
+            log "ERROR: Master doesn't build clean. Aborting."; exit 1
+        fi
         LAST_BUILT_HEAD=$CURRENT_HEAD
         log "Master builds OK"
     else
