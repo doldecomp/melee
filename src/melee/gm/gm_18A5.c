@@ -414,7 +414,7 @@ void fn_8018AA74(HSD_JObj* jobj, s32 entry_idx, s32 slot_idx)
 
 /// #fn_8018B090
 
-static s32 lbl_804DA67C = (s32) 0xFFFF00FF;
+static GXColor lbl_804DA67C = { 255, 255, 0, 255 };
 
 /// Draws tournament bracket lines for different bracket types (0-3).
 void fn_8018C8D4(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
@@ -427,10 +427,10 @@ void fn_8018C8D4(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
     s32 half, center, right;
     s32 half_h, third_h;
     s32 mid_y, bot_y, two_third_y;
-    s32 c0, c1, c2, c3, c4, c5, c6, c7, c8, c9;
-    s32 c10, c11, c12, c13, c14, c15, c16, c17, c18, c19;
-    s32 c20, c21, c22, c23, c24, c25, c26, c27, c28, c29;
-    s32 c30, c31, c32, c33;
+    GXColor c0, c1, c2, c3, c4, c5, c6, c7, c8, c9;
+    GXColor c10, c11, c12, c13, c14, c15, c16, c17, c18, c19;
+    GXColor c20, c21, c22, c23, c24, c25, c26, c27, c28, c29;
+    GXColor c30, c31, c32, c33;
 
     c0 = lbl_804DA67C;
     thickness = data->x1C;
@@ -439,29 +439,29 @@ void fn_8018C8D4(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
     case 0:
         c1 = c0;
         DrawRectangle((f32) arg1, (f32) arg2, thickness, (f32) arg4,
-                      (GXColor*) &c1);
+                      &c1);
         if (data->x20.g == 0) {
-            c2 = *(s32*) &data->x20;
+            c2 = data->x20;
             DrawRectangle((f32) arg1, (f32) arg2, thickness, (f32) arg4,
-                          (GXColor*) &c2);
+                          &c2);
         }
         return;
 
     case 1:
         c3 = c0;
         DrawRectangle((f32) arg1, (f32) arg2, thickness, (f32) arg4,
-                      (GXColor*) &c3);
+                      &c3);
         if (data->x20.g == 0) {
             if (data->x4C == 0) {
                 half_h = arg4 / 2;
-                c4 = *(s32*) &data->x20;
+                c4 = data->x20;
                 DrawRectangle((f32) arg1, (f32) (arg2 + half_h), thickness,
-                              (f32) half_h, (GXColor*) &c4);
+                              (f32) half_h, &c4);
                 return;
             }
-            c5 = *(s32*) &data->x20;
+            c5 = data->x20;
             DrawRectangle((f32) arg1, (f32) arg2, thickness,
-                          (f32) (arg4 / 2), (GXColor*) &c5);
+                          (f32) (arg4 / 2), &c5);
         }
         break;
 
@@ -471,48 +471,48 @@ void fn_8018C8D4(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
         half_h = arg4 / 2;
         c6 = c0;
         DrawRectangle((f32) center, (f32) arg2, thickness, (f32) half_h,
-                      (GXColor*) &c6);
+                      &c6);
 
         neg_thickness = -thickness;
         mid_y = arg2 + half_h;
         c7 = c0;
         DrawRectangle((f32) (arg1 + 0x2B), (f32) mid_y,
                       ((f32) arg3 + thickness) - 43.0f, neg_thickness,
-                      (GXColor*) &c7);
+                      &c7);
 
         c8 = c0;
         DrawRectangle((f32) (arg1 + 0x2B), (f32) mid_y, thickness,
-                      (f32) half_h, (GXColor*) &c8);
+                      (f32) half_h, &c8);
 
         right = arg1 + arg3;
         c9 = c0;
         DrawRectangle((f32) right, (f32) mid_y, thickness, (f32) half_h,
-                      (GXColor*) &c9);
+                      &c9);
 
         if (data->x20.g == 0) {
             if (data->x4C == 0) {
-                c10 = *(s32*) &data->x20;
+                c10 = data->x20;
                 DrawRectangle((f32) (arg1 + 0x2B), (f32) mid_y, thickness,
-                              (f32) half_h, (GXColor*) &c10);
-                c11 = *(s32*) &data->x20;
+                              (f32) half_h, &c10);
+                c11 = data->x20;
                 DrawRectangle((f32) (arg1 + 0x2B), (f32) mid_y,
                               (f32) (half - 0x2B), neg_thickness,
-                              (GXColor*) &c11);
+                              &c11);
                 return;
             }
             if (data->x78 == 0) {
-                c12 = *(s32*) &data->x20;
+                c12 = data->x20;
                 DrawRectangle((f32) right, (f32) mid_y, thickness,
-                              (f32) half_h, (GXColor*) &c12);
-                c13 = *(s32*) &data->x20;
+                              (f32) half_h, &c12);
+                c13 = data->x20;
                 DrawRectangle((f32) center, (f32) mid_y,
                               (f32) half + thickness, neg_thickness,
-                              (GXColor*) &c13);
+                              &c13);
                 return;
             }
-            c14 = *(s32*) &data->x20;
+            c14 = data->x20;
             DrawRectangle((f32) center, (f32) arg2, thickness, (f32) half_h,
-                          (GXColor*) &c14);
+                          &c14);
         }
         break;
 
@@ -524,92 +524,92 @@ void fn_8018C8D4(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
 
         c15 = c0;
         DrawRectangle((f32) center, (f32) mid_y, thickness,
-                      (f32) (third_h - 2), (GXColor*) &c15);
+                      (f32) (third_h - 2), &c15);
 
         c16 = c0;
         DrawRectangle((f32) arg1, (f32) arg2, thickness, (f32) third_h,
-                      (GXColor*) &c16);
+                      &c16);
 
         right = arg1 + arg3;
         c17 = c0;
         DrawRectangle((f32) right, (f32) arg2, thickness, (f32) third_h,
-                      (GXColor*) &c17);
+                      &c17);
 
         bot_y = (arg2 + arg4) - third_h;
         c18 = c0;
         DrawRectangle((f32) arg1, (f32) bot_y, thickness, (f32) third_h,
-                      (GXColor*) &c18);
+                      &c18);
 
         c19 = c0;
         DrawRectangle((f32) right, (f32) bot_y, thickness, (f32) third_h,
-                      (GXColor*) &c19);
+                      &c19);
 
         neg_thickness = -thickness;
         total_width = (f32) arg3 + thickness;
         c20 = c0;
         DrawRectangle((f32) arg1, (f32) mid_y, total_width, neg_thickness,
-                      (GXColor*) &c20);
+                      &c20);
 
         c21 = c0;
         DrawRectangle((f32) arg1, (f32) bot_y, total_width, neg_thickness,
-                      (GXColor*) &c21);
+                      &c21);
 
         if (data->x20.g == 0) {
             if (data->x4C == 0) {
                 two_third_y = arg2 + ((arg4 * 2) / 3);
-                c22 = *(s32*) &data->x20;
+                c22 = data->x20;
                 DrawRectangle((f32) arg1, (f32) two_third_y, thickness,
-                              (f32) third_h, (GXColor*) &c22);
-                c23 = *(s32*) &data->x20;
+                              (f32) third_h, &c22);
+                c23 = data->x20;
                 DrawRectangle((f32) arg1, (f32) two_third_y, (f32) half,
-                              neg_thickness, (GXColor*) &c23);
-                c24 = *(s32*) &data->x20;
+                              neg_thickness, &c23);
+                c24 = data->x20;
                 DrawRectangle((f32) center, (f32) (arg2 + (arg4 / 2)),
                               thickness, (f32) ((arg4 / 6) - 1),
-                              (GXColor*) &c24);
+                              &c24);
                 return;
             }
             if (data->x78 == 0) {
                 two_third_y = arg2 + ((arg4 * 2) / 3);
-                c25 = *(s32*) &data->x20;
+                c25 = data->x20;
                 DrawRectangle((f32) right, (f32) two_third_y, thickness,
-                              (f32) third_h, (GXColor*) &c25);
-                c26 = *(s32*) &data->x20;
+                              (f32) third_h, &c25);
+                c26 = data->x20;
                 DrawRectangle((f32) center, (f32) two_third_y, (f32) half,
-                              neg_thickness, (GXColor*) &c26);
-                c27 = *(s32*) &data->x20;
+                              neg_thickness, &c26);
+                c27 = data->x20;
                 DrawRectangle((f32) center, (f32) (arg2 + (arg4 / 2)),
                               thickness, (f32) ((arg4 / 6) - 1),
-                              (GXColor*) &c27);
+                              &c27);
                 return;
             }
             if (data->xA4 == 0) {
-                c28 = *(s32*) &data->x20;
+                c28 = data->x20;
                 DrawRectangle((f32) arg1, (f32) arg2, thickness,
-                              (f32) third_h, (GXColor*) &c28);
-                c29 = *(s32*) &data->x20;
+                              (f32) third_h, &c28);
+                c29 = data->x20;
                 DrawRectangle((f32) arg1, (f32) mid_y, (f32) half,
-                              neg_thickness, (GXColor*) &c29);
-                c30 = *(s32*) &data->x20;
+                              neg_thickness, &c29);
+                c30 = data->x20;
                 DrawRectangle((f32) center, (f32) mid_y, thickness,
-                              (f32) ((arg4 / 6) - 1), (GXColor*) &c30);
+                              (f32) ((arg4 / 6) - 1), &c30);
                 return;
             }
-            c31 = *(s32*) &data->x20;
+            c31 = data->x20;
             DrawRectangle((f32) right, (f32) arg2, thickness,
-                          (f32) third_h, (GXColor*) &c31);
-            c32 = *(s32*) &data->x20;
+                          (f32) third_h, &c31);
+            c32 = data->x20;
             DrawRectangle((f32) center, (f32) mid_y, (f32) half,
-                          neg_thickness, (GXColor*) &c32);
-            c33 = *(s32*) &data->x20;
+                          neg_thickness, &c32);
+            c33 = data->x20;
             DrawRectangle((f32) center, (f32) mid_y, thickness,
-                          (f32) ((arg4 / 6) - 1), (GXColor*) &c33);
+                          (f32) ((arg4 / 6) - 1), &c33);
         }
         break;
     }
 }
 
-static s32 lbl_804DA684 = (s32) 0xFFFF00FF;
+static GXColor lbl_804DA684 = { 255, 255, 0, 255 };
 
 /// Draws tournament bracket connector lines with optional tail segments.
 void fn_8018D50C(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
@@ -621,8 +621,8 @@ void fn_8018D50C(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
     f32 neg_thickness;
     s32 right;
     s32 bottom;
-    s32 c0, c1, c2, c3, c4, c5, c6, c7, c8, c9;
-    s32 c10, c11, c12, c13, c14, c15, c16, c17, c18, c19, c20;
+    GXColor c0, c1, c2, c3, c4, c5, c6, c7, c8, c9;
+    GXColor c10, c11, c12, c13, c14, c15, c16, c17, c18, c19, c20;
 
     tm = gm_8018F634();
     c20 = lbl_804DA684;
@@ -630,37 +630,37 @@ void fn_8018D50C(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
     thickness = data->x1C;
     c1 = lbl_804DA684;
     DrawRectangle((f32) arg1, (f32) arg2, thickness, (f32) arg4,
-                  (GXColor*) &c1);
+                  &c1);
 
     right = arg1 + arg3;
     c2 = c0;
     DrawRectangle((f32) right, (f32) arg2, thickness, (f32) arg4,
-                  (GXColor*) &c2);
+                  &c2);
 
     neg_thickness = -thickness;
     c3 = c0;
     DrawRectangle((f32) arg1, (f32) arg5, (f32) arg3 + thickness,
-                  neg_thickness, (GXColor*) &c3);
+                  neg_thickness, &c3);
 
     if (data->x20.g == 0) {
         if (data->x4C == 0) {
-            c4 = *(s32*) &data->x20;
+            c4 = data->x20;
             DrawRectangle((f32) arg1, (f32) arg2, thickness, (f32) arg4,
-                          (GXColor*) &c4);
-            c5 = *(s32*) &data->x20;
+                          &c4);
+            c5 = data->x20;
             DrawRectangle((f32) arg1, (f32) arg5,
                           (f32) (arg3 / 2) + thickness, neg_thickness,
-                          (GXColor*) &c5);
+                          &c5);
         } else {
-            c6 = *(s32*) &data->x20;
+            c6 = data->x20;
             DrawRectangle((f32) right, (f32) arg2, thickness, (f32) arg4,
-                          (GXColor*) &c6);
+                          &c6);
             {
                 s32 half2 = arg3 / 2;
-                c7 = *(s32*) &data->x20;
+                c7 = data->x20;
                 DrawRectangle((f32) (arg1 + half2), (f32) arg5,
                               (f32) half2 + thickness, neg_thickness,
-                              (GXColor*) &c7);
+                              &c7);
             }
         }
     }
@@ -670,11 +670,11 @@ void fn_8018D50C(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
             bottom = arg2 + arg4;
             c8 = c0;
             DrawRectangle((f32) right, (f32) bottom, thickness, -70.0f,
-                          (GXColor*) &c8);
+                          &c8);
             if (data->x20.g == 0 && data->x4C != 0) {
-                c9 = *(s32*) &data->x20;
+                c9 = data->x20;
                 DrawRectangle((f32) right, (f32) bottom, thickness, -70.0f,
-                              (GXColor*) &c9);
+                              &c9);
             }
         }
         return;
@@ -683,21 +683,21 @@ void fn_8018D50C(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
             bottom = arg2 + arg4;
             c10 = c0;
             DrawRectangle((f32) arg1, (f32) bottom, thickness, -60.0f,
-                          (GXColor*) &c10);
+                          &c10);
             if (data->x20.g == 0 && data->x4C == 0) {
-                c11 = *(s32*) &data->x20;
+                c11 = data->x20;
                 DrawRectangle((f32) arg1, (f32) bottom, thickness, -60.0f,
-                              (GXColor*) &c11);
+                              &c11);
             }
         } else if (data->x5E != 0) {
             bottom = arg2 + arg4;
             c12 = c0;
             DrawRectangle((f32) right, (f32) bottom, thickness, -60.0f,
-                          (GXColor*) &c12);
+                          &c12);
             if (data->x20.g == 0 && data->x4C != 0) {
-                c13 = *(s32*) &data->x20;
+                c13 = data->x20;
                 DrawRectangle((f32) right, (f32) bottom, thickness, -60.0f,
-                              (GXColor*) &c13);
+                              &c13);
             }
         }
     } else if (tm->entrants == 5) {
@@ -705,11 +705,11 @@ void fn_8018D50C(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
             bottom = arg2 + arg4;
             c14 = c0;
             DrawRectangle((f32) right, (f32) bottom, thickness, -40.0f,
-                          (GXColor*) &c14);
+                          &c14);
             if (data->x20.g == 0 && data->x4C != 0) {
-                c15 = *(s32*) &data->x20;
+                c15 = data->x20;
                 DrawRectangle((f32) right, (f32) bottom, thickness, -40.0f,
-                              (GXColor*) &c15);
+                              &c15);
             }
         }
     } else if (tm->entrants == 7) {
@@ -718,21 +718,21 @@ void fn_8018D50C(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
                 bottom = arg2 + arg4;
                 c16 = c0;
                 DrawRectangle((f32) right, (f32) bottom, thickness, -30.0f,
-                              (GXColor*) &c16);
+                              &c16);
                 if (data->x20.g == 0 && data->x4C != 0) {
-                    c17 = *(s32*) &data->x20;
+                    c17 = data->x20;
                     DrawRectangle((f32) right, (f32) bottom, thickness,
-                                  -30.0f, (GXColor*) &c17);
+                                  -30.0f, &c17);
                 }
             } else {
                 bottom = arg2 + 0x1E;
                 c18 = c0;
                 DrawRectangle((f32) right, (f32) bottom, thickness, -30.0f,
-                              (GXColor*) &c18);
+                              &c18);
                 if (data->x20.g == 0 && data->x4C != 0) {
-                    c19 = *(s32*) &data->x20;
+                    c19 = data->x20;
                     DrawRectangle((f32) right, (f32) bottom, thickness,
-                                  -30.0f, (GXColor*) &c19);
+                                  -30.0f, &c19);
                 }
             }
         }
@@ -813,78 +813,78 @@ void fn_8018DF68(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4,
     s32 left_third;
     s32 right_third;
     s32 half;
-    s32 c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10;
+    GXColor c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10;
 
     PAD_STACK(8);
 
-    c0 = 0xFFFF00FF;
-    c10 = 0xFFFF00FF;
+    c0 = (GXColor) { 255, 255, 0, 255 };
+    c10 = (GXColor) { 255, 255, 0, 255 };
     thickness = ((BracketEntry*) data)->x1C;
-    c1 = 0xFFFF00FF;
+    c1 = (GXColor) { 255, 255, 0, 255 };
     DrawRectangle((f32) arg1, (f32) arg2, thickness, (f32) arg4,
-                  (GXColor*) &c1);
+                  &c1);
 
     right = arg1 + arg3;
     c2 = c10;
     DrawRectangle((f32) right, (f32) arg2, thickness, (f32) arg4,
-                  (GXColor*) &c2);
+                  &c2);
 
     third = arg3 / 3;
     left_third = arg1 + third;
     c3 = c10;
     DrawRectangle((f32) left_third, (f32) arg2, thickness, (f32) arg4,
-                  (GXColor*) &c3);
+                  &c3);
 
     right_third = right - third;
     c4 = c10;
     DrawRectangle((f32) right_third, (f32) arg2, thickness, (f32) arg4,
-                  (GXColor*) &c4);
+                  &c4);
 
     neg_thickness = -thickness;
     c5 = c10;
     DrawRectangle((f32) arg1, (f32) arg5, (f32) arg3 + thickness,
-                  neg_thickness, (GXColor*) &c5);
+                  neg_thickness, &c5);
 
     if (data[0x21] == 0) {
         if (data[0x4C] == 0) {
-            c6 = *(s32*) &((BracketEntry*) data)->x20;
+            c6 = ((BracketEntry*) data)->x20;
             DrawRectangle((f32) arg1, (f32) arg2, thickness, (f32) arg4,
-                          (GXColor*) &c6);
-            c7 = *(s32*) &((BracketEntry*) data)->x20;
+                          &c6);
+            c7 = ((BracketEntry*) data)->x20;
             DrawRectangle((f32) arg1, (f32) arg5,
                           (f32) (arg3 / 2) + thickness, neg_thickness,
-                          (GXColor*) &c7);
+                          &c7);
             return;
         }
         if (data[0x78] == 0) {
-            c8 = *(s32*) &((BracketEntry*) data)->x20;
+            c8 = ((BracketEntry*) data)->x20;
             DrawRectangle((f32) left_third, (f32) arg2, thickness,
-                          (f32) arg4, (GXColor*) &c8);
-            c0 = *(s32*) &((BracketEntry*) data)->x20;
+                          (f32) arg4, &c8);
+            c0 = ((BracketEntry*) data)->x20;
             DrawRectangle((f32) left_third, (f32) arg5,
                           ((f32) (arg3 / 2) + thickness) - (f32) third,
-                          neg_thickness, (GXColor*) &c0);
+                          neg_thickness, &c0);
             return;
         }
         if (data[0xA4] == 0) {
-            c9 = *(s32*) &((BracketEntry*) data)->x20;
+            c9 = ((BracketEntry*) data)->x20;
             DrawRectangle((f32) right_third, (f32) arg2, thickness,
-                          (f32) arg4, (GXColor*) &c9);
+                          (f32) arg4, &c9);
             half = arg3 / 2;
-            c10 = *(s32*) &((BracketEntry*) data)->x20;
+            c10 = ((BracketEntry*) data)->x20;
             DrawRectangle((f32) (arg1 + half), (f32) arg5,
                           ((f32) half + thickness) - (f32) third,
-                          neg_thickness, (GXColor*) &c10);
+                          neg_thickness, &c10);
             return;
         }
-        c0 = *(s32*) &((BracketEntry*) data)->x20;
+        c0 = ((BracketEntry*) data)->x20;
         DrawRectangle((f32) right, (f32) arg2, thickness, (f32) arg4,
-                      (GXColor*) &c0);
+                      &c0);
         half = arg3 / 2;
-        c10 = *(s32*) &((BracketEntry*) data)->x20;
+        c10 = ((BracketEntry*) data)->x20;
         DrawRectangle((f32) (arg1 + half), (f32) arg5,
                       (f32) half + thickness, neg_thickness,
-                      (GXColor*) &c10);
+                      &c10);
     }
 }
 
