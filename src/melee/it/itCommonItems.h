@@ -627,14 +627,24 @@ typedef struct itPokemonAttributes {
 typedef struct {
     s16 x0;
     u8 padding[0xE34 - 0xDD8];
-    s32 timer;
-    int x64;
-    int x68;
+    union {
+        s32 timer;
+        f32 timer_f;
+    };
+    union {
+        int x64;
+        f32 x64_f;
+    };
+    union {
+        int x68;
+        f32 x68_f;
+    };
     int x6C;
     union {
         f32 xE44;
         s32 xE44_s32;
     };
+    s32 xE48;
 } itPokemon_ItemVars;
 
 typedef struct itHitodeman_ItemVars {
