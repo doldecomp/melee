@@ -1,5 +1,7 @@
 #include "itpikachutjoltair.h"
 
+#include "db/db.h"
+#include "it/item.h"
 #include "lb/lb_00B0.h"
 
 #include <placeholder.h>
@@ -58,7 +60,16 @@ void it_802B43B0(Item_GObj* gobj)
     }
 }
 
-/// #it_802B43D0
+void it_802B43D0(Item_GObj* gobj, HSD_GObj* arg1)
+{
+    Item* ip = GET_ITEM(gobj);
+    it_8026B3A8(gobj);
+    ip->xDC8_word.flags.x13 = 0;
+    it_80272940(gobj);
+    Item_80268E5C((HSD_GObj*) gobj, 0, 2);
+    Item_802694CC((HSD_GObj*) gobj);
+    db_80225DD8(gobj, arg1);
+}
 
 /// #itPikachutjoltair_UnkMotion0_Anim
 
