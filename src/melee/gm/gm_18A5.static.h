@@ -12,6 +12,35 @@ static HSD_Archive* lbl_804D6648;
 static SceneDesc* lbl_804D664C;
 static SceneDesc* lbl_804D6650;
 
+typedef struct BracketSrcEntry {
+    /* 0x00 */ u8 x0;
+    /* 0x01 */ u8 x1;
+    /* 0x02 */ u8 x2;
+    /* 0x03 */ u8 x3;
+    /* 0x04 */ u8 x4;
+    /* 0x05 */ u8 x5;
+    /* 0x06 */ u8 x6;
+    /* 0x07 */ u8 pad7;
+    /* 0x08 */ s32 x8;
+    /* 0x0C */ s32 xC;
+    /* 0x10 */ s32 x10;
+    /* 0x14 */ s32 x14;
+    /* 0x18 */ u8 x18;
+    /* 0x19 */ u8 x19;
+    /* 0x1A */ u8 x1A;
+    /* 0x1B */ u8 x1B;
+    /* 0x1C */ u8 x1C;
+    /* 0x1D */ u8 x1D;
+    /* 0x1E */ u8 x1E;
+    /* 0x1F */ u8 x1F;
+    /* 0x20 */ u8 x20;
+    /* 0x21 */ u8 x21;
+    /* 0x22 */ u8 x22;
+    /* 0x23 */ u8 x23;
+    /* 0x24 */ u8 x24;
+    /* 0x25 */ u8 pad25[3];
+} BracketSrcEntry;
+
 typedef struct BracketEntry {
     /* 0x00 */ u8 x0;
     /* 0x01 */ u8 x1;

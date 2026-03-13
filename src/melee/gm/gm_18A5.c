@@ -54,7 +54,7 @@ void fn_8018A514(int count, float val)
 {
     BracketEntry* entries = lbl_80473AB8;
     s32 region;
-    u8* src;
+    BracketSrcEntry* src;
     s32 i;
     s32 n;
     BracketEntry* entry;
@@ -67,19 +67,19 @@ void fn_8018A514(int count, float val)
         region = 1;
     }
 
-    src = *(u8**) ((u8*) entries + region * 4 + 0x3700);
+    src = *(BracketSrcEntry**) ((u8*) entries + region * 4 + 0x3700);
 
     if (count < 9) {
         for (i = 0; i < count; i++) {
-            src += lbl_803D9D20.x0[i + 0x20] * 0x28;
+            src += lbl_803D9D20.x0[i + 0x20];
         }
     } else if (count < 14) {
         for (i = 9; i < count; i++) {
-            src += lbl_803D9D20.x0[i + 0x20] * 0x28;
+            src += lbl_803D9D20.x0[i + 0x20];
         }
     } else {
         for (i = 14; i < count; i++) {
-            src += lbl_803D9D20.x0[i + 0x20] * 0x28;
+            src += lbl_803D9D20.x0[i + 0x20];
         }
     }
 
@@ -87,27 +87,27 @@ void fn_8018A514(int count, float val)
     entry = entries;
 
     for (i = 0; i < n; i++) {
-        entry->x0 = src[0];
-        entry->x1 = src[1];
-        entry->x2 = src[2];
-        entry->x3 = src[3];
-        entry->x4 = src[4];
-        entry->x5 = src[5];
-        entry->x6 = src[6];
+        entry->x0 = src->x0;
+        entry->x1 = src->x1;
+        entry->x2 = src->x2;
+        entry->x3 = src->x3;
+        entry->x4 = src->x4;
+        entry->x5 = src->x5;
+        entry->x6 = src->x6;
         entry->x1C = val;
-        entry->xC = *(s32*) (src + 0x08);
-        entry->x14 = *(s32*) (src + 0x0C);
-        entry->x10 = *(s32*) (src + 0x10);
-        entry->x18 = *(s32*) (src + 0x14);
-        entry->x20.r = src[0x18];
-        entry->x20.g = src[0x1A];
-        entry->x20.b = src[0x1C];
-        entry->x20.a = src[0x1E];
-        entry->x24 = src[0x19];
-        entry->x25 = src[0x1B];
-        entry->x26 = src[0x1D];
-        entry->x27 = src[0x1F];
-        entry->x28 = src[0x20];
+        entry->xC = src->x8;
+        entry->x14 = src->xC;
+        entry->x10 = src->x10;
+        entry->x18 = src->x14;
+        entry->x20.r = src->x18;
+        entry->x20.g = src->x1A;
+        entry->x20.b = src->x1C;
+        entry->x20.a = src->x1E;
+        entry->x24 = src->x19;
+        entry->x25 = src->x1B;
+        entry->x26 = src->x1D;
+        entry->x27 = src->x1F;
+        entry->x28 = src->x20;
         entry->x52 = 9;
         entry->x32 = 0;
         entry->x7E = 9;
@@ -116,11 +116,11 @@ void fn_8018A514(int count, float val)
         entry->x8A = 0;
         entry->xD6 = 9;
         entry->xB6 = 0;
-        entry->x30 = src[0x21];
-        entry->x5C = src[0x22];
-        entry->x88 = src[0x23];
-        entry->xB4 = src[0x24];
-        src += 0x28;
+        entry->x30 = src->x21;
+        entry->x5C = src->x22;
+        entry->x88 = src->x23;
+        entry->xB4 = src->x24;
+        src++;
         entry++;
     }
 
