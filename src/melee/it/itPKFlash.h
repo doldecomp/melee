@@ -15,7 +15,7 @@ typedef struct itPKFlush_ItemVars {
 
 typedef struct itPKFlushExplode_ItemVars {
     float xDD4;
-    s32 xDD8;
+    float xDD8;
     HSD_GObj* xDDC;
 } itPKFlushExplode_ItemVars;
 

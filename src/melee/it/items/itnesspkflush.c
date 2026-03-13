@@ -27,15 +27,12 @@
 static inline void itNesspkflush_SetScale(HSD_JObj* jobj, Item* ip,
                                           itFlashAttributes* attr)
 {
-    f32 init = attr->x8_FLASH_GRAPHIC_SIZE_INIT_MUL;
-    f32 s = (ip->xDD4_itemVar.pkflush.xDD8_PKFlash *
-             ((attr->xC_FLASH_GRAPHIC_SIZE_GROWTH_MUL - init) /
-              attr->x4_FLASH_HITBOX_SIZE_MUL)) +
-            init;
     Vec3 scale;
-    scale.z = s;
-    scale.y = s;
-    scale.x = s;
+    scale.x = scale.y = scale.z = (ip->xDD4_itemVar.pkflush.xDD8_PKFlash *
+                                   ((attr->xC_FLASH_GRAPHIC_SIZE_GROWTH_MUL -
+                                     attr->x8_FLASH_GRAPHIC_SIZE_INIT_MUL) /
+                                    attr->x4_FLASH_HITBOX_SIZE_MUL)) +
+                                  attr->x8_FLASH_GRAPHIC_SIZE_INIT_MUL;
     HSD_JObjSetScale(jobj, &scale);
 }
 
