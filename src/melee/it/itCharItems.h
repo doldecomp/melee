@@ -31,7 +31,7 @@ typedef struct itClimbersIce_ItemVars {
 } itClimbersIce_ItemVars;
 
 typedef struct itNessbat_ItemVars {
-    /* +0 ip+DD4 */ s32 x0;
+    /* +0 ip+DD4 */ HSD_GObj* x0;
 } itNessbat_ItemVars;
 
 typedef struct {
