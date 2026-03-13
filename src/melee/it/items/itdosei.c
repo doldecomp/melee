@@ -10,6 +10,7 @@
 #include "it/item.h"
 #include "lb/lb_00B0.h"
 
+#include <baselib/random.h>
 #include <math.h>
 
 /* 282DE4 */ static void it_80282DE4(Item_GObj* gobj);
