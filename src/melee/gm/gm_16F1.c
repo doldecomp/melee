@@ -194,8 +194,6 @@ int fn_80171A88(void)
     return result;
 }
 
-/// #fn_80171AD4
-
 bool fn_80171B00(int arg0)
 {
     if (lbl_8046DBC8.x2[arg0].x0 != 0) {

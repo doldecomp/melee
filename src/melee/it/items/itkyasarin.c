@@ -7,6 +7,24 @@
 #include "it/itCommonItems.h"
 #include "it/item.h"
 
+typedef struct itKyasarinColAnimAttrs {
+    /* +00 */ s32* x0;
+    /* +04 */ f32 x4;
+    /* +08 */ f32 x8;
+    /* +0C */ f32 xC;
+    /* +10 */ f32 x10;
+    /* +14 */ f32 x14;
+    /* +18 */ f32 x18;
+    /* +1C */ f32 x1C;
+    /* +20 */ u8 pad_20[0x28 - 0x20];
+    /* +28 */ f32 x28;
+    /* +2C */ f32 x2C;
+    /* +30 */ f32 x30;
+    /* +34 */ f32 x34;
+    /* +38 */ u8 pad_38[0x48 - 0x38];
+    /* +48 */ s32 x48;
+} itKyasarinColAnimAttrs;
+
 void itKyasarin_Logic25_Destroyed(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
@@ -38,9 +56,36 @@ void it_802ECEB0(Item_GObj* gobj)
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
 }
 
-/// #itKyasarin_UnkMotion0_Anim
+bool itKyasarin_UnkMotion0_Anim(Item_GObj* gobj)
+{
+    Item* ip;
+    itKyasarinAttributes* attr;
 
-/// #itKyasarin_UnkMotion0_Coll
+    if (!it_80272C6C(gobj)) {
+        ip = GET_ITEM(gobj);
+        attr = ip->xC4_article_data->x4_specialAttributes;
+        ip->x40_vel.x = attr->x4 * ip->facing_dir;
+        ip->x40_vel.z = 0.0F;
+        ip->x40_vel.y = 0.0F;
+        Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+    }
+    return false;
+}
+
+bool itKyasarin_UnkMotion0_Coll(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itKyasarinColAnimAttrs* attr = ip->xC4_article_data->x4_specialAttributes;
+
+    if (ip->facing_dir == 0.0F) {
+        if (ip->pos.x >= attr->x2C) {
+            it_802ECFE0(gobj);
+        }
+    } else if (ip->pos.x <= attr->x28) {
+        it_802ECFE0(gobj);
+    }
+    return false;
+}
 
 void it_802ECFE0(Item_GObj* gobj)
 {
@@ -81,9 +126,41 @@ void it_802ED0D0(Item_GObj* gobj)
     Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
 }
 
-/// #itKyasarin_UnkMotion2_Anim
+bool itKyasarin_UnkMotion2_Anim(Item_GObj* gobj)
+{
+    Item* ip;
+    itKyasarinAttributes* attr;
 
-/// #itKyasarin_UnkMotion2_Coll
+    if (!it_80272C6C(gobj)) {
+        ip = GET_ITEM(gobj);
+        attr = ip->xC4_article_data->x4_specialAttributes;
+        ip->x40_vel.x = -attr->x4 * ip->facing_dir;
+        ip->x40_vel.z = 0.0F;
+        ip->x40_vel.y = 0.0F;
+        Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
+    }
+    return false;
+}
+
+bool itKyasarin_UnkMotion2_Coll(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itKyasarinColAnimAttrs* attr = ip->xC4_article_data->x4_specialAttributes;
+    u8 _[8];
+
+    if (ip->facing_dir == 0.0F) {
+        if (ip->pos.x <= attr->x34) {
+            Item_80268E5C(gobj, 3, ITEM_ANIM_UPDATE);
+            it_80273454(gobj);
+            ip->xDD4_itemVar.kyasarin.x24 = attr->xC;
+        }
+    } else if (ip->pos.x >= attr->x30) {
+        Item_80268E5C(gobj, 3, ITEM_ANIM_UPDATE);
+        it_80273454(gobj);
+        ip->xDD4_itemVar.kyasarin.x24 = attr->xC;
+    }
+    return false;
+}
 
 void it_802ED25C(Item_GObj* gobj)
 {
@@ -95,7 +172,21 @@ void it_802ED25C(Item_GObj* gobj)
     Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
 }
 
-/// #itKyasarin_UnkMotion4_Anim
+bool itKyasarin_UnkMotion4_Anim(Item_GObj* gobj)
+{
+    Item* ip;
+    itKyasarinAttributes* attr;
+
+    if (!it_80272C6C(gobj)) {
+        ip = GET_ITEM(gobj);
+        attr = ip->xC4_article_data->x4_specialAttributes;
+        ip->x40_vel.x = attr->x4 * ip->facing_dir;
+        ip->x40_vel.z = 0.0F;
+        ip->x40_vel.y = 0.0F;
+        Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
+    }
+    return false;
+}
 
 /// #itKyasarin_UnkMotion4_Coll
 

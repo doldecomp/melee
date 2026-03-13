@@ -7,10 +7,30 @@
 #include "it/it_2725.h"
 #include "it/item.h"
 #include "it/items/itfreeze.h"
+#include "mp/mplib.h"
 #include "it/types.h"
 #include "sysdolphin/baselib/random.h"
 
-/// #it_802E31F8
+void grIceMt_801FA6D8(void);
+
+typedef struct itWhiteBeaAnim7Attrs {
+    /* +00 */ u8 pad_0[0x10];
+    /* +10 */ f32 x10;
+    /* +14 */ s16 x14;
+} itWhiteBeaAnim7Attrs;
+
+
+
+void it_802E31F8(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+
+    if ((u32) ip->xDD4_itemVar.whitebea.x20 != 0U) {
+        it_8028ECE0((HSD_GObj*) ip->xDD4_itemVar.whitebea.x20);
+        it_802E37A4(gobj);
+    }
+    Item_80268E5C(gobj, 8, ITEM_ANIM_UPDATE);
+}
 
 bool itOldottosea_UnkMotion8_Anim(Item_GObj* gobj)
 {
@@ -137,6 +157,31 @@ void it_802E37A4(Item_GObj* gobj)
 
 /// #it_802E37BC
 
+void it_802E37BC(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    s32 facing;
+
+    it_8027B730(gobj);
+    ip->facing_dir = it_8026B684(&ip->pos);
+    it_8027C56C(gobj, ip->facing_dir);
+    if (ip->facing_dir == -1.0f) {
+        facing = -1;
+    } else {
+        facing = 1;
+    }
+    mpCollSetFacingDir(&ip->x378_itemColl, facing);
+    ip->xD5C = 0;
+    ip->xDC8_word.flags.x15 = 0;
+    it_8027542C(gobj);
+    it_80275270(gobj);
+    it_80274740(gobj);
+    ip->xDC8_word.flags.x19 = 1;
+    ip->xDD4_itemVar.whitebea.x3C = 1;
+    ip->xDD4_itemVar.whitebea.x40 = 0;
+    it_802E3DA0(gobj);
+}
+
 bool it_802E3884(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
@@ -170,7 +215,8 @@ void fn_802E398C(Item_GObj* gobj)
 
 bool itWhitebea_UnkMotion0_Anim(Item_GObj* gobj)
 {
-    PAD_STACK(8);
+    u8 _[8];
+
     if (!it_80272C6C(gobj)) {
         Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
     }
@@ -180,7 +226,7 @@ bool itWhitebea_UnkMotion0_Anim(Item_GObj* gobj)
 void itWhitebea_UnkMotion0_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    PAD_STACK(8);
+    u8 _[8];
 
     if (ip->xDD4_itemVar.whitebea.x40 == 0) {
         int rand = HSD_Randi(2);
@@ -202,7 +248,29 @@ bool itWhitebea_UnkMotion0_Coll(Item_GObj* gobj)
 
 /// #it_802E3AC8
 
-/// #itWhitebea_UnkMotion1_Anim
+bool itWhitebea_UnkMotion1_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    int line_arg;
+    int* line_info;
+
+    PAD_STACK(8);
+
+    if (!it_80272C6C(gobj)) {
+        Item_80268E5C(gobj, 1, 0x12);
+    }
+    if (ip->xDD4_itemVar.whitebea.x44 <= 0) {
+        line_info = mpLib_80056A1C(mpLineGetFlags(ip->xC30), &line_arg);
+        ip->xDD4_itemVar.whitebea.x44 = 0xE;
+        Item_8026AE84(ip, 0x13C, 0x7F, 0x40);
+        if (line_info[0] != -1) {
+            Item_8026AE84(ip, line_info[0], 0x7F, 0x40);
+        }
+    } else {
+        ip->xDD4_itemVar.whitebea.x44--;
+    }
+    return false;
+}
 
 /// #itWhitebea_UnkMotion1_Phys
 
@@ -219,7 +287,24 @@ bool itWhitebea_UnkMotion1_Coll(Item_GObj* gobj)
     return it_8027C794(gobj);
 }
 
-/// #it_802E3DA0
+void it_802E3DA0(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itWhiteBeaAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+
+    PAD_STACK(8);
+
+    ip->xDD4_itemVar.whitebea.x40 = 0;
+    ip->x40_vel.x *= attr->x4;
+    if ((ip->facing_dir > 0.0f && ip->x70_nudge.x < 0.0f) ||
+        (ip->facing_dir < 0.0f && ip->x70_nudge.x > 0.0f))
+    {
+        ip->facing_dir = -ip->facing_dir;
+        mpCollSetFacingDir(&ip->x378_itemColl,
+                           ip->facing_dir == -1.0f ? -1 : 1);
+    }
+    Item_80268E5C(gobj, 3, ITEM_ANIM_UPDATE);
+}
 
 bool itWhitebea_UnkMotion3_Anim(Item_GObj* gobj)
 {
@@ -286,6 +371,29 @@ void it_802E4190(Item_GObj* gobj)
     Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
 }
 
+void it_802E3ED0(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    u8 _[8];
+
+    it_802762BC(ip);
+    if (it_8027B798(gobj, &ip->x40_vel) != 0) {
+        if (ip->x40_vel.y <= 0.2) {
+            ip->x40_vel.y = 0.2f;
+        } else {
+            ip->x40_vel.y *= 0.2f;
+        }
+        it_802762BC(ip);
+    } else {
+        it_802762B0(ip);
+        ip->x40_vel.x *= 0.2f;
+    }
+    ip->facing_dir = ip->init_facing_dir;
+    mpCollSetFacingDir(&ip->x378_itemColl,
+                       ip->facing_dir == -1.0f ? -1 : 1);
+    Item_80268E5C(gobj, 4, 3);
+}
+
 /// #itWhitebea_UnkMotion2_Anim
 
 void itWhitebea_UnkMotion2_Phys(Item_GObj* gobj) {}
@@ -323,7 +431,18 @@ bool itWhitebea_UnkMotion5_Coll(Item_GObj* gobj)
     return it_8027C794(gobj);
 }
 
-/// #it_802E4464
+void it_802E4464(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itWhiteBeaAnim7Attrs* attr = ip->xC4_article_data->x4_specialAttributes;
+    u8 _[8];
+
+    it_802762BC(ip);
+    ip->x40_vel.y = attr->x10;
+    it_80275258(gobj);
+    Item_8026AE84(ip, 0x4A, 0x7F, 0x40);
+    Item_80268E5C(gobj, 6, ITEM_ANIM_UPDATE);
+}
 
 bool itWhitebea_UnkMotion6_Anim(Item_GObj* gobj)
 {
@@ -344,9 +463,31 @@ bool itWhitebea_UnkMotion6_Coll(Item_GObj* gobj)
     return it_8027C794(gobj);
 }
 
-/// #it_802E4558
+void it_802E4558(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
 
-/// #itWhitebea_UnkMotion7_Anim
+    it_802762B0(ip);
+    Item_8026AE84(ip, 0x46, 0x7F, 0x40);
+    Item_8026AE84(ip, 0x13C, 0x7F, 0x40);
+    Item_80268E5C(gobj, 7, ITEM_ANIM_UPDATE);
+    grIceMt_801FA6D8();
+}
+
+bool itWhitebea_UnkMotion7_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itWhiteBeaAnim7Attrs* attr = ip->xC4_article_data->x4_specialAttributes;
+    u8 _[0x10];
+
+    if (!it_80272C6C(gobj)) {
+        ip->xDD4_itemVar.whitebea.x3C = 1;
+        ip->xDD4_itemVar.whitebea.x40 = attr->x14;
+        it_8027CAD8(gobj);
+        Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+    }
+    return false;
+}
 
 void itWhitebea_UnkMotion7_Phys(Item_GObj* gobj) {}
 

@@ -7,6 +7,8 @@
 #include "it/itCommonItems.h"
 #include "it/item.h"
 
+extern f32 it_804DD8C8;
+
 /* 2EC870 */ static void it_802EC870(Item_GObj*, int);
 
 /// #it_802EB5C8
@@ -100,7 +102,19 @@ bool itTincle_UnkMotion3_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itTincle_UnkMotion3_Phys
+void itTincle_UnkMotion3_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+
+    if (ip->xDD4_itemVar.tincle.x20 == 0) {
+        ip->pos.y = ip->xDD4_itemVar.tincle.x4C;
+        ip->x40_vel.y = 0.0f;
+        it_802EBE5C(gobj);
+    } else {
+        ip->x40_vel.y += ip->xDD4_itemVar.tincle.x38;
+        ip->xDD4_itemVar.tincle.x20 -= 1;
+    }
+}
 
 bool itTincle_UnkMotion3_Coll(Item_GObj* gobj)
 {
@@ -178,11 +192,41 @@ void it_802EC1F4(Item_GObj* gobj)
     it_802EC9E8(gobj);
 }
 
-/// #itTincle_UnkMotion7_Anim
+bool itTincle_UnkMotion7_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    u8 _[8];
+
+    if (ip->xDD4_itemVar.tincle.x20 == 0) {
+        ip->xDD4_itemVar.tincle.x20 = -1;
+        if (ip->msid == 6) {
+            Item_80268E5C(gobj, 7, 1);
+        }
+    } else if (ip->xDD4_itemVar.tincle.x20 > 0) {
+        ip->xDD4_itemVar.tincle.x20 -= 1;
+    }
+    if (!it_80272C6C(gobj)) {
+        it_802EC35C(gobj);
+    }
+    return false;
+}
 
 void itTincle_UnkMotion7_Phys(Item_GObj* gobj) {}
 
-/// #itTincle_UnkMotion7_Coll
+bool itTincle_UnkMotion7_Coll(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+
+    if (ip->ground_or_air == GA_Air) {
+        it_8026E414(gobj, it_802EC3F4);
+    } else {
+        if (ip->xDD4_itemVar.tincle.x20 < 0) {
+            it_802EC3F4(gobj);
+        }
+        it_8026D6F4(gobj, it_802EC35C);
+    }
+    return false;
+}
 
 void it_802EC35C(Item_GObj* gobj)
 {
@@ -227,6 +271,8 @@ bool itTincle_UnkMotion9_Coll(Item_GObj* gobj)
     it_8026D62C(gobj, it_802EC35C);
     return false;
 }
+
+/// #it_802EC4D0
 
 /// #it_802EC4D0
 

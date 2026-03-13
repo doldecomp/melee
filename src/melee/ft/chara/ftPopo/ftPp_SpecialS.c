@@ -819,6 +819,34 @@ void ftPp_SpecialHi_Enter(Fighter_GObj* gobj)
 }
 /// #ftPp_SpecialAirHi_Enter
 
+typedef struct ftPpAirHiEnterAttrs {
+    u8 pad0[0x84];
+    f32 x84;
+    f32 x88;
+} ftPpAirHiEnterAttrs;
+
+void ftPp_SpecialAirHi_Enter(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftPpAirHiEnterAttrs* da = fp->dat_attrs;
+
+    fp->self_vel.x /= da->x84;
+    fp->self_vel.y /= da->x88;
+
+    ftPp_SpecialHi_801218F8(gobj);
+
+    fp = GET_FIGHTER(gobj);
+    fp->x1968_jumpsUsed = fp->co_attrs.max_jumps;
+    fp->cmd_vars[2] = 0;
+    fp->cmd_vars[1] = 0;
+    fp->cmd_vars[0] = 0;
+    fp->mv.pp.unk_80123954.x0 = 1;
+    fp->fv.pp.x223C = 0;
+    fp->fv.pp.x2240.z = 0.0f;
+    fp->fv.pp.x2240.y = 0.0f;
+    fp->fv.pp.x2240.x = 0.0f;
+}
+
 /// #ftPp_SpecialHiStart_0_Anim
 
 /// #ftPp_SpecialAirHiStart_0_Anim
@@ -826,6 +854,15 @@ void ftPp_SpecialHi_Enter(Fighter_GObj* gobj)
 /// #ftPp_SpecialHiStart_0_IASA
 
 /// #ftPp_SpecialAirHiStart_0_IASA
+
+typedef struct ftPpAirHiPhysAttrs {
+    u8 pad[0x8C];
+    f32 x8C;
+    f32 x90;
+    u8 pad2[0xA8 - 0x94];
+    f32 xA8;
+    f32 xAC;
+} ftPpAirHiPhysAttrs;
 
 void ftPp_SpecialHiStart_0_Phys(Fighter_GObj* gobj)
 {
@@ -853,7 +890,34 @@ void ftPp_SpecialHiStart_0_Phys(Fighter_GObj* gobj)
     fp->fv.pp.x2240 = sp;
 }
 
-/// #ftPp_SpecialAirHiStart_0_Phys
+void ftPp_SpecialAirHiStart_0_Phys(Fighter_GObj* gobj)
+{
+    Fighter* fp;
+    Vec3 sp;
+    u8 _[0xC];
+
+    fp = GET_FIGHTER(gobj);
+    ftCommon_Fall(fp, ((ftPpAirHiPhysAttrs*) fp->dat_attrs)->x8C,
+                  ((ftPpAirHiPhysAttrs*) fp->dat_attrs)->x90);
+    ftCommon_8007CEF4(fp);
+    fp = GET_FIGHTER(gobj);
+    sp.x = sp.y = sp.z = 0.0f;
+
+    {
+        Fighter_GObj* nn_gobj =
+            Player_GetEntityAtIndex(GET_FIGHTER(gobj)->player_id, 1);
+        if (nn_gobj != NULL) {
+            Fighter* nn_fp = GET_FIGHTER(nn_gobj);
+            if (nn_fp->motion_id >= ftPp_MS_SpecialHi_0 &&
+                nn_fp->motion_id <= ftPp_MS_SpecialHi_5)
+            {
+                lb_8000B1CC(nn_fp->parts[FtPart_L4thNb].joint, NULL, &sp);
+            }
+        }
+    }
+
+    fp->fv.pp.x2240 = sp;
+}
 
 void ftPp_SpecialHiStart_0_Coll(Fighter_GObj* gobj)
 {
@@ -944,7 +1008,34 @@ void ftPp_SpecialHiThrow_0_Phys(Fighter_GObj* gobj)
     fp->fv.pp.x2240 = sp;
 }
 
-/// #ftPp_SpecialAirHiThrow_0_Phys
+void ftPp_SpecialAirHiThrow_0_Phys(Fighter_GObj* gobj)
+{
+    Fighter* fp;
+    Vec3 sp;
+    u8 _[0xC];
+
+    fp = GET_FIGHTER(gobj);
+    ftCommon_Fall(fp, ((ftPpAirHiPhysAttrs*) fp->dat_attrs)->x8C,
+                  ((ftPpAirHiPhysAttrs*) fp->dat_attrs)->x90);
+    ftCommon_8007CEF4(fp);
+    fp = GET_FIGHTER(gobj);
+    sp.x = sp.y = sp.z = 0.0f;
+
+    {
+        Fighter_GObj* nn_gobj =
+            Player_GetEntityAtIndex(GET_FIGHTER(gobj)->player_id, 1);
+        if (nn_gobj != NULL) {
+            Fighter* nn_fp = GET_FIGHTER(nn_gobj);
+            if (nn_fp->motion_id >= ftPp_MS_SpecialHi_0 &&
+                nn_fp->motion_id <= ftPp_MS_SpecialHi_5)
+            {
+                lb_8000B1CC(nn_fp->parts[FtPart_L4thNb].joint, NULL, &sp);
+            }
+        }
+    }
+
+    fp->fv.pp.x2240 = sp;
+}
 
 void ftPp_SpecialHiThrow_0_Coll(Fighter_GObj* gobj)
 {
@@ -1030,6 +1121,18 @@ void ftPp_SpecialHiStart_1_Phys(Fighter_GObj* gobj)
 
 /// #ftPp_SpecialAirHiStart_1_Phys
 
+void ftPp_SpecialAirHiStart_1_Phys(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    u8 _[8];
+
+    ftCommon_Fall(fp, ((ftPpAirHiPhysAttrs*) fp->dat_attrs)->xA8,
+                  ((ftPpAirHiPhysAttrs*) fp->dat_attrs)->xAC);
+    if (fp->self_vel.y < 0.0f) {
+        ftCommon_8007CEF4(fp);
+    }
+}
+
 void ftPp_SpecialHiStart_1_Coll(Fighter_GObj* gobj)
 {
     if (!ft_800827A0(gobj)) {
@@ -1113,6 +1216,18 @@ void ftPp_SpecialHiThrow_1_Phys(Fighter_GObj* gobj)
 }
 
 /// #ftPp_SpecialAirHiThrow_1_Phys
+
+void ftPp_SpecialAirHiThrow_1_Phys(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    u8 _[8];
+
+    ftCommon_Fall(fp, ((ftPpAirHiPhysAttrs*) fp->dat_attrs)->xA8,
+                  ((ftPpAirHiPhysAttrs*) fp->dat_attrs)->xAC);
+    if (fp->self_vel.y < 0.0f) {
+        ftCommon_8007CEF4(fp);
+    }
+}
 
 void ftPp_SpecialHiThrow_1_Coll(Fighter_GObj* gobj)
 {

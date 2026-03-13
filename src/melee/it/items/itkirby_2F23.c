@@ -47,7 +47,18 @@ bool itKirby_2F23_UnkMotion0_Coll(Item_GObj* gobj)
 
 /// #it_802F258C
 
-/// #it_802F2810
+void it_802F2810(HSD_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+
+    Item_80268E5C(gobj, 1, 0);
+    ip->on_accessory = it_802F289C;
+    it_8026BB44(gobj);
+    it_802756D0(gobj);
+    it_802762BC(ip);
+    it_80274ECC(gobj, true);
+    it_80273408(gobj);
+}
 
 bool itKirby_2F23_UnkMotion1_Anim(Item_GObj* gobj)
 {

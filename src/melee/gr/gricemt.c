@@ -384,7 +384,6 @@ extern char grIm_804D4720;
 
 void grIceMt_801F72D4(Ground_GObj* arg0)
 {
-    Vec3 sp3C;
     u32 sp38;
     u32 sp34;
     u32 sp30;
@@ -401,23 +400,19 @@ void grIceMt_801F72D4(Ground_GObj* arg0)
     grAnime_801C8138(arg0, gp->map_id, 0);
     jobj = Ground_801C3FA4(arg0, 0x12);
     if (jobj != 0) {
-        sp3C = grIm_803B8220[1];
-        HSD_JObjSetTranslate(jobj, &sp3C);
+        HSD_JObjSetTranslate(jobj, &grIm_803B8220[1]);
     }
     jobj = Ground_801C3FA4(arg0, 0x13);
     if (jobj != 0) {
-        sp3C = grIm_803B8220[2];
-        HSD_JObjSetTranslate(jobj, &sp3C);
+        HSD_JObjSetTranslate(jobj, &grIm_803B8220[2]);
     }
     jobj = Ground_801C3FA4(arg0, 0x14);
     if (jobj != 0) {
-        sp3C = grIm_803B8220[3];
-        HSD_JObjSetTranslate(jobj, &sp3C);
+        HSD_JObjSetTranslate(jobj, &grIm_803B8220[3]);
     }
     jobj = Ground_801C3FA4(arg0, 0x15);
     if (jobj != 0) {
-        sp3C = grIm_803B8220[4];
-        HSD_JObjSetTranslate(jobj, &sp3C);
+        HSD_JObjSetTranslate(jobj, &grIm_803B8220[4]);
     }
     Ground_801C39C0();
     Ground_801C3BB4();

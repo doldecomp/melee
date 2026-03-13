@@ -483,7 +483,16 @@ void ftCo_800D4F24(Fighter_GObj* gobj, int index)
 
 /// #ftCo_800D4FF4
 
-/// #ftCo_Rebirth_Anim
+void ftCo_Rebirth_Anim(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    ftCo_8008A7A8(gobj, fp->ft_data->x24);
+    fp->mv.co.common.x0 -= 1;
+    if (fp->mv.co.common.x0 == 0) {
+        ftCo_800D5600(gobj);
+    }
+}
 
 void ftCo_Rebirth_IASA(Fighter_GObj* gobj) {}
 
@@ -536,4 +545,26 @@ void fn_800D5A30(Fighter_GObj* gobj)
     ftColl_8007B7A4(gobj, p_ftCommonData->x5D8);
     ft_8008A2BC(gobj);
 }
+/// #ftCo_Rebirth_Cam
+
+typedef struct ftCoRebirthCamVars {
+    s32 x0;
+    f32 x4;
+    f32 x8;
+    f32 xC;
+} ftCoRebirthCamVars;
+
+void ftCo_Rebirth_Cam(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    CmSubject* cam = fp->x890_cameraBox;
+    UnkFloat6_Camera cam_floats;
+
+    ftCamera_80076018(fp->ft_data->x3C, &cam_floats, fp->x34_scale.y);
+    cam->x10.x = ((ftCoRebirthCamVars*) &fp->mv.co.common)->x4;
+    cam->x10.y = ((ftCoRebirthCamVars*) &fp->mv.co.common)->x8 + cam_floats.x0.x;
+    cam->x10.z = 0.0f;
+    ftLib_800866DC(gobj, &cam->x1C);
+}
+
 /// #ftCo_Rebirth_Cam

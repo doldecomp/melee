@@ -99,8 +99,11 @@ const f32 grPu_804DBA7C = -30.0;
 
 void grPura_80211D00(void)
 {
-    Vec3 cam_offset;
-    f32 fVar1;
+    struct {
+        f32 x;
+        f32 y;
+        f32 z;
+    } cam_offset;
 
     grPu_804D6AA0 = Ground_801C49F8();
     stage_info.unk8C.b4 = 0;
@@ -112,15 +115,11 @@ void grPura_80211D00(void)
     // grAnime_801C8780(r3, 3, 0, 0.0f, 1.0f);
     Ground_801C39C0();
     Ground_801C3BB4();
-    Stage_UnkSetVec3TCam_Offset(&cam_offset);
-    fVar1 = Stage_GetCamBoundsTopOffset();
-    Ground_801C3880(grPu_804DBA58 * (fVar1 - cam_offset.y));
-    fVar1 = Stage_GetCamBoundsBottomOffset();
-    Ground_801C3890(grPu_804DBA58 * (fVar1 - cam_offset.y));
-    fVar1 = Stage_GetCamBoundsLeftOffset();
-    Ground_801C38A0(grPu_804DBA58 * (fVar1 - cam_offset.x));
-    fVar1 = Stage_GetCamBoundsRightOffset();
-    Ground_801C38AC(grPu_804DBA58 * (fVar1 - cam_offset.x));
+    Stage_UnkSetVec3TCam_Offset((Vec3*) &cam_offset);
+    Ground_801C3880(grPu_804DBA58 * (Stage_GetCamBoundsTopOffset() - cam_offset.y));
+    Ground_801C3890(grPu_804DBA58 * (Stage_GetCamBoundsBottomOffset() - cam_offset.y));
+    Ground_801C38A0(grPu_804DBA58 * (Stage_GetCamBoundsLeftOffset() - cam_offset.x));
+    Ground_801C38AC(grPu_804DBA58 * (Stage_GetCamBoundsRightOffset() - cam_offset.x));
 }
 
 void grPura_80211DD8(void) {}

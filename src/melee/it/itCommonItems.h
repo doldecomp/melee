@@ -495,7 +495,8 @@ typedef struct itTincle_ItemVars {
     /* +2C ip+E00 */ s32 x2C;
     /* +30 ip+E04 */ u8 pad1b[0x8];
     /* +38 ip+E0C */ f32 x38;
-    /* +3C ip+E10 */ u8 pad1c[0x14];
+    /* +3C ip+E10 */ u8 pad1c[0x10];
+    /* +4C ip+E20 */ f32 x4C;
     /* +50 ip+E24 */ f32 x50;
     /* +54 ip+E28 */ f32 x54;
     /* +58 ip+E2C */ u8 pad2[0x4];
@@ -1210,6 +1211,7 @@ typedef struct itWhiteBea_ItemVars {
     /* +2C ip+E00 */ char pad_2C[0x10];
     /* +3C ip+E10 */ s32 x3C;
     /* +40 ip+E14 */ s32 x40;
+    /* +44 ip+E18 */ s32 x44;
 } itWhiteBea_ItemVars;
 
 typedef struct itWhiteBeaAttributes {
@@ -1323,9 +1325,10 @@ typedef struct itOctarockAttributes {
 
 typedef struct itOldottosea_ItemVars {
     /* 0x00 */ u8 pad[0x20];
-    /* 0x20 */ s32 x20;
-    /* 0x24 */ u8 pad1[0x4];
+    /* 0x20 */ HSD_GObj* x20;
+    /* 0x24 */ s32 x24;
     /* 0x28 */ s32 x28;
+    /* 0x2C */ s16 x2C;
 } itOldottosea_ItemVars;
 
 typedef struct itPatapata_ItemVars {
@@ -1462,8 +1465,15 @@ typedef struct itCrazyHandBombAttributes {
 } itCrazyHandBombAttributes;
 
 typedef struct itLugia_ItemVars {
-    /* +00 ip+DD4 */ u8 x0_pad[0x7C];
+    /* +00 ip+DD4 */ u8 x0_pad[0x60];
+    /* +60 ip+E34 */ s32 x60;
+    /* +64 ip+E38 */ Vec3 x64;
+    /* +70 ip+E44 */ Vec3 x70;
     /* +7C ip+E50 */ Vec3 xE50;
+    /* +88 ip+E5C */ f32 x88;
+    /* +8C ip+E60 */ Vec3 x8C;
+    /* +98 ip+E6C */ u8 x98_pad[0xC];
+    /* +A4 ip+E78 */ s32 xA4;
 } itLugia_ItemVars;
 
 typedef struct itGreatFoxLaser_ItemVars {

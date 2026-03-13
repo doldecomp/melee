@@ -17,7 +17,7 @@
 #include <baselib/random.h>
 
 typedef struct {
-    UNK_T x0;
+    f32 x0;
     float x4;
     float x8;
     float xC;
@@ -136,7 +136,17 @@ bool itHitodeman_UnkMotion2_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itHitodeman_UnkMotion2_Phys
+void itHitodeman_UnkMotion2_Phys(Item_GObj* gobj)
+{
+    if (it_8027A09C(gobj) != 0) {
+        Item* ip = GET_ITEM(gobj);
+
+        it_80273454(gobj);
+        Item_80268E5C(gobj, 0, 2);
+        ip->entered_hitlag = efLib_PauseAll;
+        ip->exited_hitlag = efLib_ResumeAll;
+    }
+}
 
 bool itHitodeman_UnkMotion2_Coll(Item_GObj* gobj)
 {

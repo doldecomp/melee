@@ -2,13 +2,22 @@
 #define __GALE01_1CA394
 
 #include <platform.h>
-
 #include "baselib/forward.h"
+
+struct ZakoConfig {
+    /* +0 */ void* x0;
+    /* +4 */ void* x4;
+    /* +8 */ s32 x8;
+    /* +C */ void* xC;
+    /* +10 */ f32 x10;
+    /* +14 */ s32 x14;
+    /* +18 */ s32 x18;
+};
 
 struct grZakoGenerator_Entry {
     /* +0x0 */ s16 x0;
     /* +0x2 */ s16 x2;
-    /* +0x4 */ s32 x4;
+    /* +0x4 */ HSD_GObj* x4;
     /* +0x8 */ s32 x8;
 };
 

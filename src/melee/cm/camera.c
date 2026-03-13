@@ -1805,7 +1805,173 @@ void Camera_8002C010(f32 farg0, f32 farg1)
     }
 }
 
-/// #Camera_8002C1A8
+void Camera_8002C1A8(void)
+{
+    s8 slot;
+    struct {
+        u8 pad[8];
+        CameraInputs inputs;
+    } stack_inputs;
+    f32 zoom_dir;
+    f32 move_x;
+    f32 move_y;
+    f32 rotate_x;
+    f32 rotate_y;
+    f32 abs_value;
+    f32 stick_x;
+    f32 stick_y;
+    f32 substick_x;
+    f32 substick_y;
+    f32 pause_cam_z_pos_init;
+    u64 input_x18;
+    u64 input_x10;
+    s32 dir;
+    Camera* camera;
+    s8* slot_ptr;
+
+    camera = &cm_80452C68;
+    slot = camera->x305;
+
+    if (slot == 5) {
+        return;
+    }
+
+    Camera_8002B694(&stack_inputs.inputs, slot);
+
+    zoom_dir = move_x = move_y = rotate_x = rotate_y = 0.0f;
+    stick_x = stack_inputs.inputs.stick_x;
+    stick_y = stack_inputs.inputs.stick_y;
+    substick_x = stack_inputs.inputs.substick_x;
+    substick_y = stack_inputs.inputs.substick_y;
+    input_x18 = stack_inputs.inputs.x18._u64;
+    input_x10 = stack_inputs.inputs.x10._u64;
+    dir = 0;
+    if ((input_x18 & 0x20ULL) != 0) {
+        dir = 1;
+    } else if ((input_x18 & 0x40ULL) != 0) {
+        dir = -1;
+    }
+
+    if ((input_x10 & 0x8ULL) != 0) {
+        move_y = 1.0f;
+    } else if ((input_x10 & 0x4ULL) != 0) {
+        move_y = -1.0f;
+    }
+
+    if ((input_x10 & 0x1ULL) != 0) {
+        move_x = -1.0f;
+    } else if ((input_x10 & 0x2ULL) != 0) {
+        move_x = 1.0f;
+    }
+
+    if ((input_x10 & 0x400ULL) != 0) {
+        zoom_dir = 1.0f;
+    } else if ((input_x10 & 0x800ULL) != 0) {
+        zoom_dir = -1.0f;
+    }
+
+    if ((input_x18 & 0x100ULL) != 0) {
+        if (stick_x < 0.0f) {
+            abs_value = -stick_x;
+        } else {
+            abs_value = stick_x;
+        }
+        if (abs_value > 0.125) {
+            move_x = stick_x;
+        }
+        if (stick_y < 0.0f) {
+            abs_value = -stick_y;
+        } else {
+            abs_value = stick_y;
+        }
+        if (abs_value > 0.125) {
+            move_y = stick_y;
+        }
+        stick_y = 0.0f;
+    }
+
+    if (stick_y < 0.0f) {
+        abs_value = -stick_y;
+    } else {
+        abs_value = stick_y;
+    }
+    if (abs_value > 0.125) {
+        zoom_dir = -stick_y;
+    }
+
+    if (substick_x < 0.0f) {
+        abs_value = -substick_x;
+    } else {
+        abs_value = substick_x;
+    }
+    if (abs_value > 0.125) {
+        rotate_x = substick_x;
+    }
+
+    if (substick_y < 0.0f) {
+        abs_value = -substick_y;
+    } else {
+        abs_value = substick_y;
+    }
+    if (abs_value > 0.125) {
+        rotate_y = substick_y;
+    }
+
+    if (dir != 0) {
+        pause_cam_z_pos_init = camera->x32C * cm_803BCCA0.x8C + cm_803BCCA0.x90;
+        slot_ptr = &camera->x304;
+        *slot_ptr = Camera_8002BA00((s8) *slot_ptr, dir);
+        slot = *slot_ptr;
+        camera->x314.z = 0.0f;
+        camera->x314.y = 0.0f;
+        camera->x314.x = 0.0f;
+        camera->pause_eye_offset.x = 0.0f;
+        camera->pause_eye_offset.y = 5.0f;
+        camera->pause_eye_offset.z = 20.0f;
+        camera->pause_up.x = 0.0f;
+        camera->pause_up.y = 1.0f;
+        camera->pause_up.z = 0.0f;
+
+        if (slot == 10) {
+            camera->pause_eye_distance = 3.0f * pause_cam_z_pos_init;
+        } else {
+            camera->pause_eye_distance = pause_cam_z_pos_init;
+        }
+
+        Camera_8002BAA8(0.0f);
+    }
+
+    if (zoom_dir != 0.0f) {
+        Camera_8002BAA8(zoom_dir);
+    }
+
+    if (move_x != 0.0f || move_y != 0.0f) {
+        if (camera->x304 == 10) {
+            if (sqrtf__Ff((camera->pause_eye_offset.x *
+                           camera->pause_eye_offset.x) +
+                          (camera->pause_eye_offset.y *
+                           camera->pause_eye_offset.y) +
+                          (camera->pause_eye_offset.z *
+                           camera->pause_eye_offset.z)) <
+                1.0f)
+            {
+                camera->pause_eye_distance = 1.0f;
+            }
+            if (move_y != 0.0f) {
+                camera->x314.y += move_y;
+            }
+            if (move_x != 0.0f) {
+                camera->x314.x += move_x;
+            }
+        } else {
+            Camera_8002C010(move_x, move_y);
+        }
+    }
+
+    if (rotate_x != 0.0f || rotate_y != 0.0f) {
+        Camera_8002BD88(rotate_x, rotate_y);
+    }
+}
 
 /// #Camera_8002C5B4
 

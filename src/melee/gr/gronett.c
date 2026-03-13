@@ -16,6 +16,7 @@
 #include "gr/grdisplay.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
+
 #include "if/ifhazard.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
@@ -28,7 +29,7 @@
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
-StageCallbacks grOt_803E27E0[2] = {
+static StageCallbacks grOt_803E27E0[2] = {
     { NULL, NULL, NULL, NULL, NULL },
     { NULL, NULL, NULL, NULL, NULL },
 };
@@ -38,6 +39,9 @@ static struct grOnett_StageParam {
     /* 0x00 */ float awning_initial;
     /* 0x04 */ u8 pad04[0x1C];
     /* 0x20 */ float awning_delta;
+    /* 0x24 */ u8 pad24[0x10];
+    /* 0x34 */ float x34;
+    /* 0x38 */ float x38;
 }* grOt_804D69C0;
 
 void grOnett_801E3734(bool arg) {}
@@ -165,7 +169,30 @@ void grOnett_801E3C60(Ground_GObj* gobj)
 
 void grOnett_801E3CE0(Ground_GObj* gobj) {}
 
-/// #grOnett_801E3CE4
+typedef struct grOnett_801E3CE4_vars {
+    s16 xC4;
+    s16 xC6;
+    s32 xC8;
+    s32 xCC;
+} grOnett_801E3CE4_vars;
+
+void grOnett_801E3CE4(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    u8 _[8];
+
+    Ground_801C2ED0(GET_JOBJ(gobj), gp->map_id);
+    grAnime_801C7FF8(gobj, 0, 7, 0, 0.0f, 0.0f);
+    ((grOnett_801E3CE4_vars*) &gp->gv.onett)->xC4 = -1;
+    ((grOnett_801E3CE4_vars*) &gp->gv.onett)->xC6 = 0;
+    ((grOnett_801E3CE4_vars*) &gp->gv.onett)->xC8 = 0;
+    ((grOnett_801E3CE4_vars*) &gp->gv.onett)->xCC = 0;
+    gp->x8_callback = NULL;
+    gp->xC_callback = NULL;
+    gp->x10_flags.b5 = true;
+    mpJointSetCb1(3, gp, (mpLib_Callback) grOnett_801E40E4);
+    mpJointSetCb1(4, gp, (mpLib_Callback) grOnett_801E40E4);
+}
 
 bool grOnett_801E3D98(Ground_GObj* gobj)
 {

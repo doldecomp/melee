@@ -25,7 +25,14 @@ grMaterial_801C8D44(int arg0, int arg1, Ground* arg2, Vec3* arg3, int arg4,
 /* 1C8E48 */ static bool grMaterial_801C8E48(HSD_GObj* gobj);
 /* 1C8E74 */ static void grMaterial_801C8E74(void);
 /* 1C8EF8 */ static void fn_801C8EF8(HSD_MObj* mobj, u32 rendermode);
-/* 1C9490 */ void grMaterial_801C9490(HSD_JObj* jobj);
+/* 1C9490 */ void grMaterial_801C9490(Ground_GObj* gobj, ColorOverlay* overlay);
+
+struct grMaterial_801C9490_cmd {
+    u16 pad0 : 6;
+    u16 value : 8;
+    u16 pad1 : 2;
+};
+
 /* 3E0A20 */ static HSD_MObjInfo grMaterial_803E0A20 = { 0 };
 /* 4D456C */ static ItCmd grMaterial_804D456C[1];
 
@@ -247,12 +254,19 @@ void grMaterial_801C8E74(void)
 
 /// #grMaterial_801C92C0
 
-void grMaterial_801C9470(HSD_JObj* jobj)
+void grMaterial_801C9470(Ground_GObj* gobj, ColorOverlay* overlay)
 {
-    grMaterial_801C9490(jobj);
+    grMaterial_801C9490(gobj, overlay);
 }
 
-/// #grMaterial_801C9490
+void grMaterial_801C9490(Ground_GObj* gobj, ColorOverlay* overlay)
+{
+    Ground* gp = gobj->user_data;
+    u32 color = ((struct grMaterial_801C9490_cmd*) overlay->x8_ptr1)->value;
+
+    gp->xC0 = color;
+    gp->x10_flags.b6 = true;
+}
 
 void grMaterial_801C94D8(void* obj)
 {
@@ -310,7 +324,27 @@ void grMaterial_801C95C4(HSD_GObj* gobj)
     gp->x10_flags.b4 = 1;
 }
 
-/// #grMaterial_801C9604
+typedef struct grMaterial_801C9604_raw {
+    s32 x40;
+    s32 x44;
+    s32 x48;
+    s32 x4C;
+} grMaterial_801C9604_raw;
+
+void grMaterial_801C9604(HSD_GObj* bg, int arg1, bool arg2)
+{
+    Ground* gp = bg->user_data;
+    grMaterial_801C9604_raw* raw = (grMaterial_801C9604_raw*) ((u8*) gp + 0x40);
+    ColorOverlay* overlay = (ColorOverlay*) raw;
+
+    raw->x44 = arg2;
+    raw->x48 = arg1;
+    raw->x40 = 0;
+    raw->x4C = 0;
+    overlay->x7C_color_enable = overlay->x7C_flag2 = false;
+    gp->x10_flags.b4 = false;
+    grMaterial_801C9698(bg);
+}
 
 void fn_801C9664(Item_GObj* gobj, CommandInfo* cmd, int arg2)
 {
@@ -318,4 +352,11 @@ void fn_801C9664(Item_GObj* gobj, CommandInfo* cmd, int arg2)
     grMaterial_804D456C[idx](gobj, cmd);
 }
 
-/// #grMaterial_801C9698
+void grMaterial_801C9698(HSD_GObj* gobj)
+{
+    Ground* gp = gobj->user_data;
+
+    if (lb_80014258(gobj, (ColorOverlay*) ((u8*) gp + 0x40), fn_801C9664) != 0) {
+        gp->x10_flags.b4 = 1;
+    }
+}

@@ -989,7 +989,8 @@ struct Ground {
     int x68;
     int x6C;
     int x70;
-    char pad_40[0xC4 - 0x74];
+    char x74_pad[0xC0 - 0x74];
+    f32 xC0;
 
     union {
         /// @todo This union is named 'u', from assert statements

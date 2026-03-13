@@ -68,10 +68,10 @@ struct unkCastle {
                                     mpLib_GroundEnum, f32);
 /* 1CF7B0 */ void grCastle_801CF7B0(Ground_GObj*);
 /* 1CF868 */ UNK_RET grCastle_801CF868(UNK_PARAMS);
-/* 1CFAFC */ UNK_RET fn_801CFAFC(UNK_PARAMS);
-/* 1CFB68 */ UNK_RET fn_801CFB68(UNK_PARAMS);
+/* 1CFAFC */ void fn_801CFAFC(HSD_GObj*, Ground*, Vec3*, HSD_GObj*, f32);
+/* 1CFB68 */ void fn_801CFB68(HSD_GObj*, Ground*, HSD_GObj*);
 /* 1CFBD4 */ UNK_RET grCastle_801CFBD4(UNK_PARAMS);
-/* 1D0298 */ UNK_RET grCastle_801D0298(UNK_PARAMS);
+/* 1D0298 */ void grCastle_801D0298(void);
 /* 1D02B8 */ UNK_RET grCastle_801D02B8(UNK_PARAMS);
 /* 1D0520 */ void grCastle_801D0520(Ground_GObj*, int);
 /* 1D0550 */ void grCastle_801D0550(UNK_T, unkCastle*);

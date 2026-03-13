@@ -4,6 +4,8 @@
 #include <platform.h>
 
 #include "ef/eflib.h"
+#include "ef/efsync.h"
+#include "ft/ft_0C31.h"
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
@@ -65,7 +67,7 @@ bool itMatadogas_UnkMotion1_Coll(Item_GObj* gobj)
 void it_802CB2B0(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    PAD_STACK(8);
+    PAD_STACK(4);
     if (ip->xDAC_itcmd_var0 != 0) {
         itMatadogasAttributes* attrs =
             ip->xC4_article_data->x4_specialAttributes;
@@ -104,16 +106,47 @@ bool itMatadogas_UnkMotion2_Coll(Item_GObj* gobj)
 
 /// #it_802CB4F0
 
-/// #it_2725_Logic32_Spawned
+void it_2725_Logic32_Spawned(Item_GObj* gobj)
+{
+    HSD_JObj* jobj = gobj->hsd_obj;
+    f32 scale = 1.0f;
 
-/// #it_2725_Logic33_Spawned
+    PAD_STACK(4);
+
+    efSync_Spawn(0x45B, gobj, jobj, &scale);
+    efSync_Spawn(0x45D, gobj, jobj, &scale);
+    it_802CB798(gobj);
+}
+
+void it_2725_Logic33_Spawned(Item_GObj* gobj)
+{
+    HSD_JObj* jobj = gobj->hsd_obj;
+    f32 scale = 1.0f;
+
+    PAD_STACK(4);
+
+    efSync_Spawn(0x45C, gobj, jobj, &scale);
+    efSync_Spawn(0x45E, gobj, jobj, &scale);
+    it_802CB798(gobj);
+}
 
 void itMatadogas_Logic33_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }
 
-/// #it_802CB798
+void it_802CB798(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itMatadogasAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+
+    ip->xD44_lifeTimer = attrs->x0;
+    it_80274740(gobj);
+    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+    ip->entered_hitlag = efLib_PauseAll;
+    ip->exited_hitlag = efLib_ResumeAll;
+    it_8026B3A8(gobj);
+}
 
 bool it_802CB810(Item_GObj* gobj)
 {
