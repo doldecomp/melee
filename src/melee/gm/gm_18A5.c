@@ -5279,7 +5279,7 @@ void fn_80196EEC(HSD_GObj* gobj)
     }
 }
 
-extern u8 lbl_803B7CE0[36];
+extern s32 lbl_803B7CE0[9];
 
 void fn_80196FFC(HSD_GObj* gobj)
 {
@@ -5293,18 +5293,18 @@ void fn_80196FFC(HSD_GObj* gobj)
     s32 table[9];
 
     tm = gm_8018F634();
-    jobj = gobj->hsd_obj;
     pnum = fn_8018F62C(gobj);
+    jobj = gobj->hsd_obj;
 
-    table[0] = ((s32*) lbl_803B7CE0)[0];
-    table[1] = ((s32*) lbl_803B7CE0)[1];
-    table[2] = ((s32*) lbl_803B7CE0)[2];
-    table[3] = ((s32*) lbl_803B7CE0)[3];
-    table[4] = ((s32*) lbl_803B7CE0)[4];
-    table[5] = ((s32*) lbl_803B7CE0)[5];
-    table[6] = ((s32*) lbl_803B7CE0)[6];
-    table[7] = ((s32*) lbl_803B7CE0)[7];
-    table[8] = ((s32*) lbl_803B7CE0)[8];
+    table[0] = lbl_803B7CE0[0];
+    table[1] = lbl_803B7CE0[1];
+    table[2] = lbl_803B7CE0[2];
+    table[3] = lbl_803B7CE0[3];
+    table[4] = lbl_803B7CE0[4];
+    table[5] = lbl_803B7CE0[5];
+    table[6] = lbl_803B7CE0[6];
+    table[7] = lbl_803B7CE0[7];
+    table[8] = lbl_803B7CE0[8];
 
     if ((s32) gm_8018F634()->cur_option >= 0x1B &&
         (s32) gm_8018F634()->cur_option <= 0x1E)
@@ -5351,11 +5351,11 @@ void fn_80196FFC(HSD_GObj* gobj)
 
     state = lbl_804799D8.x2A[pnum].state;
     lbl_804799D8.x2A[pnum].start =
-        ((u8*) table)[state * 6 + 0];
+        ((u16*) table)[state * 3 + 0];
     lbl_804799D8.x2A[pnum].end =
-        ((u8*) table)[state * 6 + 2];
+        ((u16*) table)[state * 3 + 1];
     lbl_804799D8.x2A[pnum].loop =
-        ((u8*) table)[state * 6 + 4];
+        ((u16*) table)[state * 3 + 2];
 
     start_frame = lbl_804799D8.x2A[pnum].start;
     cur_frame = lbl_804799D8.x2A[pnum].cur;
@@ -5379,7 +5379,7 @@ void fn_80196FFC(HSD_GObj* gobj)
     }
 
     state = lbl_804799D8.x2A[pnum].state;
-    if (state == 0 && ((u8*)&lbl_804799D8)[pnum * 6 + 0x44] == 6) {
+    if (state == 0 && lbl_804799D8.x44[pnum] == 6) {
         if (lbl_804799D8.x2A[pnum].done != 0 &&
             (u8) tm->x4B8[pnum].x0 != 0)
         {
