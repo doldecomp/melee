@@ -544,4 +544,14 @@ void fn_800D5A30(Fighter_GObj* gobj)
     ftColl_8007B7A4(gobj, p_ftCommonData->x5D8);
     ft_8008A2BC(gobj);
 }
-/// #ftCo_Rebirth_Cam
+void ftCo_Rebirth_Cam(Fighter_GObj* gobj)
+{
+    UnkFloat6_Camera spC;
+    Fighter* fp = GET_FIGHTER(gobj);
+    CmSubject* camera_box = fp->x890_cameraBox;
+    ftCamera_80076018(fp->ft_data->x3C, &spC, fp->x34_scale.y);
+    camera_box->x10.x = fp->mv.co.common.x4;
+    camera_box->x10.y = *(f32*) &fp->mv.co.common.x8 + spC.x0.x;
+    camera_box->x10.z = 0.0f;
+    ftLib_800866DC(gobj, &camera_box->x1C);
+}

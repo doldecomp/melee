@@ -761,7 +761,7 @@ struct TmData {
     int hmn_cpu_count;
     int stage_selection_type;
     int cpu_level;
-    u8 _x1C[0x20 - 0x1C];
+    s32 x1C;
     int x20;
     int x24;
     u32 x28; ///< stage id
@@ -774,6 +774,7 @@ struct TmData {
     u8 x32;
     u8 x33;
     u8 pad_x34[0x37 - 0x34];
+#pragma pack(push, 1)
     struct TmUnkMenuData {
         u8 x0;
         u8 x1;
@@ -788,9 +789,12 @@ struct TmData {
         u8 xB;
         u8 xC;
         u8 xD;
-        u8 pad_xE[0x11 - 0xE];
-    } x37[16]; ///< @todo needs to be larger, see gm_80190EA4
-    u8 pad_x158[0x4B8 - 0x158];
+        u8 xE;
+        u8 xF;
+        u8 pad_X10[0x12 - 0x10];
+    } x37[64];
+#pragma pack(pop)
+    u8 pad_x4B7[0x4B8 - 0x4B7];
     struct UnkSelections {
         u8 x0; ///< slot type
         u8 x1; ///< CSSIconHud

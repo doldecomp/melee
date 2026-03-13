@@ -524,6 +524,13 @@ typedef struct itTincleAttributes {
     /* 0x48 */ f32 x48;
 } itTincleAttributes;
 
+typedef struct itGShell_HurtInit {
+    /* 0x00 */ s32 state;
+    /* 0x04 */ Vec3 a_offset;
+    /* 0x10 */ Vec3 b_offset;
+    /* 0x1C */ f32 scale;
+} itGShell_HurtInit;
+
 typedef struct {
     /* ip+DD4 */ float xDD4;
     /* ip+DD8 */ float xDD8;
@@ -567,8 +574,9 @@ typedef struct {
     /* ip+E1C */ unsigned char xE1C_b7 : 1;
     /* ip+E1D */ char pad_E1D[0xE20 - 0xE1D];
     /* ip+E20 */ Vec3 vel;
+    /* ip+E2C */ itGShell_HurtInit x58_hurtInit;
 } itGShell_ItemVars;
-STATIC_ASSERT(sizeof(itGShell_ItemVars) == 88);
+STATIC_ASSERT(sizeof(itGShell_ItemVars) == 120);
 
 typedef struct {
     /* ip+DD4 */ f32 xDD4;
@@ -631,6 +639,17 @@ typedef struct itPokemonAttributes {
     s32 x14;
     s32 x18;
 } itPokemonAttributes;
+
+typedef struct itKamexAttributes {
+    /* +00 */ f32 x0;
+    /* +04 */ s32 timer;
+    /* +08 */ s32 max;
+    /* +0C */ s32 xC;
+    /* +10 */ s32 x10;
+    /* +14 */ s32 x14;
+    /* +18 */ f32 x18;
+    /* +1C */ f32 x1C;
+} itKamexAttributes;
 
 typedef struct {
     s16 x0;
