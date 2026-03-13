@@ -9,6 +9,7 @@
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/mtx.h>
+#include <sysdolphin/baselib/tobj.h>
 #include <melee/gm/gmresult.h>
 #include <melee/gm/types.h>
 #include <melee/lb/lb_00B0.h>
@@ -17,7 +18,23 @@
 
 extern ResultsData lbl_8046DBE8;
 
-/* 46E38C */ static int lbl_8046E38C[4];
+extern u8 lbl_8046E1B0[];
+
+extern int lbl_8046E38C[4];
+
+extern HSD_JObj* lbl_8046E39C[4];
+
+typedef struct {
+    u8 x0_0 : 1;
+    u8 x0_1 : 1;
+    u8 x0_2 : 1;
+    u8 x0_3 : 1;
+    u8 x0_4 : 2;
+    u8 x0_6 : 2;
+    u8 pad_01[0x2313];
+} lbl_8046E3AC_t;
+
+extern lbl_8046E3AC_t lbl_8046E3AC;
 
 void gm_80177724(struct ResultsMatchInfo* arg0)
 {
@@ -374,7 +391,36 @@ void fn_80179F6C(int idx, int value)
     lbl_8046E38C[idx] = value;
 }
 
-/// #fn_80179F84
+void fn_80179F84(HSD_JObj* jobj)
+{
+    HSD_JObj* child;
+    HSD_JObj* next;
+    int i;
+
+    if (jobj == NULL) {
+        child = NULL;
+    } else {
+        child = jobj->child;
+    }
+
+    {
+        HSD_JObj** p = lbl_8046E39C;
+
+        *p = child;
+
+        for (i = 0; i < 3; i++) {
+            if (child == NULL) {
+                next = NULL;
+            } else {
+                next = child->next;
+            }
+            child = next;
+            *++p = child;
+        }
+    }
+
+    lbl_8046E3AC.x0_4 = 1;
+}
 
 void fn_8017A004(void)
 {
@@ -391,6 +437,32 @@ void fn_8017A004(void)
 
 /// #fn_8017A67C
 
-/// #fn_8017A9B4
+void fn_8017A9B4(int slot)
+{
+    u8* base = lbl_8046E1B0;
+    u8* data = base + 0x224;
+    int lookup;
+    int off;
+    u8* tbl;
+    HSD_ImageDesc* desc;
+
+    if (base[0x22A] == 0) {
+        lookup = data[slot * 0xA8 + 0x5D];
+    } else {
+        int idx = data[slot * 0xA8 + 0x5F];
+        lookup = data[idx * 0xC + 0x24];
+    }
+
+    off = slot * 0x18;
+    tbl = base + (lookup << 1);
+
+    desc = (HSD_ImageDesc*) &base[off + 0x104];
+    desc->image_ptr = NULL;
+    lb_800121FC(desc, *(u16*) &tbl[0x24B0], *(u16*) &tbl[0x24C0], 5, 0);
+
+    desc = (HSD_ImageDesc*) &base[off + 0x164];
+    desc->image_ptr = NULL;
+    lb_800121FC(desc, *(u16*) &tbl[0x24B8], *(u16*) &tbl[0x24C8], 5, 0);
+}
 
 /// #fn_8017AA78
