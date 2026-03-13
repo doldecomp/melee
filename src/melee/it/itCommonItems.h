@@ -1246,12 +1246,14 @@ typedef struct itWhiteBea_ItemVars {
     /* +2C ip+E00 */ char pad_2C[0x10];
     /* +3C ip+E10 */ s32 x3C;
     /* +40 ip+E14 */ s32 x40;
+    /* +44 ip+E18 */ s32 x44;
 } itWhiteBea_ItemVars;
 
 typedef struct itWhiteBeaAttributes {
     /* +0 */ s32* x0;
     /* +4 */ f32 x4;
-    /* +8 */ char pad_x8[0xC];
+    /* +8 */ char pad_x8[0x8];
+    /* +10 */ f32 x10;
     /* +14 */ s16 x14;
 } itWhiteBeaAttributes;
 
