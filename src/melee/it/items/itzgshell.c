@@ -10,6 +10,7 @@
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/itcoll.h"
 #include "it/item.h"
 #include "MSL/math.h"
 
@@ -96,7 +97,21 @@ void fn_802DDC8C(Item_GObj* gobj)
 
 /// #it_802DE040
 
-/// #it_802DE0F0
+void it_802DE0F0(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    PAD_STACK(8);
+    it_8026B390(gobj);
+    it_80275444(gobj);
+    it_802754D4(gobj);
+    it_802756E0(gobj);
+    ip->x40_vel.x = ip->x40_vel.y = ip->x40_vel.z = 0.0f;
+    ip->xDD4_itemVar.zgshell.xE0C = 0;
+    Item_80268E5C((HSD_GObj*) gobj, 0, ITEM_ANIM_UPDATE);
+    ip->xDD4_itemVar.zgshell.xE1C_b0 = 0;
+    it_80274CAC(gobj);
+    ip->jumped_on = fn_802DFE7C;
+}
 
 bool itZrshell_UnkMotion0_Anim(Item_GObj* arg0)
 {
@@ -169,7 +184,7 @@ void it_2725_Logic11_PickedUp(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     it_80275474(gobj);
-    M2C_FIELD(ip, s32*, 0xE0C) = 0;
+    ip->xDD4_itemVar.zgshell.xE0C = 0;
     ip->xDD4_itemVar.zgshell.xE1C_b0 = 0;
     Item_80268E5C(gobj, 2, 2);
 }
@@ -317,7 +332,17 @@ bool itZrshell_UnkMotion8_Coll(Item_GObj* gobj)
     return false;
 }
 
-/// #it_2725_Logic11_EnteredAir
+void it_2725_Logic11_EnteredAir(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    if (ip->msid == 0xB || ip->msid == 0xA) {
+        return;
+    }
+    it_802DFFA0(gobj);
+    ip->xDD4_itemVar.zgshell.xE1C_b0 = 0;
+    ip->xDC8_word.flags.x1F = 1;
+    Item_80268E5C((HSD_GObj*) gobj, 9, ITEM_ANIM_UPDATE);
+}
 
 bool itZrshell_UnkMotion9_Anim(Item_GObj* arg0)
 {
@@ -356,9 +381,29 @@ void itZrshell_UnkMotion11_Phys(Item_GObj* gobj)
     }
 }
 
-/// #itZrshell_UnkMotion11_Coll
+bool itZrshell_UnkMotion11_Coll(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    if (ip->ground_or_air == GA_Air) {
+        if (it_8026DB40(gobj) & 1) {
+            it_802762B0(ip);
+            ip->x40_vel.x = ip->x40_vel.y = ip->x40_vel.z = 0.0f;
+        }
+    } else {
+        it_8026D62C(gobj, it_802DE320);
+    }
+    return it_8027C794(gobj);
+}
 
-/// #it_802DF9F8
+void it_802DF9F8(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    it_802762BC(ip);
+    ip->xDC8_word.flags.x1F = 0;
+    it_802DFF14(gobj, 0);
+    it_802756D0(gobj);
+    Item_80268E5C((HSD_GObj*) gobj, 0xA, ITEM_ANIM_UPDATE);
+}
 
 /// #itZrshell_UnkMotion10_Anim
 
@@ -368,7 +413,19 @@ void itZrshell_UnkMotion10_Phys(Item_GObj* gobj)
     ip->x40_vel.y -= ip->xCC_item_attr->x10_fall_speed;
 }
 
-/// #itZrshell_UnkMotion10_Coll
+bool itZrshell_UnkMotion10_Coll(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    if (ip->ground_or_air == GA_Air) {
+        if (it_8026DB40(gobj) & 1) {
+            it_802762B0(ip);
+            ip->x40_vel.x = ip->x40_vel.y = ip->x40_vel.z = 0.0f;
+        }
+    } else {
+        it_8026D62C(gobj, it_802DE320);
+    }
+    return it_8027C794(gobj);
+}
 
 bool itZGShell_Logic11_DmgDealt(Item_GObj* gobj)
 {
@@ -421,7 +478,16 @@ void itZGShell_Logic11_Destroyed(Item_GObj* gobj)
     grZakoGenerator_801CACB8((Ground_GObj*) gobj);
 }
 
-/// #it_802DFF14
+void it_802DFF14(Item_GObj* gobj, s32 arg1)
+{
+    Item* ip = GET_ITEM(gobj);
+    itGShell_HurtInit capsule = ip->xDD4_itemVar.zgshell.x58_hurtInit;
+    if (arg1 != 0) {
+        capsule.a_offset.y = 6.0f;
+        capsule.scale *= 2.0f;
+    }
+    it_80271534(gobj, 0, (HurtCapsule*) &capsule);
+}
 
 void it_802DFFA0(Item_GObj* gobj)
 {

@@ -18,7 +18,6 @@ bool lbArchive_80017040(HSD_Archive** dst, const char* filename, void* symbols,
                         ...);
 bool lbArchive_800171CC(HSD_Archive** dst, const char* filename, void* symbols,
                         ...);
-int lbArchive_80017340(HSD_Archive*, u8*, size_t file_size,
-                       intptr_t base_addr);
+int lbArchiveRelocate(HSD_Archive*, u8*, size_t file_size, intptr_t base_addr);
 
 #endif

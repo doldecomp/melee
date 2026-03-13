@@ -5,6 +5,9 @@
 
 #include "ft/chara/ftKirby/ftKb_Init.h"
 #include "it/inlines.h"
+#include "it/it_26B1.h"
+#include "it/it_2725.h"
+#include "it/item.h"
 
 double it_802F23AC(int* obj, float* pos)
 {
@@ -47,7 +50,17 @@ bool itKirby_2F23_UnkMotion0_Coll(Item_GObj* gobj)
 
 /// #it_802F258C
 
-/// #it_802F2810
+void it_802F2810(HSD_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    Item_80268E5C(gobj, 1, 0);
+    ip->on_accessory = it_802F289C;
+    it_8026BB44((Item_GObj*) gobj);
+    it_802756D0((Item_GObj*) gobj);
+    it_802762BC(ip);
+    it_80274ECC((Item_GObj*) gobj, 1);
+    it_80273408((Item_GObj*) gobj);
+}
 
 bool itKirby_2F23_UnkMotion1_Anim(Item_GObj* gobj)
 {

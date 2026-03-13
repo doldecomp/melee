@@ -14,7 +14,7 @@
 /* 2C9EF0 */ bool itKabigon_UnkMotion0_Anim(Item_GObj* gobj);
 /* 2C9F74 */ void itKabigon_UnkMotion0_Phys(Item_GObj* gobj);
 /* 2C9FBC */ bool itKabigon_UnkMotion0_Coll(Item_GObj* gobj);
-/* 2CA014 */ UNK_RET it_802CA014(UNK_PARAMS);
+/* 2CA014 */ void it_802CA014(Item_GObj* gobj);
 /* 2CA074 */ UNK_RET it_802CA074(UNK_PARAMS);
 /* 2CA198 */ bool itKabigon_UnkMotion1_Anim(Item_GObj* gobj);
 /* 2CA318 */ void itKabigon_UnkMotion1_Phys(Item_GObj* gobj);
@@ -23,7 +23,7 @@
 /* 2CA388 */ bool itKabigon_UnkMotion2_Anim(Item_GObj* gobj);
 /* 2CA3AC */ void itKabigon_UnkMotion2_Phys(Item_GObj* gobj);
 /* 2CA3CC */ bool itKabigon_UnkMotion2_Coll(Item_GObj* gobj);
-/* 2CA3F4 */ UNK_RET it_802CA3F4(UNK_PARAMS);
+/* 2CA3F4 */ void it_802CA3F4(Item_GObj*);
 /* 3F7AD8 */ extern ItemStateTable it_803F7AD8[];
 
 #endif

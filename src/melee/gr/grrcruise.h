@@ -48,15 +48,15 @@
 /* 20071C */ void grRCruise_8020071C(Ground_GObj*);
 /* 200B48 */ UNK_RET grRCruise_80200B48(UNK_PARAMS);
 /* 200C04 */ void grRCruise_80200C04(Ground_GObj*);
-/* 2010A4 */ UNK_RET fn_802010A4(UNK_PARAMS);
+/* 2010A4 */ void fn_802010A4(Ground_GObj*, s32, u8*);
 /* 201110 */ void grRCruise_80201110(Ground_GObj*);
 /* 201288 */ UNK_RET grRCruise_80201288(UNK_PARAMS);
 /* 201410 */ UNK_RET grRCruise_80201410(UNK_PARAMS);
 /* 201588 */ void grRCruise_80201588(Ground_GObj*);
 /* 201918 */ void grRCruise_80201918(Vec3*);
 /* 201988 */ UNK_RET grRCruise_80201988(UNK_PARAMS);
-/* 201B60 */ UNK_RET grRCruise_80201B60(UNK_PARAMS);
-/* 201BE0 */ UNK_RET fn_80201BE0(UNK_PARAMS);
+/* 201B60 */ void grRCruise_80201B60(HSD_JObj*, s32);
+/* 201BE0 */ void fn_80201BE0(HSD_GObj*, s32);
 /* 201C50 */ DynamicsDesc* grRCruise_80201C50(enum_t);
 /* 201C58 */ bool grRCruise_80201C58(Vec3*, int arg, HSD_JObj* jobj);
 

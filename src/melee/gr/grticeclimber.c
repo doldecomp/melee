@@ -47,7 +47,7 @@
 };
 
 StageData grTIc_803E8AF4 = {
-    47,
+    TICECLIMBER,
     grTIc_803E8A98,
     "/GrTIc.dat",
     grTIceClimber_80220F14,

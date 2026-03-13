@@ -37,7 +37,7 @@
 };
 
 StageData grTLg_803E8E4C = {
-    51,
+    TLUIGI,
     grTLg_803E8DF0,
     "/GrTLg.dat",
     grTLuigi_80221C14,

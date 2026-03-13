@@ -86,7 +86,7 @@ StageCallbacks grCs_803E0FF4[21] = {
 };
 
 StageData grCs_803E11A4 = {
-    (1 << 1),
+    CASTLE,
     grCs_803E0FF4,
     "/GrCs.dat",
     grCastle_801CD37C,
@@ -104,7 +104,8 @@ StageData grCs_803E11A4 = {
 typedef struct grCastleParams {
     s16 x0;
     s16 x2;
-    f32 x4;
+    s16 x4;
+    s16 x6;
     s16 x8;
     s16 xA;
     s32 xC;
@@ -263,7 +264,15 @@ void grCastle_801CD8A8(Ground_GObj* gobj)
     }
 }
 
-/// #grCastle_801CD960
+void grCastle_801CD960(Ground_GObj* gobj)
+{
+    Ground* gp = gobj->user_data;
+    s32 i;
+
+    for (i = 0; i < 12; i++) {
+        grLib_801C9B6C(&gp->gv.castle3.x1C[i]);
+    }
+}
 
 void grCastle_801CD9B4(Ground_GObj* gobj)
 {
@@ -424,7 +433,23 @@ bool grCastle_801CF300(Ground_GObj* gobj)
 
 void grCastle_801CF74C(Ground_GObj* gobj) {}
 
-/// #grCastle_801CF750
+void grCastle_801CF750(Ground* gp, s32 arg1, CollData* cd, s32 arg3,
+                       mpLib_GroundEnum arg4, f32 arg5)
+{
+    s32 idx;
+    PAD_STACK(16);
+
+    if (arg1 == 4) {
+        idx = 0;
+    } else {
+        idx = 1;
+    }
+
+    if ((s32) cd->x34_flags.b1234 == 1) {
+        gp = (Ground*) ((u8*) gp + idx * 16);
+        *(f32*) ((u8*) gp + 0xD0) += (f32) arg3;
+    }
+}
 
 /// #grCastle_801CF7B0
 void grCastle_801CF7B0(Ground_GObj* gobj)
@@ -447,9 +472,22 @@ void grCastle_801CF7B0(Ground_GObj* gobj)
 
 /// #grCastle_801CF868
 
-/// #fn_801CFAFC
+void fn_801CFAFC(Item_GObj* item, Ground* gp, Vec3* pos, HSD_GObj* gobj,
+                 f32 arg4)
+{
+    *(s16*) &gp->gv.castle2.xC4 = 4;
+    if (ftLib_80086960(gobj)) {
+        ftLib_80086A4C(gobj, (f32) grCs_804D6970->x4);
+    }
+}
 
-/// #fn_801CFB68
+void fn_801CFB68(Item_GObj* item_gobj, Ground* gp, HSD_GObj* gobj)
+{
+    gp->gv.pura.xC4 = 4;
+    if (ftLib_80086960(gobj) != 0) {
+        ftLib_80086A4C(gobj, (f32) grCs_804D6970->x4);
+    }
+}
 
 /// #grCastle_801CFBD4
 

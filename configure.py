@@ -501,9 +501,10 @@ config.libs = [
     MeleeLib(
         "ef (Visual effects)",
         [
-            Object(NonMatching, "melee/ef/eflib.c"),
+            Object(Matching, "melee/ef/eflib_alloc.c"),
+            Object(Matching, "melee/ef/eflib.c"),
             Object(NonMatching, "melee/ef/efsync.c"),
-            Object(NonMatching, "melee/ef/ef_061D.c"),
+            Object(Matching, "melee/ef/ef_061D.c"),
             Object(NonMatching, "melee/ef/efasync.c"),
         ],
     ),
@@ -724,7 +725,7 @@ config.libs = [
             Object(Matching, "melee/ft/chara/ftLink/ftLk_SpecialLw.c"),
             Object(Matching, "melee/ft/chara/ftLink/ftLk_SpecialHi.c"),
             Object(Matching, "melee/ft/chara/ftLink/ftLk_SpecialS.c"),
-            Object(NonMatching, "melee/ft/chara/ftLink/ftLk_SpecialN.c"),
+            Object(Matching, "melee/ft/chara/ftLink/ftLk_SpecialN.c"),
             # Kirby
             Object(NonMatching, "melee/ft/chara/ftKirby/ftKb_Init.c"),
             Object(NonMatching, "melee/ft/chara/ftKirby/ftKb_SpecialN.c"),

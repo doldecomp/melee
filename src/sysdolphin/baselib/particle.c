@@ -5455,8 +5455,8 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     idx = (pc[0] << 8) + pc[1];
                     pc += 2;
 
-                    if (ptclref[bank] != NULL) {
-                        idx = ptclref[bank][idx];
+                    if (ptclref_804D0E5C[bank] != NULL) {
+                        idx = ptclref_804D0E5C[bank][idx];
                     }
 
                     linkNo = pp->linkNo;
@@ -5625,8 +5625,8 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     flags = pc[2];
                     pc += 3;
 
-                    if (ptclref[pp->bank] != NULL) {
-                        idx = ptclref[pp->bank][idx];
+                    if (ptclref_804D0E5C[pp->bank] != NULL) {
+                        idx = ptclref_804D0E5C[pp->bank][idx];
                     }
 
                     gchild = hsd_8039F05C(pp->linkNo, pp->bank, idx);
@@ -5748,8 +5748,8 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
 
                     idx = baseIdx + (s32) ((f32) randomRange * HSD_Randf());
 
-                    if (ptclref[pp->bank] != NULL) {
-                        idx = ptclref[pp->bank][idx];
+                    if (ptclref_804D0E5C[pp->bank] != NULL) {
+                        idx = ptclref_804D0E5C[pp->bank][idx];
                     }
 
                     linkNo = pp->linkNo;
@@ -6103,8 +6103,8 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     idx = (pc[0] << 8) + pc[1];
                     pc += 2;
 
-                    if (ptclref[bank] != NULL) {
-                        idx = ptclref[bank][idx];
+                    if (ptclref_804D0E5C[bank] != NULL) {
+                        idx = ptclref_804D0E5C[bank][idx];
                     }
 
                     linkNo = pp->linkNo;

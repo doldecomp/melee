@@ -618,9 +618,53 @@ null_return:
     return -1;
 }
 
-/// #ftKb_SpecialNMt_80106F9C
+bool ftKb_SpecialNMt_80106F9C(Fighter_GObj* gobj)
+{
+    if (gobj != NULL) {
+        Fighter* fp = gobj->user_data;
+        s32 msid = fp->motion_id;
 
-/// #ftKb_SpecialNMt_80106FEC
+        switch (msid) {
+        case ftKb_MS_MtSpecialNStart:
+        case ftKb_MS_MtSpecialNLoop:
+        case ftKb_MS_MtSpecialNLoopFull:
+        case ftKb_MS_MtSpecialNCancel:
+        case ftKb_MS_MtSpecialNEnd:
+        case ftKb_MS_MtSpecialAirNStart:
+        case ftKb_MS_MtSpecialAirNLoop:
+        case ftKb_MS_MtSpecialAirNLoopFull:
+        case ftKb_MS_MtSpecialAirNCancel:
+        case ftKb_MS_MtSpecialAirNEnd:
+            if (fp->x2070.x2071_b6) {
+                return true;
+            }
+            return false;
+        }
+        return true;
+    }
+    return true;
+}
+
+bool ftKb_SpecialNMt_80106FEC(Fighter_GObj* gobj)
+{
+    if (gobj != NULL) {
+        Fighter* fp = gobj->user_data;
+        switch (fp->motion_id) {
+        case ftKb_MS_MtSpecialNStart:
+        case ftKb_MS_MtSpecialNLoop:
+        case ftKb_MS_MtSpecialNLoopFull:
+        case ftKb_MS_MtSpecialNEnd:
+        case ftKb_MS_MtSpecialAirNStart:
+        case ftKb_MS_MtSpecialAirNLoop:
+        case ftKb_MS_MtSpecialAirNLoopFull:
+        case ftKb_MS_MtSpecialAirNEnd:
+            return false;
+        default:
+            return true;
+        }
+    }
+    return true;
+}
 
 /// @brief Clears Mewtwo copy ability state and effects.
 void ftKb_SpecialNMt_80107040(Fighter_GObj* gobj)

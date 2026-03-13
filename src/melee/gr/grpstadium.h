@@ -13,10 +13,10 @@ typedef enum {
     PsType_Display = 1,
 } StadiumGrType;
 
-/* 1D1018 */ void grStadium_801D1018(bool);
-/* 1D101C */ void grStadium_801D101C(void);
-/* 1D10C8 */ void grStadium_UnkStage0_OnLoad(void);
-/* 1D10CC */ void grStadium_UnkStage0_OnStart(void);
+/* 1D1018 */ void grStadium_OnDemoInit(int);
+/* 1D101C */ void grStadium_OnInit(void);
+/* 1D10C8 */ void grStadium_OnLoad(void);
+/* 1D10CC */ void grStadium_OnStart(void);
 /* 1D10F0 */ bool grStadium_801D10F0(void);
 /* 1D10F8 */ Ground_GObj* grStadium_801D10F8(StadiumGrType);
 /* 1D11E4 */ void fn_801D11E4(Ground_GObj*);
@@ -89,8 +89,8 @@ typedef enum {
 /* 1D4548 */ void grStadium_801D4548(Ground_GObj*);
 /* 1D4FF8 */ bool grStadium_801D4FF8(int pl_slot);
 /* 1D5074 */ void fn_801D5074(Ground_GObj*, int);
-/* 1D50B8 */ DynamicsDesc* grStadium_801D50B8(enum_t);
-/* 1D50C0 */ bool grStadium_801D50C0(Vec3*, int, HSD_JObj*);
+/* 1D50B8 */ DynamicsDesc* grStadium_OnTouchLine(enum_t);
+/* 1D50C0 */ bool grStadium_OnCheckShadowRender(Vec3*, int, HSD_JObj*);
 /* 1D511C */ void grStadium_801D511C(void);
 
 #endif

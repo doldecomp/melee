@@ -66,7 +66,7 @@ StageCallbacks grTFe_803E97C0[4] = {
 };
 
 StageData grTFe_803E981C = {
-    64,
+    TEMBLEM,
     grTFe_803E97C0,
     "/GrTFe.dat",
     grTRoy_802243F8,

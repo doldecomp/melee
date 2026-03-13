@@ -24,7 +24,7 @@ StageCallbacks grTGw_803E96F8[] = {
 };
 
 StageData grTGw_803E9754 = {
-    63,
+    TGAMEWATCH,
     grTGw_803E96F8,
     "/GrTGw.dat",
     grTGameWatch_80224114,

@@ -71,7 +71,7 @@ StageCallbacks grTMr_803E8548[] = {
 };
 
 StageData grTMr_803E85A4 = {
-    40,
+    TMARIO,
     grTMr_803E8548,
     "/GrTMr.dat",
     grTMario_8021F844,

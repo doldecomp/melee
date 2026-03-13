@@ -32,19 +32,22 @@ StageCallbacks grTe_803E5708[] = {
       0xC0000000 },
     { 0, 0, 0, 0, 0 }
 };
-StageData grTe_803E5764 = { 0x01,
-                            grTe_803E5708,
-                            "/GrTe.dat",
-                            grTest_80206E30,
-                            grTest_80206E2C,
-                            grTest_UnkStage0_OnLoad,
-                            grTest_UnkStage0_OnStart,
-                            grTest_8020703C,
-                            grTest_8020740C,
-                            grTest_80207414,
-                            1,
-                            grTe_803E56B8,
-                            13 };
+
+StageData grTe_803E5764 = {
+    TEST,
+    grTe_803E5708,
+    "/GrTe.dat",
+    grTest_80206E30,
+    grTest_80206E2C,
+    grTest_UnkStage0_OnLoad,
+    grTest_UnkStage0_OnStart,
+    grTest_8020703C,
+    grTest_8020740C,
+    grTest_80207414,
+    1,
+    grTe_803E56B8,
+    13,
+};
 
 float grTe_804D6A48;
 

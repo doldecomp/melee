@@ -9,6 +9,7 @@
 #include <melee/gr/forward.h>
 #include <melee/it/forward.h>
 #include <melee/lb/forward.h>
+#include <melee/lb/types.h>
 #include <melee/sc/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
@@ -145,11 +146,11 @@ typedef struct StageCallbacks {
 } StageCallbacks;
 
 typedef struct StageData {
-    u32 flags1;
+    u32 internal_stage_id;
     StageCallbacks* callbacks;
     char* data1;
-    void (*callback0)(void);
-    void (*callback1)(int);
+    void (*OnInit)(void);
+    void (*OnDemoInit)(int);
     void (*OnLoad)(void);
     void (*OnStart)(void);
     bool (*callback4)(void);
@@ -288,16 +289,25 @@ struct grKongo_GroundVars3 {
 };
 
 struct grKraid_GroundVars {
-    /*  + gp+C4 */ u8 x0;
+    /*  + gp+C4 */ s8 x0;
     /*  + gp+C5 */ s8 x1;
     /*  + gp+C8 */ f32 x4;
     /*  + gp+CC */ f32 x8;
     /*  + gp+D0 */ f32 xC;
+    /*  + gp+D4 */ s32 x10;
 };
 
 struct grKraid_GroundVars2 {
-    /*  + gp+C4 */ u8 _[0xC];
+    /*  + gp+C4 */ s8 x0;
+    /*  + gp+C5 */ s8 x1;
+    /*  + gp+C6 */ s8 x2;
+    /*  + gp+C7 */ s8 x3;
+    /*  + gp+C8 */ s8 x4;
+    /*  + gp+C9 */ s8 x5;
+    /*  + gp+CC */ f32 x8;
     /*  + gp+D0 */ s32 xC;
+    /*  + gp+D4 */ HSD_JObj* x10;
+    /*  + gp+D8 */ HSD_JObj* x14;
 };
 
 struct grCorneria_GroundVars {
@@ -929,6 +939,11 @@ struct grCastle_GroundVars {
     /*  +0 gp+E0 */ HSD_Spline** xE0;
 };
 
+struct grCastle_GroundVars3 {
+    /* +00 gp+C4 */ u8 pad_0[0x1C];
+    /* +1C gp+E0 */ DynamicsDesc x1C[12];
+};
+
 struct grCastle_GroundVars2 {
     /*  +0 gp+C4 */ HSD_GObj* xC4;
     /*  +0 gp+C8 */ HSD_GObj* xC8;
@@ -1007,6 +1022,25 @@ struct Map_GroundVars {
     /* +40 gp+104   */ float x104;
 };
 
+struct grOldYoshi_Cloud {
+    u32 xC4_0123 : 4;
+    u32 xC4_4 : 1;
+    u32 xC4_567 : 8;
+    HSD_JObj* xC8;
+    float xCC;
+    float xD0;
+    float xD4;
+};
+
+struct grOldYoshi_Cloud_GroundVars {
+    struct grOldYoshi_Cloud cloud[3];
+};
+
+struct grOldYoshi_Guest_GroundVars {
+    s16 xC4;
+    s16 xC6;
+};
+
 struct Ground {
     int x0;         // 0x0
     HSD_GObj* gobj; // 0x4
@@ -1044,7 +1078,8 @@ struct Ground {
     int x68;
     int x6C;
     int x70;
-    char pad_40[0xC4 - 0x74];
+    char pad_74[0xC0 - 0x74];
+    f32 xC0;
 
     union {
         /// @todo This union is named 'u', from assert statements
@@ -1055,6 +1090,7 @@ struct Ground {
             struct grBigBlueRoute_GroundVars bigblueroute;
             struct grCastle_GroundVars castle;
             struct grCastle_GroundVars2 castle2;
+            struct grCastle_GroundVars3 castle3;
             struct grCorneria_GroundVars corneria;
             struct grGreatBay_GroundVars greatbay;
             struct grGreatBay_GroundVars2 greatbay2;
@@ -1078,6 +1114,8 @@ struct Ground {
             struct grInishie2_GroundVars2 inishie22;
             struct grInishie2_GroundVars3 inishie23;
             struct grOldKongo_GroundVars oldkongo;
+            struct grOldYoshi_Cloud_GroundVars oldyoshicloud;
+            struct grOldYoshi_Guest_GroundVars oldyoshiguest;
             struct GroundVars_izumi izumi;
             struct GroundVars_izumi2 izumi2;
             struct GroundVars_izumi3 izumi3;

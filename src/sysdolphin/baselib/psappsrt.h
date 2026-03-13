@@ -16,7 +16,7 @@
 
 /* 003A0D18 */ bool psInitAppSRT(int, int);
 /* 003A0D58 */ HSD_psAppSRT* psAddGeneratorAppSRT(s32, u16);
-/* 003A0E3C */ void HSD_PSAppSrt_803A425C(HSD_Particle*, s32);
+/* 003A0E3C */ HSD_psAppSRT* psAddParticleAppSRT_begin(HSD_Particle*, s32);
 int psRemoveGeneratorSRT(HSD_Generator*);
 int psRemoveParticleAppSRT(HSD_Particle*);
 HSD_psAppSRT* psAddGeneratorAppSRT_begin(HSD_Generator*, s32);

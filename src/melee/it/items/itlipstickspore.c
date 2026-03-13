@@ -41,7 +41,34 @@ bool itLipstickspore_UnkMotion0_Anim(Item_GObj* gobj)
     return it_80273130(gobj);
 }
 
-/// #itLipstickspore_UnkMotion0_Phys
+void itLipstickspore_UnkMotion0_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+
+    if (ip->x40_vel.x == 0.0f) {
+        return;
+    }
+
+    if (ip->xDD4_itemVar.lipstickspore.xDD8 == 0.0f) {
+        return;
+    }
+
+    if (ip->x40_vel.x > 0.0f) {
+        ip->x40_vel.x -= ip->xDD4_itemVar.lipstickspore.xDD8;
+    } else {
+        ip->x40_vel.x += ip->xDD4_itemVar.lipstickspore.xDD8;
+    }
+
+    {
+        f32 abs_vel = ip->x40_vel.x;
+        if (abs_vel < 0.0f) {
+            abs_vel = -abs_vel;
+        }
+        if (abs_vel < ip->xDD4_itemVar.lipstickspore.xDD8) {
+            ip->x40_vel.x = 0.0f;
+        }
+    }
+}
 
 bool itLipstickspore_UnkMotion0_Coll(Item_GObj* gobj)
 {
