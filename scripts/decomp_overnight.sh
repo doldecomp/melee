@@ -20,26 +20,28 @@
 
 set -euo pipefail
 
-CHILD_PIDS=""
-track_pid() { CHILD_PIDS="$CHILD_PIDS $1"; }
+CHILD_PIDS=()
+track_pid() { CHILD_PIDS+=("$1"); }
 kill_children() {
-    for pid in $CHILD_PIDS; do
-        kill "$pid" 2>/dev/null
-        # Also kill any children of that pid (e.g. claude's subprocesses)
-        pkill -P "$pid" 2>/dev/null
+    for pid in "${CHILD_PIDS[@]+"${CHILD_PIDS[@]}"}"; do
+        kill "$pid" 2>/dev/null || true
+        pkill -P "$pid" 2>/dev/null || true
     done
-    CHILD_PIDS=""
+    CHILD_PIDS=()
 }
 cleanup() {
     trap - INT TERM EXIT
     kill_children
-    pkill -P $$ 2>/dev/null
+    pkill -P $$ 2>/dev/null || true
+    # Wait for killed children to actually exit
+    wait 2>/dev/null || true
     exit 1
 }
 trap cleanup INT TERM EXIT
 
 REPO_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$REPO_ROOT"
+HELPERS="$REPO_ROOT/scripts/decomp_helpers.py"
 
 LOG_DIR="$REPO_ROOT/scripts/logs"
 mkdir -p "$LOG_DIR"
@@ -60,15 +62,16 @@ log() {
     echo "[$(date '+%H:%M:%S')] $*" | tee -a "$MAIN_LOG"
 }
 
-# Compute cutoff epoch once at startup (handles midnight wrap-around)
-CUTOFF_EPOCH=$(python3 -c "
-import datetime, sys
-now = datetime.datetime.now()
-cutoff = now.replace(hour=$CUTOFF_HOUR, minute=0, second=0, microsecond=0)
-if cutoff <= now:
-    cutoff += datetime.timedelta(days=1)
-print(int(cutoff.timestamp()))
-")
+# Abort if worktree is dirty (instead of the old git stash approach)
+check_worktree_clean() {
+    if ! git diff --quiet HEAD 2>/dev/null || [ -n "$(git ls-files --others --exclude-standard)" ]; then
+        log "ERROR: Working tree is dirty. Commit or stash changes before running."
+        log "  (This script no longer auto-stashes to avoid reverting its own edits.)"
+        exit 1
+    fi
+}
+
+CUTOFF_EPOCH=$(python3 "$HELPERS" cutoff-epoch "$CUTOFF_HOUR")
 
 past_cutoff() {
     [ "$(date +%s)" -ge "$CUTOFF_EPOCH" ]
@@ -135,28 +138,20 @@ check_usage() {
 }
 
 progress_save() {
-    local func="$1" status="$2"
-    python3 -c "
-import json, os, time
-f = '$PROGRESS_FILE'
-data = []
-if os.path.exists(f):
-    with open(f) as fh:
-        data = json.load(fh)
-data.append({'name': '$func', 'status': '$status', 'time': time.strftime('%H:%M:%S')})
-with open(f, 'w') as fh:
-    json.dump(data, fh, indent=2)
-"
+    python3 "$HELPERS" progress-save "$PROGRESS_FILE" "$1" "$2"
 }
 
 progress_already_tried() {
-    local func="$1"
-    [ -f "$PROGRESS_FILE" ] && python3 -c "
-import json, sys
-with open('$PROGRESS_FILE') as f:
-    entries = json.load(f)
-sys.exit(0 if any(e['name'] == '$func' and e['status'] in ('success', 'failure') for e in entries) else 1)
-" 2>/dev/null
+    [ -f "$PROGRESS_FILE" ] && python3 "$HELPERS" progress-check "$PROGRESS_FILE" "$1" 2>/dev/null
+}
+
+cleanup_worktree() {
+    local branch_name="$1"
+    local wt_path
+    wt_path=$(git worktree list --porcelain 2>/dev/null | grep "$branch_name" | head -1 | sed 's/worktree //')
+    if [ -n "$wt_path" ] && [ -d "$wt_path" ]; then
+        git worktree remove "$wt_path" --force 2>/dev/null || true
+    fi
 }
 
 cleanup_stale_worktrees() {
@@ -196,12 +191,16 @@ if [ "$CONTINUOUS" = "true" ]; then
     log "Continuous mode: ON (cutoff: $(date -r "$CUTOFF_EPOCH" '+%H:%M' 2>/dev/null || date -d "@$CUTOFF_EPOCH" '+%H:%M' 2>/dev/null || echo "$CUTOFF_HOUR:00"))"
 fi
 
+check_worktree_clean
 cleanup_stale_worktrees
 
 # Seed build cache if already built — avoids unnecessary full rebuild on first iteration
-if [ -f "$REPO_ROOT/build.ninja" ] && ninja -n 2>&1 | grep -q "no work to do"; then
-    LAST_BUILT_HEAD=$(git rev-parse HEAD)
-    log "Build already clean, seeded cache at $LAST_BUILT_HEAD"
+if [ -f "$REPO_ROOT/build.ninja" ]; then
+    NINJA_DRY=$(ninja -n 2>&1 || true)
+    if echo "$NINJA_DRY" | grep -q "no work to do"; then
+        LAST_BUILT_HEAD=$(git rev-parse HEAD)
+        log "Build already clean, seeded cache at $LAST_BUILT_HEAD"
+    fi
 fi
 
 TOTAL_SUCCESSES=0
@@ -215,7 +214,6 @@ while true; do
 
     # 1. Ensure we're on a clean master, synced with upstream
     log "Updating master..."
-    git stash 2>/dev/null || true
     git checkout master 2>/dev/null || git checkout main 2>/dev/null
     git pull --ff-only 2>/dev/null || true
     if git remote get-url upstream >/dev/null 2>&1; then
@@ -235,19 +233,7 @@ while true; do
         python3 configure.py --wrapper wine 2>&1 >> "$MAIN_LOG"
         log "  Running ninja..."
         set +o pipefail
-        ninja 2>&1 | python3 -u -c "
-import sys, re, signal
-signal.signal(signal.SIGINT, lambda *a: sys.exit(0))
-for line in sys.stdin:
-    m = re.match(r'\[(\d+)/(\d+)\]', line)
-    if m:
-        cur, total = int(m.group(1)), int(m.group(2))
-        pct = cur * 100 // total
-        filled = pct * 30 // 100
-        bar = '█' * filled + '░' * (30 - filled)
-        print(f'\r  [{bar}] {cur}/{total} ({pct}%)', end='', flush=True)
-print()
-"
+        ninja 2>&1 | python3 -u "$HELPERS" ninja-progress
         NINJA_EXIT=${PIPESTATUS[0]}
         set -o pipefail
         if [ "$NINJA_EXIT" -ne 0 ]; then
@@ -261,7 +247,11 @@ print()
 
     # 3. Find stubs
     log "Finding stubs..."
-    STUBS_JSON=$(python3 scripts/find_stubs.py "${SOURCE_FILES[@]}")
+    STUBS_JSON=$(python3 scripts/find_stubs.py "${SOURCE_FILES[@]}") || {
+        log "ERROR: find_stubs.py failed (exit code $?)"
+        log "  Output: $STUBS_JSON"
+        exit 1
+    }
     STUB_COUNT=$(echo "$STUBS_JSON" | python3 -c "import json,sys; print(len(json.load(sys.stdin)))")
     log "Found $STUB_COUNT stubs total"
 
@@ -290,29 +280,8 @@ print(json.dumps(list(names)))
     # Collect functions that already have decomp branches (with or without worktree- prefix)
     BRANCH_FUNCS=$(git branch --list 'decomp-*' 'worktree-decomp-*' 2>/dev/null | sed 's/^[* ]*//' | sed 's/^worktree-//' | sed 's/^decomp-//' | sort -u)
 
-    # 5. Filter stubs: remove excluded, enforce size limit, exclude already-attempted, take top N
-    TARGETS=$(python3 -c "
-import json, os
-stubs = json.loads('''$(echo "$STUBS_JSON")''')
-excluded = set(x.lower() for x in json.loads('''$EXCLUDED'''))
-progress = []
-pf = '$PROGRESS_FILE'
-if os.path.exists(pf):
-    with open(pf) as f:
-        progress = json.load(f)
-already_tried = set(e['name'] for e in progress)
-branch_funcs = set('''$BRANCH_FUNCS'''.strip().splitlines())
-targets = [
-    s for s in stubs
-    if s['name'].lower() not in excluded
-    and s['name'] not in already_tried
-    and s['name'] not in branch_funcs
-    and s['size'] > 0
-]
-targets.sort(key=lambda s: s['size'])
-targets = targets[:1]
-print(json.dumps(targets))
-")
+    # 5. Filter stubs: remove excluded, enforce size limit, exclude already-attempted, take top 1
+    TARGETS=$(echo "$STUBS_JSON" | python3 "$HELPERS" filter-stubs "$EXCLUDED" "$BRANCH_FUNCS" "$PROGRESS_FILE")
 
     # 6. Pick the next function to decompile
     STUB=$(echo "$TARGETS" | python3 -c "
@@ -361,22 +330,7 @@ print(json.dumps(targets[0]))
     CONTEXT_H=$(cat "$HEADER_FILE" 2>/dev/null || echo "(no header)")
 
     # Extract just this function's assembly from the .s file
-    CONTEXT_ASM=$(python3 -c "
-import re, sys
-text = open('$ASM_FILE').read()
-pattern = r'(\.fn $FUNC_NAME.*?\.endfn $FUNC_NAME)'
-m = re.search(pattern, text, re.DOTALL)
-if m:
-    print(m.group(1))
-else:
-    # Fallback: grab from glabel to next glabel
-    pattern = r'(glabel $FUNC_NAME\b.*?)(?=\nglabel |\Z)'
-    m = re.search(pattern, text, re.DOTALL)
-    if m:
-        print(m.group(1))
-    else:
-        print('(function not found in asm)')
-" 2>/dev/null || echo "(asm extraction failed)")
+    CONTEXT_ASM=$(python3 "$HELPERS" extract-asm "$ASM_FILE" "$FUNC_NAME" 2>/dev/null || echo "(asm extraction failed)")
 
     # Pre-run m2c decompilation
     CONTEXT_M2C=$(python3 -m m2c.main --target ppc-mwcc-c \
@@ -481,50 +435,13 @@ Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>\"
         track_pid $CLAUDE_PID
 
         # Stream live summaries while claude runs (polls file, exits when claude dies)
-        python3 -u -c "
-import json, sys, signal, time, os
-signal.signal(signal.SIGINT, lambda *a: sys.exit(0))
-signal.signal(signal.SIGTERM, lambda *a: sys.exit(0))
-pos = 0
-log_file = '$FUNC_STREAM_LOG'
-pid = $CLAUDE_PID
-while True:
-    try:
-        if os.path.exists(log_file):
-            with open(log_file) as f:
-                f.seek(pos)
-                for line in f:
-                    try:
-                        d = json.loads(line)
-                        t = d.get('type','')
-                        if t == 'assistant':
-                            for c in d.get('message',{}).get('content',[]):
-                                if c.get('type') == 'text' and c['text'].strip():
-                                    print(f'  [claude] {c[\"text\"][:120]}', flush=True)
-                                elif c.get('type') == 'tool_use':
-                                    inp = c.get('input',{})
-                                    name = c['name']
-                                    desc = inp.get('description','') or inp.get('pattern','') or inp.get('file_path','') or ''
-                                    print(f'  [{name}] {desc[:100]}', flush=True)
-                        elif t == 'result':
-                            s = d.get('subtype','')
-                            print(f'  [result] {s}', flush=True)
-                    except: pass
-                pos = f.tell()
-        # Check if claude is still running
-        os.kill(pid, 0)
-        time.sleep(0.5)
-    except ProcessLookupError:
-        break
-    except OSError:
-        break
-" &
-        TAIL_PID=$!
-        track_pid $TAIL_PID
+        python3 -u "$HELPERS" stream-monitor "$FUNC_STREAM_LOG" "$CLAUDE_PID" &
+        MONITOR_PID=$!
+        track_pid $MONITOR_PID
 
         wait $CLAUDE_PID 2>/dev/null
         CLAUDE_EXIT=$?
-        kill $TAIL_PID 2>/dev/null; wait $TAIL_PID 2>/dev/null
+        kill $MONITOR_PID 2>/dev/null; wait $MONITOR_PID 2>/dev/null
         set -e
         log "  Claude session exited (code: $CLAUDE_EXIT)"
 
@@ -536,34 +453,12 @@ while True:
                 RATE_LIMITED=true
                 break
             fi
-            # Try to parse reset time from output, otherwise use backoff
-            RESET_WAIT=$(python3 -c "
-import re, datetime, sys
-text = open('$FUNC_STREAM_LOG').read()
-m = re.search(r'resets (\d+)(am|pm)', text, re.I)
-if m:
-    hour = int(m.group(1))
-    if m.group(2).lower() == 'pm' and hour != 12:
-        hour += 12
-    elif m.group(2).lower() == 'am' and hour == 12:
-        hour = 0
-    now = datetime.datetime.now()
-    reset = now.replace(hour=hour, minute=1, second=0, microsecond=0)
-    if reset <= now:
-        reset += datetime.timedelta(days=1)
-    wait = int((reset - now).total_seconds())
-    print(max(60, min(wait, 7200)))
-else:
-    print($BACKOFF)
-" 2>/dev/null || echo "$BACKOFF")
+            RESET_WAIT=$(python3 "$HELPERS" parse-rate-limit "$FUNC_STREAM_LOG" "$BACKOFF" 2>/dev/null || echo "$BACKOFF")
             log "  Rate limited (attempt $RETRY/$MAX_RETRIES). Sleeping ${RESET_WAIT}s until reset..."
             sleep "$RESET_WAIT"
             BACKOFF=$((BACKOFF * 2))
             # Clean up failed worktree before retry
-            WT_PATH=$(git worktree list --porcelain 2>/dev/null | grep "$BRANCH_NAME" | head -1 | sed 's/worktree //')
-            if [ -n "$WT_PATH" ] && [ -d "$WT_PATH" ]; then
-                git worktree remove "$WT_PATH" --force 2>/dev/null || true
-            fi
+            cleanup_worktree "$BRANCH_NAME"
             git branch -D "$BRANCH_NAME" 2>/dev/null || true
             git branch -D "worktree-$BRANCH_NAME" 2>/dev/null || true
             continue
@@ -572,40 +467,10 @@ else:
     done
 
     # Extract readable log from stream
-    python3 -c "
-import json, sys
-for line in open('$FUNC_STREAM_LOG'):
-    try:
-        d = json.loads(line)
-        if d.get('type') == 'assistant':
-            for c in d.get('message',{}).get('content',[]):
-                if c.get('type') == 'text':
-                    print(c['text'])
-                elif c.get('type') == 'tool_use':
-                    v = list(c['input'].values())
-                    print(f'>> {c[\"name\"]}({str(v[0])[:80] if v else \"\"})')
-    except: pass
-" > "$FUNC_LOG" 2>/dev/null || true
+    python3 "$HELPERS" extract-log "$FUNC_STREAM_LOG" "$FUNC_LOG" 2>/dev/null || true
 
-    # Sum token usage across all assistant messages
-    FUNC_TOKENS=$(python3 -c "
-import json
-input_t = output_t = cache_create = cache_read = 0
-for line in open('$FUNC_STREAM_LOG'):
-    try:
-        d = json.loads(line)
-        if d.get('type') == 'assistant':
-            u = d.get('message', {}).get('usage', {})
-            input_t += u.get('input_tokens', 0)
-            output_t += u.get('output_tokens', 0)
-            cache_create += u.get('cache_creation_input_tokens', 0)
-            cache_read += u.get('cache_read_input_tokens', 0)
-    except: pass
-total = input_t + output_t + cache_create + cache_read
-def fmt(n):
-    return f'{n/1000:.1f}k' if n >= 1000 else str(n)
-print(f'total={fmt(total)} in={fmt(input_t)} out={fmt(output_t)} cache_create={fmt(cache_create)} cache_read={fmt(cache_read)}')
-" 2>/dev/null || echo "tokens=unknown")
+    # Sum token usage
+    FUNC_TOKENS=$(python3 "$HELPERS" token-usage "$FUNC_STREAM_LOG" 2>/dev/null || echo "tokens=unknown")
     log "  [tokens] $FUNC_TOKENS"
 
     # Skip result parsing if we were rate limited — don't save progress so it's retried
@@ -615,10 +480,11 @@ print(f'total={fmt(total)} in={fmt(input_t)} out={fmt(output_t)} cache_create={f
         continue
     fi
 
-    # Parse result from Claude's output (check both readable and raw logs)
-    # Use loose match — Claude sometimes truncates the function name
-    if grep -qi "SUCCESS" "$FUNC_LOG" "$FUNC_STREAM_LOG" 2>/dev/null && \
-       ! grep -qi "FAILURE" "$FUNC_LOG" "$FUNC_STREAM_LOG" 2>/dev/null; then
+    # Parse result from stream JSON result event (not grep-based text matching)
+    RESULT_LINE=$(python3 "$HELPERS" parse-result "$FUNC_STREAM_LOG" 2>/dev/null || echo "status=error")
+    RESULT_STATUS=$(echo "$RESULT_LINE" | sed -n 's/^status=//p' | head -1)
+
+    if [ "$RESULT_STATUS" = "success" ]; then
         log "  ✓ SUCCESS!"
 
         # Find the worktree branch (claude --worktree prefixes with "worktree-")
@@ -652,20 +518,14 @@ EOF
             log "  Branch ready: $WT_BRANCH (push with: git push -u origin $WT_BRANCH)"
         fi
         # Clean up worktree (branch with commit persists)
-        WT_PATH=$(git worktree list --porcelain 2>/dev/null | grep "$BRANCH_NAME" | head -1 | sed 's/worktree //')
-        if [ -n "$WT_PATH" ] && [ -d "$WT_PATH" ]; then
-            git worktree remove "$WT_PATH" --force 2>/dev/null || true
-        fi
+        cleanup_worktree "$BRANCH_NAME"
         TOTAL_SUCCESSES=$((TOTAL_SUCCESSES + 1))
         progress_save "$FUNC_NAME" "success"
     else
-        BEST=$(grep -o 'best=[0-9.]*' "$FUNC_LOG" "$FUNC_STREAM_LOG" 2>/dev/null | tail -1 | sed 's/.*best=//' || echo "?")
+        BEST=$(echo "$RESULT_LINE" | sed -n 's/.*best=//p' || echo "?")
         log "  ✗ FAILED (best: ${BEST}%)"
         # Clean up worktree and branch
-        WT_PATH=$(git worktree list --porcelain 2>/dev/null | grep "$BRANCH_NAME" | head -1 | sed 's/worktree //')
-        if [ -n "$WT_PATH" ] && [ -d "$WT_PATH" ]; then
-            git worktree remove "$WT_PATH" --force 2>/dev/null || true
-        fi
+        cleanup_worktree "$BRANCH_NAME"
         git branch -D "$BRANCH_NAME" 2>/dev/null || true
         TOTAL_FAILURES=$((TOTAL_FAILURES + 1))
         progress_save "$FUNC_NAME" "failure"
