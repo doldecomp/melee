@@ -210,7 +210,19 @@ void it_802EC1F4(Item_GObj* gobj)
 
 void itTincle_UnkMotion7_Phys(Item_GObj* gobj) {}
 
-/// #itTincle_UnkMotion7_Coll
+bool itTincle_UnkMotion7_Coll(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->ground_or_air == GA_Air) {
+        it_8026E414(gobj, it_802EC3F4);
+    } else {
+        if (ip->xDD4_itemVar.tincle.x20 < 0) {
+            it_802EC3F4(gobj);
+        }
+        it_8026D6F4(gobj, it_802EC35C);
+    }
+    return false;
+}
 
 void it_802EC35C(Item_GObj* gobj)
 {
