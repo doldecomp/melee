@@ -51,7 +51,8 @@ typedef struct ftIceClimberAttributes {
     float x70;
     float x74;
     float x78;
-    u8 _7C[0x84 - 0x7C];
+    u8 _7C[0x80 - 0x7C];
+    float x80;
     float x84;
     u8 _88[0x94 - 0x88];
     float x94;
@@ -98,6 +99,10 @@ union ftPp_MotionVars {
     struct {
         /* fp+2340 */ int x0;
     } unk_80123954;
+    struct {
+        /* fp+2340 */ int x0;
+        /* fp+2344:0 */ u8 x4_b0 : 1;
+    } speciallw;
 };
 
 #endif
