@@ -2,11 +2,15 @@
 
 #include "math.h"
 
+#include "ft/chara/ftKirby/ftKb_Init.h"
+#include "ft/chara/ftNess/ftNs_SpecialN.h"
+
 #include "it/forward.h"
 
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
+#include "it/it_2725.h"
 
 #include <baselib/jobj.h>
 
@@ -51,7 +55,27 @@ bool it_802AA810(Item_GObj* gobj, CollData* cd)
 
 /// #it_802AA8C0
 
-/// #it_2725_Logic102_Destroyed
+void it_2725_Logic102_Destroyed(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    it_802725D4(gobj);
+    if (ip->xDD4_itemVar.pkflush.xDE0_PKFlash_Owner != NULL) {
+        if (ip->owner == ip->xDD4_itemVar.pkflush.xDE0_PKFlash_Owner) {
+            switch (ip->kind) {
+            case It_Kind_Ness_PKFlush:
+                ftNs_SpecialN_SetNULL(
+                    ip->xDD4_itemVar.pkflush.xDE0_PKFlash_Owner);
+                break;
+            case It_Kind_Kirby_NessPKFlush:
+                ftKb_SpecialNNs_800FECBC(
+                    ip->xDD4_itemVar.pkflush.xDE0_PKFlash_Owner);
+                break;
+            }
+        }
+        ip->xDD4_itemVar.pkflush.xDE0_PKFlash_Owner = NULL;
+    }
+    ip->xDC8_word.flags.x13 = 0;
+}
 
 void it_802AAA50(Item_GObj* gobj)
 {
