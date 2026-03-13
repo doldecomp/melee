@@ -9,6 +9,7 @@
 #include "baselib/forward.h"
 
 #include "cm/camera.h"
+#include "ft/chara/ftCommon/ftCo_Attack100.h"
 #include "ft/chara/ftCommon/ftCo_CaptureCut.h"
 #include "ft/chara/ftCommon/ftCo_Throw.h"
 #include "ft/chara/ftCommon/ftCo_Thrown.h"
@@ -105,6 +106,10 @@ extern f32 ftCh_Init_804DA0E0;
 extern f32 ftCh_Init_804DA0E4;
 extern f32 ftCh_Init_804DA178;
 extern f32 ftCh_Init_804DA17C;
+extern f32 ftCh_Init_804DA180;
+extern f32 ftCh_Init_804DA184;
+extern f32 ftCh_Init_804DA1D8;
+extern f32 ftCh_Init_804DA1DC;
 
 /* static */ void ftCh_Init_801566B4(void);
 /* static */ void ftCh_Init_80156A5C(void);
@@ -2291,7 +2296,18 @@ void ftCh_Throw_Phys(HSD_GObj* gobj)
 
 void ftCh_Throw_Coll(HSD_GObj* gobj) {}
 
-/// #ftCh_Slam_Anim
+void ftCh_Slam_Anim(HSD_GObj* gobj)
+{
+    if (ftBossLib_8015C2E0() || ftBossLib_8015C358() ||
+        !ftAnim_IsFramesRemaining(gobj))
+    {
+        Fighter* fp = GET_FIGHTER(gobj);
+        fp->self_vel.x = fp->self_vel.y = fp->self_vel.z = ftCh_Init_804DA178;
+        Fighter_UnkSetFlag_8006CFBC(gobj);
+        fp->x1A5C = 0;
+        ftCh_GrabUnk1_8015A888(gobj);
+    }
+}
 
 void ftCh_Slam_IASA(HSD_GObj* gobj)
 {
@@ -2408,7 +2424,18 @@ void fn_8015AAC8(Fighter_GObj* gobj)
                               NULL);
 }
 
-/// #ftCh_TagRockPaper_Anim
+void ftCh_TagRockPaper_Anim(HSD_GObj* gobj)
+{
+    if (ftBossLib_8015C2E0() || ftBossLib_8015C358()) {
+        ftCh_GrabUnk1_8015BC88(gobj);
+    }
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        Fighter_ChangeMotionState(gobj, 0x180, 0, ftCh_Init_804DA184,
+                                  ftCh_Init_804DA180, ftCh_Init_804DA184,
+                                  NULL);
+        ftAnim_8006EBA4(gobj);
+    }
+}
 
 void ftCh_TagRockPaper_IASA(HSD_GObj* gobj)
 {
@@ -2747,7 +2774,17 @@ void ftCo_CaptureCrazyHand_Phys(HSD_GObj* gobj) {}
 
 void ftCo_CaptureCrazyHand_Coll(HSD_GObj* gobj) {}
 
-/// #ftCh_GrabUnk1_8015B670
+void ftCh_GrabUnk1_8015B670(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    Fighter_ChangeMotionState(gobj, 0x151, 0, ftCh_Init_804DA1D8,
+                              ftCh_Init_804DA1DC, ftCh_Init_804DA1D8, NULL);
+    fp->invisible = true;
+    fp->accessory1_cb = ftCo_800DB464;
+    ftCommon_8007E2F4(fp, 0x1FF);
+    fp->x2220_b3 = true;
+    ftAnim_8006EBA4(gobj);
+}
 
 #pragma dont_inline on
 void ftCo_CaptureDamageCrazyHand_Anim(HSD_GObj* gobj)
