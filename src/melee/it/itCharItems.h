@@ -34,6 +34,12 @@ typedef struct itNessbat_ItemVars {
     /* +0 ip+DD4 */ HSD_GObj* x0;
 } itNessbat_ItemVars;
 
+typedef struct itNesspkthundertrail_ItemVars {
+    /* +0 ip+DD4 */ Item_GObj* x0;
+    /* +4 ip+DD8 */ s32 x4;
+    /* +8 ip+DDC */ s32 x8;
+} itNesspkthundertrail_ItemVars;
+
 typedef struct {
     /* x0 ip+DD4 */ f32 x0;
     /* x4 ip+DD8 */ HSD_GObj* x4;
