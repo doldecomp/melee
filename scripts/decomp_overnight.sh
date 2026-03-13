@@ -425,6 +425,8 @@ Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>\"
         log "  Claude session started..."
 
         # Run claude in background so Ctrl+C reaches the script
+        DONE_FLAG=$(mktemp /tmp/decomp_done.XXXXXX)
+        rm -f "$DONE_FLAG"
         env -u CLAUDECODE -u ANTHROPIC_API_KEY claude -p \
             --model "$MODEL" \
             --permission-mode bypassPermissions \
@@ -434,14 +436,29 @@ Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>\"
         CLAUDE_PID=$!
         track_pid $CLAUDE_PID
 
-        # Stream live summaries while claude runs (polls file, exits when claude dies)
-        python3 -u "$HELPERS" stream-monitor "$FUNC_STREAM_LOG" "$CLAUDE_PID" &
+        # Stream live summaries while claude runs; writes done flag on result event
+        python3 -u "$HELPERS" stream-monitor "$FUNC_STREAM_LOG" "$CLAUDE_PID" "$DONE_FLAG" &
         MONITOR_PID=$!
         track_pid $MONITOR_PID
 
+        # Wait for claude, but kill it if result event arrives and it keeps running
+        while kill -0 $CLAUDE_PID 2>/dev/null; do
+            if [ -f "$DONE_FLAG" ]; then
+                log "  Result received, giving Claude 10s to finish..."
+                sleep 10
+                if kill -0 $CLAUDE_PID 2>/dev/null; then
+                    log "  Killing Claude (still running after result)"
+                    kill $CLAUDE_PID 2>/dev/null
+                    pkill -P $CLAUDE_PID 2>/dev/null
+                fi
+                break
+            fi
+            sleep 1
+        done
         wait $CLAUDE_PID 2>/dev/null
         CLAUDE_EXIT=$?
         kill $MONITOR_PID 2>/dev/null; wait $MONITOR_PID 2>/dev/null
+        rm -f "$DONE_FLAG"
         set -e
         log "  Claude session exited (code: $CLAUDE_EXIT)"
 

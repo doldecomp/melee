@@ -45,8 +45,11 @@ def cmd_ninja_progress():
     print()
 
 
-def cmd_stream_monitor(log_file, pid_str):
-    """Poll stream JSON log, print live summaries, exit when PID dies."""
+def cmd_stream_monitor(log_file, pid_str, done_flag=None):
+    """Poll stream JSON log, print live summaries, exit when PID dies.
+
+    If done_flag path is given, writes to it when a result event is seen.
+    """
     signal.signal(signal.SIGINT, lambda *a: sys.exit(0))
     signal.signal(signal.SIGTERM, lambda *a: sys.exit(0))
     pid = int(pid_str)
@@ -82,6 +85,8 @@ def cmd_stream_monitor(log_file, pid_str):
                             elif t == "result":
                                 s = d.get("subtype", "")
                                 print(f"  [result] {s}", flush=True)
+                                if done_flag:
+                                    Path(done_flag).write_text(s)
                         except (json.JSONDecodeError, KeyError):
                             pass
                     pos = f.tell()
@@ -321,7 +326,7 @@ def cmd_parse_rate_limit(log_file, backoff_str):
 
 SUBCOMMANDS = {
     "ninja-progress": (cmd_ninja_progress, 0),
-    "stream-monitor": (cmd_stream_monitor, 2),
+    "stream-monitor": (cmd_stream_monitor, 2),  # optional 3rd arg: done_flag
     "parse-result": (cmd_parse_result, 1),
     "token-usage": (cmd_token_usage, 1),
     "extract-log": (cmd_extract_log, 2),
@@ -348,7 +353,7 @@ def main():
         print(f"Error: {cmd_name} requires {nargs} arguments, got {len(args)}", file=sys.stderr)
         sys.exit(1)
 
-    func(*args[:nargs])
+    func(*args)
 
 
 if __name__ == "__main__":
