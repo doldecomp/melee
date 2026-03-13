@@ -25,7 +25,7 @@
 /* 2D1930 */ bool itLugia_UnkMotion4_Anim(Item_GObj* gobj);
 /* 2D19C0 */ void itLugia_UnkMotion4_Phys(Item_GObj* gobj);
 /* 2D1A3C */ bool itLugia_UnkMotion4_Coll(Item_GObj* gobj);
-/* 2D1A44 */ UNK_RET it_802D1A44(UNK_PARAMS);
+/* 2D1A44 */ void it_802D1A44(Item_GObj* gobj);
 /* 2D1B30 */ bool itLugia_UnkMotion5_Anim(Item_GObj* gobj);
 /* 2D1B94 */ void itLugia_UnkMotion5_Phys(Item_GObj* gobj);
 /* 2D1BB4 */ bool itLugia_UnkMotion5_Coll(Item_GObj* gobj);
@@ -48,6 +48,7 @@
 /* 3F7EE8 */ extern ItemStateTable it_803F7EE8[];
 /* 3F7F48 */ extern ItemStateTable it_803F7F48[];
 
+extern f32 it_804DD450;
 extern f32 it_804DD490;
 
 #endif
