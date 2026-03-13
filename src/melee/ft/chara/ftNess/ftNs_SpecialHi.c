@@ -165,7 +165,7 @@ void ftNs_SpecialHiStopGFX(HSD_GObj* gobj) // Removes GFX
 }
 #pragma pop
 
-inline bool check_distance(Vec3* pos, Vec2* pair)
+inline bool check_distance(Vec3* pos, Vec3* pair)
 {
     if ((ABS(pos->x - pair->x) < 8.333333015441895f) &&
         (ABS(pos->y - pair->y) < 12.333333015441895f))
@@ -180,14 +180,14 @@ inline bool check_distance(Vec3* pos, Vec2* pair)
 /// based on auto-decomp // https://decomp.me/scratch/hwphL // Proper match
 bool ftNs_SpecialHi_ItemPKThunder_CheckNessCollide(HSD_GObj* gobj)
 {
-    u8 unused0[8];
+    u8 unused0[4];
 
-    Vec2 pair;
+    Vec3 pair;
     Vec3 pos;
 
-    u8 unused1[12];
+    u8 unused1[8];
 
-    Vec2 pair2;
+    Vec3 pair2;
     Vec3 pos2;
 
     u8 unused2[36];

@@ -93,13 +93,7 @@ bool itNesspkthundertrail_UnkMotion0_Anim(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
-    HSD_JObj* child;
-
-    if (!jobj) {
-        child = NULL;
-    } else {
-        child = jobj->child;
-    }
+    HSD_JObj* child = HSD_JObjGetChild(jobj);
 
     if (ip->xDD4_itemVar.nesspkthundertrail.x8 & 1) {
         HSD_JObjSetFlagsAll(child, 0x10);
