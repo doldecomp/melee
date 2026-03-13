@@ -20,11 +20,20 @@
 
 set -euo pipefail
 
+CHILD_PIDS=""
+track_pid() { CHILD_PIDS="$CHILD_PIDS $1"; }
+kill_children() {
+    for pid in $CHILD_PIDS; do
+        kill "$pid" 2>/dev/null
+        # Also kill any children of that pid (e.g. claude's subprocesses)
+        pkill -P "$pid" 2>/dev/null
+    done
+    CHILD_PIDS=""
+}
 cleanup() {
     trap - INT TERM EXIT
-    # Kill all children and their descendants
+    kill_children
     pkill -P $$ 2>/dev/null
-    kill 0 2>/dev/null
     exit 1
 }
 trap cleanup INT TERM EXIT
@@ -463,6 +472,7 @@ Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>\"
             -w "$BRANCH_NAME" \
             "$PROMPT" > "$FUNC_STREAM_LOG" 2>&1 &
         CLAUDE_PID=$!
+        track_pid $CLAUDE_PID
 
         # Stream live summaries while claude runs (polls file, exits when claude dies)
         python3 -u -c "
@@ -504,6 +514,7 @@ while True:
         break
 " &
         TAIL_PID=$!
+        track_pid $TAIL_PID
 
         wait $CLAUDE_PID 2>/dev/null
         CLAUDE_EXIT=$?
@@ -655,6 +666,9 @@ EOF
     fi
 
     log "  Log: $FUNC_LOG"
+
+    # Kill any lingering child processes before next iteration
+    kill_children
 
     if [ "$CONTINUOUS" != "true" ]; then
         break
