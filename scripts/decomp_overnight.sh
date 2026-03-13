@@ -64,7 +64,7 @@ log() {
 
 # Abort if worktree is dirty (instead of the old git stash approach)
 check_worktree_clean() {
-    if ! git diff --quiet HEAD 2>/dev/null || [ -n "$(git ls-files --others --exclude-standard)" ]; then
+    if ! git diff --quiet HEAD 2>/dev/null; then
         log "ERROR: Working tree is dirty. Commit or stash changes before running."
         log "  (This script no longer auto-stashes to avoid reverting its own edits.)"
         exit 1
