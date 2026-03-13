@@ -37,7 +37,19 @@ void it_802EB268(Item_GObj* gobj)
 
 /// #itGreatfoxlaser_UnkMotion1_Anim
 
-/// #itGreatfoxlaser_UnkMotion1_Phys
+void itGreatfoxlaser_UnkMotion1_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->xDD4_itemVar.greatfoxlaser.x34 != 0) {
+        ip->facing_dir = -ip->facing_dir;
+        it_8027C56C(gobj, ip->facing_dir);
+        ip = GET_ITEM(gobj);
+        it_8026B3A8(gobj);
+        ip->xDD4_itemVar.greatfoxlaser.x36 = 60;
+        ip->xDD4_itemVar.greatfoxlaser.x34 = 0;
+        Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
+    }
+}
 
 bool itGreatFoxLaser_Logic27_DmgDealt(Item_GObj* item_gobj)
 {
