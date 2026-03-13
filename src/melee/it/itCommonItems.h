@@ -189,6 +189,8 @@ typedef struct itLugiaAttributes {
     /* +08 */ f32 x8;
     /* +0C */ f32 xC;
     /* +10 */ f32 x10;
+    /* +14 */ f32 x14;
+    /* +18 */ f32 x18;
 } itLugiaAttributes;
 
 /// Box/Crate item attributes loaded from .dat file
