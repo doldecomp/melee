@@ -173,7 +173,18 @@ bool itOldottosea_UnkMotion7_Anim(Item_GObj* gobj)
 
 /// #itOldottosea_UnkMotion7_Phys
 
-/// #itOldottosea_UnkMotion7_Coll
+bool itOldottosea_UnkMotion7_Coll(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    PAD_STACK(8);
+    it_8026D62C(gobj, it_802E2BC0);
+    if (ip->x40_vel.x != 0.0f) {
+        if (it_80276308(gobj) != 0) {
+            it_802E3098(gobj);
+        }
+    }
+    return it_802E35CC(gobj);
+}
 
 void it_802E3098(Item_GObj* gobj)
 {
