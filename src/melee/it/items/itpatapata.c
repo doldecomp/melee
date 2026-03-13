@@ -87,7 +87,23 @@ bool itPatapata_UnkMotion2_Anim(Item_GObj* gobj)
 
 /// #itPatapata_UnkMotion3_Coll
 
-/// #it_802E0D9C
+void it_802E0D9C(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itPatapataAttributes* attrs =
+        ip->xC4_article_data->x4_specialAttributes;
+    switch (ip->xDD4_itemVar.patapata.x40) {
+    case 0:
+        ip->x40_vel.x = -ip->facing_dir * attrs->x0->x4;
+        break;
+    case 1:
+    case 2:
+    default:
+        break;
+    }
+    it_802E1648(gobj, 3, 2);
+    ip->facing_dir = -ip->facing_dir;
+}
 
 /// #itPatapata_UnkMotion3_Anim
 
