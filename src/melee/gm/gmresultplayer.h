@@ -31,12 +31,12 @@ struct ResultsMatchInfo;
 /* 179E9C */ void fn_80179E9C(HSD_GObj*, int);
 /* 179F04 */ void fn_80179F04(HSD_GObj*, int);
 /* 179F6C */ UNK_RET fn_80179F6C(int idx, int value);
-/* 179F84 */ UNK_RET fn_80179F84(UNK_PARAMS);
+/* 179F84 */ void fn_80179F84(HSD_JObj*);
 /* 17A004 */ UNK_RET fn_8017A004(UNK_PARAMS);
 /* 17A078 */ UNK_RET fn_8017A078(UNK_PARAMS);
 /* 17A318 */ HSD_GObj* fn_8017A318(int);
 /* 17A67C */ Fighter_GObj* fn_8017A67C(CharacterKind c_kind, u8, int);
-/* 17A9B4 */ UNK_RET fn_8017A9B4(int);
+/* 17A9B4 */ void fn_8017A9B4(int);
 /* 17AA78 */ UNK_RET fn_8017AA78(u8*);
 
 #endif
