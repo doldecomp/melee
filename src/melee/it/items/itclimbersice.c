@@ -16,16 +16,56 @@
 
 /* 2C23D4 */ static bool itClimbersBlizzard_UnkMotion0_Coll(Item_GObj* gobj);
 
+typedef struct itClimbersiceSetupAttrs {
+    /* +00 */ f32 x0;
+    /* +04 */ u8 pad_4[0xC];
+    /* +10 */ f32 x10;
+} itClimbersiceSetupAttrs;
+
 /// #it_802C1590
 
-/// #it_802C16F8
+void it_802C16F8(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itClimbersiceSetupAttrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    HSD_JObj* child = NULL;
+
+    ip->x40_vel.x = attrs->x10 * ip->facing_dir;
+    ip->x40_vel.z = 0.0f;
+    ip->x40_vel.y = 0.0f;
+    it_80275158(gobj, attrs->x0);
+    ip->xDCC_flag.b3 = true;
+    it_80272980(gobj);
+    if (gobj->hsd_obj != NULL) {
+        child = ((HSD_JObj*) gobj->hsd_obj)->child;
+    }
+    if (ip->kind == 0x6A) {
+        efAsync_Spawn(gobj, &ip->xBC0, 3, 0x4EA, child, &ip->pos);
+    } else {
+        efAsync_Spawn(gobj, &ip->xBC0, 3, 0x4AF, child, &ip->pos);
+    }
+    it_802C1AE4(gobj);
+}
 
 void it_802C17DC(Item_GObj* gobj)
 {
     Item_8026A8EC(gobj);
 }
 
-/// #it_2725_Logic90_Destroyed
+void it_2725_Logic90_Destroyed(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    Item_GObj* owner = ip->xDD4_itemVar.climbersice.x0;
+
+    if (owner != NULL) {
+        if (ip->kind == 0x6A) {
+            ftPp_Init_8011F16C(owner);
+        } else {
+            ftKb_SpecialNIc_80108CE8(owner);
+        }
+    }
+    ip->xDD4_itemVar.climbersice.x0 = NULL;
+}
 
 /// #it_802C1854
 
@@ -109,9 +149,44 @@ bool itClimbersice_UnkMotion2_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itClimbersice_UnkMotion2_Phys
+void itClimbersice_UnkMotion2_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
 
-/// #itClimbersice_UnkMotion2_Coll
+    if (it_802C1854(gobj)) {
+        itClimbersBlizzardAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+        f32 speed = ip->x40_vel.x * attrs->x10;
+
+        if (speed < 0.0f) {
+            speed = -speed;
+        }
+        it_80272460(&ip->x5D4_hitboxes[0].hit, (u32) speed + attrs->xC, gobj);
+    }
+}
+
+bool itClimbersice_UnkMotion2_Coll(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+
+    it_8026D62C(gobj, fn_802C1D44);
+    it_80276CB8(gobj);
+    if (it_80276308(gobj) != 0) {
+        itClimbersBlizzardAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+        f32 speed = ip->x40_vel.x;
+
+        if (speed < 0.0f) {
+            speed = -speed;
+        }
+        if (speed < attrs->xC) {
+            it_8027770C(gobj);
+            it_80272980(gobj);
+            ip->xD44_lifeTimer -= attrs->x4;
+        } else {
+            return true;
+        }
+    }
+    return false;
+}
 
 void fn_802C1D44(Item_GObj* gobj)
 {
@@ -138,9 +213,9 @@ bool itClimbersIce_Logic90_DmgDealt(Item_GObj* arg0)
     return true;
 }
 
-bool itClimbersIce_Logic90_Reflected(Item_GObj* gobj)
+void itClimbersIce_Logic90_Reflected(Item_GObj* gobj)
 {
-    return it_80273030(gobj);
+    it_80273030(gobj);
 }
 
 bool itClimbersIce_Logic90_Clanked(Item_GObj* arg0)
@@ -148,16 +223,39 @@ bool itClimbersIce_Logic90_Clanked(Item_GObj* arg0)
     return true;
 }
 
-/// #it_2725_Logic90_HitShield
+bool it_2725_Logic90_HitShield(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ItemAttr* item_attr = ip->xCC_item_attr;
+    itClimbersBlizzardAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    f32 abs_vel_x = ip->x40_vel.x;
+
+    if (abs_vel_x < 0.0f) {
+        abs_vel_x = -abs_vel_x;
+    }
+    if (abs_vel_x >= attrs->xC) {
+        itColl_BounceOffVictim(gobj);
+        it_80272980(gobj);
+        ip->x40_vel.x *= item_attr->x58;
+        ip->x40_vel.y *= item_attr->x58;
+        ip->x40_vel.z *= item_attr->x58;
+        ip->xD44_lifeTimer -= attrs->x4;
+        if (ip->xD44_lifeTimer < attrs->x8) {
+            return true;
+        }
+        return false;
+    }
+    return true;
+}
 
 bool itClimbersIce_Logic90_Absorbed(Item_GObj* arg0)
 {
     return true;
 }
 
-bool itClimbersIce_Logic90_ShieldBounced(Item_GObj* gobj)
+void itClimbersIce_Logic90_ShieldBounced(Item_GObj* gobj)
 {
-    return itColl_BounceOffShield(gobj);
+    itColl_BounceOffShield(gobj);
 }
 
 void itClimbersIce_Logic90_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)

@@ -620,6 +620,10 @@ null_return:
 
 /// #ftKb_SpecialNMt_80106F9C
 
+/// #ftKb_SpecialNMt_80106F9C
+
+/// #ftKb_SpecialNMt_80106FEC
+
 /// #ftKb_SpecialNMt_80106FEC
 
 /// @brief Clears Mewtwo copy ability state and effects.

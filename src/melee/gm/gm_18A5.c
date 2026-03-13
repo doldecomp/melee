@@ -300,11 +300,13 @@ int fn_8018F3D0(int arg0)
 int fn_8018F410(void)
 {
     int temp_r3;
+    u8* base;
     int* temp_r30;
     int* temp_r29;
 
-    temp_r30 = &lbl_803D9F0C.x8;
-    temp_r29 = &lbl_803D9F0C.x4;
+    base = (u8*) &lbl_803D9D20;
+    temp_r30 = (int*) &base[0x1F4];
+    temp_r29 = (int*) &base[0x1F0];
     do {
         temp_r3 = HSD_Randi(0x19);
     } while (lbl_803D9D20.x72[temp_r3] == 0 || lbl_803D9F0C.x0 == temp_r3 ||

@@ -93,7 +93,15 @@ bool grCastle_801CD8A0(Ground_GObj* gobj)
 
 /// #grCastle_801CD8A8
 
-/// #grCastle_801CD960
+void grCastle_801CD960(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    s32 i;
+
+    for (i = 0; i < 12; i++) {
+        grLib_801C9B6C((u8*) gp + 0xE0 + i * 0x14);
+    }
+}
 
 void grCastle_801CD9B4(Ground_GObj* gobj)
 {
@@ -217,7 +225,21 @@ bool grCastle_801CE858(Ground_GObj* gobj)
     return false;
 }
 
-/// #grCastle_801CE860
+void grCastle_801CE860(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+
+    if (gp->gv.castle.xC4 < 3) {
+        gp->gv.castle.xC8--;
+        if (gp->gv.castle.xC8 < 0) {
+            gp->gv.castle.xC4++;
+            grAnime_801C8138(gobj, gp->map_id, gp->gv.castle.xC4);
+            gp->gv.castle.xC8 =
+                *(s16*) ((u8*) grCs_804D6970 + gp->gv.castle.xC4 * 2 + 0x12C);
+        }
+    }
+    Camera_80030E44(1, 0);
+}
 
 void grCastle_801CE8E4(Ground_GObj* gobj) {}
 
@@ -264,7 +286,29 @@ void grCastle_801CF74C(Ground_GObj* gobj) {}
 
 /// #fn_801CFAFC
 
+typedef struct grCastleRespawnParams {
+    u8 pad[4];
+    s16 x4;
+} grCastleRespawnParams;
+
+void fn_801CFAFC(HSD_GObj* item_gobj, Ground* gp, Vec3* pos,
+                 HSD_GObj* fighter_gobj, f32 arg4)
+{
+    *(s16*) ((u8*) gp + 0xC4) = 4;
+    if (ftLib_80086960(fighter_gobj)) {
+        ftLib_80086A4C(fighter_gobj, ((grCastleRespawnParams*) grCs_804D6970)->x4);
+    }
+}
+
 /// #fn_801CFB68
+
+void fn_801CFB68(HSD_GObj* item_gobj, Ground* gp, HSD_GObj* fighter_gobj)
+{
+    *(s16*) ((u8*) gp + 0xC4) = 4;
+    if (ftLib_80086960(fighter_gobj)) {
+        ftLib_80086A4C(fighter_gobj, ((grCastleRespawnParams*) grCs_804D6970)->x4);
+    }
+}
 
 /// #grCastle_801CFBD4
 

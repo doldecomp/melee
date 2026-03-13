@@ -14,7 +14,7 @@
 /* 2C16F8 */ void it_802C16F8(Item_GObj*);
 /* 2C17DC */ void it_802C17DC(Item_GObj*);
 /* 2C17FC */ void it_2725_Logic90_Destroyed(Item_GObj*);
-/* 2C1854 */ UNK_RET it_802C1854(UNK_PARAMS);
+/* 2C1854 */ bool it_802C1854(Item_GObj* gobj);
 /* 2C1950 */ void it_802C1950(Item_GObj*);
 /* 2C198C */ bool itClimbersice_UnkMotion0_Anim(Item_GObj* gobj);
 /* 2C1A14 */ void itClimbersice_UnkMotion0_Phys(Item_GObj* gobj);
@@ -32,11 +32,11 @@
 /* 2C1DB4 */ void itClimbersice_UnkMotion3_Phys(Item_GObj* gobj);
 /* 2C1E94 */ bool itClimbersice_UnkMotion3_Coll(Item_GObj* gobj);
 /* 2C1FC8 */ bool itClimbersIce_Logic90_DmgDealt(Item_GObj*);
-/* 2C1FD0 */ bool itClimbersIce_Logic90_Reflected(Item_GObj*);
+/* 2C1FD0 */ void itClimbersIce_Logic90_Reflected(Item_GObj*);
 /* 2C1FF0 */ bool itClimbersIce_Logic90_Clanked(Item_GObj*);
 /* 2C1FF8 */ bool it_2725_Logic90_HitShield(Item_GObj*);
 /* 2C20E4 */ bool itClimbersIce_Logic90_Absorbed(Item_GObj*);
-/* 2C20EC */ bool itClimbersIce_Logic90_ShieldBounced(Item_GObj*);
+/* 2C20EC */ void itClimbersIce_Logic90_ShieldBounced(Item_GObj*);
 /* 2C210C */ void itClimbersIce_Logic90_EvtUnk(Item_GObj*, Item_GObj*);
 /* 3F7668 */ extern ItemStateTable it_803F7668[];
 

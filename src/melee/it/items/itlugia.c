@@ -10,6 +10,43 @@
 #include "it/it_2725.h"
 #include "it/item.h"
 
+#include "lb/lb_00B0.h"
+#include <MetroTRK/intrinsics.h>
+
+typedef struct itLugiaMotionPhysAttrs {
+    /* +00 */ f32 x0;
+    /* +04 */ f32 x4;
+    /* +08 */ f32 x8;
+    /* +0C */ f32 xC;
+    /* +10 */ f32 x10;
+    /* +14 */ f32 x14;
+    /* +18 */ f32 x18;
+} itLugiaMotionPhysAttrs;
+
+typedef struct itLugiaTransitionAttrs {
+    /* +00 */ f32 x0;
+    /* +04 */ f32 x4;
+    /* +08 */ u8 x8_pad[0x38];
+    /* +40 */ f32 x40;
+} itLugiaTransitionAttrs;
+
+static inline f32 it_802D1830_sqrt(f32 x)
+{
+    f64 half = 0.5;
+
+    if (x > 0.0f) {
+        vf32 y;
+        f64 guess = __frsqrte(x);
+
+        guess = half * guess * (3.0 - guess * guess * x);
+        guess = half * guess * (3.0 - guess * guess * x);
+        guess = half * guess * (3.0 - guess * guess * x);
+        y = x * guess;
+        return y;
+    }
+    return x;
+}
+
 /// #it_2725_Logic17_Spawned
 
 void it_802D14D0(void) {}
@@ -112,14 +149,44 @@ bool itLugia_UnkMotion3_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itLugia_UnkMotion3_Phys
+void itLugia_UnkMotion3_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itLugiaMotionPhysAttrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    s32 temp;
+
+    it_8027A344(gobj);
+    temp = ip->xDD4_itemVar.lugia.x60;
+    ip->xDD4_itemVar.lugia.x60 = temp - 1;
+    if (temp != 0) {
+        ip->x40_vel.z = attrs->x10;
+    } else {
+        ip->x40_vel.z = 0.0f;
+        it_802D1830(gobj);
+    }
+}
 
 bool itLugia_UnkMotion3_Coll(Item_GObj* gobj)
 {
     return false;
 }
 
-/// #it_802D1830
+void it_802D1830(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itLugiaMotionPhysAttrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    f32 root;
+
+    Item_80268E5C(gobj, 4, 2);
+    ip->entered_hitlag = efLib_PauseAll;
+    ip->exited_hitlag = efLib_ResumeAll;
+    root = attrs->x18 * attrs->x18 -
+           (it_804DD454 * attrs->x18) *
+               -(ip->pos.y - ip->xDD4_itemVar.lugia.x64.y);
+    root = it_802D1830_sqrt(root);
+    ip->xDD4_itemVar.lugia.xE50.x =
+        -((-attrs->x18 + root) * it_804DD468);
+}
 
 bool itLugia_UnkMotion4_Anim(Item_GObj* gobj)
 {
@@ -144,14 +211,45 @@ bool itLugia_UnkMotion4_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itLugia_UnkMotion4_Phys
+void itLugia_UnkMotion4_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itLugiaMotionPhysAttrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+
+    it_8027A344(gobj);
+    ip->xDD4_itemVar.lugia.xE50.x += attrs->x18;
+    ip->x40_vel.y = ip->xDD4_itemVar.lugia.xE50.x;
+    if (ip->x40_vel.y > 0.0f) {
+        ip->x40_vel.y = 0.0f;
+        it_802D1A44(gobj);
+    }
+}
 
 bool itLugia_UnkMotion4_Coll(Item_GObj* gobj)
 {
     return false;
 }
 
-/// #it_802D1A44
+void it_802D1A44(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itLugiaTransitionAttrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    Vec3 sp;
+
+    Item_80268E5C(gobj, 5, 2);
+    ip->entered_hitlag = efLib_PauseAll;
+    ip->exited_hitlag = efLib_ResumeAll;
+    ip->xDD4_itemVar.lugia.xE50.y = it_804DD46C;
+    ip->xDD4_itemVar.lugia.xE50.z = it_804DD470;
+    ip->xDD4_itemVar.lugia.x88 = it_804DD474;
+    lb_8000B1CC(ip->xBBC_dynamicBoneTable->bones[25], NULL, &sp);
+    ip->xDD4_itemVar.lugia.x8C = ip->xDD4_itemVar.lugia.x64;
+    ip->xDD4_itemVar.lugia.x8C.y += attrs->x40;
+    ip->xDD4_itemVar.lugia.x70 = sp;
+    ip->xDD4_itemVar.lugia.xA4 = 0;
+    ip->on_accessory = (HSD_GObjEvent) it_802D1BBC;
+    ip->xDCC_flag.b3 = true;
+}
 
 bool itLugia_UnkMotion5_Anim(Item_GObj* gobj)
 {
@@ -198,7 +296,18 @@ bool it_802D1DB4(Item_GObj* gobj)
     return false;
 }
 
-/// #it_802D1DD8
+void it_802D1DD8(Item_GObj* gobj)
+{
+    if (it_8027A09C(gobj) != 0) {
+        Item* ip = GET_ITEM(gobj);
+
+        it_80273454(gobj);
+        Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
+        ip->entered_hitlag = efLib_PauseAll;
+        ip->exited_hitlag = efLib_ResumeAll;
+        ip->xDD1_flag.b6 = 1;
+    }
+}
 
 bool it_802D1E64(Item_GObj* gobj)
 {
@@ -234,7 +343,18 @@ void it_802D23D4(Item_GObj* gobj, Item_GObj* ref_gobj)
     it_8026B894(gobj, ref_gobj);
 }
 
-/// #it_802D23F4
+void it_802D23F4(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itLugiaMotionPhysAttrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+
+    ip->xD44_lifeTimer = attrs->x0;
+    it_80274740(gobj);
+    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+    ip->entered_hitlag = efLib_PauseAll;
+    ip->exited_hitlag = efLib_ResumeAll;
+    it_8026B3A8(gobj);
+}
 
 bool it_802D246C(Item_GObj* gobj)
 {

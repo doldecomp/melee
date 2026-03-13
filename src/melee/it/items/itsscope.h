@@ -35,8 +35,8 @@
 /* 29222C */ bool itSScope_Logic21_DmgDealt(Item_GObj*);
 /* 292250 */ bool itSScope_Logic21_Clanked(Item_GObj*);
 /* 292274 */ bool itSScope_Logic21_HitShield(Item_GObj*);
-/* 292298 */ bool itSScope_Logic21_Reflected(Item_GObj*);
-/* 2922B8 */ bool itSScope_Logic21_ShieldBounced(Item_GObj*);
+/* 292298 */ void itSScope_Logic21_Reflected(Item_GObj*);
+/* 2922B8 */ void itSScope_Logic21_ShieldBounced(Item_GObj*);
 /* 2922D8 */ void itSScope_Logic21_EnteredAir(Item_GObj*);
 /* 292300 */ bool itSscope_UnkMotion4_Anim(Item_GObj* gobj);
 /* 292308 */ void itSscope_UnkMotion4_Phys(Item_GObj* gobj);

@@ -453,10 +453,11 @@ block_124:
 
 void grKongo_801D5FA4(Ground_GObj* arg) {}
 
+/// #grKongo_801D5FA8
+
 void grKongo_801D5FA8(Ground_GObj* arg0)
 {
-    Ground* temp_r3 = arg0->user_data;
-    grAnime_801C8138(arg0, temp_r3->map_id, 0);
+    grAnime_801C8138(arg0, GET_GROUND(arg0)->map_id, 0);
 }
 
 bool grKongo_801D5FD4(Ground_GObj* arg)
@@ -486,10 +487,11 @@ void grKongo_801D6030(Ground_GObj* arg) {}
 
 void grKongo_801D6034(Ground_GObj* arg) {}
 
+/// #grKongo_801D6038
+
 void grKongo_801D6038(Ground_GObj* arg0)
 {
-    Ground* temp_r3 = arg0->user_data;
-    grAnime_801C8138(arg0, temp_r3->map_id, 0);
+    grAnime_801C8138(arg0, GET_GROUND(arg0)->map_id, 0);
 }
 
 bool grKongo_801D6064(Ground_GObj* arg)

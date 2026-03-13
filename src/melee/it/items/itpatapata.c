@@ -10,7 +10,24 @@
 #include "it/it_2725.h"
 #include "it/itCommonItems.h"
 #include "it/item.h"
+#include "it/items/itnokonoko.h"
 #include "mp/mpcoll.h"
+
+typedef struct itPatapataSpawnVars {
+    u8 pad[0x4];
+    s32 x4;
+    u8 pad2[0x3C];
+    s32 x40;
+} itPatapataSpawnVars;
+
+typedef struct itNokonokoSpawnVars {
+    u8 pad[0x4];
+    s32 x4;
+    u8 pad2[0x2C];
+    f32 x34;
+    f32 x38;
+    s32 x3C;
+} itNokonokoSpawnVars;
 
 void it_802E05A0(Item_GObj* gobj)
 {
@@ -87,9 +104,37 @@ bool itPatapata_UnkMotion2_Anim(Item_GObj* gobj)
 
 /// #itPatapata_UnkMotion3_Coll
 
-/// #it_802E0D9C
+void it_802E0D9C(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itPatapataAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
 
-/// #itPatapata_UnkMotion3_Anim
+    if (ip->xDD4_itemVar.patapata.x40 == 0) {
+        ip->x40_vel.x = -ip->facing_dir * attrs->x0->x4;
+    }
+    it_802E1648(gobj, 3, 2);
+    ip->facing_dir = -ip->facing_dir;
+}
+
+bool itPatapata_UnkMotion3_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+
+    if (!it_80272C6C(gobj)) {
+        mpCollSetFacingDir(&ip->x378_itemColl,
+                           ip->facing_dir == -1.0f ? -1 : 1);
+        it_8027C56C(gobj, ip->facing_dir);
+        if ((ip->x40_vel.x < 0.0f && ip->facing_dir == 1.0f) ||
+            (ip->x40_vel.x > 0.0f && ip->facing_dir == -1.0f))
+        {
+            ip->x40_vel.x *= -1.0f;
+        }
+        it_802E1648(gobj, 2, 2);
+    }
+    return false;
+}
+
+/// #itPatapata_UnkMotion3_Phys
 
 bool it_2725_Logic4_DmgReceived(Item_GObj* gobj)
 {
@@ -138,7 +183,20 @@ void it_2725_Logic4_Dropped(Item_GObj* gobj)
     Item_80268E5C(gobj, 7, ITEM_ANIM_UPDATE);
 }
 
-/// #itPatapata_UnkMotion7_Anim
+bool itPatapata_UnkMotion7_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+
+    PAD_STACK(8);
+
+    if (ip->xDD4_itemVar.patapata.x28 <= 0) {
+        it_8027CAD8(gobj);
+        it_802E1648(gobj, 1, 2);
+    } else {
+        ip->xDD4_itemVar.patapata.x28 -= 1;
+    }
+    return false;
+}
 
 void itPatapata_UnkMotion7_Phys(Item_GObj* gobj) {}
 

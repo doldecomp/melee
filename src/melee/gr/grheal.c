@@ -17,12 +17,20 @@
 #include "gr/granime.h"
 #include "gr/grdisplay.h"
 #include "gr/ground.h"
+#include "gr/inlines.h"
 #include "gr/grzakogenerator.h"
 #include "gr/stage.h"
 #include "it/it_26B1.h"
 #include "it/types.h"
+#include "gm/gm_1832.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
+
+extern s16 grHeal_804D49D8[];
+struct yaku {
+    int x0;
+    int x4;
+};
 
 void grHeal_8021EF38(bool arg0) {}
 
@@ -55,7 +63,8 @@ bool grHeal_8021EFE4(void)
 Ground_GObj* grHeal_8021EFEC(u32 idx)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = &grHeal_803E8454[idx];
+    StageCallbacks* callbacks = (StageCallbacks*) ((u8*) grHeal_803E83B8 + 0x9C);
+    callbacks += idx;
 
     gobj = Ground_801C14D0(idx);
 
@@ -84,7 +93,18 @@ Ground_GObj* grHeal_8021EFEC(u32 idx)
     return gobj;
 }
 
-/// #grHeal_8021F0D8
+void grHeal_8021F0D8(Ground_GObj* gobj)
+{
+    s32 i;
+    Ground* gp = gobj->user_data;
+
+    grAnime_801C8138(gobj, gp->map_id, 0);
+    for (i = 0; i < grHeal_804D6AF0->x0; i++) {
+        if (gm_80473A18.x90[i] != 0) {
+            grHeal_8021F79C(8, grHeal_804D49D8[i], i);
+        }
+    }
+}
 
 bool grHeal_8021F170(Ground_GObj* gobj)
 {

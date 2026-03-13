@@ -64,7 +64,37 @@ bool it_802CA654(Item_GObj* gobj)
     return false;
 }
 
-/// #it_802CA6A0
+typedef struct itKamexState1Vars {
+    s32 xE34;
+    f32 xE38;
+    f32 xE3C;
+    f32 xE40;
+} itKamexState1Vars;
+
+typedef struct itKamexState1Attrs {
+    f32 x0;
+    s32 x4;
+    u8 pad_8[0x10];
+    f32 x18;
+    f32 x1C;
+} itKamexState1Attrs;
+
+void it_802CA6A0(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itKamexState1Vars* vars = (itKamexState1Vars*) &ip->xDD4_itemVar;
+    itKamexState1Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+
+    if (vars->xE34 == -1) {
+        vars->xE34 = attrs->x4;
+        vars->xE3C = attrs->x18;
+        vars->xE40 = attrs->x1C;
+    }
+    Item_80268E5C(gobj, 1, 2);
+    ip->entered_hitlag = efLib_PauseAll;
+    ip->exited_hitlag = efLib_ResumeAll;
+    ip->on_accessory = it_802CA8DC;
+}
 
 /// #itKamex_UnkMotion1_Anim
 

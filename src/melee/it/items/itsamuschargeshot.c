@@ -218,7 +218,6 @@ bool itSamuschargeshot_UnkMotion8_Anim(Item_GObj* gobj)
     HSD_JObj* grandchild = itGetJObjGrandchild(gobj);
 
     scale.x = scale.y = scale.z = ip->xDD4_itemVar.samuschargeshot.xDE4;
-
     HSD_JObjSetScale(grandchild, &scale);
     return it_80273130(gobj);
 }

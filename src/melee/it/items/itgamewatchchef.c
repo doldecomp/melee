@@ -44,11 +44,47 @@ void it_802C875C(Item_GObj* gobj)
     Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
 }
 
-/// #itGamewatchchef_UnkMotion1_Anim
+bool itGamewatchchef_UnkMotion1_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+
+    ip->xD44_lifeTimer -= 1.0f;
+    if (ip->xD44_lifeTimer <= 0.0f) {
+        ip->xD44_lifeTimer = 0.0f;
+        return true;
+    }
+    if ((s32) ip->xD44_lifeTimer & 2) {
+        it_8026BB20(gobj);
+    } else {
+        it_8026BB44(gobj);
+    }
+    return false;
+}
 
 void itGamewatchchef_UnkMotion1_Phys(Item_GObj* gobj) {}
 
-/// #itGamewatchchef_UnkMotion1_Coll
+bool itGamewatchchef_UnkMotion1_Coll(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itGamewatchchefAttributes* attrs =
+        ip->xC4_article_data->x4_specialAttributes;
+    itGamewatchchefAttrEntry* entry = &attrs->entries[ip->xDD4_itemVar.gamewatchchef.x4];
+
+    if (ip->x40_vel.x != 0.0f) {
+        u32 flags = it_8026DAA8(gobj);
+
+        if (flags & 0xC) {
+            ip->x40_vel.x *= -entry->x4;
+        }
+        if (flags & 3) {
+            ip->x40_vel.y = 0.0f;
+            ip->x40_vel.x = 0.0f;
+            it_80275158(gobj, attrs->xC);
+            Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
+        }
+    }
+    return false;
+}
 
 bool it_2725_Logic112_Clanked(Item_GObj* gobj)
 {

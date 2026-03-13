@@ -33,7 +33,20 @@ void it_802B1FE8(Item_GObj* gobj, Vec3* pos)
     pos->y += offset;
 }
 
-/// #it_2725_Logic39_Destroyed
+void it_2725_Logic39_Destroyed(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+
+    if (ip->xDD4_itemVar.pikachuthunder.x0 == 0 &&
+        ip->xDD4_itemVar.pikachuthunder.x38 != NULL)
+    {
+        if (ftPk_SpecialLw_CheckProperty(ip->xDD4_itemVar.pikachuthunder.x38) ==
+            0)
+        {
+            ftPk_SpecialLw_SetState_Unk0(ip->xDD4_itemVar.pikachuthunder.x38);
+        }
+    }
+}
 
 void it_802B2080(Item_GObj* gobj)
 {
@@ -70,7 +83,21 @@ bool itPikachuthunder_UnkMotion1_Anim(Item_GObj* gobj)
 
 /// #itPikachuthunder_UnkMotion1_Coll
 
-/// #it_802B22B8
+s32 it_802B22B8(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+
+    Item_80268E5C(gobj, 2, 0x11);
+    ip->xD44_lifeTimer = ip->xDD4_itemVar.pikachuthunder.x14;
+    ip->xDD4_itemVar.pikachuthunder.x4 = 1;
+    if (ip->xDD4_itemVar.pikachuthunder.x34 != NULL &&
+        ip->xDD4_itemVar.pikachuthunder.x34->user_data != NULL)
+    {
+        Item* linked = ip->xDD4_itemVar.pikachuthunder.x34->user_data;
+        linked->xDD4_itemVar.pikachuthunder.x28 = ip->x40_vel;
+        linked->xDD4_itemVar.pikachuthunder.x4 = 1;
+    }
+}
 
 /// #itPikachuthunder_UnkMotion2_Anim
 
