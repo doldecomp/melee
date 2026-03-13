@@ -469,5 +469,5 @@ void Stage_8022532C(InternalStageId idx, s32 arg1)
     local_data.stage_id = unk_struct_804D49E8.unk_struct->stage_id;
     local_data.list_idx = idx;
 
-    Ground_801C1074(&local_data, arg1);
+    Ground_DemoInit(&local_data, arg1);
 }

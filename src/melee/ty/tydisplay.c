@@ -11,6 +11,8 @@
 
 #include <baselib/random.h>
 
+extern char un_804D5AC0[];
+
 /// #un_803181BC
 
 void un_803182D4_OnFrame(void)
@@ -91,11 +93,140 @@ void* un_8031B9DC(s32 id)
 
 /// #un_8031BA78
 
-/// #un_8031BB34
+s32 un_8031BB34(s8 idx)
+{
+    char* table[] = {
+        "ToyDspQues_Top_joint",
+        "ToyDspMycharaCmA_Top_joint",
+        "ToyDspMycharaCmB_Top_joint",
+        "ToyDspMycharaCmC_Top_joint",
+        "ToyDspMycharaCmD_Top_joint",
+        "ToyDspMycharaCmE_Top_joint",
+        "ToyDspMycharaR1A_Top_joint",
+        "ToyDspMycharaR1B_Top_joint",
+        "ToyDspMycharaR1C_Top_joint",
+        "ToyDspMycharaR1D_Top_joint",
+        "ToyDspMycharaR1E_Top_joint",
+        "ToyDspMycharaR2A_Top_joint",
+        "ToyDspMycharaR2B_Top_joint",
+        "ToyDspMycharaR2C_Top_joint",
+        "ToyDspMycharaR2D_Top_joint",
+        "ToyDspMycharaR2E_Top_joint",
+        "ToyDspMapA_Top_joint",
+        "ToyDspMapB_Top_joint",
+        "ToyDspMapC_Top_joint",
+        "ToyDspMapD_Top_joint",
+        "ToyDspMapE_Top_joint",
+        "ToyDspFgseriesA_Top_joint",
+        "ToyDspFgseriesB_Top_joint",
+        "ToyDspFgseriesC_Top_joint",
+        "ToyDspFgseriesD_Top_joint",
+        "ToyDspFgseriesE_Top_joint",
+        "ToyDspFgetcA_Top_joint",
+        "ToyDspFgetcB_Top_joint",
+        "ToyDspFgetcC_Top_joint",
+        "ToyDspFgetcD_Top_joint",
+        "ToyDspFgetcE_Top_joint",
+        "ToyDspPokemonA_Top_joint",
+        "ToyDspPokemonB_Top_joint",
+        "ToyDspPokemonC_Top_joint",
+        "ToyDspPokemonD_Top_joint",
+        "ToyDspPokemonE_Top_joint",
+        "ToyDspItemA_Top_joint",
+        "ToyDspItemB_Top_joint",
+        "ToyDspItemC_Top_joint",
+        "ToyDspItemD_Top_joint",
+        "ToyDspItemE_Top_joint",
+        "ToyDspStand_Top_joint",
+        "ToyDspQues_Top_joint",
+    };
 
-/// #un_8031BB94
+    if (idx == -1) {
+        idx = 0;
+    }
 
-/// #un_8031BBF4
+    return (s32) table[idx];
+}
+
+char* un_8031BB94(s8 idx)
+{
+    char* table[] = {
+        un_804D5AC0,
+        "ToyDspMycharaCmA_Top_matanim_joint",
+        "ToyDspMycharaCmB_Top_matanim_joint",
+        "ToyDspMycharaCmC_Top_matanim_joint",
+        "ToyDspMycharaCmD_Top_matanim_joint",
+        "ToyDspMycharaCmE_Top_matanim_joint",
+        "ToyDspMycharaR1A_Top_matanim_joint",
+        "ToyDspMycharaR1B_Top_matanim_joint",
+        "ToyDspMycharaR1C_Top_matanim_joint",
+        "ToyDspMycharaR1D_Top_matanim_joint",
+        "ToyDspMycharaR1E_Top_matanim_joint",
+        "ToyDspMycharaR2A_Top_matanim_joint",
+        "ToyDspMycharaR2B_Top_matanim_joint",
+        "ToyDspMycharaR2C_Top_matanim_joint",
+        "ToyDspMycharaR2D_Top_matanim_joint",
+        "ToyDspMycharaR2E_Top_matanim_joint",
+        "ToyDspMapA_Top_matanim_joint",
+        "ToyDspMapB_Top_matanim_joint",
+        "ToyDspMapC_Top_matanim_joint",
+        "ToyDspMapD_Top_matanim_joint",
+        "ToyDspMapE_Top_matanim_joint",
+        "ToyDspFgseriesA_Top_matanim_joint",
+        "ToyDspFgseriesB_Top_matanim_joint",
+        "ToyDspFgseriesC_Top_matanim_joint",
+        "ToyDspFgseriesD_Top_matanim_joint",
+        "ToyDspFgseriesE_Top_matanim_joint",
+        "ToyDspFgetcA_Top_matanim_joint",
+        "ToyDspFgetcB_Top_matanim_joint",
+        "ToyDspFgetcC_Top_matanim_joint",
+        "ToyDspFgetcD_Top_matanim_joint",
+        "ToyDspFgetcE_Top_matanim_joint",
+        "ToyDspPokemonA_Top_matanim_joint",
+        "ToyDspPokemonB_Top_matanim_joint",
+        "ToyDspPokemonC_Top_matanim_joint",
+        "ToyDspPokemonD_Top_matanim_joint",
+        "ToyDspPokemonE_Top_matanim_joint",
+        "ToyDspItemA_Top_matanim_joint",
+        "ToyDspItemB_Top_matanim_joint",
+        "ToyDspItemC_Top_matanim_joint",
+        "ToyDspItemD_Top_matanim_joint",
+        "ToyDspItemE_Top_matanim_joint",
+        un_804D5AC0,
+        un_804D5AC0,
+    };
+
+    if (idx == -1) {
+        idx = 0;
+    }
+
+    return table[idx];
+}
+
+s32 un_8031BBF4(s8 arg0)
+{
+    char* table[] = {
+        "TyQuesD.dat",  "TyMycCmA.dat", "TyMycCmB.dat",
+        "TyMycCmC.dat", "TyMycCmD.dat", "TyMycCmE.dat",
+        "TyMycR1A.dat", "TyMycR1B.dat", "TyMycR1C.dat",
+        "TyMycR1D.dat", "TyMycR1E.dat", "TyMycR2A.dat",
+        "TyMycR2B.dat", "TyMycR2C.dat", "TyMycR2D.dat",
+        "TyMycR2E.dat", "TyMapA.dat",   "TyMapB.dat",
+        "TyMapC.dat",   "TyMapD.dat",   "TyMapE.dat",
+        "TySeriA.dat",  "TySeriB.dat",  "TySeriC.dat",
+        "TySeriD.dat",  "TySeriE.dat",  "TyEtcA.dat",
+        "TyEtcB.dat",   "TyEtcC.dat",   "TyEtcD.dat",
+        "TyEtcE.dat",  "TyPokeA.dat",  "TyPokeB.dat",
+        "TyPokeC.dat",  "TyPokeD.dat",  "TyPokeE.dat",
+        "TyItemA.dat",  "TyItemB.dat",  "TyItemC.dat",
+        "TyItemD.dat",  "TyItemE.dat",  "TyStandD.dat",
+        "TyQuesD.dat",
+    };
+    if (arg0 == -1) {
+        arg0 = 0;
+    }
+    return (s32) table[arg0];
+}
 
 /// #un_8031BC54
 
@@ -118,7 +249,55 @@ s32 tyDisplay_8031C2EC(void)
     return un_80305058(2, 0, 1, 60.0f);
 }
 
-/// #un_8031C354
+s32 un_8031C354(s32 id, s32 (*buf)[], s32 max, s32 kind)
+{
+    void* data;
+    void* other;
+    s32 i;
+    s32 count;
+    s32 val;
+
+    PAD_STACK(8);
+
+    if (id == -1) {
+        return 0;
+    }
+
+    data = un_8031B9DC(id);
+
+    if (kind == 99) {
+        kind = (s32) un_803060BC(id, 6);
+    }
+
+    count = 0;
+    for (i = 0; i < 0x125; i++) {
+        if (i == id) {
+            continue;
+        }
+        if (un_80304CC8(i) == 0) {
+            continue;
+        }
+        if (un_803049F4(i) == 0) {
+            continue;
+        }
+        other = un_8031B9DC(i);
+        val = (s32) un_803060BC(i, 6);
+        if (((u8*) other)[4] != ((u8*) data)[4]) {
+            continue;
+        }
+        if (val != kind) {
+            continue;
+        }
+        count++;
+        (*buf)[0] = i;
+        buf = (s32 (*)[]) ((u8*) buf + 4);
+        if (count >= max) {
+            break;
+        }
+    }
+
+    return count;
+}
 
 /// #un_8031C454
 

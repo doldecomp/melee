@@ -1,5 +1,7 @@
 #include "itpikachutjoltair.h"
 
+#include "lb/lb_00B0.h"
+
 #include <placeholder.h>
 #include <platform.h>
 
@@ -28,7 +30,19 @@ Item_GObj* it_802B3EFC(Item_GObj* gobj)
     return 0;
 }
 
-/// #it_802B3F20
+void it_802B3F20(Item_GObj* gobj, Vec3* arg1)
+{
+    Item* ip = gobj->user_data;
+    PAD_STACK(8);
+    if (ip->xDD4_itemVar.pikachujoltair.xDD8 != NULL) {
+        lb_8000B1CC(ip->xBBC_dynamicBoneTable->bones[6], NULL, arg1);
+        arg1->z = 0.0f;
+        return;
+    }
+    arg1->z = 0.0f;
+    arg1->y = 0.0f;
+    arg1->x = 0.0f;
+}
 
 /// #it_802B3F88
 

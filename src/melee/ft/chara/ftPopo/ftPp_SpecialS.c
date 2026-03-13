@@ -823,9 +823,35 @@ void ftPp_SpecialHi_Enter(Fighter_GObj* gobj)
 
 /// #ftPp_SpecialAirHiStart_0_Anim
 
-/// #ftPp_SpecialHiStart_0_IASA
+void ftPp_SpecialHiStart_0_IASA(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    ftIceClimberAttributes* da = fp->dat_attrs;
+    PAD_STACK(16);
+    if (fp->cmd_vars[0] != 0) {
+        fp->cmd_vars[0] = 0;
+        if (ABS(fp->input.lstick.x) > da->x80) {
+            ftCommon_UpdateFacing(fp);
+            ftPartSetRotY(fp, 0,
+                          (float)(M_PI_2 * fp->facing_dir));
+        }
+    }
+}
 
-/// #ftPp_SpecialAirHiStart_0_IASA
+void ftPp_SpecialAirHiStart_0_IASA(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    ftIceClimberAttributes* da = fp->dat_attrs;
+    PAD_STACK(16);
+    if (fp->cmd_vars[0] != 0) {
+        fp->cmd_vars[0] = 0;
+        if (ABS(fp->input.lstick.x) > da->x80) {
+            ftCommon_UpdateFacing(fp);
+            ftPartSetRotY(fp, 0,
+                          (float)(M_PI_2 * fp->facing_dir));
+        }
+    }
+}
 
 void ftPp_SpecialHiStart_0_Phys(Fighter_GObj* gobj)
 {
@@ -1028,7 +1054,16 @@ void ftPp_SpecialHiStart_1_Phys(Fighter_GObj* gobj)
     ft_80084F3C(gobj);
 }
 
-/// #ftPp_SpecialAirHiStart_1_Phys
+void ftPp_SpecialAirHiStart_1_Phys(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    ftIceClimberAttributes* da = fp->dat_attrs;
+    PAD_STACK(8);
+    ftCommon_Fall(fp, da->xA8, da->xAC);
+    if (fp->self_vel.y < 0.0f) {
+        ftCommon_8007CEF4(fp);
+    }
+}
 
 void ftPp_SpecialHiStart_1_Coll(Fighter_GObj* gobj)
 {
@@ -1112,7 +1147,16 @@ void ftPp_SpecialHiThrow_1_Phys(Fighter_GObj* gobj)
     ft_80084F3C(gobj);
 }
 
-/// #ftPp_SpecialAirHiThrow_1_Phys
+void ftPp_SpecialAirHiThrow_1_Phys(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftIceClimberAttributes* da = fp->dat_attrs;
+    PAD_STACK(8);
+    ftCommon_Fall(fp, da->xA8, da->xAC);
+    if (fp->self_vel.y < 0.0f) {
+        ftCommon_8007CEF4(fp);
+    }
+}
 
 void ftPp_SpecialHiThrow_1_Coll(Fighter_GObj* gobj)
 {
@@ -1238,15 +1282,70 @@ void ftPp_SpecialHi_801227AC(Fighter_GObj* gobj)
 
 /// #ftPp_SpecialHi_8012280C
 
-/// #ftPp_SpecialHi_80122898
+void ftPp_SpecialHi_80122898(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    PAD_STACK(16);
+    if (fp->fv.pp.x2230_b0) {
+        efLib_DestroyAll(gobj);
+        fp = gobj->user_data;
+        fp->fv.pp.x2230_b0 = false;
+        fp->death2_cb = NULL;
+        fp->take_dmg_cb = NULL;
+        ftPartSetRotX(gobj->user_data, 0, 0.0f);
+    }
+}
 
-/// #ftPp_SpecialLw_Enter
+void ftPp_SpecialLw_Enter(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    PAD_STACK(8);
+    fp->throw_flags = 0;
+    fp->cmd_vars[0] = 0;
+    fp->cmd_vars[3] = 0;
+    fp->mv.pp.speciallw.x0 = 0;
+    fp->mv.pp.speciallw.x4_b0 = false;
+    Fighter_ChangeMotionState(gobj, ftPp_MS_SpecialLw, 0, 0.0f,
+                              1.0f, 0.0f, NULL);
+    ftAnim_8006EBA4(gobj);
+    fp->accessory4_cb = fn_80122D2C;
+}
 
 /// #ftPp_SpecialAirLw_Enter
 
-/// #ftPp_SpecialLw_Anim
+void ftPp_SpecialLw_Anim(Fighter_GObj* gobj)
+{
+    PAD_STACK(16);
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        Fighter* fp = gobj->user_data;
+        if (fp->fv.pp.x2230_b0) {
+            efLib_DestroyAll(gobj);
+            fp = gobj->user_data;
+            fp->fv.pp.x2230_b0 = false;
+            fp->death2_cb = NULL;
+            fp->take_dmg_cb = NULL;
+            ftPartSetRotX(gobj->user_data, 0, 0.0f);
+        }
+        ft_8008A2BC(gobj);
+    }
+}
 
-/// #ftPp_SpecialAirLw_Anim
+void ftPp_SpecialAirLw_Anim(Fighter_GObj* gobj)
+{
+    PAD_STACK(16);
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        Fighter* fp = gobj->user_data;
+        if (fp->fv.pp.x2230_b0) {
+            efLib_DestroyAll(gobj);
+            fp = gobj->user_data;
+            fp->fv.pp.x2230_b0 = false;
+            fp->death2_cb = NULL;
+            fp->take_dmg_cb = NULL;
+            ftPartSetRotX(gobj->user_data, 0, 0.0f);
+        }
+        ftCo_Fall_Enter(gobj);
+    }
+}
 
 void ftPp_SpecialLw_IASA(Fighter_GObj* gobj) {}
 

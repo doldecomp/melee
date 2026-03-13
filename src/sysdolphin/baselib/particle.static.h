@@ -80,7 +80,7 @@ static HSD_PSFormGroup** psFormGroupArray[65];
 /* 4D0B50 */ static HSD_PSTexGroup** psTexGroupArray[65];
 /* 4D0C54 */ static HSD_PSCmdList** psCmdListArray[65];
 /* 4D0D58 */ static int psNumCmdList[65];
-/* 4D0E5C */ static u32* ptclref[65];
+/* 4D0E5C */ static u32* ptclref_804D0E5C[65];
 
 /* 4D0F60 */ struct hsd_804D0F60_t hsd_804D0F60;
 /* 4D0F90 */ struct hsd_804D0F60_t hsd_804D0F90;

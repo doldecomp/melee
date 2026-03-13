@@ -5,6 +5,8 @@
 
 #include <platform.h>
 
+#include "forward.h"
+
 #include "gr/granime.h"
 #include "gr/grdisplay.h"
 #include "gr/grlib.h"
@@ -69,7 +71,7 @@ StageCallbacks grFs_803E3CFC[] = {
 };
 
 StageData grFs_803E3D94 = {
-    21,
+    FOURSIDE,
     grFs_803E3CFC,
     "/GrFs.dat",
     grFourside_801F2D10,

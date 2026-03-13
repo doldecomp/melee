@@ -10,6 +10,7 @@
 #include "it/it_2725.h"
 #include "it/itCommonItems.h"
 #include "it/item.h"
+#include "mp/mplib.h"
 
 /// #it_2725_Logic18_Spawned
 
@@ -115,7 +116,25 @@ bool itHouou_UnkMotion3_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itHouou_UnkMotion3_Phys
+void itHouou_UnkMotion3_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itHououAttr* attr = ip->xC4_article_data->x4_specialAttributes;
+    s32 timer;
+
+    it_8027A344(gobj);
+
+    timer = ip->xDD4_itemVar.pokemon.timer;
+    ip->xDD4_itemVar.pokemon.timer = timer - 1;
+
+    if (timer != 0) {
+        ip->x40_vel.z = attr->x10;
+        return;
+    }
+
+    ip->x40_vel.z = 0.0f;
+    it_802D290C(gobj);
+}
 
 bool itHouou_UnkMotion3_Coll(Item_GObj* gobj)
 {
@@ -173,7 +192,15 @@ bool itHouou_UnkMotion4_Coll(Item_GObj* gobj)
     return false;
 }
 
-/// #it_802D2A58
+void it_802D2A58(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    Item_80268E5C(gobj, 5, ITEM_ANIM_UPDATE);
+    ip->entered_hitlag = efLib_PauseAll;
+    ip->exited_hitlag = efLib_ResumeAll;
+    ip->on_accessory = (HSD_GObjEvent) it_802D2B4C;
+    ip->xDCC_flag.b3 = true;
+}
 
 bool itHouou_UnkMotion5_Anim(Item_GObj* gobj)
 {
@@ -268,7 +295,18 @@ bool it_802D2F3C(Item_GObj* gobj)
     return false;
 }
 
-/// #it_802D2F70
+void it_802D2F70(Item_GObj* gobj)
+{
+    Vec3 sp10;
+    Item* ip = GET_ITEM(gobj);
+
+    if (mpLib_80054ED8(ip->xDD4_itemVar.pokemon.timer)) {
+        mpGetSpeed(ip->xDD4_itemVar.pokemon.timer, &ip->pos, &sp10);
+        ip->pos.x += sp10.x;
+        ip->pos.y += sp10.y;
+        ip->pos.z += sp10.z;
+    }
+}
 
 bool it_802D2FE8(Item_GObj* gobj)
 {

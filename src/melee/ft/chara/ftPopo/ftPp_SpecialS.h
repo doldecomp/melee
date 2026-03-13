@@ -61,6 +61,6 @@
 /* 122B54 */ void fn_80122B54(Fighter_GObj* gobj);
 /// ftPp_SpecialLw_Coll
 /* ??? */ void ftPp_SpecialAirLw_Coll(Fighter_GObj* gobj);
-/// fn_80122D2C
+/* 122D2C */ void fn_80122D2C(Fighter_GObj* gobj);
 
 #endif

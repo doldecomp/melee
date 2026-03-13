@@ -20,7 +20,7 @@
 /* 2CA724 */ bool itKamex_UnkMotion1_Anim(Item_GObj* gobj);
 /* 2CA7FC */ void itKamex_UnkMotion1_Phys(Item_GObj* gobj);
 /* 2CA890 */ bool itKamex_UnkMotion1_Coll(Item_GObj* gobj);
-/* 2CA8DC */ UNK_RET it_802CA8DC(UNK_PARAMS);
+/* 2CA8DC */ void it_802CA8DC(Item_GObj* gobj);
 /* 2CA938 */ void it_802CA938(Item_GObj* gobj);
 /* 2CA984 */ bool itKamex_UnkMotion2_Anim(Item_GObj* gobj);
 /* 2CA9B8 */ void itKamex_UnkMotion2_Phys(Item_GObj* gobj);
@@ -29,7 +29,7 @@
 /* 2CAAA4 */ bool itKamex_UnkMotion3_Anim(Item_GObj* gobj);
 /* 2CAAC8 */ void itKamex_UnkMotion3_Phys(Item_GObj* gobj);
 /* 2CAAE8 */ bool itKamex_UnkMotion3_Coll(Item_GObj* gobj);
-/* 2CAB10 */ UNK_RET it_802CAB10(UNK_PARAMS);
+/* 2CAB10 */ void it_802CAB10(Item_GObj*);
 /* 2CACD0 */ void it_2725_Logic31_Spawned(Item_GObj*);
 /* 2CADC0 */ bool itKamex_Logic31_HitShield(Item_GObj*);
 /* 2CADC8 */ bool itKamex_Logic31_DmgDealt(Item_GObj*);

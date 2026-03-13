@@ -41,7 +41,7 @@
 /* 1C0800 */ void Ground_801C0800(StructPairWithStageID* pair);
 /* 1C0F78 */ void Ground_801C0F78(StructPairWithStageID* pair);
 /* 1C0FB8 */ void Ground_801C0FB8(StructPairWithStageID* pair);
-/* 1C1074 */ void Ground_801C1074(StructPairWithStageID* pair, s32);
+/* 1C1074 */ void Ground_DemoInit(StructPairWithStageID* pair, s32);
 /* 1C10B8 */ void Ground_801C10B8(HSD_GObj*, HSD_GObjEvent);
 /* 1C1154 */ void Ground_801C1154(void);
 /* 1C1158 */ void Ground_801C1158(void);
@@ -58,7 +58,7 @@
 /* 1C1DE4 */ void Ground_801C1DE4(s32*, s32*);
 /* 1C1E00 */ void Ground_801C1E00(s32);
 /* 1C1E18 */ s32 Ground_801C1E18(void);
-/* 1C1E84 */ void* Ground_801C1E84(void);
+/* 1C1E84 */ HSD_GObj* Ground_801C1E84(void);
 /* 1C1FFC */ void Ground_ApplyStageBackgroundColor(void);
 /* 1C205C */ void Ground_801C205C(GXColor* color);
 /* 1C2090 */ bool Ground_801C2090(GXColor* color);

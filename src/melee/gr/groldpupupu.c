@@ -5,6 +5,7 @@
 
 #include "gr/granime.h"
 #include "gr/ground.h"
+#include "gr/grmaterial.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
 #include "lb/lb_00B0.h"
@@ -18,6 +19,8 @@ static struct {
 }* grOp_804D6A98;
 
 static void* grOp_804D6A9C;
+
+static int grOp_804D48E0[1][2] = { { 0, 0 } };
 
 void grOldPupupu_802107DC(bool arg) {}
 
@@ -160,7 +163,16 @@ bool grOldPupupu_80210D08(Ground_GObj* gobj)
 
 void grOldPupupu_8021110C(Ground_GObj* arg) {}
 
-/// #grOldPupupu_80211110
+void grOldPupupu_80211110(Ground_GObj* gobj)
+{
+    Ground* gp = gobj->user_data;
+    HSD_JObj* jobj = gobj->hsd_obj;
+    PAD_STACK(16);
+    grAnime_801C8138(gobj, gp->map_id, 0);
+    ((Ground*) gobj->user_data)->x10_flags.b2 = 0;
+    grMaterial_801C8858(jobj, 0x28000000U);
+    gp->x11_flags.b012 = 2;
+}
 
 bool grOldPupupu_8021118C(Ground_GObj* gobj)
 {
@@ -215,7 +227,18 @@ bool grOldPupupu_80211C14(Ground_GObj* gobj)
     return false;
 }
 
-/// #grOldPupupu_80211C1C
+void grOldPupupu_80211C1C(Ground_GObj* gobj)
+{
+    Ground* gp = gobj->user_data;
+    Ground* other_gp = Ground_801C2BA4(7)->user_data;
+    PAD_STACK(8);
+
+    if (other_gp->gv.unk.xC8 == 2 && other_gp->gv.unk.xD4 != 0) {
+        grAnime_801C8138(
+            gobj, gp->map_id,
+            grOp_804D48E0[other_gp->gv.unk.xCC][other_gp->gv.unk.xD8]);
+    }
+}
 
 void grOldPupupu_80211C9C(Ground_GObj* arg) {}
 

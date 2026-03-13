@@ -7,7 +7,7 @@
 #include "grkongo.h"
 #include "grmaterial.h"
 #include "groldkongo.h"
-#include "grstadium.h"
+#include "grpstadium.h"
 #include "grzebes.h"
 #include "platform.h"
 #include "stage.h"
@@ -484,7 +484,7 @@ void Ground_801C0800(StructPairWithStageID* pair)
     mpLib_80058820();
     Ground_801C1E94();
     Ground_801C466C();
-    stage_data->callback0();
+    stage_data->OnInit();
 }
 
 static bool Ground_801C0A70(Vec3* pos)
@@ -685,9 +685,9 @@ void Ground_801C0FB8(StructPairWithStageID* pair)
                           Ground_801C0C2C, 10);
 }
 
-void Ground_801C1074(StructPairWithStageID* pair, s32 arg1)
+void Ground_DemoInit(StructPairWithStageID* pair, s32 arg1)
 {
-    Ground_803DFEDC[pair->stage_id]->callback1(arg1);
+    Ground_803DFEDC[pair->stage_id]->OnDemoInit(arg1);
 }
 
 void Ground_801C10B8(HSD_GObj* arg0, HSD_GObjEvent arg1)
@@ -1046,7 +1046,7 @@ void Ground_801C1E2C(HSD_GObj* gobj, int code)
     }
 }
 
-void* Ground_801C1E84(void)
+HSD_GObj* Ground_801C1E84(void)
 {
     return stage_info.x12C;
 }

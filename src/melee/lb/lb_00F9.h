@@ -30,8 +30,8 @@
 /* 011710 */ void lb_80011710(DynamicsDesc*, DynamicsDesc*);
 /* 0117F4 */ bool lb_800117F4(DynamicsDesc*, GXColor*, GXColor*, int, u32);
 /* 0119DC */ void lb_800119DC(Vec3*, int, float, float, float);
-/* 011A50 */ void lb_80011A50(Vec3*, int, float, float, float, float, float,
-                              float, float);
+/* 011A50 */ struct lb_80011A50_t* lb_80011A50(Vec3*, int, float, float, float,
+                                               float, float, float, float);
 /* 011ABC */ enum_t lb_80011ABC(void);
 /* 011AC4 */ HSD_LObj* lb_80011AC4(LightList**);
 /* 011C18 */ void lb_80011C18(HSD_JObj* jobj, u32 flags);

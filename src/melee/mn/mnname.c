@@ -1,5 +1,9 @@
 #include "mnname.h"
 
+#include "mnmain.h"
+#include "mnnamenew.h"
+
+#include <baselib/gobj.h>
 #include <baselib/jobj.h>
 #include <melee/gm/gmmain_lib.h>
 
@@ -76,7 +80,20 @@ void CreateNameAtIndex(s32 slot)
 
 /// #mnName_MainInput
 
-/// #fn_80238540
+void fn_80238540(HSD_GObj* gobj)
+{
+    switch ((s32) mn_804A04F0.x10) {
+    case 0:
+        mnName_MainInput(gobj);
+        break;
+    case 1:
+        mnNameNew_MainInput(gobj);
+        break;
+    case 2:
+        mnName_ConfirmNameDeleteInput(gobj);
+        break;
+    }
+}
 
 void mnName_802385A0(HSD_GObj* gobj)
 {
@@ -141,7 +158,24 @@ void mnName_80239F5C(HSD_JObj* jobj, f32 x)
     HSD_JObjSetTranslateX(jobj, x);
 }
 
-/// #mnName_80239FFC
+void mnName_80239FFC(HSD_GObj* gobj)
+{
+    MnName_GObj* mn = (MnName_GObj*) gobj;
+    HSD_JObj* jobj = (HSD_JObj*) mn->gobj.user_data_remove_func;
+    HSD_JObj* child;
+
+    if (jobj == NULL) {
+        child = NULL;
+    } else {
+        child = jobj->child;
+    }
+    HSD_JObjRemoveAll(child);
+
+    if (mn->text != NULL) {
+        HSD_SisLib_803A5CC4(mn->text);
+        mn->text = NULL;
+    }
+}
 
 void mnName_8023A058(HSD_GObj* gobj)
 {
