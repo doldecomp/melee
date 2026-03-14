@@ -1542,10 +1542,4 @@ typedef struct itMatadogas_ItemVars {
     /* +68 ip+E3C */ s32 x68;
 } itMatadogas_ItemVars;
 
-typedef struct {
-    /* +0 ip+DD4 */ Item_GObj* x0;
-    /* +4 ip+DD8 */ s32 x4;
-    /* +8 ip+DDC */ s32 x8;
-} itNesspkthundertrail_ItemVars;
-
 #endif

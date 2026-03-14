@@ -1,6 +1,7 @@
 #ifndef GALE01_2AC43C
 #define GALE01_2AC43C
 
+#include "ft/forward.h"
 #include "it/forward.h"
 
 #include "it/items/types.h"
