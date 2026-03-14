@@ -613,6 +613,7 @@ struct Item {
         itPKFlush_ItemVars pkflush;
         itPKFlushExplode_ItemVars pkflushexplode;
         itPKThunder_ItemVars pkthunder;
+        itNesspkthundertrail_ItemVars nesspkthundertrail;
         itPokemon_ItemVars pokemon;
         itRShell_ItemVars rshell;
         itSamusBomb_ItemVars samusbomb;
