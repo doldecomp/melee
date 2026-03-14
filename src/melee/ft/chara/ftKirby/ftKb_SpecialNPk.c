@@ -415,7 +415,7 @@ void ftKb_KpSpecialAirN_Anim(Fighter_GObj* gobj)
     }
     {
         Fighter* fp = GET_FIGHTER(gobj);
-        ftKb_DatAttrs* da = fp->dat_attrs;
+        ftKb_DatAttrs* da = ftKb_KpSpecialN_Anim_inline(fp);
         if (fp->mv.kb.specialn_kp.x18 == 0) {
             Camera_80030E44(2, &fp->cur_pos);
         }
