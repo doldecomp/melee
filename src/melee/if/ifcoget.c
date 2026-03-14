@@ -66,7 +66,7 @@ struct un_804A1F58_x8_t {
 
 void fn_802FED14(HSD_GObj* gobj)
 {
-    HSD_JObj* jobj = gobj->hsd_obj;
+    HSD_JObj* jobj = HSD_GObjGetHSDObj(gobj);
     if (!un_803F9E08.x0.b1) {
         HSD_JObjSetFlagsAll(jobj, 0x10);
         return;
