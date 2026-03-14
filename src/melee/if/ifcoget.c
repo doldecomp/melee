@@ -169,7 +169,7 @@ void fn_802FF218(HSD_GObj* arg0)
     if (y >= 0) {
         if (un_804A1F58[y + 1].x4 == 1) {
             HSD_SisLib_803A70A0(un_804A1F58[y].x8.x4,
-                                (void*) un_804A1F58[y].x8.x8, "");
+                                un_804A1F58[y].x8.x8, "");
         } else {
             int s;
             gm_8016B774();
@@ -179,7 +179,7 @@ void fn_802FF218(HSD_GObj* arg0)
             }
             if (un_804A1F58[y + 1].x0 != (unsigned int) s) {
                 HSD_SisLib_803A70A0(un_804A1F58[y].x8.x4,
-                                    (void*) un_804A1F58[y].x8.x8,
+                                    un_804A1F58[y].x8.x8,
                                     "%d", s);
                 un_804A1F58[y + 1].x0 = s;
             }
