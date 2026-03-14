@@ -322,6 +322,7 @@ void grMaterial_801C95C4(HSD_GObj* gobj)
     gp->x10_flags.b4 = 1;
 }
 
+// TODO: is this GET_GROUND? calling it directly didn't work.
 inline Ground* grMaterial_801C9604_inline(HSD_GObj *arg0)
 {
   return arg0->user_data;
