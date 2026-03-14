@@ -654,25 +654,26 @@ typedef struct itKamexAttributes {
 typedef struct {
     s16 x0;
     u8 padding[0xE34 - 0xDD8];
-    union {
-        s32 timer;
-        f32 timer_f;
-    };
-    union {
-        int x64;
-        f32 x64_f;
-    };
-    union {
-        int x68;
-        f32 x68_f;
-    };
-    int x6C;
+    s32 timer;
+    int x64;
+    f32 x68;
+    f32 x6C;
     union {
         f32 xE44;
         s32 xE44_s32;
     };
-    s32 xE48;
 } itPokemon_ItemVars;
+
+typedef struct {
+    /* +00 ip+DD4 */ s16 x0;
+    /* +02 */ u8 padding[0xE34 - 0xDD8];
+    /* +60 ip+E34 */ f32 timer;
+    /* +64 ip+E38 */ f32 x64;
+    /* +68 ip+E3C */ f32 x68;
+    /* +6C ip+E40 */ s32 x6C;
+    /* +70 ip+E44 */ s32 xE44;
+    /* +74 ip+E48 */ s32 xE48;
+} itKabigon_ItemVars;
 
 typedef struct itHitodeman_ItemVars {
     /*  +0 ip+DD4 */ char pad_0[0x60];
@@ -1540,5 +1541,11 @@ typedef struct itMatadogas_ItemVars {
     /* +64 ip+E38 */ s32 x64;
     /* +68 ip+E3C */ s32 x68;
 } itMatadogas_ItemVars;
+
+typedef struct {
+    /* +0 ip+DD4 */ Item_GObj* x0;
+    /* +4 ip+DD8 */ s32 x4;
+    /* +8 ip+DDC */ s32 x8;
+} itNesspkthundertrail_ItemVars;
 
 #endif

@@ -30,12 +30,12 @@ void it_802C9D40(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itKabigonAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
-    ip->xDD4_itemVar.pokemon.timer_f = attrs->x4;
-    ip->xDD4_itemVar.pokemon.x64_f = attrs->x8;
-    ip->xDD4_itemVar.pokemon.x68_f = attrs->xC;
-    ip->xDD4_itemVar.pokemon.x6C = attrs->x10;
-    ip->xDD4_itemVar.pokemon.xE44_s32 = attrs->x14;
-    ip->xDD4_itemVar.pokemon.xE48 = (s32) attrs->x18;
+    ip->xDD4_itemVar.kabigon.timer = attrs->x4;
+    ip->xDD4_itemVar.kabigon.x64 = attrs->x8;
+    ip->xDD4_itemVar.kabigon.x68 = attrs->xC;
+    ip->xDD4_itemVar.kabigon.x6C = attrs->x10;
+    ip->xDD4_itemVar.kabigon.xE44 = attrs->x14;
+    ip->xDD4_itemVar.kabigon.xE48 = (s32) attrs->x18;
     ip->xDCC_flag.b3 = 1;
     ip->xDAC_itcmd_var0 = 0;
     ip->xDB0_itcmd_var1 = 0;
@@ -80,7 +80,7 @@ bool itKabigon_UnkMotion0_Anim(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
 
     if (ip->xDB0_itcmd_var1 != 0) {
-        ip->x40_vel.y = ip->xDD4_itemVar.pokemon.timer_f;
+        ip->x40_vel.y = ip->xDD4_itemVar.kabigon.timer;
         it_802762BC(ip);
         if (ip->xDB4_itcmd_var2 != 0) {
             ip->xDB4_itcmd_var2 = 0;
@@ -125,12 +125,12 @@ void it_802CA014(Item_GObj* gobj)
     Item* ip = gobj->user_data;
     if (ip->xDB0_itcmd_var1 != 0) {
         s32 timer;
-        timer = --ip->xDD4_itemVar.pokemon.xE44_s32;
+        timer = --ip->xDD4_itemVar.kabigon.xE44;
         if (timer == 0) {
             itPokemonAttributes* attr =
                 ip->xC4_article_data->x4_specialAttributes;
             it_802CA3F4(gobj);
-            ip->xDD4_itemVar.pokemon.xE44_s32 = attr->x14;
+            ip->xDD4_itemVar.kabigon.xE44 = attr->x14;
         }
     }
 }

@@ -569,6 +569,7 @@ struct Item {
         itHeart_ItemVars heart;
         itHeiho_ItemVars heiho;
         itHitodeman_ItemVars hitodeman;
+        itKabigon_ItemVars kabigon;
         itKinoko_ItemVars kinoko;
         itKirbyHammer_ItemVars kirbyhammer;
         itkireihana_ItemVars kireihana;
@@ -613,6 +614,7 @@ struct Item {
         itPKFlush_ItemVars pkflush;
         itPKFlushExplode_ItemVars pkflushexplode;
         itPKThunder_ItemVars pkthunder;
+        itNesspkthundertrail_ItemVars nesspkthundertrail;
         itPokemon_ItemVars pokemon;
         itRShell_ItemVars rshell;
         itSamusBomb_ItemVars samusbomb;
