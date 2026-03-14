@@ -189,6 +189,8 @@ typedef struct itLugiaAttributes {
     /* +08 */ f32 x8;
     /* +0C */ f32 xC;
     /* +10 */ f32 x10;
+    /* +14 */ f32 x14;
+    /* +18 */ f32 x18;
 } itLugiaAttributes;
 
 /// Box/Crate item attributes loaded from .dat file
@@ -208,7 +210,7 @@ typedef struct itDosei_ItemVars {
     s32 xDD4;
     s32 xDD8;
     f32 xDDC;
-    s32 xDE0;
+    f32 xDE0;
     Vec3 xDE4;
     f32 xDF0;
     f32 xDF4;
@@ -516,6 +518,12 @@ typedef struct itTincle_ItemVars {
     /* +5C ip+E30 */ f32 x5C;
 } itTincle_ItemVars;
 
+typedef struct itTincleAttributes {
+    /* 0x00 */ u8 pad[0x44];
+    /* 0x44 */ f32 x44;
+    /* 0x48 */ f32 x48;
+} itTincleAttributes;
+
 typedef struct itGShell_HurtInit {
     /* 0x00 */ s32 state;
     /* 0x04 */ Vec3 a_offset;
@@ -655,6 +663,17 @@ typedef struct {
         s32 xE44_s32;
     };
 } itPokemon_ItemVars;
+
+typedef struct {
+    /* +00 ip+DD4 */ s16 x0;
+    /* +02 */ u8 padding[0xE34 - 0xDD8];
+    /* +60 ip+E34 */ f32 timer;
+    /* +64 ip+E38 */ f32 x64;
+    /* +68 ip+E3C */ f32 x68;
+    /* +6C ip+E40 */ s32 x6C;
+    /* +70 ip+E44 */ s32 xE44;
+    /* +74 ip+E48 */ s32 xE48;
+} itKabigon_ItemVars;
 
 typedef struct itHitodeman_ItemVars {
     /*  +0 ip+DD4 */ char pad_0[0x60];
@@ -1247,12 +1266,14 @@ typedef struct itWhiteBea_ItemVars {
     /* +2C ip+E00 */ char pad_2C[0x10];
     /* +3C ip+E10 */ s32 x3C;
     /* +40 ip+E14 */ s32 x40;
+    /* +44 ip+E18 */ s32 x44;
 } itWhiteBea_ItemVars;
 
 typedef struct itWhiteBeaAttributes {
     /* +0 */ s32* x0;
     /* +4 */ f32 x4;
-    /* +8 */ char pad_x8[0xC];
+    /* +8 */ char pad_x8[0x8];
+    /* +10 */ f32 x10;
     /* +14 */ s16 x14;
 } itWhiteBeaAttributes;
 
