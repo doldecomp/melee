@@ -3,8 +3,8 @@
 #include <placeholder.h>
 #include <platform.h>
 
+#include "db/db.h"
 #include "it/forward.h"
-
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
@@ -14,8 +14,36 @@
 #include "it/types.h"
 
 #include <baselib/gobj.h>
+#include <baselib/jobj.h>
 
-/// #it_802AA054
+void it_802AA054(Item_GObj* gobj, Vec3* pos, Vec3* vel, f32 facing_dir,
+                 f32 angle)
+{
+    SpawnItem spawn;
+    PAD_STACK(8);
+
+    spawn.kind = It_Kind_Ness_PKFire;
+    spawn.prev_pos = *pos;
+    spawn.prev_pos.z = 0.0f;
+    it_8026BB68(gobj, &spawn.pos);
+    spawn.vel = *vel;
+    spawn.facing_dir = facing_dir;
+    spawn.x3C_damage = 0;
+    spawn.x0_parent_gobj = gobj;
+    spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
+    spawn.x44_flag.b0 = true;
+    spawn.x40 = 0;
+
+    {
+        Item_GObj* fire = Item_80268B18(&spawn);
+        if (fire != NULL) {
+            HSD_JObj* jobj = GET_JOBJ(fire);
+            db_80225DD8(fire, gobj);
+            it_802AA1D8(fire);
+            HSD_JObjSetRotationZ(jobj, angle);
+        }
+    }
+}
 
 void it_802AA1D8(Item_GObj* item_gobj)
 {
@@ -78,7 +106,13 @@ bool itNessPKFire_Logic23_Reflected(Item_GObj* gobj)
     return it_80273030(gobj);
 }
 
-/// #it_2725_Logic23_ShieldBounced
+bool it_2725_Logic23_ShieldBounced(Item_GObj* gobj)
+{
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+    f32 rot_z = HSD_JObjGetRotationZ(jobj);
+    HSD_JObjSetRotationZ(jobj, -rot_z);
+    return itColl_BounceOffShield(gobj);
+}
 
 void it_802AA474(Item_GObj* gobj, Item_GObj* ref_gobj)
 {

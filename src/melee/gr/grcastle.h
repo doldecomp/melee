@@ -4,9 +4,11 @@
 #include <placeholder.h>
 
 #include "gr/forward.h"
+#include "it/forward.h"
 #include "lb/forward.h"
 #include "mp/forward.h"
 #include <baselib/forward.h>
+#include <melee/it/forward.h>
 
 #include <dolphin/mtx.h>
 
@@ -22,7 +24,7 @@ struct unkCastle {
 /* 1CD4A0 */ void grCastle_801CD4A0(void);
 /* 1CD4A4 */ void grCastle_801CD4A4(void);
 /* 1CD4C8 */ bool grCastle_801CD4C8(void);
-/* 1CD4D0 */ UNK_RET grCastle_801CD4D0(UNK_PARAMS);
+/* 1CD4D0 */ HSD_GObj* grCastle_801CD4D0(int);
 /* 1CD5BC */ void grCastle_801CD5BC(Ground_GObj*);
 /* 1CD600 */ bool grCastle_801CD600(Ground_GObj*);
 /* 1CD608 */ void grCastle_801CD608(Ground_GObj*);
@@ -40,7 +42,7 @@ struct unkCastle {
 /* 1CDF54 */ bool grCastle_801CDF54(Vec3*);
 /* 1CDFD8 */ void grCastle_801CDFD8(Ground_GObj*);
 /* 1CE054 */ UNK_RET grCastle_801CE054(UNK_PARAMS);
-/* 1CE19C */ UNK_RET grCastle_801CE19C(UNK_PARAMS);
+/* 1CE19C */ void grCastle_801CE19C(Ground_GObj*);
 /* 1CE260 */ void grCastle_801CE260(Ground_GObj*);
 /* 1CE3A0 */ UNK_RET fn_801CE3A0(UNK_PARAMS);
 /* 1CE3A4 */ bool grCastle_801CE3A4(Ground_GObj*);
@@ -68,8 +70,8 @@ struct unkCastle {
                                     mpLib_GroundEnum, f32);
 /* 1CF7B0 */ void grCastle_801CF7B0(Ground_GObj*);
 /* 1CF868 */ UNK_RET grCastle_801CF868(UNK_PARAMS);
-/* 1CFAFC */ UNK_RET fn_801CFAFC(UNK_PARAMS);
-/* 1CFB68 */ UNK_RET fn_801CFB68(UNK_PARAMS);
+/* 1CFAFC */ void fn_801CFAFC(Item_GObj*, Ground*, Vec3*, HSD_GObj*, f32);
+/* 1CFB68 */ void fn_801CFB68(Item_GObj*, Ground*, HSD_GObj*);
 /* 1CFBD4 */ UNK_RET grCastle_801CFBD4(UNK_PARAMS);
 /* 1D0298 */ UNK_RET grCastle_801D0298(UNK_PARAMS);
 /* 1D02B8 */ UNK_RET grCastle_801D02B8(UNK_PARAMS);
@@ -91,9 +93,7 @@ struct unkCastle {
 /* 1D0B0C */ bool grCastle_801D0B0C(Vec3* v, int arg1, HSD_JObj* jobj);
 /* 1D0BBC */ UNK_RET grCastle_801D0BBC(UNK_PARAMS);
 /* 1D0D24 */ UNK_RET grCastle_801D0D24(UNK_PARAMS);
-/* 1D0D84 */ UNK_RET grCastle_801D0D84(UNK_PARAMS);
+/* 1D0D84 */ void grCastle_801D0D84(f32);
 /* 1D0FF0 */ float grCastle_801D0FF0(void);
-/* 3B7F28 */ extern unkCastleCallback grCs_803B7F28[];
-/* 3B7F3C */ extern unkCastleCallback2 grCs_803B7F3C[];
 
 #endif

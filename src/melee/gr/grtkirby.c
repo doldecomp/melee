@@ -51,7 +51,7 @@ static StageCallbacks grTKb_803E8BB0[4] = {
 };
 
 StageData grTKb_803E8C0C = {
-    48,
+    TKIRBY,
     grTKb_803E8BB0,
     "/GrTKb.dat",
     grTKirby_80221368,

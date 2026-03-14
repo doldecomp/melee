@@ -235,11 +235,14 @@ melee/mp/mpisland.c:
 	.sdata      start:0x804D3990 end:0x804D39A0
 	.sdata2     start:0x804D8158 end:0x804D8168
 
+melee/ef/eflib_alloc.c:
+	.bss        start:0x80458EB0 end:0x80458EDC
+
 melee/ef/eflib.c:
 	.text       start:0x8005B4B8 end:0x8005FDDC
-	.data       start:0x803BF7A0 end:0x803BF848
-	.bss        start:0x80458EB0 end:0x80458FA0
-	.sdata      start:0x804D39A0 end:0x804D39C8
+	.data       start:0x803BF7A0 end:0x803BF841
+	.bss        start:0x80458EE0 end:0x80458FA0
+	.sdata      start:0x804D39A0 end:0x804D39C2
 	.sbss       start:0x804D64E8 end:0x804D64F8
 	.sdata2     start:0x804D8168 end:0x804D81A0
 
@@ -251,14 +254,14 @@ melee/ef/efsync.c:
 
 melee/ef/ef_061D.c:
 	.text       start:0x80061D70 end:0x80063930
-	.data       start:0x803BF9D0 end:0x803BFB00
-	.sdata      start:0x804D39D8 end:0x804D39E8
-	.sdata2     start:0x804D81D0 end:0x804D81F8
+	.data       start:0x803BF9D0 end:0x803BFAFC
+	.sdata      start:0x804D39D8 end:0x804D39E5
+	.sdata2     start:0x804D81D0 end:0x804D81F4
 
 melee/ef/efasync.c:
 	.text       start:0x80063930 end:0x800679B0
 	.data       start:0x803BFB00 end:0x803C0530
-	.bss        start:0x80458FA0 end:0x80458FD0
+	.bss        start:0x80458FA0 end:0x80458FCC
 	.sdata      start:0x804D39E8 end:0x804D3A00
 	.sdata2     start:0x804D81F8 end:0x804D8250
 
@@ -2229,7 +2232,7 @@ melee/gr/grcastle.c:
 	.sbss       start:0x804D6970 end:0x804D6978
 	.sdata2     start:0x804DAE18 end:0x804DAEF8
 
-melee/gr/grstadium.c:
+melee/gr/grpstadium.c:
 	.text       start:0x801D1018 end:0x801D5238
 	.rodata     start:0x803B7F68 end:0x803B7FB0
 	.data       start:0x803E1248 end:0x803E16E0

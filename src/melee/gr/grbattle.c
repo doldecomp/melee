@@ -2,6 +2,7 @@
 
 #include <platform.h>
 
+#include "baselib/gobj.h"
 #include "gm/gm_unsplit.h"
 #include "gr/granime.h"
 #include "gr/grdisplay.h"
@@ -25,10 +26,10 @@
 #include <baselib/jobj.h>
 #include <baselib/random.h>
 
-static void grBattle_80219C98(bool);
-static void grBattle_80219CA4(void);
-static void grBattle_UnkStage0_OnLoad(void);
-static void grBattle_UnkStage0_OnStart(void);
+static void grBattle_OnDemoInit(bool);
+static void grBattle_OnInit(void);
+static void grBattle_OnLoad(void);
+static void grBattle_OnStart(void);
 static bool grBattle_80219D7C(void);
 static HSD_GObj* grBattle_80219D84(int gobj_id);
 static void grBattle_80219E6C(Ground_GObj*);
@@ -58,8 +59,8 @@ static void grBattle_8021A344(Ground_GObj*);
 static bool grBattle_8021A3B4(Ground_GObj*);
 static void grBattle_8021A3BC(Ground_GObj*);
 static void grBattle_8021A60C(Ground_GObj*);
-static DynamicsDesc* grBattle_8021A610(enum_t);
-static bool grBattle_8021A618(Vec3*, int, HSD_JObj*);
+static DynamicsDesc* grBattle_OnTouchLine(enum_t);
+static bool grBattle_OnCheckShadowRender(Vec3*, int, HSD_JObj*);
 
 extern StageInfo stage_info;
 
@@ -68,7 +69,7 @@ struct {
     int unk4;
 }* grNBa_804D6ACC;
 
-static u8 grNBa_804D6AC8;
+static u8 isDemoFight;
 
 static StageCallbacks grNBa_803E7DA0[7] = {
     {
@@ -122,30 +123,28 @@ static StageCallbacks grNBa_803E7DA0[7] = {
     },
 };
 
-/// @todo Not ideal @c clang-format behavior.
-/// Removing the trailing comma is arguably worse.
 StageData grNBa_803E7E38 = {
-    0x00000024,
+    BATTLE,
     grNBa_803E7DA0,
     "/GrNBa.dat",
-    grBattle_80219CA4,
-    grBattle_80219C98,
-    grBattle_UnkStage0_OnLoad,
-    grBattle_UnkStage0_OnStart,
+    grBattle_OnInit,
+    grBattle_OnDemoInit,
+    grBattle_OnLoad,
+    grBattle_OnStart,
     grBattle_80219D7C,
-    grBattle_8021A610,
-    grBattle_8021A618,
+    grBattle_OnTouchLine,
+    grBattle_OnCheckShadowRender,
     0x00000001,
     NULL,
     0,
 };
 
-static void grBattle_80219C98(bool arg0)
+static void grBattle_OnDemoInit(bool arg0)
 {
-    grNBa_804D6AC8 = 1;
+    isDemoFight = 1;
 }
 
-static void grBattle_80219CA4(void)
+static void grBattle_OnInit(void)
 {
     grNBa_804D6ACC = Ground_801C49F8();
     stage_info.unk8C.b4 = 1;
@@ -163,12 +162,12 @@ static void grBattle_80219CA4(void)
     Ground_801C39C0();
     Ground_801C3BB4();
     grLib_801C9A10();
-    grNBa_804D6AC8 = 0;
+    isDemoFight = 0;
 }
 
-static void grBattle_UnkStage0_OnLoad(void) {}
+static void grBattle_OnLoad(void) {}
 
-static void grBattle_UnkStage0_OnStart(void)
+static void grBattle_OnStart(void)
 {
     grZakoGenerator_801CAE04(false);
 }
@@ -186,7 +185,7 @@ static HSD_GObj* grBattle_80219D84(int gobj_id)
     gobj = Ground_801C14D0(gobj_id);
 
     if (gobj != NULL) {
-        Ground* gp = gobj->user_data;
+        Ground* gp = GET_GROUND(gobj);
         gp->x8_callback = NULL;
         gp->xC_callback = NULL;
         GObj_SetupGXLink(gobj, grDisplay_801C5DB0, 3, 0);
@@ -213,12 +212,11 @@ static HSD_GObj* grBattle_80219D84(int gobj_id)
 static void grBattle_80219E6C(Ground_GObj* gobj)
 {
     Vec3 v;
-    Ground* gp = gobj->user_data;
-    enum_t id = gp->map_id;
+    Ground* gp = GET_GROUND(gobj);
 
-    grAnime_801C8138(gobj, id, 0);
+    grAnime_801C8138(gobj, gp->map_id, 0);
 
-    if (grNBa_804D6AC8 == 0) {
+    if (isDemoFight == 0) {
         return;
     }
 
@@ -246,10 +244,10 @@ static void grBattle_8021A118(Ground_GObj* arg0) {}
 
 static void grBattle_8021A11C(Ground_GObj* gobj)
 {
-    u8 _[8];
+    Ground* gp = GET_GROUND(gobj);
+    HSD_JObj* jobj = GET_JOBJ(gobj);
 
-    Ground* gp = gobj->user_data;
-    Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
+    Ground_801C2ED0(jobj, gp->map_id);
     grAnime_801C8138(gobj, gp->map_id, 0);
 }
 
@@ -268,10 +266,10 @@ static void grBattle_8021A198(Ground_GObj* arg0) {}
 
 static void grBattle_8021A19C(Ground_GObj* gobj)
 {
-    u8 _[8];
+    Ground* gp = GET_GROUND(gobj);
+    HSD_JObj* jobj = GET_JOBJ(gobj);
 
-    Ground* gp = gobj->user_data;
-    Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
+    Ground_801C2ED0(jobj, gp->map_id);
     grAnime_801C8138(gobj, gp->map_id, 0);
     gp->x11_flags.b012 = 2;
 }
@@ -287,15 +285,11 @@ static void grBattle_8021A208(Ground_GObj* arg0) {}
 
 static void grBattle_8021A20C(Ground_GObj* gobj)
 {
-    u8 _[8];
-
-    Ground* gp = gobj->user_data;
-
-    /// @todo Missing cast
-    UNK_T hsd_obj = gobj->hsd_obj;
+    Ground* gp = GET_GROUND(gobj);
+    HSD_JObj* jobj = GET_JOBJ(gobj);
 
     grAnime_801C8138(gobj, gp->map_id, 0);
-    grMaterial_801C94D8(hsd_obj);
+    grMaterial_801C94D8(jobj);
     gp->x11_flags.b012 = 2;
 }
 
@@ -310,12 +304,10 @@ static void grBattle_8021A270(Ground_GObj* arg0) {}
 
 static void grBattle_8021A274(Ground_GObj* gobj)
 {
-    u8 _[8];
-
-    Ground* gp = gobj->user_data;
-    void* hsd_obj = gobj->hsd_obj;
+    Ground* gp = GET_GROUND(gobj);
+    HSD_JObj* jobj = GET_JOBJ(gobj);
     grAnime_801C8138(gobj, gp->map_id, 0);
-    grMaterial_801C94D8(hsd_obj);
+    grMaterial_801C94D8(jobj);
     gp->x11_flags.b012 = 2;
 }
 
@@ -330,13 +322,10 @@ static void grBattle_8021A2D8(Ground_GObj* arg0) {}
 
 static void grBattle_8021A2DC(Ground_GObj* gobj)
 {
-    u8 _[8];
-
-    Ground* gp = gobj->user_data;
-    void* hsd_obj = gobj->hsd_obj;
+    Ground* gp = GET_GROUND(gobj);
+    HSD_JObj* jobj = GET_JOBJ(gobj);
     grAnime_801C8138(gobj, gp->map_id, 0);
-    grMaterial_801C94D8(hsd_obj);
-    gobj;
+    grMaterial_801C94D8(jobj);
     gp->x11_flags.b012 = 2;
 }
 
@@ -447,12 +436,12 @@ static void grBattle_8021A3BC(Ground_GObj* gobj)
 
 static void grBattle_8021A60C(Ground_GObj* arg0) {}
 
-static DynamicsDesc* grBattle_8021A610(enum_t arg0)
+static DynamicsDesc* grBattle_OnTouchLine(enum_t arg0)
 {
     return NULL;
 }
 
-static bool grBattle_8021A618(Vec3* arg0, int arg1, HSD_JObj* arg2)
+static bool grBattle_OnCheckShadowRender(Vec3* arg0, int arg1, HSD_JObj* arg2)
 {
     return true;
 }

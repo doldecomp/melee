@@ -100,7 +100,18 @@ bool itTincle_UnkMotion3_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itTincle_UnkMotion3_Phys
+void itTincle_UnkMotion3_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->xDD4_itemVar.tincle.x20 == 0) {
+        ip->pos.y = ip->xDD4_itemVar.tincle.x4C;
+        ip->x40_vel.y = 0.0f;
+        it_802EBE5C(gobj);
+    } else {
+        ip->x40_vel.y += ip->xDD4_itemVar.tincle.x38;
+        ip->xDD4_itemVar.tincle.x20 -= 1;
+    }
+}
 
 bool itTincle_UnkMotion3_Coll(Item_GObj* gobj)
 {
@@ -209,7 +220,19 @@ bool itTincle_UnkMotion8_Coll(Item_GObj* gobj)
     return false;
 }
 
-/// #it_802EC3F4
+void it_802EC3F4(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    ip->x40_vel.z = 0.0f;
+    ip->x40_vel.y = 0.0f;
+    ip->x40_vel.x = 0.0f;
+    ip->xDC8_word.flags.x1A = 0;
+    ip->x70_nudge.z = 0.0f;
+    ip->x70_nudge.y = 0.0f;
+    ip->x70_nudge.x = 0.0f;
+    Item_80268E5C(gobj, 9, ITEM_ANIM_UPDATE);
+    it_802EC9E8(gobj);
+}
 
 bool itTincle_UnkMotion9_Anim(Item_GObj* gobj)
 {

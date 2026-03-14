@@ -35,6 +35,9 @@
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_JumpAerial.h"
 #include "ftCommon/types.h"
+
+#include "gr/forward.h"
+
 #include "gr/ground.h"
 
 #include "lb/forward.h"
@@ -99,8 +102,8 @@ void ftCo_800C09B4(Fighter_GObj* gobj)
     case KONGO:
         fp->bury_timer_2 = 0;
         return;
-    case STAGEKIND_UNK39:
-    case STAGEKIND_UNK32:
+    case SHRINEROUTE:
+    case PUSHON:
     case ZEBES:
         fp->bury_timer_2 = 0;
         return;
@@ -143,8 +146,8 @@ void ftCo_800C0A98(Fighter_GObj* gobj)
             return;
         }
         break;
-    case STAGEKIND_UNK39:
-    case STAGEKIND_UNK32:
+    case SHRINEROUTE:
+    case PUSHON:
     case ZEBES:
         if (fp->bury_timer_2 != 0) {
             --fp->bury_timer_2;

@@ -567,11 +567,6 @@ void HSD_JObjAnimAll(HSD_JObj* jobj)
     }
 }
 
-inline MtxPtr HSD_CObjGetViewMtx(HSD_CObj* cobj)
-{
-    return cobj->view_mtx;
-}
-
 void HSD_JObjDispAll(HSD_JObj* jobj, Mtx vmtx, u32 flags, u32 rendermode)
 {
     MtxPtr new_var = vmtx;
@@ -589,7 +584,7 @@ void HSD_JObjDispAll(HSD_JObj* jobj, Mtx vmtx, u32 flags, u32 rendermode)
                 PSMTXConcat(jobj->mtx, mtx, mtx);
                 cobj = HSD_CObjGetCurrent();
                 HSD_ASSERT(0x355, cobj);
-                PSMTXConcat(HSD_CObjGetViewMtx(cobj), mtx, mtx);
+                PSMTXConcat(HSD_CObjGetViewingMtxPtrDirect(cobj), mtx, mtx);
                 HSD_JObjDispAll(jobj->child, mtx, flags, rendermode);
             }
         } else {

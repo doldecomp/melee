@@ -90,7 +90,7 @@ static StageCallbacks grTMewtwo_803E8F70[4] = {
 };
 
 StageData grTMewtwo_803E8FCC = {
-    (1 << 0) | (1 << 2) | (1 << 4) | (1 << 5),
+    TMEWTWO,
     grTMewtwo_803E8F70,
     "/GrTMt.dat",
     grTMewtwo_802221DC,

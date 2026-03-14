@@ -56,7 +56,19 @@ void itNessYoyo_Logic59_PickedUp(Item_GObj* gobj)
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
 }
 
-/// #it_802BFE5C
+void it_802BFE5C(Item_GObj* gobj, Vec3* pos, float unused)
+{
+    Item* ip = GET_ITEM(gobj);
+    ItemLink* link = (ItemLink*) ip->xDD4_itemVar.samusgrapple.x8;
+    float vel_x;
+    link->vel = *pos;
+    vel_x = link->vel.x;
+    if (vel_x < 0.0f) {
+        vel_x = -vel_x;
+    }
+    link->vel.x = ip->facing_dir * vel_x;
+    Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
+}
 
 /// #it_802BFEC4
 

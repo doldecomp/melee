@@ -86,9 +86,41 @@ void ftYs_SpecialS_8012E270(Fighter_GObj* gobj)
     fp->death2_cb = NULL;
 }
 
-/// #ftYs_SpecialHi_Enter
+void ftYs_SpecialHi_Enter(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
 
-/// #ftYs_SpecialAirHi_Enter
+    u8 _[24];
+
+    fp->mv.ys.specialhi.x0 = 0;
+    fp->mv.ys.specialhi.x4 = 0;
+    fp->fv.ys.x2238 = NULL;
+    fp->throw_flags = 0;
+    fp->cmd_vars[0] = 0;
+    Fighter_ChangeMotionState(gobj, ftYs_MS_SpecialHi, 0, 0.0F, 1.0F, 0.0F,
+                              NULL);
+    fp = GET_FIGHTER(gobj);
+    fp->accessory4_cb = fn_8012E110;
+    ftAnim_8006EBA4(gobj);
+}
+
+void ftYs_SpecialAirHi_Enter(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+
+    u8 _[24];
+
+    fp->mv.ys.specialhi.x0 = 0;
+    fp->mv.ys.specialhi.x4 = 0;
+    fp->fv.ys.x2238 = NULL;
+    fp->throw_flags = 0;
+    fp->cmd_vars[0] = 0;
+    Fighter_ChangeMotionState(gobj, ftYs_MS_SpecialAirHi, 0, 0.0F, 1.0F,
+                              0.0F, NULL);
+    fp = GET_FIGHTER(gobj);
+    fp->accessory4_cb = fn_8012E110;
+    ftAnim_8006EBA4(gobj);
+}
 
 static void setAccessory4Callback(Fighter_GObj* gobj)
 {
