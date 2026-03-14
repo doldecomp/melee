@@ -102,13 +102,15 @@ StageData grCs_803E11A4 = {
 };
 
 typedef struct grCastleParams {
-    s16 x0;
-    s16 x2;
-    s16 x4;
-    s16 x6;
-    s16 x8;
-    s16 xA;
-    s32 xC;
+    /* 0x000 */ s16 x0;
+    /* 0x002 */ s16 x2;
+    /* 0x004 */ s16 x4;
+    /* 0x006 */ s16 x6;
+    /* 0x008 */ s16 x8;
+    /* 0x00A */ s16 xA;
+    /* 0x00C */ s32 xC;
+    /* 0x010 */ u8 x10[0x12C - 0x10];
+    /* 0x12C */ s16 x12C[]; // TODO: How big is this array?
 } grCastleParams;
 
 static u8 grCs_804D45E4 = 1;
@@ -382,10 +384,10 @@ void grCastle_801CE7E4(Ground_GObj* gobj) {}
 void grCastle_801CE7E8(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
+    PAD_STACK(8);
     Ground_801C2ED0(GET_JOBJ(gobj), gp->map_id);
     gp->gv.castle.xC4 = 0;
-    gp->gv.castle.xC8 =
-        *(s16*) ((u8*) grCs_804D6970 + gp->gv.castle.xC4 * 2 + 0x12C);
+    gp->gv.castle.xC8 = grCs_804D6970->x12C[gp->gv.castle.xC4];
     grAnime_801C8138(gobj, gp->map_id, gp->gv.castle.xC4);
 }
 
