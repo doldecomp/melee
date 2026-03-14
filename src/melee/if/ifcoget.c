@@ -259,6 +259,7 @@ void un_802FF620(void)
 {
     int i;
     struct un_804A1F58_t* base = un_804A1F58;
+    PAD_STACK(8);
     for (i = 0; i < 6; i++) {
         base[i + 1].x4 = 0;
         if (base[i].x8.x4) {
@@ -266,6 +267,7 @@ void un_802FF620(void)
             base[i].x8.x4->hidden = 0;
         }
     }
+    base[i].x8 = base[i].x8;
 }
 
 void un_802FF6A0(void)
