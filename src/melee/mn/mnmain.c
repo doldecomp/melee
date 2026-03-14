@@ -1543,12 +1543,14 @@ void mn_8022BA1C(HSD_GObj* gp)
     float var_f31;
     float var_f30;
     float y;
+    HSD_PadStatus *new_var; // Permuter slop
     int i;
 
     HSD_CObj* cobj = GET_COBJ(gp);
+    new_var = HSD_PadCopyStatus;
     for (i = 0; i < 4; i++) {
-        x = HSD_PadCopyStatus[(u8) i].nml_subStickX;
-        y = HSD_PadCopyStatus[(u8) i].nml_subStickY;
+        x = new_var[(u8) i].nml_subStickX;
+        y = new_var[(u8) i].nml_subStickY;
         if (!(-0.4F < x && x < 0.4f && -0.4F < y && y < 0.4f)) {
             break;
         }
