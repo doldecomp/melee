@@ -974,6 +974,7 @@ void ftKb_SpecialNSs_800FCD04(Fighter_GObj* gobj)
 
 void ftKb_SpecialNSs_800FCD60(Fighter_GObj* gobj)
 {
+    PAD_STACK(8);
     if (gobj != NULL) {
         Fighter* fp = GET_FIGHTER(gobj);
         /// FAKE MATCH: redundant NULL checks required for regalloc
@@ -983,7 +984,7 @@ void ftKb_SpecialNSs_800FCD60(Fighter_GObj* gobj)
                 fp->fv.kb.xA4 = 0;
             }
             if (gobj != NULL) {
-                Fighter* fp2 = GET_FIGHTER(gobj);
+                Fighter *fp2 = HSD_GObjGetUserData(gobj);
                 efLib_DestroyAll(gobj);
                 fp2->fv.kb.xAC = 0;
             }
