@@ -159,13 +159,15 @@ void un_802FF1B4(void)
 void fn_802FF218(HSD_GObj* arg0)
 {
     int x;
-    int y = -1;
+    int y;
     for (x = 0; x < 6; x++) {
         if (un_804A1F58[x].x8.x0 == arg0) {
             y = x;
-            break;
+            goto _done;
         }
     }
+    y = -1;
+    _done: 
     if (y >= 0) {
         if (un_804A1F58[y].x0 == 1) {
             HSD_SisLib_803A70A0(un_804A1F58[y].x8.x4,
