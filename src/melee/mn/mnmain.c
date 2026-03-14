@@ -936,7 +936,8 @@ void mn_80229F60(HSD_GObj* gp, HSD_JObj* root, MainMenuSelection selection)
     HSD_JObj* jobj;
 
     HSD_JObj* sp54[7];
-    u8 pad50[4];
+    float new_var; // Permuter slop
+    u8 pad_50[4];
     Vec3 sp44;
     Vec3 sp38;
     Vec3 sp2C;
@@ -946,6 +947,7 @@ void mn_80229F60(HSD_GObj* gp, HSD_JObj* root, MainMenuSelection selection)
     sp44 = mn_803B84E8;
     data = gp->user_data;
     lb_8001204C(root, sp54, mn_803EAE7C, 7);
+    mn_803EB360[0].start_frame = mn_803EB360[0].start_frame; // Permuter slop
     jobj = sp54[1];
     flow = &mn_804A04F0;
     HSD_JObjReqAnimAll(jobj, 1.0F);
@@ -961,13 +963,15 @@ void mn_80229F60(HSD_GObj* gp, HSD_JObj* root, MainMenuSelection selection)
     mn_8022F3D8(jobj, 0x12, TOBJ_MASK);
     mn_8022F3D8(jobj, 0x13, TOBJ_MASK);
     HSD_JObjAnim(jobj);
+    new_var = mn_8022F298(sp54[0]);
     HSD_JObjReqAnimAll(
         sp54[0], mn_803EB360[1].start_frame +
-                     (mn_8022F298(sp54[0]) - mn_803EB360[0].start_frame));
+                     (new_var - mn_803EB360[0].start_frame));
     HSD_JObjAnimAll(sp54[0]);
+    new_var = mn_8022F298(sp54[2]);
     HSD_JObjReqAnimAll(
         sp54[2], mn_803EB378[1].start_frame +
-                     (mn_8022F298(sp54[2]) - mn_803EB378[0].start_frame));
+                     (new_var - mn_803EB378[0].start_frame));
     HSD_JObjAnimAll(sp54[2]);
     HSD_JObjReqAnimAll(sp54[3], mn_803EB390.start_frame);
     HSD_JObjAnimAll(sp54[3]);
@@ -975,6 +979,7 @@ void mn_80229F60(HSD_GObj* gp, HSD_JObj* root, MainMenuSelection selection)
     HSD_JObjClearFlagsAll(sp54[4], JOBJ_HIDDEN);
 
     HSD_JObjSetScaleY(sp54[5], 2.0F);
+    mn_803EB6B0[flow->cur_menu].start_frame += 0; // Permuter slop
     HSD_JObjSetScaleY(sp54[6], 2.0F);
 
     HSD_JObjGetTranslation(sp54[5], &sp20);
