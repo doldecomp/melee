@@ -8,6 +8,9 @@
 #include "ft/chara/ftNess/ftNs_SpecialN.h"
 #include "ft/ftlib.h"
 
+#include "ft/chara/ftKirby/ftKb_Init.h"
+#include "ft/chara/ftNess/ftNs_SpecialN.h"
+
 #include "it/forward.h"
 
 #include "it/inlines.h"
@@ -81,11 +84,11 @@ HSD_GObj* it_802AA8C0(Item_GObj* gobj, Vec3* pos, ItemKind kind,
 
     spawn.kind = kind;
     spawn.prev_pos = *pos;
-    spawn.prev_pos.z = 0.0f;
+    spawn.prev_pos.z = 0.0F;
     it_8026BB68(gobj, &spawn.pos);
     spawn.facing_dir = facing_dir;
     spawn.x3C_damage = 0;
-    spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;
+    spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0F;
     spawn.x0_parent_gobj = gobj;
     spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
     spawn.x44_flag.b0 = true;
@@ -100,7 +103,7 @@ HSD_GObj* it_802AA8C0(Item_GObj* gobj, Vec3* pos, ItemKind kind,
         ip->xDB0_itcmd_var1 = 0;
         ip->xDAC_itcmd_var0 = 0;
         it_80275158(flash, attr->x0_FLASH_LIFETIMER);
-        ip->xDD4_itemVar.pkflush.xDD8_PKFlash = 0.0f;
+        ip->xDD4_itemVar.pkflush.xDD8_PKFlash = 0.0F;
         ip->xDD4_itemVar.pkflush.xDDC_PKFlash = 0;
         ip->xDD4_itemVar.pkflush.xDE0_PKFlash_Owner = gobj;
         ip->xDD4_itemVar.pkflush.xDE4_PKFlash = 0;

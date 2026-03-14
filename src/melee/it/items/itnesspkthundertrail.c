@@ -27,11 +27,11 @@ Item_GObj* it_802AC43C(Fighter_GObj* gobj, Item_GObj* ball, Vec3* pos,
 
     spawn.kind = it_803F6C18[trail_idx];
     spawn.prev_pos = *pos;
-    spawn.prev_pos.z = 0.0f;
+    spawn.prev_pos.z = 0.0F;
     spawn.pos = spawn.prev_pos;
     spawn.facing_dir = facing_dir;
     spawn.x3C_damage = 0;
-    spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;
+    spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0F;
     spawn.x0_parent_gobj = gobj;
     spawn.x4_parent_gobj2 = ball;
     spawn.x44_flag.b0 = true;
@@ -50,9 +50,9 @@ Item_GObj* it_802AC43C(Fighter_GObj* gobj, Item_GObj* ball, Vec3* pos,
         it_8026B3A8(trail);
         ip->xDC8_word.flags.x13 = 0;
         it_80272940(trail);
-        ip->x40_vel.z = 0.0f;
-        ip->x40_vel.x = 0.0f;
-        ip->x40_vel.y = 0.0f;
+        ip->x40_vel.z = 0.0F;
+        ip->x40_vel.x = 0.0F;
+        ip->x40_vel.y = 0.0F;
         ip->xDCC_flag.b3 = false;
         if (gobj != NULL) {
             db_80225DD8(trail, gobj);
@@ -122,12 +122,12 @@ void itNesspkthundertrail_UnkMotion0_Phys(Item_GObj* gobj)
                     ip->xDD4_itemVar.nesspkthundertrail.x4);
         it_802AB468(ip->xDD4_itemVar.nesspkthundertrail.x0, &radius,
                     ip->xDD4_itemVar.nesspkthundertrail.x4);
-        HSD_JObjSetScaleZ(jobj, 2.0f * radius / 4);
+        HSD_JObjSetScaleZ(jobj, 2.0F * radius / 4);
 
         it_802AB3F0(ip->xDD4_itemVar.nesspkthundertrail.x0, &next_pos,
                     ip->xDD4_itemVar.nesspkthundertrail.x4 + 1);
 
-        if (ip->facing_dir == 1.0f) {
+        if (ip->facing_dir == 1.0F) {
             angle = atan2f(ip->pos.y - next_pos.y, ip->pos.x - next_pos.x);
         } else {
             angle =

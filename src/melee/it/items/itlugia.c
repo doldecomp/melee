@@ -155,7 +155,18 @@ bool itLugia_UnkMotion4_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itLugia_UnkMotion4_Phys
+void itLugia_UnkMotion4_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itLugiaAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    it_8027A344(gobj);
+    ip->xDD4_itemVar.lugia.xE50.x += attrs->x18;
+    ip->x40_vel.y = ip->xDD4_itemVar.lugia.xE50.x;
+    if (ip->x40_vel.y > it_804DD450) {
+        ip->x40_vel.y = it_804DD450;
+        it_802D1A44(gobj);
+    }
+}
 
 bool itLugia_UnkMotion4_Coll(Item_GObj* gobj)
 {
