@@ -7319,8 +7319,7 @@ void hsd_8039CEAC(u32 mask)
 
     bins = hsd_804D0908;
     bits = mask;
-    i = 0;
-    do {
+    for (i = 0; i < 16; i++) {
         if (!(bits & 0x10000)) {
             cur = *bins;
             prev = NULL;
@@ -7338,10 +7337,9 @@ void hsd_8039CEAC(u32 mask)
                 cur = next;
             }
         }
-        i++;
         bits >>= 1;
         bins++;
-    } while (i < 16);
+    }
 }
 
 // @TODO: Currently 96.59% match - instruction scheduling in address

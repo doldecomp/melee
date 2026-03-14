@@ -131,15 +131,18 @@ void DevText_InitPool(void)
 void DevText_Remove(DevText** ptext)
 {
     DevText* text = *ptext;
-    if (text->next) {
-        text->next->prev = text->prev;
+    struct DevText *new_var; // Permuter slop
+    DevText *new_var3; // Permuter slop
+    new_var = text->next;
+    if (new_var) {
+        new_var->prev = text->prev;
     }
-    text = *ptext;
-    if (text->prev) {
-        text->prev->next = text->next;
+    new_var3 = *ptext;
+    if ((*ptext)->prev) {
+        (*ptext)->prev->next = (*ptext)->next;
     } else {
-        if (text->next) {
-            *ptext = text->next;
+        if (new_var3->next != 0) {
+            *ptext = (*ptext)->next;
         } else {
             *ptext = NULL;
         }

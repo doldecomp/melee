@@ -1278,16 +1278,20 @@ void fn_801D2FD0(Ground_GObj* gobj, int unused)
 
 void fn_801D3084(HSD_GObj* gobj, int unused)
 {
+    void* new_var2; // Permuter slop
     ImageDescWrapper* wrapper = GET_WRAPPER(gobj);
     HSD_GObj* vision_gobj;
     Ground* gp2;
+    ImageDescWrapper* new_var; // Permuter slop
 
-    if (!wrapper->flag) {
-        lb_800122C8(&wrapper->desc, wrapper->x1A, wrapper->x1C, 0);
-        wrapper->flag = true;
+    new_var = wrapper;
+    if (!new_var->flag) {
+        lb_800122C8(&new_var->desc, new_var->x1A, new_var->x1C, 0);
+        new_var->flag = true;
         vision_gobj = Ground_801C2BA4(PsType_Display);
         HSD_ASSERT(0x703, vision_gobj);
-        gp2 = GET_GROUND(vision_gobj);
+        new_var2 = HSD_GObjGetUserData(vision_gobj);
+        gp2 = (Ground*) new_var2;
         HSD_ASSERT(0x704, gp2);
         gp2->u.display.xF8_0 = true;
     }

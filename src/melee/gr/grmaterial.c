@@ -322,9 +322,15 @@ void grMaterial_801C95C4(HSD_GObj* gobj)
     gp->x10_flags.b4 = 1;
 }
 
+// TODO: is this GET_GROUND? calling it directly didn't work.
+inline Ground* grMaterial_801C9604_inline(HSD_GObj *arg0)
+{
+  return arg0->user_data;
+}
+
 void grMaterial_801C9604(HSD_GObj* gobj, int arg1, bool arg2)
 {
-    Ground* gp = gobj->user_data;
+    Ground* gp = grMaterial_801C9604_inline(gobj);
     ColorOverlay* co = grMaterial_GetOverlay(gp);
     co->x4_pri = arg2;
     co->x8_ptr1 = (union ColorOverlay_x8_t*) arg1;

@@ -128,7 +128,7 @@ void HSD_SisLib_803A75E0(HSD_Text*, s32);
 void HSD_SisLib_803A7548(HSD_Text*, int, float, float);
 void HSD_SisLib_803A74F0(HSD_Text*, s32 arg1, u8* arg2);
 void HSD_SisLib_803A746C(HSD_Text*, s32, f32, f32);
-s32 HSD_SisLib_803A70A0(HSD_Text*, ...);
+s32 HSD_SisLib_803A70A0(HSD_Text*, s32 entry_idx, char* fmt, ...);
 u32 lbl_803A6FEC(s32, s32, bool);
 int HSD_SisLib_803A6B98(HSD_Text* arg0, float, float, const char*, ...);
 s32 HSD_SisLib_803A67EC(u8*, u8*);

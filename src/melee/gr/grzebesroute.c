@@ -4,6 +4,7 @@
 
 #include "cm/camera.h"
 #include "ft/ftlib.h"
+#include "gr/grdisplay.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
@@ -11,7 +12,19 @@
 #include "mp/mplib.h"
 
 #include <baselib/gobj.h>
+#include <baselib/gobjgxlink.h>
+#include <baselib/gobjproc.h>
 #include <baselib/random.h>
+
+StageCallbacks grZe_Route_803E5DB0[] = {
+    { grZebesRoute_8020B348, grZebesRoute_8020B374, grZebesRoute_8020B37C,
+      grZebesRoute_8020B380, 0 },
+    { grZebesRoute_8020B3C0, grZebesRoute_8020B424, grZebesRoute_8020B42C,
+      grZebesRoute_8020B4D4, 0xC0000000 },
+    { grZebesRoute_8020B384, grZebesRoute_8020B3B0, grZebesRoute_8020B3B8,
+      grZebesRoute_8020B3BC, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
+};
 
 static struct {
     int x0;
@@ -40,7 +53,6 @@ void grZebesRoute_8020B1D4(void)
     grZebesRoute_8020B548();
 }
 
-/// #grZebesRoute_8020B1F4
 void grZebesRoute_8020B1F4(void)
 {
     int val;
@@ -61,7 +73,33 @@ bool grZebesRoute_8020B258(void)
     return false;
 }
 
-/// #grZebesRoute_8020B260
+HSD_GObj* grZebesRoute_8020B260(int gobj_id)
+{
+    HSD_GObj* gobj;
+    StageCallbacks* callbacks = &grZe_Route_803E5DB0[gobj_id];
+
+    gobj = Ground_801C14D0(gobj_id);
+
+    if (gobj != NULL) {
+        Ground* gp = gobj->user_data;
+        gp->x8_callback = NULL;
+        gp->xC_callback = NULL;
+        GObj_SetupGXLink(gobj, grDisplay_801C5DB0, 3, 0);
+        if (callbacks->callback3 != NULL) {
+            gp->x1C_callback = callbacks->callback3;
+        }
+        if (callbacks->callback0 != NULL) {
+            callbacks->callback0(gobj);
+        }
+        if (callbacks->callback2 != NULL) {
+            HSD_GObjProc_8038FD54(gobj, callbacks->callback2, 4);
+        }
+    } else {
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 197, gobj_id);
+    }
+
+    return gobj;
+}
 
 void grZebesRoute_8020B348(Ground_GObj* gobj)
 {

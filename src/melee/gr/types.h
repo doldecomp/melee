@@ -730,6 +730,17 @@ struct grZebes_GroundVars5 {
     /* +3C gp+100 */ u32 x100;
 };
 
+struct grRCruise_Entry {
+    /* 0x00 */ u8 x00;
+    /* 0x01 */ u8 pad_01;
+    /* 0x02 */ s16 x02;
+    /* 0x04 */ s32 x04;
+    /* 0x08 */ s32 x08;
+    /* 0x0C */ f32 x0C;
+    /* 0x10 */ u8 pad_10[4];
+    /* 0x14 */ HSD_JObj* x14;
+};
+
 struct grRCruise_GroundVars {
     /* +00 gp+C4 */ char pad_0[0x14];
     /* +14 gp+D8 */ f32 x14;
@@ -742,6 +753,8 @@ struct grRCruise_GroundVars {
     /* +30 gp+F4 */ s32 x30;
     /* +34 gp+F8 */ s32 x34;
     /* +38 gp+FC */ s32 x38;
+    /* +3C gp+100 */ char pad_3C[0x30];
+    /* +6C gp+130 */ struct grRCruise_Entry* entries;
 };
 
 struct grFigureGet_GroundVars {

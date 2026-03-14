@@ -145,7 +145,7 @@ struct FighterData {
         u16 b789 : 3;      ///< stocks
         u16 b10_to_12 : 3; ///< stocks
         u16 b13_to_15 : 3; ///< stocks
-        s16 x7E;
+        u16 x7E;
         u8 x80;
         u8 x81;
         u8 x82;
