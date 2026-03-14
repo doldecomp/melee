@@ -167,7 +167,7 @@ void fn_802FF218(HSD_GObj* arg0)
         }
     }
     y = -1;
-    _done: 
+    _done:
     if (y >= 0) {
         if (un_804A1F58[y].x0 == 1) {
             HSD_SisLib_803A70A0(un_804A1F58[y].x8.x4,
