@@ -1,0 +1,7880 @@
+Starting function grOnett_801E3734
+--------------------------------------------------------------------------------
+Removing unreachable code at: 1
+*****************
+Dumps for pass=0
+*****************
+*****************
+Dumps for pass=1
+*****************
+
+BEFORE GLOBAL OPTIMIZATION
+grOnett_801E3734
+:{0005}::::LOOPWEIGHT=-1939341117
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0006}::::LOOPWEIGHT=1724383492
+B1: Succ={} Pred={B0 } Labels={L3 L2 L1 }
+
+
+AFTER INSTRUCTION SCHEDULING
+grOnett_801E3734
+:{0005}::::LOOPWEIGHT=-1939341117
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0006}::::LOOPWEIGHT=1724383492
+B1: Succ={} Pred={B0 } Labels={L3 L2 L1 }
+
+
+AFTER PEEPHOLE FORWARD
+grOnett_801E3734
+:{0005}::::LOOPWEIGHT=-1939341117
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0006}::::LOOPWEIGHT=1724383492
+B1: Succ={} Pred={B0 } Labels={L3 L2 L1 }
+
+
+AFTER REGISTER COLORING
+grOnett_801E3734
+:{0005}::::LOOPWEIGHT=-1939341117
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0006}::::LOOPWEIGHT=1724383492
+B1: Succ={} Pred={B0 } Labels={L3 L2 L1 }
+
+
+AFTER GENERATING EPILOGUE, PROLOGUE
+grOnett_801E3734
+:{0005}::::LOOPWEIGHT=-1939341117
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0006}::::LOOPWEIGHT=1724383492
+B1: Succ={} Pred={B0 } Labels={L3 L2 L1 }
+
+    blr     ; fIsLive
+
+AFTER MERGING EPILOGUE, PROLOGUE
+grOnett_801E3734
+:{0005}::::LOOPWEIGHT=-1939341117
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0006}::::LOOPWEIGHT=1724383492
+B1: Succ={} Pred={B0 } Labels={L3 L2 L1 }
+
+    blr     ; fIsLive
+
+AFTER PEEPHOLE OPTIMIZATION
+grOnett_801E3734
+:{0005}::::LOOPWEIGHT=-1939341117
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0006}::::LOOPWEIGHT=1724383492
+B1: Succ={} Pred={B0 } Labels={L3 L2 L1 }
+
+    blr     ; fIsLive
+
+FINAL CODE AFTER INSTRUCTION SCHEDULING
+grOnett_801E3734
+:{0005}::::LOOPWEIGHT=-1939341117
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0006}::::LOOPWEIGHT=1724383492
+B1: Succ={} Pred={B0 } Labels={L3 L2 L1 }
+
+    blr     ; fIsLive
+Starting function grOnett_801E3738
+--------------------------------------------------------------------------------
+Removing unreachable code at: 1
+*****************
+Dumps for pass=0
+*****************
+Replacing common sub at 16 with 9
+*****************
+Dumps for pass=1
+*****************
+
+BEFORE GLOBAL OPTIMIZATION
+grOnett_801E3738
+:{0005}::::LOOPWEIGHT=0
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=0
+B1: Succ={B2 } Pred={B0 } Labels={L3 L2 L1 }
+
+    bl      Ground_801C49F8; fLink
+:{0004}::::LOOPWEIGHT=0
+B2: Succ={B3 } Pred={B1 } Labels={L4 }
+
+    mr      r33,r3
+    stw     r33,grOt_804D69C0(r0)
+    li      r34,0
+    lis     r35,HA(stage_info)
+    addi    r36,r35,LO(stage_info)
+    addi    r32,r36,140
+    lbz     r37,0(r32); fIsPtrOp
+    rlwimi  r37,r34,3,28,28
+    stb     r37,0(r32); fIsPtrOp
+    li      r38,1
+    lbz     r39,0(r32); fIsPtrOp
+    rlwimi  r39,r38,2,29,29
+    stb     r39,0(r32); fIsPtrOp
+    li      r3,0
+:{0004}::::LOOPWEIGHT=0
+B3: Succ={B4 } Pred={B2 } Labels={L5 }
+
+    bl      grOnett_801E37F4; fLink
+:{0004}::::LOOPWEIGHT=0
+B4: Succ={B5 } Pred={B3 } Labels={L6 }
+
+    mr      r40,r3
+    li      r3,2
+:{0004}::::LOOPWEIGHT=0
+B5: Succ={B6 } Pred={B4 } Labels={L7 }
+
+    bl      grOnett_801E37F4; fLink
+:{0004}::::LOOPWEIGHT=0
+B6: Succ={B7 } Pred={B5 } Labels={L8 }
+
+    mr      r41,r3
+    li      r3,5
+:{0004}::::LOOPWEIGHT=0
+B7: Succ={B8 } Pred={B6 } Labels={L9 }
+
+    bl      grOnett_801E37F4; fLink
+:{0004}::::LOOPWEIGHT=0
+B8: Succ={B9 } Pred={B7 } Labels={L10 }
+
+    mr      r42,r3
+    li      r3,4
+:{0004}::::LOOPWEIGHT=0
+B9: Succ={B10 } Pred={B8 } Labels={L11 }
+
+    bl      grOnett_801E37F4; fLink
+:{0004}::::LOOPWEIGHT=0
+B10: Succ={B11 } Pred={B9 } Labels={L12 }
+
+    mr      r43,r3
+    li      r3,3
+:{0004}::::LOOPWEIGHT=0
+B11: Succ={B12 } Pred={B10 } Labels={L13 }
+
+    bl      grOnett_801E37F4; fLink
+:{0004}::::LOOPWEIGHT=0
+B12: Succ={B13 } Pred={B11 } Labels={L14 }
+
+    mr      r44,r3
+:{0004}::::LOOPWEIGHT=0
+B13: Succ={B14 } Pred={B12 } Labels={L15 }
+
+    bl      grOnett_801E56FC; fLink
+:{0004}::::LOOPWEIGHT=0
+B14: Succ={B15 } Pred={B13 } Labels={L16 }
+
+    mr      r45,r3
+    mr      r3,r45
+:{0004}::::LOOPWEIGHT=0
+B15: Succ={B16 } Pred={B14 } Labels={L17 }
+
+    bl      un_802FD8A0; fLink
+:{0004}::::LOOPWEIGHT=0
+B16: Succ={B17 } Pred={B15 } Labels={L19 L18 }
+
+    bl      un_802FD65C; fLink
+:{0004}::::LOOPWEIGHT=0
+B17: Succ={B18 } Pred={B16 } Labels={L21 L20 }
+
+    bl      Ground_801C39C0; fLink
+:{0004}::::LOOPWEIGHT=0
+B18: Succ={B19 } Pred={B17 } Labels={L23 L22 }
+
+    bl      Ground_801C3BB4; fLink
+:{0006}::::LOOPWEIGHT=0
+B19: Succ={} Pred={B18 } Labels={L25 L24 }
+
+
+AFTER COPY PROPAGATION
+grOnett_801E3738
+:{0005}::::LOOPWEIGHT=0
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=0
+B1: Succ={B2 } Pred={B0 } Labels={L3 L2 L1 }
+
+    bl      Ground_801C49F8; fLink
+:{0004}::::LOOPWEIGHT=0
+B2: Succ={B3 } Pred={B1 } Labels={L4 }
+
+    stw     r3,grOt_804D69C0(r0)
+    li      r34,0
+    lis     r35,HA(stage_info)
+    addi    r36,r35,LO(stage_info)
+    addi    r32,r36,140
+    lbz     r37,0(r32); fIsPtrOp
+    rlwimi  r37,r34,3,28,28
+    stb     r37,0(r32); fIsPtrOp
+    li      r38,1
+    lbz     r39,0(r32); fIsPtrOp
+    rlwimi  r39,r38,2,29,29
+    stb     r39,0(r32); fIsPtrOp
+    li      r3,0
+:{0004}::::LOOPWEIGHT=0
+B3: Succ={B4 } Pred={B2 } Labels={L5 }
+
+    bl      grOnett_801E37F4; fLink
+:{0004}::::LOOPWEIGHT=0
+B4: Succ={B5 } Pred={B3 } Labels={L6 }
+
+    li      r3,2
+:{0004}::::LOOPWEIGHT=0
+B5: Succ={B6 } Pred={B4 } Labels={L7 }
+
+    bl      grOnett_801E37F4; fLink
+:{0004}::::LOOPWEIGHT=0
+B6: Succ={B7 } Pred={B5 } Labels={L8 }
+
+    li      r3,5
+:{0004}::::LOOPWEIGHT=0
+B7: Succ={B8 } Pred={B6 } Labels={L9 }
+
+    bl      grOnett_801E37F4; fLink
+:{0004}::::LOOPWEIGHT=0
+B8: Succ={B9 } Pred={B7 } Labels={L10 }
+
+    li      r3,4
+:{0004}::::LOOPWEIGHT=0
+B9: Succ={B10 } Pred={B8 } Labels={L11 }
+
+    bl      grOnett_801E37F4; fLink
+:{0004}::::LOOPWEIGHT=0
+B10: Succ={B11 } Pred={B9 } Labels={L12 }
+
+    li      r3,3
+:{0004}::::LOOPWEIGHT=0
+B11: Succ={B12 } Pred={B10 } Labels={L13 }
+
+    bl      grOnett_801E37F4; fLink
+:{0004}::::LOOPWEIGHT=0
+B12: Succ={B13 } Pred={B11 } Labels={L14 }
+
+:{0004}::::LOOPWEIGHT=0
+B13: Succ={B14 } Pred={B12 } Labels={L15 }
+
+    bl      grOnett_801E56FC; fLink
+:{0004}::::LOOPWEIGHT=0
+B14: Succ={B15 } Pred={B13 } Labels={L16 }
+
+    mr      r45,r3
+    mr      r3,r45
+:{0004}::::LOOPWEIGHT=0
+B15: Succ={B16 } Pred={B14 } Labels={L17 }
+
+    bl      un_802FD8A0; fLink
+:{0004}::::LOOPWEIGHT=0
+B16: Succ={B17 } Pred={B15 } Labels={L19 L18 }
+
+    bl      un_802FD65C; fLink
+:{0004}::::LOOPWEIGHT=0
+B17: Succ={B18 } Pred={B16 } Labels={L21 L20 }
+
+    bl      Ground_801C39C0; fLink
+:{0004}::::LOOPWEIGHT=0
+B18: Succ={B19 } Pred={B17 } Labels={L23 L22 }
+
+    bl      Ground_801C3BB4; fLink
+:{0006}::::LOOPWEIGHT=0
+B19: Succ={} Pred={B18 } Labels={L25 L24 }
+
+
+AFTER INSTRUCTION SCHEDULING
+grOnett_801E3738
+:{0005}::::LOOPWEIGHT=0
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=0
+B1: Succ={B2 } Pred={B0 } Labels={L3 L2 L1 }
+
+    bl      Ground_801C49F8; fLink
+:{000c}::::LOOPWEIGHT=0
+B2: Succ={B3 } Pred={B1 } Labels={L4 }
+
+    lis     r35,HA(stage_info)
+    stw     r3,grOt_804D69C0(r0)
+    addi    r36,r35,LO(stage_info)
+    addi    r32,r36,140
+    lbz     r37,0(r32); fIsPtrOp
+    li      r34,0
+    rlwimi  r37,r34,3,28,28
+    stb     r37,0(r32); fIsPtrOp
+    li      r38,1
+    li      r3,0
+    lbz     r39,0(r32); fIsPtrOp
+    rlwimi  r39,r38,2,29,29
+    stb     r39,0(r32); fIsPtrOp
+:{0004}::::LOOPWEIGHT=0
+B3: Succ={B4 } Pred={B2 } Labels={L5 }
+
+    bl      grOnett_801E37F4; fLink
+:{0004}::::LOOPWEIGHT=0
+B4: Succ={B5 } Pred={B3 } Labels={L6 }
+
+    li      r3,2
+:{0004}::::LOOPWEIGHT=0
+B5: Succ={B6 } Pred={B4 } Labels={L7 }
+
+    bl      grOnett_801E37F4; fLink
+:{0004}::::LOOPWEIGHT=0
+B6: Succ={B7 } Pred={B5 } Labels={L8 }
+
+    li      r3,5
+:{0004}::::LOOPWEIGHT=0
+B7: Succ={B8 } Pred={B6 } Labels={L9 }
+
+    bl      grOnett_801E37F4; fLink
+:{0004}::::LOOPWEIGHT=0
+B8: Succ={B9 } Pred={B7 } Labels={L10 }
+
+    li      r3,4
+:{0004}::::LOOPWEIGHT=0
+B9: Succ={B10 } Pred={B8 } Labels={L11 }
+
+    bl      grOnett_801E37F4; fLink
+:{0004}::::LOOPWEIGHT=0
+B10: Succ={B11 } Pred={B9 } Labels={L12 }
+
+    li      r3,3
+:{0004}::::LOOPWEIGHT=0
+B11: Succ={B12 } Pred={B10 } Labels={L13 }
+
+    bl      grOnett_801E37F4; fLink
+:{0004}::::LOOPWEIGHT=0
+B12: Succ={B13 } Pred={B11 } Labels={L14 }
+
+:{0004}::::LOOPWEIGHT=0
+B13: Succ={B14 } Pred={B12 } Labels={L15 }
+
+    bl      grOnett_801E56FC; fLink
+:{0004}::::LOOPWEIGHT=0
+B14: Succ={B15 } Pred={B13 } Labels={L16 }
+
+    mr      r45,r3
+    mr      r3,r45
+:{0004}::::LOOPWEIGHT=0
+B15: Succ={B16 } Pred={B14 } Labels={L17 }
+
+    bl      un_802FD8A0; fLink
+:{0004}::::LOOPWEIGHT=0
+B16: Succ={B17 } Pred={B15 } Labels={L19 L18 }
+
+    bl      un_802FD65C; fLink
+:{0004}::::LOOPWEIGHT=0
+B17: Succ={B18 } Pred={B16 } Labels={L21 L20 }
+
+    bl      Ground_801C39C0; fLink
+:{0004}::::LOOPWEIGHT=0
+B18: Succ={B19 } Pred={B17 } Labels={L23 L22 }
+
+    bl      Ground_801C3BB4; fLink
+:{0006}::::LOOPWEIGHT=0
+B19: Succ={} Pred={B18 } Labels={L25 L24 }
+
+
+AFTER PEEPHOLE FORWARD
+grOnett_801E3738
+:{0005}::::LOOPWEIGHT=0
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=0
+B1: Succ={B2 } Pred={B0 } Labels={L3 L2 L1 }
+
+    bl      Ground_801C49F8; fLink
+:{000c}::::LOOPWEIGHT=0
+B2: Succ={B3 } Pred={B1 } Labels={L4 }
+
+    lis     r35,HA(stage_info)
+    stw     r3,grOt_804D69C0(r0)
+    addi    r36,r35,LO(stage_info)
+    addi    r32,r36,140
+    lbz     r37,0(r32); fIsPtrOp
+    li      r34,0
+    rlwimi  r37,r34,3,28,28
+    stb     r37,0(r32); fIsPtrOp
+    li      r38,1
+    li      r3,0
+    lbz     r39,0(r32); fIsPtrOp
+    rlwimi  r39,r38,2,29,29
+    stb     r39,0(r32); fIsPtrOp
+:{0004}::::LOOPWEIGHT=0
+B3: Succ={B4 } Pred={B2 } Labels={L5 }
+
+    bl      grOnett_801E37F4; fLink
+:{0004}::::LOOPWEIGHT=0
+B4: Succ={B5 } Pred={B3 } Labels={L6 }
+
+    li      r3,2
+:{0004}::::LOOPWEIGHT=0
+B5: Succ={B6 } Pred={B4 } Labels={L7 }
+
+    bl      grOnett_801E37F4; fLink
+:{0004}::::LOOPWEIGHT=0
+B6: Succ={B7 } Pred={B5 } Labels={L8 }
+
+    li      r3,5
+:{0004}::::LOOPWEIGHT=0
+B7: Succ={B8 } Pred={B6 } Labels={L9 }
+
+    bl      grOnett_801E37F4; fLink
+:{0004}::::LOOPWEIGHT=0
+B8: Succ={B9 } Pred={B7 } Labels={L10 }
+
+    li      r3,4
+:{0004}::::LOOPWEIGHT=0
+B9: Succ={B10 } Pred={B8 } Labels={L11 }
+
+    bl      grOnett_801E37F4; fLink
+:{0004}::::LOOPWEIGHT=0
+B10: Succ={B11 } Pred={B9 } Labels={L12 }
+
+    li      r3,3
+:{0004}::::LOOPWEIGHT=0
+B11: Succ={B12 } Pred={B10 } Labels={L13 }
+
+    bl      grOnett_801E37F4; fLink
+:{0004}::::LOOPWEIGHT=0
+B12: Succ={B13 } Pred={B11 } Labels={L14 }
+
+:{0004}::::LOOPWEIGHT=0
+B13: Succ={B14 } Pred={B12 } Labels={L15 }
+
+    bl      grOnett_801E56FC; fLink
+:{0004}::::LOOPWEIGHT=0
+B14: Succ={B15 } Pred={B13 } Labels={L16 }
+
+    mr      r45,r3
+    mr      r3,r45
+:{0004}::::LOOPWEIGHT=0
+B15: Succ={B16 } Pred={B14 } Labels={L17 }
+
+    bl      un_802FD8A0; fLink
+:{0004}::::LOOPWEIGHT=0
+B16: Succ={B17 } Pred={B15 } Labels={L19 L18 }
+
+    bl      un_802FD65C; fLink
+:{0004}::::LOOPWEIGHT=0
+B17: Succ={B18 } Pred={B16 } Labels={L21 L20 }
+
+    bl      Ground_801C39C0; fLink
+:{0004}::::LOOPWEIGHT=0
+B18: Succ={B19 } Pred={B17 } Labels={L23 L22 }
+
+    bl      Ground_801C3BB4; fLink
+:{0006}::::LOOPWEIGHT=0
+B19: Succ={} Pred={B18 } Labels={L25 L24 }
+
+
+AFTER REGISTER COLORING
+grOnett_801E3738
+:{0005}::::LOOPWEIGHT=0
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=0
+B1: Succ={B2 } Pred={B0 } Labels={L3 L2 L1 }
+
+    bl      Ground_801C49F8; fLink
+:{000c}::::LOOPWEIGHT=0
+B2: Succ={B3 } Pred={B1 } Labels={L4 }
+
+    lis     r4,HA(stage_info)
+    stw     r3,grOt_804D69C0(r0)
+    addi    r3,r4,LO(stage_info)
+    addi    r5,r3,140
+    lbz     r0,0(r5); fIsPtrOp
+    li      r3,0
+    rlwimi  r0,r3,3,28,28
+    stb     r0,0(r5); fIsPtrOp
+    li      r4,1
+    li      r3,0
+    lbz     r0,0(r5); fIsPtrOp
+    rlwimi  r0,r4,2,29,29
+    stb     r0,0(r5); fIsPtrOp
+:{0004}::::LOOPWEIGHT=0
+B3: Succ={B4 } Pred={B2 } Labels={L5 }
+
+    bl      grOnett_801E37F4; fLink
+:{0004}::::LOOPWEIGHT=0
+B4: Succ={B5 } Pred={B3 } Labels={L6 }
+
+    li      r3,2
+:{0004}::::LOOPWEIGHT=0
+B5: Succ={B6 } Pred={B4 } Labels={L7 }
+
+    bl      grOnett_801E37F4; fLink
+:{0004}::::LOOPWEIGHT=0
+B6: Succ={B7 } Pred={B5 } Labels={L8 }
+
+    li      r3,5
+:{0004}::::LOOPWEIGHT=0
+B7: Succ={B8 } Pred={B6 } Labels={L9 }
+
+    bl      grOnett_801E37F4; fLink
+:{0004}::::LOOPWEIGHT=0
+B8: Succ={B9 } Pred={B7 } Labels={L10 }
+
+    li      r3,4
+:{0004}::::LOOPWEIGHT=0
+B9: Succ={B10 } Pred={B8 } Labels={L11 }
+
+    bl      grOnett_801E37F4; fLink
+:{0004}::::LOOPWEIGHT=0
+B10: Succ={B11 } Pred={B9 } Labels={L12 }
+
+    li      r3,3
+:{0004}::::LOOPWEIGHT=0
+B11: Succ={B12 } Pred={B10 } Labels={L13 }
+
+    bl      grOnett_801E37F4; fLink
+:{0004}::::LOOPWEIGHT=0
+B12: Succ={B13 } Pred={B11 } Labels={L14 }
+
+:{0004}::::LOOPWEIGHT=0
+B13: Succ={B14 } Pred={B12 } Labels={L15 }
+
+    bl      grOnett_801E56FC; fLink
+:{0004}::::LOOPWEIGHT=0
+B14: Succ={B15 } Pred={B13 } Labels={L16 }
+
+:{0004}::::LOOPWEIGHT=0
+B15: Succ={B16 } Pred={B14 } Labels={L17 }
+
+    bl      un_802FD8A0; fLink
+:{0004}::::LOOPWEIGHT=0
+B16: Succ={B17 } Pred={B15 } Labels={L19 L18 }
+
+    bl      un_802FD65C; fLink
+:{0004}::::LOOPWEIGHT=0
+B17: Succ={B18 } Pred={B16 } Labels={L21 L20 }
+
+    bl      Ground_801C39C0; fLink
+:{0004}::::LOOPWEIGHT=0
+B18: Succ={B19 } Pred={B17 } Labels={L23 L22 }
+
+    bl      Ground_801C3BB4; fLink
+:{0006}::::LOOPWEIGHT=0
+B19: Succ={} Pred={B18 } Labels={L25 L24 }
+
+
+AFTER GENERATING EPILOGUE, PROLOGUE
+grOnett_801E3738
+:{0005}::::LOOPWEIGHT=0
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+    mflr    r0
+    stw     r0,4(r1); fIsPtrOp
+    stwu    r1,-8(r1); fIsPtrOp
+:{0004}::::LOOPWEIGHT=0
+B1: Succ={B2 } Pred={B0 } Labels={L3 L2 L1 }
+
+    bl      Ground_801C49F8; fLink
+:{000c}::::LOOPWEIGHT=0
+B2: Succ={B3 } Pred={B1 } Labels={L4 }
+
+    lis     r4,HA(stage_info)
+    stw     r3,grOt_804D69C0(r0)
+    addi    r3,r4,LO(stage_info)
+    addi    r5,r3,140
+    lbz     r0,0(r5); fIsPtrOp
+    li      r3,0
+    rlwimi  r0,r3,3,28,28
+    stb     r0,0(r5); fIsPtrOp
+    li      r4,1
+    li      r3,0
+    lbz     r0,0(r5); fIsPtrOp
+    rlwimi  r0,r4,2,29,29
+    stb     r0,0(r5); fIsPtrOp
+:{0004}::::LOOPWEIGHT=0
+B3: Succ={B4 } Pred={B2 } Labels={L5 }
+
+    bl      grOnett_801E37F4; fLink
+:{0004}::::LOOPWEIGHT=0
+B4: Succ={B5 } Pred={B3 } Labels={L6 }
+
+    li      r3,2
+:{0004}::::LOOPWEIGHT=0
+B5: Succ={B6 } Pred={B4 } Labels={L7 }
+
+    bl      grOnett_801E37F4; fLink
+:{0004}::::LOOPWEIGHT=0
+B6: Succ={B7 } Pred={B5 } Labels={L8 }
+
+    li      r3,5
+:{0004}::::LOOPWEIGHT=0
+B7: Succ={B8 } Pred={B6 } Labels={L9 }
+
+    bl      grOnett_801E37F4; fLink
+:{0004}::::LOOPWEIGHT=0
+B8: Succ={B9 } Pred={B7 } Labels={L10 }
+
+    li      r3,4
+:{0004}::::LOOPWEIGHT=0
+B9: Succ={B10 } Pred={B8 } Labels={L11 }
+
+    bl      grOnett_801E37F4; fLink
+:{0004}::::LOOPWEIGHT=0
+B10: Succ={B11 } Pred={B9 } Labels={L12 }
+
+    li      r3,3
+:{0004}::::LOOPWEIGHT=0
+B11: Succ={B12 } Pred={B10 } Labels={L13 }
+
+    bl      grOnett_801E37F4; fLink
+:{0004}::::LOOPWEIGHT=0
+B12: Succ={B13 } Pred={B11 } Labels={L14 }
+
+:{0004}::::LOOPWEIGHT=0
+B13: Succ={B14 } Pred={B12 } Labels={L15 }
+
+    bl      grOnett_801E56FC; fLink
+:{0004}::::LOOPWEIGHT=0
+B14: Succ={B15 } Pred={B13 } Labels={L16 }
+
+:{0004}::::LOOPWEIGHT=0
+B15: Succ={B16 } Pred={B14 } Labels={L17 }
+
+    bl      un_802FD8A0; fLink
+:{0004}::::LOOPWEIGHT=0
+B16: Succ={B17 } Pred={B15 } Labels={L19 L18 }
+
+    bl      un_802FD65C; fLink
+:{0004}::::LOOPWEIGHT=0
+B17: Succ={B18 } Pred={B16 } Labels={L21 L20 }
+
+    bl      Ground_801C39C0; fLink
+:{0004}::::LOOPWEIGHT=0
+B18: Succ={B19 } Pred={B17 } Labels={L23 L22 }
+
+    bl      Ground_801C3BB4; fLink
+:{0006}::::LOOPWEIGHT=0
+B19: Succ={} Pred={B18 } Labels={L25 L24 }
+
+    lwz     r0,12(r1); fIsPtrOp
+    addi    r1,r1,8; fSideEffects
+    mtlr    r0
+    blr     ; fIsLive
+
+AFTER MERGING EPILOGUE, PROLOGUE
+grOnett_801E3738
+:{0005}::::LOOPWEIGHT=0
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+    mflr    r0
+    stw     r0,4(r1); fIsPtrOp
+    stwu    r1,-8(r1); fIsPtrOp
+:{0004}::::LOOPWEIGHT=0
+B1: Succ={B2 } Pred={B0 } Labels={L3 L2 L1 }
+
+    bl      Ground_801C49F8; fLink
+:{000c}::::LOOPWEIGHT=0
+B2: Succ={B3 } Pred={B1 } Labels={L4 }
+
+    lis     r4,HA(stage_info)
+    stw     r3,grOt_804D69C0(r0)
+    addi    r3,r4,LO(stage_info)
+    addi    r5,r3,140
+    lbz     r0,0(r5); fIsPtrOp
+    li      r3,0
+    rlwimi  r0,r3,3,28,28
+    stb     r0,0(r5); fIsPtrOp
+    li      r4,1
+    li      r3,0
+    lbz     r0,0(r5); fIsPtrOp
+    rlwimi  r0,r4,2,29,29
+    stb     r0,0(r5); fIsPtrOp
+:{0004}::::LOOPWEIGHT=0
+B3: Succ={B4 } Pred={B2 } Labels={L5 }
+
+    bl      grOnett_801E37F4; fLink
+:{0004}::::LOOPWEIGHT=0
+B4: Succ={B5 } Pred={B3 } Labels={L6 }
+
+    li      r3,2
+:{0004}::::LOOPWEIGHT=0
+B5: Succ={B6 } Pred={B4 } Labels={L7 }
+
+    bl      grOnett_801E37F4; fLink
+:{0004}::::LOOPWEIGHT=0
+B6: Succ={B7 } Pred={B5 } Labels={L8 }
+
+    li      r3,5
+:{0004}::::LOOPWEIGHT=0
+B7: Succ={B8 } Pred={B6 } Labels={L9 }
+
+    bl      grOnett_801E37F4; fLink
+:{0004}::::LOOPWEIGHT=0
+B8: Succ={B9 } Pred={B7 } Labels={L10 }
+
+    li      r3,4
+:{0004}::::LOOPWEIGHT=0
+B9: Succ={B10 } Pred={B8 } Labels={L11 }
+
+    bl      grOnett_801E37F4; fLink
+:{0004}::::LOOPWEIGHT=0
+B10: Succ={B11 } Pred={B9 } Labels={L12 }
+
+    li      r3,3
+:{0004}::::LOOPWEIGHT=0
+B11: Succ={B12 } Pred={B10 } Labels={L13 }
+
+    bl      grOnett_801E37F4; fLink
+:{0004}::::LOOPWEIGHT=0
+B12: Succ={B13 } Pred={B11 } Labels={L14 }
+
+:{0004}::::LOOPWEIGHT=0
+B13: Succ={B14 } Pred={B12 } Labels={L15 }
+
+    bl      grOnett_801E56FC; fLink
+:{0004}::::LOOPWEIGHT=0
+B14: Succ={B15 } Pred={B13 } Labels={L16 }
+
+:{0004}::::LOOPWEIGHT=0
+B15: Succ={B16 } Pred={B14 } Labels={L17 }
+
+    bl      un_802FD8A0; fLink
+:{0004}::::LOOPWEIGHT=0
+B16: Succ={B17 } Pred={B15 } Labels={L19 L18 }
+
+    bl      un_802FD65C; fLink
+:{0004}::::LOOPWEIGHT=0
+B17: Succ={B18 } Pred={B16 } Labels={L21 L20 }
+
+    bl      Ground_801C39C0; fLink
+:{0004}::::LOOPWEIGHT=0
+B18: Succ={B19 } Pred={B17 } Labels={L23 L22 }
+
+    bl      Ground_801C3BB4; fLink
+:{0006}::::LOOPWEIGHT=0
+B19: Succ={} Pred={B18 } Labels={L25 L24 }
+
+    lwz     r0,12(r1); fIsPtrOp
+    addi    r1,r1,8; fSideEffects
+    mtlr    r0
+    blr     ; fIsLive
+
+AFTER PEEPHOLE OPTIMIZATION
+grOnett_801E3738
+:{0005}::::LOOPWEIGHT=0
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+    mflr    r0
+    stw     r0,4(r1); fIsPtrOp
+    stwu    r1,-8(r1); fIsPtrOp
+:{0004}::::LOOPWEIGHT=0
+B1: Succ={B2 } Pred={B0 } Labels={L3 L2 L1 }
+
+    bl      Ground_801C49F8; fLink
+:{000c}::::LOOPWEIGHT=0
+B2: Succ={B3 } Pred={B1 } Labels={L4 }
+
+    lis     r4,HA(stage_info)
+    stw     r3,grOt_804D69C0(r0)
+    addi    r3,r4,LO(stage_info)
+    addi    r5,r3,140
+    lbz     r0,140(r3); fIsPtrOp
+    li      r3,0
+    rlwimi  r0,r3,3,28,28
+    stb     r0,0(r5); fIsPtrOp
+    li      r4,1
+    li      r3,0
+    lbz     r0,0(r5); fIsPtrOp
+    rlwimi  r0,r4,2,29,29
+    stb     r0,0(r5); fIsPtrOp
+:{0004}::::LOOPWEIGHT=0
+B3: Succ={B4 } Pred={B2 } Labels={L5 }
+
+    bl      grOnett_801E37F4; fLink
+:{0004}::::LOOPWEIGHT=0
+B4: Succ={B5 } Pred={B3 } Labels={L6 }
+
+    li      r3,2
+:{0004}::::LOOPWEIGHT=0
+B5: Succ={B6 } Pred={B4 } Labels={L7 }
+
+    bl      grOnett_801E37F4; fLink
+:{0004}::::LOOPWEIGHT=0
+B6: Succ={B7 } Pred={B5 } Labels={L8 }
+
+    li      r3,5
+:{0004}::::LOOPWEIGHT=0
+B7: Succ={B8 } Pred={B6 } Labels={L9 }
+
+    bl      grOnett_801E37F4; fLink
+:{0004}::::LOOPWEIGHT=0
+B8: Succ={B9 } Pred={B7 } Labels={L10 }
+
+    li      r3,4
+:{0004}::::LOOPWEIGHT=0
+B9: Succ={B10 } Pred={B8 } Labels={L11 }
+
+    bl      grOnett_801E37F4; fLink
+:{0004}::::LOOPWEIGHT=0
+B10: Succ={B11 } Pred={B9 } Labels={L12 }
+
+    li      r3,3
+:{0004}::::LOOPWEIGHT=0
+B11: Succ={B12 } Pred={B10 } Labels={L13 }
+
+    bl      grOnett_801E37F4; fLink
+:{0004}::::LOOPWEIGHT=0
+B12: Succ={B13 } Pred={B11 } Labels={L14 }
+
+:{0004}::::LOOPWEIGHT=0
+B13: Succ={B14 } Pred={B12 } Labels={L15 }
+
+    bl      grOnett_801E56FC; fLink
+:{0004}::::LOOPWEIGHT=0
+B14: Succ={B15 } Pred={B13 } Labels={L16 }
+
+:{0004}::::LOOPWEIGHT=0
+B15: Succ={B16 } Pred={B14 } Labels={L17 }
+
+    bl      un_802FD8A0; fLink
+:{0004}::::LOOPWEIGHT=0
+B16: Succ={B17 } Pred={B15 } Labels={L19 L18 }
+
+    bl      un_802FD65C; fLink
+:{0004}::::LOOPWEIGHT=0
+B17: Succ={B18 } Pred={B16 } Labels={L21 L20 }
+
+    bl      Ground_801C39C0; fLink
+:{0004}::::LOOPWEIGHT=0
+B18: Succ={B19 } Pred={B17 } Labels={L23 L22 }
+
+    bl      Ground_801C3BB4; fLink
+:{0006}::::LOOPWEIGHT=0
+B19: Succ={} Pred={B18 } Labels={L25 L24 }
+
+    lwz     r0,12(r1); fIsPtrOp
+    addi    r1,r1,8; fSideEffects
+    mtlr    r0
+    blr     ; fIsLive
+
+FINAL CODE AFTER INSTRUCTION SCHEDULING
+grOnett_801E3738
+:{000d}::::LOOPWEIGHT=0
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+    mflr    r0
+    stw     r0,4(r1); fIsPtrOp
+    stwu    r1,-8(r1); fIsPtrOp
+:{0004}::::LOOPWEIGHT=0
+B1: Succ={B2 } Pred={B0 } Labels={L3 L2 L1 }
+
+    bl      Ground_801C49F8; fLink
+:{000c}::::LOOPWEIGHT=0
+B2: Succ={B3 } Pred={B1 } Labels={L4 }
+
+    lis     r4,HA(stage_info)
+    stw     r3,grOt_804D69C0(r0)
+    addi    r3,r4,LO(stage_info)
+    addi    r5,r3,140
+    lbz     r0,140(r3); fIsPtrOp
+    li      r3,0
+    rlwimi  r0,r3,3,28,28
+    stb     r0,0(r5); fIsPtrOp
+    li      r4,1
+    li      r3,0
+    lbz     r0,0(r5); fIsPtrOp
+    rlwimi  r0,r4,2,29,29
+    stb     r0,0(r5); fIsPtrOp
+:{0004}::::LOOPWEIGHT=0
+B3: Succ={B4 } Pred={B2 } Labels={L5 }
+
+    bl      grOnett_801E37F4; fLink
+:{0004}::::LOOPWEIGHT=0
+B4: Succ={B5 } Pred={B3 } Labels={L6 }
+
+    li      r3,2
+:{0004}::::LOOPWEIGHT=0
+B5: Succ={B6 } Pred={B4 } Labels={L7 }
+
+    bl      grOnett_801E37F4; fLink
+:{0004}::::LOOPWEIGHT=0
+B6: Succ={B7 } Pred={B5 } Labels={L8 }
+
+    li      r3,5
+:{0004}::::LOOPWEIGHT=0
+B7: Succ={B8 } Pred={B6 } Labels={L9 }
+
+    bl      grOnett_801E37F4; fLink
+:{0004}::::LOOPWEIGHT=0
+B8: Succ={B9 } Pred={B7 } Labels={L10 }
+
+    li      r3,4
+:{0004}::::LOOPWEIGHT=0
+B9: Succ={B10 } Pred={B8 } Labels={L11 }
+
+    bl      grOnett_801E37F4; fLink
+:{0004}::::LOOPWEIGHT=0
+B10: Succ={B11 } Pred={B9 } Labels={L12 }
+
+    li      r3,3
+:{0004}::::LOOPWEIGHT=0
+B11: Succ={B12 } Pred={B10 } Labels={L13 }
+
+    bl      grOnett_801E37F4; fLink
+:{0004}::::LOOPWEIGHT=0
+B12: Succ={B13 } Pred={B11 } Labels={L14 }
+
+:{0004}::::LOOPWEIGHT=0
+B13: Succ={B14 } Pred={B12 } Labels={L15 }
+
+    bl      grOnett_801E56FC; fLink
+:{0004}::::LOOPWEIGHT=0
+B14: Succ={B15 } Pred={B13 } Labels={L16 }
+
+:{0004}::::LOOPWEIGHT=0
+B15: Succ={B16 } Pred={B14 } Labels={L17 }
+
+    bl      un_802FD8A0; fLink
+:{0004}::::LOOPWEIGHT=0
+B16: Succ={B17 } Pred={B15 } Labels={L19 L18 }
+
+    bl      un_802FD65C; fLink
+:{0004}::::LOOPWEIGHT=0
+B17: Succ={B18 } Pred={B16 } Labels={L21 L20 }
+
+    bl      Ground_801C39C0; fLink
+:{0004}::::LOOPWEIGHT=0
+B18: Succ={B19 } Pred={B17 } Labels={L23 L22 }
+
+    bl      Ground_801C3BB4; fLink
+:{000e}::::LOOPWEIGHT=0
+B19: Succ={} Pred={B18 } Labels={L25 L24 }
+
+    lwz     r0,12(r1); fIsPtrOp
+    addi    r1,r1,8; fSideEffects
+    mtlr    r0
+    blr     ; fIsLive
+Starting function grOnett_801E37C4
+--------------------------------------------------------------------------------
+Removing unreachable code at: 1
+*****************
+Dumps for pass=0
+*****************
+*****************
+Dumps for pass=1
+*****************
+
+BEFORE GLOBAL OPTIMIZATION
+grOnett_801E37C4
+:{0005}::::LOOPWEIGHT=214
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0006}::::LOOPWEIGHT=-168296448
+B1: Succ={} Pred={B0 } Labels={L3 L2 L1 }
+
+
+AFTER INSTRUCTION SCHEDULING
+grOnett_801E37C4
+:{0005}::::LOOPWEIGHT=214
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0006}::::LOOPWEIGHT=-168296448
+B1: Succ={} Pred={B0 } Labels={L3 L2 L1 }
+
+
+AFTER PEEPHOLE FORWARD
+grOnett_801E37C4
+:{0005}::::LOOPWEIGHT=214
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0006}::::LOOPWEIGHT=-168296448
+B1: Succ={} Pred={B0 } Labels={L3 L2 L1 }
+
+
+AFTER REGISTER COLORING
+grOnett_801E37C4
+:{0005}::::LOOPWEIGHT=214
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0006}::::LOOPWEIGHT=-168296448
+B1: Succ={} Pred={B0 } Labels={L3 L2 L1 }
+
+
+AFTER GENERATING EPILOGUE, PROLOGUE
+grOnett_801E37C4
+:{0005}::::LOOPWEIGHT=214
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0006}::::LOOPWEIGHT=-168296448
+B1: Succ={} Pred={B0 } Labels={L3 L2 L1 }
+
+    blr     ; fIsLive
+
+AFTER MERGING EPILOGUE, PROLOGUE
+grOnett_801E37C4
+:{0005}::::LOOPWEIGHT=214
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0006}::::LOOPWEIGHT=-168296448
+B1: Succ={} Pred={B0 } Labels={L3 L2 L1 }
+
+    blr     ; fIsLive
+
+AFTER PEEPHOLE OPTIMIZATION
+grOnett_801E37C4
+:{0005}::::LOOPWEIGHT=214
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0006}::::LOOPWEIGHT=-168296448
+B1: Succ={} Pred={B0 } Labels={L3 L2 L1 }
+
+    blr     ; fIsLive
+
+FINAL CODE AFTER INSTRUCTION SCHEDULING
+grOnett_801E37C4
+:{0005}::::LOOPWEIGHT=214
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0006}::::LOOPWEIGHT=-168296448
+B1: Succ={} Pred={B0 } Labels={L3 L2 L1 }
+
+    blr     ; fIsLive
+Starting function grOnett_801E37C8
+--------------------------------------------------------------------------------
+Removing unreachable code at: 1
+*****************
+Dumps for pass=0
+*****************
+*****************
+Dumps for pass=1
+*****************
+
+BEFORE GLOBAL OPTIMIZATION
+grOnett_801E37C8
+:{0005}::::LOOPWEIGHT=5028912
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=-168296448
+B1: Succ={B2 } Pred={B0 } Labels={L2 L1 }
+
+    li      r3,0
+:{0004}::::LOOPWEIGHT=5023280
+B2: Succ={B3 } Pred={B1 } Labels={L3 }
+
+    bl      grZakoGenerator_801CAE04; fLink
+:{0006}::::LOOPWEIGHT=-169869119
+B3: Succ={} Pred={B2 } Labels={L5 L4 }
+
+
+AFTER INSTRUCTION SCHEDULING
+grOnett_801E37C8
+:{0005}::::LOOPWEIGHT=5028912
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=-168296448
+B1: Succ={B2 } Pred={B0 } Labels={L2 L1 }
+
+    li      r3,0
+:{0004}::::LOOPWEIGHT=5023280
+B2: Succ={B3 } Pred={B1 } Labels={L3 }
+
+    bl      grZakoGenerator_801CAE04; fLink
+:{0006}::::LOOPWEIGHT=-169869119
+B3: Succ={} Pred={B2 } Labels={L5 L4 }
+
+
+AFTER PEEPHOLE FORWARD
+grOnett_801E37C8
+:{0005}::::LOOPWEIGHT=5028912
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=-168296448
+B1: Succ={B2 } Pred={B0 } Labels={L2 L1 }
+
+    li      r3,0
+:{0004}::::LOOPWEIGHT=5023280
+B2: Succ={B3 } Pred={B1 } Labels={L3 }
+
+    bl      grZakoGenerator_801CAE04; fLink
+:{0006}::::LOOPWEIGHT=-169869119
+B3: Succ={} Pred={B2 } Labels={L5 L4 }
+
+
+AFTER REGISTER COLORING
+grOnett_801E37C8
+:{0005}::::LOOPWEIGHT=5028912
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=-168296448
+B1: Succ={B2 } Pred={B0 } Labels={L2 L1 }
+
+    li      r3,0
+:{0004}::::LOOPWEIGHT=5023280
+B2: Succ={B3 } Pred={B1 } Labels={L3 }
+
+    bl      grZakoGenerator_801CAE04; fLink
+:{0006}::::LOOPWEIGHT=-169869119
+B3: Succ={} Pred={B2 } Labels={L5 L4 }
+
+
+AFTER GENERATING EPILOGUE, PROLOGUE
+grOnett_801E37C8
+:{0005}::::LOOPWEIGHT=5028912
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+    mflr    r0
+    stw     r0,4(r1); fIsPtrOp
+    stwu    r1,-8(r1); fIsPtrOp
+:{0004}::::LOOPWEIGHT=-168296448
+B1: Succ={B2 } Pred={B0 } Labels={L2 L1 }
+
+    li      r3,0
+:{0004}::::LOOPWEIGHT=5023280
+B2: Succ={B3 } Pred={B1 } Labels={L3 }
+
+    bl      grZakoGenerator_801CAE04; fLink
+:{0006}::::LOOPWEIGHT=-169869119
+B3: Succ={} Pred={B2 } Labels={L5 L4 }
+
+    lwz     r0,12(r1); fIsPtrOp
+    addi    r1,r1,8; fSideEffects
+    mtlr    r0
+    blr     ; fIsLive
+
+AFTER MERGING EPILOGUE, PROLOGUE
+grOnett_801E37C8
+:{0005}::::LOOPWEIGHT=5028912
+B0: Succ={B2 } Pred={} Labels={L0 }
+
+    mflr    r0
+    stw     r0,4(r1); fIsPtrOp
+    stwu    r1,-8(r1); fIsPtrOp
+    li      r3,0
+:{0004}::::LOOPWEIGHT=5023280
+B2: Succ={B3 } Pred={B0 } Labels={L3 }
+
+    bl      grZakoGenerator_801CAE04; fLink
+:{0006}::::LOOPWEIGHT=-169869119
+B3: Succ={} Pred={B2 } Labels={L5 L4 }
+
+    lwz     r0,12(r1); fIsPtrOp
+    addi    r1,r1,8; fSideEffects
+    mtlr    r0
+    blr     ; fIsLive
+
+AFTER PEEPHOLE OPTIMIZATION
+grOnett_801E37C8
+:{0005}::::LOOPWEIGHT=5028912
+B0: Succ={B2 } Pred={} Labels={L0 }
+
+    mflr    r0
+    stw     r0,4(r1); fIsPtrOp
+    stwu    r1,-8(r1); fIsPtrOp
+    li      r3,0
+:{0004}::::LOOPWEIGHT=5023280
+B2: Succ={B3 } Pred={B0 } Labels={L3 }
+
+    bl      grZakoGenerator_801CAE04; fLink
+:{0006}::::LOOPWEIGHT=-169869119
+B3: Succ={} Pred={B2 } Labels={L5 L4 }
+
+    lwz     r0,12(r1); fIsPtrOp
+    addi    r1,r1,8; fSideEffects
+    mtlr    r0
+    blr     ; fIsLive
+
+FINAL CODE AFTER INSTRUCTION SCHEDULING
+grOnett_801E37C8
+:{000d}::::LOOPWEIGHT=5028912
+B0: Succ={B2 } Pred={} Labels={L0 }
+
+    mflr    r0
+    li      r3,0
+    stw     r0,4(r1); fIsPtrOp
+    stwu    r1,-8(r1); fIsPtrOp
+:{0004}::::LOOPWEIGHT=5023280
+B2: Succ={B3 } Pred={B0 } Labels={L3 }
+
+    bl      grZakoGenerator_801CAE04; fLink
+:{000e}::::LOOPWEIGHT=-169869119
+B3: Succ={} Pred={B2 } Labels={L5 L4 }
+
+    lwz     r0,12(r1); fIsPtrOp
+    addi    r1,r1,8; fSideEffects
+    mtlr    r0
+    blr     ; fIsLive
+Starting function grOnett_801E37EC
+--------------------------------------------------------------------------------
+Removing unreachable code at: 1
+*****************
+Dumps for pass=0
+*****************
+*****************
+Dumps for pass=1
+*****************
+
+BEFORE GLOBAL OPTIMIZATION
+grOnett_801E37EC
+:{0005}::::LOOPWEIGHT=1
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=0
+B1: Succ={B2 } Pred={B0 } Labels={L2 L1 }
+
+    li      r3,0
+:{0006}::::LOOPWEIGHT=-2114417344
+B2: Succ={} Pred={B1 } Labels={L3 }
+
+
+AFTER INSTRUCTION SCHEDULING
+grOnett_801E37EC
+:{0005}::::LOOPWEIGHT=1
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=0
+B1: Succ={B2 } Pred={B0 } Labels={L2 L1 }
+
+    li      r3,0
+:{0006}::::LOOPWEIGHT=-2114417344
+B2: Succ={} Pred={B1 } Labels={L3 }
+
+
+AFTER PEEPHOLE FORWARD
+grOnett_801E37EC
+:{0005}::::LOOPWEIGHT=1
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=0
+B1: Succ={B2 } Pred={B0 } Labels={L2 L1 }
+
+    li      r3,0
+:{0006}::::LOOPWEIGHT=-2114417344
+B2: Succ={} Pred={B1 } Labels={L3 }
+
+
+AFTER REGISTER COLORING
+grOnett_801E37EC
+:{0005}::::LOOPWEIGHT=1
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=0
+B1: Succ={B2 } Pred={B0 } Labels={L2 L1 }
+
+    li      r3,0
+:{0006}::::LOOPWEIGHT=-2114417344
+B2: Succ={} Pred={B1 } Labels={L3 }
+
+
+AFTER GENERATING EPILOGUE, PROLOGUE
+grOnett_801E37EC
+:{0005}::::LOOPWEIGHT=1
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=0
+B1: Succ={B2 } Pred={B0 } Labels={L2 L1 }
+
+    li      r3,0
+:{0006}::::LOOPWEIGHT=-2114417344
+B2: Succ={} Pred={B1 } Labels={L3 }
+
+    blr     ; fIsLive
+
+AFTER MERGING EPILOGUE, PROLOGUE
+grOnett_801E37EC
+:{0005}::::LOOPWEIGHT=1
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=0
+B1: Succ={B2 } Pred={B0 } Labels={L2 L1 }
+
+    li      r3,0
+:{0006}::::LOOPWEIGHT=-2114417344
+B2: Succ={} Pred={B1 } Labels={L3 }
+
+    blr     ; fIsLive
+
+AFTER PEEPHOLE OPTIMIZATION
+grOnett_801E37EC
+:{0005}::::LOOPWEIGHT=1
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=0
+B1: Succ={B2 } Pred={B0 } Labels={L2 L1 }
+
+    li      r3,0
+:{0006}::::LOOPWEIGHT=-2114417344
+B2: Succ={} Pred={B1 } Labels={L3 }
+
+    blr     ; fIsLive
+
+FINAL CODE AFTER INSTRUCTION SCHEDULING
+grOnett_801E37EC
+:{0005}::::LOOPWEIGHT=1
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=0
+B1: Succ={B2 } Pred={B0 } Labels={L2 L1 }
+
+    li      r3,0
+:{0006}::::LOOPWEIGHT=-2114417344
+B2: Succ={} Pred={B1 } Labels={L3 }
+
+    blr     ; fIsLive
+Starting function grOnett_801E37F4
+--------------------------------------------------------------------------------
+Removing unreachable code at: 10
+*****************
+Dumps for pass=0
+*****************
+Found propagatable expression assignment at: 9
+Found propagatable expression assignment at: 30
+Found expression propagation at 33 from 30
+Replacing common sub at 65 with 56
+Replacing common sub at 84 with 75
+Replacing common sub at 101 with 91
+Chaining goto at 107
+*****************
+Dumps for pass=1
+*****************
+Found propagatable expression assignment at: 9
+Found propagatable expression assignment at: 30
+Found expression propagation at 33 from 30
+
+BEFORE GLOBAL OPTIMIZATION
+grOnett_801E37F4
+:{0005}::::LOOPWEIGHT=197120
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=1029
+B1: Succ={B2 } Pred={B0 } Labels={L1 }
+
+    mr      r32,r3
+:{0004}::::LOOPWEIGHT=0
+B2: Succ={B3 } Pred={B1 } Labels={L2 }
+
+    lis     r40,HA(grOt_803E27E0)
+    addi    r41,r40,LO(grOt_803E27E0)
+    mr      r39,r41
+    mulli   r42,r32,20
+    add     r34,r39,r42
+    mr      r3,r32
+:{0004}::::LOOPWEIGHT=12828240
+B3: Succ={B4 } Pred={B2 } Labels={L7 }
+
+    bl      Ground_801C14D0; fLink
+:{0004}::::LOOPWEIGHT=12828328
+B4: Succ={B5 B16 } Pred={B3 } Labels={L8 }
+
+    mr      r43,r3
+    mr      r35,r43
+    cmpli   cr0,r35,0
+    bt      cr0,eq,B16
+:{0004}::::LOOPWEIGHT=0
+B5: Succ={B6 } Pred={B4 } Labels={L9 }
+
+    lwz     r33,44(r35); fIsPtrOp
+    li      r44,0
+    stw     r44,8(r33); fIsPtrOp
+    li      r45,0
+    stw     r45,12(r33); fIsPtrOp
+    mr      r3,r35
+    lis     r46,HA(grDisplay_801C5DB0)
+    addi    r47,r46,LO(grDisplay_801C5DB0)
+    mr      r4,r47
+    li      r5,3
+    li      r6,0
+:{0004}::::LOOPWEIGHT=0
+B6: Succ={B7 } Pred={B5 } Labels={L10 }
+
+    bl      GObj_SetupGXLink; fLink
+:{0004}::::LOOPWEIGHT=0
+B7: Succ={B8 B9 } Pred={B6 } Labels={L11 }
+
+    lwz     r38,12(r34); fIsPtrOp
+    cmpli   cr0,r38,0
+    bt      cr0,eq,B9
+:{0004}::::LOOPWEIGHT=0
+B8: Succ={B9 } Pred={B7 } Labels={L12 }
+
+    stw     r38,28(r33); fIsPtrOp
+:{0004}::::LOOPWEIGHT=0
+B9: Succ={B10 B12 } Pred={B8 B7 } Labels={L3 }
+
+    lwz     r37,0(r34); fIsPtrOp
+    cmpli   cr0,r37,0
+    bt      cr0,eq,B12
+:{0004}::::LOOPWEIGHT=393731
+B10: Succ={B11 } Pred={B9 } Labels={L13 }
+
+    mr      r3,r35
+    mr      r12,r37
+:{0004}::::LOOPWEIGHT=12828240
+B11: Succ={B12 } Pred={B10 } Labels={L14 }
+
+    mtlr    r12
+    blrl    ; fLink
+:{0004}::::LOOPWEIGHT=12826232
+B12: Succ={B13 B18 } Pred={B11 B9 } Labels={L4 L15 }
+
+    lwz     r36,8(r34); fIsPtrOp
+    cmpli   cr0,r36,0
+    bt      cr0,eq,B18
+:{0004}::::LOOPWEIGHT=512
+B13: Succ={B14 } Pred={B12 } Labels={L16 }
+
+    mr      r3,r35
+    mr      r4,r36
+    li      r5,4
+:{0004}::::LOOPWEIGHT=0
+B14: Succ={B15 } Pred={B13 } Labels={L17 }
+
+    bl      HSD_GObjProc_8038FD54; fLink
+:{0004}::::LOOPWEIGHT=5023936
+B15: Succ={B18 } Pred={B14 } Labels={L18 }
+
+    mr      r48,r3
+    b       B18
+:{0004}::::LOOPWEIGHT=5023280
+B16: Succ={B17 } Pred={B4 } Labels={L5 }
+
+    addi    r3,r39,40
+    addi    r4,r39,76
+    li      r5,235
+    mr      r6,r32
+    crxor   cr1[eq],cr1[eq],cr1[eq]
+:{0004}::::LOOPWEIGHT=193
+B17: Succ={B18 } Pred={B16 } Labels={L19 }
+
+    bl      OSReport; fLink
+:{0004}::::LOOPWEIGHT=0
+B18: Succ={B19 } Pred={B17 B15 B12 } Labels={L6 L20 }
+
+    mr      r3,r35
+:{0006}::::LOOPWEIGHT=0
+B19: Succ={} Pred={B18 } Labels={L21 }
+
+
+AFTER COPY PROPAGATION
+grOnett_801E37F4
+:{0005}::::LOOPWEIGHT=197120
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=1029
+B1: Succ={B2 } Pred={B0 } Labels={L1 }
+
+    mr      r32,r3
+:{0004}::::LOOPWEIGHT=0
+B2: Succ={B3 } Pred={B1 } Labels={L2 }
+
+    lis     r40,HA(grOt_803E27E0)
+    addi    r41,r40,LO(grOt_803E27E0)
+    mulli   r42,r32,20
+    add     r34,r41,r42
+    mr      r3,r32
+:{0004}::::LOOPWEIGHT=12828240
+B3: Succ={B4 } Pred={B2 } Labels={L7 }
+
+    bl      Ground_801C14D0; fLink
+:{0004}::::LOOPWEIGHT=12828328
+B4: Succ={B5 B16 } Pred={B3 } Labels={L8 }
+
+    mr      r43,r3
+    mr      r35,r43
+    cmpli   cr0,r35,0
+    bt      cr0,eq,B16
+:{0004}::::LOOPWEIGHT=0
+B5: Succ={B6 } Pred={B4 } Labels={L9 }
+
+    lwz     r33,44(r35); fIsPtrOp
+    li      r44,0
+    stw     r44,8(r33); fIsPtrOp
+    li      r45,0
+    stw     r45,12(r33); fIsPtrOp
+    mr      r3,r35
+    lis     r46,HA(grDisplay_801C5DB0)
+    addi    r47,r46,LO(grDisplay_801C5DB0)
+    mr      r4,r47
+    li      r5,3
+    li      r6,0
+:{0004}::::LOOPWEIGHT=0
+B6: Succ={B7 } Pred={B5 } Labels={L10 }
+
+    bl      GObj_SetupGXLink; fLink
+:{0004}::::LOOPWEIGHT=0
+B7: Succ={B8 B9 } Pred={B6 } Labels={L11 }
+
+    lwz     r38,12(r34); fIsPtrOp
+    cmpli   cr0,r38,0
+    bt      cr0,eq,B9
+:{0004}::::LOOPWEIGHT=0
+B8: Succ={B9 } Pred={B7 } Labels={L12 }
+
+    stw     r38,28(r33); fIsPtrOp
+:{0004}::::LOOPWEIGHT=0
+B9: Succ={B10 B12 } Pred={B8 B7 } Labels={L3 }
+
+    lwz     r37,0(r34); fIsPtrOp
+    cmpli   cr0,r37,0
+    bt      cr0,eq,B12
+:{0004}::::LOOPWEIGHT=393731
+B10: Succ={B11 } Pred={B9 } Labels={L13 }
+
+    mr      r3,r35
+    mr      r12,r37
+:{0004}::::LOOPWEIGHT=12828240
+B11: Succ={B12 } Pred={B10 } Labels={L14 }
+
+    mtlr    r12
+    blrl    ; fLink
+:{0004}::::LOOPWEIGHT=12826232
+B12: Succ={B13 B18 } Pred={B11 B9 } Labels={L4 L15 }
+
+    lwz     r36,8(r34); fIsPtrOp
+    cmpli   cr0,r36,0
+    bt      cr0,eq,B18
+:{0004}::::LOOPWEIGHT=512
+B13: Succ={B14 } Pred={B12 } Labels={L16 }
+
+    mr      r3,r35
+    mr      r4,r36
+    li      r5,4
+:{0004}::::LOOPWEIGHT=0
+B14: Succ={B15 } Pred={B13 } Labels={L17 }
+
+    bl      HSD_GObjProc_8038FD54; fLink
+:{0004}::::LOOPWEIGHT=5023936
+B15: Succ={B18 } Pred={B14 } Labels={L18 }
+
+    mr      r48,r3
+    b       B18
+:{0004}::::LOOPWEIGHT=5023280
+B16: Succ={B17 } Pred={B4 } Labels={L5 }
+
+    addi    r3,r41,40
+    addi    r4,r41,76
+    li      r5,235
+    mr      r6,r32
+    crxor   cr1[eq],cr1[eq],cr1[eq]
+:{0004}::::LOOPWEIGHT=193
+B17: Succ={B18 } Pred={B16 } Labels={L19 }
+
+    bl      OSReport; fLink
+:{0004}::::LOOPWEIGHT=0
+B18: Succ={B19 } Pred={B17 B15 B12 } Labels={L6 L20 }
+
+    mr      r3,r35
+:{0006}::::LOOPWEIGHT=0
+B19: Succ={} Pred={B18 } Labels={L21 }
+
+
+AFTER COPY PROPAGATION
+grOnett_801E37F4
+:{0005}::::LOOPWEIGHT=197120
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=1029
+B1: Succ={B2 } Pred={B0 } Labels={L1 }
+
+    mr      r32,r3
+:{0004}::::LOOPWEIGHT=0
+B2: Succ={B3 } Pred={B1 } Labels={L2 }
+
+    lis     r40,HA(grOt_803E27E0)
+    addi    r41,r40,LO(grOt_803E27E0)
+    mulli   r42,r32,20
+    add     r34,r41,r42
+    mr      r3,r32
+:{0004}::::LOOPWEIGHT=12828240
+B3: Succ={B4 } Pred={B2 } Labels={L7 }
+
+    bl      Ground_801C14D0; fLink
+:{0004}::::LOOPWEIGHT=12828328
+B4: Succ={B5 B16 } Pred={B3 } Labels={L8 }
+
+    mr      r43,r3
+    mr      r35,r43
+    cmpli   cr0,r35,0
+    bt      cr0,eq,B16
+:{0004}::::LOOPWEIGHT=0
+B5: Succ={B6 } Pred={B4 } Labels={L9 }
+
+    lwz     r33,44(r35); fIsPtrOp
+    li      r44,0
+    stw     r44,8(r33); fIsPtrOp
+    li      r45,0
+    stw     r45,12(r33); fIsPtrOp
+    mr      r3,r35
+    lis     r46,HA(grDisplay_801C5DB0)
+    addi    r47,r46,LO(grDisplay_801C5DB0)
+    mr      r4,r47
+    li      r5,3
+    li      r6,0
+:{0004}::::LOOPWEIGHT=0
+B6: Succ={B7 } Pred={B5 } Labels={L10 }
+
+    bl      GObj_SetupGXLink; fLink
+:{0004}::::LOOPWEIGHT=0
+B7: Succ={B8 B9 } Pred={B6 } Labels={L11 }
+
+    lwz     r38,12(r34); fIsPtrOp
+    cmpli   cr0,r38,0
+    bt      cr0,eq,B9
+:{0004}::::LOOPWEIGHT=0
+B8: Succ={B9 } Pred={B7 } Labels={L12 }
+
+    stw     r38,28(r33); fIsPtrOp
+:{0004}::::LOOPWEIGHT=0
+B9: Succ={B10 B12 } Pred={B8 B7 } Labels={L3 }
+
+    lwz     r37,0(r34); fIsPtrOp
+    cmpli   cr0,r37,0
+    bt      cr0,eq,B12
+:{0004}::::LOOPWEIGHT=393731
+B10: Succ={B11 } Pred={B9 } Labels={L13 }
+
+    mr      r3,r35
+    mr      r12,r37
+:{0004}::::LOOPWEIGHT=12828240
+B11: Succ={B12 } Pred={B10 } Labels={L14 }
+
+    mtlr    r12
+    blrl    ; fLink
+:{0004}::::LOOPWEIGHT=12826232
+B12: Succ={B13 B18 } Pred={B11 B9 } Labels={L4 L15 }
+
+    lwz     r36,8(r34); fIsPtrOp
+    cmpli   cr0,r36,0
+    bt      cr0,eq,B18
+:{0004}::::LOOPWEIGHT=512
+B13: Succ={B14 } Pred={B12 } Labels={L16 }
+
+    mr      r3,r35
+    mr      r4,r36
+    li      r5,4
+:{0004}::::LOOPWEIGHT=0
+B14: Succ={B15 } Pred={B13 } Labels={L17 }
+
+    bl      HSD_GObjProc_8038FD54; fLink
+:{0004}::::LOOPWEIGHT=5023936
+B15: Succ={B18 } Pred={B14 } Labels={L18 }
+
+    b       B18
+:{0004}::::LOOPWEIGHT=5023280
+B16: Succ={B17 } Pred={B4 } Labels={L5 }
+
+    addi    r3,r41,40
+    addi    r4,r41,76
+    li      r5,235
+    mr      r6,r32
+    crxor   cr1[eq],cr1[eq],cr1[eq]
+:{0004}::::LOOPWEIGHT=193
+B17: Succ={B18 } Pred={B16 } Labels={L19 }
+
+    bl      OSReport; fLink
+:{0004}::::LOOPWEIGHT=0
+B18: Succ={B19 } Pred={B17 B15 B12 } Labels={L6 L20 }
+
+    mr      r3,r35
+:{0006}::::LOOPWEIGHT=0
+B19: Succ={} Pred={B18 } Labels={L21 }
+
+
+AFTER VALUE NUMBERING 2
+grOnett_801E37F4
+:{0005}::::LOOPWEIGHT=197120
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=1029
+B1: Succ={B2 } Pred={B0 } Labels={L1 }
+
+    mr      r32,r3
+:{0004}::::LOOPWEIGHT=0
+B2: Succ={B3 } Pred={B1 } Labels={L2 }
+
+    lis     r40,HA(grOt_803E27E0)
+    addi    r41,r40,LO(grOt_803E27E0)
+    mulli   r42,r32,20
+    add     r34,r41,r42
+    mr      r3,r32
+:{0004}::::LOOPWEIGHT=12828240
+B3: Succ={B4 } Pred={B2 } Labels={L7 }
+
+    bl      Ground_801C14D0; fLink
+:{0004}::::LOOPWEIGHT=12828328
+B4: Succ={B5 B16 } Pred={B3 } Labels={L8 }
+
+    mr      r43,r3
+    mr      r35,r43
+    cmpli   cr0,r35,0
+    bt      cr0,eq,B16
+:{0004}::::LOOPWEIGHT=0
+B5: Succ={B6 } Pred={B4 } Labels={L9 }
+
+    lwz     r33,44(r35); fIsPtrOp
+    li      r44,0
+    stw     r44,8(r33); fIsPtrOp
+    stw     r44,12(r33); fIsPtrOp
+    mr      r3,r35
+    lis     r46,HA(grDisplay_801C5DB0)
+    addi    r47,r46,LO(grDisplay_801C5DB0)
+    mr      r4,r47
+    li      r5,3
+    li      r6,0
+:{0004}::::LOOPWEIGHT=0
+B6: Succ={B7 } Pred={B5 } Labels={L10 }
+
+    bl      GObj_SetupGXLink; fLink
+:{0004}::::LOOPWEIGHT=0
+B7: Succ={B8 B9 } Pred={B6 } Labels={L11 }
+
+    lwz     r38,12(r34); fIsPtrOp
+    cmpli   cr0,r38,0
+    bt      cr0,eq,B9
+:{0004}::::LOOPWEIGHT=0
+B8: Succ={B9 } Pred={B7 } Labels={L12 }
+
+    stw     r38,28(r33); fIsPtrOp
+:{0004}::::LOOPWEIGHT=0
+B9: Succ={B10 B12 } Pred={B8 B7 } Labels={L3 }
+
+    lwz     r37,0(r34); fIsPtrOp
+    cmpli   cr0,r37,0
+    bt      cr0,eq,B12
+:{0004}::::LOOPWEIGHT=393731
+B10: Succ={B11 } Pred={B9 } Labels={L13 }
+
+    mr      r3,r35
+    mr      r12,r37
+:{0004}::::LOOPWEIGHT=12828240
+B11: Succ={B12 } Pred={B10 } Labels={L14 }
+
+    mtlr    r12
+    blrl    ; fLink
+:{0004}::::LOOPWEIGHT=12826232
+B12: Succ={B13 B18 } Pred={B11 B9 } Labels={L4 L15 }
+
+    lwz     r36,8(r34); fIsPtrOp
+    cmpli   cr0,r36,0
+    bt      cr0,eq,B18
+:{0004}::::LOOPWEIGHT=512
+B13: Succ={B14 } Pred={B12 } Labels={L16 }
+
+    mr      r3,r35
+    mr      r4,r36
+    li      r5,4
+:{0004}::::LOOPWEIGHT=0
+B14: Succ={B15 } Pred={B13 } Labels={L17 }
+
+    bl      HSD_GObjProc_8038FD54; fLink
+:{0004}::::LOOPWEIGHT=5023936
+B15: Succ={B18 } Pred={B14 } Labels={L18 }
+
+    b       B18
+:{0004}::::LOOPWEIGHT=5023280
+B16: Succ={B17 } Pred={B4 } Labels={L5 }
+
+    addi    r3,r41,40
+    addi    r4,r41,76
+    li      r5,235
+    mr      r6,r32
+    crxor   cr1[eq],cr1[eq],cr1[eq]
+:{0004}::::LOOPWEIGHT=193
+B17: Succ={B18 } Pred={B16 } Labels={L19 }
+
+    bl      OSReport; fLink
+:{0004}::::LOOPWEIGHT=0
+B18: Succ={B19 } Pred={B17 B15 B12 } Labels={L6 L20 }
+
+    mr      r3,r35
+:{0006}::::LOOPWEIGHT=0
+B19: Succ={} Pred={B18 } Labels={L21 }
+
+
+AFTER INSTRUCTION SCHEDULING
+grOnett_801E37F4
+:{0005}::::LOOPWEIGHT=197120
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{000c}::::LOOPWEIGHT=1029
+B1: Succ={B3 } Pred={B0 } Labels={L1 }
+
+    mr      r32,r3
+    mulli   r42,r32,20
+    lis     r40,HA(grOt_803E27E0)
+    addi    r41,r40,LO(grOt_803E27E0)
+    mr      r3,r32
+    add     r34,r41,r42
+:{0004}::::LOOPWEIGHT=12828240
+B3: Succ={B4 } Pred={B1 } Labels={L7 }
+
+    bl      Ground_801C14D0; fLink
+:{000c}::::LOOPWEIGHT=12828328
+B4: Succ={B5 B16 } Pred={B3 } Labels={L8 }
+
+    mr      r43,r3
+    mr      r35,r43
+    cmpli   cr0,r35,0
+    bt      cr0,eq,B16
+:{000c}::::LOOPWEIGHT=0
+B5: Succ={B6 } Pred={B4 } Labels={L9 }
+
+    lwz     r33,44(r35); fIsPtrOp
+    li      r44,0
+    lis     r46,HA(grDisplay_801C5DB0)
+    stw     r44,8(r33); fIsPtrOp
+    addi    r47,r46,LO(grDisplay_801C5DB0)
+    mr      r3,r35
+    stw     r44,12(r33); fIsPtrOp
+    mr      r4,r47
+    li      r5,3
+    li      r6,0
+:{0004}::::LOOPWEIGHT=0
+B6: Succ={B7 } Pred={B5 } Labels={L10 }
+
+    bl      GObj_SetupGXLink; fLink
+:{000c}::::LOOPWEIGHT=0
+B7: Succ={B8 B9 } Pred={B6 } Labels={L11 }
+
+    lwz     r38,12(r34); fIsPtrOp
+    cmpli   cr0,r38,0
+    bt      cr0,eq,B9
+:{0004}::::LOOPWEIGHT=0
+B8: Succ={B9 } Pred={B7 } Labels={L12 }
+
+    stw     r38,28(r33); fIsPtrOp
+:{000c}::::LOOPWEIGHT=0
+B9: Succ={B10 B12 } Pred={B8 B7 } Labels={L3 }
+
+    lwz     r37,0(r34); fIsPtrOp
+    cmpli   cr0,r37,0
+    bt      cr0,eq,B12
+:{000c}::::LOOPWEIGHT=393731
+B10: Succ={B11 } Pred={B9 } Labels={L13 }
+
+    mr      r12,r37
+    mtlr    r12
+    mr      r3,r35
+:{0004}::::LOOPWEIGHT=12828240
+B11: Succ={B12 } Pred={B10 } Labels={L14 }
+
+    blrl    ; fLink
+:{000c}::::LOOPWEIGHT=12826232
+B12: Succ={B13 B18 } Pred={B11 B9 } Labels={L4 L15 }
+
+    lwz     r36,8(r34); fIsPtrOp
+    cmpli   cr0,r36,0
+    bt      cr0,eq,B18
+:{000c}::::LOOPWEIGHT=512
+B13: Succ={B14 } Pred={B12 } Labels={L16 }
+
+    mr      r3,r35
+    mr      r4,r36
+    li      r5,4
+:{0004}::::LOOPWEIGHT=0
+B14: Succ={B15 } Pred={B13 } Labels={L17 }
+
+    bl      HSD_GObjProc_8038FD54; fLink
+:{0004}::::LOOPWEIGHT=5023936
+B15: Succ={B18 } Pred={B14 } Labels={L18 }
+
+    b       B18
+:{000c}::::LOOPWEIGHT=5023280
+B16: Succ={B17 } Pred={B4 } Labels={L5 }
+
+    mr      r6,r32
+    crxor   cr1[eq],cr1[eq],cr1[eq]
+    addi    r3,r41,40
+    addi    r4,r41,76
+    li      r5,235
+:{0004}::::LOOPWEIGHT=193
+B17: Succ={B18 } Pred={B16 } Labels={L19 }
+
+    bl      OSReport; fLink
+:{0004}::::LOOPWEIGHT=0
+B18: Succ={B19 } Pred={B17 B15 B12 } Labels={L6 L20 }
+
+    mr      r3,r35
+:{0006}::::LOOPWEIGHT=0
+B19: Succ={} Pred={B18 } Labels={L21 }
+
+
+AFTER PEEPHOLE FORWARD
+grOnett_801E37F4
+:{0005}::::LOOPWEIGHT=197120
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{000c}::::LOOPWEIGHT=1029
+B1: Succ={B3 } Pred={B0 } Labels={L1 }
+
+    mr      r32,r3
+    mulli   r42,r32,20
+    lis     r40,HA(grOt_803E27E0)
+    addi    r41,r40,LO(grOt_803E27E0)
+    mr      r3,r32
+    add     r34,r41,r42
+:{0004}::::LOOPWEIGHT=12828240
+B3: Succ={B4 } Pred={B1 } Labels={L7 }
+
+    bl      Ground_801C14D0; fLink
+:{000c}::::LOOPWEIGHT=12828328
+B4: Succ={B5 B16 } Pred={B3 } Labels={L8 }
+
+    mr      r43,r3
+    mr      r35,r43
+    cmpli   cr0,r35,0
+    bt      cr0,eq,B16
+:{000c}::::LOOPWEIGHT=0
+B5: Succ={B6 } Pred={B4 } Labels={L9 }
+
+    lwz     r33,44(r35); fIsPtrOp
+    li      r44,0
+    lis     r46,HA(grDisplay_801C5DB0)
+    stw     r44,8(r33); fIsPtrOp
+    addi    r47,r46,LO(grDisplay_801C5DB0)
+    mr      r3,r35
+    stw     r44,12(r33); fIsPtrOp
+    mr      r4,r47
+    li      r5,3
+    li      r6,0
+:{0004}::::LOOPWEIGHT=0
+B6: Succ={B7 } Pred={B5 } Labels={L10 }
+
+    bl      GObj_SetupGXLink; fLink
+:{000c}::::LOOPWEIGHT=0
+B7: Succ={B8 B9 } Pred={B6 } Labels={L11 }
+
+    lwz     r38,12(r34); fIsPtrOp
+    cmpli   cr0,r38,0
+    bt      cr0,eq,B9
+:{0004}::::LOOPWEIGHT=0
+B8: Succ={B9 } Pred={B7 } Labels={L12 }
+
+    stw     r38,28(r33); fIsPtrOp
+:{000c}::::LOOPWEIGHT=0
+B9: Succ={B10 B12 } Pred={B8 B7 } Labels={L3 }
+
+    lwz     r37,0(r34); fIsPtrOp
+    cmpli   cr0,r37,0
+    bt      cr0,eq,B12
+:{000c}::::LOOPWEIGHT=393731
+B10: Succ={B11 } Pred={B9 } Labels={L13 }
+
+    mr      r12,r37
+    mtlr    r12
+    mr      r3,r35
+:{0004}::::LOOPWEIGHT=12828240
+B11: Succ={B12 } Pred={B10 } Labels={L14 }
+
+    blrl    ; fLink
+:{000c}::::LOOPWEIGHT=12826232
+B12: Succ={B13 B18 } Pred={B11 B9 } Labels={L4 L15 }
+
+    lwz     r36,8(r34); fIsPtrOp
+    cmpli   cr0,r36,0
+    bt      cr0,eq,B18
+:{000c}::::LOOPWEIGHT=512
+B13: Succ={B14 } Pred={B12 } Labels={L16 }
+
+    mr      r3,r35
+    mr      r4,r36
+    li      r5,4
+:{0004}::::LOOPWEIGHT=0
+B14: Succ={B15 } Pred={B13 } Labels={L17 }
+
+    bl      HSD_GObjProc_8038FD54; fLink
+:{0004}::::LOOPWEIGHT=5023936
+B15: Succ={B18 } Pred={B14 } Labels={L18 }
+
+    b       B18
+:{000c}::::LOOPWEIGHT=5023280
+B16: Succ={B17 } Pred={B4 } Labels={L5 }
+
+    mr      r6,r32
+    crxor   cr1[eq],cr1[eq],cr1[eq]
+    addi    r3,r41,40
+    addi    r4,r41,76
+    li      r5,235
+:{0004}::::LOOPWEIGHT=193
+B17: Succ={B18 } Pred={B16 } Labels={L19 }
+
+    bl      OSReport; fLink
+:{0004}::::LOOPWEIGHT=0
+B18: Succ={B19 } Pred={B17 B15 B12 } Labels={L6 L20 }
+
+    mr      r3,r35
+:{0006}::::LOOPWEIGHT=0
+B19: Succ={} Pred={B18 } Labels={L21 }
+
+
+AFTER REGISTER COLORING
+grOnett_801E37F4
+:{0005}::::LOOPWEIGHT=197120
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{000c}::::LOOPWEIGHT=1029
+B1: Succ={B3 } Pred={B0 } Labels={L1 }
+
+    mr      r28,r3
+    mulli   r0,r28,20
+    lis     r3,HA(grOt_803E27E0)
+    addi    r31,r3,LO(grOt_803E27E0)
+    mr      r3,r28
+    add     r29,r31,r0
+:{0004}::::LOOPWEIGHT=12828240
+B3: Succ={B4 } Pred={B1 } Labels={L7 }
+
+    bl      Ground_801C14D0; fLink
+:{0004}::::LOOPWEIGHT=12828328
+B4: Succ={B5 B16 } Pred={B3 } Labels={L8 }
+
+    mr      r30,r3
+    cmpli   cr0,r30,0
+    bt      cr0,eq,B16
+:{0004}::::LOOPWEIGHT=0
+B5: Succ={B6 } Pred={B4 } Labels={L9 }
+
+    lwz     r31,44(r30); fIsPtrOp
+    li      r0,0
+    lis     r3,HA(grDisplay_801C5DB0)
+    stw     r0,8(r31); fIsPtrOp
+    addi    r4,r3,LO(grDisplay_801C5DB0)
+    mr      r3,r30
+    stw     r0,12(r31); fIsPtrOp
+    li      r5,3
+    li      r6,0
+:{0004}::::LOOPWEIGHT=0
+B6: Succ={B7 } Pred={B5 } Labels={L10 }
+
+    bl      GObj_SetupGXLink; fLink
+:{000c}::::LOOPWEIGHT=0
+B7: Succ={B8 B9 } Pred={B6 } Labels={L11 }
+
+    lwz     r0,12(r29); fIsPtrOp
+    cmpli   cr0,r0,0
+    bt      cr0,eq,B9
+:{0004}::::LOOPWEIGHT=0
+B8: Succ={B9 } Pred={B7 } Labels={L12 }
+
+    stw     r0,28(r31); fIsPtrOp
+:{000c}::::LOOPWEIGHT=0
+B9: Succ={B10 B12 } Pred={B8 B7 } Labels={L3 }
+
+    lwz     r12,0(r29); fIsPtrOp
+    cmpli   cr0,r12,0
+    bt      cr0,eq,B12
+:{0004}::::LOOPWEIGHT=393731
+B10: Succ={B11 } Pred={B9 } Labels={L13 }
+
+    mtlr    r12
+    mr      r3,r30
+:{0004}::::LOOPWEIGHT=12828240
+B11: Succ={B12 } Pred={B10 } Labels={L14 }
+
+    blrl    ; fLink
+:{000c}::::LOOPWEIGHT=12826232
+B12: Succ={B13 B18 } Pred={B11 B9 } Labels={L4 L15 }
+
+    lwz     r4,8(r29); fIsPtrOp
+    cmpli   cr0,r4,0
+    bt      cr0,eq,B18
+:{0004}::::LOOPWEIGHT=512
+B13: Succ={B14 } Pred={B12 } Labels={L16 }
+
+    mr      r3,r30
+    li      r5,4
+:{0004}::::LOOPWEIGHT=0
+B14: Succ={B15 } Pred={B13 } Labels={L17 }
+
+    bl      HSD_GObjProc_8038FD54; fLink
+:{0004}::::LOOPWEIGHT=5023936
+B15: Succ={B18 } Pred={B14 } Labels={L18 }
+
+    b       B18
+:{000c}::::LOOPWEIGHT=5023280
+B16: Succ={B17 } Pred={B4 } Labels={L5 }
+
+    mr      r6,r28
+    crxor   cr1[eq],cr1[eq],cr1[eq]
+    addi    r3,r31,40
+    addi    r4,r31,76
+    li      r5,235
+:{0004}::::LOOPWEIGHT=193
+B17: Succ={B18 } Pred={B16 } Labels={L19 }
+
+    bl      OSReport; fLink
+:{0004}::::LOOPWEIGHT=0
+B18: Succ={B19 } Pred={B17 B15 B12 } Labels={L6 L20 }
+
+    mr      r3,r30
+:{0006}::::LOOPWEIGHT=0
+B19: Succ={} Pred={B18 } Labels={L21 }
+
+
+AFTER GENERATING EPILOGUE, PROLOGUE
+grOnett_801E37F4
+:{0005}::::LOOPWEIGHT=197120
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+    mflr    r0
+    stw     r0,4(r1); fIsPtrOp
+    stwu    r1,-32(r1); fIsPtrOp
+    stw     r31,28(r1); fIsPtrOp
+    stw     r30,24(r1); fIsPtrOp
+    stw     r29,20(r1); fIsPtrOp
+    stw     r28,16(r1); fIsPtrOp
+:{000c}::::LOOPWEIGHT=1029
+B1: Succ={B3 } Pred={B0 } Labels={L1 }
+
+    mr      r28,r3
+    mulli   r0,r28,20
+    lis     r3,HA(grOt_803E27E0)
+    addi    r31,r3,LO(grOt_803E27E0)
+    mr      r3,r28
+    add     r29,r31,r0
+:{0004}::::LOOPWEIGHT=12828240
+B3: Succ={B4 } Pred={B1 } Labels={L7 }
+
+    bl      Ground_801C14D0; fLink
+:{0004}::::LOOPWEIGHT=12828328
+B4: Succ={B5 B16 } Pred={B3 } Labels={L8 }
+
+    mr      r30,r3
+    cmpli   cr0,r30,0
+    bt      cr0,eq,B16
+:{0004}::::LOOPWEIGHT=0
+B5: Succ={B6 } Pred={B4 } Labels={L9 }
+
+    lwz     r31,44(r30); fIsPtrOp
+    li      r0,0
+    lis     r3,HA(grDisplay_801C5DB0)
+    stw     r0,8(r31); fIsPtrOp
+    addi    r4,r3,LO(grDisplay_801C5DB0)
+    mr      r3,r30
+    stw     r0,12(r31); fIsPtrOp
+    li      r5,3
+    li      r6,0
+:{0004}::::LOOPWEIGHT=0
+B6: Succ={B7 } Pred={B5 } Labels={L10 }
+
+    bl      GObj_SetupGXLink; fLink
+:{000c}::::LOOPWEIGHT=0
+B7: Succ={B8 B9 } Pred={B6 } Labels={L11 }
+
+    lwz     r0,12(r29); fIsPtrOp
+    cmpli   cr0,r0,0
+    bt      cr0,eq,B9
+:{0004}::::LOOPWEIGHT=0
+B8: Succ={B9 } Pred={B7 } Labels={L12 }
+
+    stw     r0,28(r31); fIsPtrOp
+:{000c}::::LOOPWEIGHT=0
+B9: Succ={B10 B12 } Pred={B8 B7 } Labels={L3 }
+
+    lwz     r12,0(r29); fIsPtrOp
+    cmpli   cr0,r12,0
+    bt      cr0,eq,B12
+:{0004}::::LOOPWEIGHT=393731
+B10: Succ={B11 } Pred={B9 } Labels={L13 }
+
+    mtlr    r12
+    mr      r3,r30
+:{0004}::::LOOPWEIGHT=12828240
+B11: Succ={B12 } Pred={B10 } Labels={L14 }
+
+    blrl    ; fLink
+:{000c}::::LOOPWEIGHT=12826232
+B12: Succ={B13 B18 } Pred={B11 B9 } Labels={L4 L15 }
+
+    lwz     r4,8(r29); fIsPtrOp
+    cmpli   cr0,r4,0
+    bt      cr0,eq,B18
+:{0004}::::LOOPWEIGHT=512
+B13: Succ={B14 } Pred={B12 } Labels={L16 }
+
+    mr      r3,r30
+    li      r5,4
+:{0004}::::LOOPWEIGHT=0
+B14: Succ={B15 } Pred={B13 } Labels={L17 }
+
+    bl      HSD_GObjProc_8038FD54; fLink
+:{0004}::::LOOPWEIGHT=5023936
+B15: Succ={B18 } Pred={B14 } Labels={L18 }
+
+    b       B18
+:{000c}::::LOOPWEIGHT=5023280
+B16: Succ={B17 } Pred={B4 } Labels={L5 }
+
+    mr      r6,r28
+    crxor   cr1[eq],cr1[eq],cr1[eq]
+    addi    r3,r31,40
+    addi    r4,r31,76
+    li      r5,235
+:{0004}::::LOOPWEIGHT=193
+B17: Succ={B18 } Pred={B16 } Labels={L19 }
+
+    bl      OSReport; fLink
+:{0004}::::LOOPWEIGHT=0
+B18: Succ={B19 } Pred={B17 B15 B12 } Labels={L6 L20 }
+
+    mr      r3,r30
+:{0006}::::LOOPWEIGHT=0
+B19: Succ={} Pred={B18 } Labels={L21 }
+
+    lwz     r0,36(r1); fIsPtrOp
+    lwz     r31,28(r1); fIsVolatile; fIsPtrOp
+    lwz     r30,24(r1); fIsVolatile; fIsPtrOp
+    lwz     r29,20(r1); fIsVolatile; fIsPtrOp
+    lwz     r28,16(r1); fIsVolatile; fIsPtrOp
+    addi    r1,r1,32; fSideEffects
+    mtlr    r0
+    blr     ; fIsLive
+
+AFTER MERGING EPILOGUE, PROLOGUE
+grOnett_801E37F4
+:{0005}::::LOOPWEIGHT=197120
+B0: Succ={B3 } Pred={} Labels={L0 }
+
+    mflr    r0
+    stw     r0,4(r1); fIsPtrOp
+    stwu    r1,-32(r1); fIsPtrOp
+    stw     r31,28(r1); fIsPtrOp
+    stw     r30,24(r1); fIsPtrOp
+    stw     r29,20(r1); fIsPtrOp
+    stw     r28,16(r1); fIsPtrOp
+    mr      r28,r3
+    mulli   r0,r28,20
+    lis     r3,HA(grOt_803E27E0)
+    addi    r31,r3,LO(grOt_803E27E0)
+    mr      r3,r28
+    add     r29,r31,r0
+:{0004}::::LOOPWEIGHT=12828240
+B3: Succ={B4 } Pred={B0 } Labels={L7 }
+
+    bl      Ground_801C14D0; fLink
+:{0004}::::LOOPWEIGHT=12828328
+B4: Succ={B5 B16 } Pred={B3 } Labels={L8 }
+
+    mr      r30,r3
+    cmpli   cr0,r30,0
+    bt      cr0,eq,B16
+:{0004}::::LOOPWEIGHT=0
+B5: Succ={B6 } Pred={B4 } Labels={L9 }
+
+    lwz     r31,44(r30); fIsPtrOp
+    li      r0,0
+    lis     r3,HA(grDisplay_801C5DB0)
+    stw     r0,8(r31); fIsPtrOp
+    addi    r4,r3,LO(grDisplay_801C5DB0)
+    mr      r3,r30
+    stw     r0,12(r31); fIsPtrOp
+    li      r5,3
+    li      r6,0
+:{0004}::::LOOPWEIGHT=0
+B6: Succ={B7 } Pred={B5 } Labels={L10 }
+
+    bl      GObj_SetupGXLink; fLink
+:{000c}::::LOOPWEIGHT=0
+B7: Succ={B8 B9 } Pred={B6 } Labels={L11 }
+
+    lwz     r0,12(r29); fIsPtrOp
+    cmpli   cr0,r0,0
+    bt      cr0,eq,B9
+:{0004}::::LOOPWEIGHT=0
+B8: Succ={B9 } Pred={B7 } Labels={L12 }
+
+    stw     r0,28(r31); fIsPtrOp
+:{000c}::::LOOPWEIGHT=0
+B9: Succ={B10 B12 } Pred={B8 B7 } Labels={L3 }
+
+    lwz     r12,0(r29); fIsPtrOp
+    cmpli   cr0,r12,0
+    bt      cr0,eq,B12
+:{0004}::::LOOPWEIGHT=393731
+B10: Succ={B11 } Pred={B9 } Labels={L13 }
+
+    mtlr    r12
+    mr      r3,r30
+:{0004}::::LOOPWEIGHT=12828240
+B11: Succ={B12 } Pred={B10 } Labels={L14 }
+
+    blrl    ; fLink
+:{000c}::::LOOPWEIGHT=12826232
+B12: Succ={B13 B18 } Pred={B11 B9 } Labels={L4 L15 }
+
+    lwz     r4,8(r29); fIsPtrOp
+    cmpli   cr0,r4,0
+    bt      cr0,eq,B18
+:{0004}::::LOOPWEIGHT=512
+B13: Succ={B14 } Pred={B12 } Labels={L16 }
+
+    mr      r3,r30
+    li      r5,4
+:{0004}::::LOOPWEIGHT=0
+B14: Succ={B15 } Pred={B13 } Labels={L17 }
+
+    bl      HSD_GObjProc_8038FD54; fLink
+:{0004}::::LOOPWEIGHT=5023936
+B15: Succ={B18 } Pred={B14 } Labels={L18 }
+
+    b       B18
+:{000c}::::LOOPWEIGHT=5023280
+B16: Succ={B17 } Pred={B4 } Labels={L5 }
+
+    mr      r6,r28
+    crxor   cr1[eq],cr1[eq],cr1[eq]
+    addi    r3,r31,40
+    addi    r4,r31,76
+    li      r5,235
+:{0004}::::LOOPWEIGHT=193
+B17: Succ={B18 } Pred={B16 } Labels={L19 }
+
+    bl      OSReport; fLink
+:{0004}::::LOOPWEIGHT=0
+B18: Succ={B19 } Pred={B17 B15 B12 } Labels={L6 L20 }
+
+    mr      r3,r30
+    lwz     r0,36(r1); fIsPtrOp
+    lwz     r31,28(r1); fIsVolatile; fIsPtrOp
+    lwz     r30,24(r1); fIsVolatile; fIsPtrOp
+    lwz     r29,20(r1); fIsVolatile; fIsPtrOp
+    lwz     r28,16(r1); fIsVolatile; fIsPtrOp
+:{0006}::::LOOPWEIGHT=0
+B19: Succ={} Pred={B18 } Labels={L21 }
+
+    addi    r1,r1,32; fSideEffects
+    mtlr    r0
+    blr     ; fIsLive
+
+AFTER PEEPHOLE OPTIMIZATION
+grOnett_801E37F4
+:{0005}::::LOOPWEIGHT=197120
+B0: Succ={B3 } Pred={} Labels={L0 }
+
+    mflr    r0
+    stw     r0,4(r1); fIsPtrOp
+    stwu    r1,-32(r1); fIsPtrOp
+    stw     r31,28(r1); fIsPtrOp
+    stw     r30,24(r1); fIsPtrOp
+    stw     r29,20(r1); fIsPtrOp
+    stw     r28,16(r1); fIsPtrOp
+    addi    r28,r3,0
+    mulli   r0,r28,20
+    lis     r3,HA(grOt_803E27E0)
+    addi    r31,r3,LO(grOt_803E27E0)
+    addi    r3,r28,0
+    add     r29,r31,r0
+:{0004}::::LOOPWEIGHT=12828240
+B3: Succ={B4 } Pred={B0 } Labels={L7 }
+
+    bl      Ground_801C14D0; fLink
+:{0004}::::LOOPWEIGHT=12828328
+B4: Succ={B5 B16 } Pred={B3 } Labels={L8 }
+
+    mr      r30,r3
+    bt      cr0,eq,B16
+:{0004}::::LOOPWEIGHT=0
+B5: Succ={B6 } Pred={B4 } Labels={L9 }
+
+    lwz     r31,44(r30); fIsPtrOp
+    li      r0,0
+    lis     r3,HA(grDisplay_801C5DB0)
+    stw     r0,8(r31); fIsPtrOp
+    addi    r4,r3,LO(grDisplay_801C5DB0)
+    addi    r3,r30,0
+    stw     r0,12(r31); fIsPtrOp
+    li      r5,3
+    li      r6,0
+:{0004}::::LOOPWEIGHT=0
+B6: Succ={B7 } Pred={B5 } Labels={L10 }
+
+    bl      GObj_SetupGXLink; fLink
+:{000c}::::LOOPWEIGHT=0
+B7: Succ={B8 B9 } Pred={B6 } Labels={L11 }
+
+    lwz     r0,12(r29); fIsPtrOp
+    cmpli   cr0,r0,0
+    bt      cr0,eq,B9
+:{0004}::::LOOPWEIGHT=0
+B8: Succ={B9 } Pred={B7 } Labels={L12 }
+
+    stw     r0,28(r31); fIsPtrOp
+:{000c}::::LOOPWEIGHT=0
+B9: Succ={B10 B12 } Pred={B8 B7 } Labels={L3 }
+
+    lwz     r12,0(r29); fIsPtrOp
+    cmpli   cr0,r12,0
+    bt      cr0,eq,B12
+:{0004}::::LOOPWEIGHT=393731
+B10: Succ={B11 } Pred={B9 } Labels={L13 }
+
+    mtlr    r12
+    addi    r3,r30,0
+:{0004}::::LOOPWEIGHT=12828240
+B11: Succ={B12 } Pred={B10 } Labels={L14 }
+
+    blrl    ; fLink
+:{000c}::::LOOPWEIGHT=12826232
+B12: Succ={B13 B18 } Pred={B11 B9 } Labels={L4 L15 }
+
+    lwz     r4,8(r29); fIsPtrOp
+    cmpli   cr0,r4,0
+    bt      cr0,eq,B18
+:{0004}::::LOOPWEIGHT=512
+B13: Succ={B14 } Pred={B12 } Labels={L16 }
+
+    addi    r3,r30,0
+    li      r5,4
+:{0004}::::LOOPWEIGHT=0
+B14: Succ={B15 } Pred={B13 } Labels={L17 }
+
+    bl      HSD_GObjProc_8038FD54; fLink
+:{0004}::::LOOPWEIGHT=5023936
+B15: Succ={B18 } Pred={B14 } Labels={L18 }
+
+    b       B18
+:{000c}::::LOOPWEIGHT=5023280
+B16: Succ={B17 } Pred={B4 } Labels={L5 }
+
+    addi    r6,r28,0
+    crxor   cr1[eq],cr1[eq],cr1[eq]
+    addi    r3,r31,40
+    addi    r4,r31,76
+    li      r5,235
+:{0004}::::LOOPWEIGHT=193
+B17: Succ={B18 } Pred={B16 } Labels={L19 }
+
+    bl      OSReport; fLink
+:{0004}::::LOOPWEIGHT=0
+B18: Succ={B19 } Pred={B17 B15 B12 } Labels={L6 L20 }
+
+    mr      r3,r30
+    lwz     r0,36(r1); fIsPtrOp
+    lwz     r31,28(r1); fIsVolatile; fIsPtrOp
+    lwz     r30,24(r1); fIsVolatile; fIsPtrOp
+    lwz     r29,20(r1); fIsVolatile; fIsPtrOp
+    lwz     r28,16(r1); fIsVolatile; fIsPtrOp
+:{0006}::::LOOPWEIGHT=0
+B19: Succ={} Pred={B18 } Labels={L21 }
+
+    addi    r1,r1,32; fSideEffects
+    mtlr    r0
+    blr     ; fIsLive
+
+FINAL CODE AFTER INSTRUCTION SCHEDULING
+grOnett_801E37F4
+:{000d}::::LOOPWEIGHT=197120
+B0: Succ={B3 } Pred={} Labels={L0 }
+
+    mflr    r0
+    stw     r0,4(r1); fIsPtrOp
+    stwu    r1,-32(r1); fIsPtrOp
+    stw     r31,28(r1); fIsPtrOp
+    stw     r30,24(r1); fIsPtrOp
+    stw     r29,20(r1); fIsPtrOp
+    stw     r28,16(r1); fIsPtrOp
+    addi    r28,r3,0
+    mulli   r0,r28,20
+    lis     r3,HA(grOt_803E27E0)
+    addi    r31,r3,LO(grOt_803E27E0)
+    addi    r3,r28,0
+    add     r29,r31,r0
+:{0004}::::LOOPWEIGHT=12828240
+B3: Succ={B4 } Pred={B0 } Labels={L7 }
+
+    bl      Ground_801C14D0; fLink
+:{0004}::::LOOPWEIGHT=12828328
+B4: Succ={B5 B16 } Pred={B3 } Labels={L8 }
+
+    mr      r30,r3
+    bt      cr0,eq,B16
+:{000c}::::LOOPWEIGHT=0
+B5: Succ={B6 } Pred={B4 } Labels={L9 }
+
+    lwz     r31,44(r30); fIsPtrOp
+    li      r0,0
+    lis     r3,HA(grDisplay_801C5DB0)
+    stw     r0,8(r31); fIsPtrOp
+    addi    r4,r3,LO(grDisplay_801C5DB0)
+    addi    r3,r30,0
+    stw     r0,12(r31); fIsPtrOp
+    li      r5,3
+    li      r6,0
+:{0004}::::LOOPWEIGHT=0
+B6: Succ={B7 } Pred={B5 } Labels={L10 }
+
+    bl      GObj_SetupGXLink; fLink
+:{000c}::::LOOPWEIGHT=0
+B7: Succ={B8 B9 } Pred={B6 } Labels={L11 }
+
+    lwz     r0,12(r29); fIsPtrOp
+    cmpli   cr0,r0,0
+    bt      cr0,eq,B9
+:{0004}::::LOOPWEIGHT=0
+B8: Succ={B9 } Pred={B7 } Labels={L12 }
+
+    stw     r0,28(r31); fIsPtrOp
+:{000c}::::LOOPWEIGHT=0
+B9: Succ={B10 B12 } Pred={B8 B7 } Labels={L3 }
+
+    lwz     r12,0(r29); fIsPtrOp
+    cmpli   cr0,r12,0
+    bt      cr0,eq,B12
+:{0004}::::LOOPWEIGHT=393731
+B10: Succ={B11 } Pred={B9 } Labels={L13 }
+
+    mtlr    r12
+    addi    r3,r30,0
+:{0004}::::LOOPWEIGHT=12828240
+B11: Succ={B12 } Pred={B10 } Labels={L14 }
+
+    blrl    ; fLink
+:{000c}::::LOOPWEIGHT=12826232
+B12: Succ={B13 B18 } Pred={B11 B9 } Labels={L4 L15 }
+
+    lwz     r4,8(r29); fIsPtrOp
+    cmpli   cr0,r4,0
+    bt      cr0,eq,B18
+:{0004}::::LOOPWEIGHT=512
+B13: Succ={B14 } Pred={B12 } Labels={L16 }
+
+    addi    r3,r30,0
+    li      r5,4
+:{0004}::::LOOPWEIGHT=0
+B14: Succ={B15 } Pred={B13 } Labels={L17 }
+
+    bl      HSD_GObjProc_8038FD54; fLink
+:{0004}::::LOOPWEIGHT=5023936
+B15: Succ={B18 } Pred={B14 } Labels={L18 }
+
+    b       B18
+:{000c}::::LOOPWEIGHT=5023280
+B16: Succ={B17 } Pred={B4 } Labels={L5 }
+
+    addi    r6,r28,0
+    crxor   cr1[eq],cr1[eq],cr1[eq]
+    addi    r3,r31,40
+    addi    r4,r31,76
+    li      r5,235
+:{0004}::::LOOPWEIGHT=193
+B17: Succ={B18 } Pred={B16 } Labels={L19 }
+
+    bl      OSReport; fLink
+:{000c}::::LOOPWEIGHT=0
+B18: Succ={B19 } Pred={B17 B15 B12 } Labels={L6 L20 }
+
+    mr      r3,r30
+    lwz     r0,36(r1); fIsPtrOp
+    lwz     r31,28(r1); fIsVolatile; fIsPtrOp
+    lwz     r30,24(r1); fIsVolatile; fIsPtrOp
+    lwz     r29,20(r1); fIsVolatile; fIsPtrOp
+    lwz     r28,16(r1); fIsVolatile; fIsPtrOp
+:{000e}::::LOOPWEIGHT=0
+B19: Succ={} Pred={B18 } Labels={L21 }
+
+    addi    r1,r1,32; fSideEffects
+    mtlr    r0
+    blr     ; fIsLive
+Starting function grOnett_801E38DC
+--------------------------------------------------------------------------------
+Removing unreachable code at: 1
+*****************
+Dumps for pass=0
+*****************
+Found propagatable expression assignment at: 8
+Found propagatable expression assignment at: 14
+Found expression propagation at 37 from 8
+Removing dead assignment 8
+*****************
+Dumps for pass=1
+*****************
+Found propagatable expression assignment at: 19
+
+BEFORE GLOBAL OPTIMIZATION
+grOnett_801E38DC
+:{0005}::::LOOPWEIGHT=12986256
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=5767168
+B1: Succ={B2 } Pred={B0 } Labels={L1 }
+
+    mr      r32,r3
+:{0004}::::LOOPWEIGHT=193
+B2: Succ={B3 } Pred={B1 } Labels={L2 }
+
+    lwz     r33,44(r32); fIsPtrOp
+    mr      r3,r32
+    lwz     r4,20(r33); fIsPtrOp
+    li      r5,0
+:{0004}::::LOOPWEIGHT=12820312
+B3: Succ={B4 } Pred={B2 } Labels={L3 }
+
+    bl      grAnime_801C8138; fLink
+:{0004}::::LOOPWEIGHT=-18309288
+B4: Succ={B5 } Pred={B3 } Labels={L4 }
+
+    li      r34,2
+    lbz     r35,17(r33); fIsPtrOp
+    rlwimi  r35,r34,5,24,26
+    stb     r35,17(r33); fIsPtrOp
+:{0006}::::LOOPWEIGHT=0
+B5: Succ={} Pred={B4 } Labels={L5 }
+
+
+AFTER INSTRUCTION SCHEDULING
+grOnett_801E38DC
+:{0005}::::LOOPWEIGHT=12986256
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{000c}::::LOOPWEIGHT=5767168
+B1: Succ={B3 } Pred={B0 } Labels={L1 }
+
+    mr      r32,r3
+    lwz     r33,44(r32); fIsPtrOp
+    mr      r3,r32
+    li      r5,0
+    lwz     r4,20(r33); fIsPtrOp
+:{0004}::::LOOPWEIGHT=12820312
+B3: Succ={B4 } Pred={B1 } Labels={L3 }
+
+    bl      grAnime_801C8138; fLink
+:{000c}::::LOOPWEIGHT=-18309288
+B4: Succ={B5 } Pred={B3 } Labels={L4 }
+
+    lbz     r35,17(r33); fIsPtrOp
+    li      r34,2
+    rlwimi  r35,r34,5,24,26
+    stb     r35,17(r33); fIsPtrOp
+:{0006}::::LOOPWEIGHT=0
+B5: Succ={} Pred={B4 } Labels={L5 }
+
+
+AFTER PEEPHOLE FORWARD
+grOnett_801E38DC
+:{0005}::::LOOPWEIGHT=12986256
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{000c}::::LOOPWEIGHT=5767168
+B1: Succ={B3 } Pred={B0 } Labels={L1 }
+
+    mr      r32,r3
+    lwz     r33,44(r32); fIsPtrOp
+    mr      r3,r32
+    li      r5,0
+    lwz     r4,20(r33); fIsPtrOp
+:{0004}::::LOOPWEIGHT=12820312
+B3: Succ={B4 } Pred={B1 } Labels={L3 }
+
+    bl      grAnime_801C8138; fLink
+:{000c}::::LOOPWEIGHT=-18309288
+B4: Succ={B5 } Pred={B3 } Labels={L4 }
+
+    lbz     r35,17(r33); fIsPtrOp
+    li      r34,2
+    rlwimi  r35,r34,5,24,26
+    stb     r35,17(r33); fIsPtrOp
+:{0006}::::LOOPWEIGHT=0
+B5: Succ={} Pred={B4 } Labels={L5 }
+
+
+AFTER REGISTER COLORING
+grOnett_801E38DC
+:{0005}::::LOOPWEIGHT=12986256
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=5767168
+B1: Succ={B3 } Pred={B0 } Labels={L1 }
+
+    lwz     r31,44(r3); fIsPtrOp
+    li      r5,0
+    lwz     r4,20(r31); fIsPtrOp
+:{0004}::::LOOPWEIGHT=12820312
+B3: Succ={B4 } Pred={B1 } Labels={L3 }
+
+    bl      grAnime_801C8138; fLink
+:{000c}::::LOOPWEIGHT=-18309288
+B4: Succ={B5 } Pred={B3 } Labels={L4 }
+
+    lbz     r0,17(r31); fIsPtrOp
+    li      r3,2
+    rlwimi  r0,r3,5,24,26
+    stb     r0,17(r31); fIsPtrOp
+:{0006}::::LOOPWEIGHT=0
+B5: Succ={} Pred={B4 } Labels={L5 }
+
+
+AFTER GENERATING EPILOGUE, PROLOGUE
+grOnett_801E38DC
+:{0005}::::LOOPWEIGHT=12986256
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+    mflr    r0
+    stw     r0,4(r1); fIsPtrOp
+    stwu    r1,-24(r1); fIsPtrOp
+    stw     r31,20(r1); fIsPtrOp
+:{0004}::::LOOPWEIGHT=5767168
+B1: Succ={B3 } Pred={B0 } Labels={L1 }
+
+    lwz     r31,44(r3); fIsPtrOp
+    li      r5,0
+    lwz     r4,20(r31); fIsPtrOp
+:{0004}::::LOOPWEIGHT=12820312
+B3: Succ={B4 } Pred={B1 } Labels={L3 }
+
+    bl      grAnime_801C8138; fLink
+:{000c}::::LOOPWEIGHT=-18309288
+B4: Succ={B5 } Pred={B3 } Labels={L4 }
+
+    lbz     r0,17(r31); fIsPtrOp
+    li      r3,2
+    rlwimi  r0,r3,5,24,26
+    stb     r0,17(r31); fIsPtrOp
+:{0006}::::LOOPWEIGHT=0
+B5: Succ={} Pred={B4 } Labels={L5 }
+
+    lwz     r0,28(r1); fIsPtrOp
+    lwz     r31,20(r1); fIsVolatile; fIsPtrOp
+    addi    r1,r1,24; fSideEffects
+    mtlr    r0
+    blr     ; fIsLive
+
+AFTER MERGING EPILOGUE, PROLOGUE
+grOnett_801E38DC
+:{0005}::::LOOPWEIGHT=12986256
+B0: Succ={B3 } Pred={} Labels={L0 }
+
+    mflr    r0
+    stw     r0,4(r1); fIsPtrOp
+    stwu    r1,-24(r1); fIsPtrOp
+    stw     r31,20(r1); fIsPtrOp
+    lwz     r31,44(r3); fIsPtrOp
+    li      r5,0
+    lwz     r4,20(r31); fIsPtrOp
+:{0004}::::LOOPWEIGHT=12820312
+B3: Succ={B4 } Pred={B0 } Labels={L3 }
+
+    bl      grAnime_801C8138; fLink
+:{000c}::::LOOPWEIGHT=-18309288
+B4: Succ={B5 } Pred={B3 } Labels={L4 }
+
+    lbz     r0,17(r31); fIsPtrOp
+    li      r3,2
+    rlwimi  r0,r3,5,24,26
+    stb     r0,17(r31); fIsPtrOp
+    lwz     r0,28(r1); fIsPtrOp
+    lwz     r31,20(r1); fIsVolatile; fIsPtrOp
+:{0006}::::LOOPWEIGHT=0
+B5: Succ={} Pred={B4 } Labels={L5 }
+
+    addi    r1,r1,24; fSideEffects
+    mtlr    r0
+    blr     ; fIsLive
+
+AFTER PEEPHOLE OPTIMIZATION
+grOnett_801E38DC
+:{0005}::::LOOPWEIGHT=12986256
+B0: Succ={B3 } Pred={} Labels={L0 }
+
+    mflr    r0
+    stw     r0,4(r1); fIsPtrOp
+    stwu    r1,-24(r1); fIsPtrOp
+    stw     r31,20(r1); fIsPtrOp
+    lwz     r31,44(r3); fIsPtrOp
+    li      r5,0
+    lwz     r4,20(r31); fIsPtrOp
+:{0004}::::LOOPWEIGHT=12820312
+B3: Succ={B4 } Pred={B0 } Labels={L3 }
+
+    bl      grAnime_801C8138; fLink
+:{000c}::::LOOPWEIGHT=-18309288
+B4: Succ={B5 } Pred={B3 } Labels={L4 }
+
+    lbz     r0,17(r31); fIsPtrOp
+    li      r3,2
+    rlwimi  r0,r3,5,24,26
+    stb     r0,17(r31); fIsPtrOp
+    lwz     r0,28(r1); fIsPtrOp
+    lwz     r31,20(r1); fIsVolatile; fIsPtrOp
+:{0006}::::LOOPWEIGHT=0
+B5: Succ={} Pred={B4 } Labels={L5 }
+
+    addi    r1,r1,24; fSideEffects
+    mtlr    r0
+    blr     ; fIsLive
+
+FINAL CODE AFTER INSTRUCTION SCHEDULING
+grOnett_801E38DC
+:{000d}::::LOOPWEIGHT=12986256
+B0: Succ={B3 } Pred={} Labels={L0 }
+
+    mflr    r0
+    li      r5,0
+    stw     r0,4(r1); fIsPtrOp
+    stwu    r1,-24(r1); fIsPtrOp
+    stw     r31,20(r1); fIsPtrOp
+    lwz     r31,44(r3); fIsPtrOp
+    lwz     r4,20(r31); fIsPtrOp
+:{0004}::::LOOPWEIGHT=12820312
+B3: Succ={B4 } Pred={B0 } Labels={L3 }
+
+    bl      grAnime_801C8138; fLink
+:{000c}::::LOOPWEIGHT=-18309288
+B4: Succ={B5 } Pred={B3 } Labels={L4 }
+
+    lbz     r0,17(r31); fIsPtrOp
+    li      r3,2
+    rlwimi  r0,r3,5,24,26
+    stb     r0,17(r31); fIsPtrOp
+    lwz     r0,28(r1); fIsPtrOp
+    lwz     r31,20(r1); fIsVolatile; fIsPtrOp
+:{000e}::::LOOPWEIGHT=0
+B5: Succ={} Pred={B4 } Labels={L5 }
+
+    addi    r1,r1,24; fSideEffects
+    mtlr    r0
+    blr     ; fIsLive
+Starting function grOnett_801E3920
+--------------------------------------------------------------------------------
+Removing unreachable code at: 1
+*****************
+Dumps for pass=0
+*****************
+*****************
+Dumps for pass=1
+*****************
+
+BEFORE GLOBAL OPTIMIZATION
+grOnett_801E3920
+:{0005}::::LOOPWEIGHT=-1193279488
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=-71302973
+B1: Succ={B2 } Pred={B0 } Labels={L2 L1 }
+
+    li      r3,0
+:{0006}::::LOOPWEIGHT=4
+B2: Succ={} Pred={B1 } Labels={L3 }
+
+
+AFTER INSTRUCTION SCHEDULING
+grOnett_801E3920
+:{0005}::::LOOPWEIGHT=-1193279488
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=-71302973
+B1: Succ={B2 } Pred={B0 } Labels={L2 L1 }
+
+    li      r3,0
+:{0006}::::LOOPWEIGHT=4
+B2: Succ={} Pred={B1 } Labels={L3 }
+
+
+AFTER PEEPHOLE FORWARD
+grOnett_801E3920
+:{0005}::::LOOPWEIGHT=-1193279488
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=-71302973
+B1: Succ={B2 } Pred={B0 } Labels={L2 L1 }
+
+    li      r3,0
+:{0006}::::LOOPWEIGHT=4
+B2: Succ={} Pred={B1 } Labels={L3 }
+
+
+AFTER REGISTER COLORING
+grOnett_801E3920
+:{0005}::::LOOPWEIGHT=-1193279488
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=-71302973
+B1: Succ={B2 } Pred={B0 } Labels={L2 L1 }
+
+    li      r3,0
+:{0006}::::LOOPWEIGHT=4
+B2: Succ={} Pred={B1 } Labels={L3 }
+
+
+AFTER GENERATING EPILOGUE, PROLOGUE
+grOnett_801E3920
+:{0005}::::LOOPWEIGHT=-1193279488
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=-71302973
+B1: Succ={B2 } Pred={B0 } Labels={L2 L1 }
+
+    li      r3,0
+:{0006}::::LOOPWEIGHT=4
+B2: Succ={} Pred={B1 } Labels={L3 }
+
+    blr     ; fIsLive
+
+AFTER MERGING EPILOGUE, PROLOGUE
+grOnett_801E3920
+:{0005}::::LOOPWEIGHT=-1193279488
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=-71302973
+B1: Succ={B2 } Pred={B0 } Labels={L2 L1 }
+
+    li      r3,0
+:{0006}::::LOOPWEIGHT=4
+B2: Succ={} Pred={B1 } Labels={L3 }
+
+    blr     ; fIsLive
+
+AFTER PEEPHOLE OPTIMIZATION
+grOnett_801E3920
+:{0005}::::LOOPWEIGHT=-1193279488
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=-71302973
+B1: Succ={B2 } Pred={B0 } Labels={L2 L1 }
+
+    li      r3,0
+:{0006}::::LOOPWEIGHT=4
+B2: Succ={} Pred={B1 } Labels={L3 }
+
+    blr     ; fIsLive
+
+FINAL CODE AFTER INSTRUCTION SCHEDULING
+grOnett_801E3920
+:{0005}::::LOOPWEIGHT=-1193279488
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=-71302973
+B1: Succ={B2 } Pred={B0 } Labels={L2 L1 }
+
+    li      r3,0
+:{0006}::::LOOPWEIGHT=4
+B2: Succ={} Pred={B1 } Labels={L3 }
+
+    blr     ; fIsLive
+Starting function grOnett_801E3928
+--------------------------------------------------------------------------------
+Removing unreachable code at: 1
+*****************
+Dumps for pass=0
+*****************
+*****************
+Dumps for pass=1
+*****************
+
+BEFORE GLOBAL OPTIMIZATION
+grOnett_801E3928
+:{0005}::::LOOPWEIGHT=103
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0006}::::LOOPWEIGHT=327680
+B1: Succ={} Pred={B0 } Labels={L3 L2 L1 }
+
+
+AFTER INSTRUCTION SCHEDULING
+grOnett_801E3928
+:{0005}::::LOOPWEIGHT=103
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0006}::::LOOPWEIGHT=327680
+B1: Succ={} Pred={B0 } Labels={L3 L2 L1 }
+
+
+AFTER PEEPHOLE FORWARD
+grOnett_801E3928
+:{0005}::::LOOPWEIGHT=103
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0006}::::LOOPWEIGHT=327680
+B1: Succ={} Pred={B0 } Labels={L3 L2 L1 }
+
+
+AFTER REGISTER COLORING
+grOnett_801E3928
+:{0005}::::LOOPWEIGHT=103
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0006}::::LOOPWEIGHT=327680
+B1: Succ={} Pred={B0 } Labels={L3 L2 L1 }
+
+
+AFTER GENERATING EPILOGUE, PROLOGUE
+grOnett_801E3928
+:{0005}::::LOOPWEIGHT=103
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0006}::::LOOPWEIGHT=327680
+B1: Succ={} Pred={B0 } Labels={L3 L2 L1 }
+
+    blr     ; fIsLive
+
+AFTER MERGING EPILOGUE, PROLOGUE
+grOnett_801E3928
+:{0005}::::LOOPWEIGHT=103
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0006}::::LOOPWEIGHT=327680
+B1: Succ={} Pred={B0 } Labels={L3 L2 L1 }
+
+    blr     ; fIsLive
+
+AFTER PEEPHOLE OPTIMIZATION
+grOnett_801E3928
+:{0005}::::LOOPWEIGHT=103
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0006}::::LOOPWEIGHT=327680
+B1: Succ={} Pred={B0 } Labels={L3 L2 L1 }
+
+    blr     ; fIsLive
+
+FINAL CODE AFTER INSTRUCTION SCHEDULING
+grOnett_801E3928
+:{0005}::::LOOPWEIGHT=103
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0006}::::LOOPWEIGHT=327680
+B1: Succ={} Pred={B0 } Labels={L3 L2 L1 }
+
+    blr     ; fIsLive
+Starting function grOnett_801E392C
+--------------------------------------------------------------------------------
+Removing unreachable code at: 1
+*****************
+Dumps for pass=0
+*****************
+*****************
+Dumps for pass=1
+*****************
+
+BEFORE GLOBAL OPTIMIZATION
+grOnett_801E392C
+:{0005}::::LOOPWEIGHT=0
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0006}::::LOOPWEIGHT=0
+B1: Succ={} Pred={B0 } Labels={L3 L2 L1 }
+
+
+AFTER INSTRUCTION SCHEDULING
+grOnett_801E392C
+:{0005}::::LOOPWEIGHT=0
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0006}::::LOOPWEIGHT=0
+B1: Succ={} Pred={B0 } Labels={L3 L2 L1 }
+
+
+AFTER PEEPHOLE FORWARD
+grOnett_801E392C
+:{0005}::::LOOPWEIGHT=0
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0006}::::LOOPWEIGHT=0
+B1: Succ={} Pred={B0 } Labels={L3 L2 L1 }
+
+
+AFTER REGISTER COLORING
+grOnett_801E392C
+:{0005}::::LOOPWEIGHT=0
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0006}::::LOOPWEIGHT=0
+B1: Succ={} Pred={B0 } Labels={L3 L2 L1 }
+
+
+AFTER GENERATING EPILOGUE, PROLOGUE
+grOnett_801E392C
+:{0005}::::LOOPWEIGHT=0
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0006}::::LOOPWEIGHT=0
+B1: Succ={} Pred={B0 } Labels={L3 L2 L1 }
+
+    blr     ; fIsLive
+
+AFTER MERGING EPILOGUE, PROLOGUE
+grOnett_801E392C
+:{0005}::::LOOPWEIGHT=0
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0006}::::LOOPWEIGHT=0
+B1: Succ={} Pred={B0 } Labels={L3 L2 L1 }
+
+    blr     ; fIsLive
+
+AFTER PEEPHOLE OPTIMIZATION
+grOnett_801E392C
+:{0005}::::LOOPWEIGHT=0
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0006}::::LOOPWEIGHT=0
+B1: Succ={} Pred={B0 } Labels={L3 L2 L1 }
+
+    blr     ; fIsLive
+
+FINAL CODE AFTER INSTRUCTION SCHEDULING
+grOnett_801E392C
+:{0005}::::LOOPWEIGHT=0
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0006}::::LOOPWEIGHT=0
+B1: Succ={} Pred={B0 } Labels={L3 L2 L1 }
+
+    blr     ; fIsLive
+Starting function grOnett_801E3930
+--------------------------------------------------------------------------------
+Removing unreachable code at: 3
+*****************
+Dumps for pass=0
+*****************
+Found propagatable expression assignment at: 8
+Found propagatable expression assignment at: 14
+Found expression propagation at 160 from 8
+Removing dead assignment 8
+Moving common sub from node 139 to 151
+Oh, oh, did not find reference to replace
+Replacing common sub at 147 with 139
+*****************
+Dumps for pass=1
+*****************
+Found propagatable expression assignment at: 19
+
+BEFORE GLOBAL OPTIMIZATION
+grOnett_801E3930
+:{0005}::::LOOPWEIGHT=17
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=0
+B1: Succ={B2 } Pred={B0 } Labels={L1 }
+
+    mr      r32,r3
+:{0004}::::LOOPWEIGHT=1049097
+B2: Succ={B3 } Pred={B1 } Labels={L2 }
+
+    lwz     r33,44(r32); fIsPtrOp
+    li      r3,0
+    mr      r4,r33
+    lis     r35,HA(grOnett_801E54B4)
+    addi    r36,r35,LO(grOnett_801E54B4)
+    mr      r5,r36
+:{0004}::::LOOPWEIGHT=0
+B3: Succ={B4 } Pred={B2 } Labels={L4 }
+
+    bl      mpJointSetCb1; fLink
+:{0004}::::LOOPWEIGHT=12828328
+B4: Succ={B5 } Pred={B3 } Labels={L5 }
+
+    li      r3,1
+    mr      r4,r33
+    lis     r37,HA(grOnett_801E54B4)
+    addi    r38,r37,LO(grOnett_801E54B4)
+    mr      r5,r38
+:{0004}::::LOOPWEIGHT=0
+B5: Succ={B6 } Pred={B4 } Labels={L6 }
+
+    bl      mpJointSetCb1; fLink
+:{0004}::::LOOPWEIGHT=524292
+B6: Succ={B7 } Pred={B5 } Labels={L8 L7 }
+
+    bl      Camera_80029020; fLink
+:{0004}::::LOOPWEIGHT=5023936
+B7: Succ={B8 B10 } Pred={B6 } Labels={L9 }
+
+    mr      r39,r3
+    stw     r39,260(r33); fIsPtrOp
+    lwz     r40,260(r33); fIsPtrOp
+    cmpli   cr0,r40,0
+    bf      cr0,eq,B10
+:{0004}::::LOOPWEIGHT=-1
+B8: Succ={B9 } Pred={B7 } Labels={L10 }
+
+    lis     r41,HA(@161)
+    addi    r42,r41,LO(@161)
+    mr      r3,r42
+    li      r4,331
+    lis     r43,HA(@172)
+    addi    r44,r43,LO(@172)
+    mr      r5,r44
+:{0004}::::LOOPWEIGHT=12836088
+B9: Succ={B10 } Pred={B8 } Labels={L11 }
+
+    bl      __assert; fLink
+:{0004}::::LOOPWEIGHT=12826584
+B10: Succ={B11 } Pred={B9 B7 } Labels={L3 L12 }
+
+    lfs     f32,@173(r0); fIsConst
+    lwz     r45,260(r33); fIsPtrOp
+    stfs    f32,64(r45); fIsPtrOp
+    lfs     f33,@174(r0); fIsConst
+    lwz     r46,260(r33); fIsPtrOp
+    stfs    f33,68(r46); fIsPtrOp
+    lfs     f34,@175(r0); fIsConst
+    lwz     r47,260(r33); fIsPtrOp
+    stfs    f34,72(r47); fIsPtrOp
+    lfs     f35,@176(r0); fIsConst
+    lwz     r48,260(r33); fIsPtrOp
+    stfs    f35,76(r48); fIsPtrOp
+    lfs     f36,@177(r0); fIsConst
+    lwz     r49,260(r33); fIsPtrOp
+    stfs    f36,80(r49); fIsPtrOp
+    lfs     f37,@178(r0); fIsConst
+    lwz     r50,260(r33); fIsPtrOp
+    stfs    f37,16(r50); fIsPtrOp
+    lfs     f38,@178(r0); fIsConst
+    lwz     r51,260(r33); fIsPtrOp
+    stfs    f38,20(r51); fIsPtrOp
+    lfs     f39,@178(r0); fIsConst
+    lwz     r52,260(r33); fIsPtrOp
+    stfs    f39,24(r52); fIsPtrOp
+    lwz     r34,260(r33); fIsPtrOp
+    lwz     r53,16(r34); fIsPtrOp
+    lwz     r54,20(r34); fIsPtrOp
+    stw     r53,28(r34); fIsPtrOp
+    stw     r54,32(r34); fIsPtrOp
+    lwz     r55,24(r34); fIsPtrOp
+    stw     r55,36(r34); fIsPtrOp
+    li      r56,1
+    lwz     r57,260(r33); fIsPtrOp
+    stw     r56,8(r57); fIsPtrOp
+:{0006}::::LOOPWEIGHT=5020864
+B11: Succ={} Pred={B10 } Labels={L13 }
+
+
+AFTER VALUE NUMBERING
+grOnett_801E3930
+:{0005}::::LOOPWEIGHT=17
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=0
+B1: Succ={B2 } Pred={B0 } Labels={L1 }
+
+    mr      r32,r3
+:{0004}::::LOOPWEIGHT=1049097
+B2: Succ={B3 } Pred={B1 } Labels={L2 }
+
+    lwz     r33,44(r32); fIsPtrOp
+    li      r3,0
+    mr      r4,r33
+    lis     r35,HA(grOnett_801E54B4)
+    addi    r36,r35,LO(grOnett_801E54B4)
+    mr      r5,r36
+:{0004}::::LOOPWEIGHT=0
+B3: Succ={B4 } Pred={B2 } Labels={L4 }
+
+    bl      mpJointSetCb1; fLink
+:{0004}::::LOOPWEIGHT=12828328
+B4: Succ={B5 } Pred={B3 } Labels={L5 }
+
+    li      r3,1
+    mr      r4,r33
+    lis     r37,HA(grOnett_801E54B4)
+    addi    r38,r37,LO(grOnett_801E54B4)
+    mr      r5,r38
+:{0004}::::LOOPWEIGHT=0
+B5: Succ={B6 } Pred={B4 } Labels={L6 }
+
+    bl      mpJointSetCb1; fLink
+:{0004}::::LOOPWEIGHT=524292
+B6: Succ={B7 } Pred={B5 } Labels={L8 L7 }
+
+    bl      Camera_80029020; fLink
+:{0004}::::LOOPWEIGHT=5023936
+B7: Succ={B8 B10 } Pred={B6 } Labels={L9 }
+
+    mr      r39,r3
+    stw     r39,260(r33); fIsPtrOp
+    lwz     r40,260(r33); fIsPtrOp
+    cmpli   cr0,r40,0
+    bf      cr0,eq,B10
+:{0004}::::LOOPWEIGHT=-1
+B8: Succ={B9 } Pred={B7 } Labels={L10 }
+
+    lis     r41,HA(@161)
+    addi    r42,r41,LO(@161)
+    mr      r3,r42
+    li      r4,331
+    lis     r43,HA(@172)
+    addi    r44,r43,LO(@172)
+    mr      r5,r44
+:{0004}::::LOOPWEIGHT=12836088
+B9: Succ={B10 } Pred={B8 } Labels={L11 }
+
+    bl      __assert; fLink
+:{0004}::::LOOPWEIGHT=12826584
+B10: Succ={B11 } Pred={B9 B7 } Labels={L3 L12 }
+
+    lfs     f32,@173(r0); fIsConst
+    lwz     r45,260(r33); fIsPtrOp
+    stfs    f32,64(r45); fIsPtrOp
+    lfs     f33,@174(r0); fIsConst
+    lwz     r46,260(r33); fIsPtrOp
+    stfs    f33,68(r46); fIsPtrOp
+    lfs     f34,@175(r0); fIsConst
+    lwz     r47,260(r33); fIsPtrOp
+    stfs    f34,72(r47); fIsPtrOp
+    lfs     f35,@176(r0); fIsConst
+    lwz     r48,260(r33); fIsPtrOp
+    stfs    f35,76(r48); fIsPtrOp
+    lfs     f36,@177(r0); fIsConst
+    lwz     r49,260(r33); fIsPtrOp
+    stfs    f36,80(r49); fIsPtrOp
+    lfs     f37,@178(r0); fIsConst
+    lwz     r50,260(r33); fIsPtrOp
+    stfs    f37,16(r50); fIsPtrOp
+    fmr     f38,f37
+    lwz     r51,260(r33); fIsPtrOp
+    stfs    f38,20(r51); fIsPtrOp
+    fmr     f39,f37
+    lwz     r52,260(r33); fIsPtrOp
+    stfs    f39,24(r52); fIsPtrOp
+    lwz     r34,260(r33); fIsPtrOp
+    lwz     r53,16(r34); fIsPtrOp
+    lwz     r54,20(r34); fIsPtrOp
+    stw     r53,28(r34); fIsPtrOp
+    stw     r54,32(r34); fIsPtrOp
+    lwz     r55,24(r34); fIsPtrOp
+    stw     r55,36(r34); fIsPtrOp
+    li      r56,1
+    lwz     r57,260(r33); fIsPtrOp
+    stw     r56,8(r57); fIsPtrOp
+:{0006}::::LOOPWEIGHT=5020864
+B11: Succ={} Pred={B10 } Labels={L13 }
+
+
+AFTER COPY PROPAGATION
+grOnett_801E3930
+:{0005}::::LOOPWEIGHT=17
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=0
+B1: Succ={B2 } Pred={B0 } Labels={L1 }
+
+    mr      r32,r3
+:{0004}::::LOOPWEIGHT=1049097
+B2: Succ={B3 } Pred={B1 } Labels={L2 }
+
+    lwz     r33,44(r32); fIsPtrOp
+    li      r3,0
+    mr      r4,r33
+    lis     r35,HA(grOnett_801E54B4)
+    addi    r36,r35,LO(grOnett_801E54B4)
+    mr      r5,r36
+:{0004}::::LOOPWEIGHT=0
+B3: Succ={B4 } Pred={B2 } Labels={L4 }
+
+    bl      mpJointSetCb1; fLink
+:{0004}::::LOOPWEIGHT=12828328
+B4: Succ={B5 } Pred={B3 } Labels={L5 }
+
+    li      r3,1
+    mr      r4,r33
+    lis     r37,HA(grOnett_801E54B4)
+    addi    r38,r37,LO(grOnett_801E54B4)
+    mr      r5,r38
+:{0004}::::LOOPWEIGHT=0
+B5: Succ={B6 } Pred={B4 } Labels={L6 }
+
+    bl      mpJointSetCb1; fLink
+:{0004}::::LOOPWEIGHT=524292
+B6: Succ={B7 } Pred={B5 } Labels={L8 L7 }
+
+    bl      Camera_80029020; fLink
+:{0004}::::LOOPWEIGHT=5023936
+B7: Succ={B8 B10 } Pred={B6 } Labels={L9 }
+
+    mr      r39,r3
+    stw     r39,260(r33); fIsPtrOp
+    lwz     r40,260(r33); fIsPtrOp
+    cmpli   cr0,r40,0
+    bf      cr0,eq,B10
+:{0004}::::LOOPWEIGHT=-1
+B8: Succ={B9 } Pred={B7 } Labels={L10 }
+
+    lis     r41,HA(@161)
+    addi    r42,r41,LO(@161)
+    mr      r3,r42
+    li      r4,331
+    lis     r43,HA(@172)
+    addi    r44,r43,LO(@172)
+    mr      r5,r44
+:{0004}::::LOOPWEIGHT=12836088
+B9: Succ={B10 } Pred={B8 } Labels={L11 }
+
+    bl      __assert; fLink
+:{0004}::::LOOPWEIGHT=12826584
+B10: Succ={B11 } Pred={B9 B7 } Labels={L3 L12 }
+
+    lfs     f32,@173(r0); fIsConst
+    lwz     r45,260(r33); fIsPtrOp
+    stfs    f32,64(r45); fIsPtrOp
+    lfs     f33,@174(r0); fIsConst
+    lwz     r46,260(r33); fIsPtrOp
+    stfs    f33,68(r46); fIsPtrOp
+    lfs     f34,@175(r0); fIsConst
+    lwz     r47,260(r33); fIsPtrOp
+    stfs    f34,72(r47); fIsPtrOp
+    lfs     f35,@176(r0); fIsConst
+    lwz     r48,260(r33); fIsPtrOp
+    stfs    f35,76(r48); fIsPtrOp
+    lfs     f36,@177(r0); fIsConst
+    lwz     r49,260(r33); fIsPtrOp
+    stfs    f36,80(r49); fIsPtrOp
+    lfs     f37,@178(r0); fIsConst
+    lwz     r50,260(r33); fIsPtrOp
+    stfs    f37,16(r50); fIsPtrOp
+    lwz     r51,260(r33); fIsPtrOp
+    stfs    f37,20(r51); fIsPtrOp
+    lwz     r52,260(r33); fIsPtrOp
+    stfs    f37,24(r52); fIsPtrOp
+    lwz     r34,260(r33); fIsPtrOp
+    lwz     r53,16(r34); fIsPtrOp
+    lwz     r54,20(r34); fIsPtrOp
+    stw     r53,28(r34); fIsPtrOp
+    stw     r54,32(r34); fIsPtrOp
+    lwz     r55,24(r34); fIsPtrOp
+    stw     r55,36(r34); fIsPtrOp
+    li      r56,1
+    lwz     r57,260(r33); fIsPtrOp
+    stw     r56,8(r57); fIsPtrOp
+:{0006}::::LOOPWEIGHT=5020864
+B11: Succ={} Pred={B10 } Labels={L13 }
+
+
+AFTER COPY PROPAGATION
+grOnett_801E3930
+:{0005}::::LOOPWEIGHT=17
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=0
+B1: Succ={B2 } Pred={B0 } Labels={L1 }
+
+:{0004}::::LOOPWEIGHT=1049097
+B2: Succ={B3 } Pred={B1 } Labels={L2 }
+
+    lwz     r33,44(r3); fIsPtrOp
+    li      r3,0
+    mr      r4,r33
+    lis     r35,HA(grOnett_801E54B4)
+    addi    r36,r35,LO(grOnett_801E54B4)
+    mr      r5,r36
+:{0004}::::LOOPWEIGHT=0
+B3: Succ={B4 } Pred={B2 } Labels={L4 }
+
+    bl      mpJointSetCb1; fLink
+:{0004}::::LOOPWEIGHT=12828328
+B4: Succ={B5 } Pred={B3 } Labels={L5 }
+
+    li      r3,1
+    mr      r4,r33
+    lis     r37,HA(grOnett_801E54B4)
+    addi    r38,r37,LO(grOnett_801E54B4)
+    mr      r5,r38
+:{0004}::::LOOPWEIGHT=0
+B5: Succ={B6 } Pred={B4 } Labels={L6 }
+
+    bl      mpJointSetCb1; fLink
+:{0004}::::LOOPWEIGHT=524292
+B6: Succ={B7 } Pred={B5 } Labels={L8 L7 }
+
+    bl      Camera_80029020; fLink
+:{0004}::::LOOPWEIGHT=5023936
+B7: Succ={B8 B10 } Pred={B6 } Labels={L9 }
+
+    stw     r3,260(r33); fIsPtrOp
+    lwz     r40,260(r33); fIsPtrOp
+    cmpli   cr0,r40,0
+    bf      cr0,eq,B10
+:{0004}::::LOOPWEIGHT=-1
+B8: Succ={B9 } Pred={B7 } Labels={L10 }
+
+    lis     r41,HA(@161)
+    addi    r42,r41,LO(@161)
+    mr      r3,r42
+    li      r4,331
+    lis     r43,HA(@172)
+    addi    r44,r43,LO(@172)
+    mr      r5,r44
+:{0004}::::LOOPWEIGHT=12836088
+B9: Succ={B10 } Pred={B8 } Labels={L11 }
+
+    bl      __assert; fLink
+:{0004}::::LOOPWEIGHT=12826584
+B10: Succ={B11 } Pred={B9 B7 } Labels={L3 L12 }
+
+    lfs     f32,@173(r0); fIsConst
+    lwz     r45,260(r33); fIsPtrOp
+    stfs    f32,64(r45); fIsPtrOp
+    lfs     f33,@174(r0); fIsConst
+    lwz     r46,260(r33); fIsPtrOp
+    stfs    f33,68(r46); fIsPtrOp
+    lfs     f34,@175(r0); fIsConst
+    lwz     r47,260(r33); fIsPtrOp
+    stfs    f34,72(r47); fIsPtrOp
+    lfs     f35,@176(r0); fIsConst
+    lwz     r48,260(r33); fIsPtrOp
+    stfs    f35,76(r48); fIsPtrOp
+    lfs     f36,@177(r0); fIsConst
+    lwz     r49,260(r33); fIsPtrOp
+    stfs    f36,80(r49); fIsPtrOp
+    lfs     f37,@178(r0); fIsConst
+    lwz     r50,260(r33); fIsPtrOp
+    stfs    f37,16(r50); fIsPtrOp
+    lwz     r51,260(r33); fIsPtrOp
+    stfs    f37,20(r51); fIsPtrOp
+    lwz     r52,260(r33); fIsPtrOp
+    stfs    f37,24(r52); fIsPtrOp
+    lwz     r34,260(r33); fIsPtrOp
+    lwz     r53,16(r34); fIsPtrOp
+    lwz     r54,20(r34); fIsPtrOp
+    stw     r53,28(r34); fIsPtrOp
+    stw     r54,32(r34); fIsPtrOp
+    lwz     r55,24(r34); fIsPtrOp
+    stw     r55,36(r34); fIsPtrOp
+    li      r56,1
+    lwz     r57,260(r33); fIsPtrOp
+    stw     r56,8(r57); fIsPtrOp
+:{0006}::::LOOPWEIGHT=5020864
+B11: Succ={} Pred={B10 } Labels={L13 }
+
+
+AFTER VALUE NUMBERING 2
+grOnett_801E3930
+:{0005}::::LOOPWEIGHT=17
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=0
+B1: Succ={B2 } Pred={B0 } Labels={L1 }
+
+:{0004}::::LOOPWEIGHT=1049097
+B2: Succ={B3 } Pred={B1 } Labels={L2 }
+
+    lwz     r33,44(r3); fIsPtrOp
+    li      r3,0
+    mr      r4,r33
+    lis     r35,HA(grOnett_801E54B4)
+    addi    r36,r35,LO(grOnett_801E54B4)
+    mr      r5,r36
+:{0004}::::LOOPWEIGHT=0
+B3: Succ={B4 } Pred={B2 } Labels={L4 }
+
+    bl      mpJointSetCb1; fLink
+:{0004}::::LOOPWEIGHT=12828328
+B4: Succ={B5 } Pred={B3 } Labels={L5 }
+
+    li      r3,1
+    mr      r4,r33
+    mr      r38,r36
+    mr      r5,r38
+:{0004}::::LOOPWEIGHT=0
+B5: Succ={B6 } Pred={B4 } Labels={L6 }
+
+    bl      mpJointSetCb1; fLink
+:{0004}::::LOOPWEIGHT=524292
+B6: Succ={B7 } Pred={B5 } Labels={L8 L7 }
+
+    bl      Camera_80029020; fLink
+:{0004}::::LOOPWEIGHT=5023936
+B7: Succ={B8 B10 } Pred={B6 } Labels={L9 }
+
+    stw     r3,260(r33); fIsPtrOp
+    lwz     r40,260(r33); fIsPtrOp
+    cmpli   cr0,r40,0
+    bf      cr0,eq,B10
+:{0004}::::LOOPWEIGHT=-1
+B8: Succ={B9 } Pred={B7 } Labels={L10 }
+
+    lis     r41,HA(@161)
+    addi    r42,r41,LO(@161)
+    mr      r3,r42
+    li      r4,331
+    lis     r43,HA(@172)
+    addi    r44,r43,LO(@172)
+    mr      r5,r44
+:{0004}::::LOOPWEIGHT=12836088
+B9: Succ={B10 } Pred={B8 } Labels={L11 }
+
+    bl      __assert; fLink
+:{0004}::::LOOPWEIGHT=12826584
+B10: Succ={B11 } Pred={B9 B7 } Labels={L3 L12 }
+
+    lfs     f32,@173(r0); fIsConst
+    lwz     r45,260(r33); fIsPtrOp
+    stfs    f32,64(r45); fIsPtrOp
+    lfs     f33,@174(r0); fIsConst
+    lwz     r46,260(r33); fIsPtrOp
+    stfs    f33,68(r46); fIsPtrOp
+    lfs     f34,@175(r0); fIsConst
+    lwz     r47,260(r33); fIsPtrOp
+    stfs    f34,72(r47); fIsPtrOp
+    lfs     f35,@176(r0); fIsConst
+    lwz     r48,260(r33); fIsPtrOp
+    stfs    f35,76(r48); fIsPtrOp
+    lfs     f36,@177(r0); fIsConst
+    lwz     r49,260(r33); fIsPtrOp
+    stfs    f36,80(r49); fIsPtrOp
+    lfs     f37,@178(r0); fIsConst
+    lwz     r50,260(r33); fIsPtrOp
+    stfs    f37,16(r50); fIsPtrOp
+    lwz     r51,260(r33); fIsPtrOp
+    stfs    f37,20(r51); fIsPtrOp
+    lwz     r52,260(r33); fIsPtrOp
+    stfs    f37,24(r52); fIsPtrOp
+    lwz     r34,260(r33); fIsPtrOp
+    lwz     r53,16(r34); fIsPtrOp
+    lwz     r54,20(r34); fIsPtrOp
+    stw     r53,28(r34); fIsPtrOp
+    stw     r54,32(r34); fIsPtrOp
+    lwz     r55,24(r34); fIsPtrOp
+    stw     r55,36(r34); fIsPtrOp
+    li      r56,1
+    lwz     r57,260(r33); fIsPtrOp
+    stw     r56,8(r57); fIsPtrOp
+:{0006}::::LOOPWEIGHT=5020864
+B11: Succ={} Pred={B10 } Labels={L13 }
+
+
+AFTER INSTRUCTION SCHEDULING
+grOnett_801E3930
+:{0005}::::LOOPWEIGHT=17
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=0
+B1: Succ={B2 } Pred={B0 } Labels={L1 }
+
+:{000c}::::LOOPWEIGHT=1049097
+B2: Succ={B3 } Pred={B1 } Labels={L2 }
+
+    lwz     r33,44(r3); fIsPtrOp
+    lis     r35,HA(grOnett_801E54B4)
+    addi    r36,r35,LO(grOnett_801E54B4)
+    mr      r4,r33
+    mr      r5,r36
+    li      r3,0
+:{0004}::::LOOPWEIGHT=0
+B3: Succ={B4 } Pred={B2 } Labels={L4 }
+
+    bl      mpJointSetCb1; fLink
+:{000c}::::LOOPWEIGHT=12828328
+B4: Succ={B5 } Pred={B3 } Labels={L5 }
+
+    mr      r38,r36
+    mr      r4,r33
+    mr      r5,r38
+    li      r3,1
+:{0004}::::LOOPWEIGHT=0
+B5: Succ={B6 } Pred={B4 } Labels={L6 }
+
+    bl      mpJointSetCb1; fLink
+:{0004}::::LOOPWEIGHT=524292
+B6: Succ={B7 } Pred={B5 } Labels={L8 L7 }
+
+    bl      Camera_80029020; fLink
+:{000c}::::LOOPWEIGHT=5023936
+B7: Succ={B8 B10 } Pred={B6 } Labels={L9 }
+
+    stw     r3,260(r33); fIsPtrOp
+    lwz     r40,260(r33); fIsPtrOp
+    cmpli   cr0,r40,0
+    bf      cr0,eq,B10
+:{000c}::::LOOPWEIGHT=-1
+B8: Succ={B9 } Pred={B7 } Labels={L10 }
+
+    lis     r41,HA(@161)
+    lis     r43,HA(@172)
+    addi    r42,r41,LO(@161)
+    addi    r44,r43,LO(@172)
+    mr      r3,r42
+    mr      r5,r44
+    li      r4,331
+:{0004}::::LOOPWEIGHT=12836088
+B9: Succ={B10 } Pred={B8 } Labels={L11 }
+
+    bl      __assert; fLink
+:{000c}::::LOOPWEIGHT=12826584
+B10: Succ={B11 } Pred={B9 B7 } Labels={L3 L12 }
+
+    lfs     f32,@173(r0); fIsConst
+    li      r56,1
+    lwz     r45,260(r33); fIsPtrOp
+    stfs    f32,64(r45); fIsPtrOp
+    lfs     f33,@174(r0); fIsConst
+    lwz     r46,260(r33); fIsPtrOp
+    stfs    f33,68(r46); fIsPtrOp
+    lfs     f34,@175(r0); fIsConst
+    lwz     r47,260(r33); fIsPtrOp
+    stfs    f34,72(r47); fIsPtrOp
+    lfs     f35,@176(r0); fIsConst
+    lwz     r48,260(r33); fIsPtrOp
+    stfs    f35,76(r48); fIsPtrOp
+    lfs     f36,@177(r0); fIsConst
+    lwz     r49,260(r33); fIsPtrOp
+    stfs    f36,80(r49); fIsPtrOp
+    lfs     f37,@178(r0); fIsConst
+    lwz     r50,260(r33); fIsPtrOp
+    stfs    f37,16(r50); fIsPtrOp
+    lwz     r51,260(r33); fIsPtrOp
+    stfs    f37,20(r51); fIsPtrOp
+    lwz     r52,260(r33); fIsPtrOp
+    stfs    f37,24(r52); fIsPtrOp
+    lwz     r34,260(r33); fIsPtrOp
+    lwz     r53,16(r34); fIsPtrOp
+    lwz     r54,20(r34); fIsPtrOp
+    stw     r53,28(r34); fIsPtrOp
+    stw     r54,32(r34); fIsPtrOp
+    lwz     r55,24(r34); fIsPtrOp
+    stw     r55,36(r34); fIsPtrOp
+    lwz     r57,260(r33); fIsPtrOp
+    stw     r56,8(r57); fIsPtrOp
+:{0006}::::LOOPWEIGHT=5020864
+B11: Succ={} Pred={B10 } Labels={L13 }
+
+
+AFTER PEEPHOLE FORWARD
+grOnett_801E3930
+:{0005}::::LOOPWEIGHT=17
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=0
+B1: Succ={B2 } Pred={B0 } Labels={L1 }
+
+:{000c}::::LOOPWEIGHT=1049097
+B2: Succ={B3 } Pred={B1 } Labels={L2 }
+
+    lwz     r33,44(r3); fIsPtrOp
+    lis     r35,HA(grOnett_801E54B4)
+    addi    r36,r35,LO(grOnett_801E54B4)
+    mr      r4,r33
+    mr      r5,r36
+    li      r3,0
+:{0004}::::LOOPWEIGHT=0
+B3: Succ={B4 } Pred={B2 } Labels={L4 }
+
+    bl      mpJointSetCb1; fLink
+:{000c}::::LOOPWEIGHT=12828328
+B4: Succ={B5 } Pred={B3 } Labels={L5 }
+
+    mr      r38,r36
+    mr      r4,r33
+    mr      r5,r38
+    li      r3,1
+:{0004}::::LOOPWEIGHT=0
+B5: Succ={B6 } Pred={B4 } Labels={L6 }
+
+    bl      mpJointSetCb1; fLink
+:{0004}::::LOOPWEIGHT=524292
+B6: Succ={B7 } Pred={B5 } Labels={L8 L7 }
+
+    bl      Camera_80029020; fLink
+:{000c}::::LOOPWEIGHT=5023936
+B7: Succ={B8 B10 } Pred={B6 } Labels={L9 }
+
+    stw     r3,260(r33); fIsPtrOp
+    lwz     r40,260(r33); fIsPtrOp
+    cmpli   cr0,r40,0
+    bf      cr0,eq,B10
+:{000c}::::LOOPWEIGHT=-1
+B8: Succ={B9 } Pred={B7 } Labels={L10 }
+
+    lis     r41,HA(@161)
+    lis     r43,HA(@172)
+    addi    r42,r41,LO(@161)
+    addi    r44,r43,LO(@172)
+    mr      r3,r42
+    mr      r5,r44
+    li      r4,331
+:{0004}::::LOOPWEIGHT=12836088
+B9: Succ={B10 } Pred={B8 } Labels={L11 }
+
+    bl      __assert; fLink
+:{000c}::::LOOPWEIGHT=12826584
+B10: Succ={B11 } Pred={B9 B7 } Labels={L3 L12 }
+
+    lfs     f32,@173(r0); fIsConst
+    li      r56,1
+    lwz     r45,260(r33); fIsPtrOp
+    stfs    f32,64(r45); fIsPtrOp
+    lfs     f33,@174(r0); fIsConst
+    lwz     r46,260(r33); fIsPtrOp
+    stfs    f33,68(r46); fIsPtrOp
+    lfs     f34,@175(r0); fIsConst
+    lwz     r47,260(r33); fIsPtrOp
+    stfs    f34,72(r47); fIsPtrOp
+    lfs     f35,@176(r0); fIsConst
+    lwz     r48,260(r33); fIsPtrOp
+    stfs    f35,76(r48); fIsPtrOp
+    lfs     f36,@177(r0); fIsConst
+    lwz     r49,260(r33); fIsPtrOp
+    stfs    f36,80(r49); fIsPtrOp
+    lfs     f37,@178(r0); fIsConst
+    lwz     r50,260(r33); fIsPtrOp
+    stfs    f37,16(r50); fIsPtrOp
+    lwz     r51,260(r33); fIsPtrOp
+    stfs    f37,20(r51); fIsPtrOp
+    lwz     r52,260(r33); fIsPtrOp
+    stfs    f37,24(r52); fIsPtrOp
+    lwz     r34,260(r33); fIsPtrOp
+    lwz     r53,16(r34); fIsPtrOp
+    lwz     r54,20(r34); fIsPtrOp
+    stw     r53,28(r34); fIsPtrOp
+    stw     r54,32(r34); fIsPtrOp
+    lwz     r55,24(r34); fIsPtrOp
+    stw     r55,36(r34); fIsPtrOp
+    lwz     r57,260(r33); fIsPtrOp
+    stw     r56,8(r57); fIsPtrOp
+:{0006}::::LOOPWEIGHT=5020864
+B11: Succ={} Pred={B10 } Labels={L13 }
+
+
+AFTER REGISTER COLORING
+grOnett_801E3930
+:{0005}::::LOOPWEIGHT=17
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=0
+B1: Succ={B2 } Pred={B0 } Labels={L1 }
+
+:{000c}::::LOOPWEIGHT=1049097
+B2: Succ={B3 } Pred={B1 } Labels={L2 }
+
+    lwz     r31,44(r3); fIsPtrOp
+    lis     r3,HA(grOnett_801E54B4)
+    addi    r30,r3,LO(grOnett_801E54B4)
+    mr      r4,r31
+    mr      r5,r30
+    li      r3,0
+:{0004}::::LOOPWEIGHT=0
+B3: Succ={B4 } Pred={B2 } Labels={L4 }
+
+    bl      mpJointSetCb1; fLink
+:{0004}::::LOOPWEIGHT=12828328
+B4: Succ={B5 } Pred={B3 } Labels={L5 }
+
+    mr      r4,r31
+    mr      r5,r30
+    li      r3,1
+:{0004}::::LOOPWEIGHT=0
+B5: Succ={B6 } Pred={B4 } Labels={L6 }
+
+    bl      mpJointSetCb1; fLink
+:{0004}::::LOOPWEIGHT=524292
+B6: Succ={B7 } Pred={B5 } Labels={L8 L7 }
+
+    bl      Camera_80029020; fLink
+:{000c}::::LOOPWEIGHT=5023936
+B7: Succ={B8 B10 } Pred={B6 } Labels={L9 }
+
+    stw     r3,260(r31); fIsPtrOp
+    lwz     r0,260(r31); fIsPtrOp
+    cmpli   cr0,r0,0
+    bf      cr0,eq,B10
+:{0004}::::LOOPWEIGHT=-1
+B8: Succ={B9 } Pred={B7 } Labels={L10 }
+
+    lis     r3,HA(@161)
+    lis     r4,HA(@172)
+    addi    r3,r3,LO(@161)
+    addi    r5,r4,LO(@172)
+    li      r4,331
+:{0004}::::LOOPWEIGHT=12836088
+B9: Succ={B10 } Pred={B8 } Labels={L11 }
+
+    bl      __assert; fLink
+:{000c}::::LOOPWEIGHT=12826584
+B10: Succ={B11 } Pred={B9 B7 } Labels={L3 L12 }
+
+    lfs     f0,@173(r0); fIsConst
+    li      r0,1
+    lwz     r3,260(r31); fIsPtrOp
+    stfs    f0,64(r3); fIsPtrOp
+    lfs     f0,@174(r0); fIsConst
+    lwz     r3,260(r31); fIsPtrOp
+    stfs    f0,68(r3); fIsPtrOp
+    lfs     f0,@175(r0); fIsConst
+    lwz     r3,260(r31); fIsPtrOp
+    stfs    f0,72(r3); fIsPtrOp
+    lfs     f0,@176(r0); fIsConst
+    lwz     r3,260(r31); fIsPtrOp
+    stfs    f0,76(r3); fIsPtrOp
+    lfs     f0,@177(r0); fIsConst
+    lwz     r3,260(r31); fIsPtrOp
+    stfs    f0,80(r3); fIsPtrOp
+    lfs     f0,@178(r0); fIsConst
+    lwz     r3,260(r31); fIsPtrOp
+    stfs    f0,16(r3); fIsPtrOp
+    lwz     r3,260(r31); fIsPtrOp
+    stfs    f0,20(r3); fIsPtrOp
+    lwz     r3,260(r31); fIsPtrOp
+    stfs    f0,24(r3); fIsPtrOp
+    lwz     r5,260(r31); fIsPtrOp
+    lwz     r4,16(r5); fIsPtrOp
+    lwz     r3,20(r5); fIsPtrOp
+    stw     r4,28(r5); fIsPtrOp
+    stw     r3,32(r5); fIsPtrOp
+    lwz     r3,24(r5); fIsPtrOp
+    stw     r3,36(r5); fIsPtrOp
+    lwz     r3,260(r31); fIsPtrOp
+    stw     r0,8(r3); fIsPtrOp
+:{0006}::::LOOPWEIGHT=5020864
+B11: Succ={} Pred={B10 } Labels={L13 }
+
+
+AFTER GENERATING EPILOGUE, PROLOGUE
+grOnett_801E3930
+:{0005}::::LOOPWEIGHT=17
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+    mflr    r0
+    stw     r0,4(r1); fIsPtrOp
+    stwu    r1,-24(r1); fIsPtrOp
+    stw     r31,20(r1); fIsPtrOp
+    stw     r30,16(r1); fIsPtrOp
+:{0004}::::LOOPWEIGHT=0
+B1: Succ={B2 } Pred={B0 } Labels={L1 }
+
+:{000c}::::LOOPWEIGHT=1049097
+B2: Succ={B3 } Pred={B1 } Labels={L2 }
+
+    lwz     r31,44(r3); fIsPtrOp
+    lis     r3,HA(grOnett_801E54B4)
+    addi    r30,r3,LO(grOnett_801E54B4)
+    mr      r4,r31
+    mr      r5,r30
+    li      r3,0
+:{0004}::::LOOPWEIGHT=0
+B3: Succ={B4 } Pred={B2 } Labels={L4 }
+
+    bl      mpJointSetCb1; fLink
+:{0004}::::LOOPWEIGHT=12828328
+B4: Succ={B5 } Pred={B3 } Labels={L5 }
+
+    mr      r4,r31
+    mr      r5,r30
+    li      r3,1
+:{0004}::::LOOPWEIGHT=0
+B5: Succ={B6 } Pred={B4 } Labels={L6 }
+
+    bl      mpJointSetCb1; fLink
+:{0004}::::LOOPWEIGHT=524292
+B6: Succ={B7 } Pred={B5 } Labels={L8 L7 }
+
+    bl      Camera_80029020; fLink
+:{000c}::::LOOPWEIGHT=5023936
+B7: Succ={B8 B10 } Pred={B6 } Labels={L9 }
+
+    stw     r3,260(r31); fIsPtrOp
+    lwz     r0,260(r31); fIsPtrOp
+    cmpli   cr0,r0,0
+    bf      cr0,eq,B10
+:{0004}::::LOOPWEIGHT=-1
+B8: Succ={B9 } Pred={B7 } Labels={L10 }
+
+    lis     r3,HA(@161)
+    lis     r4,HA(@172)
+    addi    r3,r3,LO(@161)
+    addi    r5,r4,LO(@172)
+    li      r4,331
+:{0004}::::LOOPWEIGHT=12836088
+B9: Succ={B10 } Pred={B8 } Labels={L11 }
+
+    bl      __assert; fLink
+:{000c}::::LOOPWEIGHT=12826584
+B10: Succ={B11 } Pred={B9 B7 } Labels={L3 L12 }
+
+    lfs     f0,@173(r0); fIsConst
+    li      r0,1
+    lwz     r3,260(r31); fIsPtrOp
+    stfs    f0,64(r3); fIsPtrOp
+    lfs     f0,@174(r0); fIsConst
+    lwz     r3,260(r31); fIsPtrOp
+    stfs    f0,68(r3); fIsPtrOp
+    lfs     f0,@175(r0); fIsConst
+    lwz     r3,260(r31); fIsPtrOp
+    stfs    f0,72(r3); fIsPtrOp
+    lfs     f0,@176(r0); fIsConst
+    lwz     r3,260(r31); fIsPtrOp
+    stfs    f0,76(r3); fIsPtrOp
+    lfs     f0,@177(r0); fIsConst
+    lwz     r3,260(r31); fIsPtrOp
+    stfs    f0,80(r3); fIsPtrOp
+    lfs     f0,@178(r0); fIsConst
+    lwz     r3,260(r31); fIsPtrOp
+    stfs    f0,16(r3); fIsPtrOp
+    lwz     r3,260(r31); fIsPtrOp
+    stfs    f0,20(r3); fIsPtrOp
+    lwz     r3,260(r31); fIsPtrOp
+    stfs    f0,24(r3); fIsPtrOp
+    lwz     r5,260(r31); fIsPtrOp
+    lwz     r4,16(r5); fIsPtrOp
+    lwz     r3,20(r5); fIsPtrOp
+    stw     r4,28(r5); fIsPtrOp
+    stw     r3,32(r5); fIsPtrOp
+    lwz     r3,24(r5); fIsPtrOp
+    stw     r3,36(r5); fIsPtrOp
+    lwz     r3,260(r31); fIsPtrOp
+    stw     r0,8(r3); fIsPtrOp
+:{0006}::::LOOPWEIGHT=5020864
+B11: Succ={} Pred={B10 } Labels={L13 }
+
+    lwz     r0,28(r1); fIsPtrOp
+    lwz     r31,20(r1); fIsVolatile; fIsPtrOp
+    lwz     r30,16(r1); fIsVolatile; fIsPtrOp
+    addi    r1,r1,24; fSideEffects
+    mtlr    r0
+    blr     ; fIsLive
+
+AFTER MERGING EPILOGUE, PROLOGUE
+grOnett_801E3930
+:{0005}::::LOOPWEIGHT=17
+B0: Succ={B3 } Pred={} Labels={L0 }
+
+    mflr    r0
+    stw     r0,4(r1); fIsPtrOp
+    stwu    r1,-24(r1); fIsPtrOp
+    stw     r31,20(r1); fIsPtrOp
+    stw     r30,16(r1); fIsPtrOp
+    lwz     r31,44(r3); fIsPtrOp
+    lis     r3,HA(grOnett_801E54B4)
+    addi    r30,r3,LO(grOnett_801E54B4)
+    mr      r4,r31
+    mr      r5,r30
+    li      r3,0
+:{0004}::::LOOPWEIGHT=0
+B3: Succ={B4 } Pred={B0 } Labels={L4 }
+
+    bl      mpJointSetCb1; fLink
+:{0004}::::LOOPWEIGHT=12828328
+B4: Succ={B5 } Pred={B3 } Labels={L5 }
+
+    mr      r4,r31
+    mr      r5,r30
+    li      r3,1
+:{0004}::::LOOPWEIGHT=0
+B5: Succ={B6 } Pred={B4 } Labels={L6 }
+
+    bl      mpJointSetCb1; fLink
+:{0004}::::LOOPWEIGHT=524292
+B6: Succ={B7 } Pred={B5 } Labels={L8 L7 }
+
+    bl      Camera_80029020; fLink
+:{000c}::::LOOPWEIGHT=5023936
+B7: Succ={B8 B10 } Pred={B6 } Labels={L9 }
+
+    stw     r3,260(r31); fIsPtrOp
+    lwz     r0,260(r31); fIsPtrOp
+    cmpli   cr0,r0,0
+    bf      cr0,eq,B10
+:{0004}::::LOOPWEIGHT=-1
+B8: Succ={B9 } Pred={B7 } Labels={L10 }
+
+    lis     r3,HA(@161)
+    lis     r4,HA(@172)
+    addi    r3,r3,LO(@161)
+    addi    r5,r4,LO(@172)
+    li      r4,331
+:{0004}::::LOOPWEIGHT=12836088
+B9: Succ={B10 } Pred={B8 } Labels={L11 }
+
+    bl      __assert; fLink
+:{000c}::::LOOPWEIGHT=12826584
+B10: Succ={B11 } Pred={B9 B7 } Labels={L3 L12 }
+
+    lfs     f0,@173(r0); fIsConst
+    li      r0,1
+    lwz     r3,260(r31); fIsPtrOp
+    stfs    f0,64(r3); fIsPtrOp
+    lfs     f0,@174(r0); fIsConst
+    lwz     r3,260(r31); fIsPtrOp
+    stfs    f0,68(r3); fIsPtrOp
+    lfs     f0,@175(r0); fIsConst
+    lwz     r3,260(r31); fIsPtrOp
+    stfs    f0,72(r3); fIsPtrOp
+    lfs     f0,@176(r0); fIsConst
+    lwz     r3,260(r31); fIsPtrOp
+    stfs    f0,76(r3); fIsPtrOp
+    lfs     f0,@177(r0); fIsConst
+    lwz     r3,260(r31); fIsPtrOp
+    stfs    f0,80(r3); fIsPtrOp
+    lfs     f0,@178(r0); fIsConst
+    lwz     r3,260(r31); fIsPtrOp
+    stfs    f0,16(r3); fIsPtrOp
+    lwz     r3,260(r31); fIsPtrOp
+    stfs    f0,20(r3); fIsPtrOp
+    lwz     r3,260(r31); fIsPtrOp
+    stfs    f0,24(r3); fIsPtrOp
+    lwz     r5,260(r31); fIsPtrOp
+    lwz     r4,16(r5); fIsPtrOp
+    lwz     r3,20(r5); fIsPtrOp
+    stw     r4,28(r5); fIsPtrOp
+    stw     r3,32(r5); fIsPtrOp
+    lwz     r3,24(r5); fIsPtrOp
+    stw     r3,36(r5); fIsPtrOp
+    lwz     r3,260(r31); fIsPtrOp
+    stw     r0,8(r3); fIsPtrOp
+    lwz     r0,28(r1); fIsPtrOp
+    lwz     r31,20(r1); fIsVolatile; fIsPtrOp
+    lwz     r30,16(r1); fIsVolatile; fIsPtrOp
+:{0006}::::LOOPWEIGHT=5020864
+B11: Succ={} Pred={B10 } Labels={L13 }
+
+    addi    r1,r1,24; fSideEffects
+    mtlr    r0
+    blr     ; fIsLive
+
+AFTER PEEPHOLE OPTIMIZATION
+grOnett_801E3930
+:{0005}::::LOOPWEIGHT=17
+B0: Succ={B3 } Pred={} Labels={L0 }
+
+    mflr    r0
+    stw     r0,4(r1); fIsPtrOp
+    stwu    r1,-24(r1); fIsPtrOp
+    stw     r31,20(r1); fIsPtrOp
+    stw     r30,16(r1); fIsPtrOp
+    lwz     r31,44(r3); fIsPtrOp
+    lis     r3,HA(grOnett_801E54B4)
+    addi    r30,r3,LO(grOnett_801E54B4)
+    addi    r4,r31,0
+    addi    r5,r30,0
+    li      r3,0
+:{0004}::::LOOPWEIGHT=0
+B3: Succ={B4 } Pred={B0 } Labels={L4 }
+
+    bl      mpJointSetCb1; fLink
+:{0004}::::LOOPWEIGHT=12828328
+B4: Succ={B5 } Pred={B3 } Labels={L5 }
+
+    addi    r4,r31,0
+    addi    r5,r30,0
+    li      r3,1
+:{0004}::::LOOPWEIGHT=0
+B5: Succ={B6 } Pred={B4 } Labels={L6 }
+
+    bl      mpJointSetCb1; fLink
+:{0004}::::LOOPWEIGHT=524292
+B6: Succ={B7 } Pred={B5 } Labels={L8 L7 }
+
+    bl      Camera_80029020; fLink
+:{000c}::::LOOPWEIGHT=5023936
+B7: Succ={B8 B10 } Pred={B6 } Labels={L9 }
+
+    stw     r3,260(r31); fIsPtrOp
+    lwz     r0,260(r31); fIsPtrOp
+    cmpli   cr0,r0,0
+    bf      cr0,eq,B10
+:{0004}::::LOOPWEIGHT=-1
+B8: Succ={B9 } Pred={B7 } Labels={L10 }
+
+    lis     r3,HA(@161)
+    lis     r4,HA(@172)
+    addi    r3,r3,LO(@161)
+    addi    r5,r4,LO(@172)
+    li      r4,331
+:{0004}::::LOOPWEIGHT=12836088
+B9: Succ={B10 } Pred={B8 } Labels={L11 }
+
+    bl      __assert; fLink
+:{000c}::::LOOPWEIGHT=12826584
+B10: Succ={B11 } Pred={B9 B7 } Labels={L3 L12 }
+
+    lfs     f0,@173(r0); fIsConst
+    li      r0,1
+    lwz     r3,260(r31); fIsPtrOp
+    stfs    f0,64(r3); fIsPtrOp
+    lfs     f0,@174(r0); fIsConst
+    lwz     r3,260(r31); fIsPtrOp
+    stfs    f0,68(r3); fIsPtrOp
+    lfs     f0,@175(r0); fIsConst
+    lwz     r3,260(r31); fIsPtrOp
+    stfs    f0,72(r3); fIsPtrOp
+    lfs     f0,@176(r0); fIsConst
+    lwz     r3,260(r31); fIsPtrOp
+    stfs    f0,76(r3); fIsPtrOp
+    lfs     f0,@177(r0); fIsConst
+    lwz     r3,260(r31); fIsPtrOp
+    stfs    f0,80(r3); fIsPtrOp
+    lfs     f0,@178(r0); fIsConst
+    lwz     r3,260(r31); fIsPtrOp
+    stfs    f0,16(r3); fIsPtrOp
+    lwz     r3,260(r31); fIsPtrOp
+    stfs    f0,20(r3); fIsPtrOp
+    lwz     r3,260(r31); fIsPtrOp
+    stfs    f0,24(r3); fIsPtrOp
+    lwz     r5,260(r31); fIsPtrOp
+    lwz     r4,16(r5); fIsPtrOp
+    lwz     r3,20(r5); fIsPtrOp
+    stw     r4,28(r5); fIsPtrOp
+    stw     r3,32(r5); fIsPtrOp
+    lwz     r3,24(r5); fIsPtrOp
+    stw     r3,36(r5); fIsPtrOp
+    lwz     r3,260(r31); fIsPtrOp
+    stw     r0,8(r3); fIsPtrOp
+    lwz     r0,28(r1); fIsPtrOp
+    lwz     r31,20(r1); fIsVolatile; fIsPtrOp
+    lwz     r30,16(r1); fIsVolatile; fIsPtrOp
+:{0006}::::LOOPWEIGHT=5020864
+B11: Succ={} Pred={B10 } Labels={L13 }
+
+    addi    r1,r1,24; fSideEffects
+    mtlr    r0
+    blr     ; fIsLive
+
+FINAL CODE AFTER INSTRUCTION SCHEDULING
+grOnett_801E3930
+:{000d}::::LOOPWEIGHT=17
+B0: Succ={B3 } Pred={} Labels={L0 }
+
+    mflr    r0
+    stw     r0,4(r1); fIsPtrOp
+    stwu    r1,-24(r1); fIsPtrOp
+    stw     r31,20(r1); fIsPtrOp
+    stw     r30,16(r1); fIsPtrOp
+    lwz     r31,44(r3); fIsPtrOp
+    lis     r3,HA(grOnett_801E54B4)
+    addi    r30,r3,LO(grOnett_801E54B4)
+    addi    r4,r31,0
+    addi    r5,r30,0
+    li      r3,0
+:{0004}::::LOOPWEIGHT=0
+B3: Succ={B4 } Pred={B0 } Labels={L4 }
+
+    bl      mpJointSetCb1; fLink
+:{000c}::::LOOPWEIGHT=12828328
+B4: Succ={B5 } Pred={B3 } Labels={L5 }
+
+    addi    r4,r31,0
+    addi    r5,r30,0
+    li      r3,1
+:{0004}::::LOOPWEIGHT=0
+B5: Succ={B6 } Pred={B4 } Labels={L6 }
+
+    bl      mpJointSetCb1; fLink
+:{0004}::::LOOPWEIGHT=524292
+B6: Succ={B7 } Pred={B5 } Labels={L8 L7 }
+
+    bl      Camera_80029020; fLink
+:{000c}::::LOOPWEIGHT=5023936
+B7: Succ={B8 B10 } Pred={B6 } Labels={L9 }
+
+    stw     r3,260(r31); fIsPtrOp
+    lwz     r0,260(r31); fIsPtrOp
+    cmpli   cr0,r0,0
+    bf      cr0,eq,B10
+:{000c}::::LOOPWEIGHT=-1
+B8: Succ={B9 } Pred={B7 } Labels={L10 }
+
+    lis     r3,HA(@161)
+    lis     r4,HA(@172)
+    addi    r5,r4,LO(@172)
+    addi    r3,r3,LO(@161)
+    li      r4,331
+:{0004}::::LOOPWEIGHT=12836088
+B9: Succ={B10 } Pred={B8 } Labels={L11 }
+
+    bl      __assert; fLink
+:{000c}::::LOOPWEIGHT=12826584
+B10: Succ={B11 } Pred={B9 B7 } Labels={L3 L12 }
+
+    lfs     f0,@173(r0); fIsConst
+    li      r0,1
+    lwz     r3,260(r31); fIsPtrOp
+    stfs    f0,64(r3); fIsPtrOp
+    lfs     f0,@174(r0); fIsConst
+    lwz     r3,260(r31); fIsPtrOp
+    stfs    f0,68(r3); fIsPtrOp
+    lfs     f0,@175(r0); fIsConst
+    lwz     r3,260(r31); fIsPtrOp
+    stfs    f0,72(r3); fIsPtrOp
+    lfs     f0,@176(r0); fIsConst
+    lwz     r3,260(r31); fIsPtrOp
+    stfs    f0,76(r3); fIsPtrOp
+    lfs     f0,@177(r0); fIsConst
+    lwz     r3,260(r31); fIsPtrOp
+    stfs    f0,80(r3); fIsPtrOp
+    lfs     f0,@178(r0); fIsConst
+    lwz     r3,260(r31); fIsPtrOp
+    stfs    f0,16(r3); fIsPtrOp
+    lwz     r3,260(r31); fIsPtrOp
+    stfs    f0,20(r3); fIsPtrOp
+    lwz     r3,260(r31); fIsPtrOp
+    stfs    f0,24(r3); fIsPtrOp
+    lwz     r5,260(r31); fIsPtrOp
+    lwz     r4,16(r5); fIsPtrOp
+    lwz     r3,20(r5); fIsPtrOp
+    stw     r4,28(r5); fIsPtrOp
+    stw     r3,32(r5); fIsPtrOp
+    lwz     r3,24(r5); fIsPtrOp
+    stw     r3,36(r5); fIsPtrOp
+    lwz     r3,260(r31); fIsPtrOp
+    stw     r0,8(r3); fIsPtrOp
+    lwz     r0,28(r1); fIsPtrOp
+    lwz     r31,20(r1); fIsVolatile; fIsPtrOp
+    lwz     r30,16(r1); fIsVolatile; fIsPtrOp
+:{000e}::::LOOPWEIGHT=5020864
+B11: Succ={} Pred={B10 } Labels={L13 }
+
+    addi    r1,r1,24; fSideEffects
+    mtlr    r0
+    blr     ; fIsLive
+Starting function grOnett_801E3C58
+--------------------------------------------------------------------------------
+Removing unreachable code at: 1
+*****************
+Dumps for pass=0
+*****************
+*****************
+Dumps for pass=1
+*****************
+
+BEFORE GLOBAL OPTIMIZATION
+grOnett_801E3C58
+:{0005}::::LOOPWEIGHT=-912261119
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=195
+B1: Succ={B2 } Pred={B0 } Labels={L2 L1 }
+
+    li      r3,0
+:{0006}::::LOOPWEIGHT=4
+B2: Succ={} Pred={B1 } Labels={L3 }
+
+
+AFTER INSTRUCTION SCHEDULING
+grOnett_801E3C58
+:{0005}::::LOOPWEIGHT=-912261119
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=195
+B1: Succ={B2 } Pred={B0 } Labels={L2 L1 }
+
+    li      r3,0
+:{0006}::::LOOPWEIGHT=4
+B2: Succ={} Pred={B1 } Labels={L3 }
+
+
+AFTER PEEPHOLE FORWARD
+grOnett_801E3C58
+:{0005}::::LOOPWEIGHT=-912261119
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=195
+B1: Succ={B2 } Pred={B0 } Labels={L2 L1 }
+
+    li      r3,0
+:{0006}::::LOOPWEIGHT=4
+B2: Succ={} Pred={B1 } Labels={L3 }
+
+
+AFTER REGISTER COLORING
+grOnett_801E3C58
+:{0005}::::LOOPWEIGHT=-912261119
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=195
+B1: Succ={B2 } Pred={B0 } Labels={L2 L1 }
+
+    li      r3,0
+:{0006}::::LOOPWEIGHT=4
+B2: Succ={} Pred={B1 } Labels={L3 }
+
+
+AFTER GENERATING EPILOGUE, PROLOGUE
+grOnett_801E3C58
+:{0005}::::LOOPWEIGHT=-912261119
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=195
+B1: Succ={B2 } Pred={B0 } Labels={L2 L1 }
+
+    li      r3,0
+:{0006}::::LOOPWEIGHT=4
+B2: Succ={} Pred={B1 } Labels={L3 }
+
+    blr     ; fIsLive
+
+AFTER MERGING EPILOGUE, PROLOGUE
+grOnett_801E3C58
+:{0005}::::LOOPWEIGHT=-912261119
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=195
+B1: Succ={B2 } Pred={B0 } Labels={L2 L1 }
+
+    li      r3,0
+:{0006}::::LOOPWEIGHT=4
+B2: Succ={} Pred={B1 } Labels={L3 }
+
+    blr     ; fIsLive
+
+AFTER PEEPHOLE OPTIMIZATION
+grOnett_801E3C58
+:{0005}::::LOOPWEIGHT=-912261119
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=195
+B1: Succ={B2 } Pred={B0 } Labels={L2 L1 }
+
+    li      r3,0
+:{0006}::::LOOPWEIGHT=4
+B2: Succ={} Pred={B1 } Labels={L3 }
+
+    blr     ; fIsLive
+
+FINAL CODE AFTER INSTRUCTION SCHEDULING
+grOnett_801E3C58
+:{0005}::::LOOPWEIGHT=-912261119
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=195
+B1: Succ={B2 } Pred={B0 } Labels={L2 L1 }
+
+    li      r3,0
+:{0006}::::LOOPWEIGHT=4
+B2: Succ={} Pred={B1 } Labels={L3 }
+
+    blr     ; fIsLive
+Starting function grOnett_801E3C60
+--------------------------------------------------------------------------------
+Removing unreachable code at: 6
+*****************
+Dumps for pass=0
+*****************
+Found propagatable expression assignment at: 8
+Found propagatable expression assignment at: 14
+Found expression propagation at 67 from 8
+Removing dead assignment 8
+*****************
+Dumps for pass=1
+*****************
+Found propagatable expression assignment at: 19
+
+BEFORE GLOBAL OPTIMIZATION
+grOnett_801E3C60
+:{0005}::::LOOPWEIGHT=-168296448
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=4194304
+B1: Succ={B2 } Pred={B0 } Labels={L1 }
+
+    mr      r32,r3
+:{0004}::::LOOPWEIGHT=0
+B2: Succ={B3 } Pred={B1 } Labels={L2 }
+
+    lwz     r33,44(r32); fIsPtrOp
+:{0004}::::LOOPWEIGHT=-916979712
+B3: Succ={B4 } Pred={B2 } Labels={L5 }
+
+    bl      grOnett_801E5214; fLink
+:{0004}::::LOOPWEIGHT=0
+B4: Succ={B5 } Pred={B3 } Labels={L6 }
+
+    mr      r3,r32
+:{0004}::::LOOPWEIGHT=0
+B5: Succ={B6 } Pred={B4 } Labels={L7 }
+
+    bl      grOnett_801E5538; fLink
+:{0004}::::LOOPWEIGHT=195
+B6: Succ={B7 B11 } Pred={B5 } Labels={L8 }
+
+    lwz     r34,260(r33); fIsPtrOp
+    cmpli   cr0,r34,0
+    bt      cr0,eq,B11
+:{0004}::::LOOPWEIGHT=-904921088
+B7: Succ={B8 } Pred={B6 } Labels={L10 L9 }
+
+    bl      Ground_801C5794; fLink
+:{0004}::::LOOPWEIGHT=0
+B8: Succ={B9 B10 } Pred={B7 } Labels={L11 }
+
+    mr      r35,r3
+    cmpi    cr0,r35,0
+    bt      cr0,eq,B10
+:{0004}::::LOOPWEIGHT=-886046428
+B9: Succ={B11 } Pred={B8 } Labels={L12 }
+
+    li      r36,0
+    lwz     r37,260(r33); fIsPtrOp
+    stw     r36,8(r37); fIsPtrOp
+    b       B11
+:{0004}::::LOOPWEIGHT=0
+B10: Succ={B11 } Pred={B8 } Labels={L3 }
+
+    li      r38,1
+    lwz     r39,260(r33); fIsPtrOp
+    stw     r38,8(r39); fIsPtrOp
+:{0004}::::LOOPWEIGHT=-168296448
+B11: Succ={B12 } Pred={B10 B9 B6 } Labels={L13 L4 }
+
+    bl      lb_800115F4; fLink
+:{0004}::::LOOPWEIGHT=0
+B12: Succ={B13 } Pred={B11 } Labels={L14 }
+
+    mr      r3,r32
+:{0004}::::LOOPWEIGHT=1365245952
+B13: Succ={B14 } Pred={B12 } Labels={L15 }
+
+    bl      Ground_801C2FE0; fLink
+:{0004}::::LOOPWEIGHT=12836192
+B14: Succ={B15 } Pred={B13 } Labels={L16 }
+
+    mr      r40,r3
+:{0006}::::LOOPWEIGHT=0
+B15: Succ={} Pred={B14 } Labels={L17 }
+
+
+AFTER COPY PROPAGATION
+grOnett_801E3C60
+:{0005}::::LOOPWEIGHT=-168296448
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=4194304
+B1: Succ={B2 } Pred={B0 } Labels={L1 }
+
+    mr      r32,r3
+:{0004}::::LOOPWEIGHT=0
+B2: Succ={B3 } Pred={B1 } Labels={L2 }
+
+    lwz     r33,44(r32); fIsPtrOp
+:{0004}::::LOOPWEIGHT=-916979712
+B3: Succ={B4 } Pred={B2 } Labels={L5 }
+
+    bl      grOnett_801E5214; fLink
+:{0004}::::LOOPWEIGHT=0
+B4: Succ={B5 } Pred={B3 } Labels={L6 }
+
+    mr      r3,r32
+:{0004}::::LOOPWEIGHT=0
+B5: Succ={B6 } Pred={B4 } Labels={L7 }
+
+    bl      grOnett_801E5538; fLink
+:{0004}::::LOOPWEIGHT=195
+B6: Succ={B7 B11 } Pred={B5 } Labels={L8 }
+
+    lwz     r34,260(r33); fIsPtrOp
+    cmpli   cr0,r34,0
+    bt      cr0,eq,B11
+:{0004}::::LOOPWEIGHT=-904921088
+B7: Succ={B8 } Pred={B6 } Labels={L10 L9 }
+
+    bl      Ground_801C5794; fLink
+:{0004}::::LOOPWEIGHT=0
+B8: Succ={B9 B10 } Pred={B7 } Labels={L11 }
+
+    cmpi    cr0,r3,0
+    bt      cr0,eq,B10
+:{0004}::::LOOPWEIGHT=-886046428
+B9: Succ={B11 } Pred={B8 } Labels={L12 }
+
+    li      r36,0
+    lwz     r37,260(r33); fIsPtrOp
+    stw     r36,8(r37); fIsPtrOp
+    b       B11
+:{0004}::::LOOPWEIGHT=0
+B10: Succ={B11 } Pred={B8 } Labels={L3 }
+
+    li      r38,1
+    lwz     r39,260(r33); fIsPtrOp
+    stw     r38,8(r39); fIsPtrOp
+:{0004}::::LOOPWEIGHT=-168296448
+B11: Succ={B12 } Pred={B10 B9 B6 } Labels={L13 L4 }
+
+    bl      lb_800115F4; fLink
+:{0004}::::LOOPWEIGHT=0
+B12: Succ={B13 } Pred={B11 } Labels={L14 }
+
+    mr      r3,r32
+:{0004}::::LOOPWEIGHT=1365245952
+B13: Succ={B14 } Pred={B12 } Labels={L15 }
+
+    bl      Ground_801C2FE0; fLink
+:{0004}::::LOOPWEIGHT=12836192
+B14: Succ={B15 } Pred={B13 } Labels={L16 }
+
+:{0006}::::LOOPWEIGHT=0
+B15: Succ={} Pred={B14 } Labels={L17 }
+
+
+AFTER INSTRUCTION SCHEDULING
+grOnett_801E3C60
+:{0005}::::LOOPWEIGHT=-168296448
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=4194304
+B1: Succ={B3 } Pred={B0 } Labels={L1 }
+
+    mr      r32,r3
+    lwz     r33,44(r32); fIsPtrOp
+:{0004}::::LOOPWEIGHT=-916979712
+B3: Succ={B4 } Pred={B1 } Labels={L5 }
+
+    bl      grOnett_801E5214; fLink
+:{0004}::::LOOPWEIGHT=0
+B4: Succ={B5 } Pred={B3 } Labels={L6 }
+
+    mr      r3,r32
+:{0004}::::LOOPWEIGHT=0
+B5: Succ={B6 } Pred={B4 } Labels={L7 }
+
+    bl      grOnett_801E5538; fLink
+:{000c}::::LOOPWEIGHT=195
+B6: Succ={B7 B11 } Pred={B5 } Labels={L8 }
+
+    lwz     r34,260(r33); fIsPtrOp
+    cmpli   cr0,r34,0
+    bt      cr0,eq,B11
+:{0004}::::LOOPWEIGHT=-904921088
+B7: Succ={B8 } Pred={B6 } Labels={L10 L9 }
+
+    bl      Ground_801C5794; fLink
+:{0004}::::LOOPWEIGHT=0
+B8: Succ={B9 B10 } Pred={B7 } Labels={L11 }
+
+    cmpi    cr0,r3,0
+    bt      cr0,eq,B10
+:{000c}::::LOOPWEIGHT=-886046428
+B9: Succ={B11 } Pred={B8 } Labels={L12 }
+
+    lwz     r37,260(r33); fIsPtrOp
+    li      r36,0
+    stw     r36,8(r37); fIsPtrOp
+    b       B11
+:{000c}::::LOOPWEIGHT=0
+B10: Succ={B11 } Pred={B8 } Labels={L3 }
+
+    lwz     r39,260(r33); fIsPtrOp
+    li      r38,1
+    stw     r38,8(r39); fIsPtrOp
+:{0004}::::LOOPWEIGHT=-168296448
+B11: Succ={B12 } Pred={B10 B9 B6 } Labels={L13 L4 }
+
+    bl      lb_800115F4; fLink
+:{0004}::::LOOPWEIGHT=0
+B12: Succ={B13 } Pred={B11 } Labels={L14 }
+
+    mr      r3,r32
+:{0004}::::LOOPWEIGHT=1365245952
+B13: Succ={B14 } Pred={B12 } Labels={L15 }
+
+    bl      Ground_801C2FE0; fLink
+:{0004}::::LOOPWEIGHT=12836192
+B14: Succ={B15 } Pred={B13 } Labels={L16 }
+
+:{0006}::::LOOPWEIGHT=0
+B15: Succ={} Pred={B14 } Labels={L17 }
+
+
+AFTER PEEPHOLE FORWARD
+grOnett_801E3C60
+:{0005}::::LOOPWEIGHT=-168296448
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=4194304
+B1: Succ={B3 } Pred={B0 } Labels={L1 }
+
+    mr      r32,r3
+    lwz     r33,44(r32); fIsPtrOp
+:{0004}::::LOOPWEIGHT=-916979712
+B3: Succ={B4 } Pred={B1 } Labels={L5 }
+
+    bl      grOnett_801E5214; fLink
+:{0004}::::LOOPWEIGHT=0
+B4: Succ={B5 } Pred={B3 } Labels={L6 }
+
+    mr      r3,r32
+:{0004}::::LOOPWEIGHT=0
+B5: Succ={B6 } Pred={B4 } Labels={L7 }
+
+    bl      grOnett_801E5538; fLink
+:{000c}::::LOOPWEIGHT=195
+B6: Succ={B7 B11 } Pred={B5 } Labels={L8 }
+
+    lwz     r34,260(r33); fIsPtrOp
+    cmpli   cr0,r34,0
+    bt      cr0,eq,B11
+:{0004}::::LOOPWEIGHT=-904921088
+B7: Succ={B8 } Pred={B6 } Labels={L10 L9 }
+
+    bl      Ground_801C5794; fLink
+:{0004}::::LOOPWEIGHT=0
+B8: Succ={B9 B10 } Pred={B7 } Labels={L11 }
+
+    cmpi    cr0,r3,0
+    bt      cr0,eq,B10
+:{000c}::::LOOPWEIGHT=-886046428
+B9: Succ={B11 } Pred={B8 } Labels={L12 }
+
+    lwz     r37,260(r33); fIsPtrOp
+    li      r36,0
+    stw     r36,8(r37); fIsPtrOp
+    b       B11
+:{000c}::::LOOPWEIGHT=0
+B10: Succ={B11 } Pred={B8 } Labels={L3 }
+
+    lwz     r39,260(r33); fIsPtrOp
+    li      r38,1
+    stw     r38,8(r39); fIsPtrOp
+:{0004}::::LOOPWEIGHT=-168296448
+B11: Succ={B12 } Pred={B10 B9 B6 } Labels={L13 L4 }
+
+    bl      lb_800115F4; fLink
+:{0004}::::LOOPWEIGHT=0
+B12: Succ={B13 } Pred={B11 } Labels={L14 }
+
+    mr      r3,r32
+:{0004}::::LOOPWEIGHT=1365245952
+B13: Succ={B14 } Pred={B12 } Labels={L15 }
+
+    bl      Ground_801C2FE0; fLink
+:{0004}::::LOOPWEIGHT=12836192
+B14: Succ={B15 } Pred={B13 } Labels={L16 }
+
+:{0006}::::LOOPWEIGHT=0
+B15: Succ={} Pred={B14 } Labels={L17 }
+
+
+AFTER REGISTER COLORING
+grOnett_801E3C60
+:{0005}::::LOOPWEIGHT=-168296448
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=4194304
+B1: Succ={B3 } Pred={B0 } Labels={L1 }
+
+    mr      r30,r3
+    lwz     r31,44(r30); fIsPtrOp
+:{0004}::::LOOPWEIGHT=-916979712
+B3: Succ={B4 } Pred={B1 } Labels={L5 }
+
+    bl      grOnett_801E5214; fLink
+:{0004}::::LOOPWEIGHT=0
+B4: Succ={B5 } Pred={B3 } Labels={L6 }
+
+    mr      r3,r30
+:{0004}::::LOOPWEIGHT=0
+B5: Succ={B6 } Pred={B4 } Labels={L7 }
+
+    bl      grOnett_801E5538; fLink
+:{000c}::::LOOPWEIGHT=195
+B6: Succ={B7 B11 } Pred={B5 } Labels={L8 }
+
+    lwz     r0,260(r31); fIsPtrOp
+    cmpli   cr0,r0,0
+    bt      cr0,eq,B11
+:{0004}::::LOOPWEIGHT=-904921088
+B7: Succ={B8 } Pred={B6 } Labels={L10 L9 }
+
+    bl      Ground_801C5794; fLink
+:{0004}::::LOOPWEIGHT=0
+B8: Succ={B9 B10 } Pred={B7 } Labels={L11 }
+
+    cmpi    cr0,r3,0
+    bt      cr0,eq,B10
+:{000c}::::LOOPWEIGHT=-886046428
+B9: Succ={B11 } Pred={B8 } Labels={L12 }
+
+    lwz     r3,260(r31); fIsPtrOp
+    li      r0,0
+    stw     r0,8(r3); fIsPtrOp
+    b       B11
+:{000c}::::LOOPWEIGHT=0
+B10: Succ={B11 } Pred={B8 } Labels={L3 }
+
+    lwz     r3,260(r31); fIsPtrOp
+    li      r0,1
+    stw     r0,8(r3); fIsPtrOp
+:{0004}::::LOOPWEIGHT=-168296448
+B11: Succ={B12 } Pred={B10 B9 B6 } Labels={L13 L4 }
+
+    bl      lb_800115F4; fLink
+:{0004}::::LOOPWEIGHT=0
+B12: Succ={B13 } Pred={B11 } Labels={L14 }
+
+    mr      r3,r30
+:{0004}::::LOOPWEIGHT=1365245952
+B13: Succ={B14 } Pred={B12 } Labels={L15 }
+
+    bl      Ground_801C2FE0; fLink
+:{0004}::::LOOPWEIGHT=12836192
+B14: Succ={B15 } Pred={B13 } Labels={L16 }
+
+:{0006}::::LOOPWEIGHT=0
+B15: Succ={} Pred={B14 } Labels={L17 }
+
+
+AFTER GENERATING EPILOGUE, PROLOGUE
+grOnett_801E3C60
+:{0005}::::LOOPWEIGHT=-168296448
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+    mflr    r0
+    stw     r0,4(r1); fIsPtrOp
+    stwu    r1,-32(r1); fIsPtrOp
+    stw     r31,28(r1); fIsPtrOp
+    stw     r30,24(r1); fIsPtrOp
+:{0004}::::LOOPWEIGHT=4194304
+B1: Succ={B3 } Pred={B0 } Labels={L1 }
+
+    mr      r30,r3
+    lwz     r31,44(r30); fIsPtrOp
+:{0004}::::LOOPWEIGHT=-916979712
+B3: Succ={B4 } Pred={B1 } Labels={L5 }
+
+    bl      grOnett_801E5214; fLink
+:{0004}::::LOOPWEIGHT=0
+B4: Succ={B5 } Pred={B3 } Labels={L6 }
+
+    mr      r3,r30
+:{0004}::::LOOPWEIGHT=0
+B5: Succ={B6 } Pred={B4 } Labels={L7 }
+
+    bl      grOnett_801E5538; fLink
+:{000c}::::LOOPWEIGHT=195
+B6: Succ={B7 B11 } Pred={B5 } Labels={L8 }
+
+    lwz     r0,260(r31); fIsPtrOp
+    cmpli   cr0,r0,0
+    bt      cr0,eq,B11
+:{0004}::::LOOPWEIGHT=-904921088
+B7: Succ={B8 } Pred={B6 } Labels={L10 L9 }
+
+    bl      Ground_801C5794; fLink
+:{0004}::::LOOPWEIGHT=0
+B8: Succ={B9 B10 } Pred={B7 } Labels={L11 }
+
+    cmpi    cr0,r3,0
+    bt      cr0,eq,B10
+:{000c}::::LOOPWEIGHT=-886046428
+B9: Succ={B11 } Pred={B8 } Labels={L12 }
+
+    lwz     r3,260(r31); fIsPtrOp
+    li      r0,0
+    stw     r0,8(r3); fIsPtrOp
+    b       B11
+:{000c}::::LOOPWEIGHT=0
+B10: Succ={B11 } Pred={B8 } Labels={L3 }
+
+    lwz     r3,260(r31); fIsPtrOp
+    li      r0,1
+    stw     r0,8(r3); fIsPtrOp
+:{0004}::::LOOPWEIGHT=-168296448
+B11: Succ={B12 } Pred={B10 B9 B6 } Labels={L13 L4 }
+
+    bl      lb_800115F4; fLink
+:{0004}::::LOOPWEIGHT=0
+B12: Succ={B13 } Pred={B11 } Labels={L14 }
+
+    mr      r3,r30
+:{0004}::::LOOPWEIGHT=1365245952
+B13: Succ={B14 } Pred={B12 } Labels={L15 }
+
+    bl      Ground_801C2FE0; fLink
+:{0004}::::LOOPWEIGHT=12836192
+B14: Succ={B15 } Pred={B13 } Labels={L16 }
+
+:{0006}::::LOOPWEIGHT=0
+B15: Succ={} Pred={B14 } Labels={L17 }
+
+    lwz     r0,36(r1); fIsPtrOp
+    lwz     r31,28(r1); fIsVolatile; fIsPtrOp
+    lwz     r30,24(r1); fIsVolatile; fIsPtrOp
+    addi    r1,r1,32; fSideEffects
+    mtlr    r0
+    blr     ; fIsLive
+
+AFTER MERGING EPILOGUE, PROLOGUE
+grOnett_801E3C60
+:{0005}::::LOOPWEIGHT=-168296448
+B0: Succ={B3 } Pred={} Labels={L0 }
+
+    mflr    r0
+    stw     r0,4(r1); fIsPtrOp
+    stwu    r1,-32(r1); fIsPtrOp
+    stw     r31,28(r1); fIsPtrOp
+    stw     r30,24(r1); fIsPtrOp
+    mr      r30,r3
+    lwz     r31,44(r30); fIsPtrOp
+:{0004}::::LOOPWEIGHT=-916979712
+B3: Succ={B4 } Pred={B0 } Labels={L5 }
+
+    bl      grOnett_801E5214; fLink
+:{0004}::::LOOPWEIGHT=0
+B4: Succ={B5 } Pred={B3 } Labels={L6 }
+
+    mr      r3,r30
+:{0004}::::LOOPWEIGHT=0
+B5: Succ={B6 } Pred={B4 } Labels={L7 }
+
+    bl      grOnett_801E5538; fLink
+:{000c}::::LOOPWEIGHT=195
+B6: Succ={B7 B11 } Pred={B5 } Labels={L8 }
+
+    lwz     r0,260(r31); fIsPtrOp
+    cmpli   cr0,r0,0
+    bt      cr0,eq,B11
+:{0004}::::LOOPWEIGHT=-904921088
+B7: Succ={B8 } Pred={B6 } Labels={L10 L9 }
+
+    bl      Ground_801C5794; fLink
+:{0004}::::LOOPWEIGHT=0
+B8: Succ={B9 B10 } Pred={B7 } Labels={L11 }
+
+    cmpi    cr0,r3,0
+    bt      cr0,eq,B10
+:{000c}::::LOOPWEIGHT=-886046428
+B9: Succ={B11 } Pred={B8 } Labels={L12 }
+
+    lwz     r3,260(r31); fIsPtrOp
+    li      r0,0
+    stw     r0,8(r3); fIsPtrOp
+    b       B11
+:{000c}::::LOOPWEIGHT=0
+B10: Succ={B11 } Pred={B8 } Labels={L3 }
+
+    lwz     r3,260(r31); fIsPtrOp
+    li      r0,1
+    stw     r0,8(r3); fIsPtrOp
+:{0004}::::LOOPWEIGHT=-168296448
+B11: Succ={B12 } Pred={B10 B9 B6 } Labels={L13 L4 }
+
+    bl      lb_800115F4; fLink
+:{0004}::::LOOPWEIGHT=0
+B12: Succ={B13 } Pred={B11 } Labels={L14 }
+
+    mr      r3,r30
+:{0004}::::LOOPWEIGHT=1365245952
+B13: Succ={B14 } Pred={B12 } Labels={L15 }
+
+    bl      Ground_801C2FE0; fLink
+:{0004}::::LOOPWEIGHT=12836192
+B14: Succ={B15 } Pred={B13 } Labels={L16 }
+
+:{0006}::::LOOPWEIGHT=0
+B15: Succ={} Pred={B14 } Labels={L17 }
+
+    lwz     r0,36(r1); fIsPtrOp
+    lwz     r31,28(r1); fIsVolatile; fIsPtrOp
+    lwz     r30,24(r1); fIsVolatile; fIsPtrOp
+    addi    r1,r1,32; fSideEffects
+    mtlr    r0
+    blr     ; fIsLive
+
+AFTER PEEPHOLE OPTIMIZATION
+grOnett_801E3C60
+:{0005}::::LOOPWEIGHT=-168296448
+B0: Succ={B3 } Pred={} Labels={L0 }
+
+    mflr    r0
+    stw     r0,4(r1); fIsPtrOp
+    stwu    r1,-32(r1); fIsPtrOp
+    stw     r31,28(r1); fIsPtrOp
+    stw     r30,24(r1); fIsPtrOp
+    mr      r30,r3
+    lwz     r31,44(r3); fIsPtrOp
+:{0004}::::LOOPWEIGHT=-916979712
+B3: Succ={B4 } Pred={B0 } Labels={L5 }
+
+    bl      grOnett_801E5214; fLink
+:{0004}::::LOOPWEIGHT=0
+B4: Succ={B5 } Pred={B3 } Labels={L6 }
+
+    mr      r3,r30
+:{0004}::::LOOPWEIGHT=0
+B5: Succ={B6 } Pred={B4 } Labels={L7 }
+
+    bl      grOnett_801E5538; fLink
+:{000c}::::LOOPWEIGHT=195
+B6: Succ={B7 B11 } Pred={B5 } Labels={L8 }
+
+    lwz     r0,260(r31); fIsPtrOp
+    cmpli   cr0,r0,0
+    bt      cr0,eq,B11
+:{0004}::::LOOPWEIGHT=-904921088
+B7: Succ={B8 } Pred={B6 } Labels={L10 L9 }
+
+    bl      Ground_801C5794; fLink
+:{0004}::::LOOPWEIGHT=0
+B8: Succ={B9 B10 } Pred={B7 } Labels={L11 }
+
+    cmpi    cr0,r3,0
+    bt      cr0,eq,B10
+:{000c}::::LOOPWEIGHT=-886046428
+B9: Succ={B11 } Pred={B8 } Labels={L12 }
+
+    lwz     r3,260(r31); fIsPtrOp
+    li      r0,0
+    stw     r0,8(r3); fIsPtrOp
+    b       B11
+:{000c}::::LOOPWEIGHT=0
+B10: Succ={B11 } Pred={B8 } Labels={L3 }
+
+    lwz     r3,260(r31); fIsPtrOp
+    li      r0,1
+    stw     r0,8(r3); fIsPtrOp
+:{0004}::::LOOPWEIGHT=-168296448
+B11: Succ={B12 } Pred={B10 B9 B6 } Labels={L13 L4 }
+
+    bl      lb_800115F4; fLink
+:{0004}::::LOOPWEIGHT=0
+B12: Succ={B13 } Pred={B11 } Labels={L14 }
+
+    mr      r3,r30
+:{0004}::::LOOPWEIGHT=1365245952
+B13: Succ={B14 } Pred={B12 } Labels={L15 }
+
+    bl      Ground_801C2FE0; fLink
+:{0004}::::LOOPWEIGHT=12836192
+B14: Succ={B15 } Pred={B13 } Labels={L16 }
+
+:{0006}::::LOOPWEIGHT=0
+B15: Succ={} Pred={B14 } Labels={L17 }
+
+    lwz     r0,36(r1); fIsPtrOp
+    lwz     r31,28(r1); fIsVolatile; fIsPtrOp
+    lwz     r30,24(r1); fIsVolatile; fIsPtrOp
+    addi    r1,r1,32; fSideEffects
+    mtlr    r0
+    blr     ; fIsLive
+
+FINAL CODE AFTER INSTRUCTION SCHEDULING
+grOnett_801E3C60
+:{000d}::::LOOPWEIGHT=-168296448
+B0: Succ={B3 } Pred={} Labels={L0 }
+
+    mflr    r0
+    stw     r0,4(r1); fIsPtrOp
+    stwu    r1,-32(r1); fIsPtrOp
+    stw     r31,28(r1); fIsPtrOp
+    stw     r30,24(r1); fIsPtrOp
+    mr      r30,r3
+    lwz     r31,44(r3); fIsPtrOp
+:{0004}::::LOOPWEIGHT=-916979712
+B3: Succ={B4 } Pred={B0 } Labels={L5 }
+
+    bl      grOnett_801E5214; fLink
+:{0004}::::LOOPWEIGHT=0
+B4: Succ={B5 } Pred={B3 } Labels={L6 }
+
+    mr      r3,r30
+:{0004}::::LOOPWEIGHT=0
+B5: Succ={B6 } Pred={B4 } Labels={L7 }
+
+    bl      grOnett_801E5538; fLink
+:{000c}::::LOOPWEIGHT=195
+B6: Succ={B7 B11 } Pred={B5 } Labels={L8 }
+
+    lwz     r0,260(r31); fIsPtrOp
+    cmpli   cr0,r0,0
+    bt      cr0,eq,B11
+:{0004}::::LOOPWEIGHT=-904921088
+B7: Succ={B8 } Pred={B6 } Labels={L10 L9 }
+
+    bl      Ground_801C5794; fLink
+:{0004}::::LOOPWEIGHT=0
+B8: Succ={B9 B10 } Pred={B7 } Labels={L11 }
+
+    cmpi    cr0,r3,0
+    bt      cr0,eq,B10
+:{000c}::::LOOPWEIGHT=-886046428
+B9: Succ={B11 } Pred={B8 } Labels={L12 }
+
+    lwz     r3,260(r31); fIsPtrOp
+    li      r0,0
+    stw     r0,8(r3); fIsPtrOp
+    b       B11
+:{000c}::::LOOPWEIGHT=0
+B10: Succ={B11 } Pred={B8 } Labels={L3 }
+
+    lwz     r3,260(r31); fIsPtrOp
+    li      r0,1
+    stw     r0,8(r3); fIsPtrOp
+:{0004}::::LOOPWEIGHT=-168296448
+B11: Succ={B12 } Pred={B10 B9 B6 } Labels={L13 L4 }
+
+    bl      lb_800115F4; fLink
+:{0004}::::LOOPWEIGHT=0
+B12: Succ={B13 } Pred={B11 } Labels={L14 }
+
+    mr      r3,r30
+:{0004}::::LOOPWEIGHT=1365245952
+B13: Succ={B14 } Pred={B12 } Labels={L15 }
+
+    bl      Ground_801C2FE0; fLink
+:{0004}::::LOOPWEIGHT=12836192
+B14: Succ={B15 } Pred={B13 } Labels={L16 }
+
+:{000e}::::LOOPWEIGHT=0
+B15: Succ={} Pred={B14 } Labels={L17 }
+
+    lwz     r0,36(r1); fIsPtrOp
+    lwz     r31,28(r1); fIsVolatile; fIsPtrOp
+    lwz     r30,24(r1); fIsVolatile; fIsPtrOp
+    addi    r1,r1,32; fSideEffects
+    mtlr    r0
+    blr     ; fIsLive
+Starting function grOnett_801E3CE0
+--------------------------------------------------------------------------------
+Removing unreachable code at: 1
+*****************
+Dumps for pass=0
+*****************
+*****************
+Dumps for pass=1
+*****************
+
+BEFORE GLOBAL OPTIMIZATION
+grOnett_801E3CE0
+:{0005}::::LOOPWEIGHT=0
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0006}::::LOOPWEIGHT=149
+B1: Succ={} Pred={B0 } Labels={L3 L2 L1 }
+
+
+AFTER INSTRUCTION SCHEDULING
+grOnett_801E3CE0
+:{0005}::::LOOPWEIGHT=0
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0006}::::LOOPWEIGHT=149
+B1: Succ={} Pred={B0 } Labels={L3 L2 L1 }
+
+
+AFTER PEEPHOLE FORWARD
+grOnett_801E3CE0
+:{0005}::::LOOPWEIGHT=0
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0006}::::LOOPWEIGHT=149
+B1: Succ={} Pred={B0 } Labels={L3 L2 L1 }
+
+
+AFTER REGISTER COLORING
+grOnett_801E3CE0
+:{0005}::::LOOPWEIGHT=0
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0006}::::LOOPWEIGHT=149
+B1: Succ={} Pred={B0 } Labels={L3 L2 L1 }
+
+
+AFTER GENERATING EPILOGUE, PROLOGUE
+grOnett_801E3CE0
+:{0005}::::LOOPWEIGHT=0
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0006}::::LOOPWEIGHT=149
+B1: Succ={} Pred={B0 } Labels={L3 L2 L1 }
+
+    blr     ; fIsLive
+
+AFTER MERGING EPILOGUE, PROLOGUE
+grOnett_801E3CE0
+:{0005}::::LOOPWEIGHT=0
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0006}::::LOOPWEIGHT=149
+B1: Succ={} Pred={B0 } Labels={L3 L2 L1 }
+
+    blr     ; fIsLive
+
+AFTER PEEPHOLE OPTIMIZATION
+grOnett_801E3CE0
+:{0005}::::LOOPWEIGHT=0
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0006}::::LOOPWEIGHT=149
+B1: Succ={} Pred={B0 } Labels={L3 L2 L1 }
+
+    blr     ; fIsLive
+
+FINAL CODE AFTER INSTRUCTION SCHEDULING
+grOnett_801E3CE0
+:{0005}::::LOOPWEIGHT=0
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0006}::::LOOPWEIGHT=149
+B1: Succ={} Pred={B0 } Labels={L3 L2 L1 }
+
+    blr     ; fIsLive
+Starting function grOnett_801E3D98
+--------------------------------------------------------------------------------
+Removing unreachable code at: 1
+*****************
+Dumps for pass=0
+*****************
+*****************
+Dumps for pass=1
+*****************
+
+BEFORE GLOBAL OPTIMIZATION
+grOnett_801E3D98
+:{0005}::::LOOPWEIGHT=1
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=0
+B1: Succ={B2 } Pred={B0 } Labels={L2 L1 }
+
+    li      r3,0
+:{0006}::::LOOPWEIGHT=-576716800
+B2: Succ={} Pred={B1 } Labels={L3 }
+
+
+AFTER INSTRUCTION SCHEDULING
+grOnett_801E3D98
+:{0005}::::LOOPWEIGHT=1
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=0
+B1: Succ={B2 } Pred={B0 } Labels={L2 L1 }
+
+    li      r3,0
+:{0006}::::LOOPWEIGHT=-576716800
+B2: Succ={} Pred={B1 } Labels={L3 }
+
+
+AFTER PEEPHOLE FORWARD
+grOnett_801E3D98
+:{0005}::::LOOPWEIGHT=1
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=0
+B1: Succ={B2 } Pred={B0 } Labels={L2 L1 }
+
+    li      r3,0
+:{0006}::::LOOPWEIGHT=-576716800
+B2: Succ={} Pred={B1 } Labels={L3 }
+
+
+AFTER REGISTER COLORING
+grOnett_801E3D98
+:{0005}::::LOOPWEIGHT=1
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=0
+B1: Succ={B2 } Pred={B0 } Labels={L2 L1 }
+
+    li      r3,0
+:{0006}::::LOOPWEIGHT=-576716800
+B2: Succ={} Pred={B1 } Labels={L3 }
+
+
+AFTER GENERATING EPILOGUE, PROLOGUE
+grOnett_801E3D98
+:{0005}::::LOOPWEIGHT=1
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=0
+B1: Succ={B2 } Pred={B0 } Labels={L2 L1 }
+
+    li      r3,0
+:{0006}::::LOOPWEIGHT=-576716800
+B2: Succ={} Pred={B1 } Labels={L3 }
+
+    blr     ; fIsLive
+
+AFTER MERGING EPILOGUE, PROLOGUE
+grOnett_801E3D98
+:{0005}::::LOOPWEIGHT=1
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=0
+B1: Succ={B2 } Pred={B0 } Labels={L2 L1 }
+
+    li      r3,0
+:{0006}::::LOOPWEIGHT=-576716800
+B2: Succ={} Pred={B1 } Labels={L3 }
+
+    blr     ; fIsLive
+
+AFTER PEEPHOLE OPTIMIZATION
+grOnett_801E3D98
+:{0005}::::LOOPWEIGHT=1
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=0
+B1: Succ={B2 } Pred={B0 } Labels={L2 L1 }
+
+    li      r3,0
+:{0006}::::LOOPWEIGHT=-576716800
+B2: Succ={} Pred={B1 } Labels={L3 }
+
+    blr     ; fIsLive
+
+FINAL CODE AFTER INSTRUCTION SCHEDULING
+grOnett_801E3D98
+:{0005}::::LOOPWEIGHT=1
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=0
+B1: Succ={B2 } Pred={B0 } Labels={L2 L1 }
+
+    li      r3,0
+:{0006}::::LOOPWEIGHT=-576716800
+B2: Succ={} Pred={B1 } Labels={L3 }
+
+    blr     ; fIsLive
+Starting function grOnett_801E40E0
+--------------------------------------------------------------------------------
+Removing unreachable code at: 1
+*****************
+Dumps for pass=0
+*****************
+*****************
+Dumps for pass=1
+*****************
+
+BEFORE GLOBAL OPTIMIZATION
+grOnett_801E40E0
+:{0005}::::LOOPWEIGHT=10878976
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0006}::::LOOPWEIGHT=327680
+B1: Succ={} Pred={B0 } Labels={L3 L2 L1 }
+
+
+AFTER INSTRUCTION SCHEDULING
+grOnett_801E40E0
+:{0005}::::LOOPWEIGHT=10878976
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0006}::::LOOPWEIGHT=327680
+B1: Succ={} Pred={B0 } Labels={L3 L2 L1 }
+
+
+AFTER PEEPHOLE FORWARD
+grOnett_801E40E0
+:{0005}::::LOOPWEIGHT=10878976
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0006}::::LOOPWEIGHT=327680
+B1: Succ={} Pred={B0 } Labels={L3 L2 L1 }
+
+
+AFTER REGISTER COLORING
+grOnett_801E40E0
+:{0005}::::LOOPWEIGHT=10878976
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0006}::::LOOPWEIGHT=327680
+B1: Succ={} Pred={B0 } Labels={L3 L2 L1 }
+
+
+AFTER GENERATING EPILOGUE, PROLOGUE
+grOnett_801E40E0
+:{0005}::::LOOPWEIGHT=10878976
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0006}::::LOOPWEIGHT=327680
+B1: Succ={} Pred={B0 } Labels={L3 L2 L1 }
+
+    blr     ; fIsLive
+
+AFTER MERGING EPILOGUE, PROLOGUE
+grOnett_801E40E0
+:{0005}::::LOOPWEIGHT=10878976
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0006}::::LOOPWEIGHT=327680
+B1: Succ={} Pred={B0 } Labels={L3 L2 L1 }
+
+    blr     ; fIsLive
+
+AFTER PEEPHOLE OPTIMIZATION
+grOnett_801E40E0
+:{0005}::::LOOPWEIGHT=10878976
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0006}::::LOOPWEIGHT=327680
+B1: Succ={} Pred={B0 } Labels={L3 L2 L1 }
+
+    blr     ; fIsLive
+
+FINAL CODE AFTER INSTRUCTION SCHEDULING
+grOnett_801E40E0
+:{0005}::::LOOPWEIGHT=10878976
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0006}::::LOOPWEIGHT=327680
+B1: Succ={} Pred={B0 } Labels={L3 L2 L1 }
+
+    blr     ; fIsLive
+Starting function grOnett_801E41B0
+--------------------------------------------------------------------------------
+Removing unreachable code at: 1
+*****************
+Dumps for pass=0
+*****************
+Found propagatable expression assignment at: 8
+Found expression propagation at 21 from 8
+Removing dead assignment 8
+*****************
+Dumps for pass=1
+*****************
+
+BEFORE GLOBAL OPTIMIZATION
+grOnett_801E41B0
+:{0005}::::LOOPWEIGHT=0
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=257
+B1: Succ={B2 } Pred={B0 } Labels={L1 }
+
+    mr      r32,r3
+:{0004}::::LOOPWEIGHT=0
+B2: Succ={B3 } Pred={B1 } Labels={L2 }
+
+    li      r33,0
+    lwz     r34,44(r32); fIsPtrOp
+    lbz     r35,196(r34); fIsPtrOp
+    rlwimi  r35,r33,7,24,24
+    stb     r35,196(r34); fIsPtrOp
+:{0006}::::LOOPWEIGHT=17039360
+B3: Succ={} Pred={B2 } Labels={L3 }
+
+
+AFTER COPY PROPAGATION
+grOnett_801E41B0
+:{0005}::::LOOPWEIGHT=0
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=257
+B1: Succ={B2 } Pred={B0 } Labels={L1 }
+
+:{0004}::::LOOPWEIGHT=0
+B2: Succ={B3 } Pred={B1 } Labels={L2 }
+
+    li      r33,0
+    lwz     r34,44(r3); fIsPtrOp
+    lbz     r35,196(r34); fIsPtrOp
+    rlwimi  r35,r33,7,24,24
+    stb     r35,196(r34); fIsPtrOp
+:{0006}::::LOOPWEIGHT=17039360
+B3: Succ={} Pred={B2 } Labels={L3 }
+
+
+AFTER INSTRUCTION SCHEDULING
+grOnett_801E41B0
+:{0005}::::LOOPWEIGHT=0
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=257
+B1: Succ={B2 } Pred={B0 } Labels={L1 }
+
+:{000c}::::LOOPWEIGHT=0
+B2: Succ={B3 } Pred={B1 } Labels={L2 }
+
+    lwz     r34,44(r3); fIsPtrOp
+    li      r33,0
+    lbz     r35,196(r34); fIsPtrOp
+    rlwimi  r35,r33,7,24,24
+    stb     r35,196(r34); fIsPtrOp
+:{0006}::::LOOPWEIGHT=17039360
+B3: Succ={} Pred={B2 } Labels={L3 }
+
+
+AFTER PEEPHOLE FORWARD
+grOnett_801E41B0
+:{0005}::::LOOPWEIGHT=0
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=257
+B1: Succ={B2 } Pred={B0 } Labels={L1 }
+
+:{000c}::::LOOPWEIGHT=0
+B2: Succ={B3 } Pred={B1 } Labels={L2 }
+
+    lwz     r34,44(r3); fIsPtrOp
+    li      r33,0
+    lbz     r35,196(r34); fIsPtrOp
+    rlwimi  r35,r33,7,24,24
+    stb     r35,196(r34); fIsPtrOp
+:{0006}::::LOOPWEIGHT=17039360
+B3: Succ={} Pred={B2 } Labels={L3 }
+
+
+AFTER REGISTER COLORING
+grOnett_801E41B0
+:{0005}::::LOOPWEIGHT=0
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=257
+B1: Succ={B2 } Pred={B0 } Labels={L1 }
+
+:{000c}::::LOOPWEIGHT=0
+B2: Succ={B3 } Pred={B1 } Labels={L2 }
+
+    lwz     r3,44(r3); fIsPtrOp
+    li      r4,0
+    lbz     r0,196(r3); fIsPtrOp
+    rlwimi  r0,r4,7,24,24
+    stb     r0,196(r3); fIsPtrOp
+:{0006}::::LOOPWEIGHT=17039360
+B3: Succ={} Pred={B2 } Labels={L3 }
+
+
+AFTER GENERATING EPILOGUE, PROLOGUE
+grOnett_801E41B0
+:{0005}::::LOOPWEIGHT=0
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=257
+B1: Succ={B2 } Pred={B0 } Labels={L1 }
+
+:{000c}::::LOOPWEIGHT=0
+B2: Succ={B3 } Pred={B1 } Labels={L2 }
+
+    lwz     r3,44(r3); fIsPtrOp
+    li      r4,0
+    lbz     r0,196(r3); fIsPtrOp
+    rlwimi  r0,r4,7,24,24
+    stb     r0,196(r3); fIsPtrOp
+:{0006}::::LOOPWEIGHT=17039360
+B3: Succ={} Pred={B2 } Labels={L3 }
+
+    blr     ; fIsLive
+
+AFTER MERGING EPILOGUE, PROLOGUE
+grOnett_801E41B0
+:{0005}::::LOOPWEIGHT=0
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=257
+B1: Succ={B2 } Pred={B0 } Labels={L1 }
+
+:{000c}::::LOOPWEIGHT=0
+B2: Succ={B3 } Pred={B1 } Labels={L2 }
+
+    lwz     r3,44(r3); fIsPtrOp
+    li      r4,0
+    lbz     r0,196(r3); fIsPtrOp
+    rlwimi  r0,r4,7,24,24
+    stb     r0,196(r3); fIsPtrOp
+:{0006}::::LOOPWEIGHT=17039360
+B3: Succ={} Pred={B2 } Labels={L3 }
+
+    blr     ; fIsLive
+
+AFTER PEEPHOLE OPTIMIZATION
+grOnett_801E41B0
+:{0005}::::LOOPWEIGHT=0
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=257
+B1: Succ={B2 } Pred={B0 } Labels={L1 }
+
+:{000c}::::LOOPWEIGHT=0
+B2: Succ={B3 } Pred={B1 } Labels={L2 }
+
+    lwz     r3,44(r3); fIsPtrOp
+    li      r4,0
+    lbz     r0,196(r3); fIsPtrOp
+    rlwimi  r0,r4,7,24,24
+    stb     r0,196(r3); fIsPtrOp
+:{0006}::::LOOPWEIGHT=17039360
+B3: Succ={} Pred={B2 } Labels={L3 }
+
+    blr     ; fIsLive
+
+FINAL CODE AFTER INSTRUCTION SCHEDULING
+grOnett_801E41B0
+:{0005}::::LOOPWEIGHT=0
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=257
+B1: Succ={B2 } Pred={B0 } Labels={L1 }
+
+:{000c}::::LOOPWEIGHT=0
+B2: Succ={B3 } Pred={B1 } Labels={L2 }
+
+    lwz     r3,44(r3); fIsPtrOp
+    li      r4,0
+    lbz     r0,196(r3); fIsPtrOp
+    rlwimi  r0,r4,7,24,24
+    stb     r0,196(r3); fIsPtrOp
+:{0006}::::LOOPWEIGHT=17039360
+B3: Succ={} Pred={B2 } Labels={L3 }
+
+    blr     ; fIsLive
+Starting function grOnett_801E43D8
+--------------------------------------------------------------------------------
+Removing unreachable code at: 1
+*****************
+Dumps for pass=0
+*****************
+*****************
+Dumps for pass=1
+*****************
+
+BEFORE GLOBAL OPTIMIZATION
+grOnett_801E43D8
+:{0005}::::LOOPWEIGHT=195
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=0
+B1: Succ={B2 } Pred={B0 } Labels={L2 L1 }
+
+    li      r3,0
+:{0006}::::LOOPWEIGHT=131267
+B2: Succ={} Pred={B1 } Labels={L3 }
+
+
+AFTER INSTRUCTION SCHEDULING
+grOnett_801E43D8
+:{0005}::::LOOPWEIGHT=195
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=0
+B1: Succ={B2 } Pred={B0 } Labels={L2 L1 }
+
+    li      r3,0
+:{0006}::::LOOPWEIGHT=131267
+B2: Succ={} Pred={B1 } Labels={L3 }
+
+
+AFTER PEEPHOLE FORWARD
+grOnett_801E43D8
+:{0005}::::LOOPWEIGHT=195
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=0
+B1: Succ={B2 } Pred={B0 } Labels={L2 L1 }
+
+    li      r3,0
+:{0006}::::LOOPWEIGHT=131267
+B2: Succ={} Pred={B1 } Labels={L3 }
+
+
+AFTER REGISTER COLORING
+grOnett_801E43D8
+:{0005}::::LOOPWEIGHT=195
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=0
+B1: Succ={B2 } Pred={B0 } Labels={L2 L1 }
+
+    li      r3,0
+:{0006}::::LOOPWEIGHT=131267
+B2: Succ={} Pred={B1 } Labels={L3 }
+
+
+AFTER GENERATING EPILOGUE, PROLOGUE
+grOnett_801E43D8
+:{0005}::::LOOPWEIGHT=195
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=0
+B1: Succ={B2 } Pred={B0 } Labels={L2 L1 }
+
+    li      r3,0
+:{0006}::::LOOPWEIGHT=131267
+B2: Succ={} Pred={B1 } Labels={L3 }
+
+    blr     ; fIsLive
+
+AFTER MERGING EPILOGUE, PROLOGUE
+grOnett_801E43D8
+:{0005}::::LOOPWEIGHT=195
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=0
+B1: Succ={B2 } Pred={B0 } Labels={L2 L1 }
+
+    li      r3,0
+:{0006}::::LOOPWEIGHT=131267
+B2: Succ={} Pred={B1 } Labels={L3 }
+
+    blr     ; fIsLive
+
+AFTER PEEPHOLE OPTIMIZATION
+grOnett_801E43D8
+:{0005}::::LOOPWEIGHT=195
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=0
+B1: Succ={B2 } Pred={B0 } Labels={L2 L1 }
+
+    li      r3,0
+:{0006}::::LOOPWEIGHT=131267
+B2: Succ={} Pred={B1 } Labels={L3 }
+
+    blr     ; fIsLive
+
+FINAL CODE AFTER INSTRUCTION SCHEDULING
+grOnett_801E43D8
+:{0005}::::LOOPWEIGHT=195
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=0
+B1: Succ={B2 } Pred={B0 } Labels={L2 L1 }
+
+    li      r3,0
+:{0006}::::LOOPWEIGHT=131267
+B2: Succ={} Pred={B1 } Labels={L3 }
+
+    blr     ; fIsLive
+Starting function grOnett_801E502C
+--------------------------------------------------------------------------------
+Removing unreachable code at: 1
+*****************
+Dumps for pass=0
+*****************
+*****************
+Dumps for pass=1
+*****************
+
+BEFORE GLOBAL OPTIMIZATION
+grOnett_801E502C
+:{0005}::::LOOPWEIGHT=11993088
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0006}::::LOOPWEIGHT=327680
+B1: Succ={} Pred={B0 } Labels={L3 L2 L1 }
+
+
+AFTER INSTRUCTION SCHEDULING
+grOnett_801E502C
+:{0005}::::LOOPWEIGHT=11993088
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0006}::::LOOPWEIGHT=327680
+B1: Succ={} Pred={B0 } Labels={L3 L2 L1 }
+
+
+AFTER PEEPHOLE FORWARD
+grOnett_801E502C
+:{0005}::::LOOPWEIGHT=11993088
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0006}::::LOOPWEIGHT=327680
+B1: Succ={} Pred={B0 } Labels={L3 L2 L1 }
+
+
+AFTER REGISTER COLORING
+grOnett_801E502C
+:{0005}::::LOOPWEIGHT=11993088
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0006}::::LOOPWEIGHT=327680
+B1: Succ={} Pred={B0 } Labels={L3 L2 L1 }
+
+
+AFTER GENERATING EPILOGUE, PROLOGUE
+grOnett_801E502C
+:{0005}::::LOOPWEIGHT=11993088
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0006}::::LOOPWEIGHT=327680
+B1: Succ={} Pred={B0 } Labels={L3 L2 L1 }
+
+    blr     ; fIsLive
+
+AFTER MERGING EPILOGUE, PROLOGUE
+grOnett_801E502C
+:{0005}::::LOOPWEIGHT=11993088
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0006}::::LOOPWEIGHT=327680
+B1: Succ={} Pred={B0 } Labels={L3 L2 L1 }
+
+    blr     ; fIsLive
+
+AFTER PEEPHOLE OPTIMIZATION
+grOnett_801E502C
+:{0005}::::LOOPWEIGHT=11993088
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0006}::::LOOPWEIGHT=327680
+B1: Succ={} Pred={B0 } Labels={L3 L2 L1 }
+
+    blr     ; fIsLive
+
+FINAL CODE AFTER INSTRUCTION SCHEDULING
+grOnett_801E502C
+:{0005}::::LOOPWEIGHT=11993088
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0006}::::LOOPWEIGHT=327680
+B1: Succ={} Pred={B0 } Labels={L3 L2 L1 }
+
+    blr     ; fIsLive
+Starting function grOnett_801E5140
+--------------------------------------------------------------------------------
+Removing unreachable code at: 1
+*****************
+Dumps for pass=0
+*****************
+Found propagatable expression assignment at: 5
+*****************
+Dumps for pass=1
+*****************
+Found propagatable expression assignment at: 5
+
+BEFORE GLOBAL OPTIMIZATION
+grOnett_801E5140
+:{0005}::::LOOPWEIGHT=5018832
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=0
+B1: Succ={B2 } Pred={B0 } Labels={L1 }
+
+    mr      r32,r3
+:{0004}::::LOOPWEIGHT=5017344
+B2: Succ={B3 } Pred={B1 } Labels={L2 }
+
+    lis     r33,HA(@198)
+    addi    r34,r33,LO(@198)
+    lwz     r35,0(r34); fIsPtrOp
+    lwz     r36,4(r34); fIsPtrOp
+    stw     r35,table(r1)
+    stw     r36,table+4(r1)
+    lwz     r37,8(r34); fIsPtrOp
+    lwz     r38,12(r34); fIsPtrOp
+    stw     r37,table+8(r1)
+    stw     r38,table+12(r1)
+    rlwinm  r39,r32,2,0,29
+    addi    r40,r1,table
+    lwzx    r3,(r40,r39); fIsPtrOp
+:{0004}::::LOOPWEIGHT=8585216
+B3: Succ={B4 } Pred={B2 } Labels={L3 }
+
+    bl      Ground_801C53EC; fLink
+:{0006}::::LOOPWEIGHT=5023936
+B4: Succ={} Pred={B3 } Labels={L5 L4 }
+
+
+AFTER COPY PROPAGATION
+grOnett_801E5140
+:{0005}::::LOOPWEIGHT=5018832
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=0
+B1: Succ={B2 } Pred={B0 } Labels={L1 }
+
+:{0004}::::LOOPWEIGHT=5017344
+B2: Succ={B3 } Pred={B1 } Labels={L2 }
+
+    lis     r33,HA(@198)
+    addi    r34,r33,LO(@198)
+    lwz     r35,0(r34); fIsPtrOp
+    lwz     r36,4(r34); fIsPtrOp
+    stw     r35,table(r1)
+    stw     r36,table+4(r1)
+    lwz     r37,8(r34); fIsPtrOp
+    lwz     r38,12(r34); fIsPtrOp
+    stw     r37,table+8(r1)
+    stw     r38,table+12(r1)
+    rlwinm  r39,r3,2,0,29
+    addi    r40,r1,table
+    lwzx    r3,(r40,r39); fIsPtrOp
+:{0004}::::LOOPWEIGHT=8585216
+B3: Succ={B4 } Pred={B2 } Labels={L3 }
+
+    bl      Ground_801C53EC; fLink
+:{0006}::::LOOPWEIGHT=5023936
+B4: Succ={} Pred={B3 } Labels={L5 L4 }
+
+
+AFTER INSTRUCTION SCHEDULING
+grOnett_801E5140
+:{0005}::::LOOPWEIGHT=5018832
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=0
+B1: Succ={B2 } Pred={B0 } Labels={L1 }
+
+:{000c}::::LOOPWEIGHT=5017344
+B2: Succ={B3 } Pred={B1 } Labels={L2 }
+
+    lis     r33,HA(@198)
+    addi    r34,r33,LO(@198)
+    lwz     r35,0(r34); fIsPtrOp
+    rlwinm  r39,r3,2,0,29
+    lwz     r36,4(r34); fIsPtrOp
+    addi    r40,r1,table
+    stw     r35,table(r1)
+    stw     r36,table+4(r1)
+    lwz     r37,8(r34); fIsPtrOp
+    lwz     r38,12(r34); fIsPtrOp
+    stw     r37,table+8(r1)
+    stw     r38,table+12(r1)
+    lwzx    r3,(r40,r39); fIsPtrOp
+:{0004}::::LOOPWEIGHT=8585216
+B3: Succ={B4 } Pred={B2 } Labels={L3 }
+
+    bl      Ground_801C53EC; fLink
+:{0006}::::LOOPWEIGHT=5023936
+B4: Succ={} Pred={B3 } Labels={L5 L4 }
+
+
+AFTER PEEPHOLE FORWARD
+grOnett_801E5140
+:{0005}::::LOOPWEIGHT=5018832
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=0
+B1: Succ={B2 } Pred={B0 } Labels={L1 }
+
+:{000c}::::LOOPWEIGHT=5017344
+B2: Succ={B3 } Pred={B1 } Labels={L2 }
+
+    lis     r33,HA(@198)
+    addi    r34,r33,LO(@198)
+    lwz     r35,0(r34); fIsPtrOp
+    rlwinm  r39,r3,2,0,29
+    lwz     r36,4(r34); fIsPtrOp
+    addi    r40,r1,table
+    stw     r35,table(r1)
+    stw     r36,table+4(r1)
+    lwz     r37,8(r34); fIsPtrOp
+    lwz     r38,12(r34); fIsPtrOp
+    stw     r37,table+8(r1)
+    stw     r38,table+12(r1)
+    lwzx    r3,(r40,r39); fIsPtrOp
+:{0004}::::LOOPWEIGHT=8585216
+B3: Succ={B4 } Pred={B2 } Labels={L3 }
+
+    bl      Ground_801C53EC; fLink
+:{0006}::::LOOPWEIGHT=5023936
+B4: Succ={} Pred={B3 } Labels={L5 L4 }
+
+
+AFTER REGISTER COLORING
+grOnett_801E5140
+:{0005}::::LOOPWEIGHT=5018832
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=0
+B1: Succ={B2 } Pred={B0 } Labels={L1 }
+
+:{000c}::::LOOPWEIGHT=5017344
+B2: Succ={B3 } Pred={B1 } Labels={L2 }
+
+    lis     r4,HA(@198)
+    addi    r6,r4,LO(@198)
+    lwz     r5,0(r6); fIsPtrOp
+    rlwinm  r0,r3,2,0,29
+    lwz     r4,4(r6); fIsPtrOp
+    addi    r3,r1,table
+    stw     r5,table(r1)
+    stw     r4,table+4(r1)
+    lwz     r5,8(r6); fIsPtrOp
+    lwz     r4,12(r6); fIsPtrOp
+    stw     r5,table+8(r1)
+    stw     r4,table+12(r1)
+    lwzx    r3,(r3,r0); fIsPtrOp
+:{0004}::::LOOPWEIGHT=8585216
+B3: Succ={B4 } Pred={B2 } Labels={L3 }
+
+    bl      Ground_801C53EC; fLink
+:{0006}::::LOOPWEIGHT=5023936
+B4: Succ={} Pred={B3 } Labels={L5 L4 }
+
+
+AFTER GENERATING EPILOGUE, PROLOGUE
+grOnett_801E5140
+:{0005}::::LOOPWEIGHT=5018832
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+    mflr    r0
+    stw     r0,4(r1); fIsPtrOp
+    stwu    r1,-32(r1); fIsPtrOp
+:{0004}::::LOOPWEIGHT=0
+B1: Succ={B2 } Pred={B0 } Labels={L1 }
+
+:{000c}::::LOOPWEIGHT=5017344
+B2: Succ={B3 } Pred={B1 } Labels={L2 }
+
+    lis     r4,HA(@198)
+    addi    r6,r4,LO(@198)
+    lwz     r5,0(r6); fIsPtrOp
+    rlwinm  r0,r3,2,0,29
+    lwz     r4,4(r6); fIsPtrOp
+    addi    r3,r1,table
+    stw     r5,table(r1)
+    stw     r4,table+4(r1)
+    lwz     r5,8(r6); fIsPtrOp
+    lwz     r4,12(r6); fIsPtrOp
+    stw     r5,table+8(r1)
+    stw     r4,table+12(r1)
+    lwzx    r3,(r3,r0); fIsPtrOp
+:{0004}::::LOOPWEIGHT=8585216
+B3: Succ={B4 } Pred={B2 } Labels={L3 }
+
+    bl      Ground_801C53EC; fLink
+:{0006}::::LOOPWEIGHT=5023936
+B4: Succ={} Pred={B3 } Labels={L5 L4 }
+
+    lwz     r0,36(r1); fIsPtrOp
+    addi    r1,r1,32; fSideEffects
+    mtlr    r0
+    blr     ; fIsLive
+
+AFTER MERGING EPILOGUE, PROLOGUE
+grOnett_801E5140
+:{0005}::::LOOPWEIGHT=5018832
+B0: Succ={B3 } Pred={} Labels={L0 }
+
+    mflr    r0
+    stw     r0,4(r1); fIsPtrOp
+    stwu    r1,-32(r1); fIsPtrOp
+    lis     r4,HA(@198)
+    addi    r6,r4,LO(@198)
+    lwz     r5,0(r6); fIsPtrOp
+    rlwinm  r0,r3,2,0,29
+    lwz     r4,4(r6); fIsPtrOp
+    addi    r3,r1,table
+    stw     r5,table(r1)
+    stw     r4,table+4(r1)
+    lwz     r5,8(r6); fIsPtrOp
+    lwz     r4,12(r6); fIsPtrOp
+    stw     r5,table+8(r1)
+    stw     r4,table+12(r1)
+    lwzx    r3,(r3,r0); fIsPtrOp
+:{0004}::::LOOPWEIGHT=8585216
+B3: Succ={B4 } Pred={B0 } Labels={L3 }
+
+    bl      Ground_801C53EC; fLink
+:{0006}::::LOOPWEIGHT=5023936
+B4: Succ={} Pred={B3 } Labels={L5 L4 }
+
+    lwz     r0,36(r1); fIsPtrOp
+    addi    r1,r1,32; fSideEffects
+    mtlr    r0
+    blr     ; fIsLive
+
+AFTER PEEPHOLE OPTIMIZATION
+grOnett_801E5140
+:{0005}::::LOOPWEIGHT=5018832
+B0: Succ={B3 } Pred={} Labels={L0 }
+
+    mflr    r0
+    stw     r0,4(r1); fIsPtrOp
+    stwu    r1,-32(r1); fIsPtrOp
+    lis     r4,HA(@198)
+    addi    r6,r4,LO(@198)
+    lwz     r5,0(r6); fIsPtrOp
+    rlwinm  r0,r3,2,0,29
+    lwz     r4,4(r6); fIsPtrOp
+    addi    r3,r1,table
+    stw     r5,table(r1)
+    stw     r4,table+4(r1)
+    lwz     r5,8(r6); fIsPtrOp
+    lwz     r4,12(r6); fIsPtrOp
+    stw     r5,table+8(r1)
+    stw     r4,table+12(r1)
+    lwzx    r3,(r3,r0); fIsPtrOp
+:{0004}::::LOOPWEIGHT=8585216
+B3: Succ={B4 } Pred={B0 } Labels={L3 }
+
+    bl      Ground_801C53EC; fLink
+:{0006}::::LOOPWEIGHT=5023936
+B4: Succ={} Pred={B3 } Labels={L5 L4 }
+
+    lwz     r0,36(r1); fIsPtrOp
+    addi    r1,r1,32; fSideEffects
+    mtlr    r0
+    blr     ; fIsLive
+
+FINAL CODE AFTER INSTRUCTION SCHEDULING
+grOnett_801E5140
+:{000d}::::LOOPWEIGHT=5018832
+B0: Succ={B3 } Pred={} Labels={L0 }
+
+    mflr    r0
+    lis     r4,HA(@198)
+    stw     r0,4(r1); fIsPtrOp
+    addi    r6,r4,LO(@198)
+    rlwinm  r0,r3,2,0,29
+    stwu    r1,-32(r1); fIsPtrOp
+    lwz     r5,0(r6); fIsPtrOp
+    addi    r3,r1,table
+    lwz     r4,4(r6); fIsPtrOp
+    stw     r5,table(r1)
+    stw     r4,table+4(r1)
+    lwz     r5,8(r6); fIsPtrOp
+    lwz     r4,12(r6); fIsPtrOp
+    stw     r5,table+8(r1)
+    stw     r4,table+12(r1)
+    lwzx    r3,(r3,r0); fIsPtrOp
+:{0004}::::LOOPWEIGHT=8585216
+B3: Succ={B4 } Pred={B0 } Labels={L3 }
+
+    bl      Ground_801C53EC; fLink
+:{000e}::::LOOPWEIGHT=5023936
+B4: Succ={} Pred={B3 } Labels={L5 L4 }
+
+    lwz     r0,36(r1); fIsPtrOp
+    addi    r1,r1,32; fSideEffects
+    mtlr    r0
+    blr     ; fIsLive
+Starting function grOnett_801E54B4
+--------------------------------------------------------------------------------
+Removing unreachable code at: 10
+*****************
+Dumps for pass=0
+*****************
+Found propagatable assignment at: 36
+Found propagatable assignment at: 42
+Found propagatable expression assignment at: 10
+Found expression propagation at 106 from 10
+Found propagatable expression assignment at: 36
+Found propagatable expression assignment at: 42
+Found propagatable assignment at: 43
+Found propagatable assignment at: 49
+Replacing common sub at 19 with 7
+Replacing common sub at 74 with 60
+Replacing common sub at 102 with 91
+Found propagatable assignment at: 48
+Found propagatable assignment at: 54
+*****************
+Dumps for pass=1
+*****************
+Found propagatable assignment at: 48
+Found propagatable assignment at: 54
+Found propagatable expression assignment at: 48
+Found propagatable expression assignment at: 54
+Found propagatable assignment at: 48
+Found propagatable assignment at: 54
+Found propagatable assignment at: 48
+Found propagatable assignment at: 54
+
+BEFORE GLOBAL OPTIMIZATION
+grOnett_801E54B4
+:{0005}::::LOOPWEIGHT=-916979712
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=17039360
+B1: Succ={B2 } Pred={B0 } Labels={L1 }
+
+    mr      r32,r3
+    mr      r33,r4
+    mr      r34,r5
+    mr      r35,r7
+:{0004}::::LOOPWEIGHT=590336
+B2: Succ={B3 B5 } Pred={B1 } Labels={L2 }
+
+    lbz     r40,52(r34); fIsPtrOp
+    rlwinm  r40,r40,29,28,31
+    mr      r37,r40
+    cmpi    cr0,r40,1
+    bt      cr0,eq,B5
+:{0004}::::LOOPWEIGHT=-166723584
+B3: Succ={B4 B5 } Pred={B2 } Labels={L7 }
+
+    cmpi    cr0,r37,2
+    bt      cr0,eq,B5
+:{0004}::::LOOPWEIGHT=292
+B4: Succ={B5 B11 } Pred={B3 } Labels={L8 }
+
+    cmpi    cr0,r37,3
+    bf      cr0,eq,B11
+:{0004}::::LOOPWEIGHT=-916979712
+B5: Succ={B6 B7 } Pred={B4 B3 B2 } Labels={L3 L10 }
+
+    cmpi    cr0,r33,0
+    bf      cr0,eq,B7
+:{0004}::::LOOPWEIGHT=195
+B6: Succ={B8 } Pred={B5 } Labels={L11 }
+
+    li      r36,0
+    b       B8
+:{0004}::::LOOPWEIGHT=0
+B7: Succ={B8 } Pred={B5 } Labels={L4 }
+
+    li      r36,1
+:{0004}::::LOOPWEIGHT=-166723584
+B8: Succ={B9 B10 } Pred={B7 B6 } Labels={L5 }
+
+    cmpi    cr0,r35,1
+    bf      cr0,eq,B10
+:{0004}::::LOOPWEIGHT=12828240
+B9: Succ={B10 } Pred={B8 } Labels={L12 }
+
+    li      r41,1
+    mulli   r39,r36,28
+    add     r42,r32,r39
+    sth     r41,222(r42); fIsPtrOp
+    lwz     r43,grOt_804D69C0(r0)
+    lfs     f32,0(r43); fIsPtrOp
+    add     r44,r32,r39
+    stfs    f32,212(r44); fIsPtrOp
+:{0004}::::LOOPWEIGHT=12829400
+B10: Succ={B11 } Pred={B9 B8 } Labels={L6 }
+
+    mulli   r38,r36,28
+    add     r45,r32,r38
+    lfs     f33,204(r45); fIsPtrOp
+    lwz     r46,grOt_804D69C0(r0)
+    lfs     f34,32(r46); fIsPtrOp
+    fadds   f35,f33,f34
+    stfs    f35,204(r45); fIsPtrOp
+    add     r47,r32,r38
+    lha     r48,216(r47); fIsPtrOp
+    addi    r49,r48,1
+    sth     r49,216(r47); fIsPtrOp
+:{0006}::::LOOPWEIGHT=5026192
+B11: Succ={} Pred={B10 B4 } Labels={L9 }
+
+
+AFTER VALUE NUMBERING
+grOnett_801E54B4
+:{0005}::::LOOPWEIGHT=-916979712
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=17039360
+B1: Succ={B2 } Pred={B0 } Labels={L1 }
+
+    mr      r32,r3
+    mr      r33,r4
+    mr      r34,r5
+    mr      r35,r7
+:{0004}::::LOOPWEIGHT=590336
+B2: Succ={B3 B5 } Pred={B1 } Labels={L2 }
+
+    lbz     r40,52(r34); fIsPtrOp
+    rlwinm  r40,r40,29,28,31
+    mr      r37,r40
+    cmpi    cr0,r40,1
+    bt      cr0,eq,B5
+:{0004}::::LOOPWEIGHT=-166723584
+B3: Succ={B4 B5 } Pred={B2 } Labels={L7 }
+
+    cmpi    cr0,r37,2
+    bt      cr0,eq,B5
+:{0004}::::LOOPWEIGHT=292
+B4: Succ={B5 B11 } Pred={B3 } Labels={L8 }
+
+    cmpi    cr0,r37,3
+    bf      cr0,eq,B11
+:{0004}::::LOOPWEIGHT=-916979712
+B5: Succ={B6 B7 } Pred={B4 B3 B2 } Labels={L3 L10 }
+
+    cmpi    cr0,r33,0
+    bf      cr0,eq,B7
+:{0004}::::LOOPWEIGHT=195
+B6: Succ={B8 } Pred={B5 } Labels={L11 }
+
+    li      r36,0
+    b       B8
+:{0004}::::LOOPWEIGHT=0
+B7: Succ={B8 } Pred={B5 } Labels={L4 }
+
+    li      r36,1
+:{0004}::::LOOPWEIGHT=-166723584
+B8: Succ={B9 B10 } Pred={B7 B6 } Labels={L5 }
+
+    cmpi    cr0,r35,1
+    bf      cr0,eq,B10
+:{0004}::::LOOPWEIGHT=12828240
+B9: Succ={B10 } Pred={B8 } Labels={L12 }
+
+    li      r41,1
+    mulli   r39,r36,28
+    add     r42,r32,r39
+    sth     r41,222(r42); fIsPtrOp
+    lwz     r43,grOt_804D69C0(r0)
+    lfs     f32,0(r43); fIsPtrOp
+    mr      r44,r42
+    stfs    f32,212(r44); fIsPtrOp
+:{0004}::::LOOPWEIGHT=12829400
+B10: Succ={B11 } Pred={B9 B8 } Labels={L6 }
+
+    mulli   r38,r36,28
+    add     r45,r32,r38
+    lfs     f33,204(r45); fIsPtrOp
+    lwz     r46,grOt_804D69C0(r0)
+    lfs     f34,32(r46); fIsPtrOp
+    fadds   f35,f33,f34
+    stfs    f35,204(r45); fIsPtrOp
+    mr      r47,r45
+    lha     r48,216(r47); fIsPtrOp
+    addi    r49,r48,1
+    sth     r49,216(r47); fIsPtrOp
+:{0006}::::LOOPWEIGHT=5026192
+B11: Succ={} Pred={B10 B4 } Labels={L9 }
+
+
+AFTER COPY PROPAGATION
+grOnett_801E54B4
+:{0005}::::LOOPWEIGHT=-916979712
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=17039360
+B1: Succ={B2 } Pred={B0 } Labels={L1 }
+
+    mr      r32,r3
+    mr      r33,r4
+    mr      r34,r5
+    mr      r35,r7
+:{0004}::::LOOPWEIGHT=590336
+B2: Succ={B3 B5 } Pred={B1 } Labels={L2 }
+
+    lbz     r40,52(r34); fIsPtrOp
+    rlwinm  r40,r40,29,28,31
+    cmpi    cr0,r40,1
+    bt      cr0,eq,B5
+:{0004}::::LOOPWEIGHT=-166723584
+B3: Succ={B4 B5 } Pred={B2 } Labels={L7 }
+
+    cmpi    cr0,r40,2
+    bt      cr0,eq,B5
+:{0004}::::LOOPWEIGHT=292
+B4: Succ={B5 B11 } Pred={B3 } Labels={L8 }
+
+    cmpi    cr0,r40,3
+    bf      cr0,eq,B11
+:{0004}::::LOOPWEIGHT=-916979712
+B5: Succ={B6 B7 } Pred={B4 B3 B2 } Labels={L3 L10 }
+
+    cmpi    cr0,r33,0
+    bf      cr0,eq,B7
+:{0004}::::LOOPWEIGHT=195
+B6: Succ={B8 } Pred={B5 } Labels={L11 }
+
+    li      r36,0
+    b       B8
+:{0004}::::LOOPWEIGHT=0
+B7: Succ={B8 } Pred={B5 } Labels={L4 }
+
+    li      r36,1
+:{0004}::::LOOPWEIGHT=-166723584
+B8: Succ={B9 B10 } Pred={B7 B6 } Labels={L5 }
+
+    cmpi    cr0,r35,1
+    bf      cr0,eq,B10
+:{0004}::::LOOPWEIGHT=12828240
+B9: Succ={B10 } Pred={B8 } Labels={L12 }
+
+    li      r41,1
+    mulli   r39,r36,28
+    add     r42,r32,r39
+    sth     r41,222(r42); fIsPtrOp
+    lwz     r43,grOt_804D69C0(r0)
+    lfs     f32,0(r43); fIsPtrOp
+    stfs    f32,212(r42); fIsPtrOp
+:{0004}::::LOOPWEIGHT=12829400
+B10: Succ={B11 } Pred={B9 B8 } Labels={L6 }
+
+    mulli   r38,r36,28
+    add     r45,r32,r38
+    lfs     f33,204(r45); fIsPtrOp
+    lwz     r46,grOt_804D69C0(r0)
+    lfs     f34,32(r46); fIsPtrOp
+    fadds   f35,f33,f34
+    stfs    f35,204(r45); fIsPtrOp
+    lha     r48,216(r45); fIsPtrOp
+    addi    r49,r48,1
+    sth     r49,216(r45); fIsPtrOp
+:{0006}::::LOOPWEIGHT=5026192
+B11: Succ={} Pred={B10 B4 } Labels={L9 }
+
+
+AFTER COPY PROPAGATION
+grOnett_801E54B4
+:{0005}::::LOOPWEIGHT=-916979712
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=17039360
+B1: Succ={B2 } Pred={B0 } Labels={L1 }
+
+:{0004}::::LOOPWEIGHT=590336
+B2: Succ={B3 B5 } Pred={B1 } Labels={L2 }
+
+    lbz     r40,52(r5); fIsPtrOp
+    rlwinm  r40,r40,29,28,31
+    cmpi    cr0,r40,1
+    bt      cr0,eq,B5
+:{0004}::::LOOPWEIGHT=-166723584
+B3: Succ={B4 B5 } Pred={B2 } Labels={L7 }
+
+    cmpi    cr0,r40,2
+    bt      cr0,eq,B5
+:{0004}::::LOOPWEIGHT=292
+B4: Succ={B5 B11 } Pred={B3 } Labels={L8 }
+
+    cmpi    cr0,r40,3
+    bf      cr0,eq,B11
+:{0004}::::LOOPWEIGHT=-916979712
+B5: Succ={B6 B7 } Pred={B4 B3 B2 } Labels={L3 L10 }
+
+    cmpi    cr0,r4,0
+    bf      cr0,eq,B7
+:{0004}::::LOOPWEIGHT=195
+B6: Succ={B8 } Pred={B5 } Labels={L11 }
+
+    li      r36,0
+    b       B8
+:{0004}::::LOOPWEIGHT=0
+B7: Succ={B8 } Pred={B5 } Labels={L4 }
+
+    li      r36,1
+:{0004}::::LOOPWEIGHT=-166723584
+B8: Succ={B9 B10 } Pred={B7 B6 } Labels={L5 }
+
+    cmpi    cr0,r7,1
+    bf      cr0,eq,B10
+:{0004}::::LOOPWEIGHT=12828240
+B9: Succ={B10 } Pred={B8 } Labels={L12 }
+
+    li      r41,1
+    mulli   r39,r36,28
+    add     r42,r3,r39
+    sth     r41,222(r42); fIsPtrOp
+    lwz     r43,grOt_804D69C0(r0)
+    lfs     f32,0(r43); fIsPtrOp
+    stfs    f32,212(r42); fIsPtrOp
+:{0004}::::LOOPWEIGHT=12829400
+B10: Succ={B11 } Pred={B9 B8 } Labels={L6 }
+
+    mulli   r38,r36,28
+    add     r45,r3,r38
+    lfs     f33,204(r45); fIsPtrOp
+    lwz     r46,grOt_804D69C0(r0)
+    lfs     f34,32(r46); fIsPtrOp
+    fadds   f35,f33,f34
+    stfs    f35,204(r45); fIsPtrOp
+    lha     r48,216(r45); fIsPtrOp
+    addi    r49,r48,1
+    sth     r49,216(r45); fIsPtrOp
+:{0006}::::LOOPWEIGHT=5026192
+B11: Succ={} Pred={B10 B4 } Labels={L9 }
+
+
+AFTER INSTRUCTION SCHEDULING
+grOnett_801E54B4
+:{0005}::::LOOPWEIGHT=-916979712
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=17039360
+B1: Succ={B2 } Pred={B0 } Labels={L1 }
+
+:{000c}::::LOOPWEIGHT=590336
+B2: Succ={B3 B5 } Pred={B1 } Labels={L2 }
+
+    lbz     r40,52(r5); fIsPtrOp
+    rlwinm  r40,r40,29,28,31
+    cmpi    cr0,r40,1
+    bt      cr0,eq,B5
+:{0004}::::LOOPWEIGHT=-166723584
+B3: Succ={B4 B5 } Pred={B2 } Labels={L7 }
+
+    cmpi    cr0,r40,2
+    bt      cr0,eq,B5
+:{0004}::::LOOPWEIGHT=292
+B4: Succ={B5 B11 } Pred={B3 } Labels={L8 }
+
+    cmpi    cr0,r40,3
+    bf      cr0,eq,B11
+:{0004}::::LOOPWEIGHT=-916979712
+B5: Succ={B6 B7 } Pred={B4 B3 B2 } Labels={L3 L10 }
+
+    cmpi    cr0,r4,0
+    bf      cr0,eq,B7
+:{0004}::::LOOPWEIGHT=195
+B6: Succ={B8 } Pred={B5 } Labels={L11 }
+
+    li      r36,0
+    b       B8
+:{0004}::::LOOPWEIGHT=0
+B7: Succ={B8 } Pred={B5 } Labels={L4 }
+
+    li      r36,1
+:{0004}::::LOOPWEIGHT=-166723584
+B8: Succ={B9 B10 } Pred={B7 B6 } Labels={L5 }
+
+    cmpi    cr0,r7,1
+    bf      cr0,eq,B10
+:{000c}::::LOOPWEIGHT=12828240
+B9: Succ={B10 } Pred={B8 } Labels={L12 }
+
+    mulli   r39,r36,28
+    add     r42,r3,r39
+    li      r41,1
+    sth     r41,222(r42); fIsPtrOp
+    lwz     r43,grOt_804D69C0(r0)
+    lfs     f32,0(r43); fIsPtrOp
+    stfs    f32,212(r42); fIsPtrOp
+:{000c}::::LOOPWEIGHT=12829400
+B10: Succ={B11 } Pred={B9 B8 } Labels={L6 }
+
+    mulli   r38,r36,28
+    lwz     r46,grOt_804D69C0(r0)
+    lfs     f34,32(r46); fIsPtrOp
+    add     r45,r3,r38
+    lfs     f33,204(r45); fIsPtrOp
+    fadds   f35,f33,f34
+    stfs    f35,204(r45); fIsPtrOp
+    lha     r48,216(r45); fIsPtrOp
+    addi    r49,r48,1
+    sth     r49,216(r45); fIsPtrOp
+:{0006}::::LOOPWEIGHT=5026192
+B11: Succ={} Pred={B10 B4 } Labels={L9 }
+
+
+AFTER PEEPHOLE FORWARD
+grOnett_801E54B4
+:{0005}::::LOOPWEIGHT=-916979712
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=17039360
+B1: Succ={B2 } Pred={B0 } Labels={L1 }
+
+:{000c}::::LOOPWEIGHT=590336
+B2: Succ={B3 B5 } Pred={B1 } Labels={L2 }
+
+    lbz     r40,52(r5); fIsPtrOp
+    rlwinm  r40,r40,29,28,31
+    cmpi    cr0,r40,1
+    bt      cr0,eq,B5
+:{0004}::::LOOPWEIGHT=-166723584
+B3: Succ={B4 B5 } Pred={B2 } Labels={L7 }
+
+    cmpi    cr0,r40,2
+    bt      cr0,eq,B5
+:{0004}::::LOOPWEIGHT=292
+B4: Succ={B5 B11 } Pred={B3 } Labels={L8 }
+
+    cmpi    cr0,r40,3
+    bf      cr0,eq,B11
+:{0004}::::LOOPWEIGHT=-916979712
+B5: Succ={B6 B7 } Pred={B4 B3 B2 } Labels={L3 L10 }
+
+    cmpi    cr0,r4,0
+    bf      cr0,eq,B7
+:{0004}::::LOOPWEIGHT=195
+B6: Succ={B8 } Pred={B5 } Labels={L11 }
+
+    li      r36,0
+    b       B8
+:{0004}::::LOOPWEIGHT=0
+B7: Succ={B8 } Pred={B5 } Labels={L4 }
+
+    li      r36,1
+:{0004}::::LOOPWEIGHT=-166723584
+B8: Succ={B9 B10 } Pred={B7 B6 } Labels={L5 }
+
+    cmpi    cr0,r7,1
+    bf      cr0,eq,B10
+:{000c}::::LOOPWEIGHT=12828240
+B9: Succ={B10 } Pred={B8 } Labels={L12 }
+
+    mulli   r39,r36,28
+    add     r42,r3,r39
+    li      r41,1
+    sth     r41,222(r42); fIsPtrOp
+    lwz     r43,grOt_804D69C0(r0)
+    lfs     f32,0(r43); fIsPtrOp
+    stfs    f32,212(r42); fIsPtrOp
+:{000c}::::LOOPWEIGHT=12829400
+B10: Succ={B11 } Pred={B9 B8 } Labels={L6 }
+
+    mulli   r38,r36,28
+    lwz     r46,grOt_804D69C0(r0)
+    lfs     f34,32(r46); fIsPtrOp
+    add     r45,r3,r38
+    lfs     f33,204(r45); fIsPtrOp
+    fadds   f35,f33,f34
+    stfs    f35,204(r45); fIsPtrOp
+    lha     r48,216(r45); fIsPtrOp
+    addi    r49,r48,1
+    sth     r49,216(r45); fIsPtrOp
+:{0006}::::LOOPWEIGHT=5026192
+B11: Succ={} Pred={B10 B4 } Labels={L9 }
+
+
+AFTER REGISTER COLORING
+grOnett_801E54B4
+:{0005}::::LOOPWEIGHT=-916979712
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=17039360
+B1: Succ={B2 } Pred={B0 } Labels={L1 }
+
+:{000c}::::LOOPWEIGHT=590336
+B2: Succ={B3 B5 } Pred={B1 } Labels={L2 }
+
+    lbz     r0,52(r5); fIsPtrOp
+    rlwinm  r0,r0,29,28,31
+    cmpi    cr0,r0,1
+    bt      cr0,eq,B5
+:{0004}::::LOOPWEIGHT=-166723584
+B3: Succ={B4 B5 } Pred={B2 } Labels={L7 }
+
+    cmpi    cr0,r0,2
+    bt      cr0,eq,B5
+:{0004}::::LOOPWEIGHT=292
+B4: Succ={B5 B11 } Pred={B3 } Labels={L8 }
+
+    cmpi    cr0,r0,3
+    bf      cr0,eq,B11
+:{0004}::::LOOPWEIGHT=-916979712
+B5: Succ={B6 B7 } Pred={B4 B3 B2 } Labels={L3 L10 }
+
+    cmpi    cr0,r4,0
+    bf      cr0,eq,B7
+:{0004}::::LOOPWEIGHT=195
+B6: Succ={B8 } Pred={B5 } Labels={L11 }
+
+    li      r6,0
+    b       B8
+:{0004}::::LOOPWEIGHT=0
+B7: Succ={B8 } Pred={B5 } Labels={L4 }
+
+    li      r6,1
+:{0004}::::LOOPWEIGHT=-166723584
+B8: Succ={B9 B10 } Pred={B7 B6 } Labels={L5 }
+
+    cmpi    cr0,r7,1
+    bf      cr0,eq,B10
+:{000c}::::LOOPWEIGHT=12828240
+B9: Succ={B10 } Pred={B8 } Labels={L12 }
+
+    mulli   r0,r6,28
+    add     r5,r3,r0
+    li      r0,1
+    sth     r0,222(r5); fIsPtrOp
+    lwz     r4,grOt_804D69C0(r0)
+    lfs     f0,0(r4); fIsPtrOp
+    stfs    f0,212(r5); fIsPtrOp
+:{000c}::::LOOPWEIGHT=12829400
+B10: Succ={B11 } Pred={B9 B8 } Labels={L6 }
+
+    mulli   r0,r6,28
+    lwz     r4,grOt_804D69C0(r0)
+    lfs     f0,32(r4); fIsPtrOp
+    add     r4,r3,r0
+    lfs     f1,204(r4); fIsPtrOp
+    fadds   f0,f1,f0
+    stfs    f0,204(r4); fIsPtrOp
+    lha     r3,216(r4); fIsPtrOp
+    addi    r0,r3,1
+    sth     r0,216(r4); fIsPtrOp
+:{0006}::::LOOPWEIGHT=5026192
+B11: Succ={} Pred={B10 B4 } Labels={L9 }
+
+
+AFTER GENERATING EPILOGUE, PROLOGUE
+grOnett_801E54B4
+:{0005}::::LOOPWEIGHT=-916979712
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=17039360
+B1: Succ={B2 } Pred={B0 } Labels={L1 }
+
+:{000c}::::LOOPWEIGHT=590336
+B2: Succ={B3 B5 } Pred={B1 } Labels={L2 }
+
+    lbz     r0,52(r5); fIsPtrOp
+    rlwinm  r0,r0,29,28,31
+    cmpi    cr0,r0,1
+    bt      cr0,eq,B5
+:{0004}::::LOOPWEIGHT=-166723584
+B3: Succ={B4 B5 } Pred={B2 } Labels={L7 }
+
+    cmpi    cr0,r0,2
+    bt      cr0,eq,B5
+:{0004}::::LOOPWEIGHT=292
+B4: Succ={B5 B11 } Pred={B3 } Labels={L8 }
+
+    cmpi    cr0,r0,3
+    bf      cr0,eq,B11
+:{0004}::::LOOPWEIGHT=-916979712
+B5: Succ={B6 B7 } Pred={B4 B3 B2 } Labels={L3 L10 }
+
+    cmpi    cr0,r4,0
+    bf      cr0,eq,B7
+:{0004}::::LOOPWEIGHT=195
+B6: Succ={B8 } Pred={B5 } Labels={L11 }
+
+    li      r6,0
+    b       B8
+:{0004}::::LOOPWEIGHT=0
+B7: Succ={B8 } Pred={B5 } Labels={L4 }
+
+    li      r6,1
+:{0004}::::LOOPWEIGHT=-166723584
+B8: Succ={B9 B10 } Pred={B7 B6 } Labels={L5 }
+
+    cmpi    cr0,r7,1
+    bf      cr0,eq,B10
+:{000c}::::LOOPWEIGHT=12828240
+B9: Succ={B10 } Pred={B8 } Labels={L12 }
+
+    mulli   r0,r6,28
+    add     r5,r3,r0
+    li      r0,1
+    sth     r0,222(r5); fIsPtrOp
+    lwz     r4,grOt_804D69C0(r0)
+    lfs     f0,0(r4); fIsPtrOp
+    stfs    f0,212(r5); fIsPtrOp
+:{000c}::::LOOPWEIGHT=12829400
+B10: Succ={B11 } Pred={B9 B8 } Labels={L6 }
+
+    mulli   r0,r6,28
+    lwz     r4,grOt_804D69C0(r0)
+    lfs     f0,32(r4); fIsPtrOp
+    add     r4,r3,r0
+    lfs     f1,204(r4); fIsPtrOp
+    fadds   f0,f1,f0
+    stfs    f0,204(r4); fIsPtrOp
+    lha     r3,216(r4); fIsPtrOp
+    addi    r0,r3,1
+    sth     r0,216(r4); fIsPtrOp
+:{0006}::::LOOPWEIGHT=5026192
+B11: Succ={} Pred={B10 B4 } Labels={L9 }
+
+    blr     ; fIsLive
+
+AFTER MERGING EPILOGUE, PROLOGUE
+grOnett_801E54B4
+:{0005}::::LOOPWEIGHT=-916979712
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=17039360
+B1: Succ={B2 } Pred={B0 } Labels={L1 }
+
+:{000c}::::LOOPWEIGHT=590336
+B2: Succ={B3 B5 } Pred={B1 } Labels={L2 }
+
+    lbz     r0,52(r5); fIsPtrOp
+    rlwinm  r0,r0,29,28,31
+    cmpi    cr0,r0,1
+    bt      cr0,eq,B5
+:{0004}::::LOOPWEIGHT=-166723584
+B3: Succ={B4 B5 } Pred={B2 } Labels={L7 }
+
+    cmpi    cr0,r0,2
+    bt      cr0,eq,B5
+:{0004}::::LOOPWEIGHT=292
+B4: Succ={B5 B11 } Pred={B3 } Labels={L8 }
+
+    cmpi    cr0,r0,3
+    bf      cr0,eq,B11
+:{0004}::::LOOPWEIGHT=-916979712
+B5: Succ={B6 B7 } Pred={B4 B3 B2 } Labels={L3 L10 }
+
+    cmpi    cr0,r4,0
+    bf      cr0,eq,B7
+:{0004}::::LOOPWEIGHT=195
+B6: Succ={B8 } Pred={B5 } Labels={L11 }
+
+    li      r6,0
+    b       B8
+:{0004}::::LOOPWEIGHT=0
+B7: Succ={B8 } Pred={B5 } Labels={L4 }
+
+    li      r6,1
+:{0004}::::LOOPWEIGHT=-166723584
+B8: Succ={B9 B10 } Pred={B7 B6 } Labels={L5 }
+
+    cmpi    cr0,r7,1
+    bf      cr0,eq,B10
+:{000c}::::LOOPWEIGHT=12828240
+B9: Succ={B10 } Pred={B8 } Labels={L12 }
+
+    mulli   r0,r6,28
+    add     r5,r3,r0
+    li      r0,1
+    sth     r0,222(r5); fIsPtrOp
+    lwz     r4,grOt_804D69C0(r0)
+    lfs     f0,0(r4); fIsPtrOp
+    stfs    f0,212(r5); fIsPtrOp
+:{000c}::::LOOPWEIGHT=12829400
+B10: Succ={B11 } Pred={B9 B8 } Labels={L6 }
+
+    mulli   r0,r6,28
+    lwz     r4,grOt_804D69C0(r0)
+    lfs     f0,32(r4); fIsPtrOp
+    add     r4,r3,r0
+    lfs     f1,204(r4); fIsPtrOp
+    fadds   f0,f1,f0
+    stfs    f0,204(r4); fIsPtrOp
+    lha     r3,216(r4); fIsPtrOp
+    addi    r0,r3,1
+    sth     r0,216(r4); fIsPtrOp
+:{0006}::::LOOPWEIGHT=5026192
+B11: Succ={} Pred={B10 B4 } Labels={L9 }
+
+    blr     ; fIsLive
+
+AFTER PEEPHOLE OPTIMIZATION
+grOnett_801E54B4
+:{0005}::::LOOPWEIGHT=-916979712
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=17039360
+B1: Succ={B2 } Pred={B0 } Labels={L1 }
+
+:{000c}::::LOOPWEIGHT=590336
+B2: Succ={B3 B5 } Pred={B1 } Labels={L2 }
+
+    lbz     r0,52(r5); fIsPtrOp
+    rlwinm  r0,r0,29,28,31
+    cmpi    cr0,r0,1
+    bt      cr0,eq,B5
+:{0004}::::LOOPWEIGHT=-166723584
+B3: Succ={B4 B5 } Pred={B2 } Labels={L7 }
+
+    cmpi    cr0,r0,2
+    bt      cr0,eq,B5
+:{0004}::::LOOPWEIGHT=292
+B4: Succ={B5 B11 } Pred={B3 } Labels={L8 }
+
+    cmpi    cr0,r0,3
+    bf      cr0,eq,B11
+:{0004}::::LOOPWEIGHT=-916979712
+B5: Succ={B6 B7 } Pred={B4 B3 B2 } Labels={L3 L10 }
+
+    cmpi    cr0,r4,0
+    bf      cr0,eq,B7
+:{0004}::::LOOPWEIGHT=195
+B6: Succ={B8 } Pred={B5 } Labels={L11 }
+
+    li      r6,0
+    b       B8
+:{0004}::::LOOPWEIGHT=0
+B7: Succ={B8 } Pred={B5 } Labels={L4 }
+
+    li      r6,1
+:{0004}::::LOOPWEIGHT=-166723584
+B8: Succ={B9 B10 } Pred={B7 B6 } Labels={L5 }
+
+    cmpi    cr0,r7,1
+    bf      cr0,eq,B10
+:{000c}::::LOOPWEIGHT=12828240
+B9: Succ={B10 } Pred={B8 } Labels={L12 }
+
+    mulli   r0,r6,28
+    add     r5,r3,r0
+    li      r0,1
+    sth     r0,222(r5); fIsPtrOp
+    lwz     r4,grOt_804D69C0(r0)
+    lfs     f0,0(r4); fIsPtrOp
+    stfs    f0,212(r5); fIsPtrOp
+:{000c}::::LOOPWEIGHT=12829400
+B10: Succ={B11 } Pred={B9 B8 } Labels={L6 }
+
+    mulli   r0,r6,28
+    lwz     r4,grOt_804D69C0(r0)
+    lfs     f0,32(r4); fIsPtrOp
+    add     r4,r3,r0
+    lfs     f1,204(r4); fIsPtrOp
+    fadds   f0,f1,f0
+    stfs    f0,204(r4); fIsPtrOp
+    lha     r3,216(r4); fIsPtrOp
+    addi    r0,r3,1
+    sth     r0,216(r4); fIsPtrOp
+:{0006}::::LOOPWEIGHT=5026192
+B11: Succ={} Pred={B10 B4 } Labels={L9 }
+
+    blr     ; fIsLive
+
+FINAL CODE AFTER INSTRUCTION SCHEDULING
+grOnett_801E54B4
+:{0005}::::LOOPWEIGHT=-916979712
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=17039360
+B1: Succ={B2 } Pred={B0 } Labels={L1 }
+
+:{000c}::::LOOPWEIGHT=590336
+B2: Succ={B3 B5 } Pred={B1 } Labels={L2 }
+
+    lbz     r0,52(r5); fIsPtrOp
+    rlwinm  r0,r0,29,28,31
+    cmpi    cr0,r0,1
+    bt      cr0,eq,B5
+:{0004}::::LOOPWEIGHT=-166723584
+B3: Succ={B4 B5 } Pred={B2 } Labels={L7 }
+
+    cmpi    cr0,r0,2
+    bt      cr0,eq,B5
+:{0004}::::LOOPWEIGHT=292
+B4: Succ={B5 B11 } Pred={B3 } Labels={L8 }
+
+    cmpi    cr0,r0,3
+    bf      cr0,eq,B11
+:{0004}::::LOOPWEIGHT=-916979712
+B5: Succ={B6 B7 } Pred={B4 B3 B2 } Labels={L3 L10 }
+
+    cmpi    cr0,r4,0
+    bf      cr0,eq,B7
+:{0004}::::LOOPWEIGHT=195
+B6: Succ={B8 } Pred={B5 } Labels={L11 }
+
+    li      r6,0
+    b       B8
+:{0004}::::LOOPWEIGHT=0
+B7: Succ={B8 } Pred={B5 } Labels={L4 }
+
+    li      r6,1
+:{0004}::::LOOPWEIGHT=-166723584
+B8: Succ={B9 B10 } Pred={B7 B6 } Labels={L5 }
+
+    cmpi    cr0,r7,1
+    bf      cr0,eq,B10
+:{000c}::::LOOPWEIGHT=12828240
+B9: Succ={B10 } Pred={B8 } Labels={L12 }
+
+    mulli   r0,r6,28
+    add     r5,r3,r0
+    li      r0,1
+    sth     r0,222(r5); fIsPtrOp
+    lwz     r4,grOt_804D69C0(r0)
+    lfs     f0,0(r4); fIsPtrOp
+    stfs    f0,212(r5); fIsPtrOp
+:{000c}::::LOOPWEIGHT=12829400
+B10: Succ={B11 } Pred={B9 B8 } Labels={L6 }
+
+    mulli   r0,r6,28
+    lwz     r4,grOt_804D69C0(r0)
+    lfs     f0,32(r4); fIsPtrOp
+    add     r4,r3,r0
+    lfs     f1,204(r4); fIsPtrOp
+    fadds   f0,f1,f0
+    stfs    f0,204(r4); fIsPtrOp
+    lha     r3,216(r4); fIsPtrOp
+    addi    r0,r3,1
+    sth     r0,216(r4); fIsPtrOp
+:{0006}::::LOOPWEIGHT=5026192
+B11: Succ={} Pred={B10 B4 } Labels={L9 }
+
+    blr     ; fIsLive
+Starting function grOnett_801E56FC
+--------------------------------------------------------------------------------
+Removing unreachable code at: 6
+*****************
+Dumps for pass=0
+*****************
+Found propagatable expression assignment at: 28
+Found expression propagation at 49 from 28
+Replacing common sub at 35 with 25
+Removing branch around goto at 9
+*****************
+Dumps for pass=1
+*****************
+
+BEFORE GLOBAL OPTIMIZATION
+grOnett_801E56FC
+:{0005}::::LOOPWEIGHT=-1668808509
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=590336
+B1: Succ={B2 } Pred={B0 } Labels={L2 L1 }
+
+    li      r3,1
+:{0004}::::LOOPWEIGHT=-597688320
+B2: Succ={B3 } Pred={B1 } Labels={L5 }
+
+    bl      grDatFiles_801C6330; fLink
+:{0004}::::LOOPWEIGHT=0
+B3: Succ={B4 B6 } Pred={B2 } Labels={L6 }
+
+    mr      r35,r3
+    mr      r33,r35
+    cmpli   cr0,r33,0
+    bf      cr0,eq,B6
+:{0004}::::LOOPWEIGHT=0
+B4: Succ={B5 } Pred={B3 } Labels={L7 }
+
+    lis     r36,HA(@161)
+    addi    r37,r36,LO(@161)
+    mr      r3,r37
+    li      r4,1319
+    li      r5,@219
+:{0004}::::LOOPWEIGHT=12822296
+B5: Succ={B6 } Pred={B4 } Labels={L8 }
+
+    bl      __assert; fLink
+:{0004}::::LOOPWEIGHT=13959168
+B6: Succ={B7 B8 } Pred={B5 B3 } Labels={L3 L9 }
+
+    lwz     r34,4(r33); fIsPtrOp
+    mr      r32,r34
+    cmpli   cr0,r34,0
+    bt      cr0,eq,B8
+:{0004}::::LOOPWEIGHT=195
+B7: Succ={B9 } Pred={B6 } Labels={L10 }
+
+    lwz     r38,8(r32); fIsPtrOp
+    addi    r3,r38,52
+    b       B9
+:{0004}::::LOOPWEIGHT=14483456
+B8: Succ={B9 } Pred={B6 } Labels={L4 }
+
+    li      r3,0
+:{0006}::::LOOPWEIGHT=259
+B9: Succ={} Pred={B8 B7 } Labels={L11 }
+
+
+AFTER COPY PROPAGATION
+grOnett_801E56FC
+:{0005}::::LOOPWEIGHT=-1668808509
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=590336
+B1: Succ={B2 } Pred={B0 } Labels={L2 L1 }
+
+    li      r3,1
+:{0004}::::LOOPWEIGHT=-597688320
+B2: Succ={B3 } Pred={B1 } Labels={L5 }
+
+    bl      grDatFiles_801C6330; fLink
+:{0004}::::LOOPWEIGHT=0
+B3: Succ={B4 B6 } Pred={B2 } Labels={L6 }
+
+    mr      r35,r3
+    cmpli   cr0,r35,0
+    bf      cr0,eq,B6
+:{0004}::::LOOPWEIGHT=0
+B4: Succ={B5 } Pred={B3 } Labels={L7 }
+
+    lis     r36,HA(@161)
+    addi    r37,r36,LO(@161)
+    mr      r3,r37
+    li      r4,1319
+    li      r5,@219
+:{0004}::::LOOPWEIGHT=12822296
+B5: Succ={B6 } Pred={B4 } Labels={L8 }
+
+    bl      __assert; fLink
+:{0004}::::LOOPWEIGHT=13959168
+B6: Succ={B7 B8 } Pred={B5 B3 } Labels={L3 L9 }
+
+    lwz     r34,4(r35); fIsPtrOp
+    cmpli   cr0,r34,0
+    bt      cr0,eq,B8
+:{0004}::::LOOPWEIGHT=195
+B7: Succ={B9 } Pred={B6 } Labels={L10 }
+
+    lwz     r38,8(r34); fIsPtrOp
+    addi    r3,r38,52
+    b       B9
+:{0004}::::LOOPWEIGHT=14483456
+B8: Succ={B9 } Pred={B6 } Labels={L4 }
+
+    li      r3,0
+:{0006}::::LOOPWEIGHT=259
+B9: Succ={} Pred={B8 B7 } Labels={L11 }
+
+
+AFTER INSTRUCTION SCHEDULING
+grOnett_801E56FC
+:{0005}::::LOOPWEIGHT=-1668808509
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=590336
+B1: Succ={B2 } Pred={B0 } Labels={L2 L1 }
+
+    li      r3,1
+:{0004}::::LOOPWEIGHT=-597688320
+B2: Succ={B3 } Pred={B1 } Labels={L5 }
+
+    bl      grDatFiles_801C6330; fLink
+:{000c}::::LOOPWEIGHT=0
+B3: Succ={B4 B6 } Pred={B2 } Labels={L6 }
+
+    mr      r35,r3
+    cmpli   cr0,r35,0
+    bf      cr0,eq,B6
+:{000c}::::LOOPWEIGHT=0
+B4: Succ={B5 } Pred={B3 } Labels={L7 }
+
+    lis     r36,HA(@161)
+    addi    r37,r36,LO(@161)
+    mr      r3,r37
+    li      r4,1319
+    li      r5,@219
+:{0004}::::LOOPWEIGHT=12822296
+B5: Succ={B6 } Pred={B4 } Labels={L8 }
+
+    bl      __assert; fLink
+:{000c}::::LOOPWEIGHT=13959168
+B6: Succ={B7 B8 } Pred={B5 B3 } Labels={L3 L9 }
+
+    lwz     r34,4(r35); fIsPtrOp
+    cmpli   cr0,r34,0
+    bt      cr0,eq,B8
+:{000c}::::LOOPWEIGHT=195
+B7: Succ={B9 } Pred={B6 } Labels={L10 }
+
+    lwz     r38,8(r34); fIsPtrOp
+    addi    r3,r38,52
+    b       B9
+:{0004}::::LOOPWEIGHT=14483456
+B8: Succ={B9 } Pred={B6 } Labels={L4 }
+
+    li      r3,0
+:{0006}::::LOOPWEIGHT=259
+B9: Succ={} Pred={B8 B7 } Labels={L11 }
+
+
+AFTER PEEPHOLE FORWARD
+grOnett_801E56FC
+:{0005}::::LOOPWEIGHT=-1668808509
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=590336
+B1: Succ={B2 } Pred={B0 } Labels={L2 L1 }
+
+    li      r3,1
+:{0004}::::LOOPWEIGHT=-597688320
+B2: Succ={B3 } Pred={B1 } Labels={L5 }
+
+    bl      grDatFiles_801C6330; fLink
+:{000c}::::LOOPWEIGHT=0
+B3: Succ={B4 B6 } Pred={B2 } Labels={L6 }
+
+    mr      r35,r3
+    cmpli   cr0,r35,0
+    bf      cr0,eq,B6
+:{000c}::::LOOPWEIGHT=0
+B4: Succ={B5 } Pred={B3 } Labels={L7 }
+
+    lis     r36,HA(@161)
+    addi    r37,r36,LO(@161)
+    mr      r3,r37
+    li      r4,1319
+    li      r5,@219
+:{0004}::::LOOPWEIGHT=12822296
+B5: Succ={B6 } Pred={B4 } Labels={L8 }
+
+    bl      __assert; fLink
+:{000c}::::LOOPWEIGHT=13959168
+B6: Succ={B7 B8 } Pred={B5 B3 } Labels={L3 L9 }
+
+    lwz     r34,4(r35); fIsPtrOp
+    cmpli   cr0,r34,0
+    bt      cr0,eq,B8
+:{000c}::::LOOPWEIGHT=195
+B7: Succ={B9 } Pred={B6 } Labels={L10 }
+
+    lwz     r38,8(r34); fIsPtrOp
+    addi    r3,r38,52
+    b       B9
+:{0004}::::LOOPWEIGHT=14483456
+B8: Succ={B9 } Pred={B6 } Labels={L4 }
+
+    li      r3,0
+:{0006}::::LOOPWEIGHT=259
+B9: Succ={} Pred={B8 B7 } Labels={L11 }
+
+
+AFTER REGISTER COLORING
+grOnett_801E56FC
+:{0005}::::LOOPWEIGHT=-1668808509
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=590336
+B1: Succ={B2 } Pred={B0 } Labels={L2 L1 }
+
+    li      r3,1
+:{0004}::::LOOPWEIGHT=-597688320
+B2: Succ={B3 } Pred={B1 } Labels={L5 }
+
+    bl      grDatFiles_801C6330; fLink
+:{000c}::::LOOPWEIGHT=0
+B3: Succ={B4 B6 } Pred={B2 } Labels={L6 }
+
+    mr      r31,r3
+    cmpli   cr0,r31,0
+    bf      cr0,eq,B6
+:{0004}::::LOOPWEIGHT=0
+B4: Succ={B5 } Pred={B3 } Labels={L7 }
+
+    lis     r3,HA(@161)
+    addi    r3,r3,LO(@161)
+    li      r4,1319
+    li      r5,@219
+:{0004}::::LOOPWEIGHT=12822296
+B5: Succ={B6 } Pred={B4 } Labels={L8 }
+
+    bl      __assert; fLink
+:{000c}::::LOOPWEIGHT=13959168
+B6: Succ={B7 B8 } Pred={B5 B3 } Labels={L3 L9 }
+
+    lwz     r3,4(r31); fIsPtrOp
+    cmpli   cr0,r3,0
+    bt      cr0,eq,B8
+:{000c}::::LOOPWEIGHT=195
+B7: Succ={B9 } Pred={B6 } Labels={L10 }
+
+    lwz     r3,8(r3); fIsPtrOp
+    addi    r3,r3,52
+    b       B9
+:{0004}::::LOOPWEIGHT=14483456
+B8: Succ={B9 } Pred={B6 } Labels={L4 }
+
+    li      r3,0
+:{0006}::::LOOPWEIGHT=259
+B9: Succ={} Pred={B8 B7 } Labels={L11 }
+
+
+AFTER GENERATING EPILOGUE, PROLOGUE
+grOnett_801E56FC
+:{0005}::::LOOPWEIGHT=-1668808509
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+    mflr    r0
+    stw     r0,4(r1); fIsPtrOp
+    stwu    r1,-16(r1); fIsPtrOp
+    stw     r31,12(r1); fIsPtrOp
+:{0004}::::LOOPWEIGHT=590336
+B1: Succ={B2 } Pred={B0 } Labels={L2 L1 }
+
+    li      r3,1
+:{0004}::::LOOPWEIGHT=-597688320
+B2: Succ={B3 } Pred={B1 } Labels={L5 }
+
+    bl      grDatFiles_801C6330; fLink
+:{000c}::::LOOPWEIGHT=0
+B3: Succ={B4 B6 } Pred={B2 } Labels={L6 }
+
+    mr      r31,r3
+    cmpli   cr0,r31,0
+    bf      cr0,eq,B6
+:{0004}::::LOOPWEIGHT=0
+B4: Succ={B5 } Pred={B3 } Labels={L7 }
+
+    lis     r3,HA(@161)
+    addi    r3,r3,LO(@161)
+    li      r4,1319
+    li      r5,@219
+:{0004}::::LOOPWEIGHT=12822296
+B5: Succ={B6 } Pred={B4 } Labels={L8 }
+
+    bl      __assert; fLink
+:{000c}::::LOOPWEIGHT=13959168
+B6: Succ={B7 B8 } Pred={B5 B3 } Labels={L3 L9 }
+
+    lwz     r3,4(r31); fIsPtrOp
+    cmpli   cr0,r3,0
+    bt      cr0,eq,B8
+:{000c}::::LOOPWEIGHT=195
+B7: Succ={B9 } Pred={B6 } Labels={L10 }
+
+    lwz     r3,8(r3); fIsPtrOp
+    addi    r3,r3,52
+    b       B9
+:{0004}::::LOOPWEIGHT=14483456
+B8: Succ={B9 } Pred={B6 } Labels={L4 }
+
+    li      r3,0
+:{0006}::::LOOPWEIGHT=259
+B9: Succ={} Pred={B8 B7 } Labels={L11 }
+
+    lwz     r0,20(r1); fIsPtrOp
+    lwz     r31,12(r1); fIsVolatile; fIsPtrOp
+    addi    r1,r1,16; fSideEffects
+    mtlr    r0
+    blr     ; fIsLive
+
+AFTER MERGING EPILOGUE, PROLOGUE
+grOnett_801E56FC
+:{0005}::::LOOPWEIGHT=-1668808509
+B0: Succ={B2 } Pred={} Labels={L0 }
+
+    mflr    r0
+    stw     r0,4(r1); fIsPtrOp
+    stwu    r1,-16(r1); fIsPtrOp
+    stw     r31,12(r1); fIsPtrOp
+    li      r3,1
+:{0004}::::LOOPWEIGHT=-597688320
+B2: Succ={B3 } Pred={B0 } Labels={L5 }
+
+    bl      grDatFiles_801C6330; fLink
+:{000c}::::LOOPWEIGHT=0
+B3: Succ={B4 B6 } Pred={B2 } Labels={L6 }
+
+    mr      r31,r3
+    cmpli   cr0,r31,0
+    bf      cr0,eq,B6
+:{0004}::::LOOPWEIGHT=0
+B4: Succ={B5 } Pred={B3 } Labels={L7 }
+
+    lis     r3,HA(@161)
+    addi    r3,r3,LO(@161)
+    li      r4,1319
+    li      r5,@219
+:{0004}::::LOOPWEIGHT=12822296
+B5: Succ={B6 } Pred={B4 } Labels={L8 }
+
+    bl      __assert; fLink
+:{000c}::::LOOPWEIGHT=13959168
+B6: Succ={B7 B8 } Pred={B5 B3 } Labels={L3 L9 }
+
+    lwz     r3,4(r31); fIsPtrOp
+    cmpli   cr0,r3,0
+    bt      cr0,eq,B8
+:{000c}::::LOOPWEIGHT=195
+B7: Succ={B9 } Pred={B6 } Labels={L10 }
+
+    lwz     r3,8(r3); fIsPtrOp
+    addi    r3,r3,52
+    b       B9
+:{0004}::::LOOPWEIGHT=14483456
+B8: Succ={B9 } Pred={B6 } Labels={L4 }
+
+    li      r3,0
+:{0006}::::LOOPWEIGHT=259
+B9: Succ={} Pred={B8 B7 } Labels={L11 }
+
+    lwz     r0,20(r1); fIsPtrOp
+    lwz     r31,12(r1); fIsVolatile; fIsPtrOp
+    addi    r1,r1,16; fSideEffects
+    mtlr    r0
+    blr     ; fIsLive
+
+AFTER PEEPHOLE OPTIMIZATION
+grOnett_801E56FC
+:{0005}::::LOOPWEIGHT=-1668808509
+B0: Succ={B2 } Pred={} Labels={L0 }
+
+    mflr    r0
+    stw     r0,4(r1); fIsPtrOp
+    stwu    r1,-16(r1); fIsPtrOp
+    stw     r31,12(r1); fIsPtrOp
+    li      r3,1
+:{0004}::::LOOPWEIGHT=-597688320
+B2: Succ={B3 } Pred={B0 } Labels={L5 }
+
+    bl      grDatFiles_801C6330; fLink
+:{0004}::::LOOPWEIGHT=0
+B3: Succ={B4 B6 } Pred={B2 } Labels={L6 }
+
+    mr      r31,r3
+    bf      cr0,eq,B6
+:{0004}::::LOOPWEIGHT=0
+B4: Succ={B5 } Pred={B3 } Labels={L7 }
+
+    lis     r3,HA(@161)
+    addi    r3,r3,LO(@161)
+    li      r4,1319
+    li      r5,@219
+:{0004}::::LOOPWEIGHT=12822296
+B5: Succ={B6 } Pred={B4 } Labels={L8 }
+
+    bl      __assert; fLink
+:{000c}::::LOOPWEIGHT=13959168
+B6: Succ={B7 B8 } Pred={B5 B3 } Labels={L3 L9 }
+
+    lwz     r3,4(r31); fIsPtrOp
+    cmpli   cr0,r3,0
+    bt      cr0,eq,B8
+:{000c}::::LOOPWEIGHT=195
+B7: Succ={B9 } Pred={B6 } Labels={L10 }
+
+    lwz     r3,8(r3); fIsPtrOp
+    addi    r3,r3,52
+    b       B9
+:{0004}::::LOOPWEIGHT=14483456
+B8: Succ={B9 } Pred={B6 } Labels={L4 }
+
+    li      r3,0
+:{0006}::::LOOPWEIGHT=259
+B9: Succ={} Pred={B8 B7 } Labels={L11 }
+
+    lwz     r0,20(r1); fIsPtrOp
+    lwz     r31,12(r1); fIsVolatile; fIsPtrOp
+    addi    r1,r1,16; fSideEffects
+    mtlr    r0
+    blr     ; fIsLive
+
+FINAL CODE AFTER INSTRUCTION SCHEDULING
+grOnett_801E56FC
+:{000d}::::LOOPWEIGHT=-1668808509
+B0: Succ={B2 } Pred={} Labels={L0 }
+
+    mflr    r0
+    li      r3,1
+    stw     r0,4(r1); fIsPtrOp
+    stwu    r1,-16(r1); fIsPtrOp
+    stw     r31,12(r1); fIsPtrOp
+:{0004}::::LOOPWEIGHT=-597688320
+B2: Succ={B3 } Pred={B0 } Labels={L5 }
+
+    bl      grDatFiles_801C6330; fLink
+:{0004}::::LOOPWEIGHT=0
+B3: Succ={B4 B6 } Pred={B2 } Labels={L6 }
+
+    mr      r31,r3
+    bf      cr0,eq,B6
+:{000c}::::LOOPWEIGHT=0
+B4: Succ={B5 } Pred={B3 } Labels={L7 }
+
+    lis     r3,HA(@161)
+    addi    r3,r3,LO(@161)
+    li      r4,1319
+    li      r5,@219
+:{0004}::::LOOPWEIGHT=12822296
+B5: Succ={B6 } Pred={B4 } Labels={L8 }
+
+    bl      __assert; fLink
+:{000c}::::LOOPWEIGHT=13959168
+B6: Succ={B7 B8 } Pred={B5 B3 } Labels={L3 L9 }
+
+    lwz     r3,4(r31); fIsPtrOp
+    cmpli   cr0,r3,0
+    bt      cr0,eq,B8
+:{000c}::::LOOPWEIGHT=195
+B7: Succ={B9 } Pred={B6 } Labels={L10 }
+
+    lwz     r3,8(r3); fIsPtrOp
+    addi    r3,r3,52
+    b       B9
+:{0004}::::LOOPWEIGHT=14483456
+B8: Succ={B9 } Pred={B6 } Labels={L4 }
+
+    li      r3,0
+:{000e}::::LOOPWEIGHT=259
+B9: Succ={} Pred={B8 B7 } Labels={L11 }
+
+    lwz     r0,20(r1); fIsPtrOp
+    lwz     r31,12(r1); fIsVolatile; fIsPtrOp
+    addi    r1,r1,16; fSideEffects
+    mtlr    r0
+    blr     ; fIsLive
+Starting function grOnett_801E5760
+--------------------------------------------------------------------------------
+Removing unreachable code at: 1
+*****************
+Dumps for pass=0
+*****************
+*****************
+Dumps for pass=1
+*****************
+
+BEFORE GLOBAL OPTIMIZATION
+grOnett_801E5760
+:{0005}::::LOOPWEIGHT=0
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=15859712
+B1: Succ={B2 } Pred={B0 } Labels={L2 L1 }
+
+    li      r3,0
+:{0006}::::LOOPWEIGHT=0
+B2: Succ={} Pred={B1 } Labels={L3 }
+
+
+AFTER INSTRUCTION SCHEDULING
+grOnett_801E5760
+:{0005}::::LOOPWEIGHT=0
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=15859712
+B1: Succ={B2 } Pred={B0 } Labels={L2 L1 }
+
+    li      r3,0
+:{0006}::::LOOPWEIGHT=0
+B2: Succ={} Pred={B1 } Labels={L3 }
+
+
+AFTER PEEPHOLE FORWARD
+grOnett_801E5760
+:{0005}::::LOOPWEIGHT=0
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=15859712
+B1: Succ={B2 } Pred={B0 } Labels={L2 L1 }
+
+    li      r3,0
+:{0006}::::LOOPWEIGHT=0
+B2: Succ={} Pred={B1 } Labels={L3 }
+
+
+AFTER REGISTER COLORING
+grOnett_801E5760
+:{0005}::::LOOPWEIGHT=0
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=15859712
+B1: Succ={B2 } Pred={B0 } Labels={L2 L1 }
+
+    li      r3,0
+:{0006}::::LOOPWEIGHT=0
+B2: Succ={} Pred={B1 } Labels={L3 }
+
+
+AFTER GENERATING EPILOGUE, PROLOGUE
+grOnett_801E5760
+:{0005}::::LOOPWEIGHT=0
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=15859712
+B1: Succ={B2 } Pred={B0 } Labels={L2 L1 }
+
+    li      r3,0
+:{0006}::::LOOPWEIGHT=0
+B2: Succ={} Pred={B1 } Labels={L3 }
+
+    blr     ; fIsLive
+
+AFTER MERGING EPILOGUE, PROLOGUE
+grOnett_801E5760
+:{0005}::::LOOPWEIGHT=0
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=15859712
+B1: Succ={B2 } Pred={B0 } Labels={L2 L1 }
+
+    li      r3,0
+:{0006}::::LOOPWEIGHT=0
+B2: Succ={} Pred={B1 } Labels={L3 }
+
+    blr     ; fIsLive
+
+AFTER PEEPHOLE OPTIMIZATION
+grOnett_801E5760
+:{0005}::::LOOPWEIGHT=0
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=15859712
+B1: Succ={B2 } Pred={B0 } Labels={L2 L1 }
+
+    li      r3,0
+:{0006}::::LOOPWEIGHT=0
+B2: Succ={} Pred={B1 } Labels={L3 }
+
+    blr     ; fIsLive
+
+FINAL CODE AFTER INSTRUCTION SCHEDULING
+grOnett_801E5760
+:{0005}::::LOOPWEIGHT=0
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=15859712
+B1: Succ={B2 } Pred={B0 } Labels={L2 L1 }
+
+    li      r3,0
+:{0006}::::LOOPWEIGHT=0
+B2: Succ={} Pred={B1 } Labels={L3 }
+
+    blr     ; fIsLive
+Starting function grOnett_801E5768
+--------------------------------------------------------------------------------
+Removing unreachable code at: 3
+*****************
+Dumps for pass=0
+*****************
+*****************
+Dumps for pass=1
+*****************
+
+BEFORE GLOBAL OPTIMIZATION
+grOnett_801E5768
+:{0005}::::LOOPWEIGHT=512
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=12818160
+B1: Succ={B2 } Pred={B0 } Labels={L1 }
+
+    mr      r32,r3
+    mr      r33,r5
+:{0004}::::LOOPWEIGHT=0
+B2: Succ={B3 } Pred={B1 } Labels={L2 }
+
+    mr      r3,r33
+    li      r4,0
+    addi    r5,r1,vec
+:{0004}::::LOOPWEIGHT=0
+B3: Succ={B4 } Pred={B2 } Labels={L4 }
+
+    bl      lb_8000B1CC; fLink
+:{0004}::::LOOPWEIGHT=1
+B4: Succ={B5 B6 } Pred={B3 } Labels={L5 }
+
+    lfs     f32,4(r32); fIsPtrOp
+    lfs     f33,vec+4(r1)
+    fcmpo   cr0,f32,f33
+    bf      cr0,gt,B6
+:{0004}::::LOOPWEIGHT=5029104
+B5: Succ={B7 } Pred={B4 } Labels={L6 }
+
+    li      r3,1
+    b       B7
+:{0004}::::LOOPWEIGHT=-1622671165
+B6: Succ={B7 } Pred={B4 } Labels={L3 }
+
+    li      r3,0
+:{0006}::::LOOPWEIGHT=-568328192
+B7: Succ={} Pred={B6 B5 } Labels={L7 }
+
+
+AFTER INSTRUCTION SCHEDULING
+grOnett_801E5768
+:{0005}::::LOOPWEIGHT=512
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{000c}::::LOOPWEIGHT=12818160
+B1: Succ={B3 } Pred={B0 } Labels={L1 }
+
+    mr      r33,r5
+    mr      r32,r3
+    mr      r3,r33
+    addi    r5,r1,vec
+    li      r4,0
+:{0004}::::LOOPWEIGHT=0
+B3: Succ={B4 } Pred={B1 } Labels={L4 }
+
+    bl      lb_8000B1CC; fLink
+:{000c}::::LOOPWEIGHT=1
+B4: Succ={B5 B6 } Pred={B3 } Labels={L5 }
+
+    lfs     f32,4(r32); fIsPtrOp
+    lfs     f33,vec+4(r1)
+    fcmpo   cr0,f32,f33
+    bf      cr0,gt,B6
+:{0004}::::LOOPWEIGHT=5029104
+B5: Succ={B7 } Pred={B4 } Labels={L6 }
+
+    li      r3,1
+    b       B7
+:{0004}::::LOOPWEIGHT=-1622671165
+B6: Succ={B7 } Pred={B4 } Labels={L3 }
+
+    li      r3,0
+:{0006}::::LOOPWEIGHT=-568328192
+B7: Succ={} Pred={B6 B5 } Labels={L7 }
+
+
+AFTER PEEPHOLE FORWARD
+grOnett_801E5768
+:{0005}::::LOOPWEIGHT=512
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{000c}::::LOOPWEIGHT=12818160
+B1: Succ={B3 } Pred={B0 } Labels={L1 }
+
+    mr      r33,r5
+    mr      r32,r3
+    mr      r3,r33
+    addi    r5,r1,vec
+    li      r4,0
+:{0004}::::LOOPWEIGHT=0
+B3: Succ={B4 } Pred={B1 } Labels={L4 }
+
+    bl      lb_8000B1CC; fLink
+:{000c}::::LOOPWEIGHT=1
+B4: Succ={B5 B6 } Pred={B3 } Labels={L5 }
+
+    lfs     f32,4(r32); fIsPtrOp
+    lfs     f33,vec+4(r1)
+    fcmpo   cr0,f32,f33
+    bf      cr0,gt,B6
+:{0004}::::LOOPWEIGHT=5029104
+B5: Succ={B7 } Pred={B4 } Labels={L6 }
+
+    li      r3,1
+    b       B7
+:{0004}::::LOOPWEIGHT=-1622671165
+B6: Succ={B7 } Pred={B4 } Labels={L3 }
+
+    li      r3,0
+:{0006}::::LOOPWEIGHT=-568328192
+B7: Succ={} Pred={B6 B5 } Labels={L7 }
+
+
+AFTER REGISTER COLORING
+grOnett_801E5768
+:{0005}::::LOOPWEIGHT=512
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+:{0004}::::LOOPWEIGHT=12818160
+B1: Succ={B3 } Pred={B0 } Labels={L1 }
+
+    mr      r31,r3
+    mr      r3,r5
+    addi    r5,r1,vec
+    li      r4,0
+:{0004}::::LOOPWEIGHT=0
+B3: Succ={B4 } Pred={B1 } Labels={L4 }
+
+    bl      lb_8000B1CC; fLink
+:{000c}::::LOOPWEIGHT=1
+B4: Succ={B5 B6 } Pred={B3 } Labels={L5 }
+
+    lfs     f1,4(r31); fIsPtrOp
+    lfs     f0,vec+4(r1)
+    fcmpo   cr0,f1,f0
+    bf      cr0,gt,B6
+:{0004}::::LOOPWEIGHT=5029104
+B5: Succ={B7 } Pred={B4 } Labels={L6 }
+
+    li      r3,1
+    b       B7
+:{0004}::::LOOPWEIGHT=-1622671165
+B6: Succ={B7 } Pred={B4 } Labels={L3 }
+
+    li      r3,0
+:{0006}::::LOOPWEIGHT=-568328192
+B7: Succ={} Pred={B6 B5 } Labels={L7 }
+
+
+AFTER GENERATING EPILOGUE, PROLOGUE
+grOnett_801E5768
+:{0005}::::LOOPWEIGHT=512
+B0: Succ={B1 } Pred={} Labels={L0 }
+
+    mflr    r0
+    stw     r0,4(r1); fIsPtrOp
+    stwu    r1,-40(r1); fIsPtrOp
+    stw     r31,36(r1); fIsPtrOp
+:{0004}::::LOOPWEIGHT=12818160
+B1: Succ={B3 } Pred={B0 } Labels={L1 }
+
+    mr      r31,r3
+    mr      r3,r5
+    addi    r5,r1,vec
+    li      r4,0
+:{0004}::::LOOPWEIGHT=0
+B3: Succ={B4 } Pred={B1 } Labels={L4 }
+
+    bl      lb_8000B1CC; fLink
+:{000c}::::LOOPWEIGHT=1
+B4: Succ={B5 B6 } Pred={B3 } Labels={L5 }
+
+    lfs     f1,4(r31); fIsPtrOp
+    lfs     f0,vec+4(r1)
+    fcmpo   cr0,f1,f0
+    bf      cr0,gt,B6
+:{0004}::::LOOPWEIGHT=5029104
+B5: Succ={B7 } Pred={B4 } Labels={L6 }
+
+    li      r3,1
+    b       B7
+:{0004}::::LOOPWEIGHT=-1622671165
+B6: Succ={B7 } Pred={B4 } Labels={L3 }
+
+    li      r3,0
+:{0006}::::LOOPWEIGHT=-568328192
+B7: Succ={} Pred={B6 B5 } Labels={L7 }
+
+    lwz     r0,44(r1); fIsPtrOp
+    lwz     r31,36(r1); fIsVolatile; fIsPtrOp
+    addi    r1,r1,40; fSideEffects
+    mtlr    r0
+    blr     ; fIsLive
+
+AFTER MERGING EPILOGUE, PROLOGUE
+grOnett_801E5768
+:{0005}::::LOOPWEIGHT=512
+B0: Succ={B3 } Pred={} Labels={L0 }
+
+    mflr    r0
+    stw     r0,4(r1); fIsPtrOp
+    stwu    r1,-40(r1); fIsPtrOp
+    stw     r31,36(r1); fIsPtrOp
+    mr      r31,r3
+    mr      r3,r5
+    addi    r5,r1,vec
+    li      r4,0
+:{0004}::::LOOPWEIGHT=0
+B3: Succ={B4 } Pred={B0 } Labels={L4 }
+
+    bl      lb_8000B1CC; fLink
+:{000c}::::LOOPWEIGHT=1
+B4: Succ={B5 B6 } Pred={B3 } Labels={L5 }
+
+    lfs     f1,4(r31); fIsPtrOp
+    lfs     f0,vec+4(r1)
+    fcmpo   cr0,f1,f0
+    bf      cr0,gt,B6
+:{0004}::::LOOPWEIGHT=5029104
+B5: Succ={B7 } Pred={B4 } Labels={L6 }
+
+    li      r3,1
+    b       B7
+:{0004}::::LOOPWEIGHT=-1622671165
+B6: Succ={B7 } Pred={B4 } Labels={L3 }
+
+    li      r3,0
+:{0006}::::LOOPWEIGHT=-568328192
+B7: Succ={} Pred={B6 B5 } Labels={L7 }
+
+    lwz     r0,44(r1); fIsPtrOp
+    lwz     r31,36(r1); fIsVolatile; fIsPtrOp
+    addi    r1,r1,40; fSideEffects
+    mtlr    r0
+    blr     ; fIsLive
+
+AFTER PEEPHOLE OPTIMIZATION
+grOnett_801E5768
+:{0005}::::LOOPWEIGHT=512
+B0: Succ={B3 } Pred={} Labels={L0 }
+
+    mflr    r0
+    stw     r0,4(r1); fIsPtrOp
+    stwu    r1,-40(r1); fIsPtrOp
+    stw     r31,36(r1); fIsPtrOp
+    addi    r31,r3,0
+    addi    r3,r5,0
+    addi    r5,r1,vec
+    li      r4,0
+:{0004}::::LOOPWEIGHT=0
+B3: Succ={B4 } Pred={B0 } Labels={L4 }
+
+    bl      lb_8000B1CC; fLink
+:{000c}::::LOOPWEIGHT=1
+B4: Succ={B5 B6 } Pred={B3 } Labels={L5 }
+
+    lfs     f1,4(r31); fIsPtrOp
+    lfs     f0,vec+4(r1)
+    fcmpo   cr0,f1,f0
+    bf      cr0,gt,B6
+:{0004}::::LOOPWEIGHT=5029104
+B5: Succ={B7 } Pred={B4 } Labels={L6 }
+
+    li      r3,1
+    b       B7
+:{0004}::::LOOPWEIGHT=-1622671165
+B6: Succ={B7 } Pred={B4 } Labels={L3 }
+
+    li      r3,0
+:{0006}::::LOOPWEIGHT=-568328192
+B7: Succ={} Pred={B6 B5 } Labels={L7 }
+
+    lwz     r0,44(r1); fIsPtrOp
+    lwz     r31,36(r1); fIsVolatile; fIsPtrOp
+    addi    r1,r1,40; fSideEffects
+    mtlr    r0
+    blr     ; fIsLive
+
+FINAL CODE AFTER INSTRUCTION SCHEDULING
+grOnett_801E5768
+:{000d}::::LOOPWEIGHT=512
+B0: Succ={B3 } Pred={} Labels={L0 }
+
+    mflr    r0
+    li      r4,0
+    stw     r0,4(r1); fIsPtrOp
+    stwu    r1,-40(r1); fIsPtrOp
+    stw     r31,36(r1); fIsPtrOp
+    addi    r31,r3,0
+    addi    r3,r5,0
+    addi    r5,r1,vec
+:{0004}::::LOOPWEIGHT=0
+B3: Succ={B4 } Pred={B0 } Labels={L4 }
+
+    bl      lb_8000B1CC; fLink
+:{000c}::::LOOPWEIGHT=1
+B4: Succ={B5 B6 } Pred={B3 } Labels={L5 }
+
+    lfs     f1,4(r31); fIsPtrOp
+    lfs     f0,vec+4(r1)
+    fcmpo   cr0,f1,f0
+    bf      cr0,gt,B6
+:{0004}::::LOOPWEIGHT=5029104
+B5: Succ={B7 } Pred={B4 } Labels={L6 }
+
+    li      r3,1
+    b       B7
+:{0004}::::LOOPWEIGHT=-1622671165
+B6: Succ={B7 } Pred={B4 } Labels={L3 }
+
+    li      r3,0
+:{000e}::::LOOPWEIGHT=-568328192
+B7: Succ={} Pred={B6 B5 } Labels={L7 }
+
+    lwz     r0,44(r1); fIsPtrOp
+    lwz     r31,36(r1); fIsVolatile; fIsPtrOp
+    addi    r1,r1,40; fSideEffects
+    mtlr    r0
+    blr     ; fIsLive
