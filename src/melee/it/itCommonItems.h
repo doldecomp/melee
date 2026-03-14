@@ -1389,7 +1389,9 @@ typedef struct itOldottosea_ItemVars {
 } itOldottosea_ItemVars;
 
 typedef struct itPatapata_ItemVars {
-    /* 0x00 */ u8 pad[0x20];
+    /* 0x00 */ u8 pad0[0x4];
+    /* 0x04 */ s32 x4;
+    /* 0x08 */ u8 pad[0x20 - 0x08];
     /* 0x20 */ s32 x20;
     /* 0x24 */ s32 x24;
     /* 0x28 */ s32 x28;
@@ -1397,6 +1399,7 @@ typedef struct itPatapata_ItemVars {
     /* 0x30 */ f32 x30;
     /* 0x34 */ u8 pad1[0x40 - 0x34];
     /* 0x40 */ s32 x40;
+    /* 0x44 */ s32 x44;
 } itPatapata_ItemVars;
 
 typedef struct itPatapataDatAttrs {
@@ -1415,6 +1418,8 @@ typedef struct itPatapataAttributes {
     /* 0x1C */ s32 x1C;
     /* 0x20 */ f32 x20;
     /* 0x24 */ s32 x24;
+    /* 0x28 */ s32 x28;
+    /* 0x2C */ s32 x2C;
 } itPatapataAttributes;
 
 typedef struct itOldottoseaAttributes {
