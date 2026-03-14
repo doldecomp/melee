@@ -42,7 +42,9 @@
     int x4;
     int x8;
     HSD_GObj* xC;
-} un_803F9E08 = { 0 };
+    char x10[12];
+    char x1C[20];
+} un_803F9E08 = { {0}, 0, 0, 0, 0, 0, 0, "IfCoGet.dat", "ScInfCgt_scene_data" };
 /* 3F9E60 */ static HSD_CObjDesc un_803F9E60 = { 0 };
 /* 3F9ED4 */ static HSD_LightDesc un_803F9ED4 = { 0 };
 
@@ -54,11 +56,11 @@ struct un_804A1F58_x8_t {
 };
 
 // TODO: sizeof(un_804A1F58) should be 0x80, see un_802FF498
-/* 4A1F58 */ static struct {
+/* 4A1F58 */ static struct un_804A1F58_t {
     unsigned int x0;
-    unsigned int x4;
+    unsigned char x4;
     struct un_804A1F58_x8_t x8;
-} un_804A1F58[6];
+} un_804A1F58[7];
 
 /// .sbss
 /* 4D6DA0 */ static void* un_804D6DA0;
@@ -148,8 +150,8 @@ void un_802FF1B4(void)
 {
     un_803F9E08.x0.b0 = 1;
     un_803F9E08.x0.b1 = 0;
-    un_804D6DA0 = lbArchive_80016DBC("IfCoGet.dat", &un_804D6DA4,
-                                     "ScInfCgt_scene_data", 0);
+    un_804D6DA0 = lbArchive_80016DBC(un_803F9E08.x10, &un_804D6DA4,
+                                     un_803F9E08.x1C, 0);
     un_802FEFAC();
 }
 
@@ -164,9 +166,9 @@ void fn_802FF218(HSD_GObj* arg0)
         }
     }
     if (y >= 0) {
-        if (un_804A1F58[y].x0 == 1) {
+        if (un_804A1F58[y + 1].x4 == 1) {
             HSD_SisLib_803A70A0(un_804A1F58[y].x8.x4,
-                                (void*) un_804A1F58[y].x4, 0);
+                                (void*) un_804A1F58[y].x8.x8, "");
         } else {
             int s;
             gm_8016B774();
@@ -174,10 +176,11 @@ void fn_802FF218(HSD_GObj* arg0)
             if (s > 9999) {
                 s = 9999;
             }
-            if (un_804A1F58[y].x0 != s) {
+            if (un_804A1F58[y + 1].x0 != (unsigned int) s) {
                 HSD_SisLib_803A70A0(un_804A1F58[y].x8.x4,
-                                    (void*) un_804A1F58[y].x4, 0);
-                un_804A1F58[y].x0 = s;
+                                    (void*) un_804A1F58[y].x8.x8,
+                                    "%d", s);
+                un_804A1F58[y + 1].x0 = s;
             }
         }
     }
@@ -191,16 +194,17 @@ void un_802FF364(int slot)
     Vec3* ifAll;
     struct un_804A1F58_x8_t* thing;
     HSD_GObj* gobj;
-    thing = &un_804A1F58[slot].x8;
-    gobj = thing->x0;
+    struct un_804A1F58_t* base = un_804A1F58;
+    thing = &base[slot].x8;
     ifAll = ifAll_802F3424(slot);
+    gobj = thing->x0;
     if (gobj) {
         HSD_GObjPLink_80390228(gobj);
     }
     if (thing->x4) {
         HSD_SisLib_803A5CC4(thing->x4);
     }
-    thing->x4 = HSD_SisLib_803A6754(2, un_804A1F58->x0);
+    thing->x4 = HSD_SisLib_803A6754(2, base->x0);
     thing->x4->default_alignment = 1;
     thing->x4->default_kerning = 1;
     gm_8016B774();
@@ -219,8 +223,7 @@ void un_802FF364(int slot)
 void un_802FF498(void)
 {
     PAD_STACK(8);
-    // TODO: sizeof(un_804A1F58) should be 0x80
-    memzero(un_804A1F58, sizeof(un_804A1F58));
+    memzero(un_804A1F58, 0x80);
     un_804A1F58->x0 =
         HSD_SisLib_803A611C(2, ifAll_802F3404(), 14, 15, 0, 11, 0, 19);
 }
@@ -242,6 +245,7 @@ void un_802FF570(void)
 {
     int i;
     for (i = 0; i < 6; i++) {
+        un_804A1F58[i + 1].x4 = 1;
         if (un_804A1F58[i].x8.x4) {
             un_804A1F58[i].x8.x4->hidden = 1;
         }
@@ -251,11 +255,12 @@ void un_802FF570(void)
 void un_802FF620(void)
 {
     int i;
+    struct un_804A1F58_t* base = un_804A1F58;
     for (i = 0; i < 6; i++) {
-        un_804A1F58[i].x0 = 0;
-        if (un_804A1F58[i].x8.x4) {
+        base[i + 1].x4 = 0;
+        if (base[i].x8.x4) {
             un_802FF364(i);
-            un_804A1F58[i].x8.x4->hidden = 0;
+            base[i].x8.x4->hidden = 0;
         }
     }
 }
