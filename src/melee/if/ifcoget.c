@@ -167,7 +167,7 @@ void fn_802FF218(HSD_GObj* arg0)
         }
     }
     if (y >= 0) {
-        if (un_804A1F58[y + 1].x4 == 1) {
+        if (un_804A1F58[y].x0 == 1) {
             HSD_SisLib_803A70A0(un_804A1F58[y].x8.x4,
                                 un_804A1F58[y].x8.x8, "");
         } else {
@@ -177,11 +177,11 @@ void fn_802FF218(HSD_GObj* arg0)
             if (s > 9999) {
                 s = 9999;
             }
-            if (un_804A1F58[y + 1].x0 != (unsigned int) s) {
+            if (un_804A1F58[y].x0 != s) {
                 HSD_SisLib_803A70A0(un_804A1F58[y].x8.x4,
                                     un_804A1F58[y].x8.x8,
                                     "%d", s);
-                un_804A1F58[y + 1].x0 = s;
+                un_804A1F58[y].x0 = s;
             }
         }
     }
