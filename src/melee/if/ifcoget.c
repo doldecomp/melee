@@ -100,12 +100,12 @@ void un_802FEFAC(void)
     HSD_JObj* jobj_ui;
     gobj_camera = GObj_Create(HSD_GOBJ_CLASS_CAMERA, 21, 0);
     HSD_GObjObject_80390A70(gobj_camera, HSD_GObj_804D784B,
-                            HSD_CObjLoadDesc(un_804D6DA4->cameras[0].desc));
+        (0, HSD_CObjLoadDesc(un_804D6DA4->cameras[0].desc)));
     GObj_SetupGXLinkMax(gobj_camera, HSD_GObj_803910D8, 9);
     gobj_camera->gxlink_prios = 0x8400;
     gobj_light = GObj_Create(HSD_GOBJ_CLASS_LIGHT, 3, 0);
     HSD_GObjObject_80390A70(gobj_light, HSD_GObj_804D784A,
-                            lb_80011AC4(un_804D6DA4->lights));
+                            (0, lb_80011AC4(un_804D6DA4->lights)));
     GObj_SetupGXLink(gobj_light, HSD_GObj_LObjCallback, 10, 0);
     gobj_ui = GObj_Create(HSD_GOBJ_CLASS_UI, 14, 0);
     jobj_ui = HSD_JObjLoadJoint(un_804D6DA4->models[0]->joint);
