@@ -997,6 +997,8 @@ void ftKb_SpecialNSs_800FCD60(Fighter_GObj* gobj)
 void ftKb_SpecialNSs_800FCF74(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp2;
+    PAD_STACK(8);
     Fighter_ChangeMotionState(gobj, ftKb_MS_SsSpecialNStart, 0, 0.0F, 1.0F,
                               0.0F, NULL);
     fp->cmd_vars[3] = 0;
@@ -1005,9 +1007,9 @@ void ftKb_SpecialNSs_800FCF74(Fighter_GObj* gobj)
     fp->cmd_vars[0] = 0;
     ftCommon_8007D7FC(fp);
     fp->self_vel.y = 0.0F;
-    fp = GET_FIGHTER(gobj);
-    fp->death2_cb = ftKb_Init_800EE74C;
-    fp->take_dmg_cb = ftKb_Init_800EE7B8;
+    fp2 = GET_FIGHTER(gobj);
+    fp2->death2_cb = ftKb_Init_800EE74C;
+    fp2->take_dmg_cb = ftKb_Init_800EE7B8;
     fp->mv.kb.specialhi.x0 = 0;
     fp->mv.kb.specialhi.x4 = 0;
     fp->mv.kb.specialhi.x8.f = 0.0F;
