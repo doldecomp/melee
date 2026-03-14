@@ -48,10 +48,15 @@ lbl_804706D8_t lbl_804706D8[12];
 struct lbl_80472D28_t {
     /*   +0 */ char pad_0[0x104];
     /* +104 */ int x104;
-    /* +108 */ char pad_108[0x2];
+    /* +108 */ s16 x108;
     /* +10A */ s16 x10A;
     /* +10C */ char pad_10C[0xA];
     /* +116 */ u8 x116;
+    /* +117 */ char pad_117[1];
+    /* +118 */ u8 x118;
+    /* +119 */ char pad_119[1];
+    /* +11A */ u8 x11A;
+    /* +11B */ u8 x11B;
 };
 
 struct lbl_80472E48_t {
@@ -802,7 +807,17 @@ s8 gm_8017E280(u16 arg0, u32 arg1)
     return -1;
 }
 
-/// #fn_8017E318
+int fn_8017E318(void)
+{
+    int i;
+    int sum = 0;
+    for (i = 0; i < 12; i++) {
+        if (lbl_804706D8[i].x0 != -1) {
+            sum += lbl_804706D8[i].x2;
+        }
+    }
+    return sum;
+}
 
 void fn_8017E3C8(void)
 {
@@ -931,7 +946,29 @@ bool gm_8017E7E0(void)
     return lbl_80472C30.x7C == 0x14;
 }
 
-/// #gm_8017E7FC
+void gm_8017E7FC(u8 arg0)
+{
+    UnkAdventureData* r31 = &lbl_80472C30;
+    bool cond;
+
+    if (gm_801A4310() == 4 && r31->x0.cpu_level >= 2 &&
+        r31->x0.xC.x20 + gm_8016AEDC() < 0xFD20U)
+    {
+        cond = true;
+    } else {
+        cond = false;
+    }
+
+    if (!cond) {
+        struct StartMeleeRules* rules = gm_8016AE50();
+        rules->x4_5 = 1;
+        r31->x77 = 0;
+        gm_SetScenePendingMinor(0x5A);
+    } else {
+        r31->x77 = 1;
+        gm_SetScenePendingMinor(0x5A);
+    }
+}
 
 /// #fn_8017E8A4
 
@@ -1099,7 +1136,16 @@ Fighter_GObj* gm_80180AF4(void)
     return Player_GetEntity(1);
 }
 
-/// #gm_80180B18
+void gm_80180B18(void)
+{
+    int i;
+
+    for (i = 0; i < 0x1B; i++) {
+        u8 idx = gm_80164024((u8) i);
+        lbl_80472E48.x14[gm_80164024((u8) i)] =
+            (u32) *gmMainLib_8015D06C(idx) / 10;
+    }
+}
 
 void gm_80180BA0(void)
 {
@@ -1171,9 +1217,35 @@ s32 gm_80181A34(void)
     return lbl_80473594.x4;
 }
 
-/// #gm_80181A44
-
 extern u8 lbl_803D8D08[];
+
+void gm_80181A44(int c_kind, int arg1, bool arg2)
+{
+    u8* base;
+
+    base = lbl_803D8D08;
+
+    switch (arg1) {
+    case 0x21:
+        (base + 0x6C)[c_kind] = arg2;
+        break;
+    case 0x22:
+        (base + 0x12C)[c_kind] = arg2;
+        break;
+    case 0x23:
+        (base + 0x1EC)[c_kind] = arg2;
+        break;
+    case 0x24:
+        (base + 0x2AC)[c_kind] = arg2;
+        break;
+    case 0x25:
+        (base + 0x36C)[c_kind] = arg2;
+        break;
+    case 0x26:
+        (base + 0x42C)[c_kind] = arg2;
+        break;
+    }
+}
 
 void gm_80181AC8(int c_kind, int arg1, u16 arg2)
 {
