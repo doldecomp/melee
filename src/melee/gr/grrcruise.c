@@ -166,23 +166,29 @@ void grRCruise_80200540(Ground_GObj* gobj)
 
 /// #grRCruise_80200C04
 
-void fn_802010A4(Ground_GObj* gobj, s32 id, u8* arg2)
+// TODO: is this GET_GROUND? calling it directly didn't work.
+inline Ground* fn_802010A4_inline(Ground_GObj *arg0)
 {
-    Ground* gp = gobj->user_data;
+  return arg0->user_data;
+}
+
+void fn_802010A4(Ground_GObj* gobj, s32 id, CollData* coll)
+{
+    Ground* gp = fn_802010A4_inline(gobj);
     s32 i;
 
-    if (((arg2[0x34] >> 3) & 0xF) != 1) {
+    if ((s32) coll->x34_flags.b1234 != 1) {
         return;
     }
 
     for (i = 0; i < 17; i++) {
-        u8* entry = *(u8**) (gp->gv.pad_0 + 0x6C) + i * 0x18;
-        if (*(s16*) (entry + 2) == id) {
-            if (entry[0] == 0) {
-                *(s32*) (entry + 4) = 0;
-                entry[0] = 1;
+        struct grRCruise_Entry* entry = &gp->gv.rcruise.entries[i];
+        if (entry->x02 == id) {
+            if (entry->x00 == 0) {
+                entry->x04 = 0;
+                entry->x00 = 1;
             }
-            (*(s32*) (entry + 8))++;
+            entry->x08++;
             return;
         }
     }

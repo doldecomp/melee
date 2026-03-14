@@ -7182,7 +7182,7 @@ void fn_8019AF50(s32* arg0, u32 arg1, u32 arg2)
                     dest += 2;
                 }
             }
-            HSD_SisLib_803A70A0((void*) tm->x524[3], 0, &sp_buf);
+            HSD_SisLib_803A70A0(tm->x524[3], 0, (char*) &sp_buf);
         } else {
             *counter += 2;
             if (lbl_804799D8.x4D != 1) {
@@ -7190,7 +7190,7 @@ void fn_8019AF50(s32* arg0, u32 arg1, u32 arg2)
                     *counter = 0xFA;
                 }
             }
-            HSD_SisLib_803A70A0((void*) tm->x524[3], 0, (u8*) counter + 0x4E);
+            HSD_SisLib_803A70A0(tm->x524[3], 0, (char*) counter + 0x4E);
         }
     } else {
         if (*counter < 0xFAU) {

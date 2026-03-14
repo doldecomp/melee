@@ -1323,24 +1323,18 @@ u16 gm_80163274(u8 i)
 bool gm_80163298(s8 c_kind, u16 arg1)
 {
     u8 index;
-    s16* record;
-    u32 save_data;
-    u32 offset;
+    u16* record;
     u16 score;
 
-    index = gm_80164024((u8) c_kind);
-    record = gmMainLib_8015D7EC((u8) index);
-    save_data = (u32) gmMainLib_8015EDBC();
-    offset = ((index << 2) & 0x3FC) + 0x114;
-    score = (u16) arg1;
+    index = gm_80164024(c_kind);
+    record = gmMainLib_8015D7EC(index);
+    score = arg1;
 
-    // POTENTIAL TODO: get rid of pointer math: seems hard with the addi + lwzx
-    if (*(u32*) (save_data + offset) < (u32) score) {
-        save_data = (u32) gmMainLib_8015EDBC();
-        *(u32*) (save_data + offset) = (u32) score;
+    if ((u32) gmMainLib_8015EDBC()->x114[index] < (u32) score) {
+        gmMainLib_8015EDBC()->x114[index] = (int) score;
     }
 
-    if (*(u16*) record < (u16) arg1) {
+    if (*record < arg1) {
         *record = arg1;
         return true;
     }

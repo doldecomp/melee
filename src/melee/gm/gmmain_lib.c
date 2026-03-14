@@ -597,7 +597,7 @@ s32* gmMainLib_8015D7D4(u8 arg0)
     return &base[arg0].x7C.xA8;
 }
 
-s16* gmMainLib_8015D7EC(u8 arg0)
+u16* gmMainLib_8015D7EC(u8 arg0)
 {
     struct FighterData* base = &gmMainLib_804D3EE0->thing.x1F2C[0];
     return &base[arg0].x7C.x7E;

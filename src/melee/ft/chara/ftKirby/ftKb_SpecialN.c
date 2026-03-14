@@ -1621,7 +1621,7 @@ static void fn_800F6318(HSD_GObj* gobj)
 void ftKb_SpecialN_800F6388(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    Fighter_ChangeMotionState(gobj, ftKb_MS_EatWait, 0x10, 0.0F, 1.0F, 0.0F,
+    Fighter_ChangeMotionState(gobj, ftKb_MS_Eat, 0x10, 0.0F, 1.0F, 0.0F,
                               NULL);
     ftAnim_8006EBA4(gobj);
     ftCommon_8007E2F4(fp, 0x1FF);
@@ -1630,7 +1630,7 @@ void ftKb_SpecialN_800F6388(Fighter_GObj* gobj)
 void ftKb_SpecialN_800F63EC(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    Fighter_ChangeMotionState(gobj, ftKb_MS_EatFall, 0x10, 0.0F, 1.0F, 0.0F,
+    Fighter_ChangeMotionState(gobj, ftKb_MS_EatAir, 0x10, 0.0F, 1.0F, 0.0F,
                               NULL);
     ftAnim_8006EBA4(gobj);
     ftCommon_8007E2F4(fp, 0x1FF);
