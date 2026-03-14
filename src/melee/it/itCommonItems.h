@@ -1513,6 +1513,7 @@ typedef struct itUnknownAttributes {
     /* +18 */ s32 x18;
     /* +1C */ s32 x1C;
     /* +20 */ s32 x20;
+    /* +24 */ HSD_Joint* x24[26];
 } itUnknownAttributes;
 
 typedef struct itCrazyHandBombAttributes {
