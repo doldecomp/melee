@@ -196,9 +196,11 @@ void un_802FF364(int slot)
     struct un_804A1F58_x8_t* thing;
     HSD_GObj* gobj;
     struct un_804A1F58_t* base = un_804A1F58;
+    PAD_STACK(0x10);
     thing = &base[slot].x8;
     ifAll = ifAll_802F3424(slot);
     gobj = thing->x0;
+    if ((thing && thing) && thing){}
     if (gobj) {
         HSD_GObjPLink_80390228(gobj);
     }
