@@ -52,6 +52,8 @@ struct un_804A1F58_x8_t {
     HSD_Text* x4;
     unsigned int x8;
 };
+
+// TODO: sizeof(un_804A1F58) should be 0x80, see un_802FF498
 /* 4A1F58 */ static struct {
     unsigned int x0;
     unsigned int x4;
@@ -216,6 +218,8 @@ void un_802FF364(int slot)
 
 void un_802FF498(void)
 {
+    PAD_STACK(8);
+    // TODO: sizeof(un_804A1F58) should be 0x80
     memzero(un_804A1F58, sizeof(un_804A1F58));
     un_804A1F58->x0 =
         HSD_SisLib_803A611C(2, ifAll_802F3404(), 14, 15, 0, 11, 0, 19);
