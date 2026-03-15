@@ -56,11 +56,46 @@ static mn_803ED1D0_t mn_803ED1D0 = { { 3, 4, 5, 6, 7, 8, 9 },
                                          60.0f,
                                      } };
 
+AnimLoopSettings mn_803ED270[3] = {
+    { 0.0f, 0.0f, 0.0f },
+    { 0.0f, 0.0f, 0.0f },
+    { 0.0f, 0.0f, 0.0f },
+};
+
+AnimLoopSettings mn_803ED294[7] = {
+    { 0.0f, 0.0f, 0.0f },
+    { 0.0f, 0.0f, 0.0f },
+    { 0.0f, 0.0f, 0.0f },
+    { 0.0f, 0.0f, 0.0f },
+    { 0.0f, 0.0f, 0.0f },
+    { 0.0f, 0.0f, 0.0f },
+    { 0.0f, 0.0f, 0.0f },
+};
+
+u8 mn_803ED2E8[16][2] = { 0 };
+
 static s32 mn_804DBE48 = 0x02030506;
 
 /// #fn_8023201C
 
-/// #mn_80232458
+AnimLoopSettings* mn_80232458(u8 option, u8 value, u8 direction)
+{
+    u8 count;
+
+    if (option != 1 && option != 2 && option != 3 && option != 4) {
+        return NULL;
+    }
+
+    count = mn_803ED2E8[option][1];
+
+    if (direction != 0) {
+        if (value == 0) {
+            return &mn_803ED270[count];
+        }
+        return &mn_803ED270[value - 1];
+    }
+    return &mn_803ED294[count - value];
+}
 
 /// #mn_802324E4
 
