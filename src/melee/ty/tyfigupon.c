@@ -302,6 +302,7 @@ void fn_80315574(void)
 
 void fn_803155C8(void)
 {
+    // TODO: One more regswap for 100%
     s32 new_var;
     TyFiguponAA8* aa8 = (TyFiguponAA8*) un_804A2AA8;
     struct un_804D6EF4_t* ef4 = un_804D6EF4;
@@ -410,6 +411,7 @@ void fn_803155C8(void)
                 un_80316420( data->x20);
                 {
                     s32 inv = un_80314B54();
+                    // TODO: Initialization of this for loop is off
                     total = 0;
                     for(i = 0; i < 9; i++){
                         if (i != 8 && i > 1U && un_80304B0C(i) != 0) {
@@ -483,7 +485,7 @@ void fn_803155C8(void)
             if (pct >= 1.0f) {
                 pct = 999.0f;
             } else {
-                pct = pct * 1000.0f;
+                pct *= 1000.0f;
             }
             un_803153EC((u32)(s32) pct, 9, 3, 2, 0);
             ef4->x58 = 0;
