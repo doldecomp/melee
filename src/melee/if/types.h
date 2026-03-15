@@ -156,7 +156,7 @@ struct DevText {
 
 struct un_804D6EF4_t {
     /* +0x00 */ u32 x00;
-    /* +0x04 */ char pad_04[4];
+    /* +0x04 */ HSD_GObj* unk4;
     /* +0x08 */ u32 x08;
     /* +0x0C */ u32 x0C;
     /* +0x10 */ HSD_JObj* jobjs[16];

@@ -506,7 +506,141 @@ void tyFigupon_80316BF8(void)
 
 /// #fn_80316C24
 
+static u16 un_804D5AA0 = 0xC;
+static char un_804D5AA4 = 0;
+
+typedef struct {
+    s32 x0, x4, x8, xC;
+} DigitInit;
+
+static const DigitInit un_803B8974 = { 0, 0, 0, 0 };
+
 /// #un_8031753C
+void un_8031753C(void)
+{
+    struct un_804D6EF4_t* ef4 = un_804D6EF4;
+    u8* fea10 = un_803FEA10;
+    HSD_Joint* joint;
+    HSD_JObj* jobj;
+    s32 total;
+    DigitInit digits_s;
+    s32* digit_ptr;
+    s32 i;
+    s32 trophy_total;
+    s32 new_count;
+
+    if (ef4->archive == NULL) {
+        OSReport((char*)(fea10 + 0x194));
+        OSPanic((char*)(fea10 + 0x120), 0x55C, &un_804D5AA4);
+    }
+    if (ef4->x00 != 0) {
+        HSD_GObjPLink_80390228((HSD_GObj*) ef4->x00);
+        ef4->x00 = 0;
+    }
+    joint = HSD_ArchiveGetPublicAddress(ef4->archive, (char*) fea10);
+    if (joint != NULL) {
+        ef4->x00 = (u32) GObj_Create(9, 9, 0);
+        jobj = HSD_JObjLoadJoint(joint);
+        HSD_GObjObject_80390A70((HSD_GObj*) ef4->x00, HSD_GObj_804D7849, jobj);
+        GObj_SetupGXLink((HSD_GObj*) ef4->x00, HSD_GObj_JObjCallback, 0x3C, 1);
+        lb_8001204C(jobj, ef4->jobjs, (u16*)(fea10 + 0x178), 0xD);
+        tyFigupon_80314AA8(ef4->jobjs[0xC], NULL, (char*)(fea10 + 0x1B8), NULL);
+        un_803083D8(ef4->jobjs[0xC], 0x3E7);
+        joint = HSD_ArchiveGetPublicAddress(ef4->archive, (char*)(fea10 + 0x1C));
+        ef4->unk4 = GObj_Create(9, 9, 0);
+        jobj = HSD_JObjLoadJoint(joint);
+        HSD_GObjObject_80390A70(ef4->unk4, HSD_GObj_804D7849, jobj);
+        GObj_SetupGXLink(ef4->unk4, HSD_GObj_JObjCallback, 0x3C, 0);
+        tyFigupon_80314AA8(jobj, (char*)(fea10 + 0x1E0),
+                           (char*)(fea10 + 0x200), (char*)(fea10 + 0x224));
+        HSD_GObjProc_8038FD54(ef4->unk4, un_80306BB8, 0);
+        HSD_GObj_80390CD4(ef4->unk4);
+        jobj = HSD_JObjLoadJoint(
+            HSD_ArchiveGetPublicAddress(ef4->archive, (char*)(fea10 + 0x58)));
+        HSD_JObjAddChild(ef4->jobjs[0], jobj);
+        tyFigupon_80314AA8(jobj, (char*)(fea10 + 0x74),
+                           (char*)(fea10 + 0x94), (char*)(fea10 + 0xB8));
+        HSD_JObjReqAnimAll(jobj, 0.0f);
+        HSD_JObjAnimAll(jobj);
+
+        i = 0;
+        digits_s = un_803B8974;
+        total = (s32)(gm_801623D8() / 10u);
+        joint = HSD_ArchiveGetPublicAddress(ef4->archive,
+                                            (char*)(fea10 + 0x248));
+        digit_ptr = &digits_s.x0;
+        do {
+            digit_ptr[i] = total % 10;
+            total /= 10;
+            i++;
+        } while (total > 0);
+
+        for (i = 0; i < 3; i++) {
+            jobj = HSD_JObjLoadJoint(joint);
+            HSD_JObjAddChild(ef4->jobjs[3 + i], jobj);
+            tyFigupon_80314AA8(jobj, (char*)(fea10 + 0x264),
+                               (char*)(fea10 + 0x284), (char*)(fea10 + 0x2A8));
+            if (digit_ptr[i] != 0) {
+                HSD_JObjReqAnimAll(jobj, (f32)(50 - digit_ptr[i] * 5));
+            } else {
+                HSD_JObjReqAnimAll(jobj, 0.0f);
+            }
+            HSD_JObjAnimAll(jobj);
+        }
+
+        joint = HSD_ArchiveGetPublicAddress(ef4->archive,
+                                            (char*)(fea10 + 0x2CC));
+        for (i = 0; i < 2; i++) {
+            jobj = HSD_JObjLoadJoint(joint);
+            HSD_JObjAddChild(ef4->jobjs[6 + i], jobj);
+            tyFigupon_80314AA8(jobj, (char*)(fea10 + 0x2E8),
+                               (char*)(fea10 + 0x308), (char*)(fea10 + 0x32C));
+            HSD_JObjReqAnimAll(jobj, 0.0f);
+            HSD_JObjAnimAll(jobj);
+        }
+
+        tyFigupon_80314AA8(ef4->jobjs[8], NULL, (char*)(fea10 + 0x350), NULL);
+
+        joint = HSD_ArchiveGetPublicAddress(ef4->archive,
+                                            (char*)(fea10 + 0x378));
+        ef4->x08 = (u32) GObj_Create(9, 9, 0);
+        jobj = HSD_JObjLoadJoint(joint);
+        HSD_GObjObject_80390A70((HSD_GObj*) ef4->x08, HSD_GObj_804D7849, jobj);
+        GObj_SetupGXLink((HSD_GObj*) ef4->x08, HSD_GObj_JObjCallback, 0x3C, 0);
+        tyFigupon_80314AA8(jobj, (char*)(fea10 + 0x394),
+                           (char*)(fea10 + 0x3B4), (char*)(fea10 + 0x3D8));
+        lb_8001204C(jobj, &ef4->jobjs[0xE], &un_804D5AA0, 1);
+
+        trophy_total = un_80314B54();
+        new_count = 0;
+        for (i = 0; i < 9; i++) {
+            if (i != 8 && (u32) i > 1U && un_80304B0C(i) != 0) {
+                new_count += un_80304B94(i);
+            }
+        }
+        if (new_count - trophy_total != 0) {
+            HSD_JObjReqAnimAll(ef4->jobjs[0xE], 0.0f);
+        } else {
+            HSD_JObjReqAnimAll(ef4->jobjs[0xE], 1.0f);
+        }
+        HSD_JObjAnimAll(ef4->jobjs[0xE]);
+
+        ef4->x0C = (u32) GObj_Create(9, 9, 0);
+        joint = HSD_ArchiveGetPublicAddress(ef4->archive,
+                                            (char*)(fea10 + 0x400));
+        for (i = 0; i < 3; i++) {
+            jobj = HSD_JObjLoadJoint(joint);
+            HSD_JObjAddChild(ef4->jobjs[9 + i], jobj);
+            tyFigupon_80314AA8(jobj, (char*)(fea10 + 0x41C),
+                               (char*)(fea10 + 0x43C), (char*)(fea10 + 0x460));
+            HSD_JObjReqAnimAll(jobj, 0.0f);
+            HSD_JObjAnimAll(jobj);
+        }
+        return;
+    }
+    OSReport((char*)(fea10 + 0x484), fea10, joint);
+    OSPanic((char*)(fea10 + 0x120), 0x610, &un_804D5AA4);
+}
 
 /// #un_80317A60
 

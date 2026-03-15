@@ -20,7 +20,7 @@
 /* 3168DC */ void fn_803168DC(HSD_GObj*);
 /* 316BF8 */ void tyFigupon_80316BF8(void);
 /* 316C24 */ UNK_RET fn_80316C24(UNK_PARAMS);
-/* 31753C */ UNK_RET un_8031753C(UNK_PARAMS);
+/* 31753C */ void un_8031753C(void);
 /* 317A60 */ void un_80317A60(void);
 /* 317D80 */ void un_80317D80_OnEnter(UNK_T);
 /* 3181BC */ s32 un_803181BC(void);
