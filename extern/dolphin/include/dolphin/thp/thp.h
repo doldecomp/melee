@@ -52,7 +52,7 @@ typedef struct _THPFileInfo {
     u16 nMCU;
     u16 currMCU;
     u8* dLC[3];
-    u32 pad2[(0x83d - 0x756) / 4];
+    u8 pad2[0x83d - 0x756];
     THPComponent components[3];
 } THPFileInfo;
 
@@ -89,7 +89,7 @@ s32 THPVideoDecode(void* file, void* tileY, void* tileU, void* tileV,
 s32 THPDec_803302EC(u8** data);
 s32 THPDec_8032FD40(THPDec_8032FD40_Data* arg0, u16 arg1);
 void THPDec_803300E0(u32* data);
-BOOL THPInit(void);
+void THPInit(void);
 
 #ifdef __cplusplus
 }

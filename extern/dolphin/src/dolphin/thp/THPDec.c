@@ -2352,10 +2352,14 @@ static inline void OSInitFastCast(void) {
 // clang-format off
 
 
-BOOL THPInit(void)
+void THPInit(void)
 {
     u8* base;
-    //OSRegisterVersion(__THPVersion);
+    
+    if (!(PPCMfhid2() & 0x10000000)) {
+        DCInvalidateRange((u8*)(0xE0000000), 0x4000);
+        LCEnable();
+    }
     base = (u8*)(0xE000 << 16);
 
     __THPLCWork512[0] = base;
@@ -2367,14 +2371,13 @@ BOOL THPInit(void)
 
     base              = (u8*)(0xE000 << 16);
     __THPLCWork672[0] = base;
-    base += 0x2A00;
+    base += 0x2800;
     __THPLCWork672[1] = base;
-    base += 0xA80;
+    base += 0xA00;
     __THPLCWork672[2] = base;
     base += 0xA80;
 
-    //OSInitFastCast();
+    OSInitFastCast();
 
-    __THPInitFlag = TRUE;
-    return TRUE;
+    return;
 }
