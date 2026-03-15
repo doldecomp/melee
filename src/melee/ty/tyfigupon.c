@@ -113,7 +113,14 @@ static char str_nget_animjoint[] = "ToyFigurePonNget_Top_animjoint";
 static char str_nget_matanim[] = "ToyFigurePonNget_Top_matanim_joint";
 static char str_nget_shapeanim[] = "ToyFigurePonNget_Top_shapeanim_joint";
 
-extern HSD_CameraDescPerspective un_803FEEE8_cam_desc;
+static HSD_CameraDescPerspective tyfigupon_cam_desc = {
+    NULL, 0, 1,
+    { 0, 640, 0, 480 },
+    { 0, 640, 0, 480 },
+    NULL, NULL,
+    0.0f, NULL,
+    0.1f, 32768.0f, 40.0f, 1.2173333f,
+};
 
 
 typedef struct {
@@ -1278,8 +1285,8 @@ void un_80317A60(void)
     gobj = data->x0;
     gobj->gxlink_prios = 0x5010000000000000ULL;
     data->x4 = GObj_Create(1, 2, 0);
-    cobj = lb_80013B14(&un_803FEEE8_cam_desc);
-    un_804D6F08 = &un_803FEEE8_cam_desc;
+    cobj = lb_80013B14(&tyfigupon_cam_desc);
+    un_804D6F08 = &tyfigupon_cam_desc;
     // Unholiest of Permuter slop
     HSD_GObjObject_80390A70(data->x4, (((((((((((HSD_GObj_804D784B & 0xFFFFFFFFFFFFFFFFu) & 0xFFFFFFFFFFFFFFFFu) & 0xFFFFFFFFFFFFFFFFu) & 0xFFFFFFFFFFFFFFFFu) & 0xFFFFFFFFFFFFFFFFu) & 0xFFFFFFFFFFFFFFFFu) & 0xFFFFFFFFFFFFFFFFu) & 0xFFFFFFFFFFFFFFFFu) & 0xFFFFFFFFFFFFFFFFu) & 0xFFFFFFFFFFFFFFFFu) & 0xFFFFFFFFFFFFFFFFu) & 0xFFFFFFFFFFFFFFFFu, cobj);
     GObj_SetupGXLinkMax(data->x4, (GObj_RenderFunc) un_803068E0, 0);
