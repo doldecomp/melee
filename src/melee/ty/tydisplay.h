@@ -17,7 +17,7 @@
 /* 31B1FC */ void un_8031B1FC(void);
 /* 31B328 */ void un_8031B328(void);
 /* 31B460 */ void un_8031B460_OnEnter(UNK_T);
-/* 31B850 */ UNK_RET un_8031B850(UNK_PARAMS);
+/* 31B850 */ void un_8031B850(void);
 /* 31B9A4 */ void un_8031B9A4_OnFrame(void);
 /* 31B9DC */ void* un_8031B9DC(s32 id);
 /* 31BA78 */ void un_8031BA78(s32, s32, f32);

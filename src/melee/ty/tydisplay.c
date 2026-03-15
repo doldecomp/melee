@@ -17,6 +17,7 @@
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjobject.h>
 #include <baselib/gobjplink.h>
+#include <baselib/gobjproc.h>
 #include <baselib/jobj.h>
 #include <baselib/lobj.h>
 #include <baselib/random.h>
@@ -24,6 +25,7 @@
 #include <dolphin/os.h>
 
 #include "lb/lb_00F9.h"
+#include "lb/lbarchive.h"
 
 extern char un_804D5AC0[2];
 extern DevText* un_804D6F24;
@@ -41,6 +43,9 @@ typedef struct TyDspBgData {
 
 extern TyDspBgData* un_804D6F1C;
 extern s32 un_804D6F20;
+extern HSD_GObj** un_804D6F18;
+extern HSD_GObj* un_804D6F2C;
+extern u8 un_804A2DD0[0x18];
 
 /// #un_803181BC
 
@@ -172,6 +177,69 @@ void un_8031B328(void)
 /// #un_8031B460_OnEnter
 
 /// #un_8031B850
+
+void un_8031B850(void)
+{
+    ToyAnimState* anim = &un_804A2AA8;
+    TyDspBgData* ptr = un_804D6F1C;
+    HSD_GObj** pgobj = un_804D6F18;
+    u8* scene = un_804D6ED4;
+    HSD_GObj* gobj;
+
+    if (ptr->archive != NULL) {
+        ptr->archive = NULL;
+    }
+
+    if (un_804D6EC8 != NULL) {
+        un_804D6EC8 = NULL;
+    }
+
+    if (anim->gobj != NULL) {
+        anim->gobj = NULL;
+        anim->jobj[1] = NULL;
+        anim->jobj[0] = NULL;
+    }
+
+    if (ptr->gobj0 != NULL) {
+        ptr->gobj0 = NULL;
+    }
+
+    if (ptr->gobj4 != NULL) {
+        ptr->gobj4 = NULL;
+    }
+
+    if (*(HSD_GObj**)(scene + 0x00) != NULL) {
+        *(HSD_GObj**)(scene + 0x00) = NULL;
+    }
+
+    if (*(HSD_GObj**)(scene + 0x04) != NULL) {
+        *(HSD_GObj**)(scene + 0x04) = NULL;
+    }
+
+    if (*(HSD_GObj**)(scene + 0x08) != NULL) {
+        *(HSD_GObj**)(scene + 0x08) = NULL;
+    }
+
+    gobj = *pgobj;
+    if (gobj != NULL) {
+        HSD_GObjProc_8038FED4(gobj);
+        *pgobj = NULL;
+    }
+
+    if (un_804D6F2C != NULL) {
+        if (*(HSD_Archive**)(un_804A2DD0 + 0x14) != NULL) {
+            lbArchive_80016EFC(*(HSD_Archive**)(un_804A2DD0 + 0x14));
+            *(HSD_Archive**)(un_804A2DD0 + 0x14) = NULL;
+        }
+        HSD_GObjPLink_80390228(un_804D6F2C);
+        un_804D6F2C = NULL;
+    }
+
+    if (un_804D6F24 != NULL) {
+        DevText_Remove(&un_804D6F24);
+        un_804D6F24 = NULL;
+    }
+}
 
 void un_8031B9A4_OnFrame(void)
 {
