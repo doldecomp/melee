@@ -1056,7 +1056,7 @@ bool grVenom_80206BF0(int arg0)
         return 0;
     }
     wgobj = (Ground_GObj*) grVenom_80203EAC(8);
-    ((wgobj) ? ((void) 0) : __assert(grVe_803E5524, 0x8C4, "wgobj"));
+    HSD_ASSERT(2244, wgobj);
     gp = wgobj->user_data;
     gp->gv.venom.xCC = 10;
     gp->gv.venom.xC8 = 0;
