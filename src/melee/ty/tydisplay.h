@@ -26,7 +26,7 @@
 /* 31BBF4 */ s32 un_8031BBF4(s8);
 /* 31BC54 */ UNK_RET un_8031BC54(UNK_PARAMS);
 /* 31BF34 */ UNK_RET un_8031BF34(UNK_PARAMS);
-/* 31C1D0 */ UNK_RET un_8031C1D0(UNK_PARAMS);
+/* 31C1D0 */ void un_8031C1D0(void);
 /* 31C2CC */ void tyDisplay_8031C2CC(void);
 /* 31C2EC */ s32 tyDisplay_8031C2EC(void);
 /* 31C354 */ s32 un_8031C354(s32, s32 (*)[], s32, s32);

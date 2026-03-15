@@ -2,6 +2,7 @@
 
 #include "gm/gm_1A3F.h"
 #include "gm/gm_1A45.h"
+#include "if/textdraw.h"
 #include "if/textlib.h"
 #include "lb/lblanguage.h"
 #include "ty/toy.h"
@@ -14,6 +15,7 @@
 extern char un_804D5AC0[];
 extern DevText* un_804D6F24;
 extern s32 un_804A2DE8[];
+extern char un_804A2D98[0x38];
 
 /// #un_803181BC
 
@@ -94,6 +96,11 @@ void* un_8031B9DC(s32 id)
 }
 
 static char un_803FF19C[] = "X  %3.2f\nZ  %3.2f";
+static f32 un_804DE020 = 12.0f;
+static s32 un_804DE024 = (s32) 0xE2E2E2FF;
+static s32 un_804DE028 = (s32) 0x4080D060;
+static f32 un_804DE02C = 18.0f;
+static f64 un_804DE030 = 0.0;
 
 /// #un_8031BA78
 void un_8031BA78(s32 arg0, s32 arg1, f32 farg0)
@@ -236,6 +243,31 @@ s32 un_8031BBF4(s8 arg0)
 /// #un_8031BF34
 
 /// #un_8031C1D0
+void un_8031C1D0(void)
+{
+    s32 savedColor;
+    s32 bgColor;
+    char buf[28];
+    HSD_GObj* gobj;
+
+    savedColor = un_804DE024;
+    un_804D6F24 = DevText_Create(1, 0x28, 0x28, 9, 3, un_804A2D98);
+    if (un_804D6F24 != NULL) {
+        gobj = DevText_GetGObj();
+        bgColor = un_804DE028;
+        DevText_Show(gobj, un_804D6F24);
+        DevText_HideCursor(un_804D6F24);
+        DevText_80302AC0(un_804D6F24);
+        DevText_SetBGColor(un_804D6F24, *(GXColor*) &bgColor);
+        DevText_SetScale(un_804D6F24, un_804DE020, un_804DE02C);
+        DevText_Erase(un_804D6F24);
+        DevText_SetCursorXY(un_804D6F24, 0, 0);
+        DevText_StoreColorIndex(un_804D6F24, 0);
+        DevText_SetTextColor(un_804D6F24, *(GXColor*) &savedColor);
+        sprintf(buf, un_803FF19C, un_804DE030, un_804DE030);
+        DevText_Print(un_804D6F24, buf);
+    }
+}
 
 void tyDisplay_8031C2CC(void)
 {
