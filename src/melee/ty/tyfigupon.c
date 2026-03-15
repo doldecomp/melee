@@ -19,6 +19,7 @@
 #include <baselib/cobj.h>
 #include <baselib/controller.h>
 #include <baselib/displayfunc.h>
+#include <baselib/dobj.h>
 #include <baselib/fog.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
@@ -29,8 +30,10 @@
 #include <baselib/jobj.h>
 #include <baselib/lobj.h>
 #include <baselib/memory.h>
+#include <baselib/mobj.h>
 #include <baselib/random.h>
 #include <baselib/sislib.h>
+#include <baselib/tobj.h>
 
 #include <dolphin/mtx.h>
 #include <dolphin/os.h>
@@ -66,7 +69,15 @@ typedef struct {
     /* 0x00 */ u32 x0;
     /* 0x04 */ u32 x4;
     /* 0x08 */ s32 x8;
-    /* 0x0C */ u8 pad_0C[0x38];
+    /* 0x0C */ u8 pad_0C[0x4];
+    /* 0x10 */ s32 x10;
+    /* 0x14 */ s32 x14;
+    /* 0x18 */ s32 x18;
+    /* 0x1C */ u8 pad_1C[0xC];
+    /* 0x28 */ s32 x28;
+    /* 0x2C */ s32 x2C;
+    /* 0x30 */ s32 x30;
+    /* 0x34 */ u8 pad_34[0x10];
     /* 0x44 */ f32 x44;
     /* 0x48 */ u8 pad_48[0x10];
 } TyFiguponUD;
@@ -248,7 +259,7 @@ void fn_803152BC(HSD_GObj* arg0)
     }
 }
 
-void un_803153EC(u32 arg0, s32 arg1, s32 arg2, s32 arg3)
+void un_803153EC(u32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
 {
     s32 digits[4] = { 0, 0, 0, 0 };
     struct un_804D6EF4_t* temp_r30;
@@ -301,6 +312,133 @@ void fn_80315574(void)
 /// #fn_803155C8
 
 /// #fn_80315C44
+void fn_80315C44(HSD_GObj* arg0)
+{
+    TyFiguponUD* ud = arg0->user_data;
+    struct un_804D6EF4_t* ef4 = un_804D6EF4;
+    u8* fea10 = un_803FEA10;
+    HSD_GObj* gobj;
+    HSD_JObj* jobj;
+    s32 total;
+    s32 count;
+    s32 anim;
+    s32 i;
+
+    PAD_STACK(24);
+
+    if (ud != NULL) {
+        if (ud->x8 != 0) {
+            if (ud->x10 == 0 && ud->x14 == 0 && ud->x18 != 0) {
+                HSD_JObjAnimAll(ef4->jobjs[5]);
+            }
+            if (ud->x10 == 0) {
+                if (ud->x14 == 0) {
+                    HSD_JObjReqAnimAll(ef4->jobjs[4], 0.0f);
+                }
+                HSD_JObjAnimAll(ef4->jobjs[4]);
+            }
+            if (ud->x10 == 0) {
+                HSD_JObjReqAnimAll(ef4->jobjs[3], 0.0f);
+            }
+            HSD_JObjAnimAll(ef4->jobjs[3]);
+            ud->x8 = ud->x8 - 1;
+            if (ud->x8 % 2 == 0) {
+                ef4 = un_804D6EF4;
+                gobj = GObj_Create(9, 9, 0);
+                jobj = HSD_JObjLoadJoint(
+                    HSD_ArchiveGetPublicAddress(ef4->archive,
+                                                (char*)(fea10 + 0x58)));
+                HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+                GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0x3C, 0);
+                tyFigupon_80314AA8(jobj, (char*)(fea10 + 0x74),
+                                   (char*)(fea10 + 0x94),
+                                   (char*)(fea10 + 0xB8));
+                HSD_JObjReqAnimAll(jobj, 0.0f);
+                HSD_JObjAnimAll(jobj);
+                HSD_JObjSetFlagsAll(jobj, 0x10);
+                HSD_GObjProc_8038FD54(gobj, tyFigupon_80314C5C, 0);
+                HSD_GObj_80390CD4(gobj);
+                gm_801623FC(gm_801623D8() - 0xA);
+                ef4->x5E = (u8) ef4->x5E - 1;
+                total = gm_801623D8() / 10u;
+                i = 0;
+                ud->x18 = i;
+                ud->x14 = i;
+                ud->x10 = i;
+                do {
+                    (&ud->x10)[i] = total % 10;
+                    total /= 10;
+                    i++;
+                } while (total > 0);
+                count = (s8)(u8) ef4->x5E;
+                i = 0;
+                ud->x30 = i;
+                ud->x2C = i;
+                ud->x28 = i;
+                do {
+                    (&ud->x28)[i] = count % 10;
+                    count = (s8)(count / 10);
+                    i++;
+                } while (count > 0);
+                un_803153EC(gm_801623D8() / 10u, 3, 3, 1, 0);
+                un_803153EC((u32)(s8)(u8) ef4->x5E, 6, 2, 0, 0);
+                ef4 = un_804D6EF4;
+                anim = 2;
+                if ((s32)(u8) ef4->x5E == 0x14) {
+                    anim = 3;
+                }
+                if ((s8)(u8) ef4->x5E <= 1) {
+                    anim = 4;
+                }
+                HSD_JObjReqAnimAll(ef4->jobjs[8], (f32) anim);
+                HSD_AObjSetRate(ef4->jobjs[8]->aobj, 1.0f);
+                HSD_JObjAnimAll(ef4->jobjs[8]);
+                gm_801678F8((s32) gm_801677F0(), 0x10, 0);
+            }
+        } else {
+            anim = 0;
+            ud->x8 = 0;
+            ef4->x5E = 0;
+            un_803153EC(gm_801623D8() / 10u, 3, 3, 1, 0);
+            un_803153EC((u32)(s8)(u8) ef4->x5E, 6, 2, 0, 0);
+            ef4 = un_804D6EF4;
+            if ((s32)(u8) ef4->x5E == 0x14) {
+                anim = 3;
+            }
+            if ((s8)(u8) ef4->x5E <= 1) {
+                anim = 4;
+            }
+            HSD_JObjReqAnimAll(ef4->jobjs[8], (f32) anim);
+            HSD_AObjSetRate(ef4->jobjs[8]->aobj, 1.0f);
+            HSD_JObjAnimAll(ef4->jobjs[8]);
+            GObj_RemoveUserData(arg0);
+            ef4->x58 = ef4->x56;
+            ef4->x58 += 0xE;
+            ef4->x5C = 2;
+            HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
+        }
+    } else {
+        ud = HSD_MemAlloc(0x58);
+        if (ud != NULL) {
+            GObj_InitUserData(arg0, 0, Toy_RemoveUserData, ud);
+            total = gm_801623D8() / 10u;
+            i = 0;
+            ud->x18 = i;
+            ud->x14 = i;
+            ud->x10 = i;
+            do {
+                (&ud->x10)[i] = total % 10;
+                total /= 10;
+                i++;
+            } while (total > 0);
+            un_803153EC(gm_801623D8() / 10u, 3, 3, 1, 0);
+            HSD_AObjSetRate(ef4->jobjs[3]->child->u.dobj->mobj->tobj->aobj, 2.0f);
+            HSD_AObjSetRate(ef4->jobjs[4]->child->u.dobj->mobj->tobj->aobj, 2.0f);
+            HSD_AObjSetRate(ef4->jobjs[5]->child->u.dobj->mobj->tobj->aobj, 2.0f);
+            ud->x8 = (s8)(u8) ef4->x5E * 2;
+        }
+    }
+}
 
 void fn_80316170(HSD_GObj* arg0)
 {
@@ -812,7 +950,7 @@ void un_80317D80_OnEnter(void* arg0)
         }
         ef4->x5E = var_r0;
     }
-    un_803153EC((s8) ef4->x5E, 6, 2, 0);
+    un_803153EC((s8) ef4->x5E, 6, 2, 0, 0);
     var_r28 = 0;
     total_b54 = un_80314B54();
     i = 0;
@@ -843,7 +981,7 @@ void un_80317D80_OnEnter(void* arg0)
     } else {
         pct = pct * 1000.0f;
     }
-    un_803153EC((s32) pct, 9, 3, 2);
+    un_803153EC((s32) pct, 9, 3, 2, 0);
     HSD_PadRenewStatus();
 }
 
