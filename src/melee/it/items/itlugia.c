@@ -4,13 +4,26 @@
 #include <platform.h>
 
 #include "ef/eflib.h"
+#include "gr/stage.h"
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
 
-/// #it_2725_Logic17_Spawned
+void it_2725_Logic17_Spawned(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itLugiaAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    ip->xDD4_itemVar.lugia.x64 = ip->pos;
+    ip->facing_dir = it_804DD450;
+    ip->xDAC_itcmd_var0 = 0;
+    ip->xDD4_itemVar.lugia.x60 = attrs->x14;
+    ip->xDCC_flag.b3 = 0;
+    it_802D1D40(gobj);
+    it_80279CDC(gobj, attrs->x0);
+    ip->xDD4_itemVar.lugia.xE50.x = it_804DD450;
+}
 
 void it_802D14D0(void) {}
 
@@ -76,7 +89,22 @@ bool itLugia_UnkMotion2_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itLugia_UnkMotion2_Phys
+void itLugia_UnkMotion2_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itLugiaAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    it_8027A344(gobj);
+    if (it_80272C6C(gobj)) {
+        ip->xDD4_itemVar.lugia.xE50.x += attrs->x8;
+    } else {
+        ip->xDD4_itemVar.lugia.xE50.x += attrs->xC;
+    }
+    ip->x40_vel.y += ip->xDD4_itemVar.lugia.xE50.x;
+    if (ip->pos.y > Stage_GetBlastZoneTopOffset()) {
+        ip->x40_vel.y = it_804DD450;
+        it_802D16D4(gobj);
+    }
+}
 
 bool itLugia_UnkMotion2_Coll(Item_GObj* gobj)
 {
@@ -220,7 +248,19 @@ bool it_802D1DB4(Item_GObj* gobj)
     return false;
 }
 
-/// #it_802D1DD8
+void it_802D1DD8(Item_GObj* gobj)
+{
+    if (it_8027A09C(gobj)) {
+        Item* old_ip = GET_ITEM(gobj);
+        Item* ip;
+        it_80273454(gobj);
+        ip = GET_ITEM(gobj);
+        Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
+        ip->entered_hitlag = efLib_PauseAll;
+        ip->exited_hitlag = efLib_ResumeAll;
+        old_ip->xDD1_flag.b1 = 1;
+    }
+}
 
 bool it_802D1E64(Item_GObj* gobj)
 {

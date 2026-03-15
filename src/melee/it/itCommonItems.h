@@ -189,7 +189,7 @@ typedef struct itLugiaAttributes {
     /* +08 */ f32 x8;
     /* +0C */ f32 xC;
     /* +10 */ f32 x10;
-    /* +14 */ f32 x14;
+    /* +14 */ s32 x14;
     /* +18 */ f32 x18;
 } itLugiaAttributes;
 
@@ -1540,7 +1540,8 @@ typedef struct itCrazyHandBombAttributes {
 typedef struct itLugia_ItemVars {
     /* +00 ip+DD4 */ u8 x0_pad[0x60];
     /* +60 ip+E34 */ s32 x60;
-    /* +64 ip+E38 */ u8 x64_pad[0x18];
+    /* +64 ip+E38 */ Vec3 x64;
+    /* +70 ip+E44 */ u8 x70_pad[0xC];
     /* +7C ip+E50 */ Vec3 xE50;
 } itLugia_ItemVars;
 
