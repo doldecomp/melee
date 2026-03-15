@@ -102,13 +102,75 @@ void mnName_802385A0(HSD_GObj* gobj)
     mnName_80238754(gobj);
     mnName_8023A058(gobj);
 }
-/// #mnName_GetPageCount
+s32 mnName_GetPageCount(void)
+{
+    s32 count = 0;
+    s32 i;
+    s32 extra;
+    for (i = 0; i < 0x78; i++) {
+        if (IsNameValid((u8) i)) {
+            count++;
+        }
+    }
+    if (count % 24 != 0) {
+        extra = 1;
+    } else {
+        extra = 0;
+    }
+    return count / 24 + extra;
+}
 
-/// #mnName_GetColumnCount
+s32 mnName_GetColumnCount(void)
+{
+    s32 count;
+    s32 extra;
+    s32 i;
+    count = 0;
+    for (i = count; i < 0x78; i++) {
+        if (IsNameValid((u8) i)) {
+            count++;
+        }
+    }
+    if (count % 6 != 0) {
+        extra = 1;
+    } else {
+        extra = 0;
+    }
+    PAD_STACK(16);
+    return count / 6 + extra;
+}
 
 /// #mnName_80238754
 
-/// #mnName_802388D4
+HSD_JObj* mnName_802388D4(HSD_GObj* gobj, u8 index)
+{
+    u8* p = (u8*) gobj;
+    HSD_JObj* result;
+
+    if ((u8) index < 0x18) {
+        HSD_JObj* jobj = *(HSD_JObj**) (p + 0x30);
+        s32 i;
+
+        result = (jobj == NULL) ? NULL : jobj->child;
+
+        for (i = 0; i < (u8) index; i++) {
+            result = (result == NULL) ? NULL : result->next;
+        }
+
+        return result;
+    }
+
+    switch ((u8) index) {
+    case 0x18:
+        return *(HSD_JObj**) (p + 0x24);
+    case 0x19:
+        return *(HSD_JObj**) (p + 0x18);
+    case 0x1A:
+        return *(HSD_JObj**) (p + 0x1C);
+    }
+
+    return (HSD_JObj*) gobj;
+}
 
 f32 mnName_80238964(u8 index, u8 target, u8 flag)
 {
