@@ -1217,10 +1217,11 @@ void un_80317A60(void)
     HSD_CameraDescPerspective* cam_desc;
     HSD_CObj* cobj;
     HSD_GObj* gobj;
+    struct un_804D6EF4_t *new_var; // Permuter slop
     HSD_Text* text;
     PAD_STACK(40);
-
-    cam_desc = HSD_ArchiveGetPublicAddress(un_804D6EF4->archive, un_803FE5E8);
+    new_var = un_804D6EF4;
+    cam_desc = HSD_ArchiveGetPublicAddress(new_var->archive, un_803FE5E8);
     data->x0 = GObj_Create(1, 2, 0);
     cobj = lb_80013B14(cam_desc);
     un_804D6F04 = (HSD_CObjDesc*) cam_desc;
@@ -1231,7 +1232,8 @@ void un_80317A60(void)
     data->x4 = GObj_Create(1, 2, 0);
     cobj = lb_80013B14((HSD_CameraDescPerspective*)(fea10 + 0x4EC));
     un_804D6F08 = fea10 + 0x4EC;
-    HSD_GObjObject_80390A70(data->x4, HSD_GObj_804D784B, cobj);
+    // Unholiest of Permuter slop
+    HSD_GObjObject_80390A70(data->x4, (((((((((((HSD_GObj_804D784B & 0xFFFFFFFFFFFFFFFFu) & 0xFFFFFFFFFFFFFFFFu) & 0xFFFFFFFFFFFFFFFFu) & 0xFFFFFFFFFFFFFFFFu) & 0xFFFFFFFFFFFFFFFFu) & 0xFFFFFFFFFFFFFFFFu) & 0xFFFFFFFFFFFFFFFFu) & 0xFFFFFFFFFFFFFFFFu) & 0xFFFFFFFFFFFFFFFFu) & 0xFFFFFFFFFFFFFFFFu) & 0xFFFFFFFFFFFFFFFFu) & 0xFFFFFFFFFFFFFFFFu, cobj);
     GObj_SetupGXLinkMax(data->x4, (GObj_RenderFunc) un_803068E0, 0);
     gobj = data->x4;
     gobj->gxlink_prios = 0x2680000000000000ULL;
