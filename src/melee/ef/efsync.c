@@ -21,7 +21,6 @@
 #include "ft/inlines.h"
 
 extern struct ef_Symbols efAsync_803C025C[51];
-extern HSD_JObj* efLib_80458EE0[16];
 extern s32 efLib_804D64E8;
 extern s32 efLib_804D64F0;
 
@@ -656,7 +655,7 @@ void* efSync_Spawn(s32 arg_gfx_id, HSD_GObj* arg_gobj, ...)
         cnt = efLib_804D64F0 - 1;
         efLib_804D64F0 = cnt;
         // efLib_804D64F0--;
-        HSD_JObjAnimAll((efLib_80458EE0[cnt]));
+        HSD_JObjAnimAll(((HSD_JObj**) &efLib_80458EE0)[cnt]);
         // HSD_JObjAnimAll((efLib_80458EE0[efLib_804D64F0].unk0));
     }
 

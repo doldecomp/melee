@@ -72,7 +72,7 @@ STATIC_ASSERT(sizeof(_struct_efLib_80458EE0) == 0x8);
 /* 05FCD8 */ Effect* efLib_8005FCD8(int arg0, HSD_GObj* gobj, HSD_JObj* jobj,
                                     Vec3* vec);
 
-extern HSD_JObj* efLib_80458EE0[0x10];
+extern _struct_efLib_80458EE0 efLib_80458EE0[0x10];
 extern _struct_efLib_80458EE0 efLib_80458F60[0x8];
 
 #endif

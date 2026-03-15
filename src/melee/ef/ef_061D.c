@@ -42,7 +42,6 @@ extern char ef_804D39E0[];
 #include "baselib/particle.h"
 #include "ft/inlines.h"
 
-/* 458EE0 */ extern HSD_JObj* efLib_80458EE0[16];
 /* 4D64E8 */ extern s32 efLib_804D64E8;
 /* 4D64F0 */ extern s32 efLib_804D64F0;
 /* 3BF9D0 */ char ef_803BF9D0[] = "!(jobj->flags & JOBJ_USE_QUATERNION)";
@@ -495,7 +494,7 @@ void* efSync_SpawnSpecial(s32 gfx_id, HSD_GObj* arg_gobj, void* vlist)
     while (efLib_804D64F0 != 0) {
         cnt = efLib_804D64F0 - 1;
         efLib_804D64F0 = cnt;
-        HSD_JObjAnimAll(efLib_80458EE0[cnt]);
+        HSD_JObjAnimAll(((HSD_JObj**) &efLib_80458EE0)[cnt]);
     }
 
     return ret_obj;

@@ -1254,7 +1254,7 @@ void* efAsync_80063930(s32 gfx_id, HSD_GObj* arg_gobj, va_list vlist)
         cnt = efLib_804D64F0 - 1;
         efLib_804D64F0 = cnt;
         // efLib_804D64F0--;
-        HSD_JObjAnimAll((efLib_80458EE0[cnt]));
+        HSD_JObjAnimAll(((HSD_JObj**) &efLib_80458EE0)[cnt]);
         // HSD_JObjAnimAll((efLib_80458EE0[efLib_804D64F0].unk0));
     }
 #if 1
