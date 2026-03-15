@@ -35,6 +35,9 @@
 
 /* 105A34 */ static void fn_80105A34(Fighter_GObj* gobj);
 
+extern f32 ftKb_Init_804D94F0;
+extern f32 ftKb_Init_804D94F4;
+
 static inline void ftKb_SetNsFlashAttr(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -833,7 +836,7 @@ void ftKb_DkSpecialNCancel_Coll(Fighter_GObj* gobj)
 void ftKb_DkSpecialN_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (ft_80082708(gobj) == GA_Ground) {
+    if (ft_800827A0(gobj) == GA_Ground) {
         ftCommon_8007D5D4(fp);
         Fighter_ChangeMotionState(gobj, ftKb_MS_DkSpecialAirN, 0x0C4D508EU,
                                   fp->cur_anim_frame, 1.0f, 0.0f, NULL);
@@ -844,7 +847,7 @@ void ftKb_DkSpecialN_Coll(Fighter_GObj* gobj)
 void ftKb_DkSpecialNFull_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (ft_80082708(gobj) == GA_Ground) {
+    if (ft_800827A0(gobj) == GA_Ground) {
         ftCommon_8007D5D4(fp);
         Fighter_ChangeMotionState(gobj, ftKb_MS_DkSpecialAirNFull, 0x0C4D508EU,
                                   fp->cur_anim_frame, 1.0f, 0.0f, NULL);
@@ -855,8 +858,8 @@ void ftKb_DkSpecialNFull_Coll(Fighter_GObj* gobj)
 void ftKb_DkSpecialAirNStart_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (ft_80082708(gobj) == GA_Air) {
-        ftCommon_8007D5D4(fp);
+    if (ft_80081D0C(gobj) == GA_Air) {
+        ftCommon_8007D7FC(fp);
         Fighter_ChangeMotionState(gobj, ftKb_MS_DkSpecialNStart, 0x0C4C5080U,
                                   fp->cur_anim_frame, 1.0f, 0.0f, NULL);
         ftKb_DkSpecialNStart_Coll_inline(gobj);
@@ -866,8 +869,8 @@ void ftKb_DkSpecialAirNStart_Coll(Fighter_GObj* gobj)
 void ftKb_DkSpecialAirNLoop_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (ft_80082708(gobj) == GA_Air) {
-        ftCommon_8007D5D4(fp);
+    if (ft_80081D0C(gobj) == GA_Air) {
+        ftCommon_8007D7FC(fp);
         Fighter_ChangeMotionState(gobj, ftKb_MS_DkSpecialNLoop, 0x0C4C5080U,
                                   fp->cur_anim_frame, 1.0f, 0.0f, NULL);
         ftKb_DkSpecialNStart_Coll_inline(gobj);
@@ -943,8 +946,7 @@ void ftKb_SpecialNPr_80101560(Fighter_GObj* gobj)
         msid = ftKb_MS_PrSpecialNStartL;
     }
     Fighter_ChangeMotionState(gobj, msid, 0, 0.0f, 1.0f, 0.0f, NULL);
-    fp->cmd_vars[0] = fp->cmd_vars[1] = fp->cmd_vars[2] = fp->cmd_vars[3] =
-        0;
+    fp->cmd_vars[0] = fp->cmd_vars[1] = fp->cmd_vars[2] = fp->cmd_vars[3] = 0;
     ftAnim_8006EBA4(gobj);
     ftKb_SpecialNPr_8010131C(gobj);
     fp->x74_anim_vel.y = 0.0f;
@@ -965,8 +967,7 @@ void ftKb_SpecialNPr_80101618(Fighter_GObj* gobj)
         msid = ftKb_MS_PrSpecialAirNStartL;
     }
     Fighter_ChangeMotionState(gobj, msid, 0, 0.0f, 1.0f, 0.0f, NULL);
-    fp->cmd_vars[0] = fp->cmd_vars[1] = fp->cmd_vars[2] = fp->cmd_vars[3] =
-        0;
+    fp->cmd_vars[0] = fp->cmd_vars[1] = fp->cmd_vars[2] = fp->cmd_vars[3] = 0;
     ftAnim_8006EBA4(gobj);
     ftKb_SpecialNPr_8010131C(gobj);
     fp->x74_anim_vel.y = da->specialn_pr_air_height_offset_at_start;
@@ -1125,8 +1126,8 @@ void ftKb_PrSpecialNStart_Coll(Fighter_GObj* gobj)
         } else {
             msid = ftKb_MS_PrSpecialAirNStartL;
         }
-        Fighter_ChangeMotionState(gobj, msid, 0x0C4C5092U,
-                                  fp->cur_anim_frame, 1.0f, 0.0f, NULL);
+        Fighter_ChangeMotionState(gobj, msid, 0x0C4C5092U, fp->cur_anim_frame,
+                                  1.0f, 0.0f, NULL);
         {
             Fighter* fp2 = GET_FIGHTER(gobj);
             fp2->death2_cb = ftKb_Init_800EE74C;
@@ -1227,8 +1228,8 @@ void ftKb_SpecialNZd_80105B2C(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     PAD_STACK(8);
-    Fighter_ChangeMotionState(gobj, ftKb_MS_ZdSpecialN, 0, 0.0f, 1.0f, 0.0f,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, ftKb_MS_ZdSpecialN, 0, ftKb_Init_804D94F0,
+                              ftKb_Init_804D94F4, ftKb_Init_804D94F0, NULL);
     ftAnim_8006EBA4(gobj);
     ftKb_SpecialNZd_Helper(gobj);
     fp->accessory4_cb = fn_80105A34;

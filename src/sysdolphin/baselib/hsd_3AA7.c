@@ -6,10 +6,10 @@
 #include <dolphin/card.h>
 #include <dolphin/os.h>
 
-/* 4D7980 */ static s32 hsd_804D7980;
-/* 4D7984 */ static volatile s32 hsd_804D7984;
-/* 4D7998 */ static s32 hsd_804D7998;
-/* 4D799C */ static s32 hsd_804D799C;
+/* 4D7980 */ extern s32 hsd_804D7980;
+/* 4D7984 */ extern volatile s32 hsd_804D7984;
+/* 4D7998 */ extern s32 hsd_804D7998;
+/* 4D799C */ extern s32 hsd_804D799C;
 
 typedef struct CardBufEntry {
     s32 x0, x4, x8, xC;

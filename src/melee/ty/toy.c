@@ -54,7 +54,7 @@ typedef struct {
     HSD_GObj* gobj;
 } TyLightData;
 
-static u8 un_804D6EA1;
+extern u8 un_804D6EA1;
 
 typedef struct {
     s16 x0;

@@ -36,6 +36,14 @@
 extern ItemKind grBb_803B8120[5];
 extern grBb_LineIds grBb_803B8134;
 
+extern f32 grBb_804DB2F0;
+extern f32 grBb_804DB2F4;
+extern f32 grBb_804DB304;
+extern f32 grBb_804DB308;
+extern f32 grBb_804DB30C;
+extern f32 grBb_804DB310;
+extern f32 grBb_804DB3F0;
+
 static grBb_YakumonoParams* grBb_804D69C8;
 
 u8 tmpPadData[168] = { 0 };
@@ -93,7 +101,7 @@ StageCallbacks grBb_803E29E0[] = {
     { NULL, NULL, NULL, NULL, 0 }
 };
 
-static const Vec3 grBb_803B8108 = { 0.5F, 0.0F, 0.0F };
+static const Vec3 grBb_803B8108 = { -1.0F, 0.0F, 0.0F };
 static const Vec3 grBb_803B8114 = { 56.0F, 40.0F, 24.0F };
 
 static grBb_TrackEntry grBb_TrackEntries[12] = {
@@ -382,9 +390,9 @@ void grBigBlue_801E6364(Ground_GObj* gobj)
     grFZeroCar_801CAFBC(car_gobj, (void*) ((u8*) tmpPadData + 0x44C), 30, 1);
 
     cur = HSD_JObjGetChild(car_gobj->hsd_obj);
-    rot_y = 0.0F;
-    scale_base = 1.0F;
-    trans_x = -1.0F;
+    rot_y = grBb_804DB304;
+    scale_base = grBb_804DB2F0;
+    trans_x = grBb_804DB308;
 
     for (i = 0; i < 30; i++) {
         child = HSD_JObjGetChild(cur);
@@ -762,11 +770,11 @@ f32 grBigBlue_801E8B84(f32 right, f32 left, f32 bottom, f32 top)
 void grBigBlue_801E8D04(void)
 {
     f32 val4, val3, val2, val1;
-    val1 = HSD_Randf();
-    val2 = HSD_Randf();
-    val3 = HSD_Randf();
-    val4 = HSD_Randf();
-    Ground_801C38D0(val4, val3, val2, val1);
+    val1 = Stage_GetCamBoundsRightOffset();
+    val2 = Stage_GetCamBoundsLeftOffset();
+    val3 = Stage_GetCamBoundsBottomOffset();
+    val4 = Stage_GetCamBoundsTopOffset();
+    grBigBlue_801E8B84(val4, val3, val2, val1);
 }
 
 void grBigBlue_801E8D64(Ground_GObj* gobj)
@@ -791,9 +799,9 @@ void grBigBlue_801E8D64(Ground_GObj* gobj)
         *(s32*) ((u8*) other_gp + 0xCC) = 1;
     }
 
-    y_pos = grBigBlue_801EC58C(&pos, NULL, 0.0F);
-    if (y_pos == 0.0F) {
-        y_pos = 1.0F;
+    y_pos = grBigBlue_801EC58C(&pos, NULL, grBb_804DB30C);
+    if (grBb_804DB310 == y_pos) {
+        y_pos = grBb_804DB2F4;
     }
 
     HSD_JObjSetTranslateX(jobj, 0.0F);
@@ -2460,15 +2468,13 @@ void fn_801EF60C(Ground* gp, s32 joint_id, CollData* coll, s32 time_param,
     }
 }
 
-/// @todo Currently 96.3% match - needs separate float literals for x vs y/z
 void grBigBlue_801EF7D8(Vec3* pos)
 {
     HSD_GObj* gobj = Ground_801C2BA4(0x22);
 
     if (gobj != NULL && gobj->user_data != NULL) {
-        pos->x = 0.0F;
-        pos->y = 0.0F;
-        pos->z = 0.0F;
+        pos->x = grBb_804DB3F0;
+        pos->z = pos->y = grBb_804DB2F4;
     } else {
         pos->z = 0.0F;
         pos->y = 0.0F;

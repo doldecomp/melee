@@ -5,12 +5,12 @@
 static s32 lbl_804D4190 = 0xFFFFFFFF;
 static s32 lbl_804D4194 = -1;
 
-static HSD_Archive* lbl_804D6638;
-static HSD_Archive* lbl_804D6640;
-static HSD_Archive* lbl_804D6644;
-static HSD_Archive* lbl_804D6648;
-static SceneDesc* lbl_804D664C;
-static SceneDesc* lbl_804D6650;
+HSD_Archive* lbl_804D6638;
+HSD_Archive* lbl_804D6640;
+HSD_Archive* lbl_804D6644;
+HSD_Archive* lbl_804D6648;
+SceneDesc* lbl_804D664C;
+SceneDesc* lbl_804D6650;
 
 typedef struct BracketSrcEntry {
     /* 0x00 */ u8 x0;

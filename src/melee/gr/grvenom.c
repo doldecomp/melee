@@ -1036,6 +1036,8 @@ void grVenom_80206BC4(Ground_GObj* gobj)
 
 void grVenom_80206BEC(Ground_GObj* arg) {}
 
+extern char grVe_803E5524[];
+
 bool grVenom_80206BF0(int arg0)
 {
     s32 var_r30;
@@ -1054,7 +1056,7 @@ bool grVenom_80206BF0(int arg0)
         return 0;
     }
     wgobj = (Ground_GObj*) grVenom_80203EAC(8);
-    HSD_ASSERT(0x8C4, wgobj);
+    ((wgobj) ? ((void) 0) : __assert(grVe_803E5524, 0x8C4, "wgobj"));
     gp = wgobj->user_data;
     gp->gv.venom.xCC = 10;
     gp->gv.venom.xC8 = 0;

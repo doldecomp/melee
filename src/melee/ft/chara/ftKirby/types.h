@@ -193,7 +193,7 @@ struct ftKb_DatAttrs {
     // Samus
     /* +168 */ float specialn_ss_charge_time;
     /* +16C */ float specialn_ss_aerial_shot_recoil;
-    /* +170 */ u32 specialn_ss_frames_per_charge_level;
+    /* +170 */ s32 specialn_ss_frames_per_charge_level;
     /* +174 */ float specialn_ss_freefall_toggle;
 
     // Peach
