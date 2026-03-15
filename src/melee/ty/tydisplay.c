@@ -207,6 +207,7 @@ void un_8031B1FC(void)
 /// #un_8031B328
 
 static s32 un_804DE018 = (s32) 0xC8C8C8FF;
+static f32 un_804DE01C = 0.6f;
 
 void un_8031B328(void)
 {
@@ -507,7 +508,40 @@ s32 un_8031BBF4(s8 arg0)
 
 /// #un_8031BC54
 
-/// #un_8031BF34
+static char un_804D5AAC[] = "jobj.h";
+static char un_804D5AB4[] = "jobj";
+
+void un_8031BF34(s16 arg0)
+{
+    u8* base = (u8*) &un_804A2D98;
+    ToyAnimState* anim = &un_804A2AA8;
+    HSD_JObj* jobj;
+
+    PAD_STACK(8);
+
+    if (un_804D6F2C != NULL) {
+        HSD_Archive** archp = (HSD_Archive**) (base + 0x4C);
+        HSD_Archive* arch = *archp;
+        if (arch != NULL) {
+            lbArchive_80016EFC(arch);
+            *archp = NULL;
+        }
+    }
+
+    un_80308250(base + 0x38, (s32) arg0, 0);
+    un_804D6F2C = un_803087F4(base + 0x38);
+
+    HSD_JObjClearFlagsAll(anim->jobj[0], 0x10);
+    HSD_JObjSetFlagsAll(anim->jobj[1], 0x10);
+    HSD_JObjClearFlagsAll(anim->jobj[0], 0x10);
+
+    jobj = (HSD_JObj*) un_804D6F2C->hsd_obj;
+
+    HSD_JObjSetScaleX(jobj, 0.6f);
+    HSD_JObjSetScaleY(jobj, 0.6f);
+    HSD_JObjSetScaleZ(jobj, 0.6f);
+    HSD_JObjAddTranslationX(jobj, 12.0f);
+}
 
 /// #un_8031C1D0
 void un_8031C1D0(void)
