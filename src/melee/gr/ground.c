@@ -2933,7 +2933,7 @@ void Ground_801C5878(void)
     tyDisplay_8031C2CC();
     if (gm_8016B498() != 0) {
         int temp_r30 = tyDisplay_8031C2EC();
-        un_8031C454();
+        un_8031C454(temp_r30);
         stage_info.x6E4[0] = temp_r30;
     } else {
         stage_info.x6E4[0] = -1;

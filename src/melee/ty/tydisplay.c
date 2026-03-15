@@ -47,6 +47,19 @@ extern HSD_GObj** un_804D6F18;
 extern HSD_GObj* un_804D6F2C;
 extern u8 un_804A2DD0[0x18];
 
+typedef struct TyDspArchNames {
+    const char* entries[43];
+} TyDspArchNames;
+
+typedef struct TyDspNameTables {
+    const char* jobj_names[43];
+    const char* matanim_names[43];
+    TyDspArchNames arch_names;
+    s32 terminator;
+} TyDspNameTables;
+
+extern const TyDspNameTables un_803B8988;
+
 /// #un_803181BC
 
 void un_803182D4_OnFrame(void)
@@ -519,7 +532,56 @@ s32 un_8031C354(s32 id, s32 (*buf)[], s32 max, s32 kind)
     return count;
 }
 
-/// #un_8031C454
+s32 un_8031C454(s32 arg0)
+{
+    TyDspArchNames names1;
+    TyDspArchNames names2;
+    TyDspArchNames names3;
+    u8* entry;
+    u8 idx;
+    s32 result;
+    s32* archArr;
+    const TyDspNameTables* tables;
+
+    PAD_STACK(16);
+    result = 0;
+    archArr = un_804A2DE8;
+    tables = &un_803B8988;
+
+    un_803124BC();
+
+    if (arg0 == -1) {
+        return -1;
+    }
+
+    entry = (u8*) un_8031B9DC(arg0);
+    idx = entry[4];
+
+    if ((u32) archArr[idx] == 0U) {
+        names1 = tables->arch_names;
+        if ((s8) idx == -1) {
+            idx = 0;
+        }
+        archArr[entry[4]] =
+            (s32) lbArchive_LoadSymbols(names1.entries[(s8) idx], NULL);
+    } else {
+        result = 1;
+    }
+
+    if ((HSD_Archive*) archArr[42] == NULL) {
+        names2 = tables->arch_names;
+        archArr[42] =
+            (s32) lbArchive_LoadSymbols(names2.entries[42], NULL);
+    }
+
+    if ((HSD_Archive*) archArr[41] == NULL) {
+        names3 = tables->arch_names;
+        archArr[41] =
+            (s32) lbArchive_LoadSymbols(names3.entries[41], NULL);
+    }
+
+    return result;
+}
 
 /// #un_8031C5E4
 

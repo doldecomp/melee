@@ -30,7 +30,7 @@
 /* 31C2CC */ void tyDisplay_8031C2CC(void);
 /* 31C2EC */ s32 tyDisplay_8031C2EC(void);
 /* 31C354 */ s32 un_8031C354(s32, s32 (*)[], s32, s32);
-/* 31C454 */ UNK_RET un_8031C454(UNK_PARAMS);
+/* 31C454 */ s32 un_8031C454(s32 arg0);
 /* 31C5E4 */ void* un_8031C5E4(s32);
 /* 31C8B8 */ void un_8031C8B8(void);
 
