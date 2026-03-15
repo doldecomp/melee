@@ -26,6 +26,7 @@ typedef struct _THPHuffmanTab {
 } THPHuffmanTab;
 
 typedef struct _THPComponent {
+    u8 _;
     THPCoeff predDC;
     u8 pad;
     u8 quantizationTableSelector;
