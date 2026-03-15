@@ -12,7 +12,27 @@
 #include "gr/inlines.h"
 #include "lb/lb_00F9.h"
 
-#include <sysdolphin/baselib/dobj.h>
+#include <baselib/dobj.h>
+#include <baselib/gobj.h>
+#include <baselib/gobjgxlink.h>
+#include <baselib/gobjproc.h>
+
+StageCallbacks grRc_803E4E34[7] = {
+    { grRCruise_801FF3B4, grRCruise_801FF3E0, grRCruise_801FF3E8,
+      grRCruise_801FF3EC, 0 },
+    { grRCruise_801FF5B4, grRCruise_801FF6CC, grRCruise_801FF6D4,
+      grRCruise_801FF738, 0xC0000000 },
+    { grRCruise_801FF3F0, grRCruise_801FF434, grRCruise_801FF43C,
+      grRCruise_801FF440, 0 },
+    { grRCruise_801FF924, grRCruise_801FFAD4, grRCruise_801FFADC,
+      grRCruise_80200070, 0 },
+    { grRCruise_80200074, grRCruise_8020014C, grRCruise_80200154,
+      grRCruise_8020045C, 0 },
+    { grRCruise_801FF73C, grRCruise_801FF794, grRCruise_801FF79C,
+      grRCruise_801FF7A0, 0 },
+    { grRCruise_801FF7A4, grRCruise_801FF8DC, grRCruise_801FF8E4,
+      grRCruise_801FF920, 0 },
+};
 
 void grRCruise_801FF164(bool arg) {}
 
@@ -30,7 +50,33 @@ bool grRCruise_801FF2C0(void)
     return false;
 }
 
-/// #grRCruise_801FF2C8
+HSD_GObj* grRCruise_801FF2C8(int gobj_id)
+{
+    HSD_GObj* gobj;
+    StageCallbacks* callbacks = &grRc_803E4E34[gobj_id];
+
+    gobj = Ground_GetStageGObj(gobj_id);
+
+    if (gobj != NULL) {
+        Ground* gp = gobj->user_data;
+        gp->x8_callback = NULL;
+        gp->xC_callback = NULL;
+        GObj_SetupGXLink(gobj, grDisplay_801C5DB0, 3, 0);
+        if (callbacks->callback3 != NULL) {
+            gp->x1C_callback = callbacks->callback3;
+        }
+        if (callbacks->callback0 != NULL) {
+            callbacks->callback0(gobj);
+        }
+        if (callbacks->callback2 != NULL) {
+            HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
+        }
+    } else {
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 290, gobj_id);
+    }
+
+    return gobj;
+}
 
 void grRCruise_801FF3B4(Ground_GObj* gobj)
 {

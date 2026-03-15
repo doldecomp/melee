@@ -12,7 +12,7 @@
 /* 1FF298 */ void grRCruise_801FF298(void);
 /* 1FF29C */ void grRCruise_801FF29C(void);
 /* 1FF2C0 */ bool grRCruise_801FF2C0(void);
-/* 1FF2C8 */ UNK_RET grRCruise_801FF2C8(UNK_PARAMS);
+/* 1FF2C8 */ HSD_GObj* grRCruise_801FF2C8(int);
 /* 1FF3B4 */ void grRCruise_801FF3B4(Ground_GObj*);
 /* 1FF3E0 */ bool grRCruise_801FF3E0(Ground_GObj*);
 /* 1FF3E8 */ void grRCruise_801FF3E8(Ground_GObj*);
