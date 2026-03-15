@@ -48,6 +48,7 @@
 
 /* 1218AC */ void ftPp_SpecialHi_801218AC(Fighter_GObj* gobj);
 /* 1218F8 */ void ftPp_SpecialHi_801218F8(Fighter_GObj* gobj);
+/* 12280C */ void ftPp_SpecialHi_8012280C(Fighter_GObj* gobj);
 
 static void setRefGObjFlagAndClear(Fighter* fp)
 {
@@ -817,7 +818,30 @@ void ftPp_SpecialHi_Enter(Fighter_GObj* gobj)
     fp->fv.pp.x2240.y = 0.0f;
     fp->fv.pp.x2240.x = 0.0f;
 }
-/// #ftPp_SpecialAirHi_Enter
+void ftPp_SpecialAirHi_Enter(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftIceClimberAttributes* da = fp->dat_attrs;
+    PAD_STACK(16);
+
+    fp->self_vel.x /= da->x84;
+    fp->self_vel.y /= da->x88;
+
+    ftPp_SpecialHi_801218F8(gobj);
+
+    fp->x1968_jumpsUsed = fp->co_attrs.max_jumps;
+
+    fp = GET_FIGHTER(gobj);
+    fp->cmd_vars[2] = 0;
+    fp->cmd_vars[1] = 0;
+    fp->cmd_vars[0] = 0;
+    fp = GET_FIGHTER(gobj);
+    fp->mv.pp.unk_80123954.x0 = 1;
+    fp->fv.pp.x223C = 0;
+    fp->fv.pp.x2240.z = 0.0f;
+    fp->fv.pp.x2240.y = 0.0f;
+    fp->fv.pp.x2240.x = 0.0f;
+}
 
 /// #ftPp_SpecialHiStart_0_Anim
 
@@ -879,7 +903,34 @@ void ftPp_SpecialHiStart_0_Phys(Fighter_GObj* gobj)
     fp->fv.pp.x2240 = sp;
 }
 
-/// #ftPp_SpecialAirHiStart_0_Phys
+void ftPp_SpecialAirHiStart_0_Phys(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    ftIceClimberAttributes* da = fp->dat_attrs;
+    Vec3 sp;
+    PAD_STACK(16);
+
+    ftCommon_Fall(fp, da->x8C, da->x90);
+    ftCommon_8007CEF4(fp);
+
+    fp = GET_FIGHTER(gobj);
+    sp.x = sp.y = sp.z = 0.0f;
+
+    {
+        Fighter_GObj* nn_gobj =
+            Player_GetEntityAtIndex(GET_FIGHTER(gobj)->player_id, 1);
+        if (nn_gobj != NULL) {
+            Fighter* nn_fp = GET_FIGHTER(nn_gobj);
+            if (nn_fp->motion_id >= ftPp_MS_SpecialHi_0 &&
+                nn_fp->motion_id <= ftPp_MS_SpecialHi_5)
+            {
+                lb_8000B1CC(nn_fp->parts[FtPart_L4thNb].joint, NULL, &sp);
+            }
+        }
+    }
+
+    fp->fv.pp.x2240 = sp;
+}
 
 void ftPp_SpecialHiStart_0_Coll(Fighter_GObj* gobj)
 {
@@ -936,7 +987,41 @@ void ftPp_SpecialHi_801218F8(Fighter_GObj* gobj)
     ftAnim_8006EBA4(gobj);
 }
 
-/// #ftPp_SpecialHiThrow_0_Anim
+void ftPp_SpecialHiThrow_0_Anim(Fighter_GObj* gobj)
+{
+    PAD_STACK(40);
+
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        ft_8008A2BC(gobj);
+    }
+
+    {
+        Fighter* fp = gobj->user_data;
+        if (fp->cmd_vars[1] != 0) {
+            fp->cmd_vars[1] = 0;
+            {
+                int found;
+                Fighter_GObj* nn_gobj =
+                    Player_GetEntityAtIndex(GET_FIGHTER(gobj)->player_id, 1);
+                if (nn_gobj != NULL && ftNn_Init_8012309C(nn_gobj) == 1) {
+                    found = 1;
+                } else {
+                    found = 0;
+                }
+                if (found == 1) {
+                    ftPp_SpecialHi_8012280C(gobj);
+                    return;
+                }
+            }
+        }
+    }
+
+    {
+        Fighter* fp = GET_FIGHTER(gobj);
+        ++fp->mv.pp.unk_80123954.x0;
+        ftPp_SpecialS_80120FE0(gobj);
+    }
+}
 
 /// #ftPp_SpecialAirHiThrow_0_Anim
 
@@ -1280,7 +1365,20 @@ void ftPp_SpecialHi_801227AC(Fighter_GObj* gobj)
                               1.0f, 0.0f, NULL);
 }
 
-/// #ftPp_SpecialHi_8012280C
+void ftPp_SpecialHi_8012280C(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    ftCo_DatAttrs* co = &fp->co_attrs;
+    PAD_STACK(8);
+    if (fp->ground_or_air == GA_Ground) {
+        ftCommon_8007D60C(fp);
+    } else {
+        fp->x1968_jumpsUsed = co->max_jumps;
+    }
+    ftPp_SpecialS_80120E68(gobj);
+    Fighter_ChangeMotionState(gobj, 0x162, 0, 0.0f, 1.0f, 0.0f, NULL);
+    fp->x21F8 = ftCommon_8007F76C;
+}
 
 void ftPp_SpecialHi_80122898(Fighter_GObj* gobj)
 {
@@ -1311,7 +1409,20 @@ void ftPp_SpecialLw_Enter(Fighter_GObj* gobj)
     fp->accessory4_cb = fn_80122D2C;
 }
 
-/// #ftPp_SpecialAirLw_Enter
+void ftPp_SpecialAirLw_Enter(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    PAD_STACK(8);
+    fp->throw_flags = 0;
+    fp->cmd_vars[0] = 0;
+    fp->cmd_vars[3] = 0;
+    fp->mv.pp.speciallw.x0 = 0;
+    fp->mv.pp.speciallw.x4_b0 = false;
+    Fighter_ChangeMotionState(gobj, ftPp_MS_SpecialAirLw, 0, 0.0f, 1.0f, 0.0f,
+                              NULL);
+    ftAnim_8006EBA4(gobj);
+    fp->accessory4_cb = fn_80122D2C;
+}
 
 void ftPp_SpecialLw_Anim(Fighter_GObj* gobj)
 {
