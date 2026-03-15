@@ -163,7 +163,7 @@ void tyFigupon_80314C5C(HSD_GObj* gobj)
     Toy* tp1 = GET_TOY(gobj);
     struct un_804D6EF4_t* temp_r29 = un_804D6EF4;
     HSD_JObj* jobj = GET_JOBJ(gobj);
-    PAD_STACK(0x38);
+    PAD_STACK(40);
     if (tp1 != NULL) {
         if (tp1->x8 % 30 == 0) {
             HSD_JObjReqAnimAll(jobj, 0.0f);
@@ -184,7 +184,7 @@ void tyFigupon_80314C5C(HSD_GObj* gobj)
             HSD_GObjPLink_80390228(gobj);
         }
     } else {
-        Toy* tp = HSD_MemAlloc(sizeof(Toy));
+        Toy* tp = HSD_MemAlloc(0x58);
         if (tp != NULL) {
             GObj_InitUserData(gobj, 0, Toy_RemoveUserData, tp);
         }
@@ -192,17 +192,17 @@ void tyFigupon_80314C5C(HSD_GObj* gobj)
         HSD_AObjSetRate(jobj->child->aobj, 1.0f);
         {
             float temp_f30 = HSD_JObjGetTranslationX(temp_r29->jobjs[2]);
-            float temp_f29_6 = HSD_JObjGetTranslationY(temp_r29->jobjs[2]);
+            float temp_f29 = HSD_JObjGetTranslationY(temp_r29->jobjs[2]);
             float temp_f31 = HSD_JObjGetTranslationZ(temp_r29->jobjs[2]);
             float temp_f28 = HSD_JObjGetTranslationX(temp_r29->jobjs[3]);
             float temp_f27 = HSD_JObjGetTranslationY(temp_r29->jobjs[3]);
             float temp_f26 = HSD_JObjGetTranslationZ(temp_r29->jobjs[3]);
-            float temp_f30_2 = (3.0f * HSD_Randf()) + temp_f30;
-            float temp_f29_7 = (3.0f * HSD_Randf()) + temp_f29_6;
-            float var_f3 = temp_f28 - temp_f30_2;
-            float var_f2;
-            float var_f3_2;
+            temp_f30 = (3.0f * HSD_Randf()) + temp_f30;
+            temp_f29 = (3.0f * HSD_Randf()) + temp_f29;
             {
+                float var_f3 = temp_f28 - temp_f30;
+                float var_f2;
+                float var_f3_2;
                 if (var_f3 < 0.0f) {
                     var_f3 = -var_f3;
                 }
@@ -211,18 +211,18 @@ void tyFigupon_80314C5C(HSD_GObj* gobj)
                 if (var_f2 < 0.0f) {
                     var_f2 = -var_f2;
                 }
-                var_f3_2 = temp_f27 - temp_f29_7;
+                var_f3_2 = temp_f27 - temp_f29;
+                tp->translate.z = -0.72f * (var_f2 / 30.0f);
+                tp->translate.y = 0.4f;
+                tp->offset.y = -0.026666667f;
+                if (var_f3_2 < 0.0f) {
+                    var_f3_2 = -var_f3_2;
+                }
+                tp->x8 = (f32)(s32)var_f3_2 + 35.0f;
             }
-            tp->translate.z = -0.72f * (var_f2 / 30.0f);
-            tp->translate.y = 0.4f;
-            tp->offset.y = -0.026666667f;
-            if (var_f3_2 < 0.0f) {
-                var_f3_2 = -var_f3_2;
-            }
-            tp->x8 = (f32)(s32)var_f3_2 + 35.0f;
             temp_r29->x56 = tp->x8;
-            HSD_JObjSetTranslateX(jobj, temp_f30_2);
-            HSD_JObjSetTranslateY(jobj, temp_f29_7);
+            HSD_JObjSetTranslateX(jobj, temp_f30);
+            HSD_JObjSetTranslateY(jobj, temp_f29);
             HSD_JObjSetTranslateZ(jobj, temp_f31);
         }
         HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
