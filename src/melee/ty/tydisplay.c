@@ -10,6 +10,8 @@
 #include "ty/tylist.h"
 #include "ty/types.h"
 
+#include <placeholder.h>
+
 #include <baselib/archive.h>
 #include <baselib/debug.h>
 #include <baselib/fog.h>
@@ -20,12 +22,16 @@
 #include <baselib/gobjproc.h>
 #include <baselib/jobj.h>
 #include <baselib/lobj.h>
+#include <baselib/memory.h>
 #include <baselib/random.h>
 
 #include <dolphin/os.h>
 
+#include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 #include "lb/lbarchive.h"
+
+#include "db/db.h"
 
 extern char un_804D5AC0[2];
 extern DevText* un_804D6F24;
@@ -77,7 +83,8 @@ void un_803182D4_OnFrame(void)
 
 /// #un_80318714
 
-extern s32 un_804D6F14;
+extern u8* un_804D6F14;
+extern void* un_804D6F10;
 
 s32 un_80318B1C(s32 arg0)
 {
@@ -257,7 +264,209 @@ void un_8031B328(void)
     }
 }
 
-/// #un_8031B460_OnEnter
+static char un_803FEFF0[] = "ToyDspPanel_Top_joint";
+
+void un_8031B460_OnEnter(void* arg0)
+{
+    s32 sp18;
+    HSD_GObj** gobj_arr;
+    u8* scene;
+    u8* base;
+    HSD_CObj* cobj;
+    HSD_GObj* gobj;
+    int i;
+    char* strbase = (char*) un_803FEFF0;
+    PAD_STACK(8);
+
+    un_804D6F10 = HSD_MemAlloc(0x4B0);
+    un_804D6F14 = HSD_MemAlloc(0x12E4);
+    un_804D6F18 = HSD_MemAlloc(0x80);
+    un_804D6F1C = HSD_MemAlloc(0x108);
+    un_804D6ED4 = HSD_MemAlloc(0xE4);
+
+    gobj_arr = un_804D6F18;
+    scene = (u8*) un_804D6F1C;
+    base = un_804D6F14;
+
+    if (un_80305C44() & 0x40) {
+        *(s32*) base = 2;
+    } else if (un_80305C44() & 0x20) {
+        *(s32*) base = 1;
+    } else if (un_80305C44() & 0x800) {
+        *(s32*) base = 3;
+    } else {
+        *(s32*) base = 0;
+    }
+
+    un_804D6F20 = 0;
+    un_804D6F2C = 0;
+    un_804D6F24 = NULL;
+
+    if ((s32) g_debugLevel >= 3 && (un_80305C44() & 0x10)) {
+        un_804D6F20 = 1;
+        *(s32*) ((u8*) gobj_arr + 0x7C) = 0;
+    }
+
+    un_8031263C();
+    memzero(un_804D6F1C, 0x108);
+    memzero(un_804D6F18, 0x80);
+    memzero(un_804D6ED4, 0xE4);
+
+    *(s32*) ((u8*) gobj_arr + 0x08) = un_80304870();
+
+    if ((s32) un_804D6F20 != 0) {
+        *(s32*) ((u8*) gobj_arr + 0x08) = 1;
+        un_8031C1D0();
+    }
+
+    {
+        s32 mode = *(s32*) base;
+        if (mode >= 2) goto check_high;
+        if (mode >= 0) goto case01;
+        goto grid_done;
+
+    check_high:
+        if (mode >= 4) goto grid_done;
+        goto case23;
+
+    case01:
+        {
+            s32 count = *(s32*) ((u8*) gobj_arr + 0x08);
+            s32 toggle = 0;
+            u8 r;
+            *(u8*) ((u8*) gobj_arr + 0x75) = 1;
+            *(u8*) ((u8*) gobj_arr + 0x76) = 1;
+            goto check_grid1;
+        loop1:
+            toggle ^= 1;
+            if (toggle != 0 && (s8) r < 0x14) {
+                *(u8*) ((u8*) gobj_arr + 0x75) =
+                    (u8)(*(u8*) ((u8*) gobj_arr + 0x75) + 1);
+            } else {
+                *(u8*) ((u8*) gobj_arr + 0x76) =
+                    (u8)(*(u8*) ((u8*) gobj_arr + 0x76) + 1);
+            }
+        check_grid1:
+            r = *(u8*) ((u8*) gobj_arr + 0x75);
+            if ((s8) r *
+                    (s8) *(u8*) ((u8*) gobj_arr + 0x76) < count)
+            {
+                goto loop1;
+            }
+            *(u8*) ((u8*) gobj_arr + 0x75) = (u8)(r + 1);
+            *(u8*) ((u8*) gobj_arr + 0x76) =
+                (u8)(*(u8*) ((u8*) gobj_arr + 0x76) + 1);
+        }
+        goto grid_done;
+
+    case23:
+        {
+            s32 count = *(s32*) ((u8*) gobj_arr + 0x08);
+            s32 toggle = 0;
+            u8 r;
+            *(u8*) ((u8*) gobj_arr + 0x75) = 1;
+            *(u8*) ((u8*) gobj_arr + 0x76) = 1;
+            goto check_grid2;
+        loop2:
+            toggle ^= 1;
+            if (toggle != 0 && (s8) r < 0x14) {
+                *(u8*) ((u8*) gobj_arr + 0x75) =
+                    (u8)(*(u8*) ((u8*) gobj_arr + 0x75) + 1);
+            } else {
+                *(u8*) ((u8*) gobj_arr + 0x76) =
+                    (u8)(*(u8*) ((u8*) gobj_arr + 0x76) + 1);
+            }
+        check_grid2:
+            r = *(u8*) ((u8*) gobj_arr + 0x75);
+            if ((s8) r *
+                    (s8) *(u8*) ((u8*) gobj_arr + 0x76) < count)
+            {
+                goto loop2;
+            }
+        }
+
+    grid_done:;
+    }
+
+    {
+        s32 jp = lbLang_IsSavedLanguageJP();
+        char* archname;
+        if (jp != 0) {
+            archname = strbase + 0xA8;
+        } else {
+            archname = strbase + 0xB8;
+        }
+        *(HSD_Archive**) (scene + 0x4C) =
+            lbArchive_80016DBC(archname, &sp18, strbase + 0x18, 0);
+    }
+
+    {
+        u8* ptr = scene;
+        i = 0;
+        do {
+            s32 ret = un_8031BBF4((s8) i);
+            *(HSD_Archive**) (ptr + 0x50) =
+                lbArchive_LoadSymbols((char*) ret, NULL);
+            i += 1;
+            ptr += 4;
+        } while (i < 0x2B);
+    }
+
+    *(s16*) (scene + 0x104) = 0;
+
+    {
+        HSD_GObj** arr2 = un_804D6F18;
+        cobj = lb_80013B14(HSD_ArchiveGetPublicAddress(
+            *(HSD_Archive**) ((u8*) un_804D6F1C + 0x4C),
+            strbase + 0x18C));
+
+        arr2[0] = GObj_Create(1, 2, 0);
+        HSD_GObjObject_80390A70(arr2[0], HSD_GObj_804D784B, cobj);
+        GObj_SetupGXLinkMax(arr2[0], (GObj_RenderFunc) un_803068E0, 0);
+
+        gobj = arr2[0];
+        *(s32*) ((u8*) gobj + 0x24) = 0;
+        *(s32*) ((u8*) gobj + 0x20) = 0x12300000;
+
+        if ((s32) un_804D6F20 != 0) {
+            HSD_GObj_SetupProc(arr2[0], (HSD_GObjEvent) fn_8031A94C, 0);
+        } else {
+            HSD_GObj_SetupProc(arr2[0], (HSD_GObjEvent) fn_8031A4EC, 0);
+        }
+        HSD_GObj_80390CD4(arr2[0]);
+    }
+
+    un_8031B328();
+    un_8031B1FC();
+
+    if ((s32) un_804D6F20 != 0) {
+        memzero(base, 0x12E4);
+        *(f32*) (base + 0x08) = -3.5f;
+        *(f32*) (base + 0x04) = -3.5f;
+        *(f32*) (base + 0x10) = 3.5f;
+        *(f32*) (base + 0x0C) = 3.5f;
+        *(HSD_GObj**) ((u8*) gobj_arr + 0x78) =
+            un_8031BC54(*(s32*) ((u8*) gobj_arr + 0x7C));
+    } else {
+        s32 m = *(s32*) base;
+        switch (m) {
+        case 0:
+        case 1:
+            un_80318CB4();
+            break;
+        case 2:
+            HSD_Randi(2);
+            un_80319540();
+            break;
+        case 3:
+            HSD_Randi(2);
+            un_80319994();
+            break;
+        }
+    }
+
+    un_80319EF0();
+}
 
 /// #un_8031B850
 
