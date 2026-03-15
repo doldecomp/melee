@@ -13,6 +13,7 @@
 #include <placeholder.h>
 
 #include <baselib/archive.h>
+#include <baselib/cobj.h>
 #include <baselib/debug.h>
 #include <baselib/fog.h>
 #include <baselib/gobj.h>
@@ -29,7 +30,11 @@
 
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
+#include "lb/lbaudio_ax.h"
 #include "lb/lbarchive.h"
+#include "lb/lbvector.h"
+
+#include "mn/mnmain.h"
 
 #include "db/db.h"
 
@@ -557,7 +562,167 @@ void un_80319540(s32 arg0)
 
 /// #un_80319EF0
 
-/// #fn_8031A4EC
+void fn_8031A4EC(HSD_GObj* arg0)
+{
+    Vec3 interest;
+    Vec3 eye;
+    Vec3 sp40;
+    f32 sp3C;
+    f32 sp38;
+    f32 sp34;
+    Vec3 sp28;
+    f32 sp24;
+    f32 sp20;
+    f32 sp1C;
+    HSD_CObj* cobj = (HSD_CObj*) arg0->hsd_obj;
+    u8* cfg = (u8*) un_804D6F18;
+    f32 fov;
+    f32 val;
+    s32 sign;
+
+    PAD_STACK(0x18);
+
+    HSD_CObjGetInterest(cobj, &interest);
+    HSD_CObjGetEyePosition(cobj, &eye);
+    fov = HSD_CObjGetFov(cobj);
+
+    *(f32*)(cfg + 0x20) = un_80305D00();
+    *(f32*)(cfg + 0x24) = un_80305DB0();
+
+    val = *(f32*)(cfg + 0x20);
+    if (val > -0.2f && val < 0.2f) {
+        *(f32*)(cfg + 0x20) = 0.0f;
+    } else {
+        if (val > 0.0f) {
+            sign = 1;
+        } else {
+            sign = -1;
+        }
+        *(f32*)(cfg + 0x20) = -(0.2f * (f32)sign - val) / 0.8f;
+    }
+
+    val = *(f32*)(cfg + 0x24);
+    if (val > -0.2f && val < 0.2f) {
+        *(f32*)(cfg + 0x24) = 0.0f;
+    } else {
+        if (val > 0.0f) {
+            sign = 1;
+        } else {
+            sign = -1;
+        }
+        *(f32*)(cfg + 0x24) = -(0.2f * (f32)sign - val) / 0.8f;
+    }
+
+    *(f32*)(cfg + 0x30) = un_80305EB4();
+    *(f32*)(cfg + 0x34) = un_80305FB8();
+
+    val = *(f32*)(cfg + 0x30);
+    if (val > -0.2f && val < 0.2f) {
+        *(f32*)(cfg + 0x30) = 0.0f;
+    } else {
+        if (val > 0.0f) {
+            sign = 1;
+        } else {
+            sign = -1;
+        }
+        *(f32*)(cfg + 0x30) = -(0.2f * (f32)sign - val) / 0.8f;
+    }
+
+    val = *(f32*)(cfg + 0x34);
+    if (val > -0.2f && val < 0.2f) {
+        *(f32*)(cfg + 0x34) = 0.0f;
+    } else {
+        if (val > 0.0f) {
+            sign = 1;
+        } else {
+            sign = -1;
+        }
+        *(f32*)(cfg + 0x34) = -(0.2f * (f32)sign - val) / 0.8f;
+    }
+
+    if (*(s8*)(cfg + 0x74) != 0) {
+        *(u8*)(cfg + 0x74) = *(u8*)(cfg + 0x74) - 1;
+        return;
+    }
+
+    if (mn_8022F218() != 0) {
+        lbAudioAx_80024030(0);
+        mn_8022F268();
+        ((TyModeState*)un_804A284C)->x4 = 1;
+        return;
+    }
+
+    if (un_80305B88() & 0x1200) {
+        lbAudioAx_80024030(0);
+        ((TyModeState*)un_804A284C)->x4 = 1;
+        return;
+    }
+
+    {
+        f32 stick = *(f32*)(cfg + 0x20);
+        if (stick != 0.0f) {
+            *(f32*)(cfg + 0x10) = -(stick * (0.02f * fov) - *(f32*)(cfg + 0x10));
+            if (*(f32*)(cfg + 0x10) < -*(f32*)(cfg + 0x1C)) {
+                *(f32*)(cfg + 0x10) = -*(f32*)(cfg + 0x1C);
+            }
+            if (*(f32*)(cfg + 0x10) > *(f32*)(cfg + 0x1C)) {
+                *(f32*)(cfg + 0x10) = *(f32*)(cfg + 0x1C);
+            }
+        }
+    }
+
+    {
+        f32 stick = *(f32*)(cfg + 0x24);
+        if (stick != 0.0f) {
+            *(f32*)(cfg + 0x0C) = (stick * (0.02f * fov)) + *(f32*)(cfg + 0x0C);
+            if (*(f32*)(cfg + 0x0C) < -*(f32*)(cfg + 0x18)) {
+                *(f32*)(cfg + 0x0C) = -*(f32*)(cfg + 0x18);
+            }
+            if (*(f32*)(cfg + 0x0C) > *(f32*)(cfg + 0x18)) {
+                *(f32*)(cfg + 0x0C) = *(f32*)(cfg + 0x18);
+            }
+        }
+    }
+
+    if (un_80305C44() & 0x424) {
+        fov += *(f32*)(cfg + 0x48);
+        if (fov > *(f32*)(cfg + 0x50)) {
+            fov = *(f32*)(cfg + 0x50);
+        }
+        HSD_CObjSetFov(cobj, fov);
+    }
+
+    if (un_80305C44() & 0x848) {
+        fov -= *(f32*)(cfg + 0x48);
+        if (fov < *(f32*)(cfg + 0x4C)) {
+            fov = *(f32*)(cfg + 0x4C);
+        }
+        HSD_CObjSetFov(cobj, fov);
+    }
+
+    if (un_80305B88() & 0x100) {
+        HSD_CObjSetInterest(cobj, (Vec3*)(cfg + 0x5C));
+        HSD_CObjSetFov(cobj, *(f32*)(cfg + 0x44));
+        *(f32*)(cfg + 0x10) = 0.0f;
+        *(f32*)(cfg + 0x0C) = 0.0f;
+        HSD_CObjSetEyePosition(cobj, (Vec3*)(cfg + 0x68));
+    }
+
+    {
+        HSD_CObj* cobj2 = (HSD_CObj*)(*(HSD_GObj**)(cfg + 0x00))->hsd_obj;
+        HSD_CObjGetInterest(cobj2, &sp40);
+        HSD_CObjGetEyePosition(cobj2, &sp28);
+        sp34 = *(f32*)(cfg + 0x68);
+        sp38 = 0.0f;
+        sp3C = -500.0f;
+        sp1C = 0.017453292f * *(f32*)(cfg + 0x0C);
+        sp20 = 0.017453292f * *(f32*)(cfg + 0x10);
+        sp24 = 0.0f;
+        lbVector_ApplyEulerRotation((Vec3*)&sp34, (Vec3*)&sp1C);
+        sp3C = *(f32*)(cfg + 0x64);
+        HSD_CObjSetInterest(cobj2, (Vec3*)&sp34);
+    }
+}
 
 /// #fn_8031A94C
 
