@@ -61,8 +61,8 @@ struct lbl_80472D28_t {
 
 struct lbl_80472E48_t {
     /* 0x00 */ char pad_0[4];
-    /* 0x04 */ s32 unk_4;        /* inferred */
-    /* 0x08 */ s32 unk_8;        /* inferred */
+    /* 0x04 */ s32 unk_4; /* inferred */
+    /* 0x08 */ s32 unk_8; /* inferred */
     /* 0x0C */ char pad_C[0x8];
     /* 0x14 */ s32 x14[0x1B];
 }; /* size = 0x80 */
@@ -113,7 +113,7 @@ static struct lbl_80472E48_t lbl_80472E48;
 static int lbl_80472EC8[4];
 
 struct {
-    u8 pad[0x398];
+    u8 x0[0x394];
     // offsets relative to .bss
     u8 x6BC;
     u16 x6BE;
@@ -1153,8 +1153,7 @@ void gm_80180BA0(void)
 
     for (i = 0; i < 0x1B; i++) {
         u8 idx = gm_80164024((u8) i);
-        *gmMainLib_8015D06C(gm_80164024((u8) i)) =
-            lbl_80472E48.x14[idx] * 0xA;
+        *gmMainLib_8015D06C(gm_80164024((u8) i)) = lbl_80472E48.x14[idx] * 0xA;
     }
 }
 
