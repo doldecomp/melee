@@ -240,7 +240,8 @@ s32 THPVideoDecode(void* file, void* tileY, void* tileU, void* tileV,
                 }
             }
 
-            else {
+            else
+            {
                 goto _err_unsupported_marker;
             }
         }
@@ -493,7 +494,7 @@ static u8 __THPReadHuffmanTableSpecification(THPFileInfo* info)
 
         info->huffmanTabs[tab_index].bits = huffmanBits;
         info->huffmanTabs[tab_index].Vij = info->file;
-        info->huffmanTabs[tab_index].pad2[1] = num_Vij;
+        info->huffmanTabs[tab_index].num_Vij = num_Vij;
         info->file += num_Vij;
         result =
             __THPHuffGenerateSizeTable(info, tab_index, (int) huffmanBits);
@@ -1760,8 +1761,7 @@ static void __THPHuffDecodeDCTCompY(register THPFileInfo* info,
         }
 #endif // clang-format on
 
-        for (k = 1; k < 64; k++)
-        {
+        for (k = 1; k < 64; k++) {
             register s32 ssss;
             register s32 rrrr;
 
@@ -2174,7 +2174,8 @@ static void __THPHuffDecodeDCTCompU(register THPFileInfo* info,
             block[__THPJpegNaturalOrder[k]] = (s16) rrrr;
         }
 
-        else {
+        else
+        {
             if (rrrr != 15) {
                 break;
             }
