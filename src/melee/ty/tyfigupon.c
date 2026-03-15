@@ -8,6 +8,7 @@
 #include "if/textlib.h"
 #include "if/types.h"
 #include "gm/gm_1601.h"
+#include "mn/mnmain.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
@@ -839,6 +840,264 @@ void tyFigupon_80316BF8(void)
 }
 
 /// #fn_80316C24
+void fn_80316C24(HSD_GObj* arg0)
+{
+    struct un_804D6EF4_t* ef4 = un_804D6EF4;
+    TyFiguponData* data = un_804D6EF0;
+    f32 var_f31;
+    s32 anim_frame;
+    s32 sc;
+
+    if ((s8)(u8) ef4->x5C != 0) {
+        return;
+    }
+
+    {
+        f32 stick = un_80305DB0();
+        if (stick > -0.2f && stick < 0.2f) {
+            var_f31 = 0.0f;
+        } else {
+            s32 dir;
+            if (stick > 0.0f) {
+                dir = 1;
+            } else {
+                dir = -1;
+            }
+            var_f31 = -((0.2f * (f32) dir) - stick) / 0.8f;
+        }
+    }
+
+    if (mn_8022F218() != 0) {
+        lbAudioAx_80024030(0);
+        mn_8022F268();
+        ((TyModeState*) un_804A284C)->x4 = 1;
+        return;
+    }
+
+    if (un_80305B88() & 0x200) {
+        if (((u32) gm_801623D8() / 10u) == 0 || (s8)(u8) ef4->x5E <= 1) {
+            lbAudioAx_80024030(0);
+            ((TyModeState*) un_804A284C)->x4 = 1;
+            return;
+        }
+        ef4->x5E = 1;
+        un_803153EC((u32)(s8)(u8) ef4->x5E, 6, 2, 0, 0);
+        {
+            struct un_804D6EF4_t* ef4_2 = un_804D6EF4;
+            anim_frame = 2;
+            if ((s32)(u8) ef4_2->x5E == 0x14) {
+                anim_frame = 3;
+            }
+            if ((s8)(u8) ef4_2->x5E <= 1) {
+                anim_frame = 4;
+            }
+            HSD_JObjReqAnimAll(ef4_2->jobjs[8], (f32) anim_frame);
+            HSD_AObjSetRate(ef4_2->jobjs[8]->aobj, 1.0f);
+            HSD_JObjAnimAll(ef4_2->jobjs[8]);
+        }
+        sc = (s8)(u8) ef4->x5E;
+        {
+            struct un_804D6EF4_t* ef4_3 = un_804D6EF4;
+            f32 pct;
+            f32 fval;
+            s16 x54val = ef4_3->x54;
+            fval = (f32)(x54val + un_80314B54());
+            if (sc != 0) {
+                sc -= 1;
+            }
+            if (x54val == 0) {
+                pct = 0.0f;
+            } else {
+                pct = ((f32) x54val / fval) + ((f32)(sc * 5) / 100.0f);
+            }
+            if (pct >= 1.0f) {
+                pct = 999.0f;
+            } else {
+                pct = pct * 1000.0f;
+            }
+            un_803153EC((u32)(s32) pct, 9, 3, 2, 0);
+        }
+        lbAudioAx_80024030(2);
+        data->x28 = 1;
+        return;
+    }
+
+    {
+        u8 x28_val = data->x28;
+        if ((s8) x28_val != 0) {
+            data->x28 = (u8)(x28_val - 1);
+            return;
+        }
+    }
+
+    if (((u32) gm_801623D8() / 10u) == 0 || (s8)(u8) ef4->x5E == 0) {
+        if (var_f31 != 0.0f || (un_80305B88() & 0x1D7C)) {
+            lbAudioAx_80024030(3);
+            data->x28 = 0x1E;
+        }
+    } else {
+        if (un_80305B88() & 0x10) {
+            if ((u32) gm_801623D8() / 10u > 0x14U) {
+                ef4->x5E = 0x14;
+            } else {
+                ef4->x5E = gm_801623D8() / 10u;
+            }
+            un_803153EC((u32)(s8)(u8) ef4->x5E, 6, 2, 0, 0);
+            {
+                struct un_804D6EF4_t* ef4_4 = un_804D6EF4;
+                anim_frame = 1;
+                if ((s32)(u8) ef4_4->x5E == 0x14) {
+                    anim_frame = 3;
+                }
+                if ((s8)(u8) ef4_4->x5E <= 1) {
+                    anim_frame = 4;
+                }
+                HSD_JObjReqAnimAll(ef4_4->jobjs[8], (f32) anim_frame);
+                HSD_AObjSetRate(ef4_4->jobjs[8]->aobj, 1.0f);
+                HSD_JObjAnimAll(ef4_4->jobjs[8]);
+            }
+            sc = (s8)(u8) ef4->x5E;
+            {
+                struct un_804D6EF4_t* ef4_5 = un_804D6EF4;
+                s16 x54val = ef4_5->x54;
+                f32 pct;
+                f32 fval;
+                fval = (f32)(x54val + un_80314B54());
+                if (sc != 0) {
+                    sc -= 1;
+                }
+                if (x54val == 0) {
+                    pct = 0.0f;
+                } else {
+                    pct = ((f32) x54val / fval) + ((f32)(sc * 5) / 100.0f);
+                }
+                if (pct >= 1.0f) {
+                    pct = 999.0f;
+                } else {
+                    pct = pct * 1000.0f;
+                }
+                un_803153EC((u32)(s32) pct, 9, 3, 2, 0);
+            }
+            lbAudioAx_80024030(2);
+            data->x28 = 1;
+            return;
+        }
+        if (un_80305B88() & 0x1160) {
+            u8 temp = (u8) ef4->x5E;
+            if ((s8) temp != 0) {
+                ef4->x5D = (s8) temp;
+                ef4->x56 = 0x1E;
+                HSD_GObjProc_8038FD54((HSD_GObj*) ef4->x00, fn_80315C44, 0);
+                HSD_GObj_80390CD4((HSD_GObj*) ef4->x00);
+                HSD_GObjProc_8038FD54((HSD_GObj*) ef4->x0C, fn_803152BC, 0);
+                HSD_GObj_80390CD4((HSD_GObj*) ef4->x0C);
+                ef4->x5C = 1;
+                HSD_GObjProc_8038FD54(arg0, (void (*)(HSD_GObj*)) fn_803155C8, 0);
+                HSD_GObj_80390CD4(arg0);
+                return;
+            }
+        }
+        if (var_f31 <= -0.1f || (un_80305C44() & 0x400) || (un_80305B88() & 4)) {
+            u8 temp = (u8) ef4->x5E;
+            if ((s8) temp > 1) {
+                ef4->x5E = temp - 1;
+                un_803153EC((u32)(s8)(u8) ef4->x5E, 6, 2, 0, 0);
+                {
+                    struct un_804D6EF4_t* ef4_6 = un_804D6EF4;
+                    anim_frame = 2;
+                    if ((s32)(u8) ef4_6->x5E == 0x14) {
+                        anim_frame = 3;
+                    }
+                    if ((s8)(u8) ef4_6->x5E <= 1) {
+                        anim_frame = 4;
+                    }
+                    HSD_JObjReqAnimAll(ef4_6->jobjs[8], (f32) anim_frame);
+                    HSD_AObjSetRate(ef4_6->jobjs[8]->aobj, 1.0f);
+                    HSD_JObjAnimAll(ef4_6->jobjs[8]);
+                }
+                sc = (s8)(u8) ef4->x5E;
+                {
+                    struct un_804D6EF4_t* ef4_7 = un_804D6EF4;
+                    s16 x54val = ef4_7->x54;
+                    f32 pct;
+                    f32 fval;
+                    fval = (f32)(x54val + un_80314B54());
+                    if (sc != 0) {
+                        sc -= 1;
+                    }
+                    if (x54val == 0) {
+                        pct = 0.0f;
+                    } else {
+                        pct = ((f32) x54val / fval) + ((f32)(sc * 5) / 100.0f);
+                    }
+                    if (pct >= 1.0f) {
+                        pct = 999.0f;
+                    } else {
+                        pct = pct * 1000.0f;
+                    }
+                    un_803153EC((u32)(s32) pct, 9, 3, 2, 0);
+                }
+                lbAudioAx_80024030(2);
+                data->x28 = 3;
+            }
+        } else if (var_f31 >= 0.1f || (un_80305C44() & 0x800) || (un_80305B88() & 8)) {
+            u8 temp = (u8) ef4->x5E;
+            if ((u32)(s8) temp < (u32) gm_801623D8() / 10u && (s8) temp < 0x14) {
+                ef4->x5E = temp + 1;
+                un_803153EC((u32)(s8)(u8) ef4->x5E, 6, 2, 0, 0);
+                {
+                    struct un_804D6EF4_t* ef4_8 = un_804D6EF4;
+                    anim_frame = 1;
+                    if ((s32)(u8) ef4_8->x5E == 0x14) {
+                        anim_frame = 3;
+                    }
+                    if ((s8)(u8) ef4_8->x5E <= 1) {
+                        anim_frame = 4;
+                    }
+                    HSD_JObjReqAnimAll(ef4_8->jobjs[8], (f32) anim_frame);
+                    HSD_AObjSetRate(ef4_8->jobjs[8]->aobj, 1.0f);
+                    HSD_JObjAnimAll(ef4_8->jobjs[8]);
+                }
+                sc = (s8)(u8) ef4->x5E;
+                {
+                    struct un_804D6EF4_t* ef4_9 = un_804D6EF4;
+                    s16 x54val = ef4_9->x54;
+                    f32 pct;
+                    f32 fval;
+                    fval = (f32)(x54val + un_80314B54());
+                    if (sc != 0) {
+                        sc -= 1;
+                    }
+                    if (x54val == 0) {
+                        pct = 0.0f;
+                    } else {
+                        pct = ((f32) x54val / fval) + ((f32)(sc * 5) / 100.0f);
+                    }
+                    if (pct >= 1.0f) {
+                        pct = 999.0f;
+                    } else {
+                        pct = pct * 1000.0f;
+                    }
+                    un_803153EC((u32)(s32) pct, 9, 3, 2, 0);
+                }
+                lbAudioAx_80024030(2);
+                data->x28 = 3;
+            }
+        } else {
+            struct un_804D6EF4_t* ef4_10 = un_804D6EF4;
+            anim_frame = 0;
+            if ((s32)(u8) ef4_10->x5E == 0x14) {
+                anim_frame = 3;
+            }
+            if ((s8)(u8) ef4_10->x5E <= 1) {
+                anim_frame = 4;
+            }
+            HSD_JObjReqAnimAll(ef4_10->jobjs[8], (f32) anim_frame);
+            HSD_AObjSetRate(ef4_10->jobjs[8]->aobj, 1.0f);
+            HSD_JObjAnimAll(ef4_10->jobjs[8]);
+        }
+    }
+}
 
 static u16 un_804D5AA0 = 0xC;
 static char un_804D5AA4 = 0;
