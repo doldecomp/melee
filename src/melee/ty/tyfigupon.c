@@ -750,20 +750,15 @@ void fn_803168DC(HSD_GObj* arg0)
     f32 rot_x;
     f32 rot_y;
     f32 dead;
+    s32 i;
 
-    cx = HSD_PadCopyStatus[0].nml_subStickX;
-    cy = HSD_PadCopyStatus[0].nml_subStickY;
-    if (-0.4f < cx && cx < 0.4f && -0.4f < cy && cy < 0.4f) {
-        cx = HSD_PadCopyStatus[1].nml_subStickX;
-        cy = HSD_PadCopyStatus[1].nml_subStickY;
+    for (i = 0; i < 4; i++) {
+        cx = HSD_PadCopyStatus[i].nml_subStickX;
+        cy = HSD_PadCopyStatus[i].nml_subStickY;
         if (-0.4f < cx && cx < 0.4f && -0.4f < cy && cy < 0.4f) {
-            cx = HSD_PadCopyStatus[2].nml_subStickX;
-            cy = HSD_PadCopyStatus[2].nml_subStickY;
-            if (-0.4f < cx && cx < 0.4f && -0.4f < cy && cy < 0.4f) {
-                cx = HSD_PadCopyStatus[3].nml_subStickX;
-                cy = HSD_PadCopyStatus[3].nml_subStickY;
-            }
+            continue;
         }
+        break;
     }
 
     if (-0.4f < cx && cx < 0.4f && -0.4f < cy && cy < 0.4f) {
