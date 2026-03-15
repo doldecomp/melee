@@ -54,7 +54,9 @@ typedef struct ftIceClimberAttributes {
     u8 _7C[0x80 - 0x7C];
     float x80;
     float x84;
-    u8 _88[0x94 - 0x88];
+    float x88;
+    float x8C;
+    float x90;
     float x94;
     float x98;
     u8 _9C[0xA4 - 0x9C];
