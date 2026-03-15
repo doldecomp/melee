@@ -21,6 +21,10 @@
 
 /* 2AC000 */ static bool itNesspkthunderball_UnkMotion0_Coll(Item_GObj* gobj);
 
+ItemStateTable it_803F6BC8[] = { { 0, itNesspkthunderball_UnkMotion0_Anim,
+                                   itNesspkthunderball_UnkMotion0_Phys,
+                                   itNesspkthunderball_UnkMotion0_Coll } };
+
 static inline void normalizeAngle(f32* angle)
 {
     while (*angle < 0.0F) {
