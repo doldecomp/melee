@@ -4,6 +4,8 @@
 #include <placeholder.h>
 #include <platform.h>
 
+#include "ty/types.h"
+
 #include <baselib/forward.h>
 
 struct TyListArg;
@@ -29,7 +31,7 @@ struct TyListState;
 /* 3FDD18 */ extern char un_803FDD18[];
 /* 3FE8F0 */ extern char un_803FE8F0[];
 /* 3FE8FC */ extern char un_803FE8FC[];
-/* 4A2AA8 */ extern u8 un_804A2AA8[];
+/* 4A2AA8 */ extern ToyAnimState un_804A2AA8;
 /* 4D6EA4 */ extern void* un_804D6EA4;
 /* 4D6EA8 */ extern void* un_804D6EA8;
 /* 4D6EAC */ extern void* un_804D6EAC;

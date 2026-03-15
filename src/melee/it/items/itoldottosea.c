@@ -55,7 +55,21 @@ bool itOldottosea_UnkMotion0_Coll(Item_GObj* gobj)
 
 /// #itOldottosea_UnkMotion2_Phys
 
-/// #itOldottosea_UnkMotion2_Coll
+bool itOldottosea_UnkMotion2_Coll(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (it_8026D8A4(gobj, it_802E3098)) {
+        if (ip->x40_vel.x != 0.0f) {
+            if (it_80276308(gobj) != 0) {
+                it_802E3098(gobj);
+            }
+        }
+    } else {
+        it_802E2BC0(gobj);
+    }
+    PAD_STACK(8);
+    return it_802E35CC(gobj);
+}
 
 void it_802E2BC0(Item_GObj* gobj)
 {

@@ -86,7 +86,7 @@ struct unkCastle {
 /* 1D07BC */ void grCastle_801D07BC(UNK_T, unkCastle*, Ground_GObj*);
 /* 1D0834 */ void grCastle_801D0834(UNK_T, unkCastle*, Ground_GObj*);
 /* 1D08AC */ void grCastle_801D08AC(UNK_T, unkCastle*, Ground_GObj*);
-/* 1D0924 */ UNK_RET fn_801D0924(UNK_PARAMS);
+/* 1D0924 */ void fn_801D0924(HSD_GObj*, int);
 /* 1D09B8 */ UNK_RET grCastle_801D09B8(UNK_PARAMS);
 /* 1D0A9C */ void grCastle_801D0A9C(Vec3* arg0, f32 arg8);
 /* 1D0B04 */ DynamicsDesc* grCastle_801D0B04(enum_t);

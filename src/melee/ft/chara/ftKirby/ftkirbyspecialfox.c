@@ -687,11 +687,15 @@ void ftKb_SpecialNNs_800FECE8(HSD_GObj* gobj)
     }
 }
 
+extern const f32 ftKb_Init_804D9478;
+extern const f32 ftKb_Init_804D9480;
+
 void ftKb_SpecialNNs_800FED38(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    Fighter_ChangeMotionState(gobj, ftKb_MS_NsSpecialNStart, Ft_MF_None, 0, 1,
-                              0, NULL);
+    Fighter_ChangeMotionState(gobj, ftKb_MS_NsSpecialNStart, Ft_MF_None,
+                              ftKb_Init_804D9478, ftKb_Init_804D9480,
+                              ftKb_Init_804D9478, NULL);
     fp->cmd_vars[0] = fp->cmd_vars[1] = fp->cmd_vars[2] = fp->cmd_vars[3] = 0;
     {
         /// @todo @c da can't move below @c fp

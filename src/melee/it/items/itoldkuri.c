@@ -126,7 +126,7 @@ void it_802D775C(Item_GObj* gobj)
 bool itOldkuri_UnkMotion3_Anim(Item_GObj* gobj)
 {
     if (!it_80272C6C(gobj)) {
-        Item_80268E5C(gobj, 3, ITEM_ANIM_UPDATE | ITEM_HIT_PRESERVE);
+        it_802D848C(gobj, 3, ITEM_ANIM_UPDATE | ITEM_HIT_PRESERVE);
     }
     return false;
 }
@@ -160,7 +160,7 @@ void it_802D7AF0(Item_GObj* gobj)
 bool itOldkuri_UnkMotion4_Anim(Item_GObj* gobj)
 {
     if (!it_80272C6C(gobj)) {
-        Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
+        it_802D848C(gobj, 4, ITEM_ANIM_UPDATE);
     }
     return false;
 }

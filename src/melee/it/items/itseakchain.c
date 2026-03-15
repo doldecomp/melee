@@ -518,7 +518,7 @@ void it_802BCA30(Item* ip)
     ItemLink* link = ip->xDD4_itemVar.seakchain.x0;
     HSD_JObj* jobj0 = link->gobj->hsd_obj;
     Mtx mtx;
-    Vec3 vec = { 0 };
+    Vec3 vec = it_803B868C;
     PAD_STACK(3 * 4);
     HSD_JObjSetupMatrix(link->jobj);
     PSMTXIdentity(mtx);

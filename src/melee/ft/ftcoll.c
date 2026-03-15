@@ -41,8 +41,7 @@
 #include <baselib/gobj.h>
 #include <Runtime/runtime.h>
 
-/* 07A06C */ static void ftColl_8007A06C(float facing_dir, DmgLogEntry** log,
-                                         int idx, bool);
+/* 07A06C */ void ftColl_8007A06C(Fighter_GObj*, void*, void*, size_t, int);
 /// /* 076808 */ static void ftColl_80076808(Fighter* fp, HitCapsule* hit, int,
 ///                                          Fighter* victim, bool);
 
@@ -1197,7 +1196,8 @@ float ftColl_80079EA8(Fighter* arg0, HitCapsule* arg1, int arg2)
 
 #pragma push
 #pragma dont_inline on
-void ftColl_8007A06C(float facing_dir, DmgLogEntry** log, int idx, bool arg3)
+void ftColl_8007A06C(Fighter_GObj* gobj, void* dmg_ptr, void* log, size_t idx,
+                     int arg4)
 {
     NOT_IMPLEMENTED;
 }
@@ -1205,22 +1205,15 @@ void ftColl_8007A06C(float facing_dir, DmgLogEntry** log, int idx, bool arg3)
 
 void ftColl_8007AB48(Fighter_GObj* gobj)
 {
-    ftColl_8007A06C(GET_FIGHTER(gobj)->dmg.facing_dir_1,
-                    (DmgLogEntry**) &dmg_log0, dmg_log0_idx, true);
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftColl_8007A06C(gobj, (char*) fp + 0x1844, dmg_log0, dmg_log0_idx, 1);
 }
-
-extern void ftColl_8007A06C_real(Fighter_GObj*, void*, DmgLogEntry*, size_t,
-                                 int);
-
-extern void ftColl_8007A06C_alt(Fighter_GObj*, void*, void*, size_t, int);
-
-extern void ftColl_8007A06C_alt(Fighter_GObj*, void*, void*, size_t, int);
 
 void ftColl_8007AB80(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->dmg.x187c = 0.0f;
-    ftColl_8007A06C_alt(gobj, (char*) fp + 0x1870, dmg_log1, dmg_log1_idx, 0);
+    ftColl_8007A06C(gobj, (char*) fp + 0x1870, dmg_log1, dmg_log1_idx, 0);
     fp->dmg.x18a0 = fp->dmg.x187c;
 }
 

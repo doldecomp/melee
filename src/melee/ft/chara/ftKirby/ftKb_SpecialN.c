@@ -58,6 +58,9 @@ struct ftKb_Init_803CB4EC_t {
 };
 extern struct ftKb_Init_803CB4EC_t ftKb_Init_803CB4EC;
 
+extern f32 ftKb_Init_804D93E8;
+extern f32 ftKb_Init_804D93EC;
+
 /// Forward declarations
 void fn_800F9260(HSD_GObj*);
 void fn_800F64C8(Fighter_GObj*, float);
@@ -1245,7 +1248,7 @@ void ftKb_SpecialAirS_Coll(Fighter_GObj* gobj)
     if (ft_80081D0C(gobj)) {
         Fighter* fp2 = GET_FIGHTER(gobj);
         if (fp2->fv.kb.hat.x0 != NULL) {
-            it_802AEAB4(fp2->fv.kb.hat.x0);
+            it_802ADC34(fp2->fv.kb.hat.x0);
             fp2->fv.kb.hat.x0 = NULL;
         }
         fp->fv.kb.x64 = false;
@@ -1623,7 +1626,7 @@ void ftKb_SpecialN_800F6388(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     Fighter_ChangeMotionState(gobj, ftKb_MS_Eat, 0x10, 0.0F, 1.0F, 0.0F,
                               NULL);
-    ftAnim_8006EBA4(gobj);
+    ftKb_SpecialN_800F9070(gobj);
     ftCommon_8007E2F4(fp, 0x1FF);
 }
 
@@ -1632,7 +1635,7 @@ void ftKb_SpecialN_800F63EC(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     Fighter_ChangeMotionState(gobj, ftKb_MS_EatAir, 0x10, 0.0F, 1.0F, 0.0F,
                               NULL);
-    ftAnim_8006EBA4(gobj);
+    ftKb_SpecialN_800F9070(gobj);
     ftCommon_8007E2F4(fp, 0x1FF);
 }
 
@@ -2010,8 +2013,8 @@ void ftKb_EatTurn_Anim(Fighter_GObj* gobj)
         fp = GET_FIGHTER(gobj);
         Fighter_ChangeMotionState(gobj, ftKb_MS_EatWait, Ft_MF_SkipModel, 0.0f,
                                   1.0f, 0.0f, NULL);
-        ftAnim_8006EBA4(gobj);
         ftKb_SpecialN_800F9070(gobj);
+        ftAnim_8006EBA4(gobj);
         ftCommon_8007E2F4(fp, 0x1FF);
     }
 }
@@ -2853,7 +2856,8 @@ void ftKb_SpecialNPk_800F9FD4(Fighter_GObj* gobj)
         msid = ftKb_MS_PcSpecialN;
         break;
     }
-    Fighter_ChangeMotionState(gobj, msid, 0, 0.0F, 1.0F, 0.0F, NULL);
+    Fighter_ChangeMotionState(gobj, msid, 0, ftKb_Init_804D93E8,
+                              ftKb_Init_804D93EC, ftKb_Init_804D93E8, NULL);
     fp->cmd_vars[3] = 0;
     fp->cmd_vars[2] = 0;
     fp->cmd_vars[1] = 0;
