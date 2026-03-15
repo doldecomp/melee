@@ -4,6 +4,7 @@
 #include <platform.h>
 
 #include "ef/eflib.h"
+#include "gr/stage.h"
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
@@ -12,7 +13,20 @@
 #include "it/item.h"
 #include "mp/mplib.h"
 
-/// #it_2725_Logic18_Spawned
+void it_2725_Logic18_Spawned(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itHououAttr* attr = ip->xC4_article_data->x4_specialAttributes;
+    *(Vec3*) &ip->xDD4_itemVar.pokemon.x64 = ip->pos;
+    ip->facing_dir = 0.0F;
+    ip->xDAC_itcmd_var0 = 0;
+    ip->xDB0_itcmd_var1 = 0;
+    ip->xDD4_itemVar.pokemon.timer = attr->x14;
+    ip->xDCC_flag.b3 = false;
+    it_802D2BE0(gobj);
+    it_80279CDC(gobj, attr->timer);
+    ip->xDD4_itemVar.pokemon.xE44 = 0.0F;
+}
 
 void it_802D25B8(void) {}
 
@@ -77,7 +91,26 @@ bool itHouou_UnkMotion2_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itHouou_UnkMotion2_Phys
+void itHouou_UnkMotion2_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itHououAttr* attr = ip->xC4_article_data->x4_specialAttributes;
+
+    it_8027A344(gobj);
+
+    if (it_80272C6C(gobj)) {
+        ip->xDD4_itemVar.pokemon.xE44 += attr->x8;
+    } else {
+        ip->xDD4_itemVar.pokemon.xE44 += attr->xC;
+    }
+
+    ip->x40_vel.y += ip->xDD4_itemVar.pokemon.xE44;
+
+    if (ip->pos.y > Stage_GetBlastZoneTopOffset()) {
+        ip->x40_vel.y = 0.0F;
+        it_802D27B0(gobj);
+    }
+}
 
 bool itHouou_UnkMotion2_Coll(Item_GObj* gobj)
 {
@@ -229,7 +262,23 @@ bool itHouou_UnkMotion5_Coll(Item_GObj* gobj)
     return false;
 }
 
-/// #it_802D2B4C
+void it_802D2B4C(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+
+    if (ip->xDAC_itcmd_var0 != 0) {
+        ip->xDAC_itcmd_var0 = 0;
+        it_8027ADEC(0x46F, gobj, ip->xBBC_dynamicBoneTable->bones[16],
+                    1.3F);
+        it_8027ADEC(0x46F, gobj, ip->xBBC_dynamicBoneTable->bones[17],
+                    1.3F);
+    }
+
+    if (ip->xDB0_itcmd_var1 != 0) {
+        ip->xDB0_itcmd_var1 = 0;
+        it_802D2D2C(gobj);
+    }
+}
 
 void it_802D2BE0(Item_GObj* gobj)
 {
@@ -247,7 +296,19 @@ bool it_802D2C54(Item_GObj* gobj)
     return false;
 }
 
-/// #it_802D2C78
+void it_802D2C78(Item_GObj* gobj)
+{
+    if (it_8027A09C(gobj)) {
+        Item* ip = GET_ITEM(gobj);
+        Item* ip2;
+        it_80273454(gobj);
+        ip2 = GET_ITEM(gobj);
+        Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
+        ip2->entered_hitlag = efLib_PauseAll;
+        ip2->exited_hitlag = efLib_ResumeAll;
+        ip->xDD1_flag.b1 = true;
+    }
+}
 
 bool it_802D2D04(Item_GObj* gobj)
 {

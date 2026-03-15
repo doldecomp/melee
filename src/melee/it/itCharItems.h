@@ -28,7 +28,14 @@ typedef struct itClimbersBlizzardAttributes {
 
 typedef struct itClimbersIce_ItemVars {
     /* +0 */ Item_GObj* x0;
+    /* +4 */ f32 x4;
+    /* +8 */ u8 x8_b0 : 1;
 } itClimbersIce_ItemVars;
+
+typedef struct itClimbersIceAttributes {
+    /* +00 */ u8 pad_00[0x28];
+    /* +28 */ f32 x28;
+} itClimbersIceAttributes;
 
 typedef struct itNessbat_ItemVars {
     /* +0 ip+DD4 */ HSD_GObj* x0;
