@@ -5,6 +5,7 @@
 
 #include "ft/types.h"
 
+#include "ftCommon/forward.h"
 #include "ftPurin/forward.h"
 #include <baselib/forward.h>
 
@@ -33,5 +34,8 @@
 /* 3D047C */ extern char ftPr_Init_AnimDatFilename[];
 /* 3D04F8 */ extern Fighter_DemoStrings ftPr_Init_DemoMotionFilenames;
 /* 3D0508 */ extern Fighter_CostumeStrings ftPr_Init_CostumeStrings[];
+/* 3D05C8 */ extern f32 ftPr_Init_803D05C8[4];
+/* 3D05D8 */ extern f32 ftPr_Init_803D05D8[4];
+/* 3D0610 */ extern ftCollisionBox ftPr_Init_803D0610;
 
 #endif
