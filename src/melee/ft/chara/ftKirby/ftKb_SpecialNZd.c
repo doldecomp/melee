@@ -79,6 +79,8 @@
 #include <baselib/random.h>
 #include <MSL/math.h>
 
+extern f32 ftKb_Init_804D9558;
+
 /// Forward declarations for functions called before definition
 void fn_80105AB0(Fighter_GObj*);
 void fn_80105A34(Fighter_GObj*);
@@ -600,8 +602,8 @@ void ftKb_SkSpecialNEnd_Coll(Fighter_GObj* gobj)
 void ftKb_SkSpecialAirNStart_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (ft_80082708(gobj) != GA_Ground) {
-        ftCommon_8007D5D4(fp);
+    if (ft_80081D0C(gobj) != GA_Ground) {
+        ftCommon_8007D7FC(fp);
         Fighter_ChangeMotionState(gobj, ftKb_MS_SkSpecialNStart, 0x0C4C5080U,
                                   fp->cur_anim_frame, 1.0f, 0.0f, NULL);
         ftKirbyDmgInline(gobj);
@@ -611,8 +613,8 @@ void ftKb_SkSpecialAirNStart_Coll(Fighter_GObj* gobj)
 void ftKb_SkSpecialAirNLoop_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (ft_80082708(gobj) != GA_Ground) {
-        ftCommon_8007D5D4(fp);
+    if (ft_80081D0C(gobj) != GA_Ground) {
+        ftCommon_8007D7FC(fp);
         Fighter_ChangeMotionState(gobj, ftKb_MS_SkSpecialNLoop, 0x0C4C5080U,
                                   fp->cur_anim_frame, 1.0f, 0.0f, NULL);
         ftKirbyDmgInline(gobj);
@@ -1063,8 +1065,8 @@ void ftKb_MtSpecialNEnd_Coll(Fighter_GObj* gobj)
 void ftKb_MtSpecialAirNStart_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (ft_80082708(gobj) == GA_Air) {
-        ftCommon_8007D5D4(fp);
+    if (ft_80081D0C(gobj) == GA_Air) {
+        ftCommon_8007D7FC(fp);
         Fighter_ChangeMotionState(gobj, ftKb_MS_MtSpecialNStart, 0x0C4C5080U,
                                   fp->cur_anim_frame, 1.0f, 0.0f, NULL);
         ftKirbyDmgInline(gobj);
@@ -1074,8 +1076,8 @@ void ftKb_MtSpecialAirNStart_Coll(Fighter_GObj* gobj)
 void ftKb_MtSpecialAirNLoop_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (ft_80082708(gobj) == GA_Air) {
-        ftCommon_8007D5D4(fp);
+    if (ft_80081D0C(gobj) == GA_Air) {
+        ftCommon_8007D7FC(fp);
         Fighter_ChangeMotionState(gobj, ftKb_MS_MtSpecialNLoop, 0x0C4C5280U,
                                   fp->cur_anim_frame, 1.0f, 0.0f, NULL);
         ftKirbyDmgInline(gobj);
@@ -1085,8 +1087,8 @@ void ftKb_MtSpecialAirNLoop_Coll(Fighter_GObj* gobj)
 void ftKb_MtSpecialAirNLoopFull_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (ft_80082708(gobj) == GA_Air) {
-        ftCommon_8007D5D4(fp);
+    if (ft_80081D0C(gobj) == GA_Air) {
+        ftCommon_8007D7FC(fp);
         Fighter_ChangeMotionState(gobj, ftKb_MS_MtSpecialNLoopFull,
                                   0x0C4C5280U, fp->cur_anim_frame, 1.0f, 0.0f,
                                   NULL);
@@ -1097,8 +1099,8 @@ void ftKb_MtSpecialAirNLoopFull_Coll(Fighter_GObj* gobj)
 void ftKb_MtSpecialAirNCancel_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (ft_80082708(gobj) == GA_Air) {
-        ftCommon_8007D5D4(fp);
+    if (ft_80081D0C(gobj) == GA_Air) {
+        ftCommon_8007D7FC(fp);
         Fighter_ChangeMotionState(gobj, ftKb_MS_MtSpecialNCancel, 0x0C4C5080U,
                                   fp->cur_anim_frame, 1.0f, 0.0f, NULL);
         ftKirbyDmgInline(gobj);
@@ -1108,8 +1110,8 @@ void ftKb_MtSpecialAirNCancel_Coll(Fighter_GObj* gobj)
 void ftKb_MtSpecialAirNEnd_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (ft_80082708(gobj) == GA_Air) {
-        ftCommon_8007D5D4(fp);
+    if (ft_80081D0C(gobj) == GA_Air) {
+        ftCommon_8007D7FC(fp);
         Fighter_ChangeMotionState(gobj, ftKb_MS_MtSpecialNEnd, 0x0C4C5080U,
                                   fp->cur_anim_frame, 1.0f, 0.0f, NULL);
         ftKirbyDmgInline(gobj);
@@ -1220,7 +1222,7 @@ void ftKb_PpSpecialAirN_Phys(Fighter_GObj* gobj)
 
 void ftKb_PpSpecialN_Coll(Fighter_GObj* gobj)
 {
-    if (!ft_800827A0(gobj)) {
+    if (!ft_80082708(gobj)) {
         Fighter* fp = GET_FIGHTER(gobj);
         if (fp->fv.kb.xC0 != NULL) {
             it_802C17DC(fp->fv.kb.xC0);
@@ -1270,5 +1272,5 @@ void ftKb_SpecialNYs_80109260(Fighter_GObj* gobj, Vec3* vec)
     ftKb_DatAttrs* da = ft->dat_attrs;
     vec->x = -ft->facing_dir * da->specialn_ys_initial_horizontal_momentum;
     vec->y = da->specialn_ys_initial_vertical_momentum;
-    vec->z = 0.0f;
+    vec->z = ftKb_Init_804D9558;
 }

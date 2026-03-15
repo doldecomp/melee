@@ -1736,7 +1736,7 @@ void fn_8019027C(UNK_T lights)
 }
 #pragma pop
 
-static HSD_GObj* lbl_804D663C;
+HSD_GObj* lbl_804D663C;
 
 /// Initializes SIS library text rendering for tournament mode.
 #pragma push
@@ -2614,7 +2614,7 @@ void fn_80191B5C(void* gobj)
     }
 }
 
-static s32 lbl_804D6658;
+s32 lbl_804D6658;
 
 /// Updates JObj visibility based on current menu option selection.
 void fn_80191CA4(HSD_GObj* gobj)
@@ -4196,7 +4196,7 @@ void fn_80194D84(s32* state, u32 buttons, u32 trigger)
     }
 }
 
-static s32 lbl_804D6654;
+s32 lbl_804D6654;
 
 /// Handles tournament settings menu input (entrant configuration).
 void fn_80194F30(s32* state_ptr, u32 buttons, u32 trigger)
@@ -4857,7 +4857,7 @@ void fn_80196510(void)
     gm_8018F634();
 
     while (1) {
-        stage = mnStageSel_8025BBD4();
+        stage = fn_8018F4A0();
         lbl_804D4190 = stage;
         if (lbl_804D4194 != lbl_804D4190) {
             break;
@@ -5930,7 +5930,7 @@ void fn_80198584(ResultsData* results)
     }
 }
 
-static s32 lbl_804D667C;
+extern s32 lbl_804D667C;
 
 void fn_801985D4(HSD_GObj* gobj)
 {
@@ -6823,7 +6823,7 @@ void fn_8019A71C(s32* state, u32 unused1, u32 unused2)
 }
 #pragma dont_inline reset
 
-s32 lbl_804D6678;
+extern s32 lbl_804D6678;
 
 void gm_8019A828(void)
 {

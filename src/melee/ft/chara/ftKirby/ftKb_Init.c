@@ -80,7 +80,7 @@
 #include <baselib/random.h>
 #include <MSL/math.h>
 
-void ftAnim_80070458_proto(Fighter* fp, CostumeTObjList*, int);
+void ftAnim_80070458(Fighter* fp, CostumeTObjList*, u32 tobj_idx, float frame);
 void fn_800F9260(HSD_GObj*);
 void ftCommon_8007D9A0(Fighter* fp);
 void fn_8010B1F4(Fighter_GObj*);
@@ -3340,7 +3340,7 @@ void ftKb_Init_UnkCallbackPairs0_1(Fighter_GObj* gobj, int arg1, float arg2)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->fv.kb.hat.x14.data != NULL && fp->fv.kb.hat.jobj == NULL) {
-        ftAnim_80070458_proto(fp, &fp->fv.kb.x44, arg1);
+        ftAnim_80070458(fp, &fp->fv.kb.x44, arg1, arg2);
     }
 }
 
@@ -4080,12 +4080,16 @@ void ftKb_SpecialN_800F1F1C(Fighter_GObj* gobj, Vec3* pos)
     }
 }
 
+extern const f32 ftKb_Init_804D9368;
+extern const f32 ftKb_Init_804D936C;
+
 void ftKb_SpecialN_800F1F68(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     fp->allow_interrupt = false;
-    Fighter_ChangeMotionState(gobj, ftKb_MS_AttackDash, 0, 0.0f, 1.0f, 0.0f,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, ftKb_MS_AttackDash, 0,
+                              ftKb_Init_804D9368, ftKb_Init_804D936C,
+                              ftKb_Init_804D9368, NULL);
     ftAnim_8006EBA4(gobj);
     fp->mv.co.attackdash.x0 = 0;
 }

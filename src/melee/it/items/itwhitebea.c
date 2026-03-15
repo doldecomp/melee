@@ -134,7 +134,7 @@ void itOldottosea_UnkMotion11_Phys(Item_GObj* gobj)
 
 bool itOldottosea_UnkMotion11_Coll(Item_GObj* gobj)
 {
-    return it_8027C794(gobj);
+    return it_802E35CC(gobj);
 }
 
 /// #it_802E35CC

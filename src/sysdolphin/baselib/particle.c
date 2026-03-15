@@ -7437,6 +7437,8 @@ void hsd_8039D0A0(HSD_Generator* gen)
     }
 }
 
+static u16 lbl_804D6368 = 0x100;
+
 void hsd_8039D1E4(HSD_Generator* gen, void* userfunc)
 {
     gen->userfunc = userfunc;
@@ -7444,11 +7446,11 @@ void hsd_8039D1E4(HSD_Generator* gen, void* userfunc)
 
 u16 hsd_8039D1EC(void)
 {
-    hsd_804D78E0++;
-    if (hsd_804D78E0 < 256) {
-        hsd_804D78E0 = 256;
+    lbl_804D6368++;
+    if (lbl_804D6368 < 256) {
+        lbl_804D6368 = 256;
     }
-    return hsd_804D78E0;
+    return lbl_804D6368;
 }
 
 void hsd_8039D214(HSD_Generator* gen)
@@ -7723,7 +7725,6 @@ void hsd_8039D71C(HSD_Generator* gen)
     }
 }
 
-static u16 lbl_804D6368 = 0x100;
 
 HSD_Generator* hsd_8039D9C8(void)
 {
