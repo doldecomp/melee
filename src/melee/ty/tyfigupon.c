@@ -300,7 +300,6 @@ void fn_80315574(void)
     }
 }
 
-/// #fn_803155C8
 void fn_803155C8(void)
 {
     TyFiguponAA8* aa8 = (TyFiguponAA8*) un_804A2AA8;
@@ -496,7 +495,6 @@ void fn_803155C8(void)
     }
 }
 
-/// #fn_80315C44
 void fn_80315C44(HSD_GObj* arg0)
 {
     TyFiguponUD* ud = arg0->user_data;
@@ -685,7 +683,6 @@ s32 fn_8031638C(s16 arg0)
     return var_r30;
 }
 
-/// #un_80316420
 void un_80316420(s16 arg0)
 {
     struct un_804D6EF4_t* ef4 = un_804D6EF4;
@@ -733,8 +730,6 @@ void un_80316420(s16 arg0)
         ((TyFiguponData*) un_804D6EF0)->x18->hidden = 0;
     }
 }
-
-/// #fn_803168DC
 static const Vec3 un_803B8968 = { 0.0f, 1.0f, 0.0f };
 
 void fn_803168DC(HSD_GObj* arg0)
@@ -827,7 +822,6 @@ void tyFigupon_80316BF8(void)
     HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
 }
 
-/// #fn_80316C24
 void fn_80316C24(HSD_GObj* arg0)
 {
     struct un_804D6EF4_t* ef4 = un_804D6EF4;
@@ -1096,7 +1090,6 @@ typedef struct {
 
 static const DigitInit un_803B8974 = { 0, 0, 0, 0 };
 
-/// #un_8031753C
 void un_8031753C(void)
 {
     struct un_804D6EF4_t* ef4 = un_804D6EF4;
@@ -1223,8 +1216,6 @@ void un_8031753C(void)
     OSPanic((char*)(fea10 + 0x120), 0x610, &un_804D5AA4);
 }
 
-/// #un_80317A60
-
 void un_80317A60(void)
 {
     u8* fea10 = un_803FEA10;
@@ -1308,7 +1299,6 @@ void un_80317A60(void)
     HSD_GObj_80390CD4(data->x0);
 }
 
-/// #un_80317D80_OnEnter
 void un_80317D80_OnEnter(void* arg0)
 {
     u8* fea10 = un_803FEA10;
