@@ -828,7 +828,7 @@ void fn_80316C24(HSD_GObj* arg0)
     s32 anim_frame;
     s32 sc;
 
-    if ((s8)(u8) ef4->x5C != 0) {
+    if (ef4->x5C != 0) {
         return;
     }
 
@@ -855,27 +855,27 @@ void fn_80316C24(HSD_GObj* arg0)
     }
 
     if (un_80305B88() & 0x200) {
-        if (((u32) gm_801623D8() / 10u) == 0 || (s8)(u8) ef4->x5E <= 1) {
+        if (((u32) gm_801623D8() / 10u) == 0 || ef4->x5E <= 1) {
             lbAudioAx_80024030(0);
             ((TyModeState*) un_804A284C)->x4 = 1;
             return;
         }
         ef4->x5E = 1;
-        un_803153EC((u32)(s8)(u8) ef4->x5E, 6, 2, 0, 0);
+        un_803153EC(ef4->x5E, 6, 2, 0, 0);
         {
             struct un_804D6EF4_t* ef4_2 = un_804D6EF4;
             anim_frame = 2;
-            if ((s32)(u8) ef4_2->x5E == 0x14) {
+            if (ef4_2->x5E == 0x14) {
                 anim_frame = 3;
             }
-            if ((s8)(u8) ef4_2->x5E <= 1) {
+            if (ef4_2->x5E <= 1) {
                 anim_frame = 4;
             }
             HSD_JObjReqAnimAll(ef4_2->jobjs[8], (f32) anim_frame);
             HSD_AObjSetRate(ef4_2->jobjs[8]->aobj, 1.0f);
             HSD_JObjAnimAll(ef4_2->jobjs[8]);
         }
-        sc = (s8)(u8) ef4->x5E;
+        sc = ef4->x5E;
         {
             struct un_804D6EF4_t* ef4_3 = un_804D6EF4;
             f32 pct;
@@ -893,7 +893,7 @@ void fn_80316C24(HSD_GObj* arg0)
             if (pct >= 1.0f) {
                 pct = 999.0f;
             } else {
-                pct = pct * 1000.0f;
+                pct *= 1000.0f;
             }
             un_803153EC((u32)(s32) pct, 9, 3, 2, 0);
         }
@@ -910,7 +910,7 @@ void fn_80316C24(HSD_GObj* arg0)
         }
     }
 
-    if (((u32) gm_801623D8() / 10u) == 0 || (s8)(u8) ef4->x5E == 0) {
+    if (((u32) gm_801623D8() / 10u) == 0 || ef4->x5E == 0) {
         if (var_f31 != 0.0f || (un_80305B88() & 0x1D7C)) {
             lbAudioAx_80024030(3);
             data->x28 = 0x1E;
@@ -922,21 +922,21 @@ void fn_80316C24(HSD_GObj* arg0)
             } else {
                 ef4->x5E = gm_801623D8() / 10u;
             }
-            un_803153EC((u32)(s8)(u8) ef4->x5E, 6, 2, 0, 0);
+            un_803153EC(ef4->x5E, 6, 2, 0, 0);
             {
                 struct un_804D6EF4_t* ef4_4 = un_804D6EF4;
                 anim_frame = 1;
-                if ((s32)(u8) ef4_4->x5E == 0x14) {
+                if (ef4_4->x5E == 0x14) {
                     anim_frame = 3;
                 }
-                if ((s8)(u8) ef4_4->x5E <= 1) {
+                if (ef4_4->x5E <= 1) {
                     anim_frame = 4;
                 }
                 HSD_JObjReqAnimAll(ef4_4->jobjs[8], (f32) anim_frame);
                 HSD_AObjSetRate(ef4_4->jobjs[8]->aobj, 1.0f);
                 HSD_JObjAnimAll(ef4_4->jobjs[8]);
             }
-            sc = (s8)(u8) ef4->x5E;
+            sc = ef4->x5E;
             {
                 struct un_804D6EF4_t* ef4_5 = un_804D6EF4;
                 s16 x54val = ef4_5->x54;
@@ -963,9 +963,9 @@ void fn_80316C24(HSD_GObj* arg0)
             return;
         }
         if (un_80305B88() & 0x1160) {
-            u8 temp = (u8) ef4->x5E;
+            u8 temp = ef4->x5E;
             if ((s8) temp != 0) {
-                ef4->x5D = (s8) temp;
+                ef4->x5D = temp;
                 ef4->x56 = 0x1E;
                 HSD_GObjProc_8038FD54((HSD_GObj*) ef4->x00, fn_80315C44, 0);
                 HSD_GObj_80390CD4((HSD_GObj*) ef4->x00);
@@ -978,24 +978,24 @@ void fn_80316C24(HSD_GObj* arg0)
             }
         }
         if (var_f31 <= -0.1f || (un_80305C44() & 0x400) || (un_80305B88() & 4)) {
-            u8 temp = (u8) ef4->x5E;
+            u8 temp = ef4->x5E;
             if ((s8) temp > 1) {
                 ef4->x5E = temp - 1;
-                un_803153EC((u32)(s8)(u8) ef4->x5E, 6, 2, 0, 0);
+                un_803153EC(ef4->x5E, 6, 2, 0, 0);
                 {
                     struct un_804D6EF4_t* ef4_6 = un_804D6EF4;
                     anim_frame = 2;
-                    if ((s32)(u8) ef4_6->x5E == 0x14) {
+                    if (ef4_6->x5E == 0x14) {
                         anim_frame = 3;
                     }
-                    if ((s8)(u8) ef4_6->x5E <= 1) {
+                    if (ef4_6->x5E <= 1) {
                         anim_frame = 4;
                     }
                     HSD_JObjReqAnimAll(ef4_6->jobjs[8], (f32) anim_frame);
                     HSD_AObjSetRate(ef4_6->jobjs[8]->aobj, 1.0f);
                     HSD_JObjAnimAll(ef4_6->jobjs[8]);
                 }
-                sc = (s8)(u8) ef4->x5E;
+                sc = ef4->x5E;
                 {
                     struct un_804D6EF4_t* ef4_7 = un_804D6EF4;
                     s16 x54val = ef4_7->x54;
@@ -1013,7 +1013,7 @@ void fn_80316C24(HSD_GObj* arg0)
                     if (pct >= 1.0f) {
                         pct = 999.0f;
                     } else {
-                        pct = pct * 1000.0f;
+                        pct *= 1000.0f;
                     }
                     un_803153EC((u32)(s32) pct, 9, 3, 2, 0);
                 }
@@ -1021,24 +1021,24 @@ void fn_80316C24(HSD_GObj* arg0)
                 data->x28 = 3;
             }
         } else if (var_f31 >= 0.1f || (un_80305C44() & 0x800) || (un_80305B88() & 8)) {
-            u8 temp = (u8) ef4->x5E;
+            u8 temp = ef4->x5E;
             if ((u32)(s8) temp < (u32) gm_801623D8() / 10u && (s8) temp < 0x14) {
                 ef4->x5E = temp + 1;
-                un_803153EC((u32)(s8)(u8) ef4->x5E, 6, 2, 0, 0);
+                un_803153EC(ef4->x5E, 6, 2, 0, 0);
                 {
                     struct un_804D6EF4_t* ef4_8 = un_804D6EF4;
                     anim_frame = 1;
-                    if ((s32)(u8) ef4_8->x5E == 0x14) {
+                    if (ef4_8->x5E == 0x14) {
                         anim_frame = 3;
                     }
-                    if ((s8)(u8) ef4_8->x5E <= 1) {
+                    if (ef4_8->x5E <= 1) {
                         anim_frame = 4;
                     }
                     HSD_JObjReqAnimAll(ef4_8->jobjs[8], (f32) anim_frame);
                     HSD_AObjSetRate(ef4_8->jobjs[8]->aobj, 1.0f);
                     HSD_JObjAnimAll(ef4_8->jobjs[8]);
                 }
-                sc = (s8)(u8) ef4->x5E;
+                sc = ef4->x5E;
                 {
                     struct un_804D6EF4_t* ef4_9 = un_804D6EF4;
                     s16 x54val = ef4_9->x54;
@@ -1066,10 +1066,10 @@ void fn_80316C24(HSD_GObj* arg0)
         } else {
             struct un_804D6EF4_t* ef4_10 = un_804D6EF4;
             anim_frame = 0;
-            if ((s32)(u8) ef4_10->x5E == 0x14) {
+            if (ef4_10->x5E == 0x14) {
                 anim_frame = 3;
             }
-            if ((s8)(u8) ef4_10->x5E <= 1) {
+            if (ef4_10->x5E <= 1) {
                 anim_frame = 4;
             }
             HSD_JObjReqAnimAll(ef4_10->jobjs[8], (f32) anim_frame);
