@@ -152,7 +152,7 @@ void grRCruise_801FF43C(Ground_GObj* arg) {}
 
 void grRCruise_801FF440(Ground_GObj* arg) {}
 
-/// #fn_801FF444
+/// #grRCruise_801FF444
 
 /// #grRCruise_801FF5B4
 
@@ -248,7 +248,7 @@ void grRCruise_80200540(Ground_GObj* gobj)
     gp->gv.rcruise.x2C = 0;
 }
 
-/// #fn_80200578
+/// #grRCruise_80200578
 
 /// #grRCruise_8020071C
 
@@ -257,14 +257,14 @@ void grRCruise_80200540(Ground_GObj* gobj)
 /// #grRCruise_80200C04
 
 // TODO: is this GET_GROUND? calling it directly didn't work.
-inline Ground* fn_802010A4_inline(Ground_GObj* arg0)
+inline Ground* grRCruise_802010A4_inline(Ground_GObj* arg0)
 {
     return arg0->user_data;
 }
 
-void fn_802010A4(Ground_GObj* gobj, s32 id, CollData* coll)
+void grRCruise_802010A4(Ground_GObj* gobj, s32 id, CollData* coll)
 {
-    Ground* gp = fn_802010A4_inline(gobj);
+    Ground* gp = grRCruise_802010A4_inline(gobj);
     s32 i;
 
     if ((s32) coll->x34_flags.b1234 != 1) {
