@@ -18,6 +18,10 @@
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 
+ItemStateTable it_803F6B28[] = {
+    { 0, itNesspkfire_UnkMotion0_Anim, NULL, itNesspkfire_UnkMotion0_Coll },
+};
+
 void it_802AA054(Item_GObj* gobj, Vec3* pos, Vec3* vel, f32 facing_dir,
                  f32 angle)
 {
