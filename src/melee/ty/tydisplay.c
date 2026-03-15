@@ -76,7 +76,75 @@ void un_803182D4_OnFrame(void)
 
 /// #un_80318714
 
-/// #un_80318B1C
+extern s32 un_804D6F14;
+
+s32 un_80318B1C(s32 arg0)
+{
+    s32* base = (s32*) un_804D6F14;
+    s32 start;
+    s32 placed;
+    s32 i;
+    s32 rand_id;
+    s32* check;
+    s32* slot;
+
+    if (arg0 > 1) {
+        start = HSD_Randi(arg0 - 1);
+    } else {
+        start = 0;
+    }
+
+    if (arg0 > 0x125) {
+        placed = 0;
+        i = 0;
+        while (placed < arg0) {
+            if (i >= 0x125) {
+                rand_id = HSD_Randi(0x124);
+                check = (s32*) un_8031B9DC(rand_id);
+                while (*check == -1) {
+                    rand_id = HSD_Randi(0x124);
+                    check = (s32*) un_8031B9DC(rand_id);
+                }
+                slot = (s32*) ((u8*) base + start * 8);
+                slot[5] = rand_id;
+                slot[6] = (s32) un_803060BC(slot[5], 7);
+                start++;
+                if (start >= arg0) {
+                    start = 0;
+                }
+                placed++;
+            } else {
+                check = (s32*) un_8031B9DC(i);
+                if (*check != -1) {
+                    slot = (s32*) ((u8*) base + start * 8);
+                    slot[5] = i;
+                    slot[6] = (s32) un_803060BC(i, 7);
+                    start++;
+                    if (start >= arg0) {
+                        start = 0;
+                    }
+                    placed++;
+                }
+            }
+            i++;
+        }
+    } else {
+        i = 0;
+        do {
+            if (un_803048C0(i) != 0) {
+                un_8031B9DC(i);
+                slot = (s32*) ((u8*) base + start * 8);
+                slot[5] = i;
+                slot[6] = (s32) un_803060BC(i, 7);
+                start++;
+                if (start >= arg0) {
+                    start = 0;
+                }
+            }
+            i++;
+        } while (i < 0x125);
+    }
+}
 
 /// #un_80318CB4
 
