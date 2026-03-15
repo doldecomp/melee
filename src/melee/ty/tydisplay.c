@@ -10,12 +10,34 @@
 #include "ty/tylist.h"
 #include "ty/types.h"
 
+#include <baselib/archive.h>
+#include <baselib/debug.h>
+#include <baselib/gobj.h>
+#include <baselib/gobjgxlink.h>
+#include <baselib/gobjobject.h>
+#include <baselib/gobjplink.h>
+#include <baselib/jobj.h>
 #include <baselib/random.h>
+
+#include <dolphin/os.h>
+
+#include "lb/lb_00F9.h"
 
 extern char un_804D5AC0[];
 extern DevText* un_804D6F24;
 extern s32 un_804A2DE8[];
 extern char un_804A2D98[0x38];
+
+typedef struct TyDspBgData {
+    /* 0x00 */ HSD_GObj* gobj0;
+    /* 0x04 */ HSD_GObj* gobj4;
+    /* 0x08 */ u8 pad8[4];
+    /* 0x0C */ HSD_JObj* jobj;
+    /* 0x10 */ u8 pad10[0x3C];
+    /* 0x4C */ HSD_Archive* archive;
+} TyDspBgData;
+
+extern TyDspBgData* un_804D6F1C;
 
 /// #un_803181BC
 
@@ -48,6 +70,51 @@ void un_803182D4_OnFrame(void)
 /// #fn_8031A94C
 
 /// #un_8031B1FC
+
+static char un_804D5AA8[] = "0";
+static u16 un_804D5ABC = 0x15;
+
+void un_8031B1FC(void)
+{
+    TyDspBgData* ptr = un_804D6F1C;
+    HSD_GObj* gobj;
+    HSD_Joint* joint;
+    HSD_JObj* jobj;
+
+    PAD_STACK(24);
+
+    if (ptr->archive == NULL) {
+        OSReport("*** BG data aren't being loaded!\n");
+        __assert("tydisplay.c", 0x3FD, un_804D5AA8);
+    }
+
+    gobj = ptr->gobj0;
+    if (gobj != NULL) {
+        HSD_GObjPLink_80390228(gobj);
+        ptr->gobj0 = NULL;
+    }
+
+    gobj = ptr->gobj4;
+    if (gobj != NULL) {
+        HSD_GObjPLink_80390228(gobj);
+        ptr->gobj4 = NULL;
+    }
+
+    joint = HSD_ArchiveGetPublicAddress(ptr->archive,
+                                        "ToyDspBg_Top_joint");
+    if (joint != NULL) {
+        ptr->gobj4 = GObj_Create(9, 9, 0);
+        jobj = HSD_JObjLoadJoint(joint);
+        HSD_GObjObject_80390A70(ptr->gobj4, HSD_GObj_804D7849, jobj);
+        GObj_SetupGXLink(ptr->gobj4, HSD_GObj_JObjCallback, 0x3C, 0);
+        lb_8001204C(jobj, &ptr->jobj, &un_804D5ABC, 1);
+        return;
+    }
+
+    OSReport("*** Can not Load Panel Label(%s)\n",
+             "ToyDspBg_Top_joint");
+    __assert("tydisplay.c", 0x43E, un_804D5AA8);
+}
 
 /// #un_8031B328
 
