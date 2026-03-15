@@ -41,15 +41,6 @@
 #include <dolphin/mtx.h>
 #include <dolphin/os.h>
 
-extern void* un_804D6EF0;
-extern HSD_CObjDesc* un_804D6F04;
-extern void* un_804D6F08;
-extern s32 un_804D6EFC;
-extern s32 un_804D6F00;
-extern char un_803FE5E8[];
-extern u8 un_803FEA10[];
-extern void* un_804D6EF8;
-
 typedef struct {
     /* 0x00 */ HSD_GObj* x0;
     /* 0x04 */ HSD_GObj* x4;
@@ -64,6 +55,16 @@ typedef struct {
     /* 0x28 */ u8 x28;
     /* 0x29 */ u8 x29;
 } TyFiguponData;
+
+extern TyFiguponData* un_804D6EF0;
+extern HSD_CObjDesc* un_804D6F04;
+extern void* un_804D6F08;
+extern s32 un_804D6EFC;
+extern s32 un_804D6F00;
+extern char un_803FE5E8[];
+extern u8 un_803FEA10[];
+extern void* un_804D6EF8;
+
 
 typedef struct {
     u8 pad[0x4D];
@@ -810,7 +811,7 @@ void fn_803168DC(HSD_GObj* arg0)
     }
 }
 
-void tyFigupon_80316BF8(void)
+void tyFigupon_80316BF8(HSD_GObj* arg0)
 {
     lbAudioAx_80023F28(0x35);
     HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
@@ -1285,13 +1286,12 @@ void un_80317A60(void)
     data->x10 = 0;
     data->x24 = 0;
     data->x28 = 8;
-    ((TyFiguponData*) un_804D6EF0)->x18->hidden = 1;
+    un_804D6EF0->x18->hidden = 1;
 
-    HSD_GObjProc_8038FD54(data->x0, (void (*)(HSD_GObj*)) fn_80316C24, 0);
+    HSD_GObjProc_8038FD54(data->x0, fn_80316C24, 0);
     HSD_GObjProc_8038FD54(data->x0, fn_803168DC, 0);
     HSD_GObjProc_8038FD54(data->x4, fn_803168DC, 0);
-    HSD_GObjProc_8038FD54(data->x0,
-                           (void (*)(HSD_GObj*)) tyFigupon_80316BF8, 0);
+    HSD_GObjProc_8038FD54(data->x0, tyFigupon_80316BF8, 0);
     HSD_GObj_80390CD4(data->x0);
 }
 

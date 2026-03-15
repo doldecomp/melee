@@ -18,7 +18,7 @@
 /* 31638C */ s32 fn_8031638C(s16);
 /* 316420 */ void un_80316420(s16);
 /* 3168DC */ void fn_803168DC(HSD_GObj*);
-/* 316BF8 */ void tyFigupon_80316BF8(void);
+/* 316BF8 */ void tyFigupon_80316BF8(HSD_GObj*);
 /* 316C24 */ void fn_80316C24(HSD_GObj*);
 /* 31753C */ void un_8031753C(void);
 /* 317A60 */ void un_80317A60(void);
