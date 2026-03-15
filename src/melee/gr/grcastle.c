@@ -615,8 +615,8 @@ void fn_801D0924(HSD_GObj* gobj, int renderpass)
 
         for (i = 0; i < 12; i++) {
             if (gp->gv.castle3.x1C[i].data != NULL) {
-                lb_800117F4(&gp->gv.castle3.x1C[i], &color1, &color2,
-                            999, renderpass);
+                lb_800117F4(&gp->gv.castle3.x1C[i], &color1, &color2, 999,
+                            renderpass);
             }
         }
     }

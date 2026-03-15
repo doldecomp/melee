@@ -1,12 +1,11 @@
 #include "itpikachuthunder.h"
 
+#include "ft/chara/ftPikachu/ftPk_SpecialLw.h"
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
 #include "it/types.h"
-
-#include "ft/chara/ftPikachu/ftPk_SpecialLw.h"
 
 #include <baselib/gobj.h>
 

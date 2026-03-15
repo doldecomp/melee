@@ -4,8 +4,8 @@
 #include "forward.h"
 
 #include "gr/granime.h"
-#include "gr/ground.h"
 #include "gr/grmaterial.h"
+#include "gr/ground.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
 #include "lb/lb_00B0.h"

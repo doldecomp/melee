@@ -63,12 +63,14 @@ STATIC_ASSERT(sizeof(_struct_efLib_80458EE0) == 0x8);
 /* 05F270 */ void efLib_8005F270(Effect*);
 /* 05F454 */ void efLib_8005F454(Effect* arg_effect);
 /* 05F748 */ void efLib_8005F748(Effect*);
-/* 05F774 */ void efLib_8005F774(HSD_JObj* arg_jobj, s32 arg1, u32 arg2, u32 arg3);
+/* 05F774 */ void efLib_8005F774(HSD_JObj* arg_jobj, s32 arg1, u32 arg2,
+                                 u32 arg3);
 /* 05F864 */ void efLib_8005F864(HSD_GObj* gobj, u8 arg1, f32 arg2, f32 arg3);
 /* 05F990 */ void efLib_8005F990(HSD_GObj* gobj, u16 arg1);
 /* 05FAB8 */ void efLib_8005FAB8(Effect* effect);
 /* 05FBE4 */ void fn_8005FBE4(Effect* effect);
-/* 05FCD8 */ Effect* efLib_8005FCD8(int arg0, HSD_GObj* gobj, HSD_JObj* jobj, Vec3* vec);
+/* 05FCD8 */ Effect* efLib_8005FCD8(int arg0, HSD_GObj* gobj, HSD_JObj* jobj,
+                                    Vec3* vec);
 
 extern _struct_efLib_80458EE0 efLib_80458EE0[0x10];
 extern _struct_efLib_80458EE0 efLib_80458F60[0x8];

@@ -1789,7 +1789,9 @@ bool gm_80164430(u16 arg0)
     unlock_bit = NUM_UNLOCKABLE_STAGES;
 
 found:
-    if (unlock_bit == NUM_UNLOCKABLE_STAGES || (*temp_r31 & (1LL << unlock_bit))) {
+    if (unlock_bit == NUM_UNLOCKABLE_STAGES ||
+        (*temp_r31 & (1LL << unlock_bit)))
+    {
         return true;
     }
     return false;

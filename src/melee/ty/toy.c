@@ -157,8 +157,6 @@ typedef struct tyDispData {
     HSD_Text* x150;
 } tyDispData;
 
-
-
 typedef struct un_804D6E68_t {
     /* 0x00 */ u8 pad[0x18];
     /* 0x18 */ f32 x18;

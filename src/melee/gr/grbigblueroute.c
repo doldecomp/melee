@@ -8,6 +8,7 @@
 #include "gm/gm_16AE.h"
 #include "gr/grdatfiles.h"
 #include "gr/grdisplay.h"
+#include "gr/grfzerocar.h"
 #include "gr/grmaterial.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
@@ -27,7 +28,6 @@
 #include <baselib/jobj.h>
 #include <baselib/random.h>
 #include <baselib/spline.h>
-#include "gr/grfzerocar.h"
 
 void grBigBlue_801E8D04(Ground_GObj*);
 
@@ -400,9 +400,9 @@ void grBigBlueRoute_8020C238(Ground_GObj* gobj)
     }
 
     gp->gv.bigblueroute.xC8 = HSD_MemAlloc(0x554);
-    ((gp->gv.bigblueroute.xC8) ? ((void) 0)
-                                : __assert(grBb_Route_803E61D4, 674,
-                                           grBb_Route_803E623C));
+    ((gp->gv.bigblueroute.xC8)
+         ? ((void) 0)
+         : __assert(grBb_Route_803E61D4, 674, grBb_Route_803E623C));
     memzero(gp->gv.bigblueroute.xC8, 0x554);
 
     gp->gv.bigblueroute.x10A = 0;

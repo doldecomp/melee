@@ -3,7 +3,6 @@
 #include "grzakogenerator.h"
 
 #include <platform.h>
-#include <sysdolphin/baselib/dobj.h>
 
 #include "cm/camera.h"
 #include "gm/gm_1A45.h"
@@ -12,6 +11,8 @@
 #include "gr/ground.h"
 #include "gr/inlines.h"
 #include "lb/lb_00F9.h"
+
+#include <sysdolphin/baselib/dobj.h>
 
 void grRCruise_801FF164(bool arg) {}
 
@@ -167,9 +168,9 @@ void grRCruise_80200540(Ground_GObj* gobj)
 /// #grRCruise_80200C04
 
 // TODO: is this GET_GROUND? calling it directly didn't work.
-inline Ground* fn_802010A4_inline(Ground_GObj *arg0)
+inline Ground* fn_802010A4_inline(Ground_GObj* arg0)
 {
-  return arg0->user_data;
+    return arg0->user_data;
 }
 
 void fn_802010A4(Ground_GObj* gobj, s32 id, CollData* coll)
@@ -208,7 +209,7 @@ void grRCruise_80201918(Vec3* vec)
     if (gobj != NULL) {
         Ground* gp = gobj->user_data;
         if (gp != NULL) {
-            *vec = *(Vec3*)((u8*)gp + 0xE0);
+            *vec = *(Vec3*) ((u8*) gp + 0xE0);
             return;
         }
     }

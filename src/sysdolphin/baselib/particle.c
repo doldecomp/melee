@@ -7725,7 +7725,6 @@ void hsd_8039D71C(HSD_Generator* gen)
     }
 }
 
-
 HSD_Generator* hsd_8039D9C8(void)
 {
     HSD_Generator* gen;

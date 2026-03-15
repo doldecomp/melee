@@ -229,12 +229,12 @@ void ftKb_SpecialNSk_80105E8C(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftKb_DatAttrs* da;
-    void *new_var; // Permuter slop
+    void* new_var; // Permuter slop
     PAD_STACK(8);
     ftCommon_8007D5D4(fp);
     Fighter_ChangeMotionState(gobj, ftKb_MS_ZdSpecialAirN, 0x0C4C508E,
                               fp->cur_anim_frame, 1.0F, 0.0F, NULL);
-    fp = (Fighter *) (new_var = HSD_GObjGetUserData(gobj));
+    fp = (Fighter*) (new_var = HSD_GObjGetUserData(gobj));
     da = fp->dat_attrs;
     if (fp->x2219_b0 == true) {
         fp->pre_hitlag_cb = efLib_PauseAll;
@@ -250,12 +250,12 @@ void ftKb_SpecialNSk_80105F3C(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftKb_DatAttrs* da;
-    void *new_var; // Permuter slop
+    void* new_var; // Permuter slop
     PAD_STACK(8);
     ftCommon_8007D7FC(fp);
     Fighter_ChangeMotionState(gobj, ftKb_MS_ZdSpecialN, 0x0C4C508E,
                               fp->cur_anim_frame, 1.0F, 0.0F, NULL);
-    fp = (Fighter *) (new_var = HSD_GObjGetUserData(gobj));
+    fp = (Fighter*) (new_var = HSD_GObjGetUserData(gobj));
     da = fp->dat_attrs;
     if (fp->x2219_b0 == true) {
         fp->pre_hitlag_cb = efLib_PauseAll;

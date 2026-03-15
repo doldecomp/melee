@@ -106,8 +106,7 @@ void itKamex_UnkMotion1_Phys(Item_GObj* gobj)
         if ((ip->x40_vel.x > 0.0f && ip->facing_dir <= 0.0f) ||
             (ip->x40_vel.x <= 0.0f && ip->facing_dir > 0.0f))
         {
-            ip->x40_vel.x +=
-                ip->xDD4_itemVar.pokemon.x6C * ip->facing_dir;
+            ip->x40_vel.x += ip->xDD4_itemVar.pokemon.x6C * ip->facing_dir;
         }
     }
     if (ip->ground_or_air == GA_Air) {

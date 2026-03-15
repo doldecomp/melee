@@ -5,6 +5,8 @@
 
 #include "ef/efasync.h"
 #include "ef/eflib.h"
+#include "ft/chara/ftKirby/ftKb_Init.h"
+#include "ft/chara/ftPopo/ftPp_Init.h"
 
 #include "it/forward.h"
 
@@ -13,9 +15,6 @@
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
-
-#include "ft/chara/ftKirby/ftKb_Init.h"
-#include "ft/chara/ftPopo/ftPp_Init.h"
 
 /* 2C23D4 */ static bool itClimbersBlizzard_UnkMotion0_Coll(Item_GObj* gobj);
 

@@ -1,14 +1,15 @@
 #include "itnessyoyo.h"
 
 #include <placeholder.h>
-#include <baselib/gobjplink.h>
 
 #include "ft/chara/ftNess/ftNs_AttackHi4.h"
 #include "it/inlines.h"
 #include "it/it_26B1.h"
-#include "it/itYoyo.h"
 #include "it/item.h"
+#include "it/itYoyo.h"
 #include "lb/lb_00B0.h"
+
+#include <baselib/gobjplink.h>
 
 void it_802BE598(Item_GObj* gobj)
 {
@@ -27,8 +28,7 @@ void it_802BE5D8(void* arg, float frame)
     itYoyoAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
     HSD_JObj* jobj = ip->xDD4_itemVar.flipper.xDEC;
     HSD_JObjRemoveAnimAll(jobj);
-    HSD_JObjAddAnimAll(jobj, NULL,
-                        (HSD_MatAnimJoint*) attrs->x58_UNK6, NULL);
+    HSD_JObjAddAnimAll(jobj, NULL, (HSD_MatAnimJoint*) attrs->x58_UNK6, NULL);
     lb_8000BA0C(jobj, 1.0F);
     HSD_JObjReqAnimAll(jobj, frame);
     HSD_JObjAnimAll(jobj);
@@ -46,8 +46,7 @@ void it_802BE958(void* gobj)
             }
             ip->owner = NULL;
             {
-                ItemLink* link =
-                    (ItemLink*) ip->xDD4_itemVar.samusgrapple.x8;
+                ItemLink* link = (ItemLink*) ip->xDD4_itemVar.samusgrapple.x8;
                 while (link != NULL) {
                     HSD_GObj* tmp = link->gobj;
                     link = link->next;

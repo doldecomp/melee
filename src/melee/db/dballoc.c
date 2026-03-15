@@ -1,8 +1,9 @@
 #include "db.h"
 
+#include "ef/eflib_alloc.h"
+
 #include <sysdolphin/baselib/particle.h>
 #include <sysdolphin/baselib/psappsrt.h>
-#include "ef/eflib_alloc.h"
 
 static UnkFlagStruct db_804D6BA0;
 
@@ -21,8 +22,8 @@ void fn_UpdateObjAllocLimiter(int player)
             (db_ButtonsPressed(player) & HSD_PAD_DPADUP))
         {
             if (db_804D6BA0.b0 == 0) {
-                HSD_ObjAllocSetNumLimit(
-                    &efLib_AllocData, HSD_ObjAllocGetPeak(&efLib_AllocData));
+                HSD_ObjAllocSetNumLimit(&efLib_AllocData,
+                                        HSD_ObjAllocGetPeak(&efLib_AllocData));
                 HSD_ObjAllocEnableNumLimit(&efLib_AllocData);
 
                 db_804D6BA0.b0 = 1;

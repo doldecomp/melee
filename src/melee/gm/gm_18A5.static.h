@@ -1,4 +1,5 @@
 #include "dolphin/gx/GXStruct.h"
+
 #include <melee/gm/types.h>
 #include <melee/sc/types.h>
 

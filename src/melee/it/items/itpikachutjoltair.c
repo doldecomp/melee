@@ -1,16 +1,15 @@
 #include "itpikachutjoltair.h"
 
-#include "db/db.h"
-#include "it/item.h"
-#include "lb/lb_00B0.h"
-
 #include <placeholder.h>
 #include <platform.h>
 
+#include "db/db.h"
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/item.h"
 #include "it/items/itpikachutjoltground.h"
+#include "lb/lb_00B0.h"
 
 /* 2B45E8 */ static bool itPikachutjoltair_UnkMotion0_Coll(Item_GObj* gobj);
 
