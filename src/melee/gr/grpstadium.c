@@ -203,7 +203,7 @@ Ground_GObj* grStadium_801D10F8(StadiumGrType id)
     StageCallbacks* cb;
 
     cb = &grPs_803E126C[id];
-    gobj = Ground_801C14D0(id);
+    gobj = Ground_GetStageGObj(id);
 
     if (gobj != NULL) {
         Ground* gp = GET_GROUND(gobj);
@@ -217,7 +217,7 @@ Ground_GObj* grStadium_801D10F8(StadiumGrType id)
             cb->callback0(gobj);
         }
         if (cb->callback2 != NULL) {
-            HSD_GObjProc_8038FD54(gobj, cb->callback2, 4);
+            HSD_GObj_SetupProc(gobj, cb->callback2, 4);
         }
     } else {
         OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 0x120, id);

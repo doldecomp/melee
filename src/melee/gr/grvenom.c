@@ -233,7 +233,7 @@ Ground_GObj* grVenom_80203EAC(int gobj_id)
     StageCallbacks* callbacks =
         &((StageCallbacks*) ((char*) base + 0x44))[gobj_id];
 
-    gobj = Ground_801C14D0(gobj_id);
+    gobj = Ground_GetStageGObj(gobj_id);
 
     if (gobj != NULL) {
         gp = gobj->user_data;
@@ -247,7 +247,7 @@ Ground_GObj* grVenom_80203EAC(int gobj_id)
             callbacks->callback0(gobj);
         }
         if (callbacks->callback2 != NULL) {
-            HSD_GObjProc_8038FD54(gobj, callbacks->callback2, 4);
+            HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
         }
     } else {
         OSReport(&base->x1B8_file[0], &base->x1DC_func[0], 0x23B, gobj_id);
@@ -1056,7 +1056,7 @@ bool grVenom_80206BF0(int arg0)
         return 0;
     }
     wgobj = (Ground_GObj*) grVenom_80203EAC(8);
-    ((wgobj) ? ((void) 0) : __assert(grVe_803E5524, 0x8C4, "wgobj"));
+    HSD_ASSERT(2244, wgobj);
     gp = wgobj->user_data;
     gp->gv.venom.xCC = 10;
     gp->gv.venom.xC8 = 0;

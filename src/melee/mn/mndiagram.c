@@ -770,7 +770,7 @@ void mnDiagram_PopupInputProc(HSD_GObj* gobj)
     if ((u32) input & 0x20) {
         lbAudioAx_80024030(0);
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
-        proc = HSD_GObjProc_8038FD54(
+        proc = HSD_GObj_SetupProc(
             gobj, (void (*)(HSD_GObj*)) mnDiagram_InputProc, 0);
         proc->flags_3 = HSD_GObj_804D783C;
         HSD_GObjPLink_80390228(data->popup_gobj);
@@ -787,7 +787,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
     if ((u32) input & 0x10) {
         lbAudioAx_80024030(1);
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
-        proc = HSD_GObjProc_8038FD54(
+        proc = HSD_GObj_SetupProc(
             gobj, (void (*)(HSD_GObj*)) mnDiagram_PopupInputProc, 0);
         proc->flags_3 = HSD_GObj_804D783C;
         if (data->is_name_mode != 0) {
@@ -1096,8 +1096,7 @@ void mnDiagram_80241310(s32 arg0, s32 arg1, s32 arg2)
         lb_80011E24(jobj, &popup_data->jobjs[i], i, -1);
     }
 
-    HSD_GObjProc_8038FD54(gobj, (void (*)(HSD_GObj*)) mnDiagram_PopupAnimProc,
-                          0);
+    HSD_GObj_SetupProc(gobj, (void (*)(HSD_GObj*)) mnDiagram_PopupAnimProc, 0);
     mnDiagram_80240D94(gobj, arg0, arg1, arg2);
 
     if (arg2 != 0) {
@@ -1419,7 +1418,7 @@ void mnDiagram_OnFrame(HSD_GObj* gobj)
             return;
         }
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
-        proc = HSD_GObjProc_8038FD54(gobj, mnDiagram_ExitAnimProc, 0);
+        proc = HSD_GObj_SetupProc(gobj, mnDiagram_ExitAnimProc, 0);
         proc->flags_3 = HSD_GObj_804D783C;
         HSD_JObjSetFlagsAll(data->jobjs[2], 0x10);
         mnDiagram_80241668(gobj);
@@ -2076,7 +2075,7 @@ void mnDiagram_802433AC(void)
     jobj = HSD_JObjLoadJoint(*joint_data);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4, 0x80);
-    HSD_GObjProc_8038FD54(gobj, mnDiagram_CursorProc, 0);
+    HSD_GObj_SetupProc(gobj, mnDiagram_CursorProc, 0);
 }
 
 void mnDiagram_80243434(u8 arg0)
@@ -2125,8 +2124,8 @@ void mnDiagram_80243434(u8 arg0)
         lb_80011E24(jobj, &data->jobjs[i], i, -1);
     }
 
-    proc = HSD_GObjProc_8038FD54(gobj, (void (*)(HSD_GObj*)) mnDiagram_OnFrame,
-                                 0);
+    proc =
+        HSD_GObj_SetupProc(gobj, (void (*)(HSD_GObj*)) mnDiagram_OnFrame, 0);
 
     if (arg0 == 0) {
         HSD_JObjReqAnimAll(data->jobjs[3], 9.0f);
@@ -2137,7 +2136,7 @@ void mnDiagram_80243434(u8 arg0)
             cursor_gobj, HSD_GObj_804D7849,
             HSD_JObjLoadJoint((HSD_Joint*) mnDiagram_804A0814));
         GObj_SetupGXLink(cursor_gobj, HSD_GObj_JObjCallback, 4, 0x80);
-        HSD_GObjProc_8038FD54(cursor_gobj, mnDiagram_CursorProc, 0);
+        HSD_GObj_SetupProc(cursor_gobj, mnDiagram_CursorProc, 0);
 
         if (data->is_name_mode != 0) {
             count = GetNameCount();
@@ -2226,7 +2225,7 @@ void mnDiagram_802437E8(s32 arg0, s32 arg1)
     mnDiagram_8023FC28();
     mnDiagram_80243434((u8) arg1);
 
-    proc = HSD_GObjProc_8038FD54(GObj_Create(0, 1, 0x80),
-                                 (void (*)(HSD_GObj*)) mnDiagram_InputProc, 0);
+    proc = HSD_GObj_SetupProc(GObj_Create(0, 1, 0x80),
+                              (void (*)(HSD_GObj*)) mnDiagram_InputProc, 0);
     proc->flags_3 = HSD_GObj_804D783C;
 }

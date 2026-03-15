@@ -8,9 +8,6 @@
 #include "ft/chara/ftNess/ftNs_SpecialN.h"
 #include "ft/ftlib.h"
 
-#include "ft/chara/ftKirby/ftKb_Init.h"
-#include "ft/chara/ftNess/ftNs_SpecialN.h"
-
 #include "it/forward.h"
 
 #include "it/inlines.h"

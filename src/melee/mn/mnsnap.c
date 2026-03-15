@@ -2412,7 +2412,7 @@ void mnSnap_80257F24(void)
     HSD_JObjSetFlagsAll(snap->move_jobj, 0x10);
     HSD_AObjSetFlags((snap->move_jobj)->u.dobj->next->next->aobj, 0x20000000);
 
-    HSD_GObjProc_8038FD54(gobj, (HSD_GObjEvent) fn_802545C4, 0);
+    HSD_GObj_SetupProc(gobj, (HSD_GObjEvent) fn_802545C4, 0);
 
     /* Sub GObj (arrows/cursor) */
     gobj = GObj_Create(6, 7, 0x80);
@@ -2567,6 +2567,6 @@ void mnSnap_80257F24(void)
 
     /* Timer/input GObj */
     gobj = GObj_Create(0, 1, 0x80);
-    proc = HSD_GObjProc_8038FD54(gobj, (HSD_GObjEvent) fn_80257D7C, 0);
+    proc = HSD_GObj_SetupProc(gobj, (HSD_GObjEvent) fn_80257D7C, 0);
     proc->flags_3 = HSD_GObj_804D783C;
 }

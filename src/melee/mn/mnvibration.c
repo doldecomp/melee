@@ -644,7 +644,7 @@ void fn_802487A8(HSD_GObj* gobj)
     if ((u8) mn_804A04F0.cur_menu != 0x13) {
         HSD_GObjProc* proc;
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
-        proc = HSD_GObjProc_8038FD54(gobj, fn_80248748, 0);
+        proc = HSD_GObj_SetupProc(gobj, fn_80248748, 0);
         proc->flags_3 = HSD_GObj_804D783C;
         return;
     }
@@ -871,7 +871,7 @@ void fn_80248A78(HSD_GObj* arg0)
                                     HSD_GObj_804D7849,
                                     (HSD_JObj*) ((u8*) loaded_joint + 0));
             GObj_SetupGXLink(cursor_gobj, HSD_GObj_JObjCallback, 4U, 0x80U);
-            HSD_GObjProc_8038FD54(cursor_gobj, fn_80248084, 0U);
+            HSD_GObj_SetupProc(cursor_gobj, fn_80248084, 0U);
             data3 = arg0->user_data;
             cursor_jobj = cursor_gobj->hsd_obj;
             jobj17 = data3->jobjs[17];
@@ -895,7 +895,7 @@ void fn_80248A78(HSD_GObj* arg0)
     if (frame >= ((AnimLoopSettings*) &mnVibration_803EECE0)->end_frame) {
         HSD_GObjProc* proc;
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
-        proc = HSD_GObjProc_8038FD54(arg0, fn_802487A8, 0);
+        proc = HSD_GObj_SetupProc(arg0, fn_802487A8, 0);
         proc->flags_3 = HSD_GObj_804D783C;
     }
 }
@@ -954,7 +954,7 @@ void mnVibration_80248ED4(s32 arg0)
     HSD_JObjSetFlagsAll(data->jobjs[21], 0x10);
     HSD_JObjSetFlagsAll(data->jobjs[20], 0x10);
     HSD_JObjSetFlagsAll(data->jobjs[19], 0x10);
-    HSD_GObjProc_8038FD54(gobj, (void (*)(HSD_GObj*)) fn_80248A78, 0);
+    HSD_GObj_SetupProc(gobj, (void (*)(HSD_GObj*)) fn_80248A78, 0);
     mnVibration_8024829C(gobj);
     text = data->title_text;
     if (text != NULL) {
@@ -1012,7 +1012,7 @@ void mnVibration_80249174(int arg0)
     mnVibration_80248ED4(saved_arg);
 
     gobj = GObj_Create(0, 1, 0x80);
-    HSD_GObjProc_8038FD54(gobj, (void (*)(HSD_GObj*)) fn_80247510, 0);
+    HSD_GObj_SetupProc(gobj, (void (*)(HSD_GObj*)) fn_80247510, 0);
 
     gobj_flags_ptr = (u8*) gobj + 0xD;
     *gobj_flags_ptr =

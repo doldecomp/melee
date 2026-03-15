@@ -131,8 +131,8 @@ void DevText_InitPool(void)
 void DevText_Remove(DevText** ptext)
 {
     DevText* text = *ptext;
-    struct DevText *new_var; // Permuter slop
-    DevText *new_var3; // Permuter slop
+    struct DevText* new_var; // Permuter slop
+    DevText* new_var3;       // Permuter slop
     new_var = text->next;
     if (new_var) {
         new_var->prev = text->prev;

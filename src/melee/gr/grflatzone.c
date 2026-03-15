@@ -128,7 +128,7 @@ bool grFlatzone_80216F40(void)
 HSD_GObj* grFlatzone_80216F48(s32 gobj_id)
 {
     StageCallbacks* callbacks = &grFz_803E7940[gobj_id];
-    HSD_GObj* gobj = Ground_801C14D0(gobj_id);
+    HSD_GObj* gobj = Ground_GetStageGObj(gobj_id);
     if (gobj != NULL) {
         Ground* gp = GET_GROUND(gobj);
         gp->x8_callback = NULL;
@@ -141,7 +141,7 @@ HSD_GObj* grFlatzone_80216F48(s32 gobj_id)
             callbacks->callback0(gobj);
         }
         if (callbacks->callback2 != NULL) {
-            HSD_GObjProc_8038FD54(gobj, callbacks->callback2, 4);
+            HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
         }
     } else {
         OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grflatzone.c", 0xE8,

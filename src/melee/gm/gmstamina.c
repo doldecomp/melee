@@ -259,5 +259,5 @@ void fn_801B9850(void)
         }
         gm_804975F8.slomo_counter[i] = 0;
     }
-    HSD_GObjProc_8038FD54(GObj_Create(0xF, 0x11, 0), fn_801B96E8, 0x15);
+    HSD_GObj_SetupProc(GObj_Create(0xF, 0x11, 0), fn_801B96E8, 0x15);
 }

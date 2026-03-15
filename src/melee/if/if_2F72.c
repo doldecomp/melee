@@ -338,8 +338,7 @@ void fn_802F7994(HSD_GObj* gobj)
             void** entry = base + idx;
             base[idx + 2] = fn_802F77F8(*++entry, (u8) slot, 1);
             if (base[idx + 2] != NULL) {
-                HSD_GObjProc_8038FD54(*entry, (HSD_GObjEvent) fn_802F7670,
-                                      0x11);
+                HSD_GObj_SetupProc(*entry, (HSD_GObjEvent) fn_802F7670, 0x11);
             }
         }
         if (lb_8000B09C(jobj) == 0) {
@@ -366,7 +365,7 @@ void if_802F7AF8(s32 slot)
     base1 = &base[1];
     base1[idx] = result;
     if (base1[idx] != NULL) {
-        HSD_GObjProc_8038FD54(*entry, (HSD_GObjEvent) fn_802F75D4, 0x11);
+        HSD_GObj_SetupProc(*entry, (HSD_GObjEvent) fn_802F75D4, 0x11);
     }
 
     idx = (u8) slot2 << 1;
@@ -374,7 +373,7 @@ void if_802F7AF8(s32 slot)
     result = fn_802F77F8(*++entry, (u8) slot2, 2);
     base1[idx] = result;
     if (base1[idx] != NULL) {
-        HSD_GObjProc_8038FD54(*entry, (HSD_GObjEvent) fn_802F75D4, 0x11);
+        HSD_GObj_SetupProc(*entry, (HSD_GObjEvent) fn_802F75D4, 0x11);
     }
 }
 
@@ -395,7 +394,7 @@ void if_802F7BB4(s32 player_idx)
                     0xFFFFFFFFu);
     (base + offset)[1] = fn_802F77F8(*++entry, idx, 1);
     if ((base + offset)[1] != NULL) {
-        HSD_GObjProc_8038FD54(*entry, (HSD_GObjEvent) fn_802F75D4, 0x11);
+        HSD_GObj_SetupProc(*entry, (HSD_GObjEvent) fn_802F75D4, 0x11);
     }
 }
 
@@ -413,7 +412,7 @@ void if_802F7C30(s32 slot)
         result = fn_802F77F8(*++entry, (u8) slot, 0);
         base[idx + 1] = result;
         if (base[idx + 1] != NULL) {
-            HSD_GObjProc_8038FD54(*entry, (HSD_GObjEvent) fn_802F75D4, 0x11);
+            HSD_GObj_SetupProc(*entry, (HSD_GObjEvent) fn_802F75D4, 0x11);
         }
     } else if (ret == -1) {
         idx = (u8) slot << 1;
@@ -421,7 +420,7 @@ void if_802F7C30(s32 slot)
         result = fn_802F77F8(*++entry, (u8) slot, 1);
         base[idx + 1] = result;
         if (base[idx + 1] != NULL) {
-            HSD_GObjProc_8038FD54(*entry, (HSD_GObjEvent) fn_802F75D4, 0x11);
+            HSD_GObj_SetupProc(*entry, (HSD_GObjEvent) fn_802F75D4, 0x11);
         }
     }
 }
@@ -440,7 +439,7 @@ void if_802F7D08(s32 slot)
         result = fn_802F77F8(*++entry, (u8) slot, 0);
         base[idx + 1] = result;
         if (base[idx + 1] != NULL) {
-            HSD_GObjProc_8038FD54(*entry, (HSD_GObjEvent) fn_802F7994, 0x11);
+            HSD_GObj_SetupProc(*entry, (HSD_GObjEvent) fn_802F7994, 0x11);
         }
     } else if (ret == -1) {
         idx = (u8) slot << 1;
@@ -448,7 +447,7 @@ void if_802F7D08(s32 slot)
         result = fn_802F77F8(*++entry, (u8) slot, 1);
         base[idx + 1] = result;
         if (base[idx + 1] != NULL) {
-            HSD_GObjProc_8038FD54(*entry, (HSD_GObjEvent) fn_802F7994, 0x11);
+            HSD_GObj_SetupProc(*entry, (HSD_GObjEvent) fn_802F7994, 0x11);
         }
     } else {
         idx = (u8) slot << 1;
@@ -456,7 +455,7 @@ void if_802F7D08(s32 slot)
         result = fn_802F77F8(*++entry, (u8) slot, 1);
         base[idx + 1] = result;
         if (base[idx + 1] != NULL) {
-            HSD_GObjProc_8038FD54(*entry, (HSD_GObjEvent) fn_802F75D4, 0x11);
+            HSD_GObj_SetupProc(*entry, (HSD_GObjEvent) fn_802F75D4, 0x11);
         }
     }
 }

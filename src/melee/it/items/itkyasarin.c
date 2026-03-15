@@ -111,7 +111,8 @@ bool itKyasarin_UnkMotion2_Anim(Item_GObj* gobj)
 {
     if (!it_80272C6C(gobj)) {
         Item* ip = GET_ITEM(gobj);
-        itKyasarinAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+        itKyasarinAttributes* attr =
+            ip->xC4_article_data->x4_specialAttributes;
         ip->x40_vel.x = -attr->x4 * ip->facing_dir;
         ip->x40_vel.z = 0.0F;
         ip->x40_vel.y = 0.0F;

@@ -182,7 +182,7 @@ static HSD_GObj* grBattle_80219D84(int gobj_id)
     HSD_GObj* gobj;
     StageCallbacks* callbacks = &grNBa_803E7DA0[gobj_id];
 
-    gobj = Ground_801C14D0(gobj_id);
+    gobj = Ground_GetStageGObj(gobj_id);
 
     if (gobj != NULL) {
         Ground* gp = GET_GROUND(gobj);
@@ -199,7 +199,7 @@ static HSD_GObj* grBattle_80219D84(int gobj_id)
         }
 
         if (callbacks->callback2 != NULL) {
-            HSD_GObjProc_8038FD54(gobj, callbacks->callback2, 4);
+            HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
         }
 
     } else {

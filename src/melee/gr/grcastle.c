@@ -186,7 +186,7 @@ HSD_GObj* grCastle_801CD4D0(int gobj_id)
     HSD_GObj* gobj;
     StageCallbacks* callbacks = &grCs_803E0FF4[gobj_id];
 
-    gobj = Ground_801C14D0(gobj_id);
+    gobj = Ground_GetStageGObj(gobj_id);
 
     if (gobj != NULL) {
         Ground* gp = gobj->user_data;
@@ -203,7 +203,7 @@ HSD_GObj* grCastle_801CD4D0(int gobj_id)
         }
 
         if (callbacks->callback2 != NULL) {
-            HSD_GObjProc_8038FD54(gobj, callbacks->callback2, 4);
+            HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
         }
 
     } else {
@@ -615,8 +615,8 @@ void fn_801D0924(HSD_GObj* gobj, int renderpass)
 
         for (i = 0; i < 12; i++) {
             if (gp->gv.castle3.x1C[i].data != NULL) {
-                lb_800117F4(&gp->gv.castle3.x1C[i], &color1, &color2,
-                            999, renderpass);
+                lb_800117F4(&gp->gv.castle3.x1C[i], &color1, &color2, 999,
+                            renderpass);
             }
         }
     }

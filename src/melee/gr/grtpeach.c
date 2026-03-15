@@ -122,7 +122,7 @@ Ground_GObj* grTPeach_80222958(int index)
     HSD_GObj* gobj;
 
     StageCallbacks* callbacks = &grTPe_803E90F0[index];
-    gobj = Ground_801C14D0(index);
+    gobj = Ground_GetStageGObj(index);
     if (gobj != NULL) {
         Ground* gp = GET_GROUND(gobj);
         gp->x8_callback = NULL;
@@ -136,7 +136,7 @@ Ground_GObj* grTPeach_80222958(int index)
         }
 
         if (callbacks->callback2 != NULL) {
-            HSD_GObjProc_8038FD54(gobj, callbacks->callback2, 4);
+            HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
         }
     } else {
         OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grtpeach.c", 195,

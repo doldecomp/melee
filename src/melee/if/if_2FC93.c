@@ -197,7 +197,7 @@ void un_802FE260(void)
         HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
         GObj_SetupGXLink(gobj, fn_802FDA4C, 11, 0);
         gm_8016895C(jobj, un_804A1F10.x0[0], 0);
-        HSD_GObjProc_8038FD54(gobj, fn_802FDA78, 17);
+        HSD_GObj_SetupProc(gobj, fn_802FDA78, 17);
         HSD_JObjReqAnimAll(jobj, 0.0);
         HSD_JObjAnimAll(jobj);
         un_804A1F10.x24[i] = 0;

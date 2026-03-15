@@ -532,7 +532,7 @@ void it_8026D018(void)
                 }
             }
             it_8026CF04();
-            HSD_GObjProc_8038FD54(GObj_Create(5U, 7U, 0U), fn_8026C88C, 0U);
+            HSD_GObj_SetupProc(GObj_Create(5U, 7U, 0U), fn_8026C88C, 0U);
             { ///< @todo Make a FLT_RAND(min, max) define or inline
                 f32* temp_r29 =
                     ((f32*) it_804D6D28) + (gm_8016AE80() * 8) + 0xFC;
@@ -586,7 +586,7 @@ void it_8026D018(void)
                 }
             }
             it_8026CF04();
-            HSD_GObjProc_8038FD54(
+            HSD_GObj_SetupProc(
                 GObj_Create(5U, 7U, 0U), fn_8026C88C,
                 0U); ///< @todo Make a FLT_RAND(min, max) define or inline
             temp_r29 = it_804D6D28 + ((gm_8016AE80() * 8) + 0xFC);

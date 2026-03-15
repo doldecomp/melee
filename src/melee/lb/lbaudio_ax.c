@@ -1319,7 +1319,7 @@ HSD_GObj* lbAudioAx_800263E8(float f1, HSD_GObj* arg1, int sfx_id, int arg3,
                 GObj_InitUserData(gobj, 0x17, lbAudioAx_ObjFree, userdata);
 
                 if (gobj != NULL) {
-                    HSD_GObjProc_8038FD54(gobj, fn_800262A0, 0x17);
+                    HSD_GObj_SetupProc(gobj, fn_800262A0, 0x17);
                 }
 
                 fn_80025FAC(gobj, userdata, &params);

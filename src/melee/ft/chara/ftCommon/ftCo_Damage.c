@@ -596,7 +596,8 @@ void ftCo_8008E5A4(Fighter* fp)
         float kb_vel_x_neg = -kb_x;
         float kb_mag = kb_vel_x_neg * kb_vel_x_neg + kb_y * kb_y;
         if (!(kb_mag < 0.00001f)) {
-            float f3 = kb_y * fp->input.lstick.x + kb_vel_x_neg * fp->input.lstick.y;
+            float f3 =
+                kb_y * fp->input.lstick.x + kb_vel_x_neg * fp->input.lstick.y;
             float f30 = f3 * f3 / kb_mag;
             Vec3 lstick_vec3, kb_vel_cross_lstick;
             lstick_vec3.x = fp->input.lstick.x;
@@ -624,13 +625,13 @@ void ftCo_Damage_OnExitHitlag(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     bool isPointInCircle;
-    if (VEC2_SQ_LEN(fp->input.lstick) >= SQ(p_ftCommonData->sdi_min_stick_mag)) {
+    if (VEC2_SQ_LEN(fp->input.lstick) >= SQ(p_ftCommonData->sdi_min_stick_mag))
+    {
         isPointInCircle = true;
     } else {
         isPointInCircle = false;
     }
-    if (isPointInCircle || ftCo_800DF608(fp))
-    {
+    if (isPointInCircle || ftCo_800DF608(fp)) {
         float x, y;
         if (ftCo_800DF608(fp)) {
             float cd_x4BC = p_ftCommonData->x4BC;

@@ -8,6 +8,7 @@
 #include "gm/gm_16AE.h"
 #include "gr/grdatfiles.h"
 #include "gr/grdisplay.h"
+#include "gr/grfzerocar.h"
 #include "gr/grmaterial.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
@@ -27,13 +28,10 @@
 #include <baselib/jobj.h>
 #include <baselib/random.h>
 #include <baselib/spline.h>
-#include "gr/grfzerocar.h"
 
 void grBigBlue_801E8D04(Ground_GObj*);
 
 extern StageCallbacks grBb_Route_803E5E78[];
-extern char grBb_Route_803E61D4[];
-extern char grBb_Route_803E623C[];
 
 static struct {
     int x0;
@@ -115,7 +113,7 @@ HSD_GObj* grBigBlueRoute_8020B9D4(int gobj_id)
     HSD_GObj* gobj;
     StageCallbacks* callbacks = &grBb_Route_803E5E78[gobj_id];
 
-    gobj = Ground_801C14D0(gobj_id);
+    gobj = Ground_GetStageGObj(gobj_id);
 
     if (gobj != NULL) {
         Ground* gp = gobj->user_data;
@@ -132,12 +130,11 @@ HSD_GObj* grBigBlueRoute_8020B9D4(int gobj_id)
         }
 
         if (callbacks->callback2 != NULL) {
-            HSD_GObjProc_8038FD54(gobj, callbacks->callback2, 4);
+            HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
         }
 
     } else {
-        OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grbigblueroute.c", 279,
-                 gobj_id);
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 279, gobj_id);
     }
 
     return gobj;
@@ -361,7 +358,6 @@ void grBigBlueRoute_8020C210(Ground_GObj* gobj)
     HSD_Free((void*) gp->gv.bigblueroute.xC8);
 }
 
-/// @todo Currently 96.39% match - r30/r31 register swap
 void grBigBlueRoute_8020C238(Ground_GObj* gobj)
 {
     HSD_JObj* root_jobj = gobj->hsd_obj;
@@ -400,9 +396,9 @@ void grBigBlueRoute_8020C238(Ground_GObj* gobj)
     }
 
     gp->gv.bigblueroute.xC8 = HSD_MemAlloc(0x554);
-    ((gp->gv.bigblueroute.xC8) ? ((void) 0)
-                                : __assert(grBb_Route_803E61D4, 674,
-                                           grBb_Route_803E623C));
+    ((gp->gv.bigblueroute.xC8)
+         ? ((void) 0)
+         : __assert(__FILE__, 674, "gp->u.car.car_info"));
     memzero(gp->gv.bigblueroute.xC8, 0x554);
 
     gp->gv.bigblueroute.x10A = 0;

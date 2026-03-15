@@ -294,7 +294,7 @@ void NameTag_Create(int slot)
         GObj_InitUserData(gobj, 0, mn_8022EB04, user_data);
         *user_data = slot;
     }
-    HSD_GObjProc_8038FD54(gobj, fn_802FCC44, 17);
+    HSD_GObj_SetupProc(gobj, fn_802FCC44, 17);
 }
 
 void un_802FD28C(int slot)

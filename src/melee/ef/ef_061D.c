@@ -1,8 +1,9 @@
 #include "ef_061D.h"
-#include "baselib/forward.h"
 
 #include "eflib.h"
 #include "types.h"
+
+#include "baselib/forward.h"
 
 #include "baselib/gobj.h"
 #include "baselib/jobj.h"
@@ -415,8 +416,8 @@ void* ef_80061D70(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
     case 0x4AB: {
         ret_obj = efLib_8005C6F4(0x9471U, gobj, EF061D_VA_ARG(HSD_JObj*));
         if (ret_obj != NULL) {
-            ((Effect*) ret_obj)->x0 =
-                (void*) efLib_8005C6F4(0x9470U, gobj, EF061D_VA_ARG(HSD_JObj*));
+            ((Effect*) ret_obj)->x0 = (void*) efLib_8005C6F4(
+                0x9470U, gobj, EF061D_VA_ARG(HSD_JObj*));
         }
         break;
     }
@@ -471,8 +472,8 @@ void* ef_80061D70(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
     case 0x4B3: {
         ret_obj = efLib_8005C6F4(0xB799U, gobj, EF061D_VA_ARG(HSD_JObj*));
         if (ret_obj != NULL) {
-            ((Effect*) ret_obj)->x0 =
-                (void*) efLib_8005C6F4(0xB798U, gobj, EF061D_VA_ARG(HSD_JObj*));
+            ((Effect*) ret_obj)->x0 = (void*) efLib_8005C6F4(
+                0xB798U, gobj, EF061D_VA_ARG(HSD_JObj*));
         }
         break;
     }
@@ -487,11 +488,11 @@ void* ef_80061D70(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
         goto lbl_4B6_4B7_shared;
     case 0x4B7:
         ret_obj = efLib_8005C2BC(0x5209U, gobj, EF061D_VA_ARG(HSD_JObj*));
-lbl_4B6_4B7_shared:
-    if (ret_obj != NULL) {
-        effect = ret_obj;
-        HSD_JObjGetScale(GET_JOBJ(gobj), &scale);
-        if (GET_JOBJ(effect->gobj) == NULL) {
+    lbl_4B6_4B7_shared:
+        if (ret_obj != NULL) {
+            effect = ret_obj;
+            HSD_JObjGetScale(GET_JOBJ(gobj), &scale);
+            if (GET_JOBJ(effect->gobj) == NULL) {
                 __assert("jobj.h", 823, "jobj");
             }
             HSD_JObjSetScale(GET_JOBJ(effect->gobj), &scale);
@@ -511,7 +512,9 @@ lbl_4B6_4B7_shared:
         cnt = efLib_804D64F0 - 1;
         efLib_804D64F0 = cnt;
         // horrible. its actually just efLib_80458EE0[cnt]
-        HSD_JObjAnimAll(((_struct_efLib_80458EE0*)(((u32*)efLib_80458EE0) + cnt))->x0_gobj);
+        HSD_JObjAnimAll(
+            ((_struct_efLib_80458EE0*) (((u32*) efLib_80458EE0) + cnt))
+                ->x0_gobj);
     }
 
     return ret_obj;

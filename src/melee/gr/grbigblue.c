@@ -189,7 +189,7 @@ HSD_GObj* grBigBlue_801E59F8(s32 id)
 {
     HSD_GObj* gobj;
     StageCallbacks* cbs = &grBb_803E29E0[id];
-    gobj = Ground_801C14D0(id);
+    gobj = Ground_GetStageGObj(id);
     if (gobj != NULL) {
         Ground* gp = GET_GROUND(gobj);
         gp->x8_callback = NULL;
@@ -203,7 +203,7 @@ HSD_GObj* grBigBlue_801E59F8(s32 id)
             cbs->callback0(gobj);
         }
         if (cbs->callback2 != NULL) {
-            HSD_GObjProc_8038FD54(gobj, cbs->callback2, 4U);
+            HSD_GObj_SetupProc(gobj, cbs->callback2, 4U);
         }
     } else {
         OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grbigblue.c", 0x17E,

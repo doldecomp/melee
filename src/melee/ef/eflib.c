@@ -13,12 +13,9 @@
 #include "baselib/psdisp.h"
 #include "baselib/psstructs.h"
 #include "baselib/state.h"
-
 #include "dolphin/mtx.h"
-
 #include "ft/inlines.h"
 #include "ftCommon/ftCo_Bury.h"
-
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 
@@ -134,8 +131,7 @@ efLib_EnsureGeneratorAppSRT_inline(HSD_Generator* generator, s32 status)
             {                                                                 \
                 _parent = NULL;                                               \
             }                                                                 \
-            else                                                              \
-            {                                                                 \
+            else {                                                            \
                 _parent = (_jobj)->parent;                                    \
             }                                                                 \
         } while (_parent != NULL);                                            \
@@ -159,11 +155,11 @@ void efLib_8005B4B8(void)
 
     gobj = GObj_Create(8U, 0xBU, 1U);
     GObj_SetupGXLink(gobj, efLib_RenderCallback, 7U, 2U);
-    HSD_GObjProc_8038FD54(gobj, efLib_8005C9A4, 0xFU);
+    HSD_GObj_SetupProc(gobj, efLib_8005C9A4, 0xFU);
 
     gobj = GObj_Create(8U, 0xCU, 1U);
     GObj_SetupGXLink(gobj, efLib_RenderCallback, 8U, 2U);
-    HSD_GObjProc_8038FD54(gobj, fn_8005C9D0, 0xFU);
+    HSD_GObj_SetupProc(gobj, fn_8005C9D0, 0xFU);
 
     HSD_JObjSetSPtclCallback(fn_8005DB20);
     HSD_JObjSetDPtclCallback(fn_8005DB70);
@@ -517,7 +513,7 @@ Effect* efLib_8005BE88(int idx, HSD_GObj* parent_gobj)
             }
         }
     }
-    HSD_GObjProc_8038FD54(ep->gobj, fn_8005BC50, 15);
+    HSD_GObj_SetupProc(ep->gobj, fn_8005BC50, 15);
     return ep;
 }
 
@@ -566,7 +562,7 @@ Effect* efLib_8005C3DC(u32 idx, HSD_GObj* gobj, HSD_JObj* jobj)
 Effect* efLib_8005C5C4(u32 idx, HSD_GObj* gobj, HSD_JObj* jobj)
 {
     // --- PLS DONT INLINE ------------------------------------------------
-    extern Effect* efLib_8005C1B4(u32 idx, HSD_GObj* gobj, HSD_JObj* jobj);
+    extern Effect* efLib_8005C1B4(u32 idx, HSD_GObj * gobj, HSD_JObj * jobj);
     // --------------------------------------------------------------------
 
     Effect* effect = efLib_8005C1B4(idx, gobj, jobj);
@@ -588,7 +584,7 @@ Effect* efLib_8005C5C4(u32 idx, HSD_GObj* gobj, HSD_JObj* jobj)
 Effect* efLib_8005C6F4(u32 idx, HSD_GObj* gobj, HSD_JObj* jobj)
 {
     // --- PLS DONT INLINE ------------------------------------------------
-    extern Effect* efLib_8005C1B4(u32 idx, HSD_GObj* gobj, HSD_JObj* jobj);
+    extern Effect* efLib_8005C1B4(u32 idx, HSD_GObj * gobj, HSD_JObj * jobj);
     // --------------------------------------------------------------------
 
     Effect* effect = efLib_8005C1B4(idx, gobj, jobj);

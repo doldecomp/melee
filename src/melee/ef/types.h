@@ -5,10 +5,10 @@
 
 #include "baselib/objalloc.h"
 #include "dolphin/mtx.h"
+#include "dolphin/types.h"
 
 #include "ef/forward.h" // IWYU pragma: export
 
-#include "dolphin/types.h"
 #include "sc/types.h"
 
 #include <baselib/forward.h>

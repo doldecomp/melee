@@ -103,8 +103,7 @@ void it_80291F14(Item_GObj* gobj, int charge_level)
     PAD_STACK(16);
 }
 
-void it_80291FA8(Item_GObj* gobj, Vec3* pos, int charge_level,
-                 float scale)
+void it_80291FA8(Item_GObj* gobj, Vec3* pos, int charge_level, float scale)
 {
     Item* ip = GET_ITEM(gobj);
     int cost = it_80291D38(gobj, charge_level);

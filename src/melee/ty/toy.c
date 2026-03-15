@@ -157,8 +157,6 @@ typedef struct tyDispData {
     HSD_Text* x150;
 } tyDispData;
 
-
-
 typedef struct un_804D6E68_t {
     /* 0x00 */ u8 pad[0x18];
     /* 0x18 */ f32 x18;
@@ -1165,7 +1163,7 @@ HSD_GObjProc* un_80306B18(HSD_GObj* gobj, s32 anim_frame, s32 val1, s32 val2)
         tp->x8 = val1;
         tp->x4 = val2;
 
-        proc = HSD_GObjProc_8038FD54(gobj, un_80306BB8, 0);
+        proc = HSD_GObj_SetupProc(gobj, un_80306BB8, 0);
         HSD_GObj_80390CD4(gobj);
     }
     return proc;
@@ -1289,8 +1287,8 @@ void un_80306D70(s32 arg0)
         GObj_SetupGXLink(*(HSD_GObj**) (data + 0x4), HSD_GObj_LObjCallback,
                          0x37, 0);
         if (spC != 0) {
-            HSD_GObjProc_8038FD54(*(HSD_GObj**) (data + 0x4),
-                                  (HSD_GObjEvent) un_80306C5C, 0);
+            HSD_GObj_SetupProc(*(HSD_GObj**) (data + 0x4),
+                               (HSD_GObjEvent) un_80306C5C, 0);
             HSD_GObj_80390CD4(*(HSD_GObj**) (data + 0x4));
         }
     } else {
@@ -1566,7 +1564,7 @@ void un_803075E8(s32 arg0)
                 HSD_JObjAddAnimAll(jobj, animjoint, matanim, shapanim);
                 HSD_JObjReqAnimAll(jobj, 0.0F);
                 HSD_JObjAnimAll(jobj);
-                HSD_GObjProc_8038FD54(td->gobj, un_80306BB8, 0);
+                HSD_GObj_SetupProc(td->gobj, un_80306BB8, 0);
                 HSD_GObj_80390CD4(td->gobj);
             }
         } else {
@@ -1774,8 +1772,8 @@ void un_80307F64(s32 arg0, s32 arg1)
                     un_80306A48(jobj2, 0, data + 0x4C8, 0, un_804D6EC8, 0);
                 }
                 state->x0F = 0xA;
-                HSD_GObjProc_8038FD54(state->gobj,
-                                      (void (*)(HSD_GObj*)) fn_80307E84, 0);
+                HSD_GObj_SetupProc(state->gobj,
+                                   (void (*)(HSD_GObj*)) fn_80307E84, 0);
                 HSD_GObj_80390CD4(state->gobj);
             }
         } else {
@@ -2739,7 +2737,7 @@ void un_803114E8(void)
 
         memzero(data, 0x18);
         *data = GObj_Create(0, 0, 0);
-        HSD_GObjProc_8038FD54(*data, (void (*)(HSD_GObj*)) un_80310B48, 0);
+        HSD_GObj_SetupProc(*data, (void (*)(HSD_GObj*)) un_80310B48, 0);
         HSD_GObj_80390CD4(*data);
     } else {
         OSReport(un_803FE7C0);

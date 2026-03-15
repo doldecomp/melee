@@ -5,12 +5,17 @@
 
 #include <platform.h>
 
+#include "baselib/forward.h"
+
+#include "baselib/jobj.h"
+#include "ft/ftlib.h"
 #include "gr/grdisplay.h"
 #include "gr/grmaterial.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
 #include "lb/lb_00B0.h"
 #include "mp/mplib.h"
+#include "pl/player.h"
 
 #include <baselib/debug.h>
 #include <baselib/gobj.h>
@@ -157,7 +162,7 @@ HSD_GObj* grShrineRoute_802088C0(int gobj_id)
     HSD_GObj* gobj;
     StageCallbacks* callbacks = &grSh_Route_803E58F0[gobj_id];
 
-    gobj = Ground_801C14D0(gobj_id);
+    gobj = Ground_GetStageGObj(gobj_id);
 
     if (gobj != NULL) {
         Ground* gp = gobj->user_data;
@@ -171,7 +176,7 @@ HSD_GObj* grShrineRoute_802088C0(int gobj_id)
             callbacks->callback0(gobj);
         }
         if (callbacks->callback2 != NULL) {
-            HSD_GObjProc_8038FD54(gobj, callbacks->callback2, 4);
+            HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
         }
     } else {
         OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 271, gobj_id);
@@ -329,13 +334,57 @@ bool grShrineRoute_8020AD24(bool arg)
     return 0;
 }
 
-/// #grShrineRoute_8020AD58
+void grShrineRoute_8020AD58(Ground* gp, int r4, CollData* r5, int r6, int r7)
+{
+    HSD_GObj* pgobj;
+    u32 slot;
+    PAD_STACK(0x10);
+
+    if ((int) r5->x34_flags.b1234 == 1 && r7 == 2) {
+        slot = ftLib_80086BE0(r5->x0_gobj);
+        if (r5->x0_gobj == Player_GetEntity(slot)) {
+            gp->gv.shrineroute.xCA = 1;
+            pgobj = Player_GetEntityAtIndex(slot, 1);
+            if (pgobj) {
+                if (!ftLib_8008731C(pgobj)) {
+                    return;
+                }
+            }
+            gp->gv.shrineroute.xCC = 1;
+            return;
+        }
+        gp->gv.shrineroute.xCC = 1;
+    }
+}
 
 /// #grShrineRoute_8020AE08
 
 /// #grShrineRoute_8020AF38
 
-/// #grShrineRoute_8020B020
+void grShrineRoute_8020B020(HSD_GObj* gobj, int r4, int r5)
+{
+    Ground* gp = GET_GROUND(gobj);
+    int comp;
+    int i;
+
+    comp = r4 - 189;
+    for (i = 0; i < 6; i++) {
+        if (r4 == -1 || i != comp) {
+            if (gp->gv.shrineroute2.x108) {
+                if (GET_JOBJ(gp->gv.shrineroute2.x108)) {
+                    if (r5) {
+                        HSD_JObjSetFlagsAll(gp->gv.shrineroute2.x108->hsd_obj,
+                                            JOBJ_HIDDEN);
+                    } else {
+                        HSD_JObjClearFlagsAll(
+                            gp->gv.shrineroute2.x108->hsd_obj, JOBJ_HIDDEN);
+                    }
+                }
+            }
+        }
+        gp = (Ground*) &gp->gobj;
+    }
+}
 
 void grShrineRoute_8020B0AC(void)
 {

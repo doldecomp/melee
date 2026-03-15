@@ -228,7 +228,7 @@ void gm_801A4BD4(void)
     un_802FF78C();
     gm_804D672C = GObj_Create(14, 0, 0);
     if (gm_804D672C != NULL) {
-        HSD_GObjProc_8038FD54(gm_804D672C, fn_801A4BD0, 0);
+        HSD_GObj_SetupProc(gm_804D672C, fn_801A4BD0, 0);
     }
     gm_804D6728 = NULL;
     gm_804D6724 = NULL;

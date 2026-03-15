@@ -217,7 +217,7 @@ void ifTime_UpdateTimers(HSD_GObj* arg0)
         HSD_JObjReqAnimAll(jobj2, 0.0f);
         HSD_JObjAnimAll(jobj2);
         HSD_JObjSetTranslate(jobj2, ifAll_802F3414());
-        HSD_GObjProc_8038FD54(x->countdown_timer, ifTime_UpdateCountdown, 17);
+        HSD_GObj_SetupProc(x->countdown_timer, ifTime_UpdateCountdown, 17);
         if (x->match_timer) {
             HSD_GObjPLink_80390228(x->match_timer);
             x->match_timer = NULL;
@@ -261,7 +261,7 @@ void ifTime_CreateTimers(void)
         shapeanims = ifTime_match_timer_models.shapeanims;
         lb_8000C07C(jobj, 0, anims, matanims, shapeanims);
         HSD_JObjReqAnimAll(jobj, 0.0f);
-        HSD_GObjProc_8038FD54(gobj, ifTime_UpdateTimers, 17);
+        HSD_GObj_SetupProc(gobj, ifTime_UpdateTimers, 17);
         HSD_JObjSetTranslate(jobj, ifAll_802F3414());
         digit = HSD_JObjGetChild(jobj);
         ifTime_data.digits[0] = digit;

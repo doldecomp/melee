@@ -265,7 +265,7 @@ void fn_8019CDBC(HSD_GObj* gobj)
     f32 sp24;
     u8 temp_r27;
     TmData* tmd = gm_8018F634();
-    HSD_JObj *jobj = HSD_GObjGetHSDObj(gobj);
+    HSD_JObj* jobj = HSD_GObjGetHSDObj(gobj);
     u32 idx = fn_8018F62C(gobj);
     PAD_STACK(20);
 

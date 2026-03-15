@@ -537,7 +537,7 @@ void grCorneria_801E12CC(Ground_GObj* arg) {}
 void fn_801E12D0(Item_GObj* gobj, Ground* gr) {}
 
 void fn_801E12D4(Item_GObj* gobj, Ground* gr, Vec3* pos, HSD_GObj* arg3,
-                  f32 damage)
+                 f32 damage)
 {
     gr->gv.corneria.x114 += damage;
     OSReport("*** Beam Damage! %f\n", damage);

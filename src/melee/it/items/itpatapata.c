@@ -3,6 +3,7 @@
 #include <placeholder.h>
 #include <platform.h>
 
+#include "cm/camera.h"
 #include "ft/ftlib.h"
 #include "it/inlines.h"
 #include "it/it_266F.h"
@@ -15,8 +16,6 @@
 #include "mp/mpcoll.h"
 
 #include <baselib/jobj.h>
-
-#include "cm/camera.h"
 
 void it_802E05A0(Item_GObj* gobj)
 {
@@ -96,8 +95,7 @@ bool itPatapata_UnkMotion2_Anim(Item_GObj* gobj)
 void it_802E0D9C(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itPatapataAttributes* attrs =
-        ip->xC4_article_data->x4_specialAttributes;
+    itPatapataAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
     switch (ip->xDD4_itemVar.patapata.x40) {
     case 0:
         ip->x40_vel.x = -ip->facing_dir * attrs->x0->x4;
@@ -228,15 +226,11 @@ bool itPatapata_UnkMotion4_Anim(Item_GObj* gobj)
         toggle = ip->xDD4_itemVar.patapata.x44 ^ 1;
         ip->xDD4_itemVar.patapata.x44 = toggle;
         if (toggle != 0) {
-            HSD_JObjSetFlagsAll(
-                ip->xBBC_dynamicBoneTable->bones[18], 0x10);
-            HSD_JObjSetFlagsAll(
-                ip->xBBC_dynamicBoneTable->bones[11], 0x10);
+            HSD_JObjSetFlagsAll(ip->xBBC_dynamicBoneTable->bones[18], 0x10);
+            HSD_JObjSetFlagsAll(ip->xBBC_dynamicBoneTable->bones[11], 0x10);
         } else {
-            HSD_JObjClearFlagsAll(
-                ip->xBBC_dynamicBoneTable->bones[18], 0x10);
-            HSD_JObjClearFlagsAll(
-                ip->xBBC_dynamicBoneTable->bones[11], 0x10);
+            HSD_JObjClearFlagsAll(ip->xBBC_dynamicBoneTable->bones[18], 0x10);
+            HSD_JObjClearFlagsAll(ip->xBBC_dynamicBoneTable->bones[11], 0x10);
         }
     } else {
         ip->xDD4_itemVar.patapata.x28 -= 1;
@@ -267,8 +261,8 @@ void it_802E15B0(Item_GObj* gobj)
 
     lb_8000B1CC(jobj, NULL, &pos);
     Camera_80030E44(2, &ip->pos);
-    new_gobj = it_802DD7F0(ip->xDD4_itemVar.patapata.x40, &pos,
-                           &ip->x40_vel, (s32) ip->facing_dir);
+    new_gobj = it_802DD7F0(ip->xDD4_itemVar.patapata.x40, &pos, &ip->x40_vel,
+                           (s32) ip->facing_dir);
     new_ip = GET_ITEM(new_gobj);
     new_ip->xDD4_itemVar.nokonoko.x34 = ip->xCC8_knockback;
     new_ip->xDD4_itemVar.nokonoko.x3C = ip->xCAC_angle;

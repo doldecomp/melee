@@ -316,7 +316,7 @@ void fn_8017C1A4(HSD_GObj* unused)
 void fn_8017C71C(void)
 {
     struct lbl_804706C0_t* tmp = &lbl_804706C0;
-    HSD_GObjProc_8038FD54(GObj_Create(0xF, 0x11, 0), fn_8017C1A4, 0x15);
+    HSD_GObj_SetupProc(GObj_Create(0xF, 0x11, 0), fn_8017C1A4, 0x15);
     tmp->x0 = 0;
     tmp->x4 = 1;
     tmp->x8 = 0;
@@ -1433,5 +1433,5 @@ void fn_80182F40(HSD_GObj* unused)
 void gm_80183218(void)
 {
     lbl_804D65E8 = 0;
-    HSD_GObjProc_8038FD54(GObj_Create(0xF, 0x11, 0), fn_80182F40, 0x15);
+    HSD_GObj_SetupProc(GObj_Create(0xF, 0x11, 0), fn_80182F40, 0x15);
 }

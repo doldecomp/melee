@@ -255,8 +255,7 @@ void mnCharSel_8025C020(int arg0)
                     HSD_SisLib_803A70A0(mnCharSel_804D6CDC, 0, "%d 個",
                                         temp_r29);
                 } else {
-                    HSD_SisLib_803A70A0(mnCharSel_804D6CDC, 0,
-                                        "%d", temp_r29);
+                    HSD_SisLib_803A70A0(mnCharSel_804D6CDC, 0, "%d", temp_r29);
                 }
             } else {
                 gm_80163374(temp_r31, &sp7B, &sp7A, &sp79, &sp78);

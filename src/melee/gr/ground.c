@@ -681,8 +681,8 @@ void Ground_801C0FB8(StructPairWithStageID* pair)
         HSD_Free(cur);
     }
     stage_info.x6A4 = NULL;
-    HSD_GObjProc_8038FD54(GObj_Create(HSD_GOBJ_CLASS_STAGE, 5, 0),
-                          Ground_801C0C2C, 10);
+    HSD_GObj_SetupProc(GObj_Create(HSD_GOBJ_CLASS_STAGE, 5, 0),
+                       Ground_801C0C2C, 10);
 }
 
 void Ground_DemoInit(StructPairWithStageID* pair, s32 arg1)
@@ -793,7 +793,7 @@ static HSD_JObj* get_jobj_inline(float phi_f0)
     return jobj;
 }
 
-Ground_GObj* Ground_801C14D0(int map_id)
+Ground_GObj* Ground_GetStageGObj(int map_id)
 {
     StageInfo* stageinfo = &stage_info;
     float phi_f0;
@@ -906,8 +906,8 @@ Ground_GObj* Ground_801C14D0(int map_id)
         }
         HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, temp_r3_11);
     }
-    HSD_GObjProc_8038FD54(gobj, &Ground_801C1CD0, 1);
-    HSD_GObjProc_8038FD54(gobj, &Ground_801C1D38, 4);
+    HSD_GObj_SetupProc(gobj, &Ground_801C1CD0, 1);
+    HSD_GObj_SetupProc(gobj, &Ground_801C1D38, 4);
     Ground_801C2BBC(gobj, map_id);
     return gobj;
 }
@@ -957,8 +957,8 @@ HSD_GObj* Ground_801C1A20(HSD_Joint* arg0, s32 arg1)
         return NULL;
     }
     HSD_GObjObject_80390A70(temp_r30, HSD_GObj_804D7849, temp_r3_4);
-    HSD_GObjProc_8038FD54(temp_r30, Ground_801C1CD0, 1);
-    HSD_GObjProc_8038FD54(temp_r30, Ground_801C1D38, 4);
+    HSD_GObj_SetupProc(temp_r30, Ground_801C1CD0, 1);
+    HSD_GObj_SetupProc(temp_r30, Ground_801C1D38, 4);
     return temp_r30;
 }
 
@@ -2458,7 +2458,7 @@ void Ground_801C466C(void)
         }
     }
     HSD_LObjAnimAll(temp_r3_2);
-    HSD_GObjProc_8038FD54(temp_r3, Ground_801C461C, 0);
+    HSD_GObj_SetupProc(temp_r3, Ground_801C461C, 0);
 }
 
 HSD_GObj* Ground_801C498C(void)

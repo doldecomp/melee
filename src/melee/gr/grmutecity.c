@@ -367,7 +367,7 @@ HSD_GObj* grMuteCity_801EFD0C(int gobj_id)
     HSD_GObj* gobj;
     StageCallbacks* callbacks = &grMc_803E30C4[gobj_id];
 
-    gobj = Ground_801C14D0(gobj_id);
+    gobj = Ground_GetStageGObj(gobj_id);
 
     if (gobj != NULL) {
         Ground* gp = gobj->user_data;
@@ -384,7 +384,7 @@ HSD_GObj* grMuteCity_801EFD0C(int gobj_id)
         }
 
         if (callbacks->callback2 != NULL) {
-            HSD_GObjProc_8038FD54(gobj, callbacks->callback2, 4);
+            HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
         }
 
     } else {

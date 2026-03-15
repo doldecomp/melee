@@ -260,8 +260,7 @@ bool itWhitebea_UnkMotion1_Coll(Item_GObj* gobj)
 void it_802E3DA0(Item_GObj* gobj)
 {
     Item* ip = gobj->user_data;
-    itWhiteBeaAttributes* attrs =
-        ip->xC4_article_data->x4_specialAttributes;
+    itWhiteBeaAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
     PAD_STACK(8);
     ip->xDD4_itemVar.whitebea.x40 = 0;
     ip->x40_vel.x *= attrs->x4;
@@ -385,8 +384,7 @@ bool itWhitebea_UnkMotion5_Coll(Item_GObj* gobj)
 void it_802E4464(Item_GObj* gobj)
 {
     Item* ip = gobj->user_data;
-    itWhiteBeaAttributes* attrs =
-        ip->xC4_article_data->x4_specialAttributes;
+    itWhiteBeaAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
     PAD_STACK(8);
     it_802762BC(ip);
     ip->x40_vel.y = attrs->x10;

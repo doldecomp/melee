@@ -118,7 +118,7 @@ static void gm_801ADB04(void)
     gm_8016895C(jobj, spC->models[0], 0);
     HSD_JObjReqAnimAll(jobj, 0.0F);
     HSD_JObjAnimAll(jobj);
-    HSD_GObjProc_8038FD54(gobj, fn_801AD920, 1);
+    HSD_GObj_SetupProc(gobj, fn_801AD920, 1);
 }
 
 void gm_801ADC88_OnFrame(void)

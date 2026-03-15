@@ -184,7 +184,7 @@ Ground_GObj* grGreens_80213524(int id)
 {
     Ground_GObj* gobj;
     StageCallbacks* cbs = &grGr_callbacks[id];
-    gobj = Ground_801C14D0(id);
+    gobj = Ground_GetStageGObj(id);
     if (gobj != NULL) {
         Ground* gp = GET_GROUND(gobj);
         gp->x8_callback = NULL;
@@ -197,7 +197,7 @@ Ground_GObj* grGreens_80213524(int id)
             cbs->callback0(gobj);
         }
         if (cbs->callback2 != NULL) {
-            HSD_GObjProc_8038FD54(gobj, cbs->callback2, 4);
+            HSD_GObj_SetupProc(gobj, cbs->callback2, 4);
         }
     } else {
         OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 281, id);

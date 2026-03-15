@@ -226,7 +226,7 @@ void mnSound_80249C08(int unused)
     menu->unk3 = gmMainLib_8015ED74();
     menu->text = NULL;
     GObj_InitUserData(gobj, 0U, HSD_Free, menu);
-    proc = HSD_GObjProc_8038FD54(gobj, fn_80249A1C, 0U);
+    proc = HSD_GObj_SetupProc(gobj, fn_80249A1C, 0U);
     proc->flags_3 = HSD_GObj_804D783C;
 
     {
@@ -280,7 +280,6 @@ void mnSound_8024A09C(int arg0)
         &mnSound_804A08A8.shapeanim_joint, "MenMainConSo_Top_shapeanim_joint",
         0);
     mnSound_80249C08(arg0);
-    temp_r3 =
-        HSD_GObjProc_8038FD54(GObj_Create(0, 1, 0x80), mnSound_802492CC, 0);
+    temp_r3 = HSD_GObj_SetupProc(GObj_Create(0, 1, 0x80), mnSound_802492CC, 0);
     temp_r3->flags_3 = HSD_GObj_804D783C;
 }

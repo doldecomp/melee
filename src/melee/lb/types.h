@@ -200,7 +200,7 @@ typedef struct ECBSource {
 } ECBSource;
 
 struct CollData {
-    /* fp+6F0 */ HSD_GObj* x0_gobj;
+    /* fp+6F0 */ HSD_GObj* x0_gobj; // Player GObj
     /* fp+6F4 */ Vec3 cur_pos;
     // position on the previous step of collision
     /* fp+700 */ Vec3 prev_pos;

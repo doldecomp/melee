@@ -1303,7 +1303,7 @@ HSD_GObj* grKongo_801D5340(s32 gobj_id)
     HSD_GObj* gobj;
     StageCallbacks* callbacks = &grKg_803E16E0[gobj_id + 1];
 
-    gobj = Ground_801C14D0(gobj_id);
+    gobj = Ground_GetStageGObj(gobj_id);
 
     if (gobj != NULL) {
         Ground* gp = gobj->user_data;
@@ -1319,7 +1319,7 @@ HSD_GObj* grKongo_801D5340(s32 gobj_id)
         }
         // 0x94
         if (callbacks->callback2 != NULL) {
-            HSD_GObjProc_8038FD54(gobj, callbacks->callback2, 4);
+            HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
         }
     } else {
         OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grstory.c", 220,

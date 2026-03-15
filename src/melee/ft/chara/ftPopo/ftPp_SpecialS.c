@@ -856,8 +856,7 @@ void ftPp_SpecialHiStart_0_IASA(Fighter_GObj* gobj)
         fp->cmd_vars[0] = 0;
         if (ABS(fp->input.lstick.x) > da->x80) {
             ftCommon_UpdateFacing(fp);
-            ftPartSetRotY(fp, 0,
-                          (float)(M_PI_2 * fp->facing_dir));
+            ftPartSetRotY(fp, 0, (float) (M_PI_2 * fp->facing_dir));
         }
     }
 }
@@ -871,8 +870,7 @@ void ftPp_SpecialAirHiStart_0_IASA(Fighter_GObj* gobj)
         fp->cmd_vars[0] = 0;
         if (ABS(fp->input.lstick.x) > da->x80) {
             ftCommon_UpdateFacing(fp);
-            ftPartSetRotY(fp, 0,
-                          (float)(M_PI_2 * fp->facing_dir));
+            ftPartSetRotY(fp, 0, (float) (M_PI_2 * fp->facing_dir));
         }
     }
 }
@@ -1403,8 +1401,8 @@ void ftPp_SpecialLw_Enter(Fighter_GObj* gobj)
     fp->cmd_vars[3] = 0;
     fp->mv.pp.speciallw.x0 = 0;
     fp->mv.pp.speciallw.x4_b0 = false;
-    Fighter_ChangeMotionState(gobj, ftPp_MS_SpecialLw, 0, 0.0f,
-                              1.0f, 0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, ftPp_MS_SpecialLw, 0, 0.0f, 1.0f, 0.0f,
+                              NULL);
     ftAnim_8006EBA4(gobj);
     fp->accessory4_cb = fn_80122D2C;
 }
