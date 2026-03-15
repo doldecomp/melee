@@ -157,13 +157,7 @@ typedef struct tyDispData {
     HSD_Text* x150;
 } tyDispData;
 
-typedef struct un_804A2AA8_t {
-    /* 0x00 */ u8 pad[0x4];
-    /* 0x04 */ HSD_JObj* x4;
-    /* 0x08 */ HSD_JObj* x8;
-    /* 0x0C */ u8 padC[0x2];
-    /* 0x0E */ u8 xE;
-} un_804A2AA8_t;
+
 
 typedef struct un_804D6E68_t {
     /* 0x00 */ u8 pad[0x18];
@@ -1668,11 +1662,11 @@ HSD_JObj* un_80307BA0(HSD_JObj* parent_jobj, s16 arg1)
 {
     void* joint_data;
     HSD_JObj* jobj;
-    u8* data_ptr;
+    ToyAnimState* state;
     f32 scale_val;
     char* str = un_803FDD18;
 
-    data_ptr = un_804A2AA8;
+    state = &un_804A2AA8;
 
     if (un_804D6EC8 == NULL) {
         un_804D6EC8 =
@@ -1688,24 +1682,24 @@ HSD_JObj* un_80307BA0(HSD_JObj* parent_jobj, s16 arg1)
         s8 tmp;
         s32 idx;
         s32 offset;
-        if (*(HSD_JObj**) (data_ptr + 0x4) != NULL) {
+        if (state->jobj[0] != NULL) {
             idx = 1;
         } else {
             idx = 0;
         }
-        *(s8*) (data_ptr + 0xE) = (s8) idx;
-        tmp = data_ptr[0xE];
+        state->x0E = (s8) idx;
+        tmp = state->x0E;
         offset = tmp;
         offset *= 4;
         offset += 4;
-        *(HSD_JObj**) (data_ptr + offset) = jobj;
+        *(HSD_JObj**) ((u8*) state + offset) = jobj;
     }
 
     HSD_JObjAddTranslationY(jobj, 0.25F);
 
-    *(u8*) (data_ptr + 0x11) = 2;
-    *(u8*) (data_ptr + 0x10) = 2;
-    *(u8*) (data_ptr + 0xF) = 0;
+    state->x11 = 2;
+    state->x10 = 2;
+    state->x0F = 0;
 
     un_80307F64(2, 0);
 
@@ -2045,10 +2039,10 @@ void un_80308DC8(HSD_CObj* cobj)
     Vec3 interest;
     Vec3 eye_pos;
     un_804D6E68_t* temp_r30;
-    un_804A2AA8_t* temp_r31;
+    ToyAnimState* temp_r31;
     f32 temp_f1;
 
-    temp_r31 = (un_804A2AA8_t*) un_804A2AA8;
+    temp_r31 = &un_804A2AA8;
     temp_r30 = (un_804D6E68_t*) un_804D6E68;
 
     HSD_CObjGetInterest(cobj, &interest);
@@ -2067,18 +2061,18 @@ void un_80308DC8(HSD_CObj* cobj)
 
     if (temp_r30->x18 < 10.0F) {
         if (eye_pos.y < 0.0F) {
-            temp_r31->xE = 1;
-            HSD_JObjClearFlagsAll(temp_r31->x8, 0x10);
-            HSD_JObjSetFlagsAll(temp_r31->x4, 0x10);
+            temp_r31->x0E = 1;
+            HSD_JObjClearFlagsAll(temp_r31->jobj[1], 0x10);
+            HSD_JObjSetFlagsAll(temp_r31->jobj[0], 0x10);
         } else {
-            temp_r31->xE = 0;
-            HSD_JObjClearFlagsAll(temp_r31->x4, 0x10);
-            HSD_JObjSetFlagsAll(temp_r31->x8, 0x10);
+            temp_r31->x0E = 0;
+            HSD_JObjClearFlagsAll(temp_r31->jobj[0], 0x10);
+            HSD_JObjSetFlagsAll(temp_r31->jobj[1], 0x10);
         }
     } else {
-        temp_r31->xE = 1;
-        HSD_JObjClearFlagsAll(temp_r31->x8, 0x10);
-        HSD_JObjSetFlagsAll(temp_r31->x4, 0x10);
+        temp_r31->x0E = 1;
+        HSD_JObjClearFlagsAll(temp_r31->jobj[1], 0x10);
+        HSD_JObjSetFlagsAll(temp_r31->jobj[0], 0x10);
     }
 }
 
