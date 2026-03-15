@@ -10,6 +10,7 @@
 /* 122F28 */ void ftNn_Init_OnDeath(Fighter_GObj* gobj);
 /* 122FAC */ void ftNn_Init_80122FAC(Fighter_GObj* gobj);
 /* 122FCC */ void ftNn_Init_LoadSpecialAttrs(Fighter_GObj* gobj);
+/* 12309C */ bool ftNn_Init_8012309C(Fighter_GObj* gobj);
 /* 123348 */ void ftPp_SpecialHi_0_Anim(Fighter_GObj* gobj);
 /* 123384 */ void ftPp_SpecialHi_3_Anim(Fighter_GObj* gobj);
 /* 123388 */ void ftPp_SpecialHi_0_IASA(Fighter_GObj* gobj);
