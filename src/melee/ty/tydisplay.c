@@ -12,18 +12,20 @@
 
 #include <baselib/archive.h>
 #include <baselib/debug.h>
+#include <baselib/fog.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjobject.h>
 #include <baselib/gobjplink.h>
 #include <baselib/jobj.h>
+#include <baselib/lobj.h>
 #include <baselib/random.h>
 
 #include <dolphin/os.h>
 
 #include "lb/lb_00F9.h"
 
-extern char un_804D5AC0[];
+extern char un_804D5AC0[2];
 extern DevText* un_804D6F24;
 extern s32 un_804A2DE8[];
 extern char un_804A2D98[0x38];
@@ -38,6 +40,7 @@ typedef struct TyDspBgData {
 } TyDspBgData;
 
 extern TyDspBgData* un_804D6F1C;
+extern s32 un_804D6F20;
 
 /// #un_803181BC
 
@@ -81,7 +84,6 @@ void un_8031B1FC(void)
     HSD_Joint* joint;
     HSD_JObj* jobj;
 
-    PAD_STACK(24);
 
     if (ptr->archive == NULL) {
         OSReport("*** BG data aren't being loaded!\n");
@@ -117,6 +119,55 @@ void un_8031B1FC(void)
 }
 
 /// #un_8031B328
+
+static s32 un_804DE018 = (s32) 0xC8C8C8FF;
+
+void un_8031B328(void)
+{
+    TyDspBgData* ptr = un_804D6F1C;
+    u8* scene = un_804D6ED4;
+    HSD_LObj* lobj;
+    void* lightData;
+    HSD_FogDesc* fogDesc;
+
+    PAD_STACK(24);
+
+
+
+
+
+
+    if (ptr->archive == NULL) {
+        OSReport("*** BG data aren't being loaded!\n");
+        OSPanic("tydisplay.c", 0x459, un_804D5AC0);
+    }
+
+    lightData = HSD_ArchiveGetPublicAddress(ptr->archive,
+                                            "ScMenDisplay_scene_lights");
+    if (lightData != NULL) {
+        *(HSD_GObj**)(scene + 0x00) = GObj_Create(2, 3, 0);
+        lobj = un_80306EEC(lightData, 0);
+        HSD_GObjObject_80390A70(*(HSD_GObj**)(scene + 0x00),
+                                HSD_GObj_804D784A, lobj);
+        GObj_SetupGXLink(*(HSD_GObj**)(scene + 0x00),
+                         HSD_GObj_LObjCallback, 0x34, 0);
+    }
+
+    if (un_804D6F20 != 0) {
+        HSD_LObjSetColor(lobj, *(GXColor*) &un_804DE018);
+    }
+
+    fogDesc = HSD_ArchiveGetPublicAddress(ptr->archive,
+                                          "ScMenDisplay_fog");
+    if (fogDesc != NULL) {
+        *(HSD_GObj**)(scene + 0x08) = GObj_Create(3, 4, 0);
+        HSD_GObjObject_80390A70(*(HSD_GObj**)(scene + 0x08),
+                                HSD_GObj_804D7848,
+                                HSD_FogLoadDesc(fogDesc));
+        GObj_SetupGXLink(*(HSD_GObj**)(scene + 0x08),
+                         un_80306930, 0x35, 0);
+    }
+}
 
 /// #un_8031B460_OnEnter
 
@@ -359,7 +410,6 @@ s32 un_8031C354(s32 id, s32 (*buf)[], s32 max, s32 kind)
     s32 count;
     s32 val;
 
-    PAD_STACK(8);
 
     if (id == -1) {
         return 0;

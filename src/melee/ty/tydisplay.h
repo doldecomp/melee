@@ -15,7 +15,7 @@
 /* 31A4EC */ UNK_RET fn_8031A4EC(UNK_PARAMS);
 /* 31A94C */ UNK_RET fn_8031A94C(UNK_PARAMS);
 /* 31B1FC */ void un_8031B1FC(void);
-/* 31B328 */ UNK_RET un_8031B328(UNK_PARAMS);
+/* 31B328 */ void un_8031B328(void);
 /* 31B460 */ void un_8031B460_OnEnter(UNK_T);
 /* 31B850 */ UNK_RET un_8031B850(UNK_PARAMS);
 /* 31B9A4 */ void un_8031B9A4_OnFrame(void);
