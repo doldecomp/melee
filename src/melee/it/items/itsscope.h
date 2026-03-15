@@ -14,10 +14,10 @@
 /* 291C98 */ void itSScope_Logic21_Spawned(Item_GObj*);
 /* 291CCC */ itSScopeAttributes* it_80291CCC(Item_GObj* gobj, Vec3* pos);
 /* 291CF4 */ s32 it_80291CF4(Item_GObj*, s32);
-/* 291D38 */ UNK_RET it_80291D38(UNK_PARAMS);
+/* 291D38 */ int it_80291D38(Item_GObj*, int);
 /* 291DAC */ int it_80291DAC(Item_GObj*, int);
-/* 291F14 */ UNK_RET it_80291F14(UNK_PARAMS);
-/* 291FA8 */ UNK_RET it_80291FA8(UNK_PARAMS);
+/* 291F14 */ void it_80291F14(Item_GObj*, int);
+/* 291FA8 */ void it_80291FA8(Item_GObj*, Vec3*, int, float);
 /* 292030 */ void it_80292030(Item_GObj* gobj);
 /* 292080 */ bool itSscope_UnkMotion0_Anim(Item_GObj* gobj);
 /* 292088 */ void itSscope_UnkMotion0_Phys(Item_GObj* gobj);
