@@ -94,11 +94,7 @@ typedef struct {
     /* 0x0C */ u32 xC;
 } TyFiguponED4;
 
-typedef struct {
-    /* 0x00 */ u32 x0;
-    /* 0x04 */ HSD_JObj* x4;
-    /* 0x08 */ HSD_JObj* x8;
-} TyFiguponAA8;
+
 
 void tyFigupon_80314AA8(HSD_JObj* jobj, char* anim_str, char* matanim_str,
                         char* shapeanim_str)
@@ -304,7 +300,7 @@ void fn_803155C8(void)
 {
     // TODO: One more regswap for 100%
     s32 new_var;
-    TyFiguponAA8* aa8 = (TyFiguponAA8*) un_804A2AA8;
+    ToyAnimState* aa8 = &un_804A2AA8;
     struct un_804D6EF4_t* ef4 = un_804D6EF4;
     TyFiguponData* data = un_804D6EF0;
     HSD_JObj* jobj = GET_JOBJ((HSD_GObj*) ef4->x08);
@@ -436,11 +432,11 @@ void fn_803155C8(void)
                 lbArchive_80016EFC(((HSD_Archive**) un_804D6EF8)[5]);
                 ((HSD_Archive**) un_804D6EF8)[5] = NULL;
             }
-            if (aa8->x0 != 0) {
-                HSD_GObjPLink_80390228((HSD_GObj*) aa8->x0);
-                aa8->x0 = 0;
-                aa8->x8 = 0;
-                aa8->x4 = 0;
+            if (aa8->gobj != NULL) {
+                HSD_GObjPLink_80390228(aa8->gobj);
+                aa8->gobj = NULL;
+                aa8->jobj[1] = NULL;
+                aa8->jobj[0] = NULL;
             }
             HSD_SisLib_803A6368(data->x14, 0);
             un_803083D8(ef4->jobjs[0xC], 0x3E7);
@@ -628,13 +624,13 @@ void fn_80315C44(HSD_GObj* arg0)
 void fn_80316170(HSD_GObj* arg0)
 {
     // Somehow get rid of 0x8 stackspace and fix a regswap for 100%
-    s16* arr = un_804A2AA8;
+    ToyAnimState* aa8 = &un_804A2AA8;
     f32 y = HSD_JObjGetTranslationY(GET_JOBJ(arg0));
     TyFiguponUD* ud = HSD_GObjGetUserData(arg0);
 
     if (ud != NULL) {
         if (y + ud->x44 <= -6.2f) {
-            if (un_803048C0(arr[6]) == 1) {
+            if (un_803048C0(aa8->xC) == 1) {
                 un_80306D14();
             }
             ((TyModeState*) un_804A284C)->x0 = 1;
@@ -690,7 +686,7 @@ void un_80316420(s16 arg0)
 {
     struct un_804D6EF4_t* ef4 = un_804D6EF4;
     TyFiguponData* data = un_804D6EF0;
-    TyFiguponAA8* aa8 = (TyFiguponAA8*) un_804A2AA8;
+    ToyAnimState* aa8 = &un_804A2AA8;
     s32 temp_r31;
     HSD_GObj* gobj;
     HSD_JObj* jobj;
@@ -701,8 +697,8 @@ void un_80316420(s16 arg0)
     temp_r31 = un_803048C0(arg0);
     un_80308250(un_804D6EF8, arg0, 0);
     gobj = un_803087F4(un_804D6EF8);
-    HSD_JObjClearFlagsAll(aa8->x4, 0x10);
-    HSD_JObjSetFlagsAll(aa8->x8, 0x10);
+    HSD_JObjClearFlagsAll(aa8->jobj[0], 0x10);
+    HSD_JObjSetFlagsAll(aa8->jobj[1], 0x10);
     jobj = HSD_GObjGetHSDObj(gobj);
     HSD_JObjSetTranslateX(jobj, -1.8f);
     HSD_JObjSetTranslateY(jobj, 18.6f);
@@ -737,7 +733,7 @@ static const Vec3 un_803B8968 = { 0.0f, 1.0f, 0.0f };
 
 void fn_803168DC(HSD_GObj* arg0)
 {
-    TyFiguponAA8* data = (TyFiguponAA8*) un_804A2AA8;
+    ToyAnimState* data = &un_804A2AA8;
     HSD_CObj* cobj = arg0->hsd_obj;
     Vec3 interest;
     Vec3 eye_pos;
@@ -801,15 +797,15 @@ void fn_803168DC(HSD_GObj* arg0)
     PSVECSubtract(&interest, &eye_vec, &eye_pos);
     HSD_CObjSetEyePosition(cobj, &eye_pos);
 
-    if (data->x0 != 0) {
+    if (data->gobj != NULL) {
         if (rot_y > 10.0f) {
-            HSD_JObjClearFlagsAll(data->x4, 0x10);
-            HSD_JObjSetFlagsAll(data->x8, 0x10);
+            HSD_JObjClearFlagsAll(data->jobj[0], 0x10);
+            HSD_JObjSetFlagsAll(data->jobj[1], 0x10);
             return;
         }
         if (rot_y < -10.0f) {
-            HSD_JObjClearFlagsAll(data->x8, 0x10);
-            HSD_JObjSetFlagsAll(data->x4, 0x10);
+            HSD_JObjClearFlagsAll(data->jobj[1], 0x10);
+            HSD_JObjSetFlagsAll(data->jobj[0], 0x10);
         }
     }
 }

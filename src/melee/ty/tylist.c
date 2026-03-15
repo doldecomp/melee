@@ -153,7 +153,7 @@ void un_803127D4(void)
     un_804D6EA8 = NULL;
     un_804D6EA4 = NULL;
     un_804D6EC8 = NULL;
-    memzero(un_804A2AA8, 0x14);
+    memzero(&un_804A2AA8, sizeof(ToyAnimState));
 }
 
 /// Formats a number into a string buffer using digit glyphs from the font.

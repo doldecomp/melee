@@ -22,15 +22,16 @@ typedef struct TyModeState {
     u16 xA;
 } TyModeState;
 
-/* Located at un_804A26B8 + 0x3F0 */
+/* Located at un_804A26B8 + 0x3F0, size 0x14 */
 typedef struct ToyAnimState {
     /* 0x00 */ struct HSD_GObj* gobj;
     /* 0x04 */ struct HSD_JObj* jobj[2];
-    /* 0x0C */ u8 padC[2];
+    /* 0x0C */ s16 xC;
     /* 0x0E */ s8 x0E;
     /* 0x0F */ s8 x0F;
     /* 0x10 */ s8 x10;
     /* 0x11 */ s8 x11;
+    /* 0x12 */ u8 pad_12[2];
 } ToyAnimState;
 
 /* Used by un_803109A0 for table lookup */
