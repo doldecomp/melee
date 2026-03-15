@@ -30,7 +30,8 @@
 /* 1E3D98 */ bool grOnett_801E3D98(Ground_GObj*);
 /* 1E3DA0 */ void grOnett_801E3DA0(Ground_GObj*);
 /* 1E40E0 */ void grOnett_801E40E0(Ground_GObj*);
-/* 1E40E4 */ UNK_RET grOnett_801E40E4(UNK_PARAMS);
+/* 1E40E4 */ void grOnett_801E40E4(Ground*, s32, CollData*, s32,
+                                   mpLib_GroundEnum, f32);
 /* 1E41B0 */ void grOnett_801E41B0(HSD_GObj*);
 /* 1E41C8 */ void grOnett_801E41C8(Ground_GObj*);
 /* 1E43D8 */ bool grOnett_801E43D8(Ground_GObj*);
