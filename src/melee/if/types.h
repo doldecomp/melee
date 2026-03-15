@@ -163,7 +163,8 @@ struct un_804D6EF4_t {
     /* +0x50 */ HSD_Archive* archive;
     /* +0x54 */ short x54;
     /* +0x56 */ short x56;
-    /* +0x58 */ char pad_58[6];
+    /* +0x58 */ short x58;
+    /* +0x5A */ char pad_5A[4];
     /* +0x5E */ s8 x5E;
 };
 

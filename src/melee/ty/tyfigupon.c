@@ -9,7 +9,9 @@
 #include "if/types.h"
 #include "gm/gm_1601.h"
 #include "lb/lbaudio_ax.h"
+#include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
+#include "lb/lbarchive.h"
 #include "lb/lblanguage.h"
 #include "lb/lbvector.h"
 
@@ -25,11 +27,13 @@
 #include <baselib/gobjproc.h>
 #include <baselib/gobjuserdata.h>
 #include <baselib/jobj.h>
+#include <baselib/lobj.h>
 #include <baselib/memory.h>
 #include <baselib/random.h>
 #include <baselib/sislib.h>
 
 #include <dolphin/mtx.h>
+#include <dolphin/os.h>
 
 extern void* un_804D6EF0;
 extern HSD_CObjDesc* un_804D6F04;
@@ -38,6 +42,7 @@ extern s32 un_804D6EFC;
 extern s32 un_804D6F00;
 extern char un_803FE5E8[];
 extern u8 un_803FEA10[];
+extern void* un_804D6EF8;
 
 typedef struct {
     /* 0x00 */ HSD_GObj* x0;
@@ -107,6 +112,7 @@ void tyFigupon_80314AA8(HSD_JObj* jobj, char* anim_str, char* matanim_str,
     HSD_JObjReqAnimAll(jobj, 0.0f);
 }
 
+#pragma dont_inline on
 s32 un_80314B54(void)
 {
     s32 i;
@@ -124,6 +130,7 @@ s32 un_80314B54(void)
     }
     return count;
 }
+#pragma dont_inline reset
 
 void tyFigupon_80314BE4(HSD_GObj* gobj, int unused)
 {
@@ -540,6 +547,124 @@ void un_80317A60(void)
 }
 
 /// #un_80317D80_OnEnter
+void un_80317D80_OnEnter(void* arg0)
+{
+    u8* fea10 = un_803FEA10;
+    TyFiguponData* data;
+    struct un_804D6EF4_t* ef4;
+    void* ed4;
+    HSD_Joint* joint;
+    HSD_JObj* jobj;
+    void* ud;
+    s32 total_b54;
+    s32 var_r28;
+    s32 i;
+    s8 x5E;
+    s16 x54;
+    f32 total;
+    f32 pct;
+    char* archive_name;
+    void* sp20;
+    PAD_STACK(24);
+
+    un_804D6EF0 = HSD_MemAlloc(0x34);
+    un_804D6EF4 = HSD_MemAlloc(0x60);
+    un_804D6EF8 = HSD_MemAlloc(0x18);
+    un_804D6ED4 = HSD_MemAlloc(0xE4);
+    memzero(un_804D6EF0, 0x34);
+    memzero(un_804D6EF4, 0x60);
+    memzero(un_804D6EF8, 0x18);
+    memzero(un_804D6ED4, 0xE4);
+    data = un_804D6EF0;
+    un_804D6EC8 = NULL;
+    ef4 = un_804D6EF4;
+    un_8031263C();
+    un_80305918(3, 0, 1);
+    *(u8*) un_804A284C = 1;
+    if (lbLang_IsSavedLanguageJP() != 0) {
+        archive_name = (char*)(fea10 + 0x38);
+    } else {
+        archive_name = (char*)(fea10 + 0x48);
+    }
+    ef4->archive = lbArchive_LoadSymbols(archive_name, &sp20, fea10, 0);
+    ef4->x58 = 0;
+    un_80317A60();
+    ef4 = un_804D6EF4;
+    ed4 = un_804D6ED4;
+    if (ef4->archive == NULL) {
+        OSReport((char*)(fea10 + 0x194));
+        OSPanic((char*)(fea10 + 0x120), 0x627, "");
+    }
+    {
+        void* temp = HSD_ArchiveGetPublicAddress(ef4->archive, (char*)(fea10 + 0x4A8));
+        if (temp != NULL) {
+            *(HSD_GObj**)ed4 = GObj_Create(2, 3, 0);
+            HSD_GObjObject_80390A70(*(HSD_GObj**)ed4, HSD_GObj_804D784A,
+                                     un_80306EEC(temp, 0));
+            GObj_SetupGXLink(*(HSD_GObj**)ed4, HSD_GObj_LObjCallback, 0x34, 0);
+        }
+    }
+    memzero(un_804D6ED4, 0xE4);
+    un_80306D70(0);
+    un_8031753C();
+    joint = HSD_ArchiveGetPublicAddress(ef4->archive, (char*)(fea10 + 0x558));
+    data->x8 = GObj_Create(0xA, 0xA, 0);
+    jobj = HSD_JObjLoadJoint(joint);
+    HSD_GObjObject_80390A70(data->x8, HSD_GObj_804D7849, jobj);
+    tyFigupon_80314AA8(jobj, (char*)(fea10 + 0x574), (char*)(fea10 + 0x594),
+                        (char*)(fea10 + 0x5B8));
+    HSD_JObjReqAnimAll(jobj, 0.0f);
+    HSD_JObjAnimAll(jobj);
+    HSD_JObjAddTranslationZ(jobj, 0.5f);
+    ud = HSD_MemAlloc(0x58);
+    if (ud != NULL) {
+        GObj_InitUserData(data->x8, 0, Toy_RemoveUserData, ud);
+    }
+    GObj_SetupGXLink(data->x8, HSD_GObj_JObjCallback, 0x3D, 0);
+    HSD_JObjSetFlagsAll(jobj, 0x10);
+    {
+        s8 var_r0;
+        if (((u32) gm_801623D8() / 10u) != 0) {
+            var_r0 = 1;
+        } else {
+            var_r0 = 0;
+        }
+        ef4->x5E = var_r0;
+    }
+    un_803153EC((s8) ef4->x5E, 6, 2, 0);
+    var_r28 = 0;
+    total_b54 = un_80314B54();
+    i = 0;
+    do {
+        if (i != 8 && (u32) i > 1U && un_80304B0C(i) != 0) {
+            var_r28 += un_80304B94(i);
+        }
+        i += 1;
+    } while (i < 9);
+    ef4->x54 = var_r28 - total_b54;
+    ef4 = un_804D6EF4;
+    x5E = (s8) ef4->x5E;
+    {
+        s32 b54 = un_80314B54();
+        x54 = ef4->x54;
+        total = (f32)(x54 + b54);
+    }
+    if (x5E != 0) {
+        x5E -= 1;
+    }
+    if (x54 == 0) {
+        pct = 0.0f;
+    } else {
+        pct = ((f32) x54 / total) + ((f32)(x5E * 5) / 100.0f);
+    }
+    if (pct >= 1.0f) {
+        pct = 999.0f;
+    } else {
+        pct = pct * 1000.0f;
+    }
+    un_803153EC((s32) pct, 9, 3, 2);
+    HSD_PadRenewStatus();
+}
 
 s32 un_803181BC(void)
 {
