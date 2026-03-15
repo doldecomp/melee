@@ -585,7 +585,26 @@ int gm_80188454(int idx)
     return lbl_80473700[idx + 2];
 }
 
-/// #fn_8018846C
+int fn_8018846C(void)
+{
+    int result;
+    int* ptr = lbl_80473700;
+    int* p;
+
+    result = pl_8004134C(0);
+    p = ptr + Player_GetPlayerCharacter(0) + 2;
+    if (*p < result) {
+        *p = result;
+    }
+    if (result != 0) {
+        ptr[67] = result;
+        ptr[68] = 1;
+    }
+    if (ptr[68] != 0) {
+        return ptr[67];
+    }
+    return result;
+}
 
 int fn_801884F8(void)
 {
