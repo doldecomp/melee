@@ -5,10 +5,12 @@
 #include <platform.h>
 
 #include "cm/camera.h"
+#include "ef/efsync.h"
 #include "ft/ftdevice.h"
 #include "ft/ftlib.h"
 #include "gr/grdisplay.h"
 #include "gr/grlib.h"
+#include "gr/grmaterial.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
 #include "lb/lb_00B0.h"
@@ -16,6 +18,7 @@
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
+#include <baselib/jobj.h>
 #include <baselib/psstructs.h>
 #include <baselib/random.h>
 
@@ -179,11 +182,53 @@ bool grKinokoRoute_80208480(bool arg)
     return 0;
 }
 
-/// #grKinokoRoute_802084B4
+void grKinokoRoute_802084B4(HSD_GObj* gobj)
+{
+    HSD_GObj* gobj2;
+    Vec3 sp_vec;
+    struct {
+        char pad[0xDD8];
+        HSD_JObj* jobj;
+    }* gp = gobj->user_data;
+
+    HSD_JObjSetFlagsAll(gp->jobj, 0x10);
+
+    gobj2 = Ground_801C2BA4(3);
+    if (gobj2 != NULL) {
+        void* gp2 = gobj2->user_data;
+        if (gp2 != NULL) {
+            ((UnkFlagStruct*) ((u8*) gp2 + 0xC4))->b0 = 1;
+        }
+    }
+
+    lb_8000B1CC(gp->jobj, NULL, &sp_vec);
+    efSync_Spawn(0x442, gobj, &sp_vec);
+    Camera_80030E44(2, NULL);
+    Ground_801C5414(0x136, 0xBA);
+    grMaterial_801C8CDC(gobj);
+    PAD_STACK(20);
+}
 
 /// #grKinokoRoute_80208564
 
-/// #grKinokoRoute_80208660
+bool grKinokoRoute_80208660(s32 arg0, HSD_GObj* gobj)
+{
+    Vec3 pos;
+    Vec3 vel;
+
+    ftLib_80086644(gobj, &pos);
+    ftLib_80086684(gobj, &vel);
+
+    if (pos.y < 5.5F && vel.y > 5.5F) {
+        f32 scale = ftLib_80086B80(gobj) / 10.0F;
+        pos.y = 5.5F;
+        grKinokoRoute_802086EC(&pos, scale);
+        Ground_801C53EC(0x77A10);
+    }
+
+    PAD_STACK(8);
+    return false;
+}
 
 void grKinokoRoute_802086EC(Vec3* arg0, f32 arg8)
 {
