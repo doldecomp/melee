@@ -9,9 +9,11 @@
 #include "if/types.h"
 #include "gm/gm_1601.h"
 #include "lb/lbaudio_ax.h"
+#include "lb/lbvector.h"
 
 #include <baselib/archive.h>
 #include <baselib/cobj.h>
+#include <baselib/controller.h>
 #include <baselib/displayfunc.h>
 #include <baselib/fog.h>
 #include <baselib/gobj.h>
@@ -22,7 +24,10 @@
 #include <baselib/memory.h>
 #include <baselib/random.h>
 
+#include <dolphin/mtx.h>
+
 extern void* un_804D6EF0;
+extern HSD_CObjDesc* un_804D6F04;
 
 typedef struct {
     /* 0x00 */ HSD_GObj* x0;
@@ -56,6 +61,12 @@ typedef struct {
     /* 0x08 */ u8 pad_08[0x4];
     /* 0x0C */ u32 xC;
 } TyFiguponED4;
+
+typedef struct {
+    /* 0x00 */ u32 x0;
+    /* 0x04 */ HSD_JObj* x4;
+    /* 0x08 */ HSD_JObj* x8;
+} TyFiguponAA8;
 
 void tyFigupon_80314AA8(HSD_JObj* jobj, char* anim_str, char* matanim_str,
                         char* shapeanim_str)
@@ -337,6 +348,91 @@ s32 fn_8031638C(s16 arg0)
 /// #un_80316420
 
 /// #fn_803168DC
+static const Vec3 un_803B8968 = { 0.0f, 1.0f, 0.0f };
+
+void fn_803168DC(HSD_GObj* arg0)
+{
+    TyFiguponAA8* data = (TyFiguponAA8*) un_804A2AA8;
+    HSD_CObj* cobj = arg0->hsd_obj;
+    Vec3 interest;
+    Vec3 eye_pos;
+    Vec3 up_copy;
+    Vec3 eye_vec;
+    Vec3 cross;
+    Mtx mtx;
+    f32 cx;
+    f32 cy;
+    f32 rot_x;
+    f32 rot_y;
+    f32 dead;
+
+    cx = HSD_PadCopyStatus[0].nml_subStickX;
+    cy = HSD_PadCopyStatus[0].nml_subStickY;
+    if (-0.4f < cx && cx < 0.4f && -0.4f < cy && cy < 0.4f) {
+        cx = HSD_PadCopyStatus[1].nml_subStickX;
+        cy = HSD_PadCopyStatus[1].nml_subStickY;
+        if (-0.4f < cx && cx < 0.4f && -0.4f < cy && cy < 0.4f) {
+            cx = HSD_PadCopyStatus[2].nml_subStickX;
+            cy = HSD_PadCopyStatus[2].nml_subStickY;
+            if (-0.4f < cx && cx < 0.4f && -0.4f < cy && cy < 0.4f) {
+                cx = HSD_PadCopyStatus[3].nml_subStickX;
+                cy = HSD_PadCopyStatus[3].nml_subStickY;
+            }
+        }
+    }
+
+    if (-0.4f < cx && cx < 0.4f && -0.4f < cy && cy < 0.4f) {
+        rot_y = 0.0f;
+        rot_x = 0.0f;
+    } else {
+        if (-0.4f < cx && cx < 0.4f) {
+            rot_x = 0.0f;
+        } else {
+            if (cx < 0.0f) {
+                dead = -0.4f;
+            } else {
+                dead = 0.4f;
+            }
+            rot_x = 30.0f * ((cx - dead) / 0.6f);
+        }
+        if (-0.4f < cy && cy < 0.4f) {
+            rot_y = 0.0f;
+        } else {
+            if (cy < 0.0f) {
+                dead = -0.4f;
+            } else {
+                dead = 0.4f;
+            }
+            rot_y = 30.0f * ((cy - dead) / 0.6f);
+        }
+    }
+
+    HSD_CObjInit(cobj, un_804D6F04);
+    up_copy = un_803B8968;
+    HSD_CObjGetEyeVector(cobj, &eye_vec);
+    HSD_CObjGetInterest(cobj, &interest);
+    PSVECCrossProduct(&up_copy, &eye_vec, &cross);
+    lbVector_Normalize(&cross);
+    PSMTXRotAxisRad(mtx, &cross, 0.017453292f * rot_y);
+    PSMTXMultVec(mtx, &eye_vec, &eye_vec);
+    PSMTXRotAxisRad(mtx, &up_copy, 0.017453292f * rot_x);
+    PSMTXMultVec(mtx, &eye_vec, &eye_vec);
+    PSVECScale(&eye_vec, &eye_vec, HSD_CObjGetEyeDistance(cobj));
+    PSVECSubtract(&interest, &eye_vec, &eye_pos);
+    HSD_CObjSetEyePosition(cobj, &eye_pos);
+
+    if (data->x0 != 0) {
+        if (rot_y > 10.0f) {
+            HSD_JObjClearFlagsAll(data->x4, 0x10);
+            HSD_JObjSetFlagsAll(data->x8, 0x10);
+            return;
+        }
+        if (rot_y < -10.0f) {
+            HSD_JObjClearFlagsAll(data->x8, 0x10);
+            HSD_JObjSetFlagsAll(data->x4, 0x10);
+        }
+    }
+}
 
 void tyFigupon_80316BF8(void)
 {
