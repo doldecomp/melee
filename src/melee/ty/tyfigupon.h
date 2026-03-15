@@ -16,7 +16,7 @@
 /* 315C44 */ UNK_RET fn_80315C44(UNK_PARAMS);
 /* 316170 */ void fn_80316170(HSD_GObj*);
 /* 31638C */ s32 fn_8031638C(s16);
-/* 316420 */ UNK_RET un_80316420(UNK_PARAMS);
+/* 316420 */ void un_80316420(s16);
 /* 3168DC */ void fn_803168DC(HSD_GObj*);
 /* 316BF8 */ void tyFigupon_80316BF8(void);
 /* 316C24 */ UNK_RET fn_80316C24(UNK_PARAMS);

@@ -363,6 +363,53 @@ s32 fn_8031638C(s16 arg0)
 }
 
 /// #un_80316420
+void un_80316420(s16 arg0)
+{
+    struct un_804D6EF4_t* ef4 = un_804D6EF4;
+    TyFiguponData* data = un_804D6EF0;
+    TyFiguponAA8* aa8 = (TyFiguponAA8*) un_804A2AA8;
+    s32 temp_r31;
+    HSD_GObj* gobj;
+    HSD_JObj* jobj;
+    f32 angle;
+
+    PAD_STACK(32);
+
+    temp_r31 = un_803048C0(arg0);
+    un_80308250(un_804D6EF8, arg0, 0);
+    gobj = un_803087F4(un_804D6EF8);
+    HSD_JObjClearFlagsAll(aa8->x4, 0x10);
+    HSD_JObjSetFlagsAll(aa8->x8, 0x10);
+    jobj = GET_JOBJ(gobj);
+    HSD_JObjSetTranslateX(jobj, -1.8f);
+    HSD_JObjSetTranslateY(jobj, 18.6f);
+    HSD_JObjSetTranslateZ(jobj, 12.0f);
+    HSD_JObjSetScaleX(jobj, 0.79f);
+    HSD_JObjSetScaleY(jobj, 0.79f);
+    HSD_JObjSetScaleZ(jobj, 0.79f);
+    angle = 30.0f * (2.0f * (HSD_Randf() - 0.5f));
+    HSD_JObjSetRotationY(jobj, 0.017453292f * angle);
+    HSD_GObjProc_8038FD54(gobj, fn_80316170, 0);
+    HSD_GObj_80390CD4(gobj);
+    if (temp_r31 == 0) {
+        un_80306B18(data->x8, 0, 0x48, 1);
+        HSD_GObj_80390CD4(data->x8);
+    }
+    Trophy_SetUnlockState(arg0, 1);
+    un_8031234C(1);
+    lb_8001CE00();
+    un_80308328(arg0);
+    HSD_SisLib_803A6368(data->x14, temp_r31);
+    un_803083D8(ef4->jobjs[0xC], arg0);
+    if (((TyModeState*) un_804A284C)->x0 == 2) {
+        if ((u32) data->x10 == 0) {
+            data->x10 = (s32) HSD_GObjProc_8038FD54(data->x0,
+                (void (*)(HSD_GObj*)) fn_80315574, 0);
+        }
+        data->x24 = 0x12C;
+        ((TyFiguponData*) un_804D6EF0)->x18->hidden = 0;
+    }
+}
 
 /// #fn_803168DC
 static const Vec3 un_803B8968 = { 0.0f, 1.0f, 0.0f };

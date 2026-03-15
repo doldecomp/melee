@@ -58,7 +58,7 @@
 /* 308354 */ s16 un_80308354(s16 idx);
 /* 3083D8 */ void un_803083D8(HSD_JObj* jobj, s32 arg1);
 /* 3084A0 */ void un_803084A0(s16 arg0);
-/* 3087F4 */ void un_803087F4(void*);
+/* 3087F4 */ HSD_GObj* un_803087F4(void*);
 /* 308DC8 */ void un_80308DC8(HSD_CObj*);
 /* 308F04 */ void un_80308F04(HSD_CObj*);
 /* 309338 */ f32 un_80309338(Vec3* arg0, Vec3* arg1);
