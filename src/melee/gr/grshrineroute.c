@@ -8,12 +8,14 @@
 #include "baselib/forward.h"
 
 #include "baselib/jobj.h"
+#include "ft/ftlib.h"
 #include "gr/grdisplay.h"
 #include "gr/grmaterial.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
 #include "lb/lb_00B0.h"
 #include "mp/mplib.h"
+#include "pl/player.h"
 
 #include <baselib/debug.h>
 #include <baselib/gobj.h>
@@ -332,7 +334,28 @@ bool grShrineRoute_8020AD24(bool arg)
     return 0;
 }
 
-/// #grShrineRoute_8020AD58
+void grShrineRoute_8020AD58(Ground* gp, int r4, CollData* r5, int r6, int r7)
+{
+    HSD_GObj* pgobj;
+    u32 slot;
+    PAD_STACK(0x10);
+
+    if ((int) r5->x34_flags.b1234 == 1 && r7 == 2) {
+        slot = ftLib_80086BE0(r5->x0_gobj);
+        if (r5->x0_gobj == Player_GetEntity(slot)) {
+            gp->gv.shrineroute.xCA = 1;
+            pgobj = Player_GetEntityAtIndex(slot, 1);
+            if (pgobj) {
+                if (!ftLib_8008731C(pgobj)) {
+                    return;
+                }
+            }
+            gp->gv.shrineroute.xCC = 1;
+            return;
+        }
+        gp->gv.shrineroute.xCC = 1;
+    }
+}
 
 /// #grShrineRoute_8020AE08
 
