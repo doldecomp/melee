@@ -752,7 +752,9 @@ struct grRCruise_GroundVars {
         u8 b6 : 1;
         u8 b7 : 1;
     } xC4;
-    /* +00 gp+C4 */ char pad_0[0x10];
+    /* +04 gp+C8 */ char pad_0[0x8];
+    /* +0C gp+D0 */ u32 x0C;
+    /* +10 gp+D4 */ u32 x10;
     /* +14 gp+D8 */ f32 x14;
     /* +18 gp+DC */ f32 x18;
     /* +1C gp+E0 */ f32 x1C;
