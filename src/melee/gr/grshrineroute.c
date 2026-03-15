@@ -79,13 +79,13 @@ StageData grSh_Route_803E5988 = {
     SHRINEROUTE,
     grSh_Route_803E58F0,
     "/GrNSr.dat",
-    grShrineRoute_802087BC,
-    grShrineRoute_802087B8,
-    grShrineRoute_8020882C,
-    grShrineRoute_80208850,
+    grShrineRoute_OnInit,
+    grShrineRoute_OnDemoInit,
+    grShrineRoute_OnLoad,
+    grShrineRoute_OnStart,
     grShrineRoute_802088B8,
-    grShrineRoute_8020B104,
-    grShrineRoute_8020B10C,
+    grShrineRoute_OnTouchLine,
+    grShrineRoute_OnCheckShadowRender,
     (1 << 0),
     NULL,
     0,
@@ -112,9 +112,9 @@ float grShrineRoute_802087B0(void)
     return grNKr_804DB868;
 }
 
-void grShrineRoute_802087B8(bool arg) {}
+void grShrineRoute_OnDemoInit(bool arg) {}
 
-void grShrineRoute_802087BC(void)
+void grShrineRoute_OnInit(void)
 {
     grSh_Route_804D6A58 = Ground_801C49F8();
     stage_info.unk8C.b4 = 0;
@@ -127,12 +127,12 @@ void grShrineRoute_802087BC(void)
     grShrineRoute_8020B0AC();
 }
 
-void grShrineRoute_8020882C(void)
+void grShrineRoute_OnLoad(void)
 {
     grShrineRoute_802088C0(6);
 }
 
-void grShrineRoute_80208850(void)
+void grShrineRoute_OnStart(void)
 {
     int val;
     grZakoGenerator_801CAE04(&grSh_Route_804D6A58->x28);
@@ -320,7 +320,7 @@ void grShrineRoute_8020A8A0(Ground_GObj* arg) {}
 
 /// #grShrineRoute_8020AC44
 
-bool fn_8020AD24(bool arg)
+bool grShrineRoute_8020AD24(bool arg)
 {
     if (arg == 1) {
         Ground_801C5740(arg);
@@ -329,9 +329,9 @@ bool fn_8020AD24(bool arg)
     return 0;
 }
 
-/// #fn_8020AD58
+/// #grShrineRoute_8020AD58
 
-/// #fn_8020AE08
+/// #grShrineRoute_8020AE08
 
 /// #grShrineRoute_8020AF38
 
@@ -346,12 +346,12 @@ void grShrineRoute_8020B0AC(void)
     }
 }
 
-DynamicsDesc* grShrineRoute_8020B104(enum_t arg)
+DynamicsDesc* grShrineRoute_OnTouchLine(enum_t arg)
 {
     return false;
 }
 
-bool grShrineRoute_8020B10C(Vec3* a, int b, HSD_JObj* jobj)
+bool grShrineRoute_OnCheckShadowRender(Vec3* a, int b, HSD_JObj* jobj)
 {
     Vec3 vec;
     lb_8000B1CC(jobj, NULL, &vec);
