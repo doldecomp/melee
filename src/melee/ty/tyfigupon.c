@@ -7,6 +7,7 @@
 
 #include "if/textlib.h"
 #include "if/types.h"
+#include "gm/gm_1601.h"
 #include "lb/lbaudio_ax.h"
 
 #include <baselib/archive.h>
@@ -44,7 +45,9 @@ typedef struct {
     /* 0x00 */ u32 x0;
     /* 0x04 */ u32 x4;
     /* 0x08 */ s32 x8;
-    /* 0x0C */ u8 pad_0C[0x4C];
+    /* 0x0C */ u8 pad_0C[0x38];
+    /* 0x44 */ f32 x44;
+    /* 0x48 */ u8 pad_48[0x10];
 } TyFiguponUD;
 
 typedef struct {
@@ -271,7 +274,35 @@ void fn_80315574(void)
 
 /// #fn_80315C44
 
-/// #fn_80316170
+void fn_80316170(HSD_GObj* arg0)
+{
+    u8* arr = un_804A2AA8;
+    f32 y = HSD_JObjGetTranslationY(GET_JOBJ(arg0));
+    TyFiguponUD* ud = HSD_GObjGetUserData(arg0);
+
+    if (ud != NULL) {
+        if (y + ud->x44 <= -6.2f) {
+            if (un_803048C0(*(s16*)(arr + 0xC)) == 1) {
+                un_80306D14();
+            }
+            ((TyModeState*) un_804A284C)->x0 = 1;
+            lbAudioAx_800237A8(0xA7, 0x7F, 0x40);
+            HSD_JObjSetTranslateY(GET_JOBJ(arg0), -7.2f);
+            gm_801678F8((s32) gm_801677F0(), 0xC, 0);
+            GObj_RemoveUserData(arg0);
+            HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
+            return;
+        }
+        ud->x44 -= 0.6f;
+        HSD_JObjAddTranslationY(GET_JOBJ(arg0), ud->x44);
+    } else {
+        TyFiguponUD* new_ud = HSD_MemAlloc(0x58);
+        if (new_ud != NULL) {
+            GObj_InitUserData(arg0, 0, Toy_RemoveUserData, new_ud);
+        }
+        new_ud->x44 = 0.0f;
+    }
+}
 
 s32 fn_8031638C(s16 arg0)
 {
