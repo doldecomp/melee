@@ -1,5 +1,7 @@
 #include "itsscope.h"
 
+#include "itsscopebeam.h"
+
 #include <placeholder.h>
 #include <platform.h>
 
@@ -68,9 +70,52 @@ s32 it_80291CF4(Item_GObj* gobj, s32 arg1)
 
 /// #it_80291DAC
 
-/// #it_80291F14
+void it_80291F14(Item_GObj* gobj, int charge_level)
+{
+    Item* ip = GET_ITEM(gobj);
+    itSScopeAttributes* attrs = GET_ATTRS(ip);
+    int cost = charge_level;
 
-/// #it_80291FA8
+    switch (charge_level) {
+    case 0:
+        cost = (int) attrs->xC[0];
+        break;
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+    case 6:
+    case 7:
+    case 8:
+        cost = (int) attrs->xC[charge_level];
+        break;
+    case 9:
+        cost = (int) attrs->xC[9];
+        break;
+    }
+
+    ip->xD4C -= cost;
+    if (ip->xD4C < 0) {
+        ip->xD4C = 0;
+    }
+
+    PAD_STACK(16);
+}
+
+void it_80291FA8(Item_GObj* gobj, Vec3* pos, int charge_level,
+                 float scale)
+{
+    Item* ip = GET_ITEM(gobj);
+    int cost = it_80291D38(gobj, charge_level);
+    ip->xD4C -= cost;
+    if (ip->xD4C < 0) {
+        ip->xD4C = 0;
+    }
+    it_80298DEC(ip->owner, pos, charge_level, scale);
+
+    PAD_STACK(8);
+}
 
 void it_80292030(Item_GObj* gobj)
 {

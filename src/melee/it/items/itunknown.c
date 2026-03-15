@@ -2,13 +2,30 @@
 
 #include "baselib/random.h"
 #include "ef/eflib.h"
+#include "gr/stage.h"
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/itCommonItems.h"
 #include "it/item.h"
 
-/// #it_802CE710
+void it_802CE710(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itUnknownAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+    it_80273318(gobj, attr->x24[HSD_Randi(26)]);
+    if (HSD_Randi(2) != 0) {
+        ip->xDD4_itemVar.unknown.x60 = 1.0F;
+    } else {
+        ip->xDD4_itemVar.unknown.x60 = -1.0F;
+    }
+    ip->xDD4_itemVar.unknown.x64 = 0;
+    ip->xDD4_itemVar.unknown.x68 = attr->x18;
+    ip->xDCC_flag.b3 = false;
+    ip->facing_dir = 0.0F;
+    it_80279CDC(gobj, attr->x0);
+    it_802CEC24(gobj);
+}
 
 void it_802CE7CC(Item_GObj* gobj) {}
 
@@ -17,7 +34,18 @@ void it_802CE7D0(Item_GObj* gobj, Item_GObj* ref_gobj)
     it_8026B894(gobj, ref_gobj);
 }
 
-/// #itUnknown_UnkMotion0_Anim
+bool itUnknown_UnkMotion0_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->pos.x > Stage_GetBlastZoneRightOffset() ||
+        ip->pos.x < Stage_GetBlastZoneLeftOffset() ||
+        ip->pos.y > Stage_GetBlastZoneTopOffset() ||
+        ip->pos.y < Stage_GetBlastZoneBottomOffset())
+    {
+        it_802CE8D0(gobj);
+    }
+    return false;
+}
 
 void itUnknown_UnkMotion0_Phys(Item_GObj* gobj)
 {

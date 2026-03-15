@@ -508,20 +508,30 @@ typedef struct itTincle_ItemVars {
     /* +20 ip+DF4 */ s32 x20;
     /* +24 ip+DF8 */ u8 pad1[0x8];
     /* +2C ip+E00 */ s32 x2C;
-    /* +30 ip+E04 */ u8 pad1b[0x8];
+    /* +30 ip+E04 */ f32 x30;
+    /* +34 ip+E08 */ u8 pad1b[0x4];
     /* +38 ip+E0C */ f32 x38;
-    /* +3C ip+E10 */ u8 pad1c[0x10];
+    /* +3C ip+E10 */ u8 pad1c[0x4];
+    /* +40 ip+E14 */ f32 x40;
+    /* +44 ip+E18 */ f32 x44;
+    /* +48 ip+E1C */ f32 x48;
     /* +4C ip+E20 */ f32 x4C;
     /* +50 ip+E24 */ f32 x50;
     /* +54 ip+E28 */ f32 x54;
     /* +58 ip+E2C */ u8 pad2[0x4];
     /* +5C ip+E30 */ f32 x5C;
+    /* +60 ip+E34 */ u8 pad3[0x8];
+    /* +68 ip+E3C */ itECB x68;
 } itTincle_ItemVars;
 
 typedef struct itTincleAttributes {
-    /* 0x00 */ u8 pad[0x44];
+    /* 0x00 */ u8 pad[0x40];
+    /* 0x40 */ s32 x40;
     /* 0x44 */ f32 x44;
     /* 0x48 */ f32 x48;
+    /* 0x4C */ u8 pad2[0x8];
+    /* 0x54 */ s8 x54;
+    /* 0x55 */ s8 x55;
 } itTincleAttributes;
 
 typedef struct itGShell_HurtInit {
@@ -1291,7 +1301,7 @@ typedef struct itSScopeAttributes {
     /* +0 */ char pad_x0[0x4];
     /* +4 */ s32 x4;
     /* +8 */ s32 x8;
-    /* +C */ char pad_xC[0x28];
+    /* +C */ float xC[10];
     /* +34 */ Vec3 x34;
 } itSScopeAttributes;
 
@@ -1389,7 +1399,9 @@ typedef struct itOldottosea_ItemVars {
 } itOldottosea_ItemVars;
 
 typedef struct itPatapata_ItemVars {
-    /* 0x00 */ u8 pad[0x20];
+    /* 0x00 */ u8 pad0[0x4];
+    /* 0x04 */ s32 x4;
+    /* 0x08 */ u8 pad[0x20 - 0x08];
     /* 0x20 */ s32 x20;
     /* 0x24 */ s32 x24;
     /* 0x28 */ s32 x28;
@@ -1397,6 +1409,7 @@ typedef struct itPatapata_ItemVars {
     /* 0x30 */ f32 x30;
     /* 0x34 */ u8 pad1[0x40 - 0x34];
     /* 0x40 */ s32 x40;
+    /* 0x44 */ s32 x44;
 } itPatapata_ItemVars;
 
 typedef struct itPatapataDatAttrs {
@@ -1415,6 +1428,8 @@ typedef struct itPatapataAttributes {
     /* 0x1C */ s32 x1C;
     /* 0x20 */ f32 x20;
     /* 0x24 */ s32 x24;
+    /* 0x28 */ s32 x28;
+    /* 0x2C */ s32 x2C;
 } itPatapataAttributes;
 
 typedef struct itOldottoseaAttributes {
@@ -1513,6 +1528,7 @@ typedef struct itUnknownAttributes {
     /* +18 */ s32 x18;
     /* +1C */ s32 x1C;
     /* +20 */ s32 x20;
+    /* +24 */ HSD_Joint* x24[26];
 } itUnknownAttributes;
 
 typedef struct itCrazyHandBombAttributes {

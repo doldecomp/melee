@@ -13,7 +13,7 @@
 /* 2CE7F0 */ bool itUnknown_UnkMotion0_Anim(Item_GObj* gobj);
 /* 2CE870 */ void itUnknown_UnkMotion0_Phys(Item_GObj* gobj);
 /* 2CE8C8 */ bool itUnknown_UnkMotion0_Coll(Item_GObj* gobj);
-/* 2CE8D0 */ UNK_RET it_802CE8D0(UNK_PARAMS);
+/* 2CE8D0 */ void it_802CE8D0(Item_GObj*);
 /* 2CEB9C */ bool itUnknown_UnkMotion1_Anim(Item_GObj* gobj);
 /* 2CEC18 */ void itUnknown_UnkMotion1_Phys(Item_GObj* gobj);
 /* 2CEC1C */ bool itUnknown_UnkMotion1_Coll(Item_GObj* gobj);
