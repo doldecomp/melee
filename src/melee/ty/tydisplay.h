@@ -14,7 +14,7 @@ struct HSD_JObj;
 /* 318CB4 */ UNK_RET un_80318CB4(UNK_PARAMS);
 /* 319540 */ void un_80319540(s32);
 /* 319994 */ void un_80319994(s32);
-/* 319EF0 */ UNK_RET un_80319EF0(UNK_PARAMS);
+/* 319EF0 */ void un_80319EF0(void);
 /* 31A4EC */ void fn_8031A4EC(struct HSD_GObj*);
 /* 31A94C */ UNK_RET fn_8031A94C(UNK_PARAMS);
 /* 31B1FC */ void un_8031B1FC(void);

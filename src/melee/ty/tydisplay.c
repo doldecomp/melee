@@ -12,6 +12,8 @@
 
 #include <placeholder.h>
 
+#include <MSL/trigf.h>
+
 #include <baselib/archive.h>
 #include <baselib/cobj.h>
 #include <baselib/debug.h>
@@ -29,6 +31,7 @@
 #include <dolphin/os.h>
 
 #include "lb/lb_00B0.h"
+#include "lb/lb_00CE.h"
 #include "lb/lb_00F9.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbarchive.h"
@@ -744,7 +747,130 @@ void un_80319994(s32 arg0)
     }
 }
 
-/// #un_80319EF0
+void un_80319EF0(void)
+{
+    Vec3 interest;
+    Vec3 sp28;
+    Vec3 eyepos;
+    u8* grid = (u8*) un_804D6F14;
+    u8* cfg = (u8*) un_804D6F18;
+    TyDspBgData* bg = un_804D6F1C;
+    HSD_CObj* cobj;
+    f32 range;
+    f32 scale;
+
+    PAD_STACK(0x18);
+
+    cobj = (HSD_CObj*)(*(HSD_GObj**)(cfg + 0x00))->hsd_obj;
+
+    range = *(f32*)(grid + 0x0C) - *(f32*)(grid + 0x04);
+    if (range < 0.0f) {
+        range = -range;
+    }
+    interest.x = range * 0.5f + *(f32*)(grid + 0x04);
+    if (*(s32*)(grid + 0x00) == 3) {
+        interest.x = 0.0f;
+    }
+    interest.y = 0.0f;
+    {
+        f32 zmin = *(f32*)(grid + 0x08);
+        f32 zrange = *(f32*)(grid + 0x10) - zmin;
+        if (zrange < 0.0f) {
+            zrange = -zrange;
+        }
+        interest.z = zrange * 0.5f + zmin;
+    }
+    eyepos = interest;
+    interest.z -= 10.0f;
+    *(Vec3*)(cfg + 0x5C) = interest;
+    HSD_CObjGetEyePosition(cobj, &sp28);
+    sp28.x = eyepos.x;
+    sp28.z = 500.0f + eyepos.z;
+    *(Vec3*)(cfg + 0x68) = sp28;
+    HSD_CObjSetInterest(cobj, &interest);
+    HSD_CObjSetEyePosition(cobj, &sp28);
+
+    {
+        f32 xrange = *(f32*)(grid + 0x0C) - *(f32*)(grid + 0x04);
+        if (xrange < 0.0f) {
+            xrange = -xrange;
+        }
+        *(f32*)(cfg + 0x40) = 14.0f + xrange;
+    }
+    *(f32*)(cfg + 0x44) = 1.0f;
+
+    while (500.0f * tanf(0.017453292f * (*(f32*)(cfg + 0x44) * 0.5f)) < *(f32*)(cfg + 0x40) * 0.5f) {
+        *(f32*)(cfg + 0x44) = *(f32*)(cfg + 0x44) + 0.1f;
+    }
+
+    if (*(f32*)(cfg + 0x44) < 3.0f) {
+        *(f32*)(cfg + 0x44) = 3.2f;
+    }
+    HSD_CObjSetFov(cobj, *(f32*)(cfg + 0x44));
+
+    *(f32*)(cfg + 0x4C) = (f32)*(s32*)(cfg + 0x08) * 0.0033333334f + 3.0f;
+    {
+        f32 fov2 = *(f32*)(cfg + 0x44);
+        *(f32*)(cfg + 0x50) = fov2 + fov2 / 5.0f;
+    }
+    if (*(f32*)(cfg + 0x44) < 3.0f) {
+        *(f32*)(cfg + 0x48) = (*(f32*)(cfg + 0x50) - *(f32*)(cfg + 0x4C)) / 30.0f;
+    } else {
+        *(f32*)(cfg + 0x48) = (*(f32*)(cfg + 0x50) - *(f32*)(cfg + 0x4C)) / 60.0f;
+    }
+
+    {
+        s32 mode = *(s32*)(grid + 0x00);
+        switch (mode) {
+        default:
+            *(f32*)(cfg + 0x54) = -((14.0f + *(f32*)(cfg + 0x40)) * 0.5f - *(f32*)(cfg + 0x5C));
+            *(f32*)(cfg + 0x58) = (14.0f + *(f32*)(cfg + 0x40)) * 0.5f + *(f32*)(cfg + 0x5C);
+            break;
+        case 2:
+            *(f32*)(cfg + 0x54) = -((7.0f + *(f32*)(cfg + 0x40)) * 0.5f - *(f32*)(cfg + 0x5C));
+            *(f32*)(cfg + 0x58) = (7.0f + *(f32*)(cfg + 0x40)) * 0.5f + *(f32*)(cfg + 0x5C);
+            break;
+        case 3:
+            *(f32*)(cfg + 0x54) = -(*(f32*)(cfg + 0x40) * 0.5f - *(f32*)(cfg + 0x5C));
+            *(f32*)(cfg + 0x58) = *(f32*)(cfg + 0x40) * 0.5f + *(f32*)(cfg + 0x5C);
+            break;
+        }
+    }
+
+    *(f32*)(cfg + 0x1C) = 57.29578f * lb_8000D008((*(f32*)(cfg + 0x58) - *(f32*)(cfg + 0x54)) * 0.5f, 500.0f);
+    *(f32*)(cfg + 0x18) = 57.29578f * lb_8000D008(*(f32*)(cfg + 0x40) * 0.5f, 500.0f);
+
+    {
+        HSD_JObj* jobj = (HSD_JObj*) bg->gobj4->hsd_obj;
+        HSD_JObjSetTranslate(jobj, &eyepos);
+    }
+
+    {
+        f32 zrange = 14.0f + (*(f32*)(grid + 0x10) - *(f32*)(grid + 0x08));
+        f32 xrange = *(f32*)(grid + 0x0C) - *(f32*)(grid + 0x04);
+        scale = (f32)(*(s32*)(cfg + 0x08) / 30);
+        if (zrange < xrange) {
+            zrange = 14.0f + xrange;
+        }
+        if (38.0f * scale < zrange) {
+            while (38.0f * scale < zrange) {
+                scale += 0.1f;
+            }
+        } else {
+            while (38.0f * scale > zrange) {
+                scale -= 0.1f;
+            }
+        }
+        if (scale > 2.1474836e9f || scale < -2.1474836e9f) {
+            OSReport("*** tyDisplay Table Scale Irregul!\n");
+            __assert("tydisplay.c", 0x28CU, "0");
+        }
+        if ((s32) scale != 0) {
+            HSD_JObjSetScaleX(bg->jobj, scale);
+            HSD_JObjSetScaleZ(bg->jobj, scale);
+        }
+    }
+}
 
 void fn_8031A4EC(HSD_GObj* arg0)
 {
