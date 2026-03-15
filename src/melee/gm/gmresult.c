@@ -900,7 +900,7 @@ void fn_801756E0(s32 slot)
     if (skip != 0) {
         goto grey_out;
     }
-    var_r6 = fn_8017AD28(me->player_standings[slot].score);
+    var_r6 = fn_8017AD48(me->player_standings[slot].score);
     if (var_r6 < 0) {
         if (var_r6 < 0) {
             var_r6 = -var_r6;

@@ -1194,8 +1194,8 @@ void ftKb_SsSpecialN_Coll(Fighter_GObj* gobj)
 void ftKb_SsSpecialAirNStart_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (ft_80082708(gobj) == GA_Air) {
-        ftCommon_8007D5D4(fp);
+    if (ft_80081D0C(gobj) == GA_Air) {
+        ftCommon_8007D7FC(fp);
         Fighter_ChangeMotionState(gobj, ftKb_MS_SsSpecialNStart, 0x0C4C5080U,
                                   fp->cur_anim_frame, 1.0f, 0.0f, NULL);
         ftKirbyDmgInline(gobj);
@@ -1205,8 +1205,8 @@ void ftKb_SsSpecialAirNStart_Coll(Fighter_GObj* gobj)
 void ftKb_SsSpecialAirN_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    if (ft_80082708(gobj) == GA_Air) {
-        ftCommon_8007D5D4(fp);
+    if (ft_80081D0C(gobj) == GA_Air) {
+        ftCommon_8007D7FC(fp);
         Fighter_ChangeMotionState(gobj, ftKb_MS_SsSpecialN, 0x0C4C5080U,
                                   fp->cur_anim_frame, 1.0f, 0.0f, NULL);
         ftKirbyDmgInline(gobj);

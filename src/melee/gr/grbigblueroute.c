@@ -27,10 +27,13 @@
 #include <baselib/jobj.h>
 #include <baselib/random.h>
 #include <baselib/spline.h>
+#include "gr/grfzerocar.h"
 
 void grBigBlue_801E8D04(Ground_GObj*);
 
 extern StageCallbacks grBb_Route_803E5E78[];
+extern char grBb_Route_803E61D4[];
+extern char grBb_Route_803E623C[];
 
 static struct {
     int x0;
@@ -311,7 +314,7 @@ void grBigBlueRoute_8020BF38(Ground_GObj* gobj)
         {
             s32 idx = *(s16*) ((u8*) gp + 0xC8) + 5;
             if (idx <= 7) {
-                if (mpLib_8004DBB4(idx, &checkpoint) != 0) {
+                if (Ground_801C2D24(idx, &checkpoint) != 0) {
                     if (fighter_pos.x > checkpoint.x) {
                         *(s16*) ((u8*) gp + 0xC8) =
                             *(s16*) ((u8*) gp + 0xC8) + 1;
@@ -327,17 +330,17 @@ void grBigBlueRoute_8020BF38(Ground_GObj* gobj)
 
 void grBigBlueRoute_8020C13C(Ground_GObj* arg) {}
 
-extern StageCallbacks grBb_Route_803E5E7C[];
+extern u8 grBb_Route_803E6200[0x3C];
 
 void grBigBlueRoute_8020C140(Ground_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
 
-    Ground_801C3BA8(gobj, grBb_Route_803E5E7C, 30, 0);
-    *(s32*) ((u8*) gp + 0xCC) = mpColl_8004F42C(33, 1);
-    *(s32*) ((u8*) gp + 0xD0) = mpColl_8004F42C(33, 0);
-    *(s32*) ((u8*) gp + 0xD4) = mpColl_8004F42C(33, 2);
-    grBigBlue_801E8D04(gobj);
+    grFZeroCar_801CAFBC(gobj, grBb_Route_803E6200, 30, 0);
+    *(s32*) ((u8*) gp + 0xCC) = (s32) Ground_801C247C(33, 1);
+    *(s32*) ((u8*) gp + 0xD0) = (s32) Ground_801C247C(33, 0);
+    *(s32*) ((u8*) gp + 0xD4) = (s32) Ground_801C247C(33, 2);
+    grBigBlueRoute_8020C238(gobj);
     ((UnkFlagStruct*) ((u8*) gp + 0xC4))->b0 = 0;
 }
 
@@ -397,7 +400,9 @@ void grBigBlueRoute_8020C238(Ground_GObj* gobj)
     }
 
     gp->gv.bigblueroute.xC8 = HSD_MemAlloc(0x554);
-    HSD_ASSERT(674, gp->gv.bigblueroute.xC8);
+    ((gp->gv.bigblueroute.xC8) ? ((void) 0)
+                                : __assert(grBb_Route_803E61D4, 674,
+                                           grBb_Route_803E623C));
     memzero(gp->gv.bigblueroute.xC8, 0x554);
 
     gp->gv.bigblueroute.x10A = 0;
@@ -674,25 +679,27 @@ void fn_8020DEAC(void)
     Ground_801C53EC(0x77A12);
 }
 
+extern f32 grBb_Route_804DB994;
+extern f32 grBb_Route_804DB998;
+extern f32 grBb_Route_804DB99C;
+
 /* Clamp camera position to stage bounds */
 void grBigBlueRoute_8020DED4(Vec3* pos)
 {
     f32 x = pos->x;
     f32 y = pos->y;
 
-    if (x < -3.0F * Ground_801C0498()) {
-        x = -3.0F * Ground_801C0498();
+    if (x < grBb_Route_804DB994 * Ground_801C0498()) {
+        x = grBb_Route_804DB994 * Ground_801C0498();
     }
 
-    /* Both branches clamp y to the same value - this is how the
-     * original code compiles (y is always clamped to -3*scale) */
-    if (y < -3.0F * Ground_801C0498()) {
-        y = -3.0F * Ground_801C0498();
-    } else if (y > -3.0F * Ground_801C0498()) {
-        y = -3.0F * Ground_801C0498();
+    if (y < grBb_Route_804DB998 * Ground_801C0498()) {
+        y = grBb_Route_804DB998 * Ground_801C0498();
+    } else if (y > grBb_Route_804DB99C * Ground_801C0498()) {
+        y = grBb_Route_804DB99C * Ground_801C0498();
     }
 
-    Camera_8002A278(x, y);
+    Ground_801C38BC(x, y);
 }
 
 DynamicsDesc* grBigBlueRoute_8020DF78(enum_t arg)

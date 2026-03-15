@@ -77,8 +77,8 @@ struct _m2c_stack_it_802BB290 {
 }; /* size = 0xA8 */
 STATIC_ASSERT(sizeof(struct _m2c_stack_it_802BB290) == 0xA8);
 
-Vec3 it_803B8680 = { 0 };
-Vec3 it_803B868C = { 0 };
+const Vec3 it_803B8680 = { 0 };
+const Vec3 it_803B868C = { 0.0f, 0.0f, 0.1f };
 
 /* 2BC080 */ void it_802BC080(ItemLink*, Vec3*, Item*);
 /* 2BCB88 */ void it_802BCB88(Item*, Vec3*);
