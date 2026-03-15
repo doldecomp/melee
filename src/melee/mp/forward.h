@@ -48,8 +48,9 @@ typedef enum mpLib_GroundEnum {
     mpLib_GroundEnum_Unk2,
 } mpLib_GroundEnum;
 
-typedef void (*mpLib_Callback)(Ground*, s32, CollData*, s32, mpLib_GroundEnum,
-                               f32);
+typedef void (*mpLib_Callback)(
+    Ground*, s32, CollData*, s32, mpLib_GroundEnum,
+    f32); /// @TODO Fix Ground* to be a void* as it can be a GObj or a Ground*
 typedef bool (*mpColl_Callback)(CollData*, u32);
 
 typedef enum CollLineKind {

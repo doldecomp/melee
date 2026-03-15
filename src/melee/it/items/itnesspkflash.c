@@ -1,4 +1,4 @@
-#include "itnesspkflush.h"
+#include "itnesspkflash.h"
 
 #include <placeholder.h>
 #include <platform.h>
@@ -15,16 +15,25 @@
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
-#include "it/items/itnesspkflushexplode.h"
+#include "it/items/itnesspkflashexplode.h"
 #include "MSL/trigf.h"
 
 #include <math.h>
 #include <baselib/jobj.h>
 
-/* 2AB29C */ static bool itNesspkflush_UnkMotion1_Coll(Item_GObj* gobj);
-/* 2AB2A4 */ static bool itNesspkflush_UnkMotion2_Coll(Item_GObj* gobj);
+/* 2AB29C */ static bool itNesspkflash_UnkMotion1_Coll(Item_GObj* gobj);
+/* 2AB2A4 */ static bool itNesspkflash_UnkMotion2_Coll(Item_GObj* gobj);
 
-static inline void itNesspkflush_SetScale(HSD_JObj* jobj, Item* ip,
+ItemStateTable it_803F6B70[] = {
+    { 0, itNesspkflash_UnkMotion0_Anim, itNesspkflash_UnkMotion0_Phys,
+      itNesspkflash_UnkMotion0_Coll },
+    { 1, itNesspkflash_UnkMotion1_Anim, itNesspkflash_UnkMotion1_Phys,
+      itNesspkflash_UnkMotion1_Coll },
+    { 2, itNesspkflash_UnkMotion2_Anim, itNesspkflash_UnkMotion2_Phys,
+      itNesspkflash_UnkMotion2_Coll },
+};
+
+static inline void itNesspkflash_SetScale(HSD_JObj* jobj, Item* ip,
                                           itFlashAttributes* attr)
 {
     Vec3 scale;
@@ -168,7 +177,7 @@ void it_802AAA80(Item_GObj* gobj)
     db_80225DD8(gobj, ip->owner);
 }
 
-bool itNesspkflush_UnkMotion0_Anim(Item_GObj* gobj)
+bool itNesspkflash_UnkMotion0_Anim(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itFlashAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
@@ -215,11 +224,11 @@ bool itNesspkflush_UnkMotion0_Anim(Item_GObj* gobj)
         ip->xDAC_itcmd_var0 = 0;
     }
 
-    itNesspkflush_SetScale(jobj, ip, attr);
+    itNesspkflash_SetScale(jobj, ip, attr);
     return false;
 }
 
-bool itNesspkflush_UnkMotion1_Anim(Item_GObj* gobj)
+bool itNesspkflash_UnkMotion1_Anim(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
@@ -252,20 +261,20 @@ bool itNesspkflush_UnkMotion1_Anim(Item_GObj* gobj)
         }
     }
 
-    itNesspkflush_SetScale(jobj, ip, attr);
+    itNesspkflash_SetScale(jobj, ip, attr);
     return it_80273130(gobj);
 }
 
-bool itNesspkflush_UnkMotion2_Anim(Item_GObj* gobj)
+bool itNesspkflash_UnkMotion2_Anim(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
     itFlashAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
-    itNesspkflush_SetScale(jobj, ip, attr);
+    itNesspkflash_SetScale(jobj, ip, attr);
     return it_80273130(gobj);
 }
 
-void itNesspkflush_UnkMotion0_Phys(Item_GObj* gobj)
+void itNesspkflash_UnkMotion0_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itFlashAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
@@ -310,19 +319,19 @@ void itNesspkflush_UnkMotion0_Phys(Item_GObj* gobj)
     ip->x40_vel.z = 0.0f;
 }
 
-void itNesspkflush_UnkMotion1_Phys(Item_GObj* gobj)
+void itNesspkflash_UnkMotion1_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itResetVelocity(ip);
 }
 
-void itNesspkflush_UnkMotion2_Phys(Item_GObj* gobj)
+void itNesspkflash_UnkMotion2_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itResetVelocity(ip);
 }
 
-bool itNesspkflush_UnkMotion0_Coll(Item_GObj* gobj)
+bool itNesspkflash_UnkMotion0_Coll(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itFlashAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
@@ -335,21 +344,21 @@ bool itNesspkflush_UnkMotion0_Coll(Item_GObj* gobj)
         Item_8026AE84(ip, 0x86, 0x7F, 0x40);
     }
 
-    itNesspkflush_SetScale(jobj, ip, attr);
+    itNesspkflash_SetScale(jobj, ip, attr);
     return false;
 }
 
-bool itNesspkflush_UnkMotion1_Coll(Item_GObj* gobj)
+bool itNesspkflash_UnkMotion1_Coll(Item_GObj* gobj)
 {
     return false;
 }
 
-bool itNesspkflush_UnkMotion2_Coll(Item_GObj* gobj)
+bool itNesspkflash_UnkMotion2_Coll(Item_GObj* gobj)
 {
     return false;
 }
 
-bool itNessPKFlush_Logic102_Reflected(Item_GObj* gobj)
+bool itNesspkflash_Logic102_Reflected(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
@@ -362,17 +371,17 @@ bool itNessPKFlush_Logic102_Reflected(Item_GObj* gobj)
     return false;
 }
 
-bool itNessPKFlush_Logic102_Clanked(Item_GObj* arg0)
+bool itNesspkflash_Logic102_Clanked(Item_GObj* arg0)
 {
     return true;
 }
 
-bool itNessPKFlush_Logic102_Absorbed(Item_GObj* arg0)
+bool itNesspkflash_Logic102_Absorbed(Item_GObj* arg0)
 {
     return true;
 }
 
-void itNessPKFlush_Logic102_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
+void itNesspkflash_Logic102_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }
