@@ -76,7 +76,7 @@ static u8 __THPRestartDefinition(THPFileInfo*);
 static void __THPPrepBitStream(THPFileInfo*);
 static void __THPDecompressYUV(void*, void*, void*);
 static void __THPGQRRestore(void);
-static void __THPDecompressiMCURow512x448(void);
+static void __THPDecompressiMCURow512x448(THPFileInfo*);
 static void __THPDecompressiMCURow640x480(void);
 static void __THPDecompressiMCURowNxN(void);
 static void __THPInverseDCTNoYPos(THPCoeff*, u32);

@@ -151,7 +151,7 @@ static void __THPDecompressYUV(void* tileY, void* tileU, void* tileV)
 
     if (__THPInfo->xPixelSize == 512 && targetY == 448) {
         while (currentY < targetY) {
-            __THPDecompressiMCURow512x448();
+            __THPDecompressiMCURow512x448(__THPInfo);
             currentY += 16;
         }
     } else if (__THPInfo->xPixelSize == 640 && targetY == 480) {
@@ -1230,7 +1230,7 @@ inline void __THPInverseDCTY8(register THPCoeff* in, register u32 xPos)
     }
 }
 
-static void __THPDecompressiMCURow512x448(void)
+static void __THPDecompressiMCURow512x448(THPFileInfo* info)
 {
     u8 cl_num;
     u32 x_pos;
@@ -1238,47 +1238,47 @@ static void __THPDecompressiMCURow512x448(void)
 
     LCQueueWait(3);
 
-    for (cl_num = 0; cl_num < __THPInfo->MCUsPerRow; cl_num++) {
-        __THPHuffDecodeDCTCompY(__THPInfo, __THPMCUBuffer[0]);
-        __THPHuffDecodeDCTCompY(__THPInfo, __THPMCUBuffer[1]);
-        __THPHuffDecodeDCTCompY(__THPInfo, __THPMCUBuffer[2]);
-        __THPHuffDecodeDCTCompY(__THPInfo, __THPMCUBuffer[3]);
-        __THPHuffDecodeDCTCompU(__THPInfo, __THPMCUBuffer[4]);
-        __THPHuffDecodeDCTCompV(__THPInfo, __THPMCUBuffer[5]);
+    for (cl_num = 0; cl_num < info->MCUsPerRow; cl_num++) {
+        __THPHuffDecodeDCTCompY(info, __THPMCUBuffer[0]);
+        __THPHuffDecodeDCTCompY(info, __THPMCUBuffer[1]);
+        __THPHuffDecodeDCTCompY(info, __THPMCUBuffer[2]);
+        __THPHuffDecodeDCTCompY(info, __THPMCUBuffer[3]);
+        __THPHuffDecodeDCTCompU(info, __THPMCUBuffer[4]);
+        __THPHuffDecodeDCTCompV(info, __THPMCUBuffer[5]);
 
-        comp = &__THPInfo->components[0];
+        comp = &info->components[0];
         Gbase = __THPLCWork512[0];
         Gwid = 512;
-        Gq = __THPInfo->quantTabs[comp->quantizationTableSelector];
+        Gq = info->quantTabs[comp->quantizationTableSelector];
         x_pos = (u32) (cl_num * 16);
         __THPInverseDCTNoYPos(__THPMCUBuffer[0], x_pos);
         __THPInverseDCTNoYPos(__THPMCUBuffer[1], x_pos + 8);
         __THPInverseDCTY8(__THPMCUBuffer[2], x_pos);
         __THPInverseDCTY8(__THPMCUBuffer[3], x_pos + 8);
 
-        comp = &__THPInfo->components[1];
+        comp = &info->components[1];
         Gbase = __THPLCWork512[1];
         Gwid = 256;
-        Gq = __THPInfo->quantTabs[comp->quantizationTableSelector];
+        Gq = info->quantTabs[comp->quantizationTableSelector];
         x_pos /= 2;
         __THPInverseDCTNoYPos(__THPMCUBuffer[4], x_pos);
-        comp = &__THPInfo->components[2];
+        comp = &info->components[2];
         Gbase = __THPLCWork512[2];
-        Gq = __THPInfo->quantTabs[comp->quantizationTableSelector];
+        Gq = info->quantTabs[comp->quantizationTableSelector];
         __THPInverseDCTNoYPos(__THPMCUBuffer[5], x_pos);
 
-        if (__THPInfo->RST != 0) {
-            if ((--__THPInfo->currMCU) == 0) {
-                __THPInfo->currMCU = __THPInfo->nMCU;
-                __THPInfo->cnt = 1 + ((__THPInfo->cnt + 6) & 0xFFFFFFF8);
+        if (info->RST != 0) {
+            if ((--info->currMCU) == 0) {
+                info->currMCU = info->nMCU;
+                info->cnt = 1 + ((info->cnt + 6) & 0xFFFFFFF8);
 
-                if (__THPInfo->cnt > 33) {
-                    __THPInfo->cnt = 33;
+                if (info->cnt > 33) {
+                    info->cnt = 33;
                 }
 
-                __THPInfo->components[0].predDC = 0;
-                __THPInfo->components[1].predDC = 0;
-                __THPInfo->components[2].predDC = 0;
+                info->components[0].predDC = 0;
+                info->components[1].predDC = 0;
+                info->components[2].predDC = 0;
             }
         }
     }
