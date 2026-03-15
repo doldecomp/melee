@@ -12,6 +12,7 @@
 #include "lb/lbaudio_ax.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
+#include "lb/lbcardgame.h"
 #include "lb/lbarchive.h"
 #include "lb/lblanguage.h"
 #include "lb/lbvector.h"
