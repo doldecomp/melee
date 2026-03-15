@@ -170,7 +170,19 @@ void ftKb_AttackDashAir_800F22D4(Fighter_GObj* gobj)
 
 /// #ftKb_SpecialAirHi_Enter
 
-/// #ftKb_SpecialHi1_Anim
+void ftKb_SpecialHi1_Anim(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        ftCommon_8007D5D4(fp);
+        Fighter_ChangeMotionState(gobj, ftKb_MS_SpecialAirHi2, 0xA, 0.0f,
+                                  1.0f, 0.0f, NULL);
+        fp->pre_hitlag_cb = efLib_PauseAll;
+        fp->post_hitlag_cb = efLib_ResumeAll;
+        fp->mv.kb.specialhi.x0 = 0;
+    }
+}
 
 /// #ftKb_SpecialHi2_Anim
 
@@ -1200,7 +1212,21 @@ void ftKb_SpecialS_Enter(Fighter_GObj* gobj)
     fp->accessory4_cb = &fn_800F53AC;
 }
 
-/// #ftKb_SpecialAirS_Enter
+void ftKb_SpecialAirS_Enter(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftKb_DatAttrs* da = fp->dat_attrs;
+    PAD_STACK(8);
+    fp->cmd_vars[0] = 0;
+    if (!fp->fv.kb.x64) {
+        fp->self_vel.y = da->specials_aerial_vertical_momentum;
+        fp->fv.kb.x64 = true;
+    }
+    Fighter_ChangeMotionState(gobj, ftKb_MS_SpecialAirS, 0, 0.0f, 1.0f,
+                              0.0f, NULL);
+    ftAnim_8006EBA4(gobj);
+    fp->accessory4_cb = &fn_800F53AC;
+}
 
 void ftKb_SpecialS_Anim(Fighter_GObj* gobj)
 {
@@ -2042,7 +2068,20 @@ void ftKb_EatWalk_Anim(Fighter_GObj* gobj)
     ftWalkCommon_800DFDDC(gobj);
 }
 
-/// #ftKb_EatJump1_Anim
+void ftKb_EatJump1_Anim(Fighter_GObj* gobj)
+{
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        Fighter* fp = GET_FIGHTER(gobj);
+        ftKb_DatAttrs* da = fp->dat_attrs;
+        PAD_STACK(24);
+        ftCommon_8007D5D4(fp);
+        Fighter_ChangeMotionState(gobj, ftKb_MS_EatJump2, 0x92, 0.0f, 1.0f,
+                                  0.0f, NULL);
+        ftKb_SpecialN_800F9070(gobj);
+        ftAnim_8006EBA4(gobj);
+        ftCo_800CB110(gobj, true, da->specialn_jump_height);
+    }
+}
 
 void ftKb_EatLanding_Anim(HSD_GObj* gobj)
 {
