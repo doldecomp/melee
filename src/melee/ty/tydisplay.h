@@ -4,6 +4,7 @@
 #include <placeholder.h>
 #include <platform.h>
 
+struct HSD_GObj;
 struct HSD_JObj;
 
 /* 3182D4 */ void un_803182D4_OnFrame(void);
@@ -26,8 +27,8 @@ struct HSD_JObj;
 /* 31BB34 */ s32 un_8031BB34(s8);
 /* 31BB94 */ char* un_8031BB94(s8);
 /* 31BBF4 */ s32 un_8031BBF4(s8);
-/* 31BC54 */ UNK_RET un_8031BC54(UNK_PARAMS);
-/* 31BF34 */ void un_8031BF34(s16 arg0);
+/* 31BC54 */ struct HSD_GObj* un_8031BC54(s32);
+/* 31BF34 */ void un_8031BF34(s32 arg0);
 /* 31C1D0 */ void un_8031C1D0(void);
 /* 31C2CC */ void tyDisplay_8031C2CC(void);
 /* 31C2EC */ s32 tyDisplay_8031C2EC(void);

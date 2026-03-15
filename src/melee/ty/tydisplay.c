@@ -59,6 +59,7 @@ typedef struct TyDspNameTables {
 } TyDspNameTables;
 
 extern const TyDspNameTables un_803B8988;
+extern const TyDspArchNames un_803B8A34;
 
 /// #un_803181BC
 
@@ -506,12 +507,76 @@ s32 un_8031BBF4(s8 arg0)
     return (s32) table[arg0];
 }
 
-/// #un_8031BC54
+static char un_803FF01C[] = "ToyDspStand_Top_joint";
+
+HSD_GObj* un_8031BC54(s32 arg0)
+{
+    char buf[44];
+    TyDspArchNames jobj_names;
+    TyDspArchNames matanim_names;
+    u8* entry;
+    HSD_GObj* gobj;
+    HSD_JObj* root;
+    HSD_JObj* child;
+    u8 cat;
+    u8 c;
+    TyDspBgData* data = un_804D6F1C;
+
+    entry = (u8*) un_8031B9DC(arg0);
+    gobj = GObj_Create(6, 7, 0);
+    root = HSD_JObjAlloc();
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, root);
+    GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0x3C, 0);
+
+    c = entry[4];
+    jobj_names = *(TyDspArchNames*) un_803B8988.jobj_names;
+    cat = c;
+    if ((s8) c == -1) {
+        cat = 0;
+    }
+    child = HSD_JObjLoadJoint(
+        HSD_ArchiveGetPublicAddress(
+            *(HSD_Archive**) ((u8*) data + c * 4 + 0x50),
+            jobj_names.entries[(s8) cat]));
+    HSD_JObjAddChild(root, child);
+
+    c = entry[4];
+    matanim_names = un_803B8A34;
+    cat = c;
+    if ((s8) c == -1) {
+        cat = 0;
+    }
+    un_80306A48(child, NULL,
+                (char*) matanim_names.entries[(s8) cat],
+                NULL,
+                *(HSD_Archive**) ((u8*) data + c * 4 + 0x50),
+                (long) entry[5]);
+    HSD_JObjRemoveAnimAll(child);
+
+    HSD_JObjSetTranslateX(child, *(f32*) (entry + 8));
+    HSD_JObjSetTranslateZ(child, *(f32*) (entry + 0xC));
+
+    HSD_JObjAddChild(root, HSD_JObjLoadJoint(
+        HSD_ArchiveGetPublicAddress(
+            *(HSD_Archive**) ((u8*) data + 0xF4),
+            un_803FF01C)));
+
+    if (un_804D6F24 != NULL) {
+        DevText_Erase(un_804D6F24);
+        DevText_SetCursorXY(un_804D6F24, 0, 0);
+        sprintf(buf, un_803FF19C,
+                *(f32*) (entry + 8), *(f32*) (entry + 0xC));
+        DevText_Print(un_804D6F24, buf);
+        un_8031BF34(arg0);
+    }
+
+    return gobj;
+}
 
 static char un_804D5AAC[] = "jobj.h";
 static char un_804D5AB4[] = "jobj";
 
-void un_8031BF34(s16 arg0)
+void un_8031BF34(s32 arg0)
 {
     u8* base = (u8*) &un_804A2D98;
     ToyAnimState* anim = &un_804A2AA8;
@@ -528,7 +593,7 @@ void un_8031BF34(s16 arg0)
         }
     }
 
-    un_80308250(base + 0x38, (s32) arg0, 0);
+    un_80308250(base + 0x38, (s16) arg0, 0);
     un_804D6F2C = un_803087F4(base + 0x38);
 
     HSD_JObjClearFlagsAll(anim->jobj[0], 0x10);
