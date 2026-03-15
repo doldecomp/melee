@@ -11,6 +11,7 @@
 #include "gr/ground.h"
 #include "gr/inlines.h"
 #include "lb/lb_00F9.h"
+#include "mp/mplib.h"
 
 #include <baselib/dobj.h>
 #include <baselib/gobj.h>
@@ -34,9 +35,51 @@ StageCallbacks grRc_803E4E34[7] = {
       grRCruise_801FF920, 0 },
 };
 
+static struct {
+    int x0;
+}* grRc_804D6A10;
+
 void grRCruise_801FF164(bool arg) {}
 
-/// #grRCruise_801FF168
+void grRCruise_801FF168(void)
+{
+    HSD_GObj* jgobj;
+    HSD_GObj* grgobj;
+    Ground* gp;
+    Ground* gp2;
+    HSD_JObj* jobj;
+    HSD_GObj* gobj6;
+    HSD_GObj* gobj1;
+    HSD_GObj* gobj4;
+
+    grRc_804D6A10 = Ground_801C49F8();
+    stage_info.unk8C.b4 = 1;
+    stage_info.unk8C.b5 = 0;
+    jgobj = grRCruise_801FF2C8(3);
+    gp = GET_GROUND(jgobj);
+    gp->gv.rcruise.xC4.b0 = 1;
+    jobj = GET_JOBJ(jgobj);
+    HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
+    grgobj = grRCruise_801FF2C8(3);
+    gp2 = GET_GROUND(grgobj);
+    gp2->gv.rcruise2.xEC = jgobj;
+    grRCruise_801FF2C8(0);
+    grRCruise_801FF2C8(2);
+    grRCruise_801FF2C8(5);
+    gobj1 = grRCruise_801FF2C8(1);
+    gobj6 = grRCruise_801FF2C8(6);
+    gobj4 = grRCruise_801FF2C8(4);
+    Ground_801C39C0();
+    Ground_801C3BB4();
+    grRCruise_801FFADC(grgobj);
+    Ground_801C2FE0(gobj1);
+    Ground_801C32AC(1);
+    Ground_801C2FE0(gobj6);
+    Ground_801C32AC(6);
+    Ground_801C2FE0(gobj4);
+    Ground_801C32AC(4);
+    mpLib_80057BC0(11);
+}
 
 void grRCruise_801FF298(void) {}
 

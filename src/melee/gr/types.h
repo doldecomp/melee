@@ -742,7 +742,17 @@ struct grRCruise_Entry {
 };
 
 struct grRCruise_GroundVars {
-    /* +00 gp+C4 */ char pad_0[0x14];
+    struct {
+        u8 b0 : 1;
+        u8 b1 : 1;
+        u8 b2 : 1;
+        u8 b3 : 1;
+        u8 b4 : 1;
+        u8 b5 : 1;
+        u8 b6 : 1;
+        u8 b7 : 1;
+    } xC4;
+    /* +00 gp+C4 */ char pad_0[0x10];
     /* +14 gp+D8 */ f32 x14;
     /* +18 gp+DC */ f32 x18;
     /* +1C gp+E0 */ f32 x1C;
@@ -755,6 +765,11 @@ struct grRCruise_GroundVars {
     /* +38 gp+FC */ s32 x38;
     /* +3C gp+100 */ char pad_3C[0x30];
     /* +6C gp+130 */ struct grRCruise_Entry* entries;
+};
+
+struct grRCruise_GroundVars2 {
+    /* +00 gp+C4 */ char pad_0[0x28];
+    /* +28 gp+EC */ HSD_GObj* xEC;
 };
 
 struct grFigureGet_GroundVars {
@@ -1156,6 +1171,7 @@ struct Ground {
             struct grPura_GroundVars pura;
             struct grPura_GroundVars2 pura2;
             struct grRCruise_GroundVars rcruise;
+            struct grRCruise_GroundVars2 rcruise2;
             struct grShrineroute_GroundVars shrineroute;
             struct grShrineroute_GroundVars2 shrineroute2;
             struct grSmashTaunt_GroundVars smashtaunt;
