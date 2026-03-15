@@ -3246,7 +3246,7 @@ melee/it/items/itnesspkfirepillar.c:
 	.sdata      start:0x804D53D8 end:0x804D53E5
 	.sdata2     start:0x804DCE60 end:0x804DCE70
 
-melee/it/items/itnesspkflush.c:
+melee/it/items/itnesspkflash.c:
 	.text       start:0x802AA7E4 end:0x802AB3F0
 	.data       start:0x803F6B70 end:0x803F6BC8
 	.sdata      start:0x804D53E8 end:0x804D53F8
@@ -3297,7 +3297,7 @@ melee/it/items/itlinkbow.c:
 	.sdata      start:0x804D5438 end:0x804D5445
 	.sdata2     start:0x804DCF40 end:0x804DCF48
 
-melee/it/items/itnesspkflushexplode.c:
+melee/it/items/itnesspkflashexplode.c:
 	.text       start:0x802AF940 end:0x802AFD8C
 	.data       start:0x803F6F40 end:0x803F6F50
 	.sdata      start:0x804D5448 end:0x804D5458

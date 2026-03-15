@@ -123,8 +123,8 @@
 #include "it/items/itnessbat.h"
 #include "it/items/itnesspkfire.h"
 #include "it/items/itnesspkfirepillar.h"
-#include "it/items/itnesspkflush.h"
-#include "it/items/itnesspkflushexplode.h"
+#include "it/items/itnesspkflash.h"
+#include "it/items/itnesspkflashexplode.h"
 #include "it/items/itnesspkthunderball.h"
 #include "it/items/itnesspkthundertrail.h"
 #include "it/items/itnessyoyo.h"
@@ -2486,12 +2486,12 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        itNessPKFlush_Logic102_Reflected,
-        itNessPKFlush_Logic102_Clanked,
-        itNessPKFlush_Logic102_Absorbed,
+        itNesspkflash_Logic102_Reflected,
+        itNesspkflash_Logic102_Clanked,
+        itNesspkflash_Logic102_Absorbed,
         NULL,
         NULL,
-        itNessPKFlush_Logic102_EvtUnk,
+        itNesspkflash_Logic102_EvtUnk,
     },
     {
         // Ness PK thunder ball
@@ -2667,11 +2667,11 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        itNessPKFlushExplode_Logic103_Clanked,
-        itNessPKFlushExplode_Logic103_Absorbed,
-        itNessPKFlushExplode_Logic103_ShieldBounced,
-        itNessPKFlushExplode_Logic103_HitShield,
-        itNessPKFlushExplode_Logic103_EvtUnk,
+        itNessPKFlashExplode_Logic103_Clanked,
+        itNessPKFlashExplode_Logic103_Absorbed,
+        itNessPKFlashExplode_Logic103_ShieldBounced,
+        itNessPKFlashExplode_Logic103_HitShield,
+        itNessPKFlashExplode_Logic103_EvtUnk,
     },
     {
         // Sheik needle thrown
@@ -3856,12 +3856,12 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        itNessPKFlush_Logic102_Reflected,
-        itNessPKFlush_Logic102_Clanked,
-        itNessPKFlush_Logic102_Absorbed,
+        itNesspkflash_Logic102_Reflected,
+        itNesspkflash_Logic102_Clanked,
+        itNesspkflash_Logic102_Absorbed,
         NULL,
         NULL,
-        itNessPKFlush_Logic102_EvtUnk,
+        itNesspkflash_Logic102_EvtUnk,
     },
     {
         it_803F6F40,
@@ -3874,11 +3874,11 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         NULL,
         NULL,
         NULL,
-        itNessPKFlushExplode_Logic103_Clanked,
-        itNessPKFlushExplode_Logic103_Absorbed,
-        itNessPKFlushExplode_Logic103_ShieldBounced,
-        itNessPKFlushExplode_Logic103_HitShield,
-        itNessPKFlushExplode_Logic103_EvtUnk,
+        itNessPKFlashExplode_Logic103_Clanked,
+        itNessPKFlashExplode_Logic103_Absorbed,
+        itNessPKFlashExplode_Logic103_ShieldBounced,
+        itNessPKFlashExplode_Logic103_HitShield,
+        itNessPKFlashExplode_Logic103_EvtUnk,
     },
     {
         it_803F7190,

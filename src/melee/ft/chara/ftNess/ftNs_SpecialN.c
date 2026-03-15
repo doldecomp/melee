@@ -16,7 +16,7 @@
 
 #include "it/forward.h"
 
-#include "it/items/itnesspkflush.h"
+#include "it/items/itnesspkflash.h"
 #include "lb/lb_00B0.h"
 
 #include <common_structs.h>

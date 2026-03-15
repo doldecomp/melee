@@ -1,4 +1,4 @@
-#include "itnesspkflushexplode.h"
+#include "itnesspkflashexplode.h"
 
 #include <placeholder.h>
 #include <platform.h>
@@ -16,7 +16,11 @@
 
 #include <baselib/jobj.h>
 
-/* 2AFD44 */ static bool itNesspkflushexplode_UnkMotion0_Coll(Item_GObj* gobj);
+/* 2AFD44 */ static bool itNessPKFlashExplode_UnkMotion0_Coll(Item_GObj* gobj);
+
+ItemStateTable it_803F6F40[] = { { 0, itNessPKFlashExplode_UnkMotion0_Anim,
+                                   itNessPKFlashExplode_UnkMotion0_Phys,
+                                   itNessPKFlashExplode_UnkMotion0_Coll } };
 
 Item_GObj* it_802AF940(Item_GObj* owner, Item_GObj* flash, Vec3* pos,
                        ItemKind kind, f32 facing_dir, f32 charge)
@@ -76,7 +80,7 @@ void it_802AFA70(Item_GObj* gobj)
     it_80275158(gobj, 1024.0f);
     ip->xDD4_itemVar.pkflushexplode.xDD8 = 0.0f;
     Item_802694CC(gobj);
-    itNesspkflushexplode_UnkMotion0_Anim(gobj);
+    itNessPKFlashExplode_UnkMotion0_Anim(gobj);
 
     ratio = ip->xDD4_itemVar.pkflushexplode.xDD4 /
             attr->x0_FLASH_EXPL_HITBOX_SIZE_MUL;
@@ -94,7 +98,7 @@ void it_802AFA70(Item_GObj* gobj)
     db_80225DD8(gobj, ip->owner);
 }
 
-bool itNesspkflushexplode_UnkMotion0_Anim(Item_GObj* gobj)
+bool itNessPKFlashExplode_UnkMotion0_Anim(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itFlashExplAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
@@ -130,38 +134,38 @@ bool itNesspkflushexplode_UnkMotion0_Anim(Item_GObj* gobj)
     return false;
 }
 
-void itNesspkflushexplode_UnkMotion0_Phys(Item_GObj* gobj)
+void itNessPKFlashExplode_UnkMotion0_Phys(Item_GObj* gobj)
 {
     Item* it = GET_ITEM(gobj);
     it->x40_vel.z = it->x40_vel.y = it->x40_vel.z = 0;
 }
 
-bool itNesspkflushexplode_UnkMotion0_Coll(Item_GObj* gobj)
+bool itNessPKFlashExplode_UnkMotion0_Coll(Item_GObj* gobj)
 {
     return false;
 }
 
-bool itNessPKFlushExplode_Logic103_Clanked(Item_GObj* arg0)
+bool itNessPKFlashExplode_Logic103_Clanked(Item_GObj* arg0)
 {
     return true;
 }
 
-bool itNessPKFlushExplode_Logic103_Absorbed(Item_GObj* arg0)
+bool itNessPKFlashExplode_Logic103_Absorbed(Item_GObj* arg0)
 {
     return true;
 }
 
-bool itNessPKFlushExplode_Logic103_ShieldBounced(Item_GObj* arg0)
+bool itNessPKFlashExplode_Logic103_ShieldBounced(Item_GObj* arg0)
 {
     return true;
 }
 
-bool itNessPKFlushExplode_Logic103_HitShield(Item_GObj* arg0)
+bool itNessPKFlashExplode_Logic103_HitShield(Item_GObj* arg0)
 {
     return true;
 }
 
-void itNessPKFlushExplode_Logic103_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
+void itNessPKFlashExplode_Logic103_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
     it_8026B894(gobj, ref_gobj);
 }
