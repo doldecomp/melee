@@ -166,7 +166,7 @@ struct un_804D6EF4_t {
     /* +0x58 */ short x58;
     /* +0x5A */ char pad_5A[2];
     /* +0x5C */ s8 x5C;
-    /* +0x5D */ char pad_5D[1];
+    /* +0x5D */ s8 x5D;
     /* +0x5E */ s8 x5E;
 };
 
