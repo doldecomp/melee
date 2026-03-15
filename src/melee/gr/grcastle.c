@@ -3,6 +3,7 @@
 #include "placeholder.h"
 #include "types.h"
 
+#include "cm/camera.h"
 #include "ft/ftdevice.h"
 #include "ft/ftlib.h"
 #include "gr/grdisplay.h"
@@ -396,7 +397,24 @@ bool grCastle_801CE858(Ground_GObj* gobj)
     return false;
 }
 
-/// #grCastle_801CE860
+void grCastle_801CE860(Ground_GObj* gobj)
+{
+    Ground* gp = gobj->user_data;
+
+    if ((s32) gp->gv.castle.xC4 < 3) {
+        s16 timer = gp->gv.castle.xC8;
+        gp->gv.castle.xC8 = timer - 1;
+        if (timer < 0) {
+            u8* ptr;
+            gp->gv.castle.xC4++;
+            grAnime_801C8138(gobj, gp->map_id, gp->gv.castle.xC4);
+            ptr = (u8*) grCs_804D6970;
+            ptr += gp->gv.castle.xC4 * 2;
+            gp->gv.castle.xC8 = *(s16*) (ptr + 0x12C);
+        }
+    }
+    Camera_80030E44(1, NULL);
+}
 
 void grCastle_801CE8E4(Ground_GObj* gobj) {}
 
@@ -583,7 +601,26 @@ void grCastle_801D08AC(void* arg0, unkCastle* arg1, Ground_GObj* gobj)
     grCastle_801D06CC_sub(arg1, gobj, 4);
 }
 
-/// #fn_801D0924
+void fn_801D0924(HSD_GObj* gobj, int renderpass)
+{
+    Ground* gp = gobj->user_data;
+    int i;
+
+    grDisplay_801C5DB0(gobj, renderpass);
+
+    if (gp->x10_flags.b7) {
+        GXColor color1 = { 0xFF, 0xFF, 0xFF, 0xFE };
+        GXColor color2 = { 0xFF, 0xFF, 0xFF, 0xFF };
+        PAD_STACK(4);
+
+        for (i = 0; i < 12; i++) {
+            if (gp->gv.castle3.x1C[i].data != NULL) {
+                lb_800117F4(&gp->gv.castle3.x1C[i], &color1, &color2,
+                            999, renderpass);
+            }
+        }
+    }
+}
 
 /// #grCastle_801D09B8
 
