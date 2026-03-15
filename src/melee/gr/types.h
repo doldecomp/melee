@@ -9,12 +9,12 @@
 #include <melee/gr/forward.h>
 #include <melee/it/forward.h>
 #include <melee/lb/forward.h>
-#include <melee/lb/types.h>
 #include <melee/sc/forward.h>
 #include <sysdolphin/baselib/forward.h>
 
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
+#include <melee/lb/types.h>
 
 typedef struct StageBlastZone {
     f32 left;   // 0x74
@@ -988,10 +988,21 @@ struct ShyGuys {
 };
 
 struct grShrineroute_GroundVars {
-    /* +0 gp+C4 */ u8 _[0x4];
+    /* +0 gp+C4 */ u32 xC4;
     /* +4 gp+C8 */ u16 xC8;
     /* +6 gp+CA */ u16 xCA;
     /* +8 gp+CA */ u16 xCC;
+};
+
+struct grShrineroute_GroundVars2 {
+    /* +0 gp+C4 */ HSD_GObj* xC4;
+    /* +4 gp+C8 */ HSD_LObj* xC8;
+    u8 _[0x118 - 0xCC];
+    u32 x118;
+    u8 _2[0x168 - 0x11C];
+    /* +0 gp+168 */ u32 x168;
+    /* +0 gp+16C */ HSD_LObj* x16C;
+    /* +0 gp+170 */ HSD_LObj* x170;
 };
 
 struct Battlefield {
@@ -1144,6 +1155,7 @@ struct Ground {
             struct grPura_GroundVars2 pura2;
             struct grRCruise_GroundVars rcruise;
             struct grShrineroute_GroundVars shrineroute;
+            struct grShrineroute_GroundVars2 shrineroute2;
             struct grSmashTaunt_GroundVars smashtaunt;
             struct GroundVars_unk unk;
             struct grVenom_GroundVars venom;
