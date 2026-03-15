@@ -12,9 +12,11 @@
 #include "lb/lb_00B0.h"
 #include "mp/mplib.h"
 
+#include <baselib/debug.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
+#include <baselib/lobj.h>
 #include <baselib/random.h>
 
 s16 grSh_Route_803E58E0[8] = {
@@ -253,7 +255,38 @@ bool grShrineRoute_80209BE4(Ground_GObj* arg)
 
 void grShrineRoute_8020A100(Ground_GObj* arg) {}
 
-/// #grShrineRoute_8020A104
+void grShrineRoute_8020A104(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    HSD_GObj* lgobj = HSD_GObj_Entities->xC;
+    HSD_LObj* lobj;
+
+    while (lgobj) {
+        if (HSD_GObjGetClassifier(lgobj) != 0xC) {
+            lgobj = HSD_GObjGetNext(lgobj);
+        } else {
+            break;
+        }
+    }
+    HSD_ASSERT(1106, lgobj);
+    gp->gv.shrineroute2.xC4 = lgobj;
+    grShrineRoute_8020AA40(gp->gv.shrineroute2.xC4);
+
+    lobj = GET_LOBJ(gp->gv.shrineroute2.xC4);
+    gp->gv.shrineroute2.x168 = 0;
+    while (lobj != NULL) {
+        (&gp->gv.shrineroute2.xC8)[gp->gv.shrineroute2.x168] = lobj;
+        (&gp->gv.shrineroute2.x118)[gp->gv.shrineroute2.x168] =
+            HSD_LObjGetFlags(lobj);
+
+        lobj = HSD_LObjGetNext(lobj);
+        gp->gv.shrineroute2.x168 += 1;
+    }
+
+    gp->gv.shrineroute2.x16C = grShrineRoute_8020AB58(gp->gv.shrineroute2.xC4);
+    gp->gv.shrineroute2.x170 = grShrineRoute_8020AC44(gp->gv.shrineroute2.xC4);
+    grShrineRoute_8020A21C(gobj);
+}
 
 bool grShrineRoute_8020A214(Ground_GObj* arg)
 {
