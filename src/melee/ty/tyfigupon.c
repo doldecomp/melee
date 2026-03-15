@@ -124,10 +124,10 @@ void tyFigupon_80314C5C(HSD_GObj* gobj)
         HSD_JObjAnimAll(jobj);
         if (--tp1->x8 != 0) {
             tp1->translate.y += tp1->offset.y;
-            if (jobj->translate.x > HSD_JObjGetTranslationX(temp_r29->x18)) {
+            if (jobj->translate.x > HSD_JObjGetTranslationX(temp_r29->jobjs[3])) {
                 HSD_JObjAddTranslationX(jobj, tp1->translate.x);
             }
-            if (jobj->translate.z > HSD_JObjGetTranslationZ(temp_r29->x18)) {
+            if (jobj->translate.z > HSD_JObjGetTranslationZ(temp_r29->jobjs[3])) {
                 HSD_JObjAddTranslationZ(jobj, tp1->translate.z);
             }
             HSD_JObjAddTranslationY(jobj, tp1->translate.y);
@@ -144,12 +144,12 @@ void tyFigupon_80314C5C(HSD_GObj* gobj)
         HSD_JObjReqAnimAll(jobj, HSD_Randi(15));
         HSD_AObjSetRate(jobj->child->aobj, 1.0f);
         {
-            float temp_f30 = HSD_JObjGetTranslationX(temp_r29->x14);
-            float temp_f29_6 = HSD_JObjGetTranslationY(temp_r29->x14);
-            float temp_f31 = HSD_JObjGetTranslationZ(temp_r29->x14);
-            float temp_f28 = HSD_JObjGetTranslationX(temp_r29->x18);
-            float temp_f27 = HSD_JObjGetTranslationY(temp_r29->x18);
-            float temp_f26 = HSD_JObjGetTranslationZ(temp_r29->x18);
+            float temp_f30 = HSD_JObjGetTranslationX(temp_r29->jobjs[2]);
+            float temp_f29_6 = HSD_JObjGetTranslationY(temp_r29->jobjs[2]);
+            float temp_f31 = HSD_JObjGetTranslationZ(temp_r29->jobjs[2]);
+            float temp_f28 = HSD_JObjGetTranslationX(temp_r29->jobjs[3]);
+            float temp_f27 = HSD_JObjGetTranslationY(temp_r29->jobjs[3]);
+            float temp_f26 = HSD_JObjGetTranslationZ(temp_r29->jobjs[3]);
             float temp_f30_2 = (3.0f * HSD_Randf()) + temp_f30;
             float var_f3 = temp_f28 - temp_f30_2;
             float temp_f29_7 = (3.0f * HSD_Randf()) + temp_f29_6;
@@ -196,9 +196,9 @@ void fn_803152BC(HSD_GObj* arg0)
         temp_r3 = temp_r30->x8;
         temp_r30->x8 = temp_r3 - 1;
         if (temp_r3 != 0) {
-            HSD_JObjAnimAll(temp_r31->x10);
+            HSD_JObjAnimAll(temp_r31->jobjs[0]);
             if ((temp_r30->x8 % 30) == 0) {
-                HSD_JObjReqAnimAll(temp_r31->x10, 0.0f);
+                HSD_JObjReqAnimAll(temp_r31->jobjs[0], 0.0f);
             }
         } else {
             temp_r30->x8 = 0;
@@ -210,13 +210,48 @@ void fn_803152BC(HSD_GObj* arg0)
         if (temp_r3_2 != NULL) {
             GObj_InitUserData(arg0, 0, Toy_RemoveUserData, temp_r3_2);
         }
-        HSD_JObjReqAnimAll(temp_r31->x10, 0.0f);
+        HSD_JObjReqAnimAll(temp_r31->jobjs[0], 0.0f);
         temp_r3_2->x8 = 0x1E;
         temp_r3_2->x8 = (s32) (temp_r3_2->x8 + (((temp_r31->x5E * 2) / 30) * 0x1E));
     }
 }
 
-/// #un_803153EC
+void un_803153EC(u32 arg0, s32 arg1, s32 arg2, s32 arg3)
+{
+    s32 digits[4] = { 0, 0, 0, 0 };
+    struct un_804D6EF4_t* temp_r30;
+    HSD_JObj** jobj_ptr;
+    s32 i;
+    s32 digit;
+    s32 num;
+    s32 count;
+
+    num = (s32) arg0;
+    count = 0;
+    temp_r30 = un_804D6EF4;
+    do {
+        digits[count] = num % 10;
+        num /= 10;
+        count += 1;
+    } while (num > 0);
+
+    for (i = 0; i < arg2; i++) {
+        digit = digits[i];
+        if (digit != 0) {
+            if (arg3 == 1) {
+                HSD_JObjReqAnimAll(temp_r30->jobjs[arg1 + i],
+                                   (f32) (0x32 - (digit * 5)));
+            } else {
+                HSD_JObjReqAnimAll(temp_r30->jobjs[arg1 + i], (f32) digit);
+            }
+        } else {
+            HSD_JObjReqAnimAll(temp_r30->jobjs[arg1 + i], 0.0f);
+        }
+        jobj_ptr = &temp_r30->jobjs[arg1 + i];
+        HSD_AObjSetRate((*jobj_ptr)->aobj, 1.0f);
+        HSD_JObjAnimAll(*jobj_ptr);
+    }
+}
 
 void fn_80315574(void)
 {

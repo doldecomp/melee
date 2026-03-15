@@ -10,7 +10,7 @@
 /* 314BE4 */ void tyFigupon_80314BE4(HSD_GObj* gobj, int unused);
 /* 314C5C */ void tyFigupon_80314C5C(HSD_GObj*);
 /* 3152BC */ void fn_803152BC(HSD_GObj*);
-/* 3153EC */ UNK_RET un_803153EC(UNK_PARAMS);
+/* 3153EC */ void un_803153EC(u32, s32, s32, s32);
 /* 315574 */ void fn_80315574(void);
 /* 3155C8 */ UNK_RET fn_803155C8(UNK_PARAMS);
 /* 315C44 */ UNK_RET fn_80315C44(UNK_PARAMS);

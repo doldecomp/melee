@@ -159,11 +159,7 @@ struct un_804D6EF4_t {
     /* +0x04 */ char pad_04[4];
     /* +0x08 */ u32 x08;
     /* +0x0C */ u32 x0C;
-    /* +0x10 */ HSD_JObj* x10;
-    /* +0x14 */ char pad_14[4];
-    /* +0x18 */ HSD_JObj* x14;
-    /* +0x1C */ HSD_JObj* x18;
-    /* +0x20 */ char pad_20[0x50 - 0x20];
+    /* +0x10 */ HSD_JObj* jobjs[16];
     /* +0x50 */ HSD_Archive* archive;
     /* +0x54 */ short x54;
     /* +0x56 */ short x56;
