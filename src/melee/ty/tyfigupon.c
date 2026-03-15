@@ -189,7 +189,35 @@ void fn_80315574(void)
 
 /// #fn_80316170
 
-/// #fn_8031638C
+s32 fn_8031638C(s16 arg0)
+{
+    s32 temp_r0;
+    s32 var_r30;
+
+    temp_r0 = (s32) un_803060BC((s32) arg0, 6);
+    var_r30 = 0;
+    switch (temp_r0) {
+    case 0:
+    case 1:
+    case 4:
+    case 6:
+    case 8:
+        break;
+    case 7:
+        if (un_803048C0((s32) arg0) > 0xFA) {
+            var_r30 = 1;
+        }
+        break;
+    case 5:
+        var_r30 = 1;
+        break;
+    case 2:
+    case 3:
+        var_r30 = 1;
+        break;
+    }
+    return var_r30;
+}
 
 /// #un_80316420
 
