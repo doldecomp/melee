@@ -13,6 +13,7 @@
 
 extern char un_804D5AC0[];
 extern DevText* un_804D6F24;
+extern s32 un_804A2DE8[];
 
 /// #un_803181BC
 
@@ -306,3 +307,11 @@ s32 un_8031C354(s32 id, s32 (*buf)[], s32 max, s32 kind)
 /// #un_8031C5E4
 
 /// #un_8031C8B8
+void un_8031C8B8(void)
+{
+    s32 i;
+
+    for (i = 0; i < 0x2B; i++) {
+        un_804A2DE8[i] = 0;
+    }
+}
