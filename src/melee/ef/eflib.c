@@ -131,7 +131,8 @@ efLib_EnsureGeneratorAppSRT_inline(HSD_Generator* generator, s32 status)
             {                                                                 \
                 _parent = NULL;                                               \
             }                                                                 \
-            else {                                                            \
+            else                                                              \
+            {                                                                 \
                 _parent = (_jobj)->parent;                                    \
             }                                                                 \
         } while (_parent != NULL);                                            \
@@ -1358,7 +1359,7 @@ void efLib_8005F774(HSD_JObj* jobj, s32 count, u32 konst, u32 tev0)
 // that there was a split or something but I am not sure because the jobj
 // text is supposedly shared between these functions and eflib. Weird.
 
-/* 458EE0 */ _struct_efLib_80458EE0 efLib_80458EE0[0x10];
+/* 458EE0 */ HSD_JObj* efLib_80458EE0[0x10];
 /* 458F60 */ _struct_efLib_80458EE0 efLib_80458F60[0x8];
 
 void efLib_8005F864(HSD_GObj* gobj, u8 arg1, f32 arg2, f32 arg3)
@@ -1366,7 +1367,8 @@ void efLib_8005F864(HSD_GObj* gobj, u8 arg1, f32 arg2, f32 arg3)
     s32 idx;
 
     // WHY
-    _struct_efLib_80458EE0* base = efLib_80458EE0 + 0x10;
+    _struct_efLib_80458EE0* base =
+        ((struct _struct_efLib_80458EE0*) efLib_80458EE0) + 0x10;
 
     for (idx = 0; idx < 8; idx++) {
         if (base[idx].x0_gobj == gobj) {
@@ -1382,8 +1384,10 @@ void efLib_8005F864(HSD_GObj* gobj, u8 arg1, f32 arg2, f32 arg3)
 
 found:
     // WHY
-    efLib_80458EE0[idx + 0x10].x0_gobj = gobj;
-    efLib_80458EE0[idx + 0x10].x6_unk = arg1;
+    ((struct _struct_efLib_80458EE0*) efLib_80458EE0)[idx + 0x10].x0_gobj =
+        gobj;
+    ((struct _struct_efLib_80458EE0*) efLib_80458EE0)[idx + 0x10].x6_unk =
+        arg1;
 }
 
 void efLib_8005F990(HSD_GObj* gobj, u16 arg1)
@@ -1391,7 +1395,8 @@ void efLib_8005F990(HSD_GObj* gobj, u16 arg1)
     s32 idx;
 
     // WHY
-    _struct_efLib_80458EE0* base = efLib_80458EE0 + 0x10;
+    _struct_efLib_80458EE0* base =
+        ((struct _struct_efLib_80458EE0*) efLib_80458EE0) + 0x10;
 
     for (idx = 0; idx < 8; idx++) {
         if (base[idx].x0_gobj == gobj) {
@@ -1407,8 +1412,10 @@ void efLib_8005F990(HSD_GObj* gobj, u16 arg1)
 
 found:
     // WHY
-    efLib_80458EE0[idx + 0x10].x0_gobj = gobj;
-    efLib_80458EE0[idx + 0x10].x4_unk = arg1;
+    ((struct _struct_efLib_80458EE0*) efLib_80458EE0)[idx + 0x10].x0_gobj =
+        gobj;
+    ((struct _struct_efLib_80458EE0*) efLib_80458EE0)[idx + 0x10].x4_unk =
+        arg1;
 }
 
 void efLib_8005FAB8(Effect* effect)
