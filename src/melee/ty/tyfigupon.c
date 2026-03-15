@@ -544,7 +544,7 @@ void fn_80315C44(HSD_GObj* arg0)
                 HSD_GObjProc_8038FD54(gobj, tyFigupon_80314C5C, 0);
                 HSD_GObj_80390CD4(gobj);
                 gm_801623FC(gm_801623D8() - 0xA);
-                ef4->x5E = (u8) ef4->x5E - 1;
+                ef4->x5E = ef4->x5E - 1;
                 total = gm_801623D8() / 10u;
                 i = 0;
                 ud->x18 = i;
@@ -555,24 +555,24 @@ void fn_80315C44(HSD_GObj* arg0)
                     total /= 10;
                     i++;
                 } while (total > 0);
-                count = (s8)(u8) ef4->x5E;
+                count = ef4->x5E;
                 i = 0;
                 ud->x30 = i;
                 ud->x2C = i;
                 ud->x28 = i;
                 do {
                     (&ud->x28)[i] = count % 10;
-                    count = (s8)(count / 10);
+                    count /= 10;
                     i++;
                 } while (count > 0);
                 un_803153EC(gm_801623D8() / 10u, 3, 3, 1, 0);
-                un_803153EC((u32)(s8)(u8) ef4->x5E, 6, 2, 0, 0);
+                un_803153EC((u32) ef4->x5E, 6, 2, 0, 0);
                 ef4 = un_804D6EF4;
                 anim = 2;
-                if ((s32)(u8) ef4->x5E == 0x14) {
+                if (ef4->x5E == 0x14) {
                     anim = 3;
                 }
-                if ((s8)(u8) ef4->x5E <= 1) {
+                if (ef4->x5E <= 1) {
                     anim = 4;
                 }
                 HSD_JObjReqAnimAll(ef4->jobjs[8], (f32) anim);
@@ -585,12 +585,12 @@ void fn_80315C44(HSD_GObj* arg0)
             ud->x8 = 0;
             ef4->x5E = 0;
             un_803153EC(gm_801623D8() / 10u, 3, 3, 1, 0);
-            un_803153EC((u32)(s8)(u8) ef4->x5E, 6, 2, 0, 0);
+            un_803153EC((u32) ef4->x5E, 6, 2, 0, 0);
             ef4 = un_804D6EF4;
-            if ((s32)(u8) ef4->x5E == 0x14) {
+            if (ef4->x5E == 0x14) {
                 anim = 3;
             }
-            if ((s8)(u8) ef4->x5E <= 1) {
+            if (ef4->x5E <= 1) {
                 anim = 4;
             }
             HSD_JObjReqAnimAll(ef4->jobjs[8], (f32) anim);
@@ -616,11 +616,11 @@ void fn_80315C44(HSD_GObj* arg0)
                 total /= 10;
                 i++;
             } while (total > 0);
-            un_803153EC(gm_801623D8() / 10u, 3, 3, 1, 0);
+            un_803153EC(gm_801623D8() / 10u, 3, 3, 1, (s32) &ud->x10);
             HSD_AObjSetRate(ef4->jobjs[3]->child->u.dobj->mobj->tobj->aobj, 2.0f);
             HSD_AObjSetRate(ef4->jobjs[4]->child->u.dobj->mobj->tobj->aobj, 2.0f);
             HSD_AObjSetRate(ef4->jobjs[5]->child->u.dobj->mobj->tobj->aobj, 2.0f);
-            ud->x8 = (s8)(u8) ef4->x5E * 2;
+            ud->x8 = ef4->x5E * 2;
         }
     }
 }
