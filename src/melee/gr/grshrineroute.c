@@ -5,6 +5,9 @@
 
 #include <platform.h>
 
+#include "baselib/forward.h"
+
+#include "baselib/jobj.h"
 #include "gr/grdisplay.h"
 #include "gr/grmaterial.h"
 #include "gr/grzakogenerator.h"
@@ -335,7 +338,30 @@ bool grShrineRoute_8020AD24(bool arg)
 
 /// #grShrineRoute_8020AF38
 
-/// #grShrineRoute_8020B020
+void grShrineRoute_8020B020(HSD_GObj* gobj, int r4, int r5)
+{
+    Ground* gp = GET_GROUND(gobj);
+    int comp;
+    int i;
+
+    comp = r4 - 189;
+    for (i = 0; i < 6; i++) {
+        if (r4 == -1 || i != comp) {
+            if (gp->gv.shrineroute2.x108) {
+                if (GET_JOBJ(gp->gv.shrineroute2.x108)) {
+                    if (r5) {
+                        HSD_JObjSetFlagsAll(gp->gv.shrineroute2.x108->hsd_obj,
+                                            JOBJ_HIDDEN);
+                    } else {
+                        HSD_JObjClearFlagsAll(
+                            gp->gv.shrineroute2.x108->hsd_obj, JOBJ_HIDDEN);
+                    }
+                }
+            }
+        }
+        gp = (Ground*) &gp->gobj;
+    }
+}
 
 void grShrineRoute_8020B0AC(void)
 {
