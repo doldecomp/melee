@@ -9,6 +9,8 @@
 #include "if/types.h"
 #include "gm/gm_1601.h"
 #include "lb/lbaudio_ax.h"
+#include "lb/lb_00F9.h"
+#include "lb/lblanguage.h"
 #include "lb/lbvector.h"
 
 #include <baselib/archive.h>
@@ -17,28 +19,37 @@
 #include <baselib/displayfunc.h>
 #include <baselib/fog.h>
 #include <baselib/gobj.h>
+#include <baselib/gobjgxlink.h>
+#include <baselib/gobjobject.h>
 #include <baselib/gobjplink.h>
 #include <baselib/gobjproc.h>
 #include <baselib/gobjuserdata.h>
 #include <baselib/jobj.h>
 #include <baselib/memory.h>
 #include <baselib/random.h>
+#include <baselib/sislib.h>
 
 #include <dolphin/mtx.h>
 
 extern void* un_804D6EF0;
 extern HSD_CObjDesc* un_804D6F04;
+extern void* un_804D6F08;
+extern s32 un_804D6EFC;
+extern s32 un_804D6F00;
+extern char un_803FE5E8[];
+extern u8 un_803FEA10[];
 
 typedef struct {
     /* 0x00 */ HSD_GObj* x0;
-    /* 0x04 */ s32 x4;
+    /* 0x04 */ HSD_GObj* x4;
     /* 0x08 */ HSD_GObj* x8;
     /* 0x0C */ u8 pad_0C[0x4];
     /* 0x10 */ s32 x10;
-    /* 0x14 */ u8 pad_14[0x4];
-    /* 0x18 */ void* x18;
+    /* 0x14 */ HSD_Text* x14;
+    /* 0x18 */ HSD_Text* x18;
     /* 0x1C */ u8 pad_1C[0x8];
     /* 0x24 */ s32 x24;
+    /* 0x28 */ u8 x28;
 } TyFiguponData;
 
 typedef struct {
@@ -272,8 +283,7 @@ void fn_80315574(void)
     TyFiguponData* data = un_804D6EF0;
 
     if (data->x24 == 0) {
-        TyFiguponInner* inner = data->x18;
-        inner->x4D = 1;
+        data->x18->hidden = 1;
         data->x10 = 0;
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
     } else {
@@ -445,6 +455,89 @@ void tyFigupon_80316BF8(void)
 /// #un_8031753C
 
 /// #un_80317A60
+
+void un_80317A60(void)
+{
+    u8* fea10 = un_803FEA10;
+    TyFiguponData* data = un_804D6EF0;
+    HSD_CameraDescPerspective* cam_desc;
+    HSD_CObj* cobj;
+    HSD_GObj* gobj;
+    HSD_Text* text;
+    PAD_STACK(40);
+
+    cam_desc = HSD_ArchiveGetPublicAddress(un_804D6EF4->archive, un_803FE5E8);
+    data->x0 = GObj_Create(1, 2, 0);
+    cobj = lb_80013B14(cam_desc);
+    un_804D6F04 = (HSD_CObjDesc*) cam_desc;
+    HSD_GObjObject_80390A70(data->x0, HSD_GObj_804D784B, cobj);
+    GObj_SetupGXLinkMax(data->x0, tyFigupon_80314BE4, 0);
+    gobj = data->x0;
+    gobj->gxlink_prios = 0x5010000000000000ULL;
+    data->x4 = GObj_Create(1, 2, 0);
+    cobj = lb_80013B14((HSD_CameraDescPerspective*)(fea10 + 0x4EC));
+    un_804D6F08 = fea10 + 0x4EC;
+    HSD_GObjObject_80390A70(data->x4, HSD_GObj_804D784B, cobj);
+    GObj_SetupGXLinkMax(data->x4, (GObj_RenderFunc) un_803068E0, 0);
+    gobj = data->x4;
+    gobj->gxlink_prios = 0x2680000000000000ULL;
+
+    if (lbLang_IsSavedLanguageJP() != 0) {
+        HSD_SisLib_803A62A0(0, (char*)(fea10 + 0x524),
+                            (char*)(fea10 + 0x530));
+    } else {
+        HSD_SisLib_803A62A0(0, (char*)(fea10 + 0x53C),
+                            (char*)(fea10 + 0x548));
+    }
+
+    un_804D6EFC = HSD_SisLib_803A611C(0, data->x0, 0xB, 0xB, 0, 0x3E, 0, 0);
+    data->x14 = HSD_SisLib_803A5ACC(0, un_804D6EFC, 5.2f, 5.2f, 17.2f,
+                                     448.0f, 64.0f);
+    if (lbLang_IsSavedLanguageUS() != 0) {
+        text = data->x14;
+        text->x34.x = 1.6f;
+        text->x34.y = 0.7f;
+    } else {
+        text = data->x14;
+        text->x34.x = 2.0f;
+        text->x34.y = 1.0f;
+    }
+    text = data->x14;
+    text->font_size.x = 0.0235f;
+    text->font_size.y = 0.0715f;
+    data->x14->default_alignment = 1;
+    if (lbLang_IsSavedLanguageUS() != 0) {
+        data->x14->default_kerning = 1;
+    }
+    data->x14->default_fitting = 1;
+
+    un_804D6F00 = HSD_SisLib_803A611C(0, data->x0, 0xD, 0xB, 0, 0x3E, 0, 0);
+    data->x18 = HSD_SisLib_803A5ACC(0, un_804D6F00, -13.2f, 9.4f, 17.2f,
+                                     320.0f, 32.0f);
+    text = data->x18;
+    text->font_size.x = 0.027f;
+    text->font_size.y = 0.028f;
+    data->x18->default_kerning = 1;
+    if (lbLang_IsSavedLanguageUS() != 0) {
+        text = data->x18;
+        text->x34.x = 0.8f;
+        text->x34.y = 0.8f;
+        data->x18->pos_x = -13.599999f;
+        data->x18->pos_y = 9.599999f;
+    }
+    HSD_SisLib_803A6368(data->x18, 0x13C);
+    data->x10 = 0;
+    data->x24 = 0;
+    data->x28 = 8;
+    ((TyFiguponData*) un_804D6EF0)->x18->hidden = 1;
+
+    HSD_GObjProc_8038FD54(data->x0, (void (*)(HSD_GObj*)) fn_80316C24, 0);
+    HSD_GObjProc_8038FD54(data->x0, fn_803168DC, 0);
+    HSD_GObjProc_8038FD54(data->x4, fn_803168DC, 0);
+    HSD_GObjProc_8038FD54(data->x0,
+                           (void (*)(HSD_GObj*)) tyFigupon_80316BF8, 0);
+    HSD_GObj_80390CD4(data->x0);
+}
 
 /// #un_80317D80_OnEnter
 
