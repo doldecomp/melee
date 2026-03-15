@@ -20,7 +20,7 @@
 /* 31B850 */ UNK_RET un_8031B850(UNK_PARAMS);
 /* 31B9A4 */ void un_8031B9A4_OnFrame(void);
 /* 31B9DC */ void* un_8031B9DC(s32 id);
-/* 31BA78 */ UNK_RET un_8031BA78(UNK_PARAMS);
+/* 31BA78 */ void un_8031BA78(s32, s32, f32);
 /* 31BB34 */ s32 un_8031BB34(s8);
 /* 31BB94 */ char* un_8031BB94(s8);
 /* 31BBF4 */ s32 un_8031BBF4(s8);

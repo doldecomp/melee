@@ -12,6 +12,7 @@
 #include <baselib/random.h>
 
 extern char un_804D5AC0[];
+extern DevText* un_804D6F24;
 
 /// #un_803181BC
 
@@ -91,7 +92,33 @@ void* un_8031B9DC(s32 id)
     return p;
 }
 
+static char un_803FF19C[] = "X  %3.2f\nZ  %3.2f";
+
 /// #un_8031BA78
+void un_8031BA78(s32 arg0, s32 arg1, f32 farg0)
+{
+    char buf[24];
+    u8* data;
+
+    data = (u8*) un_8031B9DC(arg0);
+    switch (arg1) {
+    case 1:
+        break;
+    case 0:
+        *(f32*) (data + 8) = farg0;
+        break;
+    case 2:
+        *(f32*) (data + 0xC) = farg0;
+        break;
+    }
+    if (un_804D6F24 != NULL) {
+        DevText_Erase(un_804D6F24);
+        DevText_SetCursorXY(un_804D6F24, 0, 0);
+        sprintf(buf, un_803FF19C, *(f32*) (data + 8),
+                *(f32*) (data + 0xC));
+        DevText_Print(un_804D6F24, buf);
+    }
+}
 
 s32 un_8031BB34(s8 idx)
 {
