@@ -9,13 +9,18 @@
 #include "forward.h"
 
 #include "gm/gm_1A45.h"
+#include "gr/grdatfiles.h"
 #include "gr/grdisplay.h"
 #include "gr/grlib.h"
 #include "gr/ground.h"
 #include "gr/inlines.h"
+
+#include "lb/forward.h"
+
 #include "lb/lb_00F9.h"
 #include "mp/mplib.h"
 
+#include <baselib/archive.h>
 #include <baselib/dobj.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
@@ -218,7 +223,46 @@ void grRCruise_801FF79C(Ground_GObj* arg) {}
 
 void grRCruise_801FF7A0(Ground_GObj* arg) {}
 
-/// #grRCruise_801FF7A4
+void grRCruise_801FF7A4(Ground_GObj* gobj)
+{
+    UnkArchiveStruct* archive;
+    DynamicsDesc* data;
+    Ground* gp;
+    HSD_JObj* jobj;
+
+    gp = GET_GROUND(gobj);
+    jobj = GET_JOBJ(gobj);
+    Ground_801C2ED0(jobj, gp->map_id);
+    grAnime_801C8138(gobj, gp->map_id, 0);
+    grAnime_801C752C(jobj, 1, 30628, HSD_AObjSetFlags, 3, 0x20000000);
+    if ((archive = grDatFiles_801C6324(), archive != NULL) &&
+        (data = HSD_ArchiveGetPublicAddress(archive->unk0,
+                                            "dynamicsdata_shipflag"),
+         data != NULL))
+    {
+        Ground_801C3FA4(gobj, 23);
+        grLib_801C9B20(jobj, data, &gp->gv.rcruise2.xC4);
+    } else {
+        gp->gv.rcruise2.xC4.data = NULL;
+    }
+
+    jobj = Ground_801C3FA4(gobj, 10);
+    if (jobj != NULL) {
+        Ground_801C2D0C(0, jobj);
+    }
+    jobj = Ground_801C3FA4(gobj, 11);
+    if (jobj != NULL) {
+        Ground_801C2D0C(1, jobj);
+    }
+    jobj = Ground_801C3FA4(gobj, 12);
+    if (jobj != NULL) {
+        Ground_801C2D0C(2, jobj);
+    }
+    jobj = Ground_801C3FA4(gobj, 13);
+    if (jobj != NULL) {
+        Ground_801C2D0C(3, jobj);
+    }
+}
 
 bool grRCruise_801FF8DC(Ground_GObj* arg)
 {

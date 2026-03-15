@@ -770,7 +770,8 @@ struct grRCruise_GroundVars {
 };
 
 struct grRCruise_GroundVars2 {
-    /* +00 gp+C4 */ char pad_0[0x28];
+    /* +00 gp+C4 */ DynamicsDesc xC4;
+    /* +00 gp+D0 */ DynamicsDesc xD0;
     /* +28 gp+EC */ HSD_GObj* xEC;
 };
 
