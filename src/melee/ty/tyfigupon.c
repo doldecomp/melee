@@ -627,13 +627,14 @@ void fn_80315C44(HSD_GObj* arg0)
 
 void fn_80316170(HSD_GObj* arg0)
 {
-    u8* arr = un_804A2AA8;
+    // Somehow get rid of 0x8 stackspace and fix a regswap for 100%
+    s16* arr = un_804A2AA8;
     f32 y = HSD_JObjGetTranslationY(GET_JOBJ(arg0));
     TyFiguponUD* ud = HSD_GObjGetUserData(arg0);
 
     if (ud != NULL) {
         if (y + ud->x44 <= -6.2f) {
-            if (un_803048C0(*(s16*)(arr + 0xC)) == 1) {
+            if (un_803048C0(arr[6]) == 1) {
                 un_80306D14();
             }
             ((TyModeState*) un_804A284C)->x0 = 1;
@@ -647,11 +648,11 @@ void fn_80316170(HSD_GObj* arg0)
         ud->x44 -= 0.6f;
         HSD_JObjAddTranslationY(GET_JOBJ(arg0), ud->x44);
     } else {
-        TyFiguponUD* new_ud = HSD_MemAlloc(0x58);
-        if (new_ud != NULL) {
-            GObj_InitUserData(arg0, 0, Toy_RemoveUserData, new_ud);
+        ud = HSD_MemAlloc(0x58);
+        if (ud != NULL) {
+            GObj_InitUserData(arg0, 0, Toy_RemoveUserData, ud);
         }
-        new_ud->x44 = 0.0f;
+        ud->x44 = 0.0f;
     }
 }
 
