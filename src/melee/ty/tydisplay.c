@@ -558,7 +558,191 @@ void un_80319540(s32 arg0)
     }
 }
 
-/// #un_80319994
+void un_80319994(s32 arg0)
+{
+    u8* grid = (u8*) un_804D6F14;
+    u8* cfg = (u8*) un_804D6F18;
+    f32 xoff = 0.0f;
+    s32 col = 0;
+    s32 row = 0;
+    s32 ring = 1;
+    s32 i;
+    s32 count;
+    s32 n2;
+    s32 mid;
+    s32 pivot;
+    s32 j;
+    s32 n;
+    u8* ptr;
+
+    PAD_STACK(0x38);
+
+    memzero(grid, 0x12E4);
+    ptr = grid;
+    *(f32*)(grid + 0x08) = -3.5f;
+    *(f32*)(grid + 0x04) = -3.5f;
+    *(f32*)(grid + 0x10) = 3.5f;
+    *(f32*)(grid + 0x0C) = 3.5f;
+
+    for (i = 0; i < *(s32*)(cfg + 0x08); i++) {
+        if (i == 0) {
+            *(f32*)(ptr + 0x97C) = 0.0f;
+            *(f32*)(ptr + 0x980) = 0.0f;
+        } else {
+            *(f32*)(ptr + 0x97C) = 9.0f * (f32)col + xoff;
+            if (arg0 != 0) {
+                *(f32*)(ptr + 0x980) = -9.0f * (f32)row;
+            } else {
+                *(f32*)(ptr + 0x980) = 9.0f * (f32)row;
+            }
+        }
+        col += 1;
+        if (col >= ring) {
+            xoff -= 4.5f;
+            col = 0;
+            row += 1;
+            ring += 1;
+        }
+        {
+            f32 x = *(f32*)(ptr + 0x97C);
+            if (x < *(f32*)(grid + 0x04)) {
+                *(f32*)(grid + 0x04) = x;
+            }
+        }
+        {
+            f32 x = *(f32*)(ptr + 0x97C);
+            if (x > *(f32*)(grid + 0x0C)) {
+                *(f32*)(grid + 0x0C) = x;
+            }
+        }
+        {
+            f32 z = *(f32*)(ptr + 0x980);
+            if (z < *(f32*)(grid + 0x08)) {
+                *(f32*)(grid + 0x08) = z;
+            }
+        }
+        {
+            f32 z = *(f32*)(ptr + 0x980);
+            if (z > *(f32*)(grid + 0x10)) {
+                *(f32*)(grid + 0x10) = z;
+            }
+        }
+        ptr += 8;
+    }
+
+    count = *(s32*)(cfg + 0x08);
+    if (arg0 != 0 && count > 1) {
+        n2 = count - 1;
+        if (n2 > 0) {
+            TySortElem tmp;
+            TySortElem* sort = (TySortElem*)(grid + 0x97C);
+            mid = n2 / 2;
+
+            if (mid != 0) {
+                tmp = sort[0];
+                sort[0] = sort[mid];
+                sort[mid] = tmp;
+            }
+
+            pivot = 0;
+            j = 0;
+            for (ptr = (u8*)&sort[1], n = 1; n2 >= n; n++, ptr += 8) {
+                if (*(f32*)(ptr + 4) < sort[0].val) {
+                    pivot += 1;
+                    j += 8;
+                    if (pivot != n) {
+                        TySortElem* s = (TySortElem*)(grid + j + 0x97C);
+                        tmp = *s;
+                        *s = *(TySortElem*)ptr;
+                        *(TySortElem*)ptr = tmp;
+                    }
+                }
+            }
+
+            if (pivot != 0) {
+                TySortElem* s = &sort[pivot];
+                tmp = sort[0];
+                sort[0] = *s;
+                *s = tmp;
+            }
+
+            un_8031830C(sort, 0, pivot - 1);
+            un_8031830C(sort, pivot + 1, n2);
+        }
+    }
+
+    un_80318B1C(*(s32*)(cfg + 0x08));
+
+    count = *(s32*)(cfg + 0x08);
+    if (count > 1) {
+        n2 = (count / 3) * 2;
+        if (n2 > 0) {
+            TySortElemI tmp;
+            TySortElemI* sort = (TySortElemI*)(grid + 0x14);
+            mid = n2 / 2;
+
+            if (mid != 0) {
+                tmp = sort[0];
+                sort[0] = sort[mid];
+                sort[mid] = tmp;
+            }
+
+            pivot = 0;
+            j = 0;
+            for (ptr = (u8*)&sort[1], n = 1; n2 >= n; n++, ptr += 8) {
+                if (*(s32*)(ptr + 4) > sort[0].val) {
+                    pivot += 1;
+                    j += 8;
+                    if (pivot != n) {
+                        TySortElemI* s = (TySortElemI*)(grid + j + 0x14);
+                        tmp = *s;
+                        *s = *(TySortElemI*)ptr;
+                        *(TySortElemI*)ptr = tmp;
+                    }
+                }
+            }
+
+            if (pivot != 0) {
+                TySortElemI* s = &sort[pivot];
+                tmp = sort[0];
+                sort[0] = *s;
+                *s = tmp;
+            }
+
+            un_80318714(sort, 0, pivot - 1);
+            un_80318714(sort, pivot + 1, n2);
+        }
+    }
+
+    ptr = grid;
+    {
+        s32 k;
+        s32 off = 0;
+
+        for (k = 0; k < *(s32*)(cfg + 0x08); k++) {
+            HSD_GObj* gobj;
+            HSD_JObj** jobjArr;
+            *(HSD_GObj**)(cfg + 0x78) = un_8031BC54(*(s32*)(ptr + 0x14));
+            gobj = *(HSD_GObj**)(cfg + 0x78);
+            if (gobj != NULL) {
+                jobjArr = un_804D6F10;
+                *(HSD_JObj**)((u8*)jobjArr + off) = (HSD_JObj*) gobj->hsd_obj;
+                {
+                    f32 xpos = *(f32*)(ptr + 0x97C);
+                    HSD_JObj* jobj = *(HSD_JObj**)((u8*)jobjArr + off);
+                    HSD_JObjSetTranslateX(jobj, xpos);
+                }
+                {
+                    f32 zpos = *(f32*)(ptr + 0x980);
+                    HSD_JObj* jobj = *(HSD_JObj**)((u8*)jobjArr + off);
+                    HSD_JObjSetTranslateZ(jobj, zpos);
+                }
+            }
+            ptr += 8;
+            off += 4;
+        }
+    }
+}
 
 /// #un_80319EF0
 
@@ -1018,8 +1202,7 @@ void un_8031B460_OnEnter(void* arg0)
             un_80319540(HSD_Randi(2));
             break;
         case 3:
-            HSD_Randi(2);
-            un_80319994();
+            un_80319994(HSD_Randi(2));
             break;
         }
     }
