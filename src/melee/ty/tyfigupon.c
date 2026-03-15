@@ -252,7 +252,7 @@ void fn_803152BC(HSD_GObj* arg0)
     }
 }
 
-void un_803153EC(u32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
+void un_803153EC(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
 {
     s32 digits[4] = { 0, 0, 0, 0 };
     struct un_804D6EF4_t* temp_r30;
@@ -262,14 +262,12 @@ void un_803153EC(u32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     s32 num;
     s32 count;
 
-    num = (s32) arg0;
-    count = 0;
+    num = arg0;
     temp_r30 = un_804D6EF4;
-    do {
+    for (count = 0; num > 0; count++) {
         digits[count] = num % 10;
         num /= 10;
-        count += 1;
-    } while (num > 0);
+    }
 
     for (i = 0; i < arg2; i++) {
         digit = digits[i];
