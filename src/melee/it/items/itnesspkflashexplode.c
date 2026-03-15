@@ -18,6 +18,10 @@
 
 /* 2AFD44 */ static bool itNessPKFlashExplode_UnkMotion0_Coll(Item_GObj* gobj);
 
+ItemStateTable it_803F6F40[] = { { 0, itNessPKFlashExplode_UnkMotion0_Anim,
+                                   itNessPKFlashExplode_UnkMotion0_Phys,
+                                   itNessPKFlashExplode_UnkMotion0_Coll } };
+
 Item_GObj* it_802AF940(Item_GObj* owner, Item_GObj* flash, Vec3* pos,
                        ItemKind kind, f32 facing_dir, f32 charge)
 {
