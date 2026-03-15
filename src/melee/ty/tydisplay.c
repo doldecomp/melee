@@ -12,6 +12,7 @@
 
 #include <placeholder.h>
 
+#include <MSL/math_ppc.h>
 #include <MSL/trigf.h>
 
 #include <baselib/archive.h>
@@ -404,7 +405,258 @@ s32 un_80318B1C(s32 arg0)
     }
 }
 
-/// #un_80318CB4
+void un_80318CB4(s32 arg0)
+{
+    u8* grid = (u8*) un_804D6F14;
+    u8* cfg = (u8*) un_804D6F18;
+    s32 prev_ring_size;
+    s32 ring_count = 0;
+    s32 ring_max = 6;
+    f32 angle = 0.0f;
+    f32 radius;
+    f32 base_step;
+    s32 i;
+    s32 count;
+    s32 n2;
+    s32 mid;
+    s32 pivot;
+    s32 j;
+    s32 n;
+    u8* ptr;
+
+    PAD_STACK(0x48);
+
+    memzero(grid, 0x12E4);
+    *(f32*)(grid + 0x08) = -3.5f;
+    *(f32*)(grid + 0x04) = -3.5f;
+    *(f32*)(grid + 0x10) = 3.5f;
+    *(f32*)(grid + 0x0C) = 3.5f;
+
+    if (arg0 != 0) {
+        base_step = 9.0f;
+    } else {
+        base_step = 11.0f;
+    }
+    radius = base_step;
+
+    ptr = grid;
+    for (i = 0; i < *(s32*)(cfg + 0x08); i++) {
+        if (i == 0) {
+            *(f32*)(ptr + 0x97C) = 0.0f;
+            *(f32*)(ptr + 0x980) = 0.0f;
+        } else {
+            f32 rad = 0.017453292f * angle;
+            *(f32*)(ptr + 0x97C) = radius * cosf(rad);
+            *(f32*)(ptr + 0x980) = radius * sinf(rad);
+            if (arg0 == 0) {
+                *(f32*)(ptr + 0x97C) = 2.0f * HSD_Randf() + *(f32*)(ptr + 0x97C);
+                *(f32*)(ptr + 0x980) = 2.0f * HSD_Randf() + *(f32*)(ptr + 0x980);
+            }
+            if (HSD_Randi(3) != 0) {
+                f32 theta = atan2f(*(f32*)(ptr + 0x980), *(f32*)(ptr + 0x97C));
+                f32 mag = sqrtf(*(f32*)(ptr + 0x97C) * *(f32*)(ptr + 0x97C) + *(f32*)(ptr + 0x980) * *(f32*)(ptr + 0x980));
+                s32 tries;
+                s32 start;
+                s32 collided;
+
+                if (i < 0x24) {
+                    start = 0;
+                } else {
+                    start = i - (prev_ring_size * 2 - 6);
+                }
+
+                collided = 0;
+retry:
+                if (collided == 0) {
+                    s32 k;
+                    u8* other;
+                    *(f32*)(ptr + 0x97C) = mag * cosf(theta);
+                    *(f32*)(ptr + 0x980) = mag * sinf(theta);
+                    tries = (s32)(mag / 0.1f);
+                    if (HSD_Randi(2) != 0) {
+                        f32 half = mag * 0.5f;
+                        if ((s32) half > 1) {
+                            tries -= HSD_Randi((s32) half);
+                        }
+                    }
+                    k = i - 1;
+                    other = grid + (k * 8);
+                    while (k >= start) {
+                        f32 dx = *(f32*)(ptr + 0x97C) - *(f32*)(other + 0x97C);
+                        f32 dz = *(f32*)(ptr + 0x980) - *(f32*)(other + 0x980);
+                        f32 dist = sqrtf(dx * dx + dz * dz);
+                        if (dist > 2.1474836e9f || dist < -2.1474836e9f) {
+                            OSReport("*** tyDisplay Atari Irregul!\n");
+                            __assert("tydisplay.c", 0xC6U, "0");
+                        }
+                        if ((s32) dist <= (s32) 8.0f) {
+                            collided = 1;
+                            break;
+                        }
+                        other -= 8;
+                        k -= 1;
+                    }
+                    if (tries != 0) {
+                        if (collided == 0) {
+                            mag -= 0.1f;
+                        }
+                        collided = 0;
+                        goto retry;
+                    }
+                }
+            }
+            ring_count += 1;
+            if (ring_count >= ring_max) {
+                if (arg0 != 0) {
+                    radius += 9.0f;
+                } else {
+                    radius += 11.0f;
+                }
+                prev_ring_size = ring_max;
+                ring_count = 0;
+                ring_max += 6;
+                if (arg0 != 0) {
+                    angle = 0.0f;
+                } else {
+                    angle = (f32) HSD_Randi(0x1E);
+                }
+            } else {
+                angle += 360.0f / (f32) ring_max;
+            }
+        }
+        {
+            f32 x = *(f32*)(ptr + 0x97C);
+            if (x < *(f32*)(grid + 0x04)) *(f32*)(grid + 0x04) = x;
+        }
+        {
+            f32 x = *(f32*)(ptr + 0x97C);
+            if (x > *(f32*)(grid + 0x0C)) *(f32*)(grid + 0x0C) = x;
+        }
+        {
+            f32 z = *(f32*)(ptr + 0x980);
+            if (z < *(f32*)(grid + 0x08)) *(f32*)(grid + 0x08) = z;
+        }
+        {
+            f32 z = *(f32*)(ptr + 0x980);
+            if (z > *(f32*)(grid + 0x10)) *(f32*)(grid + 0x10) = z;
+        }
+        ptr += 8;
+    }
+
+    count = *(s32*)(cfg + 0x08);
+    if (count > 1) {
+        n2 = count - 1;
+        if (n2 > 0) {
+            TySortElem tmp;
+            TySortElem* sort = (TySortElem*)(grid + 0x97C);
+            mid = n2 / 2;
+
+            if (mid != 0) {
+                tmp = sort[0];
+                sort[0] = sort[mid];
+                sort[mid] = tmp;
+            }
+
+            pivot = 0;
+            j = 0;
+            for (ptr = (u8*)&sort[1], n = 1; n2 >= n; n++, ptr += 8) {
+                if (*(f32*)(ptr + 4) < sort[0].val) {
+                    pivot += 1;
+                    j += 8;
+                    if (pivot != n) {
+                        TySortElem* s = (TySortElem*)(grid + j + 0x97C);
+                        tmp = *s;
+                        *s = *(TySortElem*)ptr;
+                        *(TySortElem*)ptr = tmp;
+                    }
+                }
+            }
+
+            if (pivot != 0) {
+                TySortElem* s = &sort[pivot];
+                tmp = sort[0];
+                sort[0] = *s;
+                *s = tmp;
+            }
+
+            un_8031830C(sort, 0, pivot - 1);
+            un_8031830C(sort, pivot + 1, n2);
+        }
+    }
+
+    un_80318B1C(*(s32*)(cfg + 0x08));
+
+    count = *(s32*)(cfg + 0x08);
+    if (count > 1) {
+        n2 = (count / 3) * 2;
+        if (n2 > 0) {
+            TySortElemI tmp;
+            TySortElemI* sort = (TySortElemI*)(grid + 0x14);
+            mid = n2 / 2;
+
+            if (mid != 0) {
+                tmp = sort[0];
+                sort[0] = sort[mid];
+                sort[mid] = tmp;
+            }
+
+            pivot = 0;
+            j = 0;
+            for (ptr = (u8*)&sort[1], n = 1; n2 >= n; n++, ptr += 8) {
+                if (*(s32*)(ptr + 4) > sort[0].val) {
+                    pivot += 1;
+                    j += 8;
+                    if (pivot != n) {
+                        TySortElemI* s = (TySortElemI*)(grid + j + 0x14);
+                        tmp = *s;
+                        *s = *(TySortElemI*)ptr;
+                        *(TySortElemI*)ptr = tmp;
+                    }
+                }
+            }
+
+            if (pivot != 0) {
+                TySortElemI* s = &sort[pivot];
+                tmp = sort[0];
+                sort[0] = *s;
+                *s = tmp;
+            }
+
+            un_80318714(sort, 0, pivot - 1);
+            un_80318714(sort, pivot + 1, n2);
+        }
+    }
+
+    {
+        s32 k;
+        s32 off = 0;
+        u8* posptr = grid;
+        ptr = grid;
+        for (k = 0; k < *(s32*)(cfg + 0x08); k++) {
+            HSD_GObj* gobj;
+            HSD_JObj** jobjArr;
+            *(HSD_GObj**)(cfg + 0x78) = un_8031BC54(*(s32*)(ptr + 0x14));
+            gobj = *(HSD_GObj**)(cfg + 0x78);
+            if (gobj != NULL) {
+                jobjArr = un_804D6F10;
+                *(HSD_JObj**)((u8*)jobjArr + off) = (HSD_JObj*) gobj->hsd_obj;
+                {
+                    f32 xpos = *(f32*)(posptr + 0x97C);
+                    HSD_JObj* jobj = *(HSD_JObj**)((u8*)jobjArr + off);
+                    HSD_JObjSetTranslateX(jobj, xpos);
+                }
+                {
+                    f32 zpos = *(f32*)(posptr + 0x980);
+                    HSD_JObj* jobj = *(HSD_JObj**)((u8*)jobjArr + off);
+                    HSD_JObjSetTranslateZ(jobj, zpos);
+                }
+                off += 4;
+                posptr += 8;
+            }
+            ptr += 8;
+        }
+    }
+}
 
 void un_80319540(s32 arg0)
 {
@@ -1322,7 +1574,7 @@ void un_8031B460_OnEnter(void* arg0)
         switch (m) {
         case 0:
         case 1:
-            un_80318CB4();
+            un_80318CB4(m);
             break;
         case 2:
             un_80319540(HSD_Randi(2));

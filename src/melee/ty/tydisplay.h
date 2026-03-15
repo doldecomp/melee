@@ -11,7 +11,7 @@ struct HSD_JObj;
 /* 31830C */ void un_8031830C(struct TySortElem*, s32, s32);
 /* 318714 */ void un_80318714(struct TySortElemI*, s32, s32);
 /* 318B1C */ s32 un_80318B1C(s32 arg0);
-/* 318CB4 */ UNK_RET un_80318CB4(UNK_PARAMS);
+/* 318CB4 */ void un_80318CB4(s32);
 /* 319540 */ void un_80319540(s32);
 /* 319994 */ void un_80319994(s32);
 /* 319EF0 */ void un_80319EF0(void);
