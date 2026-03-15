@@ -2,6 +2,7 @@
 
 #include "inlines.h"
 #include "toy.h"
+#include "tylist.h"
 #include "types.h"
 
 #include "if/textlib.h"
@@ -23,18 +24,28 @@
 extern void* un_804D6EF0;
 
 typedef struct {
-    u8 pad[0x10];
-    s32 x10;
-    u8 pad2[0x4];
-    void* x18;
-    u8 pad3[0x8];
-    s32 x24;
+    /* 0x00 */ HSD_GObj* x0;
+    /* 0x04 */ s32 x4;
+    /* 0x08 */ HSD_GObj* x8;
+    /* 0x0C */ u8 pad_0C[0x4];
+    /* 0x10 */ s32 x10;
+    /* 0x14 */ u8 pad_14[0x4];
+    /* 0x18 */ void* x18;
+    /* 0x1C */ u8 pad_1C[0x8];
+    /* 0x24 */ s32 x24;
 } TyFiguponData;
 
 typedef struct {
     u8 pad[0x4D];
     u8 x4D;
 } TyFiguponInner;
+
+typedef struct {
+    /* 0x00 */ u32 x0;
+    /* 0x04 */ u32 x4;
+    /* 0x08 */ u8 pad_08[0x4];
+    /* 0x0C */ u32 xC;
+} TyFiguponED4;
 
 void tyFigupon_80314AA8(HSD_JObj* jobj, char* anim_str, char* matanim_str,
                         char* shapeanim_str)
@@ -237,4 +248,50 @@ void tyFigupon_80316BF8(void)
 
 /// #un_80317D80_OnEnter
 
-/// #un_803181BC
+s32 un_803181BC(void)
+{
+    TyFiguponData* temp_r31;
+    struct un_804D6EF4_t* ef4;
+    TyFiguponED4* ed4;
+    PAD_STACK(8);
+
+    ef4 = un_804D6EF4;
+    temp_r31 = un_804D6EF0;
+    ed4 = un_804D6ED4;
+    if (ef4->archive != NULL) {
+        ef4->archive = NULL;
+    }
+    if (un_804D6EC8 != NULL) {
+        un_804D6EC8 = NULL;
+    }
+    if (ed4->xC != 0U) {
+        ed4->xC = 0U;
+    }
+    if (ef4->x00 != 0U) {
+        ef4->x00 = 0U;
+    }
+    if (ef4->x08 != 0U) {
+        ef4->x08 = 0U;
+    }
+    if (ef4->x0C != 0U) {
+        ef4->x0C = 0U;
+    }
+    if (ed4->x0 != 0U) {
+        ed4->x0 = 0U;
+    }
+    if (ed4->x4 != 0U) {
+        ed4->x4 = 0U;
+    }
+    if (temp_r31->x0 != NULL) {
+        HSD_GObjProc_8038FED4(temp_r31->x0);
+        temp_r31->x0 = NULL;
+    }
+    if ((u32) temp_r31->x4 != 0U) {
+        temp_r31->x4 = 0;
+    }
+    if (temp_r31->x8 != NULL) {
+        HSD_GObjPLink_80390228(temp_r31->x8);
+        temp_r31->x8 = NULL;
+    }
+    return lbAudioAx_800236DC();
+}

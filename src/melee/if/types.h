@@ -155,13 +155,17 @@ struct DevText {
 };
 
 struct un_804D6EF4_t {
-    /* +0 */ char pad_0[0x18];
-    /* +14 */ HSD_JObj* x14;
-    /* +18 */ HSD_JObj* x18;
-    /* +1C */ char pad_1C[0x50 - 0x20];
-    /* +50 */ HSD_Archive* archive;
-    /* +54 */ short x54;
-    /* +56 */ short x56;
+    /* +0x00 */ u32 x00;
+    /* +0x04 */ char pad_04[4];
+    /* +0x08 */ u32 x08;
+    /* +0x0C */ u32 x0C;
+    /* +0x10 */ char pad_10[8];
+    /* +0x18 */ HSD_JObj* x14;
+    /* +0x1C */ HSD_JObj* x18;
+    /* +0x20 */ char pad_20[0x50 - 0x20];
+    /* +0x50 */ HSD_Archive* archive;
+    /* +0x54 */ short x54;
+    /* +0x56 */ short x56;
 };
 
 struct un_80301C64_t {
