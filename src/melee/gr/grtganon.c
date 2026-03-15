@@ -87,7 +87,7 @@ HSD_GObj* grTGanon_80224784(int id)
 {
     HSD_GObj* gobj;
     StageCallbacks* cb = &grTGn_803E9880[id];
-    gobj = Ground_801C14D0(id);
+    gobj = Ground_GetStageGObj(id);
 
     if (gobj != NULL) {
         Ground* gp = (Ground*) HSD_GObjGetUserData(gobj);

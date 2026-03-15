@@ -112,7 +112,7 @@ HSD_GObj* grBigBlueRoute_8020B9D4(int gobj_id)
     HSD_GObj* gobj;
     StageCallbacks* callbacks = &grBb_Route_803E5E78[gobj_id];
 
-    gobj = Ground_801C14D0(gobj_id);
+    gobj = Ground_GetStageGObj(gobj_id);
 
     if (gobj != NULL) {
         Ground* gp = gobj->user_data;

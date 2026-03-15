@@ -208,7 +208,7 @@ Ground_GObj* grZebes_801D8558(int id)
 {
     Ground_GObj* gobj;
     StageCallbacks* cbs = &grZe_callbacks[id];
-    gobj = Ground_801C14D0(id);
+    gobj = Ground_GetStageGObj(id);
     if (gobj != NULL) {
         Ground* gp = GET_GROUND(gobj);
         gp->x8_callback = NULL;

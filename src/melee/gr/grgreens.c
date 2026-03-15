@@ -184,7 +184,7 @@ Ground_GObj* grGreens_80213524(int id)
 {
     Ground_GObj* gobj;
     StageCallbacks* cbs = &grGr_callbacks[id];
-    gobj = Ground_801C14D0(id);
+    gobj = Ground_GetStageGObj(id);
     if (gobj != NULL) {
         Ground* gp = GET_GROUND(gobj);
         gp->x8_callback = NULL;

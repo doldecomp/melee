@@ -109,7 +109,7 @@ static HSD_GObj* grShrine_80201D20(s32 arg0)
     HSD_GObj* gobj;
     StageCallbacks* callbacks = &grSh_803E50E8[arg0];
 
-    gobj = Ground_801C14D0(arg0);
+    gobj = Ground_GetStageGObj(arg0);
 
     if (gobj != NULL) {
         Ground* gp;

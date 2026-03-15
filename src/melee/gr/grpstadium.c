@@ -203,7 +203,7 @@ Ground_GObj* grStadium_801D10F8(StadiumGrType id)
     StageCallbacks* cb;
 
     cb = &grPs_803E126C[id];
-    gobj = Ground_801C14D0(id);
+    gobj = Ground_GetStageGObj(id);
 
     if (gobj != NULL) {
         Ground* gp = GET_GROUND(gobj);

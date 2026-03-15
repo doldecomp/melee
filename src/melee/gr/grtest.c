@@ -89,7 +89,7 @@ HSD_GObj* grTest_80207044(int gobj_id)
 {
     HSD_GObj* gobj;
     StageCallbacks* callbacks = &grTe_803E5708[gobj_id];
-    gobj = Ground_801C14D0(gobj_id);
+    gobj = Ground_GetStageGObj(gobj_id);
     if (gobj != NULL) {
         Ground* gp = GET_GROUND(gobj);
         gp->x8_callback = 0;

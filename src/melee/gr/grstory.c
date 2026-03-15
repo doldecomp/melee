@@ -90,7 +90,7 @@ Ground_GObj* grStory_801E30D8(int gobj_id)
     Ground_GObj* gobj;
     StageCallbacks* callbacks = &grSt_803E26F0[gobj_id];
 
-    gobj = Ground_801C14D0(gobj_id);
+    gobj = Ground_GetStageGObj(gobj_id);
 
     if (gobj != NULL) {
         Ground* gp = gobj->user_data;

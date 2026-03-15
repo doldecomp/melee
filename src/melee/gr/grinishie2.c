@@ -230,7 +230,7 @@ HSD_GObj* grInishie2_801FCCDC(int gobj_id)
     HSD_GObj* gobj;
     StageCallbacks* callbacks = &grI2_803E4AB4[gobj_id];
 
-    gobj = Ground_801C14D0(gobj_id);
+    gobj = Ground_GetStageGObj(gobj_id);
 
     if (gobj != NULL) {
         Ground* gp = gobj->user_data;

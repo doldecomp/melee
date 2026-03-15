@@ -99,7 +99,7 @@ HSD_GObj* grTFalco_8022089C(int id)
     HSD_GObj* gobj;
 
     StageCallbacks* cb = &grTFc_803E8918[id];
-    gobj = Ground_801C14D0(id);
+    gobj = Ground_GetStageGObj(id);
     if (gobj != NULL) {
         Ground* gp = gobj->user_data;
         gp->x8_callback = NULL;

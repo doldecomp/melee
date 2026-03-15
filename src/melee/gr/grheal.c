@@ -132,7 +132,7 @@ Ground_GObj* grHeal_8021EFEC(u32 idx)
     HSD_GObj* gobj;
     StageCallbacks* callbacks = &grHeal_803E8454[idx];
 
-    gobj = Ground_801C14D0(idx);
+    gobj = Ground_GetStageGObj(idx);
 
     if (gobj != NULL) {
         Ground* gp = gobj->user_data;

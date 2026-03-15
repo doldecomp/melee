@@ -75,7 +75,7 @@ HSD_GObj* grTGameWatch_802241B4(int id)
 {
     HSD_GObj* gobj;
     StageCallbacks* cb = &grTGw_803E96F8[id];
-    gobj = Ground_801C14D0(id);
+    gobj = Ground_GetStageGObj(id);
 
     if (gobj != NULL) {
         Ground* gp = (Ground*) HSD_GObjGetUserData(gobj);

@@ -92,7 +92,7 @@ HSD_GObj* grTIceClimber_80220FB4(int id)
 {
     HSD_GObj* gobj;
     StageCallbacks* cb = &grTIc_803E8A98[id];
-    gobj = Ground_801C14D0(id);
+    gobj = Ground_GetStageGObj(id);
 
     if (gobj != NULL) {
         Ground* gp = (Ground*) HSD_GObjGetUserData(gobj);

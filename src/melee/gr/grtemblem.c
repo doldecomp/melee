@@ -113,7 +113,7 @@ static HSD_GObj* grTRoy_80224498(s32 gobj_id)
     Ground* gp;
 
     cb = &grTFe_803E97C0[gobj_id];
-    gobj = Ground_801C14D0(gobj_id);
+    gobj = Ground_GetStageGObj(gobj_id);
 
     if (gobj != NULL) {
         gp = gobj->user_data;

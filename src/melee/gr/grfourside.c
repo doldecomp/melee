@@ -122,7 +122,7 @@ HSD_GObj* grFourside_801F2DD0(int gobj_id)
     HSD_GObj* gobj;
     StageCallbacks* callbacks = &grFs_803E3CFC[gobj_id];
 
-    gobj = Ground_801C14D0(gobj_id);
+    gobj = Ground_GetStageGObj(gobj_id);
 
     if (gobj != NULL) {
         Ground* gp = GET_GROUND(gobj);

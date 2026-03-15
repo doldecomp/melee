@@ -344,7 +344,7 @@ bool grIceMt_801F71E0(void)
 HSD_GObj* grIceMt_801F71E8(int gobj_id)
 {
     HSD_GObj* gobj;
-    gobj = Ground_801C14D0(gobj_id);
+    gobj = Ground_GetStageGObj(gobj_id);
     // StageCallbacks* callbacks = &grIm_803E4718[gobj_id];
     if (gobj != NULL) {
         Ground* gp = GET_GROUND(gobj);

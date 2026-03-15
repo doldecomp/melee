@@ -233,7 +233,7 @@ Ground_GObj* grVenom_80203EAC(int gobj_id)
     StageCallbacks* callbacks =
         &((StageCallbacks*) ((char*) base + 0x44))[gobj_id];
 
-    gobj = Ground_801C14D0(gobj_id);
+    gobj = Ground_GetStageGObj(gobj_id);
 
     if (gobj != NULL) {
         gp = gobj->user_data;

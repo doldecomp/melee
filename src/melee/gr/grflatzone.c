@@ -128,7 +128,7 @@ bool grFlatzone_80216F40(void)
 HSD_GObj* grFlatzone_80216F48(s32 gobj_id)
 {
     StageCallbacks* callbacks = &grFz_803E7940[gobj_id];
-    HSD_GObj* gobj = Ground_801C14D0(gobj_id);
+    HSD_GObj* gobj = Ground_GetStageGObj(gobj_id);
     if (gobj != NULL) {
         Ground* gp = GET_GROUND(gobj);
         gp->x8_callback = NULL;

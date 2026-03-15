@@ -74,7 +74,7 @@ HSD_GObj* grTPikachu_80222F20(int id)
 {
     HSD_GObj* gobj;
     StageCallbacks* cb = &grTPk_803E9270[id];
-    gobj = Ground_801C14D0(id);
+    gobj = Ground_GetStageGObj(id);
 
     if (gobj != NULL) {
         Ground* gp = (Ground*) HSD_GObjGetUserData(gobj);

@@ -101,7 +101,7 @@ static HSD_GObj* grTDonkey_802202CC(int gobj_id)
     HSD_GObj* gobj;
     StageCallbacks* callbacks = &grTDk_803E8790[gobj_id];
 
-    gobj = Ground_801C14D0(gobj_id);
+    gobj = Ground_GetStageGObj(gobj_id);
     if (gobj != NULL) {
         Ground* gp = gobj->user_data;
         gp->x8_callback = NULL;

@@ -198,7 +198,7 @@ static Ground_GObj* grLast_8021A7F4(int id)
     StageCallbacks* cb;
 
     cb = &grLast_803E7EBC[id];
-    gobj = Ground_801C14D0(id);
+    gobj = Ground_GetStageGObj(id);
     if (gobj != NULL) {
         gp = GET_GROUND(gobj);
         gp->x8_callback = NULL;

@@ -112,7 +112,7 @@ static HSD_GObj* grTMars_80221F98(int id)
     StageCallbacks* callbacks;
 
     callbacks = &grTMs_803E8EB0[id];
-    gobj = Ground_801C14D0(id);
+    gobj = Ground_GetStageGObj(id);
 
     if (gobj != NULL) {
         gp = gobj->user_data;

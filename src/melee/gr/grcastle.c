@@ -186,7 +186,7 @@ HSD_GObj* grCastle_801CD4D0(int gobj_id)
     HSD_GObj* gobj;
     StageCallbacks* callbacks = &grCs_803E0FF4[gobj_id];
 
-    gobj = Ground_801C14D0(gobj_id);
+    gobj = Ground_GetStageGObj(gobj_id);
 
     if (gobj != NULL) {
         Ground* gp = gobj->user_data;

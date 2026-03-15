@@ -181,7 +181,7 @@ HSD_GObj* grBigBlue_801E59F8(s32 id)
 {
     HSD_GObj* gobj;
     StageCallbacks* cbs = &grBb_803E29E0[id];
-    gobj = Ground_801C14D0(id);
+    gobj = Ground_GetStageGObj(id);
     if (gobj != NULL) {
         Ground* gp = GET_GROUND(gobj);
         gp->x8_callback = NULL;

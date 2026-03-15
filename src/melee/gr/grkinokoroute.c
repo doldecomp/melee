@@ -85,7 +85,7 @@ HSD_GObj* grKinokoRoute_8020754C(int gobj_id)
     HSD_GObj* gobj;
     StageCallbacks* callbacks = &grNKr_803E57F0[gobj_id];
 
-    gobj = Ground_801C14D0(gobj_id);
+    gobj = Ground_GetStageGObj(gobj_id);
 
     if (gobj != NULL) {
         Ground* gp = gobj->user_data;

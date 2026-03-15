@@ -99,7 +99,7 @@ static HSD_GObj* grFigure3_8020E5A8(int gobj_id)
     HSD_GObj* gobj;
     StageCallbacks* callbacks = &grEF2_803E63D8[gobj_id];
 
-    gobj = Ground_801C14D0(gobj_id);
+    gobj = Ground_GetStageGObj(gobj_id);
 
     if (gobj != NULL) {
         Ground* gp = gobj->user_data;

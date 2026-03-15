@@ -98,7 +98,7 @@ static HSD_GObj* grTKoopa_802216EC(int gobj_id)
     HSD_GObj* gobj;
     StageCallbacks* callbacks = &grTKp_803E8C70[gobj_id];
 
-    gobj = Ground_801C14D0(gobj_id);
+    gobj = Ground_GetStageGObj(gobj_id);
     if (gobj != NULL) {
         Ground* gp = gobj->user_data;
         gp->x8_callback = NULL;

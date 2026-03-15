@@ -138,7 +138,7 @@ Ground_GObj* grTMewtwo_80222284(int index)
     HSD_GObj* gobj;
 
     StageCallbacks* callbacks = &grTMewtwo_803E8F70[index];
-    gobj = Ground_801C14D0(index);
+    gobj = Ground_GetStageGObj(index);
     if (gobj != NULL) {
         Ground* gp = GET_GROUND(gobj);
         gp->x8_callback = NULL;

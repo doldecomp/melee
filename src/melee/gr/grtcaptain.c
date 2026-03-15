@@ -100,7 +100,7 @@ static HSD_GObj* grTCaptain_8021FD04(int gobj_id)
 
     StageCallbacks* callbacks = &grTCa_803E8608[gobj_id];
 
-    gobj = Ground_801C14D0(gobj_id);
+    gobj = Ground_GetStageGObj(gobj_id);
     if (gobj != NULL) {
         Ground* gp = gobj->user_data;
         gp->x8_callback = NULL;

@@ -85,7 +85,7 @@ HSD_GObj* grTLuigi_80221CB4(int arg0)
     Ground* gp;
 
     cb = &grTLg_803E8DF0[arg0];
-    gobj = Ground_801C14D0(arg0);
+    gobj = Ground_GetStageGObj(arg0);
     if (gobj != NULL) {
         gp = gobj->user_data;
         gp->x8_callback = 0;

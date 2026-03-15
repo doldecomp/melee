@@ -113,7 +113,7 @@ HSD_GObj* grTFox_80220C2C(s32 arg0)
     Ground* gp;
 
     cb = &grTFx_803E89D8[arg0];
-    gobj = Ground_801C14D0(arg0);
+    gobj = Ground_GetStageGObj(arg0);
     if (gobj != NULL) {
         gp = gobj->user_data;
         gp->x8_callback = 0;

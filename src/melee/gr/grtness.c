@@ -112,7 +112,7 @@ static HSD_GObj* grTNess_80222674(int id)
     HSD_GObj* gobj;
     Ground* gp;
     StageCallbacks* cb = &grTNs_803E9030[id];
-    gobj = Ground_801C14D0(id);
+    gobj = Ground_GetStageGObj(id);
     if (gobj != NULL) {
         gp = gobj->user_data;
         gp->x8_callback = NULL;

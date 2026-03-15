@@ -122,7 +122,7 @@ Ground_GObj* grTPeach_80222958(int index)
     HSD_GObj* gobj;
 
     StageCallbacks* callbacks = &grTPe_803E90F0[index];
-    gobj = Ground_801C14D0(index);
+    gobj = Ground_GetStageGObj(index);
     if (gobj != NULL) {
         Ground* gp = GET_GROUND(gobj);
         gp->x8_callback = NULL;
