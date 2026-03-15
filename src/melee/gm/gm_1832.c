@@ -321,7 +321,7 @@ void fn_80186400(void)
     HSD_JObj* jobj = HSD_JObjLoadJoint(lbl_804D65FC->models[0]->joint);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0xB, 0);
-    HSD_GObjProc_8038FD54(gobj, fn_80184AB8, 0);
+    HSD_GObj_SetupProc(gobj, fn_80184AB8, 0);
     gm_8016895C(jobj, lbl_804D65FC->models[0], 0);
     HSD_JObjReqAnimAll(jobj, 0.0F);
     HSD_JObjAnimAll(jobj);
@@ -388,7 +388,7 @@ HSD_GObjProc* fn_801873F0(void)
     Player_SetFacingDirection(0, 0.0f);
     Player_SetModelScale(0, 1.0f);
     Player_80036F34(0, 6);
-    return HSD_GObjProc_8038FD54(Player_GetEntity(0), fn_80186F6C, 0x16U);
+    return HSD_GObj_SetupProc(Player_GetEntity(0), fn_80186F6C, 0x16U);
 }
 #pragma pop
 
@@ -416,7 +416,7 @@ void fn_801874FC(void)
     jobj = HSD_JObjLoadJoint(lbl_804D6614->models[0]->joint);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0xB, 0);
-    HSD_GObjProc_8038FD54(gobj, fn_80186EFC, 0);
+    HSD_GObj_SetupProc(gobj, fn_80186EFC, 0);
     gm_8016895C(jobj, lbl_804D6614->models[0], 0);
     HSD_JObjReqAnimAll(jobj, 0.0f);
     HSD_JObjAnimAll(jobj);

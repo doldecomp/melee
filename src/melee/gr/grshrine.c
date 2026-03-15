@@ -54,7 +54,7 @@ static StageCallbacks grSh_803E50E8[3] = {
 };
 
 StageData grSh_803E5130 = {
-    (1 << 0) | (1 << 1) | (1 << 2),
+    SHRINE,
     grSh_803E50E8,
     "/GrSh.dat",
     grShrine_80201C64,
@@ -109,7 +109,7 @@ static HSD_GObj* grShrine_80201D20(s32 arg0)
     HSD_GObj* gobj;
     StageCallbacks* callbacks = &grSh_803E50E8[arg0];
 
-    gobj = Ground_801C14D0(arg0);
+    gobj = Ground_GetStageGObj(arg0);
 
     if (gobj != NULL) {
         Ground* gp;
@@ -124,7 +124,7 @@ static HSD_GObj* grShrine_80201D20(s32 arg0)
             callbacks->callback0(gobj);
         }
         if (callbacks->callback2 != NULL) {
-            HSD_GObjProc_8038FD54(gobj, callbacks->callback2, 4);
+            HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
         }
     } else {
         OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grshrine.c", 205, arg0);

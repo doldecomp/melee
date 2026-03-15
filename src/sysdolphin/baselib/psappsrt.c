@@ -53,9 +53,9 @@ HSD_psAppSRT* psAddGeneratorAppSRT(s32 status, u16 idnum)
     return srt;
 }
 
-void HSD_PSAppSrt_803A425C(HSD_Particle* pp, s32 status)
+HSD_psAppSRT* psAddParticleAppSRT_begin(HSD_Particle* pp, s32 status)
 {
-    pp->appsrt = psAddGeneratorAppSRT(status, pp->idnum);
+    return (pp->appsrt = psAddGeneratorAppSRT(status, pp->idnum));
 }
 
 HSD_psAppSRT* psAddGeneratorAppSRT_begin(HSD_Generator* gp, s32 status)

@@ -1,5 +1,6 @@
 #include "itpikachuthunder.h"
 
+#include "ft/chara/ftPikachu/ftPk_SpecialLw.h"
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
@@ -33,7 +34,16 @@ void it_802B1FE8(Item_GObj* gobj, Vec3* pos)
     pos->y += offset;
 }
 
-/// #it_2725_Logic39_Destroyed
+void it_2725_Logic39_Destroyed(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->xDD4_itemVar.pikachuthunder.x0 == 0 &&
+        ip->xDD4_itemVar.pikachuthunder.x38 != NULL &&
+        !ftPk_SpecialLw_CheckProperty(ip->xDD4_itemVar.pikachuthunder.x38))
+    {
+        ftPk_SpecialLw_SetState_Unk0(ip->xDD4_itemVar.pikachuthunder.x38);
+    }
+}
 
 void it_802B2080(Item_GObj* gobj)
 {

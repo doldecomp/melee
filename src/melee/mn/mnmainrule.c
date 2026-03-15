@@ -220,7 +220,7 @@ void mn_80231804(HSD_Archive* archive, int arg1)
     mn_8022BEDC(mn_8022BE34());
     mn_80229B2C();
     mn_80229DC0();
-    temp_r3 = HSD_GObjProc_8038FD54(GObj_Create(0, 1, 0x80), fn_8022F538, 0);
+    temp_r3 = HSD_GObj_SetupProc(GObj_Create(0, 1, 0x80), fn_8022F538, 0);
     temp_r3->flags_3 = HSD_GObj_804D783C;
     HSD_GObj_80390CD4(mn_80230E38(1));
     lbAudioAx_80023F28(gmMainLib_8015ECB0());

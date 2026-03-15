@@ -7,6 +7,8 @@
 #include "it/itCommonItems.h"
 #include "it/item.h"
 
+#include <baselib/random.h>
+
 /* 2EC870 */ static void it_802EC870(Item_GObj*, int);
 
 /// #it_802EB5C8
@@ -100,7 +102,18 @@ bool itTincle_UnkMotion3_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itTincle_UnkMotion3_Phys
+void itTincle_UnkMotion3_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->xDD4_itemVar.tincle.x20 == 0) {
+        ip->pos.y = ip->xDD4_itemVar.tincle.x4C;
+        ip->x40_vel.y = 0.0f;
+        it_802EBE5C(gobj);
+    } else {
+        ip->x40_vel.y += ip->xDD4_itemVar.tincle.x38;
+        ip->xDD4_itemVar.tincle.x20 -= 1;
+    }
+}
 
 bool itTincle_UnkMotion3_Coll(Item_GObj* gobj)
 {
@@ -108,14 +121,49 @@ bool itTincle_UnkMotion3_Coll(Item_GObj* gobj)
     return false;
 }
 
-/// #it_802EBE5C
+void it_802EBE5C(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itTincleAttributes* data = ip->xC4_article_data->x4_specialAttributes;
+
+    ip->xDD4_itemVar.tincle.x30 = (f32) ip->msid;
+    ip->xDD4_itemVar.tincle.x44 = ip->x40_vel.y;
+    ip->xDD4_itemVar.tincle.x48 = ip->xDD4_itemVar.tincle.x38;
+    ip->xDD4_itemVar.tincle.x40 = (f32) ip->xDD4_itemVar.tincle.x2C;
+
+    ip->x40_vel.z = 0.0f;
+    ip->x40_vel.y = 0.0f;
+    ip->x40_vel.x = 0.0f;
+
+    ip->xDD4_itemVar.tincle.x20 = data->x40;
+    ip->xDD4_itemVar.tincle.x4C = ip->pos.y;
+
+    Item_80268E5C(gobj, 4, 2);
+}
 
 bool itTincle_UnkMotion4_Anim(Item_GObj* gobj)
 {
     return false;
 }
 
-/// #itTincle_UnkMotion4_Phys
+void itTincle_UnkMotion4_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itTincleAttributes* sa = ip->xC4_article_data->x4_specialAttributes;
+    if (ip->xDD4_itemVar.tincle.x20 == 0) {
+        f32 dist;
+        ip->x40_vel.y = -sa->x48;
+        dist = ip->xDD4_itemVar.tincle.x4C - ip->pos.y;
+        if (dist < 0) {
+            dist = -dist;
+        }
+        if (dist > sa->x44) {
+            it_802EC18C(gobj);
+        }
+    } else {
+        ip->xDD4_itemVar.tincle.x20 -= 1;
+    }
+}
 
 bool itTincle_UnkMotion4_Coll(Item_GObj* gobj)
 {
@@ -178,11 +226,42 @@ void it_802EC1F4(Item_GObj* gobj)
     it_802EC9E8(gobj);
 }
 
-/// #itTincle_UnkMotion7_Anim
+bool itTincle_UnkMotion7_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    PAD_STACK(8);
+
+    if (ip->xDD4_itemVar.tincle.x20 == 0) {
+        ip->xDD4_itemVar.tincle.x20 = -1;
+        if (ip->msid == 6) {
+            Item_80268E5C(gobj, 7, 1);
+        }
+    } else if (ip->xDD4_itemVar.tincle.x20 > 0) {
+        ip->xDD4_itemVar.tincle.x20 -= 1;
+    }
+
+    if (!it_80272C6C(gobj)) {
+        it_802EC35C(gobj);
+    }
+
+    return false;
+}
 
 void itTincle_UnkMotion7_Phys(Item_GObj* gobj) {}
 
-/// #itTincle_UnkMotion7_Coll
+bool itTincle_UnkMotion7_Coll(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->ground_or_air == GA_Air) {
+        it_8026E414(gobj, it_802EC3F4);
+    } else {
+        if (ip->xDD4_itemVar.tincle.x20 < 0) {
+            it_802EC3F4(gobj);
+        }
+        it_8026D6F4(gobj, it_802EC35C);
+    }
+    return false;
+}
 
 void it_802EC35C(Item_GObj* gobj)
 {
@@ -209,7 +288,19 @@ bool itTincle_UnkMotion8_Coll(Item_GObj* gobj)
     return false;
 }
 
-/// #it_802EC3F4
+void it_802EC3F4(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    ip->x40_vel.z = 0.0f;
+    ip->x40_vel.y = 0.0f;
+    ip->x40_vel.x = 0.0f;
+    ip->xDC8_word.flags.x1A = 0;
+    ip->x70_nudge.z = 0.0f;
+    ip->x70_nudge.y = 0.0f;
+    ip->x70_nudge.x = 0.0f;
+    Item_80268E5C(gobj, 9, ITEM_ANIM_UPDATE);
+    it_802EC9E8(gobj);
+}
 
 bool itTincle_UnkMotion9_Anim(Item_GObj* gobj)
 {
@@ -228,7 +319,23 @@ bool itTincle_UnkMotion9_Coll(Item_GObj* gobj)
     return false;
 }
 
-/// #it_802EC4D0
+void it_802EC4D0(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itTincleAttributes* data = ip->xC4_article_data->x4_specialAttributes;
+    s32 range;
+    PAD_STACK(8);
+
+    range = data->x55 - data->x54;
+    if (range < 0) {
+        range = -range;
+    }
+
+    ip->xDD4_itemVar.tincle.x20 = HSD_Randi(range);
+    ip->xDD4_itemVar.tincle.x20 += data->x54;
+
+    Item_80268E5C(gobj, 10, 2);
+}
 
 /// #itTincle_UnkMotion10_Anim
 
@@ -319,7 +426,26 @@ void it_802EC850(Item_GObj* gobj, Item_GObj* ref_gobj)
 
 /// #it_802EC870
 
-/// #it_802EC9E8
+void it_802EC9E8(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itECB ecb = ip->xDD4_itemVar.tincle.x68;
+
+    switch (ip->msid) {
+    case 6:
+    case 7:
+    case 8:
+    case 9:
+    case 10:
+    case 11:
+        ecb.top *= 0.5f;
+        ecb.right *= 0.5f;
+        ecb.left *= 0.5f;
+        break;
+    }
+
+    it_80275D5C(gobj, &ecb);
+}
 
 /// #it_802ECA70
 

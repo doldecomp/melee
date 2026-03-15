@@ -20,26 +20,26 @@
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 
-void grTZelda_80223E2C(bool);                  /* static */
-void grTZelda_80223E30(void);                  /* static */
-void grTzelda_UnkStage0_OnLoad(void);          /* static */
-void grTzelda_UnkStage0_OnStart(void);         /* static */
-bool grTZelda_80223EC8(void);                  /* static */
-HSD_GObj* grTZelda_80223ED0(s32);              /* static */
-void grTZelda_80223FB8(Ground_GObj*);          /* static */
-bool grTZelda_80223FE4(Ground_GObj*);          /* static */
-void grTZelda_80223FEC(Ground_GObj*);          /* static */
-void grTZelda_80223FF0(Ground_GObj*);          /* static */
-void grTZelda_80223FF4(Ground_GObj*);          /* static */
-bool grTZelda_80224044(Ground_GObj*);          /* static */
-void grTZelda_8022404C(Ground_GObj*);          /* static */
-void grTZelda_80224080(Ground_GObj*);          /* static */
-void grTZelda_80224084(Ground_GObj*);          /* static */
-bool grTZelda_802240D4(Ground_GObj*);          /* static */
-void grTZelda_802240DC(Ground_GObj*);          /* static */
-void grTZelda_802240FC(Ground_GObj*);          /* static */
-DynamicsDesc* grTZelda_80224100(enum_t);       /* static */
-bool grTZelda_80224108(Vec3*, int, HSD_JObj*); /* static */
+void grTZelda_OnDemoInit(bool);                           /* static */
+void grTZelda_OnInit(void);                               /* static */
+void grTZelda_OnLoad(void);                               /* static */
+void grTZelda_OnStart(void);                              /* static */
+bool grTZelda_80223EC8(void);                             /* static */
+HSD_GObj* grTZelda_80223ED0(s32);                         /* static */
+void grTZelda_80223FB8(Ground_GObj*);                     /* static */
+bool grTZelda_80223FE4(Ground_GObj*);                     /* static */
+void grTZelda_80223FEC(Ground_GObj*);                     /* static */
+void grTZelda_80223FF0(Ground_GObj*);                     /* static */
+void grTZelda_80223FF4(Ground_GObj*);                     /* static */
+bool grTZelda_80224044(Ground_GObj*);                     /* static */
+void grTZelda_8022404C(Ground_GObj*);                     /* static */
+void grTZelda_80224080(Ground_GObj*);                     /* static */
+void grTZelda_80224084(Ground_GObj*);                     /* static */
+bool grTZelda_802240D4(Ground_GObj*);                     /* static */
+void grTZelda_802240DC(Ground_GObj*);                     /* static */
+void grTZelda_802240FC(Ground_GObj*);                     /* static */
+DynamicsDesc* grTZelda_OnTouchLine(enum_t);               /* static */
+bool grTZelda_OnCheckShadowRender(Vec3*, int, HSD_JObj*); /* static */
 
 static StageCallbacks grTZd_803E9638[4] = {
     { grTZelda_80223FB8, grTZelda_80223FE4, grTZelda_80223FEC,
@@ -52,22 +52,22 @@ static StageCallbacks grTZd_803E9638[4] = {
 };
 
 StageData grTZd_803E9694 = {
-    62,
+    TZELDA,
     grTZd_803E9638,
     "/GrTZd.dat",
-    grTZelda_80223E30,
-    grTZelda_80223E2C,
-    grTzelda_UnkStage0_OnLoad,
-    grTzelda_UnkStage0_OnStart,
+    grTZelda_OnInit,
+    grTZelda_OnDemoInit,
+    grTZelda_OnLoad,
+    grTZelda_OnStart,
     grTZelda_80223EC8,
-    grTZelda_80224100,
-    grTZelda_80224108,
+    grTZelda_OnTouchLine,
+    grTZelda_OnCheckShadowRender,
     1,
 };
 
-void grTZelda_80223E2C(bool unk0) {}
+void grTZelda_OnDemoInit(int unused) {}
 
-void grTZelda_80223E30(void)
+void grTZelda_OnInit(void)
 {
     stage_info.unk8C.b4 = false;
     stage_info.unk8C.b5 = true;
@@ -81,9 +81,9 @@ void grTZelda_80223E30(void)
     Ground_801C42AC();
 }
 
-void grTzelda_UnkStage0_OnLoad(void) {}
+void grTZelda_OnLoad(void) {}
 
-void grTzelda_UnkStage0_OnStart(void)
+void grTZelda_OnStart(void)
 {
     grZakoGenerator_801CAE04(0);
 }
@@ -100,7 +100,7 @@ HSD_GObj* grTZelda_80223ED0(s32 arg0)
     Ground* gp;
 
     cb = &grTZd_803E9638[arg0];
-    gobj = Ground_801C14D0(arg0);
+    gobj = Ground_GetStageGObj(arg0);
     if (gobj != NULL) {
         gp = gobj->user_data;
         gp->x8_callback = 0;
@@ -113,7 +113,7 @@ HSD_GObj* grTZelda_80223ED0(s32 arg0)
             cb->callback0(gobj);
         }
         if (cb->callback2 != 0U) {
-            HSD_GObjProc_8038FD54(gobj, cb->callback2, 4);
+            HSD_GObj_SetupProc(gobj, cb->callback2, 4);
         }
     } else {
         OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grtzelda.c", 0xC3,
@@ -172,12 +172,12 @@ void grTZelda_802240DC(Ground_GObj* gobj)
 
 void grTZelda_802240FC(Ground_GObj* gobj) {}
 
-DynamicsDesc* grTZelda_80224100(enum_t arg0)
+DynamicsDesc* grTZelda_OnTouchLine(enum_t arg0)
 {
     return NULL;
 }
 
-bool grTZelda_80224108(Vec3* arg0, int arg1, HSD_JObj* arg2)
+bool grTZelda_OnCheckShadowRender(Vec3* arg0, int arg1, HSD_JObj* arg2)
 {
     return true;
 }

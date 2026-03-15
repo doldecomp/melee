@@ -206,7 +206,7 @@ void gm_801A68D8(void)
     temp_r3 = Player_GetEntity(0);
     gm_804D674C = temp_r3;
     lb_8000BA0C(GET_JOBJ(temp_r3), 0.6F);
-    HSD_GObjProc_8038FD54(temp_r3, fn_801A6868, 4);
+    HSD_GObj_SetupProc(temp_r3, fn_801A6868, 4);
 
     temp_r3_2 = Player_GetEntityAtIndex(0, 1);
     if (temp_r3_2 != NULL) {
@@ -301,7 +301,7 @@ void gm_801A6C54(void)
     HSD_CObjAddAnim(cobj, gm_804D6748->cameras[0].anims[0]);
     HSD_CObjReqAnim(cobj, 0.0F);
     HSD_CObjAnim(cobj);
-    HSD_GObjProc_8038FD54(gobj, fn_801A6C30, 0);
+    HSD_GObj_SetupProc(gobj, fn_801A6C30, 0);
 
     for (i = 0; i < 2; i++) {
         gm_804808F8[i][0].image_ptr = NULL;
@@ -335,7 +335,7 @@ void gm_801A6DC0(void)
     HSD_CObjAddAnim(cobj, gm_804D6748->cameras[0].anims[0]);
     HSD_CObjReqAnim(cobj, 0.0F);
     HSD_CObjAnim(cobj);
-    HSD_GObjProc_8038FD54(gobj, fn_801A6B6C, 0);
+    HSD_GObj_SetupProc(gobj, fn_801A6B6C, 0);
 
     for (i = 0; i < 2; i++) {
         gm_80480964[i][0].image_ptr = NULL;
@@ -497,7 +497,7 @@ void gm_801A7070_OnEnter(void* unused)
     HSD_JObjSetScaleY(temp_r3_5, temp_f31);
     HSD_JObjSetScaleZ(temp_r3_5, temp_f31);
 
-    HSD_GObjProc_8038FD54(temp_r3_4, fn_801A6664, 0x17);
+    HSD_GObj_SetupProc(temp_r3_4, fn_801A6664, 0x17);
     temp_r27_4 = Player_80036EA0(0);
     lb_8000C1C0(HSD_JObjGetChild(HSD_JObjGetChild(
                     HSD_JObjGetChild(HSD_JObjGetChild(temp_r3_5)))),
@@ -534,7 +534,7 @@ void gm_801A7070_OnEnter(void* unused)
     HSD_JObjSetScaleY(temp_r3_7, temp_f31_8);
     HSD_JObjSetScaleZ(temp_r3_7, temp_f31_8);
 
-    HSD_GObjProc_8038FD54(temp_r3_6, fn_801A6844, 0x17);
+    HSD_GObj_SetupProc(temp_r3_6, fn_801A6844, 0x17);
     temp_r3_8 = gm_804D6768->hsd_obj;
     temp_r3_8 = HSD_JObjGetNext(HSD_JObjGetChild(HSD_JObjGetChild(
         HSD_JObjGetChild(HSD_JObjGetChild(HSD_JObjGetChild(temp_r3_8))))));

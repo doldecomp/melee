@@ -900,21 +900,21 @@ Fighter_GObj* Fighter_Create(struct plAllocInfo* input)
 
     jobj = GET_JOBJ(gobj);
     lbShadow_8000ED54(&fp->x20A4, jobj);
-    HSD_GObjProc_8038FD54(gobj, &Fighter_8006A1BC, 0);
-    HSD_GObjProc_8038FD54(gobj, &Fighter_8006A360, 1);
-    HSD_GObjProc_8038FD54(gobj, &Fighter_8006ABA0, 2);
-    HSD_GObjProc_8038FD54(gobj, &Fighter_Spaghetti_8006AD10, 3);
-    HSD_GObjProc_8038FD54(gobj, &Fighter_procUpdate, 4);
-    HSD_GObjProc_8038FD54(gobj, &Fighter_procMap, 6);
-    HSD_GObjProc_8038FD54(gobj, &Fighter_8006C5F4, 7);
-    HSD_GObjProc_8038FD54(gobj, &Fighter_CallAcessoryCallbacks_8006C624, 8);
-    HSD_GObjProc_8038FD54(gobj, &Fighter_8006C80C, 9);
-    HSD_GObjProc_8038FD54(gobj, &Fighter_UnkProcessGrab_8006CA5C, 0xC);
-    HSD_GObjProc_8038FD54(gobj, &Fighter_8006CB94, 0xD);
-    HSD_GObjProc_8038FD54(gobj, &Fighter_ProcessHit_8006D1EC, 0xE);
-    HSD_GObjProc_8038FD54(gobj, &Fighter_8006D9AC, 0x10);
-    HSD_GObjProc_8038FD54(gobj, &Fighter_UnkCallCameraCallback_8006D9EC, 0x12);
-    HSD_GObjProc_8038FD54(gobj, &Fighter_8006DA4C, 0x16);
+    HSD_GObj_SetupProc(gobj, &Fighter_8006A1BC, 0);
+    HSD_GObj_SetupProc(gobj, &Fighter_8006A360, 1);
+    HSD_GObj_SetupProc(gobj, &Fighter_8006ABA0, 2);
+    HSD_GObj_SetupProc(gobj, &Fighter_Spaghetti_8006AD10, 3);
+    HSD_GObj_SetupProc(gobj, &Fighter_procUpdate, 4);
+    HSD_GObj_SetupProc(gobj, &Fighter_procMap, 6);
+    HSD_GObj_SetupProc(gobj, &Fighter_8006C5F4, 7);
+    HSD_GObj_SetupProc(gobj, &Fighter_CallAcessoryCallbacks_8006C624, 8);
+    HSD_GObj_SetupProc(gobj, &Fighter_8006C80C, 9);
+    HSD_GObj_SetupProc(gobj, &Fighter_UnkProcessGrab_8006CA5C, 0xC);
+    HSD_GObj_SetupProc(gobj, &Fighter_8006CB94, 0xD);
+    HSD_GObj_SetupProc(gobj, &Fighter_ProcessHit_8006D1EC, 0xE);
+    HSD_GObj_SetupProc(gobj, &Fighter_8006D9AC, 0x10);
+    HSD_GObj_SetupProc(gobj, &Fighter_UnkCallCameraCallback_8006D9EC, 0x12);
+    HSD_GObj_SetupProc(gobj, &Fighter_8006DA4C, 0x16);
     Fighter_UnkProcessDeath_80068354(gobj);
 
     if (fp->kind == FTKIND_MASTERH) {

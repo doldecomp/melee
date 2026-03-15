@@ -112,11 +112,11 @@ Fighter_GObj* ftDemo_CreateFighter(plAllocInfo2* alloc_info)
         fp->x890_cameraBox = Camera_80029020();
         lbShadow_8000ED54(&fp->x20A4, gobj->hsd_obj);
     }
-    HSD_GObjProc_8038FD54(gobj, Fighter_8006A360, 1);
-    HSD_GObjProc_8038FD54(gobj, Fighter_procUpdate, 4);
-    HSD_GObjProc_8038FD54(gobj, Fighter_procMap, 5);
-    HSD_GObjProc_8038FD54(gobj, Fighter_8006C80C, 9);
-    HSD_GObjProc_8038FD54(gobj, Fighter_8006D9AC, 16);
+    HSD_GObj_SetupProc(gobj, Fighter_8006A360, 1);
+    HSD_GObj_SetupProc(gobj, Fighter_procUpdate, 4);
+    HSD_GObj_SetupProc(gobj, Fighter_procMap, 5);
+    HSD_GObj_SetupProc(gobj, Fighter_8006C80C, 9);
+    HSD_GObj_SetupProc(gobj, Fighter_8006D9AC, 16);
     Fighter_UnkProcessDeath_80068354(gobj);
     if (on_create_fighter[alloc_info->unk8] != NULL) {
         on_create_fighter[alloc_info->unk8](gobj);

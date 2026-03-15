@@ -75,7 +75,7 @@ HSD_GObj* grOnett_801E37F4(int gobj_id)
     HSD_GObj* gobj;
     StageCallbacks* callbacks = &grOt_803E27E0[gobj_id];
 
-    gobj = Ground_801C14D0(gobj_id);
+    gobj = Ground_GetStageGObj(gobj_id);
 
     if (gobj != NULL) {
         Ground* gp = gobj->user_data;
@@ -89,7 +89,7 @@ HSD_GObj* grOnett_801E37F4(int gobj_id)
             callbacks->callback0(gobj);
         }
         if (callbacks->callback2 != NULL) {
-            HSD_GObjProc_8038FD54(gobj, callbacks->callback2, 4);
+            HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
         }
     } else {
         OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 235, gobj_id);
@@ -165,7 +165,26 @@ void grOnett_801E3C60(Ground_GObj* gobj)
 
 void grOnett_801E3CE0(Ground_GObj* gobj) {}
 
-/// #grOnett_801E3CE4
+void grOnett_801E3CE4(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    PAD_STACK(8);
+
+    Ground_801C2ED0(GET_JOBJ(gobj), gp->map_id);
+    grAnime_801C7FF8(gobj, 0, 7, 0, 0.0f, 0.0f);
+
+    gp->gv.kongo3.xC4 = -1;
+    gp->gv.kongo3.xC6 = 0;
+    gp->gv.unk.xC8 = 0;
+    gp->gv.unk.xCC = 0;
+
+    gp->x8_callback = NULL;
+    gp->xC_callback = NULL;
+    gp->x10_flags.b5 = 1;
+
+    mpJointSetCb1(3, gp, grOnett_801E40E4);
+    mpJointSetCb1(4, gp, grOnett_801E40E4);
+}
 
 bool grOnett_801E3D98(Ground_GObj* gobj)
 {

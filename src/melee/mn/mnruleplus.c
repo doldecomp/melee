@@ -173,7 +173,7 @@ static s32 mn_804DBE48 = 0x02030506;
 ///     temp_r3_2 = HSD_JObjLoadJoint(MenMainConRl_Top.unk0);
 ///     HSD_GObjObject_80390A70(temp_r3, HSD_GObj_804D7849, temp_r3_2);
 ///     GObj_SetupGXLink(temp_r3, HSD_GObj_JObjCallback, 4U, 0x80U);
-///     HSD_GObjProc_8038FD54(temp_r3, fn_80232F44, 0U);
+///     HSD_GObj_SetupProc(temp_r3, fn_80232F44, 0U);
 ///     HSD_JObjAddAnimAll(temp_r3_2, MenMainConRl_Top.unk4,
 ///     MenMainConRl_Top.unk8, MenMainConRl_Top.unkC);
 ///     HSD_JObjReqAnimAll(temp_r3_2, 0.0f);
@@ -406,7 +406,7 @@ void mn_802339FC(void)
     }
 
     mn_80233218(state);
-    think = HSD_GObjProc_8038FD54(GObj_Create(0U, 1U, 0x80U),
-                                  (void (*)(HSD_GObj*)) fn_8023201C, 0U);
+    think = HSD_GObj_SetupProc(GObj_Create(0U, 1U, 0x80U),
+                               (void (*)(HSD_GObj*)) fn_8023201C, 0U);
     think->flags_3 = HSD_GObj_804D783C;
 }

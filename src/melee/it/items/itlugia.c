@@ -112,7 +112,18 @@ bool itLugia_UnkMotion3_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itLugia_UnkMotion3_Phys
+void itLugia_UnkMotion3_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itLugiaAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    it_8027A344(gobj);
+    if (ip->xDD4_itemVar.lugia.x60-- != 0) {
+        ip->x40_vel.z = attrs->x10;
+    } else {
+        ip->x40_vel.z = 0.0F;
+        it_802D1830(gobj);
+    }
+}
 
 bool itLugia_UnkMotion3_Coll(Item_GObj* gobj)
 {
@@ -144,7 +155,18 @@ bool itLugia_UnkMotion4_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itLugia_UnkMotion4_Phys
+void itLugia_UnkMotion4_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itLugiaAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    it_8027A344(gobj);
+    ip->xDD4_itemVar.lugia.xE50.x += attrs->x18;
+    ip->x40_vel.y = ip->xDD4_itemVar.lugia.xE50.x;
+    if (ip->x40_vel.y > it_804DD450) {
+        ip->x40_vel.y = it_804DD450;
+        it_802D1A44(gobj);
+    }
+}
 
 bool itLugia_UnkMotion4_Coll(Item_GObj* gobj)
 {
@@ -234,7 +256,17 @@ void it_802D23D4(Item_GObj* gobj, Item_GObj* ref_gobj)
     it_8026B894(gobj, ref_gobj);
 }
 
-/// #it_802D23F4
+void it_802D23F4(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itLugiaAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    ip->xD44_lifeTimer = attrs->x0;
+    it_80274740(gobj);
+    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+    ip->entered_hitlag = efLib_PauseAll;
+    ip->exited_hitlag = efLib_ResumeAll;
+    it_8026B3A8(gobj);
+}
 
 bool it_802D246C(Item_GObj* gobj)
 {

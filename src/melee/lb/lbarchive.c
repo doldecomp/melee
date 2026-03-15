@@ -74,7 +74,7 @@ static inline void lbArchive_vLoadSectionsFatal(HSD_Archive* archive,
     const char* symbol_name;
 
     for (; symbol != NULL; symbol = va_arg(symbols, void**)) {
-        const char* symbol_name = va_arg(symbols, const char*);
+        symbol_name = va_arg(symbols, const char*);
         *symbol = NULL;
         *symbol = HSD_ArchiveGetPublicAddress(archive, symbol_name);
         if (*symbol == NULL) {
@@ -180,7 +180,7 @@ bool lbArchive_80017040(HSD_Archive** dst, const char* filename, void* symbols,
     bool preloaded;
     va_list args;
 
-    va_start(args, filename);
+    va_start(args, symbols);
 
     archive = lbDvd_8001819C(filename);
     if (archive != NULL) {
@@ -207,7 +207,7 @@ bool lbArchive_800171CC(HSD_Archive** dst, const char* filename, void* symbols,
     bool preloaded;
     va_list args;
 
-    va_start(args, filename);
+    va_start(args, symbols);
 
     archive = lbDvd_8001819C(filename);
     if (archive != NULL) {
@@ -238,8 +238,8 @@ inline void Locate(HSD_Archive* archive, intptr_t base_addr)
     }
 }
 
-int lbArchive_80017340(HSD_Archive* archive, u8* src, size_t file_size,
-                       intptr_t base_addr)
+int lbArchiveRelocate(HSD_Archive* archive, u8* src, size_t file_size,
+                      intptr_t base_addr)
 {
     size_t file_offset;
 

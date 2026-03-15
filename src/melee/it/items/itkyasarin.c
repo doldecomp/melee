@@ -38,9 +38,35 @@ void it_802ECEB0(Item_GObj* gobj)
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
 }
 
-/// #itKyasarin_UnkMotion0_Anim
+bool itKyasarin_UnkMotion0_Anim(Item_GObj* gobj)
+{
+    if (!it_80272C6C(gobj)) {
+        Item* ip = GET_ITEM(gobj);
+        itOldottoseaAttributes* attr =
+            ip->xC4_article_data->x4_specialAttributes;
+        ip->x40_vel.x = attr->x4 * ip->facing_dir;
+        ip->x40_vel.z = 0.0F;
+        ip->x40_vel.y = 0.0F;
+        Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+    }
+    return false;
+}
 
-/// #itKyasarin_UnkMotion0_Coll
+bool itKyasarin_UnkMotion0_Coll(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itKyasarinAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+    if (ip->facing_dir == 1.0f) {
+        if (ip->pos.x >= attr->x2C) {
+            it_802ECFE0(gobj);
+        }
+    } else {
+        if (ip->pos.x <= attr->x28) {
+            it_802ECFE0(gobj);
+        }
+    }
+    return false;
+}
 
 void it_802ECFE0(Item_GObj* gobj)
 {
@@ -81,7 +107,19 @@ void it_802ED0D0(Item_GObj* gobj)
     Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
 }
 
-/// #itKyasarin_UnkMotion2_Anim
+bool itKyasarin_UnkMotion2_Anim(Item_GObj* gobj)
+{
+    if (!it_80272C6C(gobj)) {
+        Item* ip = GET_ITEM(gobj);
+        itKyasarinAttributes* attr =
+            ip->xC4_article_data->x4_specialAttributes;
+        ip->x40_vel.x = -attr->x4 * ip->facing_dir;
+        ip->x40_vel.z = 0.0F;
+        ip->x40_vel.y = 0.0F;
+        Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
+    }
+    return false;
+}
 
 /// #itKyasarin_UnkMotion2_Coll
 
@@ -95,7 +133,19 @@ void it_802ED25C(Item_GObj* gobj)
     Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
 }
 
-/// #itKyasarin_UnkMotion4_Anim
+bool itKyasarin_UnkMotion4_Anim(Item_GObj* gobj)
+{
+    if (!it_80272C6C(gobj)) {
+        Item* ip = GET_ITEM(gobj);
+        itKyasarinAttributes* attr =
+            ip->xC4_article_data->x4_specialAttributes;
+        ip->x40_vel.x = attr->x4 * ip->facing_dir;
+        ip->x40_vel.z = 0.0F;
+        ip->x40_vel.y = 0.0F;
+        Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
+    }
+    return false;
+}
 
 /// #itKyasarin_UnkMotion4_Coll
 

@@ -27,7 +27,7 @@ StageCallbacks grTGn_803E9880[] = {
 };
 
 StageData grTGn_803E98DC = {
-    65,
+    TGANON,
     grTGn_803E9880,
     "/GrTGn.dat",
     grTGanon_802246DC,
@@ -87,7 +87,7 @@ HSD_GObj* grTGanon_80224784(int id)
 {
     HSD_GObj* gobj;
     StageCallbacks* cb = &grTGn_803E9880[id];
-    gobj = Ground_801C14D0(id);
+    gobj = Ground_GetStageGObj(id);
 
     if (gobj != NULL) {
         Ground* gp = (Ground*) HSD_GObjGetUserData(gobj);
@@ -104,7 +104,7 @@ HSD_GObj* grTGanon_80224784(int id)
         }
 
         if (cb->callback2 != NULL) {
-            HSD_GObjProc_8038FD54(gobj, cb->callback2, 4);
+            HSD_GObj_SetupProc(gobj, cb->callback2, 4);
         }
     } else {
         OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grtganon.c", 201, id);

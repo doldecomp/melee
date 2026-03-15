@@ -45,7 +45,7 @@ StageCallbacks grGd_803E5248[] = {
 };
 
 StageData grGd_803E52E0 = {
-    5,
+    GARDEN,
     grGd_803E5248,
     "/GrGd.dat",
     grGarden_80202B70,
@@ -103,7 +103,7 @@ HSD_GObj* grGarden_80202C78(int gobj_id)
     HSD_GObj* gobj;
     StageCallbacks* callbacks = &grGd_803E5248[gobj_id];
 
-    gobj = Ground_801C14D0(gobj_id);
+    gobj = Ground_GetStageGObj(gobj_id);
 
     if (gobj != NULL) {
         Ground* gp = GET_GROUND(gobj);
@@ -119,9 +119,9 @@ HSD_GObj* grGarden_80202C78(int gobj_id)
         }
 
         if (callbacks->callback2 != NULL) {
-            HSD_GObjProc_8038FD54(gobj, callbacks->callback2, 4);
+            HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
         }
-        // HSD_GObjProc_8038FD54(gobj,gobj_id,4);
+        // HSD_GObj_SetupProc(gobj,gobj_id,4);
         // if(callbacks) {
         //	callbacks->callback0(gobj);
         // }

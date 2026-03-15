@@ -30,7 +30,7 @@ S16Vec grLast_804D4968[1] = { { 0, 3, 0 } };
 
 static int* grNLa_804D6AD0;
 
-static void grLast_8021A620(bool arg0)
+static void grLast_OnDemoInit(int arg0)
 {
     Ground_GObj* gobj;
     Ground* gp;
@@ -63,13 +63,13 @@ static void grLast_8021A620(bool arg0)
         Ground_801C4A08(gobj);
     }
     gobj = Ground_801C2BA4(1);
-    HSD_ASSERT(0x50, gobj);
+    HSD_ASSERT(80, gobj);
 
     gobj = Ground_801C2BA4(3);
-    HSD_ASSERT(0x53, gobj);
+    HSD_ASSERT(83, gobj);
 
     gp = GET_GROUND(gobj);
-    HSD_ASSERT(0x54, gp);
+    HSD_ASSERT(84, gp);
     gp->u.map.xC4_b1 = true;
 }
 
@@ -149,22 +149,22 @@ static StageCallbacks grLast_803E7EBC[] = {
 };
 
 StageData grNLa_803E7F90 = {
-    0x00000025,
+    LAST,
     grLast_803E7EBC,
     "/GrNLa.dat",
-    grLast_8021A740,
-    grLast_8021A620,
-    grLast_UnkStage0_OnLoad,
-    grLast_UnkStage0_OnStart,
+    grLast_OnInit,
+    grLast_OnDemoInit,
+    grLast_OnLoad,
+    grLast_OnStart,
     grLast_8021A7EC,
-    grLast_8021C740,
-    grLast_8021C748,
+    grLast_OnTouchLine,
+    grLast_OnCheckShadowRender,
     0x00000001,
     grLast_804D4968,
     ARRAY_SIZE(grLast_804D4968),
 };
 
-static void grLast_8021A740(void)
+static void grLast_OnInit(void)
 {
     grNLa_804D6AD0 = Ground_801C49F8();
     stage_info.unk8C.b4 = 1;
@@ -179,9 +179,9 @@ static void grLast_8021A740(void)
     Camera_800311CC(30000);
 }
 
-static void grLast_UnkStage0_OnLoad(void) {}
+static void grLast_OnLoad(void) {}
 
-static void grLast_UnkStage0_OnStart(void)
+static void grLast_OnStart(void)
 {
     grZakoGenerator_801CAE04(0);
 }
@@ -198,7 +198,7 @@ static Ground_GObj* grLast_8021A7F4(int id)
     StageCallbacks* cb;
 
     cb = &grLast_803E7EBC[id];
-    gobj = Ground_801C14D0(id);
+    gobj = Ground_GetStageGObj(id);
     if (gobj != NULL) {
         gp = GET_GROUND(gobj);
         gp->x8_callback = NULL;
@@ -211,7 +211,7 @@ static Ground_GObj* grLast_8021A7F4(int id)
             cb->callback0(gobj);
         }
         if (cb->callback2 != NULL) {
-            HSD_GObjProc_8038FD54(gobj, cb->callback2, 4);
+            HSD_GObj_SetupProc(gobj, cb->callback2, 4);
         }
     } else {
         OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 255, id);
@@ -265,7 +265,7 @@ static void grLast_8021A9A4(Ground_GObj* gobj) {}
 
 static void grLast_8021A9A8(Ground_GObj* gobj) {}
 
-static void fn_8021A9AC(Ground_GObj* gobj)
+static void grLast_8021A9AC(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     gp->u.map.xC4_b0 = false;
@@ -288,7 +288,7 @@ static void grLast_8021A9C4(Ground_GObj* gobj)
     grLast_8021B920(gobj, 1);
     gp->x11_flags.b012 = 1;
     gp->u.map.xC4_b1 = false;
-    Ground_801C10B8(gobj, &fn_8021A9AC);
+    Ground_801C10B8(gobj, &grLast_8021A9AC);
 }
 
 static bool grLast_8021AAA8(Ground_GObj* gobj)
@@ -962,12 +962,12 @@ static void grLast_8021C6AC(void)
     Ground_801C0574(&spC);
 }
 
-static DynamicsDesc* grLast_8021C740(enum_t arg0)
+static DynamicsDesc* grLast_OnTouchLine(enum_t arg0)
 {
     return NULL;
 }
 
-static bool grLast_8021C748(Vec3* v, int i, HSD_JObj* jobj)
+static bool grLast_OnCheckShadowRender(Vec3* v, int i, HSD_JObj* jobj)
 {
     return true;
 }

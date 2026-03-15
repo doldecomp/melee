@@ -11,8 +11,11 @@
 #include "lb/lb_00B0.h"
 
 #include <math.h>
+#include <baselib/random.h>
 
 /* 282DE4 */ static void it_80282DE4(Item_GObj* gobj);
+
+extern s32 it_803F56B8[];
 
 /// #it_3F14_Logic7_Spawned
 
@@ -43,7 +46,23 @@ bool itDosei_UnkMotion0_Coll(Item_GObj* gobj)
     return false;
 }
 
-/// #fn_80281734
+void fn_80281734(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    if (ip->facing_dir == 1.0f) {
+        if (ip->xDD4_itemVar.dosei.xDF8.x < 0.0f) {
+            it_80281C6C(gobj);
+            return;
+        }
+        it_802817A0(gobj);
+        return;
+    }
+    if (ip->xDD4_itemVar.dosei.xDF8.x > 0.0f) {
+        it_80281C6C(gobj);
+        return;
+    }
+    it_802817A0(gobj);
+}
 
 /// #it_802817A0
 
@@ -195,7 +214,26 @@ void itDosei_UnkMotion4_Phys(Item_GObj* gobj) {}
 
 /// #it_3F14_Logic7_Dropped
 
-/// #it_3F14_Logic7_Thrown
+void it_3F14_Logic7_Thrown(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    HSD_JObj* jobj = gobj->hsd_obj;
+    itDoseiAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+
+    if (ip->msid != 5) {
+        it_8026B390(gobj);
+        HSD_JObjClearFlagsAll(HSD_JObjGetChild(jobj), JOBJ_HIDDEN);
+        Item_80268E5C(gobj, 5, 6);
+        {
+            f32 speed = attr->unk0;
+            ip->x5D0_animFrameSpeed = speed;
+            lb_8000BA0C(jobj, speed);
+        }
+    } else {
+        Item_80268E5C(gobj, 5, 6);
+    }
+    it_80274484(gobj, jobj, ip->xDD4_itemVar.dosei.xDE0);
+}
 
 bool itDosei_UnkMotion5_Anim(Item_GObj* gobj)
 {
@@ -209,7 +247,23 @@ void itDosei_UnkMotion5_Phys(Item_GObj* gobj)
     it_80274658(gobj, it_804D6D28->x68_float);
 }
 
-/// #it_3F14_Logic7_EnteredAir
+void it_3F14_Logic7_EnteredAir(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    s32 motion_id;
+    if (!ip->xDC8_word.flags.x19) {
+        motion_id = 0xA;
+    } else {
+        motion_id = 6;
+    }
+    Item_80268E5C(gobj, motion_id, 3);
+    {
+        HSD_JObj* jobj = gobj->hsd_obj;
+        ip->x5D0_animFrameSpeed = 1.0f;
+        lb_8000BA0C(jobj, 1.0f);
+    }
+    ip->owner = NULL;
+}
 
 bool itDosei_UnkMotion6_Anim(Item_GObj* gobj)
 {
@@ -354,7 +408,16 @@ bool itDosei_UnkMotion11_Coll(Item_GObj* gobj)
     return false;
 }
 
-/// #it_3F14_Logic7_DmgDealt
+bool it_3F14_Logic7_DmgDealt(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    Item_8026AF0C(ip, it_803F56B8[HSD_Randi(3)], 127, 64);
+    if (ip->msid == 5) {
+        itColl_BounceOffVictim(gobj);
+        it_802725D4(gobj);
+    }
+    return false;
+}
 
 bool itDosei_Logic7_Reflected(Item_GObj* gobj)
 {

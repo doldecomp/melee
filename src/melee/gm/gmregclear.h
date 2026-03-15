@@ -30,7 +30,7 @@
 /* 17DB78 */ u8 gm_8017DB78(gm_8017DB6C_arg0_t* arg0, int index);
 /* 17DB88 */ UNK_RET gm_8017DB88(UNK_PARAMS);
 /* 17DD7C */ u8 fn_8017DD7C(PlayerInitData* arg0, Unk1PData_x24* arg1);
-/* 17DE54 */ UNK_RET fn_8017DE54(UNK_PARAMS);
+/* 17DE54 */ s32 fn_8017DE54(u8, u8*);
 /* 17DEC8 */ Unk1PData* fn_8017DEC8(int);
 /* 17DF28 */ Unk1PData* fn_8017DF28(void);
 /* 17DF90 */ u8 fn_8017DF90(void);
@@ -40,7 +40,7 @@
 /* 17E160 */ bool fn_8017E160(void);
 /* 17E21C */ void fn_8017E21C(void);
 /* 17E280 */ s8 gm_8017E280(u16, u32);
-/* 17E318 */ UNK_RET fn_8017E318(UNK_PARAMS);
+/* 17E318 */ int fn_8017E318(void);
 /* 17E3C8 */ void fn_8017E3C8(void);
 /* 17E424 */ UnkAdventureData* gm_8017E424(void);
 /* 17E430 */ u8 gm_8017E430(void); ///< returns a player slot
@@ -78,7 +78,7 @@
 /* 17EE40 */ void fn_8017EE40(int);
 /* 17F008 */ int fn_8017F008(void);
 /* 17F09C */ UNK_RET fn_8017F09C(UNK_PARAMS);
-/* 17F14C */ UNK_RET fn_8017F14C(UNK_PARAMS);
+/* 17F14C */ s32 fn_8017F14C(void* arg0);
 /* 17F1B8 */ UNK_RET fn_8017F1B8(UNK_PARAMS);
 /* 17F2A4 */ UNK_RET fn_8017F2A4(UNK_PARAMS);
 /* 17F47C */ UNK_RET fn_8017F47C(UNK_PARAMS);
@@ -92,8 +92,8 @@
 /* 180AC0 */ int fn_80180AC0(void);
 /* 180AE4 */ s32 gm_80180AE4(void);
 /* 180AF4 */ Fighter_GObj* gm_80180AF4(void);
-/* 180B18 */ UNK_RET gm_80180B18(UNK_PARAMS);
-/* 180BA0 */ UNK_RET gm_80180BA0(UNK_PARAMS);
+/* 180B18 */ void gm_80180B18(void);
+/* 180BA0 */ void gm_80180BA0(void);
 /* 180C14 */ void fn_80180C14(HSD_GObj* gobj);
 /* 180C60 */ UNK_RET fn_80180C60(UNK_PARAMS);
 /* 181598 */ UNK_RET fn_80181598(UNK_PARAMS);
@@ -103,7 +103,7 @@
 /* 181A14 */ int gm_80181A14(void);
 /* 181A24 */ u32 gm_80181A24(void);
 /* 181A34 */ s32 gm_80181A34(void);
-/* 181A44 */ UNK_RET gm_80181A44(int c_kind, int, bool);
+/* 181A44 */ void gm_80181A44(int c_kind, int, bool);
 /* 181AC8 */ void gm_80181AC8(int, int, u16);
 /* 181B64 */ void gm_80181B64(int c_kind, int, s32);
 /* 181BFC */ int fn_80181BFC(int*);

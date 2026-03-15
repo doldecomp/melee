@@ -157,13 +157,13 @@ StageCallbacks grIz_803E0D74[] = {
     },
 };
 StageData grIz_803E0E5C = {
-    0xC,
+    IZUMI,
     grIz_803E0D74,
     "/GrIz.dat",
     grIzumi_801CBB88,
     grIzumi_801CBB84,
-    grIzumi_UnkStage0_OnLoad,
-    grIzumi_UnkStage0_OnStart,
+    grIzumi_OnLoad,
+    grIzumi_OnStart,
     grIzumi_801CBCE0,
     grIzumi_801CD278,
     grIzumi_801CD280,
@@ -172,13 +172,11 @@ StageData grIz_803E0E5C = {
     3,
 };
 
-/// functions start here
 void grIzumi_801CBB84(bool x)
 {
     return;
 }
 
-/// https://decomp.me/scratch/94sPw
 void grIzumi_801CBB88(void)
 {
     HSD_GObj* r3;
@@ -194,8 +192,7 @@ void grIzumi_801CBB88(void)
     Ground_801C3BB4();
 }
 
-/// https://decomp.me/scratch/4u5TX
-void grIzumi_UnkStage0_OnLoad(void)
+void grIzumi_OnLoad(void)
 {
     HSD_GObj* gobj;
     HSD_LObj* lobj;
@@ -215,8 +212,7 @@ void grIzumi_UnkStage0_OnLoad(void)
     }
 }
 
-/// https://decomp.me/scratch/9AxrD
-void grIzumi_UnkStage0_OnStart(void)
+void grIzumi_OnStart(void)
 {
     grZakoGenerator_801CAE04(0);
 }
@@ -226,13 +222,12 @@ bool grIzumi_801CBCE0(void)
     return false;
 }
 
-/// https://decomp.me/scratch/FVXdq
 HSD_GObj* grIzumi_801CBCE8(int gobj_id)
 {
     HSD_GObj* gobj;
     StageCallbacks* callbacks = &grIz_803E0D74[gobj_id];
 
-    gobj = Ground_801C14D0(gobj_id);
+    gobj = Ground_GetStageGObj(gobj_id);
 
     if (gobj != NULL) {
         Ground* gp = gobj->user_data;
@@ -249,22 +244,16 @@ HSD_GObj* grIzumi_801CBCE8(int gobj_id)
         }
 
         if (callbacks->callback2 != NULL) {
-            HSD_GObjProc_8038FD54(gobj, callbacks->callback2, 4);
+            HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
         }
 
     } else {
-        // clang-format off
-//#line 241 "grizumi.c"
-///        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, __LINE__, gobj_id);
-        // clang-format on
-        OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grizumi.c", 241,
-                 gobj_id);
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 241, gobj_id);
     }
 
     return gobj;
 }
 
-/// https://decomp.me/scratch/BcUJr
 void grIzumi_801CBDD4(Ground_GObj* gobj)
 {
     grAnime_801C8138(gobj, GET_GROUND(gobj)->map_id, 0);
@@ -307,7 +296,6 @@ void grIzumi_801CBE60(Ground_GObj* gobj)
     return;
 }
 
-/// https://decomp.me/scratch/VuF6U
 void grIzumi_801CBE64(Ground_GObj* gobj)
 {
     HSD_TObj* tobj;
@@ -327,12 +315,7 @@ void grIzumi_801CBE64(Ground_GObj* gobj)
         tobj->wrap_t = 0;
         tobj->flags = (tobj->flags & ~0x1FF) | 0x103;
     } else {
-        // clang-format off
-/// this breaks the line numbers in compile errors >:(
-//#line 387 "grizumi.c"
-///        OSReport("%s:%d:Warning: not found tobj !\n", __FILE__, __LINE__);
-        // clang-format on
-        OSReport("%s:%d:Warning: not found tobj !\n", "grizumi.c", 387);
+        OSReport("%s:%d:Warning: not found tobj !\n", __FILE__, 387);
     }
     gp->gv.izumi.xC4 = tobj;
     gobj->render_cb = grIzumi_801CD220;
@@ -702,7 +685,7 @@ HSD_GObj* grIzumi_801CCBDC(float height, Vec3* a, int b, HSD_JObj* jobj)
         }
     }
 
-    OSReport("%s:%d:oioi...\n", "grizumi.c", 892);
+    OSReport("%s:%d:oioi...\n", __FILE__, 892);
     while (true) {
     }
 
@@ -757,7 +740,7 @@ HSD_GObj* grIzumi_801CCD98(void)
     } else {
         OSReport("not found mirror image desc! "
                  "(GrdIzumi_cd_wt_GrdIzumiDummy1_1_image_desc)\n");
-        __assert("grizumi.c", 968, "0");
+        HSD_ASSERT(968, 0);
     }
     return gobj;
 }

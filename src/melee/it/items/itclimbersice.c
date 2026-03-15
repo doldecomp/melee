@@ -5,6 +5,8 @@
 
 #include "ef/efasync.h"
 #include "ef/eflib.h"
+#include "ft/chara/ftKirby/ftKb_Init.h"
+#include "ft/chara/ftPopo/ftPp_Init.h"
 
 #include "it/forward.h"
 
@@ -25,7 +27,18 @@ void it_802C17DC(Item_GObj* gobj)
     Item_8026A8EC(gobj);
 }
 
-/// #it_2725_Logic90_Destroyed
+void it_2725_Logic90_Destroyed(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->xDD4_itemVar.climbersice.x0 != NULL) {
+        if (ip->kind == 0x6A) {
+            ftPp_Init_8011F16C(ip->xDD4_itemVar.climbersice.x0, gobj);
+        } else {
+            ftKb_SpecialNIc_80108CE8(ip->xDD4_itemVar.climbersice.x0, gobj);
+        }
+    }
+    ip->xDD4_itemVar.climbersice.x0 = NULL;
+}
 
 /// #it_802C1854
 

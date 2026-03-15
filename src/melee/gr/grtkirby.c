@@ -51,7 +51,7 @@ static StageCallbacks grTKb_803E8BB0[4] = {
 };
 
 StageData grTKb_803E8C0C = {
-    48,
+    TKIRBY,
     grTKb_803E8BB0,
     "/GrTKb.dat",
     grTKirby_80221368,
@@ -99,7 +99,7 @@ HSD_GObj* grTKirby_80221408(s32 arg0)
     Ground* gp;
 
     cb = &grTKb_803E8BB0[arg0];
-    gobj = Ground_801C14D0(arg0);
+    gobj = Ground_GetStageGObj(arg0);
     if (gobj != NULL) {
         gp = gobj->user_data;
         gp->x8_callback = 0;
@@ -112,7 +112,7 @@ HSD_GObj* grTKirby_80221408(s32 arg0)
             cb->callback0(gobj);
         }
         if (cb->callback2 != 0U) {
-            HSD_GObjProc_8038FD54(gobj, cb->callback2, 4);
+            HSD_GObj_SetupProc(gobj, cb->callback2, 4);
         }
     } else {
         OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grtkirby.c", 0xC3,

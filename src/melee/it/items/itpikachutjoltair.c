@@ -3,10 +3,13 @@
 #include <placeholder.h>
 #include <platform.h>
 
+#include "db/db.h"
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/item.h"
 #include "it/items/itpikachutjoltground.h"
+#include "lb/lb_00B0.h"
 
 /* 2B45E8 */ static bool itPikachutjoltair_UnkMotion0_Coll(Item_GObj* gobj);
 
@@ -28,7 +31,19 @@ Item_GObj* it_802B3EFC(Item_GObj* gobj)
     return 0;
 }
 
-/// #it_802B3F20
+void it_802B3F20(Item_GObj* gobj, Vec3* arg1)
+{
+    Item* ip = gobj->user_data;
+    PAD_STACK(8);
+    if (ip->xDD4_itemVar.pikachujoltair.xDD8 != NULL) {
+        lb_8000B1CC(ip->xBBC_dynamicBoneTable->bones[6], NULL, arg1);
+        arg1->z = 0.0f;
+        return;
+    }
+    arg1->z = 0.0f;
+    arg1->y = 0.0f;
+    arg1->x = 0.0f;
+}
 
 /// #it_802B3F88
 
@@ -44,7 +59,16 @@ void it_802B43B0(Item_GObj* gobj)
     }
 }
 
-/// #it_802B43D0
+void it_802B43D0(Item_GObj* gobj, HSD_GObj* arg1)
+{
+    Item* ip = GET_ITEM(gobj);
+    it_8026B3A8(gobj);
+    ip->xDC8_word.flags.x13 = 0;
+    it_80272940(gobj);
+    Item_80268E5C((HSD_GObj*) gobj, 0, 2);
+    Item_802694CC((HSD_GObj*) gobj);
+    db_80225DD8(gobj, arg1);
+}
 
 /// #itPikachutjoltair_UnkMotion0_Anim
 

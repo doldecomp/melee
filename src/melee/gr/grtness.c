@@ -61,7 +61,7 @@ static StageCallbacks grTNs_803E9030[] = {
 };
 
 StageData grTNs_803E908C = {
-    0x00000036,
+    TNESS,
     grTNs_803E9030,
     "/GrTNs.dat",
     grTNess_802225D4,
@@ -112,7 +112,7 @@ static HSD_GObj* grTNess_80222674(int id)
     HSD_GObj* gobj;
     Ground* gp;
     StageCallbacks* cb = &grTNs_803E9030[id];
-    gobj = Ground_801C14D0(id);
+    gobj = Ground_GetStageGObj(id);
     if (gobj != NULL) {
         gp = gobj->user_data;
         gp->x8_callback = NULL;
@@ -125,7 +125,7 @@ static HSD_GObj* grTNess_80222674(int id)
             cb->callback0(gobj);
         }
         if (cb->callback2 != 0U) {
-            HSD_GObjProc_8038FD54(gobj, cb->callback2, 4);
+            HSD_GObj_SetupProc(gobj, cb->callback2, 4);
         }
     } else {
         OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grtness.c", 0xC3, id);

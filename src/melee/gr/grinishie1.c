@@ -177,7 +177,7 @@ bool grInishie1_801FA9AC(void)
 HSD_GObj* grInishie1_801FA9B4(s32 arg0)
 {
     StageCallbacks* cb = &grI1_803E48F4[arg0];
-    HSD_GObj* gobj = Ground_801C14D0(arg0);
+    HSD_GObj* gobj = Ground_GetStageGObj(arg0);
 
     if (gobj != NULL) {
         Ground* gp = gobj->user_data;
@@ -196,7 +196,7 @@ HSD_GObj* grInishie1_801FA9B4(s32 arg0)
         }
 
         if (cb->callback2 != NULL) {
-            HSD_GObjProc_8038FD54(gobj, cb->callback2, 4U);
+            HSD_GObj_SetupProc(gobj, cb->callback2, 4U);
         }
     } else {
         OSReport("%s:%d: couldn't get gobj(id=%d)\n", "grinishie1.c", 0xE7,

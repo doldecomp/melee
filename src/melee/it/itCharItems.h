@@ -31,8 +31,14 @@ typedef struct itClimbersIce_ItemVars {
 } itClimbersIce_ItemVars;
 
 typedef struct itNessbat_ItemVars {
-    /* +0 ip+DD4 */ s32 x0;
+    /* +0 ip+DD4 */ HSD_GObj* x0;
 } itNessbat_ItemVars;
+
+typedef struct itNesspkthundertrail_ItemVars {
+    /* +0 ip+DD4 */ Item_GObj* x0;
+    /* +4 ip+DD8 */ s32 x4;
+    /* +8 ip+DDC */ s32 x8;
+} itNesspkthundertrail_ItemVars;
 
 typedef struct {
     /* x0 ip+DD4 */ f32 x0;
@@ -189,6 +195,25 @@ typedef struct {
     /*  +8 ip+DDC */ float speed;
     /*  +C ip+DE0 */ Vec3 pos;
 } itFoxLaser_ItemVars;
+
+typedef struct {
+    /* padding from 0xDD4 to 0xDF4 */ char _pad0[0xDF4 - 0xDD4];
+    /* item+0xDF4 */ Item_GObj* xDF4;
+    /* padding from 0xDF8 to 0xE18 */ char _pad1[0xE18 - 0xDF8];
+    /* item+0xE18 */ s32 xE18;
+    /* item+0xE1C */ s32 xE1C;
+    /* item+0xE20 */ s32 xE20;
+    /* item+0xE24 */ s32 xE24;
+    /* item+0xE28 */ s32 xE28;
+    /* item+0xE2C */ s32 xE2C;
+    /* item+0xE30 */ s16 xE30;
+    /* item+0xE32 */ s16 xE32_pad;
+    /* item+0xE34 */ s32 xE34_pad;
+    /* item+0xE38 */ s32 xE38;
+    /* item+0xE3C */ s32 xE3C_pad;
+    /* item+0xE40 */ Item_GObj* xE40;
+    /* item+0xE44 */ Item_GObj* xE44;
+} itArwingLaser_ItemVars;
 
 typedef struct FoxLaserAttr {
     /* +0 */ float lifetime; // [35]

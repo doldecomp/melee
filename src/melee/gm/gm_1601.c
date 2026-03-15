@@ -1323,24 +1323,18 @@ u16 gm_80163274(u8 i)
 bool gm_80163298(s8 c_kind, u16 arg1)
 {
     u8 index;
-    s16* record;
-    u32 save_data;
-    u32 offset;
+    u16* record;
     u16 score;
 
-    index = gm_80164024((u8) c_kind);
-    record = gmMainLib_8015D7EC((u8) index);
-    save_data = (u32) gmMainLib_8015EDBC();
-    offset = ((index << 2) & 0x3FC) + 0x114;
-    score = (u16) arg1;
+    index = gm_80164024(c_kind);
+    record = gmMainLib_8015D7EC(index);
+    score = arg1;
 
-    // POTENTIAL TODO: get rid of pointer math: seems hard with the addi + lwzx
-    if (*(u32*) (save_data + offset) < (u32) score) {
-        save_data = (u32) gmMainLib_8015EDBC();
-        *(u32*) (save_data + offset) = (u32) score;
+    if ((u32) gmMainLib_8015EDBC()->x114[index] < (u32) score) {
+        gmMainLib_8015EDBC()->x114[index] = (int) score;
     }
 
-    if (*(u16*) record < (u16) arg1) {
+    if (*record < arg1) {
         *record = arg1;
         return true;
     }
@@ -1426,9 +1420,60 @@ s32 gm_80163690(u8 arg0)
     return -1;
 }
 
-/// #gm_801636D8
+void gm_801636D8(u8 arg0, u8* arg1, u8* arg2, u8* arg3, u8* arg4)
+{
+    s32 temp_r0;
+    u32 val;
 
-/// #gm_80163838
+    if (gmMainLib_8015D6BC(arg0) != 0) {
+        val = *gmMainLib_8015D6A4(arg0);
+        temp_r0 = val / 60;
+        if (arg1 != NULL) {
+            *arg1 = (u8) ((temp_r0 / 60) / 60);
+        }
+        if (arg2 != NULL) {
+            *arg2 = (u8) ((temp_r0 / 60) % 60);
+        }
+        if (arg3 != NULL) {
+            *arg3 = (u8) (temp_r0 % 60);
+        }
+        if (arg4 != NULL) {
+            *arg4 = (u8) ((99.0f * (f32) (val % 60)) / 59.0f);
+        }
+    }
+}
+
+bool gm_80163838(u8* arg0, u8* arg1, u8* arg2, u8* arg3)
+{
+    u32 total_frames = 0;
+    s32 i;
+    s32 frames;
+
+    for (i = 0; i < 0x19; i++) {
+        if (gmMainLib_8015D6BC(i) != 0) {
+            total_frames += *gmMainLib_8015D6A4((u8) i);
+        } else {
+            return false;
+        }
+    }
+
+    frames = total_frames / 60;
+
+    if (arg0 != NULL) {
+        *arg0 = (u8) ((frames / 60) / 60);
+    }
+    if (arg1 != NULL) {
+        *arg1 = (u8) ((frames / 60) % 60);
+    }
+    if (arg2 != NULL) {
+        *arg2 = (u8) (frames % 60);
+    }
+    if (arg3 != NULL) {
+        *arg3 = (u8) ((99.0f * (f32) (total_frames % 60)) / 59.0f);
+    }
+
+    return true;
+}
 
 bool gm_801639C0(u8 arg0)
 {
@@ -1446,7 +1491,28 @@ int gm_801639F4(u8 arg0)
     return -1;
 }
 
-/// #gm_80163A3C
+void gm_80163A3C(u8 arg0, u8* arg1, u8* arg2, u8* arg3, u8* arg4)
+{
+    s32 temp_r0;
+    u32 val;
+
+    if (gmMainLib_8015D710(arg0) != 0) {
+        val = *gmMainLib_8015D6F8(arg0);
+        temp_r0 = val / 60;
+        if (arg1 != NULL) {
+            *arg1 = (u8) ((temp_r0 / 60) / 60);
+        }
+        if (arg2 != NULL) {
+            *arg2 = (u8) ((temp_r0 / 60) % 60);
+        }
+        if (arg3 != NULL) {
+            *arg3 = (u8) (temp_r0 % 60);
+        }
+        if (arg4 != NULL) {
+            *arg4 = (u8) ((99.0f * (f32) (val % 60)) / 59.0f);
+        }
+    }
+}
 
 bool gm_80163B9C(u8* arg0, u8* arg1, u8* arg2, u8* arg3)
 {
@@ -1699,6 +1765,33 @@ bool gm_80164330(s32 arg0)
         OSReport("RandomStageSwitch All-Off!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
     }
     if ((1 << (u16) arg0) & gmMainLib_8015CC58()->stage_mask) {
+        return true;
+    }
+    return false;
+}
+
+bool gm_80164430(u16 arg0)
+{
+    u16* temp_r31;
+    s32 i;
+    u8 stage_idx;
+    u8 unlock_bit;
+
+    temp_r31 = gmMainLib_8015EDA4();
+    stage_idx = Stage_8022519C(arg0);
+
+    for (i = 0; i < NUM_UNLOCKABLE_STAGES; i++) {
+        if ((s32) stage_idx == (s32) lbl_803B790C[i][1]) {
+            unlock_bit = lbl_803B790C[i][0];
+            goto found;
+        }
+    }
+    unlock_bit = NUM_UNLOCKABLE_STAGES;
+
+found:
+    if (unlock_bit == NUM_UNLOCKABLE_STAGES ||
+        (*temp_r31 & (1LL << unlock_bit)))
+    {
         return true;
     }
     return false;

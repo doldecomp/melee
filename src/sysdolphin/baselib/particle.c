@@ -5455,8 +5455,8 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     idx = (pc[0] << 8) + pc[1];
                     pc += 2;
 
-                    if (ptclref[bank] != NULL) {
-                        idx = ptclref[bank][idx];
+                    if (ptclref_804D0E5C[bank] != NULL) {
+                        idx = ptclref_804D0E5C[bank][idx];
                     }
 
                     linkNo = pp->linkNo;
@@ -5625,8 +5625,8 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     flags = pc[2];
                     pc += 3;
 
-                    if (ptclref[pp->bank] != NULL) {
-                        idx = ptclref[pp->bank][idx];
+                    if (ptclref_804D0E5C[pp->bank] != NULL) {
+                        idx = ptclref_804D0E5C[pp->bank][idx];
                     }
 
                     gchild = hsd_8039F05C(pp->linkNo, pp->bank, idx);
@@ -5748,8 +5748,8 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
 
                     idx = baseIdx + (s32) ((f32) randomRange * HSD_Randf());
 
-                    if (ptclref[pp->bank] != NULL) {
-                        idx = ptclref[pp->bank][idx];
+                    if (ptclref_804D0E5C[pp->bank] != NULL) {
+                        idx = ptclref_804D0E5C[pp->bank][idx];
                     }
 
                     linkNo = pp->linkNo;
@@ -6103,8 +6103,8 @@ void* hsd_8039930C(void* pp_arg, void* prev_arg)
                     idx = (pc[0] << 8) + pc[1];
                     pc += 2;
 
-                    if (ptclref[bank] != NULL) {
-                        idx = ptclref[bank][idx];
+                    if (ptclref_804D0E5C[bank] != NULL) {
+                        idx = ptclref_804D0E5C[bank][idx];
                     }
 
                     linkNo = pp->linkNo;
@@ -7319,8 +7319,7 @@ void hsd_8039CEAC(u32 mask)
 
     bins = hsd_804D0908;
     bits = mask;
-    i = 0;
-    do {
+    for (i = 0; i < 16; i++) {
         if (!(bits & 0x10000)) {
             cur = *bins;
             prev = NULL;
@@ -7338,10 +7337,9 @@ void hsd_8039CEAC(u32 mask)
                 cur = next;
             }
         }
-        i++;
         bits >>= 1;
         bins++;
-    } while (i < 16);
+    }
 }
 
 // @TODO: Currently 96.59% match - instruction scheduling in address
@@ -7439,6 +7437,8 @@ void hsd_8039D0A0(HSD_Generator* gen)
     }
 }
 
+static u16 lbl_804D6368 = 0x100;
+
 void hsd_8039D1E4(HSD_Generator* gen, void* userfunc)
 {
     gen->userfunc = userfunc;
@@ -7446,11 +7446,11 @@ void hsd_8039D1E4(HSD_Generator* gen, void* userfunc)
 
 u16 hsd_8039D1EC(void)
 {
-    hsd_804D78E0++;
-    if (hsd_804D78E0 < 256) {
-        hsd_804D78E0 = 256;
+    lbl_804D6368++;
+    if (lbl_804D6368 < 256) {
+        lbl_804D6368 = 256;
     }
-    return hsd_804D78E0;
+    return lbl_804D6368;
 }
 
 void hsd_8039D214(HSD_Generator* gen)
@@ -7724,8 +7724,6 @@ void hsd_8039D71C(HSD_Generator* gen)
             jobj->mtx[2][0] * ax + jobj->mtx[2][1] * ay + jobj->mtx[2][2] * az;
     }
 }
-
-static u16 lbl_804D6368 = 0x100;
 
 HSD_Generator* hsd_8039D9C8(void)
 {

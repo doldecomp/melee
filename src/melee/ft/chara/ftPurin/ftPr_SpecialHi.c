@@ -16,7 +16,7 @@
 #include "ftCommon/ftCo_Fall.h"
 #include "ftPurin/types.h"
 #include "gm/gm_unsplit.h"
-#include "gr/grstadium.h"
+#include "gr/grpstadium.h"
 #include "lb/types.h"
 
 #include <common_structs.h>

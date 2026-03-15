@@ -66,7 +66,7 @@ StageCallbacks grTFe_803E97C0[4] = {
 };
 
 StageData grTFe_803E981C = {
-    64,
+    TEMBLEM,
     grTFe_803E97C0,
     "/GrTFe.dat",
     grTRoy_802243F8,
@@ -113,7 +113,7 @@ static HSD_GObj* grTRoy_80224498(s32 gobj_id)
     Ground* gp;
 
     cb = &grTFe_803E97C0[gobj_id];
-    gobj = Ground_801C14D0(gobj_id);
+    gobj = Ground_GetStageGObj(gobj_id);
 
     if (gobj != NULL) {
         gp = gobj->user_data;
@@ -127,7 +127,7 @@ static HSD_GObj* grTRoy_80224498(s32 gobj_id)
             cb->callback0(gobj);
         }
         if (cb->callback2 != NULL) {
-            HSD_GObjProc_8038FD54(gobj, cb->callback2, 4);
+            HSD_GObj_SetupProc(gobj, cb->callback2, 4);
         }
     } else {
         OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grtemblem.c", 0xC3,

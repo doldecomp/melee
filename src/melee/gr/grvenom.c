@@ -2,7 +2,6 @@
 
 #include <platform.h>
 
-#include "baselib/sislib.h"
 #include "gr/grcorneria.h"
 #include "gr/grdisplay.h"
 #include "gr/grzakogenerator.h"
@@ -16,11 +15,13 @@
 #include "mp/mplib.h"
 
 #include <baselib/aobj.h>
+#include <baselib/debug.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 #include <baselib/lobj.h>
 #include <baselib/random.h>
+#include <baselib/sislib.h>
 
 /// Forward declaration of grVe_Data for use by multiple functions
 /// @todo This struct should be defined in gr/types.h or a proper header
@@ -232,7 +233,7 @@ Ground_GObj* grVenom_80203EAC(int gobj_id)
     StageCallbacks* callbacks =
         &((StageCallbacks*) ((char*) base + 0x44))[gobj_id];
 
-    gobj = Ground_801C14D0(gobj_id);
+    gobj = Ground_GetStageGObj(gobj_id);
 
     if (gobj != NULL) {
         gp = gobj->user_data;
@@ -246,7 +247,7 @@ Ground_GObj* grVenom_80203EAC(int gobj_id)
             callbacks->callback0(gobj);
         }
         if (callbacks->callback2 != NULL) {
-            HSD_GObjProc_8038FD54(gobj, callbacks->callback2, 4);
+            HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
         }
     } else {
         OSReport(&base->x1B8_file[0], &base->x1DC_func[0], 0x23B, gobj_id);
@@ -523,7 +524,6 @@ void grVenom_80204CEC(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     s32 temp;
-    PAD_STACK(8);
 
     ifStatus_802F6898();
     un_802FF570();
@@ -533,10 +533,10 @@ void grVenom_80204CEC(Ground_GObj* gobj)
             temp = gp->gv.venom.xCC;
             gp->gv.venom.xCC = temp - 1;
             if (temp < 0) {
-                HSD_GObj* other = (HSD_GObj*) grVenom_80203EAC(1);
-                Ground* other_gp = other->user_data;
-                grCorneria_801E2738(other, &other_gp->gv.venom.xC4,
-                                    gp->gv.venom.xC4, gp->gv.venom.xC8);
+                HSD_GObj* gobj = grVenom_80203EAC(1);
+                Ground* gp2 = GET_GROUND(gobj);
+                grCorneria_801E2738(gobj, &gp2->gv.venom.xC4, gp->gv.venom.xC4,
+                                    gp->gv.venom.xC8);
                 gp->gv.venom.xC8 = gp->gv.venom.xC8 + 1;
                 gp->gv.venom.xCC = 0;
             }
@@ -1036,6 +1036,8 @@ void grVenom_80206BC4(Ground_GObj* gobj)
 
 void grVenom_80206BEC(Ground_GObj* arg) {}
 
+extern char grVe_803E5524[];
+
 bool grVenom_80206BF0(int arg0)
 {
     s32 var_r30;
@@ -1054,17 +1056,13 @@ bool grVenom_80206BF0(int arg0)
         return 0;
     }
     wgobj = (Ground_GObj*) grVenom_80203EAC(8);
-    if (wgobj == NULL) {
-        __assert("grvenom.c", 0x8C4, "wgobj");
-    }
+    HSD_ASSERT(2244, wgobj);
     gp = wgobj->user_data;
     gp->gv.venom.xCC = 10;
     gp->gv.venom.xC8 = 0;
     gp->gv.venom.xC4 = var_r30;
     return 1;
 }
-
-/// grVenom_80206CB0
 
 void grVenom_80206CB0(s32 arg0)
 {

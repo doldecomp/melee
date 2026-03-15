@@ -8,7 +8,23 @@
 
 /// #it_802AFD8C
 
-/// #it_802AFEA8
+Item_GObj* it_802AFEA8(Item_GObj* gobj, Fighter_GObj* owner_gobj, u32 arg2)
+{
+    if (gobj == NULL) {
+        return;
+    }
+    if (owner_gobj == NULL) {
+        return;
+    }
+    switch (arg2) {
+    case 0:
+        it_802AFF08(gobj, owner_gobj);
+        break;
+    case 1:
+        it_802B00F4(gobj, owner_gobj);
+        break;
+    }
+}
 
 void itSeakNeedleThrown_Logic109_Destroyed(Item_GObj* gobj)
 {

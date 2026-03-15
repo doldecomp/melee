@@ -1,25 +1,152 @@
+#include "dolphin/gx/GXStruct.h"
+
 #include <melee/gm/types.h>
 #include <melee/sc/types.h>
 
 static s32 lbl_804D4190 = 0xFFFFFFFF;
 static s32 lbl_804D4194 = -1;
 
-static HSD_Archive* lbl_804D6638;
-static HSD_Archive* lbl_804D6640;
-static HSD_Archive* lbl_804D6644;
-static HSD_Archive* lbl_804D6648;
-static SceneDesc* lbl_804D664C;
-static SceneDesc* lbl_804D6650;
+HSD_Archive* lbl_804D6638;
+HSD_Archive* lbl_804D6640;
+HSD_Archive* lbl_804D6644;
+HSD_Archive* lbl_804D6648;
+SceneDesc* lbl_804D664C;
+SceneDesc* lbl_804D6650;
 
-static struct {
-    u8 x0;
-    u8 x1;
-    u8 pad2[0x32 - 0x2];
-    u8 x32;
-    u8 pad33[0x5E - 0x33];
-    u8 x5E;
-    u8 pad5F[0xDC - 0x5F];
-} lbl_80473AB8[0x40];
+typedef struct BracketSrcEntry {
+    /* 0x00 */ u8 x0;
+    /* 0x01 */ u8 x1;
+    /* 0x02 */ u8 x2;
+    /* 0x03 */ u8 x3;
+    /* 0x04 */ u8 x4;
+    /* 0x05 */ u8 x5;
+    /* 0x06 */ u8 x6;
+    /* 0x07 */ u8 pad7;
+    /* 0x08 */ s32 x8;
+    /* 0x0C */ s32 xC;
+    /* 0x10 */ s32 x10;
+    /* 0x14 */ s32 x14;
+    /* 0x18 */ u8 x18;
+    /* 0x19 */ u8 x19;
+    /* 0x1A */ u8 x1A;
+    /* 0x1B */ u8 x1B;
+    /* 0x1C */ u8 x1C;
+    /* 0x1D */ u8 x1D;
+    /* 0x1E */ u8 x1E;
+    /* 0x1F */ u8 x1F;
+    /* 0x20 */ u8 x20;
+    /* 0x21 */ u8 x21;
+    /* 0x22 */ u8 x22;
+    /* 0x23 */ u8 x23;
+    /* 0x24 */ u8 x24;
+    /* 0x25 */ u8 pad25[3];
+} BracketSrcEntry;
+
+typedef struct BracketEntry {
+    /* 0x00 */ u8 x0;
+    /* 0x01 */ u8 x1;
+    /* 0x02 */ u8 x2;
+    /* 0x03 */ u8 x3;
+    /* 0x04 */ u8 x4;
+    /* 0x05 */ u8 x5;
+    /* 0x06 */ u8 x6;
+    /* 0x07 */ u8 pad7[0x0C - 0x07];
+    /* 0x0C */ s32 xC;
+    /* 0x10 */ s32 x10;
+    /* 0x14 */ s32 x14;
+    /* 0x18 */ s32 x18;
+    /* 0x1C */ f32 x1C;
+    /* 0x20 */ GXColor x20;
+    /* 0x24 */ u8 x24;
+    /* 0x25 */ u8 x25;
+    /* 0x26 */ u8 x26;
+    /* 0x27 */ u8 x27;
+    /* 0x28 */ u8 x28;
+    /* 0x29 */ u8 pad29[0x2C - 0x29];
+    /* 0x2C */ HSD_GObj* x2C;
+    /* 0x30 */ u8 x30;
+    /* 0x31 */ u8 pad31;
+    /* 0x32 */ u8 x32;
+    /* 0x33 */ u8 pad33;
+    /* 0x34 */ s32 x34;
+    /* 0x38 */ s32 x38;
+    /* 0x3C */ s32 x3C;
+    /* 0x40 */ s32 x40;
+    /* 0x44 */ s32 x44;
+    /* 0x48 */ s32 x48;
+    /* 0x4C */ u8 x4C;
+    /* 0x4D */ u8 x4D;
+    /* 0x4E */ u8 x4E;
+    /* 0x4F */ u8 x4F;
+    /* 0x50 */ u8 x50;
+    /* 0x51 */ u8 x51;
+    /* 0x52 */ u8 x52;
+    /* 0x53 */ u8 pad53;
+    /* 0x54 */ u16 x54;
+    /* 0x56 */ u8 pad56[0x58 - 0x56];
+    /* 0x58 */ HSD_GObj* x58;
+    /* 0x5C */ u8 x5C;
+    /* 0x5D */ u8 pad5D;
+    /* 0x5E */ u8 x5E;
+    /* 0x5F */ u8 pad5F;
+    /* 0x60 */ s32 x60;
+    /* 0x64 */ s32 x64;
+    /* 0x68 */ s32 x68;
+    /* 0x6C */ s32 x6C;
+    /* 0x70 */ s32 x70;
+    /* 0x74 */ s32 x74;
+    /* 0x78 */ u8 x78;
+    /* 0x79 */ u8 pad79;
+    /* 0x7A */ u8 x7A;
+    /* 0x7B */ u8 pad7B[0x7D - 0x7B];
+    /* 0x7D */ u8 x7D;
+    /* 0x7E */ u8 x7E;
+    /* 0x7F */ u8 pad7F;
+    /* 0x80 */ u16 x80;
+    /* 0x82 */ u8 pad82[0x84 - 0x82];
+    /* 0x84 */ HSD_GObj* x84;
+    /* 0x88 */ u8 x88;
+    /* 0x89 */ u8 pad89;
+    /* 0x8A */ u8 x8A;
+    /* 0x8B */ u8 pad8B;
+    /* 0x8C */ s32 x8C;
+    /* 0x90 */ s32 x90;
+    /* 0x94 */ s32 x94;
+    /* 0x98 */ s32 x98;
+    /* 0x9C */ s32 x9C;
+    /* 0xA0 */ s32 xA0;
+    /* 0xA4 */ u8 xA4;
+    /* 0xA5 */ u8 padA5;
+    /* 0xA6 */ u8 xA6;
+    /* 0xA7 */ u8 padA7[0xA9 - 0xA7];
+    /* 0xA9 */ u8 xA9;
+    /* 0xAA */ u8 xAA;
+    /* 0xAB */ u8 padAB;
+    /* 0xAC */ u16 xAC;
+    /* 0xAE */ u8 padAE[0xB0 - 0xAE];
+    /* 0xB0 */ HSD_GObj* xB0;
+    /* 0xB4 */ u8 xB4;
+    /* 0xB5 */ u8 padB5;
+    /* 0xB6 */ u8 xB6;
+    /* 0xB7 */ u8 padB7;
+    /* 0xB8 */ s32 xB8;
+    /* 0xBC */ s32 xBC;
+    /* 0xC0 */ s32 xC0;
+    /* 0xC4 */ s32 xC4;
+    /* 0xC8 */ s32 xC8;
+    /* 0xCC */ s32 xCC;
+    /* 0xD0 */ u8 xD0;
+    /* 0xD1 */ u8 padD1;
+    /* 0xD2 */ u8 xD2;
+    /* 0xD3 */ u8 padD3[0xD5 - 0xD3];
+    /* 0xD5 */ u8 xD5;
+    /* 0xD6 */ u8 xD6;
+    /* 0xD7 */ u8 padD7;
+    /* 0xD8 */ u16 xD8;
+    /* 0xDA */ u8 padDA[0xDC - 0xDA];
+} BracketEntry;
+
+static BracketEntry lbl_80473AB8[0x40];
 
 TmData gm_804771C4;
 
@@ -72,6 +199,19 @@ static u32 lbl_803D9E1C[] = {
     0x014000F0, 0x014000F0,
 };
 
+static u8 lbl_803D9E9C[0x70] = { 0 };
+
 struct {
     int x0, x4, x8;
 } lbl_803D9F0C = { -1, -1, -1 };
+
+struct lbl_803DA0D0_t {
+    /* 0x00 */ u8 icon_model_map[0x18];
+    /* 0x18 */ u8 pad_0x18[0x1E - 0x18];
+    /* 0x1E */ u8 rank_thresholds[32][6];
+    /* 0xDE */ u8 pad_0xDE[0xE0 - 0xDE];
+    /* 0xE0 */ f32 bounce_y[41];
+}; /* size = 0x184 */
+STATIC_ASSERT(sizeof(struct lbl_803DA0D0_t) == 0x184);
+
+extern struct lbl_803DA0D0_t lbl_803DA0D0;

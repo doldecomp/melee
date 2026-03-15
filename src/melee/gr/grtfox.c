@@ -64,7 +64,7 @@ static StageCallbacks grTFx_803E89D8[4] = {
 };
 
 StageData grTFx_803E8A34 = {
-    46,
+    TFOX,
     grTFx_803E89D8,
     "/GrTFx.dat",
     grTFox_80220B84,
@@ -113,7 +113,7 @@ HSD_GObj* grTFox_80220C2C(s32 arg0)
     Ground* gp;
 
     cb = &grTFx_803E89D8[arg0];
-    gobj = Ground_801C14D0(arg0);
+    gobj = Ground_GetStageGObj(arg0);
     if (gobj != NULL) {
         gp = gobj->user_data;
         gp->x8_callback = 0;
@@ -126,7 +126,7 @@ HSD_GObj* grTFox_80220C2C(s32 arg0)
             cb->callback0(gobj);
         }
         if (cb->callback2 != 0U) {
-            HSD_GObjProc_8038FD54(gobj, cb->callback2, 4);
+            HSD_GObj_SetupProc(gobj, cb->callback2, 4);
         }
     } else {
         OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grtfox.c", 0xCB, arg0);

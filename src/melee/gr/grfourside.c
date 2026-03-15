@@ -5,6 +5,8 @@
 
 #include <platform.h>
 
+#include "forward.h"
+
 #include "gr/granime.h"
 #include "gr/grdisplay.h"
 #include "gr/grlib.h"
@@ -69,7 +71,7 @@ StageCallbacks grFs_803E3CFC[] = {
 };
 
 StageData grFs_803E3D94 = {
-    21,
+    FOURSIDE,
     grFs_803E3CFC,
     "/GrFs.dat",
     grFourside_801F2D10,
@@ -120,7 +122,7 @@ HSD_GObj* grFourside_801F2DD0(int gobj_id)
     HSD_GObj* gobj;
     StageCallbacks* callbacks = &grFs_803E3CFC[gobj_id];
 
-    gobj = Ground_801C14D0(gobj_id);
+    gobj = Ground_GetStageGObj(gobj_id);
 
     if (gobj != NULL) {
         Ground* gp = GET_GROUND(gobj);
@@ -136,7 +138,7 @@ HSD_GObj* grFourside_801F2DD0(int gobj_id)
         }
 
         if (callbacks->callback2 != NULL) {
-            HSD_GObjProc_8038FD54(gobj, callbacks->callback2, 4);
+            HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
         }
     } else {
         OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grfourside.c", 215,

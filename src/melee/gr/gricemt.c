@@ -344,7 +344,7 @@ bool grIceMt_801F71E0(void)
 HSD_GObj* grIceMt_801F71E8(int gobj_id)
 {
     HSD_GObj* gobj;
-    gobj = Ground_801C14D0(gobj_id);
+    gobj = Ground_GetStageGObj(gobj_id);
     // StageCallbacks* callbacks = &grIm_803E4718[gobj_id];
     if (gobj != NULL) {
         Ground* gp = GET_GROUND(gobj);
@@ -363,9 +363,9 @@ HSD_GObj* grIceMt_801F71E8(int gobj_id)
         }
 
         if (grIm_803E4718->callback2 != NULL) {
-            HSD_GObjProc_8038FD54(gobj, grIm_803E4718->callback2, 4);
+            HSD_GObj_SetupProc(gobj, grIm_803E4718->callback2, 4);
         }
-        // HSD_GObjProc_8038FD54(gobj,gobj_id,4);
+        // HSD_GObj_SetupProc(gobj,gobj_id,4);
         // if(callbacks) {
         //	callbacks->callback0(gobj);
         // }
@@ -852,7 +852,6 @@ bool grIceMt_801F89A4(Ground_GObj* arg0)
     return false;
 }
 
-/// #grIceMt_801F89AC
 void grIceMt_801F89AC(Ground_GObj* param1)
 {
     grIceMt_801F98A8(param1);
@@ -860,7 +859,6 @@ void grIceMt_801F89AC(Ground_GObj* param1)
     return;
 }
 
-/// #grIceMt_801F89E0
 void grIceMt_801F89E0(Ground_GObj* gobj)
 {
     Ground* gp;
@@ -876,16 +874,17 @@ void grIceMt_801F89E0(Ground_GObj* gobj)
     }
 }
 
-/// #grIceMt_801F8A34
-void grIceMt_801F8A34(Ground_GObj* arg0)
+void grIceMt_801F8A34(Ground_GObj* gobj)
 {
-    int i = 0;
-    Ground* gp = GET_GROUND(arg0);
-    grAnime_801C8138(arg0, gp->map_id, 0);
-    grAnime_801C77FC(arg0, 0, 7);
-    Ground_801C4E70(Ground_801C3FA4(arg0, 1), Ground_801C3FA4(arg0, 2),
-                    Ground_801C3FA4(arg0, 3), Ground_801C3FA4(arg0, 4),
-                    Ground_801C3FA4(arg0, 5), Ground_801C3FA4(arg0, 6));
+    Ground* gp = GET_GROUND(gobj);
+
+    grAnime_801C8138(gobj, gp->map_id, 0);
+    grAnime_801C77FC(gobj, 0, 7);
+    Ground_801C4E70(Ground_801C3FA4(gobj, 1), Ground_801C3FA4(gobj, 2),
+                    Ground_801C3FA4(gobj, 3), Ground_801C3FA4(gobj, 4),
+                    Ground_801C3FA4(gobj, 5), Ground_801C3FA4(gobj, 6));
+    gp->gv.icemt2.xC4 = 0.0f;
+    gp->x11_flags.b012 = 2;
 }
 
 bool grIceMt_801F8B08(Ground_GObj* arg0)
@@ -893,7 +892,6 @@ bool grIceMt_801F8B08(Ground_GObj* arg0)
     return false;
 }
 
-/// #grIceMt_801F8B10
 void grIceMt_801F8B10(Ground_GObj* arg0)
 {
     HSD_JObj* jobj;

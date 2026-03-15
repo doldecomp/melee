@@ -335,7 +335,7 @@ void fn_80246E64(HSD_GObj* gobj)
             HSD_GObjProc* proc;
 
             HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
-            proc = HSD_GObjProc_8038FD54(gobj, fn_80246E04, 0);
+            proc = HSD_GObj_SetupProc(gobj, fn_80246E04, 0);
             proc->flags_3 = HSD_GObj_804D783C;
             HSD_JObjSetFlagsAll(data->jobjs[2], 0x10);
         }
@@ -406,7 +406,7 @@ void mnDiagram3_80247008(int arg0)
         lb_80011E24(jobj, (HSD_JObj**) ((u8*) data + (i << 2) + 8), i, -1);
     }
 
-    HSD_GObjProc_8038FD54(gobj, fn_80246E64, 0);
+    HSD_GObj_SetupProc(gobj, fn_80246E64, 0);
 }
 
 void mnDiagram3_8024714C(void* arg0)
@@ -566,7 +566,7 @@ void mnDiagram3_8024714C(void* arg0)
 
     {
         HSD_GObjProc* proc;
-        proc = HSD_GObjProc_8038FD54(GObj_Create(0, 1, 0x80), fn_802461BC, 0);
+        proc = HSD_GObj_SetupProc(GObj_Create(0, 1, 0x80), fn_802461BC, 0);
         proc->flags_3 = HSD_GObj_804D783C;
     }
 }

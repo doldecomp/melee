@@ -8,9 +8,19 @@
 #include "it/item.h"
 #include "it/items/itfreeze.h"
 #include "it/types.h"
+#include "mp/mpcoll.h"
+#include "mp/mplib.h"
 #include "sysdolphin/baselib/random.h"
 
-/// #it_802E31F8
+void it_802E31F8(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    if ((u32) ip->xDD4_itemVar.whitebea.x20 != 0U) {
+        it_8028ECE0((HSD_GObj*) ip->xDD4_itemVar.whitebea.x20);
+        it_802E37A4(gobj);
+    }
+    Item_80268E5C(gobj, 8, ITEM_ANIM_UPDATE);
+}
 
 bool itOldottosea_UnkMotion8_Anim(Item_GObj* gobj)
 {
@@ -67,7 +77,15 @@ bool itOldottosea_UnkMotion9_Coll(Item_GObj* gobj)
     return it_8027C824(gobj, NULL);
 }
 
-/// #it_802E3400
+void it_802E3400(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->xDCC_flag.b3 = 1;
+    it_802762BC(ip);
+    it_8027B964(gobj, 0);
+    ip->xDD4_itemVar.whitebea.x18 = 0;
+    Item_80268E5C(gobj, 0xA, ITEM_ANIM_UPDATE);
+}
 
 bool itOldottosea_UnkMotion10_Anim(Item_GObj* gobj)
 {
@@ -116,7 +134,7 @@ void itOldottosea_UnkMotion11_Phys(Item_GObj* gobj)
 
 bool itOldottosea_UnkMotion11_Coll(Item_GObj* gobj)
 {
-    return it_8027C794(gobj);
+    return it_802E35CC(gobj);
 }
 
 /// #it_802E35CC
@@ -202,7 +220,27 @@ bool itWhitebea_UnkMotion0_Coll(Item_GObj* gobj)
 
 /// #it_802E3AC8
 
-/// #itWhitebea_UnkMotion1_Anim
+bool itWhitebea_UnkMotion1_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    PAD_STACK(8);
+    if (!it_80272C6C(gobj)) {
+        Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE | ITEM_HIT_PRESERVE);
+    }
+    if (ip->xDD4_itemVar.whitebea.x44 <= 0) {
+        int local;
+        int* sfx;
+        sfx = mpLib_80056A1C(mpLineGetFlags(ip->xC30), &local);
+        ip->xDD4_itemVar.whitebea.x44 = 14;
+        Item_8026AE84(ip, 0x13C, 0x7F, 0x40);
+        if (*sfx != -1) {
+            Item_8026AE84(ip, *sfx, 0x7F, 0x40);
+        }
+    } else {
+        ip->xDD4_itemVar.whitebea.x44--;
+    }
+    return false;
+}
 
 /// #itWhitebea_UnkMotion1_Phys
 
@@ -219,7 +257,27 @@ bool itWhitebea_UnkMotion1_Coll(Item_GObj* gobj)
     return it_8027C794(gobj);
 }
 
-/// #it_802E3DA0
+void it_802E3DA0(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    itWhiteBeaAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    PAD_STACK(8);
+    ip->xDD4_itemVar.whitebea.x40 = 0;
+    ip->x40_vel.x *= attrs->x4;
+    if ((ip->facing_dir > 0.0f && ip->x70_nudge.x < 0.0f) ||
+        (ip->facing_dir < 0.0f && ip->x70_nudge.x > 0.0f))
+    {
+        int int_dir;
+        ip->facing_dir = -ip->facing_dir;
+        if (-1.0f == ip->facing_dir) {
+            int_dir = -1;
+        } else {
+            int_dir = 1;
+        }
+        mpCollSetFacingDir(&ip->x378_itemColl, int_dir);
+    }
+    Item_80268E5C(gobj, 3, ITEM_ANIM_UPDATE);
+}
 
 bool itWhitebea_UnkMotion3_Anim(Item_GObj* gobj)
 {
@@ -323,7 +381,17 @@ bool itWhitebea_UnkMotion5_Coll(Item_GObj* gobj)
     return it_8027C794(gobj);
 }
 
-/// #it_802E4464
+void it_802E4464(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    itWhiteBeaAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    PAD_STACK(8);
+    it_802762BC(ip);
+    ip->x40_vel.y = attrs->x10;
+    it_80275258(gobj);
+    Item_8026AE84(ip, 0x4A, 0x7F, 0x40);
+    Item_80268E5C(gobj, 6, ITEM_ANIM_UPDATE);
+}
 
 bool itWhitebea_UnkMotion6_Anim(Item_GObj* gobj)
 {
@@ -344,9 +412,31 @@ bool itWhitebea_UnkMotion6_Coll(Item_GObj* gobj)
     return it_8027C794(gobj);
 }
 
-/// #it_802E4558
+void grIceMt_801FA6D8(void);
 
-/// #itWhitebea_UnkMotion7_Anim
+void it_802E4558(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    it_802762B0(ip);
+    Item_8026AE84(ip, 0x46, 0x7F, 0x40);
+    Item_8026AE84(ip, 0x13C, 0x7F, 0x40);
+    Item_80268E5C(gobj, 7, ITEM_ANIM_UPDATE);
+    grIceMt_801FA6D8();
+}
+
+bool itWhitebea_UnkMotion7_Anim(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    itWhiteBeaAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    PAD_STACK(16);
+    if (!it_80272C6C(gobj)) {
+        ip->xDD4_itemVar.whitebea.x3C = 1;
+        ip->xDD4_itemVar.whitebea.x40 = attrs->x14;
+        it_8027CAD8(gobj);
+        Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+    }
+    return false;
+}
 
 void itWhitebea_UnkMotion7_Phys(Item_GObj* gobj) {}
 
@@ -372,7 +462,30 @@ bool itWhitebea_UnkMotion8_Anim(Item_GObj* gobj)
 
 void itWhitebea_UnkMotion8_Phys(Item_GObj* gobj) {}
 
-/// #it_2725_Logic9_Dropped
+void it_2725_Logic9_Dropped(Item_GObj* gobj)
+{
+    Item* ip;
+    itWhiteBeaAttributes* attrs;
+    PAD_STACK(8);
+    it_8027CBA4(gobj);
+    ip = GET_ITEM(gobj);
+    attrs = ip->xC4_article_data->x4_specialAttributes;
+    ip->xDD4_itemVar.whitebea.x40 = 0;
+    ip->x40_vel.x *= attrs->x4;
+    if ((ip->facing_dir > 0.0f && ip->x70_nudge.x < 0.0f) ||
+        (ip->facing_dir < 0.0f && ip->x70_nudge.x > 0.0f))
+    {
+        int int_dir;
+        ip->facing_dir = -ip->facing_dir;
+        if (-1.0f == ip->facing_dir) {
+            int_dir = -1;
+        } else {
+            int_dir = 1;
+        }
+        mpCollSetFacingDir(&ip->x378_itemColl, int_dir);
+    }
+    Item_80268E5C(gobj, 3, ITEM_ANIM_UPDATE);
+}
 
 void it_2725_Logic9_Thrown(Item_GObj* gobj)
 {

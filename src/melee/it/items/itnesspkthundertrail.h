@@ -1,11 +1,15 @@
 #ifndef GALE01_2AC43C
 #define GALE01_2AC43C
 
+#include "ft/forward.h"
 #include "it/forward.h"
 
 #include "it/items/types.h"
 
-/* 2AC43C */ UNK_RET it_802AC43C(UNK_PARAMS);
+/* 2AC43C */ Item_GObj* it_802AC43C(Fighter_GObj* gobj, Item_GObj* ball,
+                                    Vec3* pos, s32 trail_idx, s32 arg4,
+                                    f32 facing_dir);
+/* 3F6C18 */ extern ItemKind it_803F6C18[];
 /* 2AC58C */ void it_802AC58C(Item_GObj* gobj);
 /* 2AC5D8 */ void it_802AC5D8(Item_GObj* gobj);
 /* 2AC604 */ void it_802AC604(Item_GObj* gobj);

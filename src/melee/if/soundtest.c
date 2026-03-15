@@ -1,5 +1,7 @@
 #include "soundtest.h"
 
+#include "placeholder.h"
+
 #include "gm/forward.h"
 
 #include "gm/gm_unsplit.h"
@@ -12,7 +14,6 @@
 #include "lb/lbcardnew.h"
 #include "lb/lblanguage.h"
 #include "lb/lbsnap.h"
-#include "placeholder.h"
 #include "ty/toy.h"
 #include "ty/tylist.h"
 

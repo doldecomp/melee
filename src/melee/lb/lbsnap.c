@@ -284,6 +284,8 @@ int lbSnap_8001DE8C(void* arg0)
 
 int lbSnap_8001DF20(void)
 {
+    // This is probably an offsetof call, but I don't know what pointer is in
+    // xC
     lbSnap_803BACC8.x14 =
         lbSnap_80433380.x0->xC +
         ((int) &lbSnap_80433380.x0->x38 - (int) &lbSnap_80433380.x0->x0);
@@ -305,6 +307,8 @@ int lbSnap_8001DF6C(int chan)
     if (ret == 0) {
         lbSnap_80433380.x48[chan].unk0 = 8;
         lbSnap_8001D4A4(chan, text);
+        // This is probably an offsetof call, but I don't know what pointer is
+        // in xC
         lbSnap_803BACC8.x14 =
             lbSnap_80433380.x0->xC +
             ((int) &lbSnap_80433380.x0->x38 - (int) &lbSnap_80433380.x0->x0);

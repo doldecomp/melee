@@ -622,7 +622,7 @@ bool itBombhei_UnkMotion10_Coll(Item_GObj* gobj)
     it_8026E414(gobj, fn_80280974);
     return false;
 }
-Vec3 it_803B8600;
+const Vec3 it_803B8600 = { 0 };
 void it_80280B60(Item_GObj* gobj)
 {
     Vec sp48;

@@ -919,7 +919,7 @@ inline float get_stage_floor_height(InternalStageId stage_id)
     case GARDEN:
         height = grGarden_80203624();
         break;
-    case SHRINEROUTE:
+    case KINOKOROUTE:
         height = grShrineRoute_802087B0();
         break;
     case HOMERUN:
@@ -1270,7 +1270,7 @@ void Camera_8002AF68(HSD_CObj* cobj, CameraTransformState* transform)
     case GARDEN:
         eye_y_bound = grGarden_80203624();
         break;
-    case SHRINEROUTE:
+    case KINOKOROUTE:
         eye_y_bound = grShrineRoute_802087B0();
         break;
     case HOMERUN:
@@ -3285,7 +3285,7 @@ void Camera_80030688(void)
     }
 
     GObj_SetupGXLinkMax(gobj, fn_800301D0, 2);
-    HSD_GObjProc_8038FD54(gobj, fn_8002F360, 0x12);
+    HSD_GObj_SetupProc(gobj, fn_8002F360, 0x12);
 }
 
 void Camera_80030730(f32 arg8)

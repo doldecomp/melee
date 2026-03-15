@@ -90,7 +90,7 @@ static StageCallbacks grTMewtwo_803E8F70[4] = {
 };
 
 StageData grTMewtwo_803E8FCC = {
-    (1 << 0) | (1 << 2) | (1 << 4) | (1 << 5),
+    TMEWTWO,
     grTMewtwo_803E8F70,
     "/GrTMt.dat",
     grTMewtwo_802221DC,
@@ -138,7 +138,7 @@ Ground_GObj* grTMewtwo_80222284(int index)
     HSD_GObj* gobj;
 
     StageCallbacks* callbacks = &grTMewtwo_803E8F70[index];
-    gobj = Ground_801C14D0(index);
+    gobj = Ground_GetStageGObj(index);
     if (gobj != NULL) {
         Ground* gp = GET_GROUND(gobj);
         gp->x8_callback = NULL;
@@ -152,7 +152,7 @@ Ground_GObj* grTMewtwo_80222284(int index)
         }
 
         if (callbacks->callback2 != NULL) {
-            HSD_GObjProc_8038FD54(gobj, callbacks->callback2, 4);
+            HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
         }
     } else {
         OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grtmewtwo.c", 201,

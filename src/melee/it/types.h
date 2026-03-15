@@ -556,6 +556,7 @@ struct Item {
         itFoods_ItemVars foods;
         itFoxBlaster_ItemVars foxblaster;
         itFoxIllusion_ItemVars foxillusion;
+        itArwingLaser_ItemVars arwinglaser;
         itFoxLaser_ItemVars foxlaser;
         itFreeze_ItemVars freeze;
         itFreezer_ItemVars freezer;
@@ -568,6 +569,7 @@ struct Item {
         itHeart_ItemVars heart;
         itHeiho_ItemVars heiho;
         itHitodeman_ItemVars hitodeman;
+        itKabigon_ItemVars kabigon;
         itKinoko_ItemVars kinoko;
         itKirbyHammer_ItemVars kirbyhammer;
         itkireihana_ItemVars kireihana;
@@ -581,6 +583,7 @@ struct Item {
         itLGunBeam_ItemVars lgunbeam;
         itLGunRay_ItemVars lgunray;
         itLikelike_ItemVars likelike;
+        itLipstickSpore_ItemVars lipstickspore;
         itLinkArrow_ItemVars linkarrow;
         itLinkBomb_ItemVars linkbomb;
         itLinkBoomerang_ItemVars linkboomerang;
@@ -611,6 +614,7 @@ struct Item {
         itPKFlush_ItemVars pkflush;
         itPKFlushExplode_ItemVars pkflushexplode;
         itPKThunder_ItemVars pkthunder;
+        itNesspkthundertrail_ItemVars nesspkthundertrail;
         itPokemon_ItemVars pokemon;
         itRShell_ItemVars rshell;
         itSamusBomb_ItemVars samusbomb;

@@ -52,7 +52,7 @@ static StageCallbacks grTDk_803E8790[] = {
 };
 
 StageData grTDk_803E87EC = {
-    43,
+    TDONKEY,
     grTDk_803E8790,
     "/GrTDk.dat",
     grTDonkey_8022022C,
@@ -101,7 +101,7 @@ static HSD_GObj* grTDonkey_802202CC(int gobj_id)
     HSD_GObj* gobj;
     StageCallbacks* callbacks = &grTDk_803E8790[gobj_id];
 
-    gobj = Ground_801C14D0(gobj_id);
+    gobj = Ground_GetStageGObj(gobj_id);
     if (gobj != NULL) {
         Ground* gp = gobj->user_data;
         gp->x8_callback = NULL;
@@ -114,7 +114,7 @@ static HSD_GObj* grTDonkey_802202CC(int gobj_id)
             callbacks->callback0(gobj);
         }
         if (callbacks->callback2 != NULL) {
-            HSD_GObjProc_8038FD54(gobj, callbacks->callback2, 4);
+            HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
         }
     } else {
         OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grtdonkey.c", 0xc3,

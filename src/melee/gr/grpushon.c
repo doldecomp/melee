@@ -2,11 +2,12 @@
 
 #include <platform.h>
 
+#include "cm/camera.h"
+#include "ft/ftlib.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
 #include "lb/types.h"
-#include "cm/camera.h"
-#include "ft/ftlib.h"
+#include "mp/mplib.h"
 
 #include <baselib/random.h>
 
@@ -16,15 +17,29 @@ struct grPushOn_Entry {
     s16 x6;
 };
 
+struct grPushOn_Lookup {
+    s32 key;
+    s32 value;
+};
+
 static struct {
     char pad[0x18];
     bool x18;
-    struct grPushOn_Entry x1c[0x21];
+    struct grPushOn_Entry x1c[0x1E];
+    struct grPushOn_Lookup x10c[0x21];
 }* grPushOn_804D6AB8;
 
 void grPushOn_802182C4(bool arg) {}
 
-/// #grPushOn_802182C8
+void grPushOn_802182C8(void)
+{
+    grPushOn_804D6AB8 = Ground_801C49F8();
+    stage_info.unk8C.b4 = false;
+    stage_info.unk8C.b5 = true;
+    grPushOn_802183E4(0);
+    grPushOn_802183E4(1);
+    mpLib_80057BC0(0);
+}
 
 void grPushOn_80218330(void)
 {
@@ -80,7 +95,19 @@ bool grPushOn_80218670(Ground_GObj* arg)
     return false;
 }
 
-/// #fn_80218678
+bool fn_80218678(void)
+{
+    HSD_GObj* gobj = Ground_801C2BA4(1);
+    if (gobj != NULL) {
+        Ground* gp = gobj->user_data;
+        if (gp != NULL) {
+            if (gp->u.map.xC4_b0) {
+                return true;
+            }
+        }
+    }
+    return false;
+}
 
 /// #grPushOn_802186C8
 
@@ -122,7 +149,19 @@ void grPushOn_80219204(int arg0, int* out1, int* out2)
     *out2 = grPushOn_804D6AB8->x1c[idx].x4;
 }
 
-/// #grPushOn_80219230
+int grPushOn_80219230(int arg0)
+{
+    s32 i = 0;
+    s32 key;
+
+    while (i < 0x21 && (key = grPushOn_804D6AB8->x10c[i].key) != -1) {
+        if (key == arg0) {
+            return grPushOn_804D6AB8->x10c[i].value;
+        }
+        i++;
+    }
+    __assert("grpushon.c", 0x35DU, "0");
+}
 
 /// #fn_802192A4
 

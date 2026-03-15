@@ -900,7 +900,7 @@ void fn_801756E0(s32 slot)
     if (skip != 0) {
         goto grey_out;
     }
-    var_r6 = fn_8017AD28(me->player_standings[slot].score);
+    var_r6 = fn_8017AD48(me->player_standings[slot].score);
     if (var_r6 < 0) {
         if (var_r6 < 0) {
             var_r6 = -var_r6;
@@ -1334,7 +1334,7 @@ void fn_80176D3C(Vec3* positions)
         gm_8016895C(jobj, models[winner - 1], 0);
         HSD_JObjReqAnimAll(jobj, 0.0F);
         HSD_JObjAnimAll(jobj);
-        HSD_GObjProc_8038FD54(gobj, fn_80176D18, 1);
+        HSD_GObj_SetupProc(gobj, fn_80176D18, 1);
         fn_80179F6C(i, (int) gobj);
 
     loop_end:
@@ -1382,7 +1382,7 @@ void fn_80176F60(void)
     mn_8022F3D8(data->x20, 4, MOBJ_MASK);
     mn_8022F3D8(data->x20, 5, MOBJ_MASK);
     mn_8022F3D8(data->x20, 6, MOBJ_MASK);
-    HSD_GObjProc_8038FD54(temp_r29, fn_80176BCC, 0);
+    HSD_GObj_SetupProc(temp_r29, fn_80176BCC, 0);
     if (jobj == NULL) {
         jobj = NULL;
     } else {
@@ -1595,7 +1595,7 @@ void gm_80177368_OnEnter(void* arg0_)
         OSReport("Error : gobj dont't get (gmResultAddModel)\n");
         __assert("gmresult.c", 0x6A2, "0");
     }
-    HSD_GObjProc_8038FD54(temp_r3_4, fn_80179350, 0);
+    HSD_GObj_SetupProc(temp_r3_4, fn_80179350, 0);
     fn_80176F60();
     fn_8017AA78(&arg0->x1);
     fn_8017A004();

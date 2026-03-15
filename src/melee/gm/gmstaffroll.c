@@ -275,7 +275,7 @@ void gm_801AC6D8_OnEnter(void* unused)
         gobj->gxlink_prios = 0x189;
         HSD_CObjAddAnim(cobj, gm_804D6840->cameras[0].anims[0]);
         HSD_CObjReqAnim(cobj, 0.0F);
-        HSD_GObjProc_8038FD54(gobj, fn_801AA7F8, 0);
+        HSD_GObj_SetupProc(gobj, fn_801AA7F8, 0);
     }
     {
         HSD_GObj* gobj = GObj_Create(19, 20, 0);
@@ -291,7 +291,7 @@ void gm_801AC6D8_OnEnter(void* unused)
         HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784A, lobj);
         GObj_SetupGXLink(gobj, HSD_GObj_LObjCallback, 0, 0);
         HSD_LObjReqAnimAll(lobj, 0.0F);
-        HSD_GObjProc_8038FD54(gobj, fn_801AAABC, 0);
+        HSD_GObj_SetupProc(gobj, fn_801AAABC, 0);
     }
     {
         HSD_GObj* gobj = GObj_Create(0xA, 3, 0);
@@ -301,7 +301,7 @@ void gm_801AC6D8_OnEnter(void* unused)
         GObj_SetupGXLink(gobj, HSD_GObj_FogCallback, 3, 0);
         HSD_Fog_8037DE7C(fog, gm_804D6840->fogs[0].anims[0]->aobjdesc);
         HSD_FogReqAnim(fog, 0.0F);
-        HSD_GObjProc_8038FD54(gobj, fn_801AC67C, 0);
+        HSD_GObj_SetupProc(gobj, fn_801AC67C, 0);
     }
     {
         HSD_GObj* gobj = GObj_Create(3, 5, 0);
@@ -320,7 +320,7 @@ void gm_801AC6D8_OnEnter(void* unused)
                               s32*, 0x58);
             }
         }
-        HSD_GObjProc_8038FD54(gobj, fn_801AAB18, 0);
+        HSD_GObj_SetupProc(gobj, fn_801AAB18, 0);
     }
     {
         HSD_GObj* gobj = GObj_Create(14, 15, 0);
@@ -340,7 +340,7 @@ void gm_801AC6D8_OnEnter(void* unused)
                 }
             }
         }
-        HSD_GObjProc_8038FD54(gobj, fn_801AAB74, 1);
+        HSD_GObj_SetupProc(gobj, fn_801AAB74, 1);
     }
     {
         HSD_GObj* gobj = GObj_Create(14, 15, 0);
@@ -351,7 +351,7 @@ void gm_801AC6D8_OnEnter(void* unused)
         lb_80011E24(jobj, jobj_arr, ARRAY_SIZE(jobj_arr), 20, -1);
         HSD_JObjReqAnimAll(jobj_arr[0], 0.0F);
         HSD_JObjReqAnimAll(jobj_arr[1], 0.0F);
-        HSD_GObjProc_8038FD54(gobj, fn_801AB200, 13);
+        HSD_GObj_SetupProc(gobj, fn_801AB200, 13);
     }
     lbAudioAx_80027648();
     {

@@ -47,7 +47,7 @@
 };
 
 StageData grTIc_803E8AF4 = {
-    47,
+    TICECLIMBER,
     grTIc_803E8A98,
     "/GrTIc.dat",
     grTIceClimber_80220F14,
@@ -92,7 +92,7 @@ HSD_GObj* grTIceClimber_80220FB4(int id)
 {
     HSD_GObj* gobj;
     StageCallbacks* cb = &grTIc_803E8A98[id];
-    gobj = Ground_801C14D0(id);
+    gobj = Ground_GetStageGObj(id);
 
     if (gobj != NULL) {
         Ground* gp = (Ground*) HSD_GObjGetUserData(gobj);
@@ -109,7 +109,7 @@ HSD_GObj* grTIceClimber_80220FB4(int id)
         }
 
         if (cb->callback2 != NULL) {
-            HSD_GObjProc_8038FD54(gobj, cb->callback2, 4);
+            HSD_GObj_SetupProc(gobj, cb->callback2, 4);
         }
     } else {
         OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grticeclimber.c", 202,

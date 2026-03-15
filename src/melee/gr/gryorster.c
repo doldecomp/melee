@@ -2,6 +2,8 @@
 
 #include <platform.h>
 
+#include "forward.h"
+
 #include "gr/grdisplay.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
@@ -21,7 +23,7 @@ StageCallbacks grYt_803E5198[2] = {
 };
 
 StageData grYt_803E51CC = {
-    11,
+    YORSTER,
     grYt_803E5198,
     "/GrYt.dat",
     grYorster_80201FA4,
@@ -78,7 +80,7 @@ HSD_GObj* grYorster_8020203C(int gobj_id)
     HSD_GObj* gobj;
     StageCallbacks* callbacks = &grYt_803E5198[gobj_id];
 
-    gobj = Ground_801C14D0(gobj_id);
+    gobj = Ground_GetStageGObj(gobj_id);
 
     if (gobj != NULL) {
         Ground* gp = gobj->user_data;
@@ -92,7 +94,7 @@ HSD_GObj* grYorster_8020203C(int gobj_id)
             callbacks->callback0(gobj);
         }
         if (callbacks->callback2 != NULL) {
-            HSD_GObjProc_8038FD54(gobj, callbacks->callback2, 4);
+            HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
         }
     } else {
         OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 221, gobj_id);

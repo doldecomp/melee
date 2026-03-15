@@ -94,7 +94,7 @@ void gm_801A0C6C_OnEnter(void* unused)
     temp_r3 = HSD_JObjLoadJoint(sp10->models[0]->joint);
     HSD_GObjObject_80390A70(temp_r30_3, HSD_GObj_804D7849, temp_r3);
     GObj_SetupGXLink(temp_r30_3, HSD_GObj_JObjCallback, 0xB, 0);
-    HSD_GObjProc_8038FD54(temp_r30_3, fn_801A0B60, 0);
+    HSD_GObj_SetupProc(temp_r30_3, fn_801A0B60, 0);
     gm_8016895C(temp_r3, sp10->models[0], 0);
     HSD_JObjReqAnimAll(temp_r3, 0.0f);
     HSD_JObjAnimAll(temp_r3);

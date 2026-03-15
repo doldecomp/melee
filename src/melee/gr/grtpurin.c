@@ -26,7 +26,7 @@ StageCallbacks grTPr_803E9338[] = {
 };
 
 StageData grTPr_803E9394 = {
-    58,
+    TPURIN,
     grTPr_803E9338,
     "/GrTPr.dat",
     grTPurin_80223164,
@@ -84,7 +84,7 @@ HSD_GObj* grTPurin_8022320C(int id)
 {
     HSD_GObj* gobj;
     StageCallbacks* cb = &grTPr_803E9338[id];
-    gobj = Ground_801C14D0(id);
+    gobj = Ground_GetStageGObj(id);
 
     if (gobj != NULL) {
         Ground* gp = (Ground*) HSD_GObjGetUserData(gobj);
@@ -101,7 +101,7 @@ HSD_GObj* grTPurin_8022320C(int id)
         }
 
         if (cb->callback2 != NULL) {
-            HSD_GObjProc_8038FD54(gobj, cb->callback2, 4);
+            HSD_GObj_SetupProc(gobj, cb->callback2, 4);
         }
     } else {
         OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grtpurin.c", 203, id);

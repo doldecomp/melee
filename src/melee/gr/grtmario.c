@@ -71,7 +71,7 @@ StageCallbacks grTMr_803E8548[] = {
 };
 
 StageData grTMr_803E85A4 = {
-    40,
+    TMARIO,
     grTMr_803E8548,
     "/GrTMr.dat",
     grTMario_8021F844,
@@ -121,7 +121,7 @@ HSD_GObj* grTMario_8021F8E4(s32 arg0)
     Ground* gp;
 
     cb = &grTMr_803E8548[arg0];
-    gobj = Ground_801C14D0(arg0);
+    gobj = Ground_GetStageGObj(arg0);
     if (gobj != NULL) {
         gp = gobj->user_data;
         gp->x8_callback = 0;
@@ -134,7 +134,7 @@ HSD_GObj* grTMario_8021F8E4(s32 arg0)
             cb->callback0(gobj);
         }
         if (cb->callback2 != 0U) {
-            HSD_GObjProc_8038FD54(gobj, cb->callback2, 4);
+            HSD_GObj_SetupProc(gobj, cb->callback2, 4);
         }
     } else {
         OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grtmario.c", 0xCD,

@@ -44,7 +44,7 @@
 };
 
 StageData grTFc_803E8974 = {
-    45,
+    TFALCO,
     grTFc_803E8918,
     "/GrTFc.dat",
     grTFalco_802207F4,
@@ -99,7 +99,7 @@ HSD_GObj* grTFalco_8022089C(int id)
     HSD_GObj* gobj;
 
     StageCallbacks* cb = &grTFc_803E8918[id];
-    gobj = Ground_801C14D0(id);
+    gobj = Ground_GetStageGObj(id);
     if (gobj != NULL) {
         Ground* gp = gobj->user_data;
         gp->x8_callback = NULL;
@@ -115,7 +115,7 @@ HSD_GObj* grTFalco_8022089C(int id)
         }
 
         if (cb->callback2 != NULL) {
-            HSD_GObjProc_8038FD54(gobj, cb->callback2, 4);
+            HSD_GObj_SetupProc(gobj, cb->callback2, 4);
         }
 
     } else {

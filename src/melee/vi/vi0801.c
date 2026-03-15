@@ -84,7 +84,7 @@ void vi0801_8031EE84(void)
                     (un_804D6FB8->models[i] != NULL) * 0);
         HSD_JObjReqAnimAll(temp, 0.0F);
         HSD_JObjAnimAll(jobj);
-        HSD_GObjProc_8038FD54(gobj, vi0801_8031EE60, 23);
+        HSD_GObj_SetupProc(gobj, vi0801_8031EE60, 23);
 
         for (j = 0; j < 23; j++) {
             if (i == un_80400128[j][0]) {
@@ -140,7 +140,7 @@ void vi0801_OnEnter(void* unused)
     HSD_CObjAddAnim(cobj, un_804D6FB8->cameras->anims[0]);
     HSD_CObjReqAnim(cobj, 0.0f);
     HSD_CObjAnim(cobj);
-    HSD_GObjProc_8038FD54(gobj, vi0801_8031EFE4, 0);
+    HSD_GObj_SetupProc(gobj, vi0801_8031EFE4, 0);
 
     vi0801_8031EE84();
 

@@ -44,7 +44,21 @@ void it_802C875C(Item_GObj* gobj)
     Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
 }
 
-/// #itGamewatchchef_UnkMotion1_Anim
+bool itGamewatchchef_UnkMotion1_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->xD44_lifeTimer -= 1.0f;
+    if (ip->xD44_lifeTimer <= 0.0f) {
+        ip->xD44_lifeTimer = 0.0f;
+        return true;
+    }
+    if ((s32) ip->xD44_lifeTimer & 2) {
+        it_8026BB20(gobj);
+    } else {
+        it_8026BB44(gobj);
+    }
+    return false;
+}
 
 void itGamewatchchef_UnkMotion1_Phys(Item_GObj* gobj) {}
 

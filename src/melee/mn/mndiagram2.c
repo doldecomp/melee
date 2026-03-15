@@ -963,7 +963,7 @@ void mnDiagram2_Think(HSD_GObj* gobj)
             HSD_GObjProc* proc;
 
             HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
-            proc = HSD_GObjProc_8038FD54(gobj, mnDiagram2_OnAnimComplete, 0);
+            proc = HSD_GObj_SetupProc(gobj, mnDiagram2_OnAnimComplete, 0);
             proc->flags_3 = HSD_GObj_804D783C;
             HSD_JObjSetFlagsAll(((HSD_JObj**) data)[4], 0x10);
             if (data->header_text != NULL) {
@@ -1049,7 +1049,7 @@ void mnDiagram2_Create(int arg0)
         lb_80011E24(jobj, (HSD_JObj**) ((u8*) data + (i << 2) + 8), i, -1);
     }
 
-    HSD_GObjProc_8038FD54(gobj, mnDiagram2_Think, 0);
+    HSD_GObj_SetupProc(gobj, mnDiagram2_Think, 0);
 
     is_name = data->is_name_mode;
     if (is_name) {
@@ -1109,8 +1109,8 @@ void mnDiagram2_Init(void)
     data->x10 = 1;
     data->hovered_selection = 0;
     mnDiagram2_Create(0);
-    gobj = HSD_GObjProc_8038FD54(GObj_Create(0, 1, 0x80),
-                                 mnDiagram2_HandleInput, 0);
+    gobj =
+        HSD_GObj_SetupProc(GObj_Create(0, 1, 0x80), mnDiagram2_HandleInput, 0);
     gobj->flags_3 = HSD_GObj_804D783C;
 }
 

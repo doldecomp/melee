@@ -31,7 +31,7 @@
 /* 291188 */ bool itFlipper_UnkMotion3_Coll(Item_GObj* gobj);
 /* 291254 */ void it_80291254(Item_GObj*);
 /* 29131C */ void it_8029131C(Item_GObj* gobj);
-/* 291344 */ UNK_RET it_80291344(UNK_PARAMS);
+/* 291344 */ bool it_80291344(Item_GObj* gobj);
 /* 2914C8 */ bool itFlipper_UnkMotion5_Anim(Item_GObj* gobj);
 /* 29151C */ bool itFlipper_UnkMotion6_Anim(Item_GObj* gobj);
 /* 291570 */ void itFlipper_UnkMotion6_Phys(Item_GObj* gobj);

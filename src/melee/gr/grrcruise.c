@@ -4,10 +4,15 @@
 
 #include <platform.h>
 
+#include "cm/camera.h"
+#include "gm/gm_1A45.h"
+#include "gr/grdisplay.h"
 #include "gr/grlib.h"
 #include "gr/ground.h"
 #include "gr/inlines.h"
 #include "lb/lb_00F9.h"
+
+#include <sysdolphin/baselib/dobj.h>
 
 void grRCruise_801FF164(bool arg) {}
 
@@ -162,7 +167,33 @@ void grRCruise_80200540(Ground_GObj* gobj)
 
 /// #grRCruise_80200C04
 
-/// #fn_802010A4
+// TODO: is this GET_GROUND? calling it directly didn't work.
+inline Ground* fn_802010A4_inline(Ground_GObj* arg0)
+{
+    return arg0->user_data;
+}
+
+void fn_802010A4(Ground_GObj* gobj, s32 id, CollData* coll)
+{
+    Ground* gp = fn_802010A4_inline(gobj);
+    s32 i;
+
+    if ((s32) coll->x34_flags.b1234 != 1) {
+        return;
+    }
+
+    for (i = 0; i < 17; i++) {
+        struct grRCruise_Entry* entry = &gp->gv.rcruise.entries[i];
+        if (entry->x02 == id) {
+            if (entry->x00 == 0) {
+                entry->x04 = 0;
+                entry->x00 = 1;
+            }
+            entry->x08++;
+            return;
+        }
+    }
+}
 
 /// #grRCruise_80201110
 
@@ -178,7 +209,7 @@ void grRCruise_80201918(Vec3* vec)
     if (gobj != NULL) {
         Ground* gp = gobj->user_data;
         if (gp != NULL) {
-            *vec = *(Vec3*)((u8*)gp + 0xE0);
+            *vec = *(Vec3*) ((u8*) gp + 0xE0);
             return;
         }
     }
@@ -187,9 +218,35 @@ void grRCruise_80201918(Vec3* vec)
 
 /// #grRCruise_80201988
 
-/// #grRCruise_80201B60
+void grRCruise_80201B60(HSD_JObj* jobj, s32 arg1)
+{
+    HSD_DObj* dobj;
+    HSD_DObj* next;
+    PAD_STACK(8);
 
-/// #fn_80201BE0
+    dobj = HSD_JObjGetDObj(jobj);
+    while (dobj != NULL) {
+        if (arg1 != 0) {
+            HSD_DObjClearFlags(dobj, 1U);
+        } else {
+            HSD_DObjSetFlags(dobj, 1U);
+        }
+        if (dobj != NULL) {
+            next = dobj->next;
+        } else {
+            next = NULL;
+        }
+        dobj = next;
+    }
+}
+
+void fn_80201BE0(HSD_GObj* gobj, s32 pass)
+{
+    if (gm_801A45E8(1) != 0 || gm_801A45E8(2) != 0 || Camera_8003010C() != 0) {
+        return;
+    }
+    grDisplay_801C5DB0(gobj, pass);
+}
 
 DynamicsDesc* grRCruise_80201C50(enum_t arg)
 {

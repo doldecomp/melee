@@ -1,7 +1,5 @@
 #include "efasync.h"
 
-#include "efasync.static.h"
-
 #include "eflib.h"
 #include "efsync.h"
 #include "math.h"
@@ -95,7 +93,7 @@
 /* 3C0220 */ static s8 efAsync_803C0220[0x18] = "effKirbyEmblemDataTable";
 /* 3C0238 */ static s8 efAsync_803C0238[0xD] = "EfFeData.dat";
 /* 3C0248 */ static s8 efAsync_803C0248[0x13] = "effEmblemDataTable";
-/* 3C025C */ struct _struct_efAsync_803C025C_0xC efAsync_803C025C[51] = {
+/* 3C025C */ ef_Symbols efAsync_803C025C[51] = {
     { "EfCoData.dat", "effCommonDataTable", NULL },
     { "EfMrData.dat", "effMarioDataTable", NULL },
     { "EfSsData.dat", "effSamusDataTable", NULL },
@@ -150,7 +148,7 @@
 };
 /* 3C04C0 */ static s8 efAsync_803C04C0[0x1B] = "[EfASync] unknown type %d\n";
 /* 3C04DC */ static s8 efAsync_803C04DC[0xA] = "efasync.c";
-/* 458EE0 */ extern struct _struct_efLib_80458EE0_0x8 efLib_80458EE0[16];
+/* 458FA0 */ static HSD_ObjAllocData efAsync_AllocData;
 /* 4D39E8 */ static s8 efAsync_804D39E8[7] = "jobj.h";
 /* 4D39F0 */ static s8 efAsync_804D39F0[5] = "jobj";
 /* 4D39F8 */ static s8 efAsync_804D39F8 = 48;
@@ -158,9 +156,7 @@
 /* 4D64F0 */ extern s32 efLib_804D64F0;
 /* 4D8208 */ static f64 efAsync_804D8208 = M_TAU;
 
-/// Effect* efAsync_80063930(s32 gfx_id, HSD_GObj* arg_gobj, va_list arg2) {
-#if 1
-void* efAsync_80063930(s32 gfx_id, HSD_GObj* arg_gobj, void* vlist)
+void* efAsync_80063930(s32 gfx_id, HSD_GObj* arg_gobj, va_list vlist)
 {
     Vec3 sp1CC;
     Vec3 sp1C0;
@@ -183,35 +179,6 @@ void* efAsync_80063930(s32 gfx_id, HSD_GObj* arg_gobj, void* vlist)
     // u8 unused2;
     // u16 unused3;
     PAD_STACK(0x20);
-#else
-void* efAsync_80063930(s32 gfx_id, HSD_GObj* arg_gobj, ...)
-{
-    va_list vlist;
-    Vec3 sp1CC;
-    Vec3 sp1C0;
-    Vec3 sp14;
-    HSD_Generator* generator_1;
-    HSD_psAppSRT* psAppSRT_1;
-    Effect* eff_2;
-    void* void_2;
-    void* void_1;
-    void* ret_obj;
-    f64 f64_1;
-    f32 f32_2;
-    f32 f32_1;
-    s32 u32_2;
-    s32 u32_1;
-    HSD_JObj* jobj_2;
-    HSD_JObj* jobj_1;
-    Vec3* vec3_1;
-    s32 cnt;
-    // u8 unused2;
-    // u16 unused3;
-    PAD_STACK(0x20);
-
-    va_start(vlist, arg_gobj);
-#endif
-
     // var_r26 = saved_reg_r26;
     // temp_r3 = "!(jobj->flags & JOBJ_USE_QUATERNION)";
     ret_obj = NULL;
@@ -1287,7 +1254,7 @@ void* efAsync_80063930(s32 gfx_id, HSD_GObj* arg_gobj, ...)
         cnt = efLib_804D64F0 - 1;
         efLib_804D64F0 = cnt;
         // efLib_804D64F0--;
-        HSD_JObjAnimAll((efLib_80458EE0[cnt].unk0));
+        HSD_JObjAnimAll((efLib_80458EE0[cnt].x0_gobj));
         // HSD_JObjAnimAll((efLib_80458EE0[efLib_804D64F0].unk0));
     }
 #if 1
@@ -1299,7 +1266,7 @@ void* efAsync_80063930(s32 gfx_id, HSD_GObj* arg_gobj, ...)
 
 void efAsync_8006729C(int index)
 {
-    struct _struct_efAsync_803C025C_0xC* entry = &efAsync_803C025C[index];
+    ef_Symbols* entry = &efAsync_803C025C[index];
     if (index >= 50 || index < 0) {
         return;
     }
@@ -1313,7 +1280,7 @@ void efAsync_8006729C(int index)
 
 void efAsync_8006730C(HSD_Archive* archive, u8* data, u32 length, int index)
 {
-    struct _struct_efAsync_803C025C_0xC* result;
+    ef_Symbols* result;
 
     lbArchive_InitializeDAT(archive, data, length);
     result = HSD_ArchiveGetPublicAddress(
@@ -1324,34 +1291,34 @@ void efAsync_8006730C(HSD_Archive* archive, u8* data, u32 length, int index)
     }
 }
 
-void efAsync_8006737C(int arg_index)
+void efAsync_8006737C(int idx)
 {
-    struct _struct_efAsync_803C025C_0xC* spC;
-    struct _struct_efAsync_803C025C_0xC* temp_r31;
-    temp_r31 = &efAsync_803C025C[arg_index];
+    ef_Symbols* spC;
+    ef_Symbols* lookup;
+    lookup = &efAsync_803C025C[idx];
 
-    if (arg_index >= 50 || arg_index < 0) {
+    if (idx >= 50 || idx < 0) {
         return;
     }
-    if (temp_r31->ef_DAT_file == NULL) {
+    if (!lookup->ef_DAT_file) {
         return;
     }
-    if (temp_r31->unk8) {
+    if (lookup->unk8) {
         return;
     }
     {
-        bool chk = lbArchive_80017040(NULL, temp_r31->ef_DAT_file, &spC,
-                                      temp_r31->effDataTable_name, 0);
+        bool chk = lbArchive_80017040(NULL, lookup->ef_DAT_file, &spC,
+                                      lookup->effDataTable_name, 0);
         if ((u32) spC->ef_DAT_file | (u32) spC->effDataTable_name) {
             if (chk) {
-                psInitDataBankLoad(arg_index, (void*) spC->ef_DAT_file,
+                psInitDataBankLoad(idx, (void*) spC->ef_DAT_file,
                                    (void*) spC->effDataTable_name, NULL, NULL);
             } else {
-                psInitDataBank(arg_index, (void*) spC->ef_DAT_file,
+                psInitDataBank(idx, (void*) spC->ef_DAT_file,
                                (void*) spC->effDataTable_name, NULL, NULL);
             }
         }
-        temp_r31->unk8 = (void*) ((u8*) spC + 8);
+        lookup->unk8 = &spC->unk8;
     }
 }
 
@@ -1409,7 +1376,7 @@ void efAsync_8006744C(HSD_GObj* gobj, ef_UnkStruct3* arg1)
         __assert("efasync.c", 0x7CU, "0");
         break;
     }
-    HSD_ObjFree(&efSync_80458FA0, arg1);
+    HSD_ObjFree(&efAsync_AllocData, arg1);
 }
 
 void efAsync_80067624(HSD_GObj* gobj, void* arg_struct)
@@ -1436,7 +1403,7 @@ void efAsync_80067688(void* arg_struct)
     var_r4 = ((ef_UnkStruct3*) arg_struct)->next;
     while (var_r4 != NULL) {
         temp_r30 = var_r4->next;
-        HSD_ObjFree(&efSync_80458FA0, var_r4);
+        HSD_ObjFree(&efAsync_AllocData, var_r4);
         var_r4 = temp_r30;
     }
     ((ef_UnkStruct3*) arg_struct)->next = NULL;
@@ -1455,7 +1422,7 @@ void efAsync_Spawn(HSD_GObj* gobj, void* arg1, u32 eff_type, u32 gfx_id,
     PAD_STACK(0x4);
 
     va_start(vlist, jobj);
-    ef_unkstruct3_1 = HSD_ObjAlloc(&efSync_80458FA0);
+    ef_unkstruct3_1 = HSD_ObjAlloc(&efAsync_AllocData);
     ef_unkstruct3_1->eff_type = eff_type;
     ef_unkstruct3_1->gfx_id = gfx_id;
     ef_unkstruct3_1->xC = jobj;
@@ -1505,7 +1472,7 @@ void efAsync_Spawn(HSD_GObj* gobj, void* arg1, u32 eff_type, u32 gfx_id,
 
 void efAsync_80067980(void)
 {
-    HSD_ObjAllocInit(&efSync_80458FA0,
+    HSD_ObjAllocInit(&efAsync_AllocData,
                      sizeof(struct efAsync_80067980_objalloc_t), 4U);
-    // HSD_ObjAllocInit(&efSync_80458FA0, sizeof(struct ef_UnkStruct3), 4U);
+    // HSD_ObjAllocInit(&efAsync_AllocData, sizeof(struct ef_UnkStruct3), 4U);
 }

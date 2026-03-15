@@ -380,7 +380,7 @@ void fn_8024AED0(HSD_GObj* arg0)
         user_data->unk0 = 1U;
         mnSoundTest_8024AA70(mnSoundTest_804D6C40, user_data->unk0);
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
-        temp_r3_2 = HSD_GObjProc_8038FD54(arg0, fn_8024B2B0, 0U);
+        temp_r3_2 = HSD_GObj_SetupProc(arg0, fn_8024B2B0, 0U);
         temp_r3_2->flags_3 = HSD_GObj_804D783C;
         return;
     }

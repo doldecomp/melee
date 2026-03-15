@@ -827,7 +827,7 @@ HSD_GObj* un_80304168(void* arg0, int arg1, int arg2, int arg3)
             userdata = HSD_ObjAlloc(&un_804A2688);
             un_804D6E40 = userdata;
             un_80303FD4(gobj2, userdata, arg0, arg1, arg2, arg3);
-            userdata->x14 = HSD_GObjProc_8038FD54(gobj2, fn_80303EF4, 0);
+            userdata->x14 = HSD_GObj_SetupProc(gobj2, fn_80303EF4, 0);
         }
     }
     return gobj2;

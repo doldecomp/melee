@@ -58,6 +58,9 @@ struct ftKb_Init_803CB4EC_t {
 };
 extern struct ftKb_Init_803CB4EC_t ftKb_Init_803CB4EC;
 
+extern f32 ftKb_Init_804D93E8;
+extern f32 ftKb_Init_804D93EC;
+
 /// Forward declarations
 void fn_800F9260(HSD_GObj*);
 void fn_800F64C8(Fighter_GObj*, float);
@@ -234,7 +237,17 @@ void ftKb_SpecialAirHi1_Anim(Fighter_GObj* gobj)
     }
 }
 
-/// #ftKb_SpecialAirHi2_Anim
+void ftKb_SpecialAirHi2_Anim(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        Fighter_ChangeMotionState(gobj, ftKb_MS_SpecialAirHi3, 0xA, 0.0F, 1.0F,
+                                  0.0F, NULL);
+        fp->pre_hitlag_cb = efLib_PauseAll;
+        fp->post_hitlag_cb = efLib_ResumeAll;
+    }
+}
 
 void ftKb_SpecialAirHi3_Anim(Fighter_GObj* gobj) {}
 
@@ -405,8 +418,8 @@ void ftKb_SpecialAirHi3_Phys(Fighter_GObj* gobj)
 
     /// FAKE MATCH: comma operator required for regalloc
     ftCommon_8007D3A8(fp, 0.0f,
-                      ((0, fp->co_attrs.air_drift_stick_mul)) *dat_attr
-                          ->specialhi_horizontal_momentum,
+                      ((0, fp->co_attrs.air_drift_stick_mul)) *
+                          dat_attr->specialhi_horizontal_momentum,
                       fp->co_attrs.air_drift_max);
 }
 
@@ -1235,7 +1248,7 @@ void ftKb_SpecialAirS_Coll(Fighter_GObj* gobj)
     if (ft_80081D0C(gobj)) {
         Fighter* fp2 = GET_FIGHTER(gobj);
         if (fp2->fv.kb.hat.x0 != NULL) {
-            it_802AEAB4(fp2->fv.kb.hat.x0);
+            it_802ADC34(fp2->fv.kb.hat.x0);
             fp2->fv.kb.hat.x0 = NULL;
         }
         fp->fv.kb.x64 = false;
@@ -1611,18 +1624,17 @@ static void fn_800F6318(HSD_GObj* gobj)
 void ftKb_SpecialN_800F6388(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    Fighter_ChangeMotionState(gobj, ftKb_MS_EatWait, 0x10, 0.0F, 1.0F, 0.0F,
-                              NULL);
-    ftAnim_8006EBA4(gobj);
+    Fighter_ChangeMotionState(gobj, ftKb_MS_Eat, 0x10, 0.0F, 1.0F, 0.0F, NULL);
+    ftKb_SpecialN_800F9070(gobj);
     ftCommon_8007E2F4(fp, 0x1FF);
 }
 
 void ftKb_SpecialN_800F63EC(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    Fighter_ChangeMotionState(gobj, ftKb_MS_EatFall, 0x10, 0.0F, 1.0F, 0.0F,
+    Fighter_ChangeMotionState(gobj, ftKb_MS_EatAir, 0x10, 0.0F, 1.0F, 0.0F,
                               NULL);
-    ftAnim_8006EBA4(gobj);
+    ftKb_SpecialN_800F9070(gobj);
     ftCommon_8007E2F4(fp, 0x1FF);
 }
 
@@ -2000,8 +2012,8 @@ void ftKb_EatTurn_Anim(Fighter_GObj* gobj)
         fp = GET_FIGHTER(gobj);
         Fighter_ChangeMotionState(gobj, ftKb_MS_EatWait, Ft_MF_SkipModel, 0.0f,
                                   1.0f, 0.0f, NULL);
-        ftAnim_8006EBA4(gobj);
         ftKb_SpecialN_800F9070(gobj);
+        ftAnim_8006EBA4(gobj);
         ftCommon_8007E2F4(fp, 0x1FF);
     }
 }
@@ -2081,7 +2093,41 @@ void ftKb_SpecialAirNLoop_IASA(Fighter_GObj* gobj)
 
 /// #ftKb_SpecialAirNCaptureWait_IASA
 
-/// #ftKb_EatWalk_IASA
+void ftKb_EatWalk_IASA(Fighter_GObj* gobj)
+{
+    ftCo_JumpInput jump_input;
+    s32 var;
+    PAD_STACK(8);
+
+    jump_input = ftCo_Jump_GetInput(gobj);
+    if (jump_input != JumpInput_None) {
+        Fighter* fp = GET_FIGHTER(gobj);
+        fp->mv.kb.specialhi.x4 = jump_input;
+        fp->mv.kb.specialhi.x0 = 0;
+        Fighter_ChangeMotionState(gobj, ftKb_MS_EatJump1,
+                                  Ft_MF_KeepGfx | Ft_MF_SkipModel |
+                                      Ft_MF_SkipMatAnim,
+                                  0, 1, 0, NULL);
+        ftKb_SpecialN_800F9070(gobj);
+        ftAnim_8006EBA4(gobj);
+        ftCommon_8007E2F4(fp, 0x1FF);
+        var = 1;
+    } else {
+        var = 0;
+    }
+    if (var == 0) {
+        if (ft_8008A1FC(gobj)) {
+            Fighter* fp = GET_FIGHTER(gobj);
+            Fighter_ChangeMotionState(gobj, ftKb_MS_EatWait, Ft_MF_SkipModel,
+                                      0, 1, 0, NULL);
+            ftKb_SpecialN_800F9070(gobj);
+            ftAnim_8006EBA4(gobj);
+            ftCommon_8007E2F4(fp, 0x1FF);
+            return;
+        }
+        ftWalkCommon_800DFEC8(gobj, fn_800F64C8);
+    }
+}
 
 void ftKb_EatJump1_IASA(Fighter_GObj* gobj)
 {
@@ -2483,7 +2529,27 @@ void ftKb_MrSpecialAirN_Coll(Fighter_GObj* gobj)
 
 static void fn_800F98F4(Fighter_GObj*);
 
-/// #ftKb_SpecialNLg_800F951C
+void ftKb_SpecialNLg_800F951C(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp2;
+    s32 motion_id;
+    f32 anim_frame;
+
+    ftCommon_8007D5D4(fp);
+
+    fp2 = gobj->user_data;
+    motion_id = 0x190;
+    anim_frame = fp->cur_anim_frame;
+
+    if (fp2->fv.kb.hat.kind != 0) {
+        motion_id = 0x201;
+    }
+
+    Fighter_ChangeMotionState(gobj, motion_id, 0x5000, anim_frame, 1.0F, 0.0F,
+                              NULL);
+    fp->accessory4_cb = fn_800F9260;
+}
 
 void ftKb_SpecialNLg_800F9598(Fighter_GObj* gobj)
 {
@@ -2569,9 +2635,27 @@ void ftKb_LgSpecialAirN_Phys(Fighter_GObj* gobj)
     ft_80084DB0(gobj);
 }
 
-/// #ftKb_LgSpecialN_Coll
+void ftKb_LgSpecialN_Coll(Fighter_GObj* gobj)
+{
+    if (ft_80082708(gobj) == GA_Ground) {
+        Fighter* fp = gobj->user_data;
+        ftCommon_8007D5D4(fp);
+        Fighter_ChangeMotionState(gobj, ftKb_MS_LgSpecialAirN, 0x5000,
+                                  fp->cur_anim_frame, 1.0f, 0.0f, NULL);
+        fp->accessory4_cb = fn_800F98F4;
+    }
+}
 
-/// #ftKb_LgSpecialAirN_Coll
+void ftKb_LgSpecialAirN_Coll(Fighter_GObj* gobj)
+{
+    if (ft_80081D0C(gobj) != GA_Ground) {
+        Fighter* fp = gobj->user_data;
+        ftCommon_8007D7FC(fp);
+        Fighter_ChangeMotionState(gobj, ftKb_MS_LgSpecialN, 0x5000,
+                                  fp->cur_anim_frame, 1.0f, 0.0f, NULL);
+        fp->accessory4_cb = fn_800F98F4;
+    }
+}
 
 /// #fn_800F98F4
 
@@ -2771,7 +2855,8 @@ void ftKb_SpecialNPk_800F9FD4(Fighter_GObj* gobj)
         msid = ftKb_MS_PcSpecialN;
         break;
     }
-    Fighter_ChangeMotionState(gobj, msid, 0, 0.0F, 1.0F, 0.0F, NULL);
+    Fighter_ChangeMotionState(gobj, msid, 0, ftKb_Init_804D93E8,
+                              ftKb_Init_804D93EC, ftKb_Init_804D93E8, NULL);
     fp->cmd_vars[3] = 0;
     fp->cmd_vars[2] = 0;
     fp->cmd_vars[1] = 0;

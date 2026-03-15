@@ -86,7 +86,7 @@ static void fn_801A1498_inline(void)
     HSD_JObjAddAnimAll(jobj, gmTitle_80479B38.animjoint,
                        gmTitle_80479B38.matanim_joint,
                        gmTitle_80479B38.shapeanim_joint);
-    HSD_GObjProc_8038FD54(gobj, gmTitle_801A146C, 0);
+    HSD_GObj_SetupProc(gobj, gmTitle_801A146C, 0);
     if (isActiveTitle() != 0) {
         HSD_JObjReqAnimAll(jobj, gmTitle_803DA4FC.start_frame);
     } else {
@@ -145,10 +145,10 @@ HSD_GObj* gmTitle_801A165C(void)
     if (var_r0) {
         gmTitle_804D671C = 0;
         HSD_JObjReqAnimAll(jobj, gmTitle_803DA4F0.start_frame);
-        HSD_GObjProc_8038FD54(gobj, fn_801A1498, 0);
+        HSD_GObj_SetupProc(gobj, fn_801A1498, 0);
     } else {
         HSD_JObjReqAnimAll(jobj, 400.0F);
-        HSD_GObjProc_8038FD54(gobj, gmTitle_801A1630, 0);
+        HSD_GObj_SetupProc(gobj, gmTitle_801A1630, 0);
     }
     HSD_JObjAnimAll(jobj);
     if (gm_80164840(CKIND_MARS) || gm_80164840(CKIND_EMBLEM)) {
@@ -227,7 +227,7 @@ HSD_GObj* gmTitle_801A1A3C(void)
     HSD_Fog* fog = HSD_FogLoadDesc(gmTitle_804D6710);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7848, fog);
     GObj_SetupGXLink(gobj, HSD_GObj_FogCallback, 0, 0);
-    HSD_GObjProc_8038FD54(gobj, gmTitle_801A1A18, 0);
+    HSD_GObj_SetupProc(gobj, gmTitle_801A1A18, 0);
     return gobj;
 }
 

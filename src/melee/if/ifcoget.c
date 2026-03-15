@@ -42,7 +42,11 @@
     int x4;
     int x8;
     HSD_GObj* xC;
-} un_803F9E08 = { 0 };
+    char x10[12];
+    char x1C[20];
+} un_803F9E08 = {
+    { 0 }, 0, 0, 0, 0, 0, 0, "IfCoGet.dat", "ScInfCgt_scene_data"
+};
 /* 3F9E60 */ static HSD_CObjDesc un_803F9E60 = { 0 };
 /* 3F9ED4 */ static HSD_LightDesc un_803F9ED4 = { 0 };
 
@@ -52,11 +56,14 @@ struct un_804A1F58_x8_t {
     HSD_Text* x4;
     unsigned int x8;
 };
-/* 4A1F58 */ static struct {
+
+// TODO: sizeof(un_804A1F58) should be 0x80, see un_802FF498
+// change 0x80 to sizeof(un_804A1F58) when done
+/* 4A1F58 */ static struct un_804A1F58_t {
     unsigned int x0;
-    unsigned int x4;
+    unsigned char x4;
     struct un_804A1F58_x8_t x8;
-} un_804A1F58[6];
+} un_804A1F58[7];
 
 /// .sbss
 /* 4D6DA0 */ static void* un_804D6DA0;
@@ -64,7 +71,7 @@ struct un_804A1F58_x8_t {
 
 void fn_802FED14(HSD_GObj* gobj)
 {
-    HSD_JObj* jobj = gobj->hsd_obj;
+    HSD_JObj* jobj = HSD_GObjGetHSDObj(gobj);
     if (!un_803F9E08.x0.b1) {
         HSD_JObjSetFlagsAll(jobj, 0x10);
         return;
@@ -99,19 +106,20 @@ void un_802FEFAC(void)
     HSD_GObj* gobj_ui;
     HSD_JObj* jobj_ui;
     gobj_camera = GObj_Create(HSD_GOBJ_CLASS_CAMERA, 21, 0);
-    HSD_GObjObject_80390A70(gobj_camera, HSD_GObj_804D784B,
-                            HSD_CObjLoadDesc(un_804D6DA4->cameras[0].desc));
+    HSD_GObjObject_80390A70(
+        gobj_camera, HSD_GObj_804D784B,
+        (0, HSD_CObjLoadDesc(un_804D6DA4->cameras[0].desc)));
     GObj_SetupGXLinkMax(gobj_camera, HSD_GObj_803910D8, 9);
     gobj_camera->gxlink_prios = 0x8400;
     gobj_light = GObj_Create(HSD_GOBJ_CLASS_LIGHT, 3, 0);
     HSD_GObjObject_80390A70(gobj_light, HSD_GObj_804D784A,
-                            lb_80011AC4(un_804D6DA4->lights));
+                            (0, lb_80011AC4(un_804D6DA4->lights)));
     GObj_SetupGXLink(gobj_light, HSD_GObj_LObjCallback, 10, 0);
     gobj_ui = GObj_Create(HSD_GOBJ_CLASS_UI, 14, 0);
     jobj_ui = HSD_JObjLoadJoint(un_804D6DA4->models[0]->joint);
     HSD_GObjObject_80390A70(gobj_ui, HSD_GObj_804D7849, jobj_ui);
     GObj_SetupGXLink(gobj_ui, HSD_GObj_JObjCallback, 15, 0);
-    HSD_GObjProc_8038FD54(gobj_ui, fn_802FED14, 17);
+    HSD_GObj_SetupProc(gobj_ui, fn_802FED14, 17);
     gm_8016895C(jobj_ui, un_804D6DA4->models[0], 0);
     HSD_JObjSetFlagsAll(jobj_ui, 0x10);
     HSD_JObjReqAnimAll(jobj_ui, 0.0);
@@ -146,25 +154,27 @@ void un_802FF1B4(void)
 {
     un_803F9E08.x0.b0 = 1;
     un_803F9E08.x0.b1 = 0;
-    un_804D6DA0 = lbArchive_80016DBC("IfCoGet.dat", &un_804D6DA4,
-                                     "ScInfCgt_scene_data", 0);
+    un_804D6DA0 =
+        lbArchive_80016DBC(un_803F9E08.x10, &un_804D6DA4, un_803F9E08.x1C, 0);
     un_802FEFAC();
 }
 
 void fn_802FF218(HSD_GObj* arg0)
 {
     int x;
-    int y = -1;
+    int y;
     for (x = 0; x < 6; x++) {
         if (un_804A1F58[x].x8.x0 == arg0) {
             y = x;
-            break;
+            goto _done;
         }
     }
+    y = -1;
+_done:
     if (y >= 0) {
         if (un_804A1F58[y].x0 == 1) {
-            HSD_SisLib_803A70A0(un_804A1F58[y].x8.x4,
-                                (void*) un_804A1F58[y].x4, 0);
+            HSD_SisLib_803A70A0(un_804A1F58[y].x8.x4, un_804A1F58[y].x8.x8,
+                                "");
         } else {
             int s;
             gm_8016B774();
@@ -173,8 +183,8 @@ void fn_802FF218(HSD_GObj* arg0)
                 s = 9999;
             }
             if (un_804A1F58[y].x0 != s) {
-                HSD_SisLib_803A70A0(un_804A1F58[y].x8.x4,
-                                    (void*) un_804A1F58[y].x4, 0);
+                HSD_SisLib_803A70A0(un_804A1F58[y].x8.x4, un_804A1F58[y].x8.x8,
+                                    "%d", s);
                 un_804A1F58[y].x0 = s;
             }
         }
@@ -189,16 +199,20 @@ void un_802FF364(int slot)
     Vec3* ifAll;
     struct un_804A1F58_x8_t* thing;
     HSD_GObj* gobj;
-    thing = &un_804A1F58[slot].x8;
-    gobj = thing->x0;
+    struct un_804A1F58_t* base = un_804A1F58;
+    PAD_STACK(0x10);
+    thing = &base[slot].x8;
     ifAll = ifAll_802F3424(slot);
+    gobj = thing->x0;
+    if ((thing && thing) && thing) {
+    }
     if (gobj) {
         HSD_GObjPLink_80390228(gobj);
     }
     if (thing->x4) {
         HSD_SisLib_803A5CC4(thing->x4);
     }
-    thing->x4 = HSD_SisLib_803A6754(2, un_804A1F58->x0);
+    thing->x4 = HSD_SisLib_803A6754(2, base->x0);
     thing->x4->default_alignment = 1;
     thing->x4->default_kerning = 1;
     gm_8016B774();
@@ -211,12 +225,14 @@ void un_802FF364(int slot)
     HSD_SisLib_803A7548(thing->x4, thing->x8, 0.06, 0.06);
     thing->x4->render_callback = fn_802FF360;
     thing->x0 = GObj_Create(HSD_GOBJ_CLASS_UI, 15, 0);
-    HSD_GObjProc_8038FD54(thing->x0, fn_802FF218, 17);
+    HSD_GObj_SetupProc(thing->x0, fn_802FF218, 17);
 }
 
 void un_802FF498(void)
 {
-    memzero(un_804A1F58, sizeof(un_804A1F58));
+    PAD_STACK(8);
+    memzero(un_804A1F58,
+            0x80); // TODO: change to sizeof(un_802FF498) when size fixed
     un_804A1F58->x0 =
         HSD_SisLib_803A611C(2, ifAll_802F3404(), 14, 15, 0, 11, 0, 19);
 }
@@ -238,6 +254,7 @@ void un_802FF570(void)
 {
     int i;
     for (i = 0; i < 6; i++) {
+        un_804A1F58[i + 1].x4 = 1;
         if (un_804A1F58[i].x8.x4) {
             un_804A1F58[i].x8.x4->hidden = 1;
         }
@@ -247,13 +264,16 @@ void un_802FF570(void)
 void un_802FF620(void)
 {
     int i;
+    struct un_804A1F58_t* base = un_804A1F58;
+    PAD_STACK(8);
     for (i = 0; i < 6; i++) {
-        un_804A1F58[i].x0 = 0;
-        if (un_804A1F58[i].x8.x4) {
+        base[i + 1].x4 = 0;
+        if (base[i].x8.x4) {
             un_802FF364(i);
-            un_804A1F58[i].x8.x4->hidden = 0;
+            base[i].x8.x4->hidden = 0;
         }
     }
+    base[i].x8 = base[i].x8;
 }
 
 void un_802FF6A0(void)

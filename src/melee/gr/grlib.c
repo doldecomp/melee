@@ -266,9 +266,9 @@ HSD_GObj* grLib_801C9CEC(s32 idx1)
 
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
     if (idx1 == 1) {
-        HSD_GObjProc_8038FD54(gobj, grLib_801C9BC8, 1);
+        HSD_GObj_SetupProc(gobj, grLib_801C9BC8, 1);
     } else {
-        HSD_GObjProc_8038FD54(gobj, grLib_801C9C40, 1);
+        HSD_GObj_SetupProc(gobj, grLib_801C9C40, 1);
     }
 
     HSD_JObjAddAnimAll(jobj, stage_info.quake_model_set->anims[idx0], NULL,

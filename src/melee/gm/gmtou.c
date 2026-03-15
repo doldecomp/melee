@@ -265,13 +265,13 @@ void fn_8019CDBC(HSD_GObj* gobj)
     f32 sp24;
     u8 temp_r27;
     TmData* tmd = gm_8018F634();
-    HSD_JObj* jobj = GET_JOBJ(gobj);
+    HSD_JObj* jobj = HSD_GObjGetHSDObj(gobj);
     u32 idx = fn_8018F62C(gobj);
     PAD_STACK(20);
 
     HSD_ASSERT(993, jobj);
     sp28 = jobj->translate.x;
-    temp_r27 = tmd->x37[idx].xC;
+    temp_r27 = tmd->x37[idx].xE;
     sp24 = (5.999997f * temp_r27) - 21.5f;
     mn_8022F410(&sp28, &sp24, 0.4f);
 
@@ -288,17 +288,17 @@ void fn_8019CDBC(HSD_GObj* gobj)
         break;
     default:
     case 0:
-        tmd->x37[idx].xD = temp_r27;
+        tmd->x37[idx].xF = tmd->x37[idx].xE;
         fn_8018FDC4(jobj, sp28, 17.0f, 0.01f);
         HSD_SisLib_803A746C(tmd->x534[idx], 0, 10.0f * sp28, -172.0f);
         tmd->x534[idx]->pos_z = 0.01f;
         break;
     }
-    if (tmd->x37[idx].x4 != 0) {
+    if (tmd->x37[idx].x5 != 0) {
         fn_8019044C(jobj, 201.0f);
         return;
     }
-    fn_8019044C(jobj, fn_8018F71C(tmd->x37[idx].x2, tmd->x37[idx].x6));
+    fn_8019044C(jobj, fn_8018F71C(tmd->x37[idx].x3, tmd->x37[idx].x7));
 }
 
 void fn_8019CFA4(HSD_GObj* gobj)

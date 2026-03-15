@@ -237,8 +237,6 @@ void make_full_dependancy_mtx(int num, u32* dep, u32* full)
     } while (changed != false);
 }
 
-void fn_80386230(void) {}
-
 static u8 pad[0x44] = { 0 };
 
 void HSD_TExpSchedule(int num, HSD_TExpDag* list, HSD_TExp** result,

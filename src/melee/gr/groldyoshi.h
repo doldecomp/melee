@@ -35,8 +35,10 @@
 /* 20F080 */ bool grOldYoshi_8020F080(Ground_GObj*);
 /* 20F088 */ void grOldYoshi_8020F088(Ground_GObj*);
 /* 20F2A4 */ void grOldYoshi_8020F2A4(Ground_GObj*);
-/* 20F2A8 */ UNK_RET fn_8020F2A8(UNK_PARAMS);
-/* 20F31C */ UNK_RET grOldYoshi_8020F31C(UNK_PARAMS);
+/* 20F2A8 */ void fn_8020F2A8(Ground*, s32, CollData*, s32, mpLib_GroundEnum,
+                              float);
+/* 20F31C */ float grOldYoshi_8020F31C(float, float, float, float, float,
+                                       float);
 /* 20F404 */ DynamicsDesc* grOldYoshi_8020F404(enum_t);
 /* 20F40C */ bool grOldYoshi_8020F40C(Vec3*, int arg, HSD_JObj* jobj);
 

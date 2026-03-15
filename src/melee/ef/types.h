@@ -3,7 +3,9 @@
 
 #include <placeholder.h>
 
+#include "baselib/objalloc.h"
 #include "dolphin/mtx.h"
+#include "dolphin/types.h"
 
 #include "ef/forward.h" // IWYU pragma: export
 
@@ -26,8 +28,8 @@ struct Effect {
     /* +18 */ Vec3 translate;
     /* +24 */ u16 x24;
     /* +26 */ s8 x26;
-    /* +27 */ s8 x27;
-    /* +28 */ s8 x28; // Effect update control (?) in fn_8005BC50
+    /* +27 */ u8 x27; // specifically a singular bit flag ?
+    /* +28 */ u8 x28; // Effect update control (?) in fn_8005BC50
     /* +29 */ u8 x29;
     /* +2A */ s8 x2A;
     /* +2B */ s8 x2B;
@@ -57,16 +59,16 @@ struct ef_UnkStruct3 {
     /* +20 */ f32 x20;
 }; /* size = 0x24 */
 
-struct _struct_efAsync_803C025C_0xC {
+typedef struct ef_Symbols {
     /* 0x0 */ char* ef_DAT_file;
     /* 0x4 */ char* effDataTable_name;
     /* 0x8 */ void* unk8;
-}; /* size = 0xC */
+} ef_Symbols; /* size = 0xC */
+STATIC_ASSERT(sizeof(ef_Symbols) == 0xC);
 
-struct _struct_efLib_80458EE0_0x8 {
-    /* 0x0 */ void* unk0; /* inferred */
-    /* 0x4 */ u16 pad4;
-    /* 0x6 */ u16 unk6; /* inferred */
-}; /* size = 0x8? */
+struct efAsync_80067980_objalloc_t {
+    char pad_0[0x24];
+};
+STATIC_ASSERT(sizeof(struct efAsync_80067980_objalloc_t) == 0x24);
 
 #endif
