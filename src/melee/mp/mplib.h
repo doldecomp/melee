@@ -173,7 +173,7 @@
 /* 057FDC */ void mpLib_80057FDC(int joint_id);
 /* 058044 */ void mpLib_80058044(int joint_id);
 /* 0580AC */ void mpJointSetB10(int joint_id);
-/* 0580C8 */ void mpJointSetCb1(int joint_id, Ground*, mpLib_Callback);
+/* 0580C8 */ void mpJointSetCb1(int joint_id, void*, mpLib_Callback);
 /* 0580E0 */ void mpJointClearCb1(int joint_id);
 /* 0580FC */ void mpJointGetCb1(int joint_id, mpLib_Callback*, Ground**);
 /* 05811C */ void mpLib_8005811C(CollData*, int ledge_id);

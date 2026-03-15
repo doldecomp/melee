@@ -12,7 +12,7 @@
 /* 1FF298 */ void grRCruise_801FF298(void);
 /* 1FF29C */ void grRCruise_801FF29C(void);
 /* 1FF2C0 */ bool grRCruise_801FF2C0(void);
-/* 1FF2C8 */ UNK_RET grRCruise_801FF2C8(UNK_PARAMS);
+/* 1FF2C8 */ HSD_GObj* grRCruise_801FF2C8(int);
 /* 1FF3B4 */ void grRCruise_801FF3B4(Ground_GObj*);
 /* 1FF3E0 */ bool grRCruise_801FF3E0(Ground_GObj*);
 /* 1FF3E8 */ void grRCruise_801FF3E8(Ground_GObj*);
@@ -21,7 +21,7 @@
 /* 1FF434 */ bool grRCruise_801FF434(Ground_GObj*);
 /* 1FF43C */ void grRCruise_801FF43C(Ground_GObj*);
 /* 1FF440 */ void grRCruise_801FF440(Ground_GObj*);
-/* 1FF444 */ UNK_RET fn_801FF444(UNK_PARAMS);
+/* 1FF444 */ void grRCruise_801FF444(Ground_GObj*);
 /* 1FF5B4 */ void grRCruise_801FF5B4(Ground_GObj*);
 /* 1FF6CC */ bool grRCruise_801FF6CC(Ground_GObj*);
 /* 1FF6D4 */ void grRCruise_801FF6D4(Ground_GObj*);
@@ -44,11 +44,12 @@
 /* 20045C */ void grRCruise_8020045C(Ground_GObj*);
 /* 200460 */ UNK_RET fn_80200460(UNK_PARAMS);
 /* 200540 */ void grRCruise_80200540(Ground_GObj*);
-/* 200578 */ UNK_RET fn_80200578(UNK_PARAMS);
+/* 200578 */ void grRCruise_80200578(Ground*, s32, CollData*, s32,
+                                     mpLib_GroundEnum, f32);
 /* 20071C */ void grRCruise_8020071C(Ground_GObj*);
 /* 200B48 */ UNK_RET grRCruise_80200B48(UNK_PARAMS);
 /* 200C04 */ void grRCruise_80200C04(Ground_GObj*);
-/* 2010A4 */ void fn_802010A4(Ground_GObj*, s32, CollData*);
+/* 2010A4 */ void grRCruise_802010A4(Ground_GObj*, s32, CollData*);
 /* 201110 */ void grRCruise_80201110(Ground_GObj*);
 /* 201288 */ UNK_RET grRCruise_80201288(UNK_PARAMS);
 /* 201410 */ UNK_RET grRCruise_80201410(UNK_PARAMS);

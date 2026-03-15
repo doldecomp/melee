@@ -5,18 +5,89 @@
 #include <platform.h>
 
 #include "cm/camera.h"
+
+#include "forward.h"
+
 #include "gm/gm_1A45.h"
+#include "gr/grdatfiles.h"
 #include "gr/grdisplay.h"
 #include "gr/grlib.h"
 #include "gr/ground.h"
 #include "gr/inlines.h"
-#include "lb/lb_00F9.h"
 
-#include <sysdolphin/baselib/dobj.h>
+#include "lb/forward.h"
+
+#include "lb/lb_00F9.h"
+#include "mp/mplib.h"
+
+#include <baselib/archive.h>
+#include <baselib/dobj.h>
+#include <baselib/gobj.h>
+#include <baselib/gobjgxlink.h>
+#include <baselib/gobjproc.h>
+
+StageCallbacks grRc_803E4E34[7] = {
+    { grRCruise_801FF3B4, grRCruise_801FF3E0, grRCruise_801FF3E8,
+      grRCruise_801FF3EC, 0 },
+    { grRCruise_801FF5B4, grRCruise_801FF6CC, grRCruise_801FF6D4,
+      grRCruise_801FF738, 0xC0000000 },
+    { grRCruise_801FF3F0, grRCruise_801FF434, grRCruise_801FF43C,
+      grRCruise_801FF440, 0 },
+    { grRCruise_801FF924, grRCruise_801FFAD4, grRCruise_801FFADC,
+      grRCruise_80200070, 0 },
+    { grRCruise_80200074, grRCruise_8020014C, grRCruise_80200154,
+      grRCruise_8020045C, 0 },
+    { grRCruise_801FF73C, grRCruise_801FF794, grRCruise_801FF79C,
+      grRCruise_801FF7A0, 0 },
+    { grRCruise_801FF7A4, grRCruise_801FF8DC, grRCruise_801FF8E4,
+      grRCruise_801FF920, 0 },
+};
+
+static struct {
+    int x0;
+}* grRc_804D6A10;
 
 void grRCruise_801FF164(bool arg) {}
 
-/// #grRCruise_801FF168
+void grRCruise_801FF168(void)
+{
+    HSD_GObj* jgobj;
+    HSD_GObj* grgobj;
+    Ground* gp;
+    Ground* gp2;
+    HSD_JObj* jobj;
+    HSD_GObj* gobj6;
+    HSD_GObj* gobj1;
+    HSD_GObj* gobj4;
+
+    grRc_804D6A10 = Ground_801C49F8();
+    stage_info.unk8C.b4 = 1;
+    stage_info.unk8C.b5 = 0;
+    jgobj = grRCruise_801FF2C8(3);
+    gp = GET_GROUND(jgobj);
+    gp->gv.rcruise.xC4.b0 = 1;
+    jobj = GET_JOBJ(jgobj);
+    HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
+    grgobj = grRCruise_801FF2C8(3);
+    gp2 = GET_GROUND(grgobj);
+    gp2->gv.rcruise2.xEC = jgobj;
+    grRCruise_801FF2C8(0);
+    grRCruise_801FF2C8(2);
+    grRCruise_801FF2C8(5);
+    gobj1 = grRCruise_801FF2C8(1);
+    gobj6 = grRCruise_801FF2C8(6);
+    gobj4 = grRCruise_801FF2C8(4);
+    Ground_801C39C0();
+    Ground_801C3BB4();
+    grRCruise_801FFADC(grgobj);
+    Ground_801C2FE0(gobj1);
+    Ground_801C32AC(1);
+    Ground_801C2FE0(gobj6);
+    Ground_801C32AC(6);
+    Ground_801C2FE0(gobj4);
+    Ground_801C32AC(4);
+    mpLib_80057BC0(11);
+}
 
 void grRCruise_801FF298(void) {}
 
@@ -30,7 +101,33 @@ bool grRCruise_801FF2C0(void)
     return false;
 }
 
-/// #grRCruise_801FF2C8
+HSD_GObj* grRCruise_801FF2C8(int gobj_id)
+{
+    HSD_GObj* gobj;
+    StageCallbacks* callbacks = &grRc_803E4E34[gobj_id];
+
+    gobj = Ground_GetStageGObj(gobj_id);
+
+    if (gobj != NULL) {
+        Ground* gp = gobj->user_data;
+        gp->x8_callback = NULL;
+        gp->xC_callback = NULL;
+        GObj_SetupGXLink(gobj, grDisplay_801C5DB0, 3, 0);
+        if (callbacks->callback3 != NULL) {
+            gp->x1C_callback = callbacks->callback3;
+        }
+        if (callbacks->callback0 != NULL) {
+            callbacks->callback0(gobj);
+        }
+        if (callbacks->callback2 != NULL) {
+            HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
+        }
+    } else {
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 290, gobj_id);
+    }
+
+    return gobj;
+}
 
 void grRCruise_801FF3B4(Ground_GObj* gobj)
 {
@@ -63,7 +160,29 @@ void grRCruise_801FF43C(Ground_GObj* arg) {}
 
 void grRCruise_801FF440(Ground_GObj* arg) {}
 
-/// #fn_801FF444
+void grRCruise_801FF444(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    mpJointSetCb1(5, gobj, grRCruise_80200578);
+    mpJointSetCb1(27, gobj, (mpLib_Callback) grRCruise_802010A4);
+    mpJointSetCb1(36, gobj, (mpLib_Callback) grRCruise_802010A4);
+    mpJointSetCb1(37, gobj, (mpLib_Callback) grRCruise_802010A4);
+    mpJointSetCb1(38, gobj, (mpLib_Callback) grRCruise_802010A4);
+    mpJointSetCb1(39, gobj, (mpLib_Callback) grRCruise_802010A4);
+    mpJointSetCb1(40, gobj, (mpLib_Callback) grRCruise_802010A4);
+    mpJointSetCb1(41, gobj, (mpLib_Callback) grRCruise_802010A4);
+    mpJointSetCb1(42, gobj, (mpLib_Callback) grRCruise_802010A4);
+    mpJointSetCb1(43, gobj, (mpLib_Callback) grRCruise_802010A4);
+    mpJointSetCb1(28, gobj, (mpLib_Callback) grRCruise_802010A4);
+    mpJointSetCb1(29, gobj, (mpLib_Callback) grRCruise_802010A4);
+    mpJointSetCb1(30, gobj, (mpLib_Callback) grRCruise_802010A4);
+    mpJointSetCb1(31, gobj, (mpLib_Callback) grRCruise_802010A4);
+    mpJointSetCb1(32, gobj, (mpLib_Callback) grRCruise_802010A4);
+    mpJointSetCb1(33, gobj, (mpLib_Callback) grRCruise_802010A4);
+    mpJointSetCb1(34, gobj, (mpLib_Callback) grRCruise_802010A4);
+    mpJointSetCb1(35, gobj, (mpLib_Callback) grRCruise_802010A4);
+    gp->gv.rcruise.x10 = 0;
+}
 
 /// #grRCruise_801FF5B4
 
@@ -104,7 +223,46 @@ void grRCruise_801FF79C(Ground_GObj* arg) {}
 
 void grRCruise_801FF7A0(Ground_GObj* arg) {}
 
-/// #grRCruise_801FF7A4
+void grRCruise_801FF7A4(Ground_GObj* gobj)
+{
+    UnkArchiveStruct* archive;
+    DynamicsDesc* data;
+    Ground* gp;
+    HSD_JObj* jobj;
+
+    gp = GET_GROUND(gobj);
+    jobj = GET_JOBJ(gobj);
+    Ground_801C2ED0(jobj, gp->map_id);
+    grAnime_801C8138(gobj, gp->map_id, 0);
+    grAnime_801C752C(jobj, 1, 30628, HSD_AObjSetFlags, 3, 0x20000000);
+    if ((archive = grDatFiles_801C6324(), archive != NULL) &&
+        (data = HSD_ArchiveGetPublicAddress(archive->unk0,
+                                            "dynamicsdata_shipflag"),
+         data != NULL))
+    {
+        Ground_801C3FA4(gobj, 23);
+        grLib_801C9B20(jobj, data, &gp->gv.rcruise2.xC4);
+    } else {
+        gp->gv.rcruise2.xC4.data = NULL;
+    }
+
+    jobj = Ground_801C3FA4(gobj, 10);
+    if (jobj != NULL) {
+        Ground_801C2D0C(0, jobj);
+    }
+    jobj = Ground_801C3FA4(gobj, 11);
+    if (jobj != NULL) {
+        Ground_801C2D0C(1, jobj);
+    }
+    jobj = Ground_801C3FA4(gobj, 12);
+    if (jobj != NULL) {
+        Ground_801C2D0C(2, jobj);
+    }
+    jobj = Ground_801C3FA4(gobj, 13);
+    if (jobj != NULL) {
+        Ground_801C2D0C(3, jobj);
+    }
+}
 
 bool grRCruise_801FF8DC(Ground_GObj* arg)
 {
@@ -159,7 +317,7 @@ void grRCruise_80200540(Ground_GObj* gobj)
     gp->gv.rcruise.x2C = 0;
 }
 
-/// #fn_80200578
+/// #grRCruise_80200578
 
 /// #grRCruise_8020071C
 
@@ -168,14 +326,14 @@ void grRCruise_80200540(Ground_GObj* gobj)
 /// #grRCruise_80200C04
 
 // TODO: is this GET_GROUND? calling it directly didn't work.
-inline Ground* fn_802010A4_inline(Ground_GObj* arg0)
+inline Ground* grRCruise_802010A4_inline(Ground_GObj* arg0)
 {
     return arg0->user_data;
 }
 
-void fn_802010A4(Ground_GObj* gobj, s32 id, CollData* coll)
+void grRCruise_802010A4(Ground_GObj* gobj, s32 id, CollData* coll)
 {
-    Ground* gp = fn_802010A4_inline(gobj);
+    Ground* gp = grRCruise_802010A4_inline(gobj);
     s32 i;
 
     if ((s32) coll->x34_flags.b1234 != 1) {

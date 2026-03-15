@@ -112,7 +112,7 @@ struct CollJoint {
     /* 0x18 */ Vec2 bounding_max;
     /* 0x20 */ HSD_JObj* x20;
     /* 0x24 */ mpLib_Callback x24;
-    /* 0x28 */ Ground* x28;
+    /* 0x28 */ void* x28;
     /* 0x2C */ mpLib_Callback x2C;
     /* 0x30 */ Ground* x30;
 }; /* size = 0x34 */
