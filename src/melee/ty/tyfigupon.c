@@ -43,6 +43,13 @@ typedef struct {
 typedef struct {
     /* 0x00 */ u32 x0;
     /* 0x04 */ u32 x4;
+    /* 0x08 */ s32 x8;
+    /* 0x0C */ u8 pad_0C[0x4C];
+} TyFiguponUD;
+
+typedef struct {
+    /* 0x00 */ u32 x0;
+    /* 0x04 */ u32 x4;
     /* 0x08 */ u8 pad_08[0x4];
     /* 0x0C */ u32 xC;
 } TyFiguponED4;
@@ -176,7 +183,38 @@ void tyFigupon_80314C5C(HSD_GObj* gobj)
     }
 }
 
-/// #fn_803152BC
+void fn_803152BC(HSD_GObj* arg0)
+{
+    s32 temp_r3;
+    struct un_804D6EF4_t* temp_r31;
+    TyFiguponUD* temp_r30;
+    TyFiguponUD* temp_r3_2;
+
+    temp_r30 = HSD_GObjGetUserData(arg0);
+    temp_r31 = un_804D6EF4;
+    if (temp_r30 != NULL) {
+        temp_r3 = temp_r30->x8;
+        temp_r30->x8 = temp_r3 - 1;
+        if (temp_r3 != 0) {
+            HSD_JObjAnimAll(temp_r31->x10);
+            if ((temp_r30->x8 % 30) == 0) {
+                HSD_JObjReqAnimAll(temp_r31->x10, 0.0f);
+            }
+        } else {
+            temp_r30->x8 = 0;
+            GObj_RemoveUserData(arg0);
+            HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
+        }
+    } else {
+        temp_r3_2 = HSD_MemAlloc(0x58);
+        if (temp_r3_2 != NULL) {
+            GObj_InitUserData(arg0, 0, Toy_RemoveUserData, temp_r3_2);
+        }
+        HSD_JObjReqAnimAll(temp_r31->x10, 0.0f);
+        temp_r3_2->x8 = 0x1E;
+        temp_r3_2->x8 = (s32) (temp_r3_2->x8 + (((temp_r31->x5E * 2) / 30) * 0x1E));
+    }
+}
 
 /// #un_803153EC
 

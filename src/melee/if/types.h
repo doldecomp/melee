@@ -159,13 +159,16 @@ struct un_804D6EF4_t {
     /* +0x04 */ char pad_04[4];
     /* +0x08 */ u32 x08;
     /* +0x0C */ u32 x0C;
-    /* +0x10 */ char pad_10[8];
+    /* +0x10 */ HSD_JObj* x10;
+    /* +0x14 */ char pad_14[4];
     /* +0x18 */ HSD_JObj* x14;
     /* +0x1C */ HSD_JObj* x18;
     /* +0x20 */ char pad_20[0x50 - 0x20];
     /* +0x50 */ HSD_Archive* archive;
     /* +0x54 */ short x54;
     /* +0x56 */ short x56;
+    /* +0x58 */ char pad_58[6];
+    /* +0x5E */ s8 x5E;
 };
 
 struct un_80301C64_t {
