@@ -703,7 +703,7 @@ void un_80316420(s16 arg0)
     gobj = un_803087F4(un_804D6EF8);
     HSD_JObjClearFlagsAll(aa8->x4, 0x10);
     HSD_JObjSetFlagsAll(aa8->x8, 0x10);
-    jobj = GET_JOBJ(gobj);
+    jobj = HSD_GObjGetHSDObj(gobj);
     HSD_JObjSetTranslateX(jobj, -1.8f);
     HSD_JObjSetTranslateY(jobj, 18.6f);
     HSD_JObjSetTranslateZ(jobj, 12.0f);
