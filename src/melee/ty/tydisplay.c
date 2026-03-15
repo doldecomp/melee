@@ -202,7 +202,128 @@ void un_8031830C(TySortElem* base, s32 lo, s32 hi)
     }
 }
 
-/// #un_80318714
+typedef struct TySortElemI {
+    s32 key;
+    s32 val;
+} TySortElemI;
+
+void un_80318714(TySortElemI* base, s32 lo, s32 hi)
+{
+    TySortElemI tmp;
+    PAD_STACK(8);
+
+    if (lo < hi) {
+        s32 mid = (lo + hi) / 2;
+        s32 pivot, i;
+        TySortElemI* p;
+        TySortElemI* q;
+
+        if (lo != mid) {
+            p = &base[lo];
+            q = &base[mid];
+            tmp = *p;
+            *p = *q;
+            *q = tmp;
+        }
+
+        i = lo + 1;
+        pivot = lo;
+        p = &base[lo];
+        for (q = &base[i]; i <= hi; i++, q++) {
+            if (q->val > p->val) {
+                pivot += 1;
+                if (pivot != i) {
+                    TySortElemI* s = &base[pivot];
+                    tmp = *s;
+                    *s = *q;
+                    *q = tmp;
+                }
+            }
+        }
+
+        if (lo != pivot) {
+            q = &base[pivot];
+            tmp = *p;
+            *p = *q;
+            *q = tmp;
+        }
+
+        if (lo < pivot - 1) {
+            s32 mid2 = (pivot + lo - 1) / 2;
+            s32 pivot2, j2;
+
+            p = &base[lo];
+            if (lo != mid2) {
+                q = &base[mid2];
+                tmp = *p;
+                *p = *q;
+                *q = tmp;
+            }
+
+            j2 = lo + 1;
+            pivot2 = lo;
+            for (q = &base[lo + 1]; j2 <= pivot - 1; j2++, q++) {
+                if (q->val > p->val) {
+                    pivot2 += 1;
+                    if (pivot2 != j2) {
+                        TySortElemI* s = &base[pivot2];
+                        tmp = *s;
+                        *s = *q;
+                        *q = tmp;
+                    }
+                }
+            }
+
+            if (lo != pivot2) {
+                q = &base[pivot2];
+                tmp = *p;
+                *p = *q;
+                *q = tmp;
+            }
+
+            un_80318714(base, lo, pivot2 - 1);
+            un_80318714(base, pivot2 + 1, pivot - 1);
+        }
+
+        if (pivot + 1 < hi) {
+            s32 mid3 = (pivot + hi + 1) / 2;
+            s32 pivot3, j3;
+            TySortElemI* rp;
+
+            rp = &base[pivot + 1];
+            if (pivot + 1 != mid3) {
+                q = &base[mid3];
+                tmp = *rp;
+                *rp = *q;
+                *q = tmp;
+            }
+
+            j3 = pivot + 2;
+            pivot3 = pivot + 1;
+            for (q = &base[j3]; j3 <= hi; j3++, q++) {
+                if (q->val > rp->val) {
+                    pivot3 += 1;
+                    if (pivot3 != j3) {
+                        TySortElemI* s = &base[pivot3];
+                        tmp = *s;
+                        *s = *q;
+                        *q = tmp;
+                    }
+                }
+            }
+
+            if (pivot + 1 != pivot3) {
+                q = &base[pivot3];
+                tmp = *rp;
+                *rp = *q;
+                *q = tmp;
+            }
+
+            un_80318714(base, pivot + 1, pivot3 - 1);
+            un_80318714(base, pivot3 + 1, hi);
+        }
+    }
+}
 
 extern u8* un_804D6F14;
 extern void* un_804D6F10;
