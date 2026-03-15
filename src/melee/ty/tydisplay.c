@@ -685,7 +685,75 @@ s32 un_8031C454(s32 arg0)
     return result;
 }
 
-/// #un_8031C5E4
+HSD_JObj* un_8031C5E4(s32 arg0)
+{
+    TyDspArchNames jobj_names1;
+    TyDspArchNames matanim_names1;
+    TyDspArchNames jobj_names2;
+    TyDspArchNames jobj_names3;
+    u8* entry;
+    HSD_JObj* root;
+    HSD_JObj* child;
+    u8 cat;
+    const TyDspNameTables* tables = &un_803B8988;
+    s32* archives = un_804A2DE8;
+
+    PAD_STACK(16);
+
+    entry = (u8*) un_8031B9DC(arg0);
+
+    if ((u32) archives[entry[4]] == 0U) {
+        return NULL;
+    }
+
+    root = HSD_JObjAlloc();
+
+    {
+        u8 c = entry[4];
+        jobj_names1 = *(TyDspArchNames*) tables->jobj_names;
+        cat = c;
+        if ((s8) c == -1) {
+            cat = 0;
+        }
+        child = HSD_JObjLoadJoint(
+            HSD_ArchiveGetPublicAddress(
+                (HSD_Archive*) archives[c],
+                jobj_names1.entries[(s8) cat]));
+        HSD_JObjAddChild(root, child);
+    }
+
+    {
+        u8 c = entry[4];
+        matanim_names1 = *(TyDspArchNames*) tables->matanim_names;
+        cat = c;
+        if ((s8) c == -1) {
+            cat = 0;
+        }
+        un_80306A48(child, NULL,
+                    (char*) matanim_names1.entries[(s8) cat],
+                    NULL,
+                    (HSD_Archive*) archives[c],
+                    (long) entry[5]);
+    }
+    HSD_JObjRemoveAnimAll(child);
+
+    HSD_JObjSetTranslateX(child, *(f32*) (entry + 8));
+    HSD_JObjSetTranslateZ(child, *(f32*) (entry + 0xC));
+
+    jobj_names2 = *(TyDspArchNames*) tables->jobj_names;
+    HSD_JObjAddChild(root, HSD_JObjLoadJoint(
+        HSD_ArchiveGetPublicAddress(
+            (HSD_Archive*) archives[42],
+            jobj_names2.entries[42])));
+
+    jobj_names3 = *(TyDspArchNames*) tables->jobj_names;
+    HSD_JObjAddChild(root, HSD_JObjLoadJoint(
+        HSD_ArchiveGetPublicAddress(
+            (HSD_Archive*) archives[41],
+            jobj_names3.entries[41])));
+
+    return root;
+}
 
 /// #un_8031C8B8
 void un_8031C8B8(void)
