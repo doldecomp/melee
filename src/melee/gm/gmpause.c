@@ -98,6 +98,6 @@ void fn_801A1134(void)
     HSD_JObjReqAnimAll(jobj, 1.0f);
     HSD_JObjAnimAll(jobj);
     HSD_JObjSetFlagsAll(jobj, 0x10U);
-    HSD_GObjProc_8038FD54(gobj, fn_801A0E34, 0U);
+    HSD_GObj_SetupProc(gobj, fn_801A0E34, 0U);
     lbl_80479B10.slot = 99;
 }

@@ -119,9 +119,9 @@ HSD_GObj* grGarden_80202C78(int gobj_id)
         }
 
         if (callbacks->callback2 != NULL) {
-            HSD_GObjProc_8038FD54(gobj, callbacks->callback2, 4);
+            HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
         }
-        // HSD_GObjProc_8038FD54(gobj,gobj_id,4);
+        // HSD_GObj_SetupProc(gobj,gobj_id,4);
         // if(callbacks) {
         //	callbacks->callback0(gobj);
         // }

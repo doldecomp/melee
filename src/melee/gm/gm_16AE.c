@@ -1960,7 +1960,7 @@ void fn_8016E730(StartMeleeData* arg0)
     temp_r30 = gm_801A4BC8();
     fn_80171AD4();
     if (temp_r30 != NULL) {
-        HSD_GObjProc_8038FD54(temp_r30, fn_8016C7D0, 0x14);
+        HSD_GObj_SetupProc(temp_r30, fn_8016C7D0, 0x14);
     }
     if (!arg0->rules.x1_4) {
         Stage_80225074(fn_8016E5C0(arg0));

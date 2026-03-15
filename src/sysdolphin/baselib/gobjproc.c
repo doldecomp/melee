@@ -147,8 +147,8 @@ inline void assertProc(HSD_GObjProc* gproc)
     HSD_ASSERT(31, gproc);
 }
 
-HSD_GObjProc* HSD_GObjProc_8038FD54(HSD_GObj* gobj, void (*func)(HSD_GObj*),
-                                    u8 pri)
+HSD_GObjProc* HSD_GObj_SetupProc(HSD_GObj* gobj, void (*func)(HSD_GObj*),
+                                 u8 pri)
 {
     HSD_GObjProc* gproc;
 

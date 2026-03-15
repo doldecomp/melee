@@ -5563,7 +5563,7 @@ void mpLib_80058820(void)
 {
     HSD_GObj* gobj = GObj_Create(1, 6, 0);
     HSD_ASSERT(6314, gobj);
-    HSD_GObjProc_8038FD54(gobj, mpLib_800587FC, 4);
+    HSD_GObj_SetupProc(gobj, mpLib_800587FC, 4);
     mpLib_80458868[0].right = +10000.0F;
     mpLib_80458868[0].top = +10000.0F;
     mpLib_80458868[0].left = -10000.0F;

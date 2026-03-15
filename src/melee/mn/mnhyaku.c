@@ -128,7 +128,7 @@ void mnHyaku_8024CA50(HSD_GObj* gobj)
     Menu* menu = GET_MENU(gobj);
     if (mn_804A04F0.cur_menu != 0x21) {
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
-        gobj_proc = HSD_GObjProc_8038FD54(gobj, mnHyaku_8024C9F0, 0U);
+        gobj_proc = HSD_GObj_SetupProc(gobj, mnHyaku_8024C9F0, 0U);
         gobj_proc->flags_3 = HSD_GObj_804D783C;
         HSD_SisLib_803A5CC4(menu->text);
     }
@@ -146,7 +146,7 @@ void mnHyaku_8024CAC8(HSD_GObj* gobj)
     menu = GET_MENU(gobj);
     if (mn_804A04F0.cur_menu != 0x21) {
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
-        gobj_proc = HSD_GObjProc_8038FD54(gobj, mnHyaku_8024C9F0, 0U);
+        gobj_proc = HSD_GObj_SetupProc(gobj, mnHyaku_8024C9F0, 0U);
         gobj_proc->flags_3 = HSD_GObj_804D783C;
         HSD_SisLib_803A5CC4(menu->text);
         return;
@@ -154,7 +154,7 @@ void mnHyaku_8024CAC8(HSD_GObj* gobj)
     res = mn_8022EC18(jobj, &mnHyaku_803EF668[0], 0x80);
     if (res == mnHyaku_803EF668[1]) {
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
-        gobj_proc = HSD_GObjProc_8038FD54(gobj, mnHyaku_8024CA50, 0U);
+        gobj_proc = HSD_GObj_SetupProc(gobj, mnHyaku_8024CA50, 0U);
         gobj_proc->flags_3 = HSD_GObj_804D783C;
     }
 }
@@ -195,7 +195,7 @@ void mnHyaku_8024CB94(u8 arg0)
     menu = allocMenu(arg0, gobj);
     mnHyaku_8024C68C_inline(jobj, menu->cursor);
 
-    proc = HSD_GObjProc_8038FD54(gobj, mnHyaku_8024CAC8, 0U);
+    proc = HSD_GObj_SetupProc(gobj, mnHyaku_8024CAC8, 0U);
     proc->flags_3 = HSD_GObj_804D783C;
 
     menu = gobj->user_data;
@@ -227,8 +227,8 @@ void mnHyaku_8024CD64(u8 arg0)
         &mnHyaku_804A08E8.shapeanim_joint, "MenMainConKm_Top_shapeanim_joint",
         0);
     mnHyaku_8024CB94(arg0);
-    proc = HSD_GObjProc_8038FD54(GObj_Create(0U, 1U, 0x80U), mnHyaku_8024C68C,
-                                 0U);
+    proc =
+        HSD_GObj_SetupProc(GObj_Create(0U, 1U, 0x80U), mnHyaku_8024C68C, 0U);
     proc->flags_3 = HSD_GObj_804D783C;
     lbAudioAx_800237A8(0x7530, 0x7FU, 0x40U);
 }

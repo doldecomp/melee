@@ -1,7 +1,10 @@
 #include "mngallery.h"
 
-#include <platform.h>
 #include <placeholder.h>
+#include <platform.h>
+
+#include "mn/inlines.h"
+
 #include <baselib/cobj.h>
 #include <baselib/controller.h>
 #include <baselib/displayfunc.h>
@@ -18,14 +21,12 @@
 #include <baselib/sislib.h>
 #include <baselib/sobjlib.h>
 #include <baselib/tobj.h>
-#include <melee/lb/lbarchive.h>
 #include <melee/gm/gmhowto.h>
 #include <melee/gm/gmmain_lib.h>
+#include <melee/lb/lbarchive.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbmthp.h>
 #include <melee/mn/mnmain.h>
-
-#include "mn/inlines.h"
 
 static void* mnGallery_804D6C88;
 static void* mnGallery_804D6C8C;
@@ -83,8 +84,8 @@ void mnGallery_80258A08(HSD_GObj* gobj, u16 width, u16 height, u32 priority)
     eye = mnGallery_803B8538;
     interest = mnGallery_803B8544;
     far = mnGallery_804DC364;
-    bottom = (f32)(s32)-(s32)height;
-    right = (f32)width;
+    bottom = (f32) (s32) - (s32) height;
+    right = (f32) width;
     top = zero;
     left = zero;
 
@@ -165,8 +166,8 @@ void mnGallery_80258BC4(void* arg)
         lbAudioAx_800236DC();
         lbAudioAx_80023F28(0x52);
         lbAudioAx_80024E50(true);
-        lbMthp_8001F410(mnGallery_803F0570, 0,
-                        (int) mnGallery_804D6C8C, 0x271000, 0);
+        lbMthp_8001F410(mnGallery_803F0570, 0, (int) mnGallery_804D6C8C,
+                        0x271000, 0);
         lbAudioAx_80024E50(false);
         break;
     case 1:
@@ -394,7 +395,7 @@ void fn_802590C4(HSD_GObj* gobj)
         }
     }
 
-    HSD_JObjReqAnimAll(jobj, (f32)data->frame);
+    HSD_JObjReqAnimAll(jobj, (f32) data->frame);
     HSD_JObjAnimAll(jobj);
 }
 #pragma pop
@@ -443,20 +444,25 @@ void mnGallery_802591BC(HSD_GObj* gobj)
     }
 
     if (inner->unk15 == index) {
-        HSD_MObjReqAnim(HSD_JObjGetChild(jobj)->u.dobj->mobj, mnGallery_804DC378);
+        HSD_MObjReqAnim(HSD_JObjGetChild(jobj)->u.dobj->mobj,
+                        mnGallery_804DC378);
         HSD_MObjAnim(HSD_JObjGetChild(jobj)->u.dobj->mobj);
-        HSD_MObjReqAnim(HSD_JObjGetChild(jobj)->u.dobj->next->mobj, mnGallery_804DC378);
+        HSD_MObjReqAnim(HSD_JObjGetChild(jobj)->u.dobj->next->mobj,
+                        mnGallery_804DC378);
         HSD_MObjAnim(HSD_JObjGetChild(jobj)->u.dobj->next->mobj);
     } else {
-        HSD_MObjReqAnim(HSD_JObjGetChild(jobj)->u.dobj->mobj, mnGallery_804DC360);
+        HSD_MObjReqAnim(HSD_JObjGetChild(jobj)->u.dobj->mobj,
+                        mnGallery_804DC360);
         HSD_MObjAnim(HSD_JObjGetChild(jobj)->u.dobj->mobj);
-        HSD_MObjReqAnim(HSD_JObjGetChild(jobj)->u.dobj->next->mobj, mnGallery_804DC360);
+        HSD_MObjReqAnim(HSD_JObjGetChild(jobj)->u.dobj->next->mobj,
+                        mnGallery_804DC360);
         HSD_MObjAnim(HSD_JObjGetChild(jobj)->u.dobj->next->mobj);
     }
 
-    HSD_TObjReqAnim(HSD_JObjGetChild(jobj)->u.dobj->mobj->tobj, (f32)index);
+    HSD_TObjReqAnim(HSD_JObjGetChild(jobj)->u.dobj->mobj->tobj, (f32) index);
     HSD_TObjAnim(HSD_JObjGetChild(jobj)->u.dobj->mobj->tobj);
-    HSD_TObjReqAnim(HSD_JObjGetChild(jobj)->u.dobj->next->mobj->tobj, (f32)index);
+    HSD_TObjReqAnim(HSD_JObjGetChild(jobj)->u.dobj->next->mobj->tobj,
+                    (f32) index);
     HSD_TObjAnim(HSD_JObjGetChild(jobj)->u.dobj->next->mobj->tobj);
 }
 
@@ -538,7 +544,7 @@ void mnGallery_8025963C(void)
     }
     mnGallery_80259604(data);
     GObj_InitUserData(gobj, 0, HSD_Free, data);
-    proc = HSD_GObjProc_8038FD54(gobj, fn_802590C4, 0);
+    proc = HSD_GObj_SetupProc(gobj, fn_802590C4, 0);
     proc->flags_3 = HSD_GObj_804D783C;
 
     arr = mnGallery_804A0BB0;
@@ -560,7 +566,7 @@ void mnGallery_8025963C(void)
         child_data->parent_gobj = gobj;
         child_data->index = i;
         GObj_InitUserData(child_gobj, 0, HSD_Free, child_data);
-        proc = HSD_GObjProc_8038FD54(child_gobj, mnGallery_802591BC, 0);
+        proc = HSD_GObj_SetupProc(child_gobj, mnGallery_802591BC, 0);
         proc->flags_3 = HSD_GObj_804D783C;
         mnGallery_802591BC(child_gobj);
     }
@@ -597,24 +603,19 @@ void mnGallery_80259868(void)
     mn_804A04F0.hovered_selection = 0;
     archive = mn_804D6BB8;
 
-    lbArchive_LoadSections(archive, arr,
-        base + 0x60,
-        arr + 1, base + 0x78,
-        arr + 2, base + 0x94,
-        arr + 3, base + 0xB4,
-        arr + 4, base + 0xD8,
-        arr + 5, base + 0xF4,
-        new_var, base + 0x114,
-        arr + 7, base + 0x138,
-        0);
+    lbArchive_LoadSections(archive, arr, base + 0x60, arr + 1, base + 0x78,
+                           arr + 2, base + 0x94, arr + 3, base + 0xB4, arr + 4,
+                           base + 0xD8, arr + 5, base + 0xF4, new_var,
+                           base + 0x114, arr + 7, base + 0x138, 0);
 
     gobj = GObj_Create(0, 1, 0x80);
-    proc = HSD_GObjProc_8038FD54(gobj, (HSD_GObjEvent) fn_80258ED0, 0);
+    proc = HSD_GObj_SetupProc(gobj, (HSD_GObjEvent) fn_80258ED0, 0);
     proc->flags_3 = HSD_GObj_804D783C;
     mnGallery_8025963C();
 
     inner = ((HSD_GObj*) mnGallery_804D6C88)->user_data;
-    text = HSD_SisLib_803A5ACC(0, 1, -9.5F, 9.1F, 17.0F, 364.68332F, 38.38772F);
+    text =
+        HSD_SisLib_803A5ACC(0, 1, -9.5F, 9.1F, 17.0F, 364.68332F, 38.38772F);
     text->font_size.x = 0.0521F;
     text->font_size.y = 0.0521F;
     HSD_SisLib_803A6368(text, 0xC7);

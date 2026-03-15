@@ -247,7 +247,7 @@ Ground_GObj* grVenom_80203EAC(int gobj_id)
             callbacks->callback0(gobj);
         }
         if (callbacks->callback2 != NULL) {
-            HSD_GObjProc_8038FD54(gobj, callbacks->callback2, 4);
+            HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
         }
     } else {
         OSReport(&base->x1B8_file[0], &base->x1DC_func[0], 0x23B, gobj_id);

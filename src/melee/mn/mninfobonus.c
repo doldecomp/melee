@@ -306,8 +306,7 @@ inline void mnInfoBonus_80252F8C_inline0(struct mnInfoBonus_804A09B0_t* o)
         mnInfoBonus_inline_GetJObjNext(mnInfoBonus_inline_GetJObjChild(jobj)),
         JOBJ_HIDDEN);
     HSD_JObjSetFlags(mnInfoBonus_inline_GetJObjChild(jobj), JOBJ_HIDDEN);
-    mnInfoBonus_inline_SetGObjFlag(
-        HSD_GObjProc_8038FD54(gobj, fn_80252E4C, 0));
+    mnInfoBonus_inline_SetGObjFlag(HSD_GObj_SetupProc(gobj, fn_80252E4C, 0));
 }
 
 void mnInfoBonus_80252F8C(void)
@@ -331,7 +330,7 @@ void mnInfoBonus_80252F8C(void)
         "MenMainConBo_Top_matanim_joint", &o->x50.shapeanim_joint,
         "MenMainConBo_Top_shapeanim_joint", 0);
     mnInfoBonus_inline_SetGObjFlag(
-        HSD_GObjProc_8038FD54(GObj_Create(0U, 1U, 0x80U), fn_80252C50, 0U));
+        HSD_GObj_SetupProc(GObj_Create(0U, 1U, 0x80U), fn_80252C50, 0U));
 
     mnInfoBonus_80252F8C_inline0(o);
 

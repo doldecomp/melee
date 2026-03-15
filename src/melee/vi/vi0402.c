@@ -46,7 +46,7 @@ void un_8031D708(void)
         gm_8016895C(jobj, un_804D6F68->models[i], 0);
         HSD_JObjReqAnimAll(jobj, 0.0f);
         HSD_JObjAnimAll(jobj);
-        HSD_GObjProc_8038FD54(gobj, un_8031D6E4, 0x17);
+        HSD_GObj_SetupProc(gobj, un_8031D6E4, 0x17);
     }
 
     lbAudioAx_80026F2C(0x18);
@@ -96,7 +96,7 @@ void un_8031D858_OnEnter(void* arg0)
     HSD_CObjAddAnim(cobj, un_804D6F68->cameras[0].anims[0]);
     HSD_CObjReqAnim(cobj, 0.0f);
     HSD_CObjAnim(cobj);
-    HSD_GObjProc_8038FD54(cam_gobj, vi_8031D80C, 0);
+    HSD_GObj_SetupProc(cam_gobj, vi_8031D80C, 0);
 
     un_8031D708();
     vi_8031C9B4(0x22, 0);

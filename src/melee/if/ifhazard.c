@@ -70,7 +70,7 @@ void un_802FD708(DynamicModelDesc* desc, int arg1)
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
     GObj_SetupGXLink(gobj, fn_802FD6CC, 11, 0);
     gm_8016895C(jobj, desc, 0);
-    HSD_GObjProc_8038FD54(gobj, fn_802FD680, 17);
+    HSD_GObj_SetupProc(gobj, fn_802FD680, 17);
     un_804D6D88 = 0;
     un_804D6D8C = 0;
     un_804D6D80 = gobj;

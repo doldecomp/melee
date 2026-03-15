@@ -92,7 +92,7 @@ void un_803205F4(void)
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0xB, 0);
     gm_8016895C(jobj, un_804D7010->models[1], 0);
     HSD_JObjReqAnimAll(jobj, 251.0f);
-    HSD_GObjProc_8038FD54(gobj, mn_8022EAE0, 0);
+    HSD_GObj_SetupProc(gobj, mn_8022EAE0, 0);
 
     Player_80036E20(0x1D, un_804D701C, 8);
     Player_SetPlayerCharacter(1, 0x1D);
@@ -144,10 +144,10 @@ void un_803207C4(void)
             HSD_JObjReqAnimAll(jobj, 0.0f);
             HSD_JObjAnimAll(jobj);
             if (i == 0) {
-                HSD_GObjProc_8038FD54(gobj, un_8032074C, 0);
+                HSD_GObj_SetupProc(gobj, un_8032074C, 0);
                 lb_80011E24(jobj, &un_804D7024, 2, -1);
             } else {
-                HSD_GObjProc_8038FD54(gobj, mn_8022EAE0, 0);
+                HSD_GObj_SetupProc(gobj, mn_8022EAE0, 0);
             }
         }
         i++;

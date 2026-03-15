@@ -44,7 +44,9 @@
     HSD_GObj* xC;
     char x10[12];
     char x1C[20];
-} un_803F9E08 = { {0}, 0, 0, 0, 0, 0, 0, "IfCoGet.dat", "ScInfCgt_scene_data" };
+} un_803F9E08 = {
+    { 0 }, 0, 0, 0, 0, 0, 0, "IfCoGet.dat", "ScInfCgt_scene_data"
+};
 /* 3F9E60 */ static HSD_CObjDesc un_803F9E60 = { 0 };
 /* 3F9ED4 */ static HSD_LightDesc un_803F9ED4 = { 0 };
 
@@ -104,7 +106,8 @@ void un_802FEFAC(void)
     HSD_GObj* gobj_ui;
     HSD_JObj* jobj_ui;
     gobj_camera = GObj_Create(HSD_GOBJ_CLASS_CAMERA, 21, 0);
-    HSD_GObjObject_80390A70(gobj_camera, HSD_GObj_804D784B,
+    HSD_GObjObject_80390A70(
+        gobj_camera, HSD_GObj_804D784B,
         (0, HSD_CObjLoadDesc(un_804D6DA4->cameras[0].desc)));
     GObj_SetupGXLinkMax(gobj_camera, HSD_GObj_803910D8, 9);
     gobj_camera->gxlink_prios = 0x8400;
@@ -116,7 +119,7 @@ void un_802FEFAC(void)
     jobj_ui = HSD_JObjLoadJoint(un_804D6DA4->models[0]->joint);
     HSD_GObjObject_80390A70(gobj_ui, HSD_GObj_804D7849, jobj_ui);
     GObj_SetupGXLink(gobj_ui, HSD_GObj_JObjCallback, 15, 0);
-    HSD_GObjProc_8038FD54(gobj_ui, fn_802FED14, 17);
+    HSD_GObj_SetupProc(gobj_ui, fn_802FED14, 17);
     gm_8016895C(jobj_ui, un_804D6DA4->models[0], 0);
     HSD_JObjSetFlagsAll(jobj_ui, 0x10);
     HSD_JObjReqAnimAll(jobj_ui, 0.0);
@@ -151,8 +154,8 @@ void un_802FF1B4(void)
 {
     un_803F9E08.x0.b0 = 1;
     un_803F9E08.x0.b1 = 0;
-    un_804D6DA0 = lbArchive_80016DBC(un_803F9E08.x10, &un_804D6DA4,
-                                     un_803F9E08.x1C, 0);
+    un_804D6DA0 =
+        lbArchive_80016DBC(un_803F9E08.x10, &un_804D6DA4, un_803F9E08.x1C, 0);
     un_802FEFAC();
 }
 
@@ -167,11 +170,11 @@ void fn_802FF218(HSD_GObj* arg0)
         }
     }
     y = -1;
-    _done:
+_done:
     if (y >= 0) {
         if (un_804A1F58[y].x0 == 1) {
-            HSD_SisLib_803A70A0(un_804A1F58[y].x8.x4,
-                                un_804A1F58[y].x8.x8, "");
+            HSD_SisLib_803A70A0(un_804A1F58[y].x8.x4, un_804A1F58[y].x8.x8,
+                                "");
         } else {
             int s;
             gm_8016B774();
@@ -180,8 +183,7 @@ void fn_802FF218(HSD_GObj* arg0)
                 s = 9999;
             }
             if (un_804A1F58[y].x0 != s) {
-                HSD_SisLib_803A70A0(un_804A1F58[y].x8.x4,
-                                    un_804A1F58[y].x8.x8,
+                HSD_SisLib_803A70A0(un_804A1F58[y].x8.x4, un_804A1F58[y].x8.x8,
                                     "%d", s);
                 un_804A1F58[y].x0 = s;
             }
@@ -202,7 +204,8 @@ void un_802FF364(int slot)
     thing = &base[slot].x8;
     ifAll = ifAll_802F3424(slot);
     gobj = thing->x0;
-    if ((thing && thing) && thing){}
+    if ((thing && thing) && thing) {
+    }
     if (gobj) {
         HSD_GObjPLink_80390228(gobj);
     }
@@ -222,13 +225,14 @@ void un_802FF364(int slot)
     HSD_SisLib_803A7548(thing->x4, thing->x8, 0.06, 0.06);
     thing->x4->render_callback = fn_802FF360;
     thing->x0 = GObj_Create(HSD_GOBJ_CLASS_UI, 15, 0);
-    HSD_GObjProc_8038FD54(thing->x0, fn_802FF218, 17);
+    HSD_GObj_SetupProc(thing->x0, fn_802FF218, 17);
 }
 
 void un_802FF498(void)
 {
     PAD_STACK(8);
-    memzero(un_804A1F58, 0x80); // TODO: change to sizeof(un_802FF498) when size fixed
+    memzero(un_804A1F58,
+            0x80); // TODO: change to sizeof(un_802FF498) when size fixed
     un_804A1F58->x0 =
         HSD_SisLib_803A611C(2, ifAll_802F3404(), 14, 15, 0, 11, 0, 19);
 }

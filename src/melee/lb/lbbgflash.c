@@ -197,7 +197,7 @@ void lbBgFlash_800209F4(void)
     flash->x40 = GObj_Create(0x15, 0x16, 2);
     gobj2_slot = &flash->x40;
     GObj_SetupGXLink(*gobj2_slot, (GObj_RenderFunc) fn_8001FEC4, 0x10, 0xa);
-    HSD_GObjProc_8038FD54(*gobj2_slot, (HSD_GObjEvent) fn_800204C8, 0);
+    HSD_GObj_SetupProc(*gobj2_slot, (HSD_GObjEvent) fn_800204C8, 0);
     lbl_80433658.state.active = 1;
     lbl_80433658.state.mode = 0;
 }

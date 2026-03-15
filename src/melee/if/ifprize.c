@@ -144,7 +144,7 @@ void un_802FE6A8(void)
     jobj_ui = HSD_JObjLoadJoint(un_804D6D9C->models[0]->joint);
     HSD_GObjObject_80390A70(gobj_ui, HSD_GObj_804D7849, jobj_ui);
     GObj_SetupGXLink(gobj_ui, HSD_GObj_JObjCallback, 11, 0);
-    HSD_GObjProc_8038FD54(gobj_ui, fn_802FE470, 17);
+    HSD_GObj_SetupProc(gobj_ui, fn_802FE470, 17);
     gm_8016895C(jobj_ui, un_804D6D9C->models[0], 0);
     HSD_JObjReqAnimAll(jobj_ui, 0.0);
     HSD_JObjAnimAll(jobj_ui);

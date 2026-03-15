@@ -195,7 +195,7 @@ HSD_GObj* grBigBlue_801E59F8(s32 id)
             cbs->callback0(gobj);
         }
         if (cbs->callback2 != NULL) {
-            HSD_GObjProc_8038FD54(gobj, cbs->callback2, 4U);
+            HSD_GObj_SetupProc(gobj, cbs->callback2, 4U);
         }
     } else {
         OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grbigblue.c", 0x17E,

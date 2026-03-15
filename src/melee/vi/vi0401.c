@@ -168,7 +168,7 @@ void un_8031D288_OnEnter(void* data)
     HSD_CObjAddAnim(cobj, un_804D6F48->cameras->anims[0]);
     HSD_CObjReqAnim(cobj, 0.0f);
     HSD_CObjAnim(cobj);
-    HSD_GObjProc_8038FD54(cam_gobj, vi0401_8031D23C, 0);
+    HSD_GObj_SetupProc(cam_gobj, vi0401_8031D23C, 0);
 
     for (i = 0; un_804D6F48->models[i] != NULL; i++) {
         gobj = GObj_Create(0xE, 0xF, 0);
@@ -178,7 +178,7 @@ void un_8031D288_OnEnter(void* data)
         gm_8016895C(jobj, un_804D6F48->models[i], 0);
         HSD_JObjReqAnimAll(jobj, 0.0f);
         HSD_JObjAnimAll(jobj);
-        HSD_GObjProc_8038FD54(gobj, vi0401_8031D18C, 0x17);
+        HSD_GObj_SetupProc(gobj, vi0401_8031D18C, 0x17);
         if (i == 0) {
             lb_80011E24(jobj, (HSD_JObj**) &un_804D6F58, 1, -1);
         }
@@ -199,7 +199,7 @@ void un_8031D288_OnEnter(void* data)
         gm_8016895C(jobj, un_804D6F4C->models[i], 0);
         HSD_JObjReqAnimAll(jobj, 0.0f);
         HSD_JObjAnimAll(jobj);
-        HSD_GObjProc_8038FD54(gobj, fn_8031D168, 0x17);
+        HSD_GObj_SetupProc(gobj, fn_8031D168, 0x17);
     }
     un_8031D030(desc->p1_char_index, desc->p1_costume_index);
     vi_8031C9B4(1, 0);

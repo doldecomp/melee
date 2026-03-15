@@ -13,6 +13,9 @@
 #include "gr/inlines.h"
 #include "lb/lb_00B0.h"
 
+#include <baselib/gobj.h>
+#include <baselib/gobjgxlink.h>
+#include <baselib/gobjproc.h>
 #include <baselib/psstructs.h>
 #include <baselib/random.h>
 
@@ -96,7 +99,7 @@ HSD_GObj* grKinokoRoute_8020754C(int gobj_id)
             callbacks->callback0(gobj);
         }
         if (callbacks->callback2 != NULL) {
-            HSD_GObjProc_8038FD54(gobj, callbacks->callback2, 4);
+            HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
         }
     } else {
         OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 249, gobj_id);

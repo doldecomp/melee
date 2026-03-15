@@ -154,6 +154,6 @@ void mnStageSw_80237410(void)
     gobj = mnStageSw_80236CBC(1);
     HSD_GObj_80390CD4(gobj);
     gobj = GObj_Create(0, 1, 0x80);
-    proc = HSD_GObjProc_8038FD54(gobj, fn_80235F80, 0);
+    proc = HSD_GObj_SetupProc(gobj, fn_80235F80, 0);
     proc->flags_3 = HSD_GObj_804D783C;
 }

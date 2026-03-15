@@ -115,7 +115,7 @@ HSD_GObj* grTFalco_8022089C(int id)
         }
 
         if (cb->callback2 != NULL) {
-            HSD_GObjProc_8038FD54(gobj, cb->callback2, 4);
+            HSD_GObj_SetupProc(gobj, cb->callback2, 4);
         }
 
     } else {

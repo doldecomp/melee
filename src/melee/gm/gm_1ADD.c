@@ -350,7 +350,7 @@ void gm_801AEBB0(void)
     gobj->gxlink_prios = 0x4000;
 
     gm_804D686C = HSD_SisLib_803A611C(3, gobj, 9, 13, 0, 14, 0, 18);
-    HSD_GObjProc_8038FD54(GObj_Create(15, 17, 0), fn_801AE948, 0);
+    HSD_GObj_SetupProc(GObj_Create(15, 17, 0), fn_801AE948, 0);
 }
 
 HSD_GObj* gm_801AECC4(int model_idx)

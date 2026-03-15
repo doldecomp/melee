@@ -21,7 +21,7 @@ struct HSD_GObjProc {
 /* 38FAA8 */ void HSD_GObjProc_8038FAA8(HSD_GObjProc* gproc);
 /* 38FC18 */ void HSD_GObjProc_8038FC18(HSD_GObjProc* gproc);
 /* 38FCE4 */ void HSD_GObjProc_8038FCE4(HSD_GObjProc* gproc);
-/* 38FD54 */ HSD_GObjProc* HSD_GObjProc_8038FD54(HSD_GObj*, HSD_GObjEvent, u8);
+/* 38FD54 */ HSD_GObjProc* HSD_GObj_SetupProc(HSD_GObj*, HSD_GObjEvent, u8);
 /* 38FE24 */ void HSD_GObjProc_8038FE24(HSD_GObjProc* gproc);
 /* 38FED4 */ void HSD_GObjProc_8038FED4(HSD_GObj* gobj);
 

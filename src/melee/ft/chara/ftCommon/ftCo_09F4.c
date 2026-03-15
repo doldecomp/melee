@@ -50,7 +50,7 @@ void ftCo_8009F4A4(void)
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784A, lobj);
     GObj_SetupGXLink(gobj, ftCo_8009F54C, 4U, 0U);
     HSD_LObjReqAnimAll(lobj, 0.0F);
-    HSD_GObjProc_8038FD54(gobj, ftCo_8009F480, 1);
+    HSD_GObj_SetupProc(gobj, ftCo_8009F480, 1);
 }
 
 void ftCo_8009F54C(HSD_GObj* gobj, int code)

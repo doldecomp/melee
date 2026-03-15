@@ -363,9 +363,9 @@ HSD_GObj* grIceMt_801F71E8(int gobj_id)
         }
 
         if (grIm_803E4718->callback2 != NULL) {
-            HSD_GObjProc_8038FD54(gobj, grIm_803E4718->callback2, 4);
+            HSD_GObj_SetupProc(gobj, grIm_803E4718->callback2, 4);
         }
-        // HSD_GObjProc_8038FD54(gobj,gobj_id,4);
+        // HSD_GObj_SetupProc(gobj,gobj_id,4);
         // if(callbacks) {
         //	callbacks->callback0(gobj);
         // }

@@ -211,7 +211,7 @@ static Ground_GObj* grLast_8021A7F4(int id)
             cb->callback0(gobj);
         }
         if (cb->callback2 != NULL) {
-            HSD_GObjProc_8038FD54(gobj, cb->callback2, 4);
+            HSD_GObj_SetupProc(gobj, cb->callback2, 4);
         }
     } else {
         OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 255, id);
