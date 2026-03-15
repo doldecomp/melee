@@ -7,6 +7,7 @@
 #include "cm/camera.h"
 #include "ft/ftdevice.h"
 #include "ft/ftlib.h"
+#include "gr/grdisplay.h"
 #include "gr/grlib.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
@@ -19,6 +20,17 @@ static struct {
     int x0;
     int x4;
 }* grNKr_804D6A50;
+
+StageCallbacks grNKr_803E57F0[4] = {
+    { grKinokoRoute_80207634, grKinokoRoute_802078E8, grKinokoRoute_802078F0,
+      grKinokoRoute_80207A94, 0 },
+    { grKinokoRoute_80207ADC, grKinokoRoute_80207B20, grKinokoRoute_80207B28,
+      grKinokoRoute_80207B2C, 0 },
+    { grKinokoRoute_80207A98, grKinokoRoute_80207ACC, grKinokoRoute_80207AD4,
+      grKinokoRoute_80207AD8, 0 },
+    { grKinokoRoute_80207B5C, grKinokoRoute_80207C80, grKinokoRoute_80207C88,
+      grKinokoRoute_80208368, 0xC0000000 },
+};
 
 void grKinokoRoute_8020741C(bool arg) {}
 
@@ -65,7 +77,33 @@ bool grKinokoRoute_80207544(void)
     return false;
 }
 
-/// #grKinokoRoute_8020754C
+HSD_GObj* grKinokoRoute_8020754C(int gobj_id)
+{
+    HSD_GObj* gobj;
+    StageCallbacks* callbacks = &grNKr_803E57F0[gobj_id];
+
+    gobj = Ground_801C14D0(gobj_id);
+
+    if (gobj != NULL) {
+        Ground* gp = gobj->user_data;
+        gp->x8_callback = NULL;
+        gp->xC_callback = NULL;
+        GObj_SetupGXLink(gobj, grDisplay_801C5DB0, 3, 0);
+        if (callbacks->callback3 != NULL) {
+            gp->x1C_callback = callbacks->callback3;
+        }
+        if (callbacks->callback0 != NULL) {
+            callbacks->callback0(gobj);
+        }
+        if (callbacks->callback2 != NULL) {
+            HSD_GObjProc_8038FD54(gobj, callbacks->callback2, 4);
+        }
+    } else {
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 249, gobj_id);
+    }
+
+    return gobj;
+}
 
 /// #grKinokoRoute_80207634
 
