@@ -1,6 +1,7 @@
 #include "tyfigupon.h"
 
 #include "inlines.h"
+#include "math.h"
 #include "toy.h"
 #include "tylist.h"
 #include "types.h"
@@ -160,6 +161,7 @@ void tyFigupon_80314BE4(HSD_GObj* gobj, int unused)
 
 void tyFigupon_80314C5C(HSD_GObj* gobj)
 {
+    // 3-way regswap (r29-r30-r31) to 100%
     Toy* tp1 = GET_TOY(gobj);
     struct un_804D6EF4_t* temp_r29 = un_804D6EF4;
     HSD_JObj* jobj = GET_JOBJ(gobj);
@@ -171,10 +173,10 @@ void tyFigupon_80314C5C(HSD_GObj* gobj)
         HSD_JObjAnimAll(jobj);
         if (tp1->x8-- != 0) {
             tp1->translate.y += tp1->offset.y;
-            if (HSD_JObjGetTranslationX(jobj) > HSD_JObjGetTranslationX(temp_r29->jobjs[3])) {
+            if (HSD_JObjGetTranslationX(jobj) > HSD_JObjGetTranslationX(temp_r29->jobjs[2])) {
                 HSD_JObjAddTranslationX(jobj, tp1->translate.x);
             }
-            if (HSD_JObjGetTranslationZ(jobj) > HSD_JObjGetTranslationZ(temp_r29->jobjs[3])) {
+            if (HSD_JObjGetTranslationZ(jobj) > HSD_JObjGetTranslationZ(temp_r29->jobjs[2])) {
                 HSD_JObjAddTranslationZ(jobj, tp1->translate.z);
             }
             HSD_JObjAddTranslationY(jobj, tp1->translate.y);
@@ -191,34 +193,21 @@ void tyFigupon_80314C5C(HSD_GObj* gobj)
         HSD_JObjReqAnimAll(jobj, HSD_Randi(15));
         HSD_AObjSetRate(jobj->child->aobj, 1.0f);
         {
-            float temp_f30 = HSD_JObjGetTranslationX(temp_r29->jobjs[2]);
-            float temp_f29 = HSD_JObjGetTranslationY(temp_r29->jobjs[2]);
-            float temp_f31 = HSD_JObjGetTranslationZ(temp_r29->jobjs[2]);
-            float temp_f28 = HSD_JObjGetTranslationX(temp_r29->jobjs[3]);
-            float temp_f27 = HSD_JObjGetTranslationY(temp_r29->jobjs[3]);
-            float temp_f26 = HSD_JObjGetTranslationZ(temp_r29->jobjs[3]);
+            float temp_f30 = HSD_JObjGetTranslationX(temp_r29->jobjs[1]);
+            float temp_f29 = HSD_JObjGetTranslationY(temp_r29->jobjs[1]);
+            float temp_f31 = HSD_JObjGetTranslationZ(temp_r29->jobjs[1]);
+            float temp_f28 = HSD_JObjGetTranslationX(temp_r29->jobjs[2]);
+            float temp_f27 = HSD_JObjGetTranslationY(temp_r29->jobjs[2]);
+            float temp_f26 = HSD_JObjGetTranslationZ(temp_r29->jobjs[2]);
             temp_f30 = (3.0f * HSD_Randf()) + temp_f30;
             temp_f29 = (3.0f * HSD_Randf()) + temp_f29;
             {
-                float var_f3 = temp_f28 - temp_f30;
-                float var_f2;
-                float var_f3_2;
-                if (var_f3 < 0.0f) {
-                    var_f3 = -var_f3;
-                }
-                var_f2 = temp_f26 - temp_f31;
+                float var_f3 = ABS(temp_f28 - temp_f30);
                 tp->translate.x = -0.74f * (var_f3 / 30.0f);
-                if (var_f2 < 0.0f) {
-                    var_f2 = -var_f2;
-                }
-                var_f3_2 = temp_f27 - temp_f29;
-                tp->translate.z = -0.72f * (var_f2 / 30.0f);
+                tp->translate.z = -0.72f * (ABS(temp_f26 - temp_f31) / 30.0f);
                 tp->translate.y = 0.4f;
                 tp->offset.y = -0.026666667f;
-                if (var_f3_2 < 0.0f) {
-                    var_f3_2 = -var_f3_2;
-                }
-                tp->x8 = (f32)(s32)var_f3_2 + 35.0f;
+                tp->x8 = (s32) ABS(temp_f27 - temp_f29) + 35.0f;
             }
             temp_r29->x56 = tp->x8;
             HSD_JObjSetTranslateX(jobj, temp_f30);
