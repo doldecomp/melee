@@ -3,6 +3,6 @@
 
 #include <baselib/forward.h>
 
-void* ef_80061D70(s32, HSD_GObj*, va_list);
+void* efSync_SpawnSpecial(s32, HSD_GObj*, va_list);
 
 #endif
