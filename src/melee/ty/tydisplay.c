@@ -1484,6 +1484,7 @@ void un_8031B1FC(void)
     HSD_Joint* joint;
     HSD_JObj* jobj;
 
+    PAD_STACK(0x18);
 
     if (ptr->archive == NULL) {
         OSReport("*** BG data aren't being loaded!\n");
