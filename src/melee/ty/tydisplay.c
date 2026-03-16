@@ -86,6 +86,12 @@ typedef struct TyDspEntry {
     /* 0x0C */ f32 x0C;
 } TyDspEntry;
 
+typedef struct TyDspSceneGfx {
+    /* 0x00 */ HSD_GObj* x00;
+    /* 0x04 */ HSD_GObj* x04;
+    /* 0x08 */ HSD_GObj* x08;
+} TyDspSceneGfx;
+
 /// #un_803181BC
 
 void un_803182D4_OnFrame(void)
@@ -1527,7 +1533,7 @@ static f32 un_804DE01C = 0.6f;
 void un_8031B328(void)
 {
     TyDspBgData* ptr = un_804D6F1C;
-    u8* scene = un_804D6ED4;
+    TyDspSceneGfx* scene = (TyDspSceneGfx*) un_804D6ED4;
     HSD_LObj* lobj;
     void* lightData;
     HSD_FogDesc* fogDesc;
@@ -1547,11 +1553,11 @@ void un_8031B328(void)
     lightData = HSD_ArchiveGetPublicAddress(ptr->archive,
                                             "ScMenDisplay_scene_lights");
     if (lightData != NULL) {
-        *(HSD_GObj**)(scene + 0x00) = GObj_Create(2, 3, 0);
+        scene->x00 = GObj_Create(2, 3, 0);
         lobj = un_80306EEC(lightData, 0);
-        HSD_GObjObject_80390A70(*(HSD_GObj**)(scene + 0x00),
+        HSD_GObjObject_80390A70(scene->x00,
                                 HSD_GObj_804D784A, lobj);
-        GObj_SetupGXLink(*(HSD_GObj**)(scene + 0x00),
+        GObj_SetupGXLink(scene->x00,
                          HSD_GObj_LObjCallback, 0x34, 0);
     }
 
@@ -1562,11 +1568,11 @@ void un_8031B328(void)
     fogDesc = HSD_ArchiveGetPublicAddress(ptr->archive,
                                           "ScMenDisplay_fog");
     if (fogDesc != NULL) {
-        *(HSD_GObj**)(scene + 0x08) = GObj_Create(3, 4, 0);
-        HSD_GObjObject_80390A70(*(HSD_GObj**)(scene + 0x08),
+        scene->x08 = GObj_Create(3, 4, 0);
+        HSD_GObjObject_80390A70(scene->x08,
                                 HSD_GObj_804D7848,
                                 HSD_FogLoadDesc(fogDesc));
-        GObj_SetupGXLink(*(HSD_GObj**)(scene + 0x08),
+        GObj_SetupGXLink(scene->x08,
                          un_80306930, 0x35, 0);
     }
 }
