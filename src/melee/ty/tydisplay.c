@@ -50,10 +50,14 @@ extern char un_804A2D98[0x38];
 typedef struct TyDspBgData {
     /* 0x00 */ HSD_GObj* gobj0;
     /* 0x04 */ HSD_GObj* gobj4;
-    /* 0x08 */ u8 pad8[4];
+    /* 0x08 */ u8 pad_08[4];
     /* 0x0C */ HSD_JObj* jobj;
-    /* 0x10 */ u8 pad10[0x3C];
+    /* 0x10 */ u8 pad_10[0x3C];
     /* 0x4C */ HSD_Archive* archive;
+    /* 0x50 */ HSD_Archive* archives[43];
+    /* 0xFC */ u8 pad_FC[8];
+    /* 0x104 */ s16 x104;
+    /* 0x106 */ u8 pad_106[2];
 } TyDspBgData;
 
 extern TyDspBgData* un_804D6F1C;
@@ -2045,7 +2049,7 @@ HSD_GObj* un_8031BC54(s32 arg0)
     char buf[44];
     TyDspArchNames jobj_names;
     TyDspArchNames matanim_names;
-    u8* entry;
+    TyDspEntry* entry;
     HSD_GObj* gobj;
     HSD_JObj* root;
     HSD_JObj* child;
@@ -2053,13 +2057,13 @@ HSD_GObj* un_8031BC54(s32 arg0)
     u8 c;
     TyDspBgData* data = un_804D6F1C;
 
-    entry = (u8*) un_8031B9DC(arg0);
+    entry = (TyDspEntry*) un_8031B9DC(arg0);
     gobj = GObj_Create(6, 7, 0);
     root = HSD_JObjAlloc();
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, root);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0x3C, 0);
 
-    c = entry[4];
+    c = entry->x04;
     jobj_names = *(TyDspArchNames*) un_803B8988.jobj_names;
     cat = c;
     if ((s8) c == -1) {
@@ -2067,11 +2071,11 @@ HSD_GObj* un_8031BC54(s32 arg0)
     }
     child = HSD_JObjLoadJoint(
         HSD_ArchiveGetPublicAddress(
-            *(HSD_Archive**) ((u8*) data + c * 4 + 0x50),
+            data->archives[c],
             jobj_names.entries[(s8) cat]));
     HSD_JObjAddChild(root, child);
 
-    c = entry[4];
+    c = entry->x04;
     matanim_names = un_803B8A34;
     cat = c;
     if ((s8) c == -1) {
@@ -2080,23 +2084,23 @@ HSD_GObj* un_8031BC54(s32 arg0)
     un_80306A48(child, NULL,
                 (char*) matanim_names.entries[(s8) cat],
                 NULL,
-                *(HSD_Archive**) ((u8*) data + c * 4 + 0x50),
-                (long) entry[5]);
+                data->archives[c],
+                (long) entry->x05);
     HSD_JObjRemoveAnimAll(child);
 
-    HSD_JObjSetTranslateX(child, *(f32*) (entry + 8));
-    HSD_JObjSetTranslateZ(child, *(f32*) (entry + 0xC));
+    HSD_JObjSetTranslateX(child, entry->x08);
+    HSD_JObjSetTranslateZ(child, entry->x0C);
 
     HSD_JObjAddChild(root, HSD_JObjLoadJoint(
         HSD_ArchiveGetPublicAddress(
-            *(HSD_Archive**) ((u8*) data + 0xF4),
+            data->archives[41],
             un_803FF01C)));
 
     if (un_804D6F24 != NULL) {
         DevText_Erase(un_804D6F24);
         DevText_SetCursorXY(un_804D6F24, 0, 0);
         sprintf(buf, un_803FF19C,
-                *(f32*) (entry + 8), *(f32*) (entry + 0xC));
+                entry->x08, entry->x0C);
         DevText_Print(un_804D6F24, buf);
         un_8031BF34(arg0);
     }
