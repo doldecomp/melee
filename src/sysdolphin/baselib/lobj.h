@@ -191,4 +191,10 @@ static inline HSD_LObj* HSD_LObjGetNext(HSD_LObj* lobj)
     }
 }
 
+static inline void HSD_LObjSetNext(HSD_LObj* lobj, HSD_LObj* next)
+{
+    HSD_ASSERT(0x136, lobj);
+    lobj->next = next;
+}
+
 #endif

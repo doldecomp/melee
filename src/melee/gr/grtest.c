@@ -15,6 +15,7 @@
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/jobj.h>
+#include <dolphin/os/OSError.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/gobjproc.h>
@@ -89,27 +90,16 @@ HSD_GObj* grTest_80207044(int gobj_id)
 {
     HSD_GObj* gobj;
     StageCallbacks* callbacks = &grTe_803E5708[gobj_id];
+
     gobj = Ground_GetStageGObj(gobj_id);
+
     if (gobj != NULL) {
-        Ground* gp = GET_GROUND(gobj);
-        gp->x8_callback = 0;
-        gp->xC_callback = 0;
-        GObj_SetupGXLink(gobj, grDisplay_801C5DB0, 3, 0);
-        if (callbacks->callback3 != NULL) {
-            gp->x1C_callback = callbacks->callback3;
-        }
-
-        if (callbacks->callback0 != NULL) {
-            callbacks->callback0(gobj);
-        }
-
-        if (callbacks->callback2 != NULL) {
-            HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
-        }
+        Ground_SetupStageCallbacks(gobj, callbacks);
     } else {
-        OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grtest.c", 209,
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 209,
                  gobj_id);
     }
+
     return gobj;
 }
 

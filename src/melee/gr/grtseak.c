@@ -109,28 +109,17 @@ bool grTSeak_80223900(void)
 HSD_GObj* grTSeak_80223908(s32 arg0)
 {
     HSD_GObj* gobj;
-    StageCallbacks* cb;
-    Ground* gp;
+    StageCallbacks* callbacks = &grTSk_803E94B8[arg0];
 
-    cb = &grTSk_803E94B8[arg0];
     gobj = Ground_GetStageGObj(arg0);
+
     if (gobj != NULL) {
-        gp = gobj->user_data;
-        gp->x8_callback = 0;
-        gp->xC_callback = 0;
-        GObj_SetupGXLink(gobj, &grDisplay_801C5DB0, 3, 0);
-        if (cb->callback3 != 0U) {
-            gp->x1C_callback = cb->callback3;
-        }
-        if (cb->callback0 != NULL) {
-            cb->callback0(gobj);
-        }
-        if (cb->callback2 != 0U) {
-            HSD_GObj_SetupProc(gobj, cb->callback2, 4);
-        }
+        Ground_SetupStageCallbacks(gobj, callbacks);
     } else {
-        OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grtseak.c", 0xC3, arg0);
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 0xC3,
+                 arg0);
     }
+
     return gobj;
 }
 

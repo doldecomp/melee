@@ -12,7 +12,7 @@
 /* 218330 */ void grPushOn_80218330(void);
 /* 218378 */ void grPushOn_80218378(void);
 /* 2183DC */ bool grPushOn_802183DC(void);
-/* 2183E4 */ void grPushOn_802183E4(int);
+/* 2183E4 */ HSD_GObj* grPushOn_802183E4(int);
 /* 2184CC */ void grPushOn_802184CC(Ground_GObj*);
 /* 218590 */ bool grPushOn_80218590(Ground_GObj*);
 /* 218598 */ void grPushOn_80218598(Ground_GObj*);
@@ -26,10 +26,10 @@
 /* 218880 */ bool grPushOn_80218880(Ground_GObj*);
 /* 218888 */ void grPushOn_80218888(Ground_GObj*);
 /* 218ED0 */ void grPushOn_80218ED0(Ground_GObj*);
-/* 218ED4 */ UNK_RET grPushOn_80218ED4(UNK_PARAMS);
-/* 218FC0 */ UNK_RET grPushOn_80218FC0(UNK_PARAMS);
-/* 2190A0 */ void fn_802190A0(Ground*, s32, CollData*, s32, mpLib_GroundEnum);
-/* 2190D0 */ UNK_RET grPushOn_802190D0(UNK_PARAMS);
+/* 218ED4 */ HSD_LObj* grPushOn_80218ED4(HSD_GObj*);
+/* 218FC0 */ HSD_LObj* grPushOn_80218FC0(HSD_GObj*);
+/* 2190A0 */ void fn_802190A0(Ground*, s32, CollData*, s32, mpLib_GroundEnum, f32);
+/* 2190D0 */ void grPushOn_802190D0(HSD_GObj*);
 /* 219204 */ void grPushOn_80219204(int arg0, int* out1, int* out2);
 /* 219230 */ int grPushOn_80219230(int);
 /* 2192A4 */ UNK_RET fn_802192A4(UNK_PARAMS);

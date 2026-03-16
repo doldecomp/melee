@@ -96,29 +96,17 @@ bool grTZelda_80223EC8(void)
 HSD_GObj* grTZelda_80223ED0(s32 arg0)
 {
     HSD_GObj* gobj;
-    StageCallbacks* cb;
-    Ground* gp;
+    StageCallbacks* callbacks = &grTZd_803E9638[arg0];
 
-    cb = &grTZd_803E9638[arg0];
     gobj = Ground_GetStageGObj(arg0);
+
     if (gobj != NULL) {
-        gp = gobj->user_data;
-        gp->x8_callback = 0;
-        gp->xC_callback = 0;
-        GObj_SetupGXLink(gobj, &grDisplay_801C5DB0, 3, 0);
-        if (cb->callback3 != 0U) {
-            gp->x1C_callback = cb->callback3;
-        }
-        if (cb->callback0 != NULL) {
-            cb->callback0(gobj);
-        }
-        if (cb->callback2 != 0U) {
-            HSD_GObj_SetupProc(gobj, cb->callback2, 4);
-        }
+        Ground_SetupStageCallbacks(gobj, callbacks);
     } else {
-        OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grtzelda.c", 0xC3,
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 0xC3,
                  arg0);
     }
+
     return gobj;
 }
 

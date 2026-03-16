@@ -100,7 +100,78 @@ bool grCorneria_801DD52C(void)
     return false;
 }
 
-/// #grCorneria_801DD534
+StageCallbacks grCn_803E1D8C[19] = {
+    { grCorneria_801DD620, grCorneria_801DD64C, grCorneria_801DD654,
+      grCorneria_801DD658, 0 },
+    { grCorneria_801DDAC4, grCorneria_801DDCE8, grCorneria_801DE024,
+      grCorneria_801DE4BC, 0 },
+    { grCorneria_801DE8E4, grCorneria_801DEC00, grCorneria_801DED50,
+      grCorneria_801DF8CC, 0 },
+    { grCorneria_801DD674, grCorneria_801DD9A0, grCorneria_801DD9A8,
+      grCorneria_801DDAC0, 0x80000000 },
+    { grCorneria_801E0140, grCorneria_801E01A0, grCorneria_801E01A8,
+      grCorneria_801E03C4, 0 },
+    { grCorneria_801E0DE4, grCorneria_801E0E0C, grCorneria_801E0E14,
+      grCorneria_801E0E3C, 0x20000000 },
+    { grCorneria_801DFBF0, grCorneria_801DFC1C, grCorneria_801DFC24,
+      grCorneria_801DFC28, 0 },
+    { grCorneria_801E0C3C, grCorneria_801E0D28, grCorneria_801E0D30,
+      grCorneria_801E0DE0, 0x40000000 },
+    { grCorneria_801DFC2C, grCorneria_801DFC90, grCorneria_801DFC98,
+      grCorneria_801DFEB4, 0 },
+    { grCorneria_801DFEB8, grCorneria_801DFF18, grCorneria_801DFF20,
+      grCorneria_801E013C, 0 },
+    { grCorneria_801DF8D0, grCorneria_801DFBC4, grCorneria_801DFBCC,
+      grCorneria_801DFBEC, 0 },
+    { grCorneria_801E1054, grCorneria_801E1058, grCorneria_801E1060,
+      grCorneria_801E12CC, 0 },
+    { grCorneria_801E0F30, grCorneria_801E0F64, grCorneria_801E0F6C,
+      grCorneria_801E1030, 0 },
+    { grCorneria_Arwing_801DE4C0, grCorneria_801DE560, grCorneria_801DE568,
+      grCorneria_801DE8E0, 0 },
+    { grCorneria_Arwing_801DE4C0, grCorneria_801DE560, grCorneria_801DE568,
+      grCorneria_801DE8E0, 0 },
+    { grCorneria_Arwing_801DE4C0, grCorneria_801DE560, grCorneria_801DE568,
+      grCorneria_801DE8E0, 0 },
+    { grCorneria_Arwing_801DE4C0, grCorneria_801DE560, grCorneria_801DE568,
+      grCorneria_801DE8E0, 0 },
+    { grCorneria_Arwing_801DE4C0, grCorneria_801DE560, grCorneria_801DE568,
+      grCorneria_801DE8E0, 0 },
+    { grCorneria_Arwing_801DE4C0, grCorneria_801DE560, grCorneria_801DE568,
+      grCorneria_801DE8E0, 0 },
+};
+
+#pragma push
+#pragma dont_inline on
+HSD_GObj* grCorneria_801DD534(int arg0)
+{
+    HSD_GObj* gobj;
+    StageCallbacks* callbacks = &grCn_803E1D8C[arg0];
+
+    gobj = Ground_GetStageGObj(arg0);
+
+    if (gobj != NULL) {
+        Ground* gp = gobj->user_data;
+        gp->x8_callback = NULL;
+        gp->xC_callback = NULL;
+        GObj_SetupGXLink(gobj, grDisplay_801C5DB0, 3, 0);
+        if (callbacks->callback3 != NULL) {
+            gp->x1C_callback = callbacks->callback3;
+        }
+        if (callbacks->callback0 != NULL) {
+            callbacks->callback0(gobj);
+        }
+        if (callbacks->callback2 != NULL) {
+            HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
+        }
+    } else {
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grcorneria.c", 0x26A,
+                 arg0);
+    }
+
+    return gobj;
+}
+#pragma pop
 
 void grCorneria_801DD620(Ground_GObj* gobj)
 {

@@ -15,6 +15,7 @@
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
+#include <dolphin/os/OSError.h>
 
 StageCallbacks grTGn_803E9880[] = {
     { grTGanon_8022486C, grTGanon_80224898, grTGanon_802248A0,
@@ -86,28 +87,14 @@ bool grTGanon_8022477C(void)
 HSD_GObj* grTGanon_80224784(int id)
 {
     HSD_GObj* gobj;
-    StageCallbacks* cb = &grTGn_803E9880[id];
+    StageCallbacks* callbacks = &grTGn_803E9880[id];
+
     gobj = Ground_GetStageGObj(id);
 
     if (gobj != NULL) {
-        Ground* gp = (Ground*) HSD_GObjGetUserData(gobj);
-        gp->x8_callback = NULL;
-        gp->xC_callback = NULL;
-        GObj_SetupGXLink(gobj, grDisplay_801C5DB0, 3, 0);
-
-        if (cb->callback3 != NULL) {
-            gp->x1C_callback = cb->callback3;
-        }
-
-        if (cb->callback0 != NULL) {
-            cb->callback0(gobj);
-        }
-
-        if (cb->callback2 != NULL) {
-            HSD_GObj_SetupProc(gobj, cb->callback2, 4);
-        }
+        Ground_SetupStageCallbacks(gobj, callbacks);
     } else {
-        OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grtganon.c", 201, id);
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 201, id);
     }
 
     return gobj;
