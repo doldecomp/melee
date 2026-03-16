@@ -3,8 +3,8 @@
 #include "gr/granime.h"
 #include "gr/grdisplay.h"
 #include "gr/ground.h"
-#include "gr/inlines.h"
 #include "gr/grzakogenerator.h"
+#include "gr/inlines.h"
 #include "gr/types.h"
 
 #include "lb/forward.h"
@@ -116,8 +116,7 @@ static HSD_GObj* grTMars_80221F98(int id)
     if (gobj != NULL) {
         Ground_SetupStageCallbacks(gobj, callbacks);
     } else {
-        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 0xC3,
-                 id);
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 0xC3, id);
     }
 
     return gobj;

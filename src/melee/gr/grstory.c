@@ -2,6 +2,7 @@
 
 #include <platform.h>
 
+#include <dolphin/os/OSError.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/random.h>
@@ -17,8 +18,6 @@
 #include <melee/it/items/itheiho.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lb_00F9.h>
-
-#include <dolphin/os/OSError.h>
 
 /* 1E302C */ static void grStory_801E302C(bool);
 /* 1E36D0 */ static DynamicsDesc* grStory_801E36D0(enum_t);
@@ -97,8 +96,7 @@ Ground_GObj* grStory_801E30D8(int gobj_id)
     if (gobj != NULL) {
         Ground_SetupStageCallbacks(gobj, callbacks);
     } else {
-        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 220,
-                 gobj_id);
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 220, gobj_id);
     }
 
     return gobj;

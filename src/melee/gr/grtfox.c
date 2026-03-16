@@ -116,8 +116,7 @@ HSD_GObj* grTFox_80220C2C(s32 arg0)
     if (gobj != NULL) {
         Ground_SetupStageCallbacks(gobj, callbacks);
     } else {
-        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 0xCB,
-                 arg0);
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 0xCB, arg0);
     }
 
     return gobj;

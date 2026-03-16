@@ -116,8 +116,7 @@ HSD_GObj* grTSeak_80223908(s32 arg0)
     if (gobj != NULL) {
         Ground_SetupStageCallbacks(gobj, callbacks);
     } else {
-        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 0xC3,
-                 arg0);
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 0xC3, arg0);
     }
 
     return gobj;

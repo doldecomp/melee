@@ -5,8 +5,8 @@
 #include "gr/granime.h"
 #include "gr/grdisplay.h"
 #include "gr/ground.h"
-#include "gr/inlines.h"
 #include "gr/grzakogenerator.h"
+#include "gr/inlines.h"
 #include "gr/types.h"
 
 #include "lb/forward.h"
@@ -115,8 +115,7 @@ static HSD_GObj* grShrine_80201D20(s32 arg0)
     if (gobj != NULL) {
         Ground_SetupStageCallbacks(gobj, callbacks);
     } else {
-        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 205,
-                 arg0);
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 205, arg0);
     }
 
     return gobj;

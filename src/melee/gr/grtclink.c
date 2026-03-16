@@ -8,10 +8,10 @@
 #include "lb/lb_00F9.h"
 #include "lb/types.h"
 
+#include <dolphin/os/OSError.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
-#include <dolphin/os/OSError.h>
 
 static StageCallbacks grTCLink_803E86D0[] = {
     {

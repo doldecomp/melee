@@ -104,8 +104,7 @@ static HSD_GObj* grTCaptain_8021FD04(int gobj_id)
     if (gobj != NULL) {
         Ground_SetupStageCallbacks(gobj, callbacks);
     } else {
-        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 215,
-                 gobj_id);
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 215, gobj_id);
     }
 
     return gobj;

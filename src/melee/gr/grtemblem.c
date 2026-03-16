@@ -116,8 +116,7 @@ static HSD_GObj* grTRoy_80224498(s32 gobj_id)
     if (gobj != NULL) {
         Ground_SetupStageCallbacks(gobj, callbacks);
     } else {
-        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 0xC3,
-                 gobj_id);
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 0xC3, gobj_id);
     }
 
     return gobj;

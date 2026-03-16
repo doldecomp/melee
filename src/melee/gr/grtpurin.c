@@ -10,10 +10,10 @@
 #include "lb/types.h"
 #include "mp/mplib.h"
 
+#include <dolphin/os/OSError.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
-#include <dolphin/os/OSError.h>
 #include <baselib/jobj.h>
 
 StageCallbacks grTPr_803E9338[] = {
