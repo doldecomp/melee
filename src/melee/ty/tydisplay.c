@@ -714,8 +714,8 @@ retry:
 
 void un_80319540(s32 arg0)
 {
-    u8* grid = un_804D6F14;
-    u8* cfg = (u8*) un_804D6F18;
+    TyDspGrid* grid = (TyDspGrid*) un_804D6F14;
+    TyDspConfig* cfg = (TyDspConfig*) un_804D6F18;
     s32 count;
     s32 col, row, remainder;
     s32 i;
@@ -725,21 +725,21 @@ void un_80319540(s32 arg0)
 
     memzero(grid, 0x12E4);
 
-    *(f32*)(grid + 0x08) = -3.5f;
-    *(f32*)(grid + 0x04) = -3.5f;
-    *(f32*)(grid + 0x10) = 3.5f;
-    *(f32*)(grid + 0x0C) = 3.5f;
+    grid->x08 = -3.5f;
+    grid->x04 = -3.5f;
+    grid->x10 = 3.5f;
+    grid->x0C = 3.5f;
 
-    count = *(s32*)(cfg + 0x08);
+    count = cfg->x08;
     if (count <= 1) {
         remainder = 0;
     } else {
-        remainder = count % *(s8*)(cfg + 0x75);
+        remainder = count % (s8) cfg->x75;
     }
 
     col = 0;
     row = 0;
-    ptr = grid;
+    ptr = (u8*) grid;
     for (i = 0; i < count; i++) {
         if (i == 0) {
             *(f32*)(ptr + 0x97C) = 0.0f;
@@ -760,38 +760,38 @@ void un_80319540(s32 arg0)
                 col = 0;
                 row += 1;
             }
-        } else if (col >= *(s8*)(cfg + 0x75)) {
+        } else if (col >= (s8) cfg->x75) {
             col = 0;
             row += 1;
         }
 
         {
             f32 px = *(f32*)(ptr + 0x97C);
-            if (px < *(f32*)(grid + 0x04)) {
-                *(f32*)(grid + 0x04) = px;
+            if (px < grid->x04) {
+                grid->x04 = px;
             }
         }
         {
             f32 px = *(f32*)(ptr + 0x97C);
-            if (px > *(f32*)(grid + 0x0C)) {
-                *(f32*)(grid + 0x0C) = px;
+            if (px > grid->x0C) {
+                grid->x0C = px;
             }
         }
         {
             f32 pz = *(f32*)(ptr + 0x980);
-            if (pz < *(f32*)(grid + 0x08)) {
-                *(f32*)(grid + 0x08) = pz;
+            if (pz < grid->x08) {
+                grid->x08 = pz;
             }
         }
         {
             f32 pz = *(f32*)(ptr + 0x980);
-            if (pz > *(f32*)(grid + 0x10)) {
-                *(f32*)(grid + 0x10) = pz;
+            if (pz > grid->x10) {
+                grid->x10 = pz;
             }
         }
 
         ptr += 8;
-        count = *(s32*)(cfg + 0x08);
+        count = cfg->x08;
     }
 
     un_80318B1C(count);
@@ -802,7 +802,7 @@ void un_80319540(s32 arg0)
             s32 mid = n2 / 2;
             s32 pivot, j, n;
                         TySortElemI tmp;
-            TySortElemI* sort = (TySortElemI*)(grid + 0x14);
+            TySortElemI* sort = grid->sort;
 
             if (mid != 0) {
                 tmp = sort[0];
@@ -817,7 +817,7 @@ void un_80319540(s32 arg0)
                     pivot += 1;
                     j += 8;
                     if (pivot != n) {
-                        TySortElemI* s = (TySortElemI*)(grid + j + 0x14);
+                        TySortElemI* s = (TySortElemI*)((u8*)grid->sort + j);
                         tmp = *s;
                         *s = *(TySortElemI*)ptr;
                         *(TySortElemI*)ptr = tmp;
@@ -837,16 +837,16 @@ void un_80319540(s32 arg0)
         }
     }
 
-    ptr = grid;
+    ptr = (u8*) grid;
     {
         s32 k;
         s32 off = 0;
 
-        for (k = 0; k < *(s32*)(cfg + 0x08); k++) {
+        for (k = 0; k < cfg->x08; k++) {
             HSD_GObj* gobj;
             HSD_JObj** jobjArr;
-            *(HSD_GObj**)(cfg + 0x78) = un_8031BC54(*(s32*)(ptr + 0x14));
-            gobj = *(HSD_GObj**)(cfg + 0x78);
+            cfg->x78 = un_8031BC54(*(s32*)(ptr + 0x14));
+            gobj = cfg->x78;
             if (gobj != NULL) {
                 jobjArr = un_804D6F10;
                 *(HSD_JObj**)((u8*)jobjArr + off) = (HSD_JObj*) gobj->hsd_obj;
