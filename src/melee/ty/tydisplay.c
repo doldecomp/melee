@@ -2223,7 +2223,7 @@ s32 un_8031C454(s32 arg0)
     TyDspArchNames names1;
     TyDspArchNames names2;
     TyDspArchNames names3;
-    u8* entry;
+    TyDspEntry* entry;
     u8 idx;
     s32 result;
     s32* archArr;
@@ -2240,15 +2240,15 @@ s32 un_8031C454(s32 arg0)
         return -1;
     }
 
-    entry = (u8*) un_8031B9DC(arg0);
-    idx = entry[4];
+    entry = (TyDspEntry*) un_8031B9DC(arg0);
+    idx = entry->x04;
 
     if ((u32) archArr[idx] == 0U) {
         names1 = tables->arch_names;
         if ((s8) idx == -1) {
             idx = 0;
         }
-        archArr[entry[4]] =
+        archArr[entry->x04] =
             (s32) lbArchive_LoadSymbols(names1.entries[(s8) idx], NULL);
     } else {
         result = 1;
