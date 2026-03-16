@@ -18,6 +18,8 @@
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lb_00F9.h>
 
+#include <dolphin/os/OSError.h>
+
 /* 1E302C */ static void grStory_801E302C(bool);
 /* 1E36D0 */ static DynamicsDesc* grStory_801E36D0(enum_t);
 
@@ -87,29 +89,15 @@ bool grStory_801E30D0(void)
 
 Ground_GObj* grStory_801E30D8(int gobj_id)
 {
-    Ground_GObj* gobj;
+    HSD_GObj* gobj;
     StageCallbacks* callbacks = &grSt_803E26F0[gobj_id];
 
     gobj = Ground_GetStageGObj(gobj_id);
 
     if (gobj != NULL) {
-        Ground* gp = gobj->user_data;
-        gp->x8_callback = NULL;
-        gp->xC_callback = NULL;
-        GObj_SetupGXLink(gobj, grDisplay_801C5DB0, 3, 0);
-        if (callbacks->callback3 != NULL) {
-            gp->x1C_callback = callbacks->callback3;
-        }
-        // 0x80
-        if (callbacks->callback0 != NULL) {
-            callbacks->callback0(gobj);
-        }
-        // 0x94
-        if (callbacks->callback2 != NULL) {
-            HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
-        }
+        Ground_SetupStageCallbacks(gobj, callbacks);
     } else {
-        OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grstory.c", 220,
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 220,
                  gobj_id);
     }
 

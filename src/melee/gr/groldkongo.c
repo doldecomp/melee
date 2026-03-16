@@ -19,6 +19,8 @@ static struct {
     int x0;
 }* grOk_804D6A90;
 
+extern StageCallbacks grOk_803E658C[];
+
 void grOldKongo_8020F468(bool arg) {}
 
 /// #grOldKongo_8020F46C
@@ -50,7 +52,22 @@ bool grOldKongo_8020F524(void)
     return false;
 }
 
-/// #grOldKongo_8020F52C
+HSD_GObj* grOldKongo_8020F52C(int arg0)
+{
+    HSD_GObj* gobj;
+    StageCallbacks* callbacks = &grOk_803E658C[arg0];
+
+    gobj = Ground_GetStageGObj(arg0);
+
+    if (gobj != NULL) {
+        Ground_SetupStageCallbacks(gobj, callbacks);
+    } else {
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", "groldkongo.c", 0xD5,
+                 arg0);
+    }
+
+    return gobj;
+}
 
 void grOldKongo_8020F618(Ground_GObj* gobj)
 {

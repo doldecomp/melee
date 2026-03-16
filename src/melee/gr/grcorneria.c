@@ -100,7 +100,39 @@ bool grCorneria_801DD52C(void)
     return false;
 }
 
-/// #grCorneria_801DD534
+extern StageCallbacks grCn_803E1D8C[];
+
+#pragma push
+#pragma dont_inline on
+HSD_GObj* grCorneria_801DD534(int arg0)
+{
+    HSD_GObj* gobj;
+    StageCallbacks* callbacks = &grCn_803E1D8C[arg0];
+
+    gobj = Ground_GetStageGObj(arg0);
+
+    if (gobj != NULL) {
+        Ground* gp = gobj->user_data;
+        gp->x8_callback = NULL;
+        gp->xC_callback = NULL;
+        GObj_SetupGXLink(gobj, grDisplay_801C5DB0, 3, 0);
+        if (callbacks->callback3 != NULL) {
+            gp->x1C_callback = callbacks->callback3;
+        }
+        if (callbacks->callback0 != NULL) {
+            callbacks->callback0(gobj);
+        }
+        if (callbacks->callback2 != NULL) {
+            HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
+        }
+    } else {
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grcorneria.c", 0x26A,
+                 arg0);
+    }
+
+    return gobj;
+}
+#pragma pop
 
 void grCorneria_801DD620(Ground_GObj* gobj)
 {

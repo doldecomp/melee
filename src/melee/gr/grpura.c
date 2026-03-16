@@ -136,7 +136,6 @@ bool grPura_80211E00(void)
     return false;
 }
 
-/// #grPura_80211E08
 HSD_GObj* grPura_80211E08(int gobj_id)
 {
     HSD_GObj* gobj;
@@ -145,29 +144,9 @@ HSD_GObj* grPura_80211E08(int gobj_id)
     gobj = Ground_GetStageGObj(gobj_id);
 
     if (gobj != NULL) {
-        Ground* gp = gobj->user_data;
-        gp->x8_callback = NULL;
-        gp->xC_callback = NULL;
-        GObj_SetupGXLink(gobj, grDisplay_801C5DB0, 3, 0);
-
-        if (callbacks->callback3 != NULL) {
-            gp->x1C_callback = callbacks->callback3;
-        }
-
-        if (callbacks->callback0 != NULL) {
-            callbacks->callback0(gobj);
-        }
-
-        if (callbacks->callback2 != NULL) {
-            HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
-        }
-
+        Ground_SetupStageCallbacks(gobj, callbacks);
     } else {
-        // clang-format off
-//#line 241 "grizumi.c"
-///        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, __LINE__, gobj_id);
-        // clang-format on
-        OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grpura.c", 241,
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grpura.c", 0x108,
                  gobj_id);
     }
 

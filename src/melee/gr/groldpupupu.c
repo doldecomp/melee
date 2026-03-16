@@ -22,6 +22,8 @@ static void* grOp_804D6A9C;
 
 static int grOp_804D48E0[1][2] = { { 0, 0 } };
 
+extern StageCallbacks grOp_803E6688[];
+
 void grOldPupupu_802107DC(bool arg) {}
 
 void grOldPupupu_802107E0(void)

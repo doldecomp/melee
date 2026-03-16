@@ -340,37 +340,17 @@ bool grIceMt_801F71E0(void)
     return false;
 }
 
-/// #grIceMt_801F71E8
 HSD_GObj* grIceMt_801F71E8(int gobj_id)
 {
     HSD_GObj* gobj;
+    StageCallbacks* callbacks = &grIm_803E4718[gobj_id];
+
     gobj = Ground_GetStageGObj(gobj_id);
-    // StageCallbacks* callbacks = &grIm_803E4718[gobj_id];
+
     if (gobj != NULL) {
-        Ground* gp = GET_GROUND(gobj);
-        gp->x8_callback = 0;
-        gp->xC_callback = 0;
-        GObj_SetupGXLink(gobj, grDisplay_801C5DB0, 3, 0);
-        // if(grIm_803E4718[gobj_id]) {
-        //	int bruh = 4;
-        // }
-        if (grIm_803E4718->callback3 != NULL) {
-            gp->x1C_callback = grIm_803E4718->callback3;
-        }
-
-        if (grIm_803E4718->callback0 != NULL) {
-            grIm_803E4718->callback0(gobj);
-        }
-
-        if (grIm_803E4718->callback2 != NULL) {
-            HSD_GObj_SetupProc(gobj, grIm_803E4718->callback2, 4);
-        }
-        // HSD_GObj_SetupProc(gobj,gobj_id,4);
-        // if(callbacks) {
-        //	callbacks->callback0(gobj);
-        // }
+        Ground_SetupStageCallbacks(gobj, callbacks);
     } else {
-        OSReport("s:%d: couldn t get gobj(id=%d)\n", "gricemt.c", 0x35C,
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", "gricemt.c", 0x35C,
                  gobj_id);
     }
 

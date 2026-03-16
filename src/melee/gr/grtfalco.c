@@ -97,29 +97,14 @@ bool grTFalco_80220894(void)
 HSD_GObj* grTFalco_8022089C(int id)
 {
     HSD_GObj* gobj;
+    StageCallbacks* callbacks = &grTFc_803E8918[id];
 
-    StageCallbacks* cb = &grTFc_803E8918[id];
     gobj = Ground_GetStageGObj(id);
+
     if (gobj != NULL) {
-        Ground* gp = gobj->user_data;
-        gp->x8_callback = NULL;
-        gp->xC_callback = NULL;
-        GObj_SetupGXLink(gobj, grDisplay_801C5DB0, 3, 0);
-
-        if (cb->callback3 != NULL) {
-            gp->x1C_callback = cb->callback3;
-        }
-
-        if (cb->callback0 != NULL) {
-            cb->callback0(gobj);
-        }
-
-        if (cb->callback2 != NULL) {
-            HSD_GObj_SetupProc(gobj, cb->callback2, 4);
-        }
-
+        Ground_SetupStageCallbacks(gobj, callbacks);
     } else {
-        OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grtfalco.c", 201, id);
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 201, id);
     }
 
     return gobj;
