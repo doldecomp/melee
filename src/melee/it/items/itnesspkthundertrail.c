@@ -4,6 +4,9 @@
 #include <platform.h>
 
 #include "db/db.h"
+
+#include "it/forward.h"
+
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
@@ -13,6 +16,17 @@
 
 #include <math.h>
 #include <baselib/jobj.h>
+
+ItemStateTable it_803F6C08[] = {
+    { 0, itNesspkthundertrail_UnkMotion0_Anim,
+      itNesspkthundertrail_UnkMotion0_Phys,
+      itNesspkthundertrail_UnkMotion0_Coll },
+};
+
+s32 it_803F6C18[] = {
+    It_Kind_Ness_PKThunder1, It_Kind_Ness_PKThunder1, It_Kind_Ness_PKThunder1,
+    It_Kind_Ness_PKThunder2, It_Kind_Ness_PKThunder3, It_Kind_Ness_PKThunder4,
+};
 
 Item_GObj* it_802AC43C(Fighter_GObj* gobj, Item_GObj* ball, Vec3* pos,
                        s32 trail_idx, s32 arg4, f32 facing_dir)

@@ -3,6 +3,7 @@
 #include "math.h"
 
 #include "it/inlines.h"
+#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
@@ -17,7 +18,20 @@ bool itGameWatchChef_Logic112_DmgDealt(Item_GObj* gobj)
     return false;
 }
 
-/// #it_802C84A0
+void it_802C84A0(Item_GObj* gobj, s32 index)
+{
+    Item* ip = GET_ITEM(gobj);
+    itGamewatchchefAttributes* attrs =
+        ip->xC4_article_data->x4_specialAttributes;
+    ip->xDD4_itemVar.gamewatchchef.x4 = index;
+    it_80275158(gobj, attrs->x8);
+    ip->xD5C = 0;
+    ip->x40_vel.x =
+        attrs->entries[ip->xDD4_itemVar.gamewatchchef.x4].x0 * ip->facing_dir;
+    ip->x40_vel.y = attrs->entries[ip->xDD4_itemVar.gamewatchchef.x4].x4;
+    it_8026B3A8(gobj);
+    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+}
 
 /// #itGamewatchchef_UnkMotion0_Anim
 
@@ -30,7 +44,22 @@ void itGamewatchchef_UnkMotion0_Phys(Item_GObj* gobj)
     it_80272860(gobj, attrs->entries[index].x8, attrs->entries[index].xC);
 }
 
-/// #itGamewatchchef_UnkMotion0_Coll
+bool itGamewatchchef_UnkMotion0_Coll(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itGamewatchchefAttributes* attrs =
+        ip->xC4_article_data->x4_specialAttributes;
+    if (0.0f != ip->x40_vel.x) {
+        s32 result = it_8026DAA8(gobj);
+        if (result & 0xC) {
+            ip->x40_vel.x *= -attrs->x4;
+        }
+        if (result & 3) {
+            it_802C875C(gobj);
+        }
+    }
+    return false;
+}
 
 void it_802C875C(Item_GObj* gobj)
 {
@@ -62,7 +91,28 @@ bool itGamewatchchef_UnkMotion1_Anim(Item_GObj* gobj)
 
 void itGamewatchchef_UnkMotion1_Phys(Item_GObj* gobj) {}
 
-/// #itGamewatchchef_UnkMotion1_Coll
+bool itGamewatchchef_UnkMotion1_Coll(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itGamewatchchefAttributes* attrs =
+        ip->xC4_article_data->x4_specialAttributes;
+    PAD_STACK(8);
+    if (0.0f != ip->x40_vel.x) {
+        s32 result = it_8026DAA8(gobj);
+        if (result & 0xC) {
+            ip->x40_vel.x *= -attrs->x4;
+        }
+        if (result & 3) {
+            ip = GET_ITEM(gobj);
+            attrs = ip->xC4_article_data->x4_specialAttributes;
+            ip->x40_vel.y = 0.0f;
+            ip->x40_vel.x = 0.0f;
+            it_80275158(gobj, attrs->xC);
+            Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
+        }
+    }
+    return false;
+}
 
 bool it_2725_Logic112_Clanked(Item_GObj* gobj)
 {

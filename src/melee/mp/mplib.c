@@ -5223,11 +5223,11 @@ void mpJointSetB10(int joint_id)
     joint->flags |= CollJoint_B10;
 }
 
-void mpJointSetCb1(int joint_id, Ground* arg1, mpLib_Callback cb)
+void mpJointSetCb1(int joint_id, void* obj, mpLib_Callback cb)
 {
     CollJoint* joint = &groundCollJoint[joint_id];
     joint->x24 = cb;
-    joint->x28 = arg1;
+    joint->x28 = obj;
 }
 
 void mpJointClearCb1(int joint_id)

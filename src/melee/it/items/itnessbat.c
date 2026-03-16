@@ -13,6 +13,13 @@
 
 #include <baselib/jobj.h>
 
+ItemStateTable it_803F6C68[] = {
+    { 0, itNessbat_UnkMotion0_Anim, itNessbat_UnkMotion0_Phys,
+      itNessbat_UnkMotion0_Coll },
+    { -1, itNessbat_UnkMotion1_Anim, itNessbat_UnkMotion1_Phys,
+      itNessbat_UnkMotion1_Coll }
+};
+
 static inline void itNessbat_ClearOwnerRef(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);

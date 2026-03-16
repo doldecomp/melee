@@ -60,7 +60,7 @@
 #include "it/items/itlinkbow.h"
 #include "it/items/itluigifireball.h"
 #include "it/items/itmewtwoshadowball.h"
-#include "it/items/itnesspkflush.h"
+#include "it/items/itnesspkflash.h"
 #include "it/items/itpeachtoad.h"
 #include "it/items/itpeachtoadspore.h"
 #include "it/items/itpikachutjoltground.h"

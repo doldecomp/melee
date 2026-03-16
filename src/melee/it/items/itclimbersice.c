@@ -51,7 +51,29 @@ void it_802C1950(Item_GObj* gobj)
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
 }
 
-/// #itClimbersice_UnkMotion0_Anim
+bool itClimbersice_UnkMotion0_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    HSD_JObj* jobj = gobj->hsd_obj;
+    itClimbersIceAttributes* sa = ip->xC4_article_data->x4_specialAttributes;
+    HSD_JObj* child;
+    PAD_STACK(8);
+
+    if (jobj == NULL) {
+        child = NULL;
+    } else {
+        child = jobj->child;
+    }
+
+    if (ip->xDD4_itemVar.climbersice.x8_b0) {
+        ip->xDD4_itemVar.climbersice.x4 *= sa->x28;
+        it_80272F7C(child, ip->xDD4_itemVar.climbersice.x4);
+        if (ip->xDD4_itemVar.climbersice.x4 < 0.01F) {
+            return true;
+        }
+    }
+    return false;
+}
 
 void itClimbersice_UnkMotion0_Phys(Item_GObj* gobj) {}
 

@@ -6,7 +6,7 @@
 #include "ft/forward.h"
 #include <baselib/forward.h>
 
-/* 12EB48 */ UNK_RET ftYs_SpecialS_8012EB48(UNK_PARAMS);
+/* 12EB48 */ void ftYs_SpecialS_8012EB48(Fighter_GObj* gobj);
 /* 12EC7C */ void fn_8012EC7C(Fighter_GObj* gobj);
 /* 12EDE8 */ void fn_8012EDE8(Fighter_GObj* gobj);
 /* 12EFC0 */ void fn_8012EFC0(Fighter_GObj* gobj);

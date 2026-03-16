@@ -32,10 +32,10 @@ typedef struct MnName_GObj {
 /* 23817C */ UNK_RET mnName_MainInput(HSD_GObj*);
 /* 238540 */ void fn_80238540(HSD_GObj* gobj);
 /* 2385A0 */ void mnName_802385A0(HSD_GObj* gobj);
-/* 2385D4 */ UNK_RET mnName_GetPageCount(UNK_PARAMS);
-/* 238698 */ UNK_RET mnName_GetColumnCount(UNK_PARAMS);
+/* 2385D4 */ s32 mnName_GetPageCount(void);
+/* 238698 */ s32 mnName_GetColumnCount(void);
 /* 238754 */ void mnName_80238754(HSD_GObj* gobj);
-/* 2388D4 */ UNK_RET mnName_802388D4(UNK_PARAMS);
+/* 2388D4 */ HSD_JObj* mnName_802388D4(HSD_GObj* gobj, u8 index);
 /* 238964 */ f32 mnName_80238964(u8 index, u8 target, u8 flag);
 /* 238A04 */ UNK_RET mnName_80238A04(UNK_PARAMS);
 /* 238AE0 */ UNK_RET mnName_80238AE0(UNK_PARAMS);

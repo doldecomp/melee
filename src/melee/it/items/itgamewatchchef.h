@@ -11,7 +11,7 @@
 
 /* 2C837C */ HSD_GObj* it_802C837C(Item_GObj*, Vec3*, enum_t, u32, float);
 /* 2C847C */ bool itGameWatchChef_Logic112_DmgDealt(Item_GObj*);
-/* 2C84A0 */ UNK_RET it_802C84A0(UNK_PARAMS);
+/* 2C84A0 */ void it_802C84A0(Item_GObj* gobj, s32 index);
 /* 2C8540 */ bool itGamewatchchef_UnkMotion0_Anim(Item_GObj* gobj);
 /* 2C8690 */ void itGamewatchchef_UnkMotion0_Phys(Item_GObj* gobj);
 /* 2C86D0 */ bool itGamewatchchef_UnkMotion0_Coll(Item_GObj* gobj);

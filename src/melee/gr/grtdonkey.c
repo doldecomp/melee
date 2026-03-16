@@ -102,22 +102,11 @@ static HSD_GObj* grTDonkey_802202CC(int gobj_id)
     StageCallbacks* callbacks = &grTDk_803E8790[gobj_id];
 
     gobj = Ground_GetStageGObj(gobj_id);
+
     if (gobj != NULL) {
-        Ground* gp = gobj->user_data;
-        gp->x8_callback = NULL;
-        gp->xC_callback = NULL;
-        GObj_SetupGXLink(gobj, grDisplay_801C5DB0, 3, 0);
-        if (callbacks->callback3 != NULL) {
-            gp->x1C_callback = callbacks->callback3;
-        }
-        if (callbacks->callback0 != NULL) {
-            callbacks->callback0(gobj);
-        }
-        if (callbacks->callback2 != NULL) {
-            HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
-        }
+        Ground_SetupStageCallbacks(gobj, callbacks);
     } else {
-        OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grtdonkey.c", 0xc3,
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 0xc3,
                  gobj_id);
     }
 

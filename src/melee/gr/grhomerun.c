@@ -7,12 +7,55 @@
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
+#include "gr/stage.h"
 #include "it/it_26B1.h"
 #include "lb/lb_00B0.h"
 
+static void* grHr_804D6AE8;
+StageCallbacks grHr_803E8140[11] = {
+    { grHomeRun_8021C914, grHomeRun_8021CB10, grHomeRun_8021CB18,
+      grHomeRun_8021CB1C, 0 },
+    { grHomeRun_8021E038, grHomeRun_8021E064, grHomeRun_8021E06C,
+      grHomeRun_8021E070, 0 },
+    { grHomeRun_8021E074, grHomeRun_8021E0CC, grHomeRun_8021E0D4,
+      grHomeRun_8021E18C, 0 },
+    { grHomeRun_8021E4C4, grHomeRun_8021E4F0, grHomeRun_8021E4F8,
+      grHomeRun_8021E4FC, 0 },
+    { grHomeRun_8021DEB4, grHomeRun_8021DEE0, grHomeRun_8021DEE8,
+      grHomeRun_8021DEEC, 0 },
+    { grHomeRun_8021DEF0, grHomeRun_8021DF48, grHomeRun_8021DF50,
+      grHomeRun_8021E008, 0 },
+    { grHomeRun_8021E1BC, grHomeRun_8021E1E8, grHomeRun_8021E1F0,
+      grHomeRun_8021E1F4, 0 },
+    { grHomeRun_8021E1F8, grHomeRun_8021E250, grHomeRun_8021E258,
+      grHomeRun_8021E310, 0 },
+    { grHomeRun_8021E340, grHomeRun_8021E36C, grHomeRun_8021E374,
+      grHomeRun_8021E378, 0 },
+    { grHomeRun_8021E37C, grHomeRun_8021E3D4, grHomeRun_8021E3DC,
+      grHomeRun_8021E494, 0 },
+    { grHomeRun_8021CB20, grHomeRun_8021D678, grHomeRun_8021D680,
+      grHomeRun_8021DEB0, 0xC0000000 },
+};
+
 void grHomeRun_8021C750(bool arg) {}
 
-/// #grHomeRun_8021C754
+void grHomeRun_8021C754(void)
+{
+    Vec3 cam_offset;
+
+    grHr_804D6AE8 = Ground_801C49F8();
+    stage_info.unk8C.b4 = false;
+    stage_info.unk8C.b5 = true;
+    grHomeRun_8021EDD4(1);
+    grHomeRun_8021C82C(0);
+    grHomeRun_8021C82C(0xA);
+    grHomeRun_8021ED74();
+    Ground_801C39C0();
+    Ground_801C3BB4();
+    Stage_UnkSetVec3TCam_Offset(&cam_offset);
+    Ground_801C38AC(3.0f * (Stage_GetCamBoundsRightOffset() - cam_offset.x));
+    Ground_801C39B0(3.0f * (Stage_GetBlastZoneRightOffset() - cam_offset.x));
+}
 
 void grHomeRun_8021C7FC(void) {}
 
@@ -26,7 +69,22 @@ bool grHomeRun_8021C824(void)
     return false;
 }
 
-/// #grHomeRun_8021C82C
+HSD_GObj* grHomeRun_8021C82C(int gobj_id)
+{
+    HSD_GObj* gobj;
+    StageCallbacks* callbacks = &grHr_803E8140[gobj_id];
+
+    gobj = Ground_GetStageGObj(gobj_id);
+
+    if (gobj != NULL) {
+        Ground_SetupStageCallbacks(gobj, callbacks);
+    } else {
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grhomerun.c", 0x131,
+                 gobj_id);
+    }
+
+    return gobj;
+}
 
 /// #grHomeRun_8021C914
 

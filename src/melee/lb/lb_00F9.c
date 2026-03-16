@@ -395,10 +395,7 @@ HSD_LObj* lb_80011AC4(LightList** list)
             HSD_LObjAddAnimAll(curr, temp_r4[0]);
         }
         if (prev != NULL) {
-            if (prev == NULL) {
-                __assert("lobj.h", 0x136, "lobj");
-            }
-            prev->next = curr;
+            HSD_LObjSetNext(prev, curr);
         } else {
             first = curr;
         }

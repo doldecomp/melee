@@ -52,7 +52,7 @@
 /* 1883C0 */ f32 gm_801883C0(void);
 /* 18841C */ bool gm_8018841C(void);
 /* 188454 */ int gm_80188454(int idx);
-/* 18846C */ UNK_RET fn_8018846C(UNK_PARAMS);
+/* 18846C */ int fn_8018846C(void);
 /* 1884F8 */ int fn_801884F8(void);
 /* 188550 */ UNK_RET fn_80188550(UNK_PARAMS);
 /* 188644 */ UNK_RET fn_80188644(UNK_PARAMS);

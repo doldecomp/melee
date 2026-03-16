@@ -5,6 +5,7 @@
 #include "gr/granime.h"
 #include "gr/grdisplay.h"
 #include "gr/ground.h"
+#include "gr/inlines.h"
 #include "gr/grzakogenerator.h"
 #include "gr/types.h"
 
@@ -112,23 +113,12 @@ static HSD_GObj* grShrine_80201D20(s32 arg0)
     gobj = Ground_GetStageGObj(arg0);
 
     if (gobj != NULL) {
-        Ground* gp;
-        gp = gobj->user_data;
-        gp->x8_callback = NULL;
-        gp->xC_callback = NULL;
-        GObj_SetupGXLink(gobj, grDisplay_801C5DB0, 3, 0);
-        if (callbacks->callback3 != NULL) {
-            gp->x1C_callback = callbacks->callback3;
-        }
-        if (callbacks->callback0 != NULL) {
-            callbacks->callback0(gobj);
-        }
-        if (callbacks->callback2 != NULL) {
-            HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
-        }
+        Ground_SetupStageCallbacks(gobj, callbacks);
     } else {
-        OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grshrine.c", 205, arg0);
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 205,
+                 arg0);
     }
+
     return gobj;
 }
 
