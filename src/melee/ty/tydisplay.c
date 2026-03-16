@@ -2218,6 +2218,7 @@ s32 un_8031C354(s32 id, s32 (*buf)[], s32 max, s32 kind)
     s32 i;
     s32 count;
     s32 val;
+    PAD_STACK(2 * 4);
 
     if (id == -1) {
         return 0;
