@@ -111,6 +111,38 @@ typedef struct TyDspGrid {
     /* 0x97C */ TyDspPos pos[301];
 } TyDspGrid;
 
+typedef struct TyDspConfig {
+    /* 0x00 */ HSD_GObj* x00;
+    /* 0x04 */ u8 pad_04[4];
+    /* 0x08 */ s32 x08;
+    /* 0x0C */ f32 x0C;
+    /* 0x10 */ f32 x10;
+    /* 0x14 */ u8 pad_14[4];
+    /* 0x18 */ f32 x18;
+    /* 0x1C */ f32 x1C;
+    /* 0x20 */ f32 x20;
+    /* 0x24 */ f32 x24;
+    /* 0x28 */ u8 pad_28[8];
+    /* 0x30 */ f32 x30;
+    /* 0x34 */ f32 x34;
+    /* 0x38 */ u8 pad_38[8];
+    /* 0x40 */ f32 x40;
+    /* 0x44 */ f32 x44;
+    /* 0x48 */ f32 x48;
+    /* 0x4C */ f32 x4C;
+    /* 0x50 */ f32 x50;
+    /* 0x54 */ f32 x54;
+    /* 0x58 */ f32 x58;
+    /* 0x5C */ Vec3 x5C;
+    /* 0x68 */ Vec3 x68;
+    /* 0x74 */ s8 x74;
+    /* 0x75 */ u8 x75;
+    /* 0x76 */ u8 x76;
+    /* 0x77 */ u8 pad_77[1];
+    /* 0x78 */ HSD_GObj* x78;
+    /* 0x7C */ s32 x7C;
+} TyDspConfig;
+
 /// #un_803181BC
 
 void un_803182D4_OnFrame(void)
@@ -1598,14 +1630,14 @@ static char un_803FEFF0[] = "ToyDspPanel_Top_joint";
 void un_8031B460_OnEnter(void* arg0)
 {
     s32 sp18;
-    HSD_GObj** gobj_arr;
-    u8* scene;
-    u8* base;
+    TyDspConfig* cfg;
+    TyDspBgData* data;
+    TyDspGrid* grid;
     HSD_CObj* cobj;
     HSD_GObj* gobj;
     int i;
     char* strbase = (char*) un_803FEFF0;
-    PAD_STACK(8);
+    PAD_STACK(16);
 
     un_804D6F10 = HSD_MemAlloc(0x4B0);
     un_804D6F14 = HSD_MemAlloc(0x12E4);
@@ -1613,18 +1645,18 @@ void un_8031B460_OnEnter(void* arg0)
     un_804D6F1C = HSD_MemAlloc(0x108);
     un_804D6ED4 = HSD_MemAlloc(0xE4);
 
-    gobj_arr = un_804D6F18;
-    scene = (u8*) un_804D6F1C;
-    base = un_804D6F14;
+    cfg = (TyDspConfig*) un_804D6F18;
+    data = un_804D6F1C;
+    grid = (TyDspGrid*) un_804D6F14;
 
     if (un_80305C44() & 0x40) {
-        *(s32*) base = 2;
+        grid->x00 = 2;
     } else if (un_80305C44() & 0x20) {
-        *(s32*) base = 1;
+        grid->x00 = 1;
     } else if (un_80305C44() & 0x800) {
-        *(s32*) base = 3;
+        grid->x00 = 3;
     } else {
-        *(s32*) base = 0;
+        grid->x00 = 0;
     }
 
     un_804D6F20 = 0;
@@ -1633,7 +1665,7 @@ void un_8031B460_OnEnter(void* arg0)
 
     if ((s32) g_debugLevel >= 3 && (un_80305C44() & 0x10)) {
         un_804D6F20 = 1;
-        *(s32*) ((u8*) gobj_arr + 0x7C) = 0;
+        cfg->x7C = 0;
     }
 
     un_8031263C();
@@ -1641,15 +1673,15 @@ void un_8031B460_OnEnter(void* arg0)
     memzero(un_804D6F18, 0x80);
     memzero(un_804D6ED4, 0xE4);
 
-    *(s32*) ((u8*) gobj_arr + 0x08) = un_80304870();
+    cfg->x08 = un_80304870();
 
     if ((s32) un_804D6F20 != 0) {
-        *(s32*) ((u8*) gobj_arr + 0x08) = 1;
+        cfg->x08 = 1;
         un_8031C1D0();
     }
 
     {
-        s32 mode = *(s32*) base;
+        s32 mode = grid->x00;
         if (mode >= 2) goto check_high;
         if (mode >= 0) goto case01;
         goto grid_done;
@@ -1660,55 +1692,48 @@ void un_8031B460_OnEnter(void* arg0)
 
     case01:
         {
-            s32 count = *(s32*) ((u8*) gobj_arr + 0x08);
+            s32 count = cfg->x08;
             s32 toggle = 0;
             u8 r;
-            *(u8*) ((u8*) gobj_arr + 0x75) = 1;
-            *(u8*) ((u8*) gobj_arr + 0x76) = 1;
+            cfg->x75 = 1;
+            cfg->x76 = 1;
             goto check_grid1;
         loop1:
             toggle ^= 1;
             if (toggle != 0 && (s8) r < 0x14) {
-                *(u8*) ((u8*) gobj_arr + 0x75) =
-                    (u8)(*(u8*) ((u8*) gobj_arr + 0x75) + 1);
+                cfg->x75 = (u8)(cfg->x75 + 1);
             } else {
-                *(u8*) ((u8*) gobj_arr + 0x76) =
-                    (u8)(*(u8*) ((u8*) gobj_arr + 0x76) + 1);
+                cfg->x76 = (u8)(cfg->x76 + 1);
             }
         check_grid1:
-            r = *(u8*) ((u8*) gobj_arr + 0x75);
-            if ((s8) r *
-                    (s8) *(u8*) ((u8*) gobj_arr + 0x76) < count)
+            r = cfg->x75;
+            if ((s8) r * (s8) cfg->x76 < count)
             {
                 goto loop1;
             }
-            *(u8*) ((u8*) gobj_arr + 0x75) = (u8)(r + 1);
-            *(u8*) ((u8*) gobj_arr + 0x76) =
-                (u8)(*(u8*) ((u8*) gobj_arr + 0x76) + 1);
+            cfg->x75 = (u8)(r + 1);
+            cfg->x76 = (u8)(cfg->x76 + 1);
         }
         goto grid_done;
 
     case23:
         {
-            s32 count = *(s32*) ((u8*) gobj_arr + 0x08);
+            s32 count = cfg->x08;
             s32 toggle = 0;
             u8 r;
-            *(u8*) ((u8*) gobj_arr + 0x75) = 1;
-            *(u8*) ((u8*) gobj_arr + 0x76) = 1;
+            cfg->x75 = 1;
+            cfg->x76 = 1;
             goto check_grid2;
         loop2:
             toggle ^= 1;
             if (toggle != 0 && (s8) r < 0x14) {
-                *(u8*) ((u8*) gobj_arr + 0x75) =
-                    (u8)(*(u8*) ((u8*) gobj_arr + 0x75) + 1);
+                cfg->x75 = (u8)(cfg->x75 + 1);
             } else {
-                *(u8*) ((u8*) gobj_arr + 0x76) =
-                    (u8)(*(u8*) ((u8*) gobj_arr + 0x76) + 1);
+                cfg->x76 = (u8)(cfg->x76 + 1);
             }
         check_grid2:
-            r = *(u8*) ((u8*) gobj_arr + 0x75);
-            if ((s8) r *
-                    (s8) *(u8*) ((u8*) gobj_arr + 0x76) < count)
+            r = cfg->x75;
+            if ((s8) r * (s8) cfg->x76 < count)
             {
                 goto loop2;
             }
@@ -1725,12 +1750,12 @@ void un_8031B460_OnEnter(void* arg0)
         } else {
             archname = strbase + 0xB8;
         }
-        *(HSD_Archive**) (scene + 0x4C) =
+        data->archive =
             lbArchive_80016DBC(archname, &sp18, strbase + 0x18, 0);
     }
 
     {
-        u8* ptr = scene;
+        u8* ptr = (u8*) data;
         i = 0;
         do {
             s32 ret = un_8031BBF4((s8) i);
@@ -1741,43 +1766,42 @@ void un_8031B460_OnEnter(void* arg0)
         } while (i < 0x2B);
     }
 
-    *(s16*) (scene + 0x104) = 0;
+    data->x104 = 0;
 
     {
-        HSD_GObj** arr2 = un_804D6F18;
+        TyDspConfig* cfg2 = (TyDspConfig*) un_804D6F18;
         cobj = lb_80013B14(HSD_ArchiveGetPublicAddress(
-            *(HSD_Archive**) ((u8*) un_804D6F1C + 0x4C),
+            ((TyDspBgData*) un_804D6F1C)->archive,
             strbase + 0x18C));
 
-        arr2[0] = GObj_Create(1, 2, 0);
-        HSD_GObjObject_80390A70(arr2[0], HSD_GObj_804D784B, cobj);
-        GObj_SetupGXLinkMax(arr2[0], (GObj_RenderFunc) un_803068E0, 0);
+        cfg2->x00 = GObj_Create(1, 2, 0);
+        HSD_GObjObject_80390A70(cfg2->x00, HSD_GObj_804D784B, cobj);
+        GObj_SetupGXLinkMax(cfg2->x00, (GObj_RenderFunc) un_803068E0, 0);
 
-        gobj = arr2[0];
+        gobj = cfg2->x00;
         *(s32*) ((u8*) gobj + 0x24) = 0;
         *(s32*) ((u8*) gobj + 0x20) = 0x12300000;
 
         if ((s32) un_804D6F20 != 0) {
-            HSD_GObj_SetupProc(arr2[0], (HSD_GObjEvent) fn_8031A94C, 0);
+            HSD_GObj_SetupProc(cfg2->x00, (HSD_GObjEvent) fn_8031A94C, 0);
         } else {
-            HSD_GObj_SetupProc(arr2[0], (HSD_GObjEvent) fn_8031A4EC, 0);
+            HSD_GObj_SetupProc(cfg2->x00, (HSD_GObjEvent) fn_8031A4EC, 0);
         }
-        HSD_GObj_80390CD4(arr2[0]);
+        HSD_GObj_80390CD4(cfg2->x00);
     }
 
     un_8031B328();
     un_8031B1FC();
 
     if ((s32) un_804D6F20 != 0) {
-        memzero(base, 0x12E4);
-        *(f32*) (base + 0x08) = -3.5f;
-        *(f32*) (base + 0x04) = -3.5f;
-        *(f32*) (base + 0x10) = 3.5f;
-        *(f32*) (base + 0x0C) = 3.5f;
-        *(HSD_GObj**) ((u8*) gobj_arr + 0x78) =
-            un_8031BC54(*(s32*) ((u8*) gobj_arr + 0x7C));
+        memzero(grid, 0x12E4);
+        grid->x08 = -3.5f;
+        grid->x04 = -3.5f;
+        grid->x10 = 3.5f;
+        grid->x0C = 3.5f;
+        cfg->x78 = un_8031BC54(cfg->x7C);
     } else {
-        s32 m = *(s32*) base;
+        s32 m = grid->x00;
         switch (m) {
         case 0:
         case 1:
