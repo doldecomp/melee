@@ -89,11 +89,6 @@ void un_803182D4_OnFrame(void)
     }
 }
 
-typedef struct TySortElem {
-    s32 key;
-    f32 val;
-} TySortElem;
-
 void un_8031830C(TySortElem* base, s32 lo, s32 hi)
 {
     TySortElem tmp;
@@ -211,11 +206,6 @@ void un_8031830C(TySortElem* base, s32 lo, s32 hi)
         }
     }
 }
-
-typedef struct TySortElemI {
-    s32 key;
-    s32 val;
-} TySortElemI;
 
 void un_80318714(TySortElemI* base, s32 lo, s32 hi)
 {
