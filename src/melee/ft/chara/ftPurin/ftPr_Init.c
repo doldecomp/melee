@@ -21,6 +21,9 @@
 #include "ft/ftdynamics.h"
 #include "ft/ftparts.h"
 #include "ft/types.h"
+
+#include "ftCommon/forward.h"
+
 #include "ftCommon/ftCo_Attack100.h"
 #include "it/it_26B1.h"
 
@@ -427,14 +430,13 @@ char* ftPr_Init_803D05B4[] = {
     "PlyPurinYeHat_TopN_joint",
 };
 
-Vec4 ftPr_Init_803D05C8 = { 0.65, 0.7, 0.8, 1 };
-Vec4 ftPr_Init_803D05D8 = { 1.1, 1.35, 1.3, 1.2 };
+f32 ftPr_Init_803D05C8[4] = { 0.65, 0.7, 0.8, 1 };
+f32 ftPr_Init_803D05D8[4] = { 1.1, 1.35, 1.3, 1.2 };
 
 char ftPr_Init_assert_msg_0[] = "!(jobj->flags & JOBJ_USE_QUATERNION)";
 
-Vec3 ftPr_Init_803D0610[] = {
-    { +8, +0, -4 },
-    { +4, +4, +4 },
+ftCollisionBox ftPr_Init_803D0610 = {
+    +8, +0, -4, +4, +4, +4,
 };
 /* static */ extern char* ftPr_Init_803D05B4[5];
 
