@@ -77,6 +77,15 @@ typedef struct TyDspNameTables {
 extern const TyDspNameTables un_803B8988;
 extern const TyDspArchNames un_803B8A34;
 
+typedef struct TyDspEntry {
+    /* 0x00 */ s32 x00;
+    /* 0x04 */ u8 x04;
+    /* 0x05 */ u8 x05;
+    /* 0x06 */ u8 pad_06[2];
+    /* 0x08 */ f32 x08;
+    /* 0x0C */ f32 x0C;
+} TyDspEntry;
+
 /// #un_803181BC
 
 void un_803182D4_OnFrame(void)
@@ -1879,24 +1888,23 @@ static f64 un_804DE030 = 0.0;
 void un_8031BA78(s32 arg0, s32 arg1, f32 farg0)
 {
     char buf[24];
-    u8* data;
+    TyDspEntry* data;
 
-    data = (u8*) un_8031B9DC(arg0);
+    data = (TyDspEntry*) un_8031B9DC(arg0);
     switch (arg1) {
     case 1:
         break;
     case 0:
-        *(f32*) (data + 8) = farg0;
+        data->x08 = farg0;
         break;
     case 2:
-        *(f32*) (data + 0xC) = farg0;
+        data->x0C = farg0;
         break;
     }
     if (un_804D6F24 != NULL) {
         DevText_Erase(un_804D6F24);
         DevText_SetCursorXY(un_804D6F24, 0, 0);
-        sprintf(buf, un_803FF19C, *(f32*) (data + 8),
-                *(f32*) (data + 0xC));
+        sprintf(buf, un_803FF19C, data->x08, data->x0C);
         DevText_Print(un_804D6F24, buf);
     }
 }
