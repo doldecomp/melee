@@ -93,7 +93,11 @@ struct ftYs_DatAttrs {
     /*  +F8 */ float specialhi_base_angle;
     /*  +FC */ float xFC;
     /* +100 */ float x100;
-    /* +104 */ char x104[0x118 - 0x104];
+    /* +104 */ float x104;
+    /* +108 */ float x108;
+    /* +10C */ float x10C;
+    /* +110 */ float x110;
+    /* +114 */ char pad_114[0x118 - 0x114];
     /* +118 */ Vec2 speciallw_star_offset;
 };
 STATIC_ASSERT(sizeof(struct ftYs_DatAttrs) == 0x120);

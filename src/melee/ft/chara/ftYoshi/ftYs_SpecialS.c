@@ -192,12 +192,12 @@ void fn_8012EC7C(Fighter_GObj* gobj)
 
 void fn_8012EDE8(Fighter_GObj* gobj)
 {
-    Vec3 sp18;
     Fighter* fp = GET_FIGHTER(gobj);
     FtMotionId motion = fp->motion_id;
+    Vec3 v;
     if ((motion != 0x16B) && ((motion >= 0x16B) || (motion != 0x167))) {
-        lb_8000B1CC(fp->parts->joint, NULL, &sp18);
-        efSync_Spawn(0x4CF, gobj, &sp18, &fp->co_attrs.xBC);
+        lb_8000B1CC(fp->parts[4].joint, NULL, &v);
+        efSync_Spawn(0x4CF, gobj, &v, &fp->co_attrs.xBC);
         ft_PlaySFX(fp, 0x44618, 0x7FU, 0x40U);
     }
     fn_8012EC7C_inline(gobj);
