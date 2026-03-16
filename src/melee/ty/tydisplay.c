@@ -2287,7 +2287,7 @@ HSD_JObj* un_8031C5E4(s32 arg0)
     TyDspArchNames matanim_names1;
     TyDspArchNames jobj_names2;
     TyDspArchNames jobj_names3;
-    u8* entry;
+    TyDspEntry* entry;
     HSD_JObj* root;
     HSD_JObj* child;
     u8 cat;
@@ -2296,16 +2296,16 @@ HSD_JObj* un_8031C5E4(s32 arg0)
 
     PAD_STACK(16);
 
-    entry = (u8*) un_8031B9DC(arg0);
+    entry = (TyDspEntry*) un_8031B9DC(arg0);
 
-    if ((u32) archives[entry[4]] == 0U) {
+    if ((u32) archives[entry->x04] == 0U) {
         return NULL;
     }
 
     root = HSD_JObjAlloc();
 
     {
-        u8 c = entry[4];
+        u8 c = entry->x04;
         jobj_names1 = *(TyDspArchNames*) tables->jobj_names;
         cat = c;
         if ((s8) c == -1) {
@@ -2319,7 +2319,7 @@ HSD_JObj* un_8031C5E4(s32 arg0)
     }
 
     {
-        u8 c = entry[4];
+        u8 c = entry->x04;
         matanim_names1 = *(TyDspArchNames*) tables->matanim_names;
         cat = c;
         if ((s8) c == -1) {
@@ -2329,12 +2329,12 @@ HSD_JObj* un_8031C5E4(s32 arg0)
                     (char*) matanim_names1.entries[(s8) cat],
                     NULL,
                     (HSD_Archive*) archives[c],
-                    (long) entry[5]);
+                    (long) entry->x05);
     }
     HSD_JObjRemoveAnimAll(child);
 
-    HSD_JObjSetTranslateX(child, *(f32*) (entry + 8));
-    HSD_JObjSetTranslateZ(child, *(f32*) (entry + 0xC));
+    HSD_JObjSetTranslateX(child, entry->x08);
+    HSD_JObjSetTranslateZ(child, entry->x0C);
 
     jobj_names2 = *(TyDspArchNames*) tables->jobj_names;
     HSD_JObjAddChild(root, HSD_JObjLoadJoint(
