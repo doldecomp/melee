@@ -268,10 +268,8 @@ void it_802D2B4C(Item_GObj* gobj)
 
     if (ip->xDAC_itcmd_var0 != 0) {
         ip->xDAC_itcmd_var0 = 0;
-        it_8027ADEC(0x46F, gobj, ip->xBBC_dynamicBoneTable->bones[16],
-                    1.3F);
-        it_8027ADEC(0x46F, gobj, ip->xBBC_dynamicBoneTable->bones[17],
-                    1.3F);
+        it_8027ADEC(0x46F, gobj, ip->xBBC_dynamicBoneTable->bones[16], 1.3F);
+        it_8027ADEC(0x46F, gobj, ip->xBBC_dynamicBoneTable->bones[17], 1.3F);
     }
 
     if (ip->xDB0_itcmd_var1 != 0) {

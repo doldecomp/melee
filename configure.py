@@ -504,7 +504,7 @@ config.libs = [
             Object(Matching, "melee/ef/eflib_alloc.c"),
             Object(Matching, "melee/ef/eflib.c"),
             Object(NonMatching, "melee/ef/efsync.c"),
-            Object(Matching, "melee/ef/ef_061D.c"),
+            Object(Matching, "melee/ef/efspecial.c"),
             Object(NonMatching, "melee/ef/efasync.c"),
         ],
     ),

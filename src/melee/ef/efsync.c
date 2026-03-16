@@ -20,7 +20,7 @@
 #include "ft/inlines.h"
 
 extern ef_Symbols efAsync_803C025C[51];
-extern Effect* ef_80061D70(s32, HSD_GObj*, va_list);
+extern Effect* efSpecial_SpawnSpecial(s32, HSD_GObj*, va_list);
 
 extern s32 efLib_804D64E8;
 extern s32 efLib_804D64F0;
@@ -106,8 +106,8 @@ void* efSync_Spawn(s32 arg_gfx_id, HSD_GObj* arg_gobj, ...)
         return efAsync_80063930(gfx_id, arg_gobj, vlist);
     }
     if (gfx_id < 0x4BA) {
-        // return ef_80061D70(gfx_id, arg_gobj, va_arg(vlist, void*));
-        return ef_80061D70(gfx_id, arg_gobj, vlist);
+        // return efSpecial_SpawnSpecial(gfx_id, arg_gobj, va_arg(vlist, void*));
+        return efSpecial_SpawnSpecial(gfx_id, arg_gobj, vlist);
     }
     efLib_804D64E8 = 1;
     switch (gfx_id) {
