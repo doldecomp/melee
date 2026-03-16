@@ -562,7 +562,8 @@ void ftCo_Rebirth_Cam(Fighter_GObj* gobj)
 
     ftCamera_80076018(fp->ft_data->x3C, &cam_floats, fp->x34_scale.y);
     cam->x10.x = ((ftCoRebirthCamVars*) &fp->mv.co.common)->x4;
-    cam->x10.y = ((ftCoRebirthCamVars*) &fp->mv.co.common)->x8 + cam_floats.x0.x;
+    cam->x10.y =
+        ((ftCoRebirthCamVars*) &fp->mv.co.common)->x8 + cam_floats.x0.x;
     cam->x10.z = 0.0f;
     ftLib_800866DC(gobj, &cam->x1C);
 }

@@ -405,8 +405,8 @@ void ftKb_SpecialAirHi3_Phys(Fighter_GObj* gobj)
 
     /// FAKE MATCH: comma operator required for regalloc
     ftCommon_8007D3A8(fp, 0.0f,
-                      ((0, fp->co_attrs.air_drift_stick_mul)) *dat_attr
-                          ->specialhi_horizontal_momentum,
+                      ((0, fp->co_attrs.air_drift_stick_mul)) *
+                          dat_attr->specialhi_horizontal_momentum,
                       fp->co_attrs.air_drift_max);
 }
 
@@ -1611,8 +1611,7 @@ static void fn_800F6318(HSD_GObj* gobj)
 void ftKb_SpecialN_800F6388(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    Fighter_ChangeMotionState(gobj, ftKb_MS_Eat, 0x10, 0.0F, 1.0F, 0.0F,
-                              NULL);
+    Fighter_ChangeMotionState(gobj, ftKb_MS_Eat, 0x10, 0.0F, 1.0F, 0.0F, NULL);
     ftAnim_8006EBA4(gobj);
     ftCommon_8007E2F4(fp, 0x1FF);
 }

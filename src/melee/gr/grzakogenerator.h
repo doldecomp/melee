@@ -2,6 +2,7 @@
 #define GALE01_1CA394
 
 #include <platform.h>
+
 #include "gr/types.h"
 
 struct ZakoConfig;

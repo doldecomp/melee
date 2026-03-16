@@ -2,11 +2,11 @@
 
 #include <platform.h>
 
+#include "cm/camera.h"
+#include "ft/ftlib.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
 #include "lb/types.h"
-#include "cm/camera.h"
-#include "ft/ftlib.h"
 
 #include <baselib/random.h>
 

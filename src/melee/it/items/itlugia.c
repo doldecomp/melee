@@ -9,8 +9,8 @@
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
-
 #include "lb/lb_00B0.h"
+
 #include <MetroTRK/intrinsics.h>
 
 typedef struct itLugiaMotionPhysAttrs {
@@ -184,8 +184,7 @@ void it_802D1830(Item_GObj* gobj)
            (it_804DD454 * attrs->x18) *
                -(ip->pos.y - ip->xDD4_itemVar.lugia.x64.y);
     root = it_802D1830_sqrt(root);
-    ip->xDD4_itemVar.lugia.xE50.x =
-        -((-attrs->x18 + root) * it_804DD468);
+    ip->xDD4_itemVar.lugia.xE50.x = -((-attrs->x18 + root) * it_804DD468);
 }
 
 bool itLugia_UnkMotion4_Anim(Item_GObj* gobj)

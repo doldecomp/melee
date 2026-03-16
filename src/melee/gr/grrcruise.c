@@ -178,7 +178,7 @@ void grRCruise_80201918(Vec3* vec)
     if (gobj != NULL) {
         Ground* gp = gobj->user_data;
         if (gp != NULL) {
-            *vec = *(Vec3*)((u8*)gp + 0xE0);
+            *vec = *(Vec3*) ((u8*) gp + 0xE0);
             return;
         }
     }

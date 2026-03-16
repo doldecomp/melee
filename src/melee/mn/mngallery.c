@@ -1,14 +1,15 @@
 #include "mngallery.h"
 
-#include <platform.h>
 #include <placeholder.h>
+#include <platform.h>
+
 #include <baselib/cobj.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjplink.h>
 #include <baselib/memory.h>
-#include <melee/lb/lbmthp.h>
-#include <melee/lb/lbaudio_ax.h>
 #include <melee/gm/gmmain_lib.h>
+#include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lbmthp.h>
 
 static void* mnGallery_804D6C8C;
 

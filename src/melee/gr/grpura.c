@@ -116,10 +116,14 @@ void grPura_80211D00(void)
     Ground_801C39C0();
     Ground_801C3BB4();
     Stage_UnkSetVec3TCam_Offset((Vec3*) &cam_offset);
-    Ground_801C3880(grPu_804DBA58 * (Stage_GetCamBoundsTopOffset() - cam_offset.y));
-    Ground_801C3890(grPu_804DBA58 * (Stage_GetCamBoundsBottomOffset() - cam_offset.y));
-    Ground_801C38A0(grPu_804DBA58 * (Stage_GetCamBoundsLeftOffset() - cam_offset.x));
-    Ground_801C38AC(grPu_804DBA58 * (Stage_GetCamBoundsRightOffset() - cam_offset.x));
+    Ground_801C3880(grPu_804DBA58 *
+                    (Stage_GetCamBoundsTopOffset() - cam_offset.y));
+    Ground_801C3890(grPu_804DBA58 *
+                    (Stage_GetCamBoundsBottomOffset() - cam_offset.y));
+    Ground_801C38A0(grPu_804DBA58 *
+                    (Stage_GetCamBoundsLeftOffset() - cam_offset.x));
+    Ground_801C38AC(grPu_804DBA58 *
+                    (Stage_GetCamBoundsRightOffset() - cam_offset.x));
 }
 
 void grPura_80211DD8(void) {}

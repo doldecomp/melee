@@ -1,17 +1,16 @@
 #include "grzakogenerator.h"
+
 #include "grzakogenerator.static.h"
 
 #include "it/it_26B1.h"
+#include "it/it_2725.h"
+#include "it/item.h"
+#include "it/types.h"
 
 #include <baselib/gobj.h>
 #include <baselib/memory.h>
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/random.h>
-
-#include "it/types.h"
-#include "it/item.h"
-#include "it/it_26B1.h"
-#include "it/it_2725.h"
 
 HSD_GObjProc* HSD_GObjProc_8038FD54(HSD_GObj*, HSD_GObjEvent, u8);
 void it_8027CE18(HSD_GObj*);
@@ -42,7 +41,8 @@ int grZakoGenerator_801CA394(void* arg0, int arg1, void* arg2, f32 arg3)
     return (int) result;
 }
 
-int grZakoGenerator_801CA43C(struct ZakoConfig* config, void* arg1_ptr, f32 arg1_f)
+int grZakoGenerator_801CA43C(struct ZakoConfig* config, void* arg1_ptr,
+                             f32 arg1_f)
 {
     int i;
     int count = 0;
@@ -58,14 +58,16 @@ int grZakoGenerator_801CA43C(struct ZakoConfig* config, void* arg1_ptr, f32 arg1
     dst = config->x4;
     for (i = 0; i < config->x8; i++) {
         lb_8000B1CC(arg1_ptr, src, dst);
-        lb_8000B1CC(arg1_ptr, (u8*)src + 0xC, (u8*)dst + 0xC);
+        lb_8000B1CC(arg1_ptr, (u8*) src + 0xC, (u8*) dst + 0xC);
         src++;
         dst++;
     }
 
     dst = config->x4;
     for (i = 0; i < config->x8; i++) {
-        if ((dst->x4 > arg1_f && dst->x10 > arg1_f) || (dst->x4 < arg1_f && dst->x10 < arg1_f)) {
+        if ((dst->x4 > arg1_f && dst->x10 > arg1_f) ||
+            (dst->x4 < arg1_f && dst->x10 < arg1_f))
+        {
             if (config->x10 > 0.0f) {
                 if (HSD_Randf() < config->x10) {
                     continue;
@@ -74,7 +76,9 @@ int grZakoGenerator_801CA43C(struct ZakoConfig* config, void* arg1_ptr, f32 arg1
         } else {
             f32 diff = dst->x10 - dst->x4;
             f32 results[3];
-            if (diff < 0.0f) diff = -diff;
+            if (diff < 0.0f) {
+                diff = -diff;
+            }
             if (diff > 0.0001f) {
                 f32 t = (arg1_f - dst->x4) / (dst->x10 - dst->x4);
                 results[0] = t * (dst->xC - dst->x0) + dst->x0;
@@ -86,14 +90,14 @@ int grZakoGenerator_801CA43C(struct ZakoConfig* config, void* arg1_ptr, f32 arg1
                 results[1] = arg1_f;
                 results[2] = t * (dst->x14 - dst->x8) + dst->x8;
             }
-            ((void (*)(f32*, int))config->xC)(results, i);
+            ((void (*)(f32*, int)) config->xC)(results, i);
             count++;
             continue;
         }
 
         if (config->x10 > 0.0f) {
             if (config->x14 != 0) {
-                grLib_801C9874((void*)config->x14);
+                grLib_801C9874((void*) config->x14);
                 config->x14 = 0;
             }
         }
@@ -163,25 +167,45 @@ s32 grZakoGenerator_801CA8B4(int arg1)
                         }
                     }
                     if (element->x0 != -1) {
-                        struct StageZakoEntry* entry = &stage_entries[element->x0 - 0x20];
+                        struct StageZakoEntry* entry =
+                            &stage_entries[element->x0 - 0x20];
                         u8 kind = entry->x0;
                         HSD_GObj* spawned = NULL;
                         Vec3 pos;
 
-                        pos.x = 0; pos.y = 0; pos.z = 0; // Placeholder
+                        pos.x = 0;
+                        pos.y = 0;
+                        pos.z = 0; // Placeholder
 
                         if (kind >= 0xDC && kind <= 0xFB) {
                             if (element->x8 != -1) {
-                                spawned = Ground_801C58E0(lbl_8049F030.x0, element->x8, NULL);
+                                spawned = Ground_801C58E0(lbl_8049F030.x0,
+                                                          element->x8, NULL);
                             }
                         } else {
                             switch (kind) {
-                                case 0x2B: spawned = it_8027B5B0(0x2B, &pos, NULL, NULL, 1); break;
-                                case 0x2D: spawned = it_8027B5B0(0x2D, &pos, NULL, NULL, 1); break;
-                                case 0x2E: spawned = it_8027B5B0(0x2E, &pos, NULL, NULL, 1); break;
-                                case 0xD3: spawned = it_802DD7F0(entry->x2, &pos, 0, -1); break;
-                                case 0xD5: spawned = it_802DC4BC(entry->x2, &pos, -1); break;
-                                case 0xD9: spawned = it_8027B5B0(0xD9, &pos, NULL, NULL, 1); break;
+                            case 0x2B:
+                                spawned =
+                                    it_8027B5B0(0x2B, &pos, NULL, NULL, 1);
+                                break;
+                            case 0x2D:
+                                spawned =
+                                    it_8027B5B0(0x2D, &pos, NULL, NULL, 1);
+                                break;
+                            case 0x2E:
+                                spawned =
+                                    it_8027B5B0(0x2E, &pos, NULL, NULL, 1);
+                                break;
+                            case 0xD3:
+                                spawned = it_802DD7F0(entry->x2, &pos, 0, -1);
+                                break;
+                            case 0xD5:
+                                spawned = it_802DC4BC(entry->x2, &pos, -1);
+                                break;
+                            case 0xD9:
+                                spawned =
+                                    it_8027B5B0(0xD9, &pos, NULL, NULL, 1);
+                                break;
                             }
                             if (spawned == NULL && kind < 0x2F) {
                                 spawned = it_802EA9FC(&pos, -1);
@@ -193,7 +217,7 @@ s32 grZakoGenerator_801CA8B4(int arg1)
 
                         if (spawned != NULL) {
                             element->x4 = spawned;
-                            *(s32*)((u8*)spawned->user_data + 0xDD8) = idx;
+                            *(s32*) ((u8*) spawned->user_data + 0xDD8) = idx;
                         }
                     }
                 }
@@ -204,24 +228,44 @@ s32 grZakoGenerator_801CA8B4(int arg1)
                     data->x3C2--;
                 } else {
                     if (data->x3C0 != -1) {
-                        struct StageZakoEntry* entry = &stage_entries[data->x3C0 - 0x20];
+                        struct StageZakoEntry* entry =
+                            &stage_entries[data->x3C0 - 0x20];
                         u8 kind = entry->x0;
                         HSD_GObj* spawned = NULL;
                         Vec3 pos;
-                        pos.x = 0; pos.y = 0; pos.z = 0;
+                        pos.x = 0;
+                        pos.y = 0;
+                        pos.z = 0;
 
                         if (kind >= 0xDC && kind <= 0xFB) {
                             if (data->x3C8 != -1) {
-                                spawned = Ground_801C58E0(lbl_8049F030.x0, data->x3C8, NULL);
+                                spawned = Ground_801C58E0(lbl_8049F030.x0,
+                                                          data->x3C8, NULL);
                             }
                         } else {
                             switch (kind) {
-                                case 0x2B: spawned = it_8027B5B0(0x2B, &pos, NULL, NULL, 1); break;
-                                case 0x2D: spawned = it_8027B5B0(0x2D, &pos, NULL, NULL, 1); break;
-                                case 0x2E: spawned = it_8027B5B0(0x2E, &pos, NULL, NULL, 1); break;
-                                case 0xD3: spawned = it_802DD7F0(entry->x2, &pos, 0, -1); break;
-                                case 0xD5: spawned = it_802DC4BC(entry->x2, &pos, -1); break;
-                                case 0xD9: spawned = it_8027B5B0(0xD9, &pos, NULL, NULL, 1); break;
+                            case 0x2B:
+                                spawned =
+                                    it_8027B5B0(0x2B, &pos, NULL, NULL, 1);
+                                break;
+                            case 0x2D:
+                                spawned =
+                                    it_8027B5B0(0x2D, &pos, NULL, NULL, 1);
+                                break;
+                            case 0x2E:
+                                spawned =
+                                    it_8027B5B0(0x2E, &pos, NULL, NULL, 1);
+                                break;
+                            case 0xD3:
+                                spawned = it_802DD7F0(entry->x2, &pos, 0, -1);
+                                break;
+                            case 0xD5:
+                                spawned = it_802DC4BC(entry->x2, &pos, -1);
+                                break;
+                            case 0xD9:
+                                spawned =
+                                    it_8027B5B0(0xD9, &pos, NULL, NULL, 1);
+                                break;
                             }
                             if (spawned == NULL && kind < 0x2F) {
                                 spawned = it_802EA9FC(&pos, -1);
@@ -232,15 +276,19 @@ s32 grZakoGenerator_801CA8B4(int arg1)
                         }
                         if (spawned != NULL) {
                             data->x3C4 = spawned;
-                            *(s32*)((u8*)spawned->user_data + 0xDD8) = 80;
+                            *(s32*) ((u8*) spawned->user_data + 0xDD8) = 80;
                         }
                     }
                 }
             }
         }
         idx++;
-        if (idx >= 81) idx = 0;
-        if (idx == lbl_8049F030.x8) break;
+        if (idx >= 81) {
+            idx = 0;
+        }
+        if (idx == lbl_8049F030.x8) {
+            break;
+        }
     }
     lbl_8049F030.x8 = idx;
     return 0;
@@ -312,7 +360,8 @@ s32 grZakoGenerator_801CADE0(void)
 HSD_GObj* grZakoGenerator_801CAE04(void* arg0)
 {
     HSD_GObj* gobj;
-    struct grZakoGenerator_Data* data = (struct grZakoGenerator_Data*) grZakoGenerator_801CA67C();
+    struct grZakoGenerator_Data* data =
+        (struct grZakoGenerator_Data*) grZakoGenerator_801CA67C();
     gobj = GObj_Create(2, 4, 0);
     if (gobj == NULL) {
         OSReport("%s(%d): error: create gobj\n", "grzakogenerator.c", 358);
@@ -348,7 +397,9 @@ void grZakoGenerator_801CAF08(void)
     HSD_GObj* next;
     HSD_GObj* item_gobj;
 
-    for (item_gobj = HSD_GObj_Entities->items; item_gobj != NULL; item_gobj = next) {
+    for (item_gobj = HSD_GObj_Entities->items; item_gobj != NULL;
+         item_gobj = next)
+    {
         enum_t kind;
         next = item_gobj->next;
         kind = itGetKind(item_gobj);

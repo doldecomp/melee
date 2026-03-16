@@ -163,7 +163,7 @@ void itHouou_UnkMotion4_Phys(Item_GObj* gobj)
     ip->xDD4_itemVar.pokemon.xE44 += attr->x1C;
     ip->x40_vel.y += ip->xDD4_itemVar.pokemon.xE44;
 
-    if (ip->pos.y < (*(f32*)((u8*)ip + 0xE3C)) - 1.0f) {
+    if (ip->pos.y < (*(f32*) ((u8*) ip + 0xE3C)) - 1.0f) {
         ip->x40_vel.y = 0.0f;
     }
 }

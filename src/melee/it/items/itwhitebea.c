@@ -7,8 +7,8 @@
 #include "it/it_2725.h"
 #include "it/item.h"
 #include "it/items/itfreeze.h"
-#include "mp/mplib.h"
 #include "it/types.h"
+#include "mp/mplib.h"
 #include "sysdolphin/baselib/random.h"
 
 void grIceMt_801FA6D8(void);
@@ -18,8 +18,6 @@ typedef struct itWhiteBeaAnim7Attrs {
     /* +10 */ f32 x10;
     /* +14 */ s16 x14;
 } itWhiteBeaAnim7Attrs;
-
-
 
 void it_802E31F8(Item_GObj* gobj)
 {
@@ -389,8 +387,7 @@ void it_802E3ED0(Item_GObj* gobj)
         ip->x40_vel.x *= 0.2f;
     }
     ip->facing_dir = ip->init_facing_dir;
-    mpCollSetFacingDir(&ip->x378_itemColl,
-                       ip->facing_dir == -1.0f ? -1 : 1);
+    mpCollSetFacingDir(&ip->x378_itemColl, ip->facing_dir == -1.0f ? -1 : 1);
     Item_80268E5C(gobj, 4, 3);
 }
 

@@ -1918,7 +1918,8 @@ void Camera_8002C1A8(void)
     }
 
     if (dir != 0) {
-        pause_cam_z_pos_init = camera->x32C * cm_803BCCA0.x8C + cm_803BCCA0.x90;
+        pause_cam_z_pos_init =
+            camera->x32C * cm_803BCCA0.x8C + cm_803BCCA0.x90;
         slot_ptr = &camera->x304;
         *slot_ptr = Camera_8002BA00((s8) *slot_ptr, dir);
         slot = *slot_ptr;
@@ -1947,13 +1948,11 @@ void Camera_8002C1A8(void)
 
     if (move_x != 0.0f || move_y != 0.0f) {
         if (camera->x304 == 10) {
-            if (sqrtf__Ff((camera->pause_eye_offset.x *
-                           camera->pause_eye_offset.x) +
-                          (camera->pause_eye_offset.y *
-                           camera->pause_eye_offset.y) +
-                          (camera->pause_eye_offset.z *
-                           camera->pause_eye_offset.z)) <
-                1.0f)
+            if (sqrtf__Ff(
+                    (camera->pause_eye_offset.x * camera->pause_eye_offset.x) +
+                    (camera->pause_eye_offset.y * camera->pause_eye_offset.y) +
+                    (camera->pause_eye_offset.z *
+                     camera->pause_eye_offset.z)) < 1.0f)
             {
                 camera->pause_eye_distance = 1.0f;
             }

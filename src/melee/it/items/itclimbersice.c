@@ -27,7 +27,8 @@ typedef struct itClimbersiceSetupAttrs {
 void it_802C16F8(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itClimbersiceSetupAttrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itClimbersiceSetupAttrs* attrs =
+        ip->xC4_article_data->x4_specialAttributes;
     HSD_JObj* child = NULL;
 
     ip->x40_vel.x = attrs->x10 * ip->facing_dir;
@@ -154,7 +155,8 @@ void itClimbersice_UnkMotion2_Phys(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
 
     if (it_802C1854(gobj)) {
-        itClimbersBlizzardAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+        itClimbersBlizzardAttributes* attrs =
+            ip->xC4_article_data->x4_specialAttributes;
         f32 speed = ip->x40_vel.x * attrs->x10;
 
         if (speed < 0.0f) {
@@ -171,7 +173,8 @@ bool itClimbersice_UnkMotion2_Coll(Item_GObj* gobj)
     it_8026D62C(gobj, fn_802C1D44);
     it_80276CB8(gobj);
     if (it_80276308(gobj) != 0) {
-        itClimbersBlizzardAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+        itClimbersBlizzardAttributes* attrs =
+            ip->xC4_article_data->x4_specialAttributes;
         f32 speed = ip->x40_vel.x;
 
         if (speed < 0.0f) {
@@ -227,7 +230,8 @@ bool it_2725_Logic90_HitShield(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     ItemAttr* item_attr = ip->xCC_item_attr;
-    itClimbersBlizzardAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itClimbersBlizzardAttributes* attrs =
+        ip->xC4_article_data->x4_specialAttributes;
     f32 abs_vel_x = ip->x40_vel.x;
 
     if (abs_vel_x < 0.0f) {

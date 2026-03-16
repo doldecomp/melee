@@ -114,8 +114,7 @@ void itOldkuri_UnkMotion1_Phys(Item_GObj* gobj)
             it_802D775C(gobj);
         }
     }
-    it_8027C8D0(&ip->x40_vel, &ip->x378_itemColl.floor.normal,
-                ip->facing_dir);
+    it_8027C8D0(&ip->x40_vel, &ip->x378_itemColl.floor.normal, ip->facing_dir);
     it_8027C0A8(gobj, 0.0f, 1.0f);
 }
 
@@ -154,9 +153,11 @@ bool itOldkuri_UnkMotion2_Anim(Item_GObj* gobj)
             it_802D848C(gobj, 2, 0x12);
         } else {
             Item* ip = GET_ITEM(gobj);
-            itOldkuriAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+            itOldkuriAttributes* attr =
+                ip->xC4_article_data->x4_specialAttributes;
 
-            ip->xDD4_itemVar.oldkuri.xDF4 = ip->facing_dir * ((f32*) attr->x0)[1];
+            ip->xDD4_itemVar.oldkuri.xDF4 =
+                ip->facing_dir * ((f32*) attr->x0)[1];
             ip->x40_vel.x = ip->xDD4_itemVar.oldkuri.xDF4;
             ip->x40_vel.z = 0.0f;
             ip->x40_vel.y = 0.0f;
@@ -176,8 +177,10 @@ void itOldkuri_UnkMotion2_Phys(Item_GObj* gobj)
     if (ip->xDD4_itemVar.oldkuri.xDFC != 0) {
         if (it_802750E8(gobj, 2) != 0) {
             Item* ip = GET_ITEM(gobj);
-            itOldkuriAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
-            ip->xDD4_itemVar.oldkuri.xDF4 = ip->facing_dir * ((f32*) attr->x0)[1];
+            itOldkuriAttributes* attr =
+                ip->xC4_article_data->x4_specialAttributes;
+            ip->xDD4_itemVar.oldkuri.xDF4 =
+                ip->facing_dir * ((f32*) attr->x0)[1];
             ip->x40_vel.x = ip->xDD4_itemVar.oldkuri.xDF4;
             ip->x40_vel.z = 0.0f;
             ip->x40_vel.y = 0.0f;
@@ -187,8 +190,7 @@ void itOldkuri_UnkMotion2_Phys(Item_GObj* gobj)
         }
     }
     ip->x40_vel.x = ip->xDD4_itemVar.oldkuri.xDF4;
-    it_8027C8D0(&ip->x40_vel, &ip->x378_itemColl.floor.normal,
-                ip->facing_dir);
+    it_8027C8D0(&ip->x40_vel, &ip->x378_itemColl.floor.normal, ip->facing_dir);
     it_8027C0A8(gobj, 0.0f, 1.0f);
 }
 

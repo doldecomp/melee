@@ -20,16 +20,14 @@
 
 #include "ftCommon/forward.h"
 
-#include "ftCommon/types.h"
-
 #include "ftCommon/ftCo_CaptureCut.h"
 #include "ftCommon/ftCo_ItemThrow.h"
 #include "ftCommon/ftCo_Throw.h"
-#include "it/items/itsamusgrapple.h"
-#include "it/items/itsscope.h"
+#include "ftCommon/types.h"
+#include "it/inlines.h"
 #include "it/items/itlinkhookshot.h"
 #include "it/items/itsamusgrapple.h"
-#include "it/inlines.h"
+#include "it/items/itsscope.h"
 #include "mp/mplib.h"
 
 #include <math.h>
@@ -501,10 +499,9 @@ void ft_800D76B8(Fighter_GObj* gobj)
     extern int ftCo_804D9024;
 
     if (it_8026B594(fp->item_gobj) == false) {
-        Fighter_ChangeMotionState(gobj, ftCo_MS_ItemScopeStart, Ft_MF_None,
-                                  *(f32*) &ftCo_804D9020,
-                                  *(f32*) &ftCo_804D9024,
-                                  *(f32*) &ftCo_804D9020, NULL);
+        Fighter_ChangeMotionState(
+            gobj, ftCo_MS_ItemScopeStart, Ft_MF_None, *(f32*) &ftCo_804D9020,
+            *(f32*) &ftCo_804D9024, *(f32*) &ftCo_804D9020, NULL);
     } else {
         Fighter_ChangeMotionState(gobj, ftCo_MS_ItemScopeStartEmpty,
                                   Ft_MF_None, *(f32*) &ftCo_804D9020,
@@ -608,8 +605,8 @@ void fn_800D7938(Fighter_GObj* gobj)
     temp_r30 = gobj;
     temp_r31 = GET_FIGHTER(temp_r30);
     if (temp_r31->item_gobj != NULL) {
-        temp_r4 =
-            it_80291DAC(temp_r31->item_gobj, (s32) ((FighterOverlay*) temp_r31)->x2340);
+        temp_r4 = it_80291DAC(temp_r31->item_gobj,
+                              (s32) ((FighterOverlay*) temp_r31)->x2340);
         if (temp_r4 != -1) {
             it_80291F14(temp_r31->item_gobj, temp_r4);
         }
@@ -739,8 +736,6 @@ void fn_800D7BDC(Fighter_GObj* gobj)
     fp->take_dmg_cb = fn_800D8378;
 }
 
-
-
 #pragma pop
 
 #pragma push
@@ -790,7 +785,8 @@ void ftCo_ItemScopeRapid_Anim(Fighter_GObj* gobj)
 
     PAD_STACK(8);
 
-    if (fp->cur_anim_frame >= 0.0F && fp->cur_anim_frame < fp->frame_speed_mul) {
+    if (fp->cur_anim_frame >= 0.0F && fp->cur_anim_frame < fp->frame_speed_mul)
+    {
         ft_800892A0(gobj);
         ft_80089824(gobj);
         fp->mv.co.common.x0--;
@@ -805,8 +801,7 @@ void ftCo_ItemScopeRapid_Anim(Fighter_GObj* gobj)
                                           0x0C4C5080, fp->cur_anim_frame,
                                           fp->frame_speed_mul, 0.0F, NULL);
             } else {
-                Fighter_ChangeMotionState(gobj,
-                                          ftCo_MS_ItemScopeAirRapidEmpty,
+                Fighter_ChangeMotionState(gobj, ftCo_MS_ItemScopeAirRapidEmpty,
                                           0x0C4C5080, fp->cur_anim_frame,
                                           fp->frame_speed_mul, 0.0F, NULL);
             }
@@ -822,7 +817,8 @@ void ftCo_ItemScopeAirRapid_Anim(Fighter_GObj* gobj)
 
     PAD_STACK(8);
 
-    if (fp->cur_anim_frame >= 0.0F && fp->cur_anim_frame < fp->frame_speed_mul) {
+    if (fp->cur_anim_frame >= 0.0F && fp->cur_anim_frame < fp->frame_speed_mul)
+    {
         ft_800892A0(gobj);
         ft_80089824(gobj);
         fp->mv.co.common.x0--;
@@ -837,8 +833,7 @@ void ftCo_ItemScopeAirRapid_Anim(Fighter_GObj* gobj)
                                           0x0C4C5080, fp->cur_anim_frame,
                                           fp->frame_speed_mul, 0.0F, NULL);
             } else {
-                Fighter_ChangeMotionState(gobj,
-                                          ftCo_MS_ItemScopeAirRapidEmpty,
+                Fighter_ChangeMotionState(gobj, ftCo_MS_ItemScopeAirRapidEmpty,
                                           0x0C4C5080, fp->cur_anim_frame,
                                           fp->frame_speed_mul, 0.0F, NULL);
             }
@@ -910,10 +905,9 @@ void fn_800D8140(Fighter_GObj* gobj, int arg1)
     {
         HSD_GObj* gobj2 = gobj;
 
-        Fighter_ChangeMotionState(gobj2, msid, Ft_MF_None,
-                                  *(f32*) &ftCo_804D9030,
-                                  *(f32*) &ftCo_804D9034,
-                                  *(f32*) &ftCo_804D9030, NULL);
+        Fighter_ChangeMotionState(
+            gobj2, msid, Ft_MF_None, *(f32*) &ftCo_804D9030,
+            *(f32*) &ftCo_804D9034, *(f32*) &ftCo_804D9030, NULL);
     }
     fp->mv.co.common.x0 = arg1;
     fp->accessory4_cb = fn_800D86B8;
@@ -1288,8 +1282,6 @@ bool fn_800D8E94(Fighter_GObj* gobj)
     return true;
 }
 
-
-
 bool fn_800D9228(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -1379,8 +1371,6 @@ bool fn_800D952C(Fighter_GObj* gobj)
     return true;
 }
 
-
-
 /// #fn_800D9930
 
 void fn_800D9C64(Fighter_GObj* gobj)
@@ -1430,7 +1420,6 @@ void fn_800DA004(Fighter_GObj* gobj)
     ftCo_Fall_Enter(gobj);
     ftCo_Fall_Enter(victim);
 }
-
 
 void fn_800DA190(Fighter_GObj* gobj)
 {
@@ -1855,8 +1844,8 @@ void ftCo_CapturePulledLw_Phys(Fighter_GObj* gobj)
     temp_r30 = gobj;
     temp_r31 = GET_FIGHTER(temp_r30);
 
-    lb_8000B1CC(GET_FIGHTER(temp_r31->victim_gobj)->mv.co.capturedamage.x18, NULL,
-                &sp20);
+    lb_8000B1CC(GET_FIGHTER(temp_r31->victim_gobj)->mv.co.capturedamage.x18,
+                NULL, &sp20);
     lb_8000B1CC(
         temp_r31->parts[ftParts_GetBoneIndex(temp_r31, FtPart_XRotN)].joint,
         NULL, &sp2C);
@@ -1970,8 +1959,6 @@ static void fn_800DB5D8(Fighter_GObj* gobj)
 }
 #pragma pop
 
-
-
 void fn_800DB790(Fighter_GObj* gobj)
 {
     ftHurtboxInit hurt;
@@ -1992,7 +1979,8 @@ void fn_800DB790(Fighter_GObj* gobj)
         hurt.is_grabbable = false;
         hurt.a_offset.x = hurt.a_offset.y = hurt.a_offset.z = 0.0F;
         hurt.b_offset.x = hurt.b_offset.y = hurt.b_offset.z = 0.0F;
-        hurt.scale = ftYs_Init_8012BAC0(victim_fp) / ftCommon_GetModelScale(fp);
+        hurt.scale =
+            ftYs_Init_8012BAC0(victim_fp) / ftCommon_GetModelScale(fp);
         ftColl_HurtboxInit(fp, fp->hurt_capsules, &hurt);
     }
 
@@ -2093,7 +2081,8 @@ void fn_800DBAE4(Fighter_GObj* gobj)
         hurt.is_grabbable = false;
         hurt.a_offset.x = hurt.a_offset.y = hurt.a_offset.z = 0.0F;
         hurt.b_offset.x = hurt.b_offset.y = hurt.b_offset.z = 0.0F;
-        hurt.scale = ftYs_Init_8012BAC0(victim_fp) / ftCommon_GetModelScale(fp);
+        hurt.scale =
+            ftYs_Init_8012BAC0(victim_fp) / ftCommon_GetModelScale(fp);
         ftColl_HurtboxInit(fp, fp->hurt_capsules, &hurt);
     }
 

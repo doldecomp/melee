@@ -40,8 +40,8 @@ void it_2725_Logic39_Destroyed(Item_GObj* gobj)
     if (ip->xDD4_itemVar.pikachuthunder.x0 == 0 &&
         ip->xDD4_itemVar.pikachuthunder.x38 != NULL)
     {
-        if (ftPk_SpecialLw_CheckProperty(ip->xDD4_itemVar.pikachuthunder.x38) ==
-            0)
+        if (ftPk_SpecialLw_CheckProperty(
+                ip->xDD4_itemVar.pikachuthunder.x38) == 0)
         {
             ftPk_SpecialLw_SetState_Unk0(ip->xDD4_itemVar.pikachuthunder.x38);
         }

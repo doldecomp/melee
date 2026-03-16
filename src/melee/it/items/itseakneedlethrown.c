@@ -5,7 +5,6 @@
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
-
 #include "sysdolphin/baselib/jobj.h"
 
 typedef struct itSeakNeedleThrownAnimVars {

@@ -25,7 +25,8 @@ grMaterial_801C8D44(int arg0, int arg1, Ground* arg2, Vec3* arg3, int arg4,
 /* 1C8E48 */ static bool grMaterial_801C8E48(HSD_GObj* gobj);
 /* 1C8E74 */ static void grMaterial_801C8E74(void);
 /* 1C8EF8 */ static void fn_801C8EF8(HSD_MObj* mobj, u32 rendermode);
-/* 1C9490 */ void grMaterial_801C9490(Ground_GObj* gobj, ColorOverlay* overlay);
+/* 1C9490 */ void grMaterial_801C9490(Ground_GObj* gobj,
+                                      ColorOverlay* overlay);
 
 struct grMaterial_801C9490_cmd {
     u16 pad0 : 6;
@@ -334,7 +335,8 @@ typedef struct grMaterial_801C9604_raw {
 void grMaterial_801C9604(HSD_GObj* bg, int arg1, bool arg2)
 {
     Ground* gp = bg->user_data;
-    grMaterial_801C9604_raw* raw = (grMaterial_801C9604_raw*) ((u8*) gp + 0x40);
+    grMaterial_801C9604_raw* raw =
+        (grMaterial_801C9604_raw*) ((u8*) gp + 0x40);
     ColorOverlay* overlay = (ColorOverlay*) raw;
 
     raw->x44 = arg2;
@@ -356,7 +358,8 @@ void grMaterial_801C9698(HSD_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
 
-    if (lb_80014258(gobj, (ColorOverlay*) ((u8*) gp + 0x40), fn_801C9664) != 0) {
+    if (lb_80014258(gobj, (ColorOverlay*) ((u8*) gp + 0x40), fn_801C9664) != 0)
+    {
         gp->x10_flags.b4 = 1;
     }
 }

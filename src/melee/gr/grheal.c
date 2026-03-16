@@ -11,18 +11,18 @@
 #include "baselib/gobjproc.h"
 #include "baselib/jobj.h"
 #include "dolphin/types.h"
+#include "gm/gm_1832.h"
 
 #include "gr/forward.h"
 
 #include "gr/granime.h"
 #include "gr/grdisplay.h"
 #include "gr/ground.h"
-#include "gr/inlines.h"
 #include "gr/grzakogenerator.h"
+#include "gr/inlines.h"
 #include "gr/stage.h"
 #include "it/it_26B1.h"
 #include "it/types.h"
-#include "gm/gm_1832.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 
@@ -63,7 +63,8 @@ bool grHeal_8021EFE4(void)
 Ground_GObj* grHeal_8021EFEC(u32 idx)
 {
     HSD_GObj* gobj;
-    StageCallbacks* callbacks = (StageCallbacks*) ((u8*) grHeal_803E83B8 + 0x9C);
+    StageCallbacks* callbacks =
+        (StageCallbacks*) ((u8*) grHeal_803E83B8 + 0x9C);
     callbacks += idx;
 
     gobj = Ground_801C14D0(idx);

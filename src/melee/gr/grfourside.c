@@ -462,8 +462,8 @@ void grFourside_801F3B70(Ground_GObj* gobj)
     CmSubject* cam;
     lb_8000B1CC(jobj, NULL, &local18);
     if (gp->gv.foursideUfo.xC != 0) {
-        if (local18.y <= Stage_GetCamBoundsTopOffset() +
-                             grFs_804D69D8->ufo_cs_offs)
+        if (local18.y <=
+            Stage_GetCamBoundsTopOffset() + grFs_804D69D8->ufo_cs_offs)
         {
             if (gp->gv.foursideUfo.x3 == 0) {
                 gp->gv.foursideUfo.x3 = 1;

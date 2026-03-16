@@ -68,7 +68,8 @@ bool itGamewatchchef_UnkMotion1_Coll(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     itGamewatchchefAttributes* attrs =
         ip->xC4_article_data->x4_specialAttributes;
-    itGamewatchchefAttrEntry* entry = &attrs->entries[ip->xDD4_itemVar.gamewatchchef.x4];
+    itGamewatchchefAttrEntry* entry =
+        &attrs->entries[ip->xDD4_itemVar.gamewatchchef.x4];
 
     if (ip->x40_vel.x != 0.0f) {
         u32 flags = it_8026DAA8(gobj);

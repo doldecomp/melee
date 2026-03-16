@@ -296,7 +296,8 @@ void fn_801CFAFC(HSD_GObj* item_gobj, Ground* gp, Vec3* pos,
 {
     *(s16*) ((u8*) gp + 0xC4) = 4;
     if (ftLib_80086960(fighter_gobj)) {
-        ftLib_80086A4C(fighter_gobj, ((grCastleRespawnParams*) grCs_804D6970)->x4);
+        ftLib_80086A4C(fighter_gobj,
+                       ((grCastleRespawnParams*) grCs_804D6970)->x4);
     }
 }
 
@@ -306,7 +307,8 @@ void fn_801CFB68(HSD_GObj* item_gobj, Ground* gp, HSD_GObj* fighter_gobj)
 {
     *(s16*) ((u8*) gp + 0xC4) = 4;
     if (ftLib_80086960(fighter_gobj)) {
-        ftLib_80086A4C(fighter_gobj, ((grCastleRespawnParams*) grCs_804D6970)->x4);
+        ftLib_80086A4C(fighter_gobj,
+                       ((grCastleRespawnParams*) grCs_804D6970)->x4);
     }
 }
 
