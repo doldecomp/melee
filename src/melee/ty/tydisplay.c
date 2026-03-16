@@ -92,6 +92,21 @@ typedef struct TyDspSceneGfx {
     /* 0x08 */ HSD_GObj* x08;
 } TyDspSceneGfx;
 
+typedef struct TyDspPos {
+    /* 0x00 */ f32 x;
+    /* 0x04 */ f32 z;
+} TyDspPos;
+
+typedef struct TyDspGrid {
+    /* 0x000 */ s32 x00;
+    /* 0x004 */ f32 x04;
+    /* 0x008 */ f32 x08;
+    /* 0x00C */ f32 x0C;
+    /* 0x010 */ f32 x10;
+    /* 0x014 */ TySortElemI sort[301];
+    /* 0x97C */ TyDspPos pos[301];
+} TyDspGrid;
+
 /// #un_803181BC
 
 void un_803182D4_OnFrame(void)
@@ -345,13 +360,12 @@ extern void* un_804D6F10;
 
 s32 un_80318B1C(s32 arg0)
 {
-    s32* base = (s32*) un_804D6F14;
+    TyDspGrid* grid = (TyDspGrid*) un_804D6F14;
     s32 start;
     s32 placed;
     s32 i;
     s32 rand_id;
-    s32* check;
-    s32* slot;
+    TyDspEntry* check;
 
     if (arg0 > 1) {
         start = HSD_Randi(arg0 - 1);
@@ -365,25 +379,24 @@ s32 un_80318B1C(s32 arg0)
         while (placed < arg0) {
             if (i >= 0x125) {
                 rand_id = HSD_Randi(0x124);
-                check = (s32*) un_8031B9DC(rand_id);
-                while (*check == -1) {
+                check = (TyDspEntry*) un_8031B9DC(rand_id);
+                while (check->x00 == -1) {
                     rand_id = HSD_Randi(0x124);
-                    check = (s32*) un_8031B9DC(rand_id);
+                    check = (TyDspEntry*) un_8031B9DC(rand_id);
                 }
-                slot = (s32*) ((u8*) base + start * 8);
-                slot[5] = rand_id;
-                slot[6] = (s32) un_803060BC(slot[5], 7);
+                grid->sort[start].key = rand_id;
+                grid->sort[start].val =
+                    (s32) un_803060BC(grid->sort[start].key, 7);
                 start++;
                 if (start >= arg0) {
                     start = 0;
                 }
                 placed++;
             } else {
-                check = (s32*) un_8031B9DC(i);
-                if (*check != -1) {
-                    slot = (s32*) ((u8*) base + start * 8);
-                    slot[5] = i;
-                    slot[6] = (s32) un_803060BC(i, 7);
+                check = (TyDspEntry*) un_8031B9DC(i);
+                if (check->x00 != -1) {
+                    grid->sort[start].key = i;
+                    grid->sort[start].val = (s32) un_803060BC(i, 7);
                     start++;
                     if (start >= arg0) {
                         start = 0;
@@ -398,9 +411,8 @@ s32 un_80318B1C(s32 arg0)
         do {
             if (un_803048C0(i) != 0) {
                 un_8031B9DC(i);
-                slot = (s32*) ((u8*) base + start * 8);
-                slot[5] = i;
-                slot[6] = (s32) un_803060BC(i, 7);
+                grid->sort[start].key = i;
+                grid->sort[start].val = (s32) un_803060BC(i, 7);
                 start++;
                 if (start >= arg0) {
                     start = 0;
