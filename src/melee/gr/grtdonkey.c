@@ -106,8 +106,7 @@ static HSD_GObj* grTDonkey_802202CC(int gobj_id)
     if (gobj != NULL) {
         Ground_SetupStageCallbacks(gobj, callbacks);
     } else {
-        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 0xc3,
-                 gobj_id);
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 0xc3, gobj_id);
     }
 
     return gobj;

@@ -8,10 +8,10 @@
 #include "lb/lb_00F9.h"
 #include "lb/types.h"
 
+#include <dolphin/os/OSError.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
-#include <dolphin/os/OSError.h>
 
 StageCallbacks grTPk_803E9270[] = {
     { grTPikachu_80223008, grTPikachu_80223034, grTPikachu_8022303C,

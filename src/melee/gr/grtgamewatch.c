@@ -9,10 +9,10 @@
 #include "lb/lb_00F9.h"
 #include "lb/types.h"
 
+#include <dolphin/os/OSError.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
-#include <dolphin/os/OSError.h>
 
 StageCallbacks grTGw_803E96F8[] = {
     { grTGameWatch_8022429C, grTGameWatch_802242C8, grTGameWatch_802242D0,
