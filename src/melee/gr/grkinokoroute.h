@@ -30,9 +30,9 @@
 /* 208368 */ void grKinokoRoute_80208368(Ground_GObj*);
 /* 20836C */ UNK_RET grKinokoRoute_8020836C(UNK_PARAMS);
 /* 208480 */ bool grKinokoRoute_80208480(bool);
-/* 2084B4 */ UNK_RET grKinokoRoute_802084B4(UNK_PARAMS);
+/* 2084B4 */ void grKinokoRoute_802084B4(HSD_GObj*);
 /* 208564 */ UNK_RET grKinokoRoute_80208564(UNK_PARAMS);
-/* 208660 */ UNK_RET grKinokoRoute_80208660(UNK_PARAMS);
+/* 208660 */ bool grKinokoRoute_80208660(s32, HSD_GObj*);
 /* 2086EC */ void grKinokoRoute_802086EC(Vec3*, f32);
 /* 208754 */ DynamicsDesc* grKinokoRoute_80208754(enum_t);
 /* 20875C */ bool grKinokoRoute_8020875C(Vec3*, int arg, HSD_JObj* jobj);
