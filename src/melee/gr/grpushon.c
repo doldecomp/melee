@@ -295,10 +295,7 @@ HSD_LObj* grPushOn_80218ED4(HSD_GObj* gobj)
     new_lobj = HSD_LObjLoadDesc(&grPushOn_803E7B74);
     if (new_lobj != NULL) {
         pos = grPushOn_803B8458;
-        if (lobj == NULL) {
-            __assert("lobj.h", 0x136, "lobj");
-        }
-        lobj->next = new_lobj;
+        HSD_LObjSetNext(lobj, new_lobj);
         HSD_LObjSetPosition(new_lobj, &pos);
         HSD_LObjSetFlags(new_lobj, 0x20);
     }
@@ -321,10 +318,7 @@ HSD_LObj* grPushOn_80218FC0(HSD_GObj* gobj)
     new_lobj = HSD_LObjLoadDesc(&grPushOn_803E7B90);
     if (new_lobj != NULL) {
         pos = grPushOn_803B8464;
-        if (lobj == NULL) {
-            __assert("lobj.h", 0x136, "lobj");
-        }
-        lobj->next = new_lobj;
+        HSD_LObjSetNext(lobj, new_lobj);
         HSD_LObjSetPosition(new_lobj, &pos);
     }
     return new_lobj;

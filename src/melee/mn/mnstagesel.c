@@ -414,10 +414,7 @@ void mnStageSel_8025A998_OnEnter(void* arg0)
             gobj = GObj_Create(3, 4, 0x80);
             lobj1 = HSD_LObjLoadDesc(temp_r3->unk4);
             lobj2 = HSD_LObjLoadDesc(temp_r3->unk8);
-            if (lobj1 == NULL) {
-                __assert("lobj.h", 0x136, "lobj");
-            }
-            lobj1->next = lobj2;
+            HSD_LObjSetNext(lobj1, lobj2);
             HSD_GObjObject_80390A70(gobj, (u8) HSD_GObj_804D784A, lobj1);
             GObj_SetupGXLink(gobj, HSD_GObj_LObjCallback, 0, 0x80);
         }
