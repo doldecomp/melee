@@ -12,7 +12,30 @@
 #include "lb/lb_00B0.h"
 
 static void* grHr_804D6AE8;
-extern StageCallbacks grHr_803E8140[];
+StageCallbacks grHr_803E8140[11] = {
+    { grHomeRun_8021C914, grHomeRun_8021CB10, grHomeRun_8021CB18,
+      grHomeRun_8021CB1C, 0 },
+    { grHomeRun_8021E038, grHomeRun_8021E064, grHomeRun_8021E06C,
+      grHomeRun_8021E070, 0 },
+    { grHomeRun_8021E074, grHomeRun_8021E0CC, grHomeRun_8021E0D4,
+      grHomeRun_8021E18C, 0 },
+    { grHomeRun_8021E4C4, grHomeRun_8021E4F0, grHomeRun_8021E4F8,
+      grHomeRun_8021E4FC, 0 },
+    { grHomeRun_8021DEB4, grHomeRun_8021DEE0, grHomeRun_8021DEE8,
+      grHomeRun_8021DEEC, 0 },
+    { grHomeRun_8021DEF0, grHomeRun_8021DF48, grHomeRun_8021DF50,
+      grHomeRun_8021E008, 0 },
+    { grHomeRun_8021E1BC, grHomeRun_8021E1E8, grHomeRun_8021E1F0,
+      grHomeRun_8021E1F4, 0 },
+    { grHomeRun_8021E1F8, grHomeRun_8021E250, grHomeRun_8021E258,
+      grHomeRun_8021E310, 0 },
+    { grHomeRun_8021E340, grHomeRun_8021E36C, grHomeRun_8021E374,
+      grHomeRun_8021E378, 0 },
+    { grHomeRun_8021E37C, grHomeRun_8021E3D4, grHomeRun_8021E3DC,
+      grHomeRun_8021E494, 0 },
+    { grHomeRun_8021CB20, grHomeRun_8021D678, grHomeRun_8021D680,
+      grHomeRun_8021DEB0, 0xC0000000 },
+};
 
 void grHomeRun_8021C750(bool arg) {}
 

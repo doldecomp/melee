@@ -19,7 +19,16 @@ static struct {
     int x0;
 }* grOk_804D6A90;
 
-extern StageCallbacks grOk_803E658C[];
+StageCallbacks grOk_803E658C[4] = {
+    { grOldKongo_8020F618, grOldKongo_8020F644, grOldKongo_8020F64C,
+      grOldKongo_8020F650, 0 },
+    { grOldKongo_8020F6E4, grOldKongo_8020F880, grOldKongo_8020F888,
+      grOldKongo_80210058, 0 },
+    { grOldKongo_8021005C, grOldKongo_802100F4, grOldKongo_802100FC,
+      grOldKongo_80210450, 0 },
+    { grOldKongo_8020F654, grOldKongo_8020F6B4, grOldKongo_8020F6BC,
+      grOldKongo_8020F6E0, 0xC0000000 },
+};
 
 void grOldKongo_8020F468(bool arg) {}
 

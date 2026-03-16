@@ -22,7 +22,26 @@ static void* grOp_804D6A9C;
 
 static int grOp_804D48E0[1][2] = { { 0, 0 } };
 
-extern StageCallbacks grOp_803E6688[];
+StageCallbacks grOp_803E6688[9] = {
+    { grOldPupupu_8021099C, grOldPupupu_802109C8, grOldPupupu_802109D0,
+      grOldPupupu_802109D4, 0 },
+    { grOldPupupu_802109D8, grOldPupupu_80210A1C, grOldPupupu_80210A24,
+      grOldPupupu_80210B00, 0 },
+    { grOldPupupu_80210BE4, grOldPupupu_80210C2C, grOldPupupu_80210C34,
+      grOldPupupu_80210C78, 0 },
+    { grOldPupupu_80211110, grOldPupupu_8021118C, grOldPupupu_80211194,
+      grOldPupupu_80211198, 0 },
+    { grOldPupupu_80210B04, grOldPupupu_80210B48, grOldPupupu_80210B50,
+      grOldPupupu_80210B54, 0 },
+    { grOldPupupu_80210B58, grOldPupupu_80210BB8, grOldPupupu_80210BC0,
+      grOldPupupu_80210BE0, 0xC0000000 },
+    { grOldPupupu_80211C10, grOldPupupu_80211C14, grOldPupupu_80211C1C,
+      grOldPupupu_80211C9C, 0 },
+    { grOldPupupu_8021119C, grOldPupupu_80211284, grOldPupupu_802113E0,
+      grOldPupupu_80211C0C, 0 },
+    { grOldPupupu_80210C7C, grOldPupupu_80210D08, grOldPupupu_80210D10,
+      grOldPupupu_8021110C, 0 },
+};
 
 void grOldPupupu_802107DC(bool arg) {}
 
