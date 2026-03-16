@@ -106,7 +106,8 @@ void* efSync_Spawn(s32 arg_gfx_id, HSD_GObj* arg_gobj, ...)
         return efAsync_80063930(gfx_id, arg_gobj, vlist);
     }
     if (gfx_id < 0x4BA) {
-        // return efSpecial_SpawnSpecial(gfx_id, arg_gobj, va_arg(vlist, void*));
+        // return efSpecial_SpawnSpecial(gfx_id, arg_gobj, va_arg(vlist,
+        // void*));
         return efSpecial_SpawnSpecial(gfx_id, arg_gobj, vlist);
     }
     efLib_804D64E8 = 1;

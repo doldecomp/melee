@@ -20,11 +20,11 @@
 #include "lb/lb_00F9.h"
 #include "lb/types.h"
 #include "mp/mplib.h"
+#include "sysdolphin/baselib/lobj.h"
 
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
 #include <baselib/random.h>
-#include "sysdolphin/baselib/lobj.h"
 
 struct grPushOn_Entry {
     s32 x0;

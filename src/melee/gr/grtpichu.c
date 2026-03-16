@@ -119,8 +119,7 @@ static HSD_GObj* grTPichu_80222C3C(int gobj_id)
     if (gobj != NULL) {
         Ground_SetupStageCallbacks(gobj, callbacks);
     } else {
-        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 0xc2,
-                 gobj_id);
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 0xc2, gobj_id);
     }
 
     return gobj;

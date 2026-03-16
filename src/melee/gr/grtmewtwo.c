@@ -142,8 +142,7 @@ Ground_GObj* grTMewtwo_80222284(int index)
     if (gobj != NULL) {
         Ground_SetupStageCallbacks(gobj, callbacks);
     } else {
-        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 201,
-                 index);
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 201, index);
     }
 
     return gobj;

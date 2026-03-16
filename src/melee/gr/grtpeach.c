@@ -126,8 +126,7 @@ Ground_GObj* grTPeach_80222958(int index)
     if (gobj != NULL) {
         Ground_SetupStageCallbacks(gobj, callbacks);
     } else {
-        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 195,
-                 index);
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 195, index);
     }
 
     return gobj;

@@ -28,7 +28,8 @@
 /* 218ED0 */ void grPushOn_80218ED0(Ground_GObj*);
 /* 218ED4 */ HSD_LObj* grPushOn_80218ED4(HSD_GObj*);
 /* 218FC0 */ HSD_LObj* grPushOn_80218FC0(HSD_GObj*);
-/* 2190A0 */ void fn_802190A0(Ground*, s32, CollData*, s32, mpLib_GroundEnum, f32);
+/* 2190A0 */ void fn_802190A0(Ground*, s32, CollData*, s32, mpLib_GroundEnum,
+                              f32);
 /* 2190D0 */ void grPushOn_802190D0(HSD_GObj*);
 /* 219204 */ void grPushOn_80219204(int arg0, int* out1, int* out2);
 /* 219230 */ int grPushOn_80219230(int);

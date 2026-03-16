@@ -124,8 +124,7 @@ HSD_GObj* grTMario_8021F8E4(s32 arg0)
     if (gobj != NULL) {
         Ground_SetupStageCallbacks(gobj, callbacks);
     } else {
-        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 0xCD,
-                 arg0);
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 0xCD, arg0);
     }
 
     return gobj;

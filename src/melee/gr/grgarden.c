@@ -19,6 +19,7 @@
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 
+#include <dolphin/os/OSError.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjobject.h>
@@ -26,7 +27,6 @@
 #include <baselib/gobjuserdata.h>
 #include <baselib/jobj.h>
 #include <baselib/random.h>
-#include <dolphin/os/OSError.h>
 
 StageCallbacks grGd_803E5248[] = {
     { grGarden_80202D60, grGarden_80202D8C, grGarden_80202D94,
@@ -109,8 +109,7 @@ HSD_GObj* grGarden_80202C78(int gobj_id)
     if (gobj != NULL) {
         Ground_SetupStageCallbacks(gobj, callbacks);
     } else {
-        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 0xE3,
-                 gobj_id);
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 0xE3, gobj_id);
     }
 
     return gobj;
