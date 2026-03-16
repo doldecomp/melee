@@ -461,8 +461,8 @@ s32 un_80318B1C(s32 arg0)
 
 void un_80318CB4(s32 arg0)
 {
-    u8* grid = (u8*) un_804D6F14;
-    u8* cfg = (u8*) un_804D6F18;
+    TyDspGrid* grid = (TyDspGrid*) un_804D6F14;
+    TyDspConfig* cfg = (TyDspConfig*) un_804D6F18;
     s32 prev_ring_size;
     s32 ring_count = 0;
     s32 ring_max = 6;
@@ -481,10 +481,10 @@ void un_80318CB4(s32 arg0)
     PAD_STACK(0x48);
 
     memzero(grid, 0x12E4);
-    *(f32*)(grid + 0x08) = -3.5f;
-    *(f32*)(grid + 0x04) = -3.5f;
-    *(f32*)(grid + 0x10) = 3.5f;
-    *(f32*)(grid + 0x0C) = 3.5f;
+    grid->x08 = -3.5f;
+    grid->x04 = -3.5f;
+    grid->x10 = 3.5f;
+    grid->x0C = 3.5f;
 
     if (arg0 != 0) {
         base_step = 9.0f;
@@ -493,8 +493,8 @@ void un_80318CB4(s32 arg0)
     }
     radius = base_step;
 
-    ptr = grid;
-    for (i = 0; i < *(s32*)(cfg + 0x08); i++) {
+    ptr = (u8*) grid;
+    for (i = 0; i < cfg->x08; i++) {
         if (i == 0) {
             *(f32*)(ptr + 0x97C) = 0.0f;
             *(f32*)(ptr + 0x980) = 0.0f;
@@ -534,7 +534,7 @@ retry:
                         }
                     }
                     k = i - 1;
-                    other = grid + (k * 8);
+                    other = (u8*) grid + (k * 8);
                     while (k >= start) {
                         f32 dx = *(f32*)(ptr + 0x97C) - *(f32*)(other + 0x97C);
                         f32 dz = *(f32*)(ptr + 0x980) - *(f32*)(other + 0x980);
@@ -580,29 +580,29 @@ retry:
         }
         {
             f32 x = *(f32*)(ptr + 0x97C);
-            if (x < *(f32*)(grid + 0x04)) *(f32*)(grid + 0x04) = x;
+            if (x < grid->x04) grid->x04 = x;
         }
         {
             f32 x = *(f32*)(ptr + 0x97C);
-            if (x > *(f32*)(grid + 0x0C)) *(f32*)(grid + 0x0C) = x;
+            if (x > grid->x0C) grid->x0C = x;
         }
         {
             f32 z = *(f32*)(ptr + 0x980);
-            if (z < *(f32*)(grid + 0x08)) *(f32*)(grid + 0x08) = z;
+            if (z < grid->x08) grid->x08 = z;
         }
         {
             f32 z = *(f32*)(ptr + 0x980);
-            if (z > *(f32*)(grid + 0x10)) *(f32*)(grid + 0x10) = z;
+            if (z > grid->x10) grid->x10 = z;
         }
         ptr += 8;
     }
 
-    count = *(s32*)(cfg + 0x08);
+    count = cfg->x08;
     if (count > 1) {
         n2 = count - 1;
         if (n2 > 0) {
             TySortElem tmp;
-            TySortElem* sort = (TySortElem*)(grid + 0x97C);
+            TySortElem* sort = (TySortElem*) grid->pos;
             mid = n2 / 2;
 
             if (mid != 0) {
@@ -618,7 +618,7 @@ retry:
                     pivot += 1;
                     j += 8;
                     if (pivot != n) {
-                        TySortElem* s = (TySortElem*)(grid + j + 0x97C);
+                        TySortElem* s = (TySortElem*)((u8*)grid->pos + j);
                         tmp = *s;
                         *s = *(TySortElem*)ptr;
                         *(TySortElem*)ptr = tmp;
@@ -638,14 +638,14 @@ retry:
         }
     }
 
-    un_80318B1C(*(s32*)(cfg + 0x08));
+    un_80318B1C(cfg->x08);
 
-    count = *(s32*)(cfg + 0x08);
+    count = cfg->x08;
     if (count > 1) {
         n2 = (count / 3) * 2;
         if (n2 > 0) {
             TySortElemI tmp;
-            TySortElemI* sort = (TySortElemI*)(grid + 0x14);
+            TySortElemI* sort = grid->sort;
             mid = n2 / 2;
 
             if (mid != 0) {
@@ -661,7 +661,7 @@ retry:
                     pivot += 1;
                     j += 8;
                     if (pivot != n) {
-                        TySortElemI* s = (TySortElemI*)(grid + j + 0x14);
+                        TySortElemI* s = (TySortElemI*)((u8*)grid->sort + j);
                         tmp = *s;
                         *s = *(TySortElemI*)ptr;
                         *(TySortElemI*)ptr = tmp;
@@ -684,13 +684,13 @@ retry:
     {
         s32 k;
         s32 off = 0;
-        u8* posptr = grid;
-        ptr = grid;
-        for (k = 0; k < *(s32*)(cfg + 0x08); k++) {
+        u8* posptr = (u8*) grid;
+        ptr = (u8*) grid;
+        for (k = 0; k < cfg->x08; k++) {
             HSD_GObj* gobj;
             HSD_JObj** jobjArr;
-            *(HSD_GObj**)(cfg + 0x78) = un_8031BC54(*(s32*)(ptr + 0x14));
-            gobj = *(HSD_GObj**)(cfg + 0x78);
+            cfg->x78 = un_8031BC54(*(s32*)(ptr + 0x14));
+            gobj = cfg->x78;
             if (gobj != NULL) {
                 jobjArr = un_804D6F10;
                 *(HSD_JObj**)((u8*)jobjArr + off) = (HSD_JObj*) gobj->hsd_obj;
