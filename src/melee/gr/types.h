@@ -1043,6 +1043,15 @@ struct Last_GroundVars {
     /* +1C gp+E0    */ HSD_Generator* xE0;
 };
 
+struct grPushOn_GroundVars {
+    /* +00 gp+C4 */ void* gobj;
+    /* +04 gp+C8 */ HSD_LObj* lobjs[20];
+    /* +54 gp+118 */ u32 lobj_flags[20];
+    /* +A4 gp+168 */ s32 count;
+    /* +A8 gp+16C */ HSD_LObj* point_light;
+    /* +AC gp+170 */ HSD_LObj* spot_light;
+};
+
 struct Map_GroundVars {
     /* +00 gp+C4:0  */ u32 xC4_b0 : 1;
     /* +00 gp+C4:1  */ u32 xC4_b1 : 1;
@@ -1224,6 +1233,7 @@ struct Ground {
             struct Battlefield battle;
             struct Last_GroundVars last;
             struct Map_GroundVars map;
+            struct grPushOn_GroundVars pushon;
         } u;
     };
 };
