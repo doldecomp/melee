@@ -1,4 +1,4 @@
-#include "ef_061D.h"
+#include "efspecial.h"
 
 #include "eflib.h"
 #include "types.h"
@@ -16,7 +16,7 @@
 extern volatile u32 efLib_804D64E8;
 extern volatile s32 efLib_804D64F0;
 
-void* ef_80061D70(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
+void* efSpecial_SpawnSpecial(s32 gfx_id, HSD_GObj* gobj, va_list vlist)
 {
     Effect* effect;
     HSD_JObj* jobj;

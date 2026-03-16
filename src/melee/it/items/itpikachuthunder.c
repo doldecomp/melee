@@ -1,5 +1,7 @@
 #include "itpikachuthunder.h"
 
+#include <placeholder.h>
+
 #include "ft/chara/ftPikachu/ftPk_SpecialLw.h"
 #include "it/inlines.h"
 #include "it/it_26B1.h"
@@ -8,7 +10,6 @@
 #include "it/types.h"
 
 #include <baselib/gobj.h>
-#include <placeholder.h>
 
 int it_802B1DEC(Item_GObj* arg0)
 {

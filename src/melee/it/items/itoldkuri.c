@@ -162,10 +162,8 @@ bool itOldkuri_UnkMotion2_Coll(Item_GObj* gobj)
     it_8026D62C(gobj, it_802D7AF0);
     if (it_80276308(gobj) == 8 && ip->xDD4_itemVar.oldkuri.xDFC != 0) {
         Item* ip = GET_ITEM(gobj);
-        itOldkuriAttributes* attr =
-            ip->xC4_article_data->x4_specialAttributes;
-        ip->xDD4_itemVar.oldkuri.xDF4 =
-            ip->facing_dir * ((f32*) attr->x0)[1];
+        itOldkuriAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+        ip->xDD4_itemVar.oldkuri.xDF4 = ip->facing_dir * ((f32*) attr->x0)[1];
         ip->x40_vel.x = ip->xDD4_itemVar.oldkuri.xDF4;
         ip->x40_vel.z = 0.0f;
         ip->x40_vel.y = 0.0f;
