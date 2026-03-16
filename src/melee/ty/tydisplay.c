@@ -143,8 +143,6 @@ typedef struct TyDspConfig {
     /* 0x7C */ s32 x7C;
 } TyDspConfig;
 
-/// #un_803181BC
-
 void un_803182D4_OnFrame(void)
 {
     TyModeState* state = (TyModeState*) un_804A284C;
@@ -1526,8 +1524,6 @@ void fn_8031A94C(HSD_GObj* arg0)
     }
 }
 
-/// #un_8031B1FC
-
 static char un_804D5AA8[] = "0";
 static u16 un_804D5ABC = 0x15;
 
@@ -1572,8 +1568,6 @@ void un_8031B1FC(void)
              "ToyDspBg_Top_joint");
     __assert("tydisplay.c", 0x43E, un_804D5AA8);
 }
-
-/// #un_8031B328
 
 static s32 un_804DE018 = (s32) 0xC8C8C8FF;
 static f32 un_804DE01C = 0.6f;
@@ -1819,8 +1813,6 @@ void un_8031B460_OnEnter(void* arg0)
     un_80319EF0();
 }
 
-/// #un_8031B850
-
 void un_8031B850(void)
 {
     ToyAnimState* anim = &un_804A2AA8;
@@ -1931,7 +1923,6 @@ static s32 un_804DE028 = (s32) 0x4080D060;
 static f32 un_804DE02C = 18.0f;
 static f64 un_804DE030 = 0.0;
 
-/// #un_8031BA78
 void un_8031BA78(s32 arg0, s32 arg1, f32 farg0)
 {
     char buf[24];
@@ -2167,7 +2158,6 @@ void un_8031BF34(s32 arg0)
     HSD_JObjAddTranslationX(jobj, 12.0f);
 }
 
-/// #un_8031C1D0
 void un_8031C1D0(void)
 {
     s32 savedColor;
@@ -2379,7 +2369,6 @@ HSD_JObj* un_8031C5E4(s32 arg0)
     return root;
 }
 
-/// #un_8031C8B8
 void un_8031C8B8(void)
 {
     s32 i;
