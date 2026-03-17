@@ -81,7 +81,76 @@ typedef struct BgFlashData2 {
 
 extern HSD_CObjDesc lbl_803BB028;
 
-/// #fn_8001FC08
+void fn_8001FC08(void)
+{
+    BgFlashData2* data = (BgFlashData2*) &lbl_80433658;
+    u8* end = (u8*) &data->x8;
+    f32 val;
+
+    if (data->x20 > 0.0f) {
+        val = data->x10 + data->x20;
+        if (val < (f32) end[0]) {
+            data->x10 = val;
+        } else {
+            data->x10 = (f32) end[0];
+        }
+    } else {
+        val = data->x10 + data->x20;
+        if (val > (f32) end[0]) {
+            data->x10 = val;
+        } else {
+            data->x10 = (f32) end[0];
+        }
+    }
+
+    if (data->x24 > 0.0f) {
+        val = data->x14 + data->x24;
+        if (val < (f32) end[1]) {
+            data->x14 = val;
+        } else {
+            data->x14 = (f32) end[1];
+        }
+    } else {
+        val = data->x14 + data->x24;
+        if (val > (f32) end[1]) {
+            data->x14 = val;
+        } else {
+            data->x14 = (f32) end[1];
+        }
+    }
+
+    if (data->x28 > 0.0f) {
+        val = data->x18 + data->x28;
+        if (val < (f32) end[2]) {
+            data->x18 = val;
+        } else {
+            data->x18 = (f32) end[2];
+        }
+    } else {
+        val = data->x18 + data->x28;
+        if (val > (f32) end[2]) {
+            data->x18 = val;
+        } else {
+            data->x18 = (f32) end[2];
+        }
+    }
+
+    if (data->x2C > 0.0f) {
+        val = data->x1C + data->x2C;
+        if (val < (f32) end[3]) {
+            data->x1C = val;
+        } else {
+            data->x1C = (f32) end[3];
+        }
+    } else {
+        val = data->x1C + data->x2C;
+        if (val > (f32) end[3]) {
+            data->x1C = val;
+        } else {
+            data->x1C = (f32) end[3];
+        }
+    }
+}
 
 /// #fn_8001FEC4
 

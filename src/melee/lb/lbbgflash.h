@@ -11,7 +11,7 @@
 
 #include <baselib/gobj.h>
 
-/* 01FC08 */ UNK_RET fn_8001FC08(UNK_PARAMS);
+/* 01FC08 */ void fn_8001FC08(void);
 /* 01FEC4 */ UNK_RET fn_8001FEC4(UNK_PARAMS);
 /* 0204C8 */ void fn_800204C8(void);
 /* 0205F0 */ void lbBgFlash_800205F0(s32 duration);
