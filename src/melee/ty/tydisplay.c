@@ -1838,6 +1838,7 @@ void un_8031B850(void)
     ToyAnimState* anim = &un_804A2AA8;
     TyDspBgData* ptr = un_804D6F1C;
     HSD_GObj** pgobj = un_804D6F18;
+    HSD_GObj** temp;
     TyDspSceneGfx* scene = (TyDspSceneGfx*) un_804D6ED4;
     HSD_GObj* gobj;
 
@@ -1875,10 +1876,10 @@ void un_8031B850(void)
         scene->x08 = NULL;
     }
 
-    gobj = *pgobj;
+    gobj = *(temp = pgobj);
     if (gobj != NULL) {
         HSD_GObjProc_8038FED4(gobj);
-        *pgobj = NULL;
+        *temp = NULL;
     }
 
     if (un_804D6F2C != NULL) {
@@ -2376,7 +2377,7 @@ void un_8031C8B8(void)
 {
     s32 i;
 
-    for (i = 0; i < 0x2B; i++) {
+    for (i = 0; 0x2B > i; i++) {
         un_804A2DE8[i] = 0;
     }
 }
