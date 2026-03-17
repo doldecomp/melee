@@ -182,7 +182,7 @@ void fn_80249A1C(HSD_GObj* arg0)
         } else {
             lb_80011E24(jobj, &sp34, 9, -1);
         }
-        arg8 = mn_8022EC18(sp34, (f32*) mnSound_803EEED8, 0x80);
+        arg8 = mn_8022EC18(sp34, &mnSound_803EEED8[0], 0x80);
     }
     lb_80011E24((HSD_JObj*) arg0->hsd_obj, &sp20, 6, -1, arg8);
     temp_f1 = mn_8022F298(sp20);
