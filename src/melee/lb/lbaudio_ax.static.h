@@ -76,7 +76,13 @@ static s32 lbl_804D642C;
 static int lbl_804D6430;
 static int lbl_804D6434;
 
-static HSD_ObjAllocData lbl_80433710;
+typedef struct {
+    /* 0x00 */ HSD_ObjAllocData alloc;
+    /* 0x2C */ s32 x2C[17];
+    /* 0x70 */ s32 x70[17];
+} lbAudioAx_PoolAlloc; // size: 0xB4
+
+static lbAudioAx_PoolAlloc lbl_80433710;
 
 static int lbl_80433984[0x38];
 
