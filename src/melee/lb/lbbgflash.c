@@ -283,7 +283,40 @@ void lbBgFlash_80021A18(int arg0)
     }
 }
 
-/// #fn_80021B04
+typedef struct BgFlashUserData {
+    u8 x0;
+    u8 pad_01[3];
+    ColorOverlay x4;
+} BgFlashUserData;
+
+#pragma dont_inline on
+
+void fn_80021B04(HSD_GObj* gobj)
+{
+    BgFlashUserData* data = gobj->user_data;
+    int was_active = data->x4.x7C_color_enable;
+    int color;
+    f32 scale;
+
+    PAD_STACK(8);
+
+    fn_80021C80(gobj);
+    if (data->x4.x7C_color_enable) {
+        u8* bytes = (u8*) &color;
+        scale = lbl_804D63D8;
+        bytes[0] = (u8) ((f32) data->x4.x2C_hex.r * scale);
+        bytes[1] = (u8) ((f32) data->x4.x2C_hex.g * scale);
+        bytes[2] = (u8) ((f32) data->x4.x2C_hex.b * scale);
+        bytes[3] = (data->x4.x2C_hex.a * data->x0) / 255;
+        lbBgFlash_InitState(&color);
+        return;
+    }
+    if (was_active) {
+        fn_800208B0(0);
+    }
+}
+
+#pragma dont_inline reset
 
 static void fn_80021C18(HSD_GObj* gobj, CommandInfo* cmd, int arg2) {}
 
