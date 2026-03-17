@@ -1612,36 +1612,42 @@ static f32 un_804DE01C = 0.6f;
 
 void un_8031B328(void)
 {
+    HSD_FogDesc* fogDesc;
     TyDspBgData* ptr = un_804D6F1C;
     TyDspSceneGfx* scene = (TyDspSceneGfx*) un_804D6ED4;
-    HSD_LObj* lobj;
     void* lightData;
-    HSD_FogDesc* fogDesc;
+    TyDspBgData* temp3;
+    s8 temp2;
+    HSD_LObj* lobj;
+    HSD_GObj* temp;
 
     PAD_STACK(24);
 
-    if (ptr->archive == NULL) {
+    if ((temp3 = ptr)->archive == NULL) {
         OSReport("*** BG data aren't being loaded!\n");
         OSPanic("tydisplay.c", 0x459, un_804D5AC0);
     }
 
-    lightData =
-        HSD_ArchiveGetPublicAddress(ptr->archive, "ScMenDisplay_scene_lights");
+    lightData = HSD_ArchiveGetPublicAddress(temp3->archive,
+                                            "ScMenDisplay_scene_lights");
     if (lightData != NULL) {
         scene->x00 = GObj_Create(2, 3, 0);
         lobj = un_80306EEC(lightData, 0);
-        HSD_GObjObject_80390A70(scene->x00, HSD_GObj_804D784A, lobj);
-        GObj_SetupGXLink(scene->x00, HSD_GObj_LObjCallback, 0x34, 0);
+        HSD_GObjObject_80390A70(scene->x00, (unsigned long) HSD_GObj_804D784A,
+                                lobj);
+        temp = scene->x00;
+        GObj_SetupGXLink(temp, HSD_GObj_LObjCallback, 0x34, 0);
     }
-
-    if (un_804D6F20 != 0) {
+    if ((((un_804D6F20 != 0) & 0xFFFFFFFFFFFFFFFF) & 0xFFFFFFFFFFFFFFFF) &
+        0xFFFFFFFFFFFFFFFF)
+    {
         HSD_LObjSetColor(lobj, *(GXColor*) &un_804DE018);
     }
 
-    fogDesc = HSD_ArchiveGetPublicAddress(ptr->archive, "ScMenDisplay_fog");
+    fogDesc = HSD_ArchiveGetPublicAddress(temp3->archive, "ScMenDisplay_fog");
     if (fogDesc != NULL) {
         scene->x08 = GObj_Create(3, 4, 0);
-        HSD_GObjObject_80390A70(scene->x08, HSD_GObj_804D7848,
+        HSD_GObjObject_80390A70(scene->x08, temp2 = HSD_GObj_804D7848,
                                 HSD_FogLoadDesc(fogDesc));
         GObj_SetupGXLink(scene->x08, un_80306930, 0x35, 0);
     }
