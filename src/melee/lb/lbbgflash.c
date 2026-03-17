@@ -64,7 +64,10 @@ typedef struct BgFlashData2 {
     f32 x14;
     f32 x18;
     f32 x1C;
-    u8 pad2[0x10];
+    f32 x20;
+    f32 x24;
+    f32 x28;
+    f32 x2C;
     u8 x30;
     u8 x31;
     u8 x32;
@@ -164,7 +167,32 @@ void lbBgFlash_80020688(int count)
     lbl_80433658.state.mode = 0;
 }
 
-/// #lbBgFlash_800206D4
+void lbBgFlash_800206D4(void* arg0, s32* arg1, int arg2)
+{
+    BgFlashData2* data = (BgFlashData2*) &lbl_80433658;
+    BgFlashState* state = (BgFlashState*) data;
+    u8* src = (u8*) arg0;
+    u8* dst = (u8*) arg1;
+    int count = arg2;
+
+    if (count < 1) {
+        count = 1;
+    }
+
+    state->active = 0;
+    state->mode = 2;
+    data->x4 = *(s32*) arg0;
+    *(s32*) &data->xC = data->x4;
+    data->x8 = *arg1;
+    data->x10 = (f32) src[0];
+    data->x14 = (f32) src[1];
+    data->x18 = (f32) src[2];
+    data->x1C = (f32) src[3];
+    data->x20 = (f32) (dst[0] - src[0]) / (f32) count;
+    data->x24 = (f32) (dst[1] - src[1]) / (f32) count;
+    data->x28 = (f32) (dst[2] - src[2]) / (f32) count;
+    data->x2C = (f32) (dst[3] - src[3]) / (f32) count;
+}
 
 void lbBgFlash_InitState(int* duration)
 {
@@ -204,7 +232,6 @@ void lbBgFlash_800208EC(int arg0)
     lbl_80433658.state.mode = 0;
 }
 
-/// #lbBgFlash_800206D4
 
 void lbBgFlash_800209F4(void)
 {
