@@ -49,7 +49,7 @@ typedef struct {
 /* 24AD58 */ void mnSoundTest_8024AD58(HSD_GObj*, u8);
 /* 24AED0 */ void fn_8024AED0(HSD_GObj*);
 /* 24B2B0 */ void fn_8024B2B0(HSD_GObj*);
-/* 24B7E4 */ UNK_RET fn_8024B7E4(UNK_PARAMS);
+/* 24B7E4 */ void fn_8024B7E4(HSD_GObj*);
 /* 24B8B4 */ UNK_RET fn_8024B8B4(UNK_PARAMS);
 /* 24BAF0 */ UNK_RET fn_8024BAF0(UNK_PARAMS);
 /* 24BCA0 */ UNK_RET mnSoundTest_8024BCA0(UNK_PARAMS);

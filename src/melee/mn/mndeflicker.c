@@ -81,7 +81,7 @@ void mnDeflicker_8024A2E8(HSD_GObj* gobj)
 {
     int x[2];
     float f =
-        mn_8022EC18(GET_JOBJ(gobj), &mnDeflicker_803EEFE4.start_frame, 0x400);
+        mn_8022EC18(GET_JOBJ(gobj), &mnDeflicker_803EEFE4, 0x400);
     if (f == mnDeflicker_803EEFE4.end_frame) {
         HSD_GObjPLink_80390228(gobj);
     }
@@ -115,7 +115,7 @@ void mnDeflicker_8024A3E8(HSD_GObj* gobj)
         p->flags_3 = HSD_GObj_804D783C;
         HSD_SisLib_803A5CC4(menu->text);
     } else {
-        float f = mn_8022EC18(jobj, &mnDeflicker_803EEFD8.start_frame, 0x400);
+        float f = mn_8022EC18(jobj, &mnDeflicker_803EEFD8, 0x400);
         if (f == mnDeflicker_803EEFD8.end_frame) {
             HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
             p = HSD_GObj_SetupProc(gobj, &mnDeflicker_8024A344, 0);
