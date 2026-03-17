@@ -36,7 +36,10 @@ extern BgFlashData lbl_80433658;
 #include <baselib/gobjplink.h>
 #include <baselib/gobjproc.h>
 #include <baselib/gobjuserdata.h>
+#include <baselib/jobj.h>
+#include <baselib/mtx.h>
 #include <baselib/objalloc.h>
+#include <baselib/quatlib.h>
 #include <melee/lb/lb_00F9.h>
 #include <melee/lb/lbarchive.h>
 
@@ -328,7 +331,38 @@ void lbBgFlash_800209F4(void)
 
 /// #lbBgFlash_80020E38
 
-/// #fn_8002113C
+void fn_8002113C(HSD_JObj* jobj, Vec3* axis, f32 angle)
+{
+    Mtx mtx;
+    Mtx rotMtx;
+    Mtx tmpMtx;
+    Mtx result;
+    Vec3 localAxis;
+    Quaternion rot;
+    Quaternion rot2;
+
+    PAD_STACK(16);
+
+    HSD_JObjSetupMatrix(jobj);
+    fn_80020AEC(jobj, mtx);
+    PSMTXTranspose(mtx, mtx);
+    PSMTXMultVec(mtx, (Vec*) axis, (Vec*) &localAxis);
+    PSMTXRotAxisRad(rotMtx, (Vec*) &localAxis, -angle);
+
+    if (!(jobj->flags & JOBJ_USE_QUATERNION)) {
+        HSD_JObjGetRotation(jobj, &rot);
+        HSD_MkRotationMtx(tmpMtx, (Vec3*) &rot);
+        PSMTXConcat(tmpMtx, rotMtx, result);
+        HSD_QuatLib_8037EB28(result, (Vec3*) &rot);
+        HSD_JObjSetRotation(jobj, &rot);
+    } else {
+        HSD_JObjGetRotation(jobj, &rot2);
+        HSD_MtxQuat(tmpMtx, &rot2);
+        PSMTXConcat(tmpMtx, rotMtx, result);
+        MatToQuat(result, &rot2);
+        HSD_JObjSetRotation(jobj, &rot2);
+    }
+}
 
 /// #lbBgFlash_80021410
 

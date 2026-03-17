@@ -9,6 +9,8 @@
 #include <placeholder.h>
 #include <platform.h>
 
+#include <dolphin/mtx.h>
+
 #include <baselib/gobj.h>
 
 /* 01FC08 */ void fn_8001FC08(void);
@@ -22,9 +24,9 @@
 /* 0208B0 */ void fn_800208B0(u8 arg0);
 /* 0208EC */ void lbBgFlash_800208EC(int);
 /* 0209F4 */ void lbBgFlash_800209F4(void);
-/* 020AEC */ UNK_RET fn_80020AEC(UNK_PARAMS);
+/* 020AEC */ void fn_80020AEC(HSD_JObj*, Mtx);
 /* 020E38 */ UNK_RET lbBgFlash_80020E38(UNK_PARAMS);
-/* 02113C */ UNK_RET fn_8002113C(UNK_PARAMS);
+/* 02113C */ void fn_8002113C(HSD_JObj*, Vec3*, f32);
 /* 021410 */ UNK_RET lbBgFlash_80021410(UNK_PARAMS);
 /* 0219E4 */ void fn_800219E4(void*);
 /* 021A18 */ void lbBgFlash_80021A18(int);
