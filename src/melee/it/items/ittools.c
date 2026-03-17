@@ -3,6 +3,7 @@
 #include "math.h"
 
 #include "it/inlines.h"
+#include "it/item.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
@@ -17,7 +18,20 @@ bool itTools_Logic22_DmgDealt(Item_GObj* gobj)
     return false;
 }
 
-/// #it_802EF098
+void it_802EF098(Item_GObj* gobj, s32 idx)
+{
+    Item* ip = GET_ITEM(gobj);
+    itToolsAttrEntry* entry =
+        (itToolsAttrEntry*) ip->xC4_article_data->x4_specialAttributes;
+    ip->xDD4_itemVar.tools.x0 = idx;
+    it_80275158(gobj, entry->x0);
+    ip->xD5C = 0;
+    ip->x40_vel.x = 0.0f;
+    entry += ip->xDD4_itemVar.tools.x0;
+    ip->x40_vel.y = -entry->x10;
+    it_8026B3A8(gobj);
+    Item_80268E5C(gobj, ip->xDD4_itemVar.tools.x0, 2);
+}
 
 /// #itTools_UnkMotion4_Anim
 
@@ -42,7 +56,18 @@ bool itTools_UnkMotion4_Coll(Item_GObj* gobj)
     return false;
 }
 
-/// #it_802EF320
+void it_802EF320(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itToolsAttrEntry* entry =
+        (itToolsAttrEntry*) ip->xC4_article_data->x4_specialAttributes;
+    it_802756D0(gobj);
+    it_8026B3A8(gobj);
+    ip->x40_vel.y = 0.0f;
+    ip->x40_vel.x = 0.0f;
+    ip->xD44_lifeTimer = (f32) ((s32) entry->x4 & ~1);
+    Item_80268E5C(gobj, ip->xDD4_itemVar.tools.x0 + 5, 2);
+}
 
 bool itTools_UnkMotion9_Anim(Item_GObj* gobj)
 {
@@ -73,11 +98,48 @@ bool itTools_Logic22_DmgReceived(Item_GObj* gobj)
     return false;
 }
 
-/// #it_2725_Logic22_Clanked
+bool it_2725_Logic22_Clanked(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itToolsAttrEntry* entry =
+        (itToolsAttrEntry*) ip->xC4_article_data->x4_specialAttributes;
+    it_802756D0(gobj);
+    it_8026B3A8(gobj);
+    ip->x40_vel.y = 0.0f;
+    ip->x40_vel.x = 0.0f;
+    ip->xD44_lifeTimer = (f32) ((s32) entry->x4 & ~1);
+    Item_80268E5C(gobj, ip->xDD4_itemVar.tools.x0 + 5, 2);
+    return false;
+}
 
-/// #it_2725_Logic22_HitShield
+bool it_2725_Logic22_HitShield(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itToolsAttrEntry* entry =
+        (itToolsAttrEntry*) ip->xC4_article_data->x4_specialAttributes;
+    it_802756D0(gobj);
+    it_8026B3A8(gobj);
+    ip->x40_vel.y = 0.0f;
+    ip->x40_vel.x = 0.0f;
+    ip->xD44_lifeTimer = (f32) ((s32) entry->x4 & ~1);
+    Item_80268E5C(gobj, ip->xDD4_itemVar.tools.x0 + 5, 2);
+    return false;
+}
 
-/// #it_2725_Logic22_Absorbed
+bool it_2725_Logic22_Absorbed(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itToolsAttrEntry* entry =
+        (itToolsAttrEntry*) ip->xC4_article_data->x4_specialAttributes;
+    it_802756D0(gobj);
+    it_8026B3A8(gobj);
+    ip->x40_vel.y = 0.0f;
+    ip->x40_vel.x = 0.0f;
+    ip->xD44_lifeTimer = (f32) ((s32) entry->x4 & ~1);
+    Item_80268E5C(gobj, ip->xDD4_itemVar.tools.x0 + 5, 2);
+    ip->xD44_lifeTimer = 0.0f;
+    return false;
+}
 
 bool itTools_Logic22_ShieldBounced(Item_GObj* gobj)
 {

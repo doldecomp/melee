@@ -9,7 +9,7 @@
 
 /* 2EEFA8 */ UNK_RET it_802EEFA8(UNK_PARAMS);
 /* 2EF074 */ bool itTools_Logic22_DmgDealt(Item_GObj*);
-/* 2EF098 */ UNK_RET it_802EF098(UNK_PARAMS);
+/* 2EF098 */ void it_802EF098(Item_GObj* gobj, s32 idx);
 /* 2EF128 */ bool itTools_UnkMotion4_Anim(Item_GObj* gobj);
 /* 2EF27C */ void itTools_UnkMotion4_Phys(Item_GObj* gobj);
 /* 2EF2BC */ bool itTools_UnkMotion4_Coll(Item_GObj* gobj);
