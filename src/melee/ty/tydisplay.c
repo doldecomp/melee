@@ -1037,23 +1037,22 @@ void un_80319EF0(void)
 
 void fn_8031A4EC(HSD_GObj* arg0)
 {
+    float zero;
     Vec3 interest;
     Vec3 eye;
-    Vec3 sp40;
-    f32 sp3C;
-    f32 sp38;
-    f32 sp34;
-    Vec3 sp28;
-    f32 sp24;
-    f32 sp20;
-    f32 sp1C;
+    u8 _1[0x8];
     HSD_CObj* cobj = (HSD_CObj*) arg0->hsd_obj;
     TyDspConfig* cfg = un_804D6F18;
     f32 fov;
     f32 val;
     s32 sign;
-
-    PAD_STACK(0x18);
+    Vec3 interest2;
+    Vec3 tempvec1;
+    Vec3 eye2;
+    Vec3 tempvec2;
+    HSD_CObj* cobj2;
+    f32 stick;
+    u8 _2[0x10];
 
     HSD_CObjGetInterest(cobj, &interest);
     HSD_CObjGetEyePosition(cobj, &eye);
@@ -1074,11 +1073,12 @@ void fn_8031A4EC(HSD_GObj* arg0)
         cfg->x20 = -(0.2f * (f32) sign - val) / 0.8f;
     }
 
+    zero = 0;
     val = cfg->x24;
     if (val > -0.2f && val < 0.2f) {
         cfg->x24 = 0.0f;
     } else {
-        if (val > 0.0f) {
+        if (val > zero) {
             sign = 1;
         } else {
             sign = -1;
@@ -1132,8 +1132,8 @@ void fn_8031A4EC(HSD_GObj* arg0)
     }
 
     {
-        f32 stick = cfg->x20;
-        if (stick != 0.0f) {
+        stick = cfg->x20;
+        if (stick != zero) {
             cfg->x10 = -(stick * (0.02f * fov) - cfg->x10);
             if (cfg->x10 < -cfg->x1C) {
                 cfg->x10 = -cfg->x1C;
@@ -1145,8 +1145,8 @@ void fn_8031A4EC(HSD_GObj* arg0)
     }
 
     {
-        f32 stick = cfg->x24;
-        if (stick != 0.0f) {
+        stick = cfg->x24;
+        if (stick != zero) {
             cfg->x0C = (stick * (0.02f * fov)) + cfg->x0C;
             if (cfg->x0C < -cfg->x18) {
                 cfg->x0C = -cfg->x18;
@@ -1182,18 +1182,18 @@ void fn_8031A4EC(HSD_GObj* arg0)
     }
 
     {
-        HSD_CObj* cobj2 = (HSD_CObj*) cfg->x00->hsd_obj;
-        HSD_CObjGetInterest(cobj2, &sp40);
-        HSD_CObjGetEyePosition(cobj2, &sp28);
-        sp34 = cfg->x68.x;
-        sp38 = 0.0f;
-        sp3C = -500.0f;
-        sp1C = 0.017453292f * cfg->x0C;
-        sp20 = 0.017453292f * cfg->x10;
-        sp24 = 0.0f;
-        lbVector_ApplyEulerRotation((Vec3*) &sp34, (Vec3*) &sp1C);
-        sp3C = cfg->x5C.z;
-        HSD_CObjSetInterest(cobj2, (Vec3*) &sp34);
+        cobj2 = (HSD_CObj*) cfg->x00->hsd_obj;
+        HSD_CObjGetInterest(cobj2, &interest2);
+        HSD_CObjGetEyePosition(cobj2, &eye2);
+        tempvec1.x = cfg->x68.x;
+        tempvec1.y = 0.0f;
+        tempvec1.z = -500.0f;
+        tempvec2.x = 0.017453292f * cfg->x0C;
+        tempvec2.y = 0.017453292f * cfg->x10;
+        tempvec2.z = 0.0f;
+        lbVector_ApplyEulerRotation(&tempvec1, &tempvec2);
+        tempvec1.z = cfg->x5C.z;
+        HSD_CObjSetInterest(cobj2, &tempvec1);
     }
 }
 
