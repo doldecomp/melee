@@ -64,7 +64,6 @@ typedef struct TyDspBgData {
 
 extern TyDspBgData* un_804D6F1C;
 extern s32 un_804D6F20;
-extern HSD_GObj** un_804D6F18;
 extern HSD_GObj* un_804D6F2C;
 extern s32 un_804D6F28;
 
@@ -143,6 +142,7 @@ typedef struct TyDspConfig {
     /* 0x78 */ HSD_GObj* x78;
     /* 0x7C */ s32 x7C;
 } TyDspConfig;
+extern TyDspConfig* un_804D6F18;
 
 void un_803182D4_OnFrame(void)
 {
@@ -263,7 +263,7 @@ void un_80318714(TySortElem* base, s32 lo, s32 hi)
     quicksort(base, lo, hi);
 }
 
-extern u8* un_804D6F14;
+extern TyDspGrid* un_804D6F14;
 extern void* un_804D6F10;
 
 void un_80318B1C(s32 arg0)
@@ -271,7 +271,7 @@ void un_80318B1C(s32 arg0)
     s32 i;
     s32 start;
     s32 placed;
-    TyDspGrid* grid = (TyDspGrid*) un_804D6F14;
+    TyDspGrid* grid = un_804D6F14;
     s32 rand_id;
     TyDspEntry* check;
     s32 rand_result;
@@ -334,8 +334,8 @@ void un_80318B1C(s32 arg0)
 }
 void un_80318CB4(s32 arg0)
 {
-    TyDspGrid* grid = (TyDspGrid*) un_804D6F14;
-    TyDspConfig* cfg = (TyDspConfig*) un_804D6F18;
+    TyDspGrid* grid = un_804D6F14;
+    TyDspConfig* cfg = un_804D6F18;
     HSD_JObj** jobjArr;
     s32 prev_ring_size;
     s32 ring_count = 0;
@@ -569,8 +569,8 @@ void un_80318CB4(s32 arg0)
 
 void un_80319540(s32 arg0)
 {
-    TyDspGrid* grid = (TyDspGrid*) un_804D6F14;
-    TyDspConfig* cfg = (TyDspConfig*) un_804D6F18;
+    TyDspGrid* grid = un_804D6F14;
+    TyDspConfig* cfg = un_804D6F18;
     s32 count;
     s32 col, row, remainder;
     s32 i;
@@ -725,8 +725,8 @@ void un_80319540(s32 arg0)
 
 void un_80319994(s32 arg0)
 {
-    TyDspGrid* grid = (TyDspGrid*) un_804D6F14;
-    TyDspConfig* cfg = (TyDspConfig*) un_804D6F18;
+    TyDspGrid* grid = un_804D6F14;
+    TyDspConfig* cfg = un_804D6F18;
     f32 xoff = 0.0f;
     s32 col = 0;
     s32 row = 0;
@@ -915,8 +915,8 @@ void un_80319EF0(void)
     Vec3 interest;
     Vec3 sp28;
     Vec3 eyepos;
-    TyDspGrid* grid = (TyDspGrid*) un_804D6F14;
-    TyDspConfig* cfg = (TyDspConfig*) un_804D6F18;
+    TyDspGrid* grid = un_804D6F14;
+    TyDspConfig* cfg = un_804D6F18;
     TyDspBgData* bg = un_804D6F1C;
     HSD_CObj* cobj;
     f32 range;
@@ -1048,7 +1048,7 @@ void fn_8031A4EC(HSD_GObj* arg0)
     f32 sp20;
     f32 sp1C;
     HSD_CObj* cobj = (HSD_CObj*) arg0->hsd_obj;
-    TyDspConfig* cfg = (TyDspConfig*) un_804D6F18;
+    TyDspConfig* cfg = un_804D6F18;
     f32 fov;
     f32 val;
     s32 sign;
@@ -1209,7 +1209,7 @@ void fn_8031A94C(HSD_GObj* arg0)
     f32 sp40;
     f32 sp3C;
     f32 sp38;
-    TyDspConfig* cfg = (TyDspConfig*) un_804D6F18;
+    TyDspConfig* cfg = un_804D6F18;
     HSD_CObj* cobj = (HSD_CObj*) arg0->hsd_obj;
     HSD_JObj* trophy = ((HSD_JObj*) cfg->x78->hsd_obj)->child;
     f32 fov;
@@ -1520,9 +1520,9 @@ void un_8031B460_OnEnter(void* arg0)
     un_804D6F1C = HSD_MemAlloc(0x108);
     un_804D6ED4 = HSD_MemAlloc(0xE4);
 
-    cfg = (TyDspConfig*) un_804D6F18;
+    cfg = un_804D6F18;
     data = un_804D6F1C;
-    grid = (TyDspGrid*) un_804D6F14;
+    grid = un_804D6F14;
 
     if (un_80305C44() & 0x40) {
         grid->x00 = 2;
@@ -1645,7 +1645,7 @@ void un_8031B460_OnEnter(void* arg0)
     data->x104 = 0;
 
     {
-        TyDspConfig* cfg2 = (TyDspConfig*) un_804D6F18;
+        TyDspConfig* cfg2 = un_804D6F18;
         cobj = lb_80013B14(HSD_ArchiveGetPublicAddress(
             ((TyDspBgData*) un_804D6F1C)->archive, strbase + 0x18C));
 
@@ -1698,7 +1698,7 @@ void un_8031B850(void)
 {
     ToyAnimState* anim = &un_804A2AA8;
     TyDspBgData* ptr = un_804D6F1C;
-    HSD_GObj** pgobj = un_804D6F18;
+    TyDspConfig* pgobj = un_804D6F18;
     HSD_GObj** temp;
     TyDspSceneGfx* scene = (TyDspSceneGfx*) un_804D6ED4;
     HSD_GObj* gobj;
@@ -1737,7 +1737,7 @@ void un_8031B850(void)
         scene->x08 = NULL;
     }
 
-    gobj = *(temp = pgobj);
+    gobj = *(temp = &pgobj->x00);
     if (gobj != NULL) {
         HSD_GObjProc_8038FED4(gobj);
         *temp = NULL;
