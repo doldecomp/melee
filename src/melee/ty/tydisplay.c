@@ -1207,10 +1207,10 @@ void fn_8031A94C(HSD_GObj* arg0)
     Vec3 tempvec1;
     Vec3 eye2;
     Vec3 tempvec2;
-    u8 _2[0x18];
+    u8 _2[0x8];
     TyDspConfig* cfg = un_804D6F18;
-    HSD_CObj* cobj = (HSD_CObj*) arg0->hsd_obj;
-    HSD_JObj* trophy = ((HSD_JObj*) cfg->x78->hsd_obj)->child;
+    HSD_CObj* cobj = GET_COBJ(arg0);
+    HSD_JObj* trophy = GET_JOBJ( cfg->x78)->child;
     f32 fov;
     f32 val;
     s32 sign;
