@@ -745,7 +745,26 @@ void lbAudioAx_80024D78(int arg0)
         (s32) s32_arr_803BB6B0[Stage_8022519C(Stage_80225194())][arg0];
 }
 
-/// #lbAudioAx_80024DC4
+void lbAudioAx_80024DC4(int arg0)
+{
+    lbAudioAx_PoolAlloc* st = &lbl_80433710;
+    s32* p = st->x2C;
+    s32* q = st->x2C;
+    int i;
+    for (i = 0; i < 0x10; i++) {
+        if (p[i] == arg0) {
+            st->x70[i] = 0xa;
+            return;
+        }
+    }
+    for (i = 0; i < 0x10; i++) {
+        if ((u32)q[i] == 0x83D60U) {
+            st->x2C[i] = arg0;
+            st->x70[i] = 0xa;
+            return;
+        }
+    }
+}
 
 void lbAudioAx_80024E50(bool arg0)
 {
@@ -1271,7 +1290,7 @@ void lbAudioAx_ObjFree(void* obj)
 {
     if (obj != NULL) {
         void* p = obj;
-        HSD_ObjFree(&lbl_80433710, p);
+        HSD_ObjFree(&lbl_80433710.alloc, p);
     }
 }
 typedef struct SoundParams {
@@ -1311,7 +1330,7 @@ HSD_GObj* lbAudioAx_800263E8(float f1, HSD_GObj* arg1, int sfx_id, int arg3,
 
         gobj = GObj_Create(0x17, 0x3E, 0);
         if (gobj != NULL) {
-            userdata = HSD_ObjAlloc(&lbl_80433710);
+            userdata = HSD_ObjAlloc(&lbl_80433710.alloc);
             if (userdata == NULL) {
                 HSD_GObjPLink_80390228(gobj);
                 gobj = NULL;
@@ -1652,7 +1671,7 @@ void lbAudioAx_80027DBC(void)
 
 void lbAudioAx_8002835C(void)
 {
-    HSD_ObjAllocInit(&lbl_80433710, 0x48, 4);
+    HSD_ObjAllocInit(&lbl_80433710.alloc, 0x48, 4);
 }
 
 /// #lbAudioAx_8002835C
