@@ -1561,12 +1561,18 @@ static u16 un_804D5ABC = 0x15;
 
 void un_8031B1FC(void)
 {
-    TyDspBgData* ptr = un_804D6F1C;
-    HSD_GObj* gobj;
     HSD_Joint* joint;
+    TyDspBgData* ptr = un_804D6F1C;
+    HSD_GObj* gobj4;
+    HSD_GObj* gobj;
+    int zero;
+    u8 temp;
     HSD_JObj* jobj;
-
-    PAD_STACK(0x18);
+    gobj4 = ptr->gobj4;
+    zero = 0;
+    do {
+        UNUSED unsigned char _[(0x10)];
+    } while (zero);
 
     if (ptr->archive == NULL) {
         OSReport("*** BG data aren't being loaded!\n");
@@ -1574,6 +1580,8 @@ void un_8031B1FC(void)
     }
 
     gobj = ptr->gobj0;
+    if ((ptr->gobj4 && ptr->gobj4) && gobj4) {
+    }
     if (gobj != NULL) {
         HSD_GObjPLink_80390228(gobj);
         ptr->gobj0 = NULL;
@@ -1587,10 +1595,10 @@ void un_8031B1FC(void)
 
     joint = HSD_ArchiveGetPublicAddress(ptr->archive, "ToyDspBg_Top_joint");
     if (joint != NULL) {
-        ptr->gobj4 = GObj_Create(9, 9, 0);
+        ptr->gobj4 = GObj_Create(9, 9, zero);
         jobj = HSD_JObjLoadJoint(joint);
-        HSD_GObjObject_80390A70(ptr->gobj4, HSD_GObj_804D7849, jobj);
-        GObj_SetupGXLink(ptr->gobj4, HSD_GObj_JObjCallback, 0x3C, 0);
+        HSD_GObjObject_80390A70(ptr->gobj4, temp = HSD_GObj_804D7849, jobj);
+        GObj_SetupGXLink(ptr->gobj4, HSD_GObj_JObjCallback, 0x3C, zero);
         lb_8001204C(jobj, &ptr->jobj, &un_804D5ABC, 1);
         return;
     }
