@@ -191,6 +191,8 @@ void lbBgFlash_800209F4(void)
     HSD_GObj** gobj1_slot;
     HSD_GObj** gobj2_slot;
 
+    PAD_STACK(8);
+
     flash->x44 = GObj_Create(0x14, 0x16, 0);
     gobj1_slot = &flash->x44;
     HSD_GObjObject_80390A70(*gobj1_slot, HSD_GObj_804D784B,
