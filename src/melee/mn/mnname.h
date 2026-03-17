@@ -16,7 +16,7 @@ typedef struct MnName_GObj {
     /* +3C */ HSD_Text* text;
 } MnName_GObj;
 
-/* 23749C */ UNK_RET mnName_8023749C(UNK_PARAMS);
+/* 23749C */ char* mnName_8023749C(int slot);
 /* 23754C */ char* GetNameText(int slot);
 /* 237594 */ int GetNameCount(void);
 /* 2375EC */ bool IsNameListFull(void);
