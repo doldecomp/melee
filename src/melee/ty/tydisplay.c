@@ -104,10 +104,10 @@ typedef struct TyDspPos {
 
 typedef struct TyDspGrid {
     /* 0x000 */ s32 x00;
-    /* 0x004 */ f32 x04;
-    /* 0x008 */ f32 x08;
-    /* 0x00C */ f32 x0C;
-    /* 0x010 */ f32 x10;
+    /* 0x004 */ f32 x04_min_x;
+    /* 0x008 */ f32 x08_min_z;
+    /* 0x00C */ f32 x0C_max_x;
+    /* 0x010 */ f32 x10_max_z;
     /* 0x014 */ TySortElem sort[301];
     /* 0x97C */ TyDspPos pos[301];
 } TyDspGrid;
@@ -353,10 +353,10 @@ void un_80318CB4(s32 arg0)
     PAD_STACK(0x50);
 
     memzero(grid, 0x12E4);
-    grid->x08 = -3.5f;
-    grid->x04 = -3.5f;
-    grid->x10 = 3.5f;
-    grid->x0C = 3.5f;
+    grid->x08_min_z = -3.5f;
+    grid->x04_min_x = -3.5f;
+    grid->x10_max_z = 3.5f;
+    grid->x0C_max_x = 3.5f;
 
     if (arg0 != 0) {
         base_step = 9.0f;
@@ -453,17 +453,17 @@ void un_80318CB4(s32 arg0)
             }
         }
 
-        if (grid->pos[i].x < grid->x04) {
-            grid->x04 = grid->pos[i].x;
+        if (grid->pos[i].x < grid->x04_min_x) {
+            grid->x04_min_x = grid->pos[i].x;
         }
-        if (grid->pos[i].x > grid->x0C) {
-            grid->x0C = grid->pos[i].x;
+        if (grid->pos[i].x > grid->x0C_max_x) {
+            grid->x0C_max_x = grid->pos[i].x;
         }
-        if (grid->pos[i].z < grid->x08) {
-            grid->x08 = grid->pos[i].z;
+        if (grid->pos[i].z < grid->x08_min_z) {
+            grid->x08_min_z = grid->pos[i].z;
         }
-        if (grid->pos[i].z > grid->x10) {
-            grid->x10 = grid->pos[i].z;
+        if (grid->pos[i].z > grid->x10_max_z) {
+            grid->x10_max_z = grid->pos[i].z;
         }
     }
 
@@ -580,10 +580,10 @@ void un_80319540(s32 arg0)
 
     memzero(grid, 0x12E4);
 
-    grid->x08 = -3.5f;
-    grid->x04 = -3.5f;
-    grid->x10 = 3.5f;
-    grid->x0C = 3.5f;
+    grid->x08_min_z = -3.5f;
+    grid->x04_min_x = -3.5f;
+    grid->x10_max_z = 3.5f;
+    grid->x0C_max_x = 3.5f;
 
     count = cfg->x08;
     if (count <= 1) {
@@ -622,26 +622,26 @@ void un_80319540(s32 arg0)
 
         {
             f32 px = *(f32*) (ptr + 0x97C);
-            if (px < grid->x04) {
-                grid->x04 = px;
+            if (px < grid->x04_min_x) {
+                grid->x04_min_x = px;
             }
         }
         {
             f32 px = *(f32*) (ptr + 0x97C);
-            if (px > grid->x0C) {
-                grid->x0C = px;
+            if (px > grid->x0C_max_x) {
+                grid->x0C_max_x = px;
             }
         }
         {
             f32 pz = *(f32*) (ptr + 0x980);
-            if (pz < grid->x08) {
-                grid->x08 = pz;
+            if (pz < grid->x08_min_z) {
+                grid->x08_min_z = pz;
             }
         }
         {
             f32 pz = *(f32*) (ptr + 0x980);
-            if (pz > grid->x10) {
-                grid->x10 = pz;
+            if (pz > grid->x10_max_z) {
+                grid->x10_max_z = pz;
             }
         }
 
@@ -744,10 +744,10 @@ void un_80319994(s32 arg0)
 
     memzero(grid, 0x12E4);
     ptr = (u8*) grid;
-    grid->x08 = -3.5f;
-    grid->x04 = -3.5f;
-    grid->x10 = 3.5f;
-    grid->x0C = 3.5f;
+    grid->x08_min_z = -3.5f;
+    grid->x04_min_x = -3.5f;
+    grid->x10_max_z = 3.5f;
+    grid->x0C_max_x = 3.5f;
 
     for (i = 0; i < cfg->x08; i++) {
         if (i == 0) {
@@ -770,26 +770,26 @@ void un_80319994(s32 arg0)
         }
         {
             f32 x = *(f32*) (ptr + 0x97C);
-            if (x < grid->x04) {
-                grid->x04 = x;
+            if (x < grid->x04_min_x) {
+                grid->x04_min_x = x;
             }
         }
         {
             f32 x = *(f32*) (ptr + 0x97C);
-            if (x > grid->x0C) {
-                grid->x0C = x;
+            if (x > grid->x0C_max_x) {
+                grid->x0C_max_x = x;
             }
         }
         {
             f32 z = *(f32*) (ptr + 0x980);
-            if (z < grid->x08) {
-                grid->x08 = z;
+            if (z < grid->x08_min_z) {
+                grid->x08_min_z = z;
             }
         }
         {
             f32 z = *(f32*) (ptr + 0x980);
-            if (z > grid->x10) {
-                grid->x10 = z;
+            if (z > grid->x10_max_z) {
+                grid->x10_max_z = z;
             }
         }
         ptr += 8;
@@ -926,18 +926,18 @@ void un_80319EF0(void)
 
     cobj = (HSD_CObj*) cfg->x00->hsd_obj;
 
-    range = grid->x0C - grid->x04;
+    range = grid->x0C_max_x - grid->x04_min_x;
     if (range < 0.0f) {
         range = -range;
     }
-    interest.x = range * 0.5f + grid->x04;
+    interest.x = range * 0.5f + grid->x04_min_x;
     if (grid->x00 == 3) {
         interest.x = 0.0f;
     }
     interest.y = 0.0f;
     {
-        f32 zmin = grid->x08;
-        f32 zrange = grid->x10 - zmin;
+        f32 zmin = grid->x08_min_z;
+        f32 zrange = grid->x10_max_z - zmin;
         if (zrange < 0.0f) {
             zrange = -zrange;
         }
@@ -954,7 +954,7 @@ void un_80319EF0(void)
     HSD_CObjSetEyePosition(cobj, &sp28);
 
     {
-        f32 xrange = grid->x0C - grid->x04;
+        f32 xrange = grid->x0C_max_x - grid->x04_min_x;
         if (xrange < 0.0f) {
             xrange = -xrange;
         }
@@ -1009,8 +1009,8 @@ void un_80319EF0(void)
     }
 
     {
-        f32 zrange = 14.0f + (grid->x10 - grid->x08);
-        f32 xrange = grid->x0C - grid->x04;
+        f32 zrange = 14.0f + (grid->x10_max_z - grid->x08_min_z);
+        f32 xrange = grid->x0C_max_x - grid->x04_min_x;
         scale = (f32) (cfg->x08 / 30);
         if (zrange < xrange) {
             zrange = 14.0f + xrange;
@@ -1670,10 +1670,10 @@ void un_8031B460_OnEnter(void* arg0)
 
     if ((s32) un_804D6F20 != 0) {
         memzero(grid, 0x12E4);
-        grid->x08 = -3.5f;
-        grid->x04 = -3.5f;
-        grid->x10 = 3.5f;
-        grid->x0C = 3.5f;
+        grid->x08_min_z = -3.5f;
+        grid->x04_min_x = -3.5f;
+        grid->x10_max_z = 3.5f;
+        grid->x0C_max_x = 3.5f;
         cfg->x78 = un_8031BC54(cfg->x7C);
     } else {
         s32 m = grid->x00;
