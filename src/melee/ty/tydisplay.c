@@ -40,7 +40,14 @@
 extern char un_804D5AC0[2];
 extern DevText* un_804D6F24;
 extern s32 un_804A2DE8[];
-extern char un_804A2D98[0x38];
+typedef struct TyDspBaseData {
+    /* 0x00 */ char x00[0x38];
+    /* 0x38 */ u8 x38[0x14];
+    /* 0x4C */ HSD_Archive* archive;
+} TyDspBaseData;
+
+extern TyDspBaseData un_804A2D98;
+extern u8 un_804A2DD0[0x18];
 
 typedef struct TyDspBgData {
     /* 0x00 */ HSD_GObj* gobj0;
@@ -60,7 +67,6 @@ extern s32 un_804D6F20;
 extern HSD_GObj** un_804D6F18;
 extern HSD_GObj* un_804D6F2C;
 extern s32 un_804D6F28;
-extern u8 un_804A2DD0[0x18];
 
 typedef struct TyDspArchNames {
     const char* entries[43];
@@ -2157,14 +2163,14 @@ static char un_804D5AB4[] = "jobj";
 
 void un_8031BF34(s32 arg0)
 {
-    u8* base = (u8*) &un_804A2D98;
+    TyDspBaseData* base = &un_804A2D98;
     ToyAnimState* anim = &un_804A2AA8;
     HSD_JObj* jobj;
 
     PAD_STACK(8);
 
     if (un_804D6F2C != NULL) {
-        HSD_Archive** archp = (HSD_Archive**) (base + 0x4C);
+        HSD_Archive** archp = &base->archive;
         HSD_Archive* arch = *archp;
         if (arch != NULL) {
             lbArchive_80016EFC(arch);
@@ -2172,8 +2178,8 @@ void un_8031BF34(s32 arg0)
         }
     }
 
-    un_80308250(base + 0x38, (s16) arg0, 0);
-    un_804D6F2C = un_803087F4(base + 0x38);
+    un_80308250(base->x38, (s16) arg0, 0);
+    un_804D6F2C = un_803087F4(base->x38);
 
     HSD_JObjClearFlagsAll(anim->jobj[0], 0x10);
     HSD_JObjSetFlagsAll(anim->jobj[1], 0x10);
@@ -2195,7 +2201,7 @@ void un_8031C1D0(void)
     HSD_GObj* gobj;
 
     savedColor = un_804DE024;
-    un_804D6F24 = DevText_Create(1, 0x28, 0x28, 9, 3, un_804A2D98);
+    un_804D6F24 = DevText_Create(1, 0x28, 0x28, 9, 3, un_804A2D98.x00);
     if (un_804D6F24 != NULL) {
         gobj = DevText_GetGObj();
         bgColor = un_804DE028;
