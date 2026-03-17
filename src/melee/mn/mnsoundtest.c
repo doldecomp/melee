@@ -443,3 +443,4 @@ void fn_8024AED0(HSD_GObj* arg0)
         mnSoundTest_8024A790(mnSoundTest_804D6C40);
     }
 }
+

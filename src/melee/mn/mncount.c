@@ -4,9 +4,12 @@
 
 #include "gm/gm_1601.h"
 #include "gm/gmmain_lib.h"
+#include "mn/inlines.h"
+#include "mn/mnmain.h"
 #include "sysdolphin/baselib/gobjplink.h"
 
 #include <baselib/gobj.h>
+#include <baselib/jobj.h>
 
 extern s32 mnDiagram_GetFighterTotalKOs(s32);
 extern s32 mnDiagram_GetFighterTotalFalls(s32);
@@ -238,7 +241,46 @@ s32 mnCount_8025072C(CountEntry* entries, s32 start_idx, s32 mode)
     return entries[best_idx].id;
 }
 
+extern AnimLoopSettings mnCount_803EFAA0;
+
+void mnCount_802513F4(HSD_GObj* gobj)
+{
+    HSD_JObj* jobj;
+    MnCountData* data = gobj->user_data;
+    HSD_JObj* tree = gobj->hsd_obj;
+    FORCE_PAD_STACK_4;
+
+    lb_80011E24(tree, &jobj, 2, -1);
+    if (data->cursor != 0) {
+        HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
+    } else {
+        HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
+    }
+
+    lb_80011E24(tree, &jobj, 1, -1);
+    if (data->cursor < 0x14) {
+        HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
+    } else {
+        HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
+    }
+
+    mn_8022ED6C(tree, &mnCount_803EFAA0);
+}
+
 void fn_802514B8(HSD_GObj* gobj)
 {
     HSD_GObjPLink_80390228(gobj);
+}
+
+void mnCount_802517E0(MnCountData* data)
+{
+    int i;
+
+    data->cursor = 0;
+    data->page_size = 0xA;
+
+    for (i = 0; i < 0xA; i++) {
+        data->labels[i] = NULL;
+        data->values[i] = NULL;
+    }
 }

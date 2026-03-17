@@ -2,6 +2,9 @@
 
 #include "mnmain.h"
 
+#include "gm/gm_1A3F.h"
+
+#include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjplink.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/sislib.h>
@@ -64,16 +67,71 @@ int mn_80231634(struct mn_80231634_t* arg0)
     return arg0->x10;
 }
 
-/// #mn_8023164C
+void mn_8023164C(void)
+{
+    HSD_GObjProc* proc;
+    s32 mode;
 
-/// #mn_80231714
+    mn_804A04F0.prev_menu = mn_804A04F0.cur_menu;
+    mn_804A04F0.cur_menu = 0xD;
+
+    switch (mn_804A04F0.prev_menu) {
+    case 15:
+        mn_804A04F0.hovered_selection = 6;
+        mode = 3;
+        break;
+    case 16:
+        mn_804A04F0.hovered_selection = 5;
+        mode = 3;
+        break;
+    default:
+        mn_804A04F0.hovered_selection = 0;
+        mode = 1;
+        break;
+    }
+
+    proc = HSD_GObj_SetupProc(GObj_Create(0, 1, 0x80), fn_8022F538, 0);
+    proc->flags_3 = HSD_GObj_804D783C;
+    HSD_GObj_80390CD4(mn_80230E38(mode));
+}
+
+extern s32 mn_804D6BD4;
+
+void mn_80231714(void)
+{
+    HSD_GObjProc* proc;
+    s32 mode;
+
+    mn_804A04F0.prev_menu = mn_804A04F0.cur_menu;
+    mn_804A04F0.cur_menu = 0xD;
+
+    switch (mn_804A04F0.prev_menu) {
+    case 15:
+        mn_804A04F0.hovered_selection = 6;
+        mode = 3;
+        break;
+    case 16:
+        mn_804A04F0.hovered_selection = 5;
+        mode = 3;
+        break;
+    default:
+        mn_804A04F0.hovered_selection = 0;
+        mode = 1;
+        break;
+    }
+
+    proc = HSD_GObj_SetupProc(GObj_Create(0, 1, 0x80), fn_8022F538, 0);
+    proc->flags_3 = HSD_GObj_804D783C;
+    HSD_GObj_80390CD4(mn_80230E38(mode));
+    mn_804D6BD4 = 1;
+}
 
 void mn_802317E4(HSD_Archive* archive, int arg1)
 {
     mn_80231804(archive, arg1);
 }
 
-extern int mn_804D6BD4;
+extern s32 mn_804D6BD4;
 
 void mn_80231804(HSD_Archive* archive, int arg1)
 {
@@ -226,4 +284,22 @@ void mn_80231804(HSD_Archive* archive, int arg1)
     lbAudioAx_80023F28(gmMainLib_8015ECB0());
 }
 
-/// #mn_80231F80
+bool mn_80231F80(u8 arg0)
+{
+    if (gm_801A4310() == 0x1B && arg0 == 1) {
+        return false;
+    }
+    if (arg0 == 3) {
+        if (gmMainLib_8015EE0C()) {
+            return true;
+        }
+        return false;
+    }
+    if (arg0 == 5) {
+        if (gmMainLib_8015EE44()) {
+            return true;
+        }
+        return false;
+    }
+    return true;
+}

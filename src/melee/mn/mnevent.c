@@ -1,5 +1,6 @@
 #include "mnevent.h"
 
+#include "db/db.h"
 #include "gm/gm_1601.h"
 #include "gm/gm_1BA8.h"
 #include "gm/gmmain_lib.h"
@@ -19,6 +20,58 @@
 #include <baselib/jobj.h>
 #include <baselib/memory.h>
 #include <baselib/sislib.h>
+
+s32 mnEvent_8024CE74(void)
+{
+    int count = 0;
+    int i;
+    PAD_STACK(8);
+
+    if (g_debugLevel > 2) {
+        return 0x2A;
+    }
+
+    count = 0;
+    for (i = 0; i < 0x33; i++) {
+        if (gmMainLib_8015CEFC(i)) {
+            count += 1;
+        }
+    }
+
+    if (count <= 5) {
+        return 1;
+    }
+    if (count <= 9) {
+        return 6;
+    }
+    if (count <= 0xF) {
+        return 0xB;
+    }
+    if (count <= 0x15) {
+        return 0x10;
+    }
+    if (count <= 0x1A) {
+        return 0x14;
+    }
+    if (count >= 0x32) {
+        if (gm_80162EC8()) {
+            return 0x2A;
+        }
+        return 0x29;
+    }
+    if (gm_80164840(0x14) && gm_80164840(7) && gm_80164840(0xF) &&
+        gm_80164840(0x15))
+    {
+        if (gm_80164840(0xA) && gm_80164840(9) && gm_80164840(3) &&
+            gm_80164840(0x18) && gm_80164840(0x19) && gm_80164840(0x16) &&
+            gm_80164840(0x17))
+        {
+            return 0x29;
+        }
+        return 0x1E;
+    }
+    return 0x15;
+}
 
 static AnimLoopSettings mnEvent_803EF740 = { 0, 0, -0.1f };
 static AnimLoopSettings mnEvent_803EF74C = { 0, 0, -0.1f };
