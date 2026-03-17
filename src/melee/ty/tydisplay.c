@@ -2301,12 +2301,10 @@ s32 un_8031C454(s32 arg0)
 
     entry = (TyDspEntry*) un_8031B9DC(arg0);
     idx = entry->x04;
-    if (((&tables->arch_names) && (&tables->arch_names)) &&
-        (&tables->arch_names))
-    {
-    }
+
     temp = tables;
     if ((u32) archArr[idx] == 0U) {
+        idx = entry->x04;
         names1 = temp->arch_names;
         if ((s8) idx == -1) {
             idx = 0;
@@ -2315,8 +2313,6 @@ s32 un_8031C454(s32 arg0)
             (s32) lbArchive_LoadSymbols(names1.entries[(s8) idx], NULL);
     } else {
         result = 1;
-        do {
-        } while (0);
     }
 
     if ((HSD_Archive*) archArr[42] == NULL) {
