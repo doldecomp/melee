@@ -3,6 +3,8 @@
 #include "mnmain.h"
 #include "mnnamenew.h"
 
+#include "lb/lblanguage.h"
+
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 #include <melee/gm/gmmain_lib.h>
@@ -11,9 +13,36 @@ extern AnimLoopSettings mnName_803ED538[];
 
 extern char mnName_StringTerminator;
 
+extern char* mnNameNew_803EE720[];
+extern char* mnNameNew_803EE724[];
+
 void fn_80249A1C(HSD_GObj* arg0);
 
-/// #mnName_8023749C
+#pragma push
+#pragma opt_common_subs off
+char* mnName_8023749C(int slot)
+{
+    char** array;
+    char* str;
+    s8 term;
+    int j;
+
+    if (lbLang_IsSavedLanguageUS()) {
+        array = mnNameNew_803EE724;
+    } else {
+        array = mnNameNew_803EE720;
+    }
+
+    term = (s8) mnName_StringTerminator;
+    for (j = 0; j != (u8) slot && term != (s8) array[j][0]; j++) {}
+
+    str = array[j];
+    if ((s8) mnName_StringTerminator == (s8) str[0]) {
+        str = NULL;
+    }
+    return str;
+}
+#pragma pop
 
 char* GetNameText(int slot)
 {
