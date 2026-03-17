@@ -2277,8 +2277,10 @@ s32 un_8031C354(s32 id, s32 (*buf)[], s32 max, s32 kind)
 
 s32 un_8031C454(s32 arg0)
 {
+    s32 temp2;
     TyDspArchNames names1;
     TyDspArchNames names2;
+    const TyDspNameTables* temp;
     TyDspArchNames names3;
     TyDspEntry* entry;
     u8 idx;
@@ -2286,10 +2288,10 @@ s32 un_8031C454(s32 arg0)
     s32* archArr;
     const TyDspNameTables* tables;
 
-    PAD_STACK(16);
+    PAD_STACK(0x4);
+    tables = &un_803B8988;
     result = 0;
     archArr = un_804A2DE8;
-    tables = &un_803B8988;
 
     un_803124BC();
 
@@ -2299,9 +2301,13 @@ s32 un_8031C454(s32 arg0)
 
     entry = (TyDspEntry*) un_8031B9DC(arg0);
     idx = entry->x04;
-
+    if (((&tables->arch_names) && (&tables->arch_names)) &&
+        (&tables->arch_names))
+    {
+    }
+    temp = tables;
     if ((u32) archArr[idx] == 0U) {
-        names1 = tables->arch_names;
+        names1 = temp->arch_names;
         if ((s8) idx == -1) {
             idx = 0;
         }
@@ -2309,16 +2315,20 @@ s32 un_8031C454(s32 arg0)
             (s32) lbArchive_LoadSymbols(names1.entries[(s8) idx], NULL);
     } else {
         result = 1;
+        do {
+        } while (0);
     }
 
     if ((HSD_Archive*) archArr[42] == NULL) {
         names2 = tables->arch_names;
         archArr[42] = (s32) lbArchive_LoadSymbols(names2.entries[42], NULL);
     }
-
-    if ((HSD_Archive*) archArr[41] == NULL) {
-        names3 = tables->arch_names;
-        archArr[41] = (s32) lbArchive_LoadSymbols(names3.entries[41], NULL);
+    temp2 = archArr[41];
+    if ((HSD_Archive*) temp2 == NULL) {
+        do {
+            names3 = temp->arch_names;
+            archArr[41] = (s32) lbArchive_LoadSymbols(names3.entries[41], 0L);
+        } while (entry->x04 * 0);
     }
 
     return result;
