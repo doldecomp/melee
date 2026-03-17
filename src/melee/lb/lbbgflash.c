@@ -330,6 +330,104 @@ void lbBgFlash_800209F4(void)
 
 /// #fn_80020AEC
 
+#pragma inline_depth(1)
+void fn_80020AEC(HSD_JObj* jobj, Mtx out)
+{
+    HSD_JObj* parent;
+    HSD_JObj* cur;
+    s32 i;
+
+    parent = jobj ? jobj->parent : NULL;
+
+    {
+        MtxPtr jobj_mtx = HSD_JObjGetMtxPtr(jobj);
+        HSD_JObjGetMtxPtr(parent);
+        HSD_MtxInverseConcat(parent->mtx, jobj_mtx, out);
+    }
+
+    for (i = 0; i < 3; i++) {
+        Vec3 col;
+        f32 mag;
+        f32 scale_sq;
+        f32 sp28;
+        f32 factor;
+
+        col.x = out[0][i];
+        col.y = out[1][i];
+        col.z = out[2][i];
+
+        mag = PSVECMag(&col);
+        if (mag > 1e-10f) {
+            mag = 1.0f / mag;
+        }
+
+        {
+            f32 sy = jobj->mtx[1][i];
+            f32 sx = jobj->mtx[0][i];
+            f32 sz = jobj->mtx[2][i];
+            scale_sq = sz * sz + sy * sy + sx * sx;
+        }
+
+        if (scale_sq > 0.0f) {
+            f64 e = __frsqrte(scale_sq);
+            e = 0.5 * e * -(((f64) scale_sq * (e * e)) - 3.0);
+            e = 0.5 * e * -(((f64) scale_sq * (e * e)) - 3.0);
+            e = 0.5 * e * -(((f64) scale_sq * (e * e)) - 3.0);
+            sp28 = (f32) ((f64) scale_sq * e);
+            scale_sq = sp28;
+        }
+
+        factor = mag * scale_sq;
+        col.x *= factor;
+        col.y *= factor;
+        col.z *= factor;
+        out[0][i] = col.x;
+        out[1][i] = col.y;
+        out[2][i] = col.z;
+    }
+
+    cur = jobj ? jobj->parent : NULL;
+    while (cur != NULL) {
+        HSD_JObj* grandpar;
+        Mtx tmp;
+
+        grandpar = cur ? cur->parent : NULL;
+
+        if (grandpar != NULL) {
+            HSD_JObjGetMtxPtr(cur);
+            HSD_JObjGetMtxPtr(grandpar);
+            HSD_MtxInverseConcat(grandpar->mtx, cur->mtx, tmp);
+        } else {
+            HSD_JObjGetMtxPtr(cur);
+            PSMTXCopy(cur->mtx, tmp);
+        }
+
+        for (i = 0; i < 3; i++) {
+            Vec3 col;
+            f32 mag;
+
+            col.x = tmp[0][i];
+            col.y = tmp[1][i];
+            col.z = tmp[2][i];
+
+            mag = PSVECMag(&col);
+            if (mag > 0.00001f) {
+                mag = 1.0f / mag;
+            }
+
+            col.x *= mag;
+            col.y *= mag;
+            col.z *= mag;
+            tmp[0][i] = col.x;
+            tmp[1][i] = col.y;
+            tmp[2][i] = col.z;
+        }
+
+        PSMTXConcat(tmp, out, out);
+        cur = cur ? cur->parent : NULL;
+    }
+}
+#pragma inline_depth(8)
 void lbBgFlash_80020E38(HSD_JObj* jobj, Vec3* dir, f32 max_angle,
                         f32 min_angle)
 {
