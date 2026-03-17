@@ -2338,9 +2338,15 @@ s32 un_8031C454(s32 arg0)
     return result;
 }
 
+inline void* un_8031C5E4_inline(s32* arg0, u8 arg1, const char* arg2)
+{
+    return HSD_ArchiveGetPublicAddress((HSD_Archive*) arg0[arg1], arg2);
+}
+
 HSD_JObj* un_8031C5E4(s32 arg0)
 {
     TyDspArchNames jobj_names1;
+    char* temp;
     TyDspArchNames matanim_names1;
     TyDspArchNames jobj_names2;
     TyDspArchNames jobj_names3;
@@ -2349,12 +2355,11 @@ HSD_JObj* un_8031C5E4(s32 arg0)
     HSD_JObj* child;
     u8 cat;
     const TyDspNameTables* tables = &un_803B8988;
-    s32* archives = un_804A2DE8;
 
+    s32* archives = un_804A2DE8;
     PAD_STACK(16);
 
     entry = (TyDspEntry*) un_8031B9DC(arg0);
-
     if ((u32) archives[entry->x04] == 0U) {
         return NULL;
     }
@@ -2363,40 +2368,38 @@ HSD_JObj* un_8031C5E4(s32 arg0)
 
     {
         u8 c = entry->x04;
-        jobj_names1 = *(TyDspArchNames*) tables->jobj_names;
         cat = c;
+        jobj_names1 = *(TyDspArchNames*) tables->jobj_names;
         if ((s8) c == -1) {
             cat = 0;
         }
-        child = HSD_JObjLoadJoint(HSD_ArchiveGetPublicAddress(
-            (HSD_Archive*) archives[c], jobj_names1.entries[(s8) cat]));
+        child = HSD_JObjLoadJoint(
+            un_8031C5E4_inline(archives, c, jobj_names1.entries[(s8) cat]));
         HSD_JObjAddChild(root, child);
     }
 
     {
         u8 c = entry->x04;
-        matanim_names1 = *(TyDspArchNames*) tables->matanim_names;
         cat = c;
+        matanim_names1 = *(TyDspArchNames*) tables->matanim_names;
         if ((s8) c == -1) {
             cat = 0;
         }
-        un_80306A48(child, NULL, (char*) matanim_names1.entries[(s8) cat],
-                    NULL, (HSD_Archive*) archives[c], (long) entry->x05);
+        temp = (char*) matanim_names1.entries[(s8) cat];
+        un_80306A48(child, NULL, (char*) temp, NULL,
+                    (HSD_Archive*) archives[c], entry->x05);
     }
     HSD_JObjRemoveAnimAll(child);
-
     HSD_JObjSetTranslateX(child, entry->x08);
     HSD_JObjSetTranslateZ(child, entry->x0C);
 
     jobj_names2 = *(TyDspArchNames*) tables->jobj_names;
-    HSD_JObjAddChild(
-        root, HSD_JObjLoadJoint(HSD_ArchiveGetPublicAddress(
-                  (HSD_Archive*) archives[42], jobj_names2.entries[42])));
+    HSD_JObjAddChild(root, HSD_JObjLoadJoint(un_8031C5E4_inline(
+                               archives, 42, jobj_names2.entries[42])));
 
     jobj_names3 = *(TyDspArchNames*) tables->jobj_names;
-    HSD_JObjAddChild(
-        root, HSD_JObjLoadJoint(HSD_ArchiveGetPublicAddress(
-                  (HSD_Archive*) archives[41], jobj_names3.entries[41])));
+    HSD_JObjAddChild(root, HSD_JObjLoadJoint(un_8031C5E4_inline(
+                               archives, 41, jobj_names3.entries[41])));
 
     return root;
 }
