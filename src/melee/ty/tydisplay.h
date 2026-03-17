@@ -20,7 +20,7 @@ typedef struct TySortElemI {
 /* 3182D4 */ void un_803182D4_OnFrame(void);
 /* 31830C */ void un_8031830C(TySortElem*, s32, s32);
 /* 318714 */ void un_80318714(TySortElemI*, s32, s32);
-/* 318B1C */ s32 un_80318B1C(s32 arg0);
+/* 318B1C */ void un_80318B1C(s32 arg0);
 /* 318CB4 */ void un_80318CB4(s32);
 /* 319540 */ void un_80319540(s32);
 /* 319994 */ void un_80319994(s32);

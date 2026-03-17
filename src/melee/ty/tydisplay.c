@@ -387,20 +387,22 @@ void un_80318714(TySortElemI* base, s32 lo, s32 hi)
 extern u8* un_804D6F14;
 extern void* un_804D6F10;
 
-s32 un_80318B1C(s32 arg0)
+void un_80318B1C(s32 arg0)
 {
-    TyDspGrid* grid = (TyDspGrid*) un_804D6F14;
+    s32 i;
     s32 start;
     s32 placed;
-    s32 i;
+    TyDspGrid* grid = (TyDspGrid*) un_804D6F14;
     s32 rand_id;
     TyDspEntry* check;
+    s32 rand_result;
 
     if (arg0 > 1) {
-        start = HSD_Randi(arg0 - 1);
+        rand_result = HSD_Randi(arg0 - 1);
     } else {
-        start = 0;
+        rand_result = 0;
     }
+    start = rand_result;
 
     if (arg0 > 0x125) {
         placed = 0;
