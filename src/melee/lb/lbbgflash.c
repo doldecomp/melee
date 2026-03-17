@@ -33,9 +33,12 @@ extern BgFlashData lbl_80433658;
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjobject.h>
+#include <baselib/gobjplink.h>
 #include <baselib/gobjproc.h>
+#include <baselib/gobjuserdata.h>
 #include <baselib/objalloc.h>
 #include <melee/lb/lb_00F9.h>
+#include <melee/lb/lbarchive.h>
 
 /* 021A10 */ static void lbBgFlash_80021A10(f32 arg8);
 /* 021C18 */ static void fn_80021C18(HSD_GObj* gobj, CommandInfo* cmd,
@@ -232,7 +235,30 @@ static void lbBgFlash_80021A10(f32 arg8)
     lbl_804D63D8 = arg8;
 }
 
-/// #lbBgFlash_80021A18
+void lbBgFlash_80021A18(int arg0)
+{
+    HSD_GObj* gobj;
+    u8* user_data;
+
+    HSD_ObjAllocInit(&lbl_804336A0, 0x84, 4);
+    gobj = GObj_Create(0xE, 0xE, 0);
+    if (gobj != NULL) {
+        user_data = HSD_ObjAlloc(&lbl_804336A0);
+        if (user_data != NULL) {
+            GObj_InitUserData(gobj, 0xE, fn_800219E4, user_data);
+            lbl_804D63E0 = (BgFlashGlobal*) gobj;
+            lbl_804D63D8 = 1.0f;
+            *user_data = (u8) arg0;
+            lbArchive_LoadSymbols("LbBf.dat", &lbl_804D63DC,
+                                  "lbBgFlashColAnimData", NULL);
+            lbBgFlash_800208EC(6);
+            fn_80021C1C();
+            HSD_GObj_SetupProc(gobj, (HSD_GObjEvent) fn_80021B04, 1);
+            return;
+        }
+        HSD_GObjPLink_80390228(gobj);
+    }
+}
 
 /// #fn_80021B04
 
