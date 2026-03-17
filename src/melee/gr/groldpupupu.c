@@ -13,9 +13,11 @@
 
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
+#include <baselib/random.h>
 
 static struct {
-    int x0;
+    s16 x0;
+    s16 x2;
 }* grOp_804D6A98;
 
 static void* grOp_804D6A9C;
@@ -173,7 +175,20 @@ void grOldPupupu_80210C34(Ground_GObj* gobj)
 
 void grOldPupupu_80210C78(Ground_GObj* arg) {}
 
-/// #grOldPupupu_80210C7C
+void grOldPupupu_80210C7C(Ground_GObj* gobj)
+{
+    Ground* gp = gobj->user_data;
+    s16 x2, x0;
+
+    x2 = grOp_804D6A98->x2;
+    x0 = grOp_804D6A98->x0;
+    *(s16*) &gp->gv.unk.xC4 =
+        x2 > x0
+            ? x0 + (x2 - x0 != 0 ? HSD_Randi(x2 - x0) : 0)
+        : x2 < x0
+            ? x2 + (x0 - x2 != 0 ? HSD_Randi(x0 - x2) : 0)
+            : x2;
+}
 
 bool grOldPupupu_80210D08(Ground_GObj* gobj)
 {
