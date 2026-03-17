@@ -1004,7 +1004,7 @@ void un_80319EF0(void)
     cfg->x18 = 57.29578f * lb_8000D008(cfg->x40 * 0.5f, 500.0f);
 
     {
-        HSD_JObj* jobj = (HSD_JObj*) bg->gobj4->hsd_obj;
+        HSD_JObj* jobj = (HSD_JObj*) un_804D6F1C->gobj4->hsd_obj;
         HSD_JObjSetTranslate(jobj, &eyepos);
     }
 
@@ -1029,8 +1029,8 @@ void un_80319EF0(void)
             __assert("tydisplay.c", 0x28CU, "0");
         }
         if ((s32) scale != 0) {
-            HSD_JObjSetScaleX(bg->jobj, scale);
-            HSD_JObjSetScaleZ(bg->jobj, scale);
+            HSD_JObjSetScaleX(un_804D6F1C->jobj, scale);
+            HSD_JObjSetScaleZ(un_804D6F1C->jobj, scale);
         }
     }
 }
@@ -1199,24 +1199,21 @@ void fn_8031A4EC(HSD_GObj* arg0)
 
 void fn_8031A94C(HSD_GObj* arg0)
 {
+    u8 _1[0x4];
     Vec3 sp7C;
     Vec3 sp70;
-    Vec3 sp5C;
-    f32 sp58;
-    f32 sp54;
-    f32 sp50;
-    Vec3 sp44;
-    f32 sp40;
-    f32 sp3C;
-    f32 sp38;
+    u8 _3[0x8];
+    Vec3 interest2;
+    Vec3 tempvec1;
+    Vec3 eye2;
+    Vec3 tempvec2;
+    u8 _2[0x18];
     TyDspConfig* cfg = un_804D6F18;
     HSD_CObj* cobj = (HSD_CObj*) arg0->hsd_obj;
     HSD_JObj* trophy = ((HSD_JObj*) cfg->x78->hsd_obj)->child;
     f32 fov;
     f32 val;
     s32 sign;
-
-    PAD_STACK(0x28);
 
     HSD_CObjGetInterest(cobj, &sp7C);
     HSD_CObjGetEyePosition(cobj, &sp70);
@@ -1312,30 +1309,31 @@ void fn_8031A94C(HSD_GObj* arg0)
         if (un_80305B88() & 0x20) {
             HSD_GObjPLink_80390228(cfg->x78);
             cfg->x78 = NULL;
-            do {
+            while (cfg->x78 == NULL) {
                 cfg->x7C = cfg->x7C + 1;
                 if (cfg->x7C >= 0x125) {
                     cfg->x7C = 0;
                 }
                 cfg->x78 = un_8031BC54(cfg->x7C);
-            } while (cfg->x78 == NULL);
+            }
             return;
         }
         if (un_80305B88() & 0x40) {
             HSD_GObjPLink_80390228(cfg->x78);
             cfg->x78 = NULL;
-            do {
+            while (cfg->x78 == NULL) {
                 cfg->x7C = cfg->x7C - 1;
                 if (cfg->x7C < 0) {
                     cfg->x7C = 0x124;
                 }
                 cfg->x78 = un_8031BC54(cfg->x7C);
-            } while (cfg->x78 == NULL);
+            }
             return;
         }
         if (!(un_80305C44() & 0x100)) {
             f32 stick = cfg->x20;
-            if (stick != 0.0f) {
+            f32 zero = 0.0f;
+            if (stick != zero) {
                 cfg->x10 = -(stick * (0.02f * fov) - cfg->x10);
                 if (cfg->x10 < -cfg->x1C) {
                     cfg->x10 = -cfg->x1C;
@@ -1346,7 +1344,7 @@ void fn_8031A94C(HSD_GObj* arg0)
             }
             {
                 f32 stick2 = cfg->x24;
-                if (stick2 != 0.0f) {
+                if (stick2 != zero) {
                     cfg->x0C = (stick2 * (0.02f * fov)) + cfg->x0C;
                     if (cfg->x0C < -cfg->x18) {
                         cfg->x0C = -cfg->x18;
@@ -1388,17 +1386,17 @@ void fn_8031A94C(HSD_GObj* arg0)
         }
         {
             HSD_CObj* cobj2 = (HSD_CObj*) cfg->x00->hsd_obj;
-            HSD_CObjGetInterest(cobj2, &sp5C);
-            HSD_CObjGetEyePosition(cobj2, &sp44);
-            sp50 = cfg->x68.x;
-            sp54 = 0.0f;
-            sp58 = -500.0f;
-            sp38 = 0.017453292f * cfg->x0C;
-            sp3C = 0.017453292f * cfg->x10;
-            sp40 = 0.0f;
-            lbVector_ApplyEulerRotation((Vec3*) &sp50, (Vec3*) &sp38);
-            sp58 = cfg->x5C.z;
-            HSD_CObjSetInterest(cobj2, (Vec3*) &sp50);
+            HSD_CObjGetInterest(cobj2, &interest2);
+            HSD_CObjGetEyePosition(cobj2, &eye2);
+            tempvec1.x = cfg->x68.x;
+            tempvec1.y = 0.0f;
+            tempvec1.z = -500.0f;
+            tempvec2.x = 0.017453292f * cfg->x0C;
+            tempvec2.y = 0.017453292f * cfg->x10;
+            tempvec2.z = 0.0f;
+            lbVector_ApplyEulerRotation(&tempvec1, &tempvec2);
+            tempvec1.z = cfg->x5C.z;
+            HSD_CObjSetInterest(cobj2, &tempvec1);
         }
     }
 }
