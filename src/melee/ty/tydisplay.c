@@ -1627,18 +1627,17 @@ void un_8031B460_OnEnter(void* arg0)
         } else {
             archname = strbase + 0xB8;
         }
-        data->archive = lbArchive_80016DBC(archname, &sp18, strbase + 0x18, 0);
+        data->archive =
+            lbArchive_80016DBC(archname, &sp18, strbase + 0x18, 0);
     }
 
     {
-        u8* ptr = (u8*) data;
         i = 0;
         do {
             s32 ret = un_8031BBF4((s8) i);
-            *(HSD_Archive**) (ptr + 0x50) =
+            data->archives[i] =
                 lbArchive_LoadSymbols((char*) ret, NULL);
             i += 1;
-            ptr += 4;
         } while (i < 0x2B);
     }
 
@@ -1647,20 +1646,22 @@ void un_8031B460_OnEnter(void* arg0)
     {
         TyDspConfig* cfg2 = un_804D6F18;
         cobj = lb_80013B14(HSD_ArchiveGetPublicAddress(
-            ((TyDspBgData*) un_804D6F1C)->archive, strbase + 0x18C));
+            un_804D6F1C->archive,
+            strbase + 0x18C));
 
         cfg2->x00 = GObj_Create(1, 2, 0);
         HSD_GObjObject_80390A70(cfg2->x00, HSD_GObj_804D784B, cobj);
         GObj_SetupGXLinkMax(cfg2->x00, (GObj_RenderFunc) un_803068E0, 0);
 
         gobj = cfg2->x00;
-        *(s32*) ((u8*) gobj + 0x24) = 0;
-        *(s32*) ((u8*) gobj + 0x20) = 0x12300000;
+        gobj->gxlink_prios = 0x1230000000000000ULL;
 
         if ((s32) un_804D6F20 != 0) {
-            HSD_GObj_SetupProc(cfg2->x00, (HSD_GObjEvent) fn_8031A94C, 0);
+            HSD_GObj_SetupProc(
+                cfg2->x00, (HSD_GObjEvent) fn_8031A94C, 0);
         } else {
-            HSD_GObj_SetupProc(cfg2->x00, (HSD_GObjEvent) fn_8031A4EC, 0);
+            HSD_GObj_SetupProc(
+                cfg2->x00, (HSD_GObjEvent) fn_8031A4EC, 0);
         }
         HSD_GObj_80390CD4(cfg2->x00);
     }
@@ -1690,7 +1691,6 @@ void un_8031B460_OnEnter(void* arg0)
             break;
         }
     }
-
     un_80319EF0();
 }
 
