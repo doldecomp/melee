@@ -108,7 +108,7 @@ typedef struct TyDspGrid {
     /* 0x008 */ f32 x08;
     /* 0x00C */ f32 x0C;
     /* 0x010 */ f32 x10;
-    /* 0x014 */ TySortElemI sort[301];
+    /* 0x014 */ TySortElem sort[301];
     /* 0x97C */ TyDspPos pos[301];
 } TyDspGrid;
 
@@ -154,7 +154,7 @@ void un_803182D4_OnFrame(void)
     }
 }
 
-void un_8031830C(TySortElem* base, s32 lo, s32 hi)
+inline void quicksort(TySortElem* base, s32 lo, s32 hi)
 {
     TySortElem tmp;
     PAD_STACK(16);
@@ -253,122 +253,14 @@ void un_8031830C(TySortElem* base, s32 lo, s32 hi)
     }
 }
 
-void un_80318714(TySortElemI* base, s32 lo, s32 hi)
+void un_8031830C(TySortElem* base, s32 lo, s32 hi)
 {
-    TySortElemI tmp;
-    PAD_STACK(8);
+    quicksort(base, lo, hi);
+}
 
-    if (lo < hi) {
-        s32 mid = (lo + hi) / 2;
-        s32 pivot, i;
-        TySortElemI* p;
-        TySortElemI* q;
-
-        if (lo != mid) {
-            p = &base[lo];
-            q = &base[mid];
-            tmp = *p;
-            *p = *q;
-            *q = tmp;
-        }
-
-        i = lo + 1;
-        pivot = lo;
-        p = &base[lo];
-        for (q = &base[i]; i <= hi; i++, q++) {
-            if (q->val > p->val) {
-                pivot += 1;
-                if (pivot != i) {
-                    TySortElemI* s = &base[pivot];
-                    tmp = *s;
-                    *s = *q;
-                    *q = tmp;
-                }
-            }
-        }
-
-        if (lo != pivot) {
-            q = &base[pivot];
-            tmp = *p;
-            *p = *q;
-            *q = tmp;
-        }
-
-        if (lo < pivot - 1) {
-            s32 mid2 = (pivot + lo - 1) / 2;
-            s32 pivot2, j2;
-
-            p = &base[lo];
-            if (lo != mid2) {
-                q = &base[mid2];
-                tmp = *p;
-                *p = *q;
-                *q = tmp;
-            }
-
-            j2 = lo + 1;
-            pivot2 = lo;
-            for (q = &base[lo + 1]; j2 <= pivot - 1; j2++, q++) {
-                if (q->val > p->val) {
-                    pivot2 += 1;
-                    if (pivot2 != j2) {
-                        TySortElemI* s = &base[pivot2];
-                        tmp = *s;
-                        *s = *q;
-                        *q = tmp;
-                    }
-                }
-            }
-
-            if (lo != pivot2) {
-                q = &base[pivot2];
-                tmp = *p;
-                *p = *q;
-                *q = tmp;
-            }
-
-            un_80318714(base, lo, pivot2 - 1);
-            un_80318714(base, pivot2 + 1, pivot - 1);
-        }
-
-        if (pivot + 1 < hi) {
-            s32 mid3 = (pivot + hi + 1) / 2;
-            s32 pivot3, j3;
-            TySortElemI* rp;
-
-            rp = &base[pivot + 1];
-            if (pivot + 1 != mid3) {
-                q = &base[mid3];
-                tmp = *rp;
-                *rp = *q;
-                *q = tmp;
-            }
-
-            j3 = pivot + 2;
-            pivot3 = pivot + 1;
-            for (q = &base[j3]; j3 <= hi; j3++, q++) {
-                if (q->val > rp->val) {
-                    pivot3 += 1;
-                    if (pivot3 != j3) {
-                        TySortElemI* s = &base[pivot3];
-                        tmp = *s;
-                        *s = *q;
-                        *q = tmp;
-                    }
-                }
-            }
-
-            if (pivot + 1 != pivot3) {
-                q = &base[pivot3];
-                tmp = *rp;
-                *rp = *q;
-                *q = tmp;
-            }
-
-            un_80318714(base, pivot + 1, pivot3 - 1);
-            un_80318714(base, pivot3 + 1, hi);
-        }
-    }
+void un_80318714(TySortElem* base, s32 lo, s32 hi)
+{
+    quicksort(base, lo, hi);
 }
 
 extern u8* un_804D6F14;
@@ -640,8 +532,8 @@ void un_80318CB4(s32 arg0)
     if (count > 1) {
         n2 = (count / 3) * 2;
         if (n2 > 0) {
-            TySortElemI tmp;
-            TySortElemI* sort = grid->sort;
+            TySortElem tmp;
+            TySortElem* sort = grid->sort;
             mid = n2 / 2;
 
             if (mid != 0) {
@@ -657,16 +549,16 @@ void un_80318CB4(s32 arg0)
                     pivot += 1;
                     j += 8;
                     if (pivot != n) {
-                        TySortElemI* s = (TySortElemI*) ((u8*) grid->sort + j);
+                        TySortElem* s = (TySortElem*) ((u8*) grid->sort + j);
                         tmp = *s;
-                        *s = *(TySortElemI*) ptr;
-                        *(TySortElemI*) ptr = tmp;
+                        *s = *(TySortElem*) ptr;
+                        *(TySortElem*) ptr = tmp;
                     }
                 }
             }
 
             if (pivot != 0) {
-                TySortElemI* s = &sort[pivot];
+                TySortElem* s = &sort[pivot];
                 tmp = sort[0];
                 sort[0] = *s;
                 *s = tmp;
@@ -798,8 +690,8 @@ void un_80319540(s32 arg0)
         if (n2 > 0) {
             s32 mid = n2 / 2;
             s32 pivot, j, n;
-            TySortElemI tmp;
-            TySortElemI* sort = grid->sort;
+            TySortElem tmp;
+            TySortElem* sort = grid->sort;
 
             if (mid != 0) {
                 tmp = sort[0];
@@ -814,16 +706,16 @@ void un_80319540(s32 arg0)
                     pivot += 1;
                     j += 8;
                     if (pivot != n) {
-                        TySortElemI* s = (TySortElemI*) ((u8*) grid->sort + j);
+                        TySortElem* s = (TySortElem*) ((u8*) grid->sort + j);
                         tmp = *s;
-                        *s = *(TySortElemI*) ptr;
-                        *(TySortElemI*) ptr = tmp;
+                        *s = *(TySortElem*) ptr;
+                        *(TySortElem*) ptr = tmp;
                     }
                 }
             }
 
             if (pivot != 0) {
-                TySortElemI* s = &sort[pivot];
+                TySortElem* s = &sort[pivot];
                 tmp = sort[0];
                 sort[0] = *s;
                 *s = tmp;
@@ -984,8 +876,8 @@ void un_80319994(s32 arg0)
     if (count > 1) {
         n2 = (count / 3) * 2;
         if (n2 > 0) {
-            TySortElemI tmp;
-            TySortElemI* sort = grid->sort;
+            TySortElem tmp;
+            TySortElem* sort = grid->sort;
             mid = n2 / 2;
 
             if (mid != 0) {
@@ -1001,16 +893,16 @@ void un_80319994(s32 arg0)
                     pivot += 1;
                     j += 8;
                     if (pivot != n) {
-                        TySortElemI* s = (TySortElemI*) ((u8*) grid->sort + j);
+                        TySortElem* s = (TySortElem*) ((u8*) grid->sort + j);
                         tmp = *s;
-                        *s = *(TySortElemI*) ptr;
-                        *(TySortElemI*) ptr = tmp;
+                        *s = *(TySortElem*) ptr;
+                        *(TySortElem*) ptr = tmp;
                     }
                 }
             }
 
             if (pivot != 0) {
-                TySortElemI* s = &sort[pivot];
+                TySortElem* s = &sort[pivot];
                 tmp = sort[0];
                 sort[0] = *s;
                 *s = tmp;
