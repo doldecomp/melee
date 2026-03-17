@@ -43,6 +43,8 @@ extern BgFlashData lbl_80433658;
 #include <MSL/trigf.h>
 #include <melee/lb/lb_00F9.h>
 #include <melee/lb/lbarchive.h>
+#include <melee/lb/lbvector.h>
+#include <MSL/math.h>
 
 /* 021A10 */ static void lbBgFlash_80021A10(f32 arg8);
 /* 021C18 */ static void fn_80021C18(HSD_GObj* gobj, CommandInfo* cmd,
@@ -528,6 +530,209 @@ void fn_8002113C(HSD_JObj* jobj, Vec3* axis, f32 angle)
 }
 
 /// #lbBgFlash_80021410
+
+typedef struct IKChainData {
+    /* 0x00 */ HSD_JObj* jobj0;
+    /* 0x04 */ HSD_JObj* jobj1;
+    /* 0x08 */ u8 pad_08[4];
+    /* 0x0C */ Vec3 pos0;
+    /* 0x18 */ Vec3 pos1;
+    /* 0x24 */ Vec3 pos2;
+    /* 0x30 */ Vec3 pos3;
+    /* 0x3C */ Vec3 pos4;
+    /* 0x48 */ f32 len0;
+    /* 0x4C */ f32 len1;
+} IKChainData;
+
+void lbBgFlash_80021410(void* arg0)
+{
+    IKChainData* data = arg0;
+    Vec3 axis;
+    Vec3 sp2C;
+    Vec3 sp38;
+    Vec3 sp44;
+    f32 sp28;
+    f32 sp24;
+    f32 sp20;
+    f32 sp1C;
+    f32 nx;
+    f32 ny;
+    f32 nz;
+    f32 dot;
+    f32 d;
+    f32 sin_val;
+    f32 len_ab;
+    f32 len_bc;
+    f32 len_ac;
+    f32 angle1;
+    f32 angle2;
+    f32 sum_len;
+    f32 a2;
+    f32 b2;
+    f32 c2;
+    f32 two_a;
+    f32 cos1;
+    f32 cos2;
+    f32 acos1;
+    f32 acos2;
+    f32 rem;
+    f32 dx;
+    f32 dy;
+    f32 dz;
+    HSD_JObj* jobj;
+    Vec3* pDiff;
+    PAD_STACK(64);
+
+    jobj = data->jobj1;
+    HSD_JObjSetupMatrix(jobj);
+
+    axis.x = data->jobj1->mtx[0][2];
+    axis.y = data->jobj1->mtx[1][2];
+    axis.z = data->jobj1->mtx[2][2];
+    lbVector_Normalize(&axis);
+
+    nx = axis.x;
+    ny = axis.y;
+    nz = axis.z;
+
+    dot = -((nz * data->pos1.z) +
+            ((nx * data->pos1.x) + (ny * data->pos1.y)));
+
+    d = -(dot + ((data->pos4.z * nz) +
+                 ((data->pos4.x * nx) + (data->pos4.y * ny))));
+    data->pos4.x = (d * nx) + data->pos4.x;
+    data->pos4.y = (d * ny) + data->pos4.y;
+    data->pos4.z = (d * nz) + data->pos4.z;
+
+    d = -(dot + ((data->pos0.z * nz) +
+                 ((data->pos0.x * nx) + (data->pos0.y * ny))));
+    data->pos0.x = (d * nx) + data->pos0.x;
+    data->pos0.y = (d * ny) + data->pos0.y;
+    data->pos0.z = (d * nz) + data->pos0.z;
+
+    d = -(dot + ((data->pos1.z * nz) +
+                 ((data->pos1.x * nx) + (data->pos1.y * ny))));
+    data->pos1.x = (d * nx) + data->pos1.x;
+    data->pos1.y = (d * ny) + data->pos1.y;
+    data->pos1.z = (d * nz) + data->pos1.z;
+
+    pDiff = lbVector_Diff(&data->pos0, &data->pos1, &sp44);
+    dot = (nz * pDiff->z) + ((nx * pDiff->x) + (ny * pDiff->y));
+    sin_val = -((dot * dot) - 1.0f);
+    if (sin_val > 0.0f) {
+        f64 e = __frsqrte(sin_val);
+        e = 0.5 * e * -(((f64) sin_val * (e * e)) - 3.0);
+        e = 0.5 * e * -(((f64) sin_val * (e * e)) - 3.0);
+        e = 0.5 * e * -(((f64) sin_val * (e * e)) - 3.0);
+        sp28 = (f32) ((f64) sin_val * e);
+        sin_val = sp28;
+    }
+    data->len0 = data->len0 * sin_val;
+
+    lbVector_Diff(&data->pos4, &data->pos0, &sp2C);
+    lbVector_Diff(&data->pos1, &data->pos0, &sp38);
+    angle1 = lbVector_Angle(&sp2C, &sp38);
+
+    lbVector_Diff(&data->pos2, &data->pos1, &sp2C);
+    angle2 = (f32) (3.141592653589793 - lbVector_Angle(&sp2C, &sp38));
+
+    dx = data->pos0.x - data->pos4.x;
+    dy = data->pos0.y - data->pos4.y;
+    dz = data->pos0.z - data->pos4.z;
+    dx *= dx;
+    dy *= dy;
+    dz *= dz;
+    len_ab = dz + (dx + dy);
+    if (len_ab > 0.0f) {
+        f64 e = __frsqrte(len_ab);
+        e = 0.5 * e * -(((f64) len_ab * (e * e)) - 3.0);
+        e = 0.5 * e * -(((f64) len_ab * (e * e)) - 3.0);
+        e = 0.5 * e * -(((f64) len_ab * (e * e)) - 3.0);
+        sp24 = (f32) ((f64) len_ab * e);
+        len_ab = sp24;
+    }
+
+    dx = data->pos0.x - data->pos1.x;
+    dy = data->pos0.y - data->pos1.y;
+    dz = data->pos0.z - data->pos1.z;
+    dx *= dx;
+    dy *= dy;
+    dz *= dz;
+    len_bc = dz + (dx + dy);
+    if (len_bc > 0.0f) {
+        f64 e = __frsqrte(len_bc);
+        e = 0.5 * e * -(((f64) len_bc * (e * e)) - 3.0);
+        e = 0.5 * e * -(((f64) len_bc * (e * e)) - 3.0);
+        e = 0.5 * e * -(((f64) len_bc * (e * e)) - 3.0);
+        sp20 = (f32) ((f64) len_bc * e);
+        len_bc = sp20;
+    }
+    data->len0 = len_bc;
+
+    dx = data->pos1.x - data->pos3.x;
+    dy = data->pos1.y - data->pos3.y;
+    dz = data->pos1.z - data->pos3.z;
+    dx *= dx;
+    dy *= dy;
+    dz *= dz;
+    len_ac = dz + (dx + dy);
+    if (len_ac > 0.0f) {
+        f64 e = __frsqrte(len_ac);
+        e = 0.5 * e * -(((f64) len_ac * (e * e)) - 3.0);
+        e = 0.5 * e * -(((f64) len_ac * (e * e)) - 3.0);
+        e = 0.5 * e * -(((f64) len_ac * (e * e)) - 3.0);
+        sp1C = (f32) ((f64) len_ac * e);
+        len_ac = sp1C;
+    }
+    data->len1 = len_ac;
+
+    len_bc = data->len0;
+    len_ac = data->len1;
+
+    a2 = len_bc * len_bc;
+    b2 = len_ab * len_ab;
+    two_a = 2.0f * len_bc;
+    c2 = len_ac * len_ac;
+
+    sum_len = (10.0f * (len_bc + len_ac)) / 11.0f;
+    if (len_ab > sum_len) {
+        len_ab = ((11.0f * sum_len) / 10.0f) +
+                 (-(sum_len * (sum_len * (sum_len * (sum_len *
+                   (sum_len * (sum_len * (sum_len * (sum_len *
+                   (sum_len * (sum_len * sum_len)))))))))) /
+                  (10.0f * (len_ab * (len_ab * (len_ab * (len_ab *
+                   (len_ab * (len_ab * (len_ab * (len_ab *
+                   (len_ab * len_ab)))))))))));
+    }
+
+    cos1 = ((a2 + b2) - c2) / (two_a * len_ab);
+    cos2 = ((a2 + c2) - b2) / (two_a * len_ac);
+
+    if (cos1 > 1.0f) {
+        cos1 = 1.0f;
+    } else if (cos1 < -1.0f) {
+        cos1 = -1.0f;
+    }
+
+    if (cos2 > 1.0f) {
+        cos2 = 1.0f;
+    } else if (cos2 < -1.0f) {
+        cos2 = -1.0f;
+    }
+
+    acos1 = acosf(cos1);
+    acos2 = acosf(cos2);
+    rem = (f32) (3.141592653589793 - (f64) acos2);
+    if (rem < 0.1745329201221466f) {
+        acos2 = (f32) (2.9670597334676465 +
+                (f64) (f32) ((f64) (f32) (fabs((f64) rem) /
+                0.1745329201221466) *
+                ((f64) acos2 - 2.9670597334676465)));
+    }
+
+    fn_8002113C(data->jobj0, &axis, acos1 - angle1);
+    fn_8002113C(data->jobj1, &axis, acos2 - angle2);
+}
 
 extern HSD_ObjAllocData lbl_804336A0;
 

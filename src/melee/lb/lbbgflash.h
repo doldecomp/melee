@@ -27,7 +27,7 @@
 /* 020AEC */ void fn_80020AEC(HSD_JObj*, Mtx);
 /* 020E38 */ void lbBgFlash_80020E38(HSD_JObj*, Vec3*, f32, f32);
 /* 02113C */ void fn_8002113C(HSD_JObj*, Vec3*, f32);
-/* 021410 */ UNK_RET lbBgFlash_80021410(UNK_PARAMS);
+/* 021410 */ void lbBgFlash_80021410(void*);
 /* 0219E4 */ void fn_800219E4(void*);
 /* 021A18 */ void lbBgFlash_80021A18(int);
 /* 021B04 */ void fn_80021B04(HSD_GObj*);
