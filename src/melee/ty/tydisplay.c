@@ -1631,14 +1631,9 @@ void un_8031B460_OnEnter(void* arg0)
             lbArchive_80016DBC(archname, &sp18, strbase + 0x18, 0);
     }
 
-    {
-        i = 0;
-        do {
-            s32 ret = un_8031BBF4((s8) i);
-            data->archives[i] =
-                lbArchive_LoadSymbols((char*) ret, NULL);
-            i += 1;
-        } while (i < 0x2B);
+    for (i = 0; i < 0x2B; i++) {
+        s32 ret = un_8031BBF4((s8) i);
+        data->archives[i] = lbArchive_LoadSymbols((char*) ret, 0L);
     }
 
     data->x104 = 0;
