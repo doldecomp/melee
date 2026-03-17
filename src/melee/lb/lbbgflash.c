@@ -40,6 +40,7 @@ extern BgFlashData lbl_80433658;
 #include <baselib/mtx.h>
 #include <baselib/objalloc.h>
 #include <baselib/quatlib.h>
+#include <MSL/trigf.h>
 #include <melee/lb/lb_00F9.h>
 #include <melee/lb/lbarchive.h>
 
@@ -329,7 +330,71 @@ void lbBgFlash_800209F4(void)
 
 /// #fn_80020AEC
 
-/// #lbBgFlash_80020E38
+void lbBgFlash_80020E38(HSD_JObj* jobj, Vec3* dir, f32 max_angle,
+                        f32 min_angle)
+{
+    f32 dx = dir->x;
+    f32 dy = dir->y;
+    f32 dz = dir->z;
+    f32 mag_sq;
+    f32 len;
+    f32 angle;
+    f32 z_col_z;
+    f32 z_col_x;
+
+    PAD_STACK(24);
+
+    if ((dz * dz) + ((dx * dx) + (dy * dy)) == 0.0f) {
+        return;
+    }
+
+    HSD_JObjSetupMatrix(jobj);
+
+    z_col_x = jobj->mtx[0][2];
+    z_col_z = jobj->mtx[2][2];
+    mag_sq = (jobj->mtx[2][2] * jobj->mtx[2][2]) +
+             ((jobj->mtx[0][2] * jobj->mtx[0][2]) +
+              (jobj->mtx[1][2] * jobj->mtx[1][2]));
+
+    if (mag_sq > 0.0f) {
+        f64 e = __frsqrte(mag_sq);
+        e = 0.5 * e * -(((f64) mag_sq * (e * e)) - 3.0);
+        e = 0.5 * e * -(((f64) mag_sq * (e * e)) - 3.0);
+        e = 0.5 * e * -(((f64) mag_sq * (e * e)) - 3.0);
+        len = (f32) ((f64) mag_sq * e);
+    } else {
+        len = mag_sq;
+    }
+
+    if (len == 0.0f) {
+        return;
+    }
+
+    angle = atan2f(-dir->x * (z_col_z / len), dir->y);
+
+    if (angle > max_angle) {
+        angle = max_angle;
+    }
+    if (angle < -min_angle) {
+        angle = -min_angle;
+    }
+
+    if (!(jobj->flags & JOBJ_USE_QUATERNION)) {
+        f32 z = angle + HSD_JObjGetRotationZ(jobj);
+        HSD_JObjSetRotationZ(jobj, z);
+    } else {
+        Mtx quatMtx;
+        Mtx rotMtx;
+        Mtx resultMtx;
+        PSMTXQuat(quatMtx, &jobj->rotate);
+        MTXRotRad(rotMtx, 'z', angle);
+        PSMTXConcat(quatMtx, rotMtx, resultMtx);
+        MatToQuat(resultMtx, &jobj->rotate);
+        HSD_JObjSetMtxDirty(jobj);
+    }
+
+    HSD_JObjSetupMatrix(jobj);
+}
 
 void fn_8002113C(HSD_JObj* jobj, Vec3* axis, f32 angle)
 {
