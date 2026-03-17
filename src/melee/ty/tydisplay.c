@@ -2353,10 +2353,12 @@ inline void* un_8031C5E4_inline(s32* arg0, u8 arg1, const char* arg2)
 
 HSD_JObj* un_8031C5E4(s32 arg0)
 {
+    u8 _1[12];
     TyDspArchNames jobj_names1;
     char* temp;
     TyDspArchNames matanim_names1;
     TyDspArchNames jobj_names2;
+    u8 _2[4];
     TyDspArchNames jobj_names3;
     TyDspEntry* entry;
     HSD_JObj* root;
@@ -2365,7 +2367,7 @@ HSD_JObj* un_8031C5E4(s32 arg0)
     const TyDspNameTables* tables = &un_803B8988;
 
     s32* archives = un_804A2DE8;
-    PAD_STACK(16);
+    u8 _3[4];
 
     entry = (TyDspEntry*) un_8031B9DC(arg0);
     if ((u32) archives[entry->x04] == 0U) {
