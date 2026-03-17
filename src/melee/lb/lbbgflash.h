@@ -14,7 +14,7 @@
 #include <baselib/gobj.h>
 
 /* 01FC08 */ void fn_8001FC08(void);
-/* 01FEC4 */ UNK_RET fn_8001FEC4(UNK_PARAMS);
+/* 01FEC4 */ void fn_8001FEC4(HSD_GObj* gobj, s32 code);
 /* 0204C8 */ void fn_800204C8(void);
 /* 0205F0 */ void lbBgFlash_800205F0(s32 duration);
 /* 02063C */ void lbBgFlash_8002063C(int count);

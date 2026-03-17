@@ -29,6 +29,8 @@ typedef struct BgFlashData {
 
 extern BgFlashData lbl_80433658;
 
+#include <dolphin/gx.h>
+
 #include <baselib/cobj.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
@@ -39,6 +41,7 @@ extern BgFlashData lbl_80433658;
 #include <baselib/jobj.h>
 #include <baselib/mtx.h>
 #include <baselib/objalloc.h>
+#include <baselib/particle.h>
 #include <baselib/quatlib.h>
 #include <MSL/trigf.h>
 #include <melee/lb/lb_00F9.h>
@@ -159,6 +162,140 @@ void fn_8001FC08(void)
 }
 
 /// #fn_8001FEC4
+void fn_8001FEC4(HSD_GObj* gobj, s32 code)
+{
+    BgFlashData2* data = (BgFlashData2*) &lbl_80433658;
+    s32 mode;
+    s32 y;
+
+    PAD_STACK(8);
+
+    if ((data->state >> 7) & 1) {
+        return;
+    }
+
+    hsd_80391A04(1.0f, 1.0f, 1);
+    mode = data->state & 0x7F;
+
+    if (mode == 5 || mode >= 5 || mode < 3) {
+        u8 a = data->xF;
+        u8 b = data->xE;
+        u8 g = data->xD;
+        u8 r = data->xC;
+
+        GXBegin(GX_QUADS, GX_VTXFMT0, 4);
+        GXPosition2f32(0.0f, 0.0f);
+        GXColor4u8(r, g, b, a);
+        GXPosition2f32(640.0f, 0.0f);
+        GXColor4u8(r, g, b, a);
+        GXPosition2f32(640.0f, -480.0f);
+        GXColor4u8(r, g, b, a);
+        GXPosition2f32(0.0f, -480.0f);
+        GXColor4u8(r, g, b, a);
+        return;
+    }
+
+    if (data->x33 != 0) {
+        if ((u32) mode == 3U) {
+            GXBegin(GX_QUADS, GX_VTXFMT0, 4);
+            GXPosition2f32(0.0f, 0.0f);
+            GXColor4u8(0, 0, 0, 0xFF);
+            GXPosition2f32(640.0f, 0.0f);
+            GXColor4u8(0, 0, 0, 0xFF);
+            GXPosition2f32(640.0f, -480.0f);
+            GXColor4u8(0, 0, 0, 0xFF);
+            GXPosition2f32(0.0f, -480.0f);
+            GXColor4u8(0, 0, 0, 0xFF);
+        }
+        return;
+    }
+
+    if (data->x30 != 0) {
+        return;
+    }
+
+    if ((u32) mode == 3U) {
+        y = 0;
+        while (y <= (s32) data->x38) {
+            if (y == (s32) data->x38) {
+                u8 strip_h = data->x32;
+                s32 width = data->x34;
+                s32 neg_y;
+                s32 neg_yh;
+
+                GXBegin(GX_QUADS, GX_VTXFMT0, 4);
+                neg_y = -y;
+                neg_yh = -(y + strip_h);
+                GXPosition2f32(0.0f, (f32) neg_y);
+                GXColor4u8(0, 0, 0, 0xFF);
+                GXPosition2f32((f32) width, (f32) neg_y);
+                GXColor4u8(0, 0, 0, 0xFF);
+                GXPosition2f32((f32) width, (f32) neg_yh);
+                GXColor4u8(0, 0, 0, 0xFF);
+                GXPosition2f32(0.0f, (f32) neg_yh);
+                GXColor4u8(0, 0, 0, 0xFF);
+            } else {
+                u8 strip_h = data->x32;
+                s32 neg_y;
+                s32 neg_yh;
+
+                GXBegin(GX_QUADS, GX_VTXFMT0, 4);
+                neg_y = -y;
+                neg_yh = -(y + strip_h);
+                GXPosition2f32(0.0f, (f32) neg_y);
+                GXColor4u8(0, 0, 0, 0xFF);
+                GXPosition2f32(640.0f, (f32) neg_y);
+                GXColor4u8(0, 0, 0, 0xFF);
+                GXPosition2f32(640.0f, (f32) neg_yh);
+                GXColor4u8(0, 0, 0, 0xFF);
+                GXPosition2f32(0.0f, (f32) neg_yh);
+                GXColor4u8(0, 0, 0, 0xFF);
+            }
+            y += data->x32;
+        }
+    } else {
+        y = data->x38;
+        while (y <= 0x1E0) {
+            if (y == (s32) data->x38) {
+                s32 x34 = data->x34;
+                u8 strip_h = data->x32;
+                s32 right = 0x280 - x34;
+                s32 neg_y;
+                s32 xr = x34 + right;
+                s32 neg_yh;
+
+                GXBegin(GX_QUADS, GX_VTXFMT0, 4);
+                neg_y = -y;
+                neg_yh = -(y + strip_h);
+                GXPosition2f32((f32) x34, (f32) neg_y);
+                GXColor4u8(0, 0, 0, 0xFF);
+                GXPosition2f32((f32) xr, (f32) neg_y);
+                GXColor4u8(0, 0, 0, 0xFF);
+                GXPosition2f32((f32) xr, (f32) neg_yh);
+                GXColor4u8(0, 0, 0, 0xFF);
+                GXPosition2f32((f32) x34, (f32) neg_yh);
+                GXColor4u8(0, 0, 0, 0xFF);
+            } else {
+                u8 strip_h = data->x32;
+                s32 neg_y;
+                s32 neg_yh;
+
+                GXBegin(GX_QUADS, GX_VTXFMT0, 4);
+                neg_y = -y;
+                neg_yh = -(y + strip_h);
+                GXPosition2f32(0.0f, (f32) neg_y);
+                GXColor4u8(0, 0, 0, 0xFF);
+                GXPosition2f32(640.0f, (f32) neg_y);
+                GXColor4u8(0, 0, 0, 0xFF);
+                GXPosition2f32(640.0f, (f32) neg_yh);
+                GXColor4u8(0, 0, 0, 0xFF);
+                GXPosition2f32(0.0f, (f32) neg_yh);
+                GXColor4u8(0, 0, 0, 0xFF);
+            }
+            y += data->x32;
+        }
+    }
+}
 
 void fn_800204C8(void)
 {
