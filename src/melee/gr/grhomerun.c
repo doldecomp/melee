@@ -11,6 +11,7 @@
 #include "it/it_26B1.h"
 #include "lb/lb_00B0.h"
 
+f32 grHr_804D6AE4;
 static void* grHr_804D6AE8;
 StageCallbacks grHr_803E8140[11] = {
     { grHomeRun_8021C914, grHomeRun_8021CB10, grHomeRun_8021CB18,
@@ -136,7 +137,35 @@ bool grHomeRun_8021DF48(Ground_GObj* arg)
     return false;
 }
 
-/// #grHomeRun_8021DF50
+void grHomeRun_8021DF50(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    if ((u32) gp->gv.unk.xCC != 0) {
+        if ((u32) gp->gv.unk.xC8 == 0) {
+            Vec3 pos;
+            f32 scale;
+            f32 y, z;
+            HSD_Text* text;
+
+            gp->gv.unk.xC8 =
+                (int) grHomeRun_8021EC58(gp->gv.homerun.xC6);
+            lb_8000B1CC((HSD_JObj*) gp->gv.unk.xCC, NULL, &pos);
+
+            scale = Ground_801C0498();
+            z = pos.z + 0.0F * (grHr_804D6AE4 * scale);
+
+            scale = Ground_801C0498();
+            y = -pos.y + 0.0F * (grHr_804D6AE4 * scale);
+
+            scale = Ground_801C0498();
+            text = (HSD_Text*) gp->gv.unk.xC8;
+            text->pos_x =
+                pos.x + (-1.0F) * (grHr_804D6AE4 * scale);
+            text->pos_y = y;
+            text->pos_z = z;
+        }
+    }
+}
 
 void grHomeRun_8021E008(Ground_GObj* gobj)
 {
@@ -174,7 +203,35 @@ bool grHomeRun_8021E0CC(Ground_GObj* arg)
     return false;
 }
 
-/// #grHomeRun_8021E0D4
+void grHomeRun_8021E0D4(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    if ((u32) gp->gv.unk.xCC != 0) {
+        if ((u32) gp->gv.unk.xC8 == 0) {
+            Vec3 pos;
+            f32 scale;
+            f32 y, z;
+            HSD_Text* text;
+
+            gp->gv.unk.xC8 =
+                (int) grHomeRun_8021EC58(gp->gv.homerun.xC6);
+            lb_8000B1CC((HSD_JObj*) gp->gv.unk.xCC, NULL, &pos);
+
+            scale = Ground_801C0498();
+            z = pos.z + 0.0F * (grHr_804D6AE4 * scale);
+
+            scale = Ground_801C0498();
+            y = -pos.y + 0.0F * (grHr_804D6AE4 * scale);
+
+            scale = Ground_801C0498();
+            text = (HSD_Text*) gp->gv.unk.xC8;
+            text->pos_x =
+                pos.x + (-1.0F) * (grHr_804D6AE4 * scale);
+            text->pos_y = y;
+            text->pos_z = z;
+        }
+    }
+}
 
 void grHomeRun_8021E18C(Ground_GObj* gobj)
 {
@@ -212,7 +269,35 @@ bool grHomeRun_8021E250(Ground_GObj* arg)
     return false;
 }
 
-/// #grHomeRun_8021E258
+void grHomeRun_8021E258(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    if ((u32) gp->gv.unk.xCC != 0) {
+        if ((u32) gp->gv.unk.xC8 == 0) {
+            Vec3 pos;
+            f32 scale;
+            f32 y, z;
+            HSD_Text* text;
+
+            gp->gv.unk.xC8 =
+                (int) grHomeRun_8021EC58(gp->gv.homerun.xC6);
+            lb_8000B1CC((HSD_JObj*) gp->gv.unk.xCC, NULL, &pos);
+
+            scale = Ground_801C0498();
+            z = pos.z + 0.0F * (grHr_804D6AE4 * scale);
+
+            scale = Ground_801C0498();
+            y = -pos.y + 0.0F * (grHr_804D6AE4 * scale);
+
+            scale = Ground_801C0498();
+            text = (HSD_Text*) gp->gv.unk.xC8;
+            text->pos_x =
+                pos.x + (-1.0F) * (grHr_804D6AE4 * scale);
+            text->pos_y = y;
+            text->pos_z = z;
+        }
+    }
+}
 
 void grHomeRun_8021E310(Ground_GObj* gobj)
 {
@@ -250,7 +335,35 @@ bool grHomeRun_8021E3D4(Ground_GObj* arg)
     return false;
 }
 
-/// #grHomeRun_8021E3DC
+void grHomeRun_8021E3DC(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    if ((u32) gp->gv.unk.xCC != 0) {
+        if ((u32) gp->gv.unk.xC8 == 0) {
+            Vec3 pos;
+            f32 scale;
+            f32 y, z;
+            HSD_Text* text;
+
+            gp->gv.unk.xC8 =
+                (int) grHomeRun_8021EC58(gp->gv.homerun.xC6);
+            lb_8000B1CC((HSD_JObj*) gp->gv.unk.xCC, NULL, &pos);
+
+            scale = Ground_801C0498();
+            z = pos.z + 0.0F * (grHr_804D6AE4 * scale);
+
+            scale = Ground_801C0498();
+            y = -pos.y + 0.0F * (grHr_804D6AE4 * scale);
+
+            scale = Ground_801C0498();
+            text = (HSD_Text*) gp->gv.unk.xC8;
+            text->pos_x =
+                pos.x + (-1.0F) * (grHr_804D6AE4 * scale);
+            text->pos_y = y;
+            text->pos_z = z;
+        }
+    }
+}
 
 void grHomeRun_8021E494(Ground_GObj* gobj)
 {

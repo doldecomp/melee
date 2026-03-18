@@ -4,6 +4,7 @@
 #include <placeholder.h>
 
 #include "baselib/forward.h"
+#include "lb/forward.h"
 
 #include "it/inlines.h"
 
@@ -66,7 +67,7 @@
 /* 21EA30 */ UNK_RET grHomeRun_8021EA30(UNK_PARAMS);
 /* 21EAF8 */ UNK_RET grHomeRun_8021EAF8(UNK_PARAMS);
 /* 21EB10 */ void fn_8021EB10(HSD_GObj*);
-/* 21EC58 */ UNK_RET grHomeRun_8021EC58(UNK_PARAMS);
+/* 21EC58 */ void* grHomeRun_8021EC58(u16);
 /* 21ED74 */ void grHomeRun_8021ED74(void);
 /* 21EDD4 */ void grHomeRun_8021EDD4(int);
 /* 21EEB4 */ DynamicsDesc* grHomeRun_8021EEB4(enum_t);
