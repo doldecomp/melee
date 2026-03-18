@@ -163,7 +163,7 @@ void fn_80171AD4(void)
 
 /// #fn_8016FFD4
 
-int fn_80170110(int arg0, int idx, int mask, u8 player_id)
+int fn_80170110(void* arg0, int idx, int mask, u8 player_id)
 {
     struct lbl_803D5A4C_t* curr = lbl_803D5A4C;
     int kind = lbl_803D5A4C[idx].kind;
