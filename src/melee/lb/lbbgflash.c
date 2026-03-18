@@ -402,6 +402,7 @@ void fn_800208B0(u8 arg0)
 {
     BgFlashData* data = &lbl_80433658;
     lbl_80433658.state.active = 0;
+    if ((data && data) && data){}
     lbl_80433658.state.mode = 5;
     data->xE = 0;
     data->xD = 0;
