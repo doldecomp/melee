@@ -46,11 +46,15 @@ typedef struct lbl_804706D8_t {
 lbl_804706D8_t lbl_804706D8[12];
 
 struct lbl_80472D28_t {
-    /*   +0 */ char pad_0[0x104];
+    /*   +0 */ char pad_0[0x2C];
+    /* +2C */ HSD_GObj* x2C;
+    /* +30 */ char pad_30[0xD4];
     /* +104 */ int x104;
     /* +108 */ s16 x108;
     /* +10A */ s16 x10A;
-    /* +10C */ char pad_10C[0xA];
+    /* +10C */ f32 x10C;
+    /* +110 */ u32 x110;
+    /* +114 */ char pad_114[2];
     /* +116 */ u8 x116;
     /* +117 */ char pad_117[1];
     /* +118 */ u8 x118;
@@ -96,6 +100,12 @@ STATIC_ASSERT(sizeof(AllstarStageEntry) == 0x1A);
 
 extern AdventureStageEntry lbl_803D7AC0[110];
 extern AllstarStageEntry lbl_803D85F0[55];
+
+typedef struct RegClearEv {
+    /* 0x00 */ char pad_0[0x1C];
+    /* 0x1C */ HSD_ImageDesc* x1C;
+    /* 0x20 */ f32 x20;
+} RegClearEv;
 
 static struct lbl_804706C0_t {
     int x0;
@@ -1111,7 +1121,23 @@ int fn_8017F294(void)
 
 /// #fn_8017FBA4
 
-/// #fn_8017FE54
+void fn_8017FE54(HSD_GObj* gobj)
+{
+    RegClearEv* ev = gobj->user_data;
+
+    lb_800122C8(ev->x1C, 0, 0, 1);
+    lb_800138D8(lbl_80472D28.x2C,
+                (int)(120.0F * lbl_80472D28.x10C) + 1);
+
+    ev->x20 = 0.0225F * (f32) lbl_80472D28.x110 - 0.175F;
+
+    if (ev->x20 < 0.05F) {
+        ev->x20 = 0.0F;
+    }
+    if (ev->x20 > 1.0F) {
+        ev->x20 = 1.0F;
+    }
+}
 
 /// #fn_8017FF1C
 
