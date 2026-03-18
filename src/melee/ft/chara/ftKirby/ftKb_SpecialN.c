@@ -1583,6 +1583,7 @@ void ftKb_SpecialN_800F5D04(Fighter_GObj* gobj, bool arg1)
     new_var->fv.kb.hat.kind = 4;
 }
 
+#pragma dont_inline on
 void ftKb_SpecialN_800F5DE8(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
