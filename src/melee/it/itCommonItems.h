@@ -382,8 +382,16 @@ typedef struct itFlipper_ItemVars {
 } itFlipper_ItemVars;
 
 typedef struct itFlipper_DatAttrs {
-    /* +0 */ s32 x0;
-    /* +4 */ s32 x4;
+    /* +0  */ s32 x0;
+    /* +4  */ s32 x4;
+    /* +8  */ s32 x8;
+    /* +C  */ f32 xC;
+    /* +10 */ f32 x10;
+    /* +14 */ s32 x14;
+    /* +18 */ f32 x18;
+    /* +1C */ f32 x1C;
+    /* +20 */ f32 x20;
+    /* +24 */ f32 x24;
 } itFlipper_DatAttrs;
 
 typedef struct itHarisen_DatAttrs {
@@ -508,12 +516,13 @@ typedef struct {
 typedef struct itTincle_ItemVars {
     /*  +0 ip+DD4 */ u8 pad[0x20];
     /* +20 ip+DF4 */ s32 x20;
-    /* +24 ip+DF8 */ u8 pad1[0x8];
+    /* +24 ip+DF8 */ s32 x24;
+    /* +28 ip+DFC */ u8 pad1[0x4];
     /* +2C ip+E00 */ s32 x2C;
     /* +30 ip+E04 */ f32 x30;
     /* +34 ip+E08 */ u8 pad1b[0x4];
     /* +38 ip+E0C */ f32 x38;
-    /* +3C ip+E10 */ u8 pad1c[0x4];
+    /* +3C ip+E10 */ f32 x3C;
     /* +40 ip+E14 */ f32 x40;
     /* +44 ip+E18 */ f32 x44;
     /* +48 ip+E1C */ f32 x48;
@@ -527,7 +536,11 @@ typedef struct itTincle_ItemVars {
 } itTincle_ItemVars;
 
 typedef struct itTincleAttributes {
-    /* 0x00 */ u8 pad[0x40];
+    /* 0x00 */ u8 pad[0x24];
+    /* 0x24 */ f32 x24;
+    /* 0x28 */ s32 x28;
+    /* 0x2C */ s32 x2C;
+    /* 0x30 */ u8 pad1b[0x10];
     /* 0x40 */ s32 x40;
     /* 0x44 */ f32 x44;
     /* 0x48 */ f32 x48;
@@ -575,7 +588,8 @@ typedef struct {
     /* ip+E09 */ char pad_E09[0xE0C - 0xE09];
     /* ip+E0C */ int xE0C;
     /* ip+E10 */ int xE10;
-    /* ip+E14 */ char pad_E14[0xE1C - 0xE14];
+    /* ip+E14 */ int xE14;
+    /* ip+E18 */ int xE18;
     /* ip+E1C */ unsigned char xE1C_b0 : 1;
     /* ip+E1C */ unsigned char xE1C_b1 : 1;
     /* ip+E1C */ unsigned char xE1C_b2 : 1;
@@ -1070,7 +1084,8 @@ typedef struct itMewtwoShadowball_ItemVars {
     /* ip+DF4 */ s32 x20;
     /* ip+DF8 */ f32 x24;
     /* ip+DFC */ s32 x28;
-    /* ip+E00 */ f32 x2C[6];
+    /* ip+E00 */ HSD_GObj* x2C;
+    /* ip+E04 */ f32 x30[5];
     /* ip+E18 */ f32 x44;
     /* ip+E1C */ f32 x48;
     /* ip+E20 */ s32 x4C;
@@ -1284,7 +1299,10 @@ typedef struct itWhiteBea_ItemVars {
 typedef struct itWhiteBeaAttributes {
     /* +0 */ s32* x0;
     /* +4 */ f32 x4;
-    /* +8 */ char pad_x8[0x8];
+    /* +8 */ s16 x8;
+    /* +A */ s16 xA;
+    /* +C */ s16 xC;
+    /* +E */ s16 xE;
     /* +10 */ f32 x10;
     /* +14 */ s16 x14;
 } itWhiteBeaAttributes;

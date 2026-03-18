@@ -14,6 +14,8 @@
 
 #include <trigf.h>
 #include <baselib/gobj.h>
+#include "db/db.h"
+#include "ef/efsync.h"
 
 /* 29A5F8 */ static bool itLipstickspore_UnkMotion1_Coll(Item_GObj* gobj);
 

@@ -33,8 +33,14 @@ typedef struct itClimbersIce_ItemVars {
 } itClimbersIce_ItemVars;
 
 typedef struct itClimbersIceAttributes {
-    /* +00 */ u8 pad_00[0x28];
+    /* +00 */ u8 pad_00[0x4];
+    /* +04 */ f32 x4;
+    /* +08 */ u8 pad_08[0x4];
+    /* +0C */ f32 xC;
+    /* +10 */ u8 pad_10[0x18];
     /* +28 */ f32 x28;
+    /* +2C */ s32 x2C;
+    /* +30 */ u32 x30;
 } itClimbersIceAttributes;
 
 typedef struct itNessbat_ItemVars {
@@ -207,12 +213,8 @@ typedef struct {
     /* padding from 0xDD4 to 0xDF4 */ char _pad0[0xDF4 - 0xDD4];
     /* item+0xDF4 */ Item_GObj* xDF4;
     /* padding from 0xDF8 to 0xE18 */ char _pad1[0xE18 - 0xDF8];
-    /* item+0xE18 */ s32 xE18;
-    /* item+0xE1C */ s32 xE1C;
-    /* item+0xE20 */ s32 xE20;
-    /* item+0xE24 */ s32 xE24;
-    /* item+0xE28 */ s32 xE28;
-    /* item+0xE2C */ s32 xE2C;
+    /* item+0xE18 */ Vec3 xE18;
+    /* item+0xE24 */ Vec3 xE24;
     /* item+0xE30 */ s16 xE30;
     /* item+0xE32 */ s16 xE32_pad;
     /* item+0xE34 */ s32 xE34_pad;
@@ -700,6 +702,23 @@ typedef struct itGamewatchchefAttributes {
     /* +C */ f32 xC;
     /* +10 */ itGamewatchchefAttrEntry entries[1];
 } itGamewatchchefAttributes;
+
+typedef struct itGamewatchparachuteAttributes {
+    /* +0 */ void* x0;
+} itGamewatchparachuteAttributes;
+
+typedef struct itHinoarashi_ItemVars {
+    /* xDD4 */ u8 _0[0x60 - 0x0];
+    /* xE34 */ UnkFlagStruct x60;
+    /* xE35 */ u8 x61[0x64 - 0x61];
+    /* xE38 */ f32 x64;
+} itHinoarashi_ItemVars;
+
+typedef struct itHinoarashiAttributes {
+    /* +0 */ f32 x0;
+    /* +4 */ f32 x4;
+    /* +8 */ f32 x8;
+} itHinoarashiAttributes;
 
 typedef struct itTools_ItemVars {
     /* +0 ip+DD4 */ s32 x0;

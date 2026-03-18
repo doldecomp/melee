@@ -1,6 +1,7 @@
 #include "itzgshell.h"
 
 #include "baselib/jobj.h"
+#include "baselib/random.h"
 #include "ef/efasync.h"
 #include "gr/grzakogenerator.h"
 
@@ -95,7 +96,23 @@ void fn_802DDC8C(Item_GObj* gobj)
 
 /// #it_802DDEB4
 
-/// #it_802DE040
+void it_802DE040(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itGShell_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    it_8027B730(gobj);
+    it_80275210(gobj);
+    ip->xDD4_itemVar.zgshell.xE08_b0 = 0;
+    ip->xDD4_itemVar.zgshell.xDFC = attrs->x28;
+    ip->xDD4_itemVar.zgshell.xE08_b1 = 1;
+    ip->xDD4_itemVar.zgshell.xE10 = 0;
+    ip->xDD4_itemVar.zgshell.xE14 = 0;
+    ip->xDD4_itemVar.zgshell.xE0C = 0;
+    ip->xDD4_itemVar.zgshell.xE1C_b0 = 0;
+    ip->xDD4_itemVar.zgshell.xE04 = attrs->x34.x;
+    it_80271590(gobj, 0, (HurtCapsule*) &ip->xDD4_itemVar.zgshell.x58_hurtInit);
+    it_802DE320(gobj);
+}
 
 void it_802DE0F0(Item_GObj* gobj)
 {
@@ -446,7 +463,22 @@ bool itZGShell_Logic11_Reflected(Item_GObj* gobj)
     return it_80273030(gobj);
 }
 
-/// #it_2725_Logic11_Clanked
+bool it_2725_Logic11_Clanked(Item_GObj* gobj)
+{
+    itGShell_Attrs* attrs;
+    Item* ip = GET_ITEM(gobj);
+    attrs = ip->xC4_article_data->x4_specialAttributes;
+    it_802756D0(gobj);
+    it_80275444(gobj);
+    ip->x40_vel.x = -ip->x40_vel.x * attrs->xC * HSD_Randf();
+    ip->x40_vel.y = attrs->x10;
+    it_802762BC(ip);
+    ip->xDD4_itemVar.zgshell.xE1C_b0 = 1;
+    ip->xDD4_itemVar.zgshell.xE04 = attrs->x34.x;
+    Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
+    it_80274C88(gobj);
+    return false;
+}
 
 /// #it_2725_Logic11_HitShield
 

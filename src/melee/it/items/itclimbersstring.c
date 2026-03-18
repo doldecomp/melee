@@ -1,11 +1,42 @@
 #include "itclimbersstring.h"
 
+#include "ft/chara/ftPopo/ftPp_SpecialS.h"
 #include "it/inlines.h"
 #include "it/it_26B1.h"
+#include "it/itCharItems.h"
 #include "it/item.h"
+
+#include <dolphin/os/OSError.h>
+#include <baselib/gobjplink.h>
 
 /* 2C33B8 */ static void it_802C33B8(Item* item);
 /* 2C29E8 */ static void fn_802C29E8(Item_GObj* gobj);
+
+void it_802C2750(Item_GObj* gobj)
+{
+    int unused[2];
+    Item* ip = GET_ITEM(gobj);
+    if (ip != NULL) {
+        if (gobj != NULL) {
+            if (ip->owner != NULL) {
+                ftPp_SpecialS_8012114C(ip->owner);
+            }
+            ip->owner = NULL;
+            ip->xDD4_itemVar.it_266F.xC = NULL;
+            {
+                ItemLink* cur;
+                for (cur = (ItemLink*) ip->xDD4_itemVar.it_266F.x4;
+                     cur != NULL;)
+                {
+                    HSD_GObj* cur_gobj = cur->gobj;
+                    cur = cur->next;
+                    HSD_GObjPLink_80390228(cur_gobj);
+                }
+            }
+        }
+        Item_8026A8EC(gobj);
+    }
+}
 
 void fn_802C28B8(Item_GObj* gobj)
 {

@@ -86,7 +86,22 @@ void it_802E1C4C(Item_GObj* gobj)
     Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
 }
 
-/// #it_802E1C84
+void it_802E1C84(Item_GObj* gobj)
+{
+    Vec3 pos;
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+    Item* ip = GET_ITEM(gobj);
+    HSD_JObj* child;
+
+    ip->x40_vel.y = 0.0f;
+    ip->x40_vel.x = 0.0f;
+    ip->xDCC_flag.b3 = true;
+
+    child = HSD_JObjGetChild(jobj);
+    lb_8000B1CC(child, NULL, &pos);
+    ip->pos = pos;
+    Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
+}
 
 bool itKlap_UnkMotion2_Anim(Item_GObj* gobj)
 {
@@ -108,7 +123,20 @@ bool it_2725_Logic10_DmgReceived(Item_GObj* gobj)
     return false;
 }
 
-/// #it_802E1E94
+void it_802E1E94(Item_GObj* gobj)
+{
+    f32 rand_val;
+    Item* ip = GET_ITEM(gobj);
+    it_802762BC(ip);
+    if (it_8027B798(gobj, &ip->x40_vel)) {
+        it_802762BC(ip);
+    }
+    rand_val = HSD_Randf();
+    ip->xDD4_itemVar.klap.x24 = (rand_val - 0.5f) * 0.17453292f;
+    rand_val = HSD_Randf();
+    ip->xDD4_itemVar.klap.x28 = (rand_val - 0.5f) * 0.17453292f;
+    Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
+}
 
 bool itKlap_UnkMotion4_Anim(Item_GObj* gobj)
 {

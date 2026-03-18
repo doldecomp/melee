@@ -109,7 +109,30 @@ void it_802E0D9C(Item_GObj* gobj)
     ip->facing_dir = -ip->facing_dir;
 }
 
-/// #itPatapata_UnkMotion3_Anim
+bool itPatapata_UnkMotion3_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (!it_80272C6C(gobj)) {
+        s32 facing;
+        if (ip->facing_dir == -1.0f) {
+            facing = -1;
+        } else {
+            facing = 1;
+        }
+        mpCollSetFacingDir(&ip->x378_itemColl, facing);
+        it_8027C56C(gobj, ip->facing_dir);
+        {
+            f32 vel_x = ip->x40_vel.x;
+            if ((vel_x < 0.0f && ip->facing_dir == 1.0f) ||
+                (vel_x > 0.0f && ip->facing_dir == -1.0f))
+            {
+                ip->x40_vel.x *= -1.0f;
+            }
+        }
+        it_802E1648(gobj, 2, 2);
+    }
+    return false;
+}
 
 bool it_2725_Logic4_DmgReceived(Item_GObj* gobj)
 {
