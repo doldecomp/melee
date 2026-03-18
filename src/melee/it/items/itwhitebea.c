@@ -11,6 +11,7 @@
 #include "mp/mpcoll.h"
 #include "mp/mplib.h"
 #include "sysdolphin/baselib/random.h"
+#include "MSL/math.h"
 
 void it_802E31F8(Item_GObj* gobj)
 {
@@ -153,7 +154,29 @@ void it_802E37A4(Item_GObj* gobj)
     }
 }
 
-/// #it_802E37BC
+void it_802E37BC(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    s32 facing;
+    it_8027B730(gobj);
+    ip->facing_dir = it_8026B684(&ip->pos);
+    it_8027C56C(gobj, ip->facing_dir);
+    if (ip->facing_dir == -1.0f) {
+        facing = -1;
+    } else {
+        facing = 1;
+    }
+    mpCollSetFacingDir(&ip->x378_itemColl, facing);
+    ip->xD5C = 0;
+    ip->xDC8_word.flags.x15 = 0;
+    it_8027542C(gobj);
+    it_80275270(gobj);
+    it_80274740(gobj);
+    ip->xDC8_word.flags.x19 = 1;
+    ip->xDD4_itemVar.whitebea.x3C = 1;
+    ip->xDD4_itemVar.whitebea.x40 = 0;
+    it_802E3DA0(gobj);
+}
 
 bool it_802E3884(Item_GObj* gobj)
 {
@@ -218,7 +241,32 @@ bool itWhitebea_UnkMotion0_Coll(Item_GObj* gobj)
     return it_8027C794(gobj);
 }
 
-/// #it_802E3AC8
+void it_802E3AC8(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itWhiteBeaAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    s32 facing;
+    s32 timer;
+    PAD_STACK(8);
+    ip->x40_vel.x = ip->facing_dir * ((f32*) attrs->x0)[1];
+    ip->x40_vel.z = 0.0f;
+    ip->x40_vel.y = 0.0f;
+    it_8027C56C(gobj, ip->facing_dir);
+    if (ip->facing_dir == -1.0f) {
+        facing = -1;
+    } else {
+        facing = 1;
+    }
+    mpCollSetFacingDir(&ip->x378_itemColl, facing);
+    it_802756E0(gobj);
+    timer = ip->xDD4_itemVar.whitebea.x3C;
+    if (timer < 2 || timer > attrs->xE) {
+        s32 range = ABS(attrs->xE - attrs->xC);
+        ip->xDD4_itemVar.whitebea.x3C = attrs->xC + HSD_Randi(range);
+    }
+    ip->xDD4_itemVar.whitebea.x44 = 4;
+    Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
+}
 
 bool itWhitebea_UnkMotion1_Anim(Item_GObj* gobj)
 {
@@ -242,7 +290,27 @@ bool itWhitebea_UnkMotion1_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itWhitebea_UnkMotion1_Phys
+void itWhitebea_UnkMotion1_Phys(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    itWhiteBeaAttributes* attrs =
+        ip->xC4_article_data->x4_specialAttributes;
+    s32 range;
+    PAD_STACK(16);
+
+    if (ip->xDD4_itemVar.whitebea.x3C == 0) {
+        range = ABS(attrs->xA - attrs->x8);
+        ip->xDD4_itemVar.whitebea.x40 = attrs->x8 + HSD_Randi(range);
+        it_8027CAD8(gobj);
+        Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+    } else {
+        ip->xDD4_itemVar.whitebea.x3C -= 1;
+    }
+    if (it_802750E8(gobj, 2) != 0) {
+        it_802E4190(gobj);
+    }
+    it_8027C8D0(&ip->x40_vel, &ip->x378_itemColl.floor.normal, ip->facing_dir);
+}
 
 bool itWhitebea_UnkMotion1_Coll(Item_GObj* gobj)
 {
@@ -298,7 +366,32 @@ bool itWhitebea_UnkMotion3_Coll(Item_GObj* gobj)
     return it_8027C794(gobj);
 }
 
-/// #it_802E3ED0
+void it_802E3ED0(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    s32 facing;
+    PAD_STACK(8);
+    it_802762BC(ip);
+    if (it_8027B798(gobj, &ip->x40_vel)) {
+        if (ip->x40_vel.y <= 0.2) {
+            ip->x40_vel.y = 0.2f;
+        } else {
+            ip->x40_vel.y *= 0.2f;
+        }
+        it_802762BC(ip);
+    } else {
+        it_802762B0(ip);
+        ip->x40_vel.x *= 0.2f;
+    }
+    ip->facing_dir = ip->init_facing_dir;
+    if (ip->facing_dir == -1.0f) {
+        facing = -1;
+    } else {
+        facing = 1;
+    }
+    mpCollSetFacingDir(&ip->x378_itemColl, facing);
+    Item_80268E5C(gobj, 4, 3);
+}
 
 bool itWhitebea_UnkMotion4_Anim(Item_GObj* gobj)
 {

@@ -568,6 +568,7 @@ struct Item {
         itHassam_ItemVars hassam;
         itHeart_ItemVars heart;
         itHeiho_ItemVars heiho;
+        itHinoarashi_ItemVars hinoarashi;
         itHitodeman_ItemVars hitodeman;
         itKabigon_ItemVars kabigon;
         itKinoko_ItemVars kinoko;

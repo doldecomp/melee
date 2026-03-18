@@ -68,6 +68,27 @@ s32 it_80291CF4(Item_GObj* gobj, s32 arg1)
     return 9;
 }
 
+s32 it_80291D38(Item_GObj* gobj, s32 arg1)
+{
+    Item* ip = GET_ITEM(gobj);
+    itSScopeAttributes* attrs = GET_ATTRS(ip);
+    switch (arg1) {
+    case 0:
+        return attrs->xC[0];
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+    case 6:
+    case 7:
+    case 8:
+        return attrs->xC[arg1];
+    case 9:
+        return attrs->xC[9];
+    }
+}
+
 /// #it_80291DAC
 
 void it_80291F14(Item_GObj* gobj, int charge_level)
@@ -103,25 +124,27 @@ void it_80291F14(Item_GObj* gobj, int charge_level)
     PAD_STACK(16);
 }
 
+static s32 it_80291D38_outline(Item_GObj* gobj, int charge_level)
+{
+    return it_80291D38(gobj, charge_level);
+}
+
 void it_80291FA8(Item_GObj* gobj, Vec3* pos, int charge_level, float scale)
 {
     Item* ip = GET_ITEM(gobj);
-    int cost = it_80291D38(gobj, charge_level);
+    s32 cost = it_80291D38_outline(gobj, charge_level);
+    PAD_STACK(8);
     ip->xD4C -= cost;
     if (ip->xD4C < 0) {
         ip->xD4C = 0;
     }
     it_80298DEC(ip->owner, pos, charge_level, scale);
-
-    PAD_STACK(8);
 }
 
 void it_80292030(Item_GObj* gobj)
 {
-    Item* temp_r4 = GET_ITEM(gobj);
-    temp_r4->x40_vel.z = 0.0f;
-    temp_r4->x40_vel.y = 0.0f;
-    temp_r4->x40_vel.x = 0.0f;
+    Item* ip = GET_ITEM(gobj);
+    itResetVelocity(ip);
     it_8026B390(gobj);
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
 }

@@ -33,7 +33,33 @@ void itFlipper_Logic20_Spawned(Item_GObj* gobj)
 
 /// #it_80290A7C
 
-/// #it_80290C38
+void it_80290C38(Item_GObj* gobj, Vec3* pos, f32 angle)
+{
+    Item* ip = GET_ITEM(gobj);
+    itFlipper_DatAttrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    f32 speed = angle + attrs->x1C;
+
+    if (pos->x > ip->pos.x) {
+        if (pos->y > ip->pos.y) {
+            ip->xDD4_itemVar.flipper.xDE4 += speed;
+        } else {
+            ip->xDD4_itemVar.flipper.xDE4 -= speed;
+        }
+    } else {
+        if (pos->y > ip->pos.y) {
+            ip->xDD4_itemVar.flipper.xDE4 -= speed;
+        } else {
+            ip->xDD4_itemVar.flipper.xDE4 += speed;
+        }
+    }
+
+    if (ip->xDD4_itemVar.flipper.xDE4 > attrs->x24) {
+        ip->xDD4_itemVar.flipper.xDE4 = attrs->x24;
+    }
+    if (ip->xDD4_itemVar.flipper.xDE4 < -attrs->x24) {
+        ip->xDD4_itemVar.flipper.xDE4 = -attrs->x24;
+    }
+}
 
 /// #it_80290CE8
 
@@ -146,11 +172,64 @@ bool itFlipper_UnkMotion3_Anim(Item_GObj* gobj)
 
 /// #itFlipper_UnkMotion3_Anim
 
-/// #itFlipper_UnkMotion3_Phys
+void itFlipper_UnkMotion3_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ItemAttr* item_attr = ip->xCC_item_attr;
+    it_80272860(gobj, item_attr->x10_fall_speed,
+                item_attr->x14_fall_speed_max);
+    if (ip->xDD4_itemVar.flipper.xDD4 <= 0xA) {
+        ip->x40_vel.x *=
+            (f32) ip->xDD4_itemVar.flipper.xDD4 /
+            (1.0f + (f32) ip->xDD4_itemVar.flipper.xDD4);
+        ip->x40_vel.y *=
+            (f32) ip->xDD4_itemVar.flipper.xDD4 /
+            (1.0f + (f32) ip->xDD4_itemVar.flipper.xDD4);
+    }
+    it_80274658(gobj, it_804D6D28->x68_float);
+}
 
-/// #itFlipper_UnkMotion3_Coll
+bool itFlipper_UnkMotion3_Coll(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itFlipper_DatAttrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    s32 coll = it_8026DAA8(gobj);
+    if (coll != 0) {
+        if (coll & 0xC) {
+            ip->x40_vel.x *= -attrs->xC;
+        }
+        ip->x40_vel.y *= attrs->xC;
+        if (coll & 2) {
+            ip->x40_vel.x *= attrs->xC;
+        }
+        ip->x40_vel.y *= -attrs->xC;
+        if (coll & 1) {
+            ip->x40_vel.x *= attrs->x10;
+        }
+        ip->x40_vel.y *= -attrs->x10;
+    }
+    return false;
+}
 
-/// #it_80291254
+void it_80291254(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itFlipper_DatAttrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    ip->xD5C = 0;
+    ip->x40_vel.x = 0.0f;
+    ip->x40_vel.y = 0.0f;
+    ip->xDD1_flag.b1 = 1;
+    ip->xDD4_itemVar.flipper.xDD8 = 1;
+    it_80275444(gobj);
+    it_802725D4(gobj);
+    if (ip->xDD4_itemVar.flipper.xDE8 != 0) {
+        it_8027542C(gobj);
+    }
+    ip->xD44_lifeTimer = (f32) attrs->x8;
+    it_8026B3A8(gobj);
+    it_802756E0(gobj);
+    it_8029131C(gobj);
+}
 
 void it_8029131C(Item_GObj* gobj)
 {
@@ -198,10 +277,60 @@ bool itFlipper_UnkMotion6_Coll(Item_GObj* gobj)
 
 /// #it_3F14_Logic20_DmgDealt
 
-/// #it_3F14_Logic20_Clanked
+#pragma dont_inline on
+bool it_3F14_Logic20_Clanked(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    itFlipper_DatAttrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    PAD_STACK(8);
+    if (ip->xDD4_itemVar.flipper.xDD8 == 0) {
+        if (ip->xDD4_itemVar.flipper.xDD4 >= 6) {
+            itColl_BounceOffVictim(gobj);
+        } else {
+            ip->x40_vel.x = -1.0f * ip->x40_vel.x;
+            ip->x40_vel.y =
+                -1.0f * ip->x40_vel.y + it_804D6D28->x60_float;
+        }
+    } else {
+        ip->xDD4_itemVar.flipper.xDDC = attrs->x14;
+        it_80290CE8(gobj);
+        it_80272560(gobj, 0);
+        it_80272560(gobj, 1);
+        it_802756D0(gobj);
+        if (ip->xDD4_itemVar.flipper.xDE8 == 0) {
+            it_80290DD4(gobj, ip->xC38, &ip->xCD4);
+        }
+    }
+    return false;
+}
 
-/// #it_3F14_Logic20_HitShield
+bool it_3F14_Logic20_HitShield(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    itFlipper_DatAttrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    PAD_STACK(8);
+    if (ip->xDD4_itemVar.flipper.xDD8 == 0) {
+        if (ip->xDD4_itemVar.flipper.xDD4 >= 6) {
+            itColl_BounceOffVictim(gobj);
+        } else {
+            ip->x40_vel.x = -1.0f * ip->x40_vel.x;
+            ip->x40_vel.y =
+                -1.0f * ip->x40_vel.y + it_804D6D28->x60_float;
+        }
+    } else {
+        ip->xDD4_itemVar.flipper.xDDC = attrs->x14;
+        it_80290CE8(gobj);
+        it_80272560(gobj, 0);
+        it_80272560(gobj, 1);
+        it_802756D0(gobj);
+        if (ip->xDD4_itemVar.flipper.xDE8 == 0) {
+            it_80290DD4(gobj, ip->xC38, &ip->xCD4);
+        }
+    }
+    return false;
+}
 
+#pragma dont_inline reset
 bool itFlipper_Logic20_Reflected(Item_GObj* gobj)
 {
     return it_80273030(gobj);

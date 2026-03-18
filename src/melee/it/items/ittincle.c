@@ -95,7 +95,22 @@ bool itTincle_UnkMotion2_Coll(Item_GObj* gobj)
 
 /// #itTincle_UnkMotion2_Coll
 
-/// #it_802EBD14
+void it_802EBD14(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    PAD_STACK(8);
+    ip->xDD4_itemVar.tincle.x30 = (f32) ip->msid;
+    ip->xDD4_itemVar.tincle.x44 = ip->x40_vel.y;
+    ip->xDD4_itemVar.tincle.x48 = ip->xDD4_itemVar.tincle.x38;
+    ip->xDD4_itemVar.tincle.x40 = (f32) ip->xDD4_itemVar.tincle.x2C;
+    ip->x40_vel.z = 0.0f;
+    ip->x40_vel.x = 0.0f;
+    ip->x40_vel.y = -ip->xDD4_itemVar.tincle.x54;
+    ip->xDD4_itemVar.tincle.x38 = ip->xDD4_itemVar.tincle.x54 / 10.0f;
+    ip->xDD4_itemVar.tincle.x20 = 0x13;
+    ip->xDD4_itemVar.tincle.x4C = ip->pos.y;
+    Item_80268E5C(gobj, 3, ITEM_ANIM_UPDATE);
+}
 
 bool itTincle_UnkMotion3_Anim(Item_GObj* gobj)
 {
