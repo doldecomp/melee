@@ -304,7 +304,14 @@ bool fn_802FFCC8(void)
     return false;
 }
 
-/// #un_802FFCD0
+void un_802FFCD0(int count, void* data)
+{
+    int* arr = data;
+    int i;
+    for (i = 0; i < count; i++) {
+        arr[i] = arr[count];
+    }
+}
 
 void un_802FFD94(int arg0, void* arg1, void* arg2)
 {
