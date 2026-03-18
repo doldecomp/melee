@@ -13,6 +13,7 @@
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
 #include "gr/stage.h"
+#include "it/it_26B1.h"
 #include "it/items/itklap.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
@@ -1433,7 +1434,37 @@ void grKongo_801D8058(Ground_GObj* arg)
     Ground_801C4A08(arg);
 }
 
-/// #grKongo_801D8078
+HSD_GObj* grKongo_801D8078(HSD_GObj* gobj)
+{
+    Vec3 pos;
+    f32 unk;
+    Vec3 item_pos;
+    HSD_GObj* cur;
+
+    Ground_801C4DA0(&pos, &unk);
+
+    for (cur = HSD_GObj_Entities->items; cur != NULL; cur = cur->next) {
+        if (itGetKind(cur) == 0xDA) {
+            f32 dx, dy, dz, dx2, dy2, dz2, r;
+
+            it_8026B294(cur, &item_pos);
+
+            dx = pos.x - item_pos.x;
+            dy = pos.y - item_pos.y;
+            dz = pos.z - item_pos.z;
+            dx2 = dx * dx;
+            dy2 = dy * dy;
+            dz2 = dz * dz;
+            r = grKg_804D6980->unk28;
+
+            if (dx2 + dy2 + dz2 < r * r) {
+                return cur;
+            }
+        }
+    }
+
+    return NULL;
+}
 
 /// #fn_801D8134
 
