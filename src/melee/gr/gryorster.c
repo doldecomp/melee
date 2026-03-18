@@ -4,6 +4,7 @@
 
 #include "forward.h"
 
+#include "ft/ftlib.h"
 #include "gr/grdisplay.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
@@ -38,8 +39,13 @@ StageData grYt_803E51CC = {
     0,
 };
 
+typedef struct YorsterParams {
+    u8 pad_00[0x14];
+    int x14;
+} YorsterParams;
+
 typedef struct grYt_804D6A20_t {
-    void* x0;
+    YorsterParams* x0;
 } grYt_804D6A20_t;
 grYt_804D6A20_t grYt_804D6A20;
 
@@ -165,7 +171,22 @@ void grYorster_802022A0(HSD_GObj* gobj) {}
 
 void grYorster_802022A4(void) {}
 
-/// #grYorster_80202428
+void grYorster_80202428(HSD_GObj* item_gobj, Ground* gp, Vec3* pos,
+                        HSD_GObj* fighter_gobj, f32 value)
+{
+    int i;
+
+    if (ftLib_80086960(fighter_gobj)) {
+        ftLib_80086A4C(fighter_gobj, (f32) grYt_804D6A20.x0->x14);
+    }
+
+    for (i = 0; i < 9; i++) {
+        if (gp->gv.yorster.elements[i].x1C == item_gobj) {
+            gp->gv.yorster.elements[i].x4 += value;
+            break;
+        }
+    }
+}
 
 /// #grYorster_802024F0
 
