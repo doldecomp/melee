@@ -26,6 +26,7 @@
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_CaptureKirby.h"
+#include "ftCommon/ftCo_CaptureWaitKirby.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_Landing.h"
 
@@ -1607,7 +1608,30 @@ void ftKb_SpecialN_800F5DE8(Fighter_GObj* gobj)
     }
 }
 
-/// #ftKb_SpecialN_800F5EA8
+void ftKb_SpecialN_800F5EA8(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftKb_DatAttrs* da = fp->dat_attrs;
+    Vec3 pos;
+
+    pos = fp->cur_pos;
+    pos.x += da->specialn_x_offset_inhaled * fp->facing_dir;
+    pos.y += da->specialn_y_offset_inhaled;
+
+    {
+        f32 dist = ftCo_800BD19C(fp->victim_gobj, &pos);
+        if (dist <
+            da->specialn_inhale_velocity * da->specialn_inhale_velocity)
+        {
+            ftCo_800BD620(fp->victim_gobj);
+            if (fp->ground_or_air == GA_Air) {
+                ftKb_SpecialN_800F63EC(gobj);
+            } else {
+                ftKb_SpecialN_800F6388(gobj);
+            }
+        }
+    }
+}
 
 void ftKb_SpecialN_800F5F68(HSD_GObj* gobj)
 {
