@@ -163,7 +163,30 @@ void fn_80171AD4(void)
 
 /// #fn_8016FFD4
 
-/// #fn_80170110
+int fn_80170110(int arg0, int idx, int mask, u8 player_id)
+{
+    struct lbl_803D5A4C_t* curr = lbl_803D5A4C;
+    int kind = lbl_803D5A4C[idx].kind;
+    u8 flags;
+
+    while (curr->kind != kind) {
+        if (curr->kind == 0x29A) {
+            flags = 0;
+            goto check;
+        }
+        curr++;
+    }
+    flags = curr->x4;
+
+check:
+    if ((u8) mask & flags) {
+        if (kind < 0xD7) {
+            return pl_80039418(player_id, kind);
+        }
+        return fn_801701C0(arg0, player_id, kind);
+    }
+    return 0;
+}
 
 void gm_801701A0(void)
 {
