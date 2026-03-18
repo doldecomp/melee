@@ -108,7 +108,17 @@ bool it_2725_Logic10_DmgReceived(Item_GObj* gobj)
     return false;
 }
 
-/// #it_802E1E94
+void it_802E1E94(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    it_802762BC(ip);
+    if (it_8027B798(gobj, &ip->x40_vel)) {
+        it_802762BC(ip);
+    }
+    ip->xDD4_itemVar.klap.x24 = (HSD_Randf() - 0.5f) * 0.17453292f;
+    ip->xDD4_itemVar.klap.x28 = (HSD_Randf() - 0.5f) * 0.17453292f;
+    Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
+}
 
 bool itKlap_UnkMotion4_Anim(Item_GObj* gobj)
 {
