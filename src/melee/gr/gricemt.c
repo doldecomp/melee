@@ -29,10 +29,10 @@
 
 /* 1F8C64 */ static void fn_801F8C64(Item_GObj* gobj, Ground* u1, Vec3* u2,
                                      HSD_GObj* u3, f32 u4);
-/* 1F91EC */ static void FUN_801f91ec(HSD_GObj* param_1, s16* param_2,
-                                      int param_3, int param_4, int param_5,
-                                      int param_6, int param_7,
-                                      mpLib_Callback param_8);
+/* 1F91EC */ void grIceMt_801F91EC(HSD_GObj* param_1, s16* param_2,
+                                   int param_3, int param_4, int param_5,
+                                   int param_6, int param_7,
+                                   mpLib_Callback param_8);
 
 /// StageData grIm_803E8974 = {
 ///     45,
@@ -985,10 +985,9 @@ HSD_GObj* fn_801F91A8(HSD_GObj* gobj)
     return (HSD_GObj*) result;
 }
 
-/// #grIceMt_801F91EC
-void FUN_801f91ec(HSD_GObj* param_1, s16* param_2, int param_3, int param_4,
-                  int param_5, int param_6, int param_7,
-                  mpLib_Callback param_8)
+void grIceMt_801F91EC(HSD_GObj* param_1, s16* param_2, int param_3,
+                      int param_4, int param_5, int param_6, int param_7,
+                      mpLib_Callback param_8)
 {
     Ground* gp = GET_GROUND(param_1);
     param_2[0] = 0;
@@ -998,9 +997,9 @@ void FUN_801f91ec(HSD_GObj* param_1, s16* param_2, int param_3, int param_4,
     param_2[4] = param_5;
     param_2[5] = param_6;
     param_2[6] = param_7;
-    grAnime_801C7A04(param_1, param_3, 7, -20);
+    grAnime_801C7A04(param_1, param_3, 7, 0);
     if (param_4 != -1) {
-        grAnime_801C7A04(param_1, param_4, 7, -20);
+        grAnime_801C7A04(param_1, param_4, 7, 0);
     }
     mpJointSetCb1(param_5, gp, param_8);
 }
