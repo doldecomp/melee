@@ -14,9 +14,12 @@
 #include "lb/lb_00F9.h"
 
 #include <baselib/gobj.h>
+#include <baselib/jobj.h>
+#include <baselib/random.h>
 
 static struct {
-    int x0;
+    s16 x0;
+    s16 x2;
 }* grOk_804D6A90;
 
 StageCallbacks grOk_803E658C[4] = {
@@ -126,7 +129,25 @@ bool grOldKongo_8020F880(Ground_GObj* gobj)
 
 void grOldKongo_80210058(Ground_GObj* arg) {}
 
-/// #grOldKongo_8021005C
+static inline int rand_inline(int a, int b)
+{
+    if (a > b) {
+        return b + (a - b != 0 ? HSD_Randi(a - b) : 0);
+    } else if (a < b) {
+        return a + (b - a != 0 ? HSD_Randi(b - a) : 0);
+    } else {
+        return a;
+    }
+}
+
+void grOldKongo_8021005C(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+    HSD_JObjSetFlagsAll(jobj, 0x10);
+    gp->gv.unk.xC4 =
+        rand_inline(grOk_804D6A90->x2, grOk_804D6A90->x0);
+}
 
 bool grOldKongo_802100F4(Ground_GObj* gobj)
 {
