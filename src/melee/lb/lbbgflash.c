@@ -10,6 +10,8 @@
 
 #include <placeholder.h>
 
+#include "dolphin/gx/GXStruct.h"
+
 #include "lb/forward.h"
 
 #include "lb/lb_00F9.h"
@@ -22,9 +24,9 @@ typedef struct BgFlashState {
 typedef struct BgFlashData {
     /* 0x00 */ BgFlashState state;
     /* 0x01 */ u8 pad1[3];
-    /* 0x04 */ int x4;
-    /* 0x08 */ u8 x8[4];
-    /* 0x0C */ int xC;
+    /* 0x04 */ GXColor x4;
+    /* 0x08 */ GXColor x8;
+    /* 0x0C */ GXColor xC;
     /* 0x10 */ f32 x10[4];
     /* 0x20 */ f32 x20[4];
     /* 0x30 */ u8 x30;
@@ -64,12 +66,11 @@ extern BgFlashData lbl_80433658;
 /* 021C18 */ static void fn_80021C18(HSD_GObj* gobj, CommandInfo* cmd,
                                      int arg2);
 /// @brief Initialize background flash state.
-/* 02087C */ void lbBgFlash_InitState(int* duration);
 
-extern s32 lbl_804D3840;
-extern s32 lbl_804D3844;
-extern s32 lbl_804D3848;
-extern s32 lbl_804D384C;
+extern GXColor lbl_804D3840;
+extern GXColor lbl_804D3844;
+extern GXColor lbl_804D3848;
+extern GXColor lbl_804D384C;
 
 extern HSD_CObjDesc lbl_803BB028;
 
@@ -82,65 +83,65 @@ void fn_8001FC08(void)
 
     if (data->x20[0] > 0.0f) {
         val = data->x10[0] + data->x20[0];
-        if (val < (f32) data->x8[0]) {
+        if (val < (f32) data->x8.r) {
             data->x10[0] = val;
         } else {
-            data->x10[0] = (f32) data->x8[0];
+            data->x10[0] = (f32) data->x8.r;
         }
     } else {
         val = data->x10[0] + data->x20[0];
-        if (val > (f32) data->x8[0]) {
+        if (val > (f32) data->x8.r) {
             data->x10[0] = val;
         } else {
-            data->x10[0] = (f32) data->x8[0];
+            data->x10[0] = (f32) data->x8.r;
         }
     }
 
     if (data->x20[1] > 0.0f) {
         val = data->x10[1] + data->x20[1];
-        if (val < (f32) data->x8[1]) {
+        if (val < (f32) data->x8.g) {
             data->x10[1] = val;
         } else {
-            data->x10[1] = (f32) data->x8[1];
+            data->x10[1] = (f32) data->x8.g;
         }
     } else {
         val = data->x10[1] + data->x20[1];
-        if (val > (f32) data->x8[1]) {
+        if (val > (f32) data->x8.g) {
             data->x10[1] = val;
         } else {
-            data->x10[1] = (f32) data->x8[1];
+            data->x10[1] = (f32) data->x8.g;
         }
     }
 
     if (data->x20[2] > 0.0f) {
         val = data->x10[2] + data->x20[2];
-        if (val < (f32) data->x8[2]) {
+        if (val < (f32) data->x8.b) {
             data->x10[2] = val;
         } else {
-            data->x10[2] = (f32) data->x8[2];
+            data->x10[2] = (f32) data->x8.b;
         }
     } else {
         val = data->x10[2] + data->x20[2];
-        if (val > (f32) data->x8[2]) {
+        if (val > (f32) data->x8.b) {
             data->x10[2] = val;
         } else {
-            data->x10[2] = (f32) data->x8[2];
+            data->x10[2] = (f32) data->x8.b;
         }
     }
 
     if (data->x20[3] > 0.0f) {
         val = data->x10[3] + data->x20[3];
-        if (val < (f32) data->x8[3]) {
+        if (val < (f32) data->x8.a) {
             data->x10[3] = val;
         } else {
-            data->x10[3] = (f32) data->x8[3];
+            data->x10[3] = (f32) data->x8.a;
         }
     } else {
         val = data->x10[3] + data->x20[3];
-        if (val > (f32) data->x8[3]) {
+        if (val > (f32) data->x8.a) {
             data->x10[3] = val;
         } else {
-            data->x10[3] = (f32) data->x8[3];
+            data->x10[3] = (f32) data->x8.a;
         }
     }
 }
@@ -363,11 +364,9 @@ void lbBgFlash_80020688(int count)
     lbl_80433658.state.mode = 0;
 }
 
-void lbBgFlash_800206D4(void* arg0, s32* arg1, int arg2)
+void lbBgFlash_800206D4(GXColor* col1, GXColor* col2, int arg2)
 {
     BgFlashData* data = &lbl_80433658;
-    u8* src = (u8*) arg0;
-    u8* dst = (u8*) arg1;
     int count = arg2;
 
     if (count < 1) {
@@ -376,24 +375,24 @@ void lbBgFlash_800206D4(void* arg0, s32* arg1, int arg2)
 
     data->state.active = 0;
     data->state.mode = 2;
-    data->x4 = *(s32*) arg0;
+    data->x4 = *col1;
     data->xC = data->x4;
-    *(s32*) data->x8 = *arg1;
-    data->x10[0] = (f32) src[0];
-    data->x10[1] = (f32) src[1];
-    data->x10[2] = (f32) src[2];
-    data->x10[3] = (f32) src[3];
-    data->x20[0] = (f32) (dst[0] - src[0]) / (f32) count;
-    data->x20[1] = (f32) (dst[1] - src[1]) / (f32) count;
-    data->x20[2] = (f32) (dst[2] - src[2]) / (f32) count;
-    data->x20[3] = (f32) (dst[3] - src[3]) / (f32) count;
+    data->x8 = *col2;
+    data->x10[0] = (f32) col1->r;
+    data->x10[1] = (f32) col1->g;
+    data->x10[2] = (f32) col1->b;
+    data->x10[3] = (f32) col1->a;
+    data->x20[0] = (f32) (col2->r - col1->r) / (f32) count;
+    data->x20[1] = (f32) (col2->g - col1->g) / (f32) count;
+    data->x20[2] = (f32) (col2->b - col1->b) / (f32) count;
+    data->x20[3] = (f32) (col2->a - col1->a) / (f32) count;
 }
 
-void lbBgFlash_InitState(int* duration)
+void lbBgFlash_InitState(GXColor* color)
 {
     lbl_80433658.state.active = 0;
     lbl_80433658.state.mode = 5;
-    lbl_80433658.xC = *duration;
+    lbl_80433658.xC = *color;
 }
 void fn_800208B0(u8 arg0)
 {
@@ -401,10 +400,10 @@ void fn_800208B0(u8 arg0)
     lbl_80433658.state.active = 0;
     if ((data && data) && data){}
     lbl_80433658.state.mode = 5;
-    ((u8*) &data->xC)[2] = 0;
-    ((u8*) &data->xC)[1] = 0;
-    ((u8*) &data->xC)[0] = 0;
-    ((u8*) &data->xC)[3] = arg0;
+    data->xC.b = 0;
+    data->xC.g = 0;
+    data->xC.r = 0;
+    data->xC.a = arg0;
 }
 #pragma push
 #pragma dont_inline on
@@ -935,7 +934,7 @@ void fn_80021B04(HSD_GObj* gobj)
 {
     BgFlashUserData* data = gobj->user_data;
     int was_active = data->x4.x7C_color_enable;
-    int color;
+    GXColor color;
     f32 scale;
 
     PAD_STACK(4);

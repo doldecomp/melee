@@ -19,8 +19,8 @@
 /* 0205F0 */ void lbBgFlash_800205F0(s32 duration);
 /* 02063C */ void lbBgFlash_8002063C(int count);
 /* 020688 */ void lbBgFlash_80020688(int);
-/* 0206D4 */ void lbBgFlash_800206D4(void*, s32*, int);
-/* 02087C */ void lbBgFlash_InitState(int* duration);
+/* 0206D4 */ void lbBgFlash_800206D4(GXColor*, GXColor*, int);
+/* 02087C */ void lbBgFlash_InitState(GXColor*);
 /* 0208B0 */ void fn_800208B0(u8 arg0);
 /* 0208EC */ void lbBgFlash_800208EC(int);
 /* 0209F4 */ void lbBgFlash_800209F4(void);
