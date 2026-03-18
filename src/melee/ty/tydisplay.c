@@ -37,7 +37,7 @@
 #include <MSL/math_ppc.h>
 #include <MSL/trigf.h>
 
-extern char un_804D5AC0[2];
+static char un_804D5AC0[] = "0";
 extern DevText* un_804D6F24;
 extern HSD_Archive* un_804A2DE8[0xB0];
 typedef struct TyDspBaseData {
@@ -412,7 +412,7 @@ void un_80318CB4(s32 arg0)
                         {
                             OSReport(
                                 "*** tyDisplay Atari Irregul!\n");
-                            __assert("tydisplay.c", 0xC6U, "0");
+                            HSD_ASSERT(0xC6, 0);
                         }
                         if ((s32) dist <= (s32) 8.0f) {
                             collided = 1;
@@ -1009,7 +1009,7 @@ void un_80319EF0(void)
         }
         if (scale > 2.1474836e9f || scale < -2.1474836e9f) {
             OSReport("*** tyDisplay Table Scale Irregul!\n");
-            __assert("tydisplay.c", 0x28CU, "0");
+            HSD_ASSERT(0x28C, 0);
         }
         if ((s32) scale != 0) {
             HSD_JObjSetScaleX(un_804D6F1C->jobj, scale);
@@ -1384,7 +1384,6 @@ void fn_8031A94C(HSD_GObj* arg0)
     }
 }
 
-static char un_804D5AA8[] = "0";
 static u16 un_804D5ABC = 0x15;
 
 void un_8031B1FC(void)
@@ -1404,7 +1403,7 @@ void un_8031B1FC(void)
 
     if (ptr->archive == NULL) {
         OSReport("*** BG data aren't being loaded!\n");
-        __assert("tydisplay.c", 0x3FD, un_804D5AA8);
+        HSD_ASSERT(0x3FD, 0);
     }
 
     gobj = ptr->gobj0;
@@ -1432,7 +1431,7 @@ void un_8031B1FC(void)
     }
 
     OSReport("*** Can not Load Panel Label(%s)\n", "ToyDspBg_Top_joint");
-    __assert("tydisplay.c", 0x43E, un_804D5AA8);
+    HSD_ASSERT(0x43E, 0);
 }
 
 static s32 un_804DE018 = (s32) 0xC8C8C8FF;
@@ -1453,7 +1452,7 @@ void un_8031B328(void)
 
     if ((temp3 = ptr)->archive == NULL) {
         OSReport("*** BG data aren't being loaded!\n");
-        OSPanic("tydisplay.c", 0x459, un_804D5AC0);
+        OSPanic(__FILE__, 0x459, un_804D5AC0);
     }
 
     lightData = HSD_ArchiveGetPublicAddress(temp3->archive,
@@ -1918,8 +1917,6 @@ s32 un_8031BBF4(s8 arg0)
     return (s32) table[arg0];
 }
 
-static char un_803FF01C[] = "ToyDspStand_Top_joint";
-
 HSD_GObj* un_8031BC54(s32 arg0)
 {
     char buf[44];
@@ -1971,7 +1968,7 @@ HSD_GObj* un_8031BC54(s32 arg0)
     HSD_JObjSetTranslateZ(child, entry->x0C);
 
     HSD_JObjAddChild(root, HSD_JObjLoadJoint(HSD_ArchiveGetPublicAddress(
-                               data->archives[41], un_803FF01C)));
+                               data->archives[41], "ToyDspStand_Top_joint")));
 
     if (un_804D6F24 != NULL) {
         DevText_Erase(un_804D6F24);
