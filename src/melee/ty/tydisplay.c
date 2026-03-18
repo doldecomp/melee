@@ -37,7 +37,6 @@
 #include <MSL/math_ppc.h>
 #include <MSL/trigf.h>
 
-static char un_804D5AC0[] = "0";
 extern DevText* un_804D6F24;
 extern HSD_Archive* un_804A2DE8[0xB0];
 typedef struct TyDspBaseData {
@@ -1452,7 +1451,7 @@ void un_8031B328(void)
 
     if ((temp3 = ptr)->archive == NULL) {
         OSReport("*** BG data aren't being loaded!\n");
-        OSPanic(__FILE__, 0x459, un_804D5AC0);
+        OSPanic(__FILE__, 0x459, "0");
     }
 
     lightData = HSD_ArchiveGetPublicAddress(temp3->archive,
@@ -1844,7 +1843,7 @@ s32 un_8031BB34(s8 idx)
 char* un_8031BB94(s8 idx)
 {
     char* table[] = {
-        un_804D5AC0,
+        "0",
         "ToyDspMycharaCmA_Top_matanim_joint",
         "ToyDspMycharaCmB_Top_matanim_joint",
         "ToyDspMycharaCmC_Top_matanim_joint",
@@ -1885,8 +1884,8 @@ char* un_8031BB94(s8 idx)
         "ToyDspItemC_Top_matanim_joint",
         "ToyDspItemD_Top_matanim_joint",
         "ToyDspItemE_Top_matanim_joint",
-        un_804D5AC0,
-        un_804D5AC0,
+        "0",
+        "0",
     };
 
     if (idx == -1) {
