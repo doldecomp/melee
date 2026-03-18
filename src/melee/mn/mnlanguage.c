@@ -91,7 +91,7 @@ void fn_8024C210(HSD_GObj* gobj)
 {
     u8 _[4];
     HSD_JObj* jobj = GET_JOBJ(gobj);
-    if (mn_8022EC18(jobj, &mnLanguage_803EF5AC.x, 0x80) >=
+    if (mn_8022EC18(jobj, (AnimLoopSettings*) &mnLanguage_803EF5AC, 0x80) >=
         mnLanguage_803EF5AC.y)
     {
         HSD_GObjPLink_80390228(gobj);
@@ -127,7 +127,7 @@ void fn_8024C2E8(HSD_GObj* gobj)
         return;
     }
 
-    tmp = mn_8022EC18(jobj, &mnLanguage_803EF5A0.x, 0x80);
+    tmp = mn_8022EC18(jobj, (AnimLoopSettings*) &mnLanguage_803EF5A0, 0x80);
     if (tmp == mnLanguage_803EF5A0.y) {
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
         gobjproc = HSD_GObj_SetupProc(gobj, fn_8024C270, 0);

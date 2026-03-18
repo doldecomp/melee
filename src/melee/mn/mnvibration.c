@@ -624,7 +624,7 @@ void fn_80248748(HSD_GObj* gobj)
     }
 }
 
-static f32 mnVibration_803EECF8[3] = { 0.0f, 14.0f, -0.1f };
+static AnimLoopSettings mnVibration_803EECF8 = { 0.0f, 14.0f, -0.1f };
 
 void fn_802487A8(HSD_GObj* gobj)
 {
@@ -669,7 +669,7 @@ void fn_802487A8(HSD_GObj* gobj)
         }
         lb_80011E24(var_r3_2, &sp44, 1, -1);
         if (GetRumbleSettingOfPort(var_r24) != 0) {
-            mn_8022EC18(sp44, mnVibration_803EECF8, MOBJ_MASK);
+            mn_8022EC18(sp44, &mnVibration_803EECF8, MOBJ_MASK);
         } else {
             HSD_JObjReqAnimAll(sp44, 0.0f);
             mn_8022F3D8(sp44, 0xFF, MOBJ_MASK);

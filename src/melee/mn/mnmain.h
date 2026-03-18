@@ -96,7 +96,7 @@ typedef struct _MenuInputState {
 /* 22EB24 */ s32 mn_GetDigitAt(s32, s32);
 /* 22EB78 */ s32 mn_GetDigitCount(s32);
 /* 22EBDC */ void mn_8022EBDC(void);
-/* 22EC18 */ float mn_8022EC18(HSD_JObj*, float*, HSD_TypeMask);
+/* 22EC18 */ float mn_8022EC18(HSD_JObj*, AnimLoopSettings*, HSD_TypeMask);
 /* 22ED6C */ float mn_8022ED6C(HSD_JObj*, AnimLoopSettings*);
 /* 22EE84 */ float mn_8022EE84(HSD_JObj* arg0, AnimLoopSettings* arg1,
                                HSD_TypeMask arg2);

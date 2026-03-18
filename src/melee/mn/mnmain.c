@@ -2953,23 +2953,25 @@ void mn_8022EBDC(void)
     }
 }
 
-float mn_8022EC18(HSD_JObj* arg0, float* arg1, HSD_TypeMask arg2)
+float mn_8022EC18(HSD_JObj* arg0, AnimLoopSettings* arg1, HSD_TypeMask arg2)
 {
     float temp_f1;
     float var_f31;
 
     temp_f1 = mn_8022F298(arg0);
-    if (!(arg1[0] <= temp_f1) || !(temp_f1 <= arg1[1])) {
-        HSD_JObjReqAnimAll(arg0, *(volatile float*) &arg1[0]);
+    if (!(arg1->start_frame <= temp_f1) ||
+        !(temp_f1 <= arg1->end_frame))
+    {
+        HSD_JObjReqAnimAll(arg0, *(volatile float*) &arg1->start_frame);
         mn_8022F3D8(arg0, 0xFFU, arg2);
     }
-    if (arg1[2] == -0.1f) {
+    if (arg1->loop_frame == -0.1f) {
         var_f31 = mn_8022F298(arg0);
-        if (var_f31 < arg1[1]) {
+        if (var_f31 < arg1->end_frame) {
             HSD_JObjAnimAll(arg0);
             var_f31 = mn_8022F298(arg0);
-            if (var_f31 > arg1[1]) {
-                var_f31 = arg1[1];
+            if (var_f31 > arg1->end_frame) {
+                var_f31 = arg1->end_frame;
                 HSD_JObjReqAnimAll(arg0, var_f31);
                 mn_8022F3D8(arg0, 0xFFU, arg2);
                 HSD_JObjAnimAll(arg0);
@@ -2978,8 +2980,8 @@ float mn_8022EC18(HSD_JObj* arg0, float* arg1, HSD_TypeMask arg2)
     } else {
         HSD_JObjAnimAll(arg0);
         var_f31 = mn_8022F298(arg0);
-        if (var_f31 >= arg1[1]) {
-            var_f31 = arg1[2] + (var_f31 - arg1[1]);
+        if (var_f31 >= arg1->end_frame) {
+            var_f31 = arg1->loop_frame + (var_f31 - arg1->end_frame);
             HSD_JObjReqAnimAll(arg0, var_f31);
             mn_8022F3D8(arg0, 0xFFU, arg2);
             HSD_JObjAnimAll(arg0);

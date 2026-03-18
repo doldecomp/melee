@@ -6,6 +6,16 @@
 
 #include "mn/forward.h"
 #include <baselib/forward.h>
+#include <baselib/sislib.h>
+
+typedef struct MnCountData {
+    /* 0x00 */ u8 cursor;
+    /* 0x01 */ u8 pad_01[3];
+    /* 0x04 */ s32 page_size;
+    /* 0x08 */ HSD_Text* labels[10];
+    /* 0x30 */ HSD_Text* values[10];
+    /* 0x58 */ HSD_Text* title;
+} MnCountData; // size 0x5C
 
 /* 2502CC */ s32 mnCount_802502CC(s32);
 /* 2502F0 */ s32 fn_802502F0(u8);
@@ -23,11 +33,11 @@
 /* 250DE4 */ UNK_RET mnCount_80250DE4(UNK_PARAMS);
 /* 250FF8 */ UNK_RET mnCount_80250FF8(UNK_PARAMS);
 /* 251278 */ UNK_RET fn_80251278(UNK_PARAMS);
-/* 2513F4 */ UNK_RET mnCount_802513F4(UNK_PARAMS);
+/* 2513F4 */ void mnCount_802513F4(HSD_GObj*);
 /* 2514B8 */ void fn_802514B8(HSD_GObj* gobj);
 /* 2514D8 */ UNK_RET fn_802514D8(UNK_PARAMS);
 /* 251640 */ UNK_RET fn_80251640(UNK_PARAMS);
-/* 2517E0 */ UNK_RET mnCount_802517E0(UNK_PARAMS);
+/* 2517E0 */ void mnCount_802517E0(MnCountData*);
 /* 25186C */ void mnCount_8025186C(void);
 
 #endif

@@ -14,8 +14,8 @@ static HSD_GObj* mnHyaku_804D6C58;
 
 void gm_801677E8(void);
 
-static f32 mnHyaku_803EF668[3] = { 0.0f, 19.0f, -0.1f };
-static f32 mnHyaku_803EF674[3] = { 20.0f, 29.0f, -0.1f };
+static AnimLoopSettings mnHyaku_803EF668 = { 0.0f, 19.0f, -0.1f };
+static AnimLoopSettings mnHyaku_803EF674 = { 20.0f, 29.0f, -0.1f };
 
 static f32 mnHyaku_803EF680[6] = {
     0.0f, 1.0f, 2.0f, 3.0f, 4.0f, 5.0f,
@@ -116,8 +116,8 @@ void mnHyaku_8024C68C(HSD_GObj* arg0)
 void mnHyaku_8024C9F0(HSD_GObj* gobj)
 {
     HSD_JObj* jobj = (HSD_JObj*) gobj->hsd_obj;
-    f32 ret = mn_8022EC18(jobj, &mnHyaku_803EF674[0], 0x80);
-    if (ret >= mnHyaku_803EF674[1]) {
+    f32 ret = mn_8022EC18(jobj, &mnHyaku_803EF674, 0x80);
+    if (ret >= mnHyaku_803EF674.end_frame) {
         HSD_GObjPLink_80390228(gobj);
     }
 }
@@ -151,8 +151,8 @@ void mnHyaku_8024CAC8(HSD_GObj* gobj)
         HSD_SisLib_803A5CC4(menu->text);
         return;
     }
-    res = mn_8022EC18(jobj, &mnHyaku_803EF668[0], 0x80);
-    if (res == mnHyaku_803EF668[1]) {
+    res = mn_8022EC18(jobj, &mnHyaku_803EF668, 0x80);
+    if (res == mnHyaku_803EF668.end_frame) {
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
         gobj_proc = HSD_GObj_SetupProc(gobj, mnHyaku_8024CA50, 0U);
         gobj_proc->flags_3 = HSD_GObj_804D783C;
