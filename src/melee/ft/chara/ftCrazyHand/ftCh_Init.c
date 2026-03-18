@@ -918,7 +918,18 @@ void ftCh_Damage_Phys(HSD_GObj* gobj)
 
 void ftCh_Damage_Coll(HSD_GObj* gobj) {}
 
-/// #ftCh_Init_80157170
+void ftCh_Init_80157170(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftCrazyHand_DatAttrs* attrs = fp->ft_data->ext_attr;
+    fp->mv.ch.unk0.xC.x = fp->cur_pos.x - attrs->x28;
+    fp->mv.ch.unk0.xC.y = attrs->x24;
+    Fighter_ChangeMotionState(gobj, ftMh_MS_Damage2, 0,
+                              fp->mv.ch.unk0.xC.z = ftCh_Init_804DA070,
+                              ftCh_Init_804DA074, ftCh_Init_804DA070, NULL);
+    ftAnim_8006EBA4(gobj);
+    ft_PlaySFX(fp, 0x4E207, 127, 64);
+}
 
 /// #ftCh_Damage2_Anim
 

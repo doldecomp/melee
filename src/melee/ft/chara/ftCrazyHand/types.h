@@ -15,7 +15,7 @@ typedef struct _ftCrazyHandAttributes {
     float x18;
     float x1C;
     s32 x20;
-    s32 x24;
+    float x24;
     float x28;
     float x2C;
     Vec2 x30_pos2;
