@@ -1582,7 +1582,31 @@ void ftKb_SpecialN_800F5D04(Fighter_GObj* gobj, bool arg1)
     new_var->fv.kb.hat.kind = 4;
 }
 
-/// #ftKb_SpecialN_800F5DE8
+void ftKb_SpecialN_800F5DE8(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftKb_DatAttrs* da = fp->dat_attrs;
+    Vec3 pos;
+
+    pos = fp->cur_pos;
+    pos.x += da->specialn_x_offset_inhaled * fp->facing_dir;
+    pos.y += da->specialn_y_offset_inhaled;
+
+    {
+        f64 dist =
+            it_802F23AC((int*) fp->target_item_gobj, (float*) &pos);
+        if (dist <
+            da->specialn_inhale_velocity * da->specialn_inhale_velocity)
+        {
+            it_802F2810(fp->target_item_gobj);
+            if (fp->ground_or_air == GA_Air) {
+                ftKb_SpecialN_800F63EC(gobj);
+            } else {
+                ftKb_SpecialN_800F6388(gobj);
+            }
+        }
+    }
+}
 
 /// #ftKb_SpecialN_800F5EA8
 
