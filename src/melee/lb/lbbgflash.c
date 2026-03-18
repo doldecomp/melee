@@ -24,10 +24,7 @@ typedef struct BgFlashData {
     /* 0x01 */ u8 pad1[3];
     /* 0x04 */ int x4;
     /* 0x08 */ u8 x8[4];
-    /* 0x0C */ u8 xC;
-    /* 0x0D */ u8 xD;
-    /* 0x0E */ u8 xE;
-    /* 0x0F */ u8 xF;
+    /* 0x0C */ int xC;
     /* 0x10 */ f32 x10[4];
     /* 0x20 */ f32 x20[4];
     /* 0x30 */ u8 x30;
@@ -165,10 +162,10 @@ void fn_8001FEC4(HSD_GObj* gobj, s32 code)
     mode = data->state.mode;
 
     if (mode == 5 || mode >= 5 || mode < 3) {
-        u8 a = data->xF;
-        u8 b = data->xE;
-        u8 g = data->xD;
-        u8 r = data->xC;
+        u8 a = ((u8*) &data->xC)[3];
+        u8 b = ((u8*) &data->xC)[2];
+        u8 g = ((u8*) &data->xC)[1];
+        u8 r = ((u8*) &data->xC)[0];
 
         GXBegin(GX_QUADS, GX_VTXFMT0, 4);
         GXPosition2f32(0.0f, 0.0f);
@@ -306,10 +303,10 @@ void fn_800204C8(void)
 
 case_0_1_2:
     fn_8001FC08();
-    data->xC = (s32) data->x10[0];
-    data->xD = (s32) data->x10[1];
-    data->xE = (s32) data->x10[2];
-    data->xF = (s32) data->x10[3];
+    ((u8*) &data->xC)[0] = (s32) data->x10[0];
+    ((u8*) &data->xC)[1] = (s32) data->x10[1];
+    ((u8*) &data->xC)[2] = (s32) data->x10[2];
+    ((u8*) &data->xC)[3] = (s32) data->x10[3];
     return;
 
 case_3_4:
@@ -380,7 +377,7 @@ void lbBgFlash_800206D4(void* arg0, s32* arg1, int arg2)
     data->state.active = 0;
     data->state.mode = 2;
     data->x4 = *(s32*) arg0;
-    *(s32*) &data->xC = data->x4;
+    data->xC = data->x4;
     *(s32*) data->x8 = *arg1;
     data->x10[0] = (f32) src[0];
     data->x10[1] = (f32) src[1];
@@ -404,10 +401,10 @@ void fn_800208B0(u8 arg0)
     lbl_80433658.state.active = 0;
     if ((data && data) && data){}
     lbl_80433658.state.mode = 5;
-    data->xE = 0;
-    data->xD = 0;
-    data->xC = 0;
-    data->xF = arg0;
+    ((u8*) &data->xC)[2] = 0;
+    ((u8*) &data->xC)[1] = 0;
+    ((u8*) &data->xC)[0] = 0;
+    ((u8*) &data->xC)[3] = arg0;
 }
 #pragma push
 #pragma dont_inline on
