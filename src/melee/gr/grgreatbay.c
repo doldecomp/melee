@@ -390,7 +390,24 @@ void grGreatBay_801F5D4C(Ground_GObj* gobj)
 
 /// #grGreatBay_801F63F4
 
-/// #grGreatBay_801F660C
+s16 grGb_803E4048[][2] = {
+    { 32, 20 }, { 23, 18 }, { 22, 15 }, { 29, 16 },
+    { 28, 17 }, { 27, 19 }, { 39, 21 }, { 0, 0 },
+};
+
+void grGreatBay_801F660C(Ground_GObj* gobj)
+{
+    u32 i;
+    HSD_JObj* jobj;
+    Vec3 pos;
+
+    for (i = 0; i < 7; i++) {
+        jobj = Ground_801C3FA4(gobj, grGb_803E4048[i][1]);
+        HSD_ASSERT(1398, jobj);
+        lb_8000B1CC(jobj, NULL, &pos);
+        mpVtxSetPos(grGb_803E4048[i][0], pos.x, pos.y);
+    }
+}
 
 bool grGreatBay_801F66A4(void)
 {

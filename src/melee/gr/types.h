@@ -1052,6 +1052,13 @@ struct grPushOn_GroundVars {
     /* +AC gp+170 */ HSD_LObj* spot_light;
 };
 
+struct grHomeRun_GroundVars {
+    u16 xC4;
+    u16 xC6;
+    int xC8;
+    int xCC;
+};
+
 struct Map_GroundVars {
     /* +00 gp+C4:0  */ u32 xC4_b0 : 1;
     /* +00 gp+C4:1  */ u32 xC4_b1 : 1;
@@ -1188,6 +1195,7 @@ struct Ground {
             struct grShrineroute_GroundVars2 shrineroute2;
             struct grSmashTaunt_GroundVars smashtaunt;
             struct GroundVars_unk unk;
+            struct grHomeRun_GroundVars homerun;
             struct grVenom_GroundVars venom;
             struct grYorster_GroundVars yorster;
             struct grZebes_GroundVars zebes;
