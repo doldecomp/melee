@@ -20,11 +20,25 @@ typedef struct BgFlashState {
 } BgFlashState;
 
 typedef struct BgFlashData {
-    BgFlashState state;
-    u8 pad[3];
-    int x4;
-    int x8;
-    int xC;
+    /* 0x00 */ BgFlashState state;
+    /* 0x01 */ u8 pad1[3];
+    /* 0x04 */ int x4;
+    /* 0x08 */ u8 x8[4];
+    /* 0x0C */ u8 xC;
+    /* 0x0D */ u8 xD;
+    /* 0x0E */ u8 xE;
+    /* 0x0F */ u8 xF;
+    /* 0x10 */ f32 x10[4];
+    /* 0x20 */ f32 x20[4];
+    /* 0x30 */ u8 x30;
+    /* 0x31 */ u8 x31;
+    /* 0x32 */ u8 x32;
+    /* 0x33 */ u8 x33;
+    /* 0x34 */ s32 x34;
+    /* 0x38 */ s32 x38;
+    /* 0x3C */ s32 x3C;
+    /* 0x40 */ HSD_GObj* x40;
+    /* 0x44 */ HSD_GObj* x44;
 } BgFlashData;
 
 extern BgFlashData lbl_80433658;
@@ -60,103 +74,76 @@ extern s32 lbl_804D3844;
 extern s32 lbl_804D3848;
 extern s32 lbl_804D384C;
 
-typedef struct BgFlashData2 {
-    u8 state;
-    u8 pad1[3];
-    int x4;
-    int x8;
-    u8 xC;
-    u8 xD;
-    u8 xE;
-    u8 xF;
-    f32 x10;
-    f32 x14;
-    f32 x18;
-    f32 x1C;
-    f32 x20;
-    f32 x24;
-    f32 x28;
-    f32 x2C;
-    u8 x30;
-    u8 x31;
-    u8 x32;
-    u8 x33;
-    s32 x34;
-    s32 x38;
-    s32 x3C;
-    HSD_GObj* x40;
-    HSD_GObj* x44;
-} BgFlashData2;
-
 extern HSD_CObjDesc lbl_803BB028;
 
 void fn_8001FC08(void)
 {
-    BgFlashData2* data = (BgFlashData2*) &lbl_80433658;
-    u8* end = (u8*) &data->x8;
+    // TODO: Un-unroll this somehow?
+    // When I try it just stays a loop in the asm
+    BgFlashData* data = &lbl_80433658;
     f32 val;
 
-    if (data->x20 > 0.0f) {
-        val = data->x10 + data->x20;
-        if (val < (f32) end[0]) {
-            data->x10 = val;
+    if (data->x20[0] > 0.0f) {
+        val = data->x10[0] + data->x20[0];
+        if (val < (f32) data->x8[0]) {
+            data->x10[0] = val;
         } else {
-            data->x10 = (f32) end[0];
+            data->x10[0] = (f32) data->x8[0];
         }
     } else {
-        val = data->x10 + data->x20;
-        if (val > (f32) end[0]) {
-            data->x10 = val;
+        val = data->x10[0] + data->x20[0];
+        if (val > (f32) data->x8[0]) {
+            data->x10[0] = val;
         } else {
-            data->x10 = (f32) end[0];
+            data->x10[0] = (f32) data->x8[0];
         }
     }
 
-    if (data->x24 > 0.0f) {
-        val = data->x14 + data->x24;
-        if (val < (f32) end[1]) {
-            data->x14 = val;
+    if (data->x20[1] > 0.0f) {
+        val = data->x10[1] + data->x20[1];
+        if (val < (f32) data->x8[1]) {
+            data->x10[1] = val;
         } else {
-            data->x14 = (f32) end[1];
+            data->x10[1] = (f32) data->x8[1];
         }
     } else {
-        val = data->x14 + data->x24;
-        if (val > (f32) end[1]) {
-            data->x14 = val;
+        val = data->x10[1] + data->x20[1];
+        if (val > (f32) data->x8[1]) {
+            data->x10[1] = val;
         } else {
-            data->x14 = (f32) end[1];
+            data->x10[1] = (f32) data->x8[1];
         }
     }
 
-    if (data->x28 > 0.0f) {
-        val = data->x18 + data->x28;
-        if (val < (f32) end[2]) {
-            data->x18 = val;
+    if (data->x20[2] > 0.0f) {
+        val = data->x10[2] + data->x20[2];
+        if (val < (f32) data->x8[2]) {
+            data->x10[2] = val;
         } else {
-            data->x18 = (f32) end[2];
+            data->x10[2] = (f32) data->x8[2];
         }
     } else {
-        val = data->x18 + data->x28;
-        if (val > (f32) end[2]) {
-            data->x18 = val;
+        val = data->x10[2] + data->x20[2];
+        if (val > (f32) data->x8[2]) {
+            data->x10[2] = val;
         } else {
-            data->x18 = (f32) end[2];
+            data->x10[2] = (f32) data->x8[2];
         }
     }
 
-    if (data->x2C > 0.0f) {
-        val = data->x1C + data->x2C;
-        if (val < (f32) end[3]) {
-            data->x1C = val;
+    if (data->x20[3] > 0.0f) {
+        val = data->x10[3] + data->x20[3];
+        if (val < (f32) data->x8[3]) {
+            data->x10[3] = val;
         } else {
-            data->x1C = (f32) end[3];
+            data->x10[3] = (f32) data->x8[3];
         }
     } else {
-        val = data->x1C + data->x2C;
-        if (val > (f32) end[3]) {
-            data->x1C = val;
+        val = data->x10[3] + data->x20[3];
+        if (val > (f32) data->x8[3]) {
+            data->x10[3] = val;
         } else {
-            data->x1C = (f32) end[3];
+            data->x10[3] = (f32) data->x8[3];
         }
     }
 }
@@ -164,18 +151,18 @@ void fn_8001FC08(void)
 /// #fn_8001FEC4
 void fn_8001FEC4(HSD_GObj* gobj, s32 code)
 {
-    BgFlashData2* data = (BgFlashData2*) &lbl_80433658;
+    BgFlashData* data = &lbl_80433658;
     s32 mode;
     s32 y;
 
     PAD_STACK(8);
 
-    if ((data->state >> 7) & 1) {
+    if (data->state.active) {
         return;
     }
 
     hsd_80391A04(1.0f, 1.0f, 1);
-    mode = data->state & 0x7F;
+    mode = data->state.mode;
 
     if (mode == 5 || mode >= 5 || mode < 3) {
         u8 a = data->xF;
@@ -300,8 +287,8 @@ void fn_8001FEC4(HSD_GObj* gobj, s32 code)
 void fn_800204C8(void)
 {
     f64 temp;
-    BgFlashData2* data = (BgFlashData2*) &lbl_80433658;
-    s32 mode = data->state & 0x7F;
+    BgFlashData* data = &lbl_80433658;
+    s32 mode = data->state.mode;
 
     if (mode == 5) {
         return;
@@ -319,10 +306,10 @@ void fn_800204C8(void)
 
 case_0_1_2:
     fn_8001FC08();
-    data->xC = (s32) data->x10;
-    data->xD = (s32) data->x14;
-    data->xE = (s32) data->x18;
-    data->xF = (s32) data->x1C;
+    data->xC = (s32) data->x10[0];
+    data->xD = (s32) data->x10[1];
+    data->xE = (s32) data->x10[2];
+    data->xF = (s32) data->x10[3];
     return;
 
 case_3_4:
@@ -381,8 +368,7 @@ void lbBgFlash_80020688(int count)
 
 void lbBgFlash_800206D4(void* arg0, s32* arg1, int arg2)
 {
-    BgFlashData2* data = (BgFlashData2*) &lbl_80433658;
-    BgFlashState* state = (BgFlashState*) data;
+    BgFlashData* data = &lbl_80433658;
     u8* src = (u8*) arg0;
     u8* dst = (u8*) arg1;
     int count = arg2;
@@ -391,19 +377,19 @@ void lbBgFlash_800206D4(void* arg0, s32* arg1, int arg2)
         count = 1;
     }
 
-    state->active = 0;
-    state->mode = 2;
+    data->state.active = 0;
+    data->state.mode = 2;
     data->x4 = *(s32*) arg0;
     *(s32*) &data->xC = data->x4;
-    data->x8 = *arg1;
-    data->x10 = (f32) src[0];
-    data->x14 = (f32) src[1];
-    data->x18 = (f32) src[2];
-    data->x1C = (f32) src[3];
-    data->x20 = (f32) (dst[0] - src[0]) / (f32) count;
-    data->x24 = (f32) (dst[1] - src[1]) / (f32) count;
-    data->x28 = (f32) (dst[2] - src[2]) / (f32) count;
-    data->x2C = (f32) (dst[3] - src[3]) / (f32) count;
+    *(s32*) data->x8 = *arg1;
+    data->x10[0] = (f32) src[0];
+    data->x10[1] = (f32) src[1];
+    data->x10[2] = (f32) src[2];
+    data->x10[3] = (f32) src[3];
+    data->x20[0] = (f32) (dst[0] - src[0]) / (f32) count;
+    data->x20[1] = (f32) (dst[1] - src[1]) / (f32) count;
+    data->x20[2] = (f32) (dst[2] - src[2]) / (f32) count;
+    data->x20[3] = (f32) (dst[3] - src[3]) / (f32) count;
 }
 
 void lbBgFlash_InitState(int* duration)
@@ -414,7 +400,7 @@ void lbBgFlash_InitState(int* duration)
 }
 void fn_800208B0(u8 arg0)
 {
-    BgFlashData2* data = (BgFlashData2*) &lbl_80433658;
+    BgFlashData* data = &lbl_80433658;
     lbl_80433658.state.active = 0;
     lbl_80433658.state.mode = 5;
     data->xE = 0;
@@ -426,7 +412,7 @@ void fn_800208B0(u8 arg0)
 #pragma dont_inline on
 void lbBgFlash_800208EC(int arg0)
 {
-    BgFlashData2* flash = (BgFlashData2*) &lbl_80433658;
+    BgFlashData* flash = &lbl_80433658;
     HSD_GObj** gobj1_slot;
     HSD_GObj** gobj2_slot;
 
@@ -434,7 +420,7 @@ void lbBgFlash_800208EC(int arg0)
     HSD_CObj* temp2;
     u8 temp3;
 
-    ((BgFlashData2*) (&lbl_80433658))->x44 = GObj_Create(0x14, 0x16, 0);
+    lbl_80433658.x44 = GObj_Create(0x14, 0x16, 0);
 
     temp2 = (temp1 = HSD_CObjLoadDesc(&lbl_803BB028));
     temp3 = HSD_GObj_804D784B;
@@ -460,7 +446,7 @@ void lbBgFlash_800208EC(int arg0)
 
 void lbBgFlash_800209F4(void)
 {
-    BgFlashData2* flash = (BgFlashData2*) &lbl_80433658;
+    BgFlashData* flash = &lbl_80433658;
     HSD_GObj** gobj1_slot;
     HSD_GObj** gobj2_slot;
     HSD_GObj* temp;
@@ -468,7 +454,7 @@ void lbBgFlash_800209F4(void)
     PAD_STACK(0x8);
 
     // This is flash->x44
-    ((BgFlashData2*) (&lbl_80433658))->x44 = GObj_Create(0x14, 0x16, 0);
+    lbl_80433658.x44 = GObj_Create(0x14, 0x16, 0);
     gobj1_slot = &flash->x44;
     HSD_GObjObject_80390A70(*gobj1_slot,
                             HSD_GObj_804D784B & 0xFFFFFFFFFFFFFFFF,
@@ -479,7 +465,7 @@ void lbBgFlash_800209F4(void)
     if ((!HSD_GObj_804D784B) && (!HSD_GObj_804D784B)) {
     }
     // This is flash->x40
-    ((BgFlashData2*) (&lbl_80433658))->x40 = GObj_Create(0x15, 0x16, 2);
+    lbl_80433658.x40 = GObj_Create(0x15, 0x16, 2);
     gobj2_slot = &flash->x40;
     GObj_SetupGXLink(*gobj2_slot, (GObj_RenderFunc) fn_8001FEC4, 0x10, 0xa);
     temp = *gobj2_slot;
