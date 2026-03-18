@@ -637,6 +637,26 @@ void lbBgFlash_80020E38(HSD_JObj* jobj, Vec3* dir, f32 max_angle,
     HSD_JObjSetupMatrix(jobj);
 }
 
+#define fake_HSD_ASSERT(line, cond)                                           \
+    ((cond) ? ((void) 0) : __assert("jobj.h", line, #cond))
+
+static inline void FakeHSD_JObjSetRotation(HSD_JObj* jobj, Quaternion* rotate)
+{
+    fake_HSD_ASSERT(618, jobj);
+    fake_HSD_ASSERT(619, rotate); // These get opimized away, I am unsure why.
+    jobj->rotate = *rotate;
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
+        HSD_JObjSetMtxDirty(jobj);
+    }
+}
+
+static inline void Fake_HSD_JObjGetRotation(HSD_JObj* jobj, Quaternion* quat)
+{
+    fake_HSD_ASSERT(699, jobj);
+    fake_HSD_ASSERT(700, quat); // These get opimized away, I am unsure why.
+    *quat = jobj->rotate;
+}
+
 void fn_8002113C(HSD_JObj* jobj, Vec3* axis, f32 angle)
 {
     Mtx mtx;
@@ -647,7 +667,7 @@ void fn_8002113C(HSD_JObj* jobj, Vec3* axis, f32 angle)
     Quaternion rot;
     Quaternion rot2;
 
-    PAD_STACK(16);
+    PAD_STACK(0x10);
 
     HSD_JObjSetupMatrix(jobj);
     fn_80020AEC(jobj, mtx);
@@ -656,11 +676,11 @@ void fn_8002113C(HSD_JObj* jobj, Vec3* axis, f32 angle)
     PSMTXRotAxisRad(rotMtx, (Vec*) &localAxis, -angle);
 
     if (!(jobj->flags & JOBJ_USE_QUATERNION)) {
-        HSD_JObjGetRotation(jobj, &rot);
+        Fake_HSD_JObjGetRotation(jobj, &rot);
         HSD_MkRotationMtx(tmpMtx, (Vec3*) &rot);
         PSMTXConcat(tmpMtx, rotMtx, result);
         HSD_QuatLib_8037EB28(result, (Vec3*) &rot);
-        HSD_JObjSetRotation(jobj, &rot);
+        FakeHSD_JObjSetRotation(jobj, &rot);
     } else {
         HSD_JObjGetRotation(jobj, &rot2);
         HSD_MtxQuat(tmpMtx, &rot2);
