@@ -3916,7 +3916,36 @@ void ftKb_SpecialN_800F13F0(Fighter_GObj* gobj)
     ftKb_SpecialN_800EF69C(gobj, 0x16, ft_80459B88.hats[FTKIND_DRMARIO]);
 }
 
-/// #ftKb_SpecialN_800F1420
+void ftKb_SpecialN_800F1420(Fighter_GObj* gobj, u32* arg1)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    FtPartsVisLookup* lookup = fp->x5AC.xC[4];
+    int i;
+
+    for (i = 0; i < lookup->x0; i++) {
+        TempS* entry = &lookup->x4[i];
+        u8* p = entry->x4;
+        int j;
+
+        for (j = 0; j < entry->x0; j++, p++) {
+            HSD_DObj* dobj = fp->fv.kb.hat.x14.data[*p];
+            HSD_MObj* mobj;
+
+            if (dobj != NULL) {
+                mobj = dobj->mobj;
+            } else {
+                mobj = NULL;
+            }
+
+            if (mobj != NULL) {
+                HSD_Material* mat = mobj->mat;
+                if (mat != NULL) {
+                    *(u32*) &mat->diffuse = *arg1;
+                }
+            }
+        }
+    }
+}
 
 /// #ftKb_SpecialN_800F14B4
 
