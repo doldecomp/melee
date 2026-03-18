@@ -146,7 +146,16 @@ bool itClimbersice_UnkMotion2_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itClimbersice_UnkMotion2_Phys
+void itClimbersice_UnkMotion2_Phys(Item_GObj* gobj)
+{
+    if (it_802C1854()) {
+        Item* ip = GET_ITEM(gobj);
+        itClimbersIceAttributes* sa =
+            ip->xC4_article_data->x4_specialAttributes;
+        u32 dmg = (u32) ABS(ip->x40_vel.x * sa->x30) + sa->x2C;
+        it_80272460(&ip->x5D4_hitboxes[0].hit, dmg, gobj);
+    }
+}
 
 /// #itClimbersice_UnkMotion2_Coll
 
