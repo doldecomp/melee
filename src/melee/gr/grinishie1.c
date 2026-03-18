@@ -719,7 +719,34 @@ void grInishie1_801FBCEC(HSD_GObj* gobj, u32 index)
     Camera_80030E44(2, &effect_pos);
 }
 
-/// #fn_801FBF6C
+void fn_801FBF6C(Item_GObj* item_gobj, Ground* gp, Vec3* pos,
+                 HSD_GObj* arg3, f32 arg4)
+{
+    s32 i;
+    HSD_GObj* gobj;
+    Item* ip = item_gobj->user_data;
+
+    for (i = 0; i < 19; i++) {
+        if (gp->gv.inishie1.blocks[i].jobj2 ==
+            (HSD_JObj*) ip->xDD4_itemVar.it_266F.x4)
+        {
+            break;
+        }
+    }
+
+    if ((u32) i == 19) {
+        return;
+    }
+
+    gobj = Ground_801C2BA4(3);
+    if (gobj == NULL) {
+        __assert("grinishie1.c", 0x425, "new_gobj");
+    }
+
+    grInishie1_801FB0AC(gobj, i);
+    grInishie1_801FBCEC(gobj, i);
+    PAD_STACK(16);
+}
 
 /// #grInishie1_801FC018
 
