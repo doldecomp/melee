@@ -121,7 +121,25 @@ bool itKyasarin_UnkMotion2_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itKyasarin_UnkMotion2_Coll
+bool itKyasarin_UnkMotion2_Coll(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itKyasarinAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+    if (ip->facing_dir == 1.0F) {
+        if (ip->pos.x <= attr->x34) {
+            Item_80268E5C(gobj, 3, ITEM_ANIM_UPDATE);
+            it_80273454(gobj);
+            ip->xDD4_itemVar.kyasarin.x24 = attr->xC;
+        }
+    } else {
+        if (ip->pos.x >= attr->x30) {
+            Item_80268E5C(gobj, 3, ITEM_ANIM_UPDATE);
+            it_80273454(gobj);
+            ip->xDD4_itemVar.kyasarin.x24 = attr->xC;
+        }
+    }
+    return false;
+}
 
 void it_802ED25C(Item_GObj* gobj)
 {
