@@ -574,6 +574,7 @@ void fn_80020AEC(HSD_JObj* jobj, Mtx out)
 void lbBgFlash_80020E38(HSD_JObj* jobj, Vec3* dir, f32 max_angle,
                         f32 min_angle)
 {
+    u8 _1[16];
     f32 dx = dir->x;
     f32 dy = dir->y;
     f32 dz = dir->z;
@@ -581,60 +582,60 @@ void lbBgFlash_80020E38(HSD_JObj* jobj, Vec3* dir, f32 max_angle,
     f32 len;
     f32 angle;
     f32 z_col_z;
+    f32 z_col_y;
     f32 z_col_x;
-
-    PAD_STACK(24);
-
-    if ((dz * dz) + ((dx * dx) + (dy * dy)) == 0.0f) {
+    f32 dz2 = dz * dz;
+    f32 dx2 = dx * dx;
+    f32 dy2 = dy * dy;
+    volatile f32 tmp;
+    if (dz2 + dy2 + dx2 == 0.0f) {
         return;
     }
 
     HSD_JObjSetupMatrix(jobj);
 
     z_col_x = jobj->mtx[0][2];
+    z_col_y = jobj->mtx[1][2];
     z_col_z = jobj->mtx[2][2];
-    mag_sq = (jobj->mtx[2][2] * jobj->mtx[2][2]) +
-             ((jobj->mtx[0][2] * jobj->mtx[0][2]) +
-              (jobj->mtx[1][2] * jobj->mtx[1][2]));
-
+    mag_sq = z_col_x * z_col_x;
+    mag_sq = z_col_y * z_col_y + mag_sq;
+    mag_sq = z_col_z * z_col_z + mag_sq;
+    len = mag_sq;
     if (mag_sq > 0.0f) {
         f64 e = __frsqrte(mag_sq);
         e = 0.5 * e * -(((f64) mag_sq * (e * e)) - 3.0);
         e = 0.5 * e * -(((f64) mag_sq * (e * e)) - 3.0);
         e = 0.5 * e * -(((f64) mag_sq * (e * e)) - 3.0);
-        len = (f32) ((f64) mag_sq * e);
-    } else {
-        len = mag_sq;
+        tmp = (f32) ((f64) mag_sq * e);
+        len = tmp;
     }
 
-    if (len == 0.0f) {
-        return;
-    }
+    if (len != 0.0f) {
+        angle = atan2f(-dir->x * (z_col_z / len), dir->y);
 
-    angle = atan2f(-dir->x * (z_col_z / len), dir->y);
+        if (angle > max_angle) {
+            angle = max_angle;
+        }
+        if (angle < -min_angle) {
+            angle = -min_angle;
+        }
 
-    if (angle > max_angle) {
-        angle = max_angle;
-    }
-    if (angle < -min_angle) {
-        angle = -min_angle;
-    }
+        if (!(jobj->flags & JOBJ_USE_QUATERNION)) {
+            f32 z = angle + HSD_JObjGetRotationZ(jobj);
+            HSD_JObjSetRotationZ(jobj, z);
+        } else {
+            Mtx quatMtx;
+            Mtx rotMtx;
+            Mtx resultMtx;
+            PSMTXQuat(quatMtx, &jobj->rotate);
+            MTXRotRad(rotMtx, 'z', angle);
+            PSMTXConcat(quatMtx, rotMtx, resultMtx);
+            MatToQuat(resultMtx, &jobj->rotate);
+            HSD_JObjSetMtxDirty(jobj);
+        }
 
-    if (!(jobj->flags & JOBJ_USE_QUATERNION)) {
-        f32 z = angle + HSD_JObjGetRotationZ(jobj);
-        HSD_JObjSetRotationZ(jobj, z);
-    } else {
-        Mtx quatMtx;
-        Mtx rotMtx;
-        Mtx resultMtx;
-        PSMTXQuat(quatMtx, &jobj->rotate);
-        MTXRotRad(rotMtx, 'z', angle);
-        PSMTXConcat(quatMtx, rotMtx, resultMtx);
-        MatToQuat(resultMtx, &jobj->rotate);
-        HSD_JObjSetMtxDirty(jobj);
+        HSD_JObjSetupMatrix(jobj);
     }
-
-    HSD_JObjSetupMatrix(jobj);
 }
 
 #define fake_HSD_ASSERT(line, cond)                                           \
