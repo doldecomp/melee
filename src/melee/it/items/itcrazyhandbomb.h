@@ -7,7 +7,8 @@
 
 #include "it/items/types.h"
 
-/* 2F0F6C */ UNK_RET it_802F0F6C(UNK_PARAMS);
+/* 2F0F6C */ void it_802F0F6C(Fighter_GObj* owner, Vec3* prev_pos, Vec3* pos,
+                              ItemKind kind, f32 facing_dir);
 /* 2F1030 */ void it_802F1030(Item_GObj* gobj);
 /* 2F1094 */ void itCrazyHandBomb_Logic86_EvtUnk(Item_GObj*, Item_GObj*);
 /* 2F10B4 */ bool itCrazyHandBomb_Logic86_DmgDealt(Item_GObj* gobj);
