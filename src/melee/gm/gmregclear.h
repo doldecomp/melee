@@ -77,7 +77,7 @@
 /* 17EDDC */ bool fn_8017EDDC(void);
 /* 17EE40 */ void fn_8017EE40(int);
 /* 17F008 */ int fn_8017F008(void);
-/* 17F09C */ UNK_RET fn_8017F09C(UNK_PARAMS);
+/* 17F09C */ s32 fn_8017F09C(void);
 /* 17F14C */ s32 fn_8017F14C(void* arg0);
 /* 17F1B8 */ UNK_RET fn_8017F1B8(UNK_PARAMS);
 /* 17F2A4 */ UNK_RET fn_8017F2A4(UNK_PARAMS);
