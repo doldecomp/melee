@@ -39,7 +39,7 @@
 
 extern char un_804D5AC0[2];
 extern DevText* un_804D6F24;
-extern HSD_Archive** un_804A2DE8;
+extern HSD_Archive* un_804A2DE8[0xB0];
 typedef struct TyDspBaseData {
     /* 0x00 */ char x00[0x38];
     /* 0x38 */ u8 x38[0x14];
