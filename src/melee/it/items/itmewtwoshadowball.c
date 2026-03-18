@@ -1,11 +1,15 @@
 #include "itmewtwoshadowball.h"
 
 #include "ef/eflib.h"
+#include "ft/chara/ftKirby/ftKb_Init.h"
+#include "ft/chara/ftMewtwo/ftMt_SpecialN.h"
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
+#include "lb/lbrefract.h"
+#include "lb/lbvector.h"
 
 #include <math.h>
 
@@ -39,7 +43,32 @@ bool it_802C4F50(Item_GObj* gobj, CollData* cd)
 
 /// #it_802C53F0
 
-/// #it_2725_Logic101_Destroyed
+void it_2725_Logic101_Destroyed(Item_GObj* gobj)
+{
+    if (gobj != NULL) {
+        Item* ip = gobj->user_data;
+        efLib_DestroyAll(gobj);
+        if (ip->xDD4_itemVar.mewtwoshadowball.x10[1] == 0) {
+            if (ip->xDD4_itemVar.mewtwoshadowball.x2C != NULL &&
+                ip->owner == ip->xDD4_itemVar.mewtwoshadowball.x2C)
+            {
+                switch (ip->kind) {
+                case It_Kind_Mewtwo_ShadowBall:
+                    ftMt_SpecialN_SetNULL(
+                        ip->xDD4_itemVar.mewtwoshadowball.x2C);
+                    break;
+                case It_Kind_Kirby_MewtwoShadowBall:
+                    ftKb_SpecialNMt_80107040(
+                        ip->xDD4_itemVar.mewtwoshadowball.x2C);
+                    break;
+                }
+            }
+            ip->xDD4_itemVar.mewtwoshadowball.x2C = NULL;
+        }
+        ip->owner = NULL;
+        ip->xDC8_word.flags.x13 = 0;
+    }
+}
 
 void it_802C573C(Item_GObj* gobj)
 {
@@ -166,7 +195,20 @@ bool itMewtwoShadowball_Logic101_HitShield(Item_GObj* arg0)
     return true;
 }
 
-/// #it_2725_Logic101_ShieldBounced
+bool it_2725_Logic101_ShieldBounced(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    lbVector_Mirror(&ip->x40_vel, &ip->xC58);
+    ip->xDD4_itemVar.mewtwoshadowball.x4.x =
+        atan2f(ip->x40_vel.y, ip->x40_vel.x);
+    while (ip->xDD4_itemVar.mewtwoshadowball.x4.x < 0.0f) {
+        ip->xDD4_itemVar.mewtwoshadowball.x4.x += M_TAU;
+    }
+    while (ip->xDD4_itemVar.mewtwoshadowball.x4.x > M_TAU) {
+        ip->xDD4_itemVar.mewtwoshadowball.x4.x -= M_TAU;
+    }
+    return false;
+}
 
 void itMewtwoShadowball_Logic101_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
