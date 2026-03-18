@@ -2777,7 +2777,32 @@ void fn_801689E4(HSD_JObj* arg0, DynamicModelDesc* arg1, int idx)
     HSD_JObjAddAnimAll(arg0, anim, matanim, shapeanim);
 }
 
-/// #fn_80168A6C
+s32 fn_80168A6C(void* arg0, void* arg1, s32 idx)
+{
+    struct {
+        /* 0x00 */ s32** x0;
+        /* 0x04 */ s32* x4;
+        /* 0x08 */ s32 x8;
+        /* 0x0C */ s32 xC;
+    }* src = arg0;
+
+    memzero(arg1, 0x20);
+
+    if (src->x0[idx] != NULL) {
+        ((s32*)arg1)[0] = src->x0[idx][0];
+        ((s32*)arg1)[1] = src->x0[idx][1];
+        ((s32*)arg1)[2] = src->x0[idx][2];
+        ((s32*)arg1)[3] = src->x0[idx][3];
+    }
+
+    if (src->x4 != NULL) {
+        ((s32*)arg1)[5] = src->x4[0];
+        ((s32*)arg1)[6] = src->x4[1];
+    }
+
+    ((s32*)arg1)[4] = src->x8;
+    ((s32*)arg1)[7] = src->xC;
+}
 
 f32 gm_80168B34(CharacterKind ckind, int arg1, int arg2)
 {
