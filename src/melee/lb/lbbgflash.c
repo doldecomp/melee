@@ -450,19 +450,27 @@ void lbBgFlash_800209F4(void)
     BgFlashData2* flash = (BgFlashData2*) &lbl_80433658;
     HSD_GObj** gobj1_slot;
     HSD_GObj** gobj2_slot;
+    HSD_GObj* temp;
 
-    PAD_STACK(8);
+    PAD_STACK(0x8);
 
-    flash->x44 = GObj_Create(0x14, 0x16, 0);
+    // This is flash->x44
+    ((BgFlashData2*) (&lbl_80433658))->x44 = GObj_Create(0x14, 0x16, 0);
     gobj1_slot = &flash->x44;
-    HSD_GObjObject_80390A70(*gobj1_slot, HSD_GObj_804D784B,
+    HSD_GObjObject_80390A70(*gobj1_slot,
+                            HSD_GObj_804D784B & 0xFFFFFFFFFFFFFFFF,
                             HSD_CObjLoadDesc(&lbl_803BB028));
     GObj_SetupGXLinkMax(*gobj1_slot, HSD_GObj_803910D8, 0xa);
     (*gobj1_slot)->gxlink_prios = 0x10000;
-    flash->x40 = GObj_Create(0x15, 0x16, 2);
+
+    if ((!HSD_GObj_804D784B) && (!HSD_GObj_804D784B)) {
+    }
+    // This is flash->x40
+    ((BgFlashData2*) (&lbl_80433658))->x40 = GObj_Create(0x15, 0x16, 2);
     gobj2_slot = &flash->x40;
     GObj_SetupGXLink(*gobj2_slot, (GObj_RenderFunc) fn_8001FEC4, 0x10, 0xa);
-    HSD_GObj_SetupProc(*gobj2_slot, (HSD_GObjEvent) fn_800204C8, 0);
+    temp = *gobj2_slot;
+    HSD_GObj_SetupProc(temp, (HSD_GObjEvent) fn_800204C8, 0);
     lbl_80433658.state.active = 1;
     lbl_80433658.state.mode = 0;
 }
