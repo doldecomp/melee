@@ -122,4 +122,13 @@ struct Toy {
 // TODO: This struct should only be 0x58
 // STATIC_ASSERT(sizeof(struct Toy) == 0x58);
 
+typedef struct TyDspEntry {
+    /* 0x00 */ s32 x00;
+    /* 0x04 */ u8 x04;
+    /* 0x05 */ u8 x05;
+    /* 0x06 */ u8 pad_06[2];
+    /* 0x08 */ f32 x08;
+    /* 0x0C */ f32 x0C;
+} TyDspEntry;
+STATIC_ASSERT(sizeof(struct TyDspEntry) == 0x10);
 #endif

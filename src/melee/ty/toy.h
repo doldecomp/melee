@@ -15,7 +15,7 @@
 /* 305918 */ void un_80305918(signed char, long, long);
 /* 305B88 */ s32 un_80305B88(void);
 /* 305C44 */ s32 un_80305C44(void);
-/* 305D00 */ UNK_RET un_80305D00(UNK_PARAMS);
+/* 305D00 */ float un_80305D00(void);
 /* 305DB0 */ float un_80305DB0(void);
 /* 305EB4 */ float un_80305EB4(void);
 /* 305FB8 */ float un_80305FB8(void);
