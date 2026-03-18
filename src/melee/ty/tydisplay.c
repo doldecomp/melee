@@ -39,7 +39,7 @@
 
 extern char un_804D5AC0[2];
 extern DevText* un_804D6F24;
-extern s32 un_804A2DE8[];
+extern HSD_Archive** un_804A2DE8;
 typedef struct TyDspBaseData {
     /* 0x00 */ char x00[0x38];
     /* 0x38 */ u8 x38[0x14];
@@ -47,7 +47,11 @@ typedef struct TyDspBaseData {
 } TyDspBaseData;
 
 extern TyDspBaseData un_804A2D98;
-extern u8 un_804A2DD0[0x18];
+typedef struct {
+    /* 0x00 */ u8 pad_00[0x14];
+    /* 0x14 */ HSD_Archive* archive;
+} TyDspArchiveHolder;
+TyDspArchiveHolder un_804A2DD0;
 
 typedef struct TyDspBgData {
     /* 0x00 */ HSD_GObj* gobj0;
@@ -80,15 +84,6 @@ typedef struct TyDspNameTables {
 
 extern const TyDspNameTables un_803B8988;
 extern const TyDspArchNames un_803B8A34;
-
-typedef struct TyDspEntry {
-    /* 0x00 */ s32 x00;
-    /* 0x04 */ u8 x04;
-    /* 0x05 */ u8 x05;
-    /* 0x06 */ u8 pad_06[2];
-    /* 0x08 */ f32 x08;
-    /* 0x0C */ f32 x0C;
-} TyDspEntry;
 
 typedef struct TyDspSceneGfx {
     /* 0x00 */ HSD_GObj* x00;
@@ -264,7 +259,7 @@ void un_80318714(TySortElem* base, s32 lo, s32 hi)
 }
 
 extern TyDspGrid* un_804D6F14;
-extern void* un_804D6F10;
+extern HSD_JObj** un_804D6F10;
 
 void un_80318B1C(s32 arg0)
 {
@@ -289,10 +284,10 @@ void un_80318B1C(s32 arg0)
         while (placed < arg0) {
             if (i >= 0x125) {
                 rand_id = HSD_Randi(0x124);
-                check = (TyDspEntry*) un_8031B9DC(rand_id);
+                check = un_8031B9DC(rand_id);
                 while (check->x00 == -1) {
                     rand_id = HSD_Randi(0x124);
-                    check = (TyDspEntry*) un_8031B9DC(rand_id);
+                    check = un_8031B9DC(rand_id);
                 }
                 grid->sort[start].key = rand_id;
                 grid->sort[start].val =
@@ -303,7 +298,7 @@ void un_80318B1C(s32 arg0)
                 }
                 placed++;
             } else {
-                check = (TyDspEntry*) un_8031B9DC(i);
+                check = un_8031B9DC(i);
                 if (check->x00 != -1) {
                     grid->sort[start].key = i;
                     grid->sort[start].val = (s32) un_803060BC(i, 7);
@@ -574,7 +569,6 @@ void un_80319540(s32 arg0)
     s32 count;
     s32 col, row, remainder;
     s32 i;
-    u8* ptr;
     s32 n2;
     PAD_STACK(0x28);
 
@@ -594,18 +588,17 @@ void un_80319540(s32 arg0)
 
     col = 0;
     row = 0;
-    ptr = (u8*) grid;
     for (i = 0; i < count; i++) {
         if (i == 0) {
-            *(f32*) (ptr + 0x97C) = 0.0f;
-            *(f32*) (ptr + 0x980) = 0.0f;
+            grid->pos[i].x = 0.0f;
+            grid->pos[i].z = 0.0f;
         } else {
             f32 x = 9.0f * (f32) col;
             if (arg0 != 0 && (row % 2) != 0) {
                 x = x + 3.5f;
             }
-            *(f32*) (ptr + 0x97C) = x;
-            *(f32*) (ptr + 0x980) = 9.0f * (f32) row;
+            grid->pos[i].x = x;
+            grid->pos[i].z = 9.0f * (f32) row;
         }
 
         col += 1;
@@ -621,31 +614,30 @@ void un_80319540(s32 arg0)
         }
 
         {
-            f32 px = *(f32*) (ptr + 0x97C);
+            f32 px = grid->pos[i].x;
             if (px < grid->x04_min_x) {
                 grid->x04_min_x = px;
             }
         }
         {
-            f32 px = *(f32*) (ptr + 0x97C);
+            f32 px = grid->pos[i].x;
             if (px > grid->x0C_max_x) {
                 grid->x0C_max_x = px;
             }
         }
         {
-            f32 pz = *(f32*) (ptr + 0x980);
+            f32 pz = grid->pos[i].z;
             if (pz < grid->x08_min_z) {
                 grid->x08_min_z = pz;
             }
         }
         {
-            f32 pz = *(f32*) (ptr + 0x980);
+            f32 pz = grid->pos[i].z;
             if (pz > grid->x10_max_z) {
                 grid->x10_max_z = pz;
             }
         }
 
-        ptr += 8;
         count = cfg->x08;
     }
 
@@ -667,15 +659,15 @@ void un_80319540(s32 arg0)
 
             pivot = 0;
             j = 0;
-            for (ptr = (u8*) &sort[1], n = 1; n2 >= n; n++, ptr += 8) {
-                if (*(s32*) (ptr + 4) > sort[0].val) {
+            for (n = 1; n2 >= n; n++) {
+                if (sort[n].val > sort[0].val) {
                     pivot += 1;
                     j += 8;
                     if (pivot != n) {
                         TySortElem* s = (TySortElem*) ((u8*) grid->sort + j);
                         tmp = *s;
-                        *s = *(TySortElem*) ptr;
-                        *(TySortElem*) ptr = tmp;
+                        *s = sort[n];
+                        sort[n] = tmp;
                     }
                 }
             }
@@ -692,7 +684,6 @@ void un_80319540(s32 arg0)
         }
     }
 
-    ptr = (u8*) grid;
     {
         s32 k;
         s32 off = 0;
@@ -700,25 +691,22 @@ void un_80319540(s32 arg0)
         for (k = 0; k < cfg->x08; k++) {
             HSD_GObj* gobj;
             HSD_JObj** jobjArr;
-            cfg->x78 = un_8031BC54(*(s32*) (ptr + 0x14));
+            cfg->x78 = un_8031BC54(grid->sort[0].key);
             gobj = cfg->x78;
             if (gobj != NULL) {
                 jobjArr = un_804D6F10;
-                *(HSD_JObj**) ((u8*) jobjArr + off) =
-                    (HSD_JObj*) gobj->hsd_obj;
+                jobjArr[k] = (HSD_JObj*) gobj->hsd_obj;
                 {
-                    f32 xpos = *(f32*) (ptr + 0x97C);
-                    HSD_JObj* jobj = *(HSD_JObj**) ((u8*) jobjArr + off);
+                    f32 xpos = grid->pos[k].x;
+                    HSD_JObj* jobj = jobjArr[k];
                     HSD_JObjSetTranslateX(jobj, xpos);
                 }
                 {
-                    f32 zpos = *(f32*) (ptr + 0x980);
-                    HSD_JObj* jobj = *(HSD_JObj**) ((u8*) jobjArr + off);
+                    f32 zpos = grid->pos[k].z;
+                    HSD_JObj* jobj = jobjArr[k];
                     HSD_JObjSetTranslateZ(jobj, zpos);
                 }
             }
-            ptr += 8;
-            off += 4;
         }
     }
 }
@@ -738,12 +726,10 @@ void un_80319994(s32 arg0)
     s32 pivot;
     s32 j;
     s32 n;
-    u8* ptr;
 
-    PAD_STACK(0x38);
+    PAD_STACK(0x30);
 
     memzero(grid, 0x12E4);
-    ptr = (u8*) grid;
     grid->x08_min_z = -3.5f;
     grid->x04_min_x = -3.5f;
     grid->x10_max_z = 3.5f;
@@ -751,14 +737,14 @@ void un_80319994(s32 arg0)
 
     for (i = 0; i < cfg->x08; i++) {
         if (i == 0) {
-            *(f32*) (ptr + 0x97C) = 0.0f;
-            *(f32*) (ptr + 0x980) = 0.0f;
+            grid->pos[i].x = 0.0f;
+            grid->pos[i].z = 0.0f;
         } else {
-            *(f32*) (ptr + 0x97C) = 9.0f * (f32) col + xoff;
+            grid->pos[i].x = 9.0f * (f32) col + xoff;
             if (arg0 != 0) {
-                *(f32*) (ptr + 0x980) = -9.0f * (f32) row;
+                grid->pos[i].z = -9.0f * (f32) row;
             } else {
-                *(f32*) (ptr + 0x980) = 9.0f * (f32) row;
+                grid->pos[i].z = 9.0f * (f32) row;
             }
         }
         col += 1;
@@ -769,30 +755,29 @@ void un_80319994(s32 arg0)
             ring += 1;
         }
         {
-            f32 x = *(f32*) (ptr + 0x97C);
+            f32 x = grid->pos[i].x;
             if (x < grid->x04_min_x) {
                 grid->x04_min_x = x;
             }
         }
         {
-            f32 x = *(f32*) (ptr + 0x97C);
+            f32 x = grid->pos[i].x;
             if (x > grid->x0C_max_x) {
                 grid->x0C_max_x = x;
             }
         }
         {
-            f32 z = *(f32*) (ptr + 0x980);
+            f32 z = grid->pos[i].z;
             if (z < grid->x08_min_z) {
                 grid->x08_min_z = z;
             }
         }
         {
-            f32 z = *(f32*) (ptr + 0x980);
+            f32 z = grid->pos[i].z;
             if (z > grid->x10_max_z) {
                 grid->x10_max_z = z;
             }
         }
-        ptr += 8;
     }
 
     count = cfg->x08;
@@ -811,15 +796,15 @@ void un_80319994(s32 arg0)
 
             pivot = 0;
             j = 0;
-            for (ptr = (u8*) &sort[1], n = 1; n2 >= n; n++, ptr += 8) {
-                if (*(f32*) (ptr + 4) < sort[0].val) {
+            for (n = 1; n2 >= n; n++) {
+                if (sort[n].val < sort[0].val) {
                     pivot += 1;
                     j += 8;
                     if (pivot != n) {
                         TySortElem* s = (TySortElem*) ((u8*) grid->pos + j);
                         tmp = *s;
-                        *s = *(TySortElem*) ptr;
-                        *(TySortElem*) ptr = tmp;
+                        *s = sort[n];
+                        sort[n] = tmp;
                     }
                 }
             }
@@ -854,15 +839,15 @@ void un_80319994(s32 arg0)
 
             pivot = 0;
             j = 0;
-            for (ptr = (u8*) &sort[1], n = 1; n2 >= n; n++, ptr += 8) {
-                if (*(s32*) (ptr + 4) > sort[0].val) {
+            for (n = 1; n2 >= n; n++) {
+                if (sort[n].val > sort[0].val) {
                     pivot += 1;
                     j += 8;
                     if (pivot != n) {
                         TySortElem* s = (TySortElem*) ((u8*) grid->sort + j);
                         tmp = *s;
-                        *s = *(TySortElem*) ptr;
-                        *(TySortElem*) ptr = tmp;
+                        *s = sort[n];
+                        sort[n] = tmp;
                     }
                 }
             }
@@ -879,7 +864,6 @@ void un_80319994(s32 arg0)
         }
     }
 
-    ptr = (u8*) grid;
     {
         s32 k;
         s32 off = 0;
@@ -887,24 +871,23 @@ void un_80319994(s32 arg0)
         for (k = 0; k < cfg->x08; k++) {
             HSD_GObj* gobj;
             HSD_JObj** jobjArr;
-            cfg->x78 = un_8031BC54(*(s32*) (ptr + 0x14));
+            cfg->x78 = un_8031BC54(grid->sort[0].key);
             gobj = cfg->x78;
             if (gobj != NULL) {
                 jobjArr = un_804D6F10;
                 *(HSD_JObj**) ((u8*) jobjArr + off) =
                     (HSD_JObj*) gobj->hsd_obj;
                 {
-                    f32 xpos = *(f32*) (ptr + 0x97C);
+                    f32 xpos = grid->pos[n].x;
                     HSD_JObj* jobj = *(HSD_JObj**) ((u8*) jobjArr + off);
                     HSD_JObjSetTranslateX(jobj, xpos);
                 }
                 {
-                    f32 zpos = *(f32*) (ptr + 0x980);
+                    f32 zpos = grid->pos[n].z;
                     HSD_JObj* jobj = *(HSD_JObj**) ((u8*) jobjArr + off);
                     HSD_JObjSetTranslateZ(jobj, zpos);
                 }
             }
-            ptr += 8;
             off += 4;
         }
     }
@@ -1737,9 +1720,9 @@ void un_8031B850(void)
     }
 
     if (un_804D6F2C != NULL) {
-        if (*(HSD_Archive**) (un_804A2DD0 + 0x14) != NULL) {
-            lbArchive_80016EFC(*(HSD_Archive**) (un_804A2DD0 + 0x14));
-            *(HSD_Archive**) (un_804A2DD0 + 0x14) = NULL;
+        if (un_804A2DD0.archive != NULL) {
+            lbArchive_80016EFC(un_804A2DD0.archive);
+            un_804A2DD0.archive = NULL;
         }
         HSD_GObjPLink_80390228(un_804D6F2C);
         un_804D6F2C = NULL;
@@ -1761,30 +1744,33 @@ void un_8031B9A4_OnFrame(void)
     }
 }
 
-void* un_8031B9DC(s32 id)
+TyDspEntry* un_8031B9DC(s32 id)
 {
-    s32* p;
+    TyDspEntry* p;
     s32 val;
     bool found = false;
 
     if (lbLang_IsSettingUS()) {
         p = un_804D6EAC;
-        while (val = *p, val != -1) {
+
+        while (val = p->x00, val != -1) {
             if (val == id) {
                 found = true;
                 break;
             }
-            p = (s32*) ((u8*) p + 0x10);
+            p++;
         }
     }
 
-    if (!found) {
+    if (found == 0) {
         p = un_804D6EB0;
-        while (val = *p, val != -1) {
+
+        while (val = p->x00, val != -1) {
             if (val == id) {
+                found = true;
                 break;
             }
-            p = (s32*) ((u8*) p + 0x10);
+            p++;
         }
     }
 
@@ -1803,7 +1789,7 @@ void un_8031BA78(s32 arg0, s32 arg1, f32 farg0)
     char buf[24];
     TyDspEntry* data;
 
-    data = (TyDspEntry*) un_8031B9DC(arg0);
+    data = un_8031B9DC(arg0);
     switch (arg1) {
     case 1:
         break;
@@ -1947,7 +1933,7 @@ HSD_GObj* un_8031BC54(s32 arg0)
     u8 cat;
     u32 c;
 
-    entry = (TyDspEntry*) un_8031B9DC(arg0);
+    entry = un_8031B9DC(arg0);
     gobj = GObj_Create(6, 7, 0);
     root = HSD_JObjAlloc();
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, root);
@@ -2074,14 +2060,14 @@ s32 tyDisplay_8031C2EC(void)
     return un_80305058(2, 0, 1, 60.0f);
 }
 
-s32 un_8031C354(s32 id, s32 (*buf)[], s32 max, s32 kind)
+s32 un_8031C354(s32 id, s32 buf[], s32 max, s32 kind)
 {
-    void* data;
-    void* other;
+    TyDspEntry* data;
+    TyDspEntry* other;
     s32 i;
     s32 count;
     s32 val;
-    PAD_STACK(2 * 4);
+    PAD_STACK(0x8);
 
     if (id == -1) {
         return 0;
@@ -2106,15 +2092,15 @@ s32 un_8031C354(s32 id, s32 (*buf)[], s32 max, s32 kind)
         }
         other = un_8031B9DC(i);
         val = (s32) un_803060BC(i, 6);
-        if (((u8*) other)[4] != ((u8*) data)[4]) {
+        if ((other->x04 != data->x04)) {
             continue;
         }
         if (val != kind) {
             continue;
         }
         count++;
-        (*buf)[0] = i;
-        buf = (s32(*)[])((u8*) buf + 4);
+        *buf = i;
+        buf++;
         if (count >= max) {
             break;
         }
@@ -2125,7 +2111,7 @@ s32 un_8031C354(s32 id, s32 (*buf)[], s32 max, s32 kind)
 
 s32 un_8031C454(s32 arg0)
 {
-    s32 temp2;
+    HSD_Archive* temp2;
     TyDspArchNames names1;
     TyDspArchNames names2;
     const TyDspNameTables* temp;
@@ -2133,7 +2119,7 @@ s32 un_8031C454(s32 arg0)
     TyDspEntry* entry;
     u8 idx;
     s32 result;
-    s32* archArr;
+    HSD_Archive** archArr;
     const TyDspNameTables* tables;
 
     PAD_STACK(0x4);
@@ -2147,40 +2133,40 @@ s32 un_8031C454(s32 arg0)
         return -1;
     }
 
-    entry = (TyDspEntry*) un_8031B9DC(arg0);
+    entry = un_8031B9DC(arg0);
     idx = entry->x04;
 
     temp = tables;
-    if ((u32) archArr[idx] == 0U) {
+    if (archArr[idx] == NULL) {
         idx = entry->x04;
         names1 = temp->arch_names;
         if ((s8) idx == -1) {
             idx = 0;
         }
         archArr[entry->x04] =
-            (s32) lbArchive_LoadSymbols(names1.entries[(s8) idx], NULL);
+            lbArchive_LoadSymbols(names1.entries[(s8) idx], NULL);
     } else {
         result = 1;
     }
 
-    if ((HSD_Archive*) archArr[42] == NULL) {
+    if (archArr[42] == NULL) {
         names2 = tables->arch_names;
-        archArr[42] = (s32) lbArchive_LoadSymbols(names2.entries[42], NULL);
+        archArr[42] = lbArchive_LoadSymbols(names2.entries[42], NULL);
     }
     temp2 = archArr[41];
-    if ((HSD_Archive*) temp2 == NULL) {
+    if (temp2 == NULL) {
         do {
             names3 = temp->arch_names;
-            archArr[41] = (s32) lbArchive_LoadSymbols(names3.entries[41], 0L);
+            archArr[41] = lbArchive_LoadSymbols(names3.entries[41], 0L);
         } while (entry->x04 * 0);
     }
 
     return result;
 }
 
-inline void* un_8031C5E4_inline(s32* arg0, u8 arg1, const char* arg2)
+inline void* un_8031C5E4_inline(HSD_Archive** arg0, u8 arg1, const char* arg2)
 {
-    return HSD_ArchiveGetPublicAddress((HSD_Archive*) arg0[arg1], arg2);
+    return HSD_ArchiveGetPublicAddress(arg0[arg1], arg2);
 }
 
 HSD_JObj* un_8031C5E4(s32 arg0)
@@ -2198,11 +2184,11 @@ HSD_JObj* un_8031C5E4(s32 arg0)
     u8 cat;
     const TyDspNameTables* tables = &un_803B8988;
 
-    s32* archives = un_804A2DE8;
+    HSD_Archive** archives = un_804A2DE8;
     u8 _3[4];
 
-    entry = (TyDspEntry*) un_8031B9DC(arg0);
-    if ((u32) archives[entry->x04] == 0U) {
+    entry = un_8031B9DC(arg0);
+    if (archives[entry->x04] == NULL) {
         return NULL;
     }
 
@@ -2228,8 +2214,7 @@ HSD_JObj* un_8031C5E4(s32 arg0)
             cat = 0;
         }
         temp = (char*) matanim_names1.entries[(s8) cat];
-        un_80306A48(child, NULL, (char*) temp, NULL,
-                    (HSD_Archive*) archives[c], entry->x05);
+        un_80306A48(child, NULL, (char*) temp, NULL, archives[c], entry->x05);
     }
     HSD_JObjRemoveAnimAll(child);
     HSD_JObjSetTranslateX(child, entry->x08);
@@ -2251,6 +2236,6 @@ void un_8031C8B8(void)
     s32 i;
 
     for (i = 0; 0x2B > i; i++) {
-        un_804A2DE8[i] = 0;
+        un_804A2DE8[i] = NULL;
     }
 }

@@ -4,6 +4,8 @@
 #include <placeholder.h>
 #include <platform.h>
 
+#include <ty/types.h>
+
 struct HSD_GObj;
 struct HSD_JObj;
 
@@ -27,7 +29,7 @@ typedef struct TySortElem {
 /* 31B460 */ void un_8031B460_OnEnter(void*);
 /* 31B850 */ void un_8031B850(void);
 /* 31B9A4 */ void un_8031B9A4_OnFrame(void);
-/* 31B9DC */ void* un_8031B9DC(s32 id);
+/* 31B9DC */ TyDspEntry* un_8031B9DC(s32 id);
 /* 31BA78 */ void un_8031BA78(s32, s32, f32);
 /* 31BB34 */ s32 un_8031BB34(s8);
 /* 31BB94 */ char* un_8031BB94(s8);
@@ -37,7 +39,7 @@ typedef struct TySortElem {
 /* 31C1D0 */ void un_8031C1D0(void);
 /* 31C2CC */ void tyDisplay_8031C2CC(void);
 /* 31C2EC */ s32 tyDisplay_8031C2EC(void);
-/* 31C354 */ s32 un_8031C354(s32, s32 (*)[], s32, s32);
+/* 31C354 */ s32 un_8031C354(s32, s32*, s32, s32);
 /* 31C454 */ s32 un_8031C454(s32 arg0);
 /* 31C5E4 */ struct HSD_JObj* un_8031C5E4(s32);
 /* 31C8B8 */ void un_8031C8B8(void);
