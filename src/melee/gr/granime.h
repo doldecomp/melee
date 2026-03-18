@@ -5,6 +5,9 @@
 #include <melee/gr/forward.h>
 
 /* 1C65B0 */ void grAnime_801C65B0(UnkArchiveStruct*);
+/* 1C6C0C */ void grAnime_801C6C0C(HSD_JObj*, HSD_AnimJoint*,
+                                   HSD_MatAnimJoint*,
+                                   HSD_ShapeAnimJoint*);
 /* 1C752C */ void grAnime_801C752C(HSD_JObj*, ...);
 /* 1C775C */ void grAnime_801C775C(HSD_GObj*, int, u32, f32, f32);
 /* 1C77FC */ void grAnime_801C77FC(HSD_GObj*, int, u32);

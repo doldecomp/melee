@@ -31,10 +31,10 @@
                                           HSD_AnimJoint* animjoint,
                                           HSD_MatAnimJoint* matanimjoint,
                                           HSD_ShapeAnimJoint* shapeanimjoint);
-/* 1C6C0C */ static void grAnime_801C6C0C(HSD_JObj* jobj,
-                                          HSD_AnimJoint* animjoint,
-                                          HSD_MatAnimJoint* matanimjoint,
-                                          HSD_ShapeAnimJoint* shapeanimjoint);
+/* 1C6C0C */ void grAnime_801C6C0C(HSD_JObj* jobj,
+                                   HSD_AnimJoint* animjoint,
+                                   HSD_MatAnimJoint* matanimjoint,
+                                   HSD_ShapeAnimJoint* shapeanimjoint);
 /* 1C6EE4 */ static void fn_801C6EE4(HSD_AObj* aobj);
 /* 1C6F2C */ static void fn_801C6F2C(HSD_AObj* aobj);
 /* 1C6F50 */ static void grAnime_801C6F50(HSD_AObj* aobj, void* obj, u32 flags,
