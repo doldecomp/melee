@@ -954,16 +954,17 @@ void fn_80021B04(HSD_GObj* gobj)
     int color;
     f32 scale;
 
-    PAD_STACK(8);
+    PAD_STACK(4);
 
     fn_80021C80(gobj);
     if (data->x4.x7C_color_enable) {
         u8* bytes = (u8*) &color;
         scale = lbl_804D63D8;
         bytes[0] = (u8) ((f32) data->x4.x2C_hex.r * scale);
-        bytes[1] = (u8) ((f32) data->x4.x2C_hex.g * scale);
-        bytes[2] = (u8) ((f32) data->x4.x2C_hex.b * scale);
-        bytes[3] = (data->x4.x2C_hex.a * data->x0) / 255;
+        // This is bytes[1] to bytes[3]
+        ((u8*) (&color))[1] = (u8) (((f32) data->x4.x2C_hex.g) * scale);
+        ((u8*) (&color))[2] = (u8) (((f32) data->x4.x2C_hex.b) * scale);
+        ((u8*) (&color))[3] = (data->x4.x2C_hex.a * data->x0) / 255;
         lbBgFlash_InitState(&color);
         return;
     }
