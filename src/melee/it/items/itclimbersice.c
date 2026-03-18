@@ -157,7 +157,34 @@ void itClimbersice_UnkMotion2_Phys(Item_GObj* gobj)
     }
 }
 
-/// #itClimbersice_UnkMotion2_Coll
+bool itClimbersice_UnkMotion2_Coll(Item_GObj* gobj)
+{
+    Item* ip;
+    itClimbersIceAttributes* sa;
+
+    it_8026D62C(gobj, (HSD_GObjEvent) fn_802C1D44);
+    it_80276CB8(gobj);
+
+    ip = GET_ITEM(gobj);
+    sa = ip->xC4_article_data->x4_specialAttributes;
+
+    if (it_80276308(gobj) != 0) {
+        f32 vel_x = ip->x40_vel.x;
+        if (vel_x < 0.0f) {
+            vel_x = -vel_x;
+        }
+        if (vel_x <= sa->xC) {
+            it_8027770C(gobj);
+            it_80272980(gobj);
+            ip = GET_ITEM(gobj);
+            sa = ip->xC4_article_data->x4_specialAttributes;
+            ip->xD44_lifeTimer -= sa->x4;
+        } else {
+            return true;
+        }
+    }
+    return false;
+}
 
 void fn_802C1D44(Item_GObj* gobj)
 {
