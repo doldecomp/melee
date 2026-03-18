@@ -22,7 +22,7 @@ typedef struct MnName_GObj {
 /* 2375EC */ bool IsNameListFull(void);
 /* 237654 */ s32 CompareNameStrings(char* str, s32 slot);
 /* 2377A4 */ void fn_802377A4(void);
-/* 2377A8 */ UNK_RET IsNameUnique(UNK_PARAMS);
+/* 2377A8 */ bool IsNameUnique(s32 slot);
 /* 237834 */ UNK_RET DeleteName(UNK_PARAMS);
 /* 2379BC */ bool IsNameValid(int slot);
 /* 237A04 */ void CreateNameAtIndex(s32 slot);
