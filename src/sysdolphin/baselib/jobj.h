@@ -302,7 +302,6 @@ static inline void HSD_JObjSetRotationZ(HSD_JObj* jobj, f32 z)
 static inline void HSD_JObjGetRotation(HSD_JObj* jobj, Quaternion* quat)
 {
     HSD_ASSERT(699, jobj);
-    HSD_ASSERT(700, quat);
     *quat = jobj->rotate;
 }
 

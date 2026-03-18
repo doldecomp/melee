@@ -422,7 +422,8 @@ void fn_800208B0(u8 arg0)
     data->xC = 0;
     data->xF = arg0;
 }
-
+#pragma push
+#pragma dont_inline on
 void lbBgFlash_800208EC(int arg0)
 {
     BgFlashData2* flash = (BgFlashData2*) &lbl_80433658;
@@ -443,7 +444,7 @@ void lbBgFlash_800208EC(int arg0)
     lbl_80433658.state.active = 1;
     lbl_80433658.state.mode = 0;
 }
-
+#pragma pop
 
 void lbBgFlash_800209F4(void)
 {
