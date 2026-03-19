@@ -66,10 +66,11 @@ static struct {
     u8 xF0;    ///< right char amt
     u8 xF1[3]; ///< left char ids
     u8 xF4[3]; ///< right char ids
-    u8 pad_F7;
-    int xF8;
-    int xFC;
-    int x100;
+    u8 xF7[3]; ///< left costumes
+    u8 xFA[3]; ///< right costumes
+    u8 xFD[3]; ///< left metal flags
+    u8 x100[3]; ///< right metal flags
+    u8 pad_103;
     u8 pad_104[0x54];
 } lbl_804735E8;
 
@@ -139,7 +140,81 @@ void fn_80184A94(HSD_GObj* gobj)
 
 /// #fn_8018504C
 
-/// #fn_801851C0
+static f32 lbl_803D9248[] = {
+    0.6f, 0.35f, 0.6f, 0.5f, 0.6f, 0.35f, 0.6f, 0.6f, 0.7f, 0.6f,
+    0.5f, 0.6f, 0.6f, 0.6f, 0.5f, 0.5f, 0.6f, 0.5f, 0.6f, 0.6f,
+    0.5f, 0.6f, 0.6f, 0.6f, 0.6f, 0.5f, 0.5f, 0.5f,
+    0.0f, -6.0f, 0.0f,
+    0.0f, -3.5f, 0.0f,
+    -1.0f, -3.5f, 0.0f,
+    0.0f, -3.5f, 0.0f,
+    0.0f, -1.0f, 0.0f,
+    0.0f, -3.0f, 0.0f,
+    0.0f, -5.0f, 0.0f,
+    0.0f, -3.5f, 0.0f,
+    0.0f, -3.5f, 0.0f,
+    0.0f, -3.5f, 0.0f,
+    0.0f, -3.0f, 0.0f,
+    -0.5f, -3.5f, 0.0f,
+    -2.0f, -6.0f, 0.0f,
+    0.0f, -2.5f, 0.0f,
+    0.0f, -2.5f, 0.0f,
+    -1.0f, -1.0f, 0.0f,
+    0.0f, -5.0f, 0.0f,
+    0.0f, -3.0f, 0.0f,
+    -1.0f, -6.0f, 0.0f,
+    -1.0f, -2.5f, 0.0f,
+    -1.0f, -3.5f, 0.0f,
+    0.0f, -3.5f, 0.0f,
+    0.0f, -4.0f, 0.0f,
+    -1.0f, -3.5f, 0.0f,
+    0.0f, -1.5f, 0.0f,
+    0.0f, -4.5f, 0.0f,
+    0.0f, -3.5f, 0.0f,
+    0.0f, -3.5f, 0.0f,
+    3.0f, 4.0f, -5.0f,
+};
+
+typedef struct ClassicCharData {
+    f32 scale[28];
+    Vec3 offset[28];
+    Vec3 samus_extra;
+} ClassicCharData;
+
+s32 fn_801851C0(void)
+{
+    volatile u8 pad_stack[8];
+    Vec3 pos;
+    s32 result;
+    s32 i;
+    (void) pad_stack;
+
+    i = 0;
+    while (i < (s32) lbl_804735E8.xE0) {
+        ClassicCharData* data = (ClassicCharData*) lbl_803D9248;
+        result = i + 1;
+        Player_SetPlayerCharacter(result,
+            (CharacterKind) lbl_804735E8.xF4[0]);
+        Player_SetPlayerId(result, 0);
+        Player_SetSlottype(result, Gm_PKind_Demo);
+        Player_SetFacingDirection(result, 0.0f);
+        Player_SetCostumeId(result, i);
+        pos = data->offset[lbl_804735E8.xF4[0]];
+        Player_80032768(result, &pos);
+        if ((u8) lbl_804735E8.xF4[0] == 0xE) {
+            pos.x += data->samus_extra.x;
+            pos.y += data->samus_extra.y;
+            pos.z += data->samus_extra.z;
+            Player_80032828(result, 1, &pos);
+        }
+        Player_SetModelScale(result,
+            data->scale[lbl_804735E8.xF4[0]]);
+        Player_SetFlagsBit5(result, lbl_804735E8.x100[0]);
+        Player_80037054(result, 6);
+        i++;
+    }
+    return result;
+}
 
 void fn_801852FC(HSD_GObj* gobj)
 {
