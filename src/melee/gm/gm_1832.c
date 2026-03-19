@@ -1309,6 +1309,90 @@ void fn_80188D3C(HSD_JObj* arg0)
 }
 
 /// #fn_80188EE8
+void fn_80188EE8(HSD_GObj* gobj)
+{
+    u8* base = (u8*) lbl_80473700 + 0x114;
+    HSD_JObj* jobj;
+    s32 val;
+
+    PAD_STACK(16);
+
+    if (gm_801A45E8(2) != 0) {
+        HSD_SisLib_803A6368(*(HSD_Text**) &base[0x1FC], 0x1E);
+        HSD_JObjSetFlagsAll(*(HSD_JObj**) &base[0xB4], 0x10);
+    } else {
+        HSD_JObjClearFlagsAll(*(HSD_JObj**) &base[0xB4], 0x10);
+    }
+
+    {
+        u32 counter = *(u32*) &base[0x19C];
+        if (counter < 10 || (counter >= 20 && counter < 30)) {
+            *(u32*) &base[0x19C] = counter + 1;
+            *(u32*) &base[0x148] = *(u32*) &base[0x19C];
+        }
+    }
+
+    HSD_JObjReqAnimAll(*(HSD_JObj**) &base[0x100], (f32) *(s32*) &base[0x19C]);
+    HSD_JObjAnimAll(*(HSD_JObj**) &base[0x100]);
+    HSD_JObjReqAnimAll(*(HSD_JObj**) &base[0xAC], (f32) *(s32*) &base[0x148]);
+    HSD_JObjAnimAll(*(HSD_JObj**) &base[0xAC]);
+
+    jobj = *(HSD_JObj**) &base[0xAC];
+    if (jobj == NULL) {
+        __assert("jobj.h", 0x3E1, "jobj");
+    }
+    (*(HSD_Text**) &base[0x1FC])->pos_x =
+        (12.0f * (9.798828f + jobj->translate.x)) + 50.0f;
+    (*(HSD_Text**) &base[0x1FC])->pos_y = 150.0f;
+
+    fn_80188738(*(HSD_JObj**) &base[0xCC]);
+    fn_80188910(*(HSD_JObj**) &base[0xBC]);
+    fn_80188B3C(*(HSD_JObj**) &base[0xF4]);
+
+    jobj = *(HSD_JObj**) &base[0xD8];
+    HSD_JObjReqAnimAll(jobj, (f32) base[3]);
+    HSD_JObjAnimAll(jobj);
+
+    jobj = *(HSD_JObj**) &base[0xDC];
+    HSD_JObjReqAnimAll(jobj, (f32) *(s32*) &((u8*) lbl_80473700)[0x2F4]);
+    HSD_JObjAnimAll(jobj);
+
+    jobj = *(HSD_JObj**) &base[0x104];
+    HSD_JObjReqAnimAll(jobj, (f32) base[0]);
+    HSD_JObjAnimAll(jobj);
+
+    jobj = *(HSD_JObj**) &base[0x130];
+    HSD_JObjReqAnimAll(jobj, (f32) *(s32*) &((u8*) lbl_80473700)[0x2F4]);
+    HSD_JObjAnimAll(jobj);
+
+    val = lbl_80473700[190];
+    if (lbLang_IsSettingUS() != 0 && val == 0x13) {
+        HSD_SisLib_803A6368(*(HSD_Text**) &base[0x1FC], 0x17);
+    } else {
+        HSD_SisLib_803A6368(*(HSD_Text**) &base[0x1FC],
+            (s32) *(s16*) &lbl_803D9828[val * 4 + 2]);
+    }
+
+    jobj = *(HSD_JObj**) &base[0x128];
+    HSD_JObjReqAnimAll(jobj, (f32) (lbl_80473700[191] + 1));
+    HSD_JObjAnimAll(jobj);
+
+    jobj = *(HSD_JObj**) &base[0x124];
+    HSD_JObjReqAnimAll(jobj, (f32) lbl_80473700[192]);
+    HSD_JObjAnimAll(jobj);
+
+    fn_80188D3C(*(HSD_JObj**) &base[0x114]);
+
+    HSD_JObjSetFlags(*(HSD_JObj**) &base[0x10C], 0x10);
+
+    val = lbl_80473700[195];
+    jobj = *(HSD_JObj**) &base[0x110];
+    if (val == 2 && lbl_80473700[1] == 3) {
+        val = 3;
+    }
+    HSD_JObjReqAnimAll(jobj, (f32) val);
+    HSD_JObjAnimAll(jobj);
+}
 
 /// #fn_801891F4
 

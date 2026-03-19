@@ -60,7 +60,7 @@
 /* 188910 */ void fn_80188910(HSD_JObj*);
 /* 188B3C */ void fn_80188B3C(HSD_JObj*);
 /* 188D3C */ void fn_80188D3C(HSD_JObj*);
-/* 188EE8 */ UNK_RET fn_80188EE8(UNK_PARAMS);
+/* 188EE8 */ void fn_80188EE8(HSD_GObj*);
 /* 1891F4 */ UNK_RET fn_801891F4(UNK_PARAMS);
 /* 189B88 */ s32 fn_80189B88(void);
 /* 189CDC */ s32 gm_80189CDC(StartMeleeData*);
