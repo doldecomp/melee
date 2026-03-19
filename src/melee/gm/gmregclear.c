@@ -1082,7 +1082,32 @@ int fn_8017F008(void)
     }
 }
 
-/// #fn_8017F09C
+s32 fn_8017F09C(void)
+{
+    struct lbl_80472D28_t* data = &lbl_80472D28;
+    lbl_8046B6A0_t* p = gm_8016AE38();
+    if (p->x24C8.x4_6) {
+        lbl_8046B6A0_t* p2 = gm_8016AE38();
+        int flag;
+        if (data->x118 != 0 ||
+            (data->x11A != 0 && data->x11B == 0) ||
+            p2->x24C8.x0_7)
+        {
+            flag = 0;
+        } else {
+            flag = 1;
+        }
+        if (flag != 0) {
+            s32 product = p->timer_seconds * data->x108;
+            s32 ret = product;
+            if (product < 0) {
+                ret = 0;
+            }
+            return ret;
+        }
+    }
+    return 0;
+}
 
 typedef struct fn_8017F14C_arg {
     /* 0x00 */ char pad_0[0x98];
