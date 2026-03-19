@@ -23,6 +23,7 @@
 #include <melee/ft/ftlib.h>
 #include <melee/gm/gm_1A3F.h>
 #include <melee/gm/gm_1A45.h>
+#include <melee/gm/gm_1601.h>
 #include <melee/gm/types.h>
 #include <melee/gr/ground.h>
 #include <melee/gr/grpushon.h>
@@ -79,6 +80,8 @@ static HSD_Archive* lbl_804D65F4;
 extern int lbl_804D6608;
 extern s32 lbl_803B7C40[];
 extern s32 lbl_803B7C28[];
+
+extern DynamicModelDesc** lbl_804D662C;
 
 typedef struct { s32 v[6]; } ClassicProcArray;
 
@@ -961,7 +964,49 @@ void fn_80188644(void)
 
 /// #fn_801891F4
 
-/// #fn_80189B88
+s32 fn_80189B88(void)
+{
+    HSD_GObj* gobj;
+    HSD_JObj* jobj;
+    u8* sub;
+    u8* ptr;
+    int i;
+    PAD_STACK(8);
+
+    sub = (u8*) lbl_80473700 + 0x114;
+    sub[0] = 0;
+    sub[1] = 0;
+    HSD_GObj_SetupProc(GObj_Create(0xE, 2, 0),
+                       (HSD_GObjEvent) fn_801891F4, 0x15);
+    gobj = GObj_Create(0xE, 0xF, 0);
+    jobj = HSD_JObjLoadJoint((*lbl_804D662C)->joint);
+    *(HSD_GObj**) &sub[0xA4] = gobj;
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+    GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0xB, 0);
+    HSD_GObj_SetupProc(gobj, (HSD_GObjEvent) fn_80188EE8, 0x11);
+    gm_8016895C(jobj, *lbl_804D662C, 0);
+    HSD_JObjReqAnimAll(jobj, 0.0f);
+    HSD_JObjAnimAll(jobj);
+    i = 0;
+    ptr = sub;
+    do {
+        *(int*) &ptr[0x144] = 0;
+        lb_80011E24(jobj, (HSD_JObj**) &ptr[0xA8], i, -1);
+        i++;
+        ptr += 4;
+    } while (i < 0x27);
+    *(int*) &sub[0x19C] = 0x1E;
+    *(int*) &sub[0x148] = 0x1E;
+    *(int*) &sub[0x1E0] = 0;
+    *(int*) &sub[0x1E4] = 0;
+    *(int*) &sub[0x1E8] = 0;
+    *(int*) &sub[0x1EC] = 0;
+    *(int*) &sub[0x1F0] = 0;
+    *(int*) &sub[0x1F4] = 0;
+    *(int*) &sub[0x1F8] = 0;
+    *(int*) &sub[0x1E0] = 2;
+    return 0;
+}
 
 /// #gm_80189CDC
 
