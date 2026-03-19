@@ -26,6 +26,7 @@
 #include <melee/gr/ground.h>
 #include <melee/gr/grpushon.h>
 #include <melee/gr/stage.h>
+#include <melee/if/ifstatus.h>
 #include <melee/it/item.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lb_00F9.h>
@@ -626,7 +627,7 @@ bool gm_8018841C(void)
     return false;
 }
 
-static int lbl_80473700[69];
+static int lbl_80473700[200];
 
 int gm_80188454(int idx)
 {
@@ -722,7 +723,50 @@ void fn_80188550(int arg0)
     }
 }
 
-/// #fn_80188644
+void fn_80188644(void)
+{
+    Vec3 sp10;
+    u8* ptr;
+    int saved_count;
+    int i;
+
+    PAD_STACK(8);
+
+    saved_count = lbl_80473700[0];
+    lbl_80473700[0] = 1;
+    Player_SetFacingDirection(0, 1.0f);
+    Player_SetHUDDamage(0, 0);
+    Stage_80224E64(0, &sp10);
+    Player_800328D4(0, &sp10);
+    ifStatus_802F6508(0);
+
+    ptr = (u8*) lbl_80473700;
+    i = 0;
+    do {
+        if (i != 0 && i <= saved_count) {
+            fn_8016EF98(i);
+            if (i == 1) {
+                if (i != 0) {
+                    ptr[0x75] = 1;
+                } else {
+                    ptr[0x75] = 0;
+                }
+                gm_8016EDDC(i, (PlayerInitData*) (ptr + 0x74));
+            }
+        }
+        i++;
+        ptr += 0x24;
+    } while (i < 4);
+
+    lbl_80473700[189] = 0;
+    lbl_80473700[190] = 0;
+    lbl_80473700[191] = 0;
+    lbl_80473700[192] = 0;
+    lbl_80473700[193] = 0;
+    lbl_80473700[194] = 0;
+    lbl_80473700[195] = 0;
+    lbl_80473700[189] = 2;
+}
 
 /// #fn_80188738
 
