@@ -28,6 +28,8 @@
 #include <melee/gm/gm_1601.h>
 #include <melee/gm/gm_1A36.h>
 #include <melee/gm/types.h>
+
+#include "gm_1B03.static.h"
 #include <melee/gr/ground.h>
 #include <melee/gr/grpushon.h>
 #include <melee/gr/stage.h>
@@ -1038,6 +1040,38 @@ void fn_80188644(void)
 /// #fn_80188B3C
 
 /// #fn_80188D3C
+void fn_80188D3C(HSD_JObj* arg0)
+{
+    HSD_JObj* jobjs[3];
+    int i;
+    int val;
+    int hundreds;
+
+    val = gm_80473814.x144[0x19];
+
+    jobjs[2] = (arg0 == NULL) ? NULL : arg0->child;
+    jobjs[1] = (jobjs[2] == NULL) ? NULL : jobjs[2]->next;
+    jobjs[0] = (jobjs[1] == NULL) ? NULL : jobjs[1]->next;
+
+    hundreds = val / 100;
+    if (hundreds != 0) {
+        HSD_JObjReqAnimAll(jobjs[0], (f32) hundreds);
+    } else {
+        HSD_JObjReqAnimAll(jobjs[0], 10.0f);
+    }
+
+    if ((val / 10) != 0) {
+        HSD_JObjReqAnimAll(jobjs[1], (f32) ((val - (hundreds * 100)) / 10));
+    } else {
+        HSD_JObjReqAnimAll(jobjs[1], 10.0f);
+    }
+
+    HSD_JObjReqAnimAll(jobjs[2], (f32) (val % 10));
+
+    for (i = 0; i < 3; i++) {
+        HSD_JObjAnimAll(jobjs[i]);
+    }
+}
 
 /// #fn_80188EE8
 
