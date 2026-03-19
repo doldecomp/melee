@@ -61,18 +61,18 @@ typedef struct _ftSamusAttributes {
     /* +80 */ float x80;
     /* +84 */ ftCollisionBox height_attributes;
     /* +9C */ UNK_T x9C;
-    /* +A0 */ UNK_T xA0;
+    /* +A0 */ s32 xA0;
     /* +A4 */ UNK_T xA4;
     /* +A8 */ UNK_T xA8;
     /* +AC */ UNK_T xAC;
-    /* +B0 */ UNK_T xB0;
+    /* +B0 */ s32 xB0;
     /* +B4 */ UNK_T xB4;
     /* +B8 */ UNK_T xB8;
     /* +BC */ int xBC;
     /* +C0 */ int xC0;
     /* +C4 */ int xC4;
     /* +C8 */ int xC8;
-    /* +CC */ UNK_T xCC;
+    /* +CC */ f32 xCC;
     /* +D0 */ UNK_T xD0;
 } ftSs_DatAttrs;
 
@@ -113,6 +113,11 @@ union ftSamus_MotionVars {
     struct ftSamus_State6Vars {
         s32 x0;
     } unk6;
+
+    /// @todo Proper state name.
+    struct ftSamus_State7Vars {
+        f32 x0;
+    } unk7;
 };
 
 #endif
