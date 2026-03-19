@@ -29,6 +29,7 @@
 #include <melee/gr/grpushon.h>
 #include <melee/gr/stage.h>
 #include <melee/if/ifstatus.h>
+#include <melee/if/ifall.h>
 #include <melee/it/item.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lb_00F9.h>
@@ -82,6 +83,8 @@ extern s32 lbl_803B7C40[];
 extern s32 lbl_803B7C28[];
 
 extern DynamicModelDesc** lbl_804D662C;
+extern HSD_Archive* lbl_804D6628;
+extern u8 lbl_803D9828[];
 
 typedef struct { s32 v[6]; } ClassicProcArray;
 
@@ -1010,7 +1013,45 @@ s32 fn_80189B88(void)
 
 /// #gm_80189CDC
 
-/// #fn_8018A000
+s32 fn_8018A000(void)
+{
+    u8* base;
+    u8* data;
+    HSD_JObj* jobj;
+    HSD_Text* text;
+
+    PAD_STACK(24);
+    base = (u8*) lbl_80473700;
+    data = lbl_803D9828;
+    memzero(&base[0x104], 0x10);
+    lbl_804D6628 = lbArchive_80016DBC("GmTrain",
+        &lbl_804D662C, &data[0xA0], 0);
+    fn_80189B88();
+    ifAll_802F3404();
+    HSD_SisLib_803A611C(0, NULL, 9, 0x14, 0, 0xE, 0, 0x12);
+    if (lbLang_IsSavedLanguageUS()) {
+        HSD_SisLib_803A62A0(0, (char*) &data[0xBC],
+                            (char*) &data[0xC8]);
+    } else {
+        HSD_SisLib_803A62A0(0, (char*) &data[0xDC],
+                            (char*) &data[0xC8]);
+    }
+    jobj = *(HSD_JObj**) &base[0x1C0];
+    if (jobj == NULL) {
+        __assert("jobj.h", 0x3E1, "jobj");
+    }
+    *(HSD_Text**) &base[0x310] = HSD_SisLib_803A5ACC(
+        0, 0, (12.0f * (jobj->translate.x + 9.798828f)) + 50.0f,
+        150.0f, 0.1f, 167.0f, 16.0f);
+    text = *(HSD_Text**) &base[0x310];
+    lbLang_IsSettingUS();
+    HSD_SisLib_803A6368(text, (s32) *(s16*) &data[2]);
+    (*(HSD_Text**) &base[0x310])->default_fitting = 1;
+    (*(HSD_Text**) &base[0x310])->x34.x = 0.7f;
+    (*(HSD_Text**) &base[0x310])->x34.y = 0.6f;
+    (*(HSD_Text**) &base[0x310])->default_alignment = 2;
+    return (s32) *(HSD_Text**) &base[0x310];
+}
 
 u8 gm_8018A160(u8 difficulty, u8 stage_slot)
 {

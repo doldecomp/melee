@@ -64,7 +64,7 @@
 /* 1891F4 */ UNK_RET fn_801891F4(UNK_PARAMS);
 /* 189B88 */ s32 fn_80189B88(void);
 /* 189CDC */ UNK_RET gm_80189CDC(StartMeleeData*);
-/* 18A000 */ UNK_RET fn_8018A000(UNK_PARAMS);
+/* 18A000 */ s32 fn_8018A000(void);
 /* 18A160 */ u8 gm_8018A160(u8, u8);
 /* 18A188 */ f32 gm_8018A188(u8, u8);
 /* 18A1D8 */ f32 gm_8018A1D8(u8, u8);
