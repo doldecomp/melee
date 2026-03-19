@@ -5,6 +5,7 @@
 
 #include "lb/lb_00B0.h"
 
+#include <baselib/debug.h>
 #include <baselib/memory.h>
 
 /* 3B73E8 */ mpIsland_Palette mpIsland_TerrainPalette = { {
@@ -30,6 +31,7 @@
     { -1, { 0x00, 0x00, 0x00, 0x00 } },
 } };
 
+/* 4D8158 */ static float mpIsland_804D8158;
 /* 458E88 */ struct mpIsland_80458E88_t mpIsland_80458E88;
 
 void mpIsland_8005A6F8(void)
@@ -47,209 +49,164 @@ void mpIsland_8005A6F8(void)
 
 void mpIsland_8005A728(void)
 {
-    short* v0;    // r27
-    CollLine* v1; // r28
-    CollVtx* v2;  // r3
-    // unk *test;
-    int v3;                // r29
-    unsigned char* result; // r3
-    int v5;                // r21
-    int* v6;               // r19
-    int v7;                // r20
-    float v8;              // fp31
-    int v9;                // r18
-    void* v10;             // r3
-    void* v11;             // r25
-    int v12;               // r0
-    int v13;               // r5
-    int v14;               // r3
-    int* v15;              // r6
-    int v16;               // r5
-    int v17;               // r3
-    int v18;               // ctr
-    mpisland* v19;         // r24
-    int v20;               // r26
-    int v21;               // r27
-    float v22;             // fp31
-    s32* v22_2;
-    int* v23; // r19
-    s32* v24_2;
-    mpisland* v24;           // r3
-    mpisland* v25;           // r25
-    int v26;                 // r4
-    int v27;                 // r0
-    int v28;                 // r6
-    int* v29;                // r5
-    int v30;                 // r4
-    int v31;                 // r3
-    int v32;                 // ctr
-    unsigned char v33[1524]; // [sp+18h] [-648h] BYREF
+    MapCollData* map;
+    CollLine* lines;
+    CollVtx* vtx;
+    mp_UnkStruct0* mpisp;
+    mp_UnkStruct0* prev;
+    int count;
+    int line_idx;
+    int end_idx;
+    int hidden;
+    s16 next;
+    float z_val;
+    int i;
+    u8 visited[0x600];
+    PAD_STACK(24);
 
-    v0 = (short*) mpLib_8004D164();
-    v1 = mpGetGroundCollLine();
-    v2 = mpGetGroundCollVtx();
-    v23 = (int*) &mpIsland_80458E88.x4;
-    v24_2 = (s32*) &mpIsland_80458E88.x8;
-    v22_2 = (s32*) &mpIsland_80458E88.xC;
+    map = mpLib_8004D164();
+    lines = mpGetGroundCollLine();
+    vtx = mpGetGroundCollVtx();
     mpIsland_8005A6F8();
 
-    memzero(v33, 0x600u);
-    v5 = v0[9];
-    v6 = 0;
-    if (v0[9]) {
-        v7 = v0[8];
-        v8 = 0.0f;
-        v9 = v7;
-        while (v5) {
-            v10 = HSD_MemAlloc(0x2C);
-            v11 = v10;
-            if (!v10) {
-                __assert(__FILE__, 62, "mpisp");
-            }
-            if (v6) {
-                v6 = v10;
+    memzero(visited, 0x600u);
+
+    /* Process floor segments */
+    count = map->floor_count;
+    prev = NULL;
+    if (count) {
+        line_idx = map->floor_start;
+        z_val = mpIsland_804D8158;
+        while (count != 0) {
+            mpisp = HSD_MemAlloc(0x2C);
+            HSD_ASSERT(62, mpisp);
+            if (prev) {
+                prev->next = mpisp;
             } else {
-                mpIsland_80458E88.next = v10;
+                mpIsland_80458E88.next = mpisp;
             }
-            v6 = (int*) v10;
-            v12 = v7;
-            v13 = v7 == 0;
-            v14 = 0;
-            while (v7 != v13) {
-                v33[v12] = 1;
-                v15 = (int*) (v1 + 8 * v12);
-                v16 = v15[1];
-                if ((v16 & 0x10000) == 0 || (v16 & 0x40000) != 0) {
-                    v14 = 1;
+            prev = mpisp;
+            end_idx = line_idx;
+            hidden = 0;
+            while (true) {
+                visited[end_idx] = 1;
+                if (!(lines[end_idx].flags & LINE_FLAG_ENABLED) ||
+                    (lines[end_idx].flags & LINE_FLAG_HIDDEN))
+                {
+                    hidden = 1;
                 }
-                v13 = *(short*) (*v15 + 6);
-                if (v13 == -1 ||
-                    (*(unsigned short*) (*(int*) (v1 + 8 * v13) + 0xC) & 1) ==
-                        0)
+                next = lines[end_idx].x0->next_id0;
+                if (next == -1 || !(lines[next].x0->hi_flags & CollLine_Floor))
                 {
                     break;
                 }
-                v12 = *(short*) (*v15 + 6);
+                end_idx = next;
+                if (line_idx == end_idx) {
+                    break;
+                }
             }
-            if (v14) {
-                v17 = 2;
-            } else {
-                v17 = 0;
-            }
-            /// @todo Rewrite as a struct ptr
-            // *(int*) (v11 + 0x20) = v17;
-            // *(int*) v11 = 0;
-            // *(short*) (v11 + 0x24) = v7;
-            // *(short*) (v11 + 0x26) = v12;
-            // *(short*) (v11 + 4) = **(short**) (v1 + v9);
-            // *(short*) (v11 + 6) = *(short*) (*(short*) (v1 + 8 * v12) + 2);
-            // *(float*) (v11 + 8) =
-            //     *(float*) (v2 + 0x18 * *(unsigned short*) (v11 + 4) + 8);
-            // *(float*) (v11 + 0xC) =
-            //     *(float*) (v2 + 0x18 * *(unsigned short*) (v11 + 4) + 0xC);
-            // *(float*) (v11 + 0x10) = v8;
-            // *(float*) (v11 + 0x14) =
-            //     *(float*) (v2 + 0x18 * *(unsigned short*) (v11 + 6) + 8);
-            // *(float*) (v11 + 0x18) =
-            //     *(float*) (v2 + 0x18 * *(unsigned short*) (v11 + 6) + 0xC);
-            // *(float*) (v11 + 0x1C) = v8;
-            // --v5;
-            // *(short*) (v11 + 0x28) = mpJointFromLine(v7++);
-            // v7--;
-
-            v18 = v5;
-            result = &v33[v7];
-            v9 += 8;
-            if (v7) {
-                do {
-                    if (!*result) {
-                        break;
-                    }
-                    ++result;
-                    ++v7;
-                    v9 += 8;
-                    --v5;
-                    v7--;
-                } while (v18);
+            mpisp->x20 = hidden ? 2 : 0;
+            mpisp->next = NULL;
+            mpisp->x24 = (short) line_idx;
+            mpisp->x26 = (short) end_idx;
+            mpisp->x4 = lines[line_idx].x0->v0_idx;
+            mpisp->x6 = lines[end_idx].x0->v1_idx;
+            mpisp->x8.x = vtx[mpisp->x4].pos.x;
+            mpisp->x8.y = vtx[mpisp->x4].pos.y;
+            mpisp->x8.z = z_val;
+            mpisp->x14.x = vtx[mpisp->x6].pos.x;
+            mpisp->x14.y = vtx[mpisp->x6].pos.y;
+            mpisp->x14.z = z_val;
+            mpisp->x28 = mpJointFromLine(line_idx);
+            count--;
+            line_idx++;
+            {
+                u8* p = &visited[line_idx];
+                int ctr = count;
+                if (count) {
+                    do {
+                        if (!*p) {
+                            break;
+                        }
+                        p++;
+                        line_idx++;
+                        count--;
+                    } while (--ctr);
+                }
             }
         }
     }
 
-    *v24_2 = (int) v6;
-    v19 = 0;
-    v20 = v0[0xB];
-    if (v0[0xB]) {
-        v21 = v0[0xA];
-        // v22 = MEMORY[0xFFFF9648];
-        *v23 = 8 * v21;
-        while (v20) {
-            v24 = (mpisland*) HSD_MemAlloc(0x2C);
-            v25 = v24;
-            if (!v24) {
-                __assert("mpisland.c", 0x3E, "mpisp");
-            }
-            if (v19) {
-                v19->x0[0] = (int) v24;
+    mpIsland_80458E88.x8 = prev;
+
+    /* Process ceiling segments */
+    prev = NULL;
+    count = map->ceiling_count;
+    if (count) {
+        line_idx = map->ceiling_start;
+        z_val = mpIsland_804D8158;
+        for (; count != 0;) {
+            mpisp = HSD_MemAlloc(0x2C);
+            HSD_ASSERT(0x3E, mpisp);
+            if (prev) {
+                prev->next = mpisp;
             } else {
-                *v22_2 = (int) v24;
+                mpIsland_80458E88.xC = mpisp;
             }
-            v26 = v21 == 0;
-            v19 = v24;
-            v27 = v21;
-            v28 = 0;
-            while (v21 != v26) {
-                v33[v27] = 1;
-                v29 = (int*) (v1 + 8 * v27);
-                v30 = v29[1];
-                if ((v30 & 0x10000) == 0 || (v30 & 0x40000) != 0) {
-                    v28 = 1;
+            prev = mpisp;
+            end_idx = line_idx;
+            hidden = 0;
+            for (;;) {
+                visited[end_idx] = 1;
+                if (!(lines[end_idx].flags & LINE_FLAG_ENABLED) ||
+                    (lines[end_idx].flags & LINE_FLAG_HIDDEN))
+                {
+                    hidden = 1;
                 }
-                v26 = *(short*) (*v29 + 4);
-                if (v26 == -1 ||
-                    (*(short*) (*(int*) (v1 + 8 * v26) + 0xC) & 2) == 0)
+                next = lines[end_idx].x0->prev_id0;
+                if (next == -1 ||
+                    !(lines[next].x0->hi_flags & CollLine_Ceiling))
                 {
                     break;
                 }
-                v27 = *(short*) (*v29 + 4);
+                end_idx = next;
+                if (line_idx == end_idx) {
+                    break;
+                }
             }
-            if (v28) {
-                v31 = 2;
-            } else {
-                v31 = 0;
-            }
-            v25->x0[2] = v31;
-            v25->x0[0] = 0;
-            v25->x20[0] = v21;
-            v25->x20[0] = v27;
-            // v25->unk[1] = *(short*) (*(int*) (v1 + v23) + 2);
-            v25->x0[1] = **(short**) (v1 + 8 * v27);
-            v25->x0[2] = *(int*) (v2 + 0x18 * v25->x0[1] + 8);
-            v25->x0[3] = *(int*) (v2 + 0x18 * v25->x0[1] + 0xC);
-            v25->x0[4] = 0.0F;
-            v25->x0[5] = *(float*) (v2 + 0x18 * v25->x0[1] + 8);
-            v25->x0[6] = *(float*) (v2 + 0x18 * v25->x0[1] + 0xC);
-            v25->x0[7] = 0.0F;
-            --v20;
-            v25->x20[2] = mpJointFromLine(v21++);
-            v32 = v20;
-            result = &v33[v21];
-            v23 += 8;
-            v20--;
-            if (v20) {
-                for (v32 = 0; v32 < 0; v32++) {
-                    if (!*result) {
-                        break;
-                    }
-                    ++result;
-                    ++v21;
-                    v23 += 8;
-                    --v20;
-                    --v32;
+            mpisp->x20 = hidden ? 2 : 0;
+            mpisp->next = NULL;
+            mpisp->x24 = (short) line_idx;
+            mpisp->x26 = (short) end_idx;
+            mpisp->x4 = lines[line_idx].x0->v1_idx;
+            mpisp->x6 = lines[end_idx].x0->v0_idx;
+            mpisp->x8.x = vtx[mpisp->x4].pos.x;
+            mpisp->x8.y = vtx[mpisp->x4].pos.y;
+            mpisp->x8.z = z_val;
+            mpisp->x14.x = vtx[mpisp->x6].pos.x;
+            mpisp->x14.y = vtx[mpisp->x6].pos.y;
+            mpisp->x14.z = z_val;
+            mpisp->x28 = mpJointFromLine(line_idx);
+            count--;
+            line_idx++;
+            {
+                u8* p = &visited[line_idx];
+                int ctr = count;
+                if (count) {
+                    do {
+                        if (!*p) {
+                            break;
+                        }
+                        p++;
+                        line_idx++;
+                        count--;
+                    } while (--ctr);
                 }
             }
         }
     }
-    v22_2 = v24_2;
+
+    mpIsland_80458E88.x8 = prev;
 }
 
 mp_UnkStruct0* mpIsland_8005AB54(int surface_idx)
@@ -347,8 +304,6 @@ void mpIsland_8005ACE8(mp_UnkStruct0* arg0, Vec3* arg1, Vec3* arg2)
         var_r30++;
     }
 }
-
-static float mpIsland_804D8158;
 
 void mpIsland_8005AE1C(mp_UnkStruct0** arg0, mp_UnkStruct0** arg1, int arg2,
                        int arg3, bool arg4)
