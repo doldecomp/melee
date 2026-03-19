@@ -57,7 +57,7 @@
 /* 188550 */ void fn_80188550(int);
 /* 188644 */ void fn_80188644(void);
 /* 188738 */ void fn_80188738(HSD_JObj*);
-/* 188910 */ UNK_RET fn_80188910(UNK_PARAMS);
+/* 188910 */ void fn_80188910(HSD_JObj*);
 /* 188B3C */ void fn_80188B3C(HSD_JObj*);
 /* 188D3C */ void fn_80188D3C(HSD_JObj*);
 /* 188EE8 */ UNK_RET fn_80188EE8(UNK_PARAMS);
