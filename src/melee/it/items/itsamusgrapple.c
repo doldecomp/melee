@@ -418,6 +418,7 @@ void fn_802B8524(Item_GObj* gobj)
     itSamusGrappleAttributes* attrs =
         ip->xC4_article_data->x4_specialAttributes;
     Fighter* fp = ip->owner->user_data;
+    Fighter* new_var = fp;
     ItemLink* link = ip->xDD4_itemVar.samusgrapple.x4;
     Vec3 pos;
     u8 _pad[4];
@@ -426,7 +427,7 @@ void fn_802B8524(Item_GObj* gobj)
 
     samus_grapple_setup_pos(link, &pos, m);
     it_802B9CE8(link, &pos, attrs, ip->owner->user_data);
-    it_802A7168(ip, &pos, fp->x34_scale.y);
+    it_802A7168(ip, &pos, new_var->x34_scale.y);
     samus_grapple_anim(gobj);
     if (samus_grapple_fighter_compare(fp->motion_id)) {
         return;
@@ -570,9 +571,9 @@ void fn_802B8B54(Item_GObj* gobj)
     Fighter* fp = ip->owner->user_data;
     itSamusGrappleAttributes* attrs =
         ip->xC4_article_data->x4_specialAttributes;
-    ftSs_DatAttrs* da = fp->dat_attrs;
     ItemLink* link = ip->xDD4_itemVar.samusgrapple.x4;
     Vec3 pos;
+    ftSs_DatAttrs* da = fp->dat_attrs;
     u8 _pad[4];
     f32 dx, dy;
     u8 _pad2[24];
@@ -819,6 +820,7 @@ bool it_802B9FD4(ItemLink* link, Vec3* pos, itSamusGrappleAttributes* attrs)
 {
     ItemLink* next;
     Vec3 dir;
+    Vec3* dir_ptr;
     PAD_STACK(4);
 
     it_802A4454(link);
@@ -829,16 +831,18 @@ bool it_802B9FD4(ItemLink* link, Vec3* pos, itSamusGrappleAttributes* attrs)
             next->vel.y -= samus_grapple_calc_grav(next->vel.y);
             it_802A4420(next);
             if (it_802A3C98(&next->pos, &link->pos, &dir) > attrs->x38) {
-                next->pos.x = (dir.x * attrs->x38) + link->pos.x;
-                next->pos.y = (dir.y * attrs->x38) + link->pos.y;
-                next->pos.z = (dir.z * attrs->x38) + link->pos.z;
+                dir_ptr = &dir;
+                next->pos.x = (dir_ptr->x * attrs->x38) + link->pos.x;
+                next->pos.y = (dir_ptr->y * attrs->x38) + link->pos.y;
+                next->pos.z = (dir_ptr->z * attrs->x38) + link->pos.z;
             }
             it_802A43EC(next);
         } else {
             if (it_802A3C98(pos, &link->pos, &dir) > attrs->x38) {
-                next->pos.x = (dir.x * attrs->x38) + link->pos.x;
-                next->pos.y = (dir.y * attrs->x38) + link->pos.y;
-                next->pos.z = (dir.z * attrs->x38) + link->pos.z;
+                dir_ptr = &dir;
+                next->pos.x = (dir_ptr->x * attrs->x38) + link->pos.x;
+                next->pos.y = (dir_ptr->y * attrs->x38) + link->pos.y;
+                next->pos.z = (dir_ptr->z * attrs->x38) + link->pos.z;
                 next->x2C_b0 = 1;
                 it_802A43B8(next);
             } else {
@@ -943,6 +947,7 @@ bool it_802BA3BC(ItemLink* tail, ItemLink* head, Vec3* pos,
 {
     u8 _pad[8];
     Vec3 dir;
+    Vec3* dir_ptr;
     Vec3 saved_pos;
     ItemLink* next_tail;
     ItemLink* link;
@@ -983,18 +988,20 @@ bool it_802BA3BC(ItemLink* tail, ItemLink* head, Vec3* pos,
     while (link != NULL && link->x2C_b0) {
         count++;
         if (it_802A3C98(&link->pos, &head->pos, &dir) > attrs->x38) {
-            link->pos.x = (dir.x * attrs->x38) + head->pos.x;
-            link->pos.y = (dir.y * attrs->x38) + head->pos.y;
-            link->pos.z = (dir.z * attrs->x38) + head->pos.z;
+            dir_ptr = &dir;
+            link->pos.x = (dir_ptr->x * attrs->x38) + head->pos.x;
+            link->pos.y = (dir_ptr->y * attrs->x38) + head->pos.y;
+            link->pos.z = (dir_ptr->z * attrs->x38) + head->pos.z;
         }
         head = link;
         link = head->next;
     }
 
     if (it_802A3C98(pos, &head->pos, &dir) > attrs->x38) {
-        pos->x = (dir.x * attrs->x38) + head->pos.x;
-        pos->y = (dir.y * attrs->x38) + head->pos.y;
-        pos->z = (dir.z * attrs->x38) + head->pos.z;
+        dir_ptr = &dir;
+        pos->x = (dir_ptr->x * attrs->x38) + head->pos.x;
+        pos->y = (dir_ptr->y * attrs->x38) + head->pos.y;
+        pos->z = (dir_ptr->z * attrs->x38) + head->pos.z;
     }
 
     if (count != 0) {
@@ -1008,6 +1015,7 @@ void it_802BA5DC(ItemLink* tail, ItemLink* head, Vec3* pos,
 {
     Vec3 saved_pos;
     Vec3 dir;
+    Vec3* dir_ptr;
     ItemLink* link;
     ItemLink* next;
     ItemLink* cur;
@@ -1032,9 +1040,10 @@ void it_802BA5DC(ItemLink* tail, ItemLink* head, Vec3* pos,
     while (link != NULL && link->x2C_b0) {
         if (!retracted) {
             if (it_802A3C98(&link->pos, &head->pos, &dir) > attrs->x38) {
-                link->pos.x = (dir.x * attrs->x38) + head->pos.x;
-                link->pos.y = (dir.y * attrs->x38) + head->pos.y;
-                link->pos.z = (dir.z * attrs->x38) + head->pos.z;
+                dir_ptr = &dir;
+                link->pos.x = (dir_ptr->x * attrs->x38) + head->pos.x;
+                link->pos.y = (dir_ptr->y * attrs->x38) + head->pos.y;
+                link->pos.z = (dir_ptr->z * attrs->x38) + head->pos.z;
             } else {
                 retracted = true;
             }
@@ -1044,9 +1053,10 @@ void it_802BA5DC(ItemLink* tail, ItemLink* head, Vec3* pos,
     }
 
     if (it_802A3C98(pos, &head->pos, &dir) > attrs->x38) {
-        pos->x = (dir.x * attrs->x38) + head->pos.x;
-        pos->y = (dir.y * attrs->x38) + head->pos.y;
-        pos->z = (dir.z * attrs->x38) + head->pos.z;
+        dir_ptr = &dir;
+        pos->x = (dir_ptr->x * attrs->x38) + head->pos.x;
+        pos->y = (dir_ptr->y * attrs->x38) + head->pos.y;
+        pos->z = (dir_ptr->z * attrs->x38) + head->pos.z;
     }
 }
 
@@ -1054,6 +1064,7 @@ bool it_802BA760(ItemLink* link, Vec3* pos, itSamusGrappleAttributes* attrs,
                  Fighter* fp)
 {
     Vec3 dir;
+    Vec3* dir_ptr;
     ftSs_DatAttrs* da = fp->ft_data->ext_attr;
     ItemLink* cur;
     ItemLink* next;
@@ -1070,16 +1081,18 @@ bool it_802BA760(ItemLink* link, Vec3* pos, itSamusGrappleAttributes* attrs,
         while (next != NULL) {
             if (next->x2C_b0) {
                 if (it_802A3C98(&next->pos, &cur->pos, &dir) > attrs->x38) {
-                    next->pos.x = (dir.x * attrs->x38) + cur->pos.x;
-                    next->pos.y = (dir.y * attrs->x38) + cur->pos.y;
-                    next->pos.z = (dir.z * attrs->x38) + cur->pos.z;
+                    dir_ptr = &dir;
+                    next->pos.x = (dir_ptr->x * attrs->x38) + cur->pos.x;
+                    next->pos.y = (dir_ptr->y * attrs->x38) + cur->pos.y;
+                    next->pos.z = (dir_ptr->z * attrs->x38) + cur->pos.z;
                 }
                 it_802A43EC(next);
             } else {
                 if (it_802A3C98(pos, &cur->pos, &dir) > attrs->x38) {
-                    next->pos.x = (dir.x * attrs->x38) + cur->pos.x;
-                    next->pos.y = (dir.y * attrs->x38) + cur->pos.y;
-                    next->pos.z = (dir.z * attrs->x38) + cur->pos.z;
+                    dir_ptr = &dir;
+                    next->pos.x = (dir_ptr->x * attrs->x38) + cur->pos.x;
+                    next->pos.y = (dir_ptr->y * attrs->x38) + cur->pos.y;
+                    next->pos.z = (dir_ptr->z * attrs->x38) + cur->pos.z;
                     next->x2C_b0 = 1;
                     it_802A43B8(next);
                 } else {
