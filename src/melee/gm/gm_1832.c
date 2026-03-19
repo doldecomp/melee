@@ -598,7 +598,71 @@ void fn_80186080(void)
     }
 }
 
-/// #fn_801861B8
+void fn_801861B8(void)
+{
+    s32 i, j;
+    u8* base;
+    u8* entry;
+    HSD_Text* text;
+
+    PAD_STACK(16);
+
+    HSD_SisLib_803A611C(0, NULL, 9, 0x14, 0, 0xE, 0, 0x12);
+    HSD_SisLib_803A62A0(0, "SdIntro.dat", "SIS_IntroData");
+
+    base = (u8*) &lbl_804735A8;
+    j = 0;
+    for (i = 0; i < (s32) lbl_804735E8.xEF; i++) {
+        *(HSD_Text**) (base + 0x20) = HSD_SisLib_803A6754(0, 0);
+        (*(HSD_Text**) (base + 0x20))->default_kerning = 1;
+        text = *(HSD_Text**) (base + 0x20);
+        text->font_size.x = 1.0f;
+        text->font_size.y = 1.0f;
+        (*(HSD_Text**) (base + 0x20))->default_alignment = 1;
+        entry = (u8*) lbl_804D6604 + (lbl_804735E8.xEF * 0x30) + j;
+        HSD_SisLib_803A6B98(*(HSD_Text**) (base + 0x20),
+                            *(f32*) (entry + 0x57C),
+                            *(f32*) (entry + 0x588), " ",
+                            lbl_804D6604, entry);
+        entry = (u8*) lbl_804D6604 + (lbl_804735E8.xEF * 0x30) + j;
+        HSD_SisLib_803A7548(*(HSD_Text**) (base + 0x20), 0,
+                            *(f32*) (entry + 0x594),
+                            *(f32*) (entry + 0x5A0));
+        base += 4;
+        j += 4;
+    }
+
+    base = (u8*) &lbl_804735A8;
+    j = 0;
+    for (i = 0; i < (s32) lbl_804735E8.xF0; i++) {
+        *(HSD_Text**) (base + 0x2C) = HSD_SisLib_803A6754(0, 0);
+        (*(HSD_Text**) (base + 0x2C))->default_kerning = 1;
+        text = *(HSD_Text**) (base + 0x2C);
+        text->font_size.x = 1.0f;
+        text->font_size.y = 1.0f;
+        (*(HSD_Text**) (base + 0x2C))->default_alignment = 1;
+        if ((s32) lbl_804735E8.xE4 == 4) {
+            HSD_SisLib_803A6B98(*(HSD_Text**) (base + 0x2C),
+                                340.0f + *(f32*) ((u8*) lbl_804D6604 + 0x5AC),
+                                *(f32*) ((u8*) lbl_804D6604 + 0x5B8), " ");
+            HSD_SisLib_803A7548(*(HSD_Text**) (base + 0x2C), 0,
+                                340.0f + *(f32*) ((u8*) lbl_804D6604 + 0x5C4),
+                                *(f32*) ((u8*) lbl_804D6604 + 0x5D0));
+            return;
+        }
+        entry = (u8*) lbl_804D6604 + (lbl_804735E8.xF0 * 0x30) + j;
+        HSD_SisLib_803A6B98(*(HSD_Text**) (base + 0x2C),
+                            340.0f + *(f32*) (entry + 0x57C),
+                            *(f32*) (entry + 0x588), " ",
+                            lbl_804D6604, entry);
+        entry = (u8*) lbl_804D6604 + (lbl_804735E8.xF0 * 0x30) + j;
+        HSD_SisLib_803A7548(*(HSD_Text**) (base + 0x2C), 0,
+                            340.0f + *(f32*) (entry + 0x594),
+                            *(f32*) (entry + 0x5A0));
+        base += 4;
+        j += 4;
+    }
+}
 
 static SceneDesc* lbl_804D65FC;
 
