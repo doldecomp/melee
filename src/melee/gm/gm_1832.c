@@ -38,7 +38,11 @@
 
 static struct {
     int x0;
-    HSD_JObj* x4[0xF];
+    HSD_JObj* x4[13];
+    u16 x38;
+    u16 x3A;
+    u16 x3C;
+    u16 x3E;
 } lbl_804735A8;
 /// @brief related to 1p splash screen
 static struct {
@@ -58,9 +62,15 @@ static struct {
     u8 xF0;    ///< right char amt
     u8 xF1[3]; ///< left char ids
     u8 xF4[3]; ///< right char ids
+    u8 pad_F7;
+    int xF8;
+    int xFC;
+    int x100;
 } lbl_804735E8;
 
 static HSD_Archive* lbl_804D65F4;
+
+extern int lbl_804D6608;
 
 static struct {
     u8 pad[0x6A8];
@@ -355,7 +365,43 @@ static struct {
     HSD_JObj* xC;
 } lbl_804736B0;
 
-/// #gm_80186E30_OnEnter
+/// Classic Mode intro scene enter data (0x20 bytes)
+typedef struct ClassicModeEnterData {
+    /* 0x00 */ int x0;
+    /* 0x04 */ int x4;
+    /* 0x08 */ int x8;
+    /* 0x0C */ int xC;
+    /* 0x10 */ union {
+        int x10_int;
+        struct {
+            u8 x10;
+            u8 x11;
+        };
+    };
+    /* 0x14 */ int x14;
+    /* 0x18 */ int x18;
+    /* 0x1C */ int x1C;
+} ClassicModeEnterData;
+
+void gm_80186E30_OnEnter(void* arg0_)
+{
+    ClassicModeEnterData* arg0 = arg0_;
+
+    if (arg0->x10 == 0x1A || arg0->x11 == 0x1A) {
+        lbl_804735A8.x0 = 1;
+        return;
+    }
+
+    lbl_804735A8.x0 = 0;
+    lbl_804735A8.x38 = 0;
+    lbl_804735A8.x3A = 0;
+    lbl_804735A8.x3C = 0;
+    *(ClassicModeEnterData*) &lbl_804735E8.xE4 = *arg0;
+    fn_80186634(arg0_);
+    lbl_804D6608 = -1;
+    gm_80167858((int)(s8) lbl_804735E8.xEC, lbl_804735E8.xED, 0xB, 0x2D);
+    gm_80168F88();
+}
 
 void fn_80186EFC(HSD_GObj* gobj)
 {

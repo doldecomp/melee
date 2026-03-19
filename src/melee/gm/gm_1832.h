@@ -31,9 +31,9 @@
 /* 186080 */ UNK_RET fn_80186080(UNK_PARAMS);
 /* 1861B8 */ UNK_RET fn_801861B8(UNK_PARAMS);
 /* 186400 */ UNK_RET fn_80186400(UNK_PARAMS);
-/* 186634 */ UNK_RET fn_80186634(UNK_PARAMS);
+/* 186634 */ void fn_80186634(void*);
 /* 186DFC */ void gm_80186DFC_OnFrame(void);
-/* 186E30 */ void gm_80186E30_OnEnter(UNK_T);
+/* 186E30 */ void gm_80186E30_OnEnter(void*);
 /* 186EFC */ void fn_80186EFC(HSD_GObj*);
 /* 186F6C */ void fn_80186F6C(HSD_GObj*);
 /* 1873F0 */ HSD_GObjProc* fn_801873F0(void);
