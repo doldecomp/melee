@@ -62,7 +62,7 @@ void mpIsland_8005A728(void)
     float z_val;
     int i;
     u8 visited[0x600];
-    PAD_STACK(24);
+    PAD_STACK(0x10);
 
     map = mpLib_8004D164();
     lines = mpGetGroundCollLine();
@@ -428,7 +428,157 @@ loop2_check:
     *arg1 = prev_a;
 }
 
-/// #mpIsland_8005B004
+void mpIsland_8005B004(mp_UnkStruct0** arg0, mp_UnkStruct0** arg1, int arg2,
+                       int arg3, int arg4, int arg5, bool arg6)
+{
+    mp_UnkStruct0* cur;
+    mp_UnkStruct0* prev;
+    mp_UnkStruct0* next;
+    mp_UnkStruct0* mpisp;
+    CollLine* lines;
+    CollVtx* vtx;
+    CollJoint* joints;
+    MapJoint* inner;
+    int line_idx;
+    int end_idx;
+    int start_idx;
+    int end_total;
+    int loop;
+    u32 type_flag;
+    s16 link;
+    float z_val;
+    float min_x;
+    float max_x;
+    int i;
+    u8 visited[0x600];
+    PAD_STACK(16);
+
+    type_flag = arg3 | 0x10;
+    prev = NULL;
+    cur = *arg0;
+
+    while (cur != NULL) {
+        next = cur->next;
+        if (cur->x28 == arg2) {
+            cur->next = *arg1;
+            *arg1 = cur;
+        } else {
+            cur->next = prev;
+            prev = cur;
+        }
+        cur = next;
+    }
+    *arg0 = prev;
+
+    memzero(visited, 0x600u);
+
+    joints = mpGetGroundCollJoint();
+    joints = &joints[arg2];
+    lines = mpGetGroundCollLine();
+    vtx = mpGetGroundCollVtx();
+    inner = joints->inner;
+    z_val = mpIsland_804D8158;
+
+    line_idx = inner->dynamic_start;
+    end_total = inner->dynamic_start + inner->dynamic_count;
+
+    for (; line_idx < end_total;) {
+        if (visited[line_idx] != 0 ||
+            (lines[line_idx].flags & 0x1F) != type_flag)
+        {
+            line_idx++;
+            continue;
+        }
+
+        end_idx = line_idx;
+        loop = 0;
+
+        for (;;) {
+            visited[end_idx] = 1;
+            link = lines[end_idx].x0->prev_id0;
+            if (link == -1) {
+                break;
+            }
+            if ((lines[link].flags & 0x1F) != type_flag) {
+                break;
+            }
+            end_idx = link;
+            if (link == line_idx) {
+                loop = 1;
+                break;
+            }
+        }
+
+        if (!loop) {
+            start_idx = line_idx;
+
+            for (;;) {
+                visited[start_idx] = 1;
+                link = lines[start_idx].x0->next_id0;
+                if (link == -1) {
+                    break;
+                }
+                if ((lines[link].flags & 0x1F) != type_flag) {
+                    break;
+                }
+                start_idx = link;
+                if (link == line_idx) {
+                    loop = 1;
+                    break;
+                }
+            }
+
+            if (loop) {
+                HSD_ASSERT(0x206, !loop);
+                goto after_alloc;
+            }
+        } else {
+            start_idx = end_idx;
+            min_x = -F32_MAX;
+            i = start_idx;
+            max_x = F32_MAX;
+            link = i;
+
+            do {
+                if (max_x > vtx[lines[i].x0->v0_idx].pos.x) {
+                    max_x = vtx[lines[i].x0->v0_idx].pos.x;
+                    end_idx = i;
+                }
+                if (min_x > vtx[lines[i].x0->v1_idx].pos.x) {
+                    min_x = vtx[lines[i].x0->v1_idx].pos.x;
+                    start_idx = i;
+                }
+                i = lines[i].x0->prev_id0;
+            } while (i != link);
+        }
+
+    after_alloc:
+        mpisp = *arg1;
+        if (mpisp != NULL) {
+            *arg1 = mpisp->next;
+        } else {
+            mpisp = HSD_MemAlloc(0x2C);
+            HSD_ASSERT(0x3E, mpisp);
+        }
+
+        mpisp->x20 = arg6 ? 0 : 2;
+        mpisp->next = NULL;
+        mpisp->x24 = (short) end_idx;
+        mpisp->x26 = (short) start_idx;
+        mpisp->x4 = lines[end_idx].x0->v0_idx;
+        mpisp->x6 = lines[start_idx].x0->v1_idx;
+        mpisp->x8.x = vtx[mpisp->x4].pos.x;
+        mpisp->x8.y = vtx[mpisp->x4].pos.y;
+        mpisp->x8.z = z_val;
+        mpisp->x14.x = vtx[mpisp->x6].pos.x;
+        mpisp->x14.y = vtx[mpisp->x6].pos.y;
+        mpisp->x14.z = z_val;
+        mpisp->x28 = (short) arg2;
+
+        mpisp->next = *arg0;
+        *arg0 = mpisp;
+    }
+}
 
 void mpIsland_8005B334(int arg0, int arg1, int arg2, bool arg3)
 {
