@@ -32,6 +32,7 @@
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbbgflash.h>
+#include <melee/mn/types.h>
 #include <melee/mp/mpcoll.h>
 #include <melee/pl/player.h>
 #include <melee/sc/types.h>
@@ -66,6 +67,7 @@ static struct {
     int xF8;
     int xFC;
     int x100;
+    u8 pad_104[0x54];
 } lbl_804735E8;
 
 static HSD_Archive* lbl_804D65F4;
@@ -668,7 +670,57 @@ int fn_801884F8(void)
     return result;
 }
 
-/// #fn_80188550
+void fn_80188550(int arg0)
+{
+    int current = lbl_80473700[0];
+
+    if (arg0 != current) {
+        if (arg0 > current) {
+            int skip = current;
+            u8* ptr = (u8*) lbl_80473700;
+            int remaining = arg0 - current;
+            int i = 0;
+
+            do {
+                if (i != 0) {
+                    if (skip == 0) {
+                        if (i != 0) {
+                            ptr[0x75] = 1;
+                        } else {
+                            ptr[0x75] = 0;
+                        }
+                        gm_8016EDDC(i, (PlayerInitData*) (ptr + 0x74));
+                        if (--remaining == 0) {
+                            break;
+                        }
+                    } else {
+                        skip--;
+                    }
+                }
+                i++;
+                ptr += 0x24;
+            } while (i < 4);
+        } else {
+            int to_remove = current - arg0;
+            int j = 3;
+
+            do {
+                if (j != 0 && to_remove != 0) {
+                    if (current != 3) {
+                        fn_8016EF98(to_remove + 1);
+                    } else {
+                        fn_8016EF98(j);
+                    }
+                    if (--to_remove == 0) {
+                        break;
+                    }
+                }
+                j--;
+            } while (j >= 0);
+        }
+        lbl_80473700[0] = arg0;
+    }
+}
 
 /// #fn_80188644
 

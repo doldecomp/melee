@@ -54,7 +54,7 @@
 /* 188454 */ int gm_80188454(int idx);
 /* 18846C */ int fn_8018846C(void);
 /* 1884F8 */ int fn_801884F8(void);
-/* 188550 */ UNK_RET fn_80188550(UNK_PARAMS);
+/* 188550 */ void fn_80188550(int);
 /* 188644 */ UNK_RET fn_80188644(UNK_PARAMS);
 /* 188738 */ UNK_RET fn_80188738(UNK_PARAMS);
 /* 188910 */ UNK_RET fn_80188910(UNK_PARAMS);
