@@ -24,7 +24,7 @@
 /* 18575C */ void fn_8018575C(HSD_GObj*);
 /* 1857C4 */ void fn_801857C4(HSD_GObj*);
 /* 1859C8 */ void fn_801859C8(HSD_GObj*);
-/* 185A0C */ UNK_RET fn_80185A0C(UNK_PARAMS);
+/* 185A0C */ s32 fn_80185A0C(void);
 /* 185D64 */ void fn_80185D64(void);
 /* 185E34 */ s32 fn_80185E34(void);
 /* 185F5C */ void fn_80185F5C(s32);

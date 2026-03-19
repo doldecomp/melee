@@ -88,6 +88,7 @@ static struct {
 
 static HSD_Archive* lbl_804D65F4;
 static HSD_GObj* lbl_804D65F0;
+static SceneDesc* lbl_804D6600;
 
 extern int lbl_804D6608;
 extern s32 lbl_803B7C40[];
@@ -457,7 +458,69 @@ void fn_801859C8(HSD_GObj* gobj)
     }
 }
 
-/// #fn_80185A0C
+s32 fn_80185A0C(void)
+{
+    HSD_GObj* gobj;
+    HSD_GObj* gobj2;
+    HSD_GObj* gobj3;
+    HSD_GObjProc* proc;
+    HSD_ImageDesc* img;
+    s32 i, v;
+    u8 count;
+
+    PAD_STACK(24);
+
+    gobj = GObj_Create(0x13, 0x14, 0);
+    HSD_SObjLib_803A55DC(gobj, 0x280, 0x1E0, 0xB);
+    gobj->gxlink_prios = 0x20000;
+    HSD_GObjGXLink_8039084C(gobj);
+    GObj_SetupGXLinkMax(gobj, (GObj_RenderFunc) fn_8018564C, 0xB);
+
+    gobj2 = GObj_Create(0xE, 0xF, 0);
+    HSD_GObjObject_80390A70(gobj2, HSD_SObjLib_804D7960, NULL);
+    GObj_SetupGXLink(gobj2, HSD_SObjLib_803A49E0, 0x11, 0);
+    proc = HSD_GObj_SetupProc(gobj2, fn_801859C8, 0);
+    proc->flags_3 = HSD_GObj_804D783C;
+
+    count = gm_80169238(lbl_804735E8.xF4[0]);
+    if ((s32) count > 3) {
+        count = 3;
+    }
+    lbl_804735E8.xE0 = count;
+
+    img = lbl_804735E8.x40;
+    lbl_804735E8.xDC = gobj2;
+    lbl_804735E8.xE1 = 0;
+
+    for (i = 0; i < (s32) lbl_804735E8.xE0; i++) {
+        img->image_ptr = NULL;
+        lb_800121FC(img, 0x17C, 0x190, GX_TF_RGB5A3, 0);
+        img[3].image_ptr = NULL;
+        lb_800121FC(&img[3], 0x17C, 0x190, GX_TF_Z24X8, 0);
+        img++;
+    }
+
+    for (v = 0; v < 10; v++) {
+        if ((v / (s32) lbl_804735E8.xE0) % 2 != 0) {
+            lbl_804735E8.xD0[v] =
+                (u8) ((lbl_804735E8.xE0 - 1) -
+                      (v % (s32) lbl_804735E8.xE0));
+        } else {
+            lbl_804735E8.xD0[v] =
+                (u8) (v % (s32) lbl_804735E8.xE0);
+        }
+    }
+
+    HSD_GObj_SetupProc(GObj_Create(0x13, 1, 0), fn_801857C4, 0);
+
+    gobj3 = GObj_Create(0x13, 0x14, 0);
+    HSD_GObjObject_80390A70(gobj3, HSD_GObj_804D784B,
+                            HSD_CObjLoadDesc(lbl_804D6600->cameras->desc));
+    GObj_SetupGXLinkMax(gobj3, (GObj_RenderFunc) fn_801852FC, 0);
+    gobj3->gxlink_prios = 0x61;
+    lbl_804D65F0 = gobj3;
+    return fn_801851C0();
+}
 
 void fn_80185D64(void)
 {
