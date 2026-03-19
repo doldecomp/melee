@@ -27,6 +27,7 @@
 #include <melee/gm/gm_1A45.h>
 #include <melee/gm/gm_1601.h>
 #include <melee/gm/gm_1A36.h>
+#include <melee/gm/gmmain_lib.h>
 #include <melee/gm/types.h>
 
 #include "gm_1B03.static.h"
@@ -1207,4 +1208,64 @@ f32 gm_8018A314(u8 difficulty, u8 stage_slot)
            100.0F;
 }
 
+typedef struct {
+    u8 b7 : 1, b6 : 1, b5 : 1, b4 : 1, b3 : 1, b2 : 1, b1 : 1, b0 : 1;
+} u8_bits;
+
 /// #fn_8018A364
+void fn_8018A364(int arg0_int)
+{
+    MatchEnd* arg0 = (MatchEnd*) arg0_int;
+    struct StartMeleeRules* rules;
+    gmm_x0_528_t* main_data;
+    UnkAllstarData* data;
+    u32 total_time;
+
+    rules = gm_8016AE50();
+    data = &gm_80473A18;
+
+    if (fn_8017E318() > 0) {
+        ((u8_bits*)&arg0->_x448[2])->b3 = 1;
+    }
+
+    if (rules->x4_5) {
+        main_data = gmMainLib_8015CDE0();
+        total_time = data->x0.xC.x20 + gm_8016AEDC();
+        ((u8_bits*)&arg0->_x448[0])->b5 = 1;
+
+        if ((u8) data->x0.cpu_level == 4) {
+            ((u8_bits*)&arg0->_x448[0])->b2 = 1;
+        }
+
+        if (total_time < 0x6270U) {
+            ((u8_bits*)&arg0->_x448[2])->b6 = 1;
+        } else if (total_time < 0x9AB0U) {
+            ((u8_bits*)&arg0->_x448[2])->b7 = 1;
+        }
+
+        if ((u32) data->x0.xC.x1C == 0U && arg0->player_standings[0].x44 == 0) {
+            ((u8_bits*)&arg0->_x448[1])->b1 = 1;
+        }
+
+        if ((u8) data->x0.xC.xE != 0) {
+            ((u8_bits*)&arg0->_x448[2])->b5 = 1;
+        }
+
+        if ((u8) data->x0.xC.xF != 0) {
+            ((u8_bits*)&arg0->_x448[2])->b4 = 1;
+        }
+
+        if ((u32)(data->x0.xC.x1C + arg0->player_standings[0].x44) == (u32) Player_GetDamage(0)) {
+            ((u8_bits*)&arg0->_x448[0])->b1 = 1;
+        }
+
+        if ((u8) data->x0.xC.xD != 0) {
+            ((u8_bits*)&arg0->_x448[1])->b0 = 1;
+            return;
+        }
+
+        if (arg0->player_standings[0].stocks == main_data->stocks) {
+            ((u8_bits*)&arg0->_x448[1])->b2 = 1;
+        }
+    }
+}
