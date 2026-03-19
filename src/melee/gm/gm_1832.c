@@ -1209,6 +1209,38 @@ void fn_80188738(HSD_JObj* arg0)
 /// #fn_80188910
 
 /// #fn_80188B3C
+void fn_80188B3C(HSD_JObj* arg0)
+{
+    HSD_JObj* jobjs[3];
+    int i;
+    int val;
+
+    if (fn_801884F8() > 999) {
+        val = 999;
+    } else {
+        val = fn_801884F8();
+    }
+
+    jobjs[2] = arg0;
+    jobjs[1] = (jobjs[2] == NULL) ? NULL : jobjs[2]->next;
+    jobjs[0] = (jobjs[1] == NULL) ? NULL : jobjs[1]->next;
+
+    if ((val / 100) != 0) {
+        HSD_JObjReqAnimAll(jobjs[0], (f32) (val / 100));
+    } else {
+        HSD_JObjReqAnimAll(jobjs[0], 10.0f);
+    }
+    if ((val / 10) != 0) {
+        HSD_JObjReqAnimAll(jobjs[1], (f32) ((val % 100) / 10));
+    } else {
+        HSD_JObjReqAnimAll(jobjs[1], 10.0f);
+    }
+    HSD_JObjReqAnimAll(jobjs[2], (f32) (val % 10));
+
+    for (i = 0; i < 3; i++) {
+        HSD_JObjAnimAll(jobjs[i]);
+    }
+}
 
 /// #fn_80188D3C
 void fn_80188D3C(HSD_JObj* arg0)
