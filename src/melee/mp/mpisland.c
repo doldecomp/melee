@@ -315,10 +315,10 @@ void mpIsland_8005ACE8(mp_UnkStruct0* arg0, Vec3* arg1, Vec3* arg2)
     CollLine* var_r30;
     int temp_r29;
     bool var_r28;
+    CollJoint* temp_r3;
     bool var_r27;
     int i;
 
-    CollJoint* temp_r3;
     temp_r3 = &mpGetGroundCollJoint()[arg0->x28];
     var_r31 = temp_r3->inner->floor_start;
     var_r30 = &mpGetGroundCollLine()[var_r31];
