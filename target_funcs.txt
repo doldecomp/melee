@@ -3,7 +3,7 @@ file: src/melee/gm/gm_1832.c
 - [x] gm_80186E30_OnEnter
 - [x] fn_80188550
 - [x] fn_80188644
-- [ ] fn_80185F5C
+- [x] fn_80185F5C
 - [ ] fn_80185E34
 - [ ] fn_80186080
 - [ ] fn_801851C0
