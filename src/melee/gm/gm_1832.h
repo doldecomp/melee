@@ -45,7 +45,7 @@
 /* 187910 */ void fn_80187910(HSD_GObj*);
 /* 187AB4 */ void fn_80187AB4(HSD_GObj*);
 /* 187C9C */ void fn_80187C9C(HSD_GObj*, int);
-/* 187CF4 */ UNK_RET fn_80187CF4(UNK_PARAMS);
+/* 187CF4 */ void fn_80187CF4(HSD_GObj*);
 /* 187F48 */ void gm_80187F48_OnEnter(UNK_T);
 /* 188364 */ void gm_80188364_OnLeave(UNK_T);
 /* 18838C */ void gm_8018838C_OnFrame(void);

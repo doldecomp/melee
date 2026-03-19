@@ -789,7 +789,7 @@ static struct {
     struct {
         u8 frame_counter : 4;
         u8 anim_state : 2;
-        u8 pad : 2;
+        u8 state2 : 2;
     } x37;
     u8 x38;
 } lbl_804736C0;
@@ -906,6 +906,68 @@ void fn_80187C9C(HSD_GObj* gobj, int arg1)
 }
 
 /// #fn_80187CF4
+void fn_80187CF4(HSD_GObj* gobj)
+{
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+    int state = lbl_804736C0.x37.state2;
+    DynamicModelDesc* desc;
+    int anim_state;
+
+    switch (state) {
+    case 0:
+        if (lb_8000B09C(jobj) == 0) {
+            lbl_804736C0.x37.state2 = 1;
+            anim_state = lbl_804736C0.x37.state2;
+            desc = (*lbl_804736C0.x0)[12];
+            if (desc->anims[anim_state] != NULL) {
+                lb_8000C0E8(jobj, anim_state, desc);
+                HSD_JObjReqAnimAll(jobj, 0.0f);
+                HSD_JObjAnimAll(jobj);
+            }
+        }
+        break;
+    case 1:
+        if (lb_8000B09C(jobj) == 0) {
+            lbl_804736C0.x37.state2 = 2;
+            anim_state = lbl_804736C0.x37.state2;
+            desc = (*lbl_804736C0.x0)[12];
+            if (desc->anims[anim_state] != NULL) {
+                lb_8000C0E8(jobj, anim_state, desc);
+                HSD_JObjReqAnimAll(jobj, 0.0f);
+                HSD_JObjAnimAll(jobj);
+            }
+        }
+        break;
+    case 2:
+        if (gm_801A36A0(lbl_804736C0.x38) & 0x1000) {
+            lbAudioAx_80024030(1);
+            lbl_804736C0.x36.active = 1;
+            lbl_804736C0.x37.state2 = 3;
+            anim_state = lbl_804736C0.x37.state2;
+            desc = (*lbl_804736C0.x0)[12];
+            if (desc->anims[anim_state] != NULL) {
+                lb_8000C0E8(jobj, anim_state, desc);
+                HSD_JObjReqAnimAll(jobj, 0.0f);
+                HSD_JObjAnimAll(jobj);
+            }
+        } else if (lb_8000B09C(jobj) == 0) {
+            anim_state = lbl_804736C0.x37.state2;
+            desc = (*lbl_804736C0.x0)[12];
+            if (desc->anims[anim_state] != NULL) {
+                lb_8000C0E8(jobj, anim_state, desc);
+                HSD_JObjReqAnimAll(jobj, 0.0f);
+                HSD_JObjAnimAll(jobj);
+            }
+        }
+        break;
+    case 3:
+        if (lb_8000B09C(jobj) == 0) {
+            HSD_GObjPLink_80390228(gobj);
+        }
+        break;
+    }
+    HSD_JObjAnimAll(GET_JOBJ(gobj));
+}
 
 /// #gm_80187F48_OnEnter
 
