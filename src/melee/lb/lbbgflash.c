@@ -469,8 +469,6 @@ void lbBgFlash_800209F4(void)
     lbl_80433658.state.mode = 0;
 }
 
-/// #fn_80020AEC
-
 #pragma inline_depth(1)
 void fn_80020AEC(HSD_JObj* jobj, Mtx out)
 {
@@ -688,8 +686,6 @@ void fn_8002113C(HSD_JObj* jobj, Vec3* axis, f32 angle)
         HSD_JObjSetRotation(jobj, &rot2);
     }
 }
-
-/// #lbBgFlash_80021410
 
 typedef struct IKChainData {
     /* 0x00 */ HSD_JObj* jobj0;
