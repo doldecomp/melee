@@ -6,6 +6,8 @@
 
 #include <math_ppc.h>
 #include <sysdolphin/baselib/fog.h>
+#include <sysdolphin/baselib/cobj.h>
+#include <sysdolphin/baselib/wobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/gobjproc.h>
@@ -24,6 +26,7 @@
 #include <melee/gm/gm_1A3F.h>
 #include <melee/gm/gm_1A45.h>
 #include <melee/gm/gm_1601.h>
+#include <melee/gm/gm_1A36.h>
 #include <melee/gm/types.h>
 #include <melee/gr/ground.h>
 #include <melee/gr/grpushon.h>
@@ -768,7 +771,53 @@ void gm_801877A8_OnEnter(void* arg0_)
 }
 #pragma pop
 
-/// #fn_80187910
+static struct {
+    void* x0;
+    HSD_CameraAnim** x4;
+    u8 pad_8[0x2E];
+    u8 x36;
+    u8 x37;
+    u8 x38;
+} lbl_804736C0;
+
+void fn_80187910(HSD_GObj* arg0)
+{
+    Vec3 sp10;
+    HSD_CObj* cobj;
+    s32 frame;
+    u8 val;
+    f32 scale;
+
+    PAD_STACK(8);
+    cobj = arg0->hsd_obj;
+    if (gm_801A36A0(lbl_804736C0.x38) & 0x100) {
+        lbl_804736C0.x37 = (lbl_804736C0.x37 & 0x0F) |
+            (((s32) cobj->eyepos->aobj->curr_frame / 300) << 4);
+        val = (lbl_804736C0.x37 & 0x0F) |
+            ((((lbl_804736C0.x37 >> 4) & 0xF) + 1) << 4);
+        lbl_804736C0.x37 = val;
+        if ((u32) ((val >> 4) & 0xF) >= 8U) {
+            lbl_804736C0.x37 = (lbl_804736C0.x37 & 0x0F);
+        }
+        frame = ((lbl_804736C0.x37 >> 4) & 0xF) * 0x12C;
+        HSD_CObjRemoveAnim(cobj);
+        HSD_CObjAddAnim(cobj, *lbl_804736C0.x4);
+        HSD_CObjReqAnim(cobj, (f32) frame);
+    }
+    HSD_CObjAnim(cobj);
+    HSD_CObjGetInterest(cobj, &sp10);
+    scale = Ground_801C0498();
+    sp10.x *= scale;
+    sp10.y *= scale;
+    sp10.z *= scale;
+    HSD_CObjSetInterest(cobj, &sp10);
+    HSD_CObjGetEyePosition(cobj, &sp10);
+    scale = Ground_801C0498();
+    sp10.x *= scale;
+    sp10.y *= scale;
+    sp10.z *= scale;
+    HSD_CObjSetEyePosition(cobj, &sp10);
+}
 
 /// #fn_80187AB4
 
@@ -790,11 +839,6 @@ void gm_80188364_OnLeave(void* arg0)
     HSD_Archive** var = &lbl_804D6620;
     lbArchive_80016EFC(*var);
 }
-
-static struct {
-    u8 pad[0x36];
-    u8 x36;
-} lbl_804736C0;
 
 void gm_8018838C_OnFrame(void)
 {
