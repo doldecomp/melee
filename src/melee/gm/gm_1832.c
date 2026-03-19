@@ -17,6 +17,7 @@
 #include <sysdolphin/baselib/state.h>
 #include <sysdolphin/baselib/tobj.h>
 #include <sysdolphin/baselib/util.h>
+#include <sysdolphin/baselib/random.h>
 #include <melee/cm/camera.h>
 #include <melee/ef/efasync.h>
 #include <melee/ef/eflib.h>
@@ -61,7 +62,9 @@ static struct {
 static struct {
     HSD_ImageDesc x40[3];
     HSD_ImageDesc x88[3];
-    u8 pad[0xE0 - 0x88 - 3 * 0x18];
+    u8 xD0[10]; ///< image descriptor indices for splash effect
+    u8 pad_DA[2];
+    HSD_GObj* xDC; ///< display GObj for splash screen SObjs
     u8 xE0;
     u8 xE1;
     u8 xE2;
@@ -84,6 +87,7 @@ static struct {
 } lbl_804735E8;
 
 static HSD_Archive* lbl_804D65F4;
+static HSD_GObj* lbl_804D65F0;
 
 extern int lbl_804D6608;
 extern s32 lbl_803B7C40[];
@@ -330,6 +334,7 @@ void fn_80185408(int x, float arg8, float arg9, float argA, float argB)
 
 extern float MSL_TrigF_80400770[];
 extern float MSL_TrigF_80400774[];
+#pragma dont_inline on
 double fn_801855BC(double arg8)
 {
     f64 temp_f2;
@@ -356,6 +361,7 @@ double fn_801855BC(double arg8)
     }
     return MSL_TrigF_80400774[0];
 }
+#pragma dont_inline reset
 
 void fn_8018564C(HSD_GObj* gobj)
 {
@@ -393,6 +399,48 @@ void fn_8018575C(HSD_GObj* gobj)
 }
 
 /// #fn_801857C4
+void fn_801857C4(HSD_GObj* arg0)
+{
+    HSD_ImageDesc* desc[3];
+    f32 x, y;
+    HSD_SObj* sobj;
+    s32 r24;
+    s32 row;
+    u8 i;
+    u32 delay;
+    u8* img_ptr;
+
+    PAD_STACK(48);
+
+    if (lbl_804735E8.xE1 != 0) {
+        HSD_GObjPLink_80390228(lbl_804D65F0);
+        img_ptr = (u8*) &lbl_804735E8;
+        i = 0;
+        delay = 1;
+        do {
+            desc[0] = &lbl_804735E8.x40[img_ptr[0x90]];
+            desc[1] = 0;
+            desc[2] = &lbl_804735E8.x88[img_ptr[0x90]];
+            sobj = HSD_SObjLib_803A477C(lbl_804735E8.xDC, (s32) &desc[0],
+                                        0, 0, 0x80, 1);
+            r24 = (s32) fn_801855BC((f64)(u32) 10);
+            row = (s32) i / (s32)(u8) r24;
+            x = (40.0f * HSD_Randf()) +
+                (280.0f + ((290.0f / (f32)(u8)(((u8) r24 + 9) / (u8) r24)) *
+                           (f32)(i % (u8) r24)));
+            i++;
+            img_ptr++;
+            y = (40.0f * HSD_Randf()) +
+                (((160.0f / (f32)(u8) r24) * (f32) row) + -60.0f);
+            sobj->x10 = x;
+            sobj->x14 = y;
+            sobj->x48 = delay;
+            delay += 8;
+            sobj->x40 |= 9;
+        } while ((s32) i < 10);
+        HSD_GObjPLink_80390228(arg0);
+    }
+}
 
 void fn_801859C8(HSD_GObj* gobj)
 {
