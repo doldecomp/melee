@@ -9,6 +9,7 @@
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/sislib.h>
 #include <sysdolphin/baselib/sobjlib.h>
 #include <sysdolphin/baselib/state.h>
 #include <sysdolphin/baselib/tobj.h>
@@ -33,6 +34,7 @@
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbbgflash.h>
+#include <melee/lb/lblanguage.h>
 #include <melee/mn/types.h>
 #include <melee/mp/mpcoll.h>
 #include <melee/pl/player.h>
@@ -399,7 +401,34 @@ void fn_80185F5C(s32 arg0)
     }
 }
 
-/// #fn_80186080
+void fn_80186080(void)
+{
+    s32 temp_r31;
+
+    temp_r31 = HSD_SisLib_803A611C(0, NULL, 9, 0x14, 0, 0xE, 0, 0x12);
+    HSD_SisLib_803A62A0(0, "SdIntro.dat", "SIS_IntroData");
+    lbl_804735A8.x4[6] = (HSD_JObj*) HSD_SisLib_803A5ACC(
+        0, temp_r31, 0.0f, 0.0f, 0.0f, 640.0f, 480.0f);
+    if (lbl_804735E8.xE8 == 1) {
+        if (lbLang_IsSavedLanguageUS()) {
+            HSD_SisLib_803A6368((HSD_Text*) lbl_804735A8.x4[6], 5);
+            return;
+        }
+        HSD_SisLib_803A6368((HSD_Text*) lbl_804735A8.x4[6], 2);
+    } else if (lbl_804735E8.xE8 == 3) {
+        if (lbLang_IsSavedLanguageUS()) {
+            HSD_SisLib_803A6368((HSD_Text*) lbl_804735A8.x4[6], 6);
+            return;
+        }
+        HSD_SisLib_803A6368((HSD_Text*) lbl_804735A8.x4[6], 3);
+    } else if (lbl_804735E8.xE8 == 2) {
+        if (lbLang_IsSavedLanguageUS()) {
+            HSD_SisLib_803A6368((HSD_Text*) lbl_804735A8.x4[6], 7);
+            return;
+        }
+        HSD_SisLib_803A6368((HSD_Text*) lbl_804735A8.x4[6], 4);
+    }
+}
 
 /// #fn_801861B8
 

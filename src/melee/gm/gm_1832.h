@@ -28,7 +28,7 @@
 /* 185D64 */ void fn_80185D64(void);
 /* 185E34 */ s32 fn_80185E34(void);
 /* 185F5C */ void fn_80185F5C(s32);
-/* 186080 */ UNK_RET fn_80186080(UNK_PARAMS);
+/* 186080 */ void fn_80186080(void);
 /* 1861B8 */ UNK_RET fn_801861B8(UNK_PARAMS);
 /* 186400 */ UNK_RET fn_80186400(UNK_PARAMS);
 /* 186634 */ void fn_80186634(void*);
