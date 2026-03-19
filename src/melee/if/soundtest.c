@@ -304,6 +304,7 @@ bool fn_802FFCC8(void)
     return false;
 }
 
+#pragma dont_inline on
 void un_802FFCD0(int count, void* data)
 {
     int* arr = data;
@@ -312,6 +313,7 @@ void un_802FFCD0(int count, void* data)
         arr[i] = arr[count];
     }
 }
+#pragma dont_inline reset
 
 void un_802FFD94(int arg0, void* arg1, void* arg2)
 {
