@@ -1357,6 +1357,71 @@ s32 fn_80189B88(void)
 }
 
 /// #gm_80189CDC
+s32 gm_80189CDC(StartMeleeData* arg0)
+{
+    int* ptr = lbl_80473700;
+    s32 i;
+
+    *(u8*)&arg0->rules &= ~0xE0;
+    arg0->rules.is_teams = 1;
+    arg0->rules.xB = -1;
+    ((s32*)arg0)[9] = -1;
+    ((s32*)arg0)[8] = -1;
+    ((u8*)arg0)[5] |= 0x80;
+
+    ptr[74] = ((s32*)arg0)[24]; ptr[75] = ((s32*)arg0)[25];
+    ptr[76] = ((s32*)arg0)[26]; ptr[77] = ((s32*)arg0)[27];
+    ptr[78] = ((s32*)arg0)[28]; ptr[79] = ((s32*)arg0)[29];
+    ptr[80] = ((s32*)arg0)[30]; ptr[81] = ((s32*)arg0)[31];
+    ptr[82] = ((s32*)arg0)[32];
+    ptr[29] = ptr[74]; ptr[30] = ptr[75];
+    ptr[31] = ptr[76]; ptr[32] = ptr[77];
+    ptr[33] = ptr[78]; ptr[34] = ptr[79];
+    ptr[35] = ptr[80]; ptr[36] = ptr[81];
+    ptr[37] = ptr[82];
+
+    ptr[83] = ((s32*)arg0)[33]; ptr[84] = ((s32*)arg0)[34];
+    ptr[85] = ((s32*)arg0)[35]; ptr[86] = ((s32*)arg0)[36];
+    ptr[87] = ((s32*)arg0)[37]; ptr[88] = ((s32*)arg0)[38];
+    ptr[89] = ((s32*)arg0)[39]; ptr[90] = ((s32*)arg0)[40];
+    ptr[91] = ((s32*)arg0)[41];
+    ptr[38] = ptr[83]; ptr[39] = ptr[84];
+    ptr[40] = ptr[85]; ptr[41] = ptr[86];
+    ptr[42] = ptr[87]; ptr[43] = ptr[88];
+    ptr[44] = ptr[89]; ptr[45] = ptr[90];
+    ptr[46] = ptr[91];
+
+    ptr[92] = ((s32*)arg0)[42]; ptr[93] = ((s32*)arg0)[43];
+    ptr[94] = ((s32*)arg0)[44]; ptr[95] = ((s32*)arg0)[45];
+    ptr[96] = ((s32*)arg0)[46]; ptr[97] = ((s32*)arg0)[47];
+    ptr[98] = ((s32*)arg0)[48]; ptr[99] = ((s32*)arg0)[49];
+    ptr[100] = ((s32*)arg0)[50];
+    ptr[47] = ptr[92]; ptr[48] = ptr[93];
+    ptr[49] = ptr[94]; ptr[50] = ptr[95];
+    ptr[51] = ptr[96]; ptr[52] = ptr[97];
+    ptr[53] = ptr[98]; ptr[54] = ptr[99];
+    ptr[55] = ptr[100];
+
+    ptr[101] = ((s32*)arg0)[51]; ptr[102] = ((s32*)arg0)[52];
+    ptr[103] = ((s32*)arg0)[53]; ptr[104] = ((s32*)arg0)[54];
+    ptr[105] = ((s32*)arg0)[55]; ptr[106] = ((s32*)arg0)[56];
+    ptr[107] = ((s32*)arg0)[57]; ptr[108] = ((s32*)arg0)[58];
+    ptr[109] = ((s32*)arg0)[59];
+    ptr[56] = ptr[101]; ptr[57] = ptr[102];
+    ptr[58] = ptr[103]; ptr[59] = ptr[104];
+    ptr[60] = ptr[105]; ptr[61] = ptr[106];
+    ptr[62] = ptr[107]; ptr[63] = ptr[108];
+    ptr[64] = ptr[109];
+
+    ptr[1] = (s32)(arg0->players[0].slot - 1);
+    ptr[0] = 1;
+
+    for (i = 2; i < 27; i++) {
+        ptr[i] = 0;
+    }
+
+    return (s32)ptr;
+}
 
 s32 fn_8018A000(void)
 {
