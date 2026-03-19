@@ -144,7 +144,39 @@ void fn_80184A94(HSD_GObj* gobj)
 
 /// #fn_80184AB8
 
-/// #fn_8018504C
+void fn_8018504C(void)
+{
+    PAD_STACK(16);
+    if ((u16) lbl_804735A8.x3A < 0x31U) {
+        lbl_804735A8.x3A = (u16) (lbl_804735A8.x3A + 1);
+    } else {
+        lbl_804735A8.x3A = 0;
+    }
+    if ((u16) lbl_804735A8.x3C < 0x31U) {
+        lbl_804735A8.x3C = (u16) (lbl_804735A8.x3C + 1);
+    }
+    HSD_JObjReqAnimAll(lbl_804735A8.x4[5],
+        (f32) (lbl_804735A8.x3C + ((lbl_804735E8.xEE * 0x32) - 0x32)));
+    HSD_JObjAnimAll(lbl_804735A8.x4[5]);
+    HSD_JObjReqAnimAll(lbl_804735A8.x4[4],
+        (f32) (lbl_804735A8.x3A + ((lbl_804735E8.xEE * 0x32) - 0x32)));
+    HSD_JObjAnimAll(lbl_804735A8.x4[4]);
+    if (((u16) lbl_804735A8.x38 == 0x2D) &&
+        ((s32) lbl_804735E8.xE4 == 3))
+    {
+        switch ((s32) lbl_804735E8.xE8) {
+        case 1:
+            lbAudioAx_800237A8(0x7C864, 0x7F, 0x40);
+            return;
+        case 2:
+            lbAudioAx_800237A8(0x9C49, 0x7F, 0x40);
+            return;
+        case 3:
+            lbAudioAx_800237A8(0x9C47, 0x7F, 0x40);
+            break;
+        }
+    }
+}
 
 static f32 lbl_803D9248[] = {
     0.6f, 0.35f, 0.6f, 0.5f, 0.6f, 0.35f, 0.6f, 0.6f, 0.7f, 0.6f,
