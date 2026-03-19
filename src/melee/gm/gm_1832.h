@@ -43,7 +43,7 @@
 /* 18776C */ void gm_8018776C_OnFrame(void);
 /* 1877A8 */ void gm_801877A8_OnEnter(UNK_T);
 /* 187910 */ void fn_80187910(HSD_GObj*);
-/* 187AB4 */ UNK_RET fn_80187AB4(UNK_PARAMS);
+/* 187AB4 */ void fn_80187AB4(HSD_GObj*);
 /* 187C9C */ void fn_80187C9C(HSD_GObj*, int);
 /* 187CF4 */ UNK_RET fn_80187CF4(UNK_PARAMS);
 /* 187F48 */ void gm_80187F48_OnEnter(UNK_T);

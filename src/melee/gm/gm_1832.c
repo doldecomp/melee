@@ -10,6 +10,7 @@
 #include <sysdolphin/baselib/wobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/gobjplink.h>
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/sislib.h>
 #include <sysdolphin/baselib/sobjlib.h>
@@ -775,11 +776,21 @@ void gm_801877A8_OnEnter(void* arg0_)
 #pragma pop
 
 static struct {
-    void* x0;
+    DynamicModelDesc*** x0;
     HSD_CameraAnim** x4;
-    u8 pad_8[0x2E];
-    u8 x36;
-    u8 x37;
+    u8 pad_8[0x2C];
+    u16 x34;
+    struct {
+        u8 stage_index : 5;
+        u8 done : 1;
+        u8 flash : 1;
+        u8 active : 1;
+    } x36;
+    struct {
+        u8 frame_counter : 4;
+        u8 anim_state : 2;
+        u8 pad : 2;
+    } x37;
     u8 x38;
 } lbl_804736C0;
 
@@ -794,15 +805,15 @@ void fn_80187910(HSD_GObj* arg0)
     PAD_STACK(8);
     cobj = arg0->hsd_obj;
     if (gm_801A36A0(lbl_804736C0.x38) & 0x100) {
-        lbl_804736C0.x37 = (lbl_804736C0.x37 & 0x0F) |
+        *(u8*)&lbl_804736C0.x37 = (*(u8*)&lbl_804736C0.x37 & 0x0F) |
             (((s32) cobj->eyepos->aobj->curr_frame / 300) << 4);
-        val = (lbl_804736C0.x37 & 0x0F) |
-            ((((lbl_804736C0.x37 >> 4) & 0xF) + 1) << 4);
-        lbl_804736C0.x37 = val;
+        val = (*(u8*)&lbl_804736C0.x37 & 0x0F) |
+            ((((*(u8*)&lbl_804736C0.x37 >> 4) & 0xF) + 1) << 4);
+        *(u8*)&lbl_804736C0.x37 = val;
         if ((u32) ((val >> 4) & 0xF) >= 8U) {
-            lbl_804736C0.x37 = (lbl_804736C0.x37 & 0x0F);
+            *(u8*)&lbl_804736C0.x37 = (*(u8*)&lbl_804736C0.x37 & 0x0F);
         }
-        frame = ((lbl_804736C0.x37 >> 4) & 0xF) * 0x12C;
+        frame = ((*(u8*)&lbl_804736C0.x37 >> 4) & 0xF) * 0x12C;
         HSD_CObjRemoveAnim(cobj);
         HSD_CObjAddAnim(cobj, *lbl_804736C0.x4);
         HSD_CObjReqAnim(cobj, (f32) frame);
@@ -822,7 +833,70 @@ void fn_80187910(HSD_GObj* arg0)
     HSD_CObjSetEyePosition(cobj, &sp10);
 }
 
+typedef struct {
+    u8 pad_hi : 4;
+    u8 state : 2;
+    u8 pad_lo : 2;
+} x37_state_bits;
+
+typedef struct {
+    u8 b7 : 1, b6 : 1, b5 : 1, b4 : 1, b3 : 1, b2 : 1, b1 : 1, b0 : 1;
+} u8_bits;
+
 /// #fn_80187AB4
+void fn_80187AB4(HSD_GObj* gobj)
+{
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+    int state = lbl_804736C0.x37.anim_state;
+    DynamicModelDesc* desc;
+    int anim_state;
+
+    switch (state) {
+    case 0:
+        if (lb_8000B09C(jobj) == 0) {
+            lbl_804736C0.x37.anim_state = 1;
+            desc = (*lbl_804736C0.x0)[11 - lbl_804736C0.x36.stage_index];
+            if (desc->anims != NULL) {
+                anim_state = lbl_804736C0.x37.anim_state;
+                if (desc->anims[anim_state] != NULL) {
+                    lb_8000C0E8(jobj, anim_state, desc);
+                    HSD_JObjReqAnimAll(jobj, 0.0f);
+                    HSD_JObjAnimAll(jobj);
+                }
+            }
+            lbl_804736C0.x34 = 0x960;
+        }
+        break;
+    case 1:
+        if ((u32) lbl_804736C0.x36.active == 1U) {
+            lbl_804736C0.x36.flash = 1;
+        }
+        if (lbl_804736C0.x36.flash) {
+            lbl_804736C0.x37.anim_state = 2;
+            lbl_804736C0.x36.done = 1;
+            lbBgFlash_8002063C(1);
+        }
+        if (lb_8000B09C(jobj) == 0) {
+            desc = (*lbl_804736C0.x0)[11 - lbl_804736C0.x36.stage_index];
+            if (desc->anims != NULL) {
+                anim_state = lbl_804736C0.x37.anim_state;
+                if (desc->anims[anim_state] != NULL) {
+                    lb_8000C0E8(jobj, anim_state, desc);
+                    HSD_JObjReqAnimAll(jobj, 0.0f);
+                    HSD_JObjAnimAll(jobj);
+                }
+            }
+        }
+        break;
+    case 2:
+        if (lb_8000B09C(jobj) == 0) {
+            lbl_804736C0.x36.done = 1;
+            HSD_GObjPLink_80390228(gobj);
+        }
+        break;
+    }
+    HSD_JObjAnimAll(GET_JOBJ(gobj));
+}
 
 void fn_80187C9C(HSD_GObj* gobj, int arg1)
 {
@@ -845,7 +919,7 @@ void gm_80188364_OnLeave(void* arg0)
 
 void gm_8018838C_OnFrame(void)
 {
-    if (((u8) lbl_804736C0.x36 >> 2U) & 1) {
+    if (lbl_804736C0.x36.done) {
         gm_801A4B60();
     }
 }
@@ -1241,10 +1315,6 @@ f32 gm_8018A314(u8 difficulty, u8 stage_slot)
     return (f32) lbl_803D9910[stage_slot + (difficulty * 5)].scale1_pct /
            100.0F;
 }
-
-typedef struct {
-    u8 b7 : 1, b6 : 1, b5 : 1, b4 : 1, b3 : 1, b2 : 1, b1 : 1, b0 : 1;
-} u8_bits;
 
 /// #fn_8018A364
 void fn_8018A364(int arg0_int)
