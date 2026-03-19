@@ -36,6 +36,7 @@
 #include "it/items/itkirby_2F23.h"
 #include "it/items/itkirbycutterbeam.h"
 #include "it/items/itkirbyhammer.h"
+#include "it/items/itluigifireball.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbanim.h"
 #include "lb/lbvector.h"
@@ -2696,7 +2697,22 @@ void ftKb_LgSpecialAirN_Coll(Fighter_GObj* gobj)
     }
 }
 
-/// #fn_800F98F4
+void fn_800F98F4(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    if (ftCheckThrowB0(fp)) {
+        Vec3 pos;
+        Fighter_Part bone;
+        PAD_STACK(4);
+        bone = ftParts_GetBoneIndex(fp, FtPart_LHandN);
+        lb_8000B1CC(fp->parts[bone].joint, NULL, &pos);
+        it_802C01AC(gobj, &pos, It_Kind_Kirby_LuigiFire,
+                    fp->facing_dir);
+        bone = ftParts_GetBoneIndex(fp, FtPart_LHandN);
+        efSync_Spawn(0x4B1, gobj, fp->parts[bone].joint,
+                     &fp->facing_dir);
+    }
+}
 
 void ftKb_SpecialNCa_800F99BC(Fighter_GObj* gobj)
 {
