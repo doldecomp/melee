@@ -47,7 +47,7 @@
 /* 200578 */ void grRCruise_80200578(Ground*, s32, CollData*, s32,
                                      mpLib_GroundEnum, f32);
 /* 20071C */ void grRCruise_8020071C(Ground_GObj*);
-/* 200B48 */ UNK_RET grRCruise_80200B48(UNK_PARAMS);
+/* 200B48 */ void grRCruise_80200B48(Ground_GObj*);
 /* 200C04 */ void grRCruise_80200C04(Ground_GObj*);
 /* 2010A4 */ void grRCruise_802010A4(Ground_GObj*, s32, CollData*);
 /* 201110 */ void grRCruise_80201110(Ground_GObj*);

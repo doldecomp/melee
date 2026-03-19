@@ -670,8 +670,16 @@ struct grStadium_type9_GroundVars {
     /* D4   */ HSD_JObj* xD4_jobj;
 };
 
+struct grYorster_TrackElement {
+    /* 0x00 */ u8 pad_00[4];
+    /* 0x04 */ f32 x4;
+    /* 0x08 */ u8 pad_08[0x14];
+    /* 0x1C */ HSD_GObj* x1C;
+};
+
 struct grYorster_GroundVars {
     int xC4;
+    struct grYorster_TrackElement elements[9];
 };
 
 struct grZebes_GroundVars {
