@@ -65,7 +65,6 @@ extern BgFlashData lbl_80433658;
 /* 021A10 */ static void lbBgFlash_80021A10(f32 arg8);
 /* 021C18 */ static void fn_80021C18(HSD_GObj* gobj, CommandInfo* cmd,
                                      int arg2);
-/// @brief Initialize background flash state.
 
 extern GXColor lbl_804D3840;
 extern GXColor lbl_804D3844;
@@ -146,7 +145,6 @@ void fn_8001FC08(void)
     }
 }
 
-/// #fn_8001FEC4
 void fn_8001FEC4(HSD_GObj* gobj, s32 code)
 {
     BgFlashData* data = &lbl_80433658;
@@ -163,10 +161,10 @@ void fn_8001FEC4(HSD_GObj* gobj, s32 code)
     mode = data->state.mode;
 
     if (mode == 5 || mode >= 5 || mode < 3) {
-        u8 a = ((u8*) &data->xC)[3];
-        u8 b = ((u8*) &data->xC)[2];
-        u8 g = ((u8*) &data->xC)[1];
-        u8 r = ((u8*) &data->xC)[0];
+        u8 a = data->xC.a;
+        u8 b = data->xC.b;
+        u8 g = data->xC.g;
+        u8 r = data->xC.r;
 
         GXBegin(GX_QUADS, GX_VTXFMT0, 4);
         GXPosition2f32(0.0f, 0.0f);
@@ -304,10 +302,10 @@ void fn_800204C8(void)
 
 case_0_1_2:
     fn_8001FC08();
-    ((u8*) &data->xC)[0] = (s32) data->x10[0];
-    ((u8*) &data->xC)[1] = (s32) data->x10[1];
-    ((u8*) &data->xC)[2] = (s32) data->x10[2];
-    ((u8*) &data->xC)[3] = (s32) data->x10[3];
+    data->xC.r = data->x10[0];
+    data->xC.g = data->x10[1];
+    data->xC.b = data->x10[2];
+    data->xC.a = data->x10[3];
     return;
 
 case_3_4:
