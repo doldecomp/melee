@@ -4,6 +4,7 @@
 #include "ft/forward.h"
 #include "it/forward.h"
 
+#include "it/itCharItems.h"
 #include "it/items/types.h"
 
 #include <baselib/forward.h>
@@ -12,8 +13,8 @@
 
 /* 2A77DC */ void it_802A77DC(Item_GObj* gobj);
 /* 2B7150 */ void itSamusGrapple_Logic53_Spawned(Item_GObj*);
-/* 2B7160 */ UNK_RET it_802B7160(UNK_PARAMS);
-/* 2B743C */ UNK_RET it_802B743C(UNK_PARAMS);
+/* 2B7160 */ s32 it_802B7160(Fighter_GObj*, void*);
+/* 2B743C */ void it_802B743C(HSD_GObj*, Item*, s32);
 /* 2B75FC */ HSD_JObj* it_802B75FC(Item*, HSD_JObj*, s32, f32);
 /* 2B7B84 */ void it_802B7B84(Item_GObj* gobj);
 /* 2B7C18 */ Item_GObj* it_802B7C18(Fighter_GObj*, Vec3*, float facing_dir);
@@ -35,17 +36,27 @@
 /* 2B8D24 */ void itSamusgrapple_UnkMotion7_Phys(Item_GObj* gobj);
 /* 2B8D38 */ void fn_802B8D38(Item_GObj*);
 /* 2B8FF8 */ void itSamusgrapple_UnkMotion8_Phys(Item_GObj* gobj);
-/* 2B900C */ UNK_RET it_802B900C(UNK_PARAMS);
-/* 2B91C4 */ UNK_RET it_802B91C4(UNK_PARAMS);
-/* 2B9328 */ UNK_RET it_802B9328(UNK_PARAMS);
-/* 2B99A0 */ UNK_RET it_802B99A0(UNK_PARAMS);
-/* 2B9CE8 */ UNK_RET it_802B9CE8(UNK_PARAMS);
-/* 2B9FD4 */ UNK_RET it_802B9FD4(UNK_PARAMS);
-/* 2BA194 */ UNK_RET it_802BA194(UNK_PARAMS);
-/* 2BA2D8 */ UNK_RET it_802BA2D8(UNK_PARAMS);
-/* 2BA3BC */ UNK_RET it_802BA3BC(UNK_PARAMS);
-/* 2BA5DC */ UNK_RET it_802BA5DC(UNK_PARAMS);
-/* 2BA760 */ UNK_RET it_802BA760(UNK_PARAMS);
+/* 2B900C */ void it_802B900C(ItemLink*, Vec3*, itSamusGrappleAttributes*,
+                              f32);
+/* 2B91C4 */ void it_802B91C4(ItemLink*, Vec3*, itSamusGrappleAttributes*,
+                              f32);
+/* 2B9328 */ s32 it_802B9328(ItemLink*, Vec3*, itSamusGrappleAttributes*,
+                             Fighter*);
+/* 2B99A0 */ s32 it_802B99A0(ItemLink*, Vec3*, itSamusGrappleAttributes*,
+                             Fighter*);
+/* 2B9CE8 */ void it_802B9CE8(ItemLink*, Vec3*, itSamusGrappleAttributes*,
+                              Fighter*);
+/* 2B9FD4 */ bool it_802B9FD4(ItemLink*, Vec3*, itSamusGrappleAttributes*);
+/* 2BA194 */ bool it_802BA194(ItemLink*, Vec3*, itSamusGrappleAttributes*,
+                              f32);
+/* 2BA2D8 */ bool it_802BA2D8(ItemLink*, Vec3*, itSamusGrappleAttributes*,
+                              f32);
+/* 2BA3BC */ bool it_802BA3BC(ItemLink*, ItemLink*, Vec3*,
+                              itSamusGrappleAttributes*, f32);
+/* 2BA5DC */ void it_802BA5DC(ItemLink*, ItemLink*, Vec3*,
+                              itSamusGrappleAttributes*);
+/* 2BA760 */ bool it_802BA760(ItemLink*, Vec3*, itSamusGrappleAttributes*,
+                              Fighter*);
 /* 2BA97C */ void itSamusGrapple_Logic53_PickedUp(Item_GObj*);
 /* 2BA9B8 */ void it_802BA9B8(Item_GObj* gobj);
 /* 2BAA08 */ void it_802BAA08(Item_GObj* gobj);

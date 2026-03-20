@@ -64,7 +64,7 @@
 /* 21E4FC */ void grHomeRun_8021E4FC(Ground_GObj*);
 /* 21E500 */ UNK_RET grHomeRun_8021E500(UNK_PARAMS);
 /* 21E994 */ UNK_RET fn_8021E994(UNK_PARAMS);
-/* 21EA30 */ UNK_RET grHomeRun_8021EA30(UNK_PARAMS);
+/* 21EA30 */ void grHomeRun_8021EA30(f32*);
 /* 21EAF8 */ UNK_RET grHomeRun_8021EAF8(UNK_PARAMS);
 /* 21EB10 */ void fn_8021EB10(HSD_GObj*);
 /* 21EC58 */ void* grHomeRun_8021EC58(u16);

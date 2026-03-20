@@ -1964,11 +1964,14 @@ extern f32 ftKb_Init_804D9448;
 
 void ftKb_SsSpecialNHold_Anim(Fighter_GObj* gobj)
 {
+    Fighter* fp3;
     Fighter* fp = GET_FIGHTER(gobj);
     ftKb_DatAttrs* da = fp->dat_attrs;
     f32 ratio;
     int i;
-    PAD_STACK(28);
+    Fighter* fp2 = GET_FIGHTER(gobj);
+    fp3 = (fp2 = fp);
+    PAD_STACK(0x18);
     if (fp->cmd_vars[2] != 0) {
         fp->cmd_vars[2] = 0;
         if (fp->fv.kb.xA8 != 0) {
@@ -1979,13 +1982,13 @@ void ftKb_SsSpecialNHold_Anim(Fighter_GObj* gobj)
         i = ftKb_Init_804D9448 * ratio;
         ft_80088510(fp, ftKb_Init_803CB6C0[i], 0x7F, 0x40);
     }
-    fp->mv.kb.specialhi.x4 += 1;
-    if (fp->mv.kb.specialhi.x4 > da->specialn_ss_frames_per_charge_level) {
-        fp->mv.kb.specialhi.x4 = 0;
-        fp->fv.kb.xA8 += 1;
-        if (fp->fv.kb.xA8 >= da->specialn_ss_charge_time) {
-            ftCo_800BFFD0(fp, 0x36, 0);
-            fp->fv.kb.xA8 = da->specialn_ss_charge_time;
+    fp3->mv.kb.specialhi.x4 += 1;
+    if (fp3->mv.kb.specialhi.x4 > da->specialn_ss_frames_per_charge_level) {
+        fp3->mv.kb.specialhi.x4 = 0;
+        fp3->fv.kb.xA8 += 1;
+        if (fp3->fv.kb.xA8 >= da->specialn_ss_charge_time) {
+            ftCo_800BFFD0(fp3, 0x36, 0);
+            fp3->fv.kb.xA8 = da->specialn_ss_charge_time;
             Fighter_ChangeMotionState(gobj, ftKb_MS_SsSpecialNCancel, 0, 0.0F,
                                       1.0F, 0.0F, NULL);
             ftKb_ChargeShot_inline(gobj);

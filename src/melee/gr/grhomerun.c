@@ -10,7 +10,10 @@
 #include "gr/stage.h"
 #include "it/it_26B1.h"
 #include "lb/lb_00B0.h"
+#include "lb/lblanguage.h"
 
+int grHr_804D6ADC;
+f32 grHr_804D6AE0;
 f32 grHr_804D6AE4;
 static void* grHr_804D6AE8;
 StageCallbacks grHr_803E8140[11] = {
@@ -392,7 +395,29 @@ void grHomeRun_8021E4FC(Ground_GObj* arg) {}
 
 /// #fn_8021E994
 
-/// #grHomeRun_8021EA30
+void grHomeRun_8021EA30(f32* pos)
+{
+    f32 result;
+    f32 time;
+
+    time = Ground_801C0498();
+    result = *pos - 70.0F * (grHr_804D6AE4 * time);
+
+    time = Ground_801C0498();
+    result /= grHr_804D6AE4 * ((f32) grHr_804D6ADC * (160.0F * time));
+    result *= grHr_804D6AE0;
+
+    if (result < 0.0F) {
+        result = 0.0F;
+    }
+
+    if (lbLang_IsSavedLanguageUS()) {
+        result = (f32)(result * 0.304788);
+    }
+
+    stage_info.x6E0 = 100.0F * result;
+    PAD_STACK(8);
+}
 
 void grHomeRun_8021EAF8(void)
 {

@@ -43,6 +43,8 @@ StageCallbacks grRc_803E4E34[7] = {
       grRCruise_801FF920, 0 },
 };
 
+extern s16 grRc_803E4FF0[];
+
 static struct {
     int x0;
 }* grRc_804D6A10;
@@ -321,7 +323,22 @@ void grRCruise_80200540(Ground_GObj* gobj)
 
 /// #grRCruise_8020071C
 
-/// #grRCruise_80200B48
+void grRCruise_80200B48(Ground_GObj* gobj)
+{
+    Ground* gp = gobj->user_data;
+    s32 i;
+
+    for (i = 0; i < 17; i++) {
+        struct grRCruise_Entry* entry = &gp->gv.rcruise.entries[i];
+        entry->x02 =
+            Ground_801C32D4(gp->map_id, grRc_803E4FF0[i]);
+        entry->x14 = Ground_801C3FA4(gobj, grRc_803E4FF0[i]);
+        entry->x08 = 0;
+        entry->x04 = 0;
+        entry->x0C = HSD_JObjGetTranslationY(entry->x14);
+        entry->x00 = 0;
+    }
+}
 
 /// #grRCruise_80200C04
 

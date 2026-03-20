@@ -25,7 +25,8 @@
 /* 202254 */ void grYorster_80202254(Ground_GObj*);
 /* 2022A0 */ void grYorster_802022A0(Ground_GObj*);
 /* 2022A4 */ void grYorster_802022A4(void);
-/* 202428 */ UNK_RET grYorster_80202428(UNK_PARAMS);
+/* 202428 */ void grYorster_80202428(HSD_GObj*, Ground*, Vec3*,
+                                     HSD_GObj*, f32);
 /* 2024F0 */ UNK_RET grYorster_802024F0(UNK_PARAMS);
 /* 20266C */ void grYorster_8020266C(HSD_GObj*);
 /* 202B5C */ DynamicsDesc* grYorster_80202B5C(enum_t);

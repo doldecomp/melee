@@ -155,9 +155,12 @@ typedef struct itKyasarinAttributes {
     /* +0  */ s32* x0;
     /* +4  */ f32 x4;
     /* +8  */ f32 x8;
-    /* +C  */ u8 xC_pad[0x28 - 0xC];
+    /* +C  */ f32 xC;
+    /* +10 */ u8 x10_pad[0x28 - 0x10];
     /* +28 */ f32 x28;
     /* +2C */ f32 x2C;
+    /* +30 */ f32 x30;
+    /* +34 */ f32 x34;
 } itKyasarinAttributes;
 
 typedef struct itKyasarinEgg_ItemVars {

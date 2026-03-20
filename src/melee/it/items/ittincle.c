@@ -6,12 +6,31 @@
 #include "it/it_2725.h"
 #include "it/itCommonItems.h"
 #include "it/item.h"
+#include "lb/lb_00B0.h"
 
+#include <MSL/math.h>
 #include <baselib/random.h>
 
 /* 2EC870 */ static void it_802EC870(Item_GObj*, int);
 
-/// #it_802EB5C8
+void it_802EB5C8(Item_GObj* gobj)
+{
+    Vec3 pos;
+    Item* ip = GET_ITEM(gobj);
+
+    it_8027B730(gobj);
+    ip->xD5C = 0;
+    ip->xDCC_flag.b3 = 0;
+    ip->xDC8_word.flags.x15 = 0;
+    it_8027542C(gobj);
+
+    lb_8000B1CC(ip->xBBC_dynamicBoneTable->bones[11], NULL, &pos);
+
+    ip->xDD4_itemVar.tincle.x50 = ABS(pos.y - ip->pos.y);
+
+    ip->xDD4_itemVar.tincle.x68 = ip->xC1C;
+    it_802EB6DC(gobj);
+}
 
 bool itTincle_Logic13_DmgReceived(Item_GObj* gobj)
 {

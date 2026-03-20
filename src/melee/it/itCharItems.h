@@ -596,8 +596,8 @@ typedef struct itSamusChargeShot_Attributes {
 } itSamusChargeShot_Attributes;
 
 typedef struct itSamusGrapple_ItemVars {
-    /*  +0 ip+DD4 */ f32 x0;
-    /*  +4 ip+DD8 */ f32 x4;
+    /*  +0 ip+DD4 */ ItemLink* x0;
+    /*  +4 ip+DD8 */ ItemLink* x4;
     /*  +8 ip+DDC */ HSD_GObj* x8;
     /*  +C ip+DE0 */ HSD_JObj* xC;
     /* +10 ip+DE4 */ void (*unk_10)(Item_GObj*);
@@ -605,6 +605,50 @@ typedef struct itSamusGrapple_ItemVars {
     /* +15 ip+DE9 */ u8 x15;
     /* +16 ip+DEA */ u8 x16;
 } itSamusGrapple_ItemVars;
+
+typedef struct itSamusGrappleAttributes {
+    /* +00 */ f32 x0;
+    /* +04 */ f32 x4;
+    /* +08 */ f32 x8;
+    /* +0C */ f32 xC;
+    /* +10 */ f32 x10;
+    /* +14 */ f32 x14;
+    /* +18 */ f32 x18;
+    /* +1C */ f32 x1C;
+    /* +20 */ f32 x20;
+    /* +24 */ f32 x24;
+    /* +28 */ f32 x28;
+    /* +2C */ f32 x2C;
+    /* +30 */ f32 x30;
+    /* +34 */ s32 x34;
+    /* +38 */ f32 x38;
+    /* +3C */ f32 x3C;
+    /* +40 */ f32 x40;
+    /* +44 */ f32 x44;
+    /* +48 */ f32 x48;
+    /* +4C */ f32 x4C;
+    /* +50 */ f32 x50;
+    /* +54 */ f32 x54;
+    /* +58 */ f32 x58;
+    /* +5C */ f32 x5C;
+    /* +60 */ f32 x60;
+    /* +64 */ HSD_Joint* x64;
+    /* +68 */ HSD_Joint* x68;
+    /* +6C */ HSD_Joint* x6C;
+    /* +70 */ HSD_Joint* x70;
+    /* +74 */ HSD_AnimJoint** x74;
+    /* +78 */ HSD_MatAnimJoint** x78;
+    /* +7C */ HSD_ShapeAnimJoint** x7C;
+    /* +80 */ HSD_AnimJoint** x80;
+    /* +84 */ HSD_MatAnimJoint** x84;
+    /* +88 */ HSD_ShapeAnimJoint** x88;
+    /* +8C */ HSD_AnimJoint** x8C;
+    /* +90 */ HSD_MatAnimJoint** x90;
+    /* +94 */ HSD_ShapeAnimJoint** x94;
+    /* +98 */ HSD_AnimJoint** x98;
+    /* +9C */ HSD_MatAnimJoint** x9C;
+    /* +A0 */ HSD_ShapeAnimJoint** xA0;
+} itSamusGrappleAttributes;
 
 typedef struct itSamusMissileAttributes {
     /* +0 */ f32 x0;
