@@ -2181,7 +2181,22 @@ bool fn_800DC044(Fighter_GObj* gobj)
     return false;
 }
 
-/// #fn_800DC070
+void fn_800DC070(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    Fighter_GObj* victim = fp->victim_gobj;
+
+    ftCommon_8007D5D4(fp);
+
+    fp->self_vel.x = -fp->facing_dir * p_ftCommonData->x374;
+    fp->self_vel.y = p_ftCommonData->x378;
+    fp->mv.co.buryjump.x0 = 0.0F;
+
+    ftCo_800DC920(victim, gobj);
+
+    Fighter_ChangeMotionState(gobj, ftCo_MS_CaptureJump, 0, 0.0F, 1.0F, 0.0F,
+                              NULL);
+}
 
 void ftCo_CaptureJump_Anim(Fighter_GObj* gobj)
 {
