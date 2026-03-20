@@ -86,7 +86,7 @@ bool grKraid_801FE0BC(void)
 }
 
 static char grKr_803E4D40[32] = "%s:%d: couldn t get gobj(id=%d)\n";
-static char grKr_803E4D64[9] = __FILE__;
+static char grKr_803E4D64[10] = "grkraid.c";
 
 HSD_GObj* grKraid_801FE0C4(int gobj_id)
 {
