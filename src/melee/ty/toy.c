@@ -664,7 +664,25 @@ s32 un_80305C44(void)
     return button;
 }
 
-/// #un_80305D00
+float un_80305D00(void)
+{
+    float ret;
+    float val;
+    int i;
+
+    for (i = 0; i < 4; i++) {
+        val = HSD_PadCopyStatus[(u8) i].nml_stickX;
+        ret = val;
+        if (val < 0.0F) {
+            val = -val;
+        }
+        if (val > 0.1F) {
+            break;
+        }
+    }
+
+    return ret;
+}
 
 float un_80305DB0(void)
 {
