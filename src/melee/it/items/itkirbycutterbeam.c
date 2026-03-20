@@ -1,14 +1,38 @@
 #include "itkirbycutterbeam.h"
 
+#include "db/db.h"
+#include "it/it_26B1.h"
+#include "it/it_2725.h"
+#include "it/item.h"
+#include "it/types.h"
+
 #include <placeholder.h>
 #include <platform.h>
 
-#include "it/forward.h"
+void it_8029BAB8(HSD_GObj* gobj, Vec3* pos, float facing_dir)
+{
+    Item_GObj* spawned_gobj;
 
-#include "it/it_26B1.h"
-#include "it/it_2725.h"
+    SpawnItem spawn;
+    pos->z = 0.0f;
+    spawn.kind = It_Kind_Kirby_CBeam;
+    spawn.prev_pos = *pos;
+    it_8026BB68(gobj, &spawn.pos);
+    spawn.facing_dir = facing_dir;
+    spawn.x3C_damage = 0;
+    spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;
+    spawn.x0_parent_gobj = gobj;
+    spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
+    spawn.x44_flag.b0 = true;
+    spawn.x40 = 0;
 
-/// #it_8029BAB8
+    spawned_gobj = Item_80268B18(&spawn);
+    if (spawned_gobj != NULL) {
+        it_8029BB90(spawned_gobj, gobj);
+        db_80225DD8(spawned_gobj, gobj);
+        it_802750F8(spawned_gobj);
+    }
+}
 
 /// #it_8029BB90
 
