@@ -25,7 +25,7 @@ file: src/melee/gm/gm_1832.c
 - [ ] fn_80185A0C
 - [ ] gm_80187F48_OnEnter
 - [ ] fn_80186F6C
-- [ ] fn_80184AB8
+- [x] fn_80184AB8
 - [ ] fn_80186634
 - [ ] fn_80184138
 - [ ] fn_801891F4
