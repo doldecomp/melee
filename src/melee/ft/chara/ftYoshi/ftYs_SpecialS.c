@@ -1253,6 +1253,12 @@ void ftYs_SpecialAirSLoop_2_Coll(Fighter_GObj* gobj)
     }
 }
 
+// NOTE: found by permuter, obviously fake
+static inline f32 inline_mul(f32 a, f32 b)
+{
+    return a * b;
+}
+
 void ftYs_SpecialAirSLoop_3_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -1299,9 +1305,9 @@ void ftYs_SpecialAirSLoop_3_Coll(Fighter_GObj* gobj)
             fp->self_vel.z = 0.0F;
             fp->self_vel.y = 0.0F;
             fp->mv.ys.specials.x14 =
-                (f32) ((f64) (2.0 * M_PI / 25.0) *
-                           (attributes->xD8 * ABS(fp->mv.ys.specials.x1C)) +
-                       (f64) fp->mv.ys.specials.x14);
+                ((2.0 * M_PI / 25.0) *
+                     inline_mul(attributes->xD8, ABS(fp->mv.ys.specials.x1C)) +
+                 fp->mv.ys.specials.x14);
             ftYs_SpecialS_WrapAndSetRotX(gobj);
             ftCommon_8007EBAC(fp, 1, 0);
         } else {
