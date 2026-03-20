@@ -96,7 +96,37 @@ void it_802CA6A0(Item_GObj* gobj)
     ip->on_accessory = it_802CA8DC;
 }
 
-/// #itKamex_UnkMotion1_Anim
+bool itKamex_UnkMotion1_Anim(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    PAD_STACK(8);
+
+    if (!it_80272C6C(gobj)) {
+        if (ip->xDD4_itemVar.pokemon.timer <= 0) {
+            ip->xDD4_itemVar.pokemon.timer = 0;
+            ip->x40_vel.x = 0.0f;
+            it_802CA938(gobj);
+        } else {
+            ip->xDD4_itemVar.pokemon.timer--;
+            {
+                Item* ip = GET_ITEM(gobj);
+                itKamexAttributes* attrs =
+                    ip->xC4_article_data->x4_specialAttributes;
+
+                if (ip->xDD4_itemVar.pokemon.timer == -1) {
+                    ip->xDD4_itemVar.pokemon.timer = attrs->timer;
+                    ip->xDD4_itemVar.pokemon.x68 = attrs->x18;
+                    ip->xDD4_itemVar.pokemon.x6C = attrs->x1C;
+                }
+            }
+            Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
+            ip->entered_hitlag = efLib_PauseAll;
+            ip->exited_hitlag = efLib_ResumeAll;
+            ip->on_accessory = it_802CA8DC;
+        }
+    }
+    return false;
+}
 
 void itKamex_UnkMotion1_Phys(Item_GObj* gobj)
 {
