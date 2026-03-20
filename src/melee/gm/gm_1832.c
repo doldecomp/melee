@@ -1122,7 +1122,80 @@ void fn_80186EFC(HSD_GObj* gobj)
     }
 }
 
-/// #fn_80186F6C
+static struct {
+    /* 0x00 */ f32 x0;
+    /* 0x04 */ f32 x4;
+    /* 0x08 */ f32 x8;
+    /* 0x0C */ f32 xC;
+    /* 0x10 */ f32 x10;
+    /* 0x14 */ f32 x14;
+} lbl_803D9498[] = {
+    { 0.0f, -4.5f, 0.0f, 1.0f, 1.0f, 1.0f },
+    { 0.0f, 1.5f, 0.0f, 0.6f, 0.6f, 0.6f },
+    { 0.0f, -5.3f, 0.0f, 1.3f, 1.3f, 1.3f },
+    { 0.0f, 1.0f, 0.0f, 1.0f, 1.0f, 1.0f },
+    { 0.0f, 5.5f, 0.0f, 0.75f, 0.75f, 0.75f },
+    { -1.1f, -2.0f, 0.0f, 0.5f, 0.5f, 0.5f },
+    { -1.0f, -3.5f, 0.0f, 1.3f, 1.3f, 1.3f },
+    { -1.0f, -0.5f, 0.0f, 1.35f, 1.35f, 1.35f },
+    { -1.0f, -2.0f, 0.0f, 1.4f, 1.4f, 1.4f },
+    { 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f },
+    { 0.0f, -6.0f, 0.0f, 1.0f, 1.0f, 1.0f },
+    { -1.0f, -0.5f, 0.0f, 1.1f, 1.1f, 1.1f },
+    { -2.0f, -6.5f, 0.0f, 1.3f, 1.3f, 1.3f },
+    { -0.5f, 2.5f, 0.0f, 1.0f, 1.0f, 1.0f },
+    { -0.8f, 5.0f, 0.0f, 0.7f, 0.7f, 0.7f },
+    { -1.0f, 4.0f, 0.0f, 0.8f, 0.8f, 0.8f },
+    { 0.0f, -5.0f, 0.0f, 1.0f, 1.0f, 1.0f },
+    { 0.0f, 2.0f, 0.0f, 0.9f, 0.9f, 0.9f },
+    { -1.0f, -12.5f, 0.0f, 1.8f, 1.8f, 1.8f },
+    { -3.5f, 0.0f, 0.0f, 1.8f, 1.8f, 1.8f },
+    { 0.0f, -1.0f, 0.0f, 1.0f, 1.0f, 1.0f },
+    { 0.0f, 1.0f, 0.0f, 1.0f, 1.0f, 1.0f },
+    { 0.0f, -2.5f, 0.0f, 1.1f, 1.1f, 1.1f },
+    { 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f },
+    { 0.0f, 5.5f, 0.0f, 0.4f, 0.4f, 0.4f },
+    { 1.0f, -11.0f, 0.0f, 1.3f, 1.3f, 1.3f },
+    { 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f },
+    { -1.1f, 2.5f, 0.0f, 0.4f, 0.4f, 0.4f },
+};
+
+void fn_80186F6C(HSD_GObj* arg0)
+{
+    Vec3 pos;
+    HSD_JObj* jobj = arg0->hsd_obj;
+    HSD_JObj* child = lbl_804736B0.x8;
+    PAD_STACK(8);
+
+    HSD_JObjGetTranslation(child, &pos);
+
+    pos.x -= 7.0f;
+    pos.x += lbl_803D9498[lbl_804D6618.x0].x0;
+    pos.y += lbl_803D9498[lbl_804D6618.x0].x4;
+    pos.z += lbl_803D9498[lbl_804D6618.x0].x8;
+
+    HSD_JObjSetTranslate(jobj, &pos);
+
+    HSD_JObjSetScaleX(jobj, lbl_803D9498[lbl_804D6618.x0].xC);
+    HSD_JObjSetScaleY(jobj, lbl_803D9498[lbl_804D6618.x0].x10);
+    HSD_JObjSetScaleZ(jobj, lbl_803D9498[lbl_804D6618.x0].x14);
+
+    {
+        HSD_GObj* entity2 = Player_GetEntityAtIndex(0, 1);
+        if (entity2 != NULL) {
+            HSD_JObj* jobj2 = entity2->hsd_obj;
+
+            HSD_JObjGetTranslation(jobj, &pos);
+            pos.x += 3.0f;
+            pos.z -= 5.0f;
+            pos.y += 4.0f;
+            HSD_JObjSetTranslate(jobj2, &pos);
+
+            HSD_JObjGetScale(jobj, &pos);
+            HSD_JObjSetScale(jobj2, &pos);
+        }
+    }
+}
 
 extern HSD_Archive* lbl_804D6610;
 
