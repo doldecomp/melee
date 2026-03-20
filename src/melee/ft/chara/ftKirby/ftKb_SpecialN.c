@@ -193,14 +193,13 @@ void ftKb_SpecialHi_Enter(Fighter_GObj* gobj)
 void ftKb_SpecialAirHi_Enter(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-    fp->cmd_vars[0] = fp->cmd_vars[1] = fp->cmd_vars[2] =
-        fp->cmd_vars[3] = 0;
+    fp->cmd_vars[0] = fp->cmd_vars[1] = fp->cmd_vars[2] = fp->cmd_vars[3] = 0;
     fp->mv.kb.specialhi.x0 = 0;
     fp->mv.kb.specialhi.x4 = 0;
     fp->mv.kb.specialhi.x8.i = 0;
     fp->mv.kb.specialhi.xC = 0;
-    Fighter_ChangeMotionState(gobj, ftKb_MS_SpecialAirHi1, 0, 0.0f,
-                              1.0f, 0.0f, NULL);
+    Fighter_ChangeMotionState(gobj, ftKb_MS_SpecialAirHi1, 0, 0.0f, 1.0f, 0.0f,
+                              NULL);
     ftAnim_8006EBA4(gobj);
     fp = GET_FIGHTER(gobj);
     efSync_Spawn(0x494, gobj);
@@ -1583,6 +1582,7 @@ void ftKb_SpecialN_800F5D04(Fighter_GObj* gobj, bool arg1)
     new_var->fv.kb.hat.kind = 4;
 }
 
+#pragma push
 #pragma dont_inline on
 void ftKb_SpecialN_800F5DE8(Fighter_GObj* gobj)
 {
@@ -1595,10 +1595,8 @@ void ftKb_SpecialN_800F5DE8(Fighter_GObj* gobj)
     pos.y += da->specialn_y_offset_inhaled;
 
     {
-        f64 dist =
-            it_802F23AC((int*) fp->target_item_gobj, (float*) &pos);
-        if (dist <
-            da->specialn_inhale_velocity * da->specialn_inhale_velocity)
+        f64 dist = it_802F23AC((int*) fp->target_item_gobj, (float*) &pos);
+        if (dist < da->specialn_inhale_velocity * da->specialn_inhale_velocity)
         {
             it_802F2810(fp->target_item_gobj);
             if (fp->ground_or_air == GA_Air) {
@@ -1609,6 +1607,7 @@ void ftKb_SpecialN_800F5DE8(Fighter_GObj* gobj)
         }
     }
 }
+#pragma pop
 
 void ftKb_SpecialN_800F5EA8(Fighter_GObj* gobj)
 {
@@ -1622,8 +1621,7 @@ void ftKb_SpecialN_800F5EA8(Fighter_GObj* gobj)
 
     {
         f32 dist = ftCo_800BD19C(fp->victim_gobj, &pos);
-        if (dist <
-            da->specialn_inhale_velocity * da->specialn_inhale_velocity)
+        if (dist < da->specialn_inhale_velocity * da->specialn_inhale_velocity)
         {
             ftCo_800BD620(fp->victim_gobj);
             if (fp->ground_or_air == GA_Air) {
@@ -2792,11 +2790,9 @@ void fn_800F98F4(Fighter_GObj* gobj)
         PAD_STACK(4);
         bone = ftParts_GetBoneIndex(fp, FtPart_LHandN);
         lb_8000B1CC(fp->parts[bone].joint, NULL, &pos);
-        it_802C01AC(gobj, &pos, It_Kind_Kirby_LuigiFire,
-                    fp->facing_dir);
+        it_802C01AC(gobj, &pos, It_Kind_Kirby_LuigiFire, fp->facing_dir);
         bone = ftParts_GetBoneIndex(fp, FtPart_LHandN);
-        efSync_Spawn(0x4B1, gobj, fp->parts[bone].joint,
-                     &fp->facing_dir);
+        efSync_Spawn(0x4B1, gobj, fp->parts[bone].joint, &fp->facing_dir);
     }
 }
 
