@@ -34,8 +34,8 @@
 /* 2D1DB4 */ bool it_802D1DB4(Item_GObj* gobj);
 /* 2D1DD8 */ void it_802D1DD8(Item_GObj* gobj);
 /* 2D1E64 */ bool it_802D1E64(Item_GObj* gobj);
-/* 2D1E8C */ UNK_RET it_802D1E8C(UNK_PARAMS);
-/* 2D1F64 */ UNK_RET it_802D1F64(UNK_PARAMS);
+/* 2D1E8C */ Item_GObj* it_802D1E8C(Item_GObj*, ItemKind, f32);
+/* 2D1F64 */ Vec3 it_802D1F64(Item_GObj*, f32);
 /* 2D208C */ UNK_RET it_802D208C(UNK_PARAMS);
 /* 2D2308 */ void itLugia_Logic39_Spawned(Item_GObj*);
 /* 2D234C */ void itLugia_Logic40_Spawned(Item_GObj*);
