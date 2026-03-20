@@ -94,7 +94,40 @@ s32 fn_8001EBF0(THPDecComp* data)
 
 /// #fn_8001EF5C
 
-/// #fn_8001F06C
+s32 fn_8001F06C(THPDecComp* data)
+{
+    BOOL intr;
+
+    intr = OSDisableInterrupts();
+
+    if (data->unk_108 > 0 || data->unk_6C == 0) {
+        data->unk_78++;
+
+        if (data->unk_78 == data->unk_40) {
+            if (data->unk_68 != 0) {
+                data->unk_78 = 0;
+            } else {
+                data->unk_78--;
+                goto end;
+            }
+        }
+
+        data->unk_88++;
+        data->unk_108--;
+
+        if (data->unk_88 >= data->unk_104) {
+            data->unk_88 = 0;
+        }
+    }
+
+    if (data->unk_108 < data->unk_10C) {
+        data->unk_10C = data->unk_108;
+    }
+
+end:
+    OSRestoreInterrupts(intr);
+    return 1;
+}
 
 /// #fn_8001F13C
 
