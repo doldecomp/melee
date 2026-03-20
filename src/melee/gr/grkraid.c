@@ -107,7 +107,7 @@ HSD_GObj* grKraid_801FE0C4(int gobj_id)
             HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
         }
     } else {
-        OSReport("%s:%d: couldn t get gobj(id=%d)", __FILE__, 223, gobj_id);
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 223, gobj_id);
     }
 
     return gobj;
