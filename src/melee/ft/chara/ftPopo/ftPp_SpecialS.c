@@ -1021,7 +1021,46 @@ void ftPp_SpecialHiThrow_0_Anim(Fighter_GObj* gobj)
     }
 }
 
-/// #ftPp_SpecialAirHiThrow_0_Anim
+void ftPp_SpecialAirHiThrow_0_Anim(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    ftIceClimberAttributes* da = fp->dat_attrs;
+    PAD_STACK(40);
+
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        ftCo_80096900(gobj, 0, 1, false, da->x74, da->x78);
+    }
+
+    {
+        Fighter* fp = gobj->user_data;
+        if (fp->cmd_vars[1] != 0) {
+            fp->cmd_vars[1] = 0;
+            {
+                int found;
+                Fighter_GObj* nn_gobj =
+                    Player_GetEntityAtIndex(GET_FIGHTER(gobj)->player_id,
+                                            1);
+                if (nn_gobj != NULL &&
+                    ftNn_Init_8012309C(nn_gobj) == 1)
+                {
+                    found = 1;
+                } else {
+                    found = 0;
+                }
+                if (found == 1) {
+                    ftPp_SpecialHi_8012280C(gobj);
+                    return;
+                }
+            }
+        }
+    }
+
+    {
+        Fighter* fp = GET_FIGHTER(gobj);
+        ++fp->mv.pp.unk_80123954.x0;
+        ftPp_SpecialS_80120FE0(gobj);
+    }
+}
 
 void ftPp_SpecialHiThrow_0_IASA(Fighter_GObj* gobj) {}
 
