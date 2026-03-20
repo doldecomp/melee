@@ -1,28 +1,18 @@
 #include "grkraid.h"
 
-#include "types.h"
-
-#include <platform.h>
-
 #include "cm/camera.h"
-
-#include "forward.h"
-
 #include "ft/ftlib.h"
-#include "gr/granime.h"
-#include "gr/grdisplay.h"
-#include "gr/grlib.h"
-#include "gr/ground.h"
+
+#include "gr/forward.h"
+
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 
+#include "mn/forward.h"
+
 #include <baselib/controller.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjproc.h>
-#include <baselib/jobj.h>
 #include <baselib/random.h>
 
 S16Vec3 grKr_803E4C78[] = { { 0, 3, 12 }, { 1, 3, 12 }, { 2, 3, 12 },
@@ -95,6 +85,9 @@ bool grKraid_801FE0BC(void)
     return false;
 }
 
+static char grKr_803E4D40[32] = "%s:%d: couldn t get gobj(id=%d)\n";
+static char grKr_803E4D64[9] = __FILE__;
+
 HSD_GObj* grKraid_801FE0C4(int gobj_id)
 {
     HSD_GObj* gobj;
@@ -117,7 +110,7 @@ HSD_GObj* grKraid_801FE0C4(int gobj_id)
             HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
         }
     } else {
-        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 223, gobj_id);
+        OSReport(grKr_803E4D40, grKr_803E4D64, 223, gobj_id);
     }
 
     return gobj;
@@ -200,6 +193,11 @@ void grKraid_801FE3B0(Ground_GObj* gobj)
     return;
 }
 
+void grKraid_801FE6D4(Ground_GObj* gobj)
+{
+    return;
+}
+
 void grKraid_801FE3B4(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
@@ -230,6 +228,7 @@ static inline int rand_inline(int a, int b)
     }
 }
 
+const Vec grKr_803B8278 = { 0.0f, 0.0f, 0.0f };
 void grKraid_801FE440(Ground_GObj* gobj)
 {
     float fVar2;
@@ -237,7 +236,7 @@ void grKraid_801FE440(Ground_GObj* gobj)
     float fVar4;
     Ground* gp = GET_GROUND(gobj);
     HSD_JObj* jobj = Ground_801C3FA4(gobj, 0);
-    Vec pos = { 0.0f, 0.0f, 0.0f };
+    Vec pos = grKr_803B8278;
     switch (gp->gv.kraid.x0) {
     case 0:
         if (gp->gv.kraid.x4)
