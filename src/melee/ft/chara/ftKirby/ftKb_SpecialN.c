@@ -7,6 +7,8 @@
 #include "ef/efsync.h"
 #include "ft/chara/ftCommon/ftCo_Damage.h"
 #include "ft/chara/ftCommon/ftCo_FallSpecial.h"
+#include "ft/chara/ftCommon/ftCo_Throw.h"
+#include "ft/chara/ftCommon/ftCo_ThrownKirby.h"
 #include "ft/chara/ftCommon/ftCo_Jump.h"
 #include "ft/chara/ftCommon/ftCo_KneeBend.h"
 #include "ft/chara/ftCommon/ftCo_Wait.h"
@@ -2060,7 +2062,27 @@ void ftKb_SpecialNDrink1_Anim(Fighter_GObj* gobj)
     }
 }
 
-/// #ftKb_SpecialAirNDrink_Anim
+void ftKb_SpecialAirNDrink_Anim(Fighter_GObj* gobj)
+{
+    Fighter* fp2;
+    Fighter_GObj* victim_gobj;
+    Fighter* fp = getFighter(gobj);
+    if (fp->cmd_vars[0] != 0) {
+        if ((victim_gobj = fp->victim_gobj) != NULL) {
+            ftCommon_8007E2F4(fp, 0);
+            ftCo_800DE2CC(gobj, victim_gobj);
+            ftCo_800BE000(victim_gobj, gobj);
+            fp2 = getFighter(gobj);
+            fp2->fv.kb.xE0 = ftCo_800BD9E0(gobj, victim_gobj);
+            ftKb_SpecialN_800F1BAC(gobj, fp2->fv.kb.xE0, true);
+            fp->cmd_vars[0] = 0;
+        }
+    }
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        ftCo_Fall_Enter(gobj);
+    }
+    PAD_STACK(32);
+}
 
 void ftKb_EatTurn_Anim(Fighter_GObj* gobj)
 {
