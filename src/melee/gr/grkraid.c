@@ -85,9 +85,6 @@ bool grKraid_801FE0BC(void)
     return false;
 }
 
-static char grKr_803E4D40[36] = "%s:%d: couldn t get gobj(id=%d)\n\0\0\0\0";
-static char grKr_803E4D64[10] = "grkraid.c";
-
 HSD_GObj* grKraid_801FE0C4(int gobj_id)
 {
     HSD_GObj* gobj;
@@ -110,7 +107,7 @@ HSD_GObj* grKraid_801FE0C4(int gobj_id)
             HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
         }
     } else {
-        OSReport(grKr_803E4D40, grKr_803E4D64, 223, gobj_id);
+        OSReport("%s:%d: couldn t get gobj(id=%d)", __FILE__, 223, gobj_id);
     }
 
     return gobj;
