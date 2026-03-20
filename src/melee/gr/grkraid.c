@@ -193,11 +193,6 @@ void grKraid_801FE3B0(Ground_GObj* gobj)
     return;
 }
 
-void grKraid_801FE6D4(Ground_GObj* gobj)
-{
-    return;
-}
-
 void grKraid_801FE3B4(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
@@ -281,6 +276,11 @@ void grKraid_801FE440(Ground_GObj* gobj)
     lb_800115F4();
     Ground_801C2FE0(gobj);
     grKraid_801FF150(gobj);
+}
+
+void grKraid_801FE6D4(Ground_GObj* gobj)
+{
+    return;
 }
 
 void grKraid_801FE6D8(HSD_JObj* hand, float param2)
