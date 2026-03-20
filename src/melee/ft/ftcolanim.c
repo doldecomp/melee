@@ -125,7 +125,31 @@ void ft_800C0098(Fighter* fp)
 }
 #pragma pop
 
-/// #ftCo_800C0134
+#pragma push
+#pragma auto_inline off
+#pragma global_optimizer off
+void ftCo_800C0134(Fighter* fp)
+{
+    lb_80014498(&fp->x488);
+    if (ftData_UnkMotionStates4[fp->kind] != NULL) {
+        ftData_UnkMotionStates4[fp->kind](fp->gobj);
+    }
+    if (ftCo_800C53E4(fp) != 0) {
+        s32 arg1 = 0x6A;
+        if (arg1 >= 0x7B) {
+            s32 temp = arg1 - 0x7B;
+            lb_800144C8(&fp->x508, Fighter_804D6538, temp, 0);
+        } else {
+            Fighter_804D653C_t* entry = &Fighter_804D653C[arg1];
+            if (entry->unk5 != 0) {
+                lb_800144C8(&fp->x488, Fighter_804D653C, arg1, 0);
+            } else {
+                lb_800144C8(&fp->x408, Fighter_804D653C, arg1, 0);
+            }
+        }
+    }
+}
+#pragma pop
 
 #pragma push
 #pragma dont_inline on
