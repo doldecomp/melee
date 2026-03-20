@@ -82,7 +82,23 @@ bool IsNameListFull(void)
 
 void fn_802377A4(void) {}
 
-/// #IsNameUnique
+bool IsNameUnique(s32 slot)
+{
+    int i;
+    char* namedata;
+    for (i = 0; i < 0x78; i++) {
+        namedata = !IsNameValid(i & 0xFF)
+                       ? (char*) NULL
+                       : GetPersistentNameData((u8) i)->namedata;
+        if (namedata == NULL) {
+            break;
+        }
+        if (CompareNameStrings(namedata, slot) == 0) {
+            return true;
+        }
+    }
+    return false;
+}
 
 /// #DeleteName
 
