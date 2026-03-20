@@ -807,7 +807,48 @@ check:
 
 /// #ftKb_SpecialNMt_80107410
 
-/// #ftKb_SpecialNMt_80107568
+static inline void ftKb_SpecialNMt_ChangeAction(Fighter_GObj* gobj)
+{
+    Fighter* fp = getFighter(gobj);
+    ftKb_DatAttrs* da = fp->dat_attrs;
+    s32 timer;
+
+    Fighter_ChangeMotionState(gobj, ftKb_MS_MtSpecialNStart, 0, 0.0F, 1.0F,
+                              0.0F, NULL);
+
+    timer = 0;
+    fp->cmd_vars[3] = 0;
+    fp->cmd_vars[2] = 0;
+    fp->cmd_vars[1] = 0;
+    fp->cmd_vars[0] = 0;
+
+    ftCommon_8007D7FC(fp);
+
+    fp->self_vel.y = 0.0F;
+
+    {
+        Fighter* fp2 = gobj->user_data;
+        fp2->death2_cb = ftKb_Init_800EE74C;
+        fp2->take_dmg_cb = ftKb_Init_800EE7B8;
+    }
+
+    fp->mv.kb.specialhi.x0 = 0;
+    fp->mv.kb.specialhi.x4 = 0;
+
+    if (fp->fv.kb.x9C == 0) {
+        timer = da->specialn_mt_frames_to_transition;
+    }
+    fp->mv.kb.specialhi.xC = timer;
+    fp->mv.kb.specialhi.x10.f = 0.0F;
+
+    ftAnim_8006EBA4(gobj);
+}
+
+void ftKb_SpecialNMt_80107568(Fighter_GObj* gobj)
+{
+    ftKb_SpecialNMt_ChangeAction(gobj);
+    PAD_STACK(8);
+}
 
 void ftKb_SpecialNMt_80107638(Fighter_GObj* gobj)
 {
