@@ -1582,13 +1582,12 @@ void ftKb_SpecialN_800F5D04(Fighter_GObj* gobj, bool arg1)
     new_var->fv.kb.hat.kind = 4;
 }
 
-#pragma push
-#pragma dont_inline on
-void ftKb_SpecialN_800F5DE8(Fighter_GObj* gobj)
+static void ftKb_SpecialN_800F5DE8_inline(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftKb_DatAttrs* da = fp->dat_attrs;
     Vec3 pos;
+    FORCE_PAD_STACK_16;
 
     pos = fp->cur_pos;
     pos.x += da->specialn_x_offset_inhaled * fp->facing_dir;
@@ -1607,7 +1606,11 @@ void ftKb_SpecialN_800F5DE8(Fighter_GObj* gobj)
         }
     }
 }
-#pragma pop
+
+void ftKb_SpecialN_800F5DE8(Fighter_GObj* gobj)
+{
+    ftKb_SpecialN_800F5DE8_inline(gobj);
+}
 
 void ftKb_SpecialN_800F5EA8(Fighter_GObj* gobj)
 {
