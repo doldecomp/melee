@@ -316,15 +316,15 @@ void grKraid_801FE6D8(HSD_JObj* hand, float param2)
 
 void grKraid_801FE818(Ground_GObj* gobj)
 {
-    float fVar1;
     float fVar2;
     float fVar3;
-    int iVar5;
+    float fVar1;
+    s8 iVar;
 
     Ground* gp = GET_GROUND(gobj);
     gp->gv.kraid2.x10 = Ground_801C3FA4(gobj, 31);
     gp->gv.kraid2.x14 = Ground_801C3FA4(gobj, 47);
-    fVar1 = 0.0f;
+    fVar1 = (fVar3 = 0.0f);
     gp->gv.kraid2.x4 = 0;
     gp->gv.kraid2.x3 = 0;
 
@@ -333,7 +333,6 @@ void grKraid_801FE818(Ground_GObj* gobj)
         gp->gv.kraid2.x3 = 0;
         fVar3 = fVar2;
     } else {
-        fVar3 = fVar1;
         if (fVar2 > fVar1) {
             fVar1 = fVar2;
             gp->gv.kraid2.x4 = 0;
@@ -344,7 +343,6 @@ void grKraid_801FE818(Ground_GObj* gobj)
         gp->gv.kraid2.x3 = 1;
         fVar3 = fVar2;
     } else {
-        fVar3 = fVar1;
         if (fVar2 > fVar1) {
             fVar1 = fVar2;
             gp->gv.kraid2.x4 = 1;
@@ -355,7 +353,6 @@ void grKraid_801FE818(Ground_GObj* gobj)
         gp->gv.kraid2.x3 = 2;
         fVar3 = fVar2;
     } else {
-        fVar3 = fVar1;
         if (fVar2 > fVar1) {
             fVar1 = fVar2;
             gp->gv.kraid2.x4 = 2;
@@ -366,7 +363,6 @@ void grKraid_801FE818(Ground_GObj* gobj)
         gp->gv.kraid2.x3 = 3;
         fVar3 = fVar2;
     } else {
-        fVar3 = fVar1;
         if (fVar2 > fVar1) {
             fVar1 = fVar2;
             gp->gv.kraid2.x4 = 3;
@@ -377,7 +373,6 @@ void grKraid_801FE818(Ground_GObj* gobj)
         gp->gv.kraid2.x3 = 4;
         fVar3 = fVar2;
     } else {
-        fVar3 = fVar1;
         if (fVar2 > fVar1) {
             fVar1 = fVar2;
             gp->gv.kraid2.x4 = 4;
@@ -388,7 +383,6 @@ void grKraid_801FE818(Ground_GObj* gobj)
         gp->gv.kraid2.x3 = 5;
         fVar3 = fVar2;
     } else {
-        fVar3 = fVar1;
         if (fVar2 > fVar1) {
             fVar1 = fVar2;
             gp->gv.kraid2.x4 = 5;
@@ -400,8 +394,10 @@ void grKraid_801FE818(Ground_GObj* gobj)
                             ? HSD_Randi(grKr_804D6A08->kraid_wait_time_add)
                             : 0);
     gp->gv.kraid2.x8 = 0.0f;
-    gp->gv.kraid2.x2 = 0;
-    gp->gv.kraid2.x1 = 0;
+    fVar2 = 0;
+    iVar = (u8) fVar2;
+    gp->gv.kraid2.x2 = iVar;
+    gp->gv.kraid2.x1 = iVar;
     gp->gv.kraid2.x5 = 1;
 }
 
