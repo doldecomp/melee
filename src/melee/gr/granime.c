@@ -10,6 +10,7 @@
 #include "lb/lbarchive.h"
 #include "lb/lbheap.h"
 
+#include <baselib/aobj.h>
 #include <baselib/dobj.h>
 #include <baselib/mobj.h>
 #include <baselib/robj.h>
@@ -757,7 +758,14 @@ HSD_AObj* grAnime_801C8318(HSD_GObj* gobj, int arg1, u32 arg2)
     return sp14;
 }
 
-/// #grAnime_801C83D0
+bool grAnime_801C83D0(HSD_GObj* gobj, bool arg1, enum_t arg2)
+{
+    HSD_AObj* aobj = grAnime_801C8318(gobj, arg1, arg2);
+    if (HSD_AObjGetFlags(aobj) & 0x40000000) {
+        return true;
+    }
+    return false;
+}
 
 /// #grAnime_801C84A4
 
