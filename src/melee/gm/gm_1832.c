@@ -21,6 +21,7 @@
 #include <sysdolphin/baselib/tobj.h>
 #include <sysdolphin/baselib/util.h>
 #include <sysdolphin/baselib/random.h>
+#include <Runtime/runtime.h>
 #include <melee/cm/camera.h>
 #include <melee/ef/efasync.h>
 #include <melee/ef/eflib.h>
@@ -42,10 +43,12 @@
 #include <melee/if/ifstatus.h>
 #include <melee/if/ifall.h>
 #include <melee/it/item.h>
+#include <melee/it/it_266F.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lb_00F9.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbaudio_ax.h>
+#include <melee/lb/lb_0192.h>
 #include <melee/lb/lbbgflash.h>
 #include <melee/lb/lblanguage.h>
 #include <melee/mn/types.h>
@@ -102,6 +105,7 @@ extern s32 lbl_803B7C28[];
 extern DynamicModelDesc** lbl_804D662C;
 extern HSD_Archive* lbl_804D6628;
 extern u8 lbl_803D9828[];
+extern f32 lbl_803B7C68[];
 
 typedef struct { s32 v[6]; } ClassicProcArray;
 
@@ -2097,7 +2101,310 @@ void fn_80188EE8(HSD_GObj* gobj)
     HSD_JObjAnimAll(jobj);
 }
 
-/// #fn_801891F4
+#pragma dont_inline on
+void fn_801891F4(void)
+{
+    u8* base = (u8*) lbl_80473700 + 0x114;
+    u64 buttons;
+    int i;
+    int count;
+
+    buttons = gm_801A36C0((u8) lbl_80473700[1]);
+
+    if (gm_801A45E8(2) != 0) {
+        if (base[1] == 0) {
+            fn_801651FC(0, 0);
+            count = lbl_80473700[0];
+            base[3] = 0;
+            for (i = 0; i < 4; i++) {
+                if (i != 0 && count != 0) {
+                    Player_SetPlayerAndEntityCpuType(i, 0);
+                    count--;
+                    if (count == 0) break;
+                }
+            }
+            *(u32*) &base[0x19C] = 0;
+        }
+        base[1] = 1;
+
+        if (buttons & 0x1000000000ULL) {
+            lbAudioAx_80024030(2);
+            if ((u8) base[0] != 0) {
+                base[0]--;
+                if (base[0] == 5) {
+                    base[0] = 4;
+                }
+            } else {
+                base[0] = 8;
+            }
+        }
+
+        if (buttons & 0x2000000000ULL) {
+            lbAudioAx_80024030(2);
+            if ((u8) base[0] < 8) {
+                base[0]++;
+                if (base[0] == 5) {
+                    base[0] = 6;
+                }
+            } else {
+                base[0] = 0;
+            }
+        }
+
+        switch (base[0]) {
+        case 0:
+            if (buttons & 0x4000000000ULL) {
+                lbAudioAx_80024030(2);
+                if (*(u32*) &base[0x1E0 + base[0] * 4] != 0) {
+                    (*(u32*) &base[0x1E0 + base[0] * 4])--;
+                    return;
+                }
+                *(u32*) &base[0x1E0 + base[0] * 4] = 5;
+                return;
+            }
+            if (buttons & 0x8000000000ULL) {
+                lbAudioAx_80024030(2);
+                if (*(u32*) &base[0x1E0 + base[0] * 4] < 5) {
+                    (*(u32*) &base[0x1E0 + base[0] * 4])++;
+                    return;
+                }
+                *(u32*) &base[0x1E0 + base[0] * 4] = 0;
+                return;
+            }
+            break;
+        case 1:
+            if (buttons & 0x4000000000ULL) {
+                lbAudioAx_80024030(2);
+                if (*(u32*) &base[0x1E0 + base[0] * 4] != 0) {
+                    (*(u32*) &base[0x1E0 + base[0] * 4])--;
+                } else {
+                    *(u32*) &base[0x1E0 + base[0] * 4] = 0x1D;
+                }
+            } else if (buttons & 0x8000000000ULL) {
+                lbAudioAx_80024030(2);
+                if (*(u32*) &base[0x1E0 + base[0] * 4] < 0x1D) {
+                    (*(u32*) &base[0x1E0 + base[0] * 4])++;
+                } else {
+                    *(u32*) &base[0x1E0 + base[0] * 4] = 0;
+                }
+            }
+            if (buttons & 0x100ULL) {
+                Vec3 pos;
+                s16 item;
+                HSD_JObj* jobj;
+                lbAudioAx_80024030(8);
+                item = *(s16*) &((s32*) lbl_803D9828)[*(u32*) &base[0x1E4]];
+                jobj = Player_GetEntity(0)->hsd_obj;
+                HSD_ASSERT(979, jobj);
+                pos = jobj->translate;
+                pos.y += 10.0f;
+                it_8026D258(&pos, (ItemKind) item);
+                return;
+            }
+            break;
+        case 2:
+            if (buttons & 0x4000000000ULL) {
+                lbAudioAx_80024030(2);
+                if (*(u32*) &base[0x1E0 + base[0] * 4] != 0) {
+                    (*(u32*) &base[0x1E0 + base[0] * 4])--;
+                    return;
+                }
+                *(u32*) &base[0x1E0 + base[0] * 4] = 2;
+                return;
+            }
+            if (buttons & 0x8000000000ULL) {
+                lbAudioAx_80024030(2);
+                if (*(u32*) &base[0x1E0 + base[0] * 4] < 2) {
+                    (*(u32*) &base[0x1E0 + base[0] * 4])++;
+                    return;
+                }
+                *(u32*) &base[0x1E0 + base[0] * 4] = 0;
+                return;
+            }
+            break;
+        case 3:
+            if (buttons & 0x4000000000ULL) {
+                lbAudioAx_80024030(2);
+                if (*(u32*) &base[0x1E0 + base[0] * 4] != 0) {
+                    (*(u32*) &base[0x1E0 + base[0] * 4])--;
+                    return;
+                }
+                *(u32*) &base[0x1E0 + base[0] * 4] = 5;
+                return;
+            }
+            if (buttons & 0x8000000000ULL) {
+                lbAudioAx_80024030(2);
+                if (*(u32*) &base[0x1E0 + base[0] * 4] < 5) {
+                    (*(u32*) &base[0x1E0 + base[0] * 4])++;
+                    return;
+                }
+                *(u32*) &base[0x1E0 + base[0] * 4] = 0;
+                return;
+            }
+            break;
+        case 4:
+            if (buttons & 0x4000000000ULL) {
+                lbAudioAx_80024030(2);
+                if (*(u32*) &base[0x1E0 + base[0] * 4] != 0) {
+                    (*(u32*) &base[0x1E0 + base[0] * 4])--;
+                    if (*(u32*) &base[0x1E0 + base[0] * 4] == 0) {
+                        gm_801A36E0(0, 0x19);
+                        return;
+                    }
+                } else {
+                    *(u32*) &base[0x1E0 + base[0] * 4] = 0x3E7;
+                    return;
+                }
+            } else if (buttons & 0x8000000000ULL) {
+                lbAudioAx_80024030(2);
+                if (*(u32*) &base[0x1E0 + base[0] * 4] < 0x3E7) {
+                    (*(u32*) &base[0x1E0 + base[0] * 4])++;
+                    if (*(u32*) &base[0x1E0 + base[0] * 4] == 0x3E7) {
+                        gm_801A36E0(0, 0x19);
+                        return;
+                    }
+                } else {
+                    *(u32*) &base[0x1E0 + base[0] * 4] = 0;
+                    return;
+                }
+            }
+            break;
+        case 5:
+            if (buttons & 0x4000000000ULL) {
+                lbAudioAx_80024030(2);
+                *(u32*) &base[0x1E0 + base[0] * 4] = 0;
+                return;
+            }
+            if (buttons & 0x8000000000ULL) {
+                lbAudioAx_80024030(2);
+                *(u32*) &base[0x1E0 + base[0] * 4] = 1;
+                return;
+            }
+            break;
+        case 6:
+            if (buttons & 0x4000000000ULL) {
+                lbAudioAx_80024030(2);
+                if (*(u32*) &base[0x1E0 + base[0] * 4] != 0) {
+                    (*(u32*) &base[0x1E0 + base[0] * 4])--;
+                } else {
+                    *(u32*) &base[0x1E0 + base[0] * 4] = 2;
+                }
+                switch (*(s32*) &base[0x1E0 + base[0] * 4]) {
+                case 0:
+                    fn_801650E8();
+                    return;
+                case 1:
+                    fn_80165190(0, 5);
+                    return;
+                case 2:
+                    if ((s32) lbl_80473700[1] == 3) {
+                        fn_801652B0(0, 0);
+                        return;
+                    }
+                    fn_801652B0(0, 3);
+                    return;
+                }
+            } else if (buttons & 0x8000000000ULL) {
+                lbAudioAx_80024030(2);
+                if (*(u32*) &base[0x1E0 + base[0] * 4] < 2) {
+                    (*(u32*) &base[0x1E0 + base[0] * 4])++;
+                } else {
+                    *(u32*) &base[0x1E0 + base[0] * 4] = 0;
+                }
+                switch (*(s32*) &base[0x1E0 + base[0] * 4]) {
+                case 0:
+                    fn_801650E8();
+                    return;
+                case 1:
+                    fn_80165190(0, 5);
+                    return;
+                case 2:
+                    if ((s32) lbl_80473700[1] == 3) {
+                        fn_801652B0(0, 0);
+                        return;
+                    }
+                    fn_801652B0(0, 3);
+                    return;
+                }
+            }
+            break;
+        case 7:
+            if (buttons & 0x100ULL) {
+                lbAudioAx_80024030(1);
+                fn_80188644();
+                return;
+            }
+            break;
+        case 8:
+            if (buttons & 0x100ULL) {
+                gm_8016B328();
+                return;
+            }
+            break;
+        }
+    } else {
+        if (base[1] == 1) {
+            ClassicProcArray speeds;
+            int cpu_type;
+            int damage;
+            PAD_STACK(40);
+
+            speeds = *(ClassicProcArray*) lbl_803B7C68;
+
+            lbAudioAx_80024030(0);
+            *(u32*) &base[0x19C] = 0x14;
+            lb_80019880(__cvt_dbl_usll(
+                (f64)(0.016666668f /
+                      ((f32*) speeds.v)[*(u32*) &base[0x1E0]] *
+                      (f32)(*(u32*) 0x800000F8 >> 2))));
+
+            fn_80188550(*(s32*) &base[0x1E8] + 1);
+
+            cpu_type = *(s32*) &base[0x1EC];
+            count = lbl_80473700[0];
+            base[3] = (u8) cpu_type;
+            for (i = 0; i < 4; i++) {
+                if (i != 0 && count != 0) {
+                    Player_SetPlayerAndEntityCpuType(i, cpu_type);
+                    count--;
+                    if (count == 0) break;
+                }
+            }
+
+            damage = *(s32*) &base[0x1F0];
+            count = lbl_80473700[0];
+            for (i = 0; i < 4; i++) {
+                if (i != 0 && count != 0) {
+                    Player_SetHUDDamage(i, damage);
+                    count--;
+                    if (count == 0) break;
+                }
+            }
+
+            for (i = 1; i < 4; i++) {
+                fn_8016B388(i, *(s32*) &base[0x1F0]);
+            }
+
+            switch (*(s32*) &base[0x1F8]) {
+            case 0:
+                fn_801650E8();
+                break;
+            case 1:
+                fn_80165190(0, 5);
+                break;
+            case 2:
+                if ((s32) lbl_80473700[1] == 3) {
+                    fn_801652B0(0, 0);
+                } else {
+                    fn_801652B0(0, 3);
+                }
+                break;
+            }
+        }
+        base[1] = 0;
+    }
+}
+#pragma dont_inline off
 
 s32 fn_80189B88(void)
 {
