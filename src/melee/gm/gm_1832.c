@@ -130,13 +130,23 @@ typedef struct {
 } ClassicTeamEntry;
 STATIC_ASSERT(sizeof(ClassicTeamEntry) == 0x14);
 
+typedef struct {
+    /* 0x00 */ f32 x00[3];
+    /* 0x0C */ f32 x0C[3];
+    /* 0x18 */ f32 x18[3];
+    /* 0x24 */ f32 x24[3];
+} ClassicSplashRow;
+STATIC_ASSERT(sizeof(ClassicSplashRow) == 0x30);
+
 static struct {
     /* 0x000 */ ClassicSlotVals x00[2];
     /* 0x018 */ ClassicSlotVals x18[3];
     /* 0x03C */ ClassicSlotVals x3C[4];
     /* 0x06C */ ClassicCharLayout x6C[28];
-    /* 0x37C */ ClassicTeamEntry x37C[34];
-    /* 0x624 */ u8 pad_624[0xC];
+    /* 0x37C */ ClassicTeamEntry x37C[25];
+    /* 0x570 */ u8 pad_570[0xC];
+    /* 0x57C */ ClassicSplashRow x57C[3];
+    /* 0x60C */ u8 pad_60C[0x24];
     /* 0x630 */ ClassicSlotVals x630[3];
     /* 0x654 */ ClassicSlotVals x654[3];
     /* 0x678 */ ClassicSlotVals x678[4];
@@ -370,7 +380,6 @@ void fn_80184AB8(HSD_GObj* arg0)
     char sp10[0x100];
     HSD_JObj* jobj;
     s32 i;
-    u8* entry;
     char* name;
     s32 k;
 
@@ -427,12 +436,10 @@ void fn_80184AB8(HSD_GObj* arg0)
             case 0x5:
                 for (i = 0; i < (s32) lbl_804735E8.xEF; i++) {
                     if (i != 0 || (u8) lbl_804735E8.xED == 0x78) {
-                        entry = (u8*) lbl_804D6604 +
-                                lbl_804735E8.xEF * 0x30 + i * 4;
                         fn_80160DE8(lbl_804735A8.x4[7 + i],
                                     lbl_804735E8.xF1[i], 0, 0,
-                                    *(f32*)(entry + 0x594),
-                                    *(f32*)(entry + 0x5A0));
+                                    lbl_804D6604->x57C[lbl_804735E8.xEF].x18[i],
+                                    lbl_804D6604->x57C[lbl_804735E8.xEF].x24[i]);
                     } else {
                         name = GetNameText((s32) lbl_804735E8.xED);
                         HSD_SisLib_803A70A0(
@@ -485,18 +492,16 @@ void fn_80184AB8(HSD_GObj* arg0)
                         (HSD_Text*) lbl_804735A8.x4[10], 0, sp10);
                     HSD_SisLib_803A7548(
                         (HSD_Text*) lbl_804735A8.x4[10], 0,
-                        0.8f * (*(f32*)((u8*) lbl_804D6604 + 0x5C4) *
+                        0.8f * (lbl_804D6604->x57C[1].x18[0] *
                                 fn_80160F58(lbl_804735E8.xF4[0])),
-                        *(f32*)((u8*) lbl_804D6604 + 0x5D0));
+                        lbl_804D6604->x57C[1].x24[0]);
                     return;
                 }
                 for (i = 0; i < (s32) lbl_804735E8.xF0; i++) {
-                    entry = (u8*) lbl_804D6604 +
-                            lbl_804735E8.xF0 * 0x30 + i * 4;
                     fn_80160DE8(lbl_804735A8.x4[10 + i],
                                 lbl_804735E8.xF4[i], 0, 1,
-                                *(f32*)(entry + 0x594),
-                                *(f32*)(entry + 0x5A0));
+                                lbl_804D6604->x57C[lbl_804735E8.xF0].x18[i],
+                                lbl_804D6604->x57C[lbl_804735E8.xF0].x24[i]);
                 }
                 break;
             }
@@ -1015,9 +1020,7 @@ void fn_80186080(void)
 
 void fn_801861B8(void)
 {
-    s32 i, j;
-    u8* base;
-    u8* entry;
+    s32 i;
     HSD_Text* text;
 
     PAD_STACK(16);
@@ -1025,57 +1028,47 @@ void fn_801861B8(void)
     HSD_SisLib_803A611C(0, NULL, 9, 0x14, 0, 0xE, 0, 0x12);
     HSD_SisLib_803A62A0(0, "SdIntro.dat", "SIS_IntroData");
 
-    base = (u8*) &lbl_804735A8;
-    j = 0;
     for (i = 0; i < (s32) lbl_804735E8.xEF; i++) {
-        *(HSD_Text**) (base + 0x20) = HSD_SisLib_803A6754(0, 0);
-        (*(HSD_Text**) (base + 0x20))->default_kerning = 1;
-        text = *(HSD_Text**) (base + 0x20);
+        lbl_804735A8.x4[7 + i] = (HSD_JObj*) HSD_SisLib_803A6754(0, 0);
+        ((HSD_Text*) lbl_804735A8.x4[7 + i])->default_kerning = 1;
+        text = (HSD_Text*) lbl_804735A8.x4[7 + i];
         text->font_size.x = 1.0f;
         text->font_size.y = 1.0f;
-        (*(HSD_Text**) (base + 0x20))->default_alignment = 1;
-        entry = (u8*) lbl_804D6604 + (lbl_804735E8.xEF * 0x30) + j;
-        HSD_SisLib_803A6B98(*(HSD_Text**) (base + 0x20),
-                            *(f32*) (entry + 0x57C),
-                            *(f32*) (entry + 0x588), " ",
-                            lbl_804D6604, entry);
-        entry = (u8*) lbl_804D6604 + (lbl_804735E8.xEF * 0x30) + j;
-        HSD_SisLib_803A7548(*(HSD_Text**) (base + 0x20), 0,
-                            *(f32*) (entry + 0x594),
-                            *(f32*) (entry + 0x5A0));
-        base += 4;
-        j += 4;
+        ((HSD_Text*) lbl_804735A8.x4[7 + i])->default_alignment = 1;
+        HSD_SisLib_803A6B98((HSD_Text*) lbl_804735A8.x4[7 + i],
+                            lbl_804D6604->x57C[lbl_804735E8.xEF].x00[i],
+                            lbl_804D6604->x57C[lbl_804735E8.xEF].x0C[i], " ",
+                            lbl_804D6604,
+                            &lbl_804D6604->x57C[lbl_804735E8.xEF].x00[i]);
+        HSD_SisLib_803A7548((HSD_Text*) lbl_804735A8.x4[7 + i], 0,
+                            lbl_804D6604->x57C[lbl_804735E8.xEF].x18[i],
+                            lbl_804D6604->x57C[lbl_804735E8.xEF].x24[i]);
     }
 
-    base = (u8*) &lbl_804735A8;
-    j = 0;
     for (i = 0; i < (s32) lbl_804735E8.xF0; i++) {
-        *(HSD_Text**) (base + 0x2C) = HSD_SisLib_803A6754(0, 0);
-        (*(HSD_Text**) (base + 0x2C))->default_kerning = 1;
-        text = *(HSD_Text**) (base + 0x2C);
+        lbl_804735A8.x4[10 + i] = (HSD_JObj*) HSD_SisLib_803A6754(0, 0);
+        ((HSD_Text*) lbl_804735A8.x4[10 + i])->default_kerning = 1;
+        text = (HSD_Text*) lbl_804735A8.x4[10 + i];
         text->font_size.x = 1.0f;
         text->font_size.y = 1.0f;
-        (*(HSD_Text**) (base + 0x2C))->default_alignment = 1;
+        ((HSD_Text*) lbl_804735A8.x4[10 + i])->default_alignment = 1;
         if ((s32) lbl_804735E8.xE4 == 4) {
-            HSD_SisLib_803A6B98(*(HSD_Text**) (base + 0x2C),
-                                340.0f + *(f32*) ((u8*) lbl_804D6604 + 0x5AC),
-                                *(f32*) ((u8*) lbl_804D6604 + 0x5B8), " ");
-            HSD_SisLib_803A7548(*(HSD_Text**) (base + 0x2C), 0,
-                                340.0f + *(f32*) ((u8*) lbl_804D6604 + 0x5C4),
-                                *(f32*) ((u8*) lbl_804D6604 + 0x5D0));
+            HSD_SisLib_803A6B98((HSD_Text*) lbl_804735A8.x4[10 + i],
+                                340.0f + lbl_804D6604->x57C[1].x00[0],
+                                lbl_804D6604->x57C[1].x0C[0], " ");
+            HSD_SisLib_803A7548((HSD_Text*) lbl_804735A8.x4[10 + i], 0,
+                                340.0f + lbl_804D6604->x57C[1].x18[0],
+                                lbl_804D6604->x57C[1].x24[0]);
             return;
         }
-        entry = (u8*) lbl_804D6604 + (lbl_804735E8.xF0 * 0x30) + j;
-        HSD_SisLib_803A6B98(*(HSD_Text**) (base + 0x2C),
-                            340.0f + *(f32*) (entry + 0x57C),
-                            *(f32*) (entry + 0x588), " ",
-                            lbl_804D6604, entry);
-        entry = (u8*) lbl_804D6604 + (lbl_804735E8.xF0 * 0x30) + j;
-        HSD_SisLib_803A7548(*(HSD_Text**) (base + 0x2C), 0,
-                            340.0f + *(f32*) (entry + 0x594),
-                            *(f32*) (entry + 0x5A0));
-        base += 4;
-        j += 4;
+        HSD_SisLib_803A6B98((HSD_Text*) lbl_804735A8.x4[10 + i],
+                            340.0f + lbl_804D6604->x57C[lbl_804735E8.xF0].x00[i],
+                            lbl_804D6604->x57C[lbl_804735E8.xF0].x0C[i], " ",
+                            lbl_804D6604,
+                            &lbl_804D6604->x57C[lbl_804735E8.xF0].x00[i]);
+        HSD_SisLib_803A7548((HSD_Text*) lbl_804735A8.x4[10 + i], 0,
+                            340.0f + lbl_804D6604->x57C[lbl_804735E8.xF0].x18[i],
+                            lbl_804D6604->x57C[lbl_804735E8.xF0].x24[i]);
     }
 }
 
