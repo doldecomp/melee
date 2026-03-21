@@ -637,7 +637,7 @@ void ftKb_SkSpecialAirNEnd_Coll(Fighter_GObj* gobj)
     if (ft_80081D0C(gobj)) {
         fp->fv.kb.xB4 = 0;
         fp->mv.kb.specialhi.x4 = 0;
-        ftKb_SpecialNSk_80105E8C(gobj);
+        ftCo_Landing_Enter_Basic(gobj);
     }
 }
 
