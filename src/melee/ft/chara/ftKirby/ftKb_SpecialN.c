@@ -7,6 +7,8 @@
 #include "ef/efsync.h"
 #include "ft/chara/ftCommon/ftCo_Damage.h"
 #include "ft/chara/ftCommon/ftCo_FallSpecial.h"
+#include "ft/chara/ftCommon/ftCo_Throw.h"
+#include "ft/chara/ftCommon/ftCo_ThrownKirby.h"
 #include "ft/chara/ftCommon/ftCo_Jump.h"
 #include "ft/chara/ftCommon/ftCo_KneeBend.h"
 #include "ft/chara/ftCommon/ftCo_Wait.h"
@@ -17,6 +19,7 @@
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
 #include "ft/ft_0892.h"
+#include "ft/ftanim.h"
 #include "ft/ftcliffcommon.h"
 #include "ft/ftcommon.h"
 #include "ft/ftdata.h"
@@ -2023,13 +2026,63 @@ void ftKb_SpecialAirNCaptured_Anim(Fighter_GObj* gobj)
 
 /// #ftKb_SpecialAirNSpit_Anim
 
-/// #ftKb_SpecialNDrink0_Anim
+void ftKb_SpecialNDrink0_Anim(Fighter_GObj* gobj)
+{
+    Fighter* fp = (0, GET_FIGHTER(gobj));
+    Item_GObj* item_gobj;
+    if (fp->cmd_vars[0] != 0 && (item_gobj = fp->target_item_gobj) != NULL) {
+        ftCommon_8007E2F4(fp, 0);
+        ft_PlaySFX(fp, 0x222F6, 0x7F, 0x40);
+        it_802F28C8(item_gobj, 0, 0.0F);
+        fp->x1A64 = NULL;
+        fp->target_item_gobj = NULL;
+        fp->cmd_vars[0] = 0;
+    }
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        ft_8008A2BC(gobj);
+    }
+}
 
 /// #ftKb_SpecialNDrink_Anim
 
-/// #ftKb_SpecialNDrink1_Anim
+void ftKb_SpecialNDrink1_Anim(Fighter_GObj* gobj)
+{
+    Fighter* fp = (0, GET_FIGHTER(gobj));
+    Item_GObj* item_gobj;
+    if (fp->cmd_vars[0] != 0 && (item_gobj = fp->target_item_gobj) != NULL) {
+        ftCommon_8007E2F4(fp, 0);
+        ft_PlaySFX(fp, 0x222F6, 0x7F, 0x40);
+        it_802F28C8(item_gobj, 0, 0.0F);
+        fp->x1A64 = NULL;
+        fp->target_item_gobj = NULL;
+        fp->cmd_vars[0] = 0;
+    }
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        ftCo_Fall_Enter(gobj);
+    }
+}
 
-/// #ftKb_SpecialAirNDrink_Anim
+void ftKb_SpecialAirNDrink_Anim(Fighter_GObj* gobj)
+{
+    Fighter* fp2;
+    Fighter_GObj* victim_gobj;
+    Fighter* fp = getFighter(gobj);
+    if (fp->cmd_vars[0] != 0) {
+        if ((victim_gobj = fp->victim_gobj) != NULL) {
+            ftCommon_8007E2F4(fp, 0);
+            ftCo_800DE2CC(gobj, victim_gobj);
+            ftCo_800BE000(victim_gobj, gobj);
+            fp2 = getFighter(gobj);
+            fp2->fv.kb.xE0 = ftCo_800BD9E0(gobj, victim_gobj);
+            ftKb_SpecialN_800F1BAC(gobj, fp2->fv.kb.xE0, true);
+            fp->cmd_vars[0] = 0;
+        }
+    }
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        ftCo_Fall_Enter(gobj);
+    }
+    PAD_STACK(32);
+}
 
 void ftKb_EatTurn_Anim(Fighter_GObj* gobj)
 {
