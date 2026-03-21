@@ -245,7 +245,37 @@ f32 mnName_80238964(u8 index, u8 target, u8 flag)
     }
 }
 
-/// #mnName_80238A04
+#pragma dont_inline on
+void mnName_80238A04(HSD_GObj* gobj, u8 target, u8 flag)
+{
+    AnimLoopSettings* base = mnName_803ED538;
+    HSD_JObj* jobj;
+    HSD_JObj* jobj2;
+    int i;
+
+    for (i = 0x18; i < 0x1B; i++) {
+        jobj = mnName_802388D4(gobj, i);
+        HSD_JObjReqAnimAll(jobj, mnName_80238964(i, target, flag));
+        HSD_JObjAnimAll(jobj);
+    }
+
+    jobj2 = (HSD_JObj*) gobj->prev_gx;
+
+    if ((u8) target == 0x18) {
+        if ((u8) flag) {
+            HSD_JObjReqAnimAll(jobj2, base[5].start_frame);
+        } else {
+            HSD_JObjReqAnimAll(jobj2, base[4].start_frame);
+        }
+    } else {
+        if ((u8) flag) {
+            HSD_JObjReqAnimAll(jobj2, base[8].start_frame);
+        } else {
+            HSD_JObjReqAnimAll(jobj2, base[6].start_frame);
+        }
+    }
+    HSD_JObjAnimAll(jobj2);
+}
 
 /// #mnName_80238AE0
 
