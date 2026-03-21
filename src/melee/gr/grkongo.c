@@ -1411,7 +1411,37 @@ void fn_801D542C(HSD_GObj* arg0)
 
 /// #grKongo_801D7134
 
-/// #fn_801D7700
+static void fn_801D7700(Ground* gp, s32 arg1, CollData* cd, s32 arg3,
+                        mpLib_GroundEnum arg4, float arg8)
+{
+    Vec3* cur = &cd->cur_pos;
+    s32 type = cd->x34_flags.b1234;
+
+    if (type == 1 || type == 3) {
+        if (arg4 == mpLib_GroundEnum_Unk1) {
+            f32 x1, y1, x2, y2;
+
+            mpVtxGetPos(0x1D, &x1, &y1);
+            mpVtxGetPos(0x1A, &x2, &y2);
+
+            {
+                f32 segment_size = (x2 - x1) / 15.0F;
+                f32 ratio = (cur->x - x1) / segment_size;
+                s32 idx = (s32) ratio;
+                s32 idx2 = (s32) ratio;
+
+                if (idx < 0) {
+                    idx2 = 0;
+                } else if ((u32) idx2 >= 15) {
+                    idx2 = 14;
+                }
+
+                grKg_803E188C[idx2].unk10 +=
+                    0.017453292F * grKg_804D6980->unkA4;
+            }
+        }
+    }
+}
 
 /// #grKongo_801D77E0
 
