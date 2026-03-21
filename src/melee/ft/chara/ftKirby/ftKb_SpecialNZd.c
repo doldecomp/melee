@@ -89,6 +89,7 @@ static void fn_801095DC(HSD_GObj*);
 static void fn_80109680(HSD_GObj*);
 static void fn_80109714(HSD_GObj*);
 static void fn_801097B8(HSD_GObj*);
+static void fn_80106DB0(HSD_GObj*);
 void fn_8010A930(Fighter_GObj*, Fighter_GObj*);
 
 inline void ftKirbyDmgInline(Fighter_GObj* gobj)
@@ -490,7 +491,21 @@ void ftKb_SkSpecialAirNEnd_Anim(Fighter_GObj* gobj)
 
 void ftKb_SkSpecialNStart_IASA(Fighter_GObj* gobj) {}
 
-/// #ftKb_SkSpecialNLoop_IASA
+void ftKb_SkSpecialNLoop_IASA(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (!(fp->input.held_inputs & HSD_PAD_B)) {
+        fp->mv.kb.specialhi.x0 = 0;
+        Fighter_ChangeMotionState(gobj, ftKb_MS_SkSpecialNEnd, Ft_MF_None,
+                                  0.0F, 1.0F, 0.0F, NULL);
+        ftKirbyDmgInline(gobj);
+        fp->accessory4_cb = fn_80106DB0;
+    } else if (fp->input.x668 & HSD_PAD_LR) {
+        Fighter_ChangeMotionState(gobj, ftKb_MS_SkSpecialNCancel, Ft_MF_None,
+                                  0.0F, 1.0F, 0.0F, NULL);
+        ftKirbyDmgInline(gobj);
+    }
+}
 
 void ftKb_SkSpecialNCancel_IASA(Fighter_GObj* gobj) {}
 
