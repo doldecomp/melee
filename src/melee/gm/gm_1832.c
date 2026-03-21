@@ -1676,7 +1676,12 @@ void fn_80187CF4(HSD_GObj* gobj)
     HSD_JObjAnimAll(GET_JOBJ(gobj));
 }
 
-/// #gm_80187F48_OnEnter
+static char* lbl_803D9750[54];
+
+void gm_80187F48_OnEnter(void* arg0)
+{
+    /// stub
+}
 
 static HSD_Archive* lbl_804D6620;
 
