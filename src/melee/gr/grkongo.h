@@ -52,7 +52,7 @@
 /* 1D7134 */ void grKongo_801D7134(HSD_GObj*, s32);
 /* 1D77E0 */ void grKongo_801D77E0(HSD_GObj*, s32);
 /* 1D7BBC */ void grKongo_801D7BBC(HSD_GObj*);
-/* 1D7E78 */ UNK_RET grKongo_801D7E78(UNK_PARAMS);
+/* 1D7E78 */ Vec3* grKongo_801D7E78(HSD_GObj*, Vec3*);
 /* 1D7F78 */ bool grKongo_801D7F78(HSD_GObj*);
 /* 1D8058 */ void grKongo_801D8058(Ground_GObj*);
 /* 1D8078 */ HSD_GObj* grKongo_801D8078(HSD_GObj*);

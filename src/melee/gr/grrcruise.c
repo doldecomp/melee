@@ -44,6 +44,7 @@ StageCallbacks grRc_803E4E34[7] = {
 };
 
 extern s16 grRc_803E4FF0[];
+extern s16 grRc_804D4790[4];
 
 static struct {
     int x0;
@@ -291,7 +292,25 @@ bool grRCruise_801FFAD4(Ground_GObj* arg)
 
 void grRCruise_80200070(Ground_GObj* arg) {}
 
-/// #grRCruise_80200074
+void grRCruise_80200074(Ground_GObj* gobj)
+{
+    int i;
+    Ground* gp = gobj->user_data;
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+    Ground_801C2ED0(jobj, gp->map_id);
+    grAnime_801C8138(gobj, gp->map_id, 0);
+    for (i = 0; i < 3; i++) {
+        grAnime_801C8098(gobj, grRc_804D4790[i], 7, 1, 0.0F, 0.0F);
+        gp->gv.rcruise.x3C[i].x02 =
+            Ground_801C32D4(gp->map_id, grRc_804D4790[i]);
+        mpJointSetCb1(gp->gv.rcruise.x3C[i].x02, gobj,
+                      (mpLib_Callback) fn_80200460);
+        gp->gv.rcruise.x3C[i].x0C = Ground_801C3FA4(gobj, grRc_804D4790[i]);
+        gp->gv.rcruise.x3C[i].x08 = 0;
+        gp->gv.rcruise.x3C[i].x04 = 0;
+        gp->gv.rcruise.x3C[i].x00 = 0;
+    }
+}
 
 bool grRCruise_8020014C(Ground_GObj* arg)
 {

@@ -61,6 +61,9 @@ static struct {
     f32 unk90;
     f32 unk94;
     f32 unk98;
+    f32 unk9C;
+    f32 unkA0;
+    f32 unkA4;
 }* grKg_804D6980;
 
 extern StageInfo stage_info;

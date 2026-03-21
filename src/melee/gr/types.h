@@ -749,6 +749,15 @@ struct grRCruise_Entry {
     /* 0x14 */ HSD_JObj* x14;
 };
 
+struct grRCruise_SubEntry {
+    /* 0x00 */ u8 x00;
+    /* 0x01 */ u8 pad_01;
+    /* 0x02 */ s16 x02;
+    /* 0x04 */ s32 x04;
+    /* 0x08 */ s32 x08;
+    /* 0x0C */ HSD_JObj* x0C;
+};
+
 struct grRCruise_GroundVars {
     struct {
         u8 b0 : 1;
@@ -773,7 +782,7 @@ struct grRCruise_GroundVars {
     /* +30 gp+F4 */ s32 x30;
     /* +34 gp+F8 */ s32 x34;
     /* +38 gp+FC */ s32 x38;
-    /* +3C gp+100 */ char pad_3C[0x30];
+    /* +3C gp+100 */ struct grRCruise_SubEntry x3C[3];
     /* +6C gp+130 */ struct grRCruise_Entry* entries;
 };
 
