@@ -378,7 +378,7 @@ void* lbDvd_GetPreloadedArchive(ssize_t entry_num)
             break;
 
         case 3:
-            efAsync_8006730C((HSD_Archive*) entry->archive->addr,
+            efAsync_OnLoad((HSD_Archive*) entry->archive->addr,
                              (u8*) entry->raw_data->addr, entry->size,
                              entry->effect_index);
             break;

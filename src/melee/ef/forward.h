@@ -3,12 +3,10 @@
 
 #include <placeholder.h>
 
-typedef struct ef_UnkStruct1 ef_UnkStruct1;
-typedef struct ef_UnkStruct2 ef_UnkStruct2;
-typedef struct ef_UnkStruct3 ef_UnkStruct3;
-typedef struct Effect Effect;
-typedef struct EffectDesc EffectDesc;
+typedef struct EF_Effect EF_Effect;
+typedef struct EF_QueuedEffect EF_QueuedEffect;
+typedef struct EF_EffectDesc EF_EffectDesc;
 
-typedef void (*efLib_UnkCallback)(Effect*);
+typedef void (*EF_UpdateFn)(EF_Effect*);
 
 #endif

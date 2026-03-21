@@ -155,7 +155,7 @@ void fn_800F21E8(Fighter_GObj* gobj)
         pos.x += var_f1;
         pos.y += da->specialhi_projectile_spawn_y;
         pos.z = 0.0F;
-        efLib_8005B704(gobj, 1);
+        efLib_SetFlags(gobj, 1);
         pos.y -= 1.0F;
         it_8029BAB8(gobj, &pos, fp->facing_dir);
     }
