@@ -122,12 +122,21 @@ typedef struct {
 } ClassicCharLayout;
 STATIC_ASSERT(sizeof(ClassicCharLayout) == 0x1C);
 
+typedef struct {
+    /* 0x00 */ f32 x00;
+    /* 0x04 */ f32 x04;
+    /* 0x08 */ f32 x08;
+    /* 0x0C */ u8 pad_0C[0x8];
+} ClassicTeamEntry;
+STATIC_ASSERT(sizeof(ClassicTeamEntry) == 0x14);
+
 static struct {
     /* 0x000 */ ClassicSlotVals x00[2];
     /* 0x018 */ ClassicSlotVals x18[3];
     /* 0x03C */ ClassicSlotVals x3C[4];
     /* 0x06C */ ClassicCharLayout x6C[28];
-    /* 0x37C */ u8 pad_37C[0x2B4];
+    /* 0x37C */ ClassicTeamEntry x37C[34];
+    /* 0x624 */ u8 pad_624[0xC];
     /* 0x630 */ ClassicSlotVals x630[3];
     /* 0x654 */ ClassicSlotVals x654[3];
     /* 0x678 */ ClassicSlotVals x678[4];
@@ -251,19 +260,19 @@ void fn_80184138(HSD_GObj* arg0, int arg1)
     HSD_JObjSetTranslate(jobj, &pos);
 
     if ((s32) lbl_804735E8.xE4 == 2) {
-        scl = *(f32*) ((u8*) lbl_804D6604 + lbl_804735E8.xF4[arg1] * 0x14 + 0x384);
+        scl = lbl_804D6604->x37C[lbl_804735E8.xF4[arg1]].x08;
     } else {
         scl = 1.0f;
     }
 
     if ((s32) lbl_804735E8.xE4 == 2) {
-        xoff = *(f32*) ((u8*) lbl_804D6604 + lbl_804735E8.xF4[arg1] * 0x14 + 0x37C);
+        xoff = lbl_804D6604->x37C[lbl_804735E8.xF4[arg1]].x00;
     } else {
         xoff = 0.0f;
     }
 
     if ((s32) lbl_804735E8.xE4 == 2) {
-        yoff = *(f32*) ((u8*) lbl_804D6604 + lbl_804735E8.xF4[arg1] * 0x14 + 0x380);
+        yoff = lbl_804D6604->x37C[lbl_804735E8.xF4[arg1]].x04;
     } else {
         yoff = 0.0f;
     }
@@ -273,26 +282,36 @@ void fn_80184138(HSD_GObj* arg0, int arg1)
     }
 
     {
-        f32 x_adj = xoff + (-(*(f32*) ((u8*) lbl_804D6604 + lbl_804735E8.xF4[arg1] * 0x1C + 0x6C))
-                           + *(f32*) ((u8*) lbl_804D6604 + lbl_804735E8.xF0 * 0xC + arg1 * 4 - 0xC));
+        f32 x_adj =
+            xoff + (-lbl_804D6604->x6C[lbl_804735E8.xF4[arg1]].x00 +
+                    lbl_804D6604->x00[lbl_804735E8.xF0 - 1].vals[arg1]);
         HSD_JObjAddTranslationX(jobj, x_adj);
     }
 
     {
-        f32 y_adj = yoff + (*(f32*) ((u8*) lbl_804D6604 + lbl_804735E8.xF4[arg1] * 0x1C + 0x70)
-                          + *(f32*) ((u8*) lbl_804D6604 + lbl_804735E8.xF0 * 0xC + arg1 * 4 + 0x18));
+        f32 y_adj = yoff + (lbl_804D6604->x6C[lbl_804735E8.xF4[arg1]].x04 +
+                            lbl_804D6604->x18[lbl_804735E8.xF0].vals[arg1]);
         HSD_JObjAddTranslationY(jobj, y_adj);
     }
 
     if ((s32) lbl_804735E8.xE4 == 2) {
-        HSD_JObjSetScaleX(jobj, *(f32*) ((u8*) lbl_804D6604 + lbl_804735E8.xF4[arg1] * 0x1C + 0x74) * scl);
-        HSD_JObjSetScaleY(jobj, *(f32*) ((u8*) lbl_804D6604 + lbl_804735E8.xF4[arg1] * 0x1C + 0x78) * scl);
-        HSD_JObjSetScaleZ(jobj, *(f32*) ((u8*) lbl_804D6604 + lbl_804735E8.xF4[arg1] * 0x1C + 0x7C) * scl);
+        HSD_JObjSetScaleX(
+            jobj, lbl_804D6604->x6C[lbl_804735E8.xF4[arg1]].x08.x * scl);
+        HSD_JObjSetScaleY(
+            jobj, lbl_804D6604->x6C[lbl_804735E8.xF4[arg1]].x08.y * scl);
+        HSD_JObjSetScaleZ(
+            jobj, lbl_804D6604->x6C[lbl_804735E8.xF4[arg1]].x08.z * scl);
     } else {
-        f32 scale_factor = *(f32*) ((u8*) lbl_804D6604 + lbl_804735E8.xF0 * 0xC + arg1 * 4 + 0x3C);
-        HSD_JObjSetScaleX(jobj, *(f32*) ((u8*) lbl_804D6604 + lbl_804735E8.xF4[arg1] * 0x1C + 0x74) * scale_factor);
-        HSD_JObjSetScaleY(jobj, *(f32*) ((u8*) lbl_804D6604 + lbl_804735E8.xF4[arg1] * 0x1C + 0x78) * scale_factor);
-        HSD_JObjSetScaleZ(jobj, *(f32*) ((u8*) lbl_804D6604 + lbl_804735E8.xF4[arg1] * 0x1C + 0x7C) * scale_factor);
+        f32 scale_factor = lbl_804D6604->x3C[lbl_804735E8.xF0].vals[arg1];
+        HSD_JObjSetScaleX(jobj,
+                          lbl_804D6604->x6C[lbl_804735E8.xF4[arg1]].x08.x *
+                              scale_factor);
+        HSD_JObjSetScaleY(jobj,
+                          lbl_804D6604->x6C[lbl_804735E8.xF4[arg1]].x08.y *
+                              scale_factor);
+        HSD_JObjSetScaleZ(jobj,
+                          lbl_804D6604->x6C[lbl_804735E8.xF4[arg1]].x08.z *
+                              scale_factor);
     }
 
     for (i = 0; i < 6; i++) {
