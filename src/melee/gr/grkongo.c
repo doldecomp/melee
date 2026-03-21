@@ -1457,7 +1457,39 @@ void fn_801D7E60(Ground* gp, s32 arg1, CollData* arg2, s32 arg3,
 
 /// #grKongo_801D7E78
 
-/// #grKongo_801D7F78
+bool grKongo_801D7F78(HSD_GObj* gobj)
+{
+    Vec3 pos1;
+    Vec3 pos2;
+    HSD_GObj* cur;
+    PAD_STACK(16);
+
+    if (grKongo_801D7E78(gobj, &pos1) == NULL) {
+        return false;
+    }
+
+    for (cur = HSD_GObj_Entities->x14; cur != NULL; cur = cur->next) {
+        if (cur == gobj) {
+            continue;
+        }
+        if (grKongo_801D7E78(cur, &pos2) == NULL) {
+            continue;
+        }
+        {
+            f32 dz = pos2.z - pos1.z;
+            if (dz < -100.0F) {
+                if (dz > -150.0F) {
+                    f32 dx = pos2.x - pos1.x;
+                    if (dx * dx < 6400.0F) {
+                        return true;
+                    }
+                }
+            }
+        }
+    }
+
+    return false;
+}
 
 void grKongo_801D8058(Ground_GObj* arg)
 {
