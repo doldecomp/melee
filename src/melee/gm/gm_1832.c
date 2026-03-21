@@ -710,8 +710,9 @@ void fn_8018575C(HSD_GObj* gobj)
 /// #fn_801857C4
 void fn_801857C4(HSD_GObj* arg0)
 {
+    Vec3 sp10;
+    Vec3 sp24;
     HSD_ImageDesc* desc[3];
-    f32 x, y;
     HSD_SObj* sobj;
     s32 r24;
     s32 row;
@@ -719,7 +720,7 @@ void fn_801857C4(HSD_GObj* arg0)
     u32 delay;
     u8* img_ptr;
 
-    PAD_STACK(48);
+    PAD_STACK(32);
 
     if (lbl_804735E8.xE1 != 0) {
         HSD_GObjPLink_80390228(lbl_804D65F0);
@@ -734,15 +735,16 @@ void fn_801857C4(HSD_GObj* arg0)
                                         0, 0, 0x80, 1);
             r24 = (s32) fn_801855BC((f64)(u32) 10);
             row = (s32) i / (s32)(u8) r24;
-            x = (40.0f * HSD_Randf()) +
+            sp10.x = (40.0f * HSD_Randf()) +
                 (280.0f + ((290.0f / (f32)(u8)(((u8) r24 + 9) / (u8) r24)) *
                            (f32)(i % (u8) r24)));
             i++;
             img_ptr++;
-            y = (40.0f * HSD_Randf()) +
+            sp10.y = (40.0f * HSD_Randf()) +
                 (((160.0f / (f32)(u8) r24) * (f32) row) + -60.0f);
-            sobj->x10 = x;
-            sobj->x14 = y;
+            sp24 = sp10;
+            sobj->x10 = sp24.x;
+            sobj->x14 = sp24.y;
             sobj->x48 = delay;
             delay += 8;
             sobj->x40 |= 9;
