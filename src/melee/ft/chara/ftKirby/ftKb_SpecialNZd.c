@@ -84,6 +84,7 @@ extern f32 ftKb_Init_804D9558;
 /// Forward declarations for functions called before definition
 void fn_80105AB0(Fighter_GObj*);
 void fn_80105A34(Fighter_GObj*);
+void fn_80106DB0(Fighter_GObj*);
 void fn_801090D4(Fighter_GObj*);
 static void fn_801095DC(HSD_GObj*);
 static void fn_80109680(HSD_GObj*);
@@ -513,7 +514,21 @@ void ftKb_SkSpecialNEnd_IASA(Fighter_GObj* gobj) {}
 
 void ftKb_SkSpecialAirNStart_IASA(Fighter_GObj* gobj) {}
 
-/// #ftKb_SkSpecialAirNLoop_IASA
+void ftKb_SkSpecialAirNLoop_IASA(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    if (!(fp->input.held_inputs & HSD_PAD_B)) {
+        fp->mv.kb.specialhi.x0 = 0;
+        Fighter_ChangeMotionState(gobj, ftKb_MS_SkSpecialAirNEnd, Ft_MF_None,
+                                  0, 1, 0, NULL);
+        ftKirbyDmgInline(gobj);
+        fp->accessory4_cb = fn_80106DB0;
+    } else if (fp->input.x668 & HSD_PAD_LR) {
+        Fighter_ChangeMotionState(gobj, ftKb_MS_SkSpecialAirNCancel,
+                                  Ft_MF_None, 0, 1, 0, NULL);
+        ftKirbyDmgInline(gobj);
+    }
+}
 
 void ftKb_SkSpecialAirNCancel_IASA(Fighter_GObj* gobj) {}
 
