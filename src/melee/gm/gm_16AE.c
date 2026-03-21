@@ -2211,7 +2211,7 @@ void fn_8016F140(int arg0)
     gmMainLib_8015DAB4(arg0);
 }
 
-void fn_8016F160(int arg0, int arg1)
+int fn_8016F160(int arg0, int arg1)
 {
-    pl_80039418(arg0, arg1);
+    return pl_80039418(arg0, arg1);
 }

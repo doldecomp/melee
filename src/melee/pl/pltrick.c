@@ -36,7 +36,30 @@ void pl_80037BC0(struct plAttackStats* stats, union Struct2070* ev)
 
 /// #pl_80037C60
 
-/// #pl_80037DF4
+void pl_80037DF4(HSD_GObj* gobj, union Struct2070* ev)
+{
+    Fighter* ft = GET_FIGHTER(gobj);
+    union Struct2070 local_ev;
+    plActionStats* acp = Player_GetActionStats(ft->player_id);
+    local_ev = *ev;
+    acp->attacks.total++;
+    acp->attacks.by_attack_counts[local_ev.x2073]++;
+    if (local_ev.count_thrown_items) {
+        acp->attacks.thrown_item_count++;
+    }
+    if (local_ev.count_aerials) {
+        acp->attacks.aerials_count++;
+    }
+    if (local_ev.count_specials) {
+        acp->attacks.specials_count++;
+    }
+    if (local_ev.count_x1A0) {
+        acp->attacks.x1A0_count++;
+    }
+    if (local_ev.count_x1A4) {
+        acp->attacks.x1A4_count++;
+    }
+}
 
 void pl_80037ECC(HSD_GObj* gobj)
 {
