@@ -1,5 +1,6 @@
 #include "grrcruise.h"
 
+#include "gr/granime.h"
 #include "grzakogenerator.h"
 
 #include <platform.h>
@@ -321,7 +322,39 @@ bool grRCruise_8020014C(Ground_GObj* arg)
 
 void grRCruise_8020045C(Ground_GObj* arg) {}
 
-/// #fn_80200460
+inline Ground* fn_80200460_inline(Ground_GObj* gobj)
+{
+    return GET_GROUND(gobj);
+}
+
+void fn_80200460(Ground_GObj* gobj, s32 id, CollData* coll)
+{
+    Ground* gp = fn_80200460_inline(gobj);
+    s32 i;
+    PAD_STACK(24);
+
+    if ((s32) coll->x34_flags.b1234 != 1) {
+        return;
+    }
+
+    for (i = 0; i < 3; i++) {
+        if (gp->gv.rcruise.x3C[i].x02 == id) {
+            if (gp->gv.rcruise.x3C[i].x00 == 1 ||
+                gp->gv.rcruise.x3C[i].x00 == 3 ||
+                gp->gv.rcruise.x3C[i].x00 == 4)
+            {
+                gp->gv.rcruise.x3C[i].x04 = 0;
+                grRCruise_80201B60(
+                    gp->gv.rcruise.x3C[i].x0C->child, 1);
+                grAnime_801C7A94(gobj, grRc_804D4790[i], 1,
+                                 1.0F);
+                gp->gv.rcruise.x3C[i].x00 = 2;
+            }
+            gp->gv.rcruise.x3C[i].x08++;
+            return;
+        }
+    }
+}
 
 void grRCruise_80200540(Ground_GObj* gobj)
 {

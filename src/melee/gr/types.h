@@ -738,6 +738,15 @@ struct grZebes_GroundVars5 {
     /* +3C gp+100 */ u32 x100;
 };
 
+struct grRCruise_SubEntry {
+    /* 0x00 */ u8 x00;
+    /* 0x01 */ u8 pad_01;
+    /* 0x02 */ s16 x02;
+    /* 0x04 */ s32 x04;
+    /* 0x08 */ s32 x08;
+    /* 0x0C */ HSD_JObj* x0C;
+};
+
 struct grRCruise_Entry {
     /* 0x00 */ u8 x00;
     /* 0x01 */ u8 pad_01;
