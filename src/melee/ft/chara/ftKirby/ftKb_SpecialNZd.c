@@ -90,7 +90,6 @@ static void fn_801095DC(HSD_GObj*);
 static void fn_80109680(HSD_GObj*);
 static void fn_80109714(HSD_GObj*);
 static void fn_801097B8(HSD_GObj*);
-static void fn_80106DB0(HSD_GObj*);
 void fn_8010A930(Fighter_GObj*, Fighter_GObj*);
 
 inline void ftKirbyDmgInline(Fighter_GObj* gobj)
