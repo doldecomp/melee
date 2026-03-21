@@ -8562,11 +8562,11 @@ void hsd_8039EE24(u32 mask)
 }
 
 // @TODO: Currently 91.82% match - 2 dead beq instructions in target
-HSD_Generator* hsd_8039EFAC(s32 bank, s32 id, s32 link, HSD_JObj* jobj)
+HSD_Generator* hsd_8039EFAC(s32 linkNo, s32 bank, s32 gfx_id, HSD_JObj* jobj)
 {
     HSD_Generator* gen;
 
-    gen = hsd_8039F05C(bank, id, link);
+    gen = hsd_8039F05C(linkNo, bank, gfx_id);
     if (gen == NULL) {
         return NULL;
     }
@@ -8806,11 +8806,11 @@ HSD_Generator* hsd_8039F05C(s8 linkNo, s32 bank, s32 idx)
 }
 
 // @TODO: Currently 92.50% match - dead beq instructions in target
-HSD_Generator* hsd_8039F6CC(s32 bank, s32 id, s32 link, HSD_JObj* jobj)
+HSD_Generator* hsd_8039F6CC(s32 linkNo, s32 bank, s32 gfx_id, HSD_JObj* jobj)
 {
     HSD_Generator* gen;
 
-    gen = hsd_8039F05C(bank, id, link);
+    gen = hsd_8039F05C(linkNo, bank, gfx_id);
     if (gen == NULL) {
         return NULL;
     }

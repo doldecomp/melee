@@ -202,7 +202,7 @@ static inline void inlineD0(Fighter_GObj* gobj)
     if ((int) M2C_FIELD(fp, int*, 4) != 0xE) {
         temp_f3 = M2C_FIELD(p_ftCommonData, float*, 0x2F4);
         temp_f2_2 = M2C_FIELD(fp, float*, 0x199C);
-        efLib_8005F864(
+        efLib_SetParamAlpha(
             gobj, (s8) (temp_f3 + (float) (int) (temp_f2_2 * (255 - temp_f3))),
             temp_f2_2, temp_f3);
     }

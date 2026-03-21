@@ -76,8 +76,8 @@ void un_8031D858_OnEnter(void* arg0)
     HSD_GObj* cam_gobj;
 
     lbAudioAx_800236DC();
-    efLib_8005B4B8();
-    efAsync_8006737C(0);
+    efLib_Init();
+    efAsync_LoadSync(0);
     lbAudioAx_80023F28(0x58);
     lbAudioAx_80024E50(1);
     lbArchive_LoadSymbols("Vi0402.dat", &un_804D6F68, "visual0402Scene", NULL);

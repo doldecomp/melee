@@ -13,6 +13,15 @@
 #define M_PI_2 (M_PI / 2)
 #define M_PI_3 (M_PI / 3)
 
+#define M_PI_F 3.14159265358979323846F
+#define M_PI_2_F (M_PI_F / 2.0F)
+#define M_PI_3_F (M_PI_F / 3.0F)
+
+#define M_PI_L 3.14159265358979323846L
+#define M_TAU_L 6.283185307179586L
+#define M_PI_2_L (M_PI_L / 2.0L)
+#define M_PI_3_L (M_PI_L / 3.0L)
+
 static float const deg_to_rad = M_PI / 180;
 static float const rad_to_deg = 180 / M_PI;
 

@@ -254,8 +254,8 @@ void gm_801AC6D8_OnEnter(void* unused)
     int const gx_link = 11;
     PAD_STACK(0x10);
 
-    efLib_8005B4B8();
-    efAsync_8006737C(0);
+    efLib_Init();
+    efAsync_LoadSync(0);
     gm_804D67F8 = HSD_MemAlloc(sizeof(struct gm_804D67F8_t));
     gm_804D67FC = HSD_MemAlloc(sizeof(struct gm_804D67FC_t));
     HSD_SisLib_803A62A0(0, "SdStRoll.dat", "SIS_StRollData");

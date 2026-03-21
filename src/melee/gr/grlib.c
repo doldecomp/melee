@@ -156,12 +156,12 @@ void grLib_801C9908(HSD_JObj* jobj)
     }
 }
 
-void grLib_801C99C0(s32 arg0, s32 arg1, HSD_JObj* arg2, s32 arg3)
+void grLib_801C99C0(s32 bank, s32 gfx_id, HSD_JObj* jobj, s32 flag)
 {
-    if (arg3 != 0) {
-        hsd_8039EFAC(0, arg0, arg1, arg2);
+    if (flag != 0) {
+        hsd_8039EFAC(0, bank, gfx_id, jobj);
     } else {
-        hsd_8039F6CC(0, arg0, arg1, arg2);
+        hsd_8039F6CC(0, bank, gfx_id, jobj);
     }
 }
 
