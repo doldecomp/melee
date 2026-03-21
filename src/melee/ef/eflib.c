@@ -1,6 +1,6 @@
 /*
  * TODO: I looked at the strings in the ASM, I think there was only
- *       ever eflib.c and efasync.c (?) The files in this folder 
+ *       ever eflib.c and efasync.c (?) The files in this folder
  *       and splits / symbols should be adjusted accordingly with time,
  *       but for the sake of matching files %, we can leave these
  *       separate for now. Also I dont know if anyone cares as long

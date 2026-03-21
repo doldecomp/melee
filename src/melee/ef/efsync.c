@@ -16,7 +16,7 @@
 
 #include "ft/inlines.h"
 
-/* 
+/*
  * TODO: efSync_Spawn is at 98% matching, and its associated jump
  *       table is at 60%. I presume once efSync_Spawn matches so
  *       will its jump table?
