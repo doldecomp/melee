@@ -17,6 +17,7 @@
 #include "ft/ft_081B.h"
 #include "ft/ft_0877.h"
 #include "ft/ft_0892.h"
+#include "ft/ftanim.h"
 #include "ft/ftcliffcommon.h"
 #include "ft/ftcommon.h"
 #include "ft/ftdata.h"
@@ -25,6 +26,7 @@
 #include "ft/inlines.h"
 #include "ft/types.h"
 #include "ftCommon/ftCo_CaptureKirby.h"
+#include "ftCommon/ftCo_CaptureWaitKirby.h"
 #include "ftCommon/ftCo_Fall.h"
 #include "ftCommon/ftCo_Landing.h"
 
@@ -167,9 +169,44 @@ void ftKb_AttackDashAir_800F22D4(Fighter_GObj* gobj)
     ftPartSetRotX(ft, 0, 0.0F);
 }
 
-/// #ftKb_SpecialHi_Enter
+void ftKb_SpecialHi_Enter(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    fp->cmd_vars[3] = 0;
+    fp->cmd_vars[2] = 0;
+    fp->cmd_vars[1] = 0;
+    fp->cmd_vars[0] = 0;
+    fp->mv.kb.specialhi.x0 = 0;
+    fp->mv.kb.specialhi.x4 = 0;
+    fp->mv.kb.specialhi.x8.i = 0;
+    fp->mv.kb.specialhi.xC = 0;
+    Fighter_ChangeMotionState(gobj, ftKb_MS_SpecialHi1, 0, 0.0f, 1.0f, 0.0f,
+                              NULL);
+    ftAnim_8006EBA4(gobj);
+    fp = GET_FIGHTER(gobj);
+    efSync_Spawn(0x494, gobj);
+    fp->x2219_b0 = 1;
+    fp->pre_hitlag_cb = efLib_PauseAll;
+    fp->post_hitlag_cb = efLib_ResumeAll;
+}
 
-/// #ftKb_SpecialAirHi_Enter
+void ftKb_SpecialAirHi_Enter(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    fp->cmd_vars[0] = fp->cmd_vars[1] = fp->cmd_vars[2] = fp->cmd_vars[3] = 0;
+    fp->mv.kb.specialhi.x0 = 0;
+    fp->mv.kb.specialhi.x4 = 0;
+    fp->mv.kb.specialhi.x8.i = 0;
+    fp->mv.kb.specialhi.xC = 0;
+    Fighter_ChangeMotionState(gobj, ftKb_MS_SpecialAirHi1, 0, 0.0f, 1.0f, 0.0f,
+                              NULL);
+    ftAnim_8006EBA4(gobj);
+    fp = GET_FIGHTER(gobj);
+    efSync_Spawn(0x494, gobj);
+    fp->x2219_b0 = 1;
+    fp->pre_hitlag_cb = efLib_PauseAll;
+    fp->post_hitlag_cb = efLib_ResumeAll;
+}
 
 void ftKb_SpecialHi1_Anim(Fighter_GObj* gobj)
 {
@@ -1545,9 +1582,59 @@ void ftKb_SpecialN_800F5D04(Fighter_GObj* gobj, bool arg1)
     new_var->fv.kb.hat.kind = 4;
 }
 
-/// #ftKb_SpecialN_800F5DE8
+static void ftKb_SpecialN_800F5DE8_inline(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftKb_DatAttrs* da = fp->dat_attrs;
+    Vec3 pos;
+    FORCE_PAD_STACK_16;
 
-/// #ftKb_SpecialN_800F5EA8
+    pos = fp->cur_pos;
+    pos.x += da->specialn_x_offset_inhaled * fp->facing_dir;
+    pos.y += da->specialn_y_offset_inhaled;
+
+    {
+        f64 dist = it_802F23AC((int*) fp->target_item_gobj, (float*) &pos);
+        if (dist < da->specialn_inhale_velocity * da->specialn_inhale_velocity)
+        {
+            it_802F2810(fp->target_item_gobj);
+            if (fp->ground_or_air == GA_Air) {
+                ftKb_SpecialN_800F63EC(gobj);
+            } else {
+                ftKb_SpecialN_800F6388(gobj);
+            }
+        }
+    }
+}
+
+void ftKb_SpecialN_800F5DE8(Fighter_GObj* gobj)
+{
+    ftKb_SpecialN_800F5DE8_inline(gobj);
+}
+
+void ftKb_SpecialN_800F5EA8(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftKb_DatAttrs* da = fp->dat_attrs;
+    Vec3 pos;
+
+    pos = fp->cur_pos;
+    pos.x += da->specialn_x_offset_inhaled * fp->facing_dir;
+    pos.y += da->specialn_y_offset_inhaled;
+
+    {
+        f32 dist = ftCo_800BD19C(fp->victim_gobj, &pos);
+        if (dist < da->specialn_inhale_velocity * da->specialn_inhale_velocity)
+        {
+            ftCo_800BD620(fp->victim_gobj);
+            if (fp->ground_or_air == GA_Air) {
+                ftKb_SpecialN_800F63EC(gobj);
+            } else {
+                ftKb_SpecialN_800F6388(gobj);
+            }
+        }
+    }
+}
 
 void ftKb_SpecialN_800F5F68(HSD_GObj* gobj)
 {
@@ -2706,11 +2793,9 @@ void fn_800F98F4(Fighter_GObj* gobj)
         PAD_STACK(4);
         bone = ftParts_GetBoneIndex(fp, FtPart_LHandN);
         lb_8000B1CC(fp->parts[bone].joint, NULL, &pos);
-        it_802C01AC(gobj, &pos, It_Kind_Kirby_LuigiFire,
-                    fp->facing_dir);
+        it_802C01AC(gobj, &pos, It_Kind_Kirby_LuigiFire, fp->facing_dir);
         bone = ftParts_GetBoneIndex(fp, FtPart_LHandN);
-        efSync_Spawn(0x4B1, gobj, fp->parts[bone].joint,
-                     &fp->facing_dir);
+        efSync_Spawn(0x4B1, gobj, fp->parts[bone].joint, &fp->facing_dir);
     }
 }
 
