@@ -117,9 +117,7 @@ STATIC_ASSERT(sizeof(ClassicSlotVals) == 0xC);
 typedef struct {
     /* 0x00 */ f32 x00;
     /* 0x04 */ f32 x04;
-    /* 0x08 */ f32 x08;
-    /* 0x0C */ f32 x0C;
-    /* 0x10 */ f32 x10;
+    /* 0x08 */ Vec3 x08;
     /* 0x14 */ u8 pad_14[0x8];
 } ClassicCharLayout;
 STATIC_ASSERT(sizeof(ClassicCharLayout) == 0x1C);
@@ -155,6 +153,7 @@ void fn_8018325C(HSD_GObj* arg0, int arg1)
     HSD_JObj* jobj = arg0->hsd_obj;
     HSD_JObj* src = lbl_804735A8.x4[0];
     int i;
+    HSD_JObj* arrow;
 
     HSD_JObjGetTranslation(src, &pos);
     HSD_JObjSetTranslate(jobj, &pos);
@@ -163,7 +162,7 @@ void fn_8018325C(HSD_GObj* arg0, int arg1)
     case 1:
         HSD_JObjAddTranslationZ(jobj, -10.0f);
         if (lbl_804735A8.x38 > 0x50U) {
-            HSD_JObj* arrow = lbl_804735A8.x4[2];
+            arrow = lbl_804735A8.x4[2];
             HSD_JObjSetTranslateX(arrow, -1.0f);
             HSD_JObjSetTranslateY(arrow, 0.0f);
             HSD_JObjSetTranslateZ(arrow, 5.0f);
@@ -174,7 +173,7 @@ void fn_8018325C(HSD_GObj* arg0, int arg1)
     case 2:
         HSD_JObjAddTranslationZ(jobj, -30.0f);
         if (lbl_804735A8.x38 > 0x5AU) {
-            HSD_JObj* arrow = lbl_804735A8.x4[3];
+            arrow = lbl_804735A8.x4[3];
             HSD_JObjSetTranslateX(arrow, -0.5f);
             HSD_JObjSetTranslateY(arrow, 3.0f);
             HSD_JObjSetTranslateZ(arrow, 5.0f);
@@ -185,38 +184,42 @@ void fn_8018325C(HSD_GObj* arg0, int arg1)
     }
 
     if (lbl_804735E8.xE4 == 2) {
-        f32 x_adj = lbl_804D6604->x6A8[lbl_804735E8.xF1[arg1]].x00
-                  - lbl_804D6604->x630[lbl_804735E8.xEF].vals[arg1];
-        HSD_JObjAddTranslationX(jobj, x_adj);
+        HSD_JObjAddTranslationX(
+            jobj, lbl_804D6604->x6A8[lbl_804735E8.xF1[arg1]].x00 -
+                      lbl_804D6604->x630[lbl_804735E8.xEF].vals[arg1]);
+        HSD_JObjAddTranslationY(
+            jobj, lbl_804D6604->x6A8[lbl_804735E8.xF1[arg1]].x04 +
+                      lbl_804D6604->x654[lbl_804735E8.xEF].vals[arg1]);
 
-        {
-            f32 y_adj = lbl_804D6604->x6A8[lbl_804735E8.xF1[arg1]].x04
-                      + lbl_804D6604->x654[lbl_804735E8.xEF].vals[arg1];
-            HSD_JObjAddTranslationY(jobj, y_adj);
-        }
-
-        HSD_JObjSetScaleX(jobj, lbl_804D6604->x6A8[lbl_804735E8.xF1[arg1]].x08
-                              * lbl_804D6604->x678[lbl_804735E8.xEF].vals[arg1]);
-        HSD_JObjSetScaleY(jobj, lbl_804D6604->x6A8[lbl_804735E8.xF1[arg1]].x0C
-                              * lbl_804D6604->x678[lbl_804735E8.xEF].vals[arg1]);
-        HSD_JObjSetScaleZ(jobj, lbl_804D6604->x6A8[lbl_804735E8.xF1[arg1]].x10
-                              * lbl_804D6604->x678[lbl_804735E8.xEF].vals[arg1]);
+        HSD_JObjSetScaleX(jobj,
+                          lbl_804D6604->x6A8[lbl_804735E8.xF1[arg1]].x08.x *
+                              lbl_804D6604->x678[lbl_804735E8.xEF].vals[arg1]);
+        HSD_JObjSetScaleY(jobj,
+                          lbl_804D6604->x6A8[lbl_804735E8.xF1[arg1]].x08.y *
+                              lbl_804D6604->x678[lbl_804735E8.xEF].vals[arg1]);
+        HSD_JObjSetScaleZ(jobj,
+                          lbl_804D6604->x6A8[lbl_804735E8.xF1[arg1]].x08.z *
+                              lbl_804D6604->x678[lbl_804735E8.xEF].vals[arg1]);
     } else {
-        f32 x_adj = lbl_804D6604->x6C[lbl_804735E8.xF1[arg1]].x00
-                  - lbl_804D6604->x00[lbl_804735E8.xEF - 1].vals[arg1];
-        HSD_JObjAddTranslationX(jobj, x_adj);
+        HSD_JObjAddTranslationX(
+            jobj, lbl_804D6604->x6C[lbl_804735E8.xF1[arg1]].x00 -
+                      lbl_804D6604->x00[lbl_804735E8.xEF - 1].vals[arg1]);
 
-        {
-            f32 y_adj = lbl_804D6604->x6C[lbl_804735E8.xF1[arg1]].x04
-                      + lbl_804D6604->x18[lbl_804735E8.xEF].vals[arg1];
-            HSD_JObjAddTranslationY(jobj, y_adj);
-        }
+        HSD_JObjAddTranslationY(
+            jobj, lbl_804D6604->x6C[lbl_804735E8.xF1[arg1]].x04 +
+                      lbl_804D6604->x18[lbl_804735E8.xEF].vals[arg1]);
 
         {
             f32 scale_factor = lbl_804D6604->x3C[lbl_804735E8.xEF].vals[arg1];
-            HSD_JObjSetScaleX(jobj, lbl_804D6604->x6C[lbl_804735E8.xF1[arg1]].x08 * scale_factor);
-            HSD_JObjSetScaleY(jobj, lbl_804D6604->x6C[lbl_804735E8.xF1[arg1]].x0C * scale_factor);
-            HSD_JObjSetScaleZ(jobj, lbl_804D6604->x6C[lbl_804735E8.xF1[arg1]].x10 * scale_factor);
+            HSD_JObjSetScaleX(jobj,
+                              lbl_804D6604->x6C[lbl_804735E8.xF1[arg1]].x08.x *
+                                  scale_factor);
+            HSD_JObjSetScaleY(jobj,
+                              lbl_804D6604->x6C[lbl_804735E8.xF1[arg1]].x08.y *
+                                  scale_factor);
+            HSD_JObjSetScaleZ(jobj,
+                              lbl_804D6604->x6C[lbl_804735E8.xF1[arg1]].x08.z *
+                                  scale_factor);
         }
     }
 
