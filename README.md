@@ -12,7 +12,7 @@ Documentation
 - [Getting Started](docs/getting_started.md)
 - [`symbols.txt`](docs/symbols.md)
 - [`splits.txt`](docs/splits.md)
-- [GitHub Actions](docs/github_actions.md) (new!)
+- [GitHub Actions](docs/github_actions.md)
 
 General:
 
