@@ -442,8 +442,8 @@ void fn_80187714(void)
     Stage_8022524C();
     Item_80266FA8();
     Item_80266FCC();
-    efLib_8005B4B8();
-    efAsync_8006737C(0);
+    efLib_Init();
+    efAsync_LoadSync(0);
 }
 #pragma pop
 

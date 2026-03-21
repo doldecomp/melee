@@ -501,10 +501,10 @@ config.libs = [
     MeleeLib(
         "ef (Visual effects)",
         [
-            Object(Matching, "melee/ef/eflib_alloc.c"),
+            Object(Matching, "melee/ef/efdata.c"),
             Object(Matching, "melee/ef/eflib.c"),
             Object(NonMatching, "melee/ef/efsync.c"),
-            Object(Matching, "melee/ef/efspecial.c"),
+            Object(Matching, "melee/ef/efalt.c"),
             Object(NonMatching, "melee/ef/efasync.c"),
         ],
     ),

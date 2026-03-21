@@ -1,13 +1,10 @@
 #include "efsync.h"
 
+#include "efalt.h"
 #include "efasync.h"
+#include "efdata.h"
 #include "eflib.h"
-#include "efsync.h"
-#include "math.h"
-#include "placeholder.h"
 #include "types.h"
-
-#include "baselib/forward.h"
 
 #include "baselib/gobj.h"
 #include "baselib/jobj.h"
@@ -15,115 +12,96 @@
 #include "baselib/psstructs.h"
 #include "baselib/random.h"
 
-#include "ef/forward.h"
+#include "MSL/math.h"
 
 #include "ft/inlines.h"
 
-extern ef_Symbols efAsync_803C025C[51];
-extern Effect* efSpecial_SpawnSpecial(s32, HSD_GObj*, va_list);
+/* 
+ * TODO: efSync_Spawn is at 98% matching, and its associated jump
+ *       table is at 60%. I presume once efSync_Spawn matches so
+ *       will its jump table?
+ */
 
-extern s32 efLib_804D64E8;
-extern s32 efLib_804D64F0;
+extern EF_DAT_Entry efAsync_DatEntries[51];
 
-void* jumptable_803BF870[88];
-
-void* efSync_Spawn(s32 arg_gfx_id, HSD_GObj* arg_gobj, ...)
+// Routes gfx_id to a specific spawn handler:
+//
+// .--------------------------------------------.
+// | gfx_id range       | handler               |
+// |--------------------+-----------------------|
+// | 0x0000 - 0x024F    | efLib_CreateGenerator |
+// | 0x7530 - 0x7917    | efLib_CreateGenerator |
+// | 0x0250 - 0x0477    | efAsync_Dispatch      |
+// | 0x0479 - 0x04BA    | efAlt_Spawn           |
+// | 0x04BB - 0x0512    | cases in this switch  |
+// *--------------------------------------------*
+//
+// Effects attach to a parent gobj and optionally a jobj for
+// position/rotation inheritance. Note there's variadic args!
+void* efSync_Spawn(s32 gfx_id, HSD_GObj* gobj, ...)
 {
-    // s32* sp204;
-    // ?* sp200;
     va_list vlist;
-    Vec3 sp1F0;
-    Vec3 sp1E4;
-    Vec3 spAC;
-    Vec3 spA0;
-    Vec3 sp94;
-    Vec3 sp88;
-    Vec3 sp7C;
-    Vec3 sp70;
-    HSD_psAppSRT* psAppSRT_1;
-    HSD_Generator* generator_1;
-    Effect* eff_1;
+    Vec3 translate;
+    Vec3 scale;
+    Vec3 scale_2;
+    Vec3 scale_3;
+    Vec3 scale_4;
+    Vec3 scale_5;
+    Vec3 scale_6;
+    Vec3 unused;
+    HSD_psAppSRT* psAppSRT;
+    HSD_Generator* generator;
     void* ret_obj;
-    HSD_JObj* jobj_1;
     HSD_JObj* jobj_2;
-    Vec3* vec3_1;
-    f64 f64_1;
-    f32 f32_1;
-    f32 f32_2;
-    f32 f32_3;
-    f32 f32_4;
-    f32 f32_5;
-    f32 f32_6;
-    s32 s32_1;
-    s32 gfx_id;
-    // Item* item_1;
-    Fighter* fighter_1;
-    s32 cnt;
-    PAD_STACK(0x5C);
+    HSD_JObj* jobj_1;
+    Vec3* va_vec3;
+    f64 half_pi;
+    f32 va_f32_1;
+    f32 rand_f32;
+    f32 rand_rot_y;
+    f32 rand_rot_x;
+    f32 rand_param_x;
+    f32 rand_param_y;
+    s32 cnt_1;
+    Fighter* fp;
+    s32 cnt_2;
+    PAD_STACK(0x4C);
 
-    va_start(vlist, arg_gobj);
-
-    // var_r25 = saved_reg_r25;
-    // if (M2C_ERROR(/* Read from unset register $cr0_eq */)) {
-    //     sp28 = arg_gobj;
-    //     sp30 = arg_gobj;
-    //     sp38 = arg_gobj;
-    //     sp40 = arg_gobj;
-    //     sp48 = arg_gobj;
-    //     sp50 = arg_gobj;
-    //     sp58 = arg_gobj;
-    //     sp60 = arg_gobj;
-    // }
-    // sp8 = arg_gfx_id;
-    gfx_id = arg_gfx_id;
     ret_obj = NULL;
-    // spC = arg_gobj;
-    // sp10 = arg_gobj;
-    // temp_r5 = "!(jobj->flags & JOBJ_USE_QUATERNION)";
-    // sp14 = arg_gobj;
-    // sp18 = arg_gobj;
-    // sp1C = arg_gobj;
-    // sp20 = arg_gobj;
-    // sp24 = arg_gobj;
-    efLib_804D64E8 = 0;
-    efLib_804D64F0 = 0;
-    // sp1FC = 0x02000000;
-    // sp200 = &arg2;
-    // sp204 = &sp8;
-    if ((gfx_id == 0x479) && ((u32) efAsync_803C025C[1].unk8 == NULL)) {
+    efLib_LoadKind = EF_LOADKIND_ASYNC;
+    efLib_AnimCount = 0;
+    va_start(vlist, gobj);
+    if ((gfx_id == 0x479) && ((u32) efAsync_DatEntries[1].data == NULL)) {
         gfx_id = 0x506;
     }
     if (gfx_id < 0x250) {
-        vec3_1 = va_arg(vlist, Vec3*);
-        return efLib_8005C9FC(gfx_id, vec3_1);
+        va_vec3 = va_arg(vlist, Vec3*);
+        return efLib_CreateGenerator(gfx_id, va_vec3);
     }
     if (gfx_id / 1000 == 0x1E) {
-        vec3_1 = va_arg(vlist, Vec3*);
-        return efLib_8005C9FC(gfx_id, vec3_1);
+        va_vec3 = va_arg(vlist, Vec3*);
+        return efLib_CreateGenerator(gfx_id, va_vec3);
     }
     if (gfx_id < 0x478) {
-        // return efAsync_80063930(gfx_id, arg_gobj, va_arg(vlist, void*));
-        return efAsync_80063930(gfx_id, arg_gobj, vlist);
+        return efAsync_Dispatch(gfx_id, gobj, vlist);
     }
     if (gfx_id < 0x4BA) {
-        // return efSpecial_SpawnSpecial(gfx_id, arg_gobj, va_arg(vlist,
-        // void*));
-        return efSpecial_SpawnSpecial(gfx_id, arg_gobj, vlist);
+        return efAlt_Spawn(gfx_id, gobj, vlist);
     }
-    efLib_804D64E8 = 1;
+    efLib_LoadKind = EF_LOADKIND_SYNC;
     switch (gfx_id) {
     case 0x4BB:
-        ret_obj = efLib_8005C6F4(0x1770, arg_gobj, va_arg(vlist, void*));
+        ret_obj = efLib_Create_Attach_Scale_FacingDir(0x1770, gobj, va_arg(vlist, void*));
         if (ret_obj != NULL) {
-            ret_obj =
-                efLib_8005C5C4(0x1772, arg_gobj, va_arg(vlist, HSD_JObj*));
+            ((EF_Effect*) ret_obj)->next = (void*)
+                efLib_Create_AttachChild_Scale(0x1772, gobj, va_arg(vlist, HSD_JObj*));
         }
         break;
     case 0x4BC:
-        ret_obj = efLib_8005C6F4(0x1771, arg_gobj, va_arg(vlist, void*));
+        ret_obj = efLib_Create_Attach_Scale_FacingDir(0x1771, gobj, va_arg(vlist, void*));
         if (ret_obj != NULL) {
-            ret_obj =
-                efLib_8005C5C4(0x1773, arg_gobj, va_arg(vlist, HSD_JObj*));
+            ((EF_Effect*) ret_obj)->next = (void*)
+                efLib_Create_AttachChild_Scale(0x1773, gobj, va_arg(vlist, HSD_JObj*));
         }
         break;
     case 0x4BD:
@@ -138,291 +116,263 @@ void* efSync_Spawn(s32 arg_gfx_id, HSD_GObj* arg_gobj, ...)
         hsd_8039EFAC(0, 0, 0x5F, jobj_1);
         break;
     case 0x4C0:
-        ret_obj = efLib_8005C1B4(0x1B58U, arg_gobj, va_arg(vlist, HSD_JObj*));
+        ret_obj = efLib_Create_Attach(0x1B58U, gobj, va_arg(vlist, HSD_JObj*));
         break;
     case 0x4C1:
-        ret_obj = efLib_8005C6F4(0x1B59, arg_gobj, va_arg(vlist, void*));
+        ret_obj = efLib_Create_Attach_Scale_FacingDir(0x1B59, gobj, va_arg(vlist, void*));
         if (ret_obj != NULL) {
-            f32_1 = *va_arg(vlist, f32*);
-            jobj_1 = GET_JOBJ(((Effect*) ret_obj)->gobj);
-            HSD_JObjSetRotationZ(jobj_1, f32_1);
+            va_f32_1 = *va_arg(vlist, f32*);
+            jobj_1 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
+            HSD_JObjSetRotationZ(jobj_1, va_f32_1);
         }
         break;
     case 0x4C2:
-        ret_obj = efLib_8005C6F4(0x1B5A, arg_gobj, va_arg(vlist, void*));
+        ret_obj = efLib_Create_Attach_Scale_FacingDir(0x1B5A, gobj, va_arg(vlist, void*));
         if (ret_obj != NULL) {
-            f32_1 = *va_arg(vlist, f32*);
-            jobj_1 = GET_JOBJ(((Effect*) ret_obj)->gobj);
-            HSD_JObjSetRotationZ(jobj_1, f32_1);
+            va_f32_1 = *va_arg(vlist, f32*);
+            jobj_1 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
+            HSD_JObjSetRotationZ(jobj_1, va_f32_1);
         }
         break;
     case 0x4C3:
-        ret_obj = efLib_8005CAB0(0x24CU);
+        ret_obj = efLib_CreateGenerator_AddAppSRT(0x24CU);
         if (ret_obj != NULL) {
-            vec3_1 = va_arg(vlist, Vec3*);
-            psAppSRT_1 = ((HSD_Generator*) ret_obj)->appsrt;
-            psAppSRT_1->translate = *vec3_1;
+            va_vec3 = va_arg(vlist, Vec3*);
+            psAppSRT = ((HSD_Generator*) ret_obj)->appsrt;
+            psAppSRT->translate = *va_vec3;
         }
         break;
     case 0x4C4:
-        ret_obj = efLib_8005C6F4(0x1B5B, arg_gobj, va_arg(vlist, void*));
+        ret_obj = efLib_Create_Attach_Scale_FacingDir(0x1B5B, gobj, va_arg(vlist, void*));
         if (ret_obj != NULL) {
-            f32_1 = *va_arg(vlist, f32*);
-            jobj_1 = GET_JOBJ(((Effect*) ret_obj)->gobj);
-            HSD_JObjSetRotationZ(jobj_1, f32_1);
+            va_f32_1 = *va_arg(vlist, f32*);
+            jobj_1 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
+            HSD_JObjSetRotationZ(jobj_1, va_f32_1);
         }
         break;
     case 0x4C5:
-        ret_obj = efLib_8005C6F4(0x1B5C, arg_gobj, va_arg(vlist, void*));
+        ret_obj = efLib_Create_Attach_Scale_FacingDir(0x1B5C, gobj, va_arg(vlist, void*));
         if (ret_obj != NULL) {
-            f32_1 = *va_arg(vlist, f32*);
-            jobj_1 = GET_JOBJ(((Effect*) ret_obj)->gobj);
-            HSD_JObjSetRotationZ(jobj_1, f32_1);
+            va_f32_1 = *va_arg(vlist, f32*);
+            jobj_1 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
+            HSD_JObjSetRotationZ(jobj_1, va_f32_1);
         }
         break;
     case 0x4C6:
-        ret_obj = efLib_8005C6F4(0x1F40, arg_gobj, va_arg(vlist, void*));
+        ret_obj = efLib_Create_Attach_Scale_FacingDir(0x1F40, gobj, va_arg(vlist, void*));
         break;
     case 0x4C7:
-        ret_obj = efLib_8005C6F4(0x1F41, arg_gobj, va_arg(vlist, void*));
+        ret_obj = efLib_Create_Attach_Scale_FacingDir(0x1F41, gobj, va_arg(vlist, void*));
         break;
     case 0x4C8:
-        ret_obj = efLib_8005C3DC(0x1F42, arg_gobj, va_arg(vlist, HSD_JObj*));
+        ret_obj = efLib_Create_Attach_Scale(0x1F42, gobj, va_arg(vlist, HSD_JObj*));
         if (ret_obj != NULL) {
             if (*va_arg(vlist, f32*) < 0.0f) {
-                f64_1 = -M_PI_2;
+                half_pi = -M_PI_2;
             } else {
-                f64_1 = M_PI_2;
+                half_pi = M_PI_2;
             }
-            jobj_1 = GET_JOBJ(((Effect*) ret_obj)->gobj);
-            HSD_JObjSetRotationY(jobj_1, f64_1);
-            jobj_1 = GET_JOBJ(((Effect*) ret_obj)->gobj);
-            HSD_JObjAnimAll(jobj_1);
+            jobj_1 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
+            HSD_JObjSetRotationY(jobj_1, half_pi);
+            jobj_2 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
+            HSD_JObjAnimAll(jobj_2);
         }
         break;
     case 0x4C9:
-        ret_obj = efLib_8005C3DC(0x1F43, arg_gobj, va_arg(vlist, HSD_JObj*));
+        ret_obj = efLib_Create_Attach_Scale(0x1F43, gobj, va_arg(vlist, HSD_JObj*));
         if (ret_obj != NULL) {
             if (*va_arg(vlist, f32*) < 0.0f) {
-                f64_1 = -M_PI_2;
+                half_pi = -M_PI_2;
             } else {
-                f64_1 = M_PI_2;
+                half_pi = M_PI_2;
             }
-            jobj_1 = GET_JOBJ(((Effect*) ret_obj)->gobj);
-            HSD_JObjSetRotationY(jobj_1, f64_1);
-            jobj_1 = GET_JOBJ(((Effect*) ret_obj)->gobj);
-            HSD_JObjAnimAll(jobj_1);
+            jobj_1 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
+            HSD_JObjSetRotationY(jobj_1, half_pi);
+            jobj_2 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
+            HSD_JObjAnimAll(jobj_2);
         }
         break;
     case 0x4CA:
-        ret_obj = efLib_8005C3DC(0x1F44, arg_gobj, va_arg(vlist, HSD_JObj*));
+        ret_obj = efLib_Create_Attach_Scale(0x1F44, gobj, va_arg(vlist, HSD_JObj*));
         break;
     case 0x4CB:
-        ret_obj = efLib_8005C3DC(0x1F45, arg_gobj, va_arg(vlist, HSD_JObj*));
+        ret_obj = efLib_Create_Attach_Scale(0x1F45, gobj, va_arg(vlist, HSD_JObj*));
         break;
     case 0x4CC:
-        ret_obj = efLib_8005C814(0x1F46U, arg_gobj, va_arg(vlist, Vec3*));
+        ret_obj = efLib_Create_Attach_Pos(0x1F46U, gobj, va_arg(vlist, Vec3*));
         if (ret_obj != NULL) {
-            jobj_1 = arg_gobj->hsd_obj;
-            HSD_JObjGetScale(jobj_1, &sp1E4);
-            jobj_2 = GET_JOBJ(((Effect*) ret_obj)->gobj);
-            HSD_JObjSetScale(jobj_2, &sp1E4);
-            ((Effect*) ret_obj)->x10 = efLib_8005E2B4;
+            jobj_1 = gobj->hsd_obj;
+            HSD_JObjGetScale(jobj_1, &scale);
+            jobj_2 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
+            HSD_JObjSetScale(jobj_2, &scale);
+            ((EF_Effect*) ret_obj)->update = efLib_Cb_SetRotY_FromFighterDir;
         }
         break;
     case 0x4CD:
-        ret_obj = efLib_8005C1B4(0x2328U, arg_gobj, va_arg(vlist, HSD_JObj*));
+        ret_obj = efLib_Create_Attach(0x2328U, gobj, va_arg(vlist, HSD_JObj*));
         break;
     case 0x4CE:
-        ret_obj = efLib_8005C9FC(0x2328U, va_arg(vlist, Vec3*));
+        ret_obj = efLib_CreateGenerator(0x2328U, va_arg(vlist, Vec3*));
         break;
     case 0x4CF:
-    case 0x4D0:
-        f32_1 = 1.0f;
-        vec3_1 = va_arg(vlist, Vec3*);
-        sp1F0 = *vec3_1;
+    case 0x4D0: {
+        EF_Effect* eff_1;
+        EF_Effect* effect;
+        va_f32_1 = 1.0f;
+        va_vec3 = va_arg(vlist, Vec3*);
+        translate = *va_vec3;
         if (gfx_id == 0x4CF) {
-            f32_1 = *va_arg(vlist, f32*);
+            va_f32_1 = *va_arg(vlist, f32*);
         }
-        s32_1 = 0;
+        cnt_1 = 0;
     loop_141:
-        f32_2 = HSD_Randf();
-        if (f32_2 < 0.5f) {
+        rand_f32 = HSD_Randf();
+        if (rand_f32 < 0.5f) {
             if (gfx_id == 0x4D0) {
-                ret_obj = efLib_8005C814(0x1CU, arg_gobj, &sp1F0);
+                effect = efLib_Create_Attach_Pos(0x1CU, gobj, &translate);
             } else {
-                ret_obj = efLib_8005C814(0x1EU, arg_gobj, &sp1F0);
+                effect = efLib_Create_Attach_Pos(0x1EU, gobj, &translate);
             }
         } else if (gfx_id == 0x4D0) {
-            ret_obj = efLib_8005C814(0x1DU, arg_gobj, &sp1F0);
+            effect = efLib_Create_Attach_Pos(0x1DU, gobj, &translate);
         } else {
-            ret_obj = efLib_8005C814(0x1FU, arg_gobj, &sp1F0);
+            effect = efLib_Create_Attach_Pos(0x1FU, gobj, &translate);
         }
-        if (ret_obj != NULL) {
-            ((Effect*) ret_obj)->x10 = efLib_8005E950;
-            ((Effect*) ret_obj)->x24 = 0x32;
-            f32_3 = M_TAU * HSD_Randf();
-            f32_4 = M_TAU * HSD_Randf();
-            jobj_1 = GET_JOBJ(((Effect*) ret_obj)->gobj);
-            HSD_JObjSetScaleX(jobj_1, f32_1);
-            jobj_1 = GET_JOBJ(((Effect*) ret_obj)->gobj);
-            HSD_JObjSetScaleY(jobj_1, f32_1);
-            jobj_1 = GET_JOBJ(((Effect*) ret_obj)->gobj);
-            HSD_JObjSetScaleZ(jobj_1, f32_1);
-            jobj_1 = GET_JOBJ(((Effect*) ret_obj)->gobj);
-            HSD_JObjSetRotationY(jobj_1, f32_3);
-            jobj_1 = GET_JOBJ(((Effect*) ret_obj)->gobj);
-            HSD_JObjSetRotationX(jobj_1, f32_4);
-            f32_5 = sinf(f32_3);
-            ((Effect*) ret_obj)->translate.x = 2.0f * cosf(f32_4) * f32_5;
-            ((Effect*) ret_obj)->translate.y = 2.0f * sinf(f32_4);
-            f32_6 = cosf(f32_3);
-            ((Effect*) ret_obj)->translate.z = 2.0f * cosf(f32_4) * f32_6;
-            if (s32_1 != 0) {
-                eff_1->x0 = ret_obj;
-                eff_1 = (void*) eff_1->x0;
+        if (effect != NULL) {
+            effect->update = efLib_Cb_SetOffset_FromParams;
+            effect->lifetime = 0x32;
+            rand_rot_y = M_TAU * HSD_Randf();
+            rand_rot_x = M_TAU * HSD_Randf();
+            jobj_1 = GET_JOBJ(effect->gobj);
+            HSD_JObjSetScaleX(jobj_1, va_f32_1);
+            jobj_1 = GET_JOBJ(effect->gobj);
+            HSD_JObjSetScaleY(jobj_1, va_f32_1);
+            jobj_1 = GET_JOBJ(effect->gobj);
+            HSD_JObjSetScaleZ(jobj_1, va_f32_1);
+            jobj_1 = GET_JOBJ(effect->gobj);
+            HSD_JObjSetRotationY(jobj_1, rand_rot_y);
+            jobj_1 = GET_JOBJ(effect->gobj);
+            HSD_JObjSetRotationX(jobj_1, rand_rot_x);
+            rand_param_x = sinf(rand_rot_y);
+            effect->params.x = 2.0f * cosf(rand_rot_x) * rand_param_x;
+            effect->params.y = 2.0f * sinf(rand_rot_x);
+            rand_param_y = cosf(rand_rot_y);
+            effect->params.z = 2.0f * cosf(rand_rot_x) * rand_param_y;
+            if (cnt_1 != 0) {
+                eff_1->next = effect;
+                eff_1 = (void*) eff_1->next;
             } else {
-                eff_1 = ret_obj;
+                eff_1 = effect;
                 ret_obj = eff_1;
             }
-            s32_1 += 1;
-            if (s32_1 >= 0xC) {
-            } else {
+            if (++cnt_1 < 0xC) {
                 goto loop_141;
             }
         }
         break;
+    }
     case 0x4EE:
-        ret_obj = efLib_8005C1B4(0x2710U, arg_gobj, va_arg(vlist, HSD_JObj*));
+        ret_obj = efLib_Create_Attach(0x2710U, gobj, va_arg(vlist, HSD_JObj*));
         break;
     case 0x4EF:
-        ret_obj = efLib_8005C1B4(0x2711U, arg_gobj, va_arg(vlist, HSD_JObj*));
+        ret_obj = efLib_Create_Attach(0x2711U, gobj, va_arg(vlist, HSD_JObj*));
         break;
     case 0x4F0:
-        ret_obj = efLib_8005C3DC(0x2712, arg_gobj, va_arg(vlist, HSD_JObj*));
+        ret_obj = efLib_Create_Attach_Scale(0x2712, gobj, va_arg(vlist, HSD_JObj*));
         break;
     case 0x4D5:
         ret_obj = hsd_8039EFAC(0, 0xB, 0x2AF8, va_arg(vlist, HSD_JObj*));
         break;
     case 0x4D6:
-        ret_obj = efLib_8005C3DC(0x2AF8, arg_gobj, va_arg(vlist, HSD_JObj*));
+        ret_obj = efLib_Create_Attach_Scale(0x2AF8, gobj, va_arg(vlist, HSD_JObj*));
         break;
     case 0x4D7:
         ret_obj = hsd_8039EFAC(0, 0xB, 0x2AF9, va_arg(vlist, HSD_JObj*));
         break;
     case 0x4D8:
-        ret_obj = efLib_8005CAB0(0x61U);
+        ret_obj = efLib_CreateGenerator_AddAppSRT(0x61U);
         if (ret_obj != NULL) {
-            vec3_1 = va_arg(vlist, Vec3*);
-            psAppSRT_1 = ((HSD_Generator*) ret_obj)->appsrt;
-            psAppSRT_1->translate = *vec3_1;
-            jobj_1 = GET_JOBJ(arg_gobj);
-            HSD_JObjGetScale(jobj_1, vec3_1);
-            generator_1 = ret_obj;
-            generator_1->appsrt->scale.x = generator_1->appsrt->scale.y =
-                generator_1->appsrt->scale.z = vec3_1->y;
-            generator_1->appsrt->rot.y = M_PI_2;
+            va_vec3 = va_arg(vlist, Vec3*);
+            psAppSRT = ((HSD_Generator*) ret_obj)->appsrt;
+            psAppSRT->translate = *va_vec3;
+            jobj_1 = GET_JOBJ(gobj);
+            HSD_JObjGetScale(jobj_1, &scale_4);
+            generator = ret_obj;
+            generator->appsrt->scale.x = generator->appsrt->scale.y =
+                generator->appsrt->scale.z = scale_4.y;
+            generator->appsrt->rot.y = M_PI_2;
         }
         break;
     case 0x4D9:
-        ret_obj = efLib_8005C814(0x2EE0U, arg_gobj, va_arg(vlist, Vec3*));
+        ret_obj = efLib_Create_Attach_Pos(0x2EE0U, gobj, va_arg(vlist, Vec3*));
         if (ret_obj != NULL) {
             if (*va_arg(vlist, f32*) < 0.0f) {
-                f64_1 = -M_PI_2;
+                half_pi = -M_PI_2;
             } else {
-                f64_1 = M_PI_2;
+                half_pi = M_PI_2;
             }
-            jobj_1 = GET_JOBJ(((Effect*) ret_obj)->gobj);
-            HSD_JObjSetRotationY(jobj_1, f64_1);
-            jobj_2 = GET_JOBJ(arg_gobj);
-            HSD_JObjGetScale(jobj_1, &sp7C);
-            jobj_1 = GET_JOBJ(((Effect*) ret_obj)->gobj);
-            HSD_JObjSetScale(jobj_1, &sp7C);
+            jobj_1 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
+            HSD_JObjSetRotationY(jobj_1, half_pi);
+            jobj_2 = GET_JOBJ(gobj);
+            HSD_JObjGetScale(jobj_2, &scale_6);
+            jobj_1 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
+            HSD_JObjSetScale(jobj_1, &scale_6);
         }
         break;
-    case 0x4DA:
+    case 0x4DA: {
+        EF_Effect* eff_1;
         jobj_1 = va_arg(vlist, HSD_JObj*);
-        ret_obj = efLib_8005C3DC(0x2EE1, arg_gobj, jobj_1);
+        ret_obj = efLib_Create_Attach_Scale(0x2EE1, gobj, jobj_1);
         if (ret_obj != NULL) {
-            eff_1 = efLib_8005C3DC(0x2EE2, arg_gobj, jobj_1);
-            ((Effect*) ret_obj)->x0 = (void*) eff_1;
+            eff_1 = efLib_Create_Attach_Scale(0x2EE2, gobj, jobj_1);
+            ((EF_Effect*) ret_obj)->next = (void*) eff_1;
             if (eff_1 != NULL) {
-                ((Effect*) ret_obj)->x10 = efLib_8005F454;
+                ((EF_Effect*) ret_obj)->update = efLib_Cb_ftKp_SpecialHi;
             }
         }
         break;
+    }
     case 0x4DB:
-        ret_obj = efLib_8005CD2C(0x2EE5, vlist, arg_gobj);
+        ret_obj = efLib_CreateGenerator_Attach_Scale(0x2EE5, vlist, gobj);
         break;
     case 0x4DC:
-        ret_obj = efLib_8005CD2C(0x2EE6, vlist, arg_gobj);
+        ret_obj = efLib_CreateGenerator_Attach_Scale(0x2EE6, vlist, gobj);
         break;
     case 0x4DD:
-        ret_obj = efLib_8005CD2C(0x2EE7, vlist, arg_gobj);
+        ret_obj = efLib_CreateGenerator_Attach_Scale(0x2EE7, vlist, gobj);
         break;
     case 0x4DE:
-        ret_obj = efLib_8005CD2C(0x2EE8, vlist, arg_gobj);
+        ret_obj = efLib_CreateGenerator_Attach_Scale(0x2EE8, vlist, gobj);
         break;
     case 0x4DF:
-        ret_obj = efLib_8005CD2C(0x143, vlist, arg_gobj);
+        ret_obj = efLib_CreateGenerator_Attach_Scale(0x143, vlist, gobj);
         break;
     case 0x4E0:
-        ret_obj = efLib_8005C1B4(0x32C8U, arg_gobj, va_arg(vlist, HSD_JObj*));
+        ret_obj = efLib_Create_Attach(0x32C8U, gobj, va_arg(vlist, HSD_JObj*));
         break;
     case 0x4E1:
-        ret_obj = efLib_8005BE88(0x32C9, arg_gobj);
+        ret_obj = efLib_Create(0x32C9, gobj);
         if (ret_obj != NULL) {
             jobj_1 = va_arg(vlist, HSD_JObj*);
-            ((Effect*) ret_obj)->xC = jobj_1;
-            ((Effect*) ret_obj)->x10 = efLib_8005DDB8;
-#if 1
-        loop_268:
-            if (jobj_1 == NULL) {
-                jobj_2 = NULL;
-            } else {
-                jobj_2 = jobj_1->parent;
+            ((EF_Effect*) ret_obj)->attach_jobj = jobj_1;
+            ((EF_Effect*) ret_obj)->update = efLib_Cb_SetOffsetY_FromParamY;
+            jobj_2 = jobj_1;
+            while (HSD_JObjGetParent(jobj_2) != NULL) {
+                jobj_2 = HSD_JObjGetParent(jobj_2);
             }
-            if (jobj_2 != NULL) {
-                if (jobj_1 == NULL) {
-                    jobj_2 = NULL;
-                } else {
-                    jobj_2 = jobj_1->parent;
-                }
-                jobj_1 = jobj_2;
-                goto loop_268;
-            }
-            HSD_JObjGetScale(jobj_2, &sp88);
-#else
-            while (jobj_1 != NULL) {
-                if (jobj_1 == NULL) {
-                    jobj_2 = NULL;
-                } else {
-                    jobj_2 = jobj_1->parent;
-                }
-                jobj_1 = jobj_2;
-            }
-            HSD_JObjGetScale(jobj_2, &sp88);
-
-#endif
-            sp88 = *va_arg(vlist, Vec3*);
-            // sp88 = *vec3_1;
-            ((Effect*) ret_obj)->translate = sp88;
-            // ((Effect*) ret_obj)->scale = *vec3_1;
-            // ((Effect*) ret_obj)->scale.x = vec3_1->x;
-            // ((Effect*) ret_obj)->scale.y = vec3_1->y;
-            // ((Effect*) ret_obj)->scale.z = vec3_1->z;
-            ((Effect*) ret_obj)->translate.y *= sp88.y;
-            // ((Effect*) ret_obj)->scale.y *= vec3_1->y;
+            HSD_JObjGetScale(jobj_1, &scale_5);
+            ((EF_Effect*) ret_obj)->params = *va_arg(vlist, Vec3*);
+            ((EF_Effect*) ret_obj)->params.y *= scale_5.y;
         }
         break;
     case 0x4E2:
-        ret_obj = efLib_8005C814(0x32CAU, arg_gobj, va_arg(vlist, Vec3*));
+        ret_obj = efLib_Create_Attach_Pos(0x32CAU, gobj, va_arg(vlist, Vec3*));
         break;
     case 0x4E3:
-        ret_obj = efLib_8005C9FC(0x18AU, va_arg(vlist, Vec3*));
+        ret_obj = efLib_CreateGenerator(0x18AU, va_arg(vlist, Vec3*));
         break;
     case 0x4E4:
-        ret_obj = efLib_8005C9FC(0x194U, va_arg(vlist, Vec3*));
+        ret_obj = efLib_CreateGenerator(0x194U, va_arg(vlist, Vec3*));
         break;
     case 0x4E5:
         ret_obj = hsd_8039EFAC(0, 0, 0x17D, va_arg(vlist, HSD_JObj*));
@@ -431,10 +381,10 @@ void* efSync_Spawn(s32 arg_gfx_id, HSD_GObj* arg_gobj, ...)
         ret_obj = hsd_8039EFAC(0, 0, 0x17E, va_arg(vlist, HSD_JObj*));
         break;
     case 0x4E7:
-        ret_obj = efLib_8005C9FC(0x196U, va_arg(vlist, Vec3*));
+        ret_obj = efLib_CreateGenerator(0x196U, va_arg(vlist, Vec3*));
         break;
     case 0x4E8:
-        ret_obj = efLib_8005C814(0x32CBU, arg_gobj, va_arg(vlist, Vec3*));
+        ret_obj = efLib_Create_Attach_Pos(0x32CBU, gobj, va_arg(vlist, Vec3*));
         break;
     case 0x4E9:
         ret_obj = hsd_8039EFAC(0, 0xE, 0x36B0, va_arg(vlist, HSD_JObj*));
@@ -443,97 +393,99 @@ void* efSync_Spawn(s32 arg_gfx_id, HSD_GObj* arg_gobj, ...)
         ret_obj = hsd_8039EFAC(0, 0xE, 0x36B1, va_arg(vlist, HSD_JObj*));
         break;
     case 0x4EB:
-        ret_obj = efLib_8005CF40(0x36B6, vlist);
+        ret_obj = efLib_CreateGenerator_AppSRT_SetFacingDir(0x36B6, vlist);
         break;
     case 0x4EC:
         ret_obj = hsd_8039EFAC(0, 0xE, 0x36B7, va_arg(vlist, HSD_JObj*));
         break;
     case 0x4ED:
-        ret_obj = efLib_8005C2BC(0x36B0U, arg_gobj, va_arg(vlist, HSD_JObj*));
+        ret_obj = efLib_Create_AttachChild(0x36B0U, gobj, va_arg(vlist, HSD_JObj*));
         break;
     case 0x4D1:
         ret_obj = hsd_8039EFAC(0, 0, 0x64, va_arg(vlist, HSD_JObj*));
         break;
     case 0x4D2:
-        ret_obj = efLib_8005C814(0x3A98U, arg_gobj, va_arg(vlist, Vec3*));
+        ret_obj = efLib_Create_Attach_Pos(0x3A98U, gobj, va_arg(vlist, Vec3*));
         break;
     case 0x4D3:
         jobj_1 = va_arg(vlist, HSD_JObj*);
-        ret_obj = efLib_8005CC84(0x172, jobj_1);
+        ret_obj = efLib_CreateGenerator_Attach_AddAppSRT(0x172, jobj_1);
         if (ret_obj != NULL) {
-            efLib_8005CC84(0x173, jobj_1);
+            efLib_CreateGenerator_Attach_AddAppSRT(0x173, jobj_1);
         }
         break;
     case 0x4D4:
-        ret_obj = efLib_8005CC2C(0x11E, va_arg(vlist, HSD_JObj*));
-        // ret_obj = M2C_ERROR(/* Read from unset register $r3 */);
+        ret_obj = efLib_CreateGenerator_Attach(0x11E, va_arg(vlist, HSD_JObj*));
         break;
     case 0x4F1:
-        // ret_obj = efLib_8005CF40(0x3E80, va_arg(vlist, void*));
-        ret_obj = efLib_8005CF40(0x3E80, vlist);
+        ret_obj = efLib_CreateGenerator_AppSRT_SetFacingDir(0x3E80, vlist);
         break;
     case 0x4F2:
-        ret_obj = efLib_8005C6F4(0x3E80, arg_gobj, va_arg(vlist, void*));
+        ret_obj = efLib_Create_Attach_Scale_FacingDir(0x3E80, gobj, va_arg(vlist, void*));
         break;
     case 0x4F3:
-        ret_obj = efLib_8005C6F4(0x3E81, arg_gobj, va_arg(vlist, void*));
+        ret_obj = efLib_Create_Attach_Scale_FacingDir(0x3E81, gobj, va_arg(vlist, void*));
         break;
     case 0x4F4:
-        ret_obj = efLib_8005C2BC(0x4268U, arg_gobj, va_arg(vlist, HSD_JObj*));
+        ret_obj = efLib_Create_AttachChild(0x4268U, gobj, va_arg(vlist, HSD_JObj*));
         goto block_297;
         break;
     case 0x4F5:
-        ret_obj = efLib_8005C2BC(0x4269U, arg_gobj, va_arg(vlist, HSD_JObj*));
+        ret_obj = efLib_Create_AttachChild(0x4269U, gobj, va_arg(vlist, HSD_JObj*));
     block_297:
         if (ret_obj != NULL) {
-            jobj_1 = GET_JOBJ(arg_gobj);
-            HSD_JObjGetScale(jobj_1, &sp94);
-            jobj_2 = GET_JOBJ(((Effect*) ret_obj)->gobj);
-            HSD_JObjSetScale(jobj_2, &sp94);
+            jobj_1 = GET_JOBJ(gobj);
+            HSD_JObjGetScale(jobj_1, &scale_4);
+            if (GET_JOBJ(((EF_Effect*) ret_obj)->gobj) == NULL) {
+                __assert("jobj.h", 823, "jobj");
+            }
+            jobj_2 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
+            HSD_JObjSetScale(jobj_2, &scale_4);
         }
+        break;
     case 0x4F6:
-        ret_obj = efLib_8005C3DC(0x426A, arg_gobj, va_arg(vlist, HSD_JObj*));
+        ret_obj = efLib_Create_Attach_Scale(0x426A, gobj, va_arg(vlist, HSD_JObj*));
         break;
     case 0x4F7:
-        ret_obj = efLib_8005C3DC(0x426B, arg_gobj, va_arg(vlist, HSD_JObj*));
+        ret_obj = efLib_Create_Attach_Scale(0x426B, gobj, va_arg(vlist, HSD_JObj*));
         break;
     case 0x4F8:
-        ret_obj = efLib_8005CD2C(0x6E, vlist, arg_gobj);
+        ret_obj = efLib_CreateGenerator_Attach_Scale(0x6E, vlist, gobj);
         break;
     case 0x4F9:
-        ret_obj = efLib_8005CD2C(0x1C8, vlist, arg_gobj);
+        ret_obj = efLib_CreateGenerator_Attach_Scale(0x1C8, vlist, gobj);
         break;
     case 0x4FA:
-        ret_obj = efLib_8005CD2C(0x166, vlist, arg_gobj);
+        ret_obj = efLib_CreateGenerator_Attach_Scale(0x166, vlist, gobj);
         break;
     case 0x4FB:
         ret_obj = hsd_8039EFAC(0, 0, 0x71, va_arg(vlist, HSD_JObj*));
         break;
     case 0x4FE:
-        ret_obj = efLib_8005C1B4(0x426CU, arg_gobj, va_arg(vlist, HSD_JObj*));
+        ret_obj = efLib_Create_Attach(0x426CU, gobj, va_arg(vlist, HSD_JObj*));
         break;
     case 0x4FF:
     case 0x500:
         ret_obj =
-            efLib_8005C3DC(0x426D, arg_gobj,
-                           ((Fighter*) arg_gobj->user_data)->parts[1].joint);
+            efLib_Create_Attach_Scale(0x426D, gobj,
+                           ((Fighter*) gobj->user_data)->parts[1].joint);
         break;
     case 0x501:
-        fighter_1 = GET_FIGHTER(arg_gobj);
+        fp = GET_FIGHTER(gobj);
         ret_obj =
-            efLib_8005C3DC(0x426D, arg_gobj,
-                           ((Fighter*) arg_gobj->user_data)->parts[1].joint);
+            efLib_Create_Attach_Scale(0x426E, gobj,
+                           ((Fighter*) gobj->user_data)->parts[1].joint);
         if (ret_obj != NULL) {
-            if (fighter_1->facing_dir < 0.0f) {
-                f64_1 = -M_PI_2;
+            if (fp->facing_dir < 0.0f) {
+                half_pi = -M_PI_2;
             } else {
-                f64_1 = M_PI_2;
+                half_pi = M_PI_2;
             }
-            jobj_1 = GET_JOBJ(((Effect*) ret_obj)->gobj);
-            HSD_JObjSetRotationY(jobj_1, f64_1);
-            ((Effect*) ret_obj)->xC = fighter_1->parts[85].joint;
-            ((Effect*) ret_obj)->x10 = efLib_8005EB70;
-            ((Effect*) ret_obj)->x24 = 6;
+            jobj_1 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
+            HSD_JObjSetRotationY(jobj_1, half_pi);
+            ((EF_Effect*) ret_obj)->attach_jobj = fp->parts[85].joint;
+            ((EF_Effect*) ret_obj)->update = efLib_Cb_LifetimeEndSpawn;
+            ((EF_Effect*) ret_obj)->lifetime = 6;
         }
         break;
     case 0x502:
@@ -546,119 +498,118 @@ void* efSync_Spawn(s32 arg_gfx_id, HSD_GObj* arg_gobj, ...)
         ret_obj = hsd_8039EFAC(0, 0x11, 0x4271, va_arg(vlist, HSD_JObj*));
         break;
     case 0x503:
-        ret_obj = efLib_8005C9FC(0x6AU, va_arg(vlist, Vec3*));
+        ret_obj = efLib_CreateGenerator(0x6AU, va_arg(vlist, Vec3*));
         break;
     case 0x504:
-        ret_obj = efLib_8005CAB0(0x6DU);
+        ret_obj = efLib_CreateGenerator_AddAppSRT(0x6DU);
         if (ret_obj != NULL) {
-            vec3_1 = va_arg(vlist, Vec3*);
-            psAppSRT_1 = ((HSD_Generator*) ret_obj)->appsrt;
-            psAppSRT_1->translate = *vec3_1;
-            jobj_1 = GET_JOBJ(arg_gobj);
-            HSD_JObjGetScale(jobj_1, &spA0);
-            generator_1 = ret_obj;
-            generator_1->appsrt->scale.x = generator_1->appsrt->scale.y =
-                generator_1->appsrt->scale.z = spA0.y;
+            va_vec3 = va_arg(vlist, Vec3*);
+            psAppSRT = ((HSD_Generator*) ret_obj)->appsrt;
+            psAppSRT->translate = *va_vec3;
+            jobj_1 = GET_JOBJ(gobj);
+            HSD_JObjGetScale(jobj_1, &scale_3);
+            generator = ret_obj;
+            generator->appsrt->scale.x = generator->appsrt->scale.y =
+                generator->appsrt->scale.z = scale_3.y;
         }
         break;
     case 0x505:
-        ret_obj = efLib_8005CAB0(0x79U);
+        ret_obj = efLib_CreateGenerator_AddAppSRT(0x79U);
         if (ret_obj != NULL) {
-            vec3_1 = va_arg(vlist, Vec3*);
-            psAppSRT_1 = ((HSD_Generator*) ret_obj)->appsrt;
-            psAppSRT_1->translate = *vec3_1;
-            jobj_1 = arg_gobj->hsd_obj;
-            HSD_JObjGetScale(jobj_1, &spAC);
-            generator_1 = ret_obj;
-            generator_1->appsrt->scale.x = generator_1->appsrt->scale.y =
-                generator_1->appsrt->scale.z = spAC.y;
+            va_vec3 = va_arg(vlist, Vec3*);
+            psAppSRT = ((HSD_Generator*) ret_obj)->appsrt;
+            psAppSRT->translate = *va_vec3;
+            jobj_1 = gobj->hsd_obj;
+            HSD_JObjGetScale(jobj_1, &scale_2);
+            generator = ret_obj;
+            generator->appsrt->scale.x = generator->appsrt->scale.y =
+                generator->appsrt->scale.z = scale_2.y;
         }
         break;
     case 0x506:
-        ret_obj = efLib_8005C9FC(0x4658U, va_arg(vlist, Vec3*));
+        ret_obj = efLib_CreateGenerator(0x4658U, va_arg(vlist, Vec3*));
         break;
     case 0x507:
         jobj_1 = va_arg(vlist, HSD_JObj*);
-        ret_obj = efLib_8005C1B4(0x4650U, arg_gobj, jobj_1);
+        ret_obj = efLib_Create_Attach(0x4650U, gobj, jobj_1);
         if (ret_obj != NULL) {
             if (*va_arg(vlist, f32*) < 0.0f) {
-                f64_1 = -M_PI_2;
+                half_pi = -M_PI_2;
             } else {
-                f64_1 = M_PI_2;
+                half_pi = M_PI_2;
             }
-            jobj_1 = GET_JOBJ(((Effect*) ret_obj)->gobj);
-            HSD_JObjSetRotationY(jobj_1, f64_1);
+            jobj_1 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
+            HSD_JObjSetRotationY(jobj_1, half_pi);
         }
         hsd_8039EFAC(0, 0x12, 0x4650, jobj_1);
         break;
     case 0x508:
-        ret_obj = efLib_8005C9FC(0x4652U, va_arg(vlist, Vec3*));
+        ret_obj = efLib_CreateGenerator(0x4652U, va_arg(vlist, Vec3*));
         break;
     case 0x509:
-        ret_obj = efLib_8005C3DC(0x4651, arg_gobj, va_arg(vlist, HSD_JObj*));
+        ret_obj = efLib_Create_Attach_Scale(0x4651, gobj, va_arg(vlist, HSD_JObj*));
         if (ret_obj != NULL) {
-            ((Effect*) ret_obj)->x10 = efLib_8005F270;
+            ((EF_Effect*) ret_obj)->update = efLib_Cb_ftLg_SpecialLw;
         }
         break;
     case 0x50A:
         ret_obj = hsd_8039EFAC(0, 0, 0x5F, va_arg(vlist, HSD_JObj*));
         break;
     case 0x50B:
-        ret_obj = efLib_8005C6F4(0x4A38, arg_gobj, va_arg(vlist, void*));
+        ret_obj = efLib_Create_Attach_Scale_FacingDir(0x4A38, gobj, va_arg(vlist, void*));
         if (ret_obj != NULL) {
-            ret_obj = efLib_8005C6F4(0x4A39, arg_gobj, va_arg(vlist, void*));
+            ((EF_Effect*) ret_obj)->next =
+                (void*) efLib_Create_Attach_Scale_FacingDir(0x4A39, gobj, va_arg(vlist, void*));
         }
         break;
     case 0x50C:
-        ret_obj = efLib_8005C1B4(0x4A3AU, arg_gobj, va_arg(vlist, HSD_JObj*));
+        ret_obj = efLib_Create_Attach(0x4A3AU, gobj, va_arg(vlist, HSD_JObj*));
         if (ret_obj != NULL) {
-            ((Effect*) ret_obj)->translate.z = *va_arg(vlist, f32*);
-            ((Effect*) ret_obj)->x10 = efLib_8005EDDC;
+            ((EF_Effect*) ret_obj)->params.z = *va_arg(vlist, f32*);
+            ((EF_Effect*) ret_obj)->update = efLib_Cb_SetRotYZ_FromParamZ_FighterDir;
         }
         break;
     case 0x50D:
-        ret_obj = efLib_8005C1B4(0x4A3BU, arg_gobj, va_arg(vlist, HSD_JObj*));
+        ret_obj = efLib_Create_Attach(0x4A3BU, gobj, va_arg(vlist, HSD_JObj*));
         break;
     case 0x50E:
-        ret_obj = efLib_8005C3DC(0x4A3C, arg_gobj, va_arg(vlist, HSD_JObj*));
+        ret_obj = efLib_Create_Attach_Scale(0x4A3C, gobj, va_arg(vlist, HSD_JObj*));
         if (ret_obj != NULL) {
             if (*va_arg(vlist, f32*) < 0.0f) {
-                f64_1 = -M_PI_2;
+                half_pi = -M_PI_2;
             } else {
-                f64_1 = M_PI_2;
+                half_pi = M_PI_2;
             }
-            jobj_1 = GET_JOBJ(((Effect*) ret_obj)->gobj);
-            HSD_JObjSetRotationY(jobj_1, f64_1);
+            jobj_1 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
+            HSD_JObjSetRotationY(jobj_1, half_pi);
         }
         break;
     case 0x50F:
-        ret_obj = efLib_8005C3DC(0x4A3D, arg_gobj, va_arg(vlist, HSD_JObj*));
+        ret_obj = efLib_Create_Attach_Scale(0x4A3D, gobj, va_arg(vlist, HSD_JObj*));
         if (ret_obj != NULL) {
             if (*va_arg(vlist, f32*) < 0.0f) {
-                f64_1 = -M_PI_2;
+                half_pi = -M_PI_2;
             } else {
-                f64_1 = M_PI_2;
+                half_pi = M_PI_2;
             }
-            jobj_1 = GET_JOBJ(((Effect*) ret_obj)->gobj);
-            HSD_JObjSetRotationY(jobj_1, f64_1);
+            jobj_1 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
+            HSD_JObjSetRotationY(jobj_1, half_pi);
         }
         break;
     case 0x510:
-        ret_obj = efLib_8005CF40(0xBF68, vlist);
+        ret_obj = efLib_CreateGenerator_AppSRT_SetFacingDir(0xBF68, vlist);
         break;
     case 0x511:
-        ret_obj = efLib_8005C6F4(0xBF68, arg_gobj, va_arg(vlist, void*));
+        ret_obj = efLib_Create_Attach_Scale_FacingDir(0xBF68, gobj, va_arg(vlist, void*));
         break;
     case 0x512:
-        ret_obj = efLib_8005C6F4(0xBF69, arg_gobj, va_arg(vlist, void*));
+        ret_obj = efLib_Create_Attach_Scale_FacingDir(0xBF69, gobj, va_arg(vlist, void*));
         break;
     }
-    while (efLib_804D64F0 != 0) {
-        cnt = efLib_804D64F0 - 1;
-        efLib_804D64F0 = cnt;
-        // efLib_804D64F0--;
-        HSD_JObjAnimAll((efLib_80458EE0[cnt].x0_gobj));
-        // HSD_JObjAnimAll((efLib_80458EE0[efLib_804D64F0].unk0));
+    while (efLib_AnimCount != 0) {
+        cnt_2 = efLib_AnimCount - 1;
+        efLib_AnimCount = cnt_2;
+        HSD_JObjAnimAll(((EF_ParamEntry*) (((u32*) efLib_AnimQueue) + cnt_2))->gobj);
     }
 
     va_end(vlist);

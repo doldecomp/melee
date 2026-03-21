@@ -567,7 +567,7 @@ void Fighter_UnkProcessDeath_80068354(Fighter_GObj* gobj)
     ftCo_800A101C(fp, Player_GetCpuType(fp->player_id),
                   Player_GetCpuLevel(fp->player_id), 0);
 
-    efAsync_80067688(&fp->x60C);
+    efAsync_QueueClear(&fp->x60C);
     ft_8007C17C(gobj);
     ft_8007C630(gobj);
 }
@@ -867,7 +867,7 @@ Fighter_GObj* Fighter_Create(struct plAllocInfo* input)
     GObj_InitUserData(gobj, 4U, &Fighter_Unload_8006DABC, fp);
     ftData_8008572C(input->internal_id);
     Fighter_UnkInitLoad_80068914(gobj, input);
-    efAsync_8006737C(ftData_UnkBytePerCharacter[fp->kind]);
+    efAsync_LoadSync(ftData_UnkBytePerCharacter[fp->kind]);
     ftData_80085820(fp->kind, fp->x619_costume_id);
 
     Fighter_UnkUpdateCostumeJoint_800686E4(gobj);
@@ -955,7 +955,7 @@ void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
     fp->facing_dir1 = fp->facing_dir;
 
     HSD_JObjSetTranslate(jobj, &fp->cur_pos);
-    efAsync_80067624(gobj, &fp->x60C);
+    efAsync_QueueFlush(gobj, &fp->x60C);
 
     if ((flags & Ft_MF_SkipHit) == 0) {
         if (fp->x2219_b3 != 0) {
@@ -2535,7 +2535,7 @@ void Fighter_8006C80C(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
 
     if (!fp->x221F_b3) {
-        efAsync_80067624(gobj, &fp->x60C);
+        efAsync_QueueFlush(gobj, &fp->x60C);
         Fighter_UnkApplyTransformation_8006C0F0(gobj);
 
         if (!fp->x2219_b5) {
@@ -3077,7 +3077,7 @@ void Fighter_Unload_8006DABC(void* user_data)
     }
 
     ftColl_8007B8E8(fp->gobj);
-    efAsync_80067688(&fp->x60C);
+    efAsync_QueueClear(&fp->x60C);
     it_8026B7F8(fp->gobj);
     Camera_800290D4(fp->x890_cameraBox);
     ftCo_UnloadDynamicBones(fp);

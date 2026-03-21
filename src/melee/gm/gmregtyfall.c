@@ -190,8 +190,8 @@ void gm_801A68D8(void)
     Item_80266FA8();
     Item_80266FCC();
     Stage_8022524C();
-    efLib_8005B4B8();
-    efAsync_8006737C(0);
+    efLib_Init();
+    efAsync_LoadSync(0);
     ftDemo_ObjAllocInit();
     Player_80036E20(gm_801BEFB0(), gm_804D6744, 2);
     Player_80036CF0(0);
