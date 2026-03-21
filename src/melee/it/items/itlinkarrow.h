@@ -10,7 +10,7 @@
 
 /* 2A7D8C */ void it_802A7D8C(HSD_GObj*, int);
 /* 2A7E40 */ void it_802A7E40(Item_GObj*);
-/* 2A81C4 */ void fn_802A81C4(HSD_GObj*);
+/* 2A81C4 */ s32 fn_802A81C4(Item_GObj*);
 /* 2A8330 */ void it_802A8330(HSD_GObj*);
 /* 2A8398 */ void it_802A8398(Item_GObj*, Vec3*, Vec3*);
 /* 2A83E0 */ HSD_GObj* it_802A83E0(f32, Fighter_GObj*, Vec3*, Fighter_Part,
@@ -42,5 +42,6 @@
 /* 2A9D4C */ bool itLinkArrow_Logic98_Reflected(Item_GObj*);
 /* 2AA034 */ void itLinkArrow_Logic98_EvtUnk(Item_GObj*, Item_GObj*);
 /* 3F6A28 */ extern ItemStateTable it_803F6A28[];
+/* 3F6A78 */ extern f32 it_803F6A78[];
 
 #endif
