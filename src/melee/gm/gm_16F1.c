@@ -97,7 +97,7 @@ Gm_DecType gmDecisionGetType(int kind)
     return curr->x5;
 }
 
-int fn_8016F1F0(int idx)
+short fn_8016F1F0(int idx)
 {
     return lbl_803D5A4C[idx].kind;
 }

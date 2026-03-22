@@ -16,7 +16,7 @@ struct lbl_804D65A8_t;
 
 /* 16F180 */ int fn_8016F180(int);
 /* 16F1B8 */ Gm_DecType gmDecisionGetType(int kind);
-/* 16F1F0 */ int fn_8016F1F0(int idx);
+/* 16F1F0 */ short fn_8016F1F0(int idx);
 /* 16F208 */ int gm_8016F208(int);
 /* 16F280 */ int fn_8016F280(int);
 /* 16F2F8 */ int gm_8016F2F8(int, unsigned char);
