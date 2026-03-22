@@ -243,8 +243,8 @@ void un_8031FD18_OnEnter(void* arg)
     un_804D7000 = (void*) i;
 
     lbAudioAx_800236DC();
-    efLib_8005B4B8();
-    efAsync_8006737C(0);
+    efLib_Init();
+    efAsync_LoadSync(0);
     lbAudioAx_80023F28(0x59);
     lbAudioAx_80024E50(1);
 

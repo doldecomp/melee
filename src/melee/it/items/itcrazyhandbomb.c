@@ -1,8 +1,8 @@
 #include "itcrazyhandbomb.h"
 
-#include <placeholder.h>
 #include <platform.h>
 
+#include "db/db.h"
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
@@ -11,7 +11,27 @@
 
 #include <baselib/jobj.h>
 
-/// #it_802F0F6C
+void it_802F0F6C(Fighter_GObj* owner, Vec3* prev_pos, Vec3* pos,
+                  ItemKind kind, f32 facing_dir)
+{
+    SpawnItem spawnitem;
+    Item_GObj* gobj;
+
+    spawnitem.kind = kind;
+    spawnitem.prev_pos = *prev_pos;
+    spawnitem.pos = *pos;
+    spawnitem.facing_dir = facing_dir;
+    spawnitem.x3C_damage = 0;
+    spawnitem.vel.x = spawnitem.vel.y = spawnitem.vel.z = 0.0F;
+    spawnitem.x0_parent_gobj = owner;
+    spawnitem.x4_parent_gobj2 = spawnitem.x0_parent_gobj;
+    spawnitem.x44_flag.b0 = true;
+    spawnitem.x40 = 0;
+    gobj = Item_80268B18(&spawnitem);
+    it_802F10F8(gobj);
+    db_80225DD8(gobj, owner);
+    it_802750F8(gobj);
+}
 
 void it_802F1030(Item_GObj* gobj)
 {

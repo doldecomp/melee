@@ -986,7 +986,29 @@ void ftKb_SpecialNPr_80101618(Fighter_GObj* gobj)
 
 /// #ftKb_PrSpecialNEnd_Anim
 
-/// #ftKb_PrSpecialAirNStart_Anim
+void ftKb_PrSpecialAirNStart_Anim(Fighter_GObj* gobj)
+{
+    static u32 const mf = (1 << 1) | (1 << 4) | (1 << 18);
+    Fighter* fp = GET_FIGHTER(gobj);
+    PAD_STACK(8);
+    fp->mv.pr.specialn.facing_dir = 0;
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        Fighter_ChangeMotionState(gobj, ftKb_MS_PrSpecialAirNFull, mf, 0,
+                                  0, 0, NULL);
+        {
+            Fighter* fp = GET_FIGHTER(gobj);
+            fp->death2_cb = ftKb_Init_800EE74C;
+            fp->take_dmg_cb = ftKb_Init_800EE7B8;
+            fp->deal_dmg_cb = fn_80100E0C;
+            fp->x21F8 = fn_80105978;
+        }
+        fp->cur_anim_frame = 0;
+        ftAnim_SetAnimRate(gobj, 0);
+        fp->self_vel.x = fp->facing_dir * 0.0001f;
+        fp->x74_anim_vel.x = 0;
+        ftPartSetRotY(fp, 0, M_PI_2);
+    }
+}
 
 /// #ftKb_PrSpecialAirNLoop_Anim
 

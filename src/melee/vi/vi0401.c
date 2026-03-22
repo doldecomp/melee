@@ -139,8 +139,8 @@ void un_8031D288_OnEnter(void* data)
     u8 char_index = desc->p1_char_index;
 
     lbAudioAx_800236DC();
-    efLib_8005B4B8();
-    efAsync_8006737C(0);
+    efLib_Init();
+    efAsync_LoadSync(0);
 
     lbArchive_LoadSymbols("Vi0401.dat", &un_804D6F48, "visual0401Scene",
                           &un_804D6F4C, "visual0401InfoScene", 0);

@@ -959,7 +959,7 @@ void ftLib_80087508(s8 ft_kind, u8 arg1)
 /// void ftLib_80087508(FighterKind ft_kind, u8 arg1)
 {
     ftData_8008572C(ft_kind);
-    efAsync_8006737C(ftData_UnkBytePerCharacter[ft_kind]);
+    efAsync_LoadSync(ftData_UnkBytePerCharacter[ft_kind]);
     ftData_80085820(ft_kind, arg1);
     ftData_80085A14(ft_kind);
     ftData_800857E0(ft_kind);
@@ -970,7 +970,7 @@ void ftLib_80087574(s8 ft_kind)
 {
     u8 i;
     ftData_8008572C(ft_kind);
-    efAsync_8006737C(ftData_UnkBytePerCharacter[ft_kind]);
+    efAsync_LoadSync(ftData_UnkBytePerCharacter[ft_kind]);
 
     for (i = 0; i < CostumeListsForeachCharacter[ft_kind].numCostumes; i++) {
         ftData_80085820(ft_kind, i);

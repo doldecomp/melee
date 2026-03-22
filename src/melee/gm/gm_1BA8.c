@@ -1430,7 +1430,23 @@ void gm_801BED3C(MinorScene* arg0)
     }
 }
 
-/// #gm_801BEDA8
+void gm_801BEDA8(MinorScene* arg0)
+{
+    CSSData* css = gm_801A427C(arg0);
+    VsModeData* vs = gm_801A5244();
+
+    if (css->pending_scene_change == 2) {
+        if (css->match_type != 0) {
+            css->match_type--;
+        } else {
+            css->match_type = 0x17;
+        }
+    } else {
+        css->match_type = (css->match_type + 1) % 24;
+    }
+
+    *vs = css->data;
+}
 
 void gm_801BEE58(MinorScene* arg0)
 {

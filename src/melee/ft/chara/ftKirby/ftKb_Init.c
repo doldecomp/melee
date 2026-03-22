@@ -34,6 +34,7 @@
 #include "ft/ftcommon.h"
 #include "ft/ftdata.h"
 #include "ft/ftdynamics.h"
+#include "ft/ftanim.h"
 #include "ft/ftparts.h"
 #include "ft/ftwalkcommon.h"
 #include "ft/inlines.h"
@@ -3320,7 +3321,33 @@ void ftKb_SpecialN_800EF040(Fighter_GObj* gobj, int arg1, KirbyHatStruct* hat)
 
 /// #ftKb_SpecialN_800EF0E4
 
-/// #ftKb_SpecialN_800EF35C
+void ftKb_SpecialN_800EF35C(Fighter_GObj* gobj, int arg1, u8* arg2)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    struct {
+        HSD_Joint* joint;
+        HSD_MatAnimJoint* matanim;
+    }* costume_data = (void*) ftKb_Init_803C9FC8[arg1];
+    HSD_MatAnimJoint* matanimjoint =
+        costume_data[fp->x619_costume_id].matanim;
+    int idx = 0;
+    int i = 0;
+    while (matanimjoint != NULL) {
+        if (ftParts_8007506C(fp->kind, i) != 0) {
+            i++;
+            arg2++;
+        } else {
+            if (matanimjoint->matanim != NULL) {
+                HSD_DObjAddAnimAll(fp->fv.kb.hat.x14.data[*arg2],
+                                   matanimjoint->matanim, NULL);
+            }
+            i++;
+            arg2++;
+            ftAnim_GetNextMatAnimJointInTree(&matanimjoint, &idx);
+        }
+    }
+    PAD_STACK(8);
+}
 
 /// #ftKb_SpecialN_800EF438
 

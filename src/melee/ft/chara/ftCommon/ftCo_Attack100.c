@@ -741,6 +741,30 @@ void fn_800D7BDC(Fighter_GObj* gobj)
 #pragma push
 #pragma dont_inline on
 
+void fn_800D7C60(Fighter_GObj* gobj)
+{
+    extern int ftCo_804D9028;
+    extern int ftCo_804D902C;
+    Fighter* fp = gobj->user_data;
+    Fighter_GObj* temp_gobj;
+    FtMotionId msid;
+
+    msid = fn_800D769C(fp, ftCo_MS_ItemScopeAirRapid);
+    temp_gobj = gobj;
+    Fighter_ChangeMotionState(temp_gobj, msid, 0x02000000, *(f32*) &ftCo_804D9028,
+                              *(f32*) &ftCo_804D902C, *(f32*) &ftCo_804D9028,
+                              NULL);
+    ftCommon_ClampAirDrift(fp);
+    fp->mv.co.common.x0 = *(s32*) ((u8*) p_ftCommonData + 0x5BC);
+    fp->accessory4_cb = fn_800D80F4;
+    fp->take_dmg_cb = fn_800D8378;
+}
+
+#pragma pop
+
+#pragma push
+#pragma dont_inline on
+
 void fn_800D7CEC(Fighter_GObj* gobj)
 {
     extern int ftCo_804D9028;
@@ -909,6 +933,34 @@ void fn_800D8140(Fighter_GObj* gobj, int arg1)
             gobj2, msid, Ft_MF_None, *(f32*) &ftCo_804D9030,
             *(f32*) &ftCo_804D9034, *(f32*) &ftCo_804D9030, NULL);
     }
+    fp->mv.co.common.x0 = arg1;
+    fp->accessory4_cb = fn_800D86B8;
+    fp->take_dmg_cb = fn_800D8378;
+}
+
+#pragma pop
+
+#pragma push
+#pragma dont_inline on
+
+void fn_800D81D0(Fighter_GObj* gobj, int arg1)
+{
+    extern int ftCo_804D9030;
+    extern int ftCo_804D9034;
+    Fighter* fp = gobj->user_data;
+    FtMotionId msid;
+    PAD_STACK(8);
+
+    fp->throw_flags = 0;
+    msid = fn_800D769C(fp, ftCo_MS_ItemScopeAirFire);
+    {
+        HSD_GObj* gobj2 = gobj;
+
+        Fighter_ChangeMotionState(
+            gobj2, msid, Ft_MF_None, *(f32*) &ftCo_804D9030,
+            *(f32*) &ftCo_804D9034, *(f32*) &ftCo_804D9030, NULL);
+    }
+    ftCommon_ClampAirDrift(fp);
     fp->mv.co.common.x0 = arg1;
     fp->accessory4_cb = fn_800D86B8;
     fp->take_dmg_cb = fn_800D8378;

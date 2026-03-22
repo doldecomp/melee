@@ -22,6 +22,10 @@ static struct {
 
 static void* grOp_804D6A9C;
 
+static int grOp_804D48A0[1][2] = { { 4, 0 } };
+static int grOp_804D48A8[1][2] = { { 5, 1 } };
+static int grOp_804D48B0[1][2] = { { 2, 3 } };
+
 static int grOp_804D48E0[1][2] = { { 0, 0 } };
 
 StageCallbacks grOp_803E6688[9] = {
@@ -111,7 +115,31 @@ bool grOldPupupu_80210A1C(Ground_GObj* gobj)
     return false;
 }
 
-/// #grOldPupupu_80210A24
+void grOldPupupu_80210A24(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+
+    if ((int) grOp_804D6A9C == 0 && gp->gv.unk.xD0 == 1) {
+        gp->gv.unk.xD0 = 0;
+        switch (gp->gv.unk.xC8) {
+        case 0:
+            grAnime_801C8138(
+                gobj, gp->map_id,
+                grOp_804D48A0[gp->gv.unk.xCC][gp->gv.unk.xD4]);
+            break;
+        case 1:
+            grAnime_801C8138(
+                gobj, gp->map_id,
+                grOp_804D48B0[gp->gv.unk.xCC][gp->gv.unk.xD4]);
+            break;
+        case 2:
+            grAnime_801C8138(
+                gobj, gp->map_id,
+                grOp_804D48A8[gp->gv.unk.xCC][gp->gv.unk.xD4]);
+            break;
+        }
+    }
+}
 
 void grOldPupupu_80210B00(Ground_GObj* arg) {}
 

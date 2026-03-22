@@ -125,8 +125,8 @@ void vi0801_OnEnter(void* unused)
     HSD_GObj* gobj2;
 
     lbAudioAx_800236DC();
-    efLib_8005B4B8();
-    efAsync_8006737C(0);
+    efLib_Init();
+    efAsync_LoadSync(0);
     lbAudioAx_80023F28(0x5B);
     lbAudioAx_80024E50(1);
 

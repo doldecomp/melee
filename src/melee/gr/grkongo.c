@@ -13,6 +13,7 @@
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
 #include "gr/stage.h"
+#include "it/it_26B1.h"
 #include "it/items/itklap.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
@@ -1410,7 +1411,37 @@ void fn_801D542C(HSD_GObj* arg0)
 
 /// #grKongo_801D7134
 
-/// #fn_801D7700
+static void fn_801D7700(Ground* gp, s32 arg1, CollData* cd, s32 arg3,
+                        mpLib_GroundEnum arg4, float arg8)
+{
+    Vec3* cur = &cd->cur_pos;
+    s32 type = cd->x34_flags.b1234;
+
+    if (type == 1 || type == 3) {
+        if (arg4 == mpLib_GroundEnum_Unk1) {
+            f32 x1, y1, x2, y2;
+
+            mpVtxGetPos(0x1D, &x1, &y1);
+            mpVtxGetPos(0x1A, &x2, &y2);
+
+            {
+                f32 segment_size = (x2 - x1) / 15.0F;
+                f32 ratio = (cur->x - x1) / segment_size;
+                s32 idx = (s32) ratio;
+                s32 idx2 = (s32) ratio;
+
+                if (idx < 0) {
+                    idx2 = 0;
+                } else if ((u32) idx2 >= 15) {
+                    idx2 = 14;
+                }
+
+                grKg_803E188C[idx2].unk10 +=
+                    0.017453292F * grKg_804D6980->unkA4;
+            }
+        }
+    }
+}
 
 /// #grKongo_801D77E0
 
@@ -1426,14 +1457,76 @@ void fn_801D7E60(Ground* gp, s32 arg1, CollData* arg2, s32 arg3,
 
 /// #grKongo_801D7E78
 
-/// #grKongo_801D7F78
+bool grKongo_801D7F78(HSD_GObj* gobj)
+{
+    Vec3 pos1;
+    Vec3 pos2;
+    HSD_GObj* cur;
+    PAD_STACK(16);
+
+    if (grKongo_801D7E78(gobj, &pos1) == NULL) {
+        return false;
+    }
+
+    for (cur = HSD_GObj_Entities->x14; cur != NULL; cur = cur->next) {
+        if (cur == gobj) {
+            continue;
+        }
+        if (grKongo_801D7E78(cur, &pos2) == NULL) {
+            continue;
+        }
+        {
+            f32 dz = pos2.z - pos1.z;
+            if (dz < -100.0F) {
+                if (dz > -150.0F) {
+                    f32 dx = pos2.x - pos1.x;
+                    if (dx * dx < 6400.0F) {
+                        return true;
+                    }
+                }
+            }
+        }
+    }
+
+    return false;
+}
 
 void grKongo_801D8058(Ground_GObj* arg)
 {
     Ground_801C4A08(arg);
 }
 
-/// #grKongo_801D8078
+HSD_GObj* grKongo_801D8078(HSD_GObj* gobj)
+{
+    Vec3 pos;
+    f32 unk;
+    Vec3 item_pos;
+    HSD_GObj* cur;
+
+    Ground_801C4DA0(&pos, &unk);
+
+    for (cur = HSD_GObj_Entities->items; cur != NULL; cur = cur->next) {
+        if (itGetKind(cur) == 0xDA) {
+            f32 dx, dy, dz, dx2, dy2, dz2, r;
+
+            it_8026B294(cur, &item_pos);
+
+            dx = pos.x - item_pos.x;
+            dy = pos.y - item_pos.y;
+            dz = pos.z - item_pos.z;
+            dx2 = dx * dx;
+            dy2 = dy * dy;
+            dz2 = dz * dz;
+            r = grKg_804D6980->unk28;
+
+            if (dx2 + dy2 + dz2 < r * r) {
+                return cur;
+            }
+        }
+    }
+
+    return NULL;
+}
 
 /// #fn_801D8134
 

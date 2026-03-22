@@ -457,6 +457,11 @@ void ftYs_SpecialAirSLoop_0_Anim(Fighter_GObj* gobj)
     }
 }
 
+static inline f32 perm_vel_inline(Fighter* fp)
+{
+    return fp->gr_vel;
+}
+
 void ftYs_SpecialAirSLoop_1_Anim(Fighter_GObj* gobj)
 {
     f32 angle;
@@ -468,8 +473,7 @@ void ftYs_SpecialAirSLoop_1_Anim(Fighter_GObj* gobj)
     ftYs_SpecialS_UpdateScale(gobj, &scale);
 
     fp->mv.ys.specials.x14 =
-        (f32) ((f64) (2.0 * M_PI / 25.0) * attributes->xA0 +
-               (f64) fp->mv.ys.specials.x14);
+        ((2.0 * M_PI / 25.0) * attributes->xA0 + fp->mv.ys.specials.x14);
 
     ftYs_SpecialS_WrapAndSetRotX(gobj);
 
@@ -482,14 +486,14 @@ void ftYs_SpecialAirSLoop_1_Anim(Fighter_GObj* gobj)
         f32 abs_xE4 = ABS(xE4);
 
         if (x10 > 0.0F) {
-            if (gr_vel > 0.0F) {
+            if (perm_vel_inline(fp) > 0.0F) {
                 fp->mv.ys.specials.x18 = abs_xE4 * (abs_vel / abs_x10) + -xE4;
             } else {
                 fp->mv.ys.specials.x18 =
                     abs_xE4 * (abs_vel / (abs_x10 * 0.7F)) + -xE4;
             }
         } else {
-            if (gr_vel < 0.0F) {
+            if (perm_vel_inline(fp) < 0.0F) {
                 fp->mv.ys.specials.x18 = abs_xE4 * (abs_vel / abs_x10) + -xE4;
             } else {
                 fp->mv.ys.specials.x18 =
@@ -507,24 +511,23 @@ void ftYs_SpecialAirSLoop_1_Anim(Fighter_GObj* gobj)
         f32 total = 0.7F * abs_x10 + abs_x10_2;
 
         if (x10 > 0.0F) {
-            f32 vel = fp->gr_vel;
+            f32 vel = perm_vel_inline(fp);
             f32 delta;
             if (vel > 0.0F) {
                 delta = ABS(x10) - ABS(vel);
             } else {
                 delta = ABS(x10) + ABS(vel);
             }
-            angle = (f32) ((f64) M_PI * (delta / total) + (f64) M_PI_2);
+            angle = (M_PI * (delta / total) + M_PI_2);
         } else {
-            f32 vel = fp->gr_vel;
+            f32 vel = perm_vel_inline(fp);
             f32 delta;
             if (vel < 0.0F) {
                 delta = ABS(x10) - ABS(vel);
             } else {
                 delta = ABS(x10) + ABS(vel);
             }
-            angle = (f32) ((f64) M_PI * (delta / total) +
-                           (f64) (3.0 * M_PI / 2.0));
+            angle = (M_PI * (delta / total) + (3.0 * M_PI / 2.0));
         }
     }
 
@@ -546,7 +549,7 @@ void ftYs_SpecialAirSLoop_1_Anim(Fighter_GObj* gobj)
     if (fp->mv.ys.specials.x28 % attributes->xA4 == 0) {
         Vec3* floor_normal = &fp->coll_data.floor.normal;
         f32 dir;
-        if (fp->gr_vel < 0.0F) {
+        if (perm_vel_inline(fp) < 0.0F) {
             dir = -1.0F;
         } else {
             dir = 1.0F;
@@ -565,7 +568,7 @@ void ftYs_SpecialAirSEnd_Anim(Fighter_GObj* gobj)
 
     fp->mv.ys.specials.x24 = 0.0F;
 
-    if (fp->cmd_vars[1] == 1U) {
+    if (fp->cmd_vars[1] == 1) {
         fp->cmd_vars[1]++;
         lb_8000B1CC(fp->parts[4].joint, NULL, &sp2C);
         efSync_Spawn(0x4CF, gobj, &sp2C, &fp->co_attrs.xBC);
@@ -695,12 +698,12 @@ void ftYs_SpecialAirSLanding_Anim(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftYoshiAttributes* attributes = fp->dat_attrs;
     Vec3 scale;
-    PAD_STACK(4);
+    u8 pad[4];
 
     fp->mv.ys.specials.x24 = 0.0F;
     fp->mv.ys.specials.x30 = 0;
 
-    if (fp->cmd_vars[1] == 1U) {
+    if (fp->cmd_vars[1] == 1) {
         fp->cmd_vars[1]++;
         lb_8000B1CC(fp->parts[4].joint, NULL, &sp30);
         efSync_Spawn(0x4CF, gobj, &sp30, &fp->co_attrs.xBC);
@@ -712,7 +715,7 @@ void ftYs_SpecialAirSLanding_Anim(Fighter_GObj* gobj)
     if (ftAnim_IsFramesRemaining(gobj) == 0) {
         fn_8012EC7C_inline(gobj);
 
-        if (0.0F == attributes->xE8) {
+        if (attributes->xE8 == 0.0F) {
             ftCo_Fall_Enter(gobj);
         } else {
             ftCo_80096900(gobj, 1, 0, 1, 1.0F, 0.0F);
@@ -1066,6 +1069,22 @@ void ftYs_SpecialAirSStart_0_Coll(Fighter_GObj* gobj)
     }
 }
 
+// permuter-generated helpers, almost certainly fake
+static inline f32 perm_neg_inline(f32 x)
+{
+    return -x;
+}
+
+static inline f32 perm_mul_inline(f32 a, f32 b)
+{
+    return a * b;
+}
+
+static inline f32 perm_vel_x_inline(Fighter* fp)
+{
+    return fp->self_vel.x;
+}
+
 void ftYs_SpecialAirSLoop_0_Coll(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -1086,7 +1105,7 @@ void ftYs_SpecialAirSLoop_0_Coll(Fighter_GObj* gobj)
     if (wall_hit) {
         ftCommon_8007D5D4(fp);
         ftYs_SpecialS_8012F0DC(gobj, 1, 0x4C4092, 0.0F);
-        fp->self_vel.x *= -attributes->xAC;
+        fp->self_vel.x *= perm_neg_inline(attributes->xAC);
         fp->self_vel.y = attributes->xB0;
     } else if (coll_result == 0) {
         ftCommon_8007D5D4(fp);
@@ -1112,7 +1131,7 @@ void ftYs_SpecialAirSLoop_1_Coll(Fighter_GObj* gobj)
         coll_result = ft_80082978(gobj, &ftYs_Unk3_803CEDA4);
     }
 
-    if (fp->self_vel.x > 0.0F) {
+    if (perm_vel_x_inline(fp) > 0.0F) {
         if ((wall_hit = fp->coll_data.env_flags & 0x3F)) {
             ftYs_SpecialS_SpawnWallBounceEffect(gobj, &fp->coll_data, true);
         }
@@ -1135,7 +1154,9 @@ void ftYs_SpecialAirSLoop_1_Coll(Fighter_GObj* gobj)
 
         if (fp->mv.ys.specials.x24 != 0.0F) {
             fp->facing_dir = fp->mv.ys.specials.x24;
-            fp->mv.ys.specials.x1C = ABS(fp->self_vel.x);
+            fp->mv.ys.specials.x1C = (perm_vel_x_inline(fp) < 0)
+                                         ? (-perm_vel_x_inline(fp))
+                                         : (fp->self_vel.x);
         }
         fp->mv.ys.specials.x24 = 0.0F;
         ftPartSetRotY(fp, 0, M_PI_2 * fp->facing_dir);
@@ -1172,7 +1193,7 @@ void ftYs_SpecialAirSLoop_2_Coll(Fighter_GObj* gobj)
     s32 wall_hit;
     Fighter* fp = GET_FIGHTER(gobj);
     ftYoshiAttributes* attributes = fp->dat_attrs;
-    PAD_STACK(40);
+    u8 pad[28];
 
     fp->mv.ys.specials.x30 = 0;
     coll_result = ft_800824A0(gobj, &ftYs_Unk3_803CEDA4);
@@ -1187,14 +1208,14 @@ void ftYs_SpecialAirSLoop_2_Coll(Fighter_GObj* gobj)
         }
     }
 
-    if (wall_hit != 0) {
+    if (wall_hit) {
         ftYs_SpecialS_8012F0DC(gobj, 1, 0x4C4092, 0.0F);
         fp->self_vel.x *= -attributes->xAC;
         fp->self_vel.y = attributes->xB0;
         return;
     }
 
-    if (coll_result != 0) {
+    if (coll_result) {
         f32 vel_y = ABS(fp->self_vel.y * attributes->xB4);
         fp->self_vel.y = vel_y;
         if (vel_y < attributes->xB8) {
@@ -1210,18 +1231,9 @@ void ftYs_SpecialAirSLoop_2_Coll(Fighter_GObj* gobj)
                 fp->self_vel.x = 0.01F * fp->facing_dir;
             }
 
+            fp->mv.ys.specials.x1C = ABS(fp->gr_vel = fp->self_vel.x);
+
             {
-                f32 abs_x;
-                fp->gr_vel = fp->self_vel.x;
-                abs_x = fp->self_vel.x;
-                if (fp->self_vel.x < 0.0f) {
-                    abs_x = -fp->self_vel.x;
-                    fp->gr_vel = fp->self_vel.x;
-                } else {
-                    abs_x = fp->self_vel.x;
-                    fp->gr_vel = abs_x;
-                }
-                fp->mv.ys.specials.x1C = abs_x;
             }
 
             {
@@ -1299,9 +1311,10 @@ void ftYs_SpecialAirSLoop_3_Coll(Fighter_GObj* gobj)
             fp->self_vel.z = 0.0F;
             fp->self_vel.y = 0.0F;
             fp->mv.ys.specials.x14 =
-                (f32) ((f64) (2.0 * M_PI / 25.0) *
-                           (attributes->xD8 * ABS(fp->mv.ys.specials.x1C)) +
-                       (f64) fp->mv.ys.specials.x14);
+                ((2.0 * M_PI / 25.0) *
+                     perm_mul_inline(attributes->xD8,
+                                     ABS(fp->mv.ys.specials.x1C)) +
+                 fp->mv.ys.specials.x14);
             ftYs_SpecialS_WrapAndSetRotX(gobj);
             ftCommon_8007EBAC(fp, 1, 0);
         } else {

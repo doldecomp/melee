@@ -1470,7 +1470,28 @@ void ftPp_SpecialAirLw_Phys(Fighter_GObj* gobj)
     ft_80084EEC(gobj);
 }
 
-/// #fn_80122B54
+void fn_80122B54(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    PAD_STACK(8);
+    ftCommon_8007D7FC(fp);
+    Fighter_ChangeMotionState(gobj, ftPp_MS_SpecialLw, 0x0C4C5282,
+                              fp->cur_anim_frame, 1.0F, 0.0F, NULL);
+    {
+        Fighter* fp2 = gobj->user_data;
+        fp2->death2_cb = ftPp_Init_8011F060;
+        fp2->take_dmg_cb = ftPp_Init_8011F060;
+    }
+    fp = gobj->user_data;
+    if (fp->cmd_vars[3] != 0) {
+        ftPartSetRotX(fp, 0,
+                      fp->facing_dir * atan2f(fp->coll_data.floor.normal.x,
+                                              fp->coll_data.floor.normal.y));
+    } else {
+        ftPartSetRotX(fp, 0, 0.0F);
+    }
+    fp->accessory4_cb = fn_80122D2C;
+}
 
 /// #ftPp_SpecialLw_Coll
 

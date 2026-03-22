@@ -300,7 +300,59 @@ void grCorneria_801DDD4C(Vec3* vec)
     vec->z = 0.0f;
 }
 
-/// #grCorneria_801DDDA8
+typedef struct {
+    int data[3];
+} grCn_Entry;
+
+extern grCn_Entry grCn_803E2204[][5];
+
+typedef struct grCn_Data {
+    /* 0x000 */ u8 pad[0x4CC];
+    /* 0x4CC */ grCn_Entry entries[][5];
+} grCn_Data;
+
+extern grCn_Data grCn_803E1D38;
+
+void grCorneria_801DDDA8(HSD_GObj* gobj, Vec3* vec)
+{
+    grCn_Data* data = &grCn_803E1D38;
+    Ground* gp;
+    Ground* corn_gp;
+    HSD_JObj* jobj;
+    u8 unused[12];
+    Vec3 pos;
+    int idx;
+    PAD_STACK(4);
+
+    if (gobj != NULL) {
+        gp = gobj->user_data;
+        corn_gp = Ground_801C2BA4(3)->user_data;
+        jobj = Ground_801C3FA4(gobj, 4);
+        lb_8000B1CC(jobj, NULL, &pos);
+        idx = ((int*) &data->pad[0x3C])[gp->gv.corneria.xC8];
+        vec->x =
+            corn_gp->gv.corneria.offset_x +
+            (-pos.z +
+             *(f32*) &data->pad[0x330 +
+                                idx * (int) sizeof(grCn_Entry)]);
+        vec->y =
+            pos.y +
+            *(f32*) &data->pad[0x334 +
+                               idx * (int) sizeof(grCn_Entry)];
+        vec->z =
+            pos.x +
+            *(f32*) &data->pad[0x338 +
+                               idx * (int) sizeof(grCn_Entry)];
+    } else {
+        vec->z = 0.0f;
+        vec->y = 0.0f;
+        vec->x = 0.0f;
+    }
+
+    if (vec->y <= 100.0f) {
+        vec->y = 100.0f;
+    }
+}
 
 /// #grCorneria_801DDE88
 
@@ -708,19 +760,6 @@ void smashTaunt_801E2550(Ground_GObj* gobj, struct grSmashTaunt_GroundVars* gv)
     un_802FF570();
     gobj->render_cb = smashTaunt_801E24AC;
 }
-
-typedef struct {
-    int data[3];
-} grCn_Entry;
-
-extern grCn_Entry grCn_803E2204[][5];
-
-typedef struct grCn_Data {
-    /* 0x000 */ u8 pad[0x4CC];
-    /* 0x4CC */ grCn_Entry entries[][5];
-} grCn_Data;
-
-extern grCn_Data grCn_803E1D38;
 
 s32 grCorneria_801E2598(u32 arg0, u32 arg1)
 {
