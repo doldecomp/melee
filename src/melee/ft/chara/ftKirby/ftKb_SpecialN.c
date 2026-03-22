@@ -1608,6 +1608,7 @@ void ftKb_SpecialN_800F5DE8(Fighter_GObj* gobj)
         }
     }
 }
+#pragma dont_inline off
 
 void ftKb_SpecialN_800F5EA8(Fighter_GObj* gobj)
 {
@@ -2063,6 +2064,7 @@ void ftKb_SpecialAirNEnd_Anim(Fighter_GObj* gobj)
 
 /// #ftKb_SpecialNCapture_Anim
 
+#pragma dont_inline on
 void ftKb_SpecialNCapture1_Anim(Fighter_GObj* gobj)
 {
     ftKb_SpecialN_800F5DE8(gobj);
