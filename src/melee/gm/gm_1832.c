@@ -756,7 +756,6 @@ void fn_8018575C(HSD_GObj* gobj)
     }
 }
 
-/// #fn_801857C4
 void fn_801857C4(HSD_GObj* arg0)
 {
     Vec3 sp10;
@@ -2060,6 +2059,12 @@ void fn_80188738(HSD_JObj* arg0)
     }
 }
 
+int fn_8018846C_noInline(void);
+int fn_8018846C_noInline()
+{
+    return fn_8018846C();
+}
+
 void fn_80188910(HSD_JObj* arg0)
 {
     HSD_JObj* jobjs[3];
@@ -2069,7 +2074,7 @@ void fn_80188910(HSD_JObj* arg0)
     if (fn_8018846C() > 999) {
         val = 999;
     } else {
-        val = fn_8018846C();
+        val = fn_8018846C_noInline();
     }
 
     jobjs[2] = arg0;
