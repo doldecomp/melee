@@ -55,7 +55,7 @@
 /* 18846C */ int fn_8018846C(void);
 /* 1884F8 */ int fn_801884F8(void);
 /* 188550 */ void fn_80188550(int);
-/* 188644 */ void fn_80188644();
+/* 188644 */ void fn_80188644(void);
 /* 188738 */ void fn_80188738(HSD_JObj*);
 /* 188910 */ void fn_80188910(HSD_JObj*);
 /* 188B3C */ void fn_80188B3C(HSD_JObj*);
