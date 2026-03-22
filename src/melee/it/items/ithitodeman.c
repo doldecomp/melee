@@ -1,5 +1,6 @@
 #include "ithitodeman.h"
 
+#include <math.h>
 #include <placeholder.h>
 #include <platform.h>
 
@@ -100,7 +101,38 @@ bool it_802D48A8(Item_GObj* gobj)
     return false;
 }
 
-/// #it_802D48B0
+void it_802D48B0(f32* value, f32 target, f32 max_val, f32 accel,
+                 f32 decel)
+{
+    f32 current = *value;
+    f32 diff = target - current;
+
+    if (ABS(diff) > ABS(accel)) {
+        if (diff > 0.0F) {
+            target = current + accel;
+        } else {
+            target = current - accel;
+        }
+    } else if (ABS(diff) < ABS(decel)) {
+        if (diff > 0.0F) {
+            target = current + decel;
+        } else {
+            target = current - decel;
+        }
+    }
+
+    if (target > 0.0F) {
+        if (target > max_val) {
+            target = max_val;
+        }
+    } else {
+        if (target < -max_val) {
+            target = -max_val;
+        }
+    }
+
+    *value = target;
+}
 
 void it_802D4990(Item_GObj* gobj)
 {
