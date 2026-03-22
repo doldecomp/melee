@@ -514,7 +514,9 @@ void fn_80184AB8(HSD_GObj* arg0)
 
 void fn_8018504C(void)
 {
+    int new_var;
     PAD_STACK(16);
+    new_var = 0x32;
     if ((u16) lbl_804735A8.x3A < 0x31U) {
         lbl_804735A8.x3A = (u16) (lbl_804735A8.x3A + 1);
     } else {
@@ -524,10 +526,10 @@ void fn_8018504C(void)
         lbl_804735A8.x3C = (u16) (lbl_804735A8.x3C + 1);
     }
     HSD_JObjReqAnimAll(lbl_804735A8.x4[5],
-        (f32) (lbl_804735A8.x3C + ((lbl_804735E8.xEE * 0x32) - 0x32)));
+        (f32) (lbl_804735A8.x3C + ((lbl_804735E8.xEE * 0x32) - new_var)));
     HSD_JObjAnimAll(lbl_804735A8.x4[5]);
     HSD_JObjReqAnimAll(lbl_804735A8.x4[4],
-        (f32) (lbl_804735A8.x3A + ((lbl_804735E8.xEE * 0x32) - 0x32)));
+        (f32) (lbl_804735A8.x3A + ((lbl_804735E8.xEE * 0x32) - new_var)));
     HSD_JObjAnimAll(lbl_804735A8.x4[4]);
     if (((u16) lbl_804735A8.x38 == 0x2D) &&
         ((s32) lbl_804735E8.xE4 == 3))
@@ -593,7 +595,6 @@ s32 fn_801851C0(void)
     Vec3 pos;
     s32 result;
     s32 i;
-    (void) pad_stack;
 
     i = 0;
     while (i < (s32) lbl_804735E8.xE0) {
