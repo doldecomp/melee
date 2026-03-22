@@ -245,6 +245,7 @@ f32 mnName_80238964(u8 index, u8 target, u8 flag)
     }
 }
 
+#pragma push
 #pragma dont_inline on
 void mnName_80238A04(HSD_GObj* gobj, u8 target, u8 flag)
 {
@@ -276,6 +277,7 @@ void mnName_80238A04(HSD_GObj* gobj, u8 target, u8 flag)
     }
     HSD_JObjAnimAll(jobj2);
 }
+#pragma pop
 
 /// #mnName_80238AE0
 
