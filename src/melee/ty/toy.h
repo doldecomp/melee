@@ -44,7 +44,7 @@
 /* 30715C */ void un_8030715C(f32, f32);
 /* 307470 */ void un_80307470(s32);
 /* 3075E8 */ void un_803075E8(s32 arg0);
-/* 307828 */ void un_80307828(int);
+/* 307828 */ UNK_RET un_80307828(int);
 /* 3078E4 */ void un_803078E4(void);
 /* 307BA0 */ HSD_JObj* un_80307BA0(HSD_JObj*, s16);
 /* 307E84 */ void fn_80307E84(HSD_GObj* gobj);
