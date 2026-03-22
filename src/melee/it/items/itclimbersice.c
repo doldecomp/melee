@@ -22,7 +22,47 @@
 
 /// #it_802C1590
 
-/// #it_802C16F8
+void it_802C16F8(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itClimbersIceAttributes* sa = ip->xC4_article_data->x4_specialAttributes;
+    PAD_STACK(24);
+
+    ip->x40_vel.x = sa->x10 * ip->facing_dir;
+    ip->x40_vel.z = 0.0f;
+    ip->x40_vel.y = 0.0f;
+
+    it_80275158(gobj, sa->x0);
+
+    ip->xDD4_itemVar.climbersice.x8_b0 = 1;
+
+    it_80272980(gobj);
+
+    {
+        HSD_JObj* child;
+        HSD_JObj* jobj = gobj->hsd_obj;
+
+        if (jobj == NULL) {
+            child = NULL;
+        } else {
+            child = jobj->child;
+        }
+
+        {
+            Item* ip = GET_ITEM(gobj);
+
+            if (ip->kind == 0x6A) {
+                f32* facing = &ip->facing_dir;
+                efAsync_Spawn(gobj, &ip->xBC0, 3, 0x4EA, child, facing);
+            } else {
+                f32* facing = &ip->facing_dir;
+                efAsync_Spawn(gobj, &ip->xBC0, 3, 0x4AF, child, facing);
+            }
+        }
+    }
+
+    it_802C1AE4(gobj);
+}
 
 void it_802C17DC(Item_GObj* gobj)
 {
