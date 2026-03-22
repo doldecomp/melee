@@ -12,6 +12,7 @@
 #include "lb/lb_00B0.h"
 #include "lb/lblanguage.h"
 
+f32 grHr_804D6AD8;
 int grHr_804D6ADC;
 f32 grHr_804D6AE0;
 f32 grHr_804D6AE4;
@@ -480,7 +481,35 @@ void grHomeRun_8021ED74(void)
     it_8026BE84(&bobomb_rain);
 }
 
-/// #grHomeRun_8021EDD4
+void grHomeRun_8021EDD4(int arg0)
+{
+    f32 scale;
+    f32 max_dist;
+    f32 ratio;
+    f32 num_ticks;
+    f32 dist;
+
+    if (lbLang_IsSavedLanguageJP()) {
+        scale = 0.1F;
+        max_dist = 50.0F;
+    } else {
+        scale = 0.3280969F;
+        max_dist = 100.0F;
+    }
+
+    ratio = max_dist / scale;
+    num_ticks = (int) (0.5F + ratio / (160.0F * Ground_801C0498()));
+
+    if (num_ticks < 1.0F) {
+        num_ticks = 1.0F;
+    }
+
+    dist = 160.0F * Ground_801C0498();
+    grHr_804D6AD8 = scale;
+    grHr_804D6AE0 = max_dist;
+    grHr_804D6ADC = num_ticks;
+    grHr_804D6AE4 = ratio / (num_ticks * dist);
+}
 
 DynamicsDesc* grHomeRun_8021EEB4(enum_t arg)
 {

@@ -182,8 +182,8 @@ void vi1202_OnEnter(void* arg)
 
     lbAudioAx_80023694();
     lbAudioAx_800236DC();
-    efLib_8005B4B8();
-    efAsync_8006737C(0);
+    efLib_Init();
+    efAsync_LoadSync(0);
     lbAudioAx_80023F28(0x5A);
     lbAudioAx_80024E50(1);
 

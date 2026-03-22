@@ -27,7 +27,7 @@ struct lbl_804D65A8_t;
 /* 16F870 */ UNK_RET fn_8016F870(UNK_PARAMS);
 /* 16F9A8 */ UNK_RET fn_8016F9A8(UNK_PARAMS);
 /* 16FAD4 */ int fn_8016FAD4(UNK_T, u16, int, u8);
-/* 16FFD4 */ UNK_RET fn_8016FFD4(UNK_PARAMS);
+/* 16FFD4 */ void fn_8016FFD4(struct lbl_8046B6A0_24C_t*, int, int);
 /* 170110 */ int fn_80170110(void*, int, int, u8);
 /* 1701A0 */ UNK_RET gm_801701A0(UNK_PARAMS);
 /* 1701AC */ UNK_RET fn_801701AC(UNK_PARAMS);

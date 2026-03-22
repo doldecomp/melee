@@ -4,6 +4,7 @@
 
 #include "ft/chara/ftPikachu/ftPk_SpecialLw.h"
 #include "it/inlines.h"
+#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
@@ -90,7 +91,39 @@ bool itPikachuthunder_UnkMotion1_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itPikachuthunder_UnkMotion1_Coll
+bool itPikachuthunder_UnkMotion1_Coll(Item_GObj* gobj)
+{
+    if (GET_ITEM(gobj)->xDD4_itemVar.pikachuthunder.x0 == 0) {
+        if (it_8026DA70(gobj)) {
+            Item* ip = GET_ITEM(gobj);
+            itPikachuthunderAttributes* attrs =
+                ip->xC4_article_data->x4_specialAttributes;
+            Vec3 pos;
+            pos.z = 0.0f;
+            pos.x = 0.0f;
+            pos.y = -attrs->x8;
+            it_80272AC4(gobj, &pos);
+            it_802B22B8(gobj);
+            if (ip->xDD4_itemVar.pikachuthunder.x38 != NULL) {
+                if (!ftPk_SpecialLw_CheckProperty(
+                        ip->xDD4_itemVar.pikachuthunder.x38))
+                {
+                    ftPk_SpecialLw_80127608(
+                        ip->xDD4_itemVar.pikachuthunder.x38);
+                }
+            }
+        }
+    } else {
+        Item* ip = GET_ITEM(gobj);
+        if (ip->xDD4_itemVar.pikachuthunder.x4 != 0) {
+            if (ip->pos.y <= ip->xDD4_itemVar.pikachuthunder.x28.y) {
+                it_802B22B8(gobj);
+            }
+        }
+    }
+    PAD_STACK(8);
+    return false;
+}
 
 s32 it_802B22B8(Item_GObj* gobj)
 {

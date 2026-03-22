@@ -1924,9 +1924,9 @@ void fn_8016E730(StartMeleeData* arg0)
     fn_8016DCC0(arg0);
     lbRefract_800222A4();
     lb_8000FCDC();
-    efLib_8005B4B8();
-    efAsync_8006737C(0);
-    efAsync_8006737C(0x1F);
+    efLib_Init();
+    efAsync_LoadSync(0);
+    efAsync_LoadSync(0x1F);
     Player_80036DD8();
     ftCo_800C06C0();
     mpColl_80041C78();
@@ -2211,7 +2211,7 @@ void fn_8016F140(int arg0)
     gmMainLib_8015DAB4(arg0);
 }
 
-void fn_8016F160(int arg0, int arg1)
+int fn_8016F160(int arg0, int arg1)
 {
-    pl_80039418(arg0, arg1);
+    return pl_80039418(arg0, arg1);
 }

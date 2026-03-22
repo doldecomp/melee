@@ -1727,7 +1727,7 @@ void ftData_800855C8(FighterKind kind, u8 color)
         }
     }
     if (ftData_UnkBytePerCharacter[kind] != -1) {
-        efAsync_8006729C(ftData_UnkBytePerCharacter[kind]);
+        efAsync_LoadAsync(ftData_UnkBytePerCharacter[kind]);
     }
     if (ftData_803C23E4[kind] != NULL) {
         lbDvd_800178E8(1, ftData_803C23E4[kind], 5, 5, 0, 0, 1, 8, 0);

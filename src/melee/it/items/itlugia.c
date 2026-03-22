@@ -267,7 +267,23 @@ bool it_802D1E64(Item_GObj* gobj)
     return it_8027A118(gobj, (void (*)(HSD_GObj*)) it_802D14D0);
 }
 
-/// #it_802D1E8C
+Item_GObj* it_802D1E8C(Item_GObj* gobj, ItemKind kind, f32 param)
+{
+    SpawnItem spawn;
+    Item* ip = GET_ITEM(gobj);
+
+    spawn.prev_pos = *(Vec3*) ip->xDD4_itemVar.lugia.x70_pad;
+    it_8026BB88(gobj, &spawn.pos);
+    spawn.facing_dir = ip->facing_dir;
+    spawn.x3C_damage = 0;
+    spawn.vel = it_802D1F64(gobj, param);
+    spawn.kind = kind;
+    spawn.x0_parent_gobj = ip->owner;
+    spawn.x4_parent_gobj2 = gobj;
+    spawn.x44_flag.b0 = 1;
+    spawn.x40 = 0;
+    return Item_80268B18(&spawn);
+}
 
 /// #it_802D1F64
 

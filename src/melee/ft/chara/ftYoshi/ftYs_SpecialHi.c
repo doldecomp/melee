@@ -57,21 +57,21 @@ void ftYs_SpecialS_8012DF8C(Fighter_GObj* gobj, Vec3* arg1)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftYs_DatAttrs* da = fp->dat_attrs;
-    float temp_f4;
+    float mag;
     {
         float temp = ABS(fp->input.lstick.x) / da->xEC;
-        float mag = MAX(temp, 1.0f) * da->xF0;
+        mag = MAX(temp, 1.0f) * da->xF0;
         if (mag < da->xF4) {
             mag = 0.0f;
         }
-        temp_f4 = mag * getStickDirX(fp);
+        mag *= getStickDirX(fp);
     }
     {
         float angle;
         if (fp->facing_dir == +1.0f) {
-            angle = da->specialhi_base_angle - temp_f4;
+            angle = da->specialhi_base_angle - mag;
         } else {
-            angle = M_PI - da->specialhi_base_angle - temp_f4;
+            angle = M_PI - da->specialhi_base_angle - mag;
         }
         arg1->x = (fp->mv.ys.specialhi.x4 * da->x100 + da->xFC) * cosf(angle);
         arg1->y = (fp->mv.ys.specialhi.x4 * da->x100 + da->xFC) * sinf(angle);

@@ -29,7 +29,7 @@
 /* 1DDCE8 */ bool grCorneria_801DDCE8(Ground_GObj*);
 /* 1DDCF0 */ void grCorneria_801DDCF0(Vec3*);
 /* 1DDD4C */ void grCorneria_801DDD4C(Vec3*);
-/* 1DDDA8 */ UNK_RET grCorneria_801DDDA8(UNK_PARAMS);
+/* 1DDDA8 */ void grCorneria_801DDDA8(HSD_GObj*, Vec3*);
 /* 1DDE88 */ UNK_RET grCorneria_801DDE88(UNK_PARAMS);
 /* 1DE024 */ void grCorneria_801DE024(Ground_GObj*);
 /* 1DE4C0 */ void grCorneria_Arwing_801DE4C0(Ground_GObj*);

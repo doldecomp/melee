@@ -1,28 +1,18 @@
 #include "grkraid.h"
 
-#include "types.h"
-
-#include <platform.h>
-
 #include "cm/camera.h"
-
-#include "forward.h"
-
 #include "ft/ftlib.h"
-#include "gr/granime.h"
-#include "gr/grdisplay.h"
-#include "gr/grlib.h"
-#include "gr/ground.h"
+
+#include "gr/forward.h"
+
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 
+#include "mn/forward.h"
+
 #include <baselib/controller.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
-#include <baselib/gobjproc.h>
-#include <baselib/jobj.h>
 #include <baselib/random.h>
 
 S16Vec3 grKr_803E4C78[] = { { 0, 3, 12 }, { 1, 3, 12 }, { 2, 3, 12 },
@@ -230,6 +220,7 @@ static inline int rand_inline(int a, int b)
     }
 }
 
+const Vec grKr_803B8278 = { 0.0f, 0.0f, 0.0f };
 void grKraid_801FE440(Ground_GObj* gobj)
 {
     float fVar2;
@@ -237,7 +228,7 @@ void grKraid_801FE440(Ground_GObj* gobj)
     float fVar4;
     Ground* gp = GET_GROUND(gobj);
     HSD_JObj* jobj = Ground_801C3FA4(gobj, 0);
-    Vec pos = { 0.0f, 0.0f, 0.0f };
+    Vec pos = grKr_803B8278;
     switch (gp->gv.kraid.x0) {
     case 0:
         if (gp->gv.kraid.x4)
@@ -289,25 +280,22 @@ void grKraid_801FE6D4(Ground_GObj* gobj)
     return;
 }
 
-static f32 getMapRotation()
-{
-    return ((grKr_804D6A08->map_rot_spd_max / grKr_804D6A08->map_rot_spd_min) /
-            132.0f) *
-           grKr_804D6A08->map_rot_spd_min;
-}
-
 void grKraid_801FE6D8(HSD_JObj* hand, float param2)
 {
     Ground* map = Ground_801C2BA4(3)->user_data;
     Vec handpos;
     f32 rot;
-
+    f32 min;
+    f32 max;
     if (map->gv.kraid.x4 == 0.0f) {
         map->gv.kraid.x4 = param2;
         lb_8000B1CC(hand, NULL, &handpos);
         OSReport("Kraid Hand Pos = %f\n", handpos.x);
-
-        rot = getMapRotation();
+        max = grKr_804D6A08->map_rot_spd_max;
+        min = grKr_804D6A08->map_rot_spd_min;
+        rot = (max / min) / 132.0f;
+        rot = rot * min;
+        grKr_804D6A08->map_rot_spd_min = grKr_804D6A08->map_rot_spd_min;
         map->gv.kraid.x8 = rot * ((handpos.x < 0.0f) ? -handpos.x : handpos.x);
         if (map->gv.kraid.x8 < grKr_804D6A08->map_rot_spd_min) {
             map->gv.kraid.x8 = grKr_804D6A08->map_rot_spd_min;
@@ -324,15 +312,15 @@ void grKraid_801FE6D8(HSD_JObj* hand, float param2)
 
 void grKraid_801FE818(Ground_GObj* gobj)
 {
-    float fVar1;
     float fVar2;
     float fVar3;
-    int iVar5;
+    float fVar1;
+    s8 iVar;
 
     Ground* gp = GET_GROUND(gobj);
     gp->gv.kraid2.x10 = Ground_801C3FA4(gobj, 31);
     gp->gv.kraid2.x14 = Ground_801C3FA4(gobj, 47);
-    fVar1 = 0.0f;
+    fVar1 = (fVar3 = 0.0f);
     gp->gv.kraid2.x4 = 0;
     gp->gv.kraid2.x3 = 0;
 
@@ -341,7 +329,6 @@ void grKraid_801FE818(Ground_GObj* gobj)
         gp->gv.kraid2.x3 = 0;
         fVar3 = fVar2;
     } else {
-        fVar3 = fVar1;
         if (fVar2 > fVar1) {
             fVar1 = fVar2;
             gp->gv.kraid2.x4 = 0;
@@ -352,7 +339,6 @@ void grKraid_801FE818(Ground_GObj* gobj)
         gp->gv.kraid2.x3 = 1;
         fVar3 = fVar2;
     } else {
-        fVar3 = fVar1;
         if (fVar2 > fVar1) {
             fVar1 = fVar2;
             gp->gv.kraid2.x4 = 1;
@@ -363,7 +349,6 @@ void grKraid_801FE818(Ground_GObj* gobj)
         gp->gv.kraid2.x3 = 2;
         fVar3 = fVar2;
     } else {
-        fVar3 = fVar1;
         if (fVar2 > fVar1) {
             fVar1 = fVar2;
             gp->gv.kraid2.x4 = 2;
@@ -374,7 +359,6 @@ void grKraid_801FE818(Ground_GObj* gobj)
         gp->gv.kraid2.x3 = 3;
         fVar3 = fVar2;
     } else {
-        fVar3 = fVar1;
         if (fVar2 > fVar1) {
             fVar1 = fVar2;
             gp->gv.kraid2.x4 = 3;
@@ -385,7 +369,6 @@ void grKraid_801FE818(Ground_GObj* gobj)
         gp->gv.kraid2.x3 = 4;
         fVar3 = fVar2;
     } else {
-        fVar3 = fVar1;
         if (fVar2 > fVar1) {
             fVar1 = fVar2;
             gp->gv.kraid2.x4 = 4;
@@ -396,7 +379,6 @@ void grKraid_801FE818(Ground_GObj* gobj)
         gp->gv.kraid2.x3 = 5;
         fVar3 = fVar2;
     } else {
-        fVar3 = fVar1;
         if (fVar2 > fVar1) {
             fVar1 = fVar2;
             gp->gv.kraid2.x4 = 5;
@@ -408,8 +390,10 @@ void grKraid_801FE818(Ground_GObj* gobj)
                             ? HSD_Randi(grKr_804D6A08->kraid_wait_time_add)
                             : 0);
     gp->gv.kraid2.x8 = 0.0f;
-    gp->gv.kraid2.x2 = 0;
-    gp->gv.kraid2.x1 = 0;
+    fVar2 = 0;
+    iVar = (u8) fVar2;
+    gp->gv.kraid2.x2 = iVar;
+    gp->gv.kraid2.x1 = iVar;
     gp->gv.kraid2.x5 = 1;
 }
 
