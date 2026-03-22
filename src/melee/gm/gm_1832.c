@@ -1987,11 +1987,11 @@ void fn_80188550(int arg0)
     }
 }
 
-void fn_80188644(void)
+void fn_80188644()
 {
+    int i;
     Vec3 sp10;
     int saved_count;
-    int i;
 
     PAD_STACK(8);
 
@@ -2023,10 +2023,11 @@ void fn_80188644(void)
     lbl_80473700.css.menu_values[1] = 0;
     lbl_80473700.css.menu_values[2] = 0;
     lbl_80473700.css.menu_values[3] = 0;
-    lbl_80473700.css.menu_values[4] = 0;
-    lbl_80473700.css.menu_values[5] = 0;
-    lbl_80473700.css.menu_values[6] = 0;
-    lbl_80473700.css.menu_values[0] = 2;
+    saved_count = 0;
+    lbl_80473700.css.menu_values[4] = saved_count;
+    lbl_80473700.css.menu_values[5] = saved_count;
+    lbl_80473700.css.menu_values[6] = saved_count;
+    lbl_80473700.css.menu_values[saved_count] = 2;
 }
 
 void fn_80188738(HSD_JObj* arg0)
