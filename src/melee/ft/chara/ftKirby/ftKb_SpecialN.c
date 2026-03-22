@@ -1606,7 +1606,6 @@ static void ftKb_SpecialN_800F5DE8_inline(Fighter_GObj* gobj)
         }
     }
 }
-#pragma dont_inline off
 
 void ftKb_SpecialN_800F5DE8(Fighter_GObj* gobj)
 {
