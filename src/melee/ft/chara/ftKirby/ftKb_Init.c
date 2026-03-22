@@ -4090,7 +4090,51 @@ void ftKb_SpecialN_800F190C(Fighter_GObj* gobj, FighterKind kind)
     fp->fv.kb.xDC = NULL;
 }
 
-/// #ftKb_SpecialN_800F19AC
+void ftKb_SpecialN_800F19AC(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    FighterKind kind = fp->fv.kb.hat.kind;
+
+    switch (kind) {
+    case FTKIND_POPO:
+        ftKb_SpecialNIc_80108D04(gobj);
+        break;
+    case FTKIND_PEACH:
+        ftKb_SpecialNPe_8010C3F4(gobj);
+        break;
+    case FTKIND_FOX:
+    case FTKIND_FALCO:
+        ftKb_SpecialNFx_800FDEE0(gobj);
+        break;
+    case FTKIND_LINK:
+    case FTKIND_CLINK:
+        ftKb_SpecialNLk800FB800(gobj);
+        ftKb_SpecialNLk800FB840(gobj);
+        break;
+    case FTKIND_MEWTWO:
+        ftKb_SpecialNMt_8010709C(gobj);
+        break;
+    case FTKIND_NESS:
+        ftKb_SpecialNNs_800FECE8(gobj);
+        break;
+    case FTKIND_SAMUS:
+        ftKb_SpecialNSs_800FCD60(gobj);
+        break;
+    case FTKIND_SEAK:
+        ftKb_SpecialNSk_8010603C(gobj);
+        break;
+    case FTKIND_YOSHI:
+        ftKb_SpecialNYs_801093B4(gobj);
+        ftKb_SpecialNYs_8010A8BC(gobj);
+        break;
+    case FTKIND_DONKEY:
+        ftKb_SpecialNPr_80100DE0(gobj);
+        break;
+    case FTKIND_GAMEWATCH:
+        ftKb_SpecialNGw_8010D0A8(gobj);
+        break;
+    }
+}
 
 /// #ftKb_SpecialN_800F1A8C
 
