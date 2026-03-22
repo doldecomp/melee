@@ -1121,8 +1121,8 @@ void fn_80186634(void* arg0)
     Item_80266FA8();
     Item_80266FCC();
     Stage_8022524C();
-    efLib_8005B4B8();
-    efAsync_8006737C(0);
+    efLib_Init();
+    efAsync_LoadSync(0);
 
     names[0] = lbl_803B7C58[0];
     names[1] = lbl_803B7C58[1];
@@ -1461,8 +1461,8 @@ void fn_80187714(void)
     Stage_8022524C();
     Item_80266FA8();
     Item_80266FCC();
-    efLib_8005B4B8();
-    efAsync_8006737C(0);
+    efLib_Init();
+    efAsync_LoadSync(0);
 }
 #pragma pop
 
@@ -1751,9 +1751,9 @@ void gm_80187F48_OnEnter(void* arg0_)
     Stage_802251E8(*(u16*) (arg0 + 2), NULL);
     Item_80266F70();
     Item_80266FCC();
-    efLib_8005B4B8();
-    efAsync_8006737C(0);
-    efAsync_8006737C(0x1F);
+    efLib_Init();
+    efAsync_LoadSync(0);
+    efAsync_LoadSync(0x1F);
     Stage_8022524C();
     Player_InitAllPlayers();
     lbBgFlash_800209F4();
