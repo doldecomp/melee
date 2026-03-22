@@ -1582,20 +1582,22 @@ void ftKb_SpecialN_800F5D04(Fighter_GObj* gobj, bool arg1)
     new_var->fv.kb.hat.kind = 4;
 }
 
-static void ftKb_SpecialN_800F5DE8_inline(Fighter_GObj* gobj)
+#pragma dont_inline on
+void ftKb_SpecialN_800F5DE8(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftKb_DatAttrs* da = fp->dat_attrs;
     Vec3 pos;
-    FORCE_PAD_STACK_16;
 
     pos = fp->cur_pos;
     pos.x += da->specialn_x_offset_inhaled * fp->facing_dir;
     pos.y += da->specialn_y_offset_inhaled;
 
     {
-        f64 dist = it_802F23AC((int*) fp->target_item_gobj, (float*) &pos);
-        if (dist < da->specialn_inhale_velocity * da->specialn_inhale_velocity)
+        f64 dist =
+            it_802F23AC((int*) fp->target_item_gobj, (float*) &pos);
+        if (dist <
+            da->specialn_inhale_velocity * da->specialn_inhale_velocity)
         {
             it_802F2810(fp->target_item_gobj);
             if (fp->ground_or_air == GA_Air) {
@@ -1606,11 +1608,7 @@ static void ftKb_SpecialN_800F5DE8_inline(Fighter_GObj* gobj)
         }
     }
 }
-
-void ftKb_SpecialN_800F5DE8(Fighter_GObj* gobj)
-{
-    ftKb_SpecialN_800F5DE8_inline(gobj);
-}
+#pragma dont_inline off
 
 void ftKb_SpecialN_800F5EA8(Fighter_GObj* gobj)
 {
