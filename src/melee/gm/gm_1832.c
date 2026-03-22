@@ -99,15 +99,16 @@ static HSD_GObj* lbl_804D65F0;
 static SceneDesc* lbl_804D6600;
 
 extern int lbl_804D6608;
+
+typedef struct { s32 v[6]; } ClassicProcArray;
+
 extern s32 lbl_803B7C40[];
-extern s32 lbl_803B7C28[];
+extern ClassicProcArray lbl_803B7C28;
 
 extern DynamicModelDesc** lbl_804D662C;
 extern HSD_Archive* lbl_804D6628;
 extern u8 lbl_803D9828[];
 extern f32 lbl_803B7C68[];
-
-typedef struct { s32 v[6]; } ClassicProcArray;
 
 typedef struct {
     /* 0x00 */ f32 vals[3];
@@ -915,37 +916,30 @@ void fn_80185D64(void)
 s32 fn_80185E34(void)
 {
     ClassicProcArray local;
-    u8* base;
-    s32* sp;
     int i;
     int player_slot;
 
     i = 0;
-    base = (u8*) &lbl_804735E8.xE4;
     player_slot = 0;
-    sp = (s32*) &local;
-    local = *(ClassicProcArray*) lbl_803B7C28;
-    sp += i;
+    local = lbl_803B7C28;
 
     while (i < (s32) lbl_804735E8.xEF) {
-        if ((u8) base[0xD] != 0x21) {
+        if (lbl_804735E8.xF1[i] != 0x21) {
             Player_80036CF0(player_slot);
             Player_SetPlayerCharacter(player_slot,
-                                      (CharacterKind) base[0xD]);
-            Player_SetCostumeId(player_slot, (s32) base[0x13]);
+                                      (CharacterKind) lbl_804735E8.xF1[i]);
+            Player_SetCostumeId(player_slot, (s32) lbl_804735E8.xF7[i]);
             Player_SetPlayerId(player_slot, 0);
             Player_SetSlottype(player_slot, Gm_PKind_Demo);
             Player_SetFacingDirection(player_slot, 0.0f);
             Player_SetModelScale(player_slot, 1.0f);
-            Player_SetFlagsBit5(player_slot, base[0x19]);
+            Player_SetFlagsBit5(player_slot, lbl_804735E8.xFD[i]);
             Player_80036F34(player_slot, 5);
             HSD_GObj_SetupProc(
                 Player_GetEntity(player_slot),
-                (HSD_GObjEvent) *sp, 0x16);
+                (HSD_GObjEvent) local.v[i], 0x16);
             player_slot++;
         }
-        base++;
-        sp++;
         i++;
     }
     return player_slot;
