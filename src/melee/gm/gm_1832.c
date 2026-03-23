@@ -2593,7 +2593,6 @@ TrainingModeState* gm_80189CDC(StartMeleeData* arg0)
 s32 fn_8018A000(void)
 {
     u8* data;
-    HSD_JObj* jobj;
     HSD_Text* text;
     CssSubStruct* sub = &lbl_80473700.css;
 
@@ -2612,13 +2611,11 @@ s32 fn_8018A000(void)
         HSD_SisLib_803A62A0(0, (char*) &data[0xDC],
                             (char*) &data[0xC8]);
     }
-    jobj = sub->jobjs[1];
-    if (jobj == NULL) {
-        __assert("jobj.h", 0x3E1, "jobj");
-    }
+
     sub->text = HSD_SisLib_803A5ACC(
-        0, 0, (12.0f * (jobj->translate.x + 9.798828f)) + 50.0f, 150.0f, 0.1f,
-        167.0f, 16.0f);
+        0, 0,
+        (12.0f * (HSD_JObjGetTranslationX(sub->jobjs[1]) + 9.798828f)) + 50.0f,
+        150.0f, 0.1f, 167.0f, 16.0f);
     text = sub->text;
     lbLang_IsSettingUS();
     HSD_SisLib_803A6368(text, (s32) *(s16*) &data[2]);
