@@ -999,8 +999,8 @@ void fn_80186080(void)
 
 void fn_801861B8(void)
 {
-    s32 i;
     HSD_Text* text;
+    s32 i;
 
     PAD_STACK(16);
 
@@ -1016,9 +1016,7 @@ void fn_801861B8(void)
         ((HSD_Text*) lbl_804735A8.x4[7 + i])->default_alignment = 1;
         HSD_SisLib_803A6B98((HSD_Text*) lbl_804735A8.x4[7 + i],
                             lbl_804D6604->x57C[lbl_804735E8.xEF].x00[i],
-                            lbl_804D6604->x57C[lbl_804735E8.xEF].x0C[i], " ",
-                            lbl_804D6604,
-                            &lbl_804D6604->x57C[lbl_804735E8.xEF].x00[i]);
+                            lbl_804D6604->x57C[lbl_804735E8.xEF].x0C[i], " ");
         HSD_SisLib_803A7548((HSD_Text*) lbl_804735A8.x4[7 + i], 0,
                             lbl_804D6604->x57C[lbl_804735E8.xEF].x18[i],
                             lbl_804D6604->x57C[lbl_804735E8.xEF].x24[i]);
@@ -1041,10 +1039,9 @@ void fn_801861B8(void)
             return;
         }
         HSD_SisLib_803A6B98((HSD_Text*) lbl_804735A8.x4[10 + i],
-                            340.0f + lbl_804D6604->x57C[lbl_804735E8.xF0].x00[i],
-                            lbl_804D6604->x57C[lbl_804735E8.xF0].x0C[i], " ",
-                            lbl_804D6604,
-                            &lbl_804D6604->x57C[lbl_804735E8.xF0].x00[i]);
+                            340.0f +
+                                lbl_804D6604->x57C[lbl_804735E8.xF0].x00[i],
+                            lbl_804D6604->x57C[lbl_804735E8.xF0].x0C[i], " ");
         HSD_SisLib_803A7548((HSD_Text*) lbl_804735A8.x4[10 + i], 0,
                             340.0f + lbl_804D6604->x57C[lbl_804735E8.xF0].x18[i],
                             lbl_804D6604->x57C[lbl_804735E8.xF0].x24[i]);
