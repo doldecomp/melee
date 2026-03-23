@@ -22,10 +22,12 @@ void fn_80249A1C(HSD_GObj* arg0);
 #pragma opt_common_subs off
 char* mnName_8023749C(int slot)
 {
-    char** array;
-    char* str;
-    s8 term;
     int j;
+    s8 terminator;
+    unsigned short new_var;
+    char** array;
+    s8 term;
+    char* str;
 
     if (lbLang_IsSavedLanguageUS()) {
         array = mnNameNew_803EE724;
@@ -34,10 +36,13 @@ char* mnName_8023749C(int slot)
     }
 
     term = (s8) mnName_StringTerminator;
-    for (j = 0; j != (u8) slot && term != (s8) array[j][0]; j++) {}
+    new_var = (u8) slot;
+    for (j = 0; (j != new_var) && (term != ((s8) array[j][0])); j++) {
+    }
 
     str = array[j];
-    if ((s8) mnName_StringTerminator == (s8) str[0]) {
+    terminator = (s8) mnName_StringTerminator;
+    if (terminator == str[0]) {
         str = NULL;
     }
     return str;
