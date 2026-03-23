@@ -1913,12 +1913,12 @@ void fn_80188550(int arg0)
     int current = lbl_80473700.count;
 
     if (arg0 != current) {
-        if (arg0 > current) {
-            int skip = current;
-            int remaining = arg0 - current;
+        if (arg0 > lbl_80473700.count) {
             int i = 0;
+            int skip = lbl_80473700.count;
+            int remaining = arg0 - current;
 
-            do {
+            for (i = 0; i < 4; i++) {
                 if (i != 0) {
                     if (skip == 0) {
                         if (i != 0) {
@@ -1934,13 +1934,11 @@ void fn_80188550(int arg0)
                         skip--;
                     }
                 }
-                i++;
-            } while (i < 4);
+            }
         } else {
             int to_remove = current - arg0;
-            int j = 3;
-
-            do {
+            int j;
+            for (j = 3; j >= 0; j--) {
                 if (j != 0 && to_remove != 0) {
                     if (current != 3) {
                         fn_8016EF98(to_remove + 1);
@@ -1951,8 +1949,7 @@ void fn_80188550(int arg0)
                         break;
                     }
                 }
-                j--;
-            } while (j >= 0);
+            }
         }
         lbl_80473700.count = arg0;
     }
