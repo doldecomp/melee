@@ -761,13 +761,14 @@ void fn_801857C4(HSD_GObj* arg0)
     Vec3 sp24;
     HSD_ImageDesc* desc[3];
     HSD_SObj* sobj;
-    s32 r24;
+    unsigned long long r24;
     s32 row;
-    u8 i;
+    u32 ten;
     u32 delay;
+    u8 i;
     u8* img_ptr;
 
-    PAD_STACK(32);
+    PAD_STACK(0x10);
 
     if (lbl_804735E8.xE1 != 0) {
         HSD_GObjPLink_80390228(lbl_804D65F0);
@@ -775,20 +776,22 @@ void fn_801857C4(HSD_GObj* arg0)
         i = 0;
         delay = 1;
         do {
-            desc[0] = &lbl_804735E8.x40[img_ptr[0x90]];
+            desc[0] = &lbl_804735E8.x40[((u8*) (&lbl_804735E8))[0x90]];
             desc[1] = 0;
-            desc[2] = &lbl_804735E8.x88[img_ptr[0x90]];
-            sobj = HSD_SObjLib_803A477C(lbl_804735E8.xDC, (s32) &desc[0],
-                                        0, 0, 0x80, 1);
-            r24 = (s32) fn_801855BC((f64)(u32) 10);
+            desc[2] = &lbl_804735E8.x88[((u8*) (&lbl_804735E8))[0x90]];
+            sobj = HSD_SObjLib_803A477C(lbl_804735E8.xDC, (s32) &desc[0], 0, 0,
+                                        0x80, 1);
+            ten = 10;
+            r24 = (s32) fn_801855BC((f64) ten);
             row = (s32) i / (s32)(u8) r24;
-            sp10.x = (40.0f * HSD_Randf()) +
-                (280.0f + ((290.0f / (f32)(u8)(((u8) r24 + 9) / (u8) r24)) *
-                           (f32)(i % (u8) r24)));
-            i++;
-            img_ptr++;
+            sp10.x =
+                (40.0f * HSD_Randf()) +
+                (280.0f + ((290.0f / (f32) (u8) (((u8) r24 + 9) / (u8) r24)) *
+                           (f32) (i % (u8) r24)));
             sp10.y = (40.0f * HSD_Randf()) +
                 (((160.0f / (f32)(u8) r24) * (f32) row) + -60.0f);
+            i++;
+            img_ptr++;
             sp24 = sp10;
             sobj->x10 = sp24.x;
             sobj->x14 = sp24.y;
