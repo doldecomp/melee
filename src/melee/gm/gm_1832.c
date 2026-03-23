@@ -1898,7 +1898,7 @@ int fn_8018846C(void)
     return result;
 }
 
-int fn_801884F8(void)
+inline int fn_801884F8_inline(void)
 {
     int result;
 
@@ -1913,6 +1913,23 @@ int fn_801884F8(void)
     return result;
 }
 
+#pragma push
+#pragma dont_inline on
+int fn_801884F8(void)
+{
+    int result;
+
+    result = pl_80041300(0);
+    if (result != 0) {
+        lbl_80473700.result_cache[0] = result;
+        lbl_80473700.result_cache[1] = 1;
+    }
+    if (lbl_80473700.result_cache[1] != 0) {
+        result = lbl_80473700.result_cache[0];
+    }
+    return result;
+}
+#pragma pop
 void fn_80188550(int arg0)
 {
     int current = lbl_80473700.count;
@@ -2083,7 +2100,7 @@ void fn_80188B3C(HSD_JObj* arg0)
     int i;
     int val;
 
-    if (fn_801884F8() > 999) {
+    if (fn_801884F8_inline() > 999) {
         val = 999;
     } else {
         val = fn_801884F8();
