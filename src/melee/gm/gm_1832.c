@@ -2590,13 +2590,19 @@ TrainingModeState* gm_80189CDC(StartMeleeData* arg0)
     return &lbl_80473700;
 }
 
-s32 fn_8018A000(void)
+inline void resetText(HSD_Text* text)
+{
+    text->pos_x = 0xf;
+    text->pos_y = 0.6f;
+}
+
+HSD_Text* fn_8018A000(void)
 {
     u8* data;
     HSD_Text* text;
-    CssSubStruct* sub = &lbl_80473700.css;
+    CssSubStruct* sub;
 
-    PAD_STACK(24);
+    PAD_STACK(0x10);
     data = lbl_803D9828;
     memzero(lbl_80473700.result_cache, 0x10);
     lbl_804D6628 = lbArchive_80016DBC("GmTrain",
@@ -2604,6 +2610,7 @@ s32 fn_8018A000(void)
     fn_80189B88();
     ifAll_802F3404();
     HSD_SisLib_803A611C(0, NULL, 9, 0x14, 0, 0xE, 0, 0x12);
+    sub = &lbl_80473700.css;
     if (lbLang_IsSavedLanguageUS()) {
         HSD_SisLib_803A62A0(0, (char*) &data[0xBC],
                             (char*) &data[0xC8]);
@@ -2620,10 +2627,10 @@ s32 fn_8018A000(void)
     lbLang_IsSettingUS();
     HSD_SisLib_803A6368(text, (s32) *(s16*) &data[2]);
     sub->text->default_fitting = 1;
-    sub->text->x34.x = 0.7f;
-    sub->text->x34.y = 0.6f;
+    resetText(sub->text);
+    text = sub->text;
     sub->text->default_alignment = 2;
-    return (s32) sub->text;
+    return text;
 }
 
 u8 gm_8018A160(u8 difficulty, u8 stage_slot)
