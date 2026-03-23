@@ -824,7 +824,7 @@ s32 fn_80185A0C(void)
     HSD_GObj* gobj2;
     HSD_GObj* gobj3;
     HSD_GObjProc* proc;
-    HSD_ImageDesc* img;
+    HSD_ImageDesc *img, *img2;
     s32 i, v;
     u8 count;
 
@@ -849,14 +849,15 @@ s32 fn_80185A0C(void)
     lbl_804735E8.xE0 = count;
 
     img = lbl_804735E8.x40;
+    img2 = lbl_804735E8.x88;
     lbl_804735E8.xDC = gobj2;
     lbl_804735E8.xE1 = 0;
 
     for (i = 0; i < (s32) lbl_804735E8.xE0; i++) {
         img->image_ptr = NULL;
         lb_800121FC(img, 0x17C, 0x190, GX_TF_RGB5A3, 0);
-        img[3].image_ptr = NULL;
-        lb_800121FC(&img[3], 0x17C, 0x190, GX_TF_Z24X8, 0);
+        img2[0].image_ptr = NULL;
+        lb_800121FC(&img2[0], 0x17C, 0x190, GX_TF_Z24X8, 0);
         img++;
     }
 
