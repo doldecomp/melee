@@ -952,7 +952,7 @@ void fn_80185F5C(s32 arg0)
             Player_SetFacingDirection(player_slot, 0.0f);
             Player_SetModelScale(player_slot, 1.0f);
             Player_SetFlagsBit5(player_slot, lbl_804735E8.x100[i]);
-            Player_80036F34(player_slot, 5);
+            Player_80036F34(player_slot, 6);
             HSD_GObj_SetupProc(Player_GetEntity(player_slot),
                                (HSD_GObjEvent) local.v[i], 0x16);
             player_slot++;
