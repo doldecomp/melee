@@ -2188,11 +2188,8 @@ void fn_80188EE8(HSD_GObj* gobj)
     HSD_JObjReqAnimAll(sub->jobjs[1], (f32) sub->anim_frames[1]);
     HSD_JObjAnimAll(sub->jobjs[1]);
 
-    jobj = sub->jobjs[1];
-    if (jobj == NULL) {
-        __assert("jobj.h", 0x3E1, "jobj");
-    }
-    sub->text->pos_x = (12.0f * (9.798828f + jobj->translate.x)) + 50.0f;
+    sub->text->pos_x =
+        (12.0f * (9.798828f + HSD_JObjGetTranslationX(sub->jobjs[1]))) + 50.0f;
     sub->text->pos_y = 150.0f;
 
     fn_80188738(sub->jobjs[9]);
