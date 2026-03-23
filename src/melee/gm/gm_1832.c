@@ -755,50 +755,50 @@ void fn_8018575C(HSD_GObj* gobj)
     }
 }
 
+/// @brief Creates splash screen sprite objects from pre-rendered character images.
+/// Distributes 10 image tiles across a grid with random offsets.
 void fn_801857C4(HSD_GObj* arg0)
 {
-    Vec3 sp10;
-    Vec3 sp24;
-    HSD_ImageDesc* desc[3];
+    Vec3 pos;
+    Vec3 pos_copy;
+    HSD_ImageDesc* descs[3];
     HSD_SObj* sobj;
-    unsigned long long r24;
+    u64 num_cols;
     s32 row;
-    u32 ten;
+    u32 total_tiles;
     u32 delay;
-    u8 i;
-    u8* img_ptr;
+    s32 i;
+    u8* img_idx;
 
     PAD_STACK(0x10);
 
     if (lbl_804735E8.xE1 != 0) {
         HSD_GObjPLink_80390228(lbl_804D65F0);
-        img_ptr = (u8*) &lbl_804735E8;
-        i = 0;
+        img_idx = lbl_804735E8.xD0;
         delay = 1;
-        do {
-            desc[0] = &lbl_804735E8.x40[((u8*) (&lbl_804735E8))[0x90]];
-            desc[1] = 0;
-            desc[2] = &lbl_804735E8.x88[((u8*) (&lbl_804735E8))[0x90]];
-            sobj = HSD_SObjLib_803A477C(lbl_804735E8.xDC, (s32) &desc[0], 0, 0,
-                                        0x80, 1);
-            ten = 10;
-            r24 = (s32) fn_801855BC((f64) ten);
-            row = (s32) i / (s32)(u8) r24;
-            sp10.x =
-                (40.0f * HSD_Randf()) +
-                (280.0f + ((290.0f / (f32) (u8) (((u8) r24 + 9) / (u8) r24)) *
-                           (f32) (i % (u8) r24)));
-            sp10.y = (40.0f * HSD_Randf()) +
-                (((160.0f / (f32)(u8) r24) * (f32) row) + -60.0f);
-            i++;
-            img_ptr++;
-            sp24 = sp10;
-            sobj->x10 = sp24.x;
-            sobj->x14 = sp24.y;
+        for (i = 0; i < 10; i++, img_idx++) {
+            descs[0] = &lbl_804735E8.x40[*img_idx];
+            descs[1] = 0;
+            descs[2] = &lbl_804735E8.x88[*img_idx];
+            sobj = HSD_SObjLib_803A477C(lbl_804735E8.xDC,
+                                        (s32) &descs[0], 0, 0, 0x80, 1);
+            total_tiles = 10;
+            num_cols = (s32) fn_801855BC(total_tiles);
+            row = (u8) i / (u8) num_cols;
+            pos.x = (40.0f * HSD_Randf()) +
+                    (280.0f +
+                     ((290.0f / (f32) (u8) (((u8) num_cols + 9) /
+                                            (u8) num_cols)) *
+                      (f32) ((u8) i % (u8) num_cols)));
+            pos.y = (40.0f * HSD_Randf()) +
+                    (((160.0f / (f32) (u8) num_cols) * (f32) row) + -60.0f);
+            pos_copy = pos;
+            sobj->x10 = pos_copy.x;
+            sobj->x14 = pos_copy.y;
             sobj->x48 = delay;
             delay += 8;
             sobj->x40 |= 9;
-        } while ((s32) i < 10);
+        }
         HSD_GObjPLink_80390228(arg0);
     }
 }
