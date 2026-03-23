@@ -33,8 +33,11 @@ void grDisplay_801C5B90(HSD_JObj* jobj, Mtx vmtx, u32 flags, u32 rendermode)
     if (jobj != NULL) {
         if (jobj->flags & JOBJ_INSTANCE) {
             if (!(jobj->flags & JOBJ_HIDDEN)) {
+                HSD_JObj* child;
                 HSD_JObjSetupMatrix(jobj);
-                HSD_JObjSetupMatrix(jobj->child);
+                if ((child = jobj->child) != NULL && HSD_JObjMtxIsDirty(child)) {
+                    HSD_JObjSetupMatrixSub(child);
+                }
 
                 HSD_MtxInverseConcat(jobj->child->mtx, jobj->mtx, mtx);
                 cobj = HSD_CObjGetCurrent();
@@ -74,37 +77,37 @@ void grDisplay_801C5DB0(HSD_GObj* gobj, int code)
     HSD_GObj* foggobj;
     HSD_Fog* fog;
     int i;
+    HSD_GObj* fighter;
+    u32 unused[14];
 
     gp = GET_GROUND(gobj);
     if (gp->x11_flags.b012 == Camera_8003108C()) {
         if (gp->x18 != NULL) {
             if (((intptr_t) gp->x18 & ~0x7FFFFFFF) == 0) {
-                OSReport("oioi... %08x\n");
+                OSReport("oioi... %08x\n", gp->x18);
             }
-            if (HSD_GObj_804D7818->hsd_obj == gp->x18->hsd_obj) {
-                goto skip;
-            }
-            if (gp->x10_flags.b3 == 0) {
-                return;
-            }
-            camgobj = Camera_80030A50();
-            if (camgobj == NULL) {
-                return;
-            }
-            if (GET_COBJ(camgobj) == NULL) {
-                return;
-            }
+            if (HSD_GObj_804D7818->hsd_obj != gp->x18->hsd_obj) {
+                HSD_CObj* cobj;
+                if (gp->x10_flags.b3 == 0) {
+                    return;
+                }
+                camgobj = Camera_80030A50();
+                if (camgobj == NULL) {
+                    return;
+                }
 
-            if (HSD_CObjGetCurrent() == GET_COBJ(camgobj)) {
-                goto skip;
+                if ((cobj = GET_COBJ(camgobj)) == NULL) {
+                    return;
+                }
+
+                if (HSD_CObjGetCurrent() != cobj) {
+                    return;
+                }
             }
+        } else if (Ground_801C2C8C(HSD_GObj_804D7818->hsd_obj) != false) {
             return;
         }
-        if (Ground_801C2C8C(HSD_GObj_804D7818->hsd_obj) != false) {
-            return;
-        }
 
-    skip:
         if (Camera_80030A78() == false && Camera_80030AC4() != false) {
             if (gp->x10_flags.b2 == 0) {
                 HSD_FogSet(0);
@@ -112,10 +115,9 @@ void grDisplay_801C5DB0(HSD_GObj* gobj, int code)
             HSD_StateInvalidate(-1);
 
             if (gp->x10_flags.b5 != 0) {
-                grDisplay_801C5B90(GET_JOBJ(gobj), NULL,
-                                   HSD_GObj_80390EB8(code), 0);
+                HSD_JObj* jobj = GET_JOBJ(gobj);
+                grDisplay_801C5B90(jobj, NULL, HSD_GObj_80390EB8(code), 0);
             } else {
-                HSD_GObj* fighter;
                 for (fighter = HSD_GObj_Entities->fighters; fighter != NULL;
                      fighter = fighter->next)
                 {

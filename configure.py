@@ -969,7 +969,7 @@ config.libs = [
         [
             # Main
             Object(NonMatching, "melee/gr/ground.c"),
-            Object(NonMatching, "melee/gr/grdisplay.c"),
+            Object(Matching, "melee/gr/grdisplay.c"),
             Object(Matching, "melee/gr/grdatfiles.c"),
             Object(NonMatching, "melee/gr/granime.c"),
             Object(NonMatching, "melee/gr/grmaterial.c"),

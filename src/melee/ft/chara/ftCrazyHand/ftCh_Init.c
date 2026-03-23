@@ -31,6 +31,7 @@
 #include "gr/stage.h"
 #include "it/it_26B1.h"
 #include "it/items/itmasterhandlaser.h"
+#include "mp/mplib.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbvector.h"
@@ -931,7 +932,29 @@ void ftCh_Init_80157170(HSD_GObj* gobj)
     ft_PlaySFX(fp, 0x4E207, 127, 64);
 }
 
-/// #ftCh_Damage2_Anim
+void ftCh_Damage2_Anim(HSD_GObj* gobj)
+{
+    if (!ftAnim_IsFramesRemaining(gobj)) {
+        Fighter* fp = GET_FIGHTER(gobj);
+        Vec3 pos;
+        mpFloorGetRight(0, &pos);
+        if (fp->cur_pos.x > pos.x) {
+            ftCh_Init_8015737C(gobj);
+        } else {
+            ftCrazyHand_DatAttrs* attrs;
+            fp = GET_FIGHTER(gobj);
+            attrs = fp->ft_data->ext_attr;
+            fp->mv.ch.unk0.xC.x = fp->cur_pos.x - attrs->x28;
+            fp->mv.ch.unk0.xC.y = attrs->x24;
+            Fighter_ChangeMotionState(
+                gobj, ftMh_MS_Damage, 0,
+                fp->mv.ch.unk0.xC.z = ftCh_Init_804DA070,
+                ftCh_Init_804DA074, ftCh_Init_804DA070, NULL);
+            ftAnim_8006EBA4(gobj);
+            ft_PlaySFX(fp, 0x4E207, 127, 64);
+        }
+    }
+}
 
 void ftCh_Damage2_IASA(HSD_GObj* gobj)
 {
