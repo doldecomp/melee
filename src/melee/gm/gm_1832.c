@@ -591,13 +591,12 @@ typedef struct ClassicCharData {
 
 s32 fn_801851C0(void)
 {
-    volatile u8 pad_stack[8];
+    u8 pad_stack[8];
     Vec3 pos;
-    s32 result;
     s32 i;
+    s32 result;
 
-    i = 0;
-    while (i < (s32) lbl_804735E8.xE0) {
+    for (i = 0; i < (s32) lbl_804735E8.xE0; i++) {
         ClassicCharData* data = (ClassicCharData*) lbl_803D9248;
         result = i + 1;
         Player_SetPlayerCharacter(result,
@@ -618,8 +617,8 @@ s32 fn_801851C0(void)
             data->scale[lbl_804735E8.xF4[0]]);
         Player_SetFlagsBit5(result, lbl_804735E8.x100[0]);
         Player_80037054(result, 6);
-        i++;
     }
+
     return result;
 }
 
@@ -884,25 +883,31 @@ void fn_80185D64(void)
 {
     int i;
     u8* ptr;
-
     ftDemo_ObjAllocInit();
     Player_InitAllPlayers();
 
+    /// @todo fix pointer arithmetic
+    /// is this indicative of an inner struct starting at xE4?
+    ptr = (u8*) &lbl_804735E8.xE4;
     for (i = 0; i < lbl_804735E8.xEF; i++) {
-        u8 chr = lbl_804735E8.xF1[i];
+        /// how do i access this sanely?
+        // its clearly iterating through xF1
+        u8 chr = ptr[0x0D];
         if (chr != CHKIND_MAX) {
             Player_80036E20(chr, lbl_804D65F4, 1);
         }
+        ptr++;
     }
 
+    ptr = (u8*) &lbl_804735E8.xE4;
     for (i = 0; i < lbl_804735E8.xF0; i++) {
-        u8 chr = lbl_804735E8.xF4[i];
-        if (chr == CKIND_GKOOPS) {
-            chr = CKIND_KOOPA;
+        if (ptr[0x10] == CKIND_GKOOPS) {
+            ptr[0x10] = CKIND_KOOPA;
         }
-        if (chr != CHKIND_MAX) {
-            Player_80036E20(chr, lbl_804D65F4, 1);
+        if (ptr[0x10] != CHKIND_MAX) {
+            Player_80036E20(ptr[0x10], lbl_804D65F4, 1);
         }
+        ptr++;
     }
 }
 
