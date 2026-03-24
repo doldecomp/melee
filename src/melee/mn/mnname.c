@@ -714,19 +714,13 @@ s32 mnName_GetColumnCount(void)
 {
     s32 count;
     s32 extra;
-    s32 i;
-    count = 0;
-    for (i = count; i < 0x78; i++) {
-        if (IsNameValid((u8) i)) {
-            count++;
-        }
-    }
+    count = GetNumNameList();
     if (count % 6 != 0) {
         extra = 1;
     } else {
         extra = 0;
     }
-    PAD_STACK(16);
+    PAD_STACK(8);
     return count / 6 + extra;
 }
 
