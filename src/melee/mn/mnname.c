@@ -7,6 +7,7 @@
 #include "lb/lblanguage.h"
 #include "lb/lb_00B0.h"
 
+#include <baselib/debug.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjobject.h>
@@ -36,6 +37,9 @@ extern char mnName_804D4BFC[5];
 
 extern char* mnNameNew_803EE720[];
 extern char* mnNameNew_803EE724[];
+
+extern AnimLoopSettings* mnName_803B8510[];
+extern char mnName_804D4C04[8];
 
 typedef struct {
     HSD_Joint* joint;
@@ -899,7 +903,147 @@ void mnName_80238AE0(HSD_GObj* gobj, u8 index, u8 arg2)
 }
 #pragma pop
 
-/// #mnName_80238C34
+#pragma push
+#pragma dont_inline on
+void mnName_80238C34(HSD_GObj* arg0, u8 arg1, u8 arg2)
+{
+    AnimLoopSettings** tableBase = mnName_803B8510;
+    AnimLoopSettings* base = mnName_803ED538;
+    MnName_GObj* data = (MnName_GObj*) arg0->user_data;
+    AnimLoopSettings* found;
+    s32 i;
+
+    if (arg1 != 0) {
+        u8 prev = *((u8*) data + 1);
+        if (prev != 0x1A || (u16) mn_804A04F0.hovered_selection >= 0x18U) {
+            mnName_80238AE0((HSD_GObj*) data, prev, 0);
+        }
+        mnName_80238AE0((HSD_GObj*) data,
+                        (u8) mn_804A04F0.hovered_selection, 1);
+    }
+
+    {
+        AnimLoopSettings* table[6];
+        HSD_JObj* jobj = mnName_802388D4((HSD_GObj*) data, 0x18U);
+        f32 frame = mn_8022F298(jobj);
+        table[0] = tableBase[0];
+        table[1] = tableBase[1];
+        table[2] = tableBase[2];
+        table[3] = tableBase[3];
+        table[4] = tableBase[4];
+        table[5] = tableBase[5];
+        for (i = 0; i < 6; i++) {
+            if (table[i]->start_frame <= frame &&
+                frame <= table[i]->end_frame)
+            {
+                found = table[i];
+                goto found1;
+            }
+        }
+        OSReport((char*) base + 0xF8);
+        __assert((char*) base + 0x10C, 0x3DC, mnName_804D4C04);
+    found1:
+        mn_8022ED6C(jobj, found);
+    }
+
+    {
+        AnimLoopSettings* table[6];
+        HSD_JObj* jobj = mnName_802388D4((HSD_GObj*) data, 0x19U);
+        f32 frame = mn_8022F298(jobj);
+        table[0] = tableBase[0];
+        table[1] = tableBase[1];
+        table[2] = tableBase[2];
+        table[3] = tableBase[3];
+        table[4] = tableBase[4];
+        table[5] = tableBase[5];
+        for (i = 0; i < 6; i++) {
+            if (table[i]->start_frame <= frame &&
+                frame <= table[i]->end_frame)
+            {
+                found = table[i];
+                goto found2;
+            }
+        }
+        OSReport((char*) base + 0xF8);
+        __assert((char*) base + 0x10C, 0x3DC, mnName_804D4C04);
+    found2:
+        mn_8022ED6C(jobj, found);
+    }
+
+    {
+        AnimLoopSettings* table[6];
+        HSD_JObj* jobj = mnName_802388D4((HSD_GObj*) data, 0x1AU);
+        f32 frame = mn_8022F298(jobj);
+        table[0] = tableBase[0];
+        table[1] = tableBase[1];
+        table[2] = tableBase[2];
+        table[3] = tableBase[3];
+        table[4] = tableBase[4];
+        table[5] = tableBase[5];
+        for (i = 0; i < 6; i++) {
+            if (table[i]->start_frame <= frame &&
+                frame <= table[i]->end_frame)
+            {
+                found = table[i];
+                goto found3;
+            }
+        }
+        OSReport((char*) base + 0xF8);
+        __assert((char*) base + 0x10C, 0x3DC, mnName_804D4C04);
+    found3:
+        mn_8022ED6C(jobj, found);
+    }
+
+    {
+        AnimLoopSettings* table4[6];
+        AnimLoopSettings* table5[6];
+        HSD_JObj* jobj = (HSD_JObj*) data->gobj.prev_gx;
+        f32 frame = mn_8022F298(jobj);
+        f32 result;
+        table4[0] = tableBase[0];
+        table4[1] = tableBase[1];
+        table4[2] = tableBase[2];
+        table4[3] = tableBase[3];
+        table4[4] = tableBase[4];
+        table4[5] = tableBase[5];
+        for (i = 0; i < 6; i++) {
+            if (table4[i]->start_frame <= frame &&
+                frame <= table4[i]->end_frame)
+            {
+                found = table4[i];
+                goto found4;
+            }
+        }
+        OSReport((char*) base + 0xF8);
+        __assert((char*) base + 0x10C, 0x3DC, mnName_804D4C04);
+    found4:
+        result = mn_8022ED6C(jobj, found);
+
+        table5[0] = tableBase[0];
+        table5[1] = tableBase[1];
+        table5[2] = tableBase[2];
+        table5[3] = tableBase[3];
+        table5[4] = tableBase[4];
+        table5[5] = tableBase[5];
+        for (i = 0; i < 6; i++) {
+            if (table5[i]->start_frame <= result &&
+                result <= table5[i]->end_frame)
+            {
+                found = table5[i];
+                goto found5;
+            }
+        }
+        OSReport((char*) base + 0xF8);
+        __assert((char*) base + 0x10C, 0x3DC, mnName_804D4C04);
+    found5:
+        if (found == base + 5) {
+            if (result >= base[5].end_frame) {
+                HSD_GObjPLink_80390228(arg0);
+            }
+        }
+    }
+}
+#pragma pop
 
 #pragma push
 #pragma dont_inline on
