@@ -108,21 +108,26 @@ int GetNameCount(void)
     return count;
 }
 
-bool IsNameListFull(void)
+inline int GetNumNameList()
 {
-    int result;
-    int count = 0;
     int i;
-    for (i = count; i < 0x78; i++) {
+    int count = 0;
+    for (i = 0; i < 0x78; i++) {
         if (IsNameValid((u8) i)) {
             count++;
         }
     }
-    if (count < 0x78) {
+    return count;
+}
+
+bool IsNameListFull(void)
+{
+    if (GetNumNameList() < 0x78) {
         return false;
     }
     return true;
 }
+
 s32 CompareNameStrings(char* str, s32 slot)
 {
     char* p2 = (char*) slot;
