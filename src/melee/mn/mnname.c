@@ -14,6 +14,11 @@ extern AnimLoopSettings mnName_803ED538[];
 extern char mnName_StringTerminator;
 extern u8 mnName_804D4BF0;
 
+extern f32 mnName_804D4BD0[2];
+extern f32 mnName_804D4BD8[2];
+extern s32 mnName_804D4BE0;
+extern s32 mnName_804D4BE4;
+
 extern char* mnNameNew_803EE720[];
 extern char* mnNameNew_803EE724[];
 
@@ -346,7 +351,48 @@ void mnName_80238A04(HSD_GObj* gobj, u8 target, u8 flag)
 }
 #pragma pop
 
-/// #mnName_80238AE0
+#pragma push
+#pragma dont_inline on
+void mnName_80238AE0(HSD_GObj* gobj, u8 index, u8 arg2)
+{
+    s32 color;
+    HSD_JObj* jobj;
+    s32* colorptr;
+
+    if ((u8) index < 0x18) {
+        jobj = mnName_802388D4(gobj, index);
+        HSD_JObjReqAnimAll(jobj, (f32) arg2);
+        HSD_JObjAnimAll(jobj);
+        if (arg2 != 0) {
+            colorptr = &mnName_804D4BE0;
+        } else {
+            colorptr = &mnName_804D4BE4;
+        }
+        color = *colorptr;
+        HSD_SisLib_803A74F0(((MnName_GObj*) gobj)->text, (s32) index,
+                            (u8*) &color);
+        return;
+    }
+
+    jobj = mnName_802388D4(gobj, index);
+    if ((u8) index < 0x18) {
+        HSD_JObjReqAnimAll(jobj, (f32) arg2);
+    } else {
+        switch ((u8) index) {
+        case 24:
+            HSD_JObjReqAnimAll(jobj, mnName_804D4BD0[arg2]);
+            break;
+        case 25:
+            HSD_JObjReqAnimAll(jobj, mnName_804D4BD8[arg2]);
+            break;
+        case 26:
+            HSD_JObjReqAnimAll(jobj, mnName_804D4BD8[arg2]);
+            break;
+        }
+    }
+    HSD_JObjAnimAll(jobj);
+}
+#pragma pop
 
 /// #mnName_80238C34
 

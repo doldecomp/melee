@@ -3,7 +3,7 @@ File: src/melee/mn/mnname.c
 - [x] mnName_GetColumnCount        
 - [x] mnName_80238A04              
 - [x] CompareNameStrings           
-- [ ] mnName_80238AE0              
+- [x] mnName_80238AE0              
 - [ ] mnName_80238754              
 - [ ] DeleteName                   
 - [ ] mnName_80239878              
