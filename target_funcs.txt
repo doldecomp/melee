@@ -6,7 +6,7 @@ File: src/melee/mn/mnname.c
 - [x] mnName_80238AE0              
 - [x] mnName_80238754              
 - [x] DeleteName                   
-- [ ] mnName_80239878              
+- [x] mnName_80239878              
 - [ ] fn_8023A0BC                  
 - [ ] mnName_80237D94              
 - [ ] mnName_ConfirmNameDeleteInput

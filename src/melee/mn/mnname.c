@@ -236,6 +236,75 @@ void CreateNameAtIndex(s32 slot)
 /// #mnName_SortNames
 
 /// #mnName_80237D94
+extern HSD_GObj* mnName_804D6BF8;
+
+s32 mnName_80237D94(s32 arg0, u8 arg1)
+{
+    HSD_GObj* gobj;
+
+    gobj = mnName_804D6BF8->user_data;
+    if (arg1 < 0x18U) {
+        if (arg0 & 1) {
+            if ((arg1 % 6) != 0) {
+                return arg1 - 1;
+            }
+            return arg1 + 5;
+        }
+        if (arg0 & 2) {
+            if ((s32) (arg1 % 6) != 5) {
+                return arg1 + 1;
+            }
+            return arg1 - 5;
+        }
+        if (arg0 & 8) {
+            if ((s32) (arg1 / 6) == 3) {
+                if (mnName_GetColumnCount() > 4) {
+                    lbAudioAx_80024030(2);
+                    if ((s32) (mnName_GetColumnCount() - 1) >
+                        (s32) gobj->gx_link)
+                    {
+                        gobj->gx_link = gobj->gx_link + 1;
+                    } else {
+                        gobj->gx_link = 0;
+                    }
+                    mnName_802385A0(gobj);
+                }
+                return arg1;
+            }
+            return arg1 + 6;
+        }
+        if (arg0 & 4) {
+            if ((arg1 / 6) == 0) {
+                if (mnName_GetColumnCount() > 4) {
+                    lbAudioAx_80024030(2);
+                    if (gobj->gx_link != 0) {
+                        gobj->gx_link = gobj->gx_link - 1;
+                    } else {
+                        gobj->gx_link =
+                            mnName_GetColumnCount() - 1;
+                    }
+                    mnName_802385A0(gobj);
+                }
+                return arg1;
+            }
+            return arg1 - 6;
+        }
+    } else {
+        if (arg0 & 1) {
+            if (arg1 == 0x18) {
+                return 0x1A;
+            }
+            return arg1 - 1;
+        }
+        if (arg0 & 2) {
+            if (arg1 == 0x1A) {
+                return 0x18;
+            }
+            return arg1 + 1;
+        }
+    }
+    return arg1;
+}
 
 /// #mnName_ConfirmNameDeleteInput
 
