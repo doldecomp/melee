@@ -27,6 +27,7 @@ extern f32 mnName_804D4BD0[2];
 extern f32 mnName_804D4BD8[2];
 extern s32 mnName_804D4BE0;
 extern s32 mnName_804D4BE4;
+extern s32 mnName_804D4BE8[];
 
 extern char* mnNameNew_803EE720[];
 extern char* mnNameNew_803EE724[];
@@ -771,7 +772,125 @@ void mnName_80238AE0(HSD_GObj* gobj, u8 index, u8 arg2)
 
 /// #mnName_80238C34
 
-/// #fn_80239574
+#pragma push
+#pragma dont_inline on
+void fn_80239574(HSD_GObj* arg0)
+{
+    AnimLoopSettings* anim;
+    AnimLoopSettings* base = mnName_803ED538;
+    s32 doUpdate = 0;
+    u8 doSel = 0;
+    u8 doSelReset = 0;
+    MnName_GObj* data = (MnName_GObj*) arg0->user_data;
+    u8 state = data->gobj.p_link;
+
+    if ((state == 0 || state == 1 || state == 3) &&
+        *((u8*) data) != (u8) mn_804A04F0.cur_menu)
+    {
+        if (mn_804A04F0.buttons & 0x10) {
+            data->gobj.p_link = 4U;
+        } else if (mn_804A04F0.buttons & 0x20) {
+            data->gobj.p_link = 2U;
+        }
+        state = data->gobj.p_link;
+        switch ((s32) state) {
+        case 1:
+            anim = &base[0];
+            break;
+        case 2:
+            anim = &base[2];
+            break;
+        case 3:
+            anim = &base[1];
+            break;
+        case 4:
+            anim = &base[3];
+            break;
+        }
+        {
+            HSD_JObj* jobj = (HSD_JObj*) data->gobj.next_gx;
+            HSD_JObjReqAnim(jobj, anim->start_frame);
+            HSD_JObjAnim(jobj);
+        }
+        state = data->gobj.p_link;
+        if (state == 0 || state == 1 || state == 3) {
+            doUpdate = 1;
+            doSel = 1;
+            doSelReset = 1;
+        }
+    }
+    state = data->gobj.p_link;
+    if (state != 0) {
+        switch ((s32) state) {
+        case 1:
+            anim = &base[0];
+            break;
+        case 2:
+            anim = &base[2];
+            break;
+        case 3:
+            anim = &base[1];
+            break;
+        case 4:
+            anim = &base[3];
+            break;
+        }
+        {
+            HSD_JObj* jobj = (HSD_JObj*) data->gobj.next_gx;
+            if (mn_8022F298(jobj) >= anim->end_frame) {
+                state = data->gobj.p_link;
+                switch ((s32) state) {
+                case 3:
+                case 1:
+                    data->gobj.p_link = 0U;
+                    goto do_anim;
+                case 4:
+                    HSD_GObjPLink_80390228(arg0);
+                    return;
+                }
+            } else {
+            do_anim:
+                HSD_JObjAnim(jobj);
+                goto do_update;
+            }
+        }
+    } else {
+    do_update:
+        if ((u8) mn_804A04F0.x10 != 1) {
+            state = data->gobj.p_link;
+            if ((state == 0 || state == 1 || state == 3) &&
+                (s32) *((u8*) data + 1) !=
+                    (s32) mn_804A04F0.hovered_selection)
+            {
+                doSel = 1;
+            }
+        }
+        mnName_80238C34(arg0, doSel, doSelReset);
+        if ((s32) doSel != 0 &&
+            (u16) mn_804A04F0.hovered_selection >= 0x18U &&
+            (u8) *((u8*) data + 1) >= 0x18U)
+        {
+            HSD_Text* text;
+            s32 idx = mn_804A04F0.hovered_selection - 0x18;
+            if (data->text2 != NULL) {
+                HSD_SisLib_803A5CC4(data->text2);
+            }
+            text = HSD_SisLib_803A5ACC(0, 0, -9.5f, 9.1f, 17.0f,
+                                       364.68332f, 38.38772f);
+            data->text2 = text;
+            text->font_size.x = 0.0521f;
+            text->font_size.y = 0.0521f;
+            HSD_SisLib_803A6368(text, mnName_804D4BE8[idx]);
+        }
+        if (doUpdate != 0) {
+            *((u8*) data) = (u8) mn_804A04F0.cur_menu;
+        }
+        if ((s32) doSel != 0) {
+            *((u8*) data + 1) = (u8) mn_804A04F0.hovered_selection;
+        }
+    }
+}
+#pragma pop
 
 /// #mnName_80239878
 #pragma push

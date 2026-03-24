@@ -14,7 +14,7 @@ File: src/melee/mn/mnname.c
 - [ ] fn_80239574                  
 - [x] mnName_8023A290              
 - [ ] mnName_SortNames             
-- [ ] mnName_MainInput             
+- [x] mnName_MainInput             
 - [ ] mnName_8023A59C              
 - [ ] mnName_8023AC40              
 - [ ] mnName_80239A24              
