@@ -21,9 +21,9 @@ typedef struct MnName_GObj {
 /* 23754C */ char* GetNameText(int slot);
 /* 237594 */ int GetNameCount(void);
 /* 2375EC */ bool IsNameListFull(void);
-/* 237654 */ s32 CompareNameStrings(char* str, s32 slot);
+/* 237654 */ s32 CompareNameStrings(char* str, char* slot);
 /* 2377A4 */ void fn_802377A4(void);
-/* 2377A8 */ bool IsNameUnique(s32 slot);
+/* 2377A8 */ bool IsNameUnique(char* name);
 /* 237834 */ s32 DeleteName(u8);
 /* 2379BC */ bool IsNameValid(int slot);
 /* 237A04 */ void CreateNameAtIndex(s32 slot);
@@ -53,6 +53,6 @@ typedef struct MnName_GObj {
 /* 23A59C */ HSD_GObj* mnName_8023A59C(u8);
 /* 23A9B4 */ void mnName_8023A9B4(u8);
 /* 23AC40 */ s32 mnName_8023AC40(void);
-/* 23B084 */ bool IsNameNotAllowed(s32 name_idx);
+/* 23B084 */ bool IsNameNotAllowed(char* name_idx);
 
 #endif

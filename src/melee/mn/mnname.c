@@ -26,7 +26,7 @@ extern AnimLoopSettings mnName_803ED538[];
 extern f32 mnName_803ED600[];
 
 extern char mnName_StringTerminator;
-extern u8 mnName_804D4BF0;
+extern char mnName_804D4BF0;
 
 static u8 mnName_NameDisplayOrder[0x78];
 
@@ -128,46 +128,54 @@ bool IsNameListFull(void)
     return true;
 }
 
-s32 CompareNameStrings(char* str, s32 slot)
+// Ugly match. False match maybe? Seems like regswaps, but can't manage to get
+// it perfect.
+s32 CompareNameStrings(char* str1, char* str2)
 {
-    char* p2 = (char*) slot;
-    char* p1 = str;
-    s32 i = 0;
+    char* p2;
+    char* p1;
+    char* b40Ptr;
+    char* stringTermPtr;
+    char stringTermTemp;
+    s32 i;
+    stringTermPtr = &mnName_StringTerminator;
+    for (i = 0, p1 = str1, p2 = str2;; i++, p1++, p2++) {
+        char* cur = &str1[i];
 
-    while (true) {
-        char* cur = &str[i];
-
-        if ((s8) mnName_StringTerminator == (s8)(u8) *cur) {
-            char* rem = (char*) (slot + i);
-            s32 result = 1;
-            while ((s8) mnName_StringTerminator != (s8)(u8) *rem) {
-                if ((s8) mnName_804D4BF0 != (s8)(u8) *rem ||
-                    (s8) (&mnName_804D4BF0)[1] != (s8) rem[1])
-                {
+        if (*stringTermPtr == *cur) {
+            char* rem = &str2[i];
+            s32 result;
+            stringTermTemp = mnName_StringTerminator;
+            while (stringTermTemp != *rem) {
+                b40Ptr = &mnName_804D4BF0;
+                if (mnName_804D4BF0 != *rem || b40Ptr[1] != rem[1]) {
                     result = 0;
-                    break;
+                    goto compare;
                 }
                 rem += 2;
             }
-            if (result != 0) {
+            result = 1;
+        compare:
+            if (result != ((mnName_804D4BF0 != (*cur)) * (cur[1] * 0))) {
                 return 0;
             }
             return 2;
         }
 
         {
-            u8 ch2 = (u8) *p2;
-            if ((s8) mnName_StringTerminator == (s8) ch2) {
-                s32 result = 1;
-                while ((s8) mnName_StringTerminator != (s8)(u8) *cur) {
-                    if ((s8) mnName_804D4BF0 != (s8)(u8) *cur ||
-                        (s8) (&mnName_804D4BF0)[1] != (s8) cur[1])
-                    {
+            char ch2 = *p2;
+            if (*stringTermPtr == ch2) {
+                s32 result;
+                while (*stringTermPtr != *cur) {
+                    b40Ptr = &mnName_804D4BF0;
+                    if (mnName_804D4BF0 != *cur || (b40Ptr)[1] != cur[1]) {
                         result = 0;
-                        break;
+                        goto compare2;
                     }
                     cur += 2;
                 }
+                result = 1;
+            compare2:;
                 if (result != 0) {
                     return 0;
                 }
@@ -175,25 +183,20 @@ s32 CompareNameStrings(char* str, s32 slot)
             }
 
             {
-                u8 c1 = (u8) *p1;
-                if (c1 > ch2) {
+                if ((u8) *p1 > (u8) ch2) {
                     return 1;
                 }
-                if (c1 < ch2) {
+                if ((u8) *p1 < (u8) ch2) {
                     return 2;
                 }
             }
         }
-
-        i++;
-        p1++;
-        p2++;
     }
 }
 
 void fn_802377A4(void) {}
 
-bool IsNameUnique(s32 slot)
+bool IsNameUnique(char* name)
 {
     int i;
     char* namedata;
@@ -204,7 +207,7 @@ bool IsNameUnique(s32 slot)
         if (namedata == NULL) {
             break;
         }
-        if (CompareNameStrings(namedata, slot) == 0) {
+        if (CompareNameStrings(namedata, name) == 0) {
             return true;
         }
     }
@@ -324,8 +327,7 @@ s32 mnName_SortNames(HSD_GObj* arg0)
                         e2 = 1;
                     }
                     if (e2 != 0) {
-                        result =
-                            CompareNameStrings(name1, (s32) name2);
+                        result = CompareNameStrings(name1, name2);
                     } else {
                         goto block_15;
                     }
@@ -1899,14 +1901,14 @@ s32 mnName_8023AC40(void)
 extern char** NotAllowedNamesList;
 extern char mnNameNew_NullCharacter;
 
-bool IsNameNotAllowed(s32 name_idx)
+bool IsNameNotAllowed(char* name)
 {
     char** list = NotAllowedNamesList;
     while (true) {
         if (mnNameNew_NullCharacter == **list) {
             break;
         }
-        if (!CompareNameStrings(*list, name_idx)) {
+        if (!CompareNameStrings(*list, name)) {
             return true;
         }
         list++;
