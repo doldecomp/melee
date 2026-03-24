@@ -2,7 +2,7 @@ File: src/melee/mn/mnname.c
 - [x] IsNameListFull               
 - [x] mnName_GetColumnCount        
 - [x] mnName_80238A04              
-- [ ] CompareNameStrings           
+- [x] CompareNameStrings           
 - [ ] mnName_80238AE0              
 - [ ] mnName_80238754              
 - [ ] DeleteName                   

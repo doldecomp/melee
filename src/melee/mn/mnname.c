@@ -12,6 +12,7 @@
 extern AnimLoopSettings mnName_803ED538[];
 
 extern char mnName_StringTerminator;
+extern u8 mnName_804D4BF0;
 
 extern char* mnNameNew_803EE720[];
 extern char* mnNameNew_803EE724[];
@@ -83,7 +84,68 @@ bool IsNameListFull(void)
     }
     return true;
 }
-/// #CompareNameStrings
+s32 CompareNameStrings(char* str, s32 slot)
+{
+    char* p2 = (char*) slot;
+    char* p1 = str;
+    s32 i = 0;
+
+    while (true) {
+        char* cur = &str[i];
+
+        if ((s8) mnName_StringTerminator == (s8)(u8) *cur) {
+            char* rem = (char*) (slot + i);
+            s32 result = 1;
+            while ((s8) mnName_StringTerminator != (s8)(u8) *rem) {
+                if ((s8) mnName_804D4BF0 != (s8)(u8) *rem ||
+                    (s8) (&mnName_804D4BF0)[1] != (s8) rem[1])
+                {
+                    result = 0;
+                    break;
+                }
+                rem += 2;
+            }
+            if (result != 0) {
+                return 0;
+            }
+            return 2;
+        }
+
+        {
+            u8 ch2 = (u8) *p2;
+            if ((s8) mnName_StringTerminator == (s8) ch2) {
+                s32 result = 1;
+                while ((s8) mnName_StringTerminator != (s8)(u8) *cur) {
+                    if ((s8) mnName_804D4BF0 != (s8)(u8) *cur ||
+                        (s8) (&mnName_804D4BF0)[1] != (s8) cur[1])
+                    {
+                        result = 0;
+                        break;
+                    }
+                    cur += 2;
+                }
+                if (result != 0) {
+                    return 0;
+                }
+                return 1;
+            }
+
+            {
+                u8 c1 = (u8) *p1;
+                if (c1 > ch2) {
+                    return 1;
+                }
+                if (c1 < ch2) {
+                    return 2;
+                }
+            }
+        }
+
+        i++;
+        p1++;
+        p2++;
+    }
+}
 
 void fn_802377A4(void) {}
 
