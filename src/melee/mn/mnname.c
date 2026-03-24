@@ -5,6 +5,7 @@
 #include "mnnamenew.h"
 
 #include "lb/lblanguage.h"
+#include "lb/lb_00B0.h"
 
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
@@ -35,6 +36,18 @@ extern char mnName_804D4BFC[5];
 
 extern char* mnNameNew_803EE720[];
 extern char* mnNameNew_803EE724[];
+
+typedef struct {
+    HSD_Joint* joint;
+    HSD_AnimJoint* anim_joint;
+    HSD_MatAnimJoint* matanim_joint;
+    HSD_ShapeAnimJoint* shapeanim_joint;
+} MnNameArchive;
+
+extern MnNameArchive mnName_804A06C0;
+extern MnNameArchive mnName_804A06D0;
+extern MnNameArchive mnName_804A06E0;
+extern Vec3 mnName_803ED618[];
 
 void fn_80249A1C(HSD_GObj* arg0);
 
@@ -1065,6 +1078,174 @@ void mnName_80239878(u8 arg0, HSD_GObj* gobj)
 #pragma pop
 
 /// #mnName_80239A24
+#pragma push
+#pragma dont_inline on
+void mnName_80239A24(HSD_GObj* gobj)
+{
+    Vec3 sp6C;
+    s32 sp60;
+    MnName_GObj* data = (MnName_GObj*) gobj;
+    HSD_JObj* jobj;
+    HSD_JObj* ref_jobj;
+    HSD_JObj* ref_jobj2;
+    HSD_JObj* ref_jobj3;
+    HSD_JObj* text_jobj0;
+    HSD_JObj* text_jobj6;
+    HSD_JObj* text_jobj1;
+    HSD_Text* text;
+    f32 col_width;
+    f32 row_height;
+    f32 text_col_width;
+    f32 text_row_height;
+    u8 i;
+    s32 row;
+    s32 count;
+    s32 extra;
+    s32 total_rows;
+    u8 name_idx;
+
+    i = 0;
+    do {
+        jobj = HSD_JObjLoadJoint(mnName_804A06C0.joint);
+        HSD_JObjAddAnimAll(jobj, mnName_804A06C0.anim_joint,
+                           mnName_804A06C0.matanim_joint,
+                           mnName_804A06C0.shapeanim_joint);
+        HSD_JObjReqAnimAll(jobj, (f32) (mn_804A04F0.hovered_selection == i));
+        HSD_JObjAnimAll(jobj);
+        ref_jobj = (HSD_JObj*) data->gobj.user_data_remove_func;
+        if (ref_jobj == NULL) {
+            __assert(mnName_804D4BF4, 0x3E1U, mnName_804D4BFC);
+        }
+        ref_jobj2 = (HSD_JObj*) data->gobj.x34_unk;
+        col_width = ref_jobj->translate.x;
+        if (ref_jobj2 == NULL) {
+            __assert(mnName_804D4BF4, 0x3E1U, mnName_804D4BFC);
+        }
+        ref_jobj3 = (HSD_JObj*) data->gobj.user_data_remove_func;
+        col_width = ref_jobj2->translate.x - col_width;
+        if (ref_jobj3 == NULL) {
+            __assert(mnName_804D4BF4, 0x3EEU, mnName_804D4BFC);
+        }
+        {
+            HSD_JObj* ref_y = (HSD_JObj*) data->x38;
+            row_height = ref_jobj3->translate.y;
+            if (ref_y == NULL) {
+                __assert(mnName_804D4BF4, 0x3EEU, mnName_804D4BFC);
+            }
+            row_height = ref_y->translate.y - row_height;
+        }
+        mnName_80239F5C(jobj, col_width * (f32) (i / 6));
+        mnName_80239EBC(jobj, row_height * (f32) (i % 6));
+        HSD_JObjAddChild((HSD_JObj*) data->gobj.user_data_remove_func, jobj);
+        i += 1;
+    } while ((s32) i < 0x18);
+
+    text = HSD_SisLib_803A6754(0, 0);
+    data->text = text;
+    text_jobj0 = mnName_802388D4(gobj, 0U);
+    lb_8000B1CC(text_jobj0, mnName_803ED618, &sp6C);
+    text->pos_x = sp6C.x;
+    text->pos_y = -sp6C.y;
+    text->pos_z = sp6C.z;
+    text->font_size.x = 0.03f;
+    text->font_size.y = 0.03f;
+    text->text_color = *(GXColor*) &mnName_804D4BE4;
+
+    text_jobj6 = mnName_802388D4(gobj, 6U);
+    if (text_jobj0 == NULL) {
+        __assert(mnName_804D4BF4, 0x3E1U, mnName_804D4BFC);
+    }
+    text_col_width = text_jobj0->translate.x;
+    if (text_jobj6 == NULL) {
+        __assert(mnName_804D4BF4, 0x3E1U, mnName_804D4BFC);
+    }
+    text_col_width = text_jobj6->translate.x - text_col_width;
+
+    text_jobj1 = mnName_802388D4(gobj, 1U);
+    if (text_jobj0 == NULL) {
+        __assert(mnName_804D4BF4, 0x3EEU, mnName_804D4BFC);
+    }
+    text_row_height = text_jobj0->translate.y;
+    if (text_jobj1 == NULL) {
+        __assert(mnName_804D4BF4, 0x3EEU, mnName_804D4BFC);
+    }
+    text_row_height = -(text_jobj1->translate.y - text_row_height);
+
+    i = 0;
+    do {
+        MnName_GObj* global_data =
+            (MnName_GObj*) ((HSD_GObj*) mnName_804D6BF8)->user_data;
+        row = global_data->gobj.gx_link + (i / 6);
+        count = GetNameCount();
+        if ((count % 6) != 0) {
+            extra = 1;
+        } else {
+            extra = 0;
+        }
+        total_rows = (count / 6) + extra;
+        if ((total_rows > 4) && (row >= total_rows)) {
+            row -= total_rows;
+        }
+        name_idx =
+            mnName_NameDisplayOrder[(i % 6) + (row * 6)];
+        {
+            s32 is_valid;
+            if ((s8)(u8) mnName_StringTerminator ==
+                (s8) GetPersistentNameData((s32) name_idx)->namedata[0])
+            {
+                is_valid = 0;
+            } else {
+                is_valid = 1;
+            }
+            if (is_valid != 0) {
+                char* namedata;
+                s32 is_valid2;
+                if ((s8)(u8) mnName_StringTerminator ==
+                    (s8) GetPersistentNameData((s32) name_idx)
+                        ->namedata[0])
+                {
+                    is_valid2 = 0;
+                } else {
+                    is_valid2 = 1;
+                }
+                if (is_valid2 == 0) {
+                    namedata = NULL;
+                } else {
+                    namedata = (char*) GetPersistentNameData(
+                                   (s32) name_idx) +
+                               0x198;
+                }
+                {
+                    f32 font_x = text->font_size.x;
+                    f32 x = (f32) (i / 6) * text_col_width;
+                    HSD_SisLib_803A6B98(
+                        text, x / font_x,
+                        ((f32) (i % 6) * text_row_height) /
+                            text->font_size.y,
+                        namedata);
+                }
+                {
+                    s32* color;
+                    if ((s32) i ==
+                        (s32) mn_804A04F0.hovered_selection)
+                    {
+                        color = &mnName_804D4BE0;
+                    } else {
+                        color = &mnName_804D4BE4;
+                    }
+                    sp60 = *color;
+                    HSD_SisLib_803A74F0(text, (s32) i,
+                                        (u8*) &sp60);
+                }
+            } else {
+                HSD_SisLib_803A6B98(text, 0.0f, 0.0f,
+                                    &mnName_StringTerminator);
+            }
+        }
+        i += 1;
+    } while ((s32) i < 0x18);
+}
+#pragma pop
 
 void mnName_80239EBC(HSD_JObj* jobj, f32 y)
 {
@@ -1182,16 +1363,6 @@ void fn_8023A0BC(HSD_GObj* gobj)
         HSD_JObjAnimAll(sp18);
     }
 }
-
-typedef struct {
-    HSD_Joint* joint;
-    HSD_AnimJoint* anim_joint;
-    HSD_MatAnimJoint* matanim_joint;
-    HSD_ShapeAnimJoint* shapeanim_joint;
-} MnNameArchive;
-
-extern MnNameArchive mnName_804A06D0;
-extern MnNameArchive mnName_804A06E0;
 
 void mnName_8023A290(void)
 {
