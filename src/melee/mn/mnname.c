@@ -130,8 +130,10 @@ bool IsNameListFull(void)
 
 inline bool checkStringRest(char* ptr)
 {
+    char* cmp = &mnName_804D4BF0;
+    char c = cmp[0];
     while (mnName_StringTerminator != *ptr) {
-        if (mnName_804D4BF0 != *ptr || (&mnName_804D4BF0)[1] != ptr[1]) {
+        if (c != *ptr || cmp[1] != ptr[1]) {
             return false;
         }
         ptr += 2;
@@ -141,14 +143,14 @@ inline bool checkStringRest(char* ptr)
 
 s32 CompareNameStrings(char* str1, char* str2)
 {
-    char* p2;
     char* p1;
+    char* p2;
     s32 i;
-    for (i = 0, p1 = str1, p2 = str2;; i++, p1++, p2++) {
+    for (i = 0, p2 = str2, p1 = str1;; i++, p1++, p2++) {
         char* ch1 = &str1[i];
 
         if (mnName_StringTerminator == *ch1) {
-            if (checkStringRest(&str2[i])) {
+            if (checkStringRest(&str2[i & 0xFFFFFFFFFFFFFFFF])) {
                 return 0;
             }
             return 2;
