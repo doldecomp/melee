@@ -386,12 +386,12 @@ s32 mnName_SortNames(HSD_GObj* arg0)
 }
 #pragma pop
 
-/// #mnName_80237D94
 extern HSD_GObj* mnName_804D6BF8;
 
-s32 mnName_80237D94(s32 arg0, u8 arg1)
+u8 mnName_80237D94(s32 arg0, u8 arg1)
 {
     HSD_GObj* gobj;
+    PAD_STACK(8);
 
     gobj = mnName_804D6BF8->user_data;
     if (arg1 < 0x18U) {

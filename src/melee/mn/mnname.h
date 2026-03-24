@@ -28,7 +28,7 @@ typedef struct MnName_GObj {
 /* 2379BC */ bool IsNameValid(int slot);
 /* 237A04 */ void CreateNameAtIndex(s32 slot);
 /* 237A68 */ s32 mnName_SortNames(HSD_GObj*);
-/* 237D94 */ s32 mnName_80237D94(s32, u8);
+/* 237D94 */ u8 mnName_80237D94(s32, u8);
 /* 237F78 */ UNK_RET mnName_ConfirmNameDeleteInput(HSD_GObj*);
 /* 23817C */ UNK_RET mnName_MainInput(HSD_GObj*);
 /* 238540 */ void fn_80238540(HSD_GObj* gobj);
