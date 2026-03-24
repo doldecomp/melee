@@ -96,6 +96,8 @@ char* GetNameText(int slot)
     }
     return GetPersistentNameData((u8) slot)->namedata;
 }
+#pragma push
+#pragma dont_inline on
 int GetNameCount(void)
 {
     int i = 0;
@@ -107,6 +109,7 @@ int GetNameCount(void)
     }
     return count;
 }
+#pragma pop
 
 inline int GetNumNameList()
 {
@@ -704,13 +707,11 @@ s32 mnName_GetColumnCount(void)
     return count / 6 + extra;
 }
 
-#pragma push
-#pragma dont_inline on
 void mnName_80238754(HSD_GObj* gobj)
 {
+    s32 extra;
     HSD_JObj* jobj = gobj->hsd_obj;
     s32 count = GetNameCount();
-    s32 extra;
     s32 col_count;
     f32 f_col;
 
@@ -723,32 +724,16 @@ void mnName_80238754(HSD_GObj* gobj)
     f_col = (f32) col_count;
 
     if (f_col > 4.0f) {
-        HSD_JObj* scroll_jobj;
         f32 scroll_pos;
 
         HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
         scroll_pos = (f32) (u32) gobj->gx_link *
                      (14.0f / (f_col - 1.0f));
-        scroll_jobj = gobj->user_data;
-        if (scroll_jobj == NULL) {
-            __assert("jobj.h", 0x3A4, "jobj");
-        }
-        scroll_jobj->translate.x = scroll_pos;
-        if (!(scroll_jobj->flags & JOBJ_MTX_INDEP_SRT) && scroll_jobj) {
-            if (scroll_jobj == NULL) {
-                __assert("jobj.h", 0x234, "jobj");
-            }
-            if ((!(scroll_jobj->flags & 0x800000) &&
-                 (scroll_jobj->flags & 0x40)) == 0)
-            {
-                HSD_JObjSetMtxDirtySub(scroll_jobj);
-            }
-        }
+        HSD_JObjSetTranslateX(gobj->user_data, scroll_pos);
     } else {
         HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
     }
 }
-#pragma pop
 
 HSD_JObj* mnName_802388D4(HSD_GObj* gobj, u8 index)
 {
