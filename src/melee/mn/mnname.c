@@ -1,6 +1,7 @@
 #include "mnname.h"
 
 #include "mnmain.h"
+#include "mnmainrule.h"
 #include "mnnamenew.h"
 
 #include "lb/lblanguage.h"
@@ -1127,7 +1128,61 @@ void mnName_8023A290(void)
 
 /// #mnName_8023A59C
 
-/// #mnName_8023A9B4
+#pragma push
+#pragma dont_inline on
+void mnName_8023A9B4(u8 arg0)
+{
+    s32 i;
+    MnName_GObj* gobj2;
+    HSD_JObj* jobj;
+
+    mn_804A04F0.hovered_selection = 0x18;
+    mn_804A04F0.x10 = 0;
+    for (i = 0; i < 0x78; i++) {
+        mnName_NameDisplayOrder[i] = (u8) i;
+    }
+    HSD_GObj_80390CD4(mnName_8023A59C(3));
+    gobj2 = (MnName_GObj*) ((HSD_GObj*) mnName_804D6BF8)->user_data;
+    if ((u8) mn_804A04F0.x10 == 1) {
+        struct mn_80231634_t* p =
+            (struct mn_80231634_t*) gobj2->gobj.user_data_remove_func;
+        if (p == NULL) {
+            jobj = NULL;
+        } else {
+            jobj = (HSD_JObj*) p->x10;
+        }
+        HSD_JObjRemoveAll(jobj);
+        if (gobj2->text != NULL) {
+            HSD_SisLib_803A5CC4(gobj2->text);
+            gobj2->text = NULL;
+        }
+        HSD_JObjSetFlagsAll((HSD_JObj*) gobj2->gobj.hsd_obj, 0x10U);
+    } else {
+        HSD_JObjRemoveAll(
+            (HSD_JObj*) mn_80231634(
+                (struct mn_80231634_t*) gobj2->gobj
+                    .user_data_remove_func));
+        if (gobj2->text != NULL) {
+            HSD_SisLib_803A5CC4(gobj2->text);
+            gobj2->text = NULL;
+        }
+        mnName_80239A24((HSD_GObj*) gobj2);
+        mnName_80238754((HSD_GObj*) gobj2);
+    }
+    mnName_80238A04((HSD_GObj*) gobj2, 0x18U, 0U);
+    gobj2->gobj.gx_link = arg0;
+    mnName_80238754((HSD_GObj*) gobj2);
+    HSD_JObjRemoveAll(
+        (HSD_JObj*) mn_80231634(
+            (struct mn_80231634_t*) gobj2->gobj
+                .user_data_remove_func));
+    if (gobj2->text != NULL) {
+        HSD_SisLib_803A5CC4(gobj2->text);
+        gobj2->text = NULL;
+    }
+    mnName_80239A24((HSD_GObj*) gobj2);
+}
+#pragma pop
 
 /// #mnName_8023AC40
 
