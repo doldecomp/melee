@@ -172,7 +172,49 @@ bool IsNameUnique(s32 slot)
     return false;
 }
 
-/// #DeleteName
+s32 DeleteName(u8 arg0)
+{
+    struct NameTagData temp;
+    s32 i;
+    u8 pos;
+    s32 j;
+    s32 k;
+    u16* p;
+
+    pos = arg0;
+    i = 0;
+    do {
+        if (IsNameValid((s32) (u8) i) != 0) {
+            p = (u16*) ((u8*) GetPersistentNameData(i) + pos * 2);
+            for (k = pos; k < 0x78; k++) {
+                if (k == 0x77) {
+                    *p = 0;
+                } else {
+                    *p = *(p + 1);
+                }
+                p++;
+            }
+        }
+        i++;
+    } while (i < 0x78);
+
+    while ((s32) pos < 0x78) {
+        u8 pos_u8 = (u8) pos;
+        j = pos + 1;
+        while (j < 0x78) {
+            if (IsNameValid((s32) (u8) pos) == 0) {
+                if (IsNameValid((s32) (u8) j) != 0) {
+                    temp = *GetPersistentNameData((s32) pos_u8);
+                    *GetPersistentNameData((s32) pos_u8) =
+                        *GetPersistentNameData((s32) (u8) j);
+                    *GetPersistentNameData((s32) (u8) j) = temp;
+                }
+            }
+            j++;
+        }
+        pos++;
+    }
+}
 
 bool IsNameValid(int slot)
 {
