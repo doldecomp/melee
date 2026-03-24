@@ -12,7 +12,7 @@ File: src/melee/mn/mnname.c
 - [x] mnName_ConfirmNameDeleteInput
 - [ ] mnName_8023A9B4              
 - [ ] fn_80239574                  
-- [ ] mnName_8023A290              
+- [x] mnName_8023A290              
 - [ ] mnName_SortNames             
 - [ ] mnName_MainInput             
 - [ ] mnName_8023A59C              

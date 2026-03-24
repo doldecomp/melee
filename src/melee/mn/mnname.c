@@ -379,6 +379,157 @@ void mnName_ConfirmNameDeleteInput(HSD_GObj* arg0)
     }
 }
 
+#pragma push
+#pragma dont_inline on
+void mnName_MainInput(HSD_GObj* arg0)
+{
+    MnName_GObj* gobj2 = (MnName_GObj*) mnName_804D6BF8->user_data;
+    u32 buttons = mn_80229624(4U);
+    s32 isFull = 0;
+    mn_804A04F0.buttons = buttons;
+
+    if (buttons & 0x20) {
+        lbAudioAx_80024030(0);
+        mn_804D6BC8.cooldown = 5;
+        if ((u16) mn_804A04F0.hovered_selection < 0x18U) {
+            mn_804A04F0.hovered_selection = 0x1A;
+            mnName_80238A04((HSD_GObj*) gobj2, 0x1AU, 0U);
+            return;
+        }
+        mn_804A04F0.entering_menu = 0;
+        HSD_SisLib_803A5D30();
+        mn_80229894(2, 4U, 3);
+        return;
+    }
+    if (buttons & 0x10) {
+        mn_804D6BC8.cooldown = 5;
+        switch ((s32) mn_804A04F0.hovered_selection) {
+        case 24:
+            if (GetNameCount() < 0x78) {
+            } else {
+                isFull = 1;
+            }
+            if (isFull == 0) {
+                s32 isValid;
+                u8 count = 0;
+                u8 i = 0;
+                lbAudioAx_80024030(1);
+                mnName_80239878(1U, (HSD_GObj*) gobj2);
+                mnName_80238A04((HSD_GObj*) gobj2, 0x18U, 1U);
+                HSD_SisLib_803A5CC4(gobj2->text2);
+                do {
+                    if ((s8) mnName_StringTerminator ==
+                        (s8) GetPersistentNameData((s32) i)
+                                 ->namedata[0])
+                    {
+                        isValid = 0;
+                    } else {
+                        isValid = 1;
+                    }
+                    if (isValid != 0) {
+                        count += 1;
+                    }
+                    i += 1;
+                } while ((s32) i < 0x78);
+                mnNameNew_EnterFromMnName((void*)(s32) count);
+                return;
+            }
+            lbAudioAx_80024030(3);
+            return;
+        case 25:
+            if (mnName_GetPageCount() != 0) {
+                lbAudioAx_80024030(1);
+                if ((u8) gobj2->gobj.p_priority == 0) {
+                    isFull = 1;
+                }
+                gobj2->gobj.p_priority = (u8) isFull;
+                mnName_SortNames(mnName_804D6BF8);
+                gobj2->gobj.gx_link = 0U;
+                mnName_802385A0((HSD_GObj*) gobj2);
+                return;
+            }
+            lbAudioAx_80024030(3);
+            return;
+        case 26:
+            if (mnName_GetPageCount() != 0) {
+                lbAudioAx_80024030(1);
+                mn_804A04F0.hovered_selection = 0;
+                mnName_80238A04((HSD_GObj*) gobj2, 0x1AU, 1U);
+                return;
+            }
+            lbAudioAx_80024030(3);
+            return;
+        default:
+            if ((u16) mn_804A04F0.hovered_selection < 0x18U) {
+                s32 isValid;
+                u8 sel = (u8) mn_804A04F0.hovered_selection;
+                s32 col = gobj2->gobj.gx_link +
+                          (mn_804A04F0.hovered_selection / 6);
+                s32 colCount = mnName_GetColumnCount();
+                u8 nameIdx;
+                if (colCount > 4 && col >= colCount) {
+                    col -= colCount;
+                }
+                nameIdx = mnName_NameDisplayOrder[col * 6 + (sel % 6)];
+                if ((s8) mnName_StringTerminator ==
+                    (s8) GetPersistentNameData((s32) nameIdx)
+                             ->namedata[0])
+                {
+                    isValid = 0;
+                } else {
+                    isValid = 1;
+                }
+                if (isValid != 0) {
+                    lbAudioAx_80024030(1);
+                    mn_804A04F0.x10 = 2;
+                    mn_804A04F0.confirmed_selection = 0;
+                    mnName_8023A290();
+                    return;
+                }
+                lbAudioAx_80024030(3);
+                return;
+            }
+            break;
+        }
+    } else {
+        u32 isL = buttons & 0x40;
+        if (isL != 0 || (buttons & 0x80)) {
+            if (mnName_GetColumnCount() > 4) {
+                lbAudioAx_80024030(2);
+                if (isL != 0) {
+                    u8 scroll = gobj2->gobj.gx_link;
+                    if (scroll != 0) {
+                        gobj2->gobj.gx_link = (u8) (scroll - 1);
+                    } else {
+                        gobj2->gobj.gx_link =
+                            (u8) (mnName_GetColumnCount() - 1);
+                    }
+                } else {
+                    u8 scroll = gobj2->gobj.gx_link;
+                    if ((s32) (mnName_GetColumnCount() - 1) >
+                        (s32) scroll)
+                    {
+                        gobj2->gobj.gx_link = (u8) (scroll + 1);
+                    } else {
+                        gobj2->gobj.gx_link = 0U;
+                    }
+                }
+                mnName_802385A0((HSD_GObj*) gobj2);
+            }
+        } else if (buttons & 0xF) {
+            u8 prev = (u8) mn_804A04F0.hovered_selection;
+            mn_804A04F0.hovered_selection =
+                (u16) mnName_80237D94((s32) buttons, prev);
+            if ((s32) prev !=
+                (s32) mn_804A04F0.hovered_selection)
+            {
+                lbAudioAx_80024030(2);
+            }
+        }
+    }
+}
+#pragma pop
+
 void fn_80238540(HSD_GObj* gobj)
 {
     switch ((s32) mn_804A04F0.x10) {

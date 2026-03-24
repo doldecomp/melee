@@ -14,6 +14,7 @@ typedef struct MnName_GObj {
     /* +00 */ HSD_GObj gobj;
     /* +38 */ void* x38;
     /* +3C */ HSD_Text* text;
+    /* +40 */ HSD_Text* text2;
 } MnName_GObj;
 
 /* 23749C */ char* mnName_8023749C(int slot);
