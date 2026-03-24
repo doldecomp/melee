@@ -861,7 +861,7 @@ void mnName_80238AE0(HSD_GObj* gobj, u8 index, u8 arg2)
         }
         color = *colorptr;
         HSD_SisLib_803A74F0(((MnName_GObj*) gobj)->text, (s32) index,
-                            (u8*) &color);
+                            (0, (u8*) (&color)));
         return;
     }
 
