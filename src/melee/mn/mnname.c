@@ -14,6 +14,7 @@
 #include <baselib/gobjuserdata.h>
 #include <baselib/jobj.h>
 #include <baselib/memory.h>
+#include <dolphin/os.h>
 #include <melee/gm/gmmain_lib.h>
 
 extern AnimLoopSettings mnName_803ED538[];
@@ -28,7 +29,9 @@ extern f32 mnName_804D4BD0[2];
 extern f32 mnName_804D4BD8[2];
 extern s32 mnName_804D4BE0;
 extern s32 mnName_804D4BE4;
-extern s32 mnName_804D4BE8[];
+extern u8 mnName_804D4BE8[3];
+extern char mnName_804D4BF4[7];
+extern char mnName_804D4BFC[5];
 
 extern char* mnNameNew_803EE720[];
 extern char* mnNameNew_803EE724[];
@@ -1076,6 +1079,7 @@ typedef struct {
 } MnNameArchive;
 
 extern MnNameArchive mnName_804A06D0;
+extern MnNameArchive mnName_804A06E0;
 
 void mnName_8023A290(void)
 {
@@ -1126,7 +1130,141 @@ void mnName_8023A290(void)
     }
 }
 
-/// #mnName_8023A59C
+/// @todo Strings at base offsets are in rodata near mnName_803ED538
+#pragma push
+#pragma dont_inline on
+HSD_GObj* mnName_8023A59C(u8 arg0)
+{
+    char* base = (char*) &mnName_803ED538;
+    HSD_GObj* gobj;
+    HSD_JObj* root_jobj;
+    MnName_GObj* data;
+    MnNameArchive* archive = &mnName_804A06E0;
+    s32 i;
+    HSD_JObj* jobj7;
+    HSD_JObj* jobj4;
+    HSD_JObj* jobj5;
+    HSD_JObj* scrollbar_container;
+    HSD_JObj* slider;
+    s32 count;
+    s32 extra;
+    s32 rows;
+    f32 pos;
+    HSD_Text* txt;
+
+    gobj = GObj_Create(6U, 7U, 0x80U);
+    mnName_804D6BF8 = gobj;
+    root_jobj = HSD_JObjLoadJoint(archive->joint);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, root_jobj);
+    GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4U, 0x80U);
+    HSD_GObj_SetupProc(gobj, fn_80239574, 0U);
+    HSD_JObjAddAnimAll(root_jobj, archive->anim_joint,
+                       archive->matanim_joint,
+                       archive->shapeanim_joint);
+    HSD_JObjReqAnimAll(root_jobj, 0.0f);
+    HSD_JObjAnimAll(root_jobj);
+    data = (MnName_GObj*) HSD_MemAlloc(0x44);
+    if (data == NULL) {
+        OSReport(base + 0x118);
+        __assert(base + 0x10C, 0x67CU, base + 0x130);
+    }
+    GObj_InitUserData(gobj, 0U, HSD_Free, data);
+    *(u8*) &data->gobj.classifier =
+        (u8) mn_804A04F0.cur_menu;
+    *((u8*) &data->gobj.classifier + 1) =
+        (u8) mn_804A04F0.hovered_selection;
+    data->gobj.gx_link = 0;
+    data->gobj.p_priority = 0;
+    data->gobj.p_link = arg0;
+    data->text = NULL;
+    data->text2 = NULL;
+    for (i = 0; i < 0xD; i++) {
+        lb_80011E24(root_jobj,
+                    (HSD_JObj**) ((u8*) data + (i << 2) + 8), i, -1);
+    }
+    if ((u8) mn_804A04F0.x10 == 1) {
+        struct mn_80231634_t* p =
+            (struct mn_80231634_t*) data->gobj.user_data_remove_func;
+        HSD_JObj* j;
+        if (p == NULL) {
+            j = NULL;
+        } else {
+            j = (HSD_JObj*) p->x10;
+        }
+        HSD_JObjRemoveAll(j);
+        if (data->text != NULL) {
+            HSD_SisLib_803A5CC4(data->text);
+            data->text = NULL;
+        }
+        HSD_JObjSetFlagsAll((HSD_JObj*) data->gobj.hsd_obj, 0x10U);
+    } else {
+        HSD_JObjRemoveAll(
+            (HSD_JObj*) mn_80231634(
+                (struct mn_80231634_t*) data->gobj
+                    .user_data_remove_func));
+        if (data->text != NULL) {
+            HSD_SisLib_803A5CC4(data->text);
+            data->text = NULL;
+        }
+        mnName_80239A24((HSD_GObj*) data);
+        mnName_80238754((HSD_GObj*) data);
+    }
+    jobj7 = ((HSD_JObj**) data)[9];
+    HSD_JObjReqAnimAll(jobj7,
+                       mnName_804D4BD0[mn_804A04F0.hovered_selection == 0x18]);
+    HSD_JObjAnimAll(jobj7);
+    jobj4 = (HSD_JObj*) data->gobj.proc;
+    HSD_JObjReqAnimAll(jobj4,
+                       mnName_804D4BD8[mn_804A04F0.hovered_selection == 0x19]);
+    HSD_JObjAnimAll(jobj4);
+    jobj5 = (HSD_JObj*) data->gobj.render_cb;
+    HSD_JObjReqAnimAll(jobj5,
+                       mnName_804D4BD8[mn_804A04F0.hovered_selection == 0x1A]);
+    HSD_JObjAnimAll(jobj5);
+    scrollbar_container = (HSD_JObj*) data->gobj.hsd_obj;
+    count = GetNameCount();
+    if ((count % 6) != 0) {
+        extra = 1;
+    } else {
+        extra = 0;
+    }
+    rows = (count / 6) + extra;
+    if ((f32) rows > 4.0f) {
+        HSD_JObjClearFlagsAll(scrollbar_container, JOBJ_HIDDEN);
+        slider = (HSD_JObj*) data->gobj.user_data;
+        pos = (f32) data->gobj.gx_link * (14.0f / ((f32) rows - 1.0f));
+        if (slider == NULL) {
+            __assert(mnName_804D4BF4, 0x3A4, mnName_804D4BFC);
+        }
+        slider->translate.x = pos;
+        if (!(slider->flags & JOBJ_MTX_INDEP_SRT) && slider) {
+            if (slider == NULL) {
+                __assert(mnName_804D4BF4, 0x234, mnName_804D4BFC);
+            }
+            if ((!(slider->flags & 0x800000) &&
+                 (slider->flags & 0x40)) == 0)
+            {
+                HSD_JObjSetMtxDirtySub(slider);
+            }
+        }
+    } else {
+        HSD_JObjSetFlagsAll(scrollbar_container, JOBJ_HIDDEN);
+    }
+    {
+        s32 sel = mn_804A04F0.hovered_selection - 0x18;
+        if (data->text2 != NULL) {
+            HSD_SisLib_803A5CC4(data->text2);
+        }
+        txt = HSD_SisLib_803A5ACC(0, 0, -9.5f, 9.1f, 17.0f, 364.68332f,
+                                  38.38772f);
+        data->text2 = txt;
+        txt->font_size.x = 0.0521f;
+        txt->font_size.y = 0.0521f;
+        HSD_SisLib_803A6368(txt, mnName_804D4BE8[sel]);
+    }
+    return gobj;
+}
+#pragma pop
 
 #pragma push
 #pragma dont_inline on
