@@ -14,6 +14,8 @@ extern AnimLoopSettings mnName_803ED538[];
 extern char mnName_StringTerminator;
 extern u8 mnName_804D4BF0;
 
+static u8 mnName_NameDisplayOrder[0x78];
+
 extern f32 mnName_804D4BD0[2];
 extern f32 mnName_804D4BD8[2];
 extern s32 mnName_804D4BE0;
@@ -306,9 +308,69 @@ s32 mnName_80237D94(s32 arg0, u8 arg1)
     return arg1;
 }
 
-/// #mnName_ConfirmNameDeleteInput
+void mnName_ConfirmNameDeleteInput(HSD_GObj* arg0)
+{
+    HSD_GObj* gobj2 = (HSD_GObj*) mnName_804D6BF8->user_data;
+    u32 buttons = mn_80229624(4U);
+    mn_804A04F0.buttons = buttons;
 
-/// #mnName_MainInput
+    if (buttons & 0x10) {
+        if ((u8) mn_804A04F0.confirmed_selection == 0) {
+            lbAudioAx_80024030(0);
+            mn_804D6BC8.cooldown = 5;
+            mn_804A04F0.x10 = 0;
+            return;
+        }
+        {
+            u8 sel = (u8) mn_804A04F0.hovered_selection;
+            s32 col = gobj2->gx_link +
+                      (mn_804A04F0.hovered_selection / 6);
+            s32 colCount = mnName_GetColumnCount();
+            u8 nameIdx;
+            if (colCount > 4 && col >= colCount) {
+                col -= colCount;
+            }
+            nameIdx = mnName_NameDisplayOrder[col * 6 + (sel % 6)];
+            lbAudioAx_80024030(1);
+            {
+                u8 term = mnName_StringTerminator;
+                mn_804D6BC8.cooldown = 5;
+                GetPersistentNameData((s32) nameIdx)->namedata[0] =
+                    term;
+            }
+            GetPersistentNameData((s32) nameIdx)->x1A1 = 1;
+            InitializePersistentNameData((s32) nameIdx);
+            if ((s32) gobj2->gx_link >
+                (s32) (mnName_GetColumnCount() - 1))
+            {
+                gobj2->gx_link = 0;
+            }
+            DeleteName(nameIdx);
+            mnName_SortNames(mnName_804D6BF8);
+            if (mnName_GetColumnCount() <= 4) {
+                gobj2->gx_link = 0;
+            }
+            mnName_802385A0(gobj2);
+            gmMainLib_8015DBF4(nameIdx);
+            mn_804A04F0.x10 = 0;
+        }
+        return;
+    }
+    if (buttons & 0x20) {
+        lbAudioAx_80024030(0);
+        mn_804D6BC8.cooldown = 5;
+        mn_804A04F0.x10 = 0;
+        return;
+    }
+    if ((buttons & 8) || (buttons & 4)) {
+        lbAudioAx_80024030(2);
+        if ((u8) mn_804A04F0.confirmed_selection == 0) {
+            mn_804A04F0.confirmed_selection = 1;
+            return;
+        }
+        mn_804A04F0.confirmed_selection = 0;
+    }
+}
 
 void fn_80238540(HSD_GObj* gobj)
 {
