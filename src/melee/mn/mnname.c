@@ -4,6 +4,7 @@
 #include "mnmainrule.h"
 #include "mnnamenew.h"
 
+#include "lb/lbarchive.h"
 #include "lb/lblanguage.h"
 #include "lb/lb_00B0.h"
 
@@ -1749,7 +1750,150 @@ void mnName_8023A9B4(u8 arg0)
 }
 #pragma pop
 
-/// #mnName_8023AC40
+extern char** AutoNamesList;
+extern char** NotAllowedNamesList;
+extern HSD_Text* mnName_804D6BFC;
+
+s32 mnName_8023AC40(void)
+{
+    HSD_Archive* archive = mn_804D6BB8;
+    u8* ptr = mnName_NameDisplayOrder;
+    s32 ctr;
+    s32 val;
+    HSD_GObjProc* proc;
+
+    lbArchive_LoadSections(
+        archive,
+        (void**) ((char*) mnName_NameDisplayOrder + 0x98),
+        (char*) mnName_803ED538 + 0x13C,
+        (void**) ((char*) mnName_NameDisplayOrder + 0x9C),
+        (char*) mnName_803ED538 + 0x158,
+        (void**) ((char*) mnName_NameDisplayOrder + 0xA0),
+        (char*) mnName_803ED538 + 0x178,
+        (void**) ((char*) mnName_NameDisplayOrder + 0xA4),
+        (char*) mnName_803ED538 + 0x19C,
+        (void**) ((char*) mnName_NameDisplayOrder + 0x78),
+        (char*) mnName_803ED538 + 0x1C0,
+        (void**) ((char*) mnName_NameDisplayOrder + 0x7C),
+        (char*) mnName_803ED538 + 0x1DC,
+        (void**) ((char*) mnName_NameDisplayOrder + 0x80),
+        (char*) mnName_803ED538 + 0x1FC,
+        (void**) ((char*) mnName_NameDisplayOrder + 0x84),
+        (char*) mnName_803ED538 + 0x220,
+        (void**) ((char*) mnName_NameDisplayOrder + 0x88),
+        (char*) mnName_803ED538 + 0x244,
+        (void**) ((char*) mnName_NameDisplayOrder + 0x8C),
+        (char*) mnName_803ED538 + 0x25C,
+        (void**) ((char*) mnName_NameDisplayOrder + 0x90),
+        (char*) mnName_803ED538 + 0x278,
+        (void**) ((char*) mnName_NameDisplayOrder + 0x94),
+        (char*) mnName_803ED538 + 0x298,
+        (void**) ((char*) mnName_NameDisplayOrder + 0xA8),
+        (char*) mnName_803ED538 + 0x2BC,
+        (void**) ((char*) mnName_NameDisplayOrder + 0xAC),
+        (char*) mnName_803ED538 + 0x2D8,
+        (void**) ((char*) mnName_NameDisplayOrder + 0xB0),
+        (char*) mnName_803ED538 + 0x2F8,
+        (void**) ((char*) mnName_NameDisplayOrder + 0xB4),
+        (char*) mnName_803ED538 + 0x31C,
+        (void**) ((char*) mnName_NameDisplayOrder + 0xB8),
+        (char*) mnName_803ED538 + 0x340,
+        (void**) ((char*) mnName_NameDisplayOrder + 0xBC),
+        (char*) mnName_803ED538 + 0x35C,
+        (void**) ((char*) mnName_NameDisplayOrder + 0xC0),
+        (char*) mnName_803ED538 + 0x37C,
+        (void**) ((char*) mnName_NameDisplayOrder + 0xC4),
+        (char*) mnName_803ED538 + 0x3A0,
+        (void**) ((char*) mnName_NameDisplayOrder + 0xC8),
+        (char*) mnName_803ED538 + 0x3C4,
+        (void**) ((char*) mnName_NameDisplayOrder + 0xCC),
+        (char*) mnName_803ED538 + 0x3E0,
+        (void**) ((char*) mnName_NameDisplayOrder + 0xD0),
+        (char*) mnName_803ED538 + 0x400,
+        (void**) ((char*) mnName_NameDisplayOrder + 0xD4),
+        (char*) mnName_803ED538 + 0x424,
+        (void**) ((char*) mnName_NameDisplayOrder + 0xD8),
+        (char*) mnName_803ED538 + 0x448,
+        (void**) ((char*) mnName_NameDisplayOrder + 0xDC),
+        (char*) mnName_803ED538 + 0x464,
+        (void**) ((char*) mnName_NameDisplayOrder + 0xE0),
+        (char*) mnName_803ED538 + 0x484,
+        (void**) ((char*) mnName_NameDisplayOrder + 0xE4),
+        (char*) mnName_803ED538 + 0x4A8,
+        0);
+
+    if (lbLang_IsSavedLanguageUS()) {
+        lbArchive_LoadSections(archive, (void**) &AutoNamesList,
+            (char*) mnName_803ED538 + 0x4D0,
+            (void**) &NotAllowedNamesList,
+            (char*) mnName_803ED538 + 0x4E4,
+            0);
+    } else {
+        lbArchive_LoadSections(archive, (void**) &AutoNamesList,
+            (char*) mnName_803ED538 + 0x4F8,
+            (void**) &NotAllowedNamesList,
+            (char*) mnName_803ED538 + 0x508,
+            0);
+    }
+
+    mn_804A04F0.prev_menu = mn_804A04F0.cur_menu;
+    mn_804A04F0.cur_menu = 0x12;
+    val = 0;
+    mn_804A04F0.hovered_selection = 0x18;
+    mnName_804D6BFC = NULL;
+    ctr = 3;
+    do {
+        ptr[0] = val;
+        ptr[1] = val + 1;
+        ptr[2] = val + 2;
+        ptr[3] = val + 3;
+        ptr[4] = val + 4;
+        ptr[5] = val + 5;
+        ptr[6] = val + 6;
+        ptr[7] = val + 7;
+        ptr[8] = val + 8;
+        ptr[9] = val + 9;
+        ptr[10] = val + 10;
+        ptr[11] = val + 11;
+        ptr[12] = val + 12;
+        ptr[13] = val + 13;
+        ptr[14] = val + 14;
+        ptr[15] = val + 15;
+        ptr[16] = val + 16;
+        ptr[17] = val + 17;
+        ptr[18] = val + 18;
+        ptr[19] = val + 19;
+        ptr[20] = val + 20;
+        ptr[21] = val + 21;
+        ptr[22] = val + 22;
+        ptr[23] = val + 23;
+        ptr[24] = val + 24;
+        ptr[25] = val + 25;
+        ptr[26] = val + 26;
+        ptr[27] = val + 27;
+        ptr[28] = val + 28;
+        ptr[29] = val + 29;
+        ptr[30] = val + 30;
+        ptr[31] = val + 31;
+        ptr[32] = val + 32;
+        ptr[33] = val + 33;
+        ptr[34] = val + 34;
+        ptr[35] = val + 35;
+        ptr[36] = val + 36;
+        ptr[37] = val + 37;
+        ptr[38] = val + 38;
+        ptr[39] = val + 39;
+        val += 40;
+        ptr += 40;
+        ctr--;
+    } while (ctr != 0);
+
+    mn_804A04F0.x10 = 0;
+    HSD_GObj_80390CD4(mnName_8023A59C(1U));
+    proc = HSD_GObj_SetupProc(GObj_Create(0U, 1U, 0x80U), fn_80238540, 0U);
+    proc->flags_3 = HSD_GObj_804D783C;
+    return (s32) proc;
+}
 
 extern char** NotAllowedNamesList;
 extern char mnNameNew_NullCharacter;

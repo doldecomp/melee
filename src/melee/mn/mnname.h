@@ -52,7 +52,7 @@ typedef struct MnName_GObj {
 /* 23A290 */ void mnName_8023A290(void);
 /* 23A59C */ HSD_GObj* mnName_8023A59C(u8);
 /* 23A9B4 */ void mnName_8023A9B4(u8);
-/* 23AC40 */ UNK_RET mnName_8023AC40(UNK_PARAMS);
+/* 23AC40 */ s32 mnName_8023AC40(void);
 /* 23B084 */ bool IsNameNotAllowed(s32 name_idx);
 
 #endif
