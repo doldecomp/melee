@@ -485,6 +485,60 @@ void mnName_80238AE0(HSD_GObj* gobj, u8 index, u8 arg2)
 /// #fn_80239574
 
 /// #mnName_80239878
+#pragma push
+#pragma dont_inline on
+void mnName_80239878(u8 arg0, HSD_GObj* gobj)
+{
+    HSD_JObj* jobj;
+    s32 count;
+    s32 extra;
+    s32 col_count;
+    f32 f_col;
+
+    if (arg0 == 1) {
+        mnName_80239FFC(gobj);
+        HSD_JObjSetFlagsAll(gobj->hsd_obj, JOBJ_HIDDEN);
+        return;
+    }
+
+    mnName_8023A058(gobj);
+    jobj = gobj->hsd_obj;
+    count = GetNameCount();
+    if (count % 6 != 0) {
+        extra = 1;
+    } else {
+        extra = 0;
+    }
+    col_count = count / 6 + extra;
+    f_col = (f32) col_count;
+
+    if (f_col > 4.0f) {
+        HSD_JObj* scroll_jobj;
+        f32 scroll_pos;
+
+        HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
+        scroll_jobj = gobj->user_data;
+        scroll_pos = (f32) gobj->gx_link *
+                     (14.0f / (f_col - 1.0f));
+        if (scroll_jobj == NULL) {
+            __assert("jobj.h", 0x3A4, "jobj");
+        }
+        scroll_jobj->translate.x = scroll_pos;
+        if (!(scroll_jobj->flags & JOBJ_MTX_INDEP_SRT) && scroll_jobj) {
+            if (scroll_jobj == NULL) {
+                __assert("jobj.h", 0x234, "jobj");
+            }
+            if ((!(scroll_jobj->flags & 0x800000) &&
+                 (scroll_jobj->flags & 0x40)) == 0)
+            {
+                HSD_JObjSetMtxDirtySub(scroll_jobj);
+            }
+        }
+    } else {
+        HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
+    }
+}
+#pragma pop
 
 /// #mnName_80239A24
 

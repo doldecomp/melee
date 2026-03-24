@@ -4,8 +4,8 @@ File: src/melee/mn/mnname.c
 - [x] mnName_80238A04              
 - [x] CompareNameStrings           
 - [x] mnName_80238AE0              
-- [ ] mnName_80238754              
-- [ ] DeleteName                   
+- [x] mnName_80238754              
+- [x] DeleteName                   
 - [ ] mnName_80239878              
 - [ ] fn_8023A0BC                  
 - [ ] mnName_80237D94              

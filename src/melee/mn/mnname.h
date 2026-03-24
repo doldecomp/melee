@@ -41,7 +41,7 @@ typedef struct MnName_GObj {
 /* 238AE0 */ void mnName_80238AE0(HSD_GObj* gobj, u8 index, u8 arg2);
 /* 238C34 */ UNK_RET mnName_80238C34(UNK_PARAMS);
 /* 239574 */ UNK_RET fn_80239574(UNK_PARAMS);
-/* 239878 */ UNK_RET mnName_80239878(UNK_PARAMS);
+/* 239878 */ void mnName_80239878(u8, HSD_GObj*);
 /* 239A24 */ void mnName_80239A24(HSD_GObj* gobj);
 /* 239EBC */ void mnName_80239EBC(HSD_JObj* jobj, f32 y);
 /* 239F5C */ void mnName_80239F5C(HSD_JObj* jobj, f32 x);
