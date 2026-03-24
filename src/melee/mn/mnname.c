@@ -128,68 +128,44 @@ bool IsNameListFull(void)
     return true;
 }
 
-// Ugly match. False match maybe? Seems like regswaps, but can't manage to get
-// it perfect.
+inline bool checkStringRest(char* ptr)
+{
+    while (mnName_StringTerminator != *ptr) {
+        if (mnName_804D4BF0 != *ptr || (&mnName_804D4BF0)[1] != ptr[1]) {
+            return false;
+        }
+        ptr += 2;
+    }
+    return true;
+}
+
 s32 CompareNameStrings(char* str1, char* str2)
 {
     char* p2;
     char* p1;
-    char* b40Ptr;
-    char* stringTermPtr;
-    char stringTermTemp;
     s32 i;
-    stringTermPtr = &mnName_StringTerminator;
     for (i = 0, p1 = str1, p2 = str2;; i++, p1++, p2++) {
-        char* cur = &str1[i];
+        char* ch1 = &str1[i];
 
-        if (*stringTermPtr == *cur) {
-            char* rem = &str2[i];
-            s32 result;
-            stringTermTemp = mnName_StringTerminator;
-            while (stringTermTemp != *rem) {
-                b40Ptr = &mnName_804D4BF0;
-                if (mnName_804D4BF0 != *rem || b40Ptr[1] != rem[1]) {
-                    result = 0;
-                    goto compare;
-                }
-                rem += 2;
-            }
-            result = 1;
-        compare:
-            if (result != ((mnName_804D4BF0 != (*cur)) * (cur[1] * 0))) {
+        if (mnName_StringTerminator == *ch1) {
+            if (checkStringRest(&str2[i])) {
                 return 0;
             }
             return 2;
         }
 
-        {
-            char ch2 = *p2;
-            if (*stringTermPtr == ch2) {
-                s32 result;
-                while (*stringTermPtr != *cur) {
-                    b40Ptr = &mnName_804D4BF0;
-                    if (mnName_804D4BF0 != *cur || (b40Ptr)[1] != cur[1]) {
-                        result = 0;
-                        goto compare2;
-                    }
-                    cur += 2;
-                }
-                result = 1;
-            compare2:;
-                if (result != 0) {
-                    return 0;
-                }
-                return 1;
+        if (mnName_StringTerminator == str2[i]) {
+            if (checkStringRest(&str1[i])) {
+                return 0;
             }
+            return 1;
+        }
 
-            {
-                if ((u8) *p1 > (u8) ch2) {
-                    return 1;
-                }
-                if ((u8) *p1 < (u8) ch2) {
-                    return 2;
-                }
-            }
+        if ((u8) *p1 > (u8) str2[i]) {
+            return 1;
+        }
+        if ((u8) *p1 < (u8) str2[i]) {
+            return 2;
         }
     }
 }
