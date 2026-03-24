@@ -833,9 +833,9 @@ f32 mnName_80238964(u8 index, u8 target, u8 flag)
 void mnName_80238A04(HSD_GObj* gobj, u8 target, u8 flag)
 {
     AnimLoopSettings* base = mnName_803ED538;
-    HSD_JObj* jobj;
     HSD_JObj* jobj2;
     int i;
+    HSD_JObj* jobj;
 
     for (i = 0x18; i < 0x1B; i++) {
         jobj = mnName_802388D4(gobj, i);
