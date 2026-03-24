@@ -48,7 +48,7 @@ typedef struct MnName_GObj {
 /* 239FFC */ void mnName_80239FFC(HSD_GObj* gobj);
 /* 23A058 */ void mnName_8023A058(HSD_GObj* gobj);
 /* 23A0BC */ void fn_8023A0BC(HSD_GObj*);
-/* 23A290 */ UNK_RET mnName_8023A290(UNK_PARAMS);
+/* 23A290 */ void mnName_8023A290(void);
 /* 23A59C */ UNK_RET mnName_8023A59C(UNK_PARAMS);
 /* 23A9B4 */ UNK_RET mnName_8023A9B4(UNK_PARAMS);
 /* 23AC40 */ UNK_RET mnName_8023AC40(UNK_PARAMS);

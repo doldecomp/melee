@@ -6,10 +6,17 @@
 #include "lb/lblanguage.h"
 
 #include <baselib/gobj.h>
+#include <baselib/gobjgxlink.h>
+#include <baselib/gobjobject.h>
+#include <baselib/gobjplink.h>
+#include <baselib/gobjproc.h>
+#include <baselib/gobjuserdata.h>
 #include <baselib/jobj.h>
+#include <baselib/memory.h>
 #include <melee/gm/gmmain_lib.h>
 
 extern AnimLoopSettings mnName_803ED538[];
+extern f32 mnName_803ED600[];
 
 extern char mnName_StringTerminator;
 extern u8 mnName_804D4BF0;
@@ -790,7 +797,63 @@ void fn_8023A0BC(HSD_GObj* gobj)
     }
 }
 
-/// #mnName_8023A290
+typedef struct {
+    HSD_Joint* joint;
+    HSD_AnimJoint* anim_joint;
+    HSD_MatAnimJoint* matanim_joint;
+    HSD_ShapeAnimJoint* shapeanim_joint;
+} MnNameArchive;
+
+extern MnNameArchive mnName_804A06D0;
+
+void mnName_8023A290(void)
+{
+    HSD_JObj* sp28;
+    HSD_JObj* sp24;
+    HSD_JObj* sp20;
+    HSD_JObj* sp18;
+    HSD_JObj* sp14;
+    HSD_GObj* gobj;
+    HSD_JObj* jobj;
+    u8 sel;
+
+    gobj = GObj_Create(6U, 7U, 0x80U);
+    jobj = HSD_JObjLoadJoint(mnName_804A06D0.joint);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
+    GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 6U, 0x80U);
+    HSD_GObj_SetupProc(gobj, fn_8023A0BC, 0U);
+    HSD_JObjAddAnimAll(jobj, mnName_804A06D0.anim_joint,
+                       mnName_804A06D0.matanim_joint,
+                       mnName_804A06D0.shapeanim_joint);
+    HSD_JObjReqAnimAll(jobj, mnName_803ED600[0]);
+    HSD_JObjAnimAll(jobj);
+    lb_80011E24(jobj, &sp28, 0xA, -1);
+    HSD_JObjSetFlagsAll(sp28, 0x10U);
+    lb_80011E24(jobj, &sp28, 0xB, -1);
+    HSD_JObjSetFlagsAll(sp28, 0x10U);
+    sel = mn_804A04F0.confirmed_selection;
+    lb_80011E24(jobj, &sp14, 6, -1);
+    lb_80011E24(jobj, &sp18, 7, -1);
+    if ((s32) sel != 0) {
+        HSD_JObjReqAnimAll(sp14, 1.0f);
+        HSD_JObjReqAnimAll(sp18, 0.0f);
+    } else {
+        HSD_JObjReqAnimAll(sp14, 0.0f);
+        HSD_JObjReqAnimAll(sp18, 1.0f);
+    }
+    HSD_JObjAnimAll(sp14);
+    HSD_JObjAnimAll(sp18);
+    if (lbLang_IsSavedLanguageUS()) {
+        lb_80011E24(jobj, &sp24, 6, -1);
+        lb_80011E24(jobj, &sp20, 7, -1);
+        {
+            f32 x1 = HSD_JObjGetTranslationX(sp24);
+            f32 x2 = HSD_JObjGetTranslationX(sp20);
+            HSD_JObjSetTranslateX(sp24, x2);
+            HSD_JObjSetTranslateX(sp20, x1);
+        }
+    }
+}
 
 /// #mnName_8023A59C
 
