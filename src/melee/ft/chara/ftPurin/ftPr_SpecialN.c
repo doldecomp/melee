@@ -36,7 +36,19 @@
 #include <melee/ef/efsync.h>
 #include <melee/mp/mplib.h>
 
-#define NEGABS(x) ((x) < 0.0f ? -(x) : (x))
+#define SIGNF(x) ((x) > 0.0f ? 1.0f : -1.0f)
+
+static inline void ftPr_JObjSetRotationY(HSD_JObj* jobj, f32 y, f32* base)
+{
+    ((jobj) ? ((void) 0) : __assert("jobj.h", 660, "jobj"));
+    ((!(jobj->flags & JOBJ_USE_QUATERNION))
+         ? ((void) 0)
+         : __assert("jobj.h", 661, (char*) &base[8]));
+    jobj->rotate.y = y;
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
+        HSD_JObjSetMtxDirty(jobj);
+    }
+}
 
 void ftPr_SpecialS_8013D658(HSD_GObj* gobj)
 {
@@ -258,8 +270,9 @@ static inline void scaleAnimStep(HSD_GObj* gobj, Vec3* scale)
 
 static inline void hitCapsuleToggle(HSD_GObj* gobj)
 {
+    ftPurinAttributes* da;
     Fighter* fp = GET_FIGHTER(gobj);
-    ftPurinAttributes* da = fp->dat_attrs;
+    da = fp->dat_attrs;
     fp->mv.pr.specialn.xC += 1;
     if (fp->mv.pr.specialn.xC >= da->x9C &&
         fp->x914[0].state != HitCapsule_Disabled)
@@ -451,12 +464,12 @@ void ftPr_SpecialNTurn_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftPurinAttributes* da = fp->dat_attrs;
-    u8 _[8];
+    f32 angle;
     Vec3 scale;
+    PAD_STACK(8);
     ftPr_SpecialS_8013DD54(gobj, true);
     scaleAnimStep(gobj, &scale);
-    fp->mv.pr.specialn.x14 +=
-        (f32) (0.2 * da->x6C * -fp->mv.pr.specialn.x34.x);
+    fp->mv.pr.specialn.x14 += 0.2 * da->x6C * -fp->mv.pr.specialn.x34.x;
     normalizeAndSetRollAngle(gobj);
     fp->mv.pr.specialn.x0 -= 1;
     if (fp->mv.pr.specialn.x0 <= 0) {
@@ -466,11 +479,9 @@ void ftPr_SpecialNTurn_Anim(HSD_GObj* gobj)
         return;
     }
     if ((fp->mv.pr.specialn.x24 % da->x70) == 0) {
-        f32 angle = atan2f(-fp->coll_data.floor.normal.x,
-                           fp->coll_data.floor.normal.y);
-        scale.z = angle;
-        efSync_Spawn(0x3FF, gobj, &fp->cur_pos, &fp->facing_dir, &scale,
-                     angle);
+        angle = atan2f(-fp->coll_data.floor.normal.x,
+                       fp->coll_data.floor.normal.y);
+        efSync_Spawn(0x3FF, gobj, &fp->cur_pos, &fp->facing_dir, &angle);
     }
     fp->mv.pr.specialn.x24 += 1;
     ftPartSetRotY(fp, FtPart_TopN, M_PI_2);
@@ -551,7 +562,75 @@ void ftPr_SpecialAirNChargeFull_Anim(HSD_GObj* gobj)
     ftPartSetRotY(fp, FtPart_TopN, M_PI_2);
 }
 
-/// #ftPr_SpecialAirNChargeRelease_Anim
+static inline void ftPr_SpecialAirNChargeRelease_Anim_inline(HSD_GObj* gobj,
+                                                             Vec3* scale,
+                                                             f32* scale_base)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+    s32 frame = fp->mv.pr.specialn.x8;
+    if (frame >= 0 && frame < 4) {
+        scale->x = fp->fv.pr.x2230.x;
+        scale->y = fp->fv.pr.x2230.y * scale_base[frame];
+        scale->z = fp->fv.pr.x2230.z * scale_base[frame + 4];
+        HSD_JObjSetScale(jobj, scale);
+        fp->mv.pr.specialn.x8 += 1;
+    } else {
+        HSD_JObjSetScale(jobj, &fp->fv.pr.x2230);
+    }
+}
+
+void ftPr_SpecialAirNChargeRelease_Anim(HSD_GObj* gobj)
+{
+    f32* scale_base = ftPr_Init_803D05C8;
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftPurinAttributes* da = fp->dat_attrs;
+    Vec3 scale;
+    f32 prev_angle;
+    f32 delta;
+    PAD_STACK(16);
+
+    ftPr_SpecialS_8013DD54(gobj, false);
+    fp->mv.pr.specialn.facing_dir = 0;
+    ftPr_SpecialAirNChargeRelease_Anim_inline(gobj, &scale, scale_base);
+
+    hitCapsuleToggle(gobj);
+    ftPr_SpecialS_8013D8E4(gobj);
+    prev_angle = fp->mv.pr.specialn.x14;
+    delta = (f32) (0.2 * da->x98 * fp->mv.pr.specialn.x34.x) *
+            (0.017453292f * fp->mv.pr.specialn.x2C * da->xBC);
+    fp->mv.pr.specialn.x14 += delta;
+    normalizeAndSetRollAngle(gobj);
+    fp->mv.pr.specialn.x0--;
+    if (fp->mv.pr.specialn.x0 <= 0) {
+        if (M_PI_2 < fp->mv.pr.specialn.x14 &&
+            fp->mv.pr.specialn.x14 < M_PI_2 * 3)
+        {
+            if (delta > 0.0f) {
+                if (fp->mv.pr.specialn.x14 > M_PI && prev_angle < M_PI) {
+                    fp->mv.pr.specialn.x0 = 0;
+                    ftPr_SpecialS_8013DA24(gobj, true, 0x40012, 0);
+                    return;
+                }
+                ftPr_JObjSetRotationY(fp->parts[FtPart_TopN].joint, M_PI_2,
+                                      scale_base);
+                return;
+            }
+            if (fp->mv.pr.specialn.x14 < M_PI && prev_angle > M_PI) {
+                fp->mv.pr.specialn.x0 = 0;
+                ftPr_SpecialS_8013DA24(gobj, true, 0x40012, 0);
+                return;
+            }
+            ftPr_JObjSetRotationY(fp->parts[FtPart_TopN].joint, M_PI_2,
+                                  scale_base);
+            return;
+        }
+        ftPr_JObjSetRotationY(fp->parts[FtPart_TopN].joint, M_PI_2,
+                              scale_base);
+        return;
+    }
+    ftPartSetRotY(fp, FtPart_TopN, M_PI_2);
+}
 
 void ftPr_SpecialAirNStartTurn_Anim(HSD_GObj* gobj)
 {
@@ -661,8 +740,8 @@ void ftPr_SpecialNRelease_IASA(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftPurinAttributes* da = fp->dat_attrs;
     f32 dir;
-    if (NEGABS(fp->input.lstick.x) > da->x68) {
-        dir = fp->input.lstick.x > 0.0f ? 1.0f : -1.0f;
+    if (ABS(fp->input.lstick.x) > da->x68) {
+        dir = SIGNF(fp->input.lstick.x);
         if (fp->mv.pr.specialn.x34.x != dir) {
             ftColl_8007AFF8(gobj);
             fp->mv.pr.specialn.facing_dir = dir;
@@ -761,11 +840,12 @@ void ftPr_SpecialNRelease_Phys(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftPurinAttributes* da = fp->dat_attrs;
     f32 slope = fp->coll_data.floor.normal.x;
+    u8 __[8];
     f32 base_vel = fp->mv.pr.specialn.x34.x *
                    (da->xC0 * (fp->mv.pr.specialn.x2C - da->xB8));
     {
-        f32 influence = da->xC8 * (base_vel * NEGABS(slope));
-        if (slope > 0.0f) {
+        f32 influence = da->xC8 * (base_vel * ABS(slope));
+        if (fp->coll_data.floor.normal.x > 0.0f) {
             if (fp->mv.pr.specialn.x1C > 0.0f) {
                 fp->gr_vel = base_vel + influence;
             } else {
@@ -778,8 +858,8 @@ void ftPr_SpecialNRelease_Phys(HSD_GObj* gobj)
         }
     }
     {
-        f32 max_vel = da->x4C;
-        if (NEGABS(fp->gr_vel) > max_vel) {
+        f32 max_vel;
+        if (ABS(fp->gr_vel) > (max_vel = da->x4C)) {
             if (fp->gr_vel < 0.0f) {
                 max_vel = -max_vel;
             }
@@ -787,15 +867,15 @@ void ftPr_SpecialNRelease_Phys(HSD_GObj* gobj)
         }
     }
     {
-        f32 max_vel = da->x50;
-        if (NEGABS(fp->gr_vel) > max_vel) {
+        f32 max_vel;
+        if (ABS(fp->gr_vel) > (max_vel = da->x50)) {
             if (fp->gr_vel < 0.0f) {
                 max_vel = -max_vel;
             }
             fp->gr_vel = max_vel;
         }
     }
-    fp->mv.pr.specialn.x18 = NEGABS(fp->gr_vel);
+    fp->mv.pr.specialn.x18 = ABS(fp->gr_vel);
     fp->x74_anim_vel.y = 0;
     fp->self_vel.y = 0;
     ftCommon_ApplyGroundMovement(gobj);
@@ -803,6 +883,16 @@ void ftPr_SpecialNRelease_Phys(HSD_GObj* gobj)
     if (fp->mv.pr.specialn.x2C < da->xB8) {
         ftPr_SpecialS_8013DA24(gobj, false, 0x40012, 0);
     }
+}
+
+static inline void setFacingDir(Fighter* fp)
+{
+    if (fp->mv.pr.specialn.facing_dir != 0.0f) {
+        fp->mv.pr.specialn.x34.x = fp->facing_dir =
+            fp->mv.pr.specialn.facing_dir;
+    }
+    fp->mv.pr.specialn.facing_dir = 0.0f;
+    fp->mv.pr.specialn.xC = 0;
 }
 
 void ftPr_SpecialNTurn_Phys(HSD_GObj* gobj)
@@ -813,17 +903,17 @@ void ftPr_SpecialNTurn_Phys(HSD_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     ftPurinAttributes* da = fp->dat_attrs;
     f32 scale = da->xC4 * mpLib_800569EC(fp->coll_data.floor.flags);
-    f32 slope = fp->coll_data.floor.normal.x;
-    {
-        f32 x1C = fp->mv.pr.specialn.x1C;
-        f32 influence = da->xC8 * (x1C * NEGABS(slope));
-        if (slope > 0.0f) {
-            if (x1C > 0.0f) {
-                fp->gr_vel += scale * (x1C + influence);
-            } else {
-                fp->gr_vel += scale * (x1C + influence);
-            }
-        } else if (x1C > 0.0f) {
+    f32 slope = ABS(fp->coll_data.floor.normal.x);
+    f32 x1C = fp->mv.pr.specialn.x1C;
+    f32 influence = da->xC8 * (x1C * slope);
+    if (fp->coll_data.floor.normal.x > 0.0f) {
+        if (x1C > 0.0f) {
+            fp->gr_vel += scale * (x1C + influence);
+        } else {
+            fp->gr_vel += scale * (x1C + influence);
+        }
+    } else {
+        if (x1C > 0.0f) {
             fp->gr_vel += scale * (x1C - influence);
         } else {
             fp->gr_vel += scale * (x1C - influence);
@@ -832,47 +922,26 @@ void ftPr_SpecialNTurn_Phys(HSD_GObj* gobj)
     fp->x74_anim_vel.y = 0;
     fp->self_vel.y = 0;
     ftCommon_ApplyGroundMovement(gobj);
-    {
-        f32 x10 = fp->mv.pr.specialn.x10;
-        if (x10 > 0.0f) {
-            f32 vel = fp->gr_vel;
-            if (vel < 0.0f) {
-                if (NEGABS(vel) >= NEGABS(x10 * da->xD0)) {
-                    fp->x21EC = ftPr_SpecialS_8013D8B0;
-                    Fighter_ChangeMotionState(gobj, ftPr_MS_SpecialNRelease,
-                                              mf1, fp->cur_anim_frame, 0, 0,
-                                              NULL);
-                    setupPurinCallbacks(gobj);
-                    {
-                        f32 facing = fp->mv.pr.specialn.facing_dir;
-                        if (facing != 0.0f) {
-                            fp->facing_dir = facing;
-                            fp->mv.pr.specialn.x34.x = facing;
-                        }
-                    }
-                    fp->mv.pr.specialn.facing_dir = 0;
-                    fp->mv.pr.specialn.xC = 0;
-                }
+    if (fp->mv.pr.specialn.x10 > 0.0f) {
+        if (fp->gr_vel < 0.0f) {
+            if (ABS(fp->gr_vel) >= ABS(fp->mv.pr.specialn.x10 * da->xD0)) {
+                fp->x21EC = ftPr_SpecialS_8013D8B0;
+                Fighter_ChangeMotionState(gobj, ftPr_MS_SpecialNRelease, mf1,
+                                          fp->cur_anim_frame, 0.0f, 0.0f,
+                                          NULL);
+                setupPurinCallbacks(gobj);
+                setFacingDir(fp);
             }
-        } else {
-            f32 vel = fp->gr_vel;
-            if (vel > 0.0f) {
-                if (NEGABS(vel) >= NEGABS(x10 * da->xD0)) {
-                    fp->x21EC = ftPr_SpecialS_8013D8B0;
-                    Fighter_ChangeMotionState(gobj, ftPr_MS_SpecialNRelease,
-                                              mf2, fp->cur_anim_frame, 0, 0,
-                                              NULL);
-                    setupPurinCallbacks(gobj);
-                    {
-                        f32 facing = fp->mv.pr.specialn.facing_dir;
-                        if (facing != 0.0f) {
-                            fp->facing_dir = facing;
-                            fp->mv.pr.specialn.x34.x = facing;
-                        }
-                    }
-                    fp->mv.pr.specialn.facing_dir = 0;
-                    fp->mv.pr.specialn.xC = 0;
-                }
+        }
+    } else {
+        if (fp->gr_vel > 0.0f) {
+            if (ABS(fp->gr_vel) >= ABS(fp->mv.pr.specialn.x10 * da->xD0)) {
+                fp->x21EC = ftPr_SpecialS_8013D8B0;
+                Fighter_ChangeMotionState(gobj, ftPr_MS_SpecialNRelease, mf2,
+                                          fp->cur_anim_frame, 0.0f, 0.0f,
+                                          NULL);
+                setupPurinCallbacks(gobj);
+                setFacingDir(fp);
             }
         }
     }
@@ -926,15 +995,15 @@ void ftPr_SpecialAirNChargeRelease_Phys(HSD_GObj* gobj)
     }
     {
         f32 vel = fp->self_vel.x;
-        f32 min_vel = da->x5C;
-        if (NEGABS(vel) < min_vel) {
+        f32 min_vel;
+        if (ABS(vel) < (min_vel = da->x5C)) {
             if (vel < 0.0f) {
                 min_vel = -min_vel;
             }
             fp->self_vel.x = min_vel;
         }
     }
-    fp->mv.pr.specialn.x18 = NEGABS(fp->self_vel.x);
+    fp->mv.pr.specialn.x18 = ABS(fp->self_vel.x);
     ftCommon_Fall(fp, da->x3C, da->x40);
     fp->mv.pr.specialn.x2C -= da->xB4;
     if (fp->mv.pr.specialn.x2C < da->xB8) {
@@ -955,8 +1024,8 @@ void ftPr_SpecialAirNStartTurn_Phys(HSD_GObj* gobj)
     fp->self_vel.x -= var_f1;
     {
         f32 vel = fp->self_vel.x;
-        f32 min_vel = da->x5C;
-        if (NEGABS(vel) < min_vel) {
+        f32 min_vel;
+        if (ABS(vel) < (min_vel = da->x5C)) {
             if (vel < 0.0f) {
                 min_vel = -min_vel;
             }
@@ -1049,7 +1118,76 @@ void ftPr_SpecialNFull_Coll(HSD_GObj* gobj)
     }
 }
 
-/// #ftPr_SpecialNRelease_Coll(HSD_GObj* gobj)
+static inline void wallBounceEffect(HSD_GObj* gobj, Fighter* fp, f32 dir,
+                                    Vec3* pos, f32* angle)
+{
+    Fighter* fp2 = GET_FIGHTER(gobj);
+    *pos = fp2->cur_pos;
+    *angle = atan2f(-fp->coll_data.left_facing_wall.normal.x * dir,
+                    fp->coll_data.left_facing_wall.normal.y);
+    if (dir > 0.0f) {
+        pos->x += ABS(fp2->coll_data.ecb.right.x);
+    } else {
+        pos->x -= ABS(fp2->coll_data.ecb.left.x);
+    }
+    pos->y +=
+        0.5f * ABS(fp2->coll_data.ecb.top.y + fp2->coll_data.ecb.bottom.y);
+    efSync_Spawn(0x406, gobj, pos, angle);
+    Camera_80030E44(3, pos);
+    ftCommon_8007EBAC(fp2, 0xC, 0xA);
+    ft_PlaySFX(fp2, 250070, 127, 64);
+}
+
+void ftPr_SpecialNRelease_Coll(HSD_GObj* gobj)
+{
+    /// @todo Named flags.
+    static u32 const mf = (1 << 1) | (1 << 3) | (1 << 4) | (1 << 7) |
+                          (1 << 12) | (1 << 14) | (1 << 18) | (1 << 19) |
+                          (1 << 22) | (1 << 26) | (1 << 27);
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftPurinAttributes* da = fp->dat_attrs;
+    bool coll = ft_80082888(gobj, &ftPr_Init_803D0610);
+    bool wall_hit;
+
+    if (fp->mv.pr.specialn.x34.x == 1.0f) {
+        wall_hit = fp->coll_data.env_flags & 0x3F;
+        if (wall_hit) {
+            Vec3 pos;
+            f32 angle;
+            wallBounceEffect(gobj, fp, 1.0f, &pos, &angle);
+        }
+    } else {
+        wall_hit = fp->coll_data.env_flags & 0xFC0;
+        if (wall_hit) {
+            Vec3 pos;
+            f32 angle;
+            wallBounceEffect(gobj, fp, -1.0f, &pos, &angle);
+        }
+    }
+
+    if (wall_hit) {
+        u8 _pad[4];
+        fp->mv.pr.specialn.x2C *= da->xD4;
+        if (fp->mv.pr.specialn.x2C < 0) {
+            fp->mv.pr.specialn.x2C = 0;
+        }
+        fp->mv.pr.specialn.x18 *= da->xD4;
+        fp->gr_vel = -fp->gr_vel * da->xD4;
+        fp->self_vel.x = -fp->self_vel.x * da->xD4;
+        fp->mv.pr.specialn.x34.x = SIGNF(fp->gr_vel);
+        ftPartSetRotY(fp, FtPart_TopN, M_PI_2);
+    }
+
+    if (!coll) {
+        ftCommon_8007D5D4(fp);
+        Fighter_ChangeMotionState(gobj, ftPr_MS_SpecialAirNChargeRelease, mf,
+                                  fp->cur_anim_frame, 0, 0, NULL);
+        setupPurinCallbacks(gobj);
+        normalizeAndSetRollAngle(gobj);
+        ftPartSetRotY(fp, FtPart_TopN, M_PI_2);
+        fp->mv.pr.specialn.x1C = da->x54;
+    }
+}
 
 void ftPr_SpecialNTurn_Coll(HSD_GObj* gobj)
 {
@@ -1147,7 +1285,107 @@ void ftPr_SpecialAirNChargeFull_Coll(HSD_GObj* gobj)
     }
 }
 
-/// #ftPr_SpecialAirNChargeRelease_Coll(HSD_GObj* gobj)
+static inline void ftPr_SpecialAirNChargeRelease_Coll_inline(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+    HSD_JObjSetScale(jobj, &fp->fv.pr.x2230);
+    ftPartSetRotY(fp, FtPart_TopN, M_PI_2 * fp->facing_dir);
+    if (fp->mv.pr.specialn.facing_dir != 0) {
+        fp->facing_dir = fp->mv.pr.specialn.facing_dir;
+    }
+    fp->mv.pr.specialn.facing_dir = 0;
+    ftCliffCommon_80081370(gobj);
+}
+
+void ftPr_SpecialAirNChargeRelease_Coll(HSD_GObj* gobj)
+{
+    /// @todo Named flags.
+    static u32 const mf = (1 << 1) | (1 << 3) | (1 << 4) | (1 << 7) |
+                          (1 << 12) | (1 << 14) | (1 << 18) | (1 << 19) |
+                          (1 << 22) | (1 << 26) | (1 << 27);
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftPurinAttributes* da = fp->dat_attrs;
+    bool coll;
+    int wall_hit;
+    f32 land_angle;
+
+    if (fp->mv.pr.specialn.x34.x == 1.0f) {
+        coll = ft_8008239C(gobj, 1, &ftPr_Init_803D0610);
+    } else {
+        coll = ft_8008239C(gobj, -1, &ftPr_Init_803D0610);
+    }
+
+    if (fp->mv.pr.specialn.x34.x == 1.0f) {
+        wall_hit = fp->coll_data.env_flags & 0x3F;
+        if (wall_hit) {
+            {
+                Vec3 pos;
+                f32 angle;
+                wallBounceEffect(gobj, fp, 1.0f, &pos, &angle);
+            }
+        }
+    } else {
+        wall_hit = fp->coll_data.env_flags & 0xFC0;
+        if (wall_hit) {
+            {
+                Vec3 pos;
+                f32 angle;
+                wallBounceEffect(gobj, fp, -1.0f, &pos, &angle);
+            }
+        }
+    }
+
+    if (wall_hit) {
+        fp->mv.pr.specialn.x2C *= da->xD4;
+        if (fp->mv.pr.specialn.x2C < 0) {
+            fp->mv.pr.specialn.x2C = 0;
+        }
+        fp->mv.pr.specialn.x18 *= da->xD4;
+        fp->self_vel.x = -fp->self_vel.x * da->xD4;
+        fp->mv.pr.specialn.x34.x = -fp->mv.pr.specialn.x34.x;
+    }
+
+    if (coll) {
+        f32 vel_y = ABS(fp->self_vel.y * da->x78);
+        fp->self_vel.y = vel_y;
+        if (vel_y < da->x7C) {
+            ftCommon_8007D7FC(fp);
+            Fighter_ChangeMotionState(gobj, ftPr_MS_SpecialNRelease, mf,
+                                      fp->cur_anim_frame, 0, 0, NULL);
+            setupPurinCallbacks(gobj);
+            {
+                f32 vel = fp->mv.pr.specialn.x18 * fp->mv.pr.specialn.x34.x;
+                fp->gr_vel = vel;
+                fp->self_vel.x = vel;
+            }
+            fp->self_vel.z = 0;
+            fp->self_vel.y = 0;
+            normalizeAndSetRollAngle(gobj);
+            ftPartSetRotY(fp, FtPart_TopN, M_PI_2);
+            land_angle = atan2f(-fp->coll_data.floor.normal.x,
+                                fp->coll_data.floor.normal.y);
+            efSync_Spawn(0x3FF, gobj, &fp->cur_pos, &fp->facing_dir,
+                         &land_angle);
+            fp->mv.pr.specialn.x1C = da->x44;
+        } else {
+            if (ABS(fp->input.lstick.x) > da->x68) {
+                f32 dir = SIGNF(fp->input.lstick.x);
+                fp->mv.pr.specialn.x34.x = dir;
+                fp->self_vel.x = fp->gr_vel =
+                    fp->mv.pr.specialn.x18 * fp->mv.pr.specialn.x34.x;
+                ftPartSetRotY(fp, FtPart_TopN, M_PI_2);
+            }
+            normalizeAndSetRollAngle(gobj);
+        }
+        fp->mv.pr.specialn.x8 = 0;
+        return;
+    }
+
+    if (ftCliffCommon_80081298(gobj)) {
+        ftPr_SpecialAirNChargeRelease_Coll_inline(gobj);
+    }
+}
 
 void ftPr_SpecialAirNStartTurn_Coll(HSD_GObj* gobj)
 {

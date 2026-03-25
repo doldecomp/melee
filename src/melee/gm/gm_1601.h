@@ -51,7 +51,7 @@ struct lbl_8046B488_t;
 /* 160A60 */ const char* gm_80160A60(int);
 /* 160B40 */ UNK_RET gm_80160B40(HSD_Text*, u8, u8);
 /* 160C90 */ void gm_80160C90(HSD_Text* text, u8 fighter_id, bool arg2);
-/* 160DE8 */ UNK_RET fn_80160DE8(UNK_PARAMS);
+/* 160DE8 */ void fn_80160DE8(HSD_JObj*, u8, s32, u8, f32, f32);
 /* 160F58 */ float fn_80160F58(u8 ckind);
 /* 161004 */ UNK_RET fn_80161004(UNK_PARAMS);
 /* 161154 */ UNK_RET fn_80161154(UNK_PARAMS);
