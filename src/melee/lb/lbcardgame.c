@@ -57,8 +57,8 @@ const char* lb_8001C658(void)
     int i;
 
     s64 temp_r6 = OSGetTime();
-    temp_r6 /= OS_TIMER_CLOCK;
-    OSTicksToCalendarTime(OSSecondsToTicks(temp_r6), &time);
+    u32 seconds = OSTicksToSeconds(temp_r6);
+    OSTicksToCalendarTime(OSSecondsToTicks((u64) seconds), &time);
     for (i = 0; i < 0x40; i++) {
         lb_80433318._1C[i] = 0;
     }
@@ -182,7 +182,6 @@ void lb_8001CC84(void)
 {
     int temp_r24;
     int temp_r3;
-    int var_r3;
 
     do {
         switch (lb_80433318.x10) {
@@ -208,7 +207,7 @@ void lb_8001CC84(void)
                 if (temp_r3 != 0) {
                     lb_80433318.x14 = 1;
                 }
-                lb_80433318.x10 = 0;
+                lb_80433318.x10 = temp_r3 = 0;
             }
             break;
         }
