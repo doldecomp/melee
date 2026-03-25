@@ -448,7 +448,7 @@ void mnName_ConfirmNameDeleteInput(HSD_GObj* arg0)
     HSD_GObj* gobj2 = (HSD_GObj*) mnName_804D6BF8->user_data;
     u32 buttons = mn_80229624(4U);
     mn_804A04F0.buttons = buttons;
-
+    PAD_STACK(0x20);
     if (buttons & 0x10) {
         if ((u8) mn_804A04F0.confirmed_selection == 0) {
             lbAudioAx_80024030(0);
@@ -458,8 +458,8 @@ void mnName_ConfirmNameDeleteInput(HSD_GObj* arg0)
         }
         {
             u8 sel = (u8) mn_804A04F0.hovered_selection;
-            s32 col = gobj2->gx_link +
-                      (mn_804A04F0.hovered_selection / 6);
+            s32 col = ((HSD_GObj*) mnName_804D6BF8->user_data)->gx_link +
+                      ((mn_804A04F0.hovered_selection & 0xFF) / 6);
             s32 colCount = mnName_GetColumnCount();
             u8 nameIdx;
             if (colCount > 4 && col >= colCount) {
