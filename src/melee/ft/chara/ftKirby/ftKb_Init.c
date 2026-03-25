@@ -4028,9 +4028,9 @@ void ftKb_SpecialN_800F190C(Fighter_GObj* gobj, FighterKind kind)
     fp->fv.kb.x80 = 0;
     fp->fv.kb.x84 = da->specialn_kp_max_fuel;
     fp->fv.kb.x88 = da->specialn_kp_flame_scale;
-    fp->fv.kb.x8C = 1.0F;
-    fp->fv.kb.x90 = 1.0F;
-    fp->fv.kb.x94 = 1.0F;
+    fp->fv.kb.x8C.x = 1.0F;
+    fp->fv.kb.x8C.y = 1.0F;
+    fp->fv.kb.x8C.z = 1.0F;
     fp->fv.kb.x98 = NULL;
     fp->fv.kb.x9C = 0;
     fp->fv.kb.xA0 = NULL;
