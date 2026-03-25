@@ -1122,9 +1122,7 @@ void fn_80239574(HSD_GObj* arg0)
                     data->gobj.p_link = 0U;
                     goto do_anim;
                 case 2:
-                    goto do_plink;
                 case 4:
-                do_plink:
                     HSD_GObjPLink_80390228(arg0);
                     return;
                 default:
