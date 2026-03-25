@@ -1394,27 +1394,32 @@ void mnName_8023A058(HSD_GObj* gobj)
     mnName_80239A24(gobj);
 }
 
-/// #fn_8023A0BC
 extern HSD_Text* mnName_804D6BFC;
-
 void fn_8023A0BC(HSD_GObj* gobj)
 {
+    f32* end_frame;
     HSD_JObj* jobj;
     HSD_JObj* sp2C;
     HSD_JObj* sp28;
+    u32 pad1;
+    u32 pad2;
+    u32 pad3;
     HSD_JObj* sp18;
     HSD_JObj* sp14;
     f32 frame;
     f32 frame2;
+    f32* new_var;
     u8 sel;
     u8* base;
+    u32 pad4;
+    u32 pad5;
     HSD_Text* text;
 
     jobj = gobj->hsd_obj;
     base = (u8*) mnName_803ED538;
     lb_80011E24(jobj, &sp2C, 2, -1);
 
-    if ((u8) mn_804A04F0.x10 != 2) {
+    if (((u8) (sel = mn_804A04F0.x10)) != 2) {
         HSD_SisLib_803A5CC4(mnName_804D6BFC);
         mnName_804D6BFC = NULL;
         HSD_GObjPLink_80390228(gobj);
@@ -1422,29 +1427,29 @@ void fn_8023A0BC(HSD_GObj* gobj)
     }
 
     frame = mn_8022F298(sp2C);
-    if (*(f32*) (base + 0xC8) <= frame &&
-        frame < *(f32*) (base + 0xCC))
-    {
-        frame2 = mn_8022EFD8(sp2C,
-                             (AnimLoopSettings*) (base + 0xC8));
-        lb_80011E24(jobj, &sp28, 8, -1);
-        mn_8022EFD8(sp28, (AnimLoopSettings*) (base + 0xC8));
-        if (frame2 >= *(f32*) (base + 0xCC)) {
-            if (mnName_804D6BFC != NULL) {
-                HSD_SisLib_803A5CC4(mnName_804D6BFC);
+    if (*(f32*) (base + 0xC8) <= frame) {
+        end_frame = (f32*) (base + 0xCC);
+        if (frame < (*(new_var = (f32*) (base + 0xCC)))) {
+            frame2 = mn_8022EFD8(sp2C, (AnimLoopSettings*) (base + 0xC8));
+            lb_80011E24(jobj, &sp28, 8, -1);
+            mn_8022EFD8(sp28, (AnimLoopSettings*) (base + 0xC8));
+            if (frame2 >= *end_frame) {
+                if (mnName_804D6BFC != NULL) {
+                    HSD_SisLib_803A5CC4(mnName_804D6BFC);
+                }
+                text = HSD_SisLib_803A5ACC(
+                    0, 1, *(f32*) (base + 0xEC), *(f32*) (base + 0xF0),
+                    *(f32*) (base + 0xF4), 416.6667f, 33.333336f);
+                mnName_804D6BFC = text;
+                text->font_size.x = 0.03f;
+                text->font_size.y = 0.03f;
+                HSD_SisLib_803A6368(text, 0x49);
             }
-            text = HSD_SisLib_803A5ACC(
-                0, 1,
-                *(f32*) (base + 0xEC),
-                *(f32*) (base + 0xF0),
-                *(f32*) (base + 0xF4),
-                416.6667f, 33.333336f);
-            mnName_804D6BFC = text;
-            text->font_size.x = 0.03f;
-            text->font_size.y = 0.03f;
-            HSD_SisLib_803A6368(text, 0x49);
+        } else {
+            goto else_block;
         }
     } else {
+    else_block:
         sel = mn_804A04F0.confirmed_selection;
         lb_80011E24(jobj, &sp14, 6, -1);
         lb_80011E24(jobj, &sp18, 7, -1);
