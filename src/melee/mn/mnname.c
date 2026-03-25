@@ -1135,9 +1135,6 @@ void fn_80239574(HSD_GObj* arg0)
 }
 #pragma pop
 
-/// #mnName_80239878
-#pragma push
-#pragma dont_inline on
 void mnName_80239878(u8 arg0, HSD_GObj* gobj)
 {
     HSD_JObj* jobj;
@@ -1168,28 +1165,13 @@ void mnName_80239878(u8 arg0, HSD_GObj* gobj)
         f32 scroll_pos;
 
         HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
-        scroll_jobj = gobj->user_data;
         scroll_pos = (f32) gobj->gx_link *
                      (14.0f / (f_col - 1.0f));
-        if (scroll_jobj == NULL) {
-            __assert("jobj.h", 0x3A4, "jobj");
-        }
-        scroll_jobj->translate.x = scroll_pos;
-        if (!(scroll_jobj->flags & JOBJ_MTX_INDEP_SRT) && scroll_jobj) {
-            if (scroll_jobj == NULL) {
-                __assert("jobj.h", 0x234, "jobj");
-            }
-            if ((!(scroll_jobj->flags & 0x800000) &&
-                 (scroll_jobj->flags & 0x40)) == 0)
-            {
-                HSD_JObjSetMtxDirtySub(scroll_jobj);
-            }
-        }
+        HSD_JObjSetTranslateX(gobj->user_data, scroll_pos);
     } else {
         HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
     }
 }
-#pragma pop
 
 /// #mnName_80239A24
 #pragma push
