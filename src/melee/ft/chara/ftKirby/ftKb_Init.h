@@ -620,7 +620,7 @@
                                            MotionFlags flags,
                                            float anim_start);
 /* 10131C */ void ftKb_SpecialNPr_8010131C(Fighter_GObj* gobj);
-/* 10140C */ void ftKb_SpecialNPr_8010140C(Fighter_GObj* gobj);
+/* 10140C */ void ftKb_SpecialNPr_8010140C(Fighter_GObj* gobj, bool arg1);
 /* 101560 */ void ftKb_SpecialNPr_80101560(Fighter_GObj* gobj);
 /* 101618 */ void ftKb_SpecialNPr_80101618(Fighter_GObj* gobj);
 /* 1016CC */ void ftKb_PrSpecialNStart_Anim(Fighter_GObj* gobj);
