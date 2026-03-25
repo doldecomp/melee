@@ -1046,20 +1046,22 @@ void mnName_80238C34(HSD_GObj* arg0, u8 arg1, u8 arg2)
 }
 #pragma pop
 
-#pragma push
-#pragma dont_inline on
 void fn_80239574(HSD_GObj* arg0)
 {
     AnimLoopSettings* anim;
-    AnimLoopSettings* base = mnName_803ED538;
+    HSD_JObj* new_var;
+    AnimLoopSettings* base = (0, mnName_803ED538);
     s32 doUpdate = 0;
-    u8 doSel = 0;
-    u8 doSelReset = 0;
+    int doSel = 0;
+    unsigned int doSelReset = 0;
     MnName_GObj* data = (MnName_GObj*) arg0->user_data;
+    s32 new_var2;
     u8 state = data->gobj.p_link;
+    PAD_STACK(0x8);
 
-    if ((state == 0 || state == 1 || state == 3) &&
-        *((u8*) data) != (u8) mn_804A04F0.cur_menu)
+    if ((((state == 0) || (data->gobj.p_link == 1)) ||
+         (data->gobj.p_link == 3)) &&
+        ((*((u8*) data)) != ((u8) mn_804A04F0.cur_menu)))
     {
         if (mn_804A04F0.buttons & 0x10) {
             data->gobj.p_link = 4U;
@@ -1111,12 +1113,15 @@ void fn_80239574(HSD_GObj* arg0)
         }
         {
             HSD_JObj* jobj = (HSD_JObj*) data->gobj.next_gx;
-            if (mn_8022F298(jobj) >= anim->end_frame) {
+            new_var = jobj;
+            if (mn_8022F298(new_var) >= anim->end_frame) {
                 state = data->gobj.p_link;
                 switch ((s32) state) {
                 case 3:
                 case 1:
                     data->gobj.p_link = 0U;
+                    goto do_anim;
+                case 2:
                     goto do_anim;
                 case 4:
                     HSD_GObjPLink_80390228(arg0);
@@ -1124,7 +1129,7 @@ void fn_80239574(HSD_GObj* arg0)
                 }
             } else {
             do_anim:
-                HSD_JObjAnim(jobj);
+                HSD_JObjAnim(new_var);
                 goto do_update;
             }
         }
@@ -1146,6 +1151,7 @@ void fn_80239574(HSD_GObj* arg0)
         {
             HSD_Text* text;
             s32 idx = mn_804A04F0.hovered_selection - 0x18;
+            new_var2 = idx;
             if (data->text2 != NULL) {
                 HSD_SisLib_803A5CC4(data->text2);
             }
@@ -1154,7 +1160,7 @@ void fn_80239574(HSD_GObj* arg0)
             data->text2 = text;
             text->font_size.x = 0.0521f;
             text->font_size.y = 0.0521f;
-            HSD_SisLib_803A6368(text, mnName_804D4BE8[idx]);
+            HSD_SisLib_803A6368(text, mnName_804D4BE8[new_var2]);
         }
         if (doUpdate != 0) {
             *((u8*) data) = (u8) mn_804A04F0.cur_menu;
@@ -1164,7 +1170,6 @@ void fn_80239574(HSD_GObj* arg0)
         }
     }
 }
-#pragma pop
 
 void mnName_80239878(u8 arg0, HSD_GObj* gobj)
 {
