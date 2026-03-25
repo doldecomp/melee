@@ -24,7 +24,7 @@ typedef struct MnName_GObj {
 /* 237654 */ s32 CompareNameStrings(char* str, char* slot);
 /* 2377A4 */ void fn_802377A4(void);
 /* 2377A8 */ bool IsNameUnique(char* name);
-/* 237834 */ s32 DeleteName(u8);
+/* 237834 */ void DeleteName(u8);
 /* 2379BC */ bool IsNameValid(int slot);
 /* 237A04 */ void CreateNameAtIndex(s32 slot);
 /* 237A68 */ s32 mnName_SortNames(HSD_GObj*);

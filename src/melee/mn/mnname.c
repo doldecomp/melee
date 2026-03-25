@@ -3,13 +3,15 @@
 #include "mnmain.h"
 #include "mnmainrule.h"
 #include "mnnamenew.h"
+#include "placeholder.h"
 
+#include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 #include "lb/lbarchive.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lblanguage.h"
-#include "lb/lb_00B0.h"
 
+#include <dolphin/os.h>
 #include <baselib/debug.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
@@ -19,7 +21,6 @@
 #include <baselib/gobjuserdata.h>
 #include <baselib/jobj.h>
 #include <baselib/memory.h>
-#include <dolphin/os.h>
 #include <melee/gm/gmmain_lib.h>
 
 extern AnimLoopSettings mnName_803ED538[];
@@ -195,15 +196,17 @@ bool IsNameUnique(char* name)
     return false;
 }
 
-s32 DeleteName(u8 arg0)
+void DeleteName(u8 arg0)
 {
+    u8 _2[8];
     struct NameTagData temp;
     s32 i;
-    u8 pos;
+    unsigned long long longpos;
+    s32 pos;
     s32 j;
-    s32 k;
     u16* p;
-
+    s32 k;
+    u8 pos_u8;
     pos = arg0;
     i = 0;
     do {
@@ -221,15 +224,15 @@ s32 DeleteName(u8 arg0)
         i++;
     } while (i < 0x78);
 
-    while ((s32) pos < 0x78) {
-        u8 pos_u8 = (u8) pos;
+    while (pos < 0x78) {
         j = pos + 1;
         while (j < 0x78) {
-            if (IsNameValid((s32) (u8) pos) == 0) {
-                if (IsNameValid((s32) (u8) j) != 0) {
-                    temp = *GetPersistentNameData((s32) pos_u8);
-                    *GetPersistentNameData((s32) pos_u8) =
-                        *GetPersistentNameData((s32) (u8) j);
+            longpos = pos;
+            if (IsNameValid((s32) ((u8) longpos)) == 0) {
+                if (IsNameValid((u8) j) != 0) {
+                    temp = *GetPersistentNameData((s32) (u8) pos);
+                    *GetPersistentNameData((s32) (u8) pos) =
+                        *GetPersistentNameData((s32) ((u8) j));
                     *GetPersistentNameData((s32) (u8) j) = temp;
                 }
             }
