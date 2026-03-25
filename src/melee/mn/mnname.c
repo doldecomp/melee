@@ -738,6 +738,37 @@ void mnName_80238754(HSD_GObj* gobj)
     }
 }
 
+#pragma push
+#pragma dont_inline on
+void mnName_80238754_noinline(HSD_GObj* gobj);
+void mnName_80238754_noinline(HSD_GObj* gobj)
+{
+    s32 extra;
+    HSD_JObj* jobj = gobj->hsd_obj;
+    s32 count = GetNameCount();
+    s32 col_count;
+    f32 f_col;
+
+    if (count % 6 != 0) {
+        extra = 1;
+    } else {
+        extra = 0;
+    }
+    col_count = count / 6 + extra;
+    f_col = (f32) col_count;
+
+    if (f_col > 4.0f) {
+        f32 scroll_pos;
+
+        HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
+        scroll_pos = (f32) (u32) gobj->gx_link * (14.0f / (f_col - 1.0f));
+        HSD_JObjSetTranslateX(gobj->user_data, scroll_pos);
+    } else {
+        HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
+    }
+}
+#pragma pop
+
 HSD_JObj* mnName_802388D4(HSD_GObj* gobj, u8 index)
 {
     u8* p = (u8*) gobj;
@@ -1650,21 +1681,20 @@ HSD_GObj* mnName_8023A59C(u8 arg0)
 }
 #pragma pop
 
-#pragma push
-#pragma dont_inline on
 void mnName_8023A9B4(u8 arg0)
 {
-    s32 i;
+    u32 i;
     MnName_GObj* gobj2;
     HSD_JObj* jobj;
-
     mn_804A04F0.hovered_selection = 0x18;
-    mn_804A04F0.x10 = 0;
+    mn_804A04F0.x10 = (i = 0);
+    PAD_STACK(0x8);
+
     for (i = 0; i < 0x78; i++) {
         mnName_NameDisplayOrder[i] = (u8) i;
     }
     HSD_GObj_80390CD4(mnName_8023A59C(3));
-    gobj2 = (MnName_GObj*) ((HSD_GObj*) mnName_804D6BF8)->user_data;
+    gobj2 = (0, (MnName_GObj*) ((HSD_GObj*) mnName_804D6BF8)->user_data);
     if ((u8) mn_804A04F0.x10 == 1) {
         struct mn_80231634_t* p =
             (struct mn_80231634_t*) gobj2->gobj.user_data_remove_func;
@@ -1689,11 +1719,11 @@ void mnName_8023A9B4(u8 arg0)
             gobj2->text = NULL;
         }
         mnName_80239A24((HSD_GObj*) gobj2);
-        mnName_80238754((HSD_GObj*) gobj2);
+        mnName_80238754_noinline((HSD_GObj*) gobj2);
     }
-    mnName_80238A04((HSD_GObj*) gobj2, 0x18U, 0U);
+    mnName_80238A04((HSD_GObj*) gobj2, 0x18U, (0, 0U));
     gobj2->gobj.gx_link = arg0;
-    mnName_80238754((HSD_GObj*) gobj2);
+    mnName_80238754_noinline((HSD_GObj*) gobj2);
     HSD_JObjRemoveAll(
         (HSD_JObj*) mn_80231634(
             (struct mn_80231634_t*) gobj2->gobj
@@ -1704,7 +1734,6 @@ void mnName_8023A9B4(u8 arg0)
     }
     mnName_80239A24((HSD_GObj*) gobj2);
 }
-#pragma pop
 
 extern char** AutoNamesList;
 extern char** NotAllowedNamesList;
