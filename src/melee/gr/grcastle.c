@@ -392,6 +392,43 @@ void grCastle_801CE19C(Ground_GObj* gobj)
 }
 
 /// #grCastle_801CE260
+void grCastle_801CE260(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+    Ground* gp2;
+    CmSubject* subject;
+    u8* p;
+
+    Ground_801C2ED0(jobj, gp->map_id);
+    grAnime_801C8138((HSD_GObj*) gobj, gp->map_id, 0);
+
+    {
+        struct { u8 b : 1; } *bp = (void*) ((u8*) gp + 0xC4);
+        bp->b = 0;
+    }
+    gp->gv.icemt.xC6 = gp->map_id - 8;
+    gp->gv.arwing.xCC = 0;
+    p = (u8*) grCs_804D6970 + gp->gv.icemt.xC6 * 0x14;
+    gp->gv.flatzone.xCA = *(s16*) (p + 0x5C);
+
+    gp2 = GET_GROUND(gobj);
+    *(u32*) &gp2->gv.arwing.xD8 = (u32) Camera_80029044(2);
+    subject = (CmSubject*) *(u32*) &gp2->gv.arwing.xD8;
+    if (subject != NULL) {
+        subject->x40.x = *(f32*) ((u8*) grCs_804D6970 + 0x118);
+        subject->x40.y = *(f32*) ((u8*) grCs_804D6970 + 0x11C);
+        subject->x48.x = *(f32*) ((u8*) grCs_804D6970 + 0x120);
+        subject->x48.y = *(f32*) ((u8*) grCs_804D6970 + 0x124);
+    }
+
+    grMaterial_801C94D8(jobj);
+    gp->gv.arwing.xD0 = (u32) grMaterial_801C8CFC(
+        0, 3, gp, Ground_801C3FA4((HSD_GObj*) gobj, 0),
+        (void (*)(Item_GObj*, Ground*)) fn_801CE3A0, NULL, NULL);
+    it_80275414((Item_GObj*) gp->gv.arwing.xD0);
+    Ground_801C5440(gp, 0, 0x53025U);
+}
 
 void fn_801CE3A0(void) {}
 
