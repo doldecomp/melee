@@ -255,13 +255,13 @@ void grCastle_801CD8A8(Ground_GObj* gobj)
     lb_800115F4();
     grCastle_801D0BBC();
     for (i = 0; i < 12; i++) {
-        if (gp->gv.castle.xE0[i] != NULL) {
-            grCastle_801D0D84(gp->gv.castle.xE0[i]->totalLength);
+        if (gp->gv.castle3.x1C[i].data != NULL) {
+            grCastle_801D0D84(gp->gv.castle3.x1C[i].data->desc.ft_unk.jobj->parent);
         }
     }
     for (i = 0; i < 12; i++) {
-        if (gp->gv.castle.xE0[i] != NULL) {
-            grLib_801C9B8C(&gp->gv.castle.xE0[i]);
+        if (gp->gv.castle3.x1C[i].data != NULL) {
+            grLib_801C9B8C(&gp->gv.castle3.x1C[i]);
             grCastle_801D0D24();
         }
     }
