@@ -674,6 +674,37 @@ void fn_801D0924(HSD_GObj* gobj, int renderpass)
 }
 
 /// #grCastle_801D09B8
+s32 grCastle_801D09B8(HSD_GObj* gobj, Vec3* arg2)
+{
+    Vec3 sp2C;
+    Vec3 sp20;
+    Vec3 sp14;
+    f32 temp_f31;
+    PAD_STACK(4);
+
+    temp_f31 = 14.0f * Ground_801C0498();
+    ftLib_80086644(gobj, &sp2C);
+    ftLib_80086684(gobj, &sp20);
+    if (sp2C.y < temp_f31) {
+        if (sp20.y > temp_f31) {
+            f32 temp_f1 = ftLib_80086B80(gobj) / 10.0f;
+            sp2C.y = temp_f31;
+            grCastle_801D0A9C(&sp2C, temp_f1);
+        }
+        ftLib_80086BEC(gobj, &sp14);
+        if (sp14.y < -0.5f) {
+            arg2->x = 0.0f;
+            arg2->y = 0.1f;
+            arg2->z = 0.0f;
+        } else {
+            arg2->z = 0.0f;
+            arg2->y = 0.0f;
+            arg2->x = 0.0f;
+        }
+        return 1;
+    }
+    return 0;
+}
 
 /// #grCastle_801D0A9C
 
