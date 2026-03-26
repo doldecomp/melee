@@ -259,7 +259,6 @@ void CreateNameAtIndex(s32 slot)
     GetPersistentNameData(idx)->x1A1 = true;
     InitializePersistentNameData(slot);
 }
-/// #mnName_SortNames
 
 s32 mnName_SortNames(HSD_GObj* arg0)
 {
