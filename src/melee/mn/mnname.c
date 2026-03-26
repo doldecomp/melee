@@ -36,8 +36,6 @@ extern f32 mnName_804D4BD8[2];
 extern s32 mnName_804D4BE0;
 extern s32 mnName_804D4BE4;
 extern u8 mnName_804D4BE8[3];
-extern char mnName_804D4BF4[7];
-extern char mnName_804D4BFC[5];
 
 extern char* mnNameNew_803EE720[];
 extern char* mnNameNew_803EE724[];
