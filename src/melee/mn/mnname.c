@@ -735,7 +735,7 @@ void mnName_80238754(HSD_GObj* gobj)
 
 static void mnName_80238754_noinline(HSD_GObj* gobj)
 {
-    mnName_80238754_noinline(gobj);
+    mnName_80238754(gobj);
 }
 
 static HSD_JObj* mnName_802388D4_noinline(HSD_GObj* gobj, u8 index)
