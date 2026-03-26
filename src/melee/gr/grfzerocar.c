@@ -1,20 +1,13 @@
 #include "gr/grfzerocar.h"
 
-#include <placeholder.h>
-#include <platform.h>
-
 #include "gr/granime.h"
 #include "gr/grdatfiles.h"
 #include "gr/ground.h"
-#include "gr/types.h"
 #include "lb/lb_00F9.h"
 #include "sc/types.h"
 
 #include <dolphin/mtx.h>
-#include <baselib/aobj.h>
-#include <baselib/gobj.h>
 #include <baselib/jobj.h>
-#include <baselib/object.h>
 
 typedef struct grFZeroCarEntry {
     s16 unk0;
