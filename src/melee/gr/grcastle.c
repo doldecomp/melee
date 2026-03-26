@@ -728,6 +728,33 @@ void grCastle_801CEF04(Ground_GObj* gobj)
 void grCastle_801CF0F0(Ground_GObj* gobj) {}
 
 /// #grCastle_801CF0F4
+void grCastle_801CF0F4(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+    f32 scale;
+
+    Ground_801C2ED0(jobj, gp->map_id);
+    gp->gv.castle7.xC4 = 0;
+    gp->gv.castle7.xD8 = 0;
+    HSD_JObjSetFlagsAll(jobj, 0x10);
+    scale = 1.5f * Ground_801C0498();
+    HSD_JObjSetScaleX(jobj, scale);
+    HSD_JObjSetScaleY(jobj, scale);
+    HSD_JObjSetScaleZ(jobj, scale);
+
+    switch (gp->map_id) {
+    case ONETT:
+        gp->gv.castle7.xD0 = grCastle_801CD4D0(0x11);
+        return;
+    case BIGBLUE:
+        gp->gv.castle7.xD0 = grCastle_801CD4D0(7);
+        return;
+    case MUTECITY:
+        gp->gv.castle7.xD0 = grCastle_801CD4D0(5);
+        return;
+    }
+}
 
 bool grCastle_801CF300(Ground_GObj* gobj)
 {
