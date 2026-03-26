@@ -634,18 +634,18 @@ DynamicsDesc* grCastle_801D0B04(enum_t arg)
 bool grCastle_801D0B0C(Vec3* v, int arg1, HSD_JObj* jobj)
 {
     Vec3 pos;
-    float temp_f30;
-    float temp_f31;
-    float temp_f31_2;
+    f32 temp_f30;
+    f32 temp_f31;
 
     temp_f31 = 192.0f;
     temp_f30 = 137.0f;
-    temp_f31_2 = temp_f31 * Ground_801C0498();
-    if ((v->x > temp_f31_2) && (v->y < (temp_f30 * Ground_801C0498()))) {
+    temp_f31 *= Ground_801C0498();
+    temp_f30 *= Ground_801C0498();
+    if ((v->x > temp_f31) && (v->y < temp_f30)) {
         return 0;
     }
     lb_8000B1CC(jobj, NULL, &pos);
-    if ((1 + v->y) > pos.y) {
+    if ((1.0f + v->y) > pos.y) {
         return 1;
     }
     return 0;
