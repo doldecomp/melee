@@ -64,8 +64,8 @@ typedef enum {
 /* 1D2D78 */ HSD_GObj* grStadium_801D2D78(void);
 /* 1D2E24 */ HSD_GObj* grStadium_801D2E24(void);
 /* 1D2ED0 */ void fn_801D2ED0(HSD_GObj*, int);
-/* 1D2FD0 */ void fn_801D2FD0(HSD_GObj*, int);
-/* 1D3084 */ void fn_801D3084(HSD_GObj*, int);
+/* 1D2FD0 */ void grStadium_801D2FD0(HSD_GObj*, int);
+/* 1D3084 */ void grStadium_801D3084(HSD_GObj*, int);
 /* 1D3138 */ HSD_TObj* grStadium_801D3138(Ground_GObj*, HSD_ImageDesc*,
                                           HSD_MObj**);
 /* 1D32D0 */ bool grStadium_801D32D0(Ground_GObj*);

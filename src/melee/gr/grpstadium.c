@@ -1,5 +1,7 @@
 #include "grpstadium.h"
 
+#include "baselib/forward.h"
+
 #include "dolphin/gx/GXStruct.h"
 
 #include <sysdolphin/baselib/archive.h>
@@ -1209,7 +1211,7 @@ HSD_GObj* grStadium_801D2D78(void)
     ImageDescWrapper* wrapper;
 
     temp_r3 = GObj_Create(0x11, 0x12, 0);
-    GObj_SetupGXLinkMax(temp_r3, fn_801D2FD0, 3);
+    GObj_SetupGXLinkMax(temp_r3, grStadium_801D2FD0, 3);
     wrapper = HSD_MemAlloc(0x1C);
     GObj_InitUserData(temp_r3, 3, HSD_Free, wrapper);
     memzero(&wrapper->desc, sizeof(wrapper->desc));
@@ -1222,7 +1224,7 @@ HSD_GObj* grStadium_801D2E24(void)
 {
     HSD_GObj* gobj = GObj_Create(0x11, 0x12, 0);
     ImageDescWrapper* wrapper;
-    GObj_SetupGXLinkMax(gobj, fn_801D3084, 3);
+    GObj_SetupGXLinkMax(gobj, grStadium_801D3084, 3);
     wrapper = HSD_MemAlloc(sizeof(ImageDescWrapper));
     GObj_InitUserData(gobj, 3, HSD_Free, wrapper);
     memzero(&wrapper->desc, sizeof(HSD_ImageDesc));
@@ -1256,27 +1258,27 @@ void fn_801D2ED0(HSD_GObj* gobj, int unused)
     gp2->u.display.xF8_0 = true;
 }
 
-void fn_801D2FD0(Ground_GObj* gobj, int unused)
+void grStadium_801D2FD0(Ground_GObj* gobj, int unused)
 {
-    ImageDescWrapper* wrapper = GET_WRAPPER(gobj);
     HSD_GObj* vision_gobj;
     Ground* gp2;
+    ImageDescWrapper* wrapper = GET_WRAPPER(gobj);
+    ImageDescWrapper* copy;
 
-    if (wrapper->flag) {
-        return;
+    copy = wrapper;
+    if (!wrapper->flag) {
+        lb_800122C8(&copy->desc, 0, 36, 0);
+        wrapper->flag = true;
+
+        vision_gobj = Ground_801C2BA4(PsType_Display);
+        HSD_ASSERT(0x6EA, vision_gobj);
+        gp2 = GET_GROUND(vision_gobj);
+        HSD_ASSERT(0x6EB, gp2);
+        gp2->u.display.xF8_0 = true;
     }
-
-    lb_800122C8(&wrapper->desc, 0, 0x24, 0);
-    wrapper->flag = true;
-
-    vision_gobj = Ground_801C2BA4(PsType_Display);
-    HSD_ASSERT(0x6EA, vision_gobj);
-    gp2 = GET_GROUND(vision_gobj);
-    HSD_ASSERT(0x6EB, gp2);
-    gp2->u.display.xF8_0 = true;
 }
 
-void fn_801D3084(HSD_GObj* gobj, int unused)
+void grStadium_801D3084(HSD_GObj* gobj, int unused)
 {
     void* new_var2; // Permuter slop
     ImageDescWrapper* wrapper = GET_WRAPPER(gobj);
@@ -1911,6 +1913,8 @@ void fn_801D4220(int un0, int un1, UNK_T un2, bool cancelflag)
     gp->u.stadium.xC4_b1 = false;
 }
 
+#pragma push
+#pragma dont_inline on
 bool grStadium_801D42B8(void)
 {
     HSD_GObj* map_gobj;
@@ -1927,11 +1931,7 @@ bool grStadium_801D42B8(void)
         grDatFiles_801C6478(gp->u.stadium.xCC, gp->u.stadium.xC8);
     return true;
 }
-
-inline bool grStadium_801D42B8_dontinline(void)
-{
-    return grStadium_801D42B8();
-}
+#pragma pop
 
 Ground* grStadium_801D4354(Ground_GObj* gobj)
 {
@@ -2153,7 +2153,7 @@ void grStadium_801D4548(Ground_GObj* gobj)
         }
         break;
     case 1:
-        if (grStadium_801D42B8_dontinline()) {
+        if (grStadium_801D42B8()) {
             temp_r31->u.stadium.xDC = 2;
             return;
         }

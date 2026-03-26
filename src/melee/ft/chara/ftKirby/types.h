@@ -42,9 +42,7 @@ struct ftKb_FighterVars {
     /* fp+22AC   */ s32 x80;
     /* fp+22B0   */ float x84; ///< Bowser fire breath scale 1
     /* fp+22B4   */ float x88; ///< Bowser fire breath scale 2
-    /* fp+22B8   */ float x8C;
-    /* fp+22BC   */ float x90;
-    /* fp+22C0   */ float x94;
+    /* fp+22B8   */ Vec3 x8C;
     /* fp+22C4   */ Item_GObj* x98; ///< Mewtwo shadow ball item
     /* fp+22C8   */ int x9C;
     /* fp+22CC   */ HSD_GObj* xA0; ///< Mewtwo effect gobj
