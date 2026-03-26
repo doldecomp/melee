@@ -27,6 +27,7 @@
 #include <baselib/psstructs.h>
 #include <baselib/random.h>
 #include <baselib/spline.h>
+#include <MSL/trigf.h>
 
 const unkCastleCallback grCs_803B7F28[5] = {
     grCastle_801D0550, grCastle_801D059C, grCastle_801D05E8,
@@ -115,6 +116,7 @@ typedef struct grCastleParams {
     /* 0x12C */ s16 x12C[]; // TODO: How big is this array?
 } grCastleParams;
 
+static f32 grCs_804D45E0 = 0.017453292f;
 static u8 grCs_804D45E4 = 1;
 
 static grCastleParams* grCs_804D6970;
@@ -864,6 +866,38 @@ void grCastle_801D0A9C(Vec3* arg0, f32 arg8)
 }
 
 /// #grCastle_801D0BBC
+struct lb_80011A50_t* grCastle_801D0BBC(void)
+{
+    f32 angle;
+
+    angle = atan2f(grCs_804D6974->x4.z, grCs_804D6974->x4.x) + grCs_804D45E0;
+    if (angle > 1.0471975430846214) {
+        angle = 1.0471976f;
+    }
+    if (angle < -1.0471975430846214) {
+        angle = -1.0471976f;
+    }
+    grCs_804D6974->x4.x = cosf(angle);
+    grCs_804D6974->x4.z = sinf(angle);
+    if ((grCs_804D6974->unk_angle_int % 30) == 0 &&
+        HSD_Randf() > 0.5)
+    {
+        grCs_804D45E0 = -grCs_804D45E0;
+    }
+    if ((grCs_804D6974->unk_angle_int % 300) == 0) {
+        if (grCs_804D45E4 != 0) {
+            grCs_804D45E4 = 0;
+        } else if (HSD_Randf() > 0.5) {
+            grCs_804D45E4 = 1;
+        }
+    }
+    if (grCs_804D45E4 != 0) {
+        grCs_804D6974->unk_scale = 0.3 * HSD_Randf() + 0.2;
+        return grCs_804D6974;
+    }
+    grCs_804D6974->unk_scale = 0.05 * HSD_Randf();
+    return grCs_804D6974;
+}
 
 void grCastle_801D0D24()
 {

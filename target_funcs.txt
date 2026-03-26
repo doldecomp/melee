@@ -5,10 +5,10 @@ file: src/melee/gr/grcastle.c
 - [x] grCastle_801CE9E8       
 - [x] grCastle_801D09B8       
 - [x] grCastle_801CD4D0       
-- [ ] grCastle_801CE8E8       
-- [ ] grCastle_801CE260       
-- [ ] grCastle_801CE054       
-- [ ] grCastle_801D0BBC       
+- [x] grCastle_801CE8E8       
+- [x] grCastle_801CE260       
+- [x] grCastle_801CE054       
+- [x] grCastle_801D0BBC       
 - [ ] grCastle_801CE3AC       
 - [ ] grCastle_801CEF04       
 - [ ] grCastle_801CF0F4       
