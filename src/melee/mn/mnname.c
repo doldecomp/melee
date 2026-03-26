@@ -770,6 +770,8 @@ void mnName_80238754_noinline(HSD_GObj* gobj)
 }
 #pragma pop
 
+#pragma push
+#pragma dont_inline on
 HSD_JObj* mnName_802388D4(HSD_GObj* gobj, u8 index)
 {
     u8* p = (u8*) gobj;
@@ -799,6 +801,7 @@ HSD_JObj* mnName_802388D4(HSD_GObj* gobj, u8 index)
 
     return (HSD_JObj*) gobj;
 }
+#pragma pop
 
 f32 mnName_80238964(u8 index, u8 target, u8 flag)
 {
@@ -905,15 +908,36 @@ void mnName_80238AE0(HSD_GObj* gobj, u8 index, u8 arg2)
 }
 #pragma pop
 
-#pragma push
-#pragma dont_inline on
+static inline AnimLoopSettings*
+mnName_FindAnimLoop(AnimLoopSettings** tableBase, f32 frame)
+{
+    AnimLoopSettings* table[6];
+    char* msg;
+    s32 i;
+
+    table[0] = tableBase[0];
+    table[1] = tableBase[1];
+    table[2] = tableBase[2];
+    table[3] = tableBase[3];
+    table[4] = tableBase[4];
+    table[5] = tableBase[5];
+
+    for (i = 0; i < 6; i++) {
+        if (table[i]->start_frame <= frame && frame <= table[i]->end_frame) {
+            return table[i];
+        }
+    }
+
+    msg = "But AnimFrame!!!\n";
+    HSD_ASSERTREPORT(0x3DC, NULL, msg);
+}
+
 void mnName_80238C34(HSD_GObj* arg0, u8 arg1, u8 arg2)
 {
     AnimLoopSettings** tableBase = mnName_803B8510;
     AnimLoopSettings* base = mnName_803ED538;
     MnName_GObj* data = (MnName_GObj*) arg0->user_data;
     AnimLoopSettings* found;
-    s32 i;
 
     if (arg1 != 0) {
         u8 prev = *((u8*) data + 1);
@@ -925,119 +949,31 @@ void mnName_80238C34(HSD_GObj* arg0, u8 arg1, u8 arg2)
     }
 
     {
-        AnimLoopSettings* table[6];
         HSD_JObj* jobj = mnName_802388D4((HSD_GObj*) data, 0x18U);
-        f32 frame = mn_8022F298(jobj);
-        table[0] = tableBase[0];
-        table[1] = tableBase[1];
-        table[2] = tableBase[2];
-        table[3] = tableBase[3];
-        table[4] = tableBase[4];
-        table[5] = tableBase[5];
-        for (i = 0; i < 6; i++) {
-            if (table[i]->start_frame <= frame &&
-                frame <= table[i]->end_frame)
-            {
-                found = table[i];
-                goto found1;
-            }
-        }
-        OSReport((char*) base + 0xF8);
-        __assert((char*) base + 0x10C, 0x3DC, mnName_804D4C04);
-    found1:
+        found = mnName_FindAnimLoop(tableBase, mn_8022F298(jobj));
         mn_8022ED6C(jobj, found);
     }
 
     {
-        AnimLoopSettings* table[6];
         HSD_JObj* jobj = mnName_802388D4((HSD_GObj*) data, 0x19U);
-        f32 frame = mn_8022F298(jobj);
-        table[0] = tableBase[0];
-        table[1] = tableBase[1];
-        table[2] = tableBase[2];
-        table[3] = tableBase[3];
-        table[4] = tableBase[4];
-        table[5] = tableBase[5];
-        for (i = 0; i < 6; i++) {
-            if (table[i]->start_frame <= frame &&
-                frame <= table[i]->end_frame)
-            {
-                found = table[i];
-                goto found2;
-            }
-        }
-        OSReport((char*) base + 0xF8);
-        __assert((char*) base + 0x10C, 0x3DC, mnName_804D4C04);
-    found2:
+        found = mnName_FindAnimLoop(tableBase, mn_8022F298(jobj));
         mn_8022ED6C(jobj, found);
     }
 
     {
-        AnimLoopSettings* table[6];
         HSD_JObj* jobj = mnName_802388D4((HSD_GObj*) data, 0x1AU);
-        f32 frame = mn_8022F298(jobj);
-        table[0] = tableBase[0];
-        table[1] = tableBase[1];
-        table[2] = tableBase[2];
-        table[3] = tableBase[3];
-        table[4] = tableBase[4];
-        table[5] = tableBase[5];
-        for (i = 0; i < 6; i++) {
-            if (table[i]->start_frame <= frame &&
-                frame <= table[i]->end_frame)
-            {
-                found = table[i];
-                goto found3;
-            }
-        }
-        OSReport((char*) base + 0xF8);
-        __assert((char*) base + 0x10C, 0x3DC, mnName_804D4C04);
-    found3:
+        found = mnName_FindAnimLoop(tableBase, mn_8022F298(jobj));
         mn_8022ED6C(jobj, found);
     }
 
     {
-        AnimLoopSettings* table4[6];
-        AnimLoopSettings* table5[6];
         HSD_JObj* jobj = (HSD_JObj*) data->gobj.prev_gx;
-        f32 frame = mn_8022F298(jobj);
         f32 result;
-        table4[0] = tableBase[0];
-        table4[1] = tableBase[1];
-        table4[2] = tableBase[2];
-        table4[3] = tableBase[3];
-        table4[4] = tableBase[4];
-        table4[5] = tableBase[5];
-        for (i = 0; i < 6; i++) {
-            if (table4[i]->start_frame <= frame &&
-                frame <= table4[i]->end_frame)
-            {
-                found = table4[i];
-                goto found4;
-            }
-        }
-        OSReport((char*) base + 0xF8);
-        __assert((char*) base + 0x10C, 0x3DC, mnName_804D4C04);
-    found4:
+
+        found = mnName_FindAnimLoop(tableBase, mn_8022F298(jobj));
         result = mn_8022ED6C(jobj, found);
 
-        table5[0] = tableBase[0];
-        table5[1] = tableBase[1];
-        table5[2] = tableBase[2];
-        table5[3] = tableBase[3];
-        table5[4] = tableBase[4];
-        table5[5] = tableBase[5];
-        for (i = 0; i < 6; i++) {
-            if (table5[i]->start_frame <= result &&
-                result <= table5[i]->end_frame)
-            {
-                found = table5[i];
-                goto found5;
-            }
-        }
-        OSReport((char*) base + 0xF8);
-        __assert((char*) base + 0x10C, 0x3DC, mnName_804D4C04);
-    found5:
+        found = mnName_FindAnimLoop(tableBase, result);
         if (found == base + 5) {
             if (result >= base[5].end_frame) {
                 HSD_GObjPLink_80390228(arg0);
@@ -1045,7 +981,6 @@ void mnName_80238C34(HSD_GObj* arg0, u8 arg1, u8 arg2)
         }
     }
 }
-#pragma pop
 
 void fn_80239574(HSD_GObj* arg0)
 {
@@ -1211,9 +1146,6 @@ void mnName_80239878(u8 arg0, HSD_GObj* gobj)
     }
 }
 
-/// #mnName_80239A24
-#pragma push
-#pragma dont_inline on
 void mnName_80239A24(HSD_GObj* gobj)
 {
     Vec3 sp6C;
@@ -1238,41 +1170,25 @@ void mnName_80239A24(HSD_GObj* gobj)
     s32 total_rows;
     u8 name_idx;
 
-    i = 0;
-    do {
+    for (i = 0; i < 0x18; i++) {
         jobj = HSD_JObjLoadJoint(mnName_804A06C0.joint);
         HSD_JObjAddAnimAll(jobj, mnName_804A06C0.anim_joint,
                            mnName_804A06C0.matanim_joint,
                            mnName_804A06C0.shapeanim_joint);
         HSD_JObjReqAnimAll(jobj, (f32) (mn_804A04F0.hovered_selection == i));
         HSD_JObjAnimAll(jobj);
-        ref_jobj = (HSD_JObj*) data->gobj.user_data_remove_func;
-        if (ref_jobj == NULL) {
-            __assert(mnName_804D4BF4, 0x3E1U, mnName_804D4BFC);
-        }
-        ref_jobj2 = (HSD_JObj*) data->gobj.x34_unk;
-        col_width = ref_jobj->translate.x;
-        if (ref_jobj2 == NULL) {
-            __assert(mnName_804D4BF4, 0x3E1U, mnName_804D4BFC);
-        }
-        ref_jobj3 = (HSD_JObj*) data->gobj.user_data_remove_func;
-        col_width = ref_jobj2->translate.x - col_width;
-        if (ref_jobj3 == NULL) {
-            __assert(mnName_804D4BF4, 0x3EEU, mnName_804D4BFC);
-        }
-        {
-            HSD_JObj* ref_y = (HSD_JObj*) data->x38;
-            row_height = ref_jobj3->translate.y;
-            if (ref_y == NULL) {
-                __assert(mnName_804D4BF4, 0x3EEU, mnName_804D4BFC);
-            }
-            row_height = ref_y->translate.y - row_height;
-        }
+        col_width = HSD_JObjGetTranslationX(
+            (HSD_JObj*) data->gobj.user_data_remove_func);
+        col_width = HSD_JObjGetTranslationX((HSD_JObj*) data->gobj.x34_unk) -
+                    col_width;
+        row_height = HSD_JObjGetTranslationY(
+            (HSD_JObj*) data->gobj.user_data_remove_func);
+        row_height =
+            HSD_JObjGetTranslationY((HSD_JObj*) data->x38) - row_height;
         mnName_80239F5C(jobj, col_width * (f32) (i / 6));
         mnName_80239EBC(jobj, row_height * (f32) (i % 6));
         HSD_JObjAddChild((HSD_JObj*) data->gobj.user_data_remove_func, jobj);
-        i += 1;
-    } while ((s32) i < 0x18);
+    }
 
     text = HSD_SisLib_803A6754(0, 0);
     data->text = text;
@@ -1286,27 +1202,13 @@ void mnName_80239A24(HSD_GObj* gobj)
     text->text_color = *(GXColor*) &mnName_804D4BE4;
 
     text_jobj6 = mnName_802388D4(gobj, 6U);
-    if (text_jobj0 == NULL) {
-        __assert(mnName_804D4BF4, 0x3E1U, mnName_804D4BFC);
-    }
-    text_col_width = text_jobj0->translate.x;
-    if (text_jobj6 == NULL) {
-        __assert(mnName_804D4BF4, 0x3E1U, mnName_804D4BFC);
-    }
-    text_col_width = text_jobj6->translate.x - text_col_width;
-
+    text_col_width = HSD_JObjGetTranslationX(text_jobj0);
+    text_col_width = HSD_JObjGetTranslationX(text_jobj6) - text_col_width;
     text_jobj1 = mnName_802388D4(gobj, 1U);
-    if (text_jobj0 == NULL) {
-        __assert(mnName_804D4BF4, 0x3EEU, mnName_804D4BFC);
-    }
-    text_row_height = text_jobj0->translate.y;
-    if (text_jobj1 == NULL) {
-        __assert(mnName_804D4BF4, 0x3EEU, mnName_804D4BFC);
-    }
-    text_row_height = -(text_jobj1->translate.y - text_row_height);
+    text_row_height = HSD_JObjGetTranslationY(text_jobj0);
+    text_row_height = -(HSD_JObjGetTranslationY(text_jobj1) - text_row_height);
 
-    i = 0;
-    do {
+    for (i = 0; i < 0x18; i++) {
         MnName_GObj* global_data =
             (MnName_GObj*) ((HSD_GObj*) mnName_804D6BF8)->user_data;
         row = global_data->gobj.gx_link + (i / 6);
@@ -1376,10 +1278,8 @@ void mnName_80239A24(HSD_GObj* gobj)
                                     &mnName_StringTerminator);
             }
         }
-        i += 1;
-    } while ((s32) i < 0x18);
+    }
 }
-#pragma pop
 
 void mnName_80239EBC(HSD_JObj* jobj, f32 y)
 {
@@ -1559,7 +1459,7 @@ HSD_GObj* mnName_8023A59C(u8 arg0)
     char* base = (char*) &mnName_803ED538;
     HSD_GObj* gobj;
     HSD_JObj* root_jobj;
-    MnName_GObj* data;
+    MnName_GObj* user_data;
     HSD_JObj* jobj5;
     MnNameArchive* archive = &mnName_804A06E0;
     s32 i;
@@ -1585,28 +1485,24 @@ HSD_GObj* mnName_8023A59C(u8 arg0)
                        archive->shapeanim_joint);
     HSD_JObjReqAnimAll(root_jobj, 0.0f);
     HSD_JObjAnimAll(root_jobj);
-    data = (MnName_GObj*) HSD_MemAlloc(0x44);
-    if (data == NULL) {
-        OSReport(base + 0x118);
-        __assert(base + 0x10C, 0x67CU, base + 0x130);
-    }
-    GObj_InitUserData(gobj, 0U, HSD_Free, data);
-    *(u8*) &data->gobj.classifier =
-        (u8) mn_804A04F0.cur_menu;
-    *((u8*) &data->gobj.classifier + 1) =
+    user_data = (MnName_GObj*) HSD_MemAlloc(0x44);
+    HSD_ASSERTREPORT(0x67CU, user_data, "Can't get user_data.\n");
+    GObj_InitUserData(gobj, 0U, HSD_Free, user_data);
+    *(u8*) &user_data->gobj.classifier = (u8) mn_804A04F0.cur_menu;
+    *((u8*) &user_data->gobj.classifier + 1) =
         (u8) mn_804A04F0.hovered_selection;
-    data->gobj.gx_link = 0;
-    data->gobj.p_priority = 0;
-    data->gobj.p_link = arg0;
-    data->text = NULL;
-    data->text2 = NULL;
+    user_data->gobj.gx_link = 0;
+    user_data->gobj.p_priority = 0;
+    user_data->gobj.p_link = arg0;
+    user_data->text = NULL;
+    user_data->text2 = NULL;
     for (i = 0; i < 0xD; i++) {
-        lb_80011E24(root_jobj,
-                    (HSD_JObj**) ((u8*) data + (i << 2) + 8), i, -1);
+        lb_80011E24(root_jobj, (HSD_JObj**) ((u8*) user_data + (i << 2) + 8),
+                    i, -1);
     }
     if ((u8) mn_804A04F0.x10 == 1) {
         struct mn_80231634_t* p =
-            (struct mn_80231634_t*) data->gobj.user_data_remove_func;
+            (struct mn_80231634_t*) user_data->gobj.user_data_remove_func;
         HSD_JObj* j;
         if (p == NULL) {
             j = NULL;
@@ -1614,36 +1510,34 @@ HSD_GObj* mnName_8023A59C(u8 arg0)
             j = (HSD_JObj*) p->x10;
         }
         HSD_JObjRemoveAll(j);
-        if (data->text != NULL) {
-            HSD_SisLib_803A5CC4(data->text);
-            data->text = NULL;
+        if (user_data->text != NULL) {
+            HSD_SisLib_803A5CC4(user_data->text);
+            user_data->text = NULL;
         }
-        HSD_JObjSetFlagsAll((HSD_JObj*) data->gobj.hsd_obj, 0x10U);
+        HSD_JObjSetFlagsAll((HSD_JObj*) user_data->gobj.hsd_obj, 0x10U);
     } else {
-        HSD_JObjRemoveAll(
-            (HSD_JObj*) mn_80231634(
-                (struct mn_80231634_t*) data->gobj
-                    .user_data_remove_func));
-        if (data->text != NULL) {
-            HSD_SisLib_803A5CC4(data->text);
-            data->text = NULL;
+        HSD_JObjRemoveAll((HSD_JObj*) mn_80231634(
+            (struct mn_80231634_t*) user_data->gobj.user_data_remove_func));
+        if (user_data->text != NULL) {
+            HSD_SisLib_803A5CC4(user_data->text);
+            user_data->text = NULL;
         }
-        mnName_80239A24((HSD_GObj*) data);
-        mnName_80238754_noinline((HSD_GObj*) data);
+        mnName_80239A24((HSD_GObj*) user_data);
+        mnName_80238754_noinline((HSD_GObj*) user_data);
     }
-    jobj7 = ((HSD_JObj**) data)[9];
+    jobj7 = ((HSD_JObj**) user_data)[9];
     HSD_JObjReqAnimAll(jobj7,
                        mnName_804D4BD0[mn_804A04F0.hovered_selection == 0x18]);
     HSD_JObjAnimAll(jobj7);
-    jobj4 = (HSD_JObj*) data->gobj.proc;
+    jobj4 = (HSD_JObj*) user_data->gobj.proc;
     HSD_JObjReqAnimAll(jobj4,
                        mnName_804D4BD8[mn_804A04F0.hovered_selection == 0x19]);
     HSD_JObjAnimAll(jobj4);
-    jobj5 = (HSD_JObj*) data->gobj.render_cb;
+    jobj5 = (HSD_JObj*) user_data->gobj.render_cb;
     HSD_JObjReqAnimAll(jobj5,
                        mnName_804D4BD8[mn_804A04F0.hovered_selection == 0x1A]);
     HSD_JObjAnimAll(jobj5);
-    scrollbar_container = (HSD_JObj*) data->gobj.hsd_obj;
+    scrollbar_container = (HSD_JObj*) user_data->gobj.hsd_obj;
     count = GetNameCount();
     if ((count % 6) != 0) {
         extra = 1;
@@ -1653,19 +1547,19 @@ HSD_GObj* mnName_8023A59C(u8 arg0)
     rows = (count / 6) + extra;
     if (rows > 4.0f) {
         HSD_JObjClearFlagsAll(scrollbar_container, JOBJ_HIDDEN);
-        pos = ((f32) data->gobj.gx_link) * (14.0f / (rows - 1.0f));
-        HSD_JObjSetTranslateX((HSD_JObj*) data->gobj.user_data, pos);
+        pos = ((f32) user_data->gobj.gx_link) * (14.0f / (rows - 1.0f));
+        HSD_JObjSetTranslateX((HSD_JObj*) user_data->gobj.user_data, pos);
     } else {
         HSD_JObjSetFlagsAll(scrollbar_container, JOBJ_HIDDEN);
     }
     {
         s32 sel = mn_804A04F0.hovered_selection - 0x18;
-        if (data->text2 != NULL) {
-            HSD_SisLib_803A5CC4(data->text2);
+        if (user_data->text2 != NULL) {
+            HSD_SisLib_803A5CC4(user_data->text2);
         }
         txt = HSD_SisLib_803A5ACC(0, 0, -9.5f, 9.1f, 17.0f, 364.68332f,
                                   38.38772f);
-        data->text2 = txt;
+        user_data->text2 = txt;
         txt->font_size.x = 0.0521f;
         txt->font_size.y = 0.0521f;
         HSD_SisLib_803A6368(txt, mnName_804D4BE8[sel]);
