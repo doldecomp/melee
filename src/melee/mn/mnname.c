@@ -57,8 +57,6 @@ extern Vec3 mnName_803ED618[];
 
 void fn_80249A1C(HSD_GObj* arg0);
 
-#pragma push
-#pragma opt_common_subs off
 char* mnName_8023749C(int slot)
 {
     int j;
@@ -74,9 +72,11 @@ char* mnName_8023749C(int slot)
         array = mnNameNew_803EE720;
     }
 
-    term = (s8) mnName_StringTerminator;
     new_var = (u8) slot;
-    for (j = 0; (j != new_var) && (term != ((s8) array[j][0])); j++) {
+    for (j = 0;
+         (j != new_var) && (mnName_StringTerminator != ((s8) array[j][0]));
+         j++)
+    {
     }
 
     str = array[j];
@@ -86,7 +86,6 @@ char* mnName_8023749C(int slot)
     }
     return str;
 }
-#pragma pop
 
 char* GetNameText(int slot)
 {
@@ -95,8 +94,12 @@ char* GetNameText(int slot)
     }
     return GetPersistentNameData((u8) slot)->namedata;
 }
-#pragma push
-#pragma dont_inline on
+
+static int GetNameCount_noinline(void)
+{
+    return GetNameCount();
+}
+
 int GetNameCount(void)
 {
     int i = 0;
@@ -108,7 +111,6 @@ int GetNameCount(void)
     }
     return count;
 }
-#pragma pop
 
 inline int GetNumNameList()
 {
@@ -258,8 +260,7 @@ void CreateNameAtIndex(s32 slot)
     InitializePersistentNameData(slot);
 }
 /// #mnName_SortNames
-#pragma push
-#pragma dont_inline on
+
 s32 mnName_SortNames(HSD_GObj* arg0)
 {
     u8* order = mnName_NameDisplayOrder;
@@ -368,7 +369,6 @@ s32 mnName_SortNames(HSD_GObj* arg0)
     }
     return result;
 }
-#pragma pop
 
 extern HSD_GObj* mnName_804D6BF8;
 
@@ -505,8 +505,6 @@ void mnName_ConfirmNameDeleteInput(HSD_GObj* arg0)
     }
 }
 
-#pragma push
-#pragma dont_inline on
 void mnName_MainInput(HSD_GObj* arg0)
 {
     MnName_GObj* gobj2 = (MnName_GObj*) mnName_804D6BF8->user_data;
@@ -532,7 +530,7 @@ void mnName_MainInput(HSD_GObj* arg0)
         mn_804D6BC8.cooldown = 5;
         switch ((s32) mn_804A04F0.hovered_selection) {
         case 24:
-            if (GetNameCount() < 0x78) {
+            if (GetNameCount_noinline() < 0x78) {
             } else {
                 isFull = 1;
             }
@@ -655,7 +653,6 @@ void mnName_MainInput(HSD_GObj* arg0)
         }
     }
 }
-#pragma pop
 
 void fn_80238540(HSD_GObj* gobj)
 {
@@ -713,7 +710,7 @@ void mnName_80238754(HSD_GObj* gobj)
 {
     s32 extra;
     HSD_JObj* jobj = gobj->hsd_obj;
-    s32 count = GetNameCount();
+    s32 count = GetNameCount_noinline();
     s32 col_count;
     f32 f_col;
 
@@ -737,39 +734,16 @@ void mnName_80238754(HSD_GObj* gobj)
     }
 }
 
-#pragma push
-#pragma dont_inline on
-void mnName_80238754_noinline(HSD_GObj* gobj);
-void mnName_80238754_noinline(HSD_GObj* gobj)
+static void mnName_80238754_noinline(HSD_GObj* gobj)
 {
-    s32 extra;
-    HSD_JObj* jobj = gobj->hsd_obj;
-    s32 count = GetNameCount();
-    s32 col_count;
-    f32 f_col;
-
-    if (count % 6 != 0) {
-        extra = 1;
-    } else {
-        extra = 0;
-    }
-    col_count = count / 6 + extra;
-    f_col = (f32) col_count;
-
-    if (f_col > 4.0f) {
-        f32 scroll_pos;
-
-        HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
-        scroll_pos = (f32) (u32) gobj->gx_link * (14.0f / (f_col - 1.0f));
-        HSD_JObjSetTranslateX(gobj->user_data, scroll_pos);
-    } else {
-        HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
-    }
+    mnName_80238754_noinline(gobj);
 }
-#pragma pop
 
-#pragma push
-#pragma dont_inline on
+static HSD_JObj* mnName_802388D4_noinline(HSD_GObj* gobj, u8 index)
+{
+    return mnName_802388D4(gobj, index);
+}
+
 HSD_JObj* mnName_802388D4(HSD_GObj* gobj, u8 index)
 {
     u8* p = (u8*) gobj;
@@ -799,7 +773,11 @@ HSD_JObj* mnName_802388D4(HSD_GObj* gobj, u8 index)
 
     return (HSD_JObj*) gobj;
 }
-#pragma pop
+
+static f32 mnName_80238964_noinline(u8 index, u8 target, u8 flag)
+{
+    return mnName_80238964(index, target, flag);
+}
 
 f32 mnName_80238964(u8 index, u8 target, u8 flag)
 {
@@ -829,8 +807,6 @@ f32 mnName_80238964(u8 index, u8 target, u8 flag)
     }
 }
 
-#pragma push
-#pragma dont_inline on
 void mnName_80238A04(HSD_GObj* gobj, u8 target, u8 flag)
 {
     AnimLoopSettings* base = mnName_803ED538;
@@ -839,8 +815,8 @@ void mnName_80238A04(HSD_GObj* gobj, u8 target, u8 flag)
     HSD_JObj* jobj;
 
     for (i = 0x18; i < 0x1B; i++) {
-        jobj = mnName_802388D4(gobj, i);
-        HSD_JObjReqAnimAll(jobj, mnName_80238964(i, target, flag));
+        jobj = mnName_802388D4_noinline(gobj, i);
+        HSD_JObjReqAnimAll(jobj, mnName_80238964_noinline(i, target, flag));
         HSD_JObjAnimAll(jobj);
     }
 
@@ -861,10 +837,7 @@ void mnName_80238A04(HSD_GObj* gobj, u8 target, u8 flag)
     }
     HSD_JObjAnimAll(jobj2);
 }
-#pragma pop
 
-#pragma push
-#pragma dont_inline on
 void mnName_80238AE0(HSD_GObj* gobj, u8 index, u8 arg2)
 {
     s32 color;
@@ -872,7 +845,7 @@ void mnName_80238AE0(HSD_GObj* gobj, u8 index, u8 arg2)
     s32* colorptr;
 
     if ((u8) index < 0x18) {
-        jobj = mnName_802388D4(gobj, index);
+        jobj = mnName_802388D4_noinline(gobj, index);
         HSD_JObjReqAnimAll(jobj, (f32) arg2);
         HSD_JObjAnimAll(jobj);
         if (arg2 != 0) {
@@ -886,7 +859,7 @@ void mnName_80238AE0(HSD_GObj* gobj, u8 index, u8 arg2)
         return;
     }
 
-    jobj = mnName_802388D4(gobj, index);
+    jobj = mnName_802388D4_noinline(gobj, index);
     if ((u8) index < 0x18) {
         HSD_JObjReqAnimAll(jobj, (f32) arg2);
     } else {
@@ -904,7 +877,6 @@ void mnName_80238AE0(HSD_GObj* gobj, u8 index, u8 arg2)
     }
     HSD_JObjAnimAll(jobj);
 }
-#pragma pop
 
 static inline AnimLoopSettings*
 mnName_FindAnimLoop(AnimLoopSettings** tableBase, f32 frame)
@@ -1122,7 +1094,7 @@ void mnName_80239878(u8 arg0, HSD_GObj* gobj)
 
     mnName_8023A058(gobj);
     jobj = gobj->hsd_obj;
-    count = GetNameCount();
+    count = GetNameCount_noinline();
     if (count % 6 != 0) {
         extra = 1;
     } else {
@@ -1190,7 +1162,7 @@ void mnName_80239A24(HSD_GObj* gobj)
 
     text = HSD_SisLib_803A6754(0, 0);
     data->text = text;
-    text_jobj0 = mnName_802388D4(gobj, 0U);
+    text_jobj0 = mnName_802388D4_noinline(gobj, 0U);
     lb_8000B1CC(text_jobj0, mnName_803ED618, &sp6C);
     text->pos_x = sp6C.x;
     text->pos_y = -sp6C.y;
@@ -1199,10 +1171,10 @@ void mnName_80239A24(HSD_GObj* gobj)
     text->font_size.y = 0.03f;
     text->text_color = *(GXColor*) &mnName_804D4BE4;
 
-    text_jobj6 = mnName_802388D4(gobj, 6U);
+    text_jobj6 = mnName_802388D4_noinline(gobj, 6U);
     text_col_width = HSD_JObjGetTranslationX(text_jobj0);
     text_col_width = HSD_JObjGetTranslationX(text_jobj6) - text_col_width;
-    text_jobj1 = mnName_802388D4(gobj, 1U);
+    text_jobj1 = mnName_802388D4_noinline(gobj, 1U);
     text_row_height = HSD_JObjGetTranslationY(text_jobj0);
     text_row_height = -(HSD_JObjGetTranslationY(text_jobj1) - text_row_height);
 
@@ -1210,7 +1182,7 @@ void mnName_80239A24(HSD_GObj* gobj)
         MnName_GObj* global_data =
             (MnName_GObj*) ((HSD_GObj*) mnName_804D6BF8)->user_data;
         row = global_data->gobj.gx_link + (i / 6);
-        count = GetNameCount();
+        count = GetNameCount_noinline();
         if ((count % 6) != 0) {
             extra = 1;
         } else {
@@ -1536,7 +1508,7 @@ HSD_GObj* mnName_8023A59C(u8 arg0)
                        mnName_804D4BD8[mn_804A04F0.hovered_selection == 0x1A]);
     HSD_JObjAnimAll(jobj5);
     scrollbar_container = (HSD_JObj*) user_data->gobj.hsd_obj;
-    count = GetNameCount();
+    count = GetNameCount_noinline();
     if ((count % 6) != 0) {
         extra = 1;
     } else {
