@@ -7,6 +7,8 @@
 #include "ft/ftdevice.h"
 #include "ft/ftlib.h"
 #include "gr/grdisplay.h"
+#include "gr/granime.h"
+#include "gr/grdatfiles.h"
 #include "gr/grlib.h"
 #include "gr/grmaterial.h"
 #include "gr/ground.h"
@@ -20,6 +22,7 @@
 #include "mp/mplib.h"
 
 #include <dolphin/mtx.h>
+#include <baselib/archive.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
@@ -123,6 +126,24 @@ static grCastleParams* grCs_804D6970;
 static struct lb_80011A50_t* grCs_804D6974;
 
 static const Quaternion grCs_803B7EB8 = { 0.0f, 0.0f, 0.0f, 1.0f };
+
+static const Vec3 grCs_803B7E9C = { -257.0f, 13.5f, -252.0f };
+
+typedef struct grCastle_DynEntry {
+    s16 depth;
+    s16 type;
+} grCastle_DynEntry;
+
+typedef struct grCastle_DynEntries {
+    grCastle_DynEntry e[4];
+} grCastle_DynEntries;
+
+static const grCastle_DynEntries grCs_803B7EA8 = {{
+    { 66, 6 },
+    { 76, 6 },
+    { 85, 6 },
+    { 94, 6 },
+}};
 
 void grCastle_801CD338(bool arg0)
 {
@@ -243,6 +264,94 @@ void grCastle_801CD610(Ground_GObj* gobj)
 }
 
 /// #grCastle_801CD658
+void grCastle_801CD658(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    UnkArchiveStruct* archive;
+    DynamicsDesc* flag3;
+    DynamicsDesc* flag4;
+    DynamicsDesc* flag6;
+    Vec3 pos;
+    grCastle_DynEntries entries_s;
+    s32 i;
+    s32 pad;
+
+    grAnime_801C8138(gobj, gp->map_id, 0);
+
+    pos = grCs_803B7E9C;
+    {
+        f32 scale = Ground_801C0498();
+        pos.x *= scale;
+        pos.y *= scale;
+        pos.z *= scale;
+    }
+    grLib_801C96F8(0x7536, 0x1E, &pos);
+
+    gp->gv.castle9.dynamics[0].data = NULL;
+    gp->gv.castle9.dynamics[1].data = NULL;
+    gp->gv.castle9.dynamics[2].data = NULL;
+    gp->gv.castle9.dynamics[3].data = NULL;
+    gp->gv.castle9.dynamics[4].data = NULL;
+    gp->gv.castle9.dynamics[5].data = NULL;
+    gp->gv.castle9.dynamics[6].data = NULL;
+    gp->gv.castle9.dynamics[7].data = NULL;
+
+    for (i = 8; i < 12; i++) {
+        gp->gv.castle9.dynamics[i].data = NULL;
+    }
+
+    archive = grDatFiles_801C6324();
+    if (archive != NULL) {
+        flag3 = HSD_ArchiveGetPublicAddress(archive->unk0,
+                                            "dynamicsdata_flag3");
+        if (flag3 != NULL) {
+            flag4 = HSD_ArchiveGetPublicAddress(archive->unk0,
+                                                "dynamicsdata_flag4");
+            if (flag4 != NULL) {
+                flag6 = HSD_ArchiveGetPublicAddress(archive->unk0,
+                                                    "dynamicsdata_flag6");
+                if (flag6 != NULL) {
+                    grCastle_DynEntry* ep;
+                    DynamicsDesc* dp;
+
+                    entries_s = grCs_803B7EA8;
+                    ep = entries_s.e;
+                    dp = &gp->gv.castle9.dynamics[0];
+
+                    i = 0;
+                    do {
+                        HSD_JObj* jobj =
+                            Ground_801C3FA4(gobj, ep->depth);
+                        if (jobj != NULL) {
+                            if (ep->type == 3) {
+                                grLib_801C9B20(jobj, flag3, dp);
+                            } else if (ep->type == 4) {
+                                grLib_801C9B20(jobj, flag4, dp);
+                            } else if (ep->type == 6) {
+                                grLib_801C9B20(jobj, flag6, dp);
+                            } else {
+                                dp->data = NULL;
+                            }
+                        } else {
+                            dp->data = NULL;
+                        }
+                        i++;
+                        ep++;
+                        dp++;
+                    } while ((u32)i < 4);
+                }
+            }
+        }
+    }
+
+    gobj->render_cb = fn_801D0924;
+    Ground_801C10B8(gobj, grCastle_801CD610);
+    gp->gv.castle9.xC4 = 0;
+    gp->gv.castle9.xC8 = 0;
+    gp->gv.castle9.xCC = 0;
+    gp->gv.castle9.xDE &= ~0x80;
+    gp->x10_flags.b5 = 1;
+}
 
 bool grCastle_801CD8A0(Ground_GObj* gobj)
 {
