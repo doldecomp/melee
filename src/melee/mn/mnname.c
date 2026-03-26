@@ -514,6 +514,7 @@ void mnName_MainInput(HSD_GObj* arg0)
     MnName_GObj* gobj2 = (MnName_GObj*) mnName_804D6BF8->user_data;
     u32 buttons = mn_80229624(4U);
     s32 isFull = 0;
+    PAD_STACK(0x20);
     mn_804A04F0.buttons = buttons;
 
     if (buttons & 0x20) {
@@ -1552,26 +1553,26 @@ void mnName_8023A290(void)
 }
 
 /// @todo Strings at base offsets are in rodata near mnName_803ED538
-#pragma push
-#pragma dont_inline on
+
 HSD_GObj* mnName_8023A59C(u8 arg0)
 {
     char* base = (char*) &mnName_803ED538;
     HSD_GObj* gobj;
     HSD_JObj* root_jobj;
     MnName_GObj* data;
+    HSD_JObj* jobj5;
     MnNameArchive* archive = &mnName_804A06E0;
     s32 i;
     HSD_JObj* jobj7;
     HSD_JObj* jobj4;
-    HSD_JObj* jobj5;
     HSD_JObj* scrollbar_container;
     HSD_JObj* slider;
     s32 count;
     s32 extra;
-    s32 rows;
+    f32 rows;
     f32 pos;
     HSD_Text* txt;
+    PAD_STACK(0x18);
 
     gobj = GObj_Create(6U, 7U, 0x80U);
     mnName_804D6BF8 = gobj;
@@ -1628,7 +1629,7 @@ HSD_GObj* mnName_8023A59C(u8 arg0)
             data->text = NULL;
         }
         mnName_80239A24((HSD_GObj*) data);
-        mnName_80238754((HSD_GObj*) data);
+        mnName_80238754_noinline((HSD_GObj*) data);
     }
     jobj7 = ((HSD_JObj**) data)[9];
     HSD_JObjReqAnimAll(jobj7,
@@ -1650,24 +1651,10 @@ HSD_GObj* mnName_8023A59C(u8 arg0)
         extra = 0;
     }
     rows = (count / 6) + extra;
-    if ((f32) rows > 4.0f) {
+    if (rows > 4.0f) {
         HSD_JObjClearFlagsAll(scrollbar_container, JOBJ_HIDDEN);
-        slider = (HSD_JObj*) data->gobj.user_data;
-        pos = (f32) data->gobj.gx_link * (14.0f / ((f32) rows - 1.0f));
-        if (slider == NULL) {
-            __assert(mnName_804D4BF4, 0x3A4, mnName_804D4BFC);
-        }
-        slider->translate.x = pos;
-        if (!(slider->flags & JOBJ_MTX_INDEP_SRT) && slider) {
-            if (slider == NULL) {
-                __assert(mnName_804D4BF4, 0x234, mnName_804D4BFC);
-            }
-            if ((!(slider->flags & 0x800000) &&
-                 (slider->flags & 0x40)) == 0)
-            {
-                HSD_JObjSetMtxDirtySub(slider);
-            }
-        }
+        pos = ((f32) data->gobj.gx_link) * (14.0f / (rows - 1.0f));
+        HSD_JObjSetTranslateX((HSD_JObj*) data->gobj.user_data, pos);
     } else {
         HSD_JObjSetFlagsAll(scrollbar_container, JOBJ_HIDDEN);
     }
@@ -1685,7 +1672,6 @@ HSD_GObj* mnName_8023A59C(u8 arg0)
     }
     return gobj;
 }
-#pragma pop
 
 void mnName_8023A9B4(u8 arg0)
 {
