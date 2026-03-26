@@ -1,0 +1,25 @@
+file: src/melee/gr/grcastle.c
+- [x] grCastle_801D0B0C       
+- [x] grCastle_801CD8A8       
+- [x] grCastle_801CE19C       
+- [x] grCastle_801CE9E8       
+- [x] grCastle_801D09B8       
+- [x] grCastle_801CD4D0       
+- [ ] grCastle_801CE8E8       
+- [ ] grCastle_801CE260       
+- [ ] grCastle_801CE054       
+- [ ] grCastle_801D0BBC       
+- [ ] grCastle_801CE3AC       
+- [ ] grCastle_801CEF04       
+- [ ] grCastle_801CF0F4       
+- [ ] grCastle_801CDA0C       
+- [ ] grCastle_801CD658       
+- [ ] grCastle_801D02B8       
+- [ ] grCastle_801CE578       
+- [ ] grCastle_801D0D84       
+- [ ] grCastle_801CF868       
+- [ ] grCastle_801CDC44       
+- [ ] grCastle_801CEACC        
+- [ ] grCastle_801CF308        
+- [ ] grCastle_801CFBD4 
+

@@ -13,6 +13,7 @@
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
 #include "it/it_26B1.h"
+#include "it/it_2725.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 #include "lb/types.h"
@@ -442,6 +443,31 @@ void grCastle_801CE860(Ground_GObj* gobj)
 void grCastle_801CE8E4(Ground_GObj* gobj) {}
 
 /// #grCastle_801CE8E8
+void grCastle_801CE8E8(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    Ground* gp2;
+    CmSubject* subject;
+    PAD_STACK(8);
+
+    Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
+    grAnime_801C8138((HSD_GObj*) gobj, gp->map_id, 0);
+
+    gp2 = GET_GROUND(gobj);
+    gp2->gv.arwing.xC8 = (u32) Camera_80029044(2);
+    subject = (CmSubject*) gp2->gv.arwing.xC8;
+    if (subject != NULL) {
+        subject->x40.x = *(f32*) ((u8*) grCs_804D6970 + 0x134);
+        subject->x40.y = *(f32*) ((u8*) grCs_804D6970 + 0x138);
+        subject->x48.x = *(f32*) ((u8*) grCs_804D6970 + 0x13C);
+        subject->x48.y = *(f32*) ((u8*) grCs_804D6970 + 0x140);
+    }
+    gp->gv.arwing.xC4 = (u32) grMaterial_801C8CFC(
+        0, 4, gp, Ground_801C3FA4((HSD_GObj*) gobj, 0),
+        (void (*)(Item_GObj*, Ground*)) fn_801CE9DC, NULL, NULL);
+    it_80275414((Item_GObj*) gp->gv.arwing.xC4);
+    Ground_801C5440(gp, 0, 0x53024U);
+}
 
 void fn_801CE9DC(void) {}
 
