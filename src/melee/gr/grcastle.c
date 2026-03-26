@@ -365,6 +365,62 @@ void grCastle_801CDFD8(Ground_GObj* gobj)
 }
 
 /// #grCastle_801CE054
+s32 grCastle_801CE054(Ground_GObj* gobj)
+{
+    s16 arr[9];
+    s32 count = 0;
+    s32 ctr;
+    s32 val = 0;
+    Ground* gp = GET_GROUND(gobj);
+    s16* dst = arr + count;
+    s16 picked;
+    s32 idx;
+
+    ctr = 3;
+    do {
+        if (val != gp->gv.castle4.xD8 &&
+            val != gp->gv.castle4.xDA &&
+            val != gp->gv.castle4.xDC)
+        {
+            *dst++ = (s16) val;
+            count++;
+        }
+        val++;
+        if (val != gp->gv.castle4.xD8 &&
+            val != gp->gv.castle4.xDA &&
+            val != gp->gv.castle4.xDC)
+        {
+            *dst++ = (s16) val;
+            count++;
+        }
+        val++;
+        if (val != gp->gv.castle4.xD8 &&
+            val != gp->gv.castle4.xDA &&
+            val != gp->gv.castle4.xDC)
+        {
+            *dst++ = (s16) val;
+            count++;
+        }
+        val++;
+    } while (--ctr != 0);
+
+    if (count != 0) {
+        idx = HSD_Randi(count);
+    } else {
+        idx = 0;
+    }
+
+    picked = arr[idx];
+    (&gp->gv.castle4.xD8)[gp->gv.castle4.xD6] = picked;
+
+    if (gp->gv.castle4.xD6 == 2) {
+        gp->gv.castle4.xD6 = 0;
+    } else {
+        gp->gv.castle4.xD6 = gp->gv.castle4.xD6 + 1;
+    }
+
+    return (s32) picked;
+}
 
 /// #grCastle_801CE19C
 void grCastle_801CE19C(Ground_GObj* gobj)
