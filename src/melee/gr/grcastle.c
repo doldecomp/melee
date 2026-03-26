@@ -642,6 +642,88 @@ bool grCastle_801CEEFC(Ground_GObj* gobj)
 }
 
 /// #grCastle_801CEF04
+void grCastle_801CEF04(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    PAD_STACK(8);
+
+    switch (gp->gv.castle6.xC4) {
+    case 0:
+        break;
+    case 1: {
+        s32 hi, lo, range;
+
+        gp->gv.castle6.xC8 = 0;
+        hi = *(s16*)((u8*)grCs_804D6970 + 0x42);
+        lo = *(s16*)((u8*)grCs_804D6970 + 0x40);
+
+        if (hi > lo) {
+            range = hi - lo;
+            hi = lo + (range != 0 ? HSD_Randi(range) : 0);
+        } else if (hi < lo) {
+            range = lo - hi;
+            hi += (range != 0 ? HSD_Randi(range) : 0);
+        }
+        gp->gv.castle6.xCC = hi;
+        if (grCastle_801D0298(gobj, 1) != 0) {
+            gp->gv.castle6.xC4 = 2;
+        }
+        grCastle_801D02B8(gobj);
+        break;
+    }
+    case 2: {
+        s32 temp = gp->gv.castle6.xCC;
+        gp->gv.castle6.xCC = temp - 1;
+        if (temp < 0) {
+            s32 i;
+            gp->gv.castle6.xC4 = 3;
+            gp->gv.castle6.xCC = 0;
+            for (i = 0; i < 5; i++) {
+                if (gp->gv.castle3.x1C[2].count != 0) {
+                    grMaterial_801C8CDC(
+                        (HSD_GObj*)gp->gv.castle3.x1C[2].count);
+                    gp->gv.castle3.x1C[2].count = 0;
+                }
+                gp = (Ground*)((u8*)gp + 4);
+            }
+        }
+        grCastle_801D02B8(gobj);
+        break;
+    }
+    case 3: {
+        s32 temp = gp->gv.castle6.xCC;
+        gp->gv.castle6.xCC = temp + 1;
+        if (temp > *(s16*)((u8*)grCs_804D6970 + 0x44)) {
+            gp->gv.castle6.xC4 = 4;
+        } else {
+            s32 val;
+            if (gp->gv.castle6.xC8 != 0) {
+                val = 0;
+            } else {
+                val = 1;
+            }
+            gp->gv.castle6.xC8 = (s16)val;
+        }
+        grCastle_801D02B8(gobj);
+        break;
+    }
+    case 4: {
+        s32 val;
+        if (gp->gv.castle6.xC8 != 0) {
+            val = 0;
+        } else {
+            val = 1;
+        }
+        gp->gv.castle6.xC8 = (s16)val;
+        if (grCastle_801D0298(gobj, 0) != 0) {
+            gp->gv.castle6.xC8 = 0;
+            gp->gv.castle6.xC4 = 0;
+        }
+        break;
+    }
+    }
+    Ground_801C2FE0(gobj);
+}
 
 void grCastle_801CF0F0(Ground_GObj* gobj) {}
 
@@ -716,9 +798,10 @@ void fn_801CFB68(Item_GObj* item_gobj, Ground* gp, HSD_GObj* gobj)
 
 /// #grCastle_801D0298
 
-void grCastle_801D0298(void)
+bool grCastle_801D0298(Ground_GObj* gobj, s32 arg1)
 {
     grCastle_801CFBD4();
+    return false;
 }
 
 /// #grCastle_801D02B8
