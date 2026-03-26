@@ -366,6 +366,29 @@ void grCastle_801CDFD8(Ground_GObj* gobj)
 /// #grCastle_801CE054
 
 /// #grCastle_801CE19C
+void grCastle_801CE19C(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    PAD_STACK(8);
+    if (((u8*) gp)[0xDE] >> 7 & 1) {
+        s16 timer = *(s16*) ((u8*) gp + 0xD4);
+        *(s16*) ((u8*) gp + 0xD4) = timer - 1;
+        if (timer < 0) {
+            HSD_GObj* new_gobj =
+                grCastle_801CD4D0(grCastle_801CE054(gobj) + 8);
+            ((u8*) gp)[0xDE] &= ~0x80;
+            if (new_gobj != NULL) {
+                Ground* new_gp = new_gobj->user_data;
+                Ground_801C5440(gp, 0, 0x53021U);
+                Ground_801C5694(
+                    gp, 0,
+                    *(f32*) ((u8*) grCs_804D6970 +
+                             *(s16*) ((u8*) new_gp + 0xC6) * 0x14 + 0x60));
+                *(Ground_GObj**) ((u8*) new_gp + 0xD4) = gobj;
+            }
+        }
+    }
+}
 
 /// #grCastle_801CE260
 
