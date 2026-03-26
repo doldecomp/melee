@@ -45,6 +45,17 @@ grFZeroCarEntry grFZeroCar_803E0BD8[30] = {
     { 0, 28, { 1, -1, -1, -1 } }, { 0, 29, { 1, 3, 2, 4 } },
 };
 
+static char grFZeroCar_804D4598[8] = "archive";
+
+// For sdata2 ordering
+static void fakeFunc(Vec3);
+static void fakeFunc(Vec3 temp)
+{
+    f64 f = 1.0;
+    temp.x = 0.0f;
+    temp.y = f;
+}
+
 static inline void setup_car_child(HSD_JObj* parent, s16 ext_count, s32 offset,
                                    f32 scale_factor)
 {
@@ -52,7 +63,7 @@ static inline void setup_car_child(HSD_JObj* parent, s16 ext_count, s32 offset,
     HSD_JObj* jobj;
 
     archive = grDatFiles_801C6330(ext_count);
-    HSD_ASSERT(95, archive);
+    HSD_ASSERTMSG(95, archive, grFZeroCar_804D4598);
 
     jobj = Ground_801C13D0(ext_count, 0);
     if (jobj != NULL) {
