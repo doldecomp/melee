@@ -290,6 +290,48 @@ void grCastle_801CD9B4(Ground_GObj* gobj)
 }
 
 /// #grCastle_801CDA0C
+void grCastle_801CDA0C(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+    f32 val;
+
+    Ground_801C2ED0(jobj, gp->map_id);
+    gp->x10_flags.b5 = 1;
+
+    gp->gv.castle8.xC4 = Ground_801C3FA4(gobj, 1);
+    if (*(f32*)((u8*)grCs_804D6970 + 0x18) != 0.0f) {
+        val = *(f32*)((u8*)grCs_804D6970 + 0x14);
+    } else {
+        val = *(f32*)((u8*)grCs_804D6970 + 0x10);
+    }
+    gp->gv.castle8.xC8 = val;
+    gp->gv.castle8.xCC = 0;
+
+    HSD_JObjSetTranslateY(gp->gv.castle8.xC4, gp->gv.castle8.xC8);
+    mpLib_80057424(4);
+
+    gp->gv.castle8.xCE = (s16)*(f32*)((u8*)grCs_804D6970 + 0x38);
+    gp->gv.castle8.xD0 = 0.0f;
+
+    gp->gv.castle8.xD4 = Ground_801C3FA4(gobj, 4);
+    if (*(f32*)((u8*)grCs_804D6970 + 0x18) != 0.0f) {
+        val = *(f32*)((u8*)grCs_804D6970 + 0x14);
+    } else {
+        val = *(f32*)((u8*)grCs_804D6970 + 0x10);
+    }
+    gp->gv.castle8.xD8 = val;
+    gp->gv.castle8.xDC = 0;
+
+    HSD_JObjSetTranslateY(gp->gv.castle8.xD4, gp->gv.castle8.xD8);
+    mpLib_80057424(5);
+
+    gp->gv.castle8.xDE = (s16)*(f32*)((u8*)grCs_804D6970 + 0x38);
+    gp->gv.castle8.xE0 = 0.0f;
+
+    Ground_801C10B8(gobj, grCastle_801CD9B4);
+    Ground_801C2FE0(gobj);
+}
 
 bool grCastle_801CDC3C(Ground_GObj* gobj)
 {
