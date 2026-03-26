@@ -190,14 +190,19 @@ void ftCo_80097D40(Fighter_GObj* gobj)
 }
 #undef SOLUTION
 
-void ftCo_80097D88(Fighter_GObj* gobj)
+static void inlineA1(Fighter_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     if (fp->x2228_b2) {
         ftCo_80097AF4(gobj);
     } else {
         ftCo_8009794C(gobj);
     }
+}
+
+void ftCo_80097D88(Fighter_GObj* gobj)
+{
+    inlineA1(gobj);
 }
 
 void ftCo_DownBound_Anim(Fighter_GObj* gobj)
