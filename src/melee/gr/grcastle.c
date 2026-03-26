@@ -3,6 +3,7 @@
 #include "placeholder.h"
 
 #include "baselib/random.h"
+#include "cm/camera.h"
 #include "ft/ftdevice.h"
 #include "ft/ftlib.h"
 #include "gr/grdisplay.h"

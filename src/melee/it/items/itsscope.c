@@ -11,7 +11,6 @@
 #include "it/it_2725.h"
 #include "it/itCommonItems.h"
 #include "it/item.h"
-#include "it/items/itsscopebeam.h"
 
 #define GET_ATTRS(ip)                                                         \
     ((itSScopeAttributes*) (ip)->xC4_article_data->x4_specialAttributes)
@@ -170,16 +169,16 @@ bool itSScope_Logic21_HitShield(Item_GObj* gobj)
 
 /// #itSScope_Logic21_Reflected
 
-void itSScope_Logic21_Reflected(Item_GObj* gobj)
+bool itSScope_Logic21_Reflected(Item_GObj* gobj)
 {
-    it_80273030(gobj);
+    return it_80273030(gobj);
 }
 
 /// #itSScope_Logic21_ShieldBounced
 
-void itSScope_Logic21_ShieldBounced(Item_GObj* gobj)
+bool itSScope_Logic21_ShieldBounced(Item_GObj* gobj)
 {
-    itColl_BounceOffShield(gobj);
+    return itColl_BounceOffShield(gobj);
 }
 
 void itSScope_Logic21_EnteredAir(Item_GObj* gobj)

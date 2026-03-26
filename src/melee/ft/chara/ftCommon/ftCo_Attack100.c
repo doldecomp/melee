@@ -600,7 +600,6 @@ void fn_800D7938(Fighter_GObj* gobj)
     Fighter_GObj* temp_r30;
     Fighter* temp_r31;
     s32 temp_r4;
-    extern void it_80291F14(Item_GObj*, s32);
 
     temp_r30 = gobj;
     temp_r31 = GET_FIGHTER(temp_r30);
@@ -1765,48 +1764,6 @@ static void fn_800DAECC(Fighter_GObj* gobj)
     ftCo_CapturePulledHi_Coll(gobj);
 }
 
-void ftCo_CapturePulledHi_Coll(Fighter_GObj* gobj)
-{
-    register Fighter* temp_r31;
-    register Fighter_GObj* temp_r30;
-    Fighter* fp;
-    Fighter* victim_fp;
-    f32 dz;
-    f32 dy;
-    f32 dx;
-    volatile u8 pad10[0x10];
-    Vec3 sp34;
-    Vec3 sp28;
-
-    temp_r30 = gobj;
-    temp_r31 = GET_FIGHTER(temp_r30);
-
-    ftCommon_8007D7FC(temp_r31);
-    Fighter_ChangeMotionState(temp_r30, ftCo_MS_CapturePulledLw,
-                              Ft_MF_UpdateCmd, temp_r31->cur_anim_frame, 1.0F,
-                              0.0F, NULL);
-
-    fp = GET_FIGHTER(temp_r30);
-    victim_fp = GET_FIGHTER(temp_r31->victim_gobj);
-
-    lb_8000B1CC(GET_FIGHTER(fp->victim_gobj)->mv.co.capturedamage.x18, NULL,
-                &sp28);
-    lb_8000B1CC(fp->parts[ftParts_GetBoneIndex(fp, FtPart_XRotN)].joint, NULL,
-                &sp34);
-
-    dx = sp28.x - sp34.x;
-    dy = sp28.y - sp34.y;
-    dz = sp28.z - sp34.z;
-
-    if (fp->ground_or_air == GA_Ground) {
-        victim_fp->x2170 = dy + fp->cur_pos.y - victim_fp->cur_pos.y;
-    } else {
-        victim_fp->x2170 = 0.0F;
-        fp->cur_pos.x += dx;
-        fp->cur_pos.y += dy;
-        fp->cur_pos.z += dz;
-    }
-}
 void ftCo_CapturePulledLw_Anim(Fighter_GObj* gobj) {}
 
 void ftCo_CapturePulledLw_IASA(Fighter_GObj* gobj) {}

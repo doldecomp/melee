@@ -5,6 +5,9 @@
 
 #include "ft/chara/ftKirby/ftKb_Init.h"
 #include "it/inlines.h"
+#include "it/it_26B1.h"
+#include "it/it_2725.h"
+#include "it/item.h"
 
 double it_802F23AC(int* obj, float* pos)
 {

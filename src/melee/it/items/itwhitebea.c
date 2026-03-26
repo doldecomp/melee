@@ -8,6 +8,7 @@
 #include "it/item.h"
 #include "it/items/itfreeze.h"
 #include "it/types.h"
+#include "mp/mpcoll.h"
 #include "mp/mplib.h"
 #include "sysdolphin/baselib/random.h"
 

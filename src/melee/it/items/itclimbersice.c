@@ -5,6 +5,8 @@
 
 #include "ef/efasync.h"
 #include "ef/eflib.h"
+#include "ftKirby/ftKb_Init.h"
+#include "ftPopo/ftPp_Init.h"
 
 #include "it/forward.h"
 
@@ -12,6 +14,7 @@
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/itcoll.h"
 #include "it/item.h"
 
 /* 2C23D4 */ static bool itClimbersBlizzard_UnkMotion0_Coll(Item_GObj* gobj);
@@ -56,13 +59,13 @@ void it_802C17DC(Item_GObj* gobj)
 void it_2725_Logic90_Destroyed(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    Item_GObj* owner = ip->xDD4_itemVar.climbersice.x0;
+    Fighter_GObj* owner = ip->xDD4_itemVar.climbersice.x0;
 
     if (owner != NULL) {
         if (ip->kind == 0x6A) {
-            ftPp_Init_8011F16C(owner);
+            ftPp_Init_8011F16C(gobj, owner);
         } else {
-            ftKb_SpecialNIc_80108CE8(owner);
+            ftKb_SpecialNIc_80108CE8(gobj, owner);
         }
     }
     ip->xDD4_itemVar.climbersice.x0 = NULL;
@@ -216,9 +219,9 @@ bool itClimbersIce_Logic90_DmgDealt(Item_GObj* arg0)
     return true;
 }
 
-void itClimbersIce_Logic90_Reflected(Item_GObj* gobj)
+bool itClimbersIce_Logic90_Reflected(Item_GObj* gobj)
 {
-    it_80273030(gobj);
+    return it_80273030(gobj);
 }
 
 bool itClimbersIce_Logic90_Clanked(Item_GObj* arg0)
@@ -257,9 +260,9 @@ bool itClimbersIce_Logic90_Absorbed(Item_GObj* arg0)
     return true;
 }
 
-void itClimbersIce_Logic90_ShieldBounced(Item_GObj* gobj)
+bool itClimbersIce_Logic90_ShieldBounced(Item_GObj* gobj)
 {
-    itColl_BounceOffShield(gobj);
+    return itColl_BounceOffShield(gobj);
 }
 
 void itClimbersIce_Logic90_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
