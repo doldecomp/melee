@@ -8,9 +8,11 @@
 #include "gr/ground.h"
 #include "gr/types.h"
 #include "lb/lb_00F9.h"
+#include "sc/types.h"
 
 #include <dolphin/mtx.h>
 #include <baselib/aobj.h>
+#include <baselib/gobj.h>
 #include <baselib/jobj.h>
 #include <baselib/object.h>
 
@@ -61,13 +63,11 @@ static inline void setup_car_child(HSD_JObj* parent, s16 ext_count, s32 offset,
 
     jobj = Ground_801C13D0(ext_count, 0);
     if (jobj != NULL) {
-        u8* entry = (u8*) archive->unk4->unk8 + offset;
-        void* anm_p = *(void**) (entry + 4);
-        if (anm_p != NULL) {
-            void* mat_p = *(void**) (entry + 8);
-            if (mat_p != NULL) {
-                grAnime_801C6C0C(jobj, *(HSD_AnimJoint**) anm_p,
-                                 *(HSD_MatAnimJoint**) mat_p, NULL);
+        DynamicModelDesc* entry =
+            (DynamicModelDesc*) ((u8*) archive->unk4->unk8 + offset);
+        if (entry->anims != NULL) {
+            if (entry->matanims != NULL) {
+                grAnime_801C6C0C(jobj, *entry->anims, *entry->matanims, NULL);
                 HSD_JObjReqAnimAllByFlags(jobj, 0x497, 0.0f);
                 HSD_ForeachAnim(jobj, JOBJ_TYPE, 0x76a4, HSD_AObjSetRate,
                                 AOBJ_ARG_AF, 1.0);
@@ -80,24 +80,30 @@ static inline void setup_car_child(HSD_JObj* parent, s16 ext_count, s32 offset,
     HSD_JObjSetScaleY(parent, scale_factor);
 }
 
+static inline void multiplyScale(HSD_JObj* jobj, f32 scale)
+{
+    Vec3 scl;
+    HSD_JObjGetScale(jobj, &scl);
+    scl.x *= scale;
+    scl.y *= scale;
+    scl.z *= scale;
+    HSD_JObjSetScale(jobj, &scl);
+}
+
 void grFZeroCar_801CAFBC(HSD_GObj* gobj, void* data, s32 count, s32 mode)
 {
     HSD_JObj* root;
     HSD_JObj* child;
     HSD_JObj* tra_jobj;
     f32 ground_scale;
-    s16 ext_count;
     s32 offset;
     s16* data_ptr;
-    grFZeroCarEntry* tbl;
     int i;
     Vec3 scl_local;
     Vec3 trans_local;
     Quaternion rot_local;
 
-    PAD_STACK(0x18);
-
-    root = gobj->hsd_obj;
+    root = GET_JOBJ(gobj);
     ground_scale = Ground_801C0498();
 
     scl_local = grFZeroCar_803B7E50.scale;
@@ -115,12 +121,9 @@ void grFZeroCar_801CAFBC(HSD_GObj* gobj, void* data, s32 count, s32 mode)
     tra_jobj->scl = NULL;
     HSD_JObjAddNext(child, tra_jobj);
 
-    ext_count = (s16) count;
-    offset = ext_count * 0x34;
     data_ptr = (s16*) data;
-    tbl = grFZeroCar_803E0BD8;
 
-    for (i = 0; i < 30; i++, data_ptr++, tbl++) {
+    for (i = 0; i < 30; i++) {
         s32 idx;
         s32 active;
         f32 scale_factor;
@@ -130,7 +133,7 @@ void grFZeroCar_801CAFBC(HSD_GObj* gobj, void* data, s32 count, s32 mode)
         HSD_JObj* c3;
 
         if (i != 0) {
-            child = Ground_801C13D0(*data_ptr, 0);
+            child = Ground_801C13D0(data_ptr[i], 0);
             if (child != NULL) {
                 tra_jobj = HSD_JObjAlloc();
                 HSD_ASSERT(186, tra_jobj);
@@ -150,34 +153,26 @@ void grFZeroCar_801CAFBC(HSD_GObj* gobj, void* data, s32 count, s32 mode)
         rot_local = grFZeroCar_803B7E50.rotate;
         HSD_JObjSetTranslate(child, &trans_local);
         HSD_JObjSetRotation(child, &rot_local);
+        multiplyScale(tra_jobj, ground_scale);
 
-        {
-            Vec3 scl;
-            HSD_JObjGetScale(tra_jobj, &scl);
-            scl.x *= ground_scale;
-            scl.y *= ground_scale;
-            scl.z *= ground_scale;
-            HSD_JObjSetScale(tra_jobj, &scl);
-        }
-
-        idx = tbl->children[0];
+        idx = grFZeroCar_803E0BD8[i].children[0];
         scale_factor = 1.0f;
+        active = 0;
         c0 = NULL;
         c1 = NULL;
         c2 = NULL;
         c3 = NULL;
 
-        active = 0;
         if (idx != -1) {
             active = 1;
         }
-        if (tbl->children[1] != -1) {
+        if (grFZeroCar_803E0BD8[i].children[1] != -1) {
             active++;
         }
-        if (tbl->children[2] != -1) {
+        if (grFZeroCar_803E0BD8[i].children[2] != -1) {
             active++;
         }
-        if (tbl->children[3] != -1) {
+        if (grFZeroCar_803E0BD8[i].children[3] != -1) {
             active++;
         }
 
@@ -200,7 +195,7 @@ void grFZeroCar_801CAFBC(HSD_GObj* gobj, void* data, s32 count, s32 mode)
             c0 = j;
         }
 
-        idx = tbl->children[1];
+        idx = grFZeroCar_803E0BD8[i].children[1];
         if (idx != -1) {
             HSD_JObj* j = child;
             while (j != NULL && idx != 0) {
@@ -210,7 +205,7 @@ void grFZeroCar_801CAFBC(HSD_GObj* gobj, void* data, s32 count, s32 mode)
             c1 = j;
         }
 
-        idx = tbl->children[2];
+        idx = grFZeroCar_803E0BD8[i].children[2];
         if (idx != -1) {
             HSD_JObj* j = child;
             while (j != NULL && idx != 0) {
@@ -220,7 +215,7 @@ void grFZeroCar_801CAFBC(HSD_GObj* gobj, void* data, s32 count, s32 mode)
             c2 = j;
         }
 
-        idx = tbl->children[3];
+        idx = grFZeroCar_803E0BD8[i].children[3];
         if (idx != -1) {
             HSD_JObj* j = child;
             while (j != NULL && idx != 0) {
@@ -231,19 +226,19 @@ void grFZeroCar_801CAFBC(HSD_GObj* gobj, void* data, s32 count, s32 mode)
         }
 
         if (c0 != NULL) {
-            setup_car_child(c0, ext_count, offset, scale_factor);
+            setup_car_child(c0, count, (s16) count * 0x34, scale_factor);
         }
 
         if (c1 != NULL) {
-            setup_car_child(c1, ext_count, offset, scale_factor);
+            setup_car_child(c1, count, (s16) count * 0x34, scale_factor);
         }
 
         if (c2 != NULL) {
-            setup_car_child(c2, ext_count, offset, scale_factor);
+            setup_car_child(c2, count, (s16) count * 0x34, scale_factor);
         }
 
         if (c3 != NULL) {
-            setup_car_child(c3, ext_count, offset, scale_factor);
+            setup_car_child(c3, count, (s16) count * 0x34, scale_factor);
         }
     }
 }
