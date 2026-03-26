@@ -122,6 +122,8 @@ static u8 grCs_804D45E4 = 1;
 static grCastleParams* grCs_804D6970;
 static struct lb_80011A50_t* grCs_804D6974;
 
+static const Quaternion grCs_803B7EB8 = { 0.0f, 0.0f, 0.0f, 1.0f };
+
 void grCastle_801CD338(bool arg0)
 {
     HSD_GObj* gobj;
@@ -496,6 +498,35 @@ bool grCastle_801CE3A4(Ground_GObj* gobj)
 }
 
 /// #grCastle_801CE3AC
+void grCastle_801CE3AC(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    HSD_GObj* entity_gobj = gp->gv.castle5.xCC;
+
+    if (entity_gobj != NULL) {
+        HSD_JObj* jobj = GET_JOBJ(entity_gobj);
+        Quaternion rot;
+        Vec3 pos;
+        Vec3 offset;
+        PAD_STACK(4);
+
+        rot = grCs_803B7EB8;
+
+        offset.x = 0.0f;
+        offset.y = *(f32*)((u8*)grCs_804D6970 + 0x110);
+        offset.z = 0.0f;
+
+        lb_8000B1CC(Ground_801C3FA4(gobj, 1), &offset, &pos);
+
+        HSD_JObjSetTranslate(jobj, &pos);
+
+        rot.x = *(f32*)((u8*)grCs_804D6970 + gp->gv.castle5.xC6 * 0x14 + 0x64);
+        rot.y = *(f32*)((u8*)grCs_804D6970 + gp->gv.castle5.xC6 * 0x14 + 0x68);
+        rot.z = *(f32*)((u8*)grCs_804D6970 + gp->gv.castle5.xC6 * 0x14 + 0x6C);
+
+        HSD_JObjSetRotation(jobj, &rot);
+    }
+}
 
 /// #grCastle_801CE578
 

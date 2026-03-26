@@ -1008,6 +1008,13 @@ struct grCastle_GroundVars2 {
     /*  +0 gp+D2 */ s16 xD2;
 };
 
+struct grCastle_GroundVars5 {
+    /* +00 gp+C4 */ s16 xC4;
+    /* +02 gp+C6 */ s16 xC6;
+    /* +04 gp+C8 */ u8 pad_C8[4];
+    /* +08 gp+CC */ HSD_GObj* xCC;
+};
+
 struct grPura_GroundVars {
     /*  +0 gp+C4:0 */ u16 xC4;
     /*  +0 gp+C6:0 */ s16 xC6;
@@ -1177,6 +1184,7 @@ struct Ground {
             struct grCastle_GroundVars2 castle2;
             struct grCastle_GroundVars3 castle3;
             struct grCastle_GroundVars4 castle4;
+            struct grCastle_GroundVars5 castle5;
             struct grCorneria_GroundVars corneria;
             struct grGreatBay_GroundVars greatbay;
             struct grGreatBay_GroundVars2 greatbay2;
