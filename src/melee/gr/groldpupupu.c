@@ -83,7 +83,22 @@ bool grOldPupupu_802108AC(void)
     return false;
 }
 
-/// #grOldPupupu_802108B4
+HSD_GObj* grOldPupupu_802108B4(int arg0)
+{
+    HSD_GObj* gobj;
+    StageCallbacks* callbacks = &grOp_803E6688[arg0];
+
+    gobj = Ground_GetStageGObj(arg0);
+
+    if (gobj != NULL) {
+        Ground_SetupStageCallbacks(gobj, callbacks);
+    } else {
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", "groldpupupu.c",
+                 0xD9, arg0);
+    }
+
+    return gobj;
+}
 
 void grOldPupupu_8021099C(Ground_GObj* gobj)
 {
