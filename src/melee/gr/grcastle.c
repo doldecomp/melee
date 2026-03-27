@@ -1720,8 +1720,7 @@ void grCastle_801D02B8(Ground_GObj* gobj)
     Ground* gp = GET_GROUND(gobj);
     s32 i;
 
-    i = 0;
-    do {
+    for (i = 0; i < 5; i++) {
         if (gp->gv.castle10.state[i] == 1) {
             grCastle_YOffsets offsets = grCs_803B7F50;
             f32 yoff = offsets.v[gp->gv.castle10.idx[i]];
@@ -1734,11 +1733,10 @@ void grCastle_801D02B8(Ground_GObj* gobj)
                      (u16)(gp->gv.castle10.xC4 - 2) <= 1U) &&
                     gp->gv.castle10.idx[i] == 3)
                 {
-                    HSD_JObj* eff = gp->gv.castle10.effect_a[i];
-                    if (eff != NULL) {
-                        Vec3 pos;
+                    if (gp->gv.castle10.effect_a[i] != NULL) {
                         Vec3 vel;
-                        lb_8000B1CC(eff, NULL, &pos);
+                        Vec3 pos;
+                        lb_8000B1CC(gp->gv.castle10.effect_a[i], NULL, &pos);
                         vel.z = 0.0f;
                         vel.x = 0.0f;
                         pos.y += 5.0f;
@@ -1757,8 +1755,7 @@ void grCastle_801D02B8(Ground_GObj* gobj)
             }
             gp->gv.castle10.idx[i]++;
         }
-        i++;
-    } while (i < 5);
+    }
 }
 
 void grCastle_801D0520(Ground_GObj* gobj, int renderpass)
