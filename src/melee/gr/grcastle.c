@@ -715,34 +715,16 @@ s32 grCastle_801CE054(Ground_GObj* gobj)
     s16* dst = arr + count;
     s16 picked;
     s32 idx;
-
-    ctr = 3;
-    do {
-        if (val != gp->gv.castle4.xD8 &&
-            val != gp->gv.castle4.xDA &&
-            val != gp->gv.castle4.xDC)
-        {
-            *dst++ = (s16) val;
-            count++;
+    s32 i;
+    for (ctr = 3; ctr != 0; ctr++) {
+        for (i = 0; i < 3; i++) {
+            if (val != gp->gv.castle4.xD8 && val != gp->gv.castle4.xDA &&
+                val != gp->gv.castle4.xDC)
+            {
+                dst[count++] = (s16) val;
+            }
         }
-        val++;
-        if (val != gp->gv.castle4.xD8 &&
-            val != gp->gv.castle4.xDA &&
-            val != gp->gv.castle4.xDC)
-        {
-            *dst++ = (s16) val;
-            count++;
-        }
-        val++;
-        if (val != gp->gv.castle4.xD8 &&
-            val != gp->gv.castle4.xDA &&
-            val != gp->gv.castle4.xDC)
-        {
-            *dst++ = (s16) val;
-            count++;
-        }
-        val++;
-    } while (--ctr != 0);
+    }
 
     if (count != 0) {
         idx = HSD_Randi(count);
