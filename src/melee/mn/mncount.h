@@ -4,40 +4,80 @@
 #include <placeholder.h>
 #include <platform.h>
 
-#include "mn/forward.h"
 #include <baselib/forward.h>
-#include <baselib/sislib.h>
+#include <melee/mn/forward.h>
+
+#define MNCOUNT_VISIBLE_ROWS 10
 
 typedef struct MnCountData {
-    /* 0x00 */ u8 cursor;
-    /* 0x01 */ u8 pad_01[3];
-    /* 0x04 */ s32 page_size;
-    /* 0x08 */ HSD_Text* labels[10];
-    /* 0x30 */ HSD_Text* values[10];
-    /* 0x58 */ HSD_Text* title;
-} MnCountData; // size 0x5C
+    unsigned char scroll_pos;
+    int expand_anim_duration;
+    HSD_Text* labels[MNCOUNT_VISIBLE_ROWS];
+    HSD_Text* values[MNCOUNT_VISIBLE_ROWS];
+    HSD_Text* title;
+} MnCountData;
 
-/* 2502CC */ s32 mnCount_802502CC(s32);
-/* 2502F0 */ s32 fn_802502F0(u8);
-/* 250314 */ s32 fn_80250314(u8);
-/* 250338 */ s32 fn_80250338(s32);
-/* 25035C */ int mnCount_8025035C(s32 skip_count, u32 (*get_val_func)(s8));
-/* 25069C */ s32 fn_8025069C(s32);
-/* 2506C0 */ s32 fn_802506C0(s32);
-/* 2506E4 */ s32 fn_802506E4(s32);
-/* 250708 */ s32 fn_80250708(s32);
+#ifdef M2C
+#define GET_MNCOUNT(gobj)                                                     \
+    ((MnCountData*) HSD_GObjGetUserData((HSD_GObj*) gobj))
+#else
+#define GET_MNCOUNT(gobj) ((MnCountData*) HSD_GObjGetUserData(gobj))
+#endif
+
+typedef enum {
+    POWER_COUNT,           // Power Count
+    POWER_TIME,            // Power Time
+    PLAY_TIME,             // Play Time
+    SINGLEPLAYER_TIME,     // Single-Player Time
+    VS_PLAY_TIME,          // VS. Play Time
+    COMBINED_VS_PLAY_TIME, // Combined VS. Play Time
+    VS_PLAY_MATCH_TOTAL,   // VS. Play Match Total
+    TIME_MATCH_TOTAL,      // Time Match Total
+    STOCK_MATCH_TOTAL,     // Stock Match Total
+    COIN_MATCH_TOTAL,      // Coin Match Total
+    BONUS_MATCH_TOTAL,     // Bonus Match Total
+    VS_PLAY_CONTESTANTS,   // VS. Play Contestants
+    MATCH_RESET_COUNTER,   // Match Reset Counter
+    TOTAL_DAMAGE,          // Total Damage
+    KO_TOTAL,              // KO Total
+    SELFDESTRUCT_TOTAL,    // Self-Destruct Total
+    AVAILABLE_CHARACTERS,  // Available Characters
+    AVAILABLE_MAPS,        // Available Maps
+    TROPHY_TOTAL,          // Trophy Total
+    NAME_TOTAL,            // Name Total
+    LONGEST_TIME,          // Longest Time
+    SECOND_LONGEST_TIME,   // 2nd Longest Time
+    SHORTEST_TIME,         // Shortest Time
+    SMASH_CHAMP,           // Smash Champ
+    SMASH_SAP,             // Smash Sap
+    SLUG_MEISTER,          // Slug Meister
+    PUNCHING_BAG,          // Punching Bag
+    KO_KINGPIN,            // KO Kingpin
+    NO_DEFENSE_NELLY,      // No-Defense Nelly
+    DISASTER_MASTER,       // Disaster Master
+} mnCount_row;
+
+/* 2502CC */ u32 mnCount_GetMatchTime(s32);
+/* 2502F0 */ u32 mnCount_GetKOKingpin(s32);
+/* 250314 */ u32 mnCount_GetNoDefenseNelly(s32);
+/* 250338 */ u32 mnCount_GetDisasterMaster(s32);
+/* 25035C */ int mnCount_8025035C(s32 skip_count, u32 (*get_val_func)(s32));
+/* 25069C */ u32 mnCount_GetSmashChamp(s32);
+/* 2506C0 */ u32 mnCount_GetSmashSap(s32);
+/* 2506E4 */ u32 mnCount_GetSlugMeister(s32);
+/* 250708 */ u32 mnCount_GetPunchingBag(s32);
 /* 25072C */ s32 mnCount_8025072C(CountEntry* entries, s32 start_idx,
-                                  s32 mode);
-/* 25092C */ UNK_RET mnCount_8025092C(UNK_PARAMS);
-/* 250C7C */ UNK_RET mnCount_80250C7C(UNK_PARAMS);
-/* 250DE4 */ UNK_RET mnCount_80250DE4(UNK_PARAMS);
-/* 250FF8 */ UNK_RET mnCount_80250FF8(UNK_PARAMS);
-/* 251278 */ UNK_RET fn_80251278(UNK_PARAMS);
-/* 2513F4 */ void mnCount_802513F4(HSD_GObj*);
+                                  bool mode);
+/* 25092C */ s32 mnCount_8025092C(s32 rank, u32 (*getVal)(s32), bool mode);
+/* 250C7C */ int mnCount_GetRowValue_Character(mnCount_row row);
+/* 250DE4 */ unsigned int mnCount_GetRowValue_Number(int);
+/* 250FF8 */ void mnCount_CreateRow(HSD_GObj*, int, mnCount_row);
+/* 251278 */ void mnCount_HandleUserInput(HSD_GObj* gobj);
+/* 2513F4 */ void mnCount_UpdateArrowIndicators(HSD_GObj* gobj);
 /* 2514B8 */ void fn_802514B8(HSD_GObj* gobj);
-/* 2514D8 */ UNK_RET fn_802514D8(UNK_PARAMS);
-/* 251640 */ UNK_RET fn_80251640(UNK_PARAMS);
-/* 2517E0 */ void mnCount_802517E0(MnCountData*);
-/* 25186C */ void mnCount_8025186C(void);
+/* 2514D8 */ void fn_802514D8(HSD_GObj* gobj);
+/* 251640 */ void fn_80251640(HSD_GObj* gobj);
+/* 2517E0 */ void mnCount_InitUserData(MnCountData* arg0);
+/* 25186C */ void mnCount_Create(void);
 
 #endif

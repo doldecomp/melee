@@ -946,10 +946,12 @@ void gm_80162574(u8 arg0, u8 arg1)
 
 /// #gm_8016260C
 
-u32 gm_8016279C(void)
+u32 gm_GetVsPlayMatchTotal(void)
 {
-    u32 tmp = *(u32*) gmMainLib_8015CD2C() + *(u32*) gmMainLib_8015CD38() +
-              *(u32*) gmMainLib_8015CD44() + *(u32*) gmMainLib_8015CD50() +
+    u32 tmp = *(u32*) gmMainLib_GetTimeMatchTotal() +
+              *(u32*) gmMainLib_GetStockMatchTotal() +
+              *(u32*) gmMainLib_GetCoinMatchTotal() +
+              *(u32*) gmMainLib_GetBonusMatchTotal() +
               *(u32*) gmMainLib_8015CD5C();
     return tmp;
 }
@@ -961,7 +963,7 @@ u32 gm_80162800(MatchEnd* arg0)
     u32 sum;
     u32 i;
 
-    temp_r3 = gmMainLib_8015CD08();
+    temp_r3 = gmMainLib_GetVsPlayContestants();
     count = 0;
     for (i = 0; i < 6; i++) {
         if (arg0->player_standings[i].slot_type == 0) {
@@ -979,11 +981,11 @@ void gm_801628C4(u32 arg0, u32 arg1)
     u32 var_r4;
     struct gmm_retval_ED98* temp_r3_3;
 
-    temp_r3 = gmMainLib_8015CD14();
+    temp_r3 = gmMainLib_GetVsPlayTime();
     var_r4 = *temp_r3 + arg0;
     *temp_r3 = (var_r4 > (u32) -1) ? (u32) -1 : var_r4;
 
-    temp_r3 = gmMainLib_8015CD20();
+    temp_r3 = gmMainLib_GetCombinedVSPlayTime();
     var_r4 = (0, *temp_r3 + (arg0 * arg1));
     *temp_r3 = (var_r4 > (u32) -1) ? (u32) -1 : var_r4;
 
@@ -994,7 +996,7 @@ void gm_801628C4(u32 arg0, u32 arg1)
 
 long gm_80162968(u32 seconds)
 {
-    u32* ptr = gmMainLib_8015CD74();
+    u32* ptr = gmMainLib_GetSingleplayerTime();
 
     *ptr = ((*ptr + seconds) > -1) ? -1 : (*ptr + seconds);
 }
@@ -1006,13 +1008,13 @@ long gm_801629B4(s32 amount)
     *ptr = ((*ptr + amount) > -1) ? -1 : (*ptr + amount);
 }
 
-long gm_80162A00(void)
+long gm_GetPlayTime(void)
 {
     u32 a;
     u32 b;
 
-    a = *(u32*) gmMainLib_8015CD14();
-    b = *(u32*) gmMainLib_8015CD74();
+    a = *(u32*) gmMainLib_GetVsPlayTime();
+    b = *(u32*) gmMainLib_GetSingleplayerTime();
     return a + b > -1 ? -1 : a + b;
 }
 
@@ -1020,7 +1022,7 @@ long gm_80162A4C(s32 amount)
 {
     u32* ptr;
 
-    ptr = gmMainLib_8015CDA4();
+    ptr = gmMainLib_GetTotalDamage();
     *ptr = ((*ptr + amount) > -1) ? -1 : (*ptr + amount);
 }
 
@@ -1028,7 +1030,7 @@ struct gmm_x1868_1A8_t* gm_80162A98(s32 arg0)
 {
     struct gmm_x1868_1A8_t* temp_r3;
     u32 var_r31;
-    s32* temp_r3_2 = gmMainLib_8015CDB0();
+    s32* temp_r3_2 = gmMainLib_GetKOTotal();
 
     *temp_r3_2 = MAX(*temp_r3_2 + arg0, -1U);
 
@@ -1048,18 +1050,18 @@ void gm_80162B4C(s32 amount)
     u32* ptr;
     u32 sum;
 
-    ptr = gmMainLib_8015CDBC();
+    ptr = gmMainLib_GetSelfDestructTotal();
     sum = *ptr + amount;
     *ptr = (sum > (u32) -1) ? (u32) -1 : sum;
 }
 
-void gm_80162B98(void)
+void gm_IncrementPowerCount(void)
 {
     u32 result;
     u32 val;
     u32* ptr;
 
-    ptr = gmMainLib_8015CD8C();
+    ptr = gmMainLib_GetPowerCount();
     val = *ptr;
     result = (val + 1 > (u32) -1) ? (u32) -1 : val + 1;
     *ptr = result;

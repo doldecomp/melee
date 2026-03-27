@@ -1527,7 +1527,7 @@ void un_8031B460_OnEnter(void* arg0)
     memzero(un_804D6F18, 0x80);
     memzero(un_804D6ED4, 0xE4);
 
-    cfg->x08 = un_80304870();
+    cfg->x08 = un_GetTrophyTotal();
 
     if ((s32) un_804D6F20 != 0) {
         cfg->x08 = 1;
