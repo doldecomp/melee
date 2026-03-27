@@ -501,7 +501,8 @@ void grCastle_801CDA0C(Ground_GObj* gobj)
     gp->x10_flags.b5 = 1;
 
     gp->gv.castle8.plat[0].jobj = Ground_801C3FA4(gobj, 1);
-    if (grCs_804D6970->x18 != 0.0f) {
+    val = 0.0f;
+    if (grCs_804D6970->x18 != val) {
         val = grCs_804D6970->x14;
     } else {
         val = grCs_804D6970->x10;
@@ -516,7 +517,8 @@ void grCastle_801CDA0C(Ground_GObj* gobj)
     gp->gv.castle8.plat[0].wind = 0.0f;
 
     gp->gv.castle8.plat[1].jobj = Ground_801C3FA4(gobj, 4);
-    if (grCs_804D6970->x18 != 0.0f) {
+    val = 0.0f;
+    if (grCs_804D6970->x18 != val) {
         val = grCs_804D6970->x14;
     } else {
         val = grCs_804D6970->x10;
