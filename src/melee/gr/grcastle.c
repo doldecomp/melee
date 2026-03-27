@@ -1008,8 +1008,8 @@ void grCastle_801CE8E4(Ground_GObj* gobj) {}
 
 void grCastle_801CE8E8(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
     Ground* gp2;
+    Ground* gp = GET_GROUND(gobj);
     CmSubject* subject;
     PAD_STACK(8);
 
