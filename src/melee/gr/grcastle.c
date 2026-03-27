@@ -19,6 +19,7 @@
 #include "it/it_2725.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
+#include "lb/lbvector.h"
 #include "lb/types.h"
 #include "mp/mplib.h"
 
@@ -1361,6 +1362,70 @@ void grCastle_801D0D24()
 }
 
 /// #grCastle_801D0D84
+void grCastle_801D0D84(HSD_JObj* jobj)
+{
+    Vec3 pos;
+    Vec3 dir;
+    Vec3 fwd;
+    Vec3 cross;
+    Quaternion rot;
+    f32 rot_y;
+    f32 len;
+    f32 wind_len;
+    f32 angle;
+    f32 correction;
+
+    if (jobj == NULL) {
+        return;
+    }
+
+    HSD_JObjSetupMatrix(jobj);
+    pos.x = jobj->mtx[0][3];
+    pos.y = jobj->mtx[1][3];
+    pos.z = jobj->mtx[2][3];
+
+    rot = jobj->rotate;
+    rot_y = rot.y;
+
+    wind_len = lb_800103B8(&pos, &dir);
+    dir.y = 0.0f;
+    len = lbVector_Normalize(&dir);
+
+    fwd.x = cosf(rot_y);
+    fwd.y = 0.0f;
+    fwd.z = -sinf(rot_y);
+
+    angle = lbVector_Angle(&fwd, &dir);
+    {
+        s32 near_zero;
+        if (angle < 0.00001f && angle > -0.00001f) {
+            near_zero = 1;
+        } else {
+            near_zero = 0;
+        }
+        if (near_zero == 0) {
+            correction = len * (wind_len * sinf(angle));
+            if (correction < 0.0f) {
+                correction = -correction;
+            }
+            PSVECCrossProduct(&fwd, &dir, &cross);
+            if (cross.y > 0.0) {
+                rot.y = rot_y + correction;
+            } else {
+                rot.y = rot_y - correction;
+            }
+        }
+    }
+
+    if (rot.y > 3.1415926535897931) {
+        rot.y = (f32) ((f64) rot.y - 6.2831853071795862);
+    } else if (rot.y < -3.1415926535897931) {
+        rot.y = (f32) ((f64) rot.y + 6.2831853071795862);
+    }
+
+    HSD_JObjSetRotation(jobj, &rot);
+    HSD_JObjClearFlagsAll(jobj, JOBJ_USE_QUATERNION);
+}
 
 f32 grCastle_801D0FF0(void)
 {
