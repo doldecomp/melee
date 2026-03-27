@@ -1031,17 +1031,16 @@ struct grCastle_GroundVars7 {
     /* +14 gp+D8 */ s32 xD8;
 };
 
+struct grCastle_Platform {
+    /* +00 */ HSD_JObj* jobj;
+    /* +04 */ f32 pos;
+    /* +08 */ s16 state;
+    /* +0A */ s16 timer;
+    /* +0C */ f32 wind;
+};
+
 struct grCastle_GroundVars8 {
-    /* +00 gp+C4 */ HSD_JObj* xC4;
-    /* +04 gp+C8 */ f32 xC8;
-    /* +08 gp+CC */ s16 xCC;
-    /* +0A gp+CE */ s16 xCE;
-    /* +0C gp+D0 */ f32 xD0;
-    /* +10 gp+D4 */ HSD_JObj* xD4;
-    /* +14 gp+D8 */ f32 xD8;
-    /* +18 gp+DC */ s16 xDC;
-    /* +1A gp+DE */ s16 xDE;
-    /* +1C gp+E0 */ f32 xE0;
+    /* +00 gp+C4 */ struct grCastle_Platform plat[2];
 };
 
 struct grCastle_GroundVars9 {
@@ -1067,7 +1066,7 @@ struct grCastle_GroundVars10 {
     /* +0C gp+D0 */ HSD_JObj* jobjs[5];
     /* +20 gp+E4 */ HSD_JObj* effect_a[5];
     /* +34 gp+F8 */ HSD_JObj* effect_b[5];
-    /* +48 gp+10C */ s32 x10C[5];
+    /* +48 gp+10C */ u32 x10C[5];
     /* +5C gp+120 */ s32 x120[5];
     /* +70 gp+134 */ u8 state[5];
     /* +75 gp+139 */ u8 idx[5];

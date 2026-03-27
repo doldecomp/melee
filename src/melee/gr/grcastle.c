@@ -500,35 +500,35 @@ void grCastle_801CDA0C(Ground_GObj* gobj)
     Ground_801C2ED0(jobj, gp->map_id);
     gp->x10_flags.b5 = 1;
 
-    gp->gv.castle8.xC4 = Ground_801C3FA4(gobj, 1);
+    gp->gv.castle8.plat[0].jobj = Ground_801C3FA4(gobj, 1);
     if (grCs_804D6970->x18 != 0.0f) {
         val = grCs_804D6970->x14;
     } else {
         val = grCs_804D6970->x10;
     }
-    gp->gv.castle8.xC8 = val;
-    gp->gv.castle8.xCC = 0;
+    gp->gv.castle8.plat[0].pos = val;
+    gp->gv.castle8.plat[0].state = 0;
 
-    HSD_JObjSetTranslateY(gp->gv.castle8.xC4, gp->gv.castle8.xC8);
+    HSD_JObjSetTranslateY(gp->gv.castle8.plat[0].jobj, gp->gv.castle8.plat[0].pos);
     mpLib_80057424(4);
 
-    gp->gv.castle8.xCE = (s16) grCs_804D6970->x38;
-    gp->gv.castle8.xD0 = 0.0f;
+    gp->gv.castle8.plat[0].timer = (s16) grCs_804D6970->x38;
+    gp->gv.castle8.plat[0].wind = 0.0f;
 
-    gp->gv.castle8.xD4 = Ground_801C3FA4(gobj, 4);
+    gp->gv.castle8.plat[1].jobj = Ground_801C3FA4(gobj, 4);
     if (grCs_804D6970->x18 != 0.0f) {
         val = grCs_804D6970->x14;
     } else {
         val = grCs_804D6970->x10;
     }
-    gp->gv.castle8.xD8 = val;
-    gp->gv.castle8.xDC = 0;
+    gp->gv.castle8.plat[1].pos = val;
+    gp->gv.castle8.plat[1].state = 0;
 
-    HSD_JObjSetTranslateY(gp->gv.castle8.xD4, gp->gv.castle8.xD8);
+    HSD_JObjSetTranslateY(gp->gv.castle8.plat[1].jobj, gp->gv.castle8.plat[1].pos);
     mpLib_80057424(5);
 
-    gp->gv.castle8.xDE = (s16) grCs_804D6970->x38;
-    gp->gv.castle8.xE0 = 0.0f;
+    gp->gv.castle8.plat[1].timer = (s16) grCs_804D6970->x38;
+    gp->gv.castle8.plat[1].wind = 0.0f;
 
     Ground_801C10B8(gobj, grCastle_801CD9B4);
     Ground_801C2FE0(gobj);
@@ -542,37 +542,37 @@ bool grCastle_801CDC3C(Ground_GObj* gobj)
 void grCastle_801CDC44(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
-    Ground* gp2 = gp;
     s32 i = 0;
 
     do {
-        switch (gp2->gv.castle8.xCC) {
+        struct grCastle_Platform* plat = &gp->gv.castle8.plat[i];
+        switch (plat->state) {
         case 0:
-            if (gp2->gv.castle8.xD0 > 0.0f) {
-                s16 cnt = gp2->gv.castle8.xCE;
-                gp2->gv.castle8.xCE = cnt + 1;
+            if (plat->wind > 0.0f) {
+                s16 cnt = plat->timer;
+                plat->timer = cnt + 1;
                 if ((f32) cnt > grCs_804D6970->x38) {
-                    gp2->gv.castle8.xCC = 2;
+                    plat->state = 2;
                 }
             } else {
-                gp2->gv.castle8.xCE = 0;
-                gp2->gv.castle8.xCC = 1;
+                plat->timer = 0;
+                plat->state = 1;
             }
             break;
         case 1:
-            if (gp2->gv.castle8.xD0 > 0.0f) {
-                gp2->gv.castle8.xCE = 0;
-                gp2->gv.castle8.xCC = 0;
+            if (plat->wind > 0.0f) {
+                plat->timer = 0;
+                plat->state = 0;
             } else {
-                s16 cnt = gp2->gv.castle8.xCE;
-                gp2->gv.castle8.xCE = cnt + 1;
+                s16 cnt = plat->timer;
+                plat->timer = cnt + 1;
                 if ((f32) cnt > grCs_804D6970->x3C) {
-                    gp2->gv.castle8.xCC = 3;
+                    plat->state = 3;
                 }
             }
             break;
         case 2: {
-            f32 wind = gp2->gv.castle8.xD0;
+            f32 wind = plat->wind;
             if (wind > 0.0f) {
                 f32 speed_cap = grCs_804D6970->x28;
                 f32 speed =
@@ -584,25 +584,25 @@ void grCastle_801CDC44(Ground_GObj* gobj)
                     speed = speed_cap;
                 }
                 max_val = grCs_804D6970->x10;
-                cur = gp2->gv.castle8.xC8;
+                cur = plat->pos;
                 if ((max_val - cur) < speed) {
-                    gp2->gv.castle8.xC8 = max_val;
+                    plat->pos = max_val;
                 } else {
-                    gp2->gv.castle8.xC8 = cur + speed;
+                    plat->pos = cur + speed;
                 }
-                HSD_JObjSetTranslateY(gp2->gv.castle8.xC4,
-                                      gp2->gv.castle8.xC8);
+                HSD_JObjSetTranslateY(plat->jobj,
+                                      plat->pos);
             } else {
-                gp2->gv.castle8.xCE = 0;
-                gp2->gv.castle8.xCC = 1;
+                plat->timer = 0;
+                plat->state = 1;
             }
             break;
         }
         case 3: {
-            f32 wind = gp2->gv.castle8.xD0;
+            f32 wind = plat->wind;
             if (wind > 0.0f) {
-                gp2->gv.castle8.xCE = 0;
-                gp2->gv.castle8.xCC = 0;
+                plat->timer = 0;
+                plat->state = 0;
             } else {
                 f32 speed_cap = grCs_804D6970->x34;
                 f32 speed =
@@ -613,22 +613,21 @@ void grCastle_801CDC44(Ground_GObj* gobj)
                 if (speed > speed_cap) {
                     speed = speed_cap;
                 }
-                cur = gp2->gv.castle8.xC8;
+                cur = plat->pos;
                 min_val = grCs_804D6970->x14;
                 if ((cur - min_val) < speed) {
-                    gp2->gv.castle8.xC8 = min_val;
+                    plat->pos = min_val;
                 } else {
-                    gp2->gv.castle8.xC8 = cur - speed;
+                    plat->pos = cur - speed;
                 }
-                HSD_JObjSetTranslateY(gp2->gv.castle8.xC4,
-                                      gp2->gv.castle8.xC8);
+                HSD_JObjSetTranslateY(plat->jobj,
+                                      plat->pos);
             }
             break;
         }
         }
         i++;
-        gp2->gv.castle8.xD0 = 0.0f;
-        gp2 = (Ground*) ((u8*) gp2 + 0x10);
+        plat->wind = 0.0f;
     } while (i < 2);
     Ground_801C2FE0(gobj);
 }
@@ -1239,12 +1238,11 @@ void grCastle_801CEF04(Ground_GObj* gobj)
             gp->gv.castle6.xC4 = 3;
             gp->gv.castle6.xCC = 0;
             for (i = 0; i < 5; i++) {
-                if (gp->gv.castle3.x1C[2].count != 0) {
+                if (gp->gv.castle10.x10C[i] != 0) {
                     grMaterial_801C8CDC(
-                        (HSD_GObj*)gp->gv.castle3.x1C[2].count);
-                    gp->gv.castle3.x1C[2].count = 0;
+                        (HSD_GObj*) gp->gv.castle10.x10C[i]);
+                    gp->gv.castle10.x10C[i] = 0;
                 }
-                gp = (Ground*)((u8*)gp + 4);
             }
         }
         grCastle_801D02B8(gobj);
@@ -1365,7 +1363,7 @@ void grCastle_801CF308(Ground_GObj* gobj)
                     0.0f, 1.0f, 0.0f, 4.0f);
                 grMaterial_801C8E08(
                     (Item_GObj*) gp->gv.castle11.xD8);
-                gp->gv.castle8.xCC = grCs_804D6970->x54;
+                gp->gv.castle8.plat[0].state = grCs_804D6970->x54;
             }
         }
         var_r6 = 1;
@@ -1389,8 +1387,8 @@ void grCastle_801CF308(Ground_GObj* gobj)
     }
     case 5: {
         if (grAnime_801C83D0((HSD_GObj*) gobj, 0, 7) != 0) {
-            s16 cnt = gp->gv.castle8.xCC;
-            gp->gv.castle8.xCC = cnt - 1;
+            s16 cnt = gp->gv.castle8.plat[0].state;
+            gp->gv.castle8.plat[0].state = cnt - 1;
             if (cnt < 0) {
                 HSD_JObjSetFlagsAll(jobj, 0x10);
             }
@@ -1429,8 +1427,7 @@ void grCastle_801CF750(Ground* gp, s32 arg1, CollData* cd, s32 arg3,
     }
 
     if ((s32) cd->x34_flags.b1234 == 1) {
-        gp = (Ground*) ((u8*) gp + idx * 16);
-        *(f32*) ((u8*) gp + 0xD0) += (f32) arg3;
+        gp->gv.castle8.plat[idx].wind += (f32) arg3;
     }
 }
 
@@ -1573,9 +1570,8 @@ s32 grCastle_801CFBD4(Ground_GObj* gobj, s32 arg1)
 {
     s32 i = 0;
     s32 result = 1;
-    Ground* base = (Ground*) gobj->user_data;
-    Ground* gp = base;
-    u8 _pad_top[4];
+    Ground* gp = (Ground*) gobj->user_data;
+    u8 _pad_top[8];
     unkCastleCallback cb1[5];
     unkCastleCallback2 cb2[5];
     Vec3 pos;
@@ -1583,10 +1579,10 @@ s32 grCastle_801CFBD4(Ground_GObj* gobj, s32 arg1)
     PAD_STACK(12);
 
     do {
-        HSD_JObj* jobj = base->gv.castle10.jobjs[0];
+        HSD_JObj* jobj = gp->gv.castle10.jobjs[i];
         if (jobj != NULL) {
-            HSD_JObj* eff_a = base->gv.castle10.effect_a[0];
-            HSD_JObj* eff_b = base->gv.castle10.effect_b[0];
+            HSD_JObj* eff_a = gp->gv.castle10.effect_a[i];
+            HSD_JObj* eff_b = gp->gv.castle10.effect_b[i];
 
             if (arg1 != 0) {
                 if (HSD_JObjGetFlags(jobj) & 0x10) {
@@ -1662,7 +1658,7 @@ s32 grCastle_801CFBD4(Ground_GObj* gobj, s32 arg1)
                                 cb2[3] = grCs_803B7F3C[3];
                                 cb2[4] = grCs_803B7F3C[4];
                                 gp->gv.castle10.x10C[i] =
-                                    (s32) grMaterial_801C8CFC(
+                                    (u32) grMaterial_801C8CFC(
                                         0, 2, gp, target, NULL,
                                         (void (*)(Item_GObj*, Ground*,
                                                   Vec3*, HSD_GObj*,
@@ -1717,7 +1713,6 @@ s32 grCastle_801CFBD4(Ground_GObj* gobj, s32 arg1)
             }
         }
         i++;
-        base = (Ground*) ((u8*) base + 4);
     } while (i < 5);
 
     return result;
@@ -1732,7 +1727,6 @@ bool grCastle_801D0298(Ground_GObj* gobj, s32 arg1)
 void grCastle_801D02B8(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
-    Ground* base = gp;
     s32 i;
 
     i = 0;
@@ -1742,14 +1736,14 @@ void grCastle_801D02B8(Ground_GObj* gobj)
             f32 yoff = offsets.v[gp->gv.castle10.idx[i]];
 
             if (yoff != -1.0f) {
-                f32 newY = base->gv.castle10.baseY[0] + yoff;
-                HSD_JObjSetTranslateY(base->gv.castle10.jobjs[0], newY);
+                f32 newY = gp->gv.castle10.baseY[i] + yoff;
+                HSD_JObjSetTranslateY(gp->gv.castle10.jobjs[i], newY);
 
                 if ((gp->gv.castle10.xC4 == 1 ||
                      (u16)(gp->gv.castle10.xC4 - 2) <= 1U) &&
                     gp->gv.castle10.idx[i] == 3)
                 {
-                    HSD_JObj* eff = base->gv.castle10.effect_a[0];
+                    HSD_JObj* eff = gp->gv.castle10.effect_a[i];
                     if (eff != NULL) {
                         Vec3 pos;
                         Vec3 vel;
@@ -1759,21 +1753,20 @@ void grCastle_801D02B8(Ground_GObj* gobj)
                         pos.y += 5.0f;
                         vel.y = grCs_804D6970->x50;
                         it_8026F7C8(&pos, &vel, 1);
-                        HSD_JObjSetFlags(base->gv.castle10.effect_a[0],
+                        HSD_JObjSetFlags(gp->gv.castle10.effect_a[i],
                                          0x10);
-                        HSD_JObjClearFlags(base->gv.castle10.effect_b[0],
+                        HSD_JObjClearFlags(gp->gv.castle10.effect_b[i],
                                            0x10);
                     }
                 }
             } else {
-                HSD_JObjSetTranslateY(base->gv.castle10.jobjs[0],
-                                      base->gv.castle10.baseY[0]);
+                HSD_JObjSetTranslateY(gp->gv.castle10.jobjs[i],
+                                      gp->gv.castle10.baseY[i]);
                 gp->gv.castle10.state[i] = 0;
             }
             gp->gv.castle10.idx[i]++;
         }
         i++;
-        base = (Ground*)((u8*)base + 4);
     } while (i < 5);
 }
 
