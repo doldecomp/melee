@@ -66,18 +66,40 @@ static inline enum_t getAnimID(WaitStruct* arg1)
 void ftCo_8008A7A8(Fighter_GObj* gobj, WaitStruct* arg1)
 {
     enum_t anim_id;
-    Fighter* fp = GET_FIGHTER(gobj);
+    u8(*blend_data)[2];
+    enum_t temp;
+    Fighter* fp;
+    struct S_TEMP4* anim;
+    Fighter* temp2;
+
+    fp = GET_FIGHTER(gobj);
     if (!ftAnim_IsFramesRemaining(gobj)) {
         if (arg1 == NULL ||
             (fp->item_gobj != NULL && fp->kind != FTKIND_MEWTWO &&
              fp->kind != FTKIND_FOX))
         {
+            temp = fp->anim_id;
             ftCo_8008A6D8(gobj, fp->anim_id);
         } else {
             do {
-                anim_id = getAnimID(arg1);
-            } while (!inlineA0(fp) && fp->anim_id == anim_id);
-            ftCo_8008A6D8(gobj, anim_id);
+                temp = anim_id = getAnimID(arg1);
+            } while (!inlineA0(fp) && fp->anim_id == temp);
+            temp2 = GET_FIGHTER(gobj);
+            if (temp != -1) {
+                anim = &temp2->x24[temp];
+                blend_data = &temp2->x28[temp];
+                ftData_80085CD8(temp2, temp2, anim_id);
+                temp2->anim_id = anim_id;
+                ftCo_8009E7B4(temp2, blend_data);
+                temp2->x3E4_fighterCmdScript.u = (union CmdUnion*) anim->xC;
+                temp2->x3E4_fighterCmdScript.loop_count = 0;
+                if (temp2->x590 != NULL) {
+                    temp2->x594_s32 = anim->x10_animCurrFlags;
+                    ftAnim_8006EBE8(gobj, 0.0F, 1.0F, (*blend_data)[0]);
+                }
+                temp2->x3E4_fighterCmdScript.timer = 0.0f;
+                ftAnim_8006EBA4(gobj);
+            }
         }
     }
 }
