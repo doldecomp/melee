@@ -155,6 +155,27 @@ static const grCastle_YOffsets grCs_803B7F50 = {{
     4.0f, 6.0f, 7.0f, 6.0f, 4.0f, -1.0f,
 }};
 
+typedef struct grCastle_WeightTable {
+    s32 w[3];
+} grCastle_WeightTable;
+
+static const grCastle_WeightTable grCs_803B7EF0 = {{ 0, 0, 0 }};
+
+typedef struct grCastle_TargetEntry {
+    s16 map_id;
+    s16 jobj_idx;
+} grCastle_TargetEntry;
+
+typedef struct grCastle_TargetTable {
+    grCastle_TargetEntry e[11];
+} grCastle_TargetTable;
+
+static const grCastle_TargetTable grCs_803B7EFC = {{
+    { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 },
+    { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 }, { 0, 0 },
+    { 0, 0 },
+}};
+
 void grCastle_801CD338(bool arg0)
 {
     HSD_GObj* gobj;
@@ -373,7 +394,7 @@ void grCastle_801CD8A8(Ground_GObj* gobj)
     Ground* gp = GET_GROUND(gobj);
     int i;
 
-    grCastle_801CF868();
+    grCastle_801CF868(gobj);
     grCastle_801CE19C(gobj);
     Ground_801C2FE0(gobj);
     lb_800115F4();
@@ -1068,6 +1089,105 @@ void grCastle_801CF7B0(Ground_GObj* gobj)
 }
 
 /// #grCastle_801CF868
+HSD_JObj* grCastle_801CF868(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+
+    if ((gp->gv.castle12.xC4[0] != 0 || gp->gv.castle12.xC4[1] != 0 ||
+         gp->gv.castle12.xC4[2] != 0) &&
+        (gp->gv.castle12.xD0 == -1 ||
+         (((HSD_GObj*) gp->gv.castle12.xC4[gp->gv.castle12.xD0]) != NULL &&
+          ((Ground*) ((HSD_GObj*) gp->gv.castle12.xC4[gp->gv.castle12.xD0])
+               ->user_data) != NULL &&
+          *(s16*) &((Ground*) ((HSD_GObj*) gp->gv.castle12
+                                    .xC4[gp->gv.castle12.xD0])
+                         ->user_data)
+                        ->gv.castle2.xC4 == 0)))
+    {
+        s16 timer = gp->gv.castle12.xD2;
+        gp->gv.castle12.xD2 = timer - 1;
+        if ((s16) gp->gv.castle12.xD2 < 0) {
+            s16 base = *(s16*) ((u8*) grCs_804D6970 + 0x2);
+            s16 range_end = *(s16*) ((u8*) grCs_804D6970 + 0x0);
+
+            if (base > range_end) {
+                s32 diff = base - range_end;
+                base = range_end + (diff != 0 ? HSD_Randi(diff) : 0);
+            } else if (base < range_end) {
+                s32 diff = range_end - base;
+                base = base + (diff != 0 ? HSD_Randi(diff) : 0);
+            }
+            gp->gv.castle12.xD2 = base;
+
+            {
+                grCastle_WeightTable weights = grCs_803B7EF0;
+                s16 cur_slot = gp->gv.castle12.xD0;
+                s32 total;
+                s32 rand;
+                s32 slot;
+                s32* wp;
+                Ground* sat_gp;
+
+                if (cur_slot != -1) {
+                    weights.w[cur_slot] =
+                        weights.w[cur_slot] /
+                        *(s16*) ((u8*) grCs_804D6970 + 0x6);
+                }
+
+                total = weights.w[0] + weights.w[1] + weights.w[2];
+                rand = total != 0 ? HSD_Randi(total) : 0;
+
+                wp = weights.w;
+                slot = 0;
+                rand -= wp[0];
+                if (rand >= 0) {
+                    slot = 1;
+                    rand -= wp[1];
+                    if (rand >= 0) {
+                        slot = 2;
+                        rand -= wp[2];
+                        if (rand >= 0) {
+                            slot = 3;
+                        }
+                    }
+                }
+                if (slot == 3) {
+                    slot = 0;
+                }
+                gp->gv.castle12.xD0 = slot;
+
+                sat_gp = (Ground*) ((HSD_GObj*) gp->gv.castle12
+                                         .xC4[gp->gv.castle12.xD0])
+                              ->user_data;
+
+                {
+                    grCastle_TargetTable targets = grCs_803B7EFC;
+                    s32 idx;
+                    HSD_GObj* entity;
+
+                    PAD_STACK(52);
+                    idx = HSD_Randi(11);
+                    entity = HSD_GObj_Entities->x14;
+
+                    while (entity != NULL) {
+                        if ((s32) ((Ground*) entity->user_data)->map_id ==
+                            (s16) targets.e[idx].map_id)
+                        {
+                            break;
+                        }
+                        entity = entity->next;
+                    }
+                    if (entity != NULL) {
+                        *(u32*) ((u8*) sat_gp + 0xD4) =
+                            (u32) Ground_801C3FA4(
+                                entity, (s32) targets.e[idx].jobj_idx);
+                        *(s16*) ((u8*) sat_gp + 0xC4) = 1;
+                    }
+                }
+            }
+        }
+    }
+}
 
 void fn_801CFAFC(Item_GObj* item, Ground* gp, Vec3* pos, HSD_GObj* gobj,
                  f32 arg4)
