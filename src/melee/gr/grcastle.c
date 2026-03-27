@@ -2038,7 +2038,7 @@ void grCastle_801D0D84(HSD_JObj* jobj)
     if (rot.y > 3.1415926535897931) {
         rot.y = (f32) ((f64) rot.y - 6.2831853071795862);
     } else if (rot.y < -3.1415926535897931) {
-        rot.y = (f32) ((f64) rot.y + 6.2831853071795862);
+        rot.y += 6.2831853071795862;
     }
 
     HSD_JObjSetRotation(jobj, &rot);
