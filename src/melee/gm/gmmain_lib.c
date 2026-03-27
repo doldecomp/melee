@@ -134,37 +134,37 @@ void* gmMainLib_8015CCFC(void)
     return &gmMainLib_804D3EE0->thing.x1A4C;
 }
 
-void* gmMainLib_8015CD08(void)
+void* gmMainLib_GetVsPlayContestants(void)
 {
     return &gmMainLib_804D3EE0->thing.x1A30;
 }
 
-void* gmMainLib_8015CD14(void)
+void* gmMainLib_GetVsPlayTime(void)
 {
     return &gmMainLib_804D3EE0->thing.x1A34;
 }
 
-void* gmMainLib_8015CD20(void)
+void* gmMainLib_GetCombinedVSPlayTime(void)
 {
     return &gmMainLib_804D3EE0->thing.x1A38;
 }
 
-void* gmMainLib_8015CD2C(void)
+void* gmMainLib_GetTimeMatchTotal(void)
 {
     return &gmMainLib_804D3EE0->thing.x1A18;
 }
 
-void* gmMainLib_8015CD38(void)
+void* gmMainLib_GetStockMatchTotal(void)
 {
     return &gmMainLib_804D3EE0->thing.x1A1C;
 }
 
-void* gmMainLib_8015CD44(void)
+void* gmMainLib_GetCoinMatchTotal(void)
 {
     return &gmMainLib_804D3EE0->thing.x1A20;
 }
 
-void* gmMainLib_8015CD50(void)
+void* gmMainLib_GetBonusMatchTotal(void)
 {
     return &gmMainLib_804D3EE0->thing.x1A24;
 }
@@ -174,12 +174,12 @@ void* gmMainLib_8015CD5C(void)
     return &gmMainLib_804D3EE0->thing.x1A28;
 }
 
-void* gmMainLib_8015CD68(void)
+void* gmMainLib_GetMatchResetCounter(void)
 {
     return &gmMainLib_804D3EE0->thing.x1A2C;
 }
 
-void* gmMainLib_8015CD74(void)
+void* gmMainLib_GetSingleplayerTime(void)
 {
     return &gmMainLib_804D3EE0->thing.x1A3C;
 }
@@ -189,27 +189,27 @@ void* gmMainLib_8015CD80(void)
     return &gmMainLib_804D3EE0->thing.x1A44;
 }
 
-void* gmMainLib_8015CD8C(void)
+void* gmMainLib_GetPowerCount(void)
 {
     return &gmMainLib_804D3EE0->thing.x1A50;
 }
 
-int* gmMainLib_8015CD98(void)
+int* gm_GetPowerTime(void)
 {
     return &gmMainLib_804D3EE0->thing.x1A54;
 }
 
-void* gmMainLib_8015CDA4(void)
+void* gmMainLib_GetTotalDamage(void)
 {
     return &gmMainLib_804D3EE0->thing.x1A58;
 }
 
-s32* gmMainLib_8015CDB0(void)
+s32* gmMainLib_GetKOTotal(void)
 {
     return &gmMainLib_804D3EE0->thing.x1A5C;
 }
 
-void* gmMainLib_8015CDBC(void)
+void* gmMainLib_GetSelfDestructTotal(void)
 {
     return &gmMainLib_804D3EE0->thing.x1A60;
 }
@@ -1040,7 +1040,7 @@ void gmMainLib_8015FA34(int arg0)
         if ((arg0 != 0 && arg0 != 2) || lb_8001B6E0(i) != 0) {
             gmMainLib_8015F600(i, 0);
         } else if (i == 1 && !gmMainLib_8046B0F0.x0) {
-            gm_80162B98();
+            gm_IncrementPowerCount();
         }
     }
     if (g_debugLevel > 2 && db_804D6B20 != 0) {

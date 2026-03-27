@@ -291,7 +291,7 @@ void gm_801A5F64(MinorScene* minor_data, VsModeData* vs_data, u8 next_scene)
     if (gm_801A52D0(match_end)) {
         gm_8016247C(gm_801688AC(match_end));
         if (minor_data[1].idx != 0xFF) {
-            gm_8016279C();
+            gm_GetVsPlayMatchTotal();
             unk_bool = false;
             idx = gm_801A5360(match_end);
             unk = gm_80172DD4(gmMainLib_8015ED98()->x0);
