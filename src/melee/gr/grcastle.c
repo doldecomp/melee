@@ -117,9 +117,28 @@ typedef struct grCastleParams {
     /* 0x008 */ s16 x8;
     /* 0x00A */ s16 xA;
     /* 0x00C */ s32 xC;
-    /* 0x010 */ u8 x10[0x12C - 0x10];
+    /* 0x010 */ f32 x10;
+    /* 0x014 */ f32 x14;
+    /* 0x018 */ u8 pad_x18[8];
+    /* 0x020 */ f32 x20;
+    /* 0x024 */ f32 x24;
+    /* 0x028 */ f32 x28;
+    /* 0x02C */ f32 x2C;
+    /* 0x030 */ f32 x30;
+    /* 0x034 */ f32 x34;
+    /* 0x038 */ f32 x38;
+    /* 0x03C */ f32 x3C;
+    /* 0x040 */ u8 pad_x40[0x12C - 0x40];
     /* 0x12C */ s16 x12C[]; // TODO: How big is this array?
 } grCastleParams;
+
+typedef struct grCastle_PlatSubObj {
+    /* 0x00 */ HSD_JObj* jobj;
+    /* 0x04 */ f32 current;
+    /* 0x08 */ s16 state;
+    /* 0x0A */ s16 counter;
+    /* 0x0C */ f32 wind;
+} grCastle_PlatSubObj;
 
 static f32 grCs_804D45E0 = 0.017453292f;
 static u8 grCs_804D45E4 = 1;
@@ -479,6 +498,99 @@ bool grCastle_801CDC3C(Ground_GObj* gobj)
 }
 
 /// #grCastle_801CDC44
+void grCastle_801CDC44(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    Ground* gp2 = gp;
+    s32 i = 0;
+
+    do {
+        switch (gp2->gv.castle8.xCC) {
+        case 0:
+            if (gp2->gv.castle8.xD0 > 0.0f) {
+                s16 cnt = gp2->gv.castle8.xCE;
+                gp2->gv.castle8.xCE = cnt + 1;
+                if ((f32) cnt > grCs_804D6970->x38) {
+                    gp2->gv.castle8.xCC = 2;
+                }
+            } else {
+                gp2->gv.castle8.xCE = 0;
+                gp2->gv.castle8.xCC = 1;
+            }
+            break;
+        case 1:
+            if (gp2->gv.castle8.xD0 > 0.0f) {
+                gp2->gv.castle8.xCE = 0;
+                gp2->gv.castle8.xCC = 0;
+            } else {
+                s16 cnt = gp2->gv.castle8.xCE;
+                gp2->gv.castle8.xCE = cnt + 1;
+                if ((f32) cnt > grCs_804D6970->x3C) {
+                    gp2->gv.castle8.xCC = 3;
+                }
+            }
+            break;
+        case 2: {
+            f32 wind = gp2->gv.castle8.xD0;
+            if (wind > 0.0f) {
+                f32 speed_cap = grCs_804D6970->x28;
+                f32 speed =
+                    wind * grCs_804D6970->x20 + grCs_804D6970->x24;
+                f32 max_val;
+                f32 cur;
+
+                if (speed > speed_cap) {
+                    speed = speed_cap;
+                }
+                max_val = grCs_804D6970->x10;
+                cur = gp2->gv.castle8.xC8;
+                if ((max_val - cur) < speed) {
+                    gp2->gv.castle8.xC8 = max_val;
+                } else {
+                    gp2->gv.castle8.xC8 = cur + speed;
+                }
+                HSD_JObjSetTranslateY(gp2->gv.castle8.xC4,
+                                      gp2->gv.castle8.xC8);
+            } else {
+                gp2->gv.castle8.xCE = 0;
+                gp2->gv.castle8.xCC = 1;
+            }
+            break;
+        }
+        case 3: {
+            f32 wind = gp2->gv.castle8.xD0;
+            if (wind > 0.0f) {
+                gp2->gv.castle8.xCE = 0;
+                gp2->gv.castle8.xCC = 0;
+            } else {
+                f32 speed_cap = grCs_804D6970->x34;
+                f32 speed =
+                    wind * grCs_804D6970->x2C + grCs_804D6970->x30;
+                f32 cur;
+                f32 min_val;
+
+                if (speed > speed_cap) {
+                    speed = speed_cap;
+                }
+                cur = gp2->gv.castle8.xC8;
+                min_val = grCs_804D6970->x14;
+                if ((cur - min_val) < speed) {
+                    gp2->gv.castle8.xC8 = min_val;
+                } else {
+                    gp2->gv.castle8.xC8 = cur - speed;
+                }
+                HSD_JObjSetTranslateY(gp2->gv.castle8.xC4,
+                                      gp2->gv.castle8.xC8);
+            }
+            break;
+        }
+        }
+        i++;
+        gp2->gv.castle8.xD0 = 0.0f;
+        gp2 = (Ground*) ((u8*) gp2 + 0x10);
+    } while (i < 2);
+    Ground_801C2FE0(gobj);
+}
 
 void grCastle_801CDF50(Ground_GObj* gobj) {}
 
