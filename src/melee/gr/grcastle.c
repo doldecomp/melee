@@ -1876,13 +1876,13 @@ void fn_801D0924(HSD_GObj* gobj, int renderpass)
     }
 }
 
-s32 grCastle_801D09B8(HSD_GObj* gobj, Vec3* arg2)
+// Weird parameter stuff, but it matches?
+bool grCastle_801D09B8(void* unused, HSD_GObj* gobj, Vec3* arg2)
 {
     Vec3 sp2C;
     Vec3 sp20;
     Vec3 sp14;
     f32 temp_f31;
-    PAD_STACK(4);
 
     temp_f31 = 14.0f * Ground_801C0498();
     ftLib_80086644(gobj, &sp2C);
@@ -1903,9 +1903,9 @@ s32 grCastle_801D09B8(HSD_GObj* gobj, Vec3* arg2)
             arg2->y = 0.0f;
             arg2->x = 0.0f;
         }
-        return 1;
+        return true;
     }
-    return 0;
+    return false;
 }
 
 
