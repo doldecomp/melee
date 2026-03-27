@@ -784,8 +784,8 @@ void grCastle_801CE19C(Ground_GObj* gobj)
 void grCastle_801CE260(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
-    HSD_JObj* jobj = GET_JOBJ(gobj);
     Ground* gp2;
+    HSD_JObj* jobj = GET_JOBJ(gobj);
     CmSubject* subject;
     PAD_STACK(8);
 
