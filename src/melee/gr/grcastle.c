@@ -712,17 +712,19 @@ s32 grCastle_801CE054(Ground_GObj* gobj)
     s32 ctr;
     s32 val = 0;
     Ground* gp = GET_GROUND(gobj);
-    s16* dst = arr + count;
     s16 picked;
     s32 idx;
     s32 i;
-    for (ctr = 3; ctr != 0; ctr++) {
+
+    for (ctr = 3; ctr != 0; ctr--) {
         for (i = 0; i < 3; i++) {
             if (val != gp->gv.castle4.xD8 && val != gp->gv.castle4.xDA &&
                 val != gp->gv.castle4.xDC)
             {
-                dst[count++] = (s16) val;
+                arr[count] = (s16) val;
+                count++;
             }
+            val++;
         }
     }
 
