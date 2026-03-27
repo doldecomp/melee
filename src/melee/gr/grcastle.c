@@ -689,6 +689,110 @@ void grCastle_801CE3AC(Ground_GObj* gobj)
 }
 
 /// #grCastle_801CE578
+#pragma push
+#pragma dont_inline on
+void grCastle_801CE578(Ground_GObj* gobj)
+{
+    Ground* gp = (Ground*) gobj->user_data;
+    Vec3 pos;
+    Vec3 jpos;
+    PAD_STACK(44);
+
+    {
+        CmSubject* cam = (CmSubject*) gp->gv.castle11.xD8;
+        if (cam != NULL) {
+            lb_8000B1CC(Ground_801C3FA4(gobj, 0), NULL, &pos);
+            cam->x10 = pos;
+            cam->x1C = pos;
+        }
+    }
+
+    gp = (Ground*) gobj->user_data;
+    if (gp->gv.castle11.xCC == 0) {
+        s16 timer = gp->gv.castle11.xCA;
+        gp->gv.castle11.xCA = timer - 1;
+        if (timer < 0) {
+            gp->gv.castle11.xCC = (u32) grCastle_801CD4D0(2);
+            Ground_801C53EC(0x53026);
+            grCastle_801CE3AC(gobj);
+        }
+    }
+
+    if (!gp->gv.castle11.xC4.b0) {
+        gp = (Ground*) gobj->user_data;
+        if (grAnime_801C83D0(gobj, 0, 1)) {
+            gp->gv.castle11.xC8 =
+                *(s16*) ((u8*) grCs_804D6970 + 0x58);
+            gp->gv.castle11.xC4.b0 = 1;
+            grMaterial_801C9604(gobj,
+                                *(s32*) ((u8*) grCs_804D6970 + 0x114), 0);
+            if (gp->gv.castle11.xCC != 0) {
+                Ground_801C4A08((HSD_GObj*) gp->gv.castle11.xCC);
+            }
+            Ground_801C5544(gp, 0);
+        }
+    } else {
+        gp = (Ground*) gobj->user_data;
+        {
+            s16 timer = gp->gv.castle11.xC8;
+            gp->gv.castle11.xC8 = timer - 1;
+            if (timer < 0) {
+                if (gp->gv.castle11.xD0 != 0) {
+                    grMaterial_801C8CDC((HSD_GObj*) gp->gv.castle11.xD0);
+                }
+                gp->gv.castle11.xD0 = 0;
+
+                {
+                    HSD_GObj* newobj = grCastle_801CD4D0(1);
+                    if (newobj != NULL) {
+                        HSD_JObj* jobj = (HSD_JObj*) newobj->hsd_obj;
+                        lb_8000B1CC(Ground_801C3FA4(gobj, 0), NULL, &jpos);
+                        if (jobj == NULL) {
+                            __assert("jobj.h", 0x394, "jobj");
+                        }
+                        jobj->translate = jpos;
+                        if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
+                            HSD_JObjSetMtxDirtySub(jobj);
+                        }
+                        lb_800119DC(&jpos, 0xB4, 20.0f, 0.1f, 1.0471976f);
+                    }
+                }
+
+                {
+                    Ground* sat =
+                        (Ground*) ((HSD_GObj*) gp->gv.castle11.xD4)
+                            ->user_data;
+                    s32 rand;
+                    s32 range;
+
+                    {
+                        struct { u8 b0:1; u8:7; } *flags =
+                            (void*)((u8*) sat + 0xDE);
+                        flags->b0 = 1;
+                    }
+
+                    range = *(s16*) ((u8*) grCs_804D6970 + 0xE);
+                    if (range != 0) {
+                        rand = HSD_Randi(range);
+                    } else {
+                        rand = 0;
+                    }
+                    *(s16*) ((u8*) sat + 0xD4) =
+                        (s16) (*(s16*) ((u8*) grCs_804D6970 + 0xC) + rand);
+                }
+
+                gp = (Ground*) gobj->user_data;
+                if (gp->gv.castle11.xD8 != 0) {
+                    Camera_800290D4(
+                        (CmSubject*) gp->gv.castle11.xD8);
+                    gp->gv.castle11.xD8 = 0;
+                }
+                Ground_801C4A08(gobj);
+            }
+        }
+    }
+}
+#pragma pop
 
 void grCastle_801CE7E4(Ground_GObj* gobj) {}
 
