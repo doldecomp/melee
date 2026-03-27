@@ -1068,11 +1068,24 @@ void grCastle_801CE9E8(Ground_GObj* gobj)
 
 void grCastle_801CEAC8(Ground_GObj* gobj) {}
 
+inline void zero(Ground* gp, int i, f32 zero)
+{
+    gp->gv.castle10.jobjs[i] = NULL;
+    gp->gv.castle10.effect_a[i] = NULL;
+    gp->gv.castle10.effect_b[i] = NULL;
+    gp->gv.castle10.x10C[i] = 0;
+    gp->gv.castle10.x120[i] = -1;
+    gp->gv.castle10.state[i] = 0;
+    gp->gv.castle10.idx[i] = 0;
+    gp->gv.castle10.baseY[i] = zero;
+}
+
 void grCastle_801CEACC(Ground_GObj* gobj)
 {
     Ground* gp = (Ground*) gobj->user_data;
     HSD_JObj* jobj = (HSD_JObj*) gobj->hsd_obj;
     s32 i;
+    PAD_STACK(0x8);
 
     Ground_801C2ED0(jobj, gp->map_id);
     gp->x10_flags.b5 = 1;
@@ -1081,14 +1094,7 @@ void grCastle_801CEACC(Ground_GObj* gobj)
     gp->gv.castle10.xC8 = 0;
 
     for (i = 0; i < 5; i++) {
-        gp->gv.castle10.jobjs[i] = NULL;
-        gp->gv.castle10.effect_a[i] = NULL;
-        gp->gv.castle10.effect_b[i] = NULL;
-        gp->gv.castle10.x10C[i] = 0;
-        gp->gv.castle10.x120[i] = -1;
-        gp->gv.castle10.state[i] = 0;
-        gp->gv.castle10.idx[i] = 0;
-        gp->gv.castle10.baseY[i] = 0.0f;
+        zero(gp, i, 0.0f);
     }
 
     switch (gp->map_id) {
