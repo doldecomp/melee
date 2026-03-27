@@ -692,7 +692,7 @@ typedef struct itSeakNeedleHeld_ItemVars {
 } itSeakNeedleHeld_ItemVars;
 
 typedef struct itSeakNeedleThrown_ItemVars {
-    /*  +0 ip+DD4 */ char pad_0[0x4];
+    /*  +0 ip+DD4 */ f32 xDD4;
     /*  +4 ip+DD8 */ f32 xDD8;
     /*  +8 ip+DDC */ f32 xDDC;
     /*  +C ip+DE0 */ f32 xDE0;
