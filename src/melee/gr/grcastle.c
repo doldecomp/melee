@@ -1927,11 +1927,11 @@ void grCastle_801D0A9C(Vec3* arg0, f32 arg8)
     }
 }
 
-struct lb_80011A50_t* grCastle_801D0BBC(void)
+void grCastle_801D0BBC()
 {
     f32 angle;
-
-    angle = atan2f(grCs_804D6974->x4.z, grCs_804D6974->x4.x) + grCs_804D45E0;
+    angle = atan2f(grCs_804D6974->x4.z, grCs_804D6974->x4.x);
+    angle = angle + grCs_804D45E0;
     if (angle > 1.0471975430846214) {
         angle = 1.0471976f;
     }
@@ -1954,10 +1954,10 @@ struct lb_80011A50_t* grCastle_801D0BBC(void)
     }
     if (grCs_804D45E4 != 0) {
         grCs_804D6974->unk_scale = 0.3 * HSD_Randf() + 0.2;
-        return grCs_804D6974;
+        return;
     }
     grCs_804D6974->unk_scale = 0.05 * HSD_Randf();
-    return grCs_804D6974;
+    return;
 }
 
 void grCastle_801D0D24()

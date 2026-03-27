@@ -91,7 +91,7 @@ struct unkCastle {
 /* 1D0A9C */ void grCastle_801D0A9C(Vec3* arg0, f32 arg8);
 /* 1D0B04 */ DynamicsDesc* grCastle_801D0B04(enum_t);
 /* 1D0B0C */ bool grCastle_801D0B0C(Vec3* v, int arg1, HSD_JObj* jobj);
-/* 1D0BBC */ struct lb_80011A50_t* grCastle_801D0BBC(void);
+/* 1D0BBC */ void grCastle_801D0BBC(void);
 /* 1D0D24 */ UNK_RET grCastle_801D0D24(UNK_PARAMS);
 /* 1D0D84 */ void grCastle_801D0D84(HSD_JObj*);
 /* 1D0FF0 */ float grCastle_801D0FF0(void);
