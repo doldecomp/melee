@@ -8,14 +8,15 @@
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/itcoll.h"
+#include "it/itCommonItems.h"
 #include "it/item.h"
 
-ItemStateTable it_803F7C70[] = {
+ItemStateTable it_803F7CA0[] = {
     { 0, itSonans_UnkMotion0_Anim, itSonans_UnkMotion0_Phys,
       itSonans_UnkMotion0_Coll },
     { 1, itSonans_UnkMotion1_Anim, itSonans_UnkMotion1_Phys,
       itSonans_UnkMotion1_Coll },
-    { 2, itSonans_UnkMotion2_Anim, itSonans_UnkMotion2_Phys,
+    { -1, itSonans_UnkMotion2_Anim, itSonans_UnkMotion2_Phys,
       itSonans_UnkMotion2_Coll }
 };
 
@@ -79,16 +80,14 @@ void it_802CD4FC(Item_GObj* gobj)
         angle = ip->xDD4_itemVar.sonans.x64;
         max_angle = attrs->x18;
         if (angle > max_angle) {
-            ip->xDD4_itemVar.sonans.x60 =
-                (f32) (ip->xDD4_itemVar.sonans.x60 * it_804DD3C8);
+            ip->xDD4_itemVar.sonans.x60 *= -0.9;
             ip->xDD4_itemVar.sonans.x64 = attrs->x18;
         } else if (angle < -max_angle) {
-            ip->xDD4_itemVar.sonans.x60 =
-                (f32) (ip->xDD4_itemVar.sonans.x60 * it_804DD3C8);
+            ip->xDD4_itemVar.sonans.x60 *= -0.9;
             ip->xDD4_itemVar.sonans.x64 = -attrs->x18;
         }
         HSD_JObjSetRotationZ(ip->xBBC_dynamicBoneTable->bones[4],
-                             it_804DD3D0 * ip->xDD4_itemVar.sonans.x64);
+                             0.017453292f * ip->xDD4_itemVar.sonans.x64);
     }
     it_80272460(&ip->x5D4_hitboxes[0].hit, (u32) ip->xDD4_itemVar.sonans.x68,
                 gobj);
@@ -160,15 +159,19 @@ void it_802CD9C0(Item_GObj* gobj)
     ip->exited_hitlag = efLib_ResumeAll;
 }
 
-f32 it_804DD3B8 = 0.0f;
-
 bool itSonans_UnkMotion1_Anim(Item_GObj* gobj)
 {
-    Item* ip = GET_ITEM(gobj);
-    if (--ip->xD44_lifeTimer == it_804DD3B8) {
-        return true;
+    Item* ip;
+    f32 lifetimer;
+    int zero;
+    ip = GET_ITEM(gobj);
+    lifetimer = ip->xD44_lifeTimer - 1.0f;
+    ip->xD44_lifeTimer = lifetimer;
+    zero = 0;
+    if (lifetimer == zero) {
+        return 1;
     }
-    return false;
+    return 0;
 }
 
 void itSonans_UnkMotion1_Phys(Item_GObj* gobj)
