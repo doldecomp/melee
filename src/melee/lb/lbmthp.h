@@ -7,19 +7,30 @@
 #include "lb/forward.h"
 #include <baselib/forward.h>
 
-/* THPDec function declaration */
+/* THPDec function declarations */
+BOOL THPInit(void);
 s32 THPDec_8032FD40(void* arg0, u16 height);
 
 /* Struct used by fn_8001EBF0 for THP decode component init */
 typedef struct THPDecComp {
-    /* 0x00 */ u8 pad0[0x40];
+    /* 0x00 */ u8 pad0[0x08];
+    /* 0x08 */ u32 unk_08;
+    /* 0x0C */ u32 unk_0C;
+    /* 0x10 */ u32 unk_10;
+    /* 0x14 */ u32 unk_14;
+    /* 0x18 */ u8 pad18[0x1C - 0x18];
+    /* 0x1C */ u32 unk_1C;
+    /* 0x20 */ u8 pad20[0x24 - 0x20];
+    /* 0x24 */ u32 unk_24;
+    /* 0x28 */ u8 pad28[0x40 - 0x28];
     /* 0x40 */ u32 unk_40;
     /* 0x44 */ u32 width;
     /* 0x48 */ u32 height;
     /* 0x4C */ u8 pad4C[0x68 - 0x4C];
     /* 0x68 */ s32 unk_68;
     /* 0x6C */ s32 unk_6C;
-    /* 0x70 */ u8 pad70[0x78 - 0x70];
+    /* 0x70 */ s32 unk_70;
+    /* 0x74 */ u8 pad74[0x78 - 0x74];
     /* 0x78 */ u32 unk_78;
     /* 0x7C */ u32 unk_7C;
     /* 0x80 */ u32 unk_80;
@@ -42,10 +53,18 @@ typedef struct THPDecComp {
     /* 0x104 */ u32 unk_104;
     /* 0x108 */ s32 unk_108;
     /* 0x10C */ s32 unk_10C;
+    /* 0x110 */ s32 unk_110;
+    /* 0x114 */ u8 pad114[0x11C - 0x114];
+    /* 0x11C */ s32 unk_11C;
+    /* 0x120 */ u8 pad120[0x128 - 0x120];
+    /* 0x128 */ s32 unk_128;
+    /* 0x12C */ u8 pad12C[0x130 - 0x12C];
+    /* 0x130 */ s32 unk_130;
+    /* 0x134 */ s32 unk_134;
 } THPDecComp;
 
 /* 01E910 */ UNK_RET fn_8001E910(UNK_PARAMS);
-/* 01EB14 */ UNK_RET fn_8001EB14(UNK_PARAMS);
+/* 01EB14 */ s32 fn_8001EB14(THPDecComp* data, const char* path);
 /* 01EBF0 */ s32 fn_8001EBF0(THPDecComp* data);
 /* 01ECF4 */ UNK_RET fn_8001ECF4(UNK_PARAMS);
 /* 01EF5C */ UNK_RET fn_8001EF5C(UNK_PARAMS);

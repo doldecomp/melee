@@ -1,8 +1,11 @@
 #include "lbmthp.static.h"
 
+#include "lb/lbfile.h"
+
 #include "baselib/memory.h"
 #include "baselib/video.h"
 
+#include <dolphin/dvd.h>
 #include <dolphin/gx/GXTexture.h>
 #include <sysdolphin/baselib/sobjlib.h>
 #include <melee/lb/lbanim.h>
@@ -10,7 +13,35 @@
 
 /// #fn_8001E910
 
-/// #fn_8001EB14
+s32 fn_8001EB14(THPDecComp* data, const char* path)
+{
+    THPInit();
+    data->unk_128 = DVDConvertPathToEntrynum(path);
+    lbFile_800161C4(data->unk_128, 0, (u32) data, 0x40, 0x21, 1);
+
+    data->unk_40 = data->unk_1C;
+    data->width = data->unk_10;
+    data->height = data->unk_14;
+    data->unk_100 = data->unk_0C;
+
+    if (data->unk_24 != 0) {
+        OSReport("Warning : frame offsets not supported\n");
+    }
+
+    if (data->unk_08 > 2) {
+        OSReport(
+            "Warning : file format is newer than player\n");
+    }
+
+    data->unk_11C = 1;
+    data->unk_6C = 1;
+    data->unk_110 = 0;
+    data->unk_70 = 1;
+    data->unk_134 = 0;
+    data->unk_130 = 0;
+
+    return 1;
+}
 
 #define ALIGN_32(x) (((x) + 0x1F) & ~0x1F)
 
