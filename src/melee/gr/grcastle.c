@@ -1042,6 +1042,7 @@ bool grCastle_801CE9E0(Ground_GObj* gobj)
 void grCastle_801CE9E8(Ground_GObj* gobj)
 {
     Vec3 pos;
+    Ground* tmp;
     Ground* gp = GET_GROUND(gobj);
     CmSubject* subject = (CmSubject*) gp->gv.arwing.xC8;
     PAD_STACK(8);
@@ -1051,14 +1052,14 @@ void grCastle_801CE9E8(Ground_GObj* gobj)
         subject->x1C = pos;
     }
     if (grAnime_801C83D0(gobj, 0, 1)) {
-        HSD_GObj* mat = (HSD_GObj*) gp->gv.arwing.xC4;
+        HSD_GObj* mat = (HSD_GObj*) (tmp = gp)->gv.arwing.xC4;
         if (mat != NULL) {
             grMaterial_801C8CDC(mat);
         }
         gp->gv.arwing.xC4 = 0;
         {
             Ground* gp2 = gobj->user_data;
-            CmSubject* subj2 = (CmSubject*) gp2->gv.arwing.xC8;
+            CmSubject* subj2 = (CmSubject*) (tmp = gp2)->gv.arwing.xC8;
             if (subj2 != NULL) {
                 Camera_800290D4(subj2);
                 gp2->gv.arwing.xC8 = 0;
