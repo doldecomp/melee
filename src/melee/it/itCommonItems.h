@@ -1453,6 +1453,9 @@ typedef struct itPatapataAttributes {
     /* 0x24 */ s32 x24;
     /* 0x28 */ s32 x28;
     /* 0x2C */ s32 x2C;
+    /* 0x30 */ u8 pad_30[0x38 - 0x30];
+    /* 0x38 */ f32 x38;
+    /* 0x3C */ f32 x3C;
 } itPatapataAttributes;
 
 typedef struct itOldottoseaAttributes {
