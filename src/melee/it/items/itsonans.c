@@ -163,12 +163,11 @@ bool itSonans_UnkMotion1_Anim(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     int zero = 0;
+
     f32 lifetime = ip->xD44_lifeTimer - 1.0f;
     ip->xD44_lifeTimer = lifetime;
-    if (lifetime == zero) {
-        return 1;
-    }
-    return 0;
+
+    return (lifetime == zero) ? true : false;
 }
 
 void itSonans_UnkMotion1_Phys(Item_GObj* gobj)
