@@ -15,6 +15,7 @@
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
 #include "it/it_26B1.h"
+#include "it/it_266F.h"
 #include "it/it_2725.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
@@ -143,6 +144,14 @@ static const grCastle_DynEntries grCs_803B7EA8 = {{
     { 76, 6 },
     { 85, 6 },
     { 94, 6 },
+}};
+
+typedef struct grCastle_YOffsets {
+    f32 v[6];
+} grCastle_YOffsets;
+
+static const grCastle_YOffsets grCs_803B7F50 = {{
+    4.0f, 6.0f, 7.0f, 6.0f, 4.0f, -1.0f,
 }};
 
 void grCastle_801CD338(bool arg0)
@@ -983,6 +992,53 @@ bool grCastle_801D0298(Ground_GObj* gobj, s32 arg1)
 }
 
 /// #grCastle_801D02B8
+void grCastle_801D02B8(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    Ground* base = gp;
+    s32 i;
+
+    i = 0;
+    do {
+        if (gp->gv.castle10.state[i] == 1) {
+            grCastle_YOffsets offsets = grCs_803B7F50;
+            f32 yoff = offsets.v[gp->gv.castle10.idx[i]];
+
+            if (yoff != -1.0f) {
+                f32 newY = base->gv.castle10.baseY[0] + yoff;
+                HSD_JObjSetTranslateY(base->gv.castle10.jobjs[0], newY);
+
+                if ((gp->gv.castle10.xC4 == 1 ||
+                     (u16)(gp->gv.castle10.xC4 - 2) <= 1U) &&
+                    gp->gv.castle10.idx[i] == 3)
+                {
+                    HSD_JObj* eff = base->gv.castle10.effect_a[0];
+                    if (eff != NULL) {
+                        Vec3 pos;
+                        Vec3 vel;
+                        lb_8000B1CC(eff, NULL, &pos);
+                        vel.z = 0.0f;
+                        vel.x = 0.0f;
+                        pos.y += 5.0f;
+                        vel.y = *(f32*)((u8*)grCs_804D6970 + 0x50);
+                        it_8026F7C8(&pos, &vel, 1);
+                        HSD_JObjSetFlags(base->gv.castle10.effect_a[0],
+                                         0x10);
+                        HSD_JObjClearFlags(base->gv.castle10.effect_b[0],
+                                           0x10);
+                    }
+                }
+            } else {
+                HSD_JObjSetTranslateY(base->gv.castle10.jobjs[0],
+                                      base->gv.castle10.baseY[0]);
+                gp->gv.castle10.state[i] = 0;
+            }
+            gp->gv.castle10.idx[i]++;
+        }
+        i++;
+        base = (Ground*)((u8*)base + 4);
+    } while (i < 5);
+}
 
 void grCastle_801D0520(Ground_GObj* gobj, int renderpass)
 {
