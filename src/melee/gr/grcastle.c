@@ -13,6 +13,7 @@
 #include "gr/grmaterial.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
+#include "gm/gm_16AE.h"
 #include "gr/inlines.h"
 #include "it/it_26B1.h"
 #include "it/it_266F.h"
@@ -28,6 +29,7 @@
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
+#include <MetroTRK/intrinsics.h>
 #include <baselib/jobj.h>
 #include <baselib/psstructs.h>
 #include <baselib/random.h>
@@ -603,6 +605,8 @@ void grCastle_801CDC44(Ground_GObj* gobj)
 
 void grCastle_801CDF50(Ground_GObj* gobj) {}
 
+#pragma push
+#pragma dont_inline on
 bool grCastle_801CDF54(Vec3* vec)
 {
     HSD_GObj* gobj;
@@ -622,6 +626,7 @@ bool grCastle_801CDF54(Vec3* vec)
     }
     return false;
 }
+#pragma pop
 
 void grCastle_801CDFD8(Ground_GObj* gobj)
 {
@@ -1550,13 +1555,167 @@ void fn_801CFB68(Item_GObj* item_gobj, Ground* gp, HSD_GObj* gobj)
 }
 
 /// #grCastle_801CFBD4
+s32 grCastle_801CFBD4(Ground_GObj* gobj, s32 arg1)
+{
+    s32 i = 0;
+    s32 result = 1;
+    Ground* base = (Ground*) gobj->user_data;
+    Ground* gp = base;
+    u8 _pad_top[4];
+    unkCastleCallback cb1[5];
+    unkCastleCallback2 cb2[5];
+    Vec3 pos;
+    Vec3 target_pos;
+    PAD_STACK(12);
+
+    do {
+        HSD_JObj* jobj = base->gv.castle10.jobjs[0];
+        if (jobj != NULL) {
+            HSD_JObj* eff_a = base->gv.castle10.effect_a[0];
+            HSD_JObj* eff_b = base->gv.castle10.effect_b[0];
+
+            if (arg1 != 0) {
+                if (HSD_JObjGetFlags(jobj) & 0x10) {
+                    s32 close;
+
+                    if (grCastle_801CDF54(&target_pos) != 0 &&
+                        (lb_8000B1CC(jobj, NULL, &pos),
+                         sqrtf__Ff((pos.x - target_pos.x) *
+                                       (pos.x - target_pos.x) +
+                                   (pos.y - target_pos.y) *
+                                       (pos.y - target_pos.y)) <
+                             40.0f))
+                    {
+                        close = 1;
+                    } else {
+                        close = 0;
+                    }
+
+                    if (close == 0) {
+                        HSD_JObjClearFlags(jobj, 0x10);
+                        if (eff_a != NULL && eff_b != NULL) {
+                            if (gm_8016AE80() != -1 &&
+                                gm_8016B238() == 0)
+                            {
+                                HSD_JObjClearFlags(eff_a, 0x10);
+                                HSD_JObjSetScaleY(eff_a, 0.0001f);
+                                HSD_JObjSetFlags(eff_b, 0x10);
+                                HSD_JObjSetScaleY(eff_b, 1.0f);
+                            } else {
+                                HSD_JObjSetFlags(eff_a, 0x10);
+                                HSD_JObjSetScaleY(eff_a, 1.0f);
+                                HSD_JObjClearFlags(eff_b, 0x10);
+                                HSD_JObjSetScaleY(eff_b, 0.0001f);
+                            }
+                        } else {
+                            HSD_JObjSetScaleY(jobj, 0.0001f);
+                        }
+                    }
+                    gp->gv.castle10.state[i] = 0;
+                    result = 0;
+                    gp->gv.castle10.idx[i] = 0;
+                } else {
+                    HSD_JObj* target;
+                    f32 newScale;
+
+                    if (eff_a != NULL && eff_b != NULL) {
+                        if (HSD_JObjGetFlags(eff_a) & 0x10) {
+                            target = eff_b;
+                        } else {
+                            target = eff_a;
+                        }
+                    } else {
+                        target = jobj;
+                    }
+
+                    newScale = HSD_JObjGetScaleY(target);
+                    if (newScale < 1.0f) {
+                        newScale +=
+                            *(f32*) ((u8*) grCs_804D6970 + 0x48);
+                        if (newScale >= 1.0f) {
+                            newScale = 1.0f;
+                            mpJointListAdd(gp->gv.castle10.x120[i]);
+                            if (eff_a != NULL &&
+                                !(HSD_JObjGetFlags(eff_a) & 0x10))
+                            {
+                                cb1[0] = grCs_803B7F28[0];
+                                cb1[1] = grCs_803B7F28[1];
+                                cb1[2] = grCs_803B7F28[2];
+                                cb1[3] = grCs_803B7F28[3];
+                                cb1[4] = grCs_803B7F28[4];
+                                cb2[0] = grCs_803B7F3C[0];
+                                cb2[1] = grCs_803B7F3C[1];
+                                cb2[2] = grCs_803B7F3C[2];
+                                cb2[3] = grCs_803B7F3C[3];
+                                cb2[4] = grCs_803B7F3C[4];
+                                gp->gv.castle10.x10C[i] =
+                                    (s32) grMaterial_801C8CFC(
+                                        0, 2, gp, target, NULL,
+                                        (void (*)(Item_GObj*, Ground*,
+                                                  Vec3*, HSD_GObj*,
+                                                  f32)) cb1[i],
+                                        (void (*)(Item_GObj*, Ground*,
+                                                  HSD_GObj*)) cb2[i]);
+                                grMaterial_801C8DE0(
+                                    (Item_GObj*) gp->gv.castle10.x10C[i],
+                                    0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f,
+                                    8.0f);
+                                grMaterial_801C8E08(
+                                    (Item_GObj*) gp->gv.castle10.x10C[i]);
+                            }
+                        }
+                        HSD_JObjSetScaleY(target, newScale);
+                        result = 0;
+                    }
+                }
+            } else {
+                if (!(HSD_JObjGetFlags(jobj) & 0x10)) {
+                    HSD_JObj* target;
+                    f32 newScale;
+
+                    if (eff_a != NULL && eff_b != NULL) {
+                        if (HSD_JObjGetFlags(eff_a) & 0x10) {
+                            target = eff_b;
+                        } else {
+                            target = eff_a;
+                        }
+                    } else {
+                        target = jobj;
+                    }
+
+                    newScale = HSD_JObjGetScaleY(target);
+                    if (newScale > 0.0001f) {
+                        newScale -=
+                            *(f32*) ((u8*) grCs_804D6970 + 0x4C);
+                        if (newScale <= 0.0001f) {
+                            newScale = 0.0001f;
+                            HSD_JObjSetFlags(jobj, 0x10);
+                            if (eff_a != NULL) {
+                                HSD_JObjSetFlags(eff_a, 0x10);
+                            }
+                            if (eff_b != NULL) {
+                                HSD_JObjSetFlags(eff_b, 0x10);
+                            }
+                        }
+                        HSD_JObjSetScaleY(target, newScale);
+                        result = 0;
+                    }
+                }
+                mpLib_80057BC0(gp->gv.castle10.x120[i]);
+            }
+        }
+        i++;
+        base = (Ground*) ((u8*) base + 4);
+    } while (i < 5);
+
+    return result;
+}
 
 /// #grCastle_801D0298
 
 bool grCastle_801D0298(Ground_GObj* gobj, s32 arg1)
 {
-    grCastle_801CFBD4();
-    return false;
+    return grCastle_801CFBD4(gobj, arg1);
 }
 
 /// #grCastle_801D02B8
