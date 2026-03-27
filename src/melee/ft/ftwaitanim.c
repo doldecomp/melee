@@ -84,6 +84,8 @@ void ftCo_8008A7A8(Fighter_GObj* gobj, WaitStruct* arg1)
             do {
                 temp = anim_id = getAnimID(arg1);
             } while (!inlineA0(fp) && fp->anim_id == temp);
+            // Manually inlined ftCo_8008A6D8 here, not clean but only way I
+            // could make it match
             temp2 = GET_FIGHTER(gobj);
             if (temp != -1) {
                 anim = &temp2->x24[temp];
