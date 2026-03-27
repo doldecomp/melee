@@ -1,5 +1,7 @@
 #include "itsonans.h"
 
+#include "math.h"
+
 #include "ef/eflib.h"
 #include "it/inlines.h"
 #include "it/it_266F.h"
@@ -107,41 +109,26 @@ bool itSonans_Logic9_DmgDealt(Item_GObj* gobj)
     return false;
 }
 
-/// 99.04%
 bool it_802CD7D4(Item_GObj* gobj)
 {
     Item* item = GET_ITEM(gobj);
     itsonansAttributes* attrs = item->xC4_article_data->x4_specialAttributes;
-    f32 var_f1;
-    f32 var_f3;
-    f32 temp;
     if (item->xDAC_itcmd_var0 == 0) {
         item->xDD4_itemVar.sonans.x60 =
             attrs->x8 * (item->xCA0 * item->xCCC_incDamageDirection);
         item->xDAC_itcmd_var0 = 1;
     } else {
-        if ((attrs->x8 * (item->xCA0 * item->xCCC_incDamageDirection)) < 0.0f)
+        if (ABS(item->xDD4_itemVar.sonans.x60) <
+            ABS(attrs->x8 * (item->xCA0 * item->xCCC_incDamageDirection)))
         {
-            var_f1 =
-                -(attrs->x8 * (item->xCA0 * item->xCCC_incDamageDirection));
-        } else {
-            var_f1 =
-                (attrs->x8 * (item->xCA0 * item->xCCC_incDamageDirection));
-        }
-        var_f3 = item->xDD4_itemVar.sonans.x60;
-        if (var_f3 < 0.0f) {
-            var_f3 = -var_f3;
-        }
-        if (var_f3 < var_f1) {
             item->xDD4_itemVar.sonans.x60 =
                 (attrs->x8 * (item->xCA0 * item->xCCC_incDamageDirection));
         }
     }
-    temp = item->xCA0 * attrs->x4;
-    if (temp > attrs->xC) {
+    if (item->xCA0 * attrs->x4 > attrs->xC) {
         item->xDD4_itemVar.sonans.x68 = attrs->xC;
     } else {
-        item->xDD4_itemVar.sonans.x68 = temp;
+        item->xDD4_itemVar.sonans.x68 = item->xCA0 * attrs->x4;
     }
     return false;
 }
