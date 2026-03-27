@@ -2045,7 +2045,7 @@ void mn_8022CA54(HSD_GObj* gp)
             return;
         case SEL_RECORDS_MISC:
             lbAudioAx_80024030(1);
-            mnCount_8025186C();
+            mnCount_Create();
             HSD_GObjPLink_80390228(gp);
             return;
         }

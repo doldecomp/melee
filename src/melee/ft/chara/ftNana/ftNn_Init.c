@@ -938,6 +938,7 @@ static inline void ftPp_SpecialS_0_Coll_inline3(Fighter_GObj* gobj)
 
 void ftPp_SpecialS_0_Coll(Fighter_GObj* nana_gobj)
 {
+    u8 _[16];
     Fighter* nana_fp = GET_FIGHTER(nana_gobj);
     Fighter_GObj* popo_gobj = Player_GetEntityAtIndex(nana_fp->player_id, 0);
     Fighter* popo_fp = GET_FIGHTER(popo_gobj);
@@ -981,6 +982,7 @@ static inline void ftPp_SpecialS_1_Coll_inline3(Fighter_GObj* gobj)
 
 void ftPp_SpecialS_1_Coll(Fighter_GObj* nana_gobj)
 {
+    u8 _[16];
     Fighter* nana_fp = GET_FIGHTER(nana_gobj);
     Fighter_GObj* popo_gobj = Player_GetEntityAtIndex(nana_fp->player_id, 0);
     Fighter* popo_fp = GET_FIGHTER(popo_gobj);
