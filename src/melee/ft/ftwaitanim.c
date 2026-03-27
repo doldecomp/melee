@@ -93,7 +93,7 @@ void ftCo_8008A7A8(Fighter_GObj* gobj, WaitStruct* arg1)
                     ftData_80085CD8(fp, fp, anim_id);
                     fp->anim_id = anim_id;
                     ftCo_8009E7B4(fp, blend_data);
-                    fp->x3E4_fighterCmdScript.u = (union CmdUnion*) anim->xC;
+                    fp->x3E4_fighterCmdScript.u = anim->xC;
                     fp->x3E4_fighterCmdScript.loop_count = 0;
                     if (fp->x590 != NULL) {
                         fp->x594_s32 = anim->x10_animCurrFlags;
