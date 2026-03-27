@@ -148,6 +148,15 @@ static struct lb_80011A50_t* grCs_804D6974;
 
 static const Quaternion grCs_803B7EB8 = { 0.0f, 0.0f, 0.0f, 1.0f };
 
+typedef struct grCastle_BlinkTable {
+    s16 data[19];
+} grCastle_BlinkTable;
+
+static const grCastle_BlinkTable grCs_803B7EC8 = {{
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0
+}};
+
 static const Vec3 grCs_803B7E9C = { -257.0f, 13.5f, -252.0f };
 
 typedef struct grCastle_DynEntry {
@@ -1288,6 +1297,100 @@ bool grCastle_801CF300(Ground_GObj* gobj)
 }
 
 /// #grCastle_801CF308
+void grCastle_801CF308(Ground_GObj* gobj)
+{
+    s32 var_r6 = 0;
+    Ground* gp = (Ground*) gobj->user_data;
+    HSD_JObj* jobj = (HSD_JObj*) gobj->hsd_obj;
+    grCastle_BlinkTable tbl = grCs_803B7EC8;
+    Vec3 pos;
+    Quaternion quat;
+    PAD_STACK(40);
+
+    switch (gp->gv.castle5.xC4) {
+    case 1:
+        gp->gv.castle.xC8 = -1;
+        gp->gv.castle11.xCA = 0;
+        HSD_JObjClearFlagsAll(jobj, 0x10);
+        grAnime_801C86D4(gp->map_id, (HSD_GObj*) gobj, 0);
+        gp->gv.castle5.xC4 = 2;
+        /* fallthrough */
+    case 2: {
+        s32 delay = gp->gv.castle11.xCA;
+        if (delay > 0) {
+            gp->gv.castle11.xCA = delay - 1;
+        } else {
+            s8 val;
+            gp->gv.castle.xC8 += 1;
+            if (HSD_JObjGetFlags(jobj) & 0x10) {
+                HSD_JObjClearFlagsAll(jobj, 0x10);
+            } else {
+                HSD_JObjSetFlagsAll(jobj, 0x10);
+            }
+            val = ((s8*) &tbl)[gp->gv.castle.xC8];
+            if (val != -1) {
+                gp->gv.castle11.xCA = (s16) (2.0 * (f64) val);
+            } else {
+                gp->gv.castle5.xC4 = 3;
+                gp->gv.castle11.xD8 = (u32) grMaterial_801C8CFC(
+                    0, 1, gp, jobj, NULL,
+                    (void (*)(Item_GObj*, Ground*, Vec3*, HSD_GObj*,
+                              f32)) fn_801CFAFC,
+                    (void (*)(Item_GObj*, Ground*, HSD_GObj*)) fn_801CFB68);
+                grMaterial_801C8DE0(
+                    (Item_GObj*) gp->gv.castle11.xD8, 0.0f, -1.0f, 0.0f,
+                    0.0f, 1.0f, 0.0f, 4.0f);
+                grMaterial_801C8E08(
+                    (Item_GObj*) gp->gv.castle11.xD8);
+                gp->gv.castle8.xCC =
+                    *(s16*) ((u8*) grCs_804D6970 + 0x54);
+            }
+        }
+        var_r6 = 1;
+        break;
+    }
+    case 3:
+        var_r6 = 1;
+        break;
+    case 4: {
+        if (gp->gv.castle11.xD8 != 0) {
+            grMaterial_801C8CDC((HSD_GObj*) gp->gv.castle11.xD8);
+            gp->gv.castle11.xD8 = 0;
+        }
+        ((Ground*) ((HSD_GObj*) gp->gv.castle7.xD0)->user_data)
+            ->gv.castle5.xC4 = 1;
+        gp->gv.castle5.xC4 = 5;
+        grAnime_801C8138((HSD_GObj*) gobj, gp->map_id, 0);
+        Ground_801C5440(gp, 0, 0x53027U);
+        Camera_80030E44(2, NULL);
+        /* fallthrough */
+    }
+    case 5: {
+        if (grAnime_801C83D0((HSD_GObj*) gobj, 0, 7) != 0) {
+            s16 cnt = gp->gv.castle8.xCC;
+            gp->gv.castle8.xCC = cnt - 1;
+            if (cnt < 0) {
+                HSD_JObjSetFlagsAll(jobj, 0x10);
+            }
+        }
+        if ((s16) ((Ground*) ((HSD_GObj*) gp->gv.castle7.xD0)->user_data)
+                ->gv.castle5.xC4 == 0) {
+            gp->gv.castle5.xC4 = 0;
+            HSD_JObjSetFlagsAll(jobj, 0x10);
+        }
+        var_r6 = 1;
+        break;
+    }
+    }
+
+    if (var_r6 != 0) {
+        lb_8000B1CC((HSD_JObj*) gp->gv.castle11.xD4, NULL, &pos);
+        HSD_JObjSetTranslate(jobj, &pos);
+
+        HSD_JObjGetRotation((HSD_JObj*) gp->gv.castle11.xD4, &quat);
+        HSD_JObjSetRotation(jobj, &quat);
+    }
+}
 
 void grCastle_801CF74C(Ground_GObj* gobj) {}
 
