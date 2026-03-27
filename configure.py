@@ -536,7 +536,7 @@ config.libs = [
             Object(NonMatching, "melee/ft/ft_0892.c"),
             # Common
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_Wait.c"),
-            Object(NonMatching, "melee/ft/ftwaitanim.c"),
+            Object(Matching, "melee/ft/ftwaitanim.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_Attack1.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_AttackDash.c"),
             Object(Matching, "melee/ft/chara/ftCommon/ftCo_AttackS3.c"),
@@ -1221,7 +1221,7 @@ config.libs = [
             Object(Matching, "melee/it/items/itfire.c"),
             Object(Matching, "melee/it/items/itthunder.c"),
             Object(Matching, "melee/it/items/itfreezer.c"),
-            Object(NonMatching, "melee/it/items/itsonans.c"),
+            Object(Matching, "melee/it/items/itsonans.c"),
             Object(Matching, "melee/it/items/ithassam.c"),
             Object(NonMatching, "melee/it/items/itunknown.c"),
             Object(Matching, "melee/it/items/itentei.c"),

@@ -37,7 +37,6 @@ typedef struct ftData_UnkCountStruct ftData_UnkCountStruct;
 typedef struct ftLk_SpecialN_Vec3Group ftLk_SpecialN_Vec3Group;
 typedef struct ftMaterial_UnkTevStruct ftMaterial_UnkTevStruct;
 typedef struct FtSFX FtSFX;
-typedef struct ftSubactionList ftSubactionList;
 typedef struct gmScriptEventDefault gmScriptEventDefault;
 typedef struct MotionState MotionState;
 typedef struct UnkFloat6_Camera UnkFloat6_Camera;
