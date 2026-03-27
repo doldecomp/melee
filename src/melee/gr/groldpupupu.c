@@ -3,6 +3,7 @@
 #include "baselib/forward.h"
 #include "forward.h"
 
+#include "ft/ftdevice.h"
 #include "gr/granime.h"
 #include "gr/grmaterial.h"
 #include "gr/ground.h"
@@ -18,6 +19,9 @@
 static struct {
     s16 x0;
     s16 x2;
+    int x4;
+    int x8;
+    int xC;
 }* grOp_804D6A98;
 
 static void* grOp_804D6A9C;
@@ -247,7 +251,36 @@ void grOldPupupu_80211194(Ground_GObj* arg) {}
 
 void grOldPupupu_80211198(Ground_GObj* arg) {}
 
-/// #grOldPupupu_8021119C
+static inline int rand_inline(int a, int b)
+{
+    if (a > b) {
+        return b + (a - b != 0 ? HSD_Randi(a - b) : 0);
+    } else if (a < b) {
+        return a + (b - a != 0 ? HSD_Randi(b - a) : 0);
+    } else {
+        return a;
+    }
+}
+
+void grOldPupupu_8021119C(Ground_GObj* gobj)
+{
+    Ground* gp = gobj->user_data;
+
+    ftCo_800C06E8(gobj, 10, fn_802112F4);
+
+    gp->gv.unk.xC4 = 0;
+    gp->gv.unk.xC8 = 0;
+    gp->gv.unk.xCC = 0;
+
+    gp->gv.unk.xD0 = rand_inline(grOp_804D6A98->xC, grOp_804D6A98->x8);
+
+    gp->gv.unk.xD4 = 1;
+    gp->gv.unk.xE0 = 0;
+    gp->gv.unk.xD8 = 1;
+
+    grAnime_801C8138(gobj, gp->map_id, 0);
+    gp->x11_flags.b012 = 1;
+}
 
 bool grOldPupupu_80211284(Ground_GObj* gobj)
 {
