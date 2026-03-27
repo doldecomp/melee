@@ -161,14 +161,11 @@ void it_802CD9C0(Item_GObj* gobj)
 
 bool itSonans_UnkMotion1_Anim(Item_GObj* gobj)
 {
-    Item* ip;
-    f32 lifetimer;
-    int zero;
-    ip = GET_ITEM(gobj);
-    lifetimer = ip->xD44_lifeTimer - 1.0f;
-    ip->xD44_lifeTimer = lifetimer;
-    zero = 0;
-    if (lifetimer == zero) {
+    Item* ip = GET_ITEM(gobj);
+    int zero = 0;
+    f32 lifetime = ip->xD44_lifeTimer - 1.0f;
+    ip->xD44_lifeTimer = lifetime;
+    if (lifetime == zero) {
         return 1;
     }
     return 0;
