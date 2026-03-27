@@ -413,7 +413,7 @@ bool fn_801724C8(void)
 
 bool fn_801724D0(void)
 {
-    if (gm_8016279C() >= 0x64) {
+    if (gm_GetVsPlayMatchTotal() >= 0x64) {
         return true;
     }
     return false;
@@ -421,7 +421,7 @@ bool fn_801724D0(void)
 
 bool fn_80172504(void)
 {
-    if (gm_8016279C() >= 0x3E8) {
+    if (gm_GetVsPlayMatchTotal() >= 0x3E8) {
         return true;
     }
     return false;
@@ -429,7 +429,7 @@ bool fn_80172504(void)
 
 bool fn_80172538(void)
 {
-    if (gm_8016279C() >= 0x2710) {
+    if (gm_GetVsPlayMatchTotal() >= 0x2710) {
         return true;
     }
     return false;
@@ -437,7 +437,7 @@ bool fn_80172538(void)
 
 bool fn_8017256C(void)
 {
-    if (gm_8016279C() >= 0x186A0) {
+    if (gm_GetVsPlayMatchTotal() >= 0x186A0) {
         return true;
     }
     return false;
@@ -445,7 +445,7 @@ bool fn_8017256C(void)
 
 bool fn_801725A8(void)
 {
-    if (gm_8016279C() >= 0xF4240) {
+    if (gm_GetVsPlayMatchTotal() >= 0xF4240) {
         return true;
     }
     return false;
@@ -458,7 +458,9 @@ enum {
 
 bool fn_801725E4(void)
 {
-    if (lbLang_GetLanguageSetting() == LANG_JP && gm_8016279C() >= 0x1A90) {
+    if (lbLang_GetLanguageSetting() == LANG_JP &&
+        gm_GetVsPlayMatchTotal() >= 0x1A90)
+    {
         return true;
     }
     return false;
@@ -466,7 +468,9 @@ bool fn_801725E4(void)
 
 bool fn_80172624(void)
 {
-    if (lbLang_GetLanguageSetting() == LANG_US && gm_8016279C() >= 0x1383) {
+    if (lbLang_GetLanguageSetting() == LANG_US &&
+        gm_GetVsPlayMatchTotal() >= 0x1383)
+    {
         return true;
     }
     return false;
@@ -474,7 +478,7 @@ bool fn_80172624(void)
 
 bool fn_80172664(void)
 {
-    if (gm_8016279C() >= 0xC350) {
+    if (gm_GetVsPlayMatchTotal() >= 0xC350) {
         return true;
     }
     return false;
@@ -482,7 +486,7 @@ bool fn_80172664(void)
 
 bool fn_80172698(void)
 {
-    if (un_80304870() >= 0x32) {
+    if (un_GetTrophyTotal() >= 0x32) {
         return true;
     }
     return false;
@@ -490,7 +494,7 @@ bool fn_80172698(void)
 
 bool fn_801726CC(void)
 {
-    if (un_80304870() >= 0x64) {
+    if (un_GetTrophyTotal() >= 0x64) {
         return true;
     }
     return false;
@@ -498,7 +502,7 @@ bool fn_801726CC(void)
 
 bool fn_80172700(void)
 {
-    if (un_80304870() >= 0x96) {
+    if (un_GetTrophyTotal() >= 0x96) {
         return true;
     }
     return false;
@@ -506,7 +510,7 @@ bool fn_80172700(void)
 
 bool fn_80172734(void)
 {
-    if (un_80304870() >= 0xC8) {
+    if (un_GetTrophyTotal() >= 0xC8) {
         return true;
     }
     return false;
@@ -514,7 +518,7 @@ bool fn_80172734(void)
 
 bool fn_80172768(void)
 {
-    if (un_80304870() >= 0xFA) {
+    if (un_GetTrophyTotal() >= 0xFA) {
         return true;
     }
     return false;
@@ -1396,7 +1400,7 @@ void gm_80174180(void)
     if (fn_80162CCC() != 0 && gm_80162EC8() != 0) {
         un_80305918(4, 0, 0);
     }
-    if (gm_8016279C() >= 0xC8) {
+    if (gm_GetVsPlayMatchTotal() >= 0xC8) {
         un_80305918(5, 0, 0);
     }
     if (gm_80164ABC() != 0) {
