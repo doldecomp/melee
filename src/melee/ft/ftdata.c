@@ -1870,7 +1870,7 @@ void ftData_80085B98(Fighter* fp, int arg1, int arg2)
     u32 temp_r30;
     int i;
     u32 temp_r0;
-    struct S_TEMP4* temp_r3;
+    struct Fighter_WaitAnimData* temp_r3;
 
     temp_r30 = (u32) ftData_UnkIntPairs[fp->kind].data;
     fp->x59C = HSD_ObjAlloc(&fighter_x59C_alloc_data);
@@ -1906,12 +1906,12 @@ void ftData_80085CD8(Fighter* fp, Fighter* arg1, int msid)
     s32 temp_ret;
     s32 temp_ret_2;
     struct Fighter_x59C_t* temp_r4;
-    struct S_TEMP4* temp_r3;
+    struct Fighter_WaitAnimData* temp_r3;
     u32 temp_r3_2;
     u32 temp_r4_2;
 
     if (msid < arg1->x58C) {
-        temp_r3 = (struct S_TEMP4*) ftData_80085FD4(arg1, msid);
+        temp_r3 = (struct Fighter_WaitAnimData*) ftData_80085FD4(arg1, msid);
         temp_r3_2 = temp_r3->x14;
         if (temp_r3_2 != (u32) fp->x5A4) {
             if (temp_r3_2 != 0) {
