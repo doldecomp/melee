@@ -10,6 +10,8 @@
 /* 2C28B8 */ void fn_802C28B8(Item_GObj* gobj);
 /* 2C37BC */ void it_2725_Logic70_PickedUp(Item_GObj* gobj);
 /* 2C3810 */ void it_802C3810(Item_GObj* gobj);
+/* 2C3864 */ void it_802C3864(Item_GObj* gobj);
+/* 2C3950 */ void it_802C3950(Item_GObj* gobj);
 /* 2C3AA4 */ void it_2725_Logic70_EvtUnk(Item_GObj*, Item_GObj*);
 /* 3F76B8 */ extern ItemStateTable it_803F76B8[];
 
