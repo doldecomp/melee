@@ -1057,11 +1057,14 @@ struct grCastle_GroundVars9 {
 
 struct grCastle_GroundVars10 {
     /* +00 gp+C4 */ s16 xC4;
-    /* +02 gp+C6 */ u8 pad_02[0x0A];
+    /* +02 gp+C6 */ u8 pad_C6[2];
+    /* +04 gp+C8 */ s16 xC8;
+    /* +06 gp+CA */ u8 pad_CA[6];
     /* +0C gp+D0 */ HSD_JObj* jobjs[5];
     /* +20 gp+E4 */ HSD_JObj* effect_a[5];
     /* +34 gp+F8 */ HSD_JObj* effect_b[5];
-    /* +48 gp+10C */ u8 pad_48[0x28];
+    /* +48 gp+10C */ s32 x10C[5];
+    /* +5C gp+120 */ s32 x120[5];
     /* +70 gp+134 */ u8 state[5];
     /* +75 gp+139 */ u8 idx[5];
     /* +7A gp+13E */ u8 pad_7A[2];

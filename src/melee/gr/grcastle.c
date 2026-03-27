@@ -1033,6 +1033,134 @@ void grCastle_801CE9E8(Ground_GObj* gobj)
 void grCastle_801CEAC8(Ground_GObj* gobj) {}
 
 /// #grCastle_801CEACC
+void grCastle_801CEACC(Ground_GObj* gobj)
+{
+    Ground* gp = (Ground*) gobj->user_data;
+    HSD_JObj* jobj = (HSD_JObj*) gobj->hsd_obj;
+    s32 i;
+
+    Ground_801C2ED0(jobj, gp->map_id);
+    gp->x10_flags.b5 = 1;
+    gp->gv.castle10.xC4 = 0;
+    HSD_JObjSetFlagsAll(jobj, 0x10);
+    gp->gv.castle10.xC8 = 0;
+
+    for (i = 0; i < 5; i++) {
+        gp->gv.castle10.jobjs[i] = NULL;
+        gp->gv.castle10.effect_a[i] = NULL;
+        gp->gv.castle10.effect_b[i] = NULL;
+        gp->gv.castle10.x10C[i] = 0;
+        gp->gv.castle10.x120[i] = -1;
+        gp->gv.castle10.state[i] = 0;
+        gp->gv.castle10.idx[i] = 0;
+        gp->gv.castle10.baseY[i] = 0.0f;
+    }
+
+    switch (gp->map_id) {
+    case PURA:
+        gp->gv.castle10.jobjs[0] =
+            Ground_801C3FA4((HSD_GObj*) gobj, 1);
+        gp->gv.castle10.effect_a[0] =
+            Ground_801C3FA4((HSD_GObj*) gobj, 2);
+        gp->gv.castle10.effect_b[0] =
+            Ground_801C3FA4((HSD_GObj*) gobj, 3);
+        gp->gv.castle10.baseY[0] =
+            HSD_JObjGetTranslationY(gp->gv.castle10.jobjs[0]);
+        gp->gv.castle10.x120[0] = 0xB;
+
+        gp->gv.castle10.jobjs[1] =
+            Ground_801C3FA4((HSD_GObj*) gobj, 4);
+        gp->gv.castle10.effect_a[1] =
+            Ground_801C3FA4((HSD_GObj*) gobj, 5);
+        gp->gv.castle10.effect_b[1] =
+            Ground_801C3FA4((HSD_GObj*) gobj, 6);
+        gp->gv.castle10.baseY[1] =
+            HSD_JObjGetTranslationY(gp->gv.castle10.jobjs[1]);
+        gp->gv.castle10.x120[1] = 0xC;
+
+        gp->gv.castle10.jobjs[2] =
+            Ground_801C3FA4((HSD_GObj*) gobj, 7);
+        gp->gv.castle10.effect_a[2] = NULL;
+        gp->gv.castle10.effect_b[2] = NULL;
+        gp->gv.castle10.x120[2] = 0xD;
+
+        gp->gv.castle10.jobjs[3] =
+            Ground_801C3FA4((HSD_GObj*) gobj, 8);
+        gp->gv.castle10.effect_a[3] = NULL;
+        gp->gv.castle10.effect_b[3] = NULL;
+        gp->gv.castle10.x120[3] = 0xE;
+        break;
+
+    case SHRINE:
+        gp->gv.castle10.jobjs[0] =
+            Ground_801C3FA4((HSD_GObj*) gobj, 1);
+        gp->gv.castle10.effect_a[0] =
+            Ground_801C3FA4((HSD_GObj*) gobj, 2);
+        gp->gv.castle10.effect_b[0] =
+            Ground_801C3FA4((HSD_GObj*) gobj, 3);
+        gp->gv.castle10.baseY[0] =
+            HSD_JObjGetTranslationY(gp->gv.castle10.jobjs[0]);
+        gp->gv.castle10.x120[0] = 6;
+
+        gp->gv.castle10.jobjs[1] =
+            Ground_801C3FA4((HSD_GObj*) gobj, 4);
+        gp->gv.castle10.effect_a[1] =
+            Ground_801C3FA4((HSD_GObj*) gobj, 5);
+        gp->gv.castle10.effect_b[1] =
+            Ground_801C3FA4((HSD_GObj*) gobj, 6);
+        gp->gv.castle10.baseY[1] =
+            HSD_JObjGetTranslationY(gp->gv.castle10.jobjs[1]);
+        gp->gv.castle10.x120[1] = 7;
+
+        HSD_JObjSetFlagsAll(Ground_801C3FA4((HSD_GObj*) gobj, 7),
+                            0x10);
+        gp->gv.castle10.jobjs[2] = NULL;
+        gp->gv.castle10.effect_a[2] = NULL;
+        gp->gv.castle10.effect_b[2] = NULL;
+        mpLib_80057BC0(8);
+
+        gp->gv.castle10.jobjs[3] =
+            Ground_801C3FA4((HSD_GObj*) gobj, 0xA);
+        gp->gv.castle10.effect_a[3] = NULL;
+        gp->gv.castle10.effect_b[3] = NULL;
+        gp->gv.castle10.x120[3] = 9;
+
+        gp->gv.castle10.jobjs[4] =
+            Ground_801C3FA4((HSD_GObj*) gobj, 0xB);
+        gp->gv.castle10.effect_a[4] = NULL;
+        gp->gv.castle10.effect_b[4] = NULL;
+        gp->gv.castle10.x120[4] = 0xA;
+        break;
+
+    case GARDEN:
+        gp->gv.castle10.jobjs[0] =
+            Ground_801C3FA4((HSD_GObj*) gobj, 1);
+        gp->gv.castle10.effect_a[0] =
+            Ground_801C3FA4((HSD_GObj*) gobj, 2);
+        gp->gv.castle10.effect_b[0] =
+            Ground_801C3FA4((HSD_GObj*) gobj, 3);
+        gp->gv.castle10.baseY[0] =
+            HSD_JObjGetTranslationY(gp->gv.castle10.jobjs[0]);
+        gp->gv.castle10.x120[0] = 0;
+
+        gp->gv.castle10.jobjs[1] =
+            Ground_801C3FA4((HSD_GObj*) gobj, 4);
+        gp->gv.castle10.effect_a[1] = NULL;
+        gp->gv.castle10.effect_b[1] = NULL;
+        gp->gv.castle10.x120[1] = 1;
+
+        gp->gv.castle10.jobjs[2] =
+            Ground_801C3FA4((HSD_GObj*) gobj, 5);
+        gp->gv.castle10.effect_a[2] = NULL;
+        gp->gv.castle10.effect_b[2] = NULL;
+        gp->gv.castle10.x120[2] = 2;
+        break;
+    }
+
+    grCastle_801D0298(gobj, 0);
+    Ground_801C2FE0(gobj);
+    ((HSD_GObj*) gobj)->render_cb = (GObj_RenderFunc) grCastle_801D0520;
+}
 
 bool grCastle_801CEEFC(Ground_GObj* gobj)
 {
