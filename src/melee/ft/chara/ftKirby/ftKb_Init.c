@@ -3353,7 +3353,51 @@ void ftKb_SpecialN_800EF35C(Fighter_GObj* gobj, int arg1, u8* arg2)
 
 /// #ftKb_SpecialN_800EF69C
 
-/// #ftKb_UnkIntBoolFunc0
+void ftKb_UnkIntBoolFunc0(Fighter* fp, int arg1, bool arg2)
+{
+    if (fp->fv.kb.hat.x14.data != NULL) {
+        if (arg2) {
+            if (fp->fv.kb.hat.jobj != NULL) {
+                ftParts_80074CA0(&fp->fv.kb.hat.x24, arg1,
+                                 &fp->fv.kb.hat.x14);
+                return;
+            }
+            {
+                s32 var_r0;
+                s8 idx = fp->x5F4_arr[0].idx;
+                if (idx >= 2 && idx <= 6) {
+                    var_r0 = 1;
+                } else {
+                    var_r0 = 0;
+                }
+                if (var_r0 != 0) {
+                    ftParts_80074D7C(&fp->fv.kb.hat.x24, arg1,
+                                     &fp->fv.kb.hat.x14);
+                    return;
+                }
+            }
+            if (arg1 == 2) {
+                if (*fp->fv.kb.hat.x1C.data != NULL) {
+                    ftParts_80074D7C(&fp->x5AC, arg1, &fp->x203C);
+                    ftParts_80074CA0(&fp->fv.kb.hat.x24, arg1,
+                                     &fp->fv.kb.hat.x1C);
+                }
+            } else {
+                ftParts_80074D7C(&fp->x5AC, arg1, &fp->dobj_list);
+                ftParts_80074CA0(&fp->fv.kb.hat.x24, arg1,
+                                 &fp->fv.kb.hat.x14);
+            }
+        } else {
+            if (fp->fv.kb.hat.jobj == NULL && arg1 == 2) {
+                ftParts_80074D7C(&fp->fv.kb.hat.x24, arg1,
+                                 &fp->fv.kb.hat.x1C);
+                return;
+            }
+            ftParts_80074D7C(&fp->fv.kb.hat.x24, arg1,
+                             &fp->fv.kb.hat.x14);
+        }
+    }
+}
 
 void ftKb_Init_UnkCallbackPairs0_0(Fighter_GObj* gobj)
 {
@@ -4063,7 +4107,27 @@ void ftKb_Init_UnkMotionStates3(Fighter_GObj* gobj)
     }
 }
 
-/// #ftKb_SpecialN_800F1BAC
+void ftKb_SpecialN_800F1BAC(Fighter_GObj* gobj, s32 kind, bool arg2)
+{
+    Fighter* fp = gobj->user_data;
+    HSD_GObjEvent cb;
+
+    if (fp->fv.kb.hat.kind != kind) {
+        fp->fv.kb.hat.kind = kind;
+        ftKb_SpecialN_800F190C(gobj, fp->fv.kb.hat.kind);
+        if ((cb = ftKb_Init_803C9CC8[fp->fv.kb.hat.kind * 2]) != NULL) {
+            cb(gobj);
+        }
+        ftKb_SpecialN_800F16D0(gobj, fp->fv.kb.hat.kind);
+        if (arg2 == 1) {
+            ft_PlaySFX(fp, 0x222F3, 0x7F, 0x40);
+        }
+    } else if (arg2 == 1) {
+        ft_PlaySFX(fp, 0x222F6, 0x7F, 0x40);
+    }
+    fp->death3_cb = ftKb_Init_800EE74C;
+    fp->death1_cb = ftKb_Init_800EE7B8;
+}
 
 static bool fn_800F1CA0(HSD_GObj* gobj)
 {
