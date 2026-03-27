@@ -3,20 +3,22 @@
 #include "placeholder.h"
 #include "types.h"
 
+#include "baselib/debug.h"
 #include "cm/camera.h"
+#include "ft/ft_0C31.h"
 #include "ft/ftdevice.h"
 #include "ft/ftlib.h"
-#include "gr/grdisplay.h"
+#include "gm/gm_16AE.h"
 #include "gr/granime.h"
 #include "gr/grdatfiles.h"
+#include "gr/grdisplay.h"
 #include "gr/grlib.h"
 #include "gr/grmaterial.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
-#include "gm/gm_16AE.h"
 #include "gr/inlines.h"
-#include "it/it_26B1.h"
 #include "it/it_266F.h"
+#include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
@@ -29,11 +31,11 @@
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
-#include <MetroTRK/intrinsics.h>
 #include <baselib/jobj.h>
 #include <baselib/psstructs.h>
 #include <baselib/random.h>
 #include <baselib/spline.h>
+#include <MetroTRK/intrinsics.h>
 #include <MSL/trigf.h>
 
 const unkCastleCallback grCs_803B7F28[5] = {
@@ -823,6 +825,12 @@ bool grCastle_801CE3A4(Ground_GObj* gobj)
 {
     return false;
 }
+void grCastle_801CE3AC_dontinline(Ground_GObj* gobj);
+
+void grCastle_801CE3AC_dontinline(Ground_GObj* gobj)
+{
+    grCastle_801CE3AC(gobj);
+}
 
 void grCastle_801CE3AC(Ground_GObj* gobj)
 {
@@ -854,8 +862,18 @@ void grCastle_801CE3AC(Ground_GObj* gobj)
     }
 }
 
-#pragma push
-#pragma dont_inline on
+inline void fake_HSD_JObjSetTranslate(HSD_JObj* jobj, Vec3* translate)
+{
+#undef __FILE__
+#define __FILE__ "jobj.h"
+    HSD_ASSERT(916, jobj);
+    HSD_ASSERT(917, translate);
+    jobj->translate = *translate;
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
+        ftCo_800C6AFC(jobj);
+    }
+}
+
 void grCastle_801CE578(Ground_GObj* gobj)
 {
     Ground* gp = (Ground*) gobj->user_data;
@@ -879,7 +897,7 @@ void grCastle_801CE578(Ground_GObj* gobj)
         if (timer < 0) {
             gp->gv.castle11.xCC = (u32) grCastle_801CD4D0(2);
             Ground_801C53EC(0x53026);
-            grCastle_801CE3AC(gobj);
+            grCastle_801CE3AC_dontinline(gobj);
         }
     }
 
@@ -910,13 +928,7 @@ void grCastle_801CE578(Ground_GObj* gobj)
                     if (newobj != NULL) {
                         HSD_JObj* jobj = (HSD_JObj*) newobj->hsd_obj;
                         lb_8000B1CC(Ground_801C3FA4(gobj, 0), NULL, &jpos);
-                        if (jobj == NULL) {
-                            __assert("jobj.h", 0x394, "jobj");
-                        }
-                        jobj->translate = jpos;
-                        if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
-                            HSD_JObjSetMtxDirtySub(jobj);
-                        }
+                        fake_HSD_JObjSetTranslate(jobj, &jpos);
                         lb_800119DC(&jpos, 0xB4, 20.0f, 0.1f, 1.0471976f);
                     }
                 }
@@ -955,7 +967,6 @@ void grCastle_801CE578(Ground_GObj* gobj)
         }
     }
 }
-#pragma pop
 
 void grCastle_801CE7E4(Ground_GObj* gobj) {}
 
