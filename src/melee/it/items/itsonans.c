@@ -41,7 +41,6 @@ void it_802CD4DC(Item_GObj* gobj, Item_GObj* ref_gobj)
     it_8026B894(gobj, ref_gobj);
 }
 
-/// 99.63%
 void it_802CD4FC(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
@@ -63,15 +62,9 @@ void it_802CD4FC(Item_GObj* gobj)
         } else if (angle <= 0.0f && ip->xDD4_itemVar.sonans.x60 > 0.0f) {
             ip->xDD4_itemVar.sonans.x60 += attrs->x10;
         }
-        angle = ip->xDD4_itemVar.sonans.x64;
-        if (angle < 0.0f) {
-            angle = -angle;
-        }
+        angle = ABS(ip->xDD4_itemVar.sonans.x64);
         if (angle < attrs->x1C) {
-            angle = ip->xDD4_itemVar.sonans.x60;
-            if (angle < 0.0f) {
-                angle = -angle;
-            }
+            angle = ABS(ip->xDD4_itemVar.sonans.x60);
             if (angle < attrs->x1C) {
                 ip->xDD4_itemVar.sonans.x64 = 0.0f;
                 ip->xDD4_itemVar.sonans.x60 = 0.0f;
