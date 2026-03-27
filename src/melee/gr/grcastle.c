@@ -836,9 +836,9 @@ void grCastle_801CE3AC(Ground_GObj* gobj)
 
         rot = grCs_803B7EB8;
 
+        offset.z = 0.0f;
         offset.x = 0.0f;
         offset.y = grCs_804D6970->x110;
-        offset.z = 0.0f;
 
         lb_8000B1CC(Ground_801C3FA4(gobj, 1), &offset, &pos);
 
