@@ -674,13 +674,13 @@ void grCastle_801CDFD8(Ground_GObj* gobj)
 
     // Set bit 7 at offset 0xDE
     one = 1;
-    byte = ((u8*) gp)[0xDE];
+    byte = gp->gv.castle9.xDE;
 #ifdef MWERKS_GEKKO
     asm { rlwimi byte, one, 7, 24, 24 }
 #else
     NOT_IMPLEMENTED;
 #endif
-    ((u8*) gp)[0xDE] = byte;
+    gp->gv.castle9.xDE = byte;
 
     // Get random range from params
     params = grCs_804D6970;
@@ -699,11 +699,11 @@ void grCastle_801CDFD8(Ground_GObj* gobj)
     base_value = params2->x8;
     final_value = (s16) (base_value + rand_result);
 
-    *(s16*) ((u8*) gp + 0xD4) = final_value;
-    *(s16*) ((u8*) gp + 0xDC) = neg_one;
-    *(s16*) ((u8*) gp + 0xDA) = neg_one;
-    *(s16*) ((u8*) gp + 0xD8) = neg_one;
-    *(s16*) ((u8*) gp + 0xD6) = zero;
+    gp->gv.castle9.xD4 = final_value;
+    gp->gv.castle9.xDC = neg_one;
+    gp->gv.castle9.xDA = neg_one;
+    gp->gv.castle9.xD8 = neg_one;
+    gp->gv.castle9.xD6 = zero;
 }
 
 s32 grCastle_801CE054(Ground_GObj* gobj)
@@ -767,20 +767,29 @@ void grCastle_801CE19C(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     PAD_STACK(8);
-    if (((u8*) gp)[0xDE] >> 7 & 1) {
-        s16 timer = *(s16*) ((u8*) gp + 0xD4);
-        *(s16*) ((u8*) gp + 0xD4) = timer - 1;
+    if (gp->gv.castle9.xDE >> 7 & 1) {
+        s16 timer = gp->gv.castle9.xD4;
+        gp->gv.castle9.xD4 = timer - 1;
         if (timer < 0) {
             HSD_GObj* new_gobj =
                 grCastle_801CD4D0(grCastle_801CE054(gobj) + 8);
-            ((u8*) gp)[0xDE] &= ~0x80;
+            {
+                register u8 byte = gp->gv.castle9.xDE;
+                register s32 zero = 0;
+#ifdef MWERKS_GEKKO
+                asm { rlwimi byte, zero, 7, 24, 24 }
+#else
+                NOT_IMPLEMENTED;
+#endif
+                gp->gv.castle9.xDE = byte;
+            }
             if (new_gobj != NULL) {
                 Ground* new_gp = new_gobj->user_data;
                 Ground_801C5440(gp, 0, 0x53021U);
                 Ground_801C5694(
                     gp, 0,
-                    grCs_804D6970->entries[*(s16*) ((u8*) new_gp + 0xC6)].x4);
-                *(Ground_GObj**) ((u8*) new_gp + 0xD4) = gobj;
+                    grCs_804D6970->entries[new_gp->gv.castle5.xC6].x4);
+                new_gp->gv.castle11.xD4 = (u32) gobj;
             }
         }
     }
@@ -792,14 +801,12 @@ void grCastle_801CE260(Ground_GObj* gobj)
     HSD_JObj* jobj = GET_JOBJ(gobj);
     Ground* gp2;
     CmSubject* subject;
+    PAD_STACK(8);
 
     Ground_801C2ED0(jobj, gp->map_id);
     grAnime_801C8138((HSD_GObj*) gobj, gp->map_id, 0);
 
-    {
-        struct { u8 b : 1; } *bp = (void*) ((u8*) gp + 0xC4);
-        bp->b = 0;
-    }
+    gp->gv.castle11.xC4.b0 = 0;
     gp->gv.icemt.xC6 = gp->map_id - 8;
     gp->gv.arwing.xCC = 0;
     gp->gv.flatzone.xCA = grCs_804D6970->entries[gp->gv.icemt.xC6].x0;
@@ -935,7 +942,7 @@ void grCastle_801CE578(Ground_GObj* gobj)
 
                     {
                         struct { u8 b0:1; u8:7; } *flags =
-                            (void*)((u8*) sat + 0xDE);
+                            (void*) &sat->gv.castle9.xDE;
                         flags->b0 = 1;
                     }
 
@@ -945,7 +952,7 @@ void grCastle_801CE578(Ground_GObj* gobj)
                     } else {
                         rand = 0;
                     }
-                    *(s16*) ((u8*) sat + 0xD4) =
+                    sat->gv.castle9.xD4 =
                         (s16) (grCs_804D6970->xC + rand);
                 }
 
@@ -1534,10 +1541,10 @@ HSD_JObj* grCastle_801CF868(Ground_GObj* gobj)
                         entity = entity->next;
                     }
                     if (entity != NULL) {
-                        *(u32*) ((u8*) sat_gp + 0xD4) =
+                        sat_gp->gv.castle7.xD4 =
                             (u32) Ground_801C3FA4(
                                 entity, (s32) targets.e[idx].jobj_idx);
-                        *(s16*) ((u8*) sat_gp + 0xC4) = 1;
+                        sat_gp->gv.castle7.xC4 = 1;
                     }
                 }
             }

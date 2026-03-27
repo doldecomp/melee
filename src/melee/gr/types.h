@@ -1027,7 +1027,7 @@ struct grCastle_GroundVars7 {
     /* +00 gp+C4 */ s16 xC4;
     /* +02 gp+C6 */ u8 pad_xC6[0xA];
     /* +0C gp+D0 */ HSD_GObj* xD0;
-    /* +10 gp+D4 */ u8 pad_xD4[0x4];
+    /* +10 gp+D4 */ u32 xD4;
     /* +14 gp+D8 */ s32 xD8;
 };
 
@@ -1048,8 +1048,12 @@ struct grCastle_GroundVars9 {
     /* +00 gp+C4 */ u32 xC4;
     /* +04 gp+C8 */ u32 xC8;
     /* +08 gp+CC */ u32 xCC;
-    /* +0C gp+D0 */ u8 pad_xD0[0xA];
-    /* +16 gp+DA */ u8 pad_xDA[4];
+    /* +0C gp+D0 */ u8 pad_xD0[4];
+    /* +10 gp+D4 */ s16 xD4;
+    /* +12 gp+D6 */ s16 xD6;
+    /* +14 gp+D8 */ s16 xD8;
+    /* +16 gp+DA */ s16 xDA;
+    /* +18 gp+DC */ s16 xDC;
     /* +1A gp+DE */ u8 xDE;
     /* +1B gp+DF */ u8 pad_xDF[1];
     /* +1C gp+E0 */ DynamicsDesc dynamics[12];
