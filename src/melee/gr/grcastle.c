@@ -764,10 +764,13 @@ s32 grCastle_801CE054(Ground_GObj* gobj)
 
 void grCastle_801CE19C(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
+    Ground* gp;
+    Ground* tmp = GET_GROUND(gobj);
     PAD_STACK(8);
-    if (gp->gv.castle9.xDE >> 7 & 1) {
-        s16 timer = gp->gv.castle9.xD4;
+    gp = tmp;
+    if (tmp->gv.castle9.xDE >> 7 & 1) {
+        s16 timer;
+        timer = gp->gv.castle9.xD4;
         gp->gv.castle9.xD4 = timer - 1;
         if (timer < 0) {
             HSD_GObj* new_gobj =
