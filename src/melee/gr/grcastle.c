@@ -1198,7 +1198,8 @@ void grCastle_801CEF04(Ground_GObj* gobj)
     case 0:
         break;
     case 1: {
-        s32 hi, lo, range;
+        int hi;
+        s32 lo, range;
 
         gp->gv.castle6.xC8 = 0;
         hi = grCs_804D6970->x42;
