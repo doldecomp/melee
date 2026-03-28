@@ -1353,9 +1353,11 @@ void grCastle_801CF308(Ground_GObj* gobj)
     Ground* gp = (Ground*) gobj->user_data;
     HSD_JObj* jobj = (HSD_JObj*) gobj->hsd_obj;
     grCastle_BlinkTable tbl = grCs_803B7EC8;
+    UNUSED int _0;
+    UNUSED int _1;
     Vec3 pos;
     Quaternion quat;
-    PAD_STACK(40);
+    PAD_STACK(32);
 
     switch (gp->gv.castle5.xC4) {
     case 1:
