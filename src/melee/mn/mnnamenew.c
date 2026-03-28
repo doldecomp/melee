@@ -4,6 +4,7 @@
 #include "gm/gm_1A3F.h"
 #include "gm/gmmain_lib.h"
 #include "lb/lb_00B0.h"
+#include "lb/lbaudio_ax.h"
 #include "lb/lbcardgame.h"
 #include "lb/lblanguage.h"
 #include "mn/mncharsel.h"
@@ -25,6 +26,7 @@ extern u8 mn_804D6BB5;
 extern u8 mnNameNew_804D4F7C[4];
 extern void* mnNameNew_804D6C08;
 extern u8 mnNameNew_SpaceCharacter[2];
+extern char* mnNameNew_803EDCE4[];
 
 static AnimLoopSettings mnNameNew_803EDA58[3] = {
     { 0.0f, 19.0f, -0.1f },
@@ -430,6 +432,102 @@ s32 AddCharacterToName(u8* arg0, s32 arg1, u8 arg2, u8 arg3)
 }
 
 /// #mnNameNew_GlyphVariantInput
+
+void mnNameNew_GlyphVariantInput(void)
+{
+    u8* data;
+    u32 buttons;
+    s32 count;
+    u16 old_hover;
+    u8 old_sel;
+    u8 cur_pos;
+    char** table;
+    s32 total;
+    s8 null_ch;
+
+    PAD_STACK(24);
+
+    data = ((HSD_GObj*) mnNameNew_804D6C08)->user_data;
+    buttons = mn_80229624((u32) mnNameNew_PortInUse);
+    *(u32*)((u8*)&mn_804A04F0 + 0xC) = buttons;
+    count = 0;
+    *(u32*)((u8*)&mn_804A04F0 + 0x8) = 0;
+    if (buttons & 0x200) {
+        HSD_GObjPLink_80390228(*(HSD_GObj**)(data + 0x54));
+        *(HSD_GObj**)(data + 0x54) = NULL;
+        AddCharacterToName((u8*) &mnNameNew_CurrentNameText[*(u8*)(data + 0x58) * 3],
+                           (s32)(u8) mn_804A04F0.hovered_selection,
+                           mn_804A04F0.confirmed_selection,
+                           *(u8*)(data + 0x50));
+        lbAudioAx_80024030(1);
+        cur_pos = *(u8*)(data + 0x58);
+        old_hover = mn_804A04F0.hovered_selection;
+        if (cur_pos < 3U) {
+            *(u8*)(data + 0x58) = (u8)(cur_pos + 1);
+        } else {
+            mn_804A04F0.hovered_selection = 0x39;
+        }
+        mnNameNew_8023CE4C();
+        if (((s32) old_hover != 0x30) && ((s32) old_hover != 0x31) &&
+            ((mn_804A04F0.confirmed_selection % 2) != 0))
+        {
+            if (*(u8*)(data + 0x50) == 0) {
+                *(u8*)(data + 0x50) = 1;
+            } else {
+                *(u8*)(data + 0x50) = 0;
+            }
+            mnNameNew_KeySetup(data, *(u8*)(data + 0x50));
+            mnNameNew_8023B0F8((HSD_GObj*) mnNameNew_804D6C08,
+                               (u8) mn_804A04F0.hovered_selection);
+            mnNameNew_8023B314(data, (s32) mn_804A04F0.hovered_selection);
+        }
+    } else {
+        if (buttons & 0x20) {
+            HSD_GObjPLink_80390228(*(HSD_GObj**)(data + 0x54));
+            *(HSD_GObj**)(data + 0x54) = NULL;
+            mnNameNew_8023CE4C();
+            return;
+        }
+        null_ch = (s8) mnNameNew_NullCharacter;
+        table = &mnNameNew_803EDCE4[*(u8*)(data + 1) * 4];
+        while (null_ch != (s8) **table) {
+            table++;
+            count++;
+        }
+        total = count * 2;
+        old_sel = mn_804A04F0.confirmed_selection;
+        if (buttons & 1) {
+            if ((mn_804A04F0.confirmed_selection % 2) != 0) {
+                mn_804A04F0.confirmed_selection -= 1;
+            } else {
+                mn_804A04F0.confirmed_selection += 1;
+            }
+        } else if (buttons & 2) {
+            if ((mn_804A04F0.confirmed_selection % 2) != 0) {
+                mn_804A04F0.confirmed_selection -= 1;
+            } else {
+                mn_804A04F0.confirmed_selection += 1;
+            }
+        } else if (buttons & 4) {
+            if ((mn_804A04F0.confirmed_selection / 2) == 0) {
+                mn_804A04F0.confirmed_selection =
+                    (mn_804A04F0.confirmed_selection % 2) + ((total / 2 - 1) * 2);
+            } else {
+                mn_804A04F0.confirmed_selection -= 2;
+            }
+        } else if (buttons & 8) {
+            if ((mn_804A04F0.confirmed_selection / 2) == (total / 2 - 1)) {
+                mn_804A04F0.confirmed_selection =
+                    mn_804A04F0.confirmed_selection % 2;
+            } else {
+                mn_804A04F0.confirmed_selection += 2;
+            }
+        }
+        if (old_sel != (u8) mn_804A04F0.confirmed_selection) {
+            lbAudioAx_80024030(2);
+        }
+    }
+}
 
 /// #mnNameNew_MainInput
 

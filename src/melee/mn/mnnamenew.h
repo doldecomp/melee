@@ -8,13 +8,13 @@
 /* 23B0F8 */ void mnNameNew_8023B0F8(HSD_GObj* arg0, u8 arg1);
 /* 23B224 */ void mnNameNew_8023B224(u8);
 /* 23B314 */ void mnNameNew_8023B314(u8*, s32);
-/* 23B3FC */ UNK_RET mnNameNew_KeySetup(UNK_PARAMS);
+/* 23B3FC */ void mnNameNew_KeySetup(u8*, u8);
 /* 23BAA8 */ s32 mnNameNew_8023BAA8(u8* arg0, s32 arg1, u8 arg2);
 /* 23BD4C */ s32 PickAutoName(HSD_GObj* arg0);
 /* 23BEE0 */ s32 NameContainsOnlySpaces(void);
 /* 23BFE4 */ s32 WriteCharactersForNameAtIndex(u8 arg0, s32 arg1);
 /* 23C148 */ s32 AddCharacterToName(u8* arg0, s32 arg1, u8 arg2, u8 arg3);
-/* 23C290 */ UNK_RET mnNameNew_GlyphVariantInput(UNK_PARAMS);
+/* 23C290 */ void mnNameNew_GlyphVariantInput(void);
 /* 23C54C */ UNK_RET mnNameNew_MainInput(HSD_GObj*);
 /* 23CE4C */ void mnNameNew_8023CE4C(void);
 /* 23CFC8 */ void fn_8023CFC8(HSD_GObj* arg0);
