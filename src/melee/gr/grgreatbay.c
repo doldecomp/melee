@@ -386,7 +386,55 @@ void grGreatBay_801F5D4C(Ground_GObj* gobj)
 
 /// #grGreatBay_801F60C4
 
-/// #grGreatBay_801F62F8
+s32 grGreatBay_801F62F8(s32 current)
+{
+    s32 result;
+    s32 i = 0;
+    s16* data;
+    s32 total;
+    s32 rand;
+
+    do {
+        data = grGb_804D69E0.x0;
+        total = data[56] + data[57] + data[59] + data[58];
+        if (total != 0) {
+            rand = HSD_Randi(total);
+        } else {
+            rand = 0;
+        }
+
+        data = grGb_804D69E0.x0;
+        rand -= data[58];
+        if (rand < 0) {
+            result = 1;
+        } else {
+            rand -= data[57];
+            if (rand < 0) {
+                result = 2;
+            } else {
+                rand -= data[56];
+                if (rand < 0) {
+                    result = 0;
+                } else {
+                    rand -= data[59];
+                    if (rand < 0) {
+                        result = 3;
+                    } else {
+                        HSD_ASSERT(1277, 0);
+                    }
+                }
+            }
+        }
+
+        if (current != result) {
+            goto done;
+        }
+    } while (i++ <= 1000);
+    result = 0;
+
+done:
+    return result;
+}
 
 /// #grGreatBay_801F63F4
 
