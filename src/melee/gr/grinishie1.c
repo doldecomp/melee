@@ -893,7 +893,27 @@ void fn_801FBEB8(Ground* gr, s32 block_id, CollData* arg2, s32 arg3,
 
 /// #grInishie1_801FC664
 
-/// #fn_801FC9AC
+void fn_801FC9AC(Ground* gr, s32 block_id, s32 arg2, s32 dist,
+                 enum mpLib_GroundEnum arg4)
+{
+    if (block_id == 0x14) {
+        gr->gv.inishie1.xE8 += 1;
+        if (arg4 == 1) {
+            gr->gv.inishie1.xE0 +=
+                (f32) dist * grI1_804D69F8->unk2C[1].z;
+        } else {
+            gr->gv.inishie1.xE0 += (f32) dist;
+        }
+    } else if (block_id == 0x15) {
+        gr->gv.inishie1.xEA += 1;
+        if (arg4 == 1) {
+            gr->gv.inishie1.xE4 +=
+                (f32) dist * grI1_804D69F8->unk2C[1].z;
+        } else {
+            gr->gv.inishie1.xE4 += (f32) dist;
+        }
+    }
+}
 
 bool grInishie1_801FCAAC(int line_id)
 {
