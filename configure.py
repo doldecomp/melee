@@ -977,7 +977,7 @@ config.libs = [
             Object(Matching, "melee/gr/grdynamicattr.c"),
             Object(NonMatching, "melee/gr/grzakogenerator.c"),
             # Individual stages
-            Object(NonMatching, "melee/gr/grfzerocar.c"),
+            Object(Matching, "melee/gr/grfzerocar.c"),
             Object(Matching, "melee/gr/grizumi.c"),
             Object(NonMatching, "melee/gr/grcastle.c"),
             Object(NonMatching, "melee/gr/grpstadium.c"),
