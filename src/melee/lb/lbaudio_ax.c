@@ -513,7 +513,93 @@ int lbAudioAx_8002438C(int arg0)
     return fn_80023750(arg0, 0x7F, 0x40, 0, 8);
 }
 
-/// #lbAudioAx_800243F4
+int lbAudioAx_800243F4(int arg0)
+{
+    int track = 0xCA;
+    int vol;
+    int pan;
+
+    switch (arg0 - 0x7C830) {
+    case 0:
+        track++;
+    case 1:
+        track++;
+    case 5:
+        track++;
+    case 10:
+        track++;
+    case 15:
+        track++;
+    case 16:
+        track++;
+    case 18:
+        track++;
+    case 20:
+        track++;
+    case 21:
+        track++;
+    case 22:
+        track++;
+    case 24:
+        track++;
+    case 26:
+        track++;
+    case 27:
+        track++;
+    case 29:
+        track++;
+    case 11:
+        track++;
+    case 13:
+        track++;
+    case 30:
+        track++;
+    case 31:
+        track++;
+    case 32:
+        track++;
+    case 33:
+        track++;
+    case 4:
+        track++;
+    case 19:
+        track++;
+    case 2:
+        track++;
+    case 12:
+        track++;
+    case 28:
+        track++;
+    case 6:
+        track++;
+    case 25:
+        track++;
+    case 8:
+        track++;
+    default:
+        break;
+    }
+
+    vol = 0x7F;
+    vol *= 2;
+    pan = 0x40;
+    if (vol < 0) {
+        vol = 0;
+    }
+    if (vol > 0xFF) {
+        vol = 0xFF;
+    }
+
+    pan *= 2;
+    if (pan < 0) {
+        pan = 0;
+    }
+    if (pan > 0xFF) {
+        pan = 0xFF;
+    }
+
+    return AXDriver_8038CFF4(arg0, vol, pan, track, 7);
+}
 
 /// #fn_800244F4
 
