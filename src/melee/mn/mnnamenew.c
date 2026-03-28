@@ -8,6 +8,7 @@
 #include "mn/mnmain.h"
 #include "mn/mnname.h"
 #include "mn/types.h"
+#include "sysdolphin/baselib/gobjplink.h"
 #include "sysdolphin/baselib/memory.h"
 #include "sysdolphin/baselib/sislib.h"
 
@@ -161,7 +162,50 @@ s32 mnNameNew_8023DA08(u8* arg0)
     return var_r29;
 }
 
-/// #fn_8023DAEC
+void fn_8023DAEC(HSD_GObj* arg0)
+{
+    HSD_Text* text;
+    s32 var_r30;
+    u8* data;
+
+    PAD_STACK(8);
+
+    data = arg0->user_data;
+    text = *(HSD_Text**)(data + 0x60);
+    if (text != NULL) {
+        HSD_SisLib_803A5CC4(text);
+        *(HSD_Text**)(data + 0x60) = NULL;
+    }
+    text = *(HSD_Text**)(data + 0x64);
+    if (text != NULL) {
+        HSD_SisLib_803A5CC4(text);
+        *(HSD_Text**)(data + 0x64) = NULL;
+    }
+    text = *(HSD_Text**)(data + 0x68);
+    if (text != NULL) {
+        HSD_SisLib_803A5CC4(text);
+        *(HSD_Text**)(data + 0x68) = NULL;
+    }
+    var_r30 = 1;
+    if (mn_8022EFD8(*(HSD_JObj**)(data + 0x14), &mnNameNew_803EDA58[1]) <
+        mnNameNew_803EDA58[1].end_frame)
+    {
+        var_r30 = 0;
+    }
+    if (mn_8022EFD8(*(HSD_JObj**)(data + 0x0C), &mnNameNew_803EDA58[1]) <
+        mnNameNew_803EDA58[1].end_frame)
+    {
+        var_r30 = 0;
+    }
+    if (mn_8022EFD8(*(HSD_JObj**)(data + 0x1C), &mnNameNew_803EDA58[1]) <
+        mnNameNew_803EDA58[1].end_frame)
+    {
+        var_r30 = 0;
+    }
+    if (var_r30 != 0 || (u8) mn_804A04F0.x10 == 1) {
+        HSD_GObjPLink_80390228(arg0);
+    }
+}
 
 /// #fn_8023DBE8
 
