@@ -10,6 +10,8 @@ extern volatile char mnNameNew_NullCharacter;
 extern u8 mnNameNew_PortInUse;
 extern char mnNameNew_CurrentNameText[0x10];
 extern u8** AutoNamesList;
+extern u8 mn_804D6BB4;
+extern u8 mnNameNew_804D4F7C[4];
 
 static AnimLoopSettings mnNameNew_803EDA58[3] = {
     { 0.0f, 19.0f, -0.1f },
@@ -21,7 +23,41 @@ static AnimLoopSettings mnNameNew_803EDA58[3] = {
 
 /// #mnNameNew_8023B224
 
-/// #mnNameNew_8023B314
+void mnNameNew_8023B314(u8* arg0, s32 arg1)
+{
+    HSD_Text* text;
+    u8 idx;
+    s32 var_r4;
+
+    var_r4 = arg1;
+    if (var_r4 < 0x32) {
+        switch (arg0[0x50]) {
+        case 0:
+            var_r4 = 0x33;
+            break;
+        case 1:
+            var_r4 = 0x34;
+            break;
+        case 2:
+            var_r4 = 0x35;
+            break;
+        }
+    }
+    text = *(HSD_Text**)(arg0 + 0x68);
+    idx = mnNameNew_804D4F7C[var_r4 - 0x32];
+    if (text != NULL) {
+        if (text->sis_buffer == ((SIS**) HSD_SisLib_804D1124[0])[idx]) {
+            return;
+        }
+        HSD_SisLib_803A5CC4(text);
+    }
+    text = HSD_SisLib_803A5ACC(0, (s32) mn_804D6BB4, -9.5f, 9.1f, 17.0f,
+                               364.68332f, 38.38772f);
+    *(HSD_Text**)(arg0 + 0x68) = text;
+    text->font_size.x = 0.0521f;
+    text->font_size.y = 0.0521f;
+    HSD_SisLib_803A6368(text, (s32) idx);
+}
 
 /// #mnNameNew_KeySetup
 
