@@ -4,6 +4,7 @@
 #include "gm/gm_1A3F.h"
 #include "gm/gmmain_lib.h"
 #include "lb/lb_00B0.h"
+#include "lb/lb_00F9.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbcardgame.h"
 #include "lb/lblanguage.h"
@@ -11,7 +12,13 @@
 #include "mn/mnmain.h"
 #include "mn/mnname.h"
 #include "mn/types.h"
+
+#include <dolphin/os.h>
+#include "sysdolphin/baselib/gobj.h"
+#include "sysdolphin/baselib/gobjgxlink.h"
 #include "sysdolphin/baselib/gobjplink.h"
+#include "sysdolphin/baselib/gobjproc.h"
+#include "sysdolphin/baselib/gobjuserdata.h"
 #include "sysdolphin/baselib/jobj.h"
 #include "sysdolphin/baselib/memory.h"
 #include "sysdolphin/baselib/random.h"
@@ -27,6 +34,8 @@ extern u8 mnNameNew_804D4F7C[4];
 extern void* mnNameNew_804D6C08;
 extern u8 mnNameNew_SpaceCharacter[2];
 extern char* mnNameNew_803EDCE4[];
+extern void* mnNameNew_804A06F0[];
+extern void* mnNameNew_804A0700[];
 
 static AnimLoopSettings mnNameNew_803EDA58[3] = {
     { 0.0f, 19.0f, -0.1f },
@@ -856,7 +865,7 @@ void mnNameNew_8023E0D8(u8* arg0)
 
 /// #InitNameEntryUIState
 
-s32 InitNameEntryUIState(u8* arg0, s8 arg1)
+s32 InitNameEntryUIState(u8* arg0, s32 arg1)
 {
     s32 result;
     s8 count;
@@ -896,6 +905,64 @@ s32 InitNameEntryUIState(u8* arg0, s8 arg1)
 
 /// #mnNameNew_8023E32C
 
+void mnNameNew_8023E32C(s32 arg0)
+{
+    HSD_GObj* gobj;
+    HSD_JObj* root_jobj;
+    HSD_JObj* key_jobj;
+    u8* data;
+    s32 i;
+    s32 k;
+    f32 x_range;
+    f32 y_range;
+
+    PAD_STACK(8);
+
+    gobj = GObj_Create(6U, 7U, 0x80U);
+    mnNameNew_804D6C08 = gobj;
+    root_jobj = HSD_JObjLoadJoint(mnNameNew_804A06F0[0]);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, root_jobj);
+    GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4U, 0x80U);
+    HSD_GObj_SetupProc(gobj, (HSD_GObjEvent) fn_8023DBE8, 0U);
+    HSD_JObjAddAnimAll(root_jobj, mnNameNew_804A06F0[1],
+                       mnNameNew_804A06F0[2], mnNameNew_804A06F0[3]);
+    HSD_JObjReqAnimAll(root_jobj, 0.0f);
+    HSD_JObjAnimAll(root_jobj);
+    data = HSD_MemAlloc(0x6C);
+    if (data == NULL) {
+        OSReport((char*)((u8*) mnNameNew_803EDA58 + 0x904));
+        __assert((char*)((u8*) mnNameNew_803EDA58 + 0x91C), 0x717U,
+                 (char*)((u8*) mnNameNew_803EDA58 + 0x928));
+    }
+    GObj_InitUserData(gobj, 0U, HSD_Free, data);
+    InitNameEntryUIState(data, arg0);
+    i = 0;
+    do {
+        lb_80011E24(root_jobj, (HSD_JObj**)(data + 4 + i * 4), i, -1);
+        i++;
+    } while (i < 0x13);
+    mnNameNew_8023E0D8(data);
+    k = 0;
+    do {
+        key_jobj = HSD_JObjLoadJoint(mnNameNew_804A0700[0]);
+        HSD_JObjAddAnimAll(key_jobj, mnNameNew_804A0700[1],
+                           mnNameNew_804A0700[2], mnNameNew_804A0700[3]);
+        HSD_JObjReqAnimAll(key_jobj, (f32)(data[1] == (u8) k));
+        HSD_JObjAnimAll(key_jobj);
+        x_range = HSD_JObjGetTranslationX(*(HSD_JObj**)(data + 0x48)) -
+                  HSD_JObjGetTranslationX(*(HSD_JObj**)(data + 0x44));
+        y_range = HSD_JObjGetTranslationY(*(HSD_JObj**)(data + 0x4C)) -
+                  HSD_JObjGetTranslationY(*(HSD_JObj**)(data + 0x44));
+        mnName_80239F5C(key_jobj, x_range * (f32)(k / 5));
+        mnName_80239EBC(key_jobj, y_range * (f32)(k % 5));
+        HSD_JObjAddChild(*(HSD_JObj**)(data + 0x44), key_jobj);
+        k++;
+    } while (k < 0x32);
+    *(s32*)(data + 0x60) = mnNameNew_KeySetup(data, *(u8*)(data + 0x50));
+    mnNameNew_8023B314(data, (s32) data[1]);
+    mnNameNew_8023B0F8(gobj, data[1]);
+}
+
 void mnNameNew_EnterFromMnName(UNK_T arg0)
 {
     char unused[8];
@@ -912,7 +979,7 @@ void mnNameNew_EnterFromMnName(UNK_T arg0)
     text[3] = mnNameNew_NullCharacter;
     text[6] = mnNameNew_NullCharacter;
     text[9] = mnNameNew_NullCharacter;
-    mnNameNew_8023E32C(arg0);
+    mnNameNew_8023E32C((s32) arg0);
 }
 
 /// #mnNameNew_EnterFromMnCharSel
