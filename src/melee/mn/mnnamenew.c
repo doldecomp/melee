@@ -2,6 +2,7 @@
 
 #include "gm/gm_18A5.h"
 #include "gm/gm_1A3F.h"
+#include "gm/gmmain_lib.h"
 #include "lb/lbcardgame.h"
 #include "lb/lblanguage.h"
 #include "mn/mncharsel.h"
@@ -166,6 +167,58 @@ s32 NameContainsOnlySpaces(void)
 }
 
 /// #WriteCharactersForNameAtIndex
+
+s32 WriteCharactersForNameAtIndex(u8 arg0, s32 arg1)
+{
+    s32 idx;
+    struct NameTagData* nametag;
+    u8 ch;
+    u8* text;
+    u8* ptr;
+    s32 ret;
+
+    nametag = GetPersistentNameData((s32) arg0);
+    text = (u8*) mnNameNew_CurrentNameText;
+    idx = 0;
+    if ((s8) mnNameNew_NullCharacter != (s8) *text) {
+        ptr = text;
+        while ((s8) mnNameNew_NullCharacter != (s8) (ch = *ptr)) {
+            nametag->namedata[idx] = (s8) ch;
+            idx += 1;
+            ptr += 1;
+        }
+        if ((s8) ch != (s8) *(text += 3)) {
+            ptr = text;
+            while ((s8) mnNameNew_NullCharacter != (s8) (ch = *ptr)) {
+                nametag->namedata[idx] = (s8) ch;
+                idx += 1;
+                ptr += 1;
+            }
+            if ((s8) ch != (s8) *(text += 3)) {
+                ptr = text;
+                while ((s8) mnNameNew_NullCharacter != (s8) (ch = *ptr)) {
+                    nametag->namedata[idx] = (s8) ch;
+                    idx += 1;
+                    ptr += 1;
+                }
+                if ((s8) ch != (s8) *(text += 3)) {
+                    ptr = text;
+                    while ((s8) mnNameNew_NullCharacter !=
+                           (s8) (ch = *ptr))
+                    {
+                        nametag->namedata[idx] = (s8) ch;
+                        idx += 1;
+                        ptr += 1;
+                    }
+                }
+            }
+        }
+    }
+    nametag->namedata[idx] = (s8) mnNameNew_NullCharacter;
+    ret = GetRumbleSettingOfPort(arg1);
+    nametag->x1A1 = ret;
+    return ret;
+}
 
 /// #AddCharacterToName
 

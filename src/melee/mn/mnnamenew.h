@@ -12,7 +12,7 @@
 /* 23BAA8 */ UNK_RET mnNameNew_8023BAA8(UNK_PARAMS);
 /* 23BD4C */ UNK_RET PickAutoName(UNK_PARAMS);
 /* 23BEE0 */ s32 NameContainsOnlySpaces(void);
-/* 23BFE4 */ UNK_RET WriteCharactersForNameAtIndex(UNK_PARAMS);
+/* 23BFE4 */ s32 WriteCharactersForNameAtIndex(u8 arg0, s32 arg1);
 /* 23C148 */ s32 AddCharacterToName(u8* arg0, s32 arg1, u8 arg2, u8 arg3);
 /* 23C290 */ UNK_RET mnNameNew_GlyphVariantInput(UNK_PARAMS);
 /* 23C54C */ UNK_RET mnNameNew_MainInput(HSD_GObj*);
