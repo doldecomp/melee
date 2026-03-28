@@ -750,7 +750,21 @@ void fn_801E12D4(Item_GObj* gobj, Ground* gr, Vec3* pos, HSD_GObj* arg3,
 
 /// #grCorneria_801E1348
 
-/// #grCorneria_801E1878
+void grCorneria_801E1878(Ground_GObj* gobj)
+{
+    Vec3 pos;
+    Ground* gr = GET_GROUND(gobj);
+    HSD_JObj* jobj = gobj->hsd_obj;
+    HSD_JObj* target_jobj = gr->gv.corneria.x128->hsd_obj;
+
+    HSD_JObjGetTranslation(jobj, &pos);
+    HSD_JObjSetTranslate(target_jobj, &pos);
+
+    Ground_801C39C0();
+    Ground_801C3BB4();
+
+    PAD_STACK(16);
+}
 
 /// #grCorneria_801E1970
 
