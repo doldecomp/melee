@@ -25,7 +25,7 @@
 /* 23DAEC */ UNK_RET fn_8023DAEC(UNK_PARAMS);
 /* 23DBE8 */ UNK_RET fn_8023DBE8(UNK_PARAMS);
 /* 23E0D8 */ UNK_RET mnNameNew_8023E0D8(UNK_PARAMS);
-/* 23E264 */ UNK_RET InitNameEntryUIState(UNK_PARAMS);
+/* 23E264 */ s32 InitNameEntryUIState(u8*, s8);
 /* 23E32C */ void mnNameNew_8023E32C(UNK_T);
 /* 23E630 */ void mnNameNew_EnterFromMnName(UNK_T);
 /* 23E6D0 */ void mnNameNew_EnterFromMnCharSel(UNK_T, int);

@@ -8,6 +8,7 @@
 extern volatile char mnNameNew_NullCharacter;
 extern u8 mnNameNew_PortInUse;
 extern char mnNameNew_CurrentNameText[0x10];
+extern u8** AutoNamesList;
 
 /// #mnNameNew_8023B0F8
 
@@ -53,7 +54,43 @@ void fn_8023D0F8(void* arg0)
 
 /// #mnNameNew_8023E0D8
 
-/// #InitNameEntryUIState
+s32 InitNameEntryUIState(u8* arg0, s8 arg1)
+{
+    s32 result;
+    s8 count;
+    u8** names;
+    s8 null_char;
+
+    PAD_STACK(0x20);
+
+    arg0[1] = (u8) mn_804A04F0.hovered_selection;
+    result = lbLang_IsSavedLanguageUS();
+    if (result) {
+        arg0[0x50] = 2;
+    } else {
+        arg0[0x50] = 0;
+    }
+    count = 0;
+    arg0[0x58] = 0;
+    arg0[0x51] = arg0[1];
+    *(s32*)(arg0 + 0x54) = 0;
+    arg0[0x59] = arg1;
+    *(s32*)(arg0 + 0x60) = 0;
+    *(s32*)(arg0 + 0x64) = 0;
+    *(s32*)(arg0 + 0x68) = 0;
+    null_char = (s8) mnNameNew_NullCharacter;
+    names = AutoNamesList;
+    while (null_char != (s8) **names) {
+        names++;
+        count++;
+    }
+    arg0[0x5A] = count;
+    arg0[0x5B] = count;
+    arg0[0x5C] = count;
+    arg0[0x5D] = count;
+    arg0[0x5E] = count;
+    return result;
+}
 
 /// #mnNameNew_8023E32C
 
