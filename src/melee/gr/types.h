@@ -1142,6 +1142,14 @@ struct grShrineroute_GroundVars2 {
     /* +0 gp+170 */ HSD_LObj* x170;
 };
 
+struct grShrineroute_GroundVars3 {
+    /* +0 gp+C4 */ HSD_JObj* xC4;
+    /* +4 gp+C8 */ f32 xC8;
+    /* +8 gp+CC */ f32 xCC;
+    /* +C gp+D0 */ f32 xD0;
+    /* +10 gp+D4 */ f32 xD4;
+};
+
 struct Battlefield {
     /* +0 gp+C4 */ int bg_state;
     /* +4 gp+C8 */ int curr_bg;
@@ -1319,6 +1327,7 @@ struct Ground {
             struct grRCruise_GroundVars2 rcruise2;
             struct grShrineroute_GroundVars shrineroute;
             struct grShrineroute_GroundVars2 shrineroute2;
+            struct grShrineroute_GroundVars3 shrineroute3;
             struct grSmashTaunt_GroundVars smashtaunt;
             struct GroundVars_unk unk;
             struct grHomeRun_GroundVars homerun;
