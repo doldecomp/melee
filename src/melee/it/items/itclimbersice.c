@@ -275,7 +275,41 @@ bool itClimbersIce_Logic90_Clanked(Item_GObj* arg0)
     return true;
 }
 
-/// #it_2725_Logic90_HitShield
+bool it_2725_Logic90_HitShield(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    f32 vel_x = ip->x40_vel.x;
+    ItemAttr* attr = ip->xCC_item_attr;
+    itClimbersIceAttributes* sa =
+        ip->xC4_article_data->x4_specialAttributes;
+
+    if (vel_x < 0.0f) {
+        vel_x = -vel_x;
+    }
+
+    if (vel_x <= sa->xC) {
+        itColl_BounceOffVictim(gobj);
+        it_80272980(gobj);
+        {
+            f32 scale = attr->x58;
+            ip->x40_vel.x *= scale;
+            ip->x40_vel.y *= scale;
+            ip->x40_vel.z *= scale;
+        }
+        {
+            Item* ip2 = GET_ITEM(gobj);
+            itClimbersIceAttributes* sa2 =
+                ip2->xC4_article_data->x4_specialAttributes;
+            ip2->xD44_lifeTimer -= sa2->x4;
+        }
+        if (ip->xD44_lifeTimer < sa->x8) {
+            return true;
+        }
+        return false;
+    }
+
+    return true;
+}
 
 bool itClimbersIce_Logic90_Absorbed(Item_GObj* arg0)
 {

@@ -44,7 +44,7 @@ typedef struct itClimbersStringAttributes {
 typedef struct itClimbersIceAttributes {
     /* +00 */ f32 x0;
     /* +04 */ f32 x4;
-    /* +08 */ u8 pad_08[0x4];
+    /* +08 */ f32 x8;
     /* +0C */ f32 xC;
     /* +10 */ f32 x10;
     /* +14 */ u8 pad_14[0x14];
