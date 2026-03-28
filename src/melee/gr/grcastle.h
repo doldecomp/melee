@@ -41,12 +41,12 @@ struct unkCastle {
 /* 1CDF50 */ void grCastle_801CDF50(Ground_GObj*);
 /* 1CDF54 */ bool grCastle_801CDF54(Vec3*);
 /* 1CDFD8 */ void grCastle_801CDFD8(Ground_GObj*);
-/* 1CE054 */ UNK_RET grCastle_801CE054(UNK_PARAMS);
+/* 1CE054 */ s32 grCastle_801CE054(Ground_GObj*);
 /* 1CE19C */ void grCastle_801CE19C(Ground_GObj*);
 /* 1CE260 */ void grCastle_801CE260(Ground_GObj*);
 /* 1CE3A0 */ UNK_RET fn_801CE3A0(UNK_PARAMS);
 /* 1CE3A4 */ bool grCastle_801CE3A4(Ground_GObj*);
-/* 1CE3AC */ UNK_RET grCastle_801CE3AC(UNK_PARAMS);
+/* 1CE3AC */ void grCastle_801CE3AC(Ground_GObj* gobj);
 /* 1CE578 */ void grCastle_801CE578(Ground_GObj*);
 /* 1CE7E4 */ void grCastle_801CE7E4(Ground_GObj*);
 /* 1CE7E8 */ void grCastle_801CE7E8(Ground_GObj*);
@@ -69,12 +69,12 @@ struct unkCastle {
 /* 1CF750 */ void grCastle_801CF750(Ground*, s32, CollData*, s32,
                                     mpLib_GroundEnum, f32);
 /* 1CF7B0 */ void grCastle_801CF7B0(Ground_GObj*);
-/* 1CF868 */ UNK_RET grCastle_801CF868(UNK_PARAMS);
+/* 1CF868 */ HSD_JObj* grCastle_801CF868(Ground_GObj*);
 /* 1CFAFC */ void fn_801CFAFC(Item_GObj*, Ground*, Vec3*, HSD_GObj*, f32);
 /* 1CFB68 */ void fn_801CFB68(Item_GObj*, Ground*, HSD_GObj*);
-/* 1CFBD4 */ UNK_RET grCastle_801CFBD4(UNK_PARAMS);
-/* 1D0298 */ UNK_RET grCastle_801D0298(UNK_PARAMS);
-/* 1D02B8 */ UNK_RET grCastle_801D02B8(UNK_PARAMS);
+/* 1CFBD4 */ s32 grCastle_801CFBD4(Ground_GObj* gobj, s32 arg1);
+/* 1D0298 */ bool grCastle_801D0298(Ground_GObj* gobj, s32 arg1);
+/* 1D02B8 */ void grCastle_801D02B8(Ground_GObj* gobj);
 /* 1D0520 */ void grCastle_801D0520(Ground_GObj*, int);
 /* 1D0550 */ void grCastle_801D0550(UNK_T, unkCastle*);
 /* 1D059C */ void grCastle_801D059C(UNK_T, unkCastle*);
@@ -87,13 +87,13 @@ struct unkCastle {
 /* 1D0834 */ void grCastle_801D0834(UNK_T, unkCastle*, Ground_GObj*);
 /* 1D08AC */ void grCastle_801D08AC(UNK_T, unkCastle*, Ground_GObj*);
 /* 1D0924 */ void fn_801D0924(HSD_GObj*, int);
-/* 1D09B8 */ UNK_RET grCastle_801D09B8(UNK_PARAMS);
+/* 1D09B8 */ bool grCastle_801D09B8(void*, HSD_GObj*, Vec3*);
 /* 1D0A9C */ void grCastle_801D0A9C(Vec3* arg0, f32 arg8);
 /* 1D0B04 */ DynamicsDesc* grCastle_801D0B04(enum_t);
 /* 1D0B0C */ bool grCastle_801D0B0C(Vec3* v, int arg1, HSD_JObj* jobj);
-/* 1D0BBC */ UNK_RET grCastle_801D0BBC(UNK_PARAMS);
+/* 1D0BBC */ void grCastle_801D0BBC(void);
 /* 1D0D24 */ UNK_RET grCastle_801D0D24(UNK_PARAMS);
-/* 1D0D84 */ void grCastle_801D0D84(f32);
+/* 1D0D84 */ void grCastle_801D0D84(HSD_JObj*);
 /* 1D0FF0 */ float grCastle_801D0FF0(void);
 
 #endif
