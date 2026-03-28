@@ -117,9 +117,7 @@ typedef struct grCastleParams_Entry {
     /* 0x00 */ s16 x0;
     /* 0x02 */ u8 pad_x2[2];
     /* 0x04 */ f32 x4;
-    /* 0x08 */ f32 x8;
-    /* 0x0C */ f32 xC;
-    /* 0x10 */ f32 x10;
+    /* 0x08 */ Vec3 rot;
 } grCastleParams_Entry;
 
 typedef struct grCastleParams {
@@ -867,9 +865,9 @@ void grCastle_801CE3AC(Ground_GObj* gobj)
 
         HSD_JObjSetTranslate(jobj, &pos);
 
-        rot.x = grCs_804D6970->entries[gp->gv.castle5.xC6].x8;
-        rot.y = grCs_804D6970->entries[gp->gv.castle5.xC6].xC;
-        rot.z = grCs_804D6970->entries[gp->gv.castle5.xC6].x10;
+        rot.x = grCs_804D6970->entries[gp->gv.castle5.xC6].rot.x;
+        rot.y = grCs_804D6970->entries[gp->gv.castle5.xC6].rot.y;
+        rot.z = grCs_804D6970->entries[gp->gv.castle5.xC6].rot.z;
 
         HSD_JObjSetRotation(jobj, &rot);
     }
