@@ -58,7 +58,6 @@ static AnimLoopSettings mnNameNew_803EDA58[3] = {
 
 static Vec3 mnNameNew_803EE330 = { -0.7f, 0.7f, 0.0f };
 
-/// #mnNameNew_8023B0F8
 
 void mnNameNew_8023B0F8(HSD_GObj* arg0, u8 arg1)
 {
@@ -104,7 +103,7 @@ void mnNameNew_8023B224(u8 arg0)
 
     PAD_STACK(8);
 
-    temp_r31 = *(u8**)((u8*) mnNameNew_804D6C08 + 0x2C);
+    temp_r31 = ((HSD_GObj*) mnNameNew_804D6C08)->user_data;
     temp_r30 = temp_r31[0x59];
     if (arg0 != 0) {
         lb_8001CE00();
@@ -169,7 +168,6 @@ void mnNameNew_8023B314(u8* arg0, s32 arg1)
     HSD_SisLib_803A6368(text, (s32) idx);
 }
 
-/// #mnNameNew_KeySetup
 
 static s32 mnNameNew_804D4F6C = (s32) 0xA6813DFF;
 static s32 mnNameNew_804D4F70 = 0xFF;
@@ -282,7 +280,6 @@ s32 mnNameNew_KeySetup(u8* arg0, u8 arg1)
     return (s32) text;
 }
 
-/// #mnNameNew_8023BAA8
 
 s32 mnNameNew_8023BAA8(u8* arg0, s32 arg1, u8 arg2)
 {
@@ -358,7 +355,6 @@ s32 mnNameNew_8023BAA8(u8* arg0, s32 arg1, u8 arg2)
     return (s32) arg2;
 }
 
-/// #PickAutoName
 
 s32 PickAutoName(HSD_GObj* arg0)
 {
@@ -461,7 +457,6 @@ s32 NameContainsOnlySpaces(void)
     return 1;
 }
 
-/// #WriteCharactersForNameAtIndex
 
 s32 WriteCharactersForNameAtIndex(u8 arg0, s32 arg1)
 {
@@ -515,7 +510,6 @@ s32 WriteCharactersForNameAtIndex(u8 arg0, s32 arg1)
     return ret;
 }
 
-/// #AddCharacterToName
 
 s32 AddCharacterToName(u8* arg0, s32 arg1, u8 arg2, u8 arg3)
 {
@@ -564,7 +558,6 @@ s32 AddCharacterToName(u8* arg0, s32 arg1, u8 arg2, u8 arg3)
     return (s32) arg0;
 }
 
-/// #mnNameNew_GlyphVariantInput
 
 void mnNameNew_GlyphVariantInput(void)
 {
@@ -662,7 +655,6 @@ void mnNameNew_GlyphVariantInput(void)
     }
 }
 
-/// #mnNameNew_MainInput
 
 void mnNameNew_MainInput(HSD_GObj* arg0)
 {
@@ -1033,7 +1025,6 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
     }
 }
 
-/// #mnNameNew_8023CE4C
 
 void mnNameNew_8023CE4C(void)
 {
@@ -1052,7 +1043,7 @@ void mnNameNew_8023CE4C(void)
 
     PAD_STACK(8);
 
-    data = *(u8**)((u8*) mnNameNew_804D6C08 + 0x2C);
+    data = ((HSD_GObj*) mnNameNew_804D6C08)->user_data;
     jobj_a = *(HSD_JObj**)(data + 0x3C);
     jobj_b = *(HSD_JObj**)(data + 0x40);
     first_x = HSD_JObjGetTranslationX(jobj_a);
@@ -1086,7 +1077,6 @@ void mnNameNew_8023CE4C(void)
     *(HSD_Text**)(data + 0x64) = text;
 }
 
-/// #fn_8023CFC8
 
 void fn_8023CFC8(HSD_GObj* arg0)
 {
@@ -1152,7 +1142,6 @@ void fn_8023D0F8(void* arg0)
     HSD_Free(arg0);
 }
 
-/// #mnNameNew_8023D130
 
 s32 mnNameNew_8023D130(u8* arg0, u8 arg1, u8 arg2, s32 arg3)
 {
@@ -1226,7 +1215,6 @@ s32 mnNameNew_8023D130(u8* arg0, u8 arg1, u8 arg2, s32 arg3)
     return (s32) text;
 }
 
-/// #mnNameNew_GlyphVariantSetup
 
 extern const Vec3 mnNameNew_803B8528;
 
@@ -1391,7 +1379,6 @@ void fn_8023DAEC(HSD_GObj* arg0)
     }
 }
 
-/// #fn_8023DBE8
 
 static f32 mnNameNew_804D4C10 = 10.0f;
 static s32 mnNameNew_804D4F68 = 0xFF;
@@ -1500,7 +1487,6 @@ void fn_8023DBE8(HSD_GObj* arg0)
 }
 #pragma pop
 
-/// #mnNameNew_8023E0D8
 
 void mnNameNew_8023E0D8(u8* arg0)
 {
@@ -1544,7 +1530,6 @@ void mnNameNew_8023E0D8(u8* arg0)
     }
 }
 
-/// #InitNameEntryUIState
 
 s32 InitNameEntryUIState(u8* arg0, s32 arg1)
 {
@@ -1584,7 +1569,6 @@ s32 InitNameEntryUIState(u8* arg0, s32 arg1)
     return result;
 }
 
-/// #mnNameNew_8023E32C
 
 void mnNameNew_8023E32C(s32 arg0)
 {
@@ -1663,7 +1647,6 @@ void mnNameNew_EnterFromMnName(UNK_T arg0)
     mnNameNew_8023E32C((s32) arg0);
 }
 
-/// #mnNameNew_EnterFromMnCharSel
 
 void mnNameNew_EnterFromMnCharSel(HSD_Archive* arg0, s32 arg1)
 {
