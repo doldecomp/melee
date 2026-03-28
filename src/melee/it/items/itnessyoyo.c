@@ -68,7 +68,30 @@ void itNessyoyo_UnkMotion0_Phys(Item_GObj* gobj)
 
 /// #itNessyoyo_UnkMotion1_Phys
 
-/// #itNessyoyo_UnkMotion2_Phys
+void itNessyoyo_UnkMotion2_Phys(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    itYoyoAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    ItemLink* link = (ItemLink*) ip->xDD4_itemVar.samusgrapple.x8;
+    Mtx mtx;
+    Vec3 pos;
+
+    PSMTXIdentity(mtx);
+    mtx[0][3] = 0.0F;
+    mtx[1][3] = 0.0F;
+    mtx[2][3] = 0.0F;
+
+    HSD_JObjSetupMatrix(link->jobj);
+
+    PSMTXConcat(link->jobj->mtx, mtx, mtx);
+
+    pos.x = mtx[0][3];
+    pos.y = mtx[1][3];
+    pos.z = mtx[2][3];
+
+    it_802BF4A0(link, &pos, attrs, ip);
+    it_802BFAFC(ip, &pos);
+}
 
 /// #itNessyoyo_UnkMotion3_Phys
 

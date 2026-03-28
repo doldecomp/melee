@@ -7,6 +7,9 @@
 
 #include <dolphin/mtx.h>
 
+typedef struct ItemLink ItemLink;
+typedef struct itYoyoAttributes itYoyoAttributes;
+
 /* 2BE598 */ void it_802BE598(Item_GObj*);
 /* 2BE5B8 */ void it_802BE5B8(Item_GObj*);
 /* 2BE5D8 */ void it_802BE5D8(void*, float);
@@ -21,10 +24,10 @@
 /* 2BF030 */ UNK_RET it_802BF030(UNK_PARAMS);
 /* 2BF180 */ UNK_RET it_802BF180(UNK_PARAMS);
 /* 2BF28C */ UNK_RET it_802BF28C(UNK_PARAMS);
-/* 2BF4A0 */ UNK_RET it_802BF4A0(UNK_PARAMS);
+/* 2BF4A0 */ void it_802BF4A0(ItemLink*, Vec3*, itYoyoAttributes*, Item*);
 /* 2BF800 */ UNK_RET it_802BF800(UNK_PARAMS);
 /* 2BF900 */ void it_802BF900(Item* item);
-/* 2BFAFC */ UNK_RET it_802BFAFC(UNK_PARAMS);
+/* 2BFAFC */ void it_802BFAFC(Item*, Vec3*);
 /* 2BFE34 */ void itNessYoyo_Logic59_PickedUp(Item_GObj*);
 /* 2BFE5C */ void it_802BFE5C(Item_GObj*, Vec3*, float);
 /* 2BFEC4 */ void it_802BFEC4(void*);
