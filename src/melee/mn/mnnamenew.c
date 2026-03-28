@@ -1,7 +1,12 @@
 #include "mnnamenew.h"
 
+#include "gm/gm_18A5.h"
+#include "gm/gm_1A3F.h"
+#include "lb/lbcardgame.h"
 #include "lb/lblanguage.h"
+#include "mn/mncharsel.h"
 #include "mn/mnmain.h"
+#include "mn/mnname.h"
 #include "mn/types.h"
 #include "sysdolphin/baselib/memory.h"
 #include "sysdolphin/baselib/sislib.h"
@@ -12,6 +17,7 @@ extern char mnNameNew_CurrentNameText[0x10];
 extern u8** AutoNamesList;
 extern u8 mn_804D6BB4;
 extern u8 mnNameNew_804D4F7C[4];
+extern void* mnNameNew_804D6C08;
 
 static AnimLoopSettings mnNameNew_803EDA58[3] = {
     { 0.0f, 19.0f, -0.1f },
@@ -21,7 +27,41 @@ static AnimLoopSettings mnNameNew_803EDA58[3] = {
 
 /// #mnNameNew_8023B0F8
 
-/// #mnNameNew_8023B224
+void mnNameNew_8023B224(u8 arg0)
+{
+    u8* temp_r31;
+    u8 temp_r30;
+
+    PAD_STACK(8);
+
+    temp_r31 = *(u8**)((u8*) mnNameNew_804D6C08 + 0x2C);
+    temp_r30 = temp_r31[0x59];
+    if (arg0 != 0) {
+        lb_8001CE00();
+    }
+    if (gm_801A4310() == 0x1B) {
+        HSD_SisLib_803A5E70();
+        mn_8022EBDC();
+        if (arg0 != 0) {
+            gm_80190FE4((s32) temp_r30);
+            return;
+        }
+        gm_80190FE4(0x78);
+        return;
+    }
+    if (gm_801A4310() == 1) {
+        mn_804D6BC8.cooldown = 5;
+        if (arg0 != 0 && GetNameCount() > 0x18) {
+            mnName_8023A9B4((u8)(temp_r31[0x59] / 6));
+            return;
+        }
+        mnName_8023A9B4(0U);
+        return;
+    }
+    HSD_SisLib_803A5E70();
+    mn_8022EBDC();
+    mnCharSel_802640A0();
+}
 
 void mnNameNew_8023B314(u8* arg0, s32 arg1)
 {

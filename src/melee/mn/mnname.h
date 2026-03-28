@@ -50,7 +50,7 @@ typedef struct MnName_GObj {
 /* 23A0BC */ UNK_RET fn_8023A0BC(UNK_PARAMS);
 /* 23A290 */ UNK_RET mnName_8023A290(UNK_PARAMS);
 /* 23A59C */ UNK_RET mnName_8023A59C(UNK_PARAMS);
-/* 23A9B4 */ UNK_RET mnName_8023A9B4(UNK_PARAMS);
+/* 23A9B4 */ void mnName_8023A9B4(u8);
 /* 23AC40 */ UNK_RET mnName_8023AC40(UNK_PARAMS);
 /* 23B084 */ bool IsNameNotAllowed(s32 name_idx);
 
