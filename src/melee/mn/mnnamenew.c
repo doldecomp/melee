@@ -42,6 +42,7 @@ extern void* mnNameNew_804A0700[];
 extern void* mnNameNew_804A0710[];
 extern void* mnNameNew_804A0720[];
 
+extern u16 mnNameNew_803EDA7C[];
 extern StaticModelDesc MenMainBack_Top;
 extern StaticModelDesc MenMainPanel_Top;
 extern HSD_CObjDesc* MenMain_cam;
@@ -829,6 +830,113 @@ void fn_8023DAEC(HSD_GObj* arg0)
 }
 
 /// #fn_8023DBE8
+
+static f32 mnNameNew_804D4C10 = 10.0f;
+static s32 mnNameNew_804D4F68 = 0xFF;
+
+#pragma push
+#pragma dont_inline on
+void fn_8023DBE8(HSD_GObj* arg0)
+{
+    u8* data;
+    HSD_JObj* jobj;
+    HSD_JObj* parent;
+    HSD_GObjProc* proc;
+    u8* base;
+    s32 sp2C;
+    s32 sp28;
+    u8 cursor;
+    u8 sel;
+    s32 i;
+
+    FORCE_PAD_STACK(32);
+
+    data = arg0->user_data;
+
+    if ((u8) mn_804A04F0.x10 != 1) {
+        HSD_JObjSetFlagsAll(*(HSD_JObj**)(data + 0x44), 0x10U);
+        HSD_JObjSetFlagsAll(*(HSD_JObj**)(data + 0x34), 0x10U);
+        HSD_JObjSetFlagsAll(*(HSD_JObj**)(data + 0x38), 0x10U);
+        HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
+        proc = HSD_GObj_SetupProc(arg0, fn_8023DAEC, 0U);
+        proc->flags_3 = HSD_GObj_804D783C;
+        return;
+    }
+
+    mnNameNew_8023DA08(data);
+    cursor = data[1];
+
+    if ((s32) cursor != (s32) mn_804A04F0.hovered_selection) {
+        if (cursor >= 0x32U && cursor < 0x3AU) {
+            base = data + mnNameNew_803EDA7C[cursor - 0x32] * 4;
+            jobj = *(HSD_JObj**)(base + 4);
+        } else {
+            parent = *(HSD_JObj**)(data + 0x44);
+            if (parent == NULL) {
+                jobj = NULL;
+            } else {
+                jobj = parent->child;
+            }
+            for (i = 0; i < 50; i++) {
+                if (i == (s32) cursor) break;
+                if (jobj == NULL) {
+                    jobj = NULL;
+                } else {
+                    jobj = jobj->next;
+                }
+            }
+        }
+        HSD_JObjReqAnimAll(jobj, 0.0f);
+        HSD_JObjAnimAll(jobj);
+        if ((u8) data[1] < 0x32U) {
+            sp2C = mnNameNew_804D4F6C;
+            HSD_SisLib_803A74F0(*(HSD_Text**)(data + 0x60),
+                                (s32) data[1], (u8*) &sp2C);
+        }
+
+        sel = (u8) mn_804A04F0.hovered_selection;
+        if (sel >= 0x32U && sel < 0x3AU) {
+            base = data + mnNameNew_803EDA7C[sel - 0x32] * 4;
+            jobj = *(HSD_JObj**)(base + 4);
+        } else {
+            parent = *(HSD_JObj**)(data + 0x44);
+            if (parent == NULL) {
+                jobj = NULL;
+            } else {
+                jobj = parent->child;
+            }
+            for (i = 0; i < 50; i++) {
+                if (i == (s32) sel) break;
+                if (jobj == NULL) {
+                    jobj = NULL;
+                } else {
+                    jobj = jobj->next;
+                }
+            }
+        }
+        HSD_JObjReqAnimAll(jobj, 1.0f);
+        HSD_JObjAnimAll(jobj);
+        if ((u16) mn_804A04F0.hovered_selection < 0x32U) {
+            sp28 = mnNameNew_804D4F68;
+            HSD_SisLib_803A74F0(*(HSD_Text**)(data + 0x60),
+                                (s32) mn_804A04F0.hovered_selection,
+                                (u8*) &sp28);
+        }
+        mnNameNew_8023B314(data, (s32) mn_804A04F0.hovered_selection);
+        data[1] = (u8) mn_804A04F0.hovered_selection;
+        mnNameNew_8023B0F8(arg0, data[1]);
+    }
+
+    cursor = data[0x58];
+    if ((mnNameNew_804D4C10 + (f32) cursor) !=
+        mn_8022F298(*(HSD_JObj**)(data + 0x38)))
+    {
+        jobj = *(HSD_JObj**)(((u8*) arg0->user_data) + 0x38);
+        HSD_JObjReqAnimAll(jobj, mnNameNew_804D4C10 + (f32) cursor);
+        HSD_JObjAnimAll(jobj);
+    }
+}
+#pragma pop
 
 /// #mnNameNew_8023E0D8
 
