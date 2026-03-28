@@ -38,6 +38,7 @@
 /* 0D5358 */ void ftCo_Rebirth_IASA(Fighter_GObj* gobj);
 /* 0D535C */ void ftCo_Rebirth_Phys(Fighter_GObj* gobj);
 /* 0D5470 */ void ftCo_Rebirth_Coll(Fighter_GObj* gobj);
+/* 0D54A4 */ void fn_800D54A4(Fighter_GObj* gobj);
 /* 0D55B4 */ void fn_800D55B4(Fighter_GObj* gobj);
 /* 0D5600 */ void ftCo_800D5600(Fighter_GObj* gobj);
 /* 0D56EC */ void ftCo_RebirthWait_Anim(Fighter_GObj* gobj);
