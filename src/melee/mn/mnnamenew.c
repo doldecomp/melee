@@ -169,6 +169,53 @@ s32 NameContainsOnlySpaces(void)
 
 /// #AddCharacterToName
 
+s32 AddCharacterToName(u8* arg0, s32 arg1, u8 arg2, u8 arg3)
+{
+    s32 idx;
+    u8 ch;
+    u8* var_r4;
+    u8** table;
+    u8* base;
+    u8* entry;
+
+    base = (u8*) mnNameNew_803EDA58;
+
+    if ((s32) arg3 != 2) {
+        if ((s32) arg3 < 2 && (s32) arg3 >= 0) {
+            if ((u8) (arg1 - 0x30) <= 1U) {
+                if ((arg2 % 2) != 0) {
+                    table = (u8**) (base + ((arg1 * 0x10) & 0xFF0) + 0x5AC);
+                } else {
+                    table = (u8**) (base + ((arg1 * 0x10) & 0xFF0) + 0x28C);
+                }
+            } else if ((arg3 == 0 && (arg2 % 2) == 0) ||
+                       (arg3 == 1 && (arg2 % 2) != 0))
+            {
+                table = (u8**) (base + ((arg1 * 0x10) & 0xFF0) + 0x28C);
+            } else {
+                table = (u8**) (base + ((arg1 * 0x10) & 0xFF0) + 0x5AC);
+            }
+            var_r4 = arg0;
+            idx = 0;
+            while ((s8) mnNameNew_NullCharacter !=
+                   (s8) (ch = *(table[arg2 / 2] + idx)))
+            {
+                *var_r4 = ch;
+                idx += 1;
+                var_r4 += 1;
+            }
+            arg0[idx] = mnNameNew_NullCharacter;
+            return (s32) arg0;
+        }
+        return (s32) arg0;
+    }
+    entry = base + ((arg1 * 4) & 0x3FC);
+    arg0[0] = (*(u8**) (entry + 0x1C4))[0];
+    arg0[1] = (*(u8**) (entry + 0x1C4))[1];
+    arg0[2] = (*(u8**) (entry + 0x1C4))[2];
+    return (s32) arg0;
+}
+
 /// #mnNameNew_GlyphVariantInput
 
 /// #mnNameNew_MainInput
