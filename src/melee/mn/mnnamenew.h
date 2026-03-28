@@ -17,7 +17,7 @@
 /* 23C290 */ UNK_RET mnNameNew_GlyphVariantInput(UNK_PARAMS);
 /* 23C54C */ UNK_RET mnNameNew_MainInput(HSD_GObj*);
 /* 23CE4C */ UNK_RET mnNameNew_8023CE4C(UNK_PARAMS);
-/* 23CFC8 */ UNK_RET fn_8023CFC8(UNK_PARAMS);
+/* 23CFC8 */ void fn_8023CFC8(HSD_GObj* arg0);
 /* 23D0F8 */ void fn_8023D0F8(void*);
 /* 23D130 */ UNK_RET mnNameNew_8023D130(UNK_PARAMS);
 /* 23D3E8 */ UNK_RET mnNameNew_GlyphVariantSetup(UNK_PARAMS);

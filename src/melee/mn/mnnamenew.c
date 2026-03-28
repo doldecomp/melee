@@ -173,9 +173,70 @@ s32 NameContainsOnlySpaces(void)
 
 /// #mnNameNew_MainInput
 
+static s32 mnNameNew_804D4F70 = 0xFF;
+static s32 mnNameNew_804D4F74 = 0x744F0BFF;
+
 /// #mnNameNew_8023CE4C
 
 /// #fn_8023CFC8
+
+void fn_8023CFC8(HSD_GObj* arg0)
+{
+    s32 sp30;
+    s32 sp2C;
+    HSD_JObj* jobj;
+    HSD_JObj* root;
+    u8 old_sel;
+    s32 count;
+    u8* data;
+
+    PAD_STACK(40);
+
+    data = arg0->user_data;
+    old_sel = data[0];
+    if (old_sel != (u8) mn_804A04F0.confirmed_selection) {
+        root = *(HSD_JObj**)(data + 0x14);
+        if (root == NULL) {
+            jobj = NULL;
+        } else {
+            jobj = root->child;
+        }
+        for (count = old_sel; count > 0; count--) {
+            if (jobj == NULL) {
+                jobj = NULL;
+            } else {
+                jobj = jobj->next;
+            }
+        }
+        HSD_JObjReqAnimAll(jobj, 0.0f);
+        HSD_JObjAnimAll(jobj);
+        sp30 = mnNameNew_804D4F74;
+        HSD_SisLib_803A74F0(*(HSD_Text**)(data + 0x20), (s32) data[0],
+                            (u8*) &sp30);
+        root = *(HSD_JObj**)(data + 0x14);
+        if (root == NULL) {
+            jobj = NULL;
+        } else {
+            jobj = root->child;
+        }
+        for (count = (s32) mn_804A04F0.confirmed_selection; count > 0;
+             count--)
+        {
+            if (jobj == NULL) {
+                jobj = NULL;
+            } else {
+                jobj = jobj->next;
+            }
+        }
+        HSD_JObjReqAnimAll(jobj, 1.0f);
+        HSD_JObjAnimAll(jobj);
+        sp2C = mnNameNew_804D4F70;
+        HSD_SisLib_803A74F0(*(HSD_Text**)(data + 0x20),
+                            (s32) mn_804A04F0.confirmed_selection,
+                            (u8*) &sp2C);
+        data[0] = (u8) mn_804A04F0.confirmed_selection;
+    }
+}
 
 void fn_8023D0F8(void* arg0)
 {
