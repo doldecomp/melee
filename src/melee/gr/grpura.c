@@ -396,7 +396,42 @@ void fn_802130D0(HSD_GObj* arg0, int arg1)
     HSD_MObjSetToonTextureImage(0);
 }
 
-/// #grPura_80213128
+void grPura_80213128(HSD_DObj* dobj)
+{
+    HSD_DObj* iter;
+    HSD_DObj* next;
+    HSD_DObj* next2;
+
+    if ((next = dobj->next) != NULL) {
+        if ((next2 = next->next) != NULL) {
+            if (next2->next != NULL) {
+                grPura_80213128(next2->next);
+            }
+            for (iter = next2; iter != NULL; iter = iter->next) {
+                grPura_80213224(iter);
+            }
+            if (next2->mobj != NULL) {
+                HSD_MObjCompileTev(next2->mobj);
+            }
+        }
+        for (iter = next; iter != NULL; iter = iter->next) {
+            if (iter != NULL) {
+                HSD_MObjCompileTev(iter->mobj);
+            }
+        }
+        if (next->mobj != NULL) {
+            HSD_MObjCompileTev(next->mobj);
+        }
+    }
+    for (iter = dobj; iter != NULL; iter = iter->next) {
+        if (iter != NULL) {
+            HSD_MObjCompileTev(iter->mobj);
+        }
+    }
+    if (dobj->mobj != NULL) {
+        HSD_MObjCompileTev(dobj->mobj);
+    }
+}
 
 /// #grPura_80213224
 void grPura_80213224(HSD_DObj* dobj)
@@ -420,7 +455,7 @@ void grPura_80213250(HSD_JObj* arg0)
         }
         dobj = jobj->u.dobj;
         if (jobj->u.ptcl) {
-            grPura_80213128();
+            grPura_80213128(dobj);
         }
         // for(int i = 0;ptcl->next[];i++)
         if (dobj != 0) {
@@ -437,7 +472,7 @@ void grPura_80213250(HSD_JObj* arg0)
         }
         dobj = jobj->u.dobj;
         if (jobj->u.ptcl) {
-            grPura_80213128();
+            grPura_80213128(dobj);
         }
         if (dobj != 0) {
             HSD_MObjCompileTev(dobj->mobj);
@@ -446,7 +481,7 @@ void grPura_80213250(HSD_JObj* arg0)
     dobj = arg0->u.dobj;
     if (dobj) {
         if (jobj->u.ptcl) {
-            grPura_80213128();
+            grPura_80213128(dobj);
         }
         if (jobj->next) {
             grPura_80213250(jobj->next);
