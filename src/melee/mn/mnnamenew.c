@@ -149,6 +149,80 @@ void mnNameNew_8023B314(u8* arg0, s32 arg1)
 
 /// #mnNameNew_8023BAA8
 
+s32 mnNameNew_8023BAA8(u8* arg0, s32 arg1, u8 arg2)
+{
+    u8 mode;
+
+    if (arg2 >= 0x32U && arg2 < 0x3AU) {
+        if (arg1 & 1) {
+            if (arg2 == 0x39) {
+                return ((arg0[0x51] / 5) * 5) + 4;
+            }
+            if (arg2 > 0x32U) {
+                return arg2 - 1;
+            }
+            return 0x38;
+        }
+        if (arg1 & 2) {
+            if (arg2 == 0x39) {
+                return (arg0[0x51] / 5) * 5;
+            }
+            if (arg2 == 0x38) {
+                return 0x32;
+            }
+            return arg2 + 1;
+        }
+        if (arg1 & 4) {
+            if (arg2 != 0x38 && arg2 != 0x39) {
+                return arg0[0x51] % 5;
+            }
+        } else if ((arg1 & 8) && arg2 != 0x38 && arg2 != 0x39) {
+            return (arg0[0x51] % 5) + 0x2D;
+        }
+    } else {
+        if (arg1 & 1) {
+            if ((arg2 % 5) != 0) {
+                return arg2 - 1;
+            }
+            return 0x39;
+        }
+        if (arg1 & 2) {
+            if ((s32)(arg2 % 5) == 4) {
+                return 0x39;
+            }
+            return arg2 + 1;
+        }
+        if (arg1 & 4) {
+            if ((s32)(arg2 / 5) < 9) {
+                return arg2 + 5;
+            }
+            mode = arg0[0x50];
+            switch ((s32) mode) {
+            case 0:
+                return 0x33;
+            case 1:
+                return 0x34;
+            case 2:
+                return 0x35;
+            }
+        } else if (arg1 & 8) {
+            if ((arg2 / 5) != 0) {
+                return arg2 - 5;
+            }
+            mode = arg0[0x50];
+            switch ((s32) mode) {
+            case 0:
+                return 0x33;
+            case 1:
+                return 0x34;
+            case 2:
+                return 0x35;
+            }
+        }
+    }
+    return (s32) arg2;
+}
+
 /// #PickAutoName
 
 s32 PickAutoName(HSD_GObj* arg0)
