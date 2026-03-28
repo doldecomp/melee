@@ -10,11 +10,14 @@
 #include "ft/ft_081B.h"
 #include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
+#include "ft/ftanim.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/ftwaitanim.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
+
+#include "lb/lbvector.h"
 
 #include "ftCommon/forward.h"
 
@@ -413,7 +416,39 @@ void ftCo_800D47B8(Fighter_GObj* gobj)
 
 /// #ftCo_DeadUpFall_Anim
 
-/// #ftCo_DeadUpFall_Phys
+void ftCo_DeadUpFall_Phys(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    u8* ca = (u8*) p_ftCommonData + 0x520;
+
+    switch (fp->mv.co.unk_deadup.x44) {
+    case 1:
+        if (fp->x2222_b6) {
+            if (!ftAnim_80070FD0(fp)) {
+                break;
+            }
+        }
+        lbVector_Lerp((Vec3*) (ca + 0x18), (Vec3*) (ca + 0x24),
+                      &fp->mv.co.unk_deadup.x50,
+                      fp->mv.co.unk_deadup.x4C);
+        break;
+    case 3:
+        ftCommon_Fall(fp, *(float*) (ca + 0x34),
+                      *(float*) (ca + 0x38));
+        lbVector_Add(&fp->mv.co.unk_deadup.x5C, &fp->self_vel);
+        if (fp->x2222_b6) {
+            if (!ftAnim_80070FD0(fp)) {
+                break;
+            }
+        }
+        lbVector_Add(&fp->mv.co.unk_deadup.x50,
+                     &fp->mv.co.unk_deadup.x5C);
+        fp->mv.co.unk_deadup.x5C.x = 0;
+        fp->mv.co.unk_deadup.x5C.y = 0;
+        fp->mv.co.unk_deadup.x5C.z = 0;
+        break;
+    }
+}
 
 void fn_800D4DD4(Fighter_GObj* gobj)
 {
