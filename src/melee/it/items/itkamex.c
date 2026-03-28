@@ -13,6 +13,8 @@
 #include "it/it_2725.h"
 #include "it/item.h"
 
+#include <baselib/jobj.h>
+
 void it_802CA49C(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
@@ -227,7 +229,23 @@ bool itKamex_UnkMotion3_Coll(Item_GObj* gobj)
 
 /// #it_802CAB10
 
-/// #it_2725_Logic31_Spawned
+void it_2725_Logic31_Spawned(Item_GObj* gobj)
+{
+    HSD_JObj* jobj;
+    Vec3 scale;
+    Item* ip = gobj->user_data;
+    itKamexAttributes* sa = ip->xC4_article_data->x4_specialAttributes;
+
+    jobj = gobj->hsd_obj;
+    ip->xD44_lifeTimer = sa->x0;
+    it_80274740(gobj);
+    it_802CADF0(gobj);
+    it_8026B3A8(gobj);
+    scale.x = 0.2f;
+    scale.y = 0.2f;
+    scale.z = 0.2f;
+    HSD_JObjSetScale(jobj, &scale);
+}
 
 bool itKamex_Logic31_HitShield(Item_GObj* arg0)
 {
