@@ -3,11 +3,16 @@
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/itcoll.h"
 #include "it/item.h"
+
+#include "lb/lb_00B0.h"
+
+#include <Runtime/runtime.h>
 
 UNK_T it_802EAF28(Item_GObj* item_gobj)
 {
-    return GET_ITEM(item_gobj)->xDD4_itemVar.greatfoxlaser.x38;
+    return (UNK_T)GET_ITEM(item_gobj)->xDD4_itemVar.greatfoxlaser.x38;
 }
 
 /// #it_802EAF34
@@ -35,7 +40,34 @@ void it_802EB268(Item_GObj* gobj)
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
 }
 
-/// #itGreatfoxlaser_UnkMotion1_Anim
+bool itGreatfoxlaser_UnkMotion1_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    f32* attr = ip->xC4_article_data->x4_specialAttributes;
+    PAD_STACK(8);
+
+    if (!it_80272C6C(gobj)) {
+        if (ip->xDD4_itemVar.greatfoxlaser.x38 == 0) {
+            ip->x40_vel.x = attr[1] * ip->facing_dir;
+            it_80272460(&ip->x5D4_hitboxes[0].hit,
+                        __cvt_fp2unsigned(attr[0]), gobj);
+        } else {
+            ip->x40_vel.x = attr[3] * ip->facing_dir;
+            it_80272460(&ip->x5D4_hitboxes[0].hit,
+                        __cvt_fp2unsigned(attr[2]), gobj);
+        }
+    } else {
+        HSD_JObj* jobj = ip->xDD4_itemVar.greatfoxlaser.x20->hsd_obj;
+        Vec3 pos = ip->xDD4_itemVar.greatfoxlaser.x28;
+        lb_8000B1CC(jobj, &pos, &ip->pos);
+    }
+
+    if (ip->xDD4_itemVar.greatfoxlaser.x36 == 0) {
+        return true;
+    }
+    ip->xDD4_itemVar.greatfoxlaser.x36--;
+    return false;
+}
 
 void itGreatfoxlaser_UnkMotion1_Phys(Item_GObj* gobj)
 {
