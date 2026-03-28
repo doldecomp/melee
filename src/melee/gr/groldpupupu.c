@@ -3,6 +3,7 @@
 #include "baselib/forward.h"
 #include "forward.h"
 
+#include "ft/ftlib.h"
 #include "gr/granime.h"
 #include "gr/grmaterial.h"
 #include "gr/ground.h"
@@ -18,6 +19,16 @@
 static struct {
     s16 x0;
     s16 x2;
+    int x4;
+    int x8;
+    int xC;
+    f32 x10;
+    f32 x14;
+    f32 x18;
+    f32 x1C;
+    f32 x20;
+    f32 x24;
+    f32 x28;
 }* grOp_804D6A98;
 
 static void* grOp_804D6A9C;
@@ -293,7 +304,41 @@ bool grOldPupupu_8021128C(Vec* vec, f32 maxX, f32 minX, f32 maxY, f32 minY)
     return false;
 }
 
-/// #fn_802112F4
+bool fn_802112F4(Ground_GObj* gobj, HSD_GObj* fighter_gobj, Vec3* vel)
+{
+    Ground* gp;
+    Vec3 pos;
+    PAD_STACK(8);
+
+    ftLib_80086644(fighter_gobj, &pos);
+    vel->y = 0.0F;
+    vel->z = 0.0F;
+
+    gp = gobj->user_data;
+    switch (gp->gv.unk.xDC) {
+    case 1:
+        if (grOldPupupu_8021128C(&pos, grOp_804D6A98->x1C,
+                                  grOp_804D6A98->x20, grOp_804D6A98->x24,
+                                  grOp_804D6A98->x28) == true)
+        {
+            vel->x = -grOp_804D6A98->x10;
+            return true;
+        }
+        break;
+    case 2:
+        if (grOldPupupu_8021128C(&pos, grOp_804D6A98->x18,
+                                  grOp_804D6A98->x14, grOp_804D6A98->x24,
+                                  grOp_804D6A98->x28) == true)
+        {
+            vel->x = grOp_804D6A98->x10;
+            return true;
+        }
+        break;
+    }
+
+    vel->x = 0.0F;
+    return false;
+}
 
 /// #grOldPupupu_802113E0
 

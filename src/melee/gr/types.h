@@ -173,7 +173,7 @@ struct GroundVars_unk {
     int xD0;
     int xD4;
     int xD8;
-    float xDC;
+    int xDC;
 };
 
 struct GroundVars_izumi {
