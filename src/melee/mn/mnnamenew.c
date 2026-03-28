@@ -170,6 +170,117 @@ void mnNameNew_8023B314(u8* arg0, s32 arg1)
 
 /// #mnNameNew_KeySetup
 
+static s32 mnNameNew_804D4F6C = (s32) 0xA6813DFF;
+static s32 mnNameNew_804D4F70 = 0xFF;
+static s32 mnNameNew_804D4F74 = 0x744F0BFF;
+static s32 mnNameNew_804D4F78 = 0xFF;
+
+extern const s32 mnNameNew_804DBF44;
+extern const s32 mnNameNew_804DBF48;
+
+s32 mnNameNew_KeySetup(u8* arg0, u8 arg1)
+{
+    HSD_JObj* key_jobj;
+    HSD_JObj* ref1;
+    HSD_JObj* ref2;
+    HSD_Text* text;
+    u8* base;
+    Vec3 sp50;
+    s32 sp4C;
+    s32 sp48;
+    s32 sp44;
+    char** str_table;
+    f32 x_range;
+    f32 y_range;
+    f32 base_x;
+    f32 base_y;
+    f32 font_x;
+    f32 col_x;
+    s32 i;
+    s32* color_ptr;
+
+    FORCE_PAD_STACK(20);
+
+    base = (u8*) mnNameNew_803EDA58;
+    sp4C = mnNameNew_804DBF44;
+    sp48 = mnNameNew_804DBF48;
+
+    switch ((s32) arg1) {
+    case 0:
+        arg0[0x50] = 0;
+        str_table = (char**)(base + 0x34);
+        break;
+    case 1:
+        arg0[0x50] = 1;
+        str_table = (char**)(base + 0xFC);
+        break;
+    case 2:
+        arg0[0x50] = 2;
+        str_table = (char**)(base + 0x1C4);
+        break;
+    }
+
+    text = *(HSD_Text**)(arg0 + 0x60);
+    if (text != NULL) {
+        HSD_SisLib_803A5CC4(text);
+    }
+    text = HSD_SisLib_803A6754(0, (s32) mn_804D6BB5);
+    *(HSD_Text**)(arg0 + 0x60) = text;
+
+    key_jobj = HSD_JObjGetChild(*(HSD_JObj**)(arg0 + 0x44));
+    for (i = 0; i < 50; i++) {
+        if (i == 0x2D) break;
+        key_jobj = HSD_JObjGetNext(key_jobj);
+    }
+
+    lb_8000B1CC(key_jobj, (Vec3*)(base + 0x8CC), &sp50);
+    text->pos_x = sp50.x;
+    text->pos_y = -sp50.y;
+    text->pos_z = sp50.z;
+    text->font_size.x = 0.03f;
+    text->font_size.y = 0.04f;
+    *(s32*) &text->text_color = mnNameNew_804D4F6C;
+
+    ref1 = HSD_JObjGetChild(*(HSD_JObj**)(arg0 + 0x44));
+    for (i = 0; i < 50; i++) {
+        if (i == 0x28) break;
+        ref1 = HSD_JObjGetNext(ref1);
+    }
+
+    base_x = HSD_JObjGetTranslationX(key_jobj);
+    x_range = HSD_JObjGetTranslationX(ref1) - base_x;
+
+    ref2 = HSD_JObjGetChild(*(HSD_JObj**)(arg0 + 0x44));
+    for (i = 0; i < 50; i++) {
+        if (i == 0x2E) break;
+        ref2 = HSD_JObjGetNext(ref2);
+    }
+
+    base_y = HSD_JObjGetTranslationY(key_jobj);
+    y_range = -(HSD_JObjGetTranslationY(ref2) - base_y);
+
+    {
+        u8* sp44_addr = (u8*) &sp44;
+        i = 0;
+        for (; i < 0x32; i++) {
+            font_x = text->font_size.x;
+            col_x = (f32)(9 - (i / 5)) * x_range;
+            HSD_SisLib_803A6B98(text, col_x / font_x,
+                                ((f32)(i % 5) * y_range) / text->font_size.y,
+                                str_table[i], font_x, col_x);
+            if (i == (s32) mn_804A04F0.hovered_selection) {
+                color_ptr = &sp48;
+            } else {
+                color_ptr = &sp4C;
+            }
+            sp44 = *color_ptr;
+            HSD_SisLib_803A74F0(text, i, sp44_addr);
+        }
+    }
+
+    return (s32) text;
+}
+
 /// #mnNameNew_8023BAA8
 
 s32 mnNameNew_8023BAA8(u8* arg0, s32 arg1, u8 arg2)
@@ -551,11 +662,6 @@ void mnNameNew_GlyphVariantInput(void)
 }
 
 /// #mnNameNew_MainInput
-
-static s32 mnNameNew_804D4F6C = (s32) 0xA6813DFF;
-static s32 mnNameNew_804D4F70 = 0xFF;
-static s32 mnNameNew_804D4F74 = 0x744F0BFF;
-static s32 mnNameNew_804D4F78 = 0xFF;
 
 /// #mnNameNew_8023CE4C
 
