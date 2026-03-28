@@ -11,7 +11,7 @@
 /* 23B3FC */ UNK_RET mnNameNew_KeySetup(UNK_PARAMS);
 /* 23BAA8 */ UNK_RET mnNameNew_8023BAA8(UNK_PARAMS);
 /* 23BD4C */ UNK_RET PickAutoName(UNK_PARAMS);
-/* 23BEE0 */ UNK_RET NameContainsOnlySpaces(UNK_PARAMS);
+/* 23BEE0 */ s32 NameContainsOnlySpaces(void);
 /* 23BFE4 */ UNK_RET WriteCharactersForNameAtIndex(UNK_PARAMS);
 /* 23C148 */ UNK_RET AddCharacterToName(UNK_PARAMS);
 /* 23C290 */ UNK_RET mnNameNew_GlyphVariantInput(UNK_PARAMS);

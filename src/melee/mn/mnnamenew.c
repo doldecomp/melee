@@ -19,6 +19,7 @@ extern u8** AutoNamesList;
 extern u8 mn_804D6BB4;
 extern u8 mnNameNew_804D4F7C[4];
 extern void* mnNameNew_804D6C08;
+extern u8 mnNameNew_SpaceCharacter[2];
 
 static AnimLoopSettings mnNameNew_803EDA58[3] = {
     { 0.0f, 19.0f, -0.1f },
@@ -106,7 +107,26 @@ void mnNameNew_8023B314(u8* arg0, s32 arg1)
 
 /// #PickAutoName
 
-/// #NameContainsOnlySpaces
+s32 NameContainsOnlySpaces(void)
+{
+    u8* text = (u8*) mnNameNew_CurrentNameText;
+    s8 null_char = (s8) mnNameNew_NullCharacter;
+    s8 space0 = (s8) mnNameNew_SpaceCharacter[0];
+    u8* sp = mnNameNew_SpaceCharacter;
+    s32 i;
+
+    for (i = 0; i < 4; i++) {
+        if (null_char != (s8) text[0]) {
+            if (space0 != (s8) text[0] ||
+                (s8) sp[1] != (s8) text[1])
+            {
+                return 0;
+            }
+        }
+        text += 3;
+    }
+    return 1;
+}
 
 /// #WriteCharactersForNameAtIndex
 
