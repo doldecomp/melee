@@ -262,6 +262,13 @@ typedef struct {
     u32 x0;
 } itKirbyHammer_ItemVars;
 
+typedef struct {
+    /*  +0 ip+DD4 */ f32 angle;
+    /*  +4 ip+DD8 */ f32 speed;
+    /*  +8 ip+DDC */ Vec3 dir;
+    /* +14 ip+DE8 */ Vec3 init_pos;
+} itKirbyCutterBeam_ItemVars;
+
 /// user_data struct of GObj class 7
 typedef struct ItemLink {
     /*   +0 */ struct ItemLink* prev;
