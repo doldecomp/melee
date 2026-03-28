@@ -901,8 +901,19 @@ struct grMuteCity_GroundVars {
         u8 b6 : 1;
         u8 b7 : 1;
     } xD0_flags;
-    /* +0x00 gp+D1) */ u8 pad2[0x110 - 0xD1];
-    /* +0x00 gp+110) */ HSD_LObj* x110;
+    /* +0x0D gp+D1) */ u8 pad_D1[0xE4 - 0xD1];
+    /* +0x20 gp+E4) */ f32 xE4;
+    /* +0x24 gp+E8) */ f32 xE8;
+    /* +0x28 gp+EC) */ u8 pad_EC[0xF0 - 0xEC];
+    /* +0x2C gp+F0) */ f32 xF0;
+    /* +0x30 gp+F4) */ f32 xF4;
+    /* +0x34 gp+F8) */ u8 pad_F8[0xFC - 0xF8];
+    /* +0x38 gp+FC) */ HSD_JObj* xFC;
+    /* +0x3C gp+100) */ HSD_JObj* x100;
+    /* +0x40 gp+104) */ HSD_JObj* x104;
+    /* +0x44 gp+108) */ HSD_JObj* x108;
+    /* +0x48 gp+10C) */ HSD_JObj* x10C;
+    /* +0x4C gp+110) */ HSD_LObj* x110;
 };
 
 struct grMuteCity_GroundVars2 {
