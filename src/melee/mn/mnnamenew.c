@@ -73,25 +73,6 @@ typedef struct NameNewData {
     /* 0x8CC */ Vec3 ref_pos;
 } NameNewData;
 
-typedef struct NameNewEntry {
-    /* 0x00 */ u8 x0;
-    /* 0x01 */ u8 x1;
-    /* 0x02 */ u8 x2;
-    /* 0x03 */ u8 x3;
-    /* 0x04 */ HSD_JObj* jobjs[19];
-    /* 0x50 */ u8 mode;
-    /* 0x51 */ u8 last_key_sel;
-    /* 0x52 */ u8 pad_52[2];
-    /* 0x54 */ HSD_GObj* variant_gobj;
-    /* 0x58 */ u8 cursor_pos;
-    /* 0x59 */ u8 name_index;
-    /* 0x5A */ u8 auto_history[5];
-    /* 0x5F */ u8 pad_5F;
-    /* 0x60 */ HSD_Text* key_text;
-    /* 0x64 */ HSD_Text* name_disp_text;
-    /* 0x68 */ HSD_Text* desc_text;
-} NameNewEntry; /* size = 0x6C */
-
 static AnimLoopSettings mnNameNew_803EDA58[3] = {
     { 0.0f, 19.0f, -0.1f },
     { 20.0f, 39.0f, -0.1f },
@@ -400,7 +381,7 @@ s32 mnNameNew_8023BAA8(NameNewEntry* arg0, s32 arg1, u8 arg2)
 
 s32 PickAutoName(HSD_GObj* arg0)
 {
-    u8* data;
+    NameNewEntry* data;
     u8* cur_text;
     u8* text;
     u8** names;
@@ -432,15 +413,15 @@ s32 PickAutoName(HSD_GObj* arg0)
             pick = HSD_Randi(count);
         } while (IsNameUnique((char*) AutoNamesList[pick]) != 0);
 
-        if (pick == (s32) data[0x5A]) {
+        if (pick == (s32) data->auto_history[0]) {
             dup = 1;
-        } else if (pick == (s32) data[0x5B]) {
+        } else if (pick == (s32) data->auto_history[1]) {
             dup = 1;
-        } else if (pick == (s32) data[0x5C]) {
+        } else if (pick == (s32) data->auto_history[2]) {
             dup = 1;
-        } else if (pick == (s32) data[0x5D]) {
+        } else if (pick == (s32) data->auto_history[3]) {
             dup = 1;
-        } else if (pick == (s32) data[0x5E]) {
+        } else if (pick == (s32) data->auto_history[4]) {
             dup = 1;
         }
     } while (dup != 0);
@@ -465,15 +446,15 @@ s32 PickAutoName(HSD_GObj* arg0)
 
     cur_text[name_idx * 3] = mnNameNew_NullCharacter;
 
-    tmp = data[0x5A];
-    data[0x5A] = (u8) pick;
-    ch = data[0x5B];
-    data[0x5B] = tmp;
-    tmp = data[0x5C];
-    data[0x5C] = ch;
-    ch = data[0x5D];
-    data[0x5D] = tmp;
-    data[0x5E] = ch;
+    tmp = data->auto_history[0];
+    data->auto_history[0] = (u8) pick;
+    ch = data->auto_history[1];
+    data->auto_history[1] = tmp;
+    tmp = data->auto_history[2];
+    data->auto_history[2] = ch;
+    ch = data->auto_history[3];
+    data->auto_history[3] = tmp;
+    data->auto_history[4] = ch;
 
     return (s32)(s8) mnNameNew_NullCharacter;
 }

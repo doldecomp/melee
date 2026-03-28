@@ -3,13 +3,14 @@
 
 #include <placeholder.h>
 
+#include "mn/types.h"
 #include <baselib/forward.h>
 
 /* 23B0F8 */ void mnNameNew_8023B0F8(HSD_GObj* arg0, u8 arg1);
 /* 23B224 */ void mnNameNew_8023B224(u8);
 /* 23B314 */ void mnNameNew_8023B314(u8*, s32);
-/* 23B3FC */ s32 mnNameNew_KeySetup(struct NameNewEntry*, u8);
-/* 23BAA8 */ s32 mnNameNew_8023BAA8(struct NameNewEntry* arg0, s32 arg1, u8 arg2);
+/* 23B3FC */ s32 mnNameNew_KeySetup(NameNewEntry*, u8);
+/* 23BAA8 */ s32 mnNameNew_8023BAA8(NameNewEntry* arg0, s32 arg1, u8 arg2);
 /* 23BD4C */ s32 PickAutoName(HSD_GObj* arg0);
 /* 23BEE0 */ s32 NameContainsOnlySpaces(void);
 /* 23BFE4 */ s32 WriteCharactersForNameAtIndex(u8 arg0, s32 arg1);
