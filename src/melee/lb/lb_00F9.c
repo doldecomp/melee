@@ -177,7 +177,7 @@ void lb_800101C8(Vec3* arg0, Vec3* arg1)
     lbVector_Normalize(arg1);
 }
 
-void lb_800103B8(Vec3* a, Vec3* b)
+float lb_800103B8(Vec3* a, Vec3* b)
 {
     lb_800101C8(a, b);
 }
