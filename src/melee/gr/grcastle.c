@@ -367,7 +367,6 @@ void grCastle_801CD658(Ground_GObj* gobj)
     Vec3 pos;
     grCastle_DynEntries entries_s;
     s32 i;
-    s32 pad;
 
     grAnime_801C8138(gobj, gp->map_id, 0);
 
@@ -404,34 +403,28 @@ void grCastle_801CD658(Ground_GObj* gobj)
                 flag6 = HSD_ArchiveGetPublicAddress(archive->unk0,
                                                     "dynamicsdata_flag6");
                 if (flag6 != NULL) {
-                    grCastle_DynEntry* ep;
-                    DynamicsDesc* dp;
-
                     entries_s = grCs_803B7EA8;
-                    ep = entries_s.e;
-                    dp = &gp->gv.castle9.dynamics[0];
 
-                    i = 0;
-                    do {
+                    for( i = 0; i < 4; i++ ){
                         HSD_JObj* jobj =
-                            Ground_801C3FA4(gobj, ep->depth);
+                            Ground_801C3FA4(gobj, entries_s.e[i].depth);
                         if (jobj != NULL) {
-                            if (ep->type == 3) {
-                                grLib_801C9B20(jobj, flag3, dp);
-                            } else if (ep->type == 4) {
-                                grLib_801C9B20(jobj, flag4, dp);
-                            } else if (ep->type == 6) {
-                                grLib_801C9B20(jobj, flag6, dp);
+                            if (entries_s.e[i].type == 3) {
+                                grLib_801C9B20(jobj, flag3,
+                                               &gp->gv.castle9.dynamics[i]);
+                            } else if (entries_s.e[i].type == 4) {
+                                grLib_801C9B20(jobj, flag4,
+                                               &gp->gv.castle9.dynamics[i]);
+                            } else if (entries_s.e[i].type == 6) {
+                                grLib_801C9B20(jobj, flag6,
+                                               &gp->gv.castle9.dynamics[i]);
                             } else {
-                                dp->data = NULL;
+                                gp->gv.castle9.dynamics[i].data = NULL;
                             }
                         } else {
-                            dp->data = NULL;
+                            gp->gv.castle9.dynamics[i].data = NULL;
                         }
-                        i++;
-                        ep++;
-                        dp++;
-                    } while ((u32)i < 4);
+                    }
                 }
             }
         }
