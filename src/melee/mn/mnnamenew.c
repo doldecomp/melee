@@ -13,6 +13,7 @@
 #include "sysdolphin/baselib/gobjplink.h"
 #include "sysdolphin/baselib/jobj.h"
 #include "sysdolphin/baselib/memory.h"
+#include "sysdolphin/baselib/random.h"
 #include "sysdolphin/baselib/sislib.h"
 
 extern volatile char mnNameNew_NullCharacter;
@@ -149,6 +150,86 @@ void mnNameNew_8023B314(u8* arg0, s32 arg1)
 /// #mnNameNew_8023BAA8
 
 /// #PickAutoName
+
+s32 PickAutoName(HSD_GObj* arg0)
+{
+    u8* data;
+    u8* cur_text;
+    u8* text;
+    u8** names;
+    u8** name_ptr;
+    s32 count;
+    s32 pick;
+    s32 dup;
+    s32 char_idx;
+    s32 name_idx;
+    u8 ch;
+    u8 tmp;
+    s8 null_ch;
+
+    PAD_STACK(48);
+
+    data = arg0->user_data;
+    cur_text = (u8*) mnNameNew_CurrentNameText;
+
+    do {
+        dup = 0;
+        do {
+            null_ch = (s8) mnNameNew_NullCharacter;
+            count = 0;
+            names = AutoNamesList;
+            while (null_ch != (s8) **names) {
+                names++;
+                count++;
+            }
+            pick = HSD_Randi(count);
+        } while (IsNameUnique((s32) AutoNamesList[pick]) != 0);
+
+        if (pick == (s32) data[0x5A]) {
+            dup = 1;
+        } else if (pick == (s32) data[0x5B]) {
+            dup = 1;
+        } else if (pick == (s32) data[0x5C]) {
+            dup = 1;
+        } else if (pick == (s32) data[0x5D]) {
+            dup = 1;
+        } else if (pick == (s32) data[0x5E]) {
+            dup = 1;
+        }
+    } while (dup != 0);
+
+    name_idx = 0;
+    char_idx = name_idx;
+    cur_text[0] = mnNameNew_NullCharacter;
+    text = cur_text;
+    cur_text[3] = mnNameNew_NullCharacter;
+    cur_text[6] = mnNameNew_NullCharacter;
+    cur_text[9] = mnNameNew_NullCharacter;
+
+    name_ptr = &AutoNamesList[pick];
+    while ((s8) mnNameNew_NullCharacter != (s8)(ch = (*name_ptr)[char_idx])) {
+        text[0] = ch;
+        text[1] = (*name_ptr)[char_idx + 1];
+        text[2] = mnNameNew_NullCharacter;
+        char_idx += 2;
+        name_idx++;
+        text += 3;
+    }
+
+    cur_text[name_idx * 3] = mnNameNew_NullCharacter;
+
+    tmp = data[0x5A];
+    data[0x5A] = (u8) pick;
+    ch = data[0x5B];
+    data[0x5B] = tmp;
+    tmp = data[0x5C];
+    data[0x5C] = ch;
+    ch = data[0x5D];
+    data[0x5D] = tmp;
+    data[0x5E] = ch;
+
+    return (s32)(s8) mnNameNew_NullCharacter;
+}
 
 s32 NameContainsOnlySpaces(void)
 {

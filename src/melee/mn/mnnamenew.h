@@ -10,7 +10,7 @@
 /* 23B314 */ void mnNameNew_8023B314(u8*, s32);
 /* 23B3FC */ UNK_RET mnNameNew_KeySetup(UNK_PARAMS);
 /* 23BAA8 */ UNK_RET mnNameNew_8023BAA8(UNK_PARAMS);
-/* 23BD4C */ UNK_RET PickAutoName(UNK_PARAMS);
+/* 23BD4C */ s32 PickAutoName(HSD_GObj* arg0);
 /* 23BEE0 */ s32 NameContainsOnlySpaces(void);
 /* 23BFE4 */ s32 WriteCharactersForNameAtIndex(u8 arg0, s32 arg1);
 /* 23C148 */ s32 AddCharacterToName(u8* arg0, s32 arg1, u8 arg2, u8 arg3);
@@ -24,7 +24,7 @@
 /* 23DA08 */ s32 mnNameNew_8023DA08(u8*);
 /* 23DAEC */ void fn_8023DAEC(HSD_GObj*);
 /* 23DBE8 */ UNK_RET fn_8023DBE8(UNK_PARAMS);
-/* 23E0D8 */ UNK_RET mnNameNew_8023E0D8(UNK_PARAMS);
+/* 23E0D8 */ void mnNameNew_8023E0D8(u8* arg0);
 /* 23E264 */ s32 InitNameEntryUIState(u8*, s8);
 /* 23E32C */ void mnNameNew_8023E32C(UNK_T);
 /* 23E630 */ void mnNameNew_EnterFromMnName(UNK_T);
