@@ -14,7 +14,34 @@
 
 /* 0x802910B8 */ void itFlipper_Logic20_Thrown(Item_GObj* gobj);
 
-/// #it_80290938
+HSD_GObj* it_80290938(HSD_JObj* jobj)
+{
+    SpawnItem spawn;
+    Vec3 pos;
+    Item_GObj* gobj = NULL;
+
+    if (jobj != NULL) {
+        lb_8000B1CC(jobj, NULL, &pos);
+        spawn.kind = It_Kind_Flipper;
+        spawn.prev_pos = pos;
+        spawn.pos = spawn.prev_pos;
+        spawn.facing_dir = 1.0f;
+        spawn.x3C_damage = 0;
+        spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;
+        spawn.x0_parent_gobj = NULL;
+        spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
+        spawn.x44_flag.b0 = 0;
+        spawn.x40 = 0;
+        gobj = Item_80268B18(&spawn);
+        if (gobj != NULL) {
+            Item* ip = GET_ITEM(gobj);
+            ip->xDD4_itemVar.flipper.xDE8 = 1;
+            ip->xDD4_itemVar.flipper.xDEC = jobj;
+            it_80291254(gobj);
+        }
+    }
+    return gobj;
+}
 
 void itFlipper_Logic20_Spawned(Item_GObj* gobj)
 {
