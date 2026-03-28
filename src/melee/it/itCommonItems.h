@@ -709,10 +709,15 @@ typedef struct itHitodeman_ItemVars {
     /* +60 ip+E34 */ float x60;
     /* +64 ip+E38 */ float x64;
     /* +68 ip+E3C */ s32 x68;
-    /* +6C ip+E40 */ char pad_6C[0x18];
+    /* +6C ip+E40 */ float x6C;
+    /* +70 ip+E44 */ float x70;
+    /* +74 ip+E48 */ float x74;
+    /* +78 ip+E4C */ float x78;
+    /* +7C ip+E50 */ float x7C;
+    /* +80 ip+E54 */ float x80;
     /* +84 ip+E58 */ float x84;
     /* +88 ip+E5C */ s32 x88;
-    /* +8C ip+E60 */ char pad_8C[0x4];
+    /* +8C ip+E60 */ float x8C;
     /* +90 ip+E64 */ HSD_GObj* x90;
 } itHitodeman_ItemVars;
 
