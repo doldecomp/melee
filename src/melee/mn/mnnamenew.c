@@ -559,6 +559,78 @@ void fn_8023D0F8(void* arg0)
 
 /// #mnNameNew_8023D130
 
+s32 mnNameNew_8023D130(u8* arg0, u8 arg1, u8 arg2, s32 arg3)
+{
+    Vec3 sp30;
+    s32 sp2C;
+    HSD_JObj* jobj14;
+    HSD_JObj* jobj18;
+    HSD_JObj* jobj1C;
+    HSD_Text* text;
+    s32 i;
+    char* str;
+    s32* color_ptr;
+    f32 x_range;
+    f32 y_range;
+    f32 font_x;
+    f32 col_x;
+    s32 temp;
+    u8* table_b;
+    u8* table_a;
+    u8* base;
+    u8* sp2C_ptr;
+
+    PAD_STACK(8);
+
+    base = (u8*) mnNameNew_803EDA58;
+    jobj14 = *(HSD_JObj**)(arg0 + 0x14);
+    text = HSD_SisLib_803A6754(0, (s32) mn_804D6BB4);
+    jobj18 = *(HSD_JObj**)(arg0 + 0x18);
+    jobj1C = *(HSD_JObj**)(arg0 + 0x1C);
+    lb_8000B1CC(jobj14, (Vec3*)(base + 0x8CC), &sp30);
+    text->pos_x = sp30.x;
+    text->pos_y = -sp30.y;
+    text->pos_z = sp30.z;
+    text->font_size.x = 0.03f;
+    text->font_size.y = 0.04f;
+    *(s32*) &text->text_color = mnNameNew_804D4F6C;
+    x_range = HSD_JObjGetTranslationX(jobj18) - HSD_JObjGetTranslationX(jobj14);
+    y_range = -(HSD_JObjGetTranslationY(jobj1C) - HSD_JObjGetTranslationY(jobj14));
+    temp = (arg3 * 0x10) & 0xFF0;
+    table_b = base + temp + 0x5AC;
+    table_a = base + temp + 0x28C;
+    sp2C_ptr = (u8*) &sp2C;
+    for (i = 0; i < (s32) arg1; i++) {
+        if ((u8)(arg3 - 0x30) <= 1U) {
+            if ((i % 2) != 0) {
+                str = *(char**)(table_b + (i / 2) * 4);
+            } else {
+                str = *(char**)(table_a + (i / 2) * 4);
+            }
+        } else if ((arg2 == 0 && (i % 2) == 0) ||
+                   (arg2 == 1 && (i % 2) != 0))
+        {
+            str = *(char**)(table_a + (i / 2) * 4);
+        } else {
+            str = *(char**)(table_b + (i / 2) * 4);
+        }
+        font_x = text->font_size.x;
+        col_x = (f32)(i / 2) * x_range;
+        HSD_SisLib_803A6B98(text, col_x / font_x,
+                            ((f32)(i % 2) * y_range) / text->font_size.y,
+                            str, font_x, col_x);
+        if (i == (s32) mn_804A04F0.confirmed_selection) {
+            color_ptr = &mnNameNew_804D4F70;
+        } else {
+            color_ptr = &mnNameNew_804D4F74;
+        }
+        sp2C = *color_ptr;
+        HSD_SisLib_803A74F0(text, i, sp2C_ptr);
+    }
+    *(HSD_Text**)(arg0 + 0x20) = text;
+    return (s32) text;
+}
+
 /// #mnNameNew_GlyphVariantSetup
 
 s32 mnNameNew_8023DA08(u8* arg0)
