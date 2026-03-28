@@ -2,6 +2,7 @@
 
 #include "lb/lblanguage.h"
 #include "mn/mnmain.h"
+#include "mn/types.h"
 #include "sysdolphin/baselib/memory.h"
 #include "sysdolphin/baselib/sislib.h"
 
@@ -9,6 +10,12 @@ extern volatile char mnNameNew_NullCharacter;
 extern u8 mnNameNew_PortInUse;
 extern char mnNameNew_CurrentNameText[0x10];
 extern u8** AutoNamesList;
+
+static AnimLoopSettings mnNameNew_803EDA58[3] = {
+    { 0.0f, 19.0f, -0.1f },
+    { 20.0f, 39.0f, -0.1f },
+    { 0.0f, 10.0f, -0.1f },
+};
 
 /// #mnNameNew_8023B0F8
 
@@ -46,7 +53,37 @@ void fn_8023D0F8(void* arg0)
 
 /// #mnNameNew_GlyphVariantSetup
 
-/// #mnNameNew_8023DA08
+s32 mnNameNew_8023DA08(u8* arg0)
+{
+    s32 var_r29 = 1;
+
+    if (mn_8022ED6C(*(HSD_JObj**)(arg0 + 0x34), &mnNameNew_803EDA58[2]) <
+        mnNameNew_803EDA58[2].end_frame)
+    {
+        var_r29 = 0;
+    }
+    if (mn_8022ED6C(*(HSD_JObj**)(arg0 + 0x38), &mnNameNew_803EDA58[2]) <
+        mnNameNew_803EDA58[2].end_frame)
+    {
+        var_r29 = 0;
+    }
+    if (mn_8022EFD8(*(HSD_JObj**)(arg0 + 0x14), mnNameNew_803EDA58) <
+        mnNameNew_803EDA58->end_frame)
+    {
+        var_r29 = 0;
+    }
+    if (mn_8022EFD8(*(HSD_JObj**)(arg0 + 0x0C), mnNameNew_803EDA58) <
+        mnNameNew_803EDA58->end_frame)
+    {
+        var_r29 = 0;
+    }
+    if (mn_8022EFD8(*(HSD_JObj**)(arg0 + 0x1C), mnNameNew_803EDA58) <
+        mnNameNew_803EDA58->end_frame)
+    {
+        var_r29 = 0;
+    }
+    return var_r29;
+}
 
 /// #fn_8023DAEC
 
