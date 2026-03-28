@@ -1089,7 +1089,9 @@ typedef struct it_279D_ItemVars {
 typedef struct itMewtwoShadowball_ItemVars {
     /* ip+DD4 */ s32 x0;
     /* ip+DD8 */ Vec3 x4;
-    /* ip+DE4 */ s32 x10[3];
+    /* ip+DE4 */ f32 x10;
+    /* ip+DE8 */ s32 x14;
+    /* ip+DEC */ s32 x18;
     /* ip+DF0 */ s32 x1C;
     /* ip+DF4 */ s32 x20;
     /* ip+DF8 */ f32 x24;

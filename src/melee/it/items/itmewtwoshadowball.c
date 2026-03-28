@@ -4,6 +4,8 @@
 #include "ft/chara/ftKirby/ftKb_Init.h"
 #include "ft/chara/ftMewtwo/ftMt_SpecialN.h"
 #include "it/inlines.h"
+
+#include <baselib/jobj.h>
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
@@ -48,7 +50,7 @@ void it_2725_Logic101_Destroyed(Item_GObj* gobj)
     if (gobj != NULL) {
         Item* ip = gobj->user_data;
         efLib_DestroyAll(gobj);
-        if (ip->xDD4_itemVar.mewtwoshadowball.x10[1] == 0) {
+        if (ip->xDD4_itemVar.mewtwoshadowball.x14 == 0) {
             if (ip->xDD4_itemVar.mewtwoshadowball.x2C != NULL &&
                 ip->owner == ip->xDD4_itemVar.mewtwoshadowball.x2C)
             {
@@ -104,27 +106,35 @@ void it_802C5B18(Item_GObj* gobj)
     it_80275158(gobj, attr->x0);
     efLib_DestroyAll(gobj);
     ip->xDD4_itemVar.mewtwoshadowball.x28 = 0;
-    if (ip->xDD4_itemVar.mewtwoshadowball.x10[2] < 0) {
-        ip->xDD4_itemVar.mewtwoshadowball.x10[2] = 0;
+    if (ip->xDD4_itemVar.mewtwoshadowball.x18 < 0) {
+        ip->xDD4_itemVar.mewtwoshadowball.x18 = 0;
     }
-    if (ip->xDD4_itemVar.mewtwoshadowball.x10[2] >=
+    if (ip->xDD4_itemVar.mewtwoshadowball.x18 >=
         ip->xDD4_itemVar.mewtwoshadowball.x1C)
     {
-        ip->xDD4_itemVar.mewtwoshadowball.x10[2] =
+        ip->xDD4_itemVar.mewtwoshadowball.x18 =
             ip->xDD4_itemVar.mewtwoshadowball.x1C;
     }
     Item_80268E5C(gobj,
-                  ip->xDD4_itemVar.mewtwoshadowball.x10[2] + 1,
+                  ip->xDD4_itemVar.mewtwoshadowball.x18 + 1,
                   ITEM_ANIM_UPDATE);
     ip->on_accessory = fn_802C5E18;
     ip->xDD4_itemVar.mewtwoshadowball.x50 =
-        0.5F * ((f32) ip->xDD4_itemVar.mewtwoshadowball.x10[2] /
+        0.5F * ((f32) ip->xDD4_itemVar.mewtwoshadowball.x18 /
                 (f32) ip->xDD4_itemVar.mewtwoshadowball.x1C) +
         0.5F;
     PAD_STACK(8);
 }
 
-/// #itMewtwoshadowball_UnkMotion8_Anim
+bool itMewtwoshadowball_UnkMotion8_Anim(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    HSD_JObj* jobj = itGetJObjGrandchild(gobj);
+    Vec3 scale;
+    scale.x = scale.y = scale.z = ip->xDD4_itemVar.mewtwoshadowball.x10;
+    HSD_JObjSetScale(jobj, &scale);
+    return it_80273130(gobj);
+}
 
 void itMewtwoshadowball_UnkMotion8_Phys(Item_GObj* gobj)
 {
