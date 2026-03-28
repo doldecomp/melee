@@ -50,6 +50,30 @@ extern HSD_CObjDesc* MenMain_cam;
 extern UNK_T MenMain_lights;
 extern HSD_FogDesc* MenMain_fog;
 
+extern char** mnNameNew_803EDA8C[];
+extern char** mnNameNew_803EDB54[];
+extern char** mnNameNew_803EDC1C[];
+extern Vec3 mnNameNew_803EE324;
+
+typedef struct NameNewEntry {
+    /* 0x00 */ u8 x0;
+    /* 0x01 */ u8 x1;
+    /* 0x02 */ u8 x2;
+    /* 0x03 */ u8 x3;
+    /* 0x04 */ HSD_JObj* jobjs[19];
+    /* 0x50 */ u8 mode;
+    /* 0x51 */ u8 last_key_sel;
+    /* 0x52 */ u8 pad_52[2];
+    /* 0x54 */ HSD_GObj* variant_gobj;
+    /* 0x58 */ u8 cursor_pos;
+    /* 0x59 */ u8 name_index;
+    /* 0x5A */ u8 auto_history[5];
+    /* 0x5F */ u8 pad_5F;
+    /* 0x60 */ HSD_Text* key_text;
+    /* 0x64 */ HSD_Text* name_disp_text;
+    /* 0x68 */ HSD_Text* desc_text;
+} NameNewEntry; /* size = 0x6C */
+
 static AnimLoopSettings mnNameNew_803EDA58[3] = {
     { 0.0f, 19.0f, -0.1f },
     { 20.0f, 39.0f, -0.1f },
@@ -177,13 +201,12 @@ static s32 mnNameNew_804D4F78 = 0xFF;
 extern const s32 mnNameNew_804DBF44;
 extern const s32 mnNameNew_804DBF48;
 
-s32 mnNameNew_KeySetup(u8* arg0, u8 arg1)
+s32 mnNameNew_KeySetup(NameNewEntry* arg0, u8 arg1)
 {
     HSD_JObj* key_jobj;
     HSD_JObj* ref1;
     HSD_JObj* ref2;
     HSD_Text* text;
-    u8* base;
     Vec3 sp50;
     s32 sp4C;
     s32 sp48;
@@ -200,39 +223,38 @@ s32 mnNameNew_KeySetup(u8* arg0, u8 arg1)
 
     FORCE_PAD_STACK(20);
 
-    base = (u8*) mnNameNew_803EDA58;
     sp4C = mnNameNew_804DBF44;
     sp48 = mnNameNew_804DBF48;
 
     switch ((s32) arg1) {
     case 0:
-        arg0[0x50] = 0;
-        str_table = (char**)(base + 0x34);
+        arg0->mode = 0;
+        str_table = (char**) mnNameNew_803EDA8C;
         break;
     case 1:
-        arg0[0x50] = 1;
-        str_table = (char**)(base + 0xFC);
+        arg0->mode = 1;
+        str_table = (char**) mnNameNew_803EDB54;
         break;
     case 2:
-        arg0[0x50] = 2;
-        str_table = (char**)(base + 0x1C4);
+        arg0->mode = 2;
+        str_table = (char**) mnNameNew_803EDC1C;
         break;
     }
 
-    text = *(HSD_Text**)(arg0 + 0x60);
+    text = arg0->key_text;
     if (text != NULL) {
         HSD_SisLib_803A5CC4(text);
     }
     text = HSD_SisLib_803A6754(0, (s32) mn_804D6BB5);
-    *(HSD_Text**)(arg0 + 0x60) = text;
+    arg0->key_text = text;
 
-    key_jobj = HSD_JObjGetChild(*(HSD_JObj**)(arg0 + 0x44));
+    key_jobj = HSD_JObjGetChild(arg0->jobjs[16]);
     for (i = 0; i < 50; i++) {
         if (i == 0x2D) break;
         key_jobj = HSD_JObjGetNext(key_jobj);
     }
 
-    lb_8000B1CC(key_jobj, (Vec3*)(base + 0x8CC), &sp50);
+    lb_8000B1CC(key_jobj, &mnNameNew_803EE324, &sp50);
     text->pos_x = sp50.x;
     text->pos_y = -sp50.y;
     text->pos_z = sp50.z;
@@ -240,7 +262,7 @@ s32 mnNameNew_KeySetup(u8* arg0, u8 arg1)
     text->font_size.y = 0.04f;
     *(s32*) &text->text_color = mnNameNew_804D4F6C;
 
-    ref1 = HSD_JObjGetChild(*(HSD_JObj**)(arg0 + 0x44));
+    ref1 = HSD_JObjGetChild(arg0->jobjs[16]);
     for (i = 0; i < 50; i++) {
         if (i == 0x28) break;
         ref1 = HSD_JObjGetNext(ref1);
@@ -249,7 +271,7 @@ s32 mnNameNew_KeySetup(u8* arg0, u8 arg1)
     base_x = HSD_JObjGetTranslationX(key_jobj);
     x_range = HSD_JObjGetTranslationX(ref1) - base_x;
 
-    ref2 = HSD_JObjGetChild(*(HSD_JObj**)(arg0 + 0x44));
+    ref2 = HSD_JObjGetChild(arg0->jobjs[16]);
     for (i = 0; i < 50; i++) {
         if (i == 0x2E) break;
         ref2 = HSD_JObjGetNext(ref2);
@@ -281,14 +303,14 @@ s32 mnNameNew_KeySetup(u8* arg0, u8 arg1)
 }
 
 
-s32 mnNameNew_8023BAA8(u8* arg0, s32 arg1, u8 arg2)
+s32 mnNameNew_8023BAA8(NameNewEntry* arg0, s32 arg1, u8 arg2)
 {
     u8 mode;
 
     if (arg2 >= 0x32U && arg2 < 0x3AU) {
         if (arg1 & 1) {
             if (arg2 == 0x39) {
-                return ((arg0[0x51] / 5) * 5) + 4;
+                return ((arg0->last_key_sel / 5) * 5) + 4;
             }
             if (arg2 > 0x32U) {
                 return arg2 - 1;
@@ -297,7 +319,7 @@ s32 mnNameNew_8023BAA8(u8* arg0, s32 arg1, u8 arg2)
         }
         if (arg1 & 2) {
             if (arg2 == 0x39) {
-                return (arg0[0x51] / 5) * 5;
+                return (arg0->last_key_sel / 5) * 5;
             }
             if (arg2 == 0x38) {
                 return 0x32;
@@ -306,10 +328,10 @@ s32 mnNameNew_8023BAA8(u8* arg0, s32 arg1, u8 arg2)
         }
         if (arg1 & 4) {
             if (arg2 != 0x38 && arg2 != 0x39) {
-                return arg0[0x51] % 5;
+                return arg0->last_key_sel % 5;
             }
         } else if ((arg1 & 8) && arg2 != 0x38 && arg2 != 0x39) {
-            return (arg0[0x51] % 5) + 0x2D;
+            return (arg0->last_key_sel % 5) + 0x2D;
         }
     } else {
         if (arg1 & 1) {
@@ -328,7 +350,7 @@ s32 mnNameNew_8023BAA8(u8* arg0, s32 arg1, u8 arg2)
             if ((s32)(arg2 / 5) < 9) {
                 return arg2 + 5;
             }
-            mode = arg0[0x50];
+            mode = arg0->mode;
             switch ((s32) mode) {
             case 0:
                 return 0x33;
@@ -341,7 +363,7 @@ s32 mnNameNew_8023BAA8(u8* arg0, s32 arg1, u8 arg2)
             if ((arg2 / 5) != 0) {
                 return arg2 - 5;
             }
-            mode = arg0[0x50];
+            mode = arg0->mode;
             switch ((s32) mode) {
             case 0:
                 return 0x33;
@@ -602,7 +624,7 @@ void mnNameNew_GlyphVariantInput(void)
             } else {
                 *(u8*)(data + 0x50) = 0;
             }
-            mnNameNew_KeySetup(data, *(u8*)(data + 0x50));
+            mnNameNew_KeySetup((NameNewEntry*) data, *(u8*)(data + 0x50));
             mnNameNew_8023B0F8((HSD_GObj*) mnNameNew_804D6C08,
                                (u8) mn_804A04F0.hovered_selection);
             mnNameNew_8023B314(data, (s32) mn_804A04F0.hovered_selection);
@@ -659,8 +681,7 @@ void mnNameNew_GlyphVariantInput(void)
 void mnNameNew_MainInput(HSD_GObj* arg0)
 {
     u8 sp24[16];
-    u8* data;
-    u8* base;
+    NameNewEntry* data;
     char* name_text;
     u32 buttons;
     s32 var_r29;
@@ -676,10 +697,9 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
     PAD_STACK(24);
 
     name_text = mnNameNew_CurrentNameText;
-    data = (u8*) ((HSD_GObj*) mnNameNew_804D6C08)->user_data;
-    base = (u8*) mnNameNew_803EDA58;
+    data = ((HSD_GObj*) mnNameNew_804D6C08)->user_data;
 
-    if (*(u32*)(data + 0x54) != 0) {
+    if (data->variant_gobj != NULL) {
         mnNameNew_GlyphVariantInput();
         return;
     }
@@ -692,10 +712,10 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
     if (buttons & 0x200) {
         u16 sel = mn_804A04F0.hovered_selection;
         if (sel < 0x32U) {
-            if (data[0x50] != 2 && sel < 0x32U)
+            if (data->mode != 2 && sel < 0x32U)
             {
                 key_off = (((u8) sel) << 4) & 0xFF0;
-                key_char = *(u8**)(base + key_off + 0x28C);
+                key_char = *(u8**)((u8*) mnNameNew_803EDCE4 + key_off);
                 if ((s8) mnNameNew_SpaceCharacter[0] == (s8) key_char[0] &&
                     (s8) mnNameNew_SpaceCharacter[1] == (s8) key_char[1])
                 {
@@ -709,25 +729,25 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
                     n = 0;
                     {
                         u16 sel2 = mn_804A04F0.hovered_selection;
-                        u8** ptrs = (u8**)(base + ((((u8) sel2) << 4) & 0xFF0) + 0x28C);
+                        u8** ptrs = (u8**)((u8*) mnNameNew_803EDCE4 + ((((u8) sel2) << 4) & 0xFF0));
                         null_char = (s8) mnNameNew_NullCharacter;
                         while (null_char != (s8) *ptrs[0]) {
                             ptrs++;
                             n++;
                         }
                     }
-                    *(u32*)(data + 0x54) = mnNameNew_GlyphVariantSetup(
-                        data, (u8)((n * 2) & 0xFE),
+                    data->variant_gobj = (HSD_GObj*) mnNameNew_GlyphVariantSetup(
+                        (u8*) data, (u8)((n * 2) & 0xFE),
                         (u8) mn_804A04F0.hovered_selection);
                     return;
                 }
-                cursor = data[0x58];
+                cursor = data->cursor_pos;
                 name_text[cursor * 3] = (char) mnNameNew_SpaceCharacter[0];
                 name_text[cursor * 3 + 1] = (char) mnNameNew_SpaceCharacter[1];
                 name_text[cursor * 3 + 2] = (char) mnNameNew_NullCharacter;
                 lbAudioAx_80024030(1);
-                if (data[0x58] < 3) {
-                    data[0x58] = (u8)(data[0x58] + 1);
+                if (data->cursor_pos < 3) {
+                    data->cursor_pos = (u8)(data->cursor_pos + 1);
                 } else {
                     mn_804A04F0.hovered_selection = 0x39;
                 }
@@ -735,12 +755,12 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
                 return;
             }
             AddCharacterToName(
-                (u8*) &name_text[data[0x58] * 3],
+                (u8*) &name_text[data->cursor_pos * 3],
                 (s32)(u8) mn_804A04F0.hovered_selection,
-                0U, data[0x50]);
+                0U, data->mode);
             lbAudioAx_80024030(1);
-            if (data[0x58] < 3) {
-                data[0x58] = (u8)(data[0x58] + 1);
+            if (data->cursor_pos < 3) {
+                data->cursor_pos = (u8)(data->cursor_pos + 1);
             } else {
                 mn_804A04F0.hovered_selection = 0x39;
             }
@@ -754,9 +774,9 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
                 return;
 
             case 0x33:
-                if (data[0x50] != 0) {
+                if (data->mode != 0) {
                     lbAudioAx_80024030(1);
-                    data[0x50] = 0;
+                    data->mode = 0;
                     mnNameNew_KeySetup(data, 0);
                     mnNameNew_8023B0F8((HSD_GObj*) mnNameNew_804D6C08,
                                        (u8) mn_804A04F0.hovered_selection);
@@ -765,9 +785,9 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
                 break;
 
             case 0x34:
-                if (data[0x50] != 1) {
+                if (data->mode != 1) {
                     lbAudioAx_80024030(1);
-                    data[0x50] = 1;
+                    data->mode = 1;
                     mnNameNew_KeySetup(data, 1);
                     mnNameNew_8023B0F8((HSD_GObj*) mnNameNew_804D6C08,
                                        (u8) mn_804A04F0.hovered_selection);
@@ -776,9 +796,9 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
                 break;
 
             case 0x35:
-                if (data[0x50] != 2) {
+                if (data->mode != 2) {
                     lbAudioAx_80024030(1);
-                    data[0x50] = 2;
+                    data->mode = 2;
                     mnNameNew_KeySetup(data, 2);
                     mnNameNew_8023B0F8((HSD_GObj*) mnNameNew_804D6C08,
                                        (u8) mn_804A04F0.hovered_selection);
@@ -788,7 +808,7 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
 
             case 0x36:
                 lbAudioAx_80024030(0);
-                cursor = data[0x58];
+                cursor = data->cursor_pos;
                 {
                     char* slot = &name_text[cursor * 3];
                     if ((s8) mnNameNew_NullCharacter != (s8) slot[0]) {
@@ -803,7 +823,7 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
                 if (cursor != 0) {
                     name_text[(u8)(cursor - 1) * 3] =
                         (char) mnNameNew_NullCharacter;
-                    data[0x58] = (u8)(data[0x58] - 1);
+                    data->cursor_pos = (u8)(data->cursor_pos - 1);
                     mnNameNew_8023CE4C();
                     return;
                 }
@@ -833,9 +853,9 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
                     }
                 }
                 if (var_r29 == 4) {
-                    data[0x58] = 3;
+                    data->cursor_pos = 3;
                 } else {
-                    data[0x58] = (u8) var_r29;
+                    data->cursor_pos = (u8) var_r29;
                 }
                 mnNameNew_8023CE4C();
                 return;
@@ -887,8 +907,8 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
                 }
                 if (n != 0) {
                     lbAudioAx_80024030(1);
-                    CreateNameAtIndex((s32) data[0x59]);
-                    WriteCharactersForNameAtIndex(data[0x59],
+                    CreateNameAtIndex((s32) data->name_index);
+                    WriteCharactersForNameAtIndex(data->name_index,
                                                   (s32) mn_802295AC());
                     mnNameNew_8023B224(1U);
                     return;
@@ -947,8 +967,8 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
                 }
                 if (n != 0) {
                     lbAudioAx_80024030(1);
-                    CreateNameAtIndex((s32) data[0x59]);
-                    WriteCharactersForNameAtIndex(data[0x59],
+                    CreateNameAtIndex((s32) data->name_index);
+                    WriteCharactersForNameAtIndex(data->name_index,
                                                   (s32) mn_802295AC());
                     mnNameNew_8023B224(1U);
                     return;
@@ -962,22 +982,22 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
         if (buttons & 0xC0) {
             lbAudioAx_80024030(1);
             if (buttons & 0x40) {
-                if (data[0x50] != 0) {
-                    data[0x50] = (u8)(data[0x50] - 1);
+                if (data->mode != 0) {
+                    data->mode = (u8)(data->mode - 1);
                 } else {
-                    data[0x50] = 2;
+                    data->mode = 2;
                 }
             } else {
-                if (data[0x50] < 2) {
-                    data[0x50] = (u8)(data[0x50] + 1);
+                if (data->mode < 2) {
+                    data->mode = (u8)(data->mode + 1);
                 } else {
-                    data[0x50] = 0;
+                    data->mode = 0;
                 }
             }
-            mnNameNew_KeySetup(data, data[0x50]);
+            mnNameNew_KeySetup(data, data->mode);
             mnNameNew_8023B0F8((HSD_GObj*) mnNameNew_804D6C08,
                                (u8) mn_804A04F0.hovered_selection);
-            mnNameNew_8023B314(data, (s32) mn_804A04F0.hovered_selection);
+            mnNameNew_8023B314((u8*) data, (s32) mn_804A04F0.hovered_selection);
             return;
         }
         if (buttons & 0x20) {
@@ -990,7 +1010,7 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
                 mnNameNew_8023B224(0U);
                 return;
             }
-            cursor = data[0x58];
+            cursor = data->cursor_pos;
             if (null_char != (s8) name_text[cursor * 3]) {
                 n = 1;
             } else {
@@ -1004,7 +1024,7 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
             if (cursor != 0) {
                 name_text[(u8)(cursor - 1) * 3] =
                     (char) mnNameNew_NullCharacter;
-                data[0x58] = (u8)(data[0x58] - 1);
+                data->cursor_pos = (u8)(data->cursor_pos - 1);
                 mnNameNew_8023CE4C();
                 return;
             }
@@ -1018,7 +1038,7 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
                 lbAudioAx_80024030(2);
                 mn_804A04F0.hovered_selection = (u16) new_sel;
                 if (new_sel < 0x32) {
-                    data[0x51] = new_sel;
+                    data->last_key_sel = new_sel;
                 }
             }
         }
@@ -1623,7 +1643,7 @@ void mnNameNew_8023E32C(s32 arg0)
         HSD_JObjAddChild(*(HSD_JObj**)(data + 0x44), key_jobj);
         k++;
     } while (k < 0x32);
-    *(s32*)(data + 0x60) = mnNameNew_KeySetup(data, *(u8*)(data + 0x50));
+    *(s32*)(data + 0x60) = mnNameNew_KeySetup((NameNewEntry*) data, *(u8*)(data + 0x50));
     mnNameNew_8023B314(data, (s32) data[1]);
     mnNameNew_8023B0F8(gobj, data[1]);
 }
