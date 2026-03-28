@@ -1777,9 +1777,9 @@ void grCastle_801D02B8(Ground_GObj* gobj)
                         Vec3 vel;
                         Vec3 pos;
                         lb_8000B1CC(gp->gv.castle10.effect_a[i], NULL, &pos);
+                        pos.y += 5.0f;
                         vel.z = 0.0f;
                         vel.x = 0.0f;
-                        pos.y += 5.0f;
                         vel.y = grCs_804D6970->x50;
                         it_8026F7C8(&pos, &vel, 1);
                         HSD_JObjSetFlags(gp->gv.castle10.effect_a[i],
