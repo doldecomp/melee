@@ -174,6 +174,7 @@ struct GroundVars_unk {
     int xD4;
     int xD8;
     float xDC;
+    int xE0;
 };
 
 struct GroundVars_izumi {

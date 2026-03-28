@@ -51,7 +51,44 @@ extern StaticModelDesc MenMainCursorSs_Top;
 
 /// #mn_802307F8
 
-/// #mn_802308F0
+void mn_802308F0(HSD_GObj* gobj, int arg1, int arg2)
+{
+    u8* data = HSD_GObjGetUserData(gobj);
+    u16 sel;
+    u8 kind;
+
+    if (arg1 != 0) {
+        sel = mn_804A04F0.hovered_selection;
+    } else {
+        sel = data[1];
+    }
+    kind = sel;
+
+    switch (data[0xA]) {
+    case 2:
+    case 4:
+        if (*(HSD_Text**) (data + 0x130) != NULL) {
+            HSD_SisLib_803A5CC4(*(HSD_Text**) (data + 0x130));
+            *(HSD_Text**) (data + 0x130) = NULL;
+        }
+        break;
+    case 1:
+    case 3:
+        if (*(HSD_Text**) (data + 0x130) == NULL) {
+            mn_802307F8(data, kind, mn_804A04F0.confirmed_selection);
+        }
+        break;
+    case 0:
+        if (arg1 != 0 ||
+            (arg2 != 0 && (kind == 0 || kind == 2 || kind == 4)))
+        {
+            mn_802307F8(data, kind, mn_804A04F0.confirmed_selection);
+        }
+        break;
+    case 5:
+        break;
+    }
+}
 
 /// #fn_802309F0
 

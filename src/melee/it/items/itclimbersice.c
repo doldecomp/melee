@@ -42,7 +42,56 @@ void it_2725_Logic90_Destroyed(Item_GObj* gobj)
     ip->xDD4_itemVar.climbersice.x0 = NULL;
 }
 
-/// #it_802C1854
+bool it_802C1854(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    bool result = false;
+    CollData* coll = &ip->x378_itemColl;
+    itClimbersIceAttributes* sa = ip->xC4_article_data->x4_specialAttributes;
+
+    if (coll->env_flags & 0x18000) {
+        f32 normal_x = coll->floor.normal.x;
+        s32 sign_normal;
+        s32 sign_vel;
+        f32 accel;
+
+        if (normal_x < 0.0f) {
+            sign_normal = -1;
+        } else {
+            sign_normal = 1;
+        }
+
+        if (ip->x40_vel.x < 0.0f) {
+            sign_vel = -1;
+        } else {
+            sign_vel = 1;
+        }
+
+        if (sign_vel != sign_normal) {
+            accel = sa->x1C * (normal_x * sa->x14);
+        } else {
+            accel = sa->x18 * (normal_x * sa->x14);
+        }
+
+        ip->x40_vel.x += accel;
+
+        {
+            f32 abs_vel = ip->x40_vel.x;
+            if (abs_vel < 0.0f) {
+                abs_vel = -abs_vel;
+            }
+            if (abs_vel < sa->x24) {
+                it_8026BD84(gobj);
+                it_8026BD6C(gobj);
+                it_802C1950(gobj);
+                efLib_DestroyAll(gobj);
+                result = true;
+            }
+        }
+    }
+
+    return result;
+}
 
 void it_802C1950(Item_GObj* gobj)
 {
@@ -148,7 +197,7 @@ bool itClimbersice_UnkMotion2_Anim(Item_GObj* gobj)
 
 void itClimbersice_UnkMotion2_Phys(Item_GObj* gobj)
 {
-    if (it_802C1854()) {
+    if (it_802C1854(gobj)) {
         Item* ip = GET_ITEM(gobj);
         itClimbersIceAttributes* sa =
             ip->xC4_article_data->x4_specialAttributes;
