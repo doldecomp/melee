@@ -5,6 +5,7 @@
 #include "gm/gmmain_lib.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
+#include "lb/lbarchive.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbcardgame.h"
 #include "lb/lblanguage.h"
@@ -14,6 +15,7 @@
 #include "mn/types.h"
 
 #include <dolphin/os.h>
+#include "sc/types.h"
 #include "sysdolphin/baselib/gobj.h"
 #include "sysdolphin/baselib/gobjgxlink.h"
 #include "sysdolphin/baselib/gobjplink.h"
@@ -28,6 +30,7 @@ extern volatile char mnNameNew_NullCharacter;
 extern u8 mnNameNew_PortInUse;
 extern char mnNameNew_CurrentNameText[0x10];
 extern u8** AutoNamesList;
+extern char** NotAllowedNamesList;
 extern u8 mn_804D6BB4;
 extern u8 mn_804D6BB5;
 extern u8 mnNameNew_804D4F7C[4];
@@ -36,6 +39,14 @@ extern u8 mnNameNew_SpaceCharacter[2];
 extern char* mnNameNew_803EDCE4[];
 extern void* mnNameNew_804A06F0[];
 extern void* mnNameNew_804A0700[];
+extern void* mnNameNew_804A0710[];
+extern void* mnNameNew_804A0720[];
+
+extern StaticModelDesc MenMainBack_Top;
+extern StaticModelDesc MenMainPanel_Top;
+extern HSD_CObjDesc* MenMain_cam;
+extern UNK_T MenMain_lights;
+extern HSD_FogDesc* MenMain_fog;
 
 static AnimLoopSettings mnNameNew_803EDA58[3] = {
     { 0.0f, 19.0f, -0.1f },
@@ -984,7 +995,101 @@ void mnNameNew_EnterFromMnName(UNK_T arg0)
 
 /// #mnNameNew_EnterFromMnCharSel
 
+void mnNameNew_EnterFromMnCharSel(HSD_Archive* arg0, s32 arg1)
+{
+    u8* base;
+    u8 name_count;
+    HSD_GObjProc* proc;
+    char* text;
+    s32 is_us;
+
+    PAD_STACK(16);
+
+    base = (u8*) mnNameNew_803EDA58;
+    text = mnNameNew_CurrentNameText;
+
+    mn_804D6BC8.cooldown = 0x14;
+    mn_804D6BC8.x2 = 0;
+    mn_804D6BC8.x4 = 0;
+    *(u32*)((u8*)&mn_804A04F0 + 0xC) = 0;
+    *(u32*)((u8*)&mn_804A04F0 + 0x8) = 0;
+    mn_804A04F0.prev_menu = mn_804A04F0.cur_menu;
+    mn_804A04F0.cur_menu = 0x12;
+    if (lbLang_IsSavedLanguageUS()) {
+        mn_804A04F0.hovered_selection = 0x2D;
+    } else {
+        mn_804A04F0.hovered_selection = 0;
+    }
+    mn_804A04F0.x10 = 1;
+    HSD_SisLib_803A5E70();
+    mnNameNew_PortInUse = arg1;
+
+    lbArchive_LoadSections(
+        arg0,
+        (void**) &MenMainBack_Top.joint, (char*)(base + 0x934),
+        &MenMainBack_Top.animjoint, (char*)(base + 0x94C),
+        &MenMainBack_Top.matanim_joint, (char*)(base + 0x968),
+        &MenMainBack_Top.shapeanim_joint, (char*)(base + 0x988),
+        &MenMain_cam, (char*)(base + 0x9A8),
+        &MenMain_lights, (char*)(base + 0x9C4),
+        &MenMain_fog, (char*)(base + 0x9DC),
+        &MenMainPanel_Top.joint, (char*)(base + 0x9EC),
+        &MenMainPanel_Top.animjoint, (char*)(base + 0xA04),
+        &MenMainPanel_Top.matanim_joint, (char*)(base + 0xA20),
+        &MenMainPanel_Top.shapeanim_joint, (char*)(base + 0xA40),
+        &mnNameNew_804A06F0[0], (char*)(base + 0xA64),
+        &mnNameNew_804A06F0[1], (char*)(base + 0xA80),
+        &mnNameNew_804A06F0[2], (char*)(base + 0xAA0),
+        &mnNameNew_804A06F0[3], (char*)(base + 0xAC4),
+        &mnNameNew_804A0700[0], (char*)(base + 0xAE8),
+        &mnNameNew_804A0700[1], (char*)(base + 0xB04),
+        &mnNameNew_804A0700[2], (char*)(base + 0xB24),
+        &mnNameNew_804A0700[3], (char*)(base + 0xB48),
+        &mnNameNew_804A0710[0], (char*)(base + 0xB6C),
+        &mnNameNew_804A0710[1], (char*)(base + 0xB88),
+        &mnNameNew_804A0710[2], (char*)(base + 0xBA8),
+        &mnNameNew_804A0710[3], (char*)(base + 0xBCC),
+        &mnNameNew_804A0720[0], (char*)(base + 0xBF0),
+        &mnNameNew_804A0720[1], (char*)(base + 0xC0C),
+        &mnNameNew_804A0720[2], (char*)(base + 0xC2C),
+        &mnNameNew_804A0720[3], (char*)(base + 0xC50),
+        NULL);
+
+    is_us = lbLang_IsSavedLanguageUS();
+    if (is_us) {
+        lbArchive_LoadSections(
+            arg0,
+            (void**) &AutoNamesList, (char*)(base + 0xC78),
+            &NotAllowedNamesList, (char*)(base + 0xC8C),
+            NULL);
+    } else {
+        lbArchive_LoadSections(
+            arg0,
+            (void**) &AutoNamesList, (char*)(base + 0xCA0),
+            &NotAllowedNamesList, (char*)(base + 0xCB0),
+            NULL);
+    }
+
+    mn_8022C304();
+    mn_8022BCF8();
+    mn_8022BEDC(mn_8022BE34());
+    mn_80229B2C();
+    mn_80229DC0();
+    name_count = (u8) GetNameCount();
+
+    proc = HSD_GObj_SetupProc(GObj_Create(0U, 1U, 0x80U),
+                              (HSD_GObjEvent) mnNameNew_MainInput, 0U);
+    proc->flags_3 = HSD_GObj_804D783C;
+
+    text[0] = mnNameNew_NullCharacter;
+    text[3] = mnNameNew_NullCharacter;
+    text[6] = mnNameNew_NullCharacter;
+    text[9] = mnNameNew_NullCharacter;
+    mnNameNew_8023E32C((s32) name_count);
+    lbAudioAx_80023F28(gmMainLib_8015ECB0());
+}
+
 void mnNameNew_8023EA08(UNK_T arg0)
 {
-    mnNameNew_EnterFromMnCharSel(arg0, 4);
+    mnNameNew_EnterFromMnCharSel((HSD_Archive*) arg0, 4);
 }

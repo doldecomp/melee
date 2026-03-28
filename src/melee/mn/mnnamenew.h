@@ -28,7 +28,7 @@
 /* 23E264 */ s32 InitNameEntryUIState(u8*, s32);
 /* 23E32C */ void mnNameNew_8023E32C(s32);
 /* 23E630 */ void mnNameNew_EnterFromMnName(UNK_T);
-/* 23E6D0 */ void mnNameNew_EnterFromMnCharSel(UNK_T, int);
+/* 23E6D0 */ void mnNameNew_EnterFromMnCharSel(HSD_Archive*, s32);
 /* 23EA08 */ void mnNameNew_8023EA08(UNK_T);
 
 #endif
