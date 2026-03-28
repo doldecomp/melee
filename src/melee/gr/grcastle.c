@@ -711,21 +711,30 @@ void grCastle_801CDFD8(Ground_GObj* gobj)
 
 s32 grCastle_801CE054(Ground_GObj* gobj)
 {
+    s16* new_var3;
     s16 arr[9];
     s32 count = 0;
     s32 ctr;
+    void* new_var2;
     s32 val = 0;
-    Ground* gp = GET_GROUND(gobj);
-    s16 picked;
+    Ground* gp;
+    unsigned int picked;
     s32 idx;
+    s32 new_var;
+    s16* ptr;
     s32 i;
 
+    count = (new_var = count);
+    ptr = &arr[count];
+    new_var2 = HSD_GObjGetUserData(gobj);
     for (ctr = 3; ctr != 0; ctr--) {
+        gp = (Ground*) new_var2;
         for (i = 0; i < 3; i++) {
             if (val != gp->gv.castle4.xD8 && val != gp->gv.castle4.xDA &&
                 val != gp->gv.castle4.xDC)
             {
-                arr[count] = (s16) val;
+                new_var3 = ptr++;
+                *new_var3 = (s16) val;
                 count++;
             }
             val++;
@@ -741,10 +750,14 @@ s32 grCastle_801CE054(Ground_GObj* gobj)
     picked = arr[idx];
     (&gp->gv.castle4.xD8)[gp->gv.castle4.xD6] = picked;
 
-    if (gp->gv.castle4.xD6 == 2) {
-        gp->gv.castle4.xD6 = 0;
-    } else {
-        gp->gv.castle4.xD6 = gp->gv.castle4.xD6 + 1;
+    {
+        s32 d6 = (s32) gp->gv.castle4.xD6;
+        if (2 == d6) {
+            d6 = 0;
+        } else {
+            d6 = d6 + 1;
+        }
+        gp->gv.castle4.xD6 = (s16) d6;
     }
 
     return (s32) picked;
