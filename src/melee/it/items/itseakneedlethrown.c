@@ -44,7 +44,14 @@ bool itSeakneedlethrown_UnkMotion0_Anim(Item_GObj* gobj)
     return it_80273130(gobj);
 }
 
-/// #itSeakneedlethrown_UnkMotion1_Anim
+bool itSeakneedlethrown_UnkMotion1_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    HSD_JObj* jobj = HSD_JObjGetChild(GET_JOBJ(gobj));
+    ip->xDD4_itemVar.seakneedlethrown.xDE4 = ip->pos;
+    HSD_JObjAddRotationX(jobj, ip->xDD4_itemVar.seakneedlethrown.xDD4);
+    return it_80273130(gobj);
+}
 
 /// #itSeakneedlethrown_UnkMotion2_Anim
 
