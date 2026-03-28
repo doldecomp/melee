@@ -535,8 +535,8 @@ typedef struct grInishie1_GroundVars {
     f32 xF4;
     f32 xF8;
     f32 xFC;
-    f32 x100;
-    f32 x104;
+    HSD_JObj* x100;
+    HSD_JObj* x104;
     HSD_JObj* x108;
     HSD_JObj* x10C;
 } grInishie1_GroundVars;
