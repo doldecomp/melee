@@ -887,10 +887,19 @@ inline void fake_HSD_JObjSetTranslate(HSD_JObj* jobj, Vec3* translate)
 
 void grCastle_801CE578(Ground_GObj* gobj)
 {
+    Ground *new_var2;
+    int new_var4;
+
+    void *new_var;
+    Ground *new_var3;
     Ground* gp = (Ground*) gobj->user_data;
     Vec3 pos;
     Vec3 jpos;
-    PAD_STACK(44);
+    new_var4 = 0;
+   do
+   {
+     unsigned char _[44];
+   } while (new_var4);
 
     {
         CmSubject* cam = (CmSubject*) gp->gv.castle11.xD8;
@@ -901,14 +910,16 @@ void grCastle_801CE578(Ground_GObj* gobj)
         }
     }
 
-    gp = (Ground*) gobj->user_data;
-    if (gp->gv.castle11.xCC == 0) {
-        s16 timer = gp->gv.castle11.xCA;
-        gp->gv.castle11.xCA = timer - 1;
-        if (timer < 0) {
-            gp->gv.castle11.xCC = (u32) grCastle_801CD4D0(2);
-            Ground_801C53EC(0x53026);
-            grCastle_801CE3AC_dontinline(gobj);
+    {
+        Ground* gp2 = (Ground*) gobj->user_data;
+        if (gp2->gv.castle11.xCC == 0) {
+            s16 timer = gp2->gv.castle11.xCA;
+            gp2->gv.castle11.xCA = timer - 1;
+            if (timer < 0) {
+                gp2->gv.castle11.xCC = (u32) grCastle_801CD4D0(2);
+                Ground_801C53EC(0x53026);
+                grCastle_801CE3AC_dontinline(gobj);
+            }
         }
     }
 
@@ -924,7 +935,8 @@ void grCastle_801CE578(Ground_GObj* gobj)
             Ground_801C5544(gp, 0);
         }
     } else {
-        gp = (Ground*) gobj->user_data;
+        new_var2 = (Ground *) gobj->user_data;
+        gp = new_var2;
         {
             s16 timer = gp->gv.castle11.xC8;
             gp->gv.castle11.xC8 = timer - 1;
@@ -937,7 +949,7 @@ void grCastle_801CE578(Ground_GObj* gobj)
                 {
                     HSD_GObj* newobj = grCastle_801CD4D0(1);
                     if (newobj != NULL) {
-                        HSD_JObj* jobj = (HSD_JObj*) newobj->hsd_obj;
+                        HSD_JObj* jobj = HSD_GObjGetHSDObj(newobj);
                         lb_8000B1CC(Ground_801C3FA4(gobj, 0), NULL, &jpos);
                         fake_HSD_JObjSetTranslate(jobj, &jpos);
                         lb_800119DC(&jpos, 0xB4, 20.0f, 0.1f, 1.0471976f);
@@ -945,9 +957,7 @@ void grCastle_801CE578(Ground_GObj* gobj)
                 }
 
                 {
-                    Ground* sat =
-                        (Ground*) ((HSD_GObj*) gp->gv.castle11.xD4)
-                            ->user_data;
+                    Ground *sat = (Ground *) (new_var = ((HSD_GObj *) gp->gv.castle11.xD4)->user_data);
                     s32 rand;
                     s32 range;
 
@@ -967,7 +977,7 @@ void grCastle_801CE578(Ground_GObj* gobj)
                         (s16) (grCs_804D6970->xC + rand);
                 }
 
-                gp = (Ground*) gobj->user_data;
+                gp = (new_var3 = (Ground *) gobj->user_data);
                 if (gp->gv.castle11.xD8 != 0) {
                     Camera_800290D4(
                         (CmSubject*) gp->gv.castle11.xD8);
