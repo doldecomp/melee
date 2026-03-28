@@ -626,9 +626,9 @@ struct ftData {
         /* +13 */ u8 x13;
         /* +14 */ u8 x14;
     }* x8;
-    /*  +C */ struct S_TEMP4* xC;
+    /*  +C */ struct Fighter_WaitAnimData* xC;
     /* +10 */ u8 (*x10)[2];
-    /* +14 */ struct S_TEMP4* x14;
+    /* +14 */ struct Fighter_WaitAnimData* x14;
     /* +18 */ u8 (*x18)[2];
     /* +1C */ struct ftData_x1C {
         u16 x0; ///< Fighter_Part
@@ -887,11 +887,11 @@ struct MotionState {
     HSD_GObjEvent cam_cb;
 };
 
-struct S_TEMP4 {
+struct Fighter_WaitAnimData {
     char* x0;
     s32 x4;
     s32 x8;
-    ftSubactionList* xC;
+    union CmdUnion* xC;
     s32 x10_animCurrFlags;
     u32 x14;
 };
@@ -938,10 +938,6 @@ struct Fighter_DemoStrings {
     /* fp+207C */ S32Vec2 x207C;
     /* fp+2084 */ u32 x2084;
     /* fp+2088 */ u16 x2088;
-};
-
-struct ftSubactionList {
-    u8 x0_opcode;
 };
 
 struct ftDeviceUnk3 {
@@ -1122,7 +1118,7 @@ struct Fighter {
     /*   fp+18 */ s32 x18;
     /*   fp+1C */ MotionState* x1C_actionStateList;
     /*   fp+20 */ MotionState* x20_actionStateList;
-    /*   fp+24 */ struct S_TEMP4* x24;
+    /*   fp+24 */ struct Fighter_WaitAnimData* x24;
     /*   fp+28 */ u8 (*x28)[2];
     /*   fp+2C */ float facing_dir;
     /*   fp+30 */ float facing_dir1;

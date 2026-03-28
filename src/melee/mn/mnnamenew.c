@@ -391,7 +391,7 @@ s32 PickAutoName(HSD_GObj* arg0)
                 count++;
             }
             pick = HSD_Randi(count);
-        } while (IsNameUnique((s32) AutoNamesList[pick]) != 0);
+        } while (IsNameUnique((char*) AutoNamesList[pick]) != 0);
 
         if (pick == (s32) data[0x5A]) {
             dup = 1;
@@ -885,8 +885,8 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
                     n = 0;
                 }
                 if (n == 0 && NameContainsOnlySpaces() == 0 &&
-                    IsNameUnique((s32) sp24) == 0 &&
-                    IsNameNotAllowed((s32) sp24) == 0)
+                    IsNameUnique((char*) sp24) == 0 &&
+                    IsNameNotAllowed((char*) sp24) == 0)
                 {
                     n = 1;
                 } else {
@@ -945,8 +945,8 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
                     n = 0;
                 }
                 if (n == 0 && NameContainsOnlySpaces() == 0 &&
-                    IsNameUnique((s32) sp24) == 0 &&
-                    IsNameNotAllowed((s32) sp24) == 0)
+                    IsNameUnique((char*) sp24) == 0 &&
+                    IsNameNotAllowed((char*) sp24) == 0)
                 {
                     n = 1;
                 } else {

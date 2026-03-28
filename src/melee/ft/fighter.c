@@ -945,7 +945,7 @@ void Fighter_ChangeMotionState(Fighter_GObj* gobj, FtMotionId msid,
     HSD_JObj* jobj = GET_JOBJ(gobj);
     Fighter* fp = GET_FIGHTER(gobj);
     MotionState* new_motion_state;
-    struct S_TEMP4* unk_struct_x18;
+    struct Fighter_WaitAnimData* unk_struct_x18;
     s32 bone_index;
     u8(*unk_byte_ptr)[2];
     bool animflags_bool;

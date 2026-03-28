@@ -251,7 +251,7 @@ loop:
     }
 skip_dirty:
 
-    if (arg->idx == un_80304870() - 1) {
+    if (arg->idx == un_GetTrophyTotal() - 1) {
         float pos;
         jobj = ((TyListState*) data)->jobj;
         pos = arg->x30;
@@ -507,7 +507,7 @@ void un_803147C4(void)
     }
 
     un_80307470(0);
-    if (un_80304870() != 0) {
+    if (un_GetTrophyTotal() != 0) {
         memzero(state, 0x2AC);
         un_80313774();
     }
@@ -521,7 +521,7 @@ void un_803148E4(s32 arg0)
     TyArchiveData* archive = un_804D6ED8;
     PAD_STACK(8);
 
-    if (un_80304870() != 0) {
+    if (un_GetTrophyTotal() != 0) {
         if (arg0 != 0) {
             un_804A284C[0x12A] = state->selectedIdx;
             un_804A284C[0x12B] = un_804D6EDC[state->selectedIdx];
@@ -529,7 +529,7 @@ void un_803148E4(s32 arg0)
             mode->x2 = state->x29C;
             mode->x3 = state->x2B8;
         } else {
-            if (un_80304870() != 0) {
+            if (un_GetTrophyTotal() != 0) {
                 s16 val = un_804D6EDC[state->selectedIdx];
                 un_803067BC(0, 0);
                 state->selectedIdx = un_803062BC(val);
