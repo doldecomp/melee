@@ -487,6 +487,50 @@ void fn_8023DAEC(HSD_GObj* arg0)
 
 /// #mnNameNew_8023E0D8
 
+void mnNameNew_8023E0D8(u8* arg0)
+{
+    HSD_JObj* jobj;
+    s32 i;
+    u16* table;
+
+    jobj = *(HSD_JObj**)(arg0 + 0x34);
+    HSD_JObjReqAnim(jobj, mnNameNew_803EDA58[2].start_frame);
+    HSD_JObjAnim(jobj);
+
+    jobj = *(HSD_JObj**)(arg0 + 0x38);
+    HSD_JObjReqAnim(jobj, mnNameNew_803EDA58[2].start_frame);
+    HSD_JObjAnim(jobj);
+
+    jobj = *(HSD_JObj**)(arg0 + 0x14);
+    HSD_JObjReqAnim(jobj, mnNameNew_803EDA58[0].start_frame);
+    HSD_JObjAnim(jobj);
+
+    jobj = *(HSD_JObj**)(arg0 + 0x18);
+    HSD_JObjReqAnimAll(jobj, (f32)(arg0[1] == 0x38));
+    HSD_JObjAnimAll(jobj);
+
+    jobj = *(HSD_JObj**)(arg0 + 0x0C);
+    HSD_JObjReqAnim(jobj, mnNameNew_803EDA58[0].start_frame);
+    HSD_JObjAnim(jobj);
+
+    jobj = *(HSD_JObj**)(arg0 + 0x18);
+    HSD_JObjReqAnimAll(jobj, (f32)(arg0[1] == 0x32));
+    HSD_JObjAnimAll(jobj);
+
+    jobj = *(HSD_JObj**)(arg0 + 0x1C);
+    HSD_JObjReqAnim(jobj, mnNameNew_803EDA58[0].start_frame);
+    HSD_JObjAnim(jobj);
+
+    table = (u16*)((u8*) mnNameNew_803EDA58 + 0x24);
+    for (i = 0x32; i < 0x3A; i++) {
+        jobj = *(HSD_JObj**)(arg0 + table[i - 0x32] * 4 + 4);
+        HSD_JObjReqAnimAll(jobj, (f32)(i == arg0[1]));
+        HSD_JObjAnimAll(jobj);
+    }
+}
+
+/// #InitNameEntryUIState
+
 s32 InitNameEntryUIState(u8* arg0, s8 arg1)
 {
     s32 result;
