@@ -3,6 +3,7 @@
 #include "gm/gm_18A5.h"
 #include "gm/gm_1A3F.h"
 #include "gm/gmmain_lib.h"
+#include "lb/lb_00B0.h"
 #include "lb/lbcardgame.h"
 #include "lb/lblanguage.h"
 #include "mn/mncharsel.h"
@@ -10,6 +11,7 @@
 #include "mn/mnname.h"
 #include "mn/types.h"
 #include "sysdolphin/baselib/gobjplink.h"
+#include "sysdolphin/baselib/jobj.h"
 #include "sysdolphin/baselib/memory.h"
 #include "sysdolphin/baselib/sislib.h"
 
@@ -18,6 +20,7 @@ extern u8 mnNameNew_PortInUse;
 extern char mnNameNew_CurrentNameText[0x10];
 extern u8** AutoNamesList;
 extern u8 mn_804D6BB4;
+extern u8 mn_804D6BB5;
 extern u8 mnNameNew_804D4F7C[4];
 extern void* mnNameNew_804D6C08;
 extern u8 mnNameNew_SpaceCharacter[2];
@@ -27,6 +30,8 @@ static AnimLoopSettings mnNameNew_803EDA58[3] = {
     { 20.0f, 39.0f, -0.1f },
     { 0.0f, 10.0f, -0.1f },
 };
+
+static Vec3 mnNameNew_803EE330 = { -0.7f, 0.7f, 0.0f };
 
 /// #mnNameNew_8023B0F8
 
@@ -273,10 +278,63 @@ s32 AddCharacterToName(u8* arg0, s32 arg1, u8 arg2, u8 arg3)
 
 /// #mnNameNew_MainInput
 
+static s32 mnNameNew_804D4F6C = (s32) 0xA6813DFF;
 static s32 mnNameNew_804D4F70 = 0xFF;
 static s32 mnNameNew_804D4F74 = 0x744F0BFF;
+static s32 mnNameNew_804D4F78 = 0xFF;
 
 /// #mnNameNew_8023CE4C
+
+void mnNameNew_8023CE4C(void)
+{
+    Vec3 sp24;
+    s32 sp20;
+    HSD_JObj* jobj_a;
+    HSD_JObj* jobj_b;
+    HSD_Text* text;
+    HSD_Text* old_text;
+    f32 char_spacing;
+    f32 first_x;
+    u8* data;
+    u8* name_ptr;
+    u8* sp20_ptr;
+    s32 i;
+
+    PAD_STACK(8);
+
+    data = *(u8**)((u8*) mnNameNew_804D6C08 + 0x2C);
+    jobj_a = *(HSD_JObj**)(data + 0x3C);
+    jobj_b = *(HSD_JObj**)(data + 0x40);
+    first_x = HSD_JObjGetTranslationX(jobj_a);
+    char_spacing = HSD_JObjGetTranslationX(jobj_b) - first_x;
+    old_text = *(HSD_Text**)(data + 0x64);
+    if (old_text != NULL) {
+        HSD_SisLib_803A5CC4(old_text);
+    }
+    text = HSD_SisLib_803A6754(0, (s32) mn_804D6BB5);
+    lb_8000B1CC(jobj_a, &mnNameNew_803EE330, &sp24);
+    name_ptr = (u8*) &mnNameNew_CurrentNameText;
+    text->pos_x = sp24.x;
+    text->pos_y = -sp24.y;
+    text->pos_z = sp24.z;
+    text->font_size.x = 0.04f;
+    text->font_size.y = 0.05f;
+    *(s32*) &text->text_color = mnNameNew_804D4F6C;
+    sp20_ptr = (u8*) &sp20;
+    i = 0;
+    for (; i < 4; i++) {
+        if ((s8) mnNameNew_NullCharacter == (s8) *name_ptr) {
+            break;
+        }
+        HSD_SisLib_803A6B98(text,
+                            (char_spacing * (f32) i) / text->font_size.x,
+                            0.0f, (const char*) name_ptr);
+        sp20 = mnNameNew_804D4F78;
+        HSD_SisLib_803A74F0(text, i, sp20_ptr);
+        name_ptr += 3;
+    }
+    *(HSD_Text**)(data + 0x64) = text;
+}
 
 /// #fn_8023CFC8
 

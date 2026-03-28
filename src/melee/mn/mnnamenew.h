@@ -16,7 +16,7 @@
 /* 23C148 */ s32 AddCharacterToName(u8* arg0, s32 arg1, u8 arg2, u8 arg3);
 /* 23C290 */ UNK_RET mnNameNew_GlyphVariantInput(UNK_PARAMS);
 /* 23C54C */ UNK_RET mnNameNew_MainInput(HSD_GObj*);
-/* 23CE4C */ UNK_RET mnNameNew_8023CE4C(UNK_PARAMS);
+/* 23CE4C */ void mnNameNew_8023CE4C(void);
 /* 23CFC8 */ void fn_8023CFC8(HSD_GObj* arg0);
 /* 23D0F8 */ void fn_8023D0F8(void*);
 /* 23D130 */ UNK_RET mnNameNew_8023D130(UNK_PARAMS);
