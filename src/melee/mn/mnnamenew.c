@@ -29,6 +29,43 @@ static AnimLoopSettings mnNameNew_803EDA58[3] = {
 
 /// #mnNameNew_8023B0F8
 
+void mnNameNew_8023B0F8(HSD_GObj* arg0, u8 arg1)
+{
+    HSD_JObj* jobj;
+    u8* data;
+
+    PAD_STACK(8);
+
+    data = arg0->user_data;
+    jobj = *(HSD_JObj**)(data + 0x2C);
+    if (arg1 == 0x33) {
+        HSD_JObjReqAnimAll(jobj, 1.0f);
+    } else if (*(u8*)(data + 0x50) == 0) {
+        HSD_JObjReqAnimAll(jobj, 2.0f);
+    } else {
+        HSD_JObjReqAnimAll(jobj, 0.0f);
+    }
+    HSD_JObjAnimAll(jobj);
+    jobj = *(HSD_JObj**)(data + 0x30);
+    if (arg1 == 0x34) {
+        HSD_JObjReqAnimAll(jobj, 1.0f);
+    } else if (*(u8*)(data + 0x50) == 1) {
+        HSD_JObjReqAnimAll(jobj, 2.0f);
+    } else {
+        HSD_JObjReqAnimAll(jobj, 0.0f);
+    }
+    HSD_JObjAnimAll(jobj);
+    jobj = *(HSD_JObj**)(data + 0x20);
+    if (arg1 == 0x35) {
+        HSD_JObjReqAnimAll(jobj, 1.0f);
+    } else if (*(u8*)(data + 0x50) == 2) {
+        HSD_JObjReqAnimAll(jobj, 2.0f);
+    } else {
+        HSD_JObjReqAnimAll(jobj, 0.0f);
+    }
+    HSD_JObjAnimAll(jobj);
+}
+
 void mnNameNew_8023B224(u8 arg0)
 {
     u8* temp_r31;

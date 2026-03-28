@@ -5,7 +5,7 @@
 
 #include <baselib/forward.h>
 
-/* 23B0F8 */ UNK_RET mnNameNew_8023B0F8(UNK_PARAMS);
+/* 23B0F8 */ void mnNameNew_8023B0F8(HSD_GObj* arg0, u8 arg1);
 /* 23B224 */ void mnNameNew_8023B224(u8);
 /* 23B314 */ void mnNameNew_8023B314(u8*, s32);
 /* 23B3FC */ UNK_RET mnNameNew_KeySetup(UNK_PARAMS);
