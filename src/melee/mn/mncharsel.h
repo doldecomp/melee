@@ -13,7 +13,7 @@
 /* 25DAA0 */ bool mnCharSel_8025DAA0(int door);
 /* 25DB34 */ void mnCharSel_8025DB34(u8);
 /* 25EE8C */ void mnCharSel_8025EE8C(u8 idx);
-/* 25F0E0 */ UNK_RET fn_8025F0E0(UNK_PARAMS);
+/* 25F0E0 */ void fn_8025F0E0(HSD_GObj*);
 /* 25FAC0 */ void fn_8025FAC0(HSD_GObj*);
 /* 25FB2C */ void fn_8025FB2C(HSD_GObj*);
 /* 25FB50 */ void mnCharSel_8025FB50(u8 door, s32 arg1);
