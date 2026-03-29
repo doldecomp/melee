@@ -542,17 +542,20 @@ inline char **AddCharacterToName_getGlyphs(GlyphRow *arg0, u8 arg1)
 
 char* AddCharacterToName(char* arg0, u8 arg1, u8 arg2, u8 arg3)
 {
-    s32 idx;
     char ch;
     char* var_r4;
     char** table;
     NameNewData* data;
-
+    u32 temp;
     data = (NameNewData*) mnNameNew_803EDA58;
 
     if ((s32) arg3 != 2) {
-        if ((s32) arg3 < 2 && (s32) arg3 >= 0) {
+        if (((((s32) (temp = arg3)) < ((unsigned short) 2)) & 0xFFFFFFFF) &&
+            (((s32) ((unsigned long) arg3)) >= 0))
+        {
             char null;
+            s32 idx;
+
             if ((u8) (arg1 - 0x30) <= 1U) {
                 if ((arg2 % 2) != 0) {
                     table = AddCharacterToName_getGlyphs(data->glyph_upper, arg1);
@@ -567,13 +570,13 @@ char* AddCharacterToName(char* arg0, u8 arg1, u8 arg2, u8 arg3)
                 table = AddCharacterToName_getGlyphs(data->glyph_upper, arg1);
             }
             var_r4 = arg0;
-            idx = 0;
-            while ((null = mnNameNew_NullCharacter) !=
-                   (ch = table[arg2 / 2][idx]))
+
+            for (idx = data->glyph_single[arg1][1] * 0;
+                 (null = (mnNameNew_NullCharacter & 0xFFFF) & 0xFFFF) !=
+                 (ch = table[arg2 / 2][idx] & (0xFF & 0xFFu));
+                 idx++)
             {
-                *var_r4 = ch;
-                idx += 1;
-                var_r4 += 1;
+                var_r4[idx] = ch;
             }
             arg0[idx] = null;
         }
@@ -584,7 +587,6 @@ char* AddCharacterToName(char* arg0, u8 arg1, u8 arg2, u8 arg3)
     arg0[2] = data->glyph_single[arg1][2];
     return arg0;
 }
-
 
 void mnNameNew_GlyphVariantInput(void)
 {
