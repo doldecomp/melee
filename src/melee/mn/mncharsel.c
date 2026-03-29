@@ -4,6 +4,7 @@
 
 #include "types.h"
 
+#include <MSL/trigf.h>
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/fog.h>
@@ -739,7 +740,8 @@ static struct CSSCharModel {
     /* 0x00 */ HSD_GObj* gobj;
     /* 0x04 */ u8 x4;
     /* 0x05 */ u8 x5;
-    /* 0x06 */ u8 pad_06[2];
+    /* 0x06 */ u8 x6;
+    /* 0x07 */ u8 x7;
     /* 0x08 */ float x8;
     /* 0x0C */ float xC;
     /* 0x10 */ float x10;
@@ -956,6 +958,226 @@ void mnCharSel_CostumeChange(int door, u32 input)
 /// #mnCharSel_CursorThink
 
 /// #fn_80262648
+void fn_80262648(HSD_GObj* gobj)
+{
+    HSD_JObj* sp24;
+    HSD_JObj* sp18;
+    HSD_JObj* sp14;
+    HSD_JObj* sp10;
+    struct CSSCharModel* model = gobj->user_data;
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+    u8 prev_port = model->x6;
+    u8 n_doors;
+
+    if ((u8) mnCharSel_804D6CB0->match_type == 0x17) {
+        n_doors = 2;
+    } else {
+        n_doors = mnCharSel_804D6CF5;
+    }
+
+    {
+        u8 door = model->x4;
+        CSSDoor* d = &mnCharSel_803F0DFC.doors[door];
+        u8 p_kind = d->p_kind;
+
+        if (p_kind == 3 || (u8) d->sel_icon >= 0x19U) {
+            HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
+            return;
+        }
+
+        if ((u8) mnCharSel_804D6CF5 == 1) {
+            if (door != 0) {
+                model->x6 = 8;
+            } else {
+                model->x6 = (u8) mnCharSel_804D6CF0;
+            }
+        } else if ((u8) mnCharSel_804D6CB0->data.data.rules.is_teams == 0) {
+            if (p_kind == 1) {
+                model->x6 = 8;
+            } else {
+                model->x6 = door;
+            }
+        } else if (p_kind == 1) {
+            model->x6 = (u8) (mnCharSel_804D50E0[d->team] + 4);
+        } else {
+            model->x6 = (u8) mnCharSel_804D50E0[d->team];
+        }
+    }
+
+    HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
+    model->x7 = (u8) (model->x7 + 1);
+
+    {
+        u8 port = model->x6;
+        if (prev_port != port || (u8) model->x7 > 0x27U) {
+            if (port < 4U) {
+                if ((u8) mnCharSel_804D6CF5 == 1) {
+                    f32 f24 = (f32) ((s8) (u8) mnCharSel_804D6CF0 * 4);
+                    lb_80011E24(jobj, &sp18, 4, -1);
+                    HSD_ForeachAnim(sp18, JOBJ_TYPE, TOBJ_MASK,
+                                    HSD_AObjReqAnim, AOBJ_ARG_AF, f24);
+                    HSD_JObjAnimAll(sp18);
+                    HSD_ForeachAnim(sp18, JOBJ_TYPE, TOBJ_MASK,
+                                    HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
+                } else {
+                    f32 f24 = (f32) (model->x4 * 4);
+                    lb_80011E24(jobj, &sp14, 4, -1);
+                    HSD_ForeachAnim(sp14, JOBJ_TYPE, TOBJ_MASK,
+                                    HSD_AObjReqAnim, AOBJ_ARG_AF, f24);
+                    HSD_JObjAnimAll(sp14);
+                    HSD_ForeachAnim(sp14, JOBJ_TYPE, TOBJ_MASK,
+                                    HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
+                }
+            } else {
+                lb_80011E24(jobj, &sp10, 4, -1);
+                HSD_ForeachAnim(sp10, JOBJ_TYPE, TOBJ_MASK, HSD_AObjReqAnim,
+                                AOBJ_ARG_AF, 16.0f);
+                HSD_JObjAnimAll(sp10);
+                HSD_ForeachAnim(sp10, JOBJ_TYPE, TOBJ_MASK, HSD_AObjStopAnim,
+                                AOBJ_ARG_AOV, 0, 0);
+            }
+            lb_80011E24(jobj, &sp24, 3, -1);
+            HSD_ForeachAnim(sp24, JOBJ_TYPE, MOBJ_MASK, HSD_AObjReqAnim,
+                            AOBJ_ARG_AF, (f32) (model->x6 * 0x28));
+            model->x7 = 0;
+        }
+    }
+
+    {
+        u8 status = model->x5;
+        if (status == 0) {
+            s32 iter;
+            for (iter = 0; iter < 0x14; iter++) {
+                s32 j;
+                struct CSSCharModel** bdp = mnCharSel_804A0BD0;
+                CSSDoor* dp = mnCharSel_803F0DFC.doors;
+
+                for (j = 0; j < (s32) n_doors; j++) {
+                    if (j != (s32) model->x4 &&
+                        (u8) (*bdp)->x5 == 0 &&
+                        (u8) dp->p_kind != 3 &&
+                        (u8) dp->sel_icon < 0x19U)
+                    {
+                        f32 angle;
+                        f32 dx;
+                        f32 dy;
+                        do {
+                            dx = (0.1f * (HSD_Randf() - 0.5f)) +
+                                 (model->x8 - (*bdp)->x8);
+                        } while (dx == 0.0f);
+
+                        do {
+                            dy = (0.1f * (HSD_Randf() - 0.5f)) +
+                                 (model->xC - (*bdp)->xC);
+                        } while (dy == 0.0f);
+
+                        if ((dx * dx + dy * dy) < 8.0f) {
+                            if (dy < 0.01f && dy > -0.01f) {
+                                f64 half_pi;
+                                if (dx < 0.0f) {
+                                    half_pi = 1.5707963267948966;
+                                } else {
+                                    half_pi = -1.5707963267948966;
+                                }
+                                angle = (f32) half_pi;
+                            } else {
+                                f64 base_a;
+                                if (dy < 0.0f) {
+                                    base_a = 0.0;
+                                } else {
+                                    base_a = 3.141592653589793;
+                                }
+                                angle = (f32) (base_a + atanf(dx / dy));
+                            }
+                            model->x8 =
+                                -((0.01f * sinf(angle)) - model->x8);
+                            model->xC =
+                                -((0.01f * cosf(angle)) - model->xC);
+                        }
+                    }
+                    bdp++;
+                    dp++;
+                }
+
+                {
+                    f32 x;
+
+                    x = model->x8;
+                    if (x < 1.5f + icons[mnCharSel_803F0DFC.doors[model->x4].sel_icon].bound_l) {
+                        model->x8 = x + 0.02f;
+                        if (model->x8 < icons[mnCharSel_803F0DFC.doors[model->x4].sel_icon].bound_l) {
+                            model->x8 = icons[mnCharSel_803F0DFC.doors[model->x4].sel_icon].bound_l;
+                        }
+                    }
+
+                    x = model->x8;
+                    if (x > icons[mnCharSel_803F0DFC.doors[model->x4].sel_icon].bound_r - 1.5f) {
+                        model->x8 = x - 0.02f;
+                        if (model->x8 > icons[mnCharSel_803F0DFC.doors[model->x4].sel_icon].bound_r) {
+                            model->x8 = icons[mnCharSel_803F0DFC.doors[model->x4].sel_icon].bound_r;
+                        }
+                    }
+
+                    x = model->xC;
+                    if (x > icons[mnCharSel_803F0DFC.doors[model->x4].sel_icon].bound_u - 1.5f) {
+                        model->xC = x - 0.02f;
+                        if (model->xC > icons[mnCharSel_803F0DFC.doors[model->x4].sel_icon].bound_u) {
+                            model->xC = icons[mnCharSel_803F0DFC.doors[model->x4].sel_icon].bound_u;
+                        }
+                    }
+
+                    x = model->xC;
+                    if (x < 1.5f + icons[mnCharSel_803F0DFC.doors[model->x4].sel_icon].bound_d) {
+                        model->xC = x + 0.02f;
+                        if (model->xC < icons[mnCharSel_803F0DFC.doors[model->x4].sel_icon].bound_d) {
+                            model->xC = icons[mnCharSel_803F0DFC.doors[model->x4].sel_icon].bound_d;
+                        }
+                    }
+                }
+            }
+        } else {
+            model->x8 = 2.7f + mnCharSel_804A0BD0[status - 1]->xC;
+            model->xC = -2.0f + mnCharSel_804A0BD0[model->x5 - 1]->x10;
+        }
+    }
+
+    {
+        f32 dy = model->x14 - model->xC;
+        f32 tx = model->x8;
+        f32 dx = model->x10 - tx;
+
+        if ((dx * dx + dy * dy) < 4.0f) {
+            model->x10 = tx;
+            model->x14 = model->xC;
+        } else {
+            f32 angle;
+            if (dy < 0.01f && dy > -0.01f) {
+                f64 half_pi;
+                if (dx < 0.0f) {
+                    half_pi = 1.5707963267948966;
+                } else {
+                    half_pi = -1.5707963267948966;
+                }
+                angle = (f32) half_pi;
+            } else {
+                f64 base_a;
+                if (dy < 0.0f) {
+                    base_a = 0.0;
+                } else {
+                    base_a = 3.141592653589793;
+                }
+                angle = (f32) (base_a + atanf(dx / dy));
+            }
+            model->x10 = (3.0f * sinf(angle)) + model->x10;
+            model->x14 = (3.0f * cosf(angle)) + model->x14;
+        }
+    }
+
+    HSD_JObjSetTranslateX(jobj, model->x10);
+    HSD_JObjSetTranslateY(jobj, model->x14);
+    HSD_JObjSetTranslateZ(jobj, 1.0f);
+    HSD_JObjAnimAll(jobj);
+}
 
 /// #fn_80262F44
 void fn_80262F44(HSD_GObj* gobj)

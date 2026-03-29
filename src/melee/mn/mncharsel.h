@@ -20,7 +20,7 @@
 /* 25FDEC */ s32 mnCharSel_8025FDEC(u8 door);
 /* 260094 */ void mnCharSel_CostumeChange(int door, u32 input);
 /* 2602A0 */ void mnCharSel_CursorThink(HSD_GObj* gobj);
-/* 262648 */ UNK_RET fn_80262648(UNK_PARAMS);
+/* 262648 */ void fn_80262648(HSD_GObj*);
 /* 262F44 */ void fn_80262F44(HSD_GObj*);
 /* 263354 */ void fn_80263354(HSD_GObj*);
 /* 2633B0 */ UNK_RET fn_802633B0(UNK_PARAMS);
