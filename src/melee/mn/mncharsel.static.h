@@ -9,6 +9,7 @@ static void* mnCharSel_804D6CB4;
 static HSD_JObj* mnCharSel_804D6CC0;
 static HSD_JObj* mnCharSel_804D6CC4;
 static HSD_JObj* mnCharSel_804D6CC8;
+static HSD_JObj* mnCharSel_804D6CCC;
 static HSD_Archive* mnCharSel_804D6CD0;
 static HSD_Archive* mnCharSel_804D6CD4;
 static void* mnCharSel_804D6CD8;
@@ -23,6 +24,7 @@ static u8 mnCharSel_804D6CF2;
 static s8 mnCharSel_804D6CF4;
 static u8 mnCharSel_804D6CF5; ///< number of (open? valid?) CSS doors
 static u8 mnCharSel_804D6CF6;
+static u8 mnCharSel_804D6CF7;
 static u8 mnCharSel_804D6CF8;
 static s8 mnCharSel_804D6CF9;
 

@@ -5,6 +5,7 @@
 #include "types.h"
 
 #include <sysdolphin/baselib/aobj.h>
+#include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/fog.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/jobj.h>
@@ -957,6 +958,138 @@ void mnCharSel_CostumeChange(int door, u32 input)
 /// #fn_80262648
 
 /// #fn_80262F44
+void fn_80262F44(HSD_GObj* gobj)
+{
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+    int i;
+    PAD_STACK(16);
+
+    if (mnCharSel_804D6CB0->match_type == VS_CAMERA) {
+        if (HSD_PadCopyStatus[3].err != 0) {
+            HSD_JObjClearFlagsAll(
+                mnCharSel_804D6CCC != NULL ? mnCharSel_804D6CCC->child : NULL,
+                JOBJ_HIDDEN);
+            goto hide;
+        }
+        HSD_JObjSetFlagsAll(
+            mnCharSel_804D6CCC != NULL ? mnCharSel_804D6CCC->child : NULL,
+            JOBJ_HIDDEN);
+    }
+
+    if (mnCharSel_804D6CF5 == 1) {
+        if (mnCharSel_804A0BD0[0]->x5 == 1 ||
+            mnCharSel_803F0DFC.doors[0].sel_icon >= 0x19)
+        {
+            mnCharSel_804D6CF7 = 0;
+        } else {
+            mnCharSel_804D6CF7 = 1;
+        }
+        HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
+    } else {
+        s32 valid_count = 0;
+
+        for (i = 0; i < (s32) mnCharSel_804D6CF5; i++) {
+            if (mnCharSel_803F0DFC.doors[i].p_kind != 3) {
+                if (mnCharSel_803F0DFC.doors[i].sel_icon >= 0x19) {
+                    goto hide;
+                }
+                valid_count++;
+            }
+        }
+
+        if (valid_count >= 2) {
+            if (mnCharSel_804D6CB0->data.data.rules.is_teams == 1) {
+                for (i = 0; i < (s32) (mnCharSel_804D6CF5 - 1); i++) {
+                    s32 j;
+                    if (mnCharSel_803F0DFC.doors[i].p_kind == 3) {
+                        continue;
+                    }
+                    for (j = i; j < (s32) mnCharSel_804D6CF5; j++) {
+                        if (mnCharSel_803F0DFC.doors[j].p_kind != 3 &&
+                            mnCharSel_803F0DFC.doors[i].team !=
+                                mnCharSel_803F0DFC.doors[j].team)
+                        {
+                            goto teams_ok;
+                        }
+                    }
+                }
+                goto hide;
+            }
+        teams_ok: {
+            CSSTag* tag = mnCharSel_803F0DFC.tags;
+            for (i = 0; i < (s32) mnCharSel_804D6CF5; i++) {
+                if (mnCharSel_804A0BD0[i]->x5 == 1 ||
+                    tag[i].data->state != 0)
+                {
+                    goto hide;
+                }
+            }
+        }
+
+            if (mnCharSel_804D6CF7 == 0) {
+                HSD_ForeachAnim(jobj, JOBJ_TYPE, ALL_TYPE_MASK,
+                                HSD_AObjReqAnim, AOBJ_ARG_AF, 0.0);
+            } else if (mnCharSel_804D6CF7 > 100) {
+                HSD_ForeachAnim(jobj, JOBJ_TYPE, ALL_TYPE_MASK,
+                                HSD_AObjReqAnim, AOBJ_ARG_AF, 10.0);
+                mnCharSel_804D6CF7 = 10;
+            }
+            mnCharSel_804D6CF7++;
+            HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
+            HSD_JObjAnimAll(jobj);
+        } else {
+        hide:
+            mnCharSel_804D6CF7 = 0;
+            mnCharSel_804D6CF2 = 10;
+            HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
+        }
+    }
+
+    {
+        u32 trigger;
+        if (mnCharSel_804D6CF5 == 1) {
+            trigger = HSD_PadCopyStatus[(u8) mnCharSel_804D6CF0].trigger;
+        } else {
+            u8 p = 0;
+            trigger = 0;
+            for (i = 0; i < (s32) mnCharSel_804D6CF5; i++) {
+                if (mnCharSel_804A0BD0[i]->x5 != 3) {
+                    trigger |= HSD_PadCopyStatus[p].trigger;
+                }
+                p++;
+            }
+        }
+
+        if (mnCharSel_804D6CF2 == 0 && (trigger & HSD_PAD_START)) {
+            if (mnCharSel_804D6CF7 != 0) {
+                mnCharSel_804D6CF6 = 1;
+                mnCharSel_804D6CF2 = 0xFF;
+                if (mnCharSel_804D6CF5 == 1) {
+                    if (gm_801677F8(
+                            mnCharSel_804D6CF0,
+                            mnCharSel_804D6CB0->data.data
+                                .players[mnCharSel_804D6CF0]
+                                .xA))
+                    {
+                        lb_80014574(mnCharSel_804D6CF0, 0, 0xB, 0x1E);
+                    }
+                } else {
+                    for (i = 0; i < (s32) mnCharSel_804D6CF5; i++) {
+                        if (mnCharSel_803F0DFC.doors[i].p_kind == 0 &&
+                            gm_801677F8(
+                                i,
+                                mnCharSel_804D6CB0->data.data.players[i].xA))
+                        {
+                            lb_80014574(i, 0, 0xB, 0x1E);
+                        }
+                    }
+                }
+            } else {
+                lbAudioAx_80024030(3);
+            }
+        }
+    }
+}
 
 void fn_80263354(HSD_GObj* gobj)
 {
