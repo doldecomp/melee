@@ -552,6 +552,7 @@ char* AddCharacterToName(char* arg0, u8 arg1, u8 arg2, u8 arg3)
 
     if ((s32) arg3 != 2) {
         if ((s32) arg3 < 2 && (s32) arg3 >= 0) {
+            char null;
             if ((u8) (arg1 - 0x30) <= 1U) {
                 if ((arg2 % 2) != 0) {
                     table = AddCharacterToName_getGlyphs(data->glyph_upper, arg1);
@@ -567,15 +568,14 @@ char* AddCharacterToName(char* arg0, u8 arg1, u8 arg2, u8 arg3)
             }
             var_r4 = arg0;
             idx = 0;
-            while ((char) mnNameNew_NullCharacter !=
+            while ((null = mnNameNew_NullCharacter) !=
                    (ch = table[arg2 / 2][idx]))
             {
                 *var_r4 = ch;
                 idx += 1;
                 var_r4 += 1;
             }
-            arg0[idx] = mnNameNew_NullCharacter;
-            return arg0;
+            arg0[idx] = null;
         }
         return arg0;
     }
