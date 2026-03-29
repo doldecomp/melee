@@ -23,7 +23,7 @@
 /* 262648 */ void fn_80262648(HSD_GObj*);
 /* 262F44 */ void fn_80262F44(HSD_GObj*);
 /* 263354 */ void fn_80263354(HSD_GObj*);
-/* 2633B0 */ UNK_RET fn_802633B0(UNK_PARAMS);
+/* 2633B0 */ void fn_802633B0(HSD_GObj*);
 /* 264070 */ void mnCharSel_80264070(void);
 /* 26407C */ void fn_8026407C(HSD_GObj*);
 /* 2640A0 */ UNK_RET mnCharSel_802640A0(UNK_PARAMS);

@@ -18,6 +18,7 @@
 #include <melee/gm/gm_1601.h>
 #include <melee/gm/gmmain_lib.h>
 #include <melee/gm/types.h>
+#include <melee/lb/lb_00B0.h>
 #include <melee/lb/lb_00F9.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbaudio_ax.h>
@@ -1636,6 +1637,428 @@ void fn_80263354(HSD_GObj* gobj)
 }
 
 /// #fn_802633B0
+/// Nametag list think callback - handles scrolling through nametag list
+
+static s32 mnCharSel_804DC560 = (s32) 0xFFFFFFFF;
+static s32 mnCharSel_804DC564 = (s32) 0x646464FF;
+
+void fn_802633B0(HSD_GObj* gobj)
+{
+    HSD_JObj* sp84;
+    HSD_JObj* sp80;
+    s32 sp78;
+    s32 sp74;
+    HSD_JObj* sp70;
+    Vec3 sp64;
+    s32 sp60;
+    s32 sp5C;
+    s32 sp58;
+    s32 sp54;
+    HSD_JObj* sp30;
+    CSSTagData* tag;
+    u8 port;
+    s32 num_entries;
+    u32 trigger;
+    s32 i;
+    s32 row;
+    u8 match_type;
+    u8 sel_icon;
+    s32 val;
+    f32 temp_f0;
+    f32 vel;
+    f32 scroll_pos;
+    f32 new_pos;
+    s32 page;
+    s32 new_page;
+
+    tag = gobj->user_data;
+    port = tag->port;
+
+    if ((u8) mnCharSel_804D6CF5 == 1) {
+        if ((s32) port != 0) {
+            port = (u8) (s8) (u8) mnCharSel_804D6CF1;
+        } else {
+            port = (u8) (s8) (u8) mnCharSel_804D6CF0;
+        }
+    }
+
+    sp78 = mnCharSel_804DC560;
+    sp74 = mnCharSel_804DC564;
+    num_entries = tag->next_tag;
+
+    if ((u8) num_entries > 0x78U) {
+        num_entries = num_entries - 8;
+    } else {
+        num_entries = num_entries - 7;
+    }
+
+    if ((u8) mnCharSel_804D6CF5 == 1) {
+        lb_80011E24(mnCharSel_804D6CC0, &sp84,
+                     *((u8*) &mnCharSel_803F0A48 + 0x478), -1);
+        trigger = HSD_PadCopyStatus[(u8) mnCharSel_804D6CF0].trigger;
+    } else {
+        lb_80011E24(mnCharSel_804D6CC0, &sp84,
+                     *((u8*) &mnCharSel_803F0A48 + 0x448 + tag->port * 0xC), -1);
+        trigger = HSD_PadCopyStatus[tag->port].trigger;
+    }
+
+    switch ((s32) tag->state) {
+    case 1:
+        mnCharSel_8025D1C4((s32) tag->port, 1);
+        sel_icon = *((u8*) &mnCharSel_803F0A48 + 0x3C2 + tag->port * 0x24);
+        if ((u8) sel_icon < 0x19U) {
+            if (lbLang_IsSavedLanguageUS() != 0 &&
+                (u8) sel_icon == 0x16) {
+                HSD_SisLib_803A70A0((HSD_Text*)tag->name_ls, 0,
+                                     (char*) &mnCharSel_803F0A48);
+            } else {
+                HSD_SisLib_803A70A0((HSD_Text*)tag->name_ls, 0,
+                    (char*) gm_80160980(*((u8*) &mnCharSel_803F0A48 + 0xDD + sel_icon * 0x1C)));
+            }
+        } else {
+            HSD_SisLib_803A70A0((HSD_Text*)tag->name_ls, 0,
+                (char*) ((u8*) &mnCharSel_803F0A48 + 0x5B8));
+        }
+        sp60 = sp74;
+        HSD_SisLib_803A74F0((HSD_Text*)tag->text, 0, (u8*) &sp60);
+        HSD_ForeachAnim(sp84, JOBJ_TYPE, ALL_TYPE_MASK,
+                         HSD_AObjReqAnim, AOBJ_ARG_AF, 0.0f);
+        tag->state = 2;
+        tag->timer = 0;
+        lbAudioAx_80024030(2);
+        return;
+
+    case 2: {
+        u32 t;
+        t = tag->timer + 1;
+        tag->timer = t;
+        if (t > 0xAU) {
+            HSD_ForeachAnim(sp84, JOBJ_TYPE, ALL_TYPE_MASK,
+                             HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
+            ((HSD_Text*)tag->name_ls)->hidden = 0;
+            tag->state = 3;
+            return;
+        }
+        return;
+    }
+    case 3:
+        vel = tag->scroll_amt;
+        if (vel != 0.0f) {
+            f32 sign;
+            if (vel < 0.0f) {
+                sign = -1.0f;
+            } else {
+                sign = 1.0f;
+            }
+            tag->scroll_force = (10.0f * vel) + sign;
+        }
+        if (tag->scroll_force != 0.0f) {
+            scroll_pos = tag->x8;
+            new_pos = scroll_pos + tag->scroll_force;
+            tag->x8 = new_pos;
+            page = (s32) (scroll_pos * 0.03125f);
+            new_page = (s32) (new_pos * 0.03125f);
+            if (new_pos > 0.0f) {
+                tag->x8 = 0.0f;
+            }
+            if ((u8) tag->next_tag > 7U) {
+                temp_f0 = -32.0f * (f32) num_entries;
+                if (tag->x8 < temp_f0) {
+                    tag->x8 = temp_f0;
+                }
+            } else {
+                tag->x8 = 0.0f;
+            }
+            if (tag->scroll_amt == 0.0f) {
+                if (page < new_page) {
+                    tag->x8 = 32.0f * (f32) page;
+                    tag->scroll_force = 0.0f;
+                } else if (page > new_page) {
+                    tag->x8 = 32.0f * (f32) new_page;
+                    tag->scroll_force = 0.0f;
+                }
+            }
+        }
+
+        if ((u8) mnCharSel_804D6CF5 == 1) {
+            lb_80011E24(mnCharSel_804D6CC0, &sp80,
+                         *((u8*) &mnCharSel_803F0A48 + 0x47B), -1);
+        } else {
+            lb_80011E24(mnCharSel_804D6CC0, &sp80,
+                         *((u8*) &mnCharSel_803F0A48 + 0x44B + tag->port * 0xC), -1);
+        }
+
+        if (tag->x8 == 0.0f) {
+            HSD_JObjSetFlags(sp80, JOBJ_HIDDEN);
+        } else {
+            HSD_JObjClearFlags(sp80, JOBJ_HIDDEN);
+        }
+
+        if ((u8) mnCharSel_804D6CF5 == 1) {
+            lb_80011E24(mnCharSel_804D6CC0, &sp80,
+                         *((u8*) &mnCharSel_803F0A48 + 0x47C), -1);
+        } else {
+            lb_80011E24(mnCharSel_804D6CC0, &sp80,
+                         *((u8*) &mnCharSel_803F0A48 + 0x44C + tag->port * 0xC), -1);
+        }
+
+        if ((u8) tag->next_tag > 7U) {
+            if (tag->x8 == (-32.0f * (f32) num_entries)) {
+                HSD_JObjSetFlags(sp80, JOBJ_HIDDEN);
+            } else {
+                HSD_JObjClearFlags(sp80, JOBJ_HIDDEN);
+            }
+        } else {
+            HSD_JObjSetFlags(sp80, JOBJ_HIDDEN);
+        }
+
+        HSD_SisLib_803A746C((HSD_Text*)tag->name_ls, 0, 0.0f, tag->x8);
+        HSD_SisLib_803A746C((HSD_Text*)tag->name_ls, 1, 0.0f,
+                             (32.0f * (f32) tag->next_tag) + tag->x8);
+        {
+            s32 j;
+            s32 trunc;
+            s32 page_off;
+            s32 row_idx;
+            j = 0;
+            page_off = ((s32) tag->x8 / 32) + 1;
+            do {
+                row_idx = j - page_off;
+                if (row_idx < 0) {
+                    HSD_SisLib_803A70A0((HSD_Text*)tag->name_ls, j + 2, NULL);
+                } else {
+                    char* name;
+                    name = GetNameText((s32) (u8) row_idx);
+                    HSD_SisLib_803A70A0((HSD_Text*)tag->name_ls, j + 2, name);
+                    sp5C = sp78;
+                    HSD_SisLib_803A74F0((HSD_Text*)tag->name_ls, j + 2, (u8*) &sp5C);
+                    {
+                        s32 p2;
+                        CSSData* ddata;
+                        ddata = mnCharSel_804D6CB0;
+                        for (p2 = 0; p2 < (s32) mnCharSel_804D6CF5; p2++) {
+                            if (p2 != (s32) tag->port &&
+                                (s32) ddata->data.data.players[0].xA == row_idx) {
+                                sp58 = sp74;
+                                HSD_SisLib_803A74F0((HSD_Text*)tag->name_ls, j + 2,
+                                                     (u8*) &sp58);
+                                break;
+                            }
+                            ddata = (CSSData*) ((u8*) ddata + 0x24);
+                        }
+                    }
+                }
+                trunc = (s32) tag->x8;
+                HSD_SisLib_803A746C((HSD_Text*)tag->name_ls, j + 2, 10.0f,
+                    (32.0f * (f32) (j + 1)) +
+                    (f32) ((trunc - ((trunc / 32) << 5)) - 0x20));
+                j += 1;
+            } while (j < 9);
+        }
+
+        if (trigger & 0x100) {
+            if ((u8) mnCharSel_804D6CF5 == 1) {
+                lb_80011E24(mnCharSel_804D6CC0, &sp70,
+                             *((u8*) &mnCharSel_803F0A48 + 0x479), -1);
+            } else {
+                lb_80011E24(mnCharSel_804D6CC0, &sp70,
+                             *((u8*) &mnCharSel_803F0A48 + 0x449 + tag->port * 0xC), -1);
+            }
+            lb_8000B1CC(sp70, NULL, &sp64);
+            row = (s32) (0.5f * (0.8f + (sp64.y -
+                    ((struct CSSCharModel*) mnCharSel_804A0BC0[tag->port])->x10)) -
+                    (tag->x8 * 0.03125f));
+
+            if (row == 0) {
+                sel_icon = *((u8*) &mnCharSel_803F0A48 + 0x3C2 + tag->port * 0x24);
+                if (lbLang_IsSavedLanguageUS() != 0 &&
+                    (u8) sel_icon == 0x16) {
+                    HSD_SisLib_803A70A0((HSD_Text*)tag->text, 0,
+                                         (char*) &mnCharSel_803F0A48);
+                } else {
+                    HSD_SisLib_803A70A0((HSD_Text*)tag->text, 0,
+                        (char*) gm_80160980(*((u8*) &mnCharSel_803F0A48 + 0xDD + sel_icon * 0x1C)));
+                }
+                ((HSD_Text*)tag->text)->default_kerning = 1;
+                if ((u8) sel_icon < 0x19U) {
+                    ((HSD_Text*)tag->text)->hidden = 0;
+                } else {
+                    ((HSD_Text*)tag->text)->hidden = 1;
+                }
+                if ((u8) mnCharSel_804D6CB0->data.data.players[port].xA != 0x78) {
+                    match_type = mnCharSel_804D6CB0->match_type;
+                    if ((s32) match_type < 3) {
+                        if ((s32) match_type == 0) {
+                            goto clear;
+                        }
+                        goto no_clear;
+                    }
+                    if ((s32) match_type < 0xB) {
+                    clear:
+                        val = 1;
+                    } else {
+                    no_clear:
+                        val = 0;
+                    }
+                    if (val != 0) {
+                        mnCharSel_804D6CB0->ko_star_counts[tag->port] = 0;
+                    }
+                }
+                mnCharSel_804D6CB0->data.data.players[port].xA = 0x78;
+                tag->use_tag = 0;
+                tag->state = 4;
+                lbAudioAx_80024030(2);
+                goto block_116;
+            }
+
+            if ((s32) tag->next_tag == row) {
+                if (IsNameListFull() == 0) {
+                    if ((u8) mnCharSel_804D6CF5 == 1) {
+                        mnCharSel_804D6CF9 = (s8) (u8) mnCharSel_804D6CF0;
+                    } else {
+                        mnCharSel_804D6CF9 = (s8) tag->port;
+                    }
+                    mnCharSel_804D6CF6 = 4;
+                    {
+                        struct CSSCharModel** model_ptr;
+                        s32 k;
+                        model_ptr = (struct CSSCharModel**) mnCharSel_804A0BC0;
+                        for (k = 0; k < (s32) mnCharSel_804D6CF5; k++) {
+                            if (((u8) (*model_ptr)->x5 == 1) &&
+                                (mnCharSel_8025FDEC((u8) k) == 0)) {
+                                mnCharSel_8025DB34((u8) k);
+                                (*model_ptr)->x5 = 2;
+                            }
+                            model_ptr += 1;
+                        }
+                    }
+                    return;
+                }
+                goto block_116;
+            }
+
+            if ((s32) tag->next_tag > row) {
+                {
+                    CSSData* data;
+                    s32 p;
+                    data = mnCharSel_804D6CB0;
+                    for (p = 0; p < (s32) mnCharSel_804D6CF5; p++) {
+                        if (p == (s32) port &&
+                            (s32) data->data.data.players[0].xA == (s32) (row - 1)) {
+                            goto block_116;
+                        }
+                        data = (CSSData*) ((u8*) data + 0x24);
+                    }
+                    {
+                        char* name_str;
+                        name_str = GetNameText(row - 1);
+                        HSD_SisLib_803A70A0((HSD_Text*)tag->text, 0, name_str);
+                        ((HSD_Text*)tag->text)->default_kerning = 0;
+                        ((HSD_Text*)tag->text)->hidden = 0;
+                        if ((s32) mnCharSel_804D6CB0->data.data.players[port].xA !=
+                            (s32) (row - 1)) {
+                            match_type = mnCharSel_804D6CB0->match_type;
+                            if ((s32) match_type < 3) {
+                                if ((s32) match_type == 0) {
+                                    goto clear2;
+                                }
+                                goto no_clear2;
+                            }
+                            if ((s32) match_type < 0xB) {
+                            clear2:
+                                val = 1;
+                            } else {
+                            no_clear2:
+                                val = 0;
+                            }
+                            if (val != 0) {
+                                mnCharSel_804D6CB0->ko_star_counts[tag->port] = 0;
+                            }
+                        }
+                        mnCharSel_804D6CB0->data.data.players[port].xA = row - 1;
+                        tag->use_tag = 1;
+                        tag->state = 4;
+                        lbAudioAx_80024030(2);
+                    }
+                }
+            }
+            goto block_116;
+        }
+    block_116:
+        if (trigger & 0x200) {
+            tag->state = 4;
+            lbAudioAx_80024030(0);
+            return;
+        }
+        break;
+
+    case 4:
+        HSD_ForeachAnim(sp84, JOBJ_TYPE, ALL_TYPE_MASK,
+                         HSD_AObjReqAnim, AOBJ_ARG_AF, 20.0f);
+        ((HSD_Text*)tag->name_ls)->hidden = 1;
+        if ((u8) gmMainLib_8015CC34()->handicap != 0 &&
+            (u8) mnCharSel_804D6CF5 == 4) {
+            {
+                u8 port2;
+                u8 hval;
+                port2 = tag->port;
+                if ((u8) gmMainLib_8015CC34()->handicap == 1) {
+                    hval = gm_801685D4(port2,
+                        mnCharSel_804D6CB0->data.data.players[port2].xA);
+                } else {
+                    hval = (u8) mnCharSel_804D6CB0->data.data.players[port2].handicap;
+                }
+                if ((s32) hval != 0) {
+                } else {
+                    hval = 1;
+                }
+                lb_80011E24(mnCharSel_804D6CC0, &sp30,
+                    *((u8*) &mnCharSel_803F0A48 + 0x3BB + port * 0x24), -1);
+                HSD_ForeachAnim(sp30, JOBJ_TYPE, TOBJ_MASK,
+                                 HSD_AObjReqAnim, AOBJ_ARG_AF, (f32) hval);
+                HSD_JObjAnimAll(sp30);
+                HSD_ForeachAnim(sp30, JOBJ_TYPE, TOBJ_MASK,
+                                 HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
+                sp84 = sp30;
+                {
+                    u8 port3;
+                    u8 hval2;
+                    f32 hval_f;
+                    port3 = tag->port;
+                    if ((u8) gmMainLib_8015CC34()->handicap == 1) {
+                        hval2 = gm_801685D4(port3,
+                            mnCharSel_804D6CB0->data.data.players[port3].xA);
+                    } else {
+                        hval2 = (u8) mnCharSel_804D6CB0->data.data.players[port3].handicap;
+                    }
+                    if ((s32) hval2 != 0) {
+                    } else {
+                        hval2 = 1;
+                    }
+                    hval_f = (f32) (hval2 - 1);
+                    HSD_JObjSetTranslateX(sp84, 1.25f * hval_f);
+                }
+            }
+        }
+        tag->state = 5;
+        tag->timer = 0;
+        return;
+
+    case 5: {
+        u32 t2;
+        t2 = tag->timer + 1;
+        tag->timer = t2;
+        if (t2 > 0xAU) {
+            mnCharSel_8025D1C4((s32) tag->port, 2);
+            sp54 = sp78;
+            HSD_SisLib_803A74F0((HSD_Text*)tag->text, 0, (u8*) &sp54);
+            tag->state = 0;
+        }
+        break;
+    }
+    }
+    PAD_STACK(72);
+}
 
 void mnCharSel_80264070(void)
 {
