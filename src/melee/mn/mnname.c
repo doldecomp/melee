@@ -5,6 +5,7 @@
 #include "mnnamenew.h"
 #include "placeholder.h"
 
+#include "dolphin/gx/GXStruct.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 #include "lb/lbarchive.h"
@@ -33,8 +34,8 @@ static u8 mnName_NameDisplayOrder[0x78];
 
 extern f32 mnName_804D4BD0[2];
 extern f32 mnName_804D4BD8[2];
-extern s32 mnName_804D4BE0;
-extern s32 mnName_804D4BE4;
+extern GXColor mnName_804D4BE0;
+extern GXColor mnName_804D4BE4;
 extern u8 mnName_804D4BE8[3];
 
 extern char* mnNameNew_803EE720[];
@@ -839,9 +840,9 @@ void mnName_80238A04(HSD_GObj* gobj, u8 target, u8 flag)
 
 void mnName_80238AE0(HSD_GObj* gobj, u8 index, u8 arg2)
 {
-    s32 color;
+    GXColor color;
     HSD_JObj* jobj;
-    s32* colorptr;
+    GXColor* colorptr;
 
     if ((u8) index < 0x18) {
         jobj = mnName_802388D4_noinline(gobj, index);
@@ -854,7 +855,7 @@ void mnName_80238AE0(HSD_GObj* gobj, u8 index, u8 arg2)
         }
         color = *colorptr;
         HSD_SisLib_803A74F0(((MnName_GObj*) gobj)->text, (s32) index,
-                            (0, (u8*) (&color)));
+                            (0, (&color)));
         return;
     }
 
@@ -1118,7 +1119,7 @@ void mnName_80239878(u8 arg0, HSD_GObj* gobj)
 void mnName_80239A24(HSD_GObj* gobj)
 {
     Vec3 sp6C;
-    s32 sp60;
+    GXColor sp60;
     MnName_GObj* data = (MnName_GObj*) gobj;
     HSD_JObj* jobj;
     HSD_JObj* ref_jobj;
@@ -1230,7 +1231,7 @@ void mnName_80239A24(HSD_GObj* gobj)
                         namedata);
                 }
                 {
-                    s32* color;
+                    GXColor* color;
                     if ((s32) i ==
                         (s32) mn_804A04F0.hovered_selection)
                     {
@@ -1239,8 +1240,7 @@ void mnName_80239A24(HSD_GObj* gobj)
                         color = &mnName_804D4BE4;
                     }
                     sp60 = *color;
-                    HSD_SisLib_803A74F0(text, (s32) i,
-                                        (u8*) &sp60);
+                    HSD_SisLib_803A74F0(text, (s32) i, &sp60);
                 }
             } else {
                 HSD_SisLib_803A6B98(text, 0.0f, 0.0f,
