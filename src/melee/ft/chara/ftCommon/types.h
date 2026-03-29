@@ -405,7 +405,10 @@ union ftCommon_MotionVars {
     struct {
         /* fp+2340 */ int x40;
         /* fp+2344 */ int x44;
-        /* fp+2348 */ u8 pad_x48[0x68 - 0x48];
+        /* fp+2348 */ u8 pad_x48[0x4C - 0x48];
+        /* fp+234C */ float x4C;
+        /* fp+2350 */ Vec3 x50;
+        /* fp+235C */ Vec3 x5C;
         /* fp+2368 */ int x68;
     } unk_deadup;
     struct {

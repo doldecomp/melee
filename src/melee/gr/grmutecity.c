@@ -8,6 +8,7 @@
 
 #include "forward.h"
 
+#include "gr/ground.h"
 #include "gr/grdatfiles.h"
 #include "gr/grdisplay.h"
 #include "gr/grfzerocar.h"
@@ -737,4 +738,45 @@ DynamicsDesc* grMuteCity_801F2BBC(enum_t arg0)
     return NULL;
 }
 
-/// #grMuteCity_801F2C10
+bool grMuteCity_801F2C10(Vec3* pos, int arg, HSD_JObj* jobj)
+{
+    HSD_GObj* gobj;
+    Ground* gp;
+    f32 x;
+    f32 x_min;
+    f32 x_max;
+    f32 slope;
+    f32 y;
+    PAD_STACK(8);
+
+    gobj = Ground_801C2BA4(0x1E);
+    if (gobj != NULL) {
+        gp = gobj->user_data;
+        if (gp != NULL) {
+            if (gp->gv.mutecity.xFC == jobj ||
+                gp->gv.mutecity.x100 == jobj ||
+                gp->gv.mutecity.x104 == jobj ||
+                gp->gv.mutecity.x108 == jobj ||
+                gp->gv.mutecity.x10C == jobj)
+            {
+                x = pos->x;
+                x_min = gp->gv.mutecity.xE4;
+                if (x < x_min) {
+                    return false;
+                }
+                x_max = gp->gv.mutecity.xF0;
+                if (x > x_max) {
+                    return false;
+                }
+                slope = (gp->gv.mutecity.xF4 - gp->gv.mutecity.xE8) /
+                        (x_max - x_min);
+                y = slope * (x - x_min) + gp->gv.mutecity.xE8;
+                if (pos->y > y - 3.0F) {
+                    return true;
+                }
+                return false;
+            }
+        }
+    }
+    return true;
+}

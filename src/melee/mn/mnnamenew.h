@@ -6,7 +6,7 @@
 #include <baselib/forward.h>
 
 /* 23B0F8 */ UNK_RET mnNameNew_8023B0F8(UNK_PARAMS);
-/* 23B224 */ UNK_RET mnNameNew_8023B224(UNK_PARAMS);
+/* 23B224 */ void mnNameNew_8023B224(u8);
 /* 23B314 */ UNK_RET mnNameNew_8023B314(UNK_PARAMS);
 /* 23B3FC */ UNK_RET mnNameNew_KeySetup(UNK_PARAMS);
 /* 23BAA8 */ UNK_RET mnNameNew_8023BAA8(UNK_PARAMS);
