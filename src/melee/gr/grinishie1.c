@@ -748,7 +748,35 @@ void fn_801FBF6C(Item_GObj* item_gobj, Ground* gp, Vec3* pos,
     PAD_STACK(16);
 }
 
-/// #grInishie1_801FC018
+void grInishie1_801FC018(HSD_GObj* gobj)
+{
+    Ground* gp = gobj->user_data;
+
+    gp->gv.inishie1.xEE = 0;
+    gp->gv.inishie1.xE0 = 0.0f;
+    gp->gv.inishie1.xE4 = 0.0f;
+    gp->gv.inishie1.xE8 = 0;
+    gp->gv.inishie1.xEA = 0;
+    gp->gv.inishie1.xF0 = 0.0f;
+    gp->gv.inishie1.xF4 = 0.0f;
+
+    gp->gv.inishie1.x108 = Ground_801C3FA4(gobj, 0x1a);
+    gp->gv.inishie1.x10C = Ground_801C3FA4(gobj, 0x1c);
+
+    gp->gv.inishie1.xFC =
+        HSD_JObjGetTranslationY(gp->gv.inishie1.x108);
+
+    gp->gv.inishie1.x100 = (gp->gv.inishie1.x108 == NULL)
+                                ? NULL
+                                : gp->gv.inishie1.x108->child;
+    gp->gv.inishie1.x104 = (gp->gv.inishie1.x10C == NULL)
+                                ? NULL
+                                : gp->gv.inishie1.x10C->child;
+
+    mpJointSetCb1(0x15, gp, (mpLib_Callback) fn_801FC9AC);
+    mpJointSetCb1(0x14, gp, (mpLib_Callback) fn_801FC9AC);
+    PAD_STACK(16);
+}
 
 void grInishie1_801FC110(HSD_GObj* gobj)
 {
@@ -865,7 +893,27 @@ void fn_801FBEB8(Ground* gr, s32 block_id, CollData* arg2, s32 arg3,
 
 /// #grInishie1_801FC664
 
-/// #fn_801FC9AC
+void fn_801FC9AC(Ground* gr, s32 block_id, s32 arg2, s32 dist,
+                 enum mpLib_GroundEnum arg4)
+{
+    if (block_id == 0x14) {
+        gr->gv.inishie1.xE8 += 1;
+        if (arg4 == 1) {
+            gr->gv.inishie1.xE0 +=
+                (f32) dist * grI1_804D69F8->unk2C[1].z;
+        } else {
+            gr->gv.inishie1.xE0 += (f32) dist;
+        }
+    } else if (block_id == 0x15) {
+        gr->gv.inishie1.xEA += 1;
+        if (arg4 == 1) {
+            gr->gv.inishie1.xE4 +=
+                (f32) dist * grI1_804D69F8->unk2C[1].z;
+        } else {
+            gr->gv.inishie1.xE4 += (f32) dist;
+        }
+    }
+}
 
 bool grInishie1_801FCAAC(int line_id)
 {
