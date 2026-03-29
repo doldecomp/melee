@@ -1,0 +1,15 @@
+File: src/melee/mn/mncharsel.c
+Functions:
+- [x] mnCharSel_80266D70_OnLeave       
+- [x] mnCharSel_8025EE8C               
+- [ ] mnCharSel_8025FB50               
+- [ ] mnCharSel_8025FDEC               
+- [ ] mnCharSel_8025D1C4               
+- [ ] fn_80262F44                      
+- [ ] mnCharSel_8025D5AC               
+- [ ] fn_80262648                      
+- [ ] fn_8025F0E0                      
+- [ ] fn_802633B0                      
+- [ ] mnCharSel_8025C020               
+- [ ] mnCharSel_8025DB34               
+- [ ] mnCharSel_CursorThink      
