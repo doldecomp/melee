@@ -4,7 +4,7 @@ Functions:
 - [x] mnCharSel_8025EE8C               
 - [x] mnCharSel_8025FB50               
 - [x] mnCharSel_8025FDEC               
-- [ ] mnCharSel_8025D1C4               
+- [x] mnCharSel_8025D1C4               
 - [ ] fn_80262F44                      
 - [ ] mnCharSel_8025D5AC               
 - [ ] fn_80262648                      
