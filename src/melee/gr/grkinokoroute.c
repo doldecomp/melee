@@ -209,7 +209,32 @@ void grKinokoRoute_802084B4(HSD_GObj* gobj)
     PAD_STACK(20);
 }
 
-/// #grKinokoRoute_80208564
+void grKinokoRoute_80208564(HSD_GObj* gobj)
+{
+    Ground* gp = gobj->user_data;
+    u32 i;
+    s16 depths[] = {
+        1,  2,  3,  4,  5,  6,  7,  8,  9,  10, 11, 12, 13,
+        14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26,
+        27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39,
+        40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51,
+    };
+
+    for (i = 0; i < 0x33U; i++) {
+        HSD_JObj* jobj = Ground_801C3FA4(gobj, depths[i]);
+        Item_GObj* item = grMaterial_801C8CFC(
+            8, 0, gp, jobj, NULL,
+            (void (*)(Item_GObj*, Ground*, Vec3*, HSD_GObj*, f32))
+                grKinokoRoute_802084B4,
+            NULL);
+        if (item != NULL) {
+            grMaterial_801C8DE0(item, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F,
+                                0.0F, 7.0F);
+            grMaterial_801C8E08(item);
+            grMaterial_801C8E68(item, GA_Ground);
+        }
+    }
+}
 
 bool grKinokoRoute_80208660(s32 arg0, HSD_GObj* gobj)
 {
