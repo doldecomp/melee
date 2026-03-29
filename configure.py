@@ -1603,7 +1603,7 @@ config.libs = [
             Object(Matching, "sysdolphin/baselib/video.c"),
             Object(Matching, "sysdolphin/baselib/controller.c"),
             Object(Matching, "sysdolphin/baselib/rumble.c"),
-            Object(NonMatching, "sysdolphin/baselib/spline.c"),
+            Object(Matching, "sysdolphin/baselib/spline.c"),
             Object(Matching, "sysdolphin/baselib/mtx.c"),
             Object(Matching, "sysdolphin/baselib/util.c"),
             Object(Matching, "sysdolphin/baselib/objalloc.c"),
