@@ -596,9 +596,8 @@ void mnNameNew_GlyphVariantInput(void)
 
     data = ((HSD_GObj*) mnNameNew_804D6C08)->user_data;
     buttons = mn_80229624((u32) mnNameNew_PortInUse);
-    *(u32*)((u8*)&mn_804A04F0 + 0xC) = buttons;
+    mn_804A04F0.buttons = buttons;
     count = 0;
-    *(u32*)((u8*)&mn_804A04F0 + 0x8) = 0;
     if (buttons & 0x200) {
         HSD_GObjPLink_80390228(data->variant_gobj);
         data->variant_gobj = NULL;
