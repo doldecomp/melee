@@ -8,8 +8,8 @@ Functions:
 - [x] fn_80262F44                      
 - [x] mnCharSel_8025D5AC               
 - [x] fn_80262648                      
-- [ ] fn_8025F0E0                      
-- [ ] fn_802633B0                      
-- [ ] mnCharSel_8025C020               
+- [x] fn_8025F0E0                      
+- [x] fn_802633B0                      
+- [x] mnCharSel_8025C020               
 - [ ] mnCharSel_8025DB34               
 - [ ] mnCharSel_CursorThink      
