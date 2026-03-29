@@ -16,7 +16,7 @@
 /* 25F0E0 */ UNK_RET fn_8025F0E0(UNK_PARAMS);
 /* 25FAC0 */ void fn_8025FAC0(HSD_GObj*);
 /* 25FB2C */ void fn_8025FB2C(HSD_GObj*);
-/* 25FB50 */ UNK_RET mnCharSel_8025FB50(UNK_PARAMS);
+/* 25FB50 */ void mnCharSel_8025FB50(u8 door, s32 arg1);
 /* 25FDEC */ UNK_RET mnCharSel_8025FDEC(UNK_PARAMS);
 /* 260094 */ void mnCharSel_CostumeChange(int door, u32 input);
 /* 2602A0 */ void mnCharSel_CursorThink(HSD_GObj* gobj);

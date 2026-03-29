@@ -6,9 +6,12 @@
 
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/fog.h>
+#include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/sislib.h>
 #include <melee/gm/gm_unsplit.h>
+#include <melee/gm/gm_1601.h>
 #include <melee/gm/gmmain_lib.h>
 #include <melee/gm/types.h>
 #include <melee/lb/lb_00F9.h>
@@ -728,9 +731,17 @@ void fn_8025FB2C(HSD_GObj* gobj)
     HSD_JObjAnimAll(GET_JOBJ(gobj));
 }
 
-/// #mnCharSel_8025FB50
-
-/// #mnCharSel_8025FDEC
+static HSD_GObj** mnCharSel_804A0BC0[4];
+static struct CSSCharModel {
+    /* 0x00 */ HSD_GObj* gobj;
+    /* 0x04 */ u8 x4;
+    /* 0x05 */ u8 x5;
+    /* 0x06 */ u8 pad_06[2];
+    /* 0x08 */ float x8;
+    /* 0x0C */ float xC;
+    /* 0x10 */ float x10;
+    /* 0x14 */ float x14;
+}* mnCharSel_804A0BD0[4];
 
 static inline bool isDuplicateCostume(int door)
 {
@@ -755,6 +766,74 @@ static inline bool isDuplicateCostume(int door)
     }
     return false;
 }
+
+/// #mnCharSel_8025FB50
+
+void mnCharSel_8025FB50(u8 door, s32 arg1)
+{
+    HSD_JObj* sp18;
+    s32 icon_idx;
+    s8 player;
+
+    do {
+        icon_idx = HSD_Randi(0x19);
+    } while (icons[icon_idx].state == 0);
+
+    if (mnCharSel_804D6CF5 == 1) {
+        if (door != 0) {
+            player = mnCharSel_804D6CF1;
+        } else {
+            player = mnCharSel_804D6CF0;
+        }
+    } else {
+        player = (s8) door;
+    }
+
+    mnCharSel_804D6CB0->data.data.players[player].c_kind =
+        icons[icon_idx].char_kind;
+
+    mnCharSel_803F0DFC.doors[door].sel_icon = (u8) icon_idx;
+    if (mnCharSel_803F0DFC.doors[door].sel_icon !=
+        mnCharSel_803F0DFC.doors[door].sel_icon_prev)
+    {
+        u8 costume = 0;
+        mnCharSel_803F0DFC.doors[door].costume = costume;
+        while (isDuplicateCostume(door)) {
+            costume++;
+            mnCharSel_803F0DFC.doors[door].costume = costume;
+        }
+    }
+
+    mnCharSel_804A0BD0[door]->x5 = 0;
+    mnCharSel_804A0BD0[door]->x8 = 3.4f + icons[icon_idx].bound_l;
+    mnCharSel_804A0BD0[door]->xC = -3.0f + icons[icon_idx].bound_u;
+    if (arg1 != 0) {
+        mnCharSel_804A0BD0[door]->x10 = mnCharSel_804A0BD0[door]->x8;
+        mnCharSel_804A0BD0[door]->x14 = mnCharSel_804A0BD0[door]->xC;
+    }
+    HSD_GObjGXLink_803909D8(mnCharSel_804A0BD0[door]->gobj,
+                            *mnCharSel_804A0BC0[mnCharSel_804D6CF5 - 1]);
+
+    if (mnCharSel_804D6CF5 == 1) {
+        lb_80011E24(mnCharSel_804D6CC0, &sp18,
+                    icons[icon_idx].joint_id_1p, -1);
+    } else {
+        lb_80011E24(mnCharSel_804D6CC0, &sp18,
+                    icons[icon_idx].joint_id_vs, -1);
+    }
+    HSD_ForeachAnim(sp18, JOBJ_TYPE, TOBJ_MASK, HSD_AObjReqAnim,
+                    AOBJ_ARG_AF, 10.0);
+
+    icons[icon_idx].anim_timer = 0xC;
+
+    {
+        u8 sel = mnCharSel_803F0DFC.doors[door].sel_icon;
+        lbAudioAx_80023870(icons[sel].sfx, 0x7F, 0x40, sel + 0x8A);
+        gm_80168C5C((u32) icons[sel].char_kind);
+    }
+}
+
+/// #mnCharSel_8025FDEC
 
 void mnCharSel_CostumeChange(int door, u32 input)
 {
@@ -872,12 +951,6 @@ void mnCharSel_8026688C_OnEnter(void* arg0)
     mnCharSel_804D6CF4 = 0;
     mnCharSel_802640A0();
 }
-
-static u8 bss_pad[0x10];
-static struct asdf {
-    u8 pad[0x5];
-    u8 x5;
-}* mnCharSel_804A0BD0[4];
 
 void mnCharSel_802669F4_OnFrame(void)
 {
