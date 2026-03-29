@@ -12,7 +12,7 @@
 /* 23B3FC */ s32 mnNameNew_KeySetup(NameNewEntry*, u8);
 /* 23BAA8 */ s32 mnNameNew_8023BAA8(NameNewEntry* arg0, s32 arg1, u8 arg2);
 /* 23BD4C */ s32 PickAutoName(HSD_GObj* arg0);
-/* 23BEE0 */ s32 NameContainsOnlySpaces(void);
+/* 23BEE0 */ bool NameContainsOnlySpaces(void);
 /* 23BFE4 */ s32 WriteCharactersForNameAtIndex(u8 arg0, s32 arg1);
 /* 23C148 */ s32 AddCharacterToName(u8* arg0, s32 arg1, u8 arg2, u8 arg3);
 /* 23C290 */ void mnNameNew_GlyphVariantInput(void);

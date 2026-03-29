@@ -36,7 +36,7 @@ extern u8 mn_804D6BB4;
 extern u8 mn_804D6BB5;
 extern u8 mnNameNew_804D4F7C[4];
 extern void* mnNameNew_804D6C08;
-extern u8 mnNameNew_SpaceCharacter[2];
+extern char mnNameNew_SpaceCharacter[2];
 extern char* mnNameNew_803EDCE4[];
 extern void* mnNameNew_804A06F0[];
 extern void* mnNameNew_804A0700[];
@@ -459,25 +459,25 @@ s32 PickAutoName(HSD_GObj* arg0)
     return (s32)(s8) mnNameNew_NullCharacter;
 }
 
-s32 NameContainsOnlySpaces(void)
+bool NameContainsOnlySpaces(void)
 {
-    u8* text = (u8*) mnNameNew_CurrentNameText;
-    s8 null_char = (s8) mnNameNew_NullCharacter;
-    s8 space0 = (s8) mnNameNew_SpaceCharacter[0];
-    u8* sp = mnNameNew_SpaceCharacter;
+    char* text = mnNameNew_CurrentNameText;
+    char null_char = mnNameNew_NullCharacter;
+    char space0 = mnNameNew_SpaceCharacter[0];
+    char* sp = mnNameNew_SpaceCharacter;
     s32 i;
 
     for (i = 0; i < 4; i++) {
-        if (null_char != (s8) text[0]) {
-            if (space0 != (s8) text[0] ||
-                (s8) sp[1] != (s8) text[1])
+        if (null_char != text[0]) {
+            if (space0 != text[0] ||
+                sp[1] != text[1])
             {
-                return 0;
+                return FALSE;
             }
         }
         text += 3;
     }
-    return 1;
+    return TRUE;
 }
 
 
