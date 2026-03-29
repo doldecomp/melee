@@ -31,6 +31,7 @@ typedef struct lbAudioAx_UserData {
 
 extern f32 lbl_804D63F0;
 extern int lbl_804D63F4;
+extern int lbl_804D63F8;
 extern int lbl_804D63FC;
 extern int lbl_804D6400;
 extern int lbl_804D6404;
@@ -41,8 +42,12 @@ static f32 lbl_804D3880 = 1.0F; ///< synth volume
 static int lbl_804D3884 = 0x7F;
 static int lbl_804D3888 = 0x7F;
 static int lbl_804D388C = 0x7F;
+static int lbl_804D3890 = 0x7F;
+static int lbl_804D3894 = 0x7F;
 static int lbl_804D3898 = 0x7F;
+static int lbl_804D389C = 0x7F;
 static int lbl_804D38A0 = 0x7F;
+static int lbl_804D38A4 = 0x7F;
 static int lbl_804D38A8 = 0x7F;
 static f32 lbl_804D38AC = 1.0F;
 static f32 lbl_804D38B0 = 1.0F;

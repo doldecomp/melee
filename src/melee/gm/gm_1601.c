@@ -1799,7 +1799,40 @@ found:
     return false;
 }
 
-/// #gm_80164504
+int gm_80164504(u16 stage_id)
+{
+    u16* stage_unlock_mask;
+    u8 internal_id;
+    s32 i;
+    u8 unlock_idx;
+    u8 notify_val;
+
+    stage_unlock_mask = gmMainLib_8015EDA4();
+    internal_id = Stage_8022519C(stage_id);
+
+    for (i = 0; i < NUM_UNLOCKABLE_STAGES; i++) {
+        if ((s32) internal_id == (s32) lbl_803B790C[i][1]) {
+            unlock_idx = lbl_803B790C[i][0];
+            goto found_stage;
+        }
+    }
+    unlock_idx = NUM_UNLOCKABLE_STAGES;
+
+found_stage:
+    if (unlock_idx != NUM_UNLOCKABLE_STAGES) {
+        for (i = 0; i < NUM_UNLOCKABLE_STAGES; i++) {
+            if ((s32) unlock_idx == (s32) lbl_803B790C[i][0]) {
+                notify_val = lbl_803B790C[i][2];
+                goto found_notify;
+            }
+        }
+        notify_val = 0x42;
+
+    found_notify:
+        gmMainLib_8015D818(notify_val);
+        *stage_unlock_mask |= (1LL << (s32) unlock_idx);
+    }
+}
 
 /// Are all stages unlocked?
 bool gm_80164600(void)

@@ -10,11 +10,14 @@
 #include "ft/ft_081B.h"
 #include "ft/ft_0892.h"
 #include "ft/ft_0C88.h"
+#include "ft/ftanim.h"
 #include "ft/ftcoll.h"
 #include "ft/ftcommon.h"
 #include "ft/ftwaitanim.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
+
+#include "lb/lbvector.h"
 
 #include "ftCommon/forward.h"
 
@@ -47,6 +50,7 @@
 #include <melee/gm/gm_unsplit.h>
 #include <melee/gr/stage.h>
 #include <melee/it/item.h>
+#include <melee/mp/mpcoll.h>
 #include <melee/it/items/it_2E5A.h>
 #include <melee/it/items/itkinoko.h>
 #include <melee/pl/pl_040D.h>
@@ -413,7 +417,39 @@ void ftCo_800D47B8(Fighter_GObj* gobj)
 
 /// #ftCo_DeadUpFall_Anim
 
-/// #ftCo_DeadUpFall_Phys
+void ftCo_DeadUpFall_Phys(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    u8* ca = (u8*) p_ftCommonData + 0x520;
+
+    switch (fp->mv.co.unk_deadup.x44) {
+    case 1:
+        if (fp->x2222_b6) {
+            if (!ftAnim_80070FD0(fp)) {
+                break;
+            }
+        }
+        lbVector_Lerp((Vec3*) (ca + 0x18), (Vec3*) (ca + 0x24),
+                      &fp->mv.co.unk_deadup.x50,
+                      fp->mv.co.unk_deadup.x4C);
+        break;
+    case 3:
+        ftCommon_Fall(fp, *(float*) (ca + 0x34),
+                      *(float*) (ca + 0x38));
+        lbVector_Add(&fp->mv.co.unk_deadup.x5C, &fp->self_vel);
+        if (fp->x2222_b6) {
+            if (!ftAnim_80070FD0(fp)) {
+                break;
+            }
+        }
+        lbVector_Add(&fp->mv.co.unk_deadup.x50,
+                     &fp->mv.co.unk_deadup.x5C);
+        fp->mv.co.unk_deadup.x5C.x = 0;
+        fp->mv.co.unk_deadup.x5C.y = 0;
+        fp->mv.co.unk_deadup.x5C.z = 0;
+        break;
+    }
+}
 
 void fn_800D4DD4(Fighter_GObj* gobj)
 {
@@ -517,7 +553,30 @@ void fn_800D55B4(Fighter_GObj* gobj)
         fp->cur_pos.y = other_fp->cur_pos.y;
     }
 }
-/// #ftCo_800D5600
+void ftCo_800D5600(Fighter_GObj* gobj)
+{
+    Fighter* fp = gobj->user_data;
+    mpColl_80043680(&fp->coll_data, &fp->cur_pos);
+    fp->self_vel.y = 0;
+    fp->mv.co.common.x0 = (int) p_ftCommonData->x5D4;
+    Fighter_ChangeMotionState(gobj, ftCo_MS_RebirthWait,
+                              Ft_MF_KeepGfx | Ft_MF_SkipColAnim |
+                                  Ft_MF_KeepAccessory |
+                                  Ft_MF_SkipNametagVis,
+                              0, 1, 0, NULL);
+    fp->x221E_b2 = 1;
+    fp->x2219_b1 = 1;
+    fp->x221E_b1 = 1;
+    fp->x221D_b5 = 1;
+    if (!fp->x221F_b4) {
+        fp->accessory1_cb = fn_800D54A4;
+    } else {
+        fp->accessory1_cb = fn_800D55B4;
+    }
+    if (fp->smash_attrs.x2135 != -1) {
+        mpColl_80043680(&fp->coll_data, &fp->cur_pos);
+    }
+}
 
 void ftCo_RebirthWait_Anim(Fighter_GObj* gobj)
 {

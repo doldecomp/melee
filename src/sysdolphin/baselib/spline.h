@@ -17,7 +17,6 @@ struct HSD_Spline {
 
 f32 splGetHelmite(f32, f32, f32, f32, f32, f32);
 void splGetCardinalPoint(Vec3*, Vec3*, f32, f32);
-void splGetBSplinePoint(Vec3*, Vec3*, f32);
 void splGetBezierPoint(Vec3*, Vec3*, f32);
 void splGetSplinePoint(Vec3*, HSD_Spline*, f32);
 f32 splArcLengthGetParameter(HSD_Spline*, f32);
