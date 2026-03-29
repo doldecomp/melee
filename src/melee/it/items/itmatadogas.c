@@ -5,12 +5,15 @@
 
 #include "ef/eflib.h"
 #include "ef/efsync.h"
+#include "ft/ft_0C31.h"
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
 
+#include <baselib/debug.h>
+#include <baselib/jobj.h>
 #include <baselib/random.h>
 
 void it_802CAFD4(Item_GObj* gobj)
@@ -96,7 +99,32 @@ bool itMatadogas_UnkMotion2_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itMatadogas_UnkMotion2_Phys
+void itMatadogas_UnkMotion2_Phys(Item_GObj* gobj)
+{
+    Item* item;
+    Item* item2;
+    HSD_JObj* jobj;
+
+    if (it_8027A09C(gobj)) {
+        item = gobj->user_data;
+        it_80273454(gobj);
+        item2 = gobj->user_data;
+        jobj = gobj->hsd_obj;
+        Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
+        item2->entered_hitlag = efLib_PauseAll;
+        item2->exited_hitlag = efLib_ResumeAll;
+        ((jobj) ? ((void) 0) : __assert("jobj.h", 660, "jobj"));
+        ((!(jobj->flags & JOBJ_USE_QUATERNION)) ? ((void) 0)
+            : __assert("jobj.h", 661,
+                       "!(jobj->flags & JOBJ_USE_QUATERNION)"));
+        jobj->rotate.y = 0.0f;
+        if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
+            ftCo_800C6AFC(jobj);
+        }
+        item2->on_accessory = (HSD_GObjEvent) it_802CB2B0;
+        item->xDD1_flag.b1 = 1;
+    }
+}
 
 bool itMatadogas_UnkMotion2_Coll(Item_GObj* gobj)
 {

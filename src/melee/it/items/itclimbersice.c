@@ -22,7 +22,47 @@
 
 /// #it_802C1590
 
-/// #it_802C16F8
+void it_802C16F8(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itClimbersIceAttributes* sa = ip->xC4_article_data->x4_specialAttributes;
+    PAD_STACK(24);
+
+    ip->x40_vel.x = sa->x10 * ip->facing_dir;
+    ip->x40_vel.z = 0.0f;
+    ip->x40_vel.y = 0.0f;
+
+    it_80275158(gobj, sa->x0);
+
+    ip->xDD4_itemVar.climbersice.x8_b0 = 1;
+
+    it_80272980(gobj);
+
+    {
+        HSD_JObj* child;
+        HSD_JObj* jobj = gobj->hsd_obj;
+
+        if (jobj == NULL) {
+            child = NULL;
+        } else {
+            child = jobj->child;
+        }
+
+        {
+            Item* ip = GET_ITEM(gobj);
+
+            if (ip->kind == 0x6A) {
+                f32* facing = &ip->facing_dir;
+                efAsync_Spawn(gobj, &ip->xBC0, 3, 0x4EA, child, facing);
+            } else {
+                f32* facing = &ip->facing_dir;
+                efAsync_Spawn(gobj, &ip->xBC0, 3, 0x4AF, child, facing);
+            }
+        }
+    }
+
+    it_802C1AE4(gobj);
+}
 
 void it_802C17DC(Item_GObj* gobj)
 {
@@ -202,7 +242,21 @@ bool itClimbersice_UnkMotion3_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itClimbersice_UnkMotion3_Phys
+void itClimbersice_UnkMotion3_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ItemAttr* attrs = ip->xCC_item_attr;
+    itClimbersIceAttributes* sa;
+    u32 dmg;
+
+    it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
+    it_80274658(gobj, it_804D6D28->x68_float);
+
+    ip = GET_ITEM(gobj);
+    sa = ip->xC4_article_data->x4_specialAttributes;
+    dmg = (u32) ABS(ip->x40_vel.x * sa->x30) + sa->x2C;
+    it_80272460(&ip->x5D4_hitboxes[0].hit, dmg, gobj);
+}
 
 /// #itClimbersice_UnkMotion3_Coll
 
@@ -221,7 +275,41 @@ bool itClimbersIce_Logic90_Clanked(Item_GObj* arg0)
     return true;
 }
 
-/// #it_2725_Logic90_HitShield
+bool it_2725_Logic90_HitShield(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    f32 vel_x = ip->x40_vel.x;
+    ItemAttr* attr = ip->xCC_item_attr;
+    itClimbersIceAttributes* sa =
+        ip->xC4_article_data->x4_specialAttributes;
+
+    if (vel_x < 0.0f) {
+        vel_x = -vel_x;
+    }
+
+    if (vel_x <= sa->xC) {
+        itColl_BounceOffVictim(gobj);
+        it_80272980(gobj);
+        {
+            f32 scale = attr->x58;
+            ip->x40_vel.x *= scale;
+            ip->x40_vel.y *= scale;
+            ip->x40_vel.z *= scale;
+        }
+        {
+            Item* ip2 = GET_ITEM(gobj);
+            itClimbersIceAttributes* sa2 =
+                ip2->xC4_article_data->x4_specialAttributes;
+            ip2->xD44_lifeTimer -= sa2->x4;
+        }
+        if (ip->xD44_lifeTimer < sa->x8) {
+            return true;
+        }
+        return false;
+    }
+
+    return true;
+}
 
 bool itClimbersIce_Logic90_Absorbed(Item_GObj* arg0)
 {

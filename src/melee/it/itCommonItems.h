@@ -196,6 +196,8 @@ typedef struct itLugiaAttributes {
     /* +10 */ f32 x10;
     /* +14 */ s32 x14;
     /* +18 */ f32 x18;
+    /* +1C */ u8 x1C_pad[0x24];
+    /* +40 */ f32 x40;
 } itLugiaAttributes;
 
 /// Box/Crate item attributes loaded from .dat file
@@ -709,10 +711,15 @@ typedef struct itHitodeman_ItemVars {
     /* +60 ip+E34 */ float x60;
     /* +64 ip+E38 */ float x64;
     /* +68 ip+E3C */ s32 x68;
-    /* +6C ip+E40 */ char pad_6C[0x18];
+    /* +6C ip+E40 */ float x6C;
+    /* +70 ip+E44 */ float x70;
+    /* +74 ip+E48 */ float x74;
+    /* +78 ip+E4C */ float x78;
+    /* +7C ip+E50 */ float x7C;
+    /* +80 ip+E54 */ float x80;
     /* +84 ip+E58 */ float x84;
     /* +88 ip+E5C */ s32 x88;
-    /* +8C ip+E60 */ char pad_8C[0x4];
+    /* +8C ip+E60 */ float x8C;
     /* +90 ip+E64 */ HSD_GObj* x90;
 } itHitodeman_ItemVars;
 
@@ -1082,7 +1089,9 @@ typedef struct it_279D_ItemVars {
 typedef struct itMewtwoShadowball_ItemVars {
     /* ip+DD4 */ s32 x0;
     /* ip+DD8 */ Vec3 x4;
-    /* ip+DE4 */ s32 x10[3];
+    /* ip+DE4 */ f32 x10;
+    /* ip+DE8 */ s32 x14;
+    /* ip+DEC */ s32 x18;
     /* ip+DF0 */ s32 x1C;
     /* ip+DF4 */ s32 x20;
     /* ip+DF8 */ f32 x24;
@@ -1453,6 +1462,9 @@ typedef struct itPatapataAttributes {
     /* 0x24 */ s32 x24;
     /* 0x28 */ s32 x28;
     /* 0x2C */ s32 x2C;
+    /* 0x30 */ u8 pad_30[0x38 - 0x30];
+    /* 0x38 */ f32 x38;
+    /* 0x3C */ f32 x3C;
 } itPatapataAttributes;
 
 typedef struct itOldottoseaAttributes {
@@ -1564,8 +1576,12 @@ typedef struct itLugia_ItemVars {
     /* +00 ip+DD4 */ u8 x0_pad[0x60];
     /* +60 ip+E34 */ s32 x60;
     /* +64 ip+E38 */ Vec3 x64;
-    /* +70 ip+E44 */ u8 x70_pad[0xC];
+    /* +70 ip+E44 */ Vec3 x70;
     /* +7C ip+E50 */ Vec3 xE50;
+    /* +88 ip+E5C */ f32 x88;
+    /* +8C ip+E60 */ Vec3 x8C;
+    /* +98 ip+E6C */ u8 x98_pad[0xC];
+    /* +A4 ip+E78 */ s32 xA4;
 } itLugia_ItemVars;
 
 typedef struct itGreatFoxLaser_ItemVars {
