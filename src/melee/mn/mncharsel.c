@@ -612,6 +612,7 @@ void mnCharSel_8025D5AC(int door, int var_r31, bool hidden)
     sethidden(sp44, hidden);
 }
 
+#pragma dont_inline on
 bool mnCharSel_8025DAA0(int door)
 {
     int num_doors;
@@ -636,6 +637,7 @@ bool mnCharSel_8025DAA0(int door)
     }
     return false;
 }
+#pragma dont_inline off
 
 /// #mnCharSel_8025DB34
 
@@ -833,7 +835,85 @@ void mnCharSel_8025FB50(u8 door, s32 arg1)
     }
 }
 
-/// #mnCharSel_8025FDEC
+#pragma auto_inline off
+s32 mnCharSel_8025FDEC(u8 door)
+{
+    HSD_JObj* sp10;
+    s8 player;
+    u8 c_kind;
+    u8 icon_idx;
+
+    if (mnCharSel_804D6CF5 == 1) {
+        if (door != 0) {
+            player = mnCharSel_804D6CF1;
+        } else {
+            player = mnCharSel_804D6CF0;
+        }
+    } else {
+        player = (s8) door;
+    }
+
+    c_kind = mnCharSel_804D6CB0->data.data.players[player].c_kind;
+
+    if ((s8) c_kind >= 0x1A) {
+        return 1;
+    }
+
+    if ((s8) c_kind !=
+        (s8) icons[mnCharSel_803F0DFC.doors[door].sel_icon].char_kind)
+    {
+        mnCharSel_803F0DFC.doors[door].costume = 0;
+    }
+
+    for (icon_idx = 0; icon_idx < 0x19; icon_idx++) {
+        if ((s8) c_kind == (s8) icons[icon_idx].char_kind) {
+            break;
+        }
+    }
+
+    mnCharSel_804A0BD0[door]->x8 = 3.4f + icons[icon_idx].bound_l;
+    mnCharSel_804A0BD0[door]->xC = -3.0f + icons[icon_idx].bound_u;
+
+    mnCharSel_803F0DFC.doors[door].sel_icon_prev = icon_idx;
+    mnCharSel_803F0DFC.doors[door].sel_icon = icon_idx;
+
+    HSD_GObjGXLink_803909D8(mnCharSel_804A0BD0[door]->gobj,
+                            *mnCharSel_804A0BC0[door]);
+
+    mnCharSel_804A0BD0[door]->x5 = 0;
+
+    if (mnCharSel_804D6CF5 == 1) {
+        lb_80011E24(mnCharSel_804D6CC0, &sp10,
+                    icons[icon_idx].joint_id_1p, -1);
+    } else {
+        lb_80011E24(mnCharSel_804D6CC0, &sp10,
+                    icons[icon_idx].joint_id_vs, -1);
+    }
+    HSD_ForeachAnim(sp10, JOBJ_TYPE, TOBJ_MASK, HSD_AObjReqAnim,
+                    AOBJ_ARG_AF, 10.0);
+
+    icons[icon_idx].anim_timer = 0xC;
+
+    if (mnCharSel_8025DAA0(door)) {
+        s8 costume = 0;
+        do {
+            mnCharSel_803F0DFC.doors[door].costume = costume;
+            if (!mnCharSel_8025DAA0(door)) {
+                break;
+            }
+            costume++;
+        } while (1);
+    }
+
+    if (mnCharSel_804D6CF6 != 3 && mnCharSel_804D6CF6 != 4) {
+        u8 sel = mnCharSel_803F0DFC.doors[door].sel_icon;
+        lbAudioAx_80023870(icons[sel].sfx, 0x7F, 0x40, sel + 0x8A);
+        gm_80168C5C((u32) icons[sel].char_kind);
+    }
+
+    return 0;
+}
+#pragma auto_inline on
 
 void mnCharSel_CostumeChange(int door, u32 input)
 {
@@ -853,7 +933,7 @@ void mnCharSel_CostumeChange(int door, u32 input)
                 (mnCharSel_803F0DFC.doors[door].costume + 1) %
                 gm_80169238(
                     icons[mnCharSel_803F0DFC.doors[door].sel_icon].char_kind);
-        } while (mnCharSel_8025DAA0(door));
+        } while (isDuplicateCostume(door));
     } else if (input & HSD_PAD_Y) {
         do {
             if (mnCharSel_803F0DFC.doors[door].costume != 0) {
@@ -864,7 +944,7 @@ void mnCharSel_CostumeChange(int door, u32 input)
                                     .char_kind) -
                     1;
             }
-        } while (mnCharSel_8025DAA0(door));
+        } while (isDuplicateCostume(door));
     }
     if (prev_costume != mnCharSel_803F0DFC.doors[door].costume) {
         mnCharSel_8025DB34(door);
