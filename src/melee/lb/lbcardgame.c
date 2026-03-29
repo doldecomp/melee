@@ -33,12 +33,23 @@ static struct {
     u32 pad[5];
     struct gmm_x1868* x14;
     struct {
-        UNK_T x0;
-        UNK_T x4;
+        u32 x0;
+        u32 x4;
         UNK_T x8;
     } unk_arr[8];
 } lb_803BAB74 = {
-    0, ///< @todo
+    { 0, 3, 0, 0x1790, 0 },
+    NULL,
+    {
+        { 0x1F2C, 1, NULL },
+        { 0x1F2C, 1, NULL },
+        { 0x1F2C, 1, NULL },
+        { 0x1F2C, 1, NULL },
+        { 0x1F2C, 1, NULL },
+        { 0x1F2C, 1, NULL },
+        { 0x1F2C, 1, NULL },
+        { -1,     0, NULL },
+    }
 };
 
 void lb_8001C600(void)
