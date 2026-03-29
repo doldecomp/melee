@@ -559,6 +559,13 @@ typedef enum VSRecordsStatType {
     VSSTAT_COUNT_NAME = 0x18,    ///< Number of stats in name mode
 } VSRecordsStatType;
 
+typedef struct GlyphVariantEntry {
+    /* 0x00 */ u8 selection;
+    /* 0x01 */ u8 pad_01[3];
+    /* 0x04 */ HSD_JObj* jobjs[7];
+    /* 0x20 */ HSD_Text* text;
+} GlyphVariantEntry; /* size = 0x24 */
+
 typedef struct NameNewEntry {
     /* 0x00 */ u8 x0;
     /* 0x01 */ u8 x1;

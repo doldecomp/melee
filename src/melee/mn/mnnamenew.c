@@ -192,7 +192,7 @@ void mnNameNew_8023B314(NameNewEntry* arg0, s32 arg1)
 }
 
 
-static s32 mnNameNew_804D4F6C = (s32) 0xA6813DFF;
+static GXColor mnNameNew_804D4F6C = { 0xA6, 0x81, 0x3D, 0xFF };
 static s32 mnNameNew_804D4F70 = 0xFF;
 static s32 mnNameNew_804D4F74 = 0x744F0BFF;
 static s32 mnNameNew_804D4F78 = 0xFF;
@@ -261,7 +261,7 @@ s32 mnNameNew_KeySetup(NameNewEntry* arg0, u8 arg1)
     text->pos_z = sp50.z;
     text->font_size.x = 0.03f;
     text->font_size.y = 0.04f;
-    *(s32*) &text->text_color = mnNameNew_804D4F6C;
+    text->text_color = mnNameNew_804D4F6C;
 
     ref1 = HSD_JObjGetChild(arg0->jobjs[16]);
     for (i = 0; i < 50; i++) {
@@ -1079,7 +1079,7 @@ void mnNameNew_8023CE4C(void)
     text->pos_z = sp24.z;
     text->font_size.x = 0.04f;
     text->font_size.y = 0.05f;
-    *(s32*) &text->text_color = mnNameNew_804D4F6C;
+    text->text_color = mnNameNew_804D4F6C;
     sp20_ptr = (u8*) &sp20;
     i = 0;
     for (; i < 4; i++) {
@@ -1105,14 +1105,14 @@ void fn_8023CFC8(HSD_GObj* arg0)
     HSD_JObj* root;
     u8 old_sel;
     s32 count;
-    u8* data;
+    GlyphVariantEntry* data;
 
     PAD_STACK(40);
 
     data = arg0->user_data;
-    old_sel = data[0];
+    old_sel = data->selection;
     if (old_sel != (u8) mn_804A04F0.confirmed_selection) {
-        root = *(HSD_JObj**)(data + 0x14);
+        root = data->jobjs[4];
         if (root == NULL) {
             jobj = NULL;
         } else {
@@ -1128,9 +1128,9 @@ void fn_8023CFC8(HSD_GObj* arg0)
         HSD_JObjReqAnimAll(jobj, 0.0f);
         HSD_JObjAnimAll(jobj);
         sp30 = mnNameNew_804D4F74;
-        HSD_SisLib_803A74F0(*(HSD_Text**)(data + 0x20), (s32) data[0],
+        HSD_SisLib_803A74F0(data->text, (s32) data->selection,
                             (u8*) &sp30);
-        root = *(HSD_JObj**)(data + 0x14);
+        root = data->jobjs[4];
         if (root == NULL) {
             jobj = NULL;
         } else {
@@ -1148,21 +1148,22 @@ void fn_8023CFC8(HSD_GObj* arg0)
         HSD_JObjReqAnimAll(jobj, 1.0f);
         HSD_JObjAnimAll(jobj);
         sp2C = mnNameNew_804D4F70;
-        HSD_SisLib_803A74F0(*(HSD_Text**)(data + 0x20),
+        HSD_SisLib_803A74F0(data->text,
                             (s32) mn_804A04F0.confirmed_selection,
                             (u8*) &sp2C);
-        data[0] = (u8) mn_804A04F0.confirmed_selection;
+        data->selection = (u8) mn_804A04F0.confirmed_selection;
     }
 }
 
 void fn_8023D0F8(void* arg0)
 {
-    HSD_SisLib_803A5CC4(*(HSD_Text**) ((u8*) arg0 + 0x20));
+    GlyphVariantEntry* entry = arg0;
+    HSD_SisLib_803A5CC4(entry->text);
     HSD_Free(arg0);
 }
 
 
-s32 mnNameNew_8023D130(u8* arg0, u8 arg1, u8 arg2, s32 arg3)
+s32 mnNameNew_8023D130(GlyphVariantEntry* arg0, u8 arg1, u8 arg2, s32 arg3)
 {
     Vec3 sp30;
     s32 sp2C;
@@ -1186,17 +1187,17 @@ s32 mnNameNew_8023D130(u8* arg0, u8 arg1, u8 arg2, s32 arg3)
     PAD_STACK(8);
 
     ndata = (NameNewData*) mnNameNew_803EDA58;
-    jobj14 = *(HSD_JObj**)(arg0 + 0x14);
+    jobj14 = arg0->jobjs[4];
     text = HSD_SisLib_803A6754(0, (s32) mn_804D6BB4);
-    jobj18 = *(HSD_JObj**)(arg0 + 0x18);
-    jobj1C = *(HSD_JObj**)(arg0 + 0x1C);
+    jobj18 = arg0->jobjs[5];
+    jobj1C = arg0->jobjs[6];
     lb_8000B1CC(jobj14, &ndata->ref_pos, &sp30);
     text->pos_x = sp30.x;
     text->pos_y = -sp30.y;
     text->pos_z = sp30.z;
     text->font_size.x = 0.03f;
     text->font_size.y = 0.04f;
-    *(s32*) &text->text_color = mnNameNew_804D4F6C;
+    text->text_color = mnNameNew_804D4F6C;
     x_range = HSD_JObjGetTranslationX(jobj18) - HSD_JObjGetTranslationX(jobj14);
     y_range = -(HSD_JObjGetTranslationY(jobj1C) - HSD_JObjGetTranslationY(jobj14));
     temp = (arg3 * 0x10) & 0xFF0;
@@ -1230,7 +1231,7 @@ s32 mnNameNew_8023D130(u8* arg0, u8 arg1, u8 arg2, s32 arg3)
         sp2C = *color_ptr;
         HSD_SisLib_803A74F0(text, i, sp2C_ptr);
     }
-    *(HSD_Text**)(arg0 + 0x20) = text;
+    arg0->text = text;
     return (s32) text;
 }
 
@@ -1246,7 +1247,7 @@ s32 mnNameNew_GlyphVariantSetup(u8* arg0, u8 arg1, u8 arg2)
     HSD_JObj* ref_jobj;
     HSD_JObj* ref2;
     HSD_JObj* ref3;
-    u8* udata;
+    GlyphVariantEntry* udata;
     NameNewData* ndata;
     Vec3 sp38;
     Vec3 sp2C;
@@ -1267,7 +1268,7 @@ s32 mnNameNew_GlyphVariantSetup(u8* arg0, u8 arg1, u8 arg2)
     HSD_JObjReqAnimAll(jobj, (f32) arg1 * 0.5f);
     HSD_JObjAnimAll(jobj);
 
-    udata = HSD_MemAlloc(0x24);
+    udata = HSD_MemAlloc(sizeof(GlyphVariantEntry));
     if (udata == NULL) {
         OSReport((char*) ((u8*) ndata + 0x904));
         __assert((char*) ((u8*) ndata + 0x91C), 0x5B4U,
@@ -1275,10 +1276,10 @@ s32 mnNameNew_GlyphVariantSetup(u8* arg0, u8 arg1, u8 arg2)
     }
     GObj_InitUserData(gobj, 0U, fn_8023D0F8, udata);
 
-    udata[0] = mn_804A04F0.confirmed_selection;
+    udata->selection = mn_804A04F0.confirmed_selection;
     i = 0;
     for (; i < 7; i++) {
-        lb_80011E24(jobj, (HSD_JObj**)(udata + 4 + i * 4), i, -1);
+        lb_80011E24(jobj, &udata->jobjs[i], i, -1);
     }
 
     sp2C = mnNameNew_803B8528;
@@ -1297,9 +1298,9 @@ s32 mnNameNew_GlyphVariantSetup(u8* arg0, u8 arg1, u8 arg2)
     lb_8000B1CC(key_jobj, &sp2C, &sp38);
     HSD_JObjSetTranslate(jobj, &sp38);
 
-    ref_jobj = *(HSD_JObj**)(udata + 0x14);
-    ref2 = *(HSD_JObj**)(udata + 0x18);
-    ref3 = *(HSD_JObj**)(udata + 0x1C);
+    ref_jobj = udata->jobjs[4];
+    ref2 = udata->jobjs[5];
+    ref3 = udata->jobjs[6];
 
     base_x = HSD_JObjGetTranslationX(ref_jobj);
     dx = HSD_JObjGetTranslationX(ref2) - base_x;
@@ -1311,7 +1312,7 @@ s32 mnNameNew_GlyphVariantSetup(u8* arg0, u8 arg1, u8 arg2)
         variant = HSD_JObjLoadJoint(mnNameNew_804A0720[0]);
         HSD_JObjAddAnimAll(variant, mnNameNew_804A0720[1],
                            mnNameNew_804A0720[2], mnNameNew_804A0720[3]);
-        HSD_JObjReqAnimAll(variant, (f32)(i == udata[0]));
+        HSD_JObjReqAnimAll(variant, (f32)(i == udata->selection));
         HSD_JObjAnimAll(variant);
         HSD_JObjSetTranslateX(variant, dx * (f32)(i / 2));
         HSD_JObjSetTranslateY(variant, dy * (f32)(i % 2));
@@ -1410,7 +1411,7 @@ void fn_8023DBE8(HSD_GObj* arg0)
     HSD_JObj* jobj;
     HSD_JObj* parent;
     HSD_GObjProc* proc;
-    s32 sp2C;
+    GXColor sp2C;
     s32 sp28;
     u8 cursor;
     u8 sel;
