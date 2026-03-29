@@ -35,13 +35,13 @@ extern char** NotAllowedNamesList;
 extern u8 mn_804D6BB4;
 extern u8 mn_804D6BB5;
 extern u8 mnNameNew_804D4F7C[4];
-extern void* mnNameNew_804D6C08;
 extern char mnNameNew_SpaceCharacter[2];
 extern char* mnNameNew_803EDCE4[];
 extern void* mnNameNew_804A06F0[];
 extern void* mnNameNew_804A0700[];
 extern void* mnNameNew_804A0710[];
 extern void* mnNameNew_804A0720[];
+extern HSD_GObj* mnNameNew_804D6C08;
 
 extern u16 mnNameNew_803EDA7C[];
 extern StaticModelDesc MenMainBack_Top;

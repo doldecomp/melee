@@ -10,6 +10,7 @@
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
+#include "lb/lb_00B0.h"
 
 void it_2725_Logic17_Spawned(Item_GObj* gobj)
 {
@@ -201,7 +202,26 @@ bool itLugia_UnkMotion4_Coll(Item_GObj* gobj)
     return false;
 }
 
-/// #it_802D1A44
+void it_802D1A44(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itLugiaAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    Vec3 pos;
+
+    Item_80268E5C(gobj, 5, ITEM_ANIM_UPDATE);
+    ip->entered_hitlag = efLib_PauseAll;
+    ip->exited_hitlag = efLib_ResumeAll;
+    ip->xDD4_itemVar.lugia.xE50.y = it_804DD46C;
+    ip->xDD4_itemVar.lugia.xE50.z = it_804DD470;
+    ip->xDD4_itemVar.lugia.x88 = it_804DD474;
+    lb_8000B1CC(ip->xBBC_dynamicBoneTable->bones[25], NULL, &pos);
+    ip->xDD4_itemVar.lugia.x8C = ip->xDD4_itemVar.lugia.x64;
+    ip->xDD4_itemVar.lugia.x8C.y += attrs->x40;
+    ip->xDD4_itemVar.lugia.x70 = pos;
+    ip->xDD4_itemVar.lugia.xA4 = 0;
+    ip->on_accessory = (HSD_GObjEvent) it_802D1BBC;
+    ip->xDCC_flag.b3 = 1;
+}
 
 bool itLugia_UnkMotion5_Anim(Item_GObj* gobj)
 {
@@ -272,7 +292,7 @@ Item_GObj* it_802D1E8C(Item_GObj* gobj, ItemKind kind, f32 param)
     SpawnItem spawn;
     Item* ip = GET_ITEM(gobj);
 
-    spawn.prev_pos = *(Vec3*) ip->xDD4_itemVar.lugia.x70_pad;
+    spawn.prev_pos = ip->xDD4_itemVar.lugia.x70;
     it_8026BB88(gobj, &spawn.pos);
     spawn.facing_dir = ip->facing_dir;
     spawn.x3C_damage = 0;

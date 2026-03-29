@@ -173,7 +173,7 @@ struct GroundVars_unk {
     int xD0;
     int xD4;
     int xD8;
-    float xDC;
+    int xDC;
 };
 
 struct GroundVars_izumi {
@@ -535,8 +535,8 @@ typedef struct grInishie1_GroundVars {
     f32 xF4;
     f32 xF8;
     f32 xFC;
-    f32 x100;
-    f32 x104;
+    HSD_JObj* x100;
+    HSD_JObj* x104;
     HSD_JObj* x108;
     HSD_JObj* x10C;
 } grInishie1_GroundVars;
@@ -901,8 +901,19 @@ struct grMuteCity_GroundVars {
         u8 b6 : 1;
         u8 b7 : 1;
     } xD0_flags;
-    /* +0x00 gp+D1) */ u8 pad2[0x110 - 0xD1];
-    /* +0x00 gp+110) */ HSD_LObj* x110;
+    /* +0x0D gp+D1) */ u8 pad_D1[0xE4 - 0xD1];
+    /* +0x20 gp+E4) */ f32 xE4;
+    /* +0x24 gp+E8) */ f32 xE8;
+    /* +0x28 gp+EC) */ u8 pad_EC[0xF0 - 0xEC];
+    /* +0x2C gp+F0) */ f32 xF0;
+    /* +0x30 gp+F4) */ f32 xF4;
+    /* +0x34 gp+F8) */ u8 pad_F8[0xFC - 0xF8];
+    /* +0x38 gp+FC) */ HSD_JObj* xFC;
+    /* +0x3C gp+100) */ HSD_JObj* x100;
+    /* +0x40 gp+104) */ HSD_JObj* x104;
+    /* +0x44 gp+108) */ HSD_JObj* x108;
+    /* +0x48 gp+10C) */ HSD_JObj* x10C;
+    /* +0x4C gp+110) */ HSD_LObj* x110;
 };
 
 struct grMuteCity_GroundVars2 {
@@ -992,12 +1003,112 @@ struct grCastle_GroundVars3 {
     /* +1C gp+E0 */ DynamicsDesc x1C[12];
 };
 
+struct grCastle_GroundVars4 {
+    /* +00 gp+C4 */ u8 pad_0[0x12];
+    /* +12 gp+D6 */ s16 xD6;
+    /* +14 gp+D8 */ s16 xD8;
+    /* +16 gp+DA */ s16 xDA;
+    /* +18 gp+DC */ s16 xDC;
+};
+
 struct grCastle_GroundVars2 {
     /*  +0 gp+C4 */ HSD_GObj* xC4;
     /*  +0 gp+C8 */ HSD_GObj* xC8;
     /*  +0 gp+CC */ HSD_GObj* xCC;
     /*  +0 gp+D0 */ s16 xD0;
     /*  +0 gp+D2 */ s16 xD2;
+};
+
+struct grCastle_GroundVars5 {
+    /* +00 gp+C4 */ s16 xC4;
+    /* +02 gp+C6 */ s16 xC6;
+    /* +04 gp+C8 */ u8 pad_C8[4];
+    /* +08 gp+CC */ HSD_GObj* xCC;
+};
+
+struct grCastle_GroundVars6 {
+    /* +00 gp+C4 */ s16 xC4;
+    /* +02 gp+C6 */ s16 xC6;
+    /* +04 gp+C8 */ s16 xC8;
+    /* +06 gp+CA */ u8 pad_CA[2];
+    /* +08 gp+CC */ s32 xCC;
+};
+
+struct grCastle_GroundVars7 {
+    /* +00 gp+C4 */ s16 xC4;
+    /* +02 gp+C6 */ u8 pad_xC6[0xA];
+    /* +0C gp+D0 */ HSD_GObj* xD0;
+    /* +10 gp+D4 */ u32 xD4;
+    /* +14 gp+D8 */ s32 xD8;
+};
+
+struct grCastle_Platform {
+    /* +00 */ HSD_JObj* jobj;
+    /* +04 */ f32 pos;
+    /* +08 */ s16 state;
+    /* +0A */ s16 timer;
+    /* +0C */ f32 wind;
+};
+
+struct grCastle_GroundVars8 {
+    /* +00 gp+C4 */ struct grCastle_Platform plat[2];
+};
+
+struct grCastle_GroundVars9 {
+    /* +00 gp+C4 */ u32 xC4;
+    /* +04 gp+C8 */ u32 xC8;
+    /* +08 gp+CC */ u32 xCC;
+    /* +0C gp+D0 */ u8 pad_xD0[4];
+    /* +10 gp+D4 */ s16 xD4;
+    /* +12 gp+D6 */ s16 xD6;
+    /* +14 gp+D8 */ s16 xD8;
+    /* +16 gp+DA */ s16 xDA;
+    /* +18 gp+DC */ s16 xDC;
+    /* +1A gp+DE */ u8 xDE;
+    /* +1B gp+DF */ u8 pad_xDF[1];
+    /* +1C gp+E0 */ DynamicsDesc dynamics[12];
+};
+
+struct grCastle_GroundVars10 {
+    /* +00 gp+C4 */ s16 xC4;
+    /* +02 gp+C6 */ u8 pad_C6[2];
+    /* +04 gp+C8 */ s16 xC8;
+    /* +06 gp+CA */ u8 pad_CA[6];
+    /* +0C gp+D0 */ HSD_JObj* jobjs[5];
+    /* +20 gp+E4 */ HSD_JObj* effect_a[5];
+    /* +34 gp+F8 */ HSD_JObj* effect_b[5];
+    /* +48 gp+10C */ u32 x10C[5];
+    /* +5C gp+120 */ s32 x120[5];
+    /* +70 gp+134 */ u8 state[5];
+    /* +75 gp+139 */ u8 idx[5];
+    /* +7A gp+13E */ u8 pad_7A[2];
+    /* +7C gp+140 */ f32 baseY[5];
+};
+
+struct grCastle_GroundVars11 {
+    /* +00 gp+C4 */ struct {
+        u8 b0 : 1;
+        u8 b1 : 1;
+        u8 b2 : 1;
+        u8 b3 : 1;
+        u8 b4 : 1;
+        u8 b5 : 1;
+        u8 b6 : 1;
+        u8 b7 : 1;
+    } xC4;
+    /* +01 gp+C5 */ u8 pad_01[3];
+    /* +04 gp+C8 */ s16 xC8;
+    /* +06 gp+CA */ s16 xCA;
+    /* +08 gp+CC */ u32 xCC;
+    /* +0C gp+D0 */ u32 xD0;
+    /* +10 gp+D4 */ u32 xD4;
+    /* +14 gp+D8 */ u32 xD8;
+};
+
+struct grCastle_GroundVars12 {
+    /* +00 gp+C4 */ u32 xC4[3];
+    /* +0C gp+D0 */ s16 xD0;
+    /* +0E gp+D2 */ s16 xD2;
 };
 
 struct grPura_GroundVars {
@@ -1040,6 +1151,14 @@ struct grShrineroute_GroundVars2 {
     /* +0 gp+168 */ u32 x168;
     /* +0 gp+16C */ HSD_LObj* x16C;
     /* +0 gp+170 */ HSD_LObj* x170;
+};
+
+struct grShrineroute_GroundVars3 {
+    /* +0 gp+C4 */ HSD_JObj* xC4;
+    /* +4 gp+C8 */ f32 xC8;
+    /* +8 gp+CC */ f32 xCC;
+    /* +C gp+D0 */ f32 xD0;
+    /* +10 gp+D4 */ f32 xD4;
 };
 
 struct Battlefield {
@@ -1168,6 +1287,15 @@ struct Ground {
             struct grCastle_GroundVars castle;
             struct grCastle_GroundVars2 castle2;
             struct grCastle_GroundVars3 castle3;
+            struct grCastle_GroundVars4 castle4;
+            struct grCastle_GroundVars5 castle5;
+            struct grCastle_GroundVars6 castle6;
+            struct grCastle_GroundVars7 castle7;
+            struct grCastle_GroundVars8 castle8;
+            struct grCastle_GroundVars9 castle9;
+            struct grCastle_GroundVars10 castle10;
+            struct grCastle_GroundVars11 castle11;
+            struct grCastle_GroundVars12 castle12;
             struct grCorneria_GroundVars corneria;
             struct grGreatBay_GroundVars greatbay;
             struct grGreatBay_GroundVars2 greatbay2;
@@ -1210,6 +1338,7 @@ struct Ground {
             struct grRCruise_GroundVars2 rcruise2;
             struct grShrineroute_GroundVars shrineroute;
             struct grShrineroute_GroundVars2 shrineroute2;
+            struct grShrineroute_GroundVars3 shrineroute3;
             struct grSmashTaunt_GroundVars smashtaunt;
             struct GroundVars_unk unk;
             struct grHomeRun_GroundVars homerun;

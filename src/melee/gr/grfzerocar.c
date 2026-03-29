@@ -1,20 +1,13 @@
 #include "gr/grfzerocar.h"
 
-#include <placeholder.h>
-#include <platform.h>
-
 #include "gr/granime.h"
 #include "gr/grdatfiles.h"
 #include "gr/ground.h"
-#include "gr/types.h"
 #include "lb/lb_00F9.h"
 #include "sc/types.h"
 
 #include <dolphin/mtx.h>
-#include <baselib/aobj.h>
-#include <baselib/gobj.h>
 #include <baselib/jobj.h>
-#include <baselib/object.h>
 
 typedef struct grFZeroCarEntry {
     s16 unk0;
@@ -52,6 +45,17 @@ grFZeroCarEntry grFZeroCar_803E0BD8[30] = {
     { 0, 28, { 1, -1, -1, -1 } }, { 0, 29, { 1, 3, 2, 4 } },
 };
 
+static char grFZeroCar_804D4598[8] = "archive";
+
+// For sdata2 ordering
+static void fakeFunc(Vec3);
+static void fakeFunc(Vec3 temp)
+{
+    f64 f = 1.0;
+    temp.x = 0.0f;
+    temp.y = f;
+}
+
 static inline void setup_car_child(HSD_JObj* parent, s16 ext_count, s32 offset,
                                    f32 scale_factor)
 {
@@ -59,12 +63,13 @@ static inline void setup_car_child(HSD_JObj* parent, s16 ext_count, s32 offset,
     HSD_JObj* jobj;
 
     archive = grDatFiles_801C6330(ext_count);
-    HSD_ASSERT(95, archive);
+    HSD_ASSERTMSG(95, archive, grFZeroCar_804D4598);
 
     jobj = Ground_801C13D0(ext_count, 0);
     if (jobj != NULL) {
         DynamicModelDesc* entry =
-            (DynamicModelDesc*) ((u8*) archive->unk4->unk8 + offset);
+            (DynamicModelDesc*) ((u8*) offset +
+                                 (uintptr_t) archive->unk4->unk8);
         if (entry->anims != NULL) {
             if (entry->matanims != NULL) {
                 grAnime_801C6C0C(jobj, *entry->anims, *entry->matanims, NULL);
@@ -96,14 +101,19 @@ void grFZeroCar_801CAFBC(HSD_GObj* gobj, void* data, s32 count, s32 mode)
     HSD_JObj* child;
     HSD_JObj* tra_jobj;
     f32 ground_scale;
-    s32 offset;
-    s16* data_ptr;
-    int i;
     Vec3 scl_local;
+    int i;
+    s16* data_ptr;
     Vec3 trans_local;
     Quaternion rot_local;
+    u32 pad1;
+    u32 pad2;
+    u32 pad3;
+    u32 pad4;
+    u32 pad5;
+    u32 pad6;
 
-    root = GET_JOBJ(gobj);
+    root = gobj->hsd_obj;
     ground_scale = Ground_801C0498();
 
     scl_local = grFZeroCar_803B7E50.scale;
@@ -153,7 +163,15 @@ void grFZeroCar_801CAFBC(HSD_GObj* gobj, void* data, s32 count, s32 mode)
         rot_local = grFZeroCar_803B7E50.rotate;
         HSD_JObjSetTranslate(child, &trans_local);
         HSD_JObjSetRotation(child, &rot_local);
-        multiplyScale(tra_jobj, ground_scale);
+
+        {
+            Vec3 scl;
+            HSD_JObjGetScale(tra_jobj, &scl);
+            scl.x *= ground_scale;
+            scl.y *= ground_scale;
+            scl.z *= ground_scale;
+            HSD_JObjSetScale(tra_jobj, &scl);
+        }
 
         idx = grFZeroCar_803E0BD8[i].children[0];
         scale_factor = 1.0f;

@@ -28,7 +28,7 @@ f32 splGetHelmite(f32 fterm, f32 time, f32 p0, f32 p1, f32 d0, f32 d1)
                                      (p1 * (-_2t3_T3 + _3t2_T2))));
 }
 
-void splGetCardinalPoint(Vec3* p, Vec3* cp, f32 tension, f32 u)
+inline void splGetCardinalPoint(Vec3* p, Vec3* cp, f32 tension, f32 u)
 {
     f32 u2 = u * u;
     f32 u3 = u2 * u;
@@ -46,7 +46,7 @@ void splGetCardinalPoint(Vec3* p, Vec3* cp, f32 tension, f32 u)
            (cp[3].z * car3);
 }
 
-void splGetBSplinePoint(Vec3* p, Vec3* cp, f32 u)
+static void splGetBSplinePoint(Vec3* p, Vec3* cp, f32 u)
 {
     f32 u2 = u * u;
     f32 u3 = u2 * u;
@@ -62,7 +62,7 @@ void splGetBSplinePoint(Vec3* p, Vec3* cp, f32 u)
     p->z = (cp[0].z * b0) + (cp[1].z * b1) + (cp[2].z * b2) + (cp[3].z * b3);
 }
 
-void splGetBezierPoint(Vec3* p, Vec3* cp, f32 u)
+inline void splGetBezierPoint(Vec3* p, Vec3* cp, f32 u)
 {
     f32 u_1 = 1.0F - u;
     f32 u2 = u * u;
@@ -135,7 +135,7 @@ void splGetSplinePoint(Vec3* p, HSD_Spline* spline, f32 u)
     }
 }
 
-inline f32 splArcLengthPolynomial(const f32 coeffs[5], f32 t)
+static f32 splArcLengthPolynomial(const f32 coeffs[5], f32 t)
 {
     f32 t2 = t * t;
     f32 t3 = t2 * t;
@@ -170,12 +170,17 @@ inline f32 spl_IterateSimpsonsMiddle(const f32 coeffs[5], const f32 dx, f32 t)
     return var_f24;
 }
 
+static f32 spl_GetArcLengthDx(f32 start, f32 midpoint)
+{
+    return (midpoint - start) / 8.0F;
+}
+
 f32 splArcLengthGetParameter(HSD_Spline* spl, f32 arg1)
 {
     s32 idx = 0;
-    f32 result;
     f32 start = 0.0F;
     f32 end = 1.0F;
+    f32 result;
 
     if (arg1 <= 0.0F) {
         return start;
@@ -203,20 +208,21 @@ f32 splArcLengthGetParameter(HSD_Spline* spl, f32 arg1)
 
         while (ABS(start - end) >= 0.00001F) {
             const f32* coeffs = spl_GetCoeffs(spl, idx);
-            const f32 midpoint = (start + end) / 2.0F;
-            const f32 dx = (midpoint - start) / 8.0F;
-            f32 middle = spl_IterateSimpsonsMiddle(coeffs, dx, start + dx);
+            f32 dx;
+            f32 middle;
             f32 simpsons;
 
-            result = midpoint;
+            result = (start + end) / 2.0F;
+            dx = spl_GetArcLengthDx(start, result);
+            middle = spl_IterateSimpsonsMiddle(coeffs, dx, start + dx);
             simpsons = dx *
                        (middle + splArcLengthPolynomial(coeffs, start) +
-                        splArcLengthPolynomial(coeffs, midpoint)) /
+                        splArcLengthPolynomial(coeffs, result)) /
                        3.0F;
             if (var_f22 < (0.00001F + simpsons)) {
-                end = midpoint;
+                end = result;
             } else {
-                start = midpoint;
+                start = result;
                 var_f22 -= simpsons;
             }
         }
