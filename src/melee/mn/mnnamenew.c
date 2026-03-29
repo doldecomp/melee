@@ -1554,7 +1554,7 @@ s32 InitNameEntryUIState(NameNewEntry* arg0, s32 arg1)
 
     PAD_STACK(0x20);
 
-    arg0->x1 = (u8) mn_804A04F0.hovered_selection;
+    arg0->x1 = (count = (u8) mn_804A04F0.hovered_selection);
     result = lbLang_IsSavedLanguageUS();
     if (result) {
         arg0->mode = 2;
