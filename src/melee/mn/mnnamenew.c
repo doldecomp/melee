@@ -592,7 +592,7 @@ void mnNameNew_GlyphVariantInput(void)
     s32 total;
     s8 null_ch;
 
-    PAD_STACK(24);
+    PAD_STACK(16);
 
     data = ((HSD_GObj*) mnNameNew_804D6C08)->user_data;
     buttons = mn_80229624((u32) mnNameNew_PortInUse);
@@ -608,14 +608,14 @@ void mnNameNew_GlyphVariantInput(void)
         lbAudioAx_80024030(1);
         cur_pos = data->cursor_pos;
         old_hover = mn_804A04F0.hovered_selection;
+        count = (s32) old_hover;
         if (cur_pos < 3U) {
             data->cursor_pos = (u8)(cur_pos + 1);
         } else {
             mn_804A04F0.hovered_selection = 0x39;
         }
         mnNameNew_8023CE4C();
-        if (((s32) old_hover != 0x30) && ((s32) old_hover != 0x31) &&
-            ((mn_804A04F0.confirmed_selection % 2) != 0))
+        if (((count != 0x30) && (count != 0x31)) && ((mn_804A04F0.confirmed_selection % 2) != 0))
         {
             if (data->mode == 0) {
                 data->mode = 1;
@@ -640,7 +640,7 @@ void mnNameNew_GlyphVariantInput(void)
             table++;
             count++;
         }
-        total = count * 2;
+        total = (0, count * 2);
         old_sel = mn_804A04F0.confirmed_selection;
         if (buttons & 1) {
             if ((mn_804A04F0.confirmed_selection % 2) != 0) {
