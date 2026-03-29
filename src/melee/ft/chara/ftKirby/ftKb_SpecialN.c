@@ -158,9 +158,9 @@ void ftKb_AttackDashAir_Coll(Fighter_GObj* gobj)
     ft_80082C74(gobj, fn_800F1FDC);
 }
 
-void ftKb_AttackDashAir_800F21C0(Fighter_GObj* gobj)
+float ftKb_AttackDashAir_800F21C0(Fighter_GObj* gobj)
 {
-    ftPartGetRotX(GET_FIGHTER(gobj), 0);
+    return ftPartGetRotX(GET_FIGHTER(gobj), 0);
 }
 
 void fn_800F21E8(Fighter_GObj* gobj)
