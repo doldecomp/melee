@@ -533,12 +533,17 @@ s32 WriteCharactersForNameAtIndex(u8 arg0, s32 arg1)
     return ret;
 }
 
+inline char **AddCharacterToName_getGlyphs(GlyphRow *arg0, u8 arg1)
+{
+  return arg0[arg1].glyphs;
+}
 
-s32 AddCharacterToName(u8* arg0, s32 arg1, u8 arg2, u8 arg3)
+
+char* AddCharacterToName(char* arg0, u8 arg1, u8 arg2, u8 arg3)
 {
     s32 idx;
-    u8 ch;
-    u8* var_r4;
+    char ch;
+    char* var_r4;
     char** table;
     NameNewData* data;
 
@@ -548,35 +553,35 @@ s32 AddCharacterToName(u8* arg0, s32 arg1, u8 arg2, u8 arg3)
         if ((s32) arg3 < 2 && (s32) arg3 >= 0) {
             if ((u8) (arg1 - 0x30) <= 1U) {
                 if ((arg2 % 2) != 0) {
-                    table = data->glyph_upper[(u8) arg1].glyphs;
+                    table = AddCharacterToName_getGlyphs(data->glyph_upper, arg1);
                 } else {
-                    table = data->glyph_lower[(u8) arg1].glyphs;
+                    table = AddCharacterToName_getGlyphs(data->glyph_lower, arg1);
                 }
             } else if ((arg3 == 0 && (arg2 % 2) == 0) ||
                        (arg3 == 1 && (arg2 % 2) != 0))
             {
-                table = data->glyph_lower[(u8) arg1].glyphs;
+                table = AddCharacterToName_getGlyphs(data->glyph_lower, arg1);
             } else {
-                table = data->glyph_upper[(u8) arg1].glyphs;
+                table = AddCharacterToName_getGlyphs(data->glyph_upper, arg1);
             }
             var_r4 = arg0;
             idx = 0;
-            while ((s8) mnNameNew_NullCharacter !=
-                   (s8) (ch = (u8) table[arg2 / 2][idx]))
+            while ((char) mnNameNew_NullCharacter !=
+                   (ch = table[arg2 / 2][idx]))
             {
                 *var_r4 = ch;
                 idx += 1;
                 var_r4 += 1;
             }
             arg0[idx] = mnNameNew_NullCharacter;
-            return (s32) arg0;
+            return arg0;
         }
-        return (s32) arg0;
+        return arg0;
     }
-    arg0[0] = (u8) data->glyph_single[(u8) arg1][0];
-    arg0[1] = (u8) data->glyph_single[(u8) arg1][1];
-    arg0[2] = (u8) data->glyph_single[(u8) arg1][2];
-    return (s32) arg0;
+    arg0[0] = data->glyph_single[arg1][0];
+    arg0[1] = data->glyph_single[arg1][1];
+    arg0[2] = data->glyph_single[arg1][2];
+    return arg0;
 }
 
 
@@ -601,8 +606,8 @@ void mnNameNew_GlyphVariantInput(void)
     if (buttons & 0x200) {
         HSD_GObjPLink_80390228(data->variant_gobj);
         data->variant_gobj = NULL;
-        AddCharacterToName((u8*) &mnNameNew_CurrentNameText[data->cursor_pos * 3],
-                           (s32)(u8) mn_804A04F0.hovered_selection,
+        AddCharacterToName(&mnNameNew_CurrentNameText[data->cursor_pos * 3],
+                           mn_804A04F0.hovered_selection,
                            mn_804A04F0.confirmed_selection,
                            data->mode);
         lbAudioAx_80024030(1);
@@ -753,8 +758,8 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
                 return;
             }
             AddCharacterToName(
-                (u8*) &name_text[data->cursor_pos * 3],
-                (s32)(u8) mn_804A04F0.hovered_selection,
+                &name_text[data->cursor_pos * 3],
+                mn_804A04F0.hovered_selection,
                 0U, data->mode);
             lbAudioAx_80024030(1);
             if (data->cursor_pos < 3) {

@@ -14,7 +14,7 @@
 /* 23BD4C */ s32 PickAutoName(HSD_GObj* arg0);
 /* 23BEE0 */ bool NameContainsOnlySpaces(void);
 /* 23BFE4 */ s32 WriteCharactersForNameAtIndex(u8 arg0, s32 arg1);
-/* 23C148 */ s32 AddCharacterToName(u8* arg0, s32 arg1, u8 arg2, u8 arg3);
+/* 23C148 */ char* AddCharacterToName(char* arg0, u8 arg1, u8 arg2, u8 arg3);
 /* 23C290 */ void mnNameNew_GlyphVariantInput(void);
 /* 23C54C */ UNK_RET mnNameNew_MainInput(HSD_GObj*);
 /* 23CE4C */ void mnNameNew_8023CE4C(void);
