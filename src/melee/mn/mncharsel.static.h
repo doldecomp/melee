@@ -2,8 +2,11 @@
 
 #include <melee/mn/types.h>
 
-extern u8 mnCharSel_804D5100;
+extern u8 mnCharSel_804D50CC[4];
+extern u8 mnCharSel_804D50D0[8];
+extern u8 mnCharSel_804D50D8[8];
 extern u8 mnCharSel_804D50E0[3];
+extern u8 mnCharSel_804D5100;
 
 static CSSData* volatile mnCharSel_804D6CB0;
 static void* mnCharSel_804D6CB4;

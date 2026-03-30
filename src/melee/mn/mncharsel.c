@@ -644,7 +644,509 @@ bool mnCharSel_8025DAA0(int door)
 }
 #pragma dont_inline off
 
-/// #mnCharSel_8025DB34
+void mnCharSel_8025DB34(u8 arg0)
+{
+    HSD_JObj* sp90;
+    HSD_JObj* sp84;
+    HSD_JObj* sp80;
+    HSD_JObj* sp7C;
+    HSD_JObj* sp78;
+    HSD_JObj* sp6C;
+    HSD_JObj* sp68;
+    HSD_JObj* sp60;
+    HSD_JObj* sp5C;
+    HSD_JObj* sp58;
+    HSD_JObj* sp50;
+    HSD_JObj* sp4C;
+    HSD_JObj* sp48;
+    HSD_JObj* sp44;
+    HSD_JObj* sp40;
+    HSD_JObj* sp3C;
+    HSD_JObj* sp38;
+    HSD_JObj* sp34;
+    f32 temp_f31;
+    u8 sel_icon;
+    u8 hud_idx;
+    u8 costume_var;
+    u8 var_r5;
+    u8 var_r23;
+    int num_doors;
+    int j;
+    int found;
+    f32 var_f1;
+
+    PAD_STACK(0x40);
+
+    sel_icon = mnCharSel_803F0DFC.doors[arg0].sel_icon;
+    hud_idx = icons[sel_icon].ft_hudindex;
+    mnCharSel_8025D5AC((int) arg0, 0, 1);
+
+    /* Name display */
+    if (mnCharSel_803F0DFC.tags[arg0].data->use_tag == 0 &&
+        (int) sel_icon < 0x19)
+    {
+        ((HSD_Text*) mnCharSel_803F0DFC.tags[arg0].data->text)
+            ->default_kerning = 1;
+        if (lbLang_IsSavedLanguageUS() != 0 && (int) sel_icon == 0x16) {
+            HSD_SisLib_803A70A0(
+                (HSD_Text*) mnCharSel_803F0DFC.tags[arg0].data->text, 0,
+                (char*) &mnCharSel_803F0A48);
+        } else {
+            HSD_SisLib_803A70A0(
+                (HSD_Text*) mnCharSel_803F0DFC.tags[arg0].data->text, 0,
+                (char*) gm_80160980(icons[sel_icon].char_kind));
+        }
+    }
+
+    /* Costume duplicate check */
+    {
+        u8 new_icon = mnCharSel_803F0DFC.doors[arg0].sel_icon;
+        if (new_icon != mnCharSel_803F0DFC.doors[arg0].sel_icon_prev) {
+            mnCharSel_803F0DFC.doors[arg0].sel_icon_prev = new_icon;
+            costume_var = 0;
+            for (;;) {
+                mnCharSel_803F0DFC.doors[arg0].costume = costume_var;
+                if ((u8) mnCharSel_804D6CB0->match_type == 0x17) {
+                    num_doors = 2;
+                } else {
+                    num_doors = mnCharSel_804D6CF5;
+                }
+                found = 0;
+                for (j = 0; j < num_doors; j++) {
+                    if ((int) arg0 != j &&
+                        mnCharSel_803F0DFC.doors[j].p_kind != 3 &&
+                        mnCharSel_803F0DFC.doors[j].sel_icon < 0x19U &&
+                        mnCharSel_803F0DFC.doors[j].sel_icon ==
+                            mnCharSel_803F0DFC.doors[arg0].sel_icon &&
+                        mnCharSel_803F0DFC.doors[arg0].costume ==
+                            mnCharSel_803F0DFC.doors[j].costume)
+                    {
+                        found = 1;
+                        break;
+                    }
+                }
+                if (found == 0) break;
+                costume_var += 1;
+            }
+            if ((u8) mnCharSel_804D6CF6 != 3 &&
+                (u8) mnCharSel_804D6CF6 != 4)
+            {
+                lbAudioAx_80024030(2);
+            }
+        }
+    }
+
+    if ((u8) mnCharSel_804D6CF5 == 1) {
+        /* 1P mode */
+        if (arg0 != 0) {
+            temp_f31 = (f32) mnCharSel_804D50D8[1];
+            lb_80011E24(mnCharSel_804D6CC4, &sp84, 2, -1);
+            HSD_ForeachAnim(sp84, JOBJ_TYPE, TOBJ_MASK, HSD_AObjReqAnim,
+                            AOBJ_ARG_AF, temp_f31);
+            HSD_JObjAnimAll(sp84);
+            HSD_ForeachAnim(sp84, JOBJ_TYPE, TOBJ_MASK, HSD_AObjStopAnim,
+                            AOBJ_ARG_AOV, 0, 0);
+            temp_f31 = (f32) mnCharSel_804D50D8[1];
+            lb_80011E24(mnCharSel_804D6CC4, &sp80, 4, -1);
+            HSD_ForeachAnim(sp80, JOBJ_TYPE, MOBJ_MASK, HSD_AObjReqAnim,
+                            AOBJ_ARG_AF, temp_f31);
+            HSD_JObjAnimAll(sp80);
+            HSD_ForeachAnim(sp80, JOBJ_TYPE, MOBJ_MASK, HSD_AObjStopAnim,
+                            AOBJ_ARG_AOV, 0, 0);
+        } else {
+            temp_f31 = (f32) mnCharSel_804D50D8[(s8)(u8) mnCharSel_804D6CF0];
+            lb_80011E24(mnCharSel_804D6CC0, &sp7C, 0x29, -1);
+            HSD_ForeachAnim(sp7C, JOBJ_TYPE, TOBJ_MASK, HSD_AObjReqAnim,
+                            AOBJ_ARG_AF, temp_f31);
+            HSD_JObjAnimAll(sp7C);
+            HSD_ForeachAnim(sp7C, JOBJ_TYPE, TOBJ_MASK, HSD_AObjStopAnim,
+                            AOBJ_ARG_AOV, 0, 0);
+            temp_f31 = (f32) mnCharSel_804D50D8[(s8)(u8) mnCharSel_804D6CF0];
+            lb_80011E24(mnCharSel_804D6CC0, &sp78, 0x2B, -1);
+            HSD_ForeachAnim(sp78, JOBJ_TYPE, MOBJ_MASK, HSD_AObjReqAnim,
+                            AOBJ_ARG_AF, temp_f31);
+            HSD_JObjAnimAll(sp78);
+            HSD_ForeachAnim(sp78, JOBJ_TYPE, MOBJ_MASK, HSD_AObjStopAnim,
+                            AOBJ_ARG_AOV, 0, 0);
+        }
+        if (mnCharSel_803F0DFC.tags[arg0].data->use_tag == 0 &&
+            mnCharSel_803F0DFC.doors[arg0].sel_icon >= 0x19U)
+        {
+            ((HSD_Text*) mnCharSel_803F0DFC.tags[arg0].data->text)
+                ->hidden = 1;
+        } else {
+            ((HSD_Text*) mnCharSel_803F0DFC.tags[arg0].data->text)
+                ->hidden = 0;
+        }
+    } else {
+        /* VS mode */
+        lb_80011E24(mnCharSel_804D6CC0, &sp90,
+                    mnCharSel_803F0DFC.doors[arg0].door_joint, -1);
+        if (mnCharSel_803F0DFC.doors[arg0].p_kind_prev == 3) {
+            HSD_ForeachAnim(sp90, JOBJ_TYPE, ALL_TYPE_MASK, HSD_AObjReqAnim,
+                            AOBJ_ARG_AF, 0.0f);
+            HSD_JObjAnimAll(sp90);
+            if (mnCharSel_803F0DFC.doors[arg0].p_kind == 3) {
+                HSD_ForeachAnim(sp90, JOBJ_TYPE, ALL_TYPE_MASK,
+                                HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
+            } else {
+                mnCharSel_8025D1C4((int) arg0, 2);
+                if (mnCharSel_8025DAA0((int) arg0) != 0) {
+                    int v = 0;
+                    for (;;) {
+                        mnCharSel_803F0DFC.doors[arg0].costume = v;
+                        if (mnCharSel_8025DAA0((int) arg0) == 0) break;
+                        v += 1;
+                    }
+                }
+                mnCharSel_803F0DFC.doors[arg0].dooranim_timer = 0x1E;
+                if ((u8) mnCharSel_804D6CF6 != 3 &&
+                    (u8) mnCharSel_804D6CF6 != 4)
+                {
+                    lbAudioAx_800237A8(0xB9, 0x7F, 0x40);
+                }
+            }
+        } else {
+            HSD_ForeachAnim(sp90, JOBJ_TYPE, ALL_TYPE_MASK, HSD_AObjReqAnim,
+                            AOBJ_ARG_AF, 40.0f);
+            HSD_JObjAnimAll(sp90);
+            if (mnCharSel_803F0DFC.doors[arg0].p_kind == 3) {
+                mnCharSel_8025D1C4((int) arg0, 0);
+                mnCharSel_803F0DFC.doors[arg0].dooranim_timer = 0x1E;
+                if ((u8) mnCharSel_804D6CF6 != 3 &&
+                    (u8) mnCharSel_804D6CF6 != 4)
+                {
+                    lbAudioAx_800237A8(0xBA, 0x7F, 0x40);
+                }
+            } else {
+                HSD_ForeachAnim(sp90, JOBJ_TYPE, ALL_TYPE_MASK,
+                                HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
+            }
+        }
+
+        /* Switch on p_kind for handicap/CPU */
+        if (mnCharSel_803F0DFC.doors[arg0].p_kind !=
+            mnCharSel_803F0DFC.doors[arg0].p_kind_prev)
+        {
+            lb_80011E24(mnCharSel_804D6CC0, &sp90,
+                        mnCharSel_803F0DFC.doors[arg0].slidername_joint, -1);
+            switch ((int) mnCharSel_803F0DFC.doors[arg0].p_kind) {
+            case 2:
+                break;
+            case 0:
+                if (gmMainLib_8015CC34()->handicap != 0) {
+                    if (gmMainLib_8015CC34()->handicap == 2) {
+                        var_f1 = 0.0f;
+                    } else {
+                        var_f1 = 60.0f;
+                    }
+                    HSD_ForeachAnim(sp90, JOBJ_TYPE, ALL_TYPE_MASK,
+                                    HSD_AObjReqAnim, AOBJ_ARG_AF, var_f1);
+                    temp_f31 = (f32) mnCharSel_804D6CB0->data.data
+                                   .players[arg0].cpu_level;
+                    lb_80011E24(mnCharSel_804D6CC0, &sp6C,
+                                mnCharSel_803F0DFC.doors[arg0].cpuslider_joint,
+                                -1);
+                    HSD_ForeachAnim(sp6C, JOBJ_TYPE, TOBJ_MASK,
+                                    HSD_AObjReqAnim, AOBJ_ARG_AF, temp_f31);
+                    HSD_JObjAnimAll(sp6C);
+                    HSD_ForeachAnim(sp6C, JOBJ_TYPE, TOBJ_MASK,
+                                    HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
+                }
+                break;
+            case 1: {
+                if (gmMainLib_8015CC34()->handicap != 0) {
+                    u8 hval;
+                    u8 hval2;
+
+                    if (gmMainLib_8015CC34()->handicap == 2) {
+                        var_f1 = 20.0f;
+                    } else {
+                        var_f1 = 80.0f;
+                    }
+                    HSD_ForeachAnim(sp90, JOBJ_TYPE, ALL_TYPE_MASK,
+                                    HSD_AObjReqAnim, AOBJ_ARG_AF, var_f1);
+                    if (gmMainLib_8015CC34()->handicap == 1) {
+                        hval = gm_801685D4(arg0,
+                            mnCharSel_804D6CB0->data.data.players[arg0].xA);
+                    } else {
+                        hval = (u8) mnCharSel_804D6CB0->data.data
+                                    .players[arg0].handicap;
+                    }
+                    if ((int) hval != 0) {
+                    } else {
+                        hval = 1;
+                    }
+                    lb_80011E24(mnCharSel_804D6CC0, &sp68,
+                                mnCharSel_803F0DFC.doors[arg0].cpuslider_joint,
+                                -1);
+                    HSD_ForeachAnim(sp68, JOBJ_TYPE, TOBJ_MASK,
+                                    HSD_AObjReqAnim, AOBJ_ARG_AF,
+                                    (f32) hval);
+                    HSD_JObjAnimAll(sp68);
+                    HSD_ForeachAnim(sp68, JOBJ_TYPE, TOBJ_MASK,
+                                    HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
+                    sp90 = sp68;
+                    if (gmMainLib_8015CC34()->handicap == 1) {
+                        hval2 = gm_801685D4(arg0,
+                            mnCharSel_804D6CB0->data.data.players[arg0].xA);
+                    } else {
+                        hval2 = (u8) mnCharSel_804D6CB0->data.data
+                                     .players[arg0].handicap;
+                    }
+                    if ((int) hval2 != 0) {
+                    } else {
+                        hval2 = 1;
+                    }
+                    HSD_JObjSetTranslateX(sp90,
+                                          1.25f * (f32) (hval2 - 1));
+                    temp_f31 = (f32) mnCharSel_804D6CB0->data.data
+                                   .players[arg0].cpu_level;
+                    lb_80011E24(mnCharSel_804D6CC0, &sp60,
+                                mnCharSel_803F0DFC.doors[arg0]
+                                    .cpuslider2_joint,
+                                -1);
+                    HSD_ForeachAnim(sp60, JOBJ_TYPE, TOBJ_MASK,
+                                    HSD_AObjReqAnim, AOBJ_ARG_AF, temp_f31);
+                    HSD_JObjAnimAll(sp60);
+                    HSD_ForeachAnim(sp60, JOBJ_TYPE, TOBJ_MASK,
+                                    HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
+                } else {
+                    HSD_ForeachAnim(sp90, JOBJ_TYPE, ALL_TYPE_MASK,
+                                    HSD_AObjReqAnim, AOBJ_ARG_AF, 40.0f);
+                    temp_f31 = (f32) mnCharSel_804D6CB0->data.data
+                                   .players[arg0].cpu_level;
+                    lb_80011E24(mnCharSel_804D6CC0, &sp5C,
+                                mnCharSel_803F0DFC.doors[arg0].cpuslider_joint,
+                                -1);
+                    HSD_ForeachAnim(sp5C, JOBJ_TYPE, TOBJ_MASK,
+                                    HSD_AObjReqAnim, AOBJ_ARG_AF, temp_f31);
+                    HSD_JObjAnimAll(sp5C);
+                    HSD_ForeachAnim(sp5C, JOBJ_TYPE, TOBJ_MASK,
+                                    HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
+                }
+                break;
+            }
+            case 3: {
+                if (gmMainLib_8015CC34()->handicap != 0) {
+                    u8 hval3;
+                    u8 hval4;
+
+                    if (mnCharSel_803F0DFC.doors[arg0].p_kind !=
+                        mnCharSel_803F0DFC.doors[arg0].p_kind_prev)
+                    {
+                        if (gmMainLib_8015CC34()->handicap == 2) {
+                            var_f1 = 30.0f;
+                        } else {
+                            var_f1 = 90.0f;
+                        }
+                        HSD_ForeachAnim(sp90, JOBJ_TYPE, ALL_TYPE_MASK,
+                                        HSD_AObjReqAnim, AOBJ_ARG_AF, var_f1);
+                    }
+                    if (gmMainLib_8015CC34()->handicap == 1) {
+                        hval3 = gm_801685D4(arg0,
+                            mnCharSel_804D6CB0->data.data.players[arg0].xA);
+                    } else {
+                        hval3 = (u8) mnCharSel_804D6CB0->data.data
+                                     .players[arg0].handicap;
+                    }
+                    if ((int) hval3 != 0) {
+                    } else {
+                        hval3 = 1;
+                    }
+                    lb_80011E24(mnCharSel_804D6CC0, &sp58,
+                                mnCharSel_803F0DFC.doors[arg0].cpuslider_joint,
+                                -1);
+                    HSD_ForeachAnim(sp58, JOBJ_TYPE, TOBJ_MASK,
+                                    HSD_AObjReqAnim, AOBJ_ARG_AF,
+                                    (f32) hval3);
+                    HSD_JObjAnimAll(sp58);
+                    HSD_ForeachAnim(sp58, JOBJ_TYPE, TOBJ_MASK,
+                                    HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
+                    sp90 = sp58;
+                    if (gmMainLib_8015CC34()->handicap == 1) {
+                        hval4 = gm_801685D4(arg0,
+                            mnCharSel_804D6CB0->data.data.players[arg0].xA);
+                    } else {
+                        hval4 = (u8) mnCharSel_804D6CB0->data.data
+                                     .players[arg0].handicap;
+                    }
+                    if ((int) hval4 != 0) {
+                    } else {
+                        hval4 = 1;
+                    }
+                    HSD_JObjSetTranslateX(sp90,
+                                          1.25f * (f32) (hval4 - 1));
+                    temp_f31 = (f32) mnCharSel_804D6CB0->data.data
+                                   .players[arg0].cpu_level;
+                    lb_80011E24(mnCharSel_804D6CC0, &sp50,
+                                mnCharSel_803F0DFC.doors[arg0]
+                                    .cpuslider2_joint,
+                                -1);
+                    HSD_ForeachAnim(sp50, JOBJ_TYPE, TOBJ_MASK,
+                                    HSD_AObjReqAnim, AOBJ_ARG_AF, temp_f31);
+                    HSD_JObjAnimAll(sp50);
+                    HSD_ForeachAnim(sp50, JOBJ_TYPE, TOBJ_MASK,
+                                    HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
+                } else {
+                    if (mnCharSel_803F0DFC.doors[arg0].p_kind !=
+                        mnCharSel_803F0DFC.doors[arg0].p_kind_prev)
+                    {
+                        HSD_ForeachAnim(sp90, JOBJ_TYPE, ALL_TYPE_MASK,
+                                        HSD_AObjReqAnim, AOBJ_ARG_AF, 50.0f);
+                    }
+                    temp_f31 = (f32) mnCharSel_804D6CB0->data.data
+                                   .players[arg0].cpu_level;
+                    lb_80011E24(mnCharSel_804D6CC0, &sp4C,
+                                mnCharSel_803F0DFC.doors[arg0].cpuslider_joint,
+                                -1);
+                    HSD_ForeachAnim(sp4C, JOBJ_TYPE, TOBJ_MASK,
+                                    HSD_AObjReqAnim, AOBJ_ARG_AF, temp_f31);
+                    HSD_JObjAnimAll(sp4C);
+                    HSD_ForeachAnim(sp4C, JOBJ_TYPE, TOBJ_MASK,
+                                    HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
+                }
+                break;
+            }
+            }
+            mnCharSel_803F0DFC.doors[arg0].slideranim_timer = 0xA;
+        }
+
+        /* Update p_kind_prev */
+        mnCharSel_803F0DFC.doors[arg0].p_kind_prev =
+            mnCharSel_803F0DFC.doors[arg0].p_kind;
+
+        /* Player indicator / status icon */
+        temp_f31 = (f32) mnCharSel_804D50CC[mnCharSel_803F0DFC.doors[arg0]
+                                                .p_kind];
+        lb_80011E24(mnCharSel_804D6CC0, &sp48,
+                    mnCharSel_803F0DFC.doors[arg0].player_indicator_joint, -1);
+        HSD_ForeachAnim(sp48, JOBJ_TYPE, ALL_TYPE_MASK, HSD_AObjReqAnim,
+                        AOBJ_ARG_AF, temp_f31);
+        HSD_JObjAnimAll(sp48);
+        HSD_ForeachAnim(sp48, JOBJ_TYPE, ALL_TYPE_MASK, HSD_AObjStopAnim,
+                        AOBJ_ARG_AOV, 0, 0);
+
+        /* Team / color */
+        lb_80011E24(mnCharSel_804D6CC0, &sp90,
+                    mnCharSel_803F0DFC.doors[arg0].team_joint, -1);
+        if ((u8) mnCharSel_804D6CB0->data.data.rules.is_teams == 0) {
+            /* FFA mode */
+            u8 port_color_idx;
+            HSD_JObjSetFlags(sp90, 0x10U);
+            port_color_idx = arg0;
+            if (mnCharSel_803F0DFC.doors[arg0].p_kind != 0) {
+                port_color_idx += 4;
+            }
+
+            temp_f31 = (f32) mnCharSel_804D50D8[port_color_idx];
+            lb_80011E24(mnCharSel_804D6CC0, &sp44,
+                        mnCharSel_803F0DFC.doors[arg0].bg_joint, -1);
+            HSD_ForeachAnim(sp44, JOBJ_TYPE, TOBJ_MASK, HSD_AObjReqAnim,
+                            AOBJ_ARG_AF, temp_f31);
+            HSD_JObjAnimAll(sp44);
+            HSD_ForeachAnim(sp44, JOBJ_TYPE, TOBJ_MASK, HSD_AObjStopAnim,
+                            AOBJ_ARG_AOV, 0, 0);
+            temp_f31 = (f32) mnCharSel_804D50D8[port_color_idx];
+            lb_80011E24(mnCharSel_804D6CC0, &sp40,
+                        mnCharSel_803F0DFC.doors[arg0].emblem_joint, -1);
+            HSD_ForeachAnim(sp40, JOBJ_TYPE, MOBJ_MASK, HSD_AObjReqAnim,
+                            AOBJ_ARG_AF, temp_f31);
+            HSD_JObjAnimAll(sp40);
+            HSD_ForeachAnim(sp40, JOBJ_TYPE, MOBJ_MASK, HSD_AObjStopAnim,
+                            AOBJ_ARG_AOV, 0, 0);
+        } else {
+            /* Teams mode */
+            HSD_JObjClearFlags(sp90, 0x10U);
+            var_r23 = mnCharSel_803F0DFC.doors[arg0].team;
+            temp_f31 = (f32) mnCharSel_804D50D0[var_r23];
+            lb_80011E24(mnCharSel_804D6CC0, &sp3C,
+                        mnCharSel_803F0DFC.doors[arg0].team_joint, -1);
+            HSD_ForeachAnim(sp3C, JOBJ_TYPE, TOBJ_MASK, HSD_AObjReqAnim,
+                            AOBJ_ARG_AF, temp_f31);
+            HSD_JObjAnimAll(sp3C);
+            HSD_ForeachAnim(sp3C, JOBJ_TYPE, TOBJ_MASK, HSD_AObjStopAnim,
+                            AOBJ_ARG_AOV, 0, 0);
+            if (mnCharSel_803F0DFC.doors[arg0].p_kind != 0) {
+                var_r23 += 4;
+            }
+            {
+                u8 team_color_idx = var_r23;
+                temp_f31 = (f32) mnCharSel_804D50D0[team_color_idx];
+                lb_80011E24(mnCharSel_804D6CC0, &sp38,
+                            mnCharSel_803F0DFC.doors[arg0].bg_joint, -1);
+                HSD_ForeachAnim(sp38, JOBJ_TYPE, TOBJ_MASK, HSD_AObjReqAnim,
+                                AOBJ_ARG_AF, temp_f31);
+                HSD_JObjAnimAll(sp38);
+                HSD_ForeachAnim(sp38, JOBJ_TYPE, TOBJ_MASK, HSD_AObjStopAnim,
+                                AOBJ_ARG_AOV, 0, 0);
+                temp_f31 = (f32) mnCharSel_804D50D0[team_color_idx];
+                lb_80011E24(mnCharSel_804D6CC0, &sp34,
+                            mnCharSel_803F0DFC.doors[arg0].emblem_joint, -1);
+                HSD_ForeachAnim(sp34, JOBJ_TYPE, MOBJ_MASK, HSD_AObjReqAnim,
+                                AOBJ_ARG_AF, temp_f31);
+                HSD_JObjAnimAll(sp34);
+                HSD_ForeachAnim(sp34, JOBJ_TYPE, MOBJ_MASK, HSD_AObjStopAnim,
+                                AOBJ_ARG_AOV, 0, 0);
+            }
+            mnCharSel_804D6CB0->data.data.players[arg0].team =
+                mnCharSel_803F0DFC.doors[arg0].team;
+        }
+
+        /* Hide/show nametag text */
+        if (mnCharSel_803F0DFC.doors[arg0].p_kind == 3 ||
+            (mnCharSel_803F0DFC.tags[arg0].data->use_tag == 0 &&
+             mnCharSel_803F0DFC.doors[arg0].sel_icon >= 0x19U))
+        {
+            ((HSD_Text*) mnCharSel_803F0DFC.tags[arg0].data->text)
+                ->hidden = 1;
+        } else {
+            ((HSD_Text*) mnCharSel_803F0DFC.tags[arg0].data->text)
+                ->hidden = 0;
+        }
+    }
+
+    /* Final: costume color assignment */
+    {
+        u8 final_icon = mnCharSel_803F0DFC.doors[arg0].sel_icon;
+        if (final_icon < 0x19U) {
+            if ((u8) mnCharSel_804D6CF5 == 1 ||
+                (u8) mnCharSel_804D6CB0->data.data.rules.is_teams == 0)
+            {
+                var_r5 = mnCharSel_803F0DFC.doors[arg0].costume;
+            } else {
+                u8 team_idx = mnCharSel_803F0DFC.doors[arg0].team;
+                u8 ckind = icons[final_icon].char_kind;
+                switch ((int) team_idx) {
+                default:
+                    var_r5 = gm_80169264(ckind);
+                    break;
+                case 1:
+                    var_r5 = gm_801692BC(ckind);
+                    break;
+                case 2:
+                    var_r5 = gm_80169290(ckind);
+                    break;
+                }
+            }
+            {
+                s8 port;
+                if ((u8) mnCharSel_804D6CF5 == 1) {
+                    if ((int) arg0 != 0) {
+                        port = (s8)(u8) mnCharSel_804D6CF1;
+                    } else {
+                        port = (s8)(u8) mnCharSel_804D6CF0;
+                    }
+                } else {
+                    port = (s8) arg0;
+                }
+                mnCharSel_804D6CB0->data.data.players[port].color = var_r5;
+            }
+            mnCharSel_8025D5AC((int) arg0,
+                               hud_idx + (var_r5 * 0x1E), 0);
+        }
+    }
+}
 
 inline HSD_JObj* lb_80011E24_inline(int i)
 {
