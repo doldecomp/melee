@@ -196,7 +196,7 @@ void mnNameNew_8023B314(NameNewEntry* arg0, s32 arg1)
 static GXColor mnNameNew_804D4F6C = { 0xA6, 0x81, 0x3D, 0xFF };
 static GXColor mnNameNew_804D4F70 = { 0, 0, 0, 0xFF };
 static GXColor mnNameNew_804D4F74 = { 0x74, 0x4F, 0x0B, 0xFF };
-static s32 mnNameNew_804D4F78 = 0xFF;
+static GXColor mnNameNew_804D4F78 = { 0, 0, 0, 0xFF };
 
 extern const GXColor mnNameNew_804DBF44;
 extern const GXColor mnNameNew_804DBF48;
@@ -1054,41 +1054,41 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
 
 void mnNameNew_8023CE4C(void)
 {
-    Vec3 sp24;
     GXColor sp20;
+    Vec3 sp24;
+    NameNewEntry* data;
     HSD_JObj* jobj_a;
     HSD_JObj* jobj_b;
-    HSD_Text* text;
     HSD_Text* old_text;
+    float y_minus;
     f32 char_spacing;
     f32 first_x;
-    NameNewEntry* data;
     u8* name_ptr;
     GXColor* sp20_ptr;
     s32 i;
-
-    PAD_STACK(8);
+    HSD_Text* text;
 
     data = ((HSD_GObj*) mnNameNew_804D6C08)->user_data;
     jobj_a = data->jobjs[14];
     jobj_b = data->jobjs[15];
     first_x = HSD_JObjGetTranslationX(jobj_a);
     char_spacing = HSD_JObjGetTranslationX(jobj_b) - first_x;
-    old_text = data->name_disp_text;
-    if (old_text != NULL) {
-        HSD_SisLib_803A5CC4(old_text);
+    if (data->name_disp_text != 0L) {
+        HSD_SisLib_803A5CC4(data->name_disp_text);
     }
-    text = HSD_SisLib_803A6754(0, (s32) mn_804D6BB5);
+    text = HSD_SisLib_803A6754(0, mn_804D6BB5);
     lb_8000B1CC(jobj_a, &mnNameNew_803EE330, &sp24);
     name_ptr = (u8*) &mnNameNew_CurrentNameText;
+    y_minus = -sp24.y;
     text->pos_x = sp24.x;
-    text->pos_y = -sp24.y;
+    sp20_ptr = &sp20;
+    text->pos_y = y_minus;
+    i = 0;
+    text->pos_z = sp24.z;
     text->pos_z = sp24.z;
     text->font_size.x = 0.04f;
     text->font_size.y = 0.05f;
     text->text_color = mnNameNew_804D4F6C;
-    sp20_ptr = &sp20;
-    i = 0;
     for (; i < 4; i++) {
         if ((s8) mnNameNew_NullCharacter == (s8) *name_ptr) {
             break;
@@ -1096,13 +1096,12 @@ void mnNameNew_8023CE4C(void)
         HSD_SisLib_803A6B98(text,
                             (char_spacing * (f32) i) / text->font_size.x,
                             0.0f, (const char*) name_ptr);
-        sp20.r = mnNameNew_804D4F78;
+        sp20 = mnNameNew_804D4F78;
         HSD_SisLib_803A74F0(text, i, sp20_ptr);
         name_ptr += 3;
     }
     data->name_disp_text = text;
 }
-
 
 void fn_8023CFC8(HSD_GObj* arg0)
 {
