@@ -2,6 +2,7 @@
 
 #include <melee/mn/types.h>
 
+extern u8 mnCharSel_804D50C8[4];
 extern u8 mnCharSel_804D50CC[4];
 extern u8 mnCharSel_804D50D0[8];
 extern u8 mnCharSel_804D50D8[8];
@@ -25,6 +26,7 @@ static u32 mnCharSel_804D6CEC;
 static s8 mnCharSel_804D6CF0;
 static s8 mnCharSel_804D6CF1;
 static u8 mnCharSel_804D6CF2;
+static u8 mnCharSel_804D6CF3;
 static s8 mnCharSel_804D6CF4;
 static u8 mnCharSel_804D6CF5; ///< number of (open? valid?) CSS doors
 static u8 mnCharSel_804D6CF6;

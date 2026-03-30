@@ -877,12 +877,13 @@ void mnCharSel_8025DB34(u8 arg0)
                     } else {
                         hval = 1;
                     }
+                    temp_f31 = (f32) hval;
                     lb_80011E24(mnCharSel_804D6CC0, &sp68,
                                 mnCharSel_803F0DFC.doors[arg0].cpuslider_joint,
                                 -1);
                     HSD_ForeachAnim(sp68, JOBJ_TYPE, TOBJ_MASK,
                                     HSD_AObjReqAnim, AOBJ_ARG_AF,
-                                    (f32) hval);
+                                    temp_f31);
                     HSD_JObjAnimAll(sp68);
                     HSD_ForeachAnim(sp68, JOBJ_TYPE, TOBJ_MASK,
                                     HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
@@ -898,8 +899,8 @@ void mnCharSel_8025DB34(u8 arg0)
                     } else {
                         hval2 = 1;
                     }
-                    HSD_JObjSetTranslateX(sp90,
-                                          1.25f * (f32) (hval2 - 1));
+                    temp_f31 = 1.25f * (f32) (hval2 - 1);
+                    HSD_JObjSetTranslateX(sp90, temp_f31);
                     temp_f31 = (f32) mnCharSel_804D6CB0->data.data
                                    .players[arg0].cpu_level;
                     lb_80011E24(mnCharSel_804D6CC0, &sp60,
@@ -954,12 +955,13 @@ void mnCharSel_8025DB34(u8 arg0)
                     } else {
                         hval3 = 1;
                     }
+                    temp_f31 = (f32) hval3;
                     lb_80011E24(mnCharSel_804D6CC0, &sp58,
                                 mnCharSel_803F0DFC.doors[arg0].cpuslider_joint,
                                 -1);
                     HSD_ForeachAnim(sp58, JOBJ_TYPE, TOBJ_MASK,
                                     HSD_AObjReqAnim, AOBJ_ARG_AF,
-                                    (f32) hval3);
+                                    temp_f31);
                     HSD_JObjAnimAll(sp58);
                     HSD_ForeachAnim(sp58, JOBJ_TYPE, TOBJ_MASK,
                                     HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
@@ -975,8 +977,8 @@ void mnCharSel_8025DB34(u8 arg0)
                     } else {
                         hval4 = 1;
                     }
-                    HSD_JObjSetTranslateX(sp90,
-                                          1.25f * (f32) (hval4 - 1));
+                    temp_f31 = 1.25f * (f32) (hval4 - 1);
+                    HSD_JObjSetTranslateX(sp90, temp_f31);
                     temp_f31 = (f32) mnCharSel_804D6CB0->data.data
                                    .players[arg0].cpu_level;
                     lb_80011E24(mnCharSel_804D6CC0, &sp50,
@@ -1772,6 +1774,1047 @@ void mnCharSel_CostumeChange(int door, u32 input)
 }
 
 /// #mnCharSel_CursorThink
+
+struct CSSCursorData {
+    /* 0x00 */ HSD_GObj* gobj;
+    /* 0x04 */ u8 x4;
+    /* 0x05 */ u8 x5;
+    /* 0x06 */ u8 x6;
+    /* 0x07 */ u8 x7;
+    /* 0x08 */ u16 x8;
+    /* 0x0A */ u16 xA;
+    /* 0x0C */ f32 xC;
+    /* 0x10 */ f32 x10;
+};
+
+void mnCharSel_CursorThink(HSD_GObj* gobj)
+{
+    HSD_JObj* sp98;
+    Point3d sp88;
+    HSD_JObj* sp74;
+    HSD_JObj* sp54;
+    HSD_JObj* sp50;
+    HSD_JObj* sp40;
+    HSD_JObj* sp3C;
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+    struct CSSCursorData* cursor = gobj->user_data;
+    u8 n_doors;
+    f32 stick_x;
+    f32 stick_y;
+    u32 trigger;
+    u32 buttons;
+    f32 dx;
+    f32 dy;
+    f32 mag_sq;
+
+    if ((u8) mnCharSel_804D6CB0->match_type == TRAINING_MODE) {
+        n_doors = 2;
+    } else {
+        n_doors = mnCharSel_804D6CF5;
+    }
+
+    if ((u8) mnCharSel_804D6CF6 == 0) {
+        cursor->x8 = 0;
+
+        if ((u8) mnCharSel_804D6CF5 == 1) {
+            HSD_PadStatus* pad = &HSD_PadCopyStatus[(u8) mnCharSel_804D6CF0];
+            stick_y = (f32) (s8) (u8) pad->stickY;
+            trigger = pad->trigger;
+            buttons = pad->button;
+            stick_x = (f32) (s8) (u8) pad->stickX;
+            mag_sq = (stick_x * stick_x) + (stick_y * stick_y);
+            if (mag_sq < 200.0f) {
+                dy = 0.0f;
+                dx = 0.0f;
+            } else {
+                f32 adj = mag_sq - 200.0f;
+                f32 angle = atan2f(stick_x, stick_y);
+                dx = adj * sinf(angle);
+                dy = adj * cosf(angle);
+            }
+            if (buttons & 0x200) {
+                if (mnCharSel_804D6CF3 & mnCharSel_804D50C8[cursor->x4]) {
+                    u16 new_timer = cursor->xA + 1;
+                    cursor->xA = new_timer;
+                    if (new_timer > 0x1E) {
+                        mnCharSel_804D6CF6 = 2;
+                    }
+                } else {
+                    cursor->xA = 0;
+                }
+            } else {
+                mnCharSel_804D6CF3 |= mnCharSel_804D50C8[cursor->x4];
+                cursor->xA = 0;
+            }
+        } else {
+            u8 port = cursor->x4;
+            HSD_PadStatus* pad = &HSD_PadCopyStatus[port];
+            stick_y = (f32) (s8) (u8) pad->stickY;
+            trigger = pad->trigger;
+            buttons = pad->button;
+            stick_x = (f32) (s8) (u8) pad->stickX;
+            mag_sq = (stick_x * stick_x) + (stick_y * stick_y);
+            if (mag_sq < 200.0f) {
+                dy = 0.0f;
+                dx = 0.0f;
+            } else {
+                f32 adj = mag_sq - 200.0f;
+                f32 angle = atan2f(stick_x, stick_y);
+                dx = adj * sinf(angle);
+                dy = adj * cosf(angle);
+            }
+
+            if ((s8) (u8) HSD_PadCopyStatus[port].err != 0) {
+                if ((u8) cursor->x5 != 3) {
+                    cursor->xC = (f32) ((15.0f * (f32) port) - 31.0f);
+                    cursor->x10 = -21.5f;
+                    cursor->xA = 0;
+                    if ((u8) cursor->x5 == 1) {
+                        u8 grabbed = cursor->x6;
+                        if (grabbed <= 3U) {
+                            cursor->x5 = 2;
+                            if (mnCharSel_8025FDEC(grabbed) != 0) {
+                                mnCharSel_8025FB50(grabbed, 1);
+                            }
+                        } else if (grabbed <= 7U) {
+                            mnCharSel_803F0DFC.doors[grabbed - 4].is_hold_cpu_slider = 0;
+                        }
+                    } else {
+                        u8 cport = cursor->x4;
+                        CSSDoor* d = &mnCharSel_803F0DFC.doors[cport];
+                        if ((u8) d->sel_icon >= 0x19U &&
+                            (u8) d->p_kind != 3 &&
+                            mnCharSel_8025FDEC(cport) != 0)
+                        {
+                            mnCharSel_8025FB50(cursor->x4, 1);
+                        }
+                    }
+                    {
+                        CSSTagData* tag_data = mnCharSel_803F0DFC.tags[cursor->x4].data;
+                        if ((u8) tag_data->state == 0) {
+                            mnCharSel_803F0DFC.doors[cursor->x4].p_kind = 1;
+                            mnCharSel_804D6CB0->data.data.players[cursor->x4].slot_type = 1;
+                            mnCharSel_804D6CB0->data.data.players[cursor->x4].xA = 0x78;
+                            tag_data->use_tag = 0;
+                        }
+                    }
+                    mnCharSel_8025DB34(cursor->x4);
+                    {
+                        CSSTagData* tag_data2 = mnCharSel_803F0DFC.tags[cursor->x4].data;
+                        if ((u8) tag_data2->state != 0) {
+                            tag_data2->state = 4;
+                        }
+                    }
+                    mnCharSel_803F0DFC.doors[cursor->x4].is_hold_handicap_slider = 0;
+                }
+                cursor->x5 = 3;
+                HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
+                return;
+            }
+
+            if ((u8) cursor->x5 == 3) {
+                cursor->x5 = 2;
+                HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
+            }
+
+            if (buttons & 0x200) {
+                if (mnCharSel_804D6CF3 & mnCharSel_804D50C8[cursor->x4]) {
+                    u16 new_timer = cursor->xA + 1;
+                    cursor->xA = new_timer;
+                    if (new_timer > 0x1E) {
+                        mnCharSel_804D6CF6 = 2;
+                    }
+                } else {
+                    cursor->xA = 0;
+                }
+            } else {
+                mnCharSel_804D6CF3 |= mnCharSel_804D50C8[cursor->x4];
+                cursor->xA = 0;
+            }
+        }
+
+        cursor->xC = (f32) ((0.0002f * dx) + cursor->xC);
+        cursor->x10 = (f32) ((0.0002f * dy) + cursor->x10);
+
+        mnCharSel_803F0DFC.tags[cursor->x4].data->scroll_amt = 0.0f;
+
+        {
+            CSSTagData* tag = mnCharSel_803F0DFC.tags[cursor->x4].data;
+            if ((u8) tag->state != 0) {
+                if ((u8) mnCharSel_804D6CF5 == 1) {
+                    lb_80011E24(mnCharSel_804D6CC0, &sp98,
+                                mnCharSel_803F0DFC.name_list_joint, -1, 0.0002f);
+                } else {
+                    lb_80011E24(mnCharSel_804D6CC0, &sp98,
+                                mnCharSel_803F0DFC.tags[cursor->x4].list_joint, -1, 0.0002f);
+                }
+                lb_8000B1CC(sp98, NULL, &sp88);
+
+                if ((0.8f + sp88.y) < cursor->x10) {
+                    mnCharSel_803F0DFC.tags[cursor->x4].data->scroll_amt =
+                        (f32) (cursor->x10 - (0.8f + sp88.y));
+                    cursor->x10 = (f32) (0.8f + sp88.y);
+                }
+                if ((-14.8f + sp88.y) > cursor->x10) {
+                    mnCharSel_803F0DFC.tags[cursor->x4].data->scroll_amt =
+                        (f32) (cursor->x10 - (-14.8f + sp88.y));
+                    cursor->x10 = (f32) (-14.8f + sp88.y);
+                }
+                if ((4.3f + sp88.x) < cursor->xC) {
+                    cursor->xC = 4.3f + sp88.x;
+                }
+                if ((-5.3f + sp88.x) > cursor->xC) {
+                    cursor->xC = -5.3f + sp88.x;
+                }
+            } else {
+                if (25.0f < cursor->x10) {
+                    cursor->x10 = 25.0f;
+                }
+                if (-22.0f > cursor->x10) {
+                    cursor->x10 = -22.0f;
+                }
+                if (26.0f < cursor->xC) {
+                    cursor->xC = 26.0f;
+                }
+                if (-35.0f > cursor->xC) {
+                    cursor->xC = -35.0f;
+                }
+            }
+        }
+
+        {
+            u8 port = cursor->x4;
+            CSSTagData* tag = mnCharSel_803F0DFC.tags[port].data;
+            if ((u8) tag->state == 0) {
+                if ((u8) cursor->x5 == 1) {
+                    u8 grabbed = cursor->x6;
+                    if ((s32) grabbed < 8) {
+                        if ((s32) grabbed < 4) {
+                            if ((s32) grabbed >= 0) {
+                                if (cursor->x10 < 0.2f) {
+                                    if ((s32) port != (s32) grabbed ||
+                                        ((s32) port == (s32) grabbed &&
+                                         (u8) mnCharSel_803F0DFC.doors[grabbed].p_kind == 3))
+                                    {
+                                        mnCharSel_8025FDEC(grabbed);
+                                        lbAudioAx_800237A8(0xB8, 0x7F, 0x40);
+                                    } else {
+                                        mnCharSel_804A0BD0[grabbed]->x5 = 0;
+                                        mnCharSel_803F0DFC.doors[grabbed].sel_icon = 0x19;
+                                        {
+                                            s8 player_idx;
+                                            if ((u8) mnCharSel_804D6CF5 == 1) {
+                                                if ((s32) grabbed != 0) {
+                                                    player_idx = (s8) (u8) mnCharSel_804D6CF1;
+                                                } else {
+                                                    player_idx = (s8) (u8) mnCharSel_804D6CF0;
+                                                }
+                                            } else {
+                                                player_idx = (s8) grabbed;
+                                            }
+                                            mnCharSel_804D6CB0->data.data.players[player_idx].c_kind = 0x21;
+                                        }
+                                    }
+                                    mnCharSel_8025DB34(grabbed);
+                                    cursor->x5 = 2;
+                                } else {
+                                    u32 a_press = trigger & 0x100;
+                                    if (a_press != 0) {
+                                        struct CSSCharModel* m = mnCharSel_804A0BD0[grabbed];
+                                        f32 my = m->xC;
+                                        if (my < 6.0f && my > -1.0f) {
+                                            f32 mx = m->x8;
+                                            if ((mx > -30.0f && mx < -24.4f) ||
+                                                (mx > 24.4f && mx < 30.2f))
+                                            {
+                                                s32 icon_count = 0;
+                                                s32 ic;
+                                                CSSIcon* icons = (CSSIcon*)((u8*)&mnCharSel_803F0A48 + 0xDC);
+                                                for (ic = 0; ic < 25; ic++) {
+                                                    if ((u8) icons[ic].state >= 2) {
+                                                        icon_count++;
+                                                    } else {
+                                                        break;
+                                                    }
+                                                }
+                                                if (icon_count == 0x19) {
+                                                    mnCharSel_8025FB50(grabbed, 0);
+                                                    {
+                                                        CSSDoor* door = &mnCharSel_803F0DFC.doors[grabbed];
+                                                        s32 dup;
+                                                        do {
+                                                            door->costume = HSD_Randi(
+                                                                (s32) gm_80169238(icons[door->sel_icon].char_kind));
+                                                            {
+                                                                u8 nd;
+                                                                s32 j;
+                                                                if ((u8) mnCharSel_804D6CB0->match_type == TRAINING_MODE) {
+                                                                    nd = 2;
+                                                                } else {
+                                                                    nd = mnCharSel_804D6CF5;
+                                                                }
+                                                                dup = 0;
+                                                                for (j = 0; j < (s32) nd; j++) {
+                                                                    if ((s32) grabbed != j &&
+                                                                        (u8) mnCharSel_803F0DFC.doors[j].p_kind != 3 &&
+                                                                        (u8) mnCharSel_803F0DFC.doors[j].sel_icon < 0x19U &&
+                                                                        mnCharSel_803F0DFC.doors[j].sel_icon == door->sel_icon &&
+                                                                        (u8) door->costume == (u8) mnCharSel_803F0DFC.doors[j].costume)
+                                                                    {
+                                                                        dup = 1;
+                                                                        break;
+                                                                    }
+                                                                }
+                                                            }
+                                                        } while (dup != 0);
+                                                    }
+                                                    mnCharSel_8025DB34(grabbed);
+                                                    cursor->x5 = 2;
+                                                    lbAudioAx_800237A8(0xB8, 0x7F, 0x40);
+                                                    goto block_392;
+                                                }
+                                            }
+                                        }
+                                    }
+
+                                    {
+                                        struct CSSCharModel* m2 = mnCharSel_804A0BD0[grabbed];
+                                        CSSIcon* icons = (CSSIcon*)((u8*)&mnCharSel_803F0A48 + 0xDC);
+                                        s32 i;
+                                        u8 found = 0;
+                                        for (i = 0; i < 0x19; i++) {
+                                            f32 mx = m2->x8;
+                                            if (mx > icons[i].bound_l && mx < icons[i].bound_r) {
+                                                f32 my = m2->xC;
+                                                if (my < icons[i].bound_u && my > icons[i].bound_d &&
+                                                    (u8) icons[i].state >= 1)
+                                                {
+                                                    mnCharSel_803F0DFC.doors[grabbed].sel_icon = (u8) i;
+                                                    mnCharSel_8025DB34(grabbed);
+                                                    if (trigger & 0x100) {
+                                                        s8 player_idx;
+                                                        if ((u8) mnCharSel_804D6CF5 == 1) {
+                                                            if ((s32) grabbed != 0) {
+                                                                player_idx = (s8) (u8) mnCharSel_804D6CF1;
+                                                            } else {
+                                                                player_idx = (s8) (u8) mnCharSel_804D6CF0;
+                                                            }
+                                                        } else {
+                                                            player_idx = (s8) grabbed;
+                                                        }
+                                                        mnCharSel_804D6CB0->data.data.players[player_idx].c_kind =
+                                                            (s8) icons[mnCharSel_803F0DFC.doors[grabbed].sel_icon].char_kind;
+                                                        if ((u8) mnCharSel_804D6CF5 == 1) {
+                                                            lb_80011E24(mnCharSel_804D6CC0, &sp98,
+                                                                        icons[i].joint_id_1p, -1);
+                                                        } else {
+                                                            lb_80011E24(mnCharSel_804D6CC0, &sp98,
+                                                                        icons[i].joint_id_vs, -1);
+                                                        }
+                                                        HSD_ForeachAnim(sp98, JOBJ_TYPE, TOBJ_MASK,
+                                                                        HSD_AObjReqAnim, AOBJ_ARG_AF, 10.0);
+                                                        icons[i].anim_timer = 0xC;
+                                                        mnCharSel_804A0BD0[grabbed]->x5 = 0;
+                                                        HSD_GObjGXLink_803909D8(
+                                                            mnCharSel_804A0BD0[grabbed]->gobj,
+                                                            *mnCharSel_804A0BC0[mnCharSel_804D6CF5 - 1]);
+                                                        mnCharSel_803F0DFC.doors[grabbed].selected_since_load = 1;
+                                                        cursor->x5 = 2;
+                                                        {
+                                                            u8 sel = mnCharSel_803F0DFC.doors[grabbed].sel_icon;
+                                                            CSSIcon* sel_icon = &icons[sel];
+                                                            lbAudioAx_80023870(sel_icon->sfx, 0x7F, 0x40,
+                                                                               sel + 0x8A);
+                                                            gm_80168C5C((u32) sel_icon->char_kind);
+                                                        }
+                                                        lbAudioAx_800237A8(0xB8, 0x7F, 0x40);
+                                                    }
+                                                    found = 1;
+                                                    break;
+                                                }
+                                            }
+                                        }
+
+                                        if (!found) {
+                                            mnCharSel_8025D5AC((s32) grabbed, 0, 1);
+                                            {
+                                                CSSTagData* td = mnCharSel_803F0DFC.tags[grabbed].data;
+                                                if ((u8) td->use_tag == 0) {
+                                                    ((HSD_Text*) td->text)->hidden = 1;
+                                                }
+                                            }
+                                            mnCharSel_803F0DFC.doors[grabbed].sel_icon_prev = 0x19;
+                                            if (trigger & 0x100) {
+                                                lbAudioAx_80024030(3);
+                                            } else if (trigger & 0x200) {
+                                                if (mnCharSel_8025FDEC(grabbed) == 0) {
+                                                    mnCharSel_8025DB34(grabbed);
+                                                    cursor->x5 = 2;
+                                                }
+                                            } else {
+                                                mnCharSel_CostumeChange((s32) grabbed, trigger);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        } else {
+                            s32 slider_door = grabbed - 4;
+                            GameRules* rules = gmMainLib_8015CC34();
+                            if ((u8) rules->handicap != 0) {
+                                lb_80011E24(mnCharSel_804D6CC0, &sp98,
+                                            mnCharSel_803F0DFC.doors[slider_door].cpuslider2_joint,
+                                            -1);
+                            } else {
+                                lb_80011E24(mnCharSel_804D6CC0, &sp98,
+                                            mnCharSel_803F0DFC.doors[slider_door].cpuslider_joint,
+                                            -1);
+                            }
+                            lb_8000B1CC(sp98, NULL, &sp88);
+                            {
+                                f32 jx = HSD_JObjGetTranslationX(sp98);
+                                f32 base_x = jx - sp88.x;
+                                f32 val = (cursor->xC - -2.9f) + base_x;
+                                if (val < 0.0f) {
+                                    val = 0.0f;
+                                }
+                                if (val > 10.0f) {
+                                    val = 10.0f;
+                                }
+                                mnCharSel_804D6CB0->data.data.players[slider_door].cpu_level =
+                                    (s32) ((0.8f * val) + 0.5f) + 1;
+                                {
+                                    u8 lvl = mnCharSel_804D6CB0->data.data.players[slider_door].cpu_level;
+                                    HSD_ForeachAnim(sp98, JOBJ_TYPE, TOBJ_MASK,
+                                                    HSD_AObjReqAnim, AOBJ_ARG_AF, (f32) lvl);
+                                    HSD_JObjAnimAll(sp98);
+                                    HSD_ForeachAnim(sp98, JOBJ_TYPE, TOBJ_MASK,
+                                                    HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
+                                }
+                                HSD_JObjSetTranslateX(sp98, val);
+                                cursor->xC = (f32) (-2.9f + (val - base_x));
+                                cursor->x10 = (f32) (1.7f + sp88.y);
+                                if (trigger & 0x100) {
+                                    cursor->x5 = 2;
+                                    mnCharSel_803F0DFC.doors[slider_door].is_hold_cpu_slider = 0;
+                                    lbAudioAx_800237A8(0xB7, 0x7F, 0x40);
+                                }
+                            }
+                        }
+                    } else if ((s32) grabbed < 0xC) {
+                        s32 hc_door = grabbed - 8;
+                        lb_80011E24(mnCharSel_804D6CC0, &sp98,
+                                    mnCharSel_803F0DFC.doors[hc_door].cpuslider_joint, -1);
+                        lb_8000B1CC(sp98, NULL, (Point3d*) &sp88);
+                        {
+                            f32 jx = HSD_JObjGetTranslationX(sp98);
+                            f32 base_x = jx - sp88.x;
+                            f32 val = (cursor->xC - -2.9f) + base_x;
+                            if (val < 0.0f) {
+                                val = 0.0f;
+                            }
+                            if (val > 10.0f) {
+                                val = 10.0f;
+                            }
+                            mnCharSel_804D6CB0->data.data.players[hc_door].handicap =
+                                (s32) ((0.8f * val) + 0.5f) + 1;
+                            {
+                                u8 hval = (u8) mnCharSel_804D6CB0->data.data.players[hc_door].handicap;
+                                HSD_ForeachAnim(sp98, JOBJ_TYPE, TOBJ_MASK,
+                                                HSD_AObjReqAnim, AOBJ_ARG_AF, (f32) hval);
+                                HSD_JObjAnimAll(sp98);
+                                HSD_ForeachAnim(sp98, JOBJ_TYPE, TOBJ_MASK,
+                                                HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
+                            }
+                            HSD_JObjSetTranslateX(sp98, val);
+                            cursor->xC = (f32) (-2.9f + (val - base_x));
+                            cursor->x10 = (f32) (1.7f + sp88.y);
+                            if (trigger & 0x100) {
+                                cursor->x5 = 2;
+                                mnCharSel_803F0DFC.doors[hc_door].is_hold_handicap_slider = 0;
+                                lbAudioAx_800237A8(0xB7, 0x7F, 0x40);
+                            }
+                        }
+                    }
+                    goto block_392;
+                }
+
+                if ((cursor->xC > 17.3f) && (cursor->x10 > 22.0f)) {
+                    cursor->x8 = 1;
+                    if (trigger & 0x100) {
+                        mnCharSel_804D6CF6 = 2;
+                        goto block_392;
+                    }
+                }
+
+                if ((u8) mnCharSel_804D6CF5 == 1) {
+                    if ((u8) mnCharSel_804A0BD0[cursor->x4]->x5 == 0) {
+                        mnCharSel_CostumeChange(0, trigger);
+                    }
+
+                    if ((u8) mnCharSel_804D6CB0->match_type < 0xDU) {
+                        f32 cy = cursor->x10;
+                        if (cy < data2.x108 && cy > data2.x10c) {
+                            f32 cx = cursor->xC;
+                            if (cx > data2.xf8 && cx < data2.xfc) {
+                                cursor->x8 = 1;
+                                if ((trigger & 0x100) &&
+                                    (u8) *((u8*)&data2 + 5) > 1U)
+                                {
+                                    *((u8*)&data2 + 5) = (u8) (*((u8*)&data2 + 5) - 1);
+                                    lb_80011E24(mnCharSel_804D6CC0, &sp54,
+                                                data2.xf0[0], -1);
+                                    HSD_JObjSetTranslateX(sp54, 7.5f);
+                                    {
+                                        s32 si;
+                                        for (si = 1; si < 5; si++) {
+                                            lb_80011E24(mnCharSel_804D6CC0, &sp54,
+                                                        data2.xf0[si], -1);
+                                            if ((s32) *((u8*)&data2 + 5) <= si) {
+                                                HSD_JObjSetFlags(sp54, JOBJ_HIDDEN);
+                                            } else {
+                                                HSD_JObjClearFlags(sp54, JOBJ_HIDDEN);
+                                            }
+                                        }
+                                    }
+                                    mnCharSel_804D6CB0->data.data.players[(s8)(u8) mnCharSel_804D6CF0].stocks =
+                                        (s8) *((u8*)&data2 + 5);
+                                    lbAudioAx_80024030(2);
+                                } else {
+                                    goto block_231;
+                                }
+                            } else if (cx > data2.x100 && cx < data2.x104) {
+                                cursor->x8 = 1;
+                                if ((trigger & 0x100) &&
+                                    (u8) *((u8*)&data2 + 5) < 5U)
+                                {
+                                    *((u8*)&data2 + 5) = (u8) (*((u8*)&data2 + 5) + 1);
+                                    lb_80011E24(mnCharSel_804D6CC0, &sp50,
+                                                data2.xf0[0], -1);
+                                    HSD_JObjSetTranslateX(sp50, 7.5f);
+                                    {
+                                        s32 si;
+                                        for (si = 1; si < 5; si++) {
+                                            lb_80011E24(mnCharSel_804D6CC0, &sp50,
+                                                        data2.xf0[si], -1);
+                                            if ((s32) *((u8*)&data2 + 5) <= si) {
+                                                HSD_JObjSetFlags(sp50, JOBJ_HIDDEN);
+                                            } else {
+                                                HSD_JObjClearFlags(sp50, JOBJ_HIDDEN);
+                                            }
+                                        }
+                                    }
+                                    mnCharSel_804D6CB0->data.data.players[(s8)(u8) mnCharSel_804D6CF0].stocks =
+                                        (s8) *((u8*)&data2 + 5);
+                                    lbAudioAx_80024030(2);
+                                } else {
+                                    goto block_231;
+                                }
+                            } else {
+                                goto block_231;
+                            }
+                        } else {
+                            goto block_231;
+                        }
+                    } else {
+                    block_231:
+                        if ((u8) mnCharSel_804D6CB0->match_type <= 0xDU) {
+                            f32 cy2 = cursor->x10;
+                            if (cy2 < mnCharSel_803F0DFC.xe7 && cy2 > mnCharSel_803F0DFC.xeb) {
+                                f32 cx2 = cursor->xC;
+                                if (cx2 > mnCharSel_803F0DFC.xd7 && cx2 < mnCharSel_803F0DFC.xdb) {
+                                    cursor->x8 = 1;
+                                    if ((trigger & 0x100) &&
+                                        (u8) mnCharSel_803F0DFC.xcd != 0)
+                                    {
+                                        mnCharSel_803F0DFC.xcd = (u8) (mnCharSel_803F0DFC.xcd - 1);
+                                        *((u8*)&mnCharSel_803F0DFC + 0xCF) = 1;
+                                        mnCharSel_804D6CB0->data.data.players[(s8)(u8) mnCharSel_804D6CF0].cpu_level =
+                                            mnCharSel_803F0DFC.xcd;
+                                        lbAudioAx_80024030(2);
+                                    } else {
+                                        goto block_298;
+                                    }
+                                } else if (cx2 > mnCharSel_803F0DFC.xdf && cx2 < mnCharSel_803F0DFC.xe3) {
+                                    cursor->x8 = 1;
+                                    if ((trigger & 0x100) &&
+                                        (u8) mnCharSel_803F0DFC.xcd < 4U)
+                                    {
+                                        mnCharSel_803F0DFC.xcd = (u8) (mnCharSel_803F0DFC.xcd + 1);
+                                        *((u8*)&mnCharSel_803F0DFC + 0xCF) = 1;
+                                        mnCharSel_804D6CB0->data.data.players[(s8)(u8) mnCharSel_804D6CF0].cpu_level =
+                                            mnCharSel_803F0DFC.xcd;
+                                        lbAudioAx_80024030(2);
+                                    } else {
+                                        goto block_298;
+                                    }
+                                } else {
+                                    goto block_298;
+                                }
+                            } else {
+                                goto block_298;
+                            }
+                        } else {
+                            goto block_298;
+                        }
+                    }
+                    goto block_392;
+                }
+
+                if ((u8) mnCharSel_804D6CB0->match_type != 2) {
+                    f32 cx3 = cursor->xC;
+                    if (cx3 > -17.0f && cx3 < 15.0f && cursor->x10 > 22.0f) {
+                        cursor->x8 = 1;
+                        if (trigger & 0x100) {
+                            s32 loop_i;
+                            mnCharSel_804D6CF6 = 3;
+                            for (loop_i = 0; loop_i < (s32) mnCharSel_804D6CF5; loop_i++) {
+                                struct CSSCursorData* other =
+                                    (struct CSSCursorData*) mnCharSel_804A0BC0[loop_i];
+                                if ((u8) other->x5 == 1 &&
+                                    mnCharSel_8025FDEC((u8) loop_i) == 0)
+                                {
+                                    mnCharSel_8025DB34((u8) loop_i);
+                                    other->x5 = 2;
+                                }
+                            }
+                            return;
+                        }
+                    }
+                }
+
+                if (cursor->xC < -25.5f && cursor->x10 > 22.0f) {
+                    u8 mtype = mnCharSel_804D6CB0->match_type;
+                    if ((s32) mtype < 0xB && (s32) mtype >= 0) {
+                        cursor->x8 = 1;
+                        if (trigger & 0x100) {
+                            lbAudioAx_80024030(2);
+                            mnCharSel_804D6CB0->data.data.rules.is_teams =
+                                (mnCharSel_804D6CB0->data.data.rules.is_teams + 1) & 1;
+                            if ((u8) mnCharSel_804D6CB0->data.data.rules.is_teams == 0) {
+                                s32 k;
+                                for (k = 0; k < (s32) mnCharSel_804D6CF5; k++) {
+                                    CSSDoor* dk = &mnCharSel_803F0DFC.doors[k];
+                                    s32 dup;
+                                    {
+                                        u8 nd2;
+                                        s32 j2;
+                                        if ((u8) mnCharSel_804D6CB0->match_type == TRAINING_MODE) {
+                                            nd2 = 2;
+                                        } else {
+                                            nd2 = mnCharSel_804D6CF5;
+                                        }
+                                        dup = 0;
+                                        for (j2 = 0; j2 < (s32) nd2; j2++) {
+                                            if (k != j2 &&
+                                                (u8) mnCharSel_803F0DFC.doors[j2].p_kind != 3 &&
+                                                (u8) mnCharSel_803F0DFC.doors[j2].sel_icon < 0x19U &&
+                                                mnCharSel_803F0DFC.doors[j2].sel_icon == dk->sel_icon &&
+                                                (u8) dk->costume == (u8) mnCharSel_803F0DFC.doors[j2].costume)
+                                            {
+                                                dup = 1;
+                                                break;
+                                            }
+                                        }
+                                    }
+                                    if (dup != 0) {
+                                        dk->costume = 0;
+                                        for (;;) {
+                                            u8 nd3;
+                                            s32 j3;
+                                            s32 dup2;
+                                            if ((u8) mnCharSel_804D6CB0->match_type == TRAINING_MODE) {
+                                                nd3 = 2;
+                                            } else {
+                                                nd3 = mnCharSel_804D6CF5;
+                                            }
+                                            dup2 = 0;
+                                            for (j3 = 0; j3 < (s32) nd3; j3++) {
+                                                if (k != j3 &&
+                                                    (u8) mnCharSel_803F0DFC.doors[j3].p_kind != 3 &&
+                                                    (u8) mnCharSel_803F0DFC.doors[j3].sel_icon < 0x19U &&
+                                                    mnCharSel_803F0DFC.doors[j3].sel_icon == dk->sel_icon &&
+                                                    (u8) dk->costume == (u8) mnCharSel_803F0DFC.doors[j3].costume)
+                                                {
+                                                    dup2 = 1;
+                                                    break;
+                                                }
+                                            }
+                                            if (dup2 == 0) {
+                                                break;
+                                            }
+                                            dk->costume = (u8) (dk->costume + 1);
+                                        }
+                                    }
+                                }
+                            }
+                            mnCharSel_8025EE8C(mnCharSel_804D6CB0->match_type);
+                        } else {
+                            goto block_294;
+                        }
+                    } else {
+                        goto block_294;
+                    }
+                } else {
+                block_294:
+                    {
+                        u8 cport2 = cursor->x4;
+                        if ((u8) mnCharSel_804A0BD0[cport2]->x5 == 0 &&
+                            (u8) mnCharSel_804D6CB0->data.data.rules.is_teams == 0 &&
+                            (u8) mnCharSel_803F0DFC.doors[cport2].p_kind != 3)
+                        {
+                            mnCharSel_CostumeChange((s32) cport2, trigger);
+                        }
+                    }
+                block_298:
+                    {
+                        u32 a_press2 = trigger & 0x100;
+                        if (a_press2 != 0) {
+                            if ((u8) mnCharSel_804D6CF5 != 1) {
+                                s32 di;
+                                CSSDoor* dp = &mnCharSel_803F0DFC.doors[0];
+                                CSSTag* tp = &mnCharSel_803F0DFC.tags[0];
+                                for (di = 0; di < (s32) mnCharSel_804D6CF5; di++) {
+                                    if (di != 3 || (u8) mnCharSel_804D6CB0->match_type != 1) {
+                                        if ((dp->is_hold_cpu_slider | dp->is_hold_handicap_slider) == 0 &&
+                                            (u8) mnCharSel_804A0BD0[di]->x5 == 0 &&
+                                            (u8) ((struct CSSCursorData*) mnCharSel_804A0BC0[di])->x5 != 1)
+                                        {
+                                            if ((u8) tp->data->state == 0) {
+                                                f32 cx4 = cursor->xC;
+                                                if (cx4 > dp->togglebtn_left && cx4 < dp->togglebtn_right) {
+                                                    f32 cy4 = cursor->x10;
+                                                    if (cy4 < 0.2f && cy4 > -4.6f) {
+                                                        cursor->x10 = -2.2f;
+                                                        {
+                                                            u8 new_kind = dp->p_kind + 1;
+                                                            dp->p_kind = new_kind;
+                                                            switch ((s32) new_kind) {
+                                                            case 3:
+                                                                break;
+                                                            case 2:
+                                                                dp->p_kind = 3;
+                                                                break;
+                                                            case 4:
+                                                                if ((s8)(u8) HSD_PadCopyStatus[(u8) di].err != 0) {
+                                                                    dp->p_kind = 1;
+                                                                } else {
+                                                                    dp->p_kind = 0;
+                                                                }
+                                                                break;
+                                                            }
+                                                        }
+                                                        mnCharSel_804D6CB0->data.data.players[di].slot_type = dp->p_kind;
+                                                        if ((u8) dp->p_kind == 1) {
+                                                            mnCharSel_804D6CB0->data.data.players[di].xA = 0x78;
+                                                            tp->data->use_tag = 0;
+                                                            if ((u8) dp->selected_since_load == 0 &&
+                                                                (s32) cursor->x4 != di)
+                                                            {
+                                                                mnCharSel_8025FB50((u8) di, 1);
+                                                            }
+                                                        }
+                                                        mnCharSel_8025DB34((u8) di);
+                                                        lbAudioAx_80024030(2);
+                                                        goto block_348;
+                                                    }
+                                                }
+
+                                            block_326:
+                                                if ((u8) mnCharSel_804D6CB0->data.data.rules.is_teams == 1 &&
+                                                    (u8) dp->p_kind != 3)
+                                                {
+                                                    f32 cx5 = cursor->xC;
+                                                    if (cx5 > dp->teambtn_left && cx5 < dp->teambtn_right) {
+                                                        f32 cy5 = cursor->x10;
+                                                        if (cy5 < -1.0f && cy5 > -5.8f) {
+                                                            cursor->x10 = -3.4f;
+                                                            dp->team = (u8) ((dp->team + 1) % 3);
+                                                            mnCharSel_804D6CB0->data.data.players[di].team = dp->team;
+                                                            mnCharSel_8025DB34((u8) di);
+                                                            lbAudioAx_80024030(2);
+                                                        }
+                                                    }
+                                                }
+
+                                                if (a_press2 != 0) {
+                                                    if ((u8) dp->is_hold_cpu_slider == 0 &&
+                                                        (u8) dp->p_kind == 1)
+                                                    {
+                                                        GameRules* rules2 = gmMainLib_8015CC34();
+                                                        if ((u8) rules2->handicap != 0) {
+                                                            lb_80011E24(mnCharSel_804D6CC0, &sp98,
+                                                                        dp->cpuslider2_joint, -1);
+                                                        } else {
+                                                            lb_80011E24(mnCharSel_804D6CC0, &sp98,
+                                                                        dp->cpuslider_joint, -1);
+                                                        }
+                                                        lb_8000B1CC(sp98, NULL, (Point3d*) &sp88);
+                                                        {
+                                                            f32 sdx = cursor->x10 - (1.7f + sp88.y);
+                                                            f32 sdy = cursor->xC - (-2.9f + sp88.x);
+                                                            if ((sdy * sdy + sdx * sdx) < 5.0f) {
+                                                                cursor->x5 = 1;
+                                                                cursor->x6 = (u8) (di + 4);
+                                                                cursor->xC = (f32) (-2.9f + sp88.x);
+                                                                cursor->x10 = (f32) (1.7f + sp88.y);
+                                                                dp->is_hold_cpu_slider = 1;
+                                                                lbAudioAx_800237A8(0xB7, 0x7F, 0x40);
+                                                            }
+                                                        }
+                                                    }
+
+                                                    if ((u8) dp->is_hold_handicap_slider == 0) {
+                                                        GameRules* rules3 = gmMainLib_8015CC34();
+                                                        if ((u8) rules3->handicap == 2) {
+                                                            u8 pk = dp->p_kind;
+                                                            if (pk != 3 &&
+                                                                (pk == 1 || di == (s32) cursor->x4))
+                                                            {
+                                                                lb_80011E24(mnCharSel_804D6CC0, &sp98,
+                                                                            dp->cpuslider_joint, -1);
+                                                                lb_8000B1CC(sp98, NULL, (Point3d*) &sp88);
+                                                                {
+                                                                    f32 hdx = cursor->x10 - (1.7f + sp88.y);
+                                                                    f32 hdy = cursor->xC - (-2.9f + sp88.x);
+                                                                    if ((hdy * hdy + hdx * hdx) < 5.0f) {
+                                                                        cursor->x5 = 1;
+                                                                        cursor->x6 = (u8) (di + 8);
+                                                                        cursor->xC = (f32) (-2.9f + sp88.x);
+                                                                        cursor->x10 = (f32) (1.7f + sp88.y);
+                                                                        dp->is_hold_handicap_slider = 1;
+                                                                        lbAudioAx_800237A8(0xB7, 0x7F, 0x40);
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            } else {
+                                                goto block_348;
+                                            }
+                                        } else {
+                                        block_348:;
+                                        }
+                                    }
+                                    dp++;
+                                    tp++;
+                                }
+                            }
+
+                            {
+                                u8 cport3 = cursor->x4;
+                                if ((cport3 != 3 || (u8) mnCharSel_804D6CB0->match_type != 1) &&
+                                    (u8) mnCharSel_803F0DFC.doors[cport3].p_kind == 0)
+                                {
+                                    if ((u8) mnCharSel_804D6CF5 == 1) {
+                                        lb_80011E24(mnCharSel_804D6CC0, &sp98,
+                                                    mnCharSel_803F0DFC.tag_box_joint, -1);
+                                    } else {
+                                        lb_80011E24(mnCharSel_804D6CC0, &sp98,
+                                                    mnCharSel_803F0DFC.tags[cursor->x4].name_jointl, -1);
+                                    }
+                                    lb_8000B1CC(sp98, NULL, (Point3d*) &sp88);
+                                    {
+                                        f32 cx6 = cursor->xC;
+                                        if (cx6 > (sp88.x - 4.7f) && cx6 < (5.2f + sp88.x)) {
+                                            f32 cy6 = cursor->x10;
+                                            if (cy6 < (2.0f + sp88.y) && cy6 > (sp88.y - 1.0f)) {
+                                                if ((u8) mnCharSel_804D6CF5 == 1) {
+                                                    lb_80011E24(mnCharSel_804D6CC0, &sp74,
+                                                                mnCharSel_803F0DFC.name_list_joint, -1);
+                                                } else {
+                                                    lb_80011E24(mnCharSel_804D6CC0, &sp74,
+                                                                mnCharSel_803F0DFC.tags[cursor->x4].list_joint,
+                                                                -1);
+                                                }
+                                                lb_8000B1CC(sp74, NULL, (Point3d*) &sp88);
+                                                cursor->xC = sp88.x;
+                                                cursor->x10 = (f32) (sp88.y - 5.0f);
+                                                mnCharSel_803F0DFC.tags[cursor->x4].data->state = 1;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            {
+                                s32 closest = -1;
+                                f32 closest_dist = 9.0f;
+                                s32 ci;
+                                for (ci = 0; ci < (s32) n_doors; ci++) {
+                                    f32 cy7 = cursor->x10;
+                                    if (!(cy7 < 0.2f) && !(cy7 > 22.0f)) {
+                                        CSSDoor* dc = &mnCharSel_803F0DFC.doors[ci];
+                                        u8 pk2 = dc->p_kind;
+                                        if (pk2 != 3 && (u8) dc->sel_icon < 0x19U &&
+                                            (pk2 != 0 || (s32) cursor->x4 == ci))
+                                        {
+                                            struct CSSCharModel* mc = mnCharSel_804A0BD0[ci];
+                                            if ((u8) mc->x5 == 0) {
+                                                f32 ddx = 3.8f + (cursor->xC - mc->x8);
+                                                f32 ddy = -2.6f + (cy7 - mc->xC);
+                                                f32 dist = (ddx * ddx) + (ddy * ddy);
+                                                if (dist < closest_dist) {
+                                                    closest_dist = dist;
+                                                    closest = ci;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+
+                                if (closest >= 0) {
+                                    u8 cport4 = cursor->x4;
+                                    mnCharSel_804A0BD0[closest]->x5 = (s8) (cport4 + 1);
+                                    {
+                                        struct CSSCursorData* my_cursor =
+                                            (struct CSSCursorData*) mnCharSel_804A0BC0[cport4];
+                                        my_cursor->x5 = 1;
+                                        my_cursor->x6 = (u8) closest;
+                                    }
+                                    mnCharSel_803F0DFC.doors[(u8) closest].sel_icon = 0xD;
+                                    HSD_GObjGXLink_803909D8(
+                                        mnCharSel_804A0BD0[closest]->gobj,
+                                        *mnCharSel_804A0BC0[cport4]);
+                                    lbAudioAx_800237A8(0xB7, 0x7F, 0x40);
+                                    cursor->xC = (f32) (mnCharSel_804A0BD0[closest]->x8 - 2.7f);
+                                    cursor->x10 = (f32) (mnCharSel_804A0BD0[closest]->xC - -2.0f);
+                                }
+                            }
+                        } else if (trigger & 0x200) {
+                            u8 cport5 = cursor->x4;
+                            if ((u8) mnCharSel_803F0DFC.doors[cport5].p_kind != 3 &&
+                                (u8) mnCharSel_803F0DFC.doors[cport5].sel_icon < 0x19U)
+                            {
+                                f32 cy8 = cursor->x10;
+                                if (cy8 > 0.2f && cy8 < 22.0f) {
+                                    if ((u8) mnCharSel_804A0BD0[cport5]->x5 == 0) {
+                                        mnCharSel_804A0BD0[cport5]->x5 = (u8) (cport5 + 1);
+                                        ((struct CSSCursorData*) mnCharSel_804A0BC0[cport5])->x5 = 1;
+                                        ((struct CSSCursorData*) mnCharSel_804A0BC0[cport5])->x6 = cport5;
+                                        mnCharSel_803F0DFC.doors[cport5].sel_icon = 0xD;
+                                        HSD_GObjGXLink_803909D8(
+                                            mnCharSel_804A0BD0[cport5]->gobj,
+                                            *mnCharSel_804A0BC0[cport5]);
+                                        lbAudioAx_800237A8(0xB7, 0x7F, 0x40);
+                                    }
+                                }
+                            }
+                        }
+
+                        {
+                            f32 cy9 = cursor->x10;
+                            if (cy9 > 0.2f && cy9 < 22.0f) {
+                                u8 cport6 = cursor->x4;
+                                if (cport6 != 3 || (u8) mnCharSel_804D6CB0->match_type != 1) {
+                                    if ((u8) mnCharSel_803F0DFC.doors[cport6].p_kind == 3) {
+                                        mnCharSel_803F0DFC.doors[cport6].p_kind = 0;
+                                        mnCharSel_804D6CB0->data.data.players[cursor->x4].slot_type = 0;
+                                        mnCharSel_8025DB34(cursor->x4);
+                                        lbAudioAx_80024030(2);
+                                    }
+
+                                    {
+                                        u8 cport7 = cursor->x4;
+                                        if ((u8) mnCharSel_803F0DFC.doors[cport7].sel_icon >= 0x19U) {
+                                            mnCharSel_804A0BD0[cport7]->x5 = (s8) (cport7 + 1);
+                                            ((struct CSSCursorData*) mnCharSel_804A0BC0[cport7])->x5 = 1;
+                                            ((struct CSSCursorData*) mnCharSel_804A0BC0[cport7])->x6 = cport7;
+                                            mnCharSel_803F0DFC.doors[cport7].sel_icon = 0xD;
+                                            HSD_GObjGXLink_803909D8(
+                                                mnCharSel_804A0BD0[cport7]->gobj,
+                                                *mnCharSel_804A0BC0[cport7]);
+                                            lbAudioAx_800237A8(0xB7, 0x7F, 0x40);
+                                            {
+                                                f32 val_x = 2.7f + cursor->xC;
+                                                mnCharSel_804A0BD0[cursor->x4]->x10 = val_x;
+                                                mnCharSel_804A0BD0[cursor->x4]->x8 = val_x;
+                                            }
+                                            {
+                                                f32 val_y = -2.0f + cursor->x10;
+                                                mnCharSel_804A0BD0[cursor->x4]->x14 = val_y;
+                                                mnCharSel_804A0BD0[cursor->x4]->xC = val_y;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            goto block_392;
+        }
+        goto block_392;
+    }
+
+block_392:
+    if ((u8) cursor->x5 != 1) {
+        f32 cy10 = cursor->x10;
+        if (cy10 < 0.2f || cy10 > 22.0f) {
+            cursor->x5 = 0;
+        } else {
+            cursor->x5 = 2;
+        }
+    }
+
+    {
+        f32 state_f = (f32) cursor->x5;
+        lb_80011E24(jobj, &sp40, 2, -1);
+        HSD_ForeachAnim(sp40, JOBJ_TYPE, TOBJ_MASK, HSD_AObjReqAnim, AOBJ_ARG_AF, state_f);
+        HSD_JObjAnimAll(sp40);
+        HSD_ForeachAnim(sp40, JOBJ_TYPE, TOBJ_MASK, HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
+    }
+
+    {
+        s8 color_idx;
+        if ((u8) mnCharSel_804D6CF5 == 1) {
+            color_idx = (s8) (u8) mnCharSel_804D6CF0;
+        } else if ((u8) mnCharSel_804D6CB0->data.data.rules.is_teams == 0) {
+            color_idx = (s8) cursor->x4;
+        } else {
+            color_idx = (s8) mnCharSel_804D50E0[mnCharSel_803F0DFC.doors[cursor->x4].team];
+        }
+
+        {
+            s32 frame_idx;
+            if ((u16) cursor->x8 != 0) {
+                s8 port_val = (s8) cursor->x4;
+                if ((u8) mnCharSel_804D6CF5 == 1) {
+                    if ((s32) port_val != 0) {
+                        port_val = (s8) (u8) mnCharSel_804D6CF1;
+                    } else {
+                        port_val = (s8) (u8) mnCharSel_804D6CF0;
+                    }
+                }
+                frame_idx = (mnCharSel_804D6CEC & 3) + (port_val * 4);
+            } else {
+                s8 port_val2 = (s8) cursor->x4;
+                if ((u8) mnCharSel_804D6CF5 == 1) {
+                    if ((s32) port_val2 != 0) {
+                        port_val2 = (s8) (u8) mnCharSel_804D6CF1;
+                    } else {
+                        port_val2 = (s8) (u8) mnCharSel_804D6CF0;
+                    }
+                }
+                frame_idx = color_idx + (port_val2 * 4);
+            }
+
+            lb_80011E24(jobj, &sp3C, 3, -1);
+            HSD_ForeachAnim(sp3C, JOBJ_TYPE, TOBJ_MASK, HSD_AObjReqAnim, AOBJ_ARG_AF, (f32) frame_idx);
+            HSD_JObjAnimAll(sp3C);
+            HSD_ForeachAnim(sp3C, JOBJ_TYPE, TOBJ_MASK, HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
+        }
+    }
+
+    HSD_JObjSetTranslateX(jobj, cursor->xC);
+    HSD_JObjSetTranslateY(jobj, cursor->x10);
+    HSD_JObjSetTranslateZ(jobj, 0.0f);
+    HSD_JObjAnimAll(jobj);
+
+    PAD_STACK(0x30);
+}
 
 /// #fn_80262648
 void fn_80262648(HSD_GObj* gobj)
