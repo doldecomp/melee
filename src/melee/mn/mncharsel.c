@@ -1742,7 +1742,6 @@ s32 mnCharSel_8025FDEC(u8 door)
 void mnCharSel_CostumeChange(int door, u32 input)
 {
     u8 prev_costume = mnCharSel_803F0DFC.doors[door].costume;
-    PAD_STACK(4);
 
     if (mnCharSel_803F0DFC.doors[door].sel_icon >= 0x19) {
         return;
