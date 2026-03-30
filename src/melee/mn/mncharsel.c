@@ -1188,8 +1188,9 @@ void mnCharSel_8025EE8C(u8 idx)
         temp_f31 = mnCharSel_803F0A48.mode_info[idx].mode_ffa_frame;
         cc0 = mnCharSel_804D6CC0;
         lb_80011E24(cc0, &sp14, 0x24, -1);
-        HSD_ForeachAnim(sp14, JOBJ_TYPE, TOBJ_MASK, HSD_AObjReqAnim,
-                        AOBJ_ARG_AF, temp_f31);
+        cc0 = sp14;
+        HSD_ForeachAnim(cc0, JOBJ_TYPE, TOBJ_MASK, HSD_AObjReqAnim, AOBJ_ARG_AF, temp_f31);
+
         HSD_JObjAnimAll(sp14);
         HSD_ForeachAnim(sp14, JOBJ_TYPE, TOBJ_MASK, HSD_AObjStopAnim,
                         AOBJ_ARG_AOV, 0, 0);
@@ -1202,7 +1203,8 @@ void mnCharSel_8025EE8C(u8 idx)
             temp_f31 = mnCharSel_803F0A48.mode_info[idx].mode_teams_frame;
             cc0 = mnCharSel_804D6CC0;
             lb_80011E24(cc0, &sp10, 0x24, -1);
-            HSD_ForeachAnim(sp10, JOBJ_TYPE, TOBJ_MASK, HSD_AObjReqAnim,
+            cc0 = sp10;
+            HSD_ForeachAnim(cc0, JOBJ_TYPE, TOBJ_MASK, HSD_AObjReqAnim,
                             AOBJ_ARG_AF, temp_f31);
             HSD_JObjAnimAll(sp10);
             HSD_ForeachAnim(sp10, JOBJ_TYPE, TOBJ_MASK, HSD_AObjStopAnim,
@@ -1211,7 +1213,8 @@ void mnCharSel_8025EE8C(u8 idx)
             temp_f31 = mnCharSel_803F0A48.mode_info[idx].mode_ffa_frame;
             cc0 = mnCharSel_804D6CC0;
             lb_80011E24(cc0, &spC, 0x24, -1);
-            HSD_ForeachAnim(spC, JOBJ_TYPE, TOBJ_MASK, HSD_AObjReqAnim,
+            cc0 = spC;
+            HSD_ForeachAnim(cc0, JOBJ_TYPE, TOBJ_MASK, HSD_AObjReqAnim,
                             AOBJ_ARG_AF, temp_f31);
             HSD_JObjAnimAll(spC);
             HSD_ForeachAnim(spC, JOBJ_TYPE, TOBJ_MASK, HSD_AObjStopAnim,
