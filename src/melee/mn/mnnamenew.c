@@ -711,9 +711,9 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
     }
 
     buttons = mn_80229624((u32) mnNameNew_PortInUse);
-    *(u32*)((u8*)&mn_804A04F0 + 0xC) = buttons;
+    ((s32*) &mn_804A04F0.buttons)[1] = buttons;
+    ((s32*) &mn_804A04F0.buttons)[0] = 0;
     var_r29 = 0;
-    *(u32*)((u8*)&mn_804A04F0 + 0x8) = 0;
 
     if (buttons & 0x200) {
         u16 sel = mn_804A04F0.hovered_selection;
