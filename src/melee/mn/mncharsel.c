@@ -2520,7 +2520,6 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                                     }
                                                 }
 
-                                            block_326:
                                                 if ((u8) mnCharSel_804D6CB0->data.data.rules.is_teams == 1 &&
                                                     (u8) dp->p_kind != 3)
                                                 {
