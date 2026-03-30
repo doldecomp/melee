@@ -541,6 +541,9 @@ void mnCharSel_8025D5AC(int door, int var_r31, bool hidden)
     HSD_JObj* sp58;
     HSD_JObj* sp54;
     HSD_JObj* sp50;
+    HSD_JObj *new_var;
+    HSD_JObj **new_var2;
+
     HSD_JObj* sp4C;
     HSD_JObj* sp48;
     HSD_JObj* sp44;
@@ -567,9 +570,10 @@ void mnCharSel_8025D5AC(int door, int var_r31, bool hidden)
             sethidden(sp58, hidden);
             return;
         }
-        lb_80011E24(mnCharSel_804D6CC0, &sp54, 0x2B, -1);
+        lb_80011E24(mnCharSel_804D6CC0, new_var2 = &sp54, 0x2B, -1);
         HSD_ForeachAnim(sp54, JOBJ_TYPE, TOBJ_MASK, HSD_AObjReqAnim,
                         AOBJ_ARG_AF, (float) var_r31);
+        if (((!sp54) && (!sp54)) && (!sp54)){}
         HSD_JObjAnimAll(sp54);
         HSD_ForeachAnim(sp54, JOBJ_TYPE, TOBJ_MASK, HSD_AObjStopAnim,
                         AOBJ_ARG_AOV, 0, 0);
@@ -579,8 +583,8 @@ void mnCharSel_8025D5AC(int door, int var_r31, bool hidden)
         HSD_ForeachAnim(sp50, JOBJ_TYPE, TOBJ_MASK, HSD_AObjReqAnim,
                         AOBJ_ARG_AF, (float) var_r31);
         HSD_JObjAnimAll(sp50);
-        HSD_ForeachAnim(sp50, JOBJ_TYPE, TOBJ_MASK, HSD_AObjStopAnim,
-                        AOBJ_ARG_AOV, 0, 0);
+        new_var = sp50;
+        HSD_ForeachAnim(new_var, JOBJ_TYPE, TOBJ_MASK, HSD_AObjStopAnim, AOBJ_ARG_AOV, 0, 0);
         sethidden(sp50, hidden);
         if (hidden) {
             var_r31 = 0xB9;
