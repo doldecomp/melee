@@ -1273,7 +1273,7 @@ void fn_8025F0E0(HSD_GObj* gobj)
                          AOBJ_ARG_AF, 0.0f);
     }
 
-    icons = (CSSIcon*) ((u8*) &mnCharSel_803F0A48 + 0xDC);
+    icons = (CSSIcon*) (&mnCharSel_803F0A48 + 1);
     i = 0;
     do {
         timer = icons[i].anim_timer;
@@ -1302,7 +1302,7 @@ void fn_8025F0E0(HSD_GObj* gobj)
     } while (i < 25);
 
     if ((u8) mnCharSel_804D6CF5 == 4) {
-        doors = (CSSDoor*) ((u8*) &mnCharSel_803F0A48 + 0x3B4);
+        doors = mnCharSel_803F0DFC.doors;
         sp5C = HSD_AObjReqAnim;
         sp60 = HSD_AObjStopAnim;
         i = 0;
@@ -1365,9 +1365,9 @@ void fn_8025F0E0(HSD_GObj* gobj)
                         rules = gmMainLib_8015CC34();
                         if ((u8) rules->handicap == 1) {
                             val = gm_801685D4((u8) i,
-                                *((u8*) mnCharSel_804D6CB0 + door_offset + 0x7A));
+                                mnCharSel_804D6CB0->data.data.players[i].xA);
                         } else {
-                            val = *((u8*) mnCharSel_804D6CB0 + door_offset + 0x78);
+                            val = mnCharSel_804D6CB0->data.data.players[i].handicap;
                         }
                         {
                             f32 val_f;
@@ -1387,7 +1387,7 @@ void fn_8025F0E0(HSD_GObj* gobj)
                                          HSD_AObjStopAnim, AOBJ_ARG_AOV,
                                          0, 0);
 
-                        fval = (f32) *((u8*) mnCharSel_804D6CB0 + door_offset + 0x7F);
+                        fval = (f32) mnCharSel_804D6CB0->data.data.players[i].cpu_level;
                         lb_80011E24(mnCharSel_804D6CC0, &sp38,
                                      doors->cpuslider2_joint, -1);
                         HSD_ForeachAnim(sp38, JOBJ_TYPE, TOBJ_MASK,
@@ -1418,7 +1418,7 @@ void fn_8025F0E0(HSD_GObj* gobj)
                                              sp60, AOBJ_ARG_AOV,
                                              0, 0);
                         }
-                        fval = (f32) *((u8*) mnCharSel_804D6CB0 + door_offset + 0x7F);
+                        fval = (f32) mnCharSel_804D6CB0->data.data.players[i].cpu_level;
                         lb_80011E24(mnCharSel_804D6CC0, &sp2C,
                                      doors->cpuslider_joint, -1);
                         HSD_ForeachAnim(sp2C, JOBJ_TYPE, TOBJ_MASK,
@@ -1431,39 +1431,38 @@ void fn_8025F0E0(HSD_GObj* gobj)
                 }
             }
 
-            doors = (CSSDoor*)((u8*)doors + 0x24);
+            doors++;
             door_offset += 0x24;
             i += 1;
         }
     } else {
-        u8* base = (u8*) &mnCharSel_803F0A48;
-        u8* scroll_flag = base + 0x483;
-        u8* page_target = base + 0x481;
-        u8* page_current = base + 0x482;
+        u8* scroll_flag = &mnCharSel_803F0DFC.scroll_flag;
+        u8* page_target = &mnCharSel_803F0DFC.xcd;
+        u8* page_current = &mnCharSel_803F0DFC.xce;
 
         if (*scroll_flag != 0) {
             if (*page_target != *page_current) {
                 if (*page_target < *page_current) {
-                    *(f32*)(base + 0x484) = *(f32*)(base + 0x484) + 31.0f;
-                    if (*(f32*)(base + 0x484) >= -(248.0f * (f32) *page_target - 124.0f)) {
+                    mnCharSel_803F0DFC.xcf = mnCharSel_803F0DFC.xcf + 31.0f;
+                    if (mnCharSel_803F0DFC.xcf >= -(248.0f * (f32) *page_target - 124.0f)) {
                         *page_current = *page_target;
                     }
                 } else {
-                    *(f32*)(base + 0x484) = *(f32*)(base + 0x484) - 31.0f;
-                    if (*(f32*)(base + 0x484) <= -(248.0f * (f32) *page_target - 124.0f)) {
+                    mnCharSel_803F0DFC.xcf = mnCharSel_803F0DFC.xcf - 31.0f;
+                    if (mnCharSel_803F0DFC.xcf <= -(248.0f * (f32) *page_target - 124.0f)) {
                         *page_current = *page_target;
                     }
                 }
             }
             if (*page_target == *page_current) {
                 *scroll_flag = 0;
-                *(f32*)(base + 0x484) = -(248.0f * (f32) *page_target - 124.0f);
+                mnCharSel_803F0DFC.xcf = -(248.0f * (f32) *page_target - 124.0f);
             }
             {
                 int j;
                 for (j = 0; j < 5; j++) {
-                    HSD_SisLib_803A746C(*(HSD_Text**)(base + 0x488), j,
-                                         248.0f * (f32) j + *(f32*)(base + 0x484),
+                    HSD_SisLib_803A746C(*(HSD_Text**)&mnCharSel_803F0DFC.xd3, j,
+                                         248.0f * (f32) j + mnCharSel_803F0DFC.xcf,
                                          0.0f);
                 }
             }
@@ -1512,9 +1511,9 @@ void fn_8025F0E0(HSD_GObj* gobj)
     } else {
         CSSDoor* door_ptr;
         struct CSSCharModel** model_ptr;
-        door_ptr = (CSSDoor*) ((u8*) &mnCharSel_803F0A48 + 0x3B4);
+        door_ptr = mnCharSel_803F0DFC.doors;
         i = 0;
-        model_ptr = (struct CSSCharModel**)((u8*)sp58 + 0x10);
+        model_ptr = (struct CSSCharModel**)mnCharSel_804A0BD0;
         while (i < (s32) mnCharSel_804D6CF5) {
             lb_80011E24(mnCharSel_804D6CC0, &sp54,
                          door_ptr->costume_joint, -1);
@@ -1535,7 +1534,7 @@ void fn_8025F0E0(HSD_GObj* gobj)
                 }
                 HSD_MObjSetAlpha(mobj, 1.0f);
             }
-            door_ptr = (CSSDoor*)((u8*)door_ptr + 0x24);
+            door_ptr++;
             model_ptr += 1;
             i += 1;
         }
@@ -2029,7 +2028,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                             {
                                                 s32 icon_count = 0;
                                                 s32 ic;
-                                                CSSIcon* icons = (CSSIcon*)((u8*)&mnCharSel_803F0A48 + 0xDC);
+                                                CSSIcon* icons = (CSSIcon*)(&mnCharSel_803F0A48 + 1);
                                                 for (ic = 0; ic < 25; ic++) {
                                                     if ((u8) icons[ic].state >= 2) {
                                                         icon_count++;
@@ -2079,7 +2078,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
 
                                     {
                                         struct CSSCharModel* m2 = mnCharSel_804A0BD0[grabbed];
-                                        CSSIcon* icons = (CSSIcon*)((u8*)&mnCharSel_803F0A48 + 0xDC);
+                                        CSSIcon* icons = (CSSIcon*)(&mnCharSel_803F0A48 + 1);
                                         s32 i;
                                         u8 found = 0;
                                         for (i = 0; i < 0x19; i++) {
@@ -2259,9 +2258,9 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                             if (cx > data2.xf8 && cx < data2.xfc) {
                                 cursor->x8 = 1;
                                 if ((trigger & 0x100) &&
-                                    (u8) *((u8*)&data2 + 5) > 1U)
+                                    (u8) data2.stocks > 1U)
                                 {
-                                    *((u8*)&data2 + 5) = (u8) (*((u8*)&data2 + 5) - 1);
+                                    data2.stocks = (u8) (data2.stocks - 1);
                                     lb_80011E24(mnCharSel_804D6CC0, &sp54,
                                                 data2.xf0[0], -1);
                                     HSD_JObjSetTranslateX(sp54, 7.5f);
@@ -2270,7 +2269,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                         for (si = 1; si < 5; si++) {
                                             lb_80011E24(mnCharSel_804D6CC0, &sp54,
                                                         data2.xf0[si], -1);
-                                            if ((s32) *((u8*)&data2 + 5) <= si) {
+                                            if ((s32) data2.stocks <= si) {
                                                 HSD_JObjSetFlags(sp54, JOBJ_HIDDEN);
                                             } else {
                                                 HSD_JObjClearFlags(sp54, JOBJ_HIDDEN);
@@ -2278,7 +2277,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                         }
                                     }
                                     mnCharSel_804D6CB0->data.data.players[(s8)(u8) mnCharSel_804D6CF0].stocks =
-                                        (s8) *((u8*)&data2 + 5);
+                                        (s8) data2.stocks;
                                     lbAudioAx_80024030(2);
                                 } else {
                                     goto block_231;
@@ -2286,9 +2285,9 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                             } else if (cx > data2.x100 && cx < data2.x104) {
                                 cursor->x8 = 1;
                                 if ((trigger & 0x100) &&
-                                    (u8) *((u8*)&data2 + 5) < 5U)
+                                    (u8) data2.stocks < 5U)
                                 {
-                                    *((u8*)&data2 + 5) = (u8) (*((u8*)&data2 + 5) + 1);
+                                    data2.stocks = (u8) (data2.stocks + 1);
                                     lb_80011E24(mnCharSel_804D6CC0, &sp50,
                                                 data2.xf0[0], -1);
                                     HSD_JObjSetTranslateX(sp50, 7.5f);
@@ -2297,7 +2296,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                         for (si = 1; si < 5; si++) {
                                             lb_80011E24(mnCharSel_804D6CC0, &sp50,
                                                         data2.xf0[si], -1);
-                                            if ((s32) *((u8*)&data2 + 5) <= si) {
+                                            if ((s32) data2.stocks <= si) {
                                                 HSD_JObjSetFlags(sp50, JOBJ_HIDDEN);
                                             } else {
                                                 HSD_JObjClearFlags(sp50, JOBJ_HIDDEN);
@@ -2305,7 +2304,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                         }
                                     }
                                     mnCharSel_804D6CB0->data.data.players[(s8)(u8) mnCharSel_804D6CF0].stocks =
-                                        (s8) *((u8*)&data2 + 5);
+                                        (s8) data2.stocks;
                                     lbAudioAx_80024030(2);
                                 } else {
                                     goto block_231;
@@ -2328,7 +2327,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                         (u8) mnCharSel_803F0DFC.xcd != 0)
                                     {
                                         mnCharSel_803F0DFC.xcd = (u8) (mnCharSel_803F0DFC.xcd - 1);
-                                        *((u8*)&mnCharSel_803F0DFC + 0xCF) = 1;
+                                        mnCharSel_803F0DFC.scroll_flag = 1;
                                         mnCharSel_804D6CB0->data.data.players[(s8)(u8) mnCharSel_804D6CF0].cpu_level =
                                             mnCharSel_803F0DFC.xcd;
                                         lbAudioAx_80024030(2);
@@ -2341,7 +2340,7 @@ void mnCharSel_CursorThink(HSD_GObj* gobj)
                                         (u8) mnCharSel_803F0DFC.xcd < 4U)
                                     {
                                         mnCharSel_803F0DFC.xcd = (u8) (mnCharSel_803F0DFC.xcd + 1);
-                                        *((u8*)&mnCharSel_803F0DFC + 0xCF) = 1;
+                                        mnCharSel_803F0DFC.scroll_flag = 1;
                                         mnCharSel_804D6CB0->data.data.players[(s8)(u8) mnCharSel_804D6CF0].cpu_level =
                                             mnCharSel_803F0DFC.xcd;
                                         lbAudioAx_80024030(2);
@@ -3238,18 +3237,18 @@ void fn_802633B0(HSD_GObj* gobj)
 
     if ((u8) mnCharSel_804D6CF5 == 1) {
         lb_80011E24(mnCharSel_804D6CC0, &sp84,
-                     *((u8*) &mnCharSel_803F0A48 + 0x478), -1);
+                     mnCharSel_803F0DFC.xc4, -1);
         trigger = HSD_PadCopyStatus[(u8) mnCharSel_804D6CF0].trigger;
     } else {
         lb_80011E24(mnCharSel_804D6CC0, &sp84,
-                     *((u8*) &mnCharSel_803F0A48 + 0x448 + tag->port * 0xC), -1);
+                     mnCharSel_803F0DFC.tags[tag->port].x4, -1);
         trigger = HSD_PadCopyStatus[tag->port].trigger;
     }
 
     switch ((s32) tag->state) {
     case 1:
         mnCharSel_8025D1C4((s32) tag->port, 1);
-        sel_icon = *((u8*) &mnCharSel_803F0A48 + 0x3C2 + tag->port * 0x24);
+        sel_icon = mnCharSel_803F0DFC.doors[tag->port].sel_icon;
         if ((u8) sel_icon < 0x19U) {
             if (lbLang_IsSavedLanguageUS() != 0 &&
                 (u8) sel_icon == 0x16) {
@@ -3257,7 +3256,7 @@ void fn_802633B0(HSD_GObj* gobj)
                                      (char*) &mnCharSel_803F0A48);
             } else {
                 HSD_SisLib_803A70A0((HSD_Text*)tag->name_ls, 0,
-                    (char*) gm_80160980(*((u8*) &mnCharSel_803F0A48 + 0xDD + sel_icon * 0x1C)));
+                    (char*) gm_80160980(icons[sel_icon].char_kind));
             }
         } else {
             HSD_SisLib_803A70A0((HSD_Text*)tag->name_ls, 0,
@@ -3326,10 +3325,10 @@ void fn_802633B0(HSD_GObj* gobj)
 
         if ((u8) mnCharSel_804D6CF5 == 1) {
             lb_80011E24(mnCharSel_804D6CC0, &sp80,
-                         *((u8*) &mnCharSel_803F0A48 + 0x47B), -1);
+                         mnCharSel_803F0DFC.xc7, -1);
         } else {
             lb_80011E24(mnCharSel_804D6CC0, &sp80,
-                         *((u8*) &mnCharSel_803F0A48 + 0x44B + tag->port * 0xC), -1);
+                         mnCharSel_803F0DFC.tags[tag->port].x7, -1);
         }
 
         if (tag->x8 == 0.0f) {
@@ -3340,10 +3339,10 @@ void fn_802633B0(HSD_GObj* gobj)
 
         if ((u8) mnCharSel_804D6CF5 == 1) {
             lb_80011E24(mnCharSel_804D6CC0, &sp80,
-                         *((u8*) &mnCharSel_803F0A48 + 0x47C), -1);
+                         mnCharSel_803F0DFC.xc8, -1);
         } else {
             lb_80011E24(mnCharSel_804D6CC0, &sp80,
-                         *((u8*) &mnCharSel_803F0A48 + 0x44C + tag->port * 0xC), -1);
+                         mnCharSel_803F0DFC.tags[tag->port].kostar_text_joint, -1);
         }
 
         if ((u8) tag->next_tag > 7U) {
@@ -3382,13 +3381,12 @@ void fn_802633B0(HSD_GObj* gobj)
                         ddata = mnCharSel_804D6CB0;
                         for (p2 = 0; p2 < (s32) mnCharSel_804D6CF5; p2++) {
                             if (p2 != (s32) tag->port &&
-                                (s32) ddata->data.data.players[0].xA == row_idx) {
+                                (s32) mnCharSel_804D6CB0->data.data.players[p2].xA == row_idx) {
                                 sp58 = sp74;
                                 HSD_SisLib_803A74F0((HSD_Text*)tag->name_ls, j + 2,
                                                      (u8*) &sp58);
                                 break;
                             }
-                            ddata = (CSSData*) ((u8*) ddata + 0x24);
                         }
                     }
                 }
@@ -3403,10 +3401,10 @@ void fn_802633B0(HSD_GObj* gobj)
         if (trigger & 0x100) {
             if ((u8) mnCharSel_804D6CF5 == 1) {
                 lb_80011E24(mnCharSel_804D6CC0, &sp70,
-                             *((u8*) &mnCharSel_803F0A48 + 0x479), -1);
+                             mnCharSel_803F0DFC.name_list_joint, -1);
             } else {
                 lb_80011E24(mnCharSel_804D6CC0, &sp70,
-                             *((u8*) &mnCharSel_803F0A48 + 0x449 + tag->port * 0xC), -1);
+                             mnCharSel_803F0DFC.tags[tag->port].list_joint, -1);
             }
             lb_8000B1CC(sp70, NULL, &sp64);
             row = (s32) (0.5f * (0.8f + (sp64.y -
@@ -3414,14 +3412,14 @@ void fn_802633B0(HSD_GObj* gobj)
                     (tag->x8 * 0.03125f));
 
             if (row == 0) {
-                sel_icon = *((u8*) &mnCharSel_803F0A48 + 0x3C2 + tag->port * 0x24);
+                sel_icon = mnCharSel_803F0DFC.doors[tag->port].sel_icon;
                 if (lbLang_IsSavedLanguageUS() != 0 &&
                     (u8) sel_icon == 0x16) {
                     HSD_SisLib_803A70A0((HSD_Text*)tag->text, 0,
                                          (char*) &mnCharSel_803F0A48);
                 } else {
                     HSD_SisLib_803A70A0((HSD_Text*)tag->text, 0,
-                        (char*) gm_80160980(*((u8*) &mnCharSel_803F0A48 + 0xDD + sel_icon * 0x1C)));
+                        (char*) gm_80160980(icons[sel_icon].char_kind));
                 }
                 ((HSD_Text*)tag->text)->default_kerning = 1;
                 if ((u8) sel_icon < 0x19U) {
@@ -3483,15 +3481,12 @@ void fn_802633B0(HSD_GObj* gobj)
 
             if ((s32) tag->next_tag > row) {
                 {
-                    CSSData* data;
                     s32 p;
-                    data = mnCharSel_804D6CB0;
                     for (p = 0; p < (s32) mnCharSel_804D6CF5; p++) {
                         if (p == (s32) port &&
-                            (s32) data->data.data.players[0].xA == (s32) (row - 1)) {
+                            (s32) mnCharSel_804D6CB0->data.data.players[p].xA == (s32) (row - 1)) {
                             goto block_116;
                         }
-                        data = (CSSData*) ((u8*) data + 0x24);
                     }
                     {
                         char* name_str;
@@ -3557,7 +3552,7 @@ void fn_802633B0(HSD_GObj* gobj)
                     hval = 1;
                 }
                 lb_80011E24(mnCharSel_804D6CC0, &sp30,
-                    *((u8*) &mnCharSel_803F0A48 + 0x3BB + port * 0x24), -1);
+                    mnCharSel_803F0DFC.doors[port].cpuslider_joint, -1);
                 HSD_ForeachAnim(sp30, JOBJ_TYPE, TOBJ_MASK,
                                  HSD_AObjReqAnim, AOBJ_ARG_AF, (f32) hval);
                 HSD_JObjAnimAll(sp30);

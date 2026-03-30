@@ -393,8 +393,9 @@ struct CSSDoorsData {
     u8 xcc;
     u8 xcd;
     u8 xce;
-    int xcf;
-    int xd3;
+    u8 scroll_flag;
+    float xcf;
+    float xd3;
     float xd7;
     float xdb;
     float xdf;
@@ -405,6 +406,9 @@ struct CSSDoorsData {
 
 struct CSSDoorsData2 {
     u8 xf0[5];
+    u8 stocks;
+    u8 xf6;
+    u8 xf7;
     float xf8;
     float xfc;
     float x100;
