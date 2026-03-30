@@ -2826,6 +2826,7 @@ void fn_80262648(HSD_GObj* gobj)
     HSD_JObj* jobj = GET_JOBJ(gobj);
     u8 prev_port = model->x6;
     u8 n_doors;
+    PAD_STACK(8);
 
     if ((u8) mnCharSel_804D6CB0->match_type == 0x17) {
         n_doors = 2;
