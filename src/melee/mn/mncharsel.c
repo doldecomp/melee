@@ -1232,7 +1232,6 @@ static struct CSSCharModel {
     /* 0x14 */ float x14;
 }* mnCharSel_804A0BD0[4];
 
-/// #fn_8025F0E0
 void fn_8025F0E0(HSD_GObj* gobj)
 {
     HSD_JObj* jobj = GET_JOBJ(gobj);
@@ -1589,8 +1588,6 @@ static inline bool isDuplicateCostume(int door)
     return false;
 }
 
-/// #mnCharSel_8025FB50
-
 void mnCharSel_8025FB50(u8 door, s32 arg1)
 {
     HSD_JObj* sp18;
@@ -1772,7 +1769,6 @@ void mnCharSel_CostumeChange(int door, u32 input)
     }
 }
 
-/// #mnCharSel_CursorThink
 
 struct CSSCursorData {
     /* 0x00 */ HSD_GObj* gobj;
@@ -2814,7 +2810,6 @@ block_392:
     PAD_STACK(0x30);
 }
 
-/// #fn_80262648
 void fn_80262648(HSD_GObj* gobj)
 {
     HSD_JObj* sp24;
@@ -3036,7 +3031,6 @@ void fn_80262648(HSD_GObj* gobj)
     HSD_JObjAnimAll(jobj);
 }
 
-/// #fn_80262F44
 void fn_80262F44(HSD_GObj* gobj)
 {
     HSD_JObj* jobj = GET_JOBJ(gobj);
@@ -3179,24 +3173,23 @@ void fn_80263354(HSD_GObj* gobj)
     HSD_JObjAnimAll(jobj);
 }
 
-/// #fn_802633B0
 /// Nametag list think callback - handles scrolling through nametag list
 
-static s32 mnCharSel_804DC560 = (s32) 0xFFFFFFFF;
-static s32 mnCharSel_804DC564 = (s32) 0x646464FF;
+static GXColor mnCharSel_804DC560 = { 255, 255, 255, 255 };
+static GXColor mnCharSel_804DC564 = { 100, 100, 100, 255 };
 
 void fn_802633B0(HSD_GObj* gobj)
 {
     HSD_JObj* sp84;
     HSD_JObj* sp80;
-    s32 sp78;
-    s32 sp74;
+    GXColor sp78;
+    GXColor sp74;
     HSD_JObj* sp70;
     Vec3 sp64;
-    s32 sp60;
-    s32 sp5C;
-    s32 sp58;
-    s32 sp54;
+    GXColor sp60;
+    GXColor sp5C;
+    GXColor sp58;
+    GXColor sp54;
     HSD_JObj* sp30;
     CSSTagData* tag;
     u8 port;
@@ -3219,9 +3212,9 @@ void fn_802633B0(HSD_GObj* gobj)
 
     if ((u8) mnCharSel_804D6CF5 == 1) {
         if ((s32) port != 0) {
-            port = (u8) (s8) (u8) mnCharSel_804D6CF1;
+            port = mnCharSel_804D6CF1;
         } else {
-            port = (u8) (s8) (u8) mnCharSel_804D6CF0;
+            port = mnCharSel_804D6CF0;
         }
     }
 
@@ -3609,7 +3602,6 @@ void fn_8026407C(HSD_GObj* gobj)
     HSD_FogSet(GET_FOG(gobj));
 }
 
-/// #mnCharSel_802640A0
 
 static u8 data_pad[0x138] = { 0 };
 
