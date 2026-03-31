@@ -1034,6 +1034,41 @@ void mnNameNew_MainInput(HSD_GObj* arg0)
 }
 
 
+static char mnNameNew_803EE35C[] = "Can't get user_data.\n";
+static char mnNameNew_803EE374[] = "mnnamenew.c";
+static char mnNameNew_803EE380[] = "user_data";
+static char mnNameNew_803EE38C[] = "MenMainBack_Top_joint";
+static char mnNameNew_803EE3A4[] = "MenMainBack_Top_animjoint";
+static char mnNameNew_803EE3C0[] = "MenMainBack_Top_matanim_joint";
+static char mnNameNew_803EE3E0[] = "MenMainBack_Top_shapeanim_joint";
+static char mnNameNew_803EE400[] = "ScMenMain_cam_int1_camera";
+static char mnNameNew_803EE41C[] = "ScMenMain_scene_lights";
+static char mnNameNew_803EE434[] = "ScMenMain_fog";
+static char mnNameNew_803EE444[] = "MenMainPanel_Top_joint";
+static char mnNameNew_803EE45C[] = "MenMainPanel_Top_animjoint";
+static char mnNameNew_803EE478[] = "MenMainPanel_Top_matanim_joint";
+static char mnNameNew_803EE498[] = "MenMainPanel_Top_shapeanim_joint";
+static char mnNameNew_803EE4BC[] = "MenMainConEtNw_Top_joint";
+static char mnNameNew_803EE4D8[] = "MenMainConEtNw_Top_animjoint";
+static char mnNameNew_803EE4F8[] = "MenMainConEtNw_Top_matanim_joint";
+static char mnNameNew_803EE51C[] = "MenMainConEtNw_Top_shapeanim_joint";
+static char mnNameNew_803EE540[] = "MenMainBaseEtNw_Top_joint";
+static char mnNameNew_803EE55C[] = "MenMainBaseEtNw_Top_animjoint";
+static char mnNameNew_803EE57C[] = "MenMainBaseEtNw_Top_matanim_joint";
+static char mnNameNew_803EE5A0[] = "MenMainBaseEtNw_Top_shapeanim_joint";
+static char mnNameNew_803EE5C4[] = "MenMainSubEtNw_Top_joint";
+static char mnNameNew_803EE5E0[] = "MenMainSubEtNw_Top_animjoint";
+static char mnNameNew_803EE600[] = "MenMainSubEtNw_Top_matanim_joint";
+static char mnNameNew_803EE624[] = "MenMainSubEtNw_Top_shapeanim_joint";
+static char mnNameNew_803EE648[] = "MenMainSbaseEtNw_Top_joint";
+static char mnNameNew_803EE664[] = "MenMainSbaseEtNw_Top_animjoint";
+static char mnNameNew_803EE684[] = "MenMainSbaseEtNw_Top_matanim_joint";
+static char mnNameNew_803EE6A8[] = "MenMainSbaseEtNw_Top_shapeanim_joint";
+static char mnNameNew_803EE6D0[] = "mnNameAutoNameUs";
+static char mnNameNew_803EE6E4[] = "mnNameRefuseNameUs";
+static char mnNameNew_803EE6F8[] = "mnNameAutoName";
+static char mnNameNew_803EE708[] = "mnNameRefuseName";
+
 void mnNameNew_8023CE4C(void)
 {
     GXColor sp20;
@@ -1257,8 +1292,8 @@ s32 mnNameNew_GlyphVariantSetup(u8* arg0, u8 arg1, u8 arg2)
 
     udata = HSD_MemAlloc(sizeof(GlyphVariantEntry));
     if (udata == NULL) {
-        OSReport("Can't get userdata\n");
-        __assert(__FILE__, 0x5B4U, "user_data");
+        OSReport(mnNameNew_803EE35C);
+        __assert(mnNameNew_803EE374, 0x5B4U, mnNameNew_803EE380);
     }
     GObj_InitUserData(gobj, 0U, fn_8023D0F8, udata);
 
@@ -1595,9 +1630,8 @@ void mnNameNew_8023E32C(s32 arg0)
     HSD_JObjAnimAll(root_jobj);
     data = HSD_MemAlloc(0x6C);
     if (data == NULL) {
-        OSReport((char*)((u8*) mnNameNew_803EDA58 + 0x904));
-        __assert((char*)((u8*) mnNameNew_803EDA58 + 0x91C), 0x717U,
-                 (char*)((u8*) mnNameNew_803EDA58 + 0x928));
+        OSReport(mnNameNew_803EE35C);
+        __assert(mnNameNew_803EE374, 0x717U, mnNameNew_803EE380);
     }
     GObj_InitUserData(gobj, 0U, HSD_Free, data);
     InitNameEntryUIState(data, arg0);
@@ -1650,7 +1684,6 @@ void mnNameNew_EnterFromMnName(UNK_T arg0)
 
 void mnNameNew_EnterFromMnCharSel(HSD_Archive* arg0, s32 arg1)
 {
-    u8* base;
     u8 name_count;
     HSD_GObjProc* proc;
     char* text;
@@ -1658,7 +1691,6 @@ void mnNameNew_EnterFromMnCharSel(HSD_Archive* arg0, s32 arg1)
 
     PAD_STACK(16);
 
-    base = (u8*) mnNameNew_803EDA58;
     text = mnNameNew_CurrentNameText;
 
     mn_804D6BC8.cooldown = 0x14;
@@ -1679,47 +1711,47 @@ void mnNameNew_EnterFromMnCharSel(HSD_Archive* arg0, s32 arg1)
 
     lbArchive_LoadSections(
         arg0,
-        (void**) &MenMainBack_Top.joint, (char*)(base + 0x934),
-        &MenMainBack_Top.animjoint, (char*)(base + 0x94C),
-        &MenMainBack_Top.matanim_joint, (char*)(base + 0x968),
-        &MenMainBack_Top.shapeanim_joint, (char*)(base + 0x988),
-        &MenMain_cam, (char*)(base + 0x9A8),
-        &MenMain_lights, (char*)(base + 0x9C4),
-        &MenMain_fog, (char*)(base + 0x9DC),
-        &MenMainPanel_Top.joint, (char*)(base + 0x9EC),
-        &MenMainPanel_Top.animjoint, (char*)(base + 0xA04),
-        &MenMainPanel_Top.matanim_joint, (char*)(base + 0xA20),
-        &MenMainPanel_Top.shapeanim_joint, (char*)(base + 0xA40),
-        &mnNameNew_804A06F0[0], (char*)(base + 0xA64),
-        &mnNameNew_804A06F0[1], (char*)(base + 0xA80),
-        &mnNameNew_804A06F0[2], (char*)(base + 0xAA0),
-        &mnNameNew_804A06F0[3], (char*)(base + 0xAC4),
-        &mnNameNew_804A0700[0], (char*)(base + 0xAE8),
-        &mnNameNew_804A0700[1], (char*)(base + 0xB04),
-        &mnNameNew_804A0700[2], (char*)(base + 0xB24),
-        &mnNameNew_804A0700[3], (char*)(base + 0xB48),
-        &mnNameNew_804A0710[0], (char*)(base + 0xB6C),
-        &mnNameNew_804A0710[1], (char*)(base + 0xB88),
-        &mnNameNew_804A0710[2], (char*)(base + 0xBA8),
-        &mnNameNew_804A0710[3], (char*)(base + 0xBCC),
-        &mnNameNew_804A0720[0], (char*)(base + 0xBF0),
-        &mnNameNew_804A0720[1], (char*)(base + 0xC0C),
-        &mnNameNew_804A0720[2], (char*)(base + 0xC2C),
-        &mnNameNew_804A0720[3], (char*)(base + 0xC50),
+        (void**) &MenMainBack_Top.joint, mnNameNew_803EE38C,
+        &MenMainBack_Top.animjoint, mnNameNew_803EE3A4,
+        &MenMainBack_Top.matanim_joint, mnNameNew_803EE3C0,
+        &MenMainBack_Top.shapeanim_joint, mnNameNew_803EE3E0,
+        &MenMain_cam, mnNameNew_803EE400,
+        &MenMain_lights, mnNameNew_803EE41C,
+        &MenMain_fog, mnNameNew_803EE434,
+        &MenMainPanel_Top.joint, mnNameNew_803EE444,
+        &MenMainPanel_Top.animjoint, mnNameNew_803EE45C,
+        &MenMainPanel_Top.matanim_joint, mnNameNew_803EE478,
+        &MenMainPanel_Top.shapeanim_joint, mnNameNew_803EE498,
+        &mnNameNew_804A06F0[0], mnNameNew_803EE4BC,
+        &mnNameNew_804A06F0[1], mnNameNew_803EE4D8,
+        &mnNameNew_804A06F0[2], mnNameNew_803EE4F8,
+        &mnNameNew_804A06F0[3], mnNameNew_803EE51C,
+        &mnNameNew_804A0700[0], mnNameNew_803EE540,
+        &mnNameNew_804A0700[1], mnNameNew_803EE55C,
+        &mnNameNew_804A0700[2], mnNameNew_803EE57C,
+        &mnNameNew_804A0700[3], mnNameNew_803EE5A0,
+        &mnNameNew_804A0710[0], mnNameNew_803EE5C4,
+        &mnNameNew_804A0710[1], mnNameNew_803EE5E0,
+        &mnNameNew_804A0710[2], mnNameNew_803EE600,
+        &mnNameNew_804A0710[3], mnNameNew_803EE624,
+        &mnNameNew_804A0720[0], mnNameNew_803EE648,
+        &mnNameNew_804A0720[1], mnNameNew_803EE664,
+        &mnNameNew_804A0720[2], mnNameNew_803EE684,
+        &mnNameNew_804A0720[3], mnNameNew_803EE6A8,
         NULL);
 
     is_us = lbLang_IsSavedLanguageUS();
     if (is_us) {
         lbArchive_LoadSections(
             arg0,
-            (void**) &AutoNamesList, (char*)(base + 0xC78),
-            &NotAllowedNamesList, (char*)(base + 0xC8C),
+            (void**) &AutoNamesList, mnNameNew_803EE6D0,
+            &NotAllowedNamesList, mnNameNew_803EE6E4,
             NULL);
     } else {
         lbArchive_LoadSections(
             arg0,
-            (void**) &AutoNamesList, (char*)(base + 0xCA0),
-            &NotAllowedNamesList, (char*)(base + 0xCB0),
+            (void**) &AutoNamesList, mnNameNew_803EE6F8,
+            &NotAllowedNamesList, mnNameNew_803EE708,
             NULL);
     }
 
