@@ -12,9 +12,12 @@
 #include <sysdolphin/baselib/mtx.h>
 #include <sysdolphin/baselib/tobj.h>
 #include <melee/gm/gmresult.h>
+#include <melee/gm/gm_1601.h>
+#include <melee/gm/gm_1A45.h>
 #include <melee/gm/types.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lb_00F9.h>
+#include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbbgflash.h>
 #include <melee/sc/types.h>
 
@@ -339,6 +342,94 @@ int fn_801791E4(void)
 }
 
 /// #fn_80179350
+#pragma dont_inline on
+void fn_80179350(HSD_GObj* arg0)
+{
+    ResultsData* data = &lbl_8046DBE8;
+    MatchEnd* match_end;
+    int i;
+
+    PAD_STACK(8);
+
+    match_end = fn_80174274();
+
+    for (i = 0; i < 6; i++) {
+        if (data->player_data[i].jobjs[12] != NULL) {
+            lb_8000B1CC(data->player_data[i].jobjs[12], NULL,
+                        &data->player_data[i].stats_position);
+        }
+    }
+
+    if ((u32) data->x8 == 0 && data->x0_4) {
+        gm_801A4634(0);
+    }
+
+    if ((u32) data->x8 == 0xA2) {
+        if (gm_801743A4(match_end->result) == 0) {
+            lbAudioAx_800237A8(0xB5, 0x7F, 0x40);
+        }
+    } else if ((u32) data->x8 == 0x2) {
+        if (gm_801743A4(match_end->result) == 0) {
+            lbAudioAx_800237A8(0xC355, 0x7F, 0x40);
+            lbAudioAx_800237A8(0x144, 0x7F, 0x40);
+        } else {
+            lbAudioAx_800237A8(0x148, 0x7F, 0x40);
+        }
+    } else if ((u32) data->x8 == 0x9A) {
+        if (gm_801743A4(match_end->result) != 0) {
+            lbAudioAx_800237A8(0xC350, 0x7F, 0x40);
+        } else {
+            fn_80168E54(
+                (s8)(u8) match_end->player_standings[data->x6].character_kind,
+                (s8)(u8) match_end->player_standings[data->x6].character_id,
+                match_end->player_standings[data->x6].team,
+                (u8)(match_end->is_teams == 1));
+        }
+    }
+
+    if (data->x1 < 1) {
+        if (fn_801791E4() != 0) {
+            fn_80178BB4(arg0);
+        }
+    } else {
+        HSD_JObjAnimAll((HSD_JObj*) arg0->hsd_obj);
+        switch (data->x1) {
+        case 1:
+        {
+            ResultsData* d = &lbl_8046DBE8;
+            HSD_JObj* jobj = (HSD_JObj*) arg0->hsd_obj;
+            float frame = lbGetJObjCurrFrame(jobj);
+            if (frame >= 10.0f && !d->x0_1) {
+                fn_80177748();
+                d->x0_1 = 1;
+            }
+            if (frame >= 40.0f) {
+                lb_8000BA0C(jobj, 0.0f);
+                d->x1 = 2;
+            }
+            break;
+        }
+        case 2:
+            fn_80177920(arg0);
+            break;
+        case 3:
+            fn_80178050(arg0);
+            break;
+        case 4:
+            if ((u8) data->pad_03[0] != 0) {
+                data->pad_03[0] = (char)((u8) data->pad_03[0] - 1);
+            } else {
+                gm_801A4B60();
+            }
+            break;
+        }
+    }
+
+    if ((u32) data->x8 < (u32) -1) {
+        data->x8++;
+    }
+}
+#pragma dont_inline off
 
 int fn_801795D4(void)
 {
