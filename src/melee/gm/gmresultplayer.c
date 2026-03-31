@@ -414,8 +414,7 @@ void fn_80179F84(HSD_JObj* jobj)
             } else {
                 next = child->next;
             }
-            child = next;
-            *++p = child;
+            *++p = child = next;
         }
     }
 
