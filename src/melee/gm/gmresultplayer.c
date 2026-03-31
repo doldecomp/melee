@@ -61,7 +61,16 @@ typedef struct {
     /* 0x40 */ GObj_RenderFunc x40;
     /* 0x44 */ GObj_RenderFunc x44;
     /* 0x48 */ GObj_RenderFunc x48;
-    /* 0x4C */ u8 pad_4C[0x74 - 0x4C];
+    /* 0x4C */ f32 x4C;
+    /* 0x50 */ f32 x50;
+    /* 0x54 */ f32 x54;
+    /* 0x58 */ f32 x58;
+    /* 0x5C */ f32 x5C;
+    /* 0x60 */ f32 x60;
+    /* 0x64 */ GObj_RenderFunc x64;
+    /* 0x68 */ GObj_RenderFunc x68;
+    /* 0x6C */ GObj_RenderFunc x6C;
+    /* 0x70 */ GObj_RenderFunc x70;
     /* 0x74 */ f32 x74;
     /* 0x78 */ f32 x78;
     /* 0x7C */ f32 x7C;
@@ -76,6 +85,9 @@ typedef struct {
 
 extern ResultsPlayerConfig lbl_803B7B68;
 extern HSD_CObjDesc lbl_803D7910;
+extern u8 lbl_803D6A08[];
+extern s32 lbl_804DA3F0;
+extern s32 lbl_804DA3F4;
 
 extern int lbl_8046E38C[4];
 
@@ -1265,6 +1277,119 @@ void fn_8017A078(s32 arg0)
 }
 
 /// #fn_8017A318
+
+HSD_GObj* fn_8017A318(s32 arg0)
+{
+    u8* base = lbl_8046E1B0;
+    u8* config = (u8*) &lbl_803B7B68;
+    u8* data = lbl_803D6A08;
+    u8* standings = base + 0x224;
+    s32 _pad[2];
+    s32 scissor[2];
+    Vec3 eye;
+    Vec3 interest;
+    GObj_RenderFunc callbacks[4];
+    HSD_GObj* gobj;
+    HSD_CObj* cobj;
+    int slot;
+    u8 variant;
+    s32 kind_off;
+    int vi;
+
+    PAD_STACK(0x10);
+
+    fn_801795D4();
+    fn_801796F0(arg0);
+
+    scissor[0] = lbl_804DA3F0;
+    scissor[1] = lbl_804DA3F4;
+
+    *(s32*) &eye.x = *(s32*) (config + 0x4C);
+    *(s32*) &eye.y = *(s32*) (config + 0x50);
+    *(s32*) &eye.z = *(s32*) (config + 0x54);
+    *(s32*) &interest.x = *(s32*) (config + 0x58);
+    *(s32*) &interest.y = *(s32*) (config + 0x5C);
+    *(s32*) &interest.z = *(s32*) (config + 0x60);
+    *(s32*) &callbacks[0] = *(s32*) (config + 0x64);
+    *(s32*) &callbacks[1] = *(s32*) (config + 0x68);
+    *(s32*) &callbacks[2] = *(s32*) (config + 0x6C);
+    *(s32*) &callbacks[3] = *(s32*) (config + 0x70);
+
+    if (standings[6] == 0) {
+        slot = standings[arg0 * 0xA8 + 0x5D];
+    } else {
+        u8 team_idx = standings[arg0 * 0xA8 + 0x5F];
+        slot = standings[team_idx * 0xC + 0x24];
+    }
+
+    gobj = GObj_Create(0x13, 0x14, 0);
+    cobj = HSD_CObjLoadDesc((HSD_CObjDesc*) (data + 0xF08));
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
+
+    {
+        s32 n = arg0 + 1;
+        eye.y *= (f32) n;
+        interest.y *= (f32) n;
+    }
+
+    variant = base[arg0 + 0x20A];
+
+    vi = ((s32) variant <= 2) ? variant : 3;
+    kind_off = ((s32*) (base + 0x210))[arg0] * 0x30;
+    eye.y += ((f32*) (data + kind_off + 0x20))[vi];
+
+    vi = ((s32) variant <= 2) ? variant : 3;
+    interest.y += ((f32*) (data + kind_off + 0x20))[vi];
+
+    vi = ((s32) variant <= 2) ? variant : 3;
+    eye.x += ((f32*) (data + kind_off + 0x10))[vi];
+
+    {
+        f32 temp_f0;
+        vi = ((s32) variant <= 2) ? variant : 3;
+        temp_f0 = interest.x + ((f32*) (data + kind_off + 0x10))[vi];
+
+        {
+            f32* slot_data = (f32*) (data + kind_off + slot * 4);
+            f32 x_off, y_off;
+
+            interest.x = temp_f0;
+            x_off = *(f32*) ((u8*) slot_data + 0x6D0);
+            eye.x += x_off;
+            interest.x += x_off;
+
+            y_off = *(f32*) ((u8*) slot_data + 0x6E0);
+            eye.y += y_off;
+            interest.y += y_off;
+        }
+    }
+
+    if (slot == 0) {
+        eye.z += 320.0f;
+    }
+
+    vi = ((s32) variant <= 2) ? variant : 3;
+    if ((1.0f - ((f32*) (data + kind_off + 0x30))[vi]) < 0.0f) {
+        vi = ((s32) variant <= 2) ? variant : 3;
+        eye.z += 100.0f *
+                 (1.0f - ((f32*) (data + kind_off + 0x30))[vi]);
+    } else {
+        vi = ((s32) variant <= 2) ? variant : 3;
+        eye.z += 300.0f *
+                 (1.0f - ((f32*) (data + kind_off + 0x30))[vi]);
+    }
+
+    HSD_CObjSetEyePosition(cobj, &eye);
+    HSD_CObjSetInterest(cobj, &interest);
+    HSD_CObjSetScissor(cobj, (Scissor*) scissor);
+    GObj_SetupGXLinkMax(gobj, callbacks[arg0], 0);
+
+    if (slot == 0) {
+        fn_8017A078(arg0);
+    }
+
+    return gobj;
+}
 
 Fighter_GObj* fn_8017A67C(CharacterKind c_kind, int arg1, int arg2)
 {
