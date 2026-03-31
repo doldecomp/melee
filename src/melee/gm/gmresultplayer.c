@@ -8,12 +8,14 @@
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>
+#include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/mtx.h>
 #include <sysdolphin/baselib/tobj.h>
 #include <melee/gm/gmresult.h>
 #include <melee/gm/types.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lb_00F9.h>
+#include <melee/lb/lbbgflash.h>
 #include <melee/sc/types.h>
 
 extern ResultsData lbl_8046DBE8;
@@ -343,7 +345,36 @@ int fn_801795D4(void)
 
 /// #fn_801796F0
 
-/// #fn_80179854
+int fn_80179854(void)
+{
+    u8* base = lbl_8046E1B0;
+    u8* data = base + 0x224;
+    GXColor color1 = { 0, 0, 0, 0 };
+    GXColor color2 = { 0, 0, 0, 0x3C };
+    HSD_GObj** gobjs = (HSD_GObj**) (base + 0x1DC);
+    int i;
+    int lookup;
+
+    lbBgFlash_800206D4(&color1, &color2, 0x1E);
+
+    for (i = 0; i < 4; i++) {
+        if (data[6] == 0) {
+            lookup = data[i * 0xA8 + 0x5D];
+        } else {
+            int idx = data[i * 0xA8 + 0x5F];
+            lookup = data[idx * 0xC + 0x24];
+        }
+
+        if (data[i * 0xA8 + 0x58] != 3 && lookup != 0) {
+            HSD_JObj* jobj = GET_JOBJ(gobjs[i]);
+            HSD_JObjSetTranslateX(jobj, -300.0f);
+            lookup = 1;
+            ((lbl_8046E3AC_t*) (base + 0x1FC))->x0_6 = 1;
+        }
+    }
+
+    return lookup;
+}
 
 /// #fn_80179990
 
