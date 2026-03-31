@@ -314,7 +314,32 @@ bool fn_80177DD0(int slot)
 
 /// #fn_80179350
 
-/// #fn_801795D4
+int fn_801795D4(void)
+{
+    u8* data = (u8*) &lbl_8046E3AC + 0x28;
+    int count = 0;
+    int i;
+
+    for (i = 0; i < 4; i++) {
+        int lookup;
+
+        if (data[6] == 0) {
+            lookup = data[i * 0xA8 + 0x5D];
+        } else {
+            int idx = data[i * 0xA8 + 0x5F];
+            lookup = data[idx * 0xC + 0x24];
+        }
+
+        if (data[i * 0xA8 + 0x58] != 3 && lookup == 0) {
+            count++;
+        }
+    }
+
+    if (count != 0) {
+        return count - 1;
+    }
+    return count;
+}
 
 /// #fn_801796F0
 
