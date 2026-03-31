@@ -27,6 +27,7 @@
 #include "sysdolphin/baselib/sislib.h"
 
 #include <dolphin/os.h>
+typedef char* GlyphRow[4];
 
 extern volatile char mnNameNew_NullCharacter;
 extern u8 mnNameNew_PortInUse;
@@ -37,7 +38,7 @@ extern u8 mn_804D6BB4;
 extern u8 mn_804D6BB5;
 extern u8 mnNameNew_804D4F7C[4];
 extern char mnNameNew_SpaceCharacter[2];
-extern char* mnNameNew_803EDCE4[];
+extern GlyphRow* mnNameNew_803EDCE4;
 extern void* mnNameNew_804A06F0[];
 extern void* mnNameNew_804A0700[];
 extern void* mnNameNew_804A0710[];
@@ -51,34 +52,17 @@ extern HSD_CObjDesc* MenMain_cam;
 extern UNK_T MenMain_lights;
 extern HSD_FogDesc* MenMain_fog;
 
-extern char** mnNameNew_803EDA8C[];
-extern char** mnNameNew_803EDB54[];
-extern char** mnNameNew_803EDC1C[];
-extern Vec3 mnNameNew_803EE324;
-
-/// Row of 4 glyph character pointers for a single key position.
-typedef struct GlyphRow {
-    char* glyphs[4];
-} GlyphRow;
-
-/// Large static data block starting at mnNameNew_803EDA58.
-/// Contains animation settings, glyph lookup tables, etc.
-typedef struct NameNewData {
-    /* 0x000 */ AnimLoopSettings anim[3];
-    /* 0x024 */ u16 key_counts[8];
-    /* 0x034 */ char* glyph_set_a[50];
-    /* 0x0FC */ char* glyph_set_b[50];
-    /* 0x1C4 */ char* glyph_single[50];
-    /* 0x28C */ GlyphRow glyph_lower[50];
-    /* 0x5AC */ GlyphRow glyph_upper[50];
-    /* 0x8CC */ Vec3 ref_pos;
-} NameNewData;
-
 static AnimLoopSettings mnNameNew_803EDA58[3] = {
     { 0.0f, 19.0f, -0.1f },
     { 20.0f, 39.0f, -0.1f },
     { 0.0f, 10.0f, -0.1f },
 };
+
+extern char** mnNameNew_803EDA8C;
+extern char** mnNameNew_803EDB54;
+extern char** mnNameNew_803EDC1C;
+extern GlyphRow* mnNameNew_803EE004;
+extern Vec3 mnNameNew_803EE324;
 
 static Vec3 mnNameNew_803EE330 = { -0.7f, 0.7f, 0.0f };
 
@@ -220,26 +204,24 @@ s32 mnNameNew_KeySetup(NameNewEntry* arg0, u8 arg1)
     f32 col_x;
     s32 i;
     GXColor* color_ptr;
-    NameNewData* ndata;
 
     FORCE_PAD_STACK(20);
 
     sp4C = mnNameNew_804DBF44;
     sp48 = mnNameNew_804DBF48;
-    ndata = (NameNewData*) mnNameNew_803EDA58;
 
     switch ((s32) arg1) {
     case 0:
         arg0->mode = 0;
-        str_table = ndata->glyph_set_a;
+        str_table = mnNameNew_803EDA8C;
         break;
     case 1:
         arg0->mode = 1;
-        str_table = ndata->glyph_set_b;
+        str_table = mnNameNew_803EDB54;
         break;
     case 2:
         arg0->mode = 2;
-        str_table = ndata->glyph_single;
+        str_table = mnNameNew_803EDC1C;
         break;
     }
 
@@ -536,7 +518,7 @@ s32 WriteCharactersForNameAtIndex(u8 arg0, s32 arg1)
 
 inline char **AddCharacterToName_getGlyphs(GlyphRow *arg0, u8 arg1)
 {
-  return arg0[arg1].glyphs;
+    return (char**) &arg0[arg1];
 }
 
 
@@ -545,9 +527,7 @@ char* AddCharacterToName(char* arg0, u8 arg1, u8 arg2, u8 arg3)
     char ch;
     char* var_r4;
     char** table;
-    NameNewData* data;
     u32 temp;
-    data = (NameNewData*) mnNameNew_803EDA58;
 
     if ((s32) arg3 != 2) {
         if (((((s32) (temp = arg3)) < ((unsigned short) 2)) & 0xFFFFFFFF) &&
@@ -558,20 +538,22 @@ char* AddCharacterToName(char* arg0, u8 arg1, u8 arg2, u8 arg3)
 
             if ((u8) (arg1 - 0x30) <= 1U) {
                 if ((arg2 % 2) != 0) {
-                    table = AddCharacterToName_getGlyphs(data->glyph_upper, arg1);
+                    table =
+                        AddCharacterToName_getGlyphs(mnNameNew_803EE004, arg1);
                 } else {
-                    table = AddCharacterToName_getGlyphs(data->glyph_lower, arg1);
+                    table =
+                        AddCharacterToName_getGlyphs(mnNameNew_803EDCE4, arg1);
                 }
             } else if ((arg3 == 0 && (arg2 % 2) == 0) ||
                        (arg3 == 1 && (arg2 % 2) != 0))
             {
-                table = AddCharacterToName_getGlyphs(data->glyph_lower, arg1);
+                table = AddCharacterToName_getGlyphs(mnNameNew_803EDCE4, arg1);
             } else {
-                table = AddCharacterToName_getGlyphs(data->glyph_upper, arg1);
+                table = AddCharacterToName_getGlyphs(mnNameNew_803EE004, arg1);
             }
             var_r4 = arg0;
 
-            for (idx = data->glyph_single[arg1][1] * 0;
+            for (idx = mnNameNew_803EDC1C[arg1][1] * 0;
                  (null = (mnNameNew_NullCharacter & 0xFFFF) & 0xFFFF) !=
                  (ch = table[arg2 / 2][idx] & (0xFF & 0xFFu));
                  idx++)
@@ -582,9 +564,9 @@ char* AddCharacterToName(char* arg0, u8 arg1, u8 arg2, u8 arg3)
         }
         return arg0;
     }
-    arg0[0] = data->glyph_single[arg1][0];
-    arg0[1] = data->glyph_single[arg1][1];
-    arg0[2] = data->glyph_single[arg1][2];
+    arg0[0] = mnNameNew_803EDC1C[arg1][0];
+    arg0[1] = mnNameNew_803EDC1C[arg1][1];
+    arg0[2] = mnNameNew_803EDC1C[arg1][2];
     return arg0;
 }
 
@@ -596,7 +578,7 @@ void mnNameNew_GlyphVariantInput(void)
     u16 old_hover;
     u8 old_sel;
     u8 cur_pos;
-    char** table;
+    GlyphRow* table;
     s32 total;
     s8 null_ch;
 
@@ -1172,7 +1154,6 @@ void fn_8023D0F8(void* arg0)
     HSD_Free(arg0);
 }
 
-
 s32 mnNameNew_8023D130(GlyphVariantEntry* arg0, u8 arg1, u8 arg2, s32 arg3)
 {
     Vec3 sp30;
@@ -1191,17 +1172,15 @@ s32 mnNameNew_8023D130(GlyphVariantEntry* arg0, u8 arg1, u8 arg2, s32 arg3)
     s32 temp;
     GlyphRow* table_upper;
     GlyphRow* table_lower;
-    NameNewData* ndata;
     GXColor* sp2C_ptr;
 
     PAD_STACK(8);
 
-    ndata = (NameNewData*) mnNameNew_803EDA58;
     jobj14 = arg0->jobjs[4];
     text = HSD_SisLib_803A6754(0, (s32) mn_804D6BB4);
     jobj18 = arg0->jobjs[5];
     jobj1C = arg0->jobjs[6];
-    lb_8000B1CC(jobj14, &ndata->ref_pos, &sp30);
+    lb_8000B1CC(jobj14, &mnNameNew_803EE324, &sp30);
     text->pos_x = sp30.x;
     text->pos_y = -sp30.y;
     text->pos_z = sp30.z;
@@ -1210,23 +1189,23 @@ s32 mnNameNew_8023D130(GlyphVariantEntry* arg0, u8 arg1, u8 arg2, s32 arg3)
     text->text_color = mnNameNew_804D4F6C;
     x_range = HSD_JObjGetTranslationX(jobj18) - HSD_JObjGetTranslationX(jobj14);
     y_range = -(HSD_JObjGetTranslationY(jobj1C) - HSD_JObjGetTranslationY(jobj14));
-    temp = (arg3 * 0x10) & 0xFF0;
-    table_upper = (GlyphRow*) ((u8*) ndata + temp + 0x5AC);
-    table_lower = (GlyphRow*) ((u8*) ndata + temp + 0x28C);
+    temp = (arg3 * 4) & 0x3FC;
+    table_upper = &mnNameNew_803EE004[temp];
+    table_lower = &mnNameNew_803EDCE4[temp];
     sp2C_ptr = &sp2C;
     for (i = 0; i < (s32) arg1; i++) {
         if ((u8)(arg3 - 0x30) <= 1U) {
             if ((i % 2) != 0) {
-                str = table_upper->glyphs[i / 2];
+                str = (char*) table_upper[i / 2];
             } else {
-                str = table_lower->glyphs[i / 2];
+                str = (char*) table_lower[i / 2];
             }
         } else if ((arg2 == 0 && (i % 2) == 0) ||
                    (arg2 == 1 && (i % 2) != 0))
         {
-            str = table_lower->glyphs[i / 2];
+            str = (char*) table_lower[i / 2];
         } else {
-            str = table_upper->glyphs[i / 2];
+            str = (char*) table_upper[i / 2];
         }
         font_x = text->font_size.x;
         col_x = (f32)(i / 2) * x_range;
@@ -1258,7 +1237,6 @@ s32 mnNameNew_GlyphVariantSetup(u8* arg0, u8 arg1, u8 arg2)
     HSD_JObj* ref2;
     HSD_JObj* ref3;
     GlyphVariantEntry* udata;
-    NameNewData* ndata;
     Vec3 sp38;
     Vec3 sp2C;
     f32 dx;
@@ -1267,7 +1245,6 @@ s32 mnNameNew_GlyphVariantSetup(u8* arg0, u8 arg1, u8 arg2)
     f32 base_y;
     s32 i;
 
-    ndata = (NameNewData*) mnNameNew_803EDA58;
     gobj = GObj_Create(6U, 7U, 0x80U);
     jobj = HSD_JObjLoadJoint(mnNameNew_804A0710[0]);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
@@ -1280,9 +1257,8 @@ s32 mnNameNew_GlyphVariantSetup(u8* arg0, u8 arg1, u8 arg2)
 
     udata = HSD_MemAlloc(sizeof(GlyphVariantEntry));
     if (udata == NULL) {
-        OSReport((char*) ((u8*) ndata + 0x904));
-        __assert((char*) ((u8*) ndata + 0x91C), 0x5B4U,
-                 (char*) ((u8*) ndata + 0x928));
+        OSReport("Can't get userdata\n");
+        __assert(__FILE__, 0x5B4U, "user_data");
     }
     GObj_InitUserData(gobj, 0U, fn_8023D0F8, udata);
 
@@ -1295,8 +1271,8 @@ s32 mnNameNew_GlyphVariantSetup(u8* arg0, u8 arg1, u8 arg2)
     sp2C = mnNameNew_803B8528;
 
     if (arg2 >= 0x32U && arg2 < 0x3AU) {
-        key_jobj = *(HSD_JObj**)(arg0 +
-                     ndata->key_counts[arg2 - 0x32] * 4 + 4);
+        key_jobj =
+            *(HSD_JObj**) (arg0 + mnNameNew_803EDA7C[arg2 - 0x32] * 4 + 4);
     } else {
         key_jobj = HSD_JObjGetChild(*(HSD_JObj**)(arg0 + 0x44));
         for (i = 0; i < 50; i++) {
@@ -1332,6 +1308,7 @@ s32 mnNameNew_GlyphVariantSetup(u8* arg0, u8 arg1, u8 arg2)
     mnNameNew_8023D130(udata, arg1, arg0[0x50], arg2);
     return (s32) gobj;
 }
+
 s32 mnNameNew_8023DA08(NameNewEntry* arg0)
 {
     s32 var_r29 = 1;
