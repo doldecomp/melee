@@ -6,10 +6,12 @@
 
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/controller.h>
+#include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/jobj.h>
+#include <sysdolphin/baselib/mobj.h>
 #include <sysdolphin/baselib/mtx.h>
 #include <sysdolphin/baselib/tobj.h>
 #include <melee/ef/efasync.h>
@@ -21,6 +23,7 @@
 #include <melee/gm/types.h>
 #include <melee/gr/ground.h>
 #include <melee/gr/stage.h>
+#include <melee/if/ifcoget.h>
 #include <melee/it/item.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lb_00F9.h>
@@ -688,7 +691,167 @@ void fn_801785B0(HSD_GObj* gobj)
     }
 }
 
-/// #fn_80178BB4
+void fn_80178BB4(HSD_GObj* gobj)
+{
+    ResultsData* data = &lbl_8046DBE8;
+    MatchEnd* match_end = fn_80174274();
+    int ko_count = 0;
+    int i;
+
+    fn_80179854();
+    fn_80175DC8(gobj);
+    fn_80175C5C();
+
+    if (gm_801743A4(match_end->result) != 0) {
+        int anim_n = 0xB8;
+        HSD_TObj* tobj = data->x30->u.dobj->next->mobj->tobj;
+        HSD_AObj* aobj = tobj->aobj;
+        int start;
+        HSD_TObjReqAnim(tobj, (f32) anim_n);
+        HSD_TObjAnim(data->x30->u.dobj->next->mobj->tobj);
+        start = (int) (30.0f * (f32) (anim_n - 0xB4));
+        HSD_AObjSetCurrentFrame(aobj, (f32) start);
+        HSD_AObjSetEndFrame(aobj, (30.0f + (f32) start) - 1.0f);
+        mn_8022F3D8(data->x30, 1, TOBJ_MASK);
+    } else if ((u8) match_end->is_teams == 1) {
+        int tex_id = data->x5 + 0xB5;
+        HSD_TObj* tobj = data->x30->u.dobj->next->mobj->tobj;
+        HSD_AObj* aobj = tobj->aobj;
+        HSD_TObjReqAnim(tobj, (f32) tex_id);
+        HSD_TObjAnim(data->x30->u.dobj->next->mobj->tobj);
+        if (tex_id < 0x19) {
+            HSD_AObjSetCurrentFrame(aobj, 0.0f);
+            HSD_AObjSetEndFrame(aobj, 29.0f);
+        } else {
+            int start = (int) (30.0f * (f32) (tex_id - 0xB4));
+            HSD_AObjSetCurrentFrame(aobj, (f32) start);
+            HSD_AObjSetEndFrame(aobj, (30.0f + (f32) start) - 1.0f);
+        }
+        mn_8022F3D8(data->x30, 1, TOBJ_MASK);
+    }
+
+    i = 0;
+    do {
+        HSD_JObjSetFlagsAll(data->player_data[i].jobjs[0], 0x10);
+        HSD_JObjSetFlagsAll(data->player_data[i].jobjs[4], 0x10);
+        HSD_JObjSetFlagsAll(data->player_data[i].jobjs[8], 0x10);
+        HSD_JObjSetFlagsAll(data->player_data[i].jobjs[9], 0x10);
+        HSD_JObjSetFlagsAll(data->player_data[i].jobjs[10], 0x10);
+        HSD_JObjSetFlagsAll(data->player_data[i].jobjs[11], 0x10);
+        lbDObjSetRateAll(
+            HSD_JObjGetDObj(data->player_data[i].jobjs[6]), 0.0f);
+
+        {
+            u8 slot_type = match_end->player_standings[i].slot_type;
+
+            if (slot_type == 0) {
+                ko_count += match_end->player_standings[i].xE;
+            }
+
+            if (slot_type != 3) {
+                int ckind =
+                    match_end->player_standings[i].character_kind;
+                int cid =
+                    match_end->player_standings[i].character_id;
+                u8 is_big_loser =
+                    match_end->player_standings[i].is_big_loser;
+
+            if (gm_801743A4(match_end->result) == 0 &&
+                (u8) match_end->is_teams == 0 &&
+                (s32) is_big_loser == 0)
+            {
+                ResultsData* d2 = &lbl_8046DBE8;
+                int tex_id = (int) gm_80168B34(
+                    (CharacterKind) ckind, (int) cid, 0);
+                HSD_TObj* tobj =
+                    d2->x30->u.dobj->next->mobj->tobj;
+                HSD_AObj* aobj = tobj->aobj;
+                HSD_TObjReqAnim(tobj, (f32) tex_id);
+                HSD_TObjAnim(
+                    d2->x30->u.dobj->next->mobj->tobj);
+                if (tex_id < 0x19) {
+                    HSD_AObjSetCurrentFrame(aobj, 0.0f);
+                    HSD_AObjSetEndFrame(aobj, 29.0f);
+                } else {
+                    int start =
+                        (int) (30.0f * (f32) (tex_id - 0xB4));
+                    HSD_AObjSetCurrentFrame(aobj, (f32) start);
+                    HSD_AObjSetEndFrame(
+                        aobj, (30.0f + (f32) start) - 1.0f);
+                }
+                mn_8022F3D8(d2->x30, 1, TOBJ_MASK);
+            }
+
+            fn_80174FD0(data->player_data[i].jobjs[5],
+                        (s32) gm_80168B34(
+                            (CharacterKind) ckind, (int) cid, 0));
+
+            {
+                u8 rank_val = (u8) gm_80160854(
+                               i,
+                               match_end->player_standings[i].team,
+                               (u8) (match_end->is_teams == 1),
+                               match_end->player_standings[i].slot_type);
+                HSD_AObj* rank_aobj =
+                    data->player_data[i].jobjs[2]->u.dobj->mobj->aobj;
+                HSD_AObjSetCurrentFrame(
+                    rank_aobj, 1.0f + (f32) rank_val);
+                HSD_AObjSetRate(rank_aobj, 0.0f);
+            }
+
+            if ((u8) match_end->x5 != 3) {
+                f32 taunt_frame = gm_80168B34(
+                    (CharacterKind)(s8)(u8) match_end->player_standings[i].character_kind,
+                    (int)(s8)(u8) match_end->player_standings[i].character_id,
+                    match_end->player_standings[i].x3);
+                HSD_JObj* taunt_jobj =
+                    data->player_data[i].jobjs[7];
+                HSD_ForeachAnim(taunt_jobj, JOBJ_TYPE,
+                                ALL_TYPE_MASK, HSD_AObjSetRate,
+                                AOBJ_ARG_AF, 0.0);
+                HSD_ForeachAnim(taunt_jobj, JOBJ_TYPE,
+                                ALL_TYPE_MASK,
+                                HSD_AObjSetCurrentFrame,
+                                AOBJ_ARG_AF, taunt_frame);
+                HSD_JObjAnimAll(taunt_jobj);
+                HSD_AObjSetRate(
+                    data->player_data[i].jobjs[7]->aobj, 1.0f);
+                HSD_AObjSetCurrentFrame(
+                    data->player_data[i].jobjs[7]->aobj, 0.0f);
+            } else {
+                HSD_JObj* taunt_jobj =
+                    data->player_data[i].jobjs[7];
+                HSD_ForeachAnim(taunt_jobj, JOBJ_TYPE,
+                                ALL_TYPE_MASK, HSD_AObjSetRate,
+                                AOBJ_ARG_AF, 0.0);
+                HSD_ForeachAnim(taunt_jobj, JOBJ_TYPE,
+                                ALL_TYPE_MASK,
+                                HSD_AObjSetCurrentFrame,
+                                AOBJ_ARG_AF, 0.0);
+                HSD_JObjAnimAll(taunt_jobj);
+                HSD_JObjSetFlagsAll(
+                    data->player_data[i].jobjs[7], 0x10);
+            }
+
+            HSD_JObjRemoveAnimAll(data->player_data[i].jobjs[3]);
+            HSD_JObjSetFlagsAll(data->player_data[i].jobjs[3], 0x10);
+        } else {
+            HSD_JObjSetFlagsAll(data->player_data[i].jobjs[1], 0x10);
+            HSD_JObjRemoveAnimAll(data->player_data[i].jobjs[1]);
+            HSD_JObjSetFlagsAll(data->player_data[i].jobjs[5], 0x10);
+            HSD_JObjSetFlagsAll(data->player_data[i].jobjs[7], 0x10);
+        }
+        }
+
+        i++;
+    } while (i < 6);
+
+    if (ko_count > 0) {
+        un_802FF128(0x6C, 0x78, ko_count, 5);
+    }
+
+    data->x1 = 1;
+}
 
 int fn_801791E4(void)
 {
