@@ -26,6 +26,7 @@
 #include <melee/lb/lb_00F9.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbbgflash.h>
+#include <melee/mn/mnmain.h>
 #include <melee/mp/mpcoll.h>
 #include <melee/pl/player.h>
 #include <melee/sc/types.h>
@@ -557,7 +558,135 @@ void fn_80178050(HSD_GObj* arg0)
     }
 }
 
-/// #fn_801785B0
+void fn_801785B0(HSD_GObj* gobj)
+{
+    HSD_JObj* jobj = gobj->hsd_obj;
+    HSD_JObj* child;
+    HSD_JObj* node;
+    MatchEnd* match_end = fn_80174274();
+    u8 mode = match_end->x5;
+    int frame_val;
+    f32 fv;
+    int unused;
+
+    if (mode == 2) {
+        lb_80011E24(jobj, &child, 0x15, -1);
+        HSD_JObjRemoveAnimAll(child);
+        lb_80011E24(jobj, &child, 0x11, -1);
+        HSD_JObjRemoveAnimAll(child);
+        lb_80011E24(jobj, &child, 0x10, -1);
+        HSD_JObjRemoveAnimAll(child);
+        lb_80011E24(jobj, &child, 0xC, -1);
+        node = child;
+        {
+            u8 raw = fn_80174274()->xC;
+            if ((s8) raw < 0) {
+                frame_val = -(s8) raw;
+            } else {
+                frame_val = (s8) raw;
+            }
+        }
+        fv = (f32) frame_val;
+        HSD_ForeachAnim(node, JOBJ_TYPE, ALL_TYPE_MASK, HSD_AObjSetRate,
+                        AOBJ_ARG_AF, 0.0f);
+        HSD_ForeachAnim(node, JOBJ_TYPE, ALL_TYPE_MASK,
+                        HSD_AObjSetCurrentFrame, AOBJ_ARG_AF, fv);
+        HSD_JObjAnimAll(node);
+        HSD_ForeachAnim(node, JOBJ_TYPE, ALL_TYPE_MASK,
+                        HSD_AObjSetCurrentFrame, AOBJ_ARG_AF, 0.0f);
+        HSD_ForeachAnim(node, JOBJ_TYPE, ALL_TYPE_MASK, HSD_AObjSetRate,
+                        AOBJ_ARG_AF, 1.0f);
+        mn_8022F3D8(node, 1, TOBJ_MASK);
+        return;
+    } else if (mode == 1) {
+        lb_80011E24(jobj, &child, 0x15, -1);
+        HSD_JObjRemoveAnimAll(child);
+        lb_80011E24(jobj, &child, 0xC, -1);
+        HSD_JObjRemoveAnimAll(child);
+        lb_80011E24(jobj, &child, 0x10, -1);
+        HSD_JObjRemoveAnimAll(child);
+        lb_80011E24(jobj, &child, 0x11, -1);
+        node = child;
+        {
+            u8 raw = fn_80174274()->xC;
+            if ((s8) raw < 0) {
+                frame_val = -(s8) raw;
+            } else {
+                frame_val = (s8) raw;
+            }
+        }
+        fv = (f32) frame_val;
+        HSD_ForeachAnim(node, JOBJ_TYPE, ALL_TYPE_MASK, HSD_AObjSetRate,
+                        AOBJ_ARG_AF, 0.0f);
+        HSD_ForeachAnim(node, JOBJ_TYPE, ALL_TYPE_MASK,
+                        HSD_AObjSetCurrentFrame, AOBJ_ARG_AF, fv);
+        HSD_JObjAnimAll(node);
+        HSD_ForeachAnim(node, JOBJ_TYPE, ALL_TYPE_MASK,
+                        HSD_AObjSetCurrentFrame, AOBJ_ARG_AF, 0.0f);
+        HSD_ForeachAnim(node, JOBJ_TYPE, ALL_TYPE_MASK, HSD_AObjSetRate,
+                        AOBJ_ARG_AF, 1.0f);
+        mn_8022F3D8(node, 1, TOBJ_MASK);
+        return;
+    } else if (mode == 3) {
+        lb_80011E24(jobj, &child, 0x11, -1);
+        HSD_JObjRemoveAnimAll(child);
+        lb_80011E24(jobj, &child, 0xC, -1);
+        HSD_JObjRemoveAnimAll(child);
+        lb_80011E24(jobj, &child, 0x15, -1);
+        HSD_JObjRemoveAnimAll(child);
+        lb_80011E24(jobj, &child, 0x10, -1);
+        node = child;
+        {
+            u8 raw = fn_80174274()->xC;
+            if ((s8) raw < 0) {
+                frame_val = -(s8) raw;
+            } else {
+                frame_val = (s8) raw;
+            }
+        }
+        fv = (f32) frame_val;
+        HSD_ForeachAnim(node, JOBJ_TYPE, ALL_TYPE_MASK, HSD_AObjSetRate,
+                        AOBJ_ARG_AF, 0.0f);
+        HSD_ForeachAnim(node, JOBJ_TYPE, ALL_TYPE_MASK,
+                        HSD_AObjSetCurrentFrame, AOBJ_ARG_AF, fv);
+        HSD_JObjAnimAll(node);
+        HSD_ForeachAnim(node, JOBJ_TYPE, ALL_TYPE_MASK,
+                        HSD_AObjSetCurrentFrame, AOBJ_ARG_AF, 0.0f);
+        HSD_ForeachAnim(node, JOBJ_TYPE, ALL_TYPE_MASK, HSD_AObjSetRate,
+                        AOBJ_ARG_AF, 1.0f);
+        mn_8022F3D8(node, 1, TOBJ_MASK);
+        return;
+    } else {
+        lb_80011E24(jobj, &child, 0x11, -1);
+        HSD_JObjRemoveAnimAll(child);
+        lb_80011E24(jobj, &child, 0xC, -1);
+        HSD_JObjRemoveAnimAll(child);
+        lb_80011E24(jobj, &child, 0x10, -1);
+        HSD_JObjRemoveAnimAll(child);
+        lb_80011E24(jobj, &child, 0x15, -1);
+        node = child;
+        {
+            u8 raw = fn_80174274()->xC;
+            if ((s8) raw < 0) {
+                frame_val = -(s8) raw;
+            } else {
+                frame_val = (s8) raw;
+            }
+        }
+        fv = (f32) frame_val;
+        HSD_ForeachAnim(node, JOBJ_TYPE, ALL_TYPE_MASK, HSD_AObjSetRate,
+                        AOBJ_ARG_AF, 0.0f);
+        HSD_ForeachAnim(node, JOBJ_TYPE, ALL_TYPE_MASK,
+                        HSD_AObjSetCurrentFrame, AOBJ_ARG_AF, fv);
+        HSD_JObjAnimAll(node);
+        HSD_ForeachAnim(node, JOBJ_TYPE, ALL_TYPE_MASK,
+                        HSD_AObjSetCurrentFrame, AOBJ_ARG_AF, 0.0f);
+        HSD_ForeachAnim(node, JOBJ_TYPE, ALL_TYPE_MASK, HSD_AObjSetRate,
+                        AOBJ_ARG_AF, 1.0f);
+        mn_8022F3D8(node, 1, TOBJ_MASK);
+        return;
+    }
+}
 
 /// #fn_80178BB4
 
