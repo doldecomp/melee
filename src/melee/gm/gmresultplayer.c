@@ -4,6 +4,7 @@
 
 #include "cm/camera.h"
 
+#include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
@@ -11,14 +12,22 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/mtx.h>
 #include <sysdolphin/baselib/tobj.h>
+#include <melee/ef/efasync.h>
+#include <melee/ef/eflib.h>
+#include <melee/ft/ftdemo.h>
 #include <melee/gm/gmresult.h>
 #include <melee/gm/gm_1601.h>
 #include <melee/gm/gm_1A45.h>
 #include <melee/gm/types.h>
+#include <melee/gr/ground.h>
+#include <melee/gr/stage.h>
+#include <melee/it/item.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lb_00F9.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbbgflash.h>
+#include <melee/mp/mpcoll.h>
+#include <melee/pl/player.h>
 #include <melee/sc/types.h>
 
 extern ResultsData lbl_8046DBE8;
@@ -310,7 +319,243 @@ bool fn_80177DD0(int slot)
     return result;
 }
 
-/// #fn_80178050
+static s32 lbl_804D3FC8 = 1;
+
+void fn_80178050(HSD_GObj* arg0)
+{
+    ResultsData* data = &lbl_8046DBE8;
+    MatchEnd* match_end;
+    HSD_JObj* jobj;
+    s32 var_r24;
+
+    PAD_STACK(16);
+
+    match_end = fn_80174274();
+    jobj = arg0->hsd_obj;
+    var_r24 = 0;
+
+    if (lbGetJObjCurrFrame(jobj) >= 50.0f && !data->x0_23) {
+        lb_8000BA0C(jobj, 0.0f);
+        data->x0_23 = 1;
+        lbl_804D3FC8 = 1;
+        {
+            MatchEnd* me = match_end;
+            s32 j;
+            for (j = 0; j < 4; j++) {
+                if ((u8) me->player_standings[0].slot_type == 0) {
+                    lbl_804D3FC8 = 0;
+                    break;
+                }
+                me = (MatchEnd*) ((u8*) me + 0xA8);
+            }
+        }
+        if ((s32) lbl_804D3FC8 != 0) {
+            ((u8*) data)[3] = 0x14;
+        } else {
+            ((u8*) data)[3] = 0x0A;
+        }
+    }
+
+    fn_80175D34();
+
+    {
+        u32 phase = data->x0_23;
+        if (phase != 0) {
+            if (phase == 1) {
+                data->x0_23 = 2;
+                {
+                    MatchEnd* me = match_end;
+                    ResultsData* rd = data;
+                    s32 k = 0;
+                    do {
+                        switch ((s32) me->player_standings[0].slot_type) {
+                        case 2:
+                            break;
+                        case 3:
+                            rd->player_data[0].x0_0 = 1;
+                            break;
+                        case 0:
+                            fn_80174B4C(data, k);
+                            break;
+                        case 1:
+                            fn_80174B4C(data, k);
+                            rd->player_data[0].x0_0 = 1;
+                            break;
+                        }
+                        k++;
+                        me = (MatchEnd*) ((u8*) me + 0xA8);
+                        rd = (ResultsData*) ((u8*) rd + 0xD8);
+                    } while (k < 4);
+                }
+            }
+
+            {
+                MatchEnd* me2 = match_end;
+                ResultsData* rd2 = data;
+                HSD_PadStatus* pad = HSD_PadCopyStatus;
+                s32 k2 = 0;
+                do {
+                    u8 slot = me2->player_standings[0].slot_type;
+                    if (slot == 0) {
+                        if (!rd2->player_data[0].x0_0) {
+                            if (fn_80177B7C(k2) != 0) {
+                                fn_80174B4C(data, k2);
+                            }
+                            if (((s8) pad->err != 0) ||
+                                (HSD_PadCopyStatus[(u8) k2].trigger &
+                                 0x1000))
+                            {
+                                rd2->player_data[0].x0_0 = 1;
+                                fn_80174920(&rd2->player_data[0]);
+                                lbDObjSetRateAll(
+                                    HSD_JObjGetDObj(
+                                        rd2->player_data[0].jobjs[6]),
+                                    1.0f);
+                                lbDObjReqAnimAll(
+                                    HSD_JObjGetDObj(
+                                        rd2->player_data[0].jobjs[6]),
+                                    50.0f);
+                                HSD_AObjSetRate(
+                                    rd2->player_data[0].jobjs[1]->aobj,
+                                    1.0f);
+                                HSD_AObjReqAnim(
+                                    rd2->player_data[0].jobjs[1]->aobj,
+                                    50.0f);
+                                HSD_JObjAnimAll(
+                                    rd2->player_data[0].jobjs[6]);
+                                HSD_JObjAnimAll(
+                                    rd2->player_data[0].jobjs[1]);
+                                HSD_JObjSetFlagsAll(
+                                    rd2->player_data[0].jobjs[0], 0x10U);
+                                HSD_JObjSetFlagsAll(
+                                    rd2->player_data[0].jobjs[4], 0x10U);
+                                rd2->player_data[0].x0_1 = 0;
+                                rd2->player_data[0].x0_2 = 0;
+                                rd2->player_data[0].x0_3 = 0;
+                                rd2->player_data[0].x0_4 = 0;
+                                fn_80174338();
+                            }
+                        } else if (HSD_PadCopyStatus[(u8) k2].trigger &
+                                   0x1000)
+                        {
+                            fn_80174920(&rd2->player_data[0]);
+                            rd2->player_data[0].x0_0 = 0;
+                            fn_80174B4C(data, k2);
+                            lbDObjSetRateAll(
+                                HSD_JObjGetDObj(
+                                    rd2->player_data[0].jobjs[6]),
+                                0.0f);
+                            lbDObjReqAnimAll(
+                                HSD_JObjGetDObj(
+                                    rd2->player_data[0].jobjs[6]),
+                                50.0f);
+                            HSD_AObjSetRate(
+                                rd2->player_data[0].jobjs[1]->aobj, 0.0f);
+                            HSD_AObjReqAnim(
+                                rd2->player_data[0].jobjs[1]->aobj,
+                                50.0f);
+                            HSD_JObjAnimAll(rd2->player_data[0].jobjs[6]);
+                            HSD_JObjAnimAll(rd2->player_data[0].jobjs[1]);
+                            HSD_JObjClearFlagsAll(
+                                rd2->player_data[0].jobjs[0], 0x10U);
+                            HSD_JObjClearFlagsAll(
+                                rd2->player_data[0].jobjs[4], 0x10U);
+                            fn_8017435C();
+                        }
+                    } else if (slot == 1) {
+                        if (fn_80177DD0(k2) != 0) {
+                            fn_80174B4C(data, k2);
+                        }
+                        if ((s32) lbl_804D3FC8 != 0) {
+                            rd2->player_data[0].x0_0 = 0;
+                            if (((s8) pad->err == 0) &&
+                                (HSD_PadCopyStatus[(u8) k2].trigger &
+                                 0x1000))
+                            {
+                                fn_80174338();
+                                var_r24 = 1;
+                            }
+                        }
+                    } else if (slot == 3) {
+                        if (((s32) lbl_804D3FC8 != 0) &&
+                            ((s8) pad->err == 0) &&
+                            (HSD_PadCopyStatus[(u8) k2].trigger & 0x1000))
+                        {
+                            fn_80174338();
+                            var_r24 = 1;
+                        }
+                    }
+                    k2++;
+                    me2 = (MatchEnd*) ((u8*) me2 + 0xA8);
+                    rd2 = (ResultsData*) ((u8*) rd2 + 0xD8);
+                    pad = (HSD_PadStatus*) ((u8*) pad + 0x44);
+                } while (k2 < 4);
+            }
+
+            {
+                ResultsData* rd3 = data;
+                s32 k3 = 0;
+                do {
+                    if ((u8) match_end->player_standings[0].slot_type !=
+                        3)
+                    {
+                        if (!rd3->player_data[0].x0_1) {
+                            HSD_JObjSetFlagsAll(
+                                rd3->player_data[0].jobjs[8], 0x10U);
+                        } else {
+                            HSD_JObjClearFlagsAll(
+                                rd3->player_data[0].jobjs[8], 0x10U);
+                        }
+                        if (!rd3->player_data[0].x0_2) {
+                            HSD_JObjSetFlagsAll(
+                                rd3->player_data[0].jobjs[9], 0x10U);
+                        } else {
+                            HSD_JObjClearFlagsAll(
+                                rd3->player_data[0].jobjs[9], 0x10U);
+                        }
+                        if (!rd3->player_data[0].x0_3) {
+                            HSD_JObjSetFlagsAll(
+                                rd3->player_data[0].jobjs[0xA], 0x10U);
+                        } else {
+                            HSD_JObjClearFlagsAll(
+                                rd3->player_data[0].jobjs[0xA], 0x10U);
+                        }
+                        if (!rd3->player_data[0].x0_4) {
+                            HSD_JObjSetFlagsAll(
+                                rd3->player_data[0].jobjs[0xB], 0x10U);
+                        } else {
+                            HSD_JObjClearFlagsAll(
+                                rd3->player_data[0].jobjs[0xB], 0x10U);
+                        }
+                    }
+                    k3++;
+                    match_end =
+                        (MatchEnd*) ((u8*) match_end + 0xA8);
+                    rd3 = (ResultsData*) ((u8*) rd3 + 0xD8);
+                } while (k3 < 4);
+            }
+
+            {
+                s32 all_done = 0;
+                if (!data->player_data[0].x0_0) {
+                    all_done = 1;
+                } else if (!data->player_data[1].x0_0) {
+                    all_done = 1;
+                } else if (!data->player_data[2].x0_0) {
+                    all_done = 1;
+                } else if (!data->player_data[3].x0_0) {
+                    all_done = 1;
+                }
+                if (all_done == 0) {
+                    var_r24 = 1;
+                }
+                if (var_r24 != 0) {
+                    data->x1 = 4;
+                }
+            }
+        }
+    }
+}
 
 /// #fn_801785B0
 

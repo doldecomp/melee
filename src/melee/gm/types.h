@@ -886,7 +886,12 @@ struct gm_80479D58_t {
 STATIC_ASSERT(sizeof(struct gm_80479D58_t) == 0x40);
 
 struct ResultsPlayerData {
-    /* +00 */ u8 x0; ///< flags
+    /* +00 */ u8 x0_0 : 1; ///< confirmed flag
+    /* +00 */ u8 x0_1 : 1;
+    /* +00 */ u8 x0_2 : 1;
+    /* +00 */ u8 x0_3 : 1;
+    /* +00 */ u8 x0_4 : 1;
+    /* +00 */ u8 x0_567 : 3;
     /* +01 */ u8 page;
     /* +02 */ u16 x2;
     /* +04 */ f32 scroll_offset;
@@ -906,8 +911,7 @@ struct ResultsPlayerData {
 struct ResultsData {
     /* +00 */ u8 x0_0 : 1;
     /* +00 */ u8 x0_1 : 1;
-    /* +00 */ u8 x0_2 : 1;
-    /* +00 */ u8 x0_3 : 1;
+    /* +00 */ u8 x0_23 : 2; ///< phase (0=idle, 1=init, 2=active)
     /* +00 */ u8 x0_4 : 1;
     /* +00 */ u8 x0_5 : 1;
     /* +00 */ u8 x0_6 : 1;
