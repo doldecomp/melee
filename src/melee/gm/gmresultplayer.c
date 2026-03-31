@@ -217,6 +217,7 @@ bool fn_80177B7C(int slot)
         float stick_y = HSD_PadCopyStatus[(u8) slot].nml_stickY;
         u32 trigger;
         bool result = false;
+        PAD_STACK(8);
 
         if (fabsf_bitwise(stick_y) < scroll_deadzone) {
             stick_y = 0;
