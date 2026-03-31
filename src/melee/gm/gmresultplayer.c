@@ -27,16 +27,42 @@
 #include <melee/it/item.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lb_00F9.h>
+#include <melee/lb/lbarchive.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbbgflash.h>
 #include <melee/mn/mnmain.h>
 #include <melee/mp/mpcoll.h>
 #include <melee/pl/player.h>
 #include <melee/sc/types.h>
+#include <sysdolphin/baselib/random.h>
 
 extern ResultsData lbl_8046DBE8;
 
 extern u8 lbl_8046E1B0[];
+
+typedef struct {
+    /* 0x00 */ u8 pad_00[0x20];
+    /* 0x20 */ f32 x20[4];
+} CharScaleEntry;
+
+extern CharScaleEntry lbl_803D6A18[];
+extern f32 lbl_803D7058[];
+
+typedef struct {
+    /* 0x00 */ u8 pad_00[0x74];
+    /* 0x74 */ f32 x74;
+    /* 0x78 */ f32 x78;
+    /* 0x7C */ f32 x7C;
+    /* 0x80 */ f32 x80;
+    /* 0x84 */ f32 x84;
+    /* 0x88 */ f32 x88;
+    /* 0x8C */ f32 x8C;
+    /* 0x90 */ f32 x90;
+    /* 0x94 */ f32 x94;
+    /* 0x98 */ f32 x98;
+} ResultsPlayerConfig;
+
+extern ResultsPlayerConfig lbl_803B7B68;
 
 extern int lbl_8046E38C[4];
 
@@ -1167,7 +1193,114 @@ void fn_8017A004(void)
 
 /// #fn_8017A318
 
-/// #fn_8017A67C
+Fighter_GObj* fn_8017A67C(CharacterKind c_kind, int arg1, int arg2)
+{
+    u8* base = lbl_8046E1B0;
+    u8* standings = base + 0x224;
+    ResultsPlayerConfig* config = &lbl_803B7B68;
+    CharacterKind kind = c_kind;
+    HSD_GObj* gobj = NULL;
+    int slot_type;
+
+    if (base[0x22A] == 0) {
+        slot_type = standings[arg2 * 0xA8 + 0x5D];
+    } else {
+        slot_type = standings[standings[arg2 * 0xA8 + 0x5F] * 0xC + 0x24];
+    }
+
+    if (gm_80160438(kind) != NULL) {
+        f32 cx, cy, cz;
+        PAD_STACK(8);
+        *(s32*) &cx = *(s32*) &config->x74;
+        *(s32*) &cy = *(s32*) &config->x78;
+        *(s32*) &cz = *(s32*) &config->x7C;
+
+        if ((u32)(kind - 0x12) <= 1U) {
+            if ((int)(s8) standings[arg2 * 0xA8 + 0x5A] == 7) {
+                kind = CKIND_SEAK;
+            } else {
+                kind = CKIND_ZELDA;
+            }
+        }
+
+        Player_80036E20(kind, lbArchive_LoadArchive(gm_80160438(kind)),
+                         0);
+        Player_SetPlayerCharacter(arg2, kind);
+        Player_SetCostumeId(arg2, arg1);
+        Player_SetPlayerId(arg2, arg2);
+        Player_SetSlottype(arg2, Gm_PKind_Demo);
+
+        if (kind == CKIND_GAMEWATCH) {
+            Player_SetFacingDirection(arg2, -1.0f);
+        } else {
+            Player_SetFacingDirection(arg2, 0.0f);
+        }
+
+        {
+            int variant;
+
+            if (slot_type == 0) {
+                u32 buttons =
+                    HSD_PadCopyStatus[(u8) arg2].button;
+                if (buttons & 0x200) {
+                    variant = 0;
+                } else if (buttons & 0x800) {
+                    variant = 1;
+                } else if (buttons & 0x400) {
+                    variant = 2;
+                } else {
+                    variant = HSD_Randi(3);
+                }
+            } else {
+                variant = 4;
+            }
+
+            if (variant != 4) {
+                u8 override = base[arg2 + 0x220];
+                if (override != 0) {
+                    variant = override - 1;
+                }
+            }
+
+            if (slot_type == 0) {
+                f32 px, py, pz;
+                *(s32*) &px = *(s32*) &config->x80;
+                *(s32*) &py = *(s32*) &config->x84;
+                *(s32*) &pz = *(s32*) &config->x88;
+                py = 100.0f * (f32)(arg2 + 1);
+                Player_80032A04(arg2, (Vec3*) &px);
+                Player_SetScale(arg2, 1.8f * lbl_803D7058[kind]);
+                Player_80036F34(arg2, variant);
+            } else {
+                f32 sp[4];
+                int var_idx;
+                f32 scale;
+                *(s32*) &sp[0] = *(s32*) &config->x8C;
+                *(s32*) &sp[1] = *(s32*) &config->x90;
+                *(s32*) &sp[2] = *(s32*) &config->x94;
+                *(s32*) &sp[3] = *(s32*) &config->x98;
+                if (variant <= 2) {
+                    var_idx = variant;
+                } else {
+                    var_idx = 3;
+                }
+                scale = lbl_803D6A18[kind].x20[var_idx];
+                Player_80036F34(arg2, variant);
+                Player_SetScale(arg2,
+                    scale * (sp[slot_type] *
+                             (20.0f / Player_800360D8(arg2))));
+                cy = 100.0f * (f32)(arg2 + 1);
+                Player_80032A04(arg2, (Vec3*) &cx);
+            }
+
+            base[arg2 + 0x20A] = (u8) variant;
+            ((s32*)(base + 0x210))[arg2] = (s32) kind;
+            gobj = Player_GetEntity(arg2);
+        }
+    }
+
+    return (Fighter_GObj*) gobj;
+}
 
 void fn_8017A9B4(int slot)
 {

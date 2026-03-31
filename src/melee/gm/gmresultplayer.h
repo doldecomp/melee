@@ -35,7 +35,7 @@ struct ResultsMatchInfo;
 /* 17A004 */ UNK_RET fn_8017A004(UNK_PARAMS);
 /* 17A078 */ UNK_RET fn_8017A078(UNK_PARAMS);
 /* 17A318 */ HSD_GObj* fn_8017A318(int);
-/* 17A67C */ Fighter_GObj* fn_8017A67C(CharacterKind c_kind, u8, int);
+/* 17A67C */ Fighter_GObj* fn_8017A67C(CharacterKind c_kind, int, int);
 /* 17A9B4 */ void fn_8017A9B4(int);
 /* 17AA78 */ UNK_RET fn_8017AA78(u8*);
 
