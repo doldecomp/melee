@@ -312,7 +312,30 @@ bool fn_80177DD0(int slot)
 
 /// #fn_80178BB4
 
-/// #fn_801791E4
+int fn_801791E4(void)
+{
+    ResultsData* data = &lbl_8046DBE8;
+    MatchEnd* end = fn_80174274();
+    int i;
+
+    PAD_STACK(8);
+
+    if (gm_801743A4(end->result) != 0) {
+        for (i = 0; i < 4; i++) {
+            if (end->player_standings[i].slot_type == Gm_PKind_Human &&
+                HSD_PadMasterStatus[(u8) i].err == 0 &&
+                (HSD_PadCopyStatus[(u8) i].trigger & 0x1000))
+            {
+                return 1;
+            }
+        }
+    }
+
+    if ((u32) data->x8 == 0xA0U) {
+        return 1;
+    }
+    return 0;
+}
 
 /// #fn_80179350
 
