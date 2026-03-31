@@ -1634,14 +1634,11 @@ void mnNameNew_8023E32C(s32 arg0)
     }
     GObj_InitUserData(gobj, 0U, HSD_Free, user_data);
     InitNameEntryUIState(user_data, arg0);
-    i = 0;
-    do {
+    for (i = 0; i < 0x13; i++) {
         lb_80011E24(root_jobj, &user_data->jobjs[i], i, -1);
-        i++;
-    } while (i < 0x13);
+    }
     mnNameNew_8023E0D8(user_data);
-    k = 0;
-    do {
+    for (k = 0; k < 0x32; k++) {
         key_jobj = HSD_JObjLoadJoint(mnNameNew_804A0700[0]);
         HSD_JObjAddAnimAll(key_jobj, mnNameNew_804A0700[1],
                            mnNameNew_804A0700[2], mnNameNew_804A0700[3]);
@@ -1654,8 +1651,7 @@ void mnNameNew_8023E32C(s32 arg0)
         mnName_80239F5C(key_jobj, x_range * (f32)(k / 5));
         mnName_80239EBC(key_jobj, y_range * (f32)(k % 5));
         HSD_JObjAddChild(user_data->jobjs[16], key_jobj);
-        k++;
-    } while (k < 0x32);
+    }
     user_data->key_text =
         (HSD_Text*) mnNameNew_KeySetup(user_data, user_data->mode);
     mnNameNew_8023B314(user_data, (s32) user_data->x1);
