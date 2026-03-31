@@ -33,7 +33,7 @@ struct ResultsMatchInfo;
 /* 179F6C */ UNK_RET fn_80179F6C(int idx, int value);
 /* 179F84 */ void fn_80179F84(HSD_JObj*);
 /* 17A004 */ UNK_RET fn_8017A004(UNK_PARAMS);
-/* 17A078 */ UNK_RET fn_8017A078(UNK_PARAMS);
+/* 17A078 */ void fn_8017A078(s32);
 /* 17A318 */ HSD_GObj* fn_8017A318(int);
 /* 17A67C */ Fighter_GObj* fn_8017A67C(CharacterKind c_kind, int, int);
 /* 17A9B4 */ void fn_8017A9B4(int);

@@ -5,6 +5,7 @@
 #include "cm/camera.h"
 
 #include <sysdolphin/baselib/aobj.h>
+#include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/gobj.h>
@@ -49,7 +50,18 @@ extern CharScaleEntry lbl_803D6A18[];
 extern f32 lbl_803D7058[];
 
 typedef struct {
-    /* 0x00 */ u8 pad_00[0x74];
+    /* 0x00 */ u8 pad_00[0x24];
+    /* 0x24 */ f32 x24;
+    /* 0x28 */ f32 x28;
+    /* 0x2C */ f32 x2C;
+    /* 0x30 */ f32 x30;
+    /* 0x34 */ f32 x34;
+    /* 0x38 */ f32 x38;
+    /* 0x3C */ GObj_RenderFunc x3C;
+    /* 0x40 */ GObj_RenderFunc x40;
+    /* 0x44 */ GObj_RenderFunc x44;
+    /* 0x48 */ GObj_RenderFunc x48;
+    /* 0x4C */ u8 pad_4C[0x74 - 0x4C];
     /* 0x74 */ f32 x74;
     /* 0x78 */ f32 x78;
     /* 0x7C */ f32 x7C;
@@ -63,6 +75,7 @@ typedef struct {
 } ResultsPlayerConfig;
 
 extern ResultsPlayerConfig lbl_803B7B68;
+extern HSD_CObjDesc lbl_803D7910;
 
 extern int lbl_8046E38C[4];
 
@@ -1190,6 +1203,66 @@ void fn_8017A004(void)
 }
 
 /// #fn_8017A078
+
+void fn_8017A078(s32 arg0)
+{
+    u8* base = lbl_8046E1B0;
+    ResultsPlayerConfig* config = &lbl_803B7B68;
+    Vec3 eye;
+    Vec3 interest;
+    GObj_RenderFunc callbacks[4];
+    HSD_GObj* gobj;
+    HSD_CObj* cobj;
+    int mode;
+    s16 val;
+
+    *(s32*) &eye.x = *(s32*) &config->x24;
+    *(s32*) &eye.y = *(s32*) &config->x28;
+    *(s32*) &eye.z = *(s32*) &config->x2C;
+    *(s32*) &interest.x = *(s32*) &config->x30;
+    *(s32*) &interest.y = *(s32*) &config->x34;
+    *(s32*) &interest.z = *(s32*) &config->x38;
+    *(s32*) &callbacks[0] = *(s32*) &config->x3C;
+    *(s32*) &callbacks[1] = *(s32*) &config->x40;
+    *(s32*) &callbacks[2] = *(s32*) &config->x44;
+    *(s32*) &callbacks[3] = *(s32*) &config->x48;
+
+    gobj = GObj_Create(0x13, 0x14, 0);
+    cobj = HSD_CObjLoadDesc(&lbl_803D7910);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
+
+    eye.y = (eye.y * (f32)(arg0 + 1)) + (0.7f * Player_800360D8(arg0));
+    interest.y = (interest.y * (f32)(arg0 + 1)) + (0.7f * Player_800360D8(arg0));
+
+    mode = fn_801795D4();
+    val = *(s16*) (base + 0x24D0 + mode * 8 + fn_801796F0(arg0) * 2);
+    interest.x -= (f32) val;
+    eye.x -= (f32) val;
+    interest.y -= 10.0f;
+    eye.y -= 10.0f;
+    eye.z += (20.0f * (f32)(mode - 2)) + 110.0f;
+
+    if (mode == 0) {
+        s32 kind = ((s32*) (base + 0x210))[arg0];
+        if (kind == 5) {
+            if ((u8) base[arg0 + 0x20A] == 1) {
+                eye.z += 6.0f;
+            }
+        } else if (kind == 9) {
+            if ((u8) base[arg0 + 0x20A] == 1) {
+                eye.z += 7.5f;
+            }
+        } else if (kind == 0) {
+            if ((u8) base[arg0 + 0x20A] == 2) {
+                eye.z += 6.0f;
+            }
+        }
+    }
+
+    HSD_CObjSetEyePosition(cobj, &eye);
+    HSD_CObjSetInterest(cobj, &interest);
+    GObj_SetupGXLinkMax(gobj, callbacks[arg0], 5);
+}
 
 /// #fn_8017A318
 
