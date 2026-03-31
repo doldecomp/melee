@@ -19,7 +19,7 @@ struct ResultsMatchInfo;
 /* 1791E4 */ UNK_RET fn_801791E4(UNK_PARAMS);
 /* 179350 */ void fn_80179350(HSD_GObj*);
 /* 1795D4 */ int fn_801795D4(void);
-/* 1796F0 */ UNK_RET fn_801796F0(UNK_PARAMS);
+/* 1796F0 */ int fn_801796F0(int);
 /* 179854 */ int fn_80179854(void);
 /* 179990 */ void fn_80179990(HSD_GObj*, int, int);
 /* 179D3C */ void fn_80179D3C(HSD_GObj*, int);
