@@ -10,6 +10,7 @@
 #include "baselib/jobj.h"
 #include "dolphin/types.h"
 
+#include "gm/gm_1832.h"
 #include "gr/forward.h"
 
 #include "gr/granime.h"
@@ -22,7 +23,7 @@
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 
-struct {
+struct yaku {
     int x0;
     int x4;
 }* yaku;
@@ -98,6 +99,7 @@ static char grHeal_803E851C[0x2C] = {
 };
 
 extern struct yaku* grHeal_804D6AF0;
+extern s16 grHeal_804D49D8[4];
 
 void grHeal_8021EF38(bool arg0) {}
 
@@ -159,7 +161,19 @@ Ground_GObj* grHeal_8021EFEC(u32 idx)
     return gobj;
 }
 
-/// #grHeal_8021F0D8
+void grHeal_8021F0D8(Ground_GObj* gobj)
+{
+    Ground* gp = gobj->user_data;
+    s32 i;
+
+    grAnime_801C8138(gobj, gp->map_id, 0);
+
+    for (i = 0; i < grHeal_804D6AF0->x0; i++) {
+        if ((int) gm_80473A18.x90[i] != 0) {
+            grHeal_8021F79C(8, grHeal_804D49D8[i], i);
+        }
+    }
+}
 
 bool grHeal_8021F170(Ground_GObj* gobj)
 {
