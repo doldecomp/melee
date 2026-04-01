@@ -1057,8 +1057,8 @@ int fn_801795D4(void)
 int fn_801796F0(int arg0)
 {
     MatchEnd* match_end = &lbl_8046E3AC.match_end;
-    int count = 0;
     int i;
+    int count = 0;
 
     for (i = 0; i < 4; i++) {
         int lookup;
