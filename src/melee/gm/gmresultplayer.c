@@ -936,6 +936,7 @@ bool fn_801791E4(void)
     return false;
 }
 
+int fn_80179350_inline(void);
 int fn_80179350_inline(void)
 {
     return fn_801791E4();
