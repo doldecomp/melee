@@ -315,8 +315,9 @@ bool fn_80177DD0(int slot)
     if (HSD_PadCopyStatus[slot].err == 0) {
         return fn_80177B7C(slot);
     }
+    // The cast here is permuter slop.
     scroll_max =
-        fn_80174A60(fn_801748EC(unk, data->player_data[slot].page, slot),
+        fn_80174A60(fn_801748EC(unk, data->player_data[slot].page, (unsigned long long) slot),
                     slot) -
         10;
     if (scroll_max < 0) {

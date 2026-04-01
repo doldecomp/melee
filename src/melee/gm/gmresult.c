@@ -519,10 +519,10 @@ void fn_801749B8(HSD_GObj* unused)
     }
 }
 
-u8 fn_80174A60(StatsList* list, s32 slot)
+s32 fn_80174A60(StatsList* list, s32 slot)
 {
     s32 i;
-    u8 count;
+    s32 count;
     StatsEntry* entry;
 
     count = 0;
