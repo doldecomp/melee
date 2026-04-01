@@ -903,7 +903,7 @@ void fn_80178BB4(HSD_GObj* gobj)
     data->x1 = 1;
 }
 
-int fn_801791E4(void)
+bool fn_801791E4(void)
 {
     ResultsData* data = &lbl_8046DBE8;
     MatchEnd* end = fn_80174274();
@@ -917,19 +917,22 @@ int fn_801791E4(void)
                 HSD_PadMasterStatus[(u8) i].err == 0 &&
                 (HSD_PadCopyStatus[(u8) i].trigger & 0x1000))
             {
-                return 1;
+                return true;
             }
         }
     }
 
     if ((u32) data->x8 == 0xA0U) {
-        return 1;
+        return true;
     }
-    return 0;
+    return false;
 }
 
-/// #fn_80179350
-#pragma dont_inline on
+int fn_80179350_inline(void)
+{
+    return fn_801791E4();
+}
+
 void fn_80179350(HSD_GObj* arg0)
 {
     ResultsData* data = &lbl_8046DBE8;
@@ -966,16 +969,15 @@ void fn_80179350(HSD_GObj* arg0)
         if (gm_801743A4(match_end->result) != 0) {
             lbAudioAx_800237A8(0xC350, 0x7F, 0x40);
         } else {
-            fn_80168E54(
-                (s8)(u8) match_end->player_standings[data->x6].character_kind,
-                (s8)(u8) match_end->player_standings[data->x6].character_id,
-                match_end->player_standings[data->x6].team,
-                (u8)(match_end->is_teams == 1));
+            fn_80168E54(match_end->player_standings[data->x6].character_kind,
+                        match_end->player_standings[data->x6].character_id,
+                        match_end->player_standings[data->x6].team,
+                        (match_end->is_teams == 1));
         }
     }
 
     if (data->x1 < 1) {
-        if (fn_801791E4() != 0) {
+        if (fn_80179350_inline() != 0) {
             fn_80178BB4(arg0);
         }
     } else {
@@ -1016,7 +1018,6 @@ void fn_80179350(HSD_GObj* arg0)
         data->x8++;
     }
 }
-#pragma dont_inline off
 
 int fn_801795D4(void)
 {

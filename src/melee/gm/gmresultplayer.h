@@ -16,7 +16,7 @@ struct ResultsMatchInfo;
 /* 178050 */ void fn_80178050(HSD_GObj*);
 /* 1785B0 */ void fn_801785B0(HSD_GObj*);
 /* 178BB4 */ void fn_80178BB4(HSD_GObj*);
-/* 1791E4 */ int fn_801791E4(void);
+/* 1791E4 */ bool fn_801791E4(void);
 /* 179350 */ void fn_80179350(HSD_GObj*);
 /* 1795D4 */ int fn_801795D4(void);
 /* 1796F0 */ int fn_801796F0(int);
