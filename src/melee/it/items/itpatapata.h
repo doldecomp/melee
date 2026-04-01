@@ -37,7 +37,7 @@
 /* 2E1648 */ void it_802E1648(Item_GObj*, int, int);
 /* 2E1694 */ void it_802E1694(Item_GObj*);
 /* 2E16D8 */ void it_802E16D8(Item_GObj*, Item_GObj*);
-/* 2E16F8 */ UNK_RET it_802E16F8(UNK_PARAMS);
+/* 2E16F8 */ Item_GObj* it_802E16F8(s32, Vec3*, s32);
 extern ItemStateTable it_803F88C0[];
 
 #endif

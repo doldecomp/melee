@@ -172,7 +172,7 @@ void grGreens_802134F4(void) {}
 
 void grGreens_802134F8(void)
 {
-    grZakoGenerator_801CAE04(0);
+    grZakoGenerator_801CAE04(NULL);
 }
 
 bool grGreens_8021351C(void)

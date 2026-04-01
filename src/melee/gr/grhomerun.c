@@ -66,7 +66,7 @@ void grHomeRun_8021C7FC(void) {}
 
 void grHomeRun_8021C800(void)
 {
-    grZakoGenerator_801CAE04(0);
+    grZakoGenerator_801CAE04(NULL);
 }
 
 bool grHomeRun_8021C824(void)

@@ -83,7 +83,7 @@ void grTdrmario_UnkStage0_OnLoad(void) {}
 
 void grTdrmario_UnkStage0_OnStart(void)
 {
-    grZakoGenerator_801CAE04(0);
+    grZakoGenerator_801CAE04(NULL);
 }
 
 bool grtDrMario_802205A8(void)

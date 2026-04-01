@@ -305,7 +305,7 @@ void grCastle_801CD4A0(void) {}
 
 void grCastle_801CD4A4(void)
 {
-    grZakoGenerator_801CAE04(0);
+    grZakoGenerator_801CAE04(NULL);
 }
 
 bool grCastle_801CD4C8(void)

@@ -103,7 +103,7 @@ void grGreatBay_801F42D0(void) {}
 
 void grGreatBay_801F42D4(void)
 {
-    grZakoGenerator_801CAE04(0);
+    grZakoGenerator_801CAE04(NULL);
 }
 
 bool grGreatBay_801F42F8(void)

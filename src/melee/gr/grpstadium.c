@@ -187,7 +187,7 @@ void grStadium_OnLoad(void) {}
 
 void grStadium_OnStart(void)
 {
-    grZakoGenerator_801CAE04(0);
+    grZakoGenerator_801CAE04(NULL);
 }
 
 bool grStadium_801D10F0(void)

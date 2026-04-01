@@ -215,7 +215,7 @@ void grVenom_80203DD0(void)
 
 void grVenom_80203E80(void)
 {
-    grZakoGenerator_801CAE04(0);
+    grZakoGenerator_801CAE04(NULL);
 }
 
 bool grVenom_80203EA4(void)

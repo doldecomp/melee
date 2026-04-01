@@ -721,6 +721,11 @@ typedef struct itSeakChain_Attrs {
 } itSeakChain_Attrs;
 STATIC_ASSERT(sizeof(struct itSeakChain_Attrs) == 0x5C);
 
+typedef struct itZako_ItemVars {
+    /* +0 ip+DD4 */ s32 pad;
+    /* +4 ip+DD8 */ s32 idx;
+} itZako_ItemVars;
+
 typedef struct itZeldaDinFireExplode_ItemVars {
     /* +0 ip+DD4 */ f32 xDD4;
     /* +4 ip+DD8 */ f32 xDD8;

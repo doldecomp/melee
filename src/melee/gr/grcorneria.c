@@ -19,6 +19,7 @@
 #include "if/ifcoget.h"
 #include "if/ifstatus.h"
 #include "lb/lb_00B0.h"
+#include "lb/lb_00F9.h"
 #include "mp/mplib.h"
 
 #include <baselib/controller.h>
@@ -96,7 +97,7 @@ void grCorneria_801DD478(void)
 
 void grCorneria_801DD508(void)
 {
-    grZakoGenerator_801CAE04(0);
+    grZakoGenerator_801CAE04(NULL);
 }
 
 bool grCorneria_801DD52C(void)
@@ -196,8 +197,8 @@ void grCorneria_801DD65C(Ground_GObj* gobj)
     GET_GROUND(gobj)->gv.corneria.xC4.flags.b0 = false;
 }
 
-extern int grCn_803E1FE8[];
-extern int grCn_803E2000[];
+extern grZakoGenerator_Spawn grCn_803E1FE8[];
+extern grZakoGenerator_Spawn grCn_803E2000[];
 
 void grCorneria_801DD674(Ground_GObj* ground_gobj)
 {
@@ -267,7 +268,43 @@ bool grCorneria_801DD9A0(Ground_GObj* arg)
     return false;
 }
 
-/// #grCorneria_801DD9A8
+extern Vec3 grCn_803E1F70[5];
+extern Vec3 grCn_803E1FAC[5];
+
+void grCorneria_801DD9A8(Ground_GObj* gobj)
+{
+    Ground* gp = HSD_GObjGetUserData(gobj);
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+    int i;
+
+    if (!gp->gv.corneria.xC4.flags.b0) {
+        f32 speed;
+
+        grCorneria_801E1970(gobj);
+        grCorneria_801E2228(gobj);
+
+        speed = -35.0f * Ground_801C0498() - gp->gv.corneria.xD0;
+        grZakoGenerator_801CA43C(gp->gv.corneria.xC8, Ground_801C3FA4(gobj, 0),
+                                 speed);
+
+        speed = -35.0f * Ground_801C0498() - gp->gv.corneria.xD0;
+        grZakoGenerator_801CA43C(gp->gv.corneria.xCC, Ground_801C3FA4(gobj, 0),
+                                 speed);
+
+        grCorneria_801E1348(gobj);
+        grCorneria_801E0E40();
+        grCorneria_801DCE1C();
+    }
+
+    for (i = 0; i < 5; i++) {
+        lb_8000B1CC(jobj, &grCn_803E1F70[i], &grCn_803E1FAC[i]);
+    }
+
+    Ground_801C2FE0(gobj);
+    grCorneria_801E1878(gobj);
+    grCorneria_801E2110();
+    lb_800115F4();
+}
 
 void grCorneria_801DDAC0(Ground_GObj* arg) {}
 
@@ -311,7 +348,10 @@ typedef struct {
 extern grCn_Entry grCn_803E2204[][5];
 
 typedef struct grCn_Data {
-    /* 0x000 */ u8 pad[0x4CC];
+    /* 0x000 */ u8 pad0[0x3C];
+    /* 0x03C */ s32 indices[3];
+    /* 0x048 */ u8 pad1[0x2E8];
+    /* 0x330 */ Vec3 positions[34];
     /* 0x4CC */ grCn_Entry entries[][5];
 } grCn_Data;
 
@@ -320,8 +360,8 @@ extern grCn_Data grCn_803E1D38;
 void grCorneria_801DDDA8(HSD_GObj* gobj, Vec3* vec)
 {
     grCn_Data* data = &grCn_803E1D38;
+    Ground* gp2;
     Ground* gp;
-    Ground* corn_gp;
     HSD_JObj* jobj;
     u8 unused[12];
     Vec3 pos;
@@ -330,23 +370,13 @@ void grCorneria_801DDDA8(HSD_GObj* gobj, Vec3* vec)
 
     if (gobj != NULL) {
         gp = gobj->user_data;
-        corn_gp = Ground_801C2BA4(3)->user_data;
+        gp2 = Ground_801C2BA4(3)->user_data;
         jobj = Ground_801C3FA4(gobj, 4);
         lb_8000B1CC(jobj, NULL, &pos);
-        idx = ((int*) &data->pad[0x3C])[gp->gv.corneria.xC8];
-        vec->x =
-            corn_gp->gv.corneria.offset_x +
-            (-pos.z +
-             *(f32*) &data->pad[0x330 +
-                                idx * (int) sizeof(grCn_Entry)]);
-        vec->y =
-            pos.y +
-            *(f32*) &data->pad[0x334 +
-                               idx * (int) sizeof(grCn_Entry)];
-        vec->z =
-            pos.x +
-            *(f32*) &data->pad[0x338 +
-                               idx * (int) sizeof(grCn_Entry)];
+        idx = data->indices[gp->gv.arwing.xC8];
+        vec->x = gp2->gv.arwing.xDC + (-pos.z + data->positions[idx].x);
+        vec->y = pos.y + data->positions[idx].y;
+        vec->z = pos.x + data->positions[idx].z;
     } else {
         vec->z = 0.0f;
         vec->y = 0.0f;
@@ -697,14 +727,11 @@ void grCorneria_801E0F6C(Ground_GObj* gobj)
     un_802FF570();
 
     if (Ground_801C2BA4(5) == NULL) {
-        if (grCorneria_801E2598(gp->gv.arwing.xC4,
-                                gp->gv.arwing.xC8))
-        {
+        if (grCorneria_801E2598(gp->gv.arwing.xC4, gp->gv.arwing.xC8)) {
             if ((s32) gp->gv.arwing.xCC-- < 0) {
                 HSD_GObj* gobj5 = grCorneria_801DD534(5);
                 Ground* gp5 = GET_GROUND(gobj5);
-                grCorneria_801E2738(gobj5, &gp5->gv,
-                                    gp->gv.arwing.xC4,
+                grCorneria_801E2738(gobj5, &gp5->gv, gp->gv.arwing.xC4,
                                     gp->gv.arwing.xC8);
                 gp->gv.arwing.xC8++;
                 gp->gv.arwing.xCC = 0;
@@ -774,12 +801,12 @@ void grCorneria_801E1878(Ground_GObj* gobj)
 
 /// #grCorneria_801E2228
 
-HSD_Generator* grCorneria_801E2454(Vec3* vec)
+HSD_Generator* grCorneria_801E2454(Vec3* vec, s32 arg1)
 {
     return grLib_801C96F8(0x7534, 0x1E, vec);
 }
 
-HSD_Generator* grCorneria_801E2480(Vec3* vec)
+HSD_Generator* grCorneria_801E2480(Vec3* vec, s32 arg1)
 {
     return grLib_801C96F8(0x7530, 0x1E, vec);
 }

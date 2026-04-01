@@ -77,7 +77,7 @@ void grKraid_OnLoad(void) {}
 
 void grKraid_OnStart(void)
 {
-    grZakoGenerator_801CAE04(0);
+    grZakoGenerator_801CAE04(NULL);
 }
 
 bool grKraid_801FE0BC(void)
