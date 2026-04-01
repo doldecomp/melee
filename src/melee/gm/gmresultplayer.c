@@ -1103,6 +1103,146 @@ int fn_80179854(void)
 
 /// #fn_80179990
 
+extern s32 ftLib_800876B4(HSD_GObj*);
+
+void fn_80179990(HSD_GObj* arg0, int arg1, int arg2)
+{
+    u8* base = lbl_8046E1B0;
+    u8* data = base + 0x224;
+    HSD_CObj* cobj;
+    HSD_JObj* child_jobj;
+    int lookup;
+
+    PAD_STACK(8);
+
+    fn_801795D4();
+    fn_801796F0(arg2);
+
+    cobj = (HSD_CObj*) arg0->hsd_obj;
+
+    if (data[6] == 0) {
+        lookup = data[arg2 * 0xA8 + 0x5D];
+    } else {
+        int idx = data[arg2 * 0xA8 + 0x5F];
+        lookup = data[idx * 0xC + 0x24];
+    }
+
+    if (lookup != 0) {
+        HSD_JObj* root =
+            (HSD_JObj*) ((HSD_GObj**) (base + 0x1DC))[arg2]->hsd_obj;
+        if (root == NULL) {
+            child_jobj = NULL;
+        } else {
+            child_jobj = root->child;
+        }
+    }
+
+    if (HSD_CObjSetCurrent(cobj)) {
+        if (lookup != 0) {
+            GXColor color;
+
+            {
+                u8* entry = data + arg2 * 0xA8;
+                color = gm_80160968(gm_80160854((u8) arg2, entry[0x5F],
+                    (u8) (data[6] == 1), entry[0x58]));
+            }
+            HSD_SetEraseColor(color.r, color.g, color.b, color.a);
+            HSD_CObjEraseScreen(cobj, 1, 0, 0);
+            Camera_800313E0(arg0, arg1);
+
+            {
+                u8* tbl = base + (lookup << 1);
+                s32 off = arg2 * 0x18;
+                u16* dim_w = (u16*) (tbl + 0x24B0);
+                u16* dim_h = (u16*) (tbl + 0x24C0);
+                u8* bp = base + off;
+                HSD_ImageDesc* desc =
+                    (HSD_ImageDesc*) (bp + 0x164);
+
+                HSD_ImageDescCopyFromEFB(desc,
+                    *(u16*) &tbl[0x24A0] +
+                        (0x140 - ((s32) *dim_w / 4) * 2),
+                    *(u16*) &tbl[0x24A8] +
+                        (0xF4 - ((s32) *dim_h / 2) * 2),
+                    0, 0);
+
+                if (!((lbl_8046E3AC_t*) (base + 0x1FC))->x0_4) {
+                    HSD_ImageDescCopyFromEFB(
+                        (HSD_ImageDesc*) (bp + 0x104),
+                        0x140 - ((s32) *dim_w / 4) * 2,
+                        0xF4 - ((s32) *dim_h / 2) * 2, 0, 0);
+                }
+
+                HSD_CObjEraseScreen(cobj, 1, 1, 1);
+                HSD_ImageDescCopyFromEFB(
+                    (HSD_ImageDesc*) (base + 0x1C4), 0x10E, 0x7C, 1, 0);
+                HSD_CObjEndCurrent();
+
+                if (!((lbl_8046E3AC_t*) (base + 0x1FC))->x0_4) {
+                    child_jobj->u.dobj->mobj->tobj->imagedesc =
+                        (HSD_ImageDesc*) (bp + 0x104);
+                }
+
+                if (((lbl_8046E3AC_t*) (base + 0x1FC))->x0_4) {
+                    HSD_JObj* jobj2 =
+                        ((HSD_JObj**) (base + 0x1EC))[arg2];
+                    jobj2->u.dobj->next->mobj->tobj->imagedesc = desc;
+                }
+            }
+        } else {
+            HSD_GObj* entity = Player_GetEntity(arg2);
+            if (ftLib_800876B4(entity) == 0) {
+                if (base[arg2 + 0x1FD] == 0 &&
+                    ((lbl_8046E3AC_t*) (base + 0x1FC))->x0_6)
+                {
+                    GXColor color;
+
+                    {
+                        u8* entry = data + arg2 * 0xA8;
+                        color = gm_80160968(gm_80160854((u8) arg2,
+                            entry[0x5F], (u8) (data[6] == 1),
+                            entry[0x58]));
+                    }
+                    HSD_SetEraseColor(color.r, color.g, color.b, color.a);
+                    HSD_CObjEraseScreen(cobj, 1, 0, 0);
+                    Camera_800313E0(arg0, arg1);
+
+                    {
+                        u8* tbl = base + (lookup << 1);
+                        s32 off = arg2 * 0x18;
+                        u8* bp = base + off;
+                        HSD_ImageDesc* desc =
+                            (HSD_ImageDesc*) (bp + 0x164);
+
+                        HSD_ImageDescCopyFromEFB(desc,
+                            *(u16*) &tbl[0x24A0] +
+                                (0x140 -
+                                 ((s32) *(u16*) (tbl + 0x24B0) / 4) * 2),
+                            *(u16*) &tbl[0x24A8] +
+                                (0xF4 -
+                                 ((s32) *(u16*) (tbl + 0x24C0) / 2) * 2),
+                            0, 0);
+
+                        HSD_CObjEraseScreen(cobj, 1, 1, 1);
+                        HSD_ImageDescCopyFromEFB(
+                            (HSD_ImageDesc*) (base + 0x1C4), 0x10E, 0x7C,
+                            1, 0);
+                        HSD_CObjEndCurrent();
+
+                        base[arg2 + 0x1FD] = 1;
+                        {
+                            HSD_JObj* jobj2 =
+                                ((HSD_JObj**) (base + 0x1EC))[arg2];
+                            jobj2->u.dobj->next->mobj->tobj->imagedesc =
+                                desc;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
 void fn_80179D3C(HSD_GObj* gobj, int arg1)
 {
     fn_80179990(gobj, arg1, 0);
