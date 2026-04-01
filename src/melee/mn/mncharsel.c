@@ -3269,7 +3269,7 @@ void fn_802633B0(HSD_GObj* gobj)
                 (char*) ((u8*) &mnCharSel_803F0A48 + 0x5B8));
         }
         sp60 = sp74;
-        HSD_SisLib_803A74F0((HSD_Text*)tag->text, 0, (u8*) &sp60);
+        HSD_SisLib_803A74F0((HSD_Text*)tag->text, 0, &sp60);
         HSD_ForeachAnim(sp84, JOBJ_TYPE, ALL_TYPE_MASK,
                          HSD_AObjReqAnim, AOBJ_ARG_AF, 0.0f);
         tag->state = 2;
@@ -3380,7 +3380,7 @@ void fn_802633B0(HSD_GObj* gobj)
                     name = GetNameText((s32) (u8) row_idx);
                     HSD_SisLib_803A70A0((HSD_Text*)tag->name_ls, j + 2, name);
                     sp5C = sp78;
-                    HSD_SisLib_803A74F0((HSD_Text*)tag->name_ls, j + 2, (u8*) &sp5C);
+                    HSD_SisLib_803A74F0((HSD_Text*)tag->name_ls, j + 2, &sp5C);
                     {
                         s32 p2;
                         CSSData* ddata;
@@ -3390,7 +3390,7 @@ void fn_802633B0(HSD_GObj* gobj)
                                 (s32) mnCharSel_804D6CB0->data.data.players[p2].xA == row_idx) {
                                 sp58 = sp74;
                                 HSD_SisLib_803A74F0((HSD_Text*)tag->name_ls, j + 2,
-                                                     (u8*) &sp58);
+                                                     &sp58);
                                 break;
                             }
                         }
@@ -3596,7 +3596,7 @@ void fn_802633B0(HSD_GObj* gobj)
         if (t2 > 0xAU) {
             mnCharSel_8025D1C4((s32) tag->port, 2);
             sp54 = sp78;
-            HSD_SisLib_803A74F0((HSD_Text*)tag->text, 0, (u8*) &sp54);
+            HSD_SisLib_803A74F0((HSD_Text*)tag->text, 0, &sp54);
             tag->state = 0;
         }
         break;
