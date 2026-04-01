@@ -18,7 +18,7 @@ struct lb_80433318_t {
     /* +10 */ int x10;
     /* +14 */ int x14;
     /* +18 */ bool enable;
-    /* +30 */ char _1C[0x40];
+    /* +1C */ char _1C[0x40];
     /* +5C */ int* x5C;
     /* +60 */ int x60;
     /* +64 */ SceneDesc* x64;

@@ -786,7 +786,7 @@ void fn_80175240(s32 slot)
             temp_r3 = HSD_SisLib_803A6B98(*temp_r31, 0.0f, 0.0f, "%d", var_r3);
             HSD_SisLib_803A7548(*temp_r31, temp_r3, 0.11f, 0.08f);
             sp2C = sp30;
-            HSD_SisLib_803A74F0(*temp_r31, temp_r3, (u8*) &sp2C);
+            HSD_SisLib_803A74F0(*temp_r31, temp_r3, &sp2C);
             var_r5 = fn_8017B010(slot);
             if (var_r5 > 0x3E7) {
                 var_r5 = 0x3E7;
@@ -796,7 +796,7 @@ void fn_80175240(s32 slot)
                 HSD_SisLib_803A6B98(*temp_r31, 0.0f, -temp_f31, "%d", var_r5);
             HSD_SisLib_803A7548(*temp_r31, temp_r3, 0.11f, 0.08f);
             sp28 = sp30;
-            HSD_SisLib_803A74F0(*temp_r31, temp_r3, (u8*) &sp28);
+            HSD_SisLib_803A74F0(*temp_r31, temp_r3, &sp28);
             var_r5 = fn_8017B21C(slot);
             if (var_r5 > 0x3E7) {
                 var_r5 = 0x3E7;
@@ -805,7 +805,7 @@ void fn_80175240(s32 slot)
                                           -temp_f31 - temp_f30, "%d", var_r5);
             HSD_SisLib_803A7548(*temp_r31, temp_r3, 0.11f, 0.08f);
             sp24 = sp30;
-            HSD_SisLib_803A74F0(*temp_r31, temp_r3, (u8*) &sp24);
+            HSD_SisLib_803A74F0(*temp_r31, temp_r3, &sp24);
             return;
         }
         sp30.r = 0xA0;
@@ -815,17 +815,17 @@ void fn_80175240(s32 slot)
             HSD_SisLib_803A6B98(*temp_r31, 0.0f, 0.0f, "%s", &lbl_804D3FA0);
         HSD_SisLib_803A7548(*temp_r31, temp_r3, 0.11f, 0.08f);
         sp20 = sp30;
-        HSD_SisLib_803A74F0(*temp_r31, temp_r3, (u8*) &sp20);
+        HSD_SisLib_803A74F0(*temp_r31, temp_r3, &sp20);
         temp_r3 = HSD_SisLib_803A6B98(*temp_r31, 0.0f, -temp_f31, "%s",
                                       &lbl_804D3FA0);
         HSD_SisLib_803A7548(*temp_r31, temp_r3, 0.11f, 0.08f);
         sp1C = sp30;
-        HSD_SisLib_803A74F0(*temp_r31, temp_r3, (u8*) &sp1C);
+        HSD_SisLib_803A74F0(*temp_r31, temp_r3, &sp1C);
         temp_r3 = HSD_SisLib_803A6B98(*temp_r31, 0.0f, -temp_f31 - temp_f30,
                                       "%s", &lbl_804D3FA0);
         HSD_SisLib_803A7548(*temp_r31, temp_r3, 0.11f, 0.08f);
         sp18 = sp30;
-        HSD_SisLib_803A74F0(*temp_r31, temp_r3, (u8*) &sp18);
+        HSD_SisLib_803A74F0(*temp_r31, temp_r3, &sp18);
     }
 }
 
@@ -872,7 +872,7 @@ void fn_8017556C(s32 slot)
     spC = sp10;
     new_var = &spC;
     HSD_SisLib_803A74F0(lbl_8046DBE8.player_data[slot].ko_time, var_r28,
-                        (u8*) new_var);
+                        new_var);
 }
 
 void fn_801756E0(s32 slot)
@@ -930,7 +930,7 @@ end_common:
     spC = sp10;
     new_var = &spC;
     HSD_SisLib_803A74F0(lbl_8046DBE8.player_data[slot].ko_time, var_r28,
-                        (u8*) new_var);
+                        new_var);
 }
 
 void fn_80175880(s32 slot)
@@ -1018,7 +1018,7 @@ end_common:
     spC = sp10;
     new_var = &spC;
     HSD_SisLib_803A74F0(lbl_8046DBE8.player_data[slot].ko_time, var_r30,
-                        (u8*) new_var);
+                        new_var);
 }
 
 void fn_80175A94(s32 slot, Vec3* position)
@@ -1070,7 +1070,7 @@ void fn_80175A94(s32 slot, Vec3* position)
         sp18 = sp14;
         color_ptr = &sp18;
         HSD_SisLib_803A74F0(lbl_8046DBE8.player_data[slot].ko_time, var_r29,
-                            (u8*) color_ptr);
+                            color_ptr);
         break;
     case 1:
         fn_80175880(slot);

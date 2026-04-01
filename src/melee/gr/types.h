@@ -173,7 +173,7 @@ struct GroundVars_unk {
     int xD0;
     int xD4;
     int xD8;
-    float xDC;
+    int xDC;
 };
 
 struct GroundVars_izumi {
@@ -535,8 +535,8 @@ typedef struct grInishie1_GroundVars {
     f32 xF4;
     f32 xF8;
     f32 xFC;
-    f32 x100;
-    f32 x104;
+    HSD_JObj* x100;
+    HSD_JObj* x104;
     HSD_JObj* x108;
     HSD_JObj* x10C;
 } grInishie1_GroundVars;
@@ -901,8 +901,19 @@ struct grMuteCity_GroundVars {
         u8 b6 : 1;
         u8 b7 : 1;
     } xD0_flags;
-    /* +0x00 gp+D1) */ u8 pad2[0x110 - 0xD1];
-    /* +0x00 gp+110) */ HSD_LObj* x110;
+    /* +0x0D gp+D1) */ u8 pad_D1[0xE4 - 0xD1];
+    /* +0x20 gp+E4) */ f32 xE4;
+    /* +0x24 gp+E8) */ f32 xE8;
+    /* +0x28 gp+EC) */ u8 pad_EC[0xF0 - 0xEC];
+    /* +0x2C gp+F0) */ f32 xF0;
+    /* +0x30 gp+F4) */ f32 xF4;
+    /* +0x34 gp+F8) */ u8 pad_F8[0xFC - 0xF8];
+    /* +0x38 gp+FC) */ HSD_JObj* xFC;
+    /* +0x3C gp+100) */ HSD_JObj* x100;
+    /* +0x40 gp+104) */ HSD_JObj* x104;
+    /* +0x44 gp+108) */ HSD_JObj* x108;
+    /* +0x48 gp+10C) */ HSD_JObj* x10C;
+    /* +0x4C gp+110) */ HSD_LObj* x110;
 };
 
 struct grMuteCity_GroundVars2 {
@@ -1142,6 +1153,14 @@ struct grShrineroute_GroundVars2 {
     /* +0 gp+170 */ HSD_LObj* x170;
 };
 
+struct grShrineroute_GroundVars3 {
+    /* +0 gp+C4 */ HSD_JObj* xC4;
+    /* +4 gp+C8 */ f32 xC8;
+    /* +8 gp+CC */ f32 xCC;
+    /* +C gp+D0 */ f32 xD0;
+    /* +10 gp+D4 */ f32 xD4;
+};
+
 struct Battlefield {
     /* +0 gp+C4 */ int bg_state;
     /* +4 gp+C8 */ int curr_bg;
@@ -1319,6 +1338,7 @@ struct Ground {
             struct grRCruise_GroundVars2 rcruise2;
             struct grShrineroute_GroundVars shrineroute;
             struct grShrineroute_GroundVars2 shrineroute2;
+            struct grShrineroute_GroundVars3 shrineroute3;
             struct grSmashTaunt_GroundVars smashtaunt;
             struct GroundVars_unk unk;
             struct grHomeRun_GroundVars homerun;

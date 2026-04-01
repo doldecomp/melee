@@ -21,12 +21,16 @@
 #include "lb/lb_00B0.h"
 #include "mp/mplib.h"
 
+#include <baselib/controller.h>
+#include <baselib/debug.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 #include <baselib/random.h>
 
 int grCn_803E1D80[3] = { 0, 0, 0 };
 int grCn_803E2190[5] = { 0, 0, 1, 2, 5 };
+
+int grCn_804D466C = -1;
 
 static void* grCn_804D69A0;
 static u32 grCn_804D69A4;
@@ -622,7 +626,47 @@ void grCorneria_801E0E14(Ground_GObj* gobj)
 
 void grCorneria_801E0E3C(Ground_GObj* arg) {}
 
-/// #grCorneria_801E0E40
+void grCorneria_801E0E40(void)
+{
+    u32 trigger;
+    HSD_GObj* wgobj;
+    PAD_STACK(8);
+
+    if (!Camera_80030178()) {
+        if (!Camera_80030154()) {
+            return;
+        }
+    }
+
+    trigger = HSD_PadMasterStatus[1].trigger;
+    if ((trigger & (PAD_TRIGGER_L | PAD_TRIGGER_R)) == 0) {
+        return;
+    }
+
+    if (Ground_801C2BA4(0xC) != NULL) {
+        return;
+    }
+
+    if (trigger & PAD_TRIGGER_L) {
+        grCn_804D466C -= 1;
+    } else {
+        grCn_804D466C += 1;
+    }
+
+    if (grCn_804D466C < 0) {
+        grCn_804D466C = 0;
+    }
+    if (grCn_804D466C >= 0x14u) {
+        grCn_804D466C = 0x13;
+    }
+
+    OSReport("talk no = %d\n", grCn_804D466C);
+    wgobj = grCorneria_801DD534(0xC);
+    if (wgobj == NULL) {
+        __assert("grcorneria.c", 0xAC3, "wgobj");
+    }
+    grCorneria_801E0F34(wgobj, grCn_804D466C);
+}
 
 void grCorneria_801E0F30(Ground_GObj* arg) {}
 
@@ -706,7 +750,21 @@ void fn_801E12D4(Item_GObj* gobj, Ground* gr, Vec3* pos, HSD_GObj* arg3,
 
 /// #grCorneria_801E1348
 
-/// #grCorneria_801E1878
+void grCorneria_801E1878(Ground_GObj* gobj)
+{
+    Vec3 pos;
+    Ground* gr = GET_GROUND(gobj);
+    HSD_JObj* jobj = gobj->hsd_obj;
+    HSD_JObj* target_jobj = gr->gv.corneria.x128->hsd_obj;
+
+    HSD_JObjGetTranslation(jobj, &pos);
+    HSD_JObjSetTranslate(target_jobj, &pos);
+
+    Ground_801C39C0();
+    Ground_801C3BB4();
+
+    PAD_STACK(16);
+}
 
 /// #grCorneria_801E1970
 

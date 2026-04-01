@@ -99,6 +99,11 @@ typedef struct TyCameraData_ {
     f32 x18;
     f32 x1C;
     f32 x20;
+    f32 x24;
+    f32 x28;
+    f32 x2C;
+    u8 pad30[0x58 - 0x30];
+    s32 x58;
 } TyCameraData_;
 
 typedef struct TyLightGObj_ {
@@ -260,6 +265,7 @@ extern void* un_804D6ED4;
 extern char un_803FE3B8[];
 extern char un_803FE3DC[];
 extern HSD_FogDesc un_803B8844;
+extern Vec3 un_803B8858;
 
 typedef struct PosArray {
     s32 xy[2];
@@ -1605,7 +1611,36 @@ void un_803075E8(s32 arg0)
     }
 }
 
-/// #un_80307828
+void un_80307828(int arg0)
+{
+    Vec3 interest;
+    TyCameraData_* data;
+    TyLightArray_* data2;
+    HSD_CObj* cobj;
+
+    data = (void*) un_804D6E68;
+    cobj = data->x8->x28;
+    data2 = un_804D6ED4;
+    interest = un_803B8858;
+
+    if (arg0 == 0) {
+        data->x18 = data->x1C = (f32) (data->x58 = 0);
+        data2->x18 = 0.0F;
+        data2->x14 = 0.0F;
+    } else {
+        data->x18 = 0.0F;
+        data2->x14 = 0.0F;
+    }
+
+    data->x20 = 38.0F;
+    data->x2C = 0.0F;
+    data->x28 = 0.0F;
+    data->x24 = 0.0F;
+
+    HSD_CObjSetInterest(cobj, &interest);
+
+    PAD_STACK(12);
+}
 
 /* 96.8% match */
 

@@ -27,6 +27,7 @@
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjproc.h>
+#include <baselib/jobj.h>
 #include <baselib/random.h>
 #include <baselib/spline.h>
 
@@ -1455,7 +1456,38 @@ void fn_801D7E60(Ground* gp, s32 arg1, CollData* arg2, s32 arg3,
     }
 }
 
-/// #grKongo_801D7E78
+Vec3* grKongo_801D7E78(HSD_GObj* gobj, Vec3* pos)
+{
+    Ground* gp = gobj->user_data;
+    HSD_JObj* jobj;
+    PAD_STACK(8);
+
+    if (gp != NULL) {
+        if (gp->map_id == TEST || gp->map_id == CASTLE ||
+            gp->map_id == SHRINE || gp->map_id == ZEBES || gp->map_id == KRAID)
+        {
+            jobj = Ground_801C3FA4(gobj, 2);
+            if (jobj != NULL) {
+                lb_8000B1CC(jobj, NULL, pos);
+                goto done;
+            }
+            return NULL;
+        }
+        if (gp->map_id == YORSTER) {
+            jobj = gobj->hsd_obj;
+            if (jobj != NULL) {
+                HSD_JObjGetTranslation(jobj, pos);
+                goto done;
+            }
+            return NULL;
+        }
+        return NULL;
+    }
+    return NULL;
+
+done:
+    return pos;
+}
 
 bool grKongo_801D7F78(HSD_GObj* gobj)
 {

@@ -2032,6 +2032,7 @@ def calculate_progress(config: ProjectConfig) -> None:
         total_code = measures.get("total_code", 0)
         matched_code = measures.get("matched_code", 0)
         matched_code_percent = measures.get("matched_code_percent", 0)
+        fuzzy_match_percent = measures.get("fuzzy_match_percent", 0)
         total_data = measures.get("total_data", 0)
         matched_data = measures.get("matched_data", 0)
         matched_data_percent = measures.get("matched_data_percent", 0)
@@ -2042,7 +2043,7 @@ def calculate_progress(config: ProjectConfig) -> None:
         complete_units = measures.get("complete_units", 0)
 
         progress_print(
-            f"  {name}: {matched_code_percent:.2f}% matched, {complete_code_percent:.2f}% linked ({complete_units} / {total_units} files)"
+            f"  {name}: {fuzzy_match_percent:.2f}% fuzzy, {matched_code_percent:.2f}% matched, {complete_code_percent:.2f}% linked ({complete_units} / {total_units} files)"
         )
         progress_print(
             f"    Code: {matched_code} / {total_code} bytes ({matched_functions} / {total_functions} functions)"

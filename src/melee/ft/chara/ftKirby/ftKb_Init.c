@@ -3936,7 +3936,32 @@ void ftKb_SpecialN_800F10A4(Fighter_GObj* gobj)
     ftKb_SpecialN_800EF69C(gobj, 3, ft_80459B88.hats[FTKIND_CAPTAIN]);
 }
 
-/// #ftKb_SpecialN_800F10D4
+#pragma push
+#pragma dont_inline on
+void ftKb_SpecialN_800F10D4(Fighter_GObj* gobj)
+{
+    u8 sp14[0x90];
+    Fighter* fp = fp = gobj->user_data;
+    KirbyHatStruct* temp_r28;
+    PAD_STACK(8);
+    if (fp->fv.kb.hat.x14.data != NULL) {
+        return;
+    }
+    temp_r28 = ft_80459B88.hats[14];
+    ftKb_SpecialN_800EF040(gobj, 0xF, temp_r28);
+    fp->fv.kb.hat.x14.data = HSD_ObjAlloc(&fighter_x2040_alloc_data);
+    fp->fv.kb.hat.x1C.data = HSD_ObjAlloc(&fighter_x2040_alloc_data);
+    ftKb_SpecialN_800EF0E4(gobj, 0xF, sp14);
+    ftKb_SpecialN_800EF35C(gobj, 0xF, sp14);
+    ftKb_SpecialN_800EF438(gobj, temp_r28);
+    ftParts_8007487C((FtPartsDesc*) temp_r28, &fp->fv.kb.hat.x24,
+                     fp->x619_costume_id, &fp->fv.kb.hat.x14,
+                     &fp->fv.kb.hat.x1C);
+    ftAnim_80070200(fp, (ftData_x8_x8*) &temp_r28->desc.vis_table,
+                    &fp->fv.kb.x44, &fp->fv.kb.hat.x14);
+    ftCo_8009D81C(fp);
+}
+#pragma pop
 
 void ftKb_SpecialN_800F11AC(Fighter_GObj* gobj)
 {
@@ -4090,9 +4115,97 @@ void ftKb_SpecialN_800F190C(Fighter_GObj* gobj, FighterKind kind)
     fp->fv.kb.xDC = NULL;
 }
 
-/// #ftKb_SpecialN_800F19AC
+void ftKb_SpecialN_800F19AC(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    FighterKind kind = fp->fv.kb.hat.kind;
 
-/// #ftKb_SpecialN_800F1A8C
+    switch (kind) {
+    case FTKIND_POPO:
+        ftKb_SpecialNIc_80108D04(gobj);
+        break;
+    case FTKIND_PEACH:
+        ftKb_SpecialNPe_8010C3F4(gobj);
+        break;
+    case FTKIND_FOX:
+    case FTKIND_FALCO:
+        ftKb_SpecialNFx_800FDEE0(gobj);
+        break;
+    case FTKIND_LINK:
+    case FTKIND_CLINK:
+        ftKb_SpecialNLk800FB800(gobj);
+        ftKb_SpecialNLk800FB840(gobj);
+        break;
+    case FTKIND_MEWTWO:
+        ftKb_SpecialNMt_8010709C(gobj);
+        break;
+    case FTKIND_NESS:
+        ftKb_SpecialNNs_800FECE8(gobj);
+        break;
+    case FTKIND_SAMUS:
+        ftKb_SpecialNSs_800FCD60(gobj);
+        break;
+    case FTKIND_SEAK:
+        ftKb_SpecialNSk_8010603C(gobj);
+        break;
+    case FTKIND_YOSHI:
+        ftKb_SpecialNYs_801093B4(gobj);
+        ftKb_SpecialNYs_8010A8BC(gobj);
+        break;
+    case FTKIND_DONKEY:
+        ftKb_SpecialNPr_80100DE0(gobj);
+        break;
+    case FTKIND_GAMEWATCH:
+        ftKb_SpecialNGw_8010D0A8(gobj);
+        break;
+    }
+}
+
+void ftKb_SpecialN_800F1A8C(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    FighterKind kind = fp->fv.kb.hat.kind;
+
+    switch (kind) {
+    case FTKIND_POPO:
+        ftKb_SpecialNIc_80108D04(gobj);
+        break;
+    case FTKIND_PEACH:
+        ftKb_SpecialNPe_8010C3F4(gobj);
+        break;
+    case FTKIND_FOX:
+    case FTKIND_FALCO:
+        ftKb_SpecialNFx_800FDEE0(gobj);
+        break;
+    case FTKIND_LINK:
+    case FTKIND_CLINK:
+        ftKb_SpecialNLk800FB800(gobj);
+        ftKb_SpecialNLk800FB840(gobj);
+        break;
+    case FTKIND_MEWTWO:
+        ftKb_SpecialNMt_80107130(gobj);
+        break;
+    case FTKIND_NESS:
+        ftKb_SpecialNNs_800FECE8(gobj);
+        break;
+    case FTKIND_SAMUS:
+        ftKb_SpecialNSs_800FCD60(gobj);
+        break;
+    case FTKIND_SEAK:
+        ftKb_SpecialNSk_8010603C(gobj);
+        break;
+    case FTKIND_YOSHI:
+        ftKb_SpecialNYs_801093B4(gobj);
+        ftKb_SpecialNYs_8010A8BC(gobj);
+        break;
+    case FTKIND_DONKEY:
+        ftKb_SpecialNPr_80100DE0(gobj);
+        break;
+    case FTKIND_GAMEWATCH:
+        ftKb_SpecialNGw_8010D0A8(gobj);
+        break;
+    }
+}
 
 void ftKb_Init_UnkMotionStates3(Fighter_GObj* gobj)
 {

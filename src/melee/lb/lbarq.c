@@ -63,4 +63,25 @@ void lbArq_80014AC4(lbArqHandle* handle)
 
 /// #lbArq_80014BD0
 
-/// #lbArq_80014D2C
+void lbArq_80014D2C(void)
+{
+    lbArqGlobal* global = &lbArq_804316C0;
+    lbArqNode* nodes = (lbArqNode*) global;
+    lbArqNode* node;
+    int i;
+
+    global->list[0] = NULL;
+    global->list[1] = NULL;
+    global->list[2] = NULL;
+    global->list[0] = nodes;
+
+    for (i = 0; i < 9; i++) {
+        node = &nodes[i];
+        node->next = node + 1;
+        node->state = 0;
+    }
+    node->next = NULL;
+    node->state = 0;
+
+    PAD_STACK(8);
+}

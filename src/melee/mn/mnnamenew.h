@@ -3,32 +3,34 @@
 
 #include <placeholder.h>
 
+#include "mn/types.h"
 #include <baselib/forward.h>
 
-/* 23B0F8 */ UNK_RET mnNameNew_8023B0F8(UNK_PARAMS);
-/* 23B224 */ UNK_RET mnNameNew_8023B224(UNK_PARAMS);
-/* 23B314 */ UNK_RET mnNameNew_8023B314(UNK_PARAMS);
-/* 23B3FC */ UNK_RET mnNameNew_KeySetup(UNK_PARAMS);
-/* 23BAA8 */ UNK_RET mnNameNew_8023BAA8(UNK_PARAMS);
-/* 23BD4C */ UNK_RET PickAutoName(UNK_PARAMS);
-/* 23BEE0 */ UNK_RET NameContainsOnlySpaces(UNK_PARAMS);
-/* 23BFE4 */ UNK_RET WriteCharactersForNameAtIndex(UNK_PARAMS);
-/* 23C148 */ UNK_RET AddCharacterToName(UNK_PARAMS);
-/* 23C290 */ UNK_RET mnNameNew_GlyphVariantInput(UNK_PARAMS);
+/* 23B0F8 */ void mnNameNew_8023B0F8(HSD_GObj* arg0, u8 arg1);
+/* 23B224 */ void mnNameNew_8023B224(u8);
+/* 23B314 */ void mnNameNew_8023B314(NameNewEntry*, s32);
+/* 23B3FC */ s32 mnNameNew_KeySetup(NameNewEntry*, u8);
+/* 23BAA8 */ s32 mnNameNew_8023BAA8(NameNewEntry* arg0, s32 arg1, u8 arg2);
+/* 23BD4C */ s32 PickAutoName(HSD_GObj* arg0);
+/* 23BEE0 */ bool NameContainsOnlySpaces(void);
+/* 23BFE4 */ s32 WriteCharactersForNameAtIndex(u8 arg0, s32 arg1);
+/* 23C148 */ char* AddCharacterToName(char* arg0, u8 arg1, u8 arg2, u8 arg3);
+/* 23C290 */ void mnNameNew_GlyphVariantInput(void);
 /* 23C54C */ UNK_RET mnNameNew_MainInput(HSD_GObj*);
-/* 23CE4C */ UNK_RET mnNameNew_8023CE4C(UNK_PARAMS);
-/* 23CFC8 */ UNK_RET fn_8023CFC8(UNK_PARAMS);
+/* 23CE4C */ void mnNameNew_8023CE4C(void);
+/* 23CFC8 */ void fn_8023CFC8(HSD_GObj* arg0);
 /* 23D0F8 */ void fn_8023D0F8(void*);
-/* 23D130 */ UNK_RET mnNameNew_8023D130(UNK_PARAMS);
-/* 23D3E8 */ UNK_RET mnNameNew_GlyphVariantSetup(UNK_PARAMS);
-/* 23DA08 */ UNK_RET mnNameNew_8023DA08(UNK_PARAMS);
-/* 23DAEC */ UNK_RET fn_8023DAEC(UNK_PARAMS);
-/* 23DBE8 */ UNK_RET fn_8023DBE8(UNK_PARAMS);
-/* 23E0D8 */ UNK_RET mnNameNew_8023E0D8(UNK_PARAMS);
-/* 23E264 */ UNK_RET InitNameEntryUIState(UNK_PARAMS);
-/* 23E32C */ void mnNameNew_8023E32C(UNK_T);
+/* 23D130 */ s32 mnNameNew_8023D130(GlyphVariantEntry* arg0, u8 arg1, u8 arg2, s32 arg3);
+/* 23D3E8 */ s32 mnNameNew_GlyphVariantSetup(NameNewEntry* arg0, u16 arg1,
+                                             u8 arg2);
+/* 23DA08 */ s32 mnNameNew_8023DA08(NameNewEntry*);
+/* 23DAEC */ void fn_8023DAEC(HSD_GObj*);
+/* 23DBE8 */ void fn_8023DBE8(HSD_GObj*);
+/* 23E0D8 */ void mnNameNew_8023E0D8(NameNewEntry* arg0);
+/* 23E264 */ s32 InitNameEntryUIState(NameNewEntry*, s32);
+/* 23E32C */ void mnNameNew_8023E32C(s32);
 /* 23E630 */ void mnNameNew_EnterFromMnName(UNK_T);
-/* 23E6D0 */ void mnNameNew_EnterFromMnCharSel(UNK_T, int);
+/* 23E6D0 */ void mnNameNew_EnterFromMnCharSel(HSD_Archive*, s32);
 /* 23EA08 */ void mnNameNew_8023EA08(UNK_T);
 
 #endif

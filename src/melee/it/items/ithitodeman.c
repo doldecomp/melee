@@ -14,24 +14,53 @@
 #include "it/it_2725.h"
 #include "it/item.h"
 
+#include <math.h>
 #include <baselib/random.h>
 
 typedef struct {
-    UNK_T x0;
+    f32 x0;
     float x4;
     float x8;
     float xC;
     float x10;
     float x14;
     float x18;
-    char pad_0[0x40 - 0x1C];
+    char pad_0[0x3C - 0x1C];
+    s32 x3C;
     s32 x40;
     s32 x44;
     u8 _pad2[0x4];
     f32 x4C;
 } itHitodemanAttributes;
 
-/// #it_2725_Logic24_Spawned
+void it_2725_Logic24_Spawned(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itHitodemanAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+
+    ip->facing_dir = 0.0f;
+    ip->xDBC_itcmd_var4.flags.x0 = false;
+
+    it_80279CDC(gobj, attrs->x0);
+    it_802D43EC(gobj);
+    it_802D4494(gobj);
+    it_802D4510(gobj);
+
+    ip->xDD4_itemVar.hitodeman.x8C = (f32) attrs->x3C;
+
+    ip->xDD4_itemVar.hitodeman.x6C = 0.0f;
+    ip->xDD4_itemVar.hitodeman.x70 = 0.0f;
+    ip->xDD4_itemVar.hitodeman.x74 = 0.0f;
+    ip->xDD4_itemVar.hitodeman.x78 = 0.0f;
+    ip->xDD4_itemVar.hitodeman.x7C = 0.0f;
+    ip->xDD4_itemVar.hitodeman.x80 = 0.0f;
+
+    ip->xDAC_itcmd_var0 = 0;
+    ip->xDB0_itcmd_var1 = 0;
+
+    it_802D4B54(gobj);
+    Item_8026AE84(ip, 0x2738, 0x7F, 0x40);
+}
 
 void it_802D43AC(void) {}
 
@@ -100,7 +129,37 @@ bool it_802D48A8(Item_GObj* gobj)
     return false;
 }
 
-/// #it_802D48B0
+void it_802D48B0(f32* value, f32 target, f32 max_val, f32 accel, f32 decel)
+{
+    f32 current = *value;
+    f32 diff = target - current;
+
+    if (ABS(diff) > ABS(accel)) {
+        if (diff > 0.0F) {
+            target = current + accel;
+        } else {
+            target = current - accel;
+        }
+    } else if (ABS(diff) < ABS(decel)) {
+        if (diff > 0.0F) {
+            target = current + decel;
+        } else {
+            target = current - decel;
+        }
+    }
+
+    if (target > 0.0F) {
+        if (target > max_val) {
+            target = max_val;
+        }
+    } else {
+        if (target < -max_val) {
+            target = -max_val;
+        }
+    }
+
+    *value = target;
+}
 
 void it_802D4990(Item_GObj* gobj)
 {

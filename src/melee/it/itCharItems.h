@@ -42,11 +42,12 @@ typedef struct itClimbersStringAttributes {
 } itClimbersStringAttributes;
 
 typedef struct itClimbersIceAttributes {
-    /* +00 */ u8 pad_00[0x4];
+    /* +00 */ f32 x0;
     /* +04 */ f32 x4;
-    /* +08 */ u8 pad_08[0x4];
+    /* +08 */ f32 x8;
     /* +0C */ f32 xC;
-    /* +10 */ u8 pad_10[0x18];
+    /* +10 */ f32 x10;
+    /* +14 */ u8 pad_14[0x14];
     /* +28 */ f32 x28;
     /* +2C */ s32 x2C;
     /* +30 */ u32 x30;
@@ -260,6 +261,13 @@ typedef struct FoxIllusionAttr {
 typedef struct {
     u32 x0;
 } itKirbyHammer_ItemVars;
+
+typedef struct {
+    /*  +0 ip+DD4 */ f32 angle;
+    /*  +4 ip+DD8 */ f32 speed;
+    /*  +8 ip+DDC */ Vec3 dir;
+    /* +14 ip+DE8 */ Vec3 init_pos;
+} itKirbyCutterBeam_ItemVars;
 
 /// user_data struct of GObj class 7
 typedef struct ItemLink {
@@ -691,7 +699,7 @@ typedef struct itSeakNeedleHeld_ItemVars {
 } itSeakNeedleHeld_ItemVars;
 
 typedef struct itSeakNeedleThrown_ItemVars {
-    /*  +0 ip+DD4 */ char pad_0[0x4];
+    /*  +0 ip+DD4 */ f32 xDD4;
     /*  +4 ip+DD8 */ f32 xDD8;
     /*  +8 ip+DDC */ f32 xDDC;
     /*  +C ip+DE0 */ f32 xDE0;

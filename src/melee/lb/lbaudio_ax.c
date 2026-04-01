@@ -11,6 +11,7 @@
 #include <baselib/synth.h>
 #include <melee/cm/camera.h>
 #include <melee/ft/ftlib.h>
+#include <melee/gm/gm_1601.h>
 #include <melee/gr/stage.h>
 #include <melee/it/it_26B1.h>
 #include <melee/lb/lbarchive.h>
@@ -515,7 +516,52 @@ int lbAudioAx_8002438C(int arg0)
 
 /// #lbAudioAx_800243F4
 
-/// #fn_800244F4
+void fn_800244F4(void)
+{
+    lbl_804D387C = 0x7F;
+    lbl_804D3884 = 0x7F;
+    lbl_804D388C = 0x7F;
+    lbl_804D3894 = 0x7F;
+    lbl_804D389C = 0x7F;
+    lbl_804D38A4 = 0x7F;
+    lbl_804D38D8 = 1;
+    lbl_804D38C0 = 1.0F;
+    lbl_804D38AC = 1.0F;
+    lbl_804D38B0 = 1.0F;
+    lbl_804D38B4 = 1.0F;
+    lbl_804D38B8 = 1.0F;
+    lbl_804D38BC = 1.0F;
+    lbl_804D640C = 0;
+    lbl_804D6410 = 0;
+    lbl_804D38E4 = 1.0F;
+    lbl_804D38E8 = 1.0F;
+    lbl_804D38EC = 1.0F;
+    lbl_804D6414 = 0;
+    lbl_804D6418 = 0;
+    lbl_804D6420 = 0;
+    lbl_804D6424 = 0;
+    lbl_804D6428 = 0;
+    lbl_804D642C = 0;
+    lbl_804D38F0 = -1;
+    lbl_804D38F4 = -1;
+    lbl_804D6430 = 0;
+    lbl_804D6434 = 0;
+    lbl_804D641C = 0;
+    lbl_804D63F4 = 0;
+    lbl_804D63F8 = 0;
+    lbl_804D63FC = 0;
+    lbl_804D6400 = 0;
+    lbl_804D6404 = 0;
+    lbl_804D3880 = 1.0F;
+    lbl_804D3888 = 0x7F;
+    lbl_804D3890 = 0x7F;
+    lbl_804D3898 = 0x7F;
+    lbl_804D38A0 = 0x7F;
+    lbl_804D38A8 = 0x7F;
+    lbl_804D63F0 = 0.0F;
+    lbl_804D38CC = 0x7F;
+    gm_801603B0();
+}
 
 void lbAudioAx_800245D4(int arg0)
 {

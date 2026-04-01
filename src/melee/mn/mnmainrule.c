@@ -49,7 +49,34 @@ extern StaticModelDesc MenMainCursorSs_Top;
 
 /// #mn_80230274
 
-/// #mn_802307F8
+extern u8 mn_804D4B96;
+extern u8 mn_803EC818[];
+
+void mn_802307F8(struct mn_802307F8_t* data, s32 mode, s32 index)
+{
+    HSD_Text* text;
+
+    if (data->text != NULL) {
+        HSD_SisLib_803A5CC4(data->text);
+        data->text = NULL;
+    }
+
+    if (mode == 1 && data->x2 == 1) {
+        index = mn_804D4B96;
+    } else if (mode == 1 || mode == 3 || (u32) (mode - 5) <= 1) {
+        index = mn_803EC818[mode * 5];
+    } else {
+        s32 off = mode * 5;
+        index = mn_803EC818[off + index];
+    }
+
+    text =
+        HSD_SisLib_803A5ACC(0, 1, -9.5F, 8.0F, 17.0F, 364.68332F, 76.77544F);
+    data->text = text;
+    text->font_size.x = 0.0521F;
+    text->font_size.y = 0.0521F;
+    HSD_SisLib_803A6368(text, (u8) index);
+}
 
 /// #mn_802308F0
 

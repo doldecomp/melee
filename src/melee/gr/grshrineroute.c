@@ -111,6 +111,8 @@ static struct {
 }* grSh_Route_804D6A58;
 
 extern float grNKr_804DB868;
+extern HSD_LightDesc grSh_Route_803E5D90;
+extern Vec3 grSh_Route_803B8378;
 
 float grShrineRoute_802087B0(void)
 {
@@ -249,7 +251,25 @@ bool grShrineRoute_80208F14(void)
 
 void grShrineRoute_80209AEC(Ground_GObj* arg) {}
 
-/// #grShrineRoute_80209AF0
+void grShrineRoute_80209AF0(Ground_GObj* gobj)
+{
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+    Ground* gp = GET_GROUND(gobj);
+
+    gp->x8_callback = NULL;
+    gp->xC_callback = NULL;
+    gp->x11_flags.b012 = 2;
+    grMaterial_801C94D8(jobj);
+    gp->gv.shrineroute3.xC4 = Ground_801C3FA4(gobj, 10);
+    grShrineRoute_8020A8A4(gobj);
+    gp->gv.shrineroute3.xCC = 0;
+    gp->gv.shrineroute3.xC8 = 0;
+    gp->gv.shrineroute3.xD0 = 0.00006981317F * HSD_Randf() + 0.000017453292F;
+    gp->gv.shrineroute3.xD0 *= (HSD_Randi(2) != 0) ? 1.0F : -1.0F;
+    gp->gv.shrineroute3.xD4 = 0.00006981317F * HSD_Randf() + 0.000017453292F;
+    gp->gv.shrineroute3.xD4 *= (HSD_Randi(2) != 0) ? 1.0F : -1.0F;
+    PAD_STACK(8);
+}
 
 bool grShrineRoute_80209BE4(Ground_GObj* arg)
 {
@@ -323,7 +343,27 @@ void grShrineRoute_8020A8A0(Ground_GObj* arg) {}
 
 /// #grShrineRoute_8020AB58
 
-/// #grShrineRoute_8020AC44
+HSD_LObj* grShrineRoute_8020AC44(HSD_GObj* gobj)
+{
+    HSD_LObj* new_lobj;
+    HSD_LObj* lobj;
+    Vec3 pos;
+    PAD_STACK(8);
+
+    if (gobj == NULL || (lobj = gobj->hsd_obj) == NULL) {
+        return NULL;
+    }
+    while ((lobj == NULL ? NULL : lobj->next) != NULL) {
+        lobj = lobj == NULL ? NULL : lobj->next;
+    }
+    new_lobj = HSD_LObjLoadDesc(&grSh_Route_803E5D90);
+    if (new_lobj != NULL) {
+        pos = grSh_Route_803B8378;
+        HSD_LObjSetNext(lobj, new_lobj);
+        HSD_LObjSetPosition(new_lobj, &pos);
+    }
+    return new_lobj;
+}
 
 bool grShrineRoute_8020AD24(bool arg)
 {

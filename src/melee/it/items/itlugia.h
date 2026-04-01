@@ -49,6 +49,9 @@
 /* 3F7F48 */ extern ItemStateTable it_803F7F48[];
 
 extern f32 it_804DD450;
+extern f32 it_804DD46C;
+extern f32 it_804DD470;
+extern f32 it_804DD474;
 extern f32 it_804DD490;
 
 #endif
