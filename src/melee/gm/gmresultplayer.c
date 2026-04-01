@@ -1316,28 +1316,16 @@ void fn_80179F6C(int idx, int value)
 void fn_80179F84(HSD_JObj* jobj)
 {
     HSD_JObj* child;
-    HSD_JObj* next;
     int i;
+    HSD_JObj*(*p)[4];
 
-    if (jobj == NULL) {
-        child = NULL;
-    } else {
-        child = jobj->child;
-    }
+    child = HSD_JObjGetChild(jobj);
 
-    {
-        HSD_JObj** p = lbl_8046E39C;
+    p = &lbl_8046E39C;
+    *p[0] = child;
 
-        *p = child;
-
-        for (i = 0; i < 3; i++) {
-            if (child == NULL) {
-                next = NULL;
-            } else {
-                next = child->next;
-            }
-            *++p = child = next;
-        }
+    for (i = 0; i < 3; i++) {
+        (*p)[i + 1] = child = HSD_JObjGetNext(child);
     }
 
     lbl_8046E3AC.x0_4 = 1;
