@@ -239,14 +239,18 @@ void grPura_8021228C(Ground_GObj* arg0) {}
 /// #grPura_80212290
 void grPura_80212290(Ground_GObj* arg0)
 {
-    Ground* gp = GET_GROUND(arg0);
-    HSD_JObj* jobj = arg0->hsd_obj;
-    HSD_ImageDesc* image = grPu_803E6E20;
-    HSD_MObjSetToonTextureImage(image);
-    lb_80011C18(jobj, 0x1000);
-    grPura_80213250(jobj);
-    HSD_MObjSetToonTextureImage(0);
-    grAnime_801C8138(arg0, gp->map_id, 0);
+    Ground* temp_r31;
+    HSD_JObj* temp_r30;
+    PAD_STACK(8);
+
+    temp_r31 = arg0->user_data;
+    temp_r30 = arg0->hsd_obj;
+    *(void (**)(HSD_GObj*, int))((u8*)arg0 + 0x1C) = fn_802130D0;
+    HSD_MObjSetToonTextureImage(&grPu_803E7620);
+    lb_80011C18(temp_r30, 0x1000U);
+    grPura_80213250(temp_r30);
+    HSD_MObjSetToonTextureImage(NULL);
+    grAnime_801C8138((HSD_GObj* ) arg0, temp_r31->map_id, 0);
 }
 
 bool grPura_80212314(Ground_GObj* arg0)

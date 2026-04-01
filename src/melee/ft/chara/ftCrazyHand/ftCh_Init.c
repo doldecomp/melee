@@ -1270,7 +1270,7 @@ void ftCh_Damage2_Anim(HSD_GObj* gobj)
             attrs = fp->ft_data->ext_attr;
             fp->mv.ch.unk0.xC.x = fp->cur_pos.x - attrs->x28;
             fp->mv.ch.unk0.xC.y = attrs->x24;
-            Fighter_ChangeMotionState(gobj, ftMh_MS_Damage, 0,
+            Fighter_ChangeMotionState(gobj, ftMh_MS_Damage2, 0,
                                       fp->mv.ch.unk0.xC.z = ftCh_Init_804DA070,
                                       ftCh_Init_804DA074, ftCh_Init_804DA070,
                                       NULL);

@@ -38,7 +38,14 @@ void it_802D73F0(Item_GObj* gobj)
     it_802D747C(gobj);
 }
 
-void it_802D747C(Item_GObj* gobj) {}
+void it_802D747C(Item_GObj* gobj)
+{
+    u8 _[8];
+    it_8027CAD8(gobj);
+    it_8027C0A8(gobj, 0.0f, 5.0f);
+    it_802756E0(gobj);
+    it_802D848C(gobj, 0, 2);
+}
 
 bool itOldkuri_UnkMotion0_Anim(Item_GObj* gobj)
 {

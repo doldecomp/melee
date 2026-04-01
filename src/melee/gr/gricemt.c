@@ -576,15 +576,20 @@ void grIceMt_801F7EE8(Ground_GObj* arg0)
 }
 
 /// #grIceMt_801F7F1C
-void grIceMt_801F7F1C(Ground_GObj* arg0)
+void grIceMt_801F7F1C(HSD_GObj* gobj)
 {
-    int i = 0;
-    Ground* gp = GET_GROUND(arg0);
+    u8 _[8];
+    void* ptr;
+    s32 i;
+
+    i = 0;
+    ptr = gobj->user_data;
     do {
-        if (42 != 0) {
-            grMaterial_801C8CDC(arg0);
+        if (*(void**)((u8*)ptr + 0xF8) != NULL) {
+            grMaterial_801C8CDC(*(void**)((u8*)ptr + 0xF8));
         }
-        i++;
+        i += 1;
+        ptr = (void*)((u8*)ptr + 4);
     } while (i < 2);
 }
 
@@ -631,13 +636,19 @@ void grIceMt_801F815C(Ground_GObj* param1)
 /// #grIceMt_801F81B4
 void grIceMt_801F81B4(Ground_GObj* arg0)
 {
-    int i = 0;
-    Ground* gp = GET_GROUND(arg0);
+    Ground* gp;
+    int i;
+    PAD_STACK(8);
+
+    i = 0;
+    gp = arg0->user_data;
+
     do {
-        if (42 != 0) {
-            grMaterial_801C8CDC(arg0);
+        if (*(HSD_GObj**)((u8*)gp + 0xF8) != NULL) {
+            grMaterial_801C8CDC(*(HSD_GObj**)((u8*)gp + 0xF8));
         }
         i++;
+        gp = (Ground*)((u8*)gp + 4);
     } while (i < 2);
 }
 
@@ -1007,18 +1018,47 @@ void grIceMt_801F91EC(HSD_GObj* param_1, s16* param_2, int param_3,
 /// #grIceMt_801F929C
 void grIceMt_801F929C(HSD_GObj* arg0, void* arg1)
 {
-    mpLib_80057BC0(2);
-    mpJointListAdd(2);
-    grAnime_801C83D0(arg0, 2, 7);
+    s16 temp_r3;
+
+    if (*(s16*)((u8*)arg1 + 0x0) != 0) {
+        *(s16*)((u8*)arg1 + 0x2) = (s16) (*(s16*)((u8*)arg1 + 0x2) + 1);
+        temp_r3 = *(s16*)((u8*)arg1 + 0x2);
+        if (temp_r3 == *(s16*)((u8*)arg1 + 0xA)) {
+            mpLib_80057BC0(*(s16*)((u8*)arg1 + 0x8));
+        } else if (temp_r3 == *(s16*)((u8*)arg1 + 0xC)) {
+            mpJointListAdd(*(s16*)((u8*)arg1 + 0x8));
+        }
+        if (grAnime_801C83D0(arg0, *(s16*)((u8*)arg1 + 0x4), 7) != 0) {
+            *(s16*)((u8*)arg1 + 0x0) = 0;
+        }
+    }
 }
 
 /// #fn_801F9338
 void fn_801F9338(Ground* gp, int arg1, CollData* arg2, s32 arg3,
                  mpLib_GroundEnum arg4, float arg8)
 {
-    // mpLib_80057BC0(2);
-    // mpJointListAdd(2);
-    // grAnime_801C83D0(arg0,2,7);
+    HSD_GObj* temp_r3;
+    s16* temp_r30;
+    s16 temp_r4;
+    u8 flag_byte;
+
+    temp_r30 = (s16*)((u8*)gp + 0x100);
+    flag_byte = *(u8*)((u8*)arg2 + 0x34);
+    if (((flag_byte >> 3) & 0xF) == 1 && *temp_r30 == 0) {
+        temp_r3 = Ground_801C2BA4(2);
+        *temp_r30 = 1;
+        temp_r30[1] = 0;
+        grAnime_801C7A04(temp_r3, temp_r30[2], 7, 1.0f);
+        grAnime_801C7B24(temp_r3, temp_r30[2], 7, 0.0f);
+        grAnime_801C78FC(temp_r3, temp_r30[2], 7);
+        temp_r4 = temp_r30[3];
+        if (temp_r4 != -1) {
+            grAnime_801C7A04(temp_r3, temp_r4, 7, 1.0f);
+            grAnime_801C7B24(temp_r3, temp_r30[3], 7, 0.0f);
+            grAnime_801C78FC(temp_r3, temp_r30[3], 7);
+        }
+    }
     grIceMt_801FA7F0(gp, arg1, arg2, arg3, arg4, arg8);
 }
 
@@ -1026,9 +1066,25 @@ void fn_801F9338(Ground* gp, int arg1, CollData* arg2, s32 arg3,
 void fn_801F9448(Ground* gp, int arg1, CollData* arg2, s32 arg3,
                  mpLib_GroundEnum arg4, float arg8)
 {
-    // mpLib_80057BC0(2);
-    // mpJointListAdd(2);
-    // grAnime_801C83D0(arg0,2,7);
+    HSD_GObj* gobj;
+    s16* icemt_ptr = &gp->gv.icemt.x10E;
+    s16 temp_r4;
+    u8 flag_byte = *(u8*)((u8*)arg2 + 0x34);
+
+    if (((flag_byte >> 3) & 0xF) == 1 && icemt_ptr[0] == 0) {
+        gobj = Ground_801C2BA4(2);
+        icemt_ptr[0] = 1;
+        icemt_ptr[1] = 0;
+        grAnime_801C7A04(gobj, icemt_ptr[2], 7, 1.0f);
+        grAnime_801C7B24(gobj, icemt_ptr[2], 7, 0.0f);
+        grAnime_801C78FC(gobj, icemt_ptr[2], 7);
+        temp_r4 = icemt_ptr[3];
+        if (temp_r4 != -1) {
+            grAnime_801C7A04(gobj, temp_r4, 7, 1.0f);
+            grAnime_801C7B24(gobj, icemt_ptr[3], 7, 0.0f);
+            grAnime_801C78FC(gobj, icemt_ptr[3], 7);
+        }
+    }
     grIceMt_801FA7F0(gp, arg1, arg2, arg3, arg4, arg8);
 }
 
