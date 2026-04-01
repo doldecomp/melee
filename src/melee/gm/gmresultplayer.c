@@ -1322,10 +1322,10 @@ void fn_80179F84(HSD_JObj* jobj)
     child = HSD_JObjGetChild(jobj);
 
     p = &lbl_8046E39C;
-    *p[0] = child;
 
-    for (i = 0; i < 3; i++) {
-        (*p)[i + 1] = child = HSD_JObjGetNext(child);
+    for (i = 0; i < 4; i++) {
+        (*p)[i] = child;
+        child = HSD_JObjGetNext(child);
     }
 
     lbl_8046E3AC.x0_4 = 1;
