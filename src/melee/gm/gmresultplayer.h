@@ -37,6 +37,6 @@ struct ResultsMatchInfo;
 /* 17A318 */ HSD_GObj* fn_8017A318(s32);
 /* 17A67C */ Fighter_GObj* fn_8017A67C(CharacterKind c_kind, int, int);
 /* 17A9B4 */ void fn_8017A9B4(int);
-/* 17AA78 */ UNK_RET fn_8017AA78(u8*);
+/* 17AA78 */ void fn_8017AA78(u8*);
 
 #endif

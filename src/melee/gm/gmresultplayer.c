@@ -94,10 +94,7 @@ extern int lbl_8046E38C[4];
 extern HSD_JObj* lbl_8046E39C[4];
 
 typedef struct {
-    u8 x0_0 : 1;
-    u8 x0_1 : 1;
-    u8 x0_2 : 1;
-    u8 x0_3 : 1;
+    u8 x0_0 : 4;
     u8 x0_4 : 2;
     u8 x0_6 : 2;
     u8 pad_01[0x2313];
@@ -1529,3 +1526,144 @@ void fn_8017A9B4(int slot)
 }
 
 /// #fn_8017AA78
+
+extern u32 lbl_803D7018[];
+extern u32 lbl_803D7038[];
+
+static s32 lbl_804D3FD0 = 0x500050;
+static s32 lbl_804D3FD4 = 0x460034;
+static s32 lbl_804D3FD8 = 0x6E0072;
+static s32 lbl_804D3FDC = 0x64004A;
+static s32 lbl_804D3FE0 = 0x340034;
+static s32 lbl_804D3FE4 = 0x340034;
+static s32 lbl_804D3FE8 = 0x4A004A;
+static s32 lbl_804D3FEC = 0x4A004A;
+static s32 lbl_804D3FF0 = 0xC0008;
+static s32 lbl_804D3FF4 = 0x60000;
+static s32 lbl_804D3FF8 = 0xE000E;
+static s32 lbl_804D3FFC = 0x60000;
+
+void fn_8017AA78(u8* arg0)
+{
+    u8* base = lbl_8046E1B0;
+    u32* p5;
+    u32* p7;
+    u8* p3;
+    u8* p4;
+    u8* p6;
+    u8* p8;
+    u8* p10;
+    lbl_8046E3AC_t* bf;
+
+    memzero(base, 0x104);
+    lbBgFlash_800208EC(6);
+    Camera_80028B9C(8);
+    lb_8000FCDC();
+    mpColl_80041C78();
+    Ground_801C0378(0x40);
+    Stage_802251E8(0, NULL);
+    Stage_8022524C();
+    Item_80266FA8();
+    Item_80266FCC();
+    efLib_Init();
+    efAsync_LoadSync(0);
+    ftDemo_ObjAllocInit();
+    Player_InitAllPlayers();
+
+    *(u32*)(base + 0x1C4) = 0;
+    lb_800121FC((HSD_ImageDesc*)(base + 0x1C4), 0x64, 0x98, GX_TF_RGB5A3, 0);
+
+    {
+        MatchEnd* me = fn_80174274();
+        u32* src = (u32*)((u8*)me - 8);
+        u32* dst = (u32*)(base + 0x21C);
+        int n;
+        for (n = 0x44F; n > 0; n--) {
+            u32 a = *(src += 2);
+            u32 b = src[1];
+            *(dst += 2) = a;
+            dst[1] = b;
+        }
+        dst[2] = src[2];
+    }
+
+    bf = (lbl_8046E3AC_t*)(base + 0x1FC);
+    bf->x0_0 = 1;
+    p5 = lbl_803D7038;
+    p8 = base + 0x1FC;
+    bf->x0_4 = 0;
+    p7 = lbl_803D7018;
+    p3 = p8;
+    bf->x0_6 = 0;
+    p4 = p8;
+    p6 = p8;
+    p10 = arg0;
+
+    {
+        u32 a, b;
+        a = lbl_804D3FD0; b = lbl_804D3FD4;
+        *(u32*)(base + 0x24B0) = a;
+        *(u32*)(base + 0x24B4) = b;
+        a = lbl_804D3FD8; b = lbl_804D3FDC;
+        *(u32*)(base + 0x24C0) = a;
+        *(u32*)(base + 0x24C4) = b;
+        a = lbl_804D3FE0; b = lbl_804D3FE4;
+        *(u32*)(base + 0x24B8) = a;
+        *(u32*)(base + 0x24BC) = b;
+        a = lbl_804D3FE8; b = lbl_804D3FEC;
+        *(u32*)(base + 0x24C8) = a;
+        *(u32*)(base + 0x24CC) = b;
+        a = lbl_804D3FF0; b = lbl_804D3FF4;
+        *(u32*)(base + 0x24A8) = a;
+        *(u32*)(base + 0x24AC) = b;
+        a = lbl_804D3FF8; b = lbl_804D3FFC;
+        *(u32*)(base + 0x24A0) = a;
+        *(u32*)(base + 0x24A4) = b;
+    }
+
+    {
+        int i = 0;
+        for (; i < 2; i++) {
+            u32 a, b;
+
+            p8[1] = 0;
+            p8[0x24] = p10[0];
+            if (base[0x228] == 7) {
+                u8* wp = &base[(u8)p3[0x87] * 0xC];
+                p3[0x85] = 1;
+                wp[0x248] = 1;
+            }
+            *(u16*)(p4 + 6) = 0;
+            p3 += 0xA8;
+            p4 += 2;
+            a = p5[0]; b = p5[1]; p5 += 2;
+            *(u32*)(p6 + 0x22D4) = a;
+            *(u32*)(p6 + 0x22D8) = b;
+            a = p7[0]; b = p7[1]; p7 += 2;
+            *(u32*)(p6 + 0x22F4) = a;
+            *(u32*)(p6 + 0x22F8) = b;
+            p6 += 8;
+
+            p8[2] = 0;
+            p8[0x25] = *++p10;
+            p8 += 1;
+            if (base[0x228] == 7) {
+                u8* wp = &base[(u8)p3[0x87] * 0xC];
+                p3[0x85] = 1;
+                wp[0x248] = 1;
+            }
+            *(u16*)(p4 + 6) = 0;
+            p8 += 1;
+            p3 += 0xA8;
+            a = p5[0]; b = p5[1]; p5 += 2;
+            p4 += 2;
+            *(u32*)(p6 + 0x22D4) = a;
+            p10 += 1;
+            *(u32*)(p6 + 0x22D8) = b;
+            a = p7[0]; b = p7[1]; p7 += 2;
+            *(u32*)(p6 + 0x22F4) = a;
+            *(u32*)(p6 + 0x22F8) = b;
+            p6 += 8;
+        }
+    }
+}
