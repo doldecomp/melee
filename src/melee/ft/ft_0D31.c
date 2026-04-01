@@ -17,11 +17,10 @@
 #include "ft/inlines.h"
 #include "ft/types.h"
 
-#include "lb/lbvector.h"
-
 #include "ftCommon/forward.h"
 
 #include "ftCommon/ftCo_Throw.h"
+#include "lb/lbvector.h"
 
 #include <melee/cm/camera.h>
 #include <melee/ef/efsync.h>
@@ -50,9 +49,9 @@
 #include <melee/gm/gm_unsplit.h>
 #include <melee/gr/stage.h>
 #include <melee/it/item.h>
-#include <melee/mp/mpcoll.h>
 #include <melee/it/items/it_2E5A.h>
 #include <melee/it/items/itkinoko.h>
+#include <melee/mp/mpcoll.h>
 #include <melee/pl/pl_040D.h>
 #include <melee/pl/player.h>
 #include <melee/pl/plbonuslib.h>
@@ -430,20 +429,17 @@ void ftCo_DeadUpFall_Phys(Fighter_GObj* gobj)
             }
         }
         lbVector_Lerp((Vec3*) (ca + 0x18), (Vec3*) (ca + 0x24),
-                      &fp->mv.co.unk_deadup.x50,
-                      fp->mv.co.unk_deadup.x4C);
+                      &fp->mv.co.unk_deadup.x50, fp->mv.co.unk_deadup.x4C);
         break;
     case 3:
-        ftCommon_Fall(fp, *(float*) (ca + 0x34),
-                      *(float*) (ca + 0x38));
+        ftCommon_Fall(fp, *(float*) (ca + 0x34), *(float*) (ca + 0x38));
         lbVector_Add(&fp->mv.co.unk_deadup.x5C, &fp->self_vel);
         if (fp->x2222_b6) {
             if (!ftAnim_80070FD0(fp)) {
                 break;
             }
         }
-        lbVector_Add(&fp->mv.co.unk_deadup.x50,
-                     &fp->mv.co.unk_deadup.x5C);
+        lbVector_Add(&fp->mv.co.unk_deadup.x50, &fp->mv.co.unk_deadup.x5C);
         fp->mv.co.unk_deadup.x5C.x = 0;
         fp->mv.co.unk_deadup.x5C.y = 0;
         fp->mv.co.unk_deadup.x5C.z = 0;
@@ -561,8 +557,7 @@ void ftCo_800D5600(Fighter_GObj* gobj)
     fp->mv.co.common.x0 = (int) p_ftCommonData->x5D4;
     Fighter_ChangeMotionState(gobj, ftCo_MS_RebirthWait,
                               Ft_MF_KeepGfx | Ft_MF_SkipColAnim |
-                                  Ft_MF_KeepAccessory |
-                                  Ft_MF_SkipNametagVis,
+                                  Ft_MF_KeepAccessory | Ft_MF_SkipNametagVis,
                               0, 1, 0, NULL);
     fp->x221E_b2 = 1;
     fp->x2219_b1 = 1;

@@ -1,6 +1,5 @@
 #include "ithitodeman.h"
 
-#include <math.h>
 #include <placeholder.h>
 #include <platform.h>
 
@@ -15,6 +14,7 @@
 #include "it/it_2725.h"
 #include "it/item.h"
 
+#include <math.h>
 #include <baselib/random.h>
 
 typedef struct {
@@ -129,8 +129,7 @@ bool it_802D48A8(Item_GObj* gobj)
     return false;
 }
 
-void it_802D48B0(f32* value, f32 target, f32 max_val, f32 accel,
-                 f32 decel)
+void it_802D48B0(f32* value, f32 target, f32 max_val, f32 accel, f32 decel)
 {
     f32 current = *value;
     f32 diff = target - current;

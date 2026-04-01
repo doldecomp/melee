@@ -37,20 +37,18 @@ static struct {
         u32 x4;
         UNK_T x8;
     } unk_arr[8];
-} lb_803BAB74 = {
-    { 0, 3, 0, 0x1790, 0 },
-    NULL,
-    {
-        { 0x1F2C, 1, NULL },
-        { 0x1F2C, 1, NULL },
-        { 0x1F2C, 1, NULL },
-        { 0x1F2C, 1, NULL },
-        { 0x1F2C, 1, NULL },
-        { 0x1F2C, 1, NULL },
-        { 0x1F2C, 1, NULL },
-        { -1,     0, NULL },
-    }
-};
+} lb_803BAB74 = { { 0, 3, 0, 0x1790, 0 },
+                  NULL,
+                  {
+                      { 0x1F2C, 1, NULL },
+                      { 0x1F2C, 1, NULL },
+                      { 0x1F2C, 1, NULL },
+                      { 0x1F2C, 1, NULL },
+                      { 0x1F2C, 1, NULL },
+                      { 0x1F2C, 1, NULL },
+                      { 0x1F2C, 1, NULL },
+                      { -1, 0, NULL },
+                  } };
 
 void lb_8001C600(void)
 {

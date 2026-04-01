@@ -70,8 +70,8 @@ void mn_802307F8(struct mn_802307F8_t* data, s32 mode, s32 index)
         index = mn_803EC818[off + index];
     }
 
-    text = HSD_SisLib_803A5ACC(0, 1, -9.5F, 8.0F, 17.0F, 364.68332F,
-                               76.77544F);
+    text =
+        HSD_SisLib_803A5ACC(0, 1, -9.5F, 8.0F, 17.0F, 364.68332F, 76.77544F);
     data->text = text;
     text->font_size.x = 0.0521F;
     text->font_size.y = 0.0521F;

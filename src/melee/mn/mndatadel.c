@@ -186,13 +186,15 @@ void fn_8024FC48(HSD_GObj* gobj)
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
         proc = HSD_GObj_SetupProc(gobj, fn_8024FBA4, 0);
         proc->flags_3 = HSD_GObj_804D783C;
-        HSD_SisLib_803A5CC4(*(HSD_Text**)(user_data + 0xC));
+        HSD_SisLib_803A5CC4(*(HSD_Text**) (user_data + 0xC));
     } else {
         for (i = 0; i < 6; i++) {
             lb_80011E24(
                 (HSD_JObj*) mn_80231634(
-                    *(struct mn_80231634_t**)((u8*) gobj->user_data +
-                        ((s32*) ((u8*) &data->x3C))[i] * 4 + 0x10)),
+                    *(struct mn_80231634_t**) ((u8*) gobj->user_data +
+                                               ((s32*) ((u8*) &data->x3C))[i] *
+                                                   4 +
+                                               0x10)),
                 &jobj, 1, -1);
             if (user_data[0] == i) {
                 mn_8022EC18(jobj, &data->x18, (HSD_TypeMask) 0x400);

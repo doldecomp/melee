@@ -104,8 +104,8 @@ HSD_GObj* grOldPupupu_802108B4(int arg0)
     if (gobj != NULL) {
         Ground_SetupStageCallbacks(gobj, callbacks);
     } else {
-        OSReport("%s:%d: couldn t get gobj(id=%d)\n", "groldpupupu.c",
-                 0xD9, arg0);
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", "groldpupupu.c", 0xD9,
+                 arg0);
     }
 
     return gobj;
@@ -317,18 +317,18 @@ bool fn_802112F4(Ground_GObj* gobj, HSD_GObj* fighter_gobj, Vec3* vel)
     gp = gobj->user_data;
     switch (gp->gv.unk.xDC) {
     case 1:
-        if (grOldPupupu_8021128C(&pos, grOp_804D6A98->x1C,
-                                  grOp_804D6A98->x20, grOp_804D6A98->x24,
-                                  grOp_804D6A98->x28) == true)
+        if (grOldPupupu_8021128C(&pos, grOp_804D6A98->x1C, grOp_804D6A98->x20,
+                                 grOp_804D6A98->x24,
+                                 grOp_804D6A98->x28) == true)
         {
             vel->x = -grOp_804D6A98->x10;
             return true;
         }
         break;
     case 2:
-        if (grOldPupupu_8021128C(&pos, grOp_804D6A98->x18,
-                                  grOp_804D6A98->x14, grOp_804D6A98->x24,
-                                  grOp_804D6A98->x28) == true)
+        if (grOldPupupu_8021128C(&pos, grOp_804D6A98->x18, grOp_804D6A98->x14,
+                                 grOp_804D6A98->x24,
+                                 grOp_804D6A98->x28) == true)
         {
             vel->x = grOp_804D6A98->x10;
             return true;

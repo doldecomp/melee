@@ -104,8 +104,7 @@ void it_802EBA00(Item_GObj* gobj)
     ip->xDD4_itemVar.tincle.x20 = sa->x2C;
     ip->x40_vel.y = 0.0f;
 
-    ip->xDD4_itemVar.tincle.x38 =
-        (2.0f * height) / (dur_f * dur_f);
+    ip->xDD4_itemVar.tincle.x38 = (2.0f * height) / (dur_f * dur_f);
     ip->xDD4_itemVar.tincle.x38 *= 0.5f;
 
     ip->xDD4_itemVar.tincle.x2C = sa->x28 * 2;

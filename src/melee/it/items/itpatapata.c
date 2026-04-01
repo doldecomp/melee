@@ -266,7 +266,7 @@ void itPatapata_UnkMotion4_Phys(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     itPatapataAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
     HSD_JObjAddTranslationZ(ip->xBBC_dynamicBoneTable->bones[18],
-                             ip->xDD4_itemVar.patapata.x2C);
+                            ip->xDD4_itemVar.patapata.x2C);
     it_80272860(gobj, attrs->x38, attrs->x3C);
 }
 
