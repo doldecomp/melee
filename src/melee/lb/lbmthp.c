@@ -1,9 +1,8 @@
 #include "lbmthp.static.h"
 
-#include "lb/lbfile.h"
-
 #include "baselib/memory.h"
 #include "baselib/video.h"
+#include "lb/lbfile.h"
 
 #include <dolphin/dvd.h>
 #include <dolphin/gx/GXTexture.h>
@@ -29,8 +28,7 @@ s32 fn_8001EB14(THPDecComp* data, const char* path)
     }
 
     if (data->unk_08 > 2) {
-        OSReport(
-            "Warning : file format is newer than player\n");
+        OSReport("Warning : file format is newer than player\n");
     }
 
     data->unk_11C = 1;

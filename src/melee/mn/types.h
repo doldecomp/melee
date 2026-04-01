@@ -563,4 +563,30 @@ typedef enum VSRecordsStatType {
     VSSTAT_COUNT_NAME = 0x18,    ///< Number of stats in name mode
 } VSRecordsStatType;
 
+typedef struct GlyphVariantEntry {
+    /* 0x00 */ u8 selection;
+    /* 0x01 */ u8 pad_01[3];
+    /* 0x04 */ HSD_JObj* jobjs[7];
+    /* 0x20 */ HSD_Text* text;
+} GlyphVariantEntry; /* size = 0x24 */
+
+typedef struct NameNewEntry {
+    /* 0x00 */ u8 x0;
+    /* 0x01 */ u8 x1;
+    /* 0x02 */ u8 x2;
+    /* 0x03 */ u8 x3;
+    /* 0x04 */ HSD_JObj* jobjs[19];
+    /* 0x50 */ u8 mode;
+    /* 0x51 */ u8 last_key_sel;
+    /* 0x52 */ u8 pad_52[2];
+    /* 0x54 */ HSD_GObj* variant_gobj;
+    /* 0x58 */ u8 cursor_pos;
+    /* 0x59 */ u8 name_index;
+    /* 0x5A */ u8 auto_history[5];
+    /* 0x5F */ u8 pad_5F;
+    /* 0x60 */ HSD_Text* key_text;
+    /* 0x64 */ HSD_Text* name_disp_text;
+    /* 0x68 */ HSD_Text* desc_text;
+} NameNewEntry; /* size = 0x6C */
+
 #endif

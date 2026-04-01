@@ -1,5 +1,8 @@
 #include "itkirbycutterbeam.h"
 
+#include <placeholder.h>
+#include <platform.h>
+
 #include "db/db.h"
 #include "ft/chara/ftKirby/ftKb_Init.h"
 #include "it/inlines.h"
@@ -9,8 +12,6 @@
 #include "it/types.h"
 
 #include <MSL/trigf.h>
-#include <placeholder.h>
-#include <platform.h>
 
 void it_8029BAB8(HSD_GObj* gobj, Vec3* pos, float facing_dir)
 {
@@ -45,11 +46,10 @@ void it_8029BB90(Item_GObj* gobj, HSD_GObj* owner)
     ip->xDD4_itemVar.kirbycutterbeam.angle =
         ftKb_AttackDashAir_800F21C0(owner);
     ip->xDD4_itemVar.kirbycutterbeam.speed = attr[0];
-    ip->x40_vel.x = ip->facing_dir *
-                     ip->xDD4_itemVar.kirbycutterbeam.speed *
-                     cosf(ip->xDD4_itemVar.kirbycutterbeam.angle);
+    ip->x40_vel.x = ip->facing_dir * ip->xDD4_itemVar.kirbycutterbeam.speed *
+                    cosf(ip->xDD4_itemVar.kirbycutterbeam.angle);
     ip->x40_vel.y = -ip->xDD4_itemVar.kirbycutterbeam.speed *
-                     sinf(ip->xDD4_itemVar.kirbycutterbeam.angle);
+                    sinf(ip->xDD4_itemVar.kirbycutterbeam.angle);
     ip->x40_vel.z = 0.0F;
     it_80275158(gobj, attr[2]);
     Item_80268E5C(gobj, 0, 2);

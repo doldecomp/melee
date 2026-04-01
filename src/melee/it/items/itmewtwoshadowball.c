@@ -4,16 +4,15 @@
 #include "ft/chara/ftKirby/ftKb_Init.h"
 #include "ft/chara/ftMewtwo/ftMt_SpecialN.h"
 #include "it/inlines.h"
-
-#include <baselib/jobj.h>
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
 #include "lb/lbvector.h"
+#include "MSL/trigf.h"
 
 #include <math.h>
-#include "MSL/trigf.h"
+#include <baselib/jobj.h>
 
 /// #it_802C4D10
 
@@ -115,8 +114,7 @@ void it_802C5B18(Item_GObj* gobj)
         ip->xDD4_itemVar.mewtwoshadowball.x18 =
             ip->xDD4_itemVar.mewtwoshadowball.x1C;
     }
-    Item_80268E5C(gobj,
-                  ip->xDD4_itemVar.mewtwoshadowball.x18 + 1,
+    Item_80268E5C(gobj, ip->xDD4_itemVar.mewtwoshadowball.x18 + 1,
                   ITEM_ANIM_UPDATE);
     ip->on_accessory = fn_802C5E18;
     ip->xDD4_itemVar.mewtwoshadowball.x50 =

@@ -66,7 +66,7 @@ void lbArq_80014AC4(lbArqHandle* handle)
 void lbArq_80014D2C(void)
 {
     lbArqGlobal* global = &lbArq_804316C0;
-    lbArqNode* nodes = (lbArqNode*)global;
+    lbArqNode* nodes = (lbArqNode*) global;
     lbArqNode* node;
     int i;
 

@@ -763,15 +763,12 @@ void grInishie1_801FC018(HSD_GObj* gobj)
     gp->gv.inishie1.x108 = Ground_801C3FA4(gobj, 0x1a);
     gp->gv.inishie1.x10C = Ground_801C3FA4(gobj, 0x1c);
 
-    gp->gv.inishie1.xFC =
-        HSD_JObjGetTranslationY(gp->gv.inishie1.x108);
+    gp->gv.inishie1.xFC = HSD_JObjGetTranslationY(gp->gv.inishie1.x108);
 
-    gp->gv.inishie1.x100 = (gp->gv.inishie1.x108 == NULL)
-                                ? NULL
-                                : gp->gv.inishie1.x108->child;
-    gp->gv.inishie1.x104 = (gp->gv.inishie1.x10C == NULL)
-                                ? NULL
-                                : gp->gv.inishie1.x10C->child;
+    gp->gv.inishie1.x100 =
+        (gp->gv.inishie1.x108 == NULL) ? NULL : gp->gv.inishie1.x108->child;
+    gp->gv.inishie1.x104 =
+        (gp->gv.inishie1.x10C == NULL) ? NULL : gp->gv.inishie1.x10C->child;
 
     mpJointSetCb1(0x15, gp, (mpLib_Callback) fn_801FC9AC);
     mpJointSetCb1(0x14, gp, (mpLib_Callback) fn_801FC9AC);
@@ -899,16 +896,14 @@ void fn_801FC9AC(Ground* gr, s32 block_id, s32 arg2, s32 dist,
     if (block_id == 0x14) {
         gr->gv.inishie1.xE8 += 1;
         if (arg4 == 1) {
-            gr->gv.inishie1.xE0 +=
-                (f32) dist * grI1_804D69F8->unk2C[1].z;
+            gr->gv.inishie1.xE0 += (f32) dist * grI1_804D69F8->unk2C[1].z;
         } else {
             gr->gv.inishie1.xE0 += (f32) dist;
         }
     } else if (block_id == 0x15) {
         gr->gv.inishie1.xEA += 1;
         if (arg4 == 1) {
-            gr->gv.inishie1.xE4 +=
-                (f32) dist * grI1_804D69F8->unk2C[1].z;
+            gr->gv.inishie1.xE4 += (f32) dist * grI1_804D69F8->unk2C[1].z;
         } else {
             gr->gv.inishie1.xE4 += (f32) dist;
         }

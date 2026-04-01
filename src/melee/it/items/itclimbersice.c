@@ -280,8 +280,7 @@ bool it_2725_Logic90_HitShield(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     f32 vel_x = ip->x40_vel.x;
     ItemAttr* attr = ip->xCC_item_attr;
-    itClimbersIceAttributes* sa =
-        ip->xC4_article_data->x4_specialAttributes;
+    itClimbersIceAttributes* sa = ip->xC4_article_data->x4_specialAttributes;
 
     if (vel_x < 0.0f) {
         vel_x = -vel_x;

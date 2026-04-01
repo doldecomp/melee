@@ -114,9 +114,10 @@ void itMatadogas_UnkMotion2_Phys(Item_GObj* gobj)
         item2->entered_hitlag = efLib_PauseAll;
         item2->exited_hitlag = efLib_ResumeAll;
         ((jobj) ? ((void) 0) : __assert("jobj.h", 660, "jobj"));
-        ((!(jobj->flags & JOBJ_USE_QUATERNION)) ? ((void) 0)
-            : __assert("jobj.h", 661,
-                       "!(jobj->flags & JOBJ_USE_QUATERNION)"));
+        ((!(jobj->flags & JOBJ_USE_QUATERNION))
+             ? ((void) 0)
+             : __assert("jobj.h", 661,
+                        "!(jobj->flags & JOBJ_USE_QUATERNION)"));
         jobj->rotate.y = 0.0f;
         if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
             ftCo_800C6AFC(jobj);

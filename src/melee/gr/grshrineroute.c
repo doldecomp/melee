@@ -264,11 +264,9 @@ void grShrineRoute_80209AF0(Ground_GObj* gobj)
     grShrineRoute_8020A8A4(gobj);
     gp->gv.shrineroute3.xCC = 0;
     gp->gv.shrineroute3.xC8 = 0;
-    gp->gv.shrineroute3.xD0 =
-        0.00006981317F * HSD_Randf() + 0.000017453292F;
+    gp->gv.shrineroute3.xD0 = 0.00006981317F * HSD_Randf() + 0.000017453292F;
     gp->gv.shrineroute3.xD0 *= (HSD_Randi(2) != 0) ? 1.0F : -1.0F;
-    gp->gv.shrineroute3.xD4 =
-        0.00006981317F * HSD_Randf() + 0.000017453292F;
+    gp->gv.shrineroute3.xD4 = 0.00006981317F * HSD_Randf() + 0.000017453292F;
     gp->gv.shrineroute3.xD4 *= (HSD_Randi(2) != 0) ? 1.0F : -1.0F;
     PAD_STACK(8);
 }

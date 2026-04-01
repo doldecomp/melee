@@ -1187,7 +1187,7 @@ void HSD_SisLib_803A746C(HSD_Text* text, s32 entry_idx, f32 new_x, f32 new_y)
     }
 }
 
-void HSD_SisLib_803A74F0(HSD_Text* text, s32 entry_idx, u8* color_rgb)
+void HSD_SisLib_803A74F0(HSD_Text* text, s32 entry_idx, GXColor* color_rgb)
 {
     u8* entry;
     u8* color_ptr;
@@ -1196,9 +1196,9 @@ void HSD_SisLib_803A74F0(HSD_Text* text, s32 entry_idx, u8* color_rgb)
     entry = fn_803A6FEC((u8*) text->sis_buffer, entry_idx, NULL);
     if (entry != NULL) {
         color_ptr = entry + 5;
-        color_ptr[1] = color_rgb[0];
-        color_ptr[2] = color_rgb[1];
-        color_ptr[3] = color_rgb[2];
+        color_ptr[1] = color_rgb->r;
+        color_ptr[2] = color_rgb->g;
+        color_ptr[3] = color_rgb->b;
     }
 }
 

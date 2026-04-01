@@ -1624,7 +1624,7 @@ void un_80307828(int arg0)
     interest = un_803B8858;
 
     if (arg0 == 0) {
-        data->x18 = data->x1C = (f32)(data->x58 = 0);
+        data->x18 = data->x1C = (f32) (data->x58 = 0);
         data2->x18 = 0.0F;
         data2->x14 = 0.0F;
     } else {

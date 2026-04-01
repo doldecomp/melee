@@ -12,31 +12,33 @@
 #include <baselib/object.h>
 
 typedef struct _MainMenuData {
-    MenuKind8 menu_kind;
-    MenuKind8 hovered_selection;
-    MenuState8 state;
-    HSD_JObj* tree[42];
-    HSD_Text* description;
+    /* 0x0000 */ MenuKind8 menu_kind;
+    /* 0x0001 */ MenuKind8 hovered_selection;
+    /* 0x0002 */ MenuState8 state;
+    /* 0x0003 */ u8 pad_3;
+    /* 0x0004 */ HSD_JObj* tree[42]; // 42 * 4 = 0xA8 bytes
+    /* 0x00AC */ HSD_Text* description;
 } MainMenuData;
 
 typedef struct _MainMenuPanelData {
-    MenuKind8 cur_menu;
-    MenuKind8 prev_menu;
-    u8 x3;
-    MenuState8 state;
+    /* 0x0000 */ MenuKind8 cur_menu;
+    /* 0x0001 */ MenuKind8 prev_menu;
+    /* 0x0002 */ u8 x2;
+    /* 0x0003 */ MenuState8 state;
 } MainMenuPanelData;
 
 typedef struct _MenuFlow {
-    MenuKind8 cur_menu;
-    MenuKind8 prev_menu;
-    u16 hovered_selection;
-    u8 confirmed_selection;
-    u8 pad_5[3];
-    u64 buttons;
-    u8 x10;
-    u8 entering_menu; ///< bool
-    u8 light_lerp_frames;
-    GXColor* light_color; ///< used for the main panel color
+    /* 0x0000 */ MenuKind8 cur_menu;
+    /* 0x0001 */ MenuKind8 prev_menu;
+    /* 0x0002 */ u16 hovered_selection;
+    /* 0x0004 */ u8 confirmed_selection;
+    /* 0x0005 */ u8 pad_5[3];
+    /* 0x0008 */ u64 buttons;
+    /* 0x0010 */ u8 x10;
+    /* 0x0011 */ u8 entering_menu; ///< bool
+    /* 0x0012 */ u8 light_lerp_frames;
+    /* 0x0013 */ u8 pad_13;
+    /* 0x0014 */ GXColor* light_color; ///< used for the main panel color
 } MenuFlow;
 
 typedef struct _MenuInputState {

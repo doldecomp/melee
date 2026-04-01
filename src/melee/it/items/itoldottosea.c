@@ -66,7 +66,7 @@ void itOldottosea_UnkMotion2_Phys(Item_GObj* gobj)
     }
 
     if (ip->xDD4_itemVar.oldottosea.x24 == jp_offset) {
-        ip->x40_vel.x = ip->facing_dir * ((f32*)attr->x0)[1];
+        ip->x40_vel.x = ip->facing_dir * ((f32*) attr->x0)[1];
     }
 
     ip->xDD4_itemVar.oldottosea.x24++;
@@ -79,8 +79,7 @@ void itOldottosea_UnkMotion2_Phys(Item_GObj* gobj)
         }
     }
 
-    it_8027C8D0(&ip->x40_vel, &ip->x378_itemColl.floor.normal,
-                ip->facing_dir);
+    it_8027C8D0(&ip->x40_vel, &ip->x378_itemColl.floor.normal, ip->facing_dir);
     it_8027C0A8(gobj, ip->facing_dir, 5.0f);
 }
 
