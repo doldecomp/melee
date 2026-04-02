@@ -51,16 +51,9 @@ extern f32 lbl_803D7058[];
 
 typedef struct {
     /* 0x00 */ u8 pad_00[0x24];
-    /* 0x24 */ f32 x24;
-    /* 0x28 */ f32 x28;
-    /* 0x2C */ f32 x2C;
-    /* 0x30 */ f32 x30;
-    /* 0x34 */ f32 x34;
-    /* 0x38 */ f32 x38;
-    /* 0x3C */ GObj_RenderFunc x3C;
-    /* 0x40 */ GObj_RenderFunc x40;
-    /* 0x44 */ GObj_RenderFunc x44;
-    /* 0x48 */ GObj_RenderFunc x48;
+    /* 0x24 */ Vec3 x24;
+    /* 0x30 */ Vec3 x30;
+    /* 0x3C */ GObj_RenderFunc x3C[4];
     /* 0x4C */ f32 x4C;
     /* 0x50 */ f32 x50;
     /* 0x54 */ f32 x54;
@@ -1350,16 +1343,12 @@ void fn_8017A078(s32 arg0)
     int mode;
     s16 val;
 
-    *(s32*) &eye.x = *(s32*) &config->x24;
-    *(s32*) &eye.y = *(s32*) &config->x28;
-    *(s32*) &eye.z = *(s32*) &config->x2C;
-    *(s32*) &interest.x = *(s32*) &config->x30;
-    *(s32*) &interest.y = *(s32*) &config->x34;
-    *(s32*) &interest.z = *(s32*) &config->x38;
-    *(s32*) &callbacks[0] = *(s32*) &config->x3C;
-    *(s32*) &callbacks[1] = *(s32*) &config->x40;
-    *(s32*) &callbacks[2] = *(s32*) &config->x44;
-    *(s32*) &callbacks[3] = *(s32*) &config->x48;
+    eye = config->x24;
+    interest = config->x30;
+    callbacks[0] = config->x3C[0];
+    callbacks[1] = config->x3C[1];
+    callbacks[2] = config->x3C[2];
+    callbacks[3] = config->x3C[3];
 
     gobj = GObj_Create(0x13, 0x14, 0);
     cobj = HSD_CObjLoadDesc(&lbl_803D7910);
