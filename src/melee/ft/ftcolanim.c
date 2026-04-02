@@ -82,9 +82,10 @@ void ftCo_800BFFAC(Fighter* fp)
 
 bool ftCo_800BFFD0(Fighter* fp, int arg1, int arg2)
 {
+    long tmp;
     if (arg1 >= 0x7B) {
-        s32 temp_r7 = arg1 - 0x7B;
-        if (lb_800144C8(&fp->x508, Fighter_804D6538, temp_r7, arg2)) {
+        arg1 -= (tmp = 0x7B);
+        if (lb_800144C8(&fp->x508, Fighter_804D6538, arg1, arg2)) {
             return true;
         }
     } else if (Fighter_804D653C[arg1].unk5 != 0) {
