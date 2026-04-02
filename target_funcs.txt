@@ -1,0 +1,12 @@
+file: src/melee/it/items/itarwinglaser.c
+funcs:
+- [x] itArwinglaser_UnkMotion2_Coll
+- [x] itArwinglaser_UnkMotion3_Coll
+- [x] itArwinglaser_UnkMotion2_Phys
+- [x] it_802E85F4                  
+- [x] itArwinglaser_UnkMotion3_Phys
+- [x] it_802E8420                  
+- [x] it_802E70BC                  
+- [x] itArwinglaser_UnkMotion5_Coll
+- [x] it_802E72E0                  
+- [x] it_802E7654                  

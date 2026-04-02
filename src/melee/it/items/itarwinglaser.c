@@ -61,17 +61,17 @@ static Vec2 it_803F8E48[] = {
 
 s32 it_802E70BC(Item_GObj* gobj)
 {
+    Item* ip;
+    s32 hit_count;
+    s32 i;
     int sp44;
     u32 sp40;
     Vec3 sp34;
     Vec3 sp28;
     Vec3 sp1C;
     Vec3 sp10;
-    Item* ip = GET_ITEM(gobj);
-    s32 hit_count;
-    s32 i;
-    Vec2* offsets;
 
+    ip = GET_ITEM(gobj);
     lb_8000B1CC(ip->xBBC_dynamicBoneTable->bones[4], NULL, &sp10);
     sp28 = sp10;
     sp1C = ip->xDD4_itemVar.arwinglaser.xE18;
@@ -84,13 +84,12 @@ s32 it_802E70BC(Item_GObj* gobj)
         return 1;
     }
     i = 0;
-    offsets = it_803F8E48;
     hit_count = 0;
     for (i = 0; i < 4; i++) {
         sp1C = sp10;
         sp28 = sp1C;
-        sp28.x += offsets->x;
-        sp28.y += offsets->y;
+        sp28.x += it_803F8E48[i].x;
+        sp28.y += it_803F8E48[i].y;
         sp1C.z = 0.0f;
         sp28.z = 0.0f;
         if (it_8026EA9C(gobj, &sp1C, &sp28, &sp34, &sp44, &sp40,
@@ -111,7 +110,6 @@ s32 it_802E70BC(Item_GObj* gobj)
         {
             hit_count++;
         }
-        offsets++;
     }
     if (hit_count != 0) {
         return 1;
