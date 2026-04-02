@@ -3,7 +3,6 @@
 #include "ft/fighter.h"
 #include "ft/ftaction.h"
 #include "ft/ftdata.h"
-#include "ft/types.h"
 #include "lb/lb_00F9.h"
 
 #include <melee/ft/chara/ftCommon/ftCo_HammerWait.h>
