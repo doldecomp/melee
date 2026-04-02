@@ -9,6 +9,7 @@
 #include "baselib/gobjuserdata.h"
 #include "baselib/jobj.h"
 #include "baselib/memory.h"
+#include "baselib/sislib.h"
 #include "gm/gmmain_lib.h"
 #include "gm/types.h"
 
@@ -193,7 +194,79 @@ void mn_80232660(HSD_GObj* gobj, HSD_JObj* jobj, u8 option)
 
 /// #mn_802327A4
 
-/// #mn_80232D4C
+void mn_80232D4C(HSD_GObj* gobj, u32 arg1, u32 arg2)
+{
+    MenuRulesPlusData* data = gobj->user_data;
+    u16 selection;
+    u8 confirmed;
+    u8 desc_idx;
+    HSD_Text* text;
+
+    if ((s32) arg1 != 0) {
+        selection = mn_804A04F0.hovered_selection;
+    } else {
+        selection = (u16) data->hovered_selection;
+    }
+
+    switch ((s32) data->state) {
+    case 4:
+        text = data->description;
+        if (text != NULL) {
+            HSD_SisLib_803A5CC4(text);
+            data->description = NULL;
+            return;
+        }
+    case 5:
+        return;
+    case 3:
+    case 1:
+        text = data->description;
+        if (text == NULL) {
+            confirmed = mn_804A04F0.confirmed_selection;
+            if (text != NULL) {
+                HSD_SisLib_803A5CC4(text);
+                data->description = NULL;
+            }
+            if ((s32) (u8) selection == 0 || (s32) (u8) selection == 5) {
+                desc_idx = mn_803ED2E8[(u8) selection][0];
+            } else {
+                desc_idx = mn_803ED2E8[(u8) selection][confirmed];
+            }
+            text = HSD_SisLib_803A5ACC(0, 1, -9.5f, 8.0f, 17.0f,
+                                       364.68332f, 76.77544f);
+            data->description = text;
+            text->font_size.x = 0.0521f;
+            text->font_size.y = 0.0521f;
+            HSD_SisLib_803A6368(text, (s32) desc_idx);
+            return;
+        }
+        break;
+    case 0:
+        if ((s32) arg1 != 0 ||
+            ((s32) arg2 != 0 && (u8) selection != 0 &&
+             (u8) selection != 5))
+        {
+            text = data->description;
+            confirmed = mn_804A04F0.confirmed_selection;
+            if (text != NULL) {
+                HSD_SisLib_803A5CC4(text);
+                data->description = NULL;
+            }
+            if ((s32) (u8) selection == 0 || (s32) (u8) selection == 5) {
+                desc_idx = mn_803ED2E8[(u8) selection][0];
+            } else {
+                desc_idx = mn_803ED2E8[(u8) selection][confirmed];
+            }
+            text = HSD_SisLib_803A5ACC(0, 1, -9.5f, 8.0f, 17.0f,
+                                       364.68332f, 76.77544f);
+            data->description = text;
+            text->font_size.x = 0.0521f;
+            text->font_size.y = 0.0521f;
+            HSD_SisLib_803A6368(text, (s32) desc_idx);
+        }
+        break;
+    }
+}
 
 /// #fn_80232F44
 
