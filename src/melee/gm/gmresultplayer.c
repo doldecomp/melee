@@ -6,6 +6,8 @@
 
 #include "cm/camera.h"
 
+#include "gm/forward.h"
+
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/controller.h>
@@ -51,13 +53,17 @@ extern CharScaleEntry lbl_803D6A18[];
 extern f32 lbl_803D7058[];
 
 typedef struct {
+    GObj_RenderFunc funcs[4];
+} ResultsRenderFuncs;
+
+typedef struct {
     /* 0x00 */ u8 pad_00[0x24];
     /* 0x24 */ Vec3 x24;
     /* 0x30 */ Vec3 x30;
-    /* 0x3C */ GObj_RenderFunc x3C[4];
+    /* 0x3C */ ResultsRenderFuncs x3C;
     /* 0x4C */ Vec3 x4C;
     /* 0x58 */ Vec3 x58;
-    /* 0x64 */ GObj_RenderFunc x64[4];
+    /* 0x64 */ ResultsRenderFuncs x64;
     /* 0x74 */ f32 x74;
     /* 0x78 */ f32 x78;
     /* 0x7C */ f32 x7C;
@@ -100,20 +106,21 @@ typedef struct {
                u8 x0_4 : 2;
                u8 x0_6 : 2;
     /* 0x01 */ u8 player_flags[4];
-    /* 0x05 */ u8 pad_05[0x09];
-    /* 0x0E */ u8 variant[4];
-    /* 0x12 */ u8 pad_12[0x02];
-    /* 0x14 */ s32 char_kind[4];
-    /* 0x24 */ u8 costume_override[4];
-    /* 0x28 */ MatchEnd match_end;
-    /* 0x22A4 */ u16 scissor_x[4];
-    /* 0x22AC */ u16 scissor_y[4];
-    /* 0x22B4 */ u16 dim_w1[4];
-    /* 0x22BC */ u16 dim_w2[4];
-    /* 0x22C4 */ u16 dim_h1[4];
-    /* 0x22CC */ u16 dim_h2[4];
-    /* 0x22D4 */ s16 score_tbl[4][4];
-    /* 0x22F4 */ u8 pad_22F4[0x2314 - 0x22F4];
+               /* 0x05 */ u8 pad_x5;
+               /* 0x06 */ u16 x6[4];
+               /* 0x0E */ u8 variant[4];
+               /* 0x12 */ u8 pad_12[0x02];
+               /* 0x14 */ s32 char_kind[4];
+               /* 0x24 */ u8 costume_override[4];
+               /* 0x28 */ MatchEnd match_end;
+               /* 0x22A4 */ u16 scissor_x[4];
+               /* 0x22AC */ u16 scissor_y[4];
+               /* 0x22B4 */ u32 dim_w1[2];
+               /* 0x22BC */ u32 dim_w2[2];
+               /* 0x22C4 */ u32 dim_h1[2];
+               /* 0x22CC */ u32 dim_h2[2];
+               /* 0x22D4 */ u32 score_tbl[4][2];
+               /* 0x22F4 */ u32 x22F4[4][2];
 } lbl_8046E3AC_t;
 
 extern lbl_8046E3AC_t lbl_8046E3AC;
@@ -1330,7 +1337,7 @@ void fn_8017A078(s32 arg0)
     ResultsPlayerConfig* config = &lbl_803B7B68;
     Vec3 eye;
     Vec3 interest;
-    GObj_RenderFunc callbacks[4];
+    ResultsRenderFuncs callbacks;
     HSD_GObj* gobj;
     HSD_CObj* cobj;
     int mode;
@@ -1338,10 +1345,7 @@ void fn_8017A078(s32 arg0)
 
     eye = config->x24;
     interest = config->x30;
-    callbacks[0] = config->x3C[0];
-    callbacks[1] = config->x3C[1];
-    callbacks[2] = config->x3C[2];
-    callbacks[3] = config->x3C[3];
+    callbacks = config->x3C;
 
     gobj = GObj_Create(0x13, 0x14, 0);
     cobj = HSD_CObjLoadDesc(&lbl_803D7910);
@@ -1377,7 +1381,7 @@ void fn_8017A078(s32 arg0)
 
     HSD_CObjSetEyePosition(cobj, &eye);
     HSD_CObjSetInterest(cobj, &interest);
-    GObj_SetupGXLinkMax(gobj, callbacks[arg0], 5);
+    GObj_SetupGXLinkMax(gobj, callbacks.funcs[arg0], 5);
 }
 
 HSD_GObj* fn_8017A318(s32 arg0)
@@ -1390,7 +1394,7 @@ HSD_GObj* fn_8017A318(s32 arg0)
     s32 scissor[2];
     Vec3 eye;
     Vec3 interest;
-    GObj_RenderFunc callbacks[4];
+    ResultsRenderFuncs callbacks;
     HSD_GObj* gobj;
     HSD_CObj* cobj;
     int slot;
@@ -1408,11 +1412,7 @@ HSD_GObj* fn_8017A318(s32 arg0)
 
     eye = config->x4C;
     interest = config->x58;
-    callbacks[0] = config->x64[0];
-    callbacks[1] = config->x64[1];
-    callbacks[2] = config->x64[2];
-    callbacks[3] = config->x64[3];
-
+    callbacks = config->x64;
     if (match_end->is_teams == 0) {
         slot = match_end->player_standings[arg0].is_big_loser;
     } else {
@@ -1479,7 +1479,7 @@ HSD_GObj* fn_8017A318(s32 arg0)
     HSD_CObjSetEyePosition(cobj, &eye);
     HSD_CObjSetInterest(cobj, &interest);
     HSD_CObjSetScissor(cobj, (Scissor*) scissor);
-    GObj_SetupGXLinkMax(gobj, callbacks[arg0], 0);
+    GObj_SetupGXLinkMax(gobj, callbacks.funcs[arg0], 0);
 
     if (slot == 0) {
         fn_8017A078(arg0);
@@ -1623,29 +1623,19 @@ void fn_8017A9B4(int slot)
 extern u32 lbl_803D7018[];
 extern u32 lbl_803D7038[];
 
-static s32 lbl_804D3FD0 = 0x500050;
-static s32 lbl_804D3FD4 = 0x460034;
-static s32 lbl_804D3FD8 = 0x6E0072;
-static s32 lbl_804D3FDC = 0x64004A;
-static s32 lbl_804D3FE0 = 0x340034;
-static s32 lbl_804D3FE4 = 0x340034;
-static s32 lbl_804D3FE8 = 0x4A004A;
-static s32 lbl_804D3FEC = 0x4A004A;
-static s32 lbl_804D3FF0 = 0xC0008;
-static s32 lbl_804D3FF4 = 0x60000;
-static s32 lbl_804D3FF8 = 0xE000E;
-static s32 lbl_804D3FFC = 0x60000;
+static s32 lbl_804D3FD0[4][2] = { { 0x500050, 0x460034 },
+                                  { 0x6E0072, 0x64004A },
+                                  { 0x340034, 0x340034 },
+                                  { 0x4A004A, 0x4A004A } };
 
 void fn_8017AA78(u8* arg0)
 {
     ResultsDisplayData* disp = &lbl_8046E1B0;
     u32* p5;
     u32* p7;
-    u8* p3;
-    u8* p4;
-    u8* p6;
-    u8* p8;
-    u8* p10;
+    lbl_8046E3AC_t* state;
+    MatchEnd* end;
+    struct MatchPlayerData* player_standings;
 
     memzero(disp->pad_000, sizeof(disp->pad_000));
     lbBgFlash_800208EC(6);
@@ -1666,9 +1656,8 @@ void fn_8017AA78(u8* arg0)
     lb_800121FC(&disp->shared_img, 0x64, 0x98, GX_TF_RGB5A3, 0);
 
     {
-        MatchEnd* me = fn_80174274();
-        u32* src = (u32*)((u8*)me - 8);
-        u32* dst = (u32*)((u8*)&disp->state.match_end - 8);
+        u32* src = (u32*) fn_80174274() - 2;
+        u32* dst = (u32*) &disp->state.char_kind[3];
         int n;
         for (n = 0x44F; n > 0; n--) {
             u32 a = *(src += 2);
@@ -1680,81 +1669,41 @@ void fn_8017AA78(u8* arg0)
     }
 
     disp->state.x0_0 = 1;
-    p5 = lbl_803D7038;
-    p8 = (u8*)&disp->state;
     disp->state.x0_4 = 0;
-    p7 = lbl_803D7018;
-    p3 = p8;
     disp->state.x0_6 = 0;
-    p4 = p8;
-    p6 = p8;
-    p10 = arg0;
+    p5 = lbl_803D7038;
+    state = &disp->state;
+    end = &state->match_end;
+    player_standings = end->player_standings;
+    p7 = lbl_803D7018;
 
     {
-        u32 a, b;
-        a = lbl_804D3FD0; b = lbl_804D3FD4;
-        *(u32*)disp->state.dim_w1 = a;
-        *(u32*)&disp->state.dim_w1[2] = b;
-        a = lbl_804D3FD8; b = lbl_804D3FDC;
-        *(u32*)disp->state.dim_h1 = a;
-        *(u32*)&disp->state.dim_h1[2] = b;
-        a = lbl_804D3FE0; b = lbl_804D3FE4;
-        *(u32*)disp->state.dim_w2 = a;
-        *(u32*)&disp->state.dim_w2[2] = b;
-        a = lbl_804D3FE8; b = lbl_804D3FEC;
-        *(u32*)disp->state.dim_h2 = a;
-        *(u32*)&disp->state.dim_h2[2] = b;
-        a = lbl_804D3FF0; b = lbl_804D3FF4;
-        *(u32*)disp->state.scissor_y = a;
-        *(u32*)&disp->state.scissor_y[2] = b;
-        a = lbl_804D3FF8; b = lbl_804D3FFC;
-        *(u32*)disp->state.scissor_x = a;
-        *(u32*)&disp->state.scissor_x[2] = b;
+        lbl_8046E3AC_t* state = &disp->state;
+        state->dim_w1[0] = lbl_804D3FD0[0][0];
+        state->dim_w1[1] = lbl_804D3FD0[0][1];
+        state->dim_h1[0] = lbl_804D3FD0[1][0];
+        state->dim_h1[1] = lbl_804D3FD0[1][1];
+        state->scissor_y[0] = lbl_804D3FD0[2][0];
+        state->scissor_y[1] = lbl_804D3FD0[2][1];
+        state->scissor_x[0] = lbl_804D3FD0[3][0];
+        state->scissor_x[1] = lbl_804D3FD0[3][1];
     }
 
     {
-        int i = 0;
-        for (; i < 2; i++) {
-            u32 a, b;
-
-            p8[1] = 0;
-            p8[0x24] = p10[0];
+        int i;
+        for (i = 0; i < 4; i++) {
+            state->player_flags[i] = 0;
+            state->costume_override[i] = arg0[i];
             if (disp->state.match_end.result == 7) {
-                u8 team = (u8)p3[0x87];
-                p3[0x85] = 1;
-                disp->state.match_end.team_standings[team].is_big_loser = 1;
+                player_standings[i].is_big_loser = 1;
+                disp->state.match_end.team_standings[player_standings[i].team]
+                    .is_big_loser = 1;
             }
-            *(u16*)(p4 + 6) = 0;
-            p3 += 0xA8;
-            p4 += 2;
-            a = p5[0]; b = p5[1]; p5 += 2;
-            *(u32*)(p6 + 0x22D4) = a;
-            *(u32*)(p6 + 0x22D8) = b;
-            a = p7[0]; b = p7[1]; p7 += 2;
-            *(u32*)(p6 + 0x22F4) = a;
-            *(u32*)(p6 + 0x22F8) = b;
-            p6 += 8;
-
-            p8[2] = 0;
-            p8[0x25] = *++p10;
-            p8 += 1;
-            if (disp->state.match_end.result == 7) {
-                u8 team = (u8)p3[0x87];
-                p3[0x85] = 1;
-                disp->state.match_end.team_standings[team].is_big_loser = 1;
-            }
-            *(u16*)(p4 + 6) = 0;
-            p8 += 1;
-            p3 += 0xA8;
-            a = p5[0]; b = p5[1]; p5 += 2;
-            p4 += 2;
-            *(u32*)(p6 + 0x22D4) = a;
-            p10 += 1;
-            *(u32*)(p6 + 0x22D8) = b;
-            a = p7[0]; b = p7[1]; p7 += 2;
-            *(u32*)(p6 + 0x22F4) = a;
-            *(u32*)(p6 + 0x22F8) = b;
-            p6 += 8;
+            state->x6[i] = 0;
+            state->score_tbl[i][0] = p5[0 + i * 2];
+            state->score_tbl[i][1] = p5[1 + i * 2];
+            state->x22F4[i][0] = p7[i * 2];
+            state->x22F4[i][1] = p7[1 + i * 2];
         }
     }
 }
