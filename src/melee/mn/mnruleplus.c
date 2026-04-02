@@ -5,6 +5,7 @@
 #include "baselib/gobj.h"
 #include "baselib/gobjgxlink.h"
 #include "baselib/gobjobject.h"
+#include "baselib/gobjplink.h"
 #include "baselib/gobjproc.h"
 #include "baselib/gobjuserdata.h"
 #include "baselib/jobj.h"
@@ -268,7 +269,123 @@ void mn_80232D4C(HSD_GObj* gobj, u32 arg1, u32 arg2)
     }
 }
 
-/// #fn_80232F44
+void fn_80232F44(HSD_GObj* gobj)
+{
+    MenuRulesPlusData* data = gobj->user_data;
+    AnimLoopSettings* anim_settings;
+    s32 menu_changed = 0;
+    u32 selection_changed = 0;
+    u32 value_changed = 0;
+    MenuRulesPlusData* data2;
+    u8 val;
+    u8 state;
+    HSD_JObj* jobj;
+
+    state = data->state;
+    if ((state == 0 || state == 1 || state == 3) &&
+        (u8) data->menu_kind != (u8) mn_804A04F0.cur_menu)
+    {
+        if ((u8) mn_804A04F0.entering_menu != 0) {
+            data->state = 4;
+        } else {
+            data->state = 2;
+        }
+        state = data->state;
+        jobj = data->xC[2];
+        switch ((s32) state) {
+        case 1:
+            anim_settings = &mn_803ED294[3];
+            break;
+        case 2:
+            anim_settings = &mn_803ED294[5];
+            break;
+        case 3:
+            anim_settings = &mn_803ED294[4];
+            break;
+        case 4:
+            anim_settings = &mn_803ED294[6];
+            break;
+        }
+        HSD_JObjReqAnim(jobj, anim_settings->start_frame);
+        HSD_JObjAnim(jobj);
+        state = data->state;
+        if (state == 0 || state == 1 || state == 3) {
+            menu_changed = 1;
+            selection_changed = 1;
+            value_changed = 1;
+        }
+    }
+
+    state = data->state;
+    if (state != 0) {
+        jobj = data->xC[2];
+        switch ((s32) state) {
+        case 1:
+            anim_settings = &mn_803ED294[3];
+            break;
+        case 2:
+            anim_settings = &mn_803ED294[5];
+            break;
+        case 3:
+            anim_settings = &mn_803ED294[4];
+            break;
+        case 4:
+            anim_settings = &mn_803ED294[6];
+            break;
+        }
+        if (mn_8022F298(jobj) >= anim_settings->end_frame) {
+            state = data->state;
+            switch ((s32) state) {
+            case 3:
+            case 1:
+                data->state = 0;
+                break;
+            case 2:
+            case 4:
+                HSD_GObjPLink_80390228(gobj);
+                return;
+            }
+        }
+        HSD_JObjAnim(jobj);
+    }
+    state = data->state;
+    if (state == 0 || state == 1 || state == 3) {
+        if ((s32) data->hovered_selection !=
+            (s32) mn_804A04F0.hovered_selection)
+        {
+            selection_changed = 1;
+        }
+        if ((&data->rule_values.time_limit)
+                [mn_804A04F0.hovered_selection] !=
+            (u8) mn_804A04F0.confirmed_selection)
+        {
+            value_changed = 1;
+        }
+    }
+    mn_802327A4(gobj, selection_changed, value_changed);
+    mn_80232D4C(gobj, selection_changed, value_changed);
+    if (menu_changed != 0) {
+        data->menu_kind = (u8) mn_804A04F0.cur_menu;
+    }
+    if ((s32) selection_changed != 0) {
+        data->hovered_selection = (u8) mn_804A04F0.hovered_selection;
+    }
+    if ((s32) value_changed != 0) {
+        (&data->rule_values.time_limit)[data->hovered_selection] =
+            (u8) mn_804A04F0.confirmed_selection;
+        data2 = gobj->user_data;
+        val = data2->rule_values.time_limit;
+        gmMainLib_8015CC34()->stock_time_limit = val;
+        val = data2->rule_values.friendly_fire;
+        gmMainLib_8015CC34()->friendly_fire = val;
+        val = data2->rule_values.pause;
+        gmMainLib_8015CC34()->pause = val;
+        val = data2->rule_values.score;
+        gmMainLib_8015CC34()->score_display = val;
+        val = data2->rule_values.sd_penalty;
+        gmMainLib_8015CC34()->unk_xc = val;
+    }
+}
 
 /// HSD_GObj* mn_80233218(enum MenuState state)
 /// {
