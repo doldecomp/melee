@@ -584,7 +584,7 @@ bool it_802E8420(Item_GObj* gobj)
 bool it_802E85F4(Item_GObj* gobj)
 {
     Vec3 sp10;
-    Item* ip = GET_ITEM(gobj);
+    Item* ip = (Item*) gobj->user_data;
     HSD_JObj* jobj = GET_JOBJ(gobj);
 
     ip->xDD4_itemVar.arwinglaser.xE3C = 1;
@@ -594,11 +594,14 @@ bool it_802E85F4(Item_GObj* gobj)
     ip->xDD4_itemVar.arwinglaser.xE24 = ip->pos;
     ip->xDD4_itemVar.arwinglaser.xE18 = ip->xDD4_itemVar.arwinglaser.xE24;
     switch (ip->xDD4_itemVar.arwinglaser.xE38) {
-    case 0:
     case 2:
+    case 0:
         ip->facing_dir = (ip->x40_vel.x < 0.0f) ? -1.0f : 1.0f;
         HSD_JObjSetRotationY(jobj,
             (f32) (1.5707963267948966 * (f64) ip->facing_dir));
+        break;
+    case 1:
+    case 3:
         break;
     }
     return false;
