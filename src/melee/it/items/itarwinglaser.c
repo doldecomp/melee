@@ -500,14 +500,14 @@ static bool itArwinglaser_UnkMotion5_Coll(Item_GObj* gobj)
 {
     Vec3 trans;
     Vec3 scale_vec;
+    Item* ip;
     Quaternion rot;
-    Item* ip = GET_ITEM(gobj);
-    Item_GObj* parent_gobj = ip->xDD4_itemVar.arwinglaser.xDF4;
     Item* parent_ip;
-    PAD_STACK(4);
+    ip = GET_ITEM(gobj);
 
-    if (parent_gobj != NULL) {
-        parent_ip = GET_ITEM(parent_gobj);
+    if (((Item*) gobj->user_data)->xDD4_itemVar.arwinglaser.xDF4 != NULL) {
+        parent_ip =
+            GET_ITEM(((Item*) gobj->user_data)->xDD4_itemVar.arwinglaser.xDF4);
         if (parent_ip->xDD4_itemVar.arwinglaser.xE40 == gobj ||
             parent_ip->xDD4_itemVar.arwinglaser.xE44 == gobj)
         {
