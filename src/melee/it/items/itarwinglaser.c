@@ -390,12 +390,13 @@ static void itArwinglaser_UnkMotion2_Phys(Item_GObj* gobj)
 
 static void itArwinglaser_UnkMotion3_Phys(Item_GObj* gobj)
 {
+    u32 pad;
     Vec3 scale_vec;
     Vec3 corneria_offset;
     HSD_JObj* jobj = GET_JOBJ(gobj);
-    Item* ip = GET_ITEM(gobj);
-    ArwingLaserAttr* attrs = ip->xC4_article_data->x4_specialAttributes;
-
+    ArwingLaserAttr* attrs =
+        ((Item*) gobj->user_data)->xC4_article_data->x4_specialAttributes;
+    Item* ip = gobj->user_data;
     switch (ip->xDD4_itemVar.arwinglaser.xE38) {
     case 2:
         break;
@@ -416,9 +417,8 @@ static void itArwinglaser_UnkMotion3_Phys(Item_GObj* gobj)
         scale_vec.y = s;
         scale_vec.x = s;
         {
-            f32 ratio = attrs->x8;
-            scale_vec.y *= ratio;
-            scale_vec.z *= ratio;
+            scale_vec.y *= attrs->x8;
+            scale_vec.z *= attrs->x8;
         }
     }
     HSD_JObjSetScale(jobj, &scale_vec);
