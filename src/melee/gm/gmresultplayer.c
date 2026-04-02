@@ -1112,8 +1112,6 @@ int fn_80179854(void)
     return lookup;
 }
 
-/// #fn_80179990
-
 extern s32 ftLib_800876B4(HSD_GObj*);
 
 void fn_80179990(HSD_GObj* arg0, int arg1, int arg2)
@@ -1340,8 +1338,6 @@ void fn_8017A004(void)
     GObj_SetupGXLink(gobj, HSD_GObj_LObjCallback, 0, 0);
 }
 
-/// #fn_8017A078
-
 void fn_8017A078(s32 arg0)
 {
     ResultsDisplayData* disp = &lbl_8046E1B0;
@@ -1401,8 +1397,6 @@ void fn_8017A078(s32 arg0)
     HSD_CObjSetInterest(cobj, &interest);
     GObj_SetupGXLinkMax(gobj, callbacks[arg0], 5);
 }
-
-/// #fn_8017A318
 
 HSD_GObj* fn_8017A318(s32 arg0)
 {
@@ -1648,8 +1642,6 @@ void fn_8017A9B4(int slot)
     desc->image_ptr = NULL;
     lb_800121FC(desc, disp->state.dim_w2[lookup], disp->state.dim_h2[lookup], 5, 0);
 }
-
-/// #fn_8017AA78
 
 extern u32 lbl_803D7018[];
 extern u32 lbl_803D7038[];
