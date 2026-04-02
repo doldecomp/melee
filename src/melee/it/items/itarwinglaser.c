@@ -434,6 +434,7 @@ static void itArwinglaser_UnkMotion3_Phys(Item_GObj* gobj)
 
 static bool itArwinglaser_UnkMotion2_Coll(Item_GObj* gobj)
 {
+    Item* ip2;
     Vec3 sp40;
     Vec3 prev_pos;
     Vec3 curr_pos;
@@ -441,7 +442,6 @@ static bool itArwinglaser_UnkMotion2_Coll(Item_GObj* gobj)
     u32 sp18;
     int sp14;
     Item* ip = GET_ITEM(gobj);
-    Item* ip2;
     int hit;
 
     lb_8000B1CC(ip->xBBC_dynamicBoneTable->bones[4], NULL, &sp40);
