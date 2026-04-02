@@ -102,25 +102,27 @@ extern int lbl_8046E38C[4];
 extern HSD_JObj* lbl_8046E39C[4];
 
 typedef struct {
-    /* 0x00 */ u8 x0_0 : 4;
-               u8 x0_4 : 2;
-               u8 x0_6 : 2;
+    /* 0x00:0 */ u8 x0_0 : 4;
+    /* 0x00:4 */ u8 x0_4 : 2;
+    /* 0x00:6 */ u8 x0_6 : 2;
+
     /* 0x01 */ u8 player_flags[4];
-               /* 0x05 */ u8 pad_x5;
-               /* 0x06 */ u16 x6[4];
-               /* 0x0E */ u8 variant[4];
-               /* 0x12 */ u8 pad_12[0x02];
-               /* 0x14 */ s32 char_kind[4];
-               /* 0x24 */ u8 costume_override[4];
-               /* 0x28 */ MatchEnd match_end;
-               /* 0x22A4 */ u16 scissor_x[4];
-               /* 0x22AC */ u16 scissor_y[4];
-               /* 0x22B4 */ u32 dim_w1[2];
-               /* 0x22BC */ u32 dim_w2[2];
-               /* 0x22C4 */ u32 dim_h1[2];
-               /* 0x22CC */ u32 dim_h2[2];
-               /* 0x22D4 */ u32 score_tbl[4][2];
-               /* 0x22F4 */ u32 x22F4[4][2];
+    /* 0x05 */ u8 pad_x5;
+    /* 0x06 */ u16 x6[4];
+    /* 0x0E */ u8 variant[4];
+    /* 0x12 */ u8 pad_12[0x02];
+    /* 0x14 */ s32 char_kind[4];
+    /* 0x24 */ u8 costume_override[4];
+    /* 0x28 */ MatchEnd match_end;
+
+    /* 0x22A4 */ u16 scissor_x[4];
+    /* 0x22AC */ u16 scissor_y[4];
+    /* 0x22B4 */ u32 dim_w1[2];
+    /* 0x22BC */ u32 dim_w2[2];
+    /* 0x22C4 */ u32 dim_h1[2];
+    /* 0x22CC */ u32 dim_h2[2];
+    /* 0x22D4 */ u32 score_tbl[4][2];
+    /* 0x22F4 */ u32 x22F4[4][2];
 } lbl_8046E3AC_t;
 
 extern lbl_8046E3AC_t lbl_8046E3AC;
