@@ -2,6 +2,11 @@
 
 #include <melee/mn/types.h>
 
+extern u8 mnCharSel_804D50C8[4];
+extern u8 mnCharSel_804D50CC[4];
+extern u8 mnCharSel_804D50D0[8];
+extern u8 mnCharSel_804D50D8[8];
+extern u8 mnCharSel_804D50E0[3];
 extern u8 mnCharSel_804D5100;
 
 static CSSData* volatile mnCharSel_804D6CB0;
@@ -9,6 +14,7 @@ static void* mnCharSel_804D6CB4;
 static HSD_JObj* mnCharSel_804D6CC0;
 static HSD_JObj* mnCharSel_804D6CC4;
 static HSD_JObj* mnCharSel_804D6CC8;
+static HSD_JObj* mnCharSel_804D6CCC;
 static HSD_Archive* mnCharSel_804D6CD0;
 static HSD_Archive* mnCharSel_804D6CD4;
 static void* mnCharSel_804D6CD8;
@@ -20,9 +26,11 @@ static u32 mnCharSel_804D6CEC;
 static s8 mnCharSel_804D6CF0;
 static s8 mnCharSel_804D6CF1;
 static u8 mnCharSel_804D6CF2;
+static u8 mnCharSel_804D6CF3;
 static s8 mnCharSel_804D6CF4;
 static u8 mnCharSel_804D6CF5; ///< number of (open? valid?) CSS doors
 static u8 mnCharSel_804D6CF6;
+static u8 mnCharSel_804D6CF7;
 static u8 mnCharSel_804D6CF8;
 static s8 mnCharSel_804D6CF9;
 
@@ -227,6 +235,7 @@ static CSSDoorsData mnCharSel_803F0DFC = {
     0x01,
     0,
     0,
+    0,
     0.0F,
     -10.9,
     -4.2,
@@ -238,6 +247,7 @@ static CSSDoorsData mnCharSel_803F0DFC = {
 
 static struct CSSDoorsData2 data2 = {
     { 0x35, 0x39, 0x36, 0x38, 0x37 },
+    0, 0, 0,
     -2.2,
     3.7,
     13.7,
