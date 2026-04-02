@@ -1,32 +1,21 @@
 #include "mngallery.h"
 
-#include <placeholder.h>
-#include <platform.h>
-
+#include "baselib/debug.h"
 #include "mn/inlines.h"
 
-#include <baselib/cobj.h>
 #include <baselib/controller.h>
 #include <baselib/displayfunc.h>
 #include <baselib/dobj.h>
-#include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjobject.h>
 #include <baselib/gobjplink.h>
 #include <baselib/gobjproc.h>
 #include <baselib/gobjuserdata.h>
-#include <baselib/jobj.h>
-#include <baselib/memory.h>
-#include <baselib/mobj.h>
-#include <baselib/sislib.h>
 #include <baselib/sobjlib.h>
-#include <baselib/tobj.h>
 #include <melee/gm/gmhowto.h>
 #include <melee/gm/gmmain_lib.h>
 #include <melee/lb/lbarchive.h>
-#include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbmthp.h>
-#include <melee/mn/mnmain.h>
 
 static void* mnGallery_804D6C88;
 static void* mnGallery_804D6C8C;
@@ -35,6 +24,16 @@ void mnGallery_80258940(void)
 {
     mnGallery_804D6C8C = HSD_MemAlloc(0x271000);
 }
+
+typedef struct mnGallery_t {
+    HSD_Joint* x0;
+    HSD_AnimJoint* x4;
+    HSD_MatAnimJoint* x8;
+    HSD_ShapeAnimJoint* xC;
+} mnGallery_t;
+
+static mnGallery_t mnGallery1;
+static mnGallery_t mnGallery2;
 
 void mnGallery_8025896C(HSD_GObj* gobj, int render_pass)
 {
@@ -57,19 +56,12 @@ void mnGallery_8025896C(HSD_GObj* gobj, int render_pass)
         HSD_SObjLib_803A54EC(gobj, render_pass);
     }
 }
-
 #pragma push
 #pragma opt_propagation off
 void mnGallery_80258A08(HSD_GObj* gobj, u16 width, u16 height, u32 priority)
 {
-    extern Vec3 mnGallery_803B8538;
-    extern Vec3 mnGallery_803B8544;
-    extern f32 mnGallery_804DC360;
-    extern f32 mnGallery_804DC364;
-    extern f64 mnGallery_804DC368;
-    extern f64 mnGallery_804DC370;
     HSD_CObj* cobj;
-    f32 zero = mnGallery_804DC360;
+    f32 zero = 0.0f;
     f32 far;
     f32 near_val = zero;
     f32 top;
@@ -78,12 +70,10 @@ void mnGallery_80258A08(HSD_GObj* gobj, u16 width, u16 height, u32 priority)
     f32 right;
     HSD_RectS16 viewport;
     Scissor scissor;
-    Vec3 eye;
-    Vec3 interest;
+    Vec3 eye = { 0, 0, 1 };
+    Vec3 interest = { 0, 0, 0 };
 
-    eye = mnGallery_803B8538;
-    interest = mnGallery_803B8544;
-    far = mnGallery_804DC364;
+    far = 2.0f;
     bottom = (f32) (s32) - (s32) height;
     right = (f32) width;
     top = zero;
@@ -115,12 +105,6 @@ void mnGallery_80258A08(HSD_GObj* gobj, u16 width, u16 height, u32 priority)
 
 void mnGallery_80258BC4(void* arg)
 {
-    extern char mnGallery_803F0570[];
-    extern char mnGallery_803F0580[];
-    extern f32 mnGallery_804DC358;
-    extern f32 mnGallery_804DC35C;
-    extern f32 mnGallery_804DC360;
-
     struct {
         u8 unk0;
         u8 unk1;
@@ -150,32 +134,30 @@ void mnGallery_80258BC4(void* arg)
     if (data->unk2 == 0) {
         HSD_SObj* sobj = lbMthp_8001F624(gobj, 0x1C0, 0x150);
         data->sobj = sobj;
-        sobj->x10 = mnGallery_804DC358;
-        sobj->x14 = mnGallery_804DC35C;
+        sobj->x10 = 0.0f;
+        sobj->x14 = 72.0f;
     } else if (data->unk2 == 1) {
         HSD_SObj* sobj;
-        f32 zero;
         sobj = lbMthp_8001F624(gobj, 0x280, 0x1E0);
         data->sobj = sobj;
-        zero = mnGallery_804DC360;
-        sobj->x10 = zero;
-        sobj->x14 = zero;
+        sobj->x10 = 0.0f;
+        sobj->x14 = 0.0f;
     }
     switch (mode) {
     case 0:
         lbAudioAx_800236DC();
         lbAudioAx_80023F28(0x52);
         lbAudioAx_80024E50(true);
-        lbMthp_8001F410(mnGallery_803F0570, 0, (int) mnGallery_804D6C8C,
-                        0x271000, 0);
+        lbMthp_8001F410("MvOmake15.mth", 0, (int) mnGallery_804D6C8C, 0x271000,
+                        0);
         lbAudioAx_80024E50(false);
         break;
     case 1:
         lbAudioAx_800236DC();
         lbAudioAx_80023F28(0x24);
         lbAudioAx_80024E50(true);
-        lbMthp_8001F410(mnGallery_803F0580, gm_801ACC94(),
-                        (int) mnGallery_804D6C8C, 0x271000, 0);
+        lbMthp_8001F410("MvHowTo.mth", gm_801ACC94(), (int) mnGallery_804D6C8C,
+                        0x271000, 0);
         lbAudioAx_80024E50(false);
         break;
     }
@@ -399,10 +381,6 @@ void fn_802590C4(HSD_GObj* gobj)
 
 void mnGallery_802591BC(HSD_GObj* gobj)
 {
-    extern f32 mnGallery_804DC378;
-    extern f32 mnGallery_804DC360;
-    extern f64 mnGallery_804DC368;
-
     struct mnGallery_inner {
         u8 pad[0x14];
         u8 unk14;
@@ -441,18 +419,14 @@ void mnGallery_802591BC(HSD_GObj* gobj)
     }
 
     if (inner->unk15 == index) {
-        HSD_MObjReqAnim(HSD_JObjGetChild(jobj)->u.dobj->mobj,
-                        mnGallery_804DC378);
+        HSD_MObjReqAnim(HSD_JObjGetChild(jobj)->u.dobj->mobj, 0.0f);
         HSD_MObjAnim(HSD_JObjGetChild(jobj)->u.dobj->mobj);
-        HSD_MObjReqAnim(HSD_JObjGetChild(jobj)->u.dobj->next->mobj,
-                        mnGallery_804DC378);
+        HSD_MObjReqAnim(HSD_JObjGetChild(jobj)->u.dobj->next->mobj, 0.0f);
         HSD_MObjAnim(HSD_JObjGetChild(jobj)->u.dobj->next->mobj);
     } else {
-        HSD_MObjReqAnim(HSD_JObjGetChild(jobj)->u.dobj->mobj,
-                        mnGallery_804DC360);
+        HSD_MObjReqAnim(HSD_JObjGetChild(jobj)->u.dobj->mobj, 0.0f);
         HSD_MObjAnim(HSD_JObjGetChild(jobj)->u.dobj->mobj);
-        HSD_MObjReqAnim(HSD_JObjGetChild(jobj)->u.dobj->next->mobj,
-                        mnGallery_804DC360);
+        HSD_MObjReqAnim(HSD_JObjGetChild(jobj)->u.dobj->next->mobj, 0.0f);
         HSD_MObjAnim(HSD_JObjGetChild(jobj)->u.dobj->next->mobj);
     }
 
@@ -501,8 +475,6 @@ void mnGallery_80259604(void* arg)
 
 void mnGallery_8025963C(void)
 {
-    extern char mnGallery_803F0570[];
-    extern f32 mnGallery_804DC360;
     extern void* mnGallery_804A0BA0[];
     extern void* mnGallery_804A0BB0[];
 
@@ -515,15 +487,14 @@ void mnGallery_8025963C(void)
         s32 index;
     };
 
-    char* base = mnGallery_803F0570;
     void** arr = mnGallery_804A0BA0;
     HSD_GObj* gobj;
     HSD_GObjProc* proc;
-    struct mnGallery_child_ud* child_data;
+    struct mnGallery_child_ud* cursor_user_data;
     s32 i;
     HSD_GObj* child_gobj;
     HSD_JObj* jobj;
-    struct mnGallery_data* data;
+    struct mnGallery_data* user_data;
 
     gobj = GObj_Create(6, 7, 0x80);
     mnGallery_804D6C88 = gobj;
@@ -531,38 +502,34 @@ void mnGallery_8025963C(void)
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4, 0x80);
     HSD_JObjAddAnimAll(jobj, arr[1], arr[2], arr[3]);
-    HSD_JObjReqAnimAll(jobj, mnGallery_804DC360);
+    HSD_JObjReqAnimAll(jobj, 0.0f);
     HSD_JObjAnimAll(jobj);
 
-    data = HSD_MemAlloc(0x24);
-    if (data == NULL) {
-        OSReport(base + 0x1C);
-        __assert(base + 0x34, 0x214, base + 0x40);
-    }
-    mnGallery_80259604(data);
-    GObj_InitUserData(gobj, 0, HSD_Free, data);
+    user_data = HSD_MemAlloc(0x24);
+    HSD_ASSERTREPORT(0x214, user_data, "Can't get user_data.\n");
+
+    mnGallery_80259604(user_data);
+    GObj_InitUserData(gobj, 0, HSD_Free, user_data);
     proc = HSD_GObj_SetupProc(gobj, fn_802590C4, 0);
     proc->flags_3 = HSD_GObj_804D783C;
 
     arr = mnGallery_804A0BB0;
     for (i = 0; i < 2; i++) {
         child_gobj = GObj_Create(6, 7, 0x80);
-        data->gobjs[i] = child_gobj;
+        user_data->gobjs[i] = child_gobj;
         jobj = HSD_JObjLoadJoint(arr[0]);
         HSD_GObjObject_80390A70(child_gobj, HSD_GObj_804D7849, jobj);
         GObj_SetupGXLink(child_gobj, HSD_GObj_JObjCallback, 4, 0x80);
         HSD_JObjAddAnimAll(jobj, arr[1], arr[2], arr[3]);
-        HSD_JObjReqAnimAll(jobj, mnGallery_804DC360);
+        HSD_JObjReqAnimAll(jobj, 0.0f);
         HSD_JObjAnimAll(jobj);
 
-        child_data = HSD_MemAlloc(8);
-        if (child_data == NULL) {
-            OSReport(base + 0x1C);
-            __assert(base + 0x34, 0x22C, base + 0x4C);
-        }
-        child_data->parent_gobj = gobj;
-        child_data->index = i;
-        GObj_InitUserData(child_gobj, 0, HSD_Free, child_data);
+        cursor_user_data = HSD_MemAlloc(8);
+        HSD_ASSERTREPORT(0x22c, cursor_user_data, "Can't get user_data.\n");
+
+        cursor_user_data->parent_gobj = gobj;
+        cursor_user_data->index = i;
+        GObj_InitUserData(child_gobj, 0, HSD_Free, cursor_user_data);
         proc = HSD_GObj_SetupProc(child_gobj, mnGallery_802591BC, 0);
         proc->flags_3 = HSD_GObj_804D783C;
         mnGallery_802591BC(child_gobj);
@@ -571,11 +538,6 @@ void mnGallery_8025963C(void)
 
 void mnGallery_80259868(void)
 {
-    extern char mnGallery_803F0570[];
-    extern void* mnGallery_804A0BA0[];
-
-    void** arr = mnGallery_804A0BA0;
-    char* base = mnGallery_803F0570;
     HSD_Archive* archive;
     void** new_var;
     HSD_GObj* gobj;
@@ -591,19 +553,23 @@ void mnGallery_80259868(void)
         void* unkC;
         HSD_Text* text;
     }* inner;
-    PAD_STACK(0x38);
+    PAD_STACK(0x30);
 
-    new_var = arr + 6;
     mn_804D6BC8.cooldown = 5;
     mn_804A04F0.prev_menu = mn_804A04F0.cur_menu;
     mn_804A04F0.cur_menu = 0x1A;
     mn_804A04F0.hovered_selection = 0;
     archive = mn_804D6BB8;
 
-    lbArchive_LoadSections(archive, arr, base + 0x60, arr + 1, base + 0x78,
-                           arr + 2, base + 0x94, arr + 3, base + 0xB4, arr + 4,
-                           base + 0xD8, arr + 5, base + 0xF4, new_var,
-                           base + 0x114, arr + 7, base + 0x138, 0);
+    lbArchive_LoadSections(archive, (void*) &mnGallery1,
+                           "MenMainConGa_Top_joint", &mnGallery1.x4,
+                           "MenMainConGa_Top_animjoint", &mnGallery1.x8,
+                           "MenMainConGa_Top_matanim_joint", &mnGallery1.xC,
+                           "MenMainConGa_Top_shapeanim_joint", &mnGallery2.x0,
+                           "MenMainCursorGa_Top_joint", &mnGallery2.x4,
+                           "MenMainCursorGa_Top_animjoint", &mnGallery2.x8,
+                           "MenMainCursorGa_Top_matanim_joint", &mnGallery2.xC,
+                           "MenMainCursorGa_Top_shapeanim_joint", 0);
 
     gobj = GObj_Create(0, 1, 0x80);
     proc = HSD_GObj_SetupProc(gobj, (HSD_GObjEvent) fn_80258ED0, 0);
