@@ -545,8 +545,9 @@ bool it_802E8418(Item_GObj* gobj)
 
 bool it_802E8420(Item_GObj* gobj)
 {
+    u8 pad;
     Vec3 sp10;
-    Item* ip = GET_ITEM(gobj);
+    Item* ip = (Item*) gobj->user_data;
     HSD_JObj* jobj = GET_JOBJ(gobj);
 
     if (!ip->xDCC_flag.b1) {
