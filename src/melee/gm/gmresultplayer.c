@@ -1413,7 +1413,7 @@ HSD_GObj* fn_8017A318(s32 arg0)
     s32 kind_data;
     int vi;
 
-    PAD_STACK(0x10);
+    PAD_STACK(0x8);
 
     fn_801795D4();
     fn_801796F0(arg0);
