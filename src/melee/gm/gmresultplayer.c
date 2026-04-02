@@ -1,6 +1,7 @@
 #include "gmresultplayer.h"
 
 #include "gm_unsplit.h"
+#include "placeholder.h"
 
 #include "cm/camera.h"
 
@@ -15,13 +16,14 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/mobj.h>
 #include <sysdolphin/baselib/mtx.h>
+#include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/tobj.h>
 #include <melee/ef/efasync.h>
 #include <melee/ef/eflib.h>
 #include <melee/ft/ftdemo.h>
-#include <melee/gm/gmresult.h>
 #include <melee/gm/gm_1601.h>
 #include <melee/gm/gm_1A45.h>
+#include <melee/gm/gmresult.h>
 #include <melee/gm/types.h>
 #include <melee/gr/ground.h>
 #include <melee/gr/stage.h>
@@ -36,7 +38,6 @@
 #include <melee/mp/mpcoll.h>
 #include <melee/pl/player.h>
 #include <melee/sc/types.h>
-#include <sysdolphin/baselib/random.h>
 
 extern ResultsData lbl_8046DBE8;
 
@@ -1097,14 +1098,13 @@ int fn_80179854(void)
         if (match_end->is_teams == 0) {
             lookup = match_end->player_standings[i].is_big_loser;
         } else {
-            int idx = match_end->player_standings[i].team;
-            lookup = match_end->team_standings[idx].is_big_loser;
+            lookup =
+                match_end->team_standings[match_end->player_standings[i].team]
+                    .is_big_loser;
         }
 
         if (match_end->player_standings[i].slot_type != 3 && lookup != 0) {
-            HSD_JObj* jobj = GET_JOBJ(disp->gobjs[i]);
-            HSD_JObjSetTranslateX(jobj, -300.0f);
-            lookup = 1;
+            HSD_JObjSetTranslateX(GET_JOBJ(disp->gobjs[i]), -300.0f);
             disp->state.x0_6 = 1;
         }
     }
