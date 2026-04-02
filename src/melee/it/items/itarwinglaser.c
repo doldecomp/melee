@@ -350,11 +350,14 @@ static void itArwinglaser_UnkMotion3_Anim(Item_GObj* gobj)
 
 static void itArwinglaser_UnkMotion2_Phys(Item_GObj* gobj)
 {
+    float f0;
     Vec3 scale_vec;
     HSD_JObj* jobj = GET_JOBJ(gobj);
     Item* ip = GET_ITEM(gobj);
     ArwingLaserAttr* attrs = ip->xC4_article_data->x4_specialAttributes;
-    PAD_STACK(16);
+    float f1;
+    float f2;
+    float f3;
 
     switch (ip->xDD4_itemVar.arwinglaser.xE38) {
     case 0:
