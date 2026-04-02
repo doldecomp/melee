@@ -1,6 +1,7 @@
 #include "gmresultplayer.h"
 
 #include "gm_unsplit.h"
+#include "math.h"
 #include "placeholder.h"
 
 #include "cm/camera.h"
@@ -428,9 +429,9 @@ void fn_80178050(HSD_GObj* arg0)
             }
         }
         if ((s32) lbl_804D3FC8 != 0) {
-            ((u8*) data)[3] = 0x14;
+            data->x3 = 0x14;
         } else {
-            ((u8*) data)[3] = 0x0A;
+            data->x3 = 0x0A;
         }
     }
 
@@ -643,11 +644,7 @@ void fn_801785B0(HSD_GObj* gobj)
         node = child;
         {
             u8 raw = fn_80174274()->xC;
-            if ((s8) raw < 0) {
-                frame_val = -(s8) raw;
-            } else {
-                frame_val = (s8) raw;
-            }
+            frame_val = ABS(raw);
         }
         fv = (f32) frame_val;
         HSD_ForeachAnim(node, JOBJ_TYPE, ALL_TYPE_MASK, HSD_AObjSetRate,
@@ -672,11 +669,7 @@ void fn_801785B0(HSD_GObj* gobj)
         node = child;
         {
             u8 raw = fn_80174274()->xC;
-            if ((s8) raw < 0) {
-                frame_val = -(s8) raw;
-            } else {
-                frame_val = (s8) raw;
-            }
+            frame_val = ABS(raw);
         }
         fv = (f32) frame_val;
         HSD_ForeachAnim(node, JOBJ_TYPE, ALL_TYPE_MASK, HSD_AObjSetRate,
@@ -701,11 +694,7 @@ void fn_801785B0(HSD_GObj* gobj)
         node = child;
         {
             u8 raw = fn_80174274()->xC;
-            if ((s8) raw < 0) {
-                frame_val = -(s8) raw;
-            } else {
-                frame_val = (s8) raw;
-            }
+            frame_val = ABS(raw);
         }
         fv = (f32) frame_val;
         HSD_ForeachAnim(node, JOBJ_TYPE, ALL_TYPE_MASK, HSD_AObjSetRate,
@@ -730,11 +719,7 @@ void fn_801785B0(HSD_GObj* gobj)
         node = child;
         {
             u8 raw = fn_80174274()->xC;
-            if ((s8) raw < 0) {
-                frame_val = -(s8) raw;
-            } else {
-                frame_val = (s8) raw;
-            }
+            frame_val = ABS(raw);
         }
         fv = (f32) frame_val;
         HSD_ForeachAnim(node, JOBJ_TYPE, ALL_TYPE_MASK, HSD_AObjSetRate,
@@ -1016,8 +1001,8 @@ void fn_80179350(HSD_GObj* arg0)
             fn_80178050(arg0);
             break;
         case 4:
-            if ((u8) data->pad_03[0] != 0) {
-                data->pad_03[0] = (char)((u8) data->pad_03[0] - 1);
+            if ((u8) data->x3 != 0) {
+                data->x3 = (char) ((u8) data->x3 - 1);
             } else {
                 gm_801A4B60();
             }

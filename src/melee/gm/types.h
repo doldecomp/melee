@@ -919,7 +919,7 @@ struct ResultsData {
 
     /* +01 */ u8 x1; ///< some sort of state
     /* +02 */ u8 num_pages;
-    /* +03 */ char pad_03[0x4 - 0x3];
+    /* +03 */ u8 x3;
     /* +04 */ u8 x4; ///< winner?
     /* +05 */ u8 x5; ///< team winner?
     /* +06 */ u8 x6; ///< also winner?
