@@ -1,8 +1,7 @@
 #include "mnruleplus.h"
 
+#include "placeholder.h"
 #include "platform.h"
-
-#include <dolphin/os.h>
 
 #include "baselib/debug.h"
 #include "baselib/gobj.h"
@@ -17,7 +16,6 @@
 #include "gm/gm_1A3F.h"
 #include "gm/gmmain_lib.h"
 #include "gm/types.h"
-
 #include "lb/lb_00F9.h"
 #include "lb/lbaudio_ax.h"
 
@@ -27,6 +25,8 @@
 #include "mn/mnmainrule.h"
 #include "mn/mnstagesw.h"
 #include "sc/types.h"
+
+#include <dolphin/os.h>
 
 extern StaticModelDesc MenMainConRl_Top;
 extern StaticModelDesc MenMainCursorRl_Top;
@@ -657,9 +657,10 @@ void fn_80232F44(HSD_GObj* gobj)
     u32 selection_changed = 0;
     u32 value_changed = 0;
     MenuRulesPlusData* data2;
-    u8 val;
     u8 state;
     HSD_JObj* jobj;
+    HSD_JObj* jobj2;
+    PAD_STACK(0x18);
 
     state = data->state;
     if ((state == 0 || state == 1 || state == 3) &&
@@ -672,6 +673,7 @@ void fn_80232F44(HSD_GObj* gobj)
         }
         state = data->state;
         jobj = data->xC[2];
+        jobj2 = jobj;
         switch ((s32) state) {
         case 1:
             anim_settings = &mn_803ED294[3];
@@ -686,8 +688,8 @@ void fn_80232F44(HSD_GObj* gobj)
             anim_settings = &mn_803ED294[6];
             break;
         }
-        HSD_JObjReqAnim(jobj, anim_settings->start_frame);
-        HSD_JObjAnim(jobj);
+        HSD_JObjReqAnim(jobj2, anim_settings->start_frame);
+        HSD_JObjAnim(jobj2);
         state = data->state;
         if (state == 0 || state == 1 || state == 3) {
             menu_changed = 1;
@@ -754,16 +756,11 @@ void fn_80232F44(HSD_GObj* gobj)
         data->rule_values.values[data->hovered_selection] =
             (u8) mn_804A04F0.confirmed_selection;
         data2 = gobj->user_data;
-        val = data2->rule_values.time_limit;
-        gmMainLib_8015CC34()->stock_time_limit = val;
-        val = data2->rule_values.friendly_fire;
-        gmMainLib_8015CC34()->friendly_fire = val;
-        val = data2->rule_values.pause;
-        gmMainLib_8015CC34()->pause = val;
-        val = data2->rule_values.score;
-        gmMainLib_8015CC34()->score_display = val;
-        val = data2->rule_values.sd_penalty;
-        gmMainLib_8015CC34()->unk_xc = val;
+        gmMainLib_8015CC34()->stock_time_limit = data2->rule_values.time_limit;
+        gmMainLib_8015CC34()->friendly_fire = data2->rule_values.friendly_fire;
+        gmMainLib_8015CC34()->pause = data2->rule_values.pause;
+        gmMainLib_8015CC34()->score_display = data2->rule_values.score;
+        gmMainLib_8015CC34()->unk_xc = data2->rule_values.sd_penalty;
     }
 }
 
