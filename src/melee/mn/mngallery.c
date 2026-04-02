@@ -340,30 +340,38 @@ void fn_80258ED0(HSD_GObj* gobj)
         }
     }
 }
+struct fn_802590C4_data {
+    u8 pad[0x14];
+    u8 state;
+    u8 pad2[3];
+    s32 frame;
+    HSD_GObj* gobjs[2];
+};
 
-#pragma push
-#pragma optimization_level 2
-#pragma opt_strength_reduction on
-#pragma opt_propagation off
-void fn_802590C4(HSD_GObj* gobj)
+inline void* inline_fn(HSD_GObj* gobj)
 {
-    extern f64 mnGallery_804DC368;
+    return gobj->user_data;
+}
 
-    struct fn_802590C4_data {
-        u8 pad[0x14];
-        u8 state;
-        u8 pad2[3];
-        s32 frame;
-        HSD_GObj* gobjs[2];
-    };
+inline void fn_802590C4_inline(HSD_GObj* gobj)
+{
     struct fn_802590C4_data* store;
     s32 i;
+    struct fn_802590C4_data* tmp;
+    store = (tmp = inline_fn(gobj));
+    HSD_GObjPLink_80390228(gobj);
+    for (i = 0; i < 2; i++) {
+        HSD_GObjPLink_80390228((tmp->gobjs)[i]);
+        tmp->gobjs[i] = NULL;
+    };
+}
+
+void fn_802590C4(HSD_GObj* gobj)
+{
     struct fn_802590C4_data* data;
-    s32 zero;
-    char* read_base;
     HSD_JObj* jobj;
 
-    data = gobj->user_data;
+    data = inline_fn(gobj);
     jobj = gobj->hsd_obj;
 
     if (data->state == 3) {
@@ -381,24 +389,13 @@ void fn_802590C4(HSD_GObj* gobj)
             data->frame = data->frame + 1;
         } else {
             data->state = 4;
-            store = gobj->user_data;
-            HSD_GObjPLink_80390228(gobj);
-            read_base = (char*) store;
-            i = 0;
-            zero = i;
-            do {
-                HSD_GObjPLink_80390228(*(HSD_GObj**) (read_base + 0x1C));
-                store->gobjs[i] = (HSD_GObj*) zero;
-                i++;
-                read_base += 4;
-            } while (i < 2);
+            fn_802590C4_inline(gobj);
         }
     }
 
     HSD_JObjReqAnimAll(jobj, (f32) data->frame);
     HSD_JObjAnimAll(jobj);
 }
-#pragma pop
 
 void mnGallery_802591BC(HSD_GObj* gobj)
 {
