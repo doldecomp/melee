@@ -77,17 +77,11 @@ static JObjIndices mn_804DBE48 = { 0x02030506 };
 static inline void mnRulePlus_SaveRules(void)
 {
     MenuRulesPlusData* data = mn_804D6BE0->user_data;
-    u8 val;
-    val = data->rule_values.time_limit;
-    gmMainLib_8015CC34()->stock_time_limit = val;
-    val = data->rule_values.friendly_fire;
-    gmMainLib_8015CC34()->friendly_fire = val;
-    val = data->rule_values.pause;
-    gmMainLib_8015CC34()->pause = val;
-    val = data->rule_values.score;
-    gmMainLib_8015CC34()->score_display = val;
-    val = data->rule_values.sd_penalty;
-    gmMainLib_8015CC34()->unk_xc = val;
+    gmMainLib_8015CC34()->stock_time_limit = data->rule_values.time_limit;
+    gmMainLib_8015CC34()->friendly_fire = data->rule_values.friendly_fire;
+    gmMainLib_8015CC34()->pause = data->rule_values.pause;
+    gmMainLib_8015CC34()->score_display = data->rule_values.score;
+    gmMainLib_8015CC34()->unk_xc = data->rule_values.sd_penalty;
 }
 
 /// @brief Check if a given option is visible (not hidden by game mode).
