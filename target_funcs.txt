@@ -1,7 +1,7 @@
 file: src/melee/mn/mnruleplus.c
 funcs:
 - [x] mn_80232660        
-- [ ] mn_802324E4        
+- [x] mn_802324E4        
 - [ ] mn_80232D4C        
 - [ ] fn_80232F44        
 - [ ] fn_8023201C        
