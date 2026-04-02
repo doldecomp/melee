@@ -220,18 +220,25 @@ typedef struct {
 } itFoxLaser_ItemVars;
 
 typedef struct {
-    /* padding from 0xDD4 to 0xDF4 */ char _pad0[0xDF4 - 0xDD4];
-    /* item+0xDF4 */ Item_GObj* xDF4;
-    /* padding from 0xDF8 to 0xE18 */ char _pad1[0xE18 - 0xDF8];
-    /* item+0xE18 */ Vec3 xE18;
-    /* item+0xE24 */ Vec3 xE24;
-    /* item+0xE30 */ s16 xE30;
-    /* item+0xE32 */ s16 xE32_pad;
-    /* item+0xE34 */ s32 xE34_pad;
-    /* item+0xE38 */ s32 xE38;
-    /* item+0xE3C */ s32 xE3C_pad;
-    /* item+0xE40 */ Item_GObj* xE40;
-    /* item+0xE44 */ Item_GObj* xE44;
+    /* 0x00 ip+0xDD4 */ char _pad0[0xDF4 - 0xDD4];
+    /* 0x20 ip+0xDF4 */ Item_GObj* xDF4;
+    /* 0x24 ip+0xDF8 */ HSD_JObj* xDF8;
+    /* 0x28 ip+0xDFC */ f32 xDFC;
+    /* 0x2C ip+0xE00 */ f32 xE00;
+    /* 0x30 ip+0xE04 */ f32 xE04;
+    /* 0x34 ip+0xE08 */ f32 xE08;
+    /* 0x38 ip+0xE0C */ Vec3 xE0C;
+    /* 0x44 ip+0xE18 */ Vec3 xE18;
+    /* 0x50 ip+0xE24 */ Vec3 xE24;
+    /* 0x5C ip+0xE30 */ s16 xE30;
+    /* 0x5E ip+0xE32 */ s16 xE32_pad;
+    /* 0x60 ip+0xE34 */ f32 xE34;
+    /* 0x64 ip+0xE38 */ s32 xE38;
+    /* 0x68 ip+0xE3C */ s32 xE3C;
+    /* 0x6C ip+0xE40 */ Item_GObj* xE40;
+    /* 0x70 ip+0xE44 */ Item_GObj* xE44;
+    /* 0x74 ip+0xE48 */ s32 xE48;
+    /* 0x78 ip+0xE4C */ s32 xE4C;
 } itArwingLaser_ItemVars;
 
 typedef struct FoxLaserAttr {
