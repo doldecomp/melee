@@ -74,6 +74,8 @@ static s32 mn_804DBE48 = 0x02030506;
 
 /// #fn_8023201C
 
+/// #mn_80232458 already matched above
+
 AnimLoopSettings* mn_80232458(u8 option, u8 value, u8 direction)
 {
     u8 count;
@@ -95,7 +97,53 @@ AnimLoopSettings* mn_80232458(u8 option, u8 value, u8 direction)
 
 /// #mn_802324E4
 
-/// #mn_80232660
+void mn_80232660(HSD_GObj* gobj, HSD_JObj* jobj, u8 option)
+{
+    extern AnimLoopSettings mn_803ED294[];
+    extern AnimLoopSettings mn_803ED270[];
+    AnimLoopSettings* settings;
+    AnimLoopSettings* p294;
+    AnimLoopSettings* p270;
+    f32 frame;
+
+    if ((s32) option != 5 && (s32) option < 5 && (s32) option != 0 &&
+        (s32) option >= 0)
+    {
+        frame = mn_8022F298(jobj);
+        p294 = mn_803ED294;
+        p270 = mn_803ED270;
+
+        do {
+            settings = p294;
+            if (p294->start_frame <= frame && frame <= p294->end_frame) {
+                break;
+            }
+            settings = p270;
+            if (p270->start_frame <= frame && frame <= p270->end_frame) {
+                break;
+            }
+            p294++;
+            p270++;
+            settings = p294;
+            if (p294->start_frame <= frame && frame <= p294->end_frame) {
+                break;
+            }
+            settings = p270;
+            if (p270->start_frame <= frame && frame <= p270->end_frame) {
+                break;
+            }
+            p294++;
+            p270++;
+            settings = p294;
+            if (p294->start_frame <= frame && frame <= p294->end_frame) {
+                break;
+            }
+            settings = p270;
+        } while (0);
+
+        mn_8022ED6C(jobj, settings);
+    }
+}
 
 /// #mn_802327A4
 
