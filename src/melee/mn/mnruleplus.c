@@ -11,12 +11,17 @@
 #include "baselib/jobj.h"
 #include "baselib/memory.h"
 #include "baselib/sislib.h"
+#include "gm/gm_1A3F.h"
 #include "gm/gmmain_lib.h"
 #include "gm/types.h"
+
+#include "lb/lbaudio_ax.h"
 
 #include "mn/forward.h"
 
 #include "mn/mnmain.h"
+#include "mn/mnmainrule.h"
+#include "mn/mnstagesw.h"
 #include "sc/types.h"
 
 extern StaticModelDesc MenMainConRl_Top;
@@ -77,7 +82,188 @@ static s32 mn_804DBE40 = 0x02030506;
 static f32 mn_804DBE44 = 0.0f;
 static s32 mn_804DBE48 = 0x02030506;
 
-/// #fn_8023201C
+void fn_8023201C(HSD_GObj* gobj)
+{
+    MenuRulesPlusData* data = mn_804D6BE0->user_data;
+    u32 buttons;
+
+    buttons = mn_80229624(4);
+    mn_804A04F0.buttons = buttons;
+
+    if (buttons & 0x200) {
+        if ((u16) mn_804A04F0.hovered_selection == 5) {
+            lbAudioAx_80024030(1);
+            mn_804A04F0.entering_menu = 1;
+            {
+                MenuRulesPlusData* data2 = mn_804D6BE0->user_data;
+                u8 val;
+                val = data2->rule_values.time_limit;
+                gmMainLib_8015CC34()->stock_time_limit = val;
+                val = data2->rule_values.friendly_fire;
+                gmMainLib_8015CC34()->friendly_fire = val;
+                val = data2->rule_values.pause;
+                gmMainLib_8015CC34()->pause = val;
+                val = data2->rule_values.score;
+                gmMainLib_8015CC34()->score_display = val;
+                val = data2->rule_values.sd_penalty;
+                gmMainLib_8015CC34()->unk_xc = val;
+            }
+            mn_804D6BC8.cooldown = 5;
+            mnStageSw_80237410();
+            HSD_GObjPLink_80390228(gobj);
+        }
+    } else {
+        if (buttons & 0x100) {
+            lbAudioAx_80024030(1);
+            if ((s32) gm_801A4310() == 1) {
+                MenuRulesPlusData* data2 = mn_804D6BE0->user_data;
+                u8 val;
+                val = data2->rule_values.time_limit;
+                gmMainLib_8015CC34()->stock_time_limit = val;
+                val = data2->rule_values.friendly_fire;
+                gmMainLib_8015CC34()->friendly_fire = val;
+                val = data2->rule_values.pause;
+                gmMainLib_8015CC34()->pause = val;
+                val = data2->rule_values.score;
+                gmMainLib_8015CC34()->score_display = val;
+                val = data2->rule_values.sd_penalty;
+                gmMainLib_8015CC34()->unk_xc = val;
+                mn_80229860(2);
+                return;
+            }
+            {
+                MenuRulesPlusData* data2 = mn_804D6BE0->user_data;
+                u8 val;
+                val = data2->rule_values.time_limit;
+                gmMainLib_8015CC34()->stock_time_limit = val;
+                val = data2->rule_values.friendly_fire;
+                gmMainLib_8015CC34()->friendly_fire = val;
+                val = data2->rule_values.pause;
+                gmMainLib_8015CC34()->pause = val;
+                val = data2->rule_values.score;
+                gmMainLib_8015CC34()->score_display = val;
+                val = data2->rule_values.sd_penalty;
+                gmMainLib_8015CC34()->unk_xc = val;
+            }
+            mn_8022F4CC();
+            return;
+        }
+        if (buttons & 0x20) {
+            lbAudioAx_80024030(0);
+            mn_804A04F0.entering_menu = 0;
+            {
+                MenuRulesPlusData* data2 = mn_804D6BE0->user_data;
+                u8 val;
+                val = data2->rule_values.time_limit;
+                gmMainLib_8015CC34()->stock_time_limit = val;
+                val = data2->rule_values.friendly_fire;
+                gmMainLib_8015CC34()->friendly_fire = val;
+                val = data2->rule_values.pause;
+                gmMainLib_8015CC34()->pause = val;
+                val = data2->rule_values.score;
+                gmMainLib_8015CC34()->score_display = val;
+                val = data2->rule_values.sd_penalty;
+                gmMainLib_8015CC34()->unk_xc = val;
+            }
+            mn_804D6BC8.cooldown = 5;
+            mn_8023164C();
+            HSD_GObjPLink_80390228(gobj);
+            return;
+        }
+        if (buttons & 1) {
+            s32 visible;
+            u8 sel;
+            lbAudioAx_80024030(2);
+            do {
+                if ((s32) mn_804A04F0.hovered_selection == 0) {
+                    mn_804A04F0.hovered_selection = 5;
+                } else {
+                    mn_804A04F0.hovered_selection -= 1;
+                }
+                sel = (u8) mn_804A04F0.hovered_selection;
+                if (gm_801A4310() == 0x1B && sel == 1) {
+                    visible = 0;
+                } else if (sel == 3) {
+                    if (gmMainLib_8015EE0C() != 0) {
+                        visible = 1;
+                    } else {
+                        visible = 0;
+                    }
+                } else if (sel == 5) {
+                    if (gmMainLib_8015EE44() != 0) {
+                        visible = 1;
+                    } else {
+                        visible = 0;
+                    }
+                } else {
+                    visible = 1;
+                }
+            } while (visible == 0);
+            mn_804A04F0.confirmed_selection =
+                (&data->rule_values.time_limit)
+                    [mn_804A04F0.hovered_selection];
+            return;
+        }
+        if (buttons & 2) {
+            s32 visible;
+            u8 sel;
+            lbAudioAx_80024030(2);
+            do {
+                if ((s32) mn_804A04F0.hovered_selection == 5) {
+                    mn_804A04F0.hovered_selection = 0;
+                } else {
+                    mn_804A04F0.hovered_selection += 1;
+                }
+                sel = (u8) mn_804A04F0.hovered_selection;
+                if (gm_801A4310() == 0x1B && sel == 1) {
+                    visible = 0;
+                } else if (sel == 3) {
+                    if (gmMainLib_8015EE0C() != 0) {
+                        visible = 1;
+                    } else {
+                        visible = 0;
+                    }
+                } else if (sel == 5) {
+                    if (gmMainLib_8015EE44() != 0) {
+                        visible = 1;
+                    } else {
+                        visible = 0;
+                    }
+                } else {
+                    visible = 1;
+                }
+            } while (visible == 0);
+            mn_804A04F0.confirmed_selection =
+                (&data->rule_values.time_limit)
+                    [mn_804A04F0.hovered_selection];
+            return;
+        }
+        if ((u16) mn_804A04F0.hovered_selection != 5) {
+            u8* bounds = mn_803ED2E8[mn_804A04F0.hovered_selection];
+            if (buttons & 4) {
+                lbAudioAx_80024030(2);
+                if ((u8) mn_804A04F0.confirmed_selection >
+                    (u8) bounds[0])
+                {
+                    mn_804A04F0.confirmed_selection -= 1;
+                    return;
+                }
+                mn_804A04F0.confirmed_selection = bounds[1];
+                return;
+            }
+            if (buttons & 8) {
+                lbAudioAx_80024030(2);
+                if ((u8) mn_804A04F0.confirmed_selection <
+                    (u8) bounds[1])
+                {
+                    mn_804A04F0.confirmed_selection += 1;
+                    return;
+                }
+                mn_804A04F0.confirmed_selection = bounds[0];
+            }
+        }
+    }
+}
 
 /// #mn_80232458 already matched above
 
