@@ -54,16 +54,9 @@ typedef struct {
     /* 0x24 */ Vec3 x24;
     /* 0x30 */ Vec3 x30;
     /* 0x3C */ GObj_RenderFunc x3C[4];
-    /* 0x4C */ f32 x4C;
-    /* 0x50 */ f32 x50;
-    /* 0x54 */ f32 x54;
-    /* 0x58 */ f32 x58;
-    /* 0x5C */ f32 x5C;
-    /* 0x60 */ f32 x60;
-    /* 0x64 */ GObj_RenderFunc x64;
-    /* 0x68 */ GObj_RenderFunc x68;
-    /* 0x6C */ GObj_RenderFunc x6C;
-    /* 0x70 */ GObj_RenderFunc x70;
+    /* 0x4C */ Vec3 x4C;
+    /* 0x58 */ Vec3 x58;
+    /* 0x64 */ GObj_RenderFunc x64[4];
     /* 0x74 */ f32 x74;
     /* 0x78 */ f32 x78;
     /* 0x7C */ f32 x7C;
@@ -78,7 +71,22 @@ typedef struct {
 
 extern ResultsPlayerConfig lbl_803B7B68;
 extern HSD_CObjDesc lbl_803D7910;
-extern u8 lbl_803D6A08[];
+
+typedef struct {
+    /* 0x00 */ f32 x_off[4];   // indexed by variant (clamped to 3)
+    /* 0x10 */ f32 y_off[4];   // indexed by variant (clamped to 3)
+    /* 0x20 */ f32 z_scale[4]; // indexed by variant (clamped to 3)
+} CameraKindParams;            // size = 0x30
+
+typedef struct {
+    /* 0x000 */ u8 pad[0x10];
+    /* 0x010 */ CameraKindParams kind[(0x6D0 - 0x10) / 0x30];
+    /* 0x6D0 */ f32 slot_x_off[4];
+    /* 0x6E0 */ f32 slot_y_off[4];
+} CameraKindData;
+
+extern CameraKindData lbl_803D6A08;
+
 extern s32 lbl_804DA3F0;
 extern s32 lbl_804DA3F4;
 
@@ -1390,8 +1398,8 @@ void fn_8017A078(s32 arg0)
 HSD_GObj* fn_8017A318(s32 arg0)
 {
     ResultsDisplayData* disp = &lbl_8046E1B0;
-    u8* config = (u8*) &lbl_803B7B68;
-    u8* data = lbl_803D6A08;
+    ResultsPlayerConfig* config = &lbl_803B7B68;
+    CameraKindData* data = &lbl_803D6A08;
     MatchEnd* match_end = &disp->state.match_end;
     s32 _pad[2];
     s32 scissor[2];
@@ -1402,7 +1410,7 @@ HSD_GObj* fn_8017A318(s32 arg0)
     HSD_CObj* cobj;
     int slot;
     u8 variant;
-    s32 kind_off;
+    s32 kind_data;
     int vi;
 
     PAD_STACK(0x10);
@@ -1413,16 +1421,12 @@ HSD_GObj* fn_8017A318(s32 arg0)
     scissor[0] = lbl_804DA3F0;
     scissor[1] = lbl_804DA3F4;
 
-    *(s32*) &eye.x = *(s32*) (config + 0x4C);
-    *(s32*) &eye.y = *(s32*) (config + 0x50);
-    *(s32*) &eye.z = *(s32*) (config + 0x54);
-    *(s32*) &interest.x = *(s32*) (config + 0x58);
-    *(s32*) &interest.y = *(s32*) (config + 0x5C);
-    *(s32*) &interest.z = *(s32*) (config + 0x60);
-    *(s32*) &callbacks[0] = *(s32*) (config + 0x64);
-    *(s32*) &callbacks[1] = *(s32*) (config + 0x68);
-    *(s32*) &callbacks[2] = *(s32*) (config + 0x6C);
-    *(s32*) &callbacks[3] = *(s32*) (config + 0x70);
+    eye = config->x4C;
+    interest = config->x58;
+    callbacks[0] = config->x64[0];
+    callbacks[1] = config->x64[1];
+    callbacks[2] = config->x64[2];
+    callbacks[3] = config->x64[3];
 
     if (match_end->is_teams == 0) {
         slot = match_end->player_standings[arg0].is_big_loser;
@@ -1432,7 +1436,7 @@ HSD_GObj* fn_8017A318(s32 arg0)
     }
 
     gobj = GObj_Create(0x13, 0x14, 0);
-    cobj = HSD_CObjLoadDesc((HSD_CObjDesc*) (data + 0xF08));
+    cobj = HSD_CObjLoadDesc(&lbl_803D7910);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
 
     {
@@ -1444,30 +1448,31 @@ HSD_GObj* fn_8017A318(s32 arg0)
     variant = disp->state.variant[arg0];
 
     vi = ((s32) variant <= 2) ? variant : 3;
-    kind_off = disp->state.char_kind[arg0] * 0x30;
-    eye.y += ((f32*) (data + kind_off + 0x20))[vi];
+
+    kind_data = disp->state.char_kind[arg0];
+    eye.y += data->kind[kind_data].y_off[vi];
 
     vi = ((s32) variant <= 2) ? variant : 3;
-    interest.y += ((f32*) (data + kind_off + 0x20))[vi];
+    interest.y += data->kind[kind_data].y_off[vi];
 
     vi = ((s32) variant <= 2) ? variant : 3;
-    eye.x += ((f32*) (data + kind_off + 0x10))[vi];
+    eye.x += data->kind[kind_data].x_off[vi];
 
     {
         f32 temp_f0;
         vi = ((s32) variant <= 2) ? variant : 3;
-        temp_f0 = interest.x + ((f32*) (data + kind_off + 0x10))[vi];
+        temp_f0 =
+            interest.x + data->kind[disp->state.char_kind[arg0]].x_off[vi];
 
         {
-            f32* slot_data = (f32*) (data + kind_off + slot * 4);
             f32 x_off, y_off;
 
             interest.x = temp_f0;
-            x_off = *(f32*) ((u8*) slot_data + 0x6D0);
+            x_off = data->slot_x_off[slot];
             eye.x += x_off;
             interest.x += x_off;
 
-            y_off = *(f32*) ((u8*) slot_data + 0x6E0);
+            y_off = data->slot_y_off[slot];
             eye.y += y_off;
             interest.y += y_off;
         }
@@ -1478,14 +1483,12 @@ HSD_GObj* fn_8017A318(s32 arg0)
     }
 
     vi = ((s32) variant <= 2) ? variant : 3;
-    if ((1.0f - ((f32*) (data + kind_off + 0x30))[vi]) < 0.0f) {
+    if ((1.0f - data->kind[kind_data].z_scale[vi]) < 0.0f) {
         vi = ((s32) variant <= 2) ? variant : 3;
-        eye.z += 100.0f *
-                 (1.0f - ((f32*) (data + kind_off + 0x30))[vi]);
+        eye.z += 100.0f * (1.0f - data->kind[kind_data].z_scale[vi]);
     } else {
         vi = ((s32) variant <= 2) ? variant : 3;
-        eye.z += 300.0f *
-                 (1.0f - ((f32*) (data + kind_off + 0x30))[vi]);
+        eye.z += 300.0f * (1.0f - data->kind[kind_data].z_scale[vi]);
     }
 
     HSD_CObjSetEyePosition(cobj, &eye);
