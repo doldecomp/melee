@@ -51,16 +51,14 @@ static mn_803ED1D0_t mn_803ED1D0 = {
     { 0.0f, 99.0f, 60.0f },
 };
 
-AnimLoopSettings mn_803ED270[3] = {
-    { 0.0f, 0.0f, 0.0f },
-    { 0.0f, 0.0f, 0.0f },
-    { 0.0f, 0.0f, 0.0f },
-};
-
+AnimLoopSettings mn_803ED270[3] = { { 0.0f, 3.0f, -0.1f },
+                                    { 20.0f, 23.0f, -0.1f },
+                                    { 40.0f, 43.0f, -0.1f } };
 AnimLoopSettings mn_803ED294[7] = {
-    { 0.0f, 0.0f, 0.0f }, { 0.0f, 0.0f, 0.0f }, { 0.0f, 0.0f, 0.0f },
-    { 0.0f, 0.0f, 0.0f }, { 0.0f, 0.0f, 0.0f }, { 0.0f, 0.0f, 0.0f },
-    { 0.0f, 0.0f, 0.0f },
+    { 100.0f, 103.0f, -0.1f }, { 120.0f, 123.0f, -0.1f },
+    { 140.0f, 143.0f, -0.1f }, { 30.0f, 49.0f, -0.1f },
+    { 70.0f, 89.0f, -0.1f },   { 90.0f, 109.0f, -0.1f },
+    { 50.0f, 69.0f, -0.1f },
 };
 
 u8 mn_803ED2E8[16][2] = { 0 };
@@ -314,51 +312,48 @@ void mn_802324E4(u8 time_limit, MenuRulesPlusData* data)
     HSD_JObjAnimAll(jobj);
 }
 
-void mn_80232660(HSD_GObj* gobj, HSD_JObj* jobj, u8 option)
+inline void mn_80232660_inline(HSD_JObj* jobj)
 {
-    extern AnimLoopSettings mn_803ED294[];
-    extern AnimLoopSettings mn_803ED270[];
     AnimLoopSettings* settings;
     AnimLoopSettings* p294;
     AnimLoopSettings* p270;
     f32 frame;
+    s32 i;
 
-    if ((s32) option != 5 && (s32) option < 5 && (s32) option != 0 &&
-        (s32) option >= 0)
-    {
-        frame = mn_8022F298(jobj);
-        p294 = mn_803ED294;
-        p270 = mn_803ED270;
+    frame = mn_8022F298(jobj);
 
-        do {
-            settings = p294;
-            if (p294->start_frame <= frame && frame <= p294->end_frame) {
-                break;
-            }
-            settings = p270;
-            if (p270->start_frame <= frame && frame <= p270->end_frame) {
-                break;
-            }
-            p294++;
-            p270++;
-            settings = p294;
-            if (p294->start_frame <= frame && frame <= p294->end_frame) {
-                break;
-            }
-            settings = p270;
-            if (p270->start_frame <= frame && frame <= p270->end_frame) {
-                break;
-            }
-            p294++;
-            p270++;
-            settings = p294;
-            if (p294->start_frame <= frame && frame <= p294->end_frame) {
-                break;
-            }
-            settings = p270;
-        } while (0);
+    p294 = mn_803ED294;
+    p270 = mn_803ED270;
 
-        mn_8022ED6C(jobj, settings);
+    for (i = 0; i < 3; i++) {
+        settings = p294;
+        if (p294->start_frame <= frame && frame <= p294->end_frame) {
+            break;
+        }
+        settings = p270;
+        if (p270->start_frame <= frame && frame <= p270->end_frame) {
+            break;
+        }
+        p294++;
+        p270++;
+    }
+    mn_8022ED6C(jobj, settings);
+}
+
+void mn_80232660(HSD_GObj* gobj, HSD_JObj* jobj, u8 option)
+{
+    PAD_STACK(8);
+
+    switch (option) {
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+        mn_80232660_inline(jobj);
+    case 0:
+        return;
+    case 5:
+        return;
     }
 }
 
