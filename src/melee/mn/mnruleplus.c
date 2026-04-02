@@ -1,21 +1,32 @@
 #include "mnruleplus.h"
 
+#include "placeholder.h"
 #include "platform.h"
 
+#include "baselib/debug.h"
 #include "baselib/gobj.h"
 #include "baselib/gobjgxlink.h"
 #include "baselib/gobjobject.h"
+#include "baselib/gobjplink.h"
 #include "baselib/gobjproc.h"
 #include "baselib/gobjuserdata.h"
 #include "baselib/jobj.h"
 #include "baselib/memory.h"
+#include "baselib/sislib.h"
+#include "gm/gm_1A3F.h"
 #include "gm/gmmain_lib.h"
 #include "gm/types.h"
+#include "lb/lb_00F9.h"
+#include "lb/lbaudio_ax.h"
 
 #include "mn/forward.h"
 
 #include "mn/mnmain.h"
+#include "mn/mnmainrule.h"
+#include "mn/mnstagesw.h"
 #include "sc/types.h"
+
+#include <dolphin/os.h>
 
 extern StaticModelDesc MenMainConRl_Top;
 extern StaticModelDesc MenMainCursorRl_Top;
@@ -24,55 +35,173 @@ extern StaticModelDesc MenMainCursorTr02_Top;
 extern StaticModelDesc MenMainCursorTr03_Top;
 extern StaticModelDesc MenMainCursorTr04_Top;
 extern StaticModelDesc MenMainNmRl_Top;
-extern MenuKindData* mn_803EB6B0;
+extern MenuKindData mn_803EB6B0[];
 extern HSD_GObj* mn_804D6BE0;
+extern f32 mn_804D6BE4;
 
-static mn_803ED1D0_t mn_803ED1D0 = { { 3, 4, 5, 6, 7, 8, 9 },
-                                     { 7, 2, 2, 2, 2, 0 },
-                                     { 20.0f, 21.0f, 22.0f, 23.0f, 24.0f,
-                                       25.0f, 26.0f, 27.0f, 28.0f, 29.0f,
-                                       30.0f, 31.0f },
-                                     { 0.0f, 99.0f, 0.0f },
-                                     { 200.0f, 399.0f, 200.0f },
-                                     { 100.0f, 124.0f, -0.1f },
-                                     {
-                                         125.0f,
-                                         149.0f,
-                                         -0.1f,
-                                     },
-                                     {
-                                         150.0f,
-                                         174.0f,
-                                         -0.1f,
-                                     },
-                                     {
-                                         175.0f,
-                                         199.0f,
-                                         -0.1f,
-                                     },
-                                     {
-                                         0.0f,
-                                         99.0f,
-                                         60.0f,
-                                     } };
-
-AnimLoopSettings mn_803ED270[3] = {
-    { 0.0f, 0.0f, 0.0f },
-    { 0.0f, 0.0f, 0.0f },
-    { 0.0f, 0.0f, 0.0f },
+static mn_803ED1D0_t mn_803ED1D0 = {
+    { 3, 4, 5, 6, 7, 8, 9 },
+    { 7, 2, 2, 2, 2, 0 },
+    { 20.0f, 21.0f, 22.0f, 23.0f, 24.0f, 25.0f, 26.0f, 27.0f, 28.0f, 29.0f,
+      30.0f, 31.0f },
+    { 0.0f, 99.0f, 0.0f },
+    { 200.0f, 399.0f, 200.0f },
+    { { 100.0f, 124.0f, -0.1f }, { 125.0f, 149.0f, -0.1f } },
+    { { 150.0f, 174.0f, -0.1f }, { 175.0f, 199.0f, -0.1f } },
+    { 0.0f, 99.0f, 60.0f },
 };
 
+AnimLoopSettings mn_803ED270[3] = { { 0.0f, 3.0f, -0.1f },
+                                    { 20.0f, 23.0f, -0.1f },
+                                    { 40.0f, 43.0f, -0.1f } };
 AnimLoopSettings mn_803ED294[7] = {
-    { 0.0f, 0.0f, 0.0f }, { 0.0f, 0.0f, 0.0f }, { 0.0f, 0.0f, 0.0f },
-    { 0.0f, 0.0f, 0.0f }, { 0.0f, 0.0f, 0.0f }, { 0.0f, 0.0f, 0.0f },
-    { 0.0f, 0.0f, 0.0f },
+    { 100.0f, 103.0f, -0.1f }, { 120.0f, 123.0f, -0.1f },
+    { 140.0f, 143.0f, -0.1f }, { 30.0f, 49.0f, -0.1f },
+    { 70.0f, 89.0f, -0.1f },   { 90.0f, 109.0f, -0.1f },
+    { 50.0f, 69.0f, -0.1f },
 };
 
 u8 mn_803ED2E8[16][2] = { 0 };
 
-static s32 mn_804DBE48 = 0x02030506;
+typedef union {
+    s32 packed;
+    u8 idx[4];
+} JObjIndices;
 
-/// #fn_8023201C
+static JObjIndices mn_804DBE40 = { 0x02030506 };
+static f32 mn_804DBE44 = 0.0f;
+static JObjIndices mn_804DBE48 = { 0x02030506 };
+
+
+/// @brief Copy rule values from menu data to the global game rules.
+static inline void mnRulePlus_SaveRules(void)
+{
+    MenuRulesPlusData* data = mn_804D6BE0->user_data;
+    gmMainLib_8015CC34()->stock_time_limit = data->rule_values.time_limit;
+    gmMainLib_8015CC34()->friendly_fire = data->rule_values.friendly_fire;
+    gmMainLib_8015CC34()->pause = data->rule_values.pause;
+    gmMainLib_8015CC34()->score_display = data->rule_values.score;
+    gmMainLib_8015CC34()->unk_xc = data->rule_values.sd_penalty;
+}
+
+/// @brief Check if a given option is visible (not hidden by game mode).
+static inline s32 mnRulePlus_IsOptionVisible(u8 sel)
+{
+    if (gm_801A4310() == 0x1B && sel == 1) {
+        return 0;
+    } else if (sel == 3) {
+        if (gmMainLib_8015EE0C() != 0) {
+            return 1;
+        } else {
+            return 0;
+        }
+    } else if (sel == 5) {
+        if (gmMainLib_8015EE44() != 0) {
+            return 1;
+        } else {
+            return 0;
+        }
+    } else {
+        return 1;
+    }
+}
+
+void fn_8023201C(HSD_GObj* gobj)
+{
+    MenuRulesPlusData* data = mn_804D6BE0->user_data;
+    u32 buttons;
+    PAD_STACK(0x30);
+
+    buttons = mn_80229624(4);
+    mn_804A04F0.buttons = buttons;
+
+    if (buttons & 0x200) {
+        /// A button: confirm stage select (option 5 only)
+        if ((u16) mn_804A04F0.hovered_selection == 5) {
+            lbAudioAx_80024030(1);
+            mn_804A04F0.entering_menu = 1;
+            mnRulePlus_SaveRules();
+            mn_804D6BC8.cooldown = 5;
+            mnStageSw_80237410();
+            HSD_GObjPLink_80390228(gobj);
+        }
+    } else if (buttons & 0x100) {
+        /// Start button: accept all rules and proceed
+        lbAudioAx_80024030(1);
+        switch (gm_801A4310()) {
+        case 1:
+            mnRulePlus_SaveRules();
+            mn_80229860(2);
+            return;
+        }
+        mnRulePlus_SaveRules();
+        mn_8022F4CC();
+        return;
+    } else if (buttons & 0x20) {
+        /// B button: cancel and go back
+        lbAudioAx_80024030(0);
+        mn_804A04F0.entering_menu = 0;
+        mnRulePlus_SaveRules();
+        mn_804D6BC8.cooldown = 5;
+        mn_8023164C();
+        HSD_GObjPLink_80390228(gobj);
+        return;
+    } else if (buttons & 1) {
+        /// D-Pad Up: move selection up (with wrap)
+        lbAudioAx_80024030(2);
+        do {
+            if ((s32) mn_804A04F0.hovered_selection == 0) {
+                mn_804A04F0.hovered_selection = 5;
+            } else {
+                mn_804A04F0.hovered_selection -= 1;
+            }
+        } while (mnRulePlus_IsOptionVisible(
+                     (u8) mn_804A04F0.hovered_selection) == 0);
+        mn_804A04F0.confirmed_selection =
+            data->rule_values.values[mn_804A04F0.hovered_selection];
+        return;
+    } else if (buttons & 2) {
+        /// D-Pad Down: move selection down (with wrap)
+        lbAudioAx_80024030(2);
+        do {
+            if ((s32) mn_804A04F0.hovered_selection == 5) {
+                mn_804A04F0.hovered_selection = 0;
+            } else {
+                mn_804A04F0.hovered_selection += 1;
+            }
+        } while (mnRulePlus_IsOptionVisible(
+                     (u8) mn_804A04F0.hovered_selection) == 0);
+        mn_804A04F0.confirmed_selection =
+            data->rule_values.values[mn_804A04F0.hovered_selection];
+        return;
+    } else if ((u16) mn_804A04F0.hovered_selection != 5) {
+        /// D-Pad Left/Right: adjust value for non-stage options
+        u8* bounds = mn_803ED2E8[mn_804A04F0.hovered_selection];
+        if (buttons & 4) {
+            lbAudioAx_80024030(2);
+            if ((u8) mn_804A04F0.confirmed_selection >
+                (u8) bounds[0])
+            {
+                mn_804A04F0.confirmed_selection -= 1;
+                return;
+            }
+            mn_804A04F0.confirmed_selection = bounds[1];
+            return;
+        }
+        if (buttons & 8) {
+            lbAudioAx_80024030(2);
+            if ((u8) mn_804A04F0.confirmed_selection <
+                (u8) bounds[1])
+            {
+                mn_804A04F0.confirmed_selection += 1;
+                return;
+            }
+            mn_804A04F0.confirmed_selection = bounds[0];
+        }
+    }
+}
+
+/// #mn_80232458 already matched above
 
 AnimLoopSettings* mn_80232458(u8 option, u8 value, u8 direction)
 {
@@ -93,328 +222,737 @@ AnimLoopSettings* mn_80232458(u8 option, u8 value, u8 direction)
     return &mn_803ED294[count - value];
 }
 
-/// #mn_802324E4
+void mn_802324E4(u8 time_limit, MenuRulesPlusData* data)
+{
+    JObjIndices local_indices;
+    HSD_JObj** jobjs;
+    HSD_JObj* jobj;
+    s32 i;
 
-/// #mn_80232660
+    jobjs = data->x34[0];
+    local_indices = mn_804DBE40;
+    if (time_limit == 0) {
+        for (i = 0; i < 4; i++) {
+            HSD_JObjSetFlagsAll(jobjs[local_indices.idx[i]], 0x10U);
+        }
+        HSD_JObjReqAnimAll(jobjs[4], 1.0f);
+        HSD_JObjAnimAll(jobjs[4]);
+        return;
+    }
+    for (i = 0; i < 4; i++) {
+        HSD_JObjClearFlagsAll(jobjs[local_indices.idx[i]], 0x10U);
+    }
+    HSD_JObjReqAnimAll(jobjs[4], mn_804D6BE4);
+    HSD_JObjAnimAll(jobjs[4]);
+    jobj = jobjs[2];
+    HSD_JObjReqAnimAll(jobj, (f32) (u8) (time_limit / 10));
+    HSD_JObjAnimAll(jobj);
+    jobj = jobjs[3];
+    HSD_JObjReqAnimAll(jobj, (f32) (u8) (time_limit % 10));
+    HSD_JObjAnimAll(jobj);
+    jobj = jobjs[5];
+    HSD_JObjReqAnimAll(jobj, 0.0f);
+    HSD_JObjAnimAll(jobj);
+    jobj = jobjs[6];
+    HSD_JObjReqAnimAll(jobj, 0.0f);
+    HSD_JObjAnimAll(jobj);
+}
 
-/// #mn_802327A4
+inline void mn_80232660_inline(HSD_JObj* jobj)
+{
+    AnimLoopSettings* settings;
+    AnimLoopSettings* p294;
+    AnimLoopSettings* p270;
+    f32 frame;
+    s32 i;
 
-/// #mn_80232D4C
+    frame = mn_8022F298(jobj);
 
-/// #fn_80232F44
+    p294 = mn_803ED294;
+    p270 = mn_803ED270;
 
-/// HSD_GObj* mn_80233218(enum MenuState state)
-/// {
-///     ?* sp9C;
-///     u32* sp98;
-///     HSD_GObj* sp94;
-///     u8 sp90;
-///     HSD_JObj* sp44;
-///     s16 sp3E;
-///     s16 sp3C;
-///     s16 sp3A;
-///     s16 sp38;
-///     s16 sp36;
-///     s16 sp34;
-///     s16 sp32;
-///     s16 sp30;
-///     s16 sp2E;
-///     s16 sp2C;
-///     s16 sp2A;
-///     s16 sp28;
-///     s16 sp26;
-///     s16 sp24;
-///     s16 sp22;
-///     u16 sp20;
-///     s32 sp14;
-///     ?* var_r28_3;
-///     GameRules* temp_ret_2;
-///     HSD_GObj* temp_r3;
-///     HSD_JObj* temp_r19;
-///     HSD_JObj* temp_r21;
-///     HSD_JObj* temp_r3_2;
-///     HSD_JObj* temp_r3_4;
-///     HSD_JObj* temp_r3_5;
-///     HSD_JObj* temp_r3_6;
-///     HSD_Text* temp_r3_7;
-///     HSD_Text* temp_r3_8;
-///     MenuRulesPlusData* temp_r3_3;
-///     MenuRulesPlusData* temp_ret;
-///     MenuRulesPlusData* var_r26;
-///     f32 var_f1;
-///     f32* var_r29;
-///     f32* var_r29_2;
-///     s32 var_ctr;
-///     s32 var_r0;
-///     s32 var_r24;
-///     s32 var_r27;
-///     s32 var_r28;
-///     s32 var_r28_2;
-///     s32 var_r29_4;
-///     s32 var_r31;
-///     s32 var_r31_3;
-///     s32* var_r31_4;
-///     u16 var_r3;
-///     u16* var_r20;
-///     u16* var_r24_2;
-///     u16* var_r4;
-///     u8 temp_r0;
-///     u8 temp_r14;
-///     u8 temp_r22;
-///     u8 temp_r4;
-///     u8 var_r19_2;
-///     u8 var_r31_2;
-///     void* var_r19;
-///     void* var_r29_3;
-///     void* var_r4_2;
+    for (i = 0; i < 3; i++) {
+        settings = p294;
+        if (p294->start_frame <= frame && frame <= p294->end_frame) {
+            break;
+        }
+        settings = p270;
+        if (p270->start_frame <= frame && frame <= p270->end_frame) {
+            break;
+        }
+        p294++;
+        p270++;
+    }
+    mn_8022ED6C(jobj, settings);
+}
 
-///     var_r29 = saved_reg_r29;
-///     var_r3 = 0x10;
-///     temp_r22 = (u8) mn_804A04F0.hovered_selection;
-///     sp20 = 0;
-///     sp22 = 1;
-///     sp24 = 2;
-///     sp26 = 3;
-///     sp28 = 4;
-///     sp2A = 5;
-///     sp90 = mn_803EB6B0.unk138;
-///     sp2C = 6;
-///     sp2E = 7;
-///     sp30 = 8;
-///     sp32 = 9;
-///     sp34 = 0xA;
-///     sp36 = 0xB;
-///     sp38 = 0xC;
-///     sp3A = 0xD;
-///     sp3C = 0xE;
-///     sp3E = 0xF;
-///     var_r4 = &sp20 + 0x20;
-///     var_ctr = 0x11 - 0x10;
-///     if (0x10 < 0x11) {
-///         do {
-///             *var_r4 = var_r3;
-///             var_r4 += 2;
-///             var_r3 += 1;
-///             var_ctr -= 1;
-///         } while (var_ctr != 0);
-///     }
-///     temp_r3 = GObj_Create(6U, 7U, 0x80U);
-///     sp94 = temp_r3;
-///     mn_804D6BE0 = sp94;
-///     temp_r3_2 = HSD_JObjLoadJoint(MenMainConRl_Top.unk0);
-///     HSD_GObjObject_80390A70(temp_r3, HSD_GObj_804D7849, temp_r3_2);
-///     GObj_SetupGXLink(temp_r3, HSD_GObj_JObjCallback, 4U, 0x80U);
-///     HSD_GObj_SetupProc(temp_r3, fn_80232F44, 0U);
-///     HSD_JObjAddAnimAll(temp_r3_2, MenMainConRl_Top.unk4,
-///     MenMainConRl_Top.unk8, MenMainConRl_Top.unkC);
-///     HSD_JObjReqAnimAll(temp_r3_2, 0.0f);
-///     HSD_JObjAnimAll(temp_r3_2);
-///     temp_ret = HSD_MemAlloc(0xE0);
-///     temp_r3_3 = temp_ret;
-///     if (temp_r3_3 == NULL) {
-///         OSReport(&(mn_803ED1D0 + 0x138)->unk0, (u32) (u64) temp_ret,
-///         (bitwise f32) temp_ret);
-///         __assert(&(mn_803ED1D0 + 0x150)->unk0, 0x3DFU, mn_803ED1D0 +
-///         0x160);
-///     }
-///     GObj_InitUserData(sp94, 0U, HSD_Free, temp_r3_3);
-///     temp_r3_3->menu_kind = mn_804A04F0.cur_menu;
-///     temp_r3_3->hovered_selection = (u8) mn_804A04F0.hovered_selection;
-///     temp_r3_3->rule_values.time_limit =
-///     gmMainLib_8015CC34()->stock_time_limit;
-///     temp_r3_3->rule_values.friendly_fire =
-///     gmMainLib_8015CC34()->friendly_fire; temp_r3_3->rule_values.pause =
-///     gmMainLib_8015CC34()->pause; temp_r3_3->rule_values.score =
-///     gmMainLib_8015CC34()->score_display; temp_ret_2 = gmMainLib_8015CC34();
-///     var_f1 = (bitwise f32) temp_ret_2;
-///     var_r24 = 0;
-///     temp_r3_3->rule_values.sd_penalty = temp_ret_2->unk_xc;
-///     var_r26 = temp_r3_3;
-///     temp_r3_3->state = (u8) state;
-///     temp_r3_3->description = NULL;
-///     do {
-///         var_f1 = (bitwise f32) lb_80011E24(temp_r3_2, var_r26 + 0xC,
-///         var_r24, -1, var_f1); var_r24 += 1; var_r26 += 4;
-///     } while (var_r24 < 0xA);
-///     sp98 = &mn_804A04F0.confirmed_option;
-///     *sp98 = (u8) (temp_r3_3 + temp_r3_3->hovered_selection)->unk2;
-///     if ((u8) state != 0) {
-///         temp_r0 = temp_r3_3->state;
-///         temp_r19 = temp_r3_3->option_tree[2];
-///         switch ((s32) temp_r0) {                    /* irregular */
-///         case 2:
-///             break;
-///         case 1:
-///             var_r29 = mn_803ED1D0 + 0xE8;
-///             break;
-///         case 3:
-///             var_r29 = mn_803ED1D0 + 0xF4;
-///             break;
-///         }
-///         HSD_JObjReqAnim(temp_r19, *var_r29);
-///         HSD_JObjAnim(temp_r19);
-///     }
-///     var_r27 = 0;
-///     var_r19 = temp_r3_3 + (0 * 0x1C);
-///     sp9C = &MenMainCursorTr04_Top;
-///     var_r24_2 = &mn_803ED1D0[5].unk1;
-///     var_r20 = &mn_803ED1D0[9].unk1;
-/// loop_85:
-///     if (var_r27 < (s32) sp90) {
-///         var_r28 = 0;
-///         var_r31 = 0;
-/// loop_22:
-///         if (var_r31 < (s32) (u8) var_r27) {
-///             if (mn_80231F80((u8) var_r31) != 0) {
-///                 var_r28 += 1;
-///             }
-///             var_r31 += 1;
-///             goto loop_22;
-///         }
-///         var_r28_2 = 0;
-///         var_r31_2 = 0;
-///         temp_r21 = *(temp_r3_3 + ((*(mn_803ED1D0 + ((var_r28 * 2) & 0x1FE))
-///         * 4) + 0xC)); do {
-///             if (mn_80231F80(var_r31_2) != 0) {
-///                 var_r28_2 += 1;
-///             }
-///             var_r31_2 += 1;
-///         } while ((s32) var_r31_2 < 6);
-///         HSD_JObjReqAnim(temp_r21, (f32) var_r28_2);
-///         HSD_JObjAnim(temp_r21);
-///         if ((gm_801A4310() == 0x1B) && ((u8) var_r27 == 1)) {
-///             var_r0 = 0;
-///         } else if ((u8) var_r27 == 3) {
-///             if (gmMainLib_8015EE0C() != 0) {
-///                 var_r0 = 1;
-///             } else {
-///                 var_r0 = 0;
-///             }
-///         } else if ((u8) var_r27 == 5) {
-///             if (gmMainLib_8015EE44() != 0) {
-///                 var_r0 = 1;
-///             } else {
-///                 var_r0 = 0;
-///             }
-///         } else {
-///             var_r0 = 1;
-///         }
-///         if (var_r0 != 0) {
-///             var_r28_3 = &MenMainCursorRl_Top;
-///             temp_r3_4 = HSD_JObjLoadJoint(MenMainCursorRl_Top.unk0);
-///             HSD_JObjAddAnimAll(temp_r3_4, MenMainCursorRl_Top.unk4,
-///             MenMainCursorRl_Top.unk8, MenMainCursorRl_Top.unkC);
-///             HSD_JObjReqAnimAll(temp_r3_4, 0.0f);
-///             HSD_JObjAnimAll(temp_r3_4);
-///             lb_8001204C(temp_r3_4, &sp44, &sp20, 0x11);
-///             HSD_JObjReqAnim(sp60, *(var_r20 + (((u32) CLZ(var_r27 -
-///             temp_r22) >> 3U) & 0x1FFFFFFC))); HSD_JObjAnim(sp60); if ((s32)
-///             temp_r22 != var_r27) {
-///                 HSD_JObjSetFlagsAll(sp84, 0x10U);
-///             }
-///             if (((s32) temp_r22 != var_r27) || (var_r27 == 5)) {
-///                 HSD_JObjSetFlagsAll(sp78, 0x10U);
-///             } else {
-///                 HSD_JObjReqAnimAll(sp78, mn_803ED1D0->unk58);
-///             }
-///             if (((s32) temp_r22 != var_r27) || (var_r27 != 5)) {
-///                 HSD_JObjSetFlagsAll(sp64, 0x10U);
-///             }
-///             if (var_r27 == 5) {
-///                 var_r29_2 = mn_803ED1D0 + ((temp_r22 == var_r27) * 0xC) +
-///                 0x7C;
-///             } else {
-///                 var_r29_2 = mn_803ED1D0 + ((temp_r22 == var_r27) * 0xC) +
-///                 0x64;
-///             }
-///             HSD_JObjReqAnimAll(sp4C, *var_r29_2);
-///             HSD_JObjAnimAll(sp4C);
-///             HSD_JObjAddChild(temp_r21, temp_r3_4);
-///             if (var_r27 != 5) {
-///                 switch (var_r27) {                  /* switch 1; irregular
-///                 */ case 0:                             /* switch 1 */
-///                     var_r28_3 = &MenMainCursorTr01_Top;
-///                     break;
-///                 case 1:                             /* switch 1 */
-///                     var_r28_3 = &MenMainCursorTr02_Top;
-///                     break;
-///                 default:                            /* switch 1 */
-///                     var_r28_3 = &MenMainCursorTr03_Top;
-///                     break;
-///                 case 4:                             /* switch 1 */
-///                     var_r28_3 = sp9C;
-///                     break;
-///                 }
-///                 temp_r3_5 = HSD_JObjLoadJoint(var_r28_3->unk0);
-///                 HSD_JObjAddAnimAll(temp_r3_5, var_r28_3->unk4,
-///                 var_r28_3->unk8, var_r28_3->unkC);
-///                 HSD_JObjReqAnimAll(temp_r3_5, 0.0f);
-///                 HSD_JObjAnimAll(temp_r3_5);
-///                 var_r31_3 = 0;
-///                 var_r29_3 = var_r19;
-/// loop_66:
-///                 if (var_r31_3 < (s32) *var_r24_2) {
-///                     lb_80011E24(temp_r3_5, var_r29_3 + 0x34, var_r31_3,
-///                     -1); var_r29_3 += 4; var_r31_3 += 1; goto loop_66;
-///                 }
-///                 if (var_r27 != 0) {
-///                     if ((var_r27 >= 0) && (var_r27 < 5)) {
-///                         temp_r4 = *(temp_r3_3 + (var_r27 + 2));
-///                         if (((u8) var_r27 != 1) && ((u8) var_r27 != 2) &&
-///                         ((u8) var_r27 != 3) && ((u8) var_r27 != 4)) {
-///                             var_r4_2 = NULL;
-///                         } else if (temp_r4 == 0) {
-///                             var_r4_2 = mn_803ED1D0 + ((mn_803ED1D0 +
-///                             ((var_r27 * 2) & 0x1FE))->unk119 * 0xC) + 0xA0;
-///                         } else {
-///                             var_r4_2 = mn_803ED1D0 + ((temp_r4 - 1) * 0xC)
-///                             + 0xA0;
-///                         }
-///                         HSD_JObjReqAnimAll(temp_r3_5, var_r4_2->unk4);
-///                         HSD_JObjAnimAll(temp_r3_5);
-///                     }
-///                 } else {
-///                     var_r31_4 = &sp14;
-///                     var_r29_4 = 0;
-///                     sp14 = mn_804DBE48;
-///                     do {
-///                         temp_r3_6 =
-///                         HSD_JObjLoadJoint(MenMainNmRl_Top.unk0);
-///                         HSD_JObjAddAnimAll(temp_r3_6, MenMainNmRl_Top.unk4,
-///                         MenMainNmRl_Top.unk8, MenMainNmRl_Top.unkC);
-///                         HSD_JObjAddChild(*(temp_r3_3 + ((*var_r31_4 * 4) +
-///                         0x34)), temp_r3_6); var_r29_4 += 1; var_r31_4 += 1;
-///                     } while (var_r29_4 < 4);
-///                     mn_802324E4(temp_r3_3->rule_values.time_limit,
-///                     temp_r3_3);
-///                 }
-///                 HSD_JObjAddChild(temp_r21, temp_r3_5);
-///             }
-///         }
-///         var_r20 += 8;
-///         var_r19 += 0x1C;
-///         var_r24_2 += 2;
-///         var_r27 += 1;
-///         goto loop_85;
-///     }
-///     temp_r3_7 = temp_r3_3->description;
-///     temp_r14 = *sp98;
-///     if (temp_r3_7 != NULL) {
-///         HSD_SisLib_803A5CC4(temp_r3_7);
-///         temp_r3_3->description = NULL;
-///     }
-///     if (((s32) temp_r22 == 0) || ((s32) temp_r22 == 5)) {
-///         var_r19_2 = mn_803ED1D0[temp_r22].unk124;
-///     } else {
-///         var_r19_2 = (&mn_803ED1D0[temp_r22] + temp_r14)->unk124;
-///     }
-///     temp_r3_8 = HSD_SisLib_803A5ACC(0, 1, -9.5f, 8.0f, 17.0f,
-///     364.68332f, 76.77544f); temp_r3_3->description = temp_r3_8;
-///     temp_r3_8->font_size.x = 0.0521f;
-///     temp_r3_8->font_size.y = 0.0521f;
-///     HSD_SisLib_803A6368(temp_r3_8, (s32) var_r19_2);
-///     return sp94;
-/// }
+void mn_80232660(HSD_GObj* gobj, HSD_JObj* jobj, u8 option)
+{
+    PAD_STACK(8);
+
+    switch (option) {
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+        mn_80232660_inline(jobj);
+    case 0:
+        return;
+    case 5:
+        return;
+    }
+}
+
+void mn_802327A4(HSD_GObj* gobj, u32 arg1, u32 arg2)
+{
+    u16 jobj_map[17];
+    HSD_JObj* jobj_parts[17];
+    HSD_JObj* option_roots[6];
+    MenuRulesPlusData* data = gobj->user_data;
+    u8 num_options = mn_803EB6B0[15].selection_count;
+    s32 i, j, vis_count;
+    s32 visible;
+    HSD_JObj** root_ptr;
+    u16 selected;
+
+    jobj_map[0] = 0;
+    jobj_map[1] = 1;
+    jobj_map[2] = 2;
+    jobj_map[3] = 3;
+    jobj_map[4] = 4;
+    jobj_map[5] = 5;
+    jobj_map[6] = 6;
+    jobj_map[7] = 7;
+    jobj_map[8] = 8;
+    jobj_map[9] = 9;
+    jobj_map[10] = 10;
+    jobj_map[11] = 11;
+    jobj_map[12] = 12;
+    jobj_map[13] = 13;
+    jobj_map[14] = 14;
+    jobj_map[15] = 15;
+    {
+        u16 val = 0x10;
+        u16* p = jobj_map + 16;
+        s32 ctr = 17 - 16;
+        if (16 < 17) {
+            do {
+                *p = val;
+                p++;
+                val++;
+            } while (--ctr);
+        }
+    }
+
+    root_ptr = option_roots;
+    i = 0;
+    while (i < (s32) num_options) {
+        if (gm_801A4310() == 0x1B && (u8) i == 1) {
+            visible = 0;
+        } else if ((u8) i == 3) {
+            if (gmMainLib_8015EE0C() != 0) {
+                visible = 1;
+            } else {
+                visible = 0;
+            }
+        } else if ((u8) i == 5) {
+            if (gmMainLib_8015EE44() != 0) {
+                visible = 1;
+            } else {
+                visible = 0;
+            }
+        } else {
+            visible = 1;
+        }
+        if (visible != 0) {
+            vis_count = 0;
+            j = 0;
+            while (j < (s32) (u8) i) {
+                if (mn_80231F80((u8) j) != 0) {
+                    vis_count++;
+                }
+                j++;
+            }
+            {
+                HSD_JObj* root =
+                    data->xC[mn_803ED1D0.x0[vis_count]];
+                if (root != NULL) {
+                    *root_ptr = root->child;
+                } else {
+                    *root_ptr = NULL;
+                }
+            }
+        }
+        root_ptr++;
+        i++;
+    }
+
+    if ((s32) arg1 != 0) {
+        u8 old_sel = data->hovered_selection;
+        u8 new_sel;
+        lb_8001204C(option_roots[old_sel], jobj_parts, jobj_map, 17);
+        HSD_JObjSetFlagsAll(jobj_parts[16], 0x10);
+        HSD_JObjSetFlagsAll(jobj_parts[13], 0x10);
+        if (old_sel == 5) {
+            HSD_JObjReqAnimAll(jobj_parts[2],
+                               mn_803ED1D0.x7C[0].start_frame);
+        } else {
+            HSD_JObjReqAnimAll(jobj_parts[2],
+                               mn_803ED1D0.x64[0].start_frame);
+        }
+        HSD_JObjAnimAll(jobj_parts[2]);
+        HSD_JObjReqAnim(jobj_parts[7],
+                         mn_803ED1D0.text_start_frames[old_sel * 2]);
+        HSD_JObjAnim(jobj_parts[7]);
+        HSD_JObjSetFlagsAll(jobj_parts[8], 0x10);
+        new_sel = (u8) mn_804A04F0.hovered_selection;
+        lb_8001204C(option_roots[mn_804A04F0.hovered_selection],
+                     jobj_parts, jobj_map, 17);
+        HSD_JObjClearFlagsAll(jobj_parts[16], 0x10);
+        HSD_JObjReqAnimAll(jobj_parts[16],
+                           mn_803ED1D0.x4C.start_frame);
+        if (new_sel != 5) {
+            HSD_JObjClearFlagsAll(jobj_parts[13], 0x10);
+            HSD_JObjReqAnimAll(jobj_parts[13],
+                               mn_803ED1D0.x58.start_frame);
+            HSD_JObjReqAnimAll(jobj_parts[2],
+                               mn_803ED1D0.x64[1].start_frame);
+            HSD_JObjAnimAll(jobj_parts[2]);
+        } else {
+            HSD_JObjReqAnimAll(jobj_parts[2],
+                               mn_803ED1D0.x7C[1].start_frame);
+            HSD_JObjAnimAll(jobj_parts[2]);
+        }
+        HSD_JObjReqAnim(jobj_parts[7],
+                         mn_803ED1D0
+                             .text_start_frames[new_sel * 2 + 1]);
+        HSD_JObjAnim(jobj_parts[7]);
+        if (new_sel == 5) {
+            HSD_JObjClearFlagsAll(jobj_parts[8], 0x10);
+            HSD_JObjReqAnimAll(jobj_parts[8],
+                               mn_803ED1D0.x94.start_frame);
+            HSD_JObjAnimAll(jobj_parts[8]);
+        }
+    }
+
+    if ((s32) arg2 != 0) {
+        HSD_JObj* tree =
+            data->x34[(u16) mn_804A04F0.hovered_selection][0];
+        if ((s32) (u8) mn_804A04F0.hovered_selection != 5 &&
+            (s32) (u8) mn_804A04F0.hovered_selection < 5)
+        {
+            if ((s32) (u8) mn_804A04F0.hovered_selection != 0) {
+                if ((s32) (u8) mn_804A04F0.hovered_selection >= 0) {
+                    if ((mn_804A04F0.buttons & 4) != 0) {
+                        HSD_JObjReqAnimAll(
+                            tree,
+                            mn_80232458(
+                                (u8) mn_804A04F0.hovered_selection,
+                                mn_804A04F0.confirmed_selection, 0)
+                                ->start_frame);
+                    } else {
+                        HSD_JObjReqAnimAll(
+                            tree,
+                            mn_80232458(
+                                (u8) mn_804A04F0.hovered_selection,
+                                mn_804A04F0.confirmed_selection, 1)
+                                ->start_frame);
+                    }
+                    HSD_JObjAnimAll(tree);
+                }
+            } else {
+                mn_802324E4(mn_804A04F0.confirmed_selection,
+                            (MenuRulesPlusData*) gobj->user_data);
+            }
+        }
+    }
+
+    if ((s32) arg1 != 0) {
+        selected = mn_804A04F0.hovered_selection;
+    } else {
+        selected = (u16) data->hovered_selection;
+    }
+
+    root_ptr = option_roots;
+    i = 0;
+    while (i < (s32) num_options) {
+        if (gm_801A4310() == 0x1B && (u8) i == 1) {
+            visible = 0;
+        } else if ((u8) i == 3) {
+            if (gmMainLib_8015EE0C() != 0) {
+                visible = 1;
+            } else {
+                visible = 0;
+            }
+        } else if ((u8) i == 5) {
+            if (gmMainLib_8015EE44() != 0) {
+                visible = 1;
+            } else {
+                visible = 0;
+            }
+        } else {
+            visible = 1;
+        }
+        if (visible != 0) {
+            AnimLoopSettings* als;
+            lb_8001204C(*root_ptr, jobj_parts, jobj_map, 17);
+            if (i == (s32) (u8) selected) {
+                mn_8022ED6C(jobj_parts[16], &mn_803ED1D0.x4C);
+            }
+            if (i == (s32) (u8) selected && i != 5) {
+                mn_8022ED6C(jobj_parts[13], &mn_803ED1D0.x58);
+            }
+            if (i == 5) {
+                als = &mn_803ED1D0.x7C[(u8) selected == (u8) i];
+            } else {
+                als = &mn_803ED1D0.x64[(u8) selected == (u8) i];
+            }
+            mn_8022ED6C(jobj_parts[2], als);
+            mn_8022ED6C(jobj_parts[8], &mn_803ED1D0.x94);
+            mn_80232660(gobj, data->x34[i][0], (u8) i);
+        }
+        root_ptr++;
+        i++;
+    }
+}
+
+void mn_80232D4C(HSD_GObj* gobj, u32 arg1, u32 arg2)
+{
+    MenuRulesPlusData* data = gobj->user_data;
+    u16 selection;
+    u8 confirmed;
+    u8 desc_idx;
+    HSD_Text* text;
+
+    if ((s32) arg1 != 0) {
+        selection = mn_804A04F0.hovered_selection;
+    } else {
+        selection = (u16) data->hovered_selection;
+    }
+
+    switch ((s32) data->state) {
+    case 4:
+        text = data->description;
+        if (text != NULL) {
+            HSD_SisLib_803A5CC4(text);
+            data->description = NULL;
+            return;
+        }
+    case 5:
+        return;
+    case 3:
+    case 1:
+        text = data->description;
+        if (text == NULL) {
+            confirmed = mn_804A04F0.confirmed_selection;
+            if (text != NULL) {
+                HSD_SisLib_803A5CC4(text);
+                data->description = NULL;
+            }
+            if ((s32) (u8) selection == 0 || (s32) (u8) selection == 5) {
+                desc_idx = mn_803ED2E8[(u8) selection][0];
+            } else {
+                desc_idx = mn_803ED2E8[(u8) selection][confirmed];
+            }
+            text = HSD_SisLib_803A5ACC(0, 1, -9.5f, 8.0f, 17.0f,
+                                       364.68332f, 76.77544f);
+            data->description = text;
+            text->font_size.x = 0.0521f;
+            text->font_size.y = 0.0521f;
+            HSD_SisLib_803A6368(text, (s32) desc_idx);
+            return;
+        }
+        break;
+    case 0:
+        if ((s32) arg1 != 0 ||
+            ((s32) arg2 != 0 && (u8) selection != 0 &&
+             (u8) selection != 5))
+        {
+            text = data->description;
+            confirmed = mn_804A04F0.confirmed_selection;
+            if (text != NULL) {
+                HSD_SisLib_803A5CC4(text);
+                data->description = NULL;
+            }
+            if ((s32) (u8) selection == 0 || (s32) (u8) selection == 5) {
+                desc_idx = mn_803ED2E8[(u8) selection][0];
+            } else {
+                desc_idx = mn_803ED2E8[(u8) selection][confirmed];
+            }
+            text = HSD_SisLib_803A5ACC(0, 1, -9.5f, 8.0f, 17.0f,
+                                       364.68332f, 76.77544f);
+            data->description = text;
+            text->font_size.x = 0.0521f;
+            text->font_size.y = 0.0521f;
+            HSD_SisLib_803A6368(text, (s32) desc_idx);
+        }
+        break;
+    }
+}
+
+void fn_80232F44(HSD_GObj* gobj)
+{
+    MenuRulesPlusData* data = gobj->user_data;
+    AnimLoopSettings* anim_settings;
+    s32 menu_changed = 0;
+    u32 selection_changed = 0;
+    u32 value_changed = 0;
+    MenuRulesPlusData* data2;
+    u8 state;
+    HSD_JObj* jobj;
+    HSD_JObj* jobj2;
+    PAD_STACK(0x18);
+
+    state = data->state;
+    if ((state == 0 || state == 1 || state == 3) &&
+        (u8) data->menu_kind != (u8) mn_804A04F0.cur_menu)
+    {
+        if ((u8) mn_804A04F0.entering_menu != 0) {
+            data->state = 4;
+        } else {
+            data->state = 2;
+        }
+        state = data->state;
+        jobj = data->xC[2];
+        jobj2 = jobj;
+        switch ((s32) state) {
+        case 1:
+            anim_settings = &mn_803ED294[3];
+            break;
+        case 2:
+            anim_settings = &mn_803ED294[5];
+            break;
+        case 3:
+            anim_settings = &mn_803ED294[4];
+            break;
+        case 4:
+            anim_settings = &mn_803ED294[6];
+            break;
+        }
+        HSD_JObjReqAnim(jobj2, anim_settings->start_frame);
+        HSD_JObjAnim(jobj2);
+        state = data->state;
+        if (state == 0 || state == 1 || state == 3) {
+            menu_changed = 1;
+            selection_changed = 1;
+            value_changed = 1;
+        }
+    }
+
+    state = data->state;
+    if (state != 0) {
+        jobj = data->xC[2];
+        switch ((s32) state) {
+        case 1:
+            anim_settings = &mn_803ED294[3];
+            break;
+        case 2:
+            anim_settings = &mn_803ED294[5];
+            break;
+        case 3:
+            anim_settings = &mn_803ED294[4];
+            break;
+        case 4:
+            anim_settings = &mn_803ED294[6];
+            break;
+        }
+        if (mn_8022F298(jobj) >= anim_settings->end_frame) {
+            state = data->state;
+            switch ((s32) state) {
+            case 3:
+            case 1:
+                data->state = 0;
+                break;
+            case 2:
+            case 4:
+                HSD_GObjPLink_80390228(gobj);
+                return;
+            }
+        }
+        HSD_JObjAnim(jobj);
+    }
+    state = data->state;
+    if (state == 0 || state == 1 || state == 3) {
+        if ((s32) data->hovered_selection !=
+            (s32) mn_804A04F0.hovered_selection)
+        {
+            selection_changed = 1;
+        }
+        if (data->rule_values
+                .values[mn_804A04F0.hovered_selection] !=
+            (u8) mn_804A04F0.confirmed_selection)
+        {
+            value_changed = 1;
+        }
+    }
+    mn_802327A4(gobj, selection_changed, value_changed);
+    mn_80232D4C(gobj, selection_changed, value_changed);
+    if (menu_changed != 0) {
+        data->menu_kind = (u8) mn_804A04F0.cur_menu;
+    }
+    if ((s32) selection_changed != 0) {
+        data->hovered_selection = (u8) mn_804A04F0.hovered_selection;
+    }
+    if ((s32) value_changed != 0) {
+        data->rule_values.values[data->hovered_selection] =
+            (u8) mn_804A04F0.confirmed_selection;
+        data2 = gobj->user_data;
+        gmMainLib_8015CC34()->stock_time_limit = data2->rule_values.time_limit;
+        gmMainLib_8015CC34()->friendly_fire = data2->rule_values.friendly_fire;
+        gmMainLib_8015CC34()->pause = data2->rule_values.pause;
+        gmMainLib_8015CC34()->score_display = data2->rule_values.score;
+        gmMainLib_8015CC34()->unk_xc = data2->rule_values.sd_penalty;
+    }
+}
+
+HSD_GObj* mn_80233218(MenuState state)
+{
+    u16 jobj_map[17];
+    HSD_JObj* jobj_parts[17];
+    HSD_GObj* gobj;
+    MenuRulesPlusData* user_data;
+    u8 num_options;
+    u8 selected;
+    u8 confirmed;
+    s32 i, j;
+    s32 vis_before;
+    s32 vis_total;
+    s32 visible;
+    HSD_JObj* root_jobj;
+    HSD_JObj* option_jobj;
+    HSD_JObj* cursor_jobj;
+    HSD_JObj* value_jobj;
+    StaticModelDesc* desc;
+    AnimLoopSettings* als;
+    f32* frame_ptr;
+    u16* sub_count_ptr;
+    GameRules* rules;
+
+    for (i = 0; i < 17; i++) {
+        jobj_map[i] = (u16) i;
+    }
+
+    selected = (u8) mn_804A04F0.hovered_selection;
+    num_options = mn_803EB6B0[15].selection_count;
+
+    gobj = GObj_Create(6, 7, 0x80);
+    mn_804D6BE0 = gobj;
+    root_jobj = HSD_JObjLoadJoint(MenMainConRl_Top.joint);
+    HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, root_jobj);
+    GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4, 0x80);
+    HSD_GObj_SetupProc(gobj, fn_80232F44, 0);
+    HSD_JObjAddAnimAll(root_jobj, MenMainConRl_Top.animjoint,
+                       MenMainConRl_Top.matanim_joint,
+                       MenMainConRl_Top.shapeanim_joint);
+    HSD_JObjReqAnimAll(root_jobj, 0.0f);
+    HSD_JObjAnimAll(root_jobj);
+
+    user_data = HSD_MemAlloc(sizeof(MenuRulesPlusData));
+    HSD_ASSERTREPORT(0x3DFU, user_data, "Can't get user_data.\n");
+
+    GObj_InitUserData(gobj, 0, HSD_Free, user_data);
+    user_data->menu_kind = mn_804A04F0.cur_menu;
+    user_data->hovered_selection = (u8) mn_804A04F0.hovered_selection;
+    user_data->rule_values.time_limit = gmMainLib_8015CC34()->stock_time_limit;
+    user_data->rule_values.friendly_fire = gmMainLib_8015CC34()->friendly_fire;
+    user_data->rule_values.pause = gmMainLib_8015CC34()->pause;
+    user_data->rule_values.score = gmMainLib_8015CC34()->score_display;
+    rules = gmMainLib_8015CC34();
+    user_data->rule_values.sd_penalty = rules->unk_xc;
+    user_data->state = (u8) state;
+    user_data->description = NULL;
+
+    for (i = 0; i < 10; i++) {
+        lb_80011E24(root_jobj, &user_data->xC[i], i, -1);
+    }
+
+    mn_804A04F0.confirmed_selection =
+        user_data->rule_values.values[user_data->hovered_selection];
+
+    if ((u8) state != 0) {
+        HSD_JObj* anim_jobj = user_data->xC[2];
+        switch ((s32) user_data->state) {
+        case 2:
+            break;
+        case 1:
+            als = &mn_803ED294[3];
+            break;
+        case 3:
+            als = &mn_803ED294[4];
+            break;
+        }
+        HSD_JObjReqAnim(anim_jobj, als->start_frame);
+        HSD_JObjAnim(anim_jobj);
+    }
+
+    frame_ptr = mn_803ED1D0.text_start_frames;
+    sub_count_ptr = &mn_803ED1D0.xE[1];
+    for (i = 0; i < (s32) num_options; i++) {
+        vis_before = 0;
+        for (j = vis_before; j < i; j++) {
+            if (mn_80231F80((u8) j) != 0) {
+                vis_before++;
+            }
+        }
+
+        vis_total = 0;
+        option_jobj = user_data->xC[mn_803ED1D0.x0[(u8) vis_before]];
+        for (j = vis_total; j < 5; j++) {
+            if (mn_80231F80((u8) j) != 0) {
+                vis_total++;
+            }
+        }
+
+        HSD_JObjReqAnim(option_jobj, (f32) vis_total);
+        HSD_JObjAnim(option_jobj);
+
+        if ((gm_801A4310() == 0x1B) && ((u8) i == 1)) {
+            visible = 0;
+        } else if ((u8) i == 3) {
+            if (gmMainLib_8015EE0C() != 0) {
+                visible = 1;
+            } else {
+                visible = 0;
+            }
+        } else if ((u8) i == 5) {
+            if (gmMainLib_8015EE44() != 0) {
+                visible = 1;
+            } else {
+                visible = 0;
+            }
+        } else {
+            visible = 1;
+        }
+
+        if (visible != 0) {
+            desc = &MenMainCursorRl_Top;
+            cursor_jobj = HSD_JObjLoadJoint(MenMainCursorRl_Top.joint);
+            HSD_JObjAddAnimAll(cursor_jobj, MenMainCursorRl_Top.animjoint,
+                               MenMainCursorRl_Top.matanim_joint,
+                               MenMainCursorRl_Top.shapeanim_joint);
+            HSD_JObjReqAnimAll(cursor_jobj, 0.0f);
+            HSD_JObjAnimAll(cursor_jobj);
+
+            lb_8001204C(cursor_jobj, jobj_parts, jobj_map, 17);
+
+            HSD_JObjReqAnim(jobj_parts[7], frame_ptr[i + (s32) selected == i]);
+            HSD_JObjAnim(jobj_parts[7]);
+
+            if ((s32) selected != i) {
+                HSD_JObjSetFlagsAll(jobj_parts[16], 0x10);
+            }
+
+            if (((s32) selected != i) || (i == 5)) {
+                HSD_JObjSetFlagsAll(jobj_parts[13], 0x10);
+            } else {
+                HSD_JObjReqAnimAll(jobj_parts[13],
+                                   mn_803ED1D0.x58.start_frame);
+            }
+
+            if (((s32) selected != i) || (i != 5)) {
+                HSD_JObjSetFlagsAll(jobj_parts[8], 0x10);
+            }
+
+            if (i == 5) {
+                als = &mn_803ED1D0.x7C[(u8) selected == (u8) i];
+            } else {
+                als = &mn_803ED1D0.x64[(u8) selected == (u8) i];
+            }
+            HSD_JObjReqAnimAll(jobj_parts[2], als->start_frame);
+            HSD_JObjAnimAll(jobj_parts[2]);
+            HSD_JObjAddChild(option_jobj, cursor_jobj);
+
+            if (i != 5) {
+                switch (i) {
+                case 0:
+                    desc = &MenMainCursorTr01_Top;
+                    break;
+                case 1:
+                    desc = &MenMainCursorTr02_Top;
+                    break;
+                default:
+                    desc = &MenMainCursorTr03_Top;
+                    break;
+                case 4:
+                    desc = &MenMainCursorTr04_Top;
+                    break;
+                }
+
+                value_jobj = HSD_JObjLoadJoint(desc->joint);
+                HSD_JObjAddAnimAll(value_jobj, desc->animjoint,
+                                   desc->matanim_joint,
+                                   desc->shapeanim_joint);
+                HSD_JObjReqAnimAll(value_jobj, 0.0f);
+                HSD_JObjAnimAll(value_jobj);
+
+                for (j = 0; j < sub_count_ptr[i]; j++) {
+                    lb_80011E24(value_jobj, &user_data->x34[i][j], j, -1);
+                }
+
+                if (i != 0) {
+                    if (i >= 0 && i < 5) {
+                        u8 val = user_data->rule_values.values[i];
+                        AnimLoopSettings* val_als;
+                        if ((u8) i != 1 && (u8) i != 2 &&
+                            (u8) i != 3 && (u8) i != 4)
+                        {
+                            val_als = NULL;
+                        } else if (val == 0) {
+                            val_als =
+                                &mn_803ED270[mn_803ED2E8[i][1]];
+                        } else {
+                            val_als = &mn_803ED270[val - 1];
+                        }
+                        HSD_JObjReqAnimAll(value_jobj,
+                                           val_als->start_frame);
+                        HSD_JObjAnimAll(value_jobj);
+                    }
+                } else {
+                    JObjIndices digit_indices = mn_804DBE48;
+                    j = 0;
+                    do {
+                        HSD_JObj* num_jobj =
+                            HSD_JObjLoadJoint(MenMainNmRl_Top.joint);
+                        HSD_JObjAddAnimAll(num_jobj,
+                                           MenMainNmRl_Top.animjoint,
+                                           MenMainNmRl_Top.matanim_joint,
+                                           MenMainNmRl_Top.shapeanim_joint);
+                        HSD_JObjAddChild(
+                            user_data->x34[0][digit_indices.idx[j]], num_jobj);
+                        j++;
+                    } while (j < 4);
+                    mn_802324E4(user_data->rule_values.time_limit, user_data);
+                }
+
+                HSD_JObjAddChild(option_jobj, value_jobj);
+            }
+        }
+        frame_ptr += 2;
+    }
+
+    {
+        HSD_Text* text = user_data->description;
+        u8 desc_idx;
+        confirmed = mn_804A04F0.confirmed_selection;
+        if (text != NULL) {
+            HSD_SisLib_803A5CC4(text);
+            user_data->description = NULL;
+        }
+        if ((s32) selected == 0 || (s32) selected == 5) {
+            desc_idx = mn_803ED2E8[selected][0];
+        } else {
+            desc_idx = mn_803ED2E8[selected][confirmed];
+        }
+        text = HSD_SisLib_803A5ACC(0, 1, -9.5f, 8.0f, 17.0f, 364.68332f,
+                                   76.77544f);
+        user_data->description = text;
+        text->font_size.x = 0.0521f;
+        text->font_size.y = 0.0521f;
+        HSD_SisLib_803A6368(text, (s32) desc_idx);
+    }
+
+    return gobj;
+}
 
 void mn_802339FC(void)
 {
