@@ -709,7 +709,7 @@ HSD_GObj* mn_80233218(MenuState state)
     u16 jobj_map[17];
     HSD_JObj* jobj_parts[17];
     HSD_GObj* gobj;
-    MenuRulesPlusData* data;
+    MenuRulesPlusData* user_data;
     u8 num_options;
     u8 selected;
     u8 confirmed;
@@ -727,23 +727,7 @@ HSD_GObj* mn_80233218(MenuState state)
     u16* sub_count_ptr;
     GameRules* rules;
 
-    jobj_map[0] = 0;
-    jobj_map[1] = 1;
-    jobj_map[2] = 2;
-    jobj_map[3] = 3;
-    jobj_map[4] = 4;
-    jobj_map[5] = 5;
-    jobj_map[6] = 6;
-    jobj_map[7] = 7;
-    jobj_map[8] = 8;
-    jobj_map[9] = 9;
-    jobj_map[10] = 10;
-    jobj_map[11] = 11;
-    jobj_map[12] = 12;
-    jobj_map[13] = 13;
-    jobj_map[14] = 14;
-    jobj_map[15] = 15;
-    for (i = 16; i < 17; i++) {
+    for (i = 0; i < 17; i++) {
         jobj_map[i] = (u16) i;
     }
 
@@ -762,33 +746,31 @@ HSD_GObj* mn_80233218(MenuState state)
     HSD_JObjReqAnimAll(root_jobj, 0.0f);
     HSD_JObjAnimAll(root_jobj);
 
-    data = HSD_MemAlloc(sizeof(MenuRulesPlusData));
-    if (data == NULL) {
-        OSReport("Can't get user_data.\n");
-        __assert("mnruleplus.c", 0x3DFU, "user_data");
-    }
-    GObj_InitUserData(gobj, 0, HSD_Free, data);
-    data->menu_kind = mn_804A04F0.cur_menu;
-    data->hovered_selection = (u8) mn_804A04F0.hovered_selection;
-    data->rule_values.time_limit = gmMainLib_8015CC34()->stock_time_limit;
-    data->rule_values.friendly_fire = gmMainLib_8015CC34()->friendly_fire;
-    data->rule_values.pause = gmMainLib_8015CC34()->pause;
-    data->rule_values.score = gmMainLib_8015CC34()->score_display;
+    user_data = HSD_MemAlloc(sizeof(MenuRulesPlusData));
+    HSD_ASSERTREPORT(0x3DFU, user_data, "Can't get user_data.\n");
+
+    GObj_InitUserData(gobj, 0, HSD_Free, user_data);
+    user_data->menu_kind = mn_804A04F0.cur_menu;
+    user_data->hovered_selection = (u8) mn_804A04F0.hovered_selection;
+    user_data->rule_values.time_limit = gmMainLib_8015CC34()->stock_time_limit;
+    user_data->rule_values.friendly_fire = gmMainLib_8015CC34()->friendly_fire;
+    user_data->rule_values.pause = gmMainLib_8015CC34()->pause;
+    user_data->rule_values.score = gmMainLib_8015CC34()->score_display;
     rules = gmMainLib_8015CC34();
-    data->rule_values.sd_penalty = rules->unk_xc;
-    data->state = (u8) state;
-    data->description = NULL;
+    user_data->rule_values.sd_penalty = rules->unk_xc;
+    user_data->state = (u8) state;
+    user_data->description = NULL;
 
     for (i = 0; i < 10; i++) {
-        lb_80011E24(root_jobj, &data->xC[i], i, -1);
+        lb_80011E24(root_jobj, &user_data->xC[i], i, -1);
     }
 
     mn_804A04F0.confirmed_selection =
-        data->rule_values.values[data->hovered_selection];
+        user_data->rule_values.values[user_data->hovered_selection];
 
     if ((u8) state != 0) {
-        HSD_JObj* anim_jobj = data->xC[2];
-        switch ((s32) data->state) {
+        HSD_JObj* anim_jobj = user_data->xC[2];
+        switch ((s32) user_data->state) {
         case 2:
             break;
         case 1:
@@ -804,26 +786,21 @@ HSD_GObj* mn_80233218(MenuState state)
 
     frame_ptr = mn_803ED1D0.text_start_frames;
     sub_count_ptr = &mn_803ED1D0.xE[1];
-    i = 0;
-    while (i < (s32) num_options) {
+    for (i = 0; i < (s32) num_options; i++) {
         vis_before = 0;
-        j = vis_before;
-        while (j < (s32) (u8) i) {
+        for (j = vis_before; j < i; j++) {
             if (mn_80231F80((u8) j) != 0) {
                 vis_before++;
             }
-            j++;
         }
 
         vis_total = 0;
-        option_jobj = data->xC[mn_803ED1D0.x0[(u8) vis_before]];
-        j = vis_total;
-        do {
+        option_jobj = user_data->xC[mn_803ED1D0.x0[(u8) vis_before]];
+        for (j = vis_total; j < 5; j++) {
             if (mn_80231F80((u8) j) != 0) {
                 vis_total++;
             }
-            j++;
-        } while ((s32) (u8) j < 6);
+        }
 
         HSD_JObjReqAnim(option_jobj, (f32) vis_total);
         HSD_JObjAnim(option_jobj);
@@ -857,8 +834,7 @@ HSD_GObj* mn_80233218(MenuState state)
 
             lb_8001204C(cursor_jobj, jobj_parts, jobj_map, 17);
 
-            HSD_JObjReqAnim(jobj_parts[7],
-                            frame_ptr[(s32) selected == i]);
+            HSD_JObjReqAnim(jobj_parts[7], frame_ptr[i + (s32) selected == i]);
             HSD_JObjAnim(jobj_parts[7]);
 
             if ((s32) selected != i) {
@@ -908,16 +884,13 @@ HSD_GObj* mn_80233218(MenuState state)
                 HSD_JObjReqAnimAll(value_jobj, 0.0f);
                 HSD_JObjAnimAll(value_jobj);
 
-                j = 0;
-                while (j < (s32) *sub_count_ptr) {
-                    lb_80011E24(value_jobj, &data->x34[i][j],
-                                j, -1);
-                    j++;
+                for (j = 0; j < sub_count_ptr[i]; j++) {
+                    lb_80011E24(value_jobj, &user_data->x34[i][j], j, -1);
                 }
 
                 if (i != 0) {
                     if (i >= 0 && i < 5) {
-                        u8 val = data->rule_values.values[i];
+                        u8 val = user_data->rule_values.values[i];
                         AnimLoopSettings* val_als;
                         if ((u8) i != 1 && (u8) i != 2 &&
                             (u8) i != 3 && (u8) i != 4)
@@ -944,27 +917,25 @@ HSD_GObj* mn_80233218(MenuState state)
                                            MenMainNmRl_Top.matanim_joint,
                                            MenMainNmRl_Top.shapeanim_joint);
                         HSD_JObjAddChild(
-                            data->x34[0][digit_indices.idx[j]], num_jobj);
+                            user_data->x34[0][digit_indices.idx[j]], num_jobj);
                         j++;
                     } while (j < 4);
-                    mn_802324E4(data->rule_values.time_limit, data);
+                    mn_802324E4(user_data->rule_values.time_limit, user_data);
                 }
 
                 HSD_JObjAddChild(option_jobj, value_jobj);
             }
         }
         frame_ptr += 2;
-        sub_count_ptr++;
-        i++;
     }
 
     {
-        HSD_Text* text = data->description;
+        HSD_Text* text = user_data->description;
         u8 desc_idx;
         confirmed = mn_804A04F0.confirmed_selection;
         if (text != NULL) {
             HSD_SisLib_803A5CC4(text);
-            data->description = NULL;
+            user_data->description = NULL;
         }
         if ((s32) selected == 0 || (s32) selected == 5) {
             desc_idx = mn_803ED2E8[selected][0];
@@ -973,7 +944,7 @@ HSD_GObj* mn_80233218(MenuState state)
         }
         text = HSD_SisLib_803A5ACC(0, 1, -9.5f, 8.0f, 17.0f, 364.68332f,
                                    76.77544f);
-        data->description = text;
+        user_data->description = text;
         text->font_size.x = 0.0521f;
         text->font_size.y = 0.0521f;
         HSD_SisLib_803A6368(text, (s32) desc_idx);
