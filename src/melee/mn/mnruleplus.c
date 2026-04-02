@@ -128,7 +128,8 @@ void fn_8023201C(HSD_GObj* gobj)
     } else if (buttons & 0x100) {
         /// Start button: accept all rules and proceed
         lbAudioAx_80024030(1);
-        if ((s32) gm_801A4310() == 1) {
+        switch (gm_801A4310()) {
+        case 1:
             mnRulePlus_SaveRules();
             mn_80229860(2);
             return;
