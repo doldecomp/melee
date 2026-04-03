@@ -1185,7 +1185,10 @@ struct grShrineroute_GroundVars {
     /* +2 gp+C6 */ u16 xC6;
     /* +4 gp+C8 */ u16 xC8;
     /* +6 gp+CA */ u16 xCA;
-    /* +8 gp+CA */ u16 xCC;
+    /* +8 gp+CC */ u16 xCC;
+    /* +A gp+CE */ u16 xCE;
+    u8 _pad[0xD4 - 0xD0];
+    /* +10 gp+D4 */ u32 xD4;
 };
 
 struct grShrineroute_GroundVars2 {
@@ -1193,9 +1196,12 @@ struct grShrineroute_GroundVars2 {
     /* +4 gp+C8 */ HSD_LObj* xC8;
     u8 _[0x108 - 0xCC];
     HSD_GObj* x108;
-    u8 _2[0x118 - 0x10C];
+    s32 x10C;
+    s32 x110;
+    s32 x114;
     u32 x118;
-    u8 _3[0x168 - 0x11C];
+    void* x11C;
+    u8 _3[0x168 - 0x120];
     /* +0 gp+168 */ u32 x168;
     /* +0 gp+16C */ HSD_LObj* x16C;
     /* +0 gp+170 */ HSD_LObj* x170;
@@ -1209,6 +1215,8 @@ struct grShrineroute_GroundVars3 {
     /* +10 gp+D4 */ f32 xD4;
     /* +14 gp+D8 */ f32 xD8;
     /* +18 gp+DC */ f32 xDC;
+    /* +1C gp+E0 */ f32 xE0;
+    /* +20 gp+E4 */ HSD_JObj* xE4;
 };
 
 struct Battlefield {

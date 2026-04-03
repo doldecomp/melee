@@ -9,12 +9,14 @@
 
 #include "baselib/jobj.h"
 #include "ef/efsync.h"
+#include "ft/ftdevice.h"
 #include "ft/ftlib.h"
 #include "gr/grdisplay.h"
 #include "gr/grmaterial.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
 #include "lb/lb_00B0.h"
+#include "lb/lbvector.h"
 #include "mp/mplib.h"
 #include "pl/player.h"
 
@@ -239,7 +241,68 @@ void grShrineRoute_80208A34(Ground_GObj* arg) {}
 
 /// #fn_80208A38
 
-/// #grShrineRoute_80208D14
+void grShrineRoute_80208D14(Ground_GObj* gobj)
+{
+    Ground* gp = gobj->user_data;
+    Vec3 center;
+    Ground* iter;
+    int i;
+    PAD_STACK(16);
+
+    mpLib_80058560();
+    grAnime_801C8138(gobj, gp->map_id, 0);
+    gp->x8_callback = NULL;
+    gp->xC_callback = NULL;
+    grMaterial_801C94D8(Ground_801C3FA4(gobj, 1));
+    grMaterial_801C94D8(Ground_801C3FA4(gobj, 1));
+
+    gp->gv.shrineroute.xC4 = 0;
+    gp->gv.shrineroute.xC6 = 0;
+    gp->gv.shrineroute.xC8 = 0;
+    gp->gv.shrineroute.xCE = 0;
+    gp->gv.shrineroute.xD4 = 0;
+    gp->gv.shrineroute.xCA = 0;
+    gp->gv.shrineroute.xCC = 0;
+
+    gp->x11_flags.b012 = 2;
+    stage_info.x6DC = 0;
+
+    gp->gv.shrineroute2.x108 = NULL;
+    gp->gv.shrineroute2.x10C = 0;
+    gp->gv.shrineroute2.x110 = 0;
+    gp->gv.shrineroute2.x114 = 0;
+    gp->gv.shrineroute2.x118 = 0;
+    gp->gv.shrineroute2.x11C = NULL;
+
+    ftCo_800C07F8(gobj, 3, grShrineRoute_8020AE08);
+    mpJointSetCb1(8, gp, (mpLib_Callback) grShrineRoute_8020AD58);
+    mpJointSetCb1(9, gp, (mpLib_Callback) grShrineRoute_8020AD58);
+    mpJointSetCb1(0xA, gp, (mpLib_Callback) grShrineRoute_8020AD58);
+    mpJointSetCb1(0xB, gp, (mpLib_Callback) grShrineRoute_8020AD58);
+    mpJointSetCb1(0xC, gp, (mpLib_Callback) grShrineRoute_8020AD58);
+    mpJointSetCb1(0xD, gp, (mpLib_Callback) grShrineRoute_8020AD58);
+
+    if (Ground_801C2D24(0x94, &center)) {
+        iter = gp;
+        i = 0;
+        do {
+            iter->gv.shrineroute3.xE4 = Ground_801C2CF4(i + 0x7F);
+            if (iter->gv.shrineroute3.xE4 != NULL) {
+                HSD_JObjGetTranslation(iter->gv.shrineroute3.xE4,
+                                       (Vec3*) &iter->gv.shrineroute3.xD8);
+                lbVector_Sub((Vec3*) &iter->gv.shrineroute3.xD8, &center);
+            }
+            i++;
+            iter = (Ground*) ((u8*) iter + 16);
+        } while (i < 3);
+    } else {
+        gp->gv.shrineroute3.xE4 = NULL;
+        *(HSD_JObj**) ((u8*) gp + 0xF4) = NULL;
+        *(HSD_JObj**) ((u8*) gp + 0x104) = NULL;
+    }
+
+    Ground_801C10B8(gobj, (HSD_GObjEvent) fn_80208A38);
+}
 
 bool grShrineRoute_80208F0C(Ground_GObj* arg)
 {
