@@ -352,6 +352,7 @@ typedef struct grCn_Data {
     /* 0x03C */ s32 indices[3];
     /* 0x048 */ u8 pad1[0x2E8];
     /* 0x330 */ Vec3 positions[34];
+    /* +4C8 */ UNK_T pad2;
     /* 0x4CC */ grCn_Entry entries[][5];
 } grCn_Data;
 
