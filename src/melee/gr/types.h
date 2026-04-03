@@ -1187,7 +1187,8 @@ struct grShrineroute_GroundVars {
     /* +6 gp+CA */ u16 xCA;
     /* +8 gp+CC */ u16 xCC;
     /* +A gp+CE */ u16 xCE;
-    u8 _pad[0xD4 - 0xD0];
+    /* +C gp+D0 */ u16 xD0;
+    u8 _pad[0xD4 - 0xD2];
     /* +10 gp+D4 */ u32 xD4;
 };
 
