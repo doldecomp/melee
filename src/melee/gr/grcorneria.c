@@ -131,10 +131,14 @@ void grCorneria_801DCCFC(void)
     grCn_803E1D38.arwing_group[2] = 0;
 
     stage = Stage_80225194();
-    if (stage == 0xE9 || stage == 0x47) {
+    switch (stage) {
+    case 0xE9:
+    case 0x47:
         grCn_804D69B0 = 1;
-    } else {
-        grCn_804D69B0 = 0;
+        break;
+    default:
+        grCn_804D69B0 = (imax = 0);
+        break;
     }
 
     if (grCn_804D69B0 == 1) {
