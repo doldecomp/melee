@@ -1838,7 +1838,8 @@ void grCorneria_801E2228(Ground_GObj* gobj)
             f32 speed = gp->gv.corneria.xFC;
             f32 t = speed / 0.005f;
             if (-gp->gv.corneria.xD0 > (speed * t + -0.0025f * t * t)) {
-                gp->gv.corneria.xFC = speed + 0.005f;
+                t = 0.005f;
+                gp->gv.corneria.xFC = speed + t;
                 if (gp->gv.corneria.xFC > 3.0f) {
                     gp->gv.corneria.xFC = 3.0f;
                 }
