@@ -11,7 +11,7 @@
 #include "lb/forward.h"
 #include <baselib/forward.h>
 
-/* 1DCCFC */ UNK_RET grCorneria_801DCCFC(UNK_PARAMS);
+/* 1DCCFC */ s32 grCorneria_801DCCFC(void);
 /* 1DCE1C */ UNK_RET grCorneria_801DCE1C(UNK_PARAMS);
 /* 1DD2C0 */ void grCorneria_801DD2C0(void);
 /* 1DD350 */ void grCorneria_801DD350(void);

@@ -35,9 +35,86 @@ int grCn_804D466C = -1;
 
 static void* grCn_804D69A0;
 static u32 grCn_804D69A4;
+static s32 grCn_804D69A8;
 static int grCn_804D69AC;
+static s32 grCn_804D69B0;
 
-/// #grCorneria_801DCCFC
+typedef struct {
+    int data[3];
+} grCn_Entry;
+
+extern grCn_Entry grCn_803E2204[][5];
+
+typedef struct grCn_Data {
+    /* 0x000 */ u8 pad_00[0x30];
+    /* 0x030 */ s32 x30[3];
+    /* 0x03C */ s32 indices[3];
+    /* 0x048 */ s32 x48[3];
+    /* 0x054 */ u8 pad_54[0x2DC];
+    /* 0x330 */ Vec3 positions[34];
+    /* +4C8 */ UNK_T pad2;
+    /* 0x4CC */ grCn_Entry entries[][5];
+} grCn_Data;
+
+extern grCn_Data grCn_803E1D38;
+
+s32 grCorneria_801DCCFC(void)
+{
+    f32 temp_f0;
+    f32 temp_f2;
+    s32 temp_r30;
+    s32 var_r31;
+    s32 var_r3;
+    s32 diff;
+
+    grCn_803E1D38.x30[0] = 0;
+    grCn_803E1D38.indices[0] = 0;
+    grCn_803E1D38.x48[0] = 0;
+    grCn_803E1D38.x30[1] = 0;
+    grCn_803E1D38.indices[1] = 0;
+    grCn_803E1D38.x48[1] = 0;
+    grCn_803E1D38.x30[2] = 0;
+    grCn_803E1D38.indices[2] = 0;
+    grCn_803E1D38.x48[2] = 0;
+    var_r3 = Stage_80225194();
+    switch (var_r3) {
+    case 0xE9:
+    case 0x47:
+        grCn_804D69B0 = 1;
+        break;
+    default:
+        grCn_804D69B0 = 0;
+        break;
+    }
+    if (grCn_804D69B0 == 1) {
+        grCn_804D69A8 = 0x78;
+        return var_r3;
+    }
+    temp_f0 = M2C_FIELD(grCn_804D69A0, f32*, 0x3C);
+    temp_f2 = M2C_FIELD(grCn_804D69A0, f32*, 0x40);
+    temp_r30 = (s32) temp_f0;
+    var_r3 = (s32) temp_f2;
+    var_r31 = (s32) temp_f2;
+    if (var_r3 > temp_r30) {
+        diff = var_r31 - temp_r30;
+        if (diff != 0) {
+            var_r3 = HSD_Randi(diff);
+        } else {
+            var_r3 = 0;
+        }
+        var_r31 = temp_r30 + var_r3;
+    } else if (var_r31 < temp_r30) {
+        diff = temp_r30 - var_r31;
+        if (diff != 0) {
+            var_r3 = HSD_Randi(diff);
+        } else {
+            var_r3 = 0;
+        }
+        var_r31 += var_r3;
+    }
+    grCn_804D69A8 = var_r31;
+    return var_r3;
+}
 
 /// #grCorneria_801DCE1C
 
@@ -340,23 +417,6 @@ void grCorneria_801DDD4C(Vec3* vec)
     vec->y = gp->gv.corneria.base_y + gp->gv.corneria.offset_y.val;
     vec->z = 0.0f;
 }
-
-typedef struct {
-    int data[3];
-} grCn_Entry;
-
-extern grCn_Entry grCn_803E2204[][5];
-
-typedef struct grCn_Data {
-    /* 0x000 */ u8 pad0[0x3C];
-    /* 0x03C */ s32 indices[3];
-    /* 0x048 */ u8 pad1[0x2E8];
-    /* 0x330 */ Vec3 positions[34];
-    /* +4C8 */ UNK_T pad2;
-    /* 0x4CC */ grCn_Entry entries[][5];
-} grCn_Data;
-
-extern grCn_Data grCn_803E1D38;
 
 void grCorneria_801DDDA8(HSD_GObj* gobj, Vec3* vec)
 {
