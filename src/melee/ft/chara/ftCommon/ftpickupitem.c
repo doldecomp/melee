@@ -83,6 +83,11 @@ bool ftpickupitem_80094150(Fighter_GObj* gobj, Item_GObj* item_gobj)
     return false;
 }
 
+inline itPickup* ftpickupitem_800942A0_inline(Fighter* fp)
+{
+    return &fp->x294_itPickup;
+}
+
 /// Find item in pickup range?
 Item_GObj* ftpickupitem_800942A0(Fighter_GObj* gobj, u32 flags)
 {
@@ -91,7 +96,7 @@ Item_GObj* ftpickupitem_800942A0(Fighter_GObj* gobj, u32 flags)
     Vec4* offset0;
 
     fp = GET_FIGHTER(gobj);
-    pickup = &fp->x294_itPickup;
+    pickup = ftpickupitem_800942A0_inline(fp);
     offset0 = fp->ground_or_air == GA_Ground ? &pickup->gr_light_offset
                                              : &pickup->air_light_offset;
     if (ftCo_800A2040(fp) && (signed) fp->x1A88.xC == 28) {

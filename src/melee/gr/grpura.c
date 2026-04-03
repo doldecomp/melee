@@ -128,7 +128,7 @@ void grPura_80211DD8(void) {}
 /// #grPura_80211DDC
 void grPura_80211DDC(void)
 {
-    grZakoGenerator_801CAE04(0);
+    grZakoGenerator_801CAE04(NULL);
 }
 
 bool grPura_80211E00(void)

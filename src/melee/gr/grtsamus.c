@@ -98,7 +98,7 @@ void grTSamus_OnLoad(void) {}
 
 void grTSamus_OnStart(void)
 {
-    grZakoGenerator_801CAE04(0);
+    grZakoGenerator_801CAE04(NULL);
 }
 
 bool grTSamus_8022361C(void)

@@ -87,7 +87,7 @@ void grOldYoshi_8020E824(void) {}
 
 void grOldYoshi_8020E828(void)
 {
-    grZakoGenerator_801CAE04(false);
+    grZakoGenerator_801CAE04(NULL);
 }
 
 bool grOldYoshi_8020E84C(void)
@@ -207,15 +207,14 @@ void grOldYoshi_8020EAF4(Ground_GObj* arg) {}
 void grOldYoshi_8020EAF8(Ground_GObj* arg) {}
 
 s16 grOy_803E6574[] = { 0, 1, 1, 5, 2, 9 };
-/// #grOldYoshi_8020EAFC
-void grOldYoshi_8020EAFC(Ground_GObj* arg)
+
+void grOldYoshi_8020EAFC(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(arg);
-    HSD_JObj* jobj = arg->hsd_obj;
+    Ground* gp = GET_GROUND(gobj);
+    HSD_JObj* jobj = GET_JOBJ(gobj);
     int i;
-    PAD_STACK(4);
     Ground_801C2ED0(jobj, gp->map_id);
-    grAnime_801C8138(arg, gp->map_id, 0);
+    grAnime_801C8138(gobj, gp->map_id, 0);
     for (i = 0; i < 3; i++) {
         gp->gv.oldyoshicloud.cloud[i].xC4_0123 = 0;
         gp->gv.oldyoshicloud.cloud[i].xC4_4 = 0;
@@ -223,7 +222,7 @@ void grOldYoshi_8020EAFC(Ground_GObj* arg)
         gp->gv.oldyoshicloud.cloud[i].xD4 = 0.0f;
         gp->gv.oldyoshicloud.cloud[i].xD0 = 0.0f;
         gp->gv.oldyoshicloud.cloud[i].xC8 =
-            Ground_801C3FA4(arg, grOy_803E6574[i * 2 + 1]);
+            Ground_801C3FA4(gobj, grOy_803E6574[i * 2 + 1]);
         gp->gv.oldyoshicloud.cloud[i].xCC =
             HSD_JObjGetTranslationY(gp->gv.oldyoshicloud.cloud[i].xC8);
         mpJointSetCb1(grOy_803E6574[i * 2], gp, fn_8020F2A8);

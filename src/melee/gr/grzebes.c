@@ -187,7 +187,7 @@ void grZebes_801D8528(void) {}
 
 void grZebes_801D852C(void)
 {
-    grZakoGenerator_801CAE04(0);
+    grZakoGenerator_801CAE04(NULL);
 }
 
 bool grZebes_801D8550(void)

@@ -70,7 +70,7 @@ void grTluigi_UnkStage0_OnLoad(void) {}
 
 void grTluigi_UnkStage0_OnStart(void)
 {
-    grZakoGenerator_801CAE04(0);
+    grZakoGenerator_801CAE04(NULL);
 }
 
 bool grTLuigi_80221CAC(void)

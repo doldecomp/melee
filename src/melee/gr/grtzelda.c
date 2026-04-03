@@ -85,7 +85,7 @@ void grTZelda_OnLoad(void) {}
 
 void grTZelda_OnStart(void)
 {
-    grZakoGenerator_801CAE04(0);
+    grZakoGenerator_801CAE04(NULL);
 }
 
 bool grTZelda_80223EC8(void)

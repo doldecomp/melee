@@ -80,7 +80,7 @@ void grTiceclimber_UnkStage0_OnLoad(void) {}
 
 void grTiceclimber_UnkStage0_OnStart(void)
 {
-    grZakoGenerator_801CAE04(0);
+    grZakoGenerator_801CAE04(NULL);
 }
 
 bool grTIceClimber_80220FAC(void)

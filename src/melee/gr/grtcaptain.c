@@ -86,7 +86,7 @@ static void grTCaptain_OnLoad(void) {}
 
 static void grTCaptain_OnStart(void)
 {
-    grZakoGenerator_801CAE04(false);
+    grZakoGenerator_801CAE04(NULL);
 }
 
 static bool grTCaptain_8021FCFC(void)

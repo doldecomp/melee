@@ -645,6 +645,7 @@ struct Item {
         itWstar_ItemVars wstar;
         itZeldaDinFire_ItemVars zeldadinfire;
         itZeldaDinFireExplode_ItemVars zeldadinfireexplode;
+        itZako_ItemVars zako;
         u8 _[0xFCC - 0xDD4];
     } xDD4_itemVar;
 };
