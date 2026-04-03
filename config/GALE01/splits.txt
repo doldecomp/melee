@@ -2883,16 +2883,16 @@ melee/mn/mninfobonus.c:
 melee/mn/mnsnap.c:
 	.text       start:0x80253184 end:0x80258940
 	.data       start:0x803F0168 end:0x803F0570
-	.bss        start:0x804A0A10 end:0x804A0B90
+	.bss        start:0x804A0A10 end:0x804A0BA0
 	.sdata      start:0x804D5070 end:0x804D5090
 	.sdata2     start:0x804DC2C0 end:0x804DC358
 
 melee/mn/mngallery.c:
 	.text       start:0x80258940 end:0x802599EC
 	.rodata     start:0x803B8538 end:0x803B8550
-	.data       start:0x803F0570 end:0x803F06D0
-	.bss        start:0x804A0B90 end:0x804A0BC0
-	.sdata      start:0x804D5090 end:0x804D50A0
+	.data       start:0x803F0570 end:0x803F06CC
+	.bss        start:0x804A0BA0 end:0x804A0BC0
+	.sdata      start:0x804D5090 end:0x804D509D
 	.sbss       start:0x804D6C88 end:0x804D6C90
 	.sdata2     start:0x804DC358 end:0x804DC398
 
