@@ -1181,31 +1181,29 @@ struct ShyGuys {
 };
 
 struct grShrineroute_GroundVars {
-    /* +0 gp+C4 */ u16 xC4;
-    /* +2 gp+C6 */ u16 xC6;
-    /* +4 gp+C8 */ u16 xC8;
-    /* +6 gp+CA */ u16 xCA;
-    /* +8 gp+CC */ u16 xCC;
-    /* +A gp+CE */ u16 xCE;
-    /* +C gp+D0 */ u16 xD0;
+    /* +0x00 gp+C4 */ u16 xC4;
+    /* +0x02 gp+C6 */ u16 xC6;
+    /* +0x04 gp+C8 */ u16 xC8;
+    /* +0x06 gp+CA */ u16 xCA;
+    /* +0x08 gp+CC */ u16 xCC;
+    /* +0x0A gp+CE */ u16 xCE;
+    /* +0x0C gp+D0 */ u16 xD0;
     u8 _pad[0xD4 - 0xD2];
-    /* +10 gp+D4 */ u32 xD4;
+    /* +0x10 gp+D4 */ u32 xD4;
+    /* +0x14 gp+D8 */ struct {
+        /* +0x00 */ Vec3 offset;
+        /* +0x0C */ HSD_JObj* jobj;
+    } platforms[3];
+    /* +0x44 gp+108 */ HSD_GObj* symbols[6];
 };
 
 struct grShrineroute_GroundVars2 {
-    /* +0 gp+C4 */ HSD_GObj* xC4;
-    /* +4 gp+C8 */ HSD_LObj* xC8;
-    u8 _[0x108 - 0xCC];
-    HSD_GObj* x108;
-    s32 x10C;
-    s32 x110;
-    s32 x114;
-    u32 x118;
-    void* x11C;
-    u8 _3[0x168 - 0x120];
-    /* +0 gp+168 */ u32 x168;
-    /* +0 gp+16C */ HSD_LObj* x16C;
-    /* +0 gp+170 */ HSD_LObj* x170;
+    /* +0x00 gp+C4 */ HSD_GObj* xC4;
+    /* +0x04 gp+C8 */ HSD_LObj* xC8[20];
+    /* +0x54 gp+118 */ u32 x118[20];
+    /* +0xA4 gp+168 */ u32 x168;
+    /* +0xA8 gp+16C */ HSD_LObj* x16C;
+    /* +0xAC gp+170 */ HSD_LObj* x170;
 };
 
 struct grShrineroute_GroundVars3 {
