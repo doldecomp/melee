@@ -108,7 +108,7 @@ void grTpeach_UnkStage0_OnLoad(void) {}
 
 void grTpeach_UnkStage0_OnStart(void)
 {
-    grZakoGenerator_801CAE04(0);
+    grZakoGenerator_801CAE04(NULL);
 }
 
 bool grTPeach_80222950(void)

@@ -5,6 +5,9 @@
 #include <platform.h>
 
 #include "gr/forward.h"
+
+#include "gr/types.h"
+
 #include "lb/forward.h"
 #include "mp/forward.h"
 #include <baselib/forward.h>
@@ -60,7 +63,8 @@ struct IceMountainParams {
     float xB0;
     float xB4;
     s16 xB8;
-    bool xBC;
+    s16 pad;
+    grZakoGenerator_SpawnDesc xBC;
     float xC0;
     float xC4;
     float xC8;

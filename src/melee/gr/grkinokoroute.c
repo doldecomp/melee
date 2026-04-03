@@ -24,7 +24,7 @@
 
 static struct {
     int x0;
-    int x4;
+    grZakoGenerator_SpawnDesc x4;
 }* grNKr_804D6A50;
 
 StageCallbacks grNKr_803E57F0[4] = {

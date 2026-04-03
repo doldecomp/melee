@@ -174,6 +174,7 @@ struct GroundVars_unk {
     int xD4;
     int xD8;
     int xDC;
+    int xE0;
 };
 
 struct GroundVars_izumi {
@@ -310,6 +311,41 @@ struct grKraid_GroundVars2 {
     /*  + gp+D8 */ HSD_JObj* x14;
 };
 
+typedef struct grZakoGenerator_SpawnDesc {
+    /* +0x0 */ u16 kind;
+    /* +0x2 */ u8 x2;
+    /* +0x3 */ u8 respawn;
+} grZakoGenerator_SpawnDesc;
+
+typedef struct grZakoGenerator_Spawn {
+    /* +0x00 */ Vec3 pos0;
+    /* +0x0C */ Vec3 pos1;
+} grZakoGenerator_Spawn;
+
+typedef HSD_Generator* (*grZakoGenerator_SpawnFunc)(Vec3*, s32);
+
+typedef struct grZakoGenerator_Config {
+    /* +0x00 */ grZakoGenerator_Spawn* spawn_descs;
+    /* +0x04 */ grZakoGenerator_Spawn* spawns;
+    /* +0x08 */ int count;
+    /* +0x0C */ grZakoGenerator_SpawnFunc callback;
+    /* +0x10 */ f32 x10;
+    /* +0x14 */ HSD_Generator* gen;
+    /* +0x18 */ int x18;
+} grZakoGenerator_Config;
+
+typedef struct grZakoGenerator_Entry {
+    /* +0x0 */ s16 x0;
+    /* +0x2 */ s16 x2;
+    /* +0x4 */ Item_GObj* x4;
+    /* +0x8 */ s32 x8;
+} grZakoGenerator_Entry;
+
+typedef struct grZakoGenerator_Data {
+    /* +0x000 */ grZakoGenerator_Entry entries[80];
+    /* +0x3C0 */ grZakoGenerator_Entry sentinel;
+} grZakoGenerator_Data;
+
 struct grCorneria_GroundVars {
     union {
         struct {
@@ -326,8 +362,8 @@ struct grCorneria_GroundVars {
         u8 value;
     } xC6;
     u8 xC7;
-    u32 xC8;
-    u32 xCC;
+    grZakoGenerator_Config* xC8;
+    grZakoGenerator_Config* xCC;
     f32 xD0;
     f32 base_x;
     f32 base_y;
@@ -580,8 +616,7 @@ struct grInishie2_GroundVars {
 };
 
 struct grOldKongo_GroundVars {
-    u8 xC4;
-    u8 xC5;
+    s16 xC4;
     s16 xC6;
     s16 xC8;
     s16 xCA;
@@ -589,6 +624,12 @@ struct grOldKongo_GroundVars {
     s16 xCE;
     void* xD0;
     void* xD4;
+    f32 xD8;
+    f32 xDC;
+    f32 xE0;
+    f32 xE4;
+    f32 xE8;
+    f32 xEC;
 };
 
 /// likely for Cathrine (Birdo)
@@ -769,7 +810,8 @@ struct grRCruise_GroundVars {
         u8 b6 : 1;
         u8 b7 : 1;
     } xC4;
-    /* +04 gp+C8 */ char pad_0[0x8];
+    /* +04 gp+C8 */ struct lb_80011A50_t* x04;
+    /* +08 gp+CC */ f32 x08;
     /* +0C gp+D0 */ u32 x0C;
     /* +10 gp+D4 */ u32 x10;
     /* +14 gp+D8 */ f32 x14;
@@ -797,6 +839,11 @@ struct grFigureGet_GroundVars {
     /*  +4 gp+C8 */ UNK_T x4;
     /*  +8 gp+CC */ int x8;
     /*  +C gp+D0 */ int xC;
+    /* +10 gp+D4 */ int x10;
+    /* +14 gp+D8 */ int x14;
+    /* +18 gp+DC */ int x18;
+    /* +1C gp+E0 */ int x1C[3];
+    /* +28 gp+EC */ HSD_GObj* x28[3];
 };
 
 struct grFourside_GroundVars {

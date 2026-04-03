@@ -38,6 +38,9 @@ static struct grOnett_StageParam {
     /* 0x00 */ float awning_initial;
     /* 0x04 */ u8 pad04[0x1C];
     /* 0x20 */ float awning_delta;
+    /* 0x24 */ u8 pad24[0x10];
+    /* 0x34 */ float x34;
+    /* 0x38 */ float x38;
 }* grOt_804D69C0;
 
 void grOnett_801E3734(bool arg) {}
@@ -195,7 +198,31 @@ bool grOnett_801E3D98(Ground_GObj* gobj)
 
 void grOnett_801E40E0(Ground_GObj* gobj) {}
 
-/// #grOnett_801E40E4
+void grOnett_801E40E4(Ground* gp, s32 arg1, CollData* cd, s32 arg3,
+                      mpLib_GroundEnum arg4, f32 arg5)
+{
+    PAD_STACK(8);
+
+    if (arg4 == 1) {
+        gp->gv.unk.xC8 += 1;
+        switch (gp->gv.kongo3.xC4) {
+        case 0:
+            if (gp->gv.unk.xC8 < grOt_804D69C0->x34) {
+                gp->gv.kongo3.xC6 = 1;
+                return;
+            }
+            gp->gv.kongo3.xC6 = 2;
+            return;
+        case 3:
+            if (gp->gv.unk.xC8 < grOt_804D69C0->x38) {
+                gp->gv.kongo3.xC6 = 4;
+                return;
+            }
+            gp->gv.kongo3.xC6 = 5;
+            break;
+        }
+    }
+}
 
 void grOnett_801E41B0(HSD_GObj* gobj)
 {

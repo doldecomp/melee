@@ -98,7 +98,7 @@ void grTfox_UnkStage0_OnLoad(void) {}
 
 void grTfox_UnkStage0_OnStart(void)
 {
-    grZakoGenerator_801CAE04(0);
+    grZakoGenerator_801CAE04(NULL);
 }
 
 bool grTFox_80220C24(void)

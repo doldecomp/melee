@@ -108,7 +108,7 @@ void grFourside_801F2DA0(void) {}
 
 void grFourside_801F2DA4(void)
 {
-    grZakoGenerator_801CAE04(0);
+    grZakoGenerator_801CAE04(NULL);
 }
 
 bool grFourside_801F2DC8(void)

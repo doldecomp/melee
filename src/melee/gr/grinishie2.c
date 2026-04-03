@@ -217,7 +217,7 @@ void grInishie2_801FCCAC(void) {}
 
 void grInishie2_801FCCB0(void)
 {
-    grZakoGenerator_801CAE04(0);
+    grZakoGenerator_801CAE04(NULL);
 }
 
 bool grInishie2_801FCCD4(void)

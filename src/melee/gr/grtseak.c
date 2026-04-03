@@ -98,7 +98,7 @@ void grTseak_OnLoad(void) {}
 
 void grTseak_OnStart(void)
 {
-    grZakoGenerator_801CAE04(0);
+    grZakoGenerator_801CAE04(NULL);
 }
 
 bool grTSeak_80223900(void)
