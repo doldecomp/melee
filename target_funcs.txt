@@ -2,7 +2,7 @@ file: src/melee/gr/grcorneria.c
 funcs:
 - [x] grCorneria_801DD534     
 - [x] grCorneria_801E1878     
-- [ ] grCorneria_801E2110     
+- [x] grCorneria_801E2110     
 - [ ] grCorneria_801DCCFC     
 - [ ] grCorneria_801DD350     
 - [ ] grCorneria_801E25C4     
