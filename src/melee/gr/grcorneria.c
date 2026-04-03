@@ -791,7 +791,7 @@ void grCorneria_801E1878(Ground_GObj* gobj)
     Ground_801C39C0();
     Ground_801C3BB4();
 
-    PAD_STACK(16);
+    PAD_STACK(12);
 }
 
 /// #grCorneria_801E1970
