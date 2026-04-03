@@ -1,0 +1,13 @@
+file: src/melee/gr/grshrineroute.c
+funcs:
+- [x] grShrineRoute_8020AF38     
+- [x] grShrineRoute_8020AB58     
+- [x] grShrineRoute_80209AF0     
+- [x] grShrineRoute_8020AA40     
+- [x] grShrineRoute_8020AE08     
+- [ ] grShrineRoute_8020A8A4     
+- [ ] grShrineRoute_80208D14     
+- [ ] fn_80208A38                
+- [ ] grShrineRoute_80209BEC     
+- [ ] grShrineRoute_8020A21C     
+- [ ] grShrineRoute_80208F70

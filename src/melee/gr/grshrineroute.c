@@ -24,6 +24,7 @@
 #include <baselib/gobjproc.h>
 #include <baselib/lobj.h>
 #include <baselib/random.h>
+#include <MSL/trigf.h>
 
 s16 grSh_Route_803E58E0[8] = {
     0x33, 0x4F, 0x65, 0x66, 0x73, 0x74, 0x83, 0x00
@@ -353,7 +354,19 @@ void grShrineRoute_8020A89C(Ground_GObj* arg) {}
 
 void grShrineRoute_8020A8A0(Ground_GObj* arg) {}
 
-/// #grShrineRoute_8020A8A4
+void grShrineRoute_8020A8A4(Ground_GObj* gobj)
+{
+    Ground* gp = gobj->user_data;
+    f32 angle;
+
+    if (gp->gv.shrineroute3.xC4 != NULL) {
+        angle = (f32)(6.283185307179586 * HSD_Randf());
+        HSD_JObjSetTranslateX(gp->gv.shrineroute3.xC4, 300.0f * cosf(angle));
+        HSD_JObjSetTranslateY(gp->gv.shrineroute3.xC4, 300.0f * sinf(angle));
+        gp->gv.shrineroute3.xD8 = 0.04363323f * ((2.0f * HSD_Randf()) - 1.0f);
+        gp->gv.shrineroute3.xDC = 0.04363323f * ((2.0f * HSD_Randf()) - 1.0f);
+    }
+}
 
 void grShrineRoute_8020AA40(HSD_GObj* gobj)
 {

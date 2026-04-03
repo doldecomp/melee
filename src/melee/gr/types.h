@@ -1207,6 +1207,8 @@ struct grShrineroute_GroundVars3 {
     /* +8 gp+CC */ f32 xCC;
     /* +C gp+D0 */ f32 xD0;
     /* +10 gp+D4 */ f32 xD4;
+    /* +14 gp+D8 */ f32 xD8;
+    /* +18 gp+DC */ f32 xDC;
 };
 
 struct Battlefield {
