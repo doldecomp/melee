@@ -602,18 +602,20 @@ void grCorneria_801DDE88(HSD_GObj* gobj)
 {
     Vec3 sp2C;
     Vec3 sp20;
+    grCn_Data* data = &grCn_803E1D38;
     Ground* gp = GET_GROUND(gobj);
 
     sp2C = grCn_803B809C;
     if (gobj != NULL) {
+        Ground* gp2 = GET_GROUND(gobj);
         Ground* ship = GET_GROUND(Ground_801C2BA4(3));
         s32 idx;
         lb_8000B1CC(Ground_801C3FA4(gobj, 4), NULL, &sp20);
-        idx = grCn_803E1D38.arwing_type[gp->gv.arwing.xC8];
+        idx = data->arwing_type[gp2->gv.arwing.xC8];
         sp2C.x = ship->gv.corneria.offset_x +
-                 (-sp20.z + grCn_803E1D38.positions[idx].x);
-        sp2C.y = sp20.y + grCn_803E1D38.positions[idx].y;
-        sp2C.z = sp20.x + grCn_803E1D38.positions[idx].z;
+                 (-sp20.z + data->positions[idx].x);
+        sp2C.y = sp20.y + data->positions[idx].y;
+        sp2C.z = sp20.x + data->positions[idx].z;
     } else {
         sp2C.z = 0.0f;
         sp2C.y = 0.0f;
@@ -627,9 +629,8 @@ void grCorneria_801DDE88(HSD_GObj* gobj)
         if (grCorneria_801DEC08(&sp2C) == 0) {
             lbAudioAx_800237A8(0x55730, 0x7F, 0x40);
             gp->gv.arwing.xD8 = 1;
-            return;
         }
-        return;
+        break;
     case 1:
         if (grCorneria_801DEC94(&sp2C) == 0) {
             gp->gv.arwing.xD8 = 2;
