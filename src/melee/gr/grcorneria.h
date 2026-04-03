@@ -73,14 +73,14 @@
 /* 1E1060 */ void grCorneria_801E1060(Ground_GObj*);
 /* 1E12D0 */ void fn_801E12D0(Item_GObj*, Ground*);
 /* 1E12D4 */ void fn_801E12D4(Item_GObj*, Ground*, Vec3*, HSD_GObj*, f32);
-/* 1E1348 */ UNK_RET grCorneria_801E1348(UNK_PARAMS);
+/* 1E1348 */ void grCorneria_801E1348(Ground_GObj*);
 /* 1E1878 */ void grCorneria_801E1878(Ground_GObj*);
-/* 1E1970 */ UNK_RET grCorneria_801E1970(UNK_PARAMS);
+/* 1E1970 */ void grCorneria_801E1970(Ground_GObj*);
 /* 1E1BF0 */ HSD_GObj* grCorneria_801E1BF0(void);
-/* 1E2110 */ UNK_RET grCorneria_801E2110(UNK_PARAMS);
-/* 1E2228 */ UNK_RET grCorneria_801E2228(UNK_PARAMS);
-/* 1E2454 */ HSD_Generator* grCorneria_801E2454(Vec3*);
-/* 1E2480 */ HSD_Generator* grCorneria_801E2480(Vec3*);
+/* 1E2110 */ void grCorneria_801E2110(void);
+/* 1E2228 */ void grCorneria_801E2228(Ground_GObj*);
+/* 1E2454 */ HSD_Generator* grCorneria_801E2454(Vec3*, s32);
+/* 1E2480 */ HSD_Generator* grCorneria_801E2480(Vec3*, s32);
 /* 1E24AC */ void smashTaunt_801E24AC(Ground_GObj*, int);
 /* 1E2550 */ void smashTaunt_801E2550(Ground_GObj*,
                                       struct grSmashTaunt_GroundVars*);

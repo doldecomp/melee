@@ -214,7 +214,7 @@ void grIzumi_OnLoad(void)
 
 void grIzumi_OnStart(void)
 {
-    grZakoGenerator_801CAE04(0);
+    grZakoGenerator_801CAE04(NULL);
 }
 
 bool grIzumi_801CBCE0(void)

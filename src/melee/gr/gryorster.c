@@ -73,7 +73,7 @@ void grYorster_8020200C(void)
 
 void grYorster_80202010(void)
 {
-    grZakoGenerator_801CAE04(0);
+    grZakoGenerator_801CAE04(NULL);
 }
 
 bool grYorster_80202034(void)

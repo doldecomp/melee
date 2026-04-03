@@ -2,6 +2,7 @@
 
 #include <platform.h>
 
+#include "baselib/forward.h"
 #include "gr/forward.h"
 
 #include "gr/granime.h"
@@ -11,7 +12,17 @@
 #include "gr/inlines.h"
 #include "gr/types.h"
 
+#include "it/forward.h"
+
+#include "it/inlines.h"
+#include "it/items/itcoin.h"
+#include "it/types.h"
+
 #include "lb/forward.h"
+
+#include "lb/types.h"
+
+#include "mp/forward.h"
 
 #include <dolphin/mtx.h>
 #include <dolphin/os/OSError.h>
@@ -81,7 +92,7 @@ void grFigureGet_OnLoad(void) {}
 
 void grFigureGet_OnStart(void)
 {
-    grZakoGenerator_801CAE04(0);
+    grZakoGenerator_801CAE04(NULL);
 }
 
 bool grFigureGet_802195C4(void)
@@ -131,7 +142,35 @@ bool grFigureGet_80219890(Ground_GObj* gobj)
 
 void grFigureGet_80219B0C(Ground_GObj* gobj) {}
 
-/// #grFigureGet_80219B10
+void grFigureGet_80219B10(Ground* gp, s32 arg1, CollData* cd, s32 arg3,
+                          mpLib_GroundEnum arg4, f32 arg5)
+{
+    HSD_GObj* item_gobj = cd->x0_gobj;
+    if ((s32) cd->x34_flags.b1234 == 5 && item_gobj &&
+        item_gobj->classifier == HSD_GOBJ_CLASS_ITEM)
+    {
+        Item* ip = GET_ITEM(cd->x0_gobj);
+        if (ip->kind == It_Kind_Coin && gp->gv.figureget.x8 < 3) {
+            HSD_GObj* item_gobj = cd->x0_gobj;
+            int value = it_802F2020(item_gobj);
+            int count = 0;
+            int i;
+            for (i = 0; i < gp->gv.figureget.x8; i++) {
+                if (gp->gv.figureget.x28[i] == cd->x0_gobj) {
+                    count++;
+                }
+            }
+            if (count == 0) {
+                if (cd->cur_pos.x <= 4.5f && cd->cur_pos.x >= -4.5f) {
+                    it_802F202C(cd->x0_gobj);
+                    gp->gv.figureget.x28[gp->gv.figureget.x8] = cd->x0_gobj;
+                    gp->gv.figureget.x1C[gp->gv.figureget.x8] = value;
+                    gp->gv.figureget.x8++;
+                }
+            }
+        }
+    }
+}
 
 void grFigureGet_80219C34(HSD_GObj* gobj)
 {

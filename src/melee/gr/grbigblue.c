@@ -177,7 +177,7 @@ void grBigBlue_801E59C8(void) {}
 
 void grBigBlue_801E59CC(void)
 {
-    grZakoGenerator_801CAE04(0);
+    grZakoGenerator_801CAE04(NULL);
 }
 
 bool grBigBlue_801E59F0(void)

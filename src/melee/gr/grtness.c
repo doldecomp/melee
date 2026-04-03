@@ -100,7 +100,7 @@ static void grTness_UnkStage0_OnLoad(void)
 
 static void grTness_UnkStage0_OnStart(void)
 {
-    grZakoGenerator_801CAE04(false);
+    grZakoGenerator_801CAE04(NULL);
 }
 
 static bool grTNess_8022266C(void)

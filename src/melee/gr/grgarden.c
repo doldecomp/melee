@@ -91,7 +91,7 @@ void grGarden_80202C24(void)
 
 void grGarden_80202C4C(void)
 {
-    grZakoGenerator_801CAE04(0);
+    grZakoGenerator_801CAE04(NULL);
 }
 
 bool grGarden_80202C70(void)

@@ -78,7 +78,7 @@ void grTest_UnkStage0_OnLoad(void) {}
 
 void grTest_UnkStage0_OnStart(void)
 {
-    grZakoGenerator_801CAE04(false);
+    grZakoGenerator_801CAE04(NULL);
 }
 
 bool grTest_8020703C(void)
