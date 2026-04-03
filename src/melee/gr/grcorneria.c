@@ -1262,7 +1262,7 @@ int grCorneria_801E08CC(void)
             return 4;
         }
     }
-    __assert("grcorneria.c", 0x9AC, "0");
+    HSD_ASSERT(0x9AC, 0);
     return -1;
 }
 
@@ -1916,43 +1916,43 @@ s32 grCorneria_801E2598(u32 arg0, u32 arg1)
 void grCorneria_801E25C4(HSD_GObj* gobj, void* gv, int line, int arg3,
                          int arg4)
 {
-    s16* table;
-    s16 joint0;
+    struct grSmashTaunt_GroundVars* v = gv;
     s16 joint1;
+    s16 joint0;
     int i;
-    u8* v = gv;
+    PAD_STACK(8);
 
     i = 0;
-    *(s16*) (v + 4) = line;
-    *(s16*) (v + 6) = arg3;
-    *(s32*) (v + 8) = arg4;
-    table = &grCn_803E1D38.dialog_joints[0].joint0;
-    joint0 = grCn_803E1D38.dialog_joints[line].joint0;
-    joint1 = grCn_803E1D38.dialog_joints[line].joint1;
+    v->line = line;
+    v->sis_data_idx = arg3;
+    v->sound_id = arg4;
+    joint0 = grCn_803E1D38.dialog_joints[v->line].joint0;
+    joint1 = grCn_803E1D38.dialog_joints[v->line].joint1;
     do {
-        if (i != 0 && *(s16*) (v + 4) != i) {
-            HSD_JObj* j0 = Ground_801C3FA4(gobj, table[0]);
+        if (i != 0 && v->line != i) {
+            HSD_JObj* j0 = Ground_801C3FA4(gobj,
+                grCn_803E1D38.dialog_joints[i].joint0);
             if (j0 != NULL) {
                 HSD_JObjSetFlagsAll(j0, JOBJ_HIDDEN);
             }
             {
-                HSD_JObj* j1 = Ground_801C3FA4(gobj, table[1]);
+                HSD_JObj* j1 = Ground_801C3FA4(gobj,
+                    grCn_803E1D38.dialog_joints[i].joint1);
                 if (j1 != NULL) {
                     HSD_JObjSetFlagsAll(j1, JOBJ_HIDDEN);
                 }
             }
         }
         i += 1;
-        table += 2;
     } while (i < 5);
-    *(HSD_JObj**) (v + 0xC) = Ground_801C3FA4(gobj, joint0);
-    *(HSD_JObj**) (v + 0x10) = Ground_801C3FA4(gobj, joint1);
-    *(HSD_JObj**) (v + 0x14) = Ground_801C3FA4(gobj, 5);
-    *(s16*) (v + 0x18) = joint0;
-    *(s16*) (v + 0x1A) = joint1;
-    *(s16*) (v + 0x1C) = 5;
-    *(s16*) (v + 0) = 0;
-    *(s16*) (v + 2) = 0xA;
+    v->jobj0 = Ground_801C3FA4(gobj, joint0);
+    v->jobj1 = Ground_801C3FA4(gobj, joint1);
+    v->jobj2 = Ground_801C3FA4(gobj, 5);
+    v->joint_idx0 = joint0;
+    v->joint_idx1 = joint1;
+    v->joint_idx2 = 5;
+    v->state = 0;
+    v->timer = 0xA;
     grAnime_801C8098(gobj, joint0, 7, 0, 0.0f, 1.0f);
     grAnime_801C8098(gobj, joint1, 7, 0, 0.0f, 1.0f);
     grAnime_801C8098(gobj, 5, 7, 0, 0.0f, 1.0f);
