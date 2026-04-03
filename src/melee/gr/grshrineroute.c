@@ -8,6 +8,12 @@
 #include "baselib/forward.h"
 
 #include "baselib/jobj.h"
+#include "cm/camera.h"
+#include "gm/gm_1601.h"
+#include "gr/granime.h"
+#include "gr/grlib.h"
+#include "gr/stage.h"
+#include "lb/lb_00F9.h"
 #include "ef/efsync.h"
 #include "ft/ftdevice.h"
 #include "ft/ftlib.h"
@@ -109,8 +115,8 @@ static struct {
     int x10;
     f32 x14;
     f32 x18;
-    int x1C;
-    int x20;
+    f32 x1C;
+    f32 x20;
     int x24;
     grZakoGenerator_SpawnDesc x28;
 }* grSh_Route_804D6A58;
@@ -374,6 +380,419 @@ bool grShrineRoute_80208F14(void)
 }
 
 /// #grShrineRoute_80208F70
+void grShrineRoute_80208F70(Ground_GObj* gobj)
+{
+    Vec3 sp88;
+    Vec3 sp7C;
+    Vec3 sp68;
+    Vec3 sp5C;
+    Vec3 sp50;
+    Vec3 sp44;
+    Ground* gp = gobj->user_data;
+    HSD_GObj* player;
+    s32 track_plat = 0;
+    PAD_STACK(64);
+
+    player = Ground_801C57A4();
+    if (player != NULL) {
+        ftLib_80086644(player, &sp7C);
+    } else {
+        sp7C.z = 0.0f;
+        sp7C.y = 0.0f;
+        sp7C.x = 0.0f;
+    }
+
+    switch (gp->gv.shrineroute.xC4) {
+    case 0: {
+        f32 radius;
+        s32 result;
+        track_plat = 0;
+        radius = grSh_Route_804D6A58->x20 * Ground_801C0498();
+        result = Ground_801C3DB4(grShrineRoute_80208F14,
+                                 grSh_Route_804D6A58->x1C *
+                                     Ground_801C0498(),
+                                 radius);
+        if (result != -1) {
+            s32 ix = result - 0xBD;
+            if (!(gp->gv.shrineroute.xC6 & (1 << ix))) {
+                Ground* sym = (Ground*)((u8*)gp + ix * 4);
+                gp->gv.shrineroute.xC8 = (u16)result;
+                HSD_ASSERT(0x213, sym->gv.shrineroute2.x108);
+                {
+                    s32 mid =
+                        ((Ground*)sym->gv.shrineroute2.x108
+                             ->user_data)
+                            ->map_id;
+                    if (player != NULL) {
+                        Player_80031790(
+                            (s32)ftLib_80086BE0(player));
+                    }
+                    if (mid == 3) {
+                        gp->gv.shrineroute.xC4 = 6;
+                        gp->gv.shrineroute.xD0 = 0x3C;
+                    } else {
+                        HSD_GObj* temp;
+                        HSD_JObj* ejobj;
+
+                        gp->gv.shrineroute.xC4 = 1;
+                        gp->gv.shrineroute.xCE = 0x3C;
+                        mpLib_80057BC0(0);
+                        mpLib_80057BC0(1);
+                        mpLib_80057BC0(2);
+                        mpLib_80057BC0(3);
+                        mpLib_80057BC0(4);
+                        mpLib_80057BC0(5);
+                        mpLib_80057BC0(6);
+                        mpLib_80057BC0(7);
+                        temp = grShrineRoute_802088C0(5);
+                        gp->gv.shrineroute.xD4 = (u32)temp;
+                        if (temp != NULL) {
+                            ejobj = ((HSD_GObj*)gp->gv
+                                         .shrineroute.xD4)
+                                        ->hsd_obj;
+                            HSD_JObjSetFlagsAll(ejobj, 0x10);
+                            Ground_801C2D24(result, &sp88);
+                            HSD_JObjSetTranslate(ejobj, &sp88);
+                        }
+                        grMaterial_801C9604(
+                            (HSD_GObj*)gobj,
+                            grSh_Route_804D6A58->x0, 0);
+                        temp = Ground_801C2BA4(2);
+                        if (temp != NULL) {
+                            grMaterial_801C9604(
+                                temp,
+                                grSh_Route_804D6A58->x0, 0);
+                        }
+                        if (result != 0xBD) {
+                            HSD_JObj* j = Ground_801C3FA4(
+                                (HSD_GObj*)gobj, 0x13);
+                            if (j != NULL) {
+                                HSD_JObjSetFlagsAll(j, 0x10);
+                            }
+                            mpLib_80057BC0(8);
+                        }
+                        if (result != 0xBE) {
+                            HSD_JObj* j = Ground_801C3FA4(
+                                (HSD_GObj*)gobj, 0x14);
+                            if (j != NULL) {
+                                HSD_JObjSetFlagsAll(j, 0x10);
+                            }
+                            mpLib_80057BC0(9);
+                        }
+                        if (result != 0xBF) {
+                            HSD_JObj* j = Ground_801C3FA4(
+                                (HSD_GObj*)gobj, 0x12);
+                            if (j != NULL) {
+                                HSD_JObjSetFlagsAll(j, 0x10);
+                            }
+                            mpLib_80057BC0(0xA);
+                        }
+                        if (result != 0xC0) {
+                            HSD_JObj* j = Ground_801C3FA4(
+                                (HSD_GObj*)gobj, 0x11);
+                            if (j != NULL) {
+                                HSD_JObjSetFlagsAll(j, 0x10);
+                            }
+                            mpLib_80057BC0(0xB);
+                        }
+                        if (result != 0xC1) {
+                            HSD_JObj* j = Ground_801C3FA4(
+                                (HSD_GObj*)gobj, 0x10);
+                            if (j != NULL) {
+                                HSD_JObjSetFlagsAll(j, 0x10);
+                            }
+                            mpLib_80057BC0(0xC);
+                        }
+                        if (result != 0xC2) {
+                            HSD_JObj* j = Ground_801C3FA4(
+                                (HSD_GObj*)gobj, 0xF);
+                            if (j != NULL) {
+                                HSD_JObjSetFlagsAll(j, 0x10);
+                            }
+                            mpLib_80057BC0(0xD);
+                        }
+                        stage_info.x6DC = 1;
+                        {
+                            HSD_JObj* dst =
+                                Ground_801C2CF4(5);
+                            HSD_JObj* src =
+                                Ground_801C2CF4(result - 0xA);
+                            if (dst != NULL) {
+                                HSD_JObjGetTranslation(
+                                    src, &sp68);
+                                HSD_JObjSetTranslate(
+                                    dst, &sp68);
+                            }
+                        }
+                        grZakoGenerator_801CAF08();
+                        grShrineRoute_8020B020(
+                            (HSD_GObj*)gobj,
+                            (s32)gp->gv.shrineroute.xC8, 1);
+                    }
+                }
+            }
+        }
+        break;
+    }
+    case 1: {
+        track_plat = 1;
+        if (grLib_801C96E8((HSD_GObj*)gobj) != 0) {
+            gp->gv.shrineroute.xC4 = 2;
+            HSD_JObjSetFlagsAll(
+                Ground_801C3FA4((HSD_GObj*)gobj, 1), 0x10);
+            HSD_JObjSetFlagsAll(
+                Ground_801C3FA4((HSD_GObj*)gobj, 1), 0x10);
+            {
+                HSD_GObj* gr2 = Ground_801C2BA4(2);
+                if (gr2 != NULL) {
+                    HSD_JObjSetFlagsAll(
+                        Ground_801C3FA4(gr2, 0), 0x10);
+                }
+            }
+            grAnime_801C7A04((HSD_GObj*)gobj, 0, 7U, 0.0f);
+            grLib_801C9908(gobj->hsd_obj);
+            if (gp->gv.shrineroute.xD4 != 0) {
+                grMaterial_801C9604(
+                    (HSD_GObj*)gp->gv.shrineroute.xD4,
+                    grSh_Route_804D6A58->x4, 0);
+            }
+        }
+        break;
+    }
+    case 2: {
+        track_plat = 1;
+        if (gp->gv.shrineroute.xD4 != 0) {
+            HSD_JObj* ejobj =
+                ((HSD_GObj*)gp->gv.shrineroute.xD4)->hsd_obj;
+            if (HSD_JObjGetFlags(ejobj) & 0x10) {
+                void* anim =
+                    ((HSD_GObj*)gp->gv.shrineroute.xD4)
+                        ->user_data;
+                HSD_JObjClearFlagsAll(ejobj, 0x10);
+                grAnime_801C8138(
+                    (HSD_GObj*)gp->gv.shrineroute.xD4,
+                    ((Ground*)anim)->map_id, 0);
+            }
+        }
+        {
+            HSD_GObj* eff2 =
+                (HSD_GObj*)gp->gv.shrineroute.xD4;
+            if (((eff2 != NULL) &&
+                 (grLib_801C96E8(eff2) != 0)) ||
+                (gp->gv.shrineroute.xD4 == 0))
+            {
+                gp->gv.shrineroute.xC4 = 3;
+                Ground_801C5750();
+                gm_801674C4(6, 1, 1,
+                             (s8)(gp->gv.shrineroute.xC8 - 0xA),
+                             (s32)grShrineRoute_8020AD24);
+                Player_80031900();
+                grShrineRoute_8020AF38(
+                    (HSD_GObj*)gobj,
+                    (s32)gp->gv.shrineroute.xC8);
+            }
+        }
+        break;
+    }
+    case 3: {
+        track_plat = 1;
+        if ((Ground_801C5764() == 1) &&
+            (gp->gv.shrineroute.xCA != 0) &&
+            (gp->gv.shrineroute.xCC != 0))
+        {
+            gp->gv.shrineroute.xC6 = (u16)(
+                gp->gv.shrineroute.xC6 |
+                (1 << (gp->gv.shrineroute.xC8 - 0xBD)));
+            grZakoGenerator_801CAEF0(1);
+            grShrineRoute_8020B020((HSD_GObj*)gobj, -1, 0);
+            gp->gv.shrineroute.xCE = 0x3C;
+            mpJointListAdd(0);
+            mpJointListAdd(1);
+            mpJointListAdd(2);
+            mpJointListAdd(3);
+            mpJointListAdd(4);
+            mpJointListAdd(5);
+            mpJointListAdd(6);
+            mpJointListAdd(7);
+            grShrineRoute_8020B0AC();
+            if (gp->gv.shrineroute.xD4 != 0) {
+                grMaterial_801C9604(
+                    (HSD_GObj*)gp->gv.shrineroute.xD4,
+                    grSh_Route_804D6A58->x8, 0);
+            }
+            stage_info.x6DC = 0;
+            gp->gv.shrineroute.xC4 = 4;
+        }
+        break;
+    }
+    case 4: {
+        HSD_GObj* eff4;
+        track_plat = 0;
+        eff4 = (HSD_GObj*)gp->gv.shrineroute.xD4;
+        if (((eff4 != NULL) &&
+             (grLib_801C96E8(eff4) != 0)) ||
+            (gp->gv.shrineroute.xD4 == 0))
+        {
+            HSD_GObj* temp4;
+            gp->gv.shrineroute.xC4 = 5;
+            grLib_801C9908(
+                ((HSD_GObj*)gp->gv.shrineroute.xD4)->hsd_obj);
+            temp4 = (HSD_GObj*)gp->gv.shrineroute.xD4;
+            if (temp4 != NULL) {
+                Ground_801C4A08(temp4);
+                gp->gv.shrineroute.xD4 = 0;
+            }
+            grMaterial_801C9604(
+                (HSD_GObj*)gobj, grSh_Route_804D6A58->xC, 0);
+            {
+                HSD_GObj* gr2 = Ground_801C2BA4(2);
+                if (gr2 != NULL) {
+                    grMaterial_801C9604(
+                        gr2, grSh_Route_804D6A58->xC, 0);
+                }
+            }
+        }
+        break;
+    }
+    case 5: {
+        HSD_JObj* j19;
+        track_plat = 0;
+        j19 = Ground_801C3FA4((HSD_GObj*)gobj, 1);
+        if (HSD_JObjGetFlags(j19) & 0x10) {
+            HSD_GObj* gr2;
+            u16 pid;
+            HSD_JObjClearFlagsAll(j19, 0x10);
+            HSD_JObjClearFlagsAll(
+                Ground_801C3FA4((HSD_GObj*)gobj, 1), 0x10);
+            gr2 = Ground_801C2BA4(2);
+            if (gr2 != NULL) {
+                HSD_JObjClearFlagsAll(
+                    Ground_801C3FA4(gr2, 0), 0x10);
+            }
+            grAnime_801C8138((HSD_GObj*)gobj, gp->map_id, 0);
+            pid = gp->gv.shrineroute.xC8;
+            if ((s32)pid != 0xBD) {
+                HSD_JObj* j = Ground_801C3FA4(
+                    (HSD_GObj*)gobj, 0x13);
+                if (j != NULL) {
+                    HSD_JObjClearFlagsAll(j, 0x10);
+                }
+                mpJointListAdd(8);
+            }
+            if ((s32)pid != 0xBE) {
+                HSD_JObj* j = Ground_801C3FA4(
+                    (HSD_GObj*)gobj, 0x14);
+                if (j != NULL) {
+                    HSD_JObjClearFlagsAll(j, 0x10);
+                }
+                mpJointListAdd(9);
+            }
+            if ((s32)pid != 0xBF) {
+                HSD_JObj* j = Ground_801C3FA4(
+                    (HSD_GObj*)gobj, 0x12);
+                if (j != NULL) {
+                    HSD_JObjClearFlagsAll(j, 0x10);
+                }
+                mpJointListAdd(0xA);
+            }
+            if ((s32)pid != 0xC0) {
+                HSD_JObj* j = Ground_801C3FA4(
+                    (HSD_GObj*)gobj, 0x11);
+                if (j != NULL) {
+                    HSD_JObjClearFlagsAll(j, 0x10);
+                }
+                mpJointListAdd(0xB);
+            }
+            if ((s32)pid != 0xC1) {
+                HSD_JObj* j = Ground_801C3FA4(
+                    (HSD_GObj*)gobj, 0x10);
+                if (j != NULL) {
+                    HSD_JObjClearFlagsAll(j, 0x10);
+                }
+                mpJointListAdd(0xC);
+            }
+            if ((s32)pid != 0xC2) {
+                HSD_JObj* j = Ground_801C3FA4(
+                    (HSD_GObj*)gobj, 0xF);
+                if (j != NULL) {
+                    HSD_JObjClearFlagsAll(j, 0x10);
+                }
+                mpJointListAdd(0xD);
+            }
+            mpLib_80058560();
+        }
+        if (grLib_801C96E8((HSD_GObj*)gobj) != 0) {
+            gp->gv.shrineroute.xC4 = 0;
+        }
+        break;
+    }
+    case 6:
+        stage_info.flags |= 0x10;
+        break;
+    }
+
+    if (track_plat == 0) {
+        if (player != NULL) {
+            if (ftLib_80086EC0(player) != 0) {
+                Stage_UnkSetVec3TCam_Offset(&sp5C);
+                gp->gv.shrineroute.xCE = 0x3C;
+            } else if (ftLib_8008732C(player) != 0) {
+                Stage_UnkSetVec3TCam_Offset(&sp5C);
+                gp->gv.shrineroute.xCE = 0;
+            } else {
+                sp5C = sp7C;
+            }
+        } else {
+            Stage_UnkSetVec3TCam_Offset(&sp5C);
+        }
+        Camera_80030AE0(1);
+    } else {
+        Ground_801C2D24((s32)gp->gv.shrineroute.xC8, &sp5C);
+        sp5C.y += 30.0f;
+        Camera_80030AE0(0);
+    }
+
+    {
+        u16 timer = gp->gv.shrineroute.xCE;
+        if (timer == 0) {
+            Ground_801C38BC(sp5C.x, sp5C.y);
+        } else {
+            f32 t = 1.0f / (f32)timer;
+            Stage_UnkSetVec3TCam_Offset(&sp50);
+            lbVector_Sub(&sp5C, &sp50);
+            sp5C.x *= t;
+            sp5C.y *= t;
+            sp5C.z *= t;
+            lbVector_Add(&sp50, &sp5C);
+            Ground_801C38BC(sp50.x, sp50.y);
+            gp->gv.shrineroute.xCE =
+                (u16)(gp->gv.shrineroute.xCE - 1);
+        }
+    }
+
+    Stage_UnkSetVec3TCam_Offset(&sp44);
+    {
+        s32 k;
+        Ground* iter = gp;
+        for (k = 0; k < 3; k++) {
+            HSD_JObj* jobj = iter->gv.shrineroute3.xE4;
+            if (jobj != NULL) {
+                f32 tx = iter->gv.shrineroute3.xD8 + sp44.x;
+                HSD_JObjSetTranslateX(jobj, tx);
+                jobj = iter->gv.shrineroute3.xE4;
+                {
+                    f32 ty = iter->gv.shrineroute3.xDC + sp44.y;
+                    HSD_JObjSetTranslateY(jobj, ty);
+                }
+            }
+            iter = (Ground*)((u8*)iter + 0x10);
+        }
+    }
+
+    gp->gv.shrineroute.xCA = 0;
+    gp->gv.shrineroute.xCC = 0;
+    lb_800115F4();
+}
 
 void grShrineRoute_80209AEC(Ground_GObj* arg) {}
 
