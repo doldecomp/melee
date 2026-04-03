@@ -142,7 +142,35 @@ void grCorneria_801DD2C0(void)
     grCn_804D69AC = 1;
 }
 
-/// #grCorneria_801DD350
+extern Vec3 grCn_803B8090;
+
+void grCorneria_801DD350(void)
+{
+    Vec3 sp14;
+
+    grCn_804D69A0 = Ground_801C49F8();
+    stage_info.unk8C.b4 = 0;
+    stage_info.unk8C.b5 = 1;
+    grCorneria_801DD534(7);
+    grCorneria_801DD534(3);
+    grCorneria_801DCCFC();
+    GET_GROUND(grCorneria_801DD534(8))->gv.corneria.xC4.value = 1;
+    GET_GROUND(grCorneria_801DD534(9))->gv.corneria.xC4.value = 1;
+    GET_GROUND(grCorneria_801DD534(4))->gv.corneria.xC4.value = 1;
+    grCorneria_801DD534(0xB);
+    Ground_801C39C0();
+    Ground_801C3BB4();
+    sp14 = grCn_803B8090;
+    lb_80011A50(&sp14, -1, 1.0f, 0.0f, 1.0471976f, -100000.0f, 100000.0f,
+                100000.0f, -100000.0f);
+    grCn_804D69AC = 1;
+    mpLib_80057BC0(0);
+    mpLib_80057BC0(1);
+    mpLib_80057BC0(2);
+    mpLib_80057BC0(5);
+    mpLib_80057BC0(6);
+    mpLib_80057BC0(7);
+}
 
 void grCorneria_801DD478(void)
 {
