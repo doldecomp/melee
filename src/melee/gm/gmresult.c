@@ -519,10 +519,10 @@ void fn_801749B8(HSD_GObj* unused)
     }
 }
 
-u8 fn_80174A60(StatsList* list, s32 slot)
+s32 fn_80174A60(StatsList* list, s32 slot)
 {
     s32 i;
-    u8 count;
+    s32 count;
     StatsEntry* entry;
 
     count = 0;
@@ -597,14 +597,14 @@ void fn_80174B4C(ResultsData* data, s32 slot)
     pos_y += 1.75F * (offset - (f32) (start_entry - 1));
 
     /// Set flags
-    pdata->x0 |= 0x10;
-    pdata->x0 |= 0x08;
+    pdata->x0_3 = 1;
+    pdata->x0_4 = 1;
 
     if (pdata->page == 0) {
-        pdata->x0 &= ~0x10;
+        pdata->x0_3 = 0;
     }
     if (pdata->page >= data->num_pages - 1) {
-        pdata->x0 &= ~0x08;
+        pdata->x0_4 = 0;
     }
 
     /// Count visible entries
@@ -621,15 +621,15 @@ void fn_80174B4C(ResultsData* data, s32 slot)
 
     /// Set more flags based on scroll position
     if (pdata->scroll_offset < (f32) (visible_count - 10)) {
-        pdata->x0 |= 0x20;
+        pdata->x0_2 = 1;
     } else {
-        pdata->x0 &= ~0x20;
+        pdata->x0_2 = 0;
     }
 
     if (pdata->scroll_offset > 0.0F) {
-        pdata->x0 |= 0x40;
+        pdata->x0_1 = 1;
     } else {
-        pdata->x0 &= ~0x40;
+        pdata->x0_1 = 0;
     }
 
     /// Create text objects for visible entries
