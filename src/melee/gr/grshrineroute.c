@@ -399,7 +399,95 @@ bool grShrineRoute_80209BE4(Ground_GObj* arg)
     return false;
 }
 
-/// #grShrineRoute_80209BEC
+void grShrineRoute_80209BEC(Ground_GObj* gobj)
+{
+    Ground* gp = gobj->user_data;
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+    f32 vel;
+    f32 rot;
+
+    gp->gv.shrineroute3.xC8 += gp->gv.shrineroute3.xD0;
+    gp->gv.shrineroute3.xC8 *= 0.99f;
+    if (gp->gv.shrineroute3.xC8 > 0.0008726646f) {
+        gp->gv.shrineroute3.xC8 = 0.0008726646f;
+    } else if (gp->gv.shrineroute3.xC8 < -0.0008726646f) {
+        gp->gv.shrineroute3.xC8 = -0.0008726646f;
+    }
+
+    gp->gv.shrineroute3.xCC += gp->gv.shrineroute3.xD4;
+    gp->gv.shrineroute3.xCC *= 0.99f;
+    if (gp->gv.shrineroute3.xCC > 0.0008726646f) {
+        gp->gv.shrineroute3.xCC = 0.0008726646f;
+    } else if (gp->gv.shrineroute3.xCC < -0.0008726646f) {
+        gp->gv.shrineroute3.xCC = -0.0008726646f;
+    }
+
+    vel = gp->gv.shrineroute3.xC8;
+    rot = vel + HSD_JObjGetRotationX(jobj);
+    if (rot > 0.2617994f) {
+        rot = 0.2617994f;
+        if (vel < 0.0f) {
+            vel = -vel;
+        }
+        gp->gv.shrineroute3.xC8 = -vel;
+        gp->gv.shrineroute3.xD0 =
+            0.00006981317f * -HSD_Randf() - 0.000017453292f;
+    } else if (rot < -0.2617994f) {
+        rot = -0.2617994f;
+        if (vel < 0.0f) {
+            vel = -vel;
+        }
+        gp->gv.shrineroute3.xC8 = vel;
+        gp->gv.shrineroute3.xD0 =
+            0.00006981317f * HSD_Randf() + 0.000017453292f;
+    }
+    HSD_JObjSetRotationX(jobj, rot);
+
+    vel = gp->gv.shrineroute3.xCC;
+    rot = vel + HSD_JObjGetRotationY(jobj);
+    if (rot > 0.17453292f) {
+        rot = 0.17453292f;
+        if (vel < 0.0f) {
+            vel = -vel;
+        }
+        gp->gv.shrineroute3.xCC = -vel;
+        gp->gv.shrineroute3.xD4 =
+            0.00006981317f * -HSD_Randf() - 0.000017453292f;
+    } else if (rot < -0.17453292f) {
+        rot = -0.17453292f;
+        if (vel < 0.0f) {
+            vel = -vel;
+        }
+        gp->gv.shrineroute3.xCC = vel;
+        gp->gv.shrineroute3.xD4 =
+            0.00006981317f * HSD_Randf() + 0.000017453292f;
+    }
+    HSD_JObjSetRotationY(jobj, rot);
+
+    if (gp->gv.shrineroute3.xC4 != NULL) {
+        rot = gp->gv.shrineroute3.xD8 +
+              HSD_JObjGetRotationX(gp->gv.shrineroute3.xC4);
+        if (rot > 6.283185307179586) {
+            rot = (f32)((f64)rot - 6.283185307179586);
+        } else if (rot < -6.283185307179586) {
+            rot = (f32)((f64)rot + 6.283185307179586);
+        }
+        HSD_JObjSetRotationX(gp->gv.shrineroute3.xC4, rot);
+
+        rot = gp->gv.shrineroute3.xDC +
+              HSD_JObjGetRotationY(gp->gv.shrineroute3.xC4);
+        if (rot > 6.283185307179586) {
+            rot = (f32)((f64)rot - 6.283185307179586);
+        } else if (rot < -6.283185307179586) {
+            rot = (f32)((f64)rot + 6.283185307179586);
+        }
+        HSD_JObjSetRotationY(gp->gv.shrineroute3.xC4, rot);
+    }
+
+    if (lb_8000B134(jobj)) {
+        grShrineRoute_8020A8A4(gobj);
+    }
+}
 
 void grShrineRoute_8020A100(Ground_GObj* arg) {}
 
