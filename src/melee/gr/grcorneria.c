@@ -43,6 +43,25 @@ typedef struct {
     int data[3];
 } grCn_Entry;
 
+typedef struct grCn_JointPair {
+    /* 0x00 */ s16 a;
+    /* 0x02 */ s16 b;
+} grCn_JointPair;
+
+typedef struct grCn_ConvData {
+    /* 0x00 */ s16 x0;
+    /* 0x02 */ s16 x2;
+    /* 0x04 */ s16 x4;
+    /* 0x06 */ s16 x6;
+    /* 0x08 */ s32 x8;
+    /* 0x0C */ HSD_JObj* xC;
+    /* 0x10 */ HSD_JObj* x10;
+    /* 0x14 */ HSD_JObj* x14;
+    /* 0x18 */ s16 x18;
+    /* 0x1A */ s16 x1A;
+    /* 0x1C */ s16 x1C;
+} grCn_ConvData;
+
 extern grCn_Entry grCn_803E2204[][5];
 
 typedef struct grCn_Data {
@@ -51,8 +70,9 @@ typedef struct grCn_Data {
     /* 0x03C */ s32 indices[3];
     /* 0x048 */ s32 x48[3];
     /* 0x054 */ u8 pad_54[0x2DC];
-    /* 0x330 */ Vec3 positions[34];
-    /* +4C8 */ UNK_T pad2;
+    /* 0x330 */ Vec3 positions[32];
+    /* 0x4B0 */ u8 pad_4B0[8];
+    /* 0x4B8 */ grCn_JointPair joint_pairs[5];
     /* 0x4CC */ grCn_Entry entries[][5];
 } grCn_Data;
 
@@ -998,7 +1018,52 @@ s32 grCorneria_801E2598(u32 arg0, u32 arg1)
     return val != 0;
 }
 
-/// #grCorneria_801E25C4
+void grCorneria_801E25C4(HSD_GObj* arg0, void* arg1, int arg2, int arg3,
+                         int arg4)
+{
+    grCn_ConvData* cv = arg1;
+    grCn_JointPair* pair;
+    HSD_JObj* jobj;
+    s16 pair_a;
+    s16 pair_b;
+    int i;
+    PAD_STACK(8);
+
+    i = 0;
+    cv->x4 = (s16) arg2;
+    cv->x6 = (s16) arg3;
+    cv->x8 = arg4;
+    pair = &grCn_803E1D38.joint_pairs[i];
+    pair_a = grCn_803E1D38.joint_pairs[cv->x4].a;
+    pair_b = grCn_803E1D38.joint_pairs[cv->x4].b;
+    do {
+        if (i != 0 && cv->x4 != i) {
+            jobj = Ground_801C3FA4(arg0, (s32) pair->a);
+            if (jobj != NULL) {
+                HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
+            }
+            jobj = Ground_801C3FA4(arg0, (s32) pair->b);
+            if (jobj != NULL) {
+                HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
+            }
+        }
+        i++;
+        pair++;
+    } while (i < 5);
+
+    cv->xC = Ground_801C3FA4(arg0, (s32) pair_a);
+    cv->x10 = Ground_801C3FA4(arg0, (s32) pair_b);
+    cv->x14 = Ground_801C3FA4(arg0, 5);
+    cv->x18 = pair_a;
+    cv->x1A = pair_b;
+    cv->x1C = 5;
+    cv->x0 = 0;
+    cv->x2 = 0xA;
+    grAnime_801C8098(arg0, (s32) pair_a, 7, 0, 0.0f, 1.0f);
+    grAnime_801C8098(arg0, (s32) pair_b, 7, 0, 0.0f, 1.0f);
+    grAnime_801C8098(arg0, 5, 7, 0, 0.0f, 1.0f);
+    HSD_JObjAnimAll((HSD_JObj*) arg0->hsd_obj);
+}
 
 void grCorneria_801E2738(HSD_GObj* gobj, void* ptr, u32 idx1, u32 idx2)
 {

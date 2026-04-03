@@ -5,7 +5,7 @@ funcs:
 - [x] grCorneria_801E2110     
 - [x] grCorneria_801DCCFC     
 - [x] grCorneria_801DD350     
-- [ ] grCorneria_801E25C4     
+- [x] grCorneria_801E25C4     
 - [ ] grCorneria_801DDE88     
 - [ ] grCorneria_801E08CC     
 - [ ] grCorneria_801DFC98     
