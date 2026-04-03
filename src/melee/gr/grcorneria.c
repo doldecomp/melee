@@ -507,6 +507,7 @@ void grCorneria_801DDAC4(Ground_GObj* gobj)
     Ground* gp = GET_GROUND(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
     f32 scale;
+    PAD_STACK(8);
 
     gp->gv.arwing.xC8 = grCn_804D69A4;
     grCn_803E1D38.arwing_gobj[grCn_804D69A4] = gobj;
@@ -744,9 +745,9 @@ void grCorneria_Arwing_801DE4C0(Ground_GObj* gobj)
     joints = grCn_803E2190;
     gp->gv.arwing.xD0 = 0;
     gp->gv.arwing.xDC = 0.0f;
-    gp->gv.arwing.xE8 = 0.0f;
-    gp->gv.arwing.xE4 = 0.0f;
-    gp->gv.arwing.xE0 = 0.0f;
+    gp->gv.arwing.xE0.z = 0.0f;
+    gp->gv.arwing.xE0.y = 0.0f;
+    gp->gv.arwing.xE0.x = 0.0f;
     joint_offset = joint_idx[gp->gv.arwing.xC8];
     joint_id = joints[joint_offset];
     mpJointListAdd(joint_id);
@@ -761,61 +762,53 @@ bool grCorneria_801DE560(Ground_GObj* arg)
 
 void grCorneria_801DE568(Ground_GObj* gobj)
 {
+    grCn_Data* data = &grCn_803E1D38;
     Ground* gp = GET_GROUND(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
 
-    {
-        u8* entry = (u8*) &grCn_803E1D38 + gp->gv.arwing.xC8 * 4;
-        if (grCn_803E1D38.arwing_gobj[gp->gv.arwing.xC8] != NULL) {
-            f32 angle = gp->gv.arwing.xE8;
-            if (angle < 0.0f) {
-                angle = -angle;
+    if (data->arwing_gobj[gp->gv.arwing.xC8] != NULL) {
+        f32 angle = ABS(gp->gv.arwing.xE0.z);
+        if (angle < 10.0f) {
+            gp->gv.arwing.xE0.z = 0.0f;
+            while (gp->gv.arwing.xDC < -M_PI) {
+                gp->gv.arwing.xDC += M_TAU;
             }
-            if (angle < 10.0f) {
-                gp->gv.arwing.xE8 = 0.0f;
-                while (gp->gv.arwing.xDC < -M_PI) {
-                    gp->gv.arwing.xDC += 2.0 * M_PI;
-                }
-                {
-                    f32 rot = gp->gv.arwing.xDC;
-                    while (rot > M_PI) {
-                        gp->gv.arwing.xDC -= 2.0 * M_PI;
-                        rot = gp->gv.arwing.xDC;
-                    }
-                    if (rot < 0.0f) {
-                        rot = -rot;
-                    }
-                    if (rot < 1.0471976f) {
-                        HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
-                    } else {
-                        HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
-                    }
-                }
-            } else {
-                HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
-            }
-            HSD_JObjSetTranslate(jobj, (Vec3*) &gp->gv.arwing.xE0);
             {
-                f32 scale = Ground_801C0498();
-                {
-                    f32 s = scale * grCn_804D69A0->x70;
-                    HSD_JObjSetScaleX(jobj, s);
+                f32 rot = gp->gv.arwing.xDC;
+                while (rot > M_PI) {
+                    gp->gv.arwing.xDC -= M_TAU;
+                    rot = gp->gv.arwing.xDC;
                 }
-                {
-                    f32 s = scale * grCn_804D69A0->x70;
-                    HSD_JObjSetScaleY(jobj, s);
-                }
-                {
-                    f32 s = scale * grCn_804D69A0->x70;
-                    HSD_JObjSetScaleZ(jobj, s);
+                rot = ABS(rot);
+                if (rot < 1.0471976f) {
+                    HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
+                } else {
+                    HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
                 }
             }
-            Ground_801C2FE0(gobj);
         } else {
-            s32 val = *(s32*) (entry + 0x48);
-            mpLib_80057BC0(grCn_803E1D38.x458[val]);
-            Ground_801C4A08(gobj);
+            HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
         }
+        HSD_JObjSetTranslate(jobj, &gp->gv.arwing.xE0);
+        {
+            f32 scale = Ground_801C0498();
+            {
+                f32 s = scale * grCn_804D69A0->x70;
+                HSD_JObjSetScaleX(jobj, s);
+            }
+            {
+                f32 s = scale * grCn_804D69A0->x70;
+                HSD_JObjSetScaleY(jobj, s);
+            }
+            {
+                f32 s = scale * grCn_804D69A0->x70;
+                HSD_JObjSetScaleZ(jobj, s);
+            }
+        }
+        Ground_801C2FE0(gobj);
+    } else {
+        mpLib_80057BC0(data->x458[data->arwing_group[gp->gv.arwing.xC8]]);
+        Ground_801C4A08(gobj);
     }
 }
 
