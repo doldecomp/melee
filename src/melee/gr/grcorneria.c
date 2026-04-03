@@ -435,7 +435,40 @@ void grCorneria_801DD9A8(Ground_GObj* gobj)
 
 void grCorneria_801DDAC0(Ground_GObj* arg) {}
 
-/// #grCorneria_801DDAC4
+void grCorneria_801DDAC4(Ground_GObj* arg0)
+{
+    Ground* gp = arg0->user_data;
+    HSD_JObj* jobj = arg0->hsd_obj;
+    grCn_Data* data = &grCn_803E1D38;
+    HSD_GObj* gobj;
+    Ground* gp2;
+    f32 scale;
+    s32 idx = grCn_804D69A4;
+    PAD_STACK(16);
+
+    gp->gv.arwing.xC8 = idx;
+    data->x30[idx] = (s32) arg0;
+
+    gobj = grCorneria_801DD534(
+        M2C_FIELD(data, s32*,
+                  data->x48[gp->gv.arwing.xC8] * 4 + 0x3D8));
+
+    if (gobj != NULL) {
+        ((Ground*) gobj->user_data)->x10_flags.b2 = 0;
+        gp2 = gobj->user_data;
+        if (gp2 != NULL) {
+            gp2->gv.arwing.xC8 = gp->gv.arwing.xC8;
+        }
+    }
+
+    scale = Ground_801C0498();
+    HSD_JObjSetScaleX(jobj, scale * M2C_FIELD(grCn_804D69A0, f32*, 0x70));
+    HSD_JObjSetScaleY(jobj, scale);
+    HSD_JObjSetScaleZ(jobj, scale);
+
+    gp->gv.arwing.xD4 = 1;
+    gp->gv.arwing.xD8 = 0;
+}
 
 bool grCorneria_801DDCE8(Ground_GObj* arg)
 {
