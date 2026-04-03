@@ -541,14 +541,10 @@ void grShrineRoute_8020A21C(Ground_GObj* gobj)
     f32 distances[20];
     Vec3 pos1;
     Vec3 pos2;
-    f32 dir_x;
-    f32 dir_y;
-    f32 dir_z;
+    Vec3 dir;
     GXColor color;
     Vec3 temp_pos;
     s32 color_val;
-    f32 tmp_f;
-    f32 tmp_f2;
     Ground* iter;
     f32* dp;
     s32* sp;
@@ -587,9 +583,12 @@ void grShrineRoute_8020A21C(Ground_GObj* gobj)
                 HSD_LObjGetPosition(lobj, &pos1);
                 dx = player_pos.x - pos1.x;
                 dy = player_pos.y - pos1.y;
-                dist_sq = (dx * dx) + (dy * dy);
-                dist_sq = sqrtf(dist_sq);
-                *dp = dist_sq;
+                {
+                    f32 dx2 = dx * dx;
+                    f32 dy2 = dy * dy;
+                    dist_sq = dx2 + dy2;
+                }
+                *dp = sqrtf(dist_sq);
             } else if (type == 3) {
                 HSD_LObjGetPosition(lobj, &pos2);
                 dx = player_pos.x - pos2.x;
@@ -616,17 +615,13 @@ void grShrineRoute_8020A21C(Ground_GObj* gobj)
         i = 0;
         while (i < (s32)gp->gv.shrineroute2.x168) {
             count = (s32)gp->gv.shrineroute2.x168;
-            j = i;
             min_dist = 3.4028235e38f;
             best = 0;
-            if (j < count) {
-                do {
-                    if (min_dist > distances[sorted[j]]) {
-                        best = j;
-                        min_dist = distances[sorted[j]];
-                    }
-                    j += 1;
-                } while (j < count);
+            for (j = i; j < count; j++) {
+                if (min_dist > distances[sorted[j]]) {
+                    best = j;
+                    min_dist = distances[sorted[j]];
+                }
             }
             {
                 s32 tmp = *sp;
@@ -654,9 +649,7 @@ void grShrineRoute_8020A21C(Ground_GObj* gobj)
         }
 
         /* Compute weighted direction */
-        dir_x = grSh_Route_803B8360.x;
-        dir_y = grSh_Route_803B8360.y;
-        dir_z = grSh_Route_803B8360.z;
+        dir = grSh_Route_803B8360;
         ref_dist = distances[sorted[1]];
 
         sp = &sorted[1];
@@ -679,26 +672,26 @@ void grShrineRoute_8020A21C(Ground_GObj* gobj)
                 light_pos.x *= weight;
                 light_pos.y *= weight;
                 light_pos.z *= weight;
-                lbVector_Add((Vec3*)&dir_x, &light_pos);
+                lbVector_Add(&dir, &light_pos);
             }
             sp += 1;
             i += 1;
         }
 
         /* Compute magnitude and normalize direction */
-        dist_sq = dir_z * dir_z + (dir_x * dir_x + dir_y * dir_y);
+        dist_sq = dir.z * dir.z + (dir.x * dir.x + dir.y * dir.y);
         dist_sq = sqrtf(dist_sq);
         if (dist_sq < 0.01f) {
-            dir_y = 100.0f;
+            dir.y = 100.0f;
         }
-        lbVector_Normalize((Vec3*)&dir_x);
-        dir_x *= 20.0f;
-        dir_y *= 20.0f;
-        dir_z *= 20.0f;
-        lbVector_Add((Vec3*)&dir_x, &player_pos);
+        lbVector_Normalize(&dir);
+        dir.x *= 20.0f;
+        dir.y *= 20.0f;
+        dir.z *= 20.0f;
+        lbVector_Add(&dir, &player_pos);
 
         /* Set spotlight */
-        HSD_LObjSetPosition(gp->gv.shrineroute2.x16C, (Vec3*)&dir_x);
+        HSD_LObjSetPosition(gp->gv.shrineroute2.x16C, &dir);
         HSD_LObjSetInterest(gp->gv.shrineroute2.x16C, &player_pos);
         HSD_LObjSetFlags(gp->gv.shrineroute2.x16C, 0x400);
 
