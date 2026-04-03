@@ -1730,7 +1730,7 @@ HSD_GObj* grCorneria_801E1BF0(void)
     HSD_ASSERT(0xC70, gobj);
     gp = GET_GROUND(gobj);
     HSD_ASSERT(0xC71, gp);
-    jobj = GET_JOBJ(gobj);
+    jobj = HSD_GObjGetHSDObj(gobj);
     HSD_ASSERT(0xC72, jobj);
     HSD_JObjRemoveAnimAll(jobj);
     HSD_JObjSetTranslateX(jobj, 0.0f);
