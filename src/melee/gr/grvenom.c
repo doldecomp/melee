@@ -1031,7 +1031,7 @@ bool grVenom_80206BBC(Ground_GObj* arg)
 void grVenom_80206BC4(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
-    grCorneria_801E277C(gobj, &gp->gv.corneria);
+    grCorneria_801E277C(gobj, &gp->gv.smashtaunt);
 }
 
 void grVenom_80206BEC(Ground_GObj* arg) {}

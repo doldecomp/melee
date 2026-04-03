@@ -11,8 +11,8 @@
 #include "lb/forward.h"
 #include <baselib/forward.h>
 
-/* 1DCCFC */ UNK_RET grCorneria_801DCCFC(UNK_PARAMS);
-/* 1DCE1C */ UNK_RET grCorneria_801DCE1C(UNK_PARAMS);
+/* 1DCCFC */ void grCorneria_801DCCFC(void);
+/* 1DCE1C */ void grCorneria_801DCE1C(void);
 /* 1DD2C0 */ void grCorneria_801DD2C0(void);
 /* 1DD350 */ void grCorneria_801DD350(void);
 /* 1DD478 */ void grCorneria_801DD478(void);
@@ -30,7 +30,7 @@
 /* 1DDCF0 */ void grCorneria_801DDCF0(Vec3*);
 /* 1DDD4C */ void grCorneria_801DDD4C(Vec3*);
 /* 1DDDA8 */ void grCorneria_801DDDA8(HSD_GObj*, Vec3*);
-/* 1DDE88 */ UNK_RET grCorneria_801DDE88(UNK_PARAMS);
+/* 1DDE88 */ void grCorneria_801DDE88(HSD_GObj*);
 /* 1DE024 */ void grCorneria_801DE024(Ground_GObj*);
 /* 1DE4C0 */ void grCorneria_Arwing_801DE4C0(Ground_GObj*);
 /* 1DE560 */ bool grCorneria_801DE560(Ground_GObj*);
@@ -54,9 +54,9 @@
 /* 1E0140 */ void grCorneria_801E0140(Ground_GObj*);
 /* 1E01A0 */ bool grCorneria_801E01A0(Ground_GObj*);
 /* 1E01A8 */ void grCorneria_801E01A8(Ground_GObj*);
-/* 1E03C8 */ UNK_RET grCorneria_801E03C8(UNK_PARAMS);
-/* 1E0678 */ UNK_RET grCorneria_801E0678(UNK_PARAMS);
-/* 1E08CC */ UNK_RET grCorneria_801E08CC(UNK_PARAMS);
+/* 1E03C8 */ void grCorneria_801E03C8(Ground_GObj*, int);
+/* 1E0678 */ void grCorneria_801E0678(void);
+/* 1E08CC */ int grCorneria_801E08CC(void);
 /* 1E0A74 */ int grCorneria_801E0A74(f32*);
 /* 1E0C3C */ void grCorneria_801E0C3C(Ground_GObj*);
 /* 1E0D28 */ bool grCorneria_801E0D28(Ground_GObj*);
@@ -88,7 +88,7 @@
 /* 1E25C4 */ void grCorneria_801E25C4(HSD_GObj*, void*, int, int, int);
 /* 1E2738 */ void grCorneria_801E2738(HSD_GObj*, void*, u32, u32);
 /* 1E277C */ void grCorneria_801E277C(Ground_GObj*,
-                                      struct grCorneria_GroundVars*);
+                                      struct grSmashTaunt_GroundVars*);
 /* 1E2A6C */ void grCorneria_801E2A6C(void);
 /* 1E2AF4 */ void grCorneria_801E2AF4(void);
 /* 1E2B80 */ bool grCorneria_801E2B80(void);

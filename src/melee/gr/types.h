@@ -351,6 +351,7 @@ struct grCorneria_GroundVars {
         struct {
             u8 b0 : 1;
             u8 b1 : 1;
+            u8 b2 : 1;
         } flags;
         u8 value;
     } xC4;
@@ -374,15 +375,13 @@ struct grCorneria_GroundVars {
             u8 b0 : 1;
         } flags;
     } offset_y;
-    f32 xE4;
-    f32 xE8;
-    f32 xEC;
+    Vec3 xE4;
     f32 xF0;
     f32 xF4;
     f32 xF8;
-    u32 xFC;
-    u32 x100;
-    u32 x104;
+    f32 xFC;
+    s32 x100;
+    s32 x104;
     u32 x108;
     u32 x10C;
     u32 x110;
@@ -417,8 +416,8 @@ struct grArwing_GroundVars {
     u32 xC8;
     u32 xCC;
     u32 xD0;
-    f32 xD4;
-    f32 xD8;
+    s32 xD4;
+    s32 xD8;
     f32 xDC;
     f32 xE0;
     f32 xE4;
@@ -427,17 +426,20 @@ struct grArwing_GroundVars {
 };
 
 struct grSmashTaunt_GroundVars {
-    u32 xC4;
-    u32 xC8;
-    u32 xCC;
-    u32 xD0;
-    f32 xD4;
-    f32 xD8;
-    f32 xDC;
-    f32 xE0;
-    void* xE4;
-    f32 xE8;
-    f32 xEC;
+    /* +0x00 */ s16 state;
+    /* +0x02 */ s16 timer;
+    /* +0x04 */ s16 line;
+    /* +0x06 */ s16 sis_data_idx;
+    /* +0x08 */ s32 sound_id;
+    /* +0x0C */ HSD_JObj* jobj0;
+    /* +0x10 */ HSD_JObj* jobj1;
+    /* +0x14 */ HSD_JObj* jobj2;
+    /* +0x18 */ s16 joint_idx0;
+    /* +0x1A */ s16 joint_idx1;
+    /* +0x1C */ s16 joint_idx2;
+    /* +0x20 */ void* text;
+    /* +0x24 */ f32 xE8;
+    /* +0x28 */ f32 xEC;
 };
 
 struct grGreatBay_GroundVars {
