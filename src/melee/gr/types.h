@@ -413,7 +413,19 @@ struct grVenom_GroundVars {
 };
 
 struct grArwing_GroundVars {
-    u32 xC4;
+    union {
+        u32 xC4;
+        struct {
+            u8 xC4_flags_b0 : 1;
+            u8 xC4_flags_b1 : 1;
+            u8 xC4_flags_b2 : 1;
+            u8 xC4_flags_b3 : 1;
+            u8 xC4_flags_b4 : 1;
+            u8 xC4_flags_b5 : 1;
+            u8 xC4_flags_b6 : 1;
+            u8 xC4_flags_b7 : 1;
+        };
+    };
     u32 xC8;
     u32 xCC;
     u32 xD0;

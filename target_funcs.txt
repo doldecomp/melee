@@ -12,7 +12,7 @@ funcs:
 - [x] grCorneria_801DFF20     
 - [x] grCorneria_801E01A8     
 - [x] grCorneria_801DDAC4     
-- [ ] grCorneria_801E2228     
+- [x] grCorneria_801E2228     
 - [ ] grCorneria_801E0678     
 - [ ] grCorneria_801E1060     
 - [ ] grCorneria_801E1970     

@@ -1187,7 +1187,80 @@ void grCorneria_801E2110(void)
     }
 }
 
-/// #grCorneria_801E2228
+void grCorneria_801E2228(Ground_GObj* arg0)
+{
+    Ground* gp = arg0->user_data;
+    u8 flags = *(u8*) &gp->gv.arwing.xC4;
+    PAD_STACK(32);
+
+    if (!((flags >> 6) & 1)) {
+        if (!((flags >> 5) & 1) && grCorneria_801E08CC() == 4) {
+            if (HSD_Randi(3) == 0) {
+                gp->gv.arwing.xC4_flags_b1 = 1;
+                *(s32*) &gp->gv.bigblueroute.xFC.y = 0;
+                gp->gv.bigblueroute.xFC.x = 0.0f;
+            }
+            gp->gv.arwing.xC4_flags_b2 = 1;
+        }
+        if (grCorneria_801E08CC() == 9) {
+            gp->gv.arwing.xC4_flags_b2 = 0;
+        }
+    } else {
+        s32 counter = *(s32*) &gp->gv.bigblueroute.xFC.y;
+        *(s32*) &gp->gv.bigblueroute.xFC.y = counter + 1;
+
+        if (counter < 900) {
+            f32 speed = gp->gv.bigblueroute.xFC.x;
+            f32 t = speed / 0.005f;
+
+            if (*(f32*) &gp->gv.arwing.xD0 -
+                    (50.0f * Ground_801C0498() - 250.0f) >
+                speed * t + -0.0025f * t * t)
+            {
+                gp->gv.bigblueroute.xFC.x += 0.005f;
+                if (gp->gv.bigblueroute.xFC.x > 3.0f) {
+                    gp->gv.bigblueroute.xFC.x = 3.0f;
+                }
+            } else {
+                gp->gv.bigblueroute.xFC.x -= 0.005f;
+                if (gp->gv.bigblueroute.xFC.x < 0.005f) {
+                    gp->gv.bigblueroute.xFC.x = 0.005f;
+                }
+            }
+
+            *(f32*) &gp->gv.arwing.xD0 -= gp->gv.bigblueroute.xFC.x;
+            if (*(f32*) &gp->gv.arwing.xD0 <
+                50.0f * Ground_801C0498() - 250.0f)
+            {
+                *(f32*) &gp->gv.arwing.xD0 =
+                    50.0f * Ground_801C0498() - 250.0f;
+            }
+        } else {
+            f32 speed = gp->gv.bigblueroute.xFC.x;
+            f32 t = speed / 0.005f;
+
+            if (-*(f32*) &gp->gv.arwing.xD0 >
+                speed * t + -0.0025f * t * t)
+            {
+                gp->gv.bigblueroute.xFC.x = speed + 0.005f;
+                if (gp->gv.bigblueroute.xFC.x > 3.0f) {
+                    gp->gv.bigblueroute.xFC.x = 3.0f;
+                }
+            } else {
+                gp->gv.bigblueroute.xFC.x = speed - 0.005f;
+                if (gp->gv.bigblueroute.xFC.x < 0.005f) {
+                    gp->gv.bigblueroute.xFC.x = 0.005f;
+                }
+            }
+
+            *(f32*) &gp->gv.arwing.xD0 += gp->gv.bigblueroute.xFC.x;
+            if (*(f32*) &gp->gv.arwing.xD0 > 0.0f) {
+                *(f32*) &gp->gv.arwing.xD0 = 0.0f;
+                gp->gv.arwing.xC4_flags_b1 = 0;
+            }
+        }
+    }
+}
 
 HSD_Generator* grCorneria_801E2454(Vec3* vec, s32 arg1)
 {
