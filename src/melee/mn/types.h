@@ -418,10 +418,10 @@ struct CSSDoorsData2 {
     CSSKOStar ko_stars[4]; // 0x110
 };
 
-struct mnGallery_804A0B90_t {
+struct mnSnap_804A0B90_t {
     char pad_0[0x96000];
 };
-STATIC_ASSERT(sizeof(struct mnGallery_804A0B90_t) == 0x96000);
+STATIC_ASSERT(sizeof(struct mnSnap_804A0B90_t) == 0x96000);
 
 struct SSSData {
     /* +00 */ u8 unk_stage;

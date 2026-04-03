@@ -16,9 +16,18 @@
 #include <melee/gm/gmmain_lib.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbmthp.h>
+#include <melee/sc/types.h>
 
+static StaticModelDesc mnGallery_804A0BA0;
+static StaticModelDesc mnGallery_804A0BB0;
 static void* mnGallery_804D6C88;
 static void* mnGallery_804D6C8C;
+
+static void float_order_helper(HSD_SObj* sobj)
+{
+    sobj->x10 = 96.0f;
+    sobj->x14 = 72.0f;
+}
 
 void mnGallery_80258940(void)
 {
@@ -31,9 +40,6 @@ typedef struct mnGallery_t {
     HSD_MatAnimJoint* x8;
     HSD_ShapeAnimJoint* xC;
 } mnGallery_t;
-
-static mnGallery_t mnGallery1;
-static mnGallery_t mnGallery2;
 
 void mnGallery_8025896C(HSD_GObj* gobj, int render_pass)
 {
@@ -134,8 +140,7 @@ void mnGallery_80258BC4(void* arg)
     if (data->unk2 == 0) {
         HSD_SObj* sobj = lbMthp_8001F624(gobj, 0x1C0, 0x150);
         data->sobj = sobj;
-        sobj->x10 = 0.0f;
-        sobj->x14 = 72.0f;
+        float_order_helper(sobj);
     } else if (data->unk2 == 1) {
         HSD_SObj* sobj;
         sobj = lbMthp_8001F624(gobj, 0x280, 0x1E0);
@@ -419,9 +424,9 @@ void mnGallery_802591BC(HSD_GObj* gobj)
     }
 
     if (inner->unk15 == index) {
-        HSD_MObjReqAnim(HSD_JObjGetChild(jobj)->u.dobj->mobj, 0.0f);
+        HSD_MObjReqAnim(HSD_JObjGetChild(jobj)->u.dobj->mobj, 1.0f);
         HSD_MObjAnim(HSD_JObjGetChild(jobj)->u.dobj->mobj);
-        HSD_MObjReqAnim(HSD_JObjGetChild(jobj)->u.dobj->next->mobj, 0.0f);
+        HSD_MObjReqAnim(HSD_JObjGetChild(jobj)->u.dobj->next->mobj, 1.0f);
         HSD_MObjAnim(HSD_JObjGetChild(jobj)->u.dobj->next->mobj);
     } else {
         HSD_MObjReqAnim(HSD_JObjGetChild(jobj)->u.dobj->mobj, 0.0f);
@@ -475,9 +480,6 @@ void mnGallery_80259604(void* arg)
 
 void mnGallery_8025963C(void)
 {
-    extern void* mnGallery_804A0BA0[];
-    extern void* mnGallery_804A0BB0[];
-
     struct mnGallery_data {
         u8 pad[0x1C];
         HSD_GObj* gobjs[2];
@@ -487,7 +489,7 @@ void mnGallery_8025963C(void)
         s32 index;
     };
 
-    void** arr = mnGallery_804A0BA0;
+    StaticModelDesc* model = &mnGallery_804A0BA0;
     HSD_GObj* gobj;
     HSD_GObjProc* proc;
     struct mnGallery_child_ud* cursor_user_data;
@@ -498,10 +500,11 @@ void mnGallery_8025963C(void)
 
     gobj = GObj_Create(6, 7, 0x80);
     mnGallery_804D6C88 = gobj;
-    jobj = HSD_JObjLoadJoint(arr[0]);
+    jobj = HSD_JObjLoadJoint(model->joint);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4, 0x80);
-    HSD_JObjAddAnimAll(jobj, arr[1], arr[2], arr[3]);
+    HSD_JObjAddAnimAll(jobj, model->animjoint, model->matanim_joint,
+                       model->shapeanim_joint);
     HSD_JObjReqAnimAll(jobj, 0.0f);
     HSD_JObjAnimAll(jobj);
 
@@ -513,14 +516,15 @@ void mnGallery_8025963C(void)
     proc = HSD_GObj_SetupProc(gobj, fn_802590C4, 0);
     proc->flags_3 = HSD_GObj_804D783C;
 
-    arr = mnGallery_804A0BB0;
+    model = &mnGallery_804A0BB0;
     for (i = 0; i < 2; i++) {
         child_gobj = GObj_Create(6, 7, 0x80);
         user_data->gobjs[i] = child_gobj;
-        jobj = HSD_JObjLoadJoint(arr[0]);
+        jobj = HSD_JObjLoadJoint(model->joint);
         HSD_GObjObject_80390A70(child_gobj, HSD_GObj_804D7849, jobj);
         GObj_SetupGXLink(child_gobj, HSD_GObj_JObjCallback, 4, 0x80);
-        HSD_JObjAddAnimAll(jobj, arr[1], arr[2], arr[3]);
+        HSD_JObjAddAnimAll(jobj, model->animjoint, model->matanim_joint,
+                           model->shapeanim_joint);
         HSD_JObjReqAnimAll(jobj, 0.0f);
         HSD_JObjAnimAll(jobj);
 
@@ -561,15 +565,16 @@ void mnGallery_80259868(void)
     mn_804A04F0.hovered_selection = 0;
     archive = mn_804D6BB8;
 
-    lbArchive_LoadSections(archive, (void*) &mnGallery1,
-                           "MenMainConGa_Top_joint", &mnGallery1.x4,
-                           "MenMainConGa_Top_animjoint", &mnGallery1.x8,
-                           "MenMainConGa_Top_matanim_joint", &mnGallery1.xC,
-                           "MenMainConGa_Top_shapeanim_joint", &mnGallery2.x0,
-                           "MenMainCursorGa_Top_joint", &mnGallery2.x4,
-                           "MenMainCursorGa_Top_animjoint", &mnGallery2.x8,
-                           "MenMainCursorGa_Top_matanim_joint", &mnGallery2.xC,
-                           "MenMainCursorGa_Top_shapeanim_joint", 0);
+    lbArchive_LoadSections(archive,
+        (void*) &mnGallery_804A0BA0.joint, "MenMainConGa_Top_joint",
+        &mnGallery_804A0BA0.animjoint, "MenMainConGa_Top_animjoint",
+        &mnGallery_804A0BA0.matanim_joint, "MenMainConGa_Top_matanim_joint",
+        &mnGallery_804A0BA0.shapeanim_joint, "MenMainConGa_Top_shapeanim_joint",
+        &mnGallery_804A0BB0.joint, "MenMainCursorGa_Top_joint",
+        &mnGallery_804A0BB0.animjoint, "MenMainCursorGa_Top_animjoint",
+        &mnGallery_804A0BB0.matanim_joint, "MenMainCursorGa_Top_matanim_joint",
+        &mnGallery_804A0BB0.shapeanim_joint, "MenMainCursorGa_Top_shapeanim_joint",
+        0);
 
     gobj = GObj_Create(0, 1, 0x80);
     proc = HSD_GObj_SetupProc(gobj, (HSD_GObjEvent) fn_80258ED0, 0);

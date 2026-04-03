@@ -26,5 +26,6 @@
 /* 2545C4 */ void fn_802545C4(void);
 /* 257D7C */ void fn_80257D7C(void);
 /* 257F24 */ void mnSnap_80257F24(void);
+/* 4A0B90 */ extern struct mnSnap_804A0B90_t* mnSnap_804A0B90[4];
 
 #endif

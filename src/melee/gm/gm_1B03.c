@@ -33,6 +33,7 @@
 #include <melee/lb/lbtime.h>
 #include <melee/lb/types.h>
 #include <melee/mn/mngallery.h>
+#include <melee/mn/mnsnap.h>
 #include <melee/mn/types.h>
 #include <melee/vi/types.h>
 #include <melee/vi/vi0102.h>
@@ -772,9 +773,9 @@ void gm_801B0FF8(MinorScene* scene)
                     HSD_MemAlloc(lbSnap_8001E210()));
     {
         ssize_t i;
-        for (i = 0; i < (signed) ARRAY_SIZE(mnGallery_804A0B90); i++) {
-            mnGallery_804A0B90[i] =
-                HSD_MemAlloc(sizeof(struct mnGallery_804A0B90_t));
+        for (i = 0; i < (signed) ARRAY_SIZE(mnSnap_804A0B90); i++) {
+            mnSnap_804A0B90[i] =
+                HSD_MemAlloc(sizeof(struct mnSnap_804A0B90_t));
         }
     }
     lbDvd_80018C6C();

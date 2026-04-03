@@ -4,6 +4,7 @@
 #include <platform.h>
 
 #include <baselib/forward.h>
+#include <melee/sc/forward.h>
 
 #include <baselib/gobj.h>
 
@@ -20,6 +21,5 @@
 /* 259604 */ void mnGallery_80259604(void* arg);
 /* 25963C */ void mnGallery_8025963C(void);
 /* 259868 */ void mnGallery_80259868(void);
-/* 4A0B90 */ extern struct mnGallery_804A0B90_t* mnGallery_804A0B90[4];
 
 #endif
