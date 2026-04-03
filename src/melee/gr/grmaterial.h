@@ -11,6 +11,7 @@
 
 #include <baselib/gobj.h>
 
+/* 1C87D0 */ void grMaterial_801C87D0(HSD_JObj*, u32 flags);
 /* 1C8858 */ void grMaterial_801C8858(HSD_JObj*, u32 flags);
 /* 1C8A04 */ void grMaterial_801C8A04(HSD_JObj*, u32 flags);
 /* 1C8B28 */ HSD_JObj* grMaterial_801C8B28(HSD_JObj*);

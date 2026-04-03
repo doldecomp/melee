@@ -8,7 +8,7 @@
 #include "it/items/types.h"
 
 /* 2EAF28 */ UNK_T it_802EAF28(Item_GObj* gobj);
-/* 2EAF34 */ UNK_RET it_802EAF34(UNK_PARAMS);
+/* 2EAF34 */ void it_802EAF34(HSD_GObj*, Vec3*, int);
 /* 2EB1EC */ void it_802EB1EC(Item_GObj*);
 /* 2EB268 */ void it_802EB268(Item_GObj* gobj);
 /* 2EB2C0 */ bool itGreatfoxlaser_UnkMotion1_Anim(Item_GObj* gobj);

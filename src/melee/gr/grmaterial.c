@@ -37,7 +37,7 @@ static inline ColorOverlay* grMaterial_GetOverlay(Ground* gp)
 
 static u32 data_section_pad[35] = { 0 };
 
-static void grMaterial_801C87D0(HSD_JObj* jobj, u32 flags)
+void grMaterial_801C87D0(HSD_JObj* jobj, u32 flags)
 {
     HSD_DObj* dobj;
     HSD_MObj* mobj;
