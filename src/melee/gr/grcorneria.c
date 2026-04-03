@@ -850,7 +850,37 @@ void grCorneria_801E03C4(Ground_GObj* arg) {}
 
 /// #grCorneria_801E03C8
 
-/// #grCorneria_801E0678
+void grCorneria_801E0678(void)
+{
+    HSD_GObj* gobj;
+    Ground* gp;
+    f32 half;
+    PAD_STACK(8);
+
+    gobj = Ground_801C2BA4(0xB);
+    if (gobj != NULL) {
+        Ground_801C4A08(gobj);
+    }
+
+    gobj = Ground_801C2BA4(8);
+    HSD_JObjSetTranslateX(gobj->hsd_obj, 0.0f);
+    gp = gobj->user_data;
+    gp->gv.arwing.xE0_flags_b0 = 1;
+
+    gobj = Ground_801C2BA4(9);
+    gp = gobj->user_data;
+    gp->gv.arwing.xC6_flags_b0 = 1;
+    half = 3200.0f * Ground_801C0498() * 0.5f;
+    HSD_JObjSetTranslateX(gobj->hsd_obj,
+        -(3200.0f * Ground_801C0498() * 0.5f + half));
+
+    gobj = Ground_801C2BA4(4);
+    gp = gobj->user_data;
+    gp->gv.arwing.xC6_flags_b0 = 1;
+    half = 4800.0f * Ground_801C0498() * 0.5f;
+    HSD_JObjSetTranslateX(gobj->hsd_obj,
+        3200.0f * Ground_801C0498() * 0.5f + half);
+}
 
 s32 grCorneria_801E08CC(void)
 {

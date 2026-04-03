@@ -425,6 +425,17 @@ struct grArwing_GroundVars {
             u8 xC4_flags_b6 : 1;
             u8 xC4_flags_b7 : 1;
         };
+        struct {
+            u8 _xC4_pad[2];
+            u8 xC6_flags_b0 : 1;
+            u8 xC6_flags_b1 : 1;
+            u8 xC6_flags_b2 : 1;
+            u8 xC6_flags_b3 : 1;
+            u8 xC6_flags_b4 : 1;
+            u8 xC6_flags_b5 : 1;
+            u8 xC6_flags_b6 : 1;
+            u8 xC6_flags_b7 : 1;
+        };
     };
     u32 xC8;
     u32 xCC;
@@ -432,7 +443,19 @@ struct grArwing_GroundVars {
     s32 xD4;
     s32 xD8;
     f32 xDC;
-    f32 xE0;
+    union {
+        f32 xE0;
+        struct {
+            u8 xE0_flags_b0 : 1;
+            u8 xE0_flags_b1 : 1;
+            u8 xE0_flags_b2 : 1;
+            u8 xE0_flags_b3 : 1;
+            u8 xE0_flags_b4 : 1;
+            u8 xE0_flags_b5 : 1;
+            u8 xE0_flags_b6 : 1;
+            u8 xE0_flags_b7 : 1;
+        };
+    };
     f32 xE4;
     f32 xE8;
     f32 xEC;
