@@ -6,7 +6,7 @@ funcs:
 - [x] grShrineRoute_8020AA40     
 - [x] grShrineRoute_8020AE08     
 - [x] grShrineRoute_8020A8A4     
-- [ ] grShrineRoute_80208D14     
+- [x] grShrineRoute_80208D14     
 - [ ] fn_80208A38                
 - [ ] grShrineRoute_80209BEC     
 - [ ] grShrineRoute_8020A21C     

@@ -24,7 +24,7 @@
 /* 208A28 */ bool grShrineRoute_80208A28(Ground_GObj*);
 /* 208A30 */ void grShrineRoute_80208A30(Ground_GObj*);
 /* 208A34 */ void grShrineRoute_80208A34(Ground_GObj*);
-/* 208A38 */ UNK_RET fn_80208A38(UNK_PARAMS);
+/* 208A38 */ void fn_80208A38(HSD_GObj*);
 /* 208D14 */ void grShrineRoute_80208D14(Ground_GObj*);
 /* 208F0C */ bool grShrineRoute_80208F0C(Ground_GObj*);
 /* 208F14 */ bool grShrineRoute_80208F14(void);
