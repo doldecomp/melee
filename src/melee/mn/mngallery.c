@@ -20,8 +20,33 @@
 
 static StaticModelDesc mnGallery_804A0BA0;
 static StaticModelDesc mnGallery_804A0BB0;
-static void* mnGallery_804D6C88;
+static HSD_GObj* mnGallery_804D6C88;
 static void* mnGallery_804D6C8C;
+
+#define GET_804D6C88(gobj)                                                    \
+    ((struct mnGallery_804D6C88_userdata*) HSD_GObjGetUserData(gobj))
+struct mnGallery_804D6C88_userdata {
+    u8 unk0;
+    u8 unk1;
+    u8 unk2;
+    HSD_GObj* gobj4;
+    HSD_GObj* gobj8;
+    HSD_SObj* sobj;
+    HSD_Text* text;
+    u8 state;
+    u8 unk15;
+    s32 frame;
+    HSD_GObj* gobjs[2];
+};
+STATIC_ASSERT(sizeof(struct mnGallery_804D6C88_userdata) == 0x24);
+
+#define GET_mnGallery_child_userdata(gobj)                                    \
+    ((struct mnGallery_child_userdata*) HSD_GObjGetUserData(gobj))
+struct mnGallery_child_userdata {
+    HSD_GObj* parent_gobj;
+    s32 index;
+};
+STATIC_ASSERT(sizeof(struct mnGallery_child_userdata) == 8);
 
 static void float_order_helper(HSD_SObj* sobj)
 {
@@ -34,26 +59,13 @@ void mnGallery_80258940(void)
     mnGallery_804D6C8C = HSD_MemAlloc(0x271000);
 }
 
-typedef struct mnGallery_t {
-    HSD_Joint* x0;
-    HSD_AnimJoint* x4;
-    HSD_MatAnimJoint* x8;
-    HSD_ShapeAnimJoint* xC;
-} mnGallery_t;
-
 void mnGallery_8025896C(HSD_GObj* gobj, int render_pass)
 {
-    struct {
-        u8 pad[0x2C];
-        struct {
-            u8 pad2[0x14];
-            u8 state;
-        }* unk2C;
-    }* data = mnGallery_804D6C88;
+    HSD_GObj* data = mnGallery_804D6C88;
     HSD_CObj* cobj = gobj->hsd_obj;
     PAD_STACK(0x10);
 
-    if (data->unk2C->state == 3) {
+    if (GET_804D6C88(data)->state == 3) {
         if (HSD_CObjSetCurrent(cobj)) {
             HSD_SetEraseColor(0, 0, 0, 0xFF);
             HSD_CObjEraseScreen(cobj, 1, 0, 0);
@@ -62,14 +74,13 @@ void mnGallery_8025896C(HSD_GObj* gobj, int render_pass)
         HSD_SObjLib_803A54EC(gobj, render_pass);
     }
 }
-#pragma push
-#pragma opt_propagation off
+
 void mnGallery_80258A08(HSD_GObj* gobj, u16 width, u16 height, u32 priority)
 {
     HSD_CObj* cobj;
-    f32 zero = 0.0f;
+    f32 roll = 0.0f;
     f32 far;
-    f32 near_val = zero;
+    f32 near_val = 0.0f;
     f32 top;
     f32 bottom;
     f32 left;
@@ -82,8 +93,8 @@ void mnGallery_80258A08(HSD_GObj* gobj, u16 width, u16 height, u32 priority)
     far = 2.0f;
     bottom = (f32) (s32) - (s32) height;
     right = (f32) width;
-    top = zero;
-    left = zero;
+    top = 0.0f;
+    left = 0.0f;
 
     viewport.xmin = 0;
     scissor.left = 0;
@@ -100,29 +111,16 @@ void mnGallery_80258A08(HSD_GObj* gobj, u16 width, u16 height, u32 priority)
     HSD_CObjSetScissor(cobj, &scissor);
     HSD_CObjSetEyePosition(cobj, &eye);
     HSD_CObjSetInterest(cobj, &interest);
-    HSD_CObjSetRoll(cobj, zero);
+    HSD_CObjSetRoll(cobj, roll);
     HSD_CObjSetNear(cobj, near_val);
     HSD_CObjSetFar(cobj, far);
     HSD_CObjSetOrtho(cobj, top, bottom, left, right);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784B, cobj);
     GObj_SetupGXLinkMax(gobj, mnGallery_8025896C, priority);
 }
-#pragma pop
 
-void mnGallery_80258BC4(void* arg)
+static void mnGallery_80258BC4(struct mnGallery_804D6C88_userdata* data)
 {
-    struct {
-        u8 unk0;
-        u8 unk1;
-        u8 unk2;
-        u8 pad3;
-        s32 unk4;
-        HSD_GObj* gobj;
-        HSD_SObj* sobj;
-        u8 pad10[4];
-        u8 unk14;
-        u8 unk15;
-    }* data = arg;
     HSD_GObj* gobj;
     s32 mode;
 
@@ -135,7 +133,7 @@ void mnGallery_80258BC4(void* arg)
     }
     data->unk2 = mode;
     gobj = GObj_Create(6, 7, 0x80);
-    data->gobj = gobj;
+    data->gobj8 = gobj;
     GObj_SetupGXLink(gobj, lbMthp_8001F67C, 8, 0x80);
     if (data->unk2 == 0) {
         HSD_SObj* sobj = lbMthp_8001F624(gobj, 0x1C0, 0x150);
@@ -171,43 +169,27 @@ void mnGallery_80258BC4(void* arg)
 
 #pragma push
 #pragma dont_inline on
-void mnGallery_80258D50(void* arg)
+static void mnGallery_80258D50(struct mnGallery_804D6C88_userdata* data)
 {
-    struct {
-        u8 unk0;
-        u8 unk1;
-        u8 pad[6];
-        HSD_GObj* gobj;
-    }* data = arg;
-    s32 zero;
-
     if (data->unk0 != 0) {
         lbMthp_8001F800();
         lbAudioAx_800236DC();
         lbAudioAx_80023F28(gmMainLib_8015ECB0());
 
-        zero = 0;
-        data->unk0 = zero;
-        data->unk1 = zero;
+        data->unk0 = 0;
+        data->unk1 = 0;
 
-        if (data->gobj != NULL) {
-            HSD_GObjPLink_80390228(data->gobj);
-            data->gobj = NULL;
+        if (data->gobj8 != NULL) {
+            HSD_GObjPLink_80390228(data->gobj8);
+            data->gobj8 = NULL;
         }
     }
 }
 #pragma pop
 
-void mnGallery_80258DBC(HSD_GObj* gobj, void* arg)
+static void mnGallery_80258DBC(HSD_GObj* gobj,
+                               struct mnGallery_804D6C88_userdata* data)
 {
-    struct {
-        u8 unk0;
-        u8 unk1;
-        u8 pad[6];
-        HSD_GObj* gobj;
-        u8 pad2[0x08];
-        u8 unk14;
-    }* data = arg;
     u32 buttons;
     u32 skip;
     u32 pressed;
@@ -229,7 +211,7 @@ void mnGallery_80258DBC(HSD_GObj* gobj, void* arg)
         if (pressed != 0) {
             lbAudioAx_80024030(0);
         }
-        data->unk14 = 1;
+        data->state = 1;
         mn_8022BD8C();
         if (data->unk0 != 0) {
             lbMthp_8001F800();
@@ -237,45 +219,44 @@ void mnGallery_80258DBC(HSD_GObj* gobj, void* arg)
             lbAudioAx_80023F28(gmMainLib_8015ECB0());
             data->unk0 = 0;
             data->unk1 = 0;
-            if (data->gobj != NULL) {
-                HSD_GObjPLink_80390228(data->gobj);
-                data->gobj = NULL;
+            if (data->gobj8 != NULL) {
+                HSD_GObjPLink_80390228(data->gobj8);
+                data->gobj8 = NULL;
             }
         }
     }
 }
 
+static inline void fn_80258ED0_helper(void)
+{
+    struct mnGallery_804D6C88_userdata* data =
+        mnGallery_804D6C88->user_data; /// @todo GET_804D6C88 blows the stack
+    if (data->gobj4 != NULL) {
+        HSD_GObjPLink_80390228(data->gobj4);
+    }
+    if (data->gobj8 != NULL) {
+        HSD_GObjPLink_80390228(
+            *(HSD_GObj* volatile*) &data->gobj8); /// @todo hacky
+    }
+    data->gobj4 = NULL;
+    data->gobj8 = NULL;
+    mnGallery_80258D50(data);
+}
+
 void fn_80258ED0(HSD_GObj* gobj)
 {
-    struct fn_80258ED0_inner {
-        u8 unk0;
-        u8 unk1;
-        u8 pad2[2];
-        HSD_GObj* gobj4;
-        HSD_GObj* volatile gobj8;
-        void* unkC;
-        HSD_Text* text;
-        u8 unk14;
-        u8 unk15;
-    };
-    struct fn_80258ED0_outer {
-        u8 pad[0x2C];
-        struct fn_80258ED0_inner* unk2C;
-    };
-    struct fn_80258ED0_outer* gallery;
-    struct fn_80258ED0_inner* data;
+    struct mnGallery_804D6C88_userdata* data;
     u64 buttons;
     u8 state;
 
-    gallery = mnGallery_804D6C88;
-    data = gallery->unk2C;
+    data = GET_804D6C88(mnGallery_804D6C88);
 
     if (mn_804D6BC8.cooldown != 0) {
         Menu_DecrementAnimTimer();
         return;
     }
 
-    state = data->unk14;
+    state = data->state;
     if (state == 3) {
         mnGallery_80258DBC(gobj, data);
         return;
@@ -287,27 +268,16 @@ void fn_80258ED0(HSD_GObj* gobj)
     buttons = Menu_GetAllInputs();
 
     if (buttons & MenuInput_Back) {
-        struct fn_80258ED0_inner* orig;
         sfxBack();
         mn_804A04F0.entering_menu = 0;
         mn_80229894(5, 1, 3);
         HSD_SisLib_803A5CC4(data->text);
-        orig = data;
-        data = ((struct fn_80258ED0_outer*) mnGallery_804D6C88)->unk2C;
-        if (data->gobj4 != NULL) {
-            HSD_GObjPLink_80390228(data->gobj4);
-        }
-        if (data->gobj8 != NULL) {
-            HSD_GObjPLink_80390228(data->gobj8);
-        }
-        data->gobj4 = NULL;
-        data->gobj8 = NULL;
-        mnGallery_80258D50(data);
-        orig->unk14 = 2;
+        fn_80258ED0_helper();
+        data->state = 2;
         return;
     }
 
-    if (data->unk14 == 1) {
+    if (data->state == 1) {
         if (buttons & MenuInput_Up) {
             if (data->unk15 != 0) {
                 sfxMove();
@@ -321,31 +291,18 @@ void fn_80258ED0(HSD_GObj* gobj)
                 HSD_SisLib_803A6368(data->text, 0xC8);
             }
         } else if (buttons & (MenuInput_StartButton | MenuInput_AButton)) {
-            data->unk14 = 3;
+            data->state = 3;
             mn_8022BD6C();
             mnGallery_80258BC4(data);
         }
     }
 }
-struct fn_802590C4_data {
-    u8 pad[0x14];
-    u8 state;
-    u8 pad2[3];
-    s32 frame;
-    HSD_GObj* gobjs[2];
-};
-
-inline void* inline_fn(HSD_GObj* gobj)
-{
-    return gobj->user_data;
-}
 
 inline void fn_802590C4_inline(HSD_GObj* gobj)
 {
-    struct fn_802590C4_data* store;
     s32 i;
-    struct fn_802590C4_data* tmp;
-    store = (tmp = inline_fn(gobj));
+    struct mnGallery_804D6C88_userdata* tmp;
+    tmp = HSD_GObjGetUserData(gobj); /// @todo GET_804D6C88 breaks these
     HSD_GObjPLink_80390228(gobj);
     for (i = 0; i < 2; i++) {
         HSD_GObjPLink_80390228((tmp->gobjs)[i]);
@@ -355,10 +312,10 @@ inline void fn_802590C4_inline(HSD_GObj* gobj)
 
 void fn_802590C4(HSD_GObj* gobj)
 {
-    struct fn_802590C4_data* data;
+    struct mnGallery_804D6C88_userdata* data;
     HSD_JObj* jobj;
 
-    data = inline_fn(gobj);
+    data = HSD_GObjGetUserData(gobj); /// @todo GET_804D6C88 breaks these
     jobj = gobj->hsd_obj;
 
     if (data->state == 3) {
@@ -386,30 +343,19 @@ void fn_802590C4(HSD_GObj* gobj)
 
 void mnGallery_802591BC(HSD_GObj* gobj)
 {
-    struct mnGallery_inner {
-        u8 pad[0x14];
-        u8 unk14;
-        u8 unk15;
-    };
-    struct {
-        u8 pad[0x2C];
-        struct mnGallery_inner* unk2C;
-    }* gallery;
-    struct {
-        HSD_GObj* parent_gobj;
-        s32 index;
-    }* ud;
-    struct mnGallery_inner* inner;
+    HSD_GObj* gallery;
+    struct mnGallery_child_userdata* ud;
+    struct mnGallery_804D6C88_userdata* inner;
     HSD_JObj* jobj;
     s32 index;
     HSD_JObj* child;
     s32 i;
-    PAD_STACK(24);
+    PAD_STACK(16);
 
-    ud = gobj->user_data;
+    ud = GET_mnGallery_child_userdata(gobj);
     gallery = mnGallery_804D6C88;
     jobj = gobj->hsd_obj;
-    inner = gallery->unk2C;
+    inner = GET_804D6C88(gallery);
     index = ud->index;
 
     child = HSD_JObjGetChild(ud->parent_gobj->hsd_obj);
@@ -444,59 +390,33 @@ void mnGallery_802591BC(HSD_GObj* gobj)
 
 #pragma push
 #pragma dont_inline on
-void mnGallery_80259604(void* arg)
+static void mnGallery_80259604(struct mnGallery_804D6C88_userdata* data)
 {
-    struct {
-        /* 0x00 */ u8 unk0;
-        /* 0x01 */ u8 unk1;
-        /* 0x02 */ u8 unk2;
-        /* 0x03 */ u8 pad3;
-        /* 0x04 */ s32 unk4;
-        /* 0x08 */ s32 unk8;
-        /* 0x0C */ s32 unkC;
-        /* 0x10 */ s32 unk10;
-        /* 0x14 */ u8 unk14;
-        /* 0x15 */ u8 unk15;
-        /* 0x16 */ u8 pad16[2];
-        /* 0x18 */ s32 unk18;
-        /* 0x1C */ s32 unk1C;
-        /* 0x20 */ s32 unk20;
-    }* data = arg;
-
     data->unk0 = 0;
     data->unk1 = 0;
     data->unk2 = 0;
-    data->unk4 = 0;
-    data->unk8 = 0;
-    data->unkC = 0;
-    data->unk10 = 0;
-    data->unk14 = 0;
+    data->gobj4 = NULL;
+    data->gobj8 = NULL;
+    data->sobj = NULL;
+    data->text = NULL;
+    data->state = 0;
     data->unk15 = 0;
-    data->unk18 = 0;
-    data->unk1C = 0;
-    data->unk20 = 0;
+    data->frame = 0;
+    data->gobjs[0] = NULL;
+    data->gobjs[1] = NULL;
 }
 #pragma pop
 
 void mnGallery_8025963C(void)
 {
-    struct mnGallery_data {
-        u8 pad[0x1C];
-        HSD_GObj* gobjs[2];
-    };
-    struct mnGallery_child_ud {
-        HSD_GObj* parent_gobj;
-        s32 index;
-    };
-
     StaticModelDesc* model = &mnGallery_804A0BA0;
     HSD_GObj* gobj;
     HSD_GObjProc* proc;
-    struct mnGallery_child_ud* cursor_user_data;
+    struct mnGallery_child_userdata* cursor_user_data;
     s32 i;
     HSD_GObj* child_gobj;
     HSD_JObj* jobj;
-    struct mnGallery_data* user_data;
+    struct mnGallery_804D6C88_userdata* user_data;
 
     gobj = GObj_Create(6, 7, 0x80);
     mnGallery_804D6C88 = gobj;
@@ -508,7 +428,7 @@ void mnGallery_8025963C(void)
     HSD_JObjReqAnimAll(jobj, 0.0f);
     HSD_JObjAnimAll(jobj);
 
-    user_data = HSD_MemAlloc(0x24);
+    user_data = HSD_MemAlloc(sizeof(*user_data));
     HSD_ASSERTREPORT(0x214, user_data, "Can't get user_data.\n");
 
     mnGallery_80259604(user_data);
@@ -528,7 +448,7 @@ void mnGallery_8025963C(void)
         HSD_JObjReqAnimAll(jobj, 0.0f);
         HSD_JObjAnimAll(jobj);
 
-        cursor_user_data = HSD_MemAlloc(8);
+        cursor_user_data = HSD_MemAlloc(sizeof(*cursor_user_data));
         HSD_ASSERTREPORT(0x22c, cursor_user_data, "Can't get user_data.\n");
 
         cursor_user_data->parent_gobj = gobj;
@@ -548,16 +468,8 @@ void mnGallery_80259868(void)
     HSD_GObjProc* proc;
     HSD_Text* text;
     HSD_GObj* cam_gobj;
-    struct {
-        u8 unk0;
-        u8 unk1;
-        u8 pad2[2];
-        HSD_GObj* gobj4;
-        HSD_GObj* gobj8;
-        void* unkC;
-        HSD_Text* text;
-    }* inner;
-    PAD_STACK(0x30);
+    struct mnGallery_804D6C88_userdata* inner;
+    PAD_STACK(0x28);
 
     mn_804D6BC8.cooldown = 5;
     mn_804A04F0.prev_menu = mn_804A04F0.cur_menu;
@@ -577,11 +489,11 @@ void mnGallery_80259868(void)
         0);
 
     gobj = GObj_Create(0, 1, 0x80);
-    proc = HSD_GObj_SetupProc(gobj, (HSD_GObjEvent) fn_80258ED0, 0);
+    proc = HSD_GObj_SetupProc(gobj, fn_80258ED0, 0);
     proc->flags_3 = HSD_GObj_804D783C;
     mnGallery_8025963C();
 
-    inner = ((HSD_GObj*) mnGallery_804D6C88)->user_data;
+    inner = GET_804D6C88(mnGallery_804D6C88);
     text =
         HSD_SisLib_803A5ACC(0, 1, -9.5F, 9.1F, 17.0F, 364.68332F, 38.38772F);
     text->font_size.x = 0.0521F;
