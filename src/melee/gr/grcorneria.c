@@ -1231,13 +1231,15 @@ int grCorneria_801E08CC(void)
 {
     Vec3 pos;
     HSD_GObj* gobj;
+    f32 cam_x;
 
     Camera_GetTransformInterest(&pos);
+    cam_x = pos.x;
     gobj = Ground_801C2BA4(8);
     if (gobj != NULL) {
         f32 x = HSD_JObjGetTranslationX(gobj->hsd_obj);
-        if (pos.x > -(3200.0f * Ground_801C0498() / 2 - x) &&
-            pos.x < 3200.0f * Ground_801C0498() / 2 + x)
+        if (cam_x > -(3200.0f * Ground_801C0498() / 2 - x) &&
+            cam_x < 3200.0f * Ground_801C0498() / 2 + x)
         {
             return 8;
         }
@@ -1245,8 +1247,8 @@ int grCorneria_801E08CC(void)
     gobj = Ground_801C2BA4(9);
     if (gobj != NULL) {
         f32 x = HSD_JObjGetTranslationX(gobj->hsd_obj);
-        if (pos.x > -(3200.0f * Ground_801C0498() / 2 - x) &&
-            pos.x < 3200.0f * Ground_801C0498() / 2 + x)
+        if (cam_x > -(3200.0f * Ground_801C0498() / 2 - x) &&
+            cam_x < 3200.0f * Ground_801C0498() / 2 + x)
         {
             return 9;
         }
@@ -1254,8 +1256,8 @@ int grCorneria_801E08CC(void)
     gobj = Ground_801C2BA4(4);
     if (gobj != NULL) {
         f32 x = HSD_JObjGetTranslationX(gobj->hsd_obj);
-        if (pos.x > -(4800.0f * Ground_801C0498() / 2 - x) &&
-            pos.x < 4800.0f * Ground_801C0498() / 2 + x)
+        if (cam_x > -(4800.0f * Ground_801C0498() / 2 - x) &&
+            cam_x < 4800.0f * Ground_801C0498() / 2 + x)
         {
             return 4;
         }
