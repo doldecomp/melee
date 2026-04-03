@@ -101,7 +101,7 @@ typedef struct grCn_Data {
     /* 0x28C */ u8 pad3[0x6C];
     /* 0x2F8 */ s32 anim_ids[14];
     /* 0x330 */ Vec3 positions[14];
-    /* 0x3D8 */ s32 x3D8[9][3];
+    /* 0x3D8 */ s32 x3D8[27];
     /* 0x444 */ s32 x444[5];
     /* 0x458 */ s32 x458[8];
     /* 0x478 */ u8 pad5[0x40];
@@ -506,20 +506,19 @@ void grCorneria_801DDAC4(Ground_GObj* gobj)
     Ground* gp = GET_GROUND(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
     f32 scale;
-    PAD_STACK(8);
 
     gp->gv.arwing.xC8 = grCn_804D69A4;
     grCn_803E1D38.arwing_gobj[grCn_804D69A4] = gobj;
     {
-        s32 idx =
-            grCn_803E1D38
-                .arwing_group[grCn_803E1D38.arwing_group[gp->gv.arwing.xC8]];
-        HSD_GObj* arwing = grCorneria_801DD534(grCn_803E1D38.x3D8[idx][0]);
+        s32 idx = grCn_803E1D38.arwing_group[gp->gv.arwing.xC8];
+        HSD_GObj* arwing = grCorneria_801DD534(grCn_803E1D38.x3D8[idx]);
         if (arwing != NULL) {
-            Ground* agp = GET_GROUND(arwing);
-            agp->x10_flags.b2 = 0;
-            if (agp != NULL) {
-                agp->gv.arwing.xC8 = gp->gv.arwing.xC8;
+            GET_GROUND(arwing)->x10_flags.b2 = 0;
+            {
+                Ground* agp = GET_GROUND(arwing);
+                if (agp != NULL) {
+                    agp->gv.arwing.xC8 = gp->gv.arwing.xC8;
+                }
             }
         }
     }
@@ -1917,13 +1916,12 @@ void grCorneria_801E25C4(HSD_GObj* gobj, void* gv, int line, int arg3,
     int i;
     PAD_STACK(8);
 
-    i = 0;
     v->line = line;
     v->sis_data_idx = arg3;
     v->sound_id = arg4;
     joint0 = grCn_803E1D38.dialog_joints[v->line].joint0;
     joint1 = grCn_803E1D38.dialog_joints[v->line].joint1;
-    do {
+    for (i = 0; i < 5; i++) {
         if (i != 0 && v->line != i) {
             HSD_JObj* j0 = Ground_801C3FA4(gobj,
                 grCn_803E1D38.dialog_joints[i].joint0);
@@ -1938,8 +1936,7 @@ void grCorneria_801E25C4(HSD_GObj* gobj, void* gv, int line, int arg3,
                 }
             }
         }
-        i += 1;
-    } while (i < 5);
+    }
     v->jobj0 = Ground_801C3FA4(gobj, joint0);
     v->jobj1 = Ground_801C3FA4(gobj, joint1);
     v->jobj2 = Ground_801C3FA4(gobj, 5);
