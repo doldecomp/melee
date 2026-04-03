@@ -1,0 +1,19 @@
+file: src/melee/gr/grcorneria.c
+funcs:
+- [x] grCorneria_801DD534       
+- [ ] grCorneria_801E1878       
+- [ ] grCorneria_801E25C4       
+- [ ] grCorneria_801DDE88       
+- [ ] grCorneria_801E08CC       
+- [ ] grCorneria_801DDAC4       
+- [ ] grCorneria_801E1060       
+- [ ] grCorneria_801E1970       
+- [ ] grCorneria_801E03C8       
+- [ ] grCorneria_801DF8D0       
+- [ ] grCorneria_801DE8E4       
+- [ ] grCorneria_801DE568       
+- [ ] grCorneria_801DE024       
+- [ ] grCorneria_801DCE1C       
+- [ ] grCorneria_801E1BF0       
+- [ ] grCorneria_801E1348       
+- [ ] grCorneria_801DED50   
