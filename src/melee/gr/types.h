@@ -1181,7 +1181,8 @@ struct ShyGuys {
 };
 
 struct grShrineroute_GroundVars {
-    /* +0 gp+C4 */ u32 xC4;
+    /* +0 gp+C4 */ u16 xC4;
+    /* +2 gp+C6 */ u16 xC6;
     /* +4 gp+C8 */ u16 xC8;
     /* +6 gp+CA */ u16 xCA;
     /* +8 gp+CA */ u16 xCC;

@@ -48,7 +48,7 @@
 /* 20AC44 */ HSD_LObj* grShrineRoute_8020AC44(HSD_GObj*);
 /* 20AD24 */ bool grShrineRoute_8020AD24(bool);
 /* 20AD58 */ void grShrineRoute_8020AD58(Ground*, int, CollData*, int, int);
-/* 20AE08 */ UNK_RET grShrineRoute_8020AE08(UNK_PARAMS);
+/* 20AE08 */ s32 grShrineRoute_8020AE08(HSD_GObj*, HSD_GObj*, s32*);
 /* 20AF38 */ void grShrineRoute_8020AF38(HSD_GObj*, s32);
 /* 20B020 */ void grShrineRoute_8020B020(HSD_GObj* gobj, int r4, bool hide);
 /* 20B0AC */ void grShrineRoute_8020B0AC(void);

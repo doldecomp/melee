@@ -116,6 +116,8 @@ extern HSD_LightDesc grSh_Route_803E5D74;
 extern HSD_LightDesc grSh_Route_803E5D90;
 extern Vec3 grSh_Route_803B836C;
 extern Vec3 grSh_Route_803B8378;
+extern Vec3 grSh_Route_803B8384;
+extern Vec3 grSh_Route_803B8390;
 
 extern struct grSh_Route_LightConfig {
     /* 0x00 */ GXColor x0;
@@ -465,7 +467,39 @@ void grShrineRoute_8020AD58(Ground* gp, int r4, CollData* r5, int r6, int r7)
     }
 }
 
-/// #grShrineRoute_8020AE08
+s32 grShrineRoute_8020AE08(HSD_GObj* gobj, HSD_GObj* player_gobj, s32* out)
+{
+    Vec3 lo, hi;
+    Vec3 pos;
+    Ground* gp = gobj->user_data;
+    f32 scale;
+    PAD_STACK(16);
+
+    if (gp->gv.shrineroute.xC4 == 1 || gp->gv.shrineroute.xC4 == 3) {
+        return 0;
+    }
+
+    lo = grSh_Route_803B8384;
+    hi = grSh_Route_803B8390;
+    scale = Ground_801C0498();
+    lo.x *= scale;
+    lo.y *= scale;
+    hi.x *= scale;
+    lo.z *= scale;
+    hi.y *= scale;
+    hi.z *= scale;
+
+    ftLib_80086644(player_gobj, &pos);
+
+    if (pos.y < lo.y) {
+        if (lo.x < pos.x && pos.x < hi.x) {
+            *out = grSh_Route_804D6A58->x10;
+            return 1;
+        }
+    }
+
+    return 0;
+}
 
 void grShrineRoute_8020AF38(HSD_GObj* gobj, s32 arg1)
 {
