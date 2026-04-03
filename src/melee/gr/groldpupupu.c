@@ -15,6 +15,7 @@
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 #include <baselib/random.h>
+#include "ft/ftdevice.h"
 
 static struct {
     s16 x0;
@@ -273,7 +274,41 @@ void grOldPupupu_80211194(Ground_GObj* arg) {}
 
 void grOldPupupu_80211198(Ground_GObj* arg) {}
 
-/// #grOldPupupu_8021119C
+void grOldPupupu_8021119C(Ground_GObj* gobj)
+{
+    Ground* gp = gobj->user_data;
+    s32 max;
+    s32 min;
+
+    ftCo_800C06E8(gobj, 0xA, fn_802112F4);
+    gp->gv.unk.xC4 = 0;
+    gp->gv.unk.xC8 = 0;
+    gp->gv.unk.xCC = 0;
+
+    max = grOp_804D6A98->xC;
+    min = grOp_804D6A98->x8;
+
+    if (max > min) {
+        s32 range = max - min;
+        if (range != 0) {
+            max = min + HSD_Randi(range);
+        } else {
+            max = min;
+        }
+    } else if (max < min) {
+        s32 range = min - max;
+        if (range != 0) {
+            max += HSD_Randi(range);
+        }
+    }
+
+    gp->gv.unk.xD0 = max;
+    gp->gv.unk.xD4 = 1;
+    gp->gv.unk.xE0 = 0;
+    gp->gv.unk.xD8 = 1;
+    grAnime_801C8138(gobj, gp->map_id, 0);
+    gp->x11_flags.b012 = 1;
+}
 
 bool grOldPupupu_80211284(Ground_GObj* gobj)
 {

@@ -19,6 +19,7 @@
 
 #include "lb/lb_00F9.h"
 #include "mp/mplib.h"
+#include "sysdolphin/baselib/memory.h"
 
 #include <baselib/archive.h>
 #include <baselib/dobj.h>
@@ -43,6 +44,7 @@ StageCallbacks grRc_803E4E34[7] = {
       grRCruise_801FF920, 0 },
 };
 
+extern Vec3 grRc_803B8288;
 extern s16 grRc_803E4FF0[];
 extern s16 grRc_804D4790[4];
 
@@ -96,7 +98,7 @@ void grRCruise_801FF298(void) {}
 
 void grRCruise_801FF29C(void)
 {
-    grZakoGenerator_801CAE04(0);
+    grZakoGenerator_801CAE04(NULL);
 }
 
 bool grRCruise_801FF2C0(void)
@@ -187,7 +189,31 @@ void grRCruise_801FF444(Ground_GObj* gobj)
     gp->gv.rcruise.x10 = 0;
 }
 
-/// #grRCruise_801FF5B4
+void grRCruise_801FF5B4(Ground_GObj* gobj)
+{
+    Vec3 pos;
+    Ground* gp = GET_GROUND(gobj);
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+
+    Ground_801C2ED0(jobj, gp->map_id);
+    grAnime_801C8138(gobj, gp->map_id, 0);
+    gp->gv.rcruise.x10 = 1;
+    gp->gv.rcruise.entries = HSD_MemAlloc(0x198);
+    if (gp->gv.rcruise.entries == NULL) {
+        __assert("grrcruise.c", 0x19A, "gp->u.map.chikuwa");
+    }
+    grRCruise_80201410(gobj);
+    Ground_801C10B8(gobj, grRCruise_801FF444);
+    grRCruise_80200540(gobj);
+    grRCruise_80200B48(gobj);
+    Ground_801C2FE0(gobj);
+    mpLib_80058560();
+    pos = grRc_803B8288;
+    gp->gv.rcruise.x04 = lb_80011A50(&pos, -1, 0.4f, 0.0f, 1.0471976f,
+                                     -10000.0f, 10000.0f, 10000.0f, -10000.0f);
+    gp->gv.rcruise.x08 = 0.017453292f;
+    gp->gv.rcruise.x0C = 1;
+}
 
 bool grRCruise_801FF6CC(Ground_GObj* arg)
 {
@@ -321,7 +347,31 @@ bool grRCruise_8020014C(Ground_GObj* arg)
 
 void grRCruise_8020045C(Ground_GObj* arg) {}
 
-/// #fn_80200460
+void fn_80200460(Ground* gp_arg, s32 joint_id, CollData* cd, s32 arg3,
+                 mpLib_GroundEnum arg4, f32 arg5)
+{
+    HSD_GObj* gobj = (HSD_GObj*) gp_arg;
+    Ground* gp = HSD_GObjGetUserData(gobj);
+    int i;
+    PAD_STACK(16);
+
+    if ((s32) cd->x34_flags.b1234 == 1) {
+        for (i = 0; i < 3; i++) {
+            if (gp->gv.rcruise.x3C[i].x02 == joint_id) {
+                u8 state = gp->gv.rcruise.x3C[i].x00;
+                if (state == 1 || (u8)(state - 3) <= 1u) {
+                    gp->gv.rcruise.x3C[i].x04 = 0;
+                    grRCruise_80201B60(gp->gv.rcruise.x3C[i].x0C->child,
+                                       1);
+                    grAnime_801C7A94(gobj, grRc_804D4790[i], 1, 1.0f);
+                    gp->gv.rcruise.x3C[i].x00 = 2;
+                }
+                gp->gv.rcruise.x3C[i].x08++;
+                return;
+            }
+        }
+    }
+}
 
 void grRCruise_80200540(Ground_GObj* gobj)
 {
@@ -349,8 +399,7 @@ void grRCruise_80200B48(Ground_GObj* gobj)
 
     for (i = 0; i < 17; i++) {
         struct grRCruise_Entry* entry = &gp->gv.rcruise.entries[i];
-        entry->x02 =
-            Ground_801C32D4(gp->map_id, grRc_803E4FF0[i]);
+        entry->x02 = Ground_801C32D4(gp->map_id, grRc_803E4FF0[i]);
         entry->x14 = Ground_801C3FA4(gobj, grRc_803E4FF0[i]);
         entry->x08 = 0;
         entry->x04 = 0;

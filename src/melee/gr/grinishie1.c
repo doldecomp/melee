@@ -166,7 +166,7 @@ void grInishie1_801FA984(void) {}
 
 void grInishie1_801FA988(void)
 {
-    grZakoGenerator_801CAE04(0);
+    grZakoGenerator_801CAE04(NULL);
 }
 
 bool grInishie1_801FA9AC(void)

@@ -183,7 +183,7 @@ static void grLast_OnLoad(void) {}
 
 static void grLast_OnStart(void)
 {
-    grZakoGenerator_801CAE04(0);
+    grZakoGenerator_801CAE04(NULL);
 }
 
 static bool grLast_8021A7EC(void)

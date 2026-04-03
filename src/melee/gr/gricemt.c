@@ -3,13 +3,11 @@
 #include <placeholder.h>
 #include <platform.h>
 
-#include "baselib/gobjgxlink.h"
 #include "baselib/gobjproc.h"
 #include "baselib/random.h"
 #include "cm/camera.h"
 #include "ef/efsync.h"
 #include "gr/grdatfiles.h"
-#include "gr/grdisplay.h"
 #include "gr/grlib.h"
 #include "gr/grmaterial.h"
 #include "gr/ground.h"
@@ -273,12 +271,14 @@ void grIceMt_801F686C(void)
     Ground_801C3BB4();
 }
 
+static inline bool rand_zero(s32 n)
+{
+    return ((n) ? HSD_Randi(n) : 0) == 0;
+}
+
 void grIceMt_801F7080(void)
 {
-    // Ground_801C2BA4(5);
-    int iVar1;
     HSD_GObj* gobj;
-
     Vec3 x;
     if (grIm_804D69E8) {
         Ground_801C4A08(grIm_804D69E8);
@@ -289,48 +289,36 @@ void grIceMt_801F7080(void)
     if (grIm_804D69F0) {
         Ground_801C4A08(grIm_804D69F0);
     }
-    gobj = Ground_801C2BA4(1);
-    if (gobj) {
+    if ((gobj = Ground_801C2BA4(1))) {
         Ground_801C2FE0(gobj);
     }
-    gobj = Ground_801C2BA4(2);
-    if (gobj) {
+    if ((gobj = Ground_801C2BA4(2))) {
         Ground_801C2FE0(gobj);
     }
-    gobj = Ground_801C2BA4(3);
-    if (gobj) {
+    if ((gobj = Ground_801C2BA4(3))) {
         Ground_801C2FE0(gobj);
     }
-    gobj = Ground_801C2BA4(4);
-    if (gobj) {
+    if ((gobj = Ground_801C2BA4(4))) {
         Ground_801C2FE0(gobj);
     }
-    gobj = Ground_801C2BA4(5);
-    if (gobj) {
+    if ((gobj = Ground_801C2BA4(5))) {
         Ground_801C2FE0(gobj);
     }
-    gobj = Ground_801C2BA4(6);
-    if (gobj) {
+    if ((gobj = Ground_801C2BA4(6))) {
         Ground_801C2FE0(gobj);
     }
     if (Stage_80225194() == 76) {
         grZakoGenerator_801CAE04(&grIm_804D69F4->xBC);
-        if (grIm_804D69F4->xB8 != 0) {
-            iVar1 = HSD_Randi(grIm_804D69F4->xB8);
-        } else {
-            iVar1 = 0;
-        }
-        if (iVar1 == 0) {
-            grZakoGenerator_801CAEB0(Ground_801C5940(), Ground_801C5840());
+        if (rand_zero(grIm_804D69F4->xB8)) {
+            grZakoGenerator_801CAEB0(Ground_801C5840(), Ground_801C5940());
         }
 
         grZakoGenerator_801CADE0();
     } else {
-        grZakoGenerator_801CAE04(0);
+        grZakoGenerator_801CAE04(NULL);
     }
     x = grIm_803B8220[0];
-    grLib_801C96F8(0x7534, 0x1E, &x);
-    ////grLib_801C96F8(30000,30,{0,0,0});
+    grLib_801C96F8(0x7530, 0x1E, &x);
 }
 
 void grIceMt_801F71DC(void) {}

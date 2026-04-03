@@ -99,7 +99,7 @@ static void grTYoshi_OnLoad(void) {}
 
 static void grTYoshi_OnStart(void)
 {
-    grZakoGenerator_801CAE04(false);
+    grZakoGenerator_801CAE04(NULL);
 }
 
 static bool grTYoshi_80223BE4(void)

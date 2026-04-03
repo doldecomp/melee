@@ -78,7 +78,7 @@ void grStory_UnkStage0_OnLoad(void) {}
 
 void grStory_UnkStage0_OnStart(void)
 {
-    grZakoGenerator_801CAE04(false);
+    grZakoGenerator_801CAE04(NULL);
 }
 
 bool grStory_801E30D0(void)

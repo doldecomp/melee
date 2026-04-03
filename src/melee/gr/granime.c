@@ -32,8 +32,7 @@
                                           HSD_AnimJoint* animjoint,
                                           HSD_MatAnimJoint* matanimjoint,
                                           HSD_ShapeAnimJoint* shapeanimjoint);
-/* 1C6C0C */ void grAnime_801C6C0C(HSD_JObj* jobj,
-                                   HSD_AnimJoint* animjoint,
+/* 1C6C0C */ void grAnime_801C6C0C(HSD_JObj* jobj, HSD_AnimJoint* animjoint,
                                    HSD_MatAnimJoint* matanimjoint,
                                    HSD_ShapeAnimJoint* shapeanimjoint);
 /* 1C6EE4 */ static void fn_801C6EE4(HSD_AObj* aobj);
@@ -767,7 +766,38 @@ bool grAnime_801C83D0(HSD_GObj* gobj, bool arg1, enum_t arg2)
     return false;
 }
 
-/// #grAnime_801C84A4
+bool grAnime_801C84A4(HSD_GObj* gobj, s32 arg1, s32 arg2)
+{
+    enum _HSD_TypeMask mask = 0;
+    HSD_JObj* jobj;
+    u8 _[8];
+    HSD_AObj* sp14 = NULL;
+    HSD_AObj* result;
+
+    jobj = Ground_801C3FA4(gobj, arg1);
+    if (jobj == NULL) {
+        result = NULL;
+    } else {
+        if (arg2 & 1) {
+            mask |= 0x220;
+        }
+        if (arg2 & 2) {
+            mask |= 0x7484;
+        }
+        if (arg2 & 4) {
+            mask |= 0x100;
+        }
+        if (!__setjmp(&grAnime_8049EE40)) {
+            HSD_ForeachAnim(jobj, JOBJ_TYPE, mask, fn_801C82E8, AOBJ_ARG_AV,
+                            &sp14);
+        }
+        result = sp14;
+    }
+    if (HSD_AObjGetFlags(result) & 0x04000000) {
+        return true;
+    }
+    return false;
+}
 
 /// #grAnime_801C8578
 
