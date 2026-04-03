@@ -17,10 +17,12 @@
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
 #include "gr/stage.h"
+#include "gm/gm_1832.h"
 #include "it/it_26B1.h"
 #include "it/types.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
+#include "gr/inlines.h"
 
 struct {
     int x0;
@@ -98,6 +100,7 @@ static char grHeal_803E851C[0x2C] = {
 };
 
 extern struct yaku* grHeal_804D6AF0;
+extern s16 grHeal_804D49D8[4];
 
 void grHeal_8021EF38(bool arg0) {}
 
@@ -119,7 +122,7 @@ void grHeal_8021EFBC(void) {}
 
 void grHeal_8021EFC0(void)
 {
-    grZakoGenerator_801CAE04(0);
+    grZakoGenerator_801CAE04(NULL);
 }
 
 bool grHeal_8021EFE4(void)
@@ -159,7 +162,19 @@ Ground_GObj* grHeal_8021EFEC(u32 idx)
     return gobj;
 }
 
-/// #grHeal_8021F0D8
+void grHeal_8021F0D8(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    s32 i;
+
+    grAnime_801C8138(gobj, gp->map_id, 0);
+
+    for (i = 0; i < *(s32*) grHeal_804D6AF0; i++) {
+        if ((int) gm_80473A18.x90[i] != 0) {
+            grHeal_8021F79C(8, grHeal_804D49D8[i], i);
+        }
+    }
+}
 
 bool grHeal_8021F170(Ground_GObj* gobj)
 {

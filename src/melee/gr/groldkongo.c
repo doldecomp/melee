@@ -20,6 +20,13 @@
 static struct {
     s16 x0;
     s16 x2;
+    u8 x4[0x10];
+    f32 x14;
+    f32 x18;
+    u8 x1C[0x2C];
+    f32 x48;
+    s32 x4C;
+    s32 x50;
 }* grOk_804D6A90;
 
 StageCallbacks grOk_803E658C[4] = {
@@ -35,7 +42,6 @@ StageCallbacks grOk_803E658C[4] = {
 
 void grOldKongo_8020F468(bool arg) {}
 
-/// #grOldKongo_8020F46C
 void grOldKongo_8020F46C(void)
 {
     grOk_804D6A90 = Ground_801C49F8();
@@ -56,7 +62,7 @@ void grOldKongo_8020F4E8(void)
     HSD_GObj* gobj;
     gobj = Ground_801C2BA4(1);
     ftCo_800C0764(gobj, 2, grOldKongo_80210454);
-    grZakoGenerator_801CAE04(0);
+    grZakoGenerator_801CAE04(NULL);
 }
 
 bool grOldKongo_8020F524(void)
@@ -118,17 +124,6 @@ void grOldKongo_8020F6BC(Ground_GObj* gobj)
 
 void grOldKongo_8020F6E0(Ground_GObj* arg) {}
 
-/// #grOldKongo_8020F6E4
-
-bool grOldKongo_8020F880(Ground_GObj* gobj)
-{
-    return false;
-}
-
-/// #grOldKongo_8020F888
-
-void grOldKongo_80210058(Ground_GObj* arg) {}
-
 static inline int rand_inline(int a, int b)
 {
     if (a > b) {
@@ -139,6 +134,42 @@ static inline int rand_inline(int a, int b)
         return a;
     }
 }
+
+void grOldKongo_8020F6E4(Ground_GObj* gobj)
+{
+    Vec3 sp14;
+    Ground* gp = GET_GROUND(gobj);
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+
+    grAnime_801C8138(gobj, gp->map_id, 0);
+    grMaterial_801C94D8(jobj);
+    gp->gv.oldkongo.xE8 = 1.0f;
+    gp->gv.oldkongo.xEC = 1.0f;
+    gp->gv.oldkongo.xD8 = 0.0f;
+    gp->gv.oldkongo.xDC = 0.0f;
+    gp->gv.oldkongo.xC4 = 0;
+    gp->gv.oldkongo.xC6 = 0;
+    gp->gv.oldkongo.xC8 = 2;
+    gp->gv.oldkongo.xD4 = NULL;
+    gp->gv.oldkongo.xE0 = 0.0f;
+    gp->gv.oldkongo.xE4 = 0.0f;
+    gp->gv.oldkongo.xEC = grOk_804D6A90->x48;
+    gp->gv.oldkongo.xCC =
+        rand_inline(grOk_804D6A90->x18, grOk_804D6A90->x14);
+    gp->gv.oldkongo.xCE =
+        rand_inline(grOk_804D6A90->x50, grOk_804D6A90->x4C);
+    lb_8000B1CC(Ground_801C3FA4(gobj, 1), NULL, &sp14);
+    Ground_801C4D70(gobj, &sp14, gp->gv.oldkongo.xDC);
+}
+
+bool grOldKongo_8020F880(Ground_GObj* gobj)
+{
+    return false;
+}
+
+/// #grOldKongo_8020F888
+
+void grOldKongo_80210058(Ground_GObj* arg) {}
 
 void grOldKongo_8021005C(Ground_GObj* gobj)
 {

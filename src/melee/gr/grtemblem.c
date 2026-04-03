@@ -98,7 +98,7 @@ static void grTemblem_UnkStage0_OnLoad(void) {}
 
 static void grTemblem_UnkStage0_OnStart(void)
 {
-    grZakoGenerator_801CAE04(0);
+    grZakoGenerator_801CAE04(NULL);
 }
 
 static bool grTRoy_80224490(void)

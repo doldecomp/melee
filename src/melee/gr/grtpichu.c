@@ -101,7 +101,7 @@ static void grTpichu_UnkStage0_OnLoad(void) {}
 
 static void grTpichu_UnkStage0_OnStart(void)
 {
-    grZakoGenerator_801CAE04(0);
+    grZakoGenerator_801CAE04(NULL);
 }
 
 static bool grTPichu_80222C34(void)

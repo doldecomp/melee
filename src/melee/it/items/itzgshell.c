@@ -507,7 +507,7 @@ void it_802DFED4(Item_GObj* gobj, Item_GObj* ref_gobj)
 
 void itZGShell_Logic11_Destroyed(Item_GObj* gobj)
 {
-    grZakoGenerator_801CACB8((Ground_GObj*) gobj);
+    grZakoGenerator_801CACB8(gobj);
 }
 
 void it_802DFF14(Item_GObj* gobj, s32 arg1)

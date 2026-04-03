@@ -355,7 +355,7 @@ void grMuteCity_801EFCDC(void) {}
 
 void grMuteCity_801EFCE0(void)
 {
-    grZakoGenerator_801CAE04(0);
+    grZakoGenerator_801CAE04(NULL);
 }
 
 bool grMuteCity_801EFD04(void)

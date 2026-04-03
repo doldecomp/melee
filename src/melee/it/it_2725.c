@@ -10442,7 +10442,7 @@ void it_8027CE18(Item_GObj* item_gobj)
 
 void it_8027CE44(Item_GObj* item_gobj)
 {
-    grZakoGenerator_801CACB8((Ground_GObj*) item_gobj);
+    grZakoGenerator_801CACB8(item_gobj);
 }
 
 #pragma push

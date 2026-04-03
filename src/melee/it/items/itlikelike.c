@@ -1323,7 +1323,7 @@ void itLikeLike_Logic5_Destroyed(Item_GObj* gobj)
     it_2725_Logic9_Destroyed(gobj);
 }
 
-Item_GObj* it_802DC4BC(s32 arg0, Vec3* arg1)
+Item_GObj* it_802DC4BC(s32 arg0, Vec3* arg1, s32 arg2)
 {
     // one r29-r30 regswap away from being solved
     Vec3 sp50;

@@ -86,7 +86,7 @@ static void grTkoopa_UnkStage0_OnLoad(void) {}
 
 static void grTkoopa_UnkStage0_OnStart(void)
 {
-    grZakoGenerator_801CAE04(0);
+    grZakoGenerator_801CAE04(NULL);
 }
 
 static bool grTKoopa_802216E4(void)

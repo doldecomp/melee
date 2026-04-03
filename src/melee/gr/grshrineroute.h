@@ -49,7 +49,7 @@
 /* 20AD24 */ bool grShrineRoute_8020AD24(bool);
 /* 20AD58 */ void grShrineRoute_8020AD58(Ground*, int, CollData*, int, int);
 /* 20AE08 */ UNK_RET grShrineRoute_8020AE08(UNK_PARAMS);
-/* 20AF38 */ UNK_RET grShrineRoute_8020AF38(UNK_PARAMS);
+/* 20AF38 */ void grShrineRoute_8020AF38(HSD_GObj*, s32);
 /* 20B020 */ void grShrineRoute_8020B020(HSD_GObj* gobj, int r4, bool hide);
 /* 20B0AC */ void grShrineRoute_8020B0AC(void);
 /* 20B104 */ DynamicsDesc* grShrineRoute_OnTouchLine(enum_t);

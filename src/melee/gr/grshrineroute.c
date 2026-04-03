@@ -8,6 +8,7 @@
 #include "baselib/forward.h"
 
 #include "baselib/jobj.h"
+#include "ef/efsync.h"
 #include "ft/ftlib.h"
 #include "gr/grdisplay.h"
 #include "gr/grmaterial.h"
@@ -102,12 +103,12 @@ static struct {
     int x8;
     int xC;
     int x10;
-    int x14;
-    int x18;
+    f32 x14;
+    f32 x18;
     int x1C;
     int x20;
     int x24;
-    int x28;
+    grZakoGenerator_SpawnDesc x28;
 }* grSh_Route_804D6A58;
 
 extern float grNKr_804DB868;
