@@ -417,8 +417,8 @@ struct grArwing_GroundVars {
     u32 xC8;
     u32 xCC;
     u32 xD0;
-    f32 xD4;
-    f32 xD8;
+    s32 xD4;
+    s32 xD8;
     f32 xDC;
     f32 xE0;
     f32 xE4;

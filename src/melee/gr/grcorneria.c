@@ -20,6 +20,7 @@
 #include "if/ifstatus.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
+#include "lb/lbaudio_ax.h"
 #include "mp/mplib.h"
 
 #include <baselib/controller.h>
@@ -163,6 +164,7 @@ void grCorneria_801DD2C0(void)
 }
 
 extern Vec3 grCn_803B8090;
+extern Vec3 grCn_803B809C;
 
 void grCorneria_801DD350(void)
 {
@@ -497,7 +499,64 @@ void grCorneria_801DDDA8(HSD_GObj* gobj, Vec3* vec)
     }
 }
 
-/// #grCorneria_801DDE88
+s32 grCorneria_801DDE88(HSD_GObj* arg0)
+{
+    Vec3 sp;
+    Vec3 pos;
+    Ground* gp;
+    Ground* gp2;
+    Ground* gp3;
+    grCn_Data* data = &grCn_803E1D38;
+    s32 idx;
+    s32 result = 0;
+    PAD_STACK(16);
+
+    gp = arg0->user_data;
+    sp = grCn_803B809C;
+
+    if (arg0 != NULL) {
+        gp3 = arg0->user_data;
+        gp2 = ((HSD_GObj*) Ground_801C2BA4(3))->user_data;
+        lb_8000B1CC(Ground_801C3FA4(arg0, 4), NULL, &pos);
+        idx = data->indices[gp3->gv.arwing.xC8];
+        sp.x = gp2->gv.arwing.xDC + (-pos.z + data->positions[idx].x);
+        sp.y = pos.y + data->positions[idx].y;
+        sp.z = pos.x + data->positions[idx].z;
+    } else {
+        sp.z = 0.0f;
+        sp.y = 0.0f;
+        sp.x = 0.0f;
+    }
+
+    if (sp.y <= 100.0f) {
+        sp.y = 100.0f;
+    }
+
+    switch (gp->gv.arwing.xD8) {
+    case 0:
+        result = grCorneria_801DEC08(&sp);
+        if (result == 0) {
+            result = lbAudioAx_800237A8(0x55730, 0x7F, 0x40);
+            gp->gv.arwing.xD8 = 1;
+        }
+        return result;
+    case 1:
+        result = grCorneria_801DEC94(&sp);
+        if (result == 0) {
+            gp->gv.arwing.xD8 = 2;
+        }
+        return result;
+    case 2:
+        result = grCorneria_801DEC94(&sp);
+        if (result == 1) {
+            result = lbAudioAx_800237A8(0x55732, 0x7F, 0x40);
+            gp->gv.arwing.xD8 = 3;
+        }
+        return result;
+    }
+
+    return result;
+}
 
 /// #grCorneria_801DE024
 
