@@ -117,6 +117,18 @@ extern HSD_LightDesc grSh_Route_803E5D90;
 extern Vec3 grSh_Route_803B836C;
 extern Vec3 grSh_Route_803B8378;
 
+extern struct grSh_Route_LightConfig {
+    /* 0x00 */ GXColor x0;
+    /* 0x04 */ Vec3 x4;
+    /* 0x10 */ Vec3 x10;
+    /* 0x1C */ s32 x1C;
+    /* 0x20 */ f32 x20;
+    /* 0x24 */ s32 x24;
+    /* 0x28 */ f32 x28;
+    /* 0x2C */ f32 x2C;
+    /* 0x30 */ s32 x30;
+} grSh_Route_803E5A58[];
+
 float grShrineRoute_802087B0(void)
 {
     return grNKr_804DB868;
@@ -341,7 +353,40 @@ void grShrineRoute_8020A8A0(Ground_GObj* arg) {}
 
 /// #grShrineRoute_8020A8A4
 
-/// #grShrineRoute_8020AA40
+void grShrineRoute_8020AA40(HSD_GObj* gobj)
+{
+    HSD_LObj* lobj;
+    struct grSh_Route_LightConfig* config;
+    u32 i;
+    GXColor color;
+
+    if (gobj != NULL) {
+        lobj = HSD_LObjGetNext(GET_LOBJ(gobj));
+        config = grSh_Route_803E5A58;
+        i = 0;
+        do {
+            if (lobj != NULL) {
+                color = config->x0;
+                HSD_LObjSetColor(lobj, color);
+                HSD_LObjSetPosition(lobj, &config->x4);
+                HSD_LObjSetDistAttn(lobj, config->x2C, config->x28,
+                                    config->x30);
+                if (config->x1C == 2) {
+                    lobj->flags = 6;
+                } else if (config->x1C == 3) {
+                    lobj->flags = 7;
+                    HSD_LObjSetInterest(lobj, &config->x10);
+                    HSD_LObjSetSpot(lobj, config->x20, config->x24);
+                }
+            } else {
+                OSReport("%s:%d: oioi...\n");
+            }
+            config++;
+            i++;
+            lobj = HSD_LObjGetNext(lobj);
+        } while (i < 15);
+    }
+}
 
 HSD_LObj* grShrineRoute_8020AB58(Ground_GObj* gobj)
 {
