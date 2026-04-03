@@ -782,7 +782,36 @@ bool grCorneria_801E01A0(Ground_GObj* arg)
     return false;
 }
 
-/// #grCorneria_801E01A8
+void grCorneria_801E01A8(Ground_GObj* arg0)
+{
+    Ground* gp = arg0->user_data;
+    HSD_JObj* jobj = arg0->hsd_obj;
+    u8* raw = (u8*) gp;
+    PAD_STACK(8);
+
+    if (raw[0xC4] == 0 && (u32) ((raw[0xC6] >> 7) & 1) != 1) {
+        HSD_JObjAddTranslationX(jobj, M2C_FIELD(grCn_804D69A0, f32*, 0x88));
+        HSD_JObjSetTranslateY(jobj, -grCorneria_801E2EA0());
+
+        switch ((s8) raw[0xC5]) {
+        case 0:
+            if (HSD_JObjGetTranslationX(jobj) >=
+                4800.0f * Ground_801C0498() * 0.5f + -1400.0f)
+            {
+                grCorneria_801E03C8(arg0, 8);
+                raw[0xC5] = 1;
+            }
+            break;
+        case 1:
+            if (HSD_JObjGetTranslationX(jobj) >=
+                4800.0f * Ground_801C0498() * 0.5f + 1400.0f)
+            {
+                Ground_801C4A08((HSD_GObj*) arg0);
+            }
+            break;
+        }
+    }
+}
 
 void grCorneria_801E03C4(Ground_GObj* arg) {}
 
