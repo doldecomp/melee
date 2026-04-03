@@ -112,7 +112,9 @@ static struct {
 }* grSh_Route_804D6A58;
 
 extern float grNKr_804DB868;
+extern HSD_LightDesc grSh_Route_803E5D74;
 extern HSD_LightDesc grSh_Route_803E5D90;
+extern Vec3 grSh_Route_803B836C;
 extern Vec3 grSh_Route_803B8378;
 
 float grShrineRoute_802087B0(void)
@@ -342,7 +344,28 @@ void grShrineRoute_8020A8A0(Ground_GObj* arg) {}
 
 /// #grShrineRoute_8020AA40
 
-/// #grShrineRoute_8020AB58
+HSD_LObj* grShrineRoute_8020AB58(Ground_GObj* gobj)
+{
+    HSD_LObj* new_lobj;
+    HSD_LObj* lobj;
+    Vec3 pos;
+
+    if (gobj == NULL || (lobj = gobj->hsd_obj) == NULL) {
+        return NULL;
+    }
+    while ((lobj == NULL ? NULL : lobj->next) != NULL) {
+        lobj = lobj == NULL ? NULL : lobj->next;
+    }
+    new_lobj = HSD_LObjLoadDesc(&grSh_Route_803E5D74);
+    if (new_lobj != NULL) {
+        pos = grSh_Route_803B836C;
+        HSD_LObjSetNext(lobj, new_lobj);
+        HSD_LObjSetPosition(new_lobj, &pos);
+        HSD_LObjSetFlags(new_lobj, 0x20);
+    }
+    return new_lobj;
+    PAD_STACK(8);
+}
 
 HSD_LObj* grShrineRoute_8020AC44(HSD_GObj* gobj)
 {
