@@ -400,7 +400,33 @@ void grShrineRoute_8020AD58(Ground* gp, int r4, CollData* r5, int r6, int r7)
 
 /// #grShrineRoute_8020AE08
 
-/// #grShrineRoute_8020AF38
+void grShrineRoute_8020AF38(HSD_GObj* gobj, s32 arg1)
+{
+    Ground* gp = GET_GROUND(gobj);
+    HSD_GObj* pgobj;
+    HSD_JObj* jobj;
+    f32 scale;
+    Ground* gp2;
+
+    pgobj = Ground_801C57A4();
+    gp2 = (Ground*) ((s32*) gp + (arg1 - 189));
+
+    if (gp2->gv.shrineroute2.x108 != NULL) {
+        scale = 0.7f;
+        if (((Ground*) gp2->gv.shrineroute2.x108->user_data)->map_id == 1) {
+            scale *= grSh_Route_804D6A58->x14;
+        } else {
+            scale *= grSh_Route_804D6A58->x18;
+        }
+        jobj = Ground_801C2CF4(arg1);
+        efSync_Spawn(0x428, gobj, jobj, &scale);
+        Ground_801C4A08(gp2->gv.shrineroute2.x108);
+        gp2->gv.shrineroute2.x108 = NULL;
+        if (pgobj != NULL) {
+            ftLib_80086C18(pgobj, 0xB, 0x1E);
+        }
+    }
+}
 
 void grShrineRoute_8020B020(HSD_GObj* gobj, int r4, int r5)
 {
