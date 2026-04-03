@@ -271,7 +271,6 @@ void grShrineRoute_80209AF0(Ground_GObj* gobj)
     gp->gv.shrineroute3.xD0 *= (HSD_Randi(2) != 0) ? 1.0F : -1.0F;
     gp->gv.shrineroute3.xD4 = 0.00006981317F * HSD_Randf() + 0.000017453292F;
     gp->gv.shrineroute3.xD4 *= (HSD_Randi(2) != 0) ? 1.0F : -1.0F;
-    PAD_STACK(8);
 }
 
 bool grShrineRoute_80209BE4(Ground_GObj* arg)
