@@ -512,9 +512,7 @@ void grCorneria_801DDAC4(Ground_GObj* gobj)
     gp->gv.arwing.xC8 = grCn_804D69A4;
     grCn_803E1D38.arwing_gobj[grCn_804D69A4] = gobj;
     {
-        s32 idx =
-            grCn_803E1D38
-                .arwing_group[grCn_803E1D38.arwing_group[gp->gv.arwing.xC8]];
+        s32 idx = grCn_803E1D38.arwing_group[gp->gv.arwing.xC8];
         HSD_GObj* arwing = grCorneria_801DD534(grCn_803E1D38.x3D8[idx][0]);
         if (arwing != NULL) {
             Ground* agp = GET_GROUND(arwing);
