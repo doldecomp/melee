@@ -364,8 +364,7 @@ HSD_GObj* grCorneria_801DD534(int arg0)
             HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
         }
     } else {
-        OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grcorneria.c", 0x26A,
-                 arg0);
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 0x26A, arg0);
     }
 
     return gobj;
@@ -1294,8 +1293,7 @@ int grCorneria_801E0A74(f32* arg0)
             return 4;
         }
     }
-    OSReport("grcorneria.c    grCorneriaGetPosMapKind2\n");
-    __assert("grcorneria.c", 2507, "0");
+    HSD_ASSERTREPORT(0x9CB, NULL, "grCorneriaGetPosMapKind2\n");
     return -1;
 }
 
@@ -1389,9 +1387,8 @@ void grCorneria_801E0E40(void)
 
     OSReport("talk no = %d\n", grCn_804D466C);
     wgobj = grCorneria_801DD534(0xC);
-    if (wgobj == NULL) {
-        __assert("grcorneria.c", 0xAC3, "wgobj");
-    }
+    HSD_ASSERT(0xAC3, wgobj);
+
     grCorneria_801E0F34(wgobj, grCn_804D466C);
 }
 
