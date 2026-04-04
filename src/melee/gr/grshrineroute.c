@@ -293,7 +293,7 @@ void grShrineRoute_80208D14(Ground_GObj* gobj)
     Ground* gp = gobj->user_data;
     Vec3 center;
     int i;
-    PAD_STACK(8);
+    PAD_STACK(12);
 
     mpLib_80058560();
     grAnime_801C8138(gobj, gp->map_id, 0);
@@ -326,9 +326,11 @@ void grShrineRoute_80208D14(Ground_GObj* gobj)
     mpJointSetCb1(0xD, gp, (mpLib_Callback) grShrineRoute_8020AD58);
 
     if (Ground_801C2D24(0x94, &center)) {
+        HSD_JObj* jobj;
         for (i = 0; i < 3; i++) {
-            gp->gv.shrineroute.platforms[i].jobj = Ground_801C2CF4(i + 0x7F);
-            if (gp->gv.shrineroute.platforms[i].jobj != NULL) {
+            jobj = Ground_801C2CF4(i + 0x7F);
+            gp->gv.shrineroute.platforms[i].jobj = jobj;
+            if (jobj != NULL) {
                 HSD_JObjGetTranslation(gp->gv.shrineroute.platforms[i].jobj,
                                        &gp->gv.shrineroute.platforms[i].offset);
                 lbVector_Sub(&gp->gv.shrineroute.platforms[i].offset, &center);
