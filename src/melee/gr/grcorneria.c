@@ -175,10 +175,13 @@ static inline s32 grCn_RandRange(f32 fmin, f32 fmax)
 static inline s32 grCn_CheckFar(Vec3* pos)
 {
     s32 kind = grCorneria_801E0A74(&pos->x);
-    if (kind == 4 || kind == 9) {
+    if (kind == 9 || kind == 4) {
         pos->x -= 300.0f;
         kind = grCorneria_801E0A74(&pos->x);
-        return (kind != 4 && kind != 9) ? 1 : 0;
+        if (kind == 9 || kind == 4) {
+            return 0;
+        }
+        return 1;
     }
     return 1;
 }
@@ -195,13 +198,129 @@ static inline void grCn_SpawnArwing(grCn_Data* data, s32 slot, u32 type_id,
 static inline u32 grCn_PickUniqueType(grCn_Data* data, s32 slot, s32 range,
                                       s32 base)
 {
-    u32 rand_id = data->arwing_type[slot];
+    s32 rand_id = data->arwing_type[slot];
     do {
         rand_id = HSD_Randi(range) + base;
-    } while (rand_id == (u32) data->arwing_type[0] ||
-             rand_id == (u32) data->arwing_type[1] ||
-             rand_id == (u32) data->arwing_type[2]);
+    } while (rand_id == data->arwing_type[0] ||
+             rand_id == data->arwing_type[1] ||
+             rand_id == data->arwing_type[2]);
     return rand_id;
+}
+
+void grCorneria_801DCE1C(void)
+{
+    grCn_Data* data = &grCn_803E1D38;
+
+    if (Stage_80225194() != 0x46) {
+        if (grCn_804D69B0 == 0) {
+            if (data->arwing_gobj[0] == NULL) {
+                grCn_804D69A8--;
+                if (grCn_804D69A8 <= 0) {
+                    Vec3 pos;
+                    s32 far;
+                    s32 type_id;
+                    s32 group;
+
+                    grCorneria_801DDD4C(&pos);
+                    far = grCn_CheckFar(&pos);
+
+                    type_id = data->arwing_type[0];
+                    while (type_id == data->arwing_type[0]) {
+                        s32 range;
+                        if (far == 1) {
+                            range = 9;
+                        } else {
+                            range = 13;
+                        }
+                        if (range != 0) {
+                            type_id = HSD_Randi(range);
+                        } else {
+                            type_id = 0;
+                        }
+                        type_id += 1;
+                    }
+
+                    if (data->arwing_group[0] == 4) {
+                        group = 1;
+                    } else {
+                        group = HSD_Randf() > grCn_804D69A0->x4C ? 1 : 4;
+                    }
+
+                    grCn_SpawnArwing(data, 0, type_id, group);
+                }
+            } else {
+                grCn_804D69A8 = grCn_RandRange(grCn_804D69A0->x44,
+                                               grCn_804D69A0->x48);
+            }
+        } else {
+            s32 count = 0;
+            if (data->arwing_gobj[0] != NULL) {
+                count = 1;
+                if (data->arwing_gobj[1] != NULL) {
+                    count = 2;
+                    if (data->arwing_gobj[2] != NULL) {
+                        count = 3;
+                    }
+                }
+            }
+
+            if (count < 3) {
+                grCn_804D69A8--;
+                if (grCn_804D69A8 <= 0) {
+                    s32 has_near = 0;
+
+                    if (count != 0 && data->arwing_type[0] < 10) {
+                        if (data->arwing_type[0] < 1) {
+                        } else if (data->arwing_gobj[0] != NULL) {
+                            has_near = 1;
+                        }
+                    }
+                    if (count != 1 && data->arwing_type[1] < 10) {
+                        if (data->arwing_type[1] < 1) {
+                        } else if (data->arwing_gobj[1] != NULL) {
+                            has_near = 1;
+                        }
+                    }
+                    if (count != 2) {
+                        s32 t = data->arwing_type[2];
+                        if (t < 10) {
+                            if (t < 1) {
+                            } else if (data->arwing_gobj[2] != NULL) {
+                                has_near = 1;
+                            }
+                        }
+                    }
+
+                    if (has_near == 0) {
+                        s32 type_id =
+                            grCn_PickUniqueType(data, count, 13, 1);
+                        grCn_SpawnArwing(data, count, type_id,
+                                         count + 1);
+                        return;
+                    }
+
+                    {
+                        Vec3 pos;
+                        s32 far;
+                        grCorneria_801DDD4C(&pos);
+                        far = grCn_CheckFar(&pos);
+                        if (far == 0) {
+                            s32 type_id =
+                                grCn_PickUniqueType(data, count, 4, 10);
+                            grCn_SpawnArwing(data, count, type_id,
+                                             count + 1);
+                        }
+                    }
+                }
+            } else {
+                grCn_804D69A8 = 10;
+            }
+        }
+    } else {
+        data->arwing_gobj[0] = NULL;
+        data->arwing_gobj[1] = NULL;
+        data->arwing_gobj[2] = NULL;
+    }
 }
 
 void grCorneria_801DD2C0(void)
