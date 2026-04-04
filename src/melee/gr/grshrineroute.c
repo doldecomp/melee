@@ -1163,6 +1163,10 @@ void grShrineRoute_8020A89C(Ground_GObj* arg) {}
 
 void grShrineRoute_8020A8A0(Ground_GObj* arg) {}
 
+inline f32 grShrineRoute_8020A8A4_rand(){
+    return HSD_Randf();
+}
+
 void grShrineRoute_8020A8A4(Ground_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
@@ -1172,8 +1176,8 @@ void grShrineRoute_8020A8A4(Ground_GObj* gobj)
         angle = (f32)(6.283185307179586 * HSD_Randf());
         HSD_JObjSetTranslateX(gp->gv.shrineroute3.xC4, 300.0f * cosf(angle));
         HSD_JObjSetTranslateY(gp->gv.shrineroute3.xC4, 300.0f * sinf(angle));
-        gp->gv.shrineroute3.xD8 = 0.04363323f * ((2.0f * HSD_Randf()) - 1.0f);
-        gp->gv.shrineroute3.xDC = 0.04363323f * ((2.0f * HSD_Randf()) - 1.0f);
+        gp->gv.shrineroute3.xD8 = 0.04363323f * ((2.0f * grShrineRoute_8020A8A4_rand()) - 1.0f);
+        gp->gv.shrineroute3.xDC = 0.04363323f * ((2.0f * grShrineRoute_8020A8A4_rand()) - 1.0f);
     }
 }
 
