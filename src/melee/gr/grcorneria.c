@@ -67,7 +67,7 @@ typedef struct grCn_StageData {
     /* 0x48 */ f32 x48;
     /* 0x4C */ f32 x4C;
     /* 0x50 */ u8 pad50[0x18];
-    /* 0x68 */ s32 x68;
+    /* 0x68 */ f32 x68;
     /* 0x6C */ u8 pad6C[0x4];
     /* 0x70 */ f32 x70;
     /* 0x74 */ s32 x74;
@@ -872,7 +872,7 @@ void grCorneria_801DE8E4(Ground_GObj* gobj)
     *(s32*) &gp->gv.corneria.base_x = zero;
     *(s32*) &gp->gv.corneria.xF0 = zero;
     *(s32*) &gp->gv.corneria.xF4 = zero;
-    *(s32*) &gp->gv.corneria.xF8 = grCn_804D69A0->x68;
+    *(s32*) &gp->gv.corneria.xF8 = (s32) grCn_804D69A0->x68;
     *(s32*) &gp->gv.corneria.xFC = zero;
     gp->gv.corneria.x100 = HSD_Randi(2);
 }
@@ -923,27 +923,29 @@ void grCorneria_801DF8CC(Ground_GObj* arg) {}
 
 void grCorneria_801DF8D0(Ground_GObj* gobj)
 {
+    grCn_Data* data = &grCn_803E1D38;
     Ground* gp = GET_GROUND(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
     f32 scale;
     s32 idx;
     s32 zero = 0;
 
-    static Vec3 zero_vec = { 0, 0, 0 };
     scale = Ground_801C0498();
     gp->gv.corneria.xC8 = (void*) grCn_804D69A4;
-    gp->gv.corneria.xE4 = zero_vec;
+    *(s32*) &gp->gv.corneria.xE4.z = zero;
+    *(s32*) &gp->gv.corneria.xE4.y = zero;
+    *(s32*) &gp->gv.corneria.xE4.x = zero;
     *(s32*) &gp->gv.corneria.offset_y.val = zero;
     grAnime_801C7FF8(gobj, 0, 7, 1, 0.0f, 1.0f);
     grAnime_801C8098(gobj, 2, 7, 3, 0.0f, 1.0f);
-    idx = grCn_803E1D38.arwing_type[(s32) gp->gv.corneria.xC8];
+    idx = data->arwing_type[(s32) gp->gv.corneria.xC8];
     if (idx < 10) {
         if (idx < 1) {
             goto default_case;
         }
         {
-            s32 val = grCn_803E1D38.arwing_group[(s32) gp->gv.corneria.xC8];
-            HSD_GObj* arwing = grCorneria_801DD534(grCn_803E1D38.x444[val]);
+            s32 val = data->arwing_group[(s32) gp->gv.corneria.xC8];
+            HSD_GObj* arwing = grCorneria_801DD534(data->x444[val]);
             *(HSD_GObj**) &gp->gv.corneria.offset_x = arwing;
             if (arwing != NULL) {
                 Ground* agp =
@@ -955,7 +957,7 @@ void grCorneria_801DF8D0(Ground_GObj* gobj)
         }
     } else if (idx < 14) {
         HSD_JObj* src_jobj = Ground_801C3FA4(
-            grCn_803E1D38.arwing_gobj[(s32) gp->gv.corneria.xC8], 4);
+            data->arwing_gobj[(s32) gp->gv.corneria.xC8], 4);
         lb_8000C2F8(Ground_801C3FA4(gobj, 0), src_jobj);
         *(s32*) &gp->gv.corneria.offset_x = zero;
     } else {
@@ -979,7 +981,7 @@ void grCorneria_801DF8D0(Ground_GObj* gobj)
     *(s32*) &gp->gv.corneria.base_x = zero;
     *(s32*) &gp->gv.corneria.xF0 = zero;
     *(s32*) &gp->gv.corneria.xF4 = zero;
-    *(s32*) &gp->gv.corneria.xF8 = grCn_804D69A0->x68;
+    *(s32*) &gp->gv.corneria.xF8 = (s32) grCn_804D69A0->x68;
     *(s32*) &gp->gv.corneria.xFC = zero;
 }
 
