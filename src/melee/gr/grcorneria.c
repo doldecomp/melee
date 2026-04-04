@@ -101,7 +101,7 @@ typedef struct grCn_Data {
     /* 0x28C */ u8 pad3[0x6C];
     /* 0x2F8 */ s32 anim_ids[14];
     /* 0x330 */ Vec3 positions[14];
-    /* 0x3D8 */ s32 x3D8[9][3];
+    /* 0x3D8 */ s32 x3D8[27];
     /* 0x444 */ s32 x444[5];
     /* 0x458 */ s32 x458[8];
     /* 0x478 */ u8 pad5[0x40];
@@ -364,8 +364,7 @@ HSD_GObj* grCorneria_801DD534(int arg0)
             HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
         }
     } else {
-        OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grcorneria.c", 0x26A,
-                 arg0);
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 0x26A, arg0);
     }
 
     return gobj;
@@ -507,7 +506,6 @@ void grCorneria_801DDAC4(Ground_GObj* gobj)
     Ground* gp = GET_GROUND(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
     f32 scale;
-    PAD_STACK(8);
 
     gp->gv.arwing.xC8 = grCn_804D69A4;
     grCn_803E1D38.arwing_gobj[grCn_804D69A4] = gobj;
@@ -515,10 +513,12 @@ void grCorneria_801DDAC4(Ground_GObj* gobj)
         s32 idx = grCn_803E1D38.arwing_group[gp->gv.arwing.xC8];
         HSD_GObj* arwing = grCorneria_801DD534(grCn_803E1D38.x3D8[idx][0]);
         if (arwing != NULL) {
-            Ground* agp = GET_GROUND(arwing);
-            agp->x10_flags.b2 = 0;
-            if (agp != NULL) {
-                agp->gv.arwing.xC8 = gp->gv.arwing.xC8;
+            GET_GROUND(arwing)->x10_flags.b2 = 0;
+            {
+                Ground* agp = GET_GROUND(arwing);
+                if (agp != NULL) {
+                    agp->gv.arwing.xC8 = gp->gv.arwing.xC8;
+                }
             }
         }
     }
@@ -1295,8 +1295,7 @@ int grCorneria_801E0A74(f32* arg0)
             return 4;
         }
     }
-    OSReport("grcorneria.c    grCorneriaGetPosMapKind2\n");
-    __assert("grcorneria.c", 2507, "0");
+    HSD_ASSERTREPORT(0x9CB, NULL, "grCorneriaGetPosMapKind2\n");
     return -1;
 }
 
@@ -1390,9 +1389,8 @@ void grCorneria_801E0E40(void)
 
     OSReport("talk no = %d\n", grCn_804D466C);
     wgobj = grCorneria_801DD534(0xC);
-    if (wgobj == NULL) {
-        __assert("grcorneria.c", 0xAC3, "wgobj");
-    }
+    HSD_ASSERT(0xAC3, wgobj);
+
     grCorneria_801E0F34(wgobj, grCn_804D466C);
 }
 
@@ -1455,6 +1453,21 @@ bool grCorneria_801E1058(Ground_GObj* arg)
     return false;
 }
 
+static inline void Fake_HSD_JObjSetTranslateX(HSD_JObj* jobj, f32 x)
+{
+    if (!jobj) {
+        return;
+    }
+    if (!jobj) {
+        __assert("jobj.h", 932, "jobj");
+    }
+
+    jobj->translate.x = x;
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
+        HSD_JObjSetMtxDirty(jobj);
+    }
+}
+
 void grCorneria_801E1060(Ground_GObj* gobj)
 {
     HSD_GObj* bg;
@@ -1463,12 +1476,13 @@ void grCorneria_801E1060(Ground_GObj* gobj)
 
     pos = gm_801883C0();
     total = 3200.0f * Ground_801C0498();
+
     total = 3200.0f * Ground_801C0498() * 0.5f + total;
     pos = pos * ((4800.0f * Ground_801C0498() * 0.5f + total) / 2400.0f);
 
     bg = Ground_801C2BA4(8);
     if (bg != NULL) {
-        HSD_JObjSetTranslateX(bg->hsd_obj, pos);
+        Fake_HSD_JObjSetTranslateX(bg->hsd_obj, pos);
     }
     {
         f32 a = 3200.0f * Ground_801C0498() * 0.5f;
@@ -1477,7 +1491,7 @@ void grCorneria_801E1060(Ground_GObj* gobj)
 
     bg = Ground_801C2BA4(9);
     if (bg != NULL) {
-        HSD_JObjSetTranslateX(bg->hsd_obj, pos);
+        Fake_HSD_JObjSetTranslateX(bg->hsd_obj, pos);
     }
     {
         f32 a = 4800.0f * Ground_801C0498() * 0.5f;
@@ -1486,7 +1500,7 @@ void grCorneria_801E1060(Ground_GObj* gobj)
 
     bg = Ground_801C2BA4(4);
     if (bg != NULL) {
-        HSD_JObjSetTranslateX(bg->hsd_obj, pos);
+        Fake_HSD_JObjSetTranslateX(bg->hsd_obj, pos);
     }
 }
 
@@ -1924,13 +1938,12 @@ void grCorneria_801E25C4(HSD_GObj* gobj, void* gv, int line, int arg3,
     int i;
     PAD_STACK(8);
 
-    i = 0;
     v->line = line;
     v->sis_data_idx = arg3;
     v->sound_id = arg4;
     joint0 = grCn_803E1D38.dialog_joints[v->line].joint0;
     joint1 = grCn_803E1D38.dialog_joints[v->line].joint1;
-    do {
+    for (i = 0; i < 5; i++) {
         if (i != 0 && v->line != i) {
             HSD_JObj* j0 = Ground_801C3FA4(gobj,
                 grCn_803E1D38.dialog_joints[i].joint0);
@@ -1945,8 +1958,7 @@ void grCorneria_801E25C4(HSD_GObj* gobj, void* gv, int line, int arg3,
                 }
             }
         }
-        i += 1;
-    } while (i < 5);
+    }
     v->jobj0 = Ground_801C3FA4(gobj, joint0);
     v->jobj1 = Ground_801C3FA4(gobj, joint1);
     v->jobj2 = Ground_801C3FA4(gobj, 5);
