@@ -1164,28 +1164,21 @@ void grCorneria_801E03C8(Ground_GObj* gobj, int id)
     new_gobj = grCorneria_801DD534(id);
     gp = GET_GROUND(new_gobj);
 
-    switch (id) {
-    case 8: {
+    if (id == 8) {
         f32 half = 3200.0f * Ground_801C0498() / 2;
         HSD_JObjSetTranslateX(new_gobj->hsd_obj,
                               x - (4800.0f * Ground_801C0498() / 2 + half));
         gp->gv.corneria.xC5 = 0;
-        break;
-    }
-    case 9: {
+    } else if (id == 9) {
         f32 half = 3200.0f * Ground_801C0498() / 2;
         HSD_JObjSetTranslateX(new_gobj->hsd_obj,
                               x - (3200.0f * Ground_801C0498() / 2 + half));
         gp->gv.corneria.xC5 = 0;
-        break;
-    }
-    case 4: {
+    } else if (id == 4) {
         f32 half = 4800.0f * Ground_801C0498() / 2;
         HSD_JObjSetTranslateX(new_gobj->hsd_obj,
                               x - (3200.0f * Ground_801C0498() / 2 + half));
         gp->gv.corneria.xC5 = 0;
-        break;
-    }
     }
     if (new_gobj != NULL) {
         HSD_GObjGXLink_80390908(new_gobj, 3, 0);
