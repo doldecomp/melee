@@ -1351,7 +1351,7 @@ void grShrineRoute_8020AF38(HSD_GObj* gobj, s32 arg1)
 
 void grShrineRoute_8020B020(HSD_GObj* gobj, int r4, int r5)
 {
-    Ground* gp = GET_GROUND(gobj);
+    Ground* gp = gobj->user_data;
     int comp;
     int i;
 
