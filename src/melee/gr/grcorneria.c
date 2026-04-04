@@ -101,7 +101,7 @@ typedef struct grCn_Data {
     /* 0x28C */ u8 pad3[0x6C];
     /* 0x2F8 */ s32 anim_ids[14];
     /* 0x330 */ Vec3 positions[14];
-    /* 0x3D8 */ s32 x3D8[27];
+    /* 0x3D8 */ s32 x3D8[9][3];
     /* 0x444 */ s32 x444[5];
     /* 0x458 */ s32 x458[8];
     /* 0x478 */ u8 pad5[0x40];
@@ -511,7 +511,7 @@ void grCorneria_801DDAC4(Ground_GObj* gobj)
     grCn_803E1D38.arwing_gobj[grCn_804D69A4] = gobj;
     {
         s32 idx = grCn_803E1D38.arwing_group[gp->gv.arwing.xC8];
-        HSD_GObj* arwing = grCorneria_801DD534(grCn_803E1D38.x3D8[idx]);
+        HSD_GObj* arwing = grCorneria_801DD534(grCn_803E1D38.x3D8[idx][0]);
         if (arwing != NULL) {
             GET_GROUND(arwing)->x10_flags.b2 = 0;
             {
@@ -1682,8 +1682,9 @@ void grCorneria_801E1970(Ground_GObj* gobj)
     HSD_JObj* jobj = GET_JOBJ(gobj);
 
     if (gp->gv.corneria.x104 <= 0) {
+        f32 randf = HSD_Randf();
         gp->gv.corneria.x104 =
-            (grCn_804D69A0->x4 - grCn_804D69A0->x0) * HSD_Randf() +
+            (grCn_804D69A0->x4 - grCn_804D69A0->x0) * randf +
             grCn_804D69A0->x0;
         gp->gv.corneria.xF4 =
             grCn_804D69A0->x8 * (2.0f * (HSD_Randf() - 0.5f));
