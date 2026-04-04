@@ -727,7 +727,7 @@ void grCorneria_801DDE88(HSD_GObj* gobj)
 
     sp2C = grCn_803B809C;
     if (gobj != NULL) {
-        Ground* gp2 = GET_GROUND(gobj);
+        Ground* gp2 = HSD_GObjGetUserData(gobj);
         Ground* ship = GET_GROUND(Ground_801C2BA4(3));
         s32 idx;
         lb_8000B1CC(Ground_801C3FA4(gobj, 4), NULL, &sp20);
