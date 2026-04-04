@@ -2234,12 +2234,12 @@ void grCorneria_801E1970(Ground_GObj* gobj)
     if (gp->gv.corneria.x104 <= 0) {
         f32 randf = HSD_Randf();
         gp->gv.corneria.x104 =
-            (grCn_804D69A0->x4 - grCn_804D69A0->x0) * randf +
+            randf * (grCn_804D69A0->x4 - grCn_804D69A0->x0) +
             grCn_804D69A0->x0;
-        gp->gv.corneria.xF4 =
-            grCn_804D69A0->x8 * (2.0f * (HSD_Randf() - 0.5f));
-        gp->gv.corneria.xF8 =
-            grCn_804D69A0->x8 * (2.0f * (HSD_Randf() - 0.5f));
+        randf = HSD_Randf();
+        gp->gv.corneria.xF4 = grCn_804D69A0->x8 * (2.0f * (randf - 0.5f));
+        randf = HSD_Randf();
+        gp->gv.corneria.xF8 = grCn_804D69A0->x8 * (2.0f * (randf - 0.5f));
     }
     gp->gv.corneria.x104 -= 1;
     gp->gv.corneria.xE4.z += gp->gv.corneria.xF4;
