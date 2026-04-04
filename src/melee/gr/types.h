@@ -383,10 +383,10 @@ struct grCorneria_GroundVars {
     s32 x100;
     s32 x104;
     u32 x108;
-    u32 x10C;
-    u32 x110;
+    s32 x10C;
+    s32 x110;
     f32 x114;
-    u8 x118;
+    s8 x118;
     u8 x119;
     u8 x11A;
     u8 x11B;

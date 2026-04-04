@@ -53,11 +53,11 @@ typedef struct grCn_StageData {
     /* 0x10 */ f32 x10;
     /* 0x14 */ f32 x14;
     /* 0x18 */ f32 x18;
-    /* 0x1C */ s32 x1C;
-    /* 0x20 */ s32 x20;
+    /* 0x1C */ f32 x1C;
+    /* 0x20 */ f32 x20;
     /* 0x24 */ f32 x24;
-    /* 0x28 */ s32 x28;
-    /* 0x2C */ s32 x2C;
+    /* 0x28 */ f32 x28;
+    /* 0x2C */ f32 x2C;
     /* 0x30 */ f32 x30;
     /* 0x34 */ f32 x34;
     /* 0x38 */ f32 x38;
@@ -1643,6 +1643,9 @@ void grCorneria_801E1348(Ground_GObj* gobj)
     Vec3 sp2C;
     Vec3 sp20;
     Ground* gp = GET_GROUND(gobj);
+    grCn_Data* data = &grCn_803E1D38;
+
+    PAD_STACK(24);
 
     switch (gp->gv.corneria.x108) {
     case 0:
@@ -1667,9 +1670,9 @@ void grCorneria_801E1348(Ground_GObj* gobj)
                 gp->gv.corneria.x10C = grCn_804D69A0->x2C;
                 Ground_801C53EC(0x5573A);
             }
-            sp40.x = grCn_803E1D38.effect_pos.x;
-            sp40.y = grCn_803E1D38.effect_pos.y;
-            sp40.z = grCn_803E1D38.effect_pos.z;
+            sp40.x = data->effect_pos.x;
+            sp40.y = data->effect_pos.y;
+            sp40.z = data->effect_pos.z;
             grLib_801C9808(0xBC, 0, Ground_801C3FA4(gobj, 2));
             grLib_801C9808(0xBC, 0, Ground_801C3FA4(gobj, 3));
             Item_80268E5C((HSD_GObj*) gp->gv.corneria.left_cannon, 2,
@@ -1732,8 +1735,8 @@ void grCorneria_801E1348(Ground_GObj* gobj)
         if (gp->gv.corneria.x118 != 0) {
             if (gp->gv.corneria.x110 == 0) {
                 HSD_JObj* cannon;
-                sp40.x = 20.0f + grCn_803E1D38.cannon_x;
-                sp40.y = 2.0f + grCn_803E1D38.cannon_y;
+                sp40.x = 20.0f + data->cannon_x;
+                sp40.y = 2.0f + data->cannon_y;
                 if (gp->gv.corneria.x11A != 0) {
                     sp40.z = 9.0f;
                     cannon = Ground_801C3FA4(gobj, 2);
@@ -1742,7 +1745,7 @@ void grCorneria_801E1348(Ground_GObj* gobj)
                     sp40.z = -9.0f;
                 }
                 grLib_801C9808(0xC0, 0, cannon);
-                it_802EAF34(gobj, &sp40, gp->gv.corneria.x119);
+                it_802EAF34(gobj, &sp40, (s8) gp->gv.corneria.x119);
                 Ground_801C53EC(0x55735);
                 gp->gv.corneria.x11A ^= 1;
                 gp->gv.corneria.x110 = 0xA;
@@ -1755,7 +1758,7 @@ void grCorneria_801E1348(Ground_GObj* gobj)
         {
             s32 range = grCn_804D69A0->x18;
             gp->gv.corneria.x110 =
-                grCn_804D69A0->x1C + (range != 0 ? HSD_Randi(range) : 0);
+                (s32)(grCn_804D69A0->x1C + (range != 0 ? HSD_Randi(range) : 0));
         }
         gp->gv.corneria.x10C = 0;
         gp->gv.corneria.x108 = 0;
@@ -1763,15 +1766,17 @@ void grCorneria_801E1348(Ground_GObj* gobj)
     case 4:
         grLib_801C9808(0xE3, 0, Ground_801C3FA4(gobj, 2));
         grLib_801C9808(0xE3, 0, Ground_801C3FA4(gobj, 3));
-        sp40.x = grCn_803E1D38.effect_pos.x;
-        sp40.y = grCn_803E1D38.effect_pos.y;
-        sp40.z = grCn_803E1D38.effect_pos.z;
+        sp40.x = data->effect_pos.x;
+        sp40.y = data->effect_pos.y;
+        sp40.z = data->effect_pos.z;
         Camera_80030E44(4, &sp40);
         Ground_801C53EC(0x76);
         HSD_JObjSetFlags(Ground_801C3FA4(gobj, 6), JOBJ_HIDDEN);
         HSD_JObjClearFlags(Ground_801C3FA4(gobj, 5), JOBJ_HIDDEN);
         mpLib_80057BC0(4);
         gp->gv.corneria.x108 = 5;
+        return;
+    case 5:
         return;
     }
 }
