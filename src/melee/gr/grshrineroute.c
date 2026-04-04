@@ -256,6 +256,7 @@ void fn_80208A38(HSD_GObj* gobj)
     HSD_GObj* effect;
     HSD_JObj* ejobj;
     int i;
+    float unused1;
     PAD_STACK(16);
 
     flags[0] = 0;
@@ -266,8 +267,7 @@ void fn_80208A38(HSD_GObj* gobj)
     flags[5] = 0;
     flags[HSD_Randi(6)] = 1;
 
-    i = 0;
-    do {
+    for(i = 0; i<6; i++){ 
         jobj = Ground_801C2CF4(i + 0xBD);
         if (jobj != NULL) {
             if (flags[i] != 0) {
@@ -285,8 +285,7 @@ void fn_80208A38(HSD_GObj* gobj)
                 HSD_JObjSetScaleZ(ejobj, grSh_Route_804D6A58->x14);
             }
         }
-        i++;
-    } while (i < 6);
+    }
 }
 
 void grShrineRoute_80208D14(Ground_GObj* gobj)
