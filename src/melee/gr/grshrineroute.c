@@ -1183,16 +1183,15 @@ void grShrineRoute_8020A8A4(Ground_GObj* gobj)
 
 void grShrineRoute_8020AA40(HSD_GObj* gobj)
 {
-    HSD_LObj* lobj;
     struct grSh_Route_LightConfig* config;
+    HSD_LObj* lobj;
     u32 i;
     GXColor color;
 
     if (gobj != NULL) {
         lobj = HSD_LObjGetNext(GET_LOBJ(gobj));
         config = grSh_Route_803E5A58;
-        i = 0;
-        do {
+        for (i=0; i<15; i++, lobj = HSD_LObjGetNext(lobj)){
             if (lobj != NULL) {
                 color = config->x0;
                 HSD_LObjSetColor(lobj, color);
@@ -1210,9 +1209,7 @@ void grShrineRoute_8020AA40(HSD_GObj* gobj)
                 OSReport("%s:%d: oioi...\n");
             }
             config++;
-            i++;
-            lobj = HSD_LObjGetNext(lobj);
-        } while (i < 15);
+        }
     }
 }
 
