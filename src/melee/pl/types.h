@@ -266,7 +266,8 @@ struct pl_800386E8_arg0_t {
 struct pl_804D6470_t {
     /*   +0 */ u8 x0[0x4];
     /*   +4 */ int x4;
-    /*   +8 */ u8 x8[0x10];
+    /*   +8 */ u8 x8[0xC];
+    /*  +14 */ float x14;
     /*  +18 */ unsigned int x18;
     /*  +1C */ unsigned int x1C;
     /*  +20 */ u8 x20[0x24 - 0x20];

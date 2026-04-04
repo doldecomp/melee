@@ -34,7 +34,7 @@
 /* 03EB30 */ void pl_8003EB30(float, int, int, int, int, int);
 /* 03EC30 */ void pl_8003EC30(int slot, int, int, float);
 /* 03EC9C */ void pl_8003EC9C(int, int, float, float);
-/* 03ED0C */ void pl_8003ED0C(int, int, int, float);
+/* 03ED0C */ void pl_8003ED0C(int, int, int, int, float);
 /* 03EE2C */ void fn_8003EE2C(int, int);
 /* 03F294 */ void fn_8003F294(int, int);
 /* 03F53C */ void fn_8003F53C(int, int);
@@ -48,8 +48,8 @@
 /* 03FDC8 */ void pl_8003FDC8(int, int);
 /* 03FDF4 */ void pl_8003FDF4(int, int);
 /* 03FE1C */ void pl_8003FE1C(int slot, int);
-/* 03FE40 */ void pl_8003FE40(int);
-/* 03FE64 */ void pl_8003FE64(int);
+/* 03FE40 */ void pl_8003FE40(int, int);
+/* 03FE64 */ void pl_8003FE64(int, int);
 /* 03FED0 */ void pl_8003FED0(int, int);
 /* 03FF44 */ void pl_8003FF44(int, int, int);
 /* 03FFDC */ void pl_8003FFDC(int, int, int, int, int);
@@ -97,7 +97,7 @@
 /* 040D20 */ int pl_80040D20(int);
 /* 040D44 */ float pl_80040D44(int);
 /* 040D68 */ float pl_80040D68(int);
-/* 040D8C */ void pl_80040D8C(int slot);
+/* 040D8C */ void pl_80040D8C(int slot, int);
 /* 040DB8 */ int pl_80040DB8(int slot);
 
 #endif

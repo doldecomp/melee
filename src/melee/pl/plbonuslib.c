@@ -677,13 +677,12 @@ void pl_8003EC9C(int arg0, int arg1, float arg2, float arg3)
     temp_r3->xD10 = 0;
 }
 
-void pl_8003ED0C(int arg0, int arg1, int r5, float arg2)
+void pl_8003ED0C(int arg0, int arg1, int r5, int arg3, float arg2)
 {
     float total;
     float temp_f30;
     pl_StaleMoveTableExt_t* temp_r3;
     s32 temp_r4;
-    PAD_STACK(8);
 
     RETURN_IF(arg0 == r5);
     RETURN_IF(pl_CheckIfSameTeam(r5, arg0));
@@ -973,12 +972,12 @@ void pl_8003FE1C(int slot, int arg1)
     pl_80038824(slot, 0xA);
 }
 
-void pl_8003FE40(int arg0)
+void pl_8003FE40(int arg0, int arg1)
 {
     pl_80038824(arg0, 0x4B);
 }
 
-void pl_8003FE64(int arg0)
+void pl_8003FE64(int arg0, int arg1)
 {
     int var_r31;
 
@@ -1443,7 +1442,7 @@ float pl_80040D68(int arg0)
     return Player_GetStaleMoveTableIndexPtr2(arg0)->xD88;
 }
 
-void pl_80040D8C(int slot)
+void pl_80040D8C(int slot, int arg1)
 {
     pl_StaleMoveTableExt_t* stale_moves =
         Player_GetStaleMoveTableIndexPtr2(slot);
