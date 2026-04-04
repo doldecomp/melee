@@ -939,7 +939,7 @@ void grCorneria_801DE8E0(Ground_GObj* arg) {}
 void grCorneria_801DE8E4(Ground_GObj* gobj)
 {
     grCn_Data* data = &grCn_803E1D38;
-    Ground* gp = GET_GROUND(gobj);
+    Ground* gp = gobj->user_data;
     HSD_JObj* jobj = GET_JOBJ(gobj);
     f32 scale;
 
@@ -1477,7 +1477,7 @@ void grCorneria_801DF8CC(Ground_GObj* arg) {}
 void grCorneria_801DF8D0(Ground_GObj* gobj)
 {
     grCn_Data* data = &grCn_803E1D38;
-    Ground* gp = GET_GROUND(gobj);
+    Ground* gp = gobj->user_data;
     HSD_JObj* jobj = GET_JOBJ(gobj);
     f32 scale;
 
