@@ -2031,19 +2031,15 @@ void grCorneria_801E1060(Ground_GObj* gobj)
     if (bg != NULL) {
         Fake_HSD_JObjSetTranslateX(bg->hsd_obj, pos);
     }
-    {
-        f32 a = 3200.0f * Ground_801C0498() * 0.5f;
-        pos = pos - (3200.0f * Ground_801C0498() * 0.5f + a);
-    }
+    total = 3200.0f * Ground_801C0498() * 0.5f;
+    pos = pos - (3200.0f * Ground_801C0498() * 0.5f + total);
 
     bg = Ground_801C2BA4(9);
     if (bg != NULL) {
         Fake_HSD_JObjSetTranslateX(bg->hsd_obj, pos);
     }
-    {
-        f32 a = 4800.0f * Ground_801C0498() * 0.5f;
-        pos = pos - (3200.0f * Ground_801C0498() * 0.5f + a);
-    }
+    total = 4800.0f * Ground_801C0498() * 0.5f;
+    pos = pos - (3200.0f * Ground_801C0498() * 0.5f + total);
 
     bg = Ground_801C2BA4(4);
     if (bg != NULL) {
