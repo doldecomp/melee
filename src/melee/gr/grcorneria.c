@@ -1491,8 +1491,6 @@ void grCorneria_801DF8D0(Ground_GObj* gobj)
     Ground* gp = GET_GROUND(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
     f32 scale;
-    s32 idx;
-    s32 zero = 0;
 
     scale = Ground_801C0498();
     gp->gv.corneria2.xC8 = grCn_804D69A4;
@@ -1502,8 +1500,8 @@ void grCorneria_801DF8D0(Ground_GObj* gobj)
     gp->gv.corneria2.xE0 = NULL;
     grAnime_801C7FF8(gobj, 0, 7, 1, 0.0f, 1.0f);
     grAnime_801C8098(gobj, 2, 7, 3, 0.0f, 1.0f);
-    idx = data->arwing_type[gp->gv.corneria2.xC8];
-    switch (idx) {
+
+    switch (data->arwing_type[gp->gv.corneria2.xC8]) {
     case 1:
     case 2:
     case 3:
@@ -1513,8 +1511,7 @@ void grCorneria_801DF8D0(Ground_GObj* gobj)
     case 7:
     case 8:
     case 9: {
-        s32 val = data->arwing_group[gp->gv.corneria2.xC8];
-        HSD_GObj* arwing = grCorneria_801DD534(data->x444[val]);
+        HSD_GObj* arwing = grCorneria_801DD534(data->x444[data->arwing_group[gp->gv.corneria2.xC8]]);
         gp->gv.corneria2.xDC = arwing;
         if (arwing != NULL) {
             Ground* agp = GET_GROUND(gp->gv.corneria2.xDC);
@@ -1528,9 +1525,8 @@ void grCorneria_801DF8D0(Ground_GObj* gobj)
     case 11:
     case 12:
     case 13: {
-        HSD_JObj* src_jobj = Ground_801C3FA4(
-            data->arwing_gobj[gp->gv.corneria2.xC8], 4);
-        lb_8000C2F8(Ground_801C3FA4(gobj, 0), src_jobj);
+        lb_8000C2F8(Ground_801C3FA4(gobj, 0), Ground_801C3FA4(
+            data->arwing_gobj[gp->gv.corneria2.xC8], 4));
         gp->gv.corneria2.xDC = NULL;
         break;
     }
@@ -1539,18 +1535,9 @@ void grCorneria_801DF8D0(Ground_GObj* gobj)
         gp->gv.corneria2.xE4 = (HSD_GObj*) -1;
         break;
     }
-    {
-        f32 s = scale * grCn_804D69A0->x70;
-        HSD_JObjSetScaleX(jobj, s);
-    }
-    {
-        f32 s = scale * grCn_804D69A0->x70;
-        HSD_JObjSetScaleY(jobj, s);
-    }
-    {
-        f32 s = scale * grCn_804D69A0->x70;
-        HSD_JObjSetScaleZ(jobj, s);
-    }
+    HSD_JObjSetScaleX(jobj, scale * grCn_804D69A0->x70);
+    HSD_JObjSetScaleY(jobj, scale * grCn_804D69A0->x70);
+    HSD_JObjSetScaleZ(jobj, scale * grCn_804D69A0->x70);
     gp->gv.corneria2.xC4.flags.b0 = 0;
     gp->gv.corneria2.xD4 = 0;
     gp->gv.corneria2.xF0 = 0;
