@@ -1295,11 +1295,15 @@ void grShrineRoute_8020AD58(Ground* gp, int r4, CollData* r5, int r6, int r7)
 
 s32 grShrineRoute_8020AE08(HSD_GObj* gobj, HSD_GObj* player_gobj, s32* out)
 {
-    Vec3 lo, hi;
-    Vec3 pos;
+    Vec3 lo;
+    Vec3 hi;
     Ground* gp = gobj->user_data;
     f32 scale;
-    PAD_STACK(16);
+    float unused1;
+    float unused2;
+    float unused3;
+    Vec3 pos;
+    float unused4;
 
     if (gp->gv.shrineroute.xC4 == 1 || gp->gv.shrineroute.xC4 == 3) {
         return 0;
@@ -1310,8 +1314,8 @@ s32 grShrineRoute_8020AE08(HSD_GObj* gobj, HSD_GObj* player_gobj, s32* out)
     scale = Ground_801C0498();
     lo.x *= scale;
     lo.y *= scale;
-    hi.x *= scale;
     lo.z *= scale;
+    hi.x *= scale;
     hi.y *= scale;
     hi.z *= scale;
 
