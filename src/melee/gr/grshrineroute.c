@@ -267,7 +267,7 @@ void fn_80208A38(HSD_GObj* gobj)
     flags[5] = 0;
     flags[HSD_Randi(6)] = 1;
 
-    for(i = 0; i<6; i++){ 
+    for (i = 0; i < 6; i++) {
         jobj = Ground_801C2CF4(i + 0xBD);
         if (jobj != NULL) {
             if (flags[i] != 0) {
@@ -293,7 +293,7 @@ void grShrineRoute_80208D14(Ground_GObj* gobj)
     Ground* gp = gobj->user_data;
     Vec3 center;
     int i;
-    PAD_STACK(16);
+    PAD_STACK(8);
 
     mpLib_80058560();
     grAnime_801C8138(gobj, gp->map_id, 0);
