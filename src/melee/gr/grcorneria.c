@@ -2228,7 +2228,7 @@ void grCorneria_801E1878(Ground_GObj* gobj)
 void grCorneria_801E1970(Ground_GObj* gobj)
 {
     Vec3 pos;
-    Ground* gp = GET_GROUND(gobj);
+    Ground* gp = gobj->user_data;
     HSD_JObj* jobj = GET_JOBJ(gobj);
 
     if (gp->gv.corneria.x104 <= 0) {
