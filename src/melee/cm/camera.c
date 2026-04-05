@@ -717,21 +717,19 @@ void Camera_80029CF8(CameraBounds* bounds, CameraTransformState* transform)
     f32 fov_d;
     f32 fov_r;
     f32 fov_l;
+    f32 tan_fov_u;
     f32 temp_f26;
     f32 temp_f28;
     f32 temp_f29;
-    f32 temp_f30;
     f32 temp_f31;
     f32 mid_x;
     f32 temp_f31_3;
-    f32 max_h;
-    f32 max_v;
     f32 var_f28;
-    f32 pitch_angle;
     f32 vert_frustum_dist;
-    f32 pan_angle;
+    f32 pitch_angle;
+    f32 temp_f30;
     f32 var_f3;
-    PAD_STACK(8);
+    PAD_STACK(16);
 
     Stage_UnkSetVec3TCam_Offset(&scroll_offset);
     len = get_max_bounds_length(bounds);
@@ -754,18 +752,18 @@ void Camera_80029CF8(CameraBounds* bounds, CameraTransformState* transform)
     {
         f32 info_x24 = Stage_GetCamInfoX24();
         pitch_angle += cm_803BCCA0.x8;
-        max_v = deg_to_rad * cm_803BCCA0.xC;
         pitch_angle = -(deg_to_rad * (pitch_angle * info_x24));
     }
-    if (pitch_angle > max_v) {
-        pitch_angle = max_v;
+    if (pitch_angle > (temp_f30 = deg_to_rad * cm_803BCCA0.xC)) {
+        pitch_angle = temp_f30;
     }
 
     min_v = deg_to_rad * cm_803BCCA0.x10;
     if (pitch_angle < min_v) {
         pitch_angle = min_v;
     }
-    temp_f29 = pitch_angle + Stage_GetCamPanAngleRadians();
+    pitch_angle = pitch_angle + Stage_GetCamPanAngleRadians();
+    temp_f29 = pitch_angle;
 
     fov_u = (0.5f * (deg_to_rad * transform->fov)) + temp_f29;
     HSD_ASSERTMSG(0x4FA, fov_u < (f32) M_PI_2, "fov_u<MTXDegToRad(90.0F)");
@@ -773,48 +771,49 @@ void Camera_80029CF8(CameraBounds* bounds, CameraTransformState* transform)
     fov_d = (0.5f * (deg_to_rad * transform->fov)) - temp_f29;
     HSD_ASSERTMSG(0x4FB, fov_d < (f32) M_PI_2, "fov_d<MTXDegToRad(90.0F)");
 
+    tan_fov_u = tanf(fov_u);
     vert_frustum_dist =
-        (bounds->y_max - bounds->y_min) / (tanf(fov_u) + tanf(fov_d));
+        (bounds->y_max - bounds->y_min) / (tan_fov_u + tanf(fov_d));
     Stage_GetCamBoundsBottomOffset();
     Stage_GetCamBoundsTopOffset();
     temp_f30 = vert_frustum_dist * tanf(temp_f29);
     transform->target_interest.y =
-        temp_f30 + (bounds->y_max - vert_frustum_dist * tanf(fov_u));
+        temp_f30 + (bounds->y_max - vert_frustum_dist * tan_fov_u);
     Stage_UnkSetVec3TCam_Offset(&scroll_offset2);
     mid_x = 0.5f * (bounds->x_min + bounds->x_max);
     {
         f32 info_x20 = Stage_GetCamInfoX20();
-        max_h = deg_to_rad * cm_803BCCA0.x14;
-        pan_angle = -(deg_to_rad * ((mid_x - scroll_offset2.x) * info_x20));
+        temp_f30 = deg_to_rad * cm_803BCCA0.x14;
+        temp_f29 = -(deg_to_rad * ((mid_x - scroll_offset2.x) * info_x20));
     }
-    if (pan_angle > max_h) {
-        pan_angle = max_h;
+    if (temp_f29 > temp_f30) {
+        temp_f29 = temp_f30;
     }
 
     min_h = deg_to_rad * cm_803BCCA0.x18;
-    if (pan_angle < min_h) {
-        pan_angle = min_h;
+    if (temp_f29 < min_h) {
+        temp_f29 = min_h;
     }
 
-    fov_r = (0.5f * (deg_to_rad * transform->fov)) - pan_angle;
+    fov_r = (0.5f * (deg_to_rad * transform->fov)) - temp_f29;
     HSD_ASSERTMSG(0x508, fov_r < (f32) M_PI_2, "fov_r<MTXDegToRad(90.0F)");
-    fov_l = (0.5f * (deg_to_rad * transform->fov)) + pan_angle;
+    fov_l = (0.5f * (deg_to_rad * transform->fov)) + temp_f29;
     HSD_ASSERTMSG(0x509, fov_l < (f32) M_PI_2, "fov_l<MTXDegToRad(90.0F)");
 
     temp_f26 = cm_803BCB64.aspect * tanf(fov_r);
-    temp_f28 = (bounds->x_max - bounds->x_min) /
-               (temp_f26 + (cm_803BCB64.aspect * tanf(fov_l)));
+    {
+        f32 tan_fov_l = cm_803BCB64.aspect * tanf(fov_l);
+        temp_f28 = (bounds->x_max - bounds->x_min) /
+                   (temp_f26 + tan_fov_l);
+    }
     Stage_GetCamBoundsLeftOffset();
     Stage_GetCamBoundsRightOffset();
-    temp_f31_3 = cm_803BCB64.aspect * (temp_f28 * tanf(pan_angle));
+    temp_f31_3 = cm_803BCB64.aspect * (temp_f28 * tanf(temp_f29));
     transform->target_interest.x =
         -((temp_f28 * temp_f26) - bounds->x_max) - temp_f31_3;
     transform->target_interest.z = 0.0f;
 
-    if (vert_frustum_dist > temp_f28) {
-    } else {
-        vert_frustum_dist = temp_f28;
-    }
+    vert_frustum_dist = MAX(vert_frustum_dist, temp_f28);
     var_f28 = vert_frustum_dist;
     if (vert_frustum_dist < Stage_GetCamZoomRate()) {
         var_f28 = Stage_GetCamZoomRate();
@@ -867,9 +866,9 @@ void Camera_8002A0C0(CameraBounds* bounds, CameraTransformState* state)
     }
 
     Camera_80030DE4(
-        ((var_f6 * (cm_803BCCA0.x60 - cm_803BCCA0.x58)) + cm_803BCCA0.x58) *
+        ((var_f6 * (cm_803BCCA0.x5C - cm_803BCCA0.x54)) + cm_803BCCA0.x58) *
             (var_f31 * temp_f28),
-        ((var_f6 * (cm_803BCCA0.x5C - cm_803BCCA0.x54)) + cm_803BCCA0.x54) *
+        ((var_f6 * (cm_803BCCA0.x60 - cm_803BCCA0.x58)) + cm_803BCCA0.x54) *
             (var_f30 * temp_f27));
     cm_80452C68.xA4 = 0.0f;
     cm_80452C68.xA8 = 0.0f;
@@ -2815,11 +2814,12 @@ void Camera_8002D85C(void* unused)
     f32* tgt_fov_ptr;
     f32* smooth_ptr;
     HSD_GObj* gobj;
-    s8 slot;
+    s32 slot;
     f32 z_val;
     s16* count_ptr;
     f32 left_off;
     s32 check_result;
+    PAD_STACK(16);
 
     cam = &cm_80452C68;
     slot_ptr = &cam->x2C4;
@@ -2848,35 +2848,29 @@ void Camera_8002D85C(void* unused)
     if (gobj != NULL) {
         subject = ftLib_80086B74(gobj);
         if (subject != NULL) {
-            CmSubject* subj;
+            Vec3* subj_pos;
             CameraUnkGlobals* globals;
             f32 smooth;
-            f32 x, dx;
-            f32 y, dy;
-            f32 z, dz;
+            f32 dx;
+            f32 dy;
+            f32 dz;
 
-            x = subject->x1C.x;
-            subj = (CmSubject*) ((u8*) subject + 0x1C);
+            subj_pos = &subject->x1C;
             globals = &cm_803BCCA0;
-            cam->transform.target_interest.x = x;
-            y = ((Vec3*) subj)->y;
-            cam->transform.target_interest.y = y;
-            z = ((Vec3*) subj)->z;
-            cam->transform.target_interest.z = z;
+            cam->transform.target_interest.x = subj_pos->x;
+            cam->transform.target_interest.y = subj_pos->y;
+            cam->transform.target_interest.z = subj_pos->z;
 
-            x = cam->transform.target_interest.x;
-            y = cam->transform.target_interest.y;
             smooth = globals->x64;
-            dx = x - cam->transform.interest.x;
-            z = cam->transform.target_interest.z;
-            dy = y - cam->transform.interest.y;
-            dz = z - cam->transform.interest.z;
-            cam->transform.interest.x =
-                dx * smooth + cam->transform.interest.x;
-            cam->transform.interest.y =
-                dy * smooth + cam->transform.interest.y;
-            cam->transform.interest.z =
-                dz * smooth + cam->transform.interest.z;
+            dx = cam->transform.target_interest.x -
+                 cam->transform.interest.x;
+            dy = cam->transform.target_interest.y -
+                 cam->transform.interest.y;
+            dz = cam->transform.target_interest.z -
+                 cam->transform.interest.z;
+            cam->transform.interest.x += dx * smooth;
+            cam->transform.interest.y += dy * smooth;
+            cam->transform.interest.z += dz * smooth;
         }
     }
 
@@ -2935,21 +2929,15 @@ fov_done:
     }
 
     {
-        f32 cos_pitch = cosf(*pitch_ptr);
-        f32 sin_yaw = sinf(*yaw_ptr);
+        f32 horiz_dist;
+
+        horiz_dist = distance * cosf(*pitch_ptr);
         cam->transform.target_position.x =
-            cam->transform.target_interest.x + distance * cos_pitch * sin_yaw;
-    }
-    {
-        f32 sin_pitch = sinf(*pitch_ptr);
+            cam->transform.target_interest.x + horiz_dist * sinf(*yaw_ptr);
         cam->transform.target_position.y =
-            cam->transform.target_interest.y + distance * sin_pitch;
-    }
-    {
-        f32 cos_pitch = cosf(*pitch_ptr);
-        f32 cos_yaw = cosf(*yaw_ptr);
+            cam->transform.target_interest.y + distance * sinf(*pitch_ptr);
         cam->transform.target_position.z =
-            cam->transform.target_interest.z + distance * cos_pitch * cos_yaw;
+            cam->transform.target_interest.z + horiz_dist * cosf(*yaw_ptr);
     }
 
     {
@@ -2989,7 +2977,6 @@ fallback: {
         cam->transform.fov;
     Camera_80029BC4(&bounds, transform);
 
-    check_result = 0;
     if (Camera_80030AF8()) {
         gobj = Ground_801C57A4();
         if (gobj != NULL) {
@@ -3000,10 +2987,13 @@ fallback: {
             }
             if (z_val > 30.0f) {
                 check_result = 1;
+                goto check_done1;
             }
         }
     }
-    if (!check_result) {
+    check_result = 0;
+check_done1:
+    if (check_result == 0) {
         Camera_80029CF8(&bounds, transform);
         Camera_8002A768(transform, 0);
     }
@@ -3017,7 +3007,6 @@ fallback: {
         cam->transform_copy.fov;
     Camera_80029BC4(&bounds2, transform2);
 
-    check_result = 0;
     if (Camera_80030AF8()) {
         gobj = Ground_801C57A4();
         if (gobj != NULL) {
@@ -3028,22 +3017,32 @@ fallback: {
             }
             if (z_val > 30.0f) {
                 check_result = 1;
+                goto check_done2;
             }
         }
     }
-    if (!check_result) {
+    check_result = 0;
+check_done2:
+    if (check_result == 0) {
         Camera_80029CF8(&bounds2, transform2);
         Camera_8002A768(transform2, 0);
     }
 
     if (cam->x2BC == 1.0f) {
+        f32 dx2;
+        f32 dy2;
+        f32 dz2;
+
         x = cam->transform.target_position.x -
             cam->transform.target_interest.x;
         y = cam->transform.target_position.y -
             cam->transform.target_interest.y;
         z = cam->transform.target_position.z -
             cam->transform.target_interest.z;
-        cam->x2C0 = sqrtf(x * x + y * y + z * z);
+        dx2 = x * x;
+        dy2 = y * y;
+        dz2 = z * z;
+        cam->x2C0 = sqrtf__Ff(dx2 + dy2 + dz2);
     }
 
     Camera_8002B1F8(transform);
@@ -4381,7 +4380,7 @@ static void fn_800301D0(HSD_GObj* gobj, int arg1)
             } else {
                 arg2 = 1;
             }
-            Camera_80031328(gobj, arg2, 0);
+            Camera_80031328(gobj, arg2);
         }
 
         HSD_FogSet(NULL);
@@ -4892,149 +4891,87 @@ void Camera_800311DC(f32 arg8)
     cm_80452C68.nearz = arg8;
 }
 
+static inline s64 inline_cam_gx_b0(void)
+{
+    if (cm_80452C68.x398_b0) {
+        return 0;
+    }
+    return 0x20;
+}
+
+static inline s64 inline_cam_gx_b1(void)
+{
+    if (cm_80452C68.x398_b1) {
+        return 0;
+    }
+    return 0x40;
+}
+
+static inline s64 inline_cam_gx_b4(void)
+{
+    if (cm_80452C68.x398_b4) {
+        return 0;
+    }
+    return 0x10;
+}
+
 void Camera_800311EC(HSD_GObj* gobj, u64 prios)
 {
-    s64 var_r3;
-    s64 var_r0;
-    s64 var_r4;
-    s64 var_r6;
-    s64 var_r8;
-    PAD_STACK(16);
+    s64 a;
+    s64 b;
 
     cm_80452C68.x398_b6_b7 = 1;
 
-    if (cm_80452C68.x398_b1) {
-        var_r3 = 0;
-    } else {
-        var_r3 = 0x40;
-    }
-    if (cm_80452C68.x398_b0) {
-        var_r0 = 0;
-    } else {
-        var_r0 = 0x20;
-    }
-    gobj->gxlink_prios = prios | var_r0 | var_r3;
+    a = inline_cam_gx_b1();
+    b = inline_cam_gx_b0();
+    gobj->gxlink_prios = prios | b | a;
     HSD_GObj_80390ED0(gobj, 3);
 
     cm_80452C68.x398_b6_b7 = 0;
 
-    if (cm_80452C68.x398_b0) {
-        var_r4 = 0;
-    } else {
-        var_r4 = 0x20;
-    }
-    if (cm_80452C68.x398_b4) {
-        var_r6 = 0;
-    } else {
-        var_r6 = 0x10;
-    }
-    if (cm_80452C68.x398_b1) {
-        var_r8 = 0;
-    } else {
-        var_r8 = 0x40;
-    }
-    gobj->gxlink_prios = (u64) var_r8 | var_r6 | var_r4;
+    a = inline_cam_gx_b0();
+    b = inline_cam_gx_b4();
+    gobj->gxlink_prios = inline_cam_gx_b1() | b | a;
     HSD_GObj_80390ED0(gobj, 3);
 }
 
-void Camera_80031328(HSD_GObj* arg0, s32 arg2, s32 arg3)
+void Camera_80031328(HSD_GObj* gobj, u64 prios)
 {
-    s32 var_r11;
-    s32 var_r4;
-    s32 var_r9;
-    Camera* camera;
+    s64 a;
+    s64 b;
 
     cm_80452C68.x398_b6_b7 = 0;
-    camera = &cm_80452C68;
 
-    if (cm_80452C68.x398_b0) {
-        var_r4 = 0;
-    } else {
-        var_r4 = 0x20;
-    }
-
-    if (cm_80452C68.x398_b4) {
-        var_r9 = 0;
-    } else {
-        var_r9 = 0x10;
-        var_r4 = 0;
-    }
-
-    if ((*camera).x398_b1) {
-        var_r11 = 0;
-    } else {
-        var_r11 = 0x40;
-        var_r9 = 0;
-    }
-    arg0->gxlink_prios =
-        (var_r11 | var_r4) | (var_r9 | var_r4) | (arg2 | arg3) | (var_r11 | 0);
-    HSD_GObj_80390ED0(arg0, 4);
+    a = inline_cam_gx_b0();
+    b = inline_cam_gx_b4();
+    gobj->gxlink_prios = prios | inline_cam_gx_b1() | b | a;
+    HSD_GObj_80390ED0(gobj, 4);
 }
 
 void Camera_800313E0(HSD_GObj* gobj, u64 prios)
 {
-    s64 var_r3;
-    s64 var_r0;
-    s64 var_r4;
-    s64 var_r6;
-    s64 var_r8;
-    s64 var_r3_2;
-    s64 var_r6_2;
-    s64 var_r8_2;
-    PAD_STACK(24);
+    s64 a;
+    s64 b;
+    PAD_STACK(8);
 
     cm_80452C68.x398_b6_b7 = 1;
 
-    if (cm_80452C68.x398_b1) {
-        var_r3 = 0;
-    } else {
-        var_r3 = 0x40;
-    }
-    if (cm_80452C68.x398_b0) {
-        var_r0 = 0;
-    } else {
-        var_r0 = 0x20;
-    }
-    gobj->gxlink_prios = prios | var_r0 | var_r3;
+    a = inline_cam_gx_b1();
+    b = inline_cam_gx_b0();
+    gobj->gxlink_prios = prios | b | a;
     HSD_GObj_80390ED0(gobj, 3);
 
     cm_80452C68.x398_b6_b7 = 0;
 
-    if (cm_80452C68.x398_b0) {
-        var_r4 = 0;
-    } else {
-        var_r4 = 0x20;
-    }
-    if (cm_80452C68.x398_b4) {
-        var_r6 = 0;
-    } else {
-        var_r6 = 0x10;
-    }
-    if (cm_80452C68.x398_b1) {
-        var_r8 = 0;
-    } else {
-        var_r8 = 0x40;
-    }
-    gobj->gxlink_prios = var_r8 | (var_r6 | var_r4);
+    a = inline_cam_gx_b0();
+    b = inline_cam_gx_b4();
+    gobj->gxlink_prios = inline_cam_gx_b1() | b | a;
     HSD_GObj_80390ED0(gobj, 3);
 
     cm_80452C68.x398_b6_b7 = 0;
 
-    if (cm_80452C68.x398_b0) {
-        var_r3_2 = 0;
-    } else {
-        var_r3_2 = 0x20;
-    }
-    if (cm_80452C68.x398_b4) {
-        var_r6_2 = 0;
-    } else {
-        var_r6_2 = 0x10;
-    }
-    if (cm_80452C68.x398_b1) {
-        var_r8_2 = 0;
-    } else {
-        var_r8_2 = 0x40;
-    }
-    gobj->gxlink_prios = prios | var_r8_2 | (var_r6_2 | var_r3_2);
+    a = inline_cam_gx_b0();
+    b = inline_cam_gx_b4();
+    gobj->gxlink_prios = prios | inline_cam_gx_b1() | b | a;
     HSD_GObj_80390ED0(gobj, 4);
 }

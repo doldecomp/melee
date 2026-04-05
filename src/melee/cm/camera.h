@@ -133,7 +133,7 @@
 /* 0311CC */ void Camera_800311CC(f32);
 /* 0311DC */ void Camera_800311DC(f32);
 /* 0311EC */ void Camera_800311EC(HSD_GObj*, u64);
-/* 031328 */ void Camera_80031328(HSD_GObj*, s32, s32);
+/* 031328 */ void Camera_80031328(HSD_GObj*, u64);
 /* 0313E0 */ void Camera_800313E0(HSD_GObj*, u64);
 
 extern CmSubject* cm_804D6468;
