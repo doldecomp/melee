@@ -2147,10 +2147,10 @@ void Camera_8002CB0C(CameraBounds* bounds)
     f32 x_val;
     f32 y_val;
     f32 stick_x;
+    f32 zoom_dir;
     f32 stick_y;
     f32 z_init;
     f32 abs_f1;
-    f32 zoom_dir;
     PAD_STACK(8);
 
     camera = &cm_80452C68;
@@ -2251,6 +2251,7 @@ void Camera_8002CB0C(CameraBounds* bounds)
                 goto loop_next;
             }
         }
+
         valid = (s8) *slot;
         z_init = Stage_GetPauseCamZPosInit();
 
