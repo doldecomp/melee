@@ -2201,6 +2201,7 @@ void Camera_8002CB0C(CameraBounds* bounds)
         slot = &camera->x2C4;
         *slot = Camera_8002BA00(*slot, dir);
         x308_ptr = &camera->x308;
+        /// @todo remove gotos
         goto loop_check;
 
     loop_next:
@@ -2305,6 +2306,7 @@ void Camera_8002CDDC(void* unused)
     Camera_8002958C(&bounds, transform);
     slot_ptr = &cam->x2C4;
     if (*slot_ptr == 11) {
+        /// @todo remove gotos
         goto after_loop;
     }
     pos_ptr = &cam->x308;
@@ -2547,6 +2549,7 @@ void Camera_8002D318(void* unused)
     slot_ptr = &cam->x2C4;
     gobj = Player_GetEntity(*slot_ptr);
     if (gobj == NULL) {
+        /// @todo remove gotos
         goto fallback;
     }
     if (ftLib_8008701C(gobj)) {
@@ -2822,6 +2825,7 @@ void Camera_8002D85C(void* unused)
     slot_ptr = &cam->x2C4;
     gobj = Player_GetEntity(*slot_ptr);
     if (gobj == NULL) {
+        /// @todo remove gotos
         goto fallback;
     }
     subject = ftLib_80086B74(gobj);
