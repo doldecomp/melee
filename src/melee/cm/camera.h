@@ -41,8 +41,8 @@
 /* 02BC78 */ s32 Camera_8002BC78(Vec3*, Vec3*, Vec3*);
 /* 02BD88 */ void Camera_8002BD88(f32, f32);
 /* 02C010 */ void Camera_8002C010(f32, f32);
-/* 02C1A8 */ UNK_RET Camera_8002C1A8(UNK_PARAMS);
-/* 02C5B4 */ void Camera_8002C5B4(void*);
+/* 02C1A8 */ void Camera_8002C1A8(void);
+/* 02C5B4 */ void Camera_8002C5B4(Camera_x2D0*);
 /* 02C908 */ void Camera_8002C908(void*);
 /* 02CB0C */ void Camera_8002CB0C(CameraBounds*);
 /* 02CDDC */ void Camera_8002CDDC(void* unused);
@@ -50,7 +50,7 @@
 /* 02D85C */ void Camera_8002D85C(void* unused);
 /* 02DDC4 */ void Camera_8002DDC4(void*);
 /* 02DFE4 */ s32 Camera_8002DFE4(Vec3*, Vec3*, CameraTransformState*);
-/* 02E158 */ s32 Camera_8002E158(f32*, f32, f32, f32);
+/* 02E158 */ s32 Camera_8002E158(f32*, f32, f32);
 /* 02E234 */ s32 Camera_8002E234(void);
 /* 02E490 */ void Camera_8002E490(void*);
 /* 02E6FC */ void Camera_8002E6FC(int);
@@ -88,7 +88,6 @@
 /* 030154 */ bool Camera_80030154(void);
 /* 030178 */ bool Camera_80030178(void);
 /* 03019C */ Vec3* Camera_8003019C(void);
-/* 0301D0 */ void fn_800301D0(HSD_GObj*, int);
 /* 0304E0 */ void Camera_800304E0(HSD_GObj*);
 /* 030688 */ void Camera_80030688(void);
 /* 030730 */ void Camera_80030730(f32);
@@ -133,11 +132,12 @@
 /* 03118C */ bool Camera_8003118C(Vec3*, float);
 /* 0311CC */ void Camera_800311CC(f32);
 /* 0311DC */ void Camera_800311DC(f32);
-/* 0311EC */ UNK_RET Camera_800311EC(UNK_PARAMS);
+/* 0311EC */ void Camera_800311EC(HSD_GObj*, u64);
 /* 031328 */ void Camera_80031328(HSD_GObj*, s32, s32);
 /* 0313E0 */ void Camera_800313E0(HSD_GObj*, u64);
 
 extern CmSubject* cm_804D6468;
 extern CameraDebugMode cm_80453004;
+extern CameraUnkGlobals cm_803BCCA0;
 
 #endif

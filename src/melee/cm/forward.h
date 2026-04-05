@@ -27,6 +27,7 @@ typedef enum CameraType {
 
 typedef struct Camera Camera;
 typedef struct CameraBounds CameraBounds;
+typedef struct Camera_x2D0 Camera_x2D0;
 typedef struct CameraQuake CameraQuake;
 typedef struct CmSubject CmSubject;
 typedef struct CameraTransformState CameraTransformState;
