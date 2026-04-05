@@ -4016,19 +4016,12 @@ s32 fn_8002F908(HSD_RectF32* arg0)
 
 void Camera_8002F9E4(s8 arg0, s8 arg1)
 {
-    f32 fov;
+    CameraTransformState* transform;
     f32 scale;
-    u8* x304_ptr;
-    f32* x32C_ptr;
-    Vec3* x314_ptr;
-    Vec3* pause_eye_ptr;
 
     cm_80452C68.mode = CAMERA_FREE;
     cm_80452C68.x304 = Camera_8002BA00(arg0 - 1, 1);
-    x304_ptr = (u8*) &cm_80452C68.x304;
-    cm_803BCCA0; // Force load
     cm_80452C68.x305 = arg1;
-    x32C_ptr = &cm_80452C68.x32C;
     cm_80452C68.x32C = cm_803BCCA0.x40;
 
     cm_80452C68.x2D0.x_min = Stage_GetCamBoundsLeftOffset();
@@ -4044,40 +4037,39 @@ void Camera_8002F9E4(s8 arg0, s8 arg1)
     cm_80452C68.x2D0.angle_right = Stage_GetCamAngleRadiansRight();
     cm_80452C68.x2D0.angle_left = Stage_GetCamAngleRadiansLeft();
 
-    fov = *x32C_ptr;
-    x314_ptr = &cm_80452C68.x314;
-    scale = fov * cm_803BCCA0.x8C + cm_803BCCA0.x90;
-    pause_eye_ptr = &cm_80452C68.pause_eye_offset;
+    scale = cm_80452C68.x32C * cm_803BCCA0.x8C + cm_803BCCA0.x90;
     cm_80452C68.x2D0.unk28 = scale * cm_803BCCA0.x94;
     cm_80452C68.x2D0.unk2C = scale * cm_803BCCA0.x98;
     cm_80452C68.x2D0.callback = (void (*)(Camera_x2D0*)) fn_8002F908;
 
-    cm_80452C68.x314.z = 0.0f;
-    cm_80452C68.x314.y = 0.0f;
-    cm_80452C68.x314.x = 0.0f;
-    cm_80452C68.pause_eye_offset.x = 0.0f;
-    cm_80452C68.pause_eye_offset.y = 85.0f;
-    cm_80452C68.pause_eye_offset.z = 730.0f;
-    cm_80452C68.pause_up.x = 0.0f;
-    cm_80452C68.pause_up.y = 1.0f;
-    cm_80452C68.pause_up.z = 0.0f;
+    {
+        s8 slot = cm_80452C68.x304;
+        cm_80452C68.x314.x = cm_80452C68.x314.y = cm_80452C68.x314.z = 0.0f;
+        cm_80452C68.pause_eye_offset.x = 0.0f;
+        cm_80452C68.pause_eye_offset.y = 85.0f;
+        cm_80452C68.pause_eye_offset.z = 730.0f;
+        cm_80452C68.pause_up.x = 0.0f;
+        cm_80452C68.pause_up.y = 1.0f;
+        cm_80452C68.pause_up.z = 0.0f;
 
-    if (*x304_ptr == 10) {
-        cm_80452C68.pause_eye_distance = 35.0f * scale;
-    } else {
-        cm_80452C68.pause_eye_distance = scale;
+        if (slot == 0xA) {
+            cm_80452C68.pause_eye_distance = 35.0f * scale;
+        } else {
+            cm_80452C68.pause_eye_distance = scale;
+        }
     }
 
     Camera_8002BAA8(0.0f);
     Camera_8002BD88(0.0f, 0.0f);
     Camera_8002C010(0.0f, 0.0f);
 
-    cm_80452C68.transform.target_interest = cm_80452C68.x308;
-    lbVector_Add(&cm_80452C68.transform.target_interest, x314_ptr);
+    transform = &cm_80452C68.transform;
+    transform->target_interest = cm_80452C68.x308;
+    lbVector_Add(&transform->target_interest, &cm_80452C68.x314);
+    transform->target_position = transform->target_interest;
+    lbVector_Add(&transform->target_position,
+                    &cm_80452C68.pause_eye_offset);
 
-    cm_80452C68.transform.target_position =
-        cm_80452C68.transform.target_interest;
-    lbVector_Add(&cm_80452C68.transform.target_position, pause_eye_ptr);
 }
 
 s32 fn_8002FBA0(HSD_RectF32* arg0)
@@ -4782,9 +4774,9 @@ void Camera_80030E34(f32 arg8)
 
 void Camera_80030E44(enum_t arg0, Vec3* arg1)
 {
+    Camera* camera = &cm_80452C68;
     HSD_GObj** pgobj;
     s32 result;
-    Camera* camera = &cm_80452C68;
 
     switch (arg0) {
     case 1:
@@ -4812,7 +4804,7 @@ void Camera_80030E44(enum_t arg0, Vec3* arg1)
 
     {
         s32 i;
-        for (i = 0; i < 4; i++) {
+        for (i = 0; i < 16; i++) {
             if (camera->_B0[0][i].type == 0) {
                 camera->_B0[0][i].type = arg0;
                 if (arg1 != NULL) {
