@@ -30,7 +30,7 @@
 /* 2EBF00 */ bool itTincle_UnkMotion4_Anim(Item_GObj* gobj);
 /* 2EBF08 */ void itTincle_UnkMotion4_Phys(Item_GObj* gobj);
 /* 2EBF80 */ bool itTincle_UnkMotion4_Coll(Item_GObj* gobj);
-/* 2EBFAC */ UNK_RET it_802EBFAC(UNK_PARAMS);
+/* 2EBFAC */ void it_802EBFAC(Item_GObj*);
 /* 2EC0FC */ bool itTincle_UnkMotion5_Anim(Item_GObj* gobj);
 /* 2EC104 */ void itTincle_UnkMotion5_Phys(Item_GObj* gobj);
 /* 2EC168 */ bool itTincle_UnkMotion5_Coll(Item_GObj* gobj);
@@ -62,7 +62,7 @@
 /* 2EC830 */ void it_802EC830(Item_GObj* gobj);
 /* 2EC850 */ void it_802EC850(Item_GObj*, Item_GObj*);
 /* 2EC9E8 */ void it_802EC9E8(Item_GObj*);
-/* 2ECA70 */ UNK_RET it_802ECA70(UNK_PARAMS);
+/* 2ECA70 */ Item_GObj* it_802ECA70(HSD_GObj*);
 /* 2ECC8C */ int it_802ECC8C(Item_GObj*);
 /* 2ECC98 */ void it_802ECC98(Item_GObj*, float);
 /* 2ECCA4 */ void it_802ECCA4(Item_GObj* gobj, s32* kind, Vec3* pos);

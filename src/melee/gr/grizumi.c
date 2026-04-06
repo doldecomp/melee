@@ -425,17 +425,6 @@ bool grIzumi_801CC350(Ground_GObj* gobj)
     return false;
 }
 
-static inline int rand_inline(int a, int b)
-{
-    if (a > b) {
-        return b + (a - b != 0 ? HSD_Randi(a - b) : 0);
-    } else if (a < b) {
-        return a + (b - a != 0 ? HSD_Randi(b - a) : 0);
-    } else {
-        return a;
-    }
-}
-
 void grIzumi_801CC358(Ground_GObj* gobj)
 {
     bool r29 = false;
@@ -446,7 +435,7 @@ void grIzumi_801CC358(Ground_GObj* gobj)
         // 54
         gp->gv.izumi3.xC4 = 1;
         gp->gv.izumi3.xC6 =
-            rand_inline(grIz_804D6968->x3C, grIz_804D6968->x38);
+            rand_range(grIz_804D6968->x3C, grIz_804D6968->x38);
         r29 = true;
         break;
     }
@@ -493,7 +482,7 @@ void grIzumi_801CC358(Ground_GObj* gobj)
                 }
             } else {
                 gp->gv.izumi3.xC6 =
-                    rand_inline(grIz_804D6968->x3C, grIz_804D6968->x38);
+                    rand_range(grIz_804D6968->x3C, grIz_804D6968->x38);
             }
         }
         break;
@@ -531,7 +520,7 @@ void grIzumi_801CC358(Ground_GObj* gobj)
         float f;
         gp->gv.izumi3.xC4 = 4;
         gp->gv.izumi3.xC6 =
-            rand_inline(grIz_804D6968->x50, grIz_804D6968->x4C);
+            rand_range(grIz_804D6968->x50, grIz_804D6968->x4C);
         HSD_JObjSetFlagsAll(jobj, 0x10);
         HSD_JObjRemoveAnimAll(jobj); ///< @todo float load order (41c)
         f = HSD_JObjGetTranslationY(jobj);

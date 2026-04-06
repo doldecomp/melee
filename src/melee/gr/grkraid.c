@@ -209,17 +209,6 @@ bool grKraid_801FE438(Ground_GObj* gobj)
     return false;
 }
 
-static inline int rand_inline(int a, int b)
-{
-    if (a > b) {
-        return b + (a - b != 0 ? HSD_Randi(a - b) : 0);
-    } else if (a < b) {
-        return a + (b - a != 0 ? HSD_Randi(b - a) : 0);
-    } else {
-        return a;
-    }
-}
-
 const Vec grKr_803B8278 = { 0.0f, 0.0f, 0.0f };
 void grKraid_801FE440(Ground_GObj* gobj)
 {
@@ -233,7 +222,7 @@ void grKraid_801FE440(Ground_GObj* gobj)
     case 0:
         if (gp->gv.kraid.x4)
         { /// @remark Explicit != 0.0f comparison leads to incorrect ordering
-            gp->gv.kraid.x10 = rand_inline(grKr_804D6A08->map_time_max,
+            gp->gv.kraid.x10 = rand_range(grKr_804D6A08->map_time_max,
                                            grKr_804D6A08->map_time_min);
             gp->gv.kraid.x0 = 1;
             grAnime_801C7FF8(gobj, 18, 7, 1, 0.0f, 1.0f);

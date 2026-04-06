@@ -124,17 +124,6 @@ void grOldKongo_8020F6BC(Ground_GObj* gobj)
 
 void grOldKongo_8020F6E0(Ground_GObj* arg) {}
 
-static inline int rand_inline(int a, int b)
-{
-    if (a > b) {
-        return b + (a - b != 0 ? HSD_Randi(a - b) : 0);
-    } else if (a < b) {
-        return a + (b - a != 0 ? HSD_Randi(b - a) : 0);
-    } else {
-        return a;
-    }
-}
-
 void grOldKongo_8020F6E4(Ground_GObj* gobj)
 {
     Vec3 sp14;
@@ -155,9 +144,9 @@ void grOldKongo_8020F6E4(Ground_GObj* gobj)
     gp->gv.oldkongo.xE4 = 0.0f;
     gp->gv.oldkongo.xEC = grOk_804D6A90->x48;
     gp->gv.oldkongo.xCC =
-        rand_inline(grOk_804D6A90->x18, grOk_804D6A90->x14);
+        rand_range(grOk_804D6A90->x18, grOk_804D6A90->x14);
     gp->gv.oldkongo.xCE =
-        rand_inline(grOk_804D6A90->x50, grOk_804D6A90->x4C);
+        rand_range(grOk_804D6A90->x50, grOk_804D6A90->x4C);
     lb_8000B1CC(Ground_801C3FA4(gobj, 1), NULL, &sp14);
     Ground_801C4D70(gobj, &sp14, gp->gv.oldkongo.xDC);
 }
@@ -177,7 +166,7 @@ void grOldKongo_8021005C(Ground_GObj* gobj)
     HSD_JObj* jobj = GET_JOBJ(gobj);
     HSD_JObjSetFlagsAll(jobj, 0x10);
     gp->gv.unk.xC4 =
-        rand_inline(grOk_804D6A90->x2, grOk_804D6A90->x0);
+        rand_range(grOk_804D6A90->x2, grOk_804D6A90->x0);
 }
 
 bool grOldKongo_802100F4(Ground_GObj* gobj)

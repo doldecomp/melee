@@ -57,7 +57,7 @@
 /* 1F60C4 */ void grGreatBay_801F60C4(Ground*, s32, CollData*, s32,
                                       mpLib_GroundEnum, f32);
 /* 1F62F8 */ s32 grGreatBay_801F62F8(s32);
-/* 1F63F4 */ UNK_RET grGreatBay_801F63F4(UNK_PARAMS);
+/* 1F63F4 */ bool grGreatBay_801F63F4(Ground_GObj*);
 /* 1F660C */ void grGreatBay_801F660C(Ground_GObj*);
 /* 1F66A4 */ bool grGreatBay_801F66A4(void);
 /* 1F6708 */ bool grGreatBay_801F6708(u32, HSD_GObj*);

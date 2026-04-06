@@ -444,20 +444,30 @@ struct grSmashTaunt_GroundVars {
 
 struct grGreatBay_GroundVars {
     u8 xC4;
-    u8 _[9];
-    s32 x10;
-    s32 x14;
-    u32 x18;
-    f32 x1C;
-    f32 x20;
+    struct {
+        u8 b0123456 : 7;
+        u8 b7 : 1;
+    } xC5;
+    s16 xC6;
+    HSD_Generator* xC8;
+    f32 xCC;
+    s32 xD0;
+    s32 xD4;
+    u32 xD8;
+    f32 xDC;
+    f32 xE0;
 };
 
 struct grGreatBay_GroundVars2 {
-    HSD_GObj* gobj5;
-    HSD_GObj* gobj6;
-    HSD_GObj* gobj7;
-    HSD_GObj* gobj8;
+    HSD_GObj* gobjs[4];
     s16 x10;
+    struct {
+        u8 b0 : 1;
+        u8 b1 : 1;
+        u8 b2 : 1;
+        u8 b3 : 1;
+        u8 b4567 : 4;
+    } x12;
     s32 x14;
     u32 x18;
     f32 x1C;
@@ -472,6 +482,22 @@ struct grGreatBay_GroundVars3 {
     f32 xDC;
     f32 xE0;
     HSD_JObj* jobj;
+    f32 xE8;
+    f32 xEC;
+    s32 xF0;
+};
+
+struct grGreatBay_GroundVars4 {
+    s32 xC4;
+    s32 xC8;
+    s32 xCC;
+    s32 xD0;
+    s32 xD4;
+    s32 xD8;
+    s32 xDC;
+    f32 xE0;
+    Vec3 xE4;
+    Item_GObj* xF0;
 };
 
 struct grGarden_GroundVars { // Cranky Kong
@@ -1349,6 +1375,7 @@ struct Ground {
             struct grGreatBay_GroundVars greatbay;
             struct grGreatBay_GroundVars2 greatbay2;
             struct grGreatBay_GroundVars3 greatbay3;
+            struct grGreatBay_GroundVars4 greatbay4;
             struct grFigureGet_GroundVars figureget;
             struct GroundVars_flatzone flatzone;
             struct GroundVars_flatzone2 flatzone2;

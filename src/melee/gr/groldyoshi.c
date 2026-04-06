@@ -346,17 +346,6 @@ static inline s32 randi_between(s32 min, s32 max)
     //}
 }
 
-static inline int rand_inline(int a, int b)
-{
-    if (a > b) {
-        return b + (a - b != 0 ? HSD_Randi(a - b) : 0);
-    } else if (a < b) {
-        return a + (b - a != 0 ? HSD_Randi(b - a) : 0);
-    } else {
-        return a;
-    }
-}
-
 /// #grOldYoshi_8020EFCC
 void grOldYoshi_8020EFCC(Ground_GObj* arg)
 {
@@ -364,7 +353,7 @@ void grOldYoshi_8020EFCC(Ground_GObj* arg)
     Ground* gp = arg->user_data;
     HSD_JObjSetFlagsAll(jobj, 0x10);
     gp->gv.oldyoshiguest.xC4 =
-        rand_inline(grOy_804D6A88->x16, grOy_804D6A88->x14);
+        rand_range(grOy_804D6A88->x16, grOy_804D6A88->x14);
     gp->gv.oldyoshiguest.xC6 = -1;
     gp->x11_flags.b012 = 2;
     // oldyoshiguest;
@@ -411,7 +400,7 @@ void grOldYoshi_8020F088(Ground_GObj* arg)
         if (grAnime_801C83D0(arg, 0, 7) != 0) {
             HSD_JObjSetFlagsAll(jobj, 0x10);
             gp->gv.oldyoshiguest.xC4 =
-                rand_inline(grOy_804D6A88->x16, grOy_804D6A88->x14);
+                rand_range(grOy_804D6A88->x16, grOy_804D6A88->x14);
             gp->gv.oldyoshiguest.xC6 = -1;
         }
     }
