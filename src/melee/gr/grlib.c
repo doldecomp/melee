@@ -76,9 +76,9 @@ void grLib_801C97DC(s32 arg0, s32 arg1, HSD_JObj* arg2)
     hsd_8039F6CC(0, arg1, arg0, arg2);
 }
 
-void grLib_801C9808(s32 arg0, s32 arg1, HSD_JObj* arg2)
+HSD_Generator* grLib_801C9808(s32 arg0, s32 arg1, HSD_JObj* arg2)
 {
-    hsd_8039EFAC(0, arg1, arg0, arg2);
+    return hsd_8039EFAC(0, arg1, arg0, arg2);
 }
 
 void grLib_801C9834(HSD_Generator* arg0)

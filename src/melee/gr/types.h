@@ -4,6 +4,8 @@
 #include <placeholder.h>
 #include <platform.h>
 
+#include "dolphin/gx/GXStruct.h"
+
 #include "mp/forward.h"
 #include <melee/cm/forward.h>
 #include <melee/gr/forward.h>
@@ -992,31 +994,39 @@ struct grGreens_GroundVars {
 struct grMuteCity_GroundVars {
     /* +0x00 gp+C4) */ s16 xC4;
     /* +0x02 gp+C6) */ s16 xC6;
-    /* +0x04 gp+C8) */ u32 xC8;
-    /* +0x00 gp+CC) */ u32 xCC;
-    /* +0x00 gp+D0) */ struct {
+    /* +0x04 gp+C8) */ HSD_GObj* xC8;
+    /* +0x08 gp+CC) */ HSD_GObj* xCC;
+    /* +0x0C gp+D0) */ struct {
         u8 b0 : 1;
         u8 b1 : 1;
-        u8 b2 : 1;
-        u8 b3 : 1;
+        u8 b23 : 2;
         u8 b4 : 1;
         u8 b5 : 1;
         u8 b6 : 1;
         u8 b7 : 1;
     } xD0_flags;
-    /* +0x0D gp+D1) */ u8 pad_D1[0xE4 - 0xD1];
-    /* +0x20 gp+E4) */ f32 xE4;
-    /* +0x24 gp+E8) */ f32 xE8;
-    /* +0x28 gp+EC) */ u8 pad_EC[0xF0 - 0xEC];
-    /* +0x2C gp+F0) */ f32 xF0;
-    /* +0x30 gp+F4) */ f32 xF4;
-    /* +0x34 gp+F8) */ u8 pad_F8[0xFC - 0xF8];
+    /* +0x0D gp+D1) */ u8 xD1;
+    /* +0x0E gp+D2) */ s16 xD2;
+    /* +0x10 gp+D4) */ f32 xD4;
+    /* +0x14 gp+D8) */ f32 xD8;
+    /* +0x18 gp+DC) */ HSD_JObj* xDC;
+    /* +0x1C gp+E0) */ HSD_JObj* xE0;
+    /* +0x20 gp+E4) */ Vec3 xE4;
+    /* +0x2C gp+F0) */ Vec3 xF0;
     /* +0x38 gp+FC) */ HSD_JObj* xFC;
     /* +0x3C gp+100) */ HSD_JObj* x100;
     /* +0x40 gp+104) */ HSD_JObj* x104;
     /* +0x44 gp+108) */ HSD_JObj* x108;
     /* +0x48 gp+10C) */ HSD_JObj* x10C;
     /* +0x4C gp+110) */ HSD_LObj* x110;
+    /* +0x50 gp+114) */ f32 x114;
+    /* +0x54 gp+118) */ f32 x118;
+    /* +0x58 gp+11C) */ f32 x11C;
+    /* +0x5C gp+120) */ f32 x120;
+    /* +0x60 gp+124) */ f32 x124;
+    /* +0x64 gp+128) */ f32 x128;
+    /* +0x68 gp+12C) */ f32 x12C;
+    /* +0x6C gp+130) */ f32 x130;
 };
 
 struct grMuteCity_GroundVars2 {
@@ -1030,9 +1040,10 @@ struct grMuteCity_GroundVars2 {
         u8 b6 : 1;
         u8 b7 : 1;
     } xC4_flags;
-    /* +0x00 gp+C8) */ HSD_JObj* xC8;
-    /* +0x00 gp+CC) */ f32 xCC;
-    /* +0x00 gp+D0) */ f32 xD0;
+    /* +0x04 gp+C8) */ HSD_JObj* xC8;
+    /* +0x08 gp+CC) */ f32 xCC;
+    /* +0x0C gp+D0) */ f32 xD0;
+    /* +0x10 gp+D4) */ GXColor saved_colors[4];
 };
 
 /// Onett awning physics element (0x1C bytes)
@@ -1420,7 +1431,7 @@ struct Ground {
     int x60;
     int x64;
     int x68;
-    int x6C;
+    GXColor x6C;
     int x70;
     char pad_74[0xC0 - 0x74];
     f32 xC0;
