@@ -4,6 +4,7 @@
 #include <placeholder.h>
 
 #include "gr/forward.h"
+#include "it/forward.h"
 #include "lb/forward.h"
 #include "mp/forward.h"
 #include "sc/forward.h"
@@ -37,10 +38,10 @@
 /* 1E43D8 */ bool grOnett_801E43D8(Ground_GObj*);
 /* 1E43E0 */ void grOnett_801E43E0(Ground_GObj*);
 /* 1E502C */ void grOnett_801E502C(Ground_GObj*);
-/* 1E5030 */ UNK_RET grOnett_801E5030(UNK_PARAMS);
+/* 1E5030 */ void grOnett_801E5030(Item_GObj*, Ground*);
 /* 1E5140 */ void grOnett_801E5140(s32 idx);
-/* 1E5194 */ UNK_RET grOnett_801E5194(UNK_PARAMS);
-/* 1E5214 */ UNK_RET grOnett_801E5214(UNK_PARAMS);
+/* 1E5194 */ void grOnett_801E5194(Ground*, s32, s32);
+/* 1E5214 */ void grOnett_801E5214(Ground_GObj*);
 /* 1E54B4 */ void grOnett_801E54B4(Ground*, s32, CollData*, s32,
                                    mpLib_GroundEnum, f32);
 /* 1E5538 */ void grOnett_801E5538(Ground_GObj*);
