@@ -38,6 +38,7 @@
 #include <math.h>
 #include <dolphin/mtx.h>
 #include <baselib/debug.h>
+#include <baselib/random.h>
 #include <baselib/gobj.h>
 #include <Runtime/runtime.h>
 

@@ -1009,7 +1009,7 @@ static const s32 revstd_dims[] = {
 
 /// @todo Currently 53.61% match - needs struct copy and computation order
 /// fixes
-s32 AXDriver_8038E034(AXDriverAuxType type, void* param)
+s32 HSD_AudioGetAuxHeapSize(AXDriverAuxType type, void* param)
 {
     s32 result;
     s32 d[8];
