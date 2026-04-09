@@ -176,20 +176,6 @@ void ftCo_80097AF4(Fighter_GObj* gobj)
     }
 }
 
-#define SOLUTION 1
-void ftCo_80097D40(Fighter_GObj* gobj)
-{
-    Fighter* fp = gobj->user_data;
-    u8 _[8] = { 0 };
-    if (fp->x2228_b2) {
-        ftCo_80097AF4(gobj);
-    } else {
-        ftCo_8009794C(gobj);
-    }
-    fp->mv.co.downspot.x4 = 0;
-}
-#undef SOLUTION
-
 static void inlineA1(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -199,6 +185,15 @@ static void inlineA1(Fighter_GObj* gobj)
         ftCo_8009794C(gobj);
     }
 }
+
+#define SOLUTION 1
+void ftCo_80097D40(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    inlineA1(gobj);
+    fp->mv.co.downspot.x4 = 0;
+}
+#undef SOLUTION
 
 void ftCo_80097D88(Fighter_GObj* gobj)
 {
