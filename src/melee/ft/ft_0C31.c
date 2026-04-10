@@ -564,7 +564,7 @@ bool ftCo_800C74F4(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->dmg.x1860_element == 16 && fp->capture_timer == 0 &&
         fp->motion_id != ftCo_MS_CaptureLeadead &&
-        it_802EAF28(fp->dmg.x1868_source) == NULL)
+        it_802EAF28(fp->dmg.x1868_source) == 0U)
     {
         ftCo_800C7590(gobj);
         return true;

@@ -22,11 +22,10 @@ ItemStateTable it_803F7DE8[] = {
 void it_802CF814(Item_GObj* gobj)
 {
     Item* it = gobj->user_data;
-    Article* ap = it->xC4_article_data;
-    itPokemonAttributes* sa = ap->x4_specialAttributes;
+    itPokemonAttributes* sa = it->xC4_article_data->x4_specialAttributes;
     PAD_STACK(16);
 
-    it_80279C48(gobj, ap);
+    it_80279C48(gobj);
     it->xDAC_itcmd_var0 = 0;
     it->xDB0_itcmd_var1 = 0;
     it->xDB4_itcmd_var2 = 0;

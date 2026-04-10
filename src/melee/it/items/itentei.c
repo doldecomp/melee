@@ -25,7 +25,7 @@ void it_802CF3E0(Item_GObj* gobj)
     itPokemonAttributes* sa = ap->x4_specialAttributes;
     PAD_STACK(16);
 
-    it_80279C48(gobj, ap);
+    it_80279C48(gobj);
     it->xDAC_itcmd_var0 = 0;
     it->xDB0_itcmd_var1 = 0;
     it->xDB4_itcmd_var2 = 0;

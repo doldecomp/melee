@@ -543,8 +543,10 @@ struct Item {
         itBox_ItemVars box;
         itCapsule_ItemVars capsule;
         itChicorita_ItemVars chicorita;
+        itCLinkMilk_ItemVars clinkmilk;
         itClimbersBlizzard_ItemVars climbersblizzard;
         itClimbersIce_ItemVars climbersice;
+        itClimbersString_ItemVars climbersstring;
         itCoin_ItemVars coin;
         itDosei_ItemVars dosei;
         itDrMarioPill_ItemVars drmariopill;
@@ -574,6 +576,7 @@ struct Item {
         itKinoko_ItemVars kinoko;
         itKirbyHammer_ItemVars kirbyhammer;
         itKirbyCutterBeam_ItemVars kirbycutterbeam;
+        itKirby2F23_ItemVars kirby2f23;
         itkireihana_ItemVars kireihana;
         itKlap_ItemVars klap;
         itKoopaFlame_ItemVars koopaflame;

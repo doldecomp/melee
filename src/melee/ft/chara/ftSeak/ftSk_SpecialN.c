@@ -470,7 +470,7 @@ void shootNeedles(Fighter_GObj* gobj)
                 Item_GObj* item_gobj =
                     it_802AFD8C(gobj, &pos, 79, fp->facing_dir);
                 if (item_gobj != NULL) {
-                    item_gobj = it_802AFEA8(item_gobj, gobj, 0);
+                    it_802AFEA8(item_gobj, gobj, 0);
                 }
             }
 

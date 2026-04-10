@@ -1,12 +1,20 @@
 #include "itklap.h"
 
+#include "placeholder.h"
+
+#include "dolphin/types.h"
 #include "gr/grkongo.h"
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/itcoll.h"
 #include "it/item.h"
 #include "lb/lb_00B0.h"
-#include "sysdolphin/baselib/random.h"
+#include "lb/lbcollision.h"
+
+#include <math.h>
+#include <baselib/jobj.h>
+#include <baselib/random.h>
 
 void it_802E1820(Item_GObj* gobj)
 {
@@ -108,7 +116,25 @@ bool itKlap_UnkMotion2_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itKlap_UnkMotion2_Phys
+void itKlap_UnkMotion2_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    HSD_JObj* jobj = gobj->hsd_obj;
+    f32 rot;
+    f32 diff;
+
+    ip->x40_vel.y -= ip->xCC_item_attr->x10_fall_speed;
+    rot = HSD_JObjGetRotationX(jobj);
+    diff = 1.5707964f - rot;
+    if (diff > 0.034906585f) {
+        rot += 0.034906585f;
+    } else if (diff < -0.034906585f) {
+        rot -= 0.034906585f;
+    } else {
+        rot = 1.5707964f;
+    }
+    HSD_JObjSetRotationX(jobj, rot);
+}
 
 bool itKlap_UnkMotion2_Coll(Item_GObj* gobj)
 {
@@ -143,7 +169,29 @@ bool itKlap_UnkMotion4_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itKlap_UnkMotion4_Phys
+void itKlap_UnkMotion4_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    HSD_JObj* jobj = gobj->hsd_obj;
+    Quaternion quat;
+    PAD_STACK(4);
+
+    ip->x40_vel.y -= ip->xCC_item_attr->x10_fall_speed;
+    HSD_JObjGetRotation(jobj, &quat);
+    quat.y += ip->xDD4_itemVar.klap.x24;
+    if (quat.y > (2 * M_PI)) {
+        quat.y -= (2 * M_PI);
+    } else if (quat.y < -(2 * M_PI)) {
+        quat.y += (2 * M_PI);
+    }
+    quat.z += ip->xDD4_itemVar.klap.x28;
+    if (quat.z > (2 * M_PI)) {
+        quat.z -= (2 * M_PI);
+    } else if (quat.z < -(2 * M_PI)) {
+        quat.z += (2 * M_PI);
+    }
+    HSD_JObjSetRotation(jobj, &quat);
+}
 
 bool itKlap_UnkMotion4_Coll(Item_GObj* gobj)
 {
@@ -176,7 +224,50 @@ bool itKlap_UnkMotion3_Coll(Item_GObj* gobj)
 
 /// #it_802E215C
 
-/// #it_802E2330
+static inline void it_802E2330_inline(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    it_802762BC(ip);
+    if (it_8027B798(gobj, &ip->x40_vel)) {
+        it_802762BC(ip);
+    }
+    ip->xDD4_itemVar.klap.x24 = 0.17453292f * (HSD_Randf() - 0.5f);
+    ip->xDD4_itemVar.klap.x28 = 0.17453292f * (HSD_Randf() - 0.5f);
+    Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
+}
+
+inline f32 inline_fn()
+{
+    return HSD_Randf();
+}
+
+void it_802E2330(Item_GObj* gobj, Vec3* pos, lbColl_80008D30_arg1* arg2,
+                 f32 angle)
+{
+    HitCapsule hit;
+    Item* ip = gobj->user_data;
+    u8 _pad[8];
+
+    ip->pos = *pos;
+    lbColl_80008D30(&hit, arg2);
+    Item_80269CA0(ip, hit.b_offset.x);
+    if (angle < 0.0f) {
+        angle += 360.0f;
+    }
+    ip->xCC8_knockback = it_80270CD8(ip, &hit);
+    ip->xCAC_angle = angle;
+    ip->xCCC_incDamageDirection = ip->facing_dir;
+    {
+        ip = gobj->user_data;
+        it_802762BC(ip);
+        if (it_8027B798(gobj, &ip->x40_vel)) {
+            it_802762BC(ip);
+        }
+        ip->xDD4_itemVar.klap.x24 = 0.17453292f * (inline_fn() - 0.5f);
+        ip->xDD4_itemVar.klap.x28 = 0.17453292f * (inline_fn() - 0.5f);
+        Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
+    }
+}
 
 void it_802E2450(Item_GObj* gobj, Item_GObj* ref_gobj)
 {

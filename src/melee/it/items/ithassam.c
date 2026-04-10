@@ -57,12 +57,10 @@ ItemStateTable it_803F7CF8[] = {
 void itHassam_802CDBE0(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    Article* ap = ip->xC4_article_data;
-    itHassam_ItemVars* attr = ap->x4_specialAttributes;
-
+    itHassam_ItemVars* attr = ip->xC4_article_data->x4_specialAttributes;
     PAD_STACK(12);
 
-    it_80279C48(gobj, ap);
+    it_80279C48(gobj);
     ip->xDAC_itcmd_var0 = 0;
     ip->xDB0_itcmd_var1 = 0;
     it_80279CDC(gobj, attr->x0);

@@ -18,11 +18,10 @@
 void it_802CA49C(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    Article* ap = ip->xC4_article_data;
-    itPokemonAttributes* sa = ap->x4_specialAttributes;
+    itPokemonAttributes* sa = ip->xC4_article_data->x4_specialAttributes;
     PAD_STACK(16);
 
-    it_80279C48(gobj, ap);
+    it_80279C48(gobj);
     ip->xDD4_itemVar.pokemon.timer = -1;
     ip->xDBC_itcmd_var4.flags.x0 = false;
     ip->xDD4_itemVar.pokemon.x64 = 0;

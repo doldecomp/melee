@@ -10,9 +10,32 @@
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
+#include "lb/lb_00B0.h"
 
 /* 2D5D7C */ void it_802D5D7C(HSD_GObj*);
 /* 2D60C8 */ static bool itHinoarashi_UnkMotion2_Anim(Item_GObj* gobj);
+/* 2D64B8 */ void it_802D64B8(HSD_GObj*, Vec3*, u32, f32);
+
+void it_802D5D7C(HSD_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    Vec3 pos;
+
+    if (ip->xDAC_itcmd_var0 != 0) {
+        if (!ip->xDD4_itemVar.hinoarashi.x60.b0) {
+            ip->xDD4_itemVar.hinoarashi.x60.b0 = true;
+            efSync_Spawn(0x473, gobj, ip->xBBC_dynamicBoneTable->bones[2]);
+        }
+        lb_8000B1CC(ip->xBBC_dynamicBoneTable->bones[2], NULL, &pos);
+        it_802D64B8(gobj, &pos, Item_8026AE60(), ip->facing_dir);
+        ip->xDAC_itcmd_var0 = 0;
+    }
+    if (ip->xDB0_itcmd_var1 != 0) {
+        efLib_DestroyAll(gobj);
+        ip->xDD4_itemVar.hinoarashi.x60.b1 = true;
+        ip->xDB0_itcmd_var1 = 0;
+    }
+}
 
 void it_802D5CF8(Item_GObj* gobj)
 {

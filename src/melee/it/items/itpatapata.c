@@ -77,8 +77,6 @@ bool itPatapata_UnkMotion1_Coll(Item_GObj* gobj)
     return false;
 }
 
-/// #it_802E0734
-
 bool itPatapata_UnkMotion2_Anim(Item_GObj* gobj)
 {
     PAD_STACK(8);
@@ -88,9 +86,103 @@ bool itPatapata_UnkMotion2_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itPatapata_UnkMotion3_Phys
+void itPatapata_UnkMotion3_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itPatapataAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    PAD_STACK(16);
 
-/// #itPatapata_UnkMotion3_Coll
+    if (it_802750E8(gobj, 2) && ip->msid == 2) {
+        it_802E0D9C(gobj);
+    }
+    switch (ip->xDD4_itemVar.patapata.x40) {
+    case 0:
+        ip->x40_vel.y += ip->xDD4_itemVar.patapata.x30;
+        break;
+    case 1:
+        if (ip->xDD4_itemVar.patapata.x20 == 0) {
+            ip->xDD4_itemVar.patapata.x20 = (attrs->x14 / 2) / attrs->x0->x4;
+            ip->xDD4_itemVar.patapata.x2C *= -1;
+        } else {
+            ip->x40_vel.x += ip->xDD4_itemVar.patapata.x2C;
+            ip->xDD4_itemVar.patapata.x20 -= 1;
+            if (ip->xDD4_itemVar.patapata.x28 == ip->xDD4_itemVar.patapata.x20)
+            {
+                it_802E0D9C(gobj);
+            }
+        }
+        if (ip->xDD4_itemVar.patapata.x24 == 0) {
+            ip->xDD4_itemVar.patapata.x24 = attrs->x1C / 2;
+            ip->xDD4_itemVar.patapata.x30 *= -1;
+        } else {
+            ip->x40_vel.y += ip->xDD4_itemVar.patapata.x30;
+            ip->xDD4_itemVar.patapata.x24 -= 1;
+        }
+        break;
+    case 2:
+        if (ip->xDD4_itemVar.patapata.x20 == 0) {
+            ip->xDD4_itemVar.patapata.x20 = attrs->x24 / 2;
+            ip->xDD4_itemVar.patapata.x30 *= -1;
+        } else {
+            ip->x40_vel.y += ip->xDD4_itemVar.patapata.x30;
+            ip->xDD4_itemVar.patapata.x20 -= 1;
+        }
+        break;
+    }
+}
+
+bool itPatapata_UnkMotion3_Coll(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itPatapataAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    s32 landed = it_8026DA08(gobj);
+
+    if (it_80276308(gobj)) {
+        switch (ip->xDD4_itemVar.patapata.x40) {
+        case 0:
+            if (ip->msid == 2) {
+                it_802E0D9C(gobj);
+            }
+            break;
+        case 1: {
+            f32 width;
+            s32 frames;
+            ip->x40_vel.x = -ip->facing_dir * attrs->x0->x4;
+            ip->xDD4_itemVar.patapata.x20 = frames =
+                ((width = attrs->x14) / attrs->x0->x4);
+            ip->xDD4_itemVar.patapata.x28 = frames / 2;
+            ip->xDD4_itemVar.patapata.x2C =
+                ip->facing_dir * ((2.0f * width) / (frames * frames));
+            if (ip->msid == 2) {
+                it_802E0D9C(gobj);
+            }
+            break;
+        }
+        }
+    }
+    if (landed) {
+        switch (ip->xDD4_itemVar.patapata.x40) {
+        case 0:
+            ip->x40_vel.x = ip->facing_dir * attrs->x0->x4;
+            ip->x40_vel.y = attrs->xC / attrs->x10;
+            break;
+        case 1:
+            ip->x40_vel.y *= -1.0f;
+            ip->xDD4_itemVar.patapata.x30 *= -1.0f;
+            break;
+        case 2: {
+            s32 frames = attrs->x24;
+            f32 height = attrs->x20;
+            ip->xDD4_itemVar.patapata.x20 = frames;
+            ip->x40_vel.y = height / frames;
+            ip->xDD4_itemVar.patapata.x30 =
+                -1.0f * ((2.0f * height) / (frames * frames));
+            break;
+        }
+        }
+    }
+    return false;
+}
 
 void it_802E0D9C(Item_GObj* gobj)
 {

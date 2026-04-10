@@ -7,11 +7,21 @@
 
 #include "it/items/types.h"
 
+typedef struct itLipstickSporeAttributes {
+    f32 x0;
+    f32 x4;
+    f32 x8;
+    f32 xC;
+    f32 x10;
+    s32 x14;
+    s32 x18;
+} itLipstickSporeAttributes;
+
 /* 29A114 */ void it_8029A114(Fighter_GObj*, Vec*, int, float);
 /* 29A218 */ void it_8029A218(HSD_GObj* owner, Vec3* pos, f32 facing_dir,
                               s32 arg4);
 /* 29A31C */ void it_8029A31C(Item_GObj*, Fighter_GObj*, Item*);
-/* 29A498 */ void it_8029A498(Item_GObj* gobj);
+/* 29A498 */ void it_8029A498(Item_GObj* gobj, Fighter_GObj* owner);
 /* 29A504 */ bool itLipstickspore_UnkMotion0_Anim(Item_GObj* gobj);
 /* 29A524 */ void itLipstickspore_UnkMotion0_Phys(Item_GObj* gobj);
 /* 29A58C */ bool itLipstickspore_UnkMotion0_Coll(Item_GObj* gobj);

@@ -2675,7 +2675,7 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
     },
     {
         // Sheik needle thrown
-        it_803F6F50,
+        it_803F6F50.states,
         NULL,
         itSeakNeedleThrown_Logic109_Destroyed,
         NULL,
@@ -3966,7 +3966,7 @@ struct ItemLogicTable it_803F3100[ARRAY_SIZE(it_803F2F28)] = {
         itSamusChargeshot_Logic108_EvtUnk,
     },
     {
-        it_803F6F50,
+        it_803F6F50.states,
         NULL,
         itSeakNeedleThrown_Logic109_Destroyed,
         NULL,
@@ -9050,18 +9050,15 @@ void it_80279BE0(Item_GObj* item_gobj)
     }
 }
 
-void it_80279C48(Item_GObj* item_gobj, Article* arg1)
+void it_80279C48(Item_GObj* item_gobj)
 {
-    Vec3 sp10;
-    HSD_GObj* gobj;
-    Item* item;
+    Vec3 v;
+    Item* item = GET_ITEM(item_gobj);
+    HSD_GObj* gobj = ftLib_8008627C(&item->pos, item->owner);
     f32 dir;
-
-    item = item_gobj->user_data;
-    gobj = ftLib_8008627C(&item->pos, item->owner);
     if (gobj != NULL) {
-        ftLib_80086644(gobj, &sp10);
-        if ((item->pos.x - sp10.x) > 0.0f) {
+        ftLib_80086644(gobj, &v);
+        if ((item->pos.x - v.x) > 0.0f) {
             item->facing_dir = -1.0f;
             return;
         }

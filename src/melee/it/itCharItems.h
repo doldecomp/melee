@@ -13,6 +13,10 @@
 #include <dolphin/mtx.h>
 #include <baselib/jobj.h>
 
+typedef struct itCLinkMilk_ItemVars {
+    /* +0 ip+DD4 */ Fighter_GObj* x0;
+} itCLinkMilk_ItemVars;
+
 typedef struct itClimbersBlizzard_ItemVars {
     /* +0 */ f32 x0;
     /* +4 */ u8 flag0 : 1;
@@ -81,6 +85,32 @@ typedef struct {
     /* xC */ f32 xC;
     /* x10 */ f32 x10;
 } itDrMarioPillAttributes;
+
+typedef struct {
+    f32 x0;
+    f32 x4;
+    f32 x8;
+    f32 xC;
+    f32 x10;
+    f32 x14;
+    f32 x18;
+    f32 x1C;
+    f32 x20;
+    f32 x24;
+    f32 x28;
+    f32 x2C;
+    f32 x30;
+    f32 x34;
+    f32 x38;
+    s32 x3C;
+    s32 x40;
+    s32 x44;
+    f32 x48;
+    f32 x4C;
+    f32 x50;
+    f32 x54;
+    f32 x58;
+} itHitodemanAttributes;
 
 typedef struct {
     /* x0 */ f32 x0;
@@ -279,6 +309,19 @@ typedef struct {
     /*  +8 ip+DDC */ Vec3 dir;
     /* +14 ip+DE8 */ Vec3 init_pos;
 } itKirbyCutterBeam_ItemVars;
+
+typedef struct {
+    /* +000 ip+DD4 */ u8 _pad[0x1C8];
+    /* +1C8 ip+F9C */ f32 x1C8;
+    /* +1CC ip+FA0 */ f32 x1CC;
+    /* +1D0 ip+FA4 */ f32 x1D0;
+    /* +1D4 ip+FA8 */ f32 x1D4;
+    /* +1D8 ip+FAC */ f32 x1D8;
+    /* +1DC ip+FB0 */ f32 x1DC;
+    /* +1E0 ip+FB4 */ u8 _pad2[0x8];
+    /* +1E8 ip+FBC */ Vec3 x1E8;
+    /* +1F4 ip+FC8 */ f32 x1F4;
+} itKirby2F23_ItemVars;
 
 /// user_data struct of GObj class 7
 typedef struct ItemLink {
@@ -545,8 +588,11 @@ typedef struct itPikachutJoltGround_ItemVars {
 } itPikachutJoltGround_ItemVars;
 
 typedef struct itPikachutJoltAir_ItemVars {
-    /* +0 ip+DD4 */ char pad_0[0x4];
-    /* +4 ip+DD8 */ Item_GObj* xDD8;
+    /* +0  ip+DD4 */ HSD_GObj* xDD4;
+    /* +4  ip+DD8 */ Item_GObj* xDD8;
+    /* +8  ip+DDC */ u8 pad_8[0xC];
+    /* +14 ip+DE8 */ Vec3 xDE8;
+    /* +20 ip+DF4 */ s32 xDF4;
 } itPikachutJoltAir_ItemVars;
 
 typedef struct itPikachuthunder_ItemVars {
@@ -715,6 +761,10 @@ typedef struct itSeakNeedleThrown_ItemVars {
     /*  +8 ip+DDC */ f32 xDDC;
     /*  +C ip+DE0 */ f32 xDE0;
     /* +10 ip+DE4 */ Vec3 xDE4;
+    /* +1C ip+DF0 */ f32 xDF0;
+    /* +20 ip+DF4 */ int xDF4;
+    /* +24 ip+DF8 */ f32 xDF8;
+    /* +28 ip+DFC */ f32 xDFC;
 } itSeakNeedleThrown_ItemVars;
 
 typedef struct itSeakChain_ItemVars {
@@ -731,6 +781,13 @@ typedef struct itSeakChain_Attrs {
     /* +58 */ float x58;
 } itSeakChain_Attrs;
 STATIC_ASSERT(sizeof(struct itSeakChain_Attrs) == 0x5C);
+
+typedef struct itClimbersString_ItemVars {
+    /* +0  ip+DD4 */ f32 x0;
+    /* +4  ip+DD8 */ ItemLink* x4;
+    /* +8  ip+DDC */ ItemLink* x8;
+    /* +C  ip+DE0 */ HSD_GObj* xC;
+} itClimbersString_ItemVars;
 
 typedef struct itZako_ItemVars {
     /* +0 ip+DD4 */ s32 pad;

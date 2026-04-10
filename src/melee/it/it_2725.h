@@ -199,7 +199,7 @@
 /* 279B88 */ void it_80279B88(Item*, s32, s32);
 /* 279BBC */ void it_80279BBC(Item*);
 /* 279BE0 */ void it_80279BE0(Item_GObj*);
-/* 279C48 */ void it_80279C48(Item_GObj*, Article*);
+/* 279C48 */ void it_80279C48(Item_GObj*);
 /* 279CDC */ void it_80279CDC(Item_GObj*, f32);
 /* 279D38 */ void it_80279D38(Item_GObj*);
 /* 279D5C */ void it_80279D5C(Item_GObj*, f32);

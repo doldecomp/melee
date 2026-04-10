@@ -146,12 +146,17 @@ typedef struct itWstarAttributes {
 } itWstarAttributes;
 
 typedef struct itKyasarin_ItemVars {
-    /* +0  ip+DD4 */ char pad_0[0x20];
+    /* +0  ip+DD4 */ char pad_0[0x18];
+    /* +18 ip+DEC */ s32 x18;
+    /* +1C ip+DF0 */ char pad_1C[0x4];
     /* +20 ip+DF4 */ HSD_GObj* x20;
     /* +24 ip+DF8 */ f32 x24;
     /* +28 ip+DFC */ f32 x28;
-    /* +2C ip+E00 */ char pad_2C[0x34 - 0x2C];
+    /* +2C ip+E00 */ f32 x2C;
+    /* +30 ip+E04 */ f32 x30;
     /* +34 ip+E08 */ s32 x34;
+    /* +38 ip+E0C */ s32 x38;
+    /* +3C ip+E10 */ s32 x3C;
 } itKyasarin_ItemVars;
 
 typedef struct itKyasarinAttributes {
@@ -159,16 +164,20 @@ typedef struct itKyasarinAttributes {
     /* +4  */ f32 x4;
     /* +8  */ f32 x8;
     /* +C  */ f32 xC;
-    /* +10 */ u8 x10_pad[0x18 - 0x10];
+    /* +10 */ f32 x10;
+    /* +14 */ f32 x14;
     /* +18 */ f32 x18;
     /* +1C */ f32 x1C;
-    /* +20 */ u8 x20_pad[0x28 - 0x20];
+    /* +20 */ f32 x20;
+    /* +24 */ f32 x24;
     /* +28 */ f32 x28;
     /* +2C */ f32 x2C;
     /* +30 */ f32 x30;
     /* +34 */ f32 x34;
     /* +38 */ f32 x38;
     /* +3C */ f32 x3C;
+    /* +40 */ u8 x40_pad[0x48 - 0x40];
+    /* +48 */ s32 x48;
 } itKyasarinAttributes;
 
 typedef struct itKyasarinEgg_ItemVars {
@@ -227,7 +236,7 @@ typedef struct itDosei_ItemVars {
     f32 xDDC;
     f32 xDE0;
     Vec3 xDE4;
-    f32 xDF0;
+    s32 xDF0;
     f32 xDF4;
     Vec3 xDF8;
 } itDosei_ItemVars;
@@ -1105,17 +1114,28 @@ typedef struct itMewtwoShadowball_ItemVars {
     /* ip+DF8 */ f32 x24;
     /* ip+DFC */ s32 x28;
     /* ip+E00 */ HSD_GObj* x2C;
-    /* ip+E04 */ f32 x30[5];
+    /* ip+E04 */ Vec3 x30;
+    /* ip+E10 */ f32 x3C;
+    /* ip+E14 */ f32 x40;
     /* ip+E18 */ f32 x44;
     /* ip+E1C */ f32 x48;
     /* ip+E20 */ s32 x4C;
     /* ip+E24 */ f32 x50;
-    /* ip+E28 */ s32 x54;
-    /* ip+E2C */ s32 x58;
-    /* ip+E30 */ s32 x5C;
-    /* ip+E34 */ s32 x60;
+    /* ip+E28 */ f32 x54;
+    /* ip+E2C */ Vec3 x58;
     /* ip+E38 */ f32 x64;
 } itMewtwoShadowball_ItemVars;
+
+typedef struct itMewtwoShadowball_DatAttrs {
+    f32 x0;
+    f32 x4;
+    f32 x8;
+    f32 xC;
+    f32 x10;
+    f32 x14;
+    f32 x18;
+    f32 x1C[9];
+} itMewtwoShadowball_DatAttrs;
 
 typedef struct it_279D_DatAttrs {
     f32 x0;
@@ -1570,15 +1590,25 @@ typedef struct itUnknown_ItemVars {
     /* +60 ip+E34 */ f32 x60;
     /* +64 ip+E38 */ s32 x64;
     /* +68 ip+E3C */ s32 x68;
+    /* +6C ip+E40 */ Vec3 x6C;
+    /* +78 ip+E4C */ Vec3 x78;
+    /* +84 ip+E58 */ s32 x84;
 } itUnknown_ItemVars;
+
+typedef struct itGreatFoxLaser_Attrs {
+    f32 x0;
+    f32 x4;
+    f32 x8;
+    f32 xC;
+} itGreatFoxLaser_Attrs;
 
 typedef struct itUnknownAttributes {
     /* +00 */ f32 x0;
     /* +04 */ f32 x4;
-    /* +08 */ char pad_8[0x4];
+    /* +08 */ f32 x8;
     /* +0C */ f32 xC;
     /* +10 */ f32 x10;
-    /* +14 */ char pad_14[0x4];
+    /* +14 */ f32 x14;
     /* +18 */ s32 x18;
     /* +1C */ s32 x1C;
     /* +20 */ s32 x20;
@@ -1610,7 +1640,8 @@ typedef struct itGreatFoxLaser_ItemVars {
     /* +28 ip+DFC */ Vec3 x28;
     /* +34 ip+E08 */ s16 x34;
     /* +36 ip+E0A */ s16 x36;
-    /* +38 ip+E0C */ UNK_T x38;
+    /* +38 ip+E0C */ s16 x38;
+    /* +3A ip+E0E */ s16 x3A;
 } itGreatFoxLaser_ItemVars;
 
 typedef struct itMatadogas_ItemVars {

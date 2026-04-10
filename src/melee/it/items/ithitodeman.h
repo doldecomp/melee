@@ -8,7 +8,7 @@
 #include "it/items/types.h"
 
 /* 2D42C4 */ void it_2725_Logic24_Spawned(Item_GObj*);
-/* 2D43AC */ UNK_RET it_802D43AC(UNK_PARAMS);
+/* 2D43AC */ void it_802D43AC(void);
 /* 2D43B0 */ void it_802D43B0(Item_GObj*, Item_GObj*);
 /* 2D43EC */ void it_802D43EC(Item_GObj* gobj);
 /* 2D4494 */ void it_802D4494(Item_GObj* gobj);
@@ -16,8 +16,8 @@
 /* 2D4564 */ bool it_802D4564(Item_GObj* gobj);
 /* 2D472C */ void it_802D472C(Item_GObj* gobj);
 /* 2D48A8 */ bool it_802D48A8(Item_GObj* gobj);
-/* 2D48B0 */ void it_802D48B0(f32* value, f32 target, f32 max_val, f32 accel,
-                              f32 decel);
+/* 2D48B0 */ f32 it_802D48B0(f32* value, f32 target, f32 max_val, f32 accel,
+                             f32 decel);
 /* 2D4990 */ void it_802D4990(Item_GObj*);
 /* 2D49E8 */ bool itHitodeman_UnkMotion1_Anim(Item_GObj* gobj);
 /* 2D4B14 */ void itHitodeman_UnkMotion1_Phys(Item_GObj* gobj);
