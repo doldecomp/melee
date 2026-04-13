@@ -37,7 +37,10 @@ typedef struct itClimbersIce_ItemVars {
 } itClimbersIce_ItemVars;
 
 typedef struct itClimbersStringAttributes {
-    /* +00 */ u8 pad_00[0x18];
+    /* +00 */ u8 pad_00[0x8];
+    /* +08 */ f32 x8;
+    /* +0C */ u8 pad_0C[0x8];
+    /* +14 */ f32 x14;
     /* +18 */ s32 x18;
     /* +1C */ s32 x1C;
     /* +20 */ s32 x20;

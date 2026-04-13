@@ -20,17 +20,17 @@
 /* 2BEC58 */ void itNessyoyo_UnkMotion2_Phys(Item_GObj* gobj);
 /* 2BED54 */ void itNessyoyo_UnkMotion3_Phys(Item_GObj* gobj);
 /* 2BEE88 */ bool itNessyoyo_UnkMotion3_Anim(Item_GObj* gobj);
-/* 2BF030 */ UNK_RET it_802BF030(UNK_PARAMS);
-/* 2BF180 */ UNK_RET it_802BF180(UNK_PARAMS);
-/* 2BF28C */ UNK_RET it_802BF28C(UNK_PARAMS);
+/* 2BF030 */ s32 it_802BF030(ItemLink*, s32, f32);
+/* 2BF180 */ void it_802BF180(ItemLink*, Vec3*, itYoyoAttributes*, f32);
+/* 2BF28C */ void it_802BF28C(ItemLink*, Vec3*, itYoyoAttributes*, Item*);
 /* 2BF4A0 */ void it_802BF4A0(ItemLink*, Vec3*, itYoyoAttributes*, Item*);
 /* 2BF800 */ s32 it_802BF800(ItemLink*, Vec3*, itYoyoAttributes*, Item*, f32);
 /* 2BF900 */ void it_802BF900(Item* item);
 /* 2BFAFC */ void it_802BFAFC(Item*, Vec3*);
 /* 2BFE34 */ void itNessYoyo_Logic59_PickedUp(Item_GObj*);
 /* 2BFE5C */ void it_802BFE5C(Item_GObj*, Vec3*, float);
-/* 2BFEC4 */ void it_802BFEC4(void*);
-/* 2C0010 */ void it_802C0010(Item_GObj*, void*);
+/* 2BFEC4 */ void it_802BFEC4(Item_GObj*);
+/* 2C0010 */ void it_802C0010(Item_GObj*, Vec3*);
 /* 2C016C */ void it_2725_Logic59_EvtUnk(Item_GObj*, Item_GObj*);
 /* 3F7558 */ extern ItemStateTable it_803F7558[];
 

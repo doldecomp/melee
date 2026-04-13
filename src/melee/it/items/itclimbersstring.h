@@ -3,11 +3,15 @@
 
 #include "it/forward.h"
 
+#include "it/itCharItems.h"
 #include "it/items/types.h"
 
 /* 2C2750 */ void it_802C2750(Item_GObj*);
 /* 2C27D4 */ Item_GObj* it_802C27D4(Fighter_GObj*, Vec3*, int msid, float dir);
 /* 2C28B8 */ void fn_802C28B8(Item_GObj* gobj);
+/* 2C2BF0 */ bool itClimbersstring_UnkMotion3_Anim(Item_GObj* gobj);
+/* 2C2CA8 */ void it_802C2CA8(ItemLink* link, Vec3* target,
+                              itClimbersStringAttributes* attrs, f32 length);
 /* 2C37BC */ void it_2725_Logic70_PickedUp(Item_GObj* gobj);
 /* 2C3810 */ void it_802C3810(Item_GObj* gobj);
 /* 2C3864 */ void it_802C3864(Item_GObj* gobj);
