@@ -15,21 +15,6 @@
 #include <baselib/gobjplink.h>
 #include <baselib/jobj.h>
 
-/* 2C248C */ static void it_802C248C(Item* ip, HSD_JObj* jobj);
-/* 2C28DC */ static void fn_802C28DC(Item_GObj* gobj);
-/* 2C29E8 */ static void fn_802C29E8(Item_GObj* gobj);
-/* 2C2AF4 */ static void fn_802C2AF4(HSD_GObj* gobj);
-/* 2C2DB0 */ void it_802C2DB0(ItemLink*, Vec3*, itClimbersStringAttributes*,
-                              f32);
-/* 2C2EC4 */ void it_802C2EC4(ItemLink*, Vec3*, itClimbersStringAttributes*,
-                              Item*);
-/* 2C30E8 */ void it_802C30E8(ItemLink*, Vec3*, itClimbersStringAttributes*,
-                              Item*);
-/* 2C32D4 */ s32 it_802C32D4(ItemLink*, Vec3*, itClimbersStringAttributes*,
-                             Item*, f32);
-/* 2C33B8 */ static void it_802C33B8(Item* item);
-/* 2C3520 */ void it_802C3520(Item*, Vec3*);
-
 void it_802C2750(Item_GObj* gobj)
 {
     int unused[2];
