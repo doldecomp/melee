@@ -82,6 +82,7 @@ void ftDrawCommon_800805C8(HSD_GObj* gobj, s32 arg1, bool arg2)
 {
     GXColor spAC;
     GXColor spA8;
+    int i;
 
     s32 fighter_2;
     Fighter* fighter;
@@ -93,7 +94,6 @@ void ftDrawCommon_800805C8(HSD_GObj* gobj, s32 arg1, bool arg2)
     u8 _pad[12];
     Vec3 sp54;
     Vec3 v;
-    int i;
     PAD_STACK(12);
 
     fighter = GET_FIGHTER(gobj);
