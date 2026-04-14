@@ -994,8 +994,15 @@ melee/ft/chara/ftCommon/ftCo_DamageScrew.c:
 	.sdata2     start:0x804D8FA0 end:0x804D8FA8
 
 melee/ft/ft_0D31.c:
-	.text       start:0x800D3158 end:0x800D5AEC
-	.sdata2     start:0x804D8FA8 end:0x804D8FE0
+	.text       start:0x800D3158 end:0x800D4DD4
+	.rodata     start:0x803B7500 end:0x803B7510
+	.sdata      start:0x804D3CE8 end:0x804D3CF8
+	.sdata2     start:0x804D8FA8 end:0x804D8FC8
+
+melee/ft/ft_0D4D.c:
+	.text       start:0x800D4DD4 end:0x800D5AEC
+	.sdata      start:0x804D3CF8 end:0x804D3D08
+	.sdata2     start:0x804D8FC8 end:0x804D8FE0
 
 melee/ft/chara/ftCommon/ftCo_Landing.c:
 	.text       start:0x800D5AEC end:0x800D5F58
@@ -1016,9 +1023,9 @@ melee/ft/chara/ftCommon/ftCo_SquatRv.c:
 
 melee/ft/chara/ftCommon/ftCo_Attack100.c:
 	.text       start:0x800D67C4 end:0x800DC750
-	.rodata     start:0x803B7500 end:0x803B7520
+	.rodata     start:0x803B7510 end:0x803B7520
 	.data       start:0x803C709C end:0x803C70D0
-	.sdata      start:0x804D3CE8 end:0x804D3D58
+	.sdata      start:0x804D3D08 end:0x804D3D58
 	.sdata2     start:0x804D9008 end:0x804D90F0
 
 melee/ft/chara/ftCommon/ftCo_CaptureCut.c:

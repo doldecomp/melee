@@ -33,9 +33,7 @@ struct ftHurtboxInit {
 union ftCommon_MotionVars {
     struct {
         /* fp+2340 */ int x0;
-        /* fp+2344 */ f32 x4;
-        /* fp+2348 */ UNK_T x8;
-        /* fp+234C */ UNK_T xC;
+        /* fp+2344 */ Vec3 x4;
         /* fp+2350 */ UNK_T x10;
         /* fp+2354 */ float x14;
         /* fp+2358 */ float x18;

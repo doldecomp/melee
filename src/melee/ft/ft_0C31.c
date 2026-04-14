@@ -54,7 +54,7 @@ void ftCo_800C61B0(Fighter_GObj* gobj)
     fp->mv.co.entry.x14.z = fp->mv.co.entry.x8.z;
     HSD_JObjSetScale(jobj, &fp->mv.co.entry.x14);
 
-    fp->mv.co.common.x4 = fp->cur_pos.y;
+    fp->mv.co.common.x4.x = fp->cur_pos.y;
     Fighter_ChangeMotionState(gobj, ftCo_MS_Entry, 0, 0.0F, 1.0F, 0.0F, NULL);
     fp->invisible = true;
     fp->x2219_b1 = true;
