@@ -147,8 +147,8 @@ void ifTime_ShowTimers(void)
 
 int ifTime_GetCountdownSeconds(void)
 {
-    int centiseconds = gm_8016AF0C();
     int seconds = gm_8016AEEC();
+    int centiseconds = gm_8016AF0C();
     if (centiseconds == 0) {
         seconds = 5 - seconds;
     } else {
