@@ -1,24 +1,23 @@
 #include "itkirbycutterbeam.h"
 
-#include <placeholder.h>
-#include <platform.h>
-
 #include "db/db.h"
 #include "ft/chara/ftKirby/ftKb_Init.h"
-
-#include "it/forward.h"
-
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
-#include "it/types.h"
 #include "lb/lbvector.h"
 
 #include <math.h>
-#include <baselib/jobj.h>
 #include <MSL/trigf.h>
+
+ItemStateTable it_803F6798[] = {
+    NULL,
+    itKirbycutterbeam_UnkMotion0_Anim,
+    itKirbycutterbeam_UnkMotion0_Phys,
+    itKirbycutterbeam_UnkMotion0_Coll,
+};
 
 void it_8029BAB8(HSD_GObj* gobj, Vec3* pos, float facing_dir)
 {

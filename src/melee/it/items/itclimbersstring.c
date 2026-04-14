@@ -3,21 +3,17 @@
 #include "placeholder.h"
 
 #include "ft/chara/ftPopo/ftPp_SpecialS.h"
+#include "ft/ftlib.h"
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/itCharItems.h"
 #include "it/item.h"
+#include "it/items/itlinkhookshot.h"
 
 #include <dolphin/mtx.h>
 #include <dolphin/os/OSError.h>
 #include <baselib/gobjplink.h>
 #include <baselib/jobj.h>
-
-/* 2C248C */ static void it_802C248C(Item* ip, HSD_JObj* jobj);
-/* 2C28DC */ static void fn_802C28DC(Item_GObj* gobj);
-/* 2C29E8 */ static void fn_802C29E8(Item_GObj* gobj);
-/* 2C2AF4 */ static void fn_802C2AF4(HSD_GObj* gobj);
-/* 2C33B8 */ static void it_802C33B8(Item* item);
 
 void it_802C2750(Item_GObj* gobj)
 {
@@ -73,6 +69,201 @@ Item_GObj* it_802C27D4(Fighter_GObj* owner, Vec3* pos, int msid, float dir)
 void fn_802C28B8(Item_GObj* gobj)
 {
     it_802C33B8(GET_ITEM(gobj));
+}
+
+static void fn_802C28DC(Item_GObj* gobj)
+{
+    Vec3 pos;
+    f32 pad[1];
+    Mtx m;
+    Item* ip = GET_ITEM(gobj);
+    itClimbersStringAttributes* attrs =
+        ip->xC4_article_data->x4_specialAttributes;
+    ItemLink* link = ip->xDD4_itemVar.climbersstring.x4;
+
+    link->x2C_b0 = true;
+    PSMTXIdentity(m);
+    m[0][3] = 0.0f;
+    m[1][3] = 0.0f;
+    m[2][3] = 0.0f;
+    HSD_JObjSetupMatrix(link->jobj);
+    PSMTXConcat(link->jobj->mtx, m, m);
+    pos.x = m[0][3];
+    pos.y = m[1][3];
+    pos.z = m[2][3];
+    it_802C2EC4(link, &pos, attrs, ip);
+    it_802C3520(ip, &pos);
+}
+
+static void fn_802C29E8(Item_GObj* gobj)
+{
+    Vec3 pos;
+    f32 pad[1];
+    Mtx m;
+    Item* ip = GET_ITEM(gobj);
+    itClimbersStringAttributes* attrs =
+        ip->xC4_article_data->x4_specialAttributes;
+    ItemLink* link = ip->xDD4_itemVar.climbersstring.x4;
+
+    link->x2C_b0 = true;
+    PSMTXIdentity(m);
+    m[0][3] = 0.0f;
+    m[1][3] = 0.0f;
+    m[2][3] = 0.0f;
+    HSD_JObjSetupMatrix(link->jobj);
+    PSMTXConcat(link->jobj->mtx, m, m);
+    pos.x = m[0][3];
+    pos.y = m[1][3];
+    pos.z = m[2][3];
+    it_802C30E8(link, &pos, attrs, ip);
+    it_802C3520(ip, &pos);
+}
+
+static void fn_802C2AF4(HSD_GObj* gobj)
+{
+    Vec3 pos;
+    Mtx m;
+    Item* ip = GET_ITEM(gobj);
+    itClimbersStringAttributes* attrs =
+        ip->xC4_article_data->x4_specialAttributes;
+    ItemLink* link = ip->xDD4_itemVar.climbersstring.x8;
+
+    PSMTXIdentity(m);
+    m[0][3] = 0.0f;
+    m[1][3] = 0.0f;
+    m[2][3] = 0.0f;
+    HSD_JObjSetupMatrix(link->jobj);
+    PSMTXConcat(link->jobj->mtx, m, m);
+    pos.x = m[0][3];
+    pos.y = m[1][3];
+    pos.z = m[2][3];
+    if (it_802C32D4(link, &pos, attrs, ip,
+                    ip->xDD4_itemVar.climbersstring.x0) != 0)
+    {
+        it_2725_Logic70_PickedUp(gobj);
+    }
+    it_802C3520(ip, &pos);
+}
+
+void it_802C2CA8(ItemLink* link, Vec3* target,
+                 itClimbersStringAttributes* attrs, f32 length)
+{
+    Vec3 dir;
+    ItemLink* cur = link;
+    ItemLink* prev = link->prev;
+
+    it_802A3C98(&cur->pos, target, &dir);
+    cur->pos.x = (dir.x * length) + target->x;
+    cur->pos.y = (dir.y * length) + target->y;
+    cur->pos.z = (dir.z * length) + target->z;
+    while (prev != NULL) {
+        if (prev->x2C_b0) {
+            if (it_802A3C98(&prev->pos, &cur->pos, &dir) > attrs->x8) {
+                prev->pos.x = (dir.x * attrs->x8) + cur->pos.x;
+                prev->pos.y = (dir.y * attrs->x8) + cur->pos.y;
+                prev->pos.z = (dir.z * attrs->x8) + cur->pos.z;
+            }
+        }
+        cur = prev;
+        prev = prev->prev;
+    }
+}
+
+void it_802C2DB0(ItemLink* cur, Vec3* target,
+                 itClimbersStringAttributes* attrs, f32 length)
+{
+    Vec3 dir;
+    ItemLink* prev = cur->prev;
+
+    it_802A3C98(&cur->pos, target, &dir);
+    cur->pos.x = (dir.x * length) + target->x;
+    cur->pos.y = (dir.y * length) + target->y;
+    cur->pos.z = (dir.z * length) + target->z;
+    while (prev != NULL) {
+        prev->vel.y -= attrs->x14;
+        it_802A4420(prev);
+        if (it_802A3C98(&prev->pos, &cur->pos, &dir) > attrs->x8) {
+            prev->pos.x = (dir.x * attrs->x8) + cur->pos.x;
+            prev->pos.y = (dir.y * attrs->x8) + cur->pos.y;
+            prev->pos.z = (dir.z * attrs->x8) + cur->pos.z;
+        }
+        cur = prev;
+        prev = prev->prev;
+    }
+}
+
+s32 it_802C32D4(ItemLink* cur, Vec3* pos, itClimbersStringAttributes* attrs,
+                Item* ip, f32 dist)
+{
+    Vec3 dir;
+    ItemLink* prev = cur->prev;
+    f32 len;
+    f32 step;
+
+    while (prev != NULL && !cur->x2C_b0) {
+        cur = prev;
+        prev = prev->prev;
+    }
+    len = it_802A3C98(&cur->pos, pos, &dir);
+    while (prev != NULL && dist > len) {
+        cur->x2C_b0 = false;
+        len = it_802A3C98(&prev->pos, pos, &dir);
+        cur = prev;
+        prev = prev->prev;
+    }
+    step = len - dist;
+    if (step > attrs->x8) {
+        step = attrs->x8;
+    }
+    it_802C2DB0(cur, pos, attrs, step);
+    if (prev != NULL) {
+        return 0;
+    }
+    return 1;
+}
+
+static inline void itClimbersstring_Cleanup(Item_GObj* gobj)
+{
+    if (gobj != NULL) {
+        Item* ip = GET_ITEM(gobj);
+        if (ip->owner != NULL) {
+            ftPp_SpecialS_8012114C(ip->owner);
+        }
+        ip->owner = NULL;
+        ip->xDD4_itemVar.climbersstring.xC = NULL;
+        {
+            ItemLink* cur;
+            for (cur = ip->xDD4_itemVar.climbersstring.x4; cur != NULL;) {
+                HSD_GObj* cur_gobj = cur->gobj;
+                cur = cur->next;
+                HSD_GObjPLink_80390228(cur_gobj);
+            }
+        }
+    }
+}
+
+bool itClimbersstring_UnkMotion3_Anim(Item_GObj* gobj)
+{
+    s32 should_cleanup;
+    Item* ip = GET_ITEM(gobj);
+    HSD_GObj* owner = ip->owner;
+
+    if (owner != NULL) {
+        enum_t action = ftLib_80086C0C(owner);
+        if (action >= 0x15B && action <= 0x164) {
+            should_cleanup = 0;
+        } else {
+            should_cleanup = 1;
+        }
+    } else {
+        should_cleanup = 1;
+    }
+    if (should_cleanup != 0) {
+        itClimbersstring_Cleanup(gobj);
+        return true;
+    }
+    return false;
+    PAD_STACK(8);
 }
 
 void it_2725_Logic70_EvtUnk(Item_GObj* arg0, Item_GObj* arg1)
