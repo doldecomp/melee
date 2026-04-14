@@ -381,11 +381,6 @@ void grGreens_80213C10(Ground_GObj* gobj)
     // }
 }
 
-void fn_802159B4(Item_GObj* item_gobj, Ground* gp)
-{
-    return;
-}
-
 void grGreens_80214654(Ground_GObj* arg)
 {
     return;
@@ -585,7 +580,10 @@ void grGreens_80215358(Ground_GObj* gobj, int i, int j, int arg3, int arg4)
     mpLib_80057424(block->x18);
 }
 
-/// #fn_802159B4
+void fn_802159B4(Item_GObj* item_gobj, Ground* gp)
+{
+    return;
+}
 
 void grGreens_802159B8(Ground* gp, int i, int j, int value)
 {

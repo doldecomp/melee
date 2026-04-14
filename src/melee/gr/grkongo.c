@@ -5,7 +5,9 @@
 #include "grmaterial.h"
 #include "types.h"
 
+#include "ef/efsync.h"
 #include "ft/ftdevice.h"
+#include "ft/ftlib.h"
 #include "gm/gm_unsplit.h"
 #include "gr/granime.h"
 #include "gr/grdisplay.h"
@@ -1560,7 +1562,45 @@ HSD_GObj* grKongo_801D8078(HSD_GObj* gobj)
     return NULL;
 }
 
-/// #fn_801D8134
+static int fn_801D8134(HSD_GObj* arg0, HSD_GObj* arg1)
+{
+    Ground* gp;
+    Vec3 pos_gnd;
+    Vec3 pos_ft;
+    f32 unk;
+    f32 rand_val;
+    f32 diff;
+
+    gp = GET_GROUND(arg0);
+
+    if (gp->gv.kongo3.xC6 != 0) {
+        goto done;
+    }
+
+    Ground_801C4DA0(&pos_gnd, &unk);
+    ftLib_80086644(arg1, &pos_ft);
+
+    if (!((pos_gnd.x - pos_ft.x) * (pos_gnd.x - pos_ft.x) +
+          (pos_gnd.y - pos_ft.y) * (pos_gnd.y - pos_ft.y) +
+          (pos_gnd.z - pos_ft.z) * (pos_gnd.z - pos_ft.z) <
+          grKg_804D6980->unk28 * grKg_804D6980->unk28)) {
+        goto done;
+    }
+
+    rand_val = HSD_Randf();
+    diff = grKg_804D6980->unk24 - grKg_804D6980->unk20;
+    gp->gv.kongo3.xCA =
+        (s16)(diff * rand_val + grKg_804D6980->unk20);
+    gp->gv.kongo3.xD0 = (HSD_JObj*) arg1;
+    gp->gv.kongo3.xC6 = 1;
+    Ground_801C5440(gp, 0, 0x129U);
+    grMaterial_801C9604(arg0, grKg_804D6980->unk84, 0);
+    efSync_Spawn(0x405, arg0, &pos_ft);
+    ftLib_80086C18(arg1, 0xD, 0x1E);
+    return 1;
+done:
+    return 0;
+}
 
 void grKongo_801D8270(Ground_GObj* gobj)
 {
