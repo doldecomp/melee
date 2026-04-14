@@ -1559,9 +1559,9 @@ HSD_JObj* grCastle_801CF868(Ground_GObj* gobj)
     }
 }
 
-void fn_801CFAFC(Item_GObj* item, Ground* gp, Vec3* pos, HSD_GObj* gobj,
-                 f32 arg4)
+void fn_801CFAFC(Item_GObj* item, Ground* gp, Vec3* pos, HSD_GObj* gobj)
 {
+    PAD_STACK(4);
     *(s16*) &gp->gv.castle2.xC4 = 4;
     if (ftLib_80086960(gobj)) {
         ftLib_80086A4C(gobj, (f32) grCs_804D6970->x4);

@@ -1951,7 +1951,7 @@ void it_802A7840(HSD_GObj* arg0)
     itLinkHookshot_Logic20_PickedUp_inline(arg0);
 }
 
-void it_802A78B8(HSD_GObj* arg0, Vec3* arg1, f32 arg2)
+void it_802A78B8(HSD_GObj* arg0, Vec3* arg1)
 {
     ItemLink* item_link;
     Item* item;

@@ -5047,12 +5047,8 @@ void it_80272A60(Item_GObj* item_gobj)
 
 void it_80272AC4(Item_GObj* item_gobj, Vec3* arg1)
 {
-    Item* item;
-    Vec3* temp;
-
-    item = item_gobj->user_data;
-    // mut add + return i guess?
-    temp = lbVector_Add(arg1, &item->pos);
+    Item* item = GET_ITEM(item_gobj);
+    lbVector_Add(arg1, &item->pos);
     efSync_Spawn(0x40C, item_gobj, arg1);
     Item_8026AE84(item, 0x74, 0x7F, 0x40);
     it_80274C60(item_gobj);
@@ -5154,17 +5150,12 @@ s32 it_80272D40(Item_GObj* item_gobj)
     return 2;
 }
 
-bool itColl_BounceOffVictim(Item_GObj* item_gobj)
+void itColl_BounceOffVictim(Item_GObj* gobj)
 {
-    Item* item;
-    ItemCommonData* val;
-
-    item = item_gobj->user_data;
-    // needs x58-x60 to be f32 type, otherwise requires pointer casting
+    Item* item = GET_ITEM(gobj);
     item->x40_vel.x *= it_804D6D28->x58_float;
-    val = it_804D6D28;
-    item->x40_vel.y = (item->x40_vel.y * val->x5C_float) + val->x60_float;
-    return (bool) val; // i have no idea what this means
+    item->x40_vel.y =
+        (item->x40_vel.y * it_804D6D28->x5C_float) + it_804D6D28->x60_float;
 }
 
 void it_80272DE4(HSD_JObj* jobj, f32 scale)
@@ -6104,7 +6095,7 @@ void it_80274ED8(void)
     it_804D6D0C++;
 }
 
-void it_80274EE8(u32 arg0)
+void it_80274EE8(void)
 {
     it_804D6D08++;
 }
@@ -9959,18 +9950,13 @@ void it_8027B964(Item_GObj* item_gobj, bool chk)
     item->x40_vel = sp14;
 }
 
-/// static inline u32 copy(u32 len, Vec3* src, Vec3* dst) {
-///     *dst = *src;
-///     return len;
-/// }
-
 int it_8027BA54(HSD_GObj* item_gobj, Vec3* arg1)
 {
     Vec3 sp20;
     Vec3 sp14;
     Item* item;
 
-    item = GET_ITEM((HSD_GObj*) item_gobj);
+    item = GET_ITEM(item_gobj);
     Camera_GetTransformPosition(&sp20);
     sp20.x = ((10.0f * (HSD_Randf() - it_804DC7F8)) + sp20.x);
     sp20.y += 30.0f * HSD_Randf();
@@ -9979,7 +9965,6 @@ int it_8027BA54(HSD_GObj* item_gobj, Vec3* arg1)
     sp14.x *= 10.0f;
     sp14.y *= 10.0f;
     sp14.z *= 10.0f;
-    // copy(3, &sp14, arg1);
     *arg1 = sp14;
 }
 

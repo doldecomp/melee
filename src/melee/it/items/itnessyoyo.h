@@ -4,8 +4,8 @@
 #include "it/forward.h"
 
 #include "it/itCharItems.h"
-#include "it/itYoyo.h"
 #include "it/items/types.h"
+#include "it/itYoyo.h"
 
 #include <dolphin/mtx.h>
 
@@ -14,7 +14,7 @@
 /* 2BE5D8 */ void it_802BE5D8(void*, float);
 /* 2BE65C */ UNK_RET it_802BE65C(UNK_PARAMS);
 /* 2BE958 */ void it_802BE958(void*);
-/* 2BE9D8 */ HSD_GObj* it_802BE9D8(float, HSD_GObj*, Vec3*, s32);
+/* 2BE9D8 */ HSD_GObj* it_802BE9D8(HSD_GObj*, f32, Vec3*, s32);
 /* 2BEB38 */ void itNessyoyo_UnkMotion0_Phys(Item_GObj* gobj);
 /* 2BEB5C */ void itNessyoyo_UnkMotion1_Phys(Item_GObj* gobj);
 /* 2BEC58 */ void itNessyoyo_UnkMotion2_Phys(Item_GObj* gobj);

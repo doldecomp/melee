@@ -2150,23 +2150,16 @@ void fn_80165E7C(MatchEnd* arg0)
                 int player_score = arg0->player_standings[i].score;
 
                 if (player_score < 0) {
-                    int team_score =
-                        arg0->team_standings[team].score;
+                    int team_score = arg0->team_standings[team].score;
                     if (team_score == 0) {
-                        arg0->team_standings[team].score =
-                            player_score;
-                    } else if (team_score < 0 &&
-                               team_score < player_score)
-                    {
-                        arg0->team_standings[team].score =
-                            player_score;
+                        arg0->team_standings[team].score = player_score;
+                    } else if (team_score < 0 && team_score < player_score) {
+                        arg0->team_standings[team].score = player_score;
                     }
                 } else {
-                    int team_score =
-                        arg0->team_standings[team].score;
+                    int team_score = arg0->team_standings[team].score;
                     if (team_score < 0) {
-                        arg0->team_standings[team].score =
-                            player_score;
+                        arg0->team_standings[team].score = player_score;
                     } else {
                         arg0->team_standings[team].score =
                             team_score + player_score;
@@ -2385,7 +2378,7 @@ void gm_80167470(s32 arg0, s32 arg1)
     }
 }
 
-void gm_801674C4(s8 arg0, u8 arg1, s8 arg2, s8 arg3, s32 arg4)
+void gm_801674C4(s8 arg0, u8 arg1, s8 arg2, s8 arg3, bool (*arg4)(s32))
 {
     s8 temp_r31;
     struct lbl_8046B488_t* new_var;
@@ -2856,7 +2849,7 @@ void fn_801689E4(HSD_JObj* arg0, DynamicModelDesc* arg1, int idx)
     HSD_JObjAddAnimAll(arg0, anim, matanim, shapeanim);
 }
 
-s32 fn_80168A6C(void* arg0, void* arg1, s32 idx)
+void fn_80168A6C(void* arg0, void* arg1, s32 idx)
 {
     struct {
         /* 0x00 */ s32** x0;
@@ -2868,19 +2861,19 @@ s32 fn_80168A6C(void* arg0, void* arg1, s32 idx)
     memzero(arg1, 0x20);
 
     if (src->x0[idx] != NULL) {
-        ((s32*)arg1)[0] = src->x0[idx][0];
-        ((s32*)arg1)[1] = src->x0[idx][1];
-        ((s32*)arg1)[2] = src->x0[idx][2];
-        ((s32*)arg1)[3] = src->x0[idx][3];
+        ((s32*) arg1)[0] = src->x0[idx][0];
+        ((s32*) arg1)[1] = src->x0[idx][1];
+        ((s32*) arg1)[2] = src->x0[idx][2];
+        ((s32*) arg1)[3] = src->x0[idx][3];
     }
 
     if (src->x4 != NULL) {
-        ((s32*)arg1)[5] = src->x4[0];
-        ((s32*)arg1)[6] = src->x4[1];
+        ((s32*) arg1)[5] = src->x4[0];
+        ((s32*) arg1)[6] = src->x4[1];
     }
 
-    ((s32*)arg1)[4] = src->x8;
-    ((s32*)arg1)[7] = src->xC;
+    ((s32*) arg1)[4] = src->x8;
+    ((s32*) arg1)[7] = src->xC;
 }
 
 f32 gm_80168B34(CharacterKind ckind, int arg1, int arg2)
@@ -3168,17 +3161,17 @@ bool gm_801693BC(int arg0)
     return false;
 }
 
-void fn_80169434(s32 arg0)
+void fn_80169434(bool (*fn)(s32))
 {
-    M2C_FIELD(&lbl_8046B488, s32*, 0x1B8) = arg0;
+    lbl_8046B488.x1B8 = fn;
 }
 
-bool fn_80169444(s32 arg0)
+bool fn_80169444(bool arg0)
 {
     struct lbl_8046B488_t* gp = &lbl_8046B488;
 
     if (gp->x1B8 != NULL) {
-        if (gp->x1B8() == 1) {
+        if (gp->x1B8(arg0) == 1) {
             gp->x1B8 = NULL;
             return true;
         }

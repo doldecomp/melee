@@ -9,6 +9,9 @@
 
 #include "ft/ftlib.h"
 #include "gr/ground.h"
+
+#include "it/forward.h"
+
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
@@ -24,7 +27,7 @@ s32 it_802EAF28(Item_GObj* item_gobj)
     return GET_ITEM(item_gobj)->xDD4_itemVar.likelike.x38;
 }
 
-void it_802EAF34(HSD_GObj* owner, Vec3* offset, int type)
+Item_GObj* it_802EAF34(HSD_GObj* owner, Vec3* offset, int type)
 {
     Item_GObj* item_gobj;
     Vec3 pos;
@@ -64,6 +67,7 @@ void it_802EAF34(HSD_GObj* owner, Vec3* offset, int type)
         }
         it_802EB268(item_gobj);
     }
+    return item_gobj;
 }
 
 void it_802EB1EC(Item_GObj* gobj)

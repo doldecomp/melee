@@ -8,6 +8,9 @@
 #include "ft/chara/ftKirby/ftKb_Init.h"
 #include "ft/chara/ftMewtwo/ftMt_SpecialN.h"
 #include "ft/ftlib.h"
+
+#include "it/forward.h"
+
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
@@ -134,8 +137,8 @@ HSD_GObj* it_802C5000(Item_GObj* parent, Vec3* pos, s32 kind, s32 bone,
     return item_gobj;
 }
 
-void it_802C519C(Item_GObj* parent, Vec3* pos, s32 kind, s32 max_charge,
-                 float facing_dir, float angle)
+Item_GObj* it_802C519C(Item_GObj* parent, Vec3* pos, s32 kind, s32 max_charge,
+                       float facing_dir, float angle)
 {
     SpawnItem spawn;
     Item_GObj* item_gobj;
@@ -217,6 +220,7 @@ void it_802C519C(Item_GObj* parent, Vec3* pos, s32 kind, s32 max_charge,
         ip->x40_vel.z = 0.0f;
         it_8026B3A8(item_gobj);
     }
+    return item_gobj;
 }
 
 void it_802C53F0(Item_GObj* gobj, Vec3* pos, float angle, float charge,

@@ -19,9 +19,9 @@ int it_802B1DEC(Item_GObj* arg0)
 
 /// #it_802B1DF8
 
-s32 it_802B1FC8(Item_GObj* gobj)
+void it_802B1FC8(Item_GObj* gobj)
 {
-    return it_802B22B8(gobj);
+    it_802B22B8(gobj);
 }
 
 void it_802B1FE8(Item_GObj* gobj, Vec3* pos)
@@ -125,9 +125,10 @@ bool itPikachuthunder_UnkMotion1_Coll(Item_GObj* gobj)
     return false;
 }
 
-s32 it_802B22B8(Item_GObj* gobj)
+void it_802B22B8(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
+    PAD_STACK(8);
     Item_80268E5C(gobj, 2, ITEM_UNK_0x1 | ITEM_HIT_PRESERVE);
     ip->xD44_lifeTimer = ip->xDD4_itemVar.pikachuthunder.x14;
     ip->xDD4_itemVar.pikachuthunder.x4 = 1;
@@ -142,7 +143,6 @@ s32 it_802B22B8(Item_GObj* gobj)
             }
         }
     }
-    PAD_STACK(8);
 }
 
 /// #itPikachuthunder_UnkMotion2_Anim

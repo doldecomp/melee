@@ -1417,7 +1417,7 @@ void ftKb_SpecialN_800F5874(Vec2* arg0)
     arg0->y = cd->xA0_radians;
 }
 
-HSD_Joint* ftKb_SpecialN_800F5898(Fighter_GObj* gobj, int arg1)
+HSD_Joint* ftKb_SpecialN_800F5898(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftData* ca = fp->ft_data;

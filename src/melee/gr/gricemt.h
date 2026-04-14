@@ -139,11 +139,11 @@ extern f32 grIm_804DB570;
 /* 1F9558 */ void fn_801F9558(Ground*, int, CollData*, s32, mpLib_GroundEnum,
                               float);
 /* 1F9668 */ void grIceMt_801F9668(float);
-/* 1F96E0 */ float grIceMt_801F96E0(float);
+/* 1F96E0 */ float grIceMt_801F96E0(HSD_GObj*, float);
 /* 1F98A8 */ bool grIceMt_801F98A8(HSD_GObj* param1);
 /* 1F993C */ f32 grIceMt_801F993C(s32, s32);
-/* 1F9ACC */ void grIceMt_801F9ACC(float);
-/* 1FA0BC */ UNK_RET grIceMt_801FA0BC(int);
+/* 1F9ACC */ void grIceMt_801F9ACC(HSD_GObj*, float);
+/* 1FA0BC */ UNK_RET grIceMt_801FA0BC(s16*);
 /* 1FA364 */ void grIceMt_801FA364(UNK_T, float*, HSD_GObjEvent, Ground_GObj*);
 /* 1FA4CC */ int fn_801FA4CC(int num);
 /* 1FA500 */ int grIceMt_801FA500(HSD_GObj*);

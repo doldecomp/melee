@@ -409,7 +409,8 @@ static void Item_802676F4(HSD_GObj* gobj)
         Item_804A0C64.x8++;
         break;
     case 2:
-        it_80274EE8(Item_804A0C64.x10++);
+        Item_804A0C64.x10++;
+        it_80274EE8();
         break;
     case 3:
         Item_804A0C64.x58++;

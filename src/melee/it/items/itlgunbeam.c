@@ -116,7 +116,8 @@ void it_80299528(Item_GObj* gobj, s32 arg1)
     }
 }
 
-void it_802996D0(HSD_GObj* owner_gobj, Vec3* pos, u32 arg2, f32 facing_dir)
+Item_GObj* it_802996D0(HSD_GObj* owner_gobj, Vec3* pos, u32 arg2,
+                       f32 facing_dir)
 {
     SpawnItem spawn;
     PAD_STACK(4);
@@ -174,6 +175,7 @@ void it_802996D0(HSD_GObj* owner_gobj, Vec3* pos, u32 arg2, f32 facing_dir)
 
             it_802998A0(gobj, owner_gobj, HSD_Randi(4));
         }
+        return gobj;
     }
 }
 

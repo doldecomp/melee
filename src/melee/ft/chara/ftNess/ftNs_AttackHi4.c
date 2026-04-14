@@ -550,7 +550,7 @@ void ftNs_AttackHi4_YoyoCreateItem(HSD_GObj* gobj)
 
     lb_8000B1CC(fp->parts[FtPart_R2ndNa].joint, NULL, &sp10);
     fp->fv.ns.yoyo_gobj =
-        it_802BE9D8(fp->facing_dir, gobj, &sp10, fp->motion_id);
+        it_802BE9D8(gobj, fp->facing_dir, &sp10, fp->motion_id);
     fp->x1984_heldItemSpec = fp->fv.ns.yoyo_gobj;
     if (fp->fv.ns.yoyo_gobj != NULL) {
         if (fp->death2_cb == NULL) {

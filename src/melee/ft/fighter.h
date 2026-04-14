@@ -57,7 +57,7 @@ struct plAllocInfo;
 /* 06CC30 */ void Fighter_UnkTakeDamage_8006CC30(Fighter* fp,
                                                  float damage_amount);
 /* 06CC7C */ void Fighter_TakeDamage_8006CC7C(Fighter*, float);
-/* 06CDA4 */ void Fighter_8006CDA4(Fighter* fp, s32 arg1, s32 arg2);
+/* 06CDA4 */ void Fighter_8006CDA4(Fighter* fp, s32 arg1);
 /* 06CF5C */ void Fighter_8006CF5C(Fighter* fp, s32 arg1);
 /* 06CFBC */ void Fighter_UnkSetFlag_8006CFBC(Fighter_GObj* gobj);
 /* 06CFE0 */ void Fighter_8006CFE0(Fighter_GObj* gobj);

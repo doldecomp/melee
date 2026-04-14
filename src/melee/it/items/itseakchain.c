@@ -357,7 +357,7 @@ int it_802BBB0C(ItemLink* link, Vec3* offset, Mtx mtx, float scale)
     return ret;
 }
 
-int it_802BBC38(ItemLink* link, Vec3* offset, Mtx arg2, f32 scale)
+void it_802BBC38(ItemLink* link, Vec3* offset, Mtx arg2, f32 scale)
 {
     Vec3 origin;
     ItemLink* cur = link->prev;
@@ -380,7 +380,6 @@ int it_802BBC38(ItemLink* link, Vec3* offset, Mtx arg2, f32 scale)
             cur->pos.z = origin.z * arg2[0][1] + prev->pos.z;
         }
     }
-    return ret;
 }
 
 enum_t it_802BBD64(ItemLink* link, Vec3* arg1, f32 (*arg2)[4])

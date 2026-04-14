@@ -751,9 +751,9 @@ void fn_800D7C60(Fighter_GObj* gobj)
 
     msid = fn_800D769C(fp, ftCo_MS_ItemScopeAirRapid);
     temp_gobj = gobj;
-    Fighter_ChangeMotionState(temp_gobj, msid, 0x02000000, *(f32*) &ftCo_804D9028,
-                              *(f32*) &ftCo_804D902C, *(f32*) &ftCo_804D9028,
-                              NULL);
+    Fighter_ChangeMotionState(temp_gobj, msid, 0x02000000,
+                              *(f32*) &ftCo_804D9028, *(f32*) &ftCo_804D902C,
+                              *(f32*) &ftCo_804D9028, NULL);
     ftCommon_ClampAirDrift(fp);
     fp->mv.co.common.x0 = *(s32*) ((u8*) p_ftCommonData + 0x5BC);
     fp->accessory4_cb = fn_800D80F4;
@@ -1365,14 +1365,13 @@ bool fn_800D9228(Fighter_GObj* gobj)
                 tether_ip->xC4_article_data->x4_specialAttributes;
 
             if (fp->mv.co.catch.x0 == (f32) da->x98) {
-                f32 x = tether_data->pos_x_0 * fp->facing_dir;
                 Vec3 pos;
-                UNUSED volatile u8 pad_b[8];
+                PAD_STACK(8);
 
-                pos.x = x;
+                pos.x = tether_data->pos_x_0 * fp->facing_dir;
                 pos.y = 0.0F;
                 pos.z = 0.0F;
-                it_802A78B8(tether_gobj, &pos, x);
+                it_802A78B8(tether_gobj, &pos);
                 if (fp->kind == FTKIND_CLINK) {
                     ft_PlaySFX(fp, 0x111B9, 0x7F, 0x40);
                 } else {
@@ -1458,8 +1457,7 @@ void ftCo_CatchPull_Anim(Fighter_GObj* gobj)
 
     switch (fp->kind) {
     case FTKIND_LINK:
-    case FTKIND_CLINK:
-    {
+    case FTKIND_CLINK: {
         Item_GObj* item_gobj = fp->fv.lk.xC;
         if (item_gobj == NULL) {
             should_transition = true;
@@ -1471,8 +1469,7 @@ void ftCo_CatchPull_Anim(Fighter_GObj* gobj)
         }
         break;
     }
-    case FTKIND_SAMUS:
-    {
+    case FTKIND_SAMUS: {
         Item_GObj* item_gobj = fp->fv.ss.x223C;
         if (item_gobj == NULL) {
             should_transition = true;
@@ -2299,8 +2296,8 @@ void fn_800DC070(Fighter_GObj* gobj)
     fp->self_vel.y = p_ftCommonData->x378;
     fp->mv.co.buryjump.x0 = 0;
     ftCo_800DC920(victim, gobj);
-    Fighter_ChangeMotionState(gobj, ftCo_MS_CaptureJump, 0, 0.0F, 1.0F,
-                              0.0F, NULL);
+    Fighter_ChangeMotionState(gobj, ftCo_MS_CaptureJump, 0, 0.0F, 1.0F, 0.0F,
+                              NULL);
 }
 
 void ftCo_CaptureJump_Anim(Fighter_GObj* gobj)

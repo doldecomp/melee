@@ -80,7 +80,7 @@
 /* 2EA804 */ bool it_802EA804(Item_GObj* gobj, f32 range);
 /* 2EA988 */ s32 it_802EA988(Item_GObj* gobj, f32 x_offset, f32 y_offset);
 /* 2EA9FC */ Item_GObj* it_802EA9FC(Vec3* pos, s32 facing_dir);
-/* 2EAAEC */ void it_802EAAEC(Item_GObj*, Fighter_GObj*, int, float);
+/* 2EAAEC */ void it_802EAAEC(Item_GObj*, Fighter_GObj*, int);
 /* 2EAC8C */ void it_802EAC8C(Item_GObj* gobj);
 /* 2EADD8 */ void it_802EADD8(Item_GObj* gobj);
 /* 2EAE80 */ void it_802EAE80(Item_GObj* gobj);

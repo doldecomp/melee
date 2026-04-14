@@ -5,14 +5,13 @@
 
 #include "it/forward.h"
 
-#include "it/itCommonItems.h"
 #include "it/items/types.h"
 
 #include <dolphin/mtx.h>
 
 /* 291BE0 */ HSD_GObj* it_80291BE0(Vec3*);
 /* 291C98 */ void itSScope_Logic21_Spawned(Item_GObj*);
-/* 291CCC */ itSScopeAttributes* it_80291CCC(Item_GObj* gobj, Vec3* pos);
+/* 291CCC */ void it_80291CCC(Item_GObj* gobj, Vec3* pos);
 /* 291CF4 */ s32 it_80291CF4(Item_GObj*, s32);
 /* 291D38 */ s32 it_80291D38(Item_GObj*, s32);
 /* 291DAC */ int it_80291DAC(Item_GObj*, int);

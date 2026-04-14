@@ -5,10 +5,9 @@
 #include "stdarg.h"
 #include "stddef.h"
 
-#include <MSL/trigf.h>
-
 #include "baselib/debug.h"
 #include "baselib/displayfunc.h"
+#include "baselib/psstructs.h"
 #include "baselib/rumble.h"
 #include "baselib/tobj.h"
 #include "dolphin/gx/GXCull.h"
@@ -44,6 +43,7 @@
 #include <baselib/tev.h>
 #include <melee/mp/mplib.h>
 #include <melee/sc/types.h>
+#include <MSL/trigf.h>
 
 typedef bool (*lb_803BA248_fn)(ColorOverlay*);
 
@@ -443,8 +443,7 @@ void lb_8001044C(DynamicsDesc* desc, void* colliders_raw, int num_colliders,
             s32 n = (u32) (rem8 + 7) >> 3;
             if (rem8 > 0) {
                 do {
-                    cur = cur->next->next->next->next->next->next->next
-                              ->next;
+                    cur = cur->next->next->next->next->next->next->next->next;
                     idx += 8;
                     skip_count += 8;
                 } while (--n);
@@ -537,9 +536,8 @@ void lb_8001044C(DynamicsDesc* desc, void* colliders_raw, int num_colliders,
                     lbVector_RotateAboutUnitAxis(
                         &link_dir, &cross_vec,
                         stiff_angle *
-                            (f32) (1.0 -
-                                   (f64) (cur->desc.lb_unk0.unk_4C *
-                                          desc->pos.x)));
+                            (f32) (1.0 - (f64) (cur->desc.lb_unk0.unk_4C *
+                                                desc->pos.x)));
                 }
             }
 
@@ -548,8 +546,7 @@ void lb_8001044C(DynamicsDesc* desc, void* colliders_raw, int num_colliders,
                 Vec3 grav_dir = lb_803B7280.v0;
                 f32 grav_angle = lbVector_Angle(&link_dir, &grav_dir);
                 if (grav_angle != 0.0f) {
-                    f32 grav_rot =
-                        cur->desc.lb_unk0.unk_8C * sinf(grav_angle);
+                    f32 grav_rot = cur->desc.lb_unk0.unk_8C * sinf(grav_angle);
                     if (grav_rot < 0.0f) {
                         grav_rot = -grav_rot;
                     }
@@ -592,10 +589,12 @@ void lb_8001044C(DynamicsDesc* desc, void* colliders_raw, int num_colliders,
 
             /* Apply max angle constraint */
             if (force_mag <
-                cur->desc.lb_unk0.unk_8C * cur->desc.lb_unk0.unk_48) {
+                cur->desc.lb_unk0.unk_8C * cur->desc.lb_unk0.unk_48)
+            {
                 Vec3 clamp_dir = saved_dir;
                 if (lbVector_Angle(&clamp_dir, &link_dir) >
-                    cur->desc.lb_unk0.unk_88) {
+                    cur->desc.lb_unk0.unk_88)
+                {
                     PSVECCrossProduct(&clamp_dir, &link_dir, &cross_vec);
                     lbVector_Normalize(&cross_vec);
                     lbVector_RotateAboutUnitAxis(&clamp_dir, &cross_vec,
@@ -607,13 +606,14 @@ void lb_8001044C(DynamicsDesc* desc, void* colliders_raw, int num_colliders,
             /* Apply convergence limit */
             if (cur->desc.lb_unk0.unk_50 > 0.0) {
                 if (lbVector_Angle(&natural_dir, &link_dir) <
-                    cur->desc.lb_unk0.unk_50) {
+                    cur->desc.lb_unk0.unk_50)
+                {
                     link_dir = natural_dir;
                 } else {
                     PSVECCrossProduct(&link_dir, &natural_dir, &cross_vec);
                     lbVector_Normalize(&cross_vec);
-                    lbVector_RotateAboutUnitAxis(
-                        &link_dir, &cross_vec, cur->desc.lb_unk0.unk_50);
+                    lbVector_RotateAboutUnitAxis(&link_dir, &cross_vec,
+                                                 cur->desc.lb_unk0.unk_50);
                 }
             }
 
@@ -623,9 +623,9 @@ void lb_8001044C(DynamicsDesc* desc, void* colliders_raw, int num_colliders,
                 if (dev_angle > cur->desc.lb_unk0.unk_68) {
                     PSVECCrossProduct(&link_dir, &natural_dir, &cross_vec);
                     lbVector_Normalize(&cross_vec);
-                    lbVector_RotateAboutUnitAxis(
-                        &link_dir, &cross_vec,
-                        dev_angle - cur->desc.lb_unk0.unk_68);
+                    lbVector_RotateAboutUnitAxis(&link_dir, &cross_vec,
+                                                 dev_angle -
+                                                     cur->desc.lb_unk0.unk_68);
                 }
             }
 
@@ -671,24 +671,21 @@ void lb_8001044C(DynamicsDesc* desc, void* colliders_raw, int num_colliders,
                                     lbVector_Angle(&coll_dir, &link_dir);
                                 if (0.0 != coll_angle) {
                                     f32 adj_radius =
-                                        (f32) (0.1 +
-                                               (f64) collider->radius);
-                                    f32 side_sq =
-                                        coll_dist * coll_dist -
-                                        adj_radius * adj_radius;
+                                        (f32) (0.1 + (f64) collider->radius);
+                                    f32 side_sq = coll_dist * coll_dist -
+                                                  adj_radius * adj_radius;
                                     if (side_sq > 0.0f) {
                                         side_sq = sqrtf(side_sq);
                                     }
                                     {
                                         f32 avoidance_angle =
                                             atan2f(adj_radius, side_sq);
-                                        avoidance_angle =
-                                            ABS(avoidance_angle);
+                                        avoidance_angle = ABS(avoidance_angle);
                                         avoidance_angle -= coll_angle;
                                         if (avoidance_angle > 0.0) {
-                                            PSVECCrossProduct(
-                                                &coll_dir, &link_dir,
-                                                &cross_vec);
+                                            PSVECCrossProduct(&coll_dir,
+                                                              &link_dir,
+                                                              &cross_vec);
                                             lbVector_Normalize(&cross_vec);
                                             lbVector_RotateAboutUnitAxis(
                                                 &link_dir, &cross_vec,
@@ -717,16 +714,15 @@ void lb_8001044C(DynamicsDesc* desc, void* colliders_raw, int num_colliders,
                         s32 floor_hit;
                         if (use_floor_fn != 0) {
                             floor_hit = lb_800103D8(
-                                &floor_point, end_x,
-                                (f32) (1.0 + (f64) end_y), end_x,
-                                (f32) ((f64) end_y - 1.0), pos_y);
+                                &floor_point, end_x, (f32) (1.0 + (f64) end_y),
+                                end_x, (f32) ((f64) end_y - 1.0), pos_y);
                         } else {
                             sp8 = 0;
                             floor_hit = mpCheckFloor(
                                 end_x, (f32) (1.0 + (f64) end_y), end_x,
-                                (f32) ((f64) end_y - 1.0), 0.1f,
-                                &floor_point, &line_id, &floor_flags,
-                                &floor_normal, -1, -1, -1, NULL, NULL);
+                                (f32) ((f64) end_y - 1.0), 0.1f, &floor_point,
+                                &line_id, &floor_flags, &floor_normal, -1, -1,
+                                -1, NULL, NULL);
                         }
                         PSVECCrossProduct(&gnd_norm, &link_dir, &floor_cross);
                         lbVector_Normalize(&floor_cross);
@@ -810,9 +806,9 @@ void lb_8001044C(DynamicsDesc* desc, void* colliders_raw, int num_colliders,
                                     PSVECCrossProduct(&gnd_norm, &link_dir,
                                                       &floor_cross2);
                                     lbVector_Normalize(&floor_cross2);
-                                    lbVector_RotateAboutUnitAxis(
-                                        &gnd_norm, &floor_cross2,
-                                        ground_angle);
+                                    lbVector_RotateAboutUnitAxis(&gnd_norm,
+                                                                 &floor_cross2,
+                                                                 ground_angle);
                                     on_ground = 1;
                                     link_dir = gnd_norm;
                                 }
@@ -879,7 +875,8 @@ void lb_8001044C(DynamicsDesc* desc, void* colliders_raw, int num_colliders,
             PSMTXMultVec(bone_mtx, &cross_vec, &local_axis);
             if (local_axis.x >= 0.00001f || local_axis.x <= -0.00001f ||
                 local_axis.y >= 0.00001f || local_axis.y <= -0.00001f ||
-                local_axis.z >= 0.00001f || local_axis.z <= -0.00001f) {
+                local_axis.z >= 0.00001f || local_axis.z <= -0.00001f)
+            {
                 HSD_QuatLib_8037ECE0(&local_axis, &angle_quat, angle_diff);
                 euler_angles.x = jobj->rotate.x;
                 euler_angles.y = jobj->rotate.y;
@@ -1239,11 +1236,8 @@ int lb_80011E24(HSD_JObj* root, HSD_JObj** result, ...)
                         next_node = NULL;
                         break;
                     }
-                    if (HSD_JObjGetNext(
-                            HSD_JObjGetParent(saved)) != NULL)
-                    {
-                        next_node = HSD_JObjGetNext(
-                            HSD_JObjGetParent(saved));
+                    if (HSD_JObjGetNext(HSD_JObjGetParent(saved)) != NULL) {
+                        next_node = HSD_JObjGetNext(HSD_JObjGetParent(saved));
                         break;
                     }
                     saved = HSD_JObjGetParent(saved);
@@ -1313,9 +1307,7 @@ int lb_8001204C(HSD_JObj* root, HSD_JObj** result, u16* indices, int count)
                         next_node = NULL;
                         break;
                     }
-                    if (HSD_JObjGetNext(
-                            HSD_JObjGetParent(saved)) != NULL)
-                    {
+                    if (HSD_JObjGetNext(HSD_JObjGetParent(saved)) != NULL) {
                         next_node = (saved = HSD_JObjGetNext(
                                          HSD_JObjGetParent(saved)));
                         break;
@@ -1393,7 +1385,7 @@ void lb_800122F0(HSD_ImageDesc* img, GXTexObj* tex, f32 factor)
 
     color0.b = (u8) (s8) (60.8f * factor);
     color1.b = (u8) (s8) temp;
-    color2.b = (u8) (s8) -((231.8f * factor) - 255.0f);
+    color2.b = (u8) (s8) - ((231.8f * factor) - 255.0f);
 
     color0.a = 0;
     color1.a = 0;
@@ -1422,36 +1414,36 @@ void lb_800122F0(HSD_ImageDesc* img, GXTexObj* tex, f32 factor)
         GXSetTevKColorSel(GX_TEVSTAGE1, GX_TEV_KCSEL_K1);
         GXSetTevKColorSel(GX_TEVSTAGE2, GX_TEV_KCSEL_K2);
         GXSetTevSwapMode(GX_TEVSTAGE0, GX_TEV_SWAP1, GX_TEV_SWAP1);
-        GXSetTevColorIn(GX_TEVSTAGE0, GX_CC_ZERO, GX_CC_TEXC,
-                        GX_CC_KONST, GX_CC_ZERO);
-        GXSetTevColorOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO,
-                        GX_CS_SCALE_1, 1, GX_TEVPREV);
+        GXSetTevColorIn(GX_TEVSTAGE0, GX_CC_ZERO, GX_CC_TEXC, GX_CC_KONST,
+                        GX_CC_ZERO);
+        GXSetTevColorOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1,
+                        GX_TEVPREV);
         GXSetTevSwapMode(GX_TEVSTAGE1, GX_TEV_SWAP2, GX_TEV_SWAP2);
-        GXSetTevColorIn(GX_TEVSTAGE1, GX_CC_ZERO, GX_CC_TEXC,
-                        GX_CC_KONST, GX_CC_CPREV);
-        GXSetTevColorOp(GX_TEVSTAGE1, GX_TEV_ADD, GX_TB_ZERO,
-                        GX_CS_SCALE_1, 1, GX_TEVPREV);
+        GXSetTevColorIn(GX_TEVSTAGE1, GX_CC_ZERO, GX_CC_TEXC, GX_CC_KONST,
+                        GX_CC_CPREV);
+        GXSetTevColorOp(GX_TEVSTAGE1, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1,
+                        GX_TEVPREV);
         GXSetTevSwapMode(GX_TEVSTAGE2, GX_TEV_SWAP3, GX_TEV_SWAP3);
-        GXSetTevColorIn(GX_TEVSTAGE2, GX_CC_ZERO, GX_CC_TEXC,
-                        GX_CC_KONST, GX_CC_CPREV);
-        GXSetTevColorOp(GX_TEVSTAGE2, GX_TEV_ADD, GX_TB_ZERO,
-                        GX_CS_SCALE_1, 1, GX_TEVPREV);
+        GXSetTevColorIn(GX_TEVSTAGE2, GX_CC_ZERO, GX_CC_TEXC, GX_CC_KONST,
+                        GX_CC_CPREV);
+        GXSetTevColorOp(GX_TEVSTAGE2, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1,
+                        GX_TEVPREV);
         GXSetTevAlphaIn(GX_TEVSTAGE1, GX_CA_ZERO, GX_CA_ZERO, GX_CA_ZERO,
                         GX_CA_APREV);
-        GXSetTevAlphaOp(GX_TEVSTAGE1, GX_TEV_ADD, GX_TB_ZERO,
-                        GX_CS_SCALE_1, 1, GX_TEVPREV);
+        GXSetTevAlphaOp(GX_TEVSTAGE1, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1,
+                        GX_TEVPREV);
         GXSetTevAlphaIn(GX_TEVSTAGE2, GX_CA_ZERO, GX_CA_ZERO, GX_CA_ZERO,
                         GX_CA_APREV);
-        GXSetTevAlphaOp(GX_TEVSTAGE2, GX_TEV_ADD, GX_TB_ZERO,
-                        GX_CS_SCALE_1, 1, GX_TEVPREV);
+        GXSetTevAlphaOp(GX_TEVSTAGE2, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1,
+                        GX_TEVPREV);
     } else {
         GXSetNumTevStages(1);
         GXSetTevOrder(GX_TEVSTAGE0, GX_TEXCOORD0, GX_TEXMAP0, GX_COLOR0A0);
         GXSetTevSwapMode(GX_TEVSTAGE0, GX_TEV_SWAP0, GX_TEV_SWAP0);
         GXSetTevColorIn(GX_TEVSTAGE0, GX_CC_ZERO, GX_CC_ZERO, GX_CC_ZERO,
                         GX_CC_TEXC);
-        GXSetTevColorOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO,
-                        GX_CS_SCALE_1, 1, GX_TEVPREV);
+        GXSetTevColorOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1,
+                        GX_TEVPREV);
     }
 
     GXSetBlendMode(GX_BM_BLEND, GX_BL_SRCALPHA, GX_BL_INVSRCALPHA,
@@ -1521,8 +1513,8 @@ void lb_8001285C(HSD_ImageDesc* image_desc, GXTexObj* tex_obj)
                    GX_LO_CLEAR);
 }
 
-void lb_80012994(HSD_ImageDesc* img, u8 alpha, u8 blur_size, f32 x,
-                 f32 y, f32 scale_x, f32 scale_y, f32 color_factor)
+void lb_80012994(HSD_ImageDesc* img, u8 alpha, u8 blur_size, f32 x, f32 y,
+                 f32 scale_x, f32 scale_y, f32 color_factor)
 {
     GXTexObj tex;
     GXColor color;
@@ -1790,8 +1782,8 @@ void fn_80013614(HSD_GObj* gobj)
         GXSetTevColor(GX_TEVREG0, color);
         GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_TEXA, GX_CA_ZERO, GX_CA_A0,
                         GX_CA_ZERO);
-        GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1,
-                        1, GX_TEVPREV);
+        GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, 1,
+                        GX_TEVPREV);
         lb_8001271C(&tex_obj, x0, x4, (f32) width, (f32) height, x8, xC);
         HSD_StateInvalidate(2);
     }
@@ -1802,7 +1794,7 @@ void fn_800138AC(void* ptr)
     HSD_Free(ptr);
 }
 
-void lb_800138CC(HSD_GObj* gobj, int arg1)
+void lb_800138CC(HSD_GObj* gobj, HSD_GObjEvent arg1)
 {
     struct lb_800138D8_t* data = HSD_GObjGetUserData(gobj);
     data->x18 = arg1;
@@ -2190,7 +2182,7 @@ bool lb_80014770(Vec3* arg0, int arg1)
         GXSetColorUpdate(GX_TRUE);
         GXSetAlphaUpdate(GX_FALSE);
         GXSetBlendMode(GX_BM_BLEND, GX_BL_SRCALPHA, GX_BL_INVSRCALPHA,
-                        GX_LO_NOOP);
+                       GX_LO_NOOP);
         GXSetAlphaCompare(GX_GREATER, 0, GX_AOP_AND, GX_GREATER, 0);
         GXSetZMode(GX_TRUE, GX_LEQUAL, GX_FALSE);
         GXSetZCompLoc(GX_FALSE);
@@ -2198,11 +2190,11 @@ bool lb_80014770(Vec3* arg0, int arg1)
         GXSetTevClampMode(GX_TEVSTAGE0, 0);
         GXSetNumTevStages(1);
         GXSetTevOrder(GX_TEVSTAGE0, GX_TEXCOORD_NULL, GX_TEXMAP_NULL,
-                       GX_COLOR0A0);
+                      GX_COLOR0A0);
         GXSetTevOp(GX_TEVSTAGE0, GX_PASSCLR);
         GXSetNumChans(1);
         GXSetChanCtrl(GX_COLOR0A0, GX_FALSE, GX_SRC_REG, GX_SRC_VTX, 0,
-                       GX_DF_NONE, GX_AF_NONE);
+                      GX_DF_NONE, GX_AF_NONE);
         GXSetCullMode(GX_CULL_NONE);
         GXClearVtxDesc();
         GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_POS, GX_POS_XYZ, GX_F32, 0);

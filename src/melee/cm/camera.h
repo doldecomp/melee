@@ -50,8 +50,8 @@
 /* 02D85C */ void Camera_8002D85C(void* unused);
 /* 02DDC4 */ void Camera_8002DDC4(void*);
 /* 02DFE4 */ s32 Camera_8002DFE4(Vec3*, Vec3*, CameraTransformState*);
-/* 02E158 */ s32 Camera_8002E158(f32*, f32, f32);
-/* 02E234 */ s32 Camera_8002E234(void);
+/* 02E158 */ bool Camera_8002E158(f32*, f32, f32);
+/* 02E234 */ bool Camera_8002E234(void);
 /* 02E490 */ void Camera_8002E490(void*);
 /* 02E6FC */ void Camera_8002E6FC(int);
 /* 02E818 */ void Camera_8002E818(Vec*);

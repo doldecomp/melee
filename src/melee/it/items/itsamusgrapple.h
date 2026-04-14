@@ -13,7 +13,7 @@
 
 /* 2A77DC */ void it_802A77DC(Item_GObj* gobj);
 /* 2B7150 */ void itSamusGrapple_Logic53_Spawned(Item_GObj*);
-/* 2B7160 */ s32 it_802B7160(Fighter_GObj*, void*);
+/* 2B7160 */ void it_802B7160(Fighter_GObj*, void*);
 /* 2B743C */ void it_802B743C(HSD_GObj*, Item*, s32);
 /* 2B75FC */ HSD_JObj* it_802B75FC(Item*, HSD_JObj*, s32, f32);
 /* 2B7B84 */ void it_802B7B84(Item_GObj* gobj);
@@ -62,7 +62,7 @@
 /* 2BAA08 */ void it_802BAA08(Item_GObj* gobj);
 /* 2BAA58 */ void it_802BAA58(Item_GObj* gobj);
 /* 2BAA94 */ void it_802BAA94(Item_GObj* gobj);
-/* 2BAAE4 */ void it_802BAAE4(Item_GObj* gobj, Vec3* vel, f32 unused);
+/* 2BAAE4 */ void it_802BAAE4(Item_GObj* gobj, Vec3* vel);
 /* 2BAB40 */ void it_802BAB40(Item_GObj*);
 /* 2BAB7C */ void it_802BAB7C(Item_GObj*);
 /* 2BABB8 */ void it_802BABB8(Item_GObj* gobj);

@@ -787,10 +787,10 @@ void fn_8018DF68(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
 
     PAD_STACK(8);
 
-    c0 = (GXColor){ 255, 255, 0, 255 };
-    c10 = (GXColor){ 255, 255, 0, 255 };
+    c0 = (GXColor) { 255, 255, 0, 255 };
+    c10 = (GXColor) { 255, 255, 0, 255 };
     thickness = ((BracketEntry*) data)->x1C;
-    c1 = (GXColor){ 255, 255, 0, 255 };
+    c1 = (GXColor) { 255, 255, 0, 255 };
     DrawRectangle((f32) arg1, (f32) arg2, thickness, (f32) arg4, &c1);
 
     right = arg1 + arg3;
@@ -3088,7 +3088,7 @@ void fn_80192BB0(void)
     }
 }
 
-s32 fn_80192E6C(void)
+void fn_80192E6C(void)
 {
     int new_var;
     HSD_GObj* gobj;
@@ -3142,8 +3142,7 @@ s32 fn_80192E6C(void)
         fn_8018FBD8((void*) gobj, j);
     }
 
-    return (s32) fn_8019035C(1, lbl_804D6650->models[1], 0, 0x1A, 2, 1,
-                             fn_80192690, 0.0f);
+    fn_8019035C(1, lbl_804D6650->models[1], 0, 0x1A, 2, 1, fn_80192690, 0.0f);
 }
 
 #pragma push
@@ -4900,9 +4899,7 @@ void fn_80196684(s32 bracket_idx)
     lbl_80473AB8[bracket_idx].x78 = 1;
 }
 
-/// #fn_801967E0
-
-s32 fn_801967E0(s32 arg0)
+void fn_801967E0(s32 arg0)
 {
     s32 rand;
     BracketEntry* ent = &lbl_80473AB8[arg0];
@@ -4919,11 +4916,11 @@ s32 fn_801967E0(s32 arg0)
             if (rand < (s32) ent->xA9) {
                 ent->xA4 = 2;
                 ent->xD0 = 3;
-                return rand;
+                return;
             }
             ent->xA4 = 3;
             ent->xD0 = 2;
-            return rand;
+            return;
         }
         if (rand < (s32) (ent->x7D + ent->xA9)) {
             ent->xA4 = 1;
@@ -4931,22 +4928,22 @@ s32 fn_801967E0(s32 arg0)
             if (rand < (s32) ent->x7D) {
                 ent->x78 = 2;
                 ent->xD0 = 3;
-                return rand;
+                return;
             }
             ent->x78 = 3;
             ent->xD0 = 2;
-            return rand;
+            return;
         }
         ent->xD0 = 1;
         rand = HSD_Randi(ent->x7D + ent->xA9);
         if (rand < (s32) ent->xA9) {
             ent->x78 = 2;
             ent->xA4 = 3;
-            return rand;
+            return;
         }
         ent->x78 = 3;
         ent->xA4 = 2;
-        return rand;
+        return;
     }
 
     if (rand < (s32) (ent->x51 + ent->x7D)) {
@@ -4958,11 +4955,11 @@ s32 fn_801967E0(s32 arg0)
             if (rand < (s32) ent->xA9) {
                 ent->xA4 = 2;
                 ent->xD0 = 3;
-                return rand;
+                return;
             }
             ent->xA4 = 3;
             ent->xD0 = 2;
-            return rand;
+            return;
         }
         if (rand < (s32) (ent->x51 + ent->xA9)) {
             ent->xA4 = 1;
@@ -4970,22 +4967,22 @@ s32 fn_801967E0(s32 arg0)
             if (rand < (s32) ent->x51) {
                 ent->x4C = 2;
                 ent->xD0 = 3;
-                return rand;
+                return;
             }
             ent->x4C = 3;
             ent->xD0 = 2;
-            return rand;
+            return;
         }
         ent->xD0 = 1;
         rand = HSD_Randi(ent->x51 + ent->xA9);
         if (rand < (s32) ent->x51) {
             ent->x4C = 2;
             ent->xA4 = 3;
-            return rand;
+            return;
         }
         ent->x4C = 3;
         ent->xA4 = 2;
-        return rand;
+        return;
     }
 
     if (rand < (s32) (ent->xA9 + ent->x51 + ent->x7D)) {
@@ -4997,11 +4994,11 @@ s32 fn_801967E0(s32 arg0)
             if (rand < (s32) ent->x7D) {
                 ent->x78 = 2;
                 ent->xD0 = 3;
-                return rand;
+                return;
             }
             ent->x78 = 3;
             ent->xD0 = 2;
-            return rand;
+            return;
         }
         if (rand < (s32) (ent->x51 + ent->x7D)) {
             ent->x78 = 1;
@@ -5009,22 +5006,22 @@ s32 fn_801967E0(s32 arg0)
             if (rand < (s32) ent->x51) {
                 ent->x4C = 2;
                 ent->xD0 = 3;
-                return rand;
+                return;
             }
             ent->x4C = 3;
             ent->xD0 = 2;
-            return rand;
+            return;
         }
         ent->xD0 = 1;
         rand = HSD_Randi(ent->x51 + ent->x7D);
         if (rand < (s32) ent->x51) {
             ent->x4C = 2;
             ent->x78 = 3;
-            return rand;
+            return;
         }
         ent->x4C = 3;
         ent->x78 = 2;
-        return rand;
+        return;
     }
 
     ent->xD0 = 0;
@@ -5035,11 +5032,11 @@ s32 fn_801967E0(s32 arg0)
         if (rand < (s32) ent->x7D) {
             ent->x78 = 2;
             ent->xA4 = 3;
-            return rand;
+            return;
         }
         ent->x78 = 3;
         ent->xA4 = 2;
-        return rand;
+        return;
     }
     if (rand < (s32) (ent->x51 + ent->x7D)) {
         ent->x78 = 1;
@@ -5047,22 +5044,22 @@ s32 fn_801967E0(s32 arg0)
         if (rand < (s32) ent->x51) {
             ent->x4C = 2;
             ent->xA4 = 3;
-            return rand;
+            return;
         }
         ent->x4C = 3;
         ent->xA4 = 2;
-        return rand;
+        return;
     }
     ent->xA4 = 1;
     rand = HSD_Randi(ent->x51 + ent->x7D);
     if (rand < (s32) ent->x51) {
         ent->x4C = 2;
         ent->x78 = 3;
-        return rand;
+        return;
     }
     ent->x4C = 3;
     ent->x78 = 2;
-    return rand;
+    return;
 }
 
 s32 fn_80196CF8(void)

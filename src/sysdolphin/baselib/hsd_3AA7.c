@@ -55,16 +55,16 @@ s32 fn_803AC168(s32* cmd_buf)
     return 0;
 }
 
-void fn_803AC258(s32 card_state, s32 block_idx)
+void fn_803AC258(CardState* card_state, s32 block_idx)
 {
     s32 buf[9];
     buf[0] = 13;
-    buf[1] = card_state;
+    buf[1] = (s32) card_state;
     buf[4] = block_idx;
     buf[5] = 0;
     buf[6] = 0;
     buf[8] = 0;
-    buf[7] = fn_803ACBE8((CardState*) card_state, block_idx);
+    buf[7] = fn_803ACBE8(card_state, block_idx);
     fn_803AC168(buf);
 }
 
@@ -218,7 +218,6 @@ s32 fn_803ACB74(s32 seq_a, s32 seq_b)
     return diff;
 }
 
-/// @todo Currently 75.56% match - mwcc reassociates addition order
 s32 fn_803ACBE8(CardState* state, s32 block_idx)
 {
     u32 size = state->x8;
@@ -618,7 +617,7 @@ s32 fn_803B1F78(CardState* state, s32 channel, s32 file_id, s32 seq_num,
         return result;
     }
 
-    result = fn_803B1338((s32) state, 1);
+    result = fn_803B1338(state, 1);
     if (result < 0) {
         snap = hsd_804D7998;
         if (snap >= 0) {
@@ -745,7 +744,6 @@ void hsd_803B24E4(s32* ctx, int channel, int file_no, void* work_buf)
 
 /// #hsd_803B2550
 
-/// @todo Currently 90.00% match - same regalloc issue as fn_803ACBE8
 s32 hsd_803B2674(CardState* state)
 {
     s32 blocks;

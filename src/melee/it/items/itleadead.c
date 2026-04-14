@@ -1041,14 +1041,14 @@ Item_GObj* it_802EA9FC(Vec3* pos, s32 facing_dir)
     return gobj;
 }
 
-void it_802EAAEC(Item_GObj* gobj, Fighter_GObj* fobj, int part, f32 val)
+void it_802EAAEC(Item_GObj* gobj, Fighter_GObj* fobj, int part)
 {
     Vec3 sp24;
     Item* ip2;
     Item* ip;
     HSD_JObj* jobj;
     s32 facing;
-    PAD_STACK(4);
+    PAD_STACK(8);
 
     ip = GET_ITEM(gobj);
     ip->xDD4_itemVar.leadead.x3C = -12.0f;

@@ -133,7 +133,7 @@ void grYorster_8020215C(Ground_GObj* gobj)
 void grYorster_80202160(HSD_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
-    grYorster_802022A4();
+    grYorster_802022A4(gobj);
     Ground_801C2FE0(gobj);
     mpLib_80058560();
     gp->gv.yorster.xC4 = 0;
@@ -169,7 +169,7 @@ void grYorster_80202254(Ground_GObj* gobj)
 
 void grYorster_802022A0(HSD_GObj* gobj) {}
 
-void grYorster_802022A4(void) {}
+void grYorster_802022A4(HSD_GObj* gobj) {}
 
 void grYorster_80202428(HSD_GObj* item_gobj, Ground* gp, Vec3* pos,
                         HSD_GObj* fighter_gobj, f32 value)

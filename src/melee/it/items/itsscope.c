@@ -46,13 +46,12 @@ void itSScope_Logic21_Spawned(Item_GObj* gobj)
     it_802920B8(gobj);
 }
 
-itSScopeAttributes* it_80291CCC(Item_GObj* gobj, Vec3* pos)
+void it_80291CCC(Item_GObj* gobj, Vec3* pos)
 {
     itSScopeAttributes* attrs = GET_ATTRS(GET_ITEM(gobj));
     pos->x = attrs->x34.x;
     pos->y = attrs->x34.y;
     pos->z = attrs->x34.z;
-    return attrs;
 }
 
 s32 it_80291CF4(Item_GObj* gobj, s32 arg1)

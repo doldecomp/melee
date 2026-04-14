@@ -10,7 +10,7 @@
 #include <dolphin/mtx.h>
 
 /* 2B3368 */ void* it_802B3368(Item_GObj* gobj);
-/* 2B338C */ void it_802B338C(Item_GObj*, Vec3*, float facing_dir, u32);
+/* 2B338C */ Item_GObj* it_802B338C(Item_GObj*, Vec3*, float facing_dir, u32);
 /* 2B34E4 */ void it_2725_Logic106_Destroyed(Item_GObj*);
 /* 2B3544 */ void it_802B3544(Item_GObj* gobj);
 /* 2B3554 */ void it_802B3554(Item_GObj* gobj, Fighter_GObj* owner);

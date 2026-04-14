@@ -1149,7 +1149,7 @@ void it_802BAA94(Item_GObj* gobj)
     it_802A2428(gobj);
 }
 
-void it_802BAAE4(Item_GObj* gobj, Vec3* vel, f32 unused)
+void it_802BAAE4(Item_GObj* gobj, Vec3* vel)
 {
     Item* ip = GET_ITEM(gobj);
     ItemLink* link = ip->xDD4_itemVar.samusgrapple.x0;

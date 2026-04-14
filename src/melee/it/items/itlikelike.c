@@ -243,7 +243,7 @@ bool itLikelike_UnkMotion0_Coll(Item_GObj* gobj)
         }
         it_802762D8(gobj);
     } else {
-        it_8026D6F4(gobj, (void (*)(HSD_GObj*)) it_802DAA10);
+        it_8026D6F4(gobj, it_802DAA10);
     }
     return it_8027C794(gobj);
 }
@@ -289,7 +289,7 @@ bool itLikelike_UnkMotion7_Coll(Item_GObj* gobj)
         }
         it_802762D8(gobj);
     } else {
-        it_8026D6F4(gobj, (void (*)(HSD_GObj*)) it_802DAA10);
+        it_8026D6F4(gobj, it_802DAA10);
     }
     return it_8027C794(gobj);
 }
@@ -589,7 +589,7 @@ void it_802DAA10(Item_GObj* gobj)
     ip->xDD4_itemVar.likelike.x38 = 0;
     ip->xDD4_itemVar.likelike.x4C = 0;
     it_80273454(gobj);
-    Item_80268E5C((HSD_GObj*) gobj, 5, ITEM_ANIM_UPDATE);
+    Item_80268E5C(gobj, 5, ITEM_ANIM_UPDATE);
 }
 
 bool itLikelike_UnkMotion5_Anim(Item_GObj* gobj)
@@ -747,7 +747,7 @@ bool itLikelike_UnkMotion16_Coll(Item_GObj* gobj)
     PAD_STACK(0x20);
 
     if (ip->xDD4_itemVar.likelike.x38 == 0) {
-        it_8026D6F4(gobj, (void (*)(HSD_GObj*)) it_802DAA10);
+        it_8026D6F4(gobj, it_802DAA10);
     } else {
         temp_r31 = &ip->x378_itemColl;
         it_80276214(gobj);
@@ -840,7 +840,7 @@ bool itLikelike_UnkMotion8_Coll(Item_GObj* gobj)
         }
         it_802762D8(gobj);
     } else {
-        it_8026D6F4(gobj, (void (*)(HSD_GObj*)) it_802DAA10);
+        it_8026D6F4(gobj, it_802DAA10);
     }
     return it_8027C794(gobj);
 }
@@ -867,7 +867,7 @@ void it_802DB398(Item_GObj* gobj)
     } else {
         Item_80268E5C(gobj, 0xC, ITEM_ANIM_UPDATE);
     }
-    it_80274F28(ip, 1, (void (*)(HSD_GObj*)) it_802DB358,
+    it_80274F28(ip, 1, it_802DB358,
                 (void (*)(HSD_GObj*, HSD_GObj*)) ftCo_800C78B0);
 }
 
@@ -913,7 +913,7 @@ bool itLikelike_UnkMotion12_Coll(Item_GObj* gobj)
             it_80273454(gobj);
         }
     } else {
-        it_8026D6F4(gobj, (void (*)(HSD_GObj*)) it_802DAA10);
+        it_8026D6F4(gobj, it_802DAA10);
     }
     return it_8027C794(gobj);
 }
@@ -926,7 +926,7 @@ void it_802DB5F0(Item_GObj* gobj)
     it_80273454(gobj);
     Item_80268E5C((HSD_GObj*) gobj, 9, ITEM_ANIM_UPDATE);
     Item_8026AE84(ip, 0x139, 0x7FU, 0x40U);
-    it_80274F28(ip, 1, (void (*)(HSD_GObj*)) it_802DB358,
+    it_80274F28(ip, 1, it_802DB358,
                 (void (*)(HSD_GObj*, HSD_GObj*)) ftCo_800C78B0);
     ip->xDD4_itemVar.likelike.x50 = NULL;
 }
@@ -964,7 +964,7 @@ void it_802DB74C(Item_GObj* gobj)
     it_80273454(gobj);
     Item_80268E5C((HSD_GObj*) gobj, 0xA, ITEM_ANIM_UPDATE);
     Item_8026AE84(ip, 0x139, 0x7FU, 0x40U);
-    it_80274F28(ip, 1, (void (*)(HSD_GObj*)) it_802DB358,
+    it_80274F28(ip, 1, it_802DB358,
                 (void (*)(HSD_GObj*, HSD_GObj*)) ftCo_800C78B0);
     ip->xDD4_itemVar.likelike.x50 = NULL;
 }
@@ -1263,7 +1263,7 @@ bool itLikelike_UnkMotion6_Coll(Item_GObj* gobj)
         }
         it_802762D8(gobj);
     } else {
-        it_8026D6F4(gobj, (void (*)(HSD_GObj*)) it_802DAA10);
+        it_8026D6F4(gobj, it_802DAA10);
     }
     return it_8027C794(gobj);
 }
@@ -1327,13 +1327,13 @@ Item_GObj* it_802DC4BC(s32 arg0, Vec3* arg1, s32 arg2)
 {
     // one r29-r30 regswap away from being solved
     Vec3 sp50;
-    Item* item;
     Item_GObj* gobj;
 
     sp50 = zero_vec;
-    gobj = it_8027B5B0(It_Kind_Likelike, arg1, NULL, (Vec3*) &sp50, 1);
+    gobj = it_8027B5B0(It_Kind_Likelike, arg1, NULL, &sp50, 1);
     if (gobj != NULL) {
-        item = GET_ITEM(gobj);
+        Item* item = GET_ITEM(gobj);
+        PAD_STACK(32);
         item->xDD4_itemVar.likelike.x38 = arg0;
         it_802762BC(item);
         if (arg0 == 0) {

@@ -214,7 +214,7 @@
                                          ftCollisionBox* victim_coll_box,
                                          float victim_scale_x);
 /* 0F5874 */ void ftKb_SpecialN_800F5874(Vec2* arg0);
-/* 0F5898 */ HSD_Joint* ftKb_SpecialN_800F5898(Fighter_GObj* gobj, int);
+/* 0F5898 */ HSD_Joint* ftKb_SpecialN_800F5898(Fighter_GObj* gobj);
 /* 0F58AC */ float ftKb_SpecialN_800F58AC(Fighter_GObj* gobj,
                                           Vec3* victim_self_vel,
                                           float victim_facing_dir);

@@ -184,16 +184,13 @@ check_speed:
     it_802725D4(gobj);
 }
 
-s32 it_8028D390(Item_GObj* gobj)
+void it_8028D390(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    s32 dec = ip->xDD4_itemVar.rshell.xDEC;
-
-    ip->xDD4_itemVar.rshell.xDEC = dec - 1;
+    ip->xDD4_itemVar.rshell.xDEC--;
     if (ip->xDD4_itemVar.rshell.xDEC == 0) {
         ip->xDD4_itemVar.rshell.xDF0 = 1;
     }
-    return dec;
 }
 
 void it_8028D3B8(Item_GObj* gobj)

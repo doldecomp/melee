@@ -7,6 +7,9 @@
 #include "baselib/random.h"
 #include "cm/camera.h"
 #include "ef/efsync.h"
+
+#include "gr/forward.h"
+
 #include "gr/grdatfiles.h"
 #include "gr/grlib.h"
 #include "gr/grmaterial.h"
@@ -428,7 +431,7 @@ void grIceMt_801F75FC(Ground_GObj* arg0)
     } while (val != 0);
     gp->gv.icemt.xF4[iVar1] = *(s16*) grIm_804D69F4;
     gp->gv.icemt.xC6 = (s16) grIm_803E4068[iVar1].id;
-    grIceMt_801FA0BC((int) &gp->gv.icemt.xC4);
+    grIceMt_801FA0BC(&gp->gv.icemt.xC4);
     gp->gv.icemt.xDA = 0;
     gp->gv.icemt.xC8 = 0;
     gp->gv.icemt.xCE = 0;
@@ -453,7 +456,7 @@ void grIceMt_801F7728(Ground_GObj* arg0)
     Ground* gp = GET_GROUND(arg0);
     if (gp->gv.icemt.xD8 == 0) {
         grIceMt_801FA364(&gp->gv.corneria.xC8, &y, fn_801F8E58, arg0);
-        grIceMt_801F9ACC(grIceMt_801F96E0(-y));
+        grIceMt_801F9ACC(arg0, grIceMt_801F96E0(arg0, -y));
         grIceMt_801F9668(y);
     }
 }
@@ -478,7 +481,7 @@ void grIceMt_801F785C(Ground_GObj* gobj)
     gp->gv.icemt.xC4 = (s16) grIm_803E4068[grIm_804D69F4->xAC[1]].id;
     gp->gv.icemt.xC6 = (s16) grIm_803E4068[grIm_804D69F4->xAC[0]].id;
 
-    grIceMt_801FA0BC((int) &gp->gv.icemt.xC4);
+    grIceMt_801FA0BC(&gp->gv.icemt.xC4);
 
     gp->gv.icemt.xDC = 0;
     gp->gv.icemt.xE0 = 2;
@@ -1047,7 +1050,7 @@ void grIceMt_801F9668(float arg8)
     gp->gv.icemt2.xC4 = arg8;
 }
 
-float grIceMt_801F96E0(float y)
+float grIceMt_801F96E0(Ground_GObj* gobj, float y)
 {
     HSD_GObj* jobj;
     double dVar3;
@@ -1104,9 +1107,7 @@ int grIceMt_801F98A8(Ground_GObj* param1)
 
 /// #grIceMt_801F993C
 
-/// #grIceMt_801F9ACC
-/// void grIceMt_801F9ACC() {
-void grIceMt_801F9ACC(float y)
+void grIceMt_801F9ACC(Ground_GObj* gobj, float y)
 {
     HSD_GObj* jobj;
     double dVar3;

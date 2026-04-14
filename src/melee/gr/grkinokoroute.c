@@ -173,7 +173,7 @@ void grKinokoRoute_80208368(Ground_GObj* arg) {}
 
 /// #grKinokoRoute_8020836C
 
-bool grKinokoRoute_80208480(bool arg)
+bool grKinokoRoute_80208480(s32 arg)
 {
     if (arg == 1) {
         Ground_801C5740(arg);
