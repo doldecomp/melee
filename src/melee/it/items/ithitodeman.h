@@ -8,7 +8,7 @@
 #include "it/items/types.h"
 
 /* 2D42C4 */ void it_2725_Logic24_Spawned(Item_GObj*);
-/* 2D43AC */ void it_802D43AC(void);
+/* 2D43AC */ void it_802D43AC(Item_GObj* gobj);
 /* 2D43B0 */ void it_802D43B0(Item_GObj*, Item_GObj*);
 /* 2D43EC */ void it_802D43EC(Item_GObj* gobj);
 /* 2D4494 */ void it_802D4494(Item_GObj* gobj);

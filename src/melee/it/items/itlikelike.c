@@ -571,6 +571,24 @@ void it_802DA960(Item_GObj* gobj)
     Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
 }
 
+static inline void it_802DC4BC_ptr(Item_GObj* gobj, itECB* ecb)
+{
+    Item* ip = GET_ITEM(gobj);
+    it_802DBAF0(gobj, 1, 1);
+    it_802762BC(ip);
+    if (ip->xDD4_itemVar.likelike.x38 == 1) {
+        *ecb = ip->xC1C;
+        ecb->bottom = ecb->top;
+        ecb->top = ip->xC1C.bottom;
+        it_80275D5C(gobj, ecb);
+    }
+    it_8027C56C(gobj, 0.0f);
+    ip->xDD4_itemVar.likelike.x38 = 0;
+    ip->xDD4_itemVar.likelike.x4C = 0;
+    it_80273454(gobj);
+    Item_80268E5C(gobj, 5, ITEM_ANIM_UPDATE);
+}
+
 void it_802DAA10(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
@@ -1180,11 +1198,27 @@ void itLikelike_UnkMotion18_Phys(Item_GObj* gobj) {}
 void it_2725_Logic5_Dropped(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
+    Item* ip2;
     itLikelikeAttributes* attr = GET_ATTRS(ip);
+    itECB ecb;
+    PAD_STACK(12);
 
     it_8027CBA4(gobj);
     ip->xDD4_itemVar.likelike.x4C = attr->x4;
-    it_802DA960(gobj);
+
+    // permuterslop
+    ip = ip2 = GET_ITEM(gobj);
+    it_802762BC(ip2);
+    if (ip2->xDD4_itemVar.likelike.x38 == 1) {
+        ecb = ip2->xC1C;
+        ecb.bottom = ecb.top;
+        ecb.top = ip2->xC1C.bottom;
+        it_80275D5C(gobj, &ecb);
+        it_8027C56C(gobj, 0.0f);
+    }
+    ip2->xDD4_itemVar.likelike.x38 = 0;
+    it_80273454(gobj);
+    Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
 }
 
 void itLikeLike_Logic5_Thrown(Item_GObj* gobj)
@@ -1230,20 +1264,35 @@ bool itLikelike_UnkMotion6_Anim(Item_GObj* gobj)
 
 void itLikelike_UnkMotion6_Phys(Item_GObj* gobj)
 {
-    itLikelikeAttributes* attr;
     Item* ip = GET_ITEM(gobj);
-    s32 temp_r3;
-
-    temp_r3 = ip->xDD4_itemVar.likelike.x4C;
     if (ip->xDD4_itemVar.likelike.x4C == 0) {
         if (ip->xDD4_itemVar.likelike.x38 == 0) {
             it_802DA104(gobj);
             return;
         }
-        it_802DAA10(gobj);
+
+        {
+            Item* ip = GET_ITEM(gobj);
+            itECB ecb;
+            PAD_STACK(20);
+            it_802DBAF0(gobj, 1, 1);
+            it_802762BC(ip);
+            if (ip->xDD4_itemVar.likelike.x38 == 1) {
+                ecb = ip->xC1C;
+                ecb.bottom = ecb.top;
+                ecb.top = ip->xC1C.bottom;
+                it_80275D5C(gobj, &ecb);
+            }
+            it_8027C56C(gobj, 0.0f);
+            ip->xDD4_itemVar.likelike.x38 = 0;
+            ip->xDD4_itemVar.likelike.x4C = 0;
+            it_80273454(gobj);
+            Item_80268E5C(gobj, 5, ITEM_ANIM_UPDATE);
+        }
+
         return;
     }
-    ip->xDD4_itemVar.likelike.x4C = temp_r3 - 1;
+    ip->xDD4_itemVar.likelike.x4C--;
 }
 
 bool itLikelike_UnkMotion6_Coll(Item_GObj* gobj)
@@ -1325,19 +1374,16 @@ void itLikeLike_Logic5_Destroyed(Item_GObj* gobj)
 
 Item_GObj* it_802DC4BC(s32 arg0, Vec3* arg1, s32 arg2)
 {
-    // one r29-r30 regswap away from being solved
-    Vec3 sp50;
-    Item_GObj* gobj;
-
-    sp50 = zero_vec;
-    gobj = it_8027B5B0(It_Kind_Likelike, arg1, NULL, &sp50, 1);
+    Vec3 sp50 = zero_vec;
+    Item_GObj* gobj = it_8027B5B0(It_Kind_Likelike, arg1, NULL, &sp50, 1);
+    itECB ecb;
+    PAD_STACK(28);
     if (gobj != NULL) {
-        Item* item = GET_ITEM(gobj);
-        PAD_STACK(32);
-        item->xDD4_itemVar.likelike.x38 = arg0;
-        it_802762BC(item);
+        Item* ip = GET_ITEM(gobj);
+        ip->xDD4_itemVar.likelike.x38 = arg0;
+        it_802762BC(ip);
         if (arg0 == 0) {
-            it_802DAA10(gobj);
+            it_802DC4BC_ptr(gobj, &ecb);
         } else {
             it_802DAD18(gobj);
         }
