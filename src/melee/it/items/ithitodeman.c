@@ -12,7 +12,6 @@
 
 #include <math.h>
 #include <baselib/random.h>
-#include <MSL/math_ppc.h>
 
 ItemStateTable it_803F8128[] = {
     {
@@ -35,12 +34,31 @@ ItemStateTable it_803F8128[] = {
     },
 };
 
+static void ordering_func()
+{
+    HSD_JObjSetRotationY(NULL, 10);
+}
+
 ItemStateTable it_803F8180[] = { {
     0x00000000,
     it_802D4FFC,
     it_802D5044,
     it_802D5048,
 } };
+
+extern inline float sqrtf(float x)
+{
+    volatile float y;
+    if (x > 0.0f) {
+        double guess = __frsqrte((double) x); // returns an approximation to
+        guess = .5 * guess * (3.0 - guess * guess * x); // now have 12 sig bits
+        guess = .5 * guess * (3.0 - guess * guess * x); // now have 24 sig bits
+        guess = .5 * guess * (3.0 - guess * guess * x); // now have 32 sig bits
+        y = (float) (x * guess);
+        return y;
+    }
+    return x;
+}
 
 void it_2725_Logic24_Spawned(Item_GObj* gobj)
 {
@@ -172,15 +190,20 @@ bool it_802D4564(Item_GObj* gobj)
     return false;
 }
 
+inline Article* it_802D472C_inline(Item* ip)
+{
+    return ip->xC4_article_data;
+}
+
 void it_802D472C(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itHitodemanAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itHitodemanAttributes* attrs =
+        it_802D472C_inline(ip)->x4_specialAttributes;
     Vec3 target_pos;
     Vec3 dir;
     f32 speed;
     f32 dist;
-    PAD_STACK(4);
 
     if (ip->xDD4_itemVar.hitodeman.x90 != NULL) {
         ftLib_80086644(ip->xDD4_itemVar.hitodeman.x90, &target_pos);
