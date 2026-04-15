@@ -1240,7 +1240,7 @@ config.libs = [
             Object(Matching, "melee/it/items/ithitodeman.c"),
             Object(Matching, "melee/it/items/itlucky.c"),
             Object(Matching, "melee/it/items/itporygon2.c"),
-            Object(NonMatching, "melee/it/items/ithinoarashi.c"),
+            Object(Matching, "melee/it/items/ithinoarashi.c"),
             Object(Matching, "melee/it/items/itmaril.c"),
             Object(Matching, "melee/it/items/itfushigibana.c"),
             # Indivudal items

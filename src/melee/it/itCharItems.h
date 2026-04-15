@@ -849,12 +849,18 @@ typedef struct itHinoarashi_ItemVars {
     /* xE34 */ UnkFlagStruct x60;
     /* xE35 */ u8 x61[0x64 - 0x61];
     /* xE38 */ f32 x64;
+    /* xE3C */ f32 x68;
+    /* xE40 */ Vec3 x6C;
+    /* xE4C */ f32 x78;
 } itHinoarashi_ItemVars;
 
 typedef struct itHinoarashiAttributes {
     /* +0 */ f32 x0;
     /* +4 */ f32 x4;
     /* +8 */ f32 x8;
+    /* +C */ u8 _pad[0x10 - 0xC];
+    /* +10 */ f32 x10;
+    /* +14 */ f32 x14;
 } itHinoarashiAttributes;
 
 typedef struct itTools_ItemVars {
