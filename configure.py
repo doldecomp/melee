@@ -1263,7 +1263,7 @@ config.libs = [
             Object(Matching, "melee/it/items/itoctarockstone.c"),
             Object(Matching, "melee/it/items/itleadead.c"),
             Object(NonMatching, "melee/it/items/itgreatfoxlaser.c"),
-            Object(NonMatching, "melee/it/items/ittincle.c"),
+            Object(Matching, "melee/it/items/ittincle.c"),
             Object(NonMatching, "melee/it/items/itkyasarin.c"),
             Object(Matching, "melee/it/items/itwhispyapple.c"),
             Object(NonMatching, "melee/it/items/ittools.c"),
