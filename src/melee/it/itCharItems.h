@@ -581,7 +581,7 @@ typedef struct itPeachTurnip_ItemVars {
 
 typedef struct itPikachutJoltGround_ItemVars {
     /* +0 +DD4 */ f32 xDD4;
-    /* +4 +DD8 */ char pad_0[0x4];
+    /* +4 +DD8 */ HSD_GObj* xDD8;
     /* +8 +DDC */ Item_GObj* xDDC;
     /* +C +DE0 */ s32 xDE0;
     /* +10 +DE4 */ s32 xDE4;
@@ -613,7 +613,7 @@ typedef struct itPikachuthunder_ItemVars {
 } itPikachuthunder_ItemVars;
 
 typedef struct itPikachutJoltGroundAttributes {
-    /* +0 */ char pad_0[0x4];
+    /* +0 */ f32 x0;
     /* +4 */ f32 x4;
     /* +8 */ f32 x8;
     /* +C */ f32 xC;
