@@ -1455,7 +1455,7 @@ typedef struct itOctarockAttributes {
 
 typedef struct itOldottosea_ItemVars {
     /* 0x00 */ u8 pad[0x20];
-    /* 0x20 */ s32 x20;
+    /* 0x20 */ Item_GObj* x20;
     /* 0x24 */ s32 x24;
     /* 0x28 */ s32 x28;
     /* 0x2C */ s16 x2C;
