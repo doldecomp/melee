@@ -607,6 +607,7 @@ struct Item {
         itMewtwoShadowball_ItemVars mewtwoshadowball;
         itMsBomb_ItemVars msbomb;
         itNessbat_ItemVars nessbat;
+        itNessYoyo_ItemVars nessyoyo;
         itNokoNoko_ItemVars nokonoko;
         itOctarock_ItemVars octarock;
         itOldkuri_ItemVars oldkuri;

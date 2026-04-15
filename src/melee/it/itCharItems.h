@@ -879,4 +879,14 @@ typedef struct itToolsAttributes {
     /* +10 */ itToolsAttrEntry entries[1];
 } itToolsAttributes;
 
+typedef struct itNessYoyo_ItemVars {
+    /* +0  ip+DD4 */ s32 x0;
+    /* +4  ip+DD8 */ f32 x4;
+    /* +8  ip+DDC */ ItemLink* x8;
+    /* +C  ip+DE0 */ ItemLink* xC;
+    /* +10 ip+DE4 */ HSD_GObj* x10;
+    /* +14 ip+DE8 */ char pad_14[0x4];
+    /* +18 ip+DEC */ HSD_JObj* x18;
+} itNessYoyo_ItemVars;
+
 #endif
