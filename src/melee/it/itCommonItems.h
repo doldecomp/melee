@@ -1651,4 +1651,9 @@ typedef struct itMatadogas_ItemVars {
     /* +68 ip+E3C */ s32 x68;
 } itMatadogas_ItemVars;
 
+typedef struct itYoshiEggThrowAttributes {
+    /* +0 */ f32 x0;
+    /* +4 */ f32 x4;
+} itYoshiEggThrowAttributes;
+
 #endif
