@@ -1670,4 +1670,17 @@ typedef struct itYoshiEggThrowAttributes {
     /* +4 */ f32 x4;
 } itYoshiEggThrowAttributes;
 
+typedef struct ScopeBeamFloats {
+    float velocity;
+    float scale;
+    float lifetime;
+} ScopeBeamFloats;
+
+typedef struct ScopeBeamAttrs {
+    ScopeBeamFloats floats[9];
+    /* +6C */ u8 _pad[0x78 - 0x6C];
+    /* +78 */ f32 x78;
+    /* +7C */ f32 x7C;
+} ScopeBeamAttrs;
+
 #endif
