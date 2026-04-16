@@ -214,7 +214,15 @@ typedef struct itLugiaAttributes {
     /* +10 */ f32 x10;
     /* +14 */ s32 x14;
     /* +18 */ f32 x18;
-    /* +1C */ u8 x1C_pad[0x24];
+    /* +1C */ f32 x1C;
+    /* +20 */ f32 x20;
+    /* +24 */ f32 x24;
+    /* +28 */ f32 x28;
+    /* +2C */ f32 x2C;
+    /* +30 */ f32 x30;
+    /* +34 */ f32 x34;
+    /* +38 */ f32 x38;
+    /* +3C */ f32 x3C;
     /* +40 */ f32 x40;
 } itLugiaAttributes;
 
