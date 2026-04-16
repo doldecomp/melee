@@ -176,7 +176,8 @@ typedef struct itKyasarinAttributes {
     /* +34 */ f32 x34;
     /* +38 */ f32 x38;
     /* +3C */ f32 x3C;
-    /* +40 */ u8 x40_pad[0x48 - 0x40];
+    /* +40 */ s32 x40;
+    /* +44 */ s32 x44;
     /* +48 */ s32 x48;
 } itKyasarinAttributes;
 
