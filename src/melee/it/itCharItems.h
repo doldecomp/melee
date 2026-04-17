@@ -5,6 +5,7 @@
 
 #include "platform.h"
 
+#include "baselib/forward.h"
 #include "it/forward.h"
 #include "lb/forward.h"
 
@@ -37,15 +38,17 @@ typedef struct itClimbersIce_ItemVars {
 } itClimbersIce_ItemVars;
 
 typedef struct itClimbersStringAttributes {
-    /* +00 */ u8 pad_00[0x8];
+    /* +00 */ s32 x0_count;
+    /* +04 */ s32 x4;
     /* +08 */ f32 x8;
-    /* +0C */ u8 pad_0C[0x8];
+    /* +0C */ f32 xC;
+    /* +10 */ u8 pad_10[0x4];
     /* +14 */ f32 x14;
     /* +18 */ s32 x18;
     /* +1C */ s32 x1C;
     /* +20 */ s32 x20;
-    /* +24 */ void* x24_joint;
-    /* +28 */ void* x28_joint;
+    /* +24 */ HSD_Joint* x24_joint;
+    /* +28 */ HSD_Joint* x28_joint;
 } itClimbersStringAttributes;
 
 typedef struct itClimbersIceAttributes {
@@ -790,6 +793,8 @@ typedef struct itClimbersString_ItemVars {
     /* +4  ip+DD8 */ ItemLink* x4;
     /* +8  ip+DDC */ ItemLink* x8;
     /* +C  ip+DE0 */ HSD_GObj* xC;
+    /* +10 ip+DE4 */ u8 pad_10[0x4];
+    /* +14 ip+DE8 */ HSD_JObj* x14;
 } itClimbersString_ItemVars;
 
 typedef struct itZako_ItemVars {
