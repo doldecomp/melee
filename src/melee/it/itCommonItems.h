@@ -1247,82 +1247,58 @@ struct it_2F28_DatAttrs {
     f32 float2; // item var x0
 };
 
-typedef struct it_2E5A_ItemVars_struct {
-    f32 x0;       // set to float calc result/item->x3C
-    HSD_JObj* x4; // set to item_gobj->hsd_obj
-    Vec3 x8;      // called in lb_8000B1CC
-    Vec3 x14;     // set equal to x8
-} it_2E5A_ItemVars_struct;
+/// Inline sub-struct at ItemVars offset 0x1C (byte offset 0xDF0 in Item).
+/// Tracks a bone used for coin pickup collision.
+typedef struct it_2E5A_SubVars {
+    /* +0  */ f32 x0;       // scale-dependent radius (copied to item->x3C)
+    /* +4  */ HSD_JObj* x4; // bone
+    /* +8  */ Vec3 x8;      // current bone world position
+    /* +14 */ Vec3 x14;     // previous bone world position
+} it_2E5A_SubVars;
 
 typedef struct it_2E5A_ItemVars {
-    // /* ip+DD4 */ HSD_GObj* x0;
     /* ip+DD4 */ s32 x0;
-    /* ip+DD8 */ s32 x4;  // uses regular registers (#? gets multiplied by 2C,
-                          // then indexed into attr)
-    /* ip+DDC */ s32 x8;  // uses regular registers
-    /* ip+DE0 */ s32 xC;  // uses regular registers
-    /* ip+DE4 */ f32 x10; // uses float registers; timer?
+    /* ip+DD8 */ s32 x4; // tier index (0..2)
+    /* ip+DDC */ s32 x8;
+    /* ip+DE0 */ s32 xC;
+    /* ip+DE4 */ f32 x10;
     /* ip+DE8 */ f32 x14;
-    /* ip+DEC */ UnkFlagStruct x18; // has bit assignments
-    /* ip+DF0 */ it_2E5A_ItemVars_struct* x1C;
-    // /* ip+DF4 */ s32 x20;
-    // /* ip+DF8 */ s32 x24;
-    // /* ip+DFC */ s32 x28;
-    // /* ip+E00 */ s32 x2C;
-    // /* ip+E04 */ s32 x30;
-    // /* ip+E08 */ s32 x34;
-    // /* ip+E0C */ s32 x38;
-    // /* ip+E10 */ s32 x3C;
-    // /* ip+E14 */ s32 x40;
-    // /* ip+E18 */ s32 x44;
-    // /* ip+E1C */ s32 x48;
-    // /* ip+E20 */ s32 x4C;
-    // /* ip+E24 */ s32 x50;
-    // /* ip+E28 */ s32 x54;
-    // /* ip+E2C */ s32 x58;
+    /* ip+DEC */ UnkFlagStruct x18;
+    /* ip+DF0 */ it_2E5A_SubVars sub;
 } it_2E5A_ItemVars;
 
-typedef struct it_2E5A_DatAttrs_1 {
-    f32 x0; // lifetime?
-    f32 x4; // float assignment
-    f32 x8;
-    f32 xC;
-    f32 x10;
-    f32 x14; // item->x40_vel.x
-    f32 x18;
-    f32 x1C;
-    f32 x20;
-    f32 x24; // float assignment
-    f32 x28;
-    f32 x2C; // float assignment
-    f32 x30;
-    f32 x34;
-    f32 x38;
-    HSD_Joint* x3C; // called in it_80273318
-    f32 x40;
-    f32 x44;
-    f32 x48;
-    s32 x4C; // item->xD84
-    s32 x50;
-    f32 x54;    // item->scl
-    itECB* x58; // called in it_80275D5C
-    s32 x5C;
-} it_2E5A_DatAttrs_1;
+/// One tier's worth of spawn data (bronze/silver/gold).
+/// The four fields from @c anim_joint through @c xD84_value form an inline
+/// @ref ItemStateDesc; its address is passed to @c Item_80268D34. The fourth
+/// slot (@c xC_script in @ref ItemStateDesc) doubles as @c xD84_value.
+typedef struct it_2E5A_TierEntry {
+    /* 0x00 */ HSD_Joint* joint;
+    /* 0x04 */ HSD_AnimJoint* anim_joint;
+    /* 0x08 */ HSD_MatAnimJoint* matanim_joint;
+    /* 0x0C */ HSD_ShapeAnimJoint* shape_anim_joint;
+    /* 0x10 */ s32 xD84_value;
+    /* 0x14 */ s32 threshold;
+    /* 0x18 */ f32 scale;
+    /* 0x1C */ itECB ecb;
+} it_2E5A_TierEntry;
 
-typedef struct it_2E5A_DatAttrs_2 {
-    f32 x0; // lifetime?
-    f32 x4; // float assignment
-    f32 x8;
-    f32 xC;
-    HSD_Joint* x10;     // called in it_80273318
-    ItemStateDesc* x14; // item2->xD0_itemStateDesc
-    f32 x18;
-    f32 x1C;
-    s32 x20; // item->xD84
-    f32 x24; // float assignment
-    f32 x28; // item->scl
-    // itECB* x2C; // called in it_80275D5C
-} it_2E5A_DatAttrs_2;
+/// Special attributes for it_2E5A items. Base physics parameters followed by
+/// three tier entries.
+typedef struct it_2E5A_Attrs {
+    /* 0x00 */ f32 x0;  // passed to it_80275158
+    /* 0x04 */ f32 x4;  // stored into item->xDD4_itemVar.it_2E5A.x10
+    /* 0x08 */ f32 x8;  // stored into item->xDD4_itemVar.it_2E5A.x14
+    /* 0x0C */ f32 xC;
+    /* 0x10 */ f32 x10;
+    /* 0x14 */ f32 x14; // item->x40_vel.x multiplier on landing
+    /* 0x18 */ f32 x18;
+    /* 0x1C */ f32 x1C;
+    /* 0x20 */ f32 x20;
+    /* 0x24 */ f32 x24;
+    /* 0x28 */ f32 x28;
+    /* 0x2C */ f32 x2C[4]; // per-player spawn multiplier (indexed by gm_8016C6C0)
+    /* 0x3C */ it_2E5A_TierEntry tiers[3];
+} it_2E5A_Attrs;
 
 typedef struct it_802E5FXX_struct { // used for it_802E5F00 and it_802E5F8C
     HSD_GObj* x0; // Item GObj assignment/passed to db_80225DD8
