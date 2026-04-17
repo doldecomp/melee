@@ -60,7 +60,7 @@ bool it_802E5AC4(Item_GObj* item_gobj, bool arg_check)
     it_80276214(item_gobj);
     temp_f1 = coll_data->cur_pos.y;
     coll_data->cur_pos.y = temp_f1 - item->xC1C.bottom;
-    check1 = mpColl_80048844(coll_data, temp_f1);
+    check1 = mpColl_80048844(coll_data);
     coll_data->cur_pos.y = coll_data->cur_pos.y + item->xC1C.bottom;
     item->pos = coll_data->cur_pos;
 
