@@ -1253,7 +1253,7 @@ config.libs = [
             Object(Matching, "melee/it/items/itzrshell.c"),
             Object(NonMatching, "melee/it/items/itpatapata.c"),
             Object(Matching, "melee/it/items/itklap.c"),
-            Object(NonMatching, "melee/it/items/itoldottosea.c"),
+            Object(Matching, "melee/it/items/itoldottosea.c"),
             Object(NonMatching, "melee/it/items/itwhitebea.c"),
             # Stage-related items
             Object(Matching, "melee/it/items/itoctarock.c"),

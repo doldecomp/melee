@@ -1497,16 +1497,21 @@ typedef struct itPatapataAttributes {
 } itPatapataAttributes;
 
 typedef struct itOldottoseaAttributes {
-    /* 0x00 */ s32* x0;
+    /* 0x00 */ struct {
+        s32 x0;
+        f32 x4;
+    }* x0;
     /* 0x04 */ f32 x4;
     /* 0x08 */ f32 x8;
     /* 0x0C */ f32 xC;
-    /* 0x10 */ u8 pad0[0x4];
+    /* 0x10 */ s8 x10;
+    /* 0x11 */ u8 pad0[0x3];
     /* 0x14 */ f32 x14;
     /* 0x18 */ u8 pad1[0x4];
     /* 0x1C */ f32 x1C;
     /* 0x20 */ u8 pad2[0x4];
     /* 0x24 */ f32 x24;
+    /* 0x28 */ s8 x28;
 } itOldottoseaAttributes;
 
 typedef struct itFreezerAttributes {
