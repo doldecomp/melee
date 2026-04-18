@@ -1,5 +1,7 @@
 #include "itlugia.h"
 
+#include "placeholder.h"
+
 #include "ef/eflib.h"
 #include "gr/stage.h"
 #include "it/inlines.h"
@@ -11,7 +13,6 @@
 #include "lb/lbvector.h"
 
 #include <math.h>
-#include <math_ppc.h>
 #include <baselib/random.h>
 
 ItemStateTable it_803F7EE8[] = {
@@ -34,17 +35,32 @@ ItemStateTable it_803F7F48[] = {
 
 static inline float my_sqrtf(float x)
 {
-    static const double _half = .5;
-    static const double _three = 3.0;
-
-    u8 _[4] = { 0 };
+    u32 pad;
 
     volatile float y;
     if (x > 0) {
         double guess = __frsqrte((double) x);
-        guess = _half * guess * (_three - guess * guess * x);
-        guess = _half * guess * (_three - guess * guess * x);
-        guess = _half * guess * (_three - guess * guess * x);
+        guess = .5 * guess * (3.0 - guess * guess * x);
+        guess = .5 * guess * (3.0 - guess * guess * x);
+        guess = .5 * guess * (3.0 - guess * guess * x);
+        y = (float) (x * guess);
+        return y;
+    }
+    return x;
+}
+
+inline float my_sqrtf_accurate(float x)
+{
+    volatile float y;
+    if (x > 0.0f) {
+        double guess = __frsqrte((double) x); // returns an approximation to
+        guess =
+            0.5 * guess * (3.0 - guess * guess * x); // now have 12 sig bits
+        guess =
+            0.5 * guess * (3.0 - guess * guess * x); // now have 24 sig bits
+        guess =
+            0.5 * guess * (3.0 - guess * guess * x); // now have 32 sig bits
+        guess = 0.5 * guess * (3.0 - guess * guess * x); // extra iteration
         y = (float) (x * guess);
         return y;
     }
@@ -56,13 +72,13 @@ void it_2725_Logic17_Spawned(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     itLugiaAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
     ip->xDD4_itemVar.lugia.x64 = ip->pos;
-    ip->facing_dir = it_804DD450;
+    ip->facing_dir = 0.0f;
     ip->xDAC_itcmd_var0 = 0;
     ip->xDD4_itemVar.lugia.x60 = attrs->x14;
     ip->xDCC_flag.b3 = 0;
     it_802D1D40(gobj);
     it_80279CDC(gobj, attrs->x0);
-    ip->xDD4_itemVar.lugia.xE50.x = it_804DD450;
+    ip->xDD4_itemVar.lugia.xE50.x = 0.0f;
 }
 
 void it_802D14D0(void) {}
@@ -141,7 +157,7 @@ void itLugia_UnkMotion2_Phys(Item_GObj* gobj)
     }
     ip->x40_vel.y += ip->xDD4_itemVar.lugia.xE50.x;
     if (ip->pos.y > Stage_GetBlastZoneTopOffset()) {
-        ip->x40_vel.y = it_804DD450;
+        ip->x40_vel.y = 0.0f;
         it_802D16D4(gobj);
     }
 }
@@ -213,7 +229,7 @@ void it_802D1830(Item_GObj* gobj)
     disc = ip->pos.y - ip->xDD4_itemVar.lugia.x64.y;
     x18 = attrs->x18;
     prod = 8.0f * x18;
-    sqrtval = sqrtf_accurate(-((prod * -disc) - (x18 * x18)));
+    sqrtval = my_sqrtf_accurate(-((prod * -disc) - (x18 * x18)));
     ip->xDD4_itemVar.lugia.xE50.x = -((-x18 + sqrtval) / 2);
 }
 
@@ -248,8 +264,8 @@ void itLugia_UnkMotion4_Phys(Item_GObj* gobj)
     it_8027A344(gobj);
     ip->xDD4_itemVar.lugia.xE50.x += attrs->x18;
     ip->x40_vel.y = ip->xDD4_itemVar.lugia.xE50.x;
-    if ((new_var = ip->x40_vel.y) > it_804DD450) {
-        ip->x40_vel.y = it_804DD450;
+    if ((new_var = ip->x40_vel.y) > 0.0f) {
+        ip->x40_vel.y = 0.0f;
         it_802D1A44(gobj);
     }
 }
@@ -268,9 +284,9 @@ void it_802D1A44(Item_GObj* gobj)
     Item_80268E5C(gobj, 5, ITEM_ANIM_UPDATE);
     ip->entered_hitlag = efLib_PauseAll;
     ip->exited_hitlag = efLib_ResumeAll;
-    ip->xDD4_itemVar.lugia.xE50.y = it_804DD46C;
-    ip->xDD4_itemVar.lugia.xE50.z = it_804DD470;
-    ip->xDD4_itemVar.lugia.x88 = it_804DD474;
+    ip->xDD4_itemVar.lugia.xE50.y = 1.0f;
+    ip->xDD4_itemVar.lugia.xE50.z = 0.7f;
+    ip->xDD4_itemVar.lugia.x88 = 0.4f;
     lb_8000B1CC(ip->xBBC_dynamicBoneTable->bones[25], NULL, &pos);
     ip->xDD4_itemVar.lugia.x8C = ip->xDD4_itemVar.lugia.x64;
     ip->xDD4_itemVar.lugia.x8C.y += attrs->x40;
@@ -400,6 +416,11 @@ Item_GObj* it_802D1E8C(Item_GObj* gobj, ItemKind kind, f32 param)
     return Item_80268B18(&spawn);
 }
 
+static inline float it_802D208C_inline(f32 x, f32 y, f32 z)
+{
+    return my_sqrtf(x + y + z);
+}
+
 Vec3 it_802D1F64(Item_GObj* gobj, f32 param)
 {
     Item* ip = GET_ITEM(gobj);
@@ -418,7 +439,7 @@ Vec3 it_802D1F64(Item_GObj* gobj, f32 param)
         f32 dx2 = dx * dx;
         f32 dy2 = dy * dy;
         f32 dz2 = dz * dz;
-        scale = my_sqrtf((dx2 + dy2) + dz2) / param;
+        scale = it_802D208C_inline(dx2, dy2, dz2) / param;
     }
     diff.x /= scale;
     diff.y /= scale;
@@ -459,7 +480,7 @@ void it_802D208C(Item_GObj* gobj)
             f32 dx2 = dx * dx;
             f32 dy2 = dy * dy;
             f32 dz2 = dz * dz;
-            if (my_sqrtf(dx2 + dy2 + dz2) > attrs->x40) {
+            if (it_802D208C_inline(dx2, dy2, dz2) > attrs->x40) {
                 ip->xDD4_itemVar.lugia.xA4 += 180;
             } else {
                 break;
@@ -471,19 +492,19 @@ void it_802D208C(Item_GObj* gobj)
 
 void itLugia_Logic39_Spawned(Item_GObj* gobj)
 {
-    it_8027ADEC(0x465, gobj, HSD_GObjGetHSDObj(gobj), it_804DD490);
+    it_8027ADEC(0x465, gobj, HSD_GObjGetHSDObj(gobj), 0.8f);
     it_802D23F4(gobj);
 }
 
 void itLugia_Logic40_Spawned(Item_GObj* gobj)
 {
-    it_8027ADEC(0x466, gobj, HSD_GObjGetHSDObj(gobj), it_804DD490);
+    it_8027ADEC(0x466, gobj, HSD_GObjGetHSDObj(gobj), 0.8f);
     it_802D23F4(gobj);
 }
 
 void itLugia_Logic41_Spawned(Item_GObj* gobj)
 {
-    it_8027ADEC(0x467, gobj, HSD_GObjGetHSDObj(gobj), it_804DD490);
+    it_8027ADEC(0x467, gobj, HSD_GObjGetHSDObj(gobj), 0.8f);
     it_802D23F4(gobj);
 }
 
