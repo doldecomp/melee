@@ -619,7 +619,7 @@ typedef struct {
     /* ip+DF4 */ float xDF4;
     /* ip+DF8 */ float xDF8;
     /* ip+DFC */ float xDFC;
-    /* ip+E00 */ char pad_E00[0xE04 - 0xE00];
+    /* ip+E00 */ f32 xE00;
     /* ip+E04 */ float xE04;
     /* ip+E08 */ unsigned char xE08_b0 : 1;
     /* ip+E08 */ unsigned char xE08_b1 : 1;
