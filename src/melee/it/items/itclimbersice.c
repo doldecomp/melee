@@ -15,8 +15,6 @@
 
 #include <MSL/math.h>
 
-/* 2C23D4 */ static bool itClimbersBlizzard_UnkMotion0_Coll(Item_GObj* gobj);
-
 ItemStateTable it_803F7668[] = {
     { -1, itClimbersice_UnkMotion0_Anim, itClimbersice_UnkMotion0_Phys,
       itClimbersice_UnkMotion0_Coll },
@@ -27,6 +25,12 @@ ItemStateTable it_803F7668[] = {
     { 0, itClimbersice_UnkMotion3_Anim, itClimbersice_UnkMotion3_Phys,
       itClimbersice_UnkMotion3_Coll },
 };
+
+static void fakefunc(f32 f, u32 u, Vec3 vec)
+{
+    vec.x = 0;
+    vec.x = f * u;
+}
 
 static inline void itClimbersIce_sub_x4(Item_GObj* gobj)
 {
@@ -247,7 +251,7 @@ static inline void itClimbersice_Phys_inline(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itClimbersIceAttributes* sa = ip->xC4_article_data->x4_specialAttributes;
-    u32 dmg = (u32) ABS(ip->x40_vel.x * sa->x30);
+    u32 dmg = ABS(ip->x40_vel.x * sa->x30);
     dmg += sa->x2C;
     it_80272460(&ip->x5D4_hitboxes[0].hit, dmg, gobj);
 }
