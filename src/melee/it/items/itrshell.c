@@ -30,11 +30,22 @@ typedef struct itRShell_Attrs {
     char pad30[0x38 - 0x30];
     float x38; // rotation multiplier (gshell x20)
     float x3C;
-    char pad40[0x44 - 0x40];
+    float x40;
     float x44;
     Vec x48;
     s32 x54;
 } itRShell_Attrs;
+
+ItemStateTable it_803F5C48[] = {
+    { -1, itRshell_UnkMotion0_Anim, itRshell_UnkMotion0_Phys, itRshell_UnkMotion0_Coll },
+    { -1, itRshell_UnkMotion1_Anim, itRshell_UnkMotion1_Phys, itRshell_UnkMotion1_Coll },
+    { -1, itRshell_UnkMotion2_Anim, itRshell_UnkMotion2_Phys, NULL },
+    { 0, itRshell_UnkMotion3_Anim, itRshell_UnkMotion3_Phys, itRshell_UnkMotion3_Coll },
+    { 0, itRshell_UnkMotion4_Anim, itRshell_UnkMotion4_Phys, itRshell_UnkMotion4_Coll },
+    { 0, itRshell_UnkMotion5_Anim, itRshell_UnkMotion5_Phys, itRshell_UnkMotion5_Coll },
+    { 0, itRshell_UnkMotion6_Anim, itRshell_UnkMotion6_Phys, itRshell_UnkMotion6_Coll },
+    { -1, itRshell_UnkMotion7_Anim, itRshell_UnkMotion7_Phys, itRshell_UnkMotion7_Coll },
+};
 
 void it_8028CFE0(Item_GObj* gobj)
 {
@@ -261,6 +272,31 @@ void it_8028D4E4(Item_GObj* gobj)
     }
 }
 
+static inline void itRshell_ClampVel(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    f32 vel = ip->x40_vel.x;
+    itRShell_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    f32 abs_vel;
+
+    if (vel < 0.0f) {
+        abs_vel = -vel;
+    } else {
+        abs_vel = vel;
+    }
+
+    if (abs_vel > attrs->xC) {
+        s32 sign;
+        if (vel < 0.0f) {
+            sign = -1;
+        } else {
+            sign = 1;
+        }
+        ip->x40_vel.x = (f32) sign;
+        ip->x40_vel.x *= attrs->xC;
+    }
+}
+
 f32 it_8028D56C(Item_GObj* gobj, f32 f1, f32 f2)
 {
     itRshellAttributes* attrs =
@@ -436,7 +472,34 @@ bool itRshell_UnkMotion4_Coll(Item_GObj* gobj)
     return false;
 }
 
-/// #it_8028DAE4
+static inline void itRshell_StopInit(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itRShell_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    it_8026B3A8(gobj);
+    it_80274C88(gobj);
+    it_80275158(gobj, it_804D6D28->x30_lifetime);
+    ip->xD5C = 0;
+    ip->xDD4_itemVar.rshell.xDD8 = attrs->x3C;
+    ip->xDD4_itemVar.rshell.xDE4 = 0.0f;
+    ip->xDD4_itemVar.rshell.xDDC = attrs->x44;
+    it_80275414(gobj);
+    itRshell_ClampVel(gobj);
+    it_80272980(gobj);
+}
+
+#pragma inline_depth(8)
+void it_8028DAE4(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->x40_vel.y = 0.0f;
+    itRshell_StopInit(gobj);
+    if (ip->msid == 0 || ip->msid == 1 || ip->msid == 7) {
+        Item_80268E5C(gobj, 5, ITEM_ANIM_UPDATE);
+    } else {
+        Item_80268E5C(gobj, 5, ITEM_ANIM_UPDATE | ITEM_HIT_PRESERVE);
+    }
+}
 
 bool itRshell_UnkMotion5_Anim(Item_GObj* gobj)
 {
@@ -458,11 +521,116 @@ bool itRshell_UnkMotion5_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itRshell_UnkMotion5_Phys
+static inline void itRshell_UM5_Accel(Item_GObj* gobj, Vec3* target)
+{
+    Item* ip = GET_ITEM(gobj);
+    itRShell_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    s32 sign = (target->x - ip->pos.x < 0.0f) ? -1 : 1;
+    ip->xDD4_itemVar.rshell.xDE0 = attrs->x8 * (f32) sign;
+}
 
-/// #itRshell_UnkMotion5_Coll
+static inline bool itRshell_UM5_AddVelAndCheck(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    s32 sign_xDE0;
+    s32 sign_vx;
+    ip->x40_vel.x += ip->xDD4_itemVar.rshell.xDE0;
+    sign_xDE0 = ip->xDD4_itemVar.rshell.xDE0 < 0.0f ? -1 : 1;
+    sign_vx = ip->x40_vel.x < 0.0f ? -1 : 1;
+    return sign_vx == sign_xDE0;
+}
 
-/// #it_8028E170
+static inline void itRshell_UM5_MaybeBrake(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itRShell_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    if (ip->x5D4_hitboxes[0].hit.state == HitCapsule_Disabled) {
+        if (ABS(ip->x40_vel.x) <= attrs->x10) {
+            it_80272674(gobj, 0);
+        }
+    }
+}
+
+void itRshell_UnkMotion5_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itRShell_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    Vec3 target_pos;
+    PAD_STACK(16);
+
+    if (ip->xDD4_itemVar.rshell.xDE4 <= 0.0f) {
+        if (it_8026B5E4(&ip->pos, &target_pos, NULL) != NULL) {
+            itRshell_UM5_Accel(gobj, &target_pos);
+            if (itRshell_UM5_AddVelAndCheck(gobj)) {
+                it_8028D4E4(gobj);
+            }
+            itRshell_UM5_MaybeBrake(gobj);
+            it_80272980(gobj);
+        }
+        ip->xDD4_itemVar.rshell.xDE4 = attrs->x40;
+    } else {
+        s32 sign_xDE0;
+        s32 sign_vx;
+        ip->x40_vel.x += ip->xDD4_itemVar.rshell.xDE0;
+        sign_xDE0 = ip->xDD4_itemVar.rshell.xDE0 < 0.0f ? -1 : 1;
+        sign_vx = ip->x40_vel.x < 0.0f ? -1 : 1;
+        if (sign_vx == sign_xDE0) {
+            itRshell_ClampVel(gobj);
+        }
+        it_80272980(gobj);
+        ip->xDD4_itemVar.rshell.xDE4 -= 1.0f;
+    }
+}
+
+static inline void itRshell_UM5C_Reverse(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->x40_vel.x = -ip->x40_vel.x;
+    ip->xDD4_itemVar.rshell.xDE0 = -ip->xDD4_itemVar.rshell.xDE0;
+}
+
+static inline void itRshell_UM5C_GroundSpin(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itRShell_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+
+    if (ip->ground_or_air == GA_Ground) {
+        it_80276CB8(gobj);
+        jobj = HSD_JObjGetChild(jobj);
+        HSD_JObjAddRotationY(jobj, attrs->x38 * ABS(ip->x40_vel.x));
+    }
+}
+
+bool itRshell_UnkMotion5_Coll(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    Vec3 v;
+
+    if (!it_8026D8A4(gobj, fn_8028D4A8)) {
+        it_802762BC(ip);
+        it_8028E170(gobj);
+    } else {
+        if (it_80276348(gobj, &v)) {
+            itRshell_UM5C_Reverse(gobj);
+            it_80272980(gobj);
+            it_80275444(gobj);
+        }
+        itRshell_UM5C_GroundSpin(gobj);
+    }
+    return false;
+}
+
+void it_8028E170(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itRshell_StopInit(gobj);
+    if (ip->msid == 0 || ip->msid == 1 || ip->msid == 7) {
+        Item_80268E5C(gobj, 6, ITEM_ANIM_UPDATE);
+    } else {
+        Item_80268E5C(gobj, 6, ITEM_ANIM_UPDATE | ITEM_HIT_PRESERVE);
+    }
+}
 
 #pragma push
 #pragma dont_inline on
