@@ -690,7 +690,7 @@ typedef struct itSamusGrappleAttributes {
     /* +00 */ f32 x0;
     /* +04 */ f32 x4;
     /* +08 */ f32 x8;
-    /* +0C */ f32 xC;
+    /* +0C */ s32 xC;
     /* +10 */ f32 x10;
     /* +14 */ f32 x14;
     /* +18 */ f32 x18;
@@ -728,6 +728,9 @@ typedef struct itSamusGrappleAttributes {
     /* +98 */ HSD_AnimJoint** x98;
     /* +9C */ HSD_MatAnimJoint** x9C;
     /* +A0 */ HSD_ShapeAnimJoint** xA0;
+    /* +A4 */ HSD_AnimJoint** xA4;
+    /* +A8 */ HSD_MatAnimJoint** xA8;
+    /* +AC */ HSD_ShapeAnimJoint** xAC;
 } itSamusGrappleAttributes;
 
 typedef struct itSamusMissileAttributes {
