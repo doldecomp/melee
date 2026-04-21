@@ -1285,9 +1285,9 @@ typedef struct it_2E5A_TierEntry {
 /// Special attributes for it_2E5A items. Base physics parameters followed by
 /// three tier entries.
 typedef struct it_2E5A_Attrs {
-    /* 0x00 */ f32 x0;  // passed to it_80275158
-    /* 0x04 */ f32 x4;  // stored into item->xDD4_itemVar.it_2E5A.x10
-    /* 0x08 */ f32 x8;  // stored into item->xDD4_itemVar.it_2E5A.x14
+    /* 0x00 */ f32 x0; // passed to it_80275158
+    /* 0x04 */ f32 x4; // stored into item->xDD4_itemVar.it_2E5A.x10
+    /* 0x08 */ f32 x8; // stored into item->xDD4_itemVar.it_2E5A.x14
     /* 0x0C */ f32 xC;
     /* 0x10 */ f32 x10;
     /* 0x14 */ f32 x14; // item->x40_vel.x multiplier on landing
@@ -1296,7 +1296,8 @@ typedef struct it_2E5A_Attrs {
     /* 0x20 */ f32 x20;
     /* 0x24 */ f32 x24;
     /* 0x28 */ f32 x28;
-    /* 0x2C */ f32 x2C[4]; // per-player spawn multiplier (indexed by gm_8016C6C0)
+    /* 0x2C */ f32
+        x2C[4]; // per-player spawn multiplier (indexed by gm_8016C6C0)
     /* 0x3C */ it_2E5A_TierEntry tiers[3];
 } it_2E5A_Attrs;
 
@@ -1557,6 +1558,16 @@ typedef struct itkireihanaAttributes {
     u32 x8;
     u32 xC;
 } itkireihanaAttributes;
+
+typedef struct itKabigonAttributes {
+    f32 x0;
+    f32 x4;
+    f32 x8;
+    f32 xC;
+    s32 x10;
+    s32 x14;
+    f32 x18;
+} itKabigonAttributes;
 
 typedef struct itMatadogasAttributes {
     /* +00 */ f32 x0;
