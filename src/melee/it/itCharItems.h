@@ -901,20 +901,20 @@ typedef struct itTools_ItemVars {
 } itTools_ItemVars;
 
 typedef struct itToolsMotionAttrs {
-    /* +00 */ f32 x0;  // initial vel.y for the motion
-    /* +04 */ f32 x4;  // fall speed
-    /* +08 */ f32 x8;  // fall speed max
-    /* +0C */ f32 xC;  // rotation delta (per frame)
-    /* +10 */ f32 x10; // post-hit vel.y
-    /* +14 */ f32 x14; // vel threshold for damage
-    /* +18 */ f32 x18; // knockback scale
+    /* +00 */ f32 x0;
+    /* +04 */ f32 x4;
+    /* +08 */ f32 x8;
+    /* +0C */ f32 xC;
+    /* +10 */ f32 x10;
+    /* +14 */ f32 x14;
+    /* +18 */ f32 x18;
 } itToolsMotionAttrs;
 
 typedef struct itToolsAttributes {
-    /* +00 */ f32 x0;                    // lifetime
-    /* +04 */ f32 x4;                    // knockback timer base
-    /* +08 */ f32 x8;                    // damage multiplier
-    /* +0C */ s32 xC;                    // damage cap
+    /* +00 */ f32 x0;
+    /* +04 */ f32 x4;
+    /* +08 */ f32 x8;
+    /* +0C */ s32 xC;
     /* +10 */ itToolsMotionAttrs motions[1];
 } itToolsAttributes;
 
