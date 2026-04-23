@@ -1,7 +1,9 @@
 #include "itgamewatchchef.h"
 
 #include "math.h"
+#include "placeholder.h"
 
+#include "db/db.h"
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
@@ -9,10 +11,14 @@
 #include "it/item.h"
 
 #include <baselib/jobj.h>
-#include "db/db.h"
+
+ItemStateTable it_803F79E0[] = {
+    { 0, itGamewatchchef_UnkMotion0_Anim, itGamewatchchef_UnkMotion0_Phys, itGamewatchchef_UnkMotion0_Coll },
+    { 1, itGamewatchchef_UnkMotion1_Anim, itGamewatchchef_UnkMotion1_Phys, itGamewatchchef_UnkMotion1_Coll },
+};
 
 HSD_GObj* it_802C837C(Item_GObj* parent, Vec3* pos, enum_t kind, u32 arg3,
-                       float facing_dir)
+                      float facing_dir)
 {
     Item_GObj* gobj;
     SpawnItem spawn;
@@ -64,7 +70,24 @@ void it_802C84A0(Item_GObj* gobj, s32 index)
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
 }
 
-/// #itGamewatchchef_UnkMotion0_Anim
+bool itGamewatchchef_UnkMotion0_Anim(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    HSD_JObj* jobj = gobj->hsd_obj;
+    itGamewatchchefAttributes* attrs =
+        ip->xC4_article_data->x4_specialAttributes;
+    f32 rot_x;
+    PAD_STACK(8);
+    rot_x = HSD_JObjGetRotationX(jobj);
+    rot_x += attrs->entries[ip->xDD4_itemVar.gamewatchchef.x4].x10;
+    HSD_JObjSetRotationX(jobj, rot_x);
+    ip->xD44_lifeTimer -= 1.0f;
+    if (ip->xD44_lifeTimer <= 0.0f) {
+        ip->xD44_lifeTimer = 0.0f;
+        it_802C875C(gobj);
+    }
+    return false;
+}
 
 void itGamewatchchef_UnkMotion0_Phys(Item_GObj* gobj)
 {
@@ -124,25 +147,8 @@ void itGamewatchchef_UnkMotion1_Phys(Item_GObj* gobj) {}
 
 bool itGamewatchchef_UnkMotion1_Coll(Item_GObj* gobj)
 {
-    Item* ip = GET_ITEM(gobj);
-    itGamewatchchefAttributes* attrs =
-        ip->xC4_article_data->x4_specialAttributes;
     PAD_STACK(8);
-    if (0.0f != ip->x40_vel.x) {
-        s32 result = it_8026DAA8(gobj);
-        if (result & 0xC) {
-            ip->x40_vel.x *= -attrs->x4;
-        }
-        if (result & 3) {
-            ip = GET_ITEM(gobj);
-            attrs = ip->xC4_article_data->x4_specialAttributes;
-            ip->x40_vel.y = 0.0f;
-            ip->x40_vel.x = 0.0f;
-            it_80275158(gobj, attrs->xC);
-            Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
-        }
-    }
-    return false;
+    return itGamewatchchef_UnkMotion0_Coll(gobj);
 }
 
 bool it_2725_Logic112_Clanked(Item_GObj* gobj)
