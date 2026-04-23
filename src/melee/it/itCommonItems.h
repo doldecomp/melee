@@ -1328,7 +1328,7 @@ typedef struct itWhiteBea_ItemVars {
     /*  +0 ip+DD4 */ char pad_0[0x18];
     /* +18 ip+DEC */ s32 x18;
     /* +1C ip+DF0 */ char pad_1C[0x4];
-    /* +20 ip+DF4 */ UNK_T x20;
+    /* +20 ip+DF4 */ Item_GObj* x20;
     /* +24 ip+DF8 */ char pad_24[0x4];
     /* +28 ip+DFC */ s32 x28;
     /* +2C ip+E00 */ char pad_2C[0x10];
@@ -1338,7 +1338,10 @@ typedef struct itWhiteBea_ItemVars {
 } itWhiteBea_ItemVars;
 
 typedef struct itWhiteBeaAttributes {
-    /* +0 */ s32* x0;
+    /* +0 */ struct {
+        s32 x0;
+        f32 x4;
+    }* x0;
     /* +4 */ f32 x4;
     /* +8 */ s16 x8;
     /* +A */ s16 xA;
@@ -1509,9 +1512,9 @@ typedef struct itOldottoseaAttributes {
     /* 0x10 */ s8 x10;
     /* 0x11 */ u8 pad0[0x3];
     /* 0x14 */ f32 x14;
-    /* 0x18 */ u8 pad1[0x4];
+    /* 0x18 */ f32 x18;
     /* 0x1C */ f32 x1C;
-    /* 0x20 */ u8 pad2[0x4];
+    /* 0x20 */ f32 x20;
     /* 0x24 */ f32 x24;
     /* 0x28 */ s8 x28;
 } itOldottoseaAttributes;

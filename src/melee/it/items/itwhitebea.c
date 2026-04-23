@@ -1,17 +1,44 @@
 #include "itwhitebea.h"
 
 #include "cm/camera.h"
+#include "gr/stage.h"
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
 #include "it/items/itfreeze.h"
-#include "it/types.h"
 #include "mp/mpcoll.h"
 #include "mp/mplib.h"
 #include "sysdolphin/baselib/random.h"
-#include "MSL/math.h"
+
+#include <MSL/math.h>
+
+ItemStateTable it_803F8A88[] = {
+    { 0, itWhitebea_UnkMotion0_Anim, itWhitebea_UnkMotion0_Phys,
+      itWhitebea_UnkMotion0_Coll },
+    { 1, itWhitebea_UnkMotion1_Anim, itWhitebea_UnkMotion1_Phys,
+      itWhitebea_UnkMotion1_Coll },
+    { 2, itWhitebea_UnkMotion2_Anim, itWhitebea_UnkMotion2_Phys,
+      itWhitebea_UnkMotion2_Coll },
+    { 1, itWhitebea_UnkMotion3_Anim, itWhitebea_UnkMotion3_Phys,
+      itWhitebea_UnkMotion3_Coll },
+    { 3, itWhitebea_UnkMotion4_Anim, itWhitebea_UnkMotion4_Phys,
+      itWhitebea_UnkMotion4_Coll },
+    { 4, itWhitebea_UnkMotion5_Anim, itWhitebea_UnkMotion5_Phys,
+      itWhitebea_UnkMotion5_Coll },
+    { 5, itWhitebea_UnkMotion6_Anim, itWhitebea_UnkMotion6_Phys,
+      itWhitebea_UnkMotion6_Coll },
+    { 6, itWhitebea_UnkMotion7_Anim, itWhitebea_UnkMotion7_Phys,
+      itWhitebea_UnkMotion7_Coll },
+    { 3, itWhitebea_UnkMotion8_Anim, itWhitebea_UnkMotion8_Phys, NULL },
+    { 7, itWhitebea_UnkMotion9_Anim, itWhitebea_UnkMotion9_Phys,
+      itWhitebea_UnkMotion9_Coll },
+    { 3, itWhitebea_UnkMotion10_Anim, itWhitebea_UnkMotion10_Phys,
+      itWhitebea_UnkMotion10_Coll },
+    { 3, itWhitebea_UnkMotion11_Anim, itWhitebea_UnkMotion11_Phys,
+      itWhitebea_UnkMotion11_Coll },
+};
 
 void it_802E31F8(Item_GObj* gobj)
 {
@@ -138,7 +165,63 @@ bool itOldottosea_UnkMotion11_Coll(Item_GObj* gobj)
     return it_802E35CC(gobj);
 }
 
-/// #it_802E35CC
+bool it_802E35CC(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itOldottoseaAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    Item* ip2;
+    f32 dx;
+    f32 dy;
+    f32 dz;
+    f32 dist;
+    Vec3* pos;
+    Vec3 sp30;
+    PAD_STACK(32);
+
+    if (ip->pos.x > Stage_GetBlastZoneRightOffset()) {
+        ip->xDCC_flag.b3 = 1;
+    }
+    if (ip->pos.x < Stage_GetBlastZoneLeftOffset()) {
+        ip->xDCC_flag.b3 = 1;
+    }
+    if (ip->pos.y > Stage_GetBlastZoneTopOffset()) {
+        ip->xDCC_flag.b3 = 1;
+    }
+    if (ip->pos.y < Stage_GetBlastZoneBottomOffset()) {
+        ip->xDCC_flag.b3 = 1;
+    }
+    if (ip->xDCC_flag.b3 == 1) {
+        if (ip->xDD4_itemVar.whitebea.x20 != NULL) {
+            it_8028ECE0(ip->xDD4_itemVar.whitebea.x20);
+        }
+        it_2725_Logic9_Destroyed(gobj);
+        return true;
+    }
+    if (ip->xDD4_itemVar.whitebea.x20 != NULL) {
+        Item_GObj* x20;
+        ip2 = HSD_GObjGetUserData(gobj);
+        x20 = ip2->xDD4_itemVar.whitebea.x20;
+        it_8028ECF0(x20, &sp30);
+        pos = &ip2->pos;
+        dx = pos->x - sp30.x;
+        dy = pos->y - sp30.y;
+        dz = pos->z - sp30.z;
+        dist = sqrtf__Ff(dx * dx + dy * dy + dz * dz);
+        if (dist > attrs->x18) {
+            it_8028ECE0(ip->xDD4_itemVar.whitebea.x20);
+            it_802E37A4(gobj);
+        } else if (dist <= attrs->x14) {
+            if (ip->msid == 7) {
+                it_8028EC98(ip->xDD4_itemVar.whitebea.x20,
+                            ip->x40_vel.x * attrs->x20);
+            } else {
+                it_8028EC98(ip->xDD4_itemVar.whitebea.x20,
+                            ip->x40_vel.x * attrs->x1C);
+            }
+        }
+    }
+    return false;
+}
 
 void it_802E3784(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
@@ -185,7 +268,7 @@ bool it_802E3884(Item_GObj* gobj)
     PAD_STACK(16);
     ip->init_facing_dir = ip->facing_dir;
     ip->xC9C += it_8027CBFC(gobj);
-    if (ip->xC9C > *attr->x0 || ip->msid == 9) {
+    if (ip->xC9C > attr->x0->x0 || ip->msid == 9) {
         it_8027C9D8(ip);
         it_802756D0(gobj);
         it_80275474(gobj);
@@ -248,7 +331,7 @@ void it_802E3AC8(Item_GObj* gobj)
     s32 facing;
     s32 timer;
     PAD_STACK(8);
-    ip->x40_vel.x = ip->facing_dir * ((f32*) attrs->x0)[1];
+    ip->x40_vel.x = ip->facing_dir * attrs->x0->x4;
     ip->x40_vel.z = 0.0f;
     ip->x40_vel.y = 0.0f;
     it_8027C56C(gobj, ip->facing_dir);
@@ -271,13 +354,13 @@ void it_802E3AC8(Item_GObj* gobj)
 bool itWhitebea_UnkMotion1_Anim(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
+    int local;
+    int* sfx;
     PAD_STACK(8);
     if (!it_80272C6C(gobj)) {
         Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE | ITEM_HIT_PRESERVE);
     }
     if (ip->xDD4_itemVar.whitebea.x44 <= 0) {
-        int local;
-        int* sfx;
         sfx = mpLib_80056A1C(mpLineGetFlags(ip->xC30), &local);
         ip->xDD4_itemVar.whitebea.x44 = 14;
         Item_8026AE84(ip, 0x13C, 0x7F, 0x40);
@@ -293,8 +376,7 @@ bool itWhitebea_UnkMotion1_Anim(Item_GObj* gobj)
 void itWhitebea_UnkMotion1_Phys(Item_GObj* gobj)
 {
     Item* ip = gobj->user_data;
-    itWhiteBeaAttributes* attrs =
-        ip->xC4_article_data->x4_specialAttributes;
+    itWhiteBeaAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
     s32 range;
     PAD_STACK(16);
 
@@ -427,7 +509,32 @@ bool itWhitebea_UnkMotion4_Coll(Item_GObj* gobj)
     return it_8027C794(gobj);
 }
 
-void it_802E40A4(Item_GObj* gobj) {}
+void it_802E40A4(Item_GObj* gobj)
+{
+    Item* ip = HSD_GObjGetUserData(gobj);
+    itWhiteBeaAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    s32 facing;
+    PAD_STACK(32);
+    ip->x40_vel.x = ip->facing_dir * attrs->x0->x4;
+    ip->x40_vel.z = 0.0f;
+    ip->x40_vel.y = 0.0f;
+    it_8027C56C(gobj, ip->facing_dir);
+    if (ip->facing_dir == -1.0f) {
+        facing = -1;
+    } else {
+        facing = 1;
+    }
+    mpCollSetFacingDir(&ip->x378_itemColl, facing);
+    it_802756E0(gobj);
+    if (2 > ip->xDD4_itemVar.whitebea.x3C ||
+        ip->xDD4_itemVar.whitebea.x3C > attrs->xE)
+    {
+        ip->xDD4_itemVar.whitebea.x3C =
+            attrs->xC + HSD_Randi(ABS(attrs->xE - attrs->xC));
+    }
+    ip->xDD4_itemVar.whitebea.x44 = 4;
+    Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
+}
 
 void it_802E4190(Item_GObj* gobj)
 {
@@ -437,7 +544,48 @@ void it_802E4190(Item_GObj* gobj)
     Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
 }
 
-/// #itWhitebea_UnkMotion2_Anim
+bool itWhitebea_UnkMotion2_Anim(Item_GObj* gobj)
+{
+    Item* ip = HSD_GObjGetUserData(gobj);
+    itWhiteBeaAttributes* attrs;
+    s32 facing;
+    PAD_STACK(24);
+    if (ip->xDD4_itemVar.whitebea.x40 == 0) {
+        ip->facing_dir = -ip->facing_dir;
+        if (ip->facing_dir == -1.0f) {
+            facing = -1;
+        } else {
+            facing = 1;
+        }
+        mpCollSetFacingDir(&ip->x378_itemColl, facing);
+    }
+    ip->xDD4_itemVar.whitebea.x40--;
+    if (!it_80272C6C(gobj)) {
+        ip->xDD4_itemVar.whitebea.x40 = 0;
+        ip = HSD_GObjGetUserData(gobj);
+        attrs = ip->xC4_article_data->x4_specialAttributes;
+        ip->x40_vel.x = ip->facing_dir * attrs->x0->x4;
+        ip->x40_vel.z = 0.0f;
+        ip->x40_vel.y = 0.0f;
+        it_8027C56C(gobj, ip->facing_dir);
+        if (ip->facing_dir == -1.0f) {
+            facing = -1;
+        } else {
+            facing = 1;
+        }
+        mpCollSetFacingDir(&ip->x378_itemColl, facing);
+        it_802756E0(gobj);
+        if (2 > ip->xDD4_itemVar.whitebea.x3C ||
+            ip->xDD4_itemVar.whitebea.x3C > attrs->xE)
+        {
+            ip->xDD4_itemVar.whitebea.x3C =
+                attrs->xC + HSD_Randi(ABS(attrs->xE - attrs->xC));
+        }
+        ip->xDD4_itemVar.whitebea.x44 = 4;
+        Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
+    }
+    return false;
+}
 
 void itWhitebea_UnkMotion2_Phys(Item_GObj* gobj) {}
 
