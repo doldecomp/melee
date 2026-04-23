@@ -17,6 +17,18 @@
 #define GET_ATTRS(ip)                                                         \
     ((itSScopeAttributes*) (ip)->xC4_article_data->x4_specialAttributes)
 
+ItemStateTable it_803F5F40[] = {
+    { -1, itSscope_UnkMotion0_Anim, itSscope_UnkMotion0_Phys,
+      itSscope_UnkMotion0_Coll },
+    { -1, itSscope_UnkMotion3_Anim, itSscope_UnkMotion1_Phys,
+      itSscope_UnkMotion3_Coll },
+    { -1, itSscope_UnkMotion2_Anim, itSscope_UnkMotion2_Phys, NULL },
+    { 0, itSscope_UnkMotion3_Anim, itSscope_UnkMotion3_Phys,
+      itSscope_UnkMotion3_Coll },
+    { -1, itSscope_UnkMotion4_Anim, itSscope_UnkMotion4_Phys,
+      itSscope_UnkMotion4_Coll },
+};
+
 HSD_GObj* it_80291BE0(Vec3* arg0)
 {
     SpawnItem spawn;
@@ -67,11 +79,9 @@ s32 it_80291CF4(Item_GObj* gobj, s32 arg1)
     return 9;
 }
 
-s32 it_80291D38(Item_GObj* gobj, s32 arg1)
+static inline s32 it_80291D38_attr(s32 charge_level, itSScopeAttributes* attrs)
 {
-    Item* ip = GET_ITEM(gobj);
-    itSScopeAttributes* attrs = GET_ATTRS(ip);
-    switch (arg1) {
+    switch (charge_level) {
     case 0:
         return attrs->xC[0];
     case 1:
@@ -82,24 +92,19 @@ s32 it_80291D38(Item_GObj* gobj, s32 arg1)
     case 6:
     case 7:
     case 8:
-        return attrs->xC[arg1];
+        return attrs->xC[charge_level];
     case 9:
         return attrs->xC[9];
     }
 }
 
-/// #it_80291DAC
-
-void it_80291F14(Item_GObj* gobj, int charge_level)
+s32 it_80291D38(Item_GObj* gobj, s32 charge_level)
 {
     Item* ip = GET_ITEM(gobj);
     itSScopeAttributes* attrs = GET_ATTRS(ip);
-    int cost = charge_level;
-
     switch (charge_level) {
     case 0:
-        cost = (int) attrs->xC[0];
-        break;
+        return attrs->xC[0];
     case 1:
     case 2:
     case 3:
@@ -108,19 +113,61 @@ void it_80291F14(Item_GObj* gobj, int charge_level)
     case 6:
     case 7:
     case 8:
-        cost = (int) attrs->xC[charge_level];
-        break;
+        return attrs->xC[charge_level];
     case 9:
-        cost = (int) attrs->xC[9];
-        break;
+        return attrs->xC[9];
     }
+}
 
-    ip->xD4C -= cost;
+static inline int it_80291DAC_level(Item_GObj* gobj, int arg1)
+{
+    Item* ip = GET_ITEM(gobj);
+    itSScopeAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    if (arg1 <= attrs->x4) {
+        return 0;
+    } else if (arg1 < attrs->x8 * 8) {
+        return arg1 / 8;
+    } else {
+        return 9;
+    }
+}
+
+int it_80291DAC(Item_GObj* gobj, int arg1)
+{
+    Item* ip = GET_ITEM(gobj);
+    int level;
+    int cost;
+    int i;
+    PAD_STACK(12);
+
+    if (ip->xD4C <= 0) {
+        return -1;
+    }
+    level = it_80291DAC_level(gobj, arg1);
+    cost = it_80291D38(gobj, level);
+    if (ip->xD4C - cost < 0) {
+        while (level > 0) {
+            cost = it_80291D38(gobj, level);
+            if (ip->xD4C - cost == 0) {
+                return level;
+            }
+            if (ip->xD4C - cost > 0) {
+                return level + 1;
+            }
+            level--;
+        }
+    }
+    return level;
+}
+
+void it_80291F14(Item_GObj* gobj, int charge_level)
+{
+    Item* ip = GET_ITEM(gobj);
+    PAD_STACK(8);
+    ip->xD4C -= it_80291D38(gobj, charge_level);
     if (ip->xD4C < 0) {
         ip->xD4C = 0;
     }
-
-    PAD_STACK(16);
 }
 
 static s32 it_80291D38_outline(Item_GObj* gobj, int charge_level)
@@ -131,12 +178,8 @@ static s32 it_80291D38_outline(Item_GObj* gobj, int charge_level)
 void it_80291FA8(Item_GObj* gobj, Vec3* pos, int charge_level, float scale)
 {
     Item* ip = GET_ITEM(gobj);
-    s32 cost = it_80291D38_outline(gobj, charge_level);
     PAD_STACK(8);
-    ip->xD4C -= cost;
-    if (ip->xD4C < 0) {
-        ip->xD4C = 0;
-    }
+    it_80291F14(gobj, charge_level);
     it_80298DEC(ip->owner, pos, charge_level, scale);
 }
 
@@ -180,7 +223,7 @@ void itSscope_UnkMotion1_Phys(Item_GObj* gobj)
 bool itSscope_UnkMotion3_Coll(Item_GObj* gobj)
 {
     if ((GET_ITEM(gobj))->xD4C != 0) {
-        it_8026E15C(gobj, (void (*)(HSD_GObj*)) it_80292030);
+        it_8026E15C(gobj, it_80292030);
         return 0;
     }
     return it_8026DF34(gobj);
@@ -233,14 +276,10 @@ bool itSScope_Logic21_HitShield(Item_GObj* gobj)
     return false;
 }
 
-/// #itSScope_Logic21_Reflected
-
 bool itSScope_Logic21_Reflected(Item_GObj* gobj)
 {
     return it_80273030(gobj);
 }
-
-/// #itSScope_Logic21_ShieldBounced
 
 bool itSScope_Logic21_ShieldBounced(Item_GObj* gobj)
 {
