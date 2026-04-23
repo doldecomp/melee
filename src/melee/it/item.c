@@ -697,10 +697,10 @@ static void Item_80267AA8(HSD_GObj* gobj, SpawnItem* spawnItem)
     }
 
     item_data->x5C8 = 0;
-    item_data->xBC7 = 0;
-    item_data->xBC6 = 0;
-    item_data->xBC5 = 0;
-    item_data->xBC4 = 0;
+    item_data->xBC4.a = 0;
+    item_data->xBC4.b = 0;
+    item_data->xBC4.g = 0;
+    item_data->xBC4.r = 0;
     item_data->x5C9 = 255;
 
     it_80279B64(item_data);

@@ -197,6 +197,10 @@ typedef struct it_266F_ItemVars {
     struct lbColl_8000A10C_arg0_t x1C;
 } it_266F_ItemVars;
 
+struct ItemModStruct {
+    GXColor x0_unk;
+};
+
 struct Item {
     void* x0;
 
@@ -336,11 +340,8 @@ struct Item {
     // u32 xBB8;
     DynamicBoneTable* xBBC_dynamicBoneTable;
     UNK_T xBC0;
-    u8 xBC4;
-    u8 xBC5;
-    u8 xBC6;
-    u8 xBC7;
-    u32 xBC8;
+    GXColor xBC4;
+    ItemModStruct xBC8;
     Vec2 xBCC_unk;
     Vec2 xBD4_grabRange;
     itECB xBDC;
@@ -693,10 +694,6 @@ struct SpawnItem {
     /* +48 */ GroundOrAir x48_ground_or_air;
 };
 
-struct ItemModStruct {
-    GXColor x0_unk;
-};
-
 struct ItemCommonData {
     s32 x0;
     u32 x4;
@@ -744,8 +741,7 @@ struct ItemCommonData {
     s32 xDC;
     f32 unk_degrees; ///< @at{E0}
     u8 filler_1a[0xE8 - 0xE4];
-    u8 xE8; // struct that has a float (scale?) as the first member? See
-            // it_80275BC8
+    f32 xE8;
     u8 filler_1a_2[0xF0 - 0xEC];
     f32 xF0;
     f32 xF4;
