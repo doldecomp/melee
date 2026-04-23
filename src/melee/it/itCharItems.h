@@ -442,7 +442,8 @@ typedef struct {
     /* ip+DE4 */ s32 xDE4;
     /* ip+DE8 */ s32 xDE8;
     /* ip+DEC */ s32 xDEC;
-    /* ip+DF0 */ u8 _pad0[0xF70 - 0xDF0];
+    /* ip+DF0 */ Vec3 xDF0[16];
+    /* ip+EB0 */ Vec3 xEB0[16];
     /* ip+F70 */ f32 xF70;
     /* ip+F74 */ f32 xF74;
     /* ip+F78 */ f32 xF78;
@@ -456,9 +457,9 @@ typedef struct {
 } itLinkBoomerang_ItemVars;
 
 typedef struct itLinkBoomerangAttributes {
-    /* x0 */ f32 x0;
-    /* x4 */ f32 x4;
-    /* x8 */ f32 x8;
+    /* x0 */ u32 x0;
+    /* x4 */ u32 x4;
+    /* x8 */ u32 x8;
     /* xC */ f32 xC;
     /* x10 */ f32 x10;
     /* x14 */ f32 x14;
@@ -475,6 +476,12 @@ typedef struct itLinkBoomerangAttributes {
     /* x40 */ f32 x40;
     /* x44 */ HSD_Joint* x44;
     /* x48 */ HSD_Joint* x48;
+    /* x4C */ HSD_AnimJoint* x4C_anim;
+    /* x50 */ HSD_MatAnimJoint* x50_matanim;
+    /* x54 */ HSD_ShapeAnimJoint* x54_shapeanim;
+    /* x58 */ HSD_AnimJoint* x58_anim;
+    /* x5C */ HSD_MatAnimJoint* x5C_matanim;
+    /* x60 */ HSD_ShapeAnimJoint* x60_shapeanim;
 } itLinkBoomerangAttributes;
 
 typedef struct {

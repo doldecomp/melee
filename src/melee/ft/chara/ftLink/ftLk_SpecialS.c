@@ -193,8 +193,9 @@ void onAccessory4(HSD_GObj* gobj)
     {
         Vec3 pos;
         u8 _[4];
-        calcAnglePos(gobj, &pos, fp->fv.lk.x4 ? da->x20 : da->x24);
-        it_802A0534(fp->fv.lk.boomerang_gobj, &pos);
+        f32 angle =
+            calcAnglePos(gobj, &pos, fp->fv.lk.x4 ? da->x20 : da->x24);
+        it_802A0534(fp->fv.lk.boomerang_gobj, &pos, angle);
         fp->cmd_vars[cmd_unk0_bool] = false;
         fp->cmd_vars[cmd_specials2_anim_bool] = false;
     }
