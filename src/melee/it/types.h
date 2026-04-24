@@ -573,6 +573,7 @@ struct Item {
         itHeiho_ItemVars heiho;
         itHinoarashi_ItemVars hinoarashi;
         itHitodeman_ItemVars hitodeman;
+        itHouou_ItemVars houou;
         itKabigon_ItemVars kabigon;
         itKinoko_ItemVars kinoko;
         itKirbyHammer_ItemVars kirbyhammer;

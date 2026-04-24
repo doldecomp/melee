@@ -1017,6 +1017,13 @@ typedef struct itChicorita_ItemVars {
     /* ip+E38 */ f32 x64; // y vel
 } itChicorita_ItemVars;
 
+typedef struct itHouou_ItemVars {
+    /* ip+DD4 */ u8 _0[0x60 - 0x0];
+    /* ip+E34 */ s32 timer;
+    /* ip+E38 */ Vec3 start_pos;
+    /* ip+E44 */ f32 vel_accum;
+} itHouou_ItemVars;
+
 typedef struct itChicoritaAttr {
     f32 scale;
     s32 x4; // x60 in item vars gets set to this if -1; max timer/lifetime?
