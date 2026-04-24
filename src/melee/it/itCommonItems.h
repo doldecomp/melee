@@ -713,10 +713,10 @@ typedef struct itPokemonAttributes {
 typedef struct itKamexAttributes {
     /* +00 */ f32 x0;
     /* +04 */ s32 timer;
-    /* +08 */ s32 max;
-    /* +0C */ s32 xC;
-    /* +10 */ s32 x10;
-    /* +14 */ s32 x14;
+    /* +08 */ f32 x8;
+    /* +0C */ f32 xC;
+    /* +10 */ f32 x10;
+    /* +14 */ f32 x14;
     /* +18 */ f32 x18;
     /* +1C */ f32 x1C;
 } itKamexAttributes;
