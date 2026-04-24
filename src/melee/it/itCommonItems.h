@@ -1613,10 +1613,13 @@ typedef struct itOldkuri_ItemVars {
 typedef struct itUnknown_ItemVars {
     /* +00 ip+DD4 */ char pad_0[0x60];
     /* +60 ip+E34 */ f32 x60;
-    /* +64 ip+E38 */ s32 x64;
-    /* +68 ip+E3C */ s32 x68;
+    /* +64 ip+E38 */ union { f32 f; s32 i; } x64;
+    /* +68 ip+E3C */ union { f32 f; s32 i; } x68;
     /* +6C ip+E40 */ Vec3 x6C;
-    /* +78 ip+E4C */ Vec3 x78;
+    /* +78 ip+E4C */ union {
+        Vec3 vec;
+        s32 dir;
+    } x78;
     /* +84 ip+E58 */ s32 x84;
 } itUnknown_ItemVars;
 
@@ -1628,15 +1631,15 @@ typedef struct itGreatFoxLaser_Attrs {
 } itGreatFoxLaser_Attrs;
 
 typedef struct itUnknownAttributes {
-    /* +00 */ f32 x0;
+    /* +00 */ union { f32 f; s32 i; } x0;
     /* +04 */ f32 x4;
     /* +08 */ f32 x8;
     /* +0C */ f32 xC;
     /* +10 */ f32 x10;
     /* +14 */ f32 x14;
-    /* +18 */ s32 x18;
-    /* +1C */ s32 x1C;
-    /* +20 */ s32 x20;
+    /* +18 */ union { f32 f; s32 i; } x18;
+    /* +1C */ union { f32 f; s32 i; } x1C;
+    /* +20 */ union { f32 f; s32 i; } x20;
     /* +24 */ HSD_Joint* x24[26];
 } itUnknownAttributes;
 
