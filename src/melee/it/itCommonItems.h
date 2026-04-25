@@ -176,7 +176,8 @@ typedef struct itKyasarinAttributes {
     /* +34 */ f32 x34;
     /* +38 */ f32 x38;
     /* +3C */ f32 x3C;
-    /* +40 */ u8 x40_pad[0x48 - 0x40];
+    /* +40 */ s32 x40;
+    /* +44 */ s32 x44;
     /* +48 */ s32 x48;
 } itKyasarinAttributes;
 
@@ -213,7 +214,15 @@ typedef struct itLugiaAttributes {
     /* +10 */ f32 x10;
     /* +14 */ s32 x14;
     /* +18 */ f32 x18;
-    /* +1C */ u8 x1C_pad[0x24];
+    /* +1C */ f32 x1C;
+    /* +20 */ f32 x20;
+    /* +24 */ f32 x24;
+    /* +28 */ f32 x28;
+    /* +2C */ f32 x2C;
+    /* +30 */ f32 x30;
+    /* +34 */ f32 x34;
+    /* +38 */ f32 x38;
+    /* +3C */ f32 x3C;
     /* +40 */ f32 x40;
 } itLugiaAttributes;
 
@@ -539,10 +548,10 @@ typedef struct itTincle_ItemVars {
     /*  +0 ip+DD4 */ u8 pad[0x20];
     /* +20 ip+DF4 */ s32 x20;
     /* +24 ip+DF8 */ s32 x24;
-    /* +28 ip+DFC */ u8 pad1[0x4];
+    /* +28 ip+DFC */ s32 x28;
     /* +2C ip+E00 */ s32 x2C;
     /* +30 ip+E04 */ f32 x30;
-    /* +34 ip+E08 */ u8 pad1b[0x4];
+    /* +34 ip+E08 */ f32 x34;
     /* +38 ip+E0C */ f32 x38;
     /* +3C ip+E10 */ f32 x3C;
     /* +40 ip+E14 */ f32 x40;
@@ -551,22 +560,35 @@ typedef struct itTincle_ItemVars {
     /* +4C ip+E20 */ f32 x4C;
     /* +50 ip+E24 */ f32 x50;
     /* +54 ip+E28 */ f32 x54;
-    /* +58 ip+E2C */ u8 pad2[0x4];
+    /* +58 ip+E2C */ f32 x58;
     /* +5C ip+E30 */ f32 x5C;
-    /* +60 ip+E34 */ u8 pad3[0x8];
+    /* +60 ip+E34 */ u8 pad3[0x4];
+    /* +64 ip+E38 */ HSD_GObj* x64;
     /* +68 ip+E3C */ itECB x68;
 } itTincle_ItemVars;
 
 typedef struct itTincleAttributes {
-    /* 0x00 */ u8 pad[0x24];
+    /* 0x00 */ f32 x0;
+    /* 0x04 */ s32 x4;
+    /* 0x08 */ s32 x8;
+    /* 0x0C */ f32 xC;
+    /* 0x10 */ f32 x10;
+    /* 0x14 */ f32 x14;
+    /* 0x18 */ f32 x18;
+    /* 0x1C */ f32 x1C;
+    /* 0x20 */ f32 x20;
     /* 0x24 */ f32 x24;
     /* 0x28 */ s32 x28;
     /* 0x2C */ s32 x2C;
-    /* 0x30 */ u8 pad1b[0x10];
+    /* 0x30 */ s32 x30;
+    /* 0x34 */ f32 x34;
+    /* 0x38 */ f32 x38;
+    /* 0x3C */ s32 x3C;
     /* 0x40 */ s32 x40;
     /* 0x44 */ f32 x44;
     /* 0x48 */ f32 x48;
-    /* 0x4C */ u8 pad2[0x8];
+    /* 0x4C */ f32 x4C;
+    /* 0x50 */ f32 x50;
     /* 0x54 */ s8 x54;
     /* 0x55 */ s8 x55;
 } itTincleAttributes;
@@ -597,7 +619,7 @@ typedef struct {
     /* ip+DF4 */ float xDF4;
     /* ip+DF8 */ float xDF8;
     /* ip+DFC */ float xDFC;
-    /* ip+E00 */ char pad_E00[0xE04 - 0xE00];
+    /* ip+E00 */ f32 xE00;
     /* ip+E04 */ float xE04;
     /* ip+E08 */ unsigned char xE08_b0 : 1;
     /* ip+E08 */ unsigned char xE08_b1 : 1;
@@ -1225,82 +1247,59 @@ struct it_2F28_DatAttrs {
     f32 float2; // item var x0
 };
 
-typedef struct it_2E5A_ItemVars_struct {
-    f32 x0;       // set to float calc result/item->x3C
-    HSD_JObj* x4; // set to item_gobj->hsd_obj
-    Vec3 x8;      // called in lb_8000B1CC
-    Vec3 x14;     // set equal to x8
-} it_2E5A_ItemVars_struct;
+/// Inline sub-struct at ItemVars offset 0x1C (byte offset 0xDF0 in Item).
+/// Tracks a bone used for coin pickup collision.
+typedef struct it_2E5A_SubVars {
+    /* +0  */ f32 x0;       // scale-dependent radius (copied to item->x3C)
+    /* +4  */ HSD_JObj* x4; // bone
+    /* +8  */ Vec3 x8;      // current bone world position
+    /* +14 */ Vec3 x14;     // previous bone world position
+} it_2E5A_SubVars;
 
 typedef struct it_2E5A_ItemVars {
-    // /* ip+DD4 */ HSD_GObj* x0;
     /* ip+DD4 */ s32 x0;
-    /* ip+DD8 */ s32 x4;  // uses regular registers (#? gets multiplied by 2C,
-                          // then indexed into attr)
-    /* ip+DDC */ s32 x8;  // uses regular registers
-    /* ip+DE0 */ s32 xC;  // uses regular registers
-    /* ip+DE4 */ f32 x10; // uses float registers; timer?
+    /* ip+DD8 */ s32 x4; // tier index (0..2)
+    /* ip+DDC */ s32 x8;
+    /* ip+DE0 */ s32 xC;
+    /* ip+DE4 */ f32 x10;
     /* ip+DE8 */ f32 x14;
-    /* ip+DEC */ UnkFlagStruct x18; // has bit assignments
-    /* ip+DF0 */ it_2E5A_ItemVars_struct* x1C;
-    // /* ip+DF4 */ s32 x20;
-    // /* ip+DF8 */ s32 x24;
-    // /* ip+DFC */ s32 x28;
-    // /* ip+E00 */ s32 x2C;
-    // /* ip+E04 */ s32 x30;
-    // /* ip+E08 */ s32 x34;
-    // /* ip+E0C */ s32 x38;
-    // /* ip+E10 */ s32 x3C;
-    // /* ip+E14 */ s32 x40;
-    // /* ip+E18 */ s32 x44;
-    // /* ip+E1C */ s32 x48;
-    // /* ip+E20 */ s32 x4C;
-    // /* ip+E24 */ s32 x50;
-    // /* ip+E28 */ s32 x54;
-    // /* ip+E2C */ s32 x58;
+    /* ip+DEC */ UnkFlagStruct x18;
+    /* ip+DF0 */ it_2E5A_SubVars sub;
 } it_2E5A_ItemVars;
 
-typedef struct it_2E5A_DatAttrs_1 {
-    f32 x0; // lifetime?
-    f32 x4; // float assignment
-    f32 x8;
-    f32 xC;
-    f32 x10;
-    f32 x14; // item->x40_vel.x
-    f32 x18;
-    f32 x1C;
-    f32 x20;
-    f32 x24; // float assignment
-    f32 x28;
-    f32 x2C; // float assignment
-    f32 x30;
-    f32 x34;
-    f32 x38;
-    HSD_Joint* x3C; // called in it_80273318
-    f32 x40;
-    f32 x44;
-    f32 x48;
-    s32 x4C; // item->xD84
-    s32 x50;
-    f32 x54;    // item->scl
-    itECB* x58; // called in it_80275D5C
-    s32 x5C;
-} it_2E5A_DatAttrs_1;
+/// One tier's worth of spawn data (bronze/silver/gold).
+/// The four fields from @c anim_joint through @c xD84_value form an inline
+/// @ref ItemStateDesc; its address is passed to @c Item_80268D34. The fourth
+/// slot (@c xC_script in @ref ItemStateDesc) doubles as @c xD84_value.
+typedef struct it_2E5A_TierEntry {
+    /* 0x00 */ HSD_Joint* joint;
+    /* 0x04 */ HSD_AnimJoint* anim_joint;
+    /* 0x08 */ HSD_MatAnimJoint* matanim_joint;
+    /* 0x0C */ HSD_ShapeAnimJoint* shape_anim_joint;
+    /* 0x10 */ s32 xD84_value;
+    /* 0x14 */ s32 threshold;
+    /* 0x18 */ f32 scale;
+    /* 0x1C */ itECB ecb;
+} it_2E5A_TierEntry;
 
-typedef struct it_2E5A_DatAttrs_2 {
-    f32 x0; // lifetime?
-    f32 x4; // float assignment
-    f32 x8;
-    f32 xC;
-    HSD_Joint* x10;     // called in it_80273318
-    ItemStateDesc* x14; // item2->xD0_itemStateDesc
-    f32 x18;
-    f32 x1C;
-    s32 x20; // item->xD84
-    f32 x24; // float assignment
-    f32 x28; // item->scl
-    // itECB* x2C; // called in it_80275D5C
-} it_2E5A_DatAttrs_2;
+/// Special attributes for it_2E5A items. Base physics parameters followed by
+/// three tier entries.
+typedef struct it_2E5A_Attrs {
+    /* 0x00 */ f32 x0; // passed to it_80275158
+    /* 0x04 */ f32 x4; // stored into item->xDD4_itemVar.it_2E5A.x10
+    /* 0x08 */ f32 x8; // stored into item->xDD4_itemVar.it_2E5A.x14
+    /* 0x0C */ f32 xC;
+    /* 0x10 */ f32 x10;
+    /* 0x14 */ f32 x14; // item->x40_vel.x multiplier on landing
+    /* 0x18 */ f32 x18;
+    /* 0x1C */ f32 x1C;
+    /* 0x20 */ f32 x20;
+    /* 0x24 */ f32 x24;
+    /* 0x28 */ f32 x28;
+    /* 0x2C */ f32
+        x2C[4]; // per-player spawn multiplier (indexed by gm_8016C6C0)
+    /* 0x3C */ it_2E5A_TierEntry tiers[3];
+} it_2E5A_Attrs;
 
 typedef struct it_802E5FXX_struct { // used for it_802E5F00 and it_802E5F8C
     HSD_GObj* x0; // Item GObj assignment/passed to db_80225DD8
@@ -1455,7 +1454,7 @@ typedef struct itOctarockAttributes {
 
 typedef struct itOldottosea_ItemVars {
     /* 0x00 */ u8 pad[0x20];
-    /* 0x20 */ s32 x20;
+    /* 0x20 */ Item_GObj* x20;
     /* 0x24 */ s32 x24;
     /* 0x28 */ s32 x28;
     /* 0x2C */ s16 x2C;
@@ -1491,24 +1490,30 @@ typedef struct itPatapataAttributes {
     /* 0x1C */ s32 x1C;
     /* 0x20 */ f32 x20;
     /* 0x24 */ s32 x24;
-    /* 0x28 */ s32 x28;
+    /* 0x28 */ f32 x28;
     /* 0x2C */ s32 x2C;
-    /* 0x30 */ u8 pad_30[0x38 - 0x30];
+    /* 0x30 */ f32 x30;
+    /* 0x34 */ f32 x34;
     /* 0x38 */ f32 x38;
     /* 0x3C */ f32 x3C;
 } itPatapataAttributes;
 
 typedef struct itOldottoseaAttributes {
-    /* 0x00 */ s32* x0;
+    /* 0x00 */ struct {
+        s32 x0;
+        f32 x4;
+    }* x0;
     /* 0x04 */ f32 x4;
     /* 0x08 */ f32 x8;
     /* 0x0C */ f32 xC;
-    /* 0x10 */ u8 pad0[0x4];
+    /* 0x10 */ s8 x10;
+    /* 0x11 */ u8 pad0[0x3];
     /* 0x14 */ f32 x14;
     /* 0x18 */ u8 pad1[0x4];
     /* 0x1C */ f32 x1C;
     /* 0x20 */ u8 pad2[0x4];
     /* 0x24 */ f32 x24;
+    /* 0x28 */ s8 x28;
 } itOldottoseaAttributes;
 
 typedef struct itFreezerAttributes {
@@ -1554,6 +1559,16 @@ typedef struct itkireihanaAttributes {
     u32 x8;
     u32 xC;
 } itkireihanaAttributes;
+
+typedef struct itKabigonAttributes {
+    f32 x0;
+    f32 x4;
+    f32 x8;
+    f32 xC;
+    s32 x10;
+    s32 x14;
+    f32 x18;
+} itKabigonAttributes;
 
 typedef struct itMatadogasAttributes {
     /* +00 */ f32 x0;
@@ -1650,5 +1665,23 @@ typedef struct itMatadogas_ItemVars {
     /* +64 ip+E38 */ s32 x64;
     /* +68 ip+E3C */ s32 x68;
 } itMatadogas_ItemVars;
+
+typedef struct itYoshiEggThrowAttributes {
+    /* +0 */ f32 x0;
+    /* +4 */ f32 x4;
+} itYoshiEggThrowAttributes;
+
+typedef struct ScopeBeamFloats {
+    float velocity;
+    float scale;
+    float lifetime;
+} ScopeBeamFloats;
+
+typedef struct ScopeBeamAttrs {
+    ScopeBeamFloats floats[9];
+    /* +6C */ u8 _pad[0x78 - 0x6C];
+    /* +78 */ f32 x78;
+    /* +7C */ f32 x7C;
+} ScopeBeamAttrs;
 
 #endif

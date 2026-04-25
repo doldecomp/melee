@@ -1,8 +1,5 @@
 #include "itmatadogas.h"
 
-#include <placeholder.h>
-#include <platform.h>
-
 #include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "ft/ft_0C31.h"
@@ -12,9 +9,16 @@
 #include "it/it_2725.h"
 #include "it/item.h"
 
-#include <baselib/debug.h>
-#include <baselib/jobj.h>
 #include <baselib/random.h>
+#include <MSL/math.h>
+
+ItemStateTable it_803F7B58[] = {
+    { 0, it_802CB118, it_802CB14C, it_802CB150 },
+    { 1, itMatadogas_UnkMotion1_Anim, itMatadogas_UnkMotion1_Phys,
+      itMatadogas_UnkMotion1_Coll },
+    { -1, itMatadogas_UnkMotion2_Anim, itMatadogas_UnkMotion2_Phys,
+      itMatadogas_UnkMotion2_Coll },
+};
 
 void it_802CAFD4(Item_GObj* gobj)
 {
@@ -56,7 +60,22 @@ bool it_802CB150(Item_GObj* gobj)
     return false;
 }
 
-/// #itMatadogas_UnkMotion1_Anim
+bool itMatadogas_UnkMotion1_Anim(Item_GObj* gobj)
+{
+    Item* ip;
+    HSD_JObj* jobj;
+    PAD_STACK(8);
+
+    if (it_80272C6C(gobj) == 0) {
+        jobj = gobj->hsd_obj;
+        ip = gobj->user_data;
+        Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+        ip->entered_hitlag = efLib_PauseAll;
+        ip->exited_hitlag = efLib_ResumeAll;
+        HSD_JObjSetRotationY(jobj, 0.0f);
+    }
+    return false;
+}
 
 void itMatadogas_UnkMotion1_Phys(Item_GObj* gobj) {}
 
@@ -104,6 +123,7 @@ void itMatadogas_UnkMotion2_Phys(Item_GObj* gobj)
     Item* item;
     Item* item2;
     HSD_JObj* jobj;
+    PAD_STACK(8);
 
     if (it_8027A09C(gobj)) {
         item = gobj->user_data;
@@ -132,7 +152,43 @@ bool itMatadogas_UnkMotion2_Coll(Item_GObj* gobj)
     return it_8027A118(gobj, (void (*)(HSD_GObj*)) it_802CB0F4);
 }
 
-/// #it_802CB4F0
+void it_802CB4F0(Item_GObj* gobj, s32 kind, f32 radius)
+{
+    Item* ip = GET_ITEM(gobj);
+    SpawnItem spawn;
+    f32 rand;
+
+    rand = HSD_Randi(360);
+    spawn.prev_pos = ip->pos;
+    it_8026BB88(gobj, &spawn.pos);
+    spawn.facing_dir = ip->facing_dir;
+    spawn.x3C_damage = 0;
+    spawn.vel.x = radius * cosf(deg_to_rad * rand);
+    spawn.vel.y = radius * sinf(deg_to_rad * rand);
+    spawn.vel.z = 0.0f;
+    spawn.kind = kind;
+    spawn.x0_parent_gobj = ip->owner;
+    spawn.x4_parent_gobj2 = gobj;
+    spawn.x44_flag.b0 = 1;
+    spawn.x40 = 0;
+
+    if (Item_80268B18(&spawn) != NULL) {
+        ip->xDD4_itemVar.matadogas.x64 ^= 1;
+        if (ip->xDD4_itemVar.matadogas.x64 != 0) {
+            switch (HSD_Randi(3)) {
+            case 0:
+                Item_8026AE84(ip, 0x2712, 0x7F, 0x40);
+                break;
+            case 1:
+                Item_8026AE84(ip, 0x2713, 0x7F, 0x40);
+                break;
+            case 2:
+                Item_8026AE84(ip, 0x2714, 0x7F, 0x40);
+                break;
+            }
+        }
+    }
+}
 
 void it_2725_Logic32_Spawned(Item_GObj* gobj)
 {
@@ -173,6 +229,13 @@ void it_802CB798(Item_GObj* gobj)
     ip->exited_hitlag = efLib_ResumeAll;
     it_8026B3A8(gobj);
 }
+
+ItemStateTable it_803F7BB0[] = { {
+    0,
+    it_802CB810,
+    it_802CB844,
+    it_802CB8A4,
+} };
 
 bool it_802CB810(Item_GObj* gobj)
 {

@@ -1,14 +1,8 @@
 #include "ithitodeman.h"
 
-#include <placeholder.h>
-#include <platform.h>
-
 #include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "ft/ftlib.h"
-
-#include "it/forward.h"
-
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
@@ -17,15 +11,60 @@
 #include "lb/lbvector.h"
 
 #include <math.h>
-#include <baselib/jobj.h>
 #include <baselib/random.h>
-#include <MSL/math_ppc.h>
-#include <MSL/trigf.h>
+
+ItemStateTable it_803F8128[] = {
+    {
+        0,
+        it_802D4564,
+        it_802D472C,
+        it_802D48A8,
+    },
+    {
+        1,
+        itHitodeman_UnkMotion1_Anim,
+        itHitodeman_UnkMotion1_Phys,
+        itHitodeman_UnkMotion1_Coll,
+    },
+    {
+        -1,
+        itHitodeman_UnkMotion2_Anim,
+        itHitodeman_UnkMotion2_Phys,
+        itHitodeman_UnkMotion2_Coll,
+    },
+};
+
+static void ordering_func()
+{
+    HSD_JObjSetRotationY(NULL, 10);
+}
+
+ItemStateTable it_803F8180[] = { {
+    0x00000000,
+    it_802D4FFC,
+    it_802D5044,
+    it_802D5048,
+} };
+
+extern inline float sqrtf(float x)
+{
+    volatile float y;
+    if (x > 0.0f) {
+        double guess = __frsqrte((double) x); // returns an approximation to
+        guess = .5 * guess * (3.0 - guess * guess * x); // now have 12 sig bits
+        guess = .5 * guess * (3.0 - guess * guess * x); // now have 24 sig bits
+        guess = .5 * guess * (3.0 - guess * guess * x); // now have 32 sig bits
+        y = (float) (x * guess);
+        return y;
+    }
+    return x;
+}
 
 void it_2725_Logic24_Spawned(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itHitodemanAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    PAD_STACK(16);
 
     ip->facing_dir = 0.0f;
     ip->xDBC_itcmd_var4.flags.x0 = false;
@@ -35,7 +74,7 @@ void it_2725_Logic24_Spawned(Item_GObj* gobj)
     it_802D4494(gobj);
     it_802D4510(gobj);
 
-    ip->xDD4_itemVar.hitodeman.x8C = (f32) attrs->x3C;
+    ip->xDD4_itemVar.hitodeman.x8C = attrs->x3C;
 
     ip->xDD4_itemVar.hitodeman.x6C = 0.0f;
     ip->xDD4_itemVar.hitodeman.x70 = 0.0f;
@@ -51,7 +90,7 @@ void it_2725_Logic24_Spawned(Item_GObj* gobj)
     Item_8026AE84(ip, 0x2738, 0x7F, 0x40);
 }
 
-void it_802D43AC(void) {}
+void it_802D43AC(Item_GObj* gobj) {}
 
 void it_802D43B0(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
@@ -151,15 +190,20 @@ bool it_802D4564(Item_GObj* gobj)
     return false;
 }
 
+inline Article* it_802D472C_inline(Item* ip)
+{
+    return ip->xC4_article_data;
+}
+
 void it_802D472C(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    itHitodemanAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    itHitodemanAttributes* attrs =
+        it_802D472C_inline(ip)->x4_specialAttributes;
     Vec3 target_pos;
     Vec3 dir;
     f32 speed;
     f32 dist;
-    PAD_STACK(4);
 
     if (ip->xDD4_itemVar.hitodeman.x90 != NULL) {
         ftLib_80086644(ip->xDD4_itemVar.hitodeman.x90, &target_pos);
@@ -193,20 +237,20 @@ f32 it_802D48B0(f32* value, f32 target, f32 max_val, f32 accel, f32 decel)
     f32 diff = target - current;
 
     if (ABS(diff) > ABS(accel)) {
-        if (diff > 0.0F) {
+        if (diff > 0.0f) {
             target = current + accel;
         } else {
             target = current - accel;
         }
     } else if (ABS(diff) < ABS(decel)) {
-        if (diff > 0.0F) {
+        if (diff > 0.0f) {
             target = current + decel;
         } else {
             target = current - decel;
         }
     }
 
-    if (target > 0.0F) {
+    if (target > 0.0f) {
         if (target > max_val) {
             target = max_val;
         }
@@ -240,10 +284,10 @@ bool itHitodeman_UnkMotion1_Anim(Item_GObj* gobj)
         return true;
     }
 
-    timer = ip->xDD4_itemVar.hitodeman.x8C - 1.0F;
+    timer = ip->xDD4_itemVar.hitodeman.x8C - 1.0f;
     ip->xDD4_itemVar.hitodeman.x8C = timer;
 
-    if (timer < 0.0F) {
+    if (timer < 0.0f) {
         if (--ip->xDD4_itemVar.hitodeman.x88 < 0) {
             return true;
         }
@@ -320,7 +364,7 @@ void itHitodeman_UnkMotion2_Phys(Item_GObj* gobj)
 
 bool itHitodeman_UnkMotion2_Coll(Item_GObj* gobj)
 {
-    return it_8027A118(gobj, (void (*)(HSD_GObj*)) it_802D43AC);
+    return it_8027A118(gobj, it_802D43AC);
 }
 
 void it_802D4C74(Item_GObj* gobj)
@@ -422,9 +466,9 @@ bool it_802D4FFC(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     f32 timer;
 
-    timer = ip->xD44_lifeTimer - 1.0F;
+    timer = ip->xD44_lifeTimer - 1.0f;
     ip->xD44_lifeTimer = timer;
-    if (timer <= 0.0F) {
+    if (timer <= 0.0f) {
         return true;
     }
     if (ip->xDB4_itcmd_var2 != 0) {

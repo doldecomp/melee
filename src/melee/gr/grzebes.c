@@ -1065,7 +1065,7 @@ void grZebes_801DA254(Ground_GObj* gobj, f32 level)
     HSD_LObj* lobj = (HSD_LObj*) gp->gv.zebes4.xDC;
     gp->gv.zebes4.xDC = (u32) lobj;
     if (lobj == NULL) {
-        HSD_GObj* lgobj = HSD_GObj_804D7824[4];
+        HSD_GObj* lgobj = HSD_GObjGXLinkHead[4];
         if (lgobj != NULL) {
             lobj = (HSD_LObj*) lgobj->hsd_obj;
             while (lobj != NULL) {

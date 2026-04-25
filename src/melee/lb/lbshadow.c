@@ -309,7 +309,7 @@ void lbShadow_8000F38C(s32 arg0)
     fallback = lobj;
     {
         HSD_GObj* lgobj;
-        for (lgobj = HSD_GObj_804D7824[4]; lgobj != NULL;) {
+        for (lgobj = HSD_GObjGXLinkHead[4]; lgobj != NULL;) {
             HSD_GObj* nextGx = lgobj->next_gx;
             lobj = (HSD_LObj*) lgobj->hsd_obj;
             while (lobj != NULL) {

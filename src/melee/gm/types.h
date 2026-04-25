@@ -404,6 +404,7 @@ struct lbl_8046B6A0_24C_t {
     u8 x4;
     u8 x5; ///< match mode
     u8 is_teams;
+    u8 x7;
     u32 x8;
     u8 xC;
     u8 xD;
@@ -425,12 +426,18 @@ struct lbl_8046B6A0_24C_t {
         u8 x5;
         u8 x6;
         u8 x7;
-        u8 pad8[0x20 - 8];
+        u8 pad8[2];
+        u16 xA;
+        u8 padC[2];
+        u16 xE;
+        u8 pad10[0x20 - 0x10];
         u32 x20;
         u32 x24;
         u32 x28;
         u32 x2C;
-        u8 pad60[0xA8 - 0x30];
+        u8 pad30[0x40 - 0x30];
+        u32 x40;
+        u8 pad44[0xA8 - 0x44];
     } x58[6];
     u8 pad3F0[0x44C - 0x3F0 - 0x58];
     struct lbl_8046B6A0_24C_44C_t {
@@ -703,19 +710,19 @@ struct Unk1PData {
             /* 25 */ u8 x1;
             /* 26 */ u8 x2;
             /* 27 */ u8 x3;
-            /* 28 */ int x4;
-            /* 2C */ int x8;
+            /* 28 */ f32 x4;
+            /* 2C */ f32 x8;
         } x24[3];
     } xC;
 };
 
 struct UnkAdventureData {
     /* 00 */ Unk1PData x0;
-    /* 48 */ UNK_T x48;
+    /* 48 */ u8 (*x48)(u8, u8);
     /* 4C */ u8 (*x4C)(u8, u8, u8);
-    /* 50 */ UNK_T x50;
+    /* 50 */ u8 (*x50)(u8, u8, u8);
     /* 54 */ u8 (*x54)(u8, u8, u8);
-    /* 58 */ UNK_T x58;
+    /* 58 */ u8 (*x58)(u8, u8, u8);
     /* 5C */ UNK_T x5C;
     /* 60 */ UNK_T x60;
     /* 64 */ float (*x64)(u8, u8);

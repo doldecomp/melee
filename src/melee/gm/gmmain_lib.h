@@ -117,8 +117,8 @@
 /* 15DB2C */ void gmMainLib_8015DB2C(u8);
 /* 15DB6C */ u8 gmMainLib_8015DB6C(u8);
 /* 15DB80 */ void gmMainLib_8015DB80(void);
-/* 15DBF4 */ UNK_RET gmMainLib_8015DBF4(s32);
-/* 15EA80 */ UNK_RET gmMainLib_8015EA80(UNK_PARAMS);
+/* 15DBF4 */ s32 gmMainLib_8015DBF4(s32);
+/* 15EA80 */ void gmMainLib_8015EA80(void);
 /* 15ECB0 */ int gmMainLib_8015ECB0(void);
 /* 15ECBC */ void gmMainLib_8015ECBC(void);
 /* 15ED30 */ int gmMainLib_8015ED30(void);
@@ -149,8 +149,8 @@
 /* 15EEC8 */ void gmMainLib_8015EEC8(void);
 /* 15EF30 */ void gmMainLib_8015EF30(struct gmMainLib_8015EF30_s* arg0);
 /* 15EF84 */ void InitializePersistentNameData(s32);
-/* 15F150 */ UNK_RET gmMainLib_8015F150(UNK_PARAMS);
-/* 15F260 */ UNK_RET gmMainLib_8015F260(UNK_PARAMS);
+/* 15F150 */ void gmMainLib_8015F150(void);
+/* 15F260 */ void gmMainLib_8015F260(void);
 /* 15F464 */ void gmMainLib_8015F464(void);
 /* 15F490 */ void gmMainLib_8015F490(void);
 /* 15F4BC */ void gmMainLib_8015F4BC(void);
@@ -159,7 +159,7 @@
 /* 15F500 */ void gmMainLib_8015F500(void);
 /* 15F588 */ void gmMainLib_8015F588(bool);
 /* 15F600 */ void gmMainLib_8015F600(int, int);
-/* 15FA34 */ void gmMainLib_8015FA34(int);
+/* 15FA34 */ void gmMainLib_8015FA34(s32);
 /* 15FB68 */ void gmMainLib_8015FB68(void);
 /* 15FBA4 */ void gmMainLib_8015FBA4(void);
 /* 15FC74 */ int gmMainLib_8015FC74(void);

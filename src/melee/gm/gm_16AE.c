@@ -982,7 +982,7 @@ int gm_8016C75C(HSD_GObj* arg0)
 
 void fn_8016C7D0(HSD_GObj* gobj)
 {
-    fn_80171DC4(gobj);
+    fn_80171DC4();
 }
 
 void fn_8016C7F0(void)

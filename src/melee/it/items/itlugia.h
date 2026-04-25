@@ -1,8 +1,6 @@
 #ifndef GALE01_2D1438
 #define GALE01_2D1438
 
-#include <placeholder.h>
-
 #include "it/forward.h"
 
 #include "it/items/types.h"
@@ -29,7 +27,7 @@
 /* 2D1B30 */ bool itLugia_UnkMotion5_Anim(Item_GObj* gobj);
 /* 2D1B94 */ void itLugia_UnkMotion5_Phys(Item_GObj* gobj);
 /* 2D1BB4 */ bool itLugia_UnkMotion5_Coll(Item_GObj* gobj);
-/* 2D1BBC */ UNK_RET it_802D1BBC(UNK_PARAMS);
+/* 2D1BBC */ void it_802D1BBC(Item_GObj*);
 /* 2D1D40 */ void it_802D1D40(Item_GObj*);
 /* 2D1DB4 */ bool it_802D1DB4(Item_GObj* gobj);
 /* 2D1DD8 */ void it_802D1DD8(Item_GObj* gobj);
@@ -47,11 +45,5 @@
 /* 2D24FC */ bool it_802D24FC(Item_GObj* gobj);
 /* 3F7EE8 */ extern ItemStateTable it_803F7EE8[];
 /* 3F7F48 */ extern ItemStateTable it_803F7F48[];
-
-extern f32 it_804DD450;
-extern f32 it_804DD46C;
-extern f32 it_804DD470;
-extern f32 it_804DD474;
-extern f32 it_804DD490;
 
 #endif

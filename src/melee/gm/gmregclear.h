@@ -5,6 +5,7 @@
 #include <platform.h>
 
 #include <melee/gm/forward.h>
+#include <melee/gr/forward.h>
 #include <melee/it/forward.h>
 #include <melee/mn/forward.h>
 #include <sysdolphin/baselib/forward.h>
@@ -21,15 +22,16 @@
                                  struct gmm_x0_528_t*, u8);
 /* 17CBAC */ UNK_RET gm_8017CBAC(UnkAdventureData*, struct gmm_x0_528_t*, u8);
 /* 17CD94 */ u8 gm_8017CD94(UnkAdventureData*, int, int, int);
-/* 17CE34 */ UNK_RET gm_8017CE34(StartMeleeData*, UnkAdventureData*, s8*, u8,
-                                 u8, u8, int, int, int count, int);
+/* 17CE34 */ s32 gm_8017CE34(StartMeleeData*, UnkAdventureData*, s8*, u8,
+                                 u8, u8, s32, InternalStageId, s32 count,
+                                 s32);
 /* 17D7AC */ bool gm_8017D7AC(MatchExitInfo*, Unk1PData*, u8);
-/* 17D9C0 */ UNK_RET fn_8017D9C0(UNK_PARAMS);
+/* 17D9C0 */ s32 fn_8017D9C0(u8* arg0, u8* arg1);
 /* 17DB58 */ void gm_8017DB58(struct Unk1PData_x24* arg0);
 /* 17DB6C */ u8 gm_8017DB6C(gm_8017DB6C_arg0_t* arg0, int index);
 /* 17DB78 */ u8 gm_8017DB78(gm_8017DB6C_arg0_t* arg0, int index);
-/* 17DB88 */ UNK_RET gm_8017DB88(UNK_PARAMS);
-/* 17DD7C */ u8 fn_8017DD7C(PlayerInitData* arg0, Unk1PData_x24* arg1);
+/* 17DB88 */ s32 gm_8017DB88(void* arg0, u8 arg1, s32 arg2, s32 arg3, u8* arg4, u8 arg5, u8 (*arg6)(s32, s32, u8), u8 (*arg7)(s32, s32, u8), u8 (*arg8)(s32, s32, u8), f32 (*arg9)(s32, s32), f32 (*arg10)(s32, s32));
+/* 17DD7C */ s32 fn_8017DD7C(PlayerInitData* arg0, Unk1PData_x24* arg1, u8 arg2);
 /* 17DE54 */ s32 fn_8017DE54(u8, u8*);
 /* 17DEC8 */ Unk1PData* fn_8017DEC8(int);
 /* 17DF28 */ Unk1PData* fn_8017DF28(void);
@@ -79,15 +81,15 @@
 /* 17F008 */ int fn_8017F008(void);
 /* 17F09C */ s32 fn_8017F09C(void);
 /* 17F14C */ s32 fn_8017F14C(void* arg0);
-/* 17F1B8 */ void fn_8017F1B8(void);
-/* 17F2A4 */ UNK_RET fn_8017F2A4(UNK_PARAMS);
-/* 17F47C */ UNK_RET fn_8017F47C(UNK_PARAMS);
-/* 17F608 */ UNK_RET fn_8017F608(UNK_PARAMS);
-/* 17FA1C */ UNK_RET fn_8017FA1C(UNK_PARAMS);
-/* 17FBA4 */ UNK_RET fn_8017FBA4(UNK_PARAMS);
+/* 17F1B8 */ s32 fn_8017F1B8(void);
+/* 17F2A4 */ s32 fn_8017F2A4(HSD_Text** arg0, f32 farg0, f32 farg1);
+/* 17F47C */ s32 fn_8017F47C(HSD_Text** arg0, int arg1);
+/* 17F608 */ void fn_8017F608(void* arg0);
+/* 17FA1C */ s32 fn_8017FA1C(void* arg0);
+/* 17FBA4 */ void fn_8017FBA4(void* arg0);
 /* 17FE54 */ void fn_8017FE54(HSD_GObj* gobj);
-/* 17FF1C */ UNK_RET fn_8017FF1C(UNK_PARAMS);
-/* 1803FC */ UNK_RET fn_801803FC(UNK_PARAMS);
+/* 17FF1C */ void fn_8017FF1C(HSD_GObj* gobj);
+/* 1803FC */ s32 fn_801803FC(void* arg0);
 /* 180630 */ void fn_80180630(int, int, int, bool, lbl_8046B6A0_24C_t*);
 /* 180AC0 */ int fn_80180AC0(void);
 /* 180AE4 */ s32 gm_80180AE4(void);
@@ -95,9 +97,9 @@
 /* 180B18 */ void gm_80180B18(void);
 /* 180BA0 */ void gm_80180BA0(void);
 /* 180C14 */ void fn_80180C14(HSD_GObj* gobj);
-/* 180C60 */ UNK_RET fn_80180C60(UNK_PARAMS);
-/* 181598 */ UNK_RET fn_80181598(UNK_PARAMS);
-/* 181708 */ UNK_RET fn_80181708(UNK_PARAMS);
+/* 180C60 */ void fn_80180C60(HSD_GObj* gobj);
+/* 181598 */ void fn_80181598(void);
+/* 181708 */ void fn_80181708(void);
 /* 181998 */ void gm_80181998(void);
 /* 181A00 */ void gm_80181A00(s32 arg0, s32 arg1);
 /* 181A14 */ int gm_80181A14(void);
@@ -107,12 +109,12 @@
 /* 181AC8 */ void gm_80181AC8(int, int, u16);
 /* 181B64 */ void gm_80181B64(int c_kind, int, s32);
 /* 181BFC */ int fn_80181BFC(int*);
-/* 181C80 */ UNK_RET fn_80181C80(UNK_PARAMS);
+/* 181C80 */ s32 fn_80181C80(s32 arg0);
 /* 181E18 */ UNK_RET fn_80181E18(UNK_PARAMS);
 /* 182174 */ UNK_RET gm_80182174(UNK_PARAMS);
 /* 182510 */ bool gm_80182510(void);
 /* 182554 */ void gm_80182554(int, int);
-/* 182578 */ UNK_RET gm_80182578(UNK_PARAMS);
+/* 182578 */ s32 gm_80182578(void);
 /* 182B5C */ UNK_RET fn_80182B5C(UNK_PARAMS);
 /* 182DF0 */ UnkMultimanData* gm_80182DF0(int c_kind, int);
 /* 182F40 */ void fn_80182F40(HSD_GObj*);

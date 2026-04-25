@@ -2,22 +2,105 @@
 
 #include <placeholder.h>
 
+#include "db/db.h"
 #include "ft/chara/ftPikachu/ftPk_SpecialLw.h"
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
+#include "it/itCharItems.h"
 #include "it/item.h"
+
+#include "it/items/forward.h"
+
 #include "it/types.h"
+#include "MSL/math.h"
 
 #include <baselib/gobj.h>
+#include <baselib/jobj.h>
 
-int it_802B1DEC(Item_GObj* arg0)
+ItemStateTable it_803F70C8[] = {
+    {
+        -1,
+        itPikachuthunder_UnkMotion0_Anim,
+        NULL,
+        NULL,
+    },
+    {
+        0,
+        itPikachuthunder_UnkMotion1_Anim,
+        NULL,
+        itPikachuthunder_UnkMotion1_Coll,
+    },
+    {
+        0,
+        itPikachuthunder_UnkMotion2_Anim,
+        NULL,
+        NULL,
+    },
+};
+
+s32 it_802B1DEC(Item_GObj* arg0)
 {
-    return GET_ITEM(arg0)->xDD4_itemVar.capsule.x4;
+    return GET_ITEM(arg0)->xDD4_itemVar.pikachuthunder.x4;
 }
 
-/// #it_802B1DF8
+Item_GObj* it_802B1DF8(Item_GObj* owner, Vec3* pos, Vec3* vel, s32 count,
+                       s32 delay, s32 kind)
+{
+    SpawnItem spawn;
+    u8 _pad[4];
+    u32 x40 = Item_8026AE60();
+    s32 cur_delay = 0;
+    Item_GObj* prev = NULL;
+    Item_GObj* first = NULL;
+    int i;
+
+    spawn.kind = kind;
+    spawn.prev_pos = *pos;
+    spawn.prev_pos.z = 0.0f;
+    spawn.pos = spawn.prev_pos;
+    spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;
+    spawn.facing_dir = -1.0f;
+    spawn.x3C_damage = 0;
+    spawn.x0_parent_gobj = owner;
+    spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
+    spawn.x44_flag.b0 = true;
+    spawn.x40 = x40;
+
+    for (i = 0; i < count; i++) {
+        Item_GObj* item_gobj = Item_80268B18(&spawn);
+        if (i == 0) {
+            first = item_gobj;
+        }
+        if (item_gobj != NULL) {
+            Item* ip = GET_ITEM(item_gobj);
+            itPikachuthunderAttributes* attrs =
+                ip->xC4_article_data->x4_specialAttributes;
+            if (prev != NULL) {
+                GET_ITEM(prev)->xDD4_itemVar.pikachuthunder.x34 = item_gobj;
+            }
+            it_802756D0(item_gobj);
+            ip->xDC8_word.flags.xD = 0;
+            db_80225DD8(item_gobj, owner);
+            it_802B2080(item_gobj);
+            ip->xDCC_flag.b3 = 0;
+            ip->xDCC_flag.b4567 = 14;
+            ip->xDD4_itemVar.pikachuthunder.x0 = i;
+            ip->xDD4_itemVar.pikachuthunder.x38 = owner;
+            ip->xDD4_itemVar.pikachuthunder.x8 = cur_delay;
+            ip->xDD4_itemVar.pikachuthunder.x14 = ABS(attrs->x4 / vel->y);
+            ip->xDD4_itemVar.pikachuthunder.x1C = *vel;
+            ip->xDD4_itemVar.pikachuthunder.x34 = NULL;
+            ip->xDD4_itemVar.pikachuthunder.x4 = 0;
+            ip->xDD4_itemVar.pikachuthunder.xC = attrs->x4;
+            ip->xDD4_itemVar.pikachuthunder.x18 = 1.0f;
+        }
+        prev = item_gobj;
+        cur_delay += delay;
+    }
+    return first;
+}
 
 void it_802B1FC8(Item_GObj* gobj)
 {
@@ -93,9 +176,10 @@ bool itPikachuthunder_UnkMotion1_Anim(Item_GObj* gobj)
 
 bool itPikachuthunder_UnkMotion1_Coll(Item_GObj* gobj)
 {
-    if (GET_ITEM(gobj)->xDD4_itemVar.pikachuthunder.x0 == 0) {
+    Item* ip = GET_ITEM(gobj);
+    if (ip->xDD4_itemVar.pikachuthunder.x0 == 0) {
         if (it_8026DA70(gobj)) {
-            Item* ip = GET_ITEM(gobj);
+            Item* ip = gobj->user_data;
             itPikachuthunderAttributes* attrs =
                 ip->xC4_article_data->x4_specialAttributes;
             Vec3 pos;
@@ -114,38 +198,85 @@ bool itPikachuthunder_UnkMotion1_Coll(Item_GObj* gobj)
             }
         }
     } else {
-        Item* ip = GET_ITEM(gobj);
+        Item* ip = gobj->user_data;
         if (ip->xDD4_itemVar.pikachuthunder.x4 != 0) {
             if (ip->pos.y <= ip->xDD4_itemVar.pikachuthunder.x28.y) {
                 it_802B22B8(gobj);
             }
         }
     }
-    PAD_STACK(8);
     return false;
+}
+
+static inline void it_802B22B8_inline(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (ip->xDD4_itemVar.pikachuthunder.x34 != NULL) {
+        Item* child_ip = GET_ITEM(ip->xDD4_itemVar.pikachuthunder.x34);
+        if (child_ip != NULL) {
+            child_ip->xDD4_itemVar.pikachuthunder.x28 = ip->pos;
+            child_ip->xDD4_itemVar.pikachuthunder.x4 = 1;
+        }
+    }
 }
 
 void it_802B22B8(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    PAD_STACK(8);
     Item_80268E5C(gobj, 2, ITEM_UNK_0x1 | ITEM_HIT_PRESERVE);
     ip->xD44_lifeTimer = ip->xDD4_itemVar.pikachuthunder.x14;
     ip->xDD4_itemVar.pikachuthunder.x4 = 1;
-    {
-        Item* ip2 = GET_ITEM(gobj);
-        Item_GObj* child = ip2->xDD4_itemVar.pikachuthunder.x34;
-        if (child != NULL) {
-            Item* child_ip = GET_ITEM(child);
-            if (child_ip != NULL) {
-                child_ip->xDD4_itemVar.pikachuthunder.x28 = ip2->pos;
-                child_ip->xDD4_itemVar.pikachuthunder.x4 = 1;
-            }
+    it_802B22B8_inline(gobj);
+}
+
+static inline f32 pika_scale(f32 a, f32 b)
+{
+    s32 n = 10000.0f * a / b + 1.0f;
+    return n / 10000.0f;
+}
+
+static inline void itPikachuthunder_UnkMotion2_ScaleCall(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    it_80275594(gobj, 0,
+                pika_scale(ip->xDD4_itemVar.pikachuthunder.x10,
+                           ip->xDD4_itemVar.pikachuthunder.xC));
+}
+
+static inline void itPikachuthunder_UnkMotion2_UpdateScale(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itPikachuthunderAttributes* attrs =
+        ip->xC4_article_data->x4_specialAttributes;
+    ip->xDD4_itemVar.pikachuthunder.x10 =
+        ip->xDD4_itemVar.pikachuthunder.xC +
+        ip->xDD4_itemVar.pikachuthunder.x1C.y;
+    if (ip->xDD4_itemVar.pikachuthunder.x10 > 0.0f) {
+        ip->xDD4_itemVar.pikachuthunder.x18 =
+            pika_scale(ip->xDD4_itemVar.pikachuthunder.x10, attrs->x4);
+        if (ip->xDD4_itemVar.pikachuthunder.x18 <= 0.0f) {
+            ip->xDD4_itemVar.pikachuthunder.x18 = 0.01f;
         }
+        itPikachuthunder_UnkMotion2_ScaleCall(gobj);
+        ip->xDD4_itemVar.pikachuthunder.xC =
+            ip->xDD4_itemVar.pikachuthunder.x10;
     }
 }
 
-/// #itPikachuthunder_UnkMotion2_Anim
+bool itPikachuthunder_UnkMotion2_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+    PAD_STACK(4);
+
+    ip->xD44_lifeTimer--;
+    if (ip->xD44_lifeTimer <= 0.0f) {
+        return true;
+    }
+    itPikachuthunder_UnkMotion2_UpdateScale(gobj);
+    HSD_JObjSetScaleY(jobj, ip->xDD4_itemVar.pikachuthunder.x18);
+    return false;
+}
 
 bool itPikachuThunder_Logic39_DmgDealt(Item_GObj* arg0)
 {

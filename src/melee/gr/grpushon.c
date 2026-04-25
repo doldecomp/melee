@@ -242,7 +242,7 @@ void grPushOn_802187A8(Ground_GObj* gobj)
     Ground* gp = GET_GROUND(gobj);
     HSD_LObj* lobj;
 
-    gp->u.pushon.gobj = ((HSD_GObj*) HSD_GObj_804D7824)->next_gx;
+    gp->u.pushon.gobj = ((HSD_GObj*) HSD_GObjGXLinkHead)->next_gx;
     PAD_STACK(16);
     grPushOn_802190D0(gp->u.pushon.gobj);
     lobj = ((HSD_GObj*) gp->u.pushon.gobj)->hsd_obj;

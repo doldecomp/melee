@@ -1102,6 +1102,26 @@ struct grOnett_Car_GroundVars {
     /* +64 gp+128 */ f32 speed_b;
 };
 
+struct grBigBlue_GroundData {
+    /* gp+E4 gp+138 gp+18C */ u8 index;
+    /* gp+E5 gp+139 gp+18D */ u8 x1;
+    /* gp+E6 gp+13A gp+18E */ s8 x2;
+    /* gp+E7 gp+13B gp+18F */ u8 x3;
+    /* gp+E8 gp+13C gp+190 */ s32 x4;
+    /* gp+EC gp+140 gp+194 */ f32 x8;
+    /* gp+F0 gp+144 gp+198 */ Vec3 xC;
+    /* gp+FC gp+150 gp+1A4 */ Vec3 x18;
+    /* gp+108 gp+15C gp+1B0 */ f32 x24;
+    /* gp+10C gp+160 gp+1B4 */ f32 x28;
+    /* gp+110 gp+164 gp+1B8 */ s32 x2C;
+    /* gp+114 gp+168 gp+1BC */ s32 x30;
+    /* gp+118 gp+16C gp+1C0 */ s32 x34;
+    /* gp+11C gp+170 gp+1C4 */ Vec3 x38;
+    /* gp+128 gp+17C gp+1D0 */ Vec3 x44;
+    /* gp+134 gp+188 gp+1DC */ s32 x50;
+};
+STATIC_ASSERT(sizeof(struct grBigBlue_GroundData) == 0x54);
+
 /// Used by multiple Big Blue Ground subtypes (track, road, car gobjs).
 /// Different gobjs interpret the same offsets differently.
 ///
@@ -1113,17 +1133,25 @@ struct grOnett_Car_GroundVars {
 ///   velocity(+38), accel(+3C), rotation(+40), amplitude(+44),
 ///   angular_vel(+48).
 struct grBigBlue_GroundVars {
-    /*  +0 gp+C4 */ u8 x0_b0 : 1;
-    /* pad */ char pad_1[3];
+    union {
+        /*  +0 gp+C4 */ u32 x0_w;
+        struct {
+            /*  +0 gp+C5 */ u8 x0;
+            /*  +0 gp+C6 */ u8 x1;
+            /*  +0 gp+C7 */ u8 x2;
+            /*  +0 gp+C8 */ u8 x3;
+        };
+        struct {
+            u8 x0_b1 : 1;
+            u8 pad[3];
+        };
+    };
     /*  +4 gp+C8 */ void* xC8;
     /*  +8 gp+CC */ void* xCC;
     /*  +C gp+D0 */ f32 xD0;
-    /* +10 gp+D4 */ HSD_JObj* x10;
-    /* +14 gp+D8 */ HSD_JObj* x14;
-    /* +18 gp+DC */ HSD_JObj* x18;
+    /* +10 gp+D4 */ HSD_JObj* xD4[3];
     /* pad */ char pad_3[4];
-    /* +20 gp+E4 */ u8 x20;
-    /* +21 gp+E5 */ u8 x21;
+    /* +20 gp+E4 */ struct grBigBlue_GroundData data[3];
 };
 
 struct grBigBlueRoute_GroundVars {
