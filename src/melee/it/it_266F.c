@@ -43,7 +43,7 @@ extern ItemCommonData* it_804D6D28;
 
 extern u64 __shr2u(u64, u32, s32);
 
-static Quaternion it_803B8560 = { 0.0f, 0.0f, 1.0f, 0.0f };
+Quaternion it_803B8560 = { 0.0f, 0.0f, 1.0f, 0.0f };
 static Vec3 it_803B8570 = { 0.0f, 0.0f, 0.0f };
 static Vec3 it_803B857C = { 0.0f, 0.0f, 0.0f };
 static Quaternion it_803B8588 = { 0.0f, 0.0f, 0.0f, 0.0f };

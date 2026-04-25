@@ -100,7 +100,7 @@ static HSD_ObjAllocData item_dynamic_bones_alloc_data;
 
 HSD_ObjAllocData item_link_alloc_data;
 HSD_ObjAllocUnk Item_804A0C64;
-HSD_ObjAllocUnk2 Item_804A0CCC;
+Item_FtTrack Item_804A0CCC;
 S32Vec3 Item_804A0E24;
 
 /// Init item struct?
@@ -140,7 +140,7 @@ void Item_80266FCC(void)
     Item_804A0C64.x64 = it_804D6D28->x148;
 
     Item_804A0CCC.x154.b0 = true;
-    Item_804A0CCC.x150 = 1;
+    Item_804A0CCC.x150_count = 1;
 
     Item_804A0E24.x = -1;
     Item_804A0E24.y = -1;

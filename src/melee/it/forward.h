@@ -11,7 +11,7 @@ typedef struct CameraBoxFlags CameraBoxFlags;
 typedef struct DynamicBoneTable DynamicBoneTable;
 typedef struct flag32 flag32;
 typedef struct HSD_ObjAllocUnk HSD_ObjAllocUnk;
-typedef struct HSD_ObjAllocUnk2 HSD_ObjAllocUnk2;
+typedef struct Item_FtTrack Item_FtTrack;
 typedef struct HSD_ObjAllocUnk4 HSD_ObjAllocUnk4;
 typedef struct HSD_ObjAllocUnk5 HSD_ObjAllocUnk5;
 typedef struct HSD_ObjAllocUnk6 HSD_ObjAllocUnk6;
