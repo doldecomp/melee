@@ -8,9 +8,6 @@
 
 #include <dolphin/gx.h>
 
-extern SDATA char mnSnap_804D5070[];
-extern SDATA char mnSnap_804D5078[];
-
 /* 253184 */ void mnSnap_80253184(void);
 /* 253640 */ void mnSnap_80253640(s32 page);
 /* 253964 */ void mnSnap_80253964(void);
