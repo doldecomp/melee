@@ -8,6 +8,9 @@
 
 #include <dolphin/gx.h>
 
+extern SDATA char mnSnap_804D5070[];
+extern SDATA char mnSnap_804D5078[];
+
 /* 253184 */ void mnSnap_80253184(void);
 /* 253640 */ void mnSnap_80253640(s32 page);
 /* 253964 */ void mnSnap_80253964(void);
@@ -20,7 +23,7 @@
 /* 253E90 */ void mnSnap_80253E90(s32 idx);
 /* 253F60 */ void mnSnap_80253F60(void);
 /* 254014 */ void mnSnap_80254014(void);
-/* 25409C */ void mnSnap_8025409C(HSD_JObj* jobj_flag);
+/* 25409C */ void mnSnap_8025409C(s32 dlg_type);
 /* 254298 */ void mnSnap_80254298(void);
 /* 25441C */ s32 mnSnap_8025441C(u64 buttons);
 /* 2545C4 */ void fn_802545C4(void);
