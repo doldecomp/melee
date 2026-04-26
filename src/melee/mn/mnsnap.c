@@ -3,7 +3,6 @@
 #include <placeholder.h>
 
 #include "baselib/debug.h"
-#include "ft/ft_0C31.h"
 
 #include <baselib/aobj.h>
 #include <baselib/dobj.h>
@@ -23,18 +22,6 @@
 #include <melee/lb/lbsnap.h>
 #include <melee/mn/inlines.h>
 #include <melee/mn/mnmain.h>
-
-// Local inline using ftCo_800C6AFC pattern (like mnvibration.c)
-static inline void mnSnap_JObjSetTranslate(HSD_JObj* jobj, Vec3* translate)
-{
-    HSD_JObj* temp = jobj;
-    HSD_ASSERT(916, jobj);
-    HSD_ASSERT(917, translate);
-    jobj->translate = *translate;
-    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
-        ftCo_800C6AFC(temp);
-    }
-}
 
 typedef struct mnSnap_State {
     /* 0x000 */ s32 frame_count;
@@ -1474,7 +1461,7 @@ void fn_802545C4(void)
                     translate = &mnSnap_804A0A10
                                      .thumb_jobjs[mnSnap_804A0A10.move_idx % 4]
                                      ->translate;
-                    mnSnap_JObjSetTranslate(jobj, translate);
+                    HSD_JObjSetTranslate(jobj, translate);
                     HSD_JObjClearFlagsAll(mnSnap_804A0A10.move_jobj, 0x10);
                 } else {
                     HSD_JObjSetFlagsAll(mnSnap_804A0A10.move_jobj, 0x10);
