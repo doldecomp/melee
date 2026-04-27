@@ -60,5 +60,6 @@
 /* 2D848C */ void it_802D848C(Item_GObj*, s32, Item_StateChangeFlags);
 /* 2D84D8 */ void it_802D84D8(Item_GObj*, Item_GObj*);
 /* 3F8320 */ extern ItemStateTable it_803F8320[];
+/* 4D6D40 */ extern f32* it_804D6D40;
 
 #endif

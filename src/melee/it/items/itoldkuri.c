@@ -10,6 +10,7 @@
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
+#include "sysdolphin/baselib/random.h"
 
 typedef struct itOldkuriAttributes {
     s32* x0;
@@ -17,6 +18,21 @@ typedef struct itOldkuriAttributes {
     f32 x8;
     f32 xC;
 } itOldkuriAttributes;
+
+ItemStateTable it_803F8320[] = {
+    { -1, itOldkuri_UnkMotion0_Anim, itOldkuri_UnkMotion0_Phys, itOldkuri_UnkMotion0_Coll },
+    { 0, itOldkuri_UnkMotion1_Anim, itOldkuri_UnkMotion1_Phys, itOldkuri_UnkMotion1_Coll },
+    { 1, itOldkuri_UnkMotion2_Anim, itOldkuri_UnkMotion2_Phys, itOldkuri_UnkMotion2_Coll },
+    { 0, itOldkuri_UnkMotion3_Anim, itOldkuri_UnkMotion3_Phys, itOldkuri_UnkMotion3_Coll },
+    { 1, itOldkuri_UnkMotion4_Anim, itOldkuri_UnkMotion4_Phys, itOldkuri_UnkMotion4_Coll },
+    { 3, itOldkuri_UnkMotion5_Anim, itOldkuri_UnkMotion5_Phys, NULL },
+    { 4, itOldkuri_UnkMotion6_Anim, itOldkuri_UnkMotion6_Phys, itOldkuri_UnkMotion6_Coll },
+    { 2, itOldkuri_UnkMotion7_Anim, itOldkuri_UnkMotion7_Phys, itOldkuri_UnkMotion7_Coll },
+    { 2, itOldkuri_UnkMotion8_Anim, itOldkuri_UnkMotion8_Phys, itOldkuri_UnkMotion8_Coll },
+    { 3, itOldkuri_UnkMotion9_Anim, itOldkuri_UnkMotion9_Phys, itOldkuri_UnkMotion9_Coll },
+    { 3, itOldkuri_UnkMotion10_Anim, itOldkuri_UnkMotion10_Phys, itOldkuri_UnkMotion10_Coll },
+    { 3, itOldkuri_UnkMotion11_Anim, itOldkuri_UnkMotion11_Phys, itOldkuri_UnkMotion11_Coll },
+};
 
 void itOldKuri_Logic29_EvtUnk(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
@@ -38,7 +54,14 @@ void it_802D73F0(Item_GObj* gobj)
     it_802D747C(gobj);
 }
 
-void it_802D747C(Item_GObj* gobj) {}
+void it_802D747C(Item_GObj* gobj)
+{
+    PAD_STACK(8);
+    it_8027CAD8(gobj);
+    it_8027C0A8(gobj, 0.0f, 5.0f);
+    it_802756E0(gobj);
+    it_802D848C(gobj, 0, ITEM_ANIM_UPDATE);
+}
 
 bool itOldkuri_UnkMotion0_Anim(Item_GObj* gobj)
 {
@@ -84,7 +107,7 @@ bool itOldkuri_UnkMotion1_Anim(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
 
     if (!it_80272C6C(gobj)) {
-        if (ip->facing_dir == 0.0f) {
+        if (ip->facing_dir == -1.0f) {
             ip->xDD4_itemVar.oldkuri.xDFC = 1;
             it_802D848C(gobj, 1, 0x12);
         } else {
@@ -351,7 +374,44 @@ bool itOldkuri_UnkMotion9_Coll(Item_GObj* gobj)
     return it_8027C794(gobj);
 }
 
-/// #it_2725_Logic0_DmgReceived
+static inline void it_2725_Logic0_DmgReceived_inline(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    if (it_8027B798(gobj, &ip->x40_vel)) {
+        if (ip->x40_vel.y <= 0.2) {
+            ip->x40_vel.y = 0.2f;
+        }
+        it_802762BC(ip);
+    } else {
+        it_802762B0(ip);
+    }
+    ip->xDD4_itemVar.oldkuri.xDF8 = 0;
+    Item_80268E5C(gobj, 9, ITEM_ANIM_UPDATE);
+}
+
+bool it_2725_Logic0_DmgReceived(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itOldkuriAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+
+    ip->xC9C += it_8027CBFC(gobj);
+    if (ip->xC9C > *attr->x0 || ip->msid == 6) {
+        it_8027C9D8(ip);
+        it_80274C88(gobj);
+        it_802756D0(gobj);
+        it_80275474(gobj);
+        it_8027CE44(gobj);
+        Camera_80030E44(2, &ip->pos);
+        if (HSD_Randf() < it_804D6D40[2]) {
+            it_802D839C(gobj);
+        } else {
+            it_802D82C4(gobj);
+        }
+    } else {
+        it_2725_Logic0_DmgReceived_inline(gobj);
+    }
+    return false;
+}
 
 bool it_802D8098(Item_GObj* gobj)
 {
