@@ -53,15 +53,21 @@ void it_802BAF0C(Item_GObj* gobj)
     it_8026B73C(gobj);
 }
 
+static inline HSD_JObj* it_802BAF2C_LoadX64(itSeakChain_Attrs* attrs)
+{
+    return HSD_JObjLoadJoint(attrs->x64_joint);
+}
+
 int it_802BAF2C(Item* ip, HSD_JObj* jobj)
 {
-    itSeakChain_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
-    Vec3 zero = it_803B8680;
     ItemLink* prev_link;
     ItemLink* head_link;
     ItemLink* tail_link;
     HSD_JObj* result;
+    itSeakChain_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
     int i;
+    Vec3 zero = it_803B8680;
+    PAD_STACK(4);
 
     for (i = 0; i < attrs->x0; i++) {
         HSD_GObj* link_gobj = GObj_Create(7, 0xA, 0);
@@ -89,7 +95,7 @@ int it_802BAF2C(Item* ip, HSD_JObj* jobj)
             link->x2C_b0 = false;
             it_802A24D0(link, 1.0f);
             HSD_GObjObject_80390A70(link_gobj, HSD_GObj_804D7849,
-                                    HSD_JObjLoadJoint(attrs->x64_joint));
+                                    it_802BAF2C_LoadX64(attrs));
             GObj_SetupGXLink(link_gobj, it_802A24A0, 6, 0);
         } else if (i == attrs->x0 - 1) {
             prev_link->prev = link;
@@ -116,7 +122,7 @@ int it_802BAF2C(Item* ip, HSD_JObj* jobj)
             link->x2C_b0 = false;
             it_802A24D0(link, 1.0f);
             HSD_GObjObject_80390A70(link_gobj, HSD_GObj_804D7849,
-                                    HSD_JObjLoadJoint(attrs->x64_joint));
+                                    it_802BAF2C_LoadX64(attrs));
             GObj_SetupGXLink(link_gobj, it_802A24A0, 6, 0);
         }
         prev_link = link;

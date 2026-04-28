@@ -4733,6 +4733,11 @@ Article** it_804D6D30;
 Article** it_804D6D38;
 f32* it_804D6D40;
 
+extern f32 it_804DC73C; // = 0.0f;
+static f32 it_804DC744 = 1.0f;
+static const f32 it_804DC76C = 0.01f;
+static const f64 it_804DC7F8 = 0.5f;
+
 typedef enum PokemonKind {
     Pokemon_ID_Tosakinto,   // Goldeen (Tosakinto)
     Pokemon_ID_Chicorita,   // Chikorita (Chicorita)
@@ -6500,9 +6505,9 @@ void it_802759DC(Item_GObj* item_gobj1, Item_GObj* item_gobj2)
         if (!chk) {
             temp_f31 = 0.5f * (coll2->ecb.top.y + coll2->ecb.bottom.y);
             it_8026BC90(item_gobj2, &sp1C);
-            sp34.x = sp1C.x + 0.0f;
+            sp34.x = sp1C.x + it_804DC73C;
             sp34.y = sp1C.y + temp_f31;
-            sp34.z = sp1C.z + 0.0f;
+            sp34.z = sp1C.z + it_804DC73C;
             coll1->last_pos = sp34;
             mpColl_80043670(coll1);
             coll1->cur_pos = sp44;
@@ -7105,9 +7110,9 @@ bool it_80276D9C(Item_GObj* item_gobj, enum_t arg1)
         }
         item->xC1C = sp34;
         mpColl_SetECBSource_Fixed(
-            &item->x378_itemColl, item_gobj, item->xC1C.top * 1.0f,
-            item->xC1C.bottom * 1.0f, item->xC1C.right * 1.0f,
-            item->xC1C.left * 1.0f);
+            &item->x378_itemColl, item_gobj, item->xC1C.top * it_804DC744,
+            item->xC1C.bottom * it_804DC744, item->xC1C.right * it_804DC744,
+            item->xC1C.left * it_804DC744);
         if (-1.0f == item->facing_dir) {
             dir2 = -1;
         } else {
@@ -7466,7 +7471,7 @@ bool it_8027781C(Item_GObj* item_gobj)
         chk = true;
     }
     if (chk) {
-        if (return_sqrt_value(&sp30) < 0.01f) {
+        if (return_sqrt_value(&sp30) < it_804DC76C) {
             sp30.x = item->x40_vel.x;
             sp30.y = -1.0f * item->x40_vel.y;
         }
@@ -9481,7 +9486,7 @@ int it_8027BA54(HSD_GObj* item_gobj, Vec3* arg1)
 
     item = GET_ITEM(item_gobj);
     Camera_GetTransformPosition(&sp20);
-    sp20.x = ((10.0f * (HSD_Randf() - 0.5f)) + sp20.x);
+    sp20.x = ((10.0f * (HSD_Randf() - it_804DC7F8)) + sp20.x);
     sp20.y += 30.0f * HSD_Randf();
     lbVector_Diff(&sp20, &item->pos, &sp14);
     lbVector_Normalize(&sp14);

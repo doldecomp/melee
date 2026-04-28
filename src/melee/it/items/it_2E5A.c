@@ -17,28 +17,12 @@
 #include "mp/mpcoll.h"
 
 #include <math.h>
+#include <math_ppc.h>
 #include <baselib/cobj.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjproc.h>
 #include <baselib/jobj.h>
 #include <baselib/random.h>
-
-extern double __frsqrte(double);
-
-static inline float sqrtf_accurate(float x)
-{
-    volatile float y;
-    if (x > 0.0f) {
-        double guess = __frsqrte((double) x);
-        guess = 0.5 * guess * (3.0 - guess * guess * x);
-        guess = 0.5 * guess * (3.0 - guess * guess * x);
-        guess = 0.5 * guess * (3.0 - guess * guess * x);
-        guess = 0.5 * guess * (3.0 - guess * guess * x);
-        y = (float) (x * guess);
-        return y;
-    }
-    return x;
-}
 
 const Vec3 it_803B8718 = { 0.0f, 0.0f, 0.0f };
 const Vec3 it_803B8724 = { 0.0f, 0.0f, 0.0f };
@@ -123,9 +107,7 @@ bool it_802E5AC4(Item_GObj* item_gobj, bool arg_check)
             }
             if (check2) {
                 lbVector_NormalizeXY(&sp28);
-                if (sqrtf_accurate(SQ(sp28.x) + SQ(sp28.y) + SQ(sp28.z)) <
-                    0.01f)
-                {
+                if (sqrtf(SQ(sp28.x) + SQ(sp28.y) + SQ(sp28.z)) < 0.01f) {
                     sp28.x = item->x40_vel.x;
                     sp28.y = -1.0f * item->x40_vel.y;
                 }

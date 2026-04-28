@@ -307,18 +307,22 @@ void it_8026CB9C(s32* arg0, u64 arg2, f32 arg8)
 {
     s32 struct_size;
     {
-        u64 mask = arg2;
-        s32* p = arg0;
-        ItemKind it_kind = 0;
-        s32 cnt = 0;
+        u64 var_r5;
+        s32* var_r28;
+        ItemKind it_kind;
+        s32 cnt;
 
+        var_r5 = arg2;
+        it_kind = 0;
+        var_r28 = arg0;
+        cnt = 0;
         while (it_kind < It_Kind_L_Gun_Ray) {
-            if ((mask & 1) && *p != 0) {
+            if (((var_r5 & 1) ^ 0) != 0 && *var_r28 != 0) {
                 cnt++;
             }
-            p++;
+            var_r28++;
             it_kind++;
-            mask >>= 1;
+            var_r5 = var_r5 >> 1;
         }
         struct_size = cnt * 4;
         it_804A0E30.x4.x0 = cnt;
@@ -326,83 +330,88 @@ void it_8026CB9C(s32* arg0, u64 arg2, f32 arg8)
         it_804A0E30.x4.xC = HSD_MemAlloc(struct_size);
     }
     {
-        u64 mask = arg2;
-        s32* p = arg0;
-        ItemKind it_kind = It_Kind_Capsule;
-        s32 cnt = 0;
-        s32 idx = 0;
-        s32 weight = 0;
+        u64 var_r5;
+        s32* var_r28;
+        s32 var_r31;
+        ItemKind it_kind;
+        s32 cnt;
+        s32 var_r29;
+        s32 var_r25;
 
+        cnt = 0;
+        var_r5 = arg2;
+        var_r28 = arg0;
+        var_r29 = 0;
+        it_kind = It_Kind_Capsule;
+        var_r25 = 0;
         while (it_kind < It_Kind_L_Gun_Ray) {
-            if ((mask & 1) && *p != 0) {
+            if (((var_r5 & 1) ^ 0) != 0 && *var_r28 != 0) {
                 it_804A0E30.x4.x4[cnt] = it_kind;
                 cnt++;
-                it_804A0E30.x4.xC[idx] = weight;
-                idx += 2;
-                weight = (s16) ((f32) weight + ((arg8 * (f32) *p) + 0.99f));
+                it_804A0E30.x4.xC[var_r29] = var_r25;
+                var_r29 += 2;
+                var_r25 =
+                    (s16) ((f32) var_r25 + ((arg8 * (f32) *var_r28) + 0.99f));
             }
-            p++;
+            var_r28++;
             it_kind++;
-            mask >>= 1;
+            var_r5 = var_r5 >> 1;
         }
     }
 }
 
 void it_8026CD50(s32* arg0, u64 arg1, f32 arg2)
 {
-    s16 var_r25;
     s32 struct_size;
     ItemKind it_kind;
-    s32 var_r29;
-    s32* var_r28;
-    s32* var_r28_2;
+    s16 cumulative;
+    s32 idx;
+    s32* p;
     s32 cnt;
-    u32 var_r6;
+    u32 mask_low;
     u64 temp_ret;
-    u64 var_r5;
+    u64 mask;
 
-    var_r6 = (u32) arg1;
-    var_r5 = arg1;
-    var_r28 = arg0 + 0x18;
+    mask_low = (u32) arg1;
+    mask = arg1;
+    p = arg0 + It_Kind_BombHei;
     cnt = 0;
     it_kind = It_Kind_BombHei;
     while (it_kind < It_Kind_L_Gun_Ray) {
-        if (((((var_r6 & 1) ^ 0) | ((var_r5 & 0) ^ 0)) != 0) &&
-            (*var_r28 != 0))
-        {
+        if (((mask & 1) != 0) && (*p != 0)) {
             cnt++;
         }
-        var_r28 += 4;
+        p++;
         it_kind++;
-        temp_ret = __shr2u(var_r5, var_r6, 1);
-        var_r6 = (u32) temp_ret;
-        /* note: var_r5 intentionally not updated here */
+        temp_ret = __shr2u(mask, mask_low, 1);
+        mask_low = (u32) temp_ret;
+        mask = temp_ret;
     }
     struct_size = cnt * 4;
+    idx = struct_size;
     it_804A0E50.x0 = cnt;
-    it_804A0E50.x4 = HSD_MemAlloc(struct_size);
-    it_804A0E50.xC = HSD_MemAlloc(struct_size);
+    it_804A0E50.x4 = HSD_MemAlloc(idx);
+    it_804A0E50.xC = HSD_MemAlloc(idx);
     cnt = 0;
-    var_r6 = (u32) arg1;
-    var_r28_2 = arg0 + 0x18;
-    var_r29 = 0;
-    var_r25 = 0;
+    mask_low = (u32) arg1;
+    p = arg0 + It_Kind_BombHei;
+    idx = 0;
+    cumulative = 0;
     it_kind = It_Kind_BombHei;
     while (it_kind < It_Kind_L_Gun_Ray) {
-        if (((((var_r5 & 1) ^ 0) | ((var_r6 & 0) ^ 0)) != 0) &&
-            ((s32) *var_r28_2 != 0))
-        {
+        struct_size = cumulative;
+        if ((((mask & 1) ^ 0) != 0) && (*p != 0)) {
             it_804A0E50.x4[cnt] = it_kind;
             cnt++;
-            it_804A0E50.xC[var_r29] = var_r25;
-            var_r29 += 2;
-            var_r25 = var_r25 + ((arg2 * *var_r28_2) + 0.99f);
+            it_804A0E50.xC[idx] = struct_size;
+            idx += 2;
+            cumulative = cumulative + ((arg2 * *p) + 0.99f);
         }
-        var_r28_2 += 4;
+        p++;
         it_kind++;
-        temp_ret = __shr2u(var_r5, var_r6, 1);
-        var_r6 = (u32) temp_ret;
-        var_r5 = temp_ret;
+        temp_ret = __shr2u(mask, mask_low, 1);
+        mask_low = (u32) temp_ret;
+        mask = temp_ret;
     }
 }
 
@@ -415,19 +424,26 @@ void it_8026CF04(void)
         HSD_ObjAllocUnk6 obj_60;
     } Block;
     Block* block = (Block*) &it_804A0E30;
-    s32* counts = it_804D6D28->x128;
-    s32 sum = counts[0] + counts[1] + counts[2] + counts[3];
+    s32 sum;
+    u8** x4_loc;
     s16 cumulative;
     int i;
 
+    sum = it_804D6D28->x128;
+    sum += it_804D6D28->x12C;
+    sum += it_804D6D28->x130;
+    sum += it_804D6D28->x134;
     if (sum != 0) {
+        s32* counts;
         block->obj_60.x8 = sum;
         block->obj_60.x0 = 4;
-        block->obj_60.x4 = HSD_MemAlloc(block->obj_60.x0 * 4);
+        x4_loc = &block->obj_60.x4;
+        *x4_loc = HSD_MemAlloc(block->obj_60.x0 * 4);
         block->obj_60.xC = HSD_MemAlloc(block->obj_60.x0 * 4);
         cumulative = 0;
+        counts = &it_804D6D28->x128;
         for (i = 0; i < 4; i++) {
-            block->obj_60.x4[i] = It_Kind_Kuriboh + i;
+            (*x4_loc)[i] = It_Kind_Kuriboh + i;
             block->obj_60.xC[i] = cumulative;
             cumulative += counts[i];
         }
