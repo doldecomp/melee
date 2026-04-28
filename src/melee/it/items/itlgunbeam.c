@@ -21,8 +21,8 @@
 #include <melee/it/item.h>
 #include <melee/lb/lbrefract.h>
 
-/* 2993E0 */ static void it_802993E0(Item_GObj* gobj, s32 flags);
-/* 299528 */ static void it_80299528(Item_GObj* gobj, s32 arg1);
+/* 2993E0 */ static void it_802993E0(Item_GObj* gobj, int flags);
+/* 299528 */ static void it_80299528(Item_GObj* gobj, int arg1);
 /* 2998A0 */ static void it_802998A0(Item_GObj*, HSD_GObj*, s32);
 /* 29999C */ static bool itLgunbeam_UnkMotion0_Anim(Item_GObj*);
 /* 2999E4 */ static void itLgunbeam_UnkMotion0_Phys(Item_GObj*);
@@ -32,17 +32,22 @@
       itLgunbeam_UnkMotion0_Coll },
 };
 
-void it_802993E0(Item_GObj* gobj, s32 flags)
+static inline void clamp_angle(float* f)
+{
+    while (*f < -M_PI) {
+        *f += M_TAU;
+    }
+    while (*f > M_PI) {
+        *f -= M_TAU;
+    }
+}
+
+void it_802993E0(Item_GObj* gobj, int flags)
 {
     Item* item = GET_ITEM(gobj);
     Vec3 pos;
     pos.x = pos.y = pos.z = 0.0f;
-    while (item->xDD4_itemVar.lgunbeam.angle0 < -M_PI) {
-        item->xDD4_itemVar.lgunbeam.angle0 += M_TAU;
-    }
-    while (item->xDD4_itemVar.lgunbeam.angle0 > +M_PI) {
-        item->xDD4_itemVar.lgunbeam.angle0 -= M_TAU;
-    }
+    clamp_angle(&item->xDD4_itemVar.lgunbeam.angle0);
     if (flags & (1 << 0)) {
         pos.x += item->x378_itemColl.floor.normal.x;
         pos.y += item->x378_itemColl.floor.normal.y;
@@ -63,7 +68,7 @@ void it_802993E0(Item_GObj* gobj, s32 flags)
     item->xDD4_itemVar.lgunbeam.position1 = pos;
 }
 
-void it_80299528(Item_GObj* gobj, s32 arg1)
+void it_80299528(Item_GObj* gobj, int arg1)
 {
     Item* ip = GET_ITEM(gobj);
 
@@ -73,6 +78,7 @@ void it_80299528(Item_GObj* gobj, s32 arg1)
         float angle2 = atan2f(ip->xDD4_itemVar.lgunbeam.velocity.x,
                               ip->xDD4_itemVar.lgunbeam.velocity.y) -
                        angle1;
+        // note: opposite order as clamp_angle
         while (angle2 > M_PI) {
             angle2 -= M_TAU;
         }
@@ -107,18 +113,14 @@ void it_80299528(Item_GObj* gobj, s32 arg1)
             }
             ip->xDD4_itemVar.lgunbeam.angle0 -= var_f1;
         }
-        while (ip->xDD4_itemVar.lgunbeam.angle0 < -M_PI) {
-            ip->xDD4_itemVar.lgunbeam.angle0 += M_TAU;
-        }
-        while (ip->xDD4_itemVar.lgunbeam.angle0 > +M_PI) {
-            ip->xDD4_itemVar.lgunbeam.angle0 -= M_TAU;
-        }
+        clamp_angle(&ip->xDD4_itemVar.lgunbeam.angle0);
     }
 }
 
 Item_GObj* it_802996D0(HSD_GObj* owner_gobj, Vec3* pos, u32 arg2,
                        f32 facing_dir)
 {
+    f32 diff;
     SpawnItem spawn;
     PAD_STACK(4);
 
@@ -142,18 +144,20 @@ Item_GObj* it_802996D0(HSD_GObj* owner_gobj, Vec3* pos, u32 arg2,
                 item->xC4_article_data->x4_specialAttributes;
             item->xDAC_itcmd_var0 = item->xDB0_itcmd_var1 =
                 item->xDB4_itcmd_var2 = item->xDB8_itcmd_var3 = 0;
-            item->xDD4_itemVar.lgunbeam.lifetime = item_spec_attr->lifetime;
-            it_80275158(gobj, item_spec_attr->lifetime);
+            it_80275158(gobj, item->xDD4_itemVar.lgunbeam.lifetime =
+                                  item_spec_attr->lifetime);
             item->xDD4_itemVar.lgunbeam.position0 = *pos;
             {
-                float temp = item_spec_attr->x4;
-                item->xDD4_itemVar.lgunbeam.angle1 =
-                    ((item_spec_attr->x8 - temp) * HSD_Randf()) + temp;
+                f32 r = HSD_Randf();
+                f32 lo = item_spec_attr->x4;
+                diff = item_spec_attr->x8 - lo;
+                item->xDD4_itemVar.lgunbeam.angle1 = diff * r + lo;
             }
             {
-                float temp = item_spec_attr->xC;
-                item->xDD4_itemVar.lgunbeam.angle0 =
-                    (item_spec_attr->x10 - temp) * HSD_Randf() + temp;
+                f32 r = HSD_Randf();
+                f32 lo = item_spec_attr->xC;
+                diff = item_spec_attr->x10 - lo;
+                item->xDD4_itemVar.lgunbeam.angle0 = diff * r + lo;
             }
             {
                 f32 angle;
@@ -183,13 +187,15 @@ void it_802998A0(Item_GObj* gobj, HSD_GObj* fighter_gobj, s32 arg2)
 {
     Item* ip = GET_ITEM(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
-    f32 sp2C = 1.0f;
-    Vec3 pos;
-    it_8026B3A8(gobj);
-    // item->unkDCA = item->unkDCA & ~0x10;
     {
-        PAD_STACK(8);
-        ip->xDC8_word.flags.x3 = 0;
+        PAD_STACK(0x198);
+    }
+    {
+        Vec3 pos;
+        f32 sp2C = 1.0f;
+        PAD_STACK(0x10);
+        it_8026B3A8(gobj);
+        ip->xDC8_word.flags.x13 = 0;
         it_80272940(gobj);
         Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
         pos = ip->pos;
@@ -199,13 +205,7 @@ void it_802998A0(Item_GObj* gobj, HSD_GObj* fighter_gobj, s32 arg2)
         ip->pos.y -= ip->x40_vel.y;
         it_8026D9A0(gobj);
         ip->pos = pos;
-        // item->pos.x = sp30;
-        // item->pos.y = temp_r0;
-        // item->pos.z = temp_r0_2;
-        // efSync_Spawn(arg2 + 0x44E, gobj, item_jobj, item->0x2C, &sp2C,
-        // temp_f1); efSync_Spawn(arg2 + 0x44E, gobj, item_jobj,
-        // item->facing_dir, pos, &sp2C);
-        efSync_Spawn(arg2 + 0x44E, gobj, jobj, ip->facing_dir, ip->pos, &sp2C);
+        efSync_Spawn(arg2 + 0x44E, gobj, jobj, &ip->facing_dir, &sp2C);
         db_80225DD8(gobj, fighter_gobj);
     }
 }
@@ -242,37 +242,33 @@ void itLgunbeam_UnkMotion0_Phys(HSD_GObj* gobj)
 
 bool itLgunbeam_UnkMotion0_Coll(HSD_GObj* gobj)
 {
-    s32 flags = 0;
+    int flags;
     Item* ip = GET_ITEM(gobj);
-    while (ip->xDD4_itemVar.lgunbeam.angle0 < -M_PI) {
-        ip->xDD4_itemVar.lgunbeam.angle0 += M_TAU;
-    }
-    while (ip->xDD4_itemVar.lgunbeam.angle0 > +M_PI) {
-        ip->xDD4_itemVar.lgunbeam.angle0 -= M_TAU;
-    }
-    {
-        ip->x378_itemColl.ecb_source.up = 3.0f;
-        ip->x378_itemColl.ecb_source.down = 3.0f;
-        ip->x378_itemColl.ecb_source.front = 3.0f;
-        ip->x378_itemColl.ecb_source.back = 3.0f;
-        it_8026D9A0(gobj);
+    int flags2;
+    PAD_STACK(0x1E0);
+    clamp_angle(&ip->xDD4_itemVar.lgunbeam.angle0);
+    flags = 0;
+    ip->x378_itemColl.ecb_source.up = 3.0f;
+    ip->x378_itemColl.ecb_source.down = 3.0f;
+    ip->x378_itemColl.ecb_source.front = 3.0f;
+    ip->x378_itemColl.ecb_source.back = 3.0f;
+    it_8026D9A0(gobj);
 
-        if (ip->x378_itemColl.env_flags & Collide_FloorMask) {
-            flags |= 1;
-        }
-        if (ip->x378_itemColl.env_flags & Collide_CeilingMask) {
-            flags |= 2;
-        }
-        if (ip->x378_itemColl.env_flags & Collide_LeftWallMask) {
-            flags |= 4;
-        }
-        if (ip->x378_itemColl.env_flags & Collide_RightWallMask) {
-            flags |= 8;
-        }
-        if (flags) {
-            it_802993E0(gobj, flags);
-            it_80299528(gobj, flags);
-        }
+    if (ip->x378_itemColl.env_flags & Collide_FloorMask) {
+        flags |= 1;
+    }
+    if (ip->x378_itemColl.env_flags & Collide_CeilingMask) {
+        flags |= 2;
+    }
+    if (ip->x378_itemColl.env_flags & Collide_LeftWallMask) {
+        flags |= 4;
+    }
+    if (ip->x378_itemColl.env_flags & Collide_RightWallMask) {
+        flags |= 8;
+    }
+    if ((flags2 = flags) != 0) {
+        it_802993E0(gobj, flags2);
+        it_80299528(gobj, flags2);
     }
     return false;
 }
@@ -286,12 +282,7 @@ bool itLGunBeam_Logic39_Reflected(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     ip->xDD4_itemVar.lgunbeam.angle0 += M_PI;
-    while (ip->xDD4_itemVar.lgunbeam.angle0 < -M_PI) {
-        ip->xDD4_itemVar.lgunbeam.angle0 += M_TAU;
-    }
-    while (ip->xDD4_itemVar.lgunbeam.angle0 > +M_PI) {
-        ip->xDD4_itemVar.lgunbeam.angle0 -= M_TAU;
-    }
+    clamp_angle(&ip->xDD4_itemVar.lgunbeam.angle0);
     ip->facing_dir = -ip->facing_dir;
     ip->x40_vel.x = -ip->x40_vel.x;
     ip->x40_vel.y = -ip->x40_vel.y;
