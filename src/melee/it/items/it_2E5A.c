@@ -17,12 +17,28 @@
 #include "mp/mpcoll.h"
 
 #include <math.h>
-#include <math_ppc.h>
 #include <baselib/cobj.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjproc.h>
 #include <baselib/jobj.h>
 #include <baselib/random.h>
+
+extern double __frsqrte(double);
+
+static inline float sqrtf_accurate(float x)
+{
+    volatile float y;
+    if (x > 0.0f) {
+        double guess = __frsqrte((double) x);
+        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        y = (float) (x * guess);
+        return y;
+    }
+    return x;
+}
 
 const Vec3 it_803B8718 = { 0.0f, 0.0f, 0.0f };
 const Vec3 it_803B8724 = { 0.0f, 0.0f, 0.0f };
@@ -107,7 +123,9 @@ bool it_802E5AC4(Item_GObj* item_gobj, bool arg_check)
             }
             if (check2) {
                 lbVector_NormalizeXY(&sp28);
-                if (sqrtf(SQ(sp28.x) + SQ(sp28.y) + SQ(sp28.z)) < 0.01f) {
+                if (sqrtf_accurate(SQ(sp28.x) + SQ(sp28.y) + SQ(sp28.z)) <
+                    0.01f)
+                {
                     sp28.x = item->x40_vel.x;
                     sp28.y = -1.0f * item->x40_vel.y;
                 }
@@ -289,12 +307,14 @@ s32 it_802E6380(Item_GObj* item_gobj, it_802E5FXX_struct* arg1)
 {
     Item* item = GET_ITEM(item_gobj);
     it_2E5A_Attrs* attr = item->xC4_article_data->x4_specialAttributes;
+    it_2E5A_TierEntry* tier;
     s32 off = 2;
-    PAD_STACK(14);
+    PAD_STACK(30);
 
-    if (arg1->xC < attr->tiers[2].threshold) {
+    tier = attr->tiers;
+    if (arg1->xC < tier[2].threshold) {
         off = 1;
-        if (arg1->xC < attr->tiers[1].threshold) {
+        if (arg1->xC < tier[1].threshold) {
             off = 0;
         }
     }
@@ -311,8 +331,9 @@ s32 it_802E6380(Item_GObj* item_gobj, it_802E5FXX_struct* arg1)
     item->xDD4_itemVar.it_2E5A.x10 = attr->x4;
     item->xDD4_itemVar.it_2E5A.x14 = attr->x8;
     item->xDD4_itemVar.it_2E5A.x8 = arg1->x14;
-    item->xDCD_flag.b01 |= 2;
+    item->xDCD_flag.b6 = off;
 
+    tier = &attr->tiers[off];
     item->xD84 = attr->tiers[off].xD84_value;
     item->scl = attr->tiers[off].scale;
 
@@ -323,10 +344,15 @@ s32 it_802E6380(Item_GObj* item_gobj, it_802E5FXX_struct* arg1)
     item->xC1C.bottom *= item->scl;
     item->xDD4_itemVar.it_2E5A.xC = 0;
 
-    item->xDD4_itemVar.it_2E5A.x18.b1 = 0;
-    item->xDD4_itemVar.it_2E5A.x18.b0 = item->xDD4_itemVar.it_2E5A.x18.b1 | 1;
+    {
+        Item* item = GET_ITEM(item_gobj);
+        s8 old = item->xDD4_itemVar.it_2E5A.x18.u8;
+        item->xDD4_itemVar.it_2E5A.x18.b1 = 0;
+        item->xDD4_itemVar.it_2E5A.x18.b0 = (old >> 6) & 1;
+    }
 
     if (item->xDD4_itemVar.it_2E5A.x8 != 0) {
+        it_2E5A_Attrs* attr = item->xC4_article_data->x4_specialAttributes;
         it_2E5A_SubVars* sub = &item->xDD4_itemVar.it_2E5A.sub;
         sub->x4 = GET_JOBJ(item_gobj);
         sub->x0 = (0.003906f * attr->x28) / item->scl;
@@ -384,35 +410,33 @@ void it_802E6658(void)
     }
 }
 
+static inline void it_2E5A_ApplyStateDesc(HSD_GObj* item_gobj, int idx)
+{
+    Item* item = item_gobj->user_data;
+    HSD_JObj* item_jobj = item_gobj->hsd_obj;
+    it_2E5A_Attrs* attr = item->xC4_article_data->x4_specialAttributes;
+    item->xD0_itemStateDesc = (ItemStateDesc*) &attr->tiers[idx].anim_joint;
+    Item_80268D34(item_gobj, item->xD0_itemStateDesc);
+    HSD_JObjAnimAll(item_jobj);
+}
+
 void it_802E66A0(HSD_GObj* item_gobj)
 {
-    Item* item;
-    HSD_JObj* item_jobj;
-    PAD_STACK(8);
-
-    item = item_gobj->user_data;
+    Item* item = item_gobj->user_data;
+    PAD_STACK(16);
     if (item->xDD4_itemVar.it_2E5A.x8 == 1) {
         if (item->xDD4_itemVar.it_2E5A.xC != 0) {
             Item_80268E5C(item_gobj, 0, ITEM_HIT_PRESERVE | ITEM_UNK_0x1);
         } else {
             Item_80268E5C(item_gobj, 0, ITEM_ANIM_UPDATE);
             item->xDD4_itemVar.it_2E5A.xC = 1;
-            item = item_gobj->user_data;
-            item_jobj = item_gobj->hsd_obj;
-            item->xD0_itemStateDesc = it_2E5A_ItemStateDesc(item);
-
-            Item_80268D34(item_gobj, item->xD0_itemStateDesc);
-            HSD_JObjAnimAll(item_jobj);
+            it_2E5A_ApplyStateDesc(item_gobj, item->xDD4_itemVar.it_2E5A.x4);
         }
         item->on_accessory = it_802E6A74;
         return;
     }
     Item_80268E5C(item_gobj, 1, ITEM_ANIM_UPDATE);
-    item = item_gobj->user_data;
-    item_jobj = item_gobj->hsd_obj;
-    item->xD0_itemStateDesc = it_2E5A_ItemStateDesc(item);
-    Item_80268D34(item_gobj, item->xD0_itemStateDesc);
-    HSD_JObjAnimAll(item_jobj);
+    it_2E5A_ApplyStateDesc(item_gobj, item->xDD4_itemVar.it_2E5A.x4);
 }
 
 bool it_2E5A_UnkMotion1_Anim(HSD_GObj* item_gobj)
@@ -462,9 +486,8 @@ void it_2E5A_UnkMotion2_Phys(HSD_GObj* item_gobj) {}
 
 bool it_2E5A_UnkMotion2_Coll(HSD_GObj* item_gobj)
 {
-    HSD_JObj* item_jobj;
     Item* item = item_gobj->user_data;
-    PAD_STACK(58);
+    PAD_STACK(42);
     if ((item->xDD4_itemVar.it_2E5A.x8 == 1) && !(it_802E5AC4(item_gobj, 0))) {
         item = item_gobj->user_data;
         if (item->xDD4_itemVar.it_2E5A.x8 == 1) {
@@ -473,20 +496,13 @@ bool it_2E5A_UnkMotion2_Coll(HSD_GObj* item_gobj)
             } else {
                 Item_80268E5C(item_gobj, 0, ITEM_ANIM_UPDATE);
                 item->xDD4_itemVar.it_2E5A.xC = 1;
-                item = item_gobj->user_data;
-                item_jobj = item_gobj->hsd_obj;
-                item->xD0_itemStateDesc = it_2E5A_ItemStateDesc(item);
-                Item_80268D34(item_gobj, item->xD0_itemStateDesc);
-                HSD_JObjAnimAll(item_jobj);
+                it_2E5A_ApplyStateDesc(item_gobj,
+                                       item->xDD4_itemVar.it_2E5A.x4);
             }
             item->on_accessory = it_802E6A74;
         } else {
             Item_80268E5C(item_gobj, 1, ITEM_ANIM_UPDATE);
-            item = item_gobj->user_data;
-            item_jobj = item_gobj->hsd_obj;
-            item->xD0_itemStateDesc = it_2E5A_ItemStateDesc(item);
-            Item_80268D34(item_gobj, item->xD0_itemStateDesc);
-            HSD_JObjAnimAll(item_jobj);
+            it_2E5A_ApplyStateDesc(item_gobj, item->xDD4_itemVar.it_2E5A.x4);
         }
     }
     return false;
