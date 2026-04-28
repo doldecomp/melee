@@ -1586,10 +1586,85 @@ s32 it_802A5FE0(ItemLink* link_0, ItemLink* link_0_2, Vec3* arg2,
     return 1;
 }
 
-void it_802A6474(ItemLink* link_0, ItemLink* link_0_2, Vec3* arg2,
+void it_802A6474(ItemLink* link_0, ItemLink* link_1, Vec3* arg2,
                  itLinkHookshotAttributes* arg3)
 {
-    NOT_IMPLEMENTED;
+    Vec3 saved_pos;
+    Vec3 vel;
+    f32 dx, dy, dz;
+    f32 sq, len, inv;
+    f32 test[2];
+    ItemLink* current;
+    ItemLink* prev_link;
+    ItemLink* next_link;
+    s32 stopped;
+    PAD_STACK(0x20);
+
+    if (mpLib_80054ED8(link_1->x1CC) != 0) {
+        mpGetSpeed(link_1->x1CC, &link_1->pos, &vel);
+        link_1->pos.x += vel.x;
+        link_1->pos.y += vel.y;
+        link_1->pos.z += vel.z;
+    }
+
+    current = link_0;
+    prev_link = link_0->prev;
+    saved_pos = link_1->pos;
+    while (prev_link != NULL && !current->x2C_b0) {
+        current = prev_link;
+        prev_link = prev_link->prev;
+    }
+    it_802A4758(current, arg2, arg3, arg3->x30);
+
+    current = link_1;
+    stopped = 0;
+    link_1->pos = saved_pos;
+    next_link = link_1->next;
+    while (next_link != NULL && next_link->x2C_b0) {
+        if (stopped == 0) {
+            dx = next_link->pos.x - current->pos.x;
+            dy = next_link->pos.y - current->pos.y;
+            dz = next_link->pos.z - current->pos.z;
+            sq = dx * dx + dy * dy + dz * dz;
+            len = sq;
+            if (sq > 0.0f) {
+                len = sqrtf(sq);
+            }
+            if (len == 0.0) {
+                inv = 0.0;
+            } else {
+                inv = 1.0 / len;
+            }
+            if (len > arg3->x30) {
+                next_link->pos.x = dx * inv * arg3->x30 + current->pos.x;
+                next_link->pos.y = dy * inv * arg3->x30 + current->pos.y;
+                next_link->pos.z = dz * inv * arg3->x30 + current->pos.z;
+            } else {
+                stopped = 1;
+            }
+        }
+        current = next_link;
+        next_link = next_link->next;
+    }
+
+    dx = arg2->x - current->pos.x;
+    dy = arg2->y - current->pos.y;
+    dz = arg2->z - current->pos.z;
+    sq = dx * dx + dy * dy + dz * dz;
+    len = sq;
+    if (sq > 0.0f) {
+        len = sqrtf(sq);
+    }
+    if (len == 0.0) {
+        inv = 0.0;
+    } else {
+        inv = 1.0 / len;
+    }
+    if (len > arg3->x30) {
+        arg2->x = dx * inv * arg3->x30 + current->pos.x;
+        arg2->y = dy * inv * arg3->x30 + current->pos.y;
+        arg2->z = dz * inv * arg3->x30 + current->pos.z;
+    }
 }
 
 s32 it_802A678C(ItemLink* link_0, Vec3* arg1, itLinkHookshotAttributes* arg2,
@@ -1884,9 +1959,59 @@ void it_802A7168(Item* arg0, Vec3* arg1, f32 arg8)
     }
 }
 
-void it_802A7384(Item* arg0, Vec3* arg1, f32 arg8)
+void it_802A7384(Item* item, Vec3* arg1, f32 arg8)
 {
-    NOT_IMPLEMENTED;
+    Vec3 next_pos;
+    Vec3 prev_pos;
+    Vec3 cur_pos;
+    Vec3 dir;
+    ItemLink* link;
+    Fighter* fp;
+    HSD_JObj* jobj;
+    PAD_STACK(0x1C);
+
+    link = item->xDD4_itemVar.linkhookshot.x4;
+    fp = item->owner->user_data;
+    while (!link->x2C_b0) {
+        link = link->prev;
+    }
+    while (link->prev != NULL) {
+        if (link->next != NULL) {
+            if (link->next->x2C_b0) {
+                next_pos = link->next->pos;
+            } else {
+                next_pos = *arg1;
+            }
+        } else {
+            next_pos = *arg1;
+        }
+        if (link->prev != NULL) {
+            prev_pos = link->prev->pos;
+        } else {
+            prev_pos = link->pos;
+        }
+        jobj = link->gobj->hsd_obj;
+        cur_pos = link->pos;
+        HSD_JObjSetTranslate(jobj, &cur_pos);
+        dir.x = prev_pos.x - next_pos.x;
+        dir.y = prev_pos.y - next_pos.y;
+        dir.z = prev_pos.z - next_pos.z;
+        it_802A6F80(jobj, &cur_pos, &dir, arg8);
+        link = link->prev;
+    }
+    jobj = link->gobj->hsd_obj;
+    cur_pos = link->pos;
+    HSD_JObjSetTranslate(jobj, &cur_pos);
+    if (fp->facing_dir > 0.0f) {
+        dir.x = 1.0f;
+        dir.y = 0.0f;
+        dir.z = 0.0f;
+    } else {
+        dir.x = -1.0f;
+        dir.y = 0.0f;
+        dir.z = 0.0f;
+    }
+    it_802A6F80(jobj, &cur_pos, &dir, arg8);
 }
 
 static inline void itLinkHookshot_Logic20_PickedUp_inline(HSD_GObj* arg0)
