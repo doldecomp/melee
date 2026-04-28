@@ -16,7 +16,7 @@
 /* 26C704 */ bool it_8026C704(void);
 /* 26C75C */ ItemKind it_8026C75C(HSD_ObjAllocUnk6*);
 /* 26C88C */ void fn_8026C88C(HSD_GObj*);
-/* 26CA4C */ void it_8026CA4C(u16*, s32*, u64, s32, f32);
+/* 26CA4C */ void it_8026CA4C(HSD_ObjAllocUnk6*, s32*, u64, s32, f32);
 /* 26CB3C */ bool it_8026CB3C(Vec3*);
 /* 26CB9C */ void it_8026CB9C(s32*, u64, f32);
 /* 26CD50 */ void it_8026CD50(s32*, u64, f32);

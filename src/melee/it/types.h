@@ -762,12 +762,9 @@ struct ItemCommonData {
     f32 xF0;
     f32 xF4;
     f32 xF8;
-    u8 filler_1b[0x124 - 0xFC];
+    f32 xFC[(0x124 - 0xFC) / 4];
     s32 x124; // max value for a random integer generation in it_8026F6BC
-    s32 x128; // used in it_8026CF04
-    s32 x12C; // used in it_8026CF04
-    s32 x130; // used in it_8026CF04
-    s32 x134; // used in it_8026CF04
+    s32 x128[4]; // 4 monster item counts, used in it_8026CF04
     // u8 filler_2[0x148 - 0x138]; - replaced with vars that are used for
     // calc's in it_8026F8B4
     s32 x138;

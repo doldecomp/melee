@@ -4733,62 +4733,6 @@ Article** it_804D6D30;
 Article** it_804D6D38;
 f32* it_804D6D40;
 
-/// static f32 it_804DC708 = 0.0f;
-/// static f32 it_804DC70C = 0.00001f;
-/// static f32 it_804DC710 = 1.0f;
-/// static f32 it_804DC714 = -1.0f;
-/// static f64 it_804DC718 = M_PI_2;
-/// static f64 const it_804DC720 = U32_TO_F32;
-/// static f32 it_804DC728 = 0.01f;
-/// static f32 it_804DC72C = deg_to_rad;
-/// static f32 it_804DC730 = 1.0f;
-/// static f32 it_804DC734 = 0.0f;
-/// static f32 it_804DC738 = 1.0f;
-extern f32 it_804DC73C; // = 0.0f;
-/// static f32 it_804DC740 = -1.0f;
-static f32 it_804DC744 = 1.0f;
-/// static f64 const it_804DC748 = S32_TO_F32;
-/// static f32 it_804DC750 = 1.5f;
-/// static f32 it_804DC754 = 0.00001f;
-/// static f64 it_804DC758 = 0.5f;
-/// static f64 it_804DC760 = 3.0f;
-/// static f32 it_804DC768 = 0.85f;
-static const f32 it_804DC76C = 0.01f;
-static f32 it_804DC770 = 0.0f;
-/// static f32 it_804DC774 = 1.0f;
-/// static f32 it_804DC778 = 2.0f;
-/// static f32 it_804DC77C = 0.5f;
-/// static f64 it_804DC780 = M_PI;
-/// static f64 it_804DC788 = 0.0f;
-static f32 it_804DC790 = 0.003906f;
-static f64 it_804DC798 = U32_TO_F32;
-static f64 it_804DC7A0 = S32_TO_F32;
-/// static f32 it_804DC7A8 = 1.0f;
-/// static f32 it_804DC7AC = 0.0f;
-/// static f32 it_804DC7B0 = F32_MAX;
-/// static f32 it_804DC7B8 = 0.0f;
-/// static f32 it_804DC7BC = -1.0f;
-/// static f32 it_804DC7C0 = 1.0f;
-/// static f32 it_804DC7C4 = 0.001f;
-/// static f64 it_804DC7C8 = M_PI_2;
-/// static f32 it_804DC7D0 = 0.0f;
-/// static f32 it_804DC7D4 = 1.0f;
-/// static f32 it_804DC7D8 = deg_to_rad;
-/// static f64 it_804DC7E0 = S32_TO_F32;
-/// static f32 it_804DC7E8 = M_PI_2;
-/// static f32 it_804DC7EC = 0.1f;
-/// static f64 it_804DC7F0 = 10.0f;
-static const f64 it_804DC7F8 = 0.5f;
-/// static f32 it_804DC800 = 30.0f;
-/// static f32 it_804DC804= 10.0f;
-/// static f64 it_804DC808 = M_PI_2;
-/// static f32 it_804DC810 = deg_to_rad;
-/// static f64 it_804DC818 = 3.0f;
-/// static f32 it_804DC820 = -1.0f;
-/// static f32 0.00000000680742f = 0.00000000680742f;
-/// static f32 it_804DC828 = 2.0f;
-/// static f32 it_804DC82C = 0.5f;
-
 typedef enum PokemonKind {
     Pokemon_ID_Tosakinto,   // Goldeen (Tosakinto)
     Pokemon_ID_Chicorita,   // Chikorita (Chicorita)
@@ -4845,25 +4789,14 @@ void it_80272560(Item_GObj* item_gobj, s32 idx)
 
 void it_802725D4(Item_GObj* item_gobj)
 {
+    Item* item = GET_ITEM(item_gobj);
     u32 i;
-    Item* item = item_gobj->user_data;
-
-#if 1
-    u8* var_r31 = ((u8*) item);
-
-    for (i = 0; i < 4; ++i) {
-        lbColl_80008428((HitCapsule*) (var_r31 + (i * 0x13c) + 0x5d4));
-    }
-#else
     for (i = 0; i < 4; ++i) {
         lbColl_80008428(&item->x5D4_hitboxes[i].hit);
     }
-#endif
-
     for (i = 0; i < 4; ++i) {
         it_8027129C(item_gobj, i);
     }
-    // lol. 0xDC8 should probably be split into 4 bitfields
     item->xDC8_word.flags.x16 = 0;
     item->xDAA_flag.b2 = 0;
 }
@@ -4914,19 +4847,11 @@ void it_80272784(Item_GObj* item_gobj)
 {
     u32 i;
     Item* item = GET_ITEM(item_gobj);
-
-#if 1
-    u8* var_r31 = ((u8*) item);
+    char* p = (char*) item;
 
     for (i = 0; i < 4; ++i) {
-        lbColl_80008434((HitCapsule*) (var_r31 + (i * 0x13c) + 0x5d4));
+        lbColl_80008434((HitCapsule*) (p + (i * 0x13c) + 0x5d4));
     }
-#else
-    for (i = 0; i < 4; ++i) {
-        lbColl_80008434(&item->x5D4_hitboxes[i].hit);
-    }
-#endif
-
     item->xDC8_word.flags.x16 = 1;
     it_80272784_inline(item_gobj);
 }
@@ -5015,7 +4940,6 @@ void it_80272940(Item_GObj* item_gobj)
     HSD_JObjClearFlagsAll(item_jobj2, 0x10U);
 }
 
-/// void it_80272980(Item_GObj* item_gobj, f32 arg1) {
 void it_80272980(Item_GObj* item_gobj)
 {
     f32 dir;
@@ -5166,11 +5090,7 @@ bool itColl_BounceOffShield(Item_GObj* item_gobj)
     item = GET_ITEM(item_gobj);
     lbVector_Mirror(&item->x40_vel, &item->xC58);
     item = item_gobj->user_data;
-    vel_x = item->x40_vel.x;
-    if (vel_x < 0.0f) {
-        vel_x = -vel_x;
-    }
-    if (!(vel_x < 0.00001f) || !item->facing_dir) {
+    if (!(ABS(item->x40_vel.x) < 0.00001f) || !item->facing_dir) {
         if (item->x40_vel.x >= 0.0f) {
             dir = 1.0f;
         } else {
@@ -6458,20 +6378,6 @@ void it_8027574C(Item_GObj* item_gobj)
 
 void it_80275788(Item_GObj* item_gobj)
 {
-#if 0
-    Item* item;
-    HitCapsule* hitcapsule;
-    u32 var_ctr;
-
-    item = item_gobj->user_data;
-    for (var_ctr = 0U; var_ctr < 4U; var_ctr++) {
-        hitcapsule = &item->x5D4_hitboxes[var_ctr].hit;
-        if (hitcapsule->state != HitCapsule_Disabled) {
-            hitcapsule->state = HitCapsule_Max;
-            item->xDAA_flag.b2 = 1;
-        }
-    }
-#elif 1
     Item* item;
     HitCapsule* hitcapsule;
     u32 state;
@@ -6486,34 +6392,6 @@ void it_80275788(Item_GObj* item_gobj)
             item->xDAA_flag.b2 = 1;
         }
     }
-#else
-    Item* item;
-    HitCapsule* hitcapsule;
-    u32 state;
-
-    item = item_gobj->user_data;
-    state = 4;
-    hitcapsule = &item->x5D4_hitboxes[0].hit;
-    if (hitcapsule->state != HitCapsule_Disabled) {
-        hitcapsule->state = state;
-        item->xDAA_flag.b2 = 1;
-    }
-    hitcapsule = &item->x5D4_hitboxes[1].hit;
-    if (hitcapsule->state != HitCapsule_Disabled) {
-        hitcapsule->state = state;
-        item->xDAA_flag.b2 = 1;
-    }
-    hitcapsule = &item->x5D4_hitboxes[2].hit;
-    if (hitcapsule->state != HitCapsule_Disabled) {
-        hitcapsule->state = state;
-        item->xDAA_flag.b2 = 1;
-    }
-    hitcapsule = &item->x5D4_hitboxes[3].hit;
-    if (hitcapsule->state != HitCapsule_Disabled) {
-        hitcapsule->state = state;
-        item->xDAA_flag.b2 = 1;
-    }
-#endif
 }
 
 void it_80275820(Item_GObj* item_gobj, Vec3* arg1, Vec3* arg2, s32 idx)
@@ -6622,11 +6500,9 @@ void it_802759DC(Item_GObj* item_gobj1, Item_GObj* item_gobj2)
         if (!chk) {
             temp_f31 = 0.5f * (coll2->ecb.top.y + coll2->ecb.bottom.y);
             it_8026BC90(item_gobj2, &sp1C);
-            sp34.x = sp1C.x + it_804DC73C;
-            // sp34.x = sp1C.x + 0.0f;
+            sp34.x = sp1C.x + 0.0f;
             sp34.y = sp1C.y + temp_f31;
-            sp34.z = sp1C.z + it_804DC73C;
-            // sp34.z = sp1C.z + 0.0f;
+            sp34.z = sp1C.z + 0.0f;
             coll1->last_pos = sp34;
             mpColl_80043670(coll1);
             coll1->cur_pos = sp44;
@@ -7229,13 +7105,9 @@ bool it_80276D9C(Item_GObj* item_gobj, enum_t arg1)
         }
         item->xC1C = sp34;
         mpColl_SetECBSource_Fixed(
-            &item->x378_itemColl, item_gobj, item->xC1C.top * it_804DC744,
-            item->xC1C.bottom * it_804DC744, item->xC1C.right * it_804DC744,
-            item->xC1C.left * it_804DC744);
-        // mpColl_SetECBSource_Fixed(&item->x378_itemColl,
-        // item_gobj, item->xC1C.top * 1.0f, item->xC1C.bottom * 1.0f,
-        // item->xC1C.right
-        // * 1.0f, item->xC1C.left * 1.0f);
+            &item->x378_itemColl, item_gobj, item->xC1C.top * 1.0f,
+            item->xC1C.bottom * 1.0f, item->xC1C.right * 1.0f,
+            item->xC1C.left * 1.0f);
         if (-1.0f == item->facing_dir) {
             dir2 = -1;
         } else {
@@ -7594,7 +7466,7 @@ bool it_8027781C(Item_GObj* item_gobj)
         chk = true;
     }
     if (chk) {
-        if (return_sqrt_value(&sp30) < it_804DC76C) {
+        if (return_sqrt_value(&sp30) < 0.01f) {
             sp30.x = item->x40_vel.x;
             sp30.y = -1.0f * item->x40_vel.y;
         }
@@ -9609,7 +9481,7 @@ int it_8027BA54(HSD_GObj* item_gobj, Vec3* arg1)
 
     item = GET_ITEM(item_gobj);
     Camera_GetTransformPosition(&sp20);
-    sp20.x = ((10.0f * (HSD_Randf() - it_804DC7F8)) + sp20.x);
+    sp20.x = ((10.0f * (HSD_Randf() - 0.5f)) + sp20.x);
     sp20.y += 30.0f * HSD_Randf();
     lbVector_Diff(&sp20, &item->pos, &sp14);
     lbVector_Normalize(&sp14);
