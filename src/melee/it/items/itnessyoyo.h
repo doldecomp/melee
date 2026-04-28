@@ -23,8 +23,8 @@
 /* 2BF030 */ s32 it_802BF030(ItemLink*, s32, f32);
 /* 2BF180 */ void it_802BF180(ItemLink*, Vec3*, itYoyoAttributes*, f32);
 /* 2BF28C */ s32 it_802BF28C(ItemLink*, Vec3*, itYoyoAttributes*, Item*);
-/* 2BF4A0 */ void it_802BF4A0(ItemLink*, Vec3*, itYoyoAttributes*, Item*);
-/* 2BF800 */ s32 it_802BF800(ItemLink*, Vec3*, itYoyoAttributes*, Item*, f32);
+/* 2BF4A0 */ s32 it_802BF4A0(ItemLink*, Vec3*, itYoyoAttributes*, Item*);
+/* 2BF800 */ bool it_802BF800(ItemLink*, Vec3*, itYoyoAttributes*, Item*, f32);
 /* 2BF900 */ void it_802BF900(Item* item);
 /* 2BFAFC */ void it_802BFAFC(Item*, Vec3*);
 /* 2BFE34 */ void itNessYoyo_Logic59_PickedUp(Item_GObj*);

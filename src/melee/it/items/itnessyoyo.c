@@ -1,6 +1,10 @@
 #include "itnessyoyo.h"
 
+#include "math.h"
+
 #include <placeholder.h>
+
+#include "baselib/forward.h"
 
 #include "ft/chara/ftNess/ftNs_AttackHi4.h"
 #include "ft/ftlib.h"
@@ -19,7 +23,8 @@
 #include <baselib/gobjobject.h>
 #include <baselib/gobjplink.h>
 #include <baselib/gobjuserdata.h>
-#include <MSL/math_ppc.h>
+
+extern double __frsqrte(double);
 
 void it_802BE598(Item_GObj* gobj)
 {
@@ -46,21 +51,33 @@ void it_802BE5D8(void* arg, float frame)
 
 extern const Vec3 it_803B8698;
 
+static inline HSD_JObj* it_802BE65C_LoadString(Item* ip)
+{
+    itYoyoAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    return HSD_JObjLoadJoint(attrs->x50_string_joint);
+}
+
+static inline HSD_JObj* it_802BE65C_LoadYoyo(Item* ip)
+{
+    itYoyoAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
+    return HSD_JObjLoadJoint(attrs->x54_yoyo_joint);
+}
+
 HSD_GObj* it_802BE65C(Item* ip, HSD_JObj* bone_jobj)
 {
-    Vec3 zero_vel = it_803B8698;
-    ItemLink* prev_link = NULL;
-    ItemLink* head_link = NULL;
-    ItemLink* tail_link = NULL;
-    HSD_GObj* result = NULL;
+    ItemLink* prev_link;
+    ItemLink* head_link;
+    ItemLink* tail_link;
+    HSD_GObj* result;
     itYoyoAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
-    s32 count = attrs->x0_CHARGE_SPAWN_POS;
+    HSD_GObj* link_gobj;
+    Vec3 zero_vel = it_803B8698;
+    ItemLink* link;
+    HSD_JObj* jobj;
     int i;
 
-    for (i = 0; i < count; i++) {
-        HSD_GObj* link_gobj = GObj_Create(7, 0xA, 0);
-        ItemLink* link;
-
+    for (i = 0; i < attrs->x0_CHARGE_SPAWN_POS; i++) {
+        link_gobj = GObj_Create(7, 0xA, 0);
         if (link_gobj == NULL) {
             while (prev_link != NULL) {
                 HSD_GObjPLink_80390228(prev_link->gobj);
@@ -82,11 +99,11 @@ HSD_GObj* it_802BE65C(Item* ip, HSD_JObj* bone_jobj)
             link->pos = ip->pos;
             link->x2C_b0 = false;
             it_802A24D0(link, 1.0f);
-            HSD_GObjObject_80390A70(
-                link_gobj, HSD_GObj_804D7849,
-                HSD_JObjLoadJoint(attrs->x50_string_joint));
+
+            HSD_GObjObject_80390A70(link_gobj, HSD_GObj_804D7849,
+                                    it_802BE65C_LoadString(ip));
             GObj_SetupGXLink(link_gobj, it_802A24A0, 6, 0);
-        } else if (i == count - 1) {
+        } else if (i == attrs->x0_CHARGE_SPAWN_POS - 1) {
             prev_link->prev = link;
             link->prev = NULL;
             tail_link = link;
@@ -98,7 +115,10 @@ HSD_GObj* it_802BE65C(Item* ip, HSD_JObj* bone_jobj)
             link->x2C_b0 = true;
             it_802A24D0(link, 2.0f * ftLib_80086A0C(ip->owner));
             {
-                HSD_JObj* jobj = HSD_JObjLoadJoint(attrs->x54_yoyo_joint);
+                itYoyoAttributes* attrs =
+                    ip->xC4_article_data->x4_specialAttributes;
+                HSD_Joint* joint = attrs->x54_yoyo_joint;
+                jobj = HSD_JObjLoadJoint(joint);
                 HSD_GObjObject_80390A70(link_gobj, HSD_GObj_804D7849, jobj);
                 GObj_SetupGXLink(link_gobj, HSD_GObj_JObjCallback, 6, 0);
                 ip->xDD4_itemVar.nessyoyo.x18 = jobj;
@@ -113,9 +133,8 @@ HSD_GObj* it_802BE65C(Item* ip, HSD_JObj* bone_jobj)
             link->pos = ip->pos;
             link->x2C_b0 = false;
             it_802A24D0(link, 1.0f);
-            HSD_GObjObject_80390A70(
-                link_gobj, HSD_GObj_804D7849,
-                HSD_JObjLoadJoint(attrs->x50_string_joint));
+            HSD_GObjObject_80390A70(link_gobj, HSD_GObj_804D7849,
+                                    it_802BE65C_LoadString(ip));
             GObj_SetupGXLink(link_gobj, it_802A24A0, 6, 0);
         }
         prev_link = link;
@@ -125,33 +144,39 @@ HSD_GObj* it_802BE65C(Item* ip, HSD_JObj* bone_jobj)
     return result;
 }
 
-void it_802BE958(Item_GObj* gobj)
+static inline void it_802BE958_inline(Item_GObj* gobj)
 {
-    Item* ip = GET_ITEM(gobj);
-    PAD_STACK(8);
-    if (ip != NULL) {
-        if (gobj != NULL) {
-            if (ip->owner != NULL) {
-                ftNs_AttackHi4_YoyoItemSetFlag(ip->owner);
-            }
-            ip->owner = NULL;
-            {
-                ItemLink* link = ip->xDD4_itemVar.nessyoyo.x8;
-                while (link != NULL) {
-                    HSD_GObj* gobj = link->gobj;
-                    link = link->next;
-                    HSD_GObjPLink_80390228(gobj);
-                }
+    if (gobj != NULL) {
+        Item* ip = GET_ITEM(gobj);
+        if (ip->owner != NULL) {
+            ftNs_AttackHi4_YoyoItemSetFlag(ip->owner);
+        }
+        ip->owner = NULL;
+        {
+            ItemLink* link = ip->xDD4_itemVar.nessyoyo.x8;
+            while (link != NULL) {
+                HSD_GObj* tmp = link->gobj;
+                link = link->next;
+                HSD_GObjPLink_80390228(tmp);
             }
         }
+    }
+}
+
+void it_802BE958(Item_GObj* gobj)
+{
+    if (GET_ITEM(gobj)) {
+        it_802BE958_inline(gobj);
         Item_8026A8EC(gobj);
     }
 }
 
 HSD_GObj* it_802BE9D8(HSD_GObj* owner, f32 facing_dir, Vec3* pos, s32 action)
 {
+    Fighter* fp = owner->user_data;
     SpawnItem spawn;
     Item_GObj* gobj;
+    PAD_STACK(0x14);
 
     spawn.kind = It_Kind_Ness_Yoyo;
     spawn.prev_pos = *pos;
@@ -166,16 +191,14 @@ HSD_GObj* it_802BE9D8(HSD_GObj* owner, f32 facing_dir, Vec3* pos, s32 action)
     gobj = Item_80268B18(&spawn);
     if (gobj != NULL) {
         Item* ip = GET_ITEM(gobj);
-        Fighter* fp;
-        HSD_JObj* yoyo_jobj;
         itYoyoAttributes* attrs;
+        HSD_JObj* yoyo_jobj;
 
         ip->xDD4_itemVar.nessyoyo.x10 = owner;
         ip->xDD4_itemVar.nessyoyo.x0 = action;
         if (ip->xDD4_itemVar.nessyoyo.x0 == 0x159) {
             ip->facing_dir *= -1.0f;
         }
-        fp = owner->user_data;
         it_802BE65C(ip, fp->parts[FtPart_R2ndNa].joint);
         Item_8026AB54(gobj, owner, FtPart_R2ndNa);
         ip = GET_ITEM(gobj);
@@ -260,8 +283,7 @@ void itNessyoyo_UnkMotion3_Phys(Item_GObj* gobj)
     pos.x = m[0][3];
     pos.y = m[1][3];
     pos.z = m[2][3];
-    if (it_802BF800(link2, &pos, attrs, ip, ip->xDD4_itemVar.nessyoyo.x4) != 0)
-    {
+    if (it_802BF800(link2, &pos, attrs, ip, ip->xDD4_itemVar.nessyoyo.x4)) {
         zero_vec.z = it_804DD150;
         zero_vec.y = it_804DD150;
         zero_vec.x = it_804DD150;
@@ -276,52 +298,52 @@ void itNessyoyo_UnkMotion3_Phys(Item_GObj* gobj)
     it_802BFAFC(ip, &pos);
 }
 
-static inline void itNessyoyo_UnkMotion3_Anim_Cleanup(Item_GObj* gobj)
+static inline bool itNessyoyo_UnkMotion3_Anim_inline(Item_GObj* gobj)
 {
-    if (gobj != NULL) {
-        Item* ip = GET_ITEM(gobj);
-        if (ip->owner != NULL) {
-            ftNs_AttackHi4_YoyoItemSetFlag(ip->owner);
-        }
-        ip->owner = NULL;
-        {
-            ItemLink* link = ip->xDD4_itemVar.nessyoyo.x8;
-            while (link != NULL) {
-                HSD_GObj* tmp = link->gobj;
-                link = link->next;
-                HSD_GObjPLink_80390228(tmp);
-            }
+    if (GET_ITEM(gobj)->owner) {
+        enum_t action = ftLib_80086C0C(GET_ITEM(gobj)->owner);
+        if (action >= 0x156 && action <= 0x15B) {
+            return false;
+        } else {
+            return true;
         }
     }
+    return true;
 }
 
 bool itNessyoyo_UnkMotion3_Anim(Item_GObj* gobj)
 {
-    bool should_cleanup;
     Item* ip = GET_ITEM(gobj);
-    HSD_JObj* jobj = ip->xDD4_itemVar.nessyoyo.x18;
-    Fighter* fp = (ip->xDD4_itemVar.nessyoyo.x10)->user_data;
-    HSD_JObj* child = HSD_JObjGetChild(jobj);
+    Fighter* fp = GET_FIGHTER(ip->xDD4_itemVar.nessyoyo.x10);
+    HSD_JObj* child;
+    PAD_STACK(24);
+    if (ip->xDD4_itemVar.nessyoyo.x18 == NULL) {
+        child = NULL;
+    } else {
+        child = ip->xDD4_itemVar.nessyoyo.x18->child;
+    }
 
-    if (child != NULL) {
-        f32 rot = HSD_JObjGetRotationX(child) + fp->fv.ns.x223C;
+    if (child) {
+        f32 rot = HSD_JObjGetRotationX(child);
+        rot += fp->fv.ns.x223C;
         HSD_JObjSetRotationX(child, rot);
     }
-    {
-        HSD_GObj* owner = GET_ITEM(gobj)->owner;
-        if (owner != NULL) {
-            enum_t action = ftLib_80086C0C(owner);
-            if (action >= 0x156 && action <= 0x15B) {
-                should_cleanup = false;
-            } else {
-                should_cleanup = true;
+    if (itNessyoyo_UnkMotion3_Anim_inline(gobj)) {
+        if (gobj != NULL) {
+            Item* ip = GET_ITEM(gobj);
+            if (ip->owner != NULL) {
+                ftNs_AttackHi4_YoyoItemSetFlag(ip->owner);
             }
-        } else {
-            should_cleanup = true;
+            ip->owner = NULL;
+            {
+                ItemLink* link = ip->xDD4_itemVar.nessyoyo.x8;
+                while (link != NULL) {
+                    HSD_GObj* tmp = link->gobj;
+                    link = link->next;
+                    HSD_GObjPLink_80390228(tmp);
+                }
+            }
         }
-    }
-    if (should_cleanup) {
-        itNessyoyo_UnkMotion3_Anim_Cleanup(gobj);
         return true;
     }
     return false;
@@ -331,8 +353,8 @@ s32 it_802BF030(ItemLink* link, s32 arg1, f32 offset)
 {
     CollData* coll = &link->coll_data;
 
-    link->coll_data.last_pos = link->coll_data.cur_pos;
-    link->coll_data.cur_pos = link->pos;
+    coll->last_pos = coll->cur_pos;
+    coll->cur_pos = link->pos;
     if (mpColl_800471F8(coll)) {
         if (!link->x2C_b1 && arg1 != 0 && !link->x2C_b2) {
             link->x2C_b2 = true;
@@ -386,88 +408,84 @@ void it_802BF180(ItemLink* cur, Vec3* target, itYoyoAttributes* attrs,
 s32 it_802BF28C(ItemLink* link, Vec3* target, itYoyoAttributes* attrs,
                 Item* ip)
 {
-    Vec3 dir;
-    Vec3 dir2;
-    f32 min_len = attrs->x10_UNK1 * ftLib_80086A0C(ip->owner);
-    Fighter* fp = GET_FIGHTER(ip->xDD4_itemVar.nessyoyo.x10);
-    ItemLink* cur = link;
-    ItemLink* next = cur->next;
-    f32 max_len = attrs->xC_SIZE * ftLib_80086A0C(ip->owner);
-    PAD_STACK(8);
+    PAD_STACK(0xC);
+    {
+        Vec3 dir;
+        Vec3 dir2;
+        f32 min_len = attrs->x10_UNK1 * ftLib_80086A0C(ip->owner);
+        f32 max_len = attrs->xC_SIZE * ftLib_80086A0C(ip->owner);
+        Fighter* fp = GET_FIGHTER(ip->xDD4_itemVar.nessyoyo.x10);
+        ItemLink* cur = link;
+        ItemLink* next = cur->next;
+        PAD_STACK(4);
 
-    cur->pos = fp->fv.ns.yoyo_hitbox_pos;
-    cur->vel.z = 0.0f;
-    cur->vel.y = 0.0f;
-    cur->vel.x = 0.0f;
+        cur->pos = fp->fv.ns.yoyo_hitbox_pos;
+        cur->vel.z = 0.0f;
+        cur->vel.y = 0.0f;
+        cur->vel.x = 0.0f;
 
-    while (next != NULL) {
-        if (next->x2C_b0) {
-            f32 dist;
-            next->pos = *target;
-            dist = it_802A3C98(&next->pos, &cur->pos, &dir);
-            if (dist > max_len) {
-                next->pos.x = (dir.x * max_len) + cur->pos.x;
-                next->pos.y = (dir.y * max_len) + cur->pos.y;
-                next->pos.z = (dir.z * max_len) + cur->pos.z;
-            } else if (dist < min_len) {
-                if (it_802A3C98(&next->pos, target, &dir2) <= 0.1f) {
-                    next->x2C_b0 = false;
+        while (next != NULL) {
+            if (next->x2C_b0) {
+                f32 dist;
+                next->pos = *target;
+                dist = it_802A3C98(&next->pos, &cur->pos, &dir);
+                if (dist > max_len) {
+                    next->pos.x = (dir.x * max_len) + cur->pos.x;
+                    next->pos.y = (dir.y * max_len) + cur->pos.y;
+                    next->pos.z = (dir.z * max_len) + cur->pos.z;
+                } else if (dist < min_len) {
+                    if (it_802A3C98(&next->pos, target, &dir2) <= 0.1f) {
+                        next->x2C_b0 = false;
+                    } else {
+                        next->pos.x = (dir.x * min_len) + cur->pos.x;
+                        next->pos.y = (dir.y * min_len) + cur->pos.y;
+                        next->pos.z = (dir.z * min_len) + cur->pos.z;
+                    }
+                }
+            } else {
+                if (it_802A3C98(target, &cur->pos, &dir) > max_len) {
+                    next->pos.x = (dir.x * max_len) + cur->pos.x;
+                    next->pos.y = (dir.y * max_len) + cur->pos.y;
+                    next->pos.z = (dir.z * max_len) + cur->pos.z;
+                    next->x2C_b0 = true;
                 } else {
-                    next->pos.x = (dir.x * min_len) + cur->pos.x;
-                    next->pos.y = (dir.y * min_len) + cur->pos.y;
-                    next->pos.z = (dir.z * min_len) + cur->pos.z;
+                    return 0;
                 }
             }
-        } else {
-            if (it_802A3C98(target, &cur->pos, &dir) > max_len) {
-                next->pos.x = (dir.x * max_len) + cur->pos.x;
-                next->pos.y = (dir.y * max_len) + cur->pos.y;
-                next->pos.z = (dir.z * max_len) + cur->pos.z;
-                next->x2C_b0 = true;
-            } else {
-                return 0;
-            }
+            cur = next;
+            next = next->next;
         }
-        cur = next;
-        next = next->next;
+        return 2;
     }
-    return 2;
 }
 
-void it_802BF4A0(ItemLink* link, Vec3* target, itYoyoAttributes* attrs,
-                 Item* ip)
+s32 it_802BF4A0(ItemLink* link, Vec3* target, itYoyoAttributes* attrs,
+                Item* ip)
 {
+    u8 _pad[12];
     Vec3 dir;
+    u8 _pad2[4];
     Vec3 dir2;
-    ItemLink* cur = link;
-    ItemLink* next = link->next;
+    ItemLink* cur;
+    ItemLink* next;
     ItemLink* tail;
     ItemLink* prev;
-    f32 vel_x;
-    f32 vel_y;
-    f32 abs_vel;
     s32 coll_flags;
-    s32 count = 0;
+    s32 count;
     f32 size;
 
     ftLib_80086A0C(ip->owner);
-    vel_x = link->vel.x;
     size = attrs->xC_SIZE * ftLib_80086A0C(ip->owner);
+    cur = link;
+    next = link->next;
 
-    if (vel_x < 0.0f) {
-        vel_x = -vel_x;
-    }
-    if (vel_x < attrs->x2C_UNK3_MOD) {
+    if (ABS(link->vel.x) < attrs->x2C_UNK3_MOD) {
         link->vel.x += attrs->x28_YOYO_PULL_STRENGTH * ip->facing_dir;
     } else {
         link->vel.x = attrs->x2C_UNK3_MOD * ip->facing_dir;
     }
 
-    vel_y = link->vel.y;
-    if (vel_y < 0.0f) {
-        vel_y = -vel_y;
-    }
-    if (vel_y < attrs->x38_GRAVITY_MOD) {
+    if (ABS(link->vel.y) < attrs->x38_GRAVITY_MOD) {
         link->vel.y -= attrs->x34_GRAVITY;
     } else {
         link->vel.y = -attrs->x38_GRAVITY_MOD;
@@ -478,14 +496,14 @@ void it_802BF4A0(ItemLink* link, Vec3* target, itYoyoAttributes* attrs,
     if (coll_flags & 0x18000) {
         link->coll_data.cur_pos.y += 0.001f;
         link->pos.y = link->coll_data.cur_pos.y;
-        if (link->vel.y < 0.0f) {
-            link->vel.y = 0.0f;
+        if (link->vel.y < 0) {
+            link->vel.y = 0;
         }
     }
+    coll_flags &= 0xFFF;
 
+    count = 0;
     while (next != NULL) {
-        s32 charge_len;
-
         count++;
         if (next->x2C_b0) {
             next->vel.y -= attrs->x3C_YOYO_PULL_STRENGTH_2;
@@ -497,8 +515,9 @@ void it_802BF4A0(ItemLink* link, Vec3* target, itYoyoAttributes* attrs,
                 next->pos.z = (dir.z * size) + cur->pos.z;
             }
             it_802A43EC(next);
-            it_802A42F4(next, 1.5f + target->y);
+            it_802A42F4(next, 1.5 + target->y);
         } else {
+            s32 charge_len;
             if (ip->xDD4_itemVar.nessyoyo.x0 == 0x156) {
                 charge_len = attrs->x4_UPSMASH_CHARGE_STRING_LENGTH;
             } else {
@@ -512,16 +531,18 @@ void it_802BF4A0(ItemLink* link, Vec3* target, itYoyoAttributes* attrs,
                 next->pos.z = (dir.z * size) + cur->pos.z;
                 next->x2C_b0 = true;
                 it_802A43B8(next);
-            } else if (coll_flags & 0xFFF) {
-                break;
+            } else if (coll_flags != 0) {
+                return 1;
+            } else {
+                return 0;
             }
         }
         cur = next;
         next = next->next;
     }
 
-    tail = cur;
     prev = cur->prev;
+    tail = cur;
     it_802A3C98(&tail->pos, target, &dir2);
     cur->pos.x = (dir2.x * size) + target->x;
     cur->pos.y = (dir2.y * size) + target->y;
@@ -538,19 +559,18 @@ void it_802BF4A0(ItemLink* link, Vec3* target, itYoyoAttributes* attrs,
     }
 
     link->vel.x *= 0.9f;
+    return 2;
 }
 
-s32 it_802BF800(ItemLink* cur, Vec3* pos, itYoyoAttributes* attrs, Item* ip,
-                f32 dist)
+bool it_802BF800(ItemLink* cur, Vec3* pos, itYoyoAttributes* attrs, Item* ip,
+                 f32 dist)
 {
     Vec3 dir;
-    ItemLink* prev;
-    f32 size = attrs->xC_SIZE * ftLib_80086A0C(ip->owner);
     f32 len;
     f32 step;
-
-    prev = cur->prev;
-
+    f32 size = attrs->xC_SIZE * ftLib_80086A0C(ip->owner);
+    ItemLink* prev = cur->prev;
+    PAD_STACK(0x10);
     while (prev != NULL && !cur->x2C_b0) {
         cur = prev;
         prev = prev->prev;
@@ -562,15 +582,16 @@ s32 it_802BF800(ItemLink* cur, Vec3* pos, itYoyoAttributes* attrs, Item* ip,
         cur = prev;
         prev = prev->prev;
     }
-    step = len - dist;
-    if (step > size) {
+    if (len - dist > size) {
         step = size;
+    } else {
+        step = len - dist;
     }
     it_802BF180(cur, pos, attrs, step);
     if (prev != NULL) {
-        return 0;
+        return false;
     }
-    return 1;
+    return true;
 }
 
 extern const Vec3 it_803B86A4;
@@ -578,11 +599,15 @@ extern const Vec3 it_803B86A4;
 void it_802BF900(Item* ip)
 {
     Mtx trans;
+    Vec3 offset;
     Mtx scale;
     ItemLink* link1 = ip->xDD4_itemVar.nessyoyo.x8;
     HSD_JObj* target = (HSD_JObj*) link1->gobj->hsd_obj;
-    Vec3 offset = it_803B86A4;
-    f32 scl = ftLib_80086A0C(ip->owner);
+    f32 scl;
+    PAD_STACK(0xC);
+
+    offset = it_803B86A4;
+    scl = ftLib_80086A0C(ip->owner);
 
     HSD_JObjSetupMatrix(link1->jobj);
     PSMTXIdentity(trans);
@@ -610,20 +635,22 @@ void it_802BF900(Item* ip)
 void it_802BFAFC(Item* ip, Vec3* target)
 {
     ItemLink* link = ip->xDD4_itemVar.nessyoyo.xC;
+    Vec3 next_pos;
+    Vec3 prev_pos;
+    Vec3 link_pos;
+    Vec3 dir;
+    HSD_JObj* jobj;
+    itYoyoAttributes* attrs;
+    u8 _pad[4];
+    Mtx m;
+    f32 scale;
+    u8 _pad2[16];
 
     while (!link->x2C_b0) {
         link = link->prev;
     }
 
     while (link != NULL) {
-        Vec3 next_pos;
-        Vec3 prev_pos;
-        Vec3 link_pos;
-        Vec3 dir;
-        HSD_JObj* jobj;
-        Mtx m;
-        f32 scale;
-
         if (link->next != NULL) {
             if (link->next->x2C_b0) {
                 next_pos = link->next->pos;
@@ -666,10 +693,9 @@ void it_802BFAFC(Item* ip, Vec3* target)
 
         it_802A6DC8(jobj, &link_pos, &dir);
 
+        attrs = ip->xC4_article_data->x4_specialAttributes;
         if (jobj != ip->xDD4_itemVar.nessyoyo.x18) {
-            scale = ((itYoyoAttributes*)
-                         ip->xC4_article_data->x4_specialAttributes)
-                        ->xC_SIZE;
+            scale = attrs->xC_SIZE;
         } else {
             scale = 1.0f;
         }
