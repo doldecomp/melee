@@ -143,40 +143,21 @@ typedef struct {
                        // ____but not yet invisible)
                        // 0: when xDD8 <= 0 or xDD8 >= 5
                        // 1: when cmd_var3 = 1 (when gun shooting sfx starts)
-    /* xC */ bool xDE0; // false when not shot yet; true after shot (in this
-                        // spawn instance of the blaster - not put away)
-    /* x10 */ s32 xDE4; // group 1; gets set to 0 in func (it_802ADF10) that
-                        // sets item joint locations from corresponding fighter
-                        // joint locations
-    /* x14 */ s32 xDE8; // group 1
-    /* x18 */ s32 xDEC; // group 1
-    /* x1C */ s32 xDF0; // group 1
-    /* x20 */ s32 xDF4; // group 1
-    /* x24 */ s32 xDF8; // group 1
-    /* x28 */ s32 xDFC; // group 2; gets set to 0 in func (it_802ADF10) that
-                        // sets item joint locations from corresponding fighter
-                        // joint locations
-    /* x2C */ s32 xE00; // group 2
-    /* x30 */ s32 xE04; // group 2
-    /* x34 */ s32 xE08; // group 2
-    /* x38 */ s32 xE0C; // group 2
-    /* x3C */ s32 xE10; // group 2
-    /* x40 */ Vec3 xE14; // group 3; gets set as the vector from fighter's
-                         // current position to the joint holding the blaster
-                         // on the frame blaster its shot
-    /* x4C */ Vec3 xE20; // group 3
-    /* x58 */ Vec3 xE2C; // group 3
-    /* x64 */ Vec3 xE38; // group 3
-    /* x70 */ Vec3 xE44; // group 3
-    /* x7C */ Vec3 xE50; // group 3
-    /* x88 */ f32 angle; // xE5C group 4; gets set to an angle value in func
-                         // (it_802ADF10) that sets item joint locations from
-                         // corresponding fighter joint locations
-    /* x8C */ f32 xE60;  // group 4
-    /* x90 */ f32 xE64;  // group 4
-    /* x94 */ f32 xE68;  // group 4
-    /* x98 */ f32 xE6C;  // group 4
-    /* x9C */ f32 xE70;  // group 4
+    /* xC */ bool xDE0;    // false when not shot yet; true after shot (in this
+                           // spawn instance of the blaster - not put away)
+    /* x10 */ s32 xDE4[6]; // group 1; gets set to 0 in func (it_802ADF10)
+                           // that sets item joint locations from
+                           // corresponding fighter joint locations
+    /* x28 */ s32 xDFC[6]; // group 2; gets set to 0 in func (it_802ADF10)
+                           // that sets item joint locations from
+                           // corresponding fighter joint locations
+    /* x40 */ Vec3 xE14[6]; // group 3; gets set as the vector from fighter's
+                            // current position to the joint holding the
+                            // blaster on the frame blaster its shot
+    /* x88 */ f32 angle[6]; // xE5C group 4; angle[0] gets set to an angle
+                            // value in func (it_802ADF10) that sets item
+                            // joint locations from corresponding fighter
+                            // joint locations
     /* x100 */ bool gfx_spawn_var; // xE74 Signals to spawn shoot gfx from
                                    // blaster when set to true, which is done
                                    // from subaction funcs on frame of shot
