@@ -1211,7 +1211,7 @@ config.libs = [
             Object(Matching, "melee/it/items/itgamewatchpanic.c"),
             Object(Matching, "melee/it/items/itgamewatchrescue.c"),
             Object(Matching, "melee/it/items/itgamewatchchef.c"),
-            Object(NonMatching, "melee/it/items/itclinkmilk.c"),
+            Object(Matching, "melee/it/items/itclinkmilk.c"),
             # Pokémon
             Object(Matching, "melee/it/items/ittosakinto.c"),
             Object(Matching, "melee/it/items/itchicorita.c"),
