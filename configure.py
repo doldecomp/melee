@@ -1195,7 +1195,7 @@ config.libs = [
             Object(Matching, "melee/it/items/itdrmariopill.c"),
             Object(Matching, "melee/it/items/itclimbersice.c"),
             Object(Matching, "melee/it/items/itclimbersblizzard.c"),
-            Object(NonMatching, "melee/it/items/itclimbersstring.c"),
+            Object(Matching, "melee/it/items/itclimbersstring.c"),
             Object(Matching, "melee/it/items/itzeldadinfire.c"),
             Object(Matching, "melee/it/items/itzeldadinfireexplode.c"),
             Object(Matching, "melee/it/items/itmewtwodisable.c"),

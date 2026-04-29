@@ -1,31 +1,16 @@
 #include "itclimbersstring.h"
 
-#include "placeholder.h"
-
-#include "dolphin/types.h"
 #include "ft/chara/ftPopo/ftPp_SpecialS.h"
-#include "ft/chara/ftPopo/types.h"
 #include "ft/ftlib.h"
 #include "ft/inlines.h"
 #include "it/inlines.h"
-#include "it/it_26B1.h"
 #include "it/it_2725.h"
-#include "it/itCharItems.h"
 #include "it/item.h"
 #include "it/items/itlinkhookshot.h"
 #include "lb/lbvector.h"
 
-#include <dolphin/mtx.h>
-#include <dolphin/os/OSError.h>
-#include <baselib/gobj.h>
-#include <baselib/gobjgxlink.h>
 #include <baselib/gobjobject.h>
 #include <baselib/gobjplink.h>
-#include <baselib/gobjuserdata.h>
-#include <baselib/jobj.h>
-
-extern const Vec3 it_803B86B0;
-extern const Vec3 it_803B86BC;
 
 ItemStateTable it_803F76B8[] = {
     { -1, itClimbersstring_UnkMotion3_Anim, NULL, NULL },
@@ -33,6 +18,28 @@ ItemStateTable it_803F76B8[] = {
     { -1, itClimbersstring_UnkMotion3_Anim, NULL, NULL },
     { -1, itClimbersstring_UnkMotion3_Anim, NULL, NULL },
 };
+
+static inline void it_802C248C_setupGObj(HSD_GObj* link_gobj,
+                                         HSD_JObj* loaded_jobj,
+                                         GObj_RenderFunc callback)
+{
+    HSD_GObjObject_80390A70(link_gobj, HSD_GObj_804D7849, loaded_jobj);
+    GObj_SetupGXLink(link_gobj, callback, 6, 0);
+}
+
+static inline HSD_Joint* it_802C248C_joint24(Item* ip)
+{
+    return (((itClimbersStringAttributes*)
+                 ip->xC4_article_data->x4_specialAttributes)
+                ->x24_joint);
+}
+
+static inline HSD_Joint* it_802C248C_joint28(Item* ip)
+{
+    return (((itClimbersStringAttributes*)
+                 ip->xC4_article_data->x4_specialAttributes)
+                ->x28_joint);
+}
 
 static HSD_GObj* it_802C248C(Item* ip, HSD_JObj* jobj)
 {
@@ -42,13 +49,15 @@ static HSD_GObj* it_802C248C(Item* ip, HSD_JObj* jobj)
     ItemLink* head_link;
     ItemLink* tail_link;
     HSD_GObj* result;
-    Vec3 zero_vel = it_803B86B0;
+    HSD_GObj* link_gobj;
+    ItemLink* link;
+    HSD_JObj* joint;
+    Vec3 zero_vel = { 0.0F, 0.0F, 0.0F };
     int i;
     PAD_STACK(4);
 
     for (i = 0; i < attrs->x0_count; i++) {
-        HSD_GObj* link_gobj = GObj_Create(7, 0xA, 0);
-        ItemLink* link;
+        link_gobj = GObj_Create(7, 0xA, 0);
 
         if (link_gobj == NULL) {
             while (prev_link != NULL) {
@@ -70,13 +79,9 @@ static HSD_GObj* it_802C248C(Item* ip, HSD_JObj* jobj)
             link->vel = zero_vel;
             link->pos = ip->pos;
             link->x2C_b0 = false;
-            HSD_GObjObject_80390A70(
-                link_gobj, HSD_GObj_804D7849,
-                HSD_JObjLoadJoint(
-                    ((itClimbersStringAttributes*)
-                         ip->xC4_article_data->x4_specialAttributes)
-                        ->x24_joint));
-            GObj_SetupGXLink(link_gobj, it_802A24A0, 6, 0);
+            it_802C248C_setupGObj(link_gobj,
+                                  HSD_JObjLoadJoint(it_802C248C_joint24(ip)),
+                                  it_802A24A0);
         } else if (i == attrs->x0_count - 1) {
             prev_link->prev = link;
             link->prev = NULL;
@@ -87,17 +92,12 @@ static HSD_GObj* it_802C248C(Item* ip, HSD_JObj* jobj)
             link->vel = zero_vel;
             link->pos = ip->pos;
             link->x2C_b0 = true;
-            {
-                HSD_JObj* tail_jobj = HSD_JObjLoadJoint(
-                    ((itClimbersStringAttributes*)
-                         ip->xC4_article_data->x4_specialAttributes)
-                        ->x28_joint);
-                HSD_GObjObject_80390A70(link_gobj, HSD_GObj_804D7849,
-                                        tail_jobj);
-                GObj_SetupGXLink(link_gobj, HSD_GObj_JObjCallback, 6, 0);
-                ip->xDD4_itemVar.climbersstring.x14 = tail_jobj;
-                result = link_gobj->hsd_obj;
-            }
+
+            joint = HSD_JObjLoadJoint(it_802C248C_joint28(ip));
+            HSD_GObjObject_80390A70(link_gobj, HSD_GObj_804D7849, joint);
+            GObj_SetupGXLink(link_gobj, HSD_GObj_JObjCallback, 6, 0);
+            ip->xDD4_itemVar.climbersstring.x14 = joint;
+            result = link_gobj->hsd_obj;
         } else {
             prev_link->prev = link;
             link->next = prev_link;
@@ -106,13 +106,9 @@ static HSD_GObj* it_802C248C(Item* ip, HSD_JObj* jobj)
             link->vel = zero_vel;
             link->pos = ip->pos;
             link->x2C_b0 = false;
-            HSD_GObjObject_80390A70(
-                link_gobj, HSD_GObj_804D7849,
-                HSD_JObjLoadJoint(
-                    ((itClimbersStringAttributes*)
-                         ip->xC4_article_data->x4_specialAttributes)
-                        ->x24_joint));
-            GObj_SetupGXLink(link_gobj, it_802A24A0, 6, 0);
+            it_802C248C_setupGObj(link_gobj,
+                                  HSD_JObjLoadJoint(it_802C248C_joint24(ip)),
+                                  it_802A24A0);
         }
         prev_link = link;
     }
@@ -170,27 +166,6 @@ Item_GObj* it_802C27D4(Fighter_GObj* owner, Vec3* pos, int msid, float dir)
         Item_8026AB54(item_gobj, owner, FtPart_L4thNb);
     }
     return item_gobj;
-}
-
-static void it_802C33B8(Item* ip)
-{
-    Mtx m;
-    ItemLink* link = ip->xDD4_itemVar.climbersstring.x4;
-    HSD_JObj* jobj = GET_JOBJ(link->gobj);
-    Vec3 zero = it_803B86BC;
-
-    link->x2C_b0 = false;
-    HSD_JObjSetupMatrix(link->jobj);
-
-    PSMTXIdentity(m);
-    m[0][3] = zero.x;
-    m[1][3] = zero.y;
-    m[2][3] = zero.z;
-    PSMTXConcat(link->jobj->mtx, m, m);
-
-    HSD_JObjCopyMtx(jobj, m);
-    jobj->flags |= 0x03800000;
-    HSD_JObjSetMtxDirty(jobj);
 }
 
 void fn_802C28B8(Item_GObj* gobj)
@@ -272,6 +247,49 @@ static void fn_802C2AF4(HSD_GObj* gobj)
     it_802C3520(ip, &pos);
 }
 
+static inline void itClimbersstring_Cleanup(Item_GObj* gobj)
+{
+    if (gobj != NULL) {
+        Item* ip = GET_ITEM(gobj);
+        if (ip->owner != NULL) {
+            ftPp_SpecialS_8012114C(ip->owner);
+        }
+        ip->owner = NULL;
+        ip->xDD4_itemVar.climbersstring.xC = NULL;
+        {
+            ItemLink* cur;
+            for (cur = ip->xDD4_itemVar.climbersstring.x4; cur != NULL;) {
+                HSD_GObj* cur_gobj = cur->gobj;
+                cur = cur->next;
+                HSD_GObjPLink_80390228(cur_gobj);
+            }
+        }
+    }
+}
+
+bool itClimbersstring_UnkMotion3_Anim(Item_GObj* gobj)
+{
+    s32 should_cleanup;
+    Item* ip = GET_ITEM(gobj);
+
+    if (ip->owner != NULL) {
+        enum_t action = ftLib_80086C0C(ip->owner);
+        if (action >= 0x15B && action <= 0x164) {
+            should_cleanup = 0;
+        } else {
+            should_cleanup = 1;
+        }
+    } else {
+        should_cleanup = 1;
+    }
+    if (should_cleanup != 0) {
+        itClimbersstring_Cleanup(gobj);
+        return true;
+    }
+    return false;
+    PAD_STACK(8);
+}
+
 void it_802C2CA8(ItemLink* link, Vec3* target,
                  itClimbersStringAttributes* attrs, f32 length)
 {
@@ -321,65 +339,54 @@ void it_802C2DB0(ItemLink* cur, Vec3* target,
     }
 }
 
-void it_802C3520(Item* ip, Vec3* target)
+s32 it_802C2EC4(ItemLink* link, Vec3* target,
+                itClimbersStringAttributes* attrs, Item* ip)
 {
-    HSD_JObj* jobj;
-    ItemLink* link = ip->xDD4_itemVar.climbersstring.x8;
-    itClimbersStringAttributes* attrs;
-    Vec3 next_pos;
-    Vec3 prev_pos;
-    Vec3 link_pos;
+    u8 _pad[8];
     Vec3 dir;
-    Mtx m;
-    // PAD_STACK(8);
+    Vec3 dir2;
+    ItemLink* cur = link;
+    ItemLink* iter = link->next;
+    Fighter* fp = GET_FIGHTER(ip->xDD4_itemVar.climbersstring.xC);
+    PAD_STACK(4);
 
-    while (!link->x2C_b0) {
-        link = link->prev;
+    if (fp->fv.pp.x2240.x != 0.0f || fp->fv.pp.x2240.y != 0.0f) {
+        link->pos = fp->fv.pp.x2240;
     }
+    link->vel.x = link->vel.y = link->vel.z = 0.0f;
 
-    while (link != NULL) {
-        if (link->next != NULL) {
-            if (link->next->x2C_b0) {
-                next_pos = link->next->pos;
-            } else {
-                next_pos = *target;
+    while (iter != NULL) {
+        if (iter->x2C_b0) {
+            f32 dist;
+            iter->pos = *target;
+            dist = it_802A3C98(&iter->pos, &cur->pos, &dir);
+            if (dist > attrs->x8) {
+                iter->pos.x = (dir.x * attrs->x8) + cur->pos.x;
+                iter->pos.y = (dir.y * attrs->x8) + cur->pos.y;
+                iter->pos.z = (dir.z * attrs->x8) + cur->pos.z;
+            } else if (dist < attrs->xC) {
+                if (it_802A3C98(&iter->pos, target, &dir2) <= 0.1f) {
+                    iter->x2C_b0 = false;
+                } else {
+                    iter->pos.x = (dir.x * attrs->xC) + cur->pos.x;
+                    iter->pos.y = (dir.y * attrs->xC) + cur->pos.y;
+                    iter->pos.z = (dir.z * attrs->xC) + cur->pos.z;
+                }
             }
         } else {
-            next_pos = *target;
+            if (it_802A3C98(target, &cur->pos, &dir) > attrs->x8) {
+                iter->pos.x = (dir.x * attrs->x8) + cur->pos.x;
+                iter->pos.y = (dir.y * attrs->x8) + cur->pos.y;
+                iter->pos.z = (dir.z * attrs->x8) + cur->pos.z;
+                iter->x2C_b0 = true;
+            } else {
+                return 0;
+            }
         }
-
-        if (link->prev != NULL) {
-            prev_pos = link->prev->pos;
-        } else {
-            prev_pos = link->pos;
-        }
-
-        jobj = GET_JOBJ(link->gobj);
-        link_pos = link->pos;
-        HSD_JObjSetTranslate(jobj, &link_pos);
-
-        dir.x = prev_pos.x - next_pos.x;
-        dir.y = prev_pos.y - next_pos.y;
-        dir.z = prev_pos.z - next_pos.z;
-        lbVector_Normalize(&dir);
-
-        it_802A6DC8(jobj, &link_pos, &dir);
-
-        attrs = ip->xC4_article_data->x4_specialAttributes;
-        PSMTXCopy(jobj->mtx, m);
-        m[0][0] *= attrs->x8;
-        m[1][0] *= attrs->x8;
-        m[2][0] *= attrs->x8;
-        m[0][1] *= attrs->x8;
-        m[1][1] *= attrs->x8;
-        m[2][1] *= attrs->x8;
-        m[0][2] *= attrs->x8;
-        m[1][2] *= attrs->x8;
-        m[2][2] *= attrs->x8;
-        PSMTXCopy(m, jobj->mtx);
-
-        link = link->prev;
+        cur = iter;
+        iter = iter->next;
     }
+    return 2;
 }
 
 static inline void it_802C2CA8_outline(ItemLink* link, Vec3* target,
@@ -442,56 +449,6 @@ s32 it_802C30E8(ItemLink* link, Vec3* target,
     return 2;
 }
 
-s32 it_802C2EC4(ItemLink* link, Vec3* target,
-                itClimbersStringAttributes* attrs, Item* ip)
-{
-    u8 _pad[8];
-    Vec3 dir;
-    Vec3 dir2;
-    ItemLink* cur = link;
-    ItemLink* iter = link->next;
-    Fighter* fp = GET_FIGHTER(ip->xDD4_itemVar.climbersstring.xC);
-    PAD_STACK(4);
-
-    if (fp->fv.pp.x2240.x != 0.0f || fp->fv.pp.x2240.y != 0.0f) {
-        link->pos = fp->fv.pp.x2240;
-    }
-    link->vel.x = link->vel.y = link->vel.z = 0.0f;
-
-    while (iter != NULL) {
-        if (iter->x2C_b0) {
-            f32 dist;
-            iter->pos = *target;
-            dist = it_802A3C98(&iter->pos, &cur->pos, &dir);
-            if (dist > attrs->x8) {
-                iter->pos.x = (dir.x * attrs->x8) + cur->pos.x;
-                iter->pos.y = (dir.y * attrs->x8) + cur->pos.y;
-                iter->pos.z = (dir.z * attrs->x8) + cur->pos.z;
-            } else if (dist < attrs->xC) {
-                if (it_802A3C98(&iter->pos, target, &dir2) <= 0.1f) {
-                    iter->x2C_b0 = false;
-                } else {
-                    iter->pos.x = (dir.x * attrs->xC) + cur->pos.x;
-                    iter->pos.y = (dir.y * attrs->xC) + cur->pos.y;
-                    iter->pos.z = (dir.z * attrs->xC) + cur->pos.z;
-                }
-            }
-        } else {
-            if (it_802A3C98(target, &cur->pos, &dir) > attrs->x8) {
-                iter->pos.x = (dir.x * attrs->x8) + cur->pos.x;
-                iter->pos.y = (dir.y * attrs->x8) + cur->pos.y;
-                iter->pos.z = (dir.z * attrs->x8) + cur->pos.z;
-                iter->x2C_b0 = true;
-            } else {
-                return 0;
-            }
-        }
-        cur = iter;
-        iter = iter->next;
-    }
-    return 2;
-}
-
 bool it_802C32D4(ItemLink* link, Vec3* pos, itClimbersStringAttributes* attrs,
                  Item* ip, f32 dist)
 {
@@ -527,56 +484,96 @@ bool it_802C32D4(ItemLink* link, Vec3* pos, itClimbersStringAttributes* attrs,
     return true;
 }
 
-static inline void itClimbersstring_Cleanup(Item_GObj* gobj)
+void it_802C33B8(Item* ip)
 {
-    if (gobj != NULL) {
-        Item* ip = GET_ITEM(gobj);
-        if (ip->owner != NULL) {
-            ftPp_SpecialS_8012114C(ip->owner);
-        }
-        ip->owner = NULL;
-        ip->xDD4_itemVar.climbersstring.xC = NULL;
-        {
-            ItemLink* cur;
-            for (cur = ip->xDD4_itemVar.climbersstring.x4; cur != NULL;) {
-                HSD_GObj* cur_gobj = cur->gobj;
-                cur = cur->next;
-                HSD_GObjPLink_80390228(cur_gobj);
+    Mtx m;
+    ItemLink* link = ip->xDD4_itemVar.climbersstring.x4;
+    HSD_JObj* jobj = GET_JOBJ(link->gobj);
+    Vec3 zero = { 0.0F, 0.0F, 0.0F };
+
+    link->x2C_b0 = false;
+    HSD_JObjSetupMatrix(link->jobj);
+
+    PSMTXIdentity(m);
+    m[0][3] = zero.x;
+    m[1][3] = zero.y;
+    m[2][3] = zero.z;
+    PSMTXConcat(link->jobj->mtx, m, m);
+
+    HSD_JObjCopyMtx(jobj, m);
+    jobj->flags |= 0x03800000;
+    HSD_JObjSetMtxDirty(jobj);
+}
+
+void it_802C3520(Item* ip, Vec3* target)
+{
+    HSD_JObj* jobj;
+    ItemLink* link = ip->xDD4_itemVar.climbersstring.x8;
+    itClimbersStringAttributes* attrs;
+    Vec3 next_pos;
+    Vec3 prev_pos;
+    Vec3 link_pos;
+    Vec3 dir;
+    Mtx m;
+
+    while (!link->x2C_b0) {
+        link = link->prev;
+    }
+
+    while (link != NULL) {
+        if (link->next != NULL) {
+            if (link->next->x2C_b0) {
+                next_pos = link->next->pos;
+            } else {
+                next_pos = *target;
             }
-        }
-    }
-}
-
-bool itClimbersstring_UnkMotion3_Anim(Item_GObj* gobj)
-{
-    s32 should_cleanup;
-    Item* ip = GET_ITEM(gobj);
-
-    if (ip->owner != NULL) {
-        enum_t action = ftLib_80086C0C(ip->owner);
-        if (action >= 0x15B && action <= 0x164) {
-            should_cleanup = 0;
         } else {
-            should_cleanup = 1;
+            next_pos = *target;
         }
-    } else {
-        should_cleanup = 1;
+
+        if (link->prev != NULL) {
+            prev_pos = link->prev->pos;
+        } else {
+            prev_pos = link->pos;
+        }
+
+        jobj = GET_JOBJ(link->gobj);
+        link_pos = link->pos;
+        HSD_JObjSetTranslate(jobj, &link_pos);
+
+        dir.x = prev_pos.x - next_pos.x;
+        dir.y = prev_pos.y - next_pos.y;
+        dir.z = prev_pos.z - next_pos.z;
+        lbVector_Normalize(&dir);
+
+        it_802A6DC8(jobj, &link_pos, &dir);
+
+        attrs = ip->xC4_article_data->x4_specialAttributes;
+        PSMTXCopy(jobj->mtx, m);
+        m[0][0] *= attrs->x8;
+        m[1][0] *= attrs->x8;
+        m[2][0] *= attrs->x8;
+        m[0][1] *= attrs->x8;
+        m[1][1] *= attrs->x8;
+        m[2][1] *= attrs->x8;
+        m[0][2] *= attrs->x8;
+        m[1][2] *= attrs->x8;
+        m[2][2] *= attrs->x8;
+        PSMTXCopy(m, jobj->mtx);
+
+        link = link->prev;
     }
-    if (should_cleanup != 0) {
-        itClimbersstring_Cleanup(gobj);
-        return true;
-    }
-    return false;
-    PAD_STACK(8);
 }
 
-void it_2725_Logic70_EvtUnk(Item_GObj* arg0, Item_GObj* arg1)
+void it_2725_Logic70_PickedUp(Item_GObj* gobj)
 {
-    Item* ip = GET_ITEM((HSD_GObj*) arg0);
-    it_8026B894(arg0, (HSD_GObj*) arg1);
-    if (ip->xDD4_itemVar.climbersstring.xC == arg1) {
-        ip->xDD4_itemVar.climbersstring.xC = NULL;
-    }
+    short pad;
+    void (*new_var)(Item_GObj* gobj);
+    Item* ip = gobj->user_data;
+    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+    it_8026BB44(gobj);
+    new_var = &fn_802C28B8;
+    ip->on_accessory = *new_var;
 }
 
 void it_802C3810(Item_GObj* gobj)
@@ -641,13 +638,11 @@ void it_802C3950(Item_GObj* gobj)
     ip->on_accessory = fn_802C28DC;
 }
 
-void it_2725_Logic70_PickedUp(Item_GObj* gobj)
+void it_2725_Logic70_EvtUnk(Item_GObj* arg0, Item_GObj* arg1)
 {
-    short pad;
-    void (*new_var)(Item_GObj* gobj);
-    Item* ip = gobj->user_data;
-    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
-    it_8026BB44(gobj);
-    new_var = &fn_802C28B8;
-    ip->on_accessory = *new_var;
+    Item* ip = GET_ITEM((HSD_GObj*) arg0);
+    it_8026B894(arg0, (HSD_GObj*) arg1);
+    if (ip->xDD4_itemVar.climbersstring.xC == arg1) {
+        ip->xDD4_itemVar.climbersstring.xC = NULL;
+    }
 }
