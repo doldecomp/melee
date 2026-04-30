@@ -17,33 +17,23 @@
 
 HSD_AnimJoint* it_80294364(Item_GObj* gobj)
 {
+    Item* ip = GET_ITEM(gobj);
+    itWstarAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
     s32 candidates[8];
-    s32 i;
-    Item* ip;
-    s32 last;
-    itWstarAttributes* attr;
-    s32 count;
-    s32 total;
-    s32* p;
+    s32* p = candidates;
+    s32 i = 0;
+    s32 count = i;
     s32 picked;
-
-    i = 0;
-    p = candidates;
-    ip = GET_ITEM(gobj);
-    last = it_804D6D00;
-    attr = ip->xC4_article_data->x4_specialAttributes;
-    count = 0;
-    total = attr->x24_count;
-
-    for (; i < total; i++) {
-        if (i != last) {
+    s32 end = it_804D6D00;
+    s32 var_ctr = attr->x24_count;
+    for (; i < var_ctr; i++) {
+        if (i != end) {
             *p++ = i;
             count++;
         }
     }
-
     picked = candidates[HSD_Randi(count)];
-    it_804D6D00 = (s8) picked;
+    it_804D6D00 = picked;
     ip->xDD4_itemVar.wstar.xDDC = picked;
     Item_8026AE84(ip, attr->x28_entries[ip->xDD4_itemVar.wstar.xDDC].x4_sfx,
                   0x7f, 0x40);
@@ -78,8 +68,8 @@ void itWStar_Logic29_Spawned(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     ip->xDCE_flag.b7 = 0;
-    ip->xDD4_itemVar.wstar.xDD8 = 0.0F;
-    ip->xDD4_itemVar.wstar.xDD4 = 0.0F;
+    ip->xDD4_itemVar.wstar.xDD8 = 1.0f;
+    ip->xDD4_itemVar.wstar.xDD4 = 1.0f;
     it_80294364(gobj);
 }
 
