@@ -60,7 +60,11 @@ void ftYs_SpecialS_8012DF8C(Fighter_GObj* gobj, Vec3* arg1)
     float mag;
     {
         float temp = ABS(fp->input.lstick.x) / da->xEC;
-        mag = MAX(temp, 1.0f) * da->xF0;
+        mag = temp;
+        if (mag > 1.0f) {
+            mag = 1.0f;
+        }
+        mag *= da->xF0;
         if (mag < da->xF4) {
             mag = 0.0f;
         }
@@ -100,7 +104,6 @@ void fn_8012E110(Fighter_GObj* gobj)
 
     if (var_r0) {
         Vec3 sp30;
-        PAD_STACK(4);
         lb_8000B1CC(fp->parts[31].joint, NULL, &sp30);
         fp->x1984_heldItemSpec = fp->fv.ys.x2238 =
             it_802B2A10(gobj, &sp30, 0x1F, fp->facing_dir);
@@ -117,9 +120,11 @@ void fn_8012E110(Fighter_GObj* gobj)
         sp24.y = da->x108;
         sp24.z = 0.0F;
         ftYs_SpecialS_8012DF8C_outline(gobj, &sp18);
-        it_802B28C8(fp->fv.ys.x2238, &sp18, &sp24,
-                    fp->mv.ys.specialhi.x4 * da->x110 + da->x10C,
-                    fp->mv.ys.specialhi.x4);
+        {
+            float x4 = fp->mv.ys.specialhi.x4;
+            it_802B28C8(fp->fv.ys.x2238, &sp18, &sp24,
+                        x4 * da->x110 + da->x10C, x4);
+        }
         fp->fv.ys.x2238 = NULL;
         fp->take_dmg_cb = NULL;
         fp->death2_cb = NULL;
