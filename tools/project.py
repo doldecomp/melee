@@ -824,6 +824,30 @@ def generate_build_ninja(
         )
         n.newline()
 
+    format_script = config.tools_dir / "format.py"
+    n.comment("Format source files")
+    n.rule(
+        name="clang_format",
+        command=f"$python {format_script}",
+        description="FORMAT",
+    )
+    n.rule(
+        name="clang_format_check",
+        command=f"$python {format_script} --check",
+        description="FORMAT-CHECK",
+    )
+    n.build(
+        outputs="format",
+        rule="clang_format",
+        implicit=[format_script, ".clang-format"],
+    )
+    n.build(
+        outputs="format-check",
+        rule="clang_format_check",
+        implicit=[format_script, ".clang-format"],
+    )
+    n.newline()
+
     def write_custom_step(
         step: str,
         prev_step: Optional[str] = None,
