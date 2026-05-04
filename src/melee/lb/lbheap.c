@@ -248,7 +248,7 @@ void lbHeap_80015DF8(void)
         } else {
             OSReport("                         destroy");
         }
-        OSReport(" / %5d KB\n", p->size / 1024);
+        OSReport(" / %5d KB\n", p->size / 1024, p->size);
     }
 
     bytes = (u32) lbHeap_80431FA0.arena_hi - (u32) lbHeap_80431FA0.arena_lo;
