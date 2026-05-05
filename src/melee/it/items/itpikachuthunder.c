@@ -48,15 +48,14 @@ s32 it_802B1DEC(Item_GObj* arg0)
 Item_GObj* it_802B1DF8(Item_GObj* owner, Vec3* pos, Vec3* vel, s32 count,
                        s32 delay, s32 kind)
 {
-    int i;
-    Item* ip;
-    itPikachuthunderAttributes* attrs;
     SpawnItem spawn;
     u8 _pad[4];
     u32 x40 = Item_8026AE60();
+    Item_GObj* first;
+    Item_GObj* item_gobj;
     s32 cur_delay = 0;
     Item_GObj* prev = NULL;
-    Item_GObj* first;
+    int i;
 
     spawn.kind = kind;
     spawn.prev_pos = *pos;
@@ -71,13 +70,14 @@ Item_GObj* it_802B1DF8(Item_GObj* owner, Vec3* pos, Vec3* vel, s32 count,
     spawn.x40 = x40;
 
     for (i = 0; i < count; i++) {
-        Item_GObj* item_gobj = Item_80268B18(&spawn);
+        item_gobj = Item_80268B18(&spawn);
         if (i == 0) {
             first = item_gobj;
         }
         if (item_gobj != NULL) {
-            ip = GET_ITEM(item_gobj);
-            attrs = ip->xC4_article_data->x4_specialAttributes;
+            Item* ip = GET_ITEM(item_gobj);
+            itPikachuthunderAttributes* attrs =
+                ip->xC4_article_data->x4_specialAttributes;
             if (prev != NULL) {
                 GET_ITEM(prev)->xDD4_itemVar.pikachuthunder.x34 = item_gobj;
             }
