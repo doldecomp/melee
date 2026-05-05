@@ -260,9 +260,9 @@
 /* 3F23CC */ extern struct ItemLogicTable it_803F23CC[47];
 /* 3F3100 */ extern struct ItemLogicTable it_803F3100[118];
 /* 3F4D20 */ extern struct ItemLogicTable it_803F4D20[30];
-/* 4A0E30 */ extern HSD_ObjAllocUnk4 it_804A0E30;
-/* 4A0E50 */ extern HSD_ObjAllocUnk6 it_804A0E50;
-/* 4A0E60 */ extern HSD_ObjAllocUnk6 it_804A0E60;
+/* 4A0E30 */ extern RandomItemSpawner it_804A0E30;
+/* 4A0E50 */ extern ItemPickTable it_804A0E50;
+/* 4A0E60 */ extern ItemPickTable it_804A0E60;
 /* 4A0F60 */ extern Article* it_804A0F60[];
 /* 4D6D00 */ extern s8 it_804D6D00;
 /* 4D6D08 */ extern s32 it_804D6D08;

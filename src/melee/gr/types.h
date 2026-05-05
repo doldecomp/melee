@@ -77,7 +77,7 @@ struct StageInfo {
     bool (*x94)(Vec3*, int);
     s32 x98;
     u32 x9C;
-    u8 xA0[4];
+    s32 xA0;
     u8 xA4_pad[0x12C - 0xA4];
     HSD_GObj* x12C;
     Vec3 x130, x13C, x148, x154, x160, x16C;

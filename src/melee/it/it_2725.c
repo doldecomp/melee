@@ -1059,6 +1059,9 @@ struct ItemLogicTable it_803F14C4[ARRAY_SIZE(it_803F1418)] = {
     },
 };
 
+extern char it_803F1ED8[];
+extern char it_803F1EF0[];
+
 /// static char it_803F1F00[] = "!(jobj->flags & JOBJ_USE_QUATERNION)"; // ?
 /// "translate" static char it_803F1F0C[] = "!(jobj->flags &
 /// JOBJ_USE_QUATERNION)"; // ?
@@ -4690,9 +4693,9 @@ struct ItemLogicTable it_803F4D20[ARRAY_SIZE(it_803F4CA8)] = {
 };
 
 static char it_803F5428;
-HSD_ObjAllocUnk4 it_804A0E30;
-HSD_ObjAllocUnk6 it_804A0E50;
-HSD_ObjAllocUnk6 it_804A0E60;
+RandomItemSpawner it_804A0E30;
+ItemPickTable it_804A0E50;
+ItemPickTable it_804A0E60;
 /// u8 it_804A0E70[0xF0];
 /// Article* it_804A0F60[30];
 /// static char it_804D5188[] = "src/sysdolphin/baselib/jobj.h"; // ?
@@ -6866,12 +6869,11 @@ f32 it_8027649C(Item_GObj* item_gobj)
     Vec3 sp14;
     f32 angle;
     s32 int_dir;
-    Item* item;
-    CollData* coll;
+    Item* item = GET_ITEM(item_gobj);
+    f32 ret; // permuterslop
+    CollData* coll = &item->x378_itemColl;
     PAD_STACK(4);
 
-    item = GET_ITEM(item_gobj);
-    coll = &item->x378_itemColl;
     sp14.z = 0.0f;
     sp14.x = 0.0f;
     sp14.y = 1.0f;
@@ -6893,7 +6895,8 @@ f32 it_8027649C(Item_GObj* item_gobj)
     } else {
         int_dir = 1;
     }
-    return item->facing_dir * (angle * int_dir);
+
+    return ret = item->facing_dir * (angle * int_dir);
 }
 
 void it_802765BC(Item_GObj* item_gobj, enum_t arg1)
@@ -6979,11 +6982,11 @@ void it_80276934(Item_GObj* item_gobj, enum_t arg1)
     Vec3 sp48;
     Vec3 sp3C;
     HSD_JObj* jobj;
-    Item* item1;
     Item* item2;
     Item* item3;
     Item* item4;
     f32 angle1;
+    Item* item1;
     f32 angle2;
     f32 angle3;
     f32 rotate_angle1;
@@ -7221,7 +7224,7 @@ bool it_80277040(Item_GObj* item_gobj)
         temp_f31 = item1->x94.x / temp_f3;
         temp_f30 = item1->x94.y / temp_f3;
         item1->x88.x = sp38.x * temp_f3;
-        item1->x88.y = sp38.y * temp_f3;
+        item1->x88.y = sp38.y * item1->xCC_item_attr->x50;
         item2 = item_gobj->user_data;
         it_80276408(item_gobj, &item2->x378_itemColl, &sp14);
         angle2 = lbVector_Angle(&sp14, &item2->xAC_unk);
@@ -7338,7 +7341,6 @@ bool it_80277544(Item_GObj* item_gobj)
 void it_802775F0(Item_GObj* item_gobj, Vec3* arg1)
 {
     Item* item = GET_ITEM(item_gobj);
-    u8 _[4];
 
     if (item->spin_spd) {
         f32 temp_sqrt = sqrtf_accurate(SQ(arg1->x) + SQ(arg1->y));
@@ -7643,6 +7645,7 @@ void it_80278108(Item* item, HSD_MObj* mobj, HSD_TExp* arg2)
 {
     GXColor sp168;
     HSD_TECnst spFC;
+    u8 _padA[168];
     HSD_TECnst sp90;
     HSD_TevDesc sp1C;
     GXColor sp18;
@@ -7651,7 +7654,6 @@ void it_80278108(Item* item, HSD_MObj* mobj, HSD_TExp* arg2)
     s32 reg1;
     s32 reg2;
     bool chk1;
-    PAD_STACK(168);
 
     if (item->xDCF_flag.b5) {
         return;
@@ -7876,7 +7878,7 @@ void it_8027870C(s32 arg0)
     if (lbLang_IsSettingUS()) {
         lbArchive_80017040(NULL, "ItCo.usd", &it_804D6D20, "itPublicData", 0);
     } else {
-        lbArchive_80017040(NULL, "ItCo.dat", &it_804D6D20, "itPublicData", 0);
+        lbArchive_80017040(NULL, it_803F1ED8, &it_804D6D20, it_803F1EF0, 0);
     }
     it_804D6D28 = it_804D6D20->x0;
     it_804D6D24 = it_804D6D20->x4;
@@ -8271,7 +8273,8 @@ void it_80278F2C(Item_GObj* item_gobj, CommandInfo* cmd)
     s32 arg6;
     PAD_STACK(4);
 
-    arg2 = ((u16*) cmd->u)[0] & 0x3FF;
+    arg2 = ((u16*) cmd->u)[0];
+    arg2 = arg2 & 0x3FF;
     ++cmd->u;
     arg6 = (f32) ((u16*) cmd->u)[1];
     ef_id = ((u16*) cmd->u)[0];
@@ -9018,11 +9021,11 @@ void it_8027AAA0(Item_GObj* item1_gobj, Item* item2, s32 arg2)
 
 #pragma push
 #pragma dont_inline on
-
 bool it_8027AB64(Item_GObj* item_gobj)
 {
     u8 _pad[8];
     SpawnItem spawn;
+    Item* item2; // permuterslop
     Item* item;
     Item_GObj* spawn_gobj;
     u32 temp_r3;
@@ -9073,8 +9076,9 @@ bool it_8027AB64(Item_GObj* item_gobj)
         }
     }
 
+    item2 = item_gobj->user_data;
     {
-        Item* item = item_gobj->user_data;
+        Item* item = item2;
         it_279D_DatAttrs* attrs = item->xC4_article_data->x4_specialAttributes;
         spawn.vel.z = 0.0f;
         spawn.vel.x = 0.0f;
@@ -9100,7 +9104,7 @@ bool it_8027AB64(Item_GObj* item_gobj)
     if (spawn_gobj != NULL) {
         it_8027AAA0(item_gobj, spawn_gobj->user_data, spawn.kind);
         pl_8003E70C(spawn_gobj);
-        db_80225DD8(spawn_gobj, (Fighter_GObj*) item->owner);
+        db_80225DD8(spawn_gobj, item->owner);
         it_8027B288(spawn_gobj, 0x440060);
         it_8027B564(spawn_gobj);
         return true;
@@ -9313,13 +9317,12 @@ void it_8027B564(Item_GObj* item_gobj)
 }
 
 Item_GObj* it_8027B5B0(ItemKind kind, Vec3* pos, HSD_JObj* jobj, Vec3* vel,
-                       bool chk)
+                       bool use_init)
 {
-    Item* spawn_item;
     SpawnItem spawn;
     Vec3 sp20;
-    Item_GObj* spawn_gobj;
-    PAD_STACK(4);
+    Item_GObj* gobj;
+    Item* ip;
 
     spawn.kind = kind;
     if (pos != NULL) {
@@ -9335,7 +9338,7 @@ Item_GObj* it_8027B5B0(ItemKind kind, Vec3* pos, HSD_JObj* jobj, Vec3* vel,
     spawn.pos = spawn.prev_pos;
     spawn.facing_dir = it_8026B684(&spawn.prev_pos);
     spawn.x3C_damage = 0;
-    spawn.x44_flag.b0 = 1;
+    spawn.x44_flag.b0 = true;
     if (vel != NULL) {
         spawn.vel = *vel;
     } else {
@@ -9344,19 +9347,19 @@ Item_GObj* it_8027B5B0(ItemKind kind, Vec3* pos, HSD_JObj* jobj, Vec3* vel,
     spawn.x0_parent_gobj = NULL;
     spawn.x4_parent_gobj2 = spawn.x0_parent_gobj;
     spawn.x40 = 0;
-    if (chk == true) {
-        spawn_gobj = Item_80268B18(&spawn);
+    if (use_init == 1) {
+        gobj = Item_80268B18(&spawn);
     } else {
-        spawn_gobj = Item_80268B5C(&spawn);
+        gobj = Item_80268B5C(&spawn);
     }
-    if (spawn_gobj != NULL) {
-        spawn_item = spawn_gobj->user_data;
-        spawn_item->xDD4_itemVar.it_27B5.x0 = jobj;
-        spawn_item->xDD4_itemVar.it_27B5.x4 = -1;
-        spawn_item->xDD4_itemVar.it_27B5.x14.z = 0.0f;
-        spawn_item->x378_itemColl.x34_flags.b1234 = 3;
+    if (gobj != NULL) {
+        ip = GET_ITEM(gobj);
+        ip->xDD4_itemVar.it_27B5.x0 = jobj;
+        ip->xDD4_itemVar.it_27B5.x4 = -1;
+        ip->xDD4_itemVar.it_27B5.x14.z = 0;
+        ip->x378_itemColl.x34_flags.b1234 = 3;
     }
-    return spawn_gobj;
+    return gobj;
 }
 
 #pragma push
@@ -9381,73 +9384,63 @@ void it_8027B730(Item_GObj* item_gobj)
 
 #pragma pop
 
-bool it_8027B798(Item_GObj* item_gobj, Vec3* arg1)
+bool it_8027B798(Item_GObj* gobj, Vec3* out_vel)
 {
-    Vec3 sp14;
-    Item* item;
-    Vec3* temp_r31_2;
-    f32 temp_f1;
-    f32 temp_f2;
-    f32 temp_f30;
-    f32 temp_f31;
-    f32 temp_f3;
-    f32 temp_f4;
-    f32 temp_f5;
-    f32 angle;
-    s32 degree_angle;
-    bool ret_chk;
-    PAD_STACK(8);
+    Item* ip = GET_ITEM(gobj);
+    u8 _pad[8];
+    Vec3 v;
+    f32 knockback;
+    f32 mag;
+    f32 dx;
+    f32 dy;
+    f32 angle_rad;
+    Vec3* normal;
+    bool result = false;
 
-    ret_chk = false;
-    item = item_gobj->user_data;
-    degree_angle = item->xCAC_angle;
-    temp_f1 = item->xCC8_knockback;
-    temp_f31 = temp_f1 * p_ftCommonData->x100;
-    if (degree_angle != 361) {
-        angle = 0.0174533f * (f32) degree_angle;
-    } else if (item->ground_or_air == GA_Air) {
-        angle = p_ftCommonData->x144_radians;
+    knockback = ip->xCC8_knockback;
+    mag = knockback * p_ftCommonData->x100;
+    if (ip->xCAC_angle != 0x169) {
+        angle_rad = 0.017453292f * ip->xCAC_angle;
+    } else if (ip->ground_or_air == GA_Air) {
+        angle_rad = p_ftCommonData->x144_radians;
     } else {
-        temp_f3 = p_ftCommonData->x14C;
-        if (temp_f1 < temp_f3) {
-            angle = 0.0f;
+        f32 lower = p_ftCommonData->x14C;
+        if (knockback < lower) {
+            angle_rad = 0.0f;
         } else {
-            temp_f4 = p_ftCommonData->x148;
-            temp_f5 = 0.0174533f * temp_f4;
-            angle =
-                0.0174533f * ((temp_f4 * ((temp_f1 - temp_f3) /
-                                          (p_ftCommonData->x150 - temp_f3))) +
-                              1.0f);
-            if (angle > temp_f5) {
-                angle = temp_f5;
-            }
+            f32 max_deg = p_ftCommonData->x148;
+            f32 max_rad = 0.017453292f * max_deg;
+            f32 expr =
+                0.017453292f * ((max_deg * ((knockback - lower) /
+                                            (p_ftCommonData->x150 - lower))) +
+                                1.0f);
+            angle_rad = (expr > max_rad) ? max_rad : expr;
         }
     }
-    temp_f30 = temp_f31 * cosf(angle);
-    temp_f2 = temp_f31 * sinf(angle);
-    item->facing_dir = item->xCCC_incDamageDirection;
-    if (item->ground_or_air == GA_Air) {
-        arg1->x = -temp_f30 * item->facing_dir;
-        arg1->y = temp_f2;
-        arg1->z = 0.0f;
+    dx = mag * cosf(angle_rad);
+    dy = mag * sinf(angle_rad);
+    ip->facing_dir = ip->xCCC_incDamageDirection;
+    if (ip->ground_or_air == GA_Air) {
+        out_vel->x = -dx * ip->facing_dir;
+        out_vel->y = dy;
+        out_vel->z = 0.0f;
     } else {
-        temp_r31_2 = &item->x378_itemColl.floor.normal;
-        sp14.x = -temp_f30 * item->facing_dir;
-        sp14.y = temp_f2;
-        sp14.z = 0.0f;
-        if (lbVector_Angle(temp_r31_2, &sp14) < 1.5708f)
-        { // Should this be M_PI_2?
-            ret_chk = true;
-            arg1->x = sp14.x;
-            arg1->y = sp14.y;
-            arg1->z = 0.0f;
+        normal = &ip->x378_itemColl.floor.normal;
+        v.x = -dx * ip->facing_dir;
+        v.y = dy;
+        v.z = 0.0f;
+        if (lbVector_Angle(normal, &v) < 1.5707964f) {
+            result = true;
+            out_vel->x = v.x;
+            out_vel->y = v.y;
+            out_vel->z = 0.0f;
         } else {
-            arg1->x = temp_r31_2->y * sp14.x;
-            arg1->y = -temp_r31_2->x * sp14.x;
-            arg1->z = 0.0f;
+            out_vel->x = v.x * normal->y;
+            out_vel->y = -v.x * normal->x;
+            out_vel->z = 0.0f;
         }
     }
-    return ret_chk;
+    return result;
 }
 
 void it_8027B964(Item_GObj* item_gobj, bool chk)
@@ -9537,6 +9530,7 @@ void it_8027BBF4(Item_GObj* item_gobj, bool arg_chk, f64 arg8, f32 arg9)
     f32 temp_f30;
     f32 var_f29;
     f32 var_f28;
+    const Vec3* vecs = it_803B85A8;
     Vec3 sp74;
     Vec3 sp68;
     Vec3 sp5C;
@@ -9549,6 +9543,7 @@ void it_8027BBF4(Item_GObj* item_gobj, bool arg_chk, f64 arg8, f32 arg9)
 
     item = GET_ITEM(item_gobj);
     item_jobj = item_gobj->hsd_obj;
+
     coll = &item->x378_itemColl;
     sp68 = it_803B85A8[2];
     sp5C = it_803B85A8[3];
@@ -9592,8 +9587,8 @@ block_7:
         var_f28 = (sp5C.x * temp_f1) + (sp5C.y * temp_f30);
     }
 
-    sp44 = it_803B85A8[0];
-    sp50 = it_803B85A8[1];
+    sp44 = vecs[0];
+    sp50 = vecs[1];
     lbVector_Rotate(&sp50, 2, M_PI_2 * arg8);
     lbVector_Rotate(&sp44, 2, M_PI_2 * arg8);
 
@@ -9623,6 +9618,10 @@ void it_8027C0CC(Item_GObj* item_gobj, f32 arg4, f32 arg5)
 
 void it_8027C0F0(Item_GObj* item_gobj, Vec3* arg1, f64 arg8, f32 arg9)
 {
+    u8 _pad[4];
+    const Vec3* vecs = it_803B85A8;
+    Item* item = GET_ITEM(item_gobj);
+    HSD_JObj* item_jobj = item_gobj->hsd_obj;
     f32 temp_f1;
     f32 temp_f30;
     f32 var_f29;
@@ -9632,13 +9631,10 @@ void it_8027C0F0(Item_GObj* item_gobj, Vec3* arg1, f64 arg8, f32 arg9)
     Vec3 sp5C;
     Vec3 sp50;
     Vec3 sp44;
-    Vec3 sp38;
-    Item* item = GET_ITEM(item_gobj);
-    HSD_JObj* item_jobj = GET_JOBJ(item_gobj);
-    PAD_STACK(4);
+    Vec3 sp3C;
 
-    sp68 = it_803B85A8[4];
-    sp5C = it_803B85A8[5];
+    sp68 = vecs[4];
+    sp5C = vecs[5];
 
     if (item->x378_itemColl.env_flags & Collide_FloorMask) {
         if (arg1 != NULL) {
@@ -9650,13 +9646,14 @@ void it_8027C0F0(Item_GObj* item_gobj, Vec3* arg1, f64 arg8, f32 arg9)
         it_8027BB1C(&sp5C, &sp74);
 
         if (lbVector_AngleXY(&item->xDD4_itemVar.it_27B5.x8, &sp68) >
-            deg_to_rad)
+            0.00017453292f)
         {
             item->xDD4_itemVar.it_27B5.x8 = sp68;
             item->xDD4_itemVar.it_27B5.x14.x = (s32) arg9;
         }
         temp_f1 = lbVector_AngleXY(&sp5C, &item->xDD4_itemVar.it_27B5.x8);
-        if ((temp_f1 < deg_to_rad) || item->xDD4_itemVar.it_27B5.x14.x < 2) {
+        if ((temp_f1 < 0.00017453292f) || item->xDD4_itemVar.it_27B5.x14.x < 2)
+        {
             var_f29 = sp68.x;
             var_f28 = sp68.y;
         } else {
@@ -9671,16 +9668,16 @@ void it_8027C0F0(Item_GObj* item_gobj, Vec3* arg1, f64 arg8, f32 arg9)
             var_f28 = (sp5C.x * temp_f1) + (sp5C.y * temp_f30);
         }
 
-        sp44 = it_803B85A8[0];
-        sp50 = it_803B85A8[1];
+        sp44 = vecs[0];
+        sp50 = vecs[1];
         lbVector_Rotate(&sp50, 2, M_PI_2 * arg8);
         lbVector_Rotate(&sp44, 2, M_PI_2 * arg8);
-        sp38.x = var_f29;
-        sp38.y = var_f28;
-        sp38.z = 0.0f;
-        lbVector_CrossprodNormalized(&sp38, &sp50, &sp44);
-        lbVector_CrossprodNormalized(&sp44, &sp38, &sp50);
-        lbVector_EulerAnglesFromONB(&sp74, &sp50, &sp44, &sp38);
+        sp3C.x = var_f29;
+        sp3C.y = var_f28;
+        sp3C.z = 0.0f;
+        lbVector_CrossprodNormalized(&sp3C, &sp50, &sp44);
+        lbVector_CrossprodNormalized(&sp44, &sp3C, &sp50);
+        lbVector_EulerAnglesFromONB(&sp74, &sp50, &sp44, &sp3C);
 
         HSD_JObjSetRotationX(item_jobj, sp74.x);
         HSD_JObjSetRotationY(item_jobj, sp74.y);
@@ -9927,9 +9924,8 @@ Item_GObj* it_8027CC88(Item_GObj* item_gobj_arg)
                 item_gobj_var = it_802F2094(NULL, &sp44, var_r30, 0);
                 if (item_gobj_var != 0) {
                     var_item = item_gobj_var->user_data;
-                    var_item->x40_vel.x =
-                        ((2.0f * (HSD_Randf() - 0.5f)) *
-                         (*((f32*) &it_804D6D28->x54_float)));
+                    var_item->x40_vel.x = ((2.0f * (HSD_Randf() - 0.5f)) *
+                                           (it_804D6D28->x54_float));
                     var_item->x40_vel.y = var_item->xCC_item_attr->x18;
                     var_item->x40_vel.z = 0.0f;
                     grLib_801C9E50(1);
