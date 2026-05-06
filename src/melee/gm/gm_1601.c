@@ -877,10 +877,14 @@ void fn_80162068(MatchEnd* match_end)
             if (i == j || pdata_j->slot_type == 3) {
                 continue;
             }
-            if (pdata_i->kills[j] + fd->fighter_kos[gm_80164024(pdata_j->character_kind)] > 0xFFFF) {
+            if (pdata_i->kills[j] +
+                    fd->fighter_kos[gm_80164024(pdata_j->character_kind)] >
+                0xFFFF)
+            {
                 sum = 0xFFFF;
             } else {
-                sum = pdata_i->kills[j] + fd->fighter_kos[gm_80164024(pdata_j->character_kind)];
+                sum = pdata_i->kills[j] +
+                      fd->fighter_kos[gm_80164024(pdata_j->character_kind)];
             }
             fd->fighter_kos[gm_80164024(pdata_j->character_kind)] = (u16) sum;
         }

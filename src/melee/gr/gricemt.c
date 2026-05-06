@@ -8,7 +8,6 @@
 #include "cm/camera.h"
 #include "ef/efsync.h"
 #include "ft/ftlib.h"
-
 #include "gm/gm_1601.h"
 
 #include "gr/forward.h"
@@ -561,14 +560,15 @@ void grIceMt_801F7A2C(Ground_GObj* arg0)
     }
     if (!((UnkFlagStruct*) &gp->gv.icemt.xD8)->b2) {
         var_r30 = grIceMt_801FA364(&gp->gv.corneria.xC8, &sp30,
-                                    (HSD_GObjEvent) fn_801F9150, arg0);
+                                   (HSD_GObjEvent) fn_801F9150, arg0);
         if (((UnkFlagStruct*) &gp->gv.icemt.xD8)->b4) {
             fighter = Ground_801C57A4();
             if (fighter != NULL) {
                 ftLib_80086644(fighter, &sp24);
                 if (!((UnkFlagStruct*) &gp->gv.icemt.xD8)->b1 &&
                     !ftLib_80086EC0(fighter) &&
-                    sp24.y > (f32) ((s16*) grIm_804D69F4)[0x98 / 2]) {
+                    sp24.y > (f32) ((s16*) grIm_804D69F4)[0x98 / 2])
+                {
                     ((UnkFlagStruct*) &gp->gv.icemt.xD8)->b1 = 1;
                     gp->gv.icemt.xDA = ((s16*) grIm_804D69F4)[0xA4 / 2];
                 }
@@ -606,8 +606,9 @@ void grIceMt_801F7A2C(Ground_GObj* arg0)
         } else {
             ratio = gp->gv.icemt.xD4 / grIm_804D69F4->xA0;
             if ((gp->gv.icemt.xD4 * ratio) -
-                (ratio * (0.5f * grIm_804D69F4->xA0 * ratio)) >
-                dist) {
+                    (ratio * (0.5f * grIm_804D69F4->xA0 * ratio)) >
+                dist)
+            {
                 gp->gv.icemt.xD4 -= grIm_804D69F4->xA0;
                 if (gp->gv.icemt.xD4 < grIm_804D69F4->xA0) {
                     gp->gv.icemt.xD4 = grIm_804D69F4->xA0;
@@ -625,7 +626,8 @@ void grIceMt_801F7A2C(Ground_GObj* arg0)
     }
     if (!((UnkFlagStruct*) &gp->gv.icemt.xD8)->b3) {
         if (var_r30 != 0 &&
-            gp->gv.icemt.xDE == ((s16*) grIm_804D69F4)[0xA6 / 2]) {
+            gp->gv.icemt.xDE == ((s16*) grIm_804D69F4)[0xA6 / 2])
+        {
             ((UnkFlagStruct*) &gp->gv.icemt.xD8)->b3 = 1;
             Ground_801C5750();
             gm_801674C4(0xE, 2, 2, 0, (bool (*)(s32)) fn_801FA4CC);
@@ -1271,7 +1273,7 @@ bool grIceMt_801FA364(void* state_, f32* out, HSD_GObjEvent cb_,
                       Ground_GObj* gobj)
 {
     grIceMt_FA364_State* state = state_;
-    s32 (*cb)(HSD_GObj*, s32*) = (s32 (*)(HSD_GObj*, s32*)) cb_;
+    s32 (*cb)(HSD_GObj*, s32*) = (s32(*)(HSD_GObj*, s32*)) cb_;
     bool ret = true;
     f32 result;
     s32 next_delay;
@@ -1293,8 +1295,7 @@ bool grIceMt_801FA364(void* state_, f32* out, HSD_GObjEvent cb_,
         tmp = state->lerp_count;
         if (tmp != 0) {
             state->cur +=
-                (((f32*) ((u8*) grIm_804D69F4 + 4))[state->idx] -
-                 state->cur) /
+                (((f32*) ((u8*) grIm_804D69F4 + 4))[state->idx] - state->cur) /
                 (f32) tmp;
             ret = false;
         } else {

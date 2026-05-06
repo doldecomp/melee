@@ -2,8 +2,6 @@
 
 #include "mn/mndatadel.static.h"
 
-#include "mn/inlines.h"
-
 #include "placeholder.h"
 
 #include "baselib/gobj.h"
@@ -14,6 +12,7 @@
 #include "baselib/jobj.h"
 #include "lb/lb_00F9.h"
 #include "lb/lblanguage.h"
+#include "mn/inlines.h"
 #include "mn/mnmain.h"
 #include "mn/mnmainrule.h"
 #include "sc/types.h"

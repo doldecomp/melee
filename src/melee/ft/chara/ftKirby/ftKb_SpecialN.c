@@ -1261,8 +1261,8 @@ void ftKb_SpecialLw_Coll(Fighter_GObj* gobj)
         fp->self_vel.x = 0.0f;
         ftCommon_8007D5D4(fp);
         temp = fp->x221C_b4;
-        Fighter_ChangeMotionState(gobj, ftKb_MS_SpecialAirLw, 0x0C4C1092U, 0.0f,
-                                  0.0f, 0.0f, NULL);
+        Fighter_ChangeMotionState(gobj, ftKb_MS_SpecialAirLw, 0x0C4C1092U,
+                                  0.0f, 0.0f, 0.0f, NULL);
         fp->x221C_b4 = temp;
         ftAnim_SetAnimRate(gobj, 0.0f);
         fp3 = GET_FIGHTER(gobj);
