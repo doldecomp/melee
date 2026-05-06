@@ -287,11 +287,11 @@ void it_802E628C(Item_GObj* item_gobj, f32 arg8, f32 arg9)
 
 s32 it_802E6380(Item_GObj* item_gobj, it_802E5FXX_struct* arg1)
 {
+    u8 _padA[24];
     Item* item = GET_ITEM(item_gobj);
     it_2E5A_Attrs* attr = item->xC4_article_data->x4_specialAttributes;
     it_2E5A_TierEntry* tier;
     s32 off = 2;
-    PAD_STACK(30);
 
     tier = attr->tiers;
     if (arg1->xC < tier[2].threshold) {

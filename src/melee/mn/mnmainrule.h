@@ -9,9 +9,9 @@ struct mn_802307F8_t {
     /* 0x000 */ u8 x0;
     /* 0x001 */ u8 x1;
     /* 0x002 */ u8 x2;
-    /* 0x003 */ u8 x3_pad[0x00A-0x003];
+    /* 0x003 */ u8 x3_pad[0x00A - 0x003];
     /* 0x00A */ u8 xA;
-    /* 0x00B */ u8 xB_pad[0x130-0x00B];
+    /* 0x00B */ u8 xB_pad[0x130 - 0x00B];
     /* 0x130 */ HSD_Text* text;
 };
 

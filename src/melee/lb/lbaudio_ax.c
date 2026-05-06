@@ -209,9 +209,7 @@ s32 lbAudioAx_800233EC(s32 arg0)
         if (arg0 >= 0 && arg0 < 0x83D60) {
             int(*ranges)[2] = (int(*)[2])(base + 0x5D4);
             for (slot = 0; slot < 0x37; slot++) {
-                if (ranges[slot][0] <= arg0 &&
-                    arg0 <= ranges[slot][1])
-                {
+                if (ranges[slot][0] <= arg0 && arg0 <= ranges[slot][1]) {
                     break;
                 }
             }
@@ -222,22 +220,26 @@ s32 lbAudioAx_800233EC(s32 arg0)
         if (slot != 0xD) {
             if (slot < 0xD) {
                 if (slot < 0xC) {
-                    if (slot < 6) goto ret;
+                    if (slot < 6) {
+                        goto ret;
+                    }
                 } else {
                     goto ret;
                 }
             } else if (slot < 0x20) {
-                if (slot < 0xF) goto ret;
+                if (slot < 0xF) {
+                    goto ret;
+                }
             } else {
                 goto ret;
             }
         }
 
         {
-            int* p = (int*)(base + 0x13A4);
+            int* p = (int*) (base + 0x13A4);
             for (i = 0; i < 0x4A; i++, p += 2) {
                 if (arg0 == *p) {
-                    return *(int*)(base + (i << 3) + 0x13A8);
+                    return *(int*) (base + (i << 3) + 0x13A8);
                 }
             }
         }
@@ -247,9 +249,7 @@ s32 lbAudioAx_800233EC(s32 arg0)
     if (arg0 >= 0 && arg0 < 0x83D60) {
         int(*ranges)[2] = (int(*)[2])(base + 0x5D4);
         for (slot = 0; slot < 0x37; slot++) {
-            if (ranges[slot][0] <= arg0 &&
-                arg0 <= ranges[slot][1])
-            {
+            if (ranges[slot][0] <= arg0 && arg0 <= ranges[slot][1]) {
                 break;
             }
         }
@@ -262,10 +262,10 @@ s32 lbAudioAx_800233EC(s32 arg0)
     }
 
     {
-        int* p = (int*)(base + 0x13A4);
+        int* p = (int*) (base + 0x13A4);
         for (i = 0; i < 0x4A; i++, p += 2) {
             if (arg0 == p[1]) {
-                return *(int*)(base + (i << 3) + 0x13A4);
+                return *(int*) (base + (i << 3) + 0x13A4);
             }
         }
     }
@@ -1037,7 +1037,7 @@ void lbAudioAx_80024DC4(int arg0)
         }
     }
     for (i = 0; i < 0x10; i++) {
-        if ((u32)q[i] == 0x83D60U) {
+        if ((u32) q[i] == 0x83D60U) {
             st->x2C[i] = arg0;
             st->x70[i] = 0xa;
             return;
@@ -1316,15 +1316,15 @@ bool fn_800253D8(HSD_GObj* gobj)
                 }
                 if (pan_left != pan_right) {
                     if (pan_left <= pan_right) {
-                        val = (float)pan_left +
-                              ((float)cur_frame *
-                               ((float)pan_right - (float)pan_left)) /
-                                  (float)end_frame;
+                        val = (float) pan_left +
+                              ((float) cur_frame *
+                               ((float) pan_right - (float) pan_left)) /
+                                  (float) end_frame;
                     } else {
-                        val = (float)pan_right +
-                              ((float)cur_frame *
-                               ((float)pan_left - (float)pan_right)) /
-                                  (float)end_frame;
+                        val = (float) pan_right +
+                              ((float) cur_frame *
+                               ((float) pan_left - (float) pan_right)) /
+                                  (float) end_frame;
                     }
                     if (val < 0.0f) {
                         val = 0.0f;
@@ -1332,7 +1332,7 @@ bool fn_800253D8(HSD_GObj* gobj)
                     if (val > 127.0f) {
                         val = 127.0f;
                     }
-                    result = (int)val;
+                    result = (int) val;
                 } else {
                     result = 0x40;
                 }
@@ -1350,15 +1350,15 @@ bool fn_800253D8(HSD_GObj* gobj)
                 }
                 if (pan_left != pan_right) {
                     if (pan_left <= pan_right) {
-                        val = (float)pan_left +
-                              ((float)cur_frame *
-                               ((float)pan_right - (float)pan_left)) /
-                                  (float)end_frame;
+                        val = (float) pan_left +
+                              ((float) cur_frame *
+                               ((float) pan_right - (float) pan_left)) /
+                                  (float) end_frame;
                     } else {
-                        val = (float)pan_right +
-                              ((float)cur_frame *
-                               ((float)pan_left - (float)pan_right)) /
-                                  (float)end_frame;
+                        val = (float) pan_right +
+                              ((float) cur_frame *
+                               ((float) pan_left - (float) pan_right)) /
+                                  (float) end_frame;
                     }
                     if (val < 0.0f) {
                         val = 0.0f;
@@ -1366,7 +1366,7 @@ bool fn_800253D8(HSD_GObj* gobj)
                     if (val > 127.0f) {
                         val = 127.0f;
                     }
-                    result = (int)val;
+                    result = (int) val;
                 } else {
                     result = 0x40;
                 }
@@ -1397,15 +1397,15 @@ bool fn_800256BC(HSD_GObj* gobj)
                 }
                 if (pan_left != pan_right) {
                     if (pan_left <= pan_right) {
-                        val = (float)pan_left +
-                              ((float)cur_frame *
-                               ((float)pan_right - (float)pan_left)) /
-                                  (float)end_frame;
+                        val = (float) pan_left +
+                              ((float) cur_frame *
+                               ((float) pan_right - (float) pan_left)) /
+                                  (float) end_frame;
                     } else {
-                        val = (float)pan_right +
-                              ((float)cur_frame *
-                               ((float)pan_left - (float)pan_right)) /
-                                  (float)end_frame;
+                        val = (float) pan_right +
+                              ((float) cur_frame *
+                               ((float) pan_left - (float) pan_right)) /
+                                  (float) end_frame;
                     }
                     if (val < 0.0f) {
                         val = 0.0f;
@@ -1413,7 +1413,7 @@ bool fn_800256BC(HSD_GObj* gobj)
                     if (val > 127.0f) {
                         val = 127.0f;
                     }
-                    result = (int)val;
+                    result = (int) val;
                 } else {
                     result = 0x40;
                 }
@@ -1431,15 +1431,15 @@ bool fn_800256BC(HSD_GObj* gobj)
                 }
                 if (pan_left != pan_right) {
                     if (pan_left <= pan_right) {
-                        val = (float)pan_left +
-                              ((float)cur_frame *
-                               ((float)pan_right - (float)pan_left)) /
-                                  (float)end_frame;
+                        val = (float) pan_left +
+                              ((float) cur_frame *
+                               ((float) pan_right - (float) pan_left)) /
+                                  (float) end_frame;
                     } else {
-                        val = (float)pan_right +
-                              ((float)cur_frame *
-                               ((float)pan_left - (float)pan_right)) /
-                                  (float)end_frame;
+                        val = (float) pan_right +
+                              ((float) cur_frame *
+                               ((float) pan_left - (float) pan_right)) /
+                                  (float) end_frame;
                     }
                     if (val < 0.0f) {
                         val = 0.0f;
@@ -1447,7 +1447,7 @@ bool fn_800256BC(HSD_GObj* gobj)
                     if (val > 127.0f) {
                         val = 127.0f;
                     }
-                    result = (int)val;
+                    result = (int) val;
                 } else {
                     result = 0x40;
                 }
@@ -1765,8 +1765,7 @@ void fn_80025FAC(HSD_GObj* gobj, void* userdata, void* params)
 
     switch (ud->xC) {
     case 0:
-    case 3:
-    {
+    case 3: {
         s32 sv = ud->start_val;
         if (sv == ud->end_val) {
             ud->x20 = sv;
@@ -1776,8 +1775,7 @@ void fn_80025FAC(HSD_GObj* gobj, void* userdata, void* params)
     case 1:
     case 2:
     case 4:
-    case 5:
-    {
+    case 5: {
         s32 sv = ud->start_val;
         if (sv == ud->end_val) {
             ud->x20 = sv;
@@ -1785,8 +1783,7 @@ void fn_80025FAC(HSD_GObj* gobj, void* userdata, void* params)
         break;
     }
     case 6:
-    case 7:
-    {
+    case 7: {
         s32 sv = ud->start_val;
         if (sv == ud->end_val) {
             ud->x20 = sv;
@@ -1794,8 +1791,7 @@ void fn_80025FAC(HSD_GObj* gobj, void* userdata, void* params)
         break;
     }
     case 8:
-    case 9:
-    {
+    case 9: {
         s32 sv = ud->start_val;
         if (sv == ud->end_val) {
             ud->x20 = sv;
@@ -1818,12 +1814,12 @@ void fn_80025FAC(HSD_GObj* gobj, void* userdata, void* params)
             {
                 s32 group = ud->x40;
                 if (group == 0) {
-                    ud->voice_id = lbAudioAx_800237A8(ud->x14, ud->x20,
-                                                       ud->x2C.pan);
+                    ud->voice_id =
+                        lbAudioAx_800237A8(ud->x14, ud->x20, ud->x2C.pan);
                     return;
                 }
-                ud->voice_id = lbAudioAx_80023870(ud->x14, ud->x20,
-                                                    ud->x2C.pan, group);
+                ud->voice_id =
+                    lbAudioAx_80023870(ud->x14, ud->x20, ud->x2C.pan, group);
             }
         }
         goto done;
@@ -1888,7 +1884,8 @@ void fn_800262A0(HSD_GObj* gobj)
     }
 
     if (ud->current_frame != -1 && ud->end_frame != -1 &&
-        (ud->current_frame >= ud->end_frame || ud->end_frame == (ud->voice_id * 0)))
+        (ud->current_frame >= ud->end_frame ||
+         ud->end_frame == (ud->voice_id * 0)))
     {
         if (gobj != NULL) {
             HSD_GObjPLink_80390228(gobj);
@@ -2159,10 +2156,10 @@ void fn_800268B4(void)
 
 void fn_800269AC(void)
 {
-    s8 (*types)[4];
+    s8(*types)[4];
     int* handles;
     int* avail;
-    s8 (*types2)[4];
+    s8(*types2)[4];
     int* handles2;
     int* avail2;
     int i;
@@ -2500,7 +2497,7 @@ s32 lbAudioAx_8002785C(void)
     if (stage == 0xD9 || stage == 0xE5) {
         result |= 0x200004000ULL;
     }
-    if ((u32)(stage - 0x46) <= 1U) {
+    if ((u32) (stage - 0x46) <= 1U) {
         result |= 0xC00ULL;
     }
 
@@ -2618,8 +2615,7 @@ void lbAudioAx_80027DF8(void)
     if (lbl_804D6420 != 0) {
         if (lbl_804D38F0 != -1) {
             if (AXDriver_8038D9D8(lbl_804D38F0) == 0) {
-                lbl_804D38F0 =
-                    fn_80023750(0x84, lbl_804D6428, 0x40, 5, 4);
+                lbl_804D38F0 = fn_80023750(0x84, lbl_804D6428, 0x40, 5, 4);
             } else {
                 s32 vol = lbl_804D6428;
                 if (vol < 0) {
@@ -2652,8 +2648,7 @@ void lbAudioAx_80027DF8(void)
     if (lbl_804D6424 != 0) {
         if (lbl_804D38F4 != -1) {
             if (AXDriver_8038D9D8(lbl_804D38F4) == 0) {
-                lbl_804D38F4 =
-                    fn_80023750(0x85, lbl_804D642C, 0x40, 6, 4);
+                lbl_804D38F4 = fn_80023750(0x85, lbl_804D642C, 0x40, 6, 4);
             } else {
                 s32 vol = lbl_804D642C;
                 if (vol < 0) {
@@ -2697,7 +2692,7 @@ void lbAudioAx_80027DF8(void)
         s32 idx;
         for (idx = 0; idx < 0x10; idx++) {
             s32 val = slots[idx];
-            if ((u32)(val - 0x80000) != 0x3D60U) {
+            if ((u32) (val - 0x80000) != 0x3D60U) {
                 if (val >= 0x83D61) {
                     lbAudioAx_800237A8(0x83D60, 0, 0x40);
                 } else {
@@ -2789,17 +2784,42 @@ void lbAudioAx_8002838C(void)
     p3 = st->x274;
     p4 = st->x354;
     for (i = 0; i < 7; i++) {
-        p1[0] = -1; p2[0] = -1; p3[0] = -1; p4[0] = -1;
-        p1[1] = -1; p2[1] = -1; p3[1] = -1; p4[1] = -1;
-        p1[2] = -1; p2[2] = -1; p3[2] = -1; p4[2] = -1;
-        p1[3] = -1; p2[3] = -1; p3[3] = -1; p4[3] = -1;
-        p1[4] = -1; p2[4] = -1; p3[4] = -1; p4[4] = -1;
-        p1[5] = -1; p2[5] = -1; p3[5] = -1; p4[5] = -1;
-        p1[6] = -1; p2[6] = -1; p3[6] = -1; p4[6] = -1;
-        p1[7] = -1; p1 += 8;
-        p2[7] = -1; p2 += 8;
-        p3[7] = -1; p3 += 8;
-        p4[7] = -1; p4 += 8;
+        p1[0] = -1;
+        p2[0] = -1;
+        p3[0] = -1;
+        p4[0] = -1;
+        p1[1] = -1;
+        p2[1] = -1;
+        p3[1] = -1;
+        p4[1] = -1;
+        p1[2] = -1;
+        p2[2] = -1;
+        p3[2] = -1;
+        p4[2] = -1;
+        p1[3] = -1;
+        p2[3] = -1;
+        p3[3] = -1;
+        p4[3] = -1;
+        p1[4] = -1;
+        p2[4] = -1;
+        p3[4] = -1;
+        p4[4] = -1;
+        p1[5] = -1;
+        p2[5] = -1;
+        p3[5] = -1;
+        p4[5] = -1;
+        p1[6] = -1;
+        p2[6] = -1;
+        p3[6] = -1;
+        p4[6] = -1;
+        p1[7] = -1;
+        p1 += 8;
+        p2[7] = -1;
+        p2 += 8;
+        p3[7] = -1;
+        p3 += 8;
+        p4[7] = -1;
+        p4 += 8;
     }
 
     lbl_804D3878 = -1;
