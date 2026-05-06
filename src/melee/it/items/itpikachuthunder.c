@@ -53,7 +53,7 @@ Item_GObj* it_802B1DF8(Item_GObj* owner, Vec3* pos, Vec3* vel, s32 count,
     u32 x40 = Item_8026AE60();
     Item_GObj* first;
     Item_GObj* item_gobj;
-    s32 cur_delay = 0;
+    s32 cur_delay;
     Item_GObj* prev = NULL;
     int i;
 
@@ -62,6 +62,7 @@ Item_GObj* it_802B1DF8(Item_GObj* owner, Vec3* pos, Vec3* vel, s32 count,
     spawn.prev_pos.z = 0.0f;
     spawn.pos = spawn.prev_pos;
     spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;
+    cur_delay = 0;
     spawn.facing_dir = -1.0f;
     spawn.x3C_damage = 0;
     spawn.x0_parent_gobj = owner;

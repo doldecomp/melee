@@ -5,9 +5,9 @@
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 
-/* 4A0E30 */ extern HSD_ObjAllocUnk4 it_804A0E30;
+/* 4A0E30 */ extern RandomItemSpawner it_804A0E30;
 /* 4A0E50 */ extern HSD_ObjAllocUnk5 it_804A0E50;
-/* 4A0E60 */ extern HSD_ObjAllocUnk6 it_804A0E60;
+/* 4A0E60 */ extern ItemPickTable it_804A0E60;
 /* 4D6D28 */ extern ItemCommonData* it_804D6D28;
 /* 4D6D00 */ extern s8 it_804D6D00;
 /* 4D6D08 */ extern s32 it_804D6D08;

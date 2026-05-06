@@ -121,6 +121,7 @@ void it_802B64FC(Item_GObj* gobj)
     Item* ip;
     f32 temp_f2;
     f32 var_f0;
+    Vec3 vec4;
     f32 var_f1;
     itSamusMissileAttributes* sa;
 
@@ -158,8 +159,9 @@ block_6:
     if (var_f1 < sa->x20) {
         goto block_18;
     }
-    vec0.x = vec1.x;
-    vec0.y = vec1.y;
+    vec4 = vec1;
+    vec0.x = vec4.x;
+    vec0.y = vec4.y;
     vec0.z = vec1.z;
     lbVector_Sub(&vec0, &vec2);
     if ((vec0.y > 0.001f)) {
@@ -260,6 +262,7 @@ void itSamusmissile_UnkMotion0_Phys(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itSamusMissileAttributes* sa0 = ip->xC4_article_data->x4_specialAttributes;
+    u8 _padA[24];
     if (ip->xDAC_itcmd_var0 != 0) {
         it_802B64FC(gobj);
         inlineA0(gobj);
