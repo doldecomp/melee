@@ -184,7 +184,7 @@ void grFourside_801F2F34(Ground_GObj* gobj)
     } else {
         gp->gv.fourside.x8 = NULL;
     }
-    mpJointSetCb1(0, gp, grFourside_801F30A0);
+    mpJointSetCb1(0, gobj, grFourside_801F30A0);
     gp->x10_flags.b5 = 1;
     gp->x11_flags.b012 = 1;
 }
