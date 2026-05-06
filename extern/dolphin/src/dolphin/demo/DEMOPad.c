@@ -1,8 +1,8 @@
-#include "__demo.h"
-
 #include <dolphin.h>
-#include <dolphin/demo.h>
 #include <dolphin/pad.h>
+#include <dolphin/demo.h>
+
+#include "__demo.h"
 
 // .data
 static unsigned long PadChanMask[4] = {
@@ -20,12 +20,11 @@ DEMODMPad DemoPad[4];
 u32 DemoNumValidPads;
 
 // functions
-static void DEMOPadCopy(struct PADStatus* pad, DEMODMPad* dmpad);
+static void DEMOPadCopy(struct PADStatus * pad, DEMODMPad *dmpad);
 void DEMOPadRead();
 void DEMOPadInit();
 
-static void DEMOPadCopy(struct PADStatus* pad, DEMODMPad* dmpad)
-{
+static void DEMOPadCopy(struct PADStatus * pad, DEMODMPad *dmpad) {
     unsigned short dirs;
 
     dirs = 0;
@@ -65,8 +64,7 @@ static void DEMOPadCopy(struct PADStatus* pad, DEMODMPad* dmpad)
     dmpad->pst = *pad;
 }
 
-void DEMOPadRead()
-{
+void DEMOPadRead() {
     long i;
     unsigned long ResetReq;
 
@@ -74,7 +72,7 @@ void DEMOPadRead()
     PADRead(&Pad[0]);
     PADClamp(&Pad[0]);
     DemoNumValidPads = 0;
-    for (i = 0; i < 4; i++) {
+    for(i = 0; i < 4; i++) {
         if (Pad[i].err == 0 || Pad[i].err == -3) {
             DemoNumValidPads += 1;
         } else if (Pad[i].err == -1) {
@@ -89,12 +87,11 @@ void DEMOPadRead()
     }
 }
 
-void DEMOPadInit()
-{
+void DEMOPadInit() {
     long i;
 
     PADInit();
-    for (i = 0; i < 4; i++) {
+    for(i = 0; i < 4; i++) {
         DemoPad[i].pst.button = 0;
         DemoPad[i].pst.stickX = 0;
         DemoPad[i].pst.stickY = 0;

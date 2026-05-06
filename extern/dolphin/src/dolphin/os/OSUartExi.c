@@ -6,10 +6,9 @@ static unsigned long serEnabled;
 // None of the functions in this file were ever used or made public
 int InitializeUART();
 int ReadUARTN();
-int WriteUARTN(void* buf, u32 len);
+int WriteUARTN(void *buf, u32 len);
 
-int InitializeUART()
-{
+int InitializeUART() {
     if (!(OSGetConsoleType() & 0x10000000)) {
         serEnabled = 0;
         return 2;
@@ -18,13 +17,11 @@ int InitializeUART()
     return 0;
 }
 
-int ReadUARTN()
-{
+int ReadUARTN() {
     return 4;
 }
 
-static int QueueLength(void)
-{
+static int QueueLength(void) {
     unsigned long cmd;
 
     if (EXISelect(0, 1, 3) == 0) {
@@ -39,8 +36,7 @@ static int QueueLength(void)
     return 0x10 - (cmd >> 0x18);
 }
 
-int WriteUARTN(void* buf, u32 len)
-{
+int WriteUARTN(void *buf, u32 len) {
     unsigned long cmd;
     long xLen;
     int qLen;
@@ -55,12 +51,13 @@ int WriteUARTN(void* buf, u32 len)
     locked = EXILock(0, 1, 0);
     if (locked == 0) {
         return 0;
-    } else {
-        ptr = (char*) buf;
+    }
+    else {
+        ptr = (char*)buf;
     }
 
-    while ((u32) ptr - (u32) buf < len) {
-        if (*(s8*) ptr == 0xA) {
+    while ((u32)ptr - (u32)buf < len) {
+        if (*(s8*)ptr == 0xA) {
             *ptr = 0xD;
         }
         ptr++;
@@ -74,25 +71,25 @@ int WriteUARTN(void* buf, u32 len)
             error = -1;
             break;
         }
-
+        
         if ((qLen >= 0xC) || (qLen >= len)) {
             if (EXISelect(0, 1, 3) == 0) {
                 error = -1;
                 break;
             }
-
+            
             EXIImm(0, &cmd, 4, 1, 0);
             EXISync(0);
 
-            while ((qLen != 0) && (len != 0)) {
+            while((qLen != 0) && (len != 0)) {
                 if ((qLen < 4) && (qLen < len)) {
                     break;
                 }
 
-                xLen = len < 4 ? (long) len : 4;
-
+                xLen = len < 4 ? (long)len : 4;
+                
                 EXIImm(0, buf, xLen, 1, 0);
-                (char*) buf += xLen;
+                (char*)buf += xLen;
                 len -= xLen;
                 qLen -= xLen;
                 EXISync(0);

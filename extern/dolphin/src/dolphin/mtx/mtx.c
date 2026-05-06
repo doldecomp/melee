@@ -621,11 +621,11 @@ void PSMTXRotAxisRad(register Mtx m, Vec* axis, register f32 rad)
     Vec axisNormalized;
     register Vec* axisNormalizedPtr;
 
-    zero = 0.0f;
+    zero              = 0.0f;
     axisNormalizedPtr = &axisNormalized;
-    sT = sinf(rad);
-    cT = cosf(rad);
-    oneMinusCosT = 1.0f - cT;
+    sT                = sinf(rad);
+    cT                = cosf(rad);
+    oneMinusCosT      = 1.0f - cT;
 
     PSVECNormalize(axis, axisNormalizedPtr);
 
@@ -974,20 +974,17 @@ void C_MTXLookAt(Mtx m, Vec* camPos, Vec* camUp, Vec* target)
     m[0][0] = vRight.x;
     m[0][1] = vRight.y;
     m[0][2] = vRight.z;
-    m[0][3] = -((camPos->z * vRight.z) +
-                ((camPos->x * vRight.x) + (camPos->y * vRight.y)));
+    m[0][3] = -((camPos->z * vRight.z) + ((camPos->x * vRight.x) + (camPos->y * vRight.y)));
 
     m[1][0] = vUp.x;
     m[1][1] = vUp.y;
     m[1][2] = vUp.z;
-    m[1][3] =
-        -((camPos->z * vUp.z) + ((camPos->x * vUp.x) + (camPos->y * vUp.y)));
+    m[1][3] = -((camPos->z * vUp.z) + ((camPos->x * vUp.x) + (camPos->y * vUp.y)));
 
     m[2][0] = vLook.x;
     m[2][1] = vLook.y;
     m[2][2] = vLook.z;
-    m[2][3] = -((camPos->z * vLook.z) +
-                ((camPos->x * vLook.x) + (camPos->y * vLook.y)));
+    m[2][3] = -((camPos->z * vLook.z) + ((camPos->x * vLook.x) + (camPos->y * vLook.y)));
 }
 
 void MTXLightFrustum(Mtx m, f32 t, f32 b, f32 l, f32 r, f32 n, f32 scaleS,

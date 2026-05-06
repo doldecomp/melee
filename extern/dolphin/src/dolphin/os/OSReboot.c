@@ -1,10 +1,9 @@
+#include <dolphin/os.h>
 #include "__dvd.h"
 #include "__os.h"
 
-#include <dolphin/os.h>
-
 static void* SaveStart = NULL;
-static void* SaveEnd = NULL;
+static void* SaveEnd   = NULL;
 static volatile BOOL Prepared;
 
 extern u32 OS_RESET_CODE : 0x800030F0;
@@ -14,9 +13,9 @@ extern u32 UNK_817FFFF8 : 0x817FFFF8;
 extern u32 UNK_817FFFFC : 0x817FFFFC;
 
 extern void* BOOT_REGION_START : (0x812FDFF0);
-extern void* BOOT_REGION_END : (0x812FDFEC);
+extern void* BOOT_REGION_END   : (0x812FDFEC);
 
-#define OS_BOOTROM_ADDR ((void*) 0x81300000)
+#define OS_BOOTROM_ADDR ((void*)0x81300000)
 
 typedef struct _ApploaderHeader {
     /* 0x00 */ char date[16];
@@ -30,16 +29,22 @@ static ApploaderHeader Header __attribute__((aligned(32)));
 
 static asm void Run(register void (*addr)())
 {
-    fralloc bl OSDisableInterrupts bl ICFlashInvalidate sync isync mtlr addr
-        blr frfree blr
+    fralloc
+    bl OSDisableInterrupts
+    bl ICFlashInvalidate
+    sync
+    isync
+    mtlr addr
+    blr
+    frfree
+    blr
 }
 
 inline void ReadApploader(DVDCommandBlock* dvdCmd, void* addr, u32 offset,
                           u32 numBytes)
 {
     /* Not sure if this inline is correct - might need to call other inlines */
-    while (Prepared == FALSE) {
-    }
+    while (Prepared == FALSE) { }
     DVDReadAbsAsyncForBS(dvdCmd, addr, numBytes, offset + 0x2440, NULL);
 
     while (TRUE) {
@@ -103,14 +108,15 @@ void __OSReboot(u32 resetCode, u32 bootDol)
 
     OSEnableInterrupts();
 
-    offset = 0;
+    offset   = 0;
     numBytes = 32;
-    ReadApploader(&dvdCmd, (void*) &Header, offset, numBytes);
+    ReadApploader(&dvdCmd, (void*)&Header, offset, numBytes);
 
-    offset = Header.size + 0x20;
+    offset   = Header.size + 0x20;
     numBytes = OSRoundUp32B(Header.rebootSize);
     ReadApploader(&dvdCmd2, OS_BOOTROM_ADDR, offset, numBytes);
 
     ICInvalidateRange(OS_BOOTROM_ADDR, numBytes);
     Run(OS_BOOTROM_ADDR);
 }
+

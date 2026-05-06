@@ -1,17 +1,16 @@
-#include "__ax.h"
-
 #include <dolphin.h>
 #include <dolphin/ax.h>
 
+#include "__ax.h"
+
 // .sbss
-static AXPROFILE* __AXProfile;
+static AXPROFILE * __AXProfile;
 static u32 __AXMaxProfiles;
 static u32 __AXCurrentProfile;
 static u32 __AXProfileInitialized;
 
-AXPROFILE* __AXGetCurrentProfile(void)
-{
-    AXPROFILE* profile;
+AXPROFILE * __AXGetCurrentProfile(void) {
+    AXPROFILE * profile;
 
     if (__AXProfileInitialized != 0U) {
         profile = &__AXProfile[__AXCurrentProfile];
@@ -22,8 +21,7 @@ AXPROFILE* __AXGetCurrentProfile(void)
     return 0;
 }
 
-void AXInitProfile(AXPROFILE* profile, u32 maxProfiles)
-{
+void AXInitProfile(AXPROFILE * profile, u32 maxProfiles) {
     ASSERTLINE(0x3A, profile);
     ASSERTLINE(0x3B, maxProfiles);
 
@@ -33,8 +31,7 @@ void AXInitProfile(AXPROFILE* profile, u32 maxProfiles)
     __AXProfileInitialized = 1;
 }
 
-u32 AXGetProfile(void)
-{
+u32 AXGetProfile(void) {
     int old;
     u32 n;
 

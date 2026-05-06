@@ -5,6 +5,7 @@
 #include <dolphin/mix.h>
 #include <dolphin/syn.h>
 
+
 // .data
 long __SYNVolumeAttenuation[128] = {
     0xFC400000, 0xFCB67A80, 0xFD2EE3F9, 0xFD7553B8, 0xFDA74D72, 0xFDCE1108,

@@ -4,6 +4,7 @@
 #include <dolphin/ax.h>
 #include <dolphin/syn.h>
 
+
 // functions
 static u32 __SYNGetNibbleAddress(u32 count);
 static void __SYNSetupAdpcm(struct SYNVOICE* voice);

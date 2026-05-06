@@ -10,8 +10,8 @@ volatile static enum MCC_CHANNEL gChID;
 volatile static int gQuery;
 volatile static u32 gReadDone; // size: 0x4, address: 0xC
 volatile static u32 gPrintfID; // size: 0x4, address: 0x10
-volatile static u32 gBufHead;  // size: 0x4, address: 0x14
-volatile static u32 gBufTail;  // size: 0x4, address: 0x18
+volatile static u32 gBufHead; // size: 0x4, address: 0x14
+volatile static u32 gBufTail; // size: 0x4, address: 0x18
 
 // functions
 static int ttyIsInitialized();
@@ -20,89 +20,79 @@ static void ttyMccChannelEvent(enum MCC_CHANNEL chID, u32 event, u32 value);
 int TTYInit(enum MCC_EXI exiChannel, enum MCC_CHANNEL chID);
 void TTYExit(void);
 int TTYQuery(void);
-int TTYPrintf(const char* format, ...);
+int TTYPrintf(const char *format, ...);
 int TTYFlush(void);
 static void ttyClearProperty(enum MCC_CHANNEL chID);
-static int ttyWaiting(int timeout, volatile int* flag);
-static int ttyWrite(u32 offset, void* data, long size);
+static int ttyWaiting(int timeout, volatile int *flag);
+static int ttyWrite(u32 offset, void *data, long size);
 static int ttyFlush(u32 msgID, int waitResult);
 
-static int ttyIsInitialized()
-{
+static int ttyIsInitialized() {
     int bResult = (gChID != 0);
 
     return bResult;
 }
 
-static void ShowChannelInfo(enum MCC_CHANNEL chID)
-{
+static void ShowChannelInfo(enum MCC_CHANNEL chID) {
     MCC_Info info;
 
     MCCGetChannelInfo(chID, &info);
-    OSReport("%2d: FirstBlock:%02d,BlockLength:%02d,Connect:%s,Lock:%s.\n",
-             chID, info.firstBlock, info.blockLength,
-             (info.connect == 0)   ? "DISCONNECT"
-             : (info.connect == 1) ? "HOST_OPEN"
-             : (info.connect == 2) ? "TARGET_OPEN"
-             : (info.connect == 3) ? "CONNECTED"
-                                   : "UNKNOWN",
-             (info.isLocked == 0)   ? "UNLOCKED"
-             : (info.isLocked == 1) ? "LOCKED"
-                                    : "UNKNOWN");
+    OSReport("%2d: FirstBlock:%02d,BlockLength:%02d,Connect:%s,Lock:%s.\n", chID, 
+              info.firstBlock,info.blockLength, (info.connect == 0)  ? "DISCONNECT"  :
+                                                (info.connect == 1)  ? "HOST_OPEN"   :
+                                                (info.connect == 2)  ? "TARGET_OPEN" :
+                                                (info.connect == 3)  ? "CONNECTED"   : "UNKNOWN",
+                                                (info.isLocked == 0) ? "UNLOCKED"    :
+                                                (info.isLocked == 1) ? "LOCKED"      : "UNKNOWN");
 }
 
-static void ttyMccChannelEvent(enum MCC_CHANNEL chID, u32 event, u32 value)
-{
+static void ttyMccChannelEvent(enum MCC_CHANNEL chID, u32 event, u32 value) {
     u32 notify;
     u32 size;
     u32 msgID;
 
-    switch (event) {
-    case 1:
-        gChID = chID;
-        return;
-    case 2:
-        gChID = 0;
-        return;
-    case 0x100:
-        notify = (value & (0xF00000));
-        switch (notify) {
-        case 0x200000:
-            if ((u16) value == 0x210) {
-                gQuery = 1;
-            }
+    switch(event) {
+        case 1:
+            gChID = chID;
             return;
-        case 0x400000:
-            size = (value >> 8) & 0xFF;
-            msgID = (value) & 0xFF;
-            if ((gBufTail - gBufHead) >= 0x2000) {
-                gBufHead =
-                    ((u32) gBufHead < 0x2000U) ? gBufHead : gBufHead - 0x2000;
-                gBufTail =
-                    ((u32) gBufTail < 0x2000U) ? gBufTail : gBufTail - 0x2000;
+        case 2:
+            gChID = 0;
+            return;
+        case 0x100:
+            notify = (value & (0xF00000));
+            switch(notify) {
+                case 0x200000:                              
+                    if ((u16)value == 0x210) {
+                        gQuery = 1;
+                    }
+                    return;
+                case 0x400000:                              
+                    size = (value >> 8) & 0xFF;
+                    msgID = (value) & 0xFF;
+                    if ((gBufTail - gBufHead) >= 0x2000) {
+                        gBufHead = ((u32) gBufHead < 0x2000U) ? gBufHead : gBufHead - 0x2000;
+                        gBufTail = ((u32) gBufTail < 0x2000U) ? gBufTail : gBufTail - 0x2000;
+                    }
+                    if ((u32) gBufHead >= 0x2000U) {
+                        gBufHead -= 0x2000;
+                        gBufTail -= 0x2000;
+                    }
+                    if (size == 0) {
+                        gBufHead += size << 5;
+                        gReadDone = (u32) msgID;
+                        return;
+                    }
+                    gBufHead += size << 5;
+                    gReadDone = (u32) msgID;
             }
-            if ((u32) gBufHead >= 0x2000U) {
-                gBufHead -= 0x2000;
-                gBufTail -= 0x2000;
-            }
-            if (size == 0) {
-                gBufHead += size << 5;
-                gReadDone = (u32) msgID;
-                return;
-            }
-            gBufHead += size << 5;
-            gReadDone = (u32) msgID;
-        }
     }
 }
 
-int TTYInit(enum MCC_EXI exiChannel, enum MCC_CHANNEL chID)
-{
+int TTYInit(enum MCC_EXI exiChannel, enum MCC_CHANNEL chID) {
     if (ttyIsInitialized()) {
         return 0;
     }
-    if ((MCCInit(exiChannel, 5, 0)) && (MCCOpen(chID, 1, ttyMccChannelEvent)))
-    {
+    if ((MCCInit(exiChannel, 5, 0)) && (MCCOpen(chID, 1, ttyMccChannelEvent))) {
         gOldEvent = MCCSetChannelEventMask(chID, 0x30);
         ttyClearProperty(chID);
         return 1;
@@ -110,8 +100,7 @@ int TTYInit(enum MCC_EXI exiChannel, enum MCC_CHANNEL chID)
     return 0;
 }
 
-void TTYExit(void)
-{
+void TTYExit(void) {
     if (ttyIsInitialized() != 0) {
         MCCSetChannelEventMask(gChID, gOldEvent);
         if (MCCClose(gChID) != 0) {
@@ -120,8 +109,7 @@ void TTYExit(void)
     }
 }
 
-int TTYQuery(void)
-{
+int TTYQuery(void) {
     u32 tick;
 
     if (ttyIsInitialized()) {
@@ -131,32 +119,30 @@ int TTYQuery(void)
         }
     }
     tick = OSGetTick();
-    do {
-    } while (OSTicksToSeconds(OSGetTick() - tick) < 5);
+    do {} while(OSTicksToSeconds(OSGetTick() - tick) < 5);
     return 0;
 }
 
-int TTYPrintf(const char* format, ...)
-{
+int TTYPrintf(const char *format, ...) {
     if (ttyIsInitialized() && (format != NULL)) {
-        MCC_Hdr* hdr;
-        u32* id;
-        char* str;
+        MCC_Hdr *hdr;
+        u32 *id;
+        char *str;
         u32 maxDataSize;
         u32 formatLength;
         u32 dataSize;
         int err;
-        char* eof;
+        char * eof;
         va_list argptr;
         u32 prosecced;
 
-        hdr = (void*) &gBuf;
-        id = (u32*) (hdr + 1);
-        str = (char*) (id + 1);
+        hdr = (void*)&gBuf;
+        id = (u32*)(hdr + 1);
+        str = (char*)(id + 1);
         maxDataSize = 8179;
         formatLength = strlen(format);
         if (formatLength > maxDataSize) {
-            eof = (void*) ((-1 + maxDataSize + (u32) format));
+            eof = (void*)((-1 + maxDataSize + (u32)format));
             *(eof) = 0;
         }
         va_start(argptr, format);
@@ -181,10 +167,10 @@ int TTYPrintf(const char* format, ...)
         *id = gPrintfID;
         if ((0x2000 - (gBufTail & 0x1FFF)) < dataSize) {
             prosecced = 0x2000 - (gBufTail & 0x1FFF);
-            ttyWrite(gBufTail & 0x1FFF, (char*) &gBuf, prosecced);
-            ttyWrite(0, (char*) &gBuf + prosecced, dataSize - prosecced);
+            ttyWrite(gBufTail & 0x1FFF, (char*)&gBuf, prosecced);
+            ttyWrite(0, (char*)&gBuf + prosecced, dataSize - prosecced);
         } else {
-            ttyWrite(gBufTail & 0x1FFF, (char*) &gBuf, dataSize);
+            ttyWrite(gBufTail & 0x1FFF, (char*)&gBuf, dataSize);
         }
         gBufTail += dataSize;
         if (strchr(str, '\n') != 0U) {
@@ -198,16 +184,14 @@ int TTYPrintf(const char* format, ...)
     return 0;
 }
 
-int TTYFlush(void)
-{
+int TTYFlush(void) {
     if (ttyIsInitialized() == 0) {
         return 0;
     }
     return ttyFlush(gPrintfID, 1);
 }
 
-static void ttyClearProperty(enum MCC_CHANNEL chID)
-{
+static void ttyClearProperty(enum MCC_CHANNEL chID) {
     gChID = chID;
     gQuery = 0;
     gReadDone = 0;
@@ -216,18 +200,15 @@ static void ttyClearProperty(enum MCC_CHANNEL chID)
     gBufTail = 0;
 }
 
-static int ttyWaiting(int timeout, volatile int* flag)
-{
+static int ttyWaiting(int timeout, volatile int *flag) {
     u32 tickStart;
     u32 tickDist;
 
     tickStart = OSGetTick();
     timeout = OSSecondsToTicks(timeout);
-    while (*flag == 0) {
+    while(*flag == 0) {
         tickDist = OSGetTick() - tickStart;
-        tickDist = (tickDist & 0x80000000)
-                       ? (0x80000000 - tickStart) + OSGetTick()
-                       : tickDist;
+        tickDist = (tickDist & 0x80000000) ? (0x80000000 - tickStart) + OSGetTick() : tickDist;
         if (OSTicksToSeconds(tickDist) >= timeout) {
             return 0;
         }
@@ -235,16 +216,14 @@ static int ttyWaiting(int timeout, volatile int* flag)
     return 1;
 }
 
-static int ttyWrite(u32 offset, void* data, long size)
-{
+static int ttyWrite(u32 offset, void *data, long size) {
     if (MCCWrite(gChID, offset, data, size, 0)) {
         return 1;
     }
     return 0;
 }
 
-static int ttyFlush(u32 msgID, int waitResult)
-{
+static int ttyFlush(u32 msgID, int waitResult) {
     u32 notify;
 
     notify = msgID | 0x300000;
@@ -253,12 +232,11 @@ static int ttyFlush(u32 msgID, int waitResult)
         return 1;
     }
     if (MCCNotify(gChID, notify) == 0) {
-        while (1)
+        while(1)
             ;
     }
     if (waitResult != 0) {
-        do {
-        } while (gReadDone != msgID);
+        do {} while (gReadDone != msgID);
     }
     return 1;
 }

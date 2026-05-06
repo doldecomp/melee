@@ -1,9 +1,11 @@
-#include "__gx.h"
-
-#include <macros.h>
 #include <math.h>
+
 #include <dolphin/gx.h>
 #include <dolphin/os.h>
+
+#include <macros.h>
+
+#include "__gx.h"
 
 static GXVtxDescList vcd[27];
 static GXVtxAttrFmtList vat[27];
@@ -99,9 +101,9 @@ static void Subdivide(u8 depth, f32 v0[3], f32 v1[3], f32 v2[3])
 
 static void SubDivTriangle(u8 depth, u8 i, f32 (*data)[3], u8 (*ndx)[3])
 {
-    f32* x0 = data[ndx[i][0]];
-    f32* x1 = data[ndx[i][1]];
-    f32* x2 = data[ndx[i][2]];
+    f32 *x0 = data[ndx[i][0]];
+    f32 *x1 = data[ndx[i][1]];
+    f32 *x2 = data[ndx[i][2]];
 
     Subdivide(depth, x0, x1, x2);
 }
@@ -133,6 +135,7 @@ void GXDrawCylinder(u8 numEdges)
         GXNormal3f32(x[i], y[i], 0.0f);
         GXPosition3f32(x[i], y[i], top);
         GXNormal3f32(x[i], y[i], 0.0f);
+
     }
     GXEnd();
 
@@ -142,6 +145,7 @@ void GXDrawCylinder(u8 numEdges)
     for (i = 0; i <= numEdges; i++) {
         GXPosition3f32(x[i], -y[i], top);
         GXNormal3f32(0.0f, 0.0f, 1.0f);
+
     }
     GXEnd();
 
@@ -181,10 +185,8 @@ void GXDrawTorus(f32 rc, u8 numc, u8 numt)
             for (k = 1; k >= 0; k--) {
                 s = (i + k) % numc;
                 t = j % numt;
-                x = (rt - rc * cosf(s * twopi / numc)) *
-                    cosf(t * twopi / numt);
-                y = (rt - rc * cosf(s * twopi / numc)) *
-                    sinf(t * twopi / numt);
+                x = (rt - rc * cosf(s * twopi / numc)) * cosf(t * twopi / numt);
+                y = (rt - rc * cosf(s * twopi / numc)) * sinf(t * twopi / numt);
                 z = rc * sinf(s * twopi / numc);
                 GXPosition3f32(x, y, z);
                 x = -cosf(t * twopi / numt) * cosf(s * twopi / numc);
@@ -192,7 +194,7 @@ void GXDrawTorus(f32 rc, u8 numc, u8 numt)
                 z = sinf(s * twopi / numc);
                 GXNormal3f32(x, y, z);
                 if (ttype != GX_NONE) {
-                    GXTexCoord2f32((i + k) / (f32) numc, j / (f32) numt);
+                    GXTexCoord2f32((i + k) / (f32)numc, j / (f32)numt);
                 }
             }
         }
@@ -235,14 +237,12 @@ void GXDrawSphere(u8 numMajor, u8 numMinor)
             GXPosition3f32(x * r1, y * r1, z1);
             GXNormal3f32((x * r1) / radius, (y * r1) / radius, z1 / radius);
             if (ttype != GX_NONE) {
-                GXTexCoord2f32((f32) j / (f32) numMinor,
-                               (f32) (i + 1) / (f32) numMajor);
+                GXTexCoord2f32((f32)j / (f32)numMinor, (f32)(i + 1) / (f32)numMajor);
             }
             GXPosition3f32(x * r0, y * r0, z0);
             GXNormal3f32((x * r0) / radius, (y * r0) / radius, z0 / radius);
             if (ttype != GX_NONE) {
-                GXTexCoord2f32((f32) j / (f32) numMinor,
-                               (f32) i / (f32) numMajor);
+                GXTexCoord2f32((f32)j / (f32)numMinor, (f32)i / (f32)numMajor);
             }
         }
         GXEnd();
@@ -250,12 +250,9 @@ void GXDrawSphere(u8 numMajor, u8 numMinor)
     RestoreVertState();
 }
 
-static void GXDrawCubeFace(f32 nx, f32 ny, f32 nz, f32 tx, f32 ty, f32 tz,
-                           f32 bx, f32 by, f32 bz, GXAttrType binormal,
-                           GXAttrType texture)
+static void GXDrawCubeFace(f32 nx, f32 ny, f32 nz, f32 tx, f32 ty, f32 tz, f32 bx, f32 by, f32 bz, GXAttrType binormal, GXAttrType texture)
 {
-    GXPosition3f32(0.57735026f * (nx + tx + bx), 0.57735026f * (ny + ty + by),
-                   0.57735026f * (nz + tz + bz));
+    GXPosition3f32(0.57735026f * (nx + tx + bx), 0.57735026f * (ny + ty + by), 0.57735026f * (nz + tz + bz));
     GXNormal3f32(nx, ny, nz);
     if (binormal != GX_NONE) {
         GXNormal3f32(tx, ty, tz);
@@ -264,8 +261,7 @@ static void GXDrawCubeFace(f32 nx, f32 ny, f32 nz, f32 tx, f32 ty, f32 tz,
     if (texture != GX_NONE) {
         GXTexCoord2s8(1, 1);
     }
-    GXPosition3f32(0.57735026f * (nx - tx + bx), 0.57735026f * (ny - ty + by),
-                   0.57735026f * (nz - tz + bz));
+    GXPosition3f32(0.57735026f * (nx - tx + bx), 0.57735026f * (ny - ty + by), 0.57735026f * (nz - tz + bz));
     GXNormal3f32(nx, ny, nz);
     if (binormal != GX_NONE) {
         GXNormal3f32(tx, ty, tz);
@@ -274,8 +270,7 @@ static void GXDrawCubeFace(f32 nx, f32 ny, f32 nz, f32 tx, f32 ty, f32 tz,
     if (texture != GX_NONE) {
         GXTexCoord2s8(0, 1);
     }
-    GXPosition3f32(0.57735026f * (nx - tx - bx), 0.57735026f * (ny - ty - by),
-                   0.57735026f * (nz - tz - bz));
+    GXPosition3f32(0.57735026f * (nx - tx - bx), 0.57735026f * (ny - ty - by), 0.57735026f * (nz - tz - bz));
     GXNormal3f32(nx, ny, nz);
     if (binormal != GX_NONE) {
         GXNormal3f32(tx, ty, tz);
@@ -284,8 +279,7 @@ static void GXDrawCubeFace(f32 nx, f32 ny, f32 nz, f32 tx, f32 ty, f32 tz,
     if (texture != GX_NONE) {
         GXTexCoord2s8(0, 0);
     }
-    GXPosition3f32(0.57735026f * (nx + tx - bx), 0.57735026f * (ny + ty - by),
-                   0.57735026f * (nz + tz - bz));
+    GXPosition3f32(0.57735026f * (nx + tx - bx), 0.57735026f * (ny + ty - by), 0.57735026f * (nz + tz - bz));
     GXNormal3f32(nx, ny, nz);
     if (binormal != GX_NONE) {
         GXNormal3f32(tx, ty, tz);
@@ -314,59 +308,61 @@ void GXDrawCube(void)
     }
 
     GXBegin(GX_QUADS, GX_VTXFMT3, 24);
-    GXDrawCubeFace(-1.0f, 0.0f, 0.0f, 0.0f, 0.0f, -1.0f, 0.0f, 1.0f, 0.0f,
-                   ntype, ttype);
-    GXDrawCubeFace(1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, -1.0f,
-                   ntype, ttype);
-    GXDrawCubeFace(0.0f, -1.0f, 0.0f, -1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f,
-                   ntype, ttype);
-    GXDrawCubeFace(0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f, -1.0f, 0.0f, 0.0f,
-                   ntype, ttype);
-    GXDrawCubeFace(0.0f, 0.0f, -1.0f, 0.0f, -1.0f, 0.0f, 1.0f, 0.0f, 0.0f,
-                   ntype, ttype);
-    GXDrawCubeFace(0.0f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f, -1.0f, 0.0f,
-                   ntype, ttype);
+    GXDrawCubeFace(-1.0f, 0.0f, 0.0f, 0.0f, 0.0f, -1.0f, 0.0f, 1.0f, 0.0f, ntype, ttype);
+    GXDrawCubeFace(1.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, -1.0f, ntype, ttype);
+    GXDrawCubeFace(0.0f, -1.0f, 0.0f, -1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, ntype, ttype);
+    GXDrawCubeFace(0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f, -1.0f, 0.0f, 0.0f, ntype, ttype);
+    GXDrawCubeFace(0.0f, 0.0f, -1.0f, 0.0f, -1.0f, 0.0f, 1.0f, 0.0f, 0.0f, ntype, ttype);
+    GXDrawCubeFace(0.0f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f, -1.0f, 0.0f, ntype, ttype);
     GXEnd();
 
     RestoreVertState();
 }
 
 static u32 polygons[12][5] = {
-    { 0, 12, 10, 11, 16 }, { 1, 17, 8, 9, 13 },  { 2, 14, 9, 8, 18 },
-    { 3, 19, 11, 10, 15 }, { 4, 14, 2, 3, 15 },  { 5, 12, 0, 1, 13 },
-    { 6, 17, 1, 0, 16 },   { 7, 19, 3, 2, 18 },  { 8, 17, 6, 7, 18 },
-    { 9, 14, 4, 5, 13 },   { 10, 12, 5, 4, 15 }, { 11, 19, 7, 6, 16 },
+    {  0, 12, 10, 11, 16 },
+    {  1, 17,  8,  9, 13 },
+    {  2, 14,  9,  8, 18 },
+    {  3, 19, 11, 10, 15 },
+    {  4, 14,  2,  3, 15 },
+    {  5, 12,  0,  1, 13 },
+    {  6, 17,  1,  0, 16 },
+    {  7, 19,  3,  2, 18 },
+    {  8, 17,  6,  7, 18 },
+    {  9, 14,  4,  5, 13 },
+    { 10, 12,  5,  4, 15 },
+    { 11, 19,  7,  6, 16 },
 };
 
 static f32 verts[20][3] = {
-    { -0.809015f, 0.0f, 0.309015f },
-    { -0.809015f, 0.0f, -0.309015f },
-    { 0.809015f, 0.0f, -0.309015f },
-    { 0.809015f, 0.0f, 0.309015f },
-    { 0.309015f, -0.809015f, 0.0f },
-    { -0.309015f, -0.809015f, 0.0f },
-    { -0.309015f, 0.809015f, 0 },
-    { 0.309015f, 0.809015f, 0 },
-    { 0.0f, 0.309015f, -0.809015f },
-    { 0.0f, -0.309015f, -0.809015f },
-    { 0.0f, -0.309015f, 0.809015f },
-    { 0.0f, 0.309015f, 0.809015f },
-    { -0.5f, -0.5f, 0.5 },
-    { -0.5f, -0.5f, -0.5 },
-    { 0.5f, -0.5f, -0.5 },
-    { 0.5f, -0.5f, 0.5 },
-    { -0.5f, 0.5f, 0.5 },
-    { -0.5f, 0.5f, -0.5 },
-    { 0.5f, 0.5f, -0.5 },
-    { 0.5f, 0.5f, 0.5 },
+    { -0.809015f,  0.0f,       0.309015f },
+    { -0.809015f,  0.0f,      -0.309015f },
+    {  0.809015f,  0.0f,      -0.309015f },
+    {  0.809015f,  0.0f,       0.309015f },
+    {  0.309015f, -0.809015f,  0.0f },
+    { -0.309015f, -0.809015f,  0.0f },
+    { -0.309015f,  0.809015f,  0 },
+    {  0.309015f,  0.809015f,  0 },
+    {  0.0f,       0.309015f, -0.809015f },
+    {  0.0f,      -0.309015f, -0.809015f },
+    {  0.0f,      -0.309015f,  0.809015f },
+    {  0.0f,       0.309015f,  0.809015f },
+    { -0.5f,      -0.5f,       0.5 },
+    { -0.5f,      -0.5f,      -0.5 },
+    {  0.5f,      -0.5f,      -0.5 },
+    {  0.5f,      -0.5f,       0.5 },
+    { -0.5f,       0.5f,       0.5 },
+    { -0.5f,       0.5f,      -0.5 },
+    {  0.5f,       0.5f,      -0.5 },
+    {  0.5f,       0.5f,       0.5 },
 };
 
 void GXDrawDodeca(void)
 {
     u32 i;
-    f32* p0;
-    f32* p1;
-    f32* p2;
+    f32 *p0;
+    f32 *p1;
+    f32 *p2;
     f32 u[3];
     f32 v[3];
     f32 n[3];
@@ -392,13 +388,23 @@ void GXDrawDodeca(void)
 }
 
 static f32 odata[6][3] = {
-    { 1.0f, 0.0f, 0.0f },  { -1.0f, 0.0f, 0.0f }, { 0.0f, 1.0f, 0.0f },
-    { 0.0f, -1.0f, 0.0f }, { 0.0f, 0.0f, 1.0f },  { 0.0f, 0.0f, -1.0f },
+    {  1.0f,  0.0f,  0.0f },
+    { -1.0f,  0.0f,  0.0f },
+    {  0.0f,  1.0f,  0.0f },
+    {  0.0f, -1.0f,  0.0f },
+    {  0.0f,  0.0f,  1.0f },
+    {  0.0f,  0.0f, -1.0f },
 };
 
 static u8 ondex[8][3] = {
-    { 0, 4, 2 }, { 1, 2, 4 }, { 0, 3, 4 }, { 1, 4, 3 },
-    { 0, 2, 5 }, { 1, 5, 2 }, { 0, 5, 3 }, { 1, 3, 5 },
+    { 0, 4, 2 },
+    { 1, 2, 4 },
+    { 0, 3, 4 },
+    { 1, 4, 3 },
+    { 0, 2, 5 },
+    { 1, 5, 2 },
+    { 0, 5, 3 },
+    { 1, 3, 5 },
 };
 
 void GXDrawOctahedron(void)
@@ -413,19 +419,41 @@ void GXDrawOctahedron(void)
 }
 
 static f32 idata[12][3] = {
-    { -0.5257311f, 0.0f, 0.8506508f },  { 0.5257311f, 0.0f, 0.8506508f },
-    { -0.5257311f, 0.0f, -0.8506508f }, { 0.5257311f, 0.0f, -0.8506508f },
-    { 0.0f, 0.8506508f, 0.5257311f },   { 0.0f, 0.8506508f, -0.5257311f },
-    { 0.0f, -0.8506508f, 0.5257311f },  { 0.0f, -0.8506508f, -0.5257311f },
-    { 0.8506508f, 0.5257311f, 0.0f },   { -0.8506508f, 0.5257311f, 0.0f },
-    { 0.8506508f, -0.5257311f, 0.0f },  { -0.8506508f, -0.5257311f, 0.0f },
+    { -0.5257311f,  0.0f,        0.8506508f },
+    {  0.5257311f,  0.0f,        0.8506508f },
+    { -0.5257311f,  0.0f,       -0.8506508f },
+    {  0.5257311f,  0.0f,       -0.8506508f },
+    {  0.0f,        0.8506508f,  0.5257311f },
+    {  0.0f,        0.8506508f, -0.5257311f },
+    {  0.0f,       -0.8506508f,  0.5257311f },
+    {  0.0f,       -0.8506508f, -0.5257311f },
+    {  0.8506508f,  0.5257311f,  0.0f },
+    { -0.8506508f,  0.5257311f,  0.0f },
+    {  0.8506508f, -0.5257311f,  0.0f },
+    { -0.8506508f, -0.5257311f,  0.0f },
 };
 
 static u8 index[20][3] = {
-    { 0, 4, 1 },  { 0, 9, 4 },  { 9, 5, 4 },  { 4, 5, 8 },  { 4, 8, 1 },
-    { 8, 10, 1 }, { 8, 3, 10 }, { 5, 3, 8 },  { 5, 2, 3 },  { 2, 7, 3 },
-    { 7, 10, 3 }, { 7, 6, 10 }, { 7, 11, 6 }, { 11, 0, 6 }, { 0, 1, 6 },
-    { 6, 1, 10 }, { 9, 0, 11 }, { 9, 11, 2 }, { 9, 2, 5 },  { 7, 2, 11 },
+    {  0,  4,  1 },
+    {  0,  9,  4 },
+    {  9,  5,  4 },
+    {  4,  5,  8 },
+    {  4,  8,  1 },
+    {  8, 10,  1 },
+    {  8,  3, 10 },
+    {  5,  3,  8 },
+    {  5,  2,  3 },
+    {  2,  7,  3 },
+    {  7, 10,  3 },
+    {  7,  6, 10 },
+    {  7, 11,  6 },
+    { 11,  0,  6 },
+    {  0,  1,  6 },
+    {  6,  1, 10 },
+    {  9,  0, 11 },
+    {  9, 11,  2 },
+    {  9,  2,  5 },
+    {  7,  2, 11 },
 };
 
 void GXDrawIcosahedron(void)
@@ -455,25 +483,24 @@ static u32 CmpNormal32(f32 n1[3], f32 n2[3])
     u32 i;
 
     for (i = 0; i < 3; i++) {
-        if (n1[i] != n2[i]) {
+        if (n1[i] != n2[i])
             return FALSE;
-        }
     }
     return TRUE;
 }
 
 static u32 nrm_cnt;
-static f32* nrm_tab;
+static f32 *nrm_tab;
 
 static void AddNormal(f32 n[3])
 {
     u32 indx;
     u32 i;
 
-    for (i = 0; i < nrm_cnt; i++) {
-        if (CmpNormal32(n, &nrm_tab[i * 3])) {
+    for (i = 0; i < nrm_cnt; i++)
+    {
+        if (CmpNormal32(n, &nrm_tab[i * 3]))
             return;
-        }
     }
     indx = nrm_cnt * 3;
     nrm_tab[indx + 0] = n[0];
@@ -512,14 +539,14 @@ static void SubdivideNrm(u8 depth, f32 v0[3], f32 v1[3], f32 v2[3])
 
 static void SubDivNrm(u8 depth, u8 i, f32 (*data)[3], u8 (*ndx)[3])
 {
-    f32* x0 = data[ndx[i][0]];
-    f32* x1 = data[ndx[i][1]];
-    f32* x2 = data[ndx[i][2]];
+    f32 *x0 = data[ndx[i][0]];
+    f32 *x1 = data[ndx[i][1]];
+    f32 *x2 = data[ndx[i][2]];
 
     SubdivideNrm(depth, x0, x1, x2);
 }
 
-u32 GXGenNormalTable(u8 depth, f32* table)
+u32 GXGenNormalTable(u8 depth, f32 *table)
 {
     s32 i;
 

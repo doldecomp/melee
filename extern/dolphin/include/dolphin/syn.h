@@ -63,20 +63,20 @@ struct WTADPCM {
 };
 
 struct SYNSYNTH {
-    /* 0x0000 */ void* next;
-    /* 0x0004 */ struct WTINST* percussiveInst;
-    /* 0x0008 */ struct WTINST* melodicInst;
-    /* 0x000C */ struct WTREGION* region;
-    /* 0x0010 */ struct WTART* art;
-    /* 0x0014 */ struct WTSAMPLE* sample;
-    /* 0x0018 */ struct WTADPCM* adpcm;
+    /* 0x0000 */ void * next;
+    /* 0x0004 */ struct WTINST * percussiveInst;
+    /* 0x0008 */ struct WTINST * melodicInst;
+    /* 0x000C */ struct WTREGION * region;
+    /* 0x0010 */ struct WTART * art;
+    /* 0x0014 */ struct WTSAMPLE * sample;
+    /* 0x0018 */ struct WTADPCM * adpcm;
     /* 0x001C */ u32 aramBaseWord;
     /* 0x0020 */ u32 aramBaseByte;
     /* 0x0024 */ u32 aramBaseNibble;
     /* 0x0028 */ u32 priorityVoiceAlloc;
     /* 0x002C */ u32 priorityNoteOn;
     /* 0x0030 */ u32 priorityNoteRelease;
-    /* 0x0034 */ struct WTINST* inst[16];
+    /* 0x0034 */ struct WTINST * inst[16];
     /* 0x0074 */ long masterVolume;
     /* 0x0078 */ u8 controller[16][128];
     /* 0x0878 */ u8 rpn[16];
@@ -88,26 +88,26 @@ struct SYNSYNTH {
     /* 0x09A8 */ long auxAAttn[16];
     /* 0x09E8 */ long auxBAttn[16];
     /* 0x0A28 */ u8 input[SYN_INPUT_BUFFER_SIZE][3];
-    /* 0x0D28 */ u8* inputPosition;
+    /* 0x0D28 */ u8 * inputPosition;
     /* 0x0D2C */ u32 inputCounter;
     /* 0x0D30 */ u32 notes;
-    /* 0x0D34 */ void* keyGroup[16][16];
-    /* 0x1134 */ void* voice[16][128];
+    /* 0x0D34 */ void * keyGroup[16][16];
+    /* 0x1134 */ void * voice[16][128];
 };
 
 struct SYNVOICE {
-    /* 0x00 */ void* next;
-    /* 0x04 */ AXVPB* axvpb;
-    /* 0x08 */ struct SYNSYNTH* synth;
+    /* 0x00 */ void * next;
+    /* 0x04 */ AXVPB * axvpb;
+    /* 0x08 */ struct SYNSYNTH * synth;
     /* 0x0C */ u8 midiChannel;
     /* 0x0D */ u8 keyNum;
     /* 0x0E */ u8 keyVel;
     /* 0x0F */ u8 pan;
     /* 0x10 */ u8 keyGroup;
-    /* 0x14 */ struct WTREGION* region;
-    /* 0x18 */ struct WTART* art;
-    /* 0x1C */ struct WTSAMPLE* sample;
-    /* 0x20 */ struct WTADPCM* adpcm;
+    /* 0x14 */ struct WTREGION * region;
+    /* 0x18 */ struct WTART * art;
+    /* 0x1C */ struct WTSAMPLE * sample;
+    /* 0x20 */ struct WTADPCM * adpcm;
     /* 0x24 */ u32 hold;
     /* 0x28 */ u32 type;
     /* 0x2C */ f32 srcRatio;
@@ -141,22 +141,20 @@ struct SYNVOICE {
 // sample formats
 #define SYN_SAMPLE_FORMAT_ADPCM 0
 #define SYN_SAMPLE_FORMAT_PCM16 1
-#define SYN_SAMPLE_FORMAT_PCM8 2
+#define SYN_SAMPLE_FORMAT_PCM8  2
 
 // syn.c
 void SYNInit();
 void SYNQuit();
 void SYNRunAudioFrame();
-void SYNInitSynth(struct SYNSYNTH* synth, void* wavetable, u32 aramBase,
-                  u32 priorityVoiceAlloc, u32 priorityNoteOn,
-                  u32 priorityNoteRelease);
-void SYNQuitSynth(struct SYNSYNTH* synth);
-void SYNMidiInput(struct SYNSYNTH* synth, u8* input);
-void SYNSetMasterVolume(struct SYNSYNTH* synth, long dB);
-long SYNGetMasterVolume(struct SYNSYNTH* synth);
-u32 SYNGetActiveNotes(struct SYNSYNTH* synth);
+void SYNInitSynth(struct SYNSYNTH * synth, void * wavetable, u32 aramBase, u32 priorityVoiceAlloc, u32 priorityNoteOn, u32 priorityNoteRelease);
+void SYNQuitSynth(struct SYNSYNTH * synth);
+void SYNMidiInput(struct SYNSYNTH * synth, u8 * input);
+void SYNSetMasterVolume(struct SYNSYNTH * synth, long dB);
+long SYNGetMasterVolume(struct SYNSYNTH * synth);
+u32 SYNGetActiveNotes(struct SYNSYNTH * synth);
 
 // synctrl.c
-u8 SYNGetMidiController(struct SYNSYNTH* synth, u8 midiChannel, u8 function);
+u8 SYNGetMidiController(struct SYNSYNTH * synth, u8 midiChannel, u8 function);
 
 #endif // _DOLPHIN_SYN_H_

@@ -4,7 +4,7 @@
 #include <dolphin/ax.h>
 
 struct MIXChannel {
-    /* 0x00 */ AXVPB* axvpb;
+    /* 0x00 */ AXVPB * axvpb;
     /* 0x04 */ u32 mode;
     /* 0x08 */ int input;
     /* 0x0C */ int auxA;
@@ -41,37 +41,36 @@ struct MIXChannel {
 // mix.c
 void MIXInit(void);
 void MIXQuit(void);
-void MIXInitChannel(AXVPB* axvpb, u32 mode, int input, int auxA, int auxB,
-                    int pan, int span, int fader);
-void MIXReleaseChannel(AXVPB* axvpb);
-void MIXResetControls(AXVPB* p);
-void MIXSetInput(AXVPB* p, int dB);
-void MIXAdjustInput(AXVPB* p, int dB);
-int MIXGetInput(AXVPB* p);
-void MIXAuxAPostFader(AXVPB* p);
-void MIXAuxAPreFader(AXVPB* p);
-int MIXAuxAIsPostFader(AXVPB* p);
-void MIXSetAuxA(AXVPB* p, int dB);
-void MIXAdjustAuxA(AXVPB* p, int dB);
-int MIXGetAuxA(AXVPB* p);
-void MIXAuxBPostFader(AXVPB* p);
-void MIXAuxBPreFader(AXVPB* p);
-int MIXAuxBIsPostFader(AXVPB* p);
-void MIXSetAuxB(AXVPB* p, int dB);
-void MIXAdjustAuxB(AXVPB* p, int dB);
-int MIXGetAuxB(AXVPB* p);
-void MIXSetPan(AXVPB* p, int pan);
-void MIXAdjustPan(AXVPB* p, int pan);
-int MIXGetPan(AXVPB* p);
-void MIXSetSPan(AXVPB* p, int span);
-void MIXAdjustSPan(AXVPB* p, int span);
-int MIXGetSPan(AXVPB* p);
-void MIXMute(AXVPB* p);
-void MIXUnMute(AXVPB* p);
-int MIXIsMute(AXVPB* p);
-void MIXSetFader(AXVPB* p, int dB);
-void MIXAdjustFader(AXVPB* p, int dB);
-int MIXGetFader(AXVPB* p);
+void MIXInitChannel(AXVPB * axvpb, u32 mode, int input, int auxA, int auxB, int pan, int span, int fader);
+void MIXReleaseChannel(AXVPB * axvpb);
+void MIXResetControls(AXVPB * p);
+void MIXSetInput(AXVPB * p, int dB);
+void MIXAdjustInput(AXVPB * p, int dB);
+int MIXGetInput(AXVPB * p);
+void MIXAuxAPostFader(AXVPB * p);
+void MIXAuxAPreFader(AXVPB * p);
+int MIXAuxAIsPostFader(AXVPB * p);
+void MIXSetAuxA(AXVPB * p, int dB);
+void MIXAdjustAuxA(AXVPB * p, int dB);
+int MIXGetAuxA(AXVPB * p);
+void MIXAuxBPostFader(AXVPB * p);
+void MIXAuxBPreFader(AXVPB * p);
+int MIXAuxBIsPostFader(AXVPB * p);
+void MIXSetAuxB(AXVPB * p, int dB);
+void MIXAdjustAuxB(AXVPB * p, int dB);
+int MIXGetAuxB(AXVPB * p);
+void MIXSetPan(AXVPB * p, int pan);
+void MIXAdjustPan(AXVPB * p, int pan);
+int MIXGetPan(AXVPB * p);
+void MIXSetSPan(AXVPB * p, int span);
+void MIXAdjustSPan(AXVPB * p, int span);
+int MIXGetSPan(AXVPB * p);
+void MIXMute(AXVPB * p);
+void MIXUnMute(AXVPB * p);
+int MIXIsMute(AXVPB * p);
+void MIXSetFader(AXVPB * p, int dB);
+void MIXAdjustFader(AXVPB * p, int dB);
+int MIXGetFader(AXVPB * p);
 void MIXSetDvdStreamFader(int dB);
 int MIXGetDvdStreamFader(void);
 void MIXUpdateSettings(void);

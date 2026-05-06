@@ -5,6 +5,7 @@
 #include <dolphin/mix.h>
 #include <dolphin/syn.h>
 
+
 #define AX_MAX_VOICES 64
 
 struct SYNVOICE __SYNVoice[64];

@@ -41,24 +41,24 @@
 #define SI_GBA (SI_TYPE_N64 | 0x00040000)
 #define SI_GC_CONTROLLER (SI_TYPE_GC | SI_GC_STANDARD)
 #define SI_GC_RECEIVER (SI_TYPE_GC | SI_GC_WIRELESS)
-#define SI_GC_WAVEBIRD                                                        \
-    (SI_TYPE_GC | SI_GC_WIRELESS | SI_GC_STANDARD | SI_WIRELESS_STATE |       \
-     SI_WIRELESS_FIX_ID)
+#define SI_GC_WAVEBIRD                                                                             \
+  (SI_TYPE_GC | SI_GC_WIRELESS | SI_GC_STANDARD | SI_WIRELESS_STATE | SI_WIRELESS_FIX_ID)
 #define SI_GC_KEYBOARD (SI_TYPE_GC | 0x00200000)
 #define SI_GC_STEERING (SI_TYPE_GC | 0x00000000)
 
 #define SI_MAX_CHAN 4
 
-typedef void (*SICallback)(s32 chan, u32 sr, OSContext* context);
+typedef void (*SICallback)(s32 chan, u32 sr, OSContext *context);
 typedef void (*SITypeAndStatusCallback)(s32 chan, u32 type);
 
-BOOL SITransfer(s32 chan, void* output, u32 outputBytes, void* input,
-                u32 inputBytes, SICallback callback, OSTime delay);
+BOOL SITransfer(s32 chan, void *output, u32 outputBytes, void *input, u32 inputBytes,
+                SICallback callback, OSTime delay);
 u32 SIGetCommand(long chan);
 u32 SIEnablePolling(u32 poll);
 u32 SIDisablePolling(u32 poll);
 u32 SISetXY(u32 x, u32 y);
 void SITransferCommands(void);
 BOOL SIBusy(void);
+
 
 #endif // _DOLPHIN_SI_H_

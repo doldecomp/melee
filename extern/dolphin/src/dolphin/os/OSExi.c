@@ -1,8 +1,8 @@
-#include "__os.h"
-
-#include <dolphin.h>
 #include <string.h>
+#include <dolphin.h>
 #include <dolphin/os.h>
+
+#include "__os.h"
 
 typedef void (*EXICallback)(s32, OSContext*);
 
@@ -12,7 +12,7 @@ struct EXIControl {
     EXICallback extCallback;
     volatile unsigned long state;
     int immLen;
-    unsigned char* immBuf;
+    unsigned char * immBuf;
     unsigned long dev;
     int id;
     int idTime;
@@ -40,13 +40,11 @@ struct EXIControl {
 
 static struct EXIControl Ecb[3];
 
-static void SetExiInterruptMask(long chan, struct EXIControl* exi);
+static void SetExiInterruptMask(long chan, struct EXIControl * exi);
 static void CompleteTransfer(long chan);
-int EXIImm(long chan, void* buf, long len, unsigned long type,
-           EXICallback callback);
-int EXIImmEx(long chan, void* buf, long len, unsigned long mode);
-int EXIDma(long chan, void* buf, long len, unsigned long type,
-           EXICallback callback);
+int EXIImm(long chan, void * buf, long len, unsigned long type, EXICallback callback);
+int EXIImmEx(long chan, void * buf, long len, unsigned long mode);
+int EXIDma(long chan, void * buf, long len, unsigned long type, EXICallback callback);
 int EXISync(long chan);
 unsigned long EXIClearInterrupts(long chan, int exi, int tc, int ext);
 EXICallback EXISetExiCallback(long chan, EXICallback exiCallback);
@@ -58,54 +56,46 @@ int EXIAttach(long chan, EXICallback extCallback);
 int EXIDetach(long chan);
 int EXISelect(long chan, unsigned long dev, unsigned long freq);
 int EXIDeselect(long chan);
-static void EXIIntrruptHandler(signed short interrupt,
-                               struct OSContext* context);
-static void TCIntrruptHandler(signed short interrupt,
-                              struct OSContext* context);
-static void EXTIntrruptHandler(signed short interrupt,
-                               struct OSContext* context);
+static void EXIIntrruptHandler(signed short interrupt, struct OSContext * context);
+static void TCIntrruptHandler(signed short interrupt, struct OSContext * context);
+static void EXTIntrruptHandler(signed short interrupt, struct OSContext * context);
 void EXIInit();
-int EXILock(long chan, unsigned long dev,
-            void (*unlockedCallback)(long, struct OSContext*));
+int EXILock(long chan, unsigned long dev, void (* unlockedCallback)(long, struct OSContext *));
 int EXIUnlock(long chan);
 unsigned long EXIGetState(long chan);
-int EXIGetID(long chan, unsigned long dev, unsigned long* id);
+int EXIGetID(long chan, unsigned long dev, unsigned long * id);
 
-static void SetExiInterruptMask(long chan, struct EXIControl* exi)
-{
-    struct EXIControl* exi2 = &Ecb[2];
+static void SetExiInterruptMask(long chan, struct EXIControl * exi) {
+    struct EXIControl * exi2 = &Ecb[2];
 
-    switch (chan) {
-    case 0:
-        if ((exi->exiCallback == 0 && exi2->exiCallback == 0) ||
-            exi->state & 0x10)
-        {
-            __OSMaskInterrupts(0x410000U);
+    switch(chan) {
+        case 0:
+            if ((exi->exiCallback == 0 && exi2->exiCallback == 0) || exi->state & 0x10) {
+                __OSMaskInterrupts(0x410000U);
+                return;
+            }
+            __OSUnmaskInterrupts(0x410000U);
             return;
-        }
-        __OSUnmaskInterrupts(0x410000U);
-        return;
-    case 1:
-        if (exi->exiCallback == 0 || exi->state & 0x10) {
-            __OSMaskInterrupts(0x80000U);
+        case 1:
+            if (exi->exiCallback == 0 || exi->state & 0x10) {
+                __OSMaskInterrupts(0x80000U);
+                return;
+            }
+            __OSUnmaskInterrupts(0x80000U);
             return;
-        }
-        __OSUnmaskInterrupts(0x80000U);
-        return;
-    case 2:
-        if ((__OSGetInterruptHandler(0x19) == 0U) || (exi->state & 0x10)) {
-            __OSMaskInterrupts(0x40U);
+        case 2:
+            if ((__OSGetInterruptHandler(0x19) == 0U) || (exi->state & 0x10)) {
+                __OSMaskInterrupts(0x40U);
+                return;
+            }
+            __OSUnmaskInterrupts(0x40U);
             return;
-        }
-        __OSUnmaskInterrupts(0x40U);
-        return;
     }
 }
 
-static void CompleteTransfer(long chan)
-{
-    struct EXIControl* exi;
-    unsigned char* buf;
+static void CompleteTransfer(long chan) {
+    struct EXIControl * exi;
+    unsigned char * buf;
     unsigned long data;
     int i;
     int len;
@@ -118,7 +108,7 @@ static void CompleteTransfer(long chan)
             if ((len = exi->immLen) != 0) {
                 buf = exi->immBuf;
                 data = __EXIRegs[(chan * 5) + 4];
-                for (i = 0; i < len; i++) {
+                for(i = 0; i < len; i++) {
                     *buf++ = data >> ((3 - i) * 8);
                 }
             }
@@ -127,10 +117,8 @@ static void CompleteTransfer(long chan)
     }
 }
 
-int EXIImm(long chan, void* buf, long len, unsigned long type,
-           EXICallback callback)
-{
-    struct EXIControl* exi;
+int EXIImm(long chan, void * buf, long len, unsigned long type, EXICallback callback) {
+    struct EXIControl * exi;
     int enabled;
     unsigned long data;
     int i;
@@ -153,23 +141,22 @@ int EXIImm(long chan, void* buf, long len, unsigned long type,
     exi->state |= 2;
     if (type != 0) {
         data = 0;
-        for (i = 0; i < len; i++) {
-            data |= ((u8*) buf)[i] << ((3 - i) * 8);
+        for(i = 0; i < len; i++) {
+            data |= ((u8*)buf)[i] << ((3 - i) * 8);
         }
         __EXIRegs[(chan * 5) + 4] = data;
     }
     exi->immBuf = buf;
-    exi->immLen = (type != 1) ? len : 0;
+    exi->immLen = (type != 1) ? len : 0; 
     __EXIRegs[(chan * 5) + 3] = (type << 2) | 1 | ((len - 1) << 4);
     OSRestoreInterrupts(enabled);
     return 1;
 }
 
-int EXIImmEx(long chan, void* buf, long len, unsigned long mode)
-{
+int EXIImmEx(long chan, void * buf, long len, unsigned long mode) {
     long xLen;
 
-    while (len) {
+    while(len) {
         xLen = (len < 4) ? len : 4;
         if (EXIImm(chan, buf, xLen, mode, 0) == 0) {
             return 0;
@@ -177,16 +164,14 @@ int EXIImmEx(long chan, void* buf, long len, unsigned long mode)
         if (EXISync(chan) == 0) {
             return 0;
         }
-        ((u8*) buf) += xLen;
+        ((u8*)buf) += xLen;
         len -= xLen;
     }
     return 1;
 }
 
-int EXIDma(long chan, void* buf, long len, unsigned long type,
-           EXICallback callback)
-{
-    struct EXIControl* exi;
+int EXIDma(long chan, void * buf, long len, unsigned long type, EXICallback callback) {
+    struct EXIControl * exi;
     int enabled;
 
     exi = &Ecb[chan];
@@ -203,12 +188,12 @@ int EXIDma(long chan, void* buf, long len, unsigned long type,
         return 0;
     }
     exi->tcCallback = callback;
-    if ((u32) exi->tcCallback) {
+    if ((u32)exi->tcCallback) {
         EXIClearInterrupts(chan, 0, 1, 0);
         __OSUnmaskInterrupts(0x200000U >> (chan * 3));
     }
     exi->state |= 1;
-    __EXIRegs[(chan * 5) + 1] = (u32) buf & 0x03FFFFE0;
+    __EXIRegs[(chan * 5) + 1] = (u32)buf & 0x03FFFFE0;
     __EXIRegs[(chan * 5) + 2] = len;
     __EXIRegs[(chan * 5) + 3] = (type * 4) | 3;
     OSRestoreInterrupts(enabled);
@@ -220,9 +205,8 @@ int EXIDma(long chan, void* buf, long len, unsigned long type,
 #define EXI_FREQ_1M 0
 #define EXIREG(chan, idx) (__EXIRegs[((chan) * EXI_REG_MAX) + (idx)])
 
-int EXISync(long chan)
-{
-    struct EXIControl* exi;
+int EXISync(long chan) {
+    struct EXIControl * exi;
     int rc;
     int enabled;
 
@@ -235,9 +219,8 @@ int EXISync(long chan)
             if (exi->state & 4) {
                 CompleteTransfer(chan);
                 if (__OSGetDIConfig() != 0xff || exi->immLen != 4 ||
-                    (EXIREG(chan, 0) & 0x00000070) != (EXI_FREQ_1M << 4) ||
-                    (EXIREG(chan, 4) != EXI_USB_ADAPTER))
-                {
+                    (EXIREG(chan, 0) & 0x00000070) != (EXI_FREQ_1M << 4)
+                    || (EXIREG(chan, 4) != EXI_USB_ADAPTER)) {
                     rc = TRUE;
                 }
             }
@@ -249,8 +232,7 @@ int EXISync(long chan)
     return rc;
 }
 
-unsigned long EXIClearInterrupts(long chan, int exi, int tc, int ext)
-{
+unsigned long EXIClearInterrupts(long chan, int exi, int tc, int ext) {
     unsigned long cpr;
     unsigned long prev;
 
@@ -270,9 +252,8 @@ unsigned long EXIClearInterrupts(long chan, int exi, int tc, int ext)
     return cpr;
 }
 
-EXICallback EXISetExiCallback(long chan, EXICallback exiCallback)
-{
-    struct EXIControl* exi;
+EXICallback EXISetExiCallback(long chan, EXICallback exiCallback) {
+    struct EXIControl * exi;
     EXICallback prev;
     int enabled;
 
@@ -290,17 +271,15 @@ EXICallback EXISetExiCallback(long chan, EXICallback exiCallback)
     return prev;
 }
 
-void EXIProbeReset()
-{
+void EXIProbeReset() {
     __EXIProbeStartTime[0] = __EXIProbeStartTime[1] = 0;
     Ecb[0].idTime = Ecb[1].idTime = 0;
     __EXIProbe(0);
     __EXIProbe(1);
 }
 
-static int __EXIProbe(long chan)
-{
-    struct EXIControl* exi;
+static int __EXIProbe(long chan) {
+    struct EXIControl * exi;
     int enabled;
     int rc;
     unsigned long cpr;
@@ -321,12 +300,12 @@ static int __EXIProbe(long chan)
             __EXIProbeStartTime[chan] = 0;
         }
         if (cpr & 0x1000) {
-            t = ((long) (OSTicksToMilliseconds(OSGetTime()) / 100) + 1);
+            t = ((long)(OSTicksToMilliseconds(OSGetTime()) / 100) + 1);
 
             if (__EXIProbeStartTime[chan] == 0) {
                 __EXIProbeStartTime[chan] = t;
             }
-            if (t - (long) __EXIProbeStartTime[chan] < 3) {
+            if (t - (long)__EXIProbeStartTime[chan] < 3) {
                 rc = 0;
             }
         } else {
@@ -334,7 +313,7 @@ static int __EXIProbe(long chan)
             __EXIProbeStartTime[chan] = 0;
             rc = 0;
         }
-    } else if (!(cpr & 0x1000) || (cpr & 0x800)) {
+    } else if(!(cpr & 0x1000) || (cpr & 0x800)) {
         exi->idTime = 0;
         __EXIProbeStartTime[chan] = 0;
         rc = 0;
@@ -343,8 +322,7 @@ static int __EXIProbe(long chan)
     return rc;
 }
 
-int EXIProbe(long chan)
-{
+int EXIProbe(long chan) {
     int var_r3;
     struct EXIControl* exi = &Ecb[chan];
 
@@ -361,8 +339,7 @@ int EXIProbe(long chan)
     return var_r3;
 }
 
-int EXIProbeEx(long chan)
-{
+int EXIProbeEx(long chan) {
     if (EXIProbe(chan)) {
         return 1;
     }
@@ -393,9 +370,8 @@ static int __EXIAttach(long chan, EXICallback extCallback)
     return result;
 }
 
-int EXIAttach(long chan, EXICallback extCallback)
-{
-    struct EXIControl* exi;
+int EXIAttach(long chan, EXICallback extCallback) {
+    struct EXIControl * exi;
     int enabled;
     int result;
 
@@ -415,9 +391,8 @@ int EXIAttach(long chan, EXICallback extCallback)
     return result;
 }
 
-int EXIDetach(long chan)
-{
-    struct EXIControl* exi;
+int EXIDetach(long chan) {
+    struct EXIControl * exi;
     int enabled;
 
     exi = &Ecb[chan];
@@ -437,9 +412,8 @@ int EXIDetach(long chan)
     return 1;
 }
 
-int EXISelect(long chan, unsigned long dev, unsigned long freq)
-{
-    struct EXIControl* exi;
+int EXISelect(long chan, unsigned long dev, unsigned long freq) {
+    struct EXIControl * exi;
     unsigned long cpr;
     int enabled;
 
@@ -451,11 +425,7 @@ int EXISelect(long chan, unsigned long dev, unsigned long freq)
     ASSERTLINE(0x302, !(exi->state & STATE_SELECTED));
 
     enabled = OSDisableInterrupts();
-    if ((exi->state & 4) ||
-        ((chan != 2) &&
-         (((dev == 0) && !(exi->state & 8) && (__EXIProbe(chan) == 0)) ||
-          !(exi->state & 0x10) || (exi->dev != dev))))
-    {
+    if ((exi->state & 4) || ((chan != 2) && (((dev == 0) && !(exi->state & 8) && (__EXIProbe(chan) == 0)) || !(exi->state & 0x10) || (exi->dev != dev)))) {
         OSRestoreInterrupts(enabled);
         return 0;
     }
@@ -466,21 +436,20 @@ int EXISelect(long chan, unsigned long dev, unsigned long freq)
     __EXIRegs[(chan * 5)] = cpr;
     if (exi->state & 8) {
         switch (chan) {
-        case 0:
-            __OSMaskInterrupts(0x100000U);
-            break;
-        case 1:
-            __OSMaskInterrupts(0x20000U);
-            break;
+            case 0:
+                __OSMaskInterrupts(0x100000U);
+                break;
+            case 1:
+                __OSMaskInterrupts(0x20000U);
+                break;
         }
     }
     OSRestoreInterrupts(enabled);
     return 1;
 }
 
-int EXIDeselect(long chan)
-{
-    struct EXIControl* exi;
+int EXIDeselect(long chan) {
+    struct EXIControl * exi;
     unsigned long cpr;
     int enabled;
 
@@ -496,12 +465,12 @@ int EXIDeselect(long chan)
     __EXIRegs[(chan * 5)] = cpr & 0x405;
     if (exi->state & 8) {
         switch (chan) {
-        case 0:
-            __OSUnmaskInterrupts(0x100000U);
-            break;
-        case 1:
-            __OSUnmaskInterrupts(0x20000U);
-            break;
+            case 0:
+                __OSUnmaskInterrupts(0x100000U);
+                break;
+            case 1:
+                __OSUnmaskInterrupts(0x20000U);
+                break;
         }
     }
     OSRestoreInterrupts(enabled);
@@ -514,15 +483,13 @@ int EXIDeselect(long chan)
     return 1;
 }
 
-static void EXIIntrruptHandler(signed short interrupt,
-                               struct OSContext* context)
-{
+static void EXIIntrruptHandler(signed short interrupt, struct OSContext * context) {
     long chan;
-    struct EXIControl* exi;
+    struct EXIControl * exi;
     EXICallback callback;
     OSContext old;
 
-    chan = (interrupt - 9) / 3;
+    chan = (interrupt-9)/3;
 
     ASSERTLINE(0x368, 0 <= chan && chan < MAX_CHAN);
     exi = &Ecb[chan];
@@ -537,15 +504,13 @@ static void EXIIntrruptHandler(signed short interrupt,
     }
 }
 
-static void TCIntrruptHandler(signed short interrupt,
-                              struct OSContext* context)
-{
+static void TCIntrruptHandler(signed short interrupt, struct OSContext * context) {
     long chan;
-    struct EXIControl* exi;
+    struct EXIControl * exi;
     EXICallback callback;
     OSContext old;
 
-    chan = (interrupt - 10) / 3;
+    chan = (interrupt-10)/3;
 
     ASSERTLINE(0x383, 0 <= chan && chan < MAX_CHAN);
     exi = &Ecb[chan];
@@ -563,15 +528,13 @@ static void TCIntrruptHandler(signed short interrupt,
     }
 }
 
-static void EXTIntrruptHandler(signed short interrupt,
-                               struct OSContext* context)
-{
+static void EXTIntrruptHandler(signed short interrupt, struct OSContext * context) {
     long chan;
-    struct EXIControl* exi;
+    struct EXIControl * exi;
     EXICallback callback;
     OSContext old;
 
-    chan = (interrupt - 11) / 3;
+    chan = (interrupt-11)/3;
 
     ASSERTLINE(0x3A2, 0 <= chan && chan < 2);
     __OSMaskInterrupts(0x700000U >> (chan * 3));
@@ -589,14 +552,13 @@ static void EXTIntrruptHandler(signed short interrupt,
     }
 }
 
-void EXIInit()
-{
+void EXIInit() {
     __OSMaskInterrupts(0x7F8000U);
     __EXIRegs[0] = 0;
     __EXIRegs[5] = 0;
     __EXIRegs[10] = 0;
     __EXIRegs[0] = 0x2000;
-    __OSSetInterruptHandler(9, EXIIntrruptHandler);
+    __OSSetInterruptHandler(9,  EXIIntrruptHandler);
     __OSSetInterruptHandler(10, TCIntrruptHandler);
     __OSSetInterruptHandler(11, EXTIntrruptHandler);
     __OSSetInterruptHandler(12, EXIIntrruptHandler);
@@ -610,10 +572,8 @@ void EXIInit()
     }
 }
 
-int EXILock(long chan, unsigned long dev,
-            void (*unlockedCallback)(long, struct OSContext*))
-{
-    struct EXIControl* exi;
+int EXILock(long chan, unsigned long dev, void (* unlockedCallback)(long, struct OSContext *)) {
+    struct EXIControl * exi;
     int enabled;
     int i;
 
@@ -624,9 +584,8 @@ int EXILock(long chan, unsigned long dev,
 
     if (exi->state & 0x10) {
         if (unlockedCallback) {
-            ASSERTLINE(0x3F9, chan == 0 && exi->items < (MAX_DEV - 1) ||
-                                  exi->items == 0);
-            for (i = 0; i < exi->items; i++) {
+            ASSERTLINE(0x3F9, chan == 0 && exi->items < (MAX_DEV - 1)|| exi->items == 0);
+            for(i = 0; i < exi->items; i++) {
                 if (exi->queue[i].dev == dev) {
                     OSRestoreInterrupts(enabled);
                     return 0;
@@ -647,9 +606,8 @@ int EXILock(long chan, unsigned long dev,
     return 1;
 }
 
-int EXIUnlock(long chan)
-{
-    struct EXIControl* exi;
+int EXIUnlock(long chan) {
+    struct EXIControl * exi;
     int enabled;
     EXICallback unlockedCallback;
 
@@ -673,9 +631,8 @@ int EXIUnlock(long chan)
     return 1;
 }
 
-unsigned long EXIGetState(long chan)
-{
-    struct EXIControl* exi;
+unsigned long EXIGetState(long chan) {
+    struct EXIControl * exi;
 
     exi = &Ecb[chan];
     ASSERTLINE(0x446, 0 <= chan && chan < MAX_CHAN);
@@ -688,8 +645,7 @@ static void UnlockedHandler(long chan, OSContext* context)
     EXIGetID(chan, 0, &id);
 }
 
-int EXIGetID(long chan, unsigned long dev, unsigned long* id)
-{
+int EXIGetID(long chan, unsigned long dev, unsigned long * id) {
     int err;
     unsigned long cmd;
     struct EXIControl* exi = &Ecb[chan];

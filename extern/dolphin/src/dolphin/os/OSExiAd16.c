@@ -5,10 +5,9 @@ static int Initialized;
 
 int AD16Init(void);
 int AD16WriteReg(unsigned long word);
-int AD16ReadReg(unsigned long* word);
+int AD16ReadReg(unsigned long *word);
 
-int AD16Init(void)
-{
+int AD16Init(void) {
     int err;
     unsigned long cmd;
     unsigned long id;
@@ -38,8 +37,7 @@ int AD16Init(void)
     return 1;
 }
 
-int AD16WriteReg(unsigned long word)
-{
+int AD16WriteReg(unsigned long word) {
     int err;
     unsigned long cmd;
 
@@ -64,8 +62,7 @@ int AD16WriteReg(unsigned long word)
     return 1;
 }
 
-int AD16ReadReg(unsigned long* word)
-{
+int AD16ReadReg(unsigned long * word) {
     int err;
     unsigned long cmd;
 

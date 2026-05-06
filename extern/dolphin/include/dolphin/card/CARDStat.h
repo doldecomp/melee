@@ -1,7 +1,8 @@
 #ifndef _DOLPHIN_CARDSTAT_H_
 #define _DOLPHIN_CARDSTAT_H_
 
-typedef struct CARDStat {
+typedef struct CARDStat
+{
     /*0x00*/ char fileName[CARD_FILENAME_MAX];
     /*0x20*/ u32 length;
     /*0x24*/ u32 time;
@@ -19,9 +20,8 @@ typedef struct CARDStat {
     /*0x68*/ u32 offsetData;
 } CARDStat;
 
-s32 CARDGetStatus(s32 chan, s32 fileNo, CARDStat* stat);
-s32 CARDSetStatusAsync(s32 chan, s32 fileNo, CARDStat* stat,
-                       CARDCallback callback);
-long CARDSetStatus(long chan, long fileNo, struct CARDStat* stat);
+s32 CARDGetStatus(s32 chan, s32 fileNo, CARDStat *stat);
+s32 CARDSetStatusAsync(s32 chan, s32 fileNo, CARDStat *stat, CARDCallback callback);
+long CARDSetStatus(long chan, long fileNo, struct CARDStat * stat);
 
 #endif // _DOLPHIN_CARDSTAT_H_

@@ -19,7 +19,7 @@ struct SramControl {
     int enabled;
     int locked;
     int sync;
-    void (*callback)();
+    void (* callback)();
 };
 
 typedef struct OSSram {

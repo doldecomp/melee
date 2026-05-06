@@ -132,8 +132,7 @@ f32 C_VECSquareMag(Vec* v)
     return sqmag;
 }
 
-asm f32 PSVECSquareMag(register Vec* vec1)
-{
+asm f32 PSVECSquareMag(register Vec* vec1){
     // clang-format off
     psq_l f2, Vec.x(vec1), 0, qr0
     ps_mul f3, f2, f2
@@ -144,7 +143,8 @@ asm f32 PSVECSquareMag(register Vec* vec1)
     // clang-format on
 }
 
-asm float PSVECMag(register Vec* v){
+asm float PSVECMag(register Vec* v)
+{
 #ifdef __MWERKS__ // clang-format off
 	psq_l   f0, Vec.x(v), 0, qr0
 	ps_mul  f0, f0, f0

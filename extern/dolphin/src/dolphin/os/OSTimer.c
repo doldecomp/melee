@@ -1,10 +1,10 @@
-#include "__os.h"
-
 #include <dolphin.h>
 #include <dolphin/os.h>
 
+#include "__os.h"
+
 struct Timer {
-    void (*callback)();
+    void (* callback)();
     unsigned long currval;
     unsigned long startval;
     unsigned short mode;
@@ -14,21 +14,18 @@ struct Timer {
 
 static struct Timer Timer; // .bss
 
-void (*OSSetTimerCallback(void (*callback)()))();
+void (* OSSetTimerCallback(void (* callback)()))();
 void OSInitTimer(unsigned long time, unsigned short mode);
 void OSStartTimer(void);
 void OSStopTimer(void);
-static void DecrementerExceptionHandler(unsigned char exception,
-                                        struct OSContext* context);
+static void DecrementerExceptionHandler(unsigned char exception, struct OSContext * context);
 
-void (*OSSetTimerCallback(void (*callback)()))()
-{
-    void (*prevCallback)();
+void (* OSSetTimerCallback(void (* callback)()))() {
+    void (* prevCallback)();
 
 #if DEBUG
-    if (Timer.initialized == 0) {
-        OSPanic("OSTimer.c", 127,
-                "OSSetTimerCallback(): timer is not initialized.");
+    if(Timer.initialized == 0) {
+        OSPanic("OSTimer.c", 127, "OSSetTimerCallback(): timer is not initialized.");
     }
 #endif
 
@@ -38,12 +35,10 @@ void (*OSSetTimerCallback(void (*callback)()))()
     return prevCallback;
 }
 
-void OSInitTimer(unsigned long time, unsigned short mode)
-{
+void OSInitTimer(unsigned long time, unsigned short mode) {
 #if DEBUG
     if (time >= 0x80000000) {
-        OSPanic("OSTimer.c", 0x97,
-                "OSInitTimer(): time param must be less than 0x80000000.");
+        OSPanic("OSTimer.c", 0x97, "OSInitTimer(): time param must be less than 0x80000000.");
     }
 #endif
 
@@ -61,14 +56,12 @@ void OSInitTimer(unsigned long time, unsigned short mode)
     }
 }
 
-void OSStartTimer(void)
-{
+void OSStartTimer(void) {
     int enabled;
 
 #if DEBUG
     if (Timer.initialized == 0) {
-        OSPanic("OSTimer.c", 0xB8,
-                "OSStartTimer(): timer is not initialized.");
+        OSPanic("OSTimer.c", 0xB8, "OSStartTimer(): timer is not initialized.");
     }
 #endif
     enabled = OSDisableInterrupts();
@@ -77,8 +70,7 @@ void OSStartTimer(void)
     OSRestoreInterrupts(enabled);
 }
 
-void OSStopTimer(void)
-{
+void OSStopTimer(void) {
     int enabled;
 
 #if DEBUG
@@ -98,9 +90,7 @@ void OSStopTimer(void)
     OSRestoreInterrupts(enabled);
 }
 
-static void DecrementerExceptionCallback(unsigned char exception,
-                                         struct OSContext* context)
-{
+static void DecrementerExceptionCallback(unsigned char exception, struct OSContext * context) {
     struct OSContext exceptionContext;
 
     OSClearContext(&exceptionContext);
@@ -122,8 +112,7 @@ static void DecrementerExceptionCallback(unsigned char exception,
 }
 
 static asm void DecrementerExceptionHandler(unsigned char exception,
-                                            register struct OSContext* context)
-{
+                                            register struct OSContext* context) {
     // clang-format off
     nofralloc
 

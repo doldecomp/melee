@@ -8,7 +8,7 @@ typedef enum {
     GX_WARN_ALL
 } GXWarningLevel;
 
-typedef void (*GXVerifyCallback)(GXWarningLevel level, u32 id, char* msg);
+typedef void (*GXVerifyCallback)(GXWarningLevel level, u32 id, char *msg);
 
 void GXSetVerifyLevel(GXWarningLevel level);
 GXVerifyCallback GXSetVerifyCallback(GXVerifyCallback cb);

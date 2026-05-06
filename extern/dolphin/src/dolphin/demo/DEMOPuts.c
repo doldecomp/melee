@@ -1,9 +1,9 @@
-#include "__demo.h"
-
 #include <dolphin.h>
-#include <dolphin/demo.h>
 #include <dolphin/gx.h>
+#include <dolphin/demo.h>
 #include <dolphin/mtx.h>
+
+#include "__demo.h"
 
 extern unsigned long DEMOFontBitmap[]; // size: 0x0, address: 0x0
 
@@ -11,58 +11,52 @@ extern unsigned long DEMOFontBitmap[]; // size: 0x0, address: 0x0
 static struct _GXTexObj fontTexObj; // size: 0x20, address: 0x0
 
 // .sbss
-static long fontShift;                // size: 0x4, address: 0x0
-static struct OSFontHeader* FontData; // size: 0x4, address: 0x4
-static void* LastSheet;               // size: 0x4, address: 0x8
-static s16 FontSize;                  // size: 0x2, address: 0xC
-static s16 FontSpace;                 // size: 0x2, address: 0xE
+static long fontShift; // size: 0x4, address: 0x0
+static struct OSFontHeader * FontData; // size: 0x4, address: 0x4
+static void * LastSheet; // size: 0x4, address: 0x8
+static s16 FontSize; // size: 0x2, address: 0xC
+static s16 FontSpace; // size: 0x2, address: 0xE
 
 // functions
 static void DrawFontChar(int x, int y, int z, int xChar, int yChar);
-static void LoadSheet(void* image, enum _GXTexMapID texMapID);
+static void LoadSheet(void * image, enum _GXTexMapID texMapID);
 
-void DEMOSetFontType(DMFontType attr)
-{
-    switch (attr) {
-    case DM_FT_RVS:
-        GXSetBlendMode(2, 0, 0, 0xC);
-        break;
-    case DM_FT_XLU:
-        GXSetBlendMode(1, 1, 1, 0);
-        break;
-    case DM_FT_OPQ:
-    default:
-        GXSetBlendMode(1, 1, 0, 0);
-        break;
+void DEMOSetFontType(DMFontType attr) {
+    switch(attr) {
+        case DM_FT_RVS:
+            GXSetBlendMode(2, 0, 0, 0xC);
+            break;
+        case DM_FT_XLU:
+            GXSetBlendMode(1, 1, 1, 0);
+            break;
+        case DM_FT_OPQ:
+        default:
+            GXSetBlendMode(1, 1, 0, 0);
+            break;
     }
 }
 
-void DEMOLoadFont(enum _GXTexMapID texMap, enum _GXTexMtx texMtx,
-                  DMTexFlt texFlt)
-{
+void DEMOLoadFont(enum _GXTexMapID texMap, enum _GXTexMtx texMtx, DMTexFlt texFlt) {
     float fontTMtx[3][4];
     unsigned short width;
     unsigned short height;
 
     width = 64;
     height = 0x1800 / width;
-    GXInitTexObj(&fontTexObj, (void*) DEMOFontBitmap, width, (u16) height, 0,
-                 0, 0, 0);
+    GXInitTexObj(&fontTexObj,(void*)DEMOFontBitmap, width, (u16)height, 0, 0, 0, 0);
     fontShift = 1;
     if (texFlt == 0) {
         GXInitTexObjLOD(&fontTexObj, 0, 0, 0, 0, 0, 0.0f, 0.0f, 0.0f);
         fontShift = 0;
     }
     GXLoadTexObj(&fontTexObj, texMap);
-    MTXScale(fontTMtx, 1.0f / (width - !fontShift),
-             1.0f / ((u16) height - !fontShift), 1.0f);
+    MTXScale(fontTMtx, 1.0f / (width - !fontShift), 1.0f / ((u16)height - !fontShift), 1.0f);
     GXLoadTexMtxImm(fontTMtx, texMtx, 1);
     GXSetNumTexGens(1);
     GXSetTexCoordGen(0, 1, 4, texMtx);
 }
 
-void DEMOSetupScrnSpc(long width, long height, float depth)
-{
+void DEMOSetupScrnSpc(long width, long height, float depth) {
     float pMtx[4][4];
     float mMtx[3][4];
 
@@ -73,8 +67,7 @@ void DEMOSetupScrnSpc(long width, long height, float depth)
     GXSetCurrentMtx(0);
 }
 
-void DEMOInitCaption(long font_type, long width, long height)
-{
+void DEMOInitCaption(long font_type, long width, long height) {
     DEMOSetupScrnSpc(width, height, 100.0f);
     GXSetZMode(1, 7, 1);
     GXSetNumChans(0);
@@ -85,9 +78,8 @@ void DEMOInitCaption(long font_type, long width, long height)
     DEMOSetFontType(font_type);
 }
 
-void DEMOPuts(s16 x, s16 y, s16 z, char* string)
-{
-    char* str;
+void DEMOPuts(s16 x, s16 y, s16 z, char * string) {
+    char * str;
     long s;
     long t;
     long c;
@@ -104,7 +96,7 @@ void DEMOPuts(s16 x, s16 y, s16 z, char* string)
 
     // calc len
     len = 0;
-    while (1) {
+    while(1) {
         c = *(str++);
         if ((c >= 0x20) && (c <= 0x7F)) {
             len++;
@@ -113,7 +105,7 @@ void DEMOPuts(s16 x, s16 y, s16 z, char* string)
 
         if (len > 0) {
             GXBegin(0x80, 0, len * 4);
-            for (i = 0; i < len; i++) {
+            for(i = 0; i < len; i++) {
                 w = string[i] - 0x20;
                 s = fontShift + ((w % 8) * 0x10);
                 t = fontShift + ((w / 8) * 0x10);
@@ -139,8 +131,7 @@ void DEMOPuts(s16 x, s16 y, s16 z, char* string)
     }
 }
 
-void DEMOPrintf(s16 x, s16 y, s16 z, char* fmt, ...)
-{
+void DEMOPrintf(s16 x, s16 y, s16 z, char * fmt, ...) {
     va_list vlist;
     char buf[256];
 
@@ -150,8 +141,7 @@ void DEMOPrintf(s16 x, s16 y, s16 z, char* fmt, ...)
     va_end(vlist);
 }
 
-struct OSFontHeader* DEMOInitROMFont()
-{
+struct OSFontHeader * DEMOInitROMFont() {
     if (OSGetFontEncode() == 1) {
         FontData = OSAllocFromHeap(__OSCurrHeap, 0x120F00);
     } else {
@@ -161,30 +151,23 @@ struct OSFontHeader* DEMOInitROMFont()
         OSPanic(__FILE__, 0x19D, "Ins. memory to load ROM font.");
     }
     if (OSInitFont(FontData) == 0) {
-        OSPanic(__FILE__, 0x1A1,
-                "ROM font is available in boot ROM ver 0.8 or later.");
+        OSPanic(__FILE__, 0x1A1, "ROM font is available in boot ROM ver 0.8 or later.");
     }
     FontSize = FontData->cellWidth * 0x10;
     FontSpace = -0x10;
     return FontData;
 }
 
-void DEMOSetROMFontSize(s16 size, s16 space)
-{
+void DEMOSetROMFontSize(s16 size, s16 space) {
     FontSize = size * 0x10;
     FontSpace = space * 0x10;
 }
 
-static void DrawFontChar(int x, int y, int z, int xChar, int yChar)
-{
+static void DrawFontChar(int x, int y, int z, int xChar, int yChar) {
     s16 posLeft = x;
-    s16 posRight =
-        posLeft + ((FontSize * FontData->cellWidth) / FontData->cellWidth);
+    s16 posRight = posLeft + ((FontSize * FontData->cellWidth) / FontData->cellWidth);
     s16 posBottom = y;
-    s16 posTop =
-        y - ((FontData->cellHeight *
-              ((FontData->cellHeight * FontSize) / FontData->cellWidth)) /
-             FontData->cellHeight);
+    s16 posTop = y - ((FontData->cellHeight * ((FontData->cellHeight * FontSize) / FontData->cellWidth)) / FontData->cellHeight);
     s16 texLeft = xChar;
     s16 texTop = yChar;
     s16 texRight = (xChar + FontData->cellWidth);
@@ -202,29 +185,25 @@ static void DrawFontChar(int x, int y, int z, int xChar, int yChar)
     GXEnd();
 }
 
-static void LoadSheet(void* image, enum _GXTexMapID texMapID)
-{
+static void LoadSheet(void * image, enum _GXTexMapID texMapID) {
     float mtx[3][4];
     struct _GXTexObj texObj;
 
     if (LastSheet != image) {
         LastSheet = image;
-        GXInitTexObj(&texObj, image, FontData->sheetWidth,
-                     FontData->sheetHeight, FontData->sheetFormat, 0, 0, 0);
+        GXInitTexObj(&texObj, image, FontData->sheetWidth, FontData->sheetHeight, FontData->sheetFormat, 0, 0, 0);
         GXInitTexObjLOD(&texObj, 1, 1, 0, 0, 0, 0.0f, 0.0f, 0.0f);
         GXLoadTexObj(&texObj, texMapID);
-        MTXScale(mtx, 1.0f / FontData->sheetWidth,
-                 1.0f / FontData->sheetHeight, 1.0f);
+        MTXScale(mtx, 1.0f / FontData->sheetWidth, 1.0f / FontData->sheetHeight, 1.0f);
         GXLoadTexMtxImm(mtx, 0x1E, 1);
         GXSetNumTexGens(1);
         GXSetTexCoordGen(0, 1, 4, 0x1E);
     }
 }
 
-int DEMORFPuts(s16 x, s16 y, s16 z, char* string)
-{
+int DEMORFPuts(s16 x, s16 y, s16 z, char * string) {
     long cx;
-    void* image;
+    void * image;
     long xChar;
     long yChar;
     long width;
@@ -242,7 +221,7 @@ int DEMORFPuts(s16 x, s16 y, s16 z, char* string)
     z *= 0x10;
 
     width = 0;
-    while (*string != 0) {
+    while(*string != 0) {
         if (*string == 0xA) {
             width = 0;
             y += FontData->leading * 0x10;
@@ -251,21 +230,19 @@ int DEMORFPuts(s16 x, s16 y, s16 z, char* string)
             string = OSGetFontTexture(string, &image, &xChar, &yChar, &cx);
             LoadSheet(image, 0);
             DrawFontChar(x + width, y, z, xChar, yChar);
-            width =
-                FontSpace + ((FontSize * cx) / FontData->cellWidth) + width;
+            width = FontSpace + ((FontSize * cx) / FontData->cellWidth) + width;
         }
     }
     return (width + 0xF) / 16;
 }
 
-int DEMORFPutsEx(s16 x, s16 y, s16 z, char* string, s16 maxWidth, int length)
-{
+int DEMORFPutsEx(s16 x, s16 y, s16 z, char * string, s16 maxWidth, int length) {
     long cx;
-    void* image;
+    void * image;
     long xChar;
     long yChar;
     long width;
-    char* end;
+    char * end;
 
     ASSERTLINE(0x23D, FontData);
     LastSheet = NULL;
@@ -280,18 +257,16 @@ int DEMORFPutsEx(s16 x, s16 y, s16 z, char* string, s16 maxWidth, int length)
     z *= 0x10;
     maxWidth *= 0x10;
 
-    end = (char*) &string[length];
+    end = (char*)&string[length];
     width = 0;
-    while (*string && string < end) {
+    while(*string && string < end) {
         if (*string == 0xA) {
             width = 0;
             y += FontData->leading * 0x10;
             string++;
         } else {
             string = OSGetFontTexture(string, &image, &xChar, &yChar, &cx);
-            if (maxWidth <
-                width + (FontSize * cx / FontData->cellWidth) + FontSpace)
-            {
+            if (maxWidth < width + (FontSize * cx / FontData->cellWidth) + FontSpace) {
                 width = 0;
                 y += FontData->leading * 0x10;
             }
@@ -303,8 +278,7 @@ int DEMORFPutsEx(s16 x, s16 y, s16 z, char* string, s16 maxWidth, int length)
     return (width + 0xF) / 16;
 }
 
-int DEMORFPrintf(s16 x, s16 y, s16 z, char* fmt, ...)
-{
+int DEMORFPrintf(s16 x, s16 y, s16 z, char * fmt, ...) {
     va_list vlist;
     char buf[256];
 
@@ -313,10 +287,9 @@ int DEMORFPrintf(s16 x, s16 y, s16 z, char* fmt, ...)
     DEMORFPuts(x, y, z, buf);
 }
 
-char* DEMODumpROMFont(char* string)
-{
+char * DEMODumpROMFont(char * string) {
     unsigned long image[288];
-    void* temp;
+    void * temp;
     int i;
     int j;
     long width;
@@ -324,32 +297,29 @@ char* DEMODumpROMFont(char* string)
     ASSERTLINE(0x295, FontData);
 
     if (OSGetFontEncode() == 1) {
-        temp = (void*) ((u32) FontData + 0xD3F00);
+        temp = (void*)((u32)FontData + 0xD3F00);
     } else {
-        temp = (void*) ((u32) FontData + 0x1D120);
+        temp = (void*)((u32)FontData + 0x1D120);
     }
-    temp = (void*) ((u32) temp & 0xFFFFFFE0);
+    temp = (void*)((u32)temp & 0xFFFFFFE0);
     OSLoadFont(FontData, temp);
     string = OSGetFontTexel(string, &image[0], 0, 0xC, &width);
-    for (i = 0; i < 0x30; i++) {
+    for(i = 0; i < 0x30; i++) {
         j = (i % 8) + ((i / 8) * 0x30);
-        OSReport("%08x%08x%08x%08x%08x%08x\n", image[j], image[j + 8],
-                 image[j + 0x10], image[j + 0x18], image[j + 0x20],
-                 image[j + 0x28]);
+        OSReport("%08x%08x%08x%08x%08x%08x\n", image[j], image[j+8], image[j+0x10], image[j+0x18], image[j+0x20], image[j+0x28]);
     }
     OSReport("\nwidth %d\n", width);
     OSInitFont(FontData);
     return string;
 }
 
-int DEMOGetRFTextWidth(char* string)
-{
+int DEMOGetRFTextWidth(char * string) {
     long cx;
     long width;
 
     ASSERTLINE(0x2C3, FontData);
     width = 0;
-    while (*string != 0) {
+    while(*string != 0) {
         string = OSGetFontWidth(string, &cx);
         width = FontSpace + ((FontSize * cx) / FontData->cellWidth) + width;
     }

@@ -1,6 +1,6 @@
-#include "__pad.h"
-
 #include "os/__os.h"
+
+#include "__pad.h"
 
 #include <dolphin.h>
 #include <dolphin/os.h>
@@ -283,19 +283,20 @@ static void PADTypeAndStatusCallback(s32 chan, u32 type)
 
     if (!(type & SI_GC_WIRELESS) || (type & SI_WIRELESS_IR)) {
         if (recalibrate) {
-            rc = SITransfer(ResettingChan, &CmdCalibrate, 3,
-                            &Origin[ResettingChan], 0xA, PADOriginCallback, 0);
+            rc = SITransfer(ResettingChan, &CmdCalibrate, 3, &Origin[ResettingChan],
+                                0xA, PADOriginCallback, 0);
         } else {
-            rc = SITransfer(ResettingChan, &CmdReadOrigin, 1,
-                            &Origin[ResettingChan], 0xA, PADOriginCallback, 0);
+            rc = SITransfer(ResettingChan, &CmdReadOrigin, 1, &Origin[ResettingChan],
+                                0xA, PADOriginCallback, 0);
         }
-    } else if ((type & 0x100000) && !(type & 0x80000) && !(type & 0x40000)) {
+    } else if ((type & 0x100000) && !(type & 0x80000) &&
+               !(type & 0x40000)) {
         if (type & SI_WIRELESS_RECEIVED) {
-            rc = SITransfer(ResettingChan, &CmdReadOrigin, 1,
-                            &Origin[ResettingChan], 0xA, PADOriginCallback, 0);
+            rc = SITransfer(ResettingChan, &CmdReadOrigin, 1, &Origin[ResettingChan],
+                                0xA, PADOriginCallback, 0);
         } else {
             rc = SITransfer(ResettingChan, &WirelessUnk[ResettingChan], 3,
-                            &Origin[ResettingChan], 8, PADProbeCallback, 0);
+                                &Origin[ResettingChan], 8, PADProbeCallback, 0);
         }
     }
     if (!rc) {
@@ -437,9 +438,9 @@ static void PADReceiveCheckCallback(s32 chan, unsigned long error)
         WaitingBits &= ~chanBit;
         CheckingBits &= ~chanBit;
         type = error & 0xFFFFFF00;
-        if (!(error & 0xF) && (type & 0x80000000) && (type & 0x100000) &&
-            (type & 0x40000000) && !(type & 0x4000000) && !(type & 0x80000) &&
-            !(type & 0x40000))
+        if (!(error & 0xF) && (type & 0x80000000) && (type & 0x100000)
+            && (type & 0x40000000) && !(type & 0x4000000)
+            && !(type & 0x80000) && !(type & 0x40000))
         {
             SITransfer(chan, &CmdReadOrigin, 1, &Origin[chan], 0xA,
                        PADOriginUpdateCallback, 0);
@@ -603,8 +604,8 @@ u32 PADRead(struct PADStatus* status)
                         if (status->button & 0x2000) {
                             status->err = -3;
                             memset(status, 0, 0xA);
-                            SITransfer(chan, &CmdReadOrigin, 1, &Origin[chan],
-                                       0xA, PADOriginUpdateCallback, 0);
+                            SITransfer(chan, &CmdReadOrigin, 1, &Origin[chan], 0xA,
+                                       PADOriginUpdateCallback, 0);
                         } else {
                             status->err = 0;
                             status->button &= 0xFFFFFF7F;
@@ -631,9 +632,9 @@ static XY XYNTSC[12] = { { 0xF6, 0x02 }, { 0x0E, 0x13 }, { 0x1E, 0x09 },
                          { 0x83, 0x02 }, { 0x83, 0x02 }, { 0x83, 0x02 } };
 
 static XY XYPAL[12] = { { 0x128, 0x02 }, { 0x0D, 0x18 }, { 0x1A, 0x0C },
-                        { 0x27, 0x08 },  { 0x34, 0x06 }, { 0x3E, 0x05 },
-                        { 0x4E, 0x04 },  { 0x68, 0x03 }, { 0x68, 0x03 },
-                        { 0x68, 0x03 },  { 0x68, 0x03 }, { 0x9C, 0x02 } };
+                        { 0x27, 0x08 }, { 0x34, 0x06 }, { 0x3E, 0x05 },
+                        { 0x4E, 0x04 }, { 0x68, 0x03 }, { 0x68, 0x03 },
+                        { 0x68, 0x03 }, { 0x68, 0x03 }, { 0x9C, 0x02 } };
 
 void PADSetSamplingRate(unsigned long msec)
 {
@@ -1015,8 +1016,8 @@ static BOOL OnReset(BOOL f)
     if (!f) {
         sync = PADSync();
         if (!recalibrated && sync) {
-            PADRecalibrate(PAD_CHAN0_BIT | PAD_CHAN1_BIT | PAD_CHAN2_BIT |
-                           PAD_CHAN3_BIT);
+            PADRecalibrate(PAD_CHAN0_BIT | PAD_CHAN1_BIT |
+                           PAD_CHAN2_BIT | PAD_CHAN3_BIT);
             recalibrated = TRUE;
             return FALSE;
         }

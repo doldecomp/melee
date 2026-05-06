@@ -1,8 +1,8 @@
-#include "__dvd.h"
-#include "__os.h"
-
 #include <dolphin.h>
 #include <dolphin/dvd.h>
+
+#include "__dvd.h"
+#include "__os.h"
 
 typedef void (*DVDLowCallback)(u32);
 
@@ -29,12 +29,12 @@ static struct {
 // .sbss
 static volatile BOOL StopAtNextInt;
 static int LastLength;
-static void (*Callback)(unsigned long);           // size: 0x4, address: 0x0
-static void (*ResetCoverCallback)(unsigned long); // size: 0x4, address: 0x4
-static volatile long long LastResetEnd;           // size: 0x8, address: 0x8
-static volatile unsigned long ResetOccurred;      // size: 0x4, address: 0x10
-static volatile int WaitingCoverClose;            // size: 0x4, address: 0x14
-static volatile int Breaking;                     // size: 0x4, address: 0x18
+static void (* Callback)(unsigned long); // size: 0x4, address: 0x0
+static void (* ResetCoverCallback)(unsigned long); // size: 0x4, address: 0x4
+static volatile long long LastResetEnd; // size: 0x8, address: 0x8
+static volatile unsigned long ResetOccurred; // size: 0x4, address: 0x10
+static volatile int WaitingCoverClose; // size: 0x4, address: 0x14
+static volatile int Breaking; // size: 0x4, address: 0x18
 static volatile u32 WorkAroundType;
 static u32 WorkAroundSeekLocation;
 static volatile OSTime LastReadFinished;
@@ -74,8 +74,7 @@ static BOOL ProcessNextCommand(void)
     return FALSE;
 }
 
-void __DVDInterruptHandler(short unused, struct OSContext* context)
-{
+void __DVDInterruptHandler(short unused, struct OSContext * context) {
     struct OSContext exceptionContext;
     unsigned long cause;
     unsigned long reg;
@@ -116,9 +115,7 @@ void __DVDInterruptHandler(short unused, struct OSContext* context)
     }
     __DIRegs[0] = (intr | mask);
 
-    if ((ResetOccurred != 0) &&
-        ((__OSGetSystemTime() - LastResetEnd)) < OSMillisecondsToTicks(200))
-    {
+    if ((ResetOccurred != 0) && ((__OSGetSystemTime() - LastResetEnd)) < OSMillisecondsToTicks(200)) {
         reg = __DIRegs[1];
         mask = (reg & 2);
         intr = (reg & 4) & (mask << 1);
@@ -271,7 +268,8 @@ static void WaitBeforeRead(void* addr, u32 length, u32 offset,
     OSSetAlarm(&AlarmForWA, timeout, AlarmHandler);
 }
 
-BOOL DVDLowRead(void* addr, u32 length, u32 offset, DVDLowCallback callback)
+BOOL DVDLowRead(void* addr, u32 length, u32 offset,
+                     DVDLowCallback callback)
 {
     OSTime diff;
     u32 prev;
@@ -309,10 +307,8 @@ BOOL DVDLowRead(void* addr, u32 length, u32 offset, DVDLowCallback callback)
     return TRUE;
 }
 
-int DVDLowSeek(unsigned long offset, void (*callback)(unsigned long))
-{
-    ASSERTMSGLINE(0x166, !(offset % 4),
-                  "DVDLowSeek(): offset must be a multiple of 4.");
+int DVDLowSeek(unsigned long offset, void (* callback)(unsigned long)) {
+    ASSERTMSGLINE(0x166, !(offset % 4), "DVDLowSeek(): offset must be a multiple of 4.");
     StopAtNextInt = FALSE;
     Callback = callback;
     __DIRegs[2] = 0xAB000000;
@@ -322,8 +318,7 @@ int DVDLowSeek(unsigned long offset, void (*callback)(unsigned long))
     return 1;
 }
 
-int DVDLowWaitCoverClose(void (*callback)(unsigned long))
-{
+int DVDLowWaitCoverClose(void (* callback)(unsigned long)) {
     Callback = callback;
     WaitingCoverClose = TRUE;
     StopAtNextInt = FALSE;
@@ -331,24 +326,21 @@ int DVDLowWaitCoverClose(void (*callback)(unsigned long))
     return 1;
 }
 
-int DVDLowReadDiskID(struct DVDDiskID* diskID, void (*callback)(unsigned long))
-{
-    ASSERTMSGLINE(0x19B, !OFFSET(diskID, 32),
-                  "DVDLowReadID(): id must be aligned with 32 byte boundary.");
+int DVDLowReadDiskID(struct DVDDiskID * diskID, void (* callback)(unsigned long)) {
+    ASSERTMSGLINE(0x19B, !OFFSET(diskID, 32), "DVDLowReadID(): id must be aligned with 32 byte boundary.");
     StopAtNextInt = FALSE;
     Callback = callback;
     __DIRegs[2] = 0xA8000040;
     __DIRegs[3] = 0;
     __DIRegs[4] = sizeof(DVDDiskID);
-    __DIRegs[5] = (u32) diskID;
+    __DIRegs[5] = (u32)diskID;
     __DIRegs[6] = sizeof(DVDDiskID);
     __DIRegs[7] = 3;
     SetTimeoutAlarm(OSSecondsToTicks(10));
     return 1;
 }
 
-int DVDLowStopMotor(void (*callback)(unsigned long))
-{
+int DVDLowStopMotor(void (* callback)(unsigned long)) {
     StopAtNextInt = FALSE;
     Callback = callback;
     __DIRegs[2] = 0xE3000000;
@@ -357,8 +349,7 @@ int DVDLowStopMotor(void (*callback)(unsigned long))
     return 1;
 }
 
-int DVDLowRequestError(void (*callback)(unsigned long))
-{
+int DVDLowRequestError(void (* callback)(unsigned long)) {
     StopAtNextInt = FALSE;
     Callback = callback;
     __DIRegs[2] = 0xE0000000;
@@ -367,22 +358,19 @@ int DVDLowRequestError(void (*callback)(unsigned long))
     return 1;
 }
 
-int DVDLowInquiry(struct DVDDriveInfo* info, void (*callback)(unsigned long))
-{
+int DVDLowInquiry(struct DVDDriveInfo * info, void (* callback)(unsigned long)) {
     StopAtNextInt = FALSE;
     Callback = callback;
     __DIRegs[2] = 0x12000000;
     __DIRegs[4] = sizeof(DVDDriveInfo);
-    __DIRegs[5] = (u32) info;
+    __DIRegs[5] = (u32)info;
     __DIRegs[6] = sizeof(DVDDriveInfo);
     __DIRegs[7] = 3;
     SetTimeoutAlarm(OSSecondsToTicks(10));
     return 1;
 }
 
-int DVDLowAudioStream(unsigned long subcmd, unsigned long length,
-                      unsigned long offset, void (*callback)(unsigned long))
-{
+int DVDLowAudioStream(unsigned long subcmd, unsigned long length, unsigned long offset, void (* callback)(unsigned long)) {
     StopAtNextInt = FALSE;
     Callback = callback;
     __DIRegs[2] = (subcmd | 0xE1000000);
@@ -393,9 +381,7 @@ int DVDLowAudioStream(unsigned long subcmd, unsigned long length,
     return 1;
 }
 
-int DVDLowRequestAudioStatus(unsigned long subcmd,
-                             void (*callback)(unsigned long))
-{
+int DVDLowRequestAudioStatus(unsigned long subcmd, void (* callback)(unsigned long)) {
     StopAtNextInt = FALSE;
     Callback = callback;
     __DIRegs[2] = (subcmd | 0xE2000000);
@@ -404,9 +390,7 @@ int DVDLowRequestAudioStatus(unsigned long subcmd,
     return 1;
 }
 
-int DVDLowAudioBufferConfig(int enable, unsigned long size,
-                            void (*callback)(unsigned long))
-{
+int DVDLowAudioBufferConfig(int enable, unsigned long size, void (* callback)(unsigned long)) {
     unsigned long trigger;
 
     StopAtNextInt = FALSE;
@@ -420,8 +404,7 @@ int DVDLowAudioBufferConfig(int enable, unsigned long size,
     return 1;
 }
 
-void DVDLowReset()
-{
+void DVDLowReset() {
     unsigned long reg;
     long long resetStart;
 
@@ -429,17 +412,15 @@ void DVDLowReset()
     reg = __PIRegs[9];
     __PIRegs[9] = (reg & 0xFFFFFFFB) | 1;
     resetStart = __OSGetSystemTime();
-    while ((__OSGetSystemTime() - resetStart) < OSMicrosecondsToTicks(12))
+    while((__OSGetSystemTime() - resetStart) < OSMicrosecondsToTicks(12)) 
         ;
     __PIRegs[9] = (reg | 4 | 1);
     ResetOccurred = 1;
     LastResetEnd = __OSGetSystemTime();
 }
 
-void (*DVDLowSetResetCoverCallback(void (*callback)(unsigned long)))(
-    unsigned long)
-{
-    void (*old)(unsigned long);
+void (* DVDLowSetResetCoverCallback(void (* callback)(unsigned long)))(unsigned long) {
+    void (* old)(unsigned long);
     int enabled;
 
     enabled = OSDisableInterrupts();
@@ -449,16 +430,14 @@ void (*DVDLowSetResetCoverCallback(void (*callback)(unsigned long)))(
     return old;
 }
 
-int DVDLowBreak()
-{
+int DVDLowBreak() {
     StopAtNextInt = TRUE;
     Breaking = TRUE;
     return 1;
 }
 
-void (*DVDLowClearCallback())(unsigned long)
-{
-    void (*old)(unsigned long);
+void (* DVDLowClearCallback())(unsigned long) {
+    void (* old)(unsigned long);
 
     __DIRegs[1] = 0;
     old = Callback;
@@ -466,8 +445,7 @@ void (*DVDLowClearCallback())(unsigned long)
     return old;
 }
 
-unsigned long DVDLowGetCoverStatus()
-{
+unsigned long DVDLowGetCoverStatus() {
     if (((__OSGetSystemTime() - LastResetEnd)) < OSMillisecondsToTicks(100)) {
         return 0;
     }

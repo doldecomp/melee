@@ -28,10 +28,10 @@ SOFTWARE.
 */
 
 class DoxygenAwesomeTabs {
-    static init()
-    {
+    static init() {
         window.addEventListener("load", () => {
-            document.querySelectorAll(".tabbed:not(:empty)")
+            document
+                .querySelectorAll(".tabbed:not(:empty)")
                 .forEach((tabbed, tabbedIndex) => {
                     let tabLinkList = [];
                     tabbed.querySelectorAll("li").forEach((tab, tabIndex) => {
@@ -60,9 +60,11 @@ class DoxygenAwesomeTabs {
                     tabsOverview.classList.add("tabs-overview");
                     let tabsOverviewContainer = document.createElement("div");
                     tabsOverviewContainer.classList.add(
-                        "tabs-overview-container");
-                    tabLinkList.forEach(
-                        (tabLink) => { tabsOverview.appendChild(tabLink); });
+                        "tabs-overview-container"
+                    );
+                    tabLinkList.forEach((tabLink) => {
+                        tabsOverview.appendChild(tabLink);
+                    });
                     tabsOverviewContainer.appendChild(tabsOverview);
                     tabbed.before(tabsOverviewContainer);
                 });

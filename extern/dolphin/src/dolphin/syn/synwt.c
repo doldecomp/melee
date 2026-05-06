@@ -3,6 +3,7 @@
 #include <dolphin.h>
 #include <dolphin/syn.h>
 
+
 int __SYNGetWavetableData(struct SYNVOICE* voice)
 {
     u32 regionIndex;

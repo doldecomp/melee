@@ -8,9 +8,7 @@
         "rev": "fbcf476f790d8a217c3eab4e12033dc4a0f6d23c",
         "sha256": "0ah1hwz0gg9xn5bl1f4d25a2443k7r5vmk1ikmw9539nmgwbgly0",
         "type": "tarball",
-        "url":
-            "https://github.com/NixOS/nixpkgs/archive/fbcf476f790d8a217c3eab4e12033dc4a0f6d23c.tar.gz",
-        "url_template":
-            "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+        "url": "https://github.com/NixOS/nixpkgs/archive/fbcf476f790d8a217c3eab4e12033dc4a0f6d23c.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
     }
 }

@@ -1,9 +1,9 @@
 #ifndef _DOLPHIN_VIFUNCS_H_
 #define _DOLPHIN_VIFUNCS_H_
 
-#include <dolphin/gx/GXStruct.h>
 #include <dolphin/types.h>
 #include <dolphin/vi/vitypes.h>
+#include <dolphin/gx/GXStruct.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -13,11 +13,11 @@ VIRetraceCallback VISetPreRetraceCallback(VIRetraceCallback cb);
 VIRetraceCallback VISetPostRetraceCallback(VIRetraceCallback cb);
 void VIInit(void);
 void VIWaitForRetrace(void);
-void VIConfigure(GXRenderModeObj* rm);
+void VIConfigure(GXRenderModeObj *rm);
 void VIConfigurePan(u16 xOrg, u16 yOrg, u16 width, u16 height);
 void VIFlush(void);
-void VISetNextFrameBuffer(void* fb);
-void VISetNextRightFrameBuffer(void* fb);
+void VISetNextFrameBuffer(void *fb);
+void VISetNextRightFrameBuffer(void *fb);
 void VISetBlack(BOOL black);
 void VISet3D(BOOL threeD);
 u32 VIGetRetraceCount(void);
