@@ -44,23 +44,37 @@ static struct MnItemSwTable mnItemSw_803ED340 = {
     },
     /* x30 */
     {
-        0.0f, 10.0f, -0.1f, 0.0f, 199.0f, 0.0f, 10.0f, 11.0f,
-        8.0f, 9.0f, 6.0f, 7.0f, 4.0f, 5.0f, 2.0f, 3.0f,
-        0.0f, 1.0f,
+        0.0f,
+        10.0f,
+        -0.1f,
+        0.0f,
+        199.0f,
+        0.0f,
+        10.0f,
+        11.0f,
+        8.0f,
+        9.0f,
+        6.0f,
+        7.0f,
+        4.0f,
+        5.0f,
+        2.0f,
+        3.0f,
+        0.0f,
+        1.0f,
     },
     /* items */
     {
-        0.0f, 1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f,
-        8.0f, 9.0f, 10.0f, 11.0f, 12.0f, 13.0f, 14.0f, 15.0f,
+        0.0f,  1.0f,  2.0f,  3.0f,  4.0f,  5.0f,  6.0f,  7.0f,
+        8.0f,  9.0f,  10.0f, 11.0f, 12.0f, 13.0f, 14.0f, 15.0f,
         16.0f, 17.0f, 18.0f, 19.0f, 20.0f, 21.0f, 22.0f, 23.0f,
         25.0f, 24.0f, 26.0f, 27.0f, 29.0f, 28.0f, 30.0f, 31.0f,
     },
     /* item_order */
     {
-        0x05, 0x12, 0x0A, 0x1E, 0x0D, 0x18, 0x03, 0x0E,
-        0x17, 0x1B, 0x01, 0x09, 0x08, 0x07, 0x15, 0x04,
-        0x06, 0x02, 0x0F, 0x00, 0x11, 0x0B, 0x1F, 0x1A,
-        0x14, 0x19, 0x10, 0x16, 0x13, 0x1D, 0x0C, 0x00,
+        0x05, 0x12, 0x0A, 0x1E, 0x0D, 0x18, 0x03, 0x0E, 0x17, 0x1B, 0x01,
+        0x09, 0x08, 0x07, 0x15, 0x04, 0x06, 0x02, 0x0F, 0x00, 0x11, 0x0B,
+        0x1F, 0x1A, 0x14, 0x19, 0x10, 0x16, 0x13, 0x1D, 0x0C, 0x00,
     },
 };
 
@@ -113,14 +127,11 @@ void mnItemSw_80233B68(MnItemSwData* arg0, u32 arg1)
             *hovered = sel - 1;
             break;
         }
-        if (((u8) *hovered == 0x1F) ||
-            ((u8) *hovered == 0x20))
-        {
+        if (((u8) *hovered == 0x1F) || ((u8) *hovered == 0x20)) {
             mn_804A04F0.confirmed_selection = arg0->x21;
             return;
         }
-        mn_804A04F0.confirmed_selection =
-            arg0->items[(u8) *hovered];
+        mn_804A04F0.confirmed_selection = arg0->items[(u8) *hovered];
         return;
     }
     if (arg1 & 2) {
@@ -141,14 +152,11 @@ void mnItemSw_80233B68(MnItemSwData* arg0, u32 arg1)
             *hovered = sel + 1;
             break;
         }
-        if (((u8) *hovered == 0x1F) ||
-            ((u8) *hovered == 0x20))
-        {
+        if (((u8) *hovered == 0x1F) || ((u8) *hovered == 0x20)) {
             mn_804A04F0.confirmed_selection = arg0->x21;
             return;
         }
-        mn_804A04F0.confirmed_selection =
-            arg0->items[(u8) *hovered];
+        mn_804A04F0.confirmed_selection = arg0->items[(u8) *hovered];
         return;
     }
     if (arg1 & 4) {
@@ -163,14 +171,11 @@ void mnItemSw_80233B68(MnItemSwData* arg0, u32 arg1)
         }
         if ((sel >= 0x10U) && (sel < 0x1FU)) {
             *hovered = sel - 0x10;
-            if (((u8) *hovered == 0x1F) ||
-                ((u8) *hovered == 0x20))
-            {
+            if (((u8) *hovered == 0x1F) || ((u8) *hovered == 0x20)) {
                 mn_804A04F0.confirmed_selection = arg0->x21;
                 return;
             }
-            mn_804A04F0.confirmed_selection =
-                arg0->items[(u8) *hovered];
+            mn_804A04F0.confirmed_selection = arg0->items[(u8) *hovered];
         }
     } else if (arg1 & 8) {
         if ((u8) (sel - 0x1F) <= 1U) {
@@ -189,14 +194,11 @@ void mnItemSw_80233B68(MnItemSwData* arg0, u32 arg1)
             } else {
                 *hovered = (u16) temp_r0;
             }
-            if (((u8) *hovered == 0x1F) ||
-                ((u8) *hovered == 0x20))
-            {
+            if (((u8) *hovered == 0x1F) || ((u8) *hovered == 0x20)) {
                 mn_804A04F0.confirmed_selection = arg0->x21;
                 return;
             }
-            mn_804A04F0.confirmed_selection =
-                arg0->items[(u8) *hovered];
+            mn_804A04F0.confirmed_selection = arg0->items[(u8) *hovered];
         }
     }
 }
@@ -243,8 +245,7 @@ void fn_80233E10(HSD_GObj* gobj)
             mn_804A04F0.confirmed_selection = (u8) i;
             data = (MnItemSwData*) mnItemSw_804D6BE8->user_data;
             for (i = 0; i < 0x1F; i++) {
-                mn_8022E978(mnItemSw_803ED340.item_order[i],
-                            data->items[i]);
+                mn_8022E978(mnItemSw_803ED340.item_order[i], data->items[i]);
             }
             gmMainLib_8015CC58()->item_freq = data->x21 - 1;
             return;
@@ -254,8 +255,7 @@ void fn_80233E10(HSD_GObj* gobj)
         if ((s32) gm_801A4310() == 1) {
             data = (MnItemSwData*) mnItemSw_804D6BE8->user_data;
             for (i = 0; i < 0x1F; i++) {
-                mn_8022E978(mnItemSw_803ED340.item_order[i],
-                            data->items[i]);
+                mn_8022E978(mnItemSw_803ED340.item_order[i], data->items[i]);
             }
             gmMainLib_8015CC58()->item_freq = data->x21 - 1;
             lb_8001CE00();
@@ -264,8 +264,7 @@ void fn_80233E10(HSD_GObj* gobj)
         }
         data = (MnItemSwData*) mnItemSw_804D6BE8->user_data;
         for (i = 0; i < 0x1F; i++) {
-            mn_8022E978(mnItemSw_803ED340.item_order[i],
-                        data->items[i]);
+            mn_8022E978(mnItemSw_803ED340.item_order[i], data->items[i]);
         }
         gmMainLib_8015CC58()->item_freq = data->x21 - 1;
         lb_8001CE00();
@@ -346,20 +345,20 @@ void mnItemSw_80234104(HSD_GObj* gobj)
     } else {
         HSD_JObjClearFlagsAll(cjobj, 0x10);
         y_spacing = HSD_JObjGetTranslationY(data->jobjs[5]) -
-            HSD_JObjGetTranslationY(data->jobjs[4]);
+                    HSD_JObjGetTranslationY(data->jobjs[4]);
 
         if (cursor < 0x10) {
             HSD_JObjSetTranslateX(cjobj,
-                HSD_JObjGetTranslationX(data->jobjs[4]));
+                                  HSD_JObjGetTranslationX(data->jobjs[4]));
             HSD_JObjSetTranslateY(cjobj,
-                y_spacing * (f32) cursor +
-                    HSD_JObjGetTranslationY(data->jobjs[4]));
+                                  y_spacing * (f32) cursor +
+                                      HSD_JObjGetTranslationY(data->jobjs[4]));
         } else {
             HSD_JObjSetTranslateX(cjobj,
-                HSD_JObjGetTranslationX(data->jobjs[6]));
+                                  HSD_JObjGetTranslationX(data->jobjs[6]));
             HSD_JObjSetTranslateY(cjobj,
-                y_spacing * (f32)(cursor - 0x10) +
-                    HSD_JObjGetTranslationY(data->jobjs[4]));
+                                  y_spacing * (f32) (cursor - 0x10) +
+                                      HSD_JObjGetTranslationY(data->jobjs[4]));
         }
     }
 
@@ -386,11 +385,9 @@ void mnItemSw_8023453C(HSD_GObj* gobj, u8 arg1, u8 arg2)
             if ((u8) mn_804A04F0.hovered_selection == 0x1F ||
                 (u8) mn_804A04F0.hovered_selection == 0x20)
             {
-                HSD_JObjReqAnimAll(all_jobj,
-                    tbl->x30[7 + x21 * 2]);
+                HSD_JObjReqAnimAll(all_jobj, tbl->x30[7 + x21 * 2]);
             } else {
-                HSD_JObjReqAnimAll(all_jobj,
-                    tbl->x30[6 + x21 * 2]);
+                HSD_JObjReqAnimAll(all_jobj, tbl->x30[6 + x21 * 2]);
             }
             HSD_JObjAnimAll(all_jobj);
         } else {
@@ -399,9 +396,8 @@ void mnItemSw_8023453C(HSD_GObj* gobj, u8 arg1, u8 arg2)
             HSD_JObjSetFlagsAll(sp44, 0x10);
             anim_val = mn_8022F298(sp44);
             lb_80011E24(jobj, &sp44, 3, -1);
-            HSD_JObjReqAnimAll(sp44,
-                (f32) mnItemSw_80233A98(
-                    (s32) tbl->item_order[old_cursor]));
+            HSD_JObjReqAnimAll(sp44, (f32) mnItemSw_80233A98(
+                                         (s32) tbl->item_order[old_cursor]));
             HSD_JObjAnimAll(sp44);
             HSD_JObjReqAnimAll(sp44, tbl->x30[0]);
             mn_8022F3D8(sp44, 1, TOBJ_MASK);
@@ -416,11 +412,9 @@ void mnItemSw_8023453C(HSD_GObj* gobj, u8 arg1, u8 arg2)
             if ((u8) mn_804A04F0.hovered_selection == 0x1F ||
                 (u8) mn_804A04F0.hovered_selection == 0x20)
             {
-                HSD_JObjReqAnimAll(all_jobj,
-                    tbl->x30[7 + conf * 2]);
+                HSD_JObjReqAnimAll(all_jobj, tbl->x30[7 + conf * 2]);
             } else {
-                HSD_JObjReqAnimAll(all_jobj,
-                    tbl->x30[6 + conf * 2]);
+                HSD_JObjReqAnimAll(all_jobj, tbl->x30[6 + conf * 2]);
             }
             HSD_JObjAnimAll(all_jobj);
         } else {
@@ -430,9 +424,8 @@ void mnItemSw_8023453C(HSD_GObj* gobj, u8 arg1, u8 arg2)
             HSD_JObjReqAnimAll(sp44, anim_val);
             HSD_JObjAnimAll(sp44);
             lb_80011E24(jobj, &sp44, 3, -1);
-            HSD_JObjReqAnimAll(sp44,
-                (f32) mnItemSw_80233A98(
-                    (s32) tbl->item_order[new_cursor]));
+            HSD_JObjReqAnimAll(sp44, (f32) mnItemSw_80233A98(
+                                         (s32) tbl->item_order[new_cursor]));
             HSD_JObjAnimAll(sp44);
             HSD_JObjReqAnimAll(sp44, tbl->x30[0]);
             mn_8022F3D8(sp44, 1, TOBJ_MASK);
@@ -440,26 +433,26 @@ void mnItemSw_8023453C(HSD_GObj* gobj, u8 arg1, u8 arg2)
         }
 
         cjobj = data->jobjs[2];
-        if ((u8)(new_cursor - 0x1F) <= 1U) {
+        if ((u8) (new_cursor - 0x1F) <= 1U) {
             HSD_JObjSetFlagsAll(cjobj, 0x10);
         } else {
             f32 y_spacing;
             HSD_JObjClearFlagsAll(cjobj, 0x10);
             y_spacing = HSD_JObjGetTranslationY(data->jobjs[5]) -
-                HSD_JObjGetTranslationY(data->jobjs[4]);
+                        HSD_JObjGetTranslationY(data->jobjs[4]);
 
             if (new_cursor < 0x10) {
                 HSD_JObjSetTranslateX(cjobj,
-                    HSD_JObjGetTranslationX(data->jobjs[4]));
-                HSD_JObjSetTranslateY(cjobj,
-                    y_spacing * (f32) new_cursor +
-                        HSD_JObjGetTranslationY(data->jobjs[4]));
+                                      HSD_JObjGetTranslationX(data->jobjs[4]));
+                HSD_JObjSetTranslateY(
+                    cjobj, y_spacing * (f32) new_cursor +
+                               HSD_JObjGetTranslationY(data->jobjs[4]));
             } else {
                 HSD_JObjSetTranslateX(cjobj,
-                    HSD_JObjGetTranslationX(data->jobjs[6]));
-                HSD_JObjSetTranslateY(cjobj,
-                    y_spacing * (f32)(new_cursor - 0x10) +
-                        HSD_JObjGetTranslationY(data->jobjs[4]));
+                                      HSD_JObjGetTranslationX(data->jobjs[6]));
+                HSD_JObjSetTranslateY(
+                    cjobj, y_spacing * (f32) (new_cursor - 0x10) +
+                               HSD_JObjGetTranslationY(data->jobjs[4]));
             }
         }
     }
@@ -473,20 +466,17 @@ void mnItemSw_8023453C(HSD_GObj* gobj, u8 arg1, u8 arg2)
             if ((u8) mn_804A04F0.hovered_selection == 0x1F ||
                 (u8) mn_804A04F0.hovered_selection == 0x20)
             {
-                HSD_JObjReqAnimAll(all_jobj,
-                    tbl->x30[7 + conf * 2]);
+                HSD_JObjReqAnimAll(all_jobj, tbl->x30[7 + conf * 2]);
             } else {
-                HSD_JObjReqAnimAll(all_jobj,
-                    tbl->x30[6 + conf * 2]);
+                HSD_JObjReqAnimAll(all_jobj, tbl->x30[6 + conf * 2]);
             }
             HSD_JObjAnimAll(all_jobj);
         } else {
             u8 confirmed = mn_804A04F0.confirmed_selection;
-            HSD_JObj* jobj = mnItemSw_8023405C(data,
-                (u8) mn_804A04F0.hovered_selection);
+            HSD_JObj* jobj =
+                mnItemSw_8023405C(data, (u8) mn_804A04F0.hovered_selection);
             lb_80011E24(jobj, &sp3C, 2, -1);
-            HSD_JObjReqAnimAll(sp3C,
-                mnItemSw_804D4BA0[confirmed]);
+            HSD_JObjReqAnimAll(sp3C, mnItemSw_804D4BA0[confirmed]);
             HSD_JObjAnimAll(sp3C);
         }
     }
@@ -502,11 +492,9 @@ void mnItemSw_8023453C(HSD_GObj* gobj, u8 arg1, u8 arg2)
         if ((u8) sel != 0x1F && (u8) sel != 0x20) {
             HSD_JObj* jobj = mnItemSw_8023405C(data, (u8) sel);
             lb_80011E24(jobj, &sp44, 8, -1);
-            mn_8022ED6C(sp44,
-                (AnimLoopSettings*) &tbl->x30[3]);
+            mn_8022ED6C(sp44, (AnimLoopSettings*) &tbl->x30[3]);
             lb_80011E24(jobj, &sp44, 3, -1);
-            mn_8022ED6C(sp44,
-                (AnimLoopSettings*) &tbl->x30[0]);
+            mn_8022ED6C(sp44, (AnimLoopSettings*) &tbl->x30[0]);
         }
     }
 }
@@ -596,16 +584,16 @@ void fn_80234C24(HSD_GObj* gobj)
                 case 1:
                 case 3:
                     data->x23 = 0;
-                    text = HSD_SisLib_803A5ACC(0, (s32) mn_804D6BB5,
-                                               -14.9527f, -4.6369f,
-                                               17.5f, 200.0f, 300.0f);
+                    text =
+                        HSD_SisLib_803A5ACC(0, (s32) mn_804D6BB5, -14.9527f,
+                                            -4.6369f, 17.5f, 200.0f, 300.0f);
                     data->jobjs[7] = (HSD_JObj*) text;
                     text->font_size.x = 0.0521f;
                     text->font_size.y = 0.0521f;
                     HSD_SisLib_803A6368(text, 2);
-                    text = HSD_SisLib_803A5ACC(0, (s32) mn_804D6BB5,
-                                               -0.52099997f, -4.6369f,
-                                               17.5f, 200.0f, 300.0f);
+                    text =
+                        HSD_SisLib_803A5ACC(0, (s32) mn_804D6BB5, -0.52099997f,
+                                            -4.6369f, 17.5f, 200.0f, 300.0f);
                     data->jobjs[8] = (HSD_JObj*) text;
                     text->font_size.x = 0.0521f;
                     text->font_size.y = 0.0521f;
@@ -635,19 +623,14 @@ void fn_80234C24(HSD_GObj* gobj)
     {
         u8 state = data->x23;
         if (state == 0 || state == 1 || state == 3) {
-            if ((s32) data->cursor !=
-                (s32) mn_804A04F0.hovered_selection)
-            {
+            if ((s32) data->cursor != (s32) mn_804A04F0.hovered_selection) {
                 hovered_changed = 1;
             }
             if ((u16) (mn_804A04F0.hovered_selection - 0x1F) <= 1U) {
-                if ((u8) data->x21 !=
-                    (u8) mn_804A04F0.confirmed_selection)
-                {
+                if ((u8) data->x21 != (u8) mn_804A04F0.confirmed_selection) {
                     confirmed_changed = 1;
                 }
-            } else if ((u8) data->items[mn_804A04F0
-                                             .hovered_selection] !=
+            } else if ((u8) data->items[mn_804A04F0.hovered_selection] !=
                        (u8) mn_804A04F0.confirmed_selection)
             {
                 confirmed_changed = 1;
@@ -780,7 +763,7 @@ HSD_GObj* mnItemSw_802351A0(s32 arg0)
     }
 
     y_spacing = HSD_JObjGetTranslationY(data->jobjs[5]) -
-        HSD_JObjGetTranslationY(data->jobjs[4]);
+                HSD_JObjGetTranslationY(data->jobjs[4]);
 
     for (i = 0; i < 0x1F; i++) {
         HSD_JObj* item_jobj = mnItemSw_80235020((u8) i, data);
@@ -789,8 +772,7 @@ HSD_GObj* mnItemSw_802351A0(s32 arg0)
             HSD_JObjAddTranslationY(item_jobj, y_spacing * (f32) i);
         } else {
             HSD_JObjAddChild(data->jobjs[6], item_jobj);
-            HSD_JObjAddTranslationY(item_jobj,
-                y_spacing * (f32)(i - 0x10));
+            HSD_JObjAddTranslationY(item_jobj, y_spacing * (f32) (i - 0x10));
         }
     }
 
@@ -805,20 +787,20 @@ HSD_GObj* mnItemSw_802351A0(s32 arg0)
     } else {
         HSD_JObjClearFlagsAll(cjobj, 0x10);
         y_spacing = HSD_JObjGetTranslationY(data->jobjs[5]) -
-            HSD_JObjGetTranslationY(data->jobjs[4]);
+                    HSD_JObjGetTranslationY(data->jobjs[4]);
 
         if (cursor < 0x10) {
             HSD_JObjSetTranslateX(cjobj,
-                HSD_JObjGetTranslationX(data->jobjs[4]));
+                                  HSD_JObjGetTranslationX(data->jobjs[4]));
             HSD_JObjSetTranslateY(cjobj,
-                y_spacing * (f32) cursor +
-                    HSD_JObjGetTranslationY(data->jobjs[4]));
+                                  y_spacing * (f32) cursor +
+                                      HSD_JObjGetTranslationY(data->jobjs[4]));
         } else {
             HSD_JObjSetTranslateX(cjobj,
-                HSD_JObjGetTranslationX(data->jobjs[6]));
+                                  HSD_JObjGetTranslationX(data->jobjs[6]));
             HSD_JObjSetTranslateY(cjobj,
-                y_spacing * (f32)(cursor - 0x10) +
-                    HSD_JObjGetTranslationY(data->jobjs[4]));
+                                  y_spacing * (f32) (cursor - 0x10) +
+                                      HSD_JObjGetTranslationY(data->jobjs[4]));
         }
     }
 

@@ -450,9 +450,10 @@ void grIceMt_801F7728(Ground_GObj* gobj)
     Ground* gp = gobj->user_data;
     if (gp->gv.icemt.xD8 == 0) {
         grIceMt_801FA364(&gp->gv.corneria.xC8, &y, fn_801F8E58, gobj);
-        grIceMt_801F9ACC((HSD_GObj*) &gp->gv.corneria.xC4,
-                         grIceMt_801F96E0((HSD_GObj*) &gp->gv.corneria.xC4, -y),
-                         fn_801F9038, gobj);
+        grIceMt_801F9ACC(
+            (HSD_GObj*) &gp->gv.corneria.xC4,
+            grIceMt_801F96E0((HSD_GObj*) &gp->gv.corneria.xC4, -y),
+            fn_801F9038, gobj);
         grIceMt_801F9668(y);
     }
 }
@@ -1104,7 +1105,8 @@ void grIceMt_801F98A8(Ground_GObj* param1)
 
 /// #grIceMt_801F993C
 
-void grIceMt_801F9ACC(Ground_GObj* gobj, float y, HSD_GObjEvent ev, Ground_GObj* arg3)
+void grIceMt_801F9ACC(Ground_GObj* gobj, float y, HSD_GObjEvent ev,
+                      Ground_GObj* arg3)
 {
     HSD_GObj* jobj;
     double dVar3;

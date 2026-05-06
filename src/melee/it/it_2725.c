@@ -9903,8 +9903,7 @@ Item_GObj* it_8027CC88(Item_GObj* item_gobj_arg)
     u32 pad2[4];
 
     item_gobj_var = NULL;
-    if ((gm_8016B498() != 0) && (HSD_Randi(it_804D6D40->x14) == 0))
-    {
+    if ((gm_8016B498() != 0) && (HSD_Randi(it_804D6D40->x14) == 0)) {
         if (grLib_801C9E40() == 0) {
             var_r30 = Ground_801C5840();
             if (var_r30 != -1) {

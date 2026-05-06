@@ -4,9 +4,10 @@
 #include <placeholder.h>
 
 #include "baselib/forward.h"
-#include "lb/forward.h"
 
 #include "it/inlines.h"
+
+#include "lb/forward.h"
 
 #include <baselib/cobj.h>
 #include <baselib/fog.h>
