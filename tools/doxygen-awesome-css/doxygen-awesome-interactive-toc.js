@@ -32,7 +32,8 @@ class DoxygenAwesomeInteractiveToc {
     static hideMobileMenu = true;
     static headers = [];
 
-    static init() {
+    static init()
+    {
         window.addEventListener("load", () => {
             let toc = document.querySelector(".contents > .toc");
             if (toc) {
@@ -40,8 +41,7 @@ class DoxygenAwesomeInteractiveToc {
                 if (!DoxygenAwesomeInteractiveToc.hideMobileMenu) {
                     toc.classList.add("open");
                 }
-                document
-                    .querySelector(".contents > .toc > h3")
+                document.querySelector(".contents > .toc > h3")
                     ?.addEventListener("click", () => {
                         if (toc.classList.contains("open")) {
                             toc.classList.remove("open");
@@ -50,17 +50,15 @@ class DoxygenAwesomeInteractiveToc {
                         }
                     });
 
-                document
-                    .querySelectorAll(".contents > .toc > ul a")
+                document.querySelectorAll(".contents > .toc > ul a")
                     .forEach((node) => {
                         let id = node.getAttribute("href").substring(1);
                         DoxygenAwesomeInteractiveToc.headers.push({
-                            node: node,
-                            headerNode: document.getElementById(id),
+                            node : node,
+                            headerNode : document.getElementById(id),
                         });
 
-                        document
-                            .getElementById("doc-content")
+                        document.getElementById("doc-content")
                             ?.addEventListener("scroll", () => {
                                 DoxygenAwesomeInteractiveToc.update();
                             });
@@ -70,7 +68,8 @@ class DoxygenAwesomeInteractiveToc {
         });
     }
 
-    static update() {
+    static update()
+    {
         let active = DoxygenAwesomeInteractiveToc.headers[0]?.node;
         DoxygenAwesomeInteractiveToc.headers.forEach((header) => {
             let position = header.headerNode.getBoundingClientRect().top;

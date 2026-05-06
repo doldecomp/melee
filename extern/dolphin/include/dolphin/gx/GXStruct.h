@@ -8,8 +8,7 @@
 extern "C" {
 #endif
 
-typedef struct _GXRenderModeObj
-{
+typedef struct _GXRenderModeObj {
     /*0x00*/ VITVMode viTVmode;
     /*0x04*/ u16 fbWidth;
     /*0x06*/ u16 efbHeight;
@@ -25,43 +24,35 @@ typedef struct _GXRenderModeObj
     /*0x38*/ u8 vfilter[7];
 } GXRenderModeObj;
 
-typedef struct _GXColor
-{
+typedef struct _GXColor {
     u8 r, g, b, a;
 } GXColor;
 
-typedef struct _GXColorS10
-{
+typedef struct _GXColorS10 {
     s16 r, g, b, a;
 } GXColorS10;
 
-typedef struct _GXTexObj
-{
+typedef struct _GXTexObj {
     u32 dummy[8];
 } GXTexObj;
 
-typedef struct _GXLightObj
-{
+typedef struct _GXLightObj {
     u32 dummy[16];
 } GXLightObj;
 
-typedef struct _GXTexRegion
-{
+typedef struct _GXTexRegion {
     u32 dummy[4];
 } GXTexRegion;
 
-typedef struct _GXTlutObj
-{
+typedef struct _GXTlutObj {
     u32 dummy[3];
 } GXTlutObj;
 
-typedef struct _GXTlutRegion
-{
+typedef struct _GXTlutRegion {
     u32 dummy[4];
 } GXTlutRegion;
 
-typedef struct _GXFogAdjTable
-{
+typedef struct _GXFogAdjTable {
     u16 r[10];
 } GXFogAdjTable;
 

@@ -1,8 +1,8 @@
 #ifndef _DOLPHIN_DB_H_
 #define _DOLPHIN_DB_H_
 
-#include <dolphin/types.h>
 #include <dolphin/db/DBInterface.h>
+#include <dolphin/types.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -11,7 +11,7 @@ extern "C" {
 #define OS_DBINTERFACE_ADDR 0x00000040
 
 BOOL DBIsDebuggerPresent(void);
-void DBPrintf(char *str, ...);
+void DBPrintf(char* str, ...);
 
 #ifdef __cplusplus
 }

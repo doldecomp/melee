@@ -1,8 +1,8 @@
+#include "__vi.h"
+
 #include <dolphin/exi.h>
 #include <dolphin/os.h>
 #include <dolphin/vi.h>
-
-#include "__vi.h"
 
 static u8 shadowGPIOOE;
 static u8 shadowGPIOData;
@@ -13,7 +13,7 @@ static void setI2CEnable(int value);
 static int gpioOutput(u8 value);
 static int gpioOE(u8 value);
 static int gpioOut(u32 addr, u8 value);
-static int gpioInput(u8 *p);
+static int gpioInput(u8* p);
 
 void __VIInitI2C(void)
 {
@@ -134,7 +134,7 @@ static int gpioOut(u32 addr, u8 value)
     return 1;
 }
 
-static int gpioInput(u8 *p)
+static int gpioInput(u8* p)
 {
     u32 cmd;
 

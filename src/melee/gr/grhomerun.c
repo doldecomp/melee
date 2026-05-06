@@ -151,8 +151,7 @@ void grHomeRun_8021DF50(Ground_GObj* gobj)
             f32 y, z;
             HSD_Text* text;
 
-            gp->gv.unk.xC8 =
-                (int) grHomeRun_8021EC58(gp->gv.homerun.xC6);
+            gp->gv.unk.xC8 = (int) grHomeRun_8021EC58(gp->gv.homerun.xC6);
             lb_8000B1CC((HSD_JObj*) gp->gv.unk.xCC, NULL, &pos);
 
             scale = Ground_801C0498();
@@ -163,8 +162,7 @@ void grHomeRun_8021DF50(Ground_GObj* gobj)
 
             scale = Ground_801C0498();
             text = (HSD_Text*) gp->gv.unk.xC8;
-            text->pos_x =
-                pos.x + (-1.0F) * (grHr_804D6AE4 * scale);
+            text->pos_x = pos.x + (-1.0F) * (grHr_804D6AE4 * scale);
             text->pos_y = y;
             text->pos_z = z;
         }
@@ -217,8 +215,7 @@ void grHomeRun_8021E0D4(Ground_GObj* gobj)
             f32 y, z;
             HSD_Text* text;
 
-            gp->gv.unk.xC8 =
-                (int) grHomeRun_8021EC58(gp->gv.homerun.xC6);
+            gp->gv.unk.xC8 = (int) grHomeRun_8021EC58(gp->gv.homerun.xC6);
             lb_8000B1CC((HSD_JObj*) gp->gv.unk.xCC, NULL, &pos);
 
             scale = Ground_801C0498();
@@ -229,8 +226,7 @@ void grHomeRun_8021E0D4(Ground_GObj* gobj)
 
             scale = Ground_801C0498();
             text = (HSD_Text*) gp->gv.unk.xC8;
-            text->pos_x =
-                pos.x + (-1.0F) * (grHr_804D6AE4 * scale);
+            text->pos_x = pos.x + (-1.0F) * (grHr_804D6AE4 * scale);
             text->pos_y = y;
             text->pos_z = z;
         }
@@ -283,8 +279,7 @@ void grHomeRun_8021E258(Ground_GObj* gobj)
             f32 y, z;
             HSD_Text* text;
 
-            gp->gv.unk.xC8 =
-                (int) grHomeRun_8021EC58(gp->gv.homerun.xC6);
+            gp->gv.unk.xC8 = (int) grHomeRun_8021EC58(gp->gv.homerun.xC6);
             lb_8000B1CC((HSD_JObj*) gp->gv.unk.xCC, NULL, &pos);
 
             scale = Ground_801C0498();
@@ -295,8 +290,7 @@ void grHomeRun_8021E258(Ground_GObj* gobj)
 
             scale = Ground_801C0498();
             text = (HSD_Text*) gp->gv.unk.xC8;
-            text->pos_x =
-                pos.x + (-1.0F) * (grHr_804D6AE4 * scale);
+            text->pos_x = pos.x + (-1.0F) * (grHr_804D6AE4 * scale);
             text->pos_y = y;
             text->pos_z = z;
         }
@@ -349,8 +343,7 @@ void grHomeRun_8021E3DC(Ground_GObj* gobj)
             f32 y, z;
             HSD_Text* text;
 
-            gp->gv.unk.xC8 =
-                (int) grHomeRun_8021EC58(gp->gv.homerun.xC6);
+            gp->gv.unk.xC8 = (int) grHomeRun_8021EC58(gp->gv.homerun.xC6);
             lb_8000B1CC((HSD_JObj*) gp->gv.unk.xCC, NULL, &pos);
 
             scale = Ground_801C0498();
@@ -361,8 +354,7 @@ void grHomeRun_8021E3DC(Ground_GObj* gobj)
 
             scale = Ground_801C0498();
             text = (HSD_Text*) gp->gv.unk.xC8;
-            text->pos_x =
-                pos.x + (-1.0F) * (grHr_804D6AE4 * scale);
+            text->pos_x = pos.x + (-1.0F) * (grHr_804D6AE4 * scale);
             text->pos_y = y;
             text->pos_z = z;
         }
@@ -413,7 +405,7 @@ void grHomeRun_8021EA30(f32* pos)
     }
 
     if (lbLang_IsSavedLanguageUS()) {
-        result = (f32)(result * 0.304788);
+        result = (f32) (result * 0.304788);
     }
 
     stage_info.x6E0 = 100.0F * result;

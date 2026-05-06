@@ -3,7 +3,6 @@
 #include <dolphin.h>
 #include <dolphin/syn.h>
 
-
 static float __SYNCentsTable[100] = {
     1.000000f, 1.000578f, 1.001156f, 1.001734f, 1.002313f, 1.002892f,
     1.003472f, 1.004052f, 1.004632f, 1.005212f, 1.005793f, 1.006374f,

@@ -1,36 +1,33 @@
-#include <string.h>
+#include "__gx.h"
 
+#include <macros.h>
+#include <string.h>
 #include <dolphin/base/PPCArch.h>
 #include <dolphin/gx.h>
 #include <dolphin/os.h>
 #include <dolphin/vi.h>
-#include <macros.h>
-
-#include "__gx.h"
 
 static struct __GXData_struct gxData;
-struct __GXData_struct *gx = &gxData;
+struct __GXData_struct* gx = &gxData;
 // DWARF info lists all of these as "void *", but these types make more sense.
-u16 *__memReg;
-u16 *__peReg;
-u16 *__cpReg;
-u32 *__piReg;
+u16* __memReg;
+u16* __peReg;
+u16* __cpReg;
+u32* __piReg;
 #if DEBUG
 GXBool __GXinBegin;
 #endif
 
 asm BOOL IsWriteGatherBufferEmpty(void)
 {
-    sync
-    mfspr r3, WPAR
-    andi. r3, r3, 1
+    sync mfspr r3, WPAR andi.r3, r3, 1
 }
 
 static void EnableWriteGatherPipe(void)
 {
     u32 hid2 = PPCMfhid2();
 
-    PPCMtwpar(OSUncachedToPhysical((void *)GXFIFO_ADDR));
+    PPCMtwpar(OSUncachedToPhysical((void*) GXFIFO_ADDR));
     hid2 |= 0x40000000;
     PPCMthid2(hid2);
 }
@@ -43,7 +40,8 @@ static void DisableWriteGatherPipe(void)
     PPCMthid2(hid2);
 }
 
-static GXTexRegion *__GXDefaultTexRegionCallback(GXTexObj *t_obj, GXTexMapID unused)
+static GXTexRegion* __GXDefaultTexRegionCallback(GXTexObj* t_obj,
+                                                 GXTexMapID unused)
 {
     GXTexFmt fmt = GXGetTexObjFmt(t_obj);
 
@@ -54,7 +52,7 @@ static GXTexRegion *__GXDefaultTexRegionCallback(GXTexObj *t_obj, GXTexMapID unu
     }
 }
 
-static GXTlutRegion *__GXDefaultTlutRegionCallback(u32 idx)
+static GXTlutRegion* __GXDefaultTlutRegionCallback(u32 idx)
 {
     if (idx >= 0x14U) {
         return NULL;
@@ -63,7 +61,7 @@ static GXTlutRegion *__GXDefaultTlutRegionCallback(u32 idx)
 }
 
 #if DEBUG
-static void __GXDefaultVerifyCallback(GXWarningLevel level, u32 id, char *msg)
+static void __GXDefaultVerifyCallback(GXWarningLevel level, u32 id, char* msg)
 {
     OSReport("Level %1d, Warning %3d: %s\n", level, id, msg);
 }
@@ -71,7 +69,7 @@ static void __GXDefaultVerifyCallback(GXWarningLevel level, u32 id, char *msg)
 
 GXFifoObj FifoObj;
 
-GXFifoObj *GXInit(void *base, u32 size)
+GXFifoObj* GXInit(void* base, u32 size)
 {
     u32 i;
     u32 reg;
@@ -149,8 +147,7 @@ GXFifoObj *GXInit(void *base, u32 size)
     reg = (freqBase / 0x1080) | 0x200 | 0x46000000;
     GX_WRITE_RAS_REG(reg);
 
-    for (i = GX_VTXFMT0; i < GX_MAX_VTXFMT; i++)
-    {
+    for (i = GX_VTXFMT0; i < GX_MAX_VTXFMT; i++) {
         SET_REG_FIELD(0, gx->vatA[i], 1, 30, 1);
         SET_REG_FIELD(0, gx->vatB[i], 1, 31, 1);
         {
@@ -173,9 +170,9 @@ GXFifoObj *GXInit(void *base, u32 size)
         GX_WRITE_XF_REG(0, reg1);
         SET_REG_FIELD(0, reg2, 1, 0, 1);
         GX_WRITE_XF_REG(0x12, reg2);
-    #if DEBUG
+#if DEBUG
         __gxVerif->xfRegsDirty[0] = 0;
-    #endif
+#endif
     }
     {
         u32 reg = 0;
@@ -187,15 +184,20 @@ GXFifoObj *GXInit(void *base, u32 size)
         GX_WRITE_RAS_REG(reg);
     }
 
-    for (i = 0; i < 8; i++)
-        GXInitTexCacheRegion(&gx->TexRegions[i], 0, i * 0x8000, 0, 0x80000 + i * 0x8000, 0);
-    for (i = 0; i < 4; i++)
-        GXInitTexCacheRegion(&gx->TexRegionsCI[i], 0, (i * 2 + 8) * 0x8000, 0, (i * 2 + 9) * 0x8000, 0);
-    for (i = 0; i < 16; i++)
+    for (i = 0; i < 8; i++) {
+        GXInitTexCacheRegion(&gx->TexRegions[i], 0, i * 0x8000, 0,
+                             0x80000 + i * 0x8000, 0);
+    }
+    for (i = 0; i < 4; i++) {
+        GXInitTexCacheRegion(&gx->TexRegionsCI[i], 0, (i * 2 + 8) * 0x8000, 0,
+                             (i * 2 + 9) * 0x8000, 0);
+    }
+    for (i = 0; i < 16; i++) {
         GXInitTlutRegion(&gx->TlutRegions[i], 0xC0000 + i * 0x2000, 16);
-    for (i = 0; i < 4; i++)
+    }
+    for (i = 0; i < 4; i++) {
         GXInitTlutRegion(&gx->TlutRegions[i + 16], 0xE0000 + i * 0x8000, 64);
-
+    }
 
     __cpReg[3] = 0;
     SET_REG_FIELD(0, gx->perfSel, 4, 4, 0);
@@ -220,16 +222,22 @@ GXFifoObj *GXInit(void *base, u32 size)
 void __GXInitGX(void)
 {
     f32 identity_mtx[3][4];
-    GXColor clear = {64, 64, 64, 255};
-    GXColor black = {0, 0, 0, 0};
-    GXColor white = {255, 255, 255, 255};
+    GXColor clear = { 64, 64, 64, 255 };
+    GXColor black = { 0, 0, 0, 0 };
+    GXColor white = { 255, 255, 255, 255 };
     u32 i;
 
-    GXRenderModeObj *rmode;
+    GXRenderModeObj* rmode;
     switch (VIGetTvFormat()) {
-    case VI_NTSC: rmode = &GXNtsc480IntDf; break;
-    case VI_PAL:  rmode = &GXPal528IntDf;  break;
-    case VI_MPAL: rmode = &GXMpal480IntDf; break;
+    case VI_NTSC:
+        rmode = &GXNtsc480IntDf;
+        break;
+    case VI_PAL:
+        rmode = &GXPal528IntDf;
+        break;
+    case VI_MPAL:
+        rmode = &GXMpal480IntDf;
+        break;
     default:
         ASSERTMSGLINE(0x38B, 0, "GXInit: invalid TV format");
         rmode = &GXNtsc480IntDf;
@@ -281,10 +289,12 @@ void __GXInitGX(void)
     GXSetScissor(0, 0, rmode->fbWidth, rmode->efbHeight);
     GXSetScissorBoxOffset(0, 0);
     GXSetNumChans(0);
-    GXSetChanCtrl(GX_COLOR0A0, GX_DISABLE, GX_SRC_REG, GX_SRC_VTX, GX_LIGHT_NULL, GX_DF_NONE, GX_AF_NONE);
+    GXSetChanCtrl(GX_COLOR0A0, GX_DISABLE, GX_SRC_REG, GX_SRC_VTX,
+                  GX_LIGHT_NULL, GX_DF_NONE, GX_AF_NONE);
     GXSetChanAmbColor(GX_COLOR0A0, black);
     GXSetChanMatColor(GX_COLOR0A0, white);
-    GXSetChanCtrl(GX_COLOR1A1, GX_DISABLE, GX_SRC_REG, GX_SRC_VTX, GX_LIGHT_NULL, GX_DF_NONE, GX_AF_NONE);
+    GXSetChanCtrl(GX_COLOR1A1, GX_DISABLE, GX_SRC_REG, GX_SRC_VTX,
+                  GX_LIGHT_NULL, GX_DF_NONE, GX_AF_NONE);
     GXSetChanAmbColor(GX_COLOR1A1, black);
     GXSetChanMatColor(GX_COLOR1A1, white);
     GXInvalidateTexAll();
@@ -302,33 +312,45 @@ void __GXInitGX(void)
     GXSetTevOrder(GX_TEVSTAGE5, GX_TEXCOORD5, GX_TEXMAP5, GX_COLOR0A0);
     GXSetTevOrder(GX_TEVSTAGE6, GX_TEXCOORD6, GX_TEXMAP6, GX_COLOR0A0);
     GXSetTevOrder(GX_TEVSTAGE7, GX_TEXCOORD7, GX_TEXMAP7, GX_COLOR0A0);
-    GXSetTevOrder(GX_TEVSTAGE8, GX_TEXCOORD_NULL, GX_TEXMAP_NULL, GX_COLOR_NULL);
-    GXSetTevOrder(GX_TEVSTAGE9, GX_TEXCOORD_NULL, GX_TEXMAP_NULL, GX_COLOR_NULL);
-    GXSetTevOrder(GX_TEVSTAGE10, GX_TEXCOORD_NULL, GX_TEXMAP_NULL, GX_COLOR_NULL);
-    GXSetTevOrder(GX_TEVSTAGE11, GX_TEXCOORD_NULL, GX_TEXMAP_NULL, GX_COLOR_NULL);
-    GXSetTevOrder(GX_TEVSTAGE12, GX_TEXCOORD_NULL, GX_TEXMAP_NULL, GX_COLOR_NULL);
-    GXSetTevOrder(GX_TEVSTAGE13, GX_TEXCOORD_NULL, GX_TEXMAP_NULL, GX_COLOR_NULL);
-    GXSetTevOrder(GX_TEVSTAGE14, GX_TEXCOORD_NULL, GX_TEXMAP_NULL, GX_COLOR_NULL);
-    GXSetTevOrder(GX_TEVSTAGE15, GX_TEXCOORD_NULL, GX_TEXMAP_NULL, GX_COLOR_NULL);
+    GXSetTevOrder(GX_TEVSTAGE8, GX_TEXCOORD_NULL, GX_TEXMAP_NULL,
+                  GX_COLOR_NULL);
+    GXSetTevOrder(GX_TEVSTAGE9, GX_TEXCOORD_NULL, GX_TEXMAP_NULL,
+                  GX_COLOR_NULL);
+    GXSetTevOrder(GX_TEVSTAGE10, GX_TEXCOORD_NULL, GX_TEXMAP_NULL,
+                  GX_COLOR_NULL);
+    GXSetTevOrder(GX_TEVSTAGE11, GX_TEXCOORD_NULL, GX_TEXMAP_NULL,
+                  GX_COLOR_NULL);
+    GXSetTevOrder(GX_TEVSTAGE12, GX_TEXCOORD_NULL, GX_TEXMAP_NULL,
+                  GX_COLOR_NULL);
+    GXSetTevOrder(GX_TEVSTAGE13, GX_TEXCOORD_NULL, GX_TEXMAP_NULL,
+                  GX_COLOR_NULL);
+    GXSetTevOrder(GX_TEVSTAGE14, GX_TEXCOORD_NULL, GX_TEXMAP_NULL,
+                  GX_COLOR_NULL);
+    GXSetTevOrder(GX_TEVSTAGE15, GX_TEXCOORD_NULL, GX_TEXMAP_NULL,
+                  GX_COLOR_NULL);
 
     GXSetNumTevStages(1);
     GXSetTevOp(GX_TEVSTAGE0, GX_REPLACE);
     GXSetAlphaCompare(GX_ALWAYS, 0, GX_AOP_AND, GX_ALWAYS, 0);
     GXSetZTexture(GX_ZT_DISABLE, GX_TF_Z8, 0);
-    for (i = GX_TEVSTAGE0; i < GX_MAX_TEVSTAGE; i++)
-    {
-        GXSetTevKColorSel((GXTevStageID)i, GX_TEV_KCSEL_1_4);
-        GXSetTevKAlphaSel((GXTevStageID)i, GX_TEV_KASEL_1);
-        GXSetTevSwapMode((GXTevStageID)i, GX_TEV_SWAP0, GX_TEV_SWAP0);
+    for (i = GX_TEVSTAGE0; i < GX_MAX_TEVSTAGE; i++) {
+        GXSetTevKColorSel((GXTevStageID) i, GX_TEV_KCSEL_1_4);
+        GXSetTevKAlphaSel((GXTevStageID) i, GX_TEV_KASEL_1);
+        GXSetTevSwapMode((GXTevStageID) i, GX_TEV_SWAP0, GX_TEV_SWAP0);
     }
 
-    GXSetTevSwapModeTable(GX_TEV_SWAP0, GX_CH_RED, GX_CH_GREEN, GX_CH_BLUE, GX_CH_ALPHA);
-    GXSetTevSwapModeTable(GX_TEV_SWAP1, GX_CH_RED, GX_CH_RED, GX_CH_RED, GX_CH_ALPHA);
-    GXSetTevSwapModeTable(GX_TEV_SWAP2, GX_CH_GREEN, GX_CH_GREEN, GX_CH_GREEN, GX_CH_ALPHA);
-    GXSetTevSwapModeTable(GX_TEV_SWAP3, GX_CH_BLUE, GX_CH_BLUE, GX_CH_BLUE, GX_CH_ALPHA);
+    GXSetTevSwapModeTable(GX_TEV_SWAP0, GX_CH_RED, GX_CH_GREEN, GX_CH_BLUE,
+                          GX_CH_ALPHA);
+    GXSetTevSwapModeTable(GX_TEV_SWAP1, GX_CH_RED, GX_CH_RED, GX_CH_RED,
+                          GX_CH_ALPHA);
+    GXSetTevSwapModeTable(GX_TEV_SWAP2, GX_CH_GREEN, GX_CH_GREEN, GX_CH_GREEN,
+                          GX_CH_ALPHA);
+    GXSetTevSwapModeTable(GX_TEV_SWAP3, GX_CH_BLUE, GX_CH_BLUE, GX_CH_BLUE,
+                          GX_CH_ALPHA);
 
-    for (i = GX_TEVSTAGE0; i < GX_MAX_TEVSTAGE; i++)
-        GXSetTevDirect((GXTevStageID)i);
+    for (i = GX_TEVSTAGE0; i < GX_MAX_TEVSTAGE; i++) {
+        GXSetTevDirect((GXTevStageID) i);
+    }
     GXSetNumIndStages(0);
     GXSetIndTexCoordScale(GX_INDTEXSTAGE0, GX_ITS_1, GX_ITS_1);
     GXSetIndTexCoordScale(GX_INDTEXSTAGE1, GX_ITS_1, GX_ITS_1);
@@ -346,13 +368,14 @@ void __GXInitGX(void)
     GXSetDstAlpha(GX_DISABLE, 0);
     GXSetPixelFmt(GX_PF_RGB8_Z24, GX_ZC_LINEAR);
     GXSetFieldMask(GX_ENABLE, GX_ENABLE);
-    GXSetFieldMode(rmode->field_rendering,
-                   ((rmode->viHeight == 2 * rmode->xfbHeight) ? GX_ENABLE : GX_DISABLE));
+    GXSetFieldMode(
+        rmode->field_rendering,
+        ((rmode->viHeight == 2 * rmode->xfbHeight) ? GX_ENABLE : GX_DISABLE));
 
     GXSetDispCopySrc(0, 0, rmode->fbWidth, rmode->efbHeight);
     GXSetDispCopyDst(rmode->fbWidth, rmode->efbHeight);
-    GXSetDispCopyYScale((f32)(rmode->xfbHeight) / (f32)(rmode->efbHeight));
-    GXSetCopyClamp((GXFBClamp)(GX_CLAMP_TOP | GX_CLAMP_BOTTOM));
+    GXSetDispCopyYScale((f32) (rmode->xfbHeight) / (f32) (rmode->efbHeight));
+    GXSetCopyClamp((GXFBClamp) (GX_CLAMP_TOP | GX_CLAMP_BOTTOM));
     GXSetCopyFilter(rmode->aa, rmode->sample_pattern, GX_TRUE, rmode->vfilter);
     GXSetDispCopyGamma(GX_GM_1_0);
     GXSetDispCopyFrame2Field(GX_COPY_PROGRESSIVE);

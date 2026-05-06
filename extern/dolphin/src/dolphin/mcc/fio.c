@@ -16,7 +16,7 @@ volatile static u32 gStreamReady;
 static u8 gLastErr;
 static int bAsyncIsRead;
 static enum FIO_ASYNC_STATE bAsyncBusy;
-static void * bAsyncBuffer;
+static void* bAsyncBuffer;
 static u32 gAsyncDataSize;
 static u32 gRequestSequenceNumber;
 
@@ -24,39 +24,47 @@ static u32 gRequestSequenceNumber;
 static int fioIsInitialized();
 static u16 EndianConvert16(u16 n);
 static u32 EndianConvert32(u32 n);
-static int MPDWaiting(int timeout, volatile int * flag, int value);
+static int MPDWaiting(int timeout, volatile int* flag, int value);
 static void ShowChannelInfo(enum MCC_CHANNEL chID);
-static void fioErrorReport(char * msg);
+static void fioErrorReport(char* msg);
 static void fioMccChannelEvent(enum MCC_CHANNEL chID, u32 event, u32 value);
-static void *fioPacketMakeHeader(u32 fioCode, u32 dataSize, int bEndianConvert);
-static int fioPacketSendPacket(u8 sizeOfBlocks, void *pTopOfSecondBlockData);
-static void *fioPacketReceiveResult(u32 fioCode, int bDone);
+static void* fioPacketMakeHeader(u32 fioCode, u32 dataSize,
+                                 int bEndianConvert);
+static int fioPacketSendPacket(u8 sizeOfBlocks, void* pTopOfSecondBlockData);
+static void* fioPacketReceiveResult(u32 fioCode, int bDone);
 static void fioPacketReceiveDone(void);
-static int fioPacketRead(int fd, void *buffer, int size, int async);
-static int fioPacketWrite(int fd, void *buffer, int size, int async);
-static int fioPacketResultRead(void *buffer, u32 dataSize);
-static int fioPacketResultWrite(void *buffer, u32 dataSize);
+static int fioPacketRead(int fd, void* buffer, int size, int async);
+static int fioPacketWrite(int fd, void* buffer, int size, int async);
+static int fioPacketResultRead(void* buffer, u32 dataSize);
+static int fioPacketResultWrite(void* buffer, u32 dataSize);
 
-static int fioIsInitialized() {
+static int fioIsInitialized()
+{
     return !!gChID;
 }
 
-static u16 EndianConvert16(u16 n) {
+static u16 EndianConvert16(u16 n)
+{
     return ((n & 0x00FF) << 8) | ((n & 0xFF00) >> 8);
 }
 
-static u32 EndianConvert32(u32 n) {
-    return EndianConvert16((n >> 16) & 0xFFFF) | (EndianConvert16(n & 0xFFFF) << 0x10);
+static u32 EndianConvert32(u32 n)
+{
+    return EndianConvert16((n >> 16) & 0xFFFF) |
+           (EndianConvert16(n & 0xFFFF) << 0x10);
 }
 
-static int MPDWaiting(int timeout, volatile int * flag, int value) {
+static int MPDWaiting(int timeout, volatile int* flag, int value)
+{
     u32 tickStart;
     u32 tickDist;
 
     tickStart = OSGetTick();
-    while(*flag != value) {
+    while (*flag != value) {
         tickDist = OSGetTick() - tickStart;
-        tickDist = (tickDist & 0x80000000) ? (0x80000000 - tickStart) + OSGetTick() : tickDist;
+        tickDist = (tickDist & 0x80000000)
+                       ? (0x80000000 - tickStart) + OSGetTick()
+                       : tickDist;
         if (OSTicksToSeconds(tickDist) >= timeout) {
             OSReport("Error:Time is over.\n");
             return 0;
@@ -65,60 +73,67 @@ static int MPDWaiting(int timeout, volatile int * flag, int value) {
     return 1;
 }
 
-static void ShowChannelInfo(enum MCC_CHANNEL chID) {
+static void ShowChannelInfo(enum MCC_CHANNEL chID)
+{
     MCC_Info info;
 
     MCCGetChannelInfo(chID, &info);
-    OSReport("%2d: FirstBlock:%02d,BlockLength:%02d,Connect:%s,Lock:%s.\n", chID, info.firstBlock, info.blockLength,
-                                                                            (info.connect == 0)  ? "DISCONNECT" : 
-                                                                            (info.connect == 1)  ? "HOST_OPEN" : 
-                                                                            (info.connect == 2)  ? "TARGET_OPEN" : 
-                                                                            (info.connect == 3)  ? "CONNECTED" : "UNKNOWN",
-                                                                            (info.isLocked == 0) ? "UNLOCKED" : 
-                                                                            (info.isLocked == 1) ? "LOCKED" : "UNKNOWN");
+    OSReport("%2d: FirstBlock:%02d,BlockLength:%02d,Connect:%s,Lock:%s.\n",
+             chID, info.firstBlock, info.blockLength,
+             (info.connect == 0)   ? "DISCONNECT"
+             : (info.connect == 1) ? "HOST_OPEN"
+             : (info.connect == 2) ? "TARGET_OPEN"
+             : (info.connect == 3) ? "CONNECTED"
+                                   : "UNKNOWN",
+             (info.isLocked == 0)   ? "UNLOCKED"
+             : (info.isLocked == 1) ? "LOCKED"
+                                    : "UNKNOWN");
 }
 
-static void fioErrorReport(char * msg) {
+static void fioErrorReport(char* msg)
+{
     OSReport("[fio] Error: %s\n", msg);
 }
 
-static void fioMccChannelEvent(enum MCC_CHANNEL chID, u32 event, u32 value) {
+static void fioMccChannelEvent(enum MCC_CHANNEL chID, u32 event, u32 value)
+{
     u32 notify;
 
-    switch(event) {
-        case 0x1:
-            gChID = chID;
+    switch (event) {
+    case 0x1:
+        gChID = chID;
+        return;
+    case 0x2:
+        gChID = 0;
+        return;
+    case 0x100:
+        notify = value & 0xF00000;
+        switch (notify) {
+        case 0x200000:
+            if ((u16) value == 0x120) {
+                gQuery = 1;
+            }
             return;
-        case 0x2:
-            gChID = 0;
-            return;
-        case 0x100:
-            notify = value & 0xF00000;
-            switch (notify) {                         
-            case 0x200000:                              
-                if ((u16)value == 0x120) {
-                    gQuery = 1;
-                }
+        case 0xF00000:
+            gProcDone = 1;
+            if ((s32) bAsyncBusy != 0) {
+                bAsyncBusy = 2;
                 return;
-            case 0xF00000:                              
-                gProcDone = 1;
-                if ((s32) bAsyncBusy != 0) {
-                    bAsyncBusy = 2;
-                    return;
-                }
-                break;
             }
             break;
-        case 0x10:
-            gStreamReady = 0x10U;
-            return;
-        case 0x20:
-            gStreamReady = 0x20U;
-            break;
+        }
+        break;
+    case 0x10:
+        gStreamReady = 0x10U;
+        return;
+    case 0x20:
+        gStreamReady = 0x20U;
+        break;
     }
 }
 
-int FIOInit(enum MCC_EXI exiChannel, enum MCC_CHANNEL chID, u8 blockSize) {
+int FIOInit(enum MCC_EXI exiChannel, enum MCC_CHANNEL chID, u8 blockSize)
+{
     if (MCCInit(exiChannel, 0xA, 0) == 0) {
         gLastErr = 0x87;
         goto exit;
@@ -143,7 +158,8 @@ exit:;
     return 0;
 }
 
-void FIOExit(void) {
+void FIOExit(void)
+{
     if (MCCClose(gChID) == 0) {
         gLastErr = 0x87;
         return;
@@ -159,7 +175,8 @@ void FIOExit(void) {
     bAsyncIsRead = 0;
 }
 
-int FIOQuery(void) {
+int FIOQuery(void)
+{
     u32 tick;
 
     if (fioIsInitialized()) {
@@ -177,23 +194,26 @@ int FIOQuery(void) {
     }
 exit:;
     tick = OSGetTick();
-    do {} while(OSTicksToSeconds(OSGetTick() - tick) < 5);
+    do {
+    } while (OSTicksToSeconds(OSGetTick() - tick) < 5);
     return 0;
 }
 
-u8 FIOGetLastError() {
+u8 FIOGetLastError()
+{
     return gLastErr;
 }
 
-int FIOFopen(const char *filename, u32 mode) {
+int FIOFopen(const char* filename, u32 mode)
+{
     struct FIO_Code {
         /* 0x00 */ u32 flag;
         /* 0x04 */ s8 filename; // dynamic length
-    } *code;
+    }* code;
     struct FIO_Coder {
         /* 0x00 */ u32 result;
         /* 0x04 */ u32 descriptor;
-    } *coder;
+    }* coder;
 
     if (filename == NULL) {
         gLastErr = 0xB0;
@@ -207,7 +227,8 @@ int FIOFopen(const char *filename, u32 mode) {
         gLastErr = 0xA1;
         goto exit;
     }
-    code = fioPacketMakeHeader(0, strlen(filename) + sizeof(u32) + sizeof(s8), 0);
+    code =
+        fioPacketMakeHeader(0, strlen(filename) + sizeof(u32) + sizeof(s8), 0);
     code->flag = mode;
     memcpy(&code->filename, filename, strlen(filename) + 1);
     if (fioPacketSendPacket(1U, NULL) != 0) {
@@ -225,13 +246,14 @@ exit:;
     return -1;
 }
 
-int FIOFclose(int handle) {
+int FIOFclose(int handle)
+{
     struct FIO_Code {
         /* 0x00 */ u32 descriptor;
-    } * code;
+    }* code;
     struct FIO_Coder {
         /* 0x00 */ u32 result;
-    } * coder;
+    }* coder;
 
     if (handle == 0) {
         gLastErr = 0xB0;
@@ -258,8 +280,9 @@ exit:;
     return 0;
 }
 
-u32 FIOFread(int handle, void *data, u32 size) {
-    char * pBuf;
+u32 FIOFread(int handle, void* data, u32 size)
+{
+    char* pBuf;
     volatile int nSizeRemain;
     int nResult;
     int nReadSize;
@@ -299,7 +322,8 @@ exit:;
     return -1;
 }
 
-u32 FIOFwrite(int handle, void * data, u32 size) {
+u32 FIOFwrite(int handle, void* data, u32 size)
+{
     volatile int nSizeRemain;
     int nResult;
     int nWriteSize;
@@ -338,16 +362,17 @@ exit:;
     return -1;
 }
 
-u32 FIOFseek(int handle, long offset, u32 mode) {
+u32 FIOFseek(int handle, long offset, u32 mode)
+{
     struct FIO_Code {
         /* 0x00 */ u32 descriptor;
         /* 0x04 */ u32 offset;
         /* 0x08 */ u32 base;
-    } *code;
+    }* code;
     struct FIO_Coder {
         /* 0x00 */ u32 result;
         /* 0x04 */ u32 pos;
-    } *coder;
+    }* coder;
 
     if (handle == 0) {
         gLastErr = 0xB0;
@@ -388,8 +413,9 @@ exit:
     return -1;
 }
 
-int FIOFprintf(int handle, const char *format, ...) {
-    char * str;
+int FIOFprintf(int handle, const char* format, ...)
+{
+    char* str;
     int length;
     int err;
     va_list argptr;
@@ -410,15 +436,15 @@ int FIOFprintf(int handle, const char *format, ...) {
         gLastErr = 0xA1;
         goto exit;
     }
-    str = (void*)gPrintBuf;
+    str = (void*) gPrintBuf;
     va_start(argptr, format);
     err = vsprintf(str, format, argptr);
-    if ((length = strlen((void*)str)) < 0x100) {
+    if ((length = strlen((void*) str)) < 0x100) {
         str[length] = 0;
     } else {
         str[0xFF] = 0;
     }
-    length = strlen((void*)str);
+    length = strlen((void*) str);
     if (err < 0) {
         gLastErr = 0x89;
         return -1;
@@ -430,13 +456,14 @@ exit:;
     return -1;
 }
 
-int FIOFflush(int handle) {
+int FIOFflush(int handle)
+{
     struct FIO_Code {
         /* 0x00 */ u32 descriptor;
-    } * code;
+    }* code;
     struct FIO_Coder {
         /* 0x00 */ u32 result;
-    } * coder;
+    }* coder;
 
     if (handle == 0) {
         gLastErr = 0xB0;
@@ -463,20 +490,21 @@ int FIOFflush(int handle) {
             return 1;
         }
     }
-    
+
 exit:
     return 0;
 }
 
-int FIOFstat(int handle, struct FIO_Stat *stat) {
+int FIOFstat(int handle, struct FIO_Stat* stat)
+{
     struct FIO_Code {
         /* 0x00 */ u32 descriptor;
-    } * code;
+    }* code;
     struct FIO_Coder {
         /* 0x00 */ u32 result;
         /* 0x04 */ struct FIO_Stat stat;
-    } * coder;
-    
+    }* coder;
+
     if (handle == 0) {
         gLastErr = 0xB0;
         goto exit;
@@ -513,13 +541,14 @@ exit:;
     return 0;
 }
 
-int FIOFerror(int handle) {
+int FIOFerror(int handle)
+{
     struct FIO_Code {
         /* 0x00 */ u32 descriptor;
-    } * code;
+    }* code;
     struct FIO_Coder {
         /* 0x00 */ u32 result;
-    } * coder;
+    }* coder;
 
     if (handle == 0) {
         gLastErr = 0xB0;
@@ -550,14 +579,15 @@ exit:;
     return gLastErr;
 }
 
-int FIOFindFirst(const char *filename, struct FIO_Finddata *finddata) {
+int FIOFindFirst(const char* filename, struct FIO_Finddata* finddata)
+{
     struct FIO_Code {
         /* 0x00 */ u8 filename; // dynamic length
-    } * code;
+    }* code;
     struct FIO_Coder {
         /* 0x00 */ u32 result;
         /* 0x04 */ struct FIO_Finddata findData;
-    } * coder;
+    }* coder;
 
     if (filename == NULL) {
         gLastErr = 0xB0;
@@ -572,12 +602,13 @@ int FIOFindFirst(const char *filename, struct FIO_Finddata *finddata) {
         goto exit;
     }
     code = fioPacketMakeHeader(0x10U, strlen(filename) + 1, 0);
-    strcpy((void*)&code->filename, filename);
+    strcpy((void*) &code->filename, filename);
     if (fioPacketSendPacket(1U, NULL) != 0) {
         coder = fioPacketReceiveResult(0x11, 1);
         if (coder != NULL) {
             if (finddata) {
-                memcpy(finddata, &coder->findData, sizeof(struct FIO_Finddata));
+                memcpy(finddata, &coder->findData,
+                       sizeof(struct FIO_Finddata));
             }
             if (coder->result) {
                 gLastErr = coder->result;
@@ -591,14 +622,15 @@ exit:;
     return 0;
 }
 
-int FIOFindNext(struct FIO_Finddata *finddata) {
+int FIOFindNext(struct FIO_Finddata* finddata)
+{
     struct FIO_Code {
         /* 0x00 */ u32 reserved;
-    } * code;
+    }* code;
     struct FIO_Coder {
         /* 0x00 */ u32 result;
         /* 0x04 */ struct FIO_Finddata findData;
-    } * coder;
+    }* coder;
 
     if (finddata == NULL) {
         gLastErr = 0xB0;
@@ -614,7 +646,8 @@ int FIOFindNext(struct FIO_Finddata *finddata) {
         coder = fioPacketReceiveResult(0x13, 1);
         if (coder != NULL) {
             if (finddata) {
-                memcpy(finddata, &coder->findData, sizeof(struct FIO_Finddata));
+                memcpy(finddata, &coder->findData,
+                       sizeof(struct FIO_Finddata));
             }
             if (coder->result) {
                 gLastErr = coder->result;
@@ -628,7 +661,8 @@ exit:;
     return 0;
 }
 
-u32 FIOGetAsyncBufferSize(void) {
+u32 FIOGetAsyncBufferSize(void)
+{
     int nPacketSize;
     int nHeaderSize;
 
@@ -641,7 +675,8 @@ u32 FIOGetAsyncBufferSize(void) {
     return nPacketSize - nHeaderSize;
 }
 
-int FIOFreadAsync(int handle, void * data, u32 size) {
+int FIOFreadAsync(int handle, void* data, u32 size)
+{
     if (handle == 0) {
         gLastErr = 0xB0;
         goto exit;
@@ -674,7 +709,8 @@ exit:;
     return 0;
 }
 
-int FIOFwriteAsync(int handle, void * data, u32 size) {
+int FIOFwriteAsync(int handle, void* data, u32 size)
+{
     if (handle == 0) {
         gLastErr = 0xB0;
         goto exit;
@@ -708,7 +744,8 @@ exit:
     return 0;
 }
 
-int FIOCheckAsyncDone(u32 * result) {
+int FIOCheckAsyncDone(u32* result)
+{
     if (bAsyncBusy != 0) {
         if (bAsyncIsRead != 0) {
             if (result) {
@@ -723,14 +760,15 @@ int FIOCheckAsyncDone(u32 * result) {
     return 0;
 }
 
-static void *fioPacketMakeHeader(u32 fioCode, u32 dataSize, int bEndianConvert) {
-    MCC_Hdr *hdrDpci;
-    MCC_HdrFio *hdrFio;
-    char *data;
+static void* fioPacketMakeHeader(u32 fioCode, u32 dataSize, int bEndianConvert)
+{
+    MCC_Hdr* hdrDpci;
+    MCC_HdrFio* hdrFio;
+    char* data;
 
-    hdrDpci = (void*)&gBuf[0];
-    hdrFio = (void*)((char*)hdrDpci + 0x8);
-    data = (void*)((char*)hdrFio + 0x8);
+    hdrDpci = (void*) &gBuf[0];
+    hdrFio = (void*) ((char*) hdrDpci + 0x8);
+    data = (void*) ((char*) hdrFio + 0x8);
     gRequestSequenceNumber += 1;
     hdrFio->code = fioCode;
     hdrFio->number = gRequestSequenceNumber;
@@ -746,17 +784,22 @@ static void *fioPacketMakeHeader(u32 fioCode, u32 dataSize, int bEndianConvert) 
     return (data);
 }
 
-static int fioPacketSendPacket(u8 sizeOfBlocks, void *pTopOfSecondBlockData) {
+static int fioPacketSendPacket(u8 sizeOfBlocks, void* pTopOfSecondBlockData)
+{
     u32 oldMaskWrite;
     u8 indexOfBlocks;
 
     oldMaskWrite = MCCSetChannelEventMask(gChID, 0xA0);
-    do {} while (gProcBusy != 0);
-    do {} while (gProcDone == 0);
+    do {
+    } while (gProcBusy != 0);
+    do {
+    } while (gProcDone == 0);
     gProcDone = 0;
     gProcBusy = 1;
-    for(indexOfBlocks = 0; indexOfBlocks < sizeOfBlocks; indexOfBlocks++) {
-        if (MCCWrite(gChID, ((u8)indexOfBlocks << 0xD), &gBuf, 0x2000, 0) == 0) {
+    for (indexOfBlocks = 0; indexOfBlocks < sizeOfBlocks; indexOfBlocks++) {
+        if (MCCWrite(gChID, ((u8) indexOfBlocks << 0xD), &gBuf, 0x2000, 0) ==
+            0)
+        {
             gLastErr = 0x83;
             MCCSetChannelEventMask(gChID, oldMaskWrite);
             fioErrorReport("fioPacketSendPacket.MCCWrite.NG");
@@ -764,24 +807,27 @@ static int fioPacketSendPacket(u8 sizeOfBlocks, void *pTopOfSecondBlockData) {
         }
         if (sizeOfBlocks > 1U) {
             memcpy(&gBuf, pTopOfSecondBlockData, 0x2000);
-            ((char*)pTopOfSecondBlockData) += 0x2000;
+            ((char*) pTopOfSecondBlockData) += 0x2000;
         }
     }
     MCCSetChannelEventMask(gChID, oldMaskWrite);
     if (MCCNotify(gChID, 0xF00000) == 0) {
         gLastErr = 0x87;
-        fioErrorReport("fioPacketSendPacket.MCCNotify.NG"); // fake padding but idk whats going on here.
+        fioErrorReport(
+            "fioPacketSendPacket.MCCNotify.NG"); // fake padding but idk whats
+                                                 // going on here.
         return 0;
     }
     gLastErr = 0;
     return 1;
 }
 
-static void *fioPacketReceiveResult(u32 fioCode, int bDone) {
+static void* fioPacketReceiveResult(u32 fioCode, int bDone)
+{
     u32 oldMaskRead;
-    MCC_Hdr *hdrDpci;
-    MCC_HdrFio *hdrFio;
-    char *data;
+    MCC_Hdr* hdrDpci;
+    MCC_HdrFio* hdrFio;
+    char* data;
 
     if (MPDWaiting(0xAU, &gProcDone, 1) == 0) {
         gLastErr = 0x88;
@@ -793,9 +839,9 @@ static void *fioPacketReceiveResult(u32 fioCode, int bDone) {
         MCCSetChannelEventMask(gChID, oldMaskRead);
         goto exit;
     }
-    hdrDpci = (void*)((char*)&gBuf[0]);
-    hdrFio = (void*)((char*)hdrDpci + 0x8);
-    data = (void*)((char*)hdrFio + 0x8);
+    hdrDpci = (void*) ((char*) &gBuf[0]);
+    hdrFio = (void*) ((char*) hdrDpci + 0x8);
+    data = (void*) ((char*) hdrFio + 0x8);
     MCCSetChannelEventMask(gChID, oldMaskRead);
     if (hdrFio->code != fioCode) {
         gLastErr = 0x81;
@@ -815,15 +861,17 @@ exit:;
     return NULL;
 }
 
-static void fioPacketReceiveDone(void) {
+static void fioPacketReceiveDone(void)
+{
     gProcBusy = 0;
 }
 
-static int fioPacketRead(int fd, void *buffer, int size, int async) {
+static int fioPacketRead(int fd, void* buffer, int size, int async)
+{
     struct FIO_Code {
         /* 0x00 */ u32 descriptor;
         /* 0x04 */ u32 nbytes;
-    } *code;
+    }* code;
 
     code = fioPacketMakeHeader(4, sizeof(struct FIO_Code), 0);
     code->descriptor = fd;
@@ -839,11 +887,12 @@ static int fioPacketRead(int fd, void *buffer, int size, int async) {
     return -1;
 }
 
-static int fioPacketWrite(int fd, void *buffer, int size, int async) {
+static int fioPacketWrite(int fd, void* buffer, int size, int async)
+{
     struct FIO_Code {
         /* 0x00 */ u32 descriptor;
         /* 0x04 */ u32 nbytes;
-    } *code;
+    }* code;
 
     code = fioPacketMakeHeader(6U, 0xC, 0);
     code->descriptor = fd;
@@ -859,7 +908,8 @@ static int fioPacketWrite(int fd, void *buffer, int size, int async) {
     return -1;
 }
 
-static int fioPacketResultRead(void *buffer, u32 dataSize) {
+static int fioPacketResultRead(void* buffer, u32 dataSize)
+{
     int bResult;
     enum MCC_CHANNEL nChID;
     u8 nChannelBlocks;
@@ -878,15 +928,16 @@ static int fioPacketResultRead(void *buffer, u32 dataSize) {
     nChID = gmChID;
     nChannelBlocks = gmSizeOfBlocks;
     dataBlockSize = (u32) (dataSize + 0x1FFF) >> 0xDU;
-    nPacketSize = ((u8)nChannelBlocks << 0xD);
+    nPacketSize = ((u8) nChannelBlocks << 0xD);
     nDataPacketSize = dataSize / nPacketSize;
     nFraction = dataSize - (nDataPacketSize * nPacketSize);
     nFraction = OSRoundUp32B(nFraction) & ~1;
 
     if (nFraction != 0) {
-        do {} while ((u32) gStreamReady != 0x20U);
+        do {
+        } while ((u32) gStreamReady != 0x20U);
         MCCRead(nChID, 0, buffer, nFraction, 0);
-        ((char*)buffer) += nFraction;
+        ((char*) buffer) += nFraction;
     }
     if (nDataPacketSize != 0) {
         bNeedWaitDisconnect = 0;
@@ -907,9 +958,13 @@ static int fioPacketResultRead(void *buffer, u32 dataSize) {
                     MCCGetConnectionStatus(nChID, &state);
                 } while (state != 3);
 
-                if ((nDataPacketSize * nChannelBlocks) != (readDataBlocks = MCCStreamRead(nChID, buffer))) {
+                if ((nDataPacketSize * nChannelBlocks) !=
+                    (readDataBlocks = MCCStreamRead(nChID, buffer)))
+                {
                     err = MCCGetLastError();
-                    sprintf(msg, "fioPacketResultRead.MCCStreamRead.NG(Err:%d)", err);
+                    sprintf(msg,
+                            "fioPacketResultRead.MCCStreamRead.NG(Err:%d)",
+                            err);
                     fioErrorReport(msg);
                     bResult = 0;
                 }
@@ -921,7 +976,9 @@ static int fioPacketResultRead(void *buffer, u32 dataSize) {
                     do {
                         MCCGetConnectionStatus(nChID, &state);
                     } while (state != 0);
-                    if (MCCOpen(nChID, nChannelBlocks, fioMccChannelEvent) == 0) {
+                    if (MCCOpen(nChID, nChannelBlocks, fioMccChannelEvent) ==
+                        0)
+                    {
                         OSReport("MCCStream:MCCOpen.NG\n");
                         bResult = 0;
                     } else {
@@ -940,7 +997,7 @@ static int fioPacketResultRead(void *buffer, u32 dataSize) {
             /* 0x00 */ u32 result;
             /* 0x04 */ u32 nbytes;
             /* 0x08 */ char data;
-        } * coder;
+        }* coder;
 
         coder = fioPacketReceiveResult(5U, 0);
         if (coder == NULL) {
@@ -959,10 +1016,10 @@ static int fioPacketResultRead(void *buffer, u32 dataSize) {
     }
 exit:;
     return -1;
-    
 }
 
-static int fioPacketResultWrite(void *buffer, u32 dataSize) {
+static int fioPacketResultWrite(void* buffer, u32 dataSize)
+{
     register int nResult = 0;
     enum MCC_CHANNEL nChID;
     u8 nChannelBlocks = 0;
@@ -980,7 +1037,7 @@ static int fioPacketResultWrite(void *buffer, u32 dataSize) {
     if (MCCClose(nChID) == 0) {
         fioErrorReport("fioPacketResultWrite.MCCClose.NG");
     } else {
-loop:;
+    loop:;
         MCCGetConnectionStatus(nChID, &state);
         if (state != 0) {
             goto loop;
@@ -989,7 +1046,7 @@ loop:;
             fioErrorReport("fioPacketResultWrite.MCCStreamOpen.NG");
             goto loop;
         }
-        
+
         do {
             MCCGetConnectionStatus(nChID, &state);
         } while (state != 3);
@@ -1019,12 +1076,12 @@ exit_loop:;
         struct FIO_Coder {
             /* 0x00 */ u32 result;
             /* 0x04 */ u32 nbytes;
-        } * coder;
-    
+        }* coder;
+
         oldMaskWrite = MCCSetChannelEventMask(gChID, oldMaskWrite);
         coder = fioPacketReceiveResult(7U, 1);
         if (coder == NULL) {
-            (void)0;
+            (void) 0;
         } else {
             if (coder->result) {
                 gLastErr = coder->result;

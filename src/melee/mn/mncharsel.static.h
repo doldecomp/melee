@@ -247,7 +247,9 @@ static CSSDoorsData mnCharSel_803F0DFC = {
 
 static struct CSSDoorsData2 data2 = {
     { 0x35, 0x39, 0x36, 0x38, 0x37 },
-    0, 0, 0,
+    0,
+    0,
+    0,
     -2.2,
     3.7,
     13.7,

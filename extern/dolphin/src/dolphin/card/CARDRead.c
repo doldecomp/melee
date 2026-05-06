@@ -4,7 +4,6 @@
 #include <dolphin/card.h>
 #include <dolphin/os.h>
 
-
 // functions
 static void ReadCallback(s32 chan, s32 result);
 

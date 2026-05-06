@@ -31,7 +31,8 @@ typedef enum {
 
 extern unsigned char DemoStatEnable;
 
-void DEMOSetStats(DemoStatData * stat, unsigned long nstats, DEMO_STAT_DISP disp);
+void DEMOSetStats(DemoStatData* stat, unsigned long nstats,
+                  DEMO_STAT_DISP disp);
 void DEMOUpdateStats(unsigned char inc);
 void DEMOPrintStats(void);
 

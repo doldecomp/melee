@@ -1,22 +1,23 @@
+#include "__card.h"
+
 #include <dolphin.h>
 #include <dolphin/card.h>
-
-#include "__card.h"
 
 // functions
 static void BlockReadCallback(long chan, long result);
 static void BlockWriteCallback(long chan, long result);
 
-static void BlockReadCallback(long chan, long result) {
-    struct CARDControl * card;
-    void (* callback)(long, long);
+static void BlockReadCallback(long chan, long result)
+{
+    struct CARDControl* card;
+    void (*callback)(long, long);
 
     card = &__CARDBlock[chan];
 
     if ((result >= 0)) {
         card->xferred += 0x200;
         card->addr += 0x200;
-        ((u8*)card->buffer) += 0x200;
+        ((u8*) card->buffer) += 0x200;
 
         if (--card->repeat > 0) {
             result = __CARDReadSegment(chan, BlockReadCallback);
@@ -35,8 +36,10 @@ static void BlockReadCallback(long chan, long result) {
     }
 }
 
-long __CARDRead(long chan, unsigned long addr, long length, void * dst, void (* callback)(long, long)) {
-    struct CARDControl * card;
+long __CARDRead(long chan, unsigned long addr, long length, void* dst,
+                void (*callback)(long, long))
+{
+    struct CARDControl* card;
 
     ASSERTLINE(0x58, 0 < length && length % CARD_SEG_SIZE == 0);
     ASSERTLINE(0x59, 0 <= chan && chan < 2);
@@ -51,15 +54,16 @@ long __CARDRead(long chan, unsigned long addr, long length, void * dst, void (* 
     return __CARDReadSegment(chan, BlockReadCallback);
 }
 
-static void BlockWriteCallback(long chan, long result) {
-    struct CARDControl * card;
-    void (* callback)(long, long);
+static void BlockWriteCallback(long chan, long result)
+{
+    struct CARDControl* card;
+    void (*callback)(long, long);
 
     card = &__CARDBlock[chan];
     if (result >= 0) {
         card->xferred += 0x80;
         card->addr += 0x80;
-        ((u8*)card->buffer) += 0x80;
+        ((u8*) card->buffer) += 0x80;
 
         if (--card->repeat > 0) {
             result = __CARDWritePage(chan, BlockWriteCallback);
@@ -78,8 +82,10 @@ static void BlockWriteCallback(long chan, long result) {
     }
 }
 
-long __CARDWrite(long chan, unsigned long addr, long length, void * dst, void (* callback)(long, long)) {
-    struct CARDControl * card;
+long __CARDWrite(long chan, unsigned long addr, long length, void* dst,
+                 void (*callback)(long, long))
+{
+    struct CARDControl* card;
 
     ASSERTLINE(0x95, 0 < length && length % CARD_PAGE_SIZE == 0);
     ASSERTLINE(0x96, 0 <= chan && chan < 2);
@@ -96,7 +102,8 @@ long __CARDWrite(long chan, unsigned long addr, long length, void * dst, void (*
 
 #pragma push
 #pragma force_active on
-long CARDGetXferredBytes(long chan) {
+long CARDGetXferredBytes(long chan)
+{
     ASSERTLINE(0xB4, 0 <= chan && chan < 2);
     return __CARDBlock[chan].xferred;
 }

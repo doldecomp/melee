@@ -4,7 +4,6 @@
 #include <dolphin/amc/AmcTypes.h>
 #include <dolphin/os.h>
 
-
 typedef enum {
     AMC_EXI_NO_ERROR = 0,
     AMC_EXI_UNSELECTED,

@@ -2,7 +2,6 @@
 #include <dolphin/G2D.h>
 #include <dolphin/gx.h>
 
-
 static G2DGlob glob;
 
 void G2DInitSprite(G2DSprite* sprite)

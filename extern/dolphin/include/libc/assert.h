@@ -6,7 +6,8 @@
 #define static_assert(cond, msg) _Static_assert(cond, #msg)
 #else
 // The old, hacky way
-#define static_assert(cond, msg) typedef char static_assertion_##msg[(cond)?1:-1]
+#define static_assert(cond, msg)                                              \
+    typedef char static_assertion_##msg[(cond) ? 1 : -1]
 #endif
 
 #endif

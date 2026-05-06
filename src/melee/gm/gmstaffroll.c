@@ -2,6 +2,8 @@
 
 #include "gm_unsplit.h"
 
+#include "baselib/psappsrt.h"
+#include "baselib/psstructs.h"
 #include "ef/efasync.h"
 #include "ef/eflib.h"
 #include "gm/gmmain_lib.h"
@@ -14,12 +16,12 @@
 #include "lb/lblanguage.h"
 #include "sc/types.h"
 
-#include <baselib/particle.h>
 #include <math_ppc.h>
+#include <trigf.h>
+#include <baselib/particle.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/controller.h>
 #include <sysdolphin/baselib/debug.h>
-#include <sysdolphin/baselib/sislib.h>
 #include <sysdolphin/baselib/displayfunc.h>
 #include <sysdolphin/baselib/dobj.h>
 #include <sysdolphin/baselib/fog.h>
@@ -31,10 +33,7 @@
 #include <sysdolphin/baselib/lobj.h>
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/random.h>
-#include <trigf.h>
-
-#include "baselib/psappsrt.h"
-#include "baselib/psstructs.h"
+#include <sysdolphin/baselib/sislib.h>
 
 struct staffInfo_t {
     char pad_0[0x948];
@@ -452,7 +451,7 @@ void fn_801AB200(HSD_GObj* gobj)
 
     lb_80011E24(root, &cursor_jobj, 7, -1);
 
-    raw_stick = HSD_PadCopyStatus[(u8)gm_801BF010()].stickX;
+    raw_stick = HSD_PadCopyStatus[(u8) gm_801BF010()].stickX;
     if (raw_stick > 4) {
         adj_val = raw_stick - 4;
     } else if (raw_stick < -4) {
@@ -460,9 +459,9 @@ void fn_801AB200(HSD_GObj* gobj)
     } else {
         adj_val = 0;
     }
-    vel_x = (f32)adj_val;
+    vel_x = (f32) adj_val;
 
-    raw_stick = HSD_PadCopyStatus[(u8)gm_801BF010()].stickY;
+    raw_stick = HSD_PadCopyStatus[(u8) gm_801BF010()].stickY;
     if (raw_stick > 4) {
         adj_val = raw_stick - 4;
     } else if (raw_stick < -4) {
@@ -472,7 +471,7 @@ void fn_801AB200(HSD_GObj* gobj)
     }
 
     sq_x = vel_x * vel_x + 6400.0f;
-    vel_y = (f32)adj_val;
+    vel_y = (f32) adj_val;
     sq_x = sqrtf(sq_x);
     vel_x *= 0.00038461538f * sq_x;
     sq_y = vel_y * vel_y + 6400.0f;
@@ -499,30 +498,29 @@ void fn_801AB200(HSD_GObj* gobj)
             if (entry_idx < 7) {
                 tree_base = &gm_803DBFD8[entry_idx];
                 lb_80011E24(gm_804D682C, &ptcl_jobj,
-                            *(s32*)(tree_base + 0x11F0),
-                            -1);
+                            *(s32*) (tree_base + 0x11F0), -1);
                 if (entry_idx == 0) {
                     p = ptcl_jobj->u.ptcl;
-                    tally_color = *(s32*)&gm_804D42C4;
-                    p = *(void**)((u8*)p + 4);
-                    p = *(void**)((u8*)p + 4);
-                    p = *(void**)((u8*)p + 4);
-                    p = *(void**)((u8*)p + 8);
-                    p = *(void**)((u8*)p + 0xC);
-                    *(s32*)((u8*)p + 4) = tally_color;
-                } else if ((unsigned)(entry_idx - 2) <= 1u) {
+                    tally_color = *(s32*) &gm_804D42C4;
+                    p = *(void**) ((u8*) p + 4);
+                    p = *(void**) ((u8*) p + 4);
+                    p = *(void**) ((u8*) p + 4);
+                    p = *(void**) ((u8*) p + 8);
+                    p = *(void**) ((u8*) p + 0xC);
+                    *(s32*) ((u8*) p + 4) = tally_color;
+                } else if ((unsigned) (entry_idx - 2) <= 1u) {
                     p = ptcl_jobj->u.ptcl;
-                    tally_color = *(s32*)&gm_804D42C4;
-                    p = *(void**)((u8*)p + 4);
-                    p = *(void**)((u8*)p + 8);
-                    p = *(void**)((u8*)p + 0xC);
-                    *(s32*)((u8*)p + 4) = tally_color;
+                    tally_color = *(s32*) &gm_804D42C4;
+                    p = *(void**) ((u8*) p + 4);
+                    p = *(void**) ((u8*) p + 8);
+                    p = *(void**) ((u8*) p + 0xC);
+                    *(s32*) ((u8*) p + 4) = tally_color;
                 } else {
                     p = ptcl_jobj->u.ptcl;
-                    tally_color = *(s32*)&gm_804D42C4;
-                    p = *(void**)((u8*)p + 8);
-                    p = *(void**)((u8*)p + 0xC);
-                    *(s32*)((u8*)p + 4) = tally_color;
+                    tally_color = *(s32*) &gm_804D42C4;
+                    p = *(void**) ((u8*) p + 8);
+                    p = *(void**) ((u8*) p + 0xC);
+                    *(s32*) ((u8*) p + 4) = tally_color;
                 }
             } else {
                 staffInfo[entry_idx].win[0]->active_color = gm_804D42C4;
@@ -533,9 +531,8 @@ void fn_801AB200(HSD_GObj* gobj)
 
     gm_804D6804.x0 *= 0.29411763f;
     gm_804D6804.x4 *= 0.29411763f;
-    fov_scale = (f32)(1.1917536 *
-                      tanf((f32)(0.008726646471282037 *
-                                 HSD_CObjGetFov(gm_804D6830))));
+    fov_scale = (f32) (1.1917536 * tanf((f32) (0.008726646471282037 *
+                                               HSD_CObjGetFov(gm_804D6830))));
     gm_804D6804.x0 *= fov_scale;
     gm_804D6804.x4 *= fov_scale;
 
@@ -547,9 +544,8 @@ void fn_801AB200(HSD_GObj* gobj)
                 if (entry_idx != 0xB7 && entry_idx < 0xC0) {
                     hover_jobj = sort_entry->jobj;
                     half_size =
-                        0.16875f *
-                        (f32)gm_803DBFD8[entry_idx]
-                            .x11[lbLang_IsSavedLanguageUS()];
+                        0.16875f * (f32) gm_803DBFD8[entry_idx]
+                                       .x11[lbLang_IsSavedLanguageUS()];
                     gm_803DD1C8[0xa] = -half_size;
                     gm_803DD1C8[0x7] = -half_size;
                     gm_803DD1C8[0x10] = half_size;
@@ -557,67 +553,55 @@ void fn_801AB200(HSD_GObj* gobj)
                     broke = 0;
                     for (j = 0; j < 4; j++) {
                         PSMTXMultVec(sort_entry->mtx,
-                                     (Vec3*)((u8*)gm_803DBFD8 + 0x120C) + j,
+                                     (Vec3*) ((u8*) gm_803DBFD8 + 0x120C) + j,
                                      &xform_result);
                         if (xform_result.z >= -1.0f) {
                             broke = 1;
                             break;
                         }
                         proj[j * 2] = -xform_result.x / xform_result.z;
-                        proj[j * 2 + 1] =
-                            -xform_result.y / xform_result.z;
+                        proj[j * 2 + 1] = -xform_result.y / xform_result.z;
                     }
 
                     if (broke == 0 &&
-                        (proj[3] - proj[1]) *
-                                (gm_804D6804.x0 - proj[0]) >=
-                            (gm_804D6804.x4 - proj[1]) *
-                                (proj[2] - proj[0]) &&
-                        (proj[5] - proj[3]) *
-                                (gm_804D6804.x0 - proj[2]) >=
-                            (gm_804D6804.x4 - proj[3]) *
-                                (proj[4] - proj[2]) &&
-                        (proj[7] - proj[5]) *
-                                (gm_804D6804.x0 - proj[4]) >=
-                            (gm_804D6804.x4 - proj[5]) *
-                                (proj[6] - proj[4]) &&
-                        (proj[1] - proj[7]) *
-                                (gm_804D6804.x0 - proj[6]) >=
-                            (gm_804D6804.x4 - proj[7]) *
-                                (proj[0] - proj[6]))
+                        (proj[3] - proj[1]) * (gm_804D6804.x0 - proj[0]) >=
+                            (gm_804D6804.x4 - proj[1]) * (proj[2] - proj[0]) &&
+                        (proj[5] - proj[3]) * (gm_804D6804.x0 - proj[2]) >=
+                            (gm_804D6804.x4 - proj[3]) * (proj[4] - proj[2]) &&
+                        (proj[7] - proj[5]) * (gm_804D6804.x0 - proj[4]) >=
+                            (gm_804D6804.x4 - proj[5]) * (proj[6] - proj[4]) &&
+                        (proj[1] - proj[7]) * (gm_804D6804.x0 - proj[6]) >=
+                            (gm_804D6804.x4 - proj[7]) * (proj[0] - proj[6]))
                     {
                         entry_idx = staffInfoSortBuf[i].index;
                         selected = entry_idx;
                         if (staffInfo[entry_idx].x8 < 1) {
                             if (entry_idx < 7) {
                                 tree_base = &gm_803DBFD8[entry_idx];
-                                lb_80011E24(
-                                    gm_804D682C, &ptcl_jobj2,
-                                    *(s32*)(tree_base + 0x11F0),
-                                    -1);
+                                lb_80011E24(gm_804D682C, &ptcl_jobj2,
+                                            *(s32*) (tree_base + 0x11F0), -1);
                                 if (entry_idx == 0) {
                                     p = ptcl_jobj2->u.ptcl;
-                                    tally_color = *(s32*)&gm_804D42CC;
-                                    p = *(void**)((u8*)p + 4);
-                                    p = *(void**)((u8*)p + 4);
-                                    p = *(void**)((u8*)p + 4);
-                                    p = *(void**)((u8*)p + 8);
-                                    p = *(void**)((u8*)p + 0xC);
-                                    *(s32*)((u8*)p + 4) = tally_color;
-                                } else if ((unsigned)(entry_idx - 2) <=
-                                           1u) {
+                                    tally_color = *(s32*) &gm_804D42CC;
+                                    p = *(void**) ((u8*) p + 4);
+                                    p = *(void**) ((u8*) p + 4);
+                                    p = *(void**) ((u8*) p + 4);
+                                    p = *(void**) ((u8*) p + 8);
+                                    p = *(void**) ((u8*) p + 0xC);
+                                    *(s32*) ((u8*) p + 4) = tally_color;
+                                } else if ((unsigned) (entry_idx - 2) <= 1u) {
                                     p = ptcl_jobj2->u.ptcl;
-                                    tally_color = *(s32*)&gm_804D42CC;
-                                    p = *(void**)((u8*)p + 4);
-                                    p = *(void**)((u8*)p + 8);
-                                    p = *(void**)((u8*)p + 0xC);
-                                    *(s32*)((u8*)p + 4) = tally_color;
+                                    tally_color = *(s32*) &gm_804D42CC;
+                                    p = *(void**) ((u8*) p + 4);
+                                    p = *(void**) ((u8*) p + 8);
+                                    p = *(void**) ((u8*) p + 0xC);
+                                    *(s32*) ((u8*) p + 4) = tally_color;
                                 } else {
                                     p = ptcl_jobj2->u.ptcl;
-                                    tally_color = *(s32*)&gm_804D42CC;
-                                    p = *(void**)((u8*)p + 8);
-                                    p = *(void**)((u8*)p + 0xC);
-                                    *(s32*)((u8*)p + 4) = tally_color;
+                                    tally_color = *(s32*) &gm_804D42CC;
+                                    p = *(void**) ((u8*) p + 8);
+                                    p = *(void**) ((u8*) p + 0xC);
+                                    *(s32*) ((u8*) p + 4) = tally_color;
                                 }
                             } else {
                                 staffInfo[entry_idx].win[0]->active_color =
@@ -636,13 +620,13 @@ void fn_801AB200(HSD_GObj* gobj)
     }
 
     button = 0;
-    if (HSD_PadCopyStatus[(u8)gm_801BF010()].trigger & 0x100) {
+    if (HSD_PadCopyStatus[(u8) gm_801BF010()].trigger & 0x100) {
         button = 0x100;
-    } else if (HSD_PadCopyStatus[(u8)gm_801BF010()].trigger & 0x200) {
+    } else if (HSD_PadCopyStatus[(u8) gm_801BF010()].trigger & 0x200) {
         button = 0x200;
-    } else if (HSD_PadCopyStatus[(u8)gm_801BF010()].trigger & 0x1000) {
+    } else if (HSD_PadCopyStatus[(u8) gm_801BF010()].trigger & 0x1000) {
         button = 0x1000;
-    } else if (HSD_PadCopyStatus[(u8)gm_801BF010()].trigger & 0x10) {
+    } else if (HSD_PadCopyStatus[(u8) gm_801BF010()].trigger & 0x10) {
         button = 0x10;
     }
 
@@ -654,8 +638,7 @@ void fn_801AB200(HSD_GObj* gobj)
         }
 
         if (selected != -1 &&
-            (button == 0x200 ||
-             (gm_804D6818 == 0 && button == 0x100)))
+            (button == 0x200 || (gm_804D6818 == 0 && button == 0x100)))
         {
             lb_80011E24(root, &temp_jobj, 8, -1);
             HSD_JObjReqAnimAll(temp_jobj, 0.0f);
@@ -686,10 +669,9 @@ void fn_801AB200(HSD_GObj* gobj)
 
                 if (j == 0) {
                     tree_base = &gm_803DBFD8[gm_804D6810];
-                    x_pos = *(f32*)(tree_base + 0xF78);
+                    x_pos = *(f32*) (tree_base + 0xF78);
                     gm_80480D58[0] = HSD_SisLib_803A5ACC(
-                        0, 0, 1.45f + x_pos, 0.86f, 0.0f, 0.0f,
-                        100.0f);
+                        0, 0, 1.45f + x_pos, 0.86f, 0.0f, 0.0f, 100.0f);
                 } else if (j == 1) {
                     if (selected == 0xAC) {
                         offset1 = 0.2f;
@@ -702,14 +684,13 @@ void fn_801AB200(HSD_GObj* gobj)
                         offset2 = 0.0f;
                     }
                     tree_base = &gm_803DBFD8[gm_804D6810];
-                    x_pos = *(f32*)(tree_base + 0xF78);
+                    x_pos = *(f32*) (tree_base + 0xF78);
                     gm_80480D58[1] = HSD_SisLib_803A5ACC(
-                        0, 0,
-                        offset2 + (3.0f + x_pos + offset1),
-                        0.86f, 0.0f, 0.0f, 100.0f);
+                        0, 0, offset2 + (3.0f + x_pos + offset1), 0.86f, 0.0f,
+                        0.0f, 100.0f);
                 } else {
                     tree_base = &gm_803DBFD8[gm_804D6810];
-                    x_pos = *(f32*)(tree_base + 0xF78);
+                    x_pos = *(f32*) (tree_base + 0xF78);
                     text_arr[j] = HSD_SisLib_803A5ACC(
                         0, 0, 1.45f + x_pos, (0.19f * (f32) j) + 0.67f, 0.0f,
                         0.0f, 100.0f);
@@ -720,33 +701,25 @@ void fn_801AB200(HSD_GObj* gobj)
                 text_arr[j]->font_size.y = 0.0045f;
 
                 if (j == 0) {
-                    if (check_failed == 0 ||
-                        entry_data->has_check == 0)
-                    {
+                    if (check_failed == 0 || entry_data->has_check == 0) {
                         text_arr[j]->text_color.r = 0xC3;
                         text_arr[j]->text_color.g = 0xC3;
                         text_arr[j]->text_color.b = 0xC3;
                         if (lbLang_IsSavedLanguageJP() != 0) {
-                            HSD_SisLib_803A6368(gm_80480D58[0],
-                                                page_5);
+                            HSD_SisLib_803A6368(gm_80480D58[0], page_5);
                         } else {
-                            HSD_SisLib_803A6368(gm_80480D58[0],
-                                                page_6);
+                            HSD_SisLib_803A6368(gm_80480D58[0], page_6);
                         }
                     }
                 } else if (j == 1) {
-                    if (check_failed == 0 ||
-                        entry_data->has_check == 0)
-                    {
+                    if (check_failed == 0 || entry_data->has_check == 0) {
                         text_arr[j]->text_color.r = 0xE8;
                         text_arr[j]->text_color.g = 0x37;
                         text_arr[j]->text_color.b = 0xE0;
                         if (lbLang_IsSavedLanguageJP() != 0) {
-                            HSD_SisLib_803A6368(gm_80480D58[1],
-                                                jp_page1);
+                            HSD_SisLib_803A6368(gm_80480D58[1], jp_page1);
                         } else {
-                            HSD_SisLib_803A6368(gm_80480D58[1],
-                                                page_8);
+                            HSD_SisLib_803A6368(gm_80480D58[1], page_8);
                         }
                     }
                 } else {
@@ -791,32 +764,30 @@ void fn_801AB200(HSD_GObj* gobj)
                 if (staffInfo[selected].x8 >= 1) {
                     if (selected < 7) {
                         tree_base = &gm_803DBFD8[selected];
-                        lb_80011E24(
-                            gm_804D682C, &ptcl_jobj3,
-                            *(s32*)(tree_base + 0x11F0),
-                            -1);
+                        lb_80011E24(gm_804D682C, &ptcl_jobj3,
+                                    *(s32*) (tree_base + 0x11F0), -1);
                         if (selected == 0) {
                             p = ptcl_jobj3->u.ptcl;
-                            tally_color = *(s32*)&gm_804D42C8;
-                            p = *(void**)((u8*)p + 4);
-                            p = *(void**)((u8*)p + 4);
-                            p = *(void**)((u8*)p + 4);
-                            p = *(void**)((u8*)p + 8);
-                            p = *(void**)((u8*)p + 0xC);
-                            *(s32*)((u8*)p + 4) = tally_color;
-                        } else if ((unsigned)(selected - 2) <= 1u) {
+                            tally_color = *(s32*) &gm_804D42C8;
+                            p = *(void**) ((u8*) p + 4);
+                            p = *(void**) ((u8*) p + 4);
+                            p = *(void**) ((u8*) p + 4);
+                            p = *(void**) ((u8*) p + 8);
+                            p = *(void**) ((u8*) p + 0xC);
+                            *(s32*) ((u8*) p + 4) = tally_color;
+                        } else if ((unsigned) (selected - 2) <= 1u) {
                             p = ptcl_jobj3->u.ptcl;
-                            tally_color = *(s32*)&gm_804D42C8;
-                            p = *(void**)((u8*)p + 4);
-                            p = *(void**)((u8*)p + 8);
-                            p = *(void**)((u8*)p + 0xC);
-                            *(s32*)((u8*)p + 4) = tally_color;
+                            tally_color = *(s32*) &gm_804D42C8;
+                            p = *(void**) ((u8*) p + 4);
+                            p = *(void**) ((u8*) p + 8);
+                            p = *(void**) ((u8*) p + 0xC);
+                            *(s32*) ((u8*) p + 4) = tally_color;
                         } else {
                             p = ptcl_jobj3->u.ptcl;
-                            tally_color = *(s32*)&gm_804D42C8;
-                            p = *(void**)((u8*)p + 8);
-                            p = *(void**)((u8*)p + 0xC);
-                            *(s32*)((u8*)p + 4) = tally_color;
+                            tally_color = *(s32*) &gm_804D42C8;
+                            p = *(void**) ((u8*) p + 8);
+                            p = *(void**) ((u8*) p + 0xC);
+                            *(s32*) ((u8*) p + 4) = tally_color;
                         }
                     } else {
                         staffInfo[selected].win[0]->active_color = gm_804D42C8;
@@ -841,8 +812,7 @@ void fn_801AB200(HSD_GObj* gobj)
     }
 
     lb_80011E24(root, &temp_jobj, 0x18, -1);
-    HSD_JObjSetRotationZ(temp_jobj,
-                          (f32)(-gm_804D6824 - 0.7853981633974483));
+    HSD_JObjSetRotationZ(temp_jobj, (f32) (-gm_804D6824 - 0.7853981633974483));
 
     lb_80011E24(root, &temp_jobj, 5, -1);
     HSD_JObjAnimAll(temp_jobj);
@@ -881,11 +851,11 @@ void fn_801AB200(HSD_GObj* gobj)
             }
 
             line_num = HSD_SisLib_803A6B98(
-                gm_804D680C, 0.0f, 0.0f,
-                (char*)((u8*)gm_803DBFD8 + 0x1264), tally_count);
+                gm_804D680C, 0.0f, 0.0f, (char*) ((u8*) gm_803DBFD8 + 0x1264),
+                tally_count);
             tally_color2 = tally_color;
             HSD_SisLib_803A74F0(gm_804D680C, line_num,
-                                (GXColor*)&tally_color2);
+                                (GXColor*) &tally_color2);
 
             child_jobj = jobj_pair[0]->child;
             HSD_JObjSetTranslateY(child_jobj, -0.4f);
@@ -911,9 +881,7 @@ void fn_801AB200(HSD_GObj* gobj)
     }
 
     tree_base = &gm_803DBFD8[gm_804D6810];
-    HSD_JObjSetTranslateX(
-        jobj_pair[0],
-        *(f32*)(tree_base + 0xF78));
+    HSD_JObjSetTranslateX(jobj_pair[0], *(f32*) (tree_base + 0xF78));
 
     if (button == 0x1000) {
         if (gm_804D681C == 1) {
@@ -960,8 +928,7 @@ void fn_801AB200(HSD_GObj* gobj)
 
     if (gm_804D6814 >= gm_803DBFD8[gm_804D684C * 2 + 0x3E2].x0) {
         lbAudioAx_800237A8(
-            *(s32*)((u8*)gm_803DBFD8 + gm_804D684C * 8 + 0xF8C),
-            0x7F, 0x40);
+            *(s32*) ((u8*) gm_803DBFD8 + gm_804D684C * 8 + 0xF8C), 0x7F, 0x40);
         gm_804D684C += 1;
     }
 }

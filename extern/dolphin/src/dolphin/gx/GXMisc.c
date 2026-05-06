@@ -1,10 +1,10 @@
+#include "__gx.h"
+
+#include <macros.h>
 #include <stddef.h>
 #include <dolphin/base/PPCArch.h>
 #include <dolphin/gx.h>
 #include <dolphin/os.h>
-#include <macros.h>
-
-#include "__gx.h"
 
 static GXDrawSyncCallback TokenCB;
 static GXDrawDoneCallback DrawDoneCB;
@@ -23,7 +23,9 @@ void GXSetMisc(GXMiscToken token, u32 val)
         }
         break;
     case GX_MT_DL_SAVE_CONTEXT:
-        ASSERTMSGLINE(0xC4, !gx->inDispList, "GXSetMisc: Cannot change DL context setting while making a display list");
+        ASSERTMSGLINE(0xC4, !gx->inDispList,
+                      "GXSetMisc: Cannot change DL context setting while "
+                      "making a display list");
         gx->dlSaveContext = (val > 0);
         break;
     case GX_MT_NULL:
@@ -54,7 +56,7 @@ void GXResetWriteGatherPipe(void)
 {
     while (PPCMfwpar() & 1) {
     }
-    PPCMtwpar(OSUncachedToPhysical((void *)GXFIFO_ADDR));
+    PPCMtwpar(OSUncachedToPhysical((void*) GXFIFO_ADDR));
 }
 
 static inline void __GXAbortWait(u32 clocks)
@@ -196,13 +198,15 @@ void GXPokeAlphaUpdate(GXBool update_enable)
     __peReg[1] = reg;
 }
 
-void GXPokeBlendMode(GXBlendMode type, GXBlendFactor src_factor, GXBlendFactor dst_factor, GXLogicOp op)
+void GXPokeBlendMode(GXBlendMode type, GXBlendFactor src_factor,
+                     GXBlendFactor dst_factor, GXLogicOp op)
 {
     u32 reg;
 
     CHECK_GXBEGIN(0x284, "GXPokeBlendUpdate");
     reg = __peReg[1];
-    SET_REG_FIELD(0x28C, reg, 1, 0, (type == GX_BM_BLEND) || (type == GX_BM_SUBTRACT));
+    SET_REG_FIELD(0x28C, reg, 1, 0,
+                  (type == GX_BM_BLEND) || (type == GX_BM_SUBTRACT));
     SET_REG_FIELD(0x28D, reg, 1, 11, (type == GX_BM_SUBTRACT));
     SET_REG_FIELD(0x28F, reg, 1, 1, (type == GX_BM_LOGIC));
     SET_REG_FIELD(0x290, reg, 4, 12, op);
@@ -254,44 +258,44 @@ void GXPokeZMode(GXBool compare_enable, GXCompare func, GXBool update_enable)
     __peReg[0] = reg;
 }
 
-void GXPeekARGB(u16 x, u16 y, u32 *color)
+void GXPeekARGB(u16 x, u16 y, u32* color)
 {
-    u32 addr = (u32)OSPhysicalToUncached(0x08000000);
+    u32 addr = (u32) OSPhysicalToUncached(0x08000000);
 
     SET_REG_FIELD(0x2DC, addr, 10, 2, x);
     SET_REG_FIELD(0x2DD, addr, 10, 12, y);
     SET_REG_FIELD(0x2DE, addr, 2, 22, 0);
-    *color = *(u32 *)addr;
+    *color = *(u32*) addr;
 }
 
 void GXPokeARGB(u16 x, u16 y, u32 color)
 {
-    u32 addr = (u32)OSPhysicalToUncached(0x08000000);
+    u32 addr = (u32) OSPhysicalToUncached(0x08000000);
 
     SET_REG_FIELD(0x2E6, addr, 10, 2, x);
     SET_REG_FIELD(0x2E7, addr, 10, 12, y);
     SET_REG_FIELD(0x2E8, addr, 2, 22, 0);
-    *(u32 *)addr = color;
+    *(u32*) addr = color;
 }
 
-void GXPeekZ(u16 x, u16 y, u32 *z)
+void GXPeekZ(u16 x, u16 y, u32* z)
 {
-    u32 addr = (u32)OSPhysicalToUncached(0x08000000);
+    u32 addr = (u32) OSPhysicalToUncached(0x08000000);
 
     SET_REG_FIELD(0x2F0, addr, 10, 2, x);
     SET_REG_FIELD(0x2F1, addr, 10, 12, y);
     SET_REG_FIELD(0x2F2, addr, 2, 22, 1);
-    *z = *(u32 *)addr;
+    *z = *(u32*) addr;
 }
 
 void GXPokeZ(u16 x, u16 y, u32 z)
 {
-    u32 addr = (u32)OSPhysicalToUncached(0x08000000);
+    u32 addr = (u32) OSPhysicalToUncached(0x08000000);
 
     SET_REG_FIELD(0x2FA, addr, 10, 2, x);
     SET_REG_FIELD(0x2FB, addr, 10, 12, y);
     SET_REG_FIELD(0x2FC, addr, 2, 22, 1);
-    *(u32 *)addr = z;
+    *(u32*) addr = z;
 }
 
 GXDrawSyncCallback GXSetDrawSyncCallback(GXDrawSyncCallback cb)
@@ -306,7 +310,8 @@ GXDrawSyncCallback GXSetDrawSyncCallback(GXDrawSyncCallback cb)
     return oldcb;
 }
 
-static void GXTokenInterruptHandler(__OSInterrupt interrupt, OSContext *context)
+static void GXTokenInterruptHandler(__OSInterrupt interrupt,
+                                    OSContext* context)
 {
     u16 token;
     OSContext exceptionContext;
@@ -337,7 +342,8 @@ GXDrawDoneCallback GXSetDrawDoneCallback(GXDrawDoneCallback cb)
     return oldcb;
 }
 
-static void GXFinishInterruptHandler(__OSInterrupt interrupt, OSContext *context)
+static void GXFinishInterruptHandler(__OSInterrupt interrupt,
+                                     OSContext* context)
 {
     OSContext exceptionContext;
     u32 reg;
@@ -444,7 +450,12 @@ u32 GXDecompressZ16(u32 z16, GXZFmt16 zfmt)
     long exp;
     long shift;
 
-    cb1; cb1; cb1; z16; z16; z16;  // needed to match
+    cb1;
+    cb1;
+    cb1;
+    z16;
+    z16;
+    z16; // needed to match
 
     switch (zfmt) {
     case GX_ZC_LINEAR:

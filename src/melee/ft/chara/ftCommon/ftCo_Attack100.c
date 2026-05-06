@@ -443,13 +443,15 @@ bool ftCo_800D72A0(Fighter* fp)
 {
     if (fp->x2D0->x2C != -1) {
         if (fp->x2D0->x2C <= fp->motion_id &&
-            fp->motion_id < fp->x2D0->x2C + fp->x2D0->x28) {
+            fp->motion_id < fp->x2D0->x2C + fp->x2D0->x28)
+        {
             return true;
         }
     }
     if (fp->x2D0->x30 != -1) {
         if (fp->x2D0->x30 <= fp->motion_id &&
-            fp->motion_id < fp->x2D0->x30 + fp->x2D0->x28) {
+            fp->motion_id < fp->x2D0->x30 + fp->x2D0->x28)
+        {
             return true;
         }
     }
@@ -470,14 +472,13 @@ void ftCo_800D74A4(Fighter_GObj* gobj)
     fp->cmd_vars[0] = 0;
     tmp = fp->x2D0;
     msid = fp->x1968_jumpsUsed +
-           ((struct Fighter_x2D0_t*) ((s32*) tmp +
-                                      ftCo_800D7268(fp)))->x2C;
+           ((struct Fighter_x2D0_t*) ((s32*) tmp + ftCo_800D7268(fp)))->x2C;
     vel.x = fp->input.lstick.x * p->x8;
     msid -= 1;
     tmp = fp->x2D0;
     vel.y = p->x14[msid -
-                   ((struct Fighter_x2D0_t*) ((s32*) tmp +
-                                              ftCo_800D7268(fp)))->x2C];
+                   ((struct Fighter_x2D0_t*) ((s32*) tmp + ftCo_800D7268(fp)))
+                       ->x2C];
     vel.z = ftCo_804D9018;
     ftCo_800CBAC4(gobj, msid, &vel, false);
     if ((fp->input.lstick.x * fp->facing_dir) < -p->x4) {

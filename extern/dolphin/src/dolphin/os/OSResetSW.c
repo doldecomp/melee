@@ -1,7 +1,7 @@
+#include "__os.h"
+
 #include <dolphin.h>
 #include <dolphin/os.h>
-
-#include "__os.h"
 
 u8 GameChoice : (OS_BASE_CACHED | 0x30E3);
 
@@ -19,15 +19,16 @@ void __OSResetSWInterruptHandler(__OSInterrupt exception,
     OSResetCallback callback;
 
     HoldDown = __OSGetSystemTime();
-    while (__OSGetSystemTime() - HoldDown < OSMicrosecondsToTicks(100)
-           && !(__PIRegs[0] & 0x00010000)) {
+    while (__OSGetSystemTime() - HoldDown < OSMicrosecondsToTicks(100) &&
+           !(__PIRegs[0] & 0x00010000))
+    {
         ;
     }
     if (!(__PIRegs[0] & 0x00010000)) {
         LastState = Down = TRUE;
         __OSMaskInterrupts(OS_INTERRUPTMASK_PI_RSW);
         if (ResetCallback) {
-            callback      = ResetCallback;
+            callback = ResetCallback;
             ResetCallback = NULL;
             callback();
         }
@@ -40,12 +41,12 @@ BOOL OSGetResetButtonState(void)
     BOOL enabled = OSDisableInterrupts();
     BOOL state;
     OSTime now = __OSGetSystemTime();
-    u32 reg    = __PIRegs[0];
+    u32 reg = __PIRegs[0];
 
     if (!(reg & 0x00010000)) {
         if (!Down) {
-            Down     = TRUE;
-            state    = HoldUp ? TRUE : FALSE;
+            Down = TRUE;
+            state = HoldUp ? TRUE : FALSE;
             HoldDown = now;
         } else {
             state = HoldUp || (OSMicrosecondsToTicks(100) < now - HoldDown)
@@ -53,7 +54,7 @@ BOOL OSGetResetButtonState(void)
                         : FALSE;
         }
     } else if (Down) {
-        Down  = FALSE;
+        Down = FALSE;
         state = LastState;
         if (state) {
             HoldUp = now;
@@ -63,7 +64,7 @@ BOOL OSGetResetButtonState(void)
     } else if (HoldUp && (now - HoldUp < OSMillisecondsToTicks(40))) {
         state = TRUE;
     } else {
-        state  = FALSE;
+        state = FALSE;
         HoldUp = 0;
     }
 
@@ -71,7 +72,7 @@ BOOL OSGetResetButtonState(void)
 
     if (GameChoice & 0x3F) {
         OSTime fire = (GameChoice & 0x3F) * 60;
-        fire        = __OSStartTime + OSSecondsToTicks(fire);
+        fire = __OSStartTime + OSSecondsToTicks(fire);
         if (fire < now) {
             now -= fire;
             now = OSTicksToSeconds(now) / 2;
@@ -87,4 +88,7 @@ BOOL OSGetResetButtonState(void)
     return state;
 }
 
-BOOL OSGetResetSwitchState(void) { return OSGetResetButtonState(); }
+BOOL OSGetResetSwitchState(void)
+{
+    return OSGetResetButtonState();
+}

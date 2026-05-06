@@ -44,22 +44,20 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
 
     fp = gobj->user_data;
 
-    if ((s8)(u8)fp->x2100 <= 1) {
+    if ((s8) (u8) fp->x2100 <= 1) {
         return;
     }
 
     GXSetColorUpdate(1);
     GXSetAlphaUpdate(0);
-    GXSetBlendMode(GX_BM_BLEND, GX_BL_SRCALPHA, GX_BL_INVSRCALPHA,
-                   GX_LO_NOOP);
+    GXSetBlendMode(GX_BM_BLEND, GX_BL_SRCALPHA, GX_BL_INVSRCALPHA, GX_LO_NOOP);
     GXSetAlphaCompare(GX_GREATER, 0, GX_AOP_AND, GX_GREATER, 0);
     GXSetZMode(1, GX_LEQUAL, 0);
     GXSetZCompLoc(0);
     GXSetNumTexGens(0);
     GXSetTevClampMode(0, 0);
     GXSetNumTevStages(1);
-    GXSetTevOrder(GX_TEVSTAGE0, GX_TEXCOORD_NULL, GX_TEXMAP_NULL,
-                  GX_COLOR0A0);
+    GXSetTevOrder(GX_TEVSTAGE0, GX_TEXCOORD_NULL, GX_TEXMAP_NULL, GX_COLOR0A0);
     GXSetTevOp(GX_TEVSTAGE0, GX_PASSCLR);
     GXSetNumChans(1);
     GXSetChanCtrl(GX_COLOR0A0, 0, GX_SRC_REG, GX_SRC_VTX, 0, GX_DF_NONE,
@@ -96,13 +94,13 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
         case FTKIND_LINK:
         case FTKIND_CLINK: {
             ftLk_DatAttrs* da = fp->dat_attrs;
-            params = (itSword_UnkBytes*)&da->x64;
+            params = (itSword_UnkBytes*) &da->x64;
             break;
         }
         case FTKIND_MARS:
         case FTKIND_EMBLEM: {
             MarsAttributes* da = fp->dat_attrs;
-            params = (itSword_UnkBytes*)&da->x78;
+            params = (itSword_UnkBytes*) &da->x78;
             break;
         }
         }
@@ -133,17 +131,14 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
             s32 i;
             s32 curIdx = ringIdx;
 
-            for (i = (s8)(u8)fp->x2100 - 1; i >= 0; i--) {
+            for (i = (s8) (u8) fp->x2100 - 1; i >= 0; i--) {
                 struct Fighter_x20B0_t* entry = &fp->x20B0[curIdx];
 
-                delta.x =
-                    entry->xC.x * x20FC + entry->x0.x - prevPos.x;
-                delta.y =
-                    entry->xC.y * x20FC + entry->x0.y - prevPos.y;
-                delta.z =
-                    entry->xC.z * x20FC + entry->x0.z - prevPos.z;
+                delta.x = entry->xC.x * x20FC + entry->x0.x - prevPos.x;
+                delta.y = entry->xC.y * x20FC + entry->x0.y - prevPos.y;
+                delta.z = entry->xC.z * x20FC + entry->x0.z - prevPos.z;
 
-                if (i != (s8)(u8)fp->x2100 - 1) {
+                if (i != (s8) (u8) fp->x2100 - 1) {
                     f32 d2 = delta.z * delta.z +
                              (delta.x * delta.x + delta.y * delta.y);
                     if (d2 > 0.0f) {
@@ -194,7 +189,7 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
                 }
             }
 
-            remaining = (s8)(u8)fp->x2100 - 1;
+            remaining = (s8) (u8) fp->x2100 - 1;
             distPtr = &cumDist[0];
             vp = &vtx_buf[0];
 
@@ -209,9 +204,8 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
                 numVerts += 2;
                 distPtr++;
 
-                alpha = (s32)(interpFactor *
-                              (f32)(params->x8 - params->x9) +
-                              (f32)params->x9);
+                alpha = (s32) (interpFactor * (f32) (params->x8 - params->x9) +
+                               (f32) params->x9);
 
                 vp->x = curEntry->xC.x * innerScale + curEntry->x0.x;
                 vp->y = curEntry->xC.y * innerScale + curEntry->x0.y;
@@ -221,12 +215,9 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
                 vp->b = params->xC;
                 vp->a = alpha;
 
-                (vp + 1)->x =
-                    curEntry->xC.x * outerScale + curEntry->x0.x;
-                (vp + 1)->y =
-                    curEntry->xC.y * outerScale + curEntry->x0.y;
-                (vp + 1)->z =
-                    curEntry->xC.z * outerScale + curEntry->x0.z;
+                (vp + 1)->x = curEntry->xC.x * outerScale + curEntry->x0.x;
+                (vp + 1)->y = curEntry->xC.y * outerScale + curEntry->x0.y;
+                (vp + 1)->z = curEntry->xC.z * outerScale + curEntry->x0.z;
                 (vp + 1)->r = params->xE;
                 (vp + 1)->g = params->xF;
                 (vp + 1)->b = params->x10;
@@ -247,16 +238,13 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
                     nextIdx = nextRingIdx;
 
                     if (lbVector_CrossprodNormalized(
-                            &curEntry->xC, &nextEntry->xC,
-                            &crossProd) != NULL)
+                            &curEntry->xC, &nextEntry->xC, &crossProd) != NULL)
                     {
-                        f32 angle = lbVector_Angle(
-                            &curEntry->xC, &nextEntry->xC);
-                        f32 subdivAngle =
-                            angle / AFTERIMAGE_ANGLE_STEP;
-                        s32 numSubdiv = (s32)subdivAngle;
-                        interpFactor =
-                            1.0f - (*distPtr / totalDist);
+                        f32 angle =
+                            lbVector_Angle(&curEntry->xC, &nextEntry->xC);
+                        f32 subdivAngle = angle / AFTERIMAGE_ANGLE_STEP;
+                        s32 numSubdiv = (s32) subdivAngle;
+                        interpFactor = 1.0f - (*distPtr / totalDist);
 
                         if (numSubdiv != 0) {
                             f32 frac;
@@ -269,33 +257,31 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
 
                             tempDir = curEntry->xC;
 
-                            frac =
-                                1.0f / (f32)(numSubdiv + 1);
+                            frac = 1.0f / (f32) (numSubdiv + 1);
 
-                            interpInner2 = frac *
-                                ((interpFactor * innerDiff +
-                                  blendedInner) - innerScale);
-                            interpOuter2 = frac *
-                                ((interpFactor * outerDiff +
-                                  blendedOuter) - outerScale);
+                            interpInner2 =
+                                frac *
+                                ((interpFactor * innerDiff + blendedInner) -
+                                 innerScale);
+                            interpOuter2 =
+                                frac *
+                                ((interpFactor * outerDiff + blendedOuter) -
+                                 outerScale);
 
                             basePosX = curEntry->x0.x;
                             basePosY = curEntry->x0.y;
                             basePosZ = curEntry->x0.z;
 
-                            stepPosX = frac *
-                                (nextEntry->x0.x - basePosX);
-                            stepPosY = frac *
-                                (nextEntry->x0.y - basePosY);
-                            stepPosZ = frac *
-                                (nextEntry->x0.z - basePosZ);
+                            stepPosX = frac * (nextEntry->x0.x - basePosX);
+                            stepPosY = frac * (nextEntry->x0.y - basePosY);
+                            stepPosZ = frac * (nextEntry->x0.z - basePosZ);
 
-                            alphaStep = (s32)(frac *
-                                ((interpFactor *
-                                      (f32)(params->x8 -
-                                            params->x9) +
-                                  (f32)params->x9) -
-                                 (f32)alpha));
+                            alphaStep =
+                                (s32) (frac *
+                                       ((interpFactor *
+                                             (f32) (params->x8 - params->x9) +
+                                         (f32) params->x9) -
+                                        (f32) alpha));
 
                             for (j = 0; j < numSubdiv; j++) {
                                 cumAngle += angle * frac;
@@ -308,29 +294,22 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
 
                                 tempDir = curEntry->xC;
                                 lbVector_RotateAboutUnitAxis(
-                                    &tempDir, &crossProd,
-                                    cumAngle);
+                                    &tempDir, &crossProd, cumAngle);
 
                                 numVerts += 2;
-                                vp->x = tempDir.x * innerScale +
-                                         basePosX;
-                                vp->y = tempDir.y * innerScale +
-                                         basePosY;
-                                vp->z = tempDir.z * innerScale +
-                                         basePosZ;
+                                vp->x = tempDir.x * innerScale + basePosX;
+                                vp->y = tempDir.y * innerScale + basePosY;
+                                vp->z = tempDir.z * innerScale + basePosZ;
                                 vp->r = params->xA;
                                 vp->g = params->xB;
                                 vp->b = params->xC;
                                 vp->a = alpha;
                                 (vp + 1)->x =
-                                    tempDir.x * outerScale +
-                                    basePosX;
+                                    tempDir.x * outerScale + basePosX;
                                 (vp + 1)->y =
-                                    tempDir.y * outerScale +
-                                    basePosY;
+                                    tempDir.y * outerScale + basePosY;
                                 (vp + 1)->z =
-                                    tempDir.z * outerScale +
-                                    basePosZ;
+                                    tempDir.z * outerScale + basePosZ;
                                 (vp + 1)->r = params->xE;
                                 (vp + 1)->g = params->xF;
                                 (vp + 1)->b = params->x10;
@@ -346,30 +325,25 @@ void ftCo_800C2600(Fighter_GObj* gobj, u32 arg1)
             }
 
             GXClearVtxDesc();
-            GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_POS, GX_TEX_ST, GX_RGBA6,
-                            0);
-            GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_CLR0, GX_TEX_ST, GX_RGBA8,
-                            0);
+            GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_POS, GX_TEX_ST, GX_RGBA6, 0);
+            GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_CLR0, GX_TEX_ST, GX_RGBA8, 0);
             GXSetVtxDesc(GX_VA_POS, GX_DIRECT);
             GXSetVtxDesc(GX_VA_CLR0, GX_DIRECT);
             {
                 HSD_CObj* cobj = HSD_CObjGetCurrent();
-                GXLoadPosMtxImm(
-                    HSD_CObjGetViewingMtxPtrDirect(cobj), 0);
+                GXLoadPosMtxImm(HSD_CObjGetViewingMtxPtrDirect(cobj), 0);
             }
             GXSetCurrentMtx(0);
             GXBegin(GX_TRIANGLESTRIP, GX_VTXFMT0, numVerts + 1);
 
             GXPosition3f32(vtx_buf[0].x, vtx_buf[0].y, vtx_buf[0].z);
-            GXColor4u8(vtx_buf[0].r, vtx_buf[0].g, vtx_buf[0].b,
-                       vtx_buf[0].a);
+            GXColor4u8(vtx_buf[0].r, vtx_buf[0].g, vtx_buf[0].b, vtx_buf[0].a);
             GXPosition3f32(vtx_buf[2].x, vtx_buf[2].y, vtx_buf[2].z);
-            GXColor4u8(vtx_buf[2].r, vtx_buf[2].g, vtx_buf[2].b,
-                       vtx_buf[2].a);
+            GXColor4u8(vtx_buf[2].r, vtx_buf[2].g, vtx_buf[2].b, vtx_buf[2].a);
 
             if (numVerts > 1) {
                 AfterimageVtx* p = &vtx_buf[1];
-                u32 count = (u32)(numVerts - 1);
+                u32 count = (u32) (numVerts - 1);
                 u32 n4 = count >> 2;
                 if (n4 != 0) {
                     do {

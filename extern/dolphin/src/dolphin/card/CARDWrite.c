@@ -8,13 +8,14 @@
 static void WriteCallback(long chan, long result);
 static void EraseCallback(long chan, long result);
 
-static void WriteCallback(long chan, long result) {
-    struct CARDControl * card;
-    void (* callback)(long, long);
-    unsigned short * fat;
-    struct CARDDir * dir;
-    struct CARDDir * ent;
-    struct CARDFileInfo * fileInfo;
+static void WriteCallback(long chan, long result)
+{
+    struct CARDControl* card;
+    void (*callback)(long, long);
+    unsigned short* fat;
+    struct CARDDir* dir;
+    struct CARDDir* ent;
+    struct CARDFileInfo* fileInfo;
 
     card = &__CARDBlock[chan];
     if (result >= 0) {
@@ -27,7 +28,7 @@ static void WriteCallback(long chan, long result) {
         if (fileInfo->length <= 0) {
             dir = __CARDGetDirBlock(card);
             ent = dir + fileInfo->fileNo;
-            ent->time = OSGetTime()/(__OSBusClock/4);
+            ent->time = OSGetTime() / (__OSBusClock / 4);
             callback = card->apiCallback;
             card->apiCallback = NULL;
             result = __CARDUpdateDir(chan, callback);
@@ -40,14 +41,15 @@ static void WriteCallback(long chan, long result) {
                 result = CARD_RESULT_BROKEN;
                 goto after;
             }
-            result = __CARDEraseSector(chan, card->sectorSize * fileInfo->iBlock, EraseCallback);
-check:;
+            result = __CARDEraseSector(
+                chan, card->sectorSize * fileInfo->iBlock, EraseCallback);
+        check:;
             if (result < 0) {
                 goto after;
             }
         }
     } else {
-after:;
+    after:;
         callback = card->apiCallback;
         card->apiCallback = NULL;
         __CARDPutControlBlock(card, result);
@@ -56,21 +58,23 @@ after:;
     }
 }
 
-static void EraseCallback(long chan, long result) {
-    struct CARDControl * card;
-    void (* callback)(long, long);
-    struct CARDFileInfo * fileInfo;
+static void EraseCallback(long chan, long result)
+{
+    struct CARDControl* card;
+    void (*callback)(long, long);
+    struct CARDFileInfo* fileInfo;
 
     card = &__CARDBlock[chan];
     if (result >= 0) {
         fileInfo = card->fileInfo;
         ASSERTLINE(0x98, OFFSET(fileInfo->offset, card->sectorSize) == 0);
-        result = __CARDWrite(chan, card->sectorSize * fileInfo->iBlock, card->sectorSize, card->buffer, WriteCallback);
+        result = __CARDWrite(chan, card->sectorSize * fileInfo->iBlock,
+                             card->sectorSize, card->buffer, WriteCallback);
         if (result < 0) {
             goto after;
         }
     } else {
-after:;
+    after:;
         callback = card->apiCallback;
         card->apiCallback = NULL;
         __CARDPutControlBlock(card, result);
@@ -79,11 +83,13 @@ after:;
     }
 }
 
-long CARDWriteAsync(struct CARDFileInfo * fileInfo, void * buf, long length, long offset, void (* callback)(long, long)) {
-    struct CARDControl * card;
+long CARDWriteAsync(struct CARDFileInfo* fileInfo, void* buf, long length,
+                    long offset, void (*callback)(long, long))
+{
+    struct CARDControl* card;
     long result;
-    struct CARDDir * dir;
-    struct CARDDir * ent;
+    struct CARDDir* dir;
+    struct CARDDir* ent;
 
     ASSERTLINE(0xC9, buf && ((u32) buf % 32) == 0);
     ASSERTLINE(0xCA, 0 < length);
@@ -94,26 +100,36 @@ long CARDWriteAsync(struct CARDFileInfo * fileInfo, void * buf, long length, lon
     ASSERTLINE(0xD0, OFFSET(offset, card->sectorSize) == 0);
     ASSERTLINE(0xD1, OFFSET(length, card->sectorSize) == 0);
 
-    if (OFFSET(offset, card->sectorSize) != 0 || OFFSET(length, card->sectorSize) != 0)
+    if (OFFSET(offset, card->sectorSize) != 0 ||
+        OFFSET(length, card->sectorSize) != 0)
+    {
         return __CARDPutControlBlock(card, CARD_RESULT_FATAL_ERROR);
+    }
 
     dir = __CARDGetDirBlock(card);
     ent = &dir[fileInfo->fileNo];
     result = __CARDAccess(card, ent);
-    if (result < 0)
+    if (result < 0) {
         return __CARDPutControlBlock(card, result);
+    }
 
-    DCStoreRange((void *)buf, (u32)length);
+    DCStoreRange((void*) buf, (u32) length);
     card->apiCallback = callback ? callback : __CARDDefaultApiCallback;
-    card->buffer = (void *)buf;
-    result = __CARDEraseSector(fileInfo->chan, card->sectorSize * (u32)fileInfo->iBlock, EraseCallback);
-    if (result < 0)
+    card->buffer = (void*) buf;
+    result = __CARDEraseSector(fileInfo->chan,
+                               card->sectorSize * (u32) fileInfo->iBlock,
+                               EraseCallback);
+    if (result < 0) {
         __CARDPutControlBlock(card, result);
+    }
     return result;
 }
 
-long CARDWrite(struct CARDFileInfo * fileInfo, void * buf, long length, long offset) {
-    long result = CARDWriteAsync(fileInfo, buf, length, offset, __CARDSyncCallback);
+long CARDWrite(struct CARDFileInfo* fileInfo, void* buf, long length,
+               long offset)
+{
+    long result =
+        CARDWriteAsync(fileInfo, buf, length, offset, __CARDSyncCallback);
 
     if (result < 0) {
         return result;

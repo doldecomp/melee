@@ -1,11 +1,12 @@
+#include "__gx.h"
+
+#include <macros.h>
 #include <math.h>
 #include <dolphin/gx.h>
 #include <dolphin/os.h>
-#include <macros.h>
 
-#include "__gx.h"
-
-void GXSetFog(GXFogType type, f32 startz, f32 endz, f32 nearz, f32 farz, GXColor color)
+void GXSetFog(GXFogType type, f32 startz, f32 endz, f32 nearz, f32 farz,
+              GXColor color)
 {
     u32 fogclr;
     u32 fog0;
@@ -26,8 +27,10 @@ void GXSetFog(GXFogType type, f32 startz, f32 endz, f32 nearz, f32 farz, GXColor
 
     CHECK_GXBEGIN(0x6E, "GXSetFog");
 
-    ASSERTMSGLINE(0x70, farz >= 0.0f, "GXSetFog: The farz should be positive value");
-    ASSERTMSGLINE(0x71, farz >= nearz, "GXSetFog: The farz should be larger than nearz");
+    ASSERTMSGLINE(0x70, farz >= 0.0f,
+                  "GXSetFog: The farz should be positive value");
+    ASSERTMSGLINE(0x71, farz >= nearz,
+                  "GXSetFog: The farz should be larger than nearz");
 
     if (farz == nearz || endz == startz) {
         A = 0.0f;
@@ -63,8 +66,8 @@ void GXSetFog(GXFogType type, f32 startz, f32 endz, f32 nearz, f32 farz, GXColor
     SET_REG_FIELD(0x98, fog2, 5, 0, b_s);
     SET_REG_FIELD(0x99, fog2, 8, 24, 0xF0);
 
-    a_hex = *(u32 *)&a;
-    c_hex = *(u32 *)&c;
+    a_hex = *(u32*) &a;
+    c_hex = *(u32*) &c;
 
     fog0 = 0;
     SET_REG_FIELD(0xA0, fog0, 11, 0, (a_hex >> 12) & 0x7FF);
@@ -94,7 +97,7 @@ void GXSetFog(GXFogType type, f32 startz, f32 endz, f32 nearz, f32 farz, GXColor
     gx->bpSent = 0;
 }
 
-void GXInitFogAdjTable(GXFogAdjTable *table, u16 width, f32 projmtx[4][4])
+void GXInitFogAdjTable(GXFogAdjTable* table, u16 width, f32 projmtx[4][4])
 {
     f32 xi;
     f32 iw;
@@ -104,8 +107,10 @@ void GXInitFogAdjTable(GXFogAdjTable *table, u16 width, f32 projmtx[4][4])
     u32 i;
 
     CHECK_GXBEGIN(0xCE, "GXInitFogAdjTable");
-    ASSERTMSGLINE(0xCF, table != NULL, "GXInitFogAdjTable: table pointer is null");
-    ASSERTMSGLINE(0xD0, width <= 640, "GXInitFogAdjTable: invalid width value");
+    ASSERTMSGLINE(0xCF, table != NULL,
+                  "GXInitFogAdjTable: table pointer is null");
+    ASSERTMSGLINE(0xD0, width <= 640,
+                  "GXInitFogAdjTable: invalid width value");
 
     if (0.0 == projmtx[3][3]) {
         nearZ = projmtx[2][3] / (projmtx[2][2] - 1.0f);
@@ -121,11 +126,11 @@ void GXInitFogAdjTable(GXFogAdjTable *table, u16 width, f32 projmtx[4][4])
         xi *= iw;
         xi *= sideX;
         rangeVal = sqrtf(1.0f + ((xi * xi) / (nearZ * nearZ)));
-        table->r[i] = (u32)(256.0f * rangeVal) & 0xFFF;
+        table->r[i] = (u32) (256.0f * rangeVal) & 0xFFF;
     }
 }
 
-void GXSetFogRangeAdj(GXBool enable, u16 center, GXFogAdjTable *table)
+void GXSetFogRangeAdj(GXBool enable, u16 center, GXFogAdjTable* table)
 {
     u32 i;
     u32 range_adj;
@@ -134,7 +139,8 @@ void GXSetFogRangeAdj(GXBool enable, u16 center, GXFogAdjTable *table)
     CHECK_GXBEGIN(0x106, "GXSetFogRangeAdj");
 
     if (enable) {
-        ASSERTMSGLINE(0x109, table != NULL, "GXSetFogRangeAdj: table pointer is null");
+        ASSERTMSGLINE(0x109, table != NULL,
+                      "GXSetFogRangeAdj: table pointer is null");
         for (i = 0; i < 10; i += 2) {
             range_adj = 0;
             SET_REG_FIELD(0x10D, range_adj, 12, 0, table->r[i]);
@@ -151,11 +157,13 @@ void GXSetFogRangeAdj(GXBool enable, u16 center, GXFogAdjTable *table)
     gx->bpSent = 0;
 }
 
-void GXSetBlendMode(GXBlendMode type, GXBlendFactor src_factor, GXBlendFactor dst_factor, GXLogicOp op)
+void GXSetBlendMode(GXBlendMode type, GXBlendFactor src_factor,
+                    GXBlendFactor dst_factor, GXLogicOp op)
 {
     CHECK_GXBEGIN(0x12F, "GXSetBlendMode");
 
-    SET_REG_FIELD(0x135, gx->cmode0, 1, 0, (type == GX_BM_BLEND || type == GX_BM_SUBTRACT));
+    SET_REG_FIELD(0x135, gx->cmode0, 1, 0,
+                  (type == GX_BM_BLEND || type == GX_BM_SUBTRACT));
     SET_REG_FIELD(0x136, gx->cmode0, 1, 11, (type == GX_BM_SUBTRACT));
     SET_REG_FIELD(0x138, gx->cmode0, 1, 1, (type == GX_BM_LOGIC));
     SET_REG_FIELD(0x139, gx->cmode0, 4, 12, op);
@@ -213,10 +221,11 @@ void GXSetPixelFmt(GXPixelFmt pix_fmt, GXZFmt16 z_fmt)
     SET_REG_FIELD(0x1A8, gx->peCtrl, 3, 3, z_fmt);
     if (oldPeCtrl != gx->peCtrl) {
         GX_WRITE_RAS_REG(gx->peCtrl);
-        if (pix_fmt == GX_PF_RGB565_Z16)
+        if (pix_fmt == GX_PF_RGB565_Z16) {
             aa = 1;
-        else
+        } else {
             aa = 0;
+        }
         SET_REG_FIELD(0x1B1, gx->genMode, 1, 9, aa);
         gx->dirtyState |= 4;
     }

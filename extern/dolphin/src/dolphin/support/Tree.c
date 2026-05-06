@@ -2,12 +2,12 @@
 
 void DSExtractBranch(DSTreePtr tree, Ptr obj)
 {
-    DSBranchPtr branch = (DSBranchPtr)(obj + tree->Offset);
+    DSBranchPtr branch = (DSBranchPtr) (obj + tree->Offset);
     Ptr cursor = branch->Children;
     Ptr next;
 
     while (cursor) {
-        next = ((DSBranchPtr)(cursor + tree->Offset))->Next;
+        next = ((DSBranchPtr) (cursor + tree->Offset))->Next;
         DSInsertBranchBelow(tree, branch->Parent, cursor);
         cursor = next;
     }
@@ -17,17 +17,17 @@ void DSExtractBranch(DSTreePtr tree, Ptr obj)
 void DSInitTree(DSTreePtr tree, Ptr obj, DSBranchPtr branch)
 {
     tree->Root = NULL;
-    tree->Offset = (Ptr)branch - obj;
+    tree->Offset = (Ptr) branch - obj;
 }
 
 void DSInsertBranchBelow(DSTreePtr tree, Ptr cursor, Ptr obj)
 {
     DSBranchPtr branch;
-    DSBranchPtr objBranch = (DSBranchPtr)(obj + tree->Offset);
+    DSBranchPtr objBranch = (DSBranchPtr) (obj + tree->Offset);
     Ptr tail = NULL;
 
     if (cursor) {
-        branch = (DSBranchPtr)(cursor + tree->Offset);
+        branch = (DSBranchPtr) (cursor + tree->Offset);
         if (branch->Children) {
             tail = branch->Children;
         } else {
@@ -39,10 +39,10 @@ void DSInsertBranchBelow(DSTreePtr tree, Ptr cursor, Ptr obj)
         tree->Root = obj;
     }
     if (tail) {
-        while (((DSBranchPtr)(tail + tree->Offset))->Next) {
-            tail = ((DSBranchPtr)(tail + tree->Offset))->Next;
+        while (((DSBranchPtr) (tail + tree->Offset))->Next) {
+            tail = ((DSBranchPtr) (tail + tree->Offset))->Next;
         }
-        ((DSBranchPtr)(tail + tree->Offset))->Next = obj;
+        ((DSBranchPtr) (tail + tree->Offset))->Next = obj;
         objBranch->Prev = tail;
     } else {
         objBranch->Prev = NULL;
@@ -56,7 +56,7 @@ void DSInsertBranchBeside(DSTreePtr tree, Ptr cursor, Ptr obj)
     DSBranchPtr parent;
     DSBranchPtr branch;
 
-    branch = (DSBranchPtr)(obj + tree->Offset);
+    branch = (DSBranchPtr) (obj + tree->Offset);
     if (!cursor) {
         if (!tree->Root) {
             tree->Root = obj;
@@ -68,10 +68,10 @@ void DSInsertBranchBeside(DSTreePtr tree, Ptr cursor, Ptr obj)
         }
         cursor = tree->Root;
     }
-    while (((DSBranchPtr)(cursor + tree->Offset))->Next) {
-        cursor = ((DSBranchPtr)(cursor + tree->Offset))->Next;
+    while (((DSBranchPtr) (cursor + tree->Offset))->Next) {
+        cursor = ((DSBranchPtr) (cursor + tree->Offset))->Next;
     }
-    parent = (DSBranchPtr)(cursor + tree->Offset);
+    parent = (DSBranchPtr) (cursor + tree->Offset);
     parent->Next = obj;
     branch->Prev = cursor;
     branch->Next = NULL;
@@ -83,9 +83,9 @@ void DSRemoveBranch(DSTreePtr tree, Ptr obj)
     DSBranchPtr branch;
     DSBranchPtr parent;
 
-    branch = (DSBranchPtr)(obj + tree->Offset);
+    branch = (DSBranchPtr) (obj + tree->Offset);
     if (branch->Parent) {
-        parent = (DSBranchPtr)(branch->Parent + tree->Offset);
+        parent = (DSBranchPtr) (branch->Parent + tree->Offset);
         if (parent->Children == obj) {
             parent->Children = branch->Next;
         }
@@ -93,10 +93,10 @@ void DSRemoveBranch(DSTreePtr tree, Ptr obj)
         tree->Root = branch->Next;
     }
     if (branch->Prev) {
-        ((DSBranchPtr)(branch->Prev + tree->Offset))->Next = branch->Next;
+        ((DSBranchPtr) (branch->Prev + tree->Offset))->Next = branch->Next;
     }
     if (branch->Next) {
-        ((DSBranchPtr)(branch->Next + tree->Offset))->Prev = branch->Prev;
+        ((DSBranchPtr) (branch->Next + tree->Offset))->Prev = branch->Prev;
     }
     branch->Prev = NULL;
     branch->Next = NULL;

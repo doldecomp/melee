@@ -852,7 +852,8 @@ static void cbForStateBusy(unsigned long intType)
              CurrCommand == DVD_COMMAND_BSREAD ||
              CurrCommand == DVD_COMMAND_READID ||
              CurrCommand == DVD_COMMAND_INQUIRY) &&
-            executing->transferredSize == executing->length) {
+            executing->transferredSize == executing->length)
+        {
             if (!cancel_inline(0)) {
                 DVDCommandBlock* finished = executing;
                 executing = &DummyCommandBlock;
@@ -1747,16 +1748,14 @@ BOOL DVDCheckDisk(void)
         result = FALSE;
         break;
     case 0:
-    case 8:
-        {
-            u32 temp_r4 = __DIRegs[1];
-            if (((temp_r4 >> 2) & 1) || (temp_r4 & 1)) {
-                result = FALSE;
-            } else {
-                result = TRUE;
-            }
+    case 8: {
+        u32 temp_r4 = __DIRegs[1];
+        if (((temp_r4 >> 2) & 1) || (temp_r4 & 1)) {
+            result = FALSE;
+        } else {
+            result = TRUE;
         }
-        break;
+    } break;
     }
     OSRestoreInterrupts(enabled);
     return result;

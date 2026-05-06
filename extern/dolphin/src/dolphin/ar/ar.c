@@ -3,7 +3,6 @@
 #include <dolphin.h>
 #include <dolphin/ar.h>
 
-
 static void (*__AR_Callback)();
 static u32 __AR_Size;
 static u32 __AR_StackPointer;

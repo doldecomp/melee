@@ -3,7 +3,6 @@
 #include <dolphin/os.h>
 #include <dolphin/os/OSRtc.h>
 
-
 // internal include
 #include "__os.h"
 

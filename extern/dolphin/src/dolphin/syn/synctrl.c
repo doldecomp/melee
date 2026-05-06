@@ -5,7 +5,6 @@
 #include <dolphin/mix.h>
 #include <dolphin/syn.h>
 
-
 // .data
 float __SYNn128[128] = {
     0.000000f, 0.007813f, 0.015625f, 0.023438f, 0.031250f, 0.039063f,

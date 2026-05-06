@@ -6,7 +6,6 @@
 #include <dolphin/gx.h>
 #include <dolphin/perf.h>
 
-
 #define TOKEN_MAX 0xFFFF
 
 // .bss

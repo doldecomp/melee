@@ -7,12 +7,11 @@
 extern "C" {
 #endif
 
-typedef struct DBInterface
-{
-    u32     bPresent;
-    u32     exceptionMask;
-    void    (*ExceptionDestination) ( void );
-    void    *exceptionReturn;
+typedef struct DBInterface {
+    u32 bPresent;
+    u32 exceptionMask;
+    void (*ExceptionDestination)(void);
+    void* exceptionReturn;
 } DBInterface;
 
 extern DBInterface* __DBInterface;

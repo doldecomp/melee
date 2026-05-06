@@ -55,13 +55,12 @@ typedef struct _THPFileInfo {
     THPComponent components[3];
 } THPFileInfo;
 
-typedef struct {    
+typedef struct {
     s32 val0;
     u16 val1;
     u16 _pad;
-    u8 val2;    
+    u8 val2;
 } THPDec_8032FD40_Data;
-
 
 static u8 __THPSetupBuffers(THPFileInfo*);
 static u8 __THPReadFrameHeader(void);
@@ -84,7 +83,8 @@ static void __THPHuffDecodeDCTCompY(THPFileInfo*, THPCoeff*);
 static void __THPHuffDecodeDCTCompU(THPFileInfo*, THPCoeff*);
 static void __THPHuffDecodeDCTCompV(THPFileInfo*, THPCoeff*);
 
-s32 THPVideoDecode(void* file, void* tileY, void* tileU, void* tileV, void* work);
+s32 THPVideoDecode(void* file, void* tileY, void* tileU, void* tileV,
+                   void* work);
 s32 THPDec_803302EC(u8** data);
 s32 THPDec_8032FD40(THPDec_8032FD40_Data* arg0, u16 arg1);
 void THPDec_803300E0(u32* data);

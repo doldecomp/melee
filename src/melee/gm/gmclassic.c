@@ -2,13 +2,13 @@
 
 #include "gm_unsplit.h"
 
+#include <sysdolphin/baselib/random.h>
 #include <melee/gm/gmmain_lib.h>
 #include <melee/gm/gmregcommon.h>
 #include <melee/gr/ground.h>
 #include <melee/gr/stage.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lbdvd.h>
-#include <sysdolphin/baselib/random.h>
 
 extern UNK_T gmClassic_80470708[];
 extern DebugGameOverData gmClassic_80470850;
@@ -443,8 +443,7 @@ static gmClassicMatchup* gmClassic_801B2BA4(gmClassicMatchup* arg0, u8* arg1,
                 if (temp->xC != NULL) {
                     stage1 = Stage_8022519C((InternalStageId) entry->x00);
                     if (stage1 ==
-                        Stage_8022519C(
-                            (InternalStageId) temp->xC->x00))
+                        Stage_8022519C((InternalStageId) temp->xC->x00))
                     {
                         result = entry;
                         goto next;
@@ -575,10 +574,14 @@ void gmClassic_OnLoad(void)
         entry->xC = NULL;
     }
 
-    gmClassic_InitMatchupOrder(gmClassic_803DDEC8.x2B0, gmClassic_80490880.x80);
-    gmClassic_InitMatchupOrder(gmClassic_803DDEC8.x26C, gmClassic_80490880.x74);
-    gmClassic_InitMatchupOrder(gmClassic_803DDEC8.x1B8, gmClassic_80490880.x54);
-    gmClassic_InitMatchupOrder(gmClassic_803DDEC8.x0CC, gmClassic_80490880.x2C);
+    gmClassic_InitMatchupOrder(gmClassic_803DDEC8.x2B0,
+                               gmClassic_80490880.x80);
+    gmClassic_InitMatchupOrder(gmClassic_803DDEC8.x26C,
+                               gmClassic_80490880.x74);
+    gmClassic_InitMatchupOrder(gmClassic_803DDEC8.x1B8,
+                               gmClassic_80490880.x54);
+    gmClassic_InitMatchupOrder(gmClassic_803DDEC8.x0CC,
+                               gmClassic_80490880.x2C);
 
     data = gm_8017EB30();
     gmMainLib_8015CDC8();
@@ -676,11 +679,9 @@ void gmClassic_801B3500(MinorScene* arg0)
 
     for (i = 0; i < 3; i++) {
         sd->x10[i] = entry->xC->x02[i];
-        sd->x16[i] = gm_8017CD94((UnkAdventureData*) ad,
-                                 entry->xC->x02[i],
+        sd->x16[i] = gm_8017CD94((UnkAdventureData*) ad, entry->xC->x02[i],
                                  entry->x0, i);
-        gmRegSetupEnemyColorTable(ad->x0.ckind, ad->x0.color,
-                                  entry->xC->x02,
+        gmRegSetupEnemyColorTable(ad->x0.ckind, ad->x0.color, entry->xC->x02,
                                   sd->x16);
         if (entry->x1 & 4) {
             sd->x1C[i] = 1;
@@ -704,15 +705,13 @@ void gmClassic_801B3500(MinorScene* arg0)
 
     gm_8017DB88(ad->x0.xC.x24, entry->x1, ad->x0.cpu_level,
                 (u8) gm_8017BE84(arg0->idx), sd->x10, sd->x0D[0],
-                (u8 (*)(s32, s32, u8)) ad->x58, (u8 (*)(s32, s32, u8)) ad->x5C,
-                (u8 (*)(s32, s32, u8)) ad->x60, (f32 (*)(s32, s32)) ad->x6C,
-                (f32 (*)(s32, s32)) ad->x70);
+                (u8(*)(s32, s32, u8)) ad->x58, (u8(*)(s32, s32, u8)) ad->x5C,
+                (u8(*)(s32, s32, u8)) ad->x60, (f32(*)(s32, s32)) ad->x6C,
+                (f32(*)(s32, s32)) ad->x70);
 
     for (i = 1; i < 3; i++) {
-        sd->x0D[i] =
-            gm_8017DB6C((gm_8017DB6C_arg0_t*) ad->x0.xC.x24, i - 1);
-        sd->x13[i] =
-            gm_8017DB78((gm_8017DB6C_arg0_t*) ad->x0.xC.x24, i - 1);
+        sd->x0D[i] = gm_8017DB6C((gm_8017DB6C_arg0_t*) ad->x0.xC.x24, i - 1);
+        sd->x13[i] = gm_8017DB78((gm_8017DB6C_arg0_t*) ad->x0.xC.x24, i - 1);
         if (sd->x0D[i] != 0x21) {
             ally_count++;
         }
@@ -854,7 +853,7 @@ void gmClassic_801B3A34(MinorScene* arg0)
     u8 temp_r28;
     int idx_val;
     int var_r27;
-    StartMeleeData *new_var;
+    StartMeleeData* new_var;
     s32 sp8;
     s32 spC;
     UnkAllstarData* temp_r29;
@@ -880,9 +879,8 @@ void gmClassic_801B3A34(MinorScene* arg0)
     temp_r28 = gm_804908A0[idx_val];
     sp8 = (u16) gm_8017BE84(arg0->idx);
     spC = temp_r28;
-    gm_8017CE34(new_var, (UnkAdventureData*) temp_r29,
-                temp_r31->xC->x02, temp_r31->x6, 1, 0,
-                temp_r31->x4, (int) var_r27, sp8, spC);
+    gm_8017CE34(new_var, (UnkAdventureData*) temp_r29, temp_r31->xC->x02,
+                temp_r31->x6, 1, 0, temp_r31->x4, (int) var_r27, sp8, spC);
     gm_8016F088(new_var);
 }
 

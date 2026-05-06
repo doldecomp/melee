@@ -1,15 +1,15 @@
+#include "__gx.h"
+
+#include <macros.h>
 #include <dolphin/ai.h>
 #include <dolphin/gx.h>
-#include <dolphin/os.h>
 #include <dolphin/hw_regs.h>
-#include <macros.h>
-
-#include "__gx.h"
+#include <dolphin/os.h>
 
 static AISCallback __AIS_Callback;
 static AIDCallback __AID_Callback;
-static u8 *__CallbackStack;
-static u8 *__OldStack;
+static u8* __CallbackStack;
+static u8* __OldStack;
 static BOOL __AI_init_flag;
 static OSTime bound_32KHz;
 static OSTime bound_48KHz;
@@ -31,12 +31,12 @@ OSTime __ai_src_time_end;
 OSTime __ai_src_time_start;
 
 void __AI_DEBUG_set_stream_sample_rate(u32 rate);
-struct STRUCT_TIMELOG *__ai_src_get_time(void);
+struct STRUCT_TIMELOG* __ai_src_get_time(void);
 
 static void __AI_set_stream_sample_rate(u32 rate);
-static void __AIDHandler(__OSInterrupt interrupt, OSContext *context);
-static void __AISHandler(__OSInterrupt interrupt, OSContext *context);
-static void __AICallbackStackSwitch(void *cb);
+static void __AIDHandler(__OSInterrupt interrupt, OSContext* context);
+static void __AISHandler(__OSInterrupt interrupt, OSContext* context);
+static void __AICallbackStackSwitch(void* cb);
 static void __AI_SRC_INIT(void);
 
 AIDCallback AIRegisterDMACallback(AIDCallback callback)
@@ -58,7 +58,8 @@ void AIInitDMA(u32 start_addr, u32 length)
     old = OSDisableInterrupts();
     __DSPRegs[24] = (__DSPRegs[24] & 0xFFFFFC00) | (start_addr >> 16);
     __DSPRegs[25] = (__DSPRegs[25] & 0xFFFF001F) | (start_addr & 0xFFFF);
-    ASSERTMSGLINE(0x12E, (length & 0x1F) == 0, "AIStartDMA: length must be multiple of 32 bytes");
+    ASSERTMSGLINE(0x12E, (length & 0x1F) == 0,
+                  "AIStartDMA: length must be multiple of 32 bytes");
     __DSPRegs[27] = (__DSPRegs[27] & 0xFFFF8000) | ((length >> 5) & 0xFFFF);
     OSRestoreInterrupts(old);
 }
@@ -85,7 +86,7 @@ u32 AIGetDMABytesLeft(void)
 
 u32 AIGetDMAStartAddr(void)
 {
-    return ((__DSPRegs[24] << 16) & 0x03FF0000) |  (__DSPRegs[25] & 0xFFE0);
+    return ((__DSPRegs[24] << 16) & 0x03FF0000) | (__DSPRegs[25] & 0xFFE0);
 }
 
 u32 AIGetDMALength(void)
@@ -202,7 +203,8 @@ void AISetStreamSampleRate(u32 rate)
         return;
     }
 #if DEBUG
-    OSReport("AISetStreamSampleRate(): OBSOLETED. Only 48KHz streaming from disk is supported!\n");
+    OSReport("AISetStreamSampleRate(): OBSOLETED. Only 48KHz streaming from "
+             "disk is supported!\n");
 #endif
 }
 
@@ -264,7 +266,7 @@ u8 AIGetStreamVolRight(void)
     return (__AIRegs[1] & (0xFF << 8)) >> 8;
 }
 
-void AIInit(u8 *stack)
+void AIInit(u8* stack)
 {
     if (__AI_init_flag != TRUE) {
         bound_32KHz = OSNanosecondsToTicks(31524);
@@ -285,7 +287,8 @@ void AIInit(u8 *stack)
         __AID_Callback = NULL;
         __CallbackStack = stack;
         if (stack) {
-            ASSERTMSGLINE(0x444, ((u32)stack & 7) != 0, "AIInit: stack must be 8-byte aligned");
+            ASSERTMSGLINE(0x444, ((u32) stack & 7) != 0,
+                          "AIInit: stack must be 8-byte aligned");
         }
         __OSSetInterruptHandler(5, __AIDHandler);
         __OSUnmaskInterrupts(0x04000000);
@@ -300,7 +303,7 @@ void AIReset(void)
     __AI_init_flag = FALSE;
 }
 
-static void __AISHandler(__OSInterrupt interrupt, OSContext *context)
+static void __AISHandler(__OSInterrupt interrupt, OSContext* context)
 {
     OSContext exceptionContext;
 
@@ -314,7 +317,7 @@ static void __AISHandler(__OSInterrupt interrupt, OSContext *context)
     OSSetCurrentContext(context);
 }
 
-static void __AIDHandler(__OSInterrupt interrupt, OSContext *context)
+static void __AIDHandler(__OSInterrupt interrupt, OSContext* context)
 {
     OSContext exceptionContext;
     u16 tmp;
@@ -335,31 +338,15 @@ static void __AIDHandler(__OSInterrupt interrupt, OSContext *context)
     OSSetCurrentContext(context);
 }
 
-static asm void __AICallbackStackSwitch(register void *cb)
+static asm void __AICallbackStackSwitch(register void* cb)
 {
-    nofralloc
-    mflr r0
-    stw r0, 0x4(r1)
-    stwu r1, -0x18(r1)
-    stw r31, 0x14(r1)
-    mr r31, r3
-    lis r5, __OldStack@ha
-    addi r5, r5, __OldStack@l
-    stw r1, 0x0(r5)
-    lis r5, __CallbackStack@ha
-    addi r5, r5, __CallbackStack@l
-    lwz r1, 0x0(r5)
-    subi r1, r1, 0x8
-    mtlr r31
-    blrl
-    lis r5, __OldStack@ha
-    addi r5, r5, __OldStack@l
-    lwz r1, 0x0(r5)
-    lwz r0, 0x1c(r1)
-    lwz r31, 0x14(r1)
-    addi r1, r1, 0x18
-    mtlr r0
-    blr
+    nofralloc mflr r0 stw r0, 0x4(r1) stwu r1, -0x18(r1) stw r31,
+        0x14(r1) mr r31, r3 lis r5, __OldStack @ha addi r5, r5,
+        __OldStack @l stw r1, 0x0(r5) lis r5, __CallbackStack @ha addi r5, r5,
+        __CallbackStack @l lwz r1, 0x0(r5) subi r1, r1,
+        0x8 mtlr r31 blrl lis r5, __OldStack @ha addi r5, r5,
+        __OldStack @l lwz r1, 0x0(r5) lwz r0, 0x1c(r1) lwz r31,
+        0x14(r1) addi r1, r1, 0x18 mtlr r0 blr
 }
 
 void __AI_SRC_INIT(void)
@@ -405,7 +392,8 @@ void __AI_SRC_INIT(void)
             temp = min_wait;
             done = 1;
             Init_Cnt++;
-        } else if (diff >= bound_32KHz + buffer && diff < bound_48KHz - buffer) {
+        } else if (diff >= bound_32KHz + buffer && diff < bound_48KHz - buffer)
+        {
             temp = max_wait;
             done = 1;
             Init_Cnt++;
@@ -422,7 +410,7 @@ void __AI_SRC_INIT(void)
 #endif
 }
 
-struct STRUCT_TIMELOG *__ai_src_get_time(void)
+struct STRUCT_TIMELOG* __ai_src_get_time(void)
 {
 #if DEBUG
     return &profile;

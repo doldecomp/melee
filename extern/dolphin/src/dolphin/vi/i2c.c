@@ -1,6 +1,6 @@
-#include <dolphin/vi.h>
-
 #include "__vi.h"
+
+#include <dolphin/vi.h>
 
 static int lastError;
 
@@ -49,7 +49,7 @@ static int sendSlaveAddr(u8 slaveAddr)
     return 1;
 }
 
-int __VISendI2CData(u8 slaveAddr, u8 *pData, int nBytes)
+int __VISendI2CData(u8 slaveAddr, u8* pData, int nBytes)
 {
     s32 i;
     u8 data;

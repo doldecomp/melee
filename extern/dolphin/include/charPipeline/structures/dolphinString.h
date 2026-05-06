@@ -7,10 +7,10 @@
 extern "C" {
 #endif
 
-u8 Strcat(char *str1, char *str2, char *dst);
-void Strcpy(char *dst, char *src);
-s8 Strcmp(char *str1, char *str2);
-u32 Strlen(char *str);
+u8 Strcat(char* str1, char* str2, char* dst);
+void Strcpy(char* dst, char* src);
+s8 Strcmp(char* str1, char* str2);
+u32 Strlen(char* str);
 
 #ifdef __cplusplus
 }
