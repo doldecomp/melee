@@ -275,4 +275,16 @@
 /* 4D6D30 */ extern Article** it_804D6D30;
 /* 4D6D38 */ extern Article** it_804D6D38;
 
+typedef struct it_804D6D40_t {
+    /* 0x00 */ s32 x0;
+    /* 0x04 */ f32 x4;
+    /* 0x08 */ f32 x8;
+    /* 0x0C */ f32 xC;
+    /* 0x10 */ f32 x10;
+    /* 0x14 */ f32 x14;
+    /* 0x18 */ f32 x18;
+} it_804D6D40_t;
+
+/* 4D6D40 */ extern it_804D6D40_t* it_804D6D40;
+
 #endif

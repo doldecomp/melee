@@ -4727,14 +4727,14 @@ struct it_804D6D20_t {
     Article** x4;
     Article** x8;
     Article** xC;
-    f32* x10;
+    it_804D6D40_t* x10;
     struct Fighter_804D653C_t* x14;
 }* it_804D6D20;
 Article** it_804D6D24;
 ItemCommonData* it_804D6D28;
 Article** it_804D6D30;
 Article** it_804D6D38;
-f32* it_804D6D40;
+it_804D6D40_t* it_804D6D40;
 
 extern f32 it_804DC73C; // = 0.0f;
 static f32 it_804DC744 = 1.0f;
@@ -9464,7 +9464,7 @@ void it_8027B964(Item_GObj* item_gobj, bool chk)
     }
     sp14 = item->x40_vel;
     lbVector_Normalize(&sp14);
-    scale = ((float*) it_804D6D40)[1];
+    scale = it_804D6D40->x4;
     sp14.x *= scale;
     sp14.y *= scale;
     sp14.z *= scale;
@@ -9718,10 +9718,7 @@ bool it_8027C79C(Item_GObj* item_gobj)
         it_8027C9D8(item);
         it_8027B964(item_gobj, 1);
         item->xDD4_itemVar.it_27B5.x14.y++;
-        // if (item->xDD4_itemVar.it_27B5.x14.y > (f32) (u8) &it_804D6D40) {
-        // if (item->xDD4_itemVar.it_27B5.x14.y > ((ItemAttr*) ((Article*)
-        // it_804D6D40)->x0_common_attr)->x0_is_heavy) {
-        if (item->xDD4_itemVar.it_27B5.x14.y > ((S32Vec3*) it_804D6D40)->x) {
+        if (item->xDD4_itemVar.it_27B5.x14.y > it_804D6D40->x0) {
             it_8027CC88(item_gobj);
             return true;
         }
@@ -9874,12 +9871,10 @@ f32 it_8027CBFC(Item_GObj* item_gobj)
     switch (GET_ITEM(item_gobj)->xCC4) {
     case 6:
     case 7:
-        ret_val = *(f32*) ((u8*) it_804D6D40 + 0xC);
-        // ret_val = *(f32*) &((Article*) it_804D6D40)->xC_itemStates;
+        ret_val = it_804D6D40->xC;
         break;
     case 9:
-        ret_val = *(f32*) ((u8*) it_804D6D40 + 0x10);
-        // ret_val = *(f32*) &((Article*) it_804D6D40)->x10_modelDesc;
+        ret_val = it_804D6D40->x10;
         break;
     case 4:
     case 5:
@@ -9908,8 +9903,7 @@ Item_GObj* it_8027CC88(Item_GObj* item_gobj_arg)
     u32 pad2[4];
 
     item_gobj_var = NULL;
-    if ((gm_8016B498() != 0) &&
-        (HSD_Randi(*(f32*) ((u8*) it_804D6D40 + 0x14)) == 0))
+    if ((gm_8016B498() != 0) && (HSD_Randi(it_804D6D40->x14) == 0))
     {
         if (grLib_801C9E40() == 0) {
             var_r30 = Ground_801C5840();
@@ -9931,7 +9925,7 @@ Item_GObj* it_8027CC88(Item_GObj* item_gobj_arg)
                     grLib_801C9E50(1);
                 }
             }
-        } else if (grLib_801C9E40() >= *((f32*) it_804D6D40 + 6)) {
+        } else if (grLib_801C9E40() >= it_804D6D40->x18) {
             grLib_801C9E50(0);
         } else {
             grLib_801C9E50(grLib_801C9E40() + 1);
