@@ -7,6 +7,8 @@
 #include "baselib/random.h"
 #include "cm/camera.h"
 #include "ef/efsync.h"
+#include "ft/ftlib.h"
+#include "gm/gm_1601.h"
 
 #include "gr/forward.h"
 
@@ -460,13 +462,24 @@ void grIceMt_801F7728(Ground_GObj* gobj)
 
 void grIceMt_801F77AC(Ground_GObj* arg0) {}
 
+extern s16 grIm_803E4544[218];
+
 /// #fn_801F77B0
 void fn_801F77B0(HSD_GObj* arg0)
 {
     Ground* gp = GET_GROUND(arg0);
-    // 803E4544
-    // mpJointGetCb1();
-    mpJointSetCb1(4, gp, grIceMt_801FA7F0);
+    u32 i;
+    mpLib_Callback cb;
+    Ground* gp_out;
+
+    ((UnkFlagStruct*) &gp->gv.icemt.xD8)->b0 = 0;
+
+    for (i = 0; i < 0xD9; i++) {
+        mpJointGetCb1(grIm_803E4544[i], &cb, &gp_out);
+        if (cb == NULL) {
+            mpJointSetCb1(grIm_803E4544[i], gp, grIceMt_801FA7F0);
+        }
+    }
 }
 
 /// #grIceMt_801F785C
@@ -526,6 +539,112 @@ bool grIceMt_801F796C(Ground_GObj* arg0)
 }
 
 /// #grIceMt_801F7A2C
+void grIceMt_801F7A2C(Ground_GObj* arg0)
+{
+    Ground* gp = arg0->user_data;
+    f32 sp30;
+    Vec3 sp24;
+    HSD_GObj* fighter;
+    HSD_GObj* mgobj;
+    HSD_JObj* jobj;
+    f32 dist;
+    f32 cur;
+    f32 step;
+    f32 ratio;
+    s32 var_r30;
+    s32 r;
+    PAD_STACK(8);
+
+    if (((UnkFlagStruct*) &gp->gv.icemt.xD8)->b0) {
+        return;
+    }
+    if (!((UnkFlagStruct*) &gp->gv.icemt.xD8)->b2) {
+        var_r30 = grIceMt_801FA364(&gp->gv.corneria.xC8, &sp30,
+                                   (HSD_GObjEvent) fn_801F9150, arg0);
+        if (((UnkFlagStruct*) &gp->gv.icemt.xD8)->b4) {
+            fighter = Ground_801C57A4();
+            if (fighter != NULL) {
+                ftLib_80086644(fighter, &sp24);
+                if (!((UnkFlagStruct*) &gp->gv.icemt.xD8)->b1 &&
+                    !ftLib_80086EC0(fighter) &&
+                    sp24.y > (f32) ((s16*) grIm_804D69F4)[0x98 / 2])
+                {
+                    ((UnkFlagStruct*) &gp->gv.icemt.xD8)->b1 = 1;
+                    gp->gv.icemt.xDA = ((s16*) grIm_804D69F4)[0xA4 / 2];
+                }
+            }
+        }
+        if (((UnkFlagStruct*) &gp->gv.icemt.xD8)->b1) {
+            gp->gv.icemt.xE4 += grIm_804D69F4->xA0;
+            if (gp->gv.icemt.xE4 > grIm_804D69F4->x9C) {
+                gp->gv.icemt.xE4 = grIm_804D69F4->x9C;
+            }
+            gp->gv.icemt.xDA -= 1;
+            if (gp->gv.icemt.xDA == 0) {
+                ((UnkFlagStruct*) &gp->gv.icemt.xD8)->b1 = 0;
+            }
+        } else {
+            gp->gv.icemt.xE4 -= grIm_804D69F4->xA0;
+            if (gp->gv.icemt.xE4 < grIm_804DB574) {
+                gp->gv.icemt.xE4 = grIm_804DB574;
+            }
+        }
+        sp30 += gp->gv.icemt.xE4;
+    } else {
+        mgobj = Ground_801C2BA4(gp->gv.icemt.xC6);
+        if (mgobj == NULL) {
+            __assert("gricemt.c", 0x4C3, "mgobj");
+        }
+        jobj = mgobj->hsd_obj;
+        if (jobj == NULL) {
+            __assert("gricemt.c", 0x4C5, "jobj");
+        }
+        dist = HSD_JObjGetTranslationY(jobj) -
+               (f32) ((s16*) grIm_804D69F4)[0xA8 / 2];
+        if (dist < grIm_804DB574) {
+            gp->gv.icemt.xD4 = grIm_804DB574;
+        } else {
+            ratio = gp->gv.icemt.xD4 / grIm_804D69F4->xA0;
+            if ((gp->gv.icemt.xD4 * ratio) -
+                    (ratio * (0.5f * grIm_804D69F4->xA0 * ratio)) >
+                dist)
+            {
+                gp->gv.icemt.xD4 -= grIm_804D69F4->xA0;
+                if (gp->gv.icemt.xD4 < grIm_804D69F4->xA0) {
+                    gp->gv.icemt.xD4 = grIm_804D69F4->xA0;
+                }
+            }
+        }
+        sp30 = gp->gv.icemt.xD4;
+    }
+    grIceMt_801F9ACC((Ground_GObj*) &gp->gv.icemt.xC4,
+                     grIceMt_801F96E0((HSD_GObj*) &gp->gv.icemt.xC4, -sp30),
+                     (HSD_GObjEvent) fn_801F91A8, arg0);
+    grIceMt_801F9668(sp30);
+    if (gp->gv.icemt.xC4 == -1) {
+        ((UnkFlagStruct*) &gp->gv.icemt.xD8)->b2 = 1;
+    }
+    if (!((UnkFlagStruct*) &gp->gv.icemt.xD8)->b3) {
+        if (var_r30 != 0 &&
+            gp->gv.icemt.xDE == ((s16*) grIm_804D69F4)[0xA6 / 2])
+        {
+            ((UnkFlagStruct*) &gp->gv.icemt.xD8)->b3 = 1;
+            Ground_801C5750();
+            gm_801674C4(0xE, 2, 2, 0, (bool (*)(s32)) fn_801FA4CC);
+            grZakoGenerator_801CAF08();
+        }
+    } else {
+        r = Ground_801C5764();
+        switch (r) {
+        case 2:
+            break;
+        case 1:
+            Ground_801C1D6C(0x10);
+            break;
+        }
+    }
+    ((UnkFlagStruct*) &gp->gv.icemt.xD8)->b4 = 0;
+}
 
 void grIceMt_801F7D90(Ground_GObj* arg0) {}
 
@@ -997,9 +1116,19 @@ void grIceMt_801F91EC(HSD_GObj* param_1, s16* param_2, int param_3,
 /// #grIceMt_801F929C
 void grIceMt_801F929C(HSD_GObj* arg0, void* arg1)
 {
-    mpLib_80057BC0(2);
-    mpJointListAdd(2);
-    grAnime_801C83D0(arg0, 2, 7);
+    s16* p = arg1;
+
+    if (p[0] != 0) {
+        p[1] += 1;
+        if (p[1] == p[5]) {
+            mpLib_80057BC0(p[4]);
+        } else if (p[1] == p[6]) {
+            mpJointListAdd(p[4]);
+        }
+        if (grAnime_801C83D0(arg0, p[2], 7)) {
+            p[0] = 0;
+        }
+    }
 }
 
 /// #fn_801F9338
@@ -1130,7 +1259,60 @@ void grIceMt_801F9ACC(Ground_GObj* gobj, float y, HSD_GObjEvent ev,
 
 /// #grIceMt_801FA0BC
 
-/// #grIceMt_801FA364
+typedef struct grIceMt_FA364_State {
+    /* 0x0 */ s16 phase;
+    /* 0x2 */ s16 delay;
+    /* 0x4 */ s16 lerp_count;
+    /* 0x6 */ s16 burst_count;
+    /* 0x8 */ s16 idx;
+    /* 0xA */ s16 pad;
+    /* 0xC */ f32 cur;
+} grIceMt_FA364_State;
+
+bool grIceMt_801FA364(void* state_, f32* out, HSD_GObjEvent cb_,
+                      Ground_GObj* gobj)
+{
+    grIceMt_FA364_State* state = state_;
+    s32 (*cb)(HSD_GObj*, s32*) = (s32(*)(HSD_GObj*, s32*)) cb_;
+    bool ret = true;
+    f32 result;
+    s32 next_delay;
+    s16 tmp;
+
+    switch (state->phase) {
+    case 0:
+        tmp = state->delay;
+        state->delay = tmp - 1;
+        if (tmp < 0) {
+            state->idx = cb((HSD_GObj*) gobj, &next_delay);
+            state->delay = (s16) next_delay;
+            state->phase = 1;
+            state->lerp_count = ((s16*) grIm_804D69F4)[0x34 / 2];
+        }
+        break;
+    case 1:
+        state->lerp_count = state->lerp_count - 1;
+        tmp = state->lerp_count;
+        if (tmp != 0) {
+            state->cur +=
+                (((f32*) ((u8*) grIm_804D69F4 + 4))[state->idx] - state->cur) /
+                (f32) tmp;
+            ret = false;
+        } else {
+            state->phase = 0;
+            state->cur = ((f32*) ((u8*) grIm_804D69F4 + 4))[state->idx];
+        }
+        break;
+    }
+
+    result = state->cur;
+    if (state->burst_count != 0) {
+        result = grIm_804D69F4->x3C * Ground_801C0498();
+        state->burst_count--;
+    }
+    *out = result;
+    return ret;
+}
 
 int fn_801FA4CC(int num)
 { // https://decomp.me/scratch/pSJNA
