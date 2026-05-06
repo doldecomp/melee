@@ -1103,6 +1103,45 @@ void ftCo_ItemScopeAirFire_Coll(Fighter_GObj* gobj)
     ft_80082C74(gobj, fn_800D8268);
 }
 
+static void fn_800D84D4(Fighter_GObj* gobj, int arg1)
+{
+    extern int ftCo_804D9030;
+    Fighter* fp = gobj->user_data;
+    Vec3 sp20;
+    Vec3 sp14;
+    PAD_STACK(4);
+
+    if (fp->item_gobj != NULL) {
+        if (ftCheckThrowB0(fp)) {
+            it_80291CCC(fp->item_gobj, &sp14);
+            ftCo_800CDE94(fp, &sp14, &sp20);
+            if (arg1 == 0) {
+                it_80291FA8(fp->item_gobj, &sp20, arg1, fp->facing_dir);
+                sp20.z = *(f32*) &ftCo_804D9030;
+                efSync_Spawn(0x430, fp->gobj, &sp20, &fp->facing_dir);
+                ft_PlaySFX(fp, 0xFC, 0x7F, 0x40);
+            } else if (arg1 >= 1 && arg1 <= 8) {
+                it_80291FA8(fp->item_gobj, &sp20, arg1, fp->facing_dir);
+                sp20.z = *(f32*) &ftCo_804D9030;
+                efSync_Spawn(0x430, fp->gobj, &sp20, &fp->facing_dir);
+                if (arg1 <= 4) {
+                    ft_PlaySFX(fp, 0xFF, 0x7F, 0x40);
+                } else {
+                    ft_PlaySFX(fp, 0x100, 0x7F, 0x40);
+                }
+            } else if (arg1 == 9) {
+                it_80291FA8(fp->item_gobj, &sp20, arg1, fp->facing_dir);
+                sp20.z = *(f32*) &ftCo_804D9030;
+                efSync_Spawn(0x430, fp->gobj, &sp20, &fp->facing_dir);
+                ft_PlaySFX(fp, 0x100, 0x7F, 0x40);
+            } else {
+                efSync_Spawn(0x405, gobj, &sp20);
+                ft_PlaySFX(fp, 0x101, 0x7F, 0x40);
+            }
+        }
+    }
+}
+
 void fn_800D86B8(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);

@@ -933,7 +933,67 @@ void HSD_Synth_8038AD74(u32 offset, uintptr_t src)
 
 /// #HSD_Synth_8038ADD0(void)
 
-/// #HSD_Synth_8038B120
+void HSD_Synth_8038B120(void)
+{
+    AXPBVE ve;
+    int i;
+    bool enabled;
+    struct HSD_SynthSFXNode* node;
+
+    PAD_STACK(0x10);
+
+    node = getNode(HSD_Synth_804D7760);
+    if (node != NULL) {
+        if (!(node->flags & 2)) {
+            ve.currentVolume =
+                (32767.0F * (node->user_vol[0].x8_float *
+                             (node->unk28 *
+                              (HSD_Synth_804D6030 *
+                               HSD_Synth_804C28E0_1784[node->xB].x1784))));
+        } else {
+            ve.currentVolume = 0;
+        }
+        ve.currentDelta = 0;
+        node->x24 = ve.currentVolume;
+        for (i = 0; i < node->voice_count; i++) {
+            AXSetVoiceVe(node->voice[i], &ve);
+            if (node->flags & 4) {
+                *(u32*) &HSD_Synth_80407FD8.ratioHi = 0;
+            } else {
+                *(u32*) &HSD_Synth_80407FD8.ratioHi =
+                    (u32) (65536.0F *
+                           (node->x14 * node->x18[0] * node->x18[1]));
+            }
+            AXSetVoiceSrc(node->voice[i], &HSD_Synth_80407FD8);
+            AXSetVoiceCurrentAddr(
+                node->voice[i],
+                (HSD_Synth_804D7780 + ((u32) HSD_Synth_804D7768 << 16)) * 2 +
+                    i * lbl_804C4540[HSD_Synth_804D7768].x0 + 2);
+            AXSetVoiceEndAddr(
+                node->voice[i],
+                (HSD_Synth_804D7780 + ((u32) HSD_Synth_804D7768 << 16)) * 2 +
+                    i * lbl_804C4540[HSD_Synth_804D7768].x0 +
+                    lbl_804C4540[HSD_Synth_804D7768].x4);
+            AXSetVoiceLoopAddr(
+                node->voice[i],
+                (HSD_Synth_804D7780 + ((u32) HSD_Synth_804D7768 << 16)) * 2 +
+                    i * lbl_804C4540[HSD_Synth_804D7768].x0 + 2);
+            AXSetVoiceState(node->voice[i], 1);
+        }
+        node->flags &= ~8;
+        enabled = OSDisableInterrupts();
+        if (!node->volume_update_pending && !(node->flags & 8)) {
+            node->volume_update_pending = 1;
+            node->x20 = HSD_Synth_804D774C;
+            HSD_Synth_804D774C = node;
+        }
+        OSRestoreInterrupts(enabled);
+        HSD_SynthSFXUpdateMix(node, 0);
+        HSD_Synth_804D7778 = 0;
+    } else {
+        HSD_Synth_804D7778 = 0;
+    }
+}
 
 void HSD_SynthPStreamFirstHakoHeaderCallback(void)
 {
@@ -943,7 +1003,47 @@ void HSD_SynthPStreamFirstHakoHeaderCallback(void)
                       (HSD_DevComCallback) HSD_Synth_8038B120, 0);
 }
 
-/// #HSD_SynthPStreamHeaderCallback
+extern s32 HSD_Synth_804D7770;
+extern u32 HSD_Synth_804D7774;
+
+void HSD_SynthPStreamHeaderCallback(int arg0, int arg1, void* arg2,
+                                    int cancelflag)
+{
+    u32* entry = arg2;
+    struct HSD_SynthSFXNode* node;
+    int i;
+
+    node = getNode(HSD_Synth_804D7760);
+    if (node != NULL) {
+        node->voice_count = entry[3];
+        if (node->voice_count == 2) {
+            node->voice[1] = AXAcquireVoice(0x1D, dropcallback, 0);
+            if (node->voice[1] == NULL) {
+                __assert("synth.c", 0x5CF, "entry->voice[1]");
+            }
+        }
+        node->x14 = 0.00003125f * (f32) entry[2];
+        for (i = 0; i < node->voice_count; i++) {
+            *(u32*) &HSD_Synth_80407FD8.ratioHi =
+                (u32) (65536.0f * node->x14);
+            AXSetVoiceAddr(node->voice[i],
+                           (AXPBADDR*) &entry[i * 14 + 4]);
+            AXSetVoiceAdpcm(node->voice[i],
+                            (AXPBADPCM*) &entry[i * 14 + 8]);
+        }
+        HSD_Synth_804D7774 = (HSD_Synth_804D7774 + 2) % 3;
+        HSD_Synth_804D776C = HSD_Synth_804D7770 = HSD_Synth_804D7768 =
+            HSD_Synth_804D7774;
+        HSD_DevComRequest(HSD_Synth_804D7764, 0x80,
+                          (uintptr_t) &lbl_804C4540[HSD_Synth_804D7768], 0x20,
+                          0x21, 0,
+                          (HSD_DevComCallback)
+                              HSD_SynthPStreamFirstHakoHeaderCallback,
+                          NULL);
+    } else {
+        HSD_Synth_804D7778 = 0;
+    }
+}
 
 static inline void HSD_Synth_8038B5AC_inline(void)
 {

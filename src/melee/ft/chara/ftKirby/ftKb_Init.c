@@ -4352,7 +4352,7 @@ void ftKb_SpecialN_800F1D24(Fighter_GObj* gobj)
         if (x60 != 0) {
             fp->fv.kb.x60 = x60 - 1;
         } else {
-            ftKb_SpecialN_800F1DAC();
+            ftKb_SpecialN_800F1DAC(gobj);
         }
         if ((coll->env_flags & 0x800) || (coll->env_flags & 0x20) ||
             (coll->env_flags & 0x4000) || (coll->env_flags & 0x10000))
@@ -4362,7 +4362,45 @@ void ftKb_SpecialN_800F1D24(Fighter_GObj* gobj)
     }
 }
 
-/// #ftKb_SpecialN_800F1DAC
+void ftKb_SpecialN_800F1DAC(HSD_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    CollData* coll = &fp->coll_data;
+    Vec3 vec;
+    PAD_STACK(16);
+
+    if ((coll->env_flags & 0x800) && !(coll->prev_env_flags & 0xFC0)) {
+        vec.x = coll->ecb.left.x;
+        vec.y = coll->ecb.left.y;
+        vec.z = 0.0f;
+        efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 2, 0x49E,
+                      fp->parts[0].joint, &vec);
+        return;
+    }
+    if ((coll->env_flags & 0x20) && !(coll->prev_env_flags & 0x3F)) {
+        vec.x = coll->ecb.right.x;
+        vec.y = coll->ecb.right.y;
+        vec.z = 0.0f;
+        efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 2, 0x49E,
+                      fp->parts[0].joint, &vec);
+        return;
+    }
+    if ((coll->env_flags & 0x4000) && !(coll->prev_env_flags & 0x6000)) {
+        vec.x = 0.0f;
+        vec.y = coll->ecb.top.y;
+        vec.z = 0.0f;
+        efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 2, 0x49E,
+                      fp->parts[0].joint, &vec);
+        return;
+    }
+    if ((coll->env_flags & 0x10000) && !(coll->prev_env_flags & 0x18000)) {
+        vec.x = 0.0f;
+        vec.y = coll->ecb.bottom.y;
+        vec.z = 0.0f;
+        efAsync_Spawn(gobj, &GET_FIGHTER(gobj)->x60C, 2, 0x49E,
+                      fp->parts[0].joint, &vec);
+    }
+}
 
 void ftKb_SpecialN_800F1F1C(Fighter_GObj* gobj, Vec3* pos)
 {

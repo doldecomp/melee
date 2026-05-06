@@ -735,7 +735,36 @@ void ftKb_SpecialNYs_8010AA2C(Fighter_GObj* gobj)
     ftColl_8007B62C(gobj, 2);
 }
 
-/// #fn_8010AA64
+static void fn_8010AA64(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    HSD_JObj* jobj = gobj->hsd_obj;
+    if (fp->mv.co.yoshiegg.x14 <= 0.0f) {
+        Fighter_UpdateModelScale(gobj);
+        fp->accessory4_cb = NULL;
+        return;
+    }
+    fp->mv.co.yoshiegg.x14 -= 1.0f;
+    {
+        Vec3 vec1, vec0;
+        f32 temp0 = (fp->mv.co.yoshiegg.x10 - fp->mv.co.yoshiegg.x14) /
+                    fp->mv.co.yoshiegg.x10;
+        temp0 *= fp->mv.co.yoshiegg.xC;
+        {
+            f32 temp1 = (1.0f - fp->mv.co.yoshiegg.xC) + temp0;
+            vec1.x = vec1.y = vec1.z = temp1;
+            vec0 = vec1;
+            vec1.x = vec1.x * fp->mv.co.yoshiegg.x18.x;
+            vec1.y *= fp->mv.co.yoshiegg.x18.y;
+            vec1.z *= fp->mv.co.yoshiegg.x18.z;
+            HSD_JObjSetScale(jobj, &vec1);
+            vec0.x = vec0.x * fp->mv.co.yoshiegg.scale.x;
+            vec0.y *= fp->mv.co.yoshiegg.scale.y;
+            vec0.z *= fp->mv.co.yoshiegg.scale.z;
+            HSD_JObjSetScale(fp->x20A0_accessory, &vec0);
+        }
+    }
+}
 
 /// #ftKb_SpecialNYs_8010AC78
 

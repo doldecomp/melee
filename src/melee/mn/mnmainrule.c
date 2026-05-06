@@ -9,6 +9,7 @@
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/sislib.h>
 #include <melee/gm/gmmain_lib.h>
+#include <melee/lb/lb_00F9.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/sc/types.h>
@@ -51,6 +52,7 @@ extern StaticModelDesc MenMainCursorSs_Top;
 
 extern u8 mn_804D4B96;
 extern u8 mn_803EC818[];
+extern s32 mn_804D6BD4;
 
 void mn_802307F8(struct mn_802307F8_t* data, s32 mode, s32 index)
 {
@@ -121,7 +123,57 @@ void mn_802308F0(HSD_GObj* gobj, int arg1, int arg2)
 
 /// #fn_802309F0
 
-/// #mn_80230D18
+struct mn_80230D18_t {
+    /* 0x000 */ u8 unk0;
+    /* 0x001 */ u8 unk1;
+    /* 0x002 */ u8 unk2;
+    /* 0x003 */ u8 unk3;
+    /* 0x004 */ u8 unk4;
+    /* 0x005 */ u8 unk5;
+    /* 0x006 */ u8 unk6;
+    /* 0x007 */ u8 pad7[2];
+    /* 0x009 */ u8 unk9;
+    /* 0x00A */ u8 unkA;
+    /* 0x00B */ u8 padB;
+    /* 0x00C */ HSD_JObj* slots[10];
+    /* 0x034 */ u8 pad34[0x130 - 0x34];
+    /* 0x130 */ s32 unk130;
+}; /* size = 0x134 */
+
+s32 mn_80230D18(struct mn_80230D18_t* arg0, HSD_JObj* arg1, s8 arg2)
+{
+    GameRules* rules;
+    s32 ret;
+    s32 i;
+
+    arg0->unk0 = mn_804A04F0.cur_menu;
+    arg0->unk1 = mn_804A04F0.hovered_selection;
+
+    rules = gmMainLib_8015CC34();
+    arg0->unk4 = rules->handicap;
+    if (mn_804D6BD4 == 0 && arg0->unk4 == 1) {
+        arg0->unk4 = 0;
+    }
+
+    arg0->unk5 = gmMainLib_8015CC34()->damage_ratio;
+    arg0->unk6 = gmMainLib_8015CC34()->unk_x7;
+    arg0->unk2 = gmMainLib_8015CC34()->mode;
+    arg0->unk9 = gmMainLib_8015CC34()->stock_count;
+    arg0->unk3 = gmMainLib_8015CC34()->time_limit;
+
+    if (gm_801A4310() == 0x1B && arg0->unk3 == 0) {
+        arg0->unk3 = 0x63;
+    }
+
+    arg0->unkA = arg2;
+    arg0->unk130 = 0;
+
+    ret = 0;
+    for (i = 0; i < 10; i++) {
+        ret = lb_80011E24(arg1, &arg0->slots[i], i, -1);
+    }
+    return ret;
+}
 
 /// #mn_80230E38
 
