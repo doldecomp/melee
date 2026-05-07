@@ -22,12 +22,12 @@
 /* 2BB880 */ bool itSeakchain_UnkMotion4_Anim(Item_GObj*);
 /* 2BB938 */ int it_802BB938(ItemLink* link, int arg1, f32 arg2);
 /* 2BBAEC */ s32 it_802BBAEC(ItemLink* link, s32 arg1, f32 arg2);
-/* 2BBB0C */ int it_802BBB0C(ItemLink* link, Vec3* offset, Mtx mtx,
-                             float scale);
-/* 2BBC38 */ void it_802BBC38(ItemLink*, Vec3*, Mtx, float);
-/* 2BBD64 */ enum_t it_802BBD64(ItemLink*, Vec3*, Mtx);
-/* 2BBED0 */ enum_t it_802BBED0(ItemLink*, Vec3*, Mtx);
-/* 2BC94C */ bool it_802BC94C(ItemLink*, Vec3*, Mtx, float);
+/* 2BBB0C */ void it_802BBB0C(ItemLink* link, Vec3* offset,
+                              itSeakChain_Attrs* sa, float scale);
+/* 2BBC38 */ void it_802BBC38(ItemLink*, Vec3*, itSeakChain_Attrs*, float);
+/* 2BBD64 */ enum_t it_802BBD64(ItemLink*, Vec3*, itSeakChain_Attrs*);
+/* 2BBED0 */ enum_t it_802BBED0(ItemLink*, Vec3*, itSeakChain_Attrs*);
+/* 2BC94C */ bool it_802BC94C(ItemLink*, Vec3*, itSeakChain_Attrs*, float);
 /* 2BCA30 */ void it_802BCA30(Item* ip);
 /* 2BCE94 */ void it_2725_Logic54_PickedUp(Item_GObj* gobj);
 /* 2BCED4 */ void it_802BCED4(Item_GObj* gobj);

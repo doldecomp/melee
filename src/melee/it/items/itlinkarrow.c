@@ -288,14 +288,16 @@ void it_802A850C(Item_GObj* gobj, Vec3* arg1, Vec3* arg2, f32 arg3, f32 arg4,
     u32 sp60;
     u8 _pad4[4];
     Quaternion quat;
+    HSD_GObj* fighter;
     PAD_STACK(12);
 
     ip->xDD4_itemVar.linkarrow.x94 = arg3;
     it_80275158(gobj, attr->x0 + attr->x18);
     ip->xDD4_itemVar.linkarrow.xAC = arg4;
-    {
-        HSD_GObj* fighter = ip->xDD4_itemVar.linkarrow.xE0;
-        if ((fighter != NULL) && (ip->owner == fighter)) {
+
+    fighter = ip->xDD4_itemVar.linkarrow.xE0;
+    if (fighter != NULL) {
+        if (ip->owner == fighter) {
             it_802A8C7C(gobj);
             HSD_MtxGetRotation(
                 ftLib_80086630(ip->xDD4_itemVar.linkarrow.xE0, ip->xDC4)->mtx,

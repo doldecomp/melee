@@ -184,7 +184,7 @@ bool it_802E8CD8(Item_GObj* gobj)
         it_802756D0(gobj);
         it_8027CE44(gobj);
         Camera_80030E44(2, &ip->pos);
-        if (HSD_Randf() < it_804D6D40[2]) {
+        if (HSD_Randf() < it_804D6D40->x8) {
             it_802EA334(gobj);
         } else if (ip->msid == 8) {
             it_802EA2A0(gobj);
@@ -197,7 +197,7 @@ bool it_802E8CD8(Item_GObj* gobj)
         if (it_802EA804(gobj, 15.0f) != 0) {
             it_802E9738(gobj);
         } else if ((ip->xDD4_itemVar.leadead.x50 > 1) && (HSD_Randi(2) == 0)) {
-            if (HSD_Randf() < it_804D6D40[2]) {
+            if (HSD_Randf() < it_804D6D40->x8) {
                 it_802EA334(gobj);
             } else {
                 it_802EA2A0(gobj);

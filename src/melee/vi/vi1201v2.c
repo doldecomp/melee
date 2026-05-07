@@ -128,26 +128,33 @@ void un_8032074C(HSD_GObj* gobj)
     }
 }
 
+inline HSD_GObj* inline_fn(void)
+{
+    return GObj_Create(0xE, 0xF, 0);
+}
+
 void un_803207C4(void)
 {
+    HSD_GObj* new_var;
     HSD_JObj* jobj;
     HSD_GObj* gobj;
     s32 i = 0;
 
     while (un_804D7010->models[i] != NULL) {
         if (i != 1) {
-            gobj = GObj_Create(0xE, 0xF, 0);
+            gobj = inline_fn();
             jobj = HSD_JObjLoadJoint(un_804D7010->models[i]->joint);
-            HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, jobj);
-            GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0xB, 0);
+            new_var = gobj;
+            HSD_GObjObject_80390A70(new_var, HSD_GObj_804D7849, jobj);
+            GObj_SetupGXLink(new_var, HSD_GObj_JObjCallback, 0xB, 0);
             gm_8016895C(jobj, un_804D7010->models[i], 0);
             HSD_JObjReqAnimAll(jobj, 0.0f);
             HSD_JObjAnimAll(jobj);
             if (i == 0) {
-                HSD_GObj_SetupProc(gobj, un_8032074C, 0);
+                HSD_GObj_SetupProc(new_var, un_8032074C, 0);
                 lb_80011E24(jobj, &un_804D7024, 2, -1);
             } else {
-                HSD_GObj_SetupProc(gobj, mn_8022EAE0, 0);
+                HSD_GObj_SetupProc(new_var, mn_8022EAE0, 0);
             }
         }
         i++;

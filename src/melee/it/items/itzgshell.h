@@ -67,7 +67,6 @@
 /* 2DFF14 */ void it_802DFF14(Item_GObj*, s32);
 /* 2DFFB8 */ void it_802DFFB8(HSD_JObj*, Item*);
 /* 2E0100 */ Item_GObj* it_802E0100(s32, Vec3*, s32);
-/* 2E0408 */ bool itZRShell_Logic12_Clanked(Item_GObj*);
 extern ItemStateTable it_803F86C8[];
 
 #endif

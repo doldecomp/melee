@@ -1120,7 +1120,7 @@ void grShrineRoute_8020A89C(Ground_GObj* arg) {}
 
 void grShrineRoute_8020A8A0(Ground_GObj* arg) {}
 
-inline f32 grShrineRoute_8020A8A4_rand()
+inline f32 grShrineRoute_8020A8A4_rand(void)
 {
     return HSD_Randf();
 }

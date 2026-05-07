@@ -920,10 +920,11 @@ static inline bool checkNanaInRange(Fighter_GObj* gobj)
     ftIceClimberAttributes* da = fp->dat_attrs;
     Fighter_GObj* nana_gobj = Player_GetEntityAtIndex(fp->player_id, 1);
     if (nana_gobj != NULL) {
-        Fighter* nana_fp = nana_gobj->user_data;
-        f32 dx = SQ(fp->cur_pos.x - nana_fp->cur_pos.x);
-        f32 dy = SQ(fp->cur_pos.y - nana_fp->cur_pos.y);
-        if (sqrtf__Ff(dx + dy) < da->x7C && ftNn_Init_8012300C(nana_gobj)) {
+        Vec3* nana_pos = &((Fighter*) nana_gobj->user_data)->cur_pos;
+        f32 dx = SQ(fp->cur_pos.x - nana_pos->x);
+        f32 dy = SQ(fp->cur_pos.y - nana_pos->y);
+        if (sqrtf__Ff(dx + dy) < da->x7C && ftNn_Init_8012300C(nana_gobj) == 1)
+        {
             return true;
         }
     }
@@ -940,6 +941,7 @@ static inline void incrementMvAndCheck(Fighter_GObj* gobj)
 void ftPp_SpecialHiStart_0_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
+    PAD_STACK(32);
     if (fp->cmd_vars[2] != 0) {
         fp->cmd_vars[2] = 0;
         if (!checkNanaInRange(gobj)) {
@@ -958,16 +960,17 @@ void ftPp_SpecialHiStart_0_Anim(Fighter_GObj* gobj)
 void ftPp_SpecialAirHiStart_0_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
+    PAD_STACK(32);
     if (fp->cmd_vars[2] != 0) {
         fp->cmd_vars[2] = 0;
         if (!checkNanaInRange(gobj)) {
-            ftPp_SpecialHi_80122098(gobj);
+            ftPp_SpecialHi_801220D4(gobj);
             return;
         }
         fp->x2222_b2 = true;
     }
     if (!ftAnim_IsFramesRemaining(gobj)) {
-        ftPp_SpecialHi_80121DA0(gobj);
+        ftPp_SpecialHi_80121DD8(gobj);
         return;
     }
     incrementMvAndCheck(gobj);
@@ -1741,19 +1744,23 @@ static inline void ftPp_set_cbs(Fighter_GObj* gobj)
 
 void fn_80122B54(Fighter_GObj* gobj)
 {
+    Fighter_GObj* new_var;
     Fighter* fp = gobj->user_data;
+    Fighter* fp2;
+    new_var = gobj;
     PAD_STACK(8);
     ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, ftPp_MS_SpecialLw, 0x0C4C5282,
-                              fp->cur_anim_frame, 1.0F, 0.0F, NULL);
-    ftPp_set_cbs(gobj);
-    fp = gobj->user_data;
-    if (fp->cmd_vars[3] != 0) {
-        ftPartSetRotX(fp, 0,
-                      fp->facing_dir * atan2f(fp->coll_data.floor.normal.x,
-                                              fp->coll_data.floor.normal.y));
+    fp2 = fp;
+    Fighter_ChangeMotionState(new_var, ftPp_MS_SpecialLw, 0x0C4C5282,
+                              fp2->cur_anim_frame, 1.0F, 0.0F, 0L);
+    ftPp_set_cbs(new_var);
+    fp2 = gobj->user_data;
+    if (fp2->cmd_vars[3] != 0) {
+        ftPartSetRotX(fp2, 0,
+                      fp2->facing_dir * atan2f(fp2->coll_data.floor.normal.x,
+                                               fp2->coll_data.floor.normal.y));
     } else {
-        ftPartSetRotX(fp, 0, 0.0F);
+        ftPartSetRotX(fp2, 0, 0.0F);
     }
     fp->accessory4_cb = fn_80122D2C;
 }
@@ -1768,11 +1775,19 @@ static inline void ftPp_SpecialLw_Coll_Land(Fighter_GObj* gobj)
 
 void ftPp_SpecialLw_Coll(Fighter_GObj* gobj)
 {
+    Fighter* fp;
+    PAD_STACK(8);
     if (ft_80082708(gobj) == GA_Ground) {
-        Fighter* fp = GET_FIGHTER(gobj);
-        ftPartSetRotX(fp, 0, 0.0f);
-        ftPp_SpecialLw_Coll_Land(gobj);
-        ftPp_set_cbs(gobj);
+        ftPartSetRotX(GET_FIGHTER(gobj), 0, 0.0f);
+        fp = GET_FIGHTER(gobj);
+        ftCommon_8007D5D4(fp);
+        Fighter_ChangeMotionState(gobj, ftPp_MS_SpecialAirLw, 0x0C4C5282,
+                                  fp->cur_anim_frame, 1.0f, 0.0f, NULL);
+        {
+            Fighter* temp_fp = gobj->user_data;
+            temp_fp->death2_cb = ftPp_Init_8011F060;
+            temp_fp->take_dmg_cb = ftPp_Init_8011F060;
+        }
         fp->accessory4_cb = fn_80122D2C;
         ftCommon_ClampAirDrift(fp);
     } else {

@@ -16,27 +16,26 @@ typedef struct TmBoxArrays {
 
 /// @todo :: this isnt exactly right
 typedef struct TmAnimTimers {
-    u16 x0;
-    u16 x2;
+    u32 x0;
     u16 x4;
-    u16 x6[2];
-    u16 xA;
-    u16 xC;
+    u16 x6[4];
     u8 xE;
     u8 xF;
-    u8 pad_x10[0x1C - 0x10];
+    u8 x10[4];
+    u8 pad_x14[0x18 - 0x14];
+    u8 x18[4];
     u8 x1C;
-    u8 x1D;
-    u8 x1E;
-    u8 x1F;
     struct {
+        u8 a;
+        u8 b;
+        u8 c;
         u8 x0;
         u8 x1;
         u8 x2;
-        u8 x3;
-        u8 x4;
-        u8 x5;
-    } x20[4]; ///< jobj states for each player?
+    } x1D[4]; ///< per-player jobj/anim states
+    u8 pad_x35[0x38 - 0x35];
+    u8 x38[4];
+    u8 pad_x3C[0x40 - 0x3C];
 } TmAnimTimers;
 
 typedef struct gm_8019ECAC_OnEnter_t {

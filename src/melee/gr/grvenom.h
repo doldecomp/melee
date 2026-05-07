@@ -50,7 +50,7 @@
 /* 205AD4 */ void grVenom_80205AD4(Ground_GObj*);
 /* 205DF0 */ bool grVenom_80205DF0(Ground_GObj*);
 /* 205DF8 */ s32 grVenom_80205DF8(Vec3*);
-/* 205E84 */ s32 grVenom_80205E84(Vec2*);
+/* 205E84 */ s32 grVenom_80205E84(Vec3*);
 /* 205F30 */ void grVenom_80205F30(Ground_GObj*);
 /* 206870 */ void grVenom_80206870(Ground_GObj*);
 /* 206874 */ void grVenom_80206874(Ground_GObj*);

@@ -91,7 +91,17 @@ HSD_GObj* grHomeRun_8021C82C(int gobj_id)
     return gobj;
 }
 
-/// #grHomeRun_8021C914
+void grHomeRun_8021C914(Ground_GObj* gobj)
+{
+    Ground* gp = GET_GROUND(gobj);
+    HSD_JObj* jobj = (HSD_JObj*) gobj->hsd_obj;
+
+    grAnime_801C8138((HSD_GObj*) gobj, gp->map_id, 0);
+
+    HSD_JObjSetScaleX(jobj, grHr_804D6AE4 * HSD_JObjGetScaleX(jobj));
+    HSD_JObjSetScaleY(jobj, grHr_804D6AE4 * HSD_JObjGetScaleY(jobj));
+    HSD_JObjSetScaleZ(jobj, grHr_804D6AE4 * HSD_JObjGetScaleZ(jobj));
+}
 
 bool grHomeRun_8021CB10(Ground_GObj* arg)
 {
@@ -151,8 +161,7 @@ void grHomeRun_8021DF50(Ground_GObj* gobj)
             f32 y, z;
             HSD_Text* text;
 
-            gp->gv.unk.xC8 =
-                (int) grHomeRun_8021EC58(gp->gv.homerun.xC6);
+            gp->gv.unk.xC8 = (int) grHomeRun_8021EC58(gp->gv.homerun.xC6);
             lb_8000B1CC((HSD_JObj*) gp->gv.unk.xCC, NULL, &pos);
 
             scale = Ground_801C0498();
@@ -163,8 +172,7 @@ void grHomeRun_8021DF50(Ground_GObj* gobj)
 
             scale = Ground_801C0498();
             text = (HSD_Text*) gp->gv.unk.xC8;
-            text->pos_x =
-                pos.x + (-1.0F) * (grHr_804D6AE4 * scale);
+            text->pos_x = pos.x + (-1.0F) * (grHr_804D6AE4 * scale);
             text->pos_y = y;
             text->pos_z = z;
         }
@@ -217,8 +225,7 @@ void grHomeRun_8021E0D4(Ground_GObj* gobj)
             f32 y, z;
             HSD_Text* text;
 
-            gp->gv.unk.xC8 =
-                (int) grHomeRun_8021EC58(gp->gv.homerun.xC6);
+            gp->gv.unk.xC8 = (int) grHomeRun_8021EC58(gp->gv.homerun.xC6);
             lb_8000B1CC((HSD_JObj*) gp->gv.unk.xCC, NULL, &pos);
 
             scale = Ground_801C0498();
@@ -229,8 +236,7 @@ void grHomeRun_8021E0D4(Ground_GObj* gobj)
 
             scale = Ground_801C0498();
             text = (HSD_Text*) gp->gv.unk.xC8;
-            text->pos_x =
-                pos.x + (-1.0F) * (grHr_804D6AE4 * scale);
+            text->pos_x = pos.x + (-1.0F) * (grHr_804D6AE4 * scale);
             text->pos_y = y;
             text->pos_z = z;
         }
@@ -283,8 +289,7 @@ void grHomeRun_8021E258(Ground_GObj* gobj)
             f32 y, z;
             HSD_Text* text;
 
-            gp->gv.unk.xC8 =
-                (int) grHomeRun_8021EC58(gp->gv.homerun.xC6);
+            gp->gv.unk.xC8 = (int) grHomeRun_8021EC58(gp->gv.homerun.xC6);
             lb_8000B1CC((HSD_JObj*) gp->gv.unk.xCC, NULL, &pos);
 
             scale = Ground_801C0498();
@@ -295,8 +300,7 @@ void grHomeRun_8021E258(Ground_GObj* gobj)
 
             scale = Ground_801C0498();
             text = (HSD_Text*) gp->gv.unk.xC8;
-            text->pos_x =
-                pos.x + (-1.0F) * (grHr_804D6AE4 * scale);
+            text->pos_x = pos.x + (-1.0F) * (grHr_804D6AE4 * scale);
             text->pos_y = y;
             text->pos_z = z;
         }
@@ -349,8 +353,7 @@ void grHomeRun_8021E3DC(Ground_GObj* gobj)
             f32 y, z;
             HSD_Text* text;
 
-            gp->gv.unk.xC8 =
-                (int) grHomeRun_8021EC58(gp->gv.homerun.xC6);
+            gp->gv.unk.xC8 = (int) grHomeRun_8021EC58(gp->gv.homerun.xC6);
             lb_8000B1CC((HSD_JObj*) gp->gv.unk.xCC, NULL, &pos);
 
             scale = Ground_801C0498();
@@ -361,8 +364,7 @@ void grHomeRun_8021E3DC(Ground_GObj* gobj)
 
             scale = Ground_801C0498();
             text = (HSD_Text*) gp->gv.unk.xC8;
-            text->pos_x =
-                pos.x + (-1.0F) * (grHr_804D6AE4 * scale);
+            text->pos_x = pos.x + (-1.0F) * (grHr_804D6AE4 * scale);
             text->pos_y = y;
             text->pos_z = z;
         }
@@ -413,7 +415,7 @@ void grHomeRun_8021EA30(f32* pos)
     }
 
     if (lbLang_IsSavedLanguageUS()) {
-        result = (f32)(result * 0.304788);
+        result = (f32) (result * 0.304788);
     }
 
     stage_info.x6E0 = 100.0F * result;
@@ -466,7 +468,47 @@ void fn_8021EB10(HSD_GObj* target_cam_gobj)
     }
 }
 
-/// #grHomeRun_8021EC58
+extern const float grHr_804DBC38;
+extern const float grHr_804DBC78;
+extern const float grHr_804DBC7C;
+extern const float grHr_804DBC80;
+extern const float grHr_804DBC84;
+extern const GXColor grHr_804DBC74;
+
+HSD_Text* grHomeRun_8021EC58(u32 score)
+{
+    HSD_Text* text;
+    GXColor color = grHr_804DBC74;
+    f32 scale;
+    f32 box_y;
+    f32 ofs_y;
+
+    text = HSD_SisLib_803A6754(1, 0);
+    text->pos_z = grHr_804DBC38;
+
+    scale = grHr_804D6AE4 * Ground_801C0498();
+    box_y = grHr_804DBC78 * scale;
+
+    scale = grHr_804D6AE4 * Ground_801C0498();
+    text->box_size_x = grHr_804DBC7C * scale;
+    text->box_size_y = box_y;
+    text->default_kerning = 0;
+
+    scale = grHr_804D6AE4 * Ground_801C0498();
+    ofs_y = grHr_804DBC80 * scale;
+
+    scale = grHr_804D6AE4 * Ground_801C0498();
+    text->x34.x = grHr_804DBC80 * scale;
+    text->x34.y = ofs_y;
+    text->text_color = color;
+    text->default_alignment = 1;
+    text->default_fitting = 1;
+    text->x4C = 1;
+
+    HSD_SisLib_803A6B98(text, grHr_804DBC38, grHr_804DBC84, "%d",
+                        (s32) (f32) (s32) score);
+    return text;
+}
 
 void grHomeRun_8021ED74(void)
 {

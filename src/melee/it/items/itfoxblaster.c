@@ -139,9 +139,6 @@ void it_802ADF10(HSD_GObj* item_gobj)
 {
     Vec3 ft_cur_pos;
     Vec3 ft_hold_joint_pos;
-    // TODO: probably a fake-improvement? idiomatic way is
-    // with the for loop, but can't get it to 100% match yet
-    int new_var2;
     Vec3 it_hold_joint_pos;
     Item* item = GET_ITEM(item_gobj);
 
@@ -158,119 +155,69 @@ void it_802ADF10(HSD_GObj* item_gobj)
         case It_Kind_Falco_Blaster:
             ftFx_SpecialN_FtGetHoldJoint(item->xDD4_itemVar.foxblaster.owner,
                                          &ft_hold_joint_pos);
-            item->xDD4_itemVar.foxblaster.xE14.x =
+            item->xDD4_itemVar.foxblaster.xE14[0].x =
                 ft_hold_joint_pos.x - ft_cur_pos.x;
-            item->xDD4_itemVar.foxblaster.xE14.y =
+            item->xDD4_itemVar.foxblaster.xE14[0].y =
                 ft_hold_joint_pos.y - ft_cur_pos.y;
-            item->xDD4_itemVar.foxblaster.xE14.z =
+            item->xDD4_itemVar.foxblaster.xE14[0].z =
                 ft_hold_joint_pos.z - ft_cur_pos.z;
             ftFx_SpecialN_ItGetHoldJoint(item->xDD4_itemVar.foxblaster.owner,
                                          &it_hold_joint_pos);
 
-            item->xDD4_itemVar.foxblaster.angle =
+            item->xDD4_itemVar.foxblaster.angle[0] =
                 atan2f(ft_hold_joint_pos.y - it_hold_joint_pos.y,
                        ft_hold_joint_pos.x - it_hold_joint_pos.x);
-            item->xDD4_itemVar.foxblaster.xDFC = 0;
+            item->xDD4_itemVar.foxblaster.xDFC[0] = 0;
 
-            item->xDD4_itemVar.foxblaster.xDE4 =
+            item->xDD4_itemVar.foxblaster.xDE4[0] =
                 (s32) efSync_Spawn(1166, item_gobj, &ft_hold_joint_pos,
-                                   &item->xDD4_itemVar.foxblaster.angle);
+                                   &item->xDD4_itemVar.foxblaster.angle[0]);
             break;
         case It_Kind_Kirby_FoxBlaster:
         case It_Kind_Kirby_FalcoBlaster:
             ftKb_SpecialNFx_800FDC00(item->xDD4_itemVar.foxblaster.owner,
                                      &ft_hold_joint_pos);
-            new_var2 = 0;
-            item->xDD4_itemVar.foxblaster.xE14.x =
+            item->xDD4_itemVar.foxblaster.xE14[0].x =
                 ft_hold_joint_pos.x - ft_cur_pos.x;
-            item->xDD4_itemVar.foxblaster.xE14.y =
+            item->xDD4_itemVar.foxblaster.xE14[0].y =
                 ft_hold_joint_pos.y - ft_cur_pos.y;
-            item->xDD4_itemVar.foxblaster.xE14.z =
+            item->xDD4_itemVar.foxblaster.xE14[0].z =
                 ft_hold_joint_pos.z - ft_cur_pos.z;
             ftKb_SpecialNFx_800FDC70(item->xDD4_itemVar.foxblaster.owner,
                                      &it_hold_joint_pos);
 
-            item->xDD4_itemVar.foxblaster.angle =
+            item->xDD4_itemVar.foxblaster.angle[0] =
                 atan2f(ft_hold_joint_pos.y - it_hold_joint_pos.y,
                        ft_hold_joint_pos.x - it_hold_joint_pos.x);
-            item->xDD4_itemVar.foxblaster.xDFC = new_var2;
+            item->xDD4_itemVar.foxblaster.xDFC[0] = 0;
 
-            item->xDD4_itemVar.foxblaster.xDE4 =
+            item->xDD4_itemVar.foxblaster.xDE4[0] =
                 (s32) efSync_Spawn(1196, item_gobj, &ft_hold_joint_pos,
-                                   &item->xDD4_itemVar.foxblaster.angle);
+                                   &item->xDD4_itemVar.foxblaster.angle[0]);
             break;
         }
 
-#if 0
         {
             int i;
-            for (i = 0; i < 5; i++) {
-                *(&item->xDD4_itemVar.foxblaster.xDF8 - i) =
-                    *(&item->xDD4_itemVar.foxblaster.xDF4 - i);
-                *(&item->xDD4_itemVar.foxblaster.xE10 - i) =
-                    *(&item->xDD4_itemVar.foxblaster.xE0C - i);
-
-                *(&item->xDD4_itemVar.foxblaster.xE50 - i) =
-                    *(&item->xDD4_itemVar.foxblaster.xE44 - i);
-
-                *(&item->xDD4_itemVar.foxblaster.xE70 - i) =
-                    *(&item->xDD4_itemVar.foxblaster.xE6C - i);
+            for (i = 5; i > 0; i--) {
+                item->xDD4_itemVar.foxblaster.xDE4[i] =
+                    item->xDD4_itemVar.foxblaster.xDE4[i - 1];
+                item->xDD4_itemVar.foxblaster.xDFC[i] =
+                    item->xDD4_itemVar.foxblaster.xDFC[i - 1];
+                item->xDD4_itemVar.foxblaster.xE14[i] =
+                    item->xDD4_itemVar.foxblaster.xE14[i - 1];
+                item->xDD4_itemVar.foxblaster.angle[i] =
+                    item->xDD4_itemVar.foxblaster.angle[i - 1];
             }
         }
-#else
-        item->xDD4_itemVar.foxblaster.xDF8 =
-            item->xDD4_itemVar.foxblaster.xDF4;
-        item->xDD4_itemVar.foxblaster.xE10 =
-            item->xDD4_itemVar.foxblaster.xE0C;
-        item->xDD4_itemVar.foxblaster.xE50 =
-            item->xDD4_itemVar.foxblaster.xE44;
-        item->xDD4_itemVar.foxblaster.xE70 =
-            item->xDD4_itemVar.foxblaster.xE6C;
-
-        item->xDD4_itemVar.foxblaster.xDF4 =
-            item->xDD4_itemVar.foxblaster.xDF0;
-        item->xDD4_itemVar.foxblaster.xE0C =
-            item->xDD4_itemVar.foxblaster.xE08;
-        item->xDD4_itemVar.foxblaster.xE44 =
-            item->xDD4_itemVar.foxblaster.xE38;
-        item->xDD4_itemVar.foxblaster.xE6C =
-            item->xDD4_itemVar.foxblaster.xE68;
-
-        item->xDD4_itemVar.foxblaster.xDF0 =
-            item->xDD4_itemVar.foxblaster.xDEC;
-        item->xDD4_itemVar.foxblaster.xE08 =
-            item->xDD4_itemVar.foxblaster.xE04;
-        item->xDD4_itemVar.foxblaster.xE38 =
-            item->xDD4_itemVar.foxblaster.xE2C;
-        item->xDD4_itemVar.foxblaster.xE68 =
-            item->xDD4_itemVar.foxblaster.xE64;
-
-        item->xDD4_itemVar.foxblaster.xDEC =
-            item->xDD4_itemVar.foxblaster.xDE8;
-        item->xDD4_itemVar.foxblaster.xE04 =
-            item->xDD4_itemVar.foxblaster.xE00;
-        item->xDD4_itemVar.foxblaster.xE2C =
-            item->xDD4_itemVar.foxblaster.xE20;
-        item->xDD4_itemVar.foxblaster.xE64 =
-            item->xDD4_itemVar.foxblaster.xE60;
-
-        item->xDD4_itemVar.foxblaster.xDE8 =
-            item->xDD4_itemVar.foxblaster.xDE4;
-        item->xDD4_itemVar.foxblaster.xE00 =
-            item->xDD4_itemVar.foxblaster.xDFC;
-        item->xDD4_itemVar.foxblaster.xE20 =
-            item->xDD4_itemVar.foxblaster.xE14;
-        item->xDD4_itemVar.foxblaster.xE60 =
-            item->xDD4_itemVar.foxblaster.angle;
-#endif
 
         item = GET_ITEM(item_gobj);
-        item->xDD4_itemVar.foxblaster.xDE4 = 0;
-        item->xDD4_itemVar.foxblaster.xDFC = new_var2;
-        item->xDD4_itemVar.foxblaster.angle =
-            item->xDD4_itemVar.foxblaster.xE14.x =
-                item->xDD4_itemVar.foxblaster.xE14.y =
-                    item->xDD4_itemVar.foxblaster.xE14.z = 0.0F;
+        item->xDD4_itemVar.foxblaster.xDE4[0] = 0;
+        item->xDD4_itemVar.foxblaster.xDFC[0] = 0;
+        item->xDD4_itemVar.foxblaster.angle[0] =
+            item->xDD4_itemVar.foxblaster.xE14[0].x =
+                item->xDD4_itemVar.foxblaster.xE14[0].y =
+                    item->xDD4_itemVar.foxblaster.xE14[0].z = 0.0F;
     }
 }
 
@@ -501,57 +448,57 @@ void it_802AE7B8(Item_GObj* item_gobj)
 
     item = GET_ITEM(item_gobj);
 
-    item->xDD4_itemVar.foxblaster.xDE4 = 0.0F;
-    item->xDD4_itemVar.foxblaster.xDFC = 0.0F;
-    item->xDD4_itemVar.foxblaster.xE14.z = 0.0F;
-    item->xDD4_itemVar.foxblaster.xE14.y = 0.0F;
-    item->xDD4_itemVar.foxblaster.xE14.x = 0.0F;
-    item->xDD4_itemVar.foxblaster.angle = 0.0F;
+    item->xDD4_itemVar.foxblaster.xDE4[0] = 0.0F;
+    item->xDD4_itemVar.foxblaster.xDFC[0] = 0.0F;
+    item->xDD4_itemVar.foxblaster.xE14[0].z = 0.0F;
+    item->xDD4_itemVar.foxblaster.xE14[0].y = 0.0F;
+    item->xDD4_itemVar.foxblaster.xE14[0].x = 0.0F;
+    item->xDD4_itemVar.foxblaster.angle[0] = 0.0F;
 
     item = GET_ITEM(item_gobj);
 
-    item->xDD4_itemVar.foxblaster.xDE8 = 0;
-    item->xDD4_itemVar.foxblaster.xE00 = 0;
-    item->xDD4_itemVar.foxblaster.xE20.z = 0.0F;
-    item->xDD4_itemVar.foxblaster.xE20.y = 0.0F;
-    item->xDD4_itemVar.foxblaster.xE20.x = 0.0F;
-    item->xDD4_itemVar.foxblaster.xE60 = 0.0F;
+    item->xDD4_itemVar.foxblaster.xDE4[1] = 0;
+    item->xDD4_itemVar.foxblaster.xDFC[1] = 0;
+    item->xDD4_itemVar.foxblaster.xE14[1].z = 0.0F;
+    item->xDD4_itemVar.foxblaster.xE14[1].y = 0.0F;
+    item->xDD4_itemVar.foxblaster.xE14[1].x = 0.0F;
+    item->xDD4_itemVar.foxblaster.angle[1] = 0.0F;
 
     item = GET_ITEM(item_gobj);
 
-    item->xDD4_itemVar.foxblaster.xDEC = 0;
-    item->xDD4_itemVar.foxblaster.xE04 = 0.0F;
-    item->xDD4_itemVar.foxblaster.xE2C.z = 0.0F;
-    item->xDD4_itemVar.foxblaster.xE2C.y = 0.0F;
-    item->xDD4_itemVar.foxblaster.xE2C.x = 0.0F;
-    item->xDD4_itemVar.foxblaster.xE64 = 0.0F;
+    item->xDD4_itemVar.foxblaster.xDE4[2] = 0;
+    item->xDD4_itemVar.foxblaster.xDFC[2] = 0.0F;
+    item->xDD4_itemVar.foxblaster.xE14[2].z = 0.0F;
+    item->xDD4_itemVar.foxblaster.xE14[2].y = 0.0F;
+    item->xDD4_itemVar.foxblaster.xE14[2].x = 0.0F;
+    item->xDD4_itemVar.foxblaster.angle[2] = 0.0F;
 
     item = GET_ITEM(item_gobj);
 
-    item->xDD4_itemVar.foxblaster.xDF0 = 0;
-    item->xDD4_itemVar.foxblaster.xE08 = 0;
-    item->xDD4_itemVar.foxblaster.xE38.z = 0.0F;
-    item->xDD4_itemVar.foxblaster.xE38.y = 0.0F;
-    item->xDD4_itemVar.foxblaster.xE38.x = 0.0F;
-    item->xDD4_itemVar.foxblaster.xE68 = 0.0F;
+    item->xDD4_itemVar.foxblaster.xDE4[3] = 0;
+    item->xDD4_itemVar.foxblaster.xDFC[3] = 0;
+    item->xDD4_itemVar.foxblaster.xE14[3].z = 0.0F;
+    item->xDD4_itemVar.foxblaster.xE14[3].y = 0.0F;
+    item->xDD4_itemVar.foxblaster.xE14[3].x = 0.0F;
+    item->xDD4_itemVar.foxblaster.angle[3] = 0.0F;
 
     item = GET_ITEM(item_gobj);
 
-    item->xDD4_itemVar.foxblaster.xDF4 = 0;
-    item->xDD4_itemVar.foxblaster.xE0C = 0;
-    item->xDD4_itemVar.foxblaster.xE44.z = 0.0F;
-    item->xDD4_itemVar.foxblaster.xE44.y = 0.0F;
-    item->xDD4_itemVar.foxblaster.xE44.x = 0.0F;
-    item->xDD4_itemVar.foxblaster.xE6C = 0.0F;
+    item->xDD4_itemVar.foxblaster.xDE4[4] = 0;
+    item->xDD4_itemVar.foxblaster.xDFC[4] = 0;
+    item->xDD4_itemVar.foxblaster.xE14[4].z = 0.0F;
+    item->xDD4_itemVar.foxblaster.xE14[4].y = 0.0F;
+    item->xDD4_itemVar.foxblaster.xE14[4].x = 0.0F;
+    item->xDD4_itemVar.foxblaster.angle[4] = 0.0F;
 
     item = GET_ITEM(item_gobj);
 
-    item->xDD4_itemVar.foxblaster.xDF8 = 0;
-    item->xDD4_itemVar.foxblaster.xE10 = 0;
-    item->xDD4_itemVar.foxblaster.xE50.z = 0.0F;
-    item->xDD4_itemVar.foxblaster.xE50.y = 0.0F;
-    item->xDD4_itemVar.foxblaster.xE50.x = 0.0F;
-    item->xDD4_itemVar.foxblaster.xE70 = 0.0F;
+    item->xDD4_itemVar.foxblaster.xDE4[5] = 0;
+    item->xDD4_itemVar.foxblaster.xDFC[5] = 0;
+    item->xDD4_itemVar.foxblaster.xE14[5].z = 0.0F;
+    item->xDD4_itemVar.foxblaster.xE14[5].y = 0.0F;
+    item->xDD4_itemVar.foxblaster.xE14[5].x = 0.0F;
+    item->xDD4_itemVar.foxblaster.angle[5] = 0.0F;
 }
 
 /// @brief Spawns blaster item at location arg2 and gives to fighter at

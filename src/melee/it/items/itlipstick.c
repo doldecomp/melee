@@ -47,7 +47,7 @@ void it_80295770(Item_GObj* gobj, Vec* arg1, float arg2, int arg3)
     if (ip->xD4C > 0) {
         ip->xD4C -= 1;
     }
-    it_8029A114(ip->owner, arg1, arg3, arg2);
+    it_8029A114(ip->owner, arg1, arg2, arg3);
 }
 
 void it_802957AC(Item_GObj* gobj)

@@ -3,6 +3,7 @@
 #include "gm_unsplit.h"
 #include "gmtitle.h"
 
+#include <stdio.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/gobjplink.h>
@@ -13,7 +14,6 @@
 #include <melee/lb/lblanguage.h>
 #include <melee/lb/lbmthp.h>
 #include <melee/mn/types.h>
-#include <stdio.h>
 
 static struct {
     /* 0x00 */ f32 data[9];

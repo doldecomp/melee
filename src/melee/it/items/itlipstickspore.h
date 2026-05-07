@@ -17,7 +17,7 @@ typedef struct itLipstickSporeAttributes {
     s32 x18;
 } itLipstickSporeAttributes;
 
-/* 29A114 */ void it_8029A114(Fighter_GObj*, Vec*, int, float);
+/* 29A114 */ void it_8029A114(Fighter_GObj*, Vec*, f32 facing_dir, s32 arg4);
 /* 29A218 */ void it_8029A218(HSD_GObj* owner, Vec3* pos, f32 facing_dir,
                               s32 arg4);
 /* 29A31C */ void it_8029A31C(Item_GObj*, Fighter_GObj*, Item*);

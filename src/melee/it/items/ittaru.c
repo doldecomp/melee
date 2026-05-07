@@ -1,10 +1,6 @@
 #include "ittaru.h"
 
-#include <placeholder.h>
-#include <platform.h>
-
 #include "baselib/jobj.h"
-#include "baselib/random.h"
 #include "cm/camera.h"
 #include "ef/efsync.h"
 #include "it/inlines.h"
@@ -12,11 +8,31 @@
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/itcoll.h"
-#include "it/itCommonItems.h"
 #include "it/item.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 #include "lb/lbvector.h"
+
+#include <string.h>
+#include <baselib/random.h>
+
+ItemStateTable it_803F58E0[] = {
+    { -1, itTaru_UnkMotion0_Anim, itTaru_UnkMotion0_Phys,
+      itTaru_UnkMotion0_Coll },
+    { -1, itTaru_UnkMotion1_Anim, itTaru_UnkMotion1_Phys,
+      itTaru_UnkMotion1_Coll },
+    { -1, itTaru_UnkMotion2_Anim, itTaru_UnkMotion2_Phys, NULL },
+    { 0, itTaru_UnkMotion3_Anim, itTaru_UnkMotion3_Phys,
+      itTaru_UnkMotion3_Coll },
+    { -1, itTaru_UnkMotion4_Anim, itTaru_UnkMotion4_Phys,
+      itTaru_UnkMotion4_Coll },
+    { 1, itTaru_UnkMotion5_Anim, itTaru_UnkMotion5_Phys,
+      itTaru_UnkMotion5_Coll },
+    { 2, itTaru_UnkMotion6_Anim, itTaru_UnkMotion6_Phys,
+      itTaru_UnkMotion6_Coll },
+    { 3, itTaru_UnkMotion7_Anim, itTaru_UnkMotion7_Phys,
+      itTaru_UnkMotion7_Coll },
+};
 
 void it_3F14_Logic2_Spawned(Item_GObj* gobj)
 {
@@ -30,8 +46,8 @@ void it_3F14_Logic2_Spawned(Item_GObj* gobj)
     ip->xDB0_itcmd_var1 = 0;
     ip->xDD4_itemVar.taru.xDD4 = 0;
     /// @todo float regswap. same as in it_3F14_Logic5_Spawned
-    temp = 0.34906584f * HSD_Randf();
-    ip->xDD4_itemVar.taru.xDDC = (new_var = 1.3089969f) + temp;
+    ip->xDD4_itemVar.taru.xDDC =
+        (new_var = 1.3089969f) + (temp = 0.34906584f * HSD_Randf());
     ip->xDD4_itemVar.taru.xDE0 = 0.0f;
     ip->xDD4_itemVar.taru.xDE4 = 0.0f;
     ip->xDD4_itemVar.taru.xDE8.x = 0.0f;
@@ -47,6 +63,12 @@ static inline f32 inline_fabsf(f32 x)
     } else {
         return +x;
     }
+}
+
+// ensure U32_TO_F32 is in the right place
+static f32 sdata_ordering(u32 u)
+{
+    return u;
 }
 
 void it_802874F0(Item_GObj* gobj)
@@ -141,12 +163,13 @@ void it_80287690(Item_GObj* gobj)
         }
         HSD_JObjSetRotationZ(child, var_f31);
 
-        var_f31 = ip->xDD4_itemVar.taru.xDDC;
         rot = HSD_JObjGetRotationX(child);
-        if (rot > (0.017453292f + var_f31 + step)) {
+        if (rot > ip->xDD4_itemVar.taru.xDDC + 0.017453292f + step) {
             var_f31 = rot - step;
-        } else if (rot < ((var_f31 - 0.017453292f) - step)) {
+        } else if (rot < ip->xDD4_itemVar.taru.xDDC - 0.017453292f - step) {
             var_f31 = rot + step;
+        } else {
+            var_f31 = ip->xDD4_itemVar.taru.xDDC;
         }
         HSD_JObjSetRotationX(child, var_f31);
     } else {
@@ -519,15 +542,12 @@ bool itTaru_UnkMotion6_Coll(Item_GObj* gobj)
     return false;
 }
 
-static inline void it_802886C4_inline(Item_GObj* gobj)
+static inline void it_802886C4_inline(Item_GObj* gobj, Vec3* zero)
 {
     Item* ip = GET_ITEM(gobj);
-    Vec3 zero;
-
-    /// @todo 4 byte gap for these accesses...
-    zero.x = zero.y = zero.z = 0.0f;
-    if (!it_8026F8B4(gobj, &ip->pos, &zero, false) &&
-        it_8026F6BC(gobj, &ip->pos, &zero, false) == NULL)
+    zero->x = zero->y = zero->z = 0.0f;
+    if (!it_8026F8B4(gobj, &ip->pos, zero, false) &&
+        it_8026F6BC(gobj, &ip->pos, zero, false) == NULL)
     {
         it_8026F3D4(gobj, NULL, 1, false);
     }
@@ -535,12 +555,13 @@ static inline void it_802886C4_inline(Item_GObj* gobj)
 
 void it_802886C4(Item_GObj* gobj)
 {
+    Vec3 zero;
     Item* ip = GET_ITEM(gobj);
-    HSD_JObj* jobj = GET_JOBJ(gobj);
+    HSD_JObj* jobj = (0, (HSD_JObj*) HSD_GObjGetHSDObj(gobj));
 
     Item_8026AE84(ip, 0xFB, 0x7F, 0x40);
     Camera_80030E44(2, &ip->pos);
-    it_802886C4_inline(gobj);
+    it_802886C4_inline(gobj, &zero);
     HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
     it_802756D0(gobj);
     ip->x40_vel.x = 0.0f;

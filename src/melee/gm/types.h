@@ -404,6 +404,7 @@ struct lbl_8046B6A0_24C_t {
     u8 x4;
     u8 x5; ///< match mode
     u8 is_teams;
+    u8 x7;
     u32 x8;
     u8 xC;
     u8 xD;
@@ -425,12 +426,18 @@ struct lbl_8046B6A0_24C_t {
         u8 x5;
         u8 x6;
         u8 x7;
-        u8 pad8[0x20 - 8];
+        u8 pad8[2];
+        u16 xA;
+        u8 padC[2];
+        u16 xE;
+        u8 pad10[0x20 - 0x10];
         u32 x20;
         u32 x24;
         u32 x28;
         u32 x2C;
-        u8 pad60[0xA8 - 0x30];
+        u8 pad30[0x40 - 0x30];
+        u32 x40;
+        u8 pad44[0xA8 - 0x44];
     } x58[6];
     u8 pad3F0[0x44C - 0x3F0 - 0x58];
     struct lbl_8046B6A0_24C_44C_t {
@@ -703,25 +710,25 @@ struct Unk1PData {
             /* 25 */ u8 x1;
             /* 26 */ u8 x2;
             /* 27 */ u8 x3;
-            /* 28 */ int x4;
-            /* 2C */ int x8;
+            /* 28 */ f32 x4;
+            /* 2C */ f32 x8;
         } x24[3];
     } xC;
 };
 
 struct UnkAdventureData {
     /* 00 */ Unk1PData x0;
-    /* 48 */ UNK_T x48;
+    /* 48 */ u8 (*x48)(u8, u8);
     /* 4C */ u8 (*x4C)(u8, u8, u8);
-    /* 50 */ UNK_T x50;
+    /* 50 */ u8 (*x50)(u8, u8, u8);
     /* 54 */ u8 (*x54)(u8, u8, u8);
-    /* 58 */ UNK_T x58;
-    /* 5C */ UNK_T x5C;
-    /* 60 */ UNK_T x60;
+    /* 58 */ u8 (*x58)(u8, u8, u8);
+    /* 5C */ u8 (*x5C)(u8, u8, u8);
+    /* 60 */ u8 (*x60)(u8, u8, u8);
     /* 64 */ float (*x64)(u8, u8);
     /* 68 */ float (*x68)(u8, u8);
-    /* 6C */ UNK_T x6C;
-    /* 70 */ UNK_T x70;
+    /* 6C */ float (*x6C)(u8, u8);
+    /* 70 */ float (*x70)(u8, u8);
     /* 74 */ u8 x74;
     /* 75 */ u8 x75;
     /* 76 */ u8 x76;
@@ -734,17 +741,17 @@ struct UnkAdventureData {
 
 struct UnkAllstarData {
     /*  +0 */ Unk1PData x0;
-    /* +48*/ UNK_T x48;
-    /* +4C*/ UNK_T x4C;
-    /* +50*/ UNK_T x50;
-    /* +54*/ UNK_T x54;
-    /* +58*/ u32 x58;
-    /* +5C*/ u32 _5C;
-    /* +60*/ u32 _60;
-    /* +64*/ UNK_T x64;
-    /* +68*/ UNK_T x68;
-    /* +6C*/ u32 _6C;
-    /* +70*/ u32 _70;
+    /* 48 */ u8 (*x48)(u8, u8);
+    /* 4C */ u8 (*x4C)(u8, u8, u8);
+    /* 50 */ u8 (*x50)(u8, u8, u8);
+    /* 54 */ u8 (*x54)(u8, u8, u8);
+    /* 58 */ u8 (*x58)(u8, u8, u8);
+    /* 5C */ u8 (*x5C)(u8, u8, u8);
+    /* 60 */ u8 (*x60)(u8, u8, u8);
+    /* 64 */ float (*x64)(u8, u8);
+    /* 68 */ float (*x68)(u8, u8);
+    /* 6C */ float (*x6C)(u8, u8);
+    /* 70 */ float (*x70)(u8, u8);
     /* +74*/ u16 x74;    ///< current percent
     /* +76*/ u8 x76[24]; ///< character id array
     /* +8E*/ u8 x8E[2];
@@ -988,18 +995,18 @@ struct MenuExitData {
 };
 STATIC_ASSERT(sizeof(struct MenuExitData) == 0x4);
 
+struct gmClassicMatchup;
+
 typedef struct gm_803DDEC8Struct {
-    u8 x0;
-    u8 x1_b0 : 1;
-    u8 x1_b1 : 1;
-    u8 x1_b2 : 1;
-    u8 x1_b3 : 1;
-    u8 x1_b4 : 1;
-    u8 x1_b5 : 1;
-    u8 x1_b6 : 1;
-    u8 x1_b7 : 1;
-    u8 x2[0xC - 0x2];
-    void* xC;
+    /* 0x00 */ u8 x0;
+    /* 0x01 */ u8 x1;
+    /* 0x02 */ u8 x2;
+    /* 0x03 */ u8 pad03;
+    /* 0x04 */ u16 x4;
+    /* 0x06 */ u16 x6;
+    /* 0x08 */ u8 x8;
+    /* 0x09 */ u8 pad09[3];
+    /* 0x0C */ struct gmClassicMatchup* xC;
 } gm_803DDEC8Struct;
 
 typedef struct CssSubStruct {

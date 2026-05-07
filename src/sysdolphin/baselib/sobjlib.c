@@ -82,6 +82,7 @@ void HSD_SObjLib_803A44D4(HSD_GObj* gobj, HSD_SObj* sobj, u8 priority)
         HSD_GObjObject_80390ADC(gobj);
         HSD_GObjObject_80390A70(gobj, HSD_SObjLib_804D7960, sobj);
     } else {
+        cur = gobj->hsd_obj;
         next = cur;
         while (next->next != NULL && next->x44 <= (u8) priority) {
             next = next->next;
@@ -181,7 +182,7 @@ void HSD_SObjLib_803A54EC(HSD_GObj* gobj, int unused)
     Mtx viewmtx;
     SObjLibData* data = &HSD_SObjLib_8040C3A0;
 
-    if (HSD_CObjSetCurrent(gobj->hsd_obj)) {
+    if (HSD_CObjSetCurrent(GET_COBJ(gobj))) {
         GXSetCurrentMtx(0);
         HSD_CObjGetViewingMtx(HSD_CObjGetCurrent(), viewmtx);
         GXLoadPosMtxImm(viewmtx, 0);

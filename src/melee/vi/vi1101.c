@@ -2,13 +2,117 @@
 
 #include "vi.h"
 
+#include "cm/camera.h"
+#include "ef/efasync.h"
+#include "ef/eflib.h"
+#include "ft/ftdemo.h"
 #include "gm/gm_1601.h"
 #include "gm/gm_1A45.h"
+#include "gr/grlib.h"
+#include "gr/ground.h"
+#include "gr/stage.h"
+#include "it/item.h"
 #include "lb/lb_00F9.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbshadow.h"
+#include "mp/mpcoll.h"
+#include "pl/player.h"
+#include "sc/types.h"
+#include "vi/types.h"
 
-/// #un_8031F294
+#include <baselib/aobj.h>
+#include <baselib/cobj.h>
+#include <baselib/gobj.h>
+#include <baselib/gobjgxlink.h>
+#include <baselib/gobjobject.h>
+#include <baselib/gobjproc.h>
+#include <baselib/jobj.h>
+
+static SceneDesc* un_804D6FC0;
+static SceneDesc* un_804D6FC4;
+static HSD_Archive* un_804D6FC8;
+static HSD_Archive* un_804D6FCC;
+
+static Vec3 un_80400200[3] = {
+    { 0.0f, 0.0f, 0.0f },
+    { 15.8512f, 67.0f, 0.0f },
+    { -15.7657f, 67.0f, 0.0f },
+};
+
+static struct {
+    HSD_GObj* p1;
+    HSD_GObj* p2;
+} un_804D6FD0;
+
+void un_8031F294(int char_index, int costume_index)
+{
+    HSD_JObj* jobj;
+    Vec3* pmtx;
+    char pad[40];
+
+    Camera_80028B9C(6);
+    lb_8000FCDC();
+    mpColl_80041C78();
+    Ground_801C0378(0x40);
+    Stage_802251E8(KINOKOROUTE, 0);
+    Item_80266FA8();
+    Item_80266FCC();
+    Stage_8022524C();
+    Stage_8022532C(KINOKOROUTE, 0);
+    ftDemo_ObjAllocInit();
+    Player_InitAllPlayers();
+
+    Player_80036E20(char_index, un_804D6FC8, 3);
+    Player_SetPlayerCharacter(0, char_index);
+    Player_SetCostumeId(0, costume_index);
+    Player_SetPlayerId(0, 0);
+    Player_SetSlottype(0, Gm_PKind_Demo);
+    Player_SetFacingDirection(0, 1.0f);
+    Player_80032768(0, un_80400200);
+    Player_80036F34(0, 8);
+
+    pmtx = grLib_801C9A10();
+
+    Player_80036E20(CKIND_MARIO, un_804D6FCC, 5);
+    Player_SetPlayerCharacter(1, CKIND_MARIO);
+    Player_SetCostumeId(1, 0);
+    Player_SetPlayerId(1, 0);
+    Player_SetSlottype(1, Gm_PKind_Demo);
+    Player_SetFacingDirection(1, 0.0f);
+    Player_80032768(1, un_80400200);
+    Player_SetFlagsBit5(1, 1);
+    Player_80036F34(1, 0xA);
+    un_804D6FD0.p1 = Player_GetEntity(1);
+    jobj = un_804D6FD0.p1->hsd_obj;
+    HSD_JObjReqAnimAll(jobj, 432.0f);
+    HSD_JObjAnimAll(jobj);
+    pmtx[1] = un_80400200[1];
+    HSD_JObjReqAnimAll(jobj, 0.0f);
+
+    if (gm_80164840(7) != 0) {
+        Player_80036E20(CKIND_LUIGI, un_804D6FCC, 5);
+        Player_SetPlayerCharacter(2, CKIND_LUIGI);
+        Player_SetCostumeId(2, 0);
+        Player_SetPlayerId(2, 0);
+        Player_SetSlottype(2, Gm_PKind_Demo);
+        Player_SetFacingDirection(2, 0.0f);
+        Player_80032768(2, un_80400200);
+        Player_SetFlagsBit5(2, 1);
+        Player_80036F34(2, 0xA);
+        un_804D6FD0.p2 = Player_GetEntity(2);
+        jobj = un_804D6FD0.p2->hsd_obj;
+        HSD_JObjReqAnimAll(jobj, 432.0f);
+        HSD_JObjAnimAll(jobj);
+        pmtx[2] = un_80400200[2];
+        HSD_JObjReqAnimAll(jobj, 0.0f);
+    }
+
+    lbAudioAx_80026F2C(0x1C);
+    lbAudioAx_8002702C(0xC,
+                       lbAudioAx_80026E84(char_index) | 0x0020000000000000ULL);
+    lbAudioAx_80027168();
+    lbAudioAx_80027648();
+}
 
 void fn_8031F548(HSD_GObj* gobj)
 {

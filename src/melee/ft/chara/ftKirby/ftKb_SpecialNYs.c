@@ -735,7 +735,36 @@ void ftKb_SpecialNYs_8010AA2C(Fighter_GObj* gobj)
     ftColl_8007B62C(gobj, 2);
 }
 
-/// #fn_8010AA64
+static void fn_8010AA64(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    HSD_JObj* jobj = gobj->hsd_obj;
+    if (fp->mv.co.yoshiegg.x14 <= 0.0f) {
+        Fighter_UpdateModelScale(gobj);
+        fp->accessory4_cb = NULL;
+        return;
+    }
+    fp->mv.co.yoshiegg.x14 -= 1.0f;
+    {
+        Vec3 vec1, vec0;
+        f32 temp0 = (fp->mv.co.yoshiegg.x10 - fp->mv.co.yoshiegg.x14) /
+                    fp->mv.co.yoshiegg.x10;
+        temp0 *= fp->mv.co.yoshiegg.xC;
+        {
+            f32 temp1 = (1.0f - fp->mv.co.yoshiegg.xC) + temp0;
+            vec1.x = vec1.y = vec1.z = temp1;
+            vec0 = vec1;
+            vec1.x = vec1.x * fp->mv.co.yoshiegg.x18.x;
+            vec1.y *= fp->mv.co.yoshiegg.x18.y;
+            vec1.z *= fp->mv.co.yoshiegg.x18.z;
+            HSD_JObjSetScale(jobj, &vec1);
+            vec0.x = vec0.x * fp->mv.co.yoshiegg.scale.x;
+            vec0.y *= fp->mv.co.yoshiegg.scale.y;
+            vec0.z *= fp->mv.co.yoshiegg.scale.z;
+            HSD_JObjSetScale(fp->x20A0_accessory, &vec0);
+        }
+    }
+}
 
 /// #ftKb_SpecialNYs_8010AC78
 
@@ -1253,22 +1282,26 @@ void ftKb_MsSpecialAirNEnd_Coll(Fighter_GObj* gobj)
     }
 }
 
+extern f32 ftKb_Init_804D9570;
+extern f32 ftKb_Init_804D9574;
+
 void ftKb_SpecialNPe_8010BF90(Fighter_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     s32 msid;
     PAD_STACK(16);
-    if (fp->cmd_vars[0] == 0) {
-        msid = (fp->fv.kb.hat.kind == FTKIND_MARS) ? ftKb_MS_MsSpecialAirNEnd0
-                                                   : ftKb_MS_FeSpecialAirNEnd0;
+    if (((Fighter*) gobj->user_data)->cmd_vars[0] == 0) {
+        msid = (((Fighter*) gobj->user_data)->fv.kb.hat.kind == FTKIND_MARS)
+                   ? ftKb_MS_MsSpecialAirNEnd0
+                   : ftKb_MS_FeSpecialAirNEnd0;
     } else {
-        msid = (fp->fv.kb.hat.kind == FTKIND_MARS)
+        msid = (((Fighter*) gobj->user_data)->fv.kb.hat.kind == FTKIND_MARS)
                    ? ftKb_MS_MsSpecialAirNEnd0 + 1
                    : ftKb_MS_FeSpecialAirNEnd0 + 1;
     }
     ftCommon_8007D5D4(fp);
-    Fighter_ChangeMotionState(gobj, msid, 0x0C4C708E, fp->cur_anim_frame, 1.0F,
-                              0.0F, NULL);
+    Fighter_ChangeMotionState(gobj, msid, 0x0C4C708E, fp->cur_anim_frame,
+                              ftKb_Init_804D9574, ftKb_Init_804D9570, NULL);
     if (fp->x2219_b0 == true) {
         fp->pre_hitlag_cb = efLib_PauseAll;
         fp->post_hitlag_cb = efLib_ResumeAll;

@@ -23,18 +23,32 @@
 
 /* 29A5F8 */ static bool itLipstickspore_UnkMotion1_Coll(Item_GObj* gobj);
 
-void it_8029A114(Fighter_GObj* gobj, Vec3* pos, int arg2, f32 facing_dir)
+ItemStateTable it_803F6680[] = {
+    {
+        0,
+        itLipstickspore_UnkMotion0_Anim,
+        itLipstickspore_UnkMotion0_Phys,
+        itLipstickspore_UnkMotion0_Coll,
+    },
+    {
+        1,
+        itLipstickspore_UnkMotion1_Anim,
+        itLipstickspore_UnkMotion1_Phys,
+        itLipstickspore_UnkMotion1_Coll,
+    },
+};
+
+void it_8029A114(Fighter_GObj* gobj, Vec3* pos, f32 facing_dir, s32 arg4)
 {
     Item_GObj* item_gobj;
     SpawnItem spawn;
-    u8 _pad[4];
-    f32 dir = facing_dir;
+    PAD_STACK(8);
 
     spawn.kind = 0x25;
     spawn.prev_pos = *pos;
     spawn.prev_pos.z = 0.0f;
     it_8026BB68(gobj, &spawn.pos);
-    spawn.facing_dir = dir;
+    spawn.facing_dir = facing_dir;
     spawn.x3C_damage = 0;
     spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;
     spawn.x0_parent_gobj = gobj;
@@ -44,10 +58,10 @@ void it_8029A114(Fighter_GObj* gobj, Vec3* pos, int arg2, f32 facing_dir)
     item_gobj = Item_80268B18(&spawn);
     if (item_gobj != NULL) {
         Item* ip = item_gobj->user_data;
-        ip->xDD4_itemVar.lipstickspore.xDD4 = arg2;
+        ip->xDD4_itemVar.lipstickspore.xDD4 = arg4;
         it_8029A31C(item_gobj, gobj, ip);
         db_80225DD8(item_gobj, gobj);
-        efSync_Spawn(0x440, item_gobj, pos, &dir);
+        efSync_Spawn(0x440, item_gobj, pos, &facing_dir);
     }
 }
 

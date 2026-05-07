@@ -982,7 +982,7 @@ int gm_8016C75C(HSD_GObj* arg0)
 
 void fn_8016C7D0(HSD_GObj* gobj)
 {
-    fn_80171DC4(gobj);
+    fn_80171DC4();
 }
 
 void fn_8016C7F0(void)
@@ -1107,7 +1107,7 @@ void fn_8016CA68(lbl_8046B6A0_t* arg0, int arg1)
                 }
                 gm_801A0FEC(var_r31, var_r4);
             }
-            gm_801A4634(arg1);
+            gm_801A4634((long long) arg1);
             if (arg0->x24C8.x4_0) {
                 var_r0 = fn_8016CA68_inline(var_r31);
                 if (arg0->x24C8.x3C != NULL) {

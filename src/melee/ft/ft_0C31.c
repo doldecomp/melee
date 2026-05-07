@@ -625,7 +625,7 @@ void fn_800C7890(Fighter_GObj* gobj)
     ftCo_800C7A30(gobj);
 }
 
-UNK_RET ftCo_800C78B0(UNK_PARAMS)
+UNK_RET ftCo_800C78B0(HSD_GObj* gobj, HSD_GObj* owner)
 {
     NOT_IMPLEMENTED;
 }

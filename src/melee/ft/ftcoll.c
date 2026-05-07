@@ -45,8 +45,8 @@
 #include <math.h>
 #include <dolphin/mtx.h>
 #include <baselib/debug.h>
-#include <baselib/random.h>
 #include <baselib/gobj.h>
+#include <baselib/random.h>
 #include <MSL/trigf.h>
 #include <Runtime/runtime.h>
 
@@ -958,12 +958,12 @@ void ftColl_80077970(Item* item, HitCapsule* hit1, Fighter* fp,
     int i;
     PAD_STACK(16);
 
-    midpoint.x = (hit1->hurt_coll_pos.x + hit2->hurt_coll_pos.x) *
-                 ftColl_804D82E8;
-    midpoint.y = (hit1->hurt_coll_pos.y + hit2->hurt_coll_pos.y) *
-                 ftColl_804D82E8;
-    midpoint.z = (hit1->hurt_coll_pos.z + hit2->hurt_coll_pos.z) *
-                 ftColl_804D82E8;
+    midpoint.x =
+        (hit1->hurt_coll_pos.x + hit2->hurt_coll_pos.x) * ftColl_804D82E8;
+    midpoint.y =
+        (hit1->hurt_coll_pos.y + hit2->hurt_coll_pos.y) * ftColl_804D82E8;
+    midpoint.z =
+        (hit1->hurt_coll_pos.z + hit2->hurt_coll_pos.z) * ftColl_804D82E8;
 
     dmg1_int = (int) hit1->damage;
     dmg2_int = (int) hit2->damage;
@@ -1083,22 +1083,22 @@ bool ftColl_80077C60(Item* item, HitCapsule* hit, Fighter* fp,
         if (!fp->x2224_b2) {
             switch (item->kind) {
             case It_Kind_Star:
-            hit->state = HitCapsule_Disabled;
-            item->xC34_damageDealt = 1;
-            ftColl_8007B7FC(fp, (int) it_80272818(item));
-            ft_PlaySFX(fp, 0xF9, 0x7F, 0x40);
-            ftCommon_8007EBAC(fp, 0x11, 0);
-            break;
-        case 0x1A:
-            hit->state = HitCapsule_Disabled;
-            fp->x200C++;
-            item->xC34_damageDealt = 1;
-            break;
-        case 0x1B:
-            hit->state = HitCapsule_Disabled;
-            fp->x2010++;
-            item->xC34_damageDealt = 1;
-            break;
+                hit->state = HitCapsule_Disabled;
+                item->xC34_damageDealt = 1;
+                ftColl_8007B7FC(fp, (int) it_80272818(item));
+                ft_PlaySFX(fp, 0xF9, 0x7F, 0x40);
+                ftCommon_8007EBAC(fp, 0x11, 0);
+                break;
+            case 0x1A:
+                hit->state = HitCapsule_Disabled;
+                fp->x200C++;
+                item->xC34_damageDealt = 1;
+                break;
+            case 0x1B:
+                hit->state = HitCapsule_Disabled;
+                fp->x2010++;
+                item->xC34_damageDealt = 1;
+                break;
             }
         }
         pl_8003E17C(fp->x221F_b4, fp->player_id, item->entity);
@@ -1121,9 +1121,7 @@ bool ftColl_80077C60(Item* item, HitCapsule* hit, Fighter* fp,
         scaled_dmg = f3 * fp->dmg.x182c_behavior;
 
         if (inlineB1(hit)) {
-            if (dmg_log0_idx == 0 &&
-                fp->dmg.x189C_unk_num_frames == 0.0f)
-            {
+            if (dmg_log0_idx == 0 && fp->dmg.x189C_unk_num_frames == 0.0f) {
                 HitCapsuleState state = checkTipLog(fp, hit);
                 if (state == HitCapsule_Disabled) {
                     int mode;
@@ -1134,14 +1132,12 @@ bool ftColl_80077C60(Item* item, HitCapsule* hit, Fighter* fp,
                     }
                     it_8026FC00(item, hit, mode, fp);
 
-                    if (fp->x1988 == 0 && fp->x198C == 0 &&
-                        !fp->x221D_b6 &&
+                    if (fp->x1988 == 0 && fp->x198C == 0 && !fp->x221D_b6 &&
                         hit2->state == HitCapsule_Disabled)
                     {
                         int int_scaled = (int) scaled_dmg;
                         int int_raw = (int) raw_dmg;
-                        float temp_dmg =
-                            0.5f * (float) int_scaled;
+                        float temp_dmg = 0.5f * (float) int_scaled;
                         float f4 = temp_dmg;
                         int half_raw;
                         float half_raw_f;
@@ -1164,8 +1160,7 @@ bool ftColl_80077C60(Item* item, HitCapsule* hit, Fighter* fp,
                             HSD_GObj* entity = item->entity;
                             FighterKind kind = (FighterKind) item->kind;
                             if (dmg_log1_idx < ARRAY_SIZE(dmg_log1)) {
-                                DmgLogEntry* entry =
-                                    &dmg_log1[dmg_log1_idx];
+                                DmgLogEntry* entry = &dmg_log1[dmg_log1_idx];
                                 entry->x0 = 2;
                                 entry->kind = kind;
                                 entry->gobj = entity;
@@ -1173,8 +1168,7 @@ bool ftColl_80077C60(Item* item, HitCapsule* hit, Fighter* fp,
                                 entry->hit1 = hit2;
                                 entry->pos = hit->hurt_coll_pos;
                                 entry->x20 = f4;
-                                entry->size_of_xC =
-                                    (size_t) half_raw_f;
+                                entry->size_of_xC = (size_t) half_raw_f;
                                 dmg_log1_idx++;
                             } else {
                                 HSD_ASSERTREPORT(0x110, NULL,
@@ -1265,8 +1259,7 @@ bool ftColl_80077C60(Item* item, HitCapsule* hit, Fighter* fp,
                     HSD_GObj* entity = item->entity;
                     FighterKind kind = (FighterKind) item->kind;
                     if (dmg_log0_idx < 20U) {
-                        DmgLogEntry* entry =
-                            &dmg_log0[dmg_log0_idx];
+                        DmgLogEntry* entry = &dmg_log0[dmg_log0_idx];
                         entry->x0 = 2;
                         entry->kind = kind;
                         entry->gobj = entity;
@@ -1405,11 +1398,11 @@ void ftColl_800787B4(Item_GObj* arg0, Fighter_GObj* arg1, int arg2)
         ftColl_8007861C(owner, arg1, 2, ip->kind, ip->xD90.x2070_int,
                         &ip->xD94, ip->xDA8_short, (UNK_T) arg2, 0);
     } else if (pl_8003D60C(ip->kind)) {
-        ftColl_8007861C(NULL, arg1, 2, ip->kind, ip->xD90.x2070_int,
-                        &ip->xD94, ip->xDA8_short, (UNK_T) arg2, 1);
+        ftColl_8007861C(NULL, arg1, 2, ip->kind, ip->xD90.x2070_int, &ip->xD94,
+                        ip->xDA8_short, (UNK_T) arg2, 1);
     } else {
-        ftColl_8007861C(NULL, arg1, 2, ip->kind, ip->xD90.x2070_int,
-                        &ip->xD94, ip->xDA8_short, (UNK_T) arg2, 0);
+        ftColl_8007861C(NULL, arg1, 2, ip->kind, ip->xD90.x2070_int, &ip->xD94,
+                        ip->xDA8_short, (UNK_T) arg2, 0);
     }
 }
 
@@ -1430,9 +1423,8 @@ void ftColl_8007891C(Fighter_GObj* arg0, Fighter_GObj* arg1, float arg2)
     ftColl_80076444(arg0, arg1);
     fp0 = arg0->user_data;
     fp1 = arg1->user_data;
-    pl_8003EB30(arg2, fp0->player_id, fp0->x221F_b4,
-                fp1->player_id, fp1->x221F_b4,
-                fp0->x2070.x2073);
+    pl_8003EB30(arg2, fp0->player_id, fp0->x221F_b4, fp1->player_id,
+                fp1->x221F_b4, fp0->x2070.x2073);
 }
 #pragma pop
 
@@ -1450,8 +1442,7 @@ void ftColl_80078998(HSD_GObj* arg0, HSD_GObj* arg1, float arg2)
         Fighter* owner_fp = ip->owner->user_data;
         Fighter* victim_fp = arg1->user_data;
         pl_8003EB30(arg2, owner_fp->player_id, owner_fp->x221F_b4,
-                    victim_fp->player_id, victim_fp->x221F_b4,
-                    ip->xD90.x2073);
+                    victim_fp->player_id, victim_fp->x221F_b4, ip->xD90.x2073);
     }
 }
 #pragma pop
@@ -2079,12 +2070,12 @@ float ftColl_80079AB0(Fighter* fp, HitCapsule* hit, int unk_count, float arg3,
         result = (w * decay) / (ftColl_804D82EC + w);
         decay -= result;
 
-        result = ftd->x118 * (float)(u32) hit->x28;
+        result = ftd->x118 * (float) (u32) hit->x28;
         result = ftd->x118 * ftd->x110 + ftd->x114 * result;
         result = decay * result;
         result = ftd->x11C * result + ftd->x120;
-        x24_f = ftColl_804D8314 * (float)(u32) hit->x24;
-        result = x24_f * result + (float)(u32) hit->x2C;
+        x24_f = ftColl_804D8314 * (float) (u32) hit->x24;
+        result = x24_f * result + (float) (u32) hit->x2C;
         result = arg3 * result;
         result = attack * result;
         result = defense * result;
@@ -2107,12 +2098,12 @@ float ftColl_80079AB0(Fighter* fp, HitCapsule* hit, int unk_count, float arg3,
         result = (w * decay) / (ftColl_804D82EC + w);
         decay -= result;
         damage = (float) count + fp->dmg.x1838_percentTemp;
-        result = (float)(u32) unk_count * damage;
+        result = (float) (u32) unk_count * damage;
         result = ftd->x110 * damage + ftd->x114 * result;
         result = decay * result;
         result = ftd->x11C * result + ftd->x120;
-        x24_f = ftColl_804D8314 * (float)(u32) hit->x24;
-        result = x24_f * result + (float)(u32) hit->x2C;
+        x24_f = ftColl_804D8314 * (float) (u32) hit->x24;
+        result = x24_f * result + (float) (u32) hit->x2C;
         result = arg3 * result;
         result = attack * result;
         result = defense * result;
@@ -2144,12 +2135,12 @@ float ftColl_80079C70(Fighter* fp, Fighter* attacker, HitCapsule* hit,
         result = (w * decay) / (ftColl_804D82EC + w);
         decay -= result;
 
-        result = ftd->x118 * (float)(u32) hit->x28;
+        result = ftd->x118 * (float) (u32) hit->x28;
         result = ftd->x118 * ftd->x110 + ftd->x114 * result;
         result = decay * result;
         result = ftd->x11C * result + ftd->x120;
-        x24_f = ftColl_804D8314 * (float)(u32) hit->x24;
-        result = x24_f * result + (float)(u32) hit->x2C;
+        x24_f = ftColl_804D8314 * (float) (u32) hit->x24;
+        result = x24_f * result + (float) (u32) hit->x2C;
         result = arg3 * result;
         result = attack * result;
         result = defense * result;
@@ -2172,12 +2163,12 @@ float ftColl_80079C70(Fighter* fp, Fighter* attacker, HitCapsule* hit,
         result = (w * decay) / (ftColl_804D82EC + w);
         decay -= result;
         damage = (float) count + fp->dmg.x1838_percentTemp;
-        result = (float)(u32) unk_count * damage;
+        result = (float) (u32) unk_count * damage;
         result = ftd->x110 * damage + ftd->x114 * result;
         result = decay * result;
         result = ftd->x11C * result + ftd->x120;
-        x24_f = ftColl_804D8314 * (float)(u32) hit->x24;
-        result = x24_f * result + (float)(u32) hit->x2C;
+        x24_f = ftColl_804D8314 * (float) (u32) hit->x24;
+        result = x24_f * result + (float) (u32) hit->x2C;
         result = arg3 * result;
         result = attack * result;
         result = defense * result;
@@ -2204,12 +2195,12 @@ float ftColl_80079EA8(Fighter* fp, HitCapsule* hit, int unk_count)
         result = (w * decay) / (ftColl_804D82EC + w);
         decay -= result;
 
-        result = ftd->x118 * (float)(u32) hit->x28;
+        result = ftd->x118 * (float) (u32) hit->x28;
         result = ftd->x118 * ftd->x110 + ftd->x114 * result;
         result = decay * result;
         result = ftd->x11C * result + ftd->x120;
-        x24_f = ftColl_804D8314 * (float)(u32) hit->x24;
-        result = x24_f * result + (float)(u32) hit->x2C;
+        x24_f = ftColl_804D8314 * (float) (u32) hit->x24;
+        result = x24_f * result + (float) (u32) hit->x2C;
         {
             float one = ftColl_804D82EC;
             result = one * result;
@@ -2235,12 +2226,12 @@ float ftColl_80079EA8(Fighter* fp, HitCapsule* hit, int unk_count)
         result = (w * decay) / (ftColl_804D82EC + w);
         decay -= result;
         damage = (float) count + fp->dmg.x1838_percentTemp;
-        result = (float)(u32) unk_count * damage;
+        result = (float) (u32) unk_count * damage;
         result = ftd->x110 * damage + ftd->x114 * result;
         result = decay * result;
         result = ftd->x11C * result + ftd->x120;
-        x24_f = ftColl_804D8314 * (float)(u32) hit->x24;
-        result = x24_f * result + (float)(u32) hit->x2C;
+        x24_f = ftColl_804D8314 * (float) (u32) hit->x24;
+        result = x24_f * result + (float) (u32) hit->x2C;
         {
             float one = ftColl_804D82EC;
             result = one * result;
@@ -2309,8 +2300,7 @@ void ftColl_8007A06C(Fighter_GObj* gobj, void* dmg_ptr, void* log, size_t idx,
         entry = &entries[i];
 
         switch (entry->x0) {
-        case 1:
-        {
+        case 1: {
             Fighter* attacker_fp = (Fighter*) entry->gobj->user_data;
             int unk_count = entry->size_of_xC;
             float defense, stage;
@@ -2349,8 +2339,7 @@ void ftColl_8007A06C(Fighter_GObj* gobj, void* dmg_ptr, void* log, size_t idx,
             break;
         }
 
-        case 2:
-        {
+        case 2: {
             Item* item = (Item*) entry->gobj->user_data;
             HSD_GObj* owner_gobj = item->owner;
             float defense, stage, weight;
@@ -2377,12 +2366,12 @@ void ftColl_8007A06C(Fighter_GObj* gobj, void* dmg_ptr, void* log, size_t idx,
                 result = (w * decay) / (ftColl_804D82EC + w);
                 decay -= result;
 
-                result = ftd->x118 * (float)(u32) hit->x28;
+                result = ftd->x118 * (float) (u32) hit->x28;
                 result = ftd->x118 * ftd->x110 + ftd->x114 * result;
                 result = decay * result;
                 result = ftd->x11C * result + ftd->x120;
-                x24_f = ftColl_804D8314 * (float)(u32) hit->x24;
-                result = x24_f * result + (float)(u32) hit->x2C;
+                x24_f = ftColl_804D8314 * (float) (u32) hit->x24;
+                result = x24_f * result + (float) (u32) hit->x2C;
                 result = stage * result;
                 result = attack * result;
                 result = defense * result;
@@ -2405,12 +2394,12 @@ void ftColl_8007A06C(Fighter_GObj* gobj, void* dmg_ptr, void* log, size_t idx,
                 result = (w * decay) / (ftColl_804D82EC + w);
                 decay -= result;
                 damage = (float) count + fp->dmg.x1838_percentTemp;
-                result = (float)(u32) entry->size_of_xC * damage;
+                result = (float) (u32) entry->size_of_xC * damage;
                 result = ftd->x110 * damage + ftd->x114 * result;
                 result = decay * result;
                 result = ftd->x11C * result + ftd->x120;
-                x24_f = ftColl_804D8314 * (float)(u32) hit->x24;
-                result = x24_f * result + (float)(u32) hit->x2C;
+                x24_f = ftColl_804D8314 * (float) (u32) hit->x24;
+                result = x24_f * result + (float) (u32) hit->x2C;
                 result = stage * result;
                 result = attack * result;
                 result = defense * result;
@@ -2449,8 +2438,7 @@ void ftColl_8007A06C(Fighter_GObj* gobj, void* dmg_ptr, void* log, size_t idx,
             break;
         }
 
-        case 3:
-        {
+        case 3: {
             float defense, stage, weight;
             float w, decay, result;
 
@@ -2471,12 +2459,12 @@ void ftColl_8007A06C(Fighter_GObj* gobj, void* dmg_ptr, void* log, size_t idx,
                 result = (w * decay) / (ftColl_804D82EC + w);
                 decay -= result;
 
-                result = ftd->x118 * (float)(u32) stack_hit.x28;
+                result = ftd->x118 * (float) (u32) stack_hit.x28;
                 result = ftd->x118 * ftd->x110 + ftd->x114 * result;
                 result = decay * result;
                 result = ftd->x11C * result + ftd->x120;
-                x24_f = ftColl_804D8314 * (float)(u32) stack_hit.x24;
-                result = x24_f * result + (float)(u32) stack_hit.x2C;
+                x24_f = ftColl_804D8314 * (float) (u32) stack_hit.x24;
+                result = x24_f * result + (float) (u32) stack_hit.x2C;
                 result = stage * result;
                 result = attack * result;
                 result = defense * result;
@@ -2499,12 +2487,12 @@ void ftColl_8007A06C(Fighter_GObj* gobj, void* dmg_ptr, void* log, size_t idx,
                 result = (w * decay) / (ftColl_804D82EC + w);
                 decay -= result;
                 damage = (float) count + fp->dmg.x1838_percentTemp;
-                result = (float)(u32) stack_hit.unk_count * damage;
+                result = (float) (u32) stack_hit.unk_count * damage;
                 result = ftd->x110 * damage + ftd->x114 * result;
                 result = decay * result;
                 result = ftd->x11C * result + ftd->x120;
-                x24_f = ftColl_804D8314 * (float)(u32) stack_hit.x24;
-                result = x24_f * result + (float)(u32) stack_hit.x2C;
+                x24_f = ftColl_804D8314 * (float) (u32) stack_hit.x24;
+                result = x24_f * result + (float) (u32) stack_hit.x2C;
                 result = stage * result;
                 result = attack * result;
                 result = defense * result;
@@ -2520,8 +2508,8 @@ void ftColl_8007A06C(Fighter_GObj* gobj, void* dmg_ptr, void* log, size_t idx,
         }
 
         if (kb > best_kb) {
-            if (entry->x0 == 1 && fp->victim_gobj != NULL &&
-                !fp->x221B_b5 && fp->victim_gobj == entry->gobj)
+            if (entry->x0 == 1 && fp->victim_gobj != NULL && !fp->x221B_b5 &&
+                fp->victim_gobj == entry->gobj)
             {
                 fp->x221C_b0 = 1;
             } else {
@@ -2536,8 +2524,7 @@ void ftColl_8007A06C(Fighter_GObj* gobj, void* dmg_ptr, void* log, size_t idx,
     best_entry = &entries[best_idx];
 
     switch (best_entry->x0) {
-    case 1:
-    {
+    case 1: {
         Fighter* attacker_fp = (Fighter*) best_entry->gobj->user_data;
 
         hit = best_entry->hit0;
@@ -2546,14 +2533,13 @@ void ftColl_8007A06C(Fighter_GObj* gobj, void* dmg_ptr, void* log, size_t idx,
         } else {
             dir = ftColl_804D82EC;
         }
-        angle = (float)(u32) hit->kb_angle;
+        angle = (float) (u32) hit->kb_angle;
         element = hit->element;
         sfx_severity = hit->sfx_severity;
         break;
     }
 
-    case 2:
-    {
+    case 2: {
         Item* item = (Item*) best_entry->gobj->user_data;
         float vel_x;
 
@@ -2575,20 +2561,19 @@ void ftColl_8007A06C(Fighter_GObj* gobj, void* dmg_ptr, void* log, size_t idx,
                 dir = ftColl_804D82F0;
             }
         }
-        angle = (float)(u32) hit->kb_angle;
+        angle = (float) (u32) hit->kb_angle;
         element = hit->element;
         sfx_severity = hit->sfx_severity;
         break;
     }
 
-    case 3:
-    {
+    case 3: {
         lbColl_80008D30_arg1* env =
             (lbColl_80008D30_arg1*) best_entry->unk_anim0;
 
         dir = fp->facing_dir;
         sfx_severity = 0;
-        angle = (float)(u32) env->kb_angle;
+        angle = (float) (u32) env->kb_angle;
         element = env->element;
         break;
     }
@@ -2601,10 +2586,12 @@ void ftColl_8007A06C(Fighter_GObj* gobj, void* dmg_ptr, void* log, size_t idx,
         FighterHurtCapsule* hurt = best_entry->hurt1;
         float dx, dy, abs_dx;
 
-        dx = ftColl_804D82E8 * (hurt->capsule.a_pos.x +
-             hurt->capsule.b_pos.x) - best_entry->pos.x;
-        dy = ftColl_804D82E8 * (hurt->capsule.a_pos.y +
-             hurt->capsule.b_pos.y) - best_entry->pos.y;
+        dx =
+            ftColl_804D82E8 * (hurt->capsule.a_pos.x + hurt->capsule.b_pos.x) -
+            best_entry->pos.x;
+        dy =
+            ftColl_804D82E8 * (hurt->capsule.a_pos.y + hurt->capsule.b_pos.y) -
+            best_entry->pos.y;
 
         if (dx < ftColl_804D82E0) {
             dir = ftColl_804D82EC;
@@ -2621,7 +2608,7 @@ void ftColl_8007A06C(Fighter_GObj* gobj, void* dmg_ptr, void* log, size_t idx,
         if (abs_dx < ftColl_804D8318) {
             angle_int = 0;
         } else {
-            angle_int = (s32)(ftColl_804D831C * atanf(dy / abs_dx));
+            angle_int = (s32) (ftColl_804D831C * atanf(dy / abs_dx));
         }
         angle = (float) angle_int;
     }
@@ -2637,8 +2624,7 @@ void ftColl_8007A06C(Fighter_GObj* gobj, void* dmg_ptr, void* log, size_t idx,
     out->sfx_severity = sfx_severity;
 
     switch (best_entry->x0) {
-    case 1:
-    {
+    case 1: {
         Fighter* attacker_fp = (Fighter*) best_entry->gobj->user_data;
         Fighter_GObj* attacker_gobj = attacker_fp->gobj;
         attacker_fp = (Fighter*) attacker_gobj->user_data;
@@ -2649,8 +2635,7 @@ void ftColl_8007A06C(Fighter_GObj* gobj, void* dmg_ptr, void* log, size_t idx,
         break;
     }
 
-    case 2:
-    {
+    case 2: {
         Item* item_sub = (Item*) best_entry->gobj->user_data;
         Item* ip = (Item*) item_sub->entity->user_data;
         HSD_GObj* owner_gobj;
@@ -2663,24 +2648,20 @@ void ftColl_8007A06C(Fighter_GObj* gobj, void* dmg_ptr, void* log, size_t idx,
         owner_gobj = ip->owner;
 
         if (ftLib_80086960(owner_gobj)) {
-            ftColl_8007861C(owner_gobj, gobj, 2, ip->kind,
-                            ip->xD90.x2070_int, &ip->xD94,
-                            ip->xDA8_short, dmg_ptr, 0);
+            ftColl_8007861C(owner_gobj, gobj, 2, ip->kind, ip->xD90.x2070_int,
+                            &ip->xD94, ip->xDA8_short, dmg_ptr, 0);
         } else if (pl_8003D60C(ip->kind)) {
-            ftColl_8007861C(NULL, gobj, 2, ip->kind,
-                            ip->xD90.x2070_int, &ip->xD94,
-                            ip->xDA8_short, dmg_ptr, 1);
+            ftColl_8007861C(NULL, gobj, 2, ip->kind, ip->xD90.x2070_int,
+                            &ip->xD94, ip->xDA8_short, dmg_ptr, 1);
         } else {
-            ftColl_8007861C(NULL, gobj, 2, ip->kind,
-                            ip->xD90.x2070_int, &ip->xD94,
-                            ip->xDA8_short, dmg_ptr, 0);
+            ftColl_8007861C(NULL, gobj, 2, ip->kind, ip->xD90.x2070_int,
+                            &ip->xD94, ip->xDA8_short, dmg_ptr, 0);
         }
         break;
     }
 
     case 3:
-        ftColl_8007861C(NULL, gobj, 3, best_entry->kind, 0, 0, 0,
-                        dmg_ptr, 1);
+        ftColl_8007861C(NULL, gobj, 3, best_entry->kind, 0, 0, 0, dmg_ptr, 1);
         break;
     }
 
@@ -2715,7 +2696,7 @@ void ftColl_8007ABD0(HitCapsule* arg0, u32 arg1, Fighter_GObj* arg2)
     dmg = (float) arg1;
     if (fp->x34_scale.y != ftColl_804D82EC) {
         dmg = ftCo_CalcYScaledKnockback(dmg, fp->x34_scale.y,
-                                         Fighter_804D6524->x4);
+                                        Fighter_804D6524->x4);
     }
     scaled_dmg = ftCo_800DEEB8(fp, dmg);
     arg0->unk_count = (u32) (s32) scaled_dmg;
@@ -3181,7 +3162,6 @@ void ftColl_8007BAC0(Fighter_GObj* gobj)
     struct ftDeviceUnk3* arr;
     PAD_STACK(8);
 
-
     if (gm_8016B1C4()) {
         return;
     }
@@ -3207,13 +3187,10 @@ void ftColl_8007BAC0(Fighter_GObj* gobj)
             if (ground != NULL) {
                 type = arr[i].type;
                 if (ftCo_800C0A28(gobj, ground, type)) {
-                    if (arr[i].active_cb(ground, gobj,
-                                         (Vec3*) &desc))
-                    {
+                    if (arr[i].active_cb(ground, gobj, (Vec3*) &desc)) {
                         if (max == 0) {
-                            ftCo_800C08A0(gobj,
-                                          (Fighter_GObj*) ground,
-                                          desc, type);
+                            ftCo_800C08A0(gobj, (Fighter_GObj*) ground, desc,
+                                          type);
                         }
                     }
                 }

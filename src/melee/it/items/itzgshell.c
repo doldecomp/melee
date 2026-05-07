@@ -1,21 +1,22 @@
 #include "itzgshell.h"
 
-#include "placeholder.h"
+#include "dolphin.h"
 
-#include "baselib/jobj.h"
 #include "baselib/random.h"
+#include "cm/camera.h"
 #include "ef/efasync.h"
 #include "gr/grzakogenerator.h"
-
-#include "it/forward.h"
-
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/itcoll.h"
 #include "it/item.h"
-#include "MSL/math.h"
+#include "it/items/itnokonoko.h"
+#include "lb/lb_00B0.h"
+#include "mp/mpcoll.h"
+
+#include <MSL/math.h>
 
 typedef struct itGShell_Attrs {
     float x0;
@@ -43,6 +44,32 @@ typedef struct itZGShell_Attrs {
 } itZGShell_Attrs;
 
 /* 2DFFA0 */ static void it_802DFFA0(Item_GObj* gobj);
+
+ItemStateTable it_803F86C8[] = {
+    { 0, itZrshell_UnkMotion0_Anim, itZrshell_UnkMotion0_Phys,
+      itZrshell_UnkMotion0_Coll },
+    { 0, itZrshell_UnkMotion1_Anim, itZrshell_UnkMotion1_Phys,
+      itZrshell_UnkMotion1_Coll },
+    { 0, itZrshell_UnkMotion2_Anim, itZrshell_UnkMotion2_Phys, NULL },
+    { 1, itZrshell_UnkMotion3_Anim, itZrshell_UnkMotion3_Phys,
+      itZrshell_UnkMotion3_Coll },
+    { 1, itZrshell_UnkMotion4_Anim, itZrshell_UnkMotion4_Phys,
+      itZrshell_UnkMotion4_Coll },
+    { 1, itZrshell_UnkMotion6_Anim, itZrshell_UnkMotion6_Phys,
+      itZrshell_UnkMotion6_Coll },
+    { 0, itZrshell_UnkMotion6_Anim, itZrshell_UnkMotion6_Phys,
+      itZrshell_UnkMotion6_Coll },
+    { 1, itZrshell_UnkMotion8_Anim, itZrshell_UnkMotion8_Phys,
+      itZrshell_UnkMotion8_Coll },
+    { 0, itZrshell_UnkMotion8_Anim, itZrshell_UnkMotion8_Phys,
+      itZrshell_UnkMotion8_Coll },
+    { 0, itZrshell_UnkMotion9_Anim, itZrshell_UnkMotion9_Phys,
+      itZrshell_UnkMotion9_Coll },
+    { 2, itZrshell_UnkMotion10_Anim, itZrshell_UnkMotion10_Phys,
+      itZrshell_UnkMotion10_Coll },
+    { 3, itZrshell_UnkMotion11_Anim, itZrshell_UnkMotion11_Phys,
+      itZrshell_UnkMotion11_Coll },
+};
 
 void it_802DDB38(Item_GObj* gobj)
 {
@@ -96,9 +123,105 @@ void fn_802DDC8C(Item_GObj* gobj)
     }
 }
 
-/// #it_802DDD38 - complex damage response, skipped
+void it_802DDD38(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itGShell_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
 
-/// #it_802DDEB4 - complex kicked response, skipped
+    switch (ip->msid) {
+    case 0:
+    case 1:
+    case 3:
+    case 4:
+    case 9:
+    case 10:
+        ip->x40_vel.x =
+            -ip->xCCC_incDamageDirection * ((f32) ip->xCA0 * attrs->x14);
+        ip->xDD4_itemVar.zgshell.xE08_b1 = 1;
+        break;
+    case 5:
+    case 6:
+    case 7:
+    case 8:
+        ip->x40_vel.x +=
+            -ip->xCCC_incDamageDirection * ((f32) ip->xCA0 * attrs->x14);
+        ip->xDD4_itemVar.zgshell.xE08_b1 = 1;
+        break;
+    }
+
+    if (ip->msid == 0xB) {
+        Camera_80030E44(2, &ip->pos);
+        it_802DF9F8(gobj);
+    } else {
+        it_8027236C(gobj);
+        it_802756D0(gobj);
+        if (ip->ground_or_air == GA_Air) {
+            it_802DEC80(gobj);
+        } else {
+            it_802DE6F0(gobj);
+        }
+        ip->xDD4_itemVar.zgshell.xE08_b0 = 1;
+        it_8027570C(gobj, 0);
+    }
+}
+
+// permuterslop
+static inline itGShell_Attrs* get_attrs(Item* arg0)
+{
+    return arg0->xC4_article_data->x4_specialAttributes;
+}
+
+void it_802DDEB4(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    itGShell_Attrs* attrs = get_attrs(ip);
+
+    switch (ip->msid) {
+    case 5:
+    case 6:
+    case 7:
+    case 8:
+    case 10: {
+        Item* ip = gobj->user_data;
+        itGShell_Attrs* attrs = get_attrs(ip);
+        it_802756D0(gobj);
+        it_80275444(gobj);
+        ip->x40_vel.x = -ip->x40_vel.x * attrs->xC * HSD_Randf();
+        ip->x40_vel.y = attrs->x10;
+        it_802762BC(ip);
+        ip->xDD4_itemVar.zgshell.xE1C_b0 = 1;
+        ip->xDD4_itemVar.zgshell.xE04 = attrs->x34;
+        it_802DE320(gobj);
+        ip->xDD4_itemVar.zgshell.xE08_b1 = 1;
+        break;
+    }
+    case 0:
+    case 1:
+    case 3:
+    case 4:
+    case 9: {
+        Item* ip = gobj->user_data;
+        ip->x40_vel.x = attrs->x1C * -ip->xCD0;
+        it_802723FC(gobj);
+        ip->xDD4_itemVar.zgshell.xE08_b1 = 1;
+        if (ip->ground_or_air == GA_Air) {
+            it_802DEC80(gobj);
+        } else {
+            it_802DE6F0(gobj);
+        }
+        break;
+    }
+    }
+
+    if (ip->msid == 0xB) {
+        Camera_80030E44(2, &ip->pos);
+        it_802DF9F8(gobj);
+    } else {
+        it_802756D0(gobj);
+        ip->xDD4_itemVar.zgshell.xE08_b0 = 1;
+        it_8027570C(gobj, 0);
+    }
+}
 
 void it_802DE040(Item_GObj* gobj)
 {
@@ -325,7 +448,40 @@ void it_802DE6F0(Item_GObj* gobj)
     ip->jumped_on = fn_802DFE7C;
 }
 
-/// #itZrshell_UnkMotion6_Anim
+static inline void it_802DDB38_inline(Item_GObj* gobj, Vec* v)
+{
+    Item* ip = GET_ITEM(gobj);
+    itZGShell_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    HSD_JObj* jobj;
+    if (ip->xDD4_itemVar.zgshell.xDF8 <= 0.0f) {
+        jobj = GET_JOBJ(gobj);
+        *v = attrs->x3C;
+        v->x *= -ip->facing_dir;
+        efAsync_Spawn(gobj, &GET_ITEM(gobj)->xBC0, 2, 1029, jobj, v);
+        ip->xDD4_itemVar.zgshell.xDF8 = attrs->x38;
+    } else {
+        ip->xDD4_itemVar.zgshell.xDF8 -= 1.0f;
+    }
+}
+
+bool itZrshell_UnkMotion6_Anim(Item_GObj* gobj)
+{
+    Item* ip = gobj->user_data;
+    Vec v;
+    PAD_STACK(8);
+    if (ip->xDD4_itemVar.zgshell.xDF4 <= 0.0f) {
+        if (!ip->xDCD_flag.b5) {
+            it_80275444(gobj);
+        }
+    } else {
+        ip->xDD4_itemVar.zgshell.xDF4 -= 1.0f;
+    }
+    it_802DDBE8(gobj);
+    if (ip->msid == 6 || ip->msid == 5) {
+        it_802DDB38_inline(gobj, &v);
+    }
+    return false;
+}
 
 void itZrshell_UnkMotion6_Phys(Item_GObj* gobj)
 {
@@ -511,9 +667,116 @@ bool itZrshell_UnkMotion9_Coll(Item_GObj* gobj)
     return false;
 }
 
-/// #it_802DF230
+void it_802DF230(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    HSD_JObj* jobj;
+    HSD_JObj* child;
+    f32 angle;
 
-/// #itZrshell_UnkMotion11_Anim
+    ip->xC9C = 0;
+    ip->xCA0 = 0;
+    it_802756E0(gobj);
+    it_8026B3A8(gobj);
+    ip->xDC8_word.flags.x1F = 0;
+    ip->x40_vel.x = ip->x40_vel.y = ip->x40_vel.z = 0.0f;
+    it_802DFF14(gobj, 1);
+    ip->xDD4_itemVar.zgshell.xE0C = 0x14;
+
+    jobj = GET_JOBJ(gobj);
+    angle = rad_to_deg * HSD_JObjGetRotationY(jobj);
+    child = HSD_JObjGetChild(jobj);
+    angle += rad_to_deg * HSD_JObjGetRotationY(child);
+
+    if (-90.0f == angle || 90.f == angle) {
+        ip->facing_dir = (angle < 0.0f) ? -1.0f : 1.0f;
+        ip->xDD4_itemVar.zgshell.xE00 = 0.0f;
+        HSD_JObjSetRotationY(jobj, deg_to_rad * angle);
+        HSD_JObjSetRotationY(child, 0.0f);
+    } else {
+        f32 factor;
+        if (angle > 2147483600.0f || angle < -2147483600.0f) {
+            OSReport("*** ZGShell Restoration Rot Y Irregul!\n");
+            __assert("itzgshell.c", 0x3A1, "0");
+        }
+        angle = (f32) ((s32) angle % 360);
+        HSD_JObjSetRotationY(jobj, deg_to_rad * angle);
+        HSD_JObjSetRotationY(child, 0.0f);
+        if (0.0f == angle) {
+            ip->facing_dir = HSD_Randi(2) ? -1.0f : 1.0f;
+            factor = 90.f * ip->facing_dir;
+        } else if (angle < 180.0f) {
+            ip->facing_dir = 1.0f;
+            factor = 90.f - angle;
+        } else {
+            ip->facing_dir = -1.0f;
+            factor = 270.0f - angle;
+        }
+        ip->xDD4_itemVar.zgshell.xE00 =
+            factor / (f32) ip->xDD4_itemVar.zgshell.xE0C;
+    }
+
+    if (ip->xDC8_word.flags.x13) {
+        it_8027429C(gobj, &ip->x40_vel);
+        ip->x40_vel.y -= ip->xCC_item_attr->x14_fall_speed_max;
+        it_8026B3A8(gobj);
+        ip->xDD4_itemVar.zgshell.xE18 = 1;
+        it_802762BC(ip);
+    } else {
+        ip->xDD4_itemVar.zgshell.xE18 = 0;
+    }
+    ip->xDD4_itemVar.zgshell.xE14 = 0x23;
+    it_802DFFA0(gobj);
+    Item_80268E5C(gobj, 0xB, ITEM_ANIM_UPDATE);
+}
+
+bool itZrshell_UnkMotion11_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    Vec3 pos;
+    Item_GObj* spawn;
+    PAD_STACK(12);
+
+    if (ip->xDD4_itemVar.zgshell.xE0C != 0) {
+        HSD_JObj* jobj = gobj->hsd_obj;
+        HSD_JObjAddRotationY(jobj,
+                             0.017453292f * ip->xDD4_itemVar.zgshell.xE00);
+        ip->xDD4_itemVar.zgshell.xE0C--;
+    }
+    if (it_80272C6C(gobj)) {
+        f32 saved_vy = ip->x40_vel.y;
+        it_802DFFB8(ip->xBBC_dynamicBoneTable->bones[1], ip);
+        if (ip->xDD4_itemVar.zgshell.xE14 != 0) {
+            ip->xDD4_itemVar.zgshell.xE14--;
+        } else if (ip->ground_or_air == GA_Air) {
+            if (ip->x40_vel.y) {
+                ip->x40_vel.y -= ip->xCC_item_attr->x10_fall_speed;
+                if (ip->x40_vel.y > saved_vy) {
+                    ip->x40_vel.y =
+                        saved_vy - ip->xCC_item_attr->x10_fall_speed;
+                }
+            } else {
+                ip->x40_vel.y = ip->xCC_item_attr->x14_fall_speed_max;
+            }
+        } else {
+            itResetVelocity(ip);
+            it_80276CB8(gobj);
+        }
+    } else if (ip->ground_or_air == GA_Ground) {
+        lb_8000B1CC(GET_JOBJ(gobj), NULL, &pos);
+        it_802DFF14(gobj, 0);
+        it_802756D0(gobj);
+        spawn = it_802DD7F0(ip->xDD4_itemVar.zgshell.xE10, &pos, NULL,
+                            (s32) ip->facing_dir);
+        if (spawn != NULL) {
+            *(s32*) &GET_ITEM(spawn)->xDD4_itemVar.zgshell.xDD8 =
+                *(s32*) &ip->xDD4_itemVar.zgshell.xDD8;
+            *(s32*) &ip->xDD4_itemVar.zgshell.xDD8 = -1;
+        }
+        return true;
+    }
+    return false;
+}
 
 void itZrshell_UnkMotion11_Phys(Item_GObj* gobj)
 {
@@ -547,7 +810,35 @@ void it_802DF9F8(Item_GObj* gobj)
     Item_80268E5C((HSD_GObj*) gobj, 0xA, ITEM_ANIM_UPDATE);
 }
 
-/// #itZrshell_UnkMotion10_Anim
+bool itZrshell_UnkMotion10_Anim(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    PAD_STACK(8);
+    if (!it_80272C6C(gobj) && ip->ground_or_air == GA_Ground) {
+        if (!it_80277040(gobj)) {
+            ip = (0, (Item*) HSD_GObjGetUserData(gobj)); // permuterslop
+            it_8026B390(gobj);
+            it_80275444(gobj);
+            it_802754D4(gobj);
+            it_802756E0(gobj);
+            ip->x40_vel.x = ip->x40_vel.y = ip->x40_vel.z = 0.0f;
+            ip->xDD4_itemVar.zgshell.xE0C = 0;
+            Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+            ip->xDD4_itemVar.zgshell.xE1C_b0 = 0;
+            it_80274CAC(gobj);
+            ip->jumped_on = fn_802DFE7C;
+        } else {
+            ip = GET_ITEM(gobj);
+            if (ip->msid != 0xB && ip->msid != 0xA) {
+                it_802DFFA0(gobj);
+                ip->xDD4_itemVar.zgshell.xE1C_b0 = 0;
+                ip->xDC8_word.flags.x1F = 1;
+                Item_80268E5C(gobj, 9, ITEM_ANIM_UPDATE);
+            }
+        }
+    }
+    return false;
+}
 
 void itZrshell_UnkMotion10_Phys(Item_GObj* gobj)
 {
@@ -679,9 +970,59 @@ void it_802DFFB8(HSD_JObj* jobj, Item* ip)
     }
 }
 
-/// #it_802E0100 - complex spawn, skipped
+const Vec3 it_803B86E8 = { 0.0f, 0.0f, 0.0f };
 
-bool itZRShell_Logic12_Clanked(Item_GObj* gobj)
+Item_GObj* it_802E0100(s32 arg0, Vec3* pos, s32 facing_int)
 {
-    return it_2725_Logic11_Clanked(gobj);
+    Vec3 vel = it_803B86E8;
+    Item_GObj* spawn_gobj;
+    PAD_STACK(8);
+    spawn_gobj = it_8027B5B0(0xDB, pos, NULL, &vel, 1);
+    if (spawn_gobj != NULL) {
+        Item* spawn_ip = GET_ITEM(spawn_gobj);
+        spawn_ip->facing_dir = facing_int;
+        it_8027C56C(spawn_gobj, spawn_ip->facing_dir);
+        mpCollSetFacingDir(&spawn_ip->x378_itemColl,
+                           (spawn_ip->facing_dir == -1.0f) ? -1 : 1);
+        spawn_ip->xDD4_itemVar.zgshell.xE10 = arg0;
+
+        if (it_802DDA84(spawn_gobj)) {
+            it_802762B0(spawn_ip);
+            if (!it_80277040(spawn_gobj)) {
+                spawn_ip = GET_ITEM(spawn_gobj);
+                it_8026B390(spawn_gobj);
+                it_80275444(spawn_gobj);
+                it_802754D4(spawn_gobj);
+                it_802756E0(spawn_gobj);
+                spawn_ip->x40_vel.x = spawn_ip->x40_vel.y =
+                    spawn_ip->x40_vel.z = 0.0f;
+                spawn_ip->xDD4_itemVar.zgshell.xE0C = 0;
+                Item_80268E5C(spawn_gobj, 0, ITEM_ANIM_UPDATE);
+                spawn_ip->xDD4_itemVar.zgshell.xE1C_b0 = 0;
+                it_80274CAC(spawn_gobj);
+                spawn_ip->jumped_on = fn_802DFE7C;
+            } else {
+                spawn_ip = GET_ITEM(spawn_gobj);
+                if (spawn_ip->msid != 0xB && spawn_ip->msid != 0xA) {
+                    spawn_ip->xDD4_itemVar.zgshell.vel.x = 0.0f;
+                    spawn_ip->xDD4_itemVar.zgshell.vel.y = 0.0f;
+                    spawn_ip->xDD4_itemVar.zgshell.vel.z = 0.0f;
+                    spawn_ip->xDD4_itemVar.zgshell.xE1C_b0 = 0;
+                    spawn_ip->xDC8_word.flags.x1F = 1;
+                    Item_80268E5C(spawn_gobj, 9, ITEM_ANIM_UPDATE);
+                }
+            }
+        } else {
+            it_802762BC(spawn_ip);
+            Item_80268E5C(spawn_gobj, 1, ITEM_ANIM_UPDATE);
+            it_80274C88(spawn_gobj);
+        }
+    }
+    return spawn_gobj;
+}
+
+// unused debug message? (jimen = じめん = 地面 = "ground")
+static void jimenn(void)
+{
+    OSReport("JIMENN!!!\n");
 }

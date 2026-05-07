@@ -1,17 +1,7 @@
 #include "itgreatfoxlaser.h"
 
-#include "math.h"
-#include "placeholder.h"
-
-#include "baselib/debug.h"
-
-#include "baselib/forward.h"
-
 #include "ft/ftlib.h"
 #include "gr/ground.h"
-
-#include "it/forward.h"
-
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
@@ -19,7 +9,14 @@
 #include "it/item.h"
 #include "lb/lb_00B0.h"
 
-#include <baselib/jobj.h>
+#include <MSL/math.h>
+
+ItemStateTable it_803F8FD0[] = {
+    { 0, itGreatfoxlaser_UnkMotion1_Anim, itGreatfoxlaser_UnkMotion1_Phys,
+      NULL },
+    { 1, itGreatfoxlaser_UnkMotion1_Anim, itGreatfoxlaser_UnkMotion1_Phys,
+      NULL },
+};
 
 s32 it_802EAF28(Item_GObj* item_gobj)
 {
@@ -30,15 +27,14 @@ s32 it_802EAF28(Item_GObj* item_gobj)
 Item_GObj* it_802EAF34(HSD_GObj* owner, Vec3* offset, int type)
 {
     Item_GObj* item_gobj;
-    Vec3 pos;
     HSD_JObj* jobj = owner->hsd_obj;
-    u8 _pad[4];
+    Quaternion unused;
     SpawnItem spawn;
     PAD_STACK(12);
 
-    lb_8000B1CC(jobj, offset, &pos);
+    lb_8000B1CC(jobj, offset, &spawn.prev_pos);
     spawn.kind = 0xEB;
-    spawn.prev_pos = pos;
+    spawn.pos = spawn.prev_pos;
     spawn.facing_dir = -1.0f;
     spawn.x3C_damage = 0;
     spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;
@@ -46,15 +42,14 @@ Item_GObj* it_802EAF34(HSD_GObj* owner, Vec3* offset, int type)
     spawn.x4_parent_gobj2 = NULL;
     spawn.x44_flag.b0 = false;
     spawn.x40 = 0;
-    HSD_ASSERT(0x2BBU, jobj);
+    HSD_JObjGetRotation(jobj, &unused); // ???
     item_gobj = Item_80268B18(&spawn);
     if (item_gobj != NULL) {
         Item* ip = GET_ITEM(item_gobj);
         itGreatFoxLaser_Attrs* attr =
             ip->xC4_article_data->x4_specialAttributes;
-        f32 scale = Ground_801C0498();
-        ip->scl = scale;
-        HSD_JObjSetScaleX(item_gobj->hsd_obj, scale);
+        ip->scl = Ground_801C0498();
+        HSD_JObjSetScaleX(item_gobj->hsd_obj, ip->scl);
         HSD_JObjSetScaleY(item_gobj->hsd_obj, ip->scl);
         HSD_JObjSetScaleZ(item_gobj->hsd_obj, ip->scl);
         ip->xDD4_itemVar.greatfoxlaser.x20 = owner;

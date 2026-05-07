@@ -125,10 +125,16 @@ bool grFlatzone_80216F40(void)
     return 0;
 }
 
+inline Ground_GObj* grFlatzone_80216F48_inline(s32 arg0);
+inline Ground_GObj* grFlatzone_80216F48_inline(s32 arg0)
+{
+    return Ground_GetStageGObj(arg0);
+}
+
 HSD_GObj* grFlatzone_80216F48(s32 gobj_id)
 {
     StageCallbacks* callbacks = &grFz_803E7940[gobj_id];
-    HSD_GObj* gobj = Ground_GetStageGObj(gobj_id);
+    HSD_GObj* gobj = grFlatzone_80216F48_inline(gobj_id);
     if (gobj != NULL) {
         Ground* gp = GET_GROUND(gobj);
         gp->x8_callback = NULL;

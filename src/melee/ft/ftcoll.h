@@ -27,6 +27,8 @@
 /* 076640 */ bool ftColl_80076640(Fighter*, float*);
 /* 076764 */ void ftColl_80076764(int, enum_t, Fighter_GObj*, DynamicsDesc*,
                                   Fighter* fp, FighterHurtCapsule*);
+/* 076808 */ void ftColl_80076808(Fighter* fp, HitCapsule* hit, int arg2,
+                                  void* victim, bool arg4);
 /* 0768A0 */ void ftColl_800768A0(Fighter* fp, HitCapsule* dst);
 /* 07699C */ bool ftColl_8007699C(Fighter*, HitCapsule*, Fighter*,
                                   HitCapsule*);
@@ -56,11 +58,6 @@
                                    float, float);
 /* 079C70 */ float ftColl_80079C70(Fighter*, Fighter*, HitCapsule*, int);
 /* 079EA8 */ float ftColl_80079EA8(Fighter*, HitCapsule*, int);
-/// /* 07A06C */ static void ftColl_8007A06C(float facing_dir, DmgLogEntry**
-/// log,
-///                                          int idx, bool);
-/* 076808 */ static void ftColl_80076808(Fighter* fp, HitCapsule* hit, int,
-                                         void* victim, bool);
 /* 07AB48 */ void ftColl_8007AB48(Fighter_GObj*);
 /* 07AB80 */ void ftColl_8007AB80(Fighter_GObj*);
 /* 07ABD0 */ void ftColl_8007ABD0(HitCapsule*, u32 damageAmount,

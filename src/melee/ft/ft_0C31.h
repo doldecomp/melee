@@ -46,7 +46,7 @@
 /* 0C77B4 */ void ftCo_CaptureLeadead_Phys(Fighter_GObj* gobj);
 /* 0C77B8 */ void ftCo_CaptureLeadead_Coll(Fighter_GObj* gobj);
 /* 0C7800 */ void ftCo_800C7800(Fighter_GObj*);
-/* 0C78B0 */ UNK_RET ftCo_800C78B0(UNK_PARAMS);
+/* 0C78B0 */ UNK_RET ftCo_800C78B0(HSD_GObj*, HSD_GObj*);
 /* 0C7A30 */ void ftCo_800C7A30(Fighter_GObj* gobj);
 /* 0C7A58 */ void ftCo_CaptureLikelike_Anim(Fighter_GObj* gobj);
 /* 0C7AD4 */ void ftCo_CaptureLikelike_IASA(Fighter_GObj* gobj);

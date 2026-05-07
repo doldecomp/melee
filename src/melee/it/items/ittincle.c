@@ -1,17 +1,106 @@
 #include "ittincle.h"
 
+#include "gr/ground.h"
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
-#include "it/itCommonItems.h"
 #include "it/item.h"
 #include "lb/lb_00B0.h"
 
-#include <MSL/math.h>
 #include <baselib/random.h>
+#include <MSL/math.h>
 
 /* 2EC870 */ static void it_802EC870(Item_GObj*, int);
+
+ItemStateTable it_803F9000[] = {
+    {
+        -1,
+        itTincle_UnkMotion0_Anim,
+        itTincle_UnkMotion0_Phys,
+        itTincle_UnkMotion0_Coll,
+    },
+    {
+        0,
+        itTincle_UnkMotion1_Anim,
+        itTincle_UnkMotion1_Phys,
+        itTincle_UnkMotion1_Coll,
+    },
+    {
+        0,
+        itTincle_UnkMotion2_Anim,
+        itTincle_UnkMotion2_Phys,
+        itTincle_UnkMotion2_Coll,
+    },
+    {
+        0,
+        itTincle_UnkMotion3_Anim,
+        itTincle_UnkMotion3_Phys,
+        itTincle_UnkMotion3_Coll,
+    },
+    {
+        0,
+        itTincle_UnkMotion4_Anim,
+        itTincle_UnkMotion4_Phys,
+        itTincle_UnkMotion4_Coll,
+    },
+    {
+        0,
+        itTincle_UnkMotion5_Anim,
+        itTincle_UnkMotion5_Phys,
+        itTincle_UnkMotion5_Coll,
+    },
+    {
+        1,
+        itTincle_UnkMotion7_Anim,
+        itTincle_UnkMotion7_Phys,
+        itTincle_UnkMotion7_Coll,
+    },
+    {
+        2,
+        itTincle_UnkMotion7_Anim,
+        itTincle_UnkMotion7_Phys,
+        itTincle_UnkMotion7_Coll,
+    },
+    {
+        3,
+        itTincle_UnkMotion8_Anim,
+        itTincle_UnkMotion8_Phys,
+        itTincle_UnkMotion8_Coll,
+    },
+    {
+        4,
+        itTincle_UnkMotion9_Anim,
+        itTincle_UnkMotion9_Phys,
+        itTincle_UnkMotion9_Coll,
+    },
+    {
+        5,
+        itTincle_UnkMotion10_Anim,
+        itTincle_UnkMotion10_Phys,
+        itTincle_UnkMotion10_Coll,
+    },
+    {
+        6,
+        itTincle_UnkMotion11_Anim,
+        itTincle_UnkMotion11_Phys,
+        itTincle_UnkMotion11_Coll,
+    },
+    {
+        6,
+        itTincle_UnkMotion12_Anim,
+        itTincle_UnkMotion12_Phys,
+        itTincle_UnkMotion12_Coll,
+    },
+};
+
+static void data_ordering(void)
+{
+    HSD_JObjSetRotationY(NULL, 0.0f);
+    HSD_JObjSetRotationY(NULL, 10.0f);
+}
+
+extern Vec3 it_803B8740;
 
 void it_802EB5C8(Item_GObj* gobj)
 {
@@ -46,7 +135,38 @@ bool itTincle_Logic13_DmgDealt(Item_GObj* gobj)
     return false;
 }
 
-/// #it_802EB6DC
+void it_802EB6DC(Item_GObj* gobj)
+{
+    s32 randi_result;
+    Item* ip = GET_ITEM(gobj);
+    itTincleAttributes* sa = ip->xC4_article_data->x4_specialAttributes;
+    Item* unused;
+    s32 unused2;
+    s32 range_i;
+    PAD_STACK(8);
+
+    randi_result = HSD_Randi(ABS(sa->x10 - sa->xC));
+    ip->pos.x = sa->xC + randi_result;
+    ip->pos.y = sa->x14;
+    ip->pos.z = 2.0f;
+    it_802762BC(ip);
+    ip->x40_vel.x = ip->x40_vel.y = ip->x40_vel.z = 0.0f;
+    range_i = sa->x4 - sa->x8;
+    if (range_i < 0) {
+        range_i = -range_i;
+    }
+    ip->xDD4_itemVar.tincle.x20 = HSD_Randi(range_i);
+    ip->xDD4_itemVar.tincle.x24 = 0;
+    ip->xDD4_itemVar.tincle.x28 = 0;
+    ip->xDD4_itemVar.tincle.x2C = 0;
+    ip->xDD4_itemVar.tincle.x34 = 0.0f;
+    ip->xDD4_itemVar.tincle.x38 = 0.0f;
+    ip->xDD4_itemVar.tincle.x4C = 0.0f;
+    it_802756D0(gobj);
+    HSD_JObjSetFlagsAll(GET_JOBJ(gobj), 0x10);
+    Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
+    it_802EC9E8(gobj);
+}
 
 bool itTincle_UnkMotion0_Anim(Item_GObj* gobj)
 {
@@ -69,7 +189,23 @@ bool itTincle_UnkMotion0_Coll(Item_GObj* gobj)
     return false;
 }
 
-/// #it_802EB870
+void it_802EB870(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itTincleAttributes* sa = ip->xC4_article_data->x4_specialAttributes;
+    s32 s;
+    PAD_STACK(8);
+
+    s = (ABS(sa->x10 - sa->xC) / 2);
+    ip->xDD4_itemVar.tincle.x58 = sa->xC + s;
+    s = HSD_Randi(ABS(sa->x1C - sa->x20));
+    ip->xDD4_itemVar.tincle.x5C = sa->x20 + s;
+    ip->x40_vel.y = -sa->x18;
+    ip->x40_vel.x = 0.0f;
+    HSD_JObjClearFlagsAll(GET_JOBJ(gobj), 0x10);
+    Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
+    it_802EC9E8(gobj);
+}
 
 bool itTincle_UnkMotion1_Anim(Item_GObj* gobj)
 {
@@ -131,6 +267,69 @@ bool itTincle_UnkMotion2_Anim(Item_GObj* gobj)
     return false;
 }
 
+void itTincle_UnkMotion2_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    f32 bounce_count = ip->xDD4_itemVar.tincle.x3C;
+    itTincleAttributes* sa = ip->xC4_article_data->x4_specialAttributes;
+    PAD_STACK(8);
+
+    if (bounce_count == 0.0f) {
+        ip->xDD4_itemVar.tincle.x3C = 2.0f;
+        ip->xDD4_itemVar.tincle.x2C = sa->x28 * 2;
+        ip->xDD4_itemVar.tincle.x38 *= -1.0f;
+    } else {
+        s32 half_cycle = ip->xDD4_itemVar.tincle.x2C;
+        if (half_cycle == 0) {
+            ip->xDD4_itemVar.tincle.x3C = bounce_count - 1.0f;
+        } else {
+            if (half_cycle < sa->x28) {
+                ip->x40_vel.y += ip->xDD4_itemVar.tincle.x38;
+            } else {
+                ip->x40_vel.y -= ip->xDD4_itemVar.tincle.x38;
+            }
+            ip->xDD4_itemVar.tincle.x2C -= 1;
+        }
+    }
+
+    {
+        s32 timer = ip->xDD4_itemVar.tincle.x20;
+        if (timer != 0) {
+            ip->xDD4_itemVar.tincle.x20 = timer - 1;
+            return;
+        }
+    }
+
+    {
+        s32 drift_state = ip->xDD4_itemVar.tincle.x24;
+        if (drift_state == 0) {
+            if (HSD_Randi(sa->x30) == 0) {
+                it_802EC870(gobj, 0);
+                return;
+            }
+            ip->x40_vel.x = 0.0f;
+            ip->xDD4_itemVar.tincle.x20 = sa->x2C;
+            return;
+        }
+        {
+            s32 drift_counter = ip->xDD4_itemVar.tincle.x28;
+            if (drift_counter >= drift_state) {
+                ip->x40_vel.x = 0.0f;
+                ip->xDD4_itemVar.tincle.x34 = 0.0f;
+                ip->xDD4_itemVar.tincle.x28 = 0;
+                ip->xDD4_itemVar.tincle.x24 = 0;
+                ip->xDD4_itemVar.tincle.x20 = sa->x2C;
+                return;
+            }
+            if (drift_counter == (drift_state / 2)) {
+                ip->xDD4_itemVar.tincle.x34 *= -1.0f;
+            }
+            ip->x40_vel.x += ip->xDD4_itemVar.tincle.x34;
+            ip->xDD4_itemVar.tincle.x28 += 1;
+        }
+    }
+}
+
 bool itTincle_UnkMotion2_Coll(Item_GObj* gobj)
 {
     PAD_STACK(8);
@@ -139,10 +338,6 @@ bool itTincle_UnkMotion2_Coll(Item_GObj* gobj)
     }
     return false;
 }
-
-/// #itTincle_UnkMotion2_Phys
-
-/// #itTincle_UnkMotion2_Coll
 
 void it_802EBD14(Item_GObj* gobj)
 {
@@ -235,7 +430,46 @@ bool itTincle_UnkMotion4_Coll(Item_GObj* gobj)
     return false;
 }
 
-/// #it_802EBFAC
+void it_802EBFAC(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itTincleAttributes* sa = ip->xC4_article_data->x4_specialAttributes;
+    f32 dist = ip->xDD4_itemVar.tincle.x5C - ip->pos.y;
+    f32 max_speed = sa->x4C;
+    PAD_STACK(16);
+
+    if (dist > max_speed) {
+        ip->x40_vel.y = max_speed;
+        ip->x40_vel.z = 0.0f;
+        ip->x40_vel.x = 0.0f;
+        ip->xDD4_itemVar.tincle.x2C = dist;
+        {
+            f32 vel_y = ip->x40_vel.y;
+            ip->xDD4_itemVar.tincle.x38 =
+                -(vel_y * vel_y) / (vel_y + (ip->xDD4_itemVar.tincle.x2C * 2));
+        }
+        ip->xDD4_itemVar.tincle.x20 = 0;
+        Item_80268E5C(gobj, 5, ITEM_UNK_0x1);
+        return;
+    }
+    if (ip->xDD4_itemVar.tincle.x30 == 2.0f) {
+        ip->x40_vel.y = ip->xDD4_itemVar.tincle.x44;
+        ip->x40_vel.z = 0.0f;
+        ip->x40_vel.x = 0.0f;
+        ip->xDD4_itemVar.tincle.x38 = ip->xDD4_itemVar.tincle.x48;
+        ip->xDD4_itemVar.tincle.x2C = ip->xDD4_itemVar.tincle.x40;
+        ip->xDD4_itemVar.tincle.x20 = sa->x2C;
+        ip->xDD4_itemVar.tincle.x24 = 0;
+        Item_80268E5C(gobj, 2, ITEM_UNK_0x1);
+        return;
+    }
+    ip->x40_vel.y = ip->xDD4_itemVar.tincle.x44;
+    ip->x40_vel.z = 0.0f;
+    ip->x40_vel.x = 0.0f;
+    ip->xDD4_itemVar.tincle.x38 = ip->xDD4_itemVar.tincle.x48;
+    ip->xDD4_itemVar.tincle.x2C = ip->xDD4_itemVar.tincle.x40;
+    Item_80268E5C(gobj, 5, ITEM_UNK_0x1);
+}
 
 bool itTincle_UnkMotion5_Anim(Item_GObj* gobj)
 {
@@ -449,7 +683,32 @@ bool itTincle_UnkMotion11_Coll(Item_GObj* gobj)
     return false;
 }
 
-/// #it_802EC69C
+void it_802EC69C(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itTincleAttributes* sa = ip->xC4_article_data->x4_specialAttributes;
+    f32 dist;
+    PAD_STACK(16);
+
+    ip->pos.z = 0.0f;
+    dist = ABS(ip->xDD4_itemVar.tincle.x5C - ip->pos.y);
+    if (dist < sa->x44) {
+        ip->xDD4_itemVar.tincle.x5C += 20.0f;
+        dist += 20.0f;
+    }
+    ip->x40_vel.y = sa->x50;
+    ip->x40_vel.z = 0.0f;
+    ip->x40_vel.x = 0.0f;
+    ip->xDD4_itemVar.tincle.x2C = dist;
+    ip->xDD4_itemVar.tincle.x38 =
+        -(ip->x40_vel.y * ip->x40_vel.y) /
+        (ip->x40_vel.y + (ip->xDD4_itemVar.tincle.x2C * 2));
+    ip->xDD4_itemVar.tincle.x20 = 0;
+    it_802762BC(ip);
+    it_802756E0(gobj);
+    Item_80268E5C(gobj, 0xC, ITEM_UNK_0x1);
+    it_802EC9E8(gobj);
+}
 
 bool itTincle_UnkMotion12_Anim(Item_GObj* gobj)
 {
@@ -488,7 +747,40 @@ void it_802EC850(Item_GObj* gobj, Item_GObj* ref_gobj)
     it_8026B894(gobj, ref_gobj);
 }
 
-/// #it_802EC870
+static void it_802EC870(Item_GObj* gobj, int arg1)
+{
+    Item* ip = GET_ITEM(gobj);
+    itTincleAttributes* sa = ip->xC4_article_data->x4_specialAttributes;
+
+    if (arg1 != 0) {
+        ip->facing_dir = -ip->facing_dir;
+        ip->x40_vel.x *= -1.0f;
+        ip->xDD4_itemVar.tincle.x34 *= -1.0f;
+        return;
+    }
+
+    ip->facing_dir = (ip->pos.x < ip->xDD4_itemVar.tincle.x58) ? 1.0f : -1.0f;
+    if (HSD_Randi(3) == 0) {
+        ip->facing_dir *= -1.0f;
+    }
+    if (ip->pos.x < sa->xC) {
+        ip->facing_dir = 1.0f;
+    }
+    if (ip->pos.x > sa->x10) {
+        ip->facing_dir = -1.0f;
+    }
+
+    {
+        f32 abs = ABS(sa->x38 - sa->x34);
+        ip->x40_vel.x = abs * HSD_Randf();
+    }
+    ip->xDD4_itemVar.tincle.x24 = sa->x3C;
+    ip->xDD4_itemVar.tincle.x34 =
+        (sa->x38 - ip->x40_vel.x) / (ip->xDD4_itemVar.tincle.x24 / 2);
+    ip->x40_vel.x = ip->x40_vel.x * ip->facing_dir;
+    ip->xDD4_itemVar.tincle.x34 = ip->xDD4_itemVar.tincle.x34 * ip->facing_dir;
+    ip->xDD4_itemVar.tincle.x28 = 0;
+}
 
 void it_802EC9E8(Item_GObj* gobj)
 {
@@ -511,7 +803,27 @@ void it_802EC9E8(Item_GObj* gobj)
     it_80275D5C(gobj, &ecb);
 }
 
-/// #it_802ECA70
+Item_GObj* it_802ECA70(HSD_GObj* gobj)
+{
+    u8 _pad[80];
+    Vec3 pos = it_803B8740;
+    u8 _pad2[4];
+    Item_GObj* new_gobj = it_8027B5B0(It_Kind_Tincle, &pos, NULL, NULL, 1);
+
+    if (new_gobj != NULL) {
+        Item* ip = GET_ITEM(new_gobj);
+
+        ip->scl = Ground_801C0498();
+        HSD_JObjSetScaleX(new_gobj->hsd_obj, ip->scl);
+        HSD_JObjSetScaleY(new_gobj->hsd_obj, ip->scl);
+        HSD_JObjSetScaleZ(new_gobj->hsd_obj, ip->scl);
+        ip->facing_dir = 0.0f;
+        ip->xDD4_itemVar.tincle.x64 = gobj;
+        ip->x378_itemColl.joint_id_skip = 5;
+        it_802EB6DC(new_gobj);
+    }
+    return new_gobj;
+}
 
 int it_802ECC8C(Item_GObj* arg0)
 {

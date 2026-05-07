@@ -40,8 +40,8 @@ typedef struct _MenuRulesPlusData {
 } MenuRulesPlusData;
 
 typedef struct mn_803ED1D0_t {
-    u16 x0[7];                    ///< option jobj mapping?
-    u16 xE[6];                    ///< value jobj mapping?
+    u16 x0[7]; ///< option jobj mapping?
+    u16 xE[6]; ///< value jobj mapping?
     float text_start_frames[12];
     AnimLoopSettings x4C;
     AnimLoopSettings x58;

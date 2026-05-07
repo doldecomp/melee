@@ -14,6 +14,7 @@ void itZRShell_Logic12_Dropped(Item_GObj*);
 void itZRShell_Logic12_EnteredAir(Item_GObj*);
 void itZRShell_Logic12_Destroyed(Item_GObj*);
 bool itZRShell_Logic12_DmgDealt(Item_GObj*);
+bool itZRShell_Logic12_Clanked(Item_GObj* gobj);
 bool itZRShell_Logic12_DmgReceived(Item_GObj*);
 bool itZRShell_Logic12_Reflected(Item_GObj*);
 bool itZRShell_Logic12_HitShield(Item_GObj*);
