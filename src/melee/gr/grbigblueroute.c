@@ -31,7 +31,87 @@
 
 void grBigBlue_801E8D04(Ground_GObj*);
 
-extern StageCallbacks grBb_Route_803E5E78[];
+StageCallbacks grBb_Route_803E5E78[38] = {
+    { grBigBlueRoute_8020BABC, grBigBlueRoute_8020BB00, grBigBlueRoute_8020BB08,
+      grBigBlueRoute_8020BB0C, 0 },
+    { grBigBlueRoute_8020BB68, grBigBlueRoute_8020BC24, grBigBlueRoute_8020BC2C,
+      grBigBlueRoute_8020BC30, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { grBigBlueRoute_8020C140, grBigBlueRoute_8020C1D4, grBigBlueRoute_8020C1DC,
+      grBigBlueRoute_8020C210, 0x80000000 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { grBigBlueRoute_8020BC68, grBigBlueRoute_8020BF30, grBigBlueRoute_8020BF38,
+      grBigBlueRoute_8020C13C, 0x40000000 },
+    { grBigBlueRoute_8020BB10, grBigBlueRoute_8020BB58, grBigBlueRoute_8020BB60,
+      grBigBlueRoute_8020BB64, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
+};
+
+char grBb_Route_803E6170[] = "/GrNBr.dat";
+
+static struct {
+    u32 internal_stage_id;
+    StageCallbacks* callbacks;
+    char* data1;
+    void (*OnInit)(void);
+    void (*OnDemoInit)(int);
+    void (*OnLoad)(void);
+    void (*OnStart)(void);
+    bool (*callback4)(void);
+    DynamicsDesc* (*callback5)(enum_t);
+    bool (*callback6)(Vec3*, int, HSD_JObj*);
+    u32 flags2;
+    S16Vec3* x2C;
+    size_t x30;
+    char fmt[0x24];
+} grBb_Route_803E617C = {
+    BIGBLUEROUTE,
+    grBb_Route_803E5E78,
+    grBb_Route_803E6170,
+    grBigBlueRoute_8020B89C,
+    grBigBlueRoute_8020B864,
+    grBigBlueRoute_8020B920,
+    grBigBlueRoute_8020B95C,
+    grBigBlueRoute_8020B9CC,
+    grBigBlueRoute_8020DF78,
+    grBigBlueRoute_8020DF80,
+    1,
+    NULL,
+    0,
+    "%s:%d: couldn t get gobj(id=%d)\n",
+};
+
+char grBb_Route_803E61D4[] = "grbigblueroute.c";
 
 static struct {
     int x0;
@@ -134,7 +214,7 @@ HSD_GObj* grBigBlueRoute_8020B9D4(int gobj_id)
         }
 
     } else {
-        OSReport("%s:%d: couldn t get gobj(id=%d)\n", __FILE__, 279, gobj_id);
+        OSReport(grBb_Route_803E617C.fmt, grBb_Route_803E61D4, 0x117, gobj_id);
     }
 
     return gobj;
@@ -424,7 +504,39 @@ void grBigBlueRoute_8020C238(Ground_GObj* gobj)
     gp->gv.bigblueroute.xFC.z *= 0.5F;
 }
 
-/// #grBigBlueRoute_8020C530
+s32 grBigBlueRoute_8020C530(Ground_GObj* arg0)
+{
+    Ground* gp = arg0->user_data;
+    s32 count;
+    s32 idx;
+    s32 i;
+
+    count = 0;
+    for (i = 0; i < 30; i++) {
+        if (!(*((u8*)gp->gv.bigblueroute.xC8 + i * 0x2C) >> 7 & 1)) {
+            count++;
+        }
+    }
+
+    if (count == 0) {
+        return -1;
+    }
+
+    if (count != 0) {
+        count = HSD_Randi(count);
+    } else {
+        count = 0;
+    }
+
+    for (idx = 0; idx < 30; idx++) {
+        if (!(*((u8*)gp->gv.bigblueroute.xC8 + idx * 0x2C) >> 7 & 1)) {
+            if (--count < 0) {
+                return idx;
+            }
+        }
+    }
+    __assert(__FILE__, 0x2E5, "0");
+}
 
 /// @todo Currently 91.77% match - register allocation (gp in r30 vs r31)
 /// and cror+beq vs bge for float >= comparison.
