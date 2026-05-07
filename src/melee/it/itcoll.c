@@ -740,7 +740,7 @@ f32 it_80270CD8(Item* ip, HitCapsule* hit)
     ItemAttr* attr = ip->xCC_item_attr;
     f32 f0;
     f32 f1;
-    PAD_STACK(8);
+    f32 x24_f;
 
     if (hit->x28 != 0) {
         f1 = (0.01f * hit->x24 *
@@ -752,14 +752,19 @@ f32 it_80270CD8(Item* ip, HitCapsule* hit)
                it_804D6D28->x80_float[12])) +
              hit->x2C;
     } else {
+        f32 x2C_f;
+
+        x2C_f = hit->x2C;
+        x24_f = 0.01f;
+        x24_f *= hit->x24;
         f0 = ip->xC9C + (f32) ip->xCA0;
-        f1 = (0.01f * hit->x24 *
+        f1 = (x24_f *
               ((it_804D6D28->x80_float[11] *
                 (attr->x1C_damage_mul *
                  ((it_804D6D28->x80_float[8] * f0) +
                   (it_804D6D28->x80_float[9] * (hit->damage * f0))))) +
                it_804D6D28->x80_float[12])) +
-             hit->x2C;
+             x2C_f;
     }
     if (f1 >= it_804D6D28->x80_float[7]) {
         f1 = it_804D6D28->x80_float[7];

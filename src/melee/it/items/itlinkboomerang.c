@@ -736,9 +736,11 @@ void itLinkboomerang_UnkMotion3_Phys(Item_GObj* gobj)
     itLinkBoomerangAttributes* attrs =
         ip->xC4_article_data->x4_specialAttributes;
     f32 length;
+    f32 speed;
     if (ip->xDD4_itemVar.linkboomerang.xDE8 != 1) {
         length = attrs->xC;
-        length = VEC_XY_LENGTH(&ip->x40_vel) + length;
+        speed = VEC_XY_LENGTH(&ip->x40_vel);
+        length += speed;
         if (length > attrs->x14) {
             length = attrs->x14;
         }

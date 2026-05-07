@@ -44,18 +44,17 @@ static inline ItemStateDesc* it_2E5A_ItemStateDesc(Item* ip)
 
 bool it_802E5AC4(Item_GObj* item_gobj, bool arg_check)
 {
-    u8 _pad[4];
     Vec3 sp40;
     Vec3 sp34;
     Vec3 sp28;
     Item* item;
     f32 temp_f1_10;
     f32 var_f31;
-    bool check1;
-    bool check2;
-    CollData* coll_data;
     ItemAttr* comm_attr;
     it_2E5A_Attrs* spec_attr;
+    CollData* coll_data;
+    bool check1;
+    bool check2;
     PAD_STACK(8);
 
     item = GET_ITEM(item_gobj);

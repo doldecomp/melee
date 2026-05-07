@@ -1059,12 +1059,11 @@ struct ItemLogicTable it_803F14C4[ARRAY_SIZE(it_803F1418)] = {
     },
 };
 
-extern char it_803F1ED8[];
-extern char it_803F1EF0[];
-
-/// static char it_803F1F00[] = "!(jobj->flags & JOBJ_USE_QUATERNION)"; // ?
-/// "translate" static char it_803F1F0C[] = "!(jobj->flags &
-/// JOBJ_USE_QUATERNION)"; // ?
+char it_803F1ED8[] = "ItCo.dat";
+char it_803F1EE4[] = "ItCo.usd";
+char it_803F1EF0[] = "itPublicData";
+char it_803F1F00[] = "translate";
+char it_803F1F0C[] = "!(jobj->flags & JOBJ_USE_QUATERNION)";
 
 char* it_803F1F38;
 char* it_803F1F58;
@@ -1117,8 +1116,8 @@ static ItCmd it_803F22A8[16] = {
     it_802798D4, it_8027990C, it_80279958, it_802799A8,
 };
 
-char it_803F22E8;
-char it_803F2300;
+char it_803F22E8[] = "item can't set attack!\n";
+char it_803F2300[] = "itanimlist.c";
 
 /// Pokemon items
 struct sdata_ItemGXLink it_803F2310[47] = {
@@ -4692,7 +4691,8 @@ struct ItemLogicTable it_803F4D20[ARRAY_SIZE(it_803F4CA8)] = {
     },
 };
 
-static char it_803F5428;
+char it_803F5428[] = "can t init zako pos\n";
+char it_803F5440[] = "!(jobj->flags & JOBJ_USE_QUATERNION)";
 RandomItemSpawner it_804A0E30;
 ItemPickTable it_804A0E50;
 ItemPickTable it_804A0E60;
@@ -4704,7 +4704,7 @@ static char it_804D5198;
 /// static char it_804D519C[]; // Not sure of type
 /// static char it_804D51A4[]; // Not sure of type
 static char it_804D51B8;
-static char it_804D51C0;
+static char it_804D51C0[] = "0";
 static ItCmd it_804D51C8[2] = {
     it_80279AF0,
     it_80279B10,
@@ -5780,14 +5780,55 @@ HSD_JObj* it_802746F8(Item_GObj* item_gobj)
     return item_jobj1;
 }
 
+static inline void it_80274740_JObjSetRotationX(HSD_JObj* jobj, f32 x,
+                                                char* assert_base)
+{
+    ((jobj) ? ((void) 0) : __assert("jobj.h", 639, "jobj"));
+    ((!(jobj->flags & JOBJ_USE_QUATERNION))
+         ? ((void) 0)
+         : __assert("jobj.h", 640, assert_base + 0xC));
+    jobj->rotate.x = x;
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
+        HSD_JObjSetMtxDirty(jobj);
+    }
+}
+
+static inline void it_80274740_JObjSetRotationY(HSD_JObj* jobj, f32 y,
+                                                char* assert_base)
+{
+    ((jobj) ? ((void) 0) : __assert("jobj.h", 660, "jobj"));
+    ((!(jobj->flags & JOBJ_USE_QUATERNION))
+         ? ((void) 0)
+         : __assert("jobj.h", 661, assert_base + 0xC));
+    jobj->rotate.y = y;
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
+        HSD_JObjSetMtxDirty(jobj);
+    }
+}
+
+static inline void it_80274740_JObjSetRotationZ(HSD_JObj* jobj, f32 z,
+                                                char* assert_base)
+{
+    ((jobj) ? ((void) 0) : __assert("jobj.h", 681, "jobj"));
+    ((!(jobj->flags & JOBJ_USE_QUATERNION))
+         ? ((void) 0)
+         : __assert("jobj.h", 682, assert_base + 0xC));
+    jobj->rotate.z = z;
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
+        HSD_JObjSetMtxDirty(jobj);
+    }
+}
+
 void it_80274740(Item_GObj* item_gobj)
 {
     HSD_JObj* item_jobj;
     Item* item;
+    char* assert_base;
     u32 bit_chk;
     s32 var_ctr;
     PAD_STACK(24);
 
+    assert_base = it_803F1F00;
     item = item_gobj->user_data;
     item_jobj = item_gobj->hsd_obj;
     bit_chk = (item->xC4_article_data->x10_modelDesc->xC_bit_field >> 6U) & 3;
@@ -5802,11 +5843,14 @@ void it_80274740(Item_GObj* item_gobj)
     }
     item->xD3C_spinSpeed = 0.0f;
     if (item->xDC8_word.flags.x17 == 0) {
-        HSD_JObjSetRotationZ(item_jobj, item->xD3C_spinSpeed);
+        it_80274740_JObjSetRotationZ(item_jobj, item->xD3C_spinSpeed,
+                                     assert_base);
     } else if (item->xDC8_word.flags.x17 == 1) {
-        HSD_JObjSetRotationX(item_jobj, item->xD3C_spinSpeed);
+        it_80274740_JObjSetRotationX(item_jobj, item->xD3C_spinSpeed,
+                                     assert_base);
     } else {
-        HSD_JObjSetRotationY(item_jobj, item->xD3C_spinSpeed);
+        it_80274740_JObjSetRotationY(item_jobj, item->xD3C_spinSpeed,
+                                     assert_base);
     }
 }
 
@@ -7338,12 +7382,29 @@ bool it_80277544(Item_GObj* item_gobj)
     return ret_val;
 }
 
+static inline float sqrtf_accurate_sp18(float x)
+{
+    volatile float y[2];
+
+    if (x > 0.0f) {
+        double guess = __frsqrte((double) x);
+        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        y[1] = (float) (x * guess);
+        return y[1];
+    }
+    return x;
+}
+
 void it_802775F0(Item_GObj* item_gobj, Vec3* arg1)
 {
+    f32 temp_sqrt;
     Item* item = GET_ITEM(item_gobj);
 
     if (item->spin_spd) {
-        f32 temp_sqrt = sqrtf_accurate(SQ(arg1->x) + SQ(arg1->y));
+        temp_sqrt = sqrtf_accurate_sp18(SQ(arg1->x) + SQ(arg1->y));
         item->xD3C_spinSpeed = 0.85f * (temp_sqrt / item->xC1C.bottom);
         if ((arg1->x < 0 ? -1 : 1) != (item->facing_dir < 0 ? -1 : 1)) {
             item->xD3C_spinSpeed = -item->xD3C_spinSpeed;
@@ -7641,66 +7702,77 @@ HSD_TExp* it_80277F90(Item* item, HSD_MObj* mobj, HSD_TExp* arg2)
     return NULL;
 }
 
-void it_80278108(Item* item, HSD_MObj* mobj, HSD_TExp* arg2)
+void it_80278108(Item* item, HSD_MObj* mobj, HSD_TExp* texp)
 {
     GXColor sp168;
+    u8 _padA[84];
     HSD_TECnst spFC;
-    u8 _padA[168];
+    u8 _padB[80];
     HSD_TECnst sp90;
     HSD_TevDesc sp1C;
     GXColor sp18;
-    struct it_MObjInfo* info = &it_803F1F90;
-    ColorOverlay* var_r4;
+    bool chk1;
+    s32 var_r0;
     s32 reg1;
     s32 reg2;
-    bool chk1;
+    s32 var_r3;
+    ColorOverlay* overlay;
+    struct it_MObjInfo* info = &it_803F1F90;
 
     if (item->xDCF_flag.b5) {
         return;
     }
-    var_r4 = &item->x548_colorOverlay;
+    overlay = &item->x548_colorOverlay;
     chk1 = false;
     if (item->xDCF_flag.b3) {
         if (item->owner != NULL && item->xDC8_word.flags.x13) {
-            var_r4 =
-                (ColorOverlay*) ftCo_800C0674((Fighter_GObj*) item->owner);
+            overlay = ftCo_800C0674(item->owner);
         }
     }
     if (item->xDCF_flag.b4) {
         chk1 = true;
         sp168 = item->xBC8.x0_unk;
     } else if (item->x5C8) {
-        if (var_r4->x7C_color_enable) {
-            u32 a = ((0xFF - item->xBC4.a) * (0xFF - var_r4->x2C_hex.a)) / 255;
-            GXColor* color_hex = &var_r4->x2C_hex;
-            if (a == 0xFF) {
-                sp168 = var_r4->x2C_hex;
+        if (overlay->x7C_color_enable) {
+            u32 temp_alpha;
+            s32 inv_alpha;
+            GXColor* item_color = &item->xBC4;
+            GXColor* color_hex = &overlay->x2C_hex;
+            s32 temp_r8;
+            s32 temp_r7;
+            s32 temp_r4;
+
+            temp_alpha =
+                ((0xFF - item_color->a) * (0xFF - color_hex->a)) / 255;
+            if ((s32) temp_alpha == 0xFF) {
+                sp168 = overlay->x2C_hex;
             } else {
-                u8 r = item->xBC4.r;
-                s32 inv_a = 0xFF - a;
-                s32 blended_r =
-                    r + ((color_hex->a * (color_hex->r - r)) / 255);
-                s32 scaled_r = blended_r * 0xFF;
-                s32 div = scaled_r / inv_a;
-                sp168.r = div;
-                if (div != 0) {
-                    sp168.a = scaled_r / div;
+                inv_alpha = 0xFF - temp_alpha;
+                temp_r8 = item_color->r;
+                temp_r8 += (color_hex->a * (color_hex->r - temp_r8)) / 255;
+                temp_r7 = temp_r8 * 0xFF;
+                temp_r4 = temp_r7 / inv_alpha;
+                sp168.r = temp_r4;
+                if (sp168.r != 0) {
+                    sp168.a = temp_r7 / sp168.r;
                 } else {
-                    sp168.a = ((inv_a - blended_r) * 0xFF) / 255;
+                    sp168.a = ((inv_alpha - temp_r8) * 0xFF) / 255;
                 }
                 {
-                    u8 g = item->xBC4.g;
-                    sp168.g =
-                        ((g + ((color_hex->a * (color_hex->g - g)) / 255)) *
-                         0xFF) /
-                        inv_a;
+                    u8 temp_r8_3 = item_color->g;
+                    sp168.g = ((temp_r8_3 +
+                                ((color_hex->a * (color_hex->g - temp_r8_3)) /
+                                 255)) *
+                               0xFF) /
+                              inv_alpha;
                 }
                 {
-                    u8 b = item->xBC4.b;
+                    u8 temp_r6 = item_color->b;
                     sp168.b =
-                        ((b + ((color_hex->a * (color_hex->b - b)) / 255)) *
+                        ((temp_r6 +
+                          ((color_hex->a * (color_hex->b - temp_r6)) / 255)) *
                          0xFF) /
-                        inv_a;
+                        inv_alpha;
                 }
             }
             chk1 = true;
@@ -7708,32 +7780,41 @@ void it_80278108(Item* item, HSD_MObj* mobj, HSD_TExp* arg2)
             chk1 = true;
             sp168 = item->xBC4;
         }
-    } else if (var_r4->x7C_flag2) {
+    } else if (overlay->x7C_color_enable) {
         chk1 = true;
-        sp168 = var_r4->x2C_hex;
+        sp168 = overlay->x2C_hex;
     }
     if (chk1) {
         spFC = info->texp_tmpl;
-        reg1 = lbGetFreeColorRegister(0, mobj, arg2);
+        reg1 = lbGetFreeColorRegister(0, mobj, texp);
         if (reg1 == -1) {
             OSReport(info->report_fmt_no_register);
-            __assert(info->assert_file, 0x144, (char*) &it_804D51B8);
+            __assert(info->assert_file, 0x144, "0");
         }
         spFC.reg = reg1;
         spFC.val = &sp168;
         HSD_TExpSetReg((HSD_TExp*) &spFC);
-        spFC.next = arg2;
-        reg2 = lbGetFreeColorRegister((reg1 < 4) ? 4 : 0, mobj,
-                                      (HSD_TExp*) &spFC);
+        spFC.next = texp;
+        if (reg1 < 4) {
+            var_r0 = 1;
+        } else {
+            var_r0 = 0;
+        }
+        if (var_r0 != 0) {
+            var_r3 = 4;
+        } else {
+            var_r3 = 0;
+        }
+        reg2 = lbGetFreeColorRegister(var_r3, mobj, (HSD_TExp*) &spFC);
         if (reg2 == -1) {
             OSReport(info->report_fmt_no_register_2);
-            __assert(info->assert_file, 0x152, (char*) &it_804D51B8);
+            __assert(info->assert_file, 0x152, "0");
         }
         if (item->x5C9 != 0xFF) {
             sp90 = info->texp_tmpl;
             sp90.reg = reg2;
-            sp90.idx = 3;
             sp90.comp = 5;
+            sp90.idx = 3;
             sp90.val = &item->x5C9;
             spFC.next = (HSD_TExp*) &sp90;
         } else {
@@ -7750,13 +7831,30 @@ void it_80278108(Item* item, HSD_MObj* mobj, HSD_TExp* arg2)
         sp1C.u.tevconf.clr_b = lb_8000CC8C(reg1);
         sp1C.u.tevconf.clr_c = lb_8000CC8C(reg2);
         if (reg1 < 4) {
+            var_r0 = 1;
+        } else {
+            var_r0 = 0;
+        }
+        if (var_r0 != 0) {
             sp1C.u.tevconf.kcsel = lb_8000CCA4(reg1);
-        } else if (reg2 < 4) {
-            sp1C.u.tevconf.kcsel = lb_8000CCA4(reg2);
+        } else {
+            if (reg2 < 4) {
+                var_r0 = 1;
+            } else {
+                var_r0 = 0;
+            }
+            if (var_r0 != 0) {
+                sp1C.u.tevconf.kcsel = lb_8000CCA4(reg2);
+            }
         }
         if (item->x5C9 != 0xFF) {
             sp1C.u.tevconf.alpha_d = lb_8000CD90(reg2);
             if (reg2 < 4) {
+                var_r0 = 1;
+            } else {
+                var_r0 = 0;
+            }
+            if (var_r0 != 0) {
                 sp1C.u.tevconf.kasel = lb_8000CDA8(reg2);
             }
         }
@@ -8022,9 +8120,9 @@ void it_80278800(Item_GObj* item_gobj, s32 ef_id, s32 arg2, Vec3* arg3,
     }
     // default:
     sp74 = *arg3;
-    sp74.x += 2.0f * arg4->x * (HSD_Randf() - 1.0f);
-    sp74.y += 2.0f * arg4->y * (HSD_Randf() - 1.0f);
-    sp74.z += 2.0f * arg4->z * (HSD_Randf() - 1.0f);
+    sp74.x += (HSD_Randf() - 0.5f) * (2.0f * arg4->x);
+    sp74.y += (HSD_Randf() - 0.5f) * (2.0f * arg4->y);
+    sp74.z += (HSD_Randf() - 0.5f) * (2.0f * arg4->z);
     lb_8000B1CC(it_80272CC0(item_gobj, arg2), &sp74, &sp68);
     if (ef_id < 0x250) {
         if (arg5 == 1) {
@@ -8291,14 +8389,20 @@ void it_80278F2C(Item_GObj* item_gobj, CommandInfo* cmd)
     it_80278800(item_gobj, ef_id, arg2, &sp20, &sp14, 0, arg6);
 }
 
+#pragma push
+#pragma dont_inline on
+
 void it_802790C0(Item_GObj* item_gobj, CommandInfo* cmd)
 {
+    u8 _padA[16];
     Item* item = item_gobj->user_data;
-    u32 hitbox_idx = (((u16*) cmd->u)[0] >> 7) & 7;
-    HitCapsule* hit = &item->x5D4_hitboxes[hitbox_idx].hit;
-    u32 x4 = (((u8*) cmd->u)[1] >> 4) & 7;
+    struct ItemHitbox* hb;
+    HitCapsule* hit;
+    u32 hitbox_idx = cmd->u->it_create_hitbox_0.id;
+    u32 x4 = cmd->u->it_create_hitbox_0.hit_group;
     u32 bone_idx;
-    PAD_STACK(24);
+    hb = &item->x5D4_hitboxes[hitbox_idx];
+    hit = &hb->hit;
 
     if (hit->state == HitCapsule_Disabled || hit->x4 != x4) {
         hit->x4 = x4;
@@ -8308,48 +8412,49 @@ void it_802790C0(Item_GObj* item_gobj, CommandInfo* cmd)
         it_8026FCF8(item, hit);
     }
 
-    bone_idx = (((u16*) cmd->u)[0] >> 13) & 0x7F;
+    bone_idx = cmd->u->it_create_hitbox_0.bone;
     if (bone_idx != 0) {
         if (item->xBBC_dynamicBoneTable == NULL) {
-            OSReport((char*) &it_803F22E8);
-            __assert((char*) &it_803F2300, 0x8B, (char*) &it_804D51C0);
+            OSReport(it_803F22E8);
+            __assert(it_803F2300, 0x8B, it_804D51C0);
         }
         hit->jobj = item->xBBC_dynamicBoneTable->bones[bone_idx];
     } else {
         hit->jobj = item_gobj->hsd_obj;
     }
-    it_80272460(
-        hit, item->xC3C * ((f32) (((u16*) cmd->u)[1] & 0x1FFF) * item->xC40),
-        item_gobj);
+    it_80272460(hit,
+                item->xC3C *
+                    ((f32) cmd->u->it_create_hitbox_0.damage * item->xC40),
+                item_gobj);
     ++cmd->u;
 
-    hit->scale = 0.003906f * (f32) (u16) ((u16*) cmd->u)[0];
+    hit->scale = 0.003906f * cmd->u->create_hitbox_1.size;
     item->x3C = hit->scale;
     it_80275594(item_gobj, hitbox_idx, 1.0f / item->scl);
-    hit->b_offset.x = 0.003906f * (f32) (s16) ((s16*) cmd->u)[1];
+    hit->b_offset.x = 0.003906f * cmd->u->create_hitbox_1.z_offset;
     ++cmd->u;
-    hit->b_offset.y = 0.003906f * (f32) (s16) ((s16*) cmd->u)[0];
-    hit->b_offset.z = 0.003906f * (f32) (s16) ((s16*) cmd->u)[1];
+    hit->b_offset.y = 0.003906f * cmd->u->create_hitbox_2.y_offset;
+    hit->b_offset.z = 0.003906f * cmd->u->create_hitbox_2.x_offset;
     ++cmd->u;
 
-    hit->kb_angle = (((u16*) cmd->u)[0] >> 7) & 0x1FF;
-    hit->x24 = (((u32*) cmd->u)[0] >> 14) & 0x1FF;
-    hit->x28 = (((u16*) cmd->u)[1] >> 5) & 0x1FF;
+    hit->kb_angle = cmd->u->create_hitbox_3.angle;
+    hit->x24 = cmd->u->create_hitbox_3.knockback_growth;
+    hit->x28 = cmd->u->create_hitbox_3.weight_set_knockback;
     hit->x43_b1 = 0;
     ++cmd->u;
 
-    hit->x2C = (((u16*) cmd->u)[0] >> 7) & 0x1FF;
-    hit->element = (((u8*) cmd->u)[1] >> 2) & 0x1F;
-    hit->x40_b0 = (((u8*) cmd->u)[1] >> 1) & 1;
+    hit->x2C = cmd->u->it_create_hitbox_4.base_knockback;
+    hit->element = cmd->u->it_create_hitbox_4.element;
+    hit->x40_b0 = cmd->u->it_create_hitbox_4.x40_b0;
     hit->x40_b1 = 0;
-    hit->x34 = (s32) ((((u32*) cmd->u)[0] << 15) & 0xFF800000) >> 24;
-    hit->sfx_severity = (((u16*) cmd->u)[1] >> 6) & 7;
-    hit->sfx_kind = (((u8*) cmd->u)[3] >> 2) & 0xF;
-    hit->x40_b2 = (((u8*) cmd->u)[3] >> 1) & 1;
-    hit->x40_b3 = ((u8*) cmd->u)[3] & 1;
+    hit->x34 = cmd->u->it_create_hitbox_4.shield_damage;
+    hit->sfx_severity = cmd->u->it_create_hitbox_4.sfx_severity;
+    hit->sfx_kind = cmd->u->it_create_hitbox_4.sfx_kind;
+    hit->x40_b2 = cmd->u->it_create_hitbox_4.x40_b2;
+    hit->x40_b3 = cmd->u->it_create_hitbox_4.x40_b3;
     ++cmd->u;
 
-    hit->x40_b4 = (((u8*) cmd->u)[0] >> 4) & 0xFF;
+    hit->x40_b4 = ((u8*) cmd->u)[0];
     hit->x41_b4 = (((u8*) cmd->u)[1] >> 7) & 1;
     hit->x41_b5 = (((u8*) cmd->u)[1] >> 6) & 1;
     hit->x41_b6 = (((u8*) cmd->u)[1] >> 5) & 1;
@@ -8363,7 +8468,7 @@ void it_802790C0(Item_GObj* item_gobj, CommandInfo* cmd)
     hit->x42_b6 = (((u8*) cmd->u)[2] >> 5) & 1;
     hit->x42_b7 = (((u8*) cmd->u)[2] >> 4) & 1;
     hit->x43_b0 = (((u8*) cmd->u)[2] >> 3) & 1;
-    item->x5D4_hitboxes[hitbox_idx].x138 = (((u8*) cmd->u)[2] >> 2) & 1;
+    hb->x138 = (((u8*) cmd->u)[2] >> 2) & 1;
     ++cmd->u;
 
     hit->x43_b2 = 0;
@@ -8371,6 +8476,8 @@ void it_802790C0(Item_GObj* item_gobj, CommandInfo* cmd)
         it_8027129C(item_gobj, hitbox_idx);
     }
 }
+
+#pragma pop
 
 #pragma push
 #pragma dont_inline on
@@ -8559,7 +8666,7 @@ loop:
         return;
     }
 
-    opcode = (*(u8*) cmd->u >> 2) & 0x3F;
+    opcode = cmd->u->unk0.opcode;
     if (Command_Execute(cmd, opcode) != 0) {
         goto loop;
     }
@@ -9221,7 +9328,7 @@ void it_8027B1F4(Item_GObj* item_gobj)
 void it_8027B288(Item_GObj* item_gobj, u32 arg1)
 {
     union Struct2070 sp14;
-    union Struct2070 spC;
+    volatile union Struct2070 spC;
     Item* item;
     struct Struct2074* temp_r3;
 
@@ -9524,6 +9631,45 @@ void it_8027BB1C(Vec3* arg0, Vec3* arg1)
     }
 }
 
+static inline void it_8027C0F0_JObjSetRotationX(HSD_JObj* jobj, f32 x,
+                                                char* assert_base)
+{
+    ((jobj) ? ((void) 0) : __assert("jobj.h", 639, "jobj"));
+    ((!(jobj->flags & JOBJ_USE_QUATERNION))
+         ? ((void) 0)
+         : __assert("jobj.h", 640, assert_base + 0x18));
+    jobj->rotate.x = x;
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
+        HSD_JObjSetMtxDirty(jobj);
+    }
+}
+
+static inline void it_8027C0F0_JObjSetRotationY(HSD_JObj* jobj, f32 y,
+                                                char* assert_base)
+{
+    ((jobj) ? ((void) 0) : __assert("jobj.h", 660, "jobj"));
+    ((!(jobj->flags & JOBJ_USE_QUATERNION))
+         ? ((void) 0)
+         : __assert("jobj.h", 661, assert_base + 0x18));
+    jobj->rotate.y = y;
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
+        HSD_JObjSetMtxDirty(jobj);
+    }
+}
+
+static inline void it_8027C0F0_JObjSetRotationZ(HSD_JObj* jobj, f32 z,
+                                                char* assert_base)
+{
+    ((jobj) ? ((void) 0) : __assert("jobj.h", 681, "jobj"));
+    ((!(jobj->flags & JOBJ_USE_QUATERNION))
+         ? ((void) 0)
+         : __assert("jobj.h", 682, assert_base + 0x18));
+    jobj->rotate.z = z;
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
+        HSD_JObjSetMtxDirty(jobj);
+    }
+}
+
 void it_8027BBF4(Item_GObj* item_gobj, bool arg_chk, f64 arg8, f32 arg9)
 {
     f32 temp_f1;
@@ -9567,12 +9713,14 @@ block_7:
     sp74.z = HSD_JObjGetRotationZ(item_jobj);
 
     it_8027BB1C(&sp5C, &sp74);
-    if (lbVector_AngleXY(&item->xDD4_itemVar.it_27B5.x8, &sp68) > deg_to_rad) {
+    if (lbVector_AngleXY(&item->xDD4_itemVar.it_27B5.x8, &sp68) >
+        0.00017453292f)
+    {
         item->xDD4_itemVar.it_27B5.x8 = sp68;
         item->xDD4_itemVar.it_27B5.x14.x = (s32) arg9;
     }
     temp_f1 = lbVector_AngleXY(&sp5C, &item->xDD4_itemVar.it_27B5.x8);
-    if ((temp_f1 < deg_to_rad) || item->xDD4_itemVar.it_27B5.x14.x < 2) {
+    if ((temp_f1 < 0.00017453292f) || item->xDD4_itemVar.it_27B5.x14.x < 2) {
         var_f29 = sp68.x;
         var_f28 = sp68.y;
     } else {
@@ -9619,6 +9767,7 @@ void it_8027C0CC(Item_GObj* item_gobj, f32 arg4, f32 arg5)
 void it_8027C0F0(Item_GObj* item_gobj, Vec3* arg1, f64 arg8, f32 arg9)
 {
     u8 _pad[4];
+    char* assert_base = it_803F5428;
     const Vec3* vecs = it_803B85A8;
     Item* item = GET_ITEM(item_gobj);
     HSD_JObj* item_jobj = item_gobj->hsd_obj;
@@ -9679,9 +9828,9 @@ void it_8027C0F0(Item_GObj* item_gobj, Vec3* arg1, f64 arg8, f32 arg9)
         lbVector_CrossprodNormalized(&sp44, &sp3C, &sp50);
         lbVector_EulerAnglesFromONB(&sp74, &sp50, &sp44, &sp3C);
 
-        HSD_JObjSetRotationX(item_jobj, sp74.x);
-        HSD_JObjSetRotationY(item_jobj, sp74.y);
-        HSD_JObjSetRotationZ(item_jobj, sp74.z);
+        it_8027C0F0_JObjSetRotationX(item_jobj, sp74.x, assert_base);
+        it_8027C0F0_JObjSetRotationY(item_jobj, sp74.y, assert_base);
+        it_8027C0F0_JObjSetRotationZ(item_jobj, sp74.z, assert_base);
     }
 }
 
@@ -9689,13 +9838,13 @@ void it_8027C56C(Item_GObj* item_gobj, f32 y_rot)
 {
     Item* item;
     HSD_JObj* item_jobj;
-    // char msg = it_803F5428;
+    char* assert_base = it_803F5428;
 
     item_jobj = GET_JOBJ(item_gobj);
     item = GET_ITEM(item_gobj);
-    HSD_JObjSetRotationX(item_jobj, 0.0f);
-    HSD_JObjSetRotationY(item_jobj, M_PI_2 * y_rot);
-    HSD_JObjSetRotationZ(item_jobj, 0.0f);
+    it_8027C0F0_JObjSetRotationX(item_jobj, 0.0f, assert_base);
+    it_8027C0F0_JObjSetRotationY(item_jobj, M_PI_2 * y_rot, assert_base);
+    it_8027C0F0_JObjSetRotationZ(item_jobj, 0.0f, assert_base);
 
     item->xDD4_itemVar.it_27B5.x8.z = 0.0f;
     item->xDD4_itemVar.it_27B5.x8.x = 0.0f;

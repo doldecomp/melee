@@ -776,7 +776,6 @@ void itLinkhookshot_UnkMotion7_Phys(Item_GObj* arg0)
 
 void it_802A39FC(Item_GObj* gobj)
 {
-    u8 _padA[16];
     Item* item;
     Fighter* fp;
     itLinkHookshotAttributes* attr;
@@ -791,6 +790,7 @@ void it_802A39FC(Item_GObj* gobj)
     f32 temp_f31;
     f32 temp_f0;
     f32 temp_f0_2;
+    PAD_STACK(16);
 
     item = gobj->user_data;
     attr = item->xC4_article_data->x4_specialAttributes;
@@ -819,11 +819,12 @@ void it_802A39FC(Item_GObj* gobj)
         return;
     }
 
-    temp_f30 = fp->cur_pos.y - pos.y;
-    pos_2.x = fp->cur_pos.x;
-    temp_f31 = fp->cur_pos.x - pos.x;
-    pos_2.y = fp->cur_pos.y;
-    pos_2.z = fp->cur_pos.z;
+    {
+        f32 new_var = fp->cur_pos.x - pos.x;
+        temp_f30 = fp->cur_pos.y - pos.y;
+        temp_f31 = new_var;
+    }
+    pos_2 = fp->cur_pos;
     it_802A6474(item->xDD4_itemVar.linkhookshot.x4,
                 item->xDD4_itemVar.linkhookshot.x0, &pos, attr);
     fp->cur_pos.x = pos_2.x + temp_f31;
@@ -843,8 +844,9 @@ void it_802A39FC(Item_GObj* gobj)
         it_802A79A0(gobj);
         return;
     }
+    temp_f30_2 = fp->mv.lk.specialn.x0.y;
     fp->mv.lk.specialn.x0.y -= 1.0F;
-    if (fp->mv.lk.specialn.x0.y <= 0.0f) {
+    if (temp_f30_2 <= 0.0f) {
         ftCo_80090780(item->owner);
         it_802A2B10(gobj);
     }
@@ -1579,84 +1581,115 @@ s32 it_802A5FE0(ItemLink* link_0, ItemLink* link_0_2, Vec3* arg2,
     return 1;
 }
 
-void it_802A6474(ItemLink* link_0, ItemLink* link_1, Vec3* arg2,
-                 itLinkHookshotAttributes* arg3)
+static inline f32 my_sqrt(f32 x)
 {
+    f64 guess = __frsqrte(x);
+    guess = 0.5 * guess * (3.0 - (guess * guess * x));
+    guess = 0.5 * guess * (3.0 - (guess * guess * x));
+    guess = 0.5 * guess * (3.0 - (guess * guess * x));
+    return x * guess;
+}
+
+void it_802A6474(ItemLink* link_0, ItemLink* link_1, Vec3* pos,
+                 itLinkHookshotAttributes* attrs)
+{
+    u8 _padA[24];
     Vec3 saved_pos;
-    Vec3 vel;
-    f32 dx, dy, dz;
-    f32 sq, len, inv;
-    f32 test[2];
-    ItemLink* current;
+    Vec3 speed;
+    f32 target_dx;
+    f32 target_dy;
+    f32 target_dz;
+    f32 max_len;
+    f32 segment_dz;
+    f32 segment_dx;
+    f32 segment_dy;
+    f32 inv_segment_len;
+    f32 segment_len;
+    f32 inv_target_len;
+    f32 target_len;
+    ItemLink* cur_link;
     ItemLink* prev_link;
     ItemLink* next_link;
-    s32 stopped;
-    PAD_STACK(0x20);
+    s32 limit_reached;
+    volatile f32 segment_len_tmp;
+    volatile f32 target_len_tmp;
 
     if (mpLib_80054ED8(link_1->x1CC) != 0) {
-        mpGetSpeed(link_1->x1CC, &link_1->pos, &vel);
-        link_1->pos.x += vel.x;
-        link_1->pos.y += vel.y;
-        link_1->pos.z += vel.z;
+        mpGetSpeed(link_1->x1CC, &link_1->pos, &speed);
+        link_1->pos.x += speed.x;
+        link_1->pos.y += speed.y;
+        link_1->pos.z += speed.z;
     }
 
-    current = link_0;
+    cur_link = link_0;
     prev_link = link_0->prev;
     saved_pos = link_1->pos;
-    while (prev_link != NULL && !current->x2C_b0) {
-        current = prev_link;
+    while (prev_link != NULL && !cur_link->x2C_b0) {
+        cur_link = prev_link;
         prev_link = prev_link->prev;
     }
-    it_802A4758(current, arg2, arg3, arg3->x30);
+    it_802A4758(cur_link, pos, attrs, attrs->x30);
 
-    current = link_1;
-    stopped = 0;
+    cur_link = link_1;
+    limit_reached = 0;
     link_1->pos = saved_pos;
     next_link = link_1->next;
     while (next_link != NULL && next_link->x2C_b0) {
-        if (stopped == 0) {
-            dx = next_link->pos.x - current->pos.x;
-            dy = next_link->pos.y - current->pos.y;
-            dz = next_link->pos.z - current->pos.z;
-            sq = dx * dx + dy * dy + dz * dz;
-            len = sq;
-            if (sq > 0.0f) {
-                len = sqrtf(sq);
+        if (limit_reached == 0) {
+            segment_dy = next_link->pos.y - cur_link->pos.y;
+            segment_dx = next_link->pos.x - cur_link->pos.x;
+            segment_dz = next_link->pos.z - cur_link->pos.z;
+            segment_len = segment_dy * segment_dy;
+            segment_len = (segment_dx * segment_dx) + segment_len;
+            segment_len = (segment_dz * segment_dz) + segment_len;
+            if (segment_len > 0.0f) {
+                segment_len_tmp = my_sqrt(segment_len);
+                segment_len = segment_len_tmp;
             }
-            if (len == 0.0) {
-                inv = 0.0;
+            if (0.0 == segment_len) {
+                inv_segment_len = 0.0f;
             } else {
-                inv = 1.0 / len;
+                inv_segment_len = 1.0 / segment_len;
             }
-            if (len > arg3->x30) {
-                next_link->pos.x = dx * inv * arg3->x30 + current->pos.x;
-                next_link->pos.y = dy * inv * arg3->x30 + current->pos.y;
-                next_link->pos.z = dz * inv * arg3->x30 + current->pos.z;
+            max_len = attrs->x30;
+            segment_dx *= inv_segment_len;
+            segment_dy *= inv_segment_len;
+            segment_dz *= inv_segment_len;
+            if (segment_len > max_len) {
+                next_link->pos.x = (segment_dx * max_len) + cur_link->pos.x;
+                next_link->pos.y = (segment_dy * attrs->x30) + cur_link->pos.y;
+                next_link->pos.z = (segment_dz * attrs->x30) + cur_link->pos.z;
             } else {
-                stopped = 1;
+                limit_reached = 1;
             }
         }
-        current = next_link;
+        cur_link = next_link;
         next_link = next_link->next;
     }
 
-    dx = arg2->x - current->pos.x;
-    dy = arg2->y - current->pos.y;
-    dz = arg2->z - current->pos.z;
-    sq = dx * dx + dy * dy + dz * dz;
-    len = sq;
-    if (sq > 0.0f) {
-        len = sqrtf(sq);
+    target_dy = pos->y - cur_link->pos.y;
+    target_dx = pos->x - cur_link->pos.x;
+    target_dz = pos->z - cur_link->pos.z;
+    target_len = target_dy * target_dy;
+    target_len = (target_dx * target_dx) + target_len;
+    target_len = (target_dz * target_dz) + target_len;
+    if (target_len > 0.0f) {
+        target_len_tmp = my_sqrt(target_len);
+        target_len = target_len_tmp;
     }
-    if (len == 0.0) {
-        inv = 0.0;
+    if (0.0 == target_len) {
+        inv_target_len = 0.0f;
     } else {
-        inv = 1.0 / len;
+        inv_target_len = 1.0 / target_len;
     }
-    if (len > arg3->x30) {
-        arg2->x = dx * inv * arg3->x30 + current->pos.x;
-        arg2->y = dy * inv * arg3->x30 + current->pos.y;
-        arg2->z = dz * inv * arg3->x30 + current->pos.z;
+    max_len = attrs->x30;
+    target_dx *= inv_target_len;
+    target_dy *= inv_target_len;
+    target_dz *= inv_target_len;
+    if (target_len > max_len) {
+        pos->x = (target_dx * max_len) + cur_link->pos.x;
+        pos->y = (target_dy * attrs->x30) + cur_link->pos.y;
+        pos->z = (target_dz * attrs->x30) + cur_link->pos.z;
     }
 }
 

@@ -350,6 +350,12 @@ void it_8026CB9C(s32* counts, u64 mask, f32 weight)
 
 void it_8026CD50(s32* arg0, u64 arg1, f32 arg2)
 {
+    typedef struct {
+        RandomItemSpawner alloc;
+        ItemPickTable common;
+        ItemPickTable monster;
+    } ItemSpawnTables;
+    ItemSpawnTables* tables = (ItemSpawnTables*) &it_804A0E30;
     s32 struct_size;
     ItemKind it_kind;
     s16 cumulative;
@@ -377,9 +383,9 @@ void it_8026CD50(s32* arg0, u64 arg1, f32 arg2)
     }
     struct_size = cnt * 4;
     idx = struct_size;
-    it_804A0E50.x0 = cnt;
-    it_804A0E50.x4 = HSD_MemAlloc(idx);
-    it_804A0E50.xC = HSD_MemAlloc(idx);
+    tables->common.x0 = cnt;
+    tables->common.x4 = HSD_MemAlloc(idx);
+    tables->common.xC = HSD_MemAlloc(idx);
     cnt = 0;
     mask_low = (u32) arg1;
     p = arg0 + It_Kind_BombHei;
@@ -389,9 +395,9 @@ void it_8026CD50(s32* arg0, u64 arg1, f32 arg2)
     while (it_kind < It_Kind_L_Gun_Ray) {
         struct_size = cumulative;
         if ((((mask & 1) ^ 0) != 0) && (*p != 0)) {
-            it_804A0E50.x4[cnt] = it_kind;
+            tables->common.x4[cnt] = it_kind;
             cnt++;
-            it_804A0E50.xC[idx] = struct_size;
+            tables->common.xC[idx] = struct_size;
             idx++;
             cumulative = cumulative + ((arg2 * *p) + 0.99f);
         }

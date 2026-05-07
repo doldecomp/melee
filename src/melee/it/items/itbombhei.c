@@ -557,14 +557,16 @@ bool itBombhei_UnkMotion10_Anim(Item_GObj* gobj)
 {
     HSD_JObj* temp_r31;
     Item* temp_r30;
+    itBombHeiAttributes* attr;
     f32 temp_f1;
     PAD_STACK(8);
 
     temp_r30 = GET_ITEM(gobj);
     if (it_80272C6C(gobj) == 0) {
+        attr = GET_ATTRS(temp_r30);
         temp_r31 = gobj->hsd_obj;
         if (temp_r30->xDD4_itemVar.bombhei.xDE0 == 0) {
-            temp_r30->x5D0_animFrameSpeed = GET_ATTRS(temp_r30)->x0;
+            temp_r30->x5D0_animFrameSpeed = attr->x0;
             itBombhei_UpdateStatePreserveBoneFake(gobj, 9, 0x6);
         } else {
             temp_r30->x5D0_animFrameSpeed = 1.0f;

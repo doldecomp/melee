@@ -170,7 +170,7 @@
 /* 277D08 */ void it_80277D08(void);
 /* 277D8C */ void fn_80277D8C(HSD_MObj*, u32);
 /* 277F90 */ HSD_TExp* it_80277F90(Item*, HSD_MObj*, HSD_TExp*);
-/* 278108 */ void it_80278108(Item*, HSD_MObj*, HSD_TExp*);
+/* 278108 */ void it_80278108(Item* item, HSD_MObj* mobj, HSD_TExp* texp);
 /* 278574 */ void it_80278574(HSD_GObj*, GXColor*);
 /* 27870C */ void it_8027870C(s32);
 /* 2787B4 */ void it_802787B4(Item_GObj*, s32);
