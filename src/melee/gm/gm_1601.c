@@ -3793,6 +3793,29 @@ int gm_8016A998(s8 arg0, s8 arg1)
     return -1;
 }
 
-/// #gm_8016A9E8
+int gm_8016A9E8(u8 arg0, s8 arg1)
+{
+    int i;
+    int found;
+    struct lbl_8046B668_t* ptr = &lbl_8046B668;
+
+    found = -1;
+    for (i = 0; i < 27; i++) {
+        if (ptr->arr2[i] == -2) {
+            found = i;
+            break;
+        }
+    }
+    if (found != -1) {
+        for (i = found; i >= 0; i--) {
+            ptr->arr2[i + 1] = ptr->arr2[i];
+            ptr->arr1[i + 1] = ptr->arr1[i];
+        }
+        ptr->arr2[0] = arg1;
+        ptr->arr1[0] = (u8) arg0;
+        found++;
+    }
+    return found;
+}
 
 /// #gm_8016AC44

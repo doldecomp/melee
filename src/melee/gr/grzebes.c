@@ -195,13 +195,63 @@ bool grZebes_801D8550(void)
     return false;
 }
 
+void grZebes_801D9F30(Ground_GObj*);
+void grZebes_801D9F84(Ground_GObj*);
+void grZebes_801D9100(HSD_GObj*);
+void grZebes_801D925C(HSD_GObj*);
+
+u32 grZe_803E1A10[8] = {
+    0x00010006, 0x00150004, 0x0006000E, 0x00030006,
+    0x00010002, 0x00070006, 0x00050007, 0x00010000,
+};
+
 StageCallbacks grZe_callbacks[] = {
-    { NULL, NULL, NULL, NULL, { 0 } }, { NULL, NULL, NULL, NULL, { 0 } },
-    { NULL, NULL, NULL, NULL, { 0 } }, { NULL, NULL, NULL, NULL, { 0 } },
-    { NULL, NULL, NULL, NULL, { 0 } }, { NULL, NULL, NULL, NULL, { 0 } },
-    { NULL, NULL, NULL, NULL, { 0 } }, { NULL, NULL, NULL, NULL, { 0 } },
-    { NULL, NULL, NULL, NULL, { 0 } }, { NULL, NULL, NULL, NULL, { 0 } },
-    { NULL, NULL, NULL, NULL, { 0 } }, { NULL, NULL, NULL, NULL, { 0 } },
+    { NULL, NULL, NULL, NULL, { 0 } },
+    { (void (*)(Ground_GObj*)) grZebes_801D9F30, (bool (*)(Ground_GObj*)) grZebes_801D9F7C, (void (*)(Ground_GObj*)) grZebes_801D9F84, grZebes_801DA0C0, { 0 } },
+    { NULL, NULL, NULL, NULL, { 0 } },
+    { NULL, NULL, NULL, NULL, { 0 } },
+    { grZebes_801D9508, (bool (*)(Ground_GObj*)) grZebes_801D95B0, (void (*)(Ground_GObj*)) grZebes_801D95B8, (void (*)(Ground_GObj*)) grZebes_801D9754, { 0 } },
+    { grZebes_801D93DC, (bool (*)(Ground_GObj*)) grZebes_801D9408, (void (*)(Ground_GObj*)) grZebes_801D9410, (void (*)(Ground_GObj*)) grZebes_801D94EC, { 0 } },
+    { (void (*)(Ground_GObj*)) grZebes_801D8644, (bool (*)(Ground_GObj*)) grZebes_801D8814, (void (*)(Ground_GObj*)) grZebes_801D881C, (void (*)(Ground_GObj*)) grZebes_801D90FC, { 0xC0000000 } },
+    { (void (*)(Ground_GObj*)) grZebes_801D9100, (bool (*)(Ground_GObj*)) grZebes_801D9254, (void (*)(Ground_GObj*)) grZebes_801D925C, (void (*)(Ground_GObj*)) grZebes_801D93D8, { 0 } },
+    { (void (*)(Ground_GObj*)) grZebes_801D9798, (bool (*)(Ground_GObj*)) grZebes_801D99D8, (void (*)(Ground_GObj*)) grZebes_801D99E0, (void (*)(Ground_GObj*)) grZebes_801D9F2C, { 0 } },
+    { NULL, NULL, NULL, NULL, { 0 } },
+    { NULL, NULL, NULL, NULL, { 0 } },
+    { NULL, NULL, NULL, NULL, { 0 } },
+};
+
+char grZe_803E1B20[] = "/GrZe.dat";
+
+typedef struct grZe_803E1B2C_t {
+    u32 count;
+    StageCallbacks* cbs;
+    char* datfile;
+    void (*init)(void);
+    void (*reset)(bool);
+    void (*unk528)(void);
+    void (*unk52c)(void);
+    bool (*unk550)(void);
+    DynamicsDesc* (*unkCCB8)(enum_t);
+    bool (*unkCCC0)(Vec3*, int, HSD_JObj*);
+    u32 unkA;
+    u32* unkB;
+    u32 unkC;
+} grZe_803E1B2C_t;
+
+grZe_803E1B2C_t grZe_803E1B2C = {
+    8,
+    grZe_callbacks,
+    grZe_803E1B20,
+    grZebes_801D84A4,
+    grZebes_801D84A0,
+    grZebes_801D8528,
+    grZebes_801D852C,
+    grZebes_801D8550,
+    grZebes_801DCCB8,
+    grZebes_801DCCC0,
+    1,
+    grZe_803E1A10,
+    5,
 };
 
 Ground_GObj* grZebes_801D8558(int id)

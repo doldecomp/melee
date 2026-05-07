@@ -22,7 +22,7 @@
 #include <baselib/tobj.h>
 #include <sysdolphin/baselib/dobj.h>
 
-/* 213030 */ static void grPura_80213030(void);
+/* 213030 */ static void grPura_80213030(Ground_GObj* arg0);
 
 StageCallbacks grPu_803E6800[] = {
     { grPura_80211EF0, grPura_80211F1C, grPura_80211F24, grPura_80211F28, 0 },
@@ -202,7 +202,7 @@ void grPura_80211FD8(Ground_GObj* arg0)
 {
     grPura_80212EF4(arg0);
     Ground_801C2FE0(arg0);
-    grPura_80213030();
+    grPura_80213030(arg0);
     mpLib_80055E24(0x18);
     lb_800115F4();
 }
@@ -355,7 +355,7 @@ void grPura_80212EF4(HSD_GObj* arg0)
 
 /// #grPura_80212FC0
 
-void grPura_80213030(void)
+void grPura_80213030(Ground_GObj* arg0)
 {
     UNUSED unsigned char _[8];
     Point3d spC;
