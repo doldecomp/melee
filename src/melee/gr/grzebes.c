@@ -195,10 +195,10 @@ bool grZebes_801D8550(void)
     return false;
 }
 
-static void grZebes_801D9F30(Ground_GObj*);
-static void grZebes_801D9F84(Ground_GObj*);
-static void grZebes_801D9100(HSD_GObj*);
-static void grZebes_801D925C(HSD_GObj*);
+void grZebes_801D9F30(Ground_GObj*);
+void grZebes_801D9F84(Ground_GObj*);
+void grZebes_801D9100(HSD_GObj*);
+void grZebes_801D925C(HSD_GObj*);
 
 u32 grZe_803E1A10[8] = {
     0x00010006, 0x00150004, 0x0006000E, 0x00030006,
