@@ -1223,7 +1223,87 @@ void ftKb_SpecialAirLwEnd_Phys(Fighter_GObj* gobj)
 
 /// #ftKb_SpecialLw1_Coll
 
-/// #ftKb_SpecialLw_Coll
+struct ftKb_Init_803CB490_layout {
+    char pad[0x74];
+    Vec3 vec;
+};
+
+void ftKb_SpecialLw_Coll(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp2;
+    Fighter* fp3;
+    s32 temp;
+    struct ftKb_Init_803CB490_layout* p =
+        (struct ftKb_Init_803CB490_layout*) ftKb_Init_803CB490;
+    PAD_STACK(16);
+
+    if (ft_80082708(gobj) == GA_Ground) {
+        fp2 = GET_FIGHTER(gobj);
+        fp2->mv.kb.speciallw.x24 = p->vec;
+        fp2->mv.kb.speciallw.x54 = fp2->mv.kb.speciallw.x24;
+        fp2->mv.kb.speciallw.x88[0] = 0.0f;
+        fp2->mv.kb.speciallw.x88[4] = 0.0f;
+        fp2->mv.kb.speciallw.x30 = p->vec;
+        fp2->mv.kb.speciallw.x60 = fp2->mv.kb.speciallw.x30;
+        fp2->mv.kb.speciallw.x88[1] = 0.0f;
+        fp2->mv.kb.speciallw.x88[5] = 0.0f;
+        fp2->mv.kb.speciallw.x3C = p->vec;
+        fp2->mv.kb.speciallw.x6C = fp2->mv.kb.speciallw.x3C;
+        fp2->mv.kb.speciallw.x88[2] = 0.0f;
+        fp2->mv.kb.speciallw.x88[6] = 0.0f;
+        fp2->mv.kb.speciallw.x48 = p->vec;
+        fp2->mv.kb.speciallw.x78 = fp2->mv.kb.speciallw.x48;
+        fp2->mv.kb.speciallw.x88[3] = 0.0f;
+        fp2->mv.kb.speciallw.x88[7] = 0.0f;
+        fp2->mv.kb.speciallw.x18 = p->vec;
+        fp2->mv.kb.speciallw.x84 = 0.0f;
+        fp->self_vel.x = 0.0f;
+        ftCommon_8007D5D4(fp);
+        temp = fp->x221C_b4;
+        Fighter_ChangeMotionState(gobj, ftKb_MS_SpecialAirLw, 0x0C4C1092U,
+                                  0.0f, 0.0f, 0.0f, NULL);
+        fp->x221C_b4 = temp;
+        ftAnim_SetAnimRate(gobj, 0.0f);
+        fp3 = GET_FIGHTER(gobj);
+        fp3->take_dmg_cb = ftKb_Init_800EE7B8;
+        fp3->death2_cb = ftKb_Init_800EE74C;
+        ftPartSetRotX(fp, 0, 0.0f);
+    } else {
+        ftKb_SpecialHi_800F3570(gobj);
+        ftKb_SpecialHi_800F37EC(gobj);
+    }
+}
+
+void ftKb_SpecialLwEnd_Coll(Fighter_GObj* gobj)
+{
+    Fighter* fp = GET_FIGHTER(gobj);
+    Fighter* fp2;
+    struct ftKb_Init_803CB490_layout* p =
+        (struct ftKb_Init_803CB490_layout*) ftKb_Init_803CB490;
+    PAD_STACK(8);
+    ft_80081D0C(gobj);
+    fp2 = GET_FIGHTER(gobj);
+    fp2->mv.kb.speciallw.x24 = p->vec;
+    fp2->mv.kb.speciallw.x54 = fp2->mv.kb.speciallw.x24;
+    fp2->mv.kb.speciallw.x88[0] = 0.0f;
+    fp2->mv.kb.speciallw.x88[4] = 0.0f;
+    fp2->mv.kb.speciallw.x30 = p->vec;
+    fp2->mv.kb.speciallw.x60 = fp2->mv.kb.speciallw.x30;
+    fp2->mv.kb.speciallw.x88[1] = 0.0f;
+    fp2->mv.kb.speciallw.x88[5] = 0.0f;
+    fp2->mv.kb.speciallw.x3C = p->vec;
+    fp2->mv.kb.speciallw.x6C = fp2->mv.kb.speciallw.x3C;
+    fp2->mv.kb.speciallw.x88[2] = 0.0f;
+    fp2->mv.kb.speciallw.x88[6] = 0.0f;
+    fp2->mv.kb.speciallw.x48 = p->vec;
+    fp2->mv.kb.speciallw.x78 = fp2->mv.kb.speciallw.x48;
+    fp2->mv.kb.speciallw.x88[3] = 0.0f;
+    fp2->mv.kb.speciallw.x88[7] = 0.0f;
+    fp2->mv.kb.speciallw.x18 = p->vec;
+    fp2->mv.kb.speciallw.x84 = 0.0f;
+    ftPartSetRotX(fp, 0, 0.0f);
+}
 
 /// #ftKb_SpecialAirLwStart_Coll
 

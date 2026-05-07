@@ -360,7 +360,8 @@ void grKinokoRoute_80207C88(Ground_GObj* gobj)
         }
         Ground_801C3D44(NULL, 30.0f, 10000.0f);
         if (gp->gv.kinokoroute2.phase < 2) {
-            gp->gv.kinokoroute2.spawn_idx = Ground_801C3DB4(NULL, 60.0f, 10000.0f);
+            gp->gv.kinokoroute2.spawn_idx =
+                Ground_801C3DB4(NULL, 60.0f, 10000.0f);
             if (gp->gv.kinokoroute2.spawn_idx != -1) {
                 gp->gv.kinokoroute2.phase = 2;
                 gp->gv.kinokoroute2.cam_timer = 0x3C;

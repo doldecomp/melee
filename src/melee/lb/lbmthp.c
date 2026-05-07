@@ -4,8 +4,6 @@
 #include "baselib/video.h"
 #include "lb/lbfile.h"
 
-#include <Runtime/runtime.h>
-#include <MSL/string.h>
 #include <dolphin/dvd.h>
 #include <dolphin/gx/GXTexture.h>
 #include <dolphin/os/OSCache.h>
@@ -14,6 +12,8 @@
 #include <sysdolphin/baselib/sobjlib.h>
 #include <melee/lb/lbanim.h>
 #include <melee/lb/types.h>
+#include <MSL/string.h>
+#include <Runtime/runtime.h>
 
 void fn_8001E910(int arg0, int arg1, void* arg2, bool cancelflag)
 {
@@ -232,8 +232,7 @@ void fn_8001ECF4(THPDecComp* data, void* buf)
                 OSReport("[LbMthp] firstFrameSize = %d\n", data->unk_28);
                 HSD_ASSERT(0x10A, NULL);
             }
-            lbFile_800161C4(data->unk_128, data->unk_120,
-                            (u32) var_r29,
+            lbFile_800161C4(data->unk_128, data->unk_120, (u32) var_r29,
                             (var_r24 + 0x1F) & 0xFFFFFFE0, 0x21, 1);
             csizep = var_r29;
             data->unk_120 += var_r24;
@@ -270,24 +269,20 @@ s32 fn_8001EF5C(THPDecComp* data)
 
     if ((u32) data->unk_94 != data->unk_90) {
         intr = OSDisableInterrupts();
-        data->unk_98 = THPVideoDecode(
-            &data->unk_A8, &spC, data->unk_98,
-            data->unk_4C[data->unk_90] + 4,
-            &data->unk_9C);
+        data->unk_98 =
+            THPVideoDecode(&data->unk_A8, &spC, data->unk_98,
+                           data->unk_4C[data->unk_90] + 4, &data->unk_9C);
         OSRestoreInterrupts(intr);
 
         if (data->width == 0x280) {
             THPDec_80331340(data->unk_98, data->unk_50, data->unk_54,
                             data->unk_58, data->width);
-            DCStoreRange(data->unk_50,
-                         data->width * data->height);
-            DCStoreRange(data->unk_54,
-                         (data->width * data->height) >> 2);
-            DCStoreRange(data->unk_58,
-                         (data->width * data->height) >> 2);
+            DCStoreRange(data->unk_50, data->width * data->height);
+            DCStoreRange(data->unk_54, (data->width * data->height) >> 2);
+            DCStoreRange(data->unk_58, (data->width * data->height) >> 2);
         } else {
-            THPDec_803313D0(data->unk_98, data->unk_50,
-                            data->unk_54, data->unk_58);
+            THPDec_803313D0(data->unk_98, data->unk_50, data->unk_54,
+                            data->unk_58);
         }
 
         intr = OSDisableInterrupts();
@@ -339,8 +334,8 @@ s32 fn_8001F13C(THPDecComp* streamPlayer)
     BOOL intr;
 
     intr = OSDisableInterrupts();
-    if ((streamPlayer->unk_90 != streamPlayer->unk_8C) && (streamPlayer->unk_110 == 0) &&
-        (streamPlayer->unk_70 != 0))
+    if ((streamPlayer->unk_90 != streamPlayer->unk_8C) &&
+        (streamPlayer->unk_110 == 0) && (streamPlayer->unk_70 != 0))
     {
         streamPlayer->unk_13C = OSGetTick();
         streamPlayer->unk_138 = 0;
@@ -353,7 +348,9 @@ s32 fn_8001F13C(THPDecComp* streamPlayer)
                               ALIGN_32(streamPlayer->currPackedSize), 0x21, 1,
                               fn_8001E910, NULL);
             streamPlayer->unk_74++;
-            if ((streamPlayer->unk_74 == streamPlayer->unk_40) && (streamPlayer->unk_68 != 0)) {
+            if ((streamPlayer->unk_74 == streamPlayer->unk_40) &&
+                (streamPlayer->unk_68 != 0))
+            {
                 streamPlayer->unk_74 = 0;
             }
             {

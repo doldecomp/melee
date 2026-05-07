@@ -143,6 +143,7 @@ void it_802F063C(Item_GObj* gobj, Item_GObj* arg1)
     Fighter* fp;
     Item* ip;
     itMasterHandLaserAttributes* attrs;
+    u8 _padA[8];
 
     f32 x0, y0, x1, y1;
     Vec3 pos_0;     // 58, 5C, 60

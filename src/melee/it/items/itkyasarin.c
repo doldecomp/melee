@@ -21,8 +21,6 @@
 #include <baselib/jobj.h>
 #include <baselib/random.h>
 
-extern f32* it_804D6D40;
-
 ItemStateTable it_803F90D0[] = {
     {
         0,
@@ -274,8 +272,10 @@ static inline void itKyasarin_UnkMotion4_Coll_inline(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itKyasarinAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
-    ip->xDD4_itemVar.kyasarin.x2C = attr->x10 + HSD_Randi(attr->x14);
-    ip->xDD4_itemVar.kyasarin.x28 = attr->x18 + HSD_Randi(attr->x1C);
+    s32 rand = HSD_Randi(attr->x14);
+    ip->xDD4_itemVar.kyasarin.x2C = attr->x10 + rand;
+    rand = HSD_Randi(attr->x1C);
+    ip->xDD4_itemVar.kyasarin.x28 = attr->x18 + rand;
     it_80273454(gobj);
     if (HSD_Randi(2) != 0) {
         ip->xDD4_itemVar.kyasarin.x34 = attr->x48;
@@ -516,7 +516,7 @@ bool it_802EDDC0(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itKyasarinAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
-    PAD_STACK(40);
+    PAD_STACK(32);
 
     ip->xDD4_itemVar.kyasarin.x38 += ip->xCA0;
     if (ip->xDD4_itemVar.kyasarin.x38 < attr->x40) {
@@ -530,7 +530,7 @@ bool it_802EDDC0(Item_GObj* gobj)
             grInishie2_801FD4CC(ip->xDD4_itemVar.kyasarin.x20);
         }
         ip->xDCC_flag.b3 = 1;
-        if (HSD_Randf() < it_804D6D40[2]) {
+        if (HSD_Randf() < it_804D6D40->x8) {
             itKyasarin_FlipAndFall(gobj);
             it_8027BA54(gobj, &ip->x40_vel);
             Item_80268E5C(gobj, 9, ITEM_ANIM_UPDATE);

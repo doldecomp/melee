@@ -1,8 +1,13 @@
 #include "itlinkbomb.h"
 
+#include "placeholder.h"
+
 #include "baselib/random.h"
 #include "ft/chara/ftLink/ftLk_AttackAir.h"
 #include "ft/ft_0C31.h"
+
+#include "it/forward.h"
+
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
@@ -254,9 +259,6 @@ bool itLinkbomb_UnkMotion0_Anim(HSD_GObj* gobj)
     if (it_80272C6C(gobj) == 0) {
         it_8029DEB0(gobj);
     }
-#if TEST_REAL
-    it_8029DB5C(gobj);
-#else
     item = GET_ITEM(gobj);
     article = item->xC4_article_data;
     sa = article->x4_specialAttributes;
@@ -265,7 +267,6 @@ bool itLinkbomb_UnkMotion0_Anim(HSD_GObj* gobj)
     } else {
         it_8029DB5C_Inline_Matching(gobj, item, article, sa);
     }
-#endif
     return 0;
 }
 
@@ -291,9 +292,6 @@ bool itLinkbomb_UnkMotion1_Anim(HSD_GObj* gobj)
         fn_8029E21C(gobj);
     }
 
-#if TEST_REAL
-    it_8029DB5C(gobj);
-#else
     item = GET_ITEM(gobj);
     article = item->xC4_article_data;
     sa = article->x4_specialAttributes;
@@ -302,9 +300,8 @@ bool itLinkbomb_UnkMotion1_Anim(HSD_GObj* gobj)
     } else {
         it_8029DB5C_Inline_Matching(gobj, item, article, sa);
     }
-#endif
 
-    return 0;
+    return false;
 }
 
 void itLinkbomb_UnkMotion1_Phys(HSD_GObj* gobj)
@@ -406,11 +403,9 @@ bool itLinkbomb_UnkMotion2_Coll(HSD_GObj* gobj)
 
 void it_8029EC34(HSD_GObj* gobj)
 {
-    Item* item;
-
-    item = GET_ITEM(gobj);
+    Item* item = GET_ITEM(gobj);
     it_80275414(gobj);
-    it_802754A4((Item_GObj*) gobj);
+    it_802754A4(gobj);
     if (item->msid != 3) {
         it_8029D9A4(gobj, 3, ITEM_DROP_UPDATE);
     } else {
@@ -418,38 +413,40 @@ void it_8029EC34(HSD_GObj* gobj)
     }
 }
 
-static inline void itLinkbomb_UnkMotion1_Anim_fake_2(HSD_GObj* gobj)
+static inline void itLinkbomb_UnkMotion3_Anim_inline(HSD_GObj* gobj)
+{
+    if (!it_80272C6C(gobj)) {
+        it_8029EC34(gobj);
+    }
+}
+
+static inline void itLinkbomb_UnkMotion3_Anim_inline2(HSD_GObj* gobj)
+{
+    if (!it_80272C6C(gobj)) {
+        it_8029D9A4(gobj, 1, 0);
+    }
+}
+
+static inline void itLinkbomb_UnkMotion3_Anim_inline3(HSD_GObj* gobj)
 {
     it_8029DB5C(gobj);
 }
 
-static inline void itLinkbomb_UnkMotion1_Anim_fake(HSD_GObj* gobj)
+bool itLinkbomb_UnkMotion3_Anim(Item_GObj* gobj)
 {
-    if (it_80272C6C(gobj) == 0) {
-        fn_8029E21C(gobj);
+    Item* ip = GET_ITEM(gobj);
+    Article* article = ip->xC4_article_data;
+    itLinkBombAttributes* attrs = article->x4_specialAttributes;
+    PAD_STACK(8);
+    itLinkbomb_UnkMotion3_Anim_inline(gobj);
+    // permuterslop
+    if (attrs == NULL) {
     }
-    itLinkbomb_UnkMotion1_Anim_fake_2(gobj);
-}
-
-/// This should have a non-inlined it_8029DB5C, presumably expanded from
-/// itLinkbomb_UnkMotion1_Anim, but I can't figure out how to get a match for
-/// itLinkbomb_UnkMotion1_Anim that calls it_8029DB5C. Not sure if that's
-/// related to the unused item/specialattributes.
-bool itLinkbomb_UnkMotion3_Anim(HSD_GObj* gobj)
-{
-    Item* item;
-    Article* article;
-    itLinkBombAttributes* sa;
-
-    item = GET_ITEM(gobj);
-    article = item->xC4_article_data;
-    sa = article->x4_specialAttributes;
-
-    if (it_80272C6C(gobj) == 0) {
-        it_8029EC34(gobj);
+    if (article == NULL) {
     }
-    itLinkbomb_UnkMotion1_Anim_fake(gobj);
-    return 0;
+    itLinkbomb_UnkMotion3_Anim_inline2(gobj);
+    itLinkbomb_UnkMotion3_Anim_inline3(gobj);
+    return false;
 }
 
 void itLinkbomb_UnkMotion3_Phys(Item_GObj* gobj)
@@ -464,7 +461,7 @@ bool itLinkbomb_UnkMotion3_Coll(HSD_GObj* gobj)
 {
     GET_ITEM(gobj);
     itLinkbomb_UnkMotion2_Coll(gobj);
-    return 0;
+    return false;
 }
 
 static inline f32 fsign_inline(f32 x)
@@ -521,9 +518,6 @@ bool itLinkbomb_UnkMotion4_Anim(HSD_GObj* gobj)
         it_8029F18C(gobj);
     }
 
-#if TEST_REAL
-    it_8029DB5C(gobj);
-#else
     item = GET_ITEM(gobj);
     article = item->xC4_article_data;
     sa = article->x4_specialAttributes;
@@ -532,8 +526,6 @@ bool itLinkbomb_UnkMotion4_Anim(HSD_GObj* gobj)
     } else {
         it_8029DB5C_Inline_Matching(gobj, item, article, sa);
     }
-#endif
-
     return 0;
 }
 

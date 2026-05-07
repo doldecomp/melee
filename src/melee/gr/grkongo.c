@@ -1417,21 +1417,27 @@ void fn_801D542C(HSD_GObj* arg0)
 static void fn_801D7700(Ground* gp, s32 arg1, CollData* cd, s32 arg3,
                         mpLib_GroundEnum arg4, float arg8)
 {
+    s32 idx;
+    s32 idx2;
+    f32 ratio;
     Vec3* cur = &cd->cur_pos;
     s32 type = cd->x34_flags.b1234;
+    f32 segment_size;
+    f32 x1;
+    f32 y1;
+    f32 x2;
+    f32 y2;
 
     if (type == 1 || type == 3) {
         if (arg4 == mpLib_GroundEnum_Unk1) {
-            f32 x1, y1, x2, y2;
-
             mpVtxGetPos(0x1D, &x1, &y1);
             mpVtxGetPos(0x1A, &x2, &y2);
 
             {
-                f32 segment_size = (x2 - x1) / 15.0F;
-                f32 ratio = (cur->x - x1) / segment_size;
-                s32 idx = (s32) ratio;
-                s32 idx2 = (s32) ratio;
+                segment_size = (x2 - x1) / 15.0F;
+                ratio = (cur->x - x1) / segment_size;
+                idx2 = (s32) ratio;
+                idx = (s32) ratio;
 
                 if (idx < 0) {
                     idx2 = 0;
@@ -1532,11 +1538,11 @@ void grKongo_801D8058(Ground_GObj* arg)
 
 HSD_GObj* grKongo_801D8078(HSD_GObj* gobj)
 {
+    s32 unused1;
     Vec3 pos;
     f32 unk;
     Vec3 item_pos;
     HSD_GObj* cur;
-
     Ground_801C4DA0(&pos, &unk);
 
     for (cur = HSD_GObj_Entities->items; cur != NULL; cur = cur->next) {
@@ -1546,8 +1552,8 @@ HSD_GObj* grKongo_801D8078(HSD_GObj* gobj)
             it_8026B294(cur, &item_pos);
 
             dx = pos.x - item_pos.x;
+            dz = pos.z - ((0, item_pos.z));
             dy = pos.y - item_pos.y;
-            dz = pos.z - item_pos.z;
             dx2 = dx * dx;
             dy2 = dy * dy;
             dz2 = dz * dz;
@@ -1581,16 +1587,16 @@ static int fn_801D8134(HSD_GObj* arg0, HSD_GObj* arg1)
     ftLib_80086644(arg1, &pos_ft);
 
     if (!((pos_gnd.x - pos_ft.x) * (pos_gnd.x - pos_ft.x) +
-          (pos_gnd.y - pos_ft.y) * (pos_gnd.y - pos_ft.y) +
-          (pos_gnd.z - pos_ft.z) * (pos_gnd.z - pos_ft.z) <
-          grKg_804D6980->unk28 * grKg_804D6980->unk28)) {
+              (pos_gnd.y - pos_ft.y) * (pos_gnd.y - pos_ft.y) +
+              (pos_gnd.z - pos_ft.z) * (pos_gnd.z - pos_ft.z) <
+          grKg_804D6980->unk28 * grKg_804D6980->unk28))
+    {
         goto done;
     }
 
     rand_val = HSD_Randf();
     diff = grKg_804D6980->unk24 - grKg_804D6980->unk20;
-    gp->gv.kongo3.xCA =
-        (s16)(diff * rand_val + grKg_804D6980->unk20);
+    gp->gv.kongo3.xCA = (s16) (diff * rand_val + grKg_804D6980->unk20);
     gp->gv.kongo3.xD0 = (HSD_JObj*) arg1;
     gp->gv.kongo3.xC6 = 1;
     Ground_801C5440(gp, 0, 0x129U);

@@ -610,13 +610,13 @@ typedef struct {
 
 void grVenom_802052E0(Ground_GObj* gobj, Vec3* pos)
 {
+    u8* new_var2;
     Vec3 jobj_pos;
     s32* spawn_table = (s32*) &grVe_803E5348;
     Ground* gp;
     HSD_JObj* jobj;
     s32* new_var;
     s32* new_var4;
-    u8* new_var2;
     u32 spawn_idx;
     struct grVenom_GroundVars* new_var3;
     s32 data_idx;

@@ -1794,6 +1794,7 @@ bool grMuteCity_801F2C10(Vec3* pos, int arg, HSD_JObj* jobj)
     f32 x_max;
     f32 slope;
     f32 y;
+    f32 new_var;
     PAD_STACK(8);
 
     gobj = Ground_801C2BA4(0x1E);
@@ -1806,7 +1807,7 @@ bool grMuteCity_801F2C10(Vec3* pos, int arg, HSD_JObj* jobj)
             {
                 x = pos->x;
                 x_min = gp->gv.mutecity.xE4.x;
-                if (x < x_min) {
+                if ((new_var = x) < x_min) {
                     return false;
                 }
                 x_max = gp->gv.mutecity.xF0.x;

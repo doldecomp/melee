@@ -51,9 +51,10 @@ Item_GObj* it_802B1DF8(Item_GObj* owner, Vec3* pos, Vec3* vel, s32 count,
     SpawnItem spawn;
     u8 _pad[4];
     u32 x40 = Item_8026AE60();
-    s32 cur_delay = 0;
+    Item_GObj* first;
+    Item_GObj* item_gobj;
+    s32 cur_delay;
     Item_GObj* prev = NULL;
-    Item_GObj* first = NULL;
     int i;
 
     spawn.kind = kind;
@@ -61,6 +62,7 @@ Item_GObj* it_802B1DF8(Item_GObj* owner, Vec3* pos, Vec3* vel, s32 count,
     spawn.prev_pos.z = 0.0f;
     spawn.pos = spawn.prev_pos;
     spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;
+    cur_delay = 0;
     spawn.facing_dir = -1.0f;
     spawn.x3C_damage = 0;
     spawn.x0_parent_gobj = owner;
@@ -69,7 +71,7 @@ Item_GObj* it_802B1DF8(Item_GObj* owner, Vec3* pos, Vec3* vel, s32 count,
     spawn.x40 = x40;
 
     for (i = 0; i < count; i++) {
-        Item_GObj* item_gobj = Item_80268B18(&spawn);
+        item_gobj = Item_80268B18(&spawn);
         if (i == 0) {
             first = item_gobj;
         }
@@ -231,8 +233,9 @@ void it_802B22B8(Item_GObj* gobj)
 
 static inline f32 pika_scale(f32 a, f32 b)
 {
-    s32 n = 10000.0f * a / b + 1.0f;
-    return n / 10000.0f;
+    f32 f = 10000.0f * a / b;
+    f = ((s32) (f + 1)) / 10000.0f;
+    return f;
 }
 
 static inline void itPikachuthunder_UnkMotion2_ScaleCall(Item_GObj* gobj)
@@ -267,7 +270,7 @@ bool itPikachuthunder_UnkMotion2_Anim(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     HSD_JObj* jobj = GET_JOBJ(gobj);
-    PAD_STACK(4);
+    PAD_STACK(12);
 
     ip->xD44_lifeTimer--;
     if (ip->xD44_lifeTimer <= 0.0f) {

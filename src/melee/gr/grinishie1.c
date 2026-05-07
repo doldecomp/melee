@@ -719,8 +719,8 @@ void grInishie1_801FBCEC(HSD_GObj* gobj, u32 index)
     Camera_80030E44(2, &effect_pos);
 }
 
-void fn_801FBF6C(Item_GObj* item_gobj, Ground* gp, Vec3* pos,
-                 HSD_GObj* arg3, f32 arg4)
+void fn_801FBF6C(Item_GObj* item_gobj, Ground* gp, Vec3* pos, HSD_GObj* arg3,
+                 f32 arg4)
 {
     s32 i;
     HSD_GObj* gobj;
@@ -893,6 +893,7 @@ void fn_801FBEB8(Ground* gr, s32 block_id, CollData* arg2, s32 arg3,
 void fn_801FC9AC(Ground* gr, s32 block_id, s32 arg2, s32 dist,
                  enum mpLib_GroundEnum arg4)
 {
+    PAD_STACK(8);
     if (block_id == 0x14) {
         gr->gv.inishie1.xE8 += 1;
         if (arg4 == 1) {

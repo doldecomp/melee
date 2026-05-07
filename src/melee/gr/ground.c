@@ -437,7 +437,7 @@ void Ground_801C0754(StructPairWithStageID* pair)
     stage = Ground_803DFEDC[pair->stage_id];
     arg3 = (pair->list_idx == 0x55) ? 0 : 1;
     grDatFiles_801C6038(stage->data1, 0, arg3);
-    Ground_801C28CC(stage_info.xA0, pair->list_idx);
+    Ground_801C28CC(&stage_info.xA0, pair->list_idx);
     stage_info.x178 = stage->callback5;
     stage_info.x17C = stage->callback6;
     Ground_801C5878();
@@ -1349,9 +1349,9 @@ static char msg2[] = " stageid=%d\n";
 
 /// #Ground_801C28CC
 
-u8* Ground_801C2AD8(void)
+s32* Ground_801C2AD8(void)
 {
-    return stage_info.xA0;
+    return &stage_info.xA0;
 }
 
 f32 Ground_801C2AE8(s32 arg0)

@@ -53,15 +53,21 @@ void it_802BAF0C(Item_GObj* gobj)
     it_8026B73C(gobj);
 }
 
+static inline HSD_JObj* it_802BAF2C_LoadX64(itSeakChain_Attrs* attrs)
+{
+    return HSD_JObjLoadJoint(attrs->x64_joint);
+}
+
 int it_802BAF2C(Item* ip, HSD_JObj* jobj)
 {
-    itSeakChain_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
-    Vec3 zero = it_803B8680;
     ItemLink* prev_link;
     ItemLink* head_link;
     ItemLink* tail_link;
     HSD_JObj* result;
+    itSeakChain_Attrs* attrs = ip->xC4_article_data->x4_specialAttributes;
     int i;
+    Vec3 zero = it_803B8680;
+    PAD_STACK(4);
 
     for (i = 0; i < attrs->x0; i++) {
         HSD_GObj* link_gobj = GObj_Create(7, 0xA, 0);
@@ -89,7 +95,7 @@ int it_802BAF2C(Item* ip, HSD_JObj* jobj)
             link->x2C_b0 = false;
             it_802A24D0(link, 1.0f);
             HSD_GObjObject_80390A70(link_gobj, HSD_GObj_804D7849,
-                                    HSD_JObjLoadJoint(attrs->x64_joint));
+                                    it_802BAF2C_LoadX64(attrs));
             GObj_SetupGXLink(link_gobj, it_802A24A0, 6, 0);
         } else if (i == attrs->x0 - 1) {
             prev_link->prev = link;
@@ -116,7 +122,7 @@ int it_802BAF2C(Item* ip, HSD_JObj* jobj)
             link->x2C_b0 = false;
             it_802A24D0(link, 1.0f);
             HSD_GObjObject_80390A70(link_gobj, HSD_GObj_804D7849,
-                                    HSD_JObjLoadJoint(attrs->x64_joint));
+                                    it_802BAF2C_LoadX64(attrs));
             GObj_SetupGXLink(link_gobj, it_802A24A0, 6, 0);
         }
         prev_link = link;
@@ -426,6 +432,7 @@ enum_t it_802BBD64(ItemLink* link, Vec3* arg1, itSeakChain_Attrs* sa)
 
     it_802A4420(link);
     temp_r29 = it_802BB938(cur, 1, sa->x4) & 0xFFF;
+    cur->pos.z = cur->pos.z;
     while (prev != NULL) {
         if (prev->x2C_b0) {
             if (it_802A3C98(&prev->pos, &cur->pos, &vec) > sa->x4) {
@@ -513,6 +520,7 @@ static inline void itSeakChain_clamp(f32* vel, f32 limit)
 
 void it_802BC080(ItemLink* link, Vec3* target, Item* ip)
 {
+    u8 _padA[24];
     Vec3 dir;
     Fighter* fp;
     ItemLink* cur = link;
@@ -699,8 +707,10 @@ void it_802BC080(ItemLink* link, Vec3* target, Item* ip)
 
 int it_802BC94C(ItemLink* arg0, Vec3* arg1, itSeakChain_Attrs* sa, f32 farg0)
 {
+    u8 _padA[8];
     ItemLink *var_r30, *var_r29;
-    PAD_STACK(3 * 4);
+    Vec3 sp18;
+    float var_f1;
 
     for (var_r29 = arg0, var_r30 = arg0->prev;
          var_r30 != NULL && !var_r29->x2C_b0;)
@@ -708,20 +718,18 @@ int it_802BC94C(ItemLink* arg0, Vec3* arg1, itSeakChain_Attrs* sa, f32 farg0)
         var_r29 = var_r30;
         var_r30 = var_r30->prev;
     }
-    {
-        Vec3 sp18;
-        float var_f1 = it_802A3C98(&var_r29->pos, arg1, &sp18);
-        while (var_r30 != NULL && farg0 > var_f1) {
-            var_r29->x2C_b0 = false;
-            var_f1 = it_802A3C98(&var_r30->pos, arg1, &sp18);
-            var_r29 = var_r30;
-            var_r30 = var_r30->prev;
-        }
-        {
-            float var_f1_2 = var_f1 - farg0;
-            it_802BBC38(var_r29, arg1, sa, MAX(var_f1_2, sa->x4));
-        }
+    var_f1 = it_802A3C98(&var_r29->pos, arg1, &sp18);
+    while (var_r30 != NULL && farg0 > var_f1) {
+        var_r29->x2C_b0 = false;
+        var_f1 = it_802A3C98(&var_r30->pos, arg1, &sp18);
+        var_r29 = var_r30;
+        var_r30 = var_r30->prev;
     }
+    var_f1 -= farg0;
+    if (var_f1 > sa->x4) {
+        var_f1 = sa->x4;
+    }
+    it_802BBC38(var_r29, arg1, sa, var_f1);
     if (var_r30 != NULL) {
         return false;
     }

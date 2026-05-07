@@ -4,7 +4,6 @@
 
 #include <sysdolphin/baselib/particle.h>
 #include <sysdolphin/baselib/psappsrt.h>
-#include "ef/efdata.h"
 
 static UnkFlagStruct db_804D6BA0;
 

@@ -1133,21 +1133,21 @@ typedef struct it_279D_ItemVars {
 } it_279D_ItemVars;
 
 typedef struct itMewtwoShadowball_ItemVars {
-    /* ip+DD4 */ s32 x0;
+    /* ip+DD4 */ f32 x0;
     /* ip+DD8 */ Vec3 x4;
     /* ip+DE4 */ f32 x10;
     /* ip+DE8 */ s32 x14;
     /* ip+DEC */ s32 x18;
     /* ip+DF0 */ s32 x1C;
     /* ip+DF4 */ s32 x20;
-    /* ip+DF8 */ f32 x24;
+    /* ip+DF8 */ u32 x24;
     /* ip+DFC */ s32 x28;
     /* ip+E00 */ HSD_GObj* x2C;
     /* ip+E04 */ Vec3 x30;
     /* ip+E10 */ f32 x3C;
     /* ip+E14 */ f32 x40;
     /* ip+E18 */ f32 x44;
-    /* ip+E1C */ f32 x48;
+    /* ip+E1C */ s32 x48;
     /* ip+E20 */ s32 x4C;
     /* ip+E24 */ f32 x50;
     /* ip+E28 */ f32 x54;
@@ -1163,7 +1163,15 @@ typedef struct itMewtwoShadowball_DatAttrs {
     f32 x10;
     f32 x14;
     f32 x18;
-    f32 x1C[9];
+    f32 x1C;
+    s32 x20;
+    f32 x24;
+    f32 x28;
+    f32 x2C;
+    f32 x30;
+    f32 x34;
+    f32 x38;
+    f32 x3C;
 } itMewtwoShadowball_DatAttrs;
 
 typedef struct it_279D_DatAttrs {
@@ -1613,8 +1621,14 @@ typedef struct itOldkuri_ItemVars {
 typedef struct itUnknown_ItemVars {
     /* +00 ip+DD4 */ char pad_0[0x60];
     /* +60 ip+E34 */ f32 x60;
-    /* +64 ip+E38 */ union { f32 f; s32 i; } x64;
-    /* +68 ip+E3C */ union { f32 f; s32 i; } x68;
+    /* +64 ip+E38 */ union {
+        f32 f;
+        s32 i;
+    } x64;
+    /* +68 ip+E3C */ union {
+        f32 f;
+        s32 i;
+    } x68;
     /* +6C ip+E40 */ Vec3 x6C;
     /* +78 ip+E4C */ union {
         Vec3 vec;
@@ -1631,15 +1645,27 @@ typedef struct itGreatFoxLaser_Attrs {
 } itGreatFoxLaser_Attrs;
 
 typedef struct itUnknownAttributes {
-    /* +00 */ union { f32 f; s32 i; } x0;
+    /* +00 */ union {
+        f32 f;
+        s32 i;
+    } x0;
     /* +04 */ f32 x4;
     /* +08 */ f32 x8;
     /* +0C */ f32 xC;
     /* +10 */ f32 x10;
     /* +14 */ f32 x14;
-    /* +18 */ union { f32 f; s32 i; } x18;
-    /* +1C */ union { f32 f; s32 i; } x1C;
-    /* +20 */ union { f32 f; s32 i; } x20;
+    /* +18 */ union {
+        f32 f;
+        s32 i;
+    } x18;
+    /* +1C */ union {
+        f32 f;
+        s32 i;
+    } x1C;
+    /* +20 */ union {
+        f32 f;
+        s32 i;
+    } x20;
     /* +24 */ HSD_Joint* x24[26];
 } itUnknownAttributes;
 

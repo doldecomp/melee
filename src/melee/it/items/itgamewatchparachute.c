@@ -1,17 +1,17 @@
 #include "itgamewatchparachute.h"
 
+#include "db/db.h"
 #include "ftGameWatch/ftGw_AttackAir.h"
 
 #include "it/forward.h"
 
 #include "it/inlines.h"
 #include "it/it_26B1.h"
-#include "it/item.h"
-#include "db/db.h"
 #include "it/it_2725.h"
+#include "it/item.h"
 
 HSD_GObj* it_802C6C38(Item_GObj* parent, Vec3* pos, enum_t part,
-                       float facing_dir)
+                      float facing_dir)
 {
     Item_GObj* gobj;
     SpawnItem spawn;

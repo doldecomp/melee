@@ -1107,7 +1107,7 @@ void fn_8016CA68(lbl_8046B6A0_t* arg0, int arg1)
                 }
                 gm_801A0FEC(var_r31, var_r4);
             }
-            gm_801A4634(arg1);
+            gm_801A4634((long long) arg1);
             if (arg0->x24C8.x4_0) {
                 var_r0 = fn_8016CA68_inline(var_r31);
                 if (arg0->x24C8.x3C != NULL) {

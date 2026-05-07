@@ -1,27 +1,28 @@
 #include "gm_1832.h"
 
+#include "gm_1B03.static.h"
+
 #include "gm_unsplit.h"
 
 #include "pl/pl_040D.h"
 
 #include <math_ppc.h>
-#include <sysdolphin/baselib/fog.h>
 #include <sysdolphin/baselib/aobj.h>
 #include <sysdolphin/baselib/cobj.h>
 #include <sysdolphin/baselib/dobj.h>
-#include <sysdolphin/baselib/mobj.h>
-#include <sysdolphin/baselib/wobj.h>
+#include <sysdolphin/baselib/fog.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/gobjplink.h>
 #include <sysdolphin/baselib/gobjproc.h>
+#include <sysdolphin/baselib/mobj.h>
+#include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/sislib.h>
 #include <sysdolphin/baselib/sobjlib.h>
 #include <sysdolphin/baselib/state.h>
 #include <sysdolphin/baselib/tobj.h>
 #include <sysdolphin/baselib/util.h>
-#include <sysdolphin/baselib/random.h>
-#include <Runtime/runtime.h>
+#include <sysdolphin/baselib/wobj.h>
 #include <melee/cm/camera.h>
 #include <melee/ef/efasync.h>
 #include <melee/ef/eflib.h>
@@ -29,33 +30,32 @@
 #include <melee/ft/ftbosslib.h>
 #include <melee/ft/ftdemo.h>
 #include <melee/ft/ftlib.h>
-#include <melee/gm/gm_1A3F.h>
-#include <melee/gm/gm_1A45.h>
 #include <melee/gm/gm_1601.h>
 #include <melee/gm/gm_1A36.h>
+#include <melee/gm/gm_1A3F.h>
+#include <melee/gm/gm_1A45.h>
 #include <melee/gm/gmmain_lib.h>
 #include <melee/gm/types.h>
-
-#include "gm_1B03.static.h"
 #include <melee/gr/ground.h>
 #include <melee/gr/grpushon.h>
 #include <melee/gr/stage.h>
-#include <melee/if/ifstatus.h>
 #include <melee/if/ifall.h>
-#include <melee/it/item.h>
+#include <melee/if/ifstatus.h>
 #include <melee/it/it_266F.h>
+#include <melee/it/item.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lb_00F9.h>
+#include <melee/lb/lb_0192.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbaudio_ax.h>
-#include <melee/lb/lb_0192.h>
 #include <melee/lb/lbbgflash.h>
 #include <melee/lb/lblanguage.h>
-#include <melee/mn/types.h>
 #include <melee/mn/mnname.h>
+#include <melee/mn/types.h>
 #include <melee/mp/mpcoll.h>
 #include <melee/pl/player.h>
 #include <melee/sc/types.h>
+#include <Runtime/runtime.h>
 
 static struct {
     int x0;
@@ -80,14 +80,14 @@ static struct {
     int xE8; ///< game type
     u8 xEC;
     u8 xED;
-    u8 xEE;    ///< roadmap (IrRdMap) progress
-    u8 xEF;    ///< left char amt
-    u8 xF0;    ///< right char amt
-    u8 xF1[3]; ///< left char ids
-    u8 xF4[3]; ///< right char ids
-    u8 xF7[3]; ///< left costumes
-    u8 xFA[3]; ///< right costumes
-    u8 xFD[3]; ///< left metal flags
+    u8 xEE;     ///< roadmap (IrRdMap) progress
+    u8 xEF;     ///< left char amt
+    u8 xF0;     ///< right char amt
+    u8 xF1[3];  ///< left char ids
+    u8 xF4[3];  ///< right char ids
+    u8 xF7[3];  ///< left costumes
+    u8 xFA[3];  ///< right costumes
+    u8 xFD[3];  ///< left metal flags
     u8 x100[3]; ///< right metal flags
     u8 pad_103;
     u8 pad_104[0x54];
@@ -100,7 +100,9 @@ static SceneDesc* lbl_804D6600;
 
 extern int lbl_804D6608;
 
-typedef struct { s32 v[6]; } ClassicProcArray;
+typedef struct {
+    s32 v[6];
+} ClassicProcArray;
 
 extern ClassicProcArray lbl_803B7C40;
 extern ClassicProcArray lbl_803B7C28;
@@ -369,9 +371,8 @@ void fn_80184A94(HSD_GObj* gobj)
     fn_80184138(gobj, 2);
 }
 
-static char lbl_803D9414[] = {
-    0x82, 0x73, 0x82, 0x85, 0x82, 0x81, 0x82, 0x8D, 0, 0, 0, 0
-};
+static char lbl_803D9414[] = { 0x82, 0x73, 0x82, 0x85, 0x82, 0x81,
+                               0x82, 0x8D, 0,    0,    0,    0 };
 
 static char lbl_804D40A0[] = { 0x8C, 0x52, 0x92, 0x63, 0x00 };
 
@@ -414,8 +415,8 @@ void fn_80184AB8(HSD_GObj* arg0)
                 lbAudioAx_800237A8(0x9C4A, 0x7F, 0x40);
                 return;
             case 0x46:
-                if ((s32) lbl_804735E8.xE4 == 4 ||
-                    (s32) lbl_804735E8.xE4 == 1) {
+                if ((s32) lbl_804735E8.xE4 == 4 || (s32) lbl_804735E8.xE4 == 1)
+                {
                     lbl_804D6608 = lbAudioAx_800237A8(0x7C863, 0x7F, 0x40);
                     return;
                 }
@@ -437,16 +438,16 @@ void fn_80184AB8(HSD_GObj* arg0)
             case 0x5:
                 for (i = 0; i < (s32) lbl_804735E8.xEF; i++) {
                     if (i != 0 || (u8) lbl_804735E8.xED == 0x78) {
-                        fn_80160DE8(lbl_804735A8.x4[7 + i],
-                                    lbl_804735E8.xF1[i], 0, 0,
-                                    lbl_804D6604->x57C[lbl_804735E8.xEF].x18[i],
-                                    lbl_804D6604->x57C[lbl_804735E8.xEF].x24[i]);
+                        fn_80160DE8(
+                            lbl_804735A8.x4[7 + i], lbl_804735E8.xF1[i], 0, 0,
+                            lbl_804D6604->x57C[lbl_804735E8.xEF].x18[i],
+                            lbl_804D6604->x57C[lbl_804735E8.xEF].x24[i]);
                     } else {
                         name = GetNameText((s32) lbl_804735E8.xED);
-                        HSD_SisLib_803A70A0(
-                            (HSD_Text*) lbl_804735A8.x4[7 + i], 0, name);
-                        HSD_SisLib_803A7548(
-                            (HSD_Text*) lbl_804735A8.x4[7 + i], 0, 1.0f, 1.0f);
+                        HSD_SisLib_803A70A0((HSD_Text*) lbl_804735A8.x4[7 + i],
+                                            0, name);
+                        HSD_SisLib_803A7548((HSD_Text*) lbl_804735A8.x4[7 + i],
+                                            0, 1.0f, 1.0f);
                     }
                 }
                 return;
@@ -489,18 +490,18 @@ void fn_80184AB8(HSD_GObj* arg0)
                             sp10[k] = 0;
                         }
                     }
-                    HSD_SisLib_803A70A0(
-                        (HSD_Text*) lbl_804735A8.x4[10], 0, sp10);
-                    HSD_SisLib_803A7548(
-                        (HSD_Text*) lbl_804735A8.x4[10], 0,
-                        0.8f * (lbl_804D6604->x57C[1].x18[0] *
-                                fn_80160F58(lbl_804735E8.xF4[0])),
-                        lbl_804D6604->x57C[1].x24[0]);
+                    HSD_SisLib_803A70A0((HSD_Text*) lbl_804735A8.x4[10], 0,
+                                        sp10);
+                    HSD_SisLib_803A7548((HSD_Text*) lbl_804735A8.x4[10], 0,
+                                        0.8f *
+                                            (lbl_804D6604->x57C[1].x18[0] *
+                                             fn_80160F58(lbl_804735E8.xF4[0])),
+                                        lbl_804D6604->x57C[1].x24[0]);
                     return;
                 }
                 for (i = 0; i < (s32) lbl_804735E8.xF0; i++) {
-                    fn_80160DE8(lbl_804735A8.x4[10 + i],
-                                lbl_804735E8.xF4[i], 0, 1,
+                    fn_80160DE8(lbl_804735A8.x4[10 + i], lbl_804735E8.xF4[i],
+                                0, 1,
                                 lbl_804D6604->x57C[lbl_804735E8.xF0].x18[i],
                                 lbl_804D6604->x57C[lbl_804735E8.xF0].x24[i]);
                 }
@@ -525,15 +526,15 @@ void fn_8018504C(void)
     if ((u16) lbl_804735A8.x3C < 0x31U) {
         lbl_804735A8.x3C = (u16) (lbl_804735A8.x3C + 1);
     }
-    HSD_JObjReqAnimAll(lbl_804735A8.x4[5],
+    HSD_JObjReqAnimAll(
+        lbl_804735A8.x4[5],
         (f32) (lbl_804735A8.x3C + ((lbl_804735E8.xEE * 0x32) - new_var)));
     HSD_JObjAnimAll(lbl_804735A8.x4[5]);
-    HSD_JObjReqAnimAll(lbl_804735A8.x4[4],
+    HSD_JObjReqAnimAll(
+        lbl_804735A8.x4[4],
         (f32) (lbl_804735A8.x3A + ((lbl_804735E8.xEE * 0x32) - new_var)));
     HSD_JObjAnimAll(lbl_804735A8.x4[4]);
-    if (((u16) lbl_804735A8.x38 == 0x2D) &&
-        ((s32) lbl_804735E8.xE4 == 3))
-    {
+    if (((u16) lbl_804735A8.x38 == 0x2D) && ((s32) lbl_804735E8.xE4 == 3)) {
         switch ((s32) lbl_804735E8.xE8) {
         case 1:
             lbAudioAx_800237A8(0x7C864, 0x7F, 0x40);
@@ -549,38 +550,18 @@ void fn_8018504C(void)
 }
 
 static f32 lbl_803D9248[] = {
-    0.6f, 0.35f, 0.6f, 0.5f, 0.6f, 0.35f, 0.6f, 0.6f, 0.7f, 0.6f,
-    0.5f, 0.6f, 0.6f, 0.6f, 0.5f, 0.5f, 0.6f, 0.5f, 0.6f, 0.6f,
-    0.5f, 0.6f, 0.6f, 0.6f, 0.6f, 0.5f, 0.5f, 0.5f,
-    0.0f, -6.0f, 0.0f,
-    0.0f, -3.5f, 0.0f,
-    -1.0f, -3.5f, 0.0f,
-    0.0f, -3.5f, 0.0f,
-    0.0f, -1.0f, 0.0f,
-    0.0f, -3.0f, 0.0f,
-    0.0f, -5.0f, 0.0f,
-    0.0f, -3.5f, 0.0f,
-    0.0f, -3.5f, 0.0f,
-    0.0f, -3.5f, 0.0f,
-    0.0f, -3.0f, 0.0f,
-    -0.5f, -3.5f, 0.0f,
-    -2.0f, -6.0f, 0.0f,
-    0.0f, -2.5f, 0.0f,
-    0.0f, -2.5f, 0.0f,
-    -1.0f, -1.0f, 0.0f,
-    0.0f, -5.0f, 0.0f,
-    0.0f, -3.0f, 0.0f,
-    -1.0f, -6.0f, 0.0f,
-    -1.0f, -2.5f, 0.0f,
-    -1.0f, -3.5f, 0.0f,
-    0.0f, -3.5f, 0.0f,
-    0.0f, -4.0f, 0.0f,
-    -1.0f, -3.5f, 0.0f,
-    0.0f, -1.5f, 0.0f,
-    0.0f, -4.5f, 0.0f,
-    0.0f, -3.5f, 0.0f,
-    0.0f, -3.5f, 0.0f,
-    3.0f, 4.0f, -5.0f,
+    0.6f,  0.35f, 0.6f,  0.5f,  0.6f,  0.35f, 0.6f,  0.6f,  0.7f,  0.6f,
+    0.5f,  0.6f,  0.6f,  0.6f,  0.5f,  0.5f,  0.6f,  0.5f,  0.6f,  0.6f,
+    0.5f,  0.6f,  0.6f,  0.6f,  0.6f,  0.5f,  0.5f,  0.5f,  0.0f,  -6.0f,
+    0.0f,  0.0f,  -3.5f, 0.0f,  -1.0f, -3.5f, 0.0f,  0.0f,  -3.5f, 0.0f,
+    0.0f,  -1.0f, 0.0f,  0.0f,  -3.0f, 0.0f,  0.0f,  -5.0f, 0.0f,  0.0f,
+    -3.5f, 0.0f,  0.0f,  -3.5f, 0.0f,  0.0f,  -3.5f, 0.0f,  0.0f,  -3.0f,
+    0.0f,  -0.5f, -3.5f, 0.0f,  -2.0f, -6.0f, 0.0f,  0.0f,  -2.5f, 0.0f,
+    0.0f,  -2.5f, 0.0f,  -1.0f, -1.0f, 0.0f,  0.0f,  -5.0f, 0.0f,  0.0f,
+    -3.0f, 0.0f,  -1.0f, -6.0f, 0.0f,  -1.0f, -2.5f, 0.0f,  -1.0f, -3.5f,
+    0.0f,  0.0f,  -3.5f, 0.0f,  0.0f,  -4.0f, 0.0f,  -1.0f, -3.5f, 0.0f,
+    0.0f,  -1.5f, 0.0f,  0.0f,  -4.5f, 0.0f,  0.0f,  -3.5f, 0.0f,  0.0f,
+    -3.5f, 0.0f,  3.0f,  4.0f,  -5.0f,
 };
 
 typedef struct ClassicCharData {
@@ -599,8 +580,7 @@ s32 fn_801851C0(void)
     for (i = 0; i < (s32) lbl_804735E8.xE0; i++) {
         ClassicCharData* data = (ClassicCharData*) lbl_803D9248;
         result = i + 1;
-        Player_SetPlayerCharacter(result,
-            (CharacterKind) lbl_804735E8.xF4[0]);
+        Player_SetPlayerCharacter(result, (CharacterKind) lbl_804735E8.xF4[0]);
         Player_SetPlayerId(result, 0);
         Player_SetSlottype(result, Gm_PKind_Demo);
         Player_SetFacingDirection(result, 0.0f);
@@ -613,8 +593,7 @@ s32 fn_801851C0(void)
             pos.z += data->samus_extra.z;
             Player_80032828(result, 1, &pos);
         }
-        Player_SetModelScale(result,
-            data->scale[lbl_804735E8.xF4[0]]);
+        Player_SetModelScale(result, data->scale[lbl_804735E8.xF4[0]]);
         Player_SetFlagsBit5(result, lbl_804735E8.x100[0]);
         Player_80037054(result, 6);
     }
@@ -755,8 +734,8 @@ void fn_8018575C(HSD_GObj* gobj)
     }
 }
 
-/// @brief Creates splash screen sprite objects from pre-rendered character images.
-/// Distributes 10 image tiles across a grid with random offsets.
+/// @brief Creates splash screen sprite objects from pre-rendered character
+/// images. Distributes 10 image tiles across a grid with random offsets.
 void fn_801857C4(HSD_GObj* arg0)
 {
     Vec3 pos;
@@ -780,16 +759,16 @@ void fn_801857C4(HSD_GObj* arg0)
             descs[0] = &lbl_804735E8.x40[*img_idx];
             descs[1] = 0;
             descs[2] = &lbl_804735E8.x88[*img_idx];
-            sobj = HSD_SObjLib_803A477C(lbl_804735E8.xDC,
-                                        (s32) &descs[0], 0, 0, 0x80, 1);
+            sobj = HSD_SObjLib_803A477C(lbl_804735E8.xDC, (s32) &descs[0], 0,
+                                        0, 0x80, 1);
             total_tiles = 10;
             num_cols = (s32) fn_801855BC(total_tiles);
             row = (u8) i / (u8) num_cols;
-            pos.x = (40.0f * HSD_Randf()) +
-                    (280.0f +
-                     ((290.0f / (f32) (u8) (((u8) num_cols + 9) /
-                                            (u8) num_cols)) *
-                      (f32) ((u8) i % (u8) num_cols)));
+            pos.x =
+                (40.0f * HSD_Randf()) +
+                (280.0f +
+                 ((290.0f / (f32) (u8) (((u8) num_cols + 9) / (u8) num_cols)) *
+                  (f32) ((u8) i % (u8) num_cols)));
             pos.y = (40.0f * HSD_Randf()) +
                     (((160.0f / (f32) (u8) num_cols) * (f32) row) + -60.0f);
             pos_copy = pos;
@@ -864,11 +843,9 @@ s32 fn_80185A0C(void)
     for (v = 0; v < 10; v++) {
         if ((v / (s32) lbl_804735E8.xE0) % 2 != 0) {
             lbl_804735E8.xD0[v] =
-                (u8) ((lbl_804735E8.xE0 - 1) -
-                      (v % (s32) lbl_804735E8.xE0));
+                (u8) ((lbl_804735E8.xE0 - 1) - (v % (s32) lbl_804735E8.xE0));
         } else {
-            lbl_804735E8.xD0[v] =
-                (u8) (v % (s32) lbl_804735E8.xE0);
+            lbl_804735E8.xD0[v] = (u8) (v % (s32) lbl_804735E8.xE0);
         }
     }
 
@@ -934,9 +911,8 @@ s32 fn_80185E34(void)
             Player_SetModelScale(player_slot, 1.0f);
             Player_SetFlagsBit5(player_slot, lbl_804735E8.xFD[i]);
             Player_80036F34(player_slot, 5);
-            HSD_GObj_SetupProc(
-                Player_GetEntity(player_slot),
-                (HSD_GObjEvent) local.v[i], 0x16);
+            HSD_GObj_SetupProc(Player_GetEntity(player_slot),
+                               (HSD_GObjEvent) local.v[i], 0x16);
             player_slot++;
         }
     }
@@ -1044,7 +1020,8 @@ void fn_801861B8(void)
                                 lbl_804D6604->x57C[lbl_804735E8.xF0].x00[i],
                             lbl_804D6604->x57C[lbl_804735E8.xF0].x0C[i], " ");
         HSD_SisLib_803A7548((HSD_Text*) lbl_804735A8.x4[10 + i], 0,
-                            340.0f + lbl_804D6604->x57C[lbl_804735E8.xF0].x18[i],
+                            340.0f +
+                                lbl_804D6604->x57C[lbl_804735E8.xF0].x18[i],
                             lbl_804D6604->x57C[lbl_804735E8.xF0].x24[i]);
     }
 }
@@ -1071,9 +1048,8 @@ void fn_80186400(void)
     }
 }
 
-static const char* const lbl_803B7C58[] = {
-    "IrAls", "IrEzTarg", "IrEzTuki", "IrEzFigG"
-};
+static const char* const lbl_803B7C58[] = { "IrAls", "IrEzTarg", "IrEzTuki",
+                                            "IrEzFigG" };
 
 static char lbl_804D40B0[] = "IrRdMap";
 
@@ -1088,8 +1064,7 @@ void fn_80186634(void* arg0)
     HSD_GObj* gobj4;
     const char* names[4];
 
-    lbArchive_80016DBC("GmIntEz.dat", &lbl_804D6604,
-                       "gmIntroEasyTable", 0);
+    lbArchive_80016DBC("GmIntEz.dat", &lbl_804D6604, "gmIntroEasyTable", 0);
     Camera_80028B9C(0xC);
     lb_8000FCDC();
     mpColl_80041C78();
@@ -1105,11 +1080,10 @@ void fn_80186634(void* arg0)
     names[1] = lbl_803B7C58[1];
     names[2] = lbl_803B7C58[2];
     names[3] = lbl_803B7C58[3];
-    lbl_804D65F4 = lbArchive_80016DBC(
-        names[lbl_804735E8.xE8],
-        &lbl_804D65FC, "ScItrAllstar_scene_data", 0);
-    lbl_804D65F8 = lbArchive_80016DBC(
-        lbl_804D40B0, &lbl_804D6600, "ScItrAllstar_scene_data", 0);
+    lbl_804D65F4 = lbArchive_80016DBC(names[lbl_804735E8.xE8], &lbl_804D65FC,
+                                      "ScItrAllstar_scene_data", 0);
+    lbl_804D65F8 = lbArchive_80016DBC(lbl_804D40B0, &lbl_804D6600,
+                                      "ScItrAllstar_scene_data", 0);
 
     gobj = GObj_Create(0xB, 3, 0);
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D784A,
@@ -1276,7 +1250,7 @@ void gm_80186E30_OnEnter(void* arg0_)
     *(ClassicModeEnterData*) &lbl_804735E8.xE4 = *arg0;
     fn_80186634(arg0_);
     lbl_804D6608 = -1;
-    gm_80167858((int)(s8) lbl_804735E8.xEC, lbl_804735E8.xED, 0xB, 0x2D);
+    gm_80167858((int) (s8) lbl_804735E8.xEC, lbl_804735E8.xED, 0xB, 0x2D);
     gm_80168F88();
 }
 
@@ -1689,19 +1663,60 @@ void fn_80187CF4(HSD_GObj* gobj)
 static char lbl_804D4138[] = "IrNml";
 
 static char* lbl_803D9750[] = {
-    "mc01", "mc02", "mc03", "mc04", "mc05", "mc06",
-    "mc07", "mc08", "mc09", "mc10", "mc11", "mc12",
-    (char*) 0x1C, (char*) 0x1C, (char*) 0x1C, (char*) 0x1C,
-    (char*) 0x1C, (char*) 0x1C, (char*) 0x1C, (char*) 0x1C,
-    (char*) 0x1C, (char*) 0x14, (char*) 0x14, (char*) 0x1C,
-    (char*) 0x20000,    (char*) 0x10000000, (char*) 0x20,       (char*) 0x100,
-    (char*) 0x20000,    (char*) 0x10000,    (char*) 0x100,      (char*) 0x04000000,
-    (char*) 0x802,      (char*) 0x4000,     (char*) 8,          (char*) 0xC00,
-    (char*) 0x10000,    (char*) 0x01000000, (char*) 0x20000,    (char*) 0x40,
-    (char*) 0x80,       (char*) 0x200000,   NULL,               (char*) 0x2000,
-    NULL,               (char*) 0x60000,    (char*) 0x200000,   (char*) 0x9000,
-    (char*) 0x53634974, (char*) 0x724E6F72, (char*) 0x6D616C5F, (char*) 0x7363656E,
-    (char*) 0x655F6461, (char*) 0x74610000,
+    "mc01",
+    "mc02",
+    "mc03",
+    "mc04",
+    "mc05",
+    "mc06",
+    "mc07",
+    "mc08",
+    "mc09",
+    "mc10",
+    "mc11",
+    "mc12",
+    (char*) 0x1C,
+    (char*) 0x1C,
+    (char*) 0x1C,
+    (char*) 0x1C,
+    (char*) 0x1C,
+    (char*) 0x1C,
+    (char*) 0x1C,
+    (char*) 0x1C,
+    (char*) 0x1C,
+    (char*) 0x14,
+    (char*) 0x14,
+    (char*) 0x1C,
+    (char*) 0x20000,
+    (char*) 0x10000000,
+    (char*) 0x20,
+    (char*) 0x100,
+    (char*) 0x20000,
+    (char*) 0x10000,
+    (char*) 0x100,
+    (char*) 0x04000000,
+    (char*) 0x802,
+    (char*) 0x4000,
+    (char*) 8,
+    (char*) 0xC00,
+    (char*) 0x10000,
+    (char*) 0x01000000,
+    (char*) 0x20000,
+    (char*) 0x40,
+    (char*) 0x80,
+    (char*) 0x200000,
+    NULL,
+    (char*) 0x2000,
+    NULL,
+    (char*) 0x60000,
+    (char*) 0x200000,
+    (char*) 0x9000,
+    (char*) 0x53634974,
+    (char*) 0x724E6F72,
+    (char*) 0x6D616C5F,
+    (char*) 0x7363656E,
+    (char*) 0x655F6461,
+    (char*) 0x74610000,
 };
 
 static HSD_Archive* lbl_804D6620;
@@ -1746,8 +1761,7 @@ void gm_80187F48_OnEnter(void* arg0_)
 
     stage_index = arg0[1];
     lbl_804D6620 = lbArchive_80016DBC(
-        lbl_804D4138, &lbl_804736C0.x0,
-        (char*) &lbl_803D9750[48],
+        lbl_804D4138, &lbl_804736C0.x0, (char*) &lbl_803D9750[48],
         &lbl_804736C0.x4, lbl_803D9750[stage_index], NULL);
 
     lbAudioAx_80026F2C((s32) lbl_803D9750[stage_index + 12]);
@@ -1769,13 +1783,15 @@ void gm_80187F48_OnEnter(void* arg0_)
     HSD_CObjReqAnim(cobj, 0.0f);
 
     gobj2 = GObj_Create(0x13, 0x14, 0);
-    HSD_GObjObject_80390A70(gobj2, HSD_GObj_804D784B,
+    HSD_GObjObject_80390A70(
+        gobj2, HSD_GObj_804D784B,
         HSD_CObjLoadDesc(((SceneDesc*) lbl_804736C0.x0)->cameras[0].desc));
     GObj_SetupGXLinkMax(gobj2, HSD_GObj_803910D8, 8);
     gobj2->gxlink_prios = 0xC00;
 
     gobj3 = GObj_Create(0xB, 3, 0);
-    HSD_GObjObject_80390A70(gobj3, HSD_GObj_804D784A,
+    HSD_GObjObject_80390A70(
+        gobj3, HSD_GObj_804D784A,
         lb_80011AC4(((SceneDesc*) lbl_804736C0.x0)->lights));
     GObj_SetupGXLink(gobj3, HSD_GObj_LObjCallback, 0xA, 0);
 
@@ -2261,7 +2277,9 @@ void fn_801891F4(void)
                 if (i != 0 && count != 0) {
                     Player_SetPlayerAndEntityCpuType(i, 0);
                     count--;
-                    if (count == 0) break;
+                    if (count == 0) {
+                        break;
+                    }
                 }
             }
             sub->anim_frames[22] = 0;
@@ -2507,7 +2525,9 @@ void fn_801891F4(void)
                 if (i != 0 && count != 0) {
                     Player_SetPlayerAndEntityCpuType(i, cpu_type);
                     count--;
-                    if (count == 0) break;
+                    if (count == 0) {
+                        break;
+                    }
                 }
             }
 
@@ -2517,7 +2537,9 @@ void fn_801891F4(void)
                 if (i != 0 && count != 0) {
                     Player_SetHUDDamage(i, damage);
                     count--;
-                    if (count == 0) break;
+                    if (count == 0) {
+                        break;
+                    }
                 }
             }
 
@@ -2557,8 +2579,8 @@ s32 fn_80189B88(void)
     sub = &lbl_80473700.css;
     sub->x00 = 0;
     sub->x01 = 0;
-    HSD_GObj_SetupProc(GObj_Create(0xE, 2, 0),
-                       (HSD_GObjEvent) fn_801891F4, 0x15);
+    HSD_GObj_SetupProc(GObj_Create(0xE, 2, 0), (HSD_GObjEvent) fn_801891F4,
+                       0x15);
     gobj = GObj_Create(0xE, 0xF, 0);
     jobj = HSD_JObjLoadJoint((*lbl_804D662C)->joint);
     sub->gobj = gobj;
@@ -2625,18 +2647,16 @@ HSD_Text* fn_8018A000(void)
     PAD_STACK(0x10);
     data = lbl_803D9828;
     memzero(lbl_80473700.result_cache, 0x10);
-    lbl_804D6628 = lbArchive_80016DBC("GmTrain",
-        &lbl_804D662C, &data[0xA0], 0);
+    lbl_804D6628 =
+        lbArchive_80016DBC("GmTrain", &lbl_804D662C, &data[0xA0], 0);
     fn_80189B88();
     ifAll_802F3404();
     HSD_SisLib_803A611C(0, NULL, 9, 0x14, 0, 0xE, 0, 0x12);
     sub = &lbl_80473700.css;
     if (lbLang_IsSavedLanguageUS()) {
-        HSD_SisLib_803A62A0(0, (char*) &data[0xBC],
-                            (char*) &data[0xC8]);
+        HSD_SisLib_803A62A0(0, (char*) &data[0xBC], (char*) &data[0xC8]);
     } else {
-        HSD_SisLib_803A62A0(0, (char*) &data[0xDC],
-                            (char*) &data[0xC8]);
+        HSD_SisLib_803A62A0(0, (char*) &data[0xDC], (char*) &data[0xC8]);
     }
 
     sub->text = HSD_SisLib_803A5ACC(
@@ -2645,7 +2665,7 @@ HSD_Text* fn_8018A000(void)
         150.0f, 0.1f, 167.0f, 16.0f);
     text = sub->text;
     lbLang_IsSettingUS();
-    HSD_SisLib_803A6368(text, (s32) *(s16*) &data[2]);
+    HSD_SisLib_803A6368(text, (s32) * (s16*) &data[2]);
     sub->text->default_fitting = 1;
     resetText(sub->text);
     text = sub->text;
@@ -2709,47 +2729,50 @@ void fn_8018A364(int arg0_int)
     data = &gm_80473A18;
 
     if (fn_8017E318() > 0) {
-        ((u8_bits*)&arg0->_x448[2])->b3 = 1;
+        ((u8_bits*) &arg0->_x448[2])->b3 = 1;
     }
 
     if (rules->x4_5) {
         main_data = gmMainLib_8015CDE0();
         total_time = data->x0.xC.x20 + gm_8016AEDC();
-        ((u8_bits*)&arg0->_x448[0])->b5 = 1;
+        ((u8_bits*) &arg0->_x448[0])->b5 = 1;
 
         if ((u8) data->x0.cpu_level == 4) {
-            ((u8_bits*)&arg0->_x448[0])->b2 = 1;
+            ((u8_bits*) &arg0->_x448[0])->b2 = 1;
         }
 
         if (total_time < 0x6270U) {
-            ((u8_bits*)&arg0->_x448[2])->b6 = 1;
+            ((u8_bits*) &arg0->_x448[2])->b6 = 1;
         } else if (total_time < 0x9AB0U) {
-            ((u8_bits*)&arg0->_x448[2])->b7 = 1;
+            ((u8_bits*) &arg0->_x448[2])->b7 = 1;
         }
 
-        if ((u32) data->x0.xC.x1C == 0U && arg0->player_standings[0].x44 == 0) {
-            ((u8_bits*)&arg0->_x448[1])->b1 = 1;
+        if ((u32) data->x0.xC.x1C == 0U && arg0->player_standings[0].x44 == 0)
+        {
+            ((u8_bits*) &arg0->_x448[1])->b1 = 1;
         }
 
         if ((u8) data->x0.xC.xE != 0) {
-            ((u8_bits*)&arg0->_x448[2])->b5 = 1;
+            ((u8_bits*) &arg0->_x448[2])->b5 = 1;
         }
 
         if ((u8) data->x0.xC.xF != 0) {
-            ((u8_bits*)&arg0->_x448[2])->b4 = 1;
+            ((u8_bits*) &arg0->_x448[2])->b4 = 1;
         }
 
-        if ((u32)(data->x0.xC.x1C + arg0->player_standings[0].x44) == (u32) Player_GetDamage(0)) {
-            ((u8_bits*)&arg0->_x448[0])->b1 = 1;
+        if ((u32) (data->x0.xC.x1C + arg0->player_standings[0].x44) ==
+            (u32) Player_GetDamage(0))
+        {
+            ((u8_bits*) &arg0->_x448[0])->b1 = 1;
         }
 
         if ((u8) data->x0.xC.xD != 0) {
-            ((u8_bits*)&arg0->_x448[1])->b0 = 1;
+            ((u8_bits*) &arg0->_x448[1])->b0 = 1;
             return;
         }
 
         if (arg0->player_standings[0].stocks == main_data->stocks) {
-            ((u8_bits*)&arg0->_x448[1])->b2 = 1;
+            ((u8_bits*) &arg0->_x448[1])->b2 = 1;
         }
     }
 }

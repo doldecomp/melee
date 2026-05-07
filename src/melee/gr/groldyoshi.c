@@ -346,11 +346,17 @@ static inline s32 randi_between(s32 min, s32 max)
     //}
 }
 
-/// #grOldYoshi_8020EFCC
+// For some reason, the normal GET_GROUND didn't work here
+inline Ground* grOldYoshi_8020EFCC_inline(Ground_GObj* arg0);
+inline Ground* grOldYoshi_8020EFCC_inline(Ground_GObj* arg0)
+{
+    return arg0->user_data;
+}
+
 void grOldYoshi_8020EFCC(Ground_GObj* arg)
 {
     HSD_JObj* jobj = arg->hsd_obj;
-    Ground* gp = arg->user_data;
+    Ground* gp = grOldYoshi_8020EFCC_inline(arg);
     HSD_JObjSetFlagsAll(jobj, 0x10);
     gp->gv.oldyoshiguest.xC4 =
         rand_range(grOy_804D6A88->x16, grOy_804D6A88->x14);

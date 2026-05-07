@@ -4162,6 +4162,7 @@ void Camera_8002FEEC(s32 arg0)
 {
     HSD_CObj* cobj;
     CmSubject* box;
+    float new_var;
     Vec3 target;
     Vec3 eye;
     f32 fov;
@@ -4197,13 +4198,11 @@ void Camera_8002FEEC(s32 arg0)
             temp_f1_3 = cm_80453004.follow_eye_offset.x;
             temp_f1 = temp_f1_3 * temp_f1_3;
 
-            temp_f1_4 =
-                temp_f31 /
-                sqrtf__Ff((cm_80453004.follow_eye_offset.z *
-                           cm_80453004.follow_eye_offset.z) +
-                          (temp_f1 + (cm_80453004.follow_eye_offset.y *
-                                      cm_80453004.follow_eye_offset.y)));
-
+            new_var = (cm_80453004.follow_eye_offset.z *
+                       cm_80453004.follow_eye_offset.z) +
+                      (temp_f1 + (cm_80453004.follow_eye_offset.y *
+                                  cm_80453004.follow_eye_offset.y));
+            temp_f1_4 = temp_f31 / sqrtf__Ff(new_var);
             cm_80453004.follow_eye_offset.x *= temp_f1_4;
             cm_80453004.follow_eye_offset.y *= temp_f1_4;
             cm_80453004.follow_eye_offset.z *= temp_f1_4;

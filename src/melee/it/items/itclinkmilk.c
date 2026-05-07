@@ -1,15 +1,17 @@
 #include "itclinkmilk.h"
 
-#include <placeholder.h>
-#include <platform.h>
-
 #include "ft/chara/ftCLink/ftCl_Init.h"
 #include "ft/ftlib.h"
 #include "it/inlines.h"
 #include "it/it_26B1.h"
 #include "it/item.h"
 
-#include <baselib/jobj.h>
+ItemStateTable it_803F7A28[] = {
+    { 0, itClinkmilk_UnkMotion1_Anim, itClinkmilk_UnkMotion1_Phys,
+      itClinkmilk_UnkMotion1_Coll },
+    { 1, itClinkmilk_UnkMotion1_Anim, itClinkmilk_UnkMotion1_Phys,
+      itClinkmilk_UnkMotion1_Coll },
+};
 
 HSD_GObj* it_802C8B28(Item_GObj* parent, Vec3* pos, u32 bone, float facing_dir)
 {
@@ -70,10 +72,12 @@ void it_2725_Logic80_PickedUp(Item_GObj* gobj)
 
 static inline void itCLinkMilk_NotifyParent(Item_GObj* gobj)
 {
+    Item* ip2;
     if (gobj) {
         Item* ip = GET_ITEM(gobj);
         if (gobj && ip) {
-            Fighter_GObj* parent = ip->xDD4_itemVar.clinkmilk.x0;
+            // permuterslop
+            Fighter_GObj* parent = (ip2 = ip)->xDD4_itemVar.clinkmilk.x0;
             if (parent != NULL && ip->owner == parent) {
                 ftCl_Init_801492C4(parent);
             }
@@ -100,14 +104,15 @@ bool itClinkmilk_UnkMotion1_Anim(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     HSD_JObj* child = HSD_JObjGetChild(gobj->hsd_obj);
-    HSD_JObj* grandchild = HSD_JObjGetChild(child);
+    HSD_JObj* grandchild = HSD_JObjGetChild(gobj->hsd_obj);
+    u8 _pad[4];
     Vec3 sv;
-    PAD_STACK(16);
+    PAD_STACK(12);
 
     if (ip->xDAC_itcmd_var0 == 1) {
-        HSD_JObjClearFlags(child, JOBJ_HIDDEN);
+        HSD_JObjClearFlags(grandchild, JOBJ_HIDDEN);
     } else {
-        HSD_JObjSetFlags(child, JOBJ_HIDDEN);
+        HSD_JObjSetFlags(grandchild, JOBJ_HIDDEN);
     }
 
     if (ip->xDD4_itemVar.clinkmilk.x0 != NULL) {
@@ -120,7 +125,7 @@ bool itClinkmilk_UnkMotion1_Anim(Item_GObj* gobj)
             ip->xDAC_itcmd_var0 =
                 ftCl_Init_801492F4(ip->xDD4_itemVar.clinkmilk.x0);
             sv.x = sv.y = sv.z = ftLib_800869D4(ip->xDD4_itemVar.clinkmilk.x0);
-            HSD_JObjSetScale(grandchild, &sv);
+            HSD_JObjSetScale(child, &sv);
         }
     } else {
         itCLinkMilk_NotifyParent(gobj);

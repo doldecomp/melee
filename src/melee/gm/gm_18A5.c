@@ -787,10 +787,10 @@ void fn_8018DF68(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
 
     PAD_STACK(8);
 
-    c0 = (GXColor) { 255, 255, 0, 255 };
-    c10 = (GXColor) { 255, 255, 0, 255 };
+    c0 = (GXColor){ 255, 255, 0, 255 };
+    c10 = (GXColor){ 255, 255, 0, 255 };
     thickness = ((BracketEntry*) data)->x1C;
-    c1 = (GXColor) { 255, 255, 0, 255 };
+    c1 = (GXColor){ 255, 255, 0, 255 };
     DrawRectangle((f32) arg1, (f32) arg2, thickness, (f32) arg4, &c1);
 
     right = arg1 + arg3;
@@ -5731,7 +5731,7 @@ void fn_80197FD8(HSD_GObj* gobj)
 
 extern f32 lbl_804DA824; // 0.01f
 
-/// @todo Currently 55.88% match - needs significant rework
+/// @todo Down to linking
 /// Updates player cursor animation and position.
 void fn_801981A0(HSD_GObj* gobj)
 {
@@ -5768,15 +5768,15 @@ void fn_801981A0(HSD_GObj* gobj)
         return;
     }
 
-    state_ptr = &lbl_804799D8.x44[pnum];
-    if (*state_ptr == 6) {
+    if (*(&lbl_804799D8.x44[pnum]) == 6) {
         HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
     }
 
     if ((s32) data->x30 == 4) {
         x_pos = (lbl_804DA7E4 * (f32) pnum) + (lbl_804DA7E0);
     } else if ((s32) data->x30 == 3) {
-        x_pos = lbl_804DA7E8 + ((lbl_804DA7E4 * (f32) pnum) - lbl_804DA7EC);
+        x_pos = lbl_804DA7E4;
+        x_pos = lbl_804DA7E8 + ((x_pos * (f32) pnum) - lbl_804DA7EC);
     } else {
         x_pos = lbl_804DA7E8 +
                 ((lbl_804DA7E4 * (lbl_804DA7F0 * (f32) pnum)) - lbl_804DA7EC);
@@ -5788,7 +5788,7 @@ void fn_801981A0(HSD_GObj* gobj)
     counter = (counter + 1) % 11;
     lbl_804799D8.x21[pnum] = counter;
 
-    if (*state_ptr == 7) {
+    if (*(&lbl_804799D8.x44[pnum]) == 7) {
         fn_8019044C(jobj, (f32) lbl_804799D8.x21[pnum]);
         return;
     }

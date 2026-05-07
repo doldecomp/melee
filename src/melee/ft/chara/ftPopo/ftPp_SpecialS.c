@@ -1741,19 +1741,23 @@ static inline void ftPp_set_cbs(Fighter_GObj* gobj)
 
 void fn_80122B54(Fighter_GObj* gobj)
 {
+    Fighter_GObj* new_var;
     Fighter* fp = gobj->user_data;
+    Fighter* fp2;
+    new_var = gobj;
     PAD_STACK(8);
     ftCommon_8007D7FC(fp);
-    Fighter_ChangeMotionState(gobj, ftPp_MS_SpecialLw, 0x0C4C5282,
-                              fp->cur_anim_frame, 1.0F, 0.0F, NULL);
-    ftPp_set_cbs(gobj);
-    fp = gobj->user_data;
-    if (fp->cmd_vars[3] != 0) {
-        ftPartSetRotX(fp, 0,
-                      fp->facing_dir * atan2f(fp->coll_data.floor.normal.x,
-                                              fp->coll_data.floor.normal.y));
+    fp2 = fp;
+    Fighter_ChangeMotionState(new_var, ftPp_MS_SpecialLw, 0x0C4C5282,
+                              fp2->cur_anim_frame, 1.0F, 0.0F, 0L);
+    ftPp_set_cbs(new_var);
+    fp2 = gobj->user_data;
+    if (fp2->cmd_vars[3] != 0) {
+        ftPartSetRotX(fp2, 0,
+                      fp2->facing_dir * atan2f(fp2->coll_data.floor.normal.x,
+                                               fp2->coll_data.floor.normal.y));
     } else {
-        ftPartSetRotX(fp, 0, 0.0F);
+        ftPartSetRotX(fp2, 0, 0.0F);
     }
     fp->accessory4_cb = fn_80122D2C;
 }
