@@ -41,16 +41,15 @@ void ftCo_8009CB40(Fighter* fp, ssize_t bone_idx, bool arg2, FigaTree* arg3)
         var_r30 = fp->parts[bone_id].joint;
         var_r29 = 0;
         if (arg2 == 1) {
-            fp->dynamic_bone_sets[bone_idx].bone_id = (enum_t)(ssize_t)arg3;
+            fp->dynamic_bone_sets[bone_idx].bone_id = (enum_t) (ssize_t) arg3;
         } else {
             fp->dynamic_bone_sets[bone_idx].bone_id = 0x100;
         }
         var_r28 = fp->dynamic_bone_sets[bone_idx].dyn_desc.data;
         temp_r21 = 1 - var_r22;
         while (var_r28 != NULL) {
-            if (var_r29 < (s32)arg3) {
-                if (temp_r21 != 0 &&
-                    !(fp->parts[bone_id + var_r29].flags_b7))
+            if (var_r29 < (s32) arg3) {
+                if (temp_r21 != 0 && !(fp->parts[bone_id + var_r29].flags_b7))
                 {
                     var_r28->desc.lb_unk0.unk_2C.x =
                         var_r28->desc.lb_unk0.jobj->mtx[0][3];
@@ -61,16 +60,13 @@ void ftCo_8009CB40(Fighter* fp, ssize_t bone_idx, bool arg2, FigaTree* arg3)
                     var_r28->desc.lb_unk0.unk_44 = 0.0f;
                     temp_jobj = var_r28->desc.lb_unk0.jobj;
                     HSD_JObjSetTranslate(temp_jobj,
-                                        &var_r28->desc.lb_unk0.translate);
+                                         &var_r28->desc.lb_unk0.translate);
                     temp_jobj = var_r28->desc.lb_unk0.jobj;
-                    HSD_JObjSetScale(temp_jobj,
-                                     &var_r28->desc.lb_unk0.scale);
+                    HSD_JObjSetScale(temp_jobj, &var_r28->desc.lb_unk0.scale);
                 }
                 fp->parts[bone_id + var_r29].flags_b7 = temp_r21;
             } else {
-                if (var_r22 != 0 &&
-                    !(fp->parts[bone_id + var_r29].flags_b7))
-                {
+                if (var_r22 != 0 && !(fp->parts[bone_id + var_r29].flags_b7)) {
                     var_r28->desc.lb_unk0.unk_2C.x =
                         var_r28->desc.lb_unk0.jobj->mtx[0][3];
                     var_r28->desc.lb_unk0.unk_2C.y =
@@ -80,10 +76,9 @@ void ftCo_8009CB40(Fighter* fp, ssize_t bone_idx, bool arg2, FigaTree* arg3)
                     var_r28->desc.lb_unk0.unk_44 = 0.0f;
                     temp_jobj = var_r28->desc.lb_unk0.jobj;
                     HSD_JObjSetTranslate(temp_jobj,
-                                        &var_r28->desc.lb_unk0.translate);
+                                         &var_r28->desc.lb_unk0.translate);
                     temp_jobj = var_r28->desc.lb_unk0.jobj;
-                    HSD_JObjSetScale(temp_jobj,
-                                     &var_r28->desc.lb_unk0.scale);
+                    HSD_JObjSetScale(temp_jobj, &var_r28->desc.lb_unk0.scale);
                 }
                 fp->parts[bone_id + var_r29].flags_b7 = var_r22;
             }
@@ -535,10 +530,9 @@ void ftCo_8009DB50(Fighter* fp)
             s32 bone_id =
                 hat->hat_dynamics[4]->ftDynamicBones->array[i].bone_id;
             fp->parts[bone_id].flags_b0 = true;
-            lb_8000FD48(fp->parts[bone_id].joint,
-                        &fp->dynamic_bone_sets[i].dyn_desc,
-                        hat->hat_dynamics[4]->ftDynamicBones->array[i]
-                            .dyn_desc.count);
+            lb_8000FD48(
+                fp->parts[bone_id].joint, &fp->dynamic_bone_sets[i].dyn_desc,
+                hat->hat_dynamics[4]->ftDynamicBones->array[i].dyn_desc.count);
             fp->dynamic_bone_sets[i].bone_id = FtPart_TopN;
             lb_80011710(
                 &hat->hat_dynamics[4]->ftDynamicBones->array[i].dyn_desc,

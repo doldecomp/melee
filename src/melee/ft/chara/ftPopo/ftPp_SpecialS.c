@@ -923,7 +923,8 @@ static inline bool checkNanaInRange(Fighter_GObj* gobj)
         Vec3* nana_pos = &((Fighter*) nana_gobj->user_data)->cur_pos;
         f32 dx = SQ(fp->cur_pos.x - nana_pos->x);
         f32 dy = SQ(fp->cur_pos.y - nana_pos->y);
-        if (sqrtf__Ff(dx + dy) < da->x7C && ftNn_Init_8012300C(nana_gobj) == 1) {
+        if (sqrtf__Ff(dx + dy) < da->x7C && ftNn_Init_8012300C(nana_gobj) == 1)
+        {
             return true;
         }
     }
