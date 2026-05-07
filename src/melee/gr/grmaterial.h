@@ -22,7 +22,6 @@ grMaterial_801C8D44(int arg0, int arg1, Ground* arg2, Vec3* arg3, int arg4,
 /* 1C8EF8 */ static void fn_801C8EF8(HSD_MObj* mobj, u32 rendermode);
 /* 1C9490 */ void grMaterial_801C9490(Item_GObj* gobj, CommandInfo* cmd);
 
-
 /* 1C87D0 */ void grMaterial_801C87D0(HSD_JObj*, u32 flags);
 /* 1C8858 */ void grMaterial_801C8858(HSD_JObj*, u32 flags);
 /* 1C8A04 */ void grMaterial_801C8A04(HSD_JObj*, u32 flags);

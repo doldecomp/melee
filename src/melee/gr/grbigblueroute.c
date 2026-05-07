@@ -32,17 +32,14 @@
 void grBigBlue_801E8D04(Ground_GObj*);
 
 StageCallbacks grBb_Route_803E5E78[38] = {
-    { grBigBlueRoute_8020BABC, grBigBlueRoute_8020BB00, grBigBlueRoute_8020BB08,
-      grBigBlueRoute_8020BB0C, 0 },
-    { grBigBlueRoute_8020BB68, grBigBlueRoute_8020BC24, grBigBlueRoute_8020BC2C,
-      grBigBlueRoute_8020BC30, 0 },
+    { grBigBlueRoute_8020BABC, grBigBlueRoute_8020BB00,
+      grBigBlueRoute_8020BB08, grBigBlueRoute_8020BB0C, 0 },
+    { grBigBlueRoute_8020BB68, grBigBlueRoute_8020BC24,
+      grBigBlueRoute_8020BC2C, grBigBlueRoute_8020BC30, 0 },
     { NULL, NULL, NULL, NULL, 0 },
     { NULL, NULL, NULL, NULL, 0 },
-    { grBigBlueRoute_8020C140, grBigBlueRoute_8020C1D4, grBigBlueRoute_8020C1DC,
-      grBigBlueRoute_8020C210, 0x80000000 },
-    { NULL, NULL, NULL, NULL, 0 },
-    { NULL, NULL, NULL, NULL, 0 },
-    { NULL, NULL, NULL, NULL, 0 },
+    { grBigBlueRoute_8020C140, grBigBlueRoute_8020C1D4,
+      grBigBlueRoute_8020C1DC, grBigBlueRoute_8020C210, 0x80000000 },
     { NULL, NULL, NULL, NULL, 0 },
     { NULL, NULL, NULL, NULL, 0 },
     { NULL, NULL, NULL, NULL, 0 },
@@ -66,10 +63,13 @@ StageCallbacks grBb_Route_803E5E78[38] = {
     { NULL, NULL, NULL, NULL, 0 },
     { NULL, NULL, NULL, NULL, 0 },
     { NULL, NULL, NULL, NULL, 0 },
-    { grBigBlueRoute_8020BC68, grBigBlueRoute_8020BF30, grBigBlueRoute_8020BF38,
-      grBigBlueRoute_8020C13C, 0x40000000 },
-    { grBigBlueRoute_8020BB10, grBigBlueRoute_8020BB58, grBigBlueRoute_8020BB60,
-      grBigBlueRoute_8020BB64, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { grBigBlueRoute_8020BC68, grBigBlueRoute_8020BF30,
+      grBigBlueRoute_8020BF38, grBigBlueRoute_8020C13C, 0x40000000 },
+    { grBigBlueRoute_8020BB10, grBigBlueRoute_8020BB58,
+      grBigBlueRoute_8020BB60, grBigBlueRoute_8020BB64, 0 },
     { NULL, NULL, NULL, NULL, 0 },
     { NULL, NULL, NULL, NULL, 0 },
     { NULL, NULL, NULL, NULL, 0 },
@@ -513,7 +513,7 @@ s32 grBigBlueRoute_8020C530(Ground_GObj* arg0)
 
     count = 0;
     for (i = 0; i < 30; i++) {
-        if (!(*((u8*)gp->gv.bigblueroute.xC8 + i * 0x2C) >> 7 & 1)) {
+        if (!(*((u8*) gp->gv.bigblueroute.xC8 + i * 0x2C) >> 7 & 1)) {
             count++;
         }
     }
@@ -529,7 +529,7 @@ s32 grBigBlueRoute_8020C530(Ground_GObj* arg0)
     }
 
     for (idx = 0; idx < 30; idx++) {
-        if (!(*((u8*)gp->gv.bigblueroute.xC8 + idx * 0x2C) >> 7 & 1)) {
+        if (!(*((u8*) gp->gv.bigblueroute.xC8 + idx * 0x2C) >> 7 & 1)) {
             if (--count < 0) {
                 return idx;
             }

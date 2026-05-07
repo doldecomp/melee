@@ -148,7 +148,7 @@ void gm_801A7B00(void)
     lb_8000C290((HSD_JObj*) gobj->hsd_obj, target);
 }
 
-inline s32 fn_801A7FB4_inline()
+inline s32 fn_801A7FB4_inline(void)
 {
     s32 i;
     s32 count;
@@ -161,7 +161,7 @@ inline s32 fn_801A7FB4_inline()
     return count;
 }
 
-inline s32 fn_801A7FB4_inline2()
+inline s32 fn_801A7FB4_inline2(void)
 {
     s32 count;
     s32 i;

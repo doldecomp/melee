@@ -28,7 +28,6 @@
 #include "it/items/itlinkhookshot.h"
 #include "it/items/itsamusgrapple.h"
 #include "it/items/itsscope.h"
-#include "mp/mplib.h"
 
 #include <math.h>
 #include <baselib/gobj.h>
@@ -2386,7 +2385,7 @@ static inline void fn_800DBED4_inline(Fighter_GObj* gobj)
     HSD_JObjSetTranslate(GET_JOBJ(gobj), &temp_r31->cur_pos);
 }
 
-void fn_800DBED4(gobj) Fighter_GObj* gobj;
+void fn_800DBED4(Fighter_GObj* gobj)
 {
     PAD_STACK(4);
     fn_800DBED4_inline(gobj);

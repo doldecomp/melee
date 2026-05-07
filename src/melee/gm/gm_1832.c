@@ -1994,7 +1994,7 @@ void fn_80188550(int arg0)
     }
 }
 
-void fn_80188644()
+void fn_80188644(void)
 {
     int i;
     Vec3 sp10;
@@ -2072,8 +2072,7 @@ void fn_80188738(HSD_JObj* arg0)
     }
 }
 
-int fn_8018846C_noInline(void);
-int fn_8018846C_noInline()
+static int fn_8018846C_noInline(void)
 {
     return fn_8018846C();
 }

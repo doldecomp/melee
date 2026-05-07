@@ -1383,7 +1383,7 @@ int fn_80171BA4(void* arg0)
     return result;
 }
 
-void fn_80171DC4()
+void fn_80171DC4(void)
 {
     int i;
     struct lbl_8046B6A0_24C_t* rules = gm_8016B774();

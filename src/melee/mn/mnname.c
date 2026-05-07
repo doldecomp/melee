@@ -113,7 +113,7 @@ int GetNameCount(void)
     return count;
 }
 
-inline int GetNumNameList()
+inline int GetNumNameList(void)
 {
     int i;
     int count = 0;

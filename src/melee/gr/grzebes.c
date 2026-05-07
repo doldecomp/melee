@@ -167,57 +167,30 @@ typedef struct grZe_AcidState {
 
 extern const grZe_BubbleConfig grZe_803B8044;
 
-void grZebes_801D84A0(bool arg) {}
-
-void grZebes_801D84A4(void)
-{
-    grZe_804D6990 = Ground_801C49F8();
-    stage_info.unk8C.b4 = 0;
-    stage_info.unk8C.b5 = 1;
-    grZebes_801D8558(0);
-    grZebes_801D8558(1);
-    grZebes_801D8558(6);
-    grZebes_801D8558(4);
-    grZebes_801D8558(8);
-    Ground_801C39C0();
-    Ground_801C3BB4();
-    grZebes_801DA3E8();
-}
-void grZebes_801D8528(void) {}
-
-void grZebes_801D852C(void)
-{
-    grZakoGenerator_801CAE04(NULL);
-}
-
-bool grZebes_801D8550(void)
-{
-    return false;
-}
-
-void grZebes_801D9F30(Ground_GObj*);
-void grZebes_801D9F84(Ground_GObj*);
-void grZebes_801D9100(HSD_GObj*);
-void grZebes_801D925C(HSD_GObj*);
-
 u32 grZe_803E1A10[8] = {
     0x00010006, 0x00150004, 0x0006000E, 0x00030006,
     0x00010002, 0x00070006, 0x00050007, 0x00010000,
 };
 
 StageCallbacks grZe_callbacks[] = {
-    { NULL, NULL, NULL, NULL, { 0 } },
-    { (void (*)(Ground_GObj*)) grZebes_801D9F30, (bool (*)(Ground_GObj*)) grZebes_801D9F7C, (void (*)(Ground_GObj*)) grZebes_801D9F84, grZebes_801DA0C0, { 0 } },
-    { NULL, NULL, NULL, NULL, { 0 } },
-    { NULL, NULL, NULL, NULL, { 0 } },
-    { grZebes_801D9508, (bool (*)(Ground_GObj*)) grZebes_801D95B0, (void (*)(Ground_GObj*)) grZebes_801D95B8, (void (*)(Ground_GObj*)) grZebes_801D9754, { 0 } },
-    { grZebes_801D93DC, (bool (*)(Ground_GObj*)) grZebes_801D9408, (void (*)(Ground_GObj*)) grZebes_801D9410, (void (*)(Ground_GObj*)) grZebes_801D94EC, { 0 } },
-    { (void (*)(Ground_GObj*)) grZebes_801D8644, (bool (*)(Ground_GObj*)) grZebes_801D8814, (void (*)(Ground_GObj*)) grZebes_801D881C, (void (*)(Ground_GObj*)) grZebes_801D90FC, { 0xC0000000 } },
-    { (void (*)(Ground_GObj*)) grZebes_801D9100, (bool (*)(Ground_GObj*)) grZebes_801D9254, (void (*)(Ground_GObj*)) grZebes_801D925C, (void (*)(Ground_GObj*)) grZebes_801D93D8, { 0 } },
-    { (void (*)(Ground_GObj*)) grZebes_801D9798, (bool (*)(Ground_GObj*)) grZebes_801D99D8, (void (*)(Ground_GObj*)) grZebes_801D99E0, (void (*)(Ground_GObj*)) grZebes_801D9F2C, { 0 } },
-    { NULL, NULL, NULL, NULL, { 0 } },
-    { NULL, NULL, NULL, NULL, { 0 } },
-    { NULL, NULL, NULL, NULL, { 0 } },
+    { NULL, NULL, NULL, NULL, 0 },
+    { grZebes_801D9F30, grZebes_801D9F7C, grZebes_801D9F84, grZebes_801DA0C0,
+      0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { grZebes_801D9508, grZebes_801D95B0, grZebes_801D95B8, grZebes_801D9754,
+      0 },
+    { grZebes_801D93DC, grZebes_801D9408, grZebes_801D9410, grZebes_801D94EC,
+      0 },
+    { grZebes_801D8644, grZebes_801D8814, grZebes_801D881C, grZebes_801D90FC,
+      0xC0000000 },
+    { grZebes_801D9100, grZebes_801D9254, grZebes_801D925C, grZebes_801D93D8,
+      0 },
+    { grZebes_801D9798, grZebes_801D99D8, grZebes_801D99E0, grZebes_801D9F2C,
+      0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
 };
 
 char grZe_803E1B20[] = "/GrZe.dat";
@@ -253,6 +226,34 @@ grZe_803E1B2C_t grZe_803E1B2C = {
     grZe_803E1A10,
     5,
 };
+
+void grZebes_801D84A0(bool arg) {}
+
+void grZebes_801D84A4(void)
+{
+    grZe_804D6990 = Ground_801C49F8();
+    stage_info.unk8C.b4 = 0;
+    stage_info.unk8C.b5 = 1;
+    grZebes_801D8558(0);
+    grZebes_801D8558(1);
+    grZebes_801D8558(6);
+    grZebes_801D8558(4);
+    grZebes_801D8558(8);
+    Ground_801C39C0();
+    Ground_801C3BB4();
+    grZebes_801DA3E8();
+}
+void grZebes_801D8528(void) {}
+
+void grZebes_801D852C(void)
+{
+    grZakoGenerator_801CAE04(NULL);
+}
+
+bool grZebes_801D8550(void)
+{
+    return false;
+}
 
 Ground_GObj* grZebes_801D8558(int id)
 {
