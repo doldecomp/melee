@@ -2072,7 +2072,7 @@ void fn_80188738(HSD_JObj* arg0)
     }
 }
 
-int fn_8018846C_noInline(void)
+static int fn_8018846C_noInline(void)
 {
     return fn_8018846C();
 }
