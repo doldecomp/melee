@@ -805,29 +805,28 @@ HSD_GObj* grHomeRun_8021E500(s16 arg0)
     return gobj;
 }
 
-HSD_GObj* fn_8021E994(Ground* arg0, s32 arg1, CollData* arg2, s32 arg3,
-                      mpLib_GroundEnum arg4, f32 arg5)
+void fn_8021E994(Ground* arg0, s32 arg1, CollData* arg2, s32 arg3,
+                 mpLib_GroundEnum arg4, f32 arg5)
 {
     HSD_GObj* gobj;
     Ground* gp;
-    grHomeRun_MainGroundVars* vars;
-    s32 collKind = (*(u8*) &arg2->x34_flags >> 3U) & 0xF;
-
+    s32 collKind = arg2->x34_flags.b1234;
+    Ground* new_var;
     gobj = Ground_801C2BA4(0xA);
     if (gobj != NULL) {
-        gp = GET_GROUND(gobj);
+        gp = (new_var = GET_GROUND(gobj));
         if (gp == NULL) {
-            return gobj;
+            arg2->x34_flags = arg2->x34_flags;
+            return;
         }
         if (collKind == 1) {
             gobj = gm_80180AF4();
             if (arg2->x0_gobj == gobj && arg4 == 1) {
-                vars = (grHomeRun_MainGroundVars*) &gp->gv.homerun;
-                vars->xE8_flags.b0 = 1;
+                ((grHomeRun_MainGroundVars*) &gp->gv.homerun)->xE8_flags.b0 =
+                    1;
             }
         }
     }
-    return gobj;
 }
 
 void grHomeRun_8021EA30(f32* pos)

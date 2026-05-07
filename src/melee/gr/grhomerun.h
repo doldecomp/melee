@@ -64,8 +64,8 @@
 /* 21E4F8 */ void grHomeRun_8021E4F8(Ground_GObj*);
 /* 21E4FC */ void grHomeRun_8021E4FC(Ground_GObj*);
 /* 21E500 */ HSD_GObj* grHomeRun_8021E500(s16);
-/* 21E994 */ HSD_GObj* fn_8021E994(Ground*, s32, CollData*, s32,
-                                   mpLib_GroundEnum, f32);
+/* 21E994 */ void fn_8021E994(Ground*, s32, CollData*, s32, mpLib_GroundEnum,
+                              f32);
 /* 21EA30 */ void grHomeRun_8021EA30(f32*);
 /* 21EAF8 */ UNK_RET grHomeRun_8021EAF8(UNK_PARAMS);
 /* 21EB10 */ void fn_8021EB10(HSD_GObj*);
