@@ -34,7 +34,7 @@
 #define Gr_Greens_Block_Max 30
 
 static u8 grGr_804D6AAC;
-static s8 grGr_804D6AAD;
+static u8 grGr_804D6AAD;
 static struct {
     int x0_blockTimerMin;
     int x4_blockTimerMax;
@@ -151,23 +151,17 @@ static inline int randrange(int min, int max);
 static inline int randrange(int min, int max)
 {
     int diff;
-    int rng = min;
-    if (max > min) {
-        diff = max - min;
-        if (diff != 0) {
-            rng = HSD_Randi(diff);
-        } else {
-            rng = 0;
-        }
-        rng = rng + min;
-    } else if (max < min) {
+    int rng;
+    if (min > max) {
         diff = min - max;
-        if (diff != 0) {
-            rng = HSD_Randi(diff);
-        } else {
-            rng = 0;
-        }
-        rng = rng + max;
+        rng = (diff != 0) ? HSD_Randi(diff) : 0;
+        rng = max + rng;
+    } else if (min < max) {
+        diff = max - min;
+        rng = (diff != 0) ? HSD_Randi(diff) : 0;
+        rng = min + rng;
+    } else {
+        rng = min;
     }
     return rng;
 }
@@ -332,13 +326,13 @@ void grGreens_802139C0(Ground_GObj* arg) {}
 
 void grGreens_802139C4(Ground_GObj* gobj)
 {
-    Ground* gp = GET_GROUND(gobj);
+    Ground* gp = gobj->user_data;
     ftCo_800C06E8(gobj, 9, fn_80213B1C);
     gp->gv.greens.x0_flags.whole_thing = 0;
     gp->gv.greens.x4 = NULL;
     gp->gv.greens.x8_blocks = NULL;
-    gp->gv.greens.xC = randrange(grGr_params->x34_windTimerMin,
-                                 grGr_params->x38_windTimerMax);
+    gp->gv.greens.xC = randrange(grGr_params->x38_windTimerMax,
+                                 grGr_params->x34_windTimerMin);
     gp->gv.greens.x10 = 1;
     gp->gv.greens.x1C = 0;
     gp->gv.greens.x14 = HSD_Randi(2);
@@ -413,7 +407,10 @@ void grGreens_80213C10(Ground_GObj* gobj)
 
     gp->gv.greens2.x18 = 0;
 
-    if (grGr_804D6AAC != 0 || grGr_804D6AAD != 0) {
+    if (grGr_804D6AAC != 0) {
+        return;
+    }
+    if (grGr_804D6AAD != 0) {
         return;
     }
 
@@ -675,20 +672,22 @@ void fn_80214658(Ground_GObj* gobj)
 
 void grGreens_80214674(Ground_GObj* gobj)
 {
+    Ground_GObj* new_var;
     Ground* gp = GET_GROUND(gobj);
+    new_var = gobj;
     Ground_801C2ED0(gobj->hsd_obj, gp->map_id);
     gp->gv.greens.x4 = HSD_MemAlloc(5 * 6 * sizeof(*gp->gv.greens.x4));
     memzero(gp->gv.greens.x4, 5 * 6 * sizeof(*gp->gv.greens.x4));
     gp->gv.greens.x8_blocks =
         HSD_MemAlloc(5 * 6 * sizeof(*gp->gv.greens.x8_blocks));
     memzero(gp->gv.greens.x8_blocks, 5 * 6 * sizeof(*gp->gv.greens.x8_blocks));
-    grGreens_8021483C(gobj);
+    grGreens_8021483C(new_var);
     if (grGr_804D6AAC == 0) {
-        grGreens_80214B58(gobj);
+        grGreens_80214B58(new_var);
     }
     grGr_804D6AAC = 0;
-    grGreens_80214FA8(gobj);
-    Ground_801C10B8(gobj, fn_80214658);
+    grGreens_80214FA8(new_var);
+    Ground_801C10B8(new_var, fn_80214658);
     gp->gv.greens.xC = randrange(grGr_params->x0_blockTimerMin, grGr_params->x4_blockTimerMax);
     gp->gv.greens.x0_flags.b0 = 1;
     grGr_804D6AAD = 1;
