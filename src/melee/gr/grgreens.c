@@ -456,7 +456,6 @@ void grGreens_80213C10(Ground_GObj* gobj)
             gp->gv.greens2.x10 = 0;
             gp->gv.greens2.x8 = 0;
             jobj = gobj->hsd_obj;
-            HSD_ASSERT(979, jobj);
             HSD_JObjGetTranslation(jobj, &pos);
             gp->gv.greens2.x14 = ftLib_800864A8(&pos, NULL) == 1.0f;
             gp->gv.greens2.xC = 0;
@@ -551,22 +550,11 @@ void grGreens_80213C10(Ground_GObj* gobj)
 
                 gp->gv.greens2.xC++;
                 if ((float) gp->gv.greens2.xC > grGr_params->x54) {
-                    gp->gv.greens2.x8++;
-                    gp->gv.greens2.xC = 0;
-                    grAnime_801C8138(
-                        gobj, gp->map_id,
-                        grGr_803E777C[gp->gv.greens2.x8 * 2 +
-                                      gp->gv.greens2.x14]);
-                    grAnime_801C8138(
-                        bg_gobj, bg_gp->map_id,
-                        grGr_803E77D4[gp->gv.greens2.x8 * 2 +
-                                      gp->gv.greens2.x14]);
                     return;
                 }
 
                 if ((float) gp->gv.greens2.xC > grGr_params->x58) {
                     jobj = gobj->hsd_obj;
-                    HSD_ASSERT(979, jobj);
                     HSD_JObjGetTranslation(jobj, &pos);
                     if (gp->gv.greens2.x14 !=
                         (ftLib_800864A8(&pos, NULL) == 1.0f))
@@ -1067,11 +1055,11 @@ s32 grGreens_80215D54(Ground_GObj* gobj, int arg1, int arg2)
 
     for (row = 1; row < 5; row++) {
         int offset = row * 0xC0;
-        u8* blocks = (u8*) gp->gv.greens.x8_blocks;
-        int status = (blocks[offset + x] >> 4) & 0xF;
+        struct grGreens_BlockVars* blocks = gp->gv.greens.x8_blocks;
+        int status = blocks[offset + x].status;
 
         if ((status == 1 || status == 2) &&
-            (((blocks[(row - 1) * 0xC0 + x] >> 4) & 0xF) == 0))
+            ((blocks[(row - 1) * 0xC0 + x].status == 0)))
         {
             int i;
             int count = 5 - row;
@@ -1089,9 +1077,8 @@ s32 grGreens_80215D54(Ground_GObj* gobj, int arg1, int arg2)
                     count -= 1;
                 } while (count != 0);
             }
-            if ((((blocks[(row - 1) * 0xC0 + x] >> 4) & 0xF) == 2)) {
-                blocks[(row - 1) * 0xC0 + x] =
-                    (blocks[(row - 1) * 0xC0 + x] & ~0xF0) | 0x10;
+            if (blocks[(row - 1) * 0xC0 + x].status == 2) {
+                blocks[(row - 1) * 0xC0 + x].status |= 0x10;
             }
             row = 0;
         }
