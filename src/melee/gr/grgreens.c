@@ -140,7 +140,7 @@ static const Vec3 grGr_803E780C[] = {
     { -1.0f, 0.0f, 0.0f },
     { 1.0f, 0.0f, 0.0f },
 };
-static s16 grGr_803E7840[128] = {
+static s16 grGr_803E7840[30] = {
     5,    6,    7,    8,    9,    0xA,  0xB,  0xC,  0xD,  0xE,
     0xF,  0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18,
     0x19, 0x1A, 0x1B, 0x1C, 0x1D, 0x1E, 0x1F, 0x20, 0x21, 0x22,
@@ -825,6 +825,7 @@ void grGreens_80214FA8(Ground_GObj* gobj)
     int j;
     Ground* gp = GET_GROUND(gobj);
     int k;
+
     for (i = 0; i < 30; i++) {
         mpJointSetCb2(grGr_803E7840[i], gp, fn_80216DE4);
     }
@@ -833,7 +834,7 @@ void grGreens_80214FA8(Ground_GObj* gobj)
         if (jobj != NULL) {
             HSD_JObjSetFlags(jobj, JOBJ_HIDDEN);
         } else {
-            HSD_ASSERT(1203, 0);
+            HSD_ASSERT(1203, NULL);
         }
     }
     for (k = 0; k < 5; k++) {
