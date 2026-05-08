@@ -5,7 +5,8 @@
 #include <placeholder.h>
 #include <platform.h>
 
-#include "ft/chara/ftPopo/ftPp_1211.h"
+#include "ft/chara/ftPopo/ftPp_SpecialHi.h"
+#include "ft/chara/ftPopo/ftPp_SpecialLw.h"
 #include "ft/fighter.h"
 #include "ft/ft_0877.h"
 #include "ft/ftcpuattack.h"
