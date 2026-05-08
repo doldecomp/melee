@@ -1,11 +1,11 @@
 #include "vi1101.h"
 
-#include "cm/camera.h"
 #include "vi.h"
 
+#include "cm/camera.h"
+#include "dolphin/gx/GXStruct.h"
 #include "ef/efasync.h"
 #include "ef/eflib.h"
-#include "ft/forward.h"
 #include "ft/ftdemo.h"
 #include "gm/gm_1601.h"
 #include "gm/gm_1A45.h"
@@ -20,14 +20,12 @@
 #include "mp/mpcoll.h"
 #include "pl/player.h"
 #include "sc/types.h"
-#include "vi/types.h"
 
-#include <baselib/aobj.h>
-#include <baselib/cobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjobject.h>
 #include <baselib/gobjproc.h>
-#include <baselib/jobj.h>
+u8 un_804D6FD8[8];
+GXColor un_804D5B08 = { 0, 0, 0, 0xff };
 
 typedef struct Vi1101Data {
     Vec3 spawns[3];

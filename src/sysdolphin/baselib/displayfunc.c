@@ -13,6 +13,7 @@
 
 #include <dolphin/gx.h>
 #include <dolphin/mtx.h>
+#include <MSL/math_ppc.h>
 #include <Runtime/__mem.h>
 
 #define FLT_EPSILON 1.00000001335e-10F
@@ -88,6 +89,12 @@ void HSD_StateInitDirect(int vtxfmt, u32 rendermode)
 Vec3 zOne = { 0, 0, 1 };
 Vec3 yOne = { 0, 1, 0 };
 Vec3 zOne2 = { 0, 0, 1 };
+
+inline f32 HSD_MtxColMagFloat(MtxPtr mtx, int col)
+{
+    return sqrtf((mtx[0][col] * mtx[0][col]) + (mtx[1][col] * mtx[1][col]) +
+                 (mtx[2][col] * mtx[2][col]));
+}
 
 static void mkVBillBoardMtx(HSD_JObj* jobj, MtxPtr src, MtxPtr dst)
 {

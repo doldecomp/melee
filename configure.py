@@ -1318,7 +1318,7 @@ config.libs = [
             Object(NonMatching, "melee/vi/vi0502.c"),
             Object(Matching, "melee/vi/vi0601.c"),
             Object(Matching, "melee/vi/vi0801.c"),
-            Object(NonMatching, "melee/vi/vi1101.c"),
+            Object(Matching, "melee/vi/vi1101.c"),
             Object(NonMatching, "melee/vi/vi1201v1.c"),
             Object(NonMatching, "melee/vi/vi1201v2.c"),
             Object(NonMatching, "melee/vi/vi1202.c"),

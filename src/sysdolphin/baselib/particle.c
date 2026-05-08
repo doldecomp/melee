@@ -23,6 +23,7 @@
 #include <baselib/state.h>
 #include <baselib/video.h>
 #include <MetroTRK/ppc_reg.h>
+#include <MSL/math_ppc.h>
 #include <MSL/trigf.h>
 
 typedef struct {
