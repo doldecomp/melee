@@ -394,6 +394,7 @@ void lb_8001044C(DynamicsDesc* desc, void* colliders_raw, int num_colliders,
                  float pos_y, bool use_floor_fn, Fighter_Part part,
                  int first_active, bool ground_check)
 {
+    u8 _padA[152];
     Mtx parent_mtx, temp_mtx, bone_mtx, constrained_mtx, trans_mtx, scale_mtx;
     Vec3 natural_dir, current_dir, link_dir;
     Vec3 cross_vec, local_axis;

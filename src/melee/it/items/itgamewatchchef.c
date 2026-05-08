@@ -13,8 +13,10 @@
 #include <baselib/jobj.h>
 
 ItemStateTable it_803F79E0[] = {
-    { 0, itGamewatchchef_UnkMotion0_Anim, itGamewatchchef_UnkMotion0_Phys, itGamewatchchef_UnkMotion0_Coll },
-    { 1, itGamewatchchef_UnkMotion1_Anim, itGamewatchchef_UnkMotion1_Phys, itGamewatchchef_UnkMotion1_Coll },
+    { 0, itGamewatchchef_UnkMotion0_Anim, itGamewatchchef_UnkMotion0_Phys,
+      itGamewatchchef_UnkMotion0_Coll },
+    { 1, itGamewatchchef_UnkMotion1_Anim, itGamewatchchef_UnkMotion1_Phys,
+      itGamewatchchef_UnkMotion1_Coll },
 };
 
 HSD_GObj* it_802C837C(Item_GObj* parent, Vec3* pos, enum_t kind, u32 arg3,

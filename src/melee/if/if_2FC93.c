@@ -113,6 +113,7 @@ void fn_802FDA78(HSD_GObj* gobj)
     unsigned char* pslot = gobj->user_data;
     unsigned char slot = *pslot;
     HSD_JObjSetTranslateZ(jobj, 0.0);
+    PAD_STACK(24);
     jobj->child->u.dobj->mobj->mat->diffuse = un_804A1F10.x14[slot];
     jobj->child->u.dobj->next->mobj->mat->diffuse = un_804A1F10.x14[slot];
     jobj->child->u.dobj->next->next->mobj->mat->diffuse =

@@ -434,8 +434,7 @@ void grIzumi_801CC358(Ground_GObj* gobj)
     case 0: {
         // 54
         gp->gv.izumi3.xC4 = 1;
-        gp->gv.izumi3.xC6 =
-            rand_range(grIz_804D6968->x3C, grIz_804D6968->x38);
+        gp->gv.izumi3.xC6 = rand_range(grIz_804D6968->x3C, grIz_804D6968->x38);
         r29 = true;
         break;
     }
@@ -519,8 +518,7 @@ void grIzumi_801CC358(Ground_GObj* gobj)
         // 368
         float f;
         gp->gv.izumi3.xC4 = 4;
-        gp->gv.izumi3.xC6 =
-            rand_range(grIz_804D6968->x50, grIz_804D6968->x4C);
+        gp->gv.izumi3.xC6 = rand_range(grIz_804D6968->x50, grIz_804D6968->x4C);
         HSD_JObjSetFlagsAll(jobj, 0x10);
         HSD_JObjRemoveAnimAll(jobj); ///< @todo float load order (41c)
         f = HSD_JObjGetTranslationY(jobj);

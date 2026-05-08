@@ -91,6 +91,7 @@ static inline float inlineA0(Fighter_GObj* gobj)
 void ftCo_Shouldered_Anim(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
+    PAD_STACK(16);
     fp->mv.co.shouldered.x4 = ftCommon_GrabMash(fp, inlineA0(fp->victim_gobj));
     if (fp->grab_timer <= 0) {
         HitCapsule* hit;
