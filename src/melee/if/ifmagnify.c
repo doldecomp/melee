@@ -58,9 +58,8 @@ static GXColor* (*ifMagnify_803F9828[])(void) = {
 };
 
 static s32 ifMagnify_803F984C[0x10] = {
-    0,          0x10001,   0x01020102, 0x02020202,
-    0x303,      0x10304,   0x01020405, 0x02020505,
-    0x03030606, 0x03040607, 0x04050708, 0x05050808,
+    0,          0x10001,    0x01020102, 0x02020202, 0x303,      0x10304,
+    0x01020405, 0x02020505, 0x03030606, 0x03040607, 0x04050708, 0x05050808,
     0x06060606, 0x06070607, 0x07080708, 0x08080808,
 };
 
@@ -72,7 +71,8 @@ s32 ifMagnify_802FB6E8(s32 slot)
     return 0;
 }
 
-ifMagnifyPlayer* ifMagnify_802FB73C(ifMagnifyPlayer* arg0, Vec2* arg1, Vec2* arg2)
+ifMagnifyPlayer* ifMagnify_802FB73C(ifMagnifyPlayer* arg0, Vec2* arg1,
+                                    Vec2* arg2)
 {
     f32 temp_f1;
     f32 temp_f1_2;
@@ -181,14 +181,16 @@ void ifMagnify_802FB8C0(HSD_GObj* arg0, s32 arg1)
             translate.x = 0.09125f * out.x;
             translate.y = 0.1f * out.y;
             translate.z = 0.0f;
-            HSD_JObjSetTranslate((HSD_JObj*) player->gobj->hsd_obj, &translate);
+            HSD_JObjSetTranslate((HSD_JObj*) player->gobj->hsd_obj,
+                                 &translate);
 
             HSD_GObj_JObjCallback(arg0, arg1);
             if ((player->state.unk == 4) || (player->state.unk == 2)) {
                 slot_type = Player_GetPlayerSlotType(slot);
                 teams_enabled = gm_8016B168();
-                color = gm_80160968(gm_80160854((u8) slot, Player_GetTeam(slot),
-                                                teams_enabled, slot_type));
+                color =
+                    gm_80160968(gm_80160854((u8) slot, Player_GetTeam(slot),
+                                            teams_enabled, slot_type));
                 if (player->state.unk == 2) {
                     arrow_kind = 1;
                 } else {
@@ -285,20 +287,18 @@ void ifMagnify_802FBBDC(HSD_GObj* arg0)
             }
             if (((s32) x_class - 1) == 0) {
                 x_blend =
-                    1.0f -
-                    ((world_pos.x - Stage_GetCamBoundsLeftOffset()) /
-                     ((0.5f * (Stage_GetCamBoundsLeftOffset() +
-                               Stage_GetCamBoundsRightOffset())) -
-                      Stage_GetCamBoundsLeftOffset()));
+                    1.0f - ((world_pos.x - Stage_GetCamBoundsLeftOffset()) /
+                            ((0.5f * (Stage_GetCamBoundsLeftOffset() +
+                                      Stage_GetCamBoundsRightOffset())) -
+                             Stage_GetCamBoundsLeftOffset()));
             } else {
                 x_blend =
-                    1.0f -
-                    (-((0.5f * (Stage_GetCamBoundsLeftOffset() +
-                                Stage_GetCamBoundsRightOffset())) -
-                       world_pos.x) /
-                     -((0.5f * (Stage_GetCamBoundsLeftOffset() +
-                                 Stage_GetCamBoundsRightOffset())) -
-                       Stage_GetCamBoundsRightOffset()));
+                    1.0f - (-((0.5f * (Stage_GetCamBoundsLeftOffset() +
+                                       Stage_GetCamBoundsRightOffset())) -
+                              world_pos.x) /
+                            -((0.5f * (Stage_GetCamBoundsLeftOffset() +
+                                       Stage_GetCamBoundsRightOffset())) -
+                              Stage_GetCamBoundsRightOffset()));
             }
         }
         x_inv = 1.0f - x_blend;
@@ -321,20 +321,18 @@ void ifMagnify_802FBBDC(HSD_GObj* arg0)
             }
             if (((s32) y_class - 1) == 0) {
                 y_blend =
-                    1.0f -
-                    ((Stage_GetCamBoundsTopOffset() - world_pos.y) /
-                     -((0.5f * (Stage_GetCamBoundsTopOffset() +
-                                Stage_GetCamBoundsBottomOffset())) -
-                       Stage_GetCamBoundsTopOffset()));
+                    1.0f - ((Stage_GetCamBoundsTopOffset() - world_pos.y) /
+                            -((0.5f * (Stage_GetCamBoundsTopOffset() +
+                                       Stage_GetCamBoundsBottomOffset())) -
+                              Stage_GetCamBoundsTopOffset()));
             } else {
                 y_blend =
-                    1.0f -
-                    (((0.5f * (Stage_GetCamBoundsTopOffset() +
-                               Stage_GetCamBoundsBottomOffset())) -
-                      world_pos.y) /
-                     ((0.5f * (Stage_GetCamBoundsTopOffset() +
-                               Stage_GetCamBoundsBottomOffset())) -
-                      Stage_GetCamBoundsBottomOffset()));
+                    1.0f - (((0.5f * (Stage_GetCamBoundsTopOffset() +
+                                      Stage_GetCamBoundsBottomOffset())) -
+                             world_pos.y) /
+                            ((0.5f * (Stage_GetCamBoundsTopOffset() +
+                                      Stage_GetCamBoundsBottomOffset())) -
+                             Stage_GetCamBoundsBottomOffset()));
             }
         }
         y_inv = 1.0f - y_blend;
@@ -342,9 +340,8 @@ void ifMagnify_802FBBDC(HSD_GObj* arg0)
             y_class = 0.0f;
         } else if (world_pos.y < Stage_GetCamBoundsBottomOffset()) {
             y_class = 3.0f;
-        } else if (world_pos.y >
-                   (0.5f * (Stage_GetCamBoundsTopOffset() +
-                            Stage_GetCamBoundsBottomOffset())))
+        } else if (world_pos.y > (0.5f * (Stage_GetCamBoundsTopOffset() +
+                                          Stage_GetCamBoundsBottomOffset())))
         {
             y_class = 1.0f;
         } else {
@@ -354,15 +351,15 @@ void ifMagnify_802FBBDC(HSD_GObj* arg0)
             x_class = 0.0f;
         } else if (world_pos.x > Stage_GetCamBoundsRightOffset()) {
             x_class = 3.0f;
-        } else if (world_pos.x <
-                   (0.5f * (Stage_GetCamBoundsLeftOffset() +
-                            Stage_GetCamBoundsRightOffset())))
+        } else if (world_pos.x < (0.5f * (Stage_GetCamBoundsLeftOffset() +
+                                          Stage_GetCamBoundsRightOffset())))
         {
             x_class = 1.0f;
         } else {
             x_class = 2.0f;
         }
-        color_ids = (u8*) &ifMagnify_803F984C[(s32) x_class + ((s32) y_class * 4)];
+        color_ids =
+            (u8*) &ifMagnify_803F984C[(s32) x_class + ((s32) y_class * 4)];
         for (j = 0; j < 4; j++) {
             colors[j] = *ifMagnify_803F9828[color_ids[j]]();
         }
@@ -435,12 +432,11 @@ void ifMagnify_802FC3C0(s32 slot)
         image_descs = (HSD_ImageDesc*) ifMagnify_804A1DE0.image_descs;
         image_descs[slot - 1] = *ifMagnify_804A1DE0.player[0].idesc;
         player->idesc = &image_descs[slot - 1];
-        player->idesc->image_ptr = HSD_MemAlloc((GXGetTexBufferSize(
-                                                     player->idesc->width,
-                                                     player->idesc->height,
-                                                     player->idesc->format, 0, 0) +
-                                                 0x1F) &
-                                                ~0x1F);
+        player->idesc->image_ptr = HSD_MemAlloc(
+            (GXGetTexBufferSize(player->idesc->width, player->idesc->height,
+                                player->idesc->format, 0, 0) +
+             0x1F) &
+            ~0x1F);
         child->u.dobj->next->mobj->tobj->imagedesc = player->idesc;
     }
 
@@ -448,8 +444,8 @@ void ifMagnify_802FC3C0(s32 slot)
 
     slot_type = Player_GetPlayerSlotType(slot);
     teams_enabled = gm_8016B168();
-    color = gm_80160968(
-        gm_80160854((u8) slot, Player_GetTeam(slot), teams_enabled, slot_type));
+    color = gm_80160968(gm_80160854((u8) slot, Player_GetTeam(slot),
+                                    teams_enabled, slot_type));
 
     dobj = player->jobj->u.dobj;
     mobj = dobj->mobj;
