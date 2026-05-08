@@ -12,19 +12,20 @@
 #include "baselib/gobjuserdata.h"
 #include "baselib/jobj.h"
 #include "baselib/memory.h"
-#include "sysdolphin/baselib/debug.h"
 #include "gm/gm_1601.h"
 #include "gm/gm_16F1.h"
 #include "gm/gm_1A3F.h"
 #include "gm/gmmain_lib.h"
-#include "lb/lbarchive.h"
 #include "lb/lb_00F9.h"
+#include "lb/lbarchive.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbcardgame.h"
 #include "lb/lblanguage.h"
+#include "mn/inlines.h"
 #include "mn/mnmain.h"
 #include "mn/mnmainrule.h"
 #include "sc/types.h"
+#include "sysdolphin/baselib/debug.h"
 #include "ty/toy.h"
 
 inline f32 mnDataDel_8024E940_inline(HSD_JObj* arg0)
@@ -131,37 +132,34 @@ void mnDataDel_8024EA6C(void)
     lb_8001CE00();
 }
 
-void mnDataDel_8024EBC8(HSD_JObj* arg0, u8 unused, u8 arg1, u8 arg2)
+void mnDataDel_8024EBC8(HSD_JObj* root, u8 unused, u8 a, u8 b)
 {
-    HSD_JObj* sp14;
-    HSD_JObj* sp10;
-    f32 var_f1;
-    f32 var_f1_2;
+    HSD_JObj* j2;
+    HSD_JObj* j1;
+    f32 frame;
 
-    lb_80011E24(arg0, &sp10, 4, -1);
-    if (arg1 != 0) {
-        var_f1 = 1.0f;
-    } else {
-        var_f1 = 0.0f;
-    }
-    HSD_JObjReqAnimAll(sp10, var_f1);
-    mn_8022F3D8(sp10, 0xFFU, TOBJ_MASK);
-    HSD_JObjAnimAll(sp10);
-    lb_80011E24(arg0, &sp14, 1, -1);
-    if (arg1 != 0) {
-        if (arg2 != 0) {
-            var_f1_2 = mnDataDel_803EF870.x18.end_frame;
+    lb_80011E24(root, &j1, WARN_JOINT_PANEL_TEXT_BOTTOM, -1);
+    HSD_JObjReqAnimAll(j1, a ? 1.0f : 0.0f);
+    mn_8022F3D8(j1, 0xff, (HSD_TypeMask) 0x400);
+    HSD_JObjAnimAll(j1);
+
+    lb_80011E24(root, &j2, WARN_JOINT_BACKGROUND, -1);
+    if (a) {
+        if (b) {
+            frame = mnDataDel_803EF870.x18.end_frame;
         } else {
-            var_f1_2 = mnDataDel_803EF870.x18.start_frame;
+            frame = mnDataDel_803EF870.x18.start_frame;
         }
-    } else if (arg2 != 0) {
-        var_f1_2 = mnDataDel_803EF870.x24.end_frame;
     } else {
-        var_f1_2 = mnDataDel_803EF870.x24.start_frame;
+        if (b) {
+            frame = mnDataDel_803EF870.x24.end_frame;
+        } else {
+            frame = mnDataDel_803EF870.x24.start_frame;
+        }
     }
-    HSD_JObjReqAnimAll(sp14, var_f1_2);
-    mn_8022F3D8(sp14, 0xFFU, TOBJ_MASK);
-    HSD_JObjAnimAll(sp14);
+    HSD_JObjReqAnimAll(j2, frame);
+    mn_8022F3D8(j2, 0xff, (HSD_TypeMask) 0x400);
+    HSD_JObjAnimAll(j2);
 }
 
 /// @brief animates the warning modal
@@ -290,43 +288,38 @@ void mnDataDel_8024EEC0(void)
 
 void fn_8024F1D4(HSD_GObj* gobj)
 {
-    u32 buttons;
     HSD_GObjProc* proc;
-    struct MnDataDelGObjUserData* user_data;
+    struct WarnCmnData* data;
+    u32 input;
     PAD_STACK(16);
 
-    user_data = mnDataDel_804D6C68->user_data;
-    buttons = mn_80229624(4U);
-    mn_804A04F0.buttons = buttons;
-    if (buttons & 0x10) {
-        if (user_data->x2 != 0) {
+    data = mnDataDel_804D6C68->user_data;
+    input = Menu_GetAllInputs();
+    if (input & 0x10) {
+        if (data->cursor_idx != 0) {
             mnDataDel_8024EA6C();
         } else {
-            lbAudioAx_80024030(0);
+            sfxBack();
         }
         mn_804D6BC8.cooldown = 5;
-        user_data->x1 = 0;
+        data->visible = 0;
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
         proc = HSD_GObj_SetupProc(gobj, fn_8024F840, 0);
         proc->flags_3 = HSD_GObj_804D783C;
-        return;
-    }
-    if (buttons & 0x20) {
-        lbAudioAx_80024030(0);
+    } else if (input & 0x20) {
+        sfxBack();
         mn_804D6BC8.cooldown = 5;
-        user_data->x1 = 0;
+        data->visible = 0;
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
         proc = HSD_GObj_SetupProc(gobj, fn_8024F840, 0);
         proc->flags_3 = HSD_GObj_804D783C;
-        return;
-    }
-    if ((buttons & 8) || (buttons & 4)) {
-        lbAudioAx_80024030(2);
-        if (user_data->x2 != 0) {
-            user_data->x2 = 0;
-            return;
+    } else if ((input & 8) || (input & 4)) {
+        sfxMove();
+        if (data->cursor_idx != 0) {
+            data->cursor_idx = 0;
+        } else {
+            data->cursor_idx = 1;
         }
-        user_data->x2 = 1;
     }
 }
 

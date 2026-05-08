@@ -277,6 +277,7 @@ void grYorster_8020266C(HSD_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
     s32 i;
+    PAD_STACK(8);
 
     for (i = 0; i < 9; i++) {
         struct grYorster_TrackElement* entry = &gp->gv.yorster.elements[i];
@@ -301,9 +302,8 @@ void grYorster_8020266C(HSD_GObj* gobj)
                     end_frame = lbGetJObjEndFrame(entry->x18);
                 }
                 advance = 1;
-                entry->x10 =
-                    (s32) ((f32) frames_left *
-                           (end_frame / grYt_804D6A20.x0->x0C));
+                entry->x10 = (s32) ((f32) frames_left *
+                                    (end_frame / grYt_804D6A20.x0->x0C));
             } else if (entry->x08 >= grYt_804D6A20.x0->x00) {
                 s32 frames_left;
                 f32 end_frame = (f32) grYt_804D6A20.x0->x1C;
@@ -317,8 +317,7 @@ void grYorster_8020266C(HSD_GObj* gobj)
                     frames_left = 0;
                 } else {
                     frames_left =
-                        (s32) (10.0f *
-                               (grYt_804D6A20.x0->x04 - entry->x08));
+                        (s32) (10.0f * (grYt_804D6A20.x0->x04 - entry->x08));
                 }
                 if (end_frame >= lbGetJObjEndFrame(entry->x18)) {
                     end_frame = lbGetJObjEndFrame(entry->x18);

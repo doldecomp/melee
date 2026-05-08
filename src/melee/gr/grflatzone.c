@@ -753,6 +753,7 @@ loop_4:
 void grFlatzone_802181B4(void)
 {
     HSD_GObj* gobj = Ground_801C2BA4(5);
+    PAD_STACK(16);
     if (gobj != NULL) {
         Ground* gp = GET_GROUND(gobj);
         if (gp != NULL) {

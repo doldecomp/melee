@@ -184,7 +184,7 @@ void grFourside_801F2F34(Ground_GObj* gobj)
     } else {
         gp->gv.fourside.x8 = NULL;
     }
-    mpJointSetCb1(0, gp, grFourside_801F30A0);
+    mpJointSetCb1(0, gobj, grFourside_801F30A0);
     gp->x10_flags.b5 = 1;
     gp->x11_flags.b012 = 1;
 }
@@ -277,6 +277,7 @@ void grFourside_801F3274(Ground_GObj* gobj)
     float temp_fVar1;
     // Ground_801C2ED0(jobj,gp->map_id);
     // grAnime_801C7FF8(gobj,0,7,0,0.0f,0.0f);
+    PAD_STACK(24);
     switch (gp->gv.foursideCrane.x0) {
     case 0:
         if (gp->gv.foursideCrane.x4 <= 0) {

@@ -18,8 +18,8 @@
 #include "mp/mplib.h"
 
 #include <trigf.h>
-#include <MSL/math.h>
 #include <baselib/jobj.h>
+#include <MSL/math.h>
 
 typedef struct ArwingLaserAttr {
     /* +0 */ ItemAttr* x0;
@@ -105,7 +105,7 @@ s32 it_802E70BC(Item_GObj* gobj)
                 hit_count++;
             }
         } else if (it_8026EA9C(gobj, &sp28, &sp1C, &sp34, &sp44, &sp40,
-                                ip->xDD4_itemVar.arwinglaser.xE48) != 0 &&
+                               ip->xDD4_itemVar.arwinglaser.xE48) != 0 &&
                    !(mpLineGetFlags(sp44) & 0x100))
         {
             hit_count++;
@@ -117,8 +117,8 @@ s32 it_802E70BC(Item_GObj* gobj)
     return 0;
 }
 
-Item_GObj* it_802E72E0(Item_GObj* parent, HSD_JObj* bone, s32 type,
-                       f32 scale, f32 scale_mult)
+Item_GObj* it_802E72E0(Item_GObj* parent, HSD_JObj* bone, s32 type, f32 scale,
+                       f32 scale_mult)
 {
     SpawnItem spawn;
     Vec3 sp24;
@@ -166,8 +166,7 @@ Item_GObj* it_802E72E0(Item_GObj* parent, HSD_JObj* bone, s32 type,
         HSD_JObj* jobj = GET_JOBJ(new_gobj);
         it_80275158(new_gobj, 300.0f);
         ip->xDD4_itemVar.arwinglaser.xE24 = sp24;
-        ip->xDD4_itemVar.arwinglaser.xE18 =
-            ip->xDD4_itemVar.arwinglaser.xE24;
+        ip->xDD4_itemVar.arwinglaser.xE18 = ip->xDD4_itemVar.arwinglaser.xE24;
         ip->xDD4_itemVar.arwinglaser.xE30 = 0;
         ip->xDD4_itemVar.arwinglaser.xDFC = Ground_801C0498();
         ip->xDD4_itemVar.arwinglaser.xDF4 = parent;
@@ -177,8 +176,7 @@ Item_GObj* it_802E72E0(Item_GObj* parent, HSD_JObj* bone, s32 type,
         ip->xDD4_itemVar.arwinglaser.xE3C = 0;
         ip->xDD4_itemVar.arwinglaser.xE4C = 0;
         HSD_JObjSetRotationY(
-            jobj,
-            (f32) (1.5707963267948966 * (f64) ip->facing_dir));
+            jobj, (f32) (1.5707963267948966 * (f64) ip->facing_dir));
         switch (ip->xDD4_itemVar.arwinglaser.xE38) {
         case 0:
         case 2:
@@ -228,8 +226,8 @@ Item_GObj* it_802E72E0(Item_GObj* parent, HSD_JObj* bone, s32 type,
     return new_gobj;
 }
 
-void it_802E7654(s32 owner, HSD_JObj* bone, Vec3* target, s32 type,
-                 s32 arg4, f32 scale)
+void it_802E7654(s32 owner, HSD_JObj* bone, Vec3* target, s32 type, s32 arg4,
+                 f32 scale)
 {
     SpawnItem spawn;
     Vec3 sp28;
@@ -365,8 +363,7 @@ static void itArwinglaser_UnkMotion2_Phys(Item_GObj* gobj)
     case 0:
     case 2:
         if ((s16) ip->xDD4_itemVar.arwinglaser.xE30 == 1) {
-            ip->x40_vel.x =
-                attrs->x0->x4_throw_speed_mul * ip->facing_dir;
+            ip->x40_vel.x = attrs->x0->x4_throw_speed_mul * ip->facing_dir;
             ip->x40_vel.z = 0.0f;
             ip->x40_vel.y = 0.0f;
         } else {
@@ -403,11 +400,11 @@ static void itArwinglaser_UnkMotion3_Phys(Item_GObj* gobj)
     case 1:
     case 3:
         ip->x40_vel.x = ip->xDD4_itemVar.arwinglaser.xE0C.x *
-                         (attrs->x0->x4_throw_speed_mul * attrs->x4);
+                        (attrs->x0->x4_throw_speed_mul * attrs->x4);
         ip->x40_vel.y = ip->xDD4_itemVar.arwinglaser.xE0C.y *
-                         (attrs->x0->x4_throw_speed_mul * attrs->x4);
+                        (attrs->x0->x4_throw_speed_mul * attrs->x4);
         ip->x40_vel.z = ip->xDD4_itemVar.arwinglaser.xE0C.z *
-                         (attrs->x0->x4_throw_speed_mul * attrs->x4);
+                        (attrs->x0->x4_throw_speed_mul * attrs->x4);
         break;
     }
     {
@@ -511,15 +508,18 @@ static bool itArwinglaser_UnkMotion5_Coll(Item_GObj* gobj)
         if (parent_ip->xDD4_itemVar.arwinglaser.xE40 == gobj ||
             parent_ip->xDD4_itemVar.arwinglaser.xE44 == gobj)
         {
-            HSD_JObjGetTranslation(parent_ip->xBBC_dynamicBoneTable->bones[0], &trans);
+            HSD_JObjGetTranslation(parent_ip->xBBC_dynamicBoneTable->bones[0],
+                                   &trans);
             trans.z = ip->xDD4_itemVar.arwinglaser.xE08;
             HSD_JObjSetTranslate(ip->xBBC_dynamicBoneTable->bones[0], &trans);
             ip->pos = trans;
 
-            HSD_JObjGetScale(parent_ip->xBBC_dynamicBoneTable->bones[0], &scale_vec);
+            HSD_JObjGetScale(parent_ip->xBBC_dynamicBoneTable->bones[0],
+                             &scale_vec);
             HSD_JObjSetScale(ip->xBBC_dynamicBoneTable->bones[0], &scale_vec);
 
-            HSD_JObjGetRotation(parent_ip->xBBC_dynamicBoneTable->bones[0], &rot);
+            HSD_JObjGetRotation(parent_ip->xBBC_dynamicBoneTable->bones[0],
+                                &rot);
             HSD_JObjSetRotation(ip->xBBC_dynamicBoneTable->bones[0], &rot);
 
             return false;
@@ -564,14 +564,13 @@ bool it_802E8420(Item_GObj* gobj)
         lb_8000B1CC(ip->xBBC_dynamicBoneTable->bones[4], NULL, &sp10);
         ip->pos = sp10;
         ip->xDD4_itemVar.arwinglaser.xE24 = ip->pos;
-        ip->xDD4_itemVar.arwinglaser.xE18 =
-            ip->xDD4_itemVar.arwinglaser.xE24;
+        ip->xDD4_itemVar.arwinglaser.xE18 = ip->xDD4_itemVar.arwinglaser.xE24;
         ip->facing_dir = -ip->facing_dir;
         ip->x40_vel.x = -ip->x40_vel.x;
         ip->x40_vel.z = 0.0f;
         ip->x40_vel.y = 0.0f;
-        HSD_JObjSetRotationY(jobj,
-            (f32) (1.5707963267948966 * (f64) ip->facing_dir));
+        HSD_JObjSetRotationY(
+            jobj, (f32) (1.5707963267948966 * (f64) ip->facing_dir));
         break;
     case 1:
     case 3:
@@ -599,8 +598,8 @@ bool it_802E85F4(Item_GObj* gobj)
     case 2:
     case 0:
         ip->facing_dir = (ip->x40_vel.x < 0.0f) ? -1.0f : 1.0f;
-        HSD_JObjSetRotationY(jobj,
-            (f32) (1.5707963267948966 * (f64) ip->facing_dir));
+        HSD_JObjSetRotationY(
+            jobj, (f32) (1.5707963267948966 * (f64) ip->facing_dir));
         break;
     case 1:
     case 3:

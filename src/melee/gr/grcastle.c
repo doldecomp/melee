@@ -553,6 +553,7 @@ void grCastle_801CDC44(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     s32 i = 0;
+    PAD_STACK(8);
 
     do {
         struct grCastle_Platform* plat = &gp->gv.castle8.plat[i];
@@ -1937,7 +1938,7 @@ void grCastle_801D0A9C(Vec3* arg0, f32 arg8)
     }
 }
 
-void grCastle_801D0BBC()
+void grCastle_801D0BBC(void)
 {
     f32 angle;
     angle = atan2f(grCs_804D6974->x4.z, grCs_804D6974->x4.x);
@@ -1968,7 +1969,7 @@ void grCastle_801D0BBC()
     return;
 }
 
-void grCastle_801D0D24()
+void grCastle_801D0D24(void)
 {
     if (grCs_804D45E4 != 0) {
         grCs_804D6974->unk_scale = 0.3 * HSD_Randf() + 0.2;

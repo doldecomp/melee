@@ -1346,10 +1346,18 @@ melee/ft/chara/ftPopo/ftPp_SpecialN.c:
 	.sdata2     start:0x804D9838 end:0x804D9848
 
 melee/ft/chara/ftPopo/ftPp_SpecialS.c:
-	.text       start:0x8011F68C end:0x80122EDC
+	.text       start:0x8011F68C end:0x80120E68
 	.data       start:0x803CD7F8 end:0x803CD838
 	.sdata      start:0x804D3E10 end:0x804D3E20
-	.sdata2     start:0x804D9848 end:0x804D9898
+	.sdata2     start:0x804D9848 end:0x804D9860
+
+melee/ft/chara/ftPopo/ftPp_SpecialHi.c:
+	.text       start:0x80120E68 end:0x80122898
+	.sdata2     start:0x804D9860 end:0x804D9890
+
+melee/ft/chara/ftPopo/ftPp_SpecialLw.c:
+	.text       start:0x80122898 end:0x80122EDC
+	.sdata2     start:0x804D9890 end:0x804D9898
 
 melee/ft/chara/ftNana/ftNn_Init.c:
 	.text       start:0x80122EDC end:0x801243AC
@@ -2493,15 +2501,14 @@ melee/gr/grpushon.c:
 	.rodata     start:0x803B8440 end:0x803B8470
 	.data       start:0x803E7AC8 end:0x803E7D00
 	.sdata      start:0x804D4930 end:0x804D4950
-	.sbss       start:0x804D6AB8 end:0x804D6AC0
+	.sbss       start:0x804D6AB8 end:0x804D6AC8
 	.sdata2     start:0x804DBAF0 end:0x804DBB40
 
 melee/gr/grfigureget.c:
 	.text       start:0x80219530 end:0x80219C98
 	.rodata     start:0x803B8470 end:0x803B8480
 	.data       start:0x803E7D00 end:0x803E7DA0
-	.sbss       start:0x804D6AC0 end:0x804D6AC8
-	.sdata2     start:0x804DBB40 end:0x804DBB68
+	.sdata2     start:0x804DBB40 end:0x804DBB60
 
 melee/gr/grbattle.c:
 	.text       start:0x80219C98 end:0x8021A620
