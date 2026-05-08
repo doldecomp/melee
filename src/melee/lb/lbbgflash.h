@@ -10,7 +10,6 @@
 #include <platform.h>
 
 #include <dolphin/mtx.h>
-
 #include <baselib/gobj.h>
 
 /* 01FC08 */ void fn_8001FC08(void);

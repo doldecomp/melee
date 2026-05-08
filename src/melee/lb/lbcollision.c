@@ -330,6 +330,7 @@ inline bool end(Vec3* a, Vec3* b, float unk_sum)
 int lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3, Vec3* arg4,
                     Vec3* arg5, float arg6, float arg7)
 {
+    PAD_STACK(64);
     {
         Vec3 vec4;
         float sp30;
@@ -665,6 +666,7 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
     float a_z;
     Vec3 a0;
     Vec3 a1;
+    PAD_STACK(16);
 
     a0.x = a->x;
     a0.y = a->y;
@@ -1090,6 +1092,7 @@ bool lbColl_80006E58(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3,
     s32 var_r0_2;
     s32 var_r0_3;
     s32 var_r0_4;
+    PAD_STACK(144);
 
     temp_f3 = (arg10 * arg11) + scl;
     sp11C = arg0->x;
@@ -2293,6 +2296,7 @@ void lbColl_80009DD4(Vec3* v0, Vec3* v1, GXColor* clr)
 
     HSD_StateInvalidate(-1);
     HSD_StateInitTev();
+    PAD_STACK(32);
     lbColl_80008DA4(clr, clr);
     HSD_ClearVtxDesc();
     GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_POS, GX_POS_XYZ, GX_F32, 0);

@@ -198,6 +198,7 @@ void ftMaterial_800BF6BC(Fighter* fp, HSD_MObj* mobj, HSD_TExp* texp)
     ColorOverlay* overlay;
     s32 var_r5;
     char* base = (char*) &ftMObj;
+    PAD_STACK(160);
 
     if (!fp->x2223_b3) {
         overlay = ftCo_800C0658(fp);
@@ -240,15 +241,13 @@ void ftMaterial_800BF6BC(Fighter* fp, HSD_MObj* mobj, HSD_TExp* texp)
                     if (sp168.r != 0) {
                         sp168.a = temp_r7 / sp168.r;
                     } else {
-                        sp168.a =
-                            ((inv_alpha - temp_r8_2) * 0xFF) / 255;
+                        sp168.a = ((inv_alpha - temp_r8_2) * 0xFF) / 255;
                     }
                     {
                         u8 temp_r8_3 = fp_color->g;
                         sp168.g =
                             ((temp_r8_3 +
-                              ((color_hex->a *
-                                (color_hex->g - temp_r8_3)) /
+                              ((color_hex->a * (color_hex->g - temp_r8_3)) /
                                255)) *
                              0xFF) /
                             inv_alpha;
@@ -257,8 +256,7 @@ void ftMaterial_800BF6BC(Fighter* fp, HSD_MObj* mobj, HSD_TExp* texp)
                         u8 temp_r6 = fp_color->b;
                         sp168.b =
                             ((temp_r6 +
-                              ((color_hex->a *
-                                (color_hex->b - temp_r6)) /
+                              ((color_hex->a * (color_hex->b - temp_r6)) /
                                255)) *
                              0xFF) /
                             inv_alpha;
@@ -294,8 +292,7 @@ void ftMaterial_800BF6BC(Fighter* fp, HSD_MObj* mobj, HSD_TExp* texp)
             } else {
                 var_r3 = 0;
             }
-            reg2 = lbGetFreeColorRegister(var_r3, mobj,
-                                          (HSD_TExp*) &sp_cnst1);
+            reg2 = lbGetFreeColorRegister(var_r3, mobj, (HSD_TExp*) &sp_cnst1);
             if (reg2 == -1) {
                 OSReport(base + 0x128);
                 __assert(base + 0x118, 366, (char*) &ftCo_804D3C08);

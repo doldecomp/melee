@@ -53,10 +53,10 @@ struct lbl_8046B488_t;
 /* 160C90 */ void gm_80160C90(HSD_Text* text, u8 fighter_id, bool arg2);
 /* 160DE8 */ void fn_80160DE8(HSD_JObj*, u8, s32, u8, f32, f32);
 /* 160F58 */ float fn_80160F58(u8 ckind);
-/* 161004 */ UNK_RET fn_80161004(UNK_PARAMS);
+/* 161004 */ s32 fn_80161004(MatchEnd*);
 /* 161154 */ UNK_RET fn_80161154(UNK_PARAMS);
-/* 161C90 */ UNK_RET fn_80161C90(UNK_PARAMS);
-/* 162068 */ void fn_80162068(void);
+/* 161C90 */ void fn_80161C90(MatchEnd*, s32, u16*);
+/* 162068 */ void fn_80162068(MatchEnd*);
 /* 162170 */ s32 fn_80162170(MatchEnd*);
 /* 1623A4 */ s32 gm_801623A4(MatchEnd*);
 /* 1623D8 */ int gm_801623D8(void);
@@ -253,7 +253,7 @@ gm_80167BC8(struct VsModeData*); // inits VsModeData from game rules
 /* 16A97C */ void* gm_8016A97C(void);
 /* 16A98C */ struct lbl_8046B668_t* gm_8016A98C(void);
 /* 16A998 */ int gm_8016A998(s8, s8);
-/* 16A9E8 */ UNK_RET gm_8016A9E8(UNK_PARAMS);
+/* 16A9E8 */ int gm_8016A9E8(u8 arg0, s8 arg1);
 /* 16AC44 */ UNK_RET gm_8016AC44(s8 ckind, s8 costume_id);
 
 #endif

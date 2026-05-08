@@ -1264,7 +1264,7 @@ void HSD_SisLib_803A8134(void* sis_data, HSD_Text* text, f32* out_width,
     u8 kern_enabled;
     u8* kern_data;
     u8* cursor;
-    PAD_STACK(8);
+    PAD_STACK(16);
 
     cursor = sis_data;
     saved_scale_x = text->x80.x;
