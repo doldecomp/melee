@@ -19,6 +19,7 @@
 #include <trigf.h>
 #include <dolphin/mtx.h>
 #include <dolphin/os.h>
+#include <MSL/math_ppc.h>
 
 void JObjInfoInit(void);
 HSD_JObjInfo hsdJObj = { JObjInfoInit };

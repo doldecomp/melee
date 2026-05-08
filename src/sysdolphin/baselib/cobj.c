@@ -18,6 +18,7 @@
 #include <dolphin/mtx.h>
 #include <dolphin/vi.h>
 #include <MetroTRK/intrinsics.h>
+#include <MSL/math_ppc.h>
 #include <MSL/trigf.h>
 
 static HSD_ClassInfo* default_class;
