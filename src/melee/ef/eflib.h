@@ -38,7 +38,7 @@ efLib_Create_AttachChild_Scale(u32 gfx_id, HSD_GObj* gobj, HSD_JObj* jobj);
                                                             HSD_GObj* gobj,
                                                             HSD_JObj* jobj);
 /* 05C814 */ EF_Effect* efLib_Create_Attach_Pos(u32 gfx_id, HSD_GObj* gobj,
-                                          Vec3* position);
+                                                Vec3* position);
 
 // Particle processing callbacks
 

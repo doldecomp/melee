@@ -792,18 +792,21 @@ MtxPtr HSD_CObjGetInvViewingMtxPtrDirect(HSD_CObj* cobj)
 MtxPtr HSD_CObjGetViewingMtxPtr(HSD_CObj* cobj)
 {
     HSD_CObjSetupViewingMtx(cobj);
+    PAD_STACK(24);
     return HSD_CObjGetViewingMtxPtrDirect(cobj);
 }
 
 MtxPtr HSD_CObjGetInvViewingMtxPtr(HSD_CObj* cobj)
 {
     HSD_CObjSetupViewingMtx(cobj);
+    PAD_STACK(24);
     return HSD_CObjGetInvViewingMtxPtrDirect(cobj);
 }
 
 void HSD_CObjSetRoll(HSD_CObj* cobj, float roll)
 {
     Vec3 up;
+    PAD_STACK(8);
 
     if (!cobj) {
         return;

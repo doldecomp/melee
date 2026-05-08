@@ -830,6 +830,7 @@ void mpLib_8004ED5C(int line_id, float* x0_out, float* y0_out, float* x1_out,
     float x1_f2 = groundCollVtx[line_r11->v1_idx].pos.x;
     float y1_f3 = groundCollVtx[line_r11->v1_idx].pos.y;
     float distance;
+    PAD_STACK(8);
 
     if (mpLineGetPrev(line_id) != -1) {
         distance = sqrtf(SQ(x0_f0 - x1_f2) + SQ(y0_f1 - y1_f3));
@@ -4864,6 +4865,7 @@ int mpJointFromLine(int line_id)
 bool mpLib_80056C54(int line_id, Vec3* pos, int* line_id_out, Vec3* vec_out,
                     u32* flags_out, Vec3* normal_out, f32 var_f25, f32 arg7)
 {
+    u8 _padA[8];
     float sp64;
     Vec3 sp58;
     Vec3 sp4C;
@@ -5461,6 +5463,7 @@ void mpLib_80058614_Floor(void)
     int count_r30;
     int count_r29;
     int j;
+    PAD_STACK(8);
 
     joint_r7 = groundCollJoint;
     count_r8 = mpLib_804D64B4->joint_count;

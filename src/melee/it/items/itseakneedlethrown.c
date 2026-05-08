@@ -24,7 +24,10 @@
 Item_GObj* it_802AFD8C(Item_GObj* parent, Vec3* pos, u32 kind,
                        float facing_dir)
 {
+    u8 _padA[4];
     SpawnItem spawn;
+    u8 _padB[4];
+    itSeakNeedleThrownAttributes* attr;
     Item_GObj* item_gobj;
 
     spawn.kind = kind;
@@ -41,13 +44,12 @@ Item_GObj* it_802AFD8C(Item_GObj* parent, Vec3* pos, u32 kind,
     item_gobj = Item_80268B18(&spawn);
     if (item_gobj != NULL) {
         Item* ip = GET_ITEM(item_gobj);
+        attr = ip->xC4_article_data->x4_specialAttributes;
         ip->xDB8_itcmd_var3 = 0;
         ip->xDB4_itcmd_var2 = 0;
         ip->xDB0_itcmd_var1 = 0;
         ip->xDAC_itcmd_var0 = 0;
-        it_80275158(item_gobj, ((itSeakNeedleThrownAttributes*)
-                                    ip->xC4_article_data->x4_specialAttributes)
-                                   ->x0);
+        it_80275158(item_gobj, attr->x0);
         ip->xDD4_itemVar.seakneedlethrown.xDF4 = -1;
         ip->xDD4_itemVar.seakneedlethrown.xDFC = 0.0f;
         ip->xDD4_itemVar.seakneedlethrown.xDF8 = 0.0f;
@@ -79,36 +81,39 @@ void itSeakNeedleThrown_Logic109_Destroyed(Item_GObj* gobj)
 void it_802AFF08(Item_GObj* gobj, Fighter_GObj* owner)
 {
     Item* ip = GET_ITEM(gobj);
-    HSD_JObj* child = HSD_JObjGetChild(gobj->hsd_obj);
     itSeakNeedleThrownAttributes* attr =
         ip->xC4_article_data->x4_specialAttributes;
-    f32 angle;
+    HSD_JObj* child = HSD_JObjGetChild(GET_JOBJ(gobj));
+    f32 angle_factor;
+    PAD_STACK(16);
 
     ip->owner = owner;
     it_8026B3A8(gobj);
-    ip->xDCE_flag.b5 = false;
+    ip->xDC8_word.flags.x13 = false;
     it_80272940(gobj);
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
     it_8026BD6C(gobj);
     it_80275158(gobj, attr->x0);
-
-    angle = (ftLib_800865CC(owner)) ? 2.3561945f : M_PI_2;
+    if (ftLib_800865CC(owner)) {
+        angle_factor = 2.3561945f;
+    } else {
+        angle_factor = 1.5707964f;
+    }
     ip->xDD4_itemVar.seakneedlethrown.xDF0 =
-        (ip->facing_dir * angle) + (f32) M_PI_2;
+        (ip->facing_dir * angle_factor) + 1.5707964f;
     ip->x40_vel.x = -attr->x8 * cosf(ip->xDD4_itemVar.seakneedlethrown.xDF0);
     ip->x40_vel.y = attr->x8 * sinf(ip->xDD4_itemVar.seakneedlethrown.xDF0);
     ip->x40_vel.z = 0.0f;
     ip->xDD4_itemVar.seakneedlethrown.xDE4.x =
-        -(3.0f * ip->x40_vel.x - ip->pos.x);
+        ip->pos.x - 3.0f * ip->x40_vel.x;
     ip->xDD4_itemVar.seakneedlethrown.xDE4.y =
-        -(3.0f * ip->x40_vel.y - ip->pos.y);
+        ip->pos.y - 3.0f * ip->x40_vel.y;
     ip->xDD4_itemVar.seakneedlethrown.xDE4.z = 0.0f;
-    {
-        f32 rot = -ip->facing_dir *
-                  atan2f(ip->pos.y - ip->xDD4_itemVar.seakneedlethrown.xDE4.y,
-                         ip->pos.x - ip->xDD4_itemVar.seakneedlethrown.xDE4.x);
-        HSD_JObjSetRotationX(child, rot);
-    }
+    HSD_JObjSetRotationX(
+        child,
+        -ip->facing_dir *
+            atan2f(ip->pos.y - ip->xDD4_itemVar.seakneedlethrown.xDE4.y,
+                   ip->pos.x - ip->xDD4_itemVar.seakneedlethrown.xDE4.x));
     db_80225DD8(gobj, owner);
 }
 

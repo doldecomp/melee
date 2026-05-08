@@ -2,6 +2,7 @@
 #define MELEE_IT_ITYOYO_H
 
 #include <platform.h>
+
 #include <baselib/forward.h>
 
 typedef struct itYoyoAttributes {

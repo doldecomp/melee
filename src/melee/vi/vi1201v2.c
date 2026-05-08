@@ -163,7 +163,7 @@ void un_8032074C(HSD_GObj* gobj)
     }
 }
 
-inline HSD_GObj* inline_fn(void)
+inline HSD_GObj* GET_EVENTDATA(void)
 {
     return GObj_Create(0xE, 0xF, 0);
 }
@@ -177,7 +177,7 @@ void un_803207C4(void)
 
     while (un_804D7010->models[i] != NULL) {
         if (i != 1) {
-            gobj = inline_fn();
+            gobj = GET_EVENTDATA();
             jobj = HSD_JObjLoadJoint(un_804D7010->models[i]->joint);
             new_var = gobj;
             HSD_GObjObject_80390A70(new_var, HSD_GObj_804D7849, jobj);
