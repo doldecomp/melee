@@ -201,7 +201,312 @@ void CalcDistance(HSD_TExp** tevs, int* dist, HSD_TExp* tev, int num,
     }
 }
 
-/// #HSD_TExpMakeDag
+static char HSD_TExpDag_80407AA0[0x78] = {
+    0x74, 0x65, 0x78, 0x70, 0x64, 0x61, 0x67, 0x2E, 0x63, 0x00, 0x00, 0x00,
+    0x48, 0x53, 0x44, 0x5F, 0x54, 0x45, 0x78, 0x70, 0x47, 0x65, 0x74, 0x54,
+    0x79, 0x70, 0x65, 0x28, 0x72, 0x6F, 0x6F, 0x74, 0x29, 0x20, 0x3D, 0x3D,
+    0x20, 0x48, 0x53, 0x44, 0x5F, 0x54, 0x45, 0x5F, 0x54, 0x45, 0x56, 0x00,
+    0x6A, 0x3C, 0x48, 0x53, 0x44, 0x5F, 0x54, 0x45, 0x58, 0x50, 0x5F, 0x4D,
+    0x41, 0x58, 0x5F, 0x4E, 0x55, 0x4D, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02,
+    0x00, 0x00, 0x00, 0x04, 0x00, 0x00, 0x00, 0x06, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x03, 0x00, 0x00, 0x00, 0x05, 0x00, 0x00, 0x00, 0x07,
+    0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x02,
+    0x00, 0x00, 0x00, 0x03, 0x00, 0x00, 0x00, 0x00,
+};
+static char HSD_TExpDag_804D5FF0[8] = "l < num";
+
+int HSD_TExpMakeDag(HSD_TExp* root, HSD_TExpDag* list)
+{
+    HSD_TExp* sp94[32];
+    int sp14[32];
+    HSD_TExp* tmp;
+    HSD_TExp* tmp2;
+    HSD_TExp* cur;
+    HSD_TExp* cur2;
+    HSD_TExp** p;
+    HSD_TExp** q;
+    HSD_TExp** r;
+    HSD_TExp** r2;
+    HSD_TExp** r3;
+    HSD_TExpDag* dep_entry;
+    HSD_TExpDag* dep_entry2;
+    HSD_TExpDag* dag;
+    HSD_TExpDag* dag2;
+    HSD_TExpDag* dag3;
+    int count;
+    int count2;
+    int num;
+    int i;
+    int j;
+    int k;
+    int l;
+    int last;
+    int idx;
+    int idx2;
+    int loop_count;
+    int loop_count2;
+    int loop_count3;
+    int loop_count4;
+    int loop_count5;
+    int loop_count6;
+    int dist;
+    int ofs;
+    u8 dep_count;
+    u8 dep_count2;
+
+    if (HSD_TExpGetType(root) != HSD_TE_TEV) {
+        __assert(HSD_TExpDag_80407AA0, 0xEEU, &HSD_TExpDag_80407AA0[0xC]);
+    }
+
+    sp94[0] = root;
+    p = &sp94[0];
+    num = 1;
+    i = 0;
+loop_22:
+    if (i < num) {
+        if (i >= 0x20) {
+            __assert(HSD_TExpDag_80407AA0, 0xF6U, &HSD_TExpDag_80407AA0[0x30]);
+        }
+        cur = *p;
+        j = 0;
+        tmp = cur;
+        do {
+            if ((u8) cur->tev.c_in[0].type == HSD_TE_TEV) {
+                loop_count = num;
+                q = &sp94[0];
+                k = 0;
+                if (num > 0) {
+                loop_8:
+                    if (*q != cur->tev.c_in[0].exp) {
+                        q++;
+                        k++;
+                        loop_count--;
+                        if (loop_count != 0) {
+                            goto loop_8;
+                        }
+                    }
+                }
+                if (k >= num) {
+                    sp94[num] = cur->tev.c_in[0].exp;
+                    num++;
+                }
+            }
+            j++;
+            cur = (HSD_TExp*) ((u8*) cur + sizeof(HSD_TEArg));
+        } while (j < 4);
+
+        j = 0;
+        cur2 = tmp;
+        do {
+            if ((u8) cur2->tev.a_in[0].type == HSD_TE_TEV) {
+                loop_count2 = num;
+                r = &sp94[0];
+                k = 0;
+                if (num > 0) {
+                loop_16:
+                    if (*r != cur2->tev.a_in[0].exp) {
+                        r++;
+                        k++;
+                        loop_count2--;
+                        if (loop_count2 != 0) {
+                            goto loop_16;
+                        }
+                    }
+                }
+                if (k >= num) {
+                    sp94[num] = cur2->tev.a_in[0].exp;
+                    num++;
+                }
+            }
+            j++;
+            cur2 = (HSD_TExp*) ((u8*) cur2 + sizeof(HSD_TEArg));
+        } while (j < 4);
+
+        p++;
+        i++;
+        goto loop_22;
+    }
+
+    i = 0;
+    if (num > 0) {
+        count = num - 8;
+        if (num > 8) {
+            loop_count3 = (u32) (count + 7) >> 3;
+            {
+                int* distp = &sp14[0];
+
+                if (count > 0) {
+                    do {
+                        distp[0] = -1;
+                        i += 8;
+                        distp[1] = -1;
+                        distp[2] = -1;
+                        distp[3] = -1;
+                        distp[4] = -1;
+                        distp[5] = -1;
+                        distp[6] = -1;
+                        distp[7] = -1;
+                        distp += 8;
+                        loop_count3--;
+                    } while (loop_count3 != 0);
+                }
+            }
+        }
+        {
+            int* distp = &sp14[i];
+
+            loop_count4 = num - i;
+            if (i < num) {
+                do {
+                    *distp = -1;
+                    distp++;
+                    loop_count4--;
+                } while (loop_count4 != 0);
+            }
+        }
+    }
+
+    CalcDistance(&sp94[0], &sp14[0], sp94[0], num, 0);
+    idx = 0;
+loop_36:
+    if (idx < num) {
+        count2 = idx + 1;
+        loop_count5 = num - count2;
+        {
+            int* distp = &sp14[count2];
+
+            r3 = &sp94[count2];
+            if (count2 < num) {
+                do {
+                    if (distp[-1] > distp[0]) {
+                        tmp2 = r3[-1];
+                        r3[-1] = r3[0];
+                        r3[0] = tmp2;
+                        dist = distp[-1];
+                        distp[-1] = distp[0];
+                        distp[0] = dist;
+                    }
+                    distp++;
+                    r3++;
+                    loop_count5--;
+                } while (loop_count5 != 0);
+            }
+        }
+        idx++;
+        goto loop_36;
+    }
+
+    last = num - 1;
+    dag = &list[last];
+    p = &sp94[last];
+loop_65:
+    if (last >= 0) {
+        tmp = *p;
+        idx = 0;
+        dag->idx = (u8) last;
+        cur = tmp;
+        dag->nb_ref = 0;
+        dag->nb_dep = 0;
+        dag->tev = &tmp->tev;
+        do {
+            if ((u8) cur->tev.c_in[0].type == HSD_TE_TEV) {
+                l = last;
+                loop_count6 = num - l;
+                q = &sp94[last];
+                if (l < num) {
+                loop_41:
+                    if (cur->tev.c_in[0].exp == *q) {
+                        dep_count = dag->nb_dep;
+                        dag2 = dag;
+                        dep_entry = &list[l];
+                        l = 0;
+                        if ((int) dep_count > 0) {
+                        loop_43:
+                            if (dag2->depend[0] != dep_entry) {
+                                dag2++;
+                                l++;
+                                dep_count--;
+                                if (dep_count != 0) {
+                                    goto loop_43;
+                                }
+                            }
+                        }
+                        if (l >= (int) dag->nb_dep) {
+                            dag->depend[dag->nb_dep] = dep_entry;
+                            dag->nb_dep++;
+                            dep_entry->nb_ref++;
+                        }
+                    } else {
+                        q++;
+                        l++;
+                        loop_count6--;
+                        if (loop_count6 != 0) {
+                            goto loop_41;
+                        }
+                    }
+                }
+                if (l >= num) {
+                    __assert(HSD_TExpDag_80407AA0, 0x145U, HSD_TExpDag_804D5FF0);
+                }
+            }
+            idx++;
+            cur = (HSD_TExp*) ((u8*) cur + sizeof(HSD_TEArg));
+        } while (idx < 4);
+
+        idx2 = 0;
+        cur2 = tmp;
+        do {
+            if ((u8) cur2->tev.a_in[0].type == HSD_TE_TEV) {
+                l = last;
+                ofs = num - l;
+                r2 = &sp94[last];
+                if (l < num) {
+                loop_54:
+                    if (cur2->tev.a_in[0].exp == *r2) {
+                        dep_count2 = dag->nb_dep;
+                        dag3 = dag;
+                        dep_entry2 = &list[l];
+                        l = 0;
+                        if ((int) dep_count2 > 0) {
+                        loop_56:
+                            if (dag3->depend[0] != dep_entry2) {
+                                dag3++;
+                                l++;
+                                dep_count2--;
+                                if (dep_count2 != 0) {
+                                    goto loop_56;
+                                }
+                            }
+                        }
+                        if (l >= (int) dag->nb_dep) {
+                            dag->depend[dag->nb_dep] = dep_entry2;
+                            dag->nb_dep++;
+                            dep_entry2->nb_ref++;
+                        }
+                    } else {
+                        r2++;
+                        l++;
+                        ofs--;
+                        if (ofs != 0) {
+                            goto loop_54;
+                        }
+                    }
+                }
+                if (l >= num) {
+                    __assert(HSD_TExpDag_80407AA0, 0x15BU, HSD_TExpDag_804D5FF0);
+                }
+            }
+            idx2++;
+            cur2 = (HSD_TExp*) ((u8*) cur2 + sizeof(HSD_TEArg));
+        } while (idx2 < 4);
+
+        dag--;
+        p--;
+        last--;
+        goto loop_65;
+    }
+    return num;
+}
 
 static void make_dependancy_mtx(int num, HSD_TExpDag* list, u32* dep_mtx)
 {

@@ -4,6 +4,6 @@ Funcs:
 - [x] order_dag
 - [x] HSD_TExpSimplify2
 - [x] SimplifySrc
-- [ ] HSD_TExpMakeDag
+- [x] HSD_TExpMakeDag
 - [ ] SimplifyThis
 - [ ] SimplifyByMerge
