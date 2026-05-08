@@ -223,8 +223,6 @@ void mnSoundTest_8024A958(Soundtest_GObj* arg0)
     HSD_SisLib_803A6B98(temp_r3_4, 0.0f, 0.0f, string);
 }
 
-f32 mn_8022F298(HSD_JObj*);
-
 void mnSoundTest_8024AA70(HSD_GObj* arg0, u8 arg1)
 {
     u8 _padA[16];
