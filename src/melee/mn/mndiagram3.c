@@ -420,7 +420,7 @@ void mnDiagram3_8024714C(void* arg0)
     f32 row_spacing;
     f32 neg_spacing;
     int i;
-    PAD_STACK(56);
+    PAD_STACK(64);
 
     {
         MenuFlow* flow = &mn_804A04F0;

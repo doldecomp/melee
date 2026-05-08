@@ -17,20 +17,19 @@
 #include "ftCrazyHand/ftCh_Init.h"
 #include "ftLink/ftLk_AttackAir.h"
 #include "ftMasterHand/ftMh_Wait1_2.h"
-#include "it/items/itpeachparasol.h"
 #include "it/it_26B1.h"
+#include "it/items/itpeachparasol.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbbgflash.h"
 #include "lb/lbvector.h"
+#include "mp/mplib.h"
 #include "pl/plattack.h"
 #include "pl/pltrick.h"
 
-#include "mp/mplib.h"
-
-#include <MSL/math_ppc.h>
-#include <MSL/trigf.h>
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
+#include <MSL/math_ppc.h>
+#include <MSL/trigf.h>
 
 extern s32 db_804D4AF8;
 
@@ -161,7 +160,6 @@ void ft_80089460(Fighter* fp)
         fp->x2074.x2084_b6 = 1;
     }
 }
-
 
 // TODO: is arg1 not just a Struct2070?
 void ft_800895E0(Fighter* fp, int arg1)
@@ -388,9 +386,8 @@ void ft_80089B08(Fighter_GObj* gobj)
         if (db_804D4AF8 != 0) {
             f32 scale_y = fp->x34_scale.y;
             ik.len0 = ((ftData_x58_t*) fp->ft_data->x58)->x4 * scale_y;
-            ik.len1 = scale_y *
-                      (((ftData_x58_t*) fp->ft_data->x58)->xC +
-                       ((ftData_x58_t*) fp->ft_data->x58)->x18);
+            ik.len1 = scale_y * (((ftData_x58_t*) fp->ft_data->x58)->xC +
+                                 ((ftData_x58_t*) fp->ft_data->x58)->x18);
 
             if (fp->x221C_u16_y & 2) {
                 ik.jobj0 =
@@ -464,7 +461,7 @@ void ft_80089B08(Fighter_GObj* gobj)
         if (fp->x221C_u16_y & 4) {
             s32 line_id = fp->coll_data.floor.index;
             f32 angle = fp->facing_dir * atan2f(fp->coll_data.floor.normal.x,
-                                                 fp->coll_data.floor.normal.y);
+                                                fp->coll_data.floor.normal.y);
             f32 dx, dy, line_len;
             f32 adj_angle;
 
@@ -485,7 +482,9 @@ void ft_80089B08(Fighter_GObj* gobj)
                 prev_id = mpLineGetPrev(line_id);
                 if (prev_id != -1 && (mpLineGetKind(prev_id) & 1)) {
                     mpLineGetNormal(prev_id, &sp1C);
-                    adj_angle = 0.5f * ((fp->facing_dir * atan2f(sp1C.x, sp1C.y)) + adj_angle);
+                    adj_angle =
+                        0.5f * ((fp->facing_dir * atan2f(sp1C.x, sp1C.y)) +
+                                adj_angle);
                 }
                 {
                     f32 diff = adj_angle - angle;

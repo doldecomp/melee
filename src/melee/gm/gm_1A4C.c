@@ -1,17 +1,23 @@
 #include "gm_1A4C.h"
 
+#include "gm/gmregtyfall.static.h"
+
 #include "gm_unsplit.h"
 
 #include "ft/forward.h"
+
 #include "gm/gm_1BA8.h"
 #include "gm/gmregtyfall.h"
 #include "if/textlib.h"
+#include "lb/lb_00B0.h"
+#include "lb/lb_00F9.h"
 #include "lb/lbaudio_ax.h"
 #include "lb/lbbgflash.h"
 #include "lb/lbmthp.h"
 #include "mn/mnmain.h"
-#include "ty/tydisplay.h"
+#include "sc/types.h"
 #include "ty/toy.h"
+#include "ty/tydisplay.h"
 
 #include <sysdolphin/baselib/archive.h>
 #include <sysdolphin/baselib/cobj.h>
@@ -25,11 +31,6 @@
 #include <sysdolphin/baselib/lobj.h>
 #include <sysdolphin/baselib/random.h>
 #include <sysdolphin/baselib/sobjlib.h>
-
-#include "gm/gmregtyfall.static.h"
-#include "lb/lb_00B0.h"
-#include "lb/lb_00F9.h"
-#include "sc/types.h"
 
 extern Event gm_804D6724;
 
@@ -80,8 +81,8 @@ void gm_801A7B00(void)
 
     // Camera GObj
     cam_gobj = GObj_Create(0x13, 0x14, 0);
-    cobj = lb_80013B14(
-        (HSD_CameraDescPerspective*) gm_804D67A8->cameras[0].desc);
+    cobj =
+        lb_80013B14((HSD_CameraDescPerspective*) gm_804D67A8->cameras[0].desc);
     HSD_GObjObject_80390A70(cam_gobj, HSD_GObj_804D784B, cobj);
     GObj_SetupGXLinkMax(cam_gobj, HSD_GObj_803910D8, 8);
     cam_gobj->gxlink_prios = 0x801;
@@ -113,7 +114,6 @@ void gm_801A7B00(void)
 
     char_idx = gm_801A659C(gm_801BEFB0());
     if (jobj == NULL) {
-
     } else {
         child = jobj->child;
     }
@@ -148,7 +148,7 @@ void gm_801A7B00(void)
     lb_8000C290((HSD_JObj*) gobj->hsd_obj, target);
 }
 
-inline s32 fn_801A7FB4_inline()
+inline s32 fn_801A7FB4_inline(void)
 {
     s32 i;
     s32 count;
@@ -161,7 +161,7 @@ inline s32 fn_801A7FB4_inline()
     return count;
 }
 
-inline s32 fn_801A7FB4_inline2()
+inline s32 fn_801A7FB4_inline2(void)
 {
     s32 count;
     s32 i;
@@ -264,8 +264,8 @@ void gm_801A85E4(HSD_JObj* jobj, s32 arg1, s32 arg2)
             arg2 = 4 - idx;
             idx = arg2 + 2;
         }
-        angle = 0.017453292f *
-                ((45.0f * (f32) idx) + (2.0f * HSD_Randf()) - 1.0f);
+        angle =
+            0.017453292f * ((45.0f * (f32) idx) + (2.0f * HSD_Randf()) - 1.0f);
         x = 25.0f * cosf(angle);
         HSD_JObjSetTranslateX(jobj, x);
         z = 0.9f * ((25.0f * -sinf(angle)) + -18.0f);
@@ -278,8 +278,7 @@ void gm_801A85E4(HSD_JObj* jobj, s32 arg1, s32 arg2)
             idx = arg2 + 8;
         }
         angle = 0.017453292f *
-                ((25.714285f * (f32) (idx - 5)) + (4.0f * HSD_Randf()) -
-                 2.0f);
+                ((25.714285f * (f32) (idx - 5)) + (4.0f * HSD_Randf()) - 2.0f);
         x = 50.0f * cosf(angle);
         HSD_JObjSetTranslateX(jobj, x);
         z = 0.9f * ((50.0f * -sinf(angle)) + -18.0f);
@@ -291,8 +290,8 @@ void gm_801A85E4(HSD_JObj* jobj, s32 arg1, s32 arg2)
             arg2 = 0x15 - idx;
             idx = arg2 + 0x11;
         }
-        angle = 0.017453292f *
-                ((22.5f * (f32) (idx - 0xD)) + HSD_Randf() - 0.5f);
+        angle =
+            0.017453292f * ((22.5f * (f32) (idx - 0xD)) + HSD_Randf() - 0.5f);
         x = 75.0f * cosf(angle);
         HSD_JObjSetTranslateX(jobj, x);
         z = 0.8f * ((75.0f * -sinf(angle)) + -18.0f);
@@ -329,11 +328,10 @@ void gm_801A8D54(s32* arg0)
 
     count = 0;
     for (i = 0; i < 0x1A; i++) {
-        if ((u32)(i - 0x12) <= 1U) {
+        if ((u32) (i - 0x12) <= 1U) {
             gm_801A4310();
             if ((un_803048C0(gm_801A659C(i)) ? true : false) &&
-                gm_801BEFB0() != CKIND_ZELDA &&
-                gm_801BEFB0() != CKIND_SEAK)
+                gm_801BEFB0() != CKIND_ZELDA && gm_801BEFB0() != CKIND_SEAK)
             {
                 sp84[count] = i;
                 count++;
@@ -353,7 +351,9 @@ void gm_801A8D54(s32* arg0)
         if (sp84[i] != 0x1A) {
             for (j = i + 1; j < 0x1A; j++) {
                 if (0x1A != sp84[j]) {
-                    if ((gm_80480AD0[sp84[i]] < gm_80480AD0[sp84[j]] ? 1 : 2) == 2) {
+                    if ((gm_80480AD0[sp84[i]] < gm_80480AD0[sp84[j]] ? 1
+                                                                     : 2) == 2)
+                    {
                         temp_i = sp84[i];
                         sp84[i] = sp84[j];
                         sp84[j] = temp_i;
@@ -388,10 +388,10 @@ void gm_801A9094(void)
             dsp = un_8031B9DC(gm_801A659C(sp8C[i]));
             joint = HSD_ArchiveGetPublicAddress(
                 gm_804D679C, (const char*) un_8031BB34((s8) dsp->x04));
-            matanim = HSD_ArchiveGetPublicAddress(
-                gm_804D679C, un_8031BB94((s8) dsp->x04));
-            bg_joint = HSD_ArchiveGetPublicAddress(
-                gm_804D679C, "ToyDspStand_Top_joint");
+            matanim = HSD_ArchiveGetPublicAddress(gm_804D679C,
+                                                  un_8031BB94((s8) dsp->x04));
+            bg_joint = HSD_ArchiveGetPublicAddress(gm_804D679C,
+                                                   "ToyDspStand_Top_joint");
             gobj = GObj_Create(0xE, 0xF, 0);
             gm_80480A00[sp8C[i]] = gobj;
             root = HSD_JObjAlloc();
@@ -478,7 +478,8 @@ static HSD_GObj* gm_804D67BC;
 static HSD_GObj* gm_804D67C0;
 
 void gm_801A8114_inline(HSD_JObj* arg0, int arg1);
-void gm_801A8114_inline(HSD_JObj* arg0, int arg1) {
+void gm_801A8114_inline(HSD_JObj* arg0, int arg1)
+{
     gm_801A8114(arg0, arg1);
 }
 
@@ -531,8 +532,8 @@ void gm_801A9630(void)
 
     // Camera GObj
     cam_gobj = GObj_Create(0x13, 0x14, 0);
-    cobj = lb_80013B14(
-        (HSD_CameraDescPerspective*) gm_804D67A4->cameras[0].desc);
+    cobj =
+        lb_80013B14((HSD_CameraDescPerspective*) gm_804D67A4->cameras[0].desc);
     HSD_GObjObject_80390A70(cam_gobj, HSD_GObj_804D784B, cobj);
     GObj_SetupGXLinkMax(cam_gobj, HSD_GObj_803910D8, 8);
     cam_gobj->gxlink_prios = 0x801;

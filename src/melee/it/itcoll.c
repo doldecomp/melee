@@ -769,7 +769,9 @@ f32 it_80270CD8(Item* ip, HitCapsule* hit)
 
 void it_80270E30(Item_GObj* arg_item_gobj)
 {
+    u8 _padA[4];
     Vec3 sp2C;
+    u8 _padB[4];
     f32 sp18;
     DamageLogEntry* var_r29;
     HSD_GObj* item_owner_gobj;
@@ -796,7 +798,6 @@ void it_80270E30(Item_GObj* arg_item_gobj)
     Fighter* fighter;
     HitCapsule* hit;
     Item* arg_item2;
-    PAD_STACK(8);
 
     if (it_804D6D18 != 0U) {
         arg_item = arg_item_gobj->user_data;
@@ -852,7 +853,7 @@ void it_80270E30(Item_GObj* arg_item_gobj)
                     case 0x416:
                     case 0x3EB:
                         efSync_Spawn(it_803F1384[hit2->element], arg_item_gobj,
-                                     hurt_coll_pos, arg_item2);
+                                     &hit2->hurt_coll_pos, arg_item2);
                         break;
                     }
                 } else {
@@ -1068,6 +1069,7 @@ void it_8027163C(Item_GObj* item_gobj)
     BoneDynamicsDesc* bone_dyn_desc;
     s32 index;
     s32 bone_id;
+    struct AbsorbDesc* absorb;
     PAD_STACK(16);
 
     item = item_gobj->user_data;
@@ -1082,7 +1084,7 @@ void it_8027163C(Item_GObj* item_gobj)
         cnt = 0U;
         item->xAC8_hurtboxNum = it_hurtbox->count;
         index = 0;
-        while (cnt < (u32) it_hurtbox->count) {
+        while (cnt < it_hurtbox->count) {
             hurt = &item->xACC_itemHurtbox[index];
             hurt_dyn_desc = &it_hurtbox->descs[index];
             item->xACC_itemHurtbox[index].state = HurtCapsule_Enabled;
@@ -1113,16 +1115,15 @@ void it_8027163C(Item_GObj* item_gobj)
         cnt = 0U;
         item->xB68 = it_dynams->count;
         index = 0;
-        while (cnt < (u32) it_dynams->count) {
+        while (cnt < it_dynams->count) {
             bone_dyn_desc = &it_dynams->dyn_descs[index];
             bone_id = bone_dyn_desc->bone_id;
             item->xB6C_vars[cnt].xB90 = bone_id;
+            absorb = &bone_dyn_desc->dyn_desc.data->desc.absorb;
             item->xB6C_vars[cnt].xB7C =
                 item->xBBC_dynamicBoneTable->bones[bone_id];
-            item->xB6C_vars[cnt].xB6C =
-                bone_dyn_desc->dyn_desc.data->desc.absorb.x4_offset;
-            item->xB6C_vars[cnt].xB78 =
-                bone_dyn_desc->dyn_desc.data->desc.absorb.x10_size;
+            item->xB6C_vars[cnt].xB6C = absorb->x4_offset;
+            item->xB6C_vars[cnt].xB78 = absorb->x10_size;
             index++;
             cnt++;
         }
@@ -1239,18 +1240,18 @@ void it_80271A58(Item_GObj* item_gobj)
 
 void it_80271B60(Item_GObj* item_gobj)
 {
-    Vec3 sp24;
+    f32 x_pos;
     Item_FtTrack* var_r29;
     Item_FtTrack* var_r30;
     f32 x_float;
-    f32 x_pos;
+    Vec3 sp24;
     f32 y_pos;
     f32 x_float_mag;
+    HSD_JObj* item_jobj;
     f32 dir;
     u32 cnt;
-    HSD_JObj* item_jobj;
     Item* item;
-    PAD_STACK(12);
+    u8 _padA[8];
 
     item_jobj = GET_JOBJ(item_gobj);
     item = GET_ITEM(item_gobj);

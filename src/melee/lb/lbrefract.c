@@ -42,12 +42,14 @@ extern f32 lbl_803BB0E0[6];
 lbRefract_WriteTexCoordIA4(lbRefract_CallbackData* data, s32 row, u32 col,
                            u32 arg3, u8 arg4, u8 intensity, u8 alpha);
 /* 021F70 */ static void fn_80021F70(lbRefract_CallbackData* data, s32 row,
-                                    u32 col, s32 r, s32 g, u32 b);
+                                     u32 col, s32 r, s32 g, u32 b);
 /* 021FB4 */ static void fn_80021FB4(lbRefract_CallbackData* data, s32 row,
                                      u32 col, u8 arg3, u8 arg4, u8 arg5,
                                      u8 arg6);
-/* 021FF8 */ static void fn_80021FF8(lbRefract_CallbackData*, s32, u32, s32*, s32*, s32*, s32*);
-/* 02206C */ static void fn_8002206C(lbRefract_CallbackData*, s32, u32, s32*, s32*, s32*, s32*);
+/* 021FF8 */ static void fn_80021FF8(lbRefract_CallbackData*, s32, u32, s32*,
+                                     s32*, s32*, s32*);
+/* 02206C */ static void fn_8002206C(lbRefract_CallbackData*, s32, u32, s32*,
+                                     s32*, s32*, s32*);
 /// @brief Display DObj then reset TEV/indirect stages for refraction cleanup.
 /* 022608 */ static void lbRefract_DObjDispReset(HSD_DObj* dobj, Mtx vmtx,
                                                  Mtx pmtx, u32 rendermode);
@@ -121,8 +123,8 @@ void lbRefract_80021CE8(void* arg0, s32 arg1)
 
     PAD_STACK(20);
 
-    x_step = 2.0f / (f32)(u32)(cb->width - 1);
-    y_step = 2.0f / (f32)(u32)(cb->height - 1);
+    x_step = 2.0f / (f32) (u32) (cb->width - 1);
+    y_step = 2.0f / (f32) (u32) (cb->height - 1);
     y = -1.0f;
 
     for (col = 0; col < (u32) cb->height; col++) {
@@ -132,10 +134,8 @@ void lbRefract_80021CE8(void* arg0, s32 arg1)
             dist_sq = x * x + y_sq;
             if (dist_sq > 0.0f) {
                 f64 est = __frsqrte((f64) dist_sq);
-                est = 0.5 * est *
-                      -(((f64) dist_sq * (est * est)) - 3.0);
-                est = 0.5 * est *
-                      -(((f64) dist_sq * (est * est)) - 3.0);
+                est = 0.5 * est * -(((f64) dist_sq * (est * est)) - 3.0);
+                est = 0.5 * est * -(((f64) dist_sq * (est * est)) - 3.0);
                 sp18 = (f32) ((f64) dist_sq *
                               (0.5 * est *
                                -(((f64) dist_sq * (est * est)) - 3.0)));
@@ -152,8 +152,7 @@ void lbRefract_80021CE8(void* arg0, s32 arg1)
                 if (__fabsf(param0) > __fabsf(dist)) {
                     rem = dist;
                 } else {
-                    rem = -(param0 *
-                            (f32) (s64) (u64) (dist / param0) - dist);
+                    rem = -(param0 * (f32) (s64) (u64) (dist / param0) - dist);
                 }
                 param0 = dist * rem;
             } else {
@@ -165,10 +164,9 @@ void lbRefract_80021CE8(void* arg0, s32 arg1)
                 param0 = 1.0f;
             }
             y_tex = (u32) (127.0f * (y * param0) + 128.0f);
-            ((void (*)(lbRefract_CallbackData*, s32, s32, s32, s32, u32,
-                       u32)) cb->callback0)(
-                cb, row, col, 0, 0, y_tex,
-                (u32) (127.0f * (x * param0) + 128.0f));
+            ((void (*)(lbRefract_CallbackData*, s32, s32, s32, s32, u32, u32))
+                 cb->callback0)(cb, row, col, 0, 0, y_tex,
+                                (u32) (127.0f * (x * param0) + 128.0f));
             x += x_step;
         }
         y += y_step;
@@ -195,8 +193,8 @@ static void lbRefract_WriteTexCoordIA4(lbRefract_CallbackData* data, s32 row,
     base[1] = intensity;
 }
 
-static void fn_80021F70(lbRefract_CallbackData* data, s32 row, u32 col,
-                        s32 r, s32 g, u32 b)
+static void fn_80021F70(lbRefract_CallbackData* data, s32 row, u32 col, s32 r,
+                        s32 g, u32 b)
 {
     u8* base;
     s32 offset;
@@ -481,10 +479,9 @@ struct lbRefract_DataLayout lbl_803BB0B0 = {
 static void fn_80022650(void)
 {
     hsdInitClassInfo(HSD_CLASS_INFO(&lbl_803BB0B0.dobj_info),
-                     HSD_CLASS_INFO(&hsdDObj),
-                     lbl_803BB0B0.lib_name,
-                     lbl_803BB0B0.dobj_name,
-                     sizeof(HSD_DObjInfo), sizeof(HSD_DObj));
+                     HSD_CLASS_INFO(&hsdDObj), lbl_803BB0B0.lib_name,
+                     lbl_803BB0B0.dobj_name, sizeof(HSD_DObjInfo),
+                     sizeof(HSD_DObj));
     lbl_803BB0B0.dobj_info.disp = lbRefract_DObjDispReset;
 }
 
@@ -647,10 +644,9 @@ s32 lbRefract_PObjLoad(HSD_PObj* pobj, HSD_PObjDesc* desc)
 static void fn_80022940(void)
 {
     hsdInitClassInfo(HSD_CLASS_INFO(&lbl_803BB0B0.pobj_info),
-                     HSD_CLASS_INFO(&hsdPObj),
-                     lbl_803BB0B0.lib_name,
-                     lbl_803BB0B0.pobj_name,
-                     sizeof(HSD_PObjInfo), sizeof(HSD_PObj));
+                     HSD_CLASS_INFO(&hsdPObj), lbl_803BB0B0.lib_name,
+                     lbl_803BB0B0.pobj_name, sizeof(HSD_PObjInfo),
+                     sizeof(HSD_PObj));
     lbl_803BB0B0.pobj_info.load = lbRefract_PObjLoad;
 }
 

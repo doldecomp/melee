@@ -162,7 +162,6 @@ void it_802817A0(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itDoseiAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
-    PAD_STACK(8);
 
     ip->xD5C = 0;
     ip->xDC8_word.flags.x17 = 1;
@@ -378,7 +377,7 @@ void it_3F14_Logic7_PickedUp(Item_GObj* gobj)
 
 bool itDosei_UnkMotion4_Anim(Item_GObj* gobj)
 {
-    PAD_STACK(16);
+    PAD_STACK(24);
     if (!it_80272C6C(gobj)) {
         HSD_JObj* jobj = gobj->hsd_obj;
         Item* ip = GET_ITEM(gobj);
@@ -645,26 +644,25 @@ bool itDosei_UnkMotion10_Anim(Item_GObj* gobj)
 
 bool it_3F14_Logic7_DmgReceived(Item_GObj* gobj)
 {
-    HSD_JObj* jobj = gobj->hsd_obj;
-    Item* ip = GET_ITEM(gobj);
+    Item_GObj* gobj2 = gobj; // permuterslop
+    Item* ip = GET_ITEM(gobj2);
     itDoseiAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
 
-    Item_80268E5C(gobj, 0xB, 3);
-    it_802762BC(ip);
-    ip->x5D0_animFrameSpeed = 1.0f;
-    lb_8000BA0C(jobj, 1.0f);
+    {
+        HSD_JObj* jobj = gobj2->hsd_obj;
+        Item_80268E5C(gobj2, 0xB, 3);
+        it_802762BC(ip);
+        ip->x5D0_animFrameSpeed = 1.0f;
+        lb_8000BA0C(jobj, 1.0f);
+    }
+
     ip->x40_vel.x = attr->unk10 * ip->facing_dir;
     ip->x40_vel.y = ABS(attr->unk14);
     ip->x40_vel.z = 0.0f;
     ip->xDC8_word.flags.x17 = 1;
     ip->xDC8_word.flags.x19 = 1;
     ip->xDD4_itemVar.dosei.xDF0 = 20;
-    {
-        HSD_JObj* jobj2 = gobj->hsd_obj;
-        HSD_JObjSetRotationX(jobj2, 0.0f);
-        HSD_JObjSetRotationY(jobj2, 0.0f);
-        HSD_JObjSetRotationZ(jobj2, 0.0f);
-    }
+    HSD_JObjSetRotationZero(gobj);
     itDosei_SetFacingAngle(gobj, it_804DC878);
     ip->owner = NULL;
     ip->xD44_lifeTimer -= 60.0f;

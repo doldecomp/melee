@@ -971,6 +971,7 @@ void grMuteCity_801F106C(s32 i)
     f32 var_f0;
     grMc_CarEntry* car = &grMc_8049F4B8[i];
     u16 flags16 = car->x20;
+    PAD_STACK(8);
 
     if (!car->x22_flags.b0) {
         if (flags16 & 1) {
@@ -1052,6 +1053,7 @@ void grMuteCity_801F1328(void)
 {
     s32* arr = grMc_8049F440;
     int i, j;
+    PAD_STACK(8);
 
     for (i = 1; i < 30; i++) {
         j = i;
@@ -1301,6 +1303,7 @@ void grMuteCity_801F1A34(HSD_GObj* arg0, Ground_GObj* arg1)
     HSD_Spline* spline;
 
     Ground_801C0498();
+    PAD_STACK(8);
     track_mid = 0.5f * (gp->gv.mutecity.xD4 + gp->gv.mutecity.xD8);
     Camera_GetTransformPosition(&spE8);
 

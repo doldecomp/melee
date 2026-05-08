@@ -113,7 +113,7 @@ int GetNameCount(void)
     return count;
 }
 
-inline int GetNumNameList()
+inline int GetNumNameList(void)
 {
     int i;
     int count = 0;
@@ -266,6 +266,7 @@ s32 mnName_SortNames(HSD_GObj* arg0)
     u8* order = mnName_NameDisplayOrder;
     MnName_GObj* data = (MnName_GObj*) arg0->user_data;
     s32 result;
+    PAD_STACK(8);
 
     if ((u8) data->gobj.p_priority == 0) {
         s32 i;
@@ -302,8 +303,7 @@ s32 mnName_SortNames(HSD_GObj* arg0)
                 }
                 if (e1 != 0) {
                     if ((s8) mnName_StringTerminator ==
-                        (s8) GetPersistentNameData((s32) idx2)
-                            ->namedata[0])
+                        (s8) GetPersistentNameData((s32) idx2)->namedata[0])
                     {
                         e2 = 0;
                     } else {
@@ -317,8 +317,7 @@ s32 mnName_SortNames(HSD_GObj* arg0)
                 } else {
                 block_15:
                     if ((s8) mnName_StringTerminator ==
-                        (s8) GetPersistentNameData((s32) idx1)
-                            ->namedata[0])
+                        (s8) GetPersistentNameData((s32) idx1)->namedata[0])
                     {
                         e1 = 0;
                     } else {
@@ -415,8 +414,7 @@ u8 mnName_80237D94(s32 arg0, u8 arg1)
                     if (gobj->gx_link != 0) {
                         gobj->gx_link = gobj->gx_link - 1;
                     } else {
-                        gobj->gx_link =
-                            mnName_GetColumnCount() - 1;
+                        gobj->gx_link = mnName_GetColumnCount() - 1;
                     }
                     mnName_802385A0(gobj);
                 }
@@ -468,14 +466,11 @@ void mnName_ConfirmNameDeleteInput(HSD_GObj* arg0)
             {
                 u8 term = mnName_StringTerminator;
                 mn_804D6BC8.cooldown = 5;
-                GetPersistentNameData((s32) nameIdx)->namedata[0] =
-                    term;
+                GetPersistentNameData((s32) nameIdx)->namedata[0] = term;
             }
             GetPersistentNameData((s32) nameIdx)->x1A1 = 1;
             InitializePersistentNameData((s32) nameIdx);
-            if ((s32) gobj2->gx_link >
-                (s32) (mnName_GetColumnCount() - 1))
-            {
+            if ((s32) gobj2->gx_link > (s32) (mnName_GetColumnCount() - 1)) {
                 gobj2->gx_link = 0;
             }
             DeleteName(nameIdx);
@@ -544,8 +539,7 @@ void mnName_MainInput(HSD_GObj* arg0)
                 HSD_SisLib_803A5CC4(gobj2->text2);
                 do {
                     if ((s8) mnName_StringTerminator ==
-                        (s8) GetPersistentNameData((s32) i)
-                                 ->namedata[0])
+                        (s8) GetPersistentNameData((s32) i)->namedata[0])
                     {
                         isValid = 0;
                     } else {
@@ -556,7 +550,7 @@ void mnName_MainInput(HSD_GObj* arg0)
                     }
                     i += 1;
                 } while ((s32) i < 0x78);
-                mnNameNew_EnterFromMnName((void*)(s32) count);
+                mnNameNew_EnterFromMnName((void*) (s32) count);
                 return;
             }
             lbAudioAx_80024030(3);
@@ -588,8 +582,8 @@ void mnName_MainInput(HSD_GObj* arg0)
             if ((u16) mn_804A04F0.hovered_selection < 0x18U) {
                 s32 isValid;
                 u8 sel = (u8) mn_804A04F0.hovered_selection;
-                s32 col = gobj2->gobj.gx_link +
-                          (mn_804A04F0.hovered_selection / 6);
+                s32 col =
+                    gobj2->gobj.gx_link + (mn_804A04F0.hovered_selection / 6);
                 s32 colCount = mnName_GetColumnCount();
                 u8 nameIdx;
                 if (colCount > 4 && col >= colCount) {
@@ -597,8 +591,7 @@ void mnName_MainInput(HSD_GObj* arg0)
                 }
                 nameIdx = mnName_NameDisplayOrder[col * 6 + (sel % 6)];
                 if ((s8) mnName_StringTerminator ==
-                    (s8) GetPersistentNameData((s32) nameIdx)
-                             ->namedata[0])
+                    (s8) GetPersistentNameData((s32) nameIdx)->namedata[0])
                 {
                     isValid = 0;
                 } else {
@@ -631,9 +624,7 @@ void mnName_MainInput(HSD_GObj* arg0)
                     }
                 } else {
                     u8 scroll = gobj2->gobj.gx_link;
-                    if ((s32) (mnName_GetColumnCount() - 1) >
-                        (s32) scroll)
-                    {
+                    if ((s32) (mnName_GetColumnCount() - 1) > (s32) scroll) {
                         gobj2->gobj.gx_link = (u8) (scroll + 1);
                     } else {
                         gobj2->gobj.gx_link = 0U;
@@ -645,9 +636,7 @@ void mnName_MainInput(HSD_GObj* arg0)
             u8 prev = (u8) mn_804A04F0.hovered_selection;
             mn_804A04F0.hovered_selection =
                 (u16) mnName_80237D94((s32) buttons, prev);
-            if ((s32) prev !=
-                (s32) mn_804A04F0.hovered_selection)
-            {
+            if ((s32) prev != (s32) mn_804A04F0.hovered_selection) {
                 lbAudioAx_80024030(2);
             }
         }
@@ -726,8 +715,7 @@ void mnName_80238754(HSD_GObj* gobj)
         f32 scroll_pos;
 
         HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
-        scroll_pos = (f32) (u32) gobj->gx_link *
-                     (14.0f / (f_col - 1.0f));
+        scroll_pos = (f32) (u32) gobj->gx_link * (14.0f / (f_col - 1.0f));
         HSD_JObjSetTranslateX(gobj->user_data, scroll_pos);
     } else {
         HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
@@ -914,8 +902,8 @@ void mnName_80238C34(HSD_GObj* arg0, u8 arg1, u8 arg2)
         if (prev != 0x1A || (u16) mn_804A04F0.hovered_selection >= 0x18U) {
             mnName_80238AE0((HSD_GObj*) data, prev, 0);
         }
-        mnName_80238AE0((HSD_GObj*) data,
-                        (u8) mn_804A04F0.hovered_selection, 1);
+        mnName_80238AE0((HSD_GObj*) data, (u8) mn_804A04F0.hovered_selection,
+                        1);
     }
 
     {
@@ -1045,16 +1033,15 @@ void fn_80239574(HSD_GObj* arg0)
         if ((u8) mn_804A04F0.x10 != 1) {
             state = data->gobj.p_link;
             if ((state == 0 || state == 1 || state == 3) &&
-                (s32) *((u8*) data + 1) !=
+                (s32) * ((u8*) data + 1) !=
                     (s32) mn_804A04F0.hovered_selection)
             {
                 doSel = 1;
             }
         }
         mnName_80238C34(arg0, doSel, doSelReset);
-        if ((s32) doSel != 0 &&
-            (u16) mn_804A04F0.hovered_selection >= 0x18U &&
-            (u8) *((u8*) data + 1) >= 0x18U)
+        if ((s32) doSel != 0 && (u16) mn_804A04F0.hovered_selection >= 0x18U &&
+            (u8) * ((u8*) data + 1) >= 0x18U)
         {
             HSD_Text* text;
             s32 idx = mn_804A04F0.hovered_selection - 0x18;
@@ -1062,8 +1049,8 @@ void fn_80239574(HSD_GObj* arg0)
             if (data->text2 != NULL) {
                 HSD_SisLib_803A5CC4(data->text2);
             }
-            text = HSD_SisLib_803A5ACC(0, 0, -9.5f, 9.1f, 17.0f,
-                                       364.68332f, 38.38772f);
+            text = HSD_SisLib_803A5ACC(0, 0, -9.5f, 9.1f, 17.0f, 364.68332f,
+                                       38.38772f);
             data->text2 = text;
             text->font_size.x = 0.0521f;
             text->font_size.y = 0.0521f;
@@ -1108,8 +1095,7 @@ void mnName_80239878(u8 arg0, HSD_GObj* gobj)
         f32 scroll_pos;
 
         HSD_JObjClearFlagsAll(jobj, JOBJ_HIDDEN);
-        scroll_pos = (f32) gobj->gx_link *
-                     (14.0f / (f_col - 1.0f));
+        scroll_pos = (f32) gobj->gx_link * (14.0f / (f_col - 1.0f));
         HSD_JObjSetTranslateX(gobj->user_data, scroll_pos);
     } else {
         HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
@@ -1139,6 +1125,7 @@ void mnName_80239A24(HSD_GObj* gobj)
     s32 extra;
     s32 total_rows;
     u8 name_idx;
+    PAD_STACK(24);
 
     for (i = 0; i < 0x18; i++) {
         jobj = HSD_JObjLoadJoint(mnName_804A06C0.joint);
@@ -1192,11 +1179,10 @@ void mnName_80239A24(HSD_GObj* gobj)
         if ((total_rows > 4) && (row >= total_rows)) {
             row -= total_rows;
         }
-        name_idx =
-            mnName_NameDisplayOrder[(i % 6) + (row * 6)];
+        name_idx = mnName_NameDisplayOrder[(i % 6) + (row * 6)];
         {
             s32 is_valid;
-            if ((s8)(u8) mnName_StringTerminator ==
+            if ((s8) (u8) mnName_StringTerminator ==
                 (s8) GetPersistentNameData((s32) name_idx)->namedata[0])
             {
                 is_valid = 0;
@@ -1206,9 +1192,8 @@ void mnName_80239A24(HSD_GObj* gobj)
             if (is_valid != 0) {
                 char* namedata;
                 s32 is_valid2;
-                if ((s8)(u8) mnName_StringTerminator ==
-                    (s8) GetPersistentNameData((s32) name_idx)
-                        ->namedata[0])
+                if ((s8) (u8) mnName_StringTerminator ==
+                    (s8) GetPersistentNameData((s32) name_idx)->namedata[0])
                 {
                     is_valid2 = 0;
                 } else {
@@ -1217,24 +1202,20 @@ void mnName_80239A24(HSD_GObj* gobj)
                 if (is_valid2 == 0) {
                     namedata = NULL;
                 } else {
-                    namedata = (char*) GetPersistentNameData(
-                                   (s32) name_idx) +
-                               0x198;
+                    namedata =
+                        (char*) GetPersistentNameData((s32) name_idx) + 0x198;
                 }
                 {
                     f32 font_x = text->font_size.x;
                     f32 x = (f32) (i / 6) * text_col_width;
-                    HSD_SisLib_803A6B98(
-                        text, x / font_x,
-                        ((f32) (i % 6) * text_row_height) /
-                            text->font_size.y,
-                        namedata);
+                    HSD_SisLib_803A6B98(text, x / font_x,
+                                        ((f32) (i % 6) * text_row_height) /
+                                            text->font_size.y,
+                                        namedata);
                 }
                 {
                     GXColor* color;
-                    if ((s32) i ==
-                        (s32) mn_804A04F0.hovered_selection)
-                    {
+                    if ((s32) i == (s32) mn_804A04F0.hovered_selection) {
                         color = &mnName_804D4BE0;
                     } else {
                         color = &mnName_804D4BE4;
@@ -1441,7 +1422,7 @@ HSD_GObj* mnName_8023A59C(u8 arg0)
     f32 rows;
     f32 pos;
     HSD_Text* txt;
-    PAD_STACK(0x18);
+    PAD_STACK(16);
 
     gobj = GObj_Create(6U, 7U, 0x80U);
     mnName_804D6BF8 = gobj;
@@ -1449,8 +1430,7 @@ HSD_GObj* mnName_8023A59C(u8 arg0)
     HSD_GObjObject_80390A70(gobj, HSD_GObj_804D7849, root_jobj);
     GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 4U, 0x80U);
     HSD_GObj_SetupProc(gobj, fn_80239574, 0U);
-    HSD_JObjAddAnimAll(root_jobj, archive->anim_joint,
-                       archive->matanim_joint,
+    HSD_JObjAddAnimAll(root_jobj, archive->anim_joint, archive->matanim_joint,
                        archive->shapeanim_joint);
     HSD_JObjReqAnimAll(root_jobj, 0.0f);
     HSD_JObjAnimAll(root_jobj);
@@ -1565,10 +1545,8 @@ void mnName_8023A9B4(u8 arg0)
         }
         HSD_JObjSetFlagsAll((HSD_JObj*) gobj2->gobj.hsd_obj, 0x10U);
     } else {
-        HSD_JObjRemoveAll(
-            (HSD_JObj*) mn_80231634(
-                (struct mn_80231634_t*) gobj2->gobj
-                    .user_data_remove_func));
+        HSD_JObjRemoveAll((HSD_JObj*) mn_80231634(
+            (struct mn_80231634_t*) gobj2->gobj.user_data_remove_func));
         if (gobj2->text != NULL) {
             HSD_SisLib_803A5CC4(gobj2->text);
             gobj2->text = NULL;
@@ -1579,10 +1557,8 @@ void mnName_8023A9B4(u8 arg0)
     mnName_80238A04((HSD_GObj*) gobj2, 0x18U, (0, 0U));
     gobj2->gobj.gx_link = arg0;
     mnName_80238754_noinline((HSD_GObj*) gobj2);
-    HSD_JObjRemoveAll(
-        (HSD_JObj*) mn_80231634(
-            (struct mn_80231634_t*) gobj2->gobj
-                .user_data_remove_func));
+    HSD_JObjRemoveAll((HSD_JObj*) mn_80231634(
+        (struct mn_80231634_t*) gobj2->gobj.user_data_remove_func));
     if (gobj2->text != NULL) {
         HSD_SisLib_803A5CC4(gobj2->text);
         gobj2->text = NULL;
@@ -1601,79 +1577,74 @@ s32 mnName_8023AC40(void)
     s32 ctr;
     s32 val;
     HSD_GObjProc* proc;
+    PAD_STACK(8);
 
-    lbArchive_LoadSections(
-        archive,
-        (void**) ((char*) mnName_NameDisplayOrder + 0x98),
-        (char*) mnName_803ED538 + 0x13C,
-        (void**) ((char*) mnName_NameDisplayOrder + 0x9C),
-        (char*) mnName_803ED538 + 0x158,
-        (void**) ((char*) mnName_NameDisplayOrder + 0xA0),
-        (char*) mnName_803ED538 + 0x178,
-        (void**) ((char*) mnName_NameDisplayOrder + 0xA4),
-        (char*) mnName_803ED538 + 0x19C,
-        (void**) ((char*) mnName_NameDisplayOrder + 0x78),
-        (char*) mnName_803ED538 + 0x1C0,
-        (void**) ((char*) mnName_NameDisplayOrder + 0x7C),
-        (char*) mnName_803ED538 + 0x1DC,
-        (void**) ((char*) mnName_NameDisplayOrder + 0x80),
-        (char*) mnName_803ED538 + 0x1FC,
-        (void**) ((char*) mnName_NameDisplayOrder + 0x84),
-        (char*) mnName_803ED538 + 0x220,
-        (void**) ((char*) mnName_NameDisplayOrder + 0x88),
-        (char*) mnName_803ED538 + 0x244,
-        (void**) ((char*) mnName_NameDisplayOrder + 0x8C),
-        (char*) mnName_803ED538 + 0x25C,
-        (void**) ((char*) mnName_NameDisplayOrder + 0x90),
-        (char*) mnName_803ED538 + 0x278,
-        (void**) ((char*) mnName_NameDisplayOrder + 0x94),
-        (char*) mnName_803ED538 + 0x298,
-        (void**) ((char*) mnName_NameDisplayOrder + 0xA8),
-        (char*) mnName_803ED538 + 0x2BC,
-        (void**) ((char*) mnName_NameDisplayOrder + 0xAC),
-        (char*) mnName_803ED538 + 0x2D8,
-        (void**) ((char*) mnName_NameDisplayOrder + 0xB0),
-        (char*) mnName_803ED538 + 0x2F8,
-        (void**) ((char*) mnName_NameDisplayOrder + 0xB4),
-        (char*) mnName_803ED538 + 0x31C,
-        (void**) ((char*) mnName_NameDisplayOrder + 0xB8),
-        (char*) mnName_803ED538 + 0x340,
-        (void**) ((char*) mnName_NameDisplayOrder + 0xBC),
-        (char*) mnName_803ED538 + 0x35C,
-        (void**) ((char*) mnName_NameDisplayOrder + 0xC0),
-        (char*) mnName_803ED538 + 0x37C,
-        (void**) ((char*) mnName_NameDisplayOrder + 0xC4),
-        (char*) mnName_803ED538 + 0x3A0,
-        (void**) ((char*) mnName_NameDisplayOrder + 0xC8),
-        (char*) mnName_803ED538 + 0x3C4,
-        (void**) ((char*) mnName_NameDisplayOrder + 0xCC),
-        (char*) mnName_803ED538 + 0x3E0,
-        (void**) ((char*) mnName_NameDisplayOrder + 0xD0),
-        (char*) mnName_803ED538 + 0x400,
-        (void**) ((char*) mnName_NameDisplayOrder + 0xD4),
-        (char*) mnName_803ED538 + 0x424,
-        (void**) ((char*) mnName_NameDisplayOrder + 0xD8),
-        (char*) mnName_803ED538 + 0x448,
-        (void**) ((char*) mnName_NameDisplayOrder + 0xDC),
-        (char*) mnName_803ED538 + 0x464,
-        (void**) ((char*) mnName_NameDisplayOrder + 0xE0),
-        (char*) mnName_803ED538 + 0x484,
-        (void**) ((char*) mnName_NameDisplayOrder + 0xE4),
-        (char*) mnName_803ED538 + 0x4A8,
-        0);
+    lbArchive_LoadSections(archive,
+                           (void**) ((char*) mnName_NameDisplayOrder + 0x98),
+                           (char*) mnName_803ED538 + 0x13C,
+                           (void**) ((char*) mnName_NameDisplayOrder + 0x9C),
+                           (char*) mnName_803ED538 + 0x158,
+                           (void**) ((char*) mnName_NameDisplayOrder + 0xA0),
+                           (char*) mnName_803ED538 + 0x178,
+                           (void**) ((char*) mnName_NameDisplayOrder + 0xA4),
+                           (char*) mnName_803ED538 + 0x19C,
+                           (void**) ((char*) mnName_NameDisplayOrder + 0x78),
+                           (char*) mnName_803ED538 + 0x1C0,
+                           (void**) ((char*) mnName_NameDisplayOrder + 0x7C),
+                           (char*) mnName_803ED538 + 0x1DC,
+                           (void**) ((char*) mnName_NameDisplayOrder + 0x80),
+                           (char*) mnName_803ED538 + 0x1FC,
+                           (void**) ((char*) mnName_NameDisplayOrder + 0x84),
+                           (char*) mnName_803ED538 + 0x220,
+                           (void**) ((char*) mnName_NameDisplayOrder + 0x88),
+                           (char*) mnName_803ED538 + 0x244,
+                           (void**) ((char*) mnName_NameDisplayOrder + 0x8C),
+                           (char*) mnName_803ED538 + 0x25C,
+                           (void**) ((char*) mnName_NameDisplayOrder + 0x90),
+                           (char*) mnName_803ED538 + 0x278,
+                           (void**) ((char*) mnName_NameDisplayOrder + 0x94),
+                           (char*) mnName_803ED538 + 0x298,
+                           (void**) ((char*) mnName_NameDisplayOrder + 0xA8),
+                           (char*) mnName_803ED538 + 0x2BC,
+                           (void**) ((char*) mnName_NameDisplayOrder + 0xAC),
+                           (char*) mnName_803ED538 + 0x2D8,
+                           (void**) ((char*) mnName_NameDisplayOrder + 0xB0),
+                           (char*) mnName_803ED538 + 0x2F8,
+                           (void**) ((char*) mnName_NameDisplayOrder + 0xB4),
+                           (char*) mnName_803ED538 + 0x31C,
+                           (void**) ((char*) mnName_NameDisplayOrder + 0xB8),
+                           (char*) mnName_803ED538 + 0x340,
+                           (void**) ((char*) mnName_NameDisplayOrder + 0xBC),
+                           (char*) mnName_803ED538 + 0x35C,
+                           (void**) ((char*) mnName_NameDisplayOrder + 0xC0),
+                           (char*) mnName_803ED538 + 0x37C,
+                           (void**) ((char*) mnName_NameDisplayOrder + 0xC4),
+                           (char*) mnName_803ED538 + 0x3A0,
+                           (void**) ((char*) mnName_NameDisplayOrder + 0xC8),
+                           (char*) mnName_803ED538 + 0x3C4,
+                           (void**) ((char*) mnName_NameDisplayOrder + 0xCC),
+                           (char*) mnName_803ED538 + 0x3E0,
+                           (void**) ((char*) mnName_NameDisplayOrder + 0xD0),
+                           (char*) mnName_803ED538 + 0x400,
+                           (void**) ((char*) mnName_NameDisplayOrder + 0xD4),
+                           (char*) mnName_803ED538 + 0x424,
+                           (void**) ((char*) mnName_NameDisplayOrder + 0xD8),
+                           (char*) mnName_803ED538 + 0x448,
+                           (void**) ((char*) mnName_NameDisplayOrder + 0xDC),
+                           (char*) mnName_803ED538 + 0x464,
+                           (void**) ((char*) mnName_NameDisplayOrder + 0xE0),
+                           (char*) mnName_803ED538 + 0x484,
+                           (void**) ((char*) mnName_NameDisplayOrder + 0xE4),
+                           (char*) mnName_803ED538 + 0x4A8, 0);
 
     if (lbLang_IsSavedLanguageUS()) {
-        lbArchive_LoadSections(archive, (void**) &AutoNamesList,
-            (char*) mnName_803ED538 + 0x4D0,
-            (void**) &NotAllowedNamesList,
-            (char*) mnName_803ED538 + 0x4E4,
-            0);
+        lbArchive_LoadSections(
+            archive, (void**) &AutoNamesList, (char*) mnName_803ED538 + 0x4D0,
+            (void**) &NotAllowedNamesList, (char*) mnName_803ED538 + 0x4E4, 0);
     } else {
-        lbArchive_LoadSections(archive, (void**) &AutoNamesList,
-            (char*) mnName_803ED538 + 0x4F8,
-            (void**) &NotAllowedNamesList,
-            (char*) mnName_803ED538 + 0x508,
-            0);
+        lbArchive_LoadSections(
+            archive, (void**) &AutoNamesList, (char*) mnName_803ED538 + 0x4F8,
+            (void**) &NotAllowedNamesList, (char*) mnName_803ED538 + 0x508, 0);
     }
 
     mn_804A04F0.prev_menu = mn_804A04F0.cur_menu;
