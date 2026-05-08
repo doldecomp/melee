@@ -108,8 +108,6 @@ static s32 mnEvent_804D5028 = 0xCABC9FFF;
 static s32 mnEvent_804D502C = 0xFF;
 void* mnEvent_804A08F8[4];
 void* mnEvent_804A0908;
-static char mnEvent_804D5030[7] = "jobj.h";
-static char mnEvent_804D5038[5] = "jobj";
 static char mnEvent_804D5040[3] = "%d";
 static char mnEvent_804D5044[4] = { 0x81, 0x7C, 0, 0 };
 
@@ -125,6 +123,7 @@ void mnEvent_8024D15C(s32 idx, s32 event_id)
     HSD_JObj* icon_jobj;
     HSD_Text* text;
     HSD_Text* icon_text;
+    Vec3 translate;
     f32 spacing;
     f32 icon_spacing;
     s32 data_offset;
@@ -137,23 +136,16 @@ void mnEvent_8024D15C(s32 idx, s32 event_id)
     data = mnEvent_804D6C60->user_data;
     lb_80011E24(tree, &jobj_0C, 0xC, -1);
     lb_80011E24(tree, &jobj_0A, 0xA, -1);
-    if (jobj_0A == NULL) {
-        __assert(mnEvent_804D5030, 0x3EE, mnEvent_804D5038);
-    }
-    spacing = jobj_0A->translate.y;
-    if (jobj_0C == NULL) {
-        __assert(mnEvent_804D5030, 0x3EE, mnEvent_804D5038);
-    }
-    spacing = jobj_0C->translate.y - spacing;
-    if (jobj_0A == NULL) {
-        __assert(mnEvent_804D5030, 0x3D3, mnEvent_804D5038);
-    }
+
+    spacing = HSD_JObjGetTranslationY(jobj_0A);
+    spacing = HSD_JObjGetTranslationY(jobj_0C) - spacing;
+    HSD_JObjGetTranslation(jobj_0A, &translate);
 
     data_offset = idx * 4;
     row = (MnEventData*) ((u8*) data + data_offset);
-    pos.x = jobj_0A->translate.x;
-    pos.y = -(((f32) idx * spacing) + jobj_0A->translate.y);
-    pos.z = jobj_0A->translate.z;
+    pos.x = translate.x;
+    pos.y = -(((f32) idx * spacing) + translate.y);
+    pos.z = translate.z;
 
     if (row->gobjs[0] != NULL) {
         HSD_GObjPLink_80390228(data->gobjs[idx]);
@@ -165,20 +157,13 @@ void mnEvent_8024D15C(s32 idx, s32 event_id)
         tree = mnEvent_804D6C60->hsd_obj;
         lb_80011E24(tree, &jobj_0C_2, 0xC, -1);
         lb_80011E24(tree, &jobj_0A_2, 0xA, -1);
-        if (jobj_0A_2 == NULL) {
-            __assert(mnEvent_804D5030, 0x3EE, mnEvent_804D5038);
-        }
-        icon_spacing = jobj_0A_2->translate.y;
-        if (jobj_0C_2 == NULL) {
-            __assert(mnEvent_804D5030, 0x3EE, mnEvent_804D5038);
-        }
-        icon_spacing = jobj_0C_2->translate.y - icon_spacing;
-        if (jobj_0A_2 == NULL) {
-            __assert(mnEvent_804D5030, 0x3D3, mnEvent_804D5038);
-        }
-        icon_pos.x = jobj_0A_2->translate.x;
-        icon_pos.y = jobj_0A_2->translate.y + ((f32) idx * icon_spacing);
-        icon_pos.z = jobj_0A_2->translate.z;
+        icon_spacing = HSD_JObjGetTranslationY(jobj_0A_2);
+        icon_spacing = HSD_JObjGetTranslationY(jobj_0C_2) - icon_spacing;
+        HSD_JObjGetTranslation(jobj_0A_2, &translate);
+
+        icon_pos.x = translate.x;
+        icon_pos.y = translate.y + ((f32) idx * icon_spacing);
+        icon_pos.z = translate.z;
         icon_gobj = GObj_Create(6, 7, 0x80);
         icon_jobj = HSD_JObjLoadJoint((HSD_Joint*) mnEvent_804A0908);
         HSD_GObjObject_80390A70(icon_gobj, HSD_GObj_804D7849, icon_jobj);
