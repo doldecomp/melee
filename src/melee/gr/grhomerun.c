@@ -188,7 +188,8 @@ void grHomeRun_8021CB20(Ground_GObj* gobj)
     };
 
     Ground* gp = GET_GROUND(gobj);
-    grHomeRun_MainGroundVars* vars = (grHomeRun_MainGroundVars*) &gp->gv.homerun;
+    grHomeRun_MainGroundVars* vars =
+        (grHomeRun_MainGroundVars*) &gp->gv.homerun;
     HSD_JObj* jobj = GET_JOBJ(gobj);
     UnkArchiveStruct* archive;
     HSD_CObj* cobj;
@@ -229,7 +230,8 @@ void grHomeRun_8021CB20(Ground_GObj* gobj)
     gobjs_num = 2.0F * (1.0F + (2400.0F / (160.0F * Ground_801C0498())));
     HSD_ASSERT(0x1A2, gobjs_num < 64);
 
-    for (i = 0; (f32) i < 1.0F + (2400.0F / (160.0F * Ground_801C0498())); i++) {
+    for (i = 0; (f32) i < 1.0F + (2400.0F / (160.0F * Ground_801C0498())); i++)
+    {
         gobjs[i] = grHomeRun_8021E500(i);
     }
     for (; i < 64; i++) {
@@ -421,26 +423,22 @@ void grHomeRun_8021D680(Ground_GObj* gobj)
 
         jobj = GET_JOBJ(vars->rear_gobj);
         HSD_ASSERT(0x257, jobj);
-        HSD_JObjSetTranslateX(
-            jobj, x - 1.5F * (2150.99F * Ground_801C0498()));
+        HSD_JObjSetTranslateX(jobj, x - 1.5F * (2150.99F * Ground_801C0498()));
 
         jobj = GET_JOBJ(vars->rear2_gobj);
         HSD_ASSERT(0x259, jobj);
 
-        HSD_JObjSetTranslateX(
-            jobj, x - 0.5F * (2150.99F * Ground_801C0498()));
+        HSD_JObjSetTranslateX(jobj, x - 0.5F * (2150.99F * Ground_801C0498()));
 
         jobj = GET_JOBJ(vars->rear3_gobj);
         HSD_ASSERT(0x25B, jobj);
 
-        HSD_JObjSetTranslateX(
-            jobj, x + 0.5F * (2150.99F * Ground_801C0498()));
+        HSD_JObjSetTranslateX(jobj, x + 0.5F * (2150.99F * Ground_801C0498()));
 
         jobj = GET_JOBJ(vars->rear4_gobj);
         HSD_ASSERT(0x25D, jobj);
 
-        HSD_JObjSetTranslateX(
-            jobj, x + 1.5F * (2150.99F * Ground_801C0498()));
+        HSD_JObjSetTranslateX(jobj, x + 1.5F * (2150.99F * Ground_801C0498()));
 
         lb_800115F4();
         Ground_801C2FE0(gobj);
@@ -777,7 +775,8 @@ HSD_GObj* grHomeRun_8021E500(s16 arg0)
     HSD_JObjSetTranslateX(child, 0.0F);
 
     offset = grHr_804D6AE4 * ((f32) arg0 * (160.0F * Ground_801C0498()));
-    gp->gv.homerun.xD0 = (160.0F * (grHr_804D6AE4 * Ground_801C0498())) + offset;
+    gp->gv.homerun.xD0 =
+        (160.0F * (grHr_804D6AE4 * Ground_801C0498())) + offset;
     HSD_JObjSetTranslateX(jobj, gp->gv.homerun.xD0);
 
     gp->gv.homerun.xC6 =
