@@ -115,7 +115,6 @@ void mn_802339FC(void);
 void mnCharSel_80264070(void);
 void mnCharSel_802640A0(void);
 
-/// #fn_8022F538
 void fn_8022F538(HSD_GObj* arg0)
 {
     GameRules* rules;
@@ -363,7 +362,6 @@ void mn_8022FB88(u8 arg0, void* arg1)
     HSD_JObjAnimAll(temp_r29_3);
 }
 
-/// #mn_8022FD18
 void mn_8022FD18(u8 arg0)
 {
     u16 sp14;
@@ -420,7 +418,6 @@ void mn_8022FD18(u8 arg0)
     HSD_JObjAnimAll(jobj);
 }
 
-/// #mn_8022FEC8
 void mn_8022FEC8(HSD_GObj* arg0, HSD_JObj* arg1, u8 arg2, u8 arg3)
 {
     HSD_JObj* temp_r28;
@@ -551,7 +548,6 @@ func:
     mn_8022ED6C(jobj, settings);
 }
 
-/// #mn_80230274
 extern MenuKindData mn_803EB6B0[];
 extern AnimLoopSettings mn_804D4B88;
 
@@ -769,7 +765,6 @@ void mn_802308F0(HSD_GObj* gobj, int arg1, int arg2)
     }
 }
 
-/// #fn_802309F0
 void fn_802309F0(HSD_GObj* arg0)
 {
     GameRules* rules;
@@ -930,7 +925,6 @@ int mn_80230D18(struct mn_802307F8_t* arg0, HSD_JObj* arg1, s8 arg2)
     return result;
 }
 
-/// #mn_80230E38
 HSD_GObj* mn_80230E38(int arg0)
 {
     HSD_GObj* gobj;
