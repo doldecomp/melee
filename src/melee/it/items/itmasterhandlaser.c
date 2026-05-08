@@ -149,6 +149,7 @@ void it_802F063C(Item_GObj* gobj, Item_GObj* arg1)
     Vec3 pos_1;     // 4C, 50, 54
     Vec3 pos_2;     // 40, 44, 48
     Vec3 translate; // 34, 38, 3C
+    PAD_STACK(8);
 
     ip = GET_ITEM(gobj);
     fp = GET_FIGHTER(ip->owner);

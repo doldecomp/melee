@@ -232,6 +232,7 @@ void it_802C53F0(Item_GObj* gobj, Vec3* pos, float angle, float charge,
     Item* ip = GET_ITEM(gobj);
     itMewtwoShadowball_DatAttrs* attr =
         ip->xC4_article_data->x4_specialAttributes;
+    HSD_JObj* jobj;
     PAD_STACK(8);
 
     ip->xDD4_itemVar.mewtwoshadowball.x4.x = angle;
@@ -264,7 +265,7 @@ void it_802C53F0(Item_GObj* gobj, Vec3* pos, float angle, float charge,
         {
             f32 base = attr->x8;
             ip->xDD4_itemVar.mewtwoshadowball.x4.y =
-                (charge * ((attr->xC - base) / max_charge)) + base;
+                base + (charge * ((attr->xC - base) / max_charge));
         }
         {
             f32 base = attr->x10;
@@ -293,8 +294,9 @@ void it_802C53F0(Item_GObj* gobj, Vec3* pos, float angle, float charge,
         ip->x40_vel.z = 0.0f;
         ip->xDD4_itemVar.mewtwoshadowball.x14 = 1;
         ip->xDD4_itemVar.mewtwoshadowball.x4C = 0;
+        jobj = HSD_JObjGetChild(gobj->hsd_obj);
         tr.x = tr.y = tr.z = 1.0f;
-        HSD_JObjSetScale(HSD_JObjGetChild(gobj->hsd_obj), &tr);
+        HSD_JObjSetScale(jobj, &tr);
     }
 }
 

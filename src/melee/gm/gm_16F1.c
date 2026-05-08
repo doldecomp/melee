@@ -11,11 +11,11 @@
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lblanguage.h>
 #include <melee/lb/lbtime.h>
+#include <melee/pl/player.h>
 #include <melee/pl/plbonus.h>
 #include <melee/pl/plbonuslib.h>
 #include <melee/pl/types.h>
 #include <melee/ty/toy.h>
-#include <melee/pl/player.h>
 
 struct lbl_804D65A8_t {
     /* 0x00 */ u8 x0;
@@ -366,8 +366,8 @@ int fn_8016FAD4(struct lbl_8046B6A0_24C_t* rules, u32 kind, int flags,
     s32 scores[6];
     int i;
 
-    *(s32*)rankings = lbl_804DA2E8;
-    *(u16*)&rankings[4] = lbl_804DA2EC;
+    *(s32*) rankings = lbl_804DA2E8;
+    *(u16*) &rankings[4] = lbl_804DA2EC;
     rankings[6] = lbl_804DA2EE;
 
     while (entry->kind != kind) {
@@ -380,8 +380,7 @@ int fn_8016FAD4(struct lbl_8046B6A0_24C_t* rules, u32 kind, int flags,
     for (i = 0; i < 6; i++) {
         if (x58[i].x0 != 3) {
             u16 sd = x58[i].xA;
-            scores[i] = x58[i].x20 - (x58[i].x24 - sd) +
-                         (s8)rules->xC * sd;
+            scores[i] = x58[i].x20 - (x58[i].x24 - sd) + (s8) rules->xC * sd;
         }
     }
 
@@ -389,9 +388,7 @@ int fn_8016FAD4(struct lbl_8046B6A0_24C_t* rules, u32 kind, int flags,
         if (x58[i].x0 != 3) {
             int j;
             for (j = 0; j < 6; j++) {
-                if (x58[j].x0 != 3 && i != j &&
-                    scores[i] < scores[j])
-                {
+                if (x58[j].x0 != 3 && i != j && scores[i] < scores[j]) {
                     rankings[i]++;
                 }
             }
@@ -402,16 +399,24 @@ int fn_8016FAD4(struct lbl_8046B6A0_24C_t* rules, u32 kind, int flags,
     }
 
     if ((entry->x6 & 2) && (flags & 2)) {
-        u8 pr = rankings[(u8)player];
+        u8 pr = rankings[(u8) player];
         if (pr == 0) {
             return lbl_803D5648[entry->x2 - 2] * 2;
         }
         {
             int active = 0;
-            if (x58[0].x0 != 3) active++;
-            if (x58[1].x0 != 3) active++;
-            if (x58[2].x0 != 3) active++;
-            if (x58[3].x0 != 3) active++;
+            if (x58[0].x0 != 3) {
+                active++;
+            }
+            if (x58[1].x0 != 3) {
+                active++;
+            }
+            if (x58[2].x0 != 3) {
+                active++;
+            }
+            if (x58[3].x0 != 3) {
+                active++;
+            }
         }
         if (pr == rankings[6]) {
             return lbl_803D5648[entry->x2 - 2] / 2;
@@ -420,23 +425,20 @@ int fn_8016FAD4(struct lbl_8046B6A0_24C_t* rules, u32 kind, int flags,
 
     if ((entry->x6 & 1) && (flags & 4)) {
         return (lbl_803D5648[entry->x2 - 2] / 10) *
-               pl_80039418((u8)player, kind);
+               pl_80039418((u8) player, kind);
     }
 
     if (entry->x5 == 1) {
         if (kind == 0xE3) {
-            return lbl_803D5648[entry->x2 - 2] *
-                   x58[(u8)player].x20;
+            return lbl_803D5648[entry->x2 - 2] * x58[(u8) player].x20;
         } else if (kind == 0xE4) {
             return lbl_803D5648[entry->x2 - 2] *
-                   (x58[(u8)player].x24 -
-                    x58[(u8)player].xA);
+                   (x58[(u8) player].x24 - x58[(u8) player].xA);
         } else if (kind == 0xE5) {
-            return lbl_803D5648[entry->x2 - 2] *
-                   x58[(u8)player].xA;
+            return lbl_803D5648[entry->x2 - 2] * x58[(u8) player].xA;
         } else {
             return lbl_803D5648[entry->x2 - 2] *
-                   pl_80039418((u8)player, kind);
+                   pl_80039418((u8) player, kind);
         }
     }
 
@@ -516,8 +518,8 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
 
     {
         u8 is_teams = (u8) lbl_804D65A0;
-        *(s32*)&rankings[0] = lbl_804DA2F0;
-        *(u16*)&rankings[4] = lbl_804DA2F4;
+        *(s32*) &rankings[0] = lbl_804DA2F0;
+        *(u16*) &rankings[4] = lbl_804DA2F4;
         rankings[6] = lbl_804DA2F6;
         if (is_teams != 0) {
             return 0;
@@ -534,8 +536,8 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
 
         if (x58[0].x0 != 3) {
             u16 xA = x58[0].xA;
-            scores[0] = (x58[0].x20 - (x58[0].x24 - xA)) +
-                         ((s8) rules->xC * xA);
+            scores[0] =
+                (x58[0].x20 - (x58[0].x24 - xA)) + ((s8) rules->xC * xA);
         }
         {
             int k;
@@ -544,8 +546,7 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
             for (k = 1; k < 6; k++) {
                 if (p->x0 != 3) {
                     u16 xA = p->xA;
-                    *sp = (p->x20 - (p->x24 - xA)) +
-                           ((s8) rules->xC * xA);
+                    *sp = (p->x20 - (p->x24 - xA)) + ((s8) rules->xC * xA);
                 }
                 p++;
                 sp++;
@@ -561,9 +562,7 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
                 if (x58_p->x0 != 3) {
                     s32 my_score = *sc_p;
 
-                    if (x58[0].x0 != 3 && idx != 0 &&
-                        my_score < scores[0])
-                    {
+                    if (x58[0].x0 != 3 && idx != 0 && my_score < scores[0]) {
                         *rk_p = *rk_p + 1;
                     }
 
@@ -572,9 +571,7 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
                         s32* sq = score_ptr + 1;
                         int j;
                         for (j = 1; j < 6; j++) {
-                            if (q->x0 != 3 && idx != j &&
-                                my_score < *sq)
-                            {
+                            if (q->x0 != 3 && idx != j && my_score < *sq) {
                                 *rk_p = *rk_p + 1;
                             }
                             q++;
@@ -633,8 +630,7 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
         }
         return 0;
 
-    case 0xD9:
-    {
+    case 0xD9: {
         int k = 0;
         do {
             if (x58[k].x0 != 3 && k != arg1 && fn_80171B00(k) != 0) {
@@ -648,8 +644,7 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
         return 0;
     }
 
-    case 0xDA:
-    {
+    case 0xDA: {
         int k = 0;
         do {
             if (x58[k].x0 != 3 && k != arg1 && fn_80171B2C(k) != 0) {
@@ -663,8 +658,7 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
         return 0;
     }
 
-    case 0xDB:
-    {
+    case 0xDB: {
         s32 vals[4];
         int i, j;
         if (x58[arg1].x20 < 3) {
@@ -696,16 +690,13 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
                 p++;
             }
         }
-        if (vals[0] == x58[arg1].x20 &&
-            vals[0] >= vals[1] * 2)
-        {
+        if (vals[0] == x58[arg1].x20 && vals[0] >= vals[1] * 2) {
             return 1;
         }
         return 0;
     }
 
-    case 0xDC:
-    {
+    case 0xDC: {
         if ((unsigned) fn_801701C0(arg0, arg1, 0xDB) == 0) {
             s32 player_kills = x58[arg1].x20;
             {
@@ -727,8 +718,7 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
         return 0;
     }
 
-    case 0xDD:
-    {
+    case 0xDD: {
         s32 vals[4];
         int i, j;
         if (x58[arg1].x40 < 3) {
@@ -760,16 +750,13 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
                 p++;
             }
         }
-        if (vals[0] == x58[arg1].x40 &&
-            vals[0] >= vals[1] * 2)
-        {
+        if (vals[0] == x58[arg1].x40 && vals[0] >= vals[1] * 2) {
             return 1;
         }
         return 0;
     }
 
-    case 0xDE:
-    {
+    case 0xDE: {
         if ((unsigned) fn_801701C0(arg0, arg1, 0xDD) == 0) {
             s32 player_deaths = x58[arg1].x40;
             {
@@ -791,8 +778,7 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
         return 0;
     }
 
-    case 0xDF:
-    {
+    case 0xDF: {
         s32 vals[4];
         int i, j;
         s32 player_net = x58[arg1].x24 - x58[arg1].xA;
@@ -825,7 +811,7 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
                 p++;
             }
         }
-        if (vals[0] == (s32)(x58[arg1].x24 - x58[arg1].xA) &&
+        if (vals[0] == (s32) (x58[arg1].x24 - x58[arg1].xA) &&
             vals[0] >= vals[1] * 2)
         {
             return 1;
@@ -833,8 +819,7 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
         return 0;
     }
 
-    case 0xE0:
-    {
+    case 0xE0: {
         if ((unsigned) fn_801701C0(arg0, arg1, 0xDF) == 0) {
             s32 player_net = x58[arg1].x24 - x58[arg1].xA;
             {
@@ -842,7 +827,7 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
                 int i;
                 for (i = 0; i < 4; i++) {
                     if (p->x0 != 3 && arg1 != i &&
-                        (u32)(p->x24 - p->xA) >= (u32) player_net)
+                        (u32) (p->x24 - p->xA) >= (u32) player_net)
                     {
                         return 0;
                     }
@@ -856,8 +841,7 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
         return 0;
     }
 
-    case 0xE1:
-    {
+    case 0xE1: {
         s32 vals[4];
         int i, j;
         if (x58[arg1].xA < 3) {
@@ -889,25 +873,20 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
                 p++;
             }
         }
-        if ((u32) vals[0] == (u32) x58[arg1].xA &&
-            vals[0] >= vals[1] * 2)
-        {
+        if ((u32) vals[0] == (u32) x58[arg1].xA && vals[0] >= vals[1] * 2) {
             return 1;
         }
         return 0;
     }
 
-    case 0xE2:
-    {
+    case 0xE2: {
         if ((unsigned) fn_801701C0(arg0, arg1, 0xE1) == 0) {
             u16 player_sds = x58[arg1].xA;
             {
                 struct lbl_8046B6A0_24C_58_t* p = x58;
                 int i;
                 for (i = 0; i < 4; i++) {
-                    if (p->x0 != 3 && arg1 != i &&
-                        p->xA >= player_sds)
-                    {
+                    if (p->x0 != 3 && arg1 != i && p->xA >= player_sds) {
                         return 0;
                     }
                     p++;
@@ -926,8 +905,7 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
         }
         return 0;
 
-    case 0xE4:
-    {
+    case 0xE4: {
         if ((x58[arg1].x24 - x58[arg1].xA) != 0) {
             return 1;
         }
@@ -970,8 +948,7 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
         }
         return 0;
 
-    case 0xEB:
-    {
+    case 0xEB: {
         u8 f0 = flags[0];
         if (((f0 >> 1) & 1) && ((f0 >> 5) & 1)) {
             return 1;
@@ -997,8 +974,7 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
         }
         return 0;
 
-    case 0xEF:
-    {
+    case 0xEF: {
         u8 f0 = flags[0];
         if (((f0 >> 4) & 1) || ((f0 >> 3) & 1) || ((f0 >> 2) & 1)) {
             return 1;
@@ -1060,13 +1036,14 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
         }
         return 0;
 
-    case 0xF9:
-    {
+    case 0xF9: {
         f32 vals[4];
         int i, j;
         {
-            typedef struct { s32 a, b, c, d; } copy_t;
-            *(copy_t*)vals = *(copy_t*)zeroes->x40;
+            typedef struct {
+                s32 a, b, c, d;
+            } copy_t;
+            *(copy_t*) vals = *(copy_t*) zeroes->x40;
         }
         for (i = 0; i < 4; i++) {
             if (x58[i].x0 != 3) {
@@ -1091,13 +1068,14 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
     }
 
     case 0xFA:
-        if ((unsigned) fn_8016F160(arg1, 0x60) != 0 && rankings[arg1] != rankings[6]) {
+        if ((unsigned) fn_8016F160(arg1, 0x60) != 0 &&
+            rankings[arg1] != rankings[6])
+        {
             return 1;
         }
         return 0;
 
-    case 0xFB:
-    {
+    case 0xFB: {
         f32 min_dmg = 0.0f;
         int i;
         for (i = 0; i < 4; i++) {
@@ -1111,8 +1089,7 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
         return 0;
     }
 
-    case 0xFC:
-    {
+    case 0xFC: {
         {
             struct lbl_8046B6A0_24C_58_t* p = x58;
             int i;
@@ -1179,8 +1156,7 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
         }
         return 0;
 
-    case 0xFE:
-    {
+    case 0xFE: {
         u32 vals[4];
         int i, j;
         unsigned int threshold;
@@ -1216,9 +1192,7 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
                         p++;
                     }
                 }
-                if (vals[0] == pl_800408B8(arg1) &&
-                    vals[0] <= vals[1] / 2)
-                {
+                if (vals[0] == pl_800408B8(arg1) && vals[0] <= vals[1] / 2) {
                     return 1;
                 }
             } else {
@@ -1228,8 +1202,7 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
         return 0;
     }
 
-    case 0xFF:
-    {
+    case 0xFF: {
         u32 vals[4];
         int i, j;
         unsigned int threshold;
@@ -1262,9 +1235,7 @@ int fn_801701C0(void* arg0, int arg1, int arg2)
                         p++;
                     }
                 }
-                if (vals[0] == pl_80040894(arg1) &&
-                    vals[0] >= vals[1] * 2)
-                {
+                if (vals[0] == pl_80040894(arg1) && vals[0] >= vals[1] * 2) {
                     return 1;
                 }
             } else {
@@ -1322,6 +1293,7 @@ void fn_80171B64(struct lbl_804D65A8_t* arg0)
 
 int fn_80171BA4(void* arg0)
 {
+    u8 _padA[8];
     int scores[6];
     int player;
     int ko_count;
@@ -1356,10 +1328,8 @@ int fn_80171BA4(void* arg0)
                                     Player_GetKOsByPlayerIndex(player, j);
                             }
                         } else {
-                            suicides +=
-                                Player_GetKOsByPlayerIndex(player, j);
-                            falls +=
-                                Player_GetKOsByPlayerIndex(player, j);
+                            suicides += Player_GetKOsByPlayerIndex(player, j);
+                            falls += Player_GetKOsByPlayerIndex(player, j);
                         }
                     }
                     j++;
@@ -1369,21 +1339,17 @@ int fn_80171BA4(void* arg0)
                 do {
                     if (Player_GetPlayerSlotType(j) != Gm_PKind_NA) {
                         if (player != j) {
-                            ko_count +=
-                                Player_GetKOsByPlayerIndex(player, j);
+                            ko_count += Player_GetKOsByPlayerIndex(player, j);
                         } else {
-                            suicides +=
-                                Player_GetKOsByPlayerIndex(player, j);
-                            falls +=
-                                Player_GetKOsByPlayerIndex(player, j);
+                            suicides += Player_GetKOsByPlayerIndex(player, j);
+                            falls += Player_GetKOsByPlayerIndex(player, j);
                         }
                     }
                     j++;
                 } while (j < 6);
             }
-            *var_r28 =
-                (ko_count - (falls - (int) suicides)) +
-                ((int) suicides * (s8) *((u8*) arg0 + 0xC));
+            *var_r28 = (ko_count - (falls - (int) suicides)) +
+                       ((int) suicides * (s8) * ((u8*) arg0 + 0xC));
         }
         player++;
         var_r28 += 1;
@@ -1418,7 +1384,7 @@ int fn_80171BA4(void* arg0)
     return result;
 }
 
-void fn_80171DC4()
+void fn_80171DC4(void)
 {
     int i;
     struct lbl_8046B6A0_24C_t* rules = gm_8016B774();
@@ -1444,7 +1410,8 @@ void fn_80171DC4()
                     lbl_8046DBC8.x2[i].x0 = 0;
                 }
                 if (lbl_8046DBC8.x2[i].x1 == 1 &&
-                    (lbl_804D65A8[i] == 0 || (s32) lbl_804D65A8[i] != lbl_804D65B0))
+                    (lbl_804D65A8[i] == 0 ||
+                     (s32) lbl_804D65A8[i] != lbl_804D65B0))
                 {
                     lbl_8046DBC8.x2[i].x1 = 0;
                 }

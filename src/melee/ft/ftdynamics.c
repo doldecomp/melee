@@ -21,7 +21,76 @@
 
 char const* _assert_msg = "translate";
 
-/// #ftCo_8009CB40
+void ftCo_8009CB40(Fighter* fp, ssize_t bone_idx, bool arg2, FigaTree* arg3)
+{
+    ftDynamics* dyn = fp->ft_data->x2C;
+    if (dyn->dynamicsNum != 0) {
+        s32 bone_id;
+        u8 var_r22;
+        HSD_JObj* var_r30;
+        s32 var_r29;
+        struct DynamicsData* var_r28;
+        u8 temp_r21;
+        HSD_JObj* temp_jobj;
+        bone_id = dyn->ftDynamicBones->array[bone_idx].bone_id;
+        if (arg2 == 0) {
+            var_r22 = 0;
+        } else {
+            var_r22 = 1;
+        }
+        var_r30 = fp->parts[bone_id].joint;
+        var_r29 = 0;
+        if (arg2 == 1) {
+            fp->dynamic_bone_sets[bone_idx].bone_id = (enum_t) (ssize_t) arg3;
+        } else {
+            fp->dynamic_bone_sets[bone_idx].bone_id = 0x100;
+        }
+        var_r28 = fp->dynamic_bone_sets[bone_idx].dyn_desc.data;
+        temp_r21 = 1 - var_r22;
+        while (var_r28 != NULL) {
+            if (var_r29 < (s32) arg3) {
+                if (temp_r21 != 0 && !(fp->parts[bone_id + var_r29].flags_b7))
+                {
+                    var_r28->desc.lb_unk0.unk_2C.x =
+                        var_r28->desc.lb_unk0.jobj->mtx[0][3];
+                    var_r28->desc.lb_unk0.unk_2C.y =
+                        var_r28->desc.lb_unk0.jobj->mtx[1][3];
+                    var_r28->desc.lb_unk0.unk_2C.z =
+                        var_r28->desc.lb_unk0.jobj->mtx[2][3];
+                    var_r28->desc.lb_unk0.unk_44 = 0.0f;
+                    temp_jobj = var_r28->desc.lb_unk0.jobj;
+                    HSD_JObjSetTranslate(temp_jobj,
+                                         &var_r28->desc.lb_unk0.translate);
+                    temp_jobj = var_r28->desc.lb_unk0.jobj;
+                    HSD_JObjSetScale(temp_jobj, &var_r28->desc.lb_unk0.scale);
+                }
+                fp->parts[bone_id + var_r29].flags_b7 = temp_r21;
+            } else {
+                if (var_r22 != 0 && !(fp->parts[bone_id + var_r29].flags_b7)) {
+                    var_r28->desc.lb_unk0.unk_2C.x =
+                        var_r28->desc.lb_unk0.jobj->mtx[0][3];
+                    var_r28->desc.lb_unk0.unk_2C.y =
+                        var_r28->desc.lb_unk0.jobj->mtx[1][3];
+                    var_r28->desc.lb_unk0.unk_2C.z =
+                        var_r28->desc.lb_unk0.jobj->mtx[2][3];
+                    var_r28->desc.lb_unk0.unk_44 = 0.0f;
+                    temp_jobj = var_r28->desc.lb_unk0.jobj;
+                    HSD_JObjSetTranslate(temp_jobj,
+                                         &var_r28->desc.lb_unk0.translate);
+                    temp_jobj = var_r28->desc.lb_unk0.jobj;
+                    HSD_JObjSetScale(temp_jobj, &var_r28->desc.lb_unk0.scale);
+                }
+                fp->parts[bone_id + var_r29].flags_b7 = var_r22;
+            }
+            if (fp->parts[bone_id + var_r29].flags_b7) {
+                HSD_JObjClearFlags(var_r30, 0x20000U);
+            }
+            var_r30 = HSD_JObjGetChild(var_r30);
+            var_r28 = var_r28->next;
+            var_r29++;
+        }
+    }
+}
 
 void ftCo_8009CF84(Fighter* fp)
 {
@@ -294,6 +363,7 @@ void ftCo_8009D704(Fighter* fp)
 void ftCo_8009D81C(Fighter* fp)
 {
     KirbyHatStruct* data = ft_80459B88.hats[FTKIND_YOSHI];
+    PAD_STACK(8);
     fp->dynamics_num = data->hat_dynamics[3]->dynamicsNum;
     if (fp->dynamics_num >= Ft_Dynamics_NumMax) {
         OSReport("fighter dynamics num over!\n");
@@ -453,17 +523,17 @@ void ftCo_8009DB50(Fighter* fp)
     fp->dynamics_num = hat->hat_dynamics[4]->dynamicsNum;
     if (fp->dynamics_num >= Ft_Dynamics_NumMax) {
         OSReport("fighter dynamics num over!\n");
-        __assert("ftdynamics.c", 455, "fp->dynamics_num < Ft_Dynamics_NumMax");
+        __assert(__FILE__, 455, "fp->dynamics_num < Ft_Dynamics_NumMax");
     }
     {
         ssize_t i;
         for (i = 0; i < fp->dynamics_num; i++) {
-            BoneDynamicsDesc* desc =
-                &hat->hat_dynamics[4]->ftDynamicBones->array[i];
-            fp->parts[desc->bone_id].flags_b0 = true;
-            lb_8000FD48(fp->parts[desc->bone_id].joint,
-                        &fp->dynamic_bone_sets[i].dyn_desc,
-                        desc->dyn_desc.count);
+            s32 bone_id =
+                hat->hat_dynamics[4]->ftDynamicBones->array[i].bone_id;
+            fp->parts[bone_id].flags_b0 = true;
+            lb_8000FD48(
+                fp->parts[bone_id].joint, &fp->dynamic_bone_sets[i].dyn_desc,
+                hat->hat_dynamics[4]->ftDynamicBones->array[i].dyn_desc.count);
             fp->dynamic_bone_sets[i].bone_id = FtPart_TopN;
             lb_80011710(
                 &hat->hat_dynamics[4]->ftDynamicBones->array[i].dyn_desc,
@@ -497,6 +567,7 @@ void ftCo_8009DD94(Fighter_GObj* gobj, bool arg1)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ssize_t dynamics_num = fp->dynamics_num;
+    PAD_STACK(16);
     if (dynamics_num != 0 && stage_info.internal_stage_id == FLATZONE) {
         HSD_JObjSetupMatrix(GET_JOBJ(gobj));
     }

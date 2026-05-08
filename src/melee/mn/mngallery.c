@@ -477,16 +477,17 @@ void mnGallery_80259868(void)
     mn_804A04F0.hovered_selection = 0;
     archive = mn_804D6BB8;
 
-    lbArchive_LoadSections(archive,
-        (void*) &mnGallery_804A0BA0.joint, "MenMainConGa_Top_joint",
+    lbArchive_LoadSections(
+        archive, (void*) &mnGallery_804A0BA0.joint, "MenMainConGa_Top_joint",
         &mnGallery_804A0BA0.animjoint, "MenMainConGa_Top_animjoint",
         &mnGallery_804A0BA0.matanim_joint, "MenMainConGa_Top_matanim_joint",
-        &mnGallery_804A0BA0.shapeanim_joint, "MenMainConGa_Top_shapeanim_joint",
-        &mnGallery_804A0BB0.joint, "MenMainCursorGa_Top_joint",
-        &mnGallery_804A0BB0.animjoint, "MenMainCursorGa_Top_animjoint",
-        &mnGallery_804A0BB0.matanim_joint, "MenMainCursorGa_Top_matanim_joint",
-        &mnGallery_804A0BB0.shapeanim_joint, "MenMainCursorGa_Top_shapeanim_joint",
-        0);
+        &mnGallery_804A0BA0.shapeanim_joint,
+        "MenMainConGa_Top_shapeanim_joint", &mnGallery_804A0BB0.joint,
+        "MenMainCursorGa_Top_joint", &mnGallery_804A0BB0.animjoint,
+        "MenMainCursorGa_Top_animjoint", &mnGallery_804A0BB0.matanim_joint,
+        "MenMainCursorGa_Top_matanim_joint",
+        &mnGallery_804A0BB0.shapeanim_joint,
+        "MenMainCursorGa_Top_shapeanim_joint", 0);
 
     gobj = GObj_Create(0, 1, 0x80);
     proc = HSD_GObj_SetupProc(gobj, fn_80258ED0, 0);

@@ -80,6 +80,5 @@
 /* 2E4A04 */ bool itWhitebea_UnkMotion11_Coll(Item_GObj* gobj);
 /* 2E4A24 */ void it_802E4A24(Item_GObj*, Item_GObj*);
 extern ItemStateTable it_803F8A88[];
-/* 4D6D40 */ extern f32* it_804D6D40;
 
 #endif

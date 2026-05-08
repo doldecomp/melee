@@ -193,10 +193,8 @@ void itOldkuri_UnkMotion2_Phys(Item_GObj* gobj)
     PAD_STACK(8);
     if (ip->xDD4_itemVar.oldkuri.xDFC != 0 && it_802750E8(gobj, 2) != 0) {
         Item* ip = GET_ITEM(gobj);
-        itOldkuriAttributes* attr =
-            ip->xC4_article_data->x4_specialAttributes;
-        ip->xDD4_itemVar.oldkuri.xDF4 =
-            ip->facing_dir * ((f32*) attr->x0)[1];
+        itOldkuriAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
+        ip->xDD4_itemVar.oldkuri.xDF4 = ip->facing_dir * ((f32*) attr->x0)[1];
         ip->x40_vel.x = ip->xDD4_itemVar.oldkuri.xDF4;
         ip->x40_vel.z = 0.0f;
         ip->x40_vel.y = 0.0f;
@@ -205,8 +203,7 @@ void itOldkuri_UnkMotion2_Phys(Item_GObj* gobj)
         it_802D848C(gobj, 1, ITEM_ANIM_UPDATE);
     }
     ip->x40_vel.x = ip->xDD4_itemVar.oldkuri.xDF4;
-    it_8027C8D0(&ip->x40_vel, &ip->x378_itemColl.floor.normal,
-                ip->facing_dir);
+    it_8027C8D0(&ip->x40_vel, &ip->x378_itemColl.floor.normal, ip->facing_dir);
     it_8027C0A8(gobj, 0.0f, 5.0f);
 }
 
@@ -413,7 +410,7 @@ bool it_2725_Logic0_DmgReceived(Item_GObj* gobj)
         it_80275474(gobj);
         it_8027CE44(gobj);
         Camera_80030E44(2, &ip->pos);
-        if (HSD_Randf() < it_804D6D40[2]) {
+        if (HSD_Randf() < it_804D6D40->x8) {
             it_802D839C(gobj);
         } else {
             it_802D82C4(gobj);

@@ -887,7 +887,52 @@ void ifStatus_802F6E3C(s32 player_num)
 
 /// #ifStatus_802F6EA4
 
-/// #ifStatus_802F7034
+void ifStatus_802F7034(UNK_T arg0)
+{
+    lbl_8046B6A0_t* big_thing;
+    int a;
+    int b;
+    int c;
+    u8 unkB;
+    u8 mr;
+
+    big_thing = gm_8016AE38();
+    if (big_thing->unk_10 != 0) {
+        a = big_thing->unk_10 - 1;
+    } else {
+        a = -1;
+    }
+    if (big_thing->unk_14 != 0) {
+        b = big_thing->unk_14 - 1;
+    } else {
+        b = -1;
+    }
+    if (big_thing->unk_18 != 0) {
+        c = big_thing->unk_18;
+    } else {
+        c = 0;
+    }
+
+    unkB = big_thing->unk_B;
+    if (unkB != 0) {
+        ifStatus_802F6EA4(unkB - 1, a, b, c, arg0, NULL);
+        return;
+    }
+    mr = big_thing->match_result;
+    if (mr == 1) {
+        ifStatus_802F6EA4(0, a, b, c, arg0, NULL);
+        return;
+    }
+    if (big_thing->x24C8.x5_1) {
+        if (mr == 6) {
+            ifStatus_802F6EA4(7, a, b, c, arg0, NULL);
+            return;
+        }
+        ifStatus_802F6EA4(6, a, b, c, arg0, NULL);
+        return;
+    }
+    ifStatus_802F6EA4(5, a, b, c, arg0, NULL);
+}
 
 void ifStatus_802F7134(void)
 {
