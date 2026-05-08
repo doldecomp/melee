@@ -5,6 +5,7 @@
 #include "baselib/psstructs.h"
 
 #include <math.h>
+#include <string.h>
 #include <dolphin/gx.h>
 
 typedef struct {
@@ -20,6 +21,19 @@ typedef struct {
     u8 filename[9];
 } psdisp_UnknownType002;
 
+typedef struct {
+    HSD_Particle* head;
+    HSD_Particle* tail;
+} psdisp_ParticleSortBucket;
+
+typedef struct {
+    u8 x0_pad[0xAC];
+    HSD_Particle* xAC[17];
+} psdisp_ParticleSortCache;
+
+STATIC_ASSERT(sizeof(psdisp_ParticleSortBucket) == 8);
+STATIC_ASSERT(sizeof(psdisp_ParticleSortCache) == 0xF0);
+
 /* 39F89C */ static void calcTornadoLastPos(HSD_Particle*, f32*, f32*, f32*);
 /* 39FA28 */ static void getColorPrimEnv(HSD_Particle*, GXColor*, GXColor*);
 /* 39FB74 */ static void getColorMatAmb(HSD_Particle*, GXColor*, GXColor*);
@@ -28,6 +42,8 @@ typedef struct {
 /* 40C360 */ extern psdisp_UnknownType002 HSD_PSDisp_8040C360;
 /* 4D6380 */ extern u8 HSD_PSDisp_804D6380[2];
 /* 4D6384 */ extern u8 HSD_PSDisp_804D6384[2];
+/* 4D0908 */ extern HSD_Particle* hsd_804D0908[146];
+/* 4D0FC0 */ extern psdisp_ParticleSortCache HSD_PSDisp_804D0FC0;
 /* 4D7908 */ extern s32 HSD_PSDisp_804D7908;
 /* 4D790C */ extern s32 HSD_PSDisp_804D790C;
 /* 4D7910 */ extern s32 HSD_PSDisp_804D7910;
@@ -182,4 +198,234 @@ static void getColorMatAmb(HSD_Particle* pp, GXColor* matCol, GXColor* ambCol)
         ambCol->r = ambCol->g = ambCol->b = pp->ambRGB;
         ambCol->a = pp->ambA;
     }
+}
+
+HSD_Particle* particleSort(s32 arg0, u8 arg1, HSD_Particle** arg2,
+                           HSD_Particle** arg3)
+{
+    psdisp_ParticleSortBucket buckets[16];
+    HSD_Particle* var_r28;
+    HSD_Particle* var_r3;
+    HSD_Particle* var_r4;
+    HSD_Particle* var_r5;
+    HSD_Particle* var_r7;
+    HSD_Particle** temp_r29;
+    HSD_Particle** var_r6_2;
+    HSD_Particle** var_r7_2;
+    psdisp_ParticleSortBucket* temp_r3_4;
+    psdisp_ParticleSortBucket* temp_r3_10;
+    psdisp_ParticleSortCache* cache;
+    u32 temp_r3;
+    u32 temp_r3_2;
+    s32 temp_r4;
+    s32 var_r0;
+    s32 var_r0_2;
+    s32 var_r6;
+    u8* temp_r9;
+
+    temp_r9 = (u8*) &HSD_PSDisp_8040C360 + arg0;
+    temp_r29 = &hsd_804D0908[arg0];
+    cache = &HSD_PSDisp_804D0FC0;
+    var_r28 = *temp_r29;
+    if (*temp_r9 == arg1) {
+        *arg2 = var_r28;
+        *arg3 = cache->xAC[arg0];
+        return var_r28;
+    }
+
+    *temp_r9 = arg1;
+    if (var_r28 == NULL) {
+        cache->xAC[arg0] = NULL;
+        *arg2 = NULL;
+        *arg3 = NULL;
+        return NULL;
+    }
+
+    memset(buckets, 0, sizeof(buckets));
+    temp_r3 = var_r28->kind;
+    if (temp_r3 & 8) {
+        var_r0 = 0;
+    } else {
+        var_r0 = 1;
+    }
+    temp_r4 = ((temp_r3 >> 0x19) & 7) + (var_r0 * 8);
+    buckets[temp_r4].head = var_r28;
+    var_r6 = temp_r4;
+    var_r7 = var_r28->next;
+
+    while (var_r7 != NULL) {
+        if ((var_r28->kind ^ var_r7->kind) & 0x0E000008) {
+            buckets[var_r6].tail = var_r28;
+            temp_r3_2 = var_r7->kind;
+            if (temp_r3_2 & 8) {
+                var_r0_2 = 0;
+            } else {
+                var_r0_2 = 1;
+            }
+            var_r6 = ((temp_r3_2 >> 0x19) & 7) + (var_r0_2 * 8);
+            if (buckets[var_r6].head == NULL) {
+                buckets[var_r6].head = var_r7;
+            } else {
+                buckets[var_r6].tail->next = var_r7;
+            }
+        }
+        var_r28 = var_r7;
+        var_r7 = var_r7->next;
+    }
+    buckets[var_r6].tail = var_r28;
+
+    var_r6_2 = NULL;
+    var_r4 = NULL;
+    var_r7_2 = NULL;
+    var_r5 = NULL;
+
+    temp_r3_4 = buckets;
+    if (temp_r3_4->head != NULL) {
+        if (var_r4 == NULL) {
+            var_r4 = temp_r3_4->head;
+        } else {
+            *var_r6_2 = temp_r3_4->head;
+        }
+        var_r6_2 = &temp_r3_4->tail->next;
+    }
+    if ((++temp_r3_4)->head != NULL) {
+        if (var_r4 == NULL) {
+            var_r4 = temp_r3_4->head;
+        } else {
+            *var_r6_2 = temp_r3_4->head;
+        }
+        var_r6_2 = &temp_r3_4->tail->next;
+    }
+    if ((++temp_r3_4)->head != NULL) {
+        if (var_r4 == NULL) {
+            var_r4 = temp_r3_4->head;
+        } else {
+            *var_r6_2 = temp_r3_4->head;
+        }
+        var_r6_2 = &temp_r3_4->tail->next;
+    }
+    if ((++temp_r3_4)->head != NULL) {
+        if (var_r4 == NULL) {
+            var_r4 = temp_r3_4->head;
+        } else {
+            *var_r6_2 = temp_r3_4->head;
+        }
+        var_r6_2 = &temp_r3_4->tail->next;
+    }
+    if ((++temp_r3_4)->head != NULL) {
+        if (var_r4 == NULL) {
+            var_r4 = temp_r3_4->head;
+        } else {
+            *var_r6_2 = temp_r3_4->head;
+        }
+        var_r6_2 = &temp_r3_4->tail->next;
+    }
+    if ((++temp_r3_4)->head != NULL) {
+        if (var_r4 == NULL) {
+            var_r4 = temp_r3_4->head;
+        } else {
+            *var_r6_2 = temp_r3_4->head;
+        }
+        var_r6_2 = &temp_r3_4->tail->next;
+    }
+    if ((++temp_r3_4)->head != NULL) {
+        if (var_r4 == NULL) {
+            var_r4 = temp_r3_4->head;
+        } else {
+            *var_r6_2 = temp_r3_4->head;
+        }
+        var_r6_2 = &temp_r3_4->tail->next;
+    }
+    if ((++temp_r3_4)->head != NULL) {
+        if (var_r4 == NULL) {
+            var_r4 = temp_r3_4->head;
+        } else {
+            *var_r6_2 = temp_r3_4->head;
+        }
+        var_r6_2 = &temp_r3_4->tail->next;
+    }
+
+    temp_r3_10 = &buckets[8];
+    if (temp_r3_10->head != NULL) {
+        if (var_r5 == NULL) {
+            var_r5 = temp_r3_10->head;
+        } else {
+            *var_r7_2 = temp_r3_10->head;
+        }
+        var_r7_2 = &temp_r3_10->tail->next;
+    }
+    if ((++temp_r3_10)->head != NULL) {
+        if (var_r5 == NULL) {
+            var_r5 = temp_r3_10->head;
+        } else {
+            *var_r7_2 = temp_r3_10->head;
+        }
+        var_r7_2 = &temp_r3_10->tail->next;
+    }
+    if ((++temp_r3_10)->head != NULL) {
+        if (var_r5 == NULL) {
+            var_r5 = temp_r3_10->head;
+        } else {
+            *var_r7_2 = temp_r3_10->head;
+        }
+        var_r7_2 = &temp_r3_10->tail->next;
+    }
+    if ((++temp_r3_10)->head != NULL) {
+        if (var_r5 == NULL) {
+            var_r5 = temp_r3_10->head;
+        } else {
+            *var_r7_2 = temp_r3_10->head;
+        }
+        var_r7_2 = &temp_r3_10->tail->next;
+    }
+    if ((++temp_r3_10)->head != NULL) {
+        if (var_r5 == NULL) {
+            var_r5 = temp_r3_10->head;
+        } else {
+            *var_r7_2 = temp_r3_10->head;
+        }
+        var_r7_2 = &temp_r3_10->tail->next;
+    }
+    if ((++temp_r3_10)->head != NULL) {
+        if (var_r5 == NULL) {
+            var_r5 = temp_r3_10->head;
+        } else {
+            *var_r7_2 = temp_r3_10->head;
+        }
+        var_r7_2 = &temp_r3_10->tail->next;
+    }
+    if ((++temp_r3_10)->head != NULL) {
+        if (var_r5 == NULL) {
+            var_r5 = temp_r3_10->head;
+        } else {
+            *var_r7_2 = temp_r3_10->head;
+        }
+        var_r7_2 = &temp_r3_10->tail->next;
+    }
+    if ((++temp_r3_10)->head != NULL) {
+        if (var_r5 == NULL) {
+            var_r5 = temp_r3_10->head;
+        } else {
+            *var_r7_2 = temp_r3_10->head;
+        }
+        var_r7_2 = &temp_r3_10->tail->next;
+    }
+
+    var_r3 = NULL;
+    if (var_r6_2 != NULL) {
+        var_r3 = var_r4;
+        *var_r6_2 = var_r5;
+    }
+    if (var_r7_2 != NULL) {
+        if (var_r3 == NULL) {
+            var_r3 = var_r5;
+        }
+        *var_r7_2 = NULL;
+    }
+
+    *temp_r29 = var_r3;
+    cache->xAC[arg0] = var_r5;
+    *arg2 = var_r3;
+    *arg3 = var_r5;
+    return var_r3;
 }
