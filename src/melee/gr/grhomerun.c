@@ -237,16 +237,13 @@ void grHomeRun_8021CB20(Ground_GObj* gobj)
 
     for (i = 0; i < 16; i++) {
         HSD_JObj* child;
-
+        HSD_GObj* gobj;
         jobjs[i] = grHomeRun_8021C82C_noinline(4);
-        if (jobjs[i] == NULL) {
-            __assert("grhomerun.c", 0x1AB, "gobj");
-        }
+        gobj = jobjs[i];
+        HSD_ASSERT(0x1AB, gobj);
 
-        jobj = GET_JOBJ(jobjs[i]);
-        if (jobj == NULL) {
-            __assert("grhomerun.c", 0x1AC, "jobj");
-        }
+        jobj = GET_JOBJ(gobj);
+        HSD_ASSERT(0x1AC, jobj);
 
         HSD_JObjSetScaleX(jobj, grHr_804D6AE4 * HSD_JObjGetScaleX(jobj));
         HSD_JObjSetScaleY(jobj, grHr_804D6AE4 * HSD_JObjGetScaleY(jobj));
@@ -300,8 +297,7 @@ void grHomeRun_8021CB20(Ground_GObj* gobj)
 
     vars->xCC = NULL;
     vars->xD0 = Ground_801C3FA4(gobj, 1);
-    gp->gv.yorster.elements[1].x00 =
-        (u8) gp->gv.yorster.elements[1].x00 & ~0x80;
+    vars->xE8_flags.b0 = 0;
 }
 
 bool grHomeRun_8021D678(Ground_GObj* arg)
@@ -338,28 +334,25 @@ void grHomeRun_8021D680(Ground_GObj* gobj)
         subject = ftLib_80086B74(gobj2);
         if (subject != NULL) {
             subject->x8 = 1;
-            *(u8*) ((u8*) subject + 0xC) |= 0x40;
+            subject->xC_b1 = 1;
         }
         gobj2 = Ground_801C57C8();
         if (gobj2 != NULL) {
             subject = ftLib_80086B74(gobj2);
             if (subject != NULL) {
                 subject->x8 = 1;
-                *(u8*) ((u8*) subject + 0xC) |= 0x40;
+                subject->xC_b1 = 1;
             }
         }
         gobj2 = gm_80180AF4();
         if (gobj2 != NULL) {
             ftLib_80086644(gobj2, &pos1);
             grHomeRun_8021EA30(&pos1.x);
-            if (pos1.y < 4.0F &&
-                ((u8) gp->gv.yorster.elements[1].x00 & 0x80) != 0)
-            {
+            if (pos1.y < 4.0F && vars->xE8_flags.b0 != 0) {
                 grHomeRun_8021EAF8();
             }
         }
-        gp->gv.yorster.elements[1].x00 =
-            (u8) gp->gv.yorster.elements[1].x00 & ~0x80;
+        vars->xE8_flags.b0 = 0;
         if (vars->xD0 != NULL && vars->xCC == NULL) {
             vars->xCC = grHomeRun_8021EC58(0);
             lb_8000B1CC(vars->xD0, NULL, &pos2);
@@ -408,9 +401,7 @@ void grHomeRun_8021D680(Ground_GObj* gobj)
                 break;
             }
         }
-        if (gobj2 == NULL) {
-            __assert("grhomerun.c", 0x239, "gobj2");
-        }
+        HSD_ASSERT(0x239, gobj2);
         gp2 = GET_GROUND(gobj2);
         if (gp2->gv.homerun.xC4 > x1) {
             vars->gobjs[i] = NULL;
@@ -428,30 +419,25 @@ void grHomeRun_8021D680(Ground_GObj* gobj)
         }
 
         jobj = GET_JOBJ(vars->rear_gobj);
-        if (jobj == NULL) {
-            __assert("grhomerun.c", 0x257, "jobj");
-        }
+        HSD_ASSERT(0x257, jobj);
         HSD_JObjSetTranslateX(
             jobj, x - 1.5F * (2150.99F * Ground_801C0498()));
 
         jobj = GET_JOBJ(vars->rear2_gobj);
-        if (jobj == NULL) {
-            __assert("grhomerun.c", 0x259, "jobj");
-        }
+        HSD_ASSERT(0x259, jobj);
+
         HSD_JObjSetTranslateX(
             jobj, x - 0.5F * (2150.99F * Ground_801C0498()));
 
         jobj = GET_JOBJ(vars->rear3_gobj);
-        if (jobj == NULL) {
-            __assert("grhomerun.c", 0x25B, "jobj");
-        }
+        HSD_ASSERT(0x25B, jobj);
+
         HSD_JObjSetTranslateX(
             jobj, x + 0.5F * (2150.99F * Ground_801C0498()));
 
         jobj = GET_JOBJ(vars->rear4_gobj);
-        if (jobj == NULL) {
-            __assert("grhomerun.c", 0x25D, "jobj");
-        }
+        HSD_ASSERT(0x25D, jobj);
+
         HSD_JObjSetTranslateX(
             jobj, x + 1.5F * (2150.99F * Ground_801C0498()));
 
