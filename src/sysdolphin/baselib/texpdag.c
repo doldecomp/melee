@@ -536,9 +536,10 @@ void make_full_dependancy_mtx(int num, u32* dep, u32* full)
     do {
         changed = false;
         for (j = 0; j < num; j++) {
-            bits = full[j];
+            flag = 1 << j;
+            old = full[j];
+            bits = old;
             for (k = 0; k < num; k++) {
-                flag = (1 << j);
                 if ((flag & full[k]) != 0) {
                     u32 old = full[k];
                     full[k] |= bits;
