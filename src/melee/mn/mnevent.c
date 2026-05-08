@@ -11,13 +11,13 @@
 #include "mn/mnmain.h"
 #include "mn/types.h"
 
+#include <baselib/debug.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
 #include <baselib/gobjobject.h>
 #include <baselib/gobjplink.h>
 #include <baselib/gobjproc.h>
 #include <baselib/gobjuserdata.h>
-#include <baselib/debug.h>
 #include <baselib/jobj.h>
 #include <baselib/memory.h>
 #include <baselib/sislib.h>
@@ -195,8 +195,8 @@ void mnEvent_8024D15C(s32 idx, s32 event_id)
     row->icons[0] = icon_text;
     icon_text->font_size.x = 0.035f;
     icon_text->font_size.y = 0.035f;
-    HSD_SisLib_803A6368(
-        icon_text, ((gm_801BEBA8((u8) event_id) * 2) & 0x1FE) + 0x154);
+    HSD_SisLib_803A6368(icon_text,
+                        ((gm_801BEBA8((u8) event_id) * 2) & 0x1FE) + 0x154);
 }
 
 void mnEvent_8024D4E0(HSD_JObj* jobj, Vec3* translate)
@@ -275,7 +275,8 @@ void fn_8024E1B4(HSD_GObj* gobj)
     MnEventData* iter;
     int i;
 
-    if (mn_8022EC18(tree, &mnEvent_803EF74C, 0x80) >= mnEvent_803EF74C.end_frame)
+    if (mn_8022EC18(tree, &mnEvent_803EF74C, 0x80) >=
+        mnEvent_803EF74C.end_frame)
     {
         tmp = data;
         iter = data;
@@ -453,7 +454,8 @@ void fn_8024D864(HSD_GObj* gobj)
 
     if (inputs & MenuInput_XButton) {
         s32 max_events = mnEvent_8024CE74();
-        if (data->first_event + 9 < max_events || data->first_event != max_events)
+        if (data->first_event + 9 < max_events ||
+            data->first_event != max_events)
         {
             lbAudioAx_80024030(2);
             if (data->first_event + 9 < max_events) {

@@ -166,9 +166,8 @@ void mnSoundTest_8024A790(HSD_GObj* arg0)
         }
     }
     if ((temp_f30 < 0.9f) || (temp_r31->unkC < 1.0f)) {
-        temp_r30_2 =
-            (s32) (temp_r31->unkC *
-                   (temp_f30 * gm_80160244(gmMainLib_8015ED74())));
+        temp_r30_2 = (s32) (temp_r31->unkC *
+                            (temp_f30 * gm_80160244(gmMainLib_8015ED74())));
         lbAudioAx_800245F4(temp_r30_2);
         mnSoundTest_804D6C4C = temp_r30_2;
         return;
@@ -620,8 +619,7 @@ void fn_8024B7E4(HSD_GObj* arg0)
 
     temp_r30 = GET_JOBJ(arg0);
     (lb_80011E24(temp_r30, &sp20, 0xB, -1),
-     lb_80011E24(temp_r30, &sp1C, 2, -1),
-     lb_80011E24(temp_r30, &sp18, 1, -1));
+     lb_80011E24(temp_r30, &sp1C, 2, -1), lb_80011E24(temp_r30, &sp18, 1, -1));
     temp_f31 = mn_8022EFD8(sp20, &vec_1);
     mn_8022EFD8(sp1C, &vec_1);
     mn_8022EFD8(sp18, &vec_1);
@@ -742,7 +740,7 @@ void fn_8024BAF0(HSD_GObj* arg0)
         if (temp_f31 == vec_0.end_frame) {
             HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
             proc2 = HSD_GObj_SetupProc(arg0, (void (*)(HSD_GObj*)) fn_8024B8B4,
-                                      0U);
+                                       0U);
             proc2->flags_3 = HSD_GObj_804D783C;
             mnSoundTest_8024A958((Soundtest_GObj*) arg0);
             mnSoundTest_804D6C44 = 0;
@@ -794,7 +792,8 @@ void mnSoundTest_8024BCA0(int arg0)
     if (text != NULL) {
         HSD_SisLib_803A5CC4(text);
     }
-    text = HSD_SisLib_803A5ACC(0, 1, -9.5f, 9.1f, 17.0f, 364.68332f, 38.38772f);
+    text =
+        HSD_SisLib_803A5ACC(0, 1, -9.5f, 9.1f, 17.0f, 364.68332f, 38.38772f);
     user_data->unk10 = text;
     text->font_size.x = 0.0521f;
     text->font_size.y = 0.0521f;
