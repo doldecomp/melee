@@ -27,42 +27,52 @@
 #include "sc/types.h"
 #include "ty/toy.h"
 
+inline f32 mnDataDel_8024E940_inline(HSD_JObj* arg0)
+{
+    return mn_8022F298(arg0);
+}
+
 void mnDataDel_8024E940(void)
 {
+    u32 pad1;
+    u32 pad2;
+    u32 pad3;
     HSD_JObj* sp18;
+    int tmp;
+    f32 tmp2;
     f32 temp_f31;
     s32* data;
     s32 temp_ret;
-    s32 var_r30;
-    u8 var_r31;
     struct MnDataDelGObjUserData* temp_r31;
-    PAD_STACK(24);
+    int i;
+    s32 var_r30;
+    u32 pad4;
 
     temp_r31 = mnDataDel_804D6C68->user_data;
-    data = mnDataDel_803EF870.x3C;
-    temp_ret = mn_80231634((struct mn_80231634_t*) temp_r31->x10[data[1]]);
+    temp_ret = mn_80231634(
+        (struct mn_80231634_t*) temp_r31->x10[mnDataDel_803EF8AC[0]]);
     lb_80011E24((HSD_JObj*) temp_ret, &sp18, 1, -1);
-    temp_f31 = mn_8022F298(sp18);
-    HSD_JObjReqAnimAll(sp18, 1.0f);
+    temp_f31 = mnDataDel_8024E940_inline(sp18);
+    HSD_JObjReqAnimAll(sp18, (0, 1.0f));
     mn_8022F3D8(sp18, 0xFFU, MOBJ_MASK);
+    tmp2 = temp_f31;
     HSD_JObjAnimAll(sp18);
-    HSD_JObjReqAnimAll(sp18, temp_f31);
-    mn_8022F3D8(sp18, 0xFFU, (enum _HSD_TypeMask) 0x480);
-    HSD_JObjAnimAll(sp18);
+    tmp = (enum _HSD_TypeMask) 0x480;
+    HSD_JObjReqAnimAll(sp18, tmp2);
+    mn_8022F3D8(sp18, 0xFFU, tmp);
+    HSD_JObjAnimAll((0, sp18));
     temp_r31->x4 = 1;
     gm_801647D0();
     gmMainLib_8015F490();
-    var_r30 = 0;
-    var_r31 = 0;
-    do {
-        if (gm_80164430(gm_801641CC(var_r31)) != 0 &&
-            gm_80164250((u16) var_r31) != 0)
+    var_r30 = (i = 0);
+    for (i = 0; i < 0x1D; i++) {
+        if ((gm_80164430(gm_801641CC(i)) != 0) &&
+            ((gm_80164250((u16) i) & (0xFFFF & 0xFF)) != 0))
         {
             var_r30 = 1;
             break;
         }
-        var_r31++;
-    } while ((s32) var_r31 < 0x1D);
+    }
     if (var_r30 == 0) {
         gm_801641E4(0U, 1U);
     }
