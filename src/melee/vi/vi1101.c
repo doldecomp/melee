@@ -182,20 +182,23 @@ void fn_8031F600(HSD_GObj* gobj)
 
 void un_8031F714_OnEnter(void* arg)
 {
+    HSD_Joint* new_var2;
+    SceneDesc* var_r28;
     HSD_CObj* temp_r3;
-    HSD_GObj* temp_r26;
     HSD_GObj* temp_r28;
     HSD_GObj* temp_r31;
     HSD_JObj* temp_r3_2;
-    SceneDesc* var_r28;
+    HSD_GObj* temp_r26;
+    u8 new_var3;
     s32 var_r31;
     u8 temp_r29;
     u8* input = arg;
     char* data = (char*) &un_80400200;
-
+    HSD_JObj* new_var;
     lbAudioAx_800236DC();
     efLib_Init();
-    efAsync_LoadSync(0);
+    temp_r29 = 0;
+    efAsync_LoadSync(temp_r29);
     lbAudioAx_80023F28(0x55);
     lbAudioAx_80024E50(1);
 
@@ -205,7 +208,7 @@ void un_8031F714_OnEnter(void* arg)
     un_804D6FC8 = lbArchive_LoadSymbols(viGetCharAnimByIndex(temp_r29), NULL);
 
     temp_r28 = GObj_Create(0xB, 3, 0);
-    HSD_GObjObject_80390A70(temp_r28, HSD_GObj_804D784A,
+    HSD_GObjObject_80390A70(temp_r28, HSD_GObj_804D784A & 0xFFFF,
                             lb_80011AC4(un_804D6FC0->lights));
     GObj_SetupGXLink(temp_r28, HSD_GObj_LObjCallback, 0, 0);
 
@@ -226,12 +229,15 @@ void un_8031F714_OnEnter(void* arg)
 
     for (var_r31 = 0; un_804D6FC0->models[var_r31] != NULL; var_r31++) {
         temp_r26 = GObj_Create(0xE, 0xF, 0);
-        temp_r3_2 = HSD_JObjLoadJoint(un_804D6FC0->models[var_r31]->joint);
-        HSD_GObjObject_80390A70(temp_r26, HSD_GObj_804D7849, temp_r3_2);
+        temp_r3_2 =
+            HSD_JObjLoadJoint(new_var2 = un_804D6FC0->models[var_r31]->joint);
+        HSD_GObjObject_80390A70(temp_r26, new_var3 = HSD_GObj_804D7849,
+                                temp_r3_2);
         GObj_SetupGXLink(temp_r26, HSD_GObj_JObjCallback, 9, 0);
         gm_8016895C(temp_r3_2, un_804D6FC0->models[var_r31], 0);
         HSD_JObjReqAnimAll(temp_r3_2, un_804DE0DC);
-        HSD_JObjAnimAll(temp_r3_2);
+        new_var = temp_r3_2;
+        HSD_JObjAnimAll(new_var);
         HSD_GObj_SetupProc(temp_r26, fn_8031F548, 0x17);
     }
 
