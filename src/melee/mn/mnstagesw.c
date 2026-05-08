@@ -1,5 +1,6 @@
 #include "mnstagesw.h"
 
+#include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>
@@ -9,7 +10,6 @@
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/sislib.h>
-#include <sysdolphin/baselib/debug.h>
 #include <melee/gm/gm_1601.h>
 #include <melee/gm/gm_1A3F.h>
 #include <melee/gm/gmmain_lib.h>
@@ -110,10 +110,9 @@ static void mnStageSw_802359C8(MnStageSwData* data)
     texts = data->x40;
     icon = mnStageSw_stageIcons;
     for (i = 0; i < 15; i++) {
-        text = HSD_SisLib_803A5ACC(0, (s32) mn_804D6BB5,
-                                   1.0f + HSD_JObjGetTranslationX(data->x2C),
-                                   -((delta_y * (f32) i) + start_y), 17.5f,
-                                   160.0f, 300.0f);
+        text = HSD_SisLib_803A5ACC(
+            0, (s32) mn_804D6BB5, 1.0f + HSD_JObjGetTranslationX(data->x2C),
+            -((delta_y * (f32) i) + start_y), 17.5f, 160.0f, 300.0f);
         *texts = text;
         text->font_size.x = 0.0521f;
         text->font_size.y = 0.0521f;
@@ -131,10 +130,9 @@ static void mnStageSw_802359C8(MnStageSwData* data)
     texts = &data->x40[15];
     icon = &mnStageSw_stageIcons[15];
     for (i = 15; i < NUM_STAGES; i++) {
-        text = HSD_SisLib_803A5ACC(0, (s32) mn_804D6BB5,
-                                   1.0f + HSD_JObjGetTranslationX(data->x34),
-                                   -((delta_y * (f32) (i - 15)) + start_y),
-                                   17.5f, 160.0f, 300.0f);
+        text = HSD_SisLib_803A5ACC(
+            0, (s32) mn_804D6BB5, 1.0f + HSD_JObjGetTranslationX(data->x34),
+            -((delta_y * (f32) (i - 15)) + start_y), 17.5f, 160.0f, 300.0f);
         *texts = text;
         text->font_size.x = 0.0521f;
         text->font_size.y = 0.0521f;
@@ -268,7 +266,8 @@ static void mnStageSw_80235DC8(u8* user_data, s32 buttons)
             selection = mnStageSw_80235C58(idx - 15);
             if (selection != -1) {
                 mn_804A04F0.hovered_selection = (u8) selection;
-                mn_804A04F0.confirmed_selection = user_data[(u8) selection + 2];
+                mn_804A04F0.confirmed_selection =
+                    user_data[(u8) selection + 2];
             }
         }
     } else if ((buttons & 8) && idx < 15) {
@@ -334,7 +333,8 @@ static void fn_80235F80(HSD_GObj* gobj)
                 stage_ids = mnStageSw_803ED4C4;
                 idx = 0;
                 do {
-                    if (gm_80164430(gm_801641CC(mnStageSw_803ED4C4[idx])) != 0) {
+                    if (gm_80164430(gm_801641CC(mnStageSw_803ED4C4[idx])) != 0)
+                    {
                         gm_801641E4(*stage_ids, user_data[idx + 2]);
                     }
                     idx++;
@@ -358,7 +358,7 @@ static void fn_80235F80(HSD_GObj* gobj)
             mn_80229860(2);
             return;
         }
-check_dpad:
+    check_dpad:
         if (buttons & 0xF) {
             lbAudioAx_80024030(2);
             mnStageSw_80235DC8(user_data, buttons);
@@ -456,12 +456,14 @@ static void mnStageSw_80236548(HSD_GObj* gobj, u8 arg1, u8 arg2)
         delta_y = HSD_JObjGetTranslationY(data->x30) -
                   HSD_JObjGetTranslationY(data->x2C);
         if (sel < 15) {
-            HSD_JObjSetTranslateX(data->x28, HSD_JObjGetTranslationX(data->x2C));
+            HSD_JObjSetTranslateX(data->x28,
+                                  HSD_JObjGetTranslationX(data->x2C));
             HSD_JObjSetTranslateY(data->x28,
                                   delta_y * (f32) sel +
                                       HSD_JObjGetTranslationY(data->x2C));
         } else {
-            HSD_JObjSetTranslateX(data->x28, HSD_JObjGetTranslationX(data->x34));
+            HSD_JObjSetTranslateX(data->x28,
+                                  HSD_JObjGetTranslationX(data->x34));
             HSD_JObjSetTranslateY(data->x28,
                                   delta_y * (f32) (sel - 15) +
                                       HSD_JObjGetTranslationY(data->x2C));
@@ -602,7 +604,8 @@ static void fn_80236998(HSD_GObj* gobj)
         data->x1 = mn_804A04F0.hovered_selection;
     }
     if (changed_confirmed != 0) {
-        data->x2[mn_804A04F0.hovered_selection] = mn_804A04F0.confirmed_selection;
+        data->x2[mn_804A04F0.hovered_selection] =
+            mn_804A04F0.confirmed_selection;
     }
 }
 

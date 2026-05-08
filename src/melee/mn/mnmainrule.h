@@ -13,10 +13,10 @@ struct mn_802307F8_t {
     /* 0x004 */ u8 x4;
     /* 0x005 */ u8 x5;
     /* 0x006 */ u8 x6;
-    /* 0x007 */ u8 x7_pad[0x009-0x007];
+    /* 0x007 */ u8 x7_pad[0x009 - 0x007];
     /* 0x009 */ u8 x9;
     /* 0x00A */ u8 xA;
-    /* 0x00B */ u8 xB_pad[0x00C-0x00B];
+    /* 0x00B */ u8 xB_pad[0x00C - 0x00B];
     union {
         /* 0x00C */ HSD_JObj* xC[17];
         struct {
