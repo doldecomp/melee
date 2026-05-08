@@ -36,6 +36,7 @@
 #include <baselib/lobj.h>
 #include <baselib/psappsrt.h>
 #include <baselib/psstructs.h>
+#include <MSL/math_ppc.h>
 
 extern s16 grMc_803E34A4[];
 extern Vec3 grMc_803B81B8;

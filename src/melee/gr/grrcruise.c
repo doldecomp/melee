@@ -36,6 +36,7 @@
 #include <baselib/gobjproc.h>
 #include <baselib/jobj.h>
 #include <baselib/random.h>
+#include <MSL/math_ppc.h>
 #include <MSL/trigf.h>
 
 S16Vec3 grRc_803E4DA8[] = {

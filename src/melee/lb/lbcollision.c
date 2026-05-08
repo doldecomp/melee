@@ -24,6 +24,7 @@
 #include <baselib/state.h>
 #include <baselib/tev.h>
 #include <MetroTRK/intrinsics.h>
+#include <MSL/math_ppc.h>
 
 /* 006E58 */ static bool lbColl_80006E58(Vec3* arg0, Vec3* arg1, Vec3* arg2,
                                          Vec3* arg3, Vec3* arg4, Vec3* arg5,

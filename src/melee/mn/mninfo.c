@@ -2,8 +2,8 @@
 
 #include "placeholder.h"
 
-#include "gm/gmmain_lib.h"
 #include "gm/gm_1601.h"
+#include "gm/gmmain_lib.h"
 #include "gm/types.h"
 #include "if/ifprize.h"
 #include "lb/lb_00F9.h"
@@ -515,8 +515,7 @@ s32 mnInfo_80252758(void)
     mnInfo_80252720(temp_r3_3);
     GObj_InitUserData(temp_r3_2, 0, HSD_Free, temp_r3_3);
 
-    temp_r3_4 =
-        HSD_GObj_SetupProc(temp_r3_2, (HSD_GObjEvent) fn_80252548, 0);
+    temp_r3_4 = HSD_GObj_SetupProc(temp_r3_2, (HSD_GObjEvent) fn_80252548, 0);
     temp_r3_4->flags_3 = HSD_GObj_804D783C;
 
     temp_r29 = temp_r3_2->user_data;
