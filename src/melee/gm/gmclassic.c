@@ -569,6 +569,7 @@ void gmClassic_OnLoad(void)
     UnkAllstarData* data;
     gm_803DDEC8Struct* entry;
     s32 i;
+    PAD_STACK(40);
 
     for (entry = gmClassic_803DDEC8.x00; entry->x0 != 0x0D; entry++) {
         entry->xC = NULL;

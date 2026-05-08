@@ -266,6 +266,7 @@ s32 mnName_SortNames(HSD_GObj* arg0)
     u8* order = mnName_NameDisplayOrder;
     MnName_GObj* data = (MnName_GObj*) arg0->user_data;
     s32 result;
+    PAD_STACK(8);
 
     if ((u8) data->gobj.p_priority == 0) {
         s32 i;
@@ -1124,6 +1125,7 @@ void mnName_80239A24(HSD_GObj* gobj)
     s32 extra;
     s32 total_rows;
     u8 name_idx;
+    PAD_STACK(24);
 
     for (i = 0; i < 0x18; i++) {
         jobj = HSD_JObjLoadJoint(mnName_804A06C0.joint);
@@ -1420,7 +1422,7 @@ HSD_GObj* mnName_8023A59C(u8 arg0)
     f32 rows;
     f32 pos;
     HSD_Text* txt;
-    PAD_STACK(0x18);
+    PAD_STACK(16);
 
     gobj = GObj_Create(6U, 7U, 0x80U);
     mnName_804D6BF8 = gobj;
@@ -1575,6 +1577,7 @@ s32 mnName_8023AC40(void)
     s32 ctr;
     s32 val;
     HSD_GObjProc* proc;
+    PAD_STACK(8);
 
     lbArchive_LoadSections(archive,
                            (void**) ((char*) mnName_NameDisplayOrder + 0x98),

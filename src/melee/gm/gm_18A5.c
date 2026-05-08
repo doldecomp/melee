@@ -785,7 +785,6 @@ void fn_8018DF68(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
     s32 half;
     GXColor c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10;
 
-    PAD_STACK(8);
 
     c0 = (GXColor){ 255, 255, 0, 255 };
     c10 = (GXColor){ 255, 255, 0, 255 };
@@ -1806,10 +1805,10 @@ static inline int gm_801905F0_inline0(int c_kind)
 
 void gm_801905F0(StartMeleeData* arg0)
 {
+    u8 _padA[8];
     GameRules* temp_r31 = gmMainLib_8015CC34();
     int i;
     TmVsData sp18;
-    PAD_STACK(8);
 
     gm_80168FC4();
     gm_80167A64(&arg0->rules);

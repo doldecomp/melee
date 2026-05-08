@@ -319,6 +319,7 @@ void grKinokoRoute_80207C88(Ground_GObj* gobj)
     HSD_GObj* fighter;
     HSD_GObj* ground_gobj;
     HSD_JObj* jobj;
+    PAD_STACK(32);
 
     scale = Ground_801C0498();
     fighter = Ground_801C57A4();

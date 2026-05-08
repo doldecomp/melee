@@ -1621,6 +1621,7 @@ void mnCharSel_8025FB50(u8 door, s32 arg1)
     HSD_JObj* sp18;
     s32 icon_idx;
     s8 player;
+    PAD_STACK(16);
 
     do {
         icon_idx = HSD_Randi(0x19);

@@ -806,6 +806,7 @@ void ftKb_SpecialHi_800F3570(Fighter_GObj* gobj)
     f32 var_f3;
     Fighter* fp = GET_FIGHTER(gobj);
     ftKb_DatAttrs* dat_attr = fp->dat_attrs;
+    PAD_STACK(24);
 
     fp->mv.kb.specialhi.x18 = fp->coll_data.floor.normal;
     fp->mv.kb.specialhi.xC4 =
@@ -875,6 +876,7 @@ void ftKb_SpecialHi_800F37EC(Fighter_GObj* gobj)
     s32 j;
     Fighter* fp = GET_FIGHTER(gobj);
     ftKb_DatAttrs* dat_attr = fp->dat_attrs;
+    PAD_STACK(8);
     fp->mv.kb.speciallw.x48 = fp->mv.kb.speciallw.x3C;
     fp->mv.kb.speciallw.x78 = fp->mv.kb.speciallw.x6C;
     fp->mv.kb.speciallw.x88[3] = fp->mv.kb.speciallw.x88[2];

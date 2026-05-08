@@ -432,6 +432,7 @@ void if_802F7D08(s32 slot)
     void** entry;
     s32 ret = gm_8016AEC8();
     HSD_GObj* result;
+    PAD_STACK(8);
 
     if (ret == -2) {
         idx = (u8) slot << 1;

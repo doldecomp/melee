@@ -674,6 +674,7 @@ void grRCruise_8020071C(Ground_GObj* gobj)
     f32 abs_rot =
         gp->gv.rcruise.x14 < 0.0f ? -gp->gv.rcruise.x14 : gp->gv.rcruise.x14;
     f32 wrapped = abs_rot - (360.0f * (s32) (abs_rot / 360.0f));
+    PAD_STACK(8);
 
     switch (gp->gv.rcruise.x2C) {
     case 0:
@@ -754,6 +755,7 @@ void grRCruise_80200C04(Ground_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
     s32 i;
+    PAD_STACK(8);
 
     for (i = 0; i < 17; i++) {
         struct grRCruise_Entry* entry = &gp->gv.rcruise.entries[i];
@@ -1021,6 +1023,7 @@ void grRCruise_80201588(Ground_GObj* gobj)
     s32 i;
 
     HSD_ASSERT(0x5D6, gp->u.map.vanish);
+    PAD_STACK(16);
     for (i = 0; i < 20; i++, desc++) {
         struct grRCruise_VanishEntry* vanish = &gp->gv.rcruise.vanish[i];
 

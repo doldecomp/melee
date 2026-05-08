@@ -193,6 +193,7 @@ void DevText_SetupCObj(void)
 
 void DevText_Draw(DevText* text)
 {
+    PAD_STACK(24);
     hsd_80391A04(text->scale_x, text->scale_y, text->line_width);
     if ((text->flags & DEVTEXT_FLAG_HIDEBACKGROUND) == 0) {
         DrawRectangle(text->x - 8, text->y - 8, text->scale_x * text->w + 8,

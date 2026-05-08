@@ -2624,6 +2624,7 @@ void gm_80167BC8(VsModeData* vs_data)
     struct gmm_x1CB0* prefs;
     s32 i;
     s8* handicap;
+    PAD_STACK(56);
 
     rules = gmMainLib_8015CC34();
     prefs = gmMainLib_8015CC58();

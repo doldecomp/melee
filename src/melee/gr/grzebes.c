@@ -356,6 +356,7 @@ void grZebes_801D881C(HSD_GObj* gobj)
     Ground* gp = GET_GROUND(gobj);
     HSD_GObj* secondary_gobj = (HSD_GObj*) gp->gv.zebes5.xF0;
     u8 result = grZebes_801DA528(gobj, &gp->gv.zebes5.xC8, 1, 2);
+    PAD_STACK(8);
 
     if ((s32) gp->gv.zebes5.xEC != result) {
         gp->gv.zebes5.xEC = result;

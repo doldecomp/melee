@@ -404,6 +404,7 @@ s32 lbAudioAx_80023B24(s32 arg0)
     lbAudioAx_PoolAlloc* st = &lbl_80433710;
     s32 slot;
     s32 off;
+    PAD_STACK(8);
 
     if (arg0 >= 0 && arg0 < 0x83D60) {
         s32(*ranges)[2] = lbl_803BB8D4;
@@ -2599,6 +2600,7 @@ void lbAudioAx_80027DBC(void)
 
 void lbAudioAx_80027DF8(void)
 {
+    PAD_STACK(16);
     if (lbl_804D640C == 0) {
         lbl_804D6430--;
         if (lbl_804D6430 <= 0) {
@@ -2741,6 +2743,7 @@ void lbAudioAx_8002838C(void)
     ARInit(st->x514, 0x10);
     ARQInit();
     AIInit(NULL);
+    PAD_STACK(8);
 
     lbl_804D643C = offsets_arr_803BC4E4[0][0];
     lbl_804D6440 = offsets_arr_803BC4E4[0x33][0];

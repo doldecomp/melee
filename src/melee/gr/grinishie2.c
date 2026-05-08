@@ -514,6 +514,7 @@ void grInishie2_801FD4F0(Ground_GObj* gobj)
     void* temp_r30;
     void* temp_r3;
     Ground* gp;
+    PAD_STACK(8);
 
     temp_r29 = GET_JOBJ(gobj);
     gp = GET_GROUND(gobj);
@@ -642,6 +643,7 @@ void grInishie2_801FD9EC(HSD_GObj* gobj)
     s16 temp_r0;
     HSD_JObj* jobj;
     Vec3* temp_vec;
+    PAD_STACK(72);
 
     gp = gobj->user_data;
 

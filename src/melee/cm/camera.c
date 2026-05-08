@@ -708,6 +708,7 @@ inline float get_max_bounds_length(CameraBounds* bounds)
 
 void Camera_80029CF8(CameraBounds* bounds, CameraTransformState* transform)
 {
+    u8 _padA[16];
     f32 len;
     Vec3 scroll_offset;
     Vec3 scroll_offset2;
@@ -729,7 +730,6 @@ void Camera_80029CF8(CameraBounds* bounds, CameraTransformState* transform)
     f32 pitch_angle;
     f32 temp_f30;
     f32 var_f3;
-    PAD_STACK(16);
 
     Stage_UnkSetVec3TCam_Offset(&scroll_offset);
     len = get_max_bounds_length(bounds);
@@ -1960,6 +1960,7 @@ void Camera_8002C5B4(Camera_x2D0* arg0)
     f32 pitch;
     f32 yaw;
     f32 limit;
+    PAD_STACK(16);
 
     cam = &cm_80452C68;
     params = arg0;
@@ -2049,6 +2050,7 @@ void Camera_8002C5B4(Camera_x2D0* arg0)
 
 void Camera_8002C908(void* arg0)
 {
+    u8 _padA[24];
     CameraBounds bounds;
     Vec3 sp1C;
     Vec3 sp10;
@@ -3075,7 +3077,6 @@ void Camera_8002DDC4(void* arg0)
     CameraTransformState* transform_copy;
     CameraUnkGlobals* globals;
     f32 smooth;
-    PAD_STACK(8);
 
     cam = &cm_80452C68;
     Camera_80030DF8();

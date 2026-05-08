@@ -2127,6 +2127,7 @@ float ftColl_80079C70(Fighter* fp, Fighter* attacker, HitCapsule* hit,
     float w = weight * ftd->xF4;
     float decay;
     float result;
+    PAD_STACK(8);
 
     if (hit->x28 != 0) {
         float x24_f;

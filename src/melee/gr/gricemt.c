@@ -144,6 +144,7 @@ void grIceMt_801F686C(void)
     f32 y_pos4;
     HSD_GObj* gobj;
     HSD_JObj* jobj;
+    PAD_STACK(16);
 
     grIm_804D69F4 = Ground_801C49F8();
     stage_info.unk8C.b4 = true;
@@ -521,6 +522,7 @@ bool grIceMt_801F796C(Ground_GObj* arg0)
 {
     Ground* gp = GET_GROUND(arg0);
     HSD_GObj* gobj;
+    PAD_STACK(8);
     if (gp->gv.icemt2.xC4 != NULL) {
         gobj = Ground_801C2BA4(gp->gv.icemt2.xC4);
         if (gobj == NULL) {
@@ -653,6 +655,7 @@ void grIceMt_801F7D94(Ground_GObj* arg0)
 {
     Ground* gp = GET_GROUND(arg0);
     Ground_801C2ED0(arg0->hsd_obj, gp->map_id);
+    PAD_STACK(8);
     grAnime_801C8138(arg0, gp->map_id, 0);
     grAnime_801C77FC(arg0, 0, 7);
     gp->gv.icemt2.xC8 = Ground_801C3FA4(arg0, 3);
@@ -703,6 +706,7 @@ void grIceMt_801F7F70(Ground_GObj* arg0)
     HSD_JObj* jobj;
     HSD_JObj* jobj2;
     Ground_801C2ED0(arg0->hsd_obj, gp->map_id);
+    PAD_STACK(8);
     grAnime_801C8138(arg0, gp->map_id, 0);
     grAnime_801C77FC(arg0, 0, 7);
     jobj = Ground_801C3FA4(arg0, 4);
@@ -757,6 +761,7 @@ void grIceMt_801F8208(Ground_GObj* arg0)
     HSD_JObj* jobj;
     HSD_JObj* jobj2;
     Ground_801C2ED0(arg0->hsd_obj, gp->map_id);
+    PAD_STACK(8);
     grAnime_801C8138(arg0, gp->map_id, 0);
     grAnime_801C77FC(arg0, 0, 7);
     gp->gv.icemt2.xC8 = Ground_801C3FA4(arg0, 5);
@@ -808,6 +813,7 @@ void grIceMt_801F83EC(Ground_GObj* arg0)
     HSD_JObj* jobj2;
     Ground_801C0498();
     Ground_801C2ED0(arg0->hsd_obj, gp->map_id);
+    PAD_STACK(16);
     grAnime_801C8138(arg0, gp->map_id, 0);
     grAnime_801C77FC(arg0, 0, 7);
     jobj = Ground_801C3FA4(arg0, 7);
@@ -863,6 +869,7 @@ void grIceMt_801F865C(Ground_GObj* arg0)
     HSD_JObj* jobj2;
     // Ground_801C0498();
     Ground_801C2ED0(arg0->hsd_obj, gp->map_id);
+    PAD_STACK(8);
     grAnime_801C8138(arg0, gp->map_id, 0);
     grAnime_801C77FC(arg0, 0, 7);
     // jobj = Ground_801C3FA4(arg0,7);
@@ -917,6 +924,7 @@ void grIceMt_801F8850(Ground_GObj* arg0)
     HSD_JObj* jobj2;
     // Ground_801C0498();
     Ground_801C2ED0(arg0->hsd_obj, gp->map_id);
+    PAD_STACK(8);
     grAnime_801C8138(arg0, gp->map_id, 0);
     grAnime_801C77FC(arg0, 0, 7);
     // jobj = Ground_801C3FA4(arg0,7);
@@ -986,6 +994,7 @@ void grIceMt_801F8B10(Ground_GObj* arg0)
     HSD_JObj* jobj;
     double dVar3;
     double dVar4;
+    PAD_STACK(16);
     dVar4 = 0.3;
     jobj = Ground_801C3FA4(arg0, 8);
     HSD_JObjGetTranslationY(jobj);
@@ -1240,6 +1249,7 @@ void grIceMt_801F9ACC(Ground_GObj* gobj, float y, HSD_GObjEvent ev,
     HSD_GObj* jobj;
     double dVar3;
     double dVar4;
+    PAD_STACK(96);
     dVar4 = 0.3;
 
     jobj = Ground_801C2BA4(4);
@@ -1330,6 +1340,7 @@ int grIceMt_801FA500(HSD_GObj* param1)
     int iVar1 = NULL;
     int iVar2;
     int iVar3;
+    PAD_STACK(8);
     iVar3 = 0;
     if (param1->hsd_obj == NULL) {
         __assert("gricemt.c", 2993, "jobj");

@@ -240,6 +240,7 @@ void fn_80174468(u8 slot, HSD_Text* text1, HSD_Text* text2, HSD_Text* text3,
     /* Float constants preloaded into registers */
     f32 const_zero = 0.0F;
     f32 const_neg30 = -30.0F;
+    PAD_STACK(8);
 
     label_id = -1;
     value_id = -1;
@@ -559,6 +560,7 @@ void fn_80174B4C(ResultsData* data, s32 slot)
     f32 pos_x, pos_y, pos_z;
     f32 offset;
     u32 start_entry;
+    PAD_STACK(64);
 
     pdata = &data->player_data[slot];
 
@@ -1031,6 +1033,7 @@ void fn_80175A94(s32 slot, Vec3* position)
     GXColor sp18;
     GXColor* color_ptr;
     Vec3 sp24;
+    PAD_STACK(16);
 
     me = lbl_8046DBE8.x94;
     if (me->x5 == 3) {
@@ -1145,6 +1148,7 @@ void fn_80175DC8(HSD_GObj* gobj)
     HSD_JObj* temp_jobj;
     s32 i;
     Vec3 pos;
+    PAD_STACK(264);
 
     me = lbl_8046DBE8.x94;
     desc = lbl_8046DBE8.pnlsce;
@@ -1278,6 +1282,7 @@ void fn_80176D3C(Vec3* positions)
     HSD_JObj* jobj;
     s32 winner;
     s32 i;
+    PAD_STACK(8);
 
     me = data->x94;
     p = me->player_standings;

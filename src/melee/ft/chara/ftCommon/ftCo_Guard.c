@@ -211,6 +211,7 @@ static inline void inlineD0(Fighter_GObj* gobj)
 void ftCo_80091E78(HSD_GObj* gobj, float arg1)
 {
     Fighter* fp = gobj->user_data;
+    PAD_STACK(8);
     if (fp->reflecting || fp->x221B_b0) {
         ftCo_80091BC4(fp);
         if (fp->mv.co.guard.x4) {
@@ -256,6 +257,7 @@ void ftCo_80092158(Fighter_GObj* gobj, int arg1, HSD_JObj* arg2)
 void ftCo_800921DC(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
+    PAD_STACK(8);
     ftCo_80092158(gobj, 1047, fp->parts[fp->ft_data->x8->x11].joint);
     fp->x2219_b0 = true;
     fp->mv.co.guard.xC = false;
@@ -583,6 +585,7 @@ void ftCo_80092F2C(HSD_GObj* gobj, bool arg1)
     Fighter* fp = gobj->user_data;
     Fighter_ChangeMotionState(gobj, ftCo_MS_GuardSetOff, Ft_MF_None, 0, 1, 0,
                               NULL);
+    PAD_STACK(8);
     fp->hitlag_cb = ftCo_80093240;
     fp->x670_timer_lstick_tilt_x = -2;
     fp->post_hitlag_cb = ftCo_800932DC;
@@ -658,6 +661,7 @@ void ftCo_800932DC(Fighter_GObj* gobj)
 void ftCo_GuardSetOff_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
+    PAD_STACK(8);
     ftCo_80093BC0(gobj);
     if (!ftAnim_IsFramesRemaining(gobj)) {
         if (fp->mv.co.guard.xC) {
@@ -820,6 +824,7 @@ void ftCo_80093BC0(Fighter_GObj* gobj)
 
 void ftCo_GuardReflect_Anim(HSD_GObj* gobj)
 {
+    PAD_STACK(16);
     ftCo_80093BC0(gobj);
     ftCo_GuardOn_Anim(gobj);
 }

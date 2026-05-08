@@ -514,6 +514,7 @@ bool fn_802112F4(Ground_GObj* gobj, HSD_GObj* fighter_gobj, Vec3* vel)
 void grOldPupupu_802113E0(Ground_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
+    PAD_STACK(176);
 
     if (grOp_804D6A9C == 0) {
         gp->gv.oldpupupu.xE0 += 1;

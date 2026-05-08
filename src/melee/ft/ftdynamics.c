@@ -363,6 +363,7 @@ void ftCo_8009D704(Fighter* fp)
 void ftCo_8009D81C(Fighter* fp)
 {
     KirbyHatStruct* data = ft_80459B88.hats[FTKIND_YOSHI];
+    PAD_STACK(8);
     fp->dynamics_num = data->hat_dynamics[3]->dynamicsNum;
     if (fp->dynamics_num >= Ft_Dynamics_NumMax) {
         OSReport("fighter dynamics num over!\n");
@@ -566,6 +567,7 @@ void ftCo_8009DD94(Fighter_GObj* gobj, bool arg1)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ssize_t dynamics_num = fp->dynamics_num;
+    PAD_STACK(16);
     if (dynamics_num != 0 && stage_info.internal_stage_id == FLATZONE) {
         HSD_JObjSetupMatrix(GET_JOBJ(gobj));
     }

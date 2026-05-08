@@ -261,13 +261,13 @@ void fn_8018325C(HSD_GObj* arg0, int arg1)
 
 void fn_80184138(HSD_GObj* arg0, int arg1)
 {
+    u8 _padA[8];
     Vec3 pos;
     Vec3 scale;
     HSD_JObj* jobj = arg0->hsd_obj;
     HSD_JObj* src = lbl_804735A8.x4[1];
     f32 scl, xoff, yoff;
     int i;
-    PAD_STACK(8);
 
     HSD_JObjGetTranslation(src, &pos);
     HSD_JObjSetTranslate(jobj, &pos);
@@ -1063,6 +1063,7 @@ void fn_80186634(void* arg0)
     HSD_JObj* jobj;
     HSD_GObj* gobj4;
     const char* names[4];
+    PAD_STACK(8);
 
     lbArchive_80016DBC("GmIntEz.dat", &lbl_804D6604, "gmIntroEasyTable", 0);
     Camera_80028B9C(0xC);
@@ -1542,6 +1543,7 @@ void fn_80187AB4(HSD_GObj* gobj)
     int state = lbl_804736C0.x37.anim_state;
     DynamicModelDesc* desc;
     int anim_state;
+    PAD_STACK(8);
 
     switch (state) {
     case 0:
@@ -1735,6 +1737,7 @@ void gm_80187F48_OnEnter(void* arg0_)
     HSD_JObj* jobj2;
     DynamicModelDesc* desc;
     int anim_idx;
+    PAD_STACK(24);
 
     lbl_804736C0.x38 = arg0[0];
     lb_8000FCDC();

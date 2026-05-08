@@ -237,6 +237,7 @@ void grAnime_801C6A54(HSD_JObj* jobj, HSD_AnimJoint* animjoint,
                       HSD_MatAnimJoint* matanimjoint,
                       HSD_ShapeAnimJoint* shapeanimjoint)
 {
+    PAD_STACK(16);
     if (jobj == NULL) {
         return;
     }
@@ -261,6 +262,7 @@ void grAnime_801C6C0C(HSD_JObj* jobj, HSD_AnimJoint* animjoint,
                       HSD_MatAnimJoint* matanimjoint,
                       HSD_ShapeAnimJoint* shapeanimjoint)
 {
+    PAD_STACK(16);
     if (jobj == NULL) {
         return;
     }
@@ -822,6 +824,7 @@ HSD_AObj* grAnime_801C8318(HSD_GObj* gobj, int arg1, u32 arg2)
 bool grAnime_801C83D0(HSD_GObj* gobj, bool arg1, enum_t arg2)
 {
     HSD_AObj* aobj = grAnime_801C8318(gobj, arg1, arg2);
+    PAD_STACK(8);
     if (HSD_AObjGetFlags(aobj) & 0x40000000) {
         return true;
     }

@@ -411,6 +411,7 @@ s32 mnSnap_80253BE0(u64 buttons, s32* cursor, s32 count)
 {
     s32 cur = *cursor;
     s32 next = cur;
+    PAD_STACK(8);
 
     if (buttons & 1) {
         if ((next & 1) == 1) {
@@ -799,7 +800,7 @@ void fn_802545C4(void)
     HSD_JObj* jobj;
     HSD_JObj* jobj2;
     Vec3* translate;
-    PAD_STACK(336);
+    PAD_STACK(328);
     buttons = (mn_804A04F0.buttons = mn_80229624(4));
     HSD_JObjAnimAll(mnSnap_804A0A10.select_jobj);
     HSD_JObjAnimAll(mnSnap_804A0A10.move_jobj);
