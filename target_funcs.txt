@@ -5,5 +5,5 @@ Funcs:
 - [x] HSD_TExpSimplify2
 - [x] SimplifySrc
 - [x] HSD_TExpMakeDag
-- [ ] SimplifyThis
+- [x] SimplifyThis
 - [ ] SimplifyByMerge
