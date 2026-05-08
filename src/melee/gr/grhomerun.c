@@ -1,9 +1,15 @@
 #include "grhomerun.h"
 
+#include "placeholder.h"
+
 #include <platform.h>
 
 #include "baselib/archive.h"
 #include "baselib/debug.h"
+
+#include "baselib/forward.h"
+
+#include "baselib/gobj.h"
 #include "baselib/gobjgxlink.h"
 #include "baselib/gobjobject.h"
 #include "baselib/jobj.h"
@@ -37,15 +43,15 @@ extern f32 grHr_804DBC80;
 extern f32 grHr_804DBC84;
 
 typedef struct grHomeRun_MainGroundVars {
-    HSD_GObj** xC4;
-    HSD_GObj** xC8;
+    HSD_GObj** gobjs;
+    HSD_GObj** jobj_gobjs;
     HSD_Text* xCC;
     HSD_JObj* xD0;
     HSD_GObj* xD4;
-    HSD_GObj* xD8;
-    HSD_GObj* xDC;
-    HSD_GObj* xE0;
-    HSD_GObj* xE4;
+    HSD_GObj* rear_gobj;
+    HSD_GObj* rear2_gobj;
+    HSD_GObj* rear3_gobj;
+    HSD_GObj* rear4_gobj;
     struct {
         u8 b0 : 1;
         u8 b1 : 1;
@@ -114,10 +120,10 @@ bool grHomeRun_8021C824(void)
 {
     return false;
 }
-
-HSD_GObj* grHomeRun_8021C82C_noinline(int gobj_id);
 #pragma push
 #pragma dont_inline on
+HSD_GObj* grHomeRun_8021C82C_noinline(int gobj_id);
+
 HSD_GObj* grHomeRun_8021C82C_noinline(int gobj_id)
 {
     return grHomeRun_8021C82C(gobj_id);
@@ -186,17 +192,20 @@ void grHomeRun_8021CB20(Ground_GObj* gobj)
     UnkArchiveStruct* archive;
     HSD_CObj* cobj;
     s16 i;
+    f32 gobjs_num;
+    HSD_GObj** gobjs;
+    HSD_GObj** jobjs;
+    PAD_STACK(8);
 
     Ground_801C2ED0(jobj, gp->map_id);
 
-    vars->xC4 = HSD_MemAlloc(0x100);
-    if (vars->xC4 == NULL) {
-        __assert("grhomerun.c", 0x17A, "gobjs");
-    }
-    vars->xC8 = HSD_MemAlloc(0x40);
-    if (vars->xC8 == NULL) {
-        __assert("grhomerun.c", 0x17B, "jobjs");
-    }
+    gobjs = HSD_MemAlloc(0x100);
+    HSD_ASSERT(0x17A, gobjs);
+    vars->gobjs = gobjs;
+
+    jobjs = HSD_MemAlloc(0x40);
+    HSD_ASSERT(0x17B, jobjs);
+    vars->jobj_gobjs = jobjs;
 
     HSD_JObjSetScaleX(jobj, grHr_804D6AE4 * HSD_JObjGetScaleX(jobj));
     HSD_JObjSetScaleY(jobj, grHr_804D6AE4 * HSD_JObjGetScaleY(jobj));
@@ -216,27 +225,25 @@ void grHomeRun_8021CB20(Ground_GObj* gobj)
     HSD_SisLib_803A611C(1, vars->xD4, 9, 0xD, 0, 1, 0, 7);
     HSD_SisLib_804D1124[1] =
         HSD_ArchiveGetPublicAddress(archive->unk0, "SIS_GrHomerunData");
-
-    if (2.0F * (1.0F + (2400.0F / (160.0F * Ground_801C0498()))) >= 64.0F) {
-        __assert("grhomerun.c", 0x1A2, "gobjs_num < 64");
-    }
+    gobjs_num = 2.0F * (1.0F + (2400.0F / (160.0F * Ground_801C0498())));
+    HSD_ASSERT(0x1A2, gobjs_num < 64);
 
     for (i = 0; (f32) i < 1.0F + (2400.0F / (160.0F * Ground_801C0498())); i++) {
-        vars->xC4[i] = grHomeRun_8021E500(i);
+        gobjs[i] = grHomeRun_8021E500(i);
     }
     for (; i < 64; i++) {
-        vars->xC4[i] = NULL;
+        gobjs[i] = NULL;
     }
 
     for (i = 0; i < 16; i++) {
         HSD_JObj* child;
 
-        vars->xC8[i] = grHomeRun_8021C82C(4);
-        if (vars->xC8[i] == NULL) {
+        jobjs[i] = grHomeRun_8021C82C_noinline(4);
+        if (jobjs[i] == NULL) {
             __assert("grhomerun.c", 0x1AB, "gobj");
         }
 
-        jobj = GET_JOBJ(vars->xC8[i]);
+        jobj = GET_JOBJ(jobjs[i]);
         if (jobj == NULL) {
             __assert("grhomerun.c", 0x1AC, "jobj");
         }
@@ -246,53 +253,49 @@ void grHomeRun_8021CB20(Ground_GObj* gobj)
         HSD_JObjSetScaleZ(jobj, grHr_804D6AE4 * HSD_JObjGetScaleZ(jobj));
 
         child = HSD_JObjGetChild(jobj);
-        if (child == NULL) {
-            __assert("jobj.h", 0x3A4, "jobj");
-        }
         HSD_JObjSetTranslateX(child, 0.0F);
         HSD_JObjSetTranslateX(
             jobj, grHr_804D6AE4 *
                       ((4.0F + (f32) i) * -(160.0F * Ground_801C0498())));
     }
 
-    vars->xD8 = grHomeRun_8021C82C(3);
-    if (vars->xD8 == NULL) {
-        __assert("grhomerun.c", 0x1BA, "rear_gobj");
-    }
-    jobj = GET_JOBJ(vars->xD8);
-    if (jobj == NULL) {
-        __assert("grhomerun.c", 0x1BB, "jobj");
+    {
+        HSD_GObj* rear_gobj = grHomeRun_8021C82C_noinline(3);
+        HSD_ASSERT(0x1BA, rear_gobj);
+        vars->rear_gobj = rear_gobj;
+        jobj = GET_JOBJ(rear_gobj);
+        HSD_ASSERT(0x1BB, jobj);
     }
     HSD_JObjSetTranslateX(jobj, 1.5F * -(2150.99F * Ground_801C0498()));
 
-    vars->xDC = grHomeRun_8021C82C(3);
-    if (vars->xDC == NULL) {
-        __assert("grhomerun.c", 0x1BD, "rear2_gobj");
+    {
+        HSD_GObj* rear2_gobj = grHomeRun_8021C82C_noinline(3);
+        HSD_ASSERT(0x1BD, rear2_gobj);
+        vars->rear2_gobj = rear2_gobj;
+        jobj = GET_JOBJ(rear2_gobj);
+        HSD_ASSERT(0x1BE, jobj);
     }
-    jobj = GET_JOBJ(vars->xDC);
-    if (jobj == NULL) {
-        __assert("grhomerun.c", 0x1BE, "jobj");
-    }
+
     HSD_JObjSetTranslateX(jobj, 0.5F * -(2150.99F * Ground_801C0498()));
 
-    vars->xE0 = grHomeRun_8021C82C(3);
-    if (vars->xE0 == NULL) {
-        __assert("grhomerun.c", 0x1C0, "rear3_gobj");
+    {
+        HSD_GObj* rear3_gobj = grHomeRun_8021C82C_noinline(3);
+        HSD_ASSERT(0x1C0, rear3_gobj);
+        vars->rear3_gobj = rear3_gobj;
+        jobj = GET_JOBJ(rear3_gobj);
+        HSD_ASSERT(0x1C1, jobj);
     }
-    jobj = GET_JOBJ(vars->xE0);
-    if (jobj == NULL) {
-        __assert("grhomerun.c", 0x1C1, "jobj");
-    }
+
     HSD_JObjSetTranslateX(jobj, 0.5F * (2150.99F * Ground_801C0498()));
 
-    vars->xE4 = grHomeRun_8021C82C(3);
-    if (vars->xE4 == NULL) {
-        __assert("grhomerun.c", 0x1C3, "rear4_gobj");
+    {
+        HSD_GObj* rear4_gobj = grHomeRun_8021C82C_noinline(3);
+        HSD_ASSERT(0x1C3, rear4_gobj);
+        vars->rear4_gobj = rear4_gobj;
+        jobj = GET_JOBJ(rear4_gobj);
+        HSD_ASSERT(0x1C4, jobj);
     }
-    jobj = GET_JOBJ(vars->xE4);
-    if (jobj == NULL) {
-        __assert("grhomerun.c", 0x1C4, "jobj");
-    }
+
     HSD_JObjSetTranslateX(jobj, 1.5F * (2150.99F * Ground_801C0498()));
 
     vars->xCC = NULL;
@@ -382,25 +385,25 @@ void grHomeRun_8021D680(Ground_GObj* gobj)
             x0 = 0;
         }
 
-        gp2 = GET_GROUND(vars->xC4[0]);
+        gp2 = GET_GROUND(vars->gobjs[0]);
         x1 = (s32) (1.0F + ((2400.0F + cam_interest.x) /
                             (160.0F * Ground_801C0498())));
         if (gp2->gv.homerun.xC4 < x0) {
-            Ground_801C4A08(vars->xC4[0]);
+            Ground_801C4A08(vars->gobjs[0]);
             for (i = 0; i < 63; i++) {
-                vars->xC4[i] = vars->xC4[i + 1];
+                vars->gobjs[i] = vars->gobjs[i + 1];
             }
-            vars->xC4[63] = NULL;
+            vars->gobjs[63] = NULL;
         } else if (gp2->gv.homerun.xC4 > x0) {
             gobj2 = grHomeRun_8021E500(gp2->gv.homerun.xC4 - 1);
             for (i = 63; i > 0; i--) {
-                vars->xC4[i] = vars->xC4[i - 1];
+                vars->gobjs[i] = vars->gobjs[i - 1];
             }
-            vars->xC4[0] = gobj2;
+            vars->gobjs[0] = gobj2;
         }
 
         for (i = 63; i >= 0; i--) {
-            gobj2 = vars->xC4[i];
+            gobj2 = vars->gobjs[i];
             if (gobj2 != NULL) {
                 break;
             }
@@ -410,10 +413,10 @@ void grHomeRun_8021D680(Ground_GObj* gobj)
         }
         gp2 = GET_GROUND(gobj2);
         if (gp2->gv.homerun.xC4 > x1) {
-            vars->xC4[i] = NULL;
+            vars->gobjs[i] = NULL;
             Ground_801C4A08(gobj2);
         } else if (gp2->gv.homerun.xC4 < x1) {
-            vars->xC4[i + 1] = grHomeRun_8021E500(gp2->gv.homerun.xC4 + 1);
+            vars->gobjs[i + 1] = grHomeRun_8021E500(gp2->gv.homerun.xC4 + 1);
         }
 
         x = 0.85F * cam_interest.x;
@@ -424,28 +427,28 @@ void grHomeRun_8021D680(Ground_GObj* gobj)
             x -= 2150.99F * Ground_801C0498();
         }
 
-        jobj = GET_JOBJ(vars->xD8);
+        jobj = GET_JOBJ(vars->rear_gobj);
         if (jobj == NULL) {
             __assert("grhomerun.c", 0x257, "jobj");
         }
         HSD_JObjSetTranslateX(
             jobj, x - 1.5F * (2150.99F * Ground_801C0498()));
 
-        jobj = GET_JOBJ(vars->xDC);
+        jobj = GET_JOBJ(vars->rear2_gobj);
         if (jobj == NULL) {
             __assert("grhomerun.c", 0x259, "jobj");
         }
         HSD_JObjSetTranslateX(
             jobj, x - 0.5F * (2150.99F * Ground_801C0498()));
 
-        jobj = GET_JOBJ(vars->xE0);
+        jobj = GET_JOBJ(vars->rear3_gobj);
         if (jobj == NULL) {
             __assert("grhomerun.c", 0x25B, "jobj");
         }
         HSD_JObjSetTranslateX(
             jobj, x + 0.5F * (2150.99F * Ground_801C0498()));
 
-        jobj = GET_JOBJ(vars->xE4);
+        jobj = GET_JOBJ(vars->rear4_gobj);
         if (jobj == NULL) {
             __assert("grhomerun.c", 0x25D, "jobj");
         }
