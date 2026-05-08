@@ -225,15 +225,18 @@ void mnSoundTest_8024A958(Soundtest_GObj* arg0)
 
 void mnSoundTest_8024AA70(HSD_GObj* arg0, u8 arg1)
 {
-    u8 _padA[16];
     HSD_JObj* sp38;
     HSD_JObj* sp34;
-    char string[3];
+    u32 pad1;
+    u32 pad2;
     HSD_JObj* temp_r31;
+    char string[3];
     HSD_Text* temp_r3;
     HSD_Text* temp_r3_2;
     HSD_Text* temp_r3_4;
     f32 temp_f1;
+    u32 pad5;
+    soundtest_user_data* new_var;
     void* temp_r30;
     void* temp_r30_2;
 
@@ -243,19 +246,20 @@ void mnSoundTest_8024AA70(HSD_GObj* arg0, u8 arg1)
     lb_80011E24(jobj, &sp34, 0x14, -1);
     if (arg1 == 2) {
         soundtest_user_data* temp_r30_2 = arg0->user_data;
+        new_var = temp_r30_2;
         temp_r3 = temp_r30_2->unk1C;
         if (temp_r3 != NULL) {
-            HSD_SisLib_803A5CC4(temp_r3);
+            HSD_SisLib_803A5CC4(temp_r30_2->unk1C);
         }
         temp_r3_2 = HSD_SisLib_803A6754(0, 0);
-        temp_r30_2->unk1C = temp_r3_2;
+        new_var->unk1C = (temp_r3_4 = temp_r3_2);
         temp_f1 = vec_7.y;
         temp_r3_2->pos_x = vec_7.x;
         temp_r3_2->pos_y = temp_f1;
         temp_r3_2->pos_z = 18.0f;
         temp_r3_2->font_size.x = 0.04f;
         temp_r3_2->font_size.y = 0.04f;
-        mn_8022EA08((char*) &string, temp_r30_2->unk4);
+        mn_8022EA08((char*) &string, new_var->unk4);
         temp_r3_2->default_alignment = 1;
         HSD_SisLib_803A6B98(temp_r3_2, 0.0f, 0.0f, string);
         HSD_JObjClearFlagsAll(sp38, 0x10U);
