@@ -1,7 +1,10 @@
 #include "toy.h"
 
+#include "stddef.h"
+
 #include "baselib/cobj.h"
 #include "baselib/controller.h"
+#include "baselib/debug.h"
 #include "baselib/displayfunc.h"
 #include "baselib/fog.h"
 #include "baselib/gobj.h"
@@ -1378,8 +1381,7 @@ void un_80306D70(s32 arg0)
         entry = (TyLightEntry*) (base + arg0 * 0xC);
         idx = entry->xFC_idx;
         sym = (TyLightSymbol*) (base + idx * 8);
-        OSReport(base + 0x64C, sym->xCC_name);
-        __assert("toy.c", 0x8CD, "0");
+        HSD_ASSERTREPORT(0x8CD, NULL, base + 0x64C, sym->xCC_name);
     }
 }
 
@@ -1433,11 +1435,7 @@ HSD_LObj* un_80306EEC(void* list_arg, s32 hasAnim_arg)
             idx += 1;
         }
         if (prev != NULL) {
-            /* FAKE MATCH: Dead code needed for binary match */
-            if (prev == NULL) {
-                __assert(un_804D5A54, 0x136, un_804D5A5C);
-            }
-            prev->next = lobj;
+            HSD_LObjSetNext(prev, lobj);
         } else {
             first = lobj;
         }
@@ -1463,8 +1461,7 @@ void un_80307018(void)
     ptr2 = un_804D6ED4;
 
     if (ptr1->x50 == NULL) {
-        OSReport("*** BG data aren't being loaded!\n");
-        __assert("toy.c", 0x912, "0");
+        HSD_ASSERTREPORT(0x912, NULL, "*** BG data aren't being loaded!\n");
     }
 
     jobj = HSD_ArchiveGetPublicAddress(ptr1->x50, un_803FE3DC);
@@ -1612,8 +1609,7 @@ void un_803075E8(s32 arg0)
     td = un_804D6ED8;
 
     if (td->archive == NULL) {
-        OSReport(data + 0x6A0);
-        __assert("toy.c", 0xA41, "0");
+        HSD_ASSERTREPORT(0xA41, NULL, "*** BG data aren\'t being loaded!\n");
     }
 
     if (td->gobj != NULL) {
@@ -1652,8 +1648,7 @@ void un_803075E8(s32 arg0)
                 HSD_GObj_80390CD4(td->gobj);
             }
         } else {
-            OSReport(data + 0x718, *ptr);
-            __assert("toy.c", 0xA75, "0");
+            HSD_ASSERTREPORT(0xA75, NULL, "*** Can not Load Panel Label(%s)");
         }
     } else if (td->x54 != 0) {
         tdjobj = ((ToyData*) un_804D6ED8)->x8->x28;
@@ -1943,8 +1938,7 @@ char* un_8030813C(s32 arg0, enum_t unused)
     }
 
     if (found == 0) {
-        OSReport(un_803FE454, arg0);
-        __assert(un_804D5A48, 0xBA3, un_804D5A50);
+        HSD_ASSERTREPORT(0xBA3, NULL, "**** Not Found Toy Model!(%d)\n", arg0);
     }
 
     return ptr;
@@ -1954,7 +1948,6 @@ void un_80308250(u8* arg0, s32 arg1, s32 arg2)
 {
     void* sym;
     char* ptr;
-
     ptr = un_8030813C(arg1, arg1);
 
     if (*(HSD_Archive**) (arg0 + 0x14) != NULL) {
@@ -1998,8 +1991,9 @@ s16 un_80308354(s16 idx)
     if (i != 0x125) {
         goto lbl_return;
     }
-    OSReport(un_803FE474, target, entry);
-    __assert(un_804D5A48, 0xC2A, un_804D5A50);
+    HSD_ASSERTREPORT(0xC2A, NULL,
+                     "*** Error : Not Found Model Name!(To Idx %d)", target,
+                     entry);
     goto lbl_end;
 
 lbl_return:
