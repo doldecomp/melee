@@ -302,7 +302,157 @@ void HSD_TExpSchedule(int num, HSD_TExpDag* list, HSD_TExp** result,
     }
 }
 
-/// #SimplifySrc
+static s32 HSD_TExpDag_804D5FF8 = 0x7FF00;
+static HSD_TExp* HSD_TExpDag_804D5FFC = NULL;
+
+int SimplifySrc(HSD_TExp* arg0)
+{
+    HSD_TEArg* c_arg;
+    HSD_TEArg* a_arg;
+    HSD_TExp* src;
+    HSD_TObj* tobj;
+    int result;
+    int i;
+    u8 sel;
+
+    c_arg = arg0->tev.c_in;
+    result = 0;
+    for (i = 0; i < 4; i++) {
+        if (c_arg->type == HSD_TE_TEV) {
+            src = c_arg->exp;
+            sel = c_arg->sel;
+            if (HSD_TExpSimplify(src) != 0) {
+                result = 1;
+            }
+            if (sel == HSD_TE_RGB) {
+                switch (src->tev.c_op) {
+                case 0xFF:
+                    HSD_TExpUnref(src, sel);
+                    result = 1;
+                    *(u32*) c_arg = HSD_TExpDag_804D5FF8;
+                    c_arg->exp = HSD_TExpDag_804D5FFC;
+                    break;
+                case GX_TEV_ADD:
+                    if (src->tev.c_in[0].sel == HSD_TE_0 &&
+                        src->tev.c_in[1].sel == HSD_TE_0 &&
+                        src->tev.c_bias == 0 && src->tev.c_scale == 0)
+                    {
+                        switch (src->tev.c_in[3].type) {
+                        case HSD_TE_TEV:
+                            if (src->tev.c_in[3].exp->tev.c_clamp != 0 ||
+                                src->tev.c_clamp == 0)
+                            {
+                                *c_arg = src->tev.c_in[3];
+                                HSD_TExpRef(c_arg->exp, c_arg->sel);
+                                HSD_TExpUnref(src, sel);
+                                result = 1;
+                            }
+                            break;
+                        case HSD_TE_TEX:
+                            tobj = arg0->tev.tex;
+                            if ((tobj == NULL || tobj == src->tev.tex) &&
+                                (arg0->tev.tex_swap == 0xFF ||
+                                 src->tev.tex_swap == 0xFF ||
+                                 arg0->tev.tex_swap == src->tev.tex_swap))
+                            {
+                                *c_arg = src->tev.c_in[3];
+                                arg0->tev.tex = src->tev.tex;
+                                if (arg0->tev.tex_swap == 0xFF) {
+                                    arg0->tev.tex_swap = src->tev.tex_swap;
+                                }
+                                HSD_TExpUnref(src, sel);
+                                result = 1;
+                            }
+                            break;
+                        case HSD_TE_RAS:
+                            if ((arg0->tev.chan == 0xFF ||
+                                 arg0->tev.chan == src->tev.chan) &&
+                                (arg0->tev.ras_swap == 0xFF ||
+                                 src->tev.ras_swap == 0xFF ||
+                                 arg0->tev.ras_swap == src->tev.tex_swap))
+                            {
+                                *c_arg = src->tev.c_in[3];
+                                arg0->tev.chan = src->tev.chan;
+                                if (arg0->tev.tex_swap == 0xFF) {
+                                    arg0->tev.tex_swap = src->tev.tex_swap;
+                                }
+                                HSD_TExpUnref(src, sel);
+                                result = 1;
+                            }
+                            break;
+                        }
+                    }
+                    break;
+                }
+            } else {
+                switch (src->tev.a_op) {
+                case GX_TEV_ADD:
+                    break;
+                case 0xFF:
+                    HSD_TExpUnref(src, sel);
+                    result = 1;
+                    *(u32*) c_arg = HSD_TExpDag_804D5FF8;
+                    c_arg->exp = HSD_TExpDag_804D5FFC;
+                    break;
+                }
+            }
+        }
+        c_arg++;
+    }
+
+    a_arg = arg0->tev.a_in;
+    for (i = 0; i < 4; i++) {
+        if (a_arg->type == HSD_TE_TEV) {
+            src = a_arg->exp;
+            sel = a_arg->sel;
+            HSD_TExpSimplify(src);
+            switch (src->tev.a_op) {
+            case 0xFF:
+                HSD_TExpUnref(src, sel);
+                result = 1;
+                *(u32*) a_arg = HSD_TExpDag_804D5FF8;
+                a_arg->exp = HSD_TExpDag_804D5FFC;
+                break;
+            case GX_TEV_ADD:
+                if (src->tev.a_in[0].sel == HSD_TE_0 &&
+                    src->tev.a_in[1].sel == HSD_TE_0 && src->tev.a_bias == 0 &&
+                    src->tev.a_scale == 0)
+                {
+                    switch (src->tev.a_in[3].type) {
+                    case HSD_TE_TEV:
+                        *a_arg = src->tev.a_in[3];
+                        HSD_TExpRef(a_arg->exp, a_arg->sel);
+                        HSD_TExpUnref(src, sel);
+                        result = 1;
+                        break;
+                    case HSD_TE_TEX:
+                        tobj = arg0->tev.tex;
+                        if (tobj == NULL || tobj == src->tev.tex) {
+                            *a_arg = src->tev.a_in[3];
+                            arg0->tev.tex = src->tev.tex;
+                            HSD_TExpUnref(src, sel);
+                            result = 1;
+                        }
+                        break;
+                    case HSD_TE_RAS:
+                        if (arg0->tev.chan == 0xFF ||
+                            arg0->tev.chan == src->tev.chan)
+                        {
+                            *a_arg = src->tev.a_in[3];
+                            arg0->tev.chan = src->tev.chan;
+                            HSD_TExpUnref(src, sel);
+                            result = 1;
+                        }
+                        break;
+                    }
+                }
+                break;
+            }
+        }
+        a_arg++;
+    }
+    return result;
+}
 
 /// #SimplifyThis
 

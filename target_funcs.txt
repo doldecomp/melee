@@ -3,7 +3,7 @@ Funcs:
 - [x] make_full_dependancy_mtx
 - [x] order_dag
 - [x] HSD_TExpSimplify2
-- [ ] SimplifySrc
+- [x] SimplifySrc
 - [ ] HSD_TExpMakeDag
 - [ ] SimplifyThis
 - [ ] SimplifyByMerge
