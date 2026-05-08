@@ -77,7 +77,7 @@ struct StageInfo {
     bool (*x94)(Vec3*, int);
     s32 x98;
     u32 x9C;
-    u8 xA0[4];
+    s32 xA0;
     u8 xA4_pad[0x12C - 0xA4];
     HSD_GObj* x12C;
     Vec3 x130, x13C, x148, x154, x160, x16C;
@@ -1078,6 +1078,19 @@ struct grGreens_GroundVars {
     /* +1C gp+E0 */ int x1C;
 };
 
+struct grGreens_GroundVars2 {
+    /*  +0 gp+C4 */ int x0;
+    /*  +4 gp+C8 */ int x4;
+    /*  +8 gp+CC */ int x8;
+    /*  +C gp+D0 */ int xC;
+    /* +10 gp+D4 */ int x10;
+    /* +14 gp+D8 */ int x14;
+    /* +18 gp+DC */ int x18;
+    /* +1C gp+E0 */ int x1C;
+    /* +20 gp+E4 */ int x20;
+    /* +24 gp+E8 */ int x24;
+};
+
 struct grMuteCity_GroundVars {
     /* +0x00 gp+C4) */ s16 xC4;
     /* +0x02 gp+C6) */ s16 xC6;
@@ -1605,6 +1618,7 @@ struct Ground {
             struct grFourside_UfoVars foursideUfo;
             struct grFourside_GroundVars2 fourside2;
             struct grGreens_GroundVars greens;
+            struct grGreens_GroundVars2 greens2;
             struct grGarden_GroundVars garden;
             struct grGarden_GroundVars2 garden2;
             struct grIceMt_GroundVars icemt;

@@ -243,8 +243,6 @@ static int offsets_arr_803BC4E4[0x38][2];
 
 static int sfx_remap_803BC6A4[0x4A][2] = { 0 };
 
-
-
 extern int lbl_804D6438;
 extern int lbl_804D643C;
 extern int lbl_804D6440;

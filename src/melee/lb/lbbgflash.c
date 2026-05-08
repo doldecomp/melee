@@ -43,7 +43,6 @@ typedef struct BgFlashData {
 extern BgFlashData lbl_80433658;
 
 #include <dolphin/gx.h>
-
 #include <baselib/cobj.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
@@ -56,11 +55,11 @@ extern BgFlashData lbl_80433658;
 #include <baselib/objalloc.h>
 #include <baselib/particle.h>
 #include <baselib/quatlib.h>
-#include <MSL/trigf.h>
 #include <melee/lb/lb_00F9.h>
 #include <melee/lb/lbarchive.h>
 #include <melee/lb/lbvector.h>
 #include <MSL/math.h>
+#include <MSL/trigf.h>
 
 /* 021A10 */ static void lbBgFlash_80021A10(f32 arg8);
 /* 021C18 */ static void fn_80021C18(HSD_GObj* gobj, CommandInfo* cmd,
@@ -150,8 +149,7 @@ void fn_8001FEC4(HSD_GObj* gobj, s32 code)
     BgFlashData* data = &lbl_80433658;
     s32 mode;
     s32 y;
-
-    PAD_STACK(8);
+    PAD_STACK(24);
 
     if (data->state.active) {
         return;
@@ -396,7 +394,8 @@ void fn_800208B0(u8 arg0)
 {
     BgFlashData* data = &lbl_80433658;
     lbl_80433658.state.active = 0;
-    if ((data && data) && data){}
+    if ((data && data) && data) {
+    }
     lbl_80433658.state.mode = 5;
     data->xC.b = 0;
     data->xC.g = 0;
@@ -751,23 +750,22 @@ void lbBgFlash_80021410(void* arg0)
     ny = axis.y;
     nz = axis.z;
 
-    dot = -((nz * data->pos1.z) +
-            ((nx * data->pos1.x) + (ny * data->pos1.y)));
+    dot = -((nz * data->pos1.z) + ((nx * data->pos1.x) + (ny * data->pos1.y)));
 
-    d = -(dot + ((data->pos4.z * nz) +
-                 ((data->pos4.x * nx) + (data->pos4.y * ny))));
+    d = -(dot +
+          ((data->pos4.z * nz) + ((data->pos4.x * nx) + (data->pos4.y * ny))));
     data->pos4.x = (d * nx) + data->pos4.x;
     data->pos4.y = (d * ny) + data->pos4.y;
     data->pos4.z = (d * nz) + data->pos4.z;
 
-    d = -(dot + ((data->pos0.z * nz) +
-                 ((data->pos0.x * nx) + (data->pos0.y * ny))));
+    d = -(dot +
+          ((data->pos0.z * nz) + ((data->pos0.x * nx) + (data->pos0.y * ny))));
     data->pos0.x = (d * nx) + data->pos0.x;
     data->pos0.y = (d * ny) + data->pos0.y;
     data->pos0.z = (d * nz) + data->pos0.z;
 
-    d = -(dot + ((data->pos1.z * nz) +
-                 ((data->pos1.x * nx) + (data->pos1.y * ny))));
+    d = -(dot +
+          ((data->pos1.z * nz) + ((data->pos1.x * nx) + (data->pos1.y * ny))));
     data->pos1.x = (d * nx) + data->pos1.x;
     data->pos1.y = (d * ny) + data->pos1.y;
     data->pos1.z = (d * nz) + data->pos1.z;
@@ -852,13 +850,23 @@ void lbBgFlash_80021410(void* arg0)
 
     sum_len = (10.0f * (len_bc + len_ac)) / 11.0f;
     if (len_ab > sum_len) {
-        len_ab = ((11.0f * sum_len) / 10.0f) +
-                 (-(sum_len * (sum_len * (sum_len * (sum_len *
-                   (sum_len * (sum_len * (sum_len * (sum_len *
-                   (sum_len * (sum_len * sum_len)))))))))) /
-                  (10.0f * (len_ab * (len_ab * (len_ab * (len_ab *
-                   (len_ab * (len_ab * (len_ab * (len_ab *
-                   (len_ab * len_ab)))))))))));
+        len_ab =
+            ((11.0f * sum_len) / 10.0f) +
+            (-(sum_len *
+               (sum_len *
+                (sum_len *
+                 (sum_len *
+                  (sum_len *
+                   (sum_len *
+                    (sum_len *
+                     (sum_len * (sum_len * (sum_len * sum_len)))))))))) /
+             (10.0f *
+              (len_ab *
+               (len_ab *
+                (len_ab *
+                 (len_ab *
+                  (len_ab *
+                   (len_ab * (len_ab * (len_ab * (len_ab * len_ab)))))))))));
     }
 
     cos1 = ((a2 + b2) - c2) / (two_a * len_ab);
@@ -881,9 +889,9 @@ void lbBgFlash_80021410(void* arg0)
     rem = (f32) (3.141592653589793 - (f64) acos2);
     if (rem < 0.1745329201221466f) {
         acos2 = (f32) (2.9670597334676465 +
-                (f64) (f32) ((f64) (f32) (fabs((f64) rem) /
-                0.1745329201221466) *
-                ((f64) acos2 - 2.9670597334676465)));
+                       (f64) (f32) ((f64) (f32) (fabs((f64) rem) /
+                                                 0.1745329201221466) *
+                                    ((f64) acos2 - 2.9670597334676465)));
     }
 
     fn_8002113C(data->jobj0, &axis, acos1 - angle1);

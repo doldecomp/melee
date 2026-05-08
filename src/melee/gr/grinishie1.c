@@ -507,6 +507,7 @@ void grInishie1_801FB3F0(HSD_GObj* gobj)
     struct grInishie1_GroundVars* vars = &gp->gv.inishie1;
     HSD_DObj* dobj;
     int i;
+    PAD_STACK(56);
 
     if (vars->xD8 > 0) {
         vars->xD8--;
@@ -685,6 +686,7 @@ void grInishie1_801FBCEC(HSD_GObj* gobj, u32 index)
     Ground* gp = gobj->user_data;
     Vec3 effect_pos;
     Vec3 item_spawn_offset;
+    PAD_STACK(8);
 
     gp->gv.inishie1.blocks[index].status = 0;
     gp->gv.inishie1.blocks[index].x20 =
@@ -719,8 +721,8 @@ void grInishie1_801FBCEC(HSD_GObj* gobj, u32 index)
     Camera_80030E44(2, &effect_pos);
 }
 
-void fn_801FBF6C(Item_GObj* item_gobj, Ground* gp, Vec3* pos,
-                 HSD_GObj* arg3, f32 arg4)
+void fn_801FBF6C(Item_GObj* item_gobj, Ground* gp, Vec3* pos, HSD_GObj* arg3,
+                 f32 arg4)
 {
     s32 i;
     HSD_GObj* gobj;

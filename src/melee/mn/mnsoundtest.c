@@ -147,6 +147,7 @@ void mnSoundTest_8024A790(HSD_GObj* arg0)
                (1.0f - HSD_PadCopyStatus[1].nml_analogR) *
                (1.0f - HSD_PadCopyStatus[2].nml_analogR) *
                (1.0f - HSD_PadCopyStatus[3].nml_analogR);
+    PAD_STACK(24);
     if ((temp_f31 < 0.9f) || (temp_r31->unk8 < 1.0f)) {
         temp_f1 = temp_f31 * (f32) gm_801601C4(gmMainLib_8015ED74());
         temp_r30 = (s32) (temp_r31->unk8 * temp_f1);
@@ -181,6 +182,7 @@ void mnSoundTest_8024A958(Soundtest_GObj* arg0)
     HSD_Text* temp_r3_3;
     HSD_Text* temp_r3_4;
     soundtest_user_data* temp_r30;
+    PAD_STACK(16);
 
     temp_r30 = arg0->user_data;
     if (temp_r30->unk14 != NULL) {
@@ -212,6 +214,7 @@ f32 mn_8022F298(HSD_JObj*);
 
 void mnSoundTest_8024AA70(HSD_GObj* arg0, u8 arg1)
 {
+    u8 _padA[16];
     HSD_JObj* sp38;
     HSD_JObj* sp34;
     char string[3];
@@ -370,6 +373,7 @@ void fn_8024AED0(HSD_GObj* arg0)
     u64 events;
 
     soundtest_user_data* user_data = arg0->user_data;
+    PAD_STACK(88);
     if ((u16) mn_804D6BC8.cooldown != 0) {
         Menu_DecrementAnimTimer();
         return;
@@ -443,4 +447,3 @@ void fn_8024AED0(HSD_GObj* arg0)
         mnSoundTest_8024A790(mnSoundTest_804D6C40);
     }
 }
-

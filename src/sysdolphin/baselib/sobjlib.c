@@ -213,7 +213,7 @@ void HSD_SObjLib_803A55DC(HSD_GObj* gobj, int width, int height, int priority)
     Scissor scissor;
     f32 roll = 0.0F;
     f32 near_val = roll;
-    f32 far_val = 0.5F;
+    f32 far_val = 2.0f;
     f32 top = roll;
     f32 bottom = (f32) - (s32) (u16) height;
     f32 left = roll;

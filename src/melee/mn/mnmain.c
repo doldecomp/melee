@@ -2959,9 +2959,7 @@ float mn_8022EC18(HSD_JObj* arg0, AnimLoopSettings* arg1, HSD_TypeMask arg2)
     float var_f31;
 
     temp_f1 = mn_8022F298(arg0);
-    if (!(arg1->start_frame <= temp_f1) ||
-        !(temp_f1 <= arg1->end_frame))
-    {
+    if (!(arg1->start_frame <= temp_f1) || !(temp_f1 <= arg1->end_frame)) {
         HSD_JObjReqAnimAll(arg0, *(volatile float*) &arg1->start_frame);
         mn_8022F3D8(arg0, 0xFFU, arg2);
     }
