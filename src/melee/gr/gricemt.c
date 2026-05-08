@@ -532,7 +532,7 @@ bool grIceMt_801F796C(Ground_GObj* arg0)
     if (gp->gv.icemt.xCC != NULL) {
         gobj = Ground_801C2BA4(gp->gv.icemt2.xC4);
         if (gobj == NULL) {
-            __assert("gricemt.c", 0x4A7, "mgobj");
+            __assert("gricemt.c", 0x47A, "mgobj");
         }
     }
     //__assert("gricemt.c",0x475,"mgobj");
@@ -1204,7 +1204,7 @@ float grIceMt_801F96E0(Ground_GObj* gobj, float y)
     HSD_JObjAddTranslationY(jobj->hsd_obj, y);
     jobj = Ground_801C2BA4(7);
     if (jobj == NULL) {
-        __assert("gricemt.c", 2639, "mgobj");
+        __assert("gricemt.c", 2635, "mgobj");
     }
     if (jobj->hsd_obj == NULL) {
         __assert("gricemt.c", 2630, "jobj");
@@ -1343,7 +1343,7 @@ int grIceMt_801FA500(HSD_GObj* param1)
     PAD_STACK(8);
     iVar3 = 0;
     if (param1->hsd_obj == NULL) {
-        __assert("gricemt.c", 2993, "jobj");
+        __assert("gricemt.c", 2994, "jobj");
         iVar1 = 0;
         //} else {
         //	ivar1 = param1->hsd_obj

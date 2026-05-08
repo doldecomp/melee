@@ -1015,7 +1015,7 @@ grey_out:
                                   -30.0F, NULL, 0);
 
 end_common:
-    HSD_SisLib_803A7548(lbl_8046DBE8.player_data[slot].ko_time, var_r30, 0.09F,
+    HSD_SisLib_803A7548(lbl_8046DBE8.player_data[slot].ko_time, var_r30, 0.11f,
                         0.08F);
     spC = sp10;
     new_var = &spC;

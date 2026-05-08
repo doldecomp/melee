@@ -1291,9 +1291,9 @@ void grBigBlue_801E8A1C(int idx)
         spawn.x8_vec = platform->translate;
 
         if (spawn.x14 == 4) {
-            spawn.x8_vec.y += 15.0F;
+            spawn.x8_vec.y += 8.0f;
         } else {
-            spawn.x8_vec.y += 10.0F;
+            spawn.x8_vec.y += 5.0f;
         }
 
         spawn.x1C.b0 = 1;
@@ -3813,7 +3813,7 @@ void grBigBlue_801ED694(Ground_GObj* gobj, s32 lane)
     if ((gp[lane_offset + 0xD4] >> 1) & 1) {
         /* Grounded path */
         ground_y = grBigBlue_801EC58C((Vec3*) (gp + lane_offset + 0xE0),
-                                      &sp_vec, (f32) 1.5707963F);
+                                      &sp_vec, (f32) 500.0f);
 
         if (0.0F != ground_y && ground_y > rank_factor) {
             if (*(f32*) (gp + lane_offset + 0x10C) < 0.0F) {

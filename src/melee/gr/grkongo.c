@@ -1330,7 +1330,7 @@ HSD_GObj* grKongo_801D5340(s32 gobj_id)
             HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
         }
     } else {
-        OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grstory.c", 220,
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grstory.c", 270,
                  gobj_id);
     }
     return gobj;

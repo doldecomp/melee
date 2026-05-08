@@ -333,7 +333,7 @@ void fn_802F7994(HSD_GObj* gobj)
     }
 
     if (slot >= 0) {
-        if (frame > 0.0f && base[slot * 2 + 2] == NULL) {
+        if (frame > 12.0f && base[slot * 2 + 2] == NULL) {
             s32 idx = (u8) slot << 3;
             void** entry = base + idx;
             base[idx + 2] = fn_802F77F8(*++entry, (u8) slot, 1);

@@ -4042,14 +4042,14 @@ void Camera_8002F9E4(s8 arg0, s8 arg1)
         s8 slot = cm_80452C68.x304;
         cm_80452C68.x314.x = cm_80452C68.x314.y = cm_80452C68.x314.z = 0.0f;
         cm_80452C68.pause_eye_offset.x = 0.0f;
-        cm_80452C68.pause_eye_offset.y = 85.0f;
-        cm_80452C68.pause_eye_offset.z = 730.0f;
+        cm_80452C68.pause_eye_offset.y = 5.0f;
+        cm_80452C68.pause_eye_offset.z = 20.0f;
         cm_80452C68.pause_up.x = 0.0f;
         cm_80452C68.pause_up.y = 1.0f;
         cm_80452C68.pause_up.z = 0.0f;
 
         if (slot == 0xA) {
-            cm_80452C68.pause_eye_distance = 35.0f * scale;
+            cm_80452C68.pause_eye_distance = 3.0f * scale;
         } else {
             cm_80452C68.pause_eye_distance = scale;
         }

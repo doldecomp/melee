@@ -545,7 +545,7 @@ void grBigBlueRoute_8020C85C(Ground_GObj* gobj)
     s32 route_idx;
     PAD_STACK(8);
 
-    if ((f32) gp->gv.bigblueroute.x108 >= 0.5F + grBb_Route_804D6A68->x40) {
+    if ((f32) gp->gv.bigblueroute.x108 >= 1.0f + grBb_Route_804D6A68->x40) {
         return;
     }
 

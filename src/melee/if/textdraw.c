@@ -224,7 +224,7 @@ void DevText_Draw(DevText* text)
     }
     if ((text->flags & DEVTEXT_FLAG_SHOWCURSOR) == 1) {
         text->unk++;
-        if (text->unk < 17) {
+        if (text->unk < 16) {
             if (8 < text->unk) {
                 GXColor color = { 0xFF, 0xFF, 0xFF, 0xC0 };
                 DrawRectangle(text->x + text->scale_x * text->cursor_x,
