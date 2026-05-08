@@ -392,8 +392,8 @@ void gm_801B5324(UnkAllstarData* arg0, u8 arg1)
     s32 slot_idx;
     u64 audio;
     s32 i;
+    PAD_STACK(16);
 
-    PAD_STACK(12);
     base = (u8*) gm_803DE930_MinorScenes;
     is_last_round = 0;
     count_processed = 0;
@@ -517,8 +517,8 @@ void gm_801B5624(MinorScene* arg0)
     s32 count;
     u16 round;
     u8 color;
+    PAD_STACK(8);
 
-    PAD_STACK(16);
     base = (u8*) gm_803DE930_MinorScenes;
     data = gm_801A427C(arg0);
     allstar = &gm_80473A18;

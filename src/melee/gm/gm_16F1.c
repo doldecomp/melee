@@ -1293,6 +1293,7 @@ void fn_80171B64(struct lbl_804D65A8_t* arg0)
 
 int fn_80171BA4(void* arg0)
 {
+    u8 _padA[8];
     int scores[6];
     int player;
     int ko_count;

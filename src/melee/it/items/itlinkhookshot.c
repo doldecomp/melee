@@ -576,14 +576,13 @@ void itLinkhookshot_UnkMotion2_Phys(Item_GObj* arg0)
 void it_802A3254(Item_GObj* arg0)
 {
     Vec3 pos;
-    u8 _padA[4];
     Mtx m;
-    u8 _padB[8];
     Item* item = GET_ITEM(arg0);
     Fighter* fp = item->owner->user_data;
     itLinkHookshotAttributes* attr =
         item->xC4_article_data->x4_specialAttributes;
     ItemLink* item_link = item->xDD4_itemVar.linkhookshot.x4;
+    PAD_STACK(8);
 
     it_802A2EE4_inline((MtxPtr) &m, item_link, &pos);
 

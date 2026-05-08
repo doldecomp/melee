@@ -99,6 +99,7 @@ const f32 grPu_804DBA7C = -30.0;
 
 void grPura_80211D00(void)
 {
+    u8 _padA[8];
     Vec3 cam_offset;
     f32 fVar1;
 
@@ -270,6 +271,7 @@ void grPura_8021231C(Ground_GObj* arg0)
     HSD_JObjSetScale(jobj, vec);
 
     // HSD_JObjGetFlags(jobj);
+    PAD_STACK(40);
     if ((HSD_JObjGetFlags(gp->gv.pura2.xC8) & 0x10) &&
         ((HSD_JObjGetFlags(jobj) & 0x10) == NULL))
     {

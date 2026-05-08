@@ -362,7 +362,6 @@ void grBigBlueRoute_8020BF38(Ground_GObj* gobj)
     int i;
     u8* car;
     HSD_JObj* jobj;
-    PAD_STACK(4);
 
     fighter = Ground_801C57A4();
     Ground_801C3D44(0, grBb_Route_804DB948, grBb_Route_804DB94C);
@@ -546,7 +545,7 @@ void grBigBlueRoute_8020C85C(Ground_GObj* gobj)
     s32 route_idx;
     PAD_STACK(8);
 
-    if ((f32) gp->gv.bigblueroute.x108 >= 0.5F + grBb_Route_804D6A68->x40) {
+    if ((f32) gp->gv.bigblueroute.x108 >= 1.0f + grBb_Route_804D6A68->x40) {
         return;
     }
 
@@ -691,7 +690,6 @@ void grBigBlueRoute_8020DAB4(HSD_JObj** jobjs, f32 scale, int count)
     HSD_JObj** arr;
     HSD_JObj* jobj;
     HSD_GObj* gobj;
-    PAD_STACK(8);
 
     if (jobjs == NULL) {
         return;

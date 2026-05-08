@@ -277,6 +277,7 @@ void grYorster_8020266C(HSD_GObj* gobj)
 {
     Ground* gp = gobj->user_data;
     s32 i;
+    PAD_STACK(8);
 
     for (i = 0; i < 9; i++) {
         struct grYorster_TrackElement* entry = &gp->gv.yorster.elements[i];

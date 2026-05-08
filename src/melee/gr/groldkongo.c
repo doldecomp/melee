@@ -296,6 +296,7 @@ void grOldKongo_8020F888(Ground_GObj* arg0)
     s32 var_r3_4;
     s32 var_r3_5;
     s32 var_r3_6;
+    PAD_STACK(8);
 
     temp_r31 = GET_GROUND(arg0);
     temp_r30 = Ground_801C3FA4(arg0, 1);

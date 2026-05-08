@@ -553,6 +553,7 @@ void grCastle_801CDC44(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     s32 i = 0;
+    PAD_STACK(8);
 
     do {
         struct grCastle_Platform* plat = &gp->gv.castle8.plat[i];

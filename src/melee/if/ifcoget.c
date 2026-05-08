@@ -163,6 +163,7 @@ void fn_802FF218(HSD_GObj* arg0)
 {
     int x;
     int y;
+    PAD_STACK(24);
     for (x = 0; x < 6; x++) {
         if (un_804A1F58[x].x8.x0 == arg0) {
             y = x;
@@ -240,6 +241,7 @@ void un_802FF498(void)
 void un_802FF4FC(void)
 {
     int i;
+    PAD_STACK(8);
     for (i = 0; i < 6; i++) {
         if (un_804A1F58[i].x8.x0) {
             HSD_GObjPLink_80390228(un_804A1F58[i].x8.x0);

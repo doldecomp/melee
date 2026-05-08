@@ -309,6 +309,7 @@ void mn_802327A4(HSD_GObj* gobj, u32 arg1, u32 arg2)
     s32 visible;
     HSD_JObj** root_ptr;
     u16 selected;
+    PAD_STACK(24);
 
     jobj_map[0] = 0;
     jobj_map[1] = 1;
@@ -506,6 +507,7 @@ void mn_80232D4C(HSD_GObj* gobj, u32 arg1, u32 arg2)
     u8 confirmed;
     u8 desc_idx;
     HSD_Text* text;
+    PAD_STACK(8);
 
     if ((s32) arg1 != 0) {
         selection = mn_804A04F0.hovered_selection;
@@ -708,6 +710,7 @@ HSD_GObj* mn_80233218(MenuState state)
     f32* frame_ptr;
     u16* sub_count_ptr;
     GameRules* rules;
+    PAD_STACK(16);
 
     for (i = 0; i < 17; i++) {
         jobj_map[i] = (u16) i;

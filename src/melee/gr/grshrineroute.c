@@ -926,6 +926,7 @@ void grShrineRoute_8020A21C(Ground_GObj* gobj)
     f32 dx;
     f32 dy;
     f32 dist_sq;
+    PAD_STACK(16);
 
     player = Ground_801C57A4();
     if (player != NULL) {
@@ -1294,6 +1295,7 @@ void grShrineRoute_8020AF38(HSD_GObj* gobj, s32 arg1)
     HSD_JObj* jobj;
     f32 scale;
     s32 ix = arg1 - 0xBD;
+    PAD_STACK(16);
 
     pgobj = Ground_801C57A4();
 

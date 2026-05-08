@@ -198,6 +198,7 @@ void ftMaterial_800BF6BC(Fighter* fp, HSD_MObj* mobj, HSD_TExp* texp)
     ColorOverlay* overlay;
     s32 var_r5;
     char* base = (char*) &ftMObj;
+    PAD_STACK(160);
 
     if (!fp->x2223_b3) {
         overlay = ftCo_800C0658(fp);

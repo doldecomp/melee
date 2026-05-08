@@ -3,6 +3,7 @@
 #include "grkongo.static.h"
 
 #include "grmaterial.h"
+#include "placeholder.h"
 #include "types.h"
 
 #include "ef/efsync.h"
@@ -175,6 +176,7 @@ void grKongo_801D55D8(Ground_GObj* arg0)
     Vec3 sp14;
     Ground* temp_r31;
     void* temp_r28;
+    PAD_STACK(8);
 
     temp_r31 = arg0->user_data;
     temp_r28 = arg0->hsd_obj;
@@ -276,6 +278,7 @@ void grKongo_801D577C(Ground_GObj* arg0)
     f32 var_f0;
     HSD_GObj* temp_r3_9;
     Vec3 vec;
+    PAD_STACK(32);
 
     switch (temp_r31->gv.kongo3.xC4) {
     default:
@@ -888,6 +891,7 @@ void grKongo_801D6AFC(void)
     _struct_grKg_803E188C_0x18* var_r6;
 
     s32 var_ctr = 3;
+    PAD_STACK(80);
     var_r5 = &sp44;
     var_r3 = var_r5;
     do {
@@ -1326,7 +1330,7 @@ HSD_GObj* grKongo_801D5340(s32 gobj_id)
             HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
         }
     } else {
-        OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grstory.c", 220,
+        OSReport("%s:%d: couldn t get gobj(id=%d)\n", "grstory.c", 270,
                  gobj_id);
     }
     return gobj;

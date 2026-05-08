@@ -384,6 +384,7 @@ void grBigBlue_801E6364(Ground_GObj* gobj)
     f32 rot_y;
 
     Ground_801C2ED0(jobj, gp->map_id);
+    PAD_STACK(8);
 
     scale.x = scale.y = scale.z = 1.0F;
     HSD_JObjSetScale(jobj, &scale);
@@ -1290,9 +1291,9 @@ void grBigBlue_801E8A1C(int idx)
         spawn.x8_vec = platform->translate;
 
         if (spawn.x14 == 4) {
-            spawn.x8_vec.y += 15.0F;
+            spawn.x8_vec.y += 8.0f;
         } else {
-            spawn.x8_vec.y += 10.0F;
+            spawn.x8_vec.y += 5.0f;
         }
 
         spawn.x1C.b0 = 1;
@@ -2055,6 +2056,7 @@ bool grBigBlue_801EAB50(Vec3* pos, s32 flag, f32 rangeX, f32 rangeY)
 s32 grBigBlue_801EACE8(HSD_JObj* exclude, Vec3* point, f32* out_y,
                        f32 half_range_x, f32 half_range_y)
 {
+    u8 _padA[32];
     HSD_GObj* gobj;
     Ground* gp;
     HSD_JObj* jobj;
@@ -2068,7 +2070,6 @@ s32 grBigBlue_801EACE8(HSD_JObj* exclude, Vec3* point, f32* out_y,
     f32* p_left;
     f32* p_right;
     s32 i;
-    PAD_STACK(0x24);
 
     gobj = Ground_801C2BA4(32);
 
@@ -2545,6 +2546,7 @@ void grBigBlue_801EBAF8(Ground_GObj* gobj)
     f32 rot_z;
     f32 angular_vel;
     grBb_TrackEntry* entry;
+    PAD_STACK(16);
 
     center.x = 0.0F;
     center.z = 0.0F;
@@ -2972,6 +2974,7 @@ void grBigBlue_801ECB50(Ground_GObj* gobj)
     s32 free_count = 0;
     s32 reserved_count = 0;
     s32 active_count = 0;
+    PAD_STACK(8);
 
     /* Count free (0) and reserved (2) lanes - 5×6=30 total */
     {
@@ -3810,7 +3813,7 @@ void grBigBlue_801ED694(Ground_GObj* gobj, s32 lane)
     if ((gp[lane_offset + 0xD4] >> 1) & 1) {
         /* Grounded path */
         ground_y = grBigBlue_801EC58C((Vec3*) (gp + lane_offset + 0xE0),
-                                      &sp_vec, (f32) 1.5707963F);
+                                      &sp_vec, (f32) 500.0f);
 
         if (0.0F != ground_y && ground_y > rank_factor) {
             if (*(f32*) (gp + lane_offset + 0x10C) < 0.0F) {
@@ -3894,6 +3897,7 @@ s32 grBigBlue_801EDF44(Ground_GObj* gobj, s32 index)
     u8* gp;
     s32 result;
     s32 offset;
+    PAD_STACK(8);
 
     gp = (u8*) gobj->user_data;
     result = 0;
@@ -4069,6 +4073,7 @@ s32 grBigBlue_801EE398(Ground_GObj* gobj, s32 arg1, s32 arg2)
     s32 result = 0;
     Ground* gp = gobj->user_data;
     Vec3 pos;
+    PAD_STACK(32);
 
     switch (arg2) {
     case 1: {

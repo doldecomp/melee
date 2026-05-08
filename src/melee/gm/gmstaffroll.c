@@ -447,7 +447,7 @@ void fn_801AB200(HSD_GObj* gobj)
     f32 offset1, offset2;
     StaffEntryData* tree_base;
     HSD_Text* tally_text;
-    PAD_STACK(0x60);
+    PAD_STACK(88);
 
     lb_80011E24(root, &cursor_jobj, 7, -1);
 

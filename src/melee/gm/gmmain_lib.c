@@ -1197,6 +1197,7 @@ static u8 gmMainLib_804D3EE4;
 void gmMainLib_8015F600(int arg0, int arg1)
 {
     s32 i;
+    PAD_STACK(112);
 
     if (arg0 == 1) {
         s32 j = 0;
