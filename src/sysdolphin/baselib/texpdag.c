@@ -67,15 +67,19 @@ void order_dag(int num, u32* dep, u32* full_dep, HSD_TExpDag* list, int depth,
                int idx, u32 done_set, u32 ready_set, int* order, int* min,
                int* min_order)
 {
+    int* sp8;
+    int* spC;
+    int* sp10;
     HSD_TExpDag* dag;
     int new_scheduled;
-    int new_available;
-    int blocked;
-    int dep_bits;
+    u32 new_available;
+    u32 blocked;
+    u32 dep_bits;
     int score;
     int i;
     int n;
     int rem;
+    PAD_STACK(8);
 
     new_scheduled = done_set | (1 << idx);
     new_available = ready_set & ~(1 << idx);
@@ -147,14 +151,19 @@ void order_dag(int num, u32* dep, u32* full_dep, HSD_TExpDag* list, int depth,
         dag = &list[idx];
         new_available = blocked & ~dep_bits;
         if (dag->nb_dep == 1 && (new_available & dep[idx])) {
+            sp8 = order;
+            spC = min;
+            sp10 = min_order;
             order_dag(num, dep, full_dep, list, depth + 1, dag->depend[0]->idx,
-                      new_scheduled, new_available, order, min, min_order);
+                      new_scheduled, new_available, sp8, spC, sp10);
         } else {
             for (i = 0; i < num; i++) {
                 if (new_available & (1 << i)) {
+                    sp8 = order;
+                    spC = min;
+                    sp10 = min_order;
                     order_dag(num, dep, full_dep, list, depth + 1, i,
-                              new_scheduled, new_available, order, min,
-                              min_order);
+                              new_scheduled, new_available, sp8, spC, sp10);
                 }
             }
         }

@@ -1,7 +1,7 @@
 File: src/sysdolphin/baselib/texpdag.c
 Funcs:
 - [x] make_full_dependancy_mtx
-- [ ] order_dag
+- [x] order_dag
 - [ ] HSD_TExpSimplify2
 - [ ] SimplifySrc
 - [ ] HSD_TExpMakeDag
