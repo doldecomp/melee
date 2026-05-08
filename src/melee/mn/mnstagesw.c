@@ -372,7 +372,6 @@ check_dpad:
 
 /// Position stage icon JObj based on index
 /// Uses stored reference JObjs to calculate X/Y position
-#pragma dont_inline on
 static void mnStageSw_80236178(HSD_GObj* gobj, u8 idx)
 {
     HSD_JObj* jobj;
@@ -399,7 +398,11 @@ static void mnStageSw_80236178(HSD_GObj* gobj, u8 idx)
                       HSD_JObjGetTranslationY((HSD_JObj*) gobj->user_data));
     }
 }
-#pragma dont_inline reset
+static HSD_JObj* mnStageSw_802364A0_noinline(HSD_GObj* gobj, u8 idx);
+static HSD_JObj* mnStageSw_802364A0_noinline(HSD_GObj* gobj, u8 idx)
+{
+    return mnStageSw_802364A0(gobj, idx);
+}
 
 /// Get JObj for stage icon at given index
 /// Navigates JObj tree stored in gobj->user_data (idx < 15) or gobj->x34_unk
@@ -437,12 +440,12 @@ static void mnStageSw_80236548(HSD_GObj* gobj, u8 arg1, u8 arg2)
 
     data = gobj->user_data;
     if (arg1 != 0) {
-        jobj = mnStageSw_802364A0(gobj, data->x1);
+        jobj = mnStageSw_802364A0_noinline(gobj, data->x1);
         lb_80011E24(jobj, &sp44, 3, -1);
         HSD_JObjSetFlagsAll(sp44, JOBJ_HIDDEN);
         frame = mn_8022F298(sp44);
         sel = (u8) mn_804A04F0.hovered_selection;
-        jobj = mnStageSw_802364A0(gobj, sel);
+        jobj = mnStageSw_802364A0_noinline(gobj, sel);
         lb_80011E24(jobj, &sp44, 3, -1);
         HSD_JObjClearFlagsAll(sp44, JOBJ_HIDDEN);
         HSD_JObjReqAnimAll(sp44, frame);
@@ -464,7 +467,8 @@ static void mnStageSw_80236548(HSD_GObj* gobj, u8 arg1, u8 arg2)
     }
     if (arg2 != 0) {
         sel = mn_804A04F0.confirmed_selection;
-        jobj = mnStageSw_802364A0(gobj, (u8) mn_804A04F0.hovered_selection);
+        jobj = mnStageSw_802364A0_noinline(gobj,
+                                           (u8) mn_804A04F0.hovered_selection);
         lb_80011E24(jobj, &sp3C, 2, -1);
         HSD_JObjReqAnimAll(sp3C, sel);
         HSD_JObjAnimAll(sp3C);
@@ -474,7 +478,7 @@ static void mnStageSw_80236548(HSD_GObj* gobj, u8 arg1, u8 arg2)
     } else {
         hovered = data->x1;
     }
-    temp = mnStageSw_802364A0(gobj, (u8) hovered);
+    temp = mnStageSw_802364A0_noinline(gobj, (u8) hovered);
     lb_80011E24(temp, &sp44, 3, -1);
     mn_8022ED6C(sp44, mnStageSw_803ED488);
 }
