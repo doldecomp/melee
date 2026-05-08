@@ -136,11 +136,6 @@
 /* 4D6EB4 */ extern s16* un_804D6EB4;
 /* 4DDCD0 */ extern f64 un_804DDCD0;
 
-/* un_80308354 externs */
-/* 3FE474 */ char un_803FE474[0x174];
-/* 4D5A48 */ char un_804D5A48[6];
-/* 4D5A50 */ char un_804D5A50[2];
-
 /* un_803102D0 externs */
 /* 4D6ECC */ extern void* un_804D6ECC;
 /* 4D6EA8 */ extern void* un_804D6EA8;
