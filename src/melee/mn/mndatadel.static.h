@@ -42,12 +42,7 @@ struct MnDataDelData {
     AnimLoopSettings x18;
     AnimLoopSettings x24;
     AnimLoopSettings x30;
-    s32 x3C;
-    s32 x40;
-    s32 x44;
-    s32 x48;
-    s32 x4C;
-    s32 x50;
+    s32 x3C[6];
     s32 x54;
     s16 x58;
     s16 x5A;
@@ -58,6 +53,21 @@ struct MnDataDelData {
     f32 x64;
     f32 x68;
     f32 x6C;
+};
+
+struct MnDataDelGObjUserData {
+    /* +00 */ u8 x0;
+    /* +01 */ u8 x1;
+    /* +02 */ u8 x2;
+    /* +03 */ u8 x3;
+    /* +04 */ u8 x4;
+    /* +05 */ u8 x5;
+    /* +06 */ u8 x6;
+    /* +07 */ u8 x7;
+    /* +08 */ u8 x8;
+    /* +09 */ u8 pad_x9[3];
+    /* +0C */ HSD_Text* xC;
+    /* +10 */ HSD_JObj* x10[8];
 };
 
 static inline void JObj_GetChildAtIdx(HSD_JObj* parent, HSD_JObj** child,
@@ -87,6 +97,9 @@ static struct MnDataDelData mnDataDel_803EF870;
 static AnimLoopSettings mnDataDel_803EF8A0 = {
     0.0f, 9.0f, -0.1f
 }; /// mnDataDel_803EF870[4]
+extern unsigned long long mnDataDel_803EF8AC[2];
+static StaticModelDesc mnDataDel_804A0918;
+static StaticModelDesc mnDataDel_804A0928;
 static StaticModelDesc mnDataDel_804A0938;
 
 #endif

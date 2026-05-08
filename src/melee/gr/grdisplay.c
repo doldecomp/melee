@@ -35,7 +35,8 @@ void grDisplay_801C5B90(HSD_JObj* jobj, Mtx vmtx, u32 flags, u32 rendermode)
             if (!(jobj->flags & JOBJ_HIDDEN)) {
                 HSD_JObj* child;
                 HSD_JObjSetupMatrix(jobj);
-                if ((child = jobj->child) != NULL && HSD_JObjMtxIsDirty(child)) {
+                if ((child = jobj->child) != NULL && HSD_JObjMtxIsDirty(child))
+                {
                     HSD_JObjSetupMatrixSub(child);
                 }
 

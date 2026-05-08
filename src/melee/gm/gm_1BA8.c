@@ -153,7 +153,60 @@ void gm_801BAAD0(MinorScene* arg0)
     temp_r31->xA = -1;
 }
 
-/// #gm_801BAB40
+typedef struct gm_801BAB40_src {
+    /* 0x00 */ u8 c_kind;
+    /* 0x01 */ u8 slot_type;
+    /* 0x02 */ u8 stocks;
+    /* 0x03 */ u8 color;
+    /* 0x04 */ u8 x5;
+    /* 0x05 */ u8 sub_color;
+    /* 0x06 */ u8 team;
+    /* 0x07 */ u8 xB;
+    /* 0x08 */ u8 flags;
+    /* 0x09 */ u8 xE;
+    /* 0x0A */ u8 cpu_level;
+    /* 0x0B */ u8 pad;
+    /* 0x0C */ u16 x12;
+    /* 0x0E */ u16 hp;
+    /* 0x10 */ f32 x18;
+    /* 0x14 */ f32 x1C;
+    /* 0x18 */ f32 x20;
+} gm_801BAB40_src;
+
+void gm_801BAB40(PlayerInitData* arg0, int arg1)
+{
+    gm_801BAB40_src* src = (gm_801BAB40_src*) arg1;
+    gm_8016795C(arg0);
+    arg0->c_kind = src->c_kind;
+    arg0->slot_type = src->slot_type;
+    arg0->stocks = src->stocks;
+    arg0->color = src->color;
+    arg0->slot = 0;
+    arg0->x5 = src->x5;
+    arg0->sub_color = src->sub_color;
+    arg0->handicap = 9;
+    arg0->team = src->team;
+    arg0->xA = 0x78;
+    arg0->xB = src->xB;
+    arg0->xC_b0 = 0;
+    arg0->xC_b1 = (src->flags & 0x80) >> 7;
+    arg0->xC_b2 = (src->flags & 0x40) >> 6;
+    arg0->xC_b3 = (src->flags & 0x20) >> 5;
+    arg0->xC_b4 = (src->flags & 0x10) >> 4;
+    arg0->xC_b6 = (src->flags & 0x08) >> 3;
+    arg0->xC_b7 = (src->flags & 0x04) >> 2;
+    arg0->xD_b1 = 0;
+    arg0->xD_b2 = 0;
+    arg0->xD_b4 = 0;
+    arg0->xE = src->xE;
+    arg0->cpu_level = src->cpu_level;
+    arg0->x10 = 0;
+    arg0->x12 = src->x12;
+    arg0->hp = src->hp;
+    arg0->x18 = src->x18;
+    arg0->x1C = src->x1C;
+    arg0->x20 = src->x20;
+}
 
 /// #gm_801BAC9C
 
@@ -760,7 +813,77 @@ void gm_801BD44C(HSD_GObj* gobj)
     gm_801BCC9C(gobj);
 }
 
-/// #gm_801BD46C
+void gm_801BD46C(HSD_GObj* gobj)
+{
+    lbl_8046B6A0_t* temp_r3;
+    s32 var_r0;
+    struct EventData* temp_r31;
+    s32 var_r30;
+    int i;
+    int count;
+    HSD_GObj* p;
+    PAD_STACK(0x38);
+
+    count = 0;
+    for (i = 1; i < 3; i++) {
+        p = Player_GetEntityAtIndex(i, 1);
+        if (p != NULL) {
+            var_r30 = ftLib_8008731C(p);
+        }
+        if (var_r30 != 0) {
+            count++;
+        }
+    }
+    if (count == 2) {
+        gm_801BC4F4(gobj);
+        return;
+    }
+    for (i = 1; i < 3; i++) {
+        if (Player_GetStocks(i) <= 0) {
+            gmMainLib_804D3EE0->unk_530.xB_1 = false;
+            lbAudioAx_80028B90();
+            gm_SetGameSpeed(1.0F);
+            gm_8016B33C(6);
+            gm_8016B364(0x148);
+            gm_8016B378(0x28);
+            gm_8016B328();
+            HSD_GObjPLink_80390228(gobj);
+            return;
+        }
+    }
+    if (Player_GetP1Stock() <= 0) {
+        gmMainLib_804D3EE0->unk_530.xB_1 = false;
+        lbAudioAx_80028B90();
+        gm_SetGameSpeed(1.0F);
+        gm_8016B33C(6);
+        gm_8016B364(0x148);
+        gm_8016B378(0x28);
+        gm_8016B328();
+        HSD_GObjPLink_80390228(gobj);
+        return;
+    }
+    temp_r31 = &gmMainLib_804D3EE0->unk_530;
+    temp_r3 = gm_8016AE38();
+    if (temp_r31->xB_0) {
+        var_r0 = 0;
+    } else if (temp_r3->x24C8.x0_6 && gm_8016AEEC() == 0 &&
+               gm_8016AEFC() == 0x3B)
+    {
+        var_r0 = 1;
+    } else {
+        var_r0 = 0;
+    }
+    if (var_r0 != 0) {
+        gmMainLib_804D3EE0->unk_530.xB_1 = false;
+        lbAudioAx_80028B90();
+        gm_SetGameSpeed(1.0F);
+        gm_8016B33C(6);
+        gm_8016B364(0x148);
+        gm_8016B378(0x28);
+        gm_8016B328();
+        HSD_GObjPLink_80390228(gobj);
+    }
+}
 
 void gm_801BD658(HSD_GObj* gobj)
 {

@@ -9,6 +9,7 @@
 #include "baselib/gobjproc.h"
 #include "baselib/jobj.h"
 #include "dolphin/types.h"
+#include "gm/gm_1832.h"
 
 #include "gr/forward.h"
 
@@ -16,13 +17,12 @@
 #include "gr/grdisplay.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
+#include "gr/inlines.h"
 #include "gr/stage.h"
-#include "gm/gm_1832.h"
 #include "it/it_26B1.h"
 #include "it/types.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
-#include "gr/inlines.h"
 
 struct {
     int x0;

@@ -137,6 +137,7 @@ void un_8031D288_OnEnter(void* data)
 
     ViCharaDesc* desc = (ViCharaDesc*) data;
     u8 char_index = desc->p1_char_index;
+    PAD_STACK(8);
 
     lbAudioAx_800236DC();
     efLib_Init();

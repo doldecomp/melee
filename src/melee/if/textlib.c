@@ -242,6 +242,7 @@ inline void DevText_AdvanceLine(DevText* text)
 
 void DevText_Print(DevText* text, char* str)
 {
+    PAD_STACK(8);
     if (str) {
         while (*str) {
             if (*str != '\n') {
@@ -627,6 +628,7 @@ void un_80303AC4(struct un_80304138_objalloc_t* arg0)
     int trigger = HSD_PadCopyStatus[0].trigger;
     int stick = un_803039A4(0);
     int buttons = stick | trigger;
+    PAD_STACK(8);
     if (buttons & HSD_PAD_START) {
         struct un_80304138_objalloc_t_x8* x8 = &arg0->x8[arg0->x0];
         if (x8->x4 != NULL) {
@@ -768,6 +770,7 @@ void un_80303FD4(HSD_GObj* arg0, struct un_80304138_objalloc_t* arg1,
     int size;
     void* buf;
     struct un_80304138_objalloc_t* un;
+    PAD_STACK(8);
 
     arg1->x8 = arg2;
     arg1->x1 = 0;

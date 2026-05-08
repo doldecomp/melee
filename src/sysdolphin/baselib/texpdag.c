@@ -76,6 +76,7 @@ void order_dag(int num, u32* dep, u32* full_dep, HSD_TExpDag* list, int depth,
     int i;
     int n;
     int rem;
+    PAD_STACK(8);
 
     new_scheduled = done_set | (1 << idx);
     new_available = ready_set & ~(1 << idx);

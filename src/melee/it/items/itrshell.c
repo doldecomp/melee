@@ -37,14 +37,21 @@ typedef struct itRShell_Attrs {
 } itRShell_Attrs;
 
 ItemStateTable it_803F5C48[] = {
-    { -1, itRshell_UnkMotion0_Anim, itRshell_UnkMotion0_Phys, itRshell_UnkMotion0_Coll },
-    { -1, itRshell_UnkMotion1_Anim, itRshell_UnkMotion1_Phys, itRshell_UnkMotion1_Coll },
+    { -1, itRshell_UnkMotion0_Anim, itRshell_UnkMotion0_Phys,
+      itRshell_UnkMotion0_Coll },
+    { -1, itRshell_UnkMotion1_Anim, itRshell_UnkMotion1_Phys,
+      itRshell_UnkMotion1_Coll },
     { -1, itRshell_UnkMotion2_Anim, itRshell_UnkMotion2_Phys, NULL },
-    { 0, itRshell_UnkMotion3_Anim, itRshell_UnkMotion3_Phys, itRshell_UnkMotion3_Coll },
-    { 0, itRshell_UnkMotion4_Anim, itRshell_UnkMotion4_Phys, itRshell_UnkMotion4_Coll },
-    { 0, itRshell_UnkMotion5_Anim, itRshell_UnkMotion5_Phys, itRshell_UnkMotion5_Coll },
-    { 0, itRshell_UnkMotion6_Anim, itRshell_UnkMotion6_Phys, itRshell_UnkMotion6_Coll },
-    { -1, itRshell_UnkMotion7_Anim, itRshell_UnkMotion7_Phys, itRshell_UnkMotion7_Coll },
+    { 0, itRshell_UnkMotion3_Anim, itRshell_UnkMotion3_Phys,
+      itRshell_UnkMotion3_Coll },
+    { 0, itRshell_UnkMotion4_Anim, itRshell_UnkMotion4_Phys,
+      itRshell_UnkMotion4_Coll },
+    { 0, itRshell_UnkMotion5_Anim, itRshell_UnkMotion5_Phys,
+      itRshell_UnkMotion5_Coll },
+    { 0, itRshell_UnkMotion6_Anim, itRshell_UnkMotion6_Phys,
+      itRshell_UnkMotion6_Coll },
+    { -1, itRshell_UnkMotion7_Anim, itRshell_UnkMotion7_Phys,
+      itRshell_UnkMotion7_Coll },
 };
 
 void it_8028CFE0(Item_GObj* gobj)

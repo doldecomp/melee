@@ -223,7 +223,7 @@ void grKraid_801FE440(Ground_GObj* gobj)
         if (gp->gv.kraid.x4)
         { /// @remark Explicit != 0.0f comparison leads to incorrect ordering
             gp->gv.kraid.x10 = rand_range(grKr_804D6A08->map_time_max,
-                                           grKr_804D6A08->map_time_min);
+                                          grKr_804D6A08->map_time_min);
             gp->gv.kraid.x0 = 1;
             grAnime_801C7FF8(gobj, 18, 7, 1, 0.0f, 1.0f);
             Ground_801C53EC(420007);

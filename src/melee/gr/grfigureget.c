@@ -3,17 +3,19 @@
 #include <platform.h>
 
 #include "baselib/forward.h"
+
+#include "ft/ftlib.h"
+#include "gm/gmregclear.h"
+
 #include "gr/forward.h"
 
 #include "gr/granime.h"
 #include "gr/ground.h"
-#include "gr/stage.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
+#include "gr/stage.h"
 #include "gr/types.h"
 
-#include "ft/ftlib.h"
-#include "gm/gmregclear.h"
 #include "it/forward.h"
 
 #include "it/inlines.h"
@@ -27,10 +29,10 @@
 #include "lb/types.h"
 
 #include "mp/forward.h"
-#include "mp/mplib.h"
 
-#include "ty/tydisplay.h"
+#include "mp/mplib.h"
 #include "ty/toy.h"
+#include "ty/tydisplay.h"
 
 #include <dolphin/mtx.h>
 #include <dolphin/os/OSError.h>
@@ -259,8 +261,8 @@ void grFigureGet_80219898(Ground_GObj* gobj)
             }
             pos.y = grFigureGet_804D6AC0->x14 + Stage_GetCamBoundsTopOffset();
             temp_r6 = gp->gv.figureget.x4;
-            temp_r3_2 = it_802F2094(gobj, &pos,
-                                    gp->gv.figureget.x10[temp_r6 - 1], temp_r6);
+            temp_r3_2 = it_802F2094(
+                gobj, &pos, gp->gv.figureget.x10[temp_r6 - 1], temp_r6);
             gp->gv.figureget.x34[gp->gv.figureget.x4 - 1] = temp_r3_2;
             it_802F2014(temp_r3_2, 0);
             temp_r3 = grFigureGet_804D6AC0->x4;
