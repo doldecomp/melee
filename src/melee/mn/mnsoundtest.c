@@ -606,14 +606,14 @@ void fn_8024B2B0(HSD_GObj* arg0)
 
 void fn_8024B7E4(HSD_GObj* arg0)
 {
+    u32 pad2;
     HSD_JObj* sp20;
     HSD_JObj* sp1C;
     HSD_JObj* sp18;
     AnimLoopSettings* temp_r31;
     HSD_JObj* temp_r30;
     f32 temp_f31;
-
-    PAD_STACK(8);
+    u32 pad1;
 
     temp_r30 = GET_JOBJ(arg0);
     (lb_80011E24(temp_r30, &sp20, 0xB, -1),
