@@ -1905,17 +1905,18 @@ void un_80307F64(s32 arg0, s32 arg1)
 }
 extern char un_803FE454[0x1F];
 
-/* 99.9% match */
 char* un_8030813C(s32 arg0, enum_t unused)
 {
     char* ptr;
     s32 i;
     s32 found;
-
     found = 0;
 
     if (lbLang_IsSettingUS()) {
-        if (*(s32*) (ptr = un_804D6EA4) == arg0) {
+        ptr = un_804D6EA4;
+        if ((arg0 && arg0) && arg0) {
+        }
+        if (*(s32*) ptr == arg0) {
             found = 1;
         } else if (*(s32*) (ptr += 0x54) == arg0) {
             found = 1;

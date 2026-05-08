@@ -490,7 +490,7 @@ bool gm_80160474(CharacterKind ckind, MajorSceneKind scene)
 
 char* gm_801604DC(CharacterKind ckind, MajorSceneKind scene)
 {
-    s16 var_r3;
+    s32 var_r3;
 
     switch (scene) {
     case MJ_CLASSIC_GOVER:
@@ -510,7 +510,7 @@ char* gm_801604DC(CharacterKind ckind, MajorSceneKind scene)
 
 char* gm_80160564(CharacterKind ckind, MajorSceneKind scene)
 {
-    s16 var_r3;
+    s32 var_r3;
 
     switch (scene) {
     case MJ_CLASSIC_GOVER:
