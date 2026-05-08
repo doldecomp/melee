@@ -78,22 +78,18 @@ extern StaticModelDesc MenMainCursorSs_Top;
 #pragma dont_inline on
 static void mnStageSw_8023593C(HSD_GObj* gobj)
 {
-    u8* arr = mnStageSw_803ED4C4;
-    u8* ptr = arr;
-    s32 i = 0;
+    s32 i;
     u8* user_data = gobj->user_data;
     u8* p;
     u8 pad[8];
     (void) pad;
 
-    do {
-        p = arr + (u8) i;
+    for (i = 0; i < NUM_STAGES; i++) {
+        p = mnStageSw_803ED4C4 + (u8) i;
         if (gm_80164430(gm_801641CC(*p)) != 0) {
-            gm_801641E4(*ptr, user_data[i + 2]);
+            gm_801641E4(mnStageSw_803ED4C4[i], user_data[i + 2]);
         }
-        i++;
-        ptr++;
-    } while (i < NUM_STAGES);
+    }
 }
 #pragma dont_inline reset
 
