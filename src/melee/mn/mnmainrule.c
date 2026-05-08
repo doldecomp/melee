@@ -493,9 +493,7 @@ void mn_8022FEC8(HSD_GObj* arg0, HSD_JObj* arg1, u8 arg2, u8 arg3)
 
 void mn_80230198(HSD_GObj* gobj, HSD_JObj* jobj, u8 arg2)
 {
-    AnimLoopSettings* p734;
     AnimLoopSettings* settings;
-    AnimLoopSettings* p770;
     f32 frame;
     s32 i;
     s32 option;
@@ -503,39 +501,53 @@ void mn_80230198(HSD_GObj* gobj, HSD_JObj* jobj, u8 arg2)
     PAD_STACK(8);
 
     option = arg2;
+    if (option == 3) {
+        return;
+    }
 
-    if (option != 3) {
-        if (option < 3) {
-            if (option != 1) {
-                if (option < 1 && option < 0) {
-                    return;
-                }
-                goto find;
-            }
-            return;
+    if (option >= 3) {
+        goto seven;
+    }
+
+    if (option == 1) {
+        return;
+    }
+    if (option >= 1) {
+        goto func;
+    }
+
+    if (option >= 0) {
+        goto func;
+    }
+    return;
+
+seven:
+    if (option >= 7) {
+        return;
+    }
+    if (option >= 5) {
+        return;
+    }
+
+func:
+    frame = mn_8022F298(jobj);
+
+    for (i = 0; i != 5; i++) {
+        settings = &mn_803EC770[i];
+        if (mn_803EC770[i].start_frame <= frame &&
+            frame <= mn_803EC770[i].end_frame)
+        {
+            break;
         }
-        if (option < 7 && option < 5) {
-        find:
-            frame = mn_8022F298(jobj);
-            p770 = mn_803EC770;
-            p734 = mn_803EC734;
-
-            for (i = 5; i != 0; i--) {
-                settings = p770;
-                if (p770->start_frame <= frame && frame <= p770->end_frame) {
-                    break;
-                }
-                settings = p734;
-                if (p734->start_frame <= frame && frame <= p734->end_frame) {
-                    break;
-                }
-                p770++;
-                p734++;
-            }
-
-            mn_8022ED6C(jobj, settings);
+        settings = &mn_803EC734[i];
+        if (mn_803EC734[i].start_frame <= frame &&
+            frame <= mn_803EC734[i].end_frame)
+        {
+            break;
         }
     }
+
+    mn_8022ED6C(jobj, settings);
 }
 
 /// #mn_80230274
