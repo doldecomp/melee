@@ -39,6 +39,7 @@ int ifStock_802F7EFC(int arg0, int arg1)
 {
     Vec3 pos;
     int i, j;
+    PAD_STACK(24);
     if (Player_GetStocks(arg1) == 0) {
         return 1;
     }
@@ -100,6 +101,7 @@ void ifStock_802F8298(HSD_GObj* gobj)
     HSD_JObj* jobj2;
     int i;
     Vec3 vecA, vecB, vecC;
+    PAD_STACK(8);
     ifStock_804A1378.player[user_data->player].stocks =
         Player_GetStocks(user_data->player);
     if (ifStock_804A1378.player[user_data->player].stocks > 99) {
@@ -219,6 +221,7 @@ void ifStock_802F89F8(HSD_GObj* gobj)
     int coins2;
     int count;
     Player_GetCoins(player);
+    PAD_STACK(72);
     coins = Player_GetCoins(user_data->player);
     ifStock_804A1378.player[user_data->player].coins = coins;
     if (coins > 99999) {
@@ -447,6 +450,7 @@ void ifStock_802F98E8(unsigned char player, int b)
     struct ifStock_804A1378_per_player* r26;
     int i;
     lbl_8046B6A0_t* ae44;
+    PAD_STACK(8);
     if (ifStock_804A1378.x0 != NULL) {
         user_data = &ifStock_804A1378.x204[player];
         ifStock_804A1378.x204[player].x0[0] = player;

@@ -29,7 +29,56 @@
 
 /// #ftCo_800B5AB0
 
-/// #ftCo_800B6208
+typedef struct ftCo_AttackEntry {
+    /* +00 */ s32 cmd;
+    /* +04 */ u8 pad04[0x18 - 0x04];
+    /* +18 */ f32 weight;
+    /* +1C */ u8 pad1C[0x24 - 0x1C];
+} ftCo_AttackEntry;
+
+int ftCo_800B6208(ftCo_AttackEntry* arr)
+{
+    f32 r;
+    f32 sum;
+    f32 acc;
+    f32 inv;
+    ftCo_AttackEntry* p;
+    s32 n;
+    s32 i;
+    bool zero;
+
+    r = HSD_Randf();
+    sum = 0.0f;
+    p = arr;
+    n = 0;
+    while (p->cmd != 0) {
+        sum += p->weight;
+        p++;
+        n++;
+    }
+    if (n == 0) {
+        return 0;
+    }
+    if (sum < 0.00001f && sum > -0.00001f) {
+        zero = true;
+    } else {
+        zero = false;
+    }
+    if (zero) {
+        return 0;
+    }
+    inv = 1.0 / sum;
+    acc = 0.0f;
+    p = arr;
+    for (i = 0; i < n; i++) {
+        acc += p->weight;
+        if (acc * inv >= r) {
+            return arr[i].cmd;
+        }
+        p++;
+    }
+    __assert("ftcpuattack.c", 0x28A, "0");
+}
 
 /// Return true if the fighter is currently in any attacking motion state
 bool ftCo_800B630C(Fighter* fp)

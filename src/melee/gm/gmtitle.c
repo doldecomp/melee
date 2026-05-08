@@ -65,7 +65,7 @@ static void gmTitle_801A146C(HSD_GObj* gobj)
     mn_8022ED6C(GET_JOBJ(gobj), &gmTitle_803DA4FC);
 }
 
-static inline bool isActiveTitle()
+static inline bool isActiveTitle(void)
 {
     if (gm_801A4310() == MJ_TITLE ||
         (gm_801A4310() == MJ_OPENING_MV && gm_801A42C4() == MN_VS))
