@@ -97,7 +97,7 @@ AnimLoopSettings mn_803EC770[9] = {
 extern f32 mn_804D4B90;
 extern u16 mn_804D4B94[2];
 extern f32 mn_804D6BD8;
-extern s32 mn_804DBDFC;
+extern u8* mn_804DBDFC;
 extern f32 mn_804DBE00;
 extern HSD_GObj* mn_804D6BD0;
 extern u16 mn_804DBE04;
@@ -309,14 +309,13 @@ void fn_8022F538(HSD_GObj* arg0)
 void mn_8022FB88(u8 arg0, void* arg1)
 {
     struct mn_8022FB88_arg1_t* data = arg1;
+    u8* sp14;
     s32 sp10;
-    s32 sp14;
-    HSD_JObj* temp_r27;
-    HSD_JObj* temp_r28;
     HSD_JObj* temp_r29;
     HSD_JObj* temp_r29_2;
     HSD_JObj* temp_r29_3;
     HSD_JObj* temp_r31;
+    HSD_JObj* temp_r28;
     s32 var_r27;
     s32 var_r28;
     u8* var_r29;
@@ -325,6 +324,7 @@ void mn_8022FB88(u8 arg0, void* arg1)
 
     sp14 = mn_804DBDFC;
     if (arg0 == 0) {
+        HSD_JObj* temp_r27;
         var_r27 = 0;
         var_r29 = (u8*) &sp14;
         do {
@@ -348,7 +348,8 @@ void mn_8022FB88(u8 arg0, void* arg1)
     HSD_JObjReqAnimAll(temp_r28, mn_804D6BD8);
     HSD_JObjAnimAll(temp_r28);
     temp_r27_2 = data->x58;
-    temp_r31 = data->x58[2];
+    temp_r27_2 = data->x58;
+    temp_r31 = temp_r27_2[2];
     HSD_JObjReqAnimAll(temp_r31, (f32) (u8) (arg0 / 10));
     HSD_JObjAnimAll(temp_r31);
     temp_r29 = temp_r27_2[3];
