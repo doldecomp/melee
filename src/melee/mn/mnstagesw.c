@@ -370,6 +370,12 @@ check_dpad:
     }
 }
 
+static void mnStageSw_80236178_noinline(HSD_GObj* gobj, u8 idx);
+static void mnStageSw_80236178_noinline(HSD_GObj* gobj, u8 idx)
+{
+    mnStageSw_80236178(gobj, idx);
+}
+
 /// Position stage icon JObj based on index
 /// Uses stored reference JObjs to calculate X/Y position
 static void mnStageSw_80236178(HSD_GObj* gobj, u8 idx)
@@ -559,13 +565,13 @@ static void fn_80236998(HSD_GObj* gobj)
                 HSD_JObjClearFlagsAll(data->x2C, JOBJ_HIDDEN);
                 HSD_JObjClearFlagsAll(data->x34, JOBJ_HIDDEN);
                 for (i = 0; i < NUM_STAGES; i++) {
-                    jobj = mnStageSw_802364A0(gobj, i);
+                    jobj = mnStageSw_802364A0_noinline(gobj, i);
                     if (i != data->x1) {
                         lb_80011E24(jobj, &child, 3, -1);
                         HSD_JObjSetFlagsAll(child, JOBJ_HIDDEN);
                     }
                 }
-                mnStageSw_80236178(gobj, data->x1);
+                mnStageSw_80236178_noinline(gobj, data->x1);
                 mnStageSw_804D6BF4 = 0;
                 return;
             case 4:
