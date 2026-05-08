@@ -3,6 +3,8 @@
 #include "texp.h"
 #include "tobj.h"
 
+#include "baselib/debug.h"
+
 int assign_reg(int num, u32* unused, HSD_TExpDag* list, int* order)
 {
     u8 color_refs[4] = { 0 };
@@ -201,18 +203,6 @@ void CalcDistance(HSD_TExp** tevs, int* dist, HSD_TExp* tev, int num,
     }
 }
 
-static char HSD_TExpDag_80407AA0[0x78] = {
-    0x74, 0x65, 0x78, 0x70, 0x64, 0x61, 0x67, 0x2E, 0x63, 0x00, 0x00, 0x00,
-    0x48, 0x53, 0x44, 0x5F, 0x54, 0x45, 0x78, 0x70, 0x47, 0x65, 0x74, 0x54,
-    0x79, 0x70, 0x65, 0x28, 0x72, 0x6F, 0x6F, 0x74, 0x29, 0x20, 0x3D, 0x3D,
-    0x20, 0x48, 0x53, 0x44, 0x5F, 0x54, 0x45, 0x5F, 0x54, 0x45, 0x56, 0x00,
-    0x6A, 0x3C, 0x48, 0x53, 0x44, 0x5F, 0x54, 0x45, 0x58, 0x50, 0x5F, 0x4D,
-    0x41, 0x58, 0x5F, 0x4E, 0x55, 0x4D, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02,
-    0x00, 0x00, 0x00, 0x04, 0x00, 0x00, 0x00, 0x06, 0x00, 0x00, 0x00, 0x00,
-    0x00, 0x00, 0x00, 0x03, 0x00, 0x00, 0x00, 0x05, 0x00, 0x00, 0x00, 0x07,
-    0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x02,
-    0x00, 0x00, 0x00, 0x03, 0x00, 0x00, 0x00, 0x00,
-};
 static char HSD_TExpDag_804D5FF0[8] = "l < num";
 
 int HSD_TExpMakeDag(HSD_TExp* root, HSD_TExpDag* list)
@@ -236,8 +226,8 @@ int HSD_TExpMakeDag(HSD_TExp* root, HSD_TExpDag* list)
     int count;
     int count2;
     int num;
-    int i;
     int j;
+    int i;
     int k;
     int l;
     int last;
@@ -254,21 +244,17 @@ int HSD_TExpMakeDag(HSD_TExp* root, HSD_TExpDag* list)
     u8 dep_count;
     u8 dep_count2;
 
-    if (HSD_TExpGetType(root) != HSD_TE_TEV) {
-        __assert(HSD_TExpDag_80407AA0, 0xEEU, &HSD_TExpDag_80407AA0[0xC]);
-    }
+    HSD_ASSERT(0xEEU, HSD_TExpGetType(root) == HSD_TE_TEV);
 
     sp94[0] = root;
     p = &sp94[0];
     num = 1;
-    i = 0;
+    j = 0;
 loop_22:
-    if (i < num) {
-        if (i >= 0x20) {
-            __assert(HSD_TExpDag_80407AA0, 0xF6U, &HSD_TExpDag_80407AA0[0x30]);
-        }
+    if (j < num) {
+        HSD_ASSERT(0xF6U, j < HSD_TEXP_MAX_NUM);
         cur = *p;
-        j = 0;
+        i = 0;
         tmp = cur;
         do {
             if ((u8) cur->tev.c_in[0].type == HSD_TE_TEV) {
@@ -291,11 +277,11 @@ loop_22:
                     num++;
                 }
             }
-            j++;
+            i++;
             cur = (HSD_TExp*) ((u8*) cur + sizeof(HSD_TEArg));
-        } while (j < 4);
+        } while (i < 4);
 
-        j = 0;
+        i = 0;
         cur2 = tmp;
         do {
             if ((u8) cur2->tev.a_in[0].type == HSD_TE_TEV) {
@@ -318,16 +304,16 @@ loop_22:
                     num++;
                 }
             }
-            j++;
+            i++;
             cur2 = (HSD_TExp*) ((u8*) cur2 + sizeof(HSD_TEArg));
-        } while (j < 4);
+        } while (i < 4);
 
         p++;
-        i++;
+        j++;
         goto loop_22;
     }
 
-    i = 0;
+    j = 0;
     if (num > 0) {
         count = num - 8;
         if (num > 8) {
@@ -338,7 +324,7 @@ loop_22:
                 if (count > 0) {
                     do {
                         distp[0] = -1;
-                        i += 8;
+                        j += 8;
                         distp[1] = -1;
                         distp[2] = -1;
                         distp[3] = -1;
@@ -353,10 +339,10 @@ loop_22:
             }
         }
         {
-            int* distp = &sp14[i];
+            int* distp = &sp14[j];
 
-            loop_count4 = num - i;
-            if (i < num) {
+            loop_count4 = num - j;
+            if (j < num) {
                 do {
                     *distp = -1;
                     distp++;
@@ -445,9 +431,7 @@ loop_65:
                         }
                     }
                 }
-                if (l >= num) {
-                    __assert(HSD_TExpDag_80407AA0, 0x145U, HSD_TExpDag_804D5FF0);
-                }
+                HSD_ASSERT(0x145B, l < num);
             }
             idx++;
             cur = (HSD_TExp*) ((u8*) cur + sizeof(HSD_TEArg));
@@ -492,9 +476,7 @@ loop_65:
                         }
                     }
                 }
-                if (l >= num) {
-                    __assert(HSD_TExpDag_80407AA0, 0x15BU, HSD_TExpDag_804D5FF0);
-                }
+                HSD_ASSERT(0x15B, l < num);
             }
             idx2++;
             cur2 = (HSD_TExp*) ((u8*) cur2 + sizeof(HSD_TEArg));

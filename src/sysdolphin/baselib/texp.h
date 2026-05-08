@@ -54,6 +54,7 @@ typedef enum _HSD_TExpType {
     HSD_TE_ALL = 7,
     HSD_TE_TYPE_MAX = 8
 } HSD_TExpType;
+static int HSD_TEXP_MAX_NUM = 20;
 
 typedef struct _HSD_TevConf {
     GXTevOp clr_op;
