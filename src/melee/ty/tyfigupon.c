@@ -799,6 +799,7 @@ static const Vec3 un_803B8968 = { 0.0f, 1.0f, 0.0f };
 
 void fn_803168DC(HSD_GObj* arg0)
 {
+    u8 _padA[32];
     ToyAnimState* data = &un_804A2AA8;
     HSD_CObj* cobj = arg0->hsd_obj;
     Vec3 interest;
@@ -1159,6 +1160,7 @@ static const DigitInit un_803B8974 = { 0, 0, 0, 0 };
 
 void un_8031753C(void)
 {
+    u8 _padA[24];
     struct un_804D6EF4_t* ef4 = un_804D6EF4;
     HSD_Joint* joint;
     HSD_JObj* jobj;

@@ -774,20 +774,22 @@ s32 gmMainLib_8015DBF4(s32 arg0)
     s32 j;
     u8 val;
 
-#define ADJ_NAMETAG_78(field) do {                          \
-    val = (field);                                          \
-    if (val == (u8) arg0) {                                 \
-        (field) = 0x78;                                     \
-    } else if (val > (u8) arg0 && val != 0x78) {            \
-        (field) = val - 1;                                  \
-    }                                                       \
-} while (0)
+#define ADJ_NAMETAG_78(field)                                                 \
+    do {                                                                      \
+        val = (field);                                                        \
+        if (val == (u8) arg0) {                                               \
+            (field) = 0x78;                                                   \
+        } else if (val > (u8) arg0 && val != 0x78) {                          \
+            (field) = val - 1;                                                \
+        }                                                                     \
+    } while (0)
 
-#define ADJ_VMD(vmd) do {                                   \
-    for (j = 0; j < 6; j++) {                               \
-        ADJ_NAMETAG_78((vmd)->data.players[j].xA);          \
-    }                                                       \
-} while (0)
+#define ADJ_VMD(vmd)                                                          \
+    do {                                                                      \
+        for (j = 0; j < 6; j++) {                                             \
+            ADJ_NAMETAG_78((vmd)->data.players[j].xA);                        \
+        }                                                                     \
+    } while (0)
 
     ADJ_NAMETAG_78(gmMainLib_804D3EE0->unk_51C.x4);
     ADJ_NAMETAG_78(gmMainLib_804D3EE0->unk_522.x4);
@@ -1078,15 +1080,14 @@ void gmMainLib_8015F150(void)
 
     for (i = 0; i < 0x19; i++) {
         int j;
-        struct FighterData* data =
-            &gmMainLib_804D3EE0->thing.x1F2C[(u8) i];
+        struct FighterData* data = &gmMainLib_804D3EE0->thing.x1F2C[(u8) i];
         for (j = 0; j < 0x19; j++) {
             data->fighter_kos[j] = 0;
         }
         gmMainLib_8015EF30(
             (struct gmMainLib_8015EF30_s*) &gmMainLib_804D3EE0->thing
-                                                .x1F2C[(u8) i]
-                                                .sd_count);
+                .x1F2C[(u8) i]
+                .sd_count);
     }
 }
 
@@ -1107,8 +1108,7 @@ void gmMainLib_8015F260(void)
         for (j = 0; j < 120; j++) {
             data->vs_kos[j] = 0;
         }
-        gmMainLib_8015EF30(
-            (struct gmMainLib_8015EF30_s*) &data->sd_count);
+        gmMainLib_8015EF30((struct gmMainLib_8015EF30_s*) &data->sd_count);
         for (j = 0; j < 25; j++) {
             data->play_time_by_fighter[j] = 0;
         }
@@ -1197,19 +1197,19 @@ static u8 gmMainLib_804D3EE4;
 void gmMainLib_8015F600(int arg0, int arg1)
 {
     s32 i;
+    PAD_STACK(112);
 
     if (arg0 == 1) {
         s32 j = 0;
         do {
-            struct FighterData* fdata =
-                gmMainLib_804D3EE0->thing.x1F2C;
+            struct FighterData* fdata = gmMainLib_804D3EE0->thing.x1F2C;
             for (i = 0; i < 25; i++) {
                 fdata[(u8) j].fighter_kos[i] = 0;
             }
             gmMainLib_8015EF30(
-                (struct gmMainLib_8015EF30_s*)
-                    &gmMainLib_804D3EE0->thing.x1F2C[(u8) j]
-                         .sd_count);
+                (struct gmMainLib_8015EF30_s*) &gmMainLib_804D3EE0->thing
+                    .x1F2C[(u8) j]
+                    .sd_count);
             j++;
         } while (j < 25);
 
@@ -1218,8 +1218,8 @@ void gmMainLib_8015F600(int arg0, int arg1)
 
         if (arg1 == 0) {
             un_803124BC();
-            Trophy_SetUnlockState(
-                (s32)(s16) un_80305058(2, 0x63, 0, 100.0f), 1);
+            Trophy_SetUnlockState((s32) (s16) un_80305058(2, 0x63, 0, 100.0f),
+                                  1);
         }
 
         gmMainLib_804D3EE0->thing.x1CB0 =
@@ -1242,9 +1242,7 @@ void gmMainLib_8015F600(int arg0, int arg1)
         gm_801623FC(0x32);
         gm_IncrementPowerCount();
 
-        if (arg1 == 0 && un_803048C0(0xA5) > 0 &&
-            gm_80164430(0x14U) == 0)
-        {
+        if (arg1 == 0 && un_803048C0(0xA5) > 0 && gm_80164430(0x14U) == 0) {
             gm_80164504(0x14U);
         }
     } else {
@@ -1255,15 +1253,13 @@ void gmMainLib_8015F600(int arg0, int arg1)
         do {
             s32 idx = j + bank_offset;
             struct NameTagData* data =
-                &gmMainLib_804D3EE0->thing
-                     .x2FF8[(u8) idx / 19]
+                &gmMainLib_804D3EE0->thing.x2FF8[(u8) idx / 19]
                      .inner[(u8) idx % 19];
 
             for (i = 0; i < 120; i++) {
                 data->vs_kos[i] = 0;
             }
-            gmMainLib_8015EF30(
-                (struct gmMainLib_8015EF30_s*) &data->sd_count);
+            gmMainLib_8015EF30((struct gmMainLib_8015EF30_s*) &data->sd_count);
 
             for (i = 0; i < 25; i++) {
                 data->play_time_by_fighter[i] = 0;
@@ -1271,10 +1267,10 @@ void gmMainLib_8015F600(int arg0, int arg1)
             data->x1A2 = 5;
 
             {
-                char* src = mnName_8023749C((s32)(u8) idx);
+                char* src = mnName_8023749C((s32) (u8) idx);
                 if (src != NULL) {
                     s32 k = 0;
-                    while ((s8) gmMainLib_804D3EE4 != (s8)(u8) *src) {
+                    while ((s8) gmMainLib_804D3EE4 != (s8) (u8) *src) {
                         data->namedata[k] = (u8) *src;
                         k++;
                         src++;

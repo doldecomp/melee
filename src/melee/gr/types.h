@@ -77,7 +77,7 @@ struct StageInfo {
     bool (*x94)(Vec3*, int);
     s32 x98;
     u32 x9C;
-    u8 xA0[4];
+    s32 xA0;
     u8 xA4_pad[0x12C - 0xA4];
     HSD_GObj* x12C;
     Vec3 x130, x13C, x148, x154, x160, x16C;
@@ -742,6 +742,22 @@ struct grOldKongo_GroundVars {
     f32 xEC;
 };
 
+struct grOldPupupu_GroundVars {
+    s32 xC4;
+    s32 xC8;
+    s32 xCC;
+    s32 xD0;
+    s32 xD4;
+    s32 xD8;
+    s32 xDC;
+    s32 xE0;
+};
+
+struct grOldPupupu_GroundVars2 {
+    s16 xC4;
+    s16 xC6;
+};
+
 /// likely for Cathrine (Birdo)
 struct grInishie2_GroundVars2 {
     Item_GObj* xC4;
@@ -965,15 +981,14 @@ struct grRCruise_GroundVars2 {
 };
 
 struct grFigureGet_GroundVars {
-    /*  +0 gp+C4 */ UNK_T x0;
-    /*  +4 gp+C8 */ UNK_T x4;
+    /*  +0 gp+C4 */ s32 x0;
+    /*  +4 gp+C8 */ s32 x4;
     /*  +8 gp+CC */ int x8;
     /*  +C gp+D0 */ int xC;
-    /* +10 gp+D4 */ int x10;
-    /* +14 gp+D8 */ int x14;
-    /* +18 gp+DC */ int x18;
+    /* +10 gp+D4 */ int x10[3];
     /* +1C gp+E0 */ int x1C[3];
     /* +28 gp+EC */ HSD_GObj* x28[3];
+    /* +34 gp+F8 */ Item_GObj* x34[3];
 };
 
 struct grFourside_GroundVars {
@@ -1061,6 +1076,19 @@ struct grGreens_GroundVars {
     /* +14 gp+D8 */ int x14;
     /* +18 gp+DC */ int x18;
     /* +1C gp+E0 */ int x1C;
+};
+
+struct grGreens_GroundVars2 {
+    /*  +0 gp+C4 */ int x0;
+    /*  +4 gp+C8 */ int x4;
+    /*  +8 gp+CC */ int x8;
+    /*  +C gp+D0 */ int xC;
+    /* +10 gp+D4 */ int x10;
+    /* +14 gp+D8 */ int x14;
+    /* +18 gp+DC */ int x18;
+    /* +1C gp+E0 */ int x1C;
+    /* +20 gp+E4 */ int x20;
+    /* +24 gp+E8 */ int x24;
 };
 
 struct grMuteCity_GroundVars {
@@ -1469,6 +1497,7 @@ struct grHomeRun_GroundVars {
     u16 xC6;
     int xC8;
     int xCC;
+    f32 xD0;
 };
 
 struct Map_GroundVars {
@@ -1589,6 +1618,7 @@ struct Ground {
             struct grFourside_UfoVars foursideUfo;
             struct grFourside_GroundVars2 fourside2;
             struct grGreens_GroundVars greens;
+            struct grGreens_GroundVars2 greens2;
             struct grGarden_GroundVars garden;
             struct grGarden_GroundVars2 garden2;
             struct grIceMt_GroundVars icemt;
@@ -1600,6 +1630,8 @@ struct Ground {
             struct grInishie2_GroundVars2 inishie22;
             struct grInishie2_GroundVars3 inishie23;
             struct grOldKongo_GroundVars oldkongo;
+            struct grOldPupupu_GroundVars oldpupupu;
+            struct grOldPupupu_GroundVars2 oldpupupu2;
             struct grOldYoshi_Cloud_GroundVars oldyoshicloud;
             struct grOldYoshi_Guest_GroundVars oldyoshiguest;
             struct GroundVars_izumi izumi;

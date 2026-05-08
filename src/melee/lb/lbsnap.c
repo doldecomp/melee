@@ -185,6 +185,7 @@ int lbSnap_8001D7B0(int chan, int index, int jndex)
 void lbSnap_8001DA5C(int arg0)
 {
     int r4, r5, r6, r7, r9, r10, r25, r27, r28, ctr;
+    PAD_STACK(16);
 
     r7 = 0;
     for (r10 = 0; r10 < 32; r10++) {

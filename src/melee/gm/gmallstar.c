@@ -392,8 +392,8 @@ void gm_801B5324(UnkAllstarData* arg0, u8 arg1)
     s32 slot_idx;
     u64 audio;
     s32 i;
+    PAD_STACK(16);
 
-    PAD_STACK(12);
     base = (u8*) gm_803DE930_MinorScenes;
     is_last_round = 0;
     count_processed = 0;
@@ -492,7 +492,7 @@ void gm_801B5324(UnkAllstarData* arg0, u8 arg1)
     gc->game_cache.stage_id = (InternalStageId) opp_data->x2;
     lbDvd_80018254();
 
-    audio = lbAudioAx_80026E84((CharacterKind)(s8) arg0->x0.ckind);
+    audio = lbAudioAx_80026E84((CharacterKind) (s8) arg0->x0.ckind);
     {
         s8* cp = chars;
         for (i = 0; i < 3; i++) {
@@ -517,8 +517,8 @@ void gm_801B5624(MinorScene* arg0)
     s32 count;
     u16 round;
     u8 color;
+    PAD_STACK(8);
 
-    PAD_STACK(16);
     base = (u8*) gm_803DE930_MinorScenes;
     data = gm_801A427C(arg0);
     allstar = &gm_80473A18;
@@ -537,7 +537,7 @@ void gm_801B5624(MinorScene* arg0)
 
     if (count > 0) {
         if (count > 8) {
-            u32 blocks = (u32)(count - 8 + 7) >> 3;
+            u32 blocks = (u32) (count - 8 + 7) >> 3;
             gm_803DEBE8_t* src = opp_data;
             s8* dst = chars;
             if (count - 8 > 0) {
@@ -586,9 +586,7 @@ void gm_801B5624(MinorScene* arg0)
     round = gm_8017BE84(arg0->idx);
 
     gm_8017CE34(data, (UnkAdventureData*) allstar, chars, 0, 0, 0, 0,
-                (s32) opp_data->x2,
-                (s32) round,
-                (s32) color);
+                (s32) opp_data->x2, (s32) round, (s32) color);
 
     data->rules.x0_6 = 1;
     data->rules.x0_7 = 1;
@@ -608,13 +606,9 @@ void gm_801B5624(MinorScene* arg0)
         f32 f31 = gm_8018A188(0xC, allstar->x0.cpu_level);
         u8 opp_count = gm_8018A228(0xC, allstar->x0.cpu_level, 0);
 
-        gm_8016A22C(3, 0x21, 0x21, 0, 0, 0, 1, 0,
-                    0,
-                    (u8) data->players[0].c_kind,
-                    data->players[0].color,
-                    (s32) opp_count,
-                    0x19, 5, 1, 0, 1,
-                    f31, f30);
+        gm_8016A22C(3, 0x21, 0x21, 0, 0, 0, 1, 0, 0,
+                    (u8) data->players[0].c_kind, data->players[0].color,
+                    (s32) opp_count, 0x19, 5, 1, 0, 1, f31, f30);
 
         data->rules.x4_5 = 1;
         data->rules.x0_3 = 6;
@@ -644,9 +638,7 @@ void gm_801B59AC(MinorScene* arg0)
     }
     data->x74 = exit->match_end.player_standings[0].percent;
     data->x9C += exit->match_end.frame_count;
-    if (gm_8017D7AC(exit, &data->x0, 0x69) != 0 &&
-        (u8) arg0->idx == 0x60)
-    {
+    if (gm_8017D7AC(exit, &data->x0, 0x69) != 0 && (u8) arg0->idx == 0x60) {
         gm_8017CBAC((UnkAdventureData*) data, gmMainLib_8015CDE0(), 0x17);
     }
 }
@@ -683,8 +675,8 @@ void gm_801B5ACC(MinorScene* arg0)
         color = gm_80490940[opp_idx].x0;
     }
 
-    gm_8017CE34(data, (UnkAdventureData*) allstar, chars, 0, 0, 0, 0,
-                0x55, 0, (s32) color);
+    gm_8017CE34(data, (UnkAdventureData*) allstar, chars, 0, 0, 0, 0, 0x55, 0,
+                (s32) color);
 
     data->rules.x0_6 = 0;
     data->rules.x0_7 = 1;
@@ -721,7 +713,7 @@ void gm_801B5ACC(MinorScene* arg0)
     }
 
     allstar->_94[1] = (u8) next_count;
-    allstar->_94[0] = (u8)(round + 1);
+    allstar->_94[0] = (u8) (round + 1);
     data->players[0].xC_b1 = 0;
     data->rules.x1_2 = 1;
     data->rules.x1_3 = 1;

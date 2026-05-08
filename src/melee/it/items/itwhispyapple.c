@@ -287,9 +287,8 @@ void itWhispyapple_UnkMotion3_Phys(Item_GObj* gobj) {}
 void it_802EEA70(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    HSD_JObj* jobj = GET_JOBJ(gobj);
-    HSD_JObj* child = HSD_JObjGetChild(jobj);
-    Vec3 vec = { 0, 0, 0 };
+    HSD_JObj* child = HSD_JObjGetChild(GET_JOBJ(gobj));
+    Vec3 pos = { 0.0f, 0.0f, 0.0f };
 
     it_8026B390(gobj);
     HSD_JObjClearFlagsAll(child, 0x10);
@@ -297,7 +296,7 @@ void it_802EEA70(Item_GObj* gobj)
     ip->x40_vel.z = 0.0f;
     ip->x40_vel.y = 0.0f;
     ip->pos.z = 0.0f;
-    it_8027429C(gobj, &vec);
+    it_8027429C(gobj, &pos);
 }
 
 void it_802EEB28(Item_GObj* gobj)

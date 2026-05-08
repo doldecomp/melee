@@ -609,6 +609,7 @@ void mnDiagram2_CreateStatRow(HSD_GObj* gobj, u8 is_name_mode, u8 stat_type,
     HSD_Text* text;
     f32 f31;
     f32 f30;
+    PAD_STACK(16);
 
     data = gobj->user_data;
     base = (char*) &mnDiagram2_803EEAD0;

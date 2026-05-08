@@ -737,6 +737,7 @@ static bool inlineB0(Fighter_GObj* gobj)
 #pragma inline_depth(1)
 void ftCo_8008EB58(Fighter_GObj* gobj)
 {
+    PAD_STACK(8);
     if (inlineB0(gobj)) {
         ftCo_800C8D00(gobj);
         inlineF0(gobj);
@@ -785,6 +786,7 @@ void ftCo_8008EC90(Fighter_GObj* gobj)
     bool ret0 = false;
     Fighter* fp = gobj->user_data;
     float facing_dir = 0;
+    PAD_STACK(64);
     if (fp->x2220_b3 || fp->x2220_b4 || !fp->dmg.kb_applied) {
         inlineB2(gobj);
         goto ret_A8C;

@@ -4,10 +4,10 @@
 #include "ft/ftdata.h"
 #include "ft/inlines.h"
 #include "if/ifmagnify.h"
+#include "pl/pl_040D.h"
 #include "pl/player.h"
 #include "pl/plbonus.h"
 #include "pl/plbonuslib.h"
-#include "pl/pl_040D.h"
 
 #include <sysdolphin/baselib/debug.h>
 
@@ -15,8 +15,7 @@
                                      s32);
 
 int pl_803BCE70[16] = {
-    -1, 0x2F, 0x30, 0x31, -1, -1, -1, -1,
-    -1, -1,   -1,   -1,   -1, -1, -1, -1,
+    -1, 0x2F, 0x30, 0x31, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
 };
 
 int pl_80037B2C(struct plActionStats* arg0, int h_player, int idx)
@@ -208,9 +207,9 @@ static void fn_80037F00(HSD_GObj** gp, Fighter* fp, ft_800898B4_t* ev,
     }
 }
 
-void pl_80038144(HSD_GObj* attacker_gobj, HSD_GObj* victim_gobj,
-                 s32 x18d4_int, ft_800898B4_t* ev_data,
-                 u16 attack_instance, s32 arg5, s32 source_ply)
+void pl_80038144(HSD_GObj* attacker_gobj, HSD_GObj* victim_gobj, s32 x18d4_int,
+                 ft_800898B4_t* ev_data, u16 attack_instance, s32 arg5,
+                 s32 source_ply)
 {
     Fighter* attacker_fp;
     Fighter* victim_fp;
@@ -258,7 +257,7 @@ void pl_80038144(HSD_GObj* attacker_gobj, HSD_GObj* victim_gobj,
         }
 
         pl_800410F4(attacker_fp->player_id, attacker_fp->x221F_b4,
-                     victim_fp->player_id, victim_fp->x221F_b4, ev.x2073);
+                    victim_fp->player_id, victim_fp->x221F_b4, ev.x2073);
     }
 
     if (attack_instance == 0 ||
@@ -392,9 +391,8 @@ void pl_800384DC(HSD_GObj* gobj, int arg1, void* arg2)
             pl_8003FE40(fp->player_id, fp->x221F_b4);
         }
 
-        if (!ev_data->x10_b7 &&
-            acp->attacks.by_attack_counts[attack_id] >
-                acp->x358_hits.by_attack_counts[attack_id])
+        if (!ev_data->x10_b7 && acp->attacks.by_attack_counts[attack_id] >
+                                    acp->x358_hits.by_attack_counts[attack_id])
         {
             ev4.x2070_int = ev.x2070_int;
             pl_80037BC0_inline(&acp->x358_hits, &ev4);

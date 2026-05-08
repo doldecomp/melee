@@ -5,6 +5,7 @@
 #include "gm_1A3F.h"
 #include "gm_1A45.h"
 #include "gm_unsplit.h"
+
 #include "it/inlines.h"
 
 #include <sysdolphin/baselib/archive.h>
@@ -17,6 +18,7 @@
 #include <sysdolphin/baselib/gobjproc.h>
 #include <sysdolphin/baselib/jobj.h>
 #include <sysdolphin/baselib/mobj.h>
+#include <sysdolphin/baselib/sislib.h>
 #include <melee/lb/lb_00B0.h>
 #include <melee/lb/lb_00F9.h>
 #include <melee/lb/lbarchive.h>
@@ -24,7 +26,6 @@
 #include <melee/sc/types.h>
 #include <melee/ty/toy.h>
 #include <melee/ty/tylist.h>
-#include <sysdolphin/baselib/sislib.h>
 
 static HSD_Archive* lbl_804D6698;
 static SceneDesc* lbl_804D669C;
@@ -231,8 +232,7 @@ static void fn_8019F2D4(u32 arg0)
                     lbl_80479A98.x60 = 1;
                     lbl_80479A98.x22 =
                         lbl_80479A98.x22 - (lbl_80479A98.x1C * 0xA);
-                    lbl_80479A98.x1E =
-                        lbl_80479A98.x1E - lbl_80479A98.x1C;
+                    lbl_80479A98.x1E = lbl_80479A98.x1E - lbl_80479A98.x1C;
                     lbl_804D66C8.x4 = 0x5A;
                     lbl_804D66C0.x4 = 0x64;
                     return;
@@ -408,8 +408,7 @@ void fn_8019F9C4(u32 arg0)
         lbArchive_LoadSymbols(scene_name, &lbl_804D66AC, model_name, 0);
         lbArchive_LoadSymbols("GmGoAnim.dat", &lbl_804D66A4,
                               "ScGamRegGover_scene_data", 0);
-        lbArchive_LoadSymbols("GmRgStnd.dat", &lbl_804D66A8, "standScene",
-                              0);
+        lbArchive_LoadSymbols("GmRgStnd.dat", &lbl_804D66A8, "standScene", 0);
     }
     cobj = HSD_CObjLoadDesc(lbl_804D669C->cameras->desc);
     cam_gobj = GObj_Create(0x13, 0x14, 0);
@@ -510,12 +509,9 @@ void fn_8019F9C4(u32 arg0)
 
     {
         u16 val = lbl_80479A98.x1E;
-        lbl_80479A98.x6C =
-            ((0xA - ((val / 100) % 10)) * 5) % 50;
-        lbl_80479A98.x68 =
-            ((0xA - ((val / 10) % 10)) * 5) % 50;
-        lbl_80479A98.x64 =
-            ((0xA - (val % 10)) * 5) % 50;
+        lbl_80479A98.x6C = ((0xA - ((val / 100) % 10)) * 5) % 50;
+        lbl_80479A98.x68 = ((0xA - ((val / 10) % 10)) * 5) % 50;
+        lbl_80479A98.x64 = ((0xA - (val % 10)) * 5) % 50;
     }
     HSD_JObjReqAnimAll(lbl_80479A98.x5C, (f32) lbl_80479A98.x6C);
     HSD_JObjReqAnimAll(lbl_80479A98.x58, (f32) lbl_80479A98.x68);
@@ -609,8 +605,7 @@ void fn_8019F9C4(u32 arg0)
     HSD_JObjSetTranslateX(child, un_803060BC(char_idx, 0));
     HSD_JObjSetTranslateY(child, un_803060BC(char_idx, 1));
     HSD_JObjSetTranslateZ(child, un_803060BC(char_idx, 2));
-    HSD_JObjSetRotationY(child,
-                         0.017453292f * un_803060BC(char_idx, 5));
+    HSD_JObjSetRotationY(child, 0.017453292f * un_803060BC(char_idx, 5));
     f = un_803060BC(char_idx, 4);
     scale = un_803060BC(char_idx, 3) / f;
     HSD_JObjSetScaleX(child, scale);

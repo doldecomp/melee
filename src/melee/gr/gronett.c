@@ -769,6 +769,7 @@ void grOnett_801E5214(Ground_GObj* gobj)
 {
     Ground* gp = GET_GROUND(gobj);
     int i;
+    PAD_STACK(8);
     for (i = 0; i < 2; i++) {
         struct grOnett_AwningData* awn = &gp->gv.onett.awnings[i];
         f32 disp, vel, error, abs_ratio, accel, force;
