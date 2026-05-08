@@ -557,7 +557,7 @@ void it_802886C4(Item_GObj* gobj)
 {
     Vec3 zero;
     Item* ip = GET_ITEM(gobj);
-    HSD_JObj *jobj = (0, (HSD_JObj *) HSD_GObjGetHSDObj(gobj));
+    HSD_JObj* jobj = (0, (HSD_JObj*) HSD_GObjGetHSDObj(gobj));
 
     Item_8026AE84(ip, 0xFB, 0x7F, 0x40);
     Camera_80030E44(2, &ip->pos);

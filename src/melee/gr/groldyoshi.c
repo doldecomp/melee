@@ -241,6 +241,7 @@ void grOldYoshi_8020EC10(Ground_GObj* arg)
     int i = 0;
     Ground* gp = arg->user_data;
     HSD_JObj* jobj = arg->user_data;
+    PAD_STACK(8);
     do {
         // int test = HSD_Randi(3);
         switch (gp->gv.oldyoshicloud.cloud[i].xC4_0123) {
@@ -347,12 +348,11 @@ static inline s32 randi_between(s32 min, s32 max)
 }
 
 // For some reason, the normal GET_GROUND didn't work here
-inline Ground* grOldYoshi_8020EFCC_inline(Ground_GObj *arg0);
-inline Ground* grOldYoshi_8020EFCC_inline(Ground_GObj *arg0)
+inline Ground* grOldYoshi_8020EFCC_inline(Ground_GObj* arg0);
+inline Ground* grOldYoshi_8020EFCC_inline(Ground_GObj* arg0)
 {
-  return arg0->user_data;
+    return arg0->user_data;
 }
-
 
 void grOldYoshi_8020EFCC(Ground_GObj* arg)
 {
@@ -380,6 +380,7 @@ void grOldYoshi_8020F088(Ground_GObj* arg)
     float dVar9;
     float dVar10;
     int local34[5];
+    PAD_STACK(8);
     if (gp->gv.oldyoshiguest.xC6 == -1) {
         sVar5 = gp->gv.oldyoshiguest.xC4;
         gp->gv.oldyoshiguest.xC4 = sVar5 - 1;

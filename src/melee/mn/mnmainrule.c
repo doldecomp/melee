@@ -543,6 +543,7 @@ extern f32 mn_804DBE20;
 extern f32 mn_804DBE24;
 extern f32 mn_804DBE28;
 extern f32 mn_804DBE2C;
+extern s32 mn_804D6BD4;
 
 void mn_80230274(HSD_GObj* arg0, int arg1, int arg2)
 {
@@ -737,8 +738,7 @@ void mn_802308F0(HSD_GObj* gobj, int arg1, int arg2)
         }
         break;
     case 0:
-        if (arg1 != 0 ||
-            (arg2 != 0 && (kind == 0 || kind == 2 || kind == 4)))
+        if (arg1 != 0 || (arg2 != 0 && (kind == 0 || kind == 2 || kind == 4)))
         {
             mn_802307F8((struct mn_802307F8_t*) data, kind,
                         mn_804A04F0.confirmed_selection);
@@ -881,32 +881,39 @@ void fn_802309F0(HSD_GObj* arg0)
 
 extern s32 mn_804D6BD4;
 
-int mn_80230D18(struct mn_802307F8_t* arg0, HSD_JObj* arg1, s8 arg2)
+s32 mn_80230D18(struct mn_802307F8_t* arg0, HSD_JObj* arg1, s8 arg2)
 {
-    s32 result;
+    GameRules* rules;
+    s32 ret;
     s32 i;
 
     arg0->x0 = mn_804A04F0.cur_menu;
     arg0->x1 = mn_804A04F0.hovered_selection;
-    arg0->x4 = gmMainLib_8015CC34()->handicap;
+
+    rules = gmMainLib_8015CC34();
+    arg0->x4 = rules->handicap;
     if (mn_804D6BD4 == 0 && arg0->x4 == 1) {
         arg0->x4 = 0;
     }
+
     arg0->x5 = gmMainLib_8015CC34()->damage_ratio;
     arg0->x6 = gmMainLib_8015CC34()->unk_x7;
     arg0->x2 = gmMainLib_8015CC34()->mode;
     arg0->x9 = gmMainLib_8015CC34()->stock_count;
     arg0->x3 = gmMainLib_8015CC34()->time_limit;
+
     if (gm_801A4310() == 0x1B && arg0->x3 == 0) {
         arg0->x3 = 0x63;
     }
+
     arg0->xA = arg2;
-    result = 0;
-    arg0->text = NULL;
+    arg0->text = 0;
+
+    ret = 0;
     for (i = 0; i < 10; i++) {
-        result = lb_80011E24(arg1, &arg0->xC[i], i, -1);
+        ret = lb_80011E24(arg1, &arg0->xC[i], i, -1);
     }
-    return result;
+    return ret;
 }
 
 HSD_GObj* mn_80230E38(int arg0)

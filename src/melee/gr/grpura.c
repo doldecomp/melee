@@ -22,7 +22,7 @@
 #include <baselib/tobj.h>
 #include <sysdolphin/baselib/dobj.h>
 
-/* 213030 */ static void grPura_80213030(void);
+/* 213030 */ static void grPura_80213030(Ground_GObj* arg0);
 
 StageCallbacks grPu_803E6800[] = {
     { grPura_80211EF0, grPura_80211F1C, grPura_80211F24, grPura_80211F28, 0 },
@@ -99,6 +99,7 @@ const f32 grPu_804DBA7C = -30.0;
 
 void grPura_80211D00(void)
 {
+    u8 _padA[8];
     Vec3 cam_offset;
     f32 fVar1;
 
@@ -202,24 +203,24 @@ void grPura_80211FD8(Ground_GObj* arg0)
 {
     grPura_80212EF4(arg0);
     Ground_801C2FE0(arg0);
-    grPura_80213030();
+    grPura_80213030(arg0);
     mpLib_80055E24(0x18);
     lb_800115F4();
 }
 
 void grPura_80212020(Ground_GObj* arg0) {}
 
-/// #grPura_80212024
 void grPura_80212024(Ground_GObj* arg0)
 {
-    s16 uVar1;
+    unsigned int uVar1;
     Ground* gp = GET_GROUND(arg0);
+    PAD_STACK(16);
     grAnime_801C8138(arg0, gp->map_id, 0);
-    gp->gv.pura.xC4 = HSD_Randi(2);
+    gp->x11_flags.b012 = 2;
+    gp->gv.pura.xC4 = HSD_Randi(4);
     do {
         uVar1 = HSD_Randi(4);
-        gp->gv.pura.xC6 = uVar1;
-    } while (gp->gv.pura.xC4 == uVar1);
+    } while (gp->gv.pura.xC4 == (gp->gv.pura.xC6 = uVar1));
     Ground_801C205C(&grPu_803E6AA0[gp->gv.pura.xC4]);
     Camera_SetBackgroundColor(grPu_803E6AA0[gp->gv.pura.xC4].r,
                               grPu_803E6AA0[gp->gv.pura.xC4].g,
@@ -241,11 +242,12 @@ void grPura_80212290(Ground_GObj* arg0)
 {
     Ground* gp = GET_GROUND(arg0);
     HSD_JObj* jobj = arg0->hsd_obj;
-    HSD_ImageDesc* image = grPu_803E6E20;
-    HSD_MObjSetToonTextureImage(image);
+    PAD_STACK(8);
+    arg0->render_cb = (GObj_RenderFunc) fn_802130D0;
+    HSD_MObjSetToonTextureImage(&grPu_803E7620);
     lb_80011C18(jobj, 0x1000);
     grPura_80213250(jobj);
-    HSD_MObjSetToonTextureImage(0);
+    HSD_MObjSetToonTextureImage(NULL);
     grAnime_801C8138(arg0, gp->map_id, 0);
 }
 
@@ -269,6 +271,7 @@ void grPura_8021231C(Ground_GObj* arg0)
     HSD_JObjSetScale(jobj, vec);
 
     // HSD_JObjGetFlags(jobj);
+    PAD_STACK(40);
     if ((HSD_JObjGetFlags(gp->gv.pura2.xC8) & 0x10) &&
         ((HSD_JObjGetFlags(jobj) & 0x10) == NULL))
     {
@@ -305,17 +308,17 @@ void grPura_802125F0(HSD_GObj* arg0)
             __assert("grpura.c", 0x291, "gp");
         }
         // uVar3 = Ground_801C33C0(4,gp->gv.pura2.xC4);
-        gp->gv.pura.xC8 = Ground_801C3FA4(arg0, gp->gv.pura.xC4);
+        gp->gv.pura2.xC8 = Ground_801C3FA4(arg0, gp->gv.pura.xC4);
         // uVar3 = Ground_801C3FA4(arg0,uVar3);
 
         HSD_JObjSetTranslateX(arg0->hsd_obj,
-                              HSD_JObjGetTranslationX(gp->gv.pura.xC8));
+                              HSD_JObjGetTranslationX(gp->gv.pura2.xC8));
         HSD_JObjSetTranslateY(arg0->hsd_obj,
-                              HSD_JObjGetTranslationY(gp->gv.pura.xC8));
+                              HSD_JObjGetTranslationY(gp->gv.pura2.xC8));
         HSD_JObjSetTranslateZ(arg0->hsd_obj,
-                              HSD_JObjGetTranslationZ(gp->gv.pura.xC8));
+                              HSD_JObjGetTranslationZ(gp->gv.pura2.xC8));
 
-        if (HSD_JObjGetFlags(gp->gv.pura.xC8) & 0x10) {
+        if (HSD_JObjGetFlags(gp->gv.pura2.xC8) & 0x10) {
             HSD_JObjSetFlagsAll(arg0->hsd_obj, 0x10);
         }
         jobj = gobj->hsd_obj;
@@ -354,23 +357,20 @@ void grPura_80212EF4(HSD_GObj* arg0)
 
 /// #grPura_80212FC0
 
-void grPura_80213030(void)
+void grPura_80213030(Ground_GObj* arg0)
 {
+    UNUSED unsigned char _[8];
     Point3d spC;
-    HSD_JObj* temp_r3;
-    u16* var_r31;
-    u32 var_r30;
+    u16* var_r31 = grPu_803E6C0C;
+    u32 var_r30 = 0;
 
-    var_r31 = &grPu_803E6C0C[0];
-    var_r30 = 0;
     do {
-        temp_r3 = M2C_FIELD(var_r31, HSD_JObj**, 8);
-        if (temp_r3 != NULL) {
-            lb_8000B1CC(temp_r3, NULL, &spC);
+        if (M2C_FIELD(var_r31, HSD_JObj**, 8) != NULL) {
+            lb_8000B1CC(M2C_FIELD(var_r31, HSD_JObj**, 8), NULL, &spC);
             mpVtxSetPos(M2C_FIELD(var_r31, s16*, 0), spC.x, spC.y);
         }
         var_r30 += 1;
-        var_r31 += 0xC;
+        var_r31 += 6;
     } while (var_r30 < 0x2A);
     mpJointUpdateBounding(0);
     mpJointUpdateBounding(9);

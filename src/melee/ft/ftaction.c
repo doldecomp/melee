@@ -1350,6 +1350,7 @@ void ftAction_80073354(Fighter_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
     CommandInfo* cmd = (CommandInfo*) &fp->x3E4_fighterCmdScript;
+    PAD_STACK(8);
     fp->x3E4_fighterCmdScript.timer = fp->cur_anim_frame + fp->x898_unk;
     fp->throw_flags = 0;
     if (fp->x3E4_fighterCmdScript.u != NULL) {

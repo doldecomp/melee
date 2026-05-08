@@ -5,7 +5,8 @@
 #include <placeholder.h>
 #include <platform.h>
 
-#include "ft/chara/ftPopo/ftPp_1211.h"
+#include "ft/chara/ftPopo/ftPp_SpecialHi.h"
+#include "ft/chara/ftPopo/ftPp_SpecialLw.h"
 #include "ft/fighter.h"
 #include "ft/ft_0877.h"
 #include "ft/ftcpuattack.h"
@@ -1012,12 +1013,15 @@ bool ftCo_800A2718(mp_UnkStruct0* arg0)
 {
     PAD_STACK(4 * 4);
     if (arg0 == NULL) {
-        return 0;
+        return false;
     }
-    if (!inlineL0(arg0) && !inlineL1(arg0)) {
-        return 0;
+    if (!inlineL0(arg0)) {
+        if (inlineL1(arg0)) {
+            return true;
+        }
+        return false;
     }
-    return 1;
+    return false;
 }
 
 bool ftCo_800A28D0(Fighter* fp, float arg1)

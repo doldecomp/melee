@@ -59,9 +59,12 @@ static struct {
 
 static int HSD_Synth_804C28E0_1844[HSD_SYNTHSFXGROUP_MAX];
 
+static u8 lbl_804C4524[0x1C];
+
 static struct {
     /* 00 */ s32 x0;
-    /* 04 */ char pad[0x1C];
+    /* 04 */ s32 x4;
+    /* 08 */ char pad[0x18];
 } lbl_804C4540[3];
 
 static int hsd_SynthSFXBankNum;

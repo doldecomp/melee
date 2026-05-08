@@ -11,10 +11,8 @@
 #include "baselib/particle.h"
 #include "baselib/psstructs.h"
 #include "baselib/random.h"
-
-#include "MSL/math.h"
-
 #include "ft/inlines.h"
+#include "MSL/math.h"
 
 /*
  * TODO: efSync_Spawn is at 98% matching, and its associated jump
@@ -91,17 +89,21 @@ void* efSync_Spawn(s32 gfx_id, HSD_GObj* gobj, ...)
     efLib_LoadKind = EF_LOADKIND_SYNC;
     switch (gfx_id) {
     case 0x4BB:
-        ret_obj = efLib_Create_Attach_Scale_FacingDir(0x1770, gobj, va_arg(vlist, void*));
+        ret_obj = efLib_Create_Attach_Scale_FacingDir(0x1770, gobj,
+                                                      va_arg(vlist, void*));
         if (ret_obj != NULL) {
-            ((EF_Effect*) ret_obj)->next = (void*)
-                efLib_Create_AttachChild_Scale(0x1772, gobj, va_arg(vlist, HSD_JObj*));
+            ((EF_Effect*) ret_obj)->next =
+                (void*) efLib_Create_AttachChild_Scale(
+                    0x1772, gobj, va_arg(vlist, HSD_JObj*));
         }
         break;
     case 0x4BC:
-        ret_obj = efLib_Create_Attach_Scale_FacingDir(0x1771, gobj, va_arg(vlist, void*));
+        ret_obj = efLib_Create_Attach_Scale_FacingDir(0x1771, gobj,
+                                                      va_arg(vlist, void*));
         if (ret_obj != NULL) {
-            ((EF_Effect*) ret_obj)->next = (void*)
-                efLib_Create_AttachChild_Scale(0x1773, gobj, va_arg(vlist, HSD_JObj*));
+            ((EF_Effect*) ret_obj)->next =
+                (void*) efLib_Create_AttachChild_Scale(
+                    0x1773, gobj, va_arg(vlist, HSD_JObj*));
         }
         break;
     case 0x4BD:
@@ -119,7 +121,8 @@ void* efSync_Spawn(s32 gfx_id, HSD_GObj* gobj, ...)
         ret_obj = efLib_Create_Attach(0x1B58U, gobj, va_arg(vlist, HSD_JObj*));
         break;
     case 0x4C1:
-        ret_obj = efLib_Create_Attach_Scale_FacingDir(0x1B59, gobj, va_arg(vlist, void*));
+        ret_obj = efLib_Create_Attach_Scale_FacingDir(0x1B59, gobj,
+                                                      va_arg(vlist, void*));
         if (ret_obj != NULL) {
             va_f32_1 = *va_arg(vlist, f32*);
             jobj_1 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
@@ -127,7 +130,8 @@ void* efSync_Spawn(s32 gfx_id, HSD_GObj* gobj, ...)
         }
         break;
     case 0x4C2:
-        ret_obj = efLib_Create_Attach_Scale_FacingDir(0x1B5A, gobj, va_arg(vlist, void*));
+        ret_obj = efLib_Create_Attach_Scale_FacingDir(0x1B5A, gobj,
+                                                      va_arg(vlist, void*));
         if (ret_obj != NULL) {
             va_f32_1 = *va_arg(vlist, f32*);
             jobj_1 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
@@ -143,7 +147,8 @@ void* efSync_Spawn(s32 gfx_id, HSD_GObj* gobj, ...)
         }
         break;
     case 0x4C4:
-        ret_obj = efLib_Create_Attach_Scale_FacingDir(0x1B5B, gobj, va_arg(vlist, void*));
+        ret_obj = efLib_Create_Attach_Scale_FacingDir(0x1B5B, gobj,
+                                                      va_arg(vlist, void*));
         if (ret_obj != NULL) {
             va_f32_1 = *va_arg(vlist, f32*);
             jobj_1 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
@@ -151,7 +156,8 @@ void* efSync_Spawn(s32 gfx_id, HSD_GObj* gobj, ...)
         }
         break;
     case 0x4C5:
-        ret_obj = efLib_Create_Attach_Scale_FacingDir(0x1B5C, gobj, va_arg(vlist, void*));
+        ret_obj = efLib_Create_Attach_Scale_FacingDir(0x1B5C, gobj,
+                                                      va_arg(vlist, void*));
         if (ret_obj != NULL) {
             va_f32_1 = *va_arg(vlist, f32*);
             jobj_1 = GET_JOBJ(((EF_Effect*) ret_obj)->gobj);
@@ -159,13 +165,16 @@ void* efSync_Spawn(s32 gfx_id, HSD_GObj* gobj, ...)
         }
         break;
     case 0x4C6:
-        ret_obj = efLib_Create_Attach_Scale_FacingDir(0x1F40, gobj, va_arg(vlist, void*));
+        ret_obj = efLib_Create_Attach_Scale_FacingDir(0x1F40, gobj,
+                                                      va_arg(vlist, void*));
         break;
     case 0x4C7:
-        ret_obj = efLib_Create_Attach_Scale_FacingDir(0x1F41, gobj, va_arg(vlist, void*));
+        ret_obj = efLib_Create_Attach_Scale_FacingDir(0x1F41, gobj,
+                                                      va_arg(vlist, void*));
         break;
     case 0x4C8:
-        ret_obj = efLib_Create_Attach_Scale(0x1F42, gobj, va_arg(vlist, HSD_JObj*));
+        ret_obj =
+            efLib_Create_Attach_Scale(0x1F42, gobj, va_arg(vlist, HSD_JObj*));
         if (ret_obj != NULL) {
             if (*va_arg(vlist, f32*) < 0.0f) {
                 half_pi = -M_PI_2;
@@ -179,7 +188,8 @@ void* efSync_Spawn(s32 gfx_id, HSD_GObj* gobj, ...)
         }
         break;
     case 0x4C9:
-        ret_obj = efLib_Create_Attach_Scale(0x1F43, gobj, va_arg(vlist, HSD_JObj*));
+        ret_obj =
+            efLib_Create_Attach_Scale(0x1F43, gobj, va_arg(vlist, HSD_JObj*));
         if (ret_obj != NULL) {
             if (*va_arg(vlist, f32*) < 0.0f) {
                 half_pi = -M_PI_2;
@@ -193,10 +203,12 @@ void* efSync_Spawn(s32 gfx_id, HSD_GObj* gobj, ...)
         }
         break;
     case 0x4CA:
-        ret_obj = efLib_Create_Attach_Scale(0x1F44, gobj, va_arg(vlist, HSD_JObj*));
+        ret_obj =
+            efLib_Create_Attach_Scale(0x1F44, gobj, va_arg(vlist, HSD_JObj*));
         break;
     case 0x4CB:
-        ret_obj = efLib_Create_Attach_Scale(0x1F45, gobj, va_arg(vlist, HSD_JObj*));
+        ret_obj =
+            efLib_Create_Attach_Scale(0x1F45, gobj, va_arg(vlist, HSD_JObj*));
         break;
     case 0x4CC:
         ret_obj = efLib_Create_Attach_Pos(0x1F46U, gobj, va_arg(vlist, Vec3*));
@@ -278,13 +290,15 @@ void* efSync_Spawn(s32 gfx_id, HSD_GObj* gobj, ...)
         ret_obj = efLib_Create_Attach(0x2711U, gobj, va_arg(vlist, HSD_JObj*));
         break;
     case 0x4F0:
-        ret_obj = efLib_Create_Attach_Scale(0x2712, gobj, va_arg(vlist, HSD_JObj*));
+        ret_obj =
+            efLib_Create_Attach_Scale(0x2712, gobj, va_arg(vlist, HSD_JObj*));
         break;
     case 0x4D5:
         ret_obj = hsd_8039EFAC(0, 0xB, 0x2AF8, va_arg(vlist, HSD_JObj*));
         break;
     case 0x4D6:
-        ret_obj = efLib_Create_Attach_Scale(0x2AF8, gobj, va_arg(vlist, HSD_JObj*));
+        ret_obj =
+            efLib_Create_Attach_Scale(0x2AF8, gobj, va_arg(vlist, HSD_JObj*));
         break;
     case 0x4D7:
         ret_obj = hsd_8039EFAC(0, 0xB, 0x2AF9, va_arg(vlist, HSD_JObj*));
@@ -399,7 +413,8 @@ void* efSync_Spawn(s32 gfx_id, HSD_GObj* gobj, ...)
         ret_obj = hsd_8039EFAC(0, 0xE, 0x36B7, va_arg(vlist, HSD_JObj*));
         break;
     case 0x4ED:
-        ret_obj = efLib_Create_AttachChild(0x36B0U, gobj, va_arg(vlist, HSD_JObj*));
+        ret_obj =
+            efLib_Create_AttachChild(0x36B0U, gobj, va_arg(vlist, HSD_JObj*));
         break;
     case 0x4D1:
         ret_obj = hsd_8039EFAC(0, 0, 0x64, va_arg(vlist, HSD_JObj*));
@@ -415,23 +430,28 @@ void* efSync_Spawn(s32 gfx_id, HSD_GObj* gobj, ...)
         }
         break;
     case 0x4D4:
-        ret_obj = efLib_CreateGenerator_Attach(0x11E, va_arg(vlist, HSD_JObj*));
+        ret_obj =
+            efLib_CreateGenerator_Attach(0x11E, va_arg(vlist, HSD_JObj*));
         break;
     case 0x4F1:
         ret_obj = efLib_CreateGenerator_AppSRT_SetFacingDir(0x3E80, vlist);
         break;
     case 0x4F2:
-        ret_obj = efLib_Create_Attach_Scale_FacingDir(0x3E80, gobj, va_arg(vlist, void*));
+        ret_obj = efLib_Create_Attach_Scale_FacingDir(0x3E80, gobj,
+                                                      va_arg(vlist, void*));
         break;
     case 0x4F3:
-        ret_obj = efLib_Create_Attach_Scale_FacingDir(0x3E81, gobj, va_arg(vlist, void*));
+        ret_obj = efLib_Create_Attach_Scale_FacingDir(0x3E81, gobj,
+                                                      va_arg(vlist, void*));
         break;
     case 0x4F4:
-        ret_obj = efLib_Create_AttachChild(0x4268U, gobj, va_arg(vlist, HSD_JObj*));
+        ret_obj =
+            efLib_Create_AttachChild(0x4268U, gobj, va_arg(vlist, HSD_JObj*));
         goto block_297;
         break;
     case 0x4F5:
-        ret_obj = efLib_Create_AttachChild(0x4269U, gobj, va_arg(vlist, HSD_JObj*));
+        ret_obj =
+            efLib_Create_AttachChild(0x4269U, gobj, va_arg(vlist, HSD_JObj*));
     block_297:
         if (ret_obj != NULL) {
             jobj_1 = GET_JOBJ(gobj);
@@ -444,10 +464,12 @@ void* efSync_Spawn(s32 gfx_id, HSD_GObj* gobj, ...)
         }
         break;
     case 0x4F6:
-        ret_obj = efLib_Create_Attach_Scale(0x426A, gobj, va_arg(vlist, HSD_JObj*));
+        ret_obj =
+            efLib_Create_Attach_Scale(0x426A, gobj, va_arg(vlist, HSD_JObj*));
         break;
     case 0x4F7:
-        ret_obj = efLib_Create_Attach_Scale(0x426B, gobj, va_arg(vlist, HSD_JObj*));
+        ret_obj =
+            efLib_Create_Attach_Scale(0x426B, gobj, va_arg(vlist, HSD_JObj*));
         break;
     case 0x4F8:
         ret_obj = efLib_CreateGenerator_Attach_Scale(0x6E, vlist, gobj);
@@ -466,15 +488,13 @@ void* efSync_Spawn(s32 gfx_id, HSD_GObj* gobj, ...)
         break;
     case 0x4FF:
     case 0x500:
-        ret_obj =
-            efLib_Create_Attach_Scale(0x426D, gobj,
-                           ((Fighter*) gobj->user_data)->parts[1].joint);
+        ret_obj = efLib_Create_Attach_Scale(
+            0x426D, gobj, ((Fighter*) gobj->user_data)->parts[1].joint);
         break;
     case 0x501:
         fp = GET_FIGHTER(gobj);
-        ret_obj =
-            efLib_Create_Attach_Scale(0x426E, gobj,
-                           ((Fighter*) gobj->user_data)->parts[1].joint);
+        ret_obj = efLib_Create_Attach_Scale(
+            0x426E, gobj, ((Fighter*) gobj->user_data)->parts[1].joint);
         if (ret_obj != NULL) {
             if (fp->facing_dir < 0.0f) {
                 half_pi = -M_PI_2;
@@ -547,7 +567,8 @@ void* efSync_Spawn(s32 gfx_id, HSD_GObj* gobj, ...)
         ret_obj = efLib_CreateGenerator(0x4652U, va_arg(vlist, Vec3*));
         break;
     case 0x509:
-        ret_obj = efLib_Create_Attach_Scale(0x4651, gobj, va_arg(vlist, HSD_JObj*));
+        ret_obj =
+            efLib_Create_Attach_Scale(0x4651, gobj, va_arg(vlist, HSD_JObj*));
         if (ret_obj != NULL) {
             ((EF_Effect*) ret_obj)->update = efLib_Cb_ftLg_SpecialLw;
         }
@@ -556,24 +577,28 @@ void* efSync_Spawn(s32 gfx_id, HSD_GObj* gobj, ...)
         ret_obj = hsd_8039EFAC(0, 0, 0x5F, va_arg(vlist, HSD_JObj*));
         break;
     case 0x50B:
-        ret_obj = efLib_Create_Attach_Scale_FacingDir(0x4A38, gobj, va_arg(vlist, void*));
+        ret_obj = efLib_Create_Attach_Scale_FacingDir(0x4A38, gobj,
+                                                      va_arg(vlist, void*));
         if (ret_obj != NULL) {
             ((EF_Effect*) ret_obj)->next =
-                (void*) efLib_Create_Attach_Scale_FacingDir(0x4A39, gobj, va_arg(vlist, void*));
+                (void*) efLib_Create_Attach_Scale_FacingDir(
+                    0x4A39, gobj, va_arg(vlist, void*));
         }
         break;
     case 0x50C:
         ret_obj = efLib_Create_Attach(0x4A3AU, gobj, va_arg(vlist, HSD_JObj*));
         if (ret_obj != NULL) {
             ((EF_Effect*) ret_obj)->params.z = *va_arg(vlist, f32*);
-            ((EF_Effect*) ret_obj)->update = efLib_Cb_SetRotYZ_FromParamZ_FighterDir;
+            ((EF_Effect*) ret_obj)->update =
+                efLib_Cb_SetRotYZ_FromParamZ_FighterDir;
         }
         break;
     case 0x50D:
         ret_obj = efLib_Create_Attach(0x4A3BU, gobj, va_arg(vlist, HSD_JObj*));
         break;
     case 0x50E:
-        ret_obj = efLib_Create_Attach_Scale(0x4A3C, gobj, va_arg(vlist, HSD_JObj*));
+        ret_obj =
+            efLib_Create_Attach_Scale(0x4A3C, gobj, va_arg(vlist, HSD_JObj*));
         if (ret_obj != NULL) {
             if (*va_arg(vlist, f32*) < 0.0f) {
                 half_pi = -M_PI_2;
@@ -585,7 +610,8 @@ void* efSync_Spawn(s32 gfx_id, HSD_GObj* gobj, ...)
         }
         break;
     case 0x50F:
-        ret_obj = efLib_Create_Attach_Scale(0x4A3D, gobj, va_arg(vlist, HSD_JObj*));
+        ret_obj =
+            efLib_Create_Attach_Scale(0x4A3D, gobj, va_arg(vlist, HSD_JObj*));
         if (ret_obj != NULL) {
             if (*va_arg(vlist, f32*) < 0.0f) {
                 half_pi = -M_PI_2;
@@ -600,16 +626,19 @@ void* efSync_Spawn(s32 gfx_id, HSD_GObj* gobj, ...)
         ret_obj = efLib_CreateGenerator_AppSRT_SetFacingDir(0xBF68, vlist);
         break;
     case 0x511:
-        ret_obj = efLib_Create_Attach_Scale_FacingDir(0xBF68, gobj, va_arg(vlist, void*));
+        ret_obj = efLib_Create_Attach_Scale_FacingDir(0xBF68, gobj,
+                                                      va_arg(vlist, void*));
         break;
     case 0x512:
-        ret_obj = efLib_Create_Attach_Scale_FacingDir(0xBF69, gobj, va_arg(vlist, void*));
+        ret_obj = efLib_Create_Attach_Scale_FacingDir(0xBF69, gobj,
+                                                      va_arg(vlist, void*));
         break;
     }
     while (efLib_AnimCount != 0) {
         cnt_2 = efLib_AnimCount - 1;
         efLib_AnimCount = cnt_2;
-        HSD_JObjAnimAll(((EF_ParamEntry*) (((u32*) efLib_AnimQueue) + cnt_2))->gobj);
+        HSD_JObjAnimAll(
+            ((EF_ParamEntry*) (((u32*) efLib_AnimQueue) + cnt_2))->gobj);
     }
 
     va_end(vlist);

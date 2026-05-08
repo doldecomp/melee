@@ -12,6 +12,7 @@
 #include "baselib/jobj.h"
 #include "lb/lb_00F9.h"
 #include "lb/lblanguage.h"
+#include "mn/inlines.h"
 #include "mn/mnmain.h"
 #include "mn/mnmainrule.h"
 #include "sc/types.h"
@@ -20,8 +21,35 @@
 
 /// #mnDataDel_8024EA6C
 
-/// #mnDataDel_8024EBC8                 /* unable to generate initializer:
-/// unknown type */
+void mnDataDel_8024EBC8(HSD_JObj* root, u8 unused, u8 a, u8 b)
+{
+    HSD_JObj* j2;
+    HSD_JObj* j1;
+    f32 frame;
+
+    lb_80011E24(root, &j1, WARN_JOINT_PANEL_TEXT_BOTTOM, -1);
+    HSD_JObjReqAnimAll(j1, a ? 1.0f : 0.0f);
+    mn_8022F3D8(j1, 0xff, (HSD_TypeMask) 0x400);
+    HSD_JObjAnimAll(j1);
+
+    lb_80011E24(root, &j2, WARN_JOINT_BACKGROUND, -1);
+    if (a) {
+        if (b) {
+            frame = mnDataDel_803EF870.x18.end_frame;
+        } else {
+            frame = mnDataDel_803EF870.x18.start_frame;
+        }
+    } else {
+        if (b) {
+            frame = mnDataDel_803EF870.x24.end_frame;
+        } else {
+            frame = mnDataDel_803EF870.x24.start_frame;
+        }
+    }
+    HSD_JObjReqAnimAll(j2, frame);
+    mn_8022F3D8(j2, 0xff, (HSD_TypeMask) 0x400);
+    HSD_JObjAnimAll(j2);
+}
 
 /// @brief animates the warning modal
 void fn_8024ECCC(HSD_GObj* arg0)
@@ -144,7 +172,42 @@ void mnDataDel_8024EEC0(void)
     }
 }
 
-/// #fn_8024F1D4
+void fn_8024F1D4(HSD_GObj* gobj)
+{
+    HSD_GObjProc* proc;
+    struct WarnCmnData* data;
+    u32 input;
+    PAD_STACK(16);
+
+    data = mnDataDel_804D6C68->user_data;
+    input = Menu_GetAllInputs();
+    if (input & 0x10) {
+        if (data->cursor_idx != 0) {
+            mnDataDel_8024EA6C();
+        } else {
+            sfxBack();
+        }
+        mn_804D6BC8.cooldown = 5;
+        data->visible = 0;
+        HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
+        proc = HSD_GObj_SetupProc(gobj, fn_8024F840, 0);
+        proc->flags_3 = HSD_GObj_804D783C;
+    } else if (input & 0x20) {
+        sfxBack();
+        mn_804D6BC8.cooldown = 5;
+        data->visible = 0;
+        HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
+        proc = HSD_GObj_SetupProc(gobj, fn_8024F840, 0);
+        proc->flags_3 = HSD_GObj_804D783C;
+    } else if ((input & 8) || (input & 4)) {
+        sfxMove();
+        if (data->cursor_idx != 0) {
+            data->cursor_idx = 0;
+        } else {
+            data->cursor_idx = 1;
+        }
+    }
+}
 
 /// #fn_8024F318
 
@@ -170,7 +233,6 @@ void fn_8024FBA4(HSD_GObj* gobj)
         HSD_GObjPLink_80390228(gobj);
     }
 }
-
 
 inline HSD_JObj* fn_8024FC48_inline(int arg0);
 inline HSD_JObj* fn_8024FC48_inline(int arg0)

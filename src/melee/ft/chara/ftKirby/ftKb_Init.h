@@ -115,7 +115,7 @@
 /* 0F1BAC */ void ftKb_SpecialN_800F1BAC(Fighter_GObj* gobj, s32, bool);
 /* 0F1CD8 */ s32 ftKb_SpecialN_800F1CD8(HSD_GObj* gobj);
 /* 0F1D24 */ void ftKb_SpecialN_800F1D24(Fighter_GObj* gobj);
-/* 0F1DAC */ UNK_RET ftKb_SpecialN_800F1DAC(UNK_PARAMS);
+/* 0F1DAC */ void ftKb_SpecialN_800F1DAC(HSD_GObj* gobj);
 /* 0F1F1C */ void ftKb_SpecialN_800F1F1C(Fighter_GObj* gobj, Vec3*);
 /* 0F1F68 */ void ftKb_SpecialN_800F1F68(Fighter_GObj* gobj);
 /* 0F1FDC */ void fn_800F1FDC(Fighter_GObj* gobj);

@@ -170,10 +170,9 @@ u32 fn_803AC634(struct hsd_803AC3E0_arg0_t* file_desc, s32 file_idx)
         u32 usable;
         s32 remaining;
 
-        remaining =
-            file_desc->x4C[0];
-        remaining = remaining -
-            (s32) ((sector_size - 0x20) - (file_desc->x24 + 48) % sector_size);
+        remaining = file_desc->x4C[0];
+        remaining = remaining - (s32) ((sector_size - 0x20) -
+                                       (file_desc->x24 + 48) % sector_size);
         usable = sector_size - 0x20;
         if (remaining <= 0) {
             return 1;
