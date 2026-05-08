@@ -98,7 +98,8 @@ ifMagnifyPlayer* ifMagnify_802FB73C(ifMagnifyPlayer* arg0, Vec2* arg1, Vec2* arg
             } else {
                 arg2->y = ifMagnify_804DDB2C;
             }
-            temp_f1 = arg2->y * temp_f2;
+            temp_f1 = arg2->y;
+            temp_f1 = temp_f1 * temp_f2;
             temp_f1 /= temp_f4;
             if (temp_f1 < ifMagnify_804DDB38) {
                 arg2->x = ifMagnify_804DDB38;
@@ -113,7 +114,8 @@ ifMagnifyPlayer* ifMagnify_802FB73C(ifMagnifyPlayer* arg0, Vec2* arg1, Vec2* arg
             } else {
                 arg2->x = ifMagnify_804DDB38;
             }
-            temp_f1_2 = arg2->x * temp_f4;
+            temp_f1_2 = arg2->x;
+            temp_f1_2 = temp_f1_2 * temp_f4;
             temp_f1_2 /= temp_f2;
             if (temp_f1_2 < ifMagnify_804DDB2C) {
                 arg2->y = ifMagnify_804DDB2C;
