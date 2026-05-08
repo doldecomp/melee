@@ -378,37 +378,21 @@ void mn_8022FD18(u8 arg0)
     sp14 = mn_804DBE04;
     sp10 = mn_804DBE0C;
     if (arg0 != 0) {
-        i = 0;
-        ptr = (u8*) &sp14;
-        do {
-            HSD_JObjSetFlagsAll(data->x58[*ptr], 0x10U);
-            i++;
-            ptr++;
-        } while (i < 2);
-        i = 0;
-        ptr = (u8*) &spC;
-        do {
-            HSD_JObjClearFlagsAll(data->x58[*ptr], 0x10U);
-            i++;
-            ptr++;
-        } while (i < 5);
+        for (i = 0, ptr = (u8*) &sp14; i < 2; i++) {
+            HSD_JObjSetFlagsAll(data->x58[ptr[i]], 0x10U);
+        }
+        for (i = 0, ptr = (u8*) &spC; i < 5; i++) {
+            HSD_JObjSetFlagsAll(data->x58[ptr[i]], 0x10U);
+        }
         mn_8022FB88(data->x3, data);
         return;
     }
-    i = 0;
-    ptr = (u8*) &sp14;
-    do {
-        HSD_JObjClearFlagsAll(data->x58[*ptr], 0x10U);
-        i++;
-        ptr++;
-    } while (i < 2);
-    i = 0;
-    ptr = (u8*) &spC;
-    do {
-        HSD_JObjSetFlagsAll(data->x58[*ptr], 0x10U);
-        i++;
-        ptr++;
-    } while (i < 5);
+    for (i = 0, ptr = (u8*) &sp14; i < 2; i++) {
+        HSD_JObjSetFlagsAll(data->x58[ptr[i]], 0x10U);
+    }
+    for (i = 0, ptr = (u8*) &spC; i < 5; i++) {
+        HSD_JObjSetFlagsAll(data->x58[ptr[i]], 0x10U);
+    }
     val = data->x9;
     jobj = data->x58[7];
     HSD_JObjReqAnimAll(jobj, (f32) (u8) (data->x9 / 10));
