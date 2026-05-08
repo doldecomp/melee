@@ -203,7 +203,7 @@ void CalcDistance(HSD_TExp** tevs, int* dist, HSD_TExp* tev, int num,
     }
 }
 
-static char HSD_TExpDag_804D5FF0[8] = "l < num";
+static int HSD_TEXP_MAX_NUM = 20;
 
 int HSD_TExpMakeDag(HSD_TExp* root, HSD_TExpDag* list)
 {
