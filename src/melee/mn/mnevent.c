@@ -273,27 +273,34 @@ void mnEvent_8024D5B0(HSD_GObj* gobj, u8 event)
     HSD_SisLib_803A6B98(temp_r3_2, 0.0f, 0.0f, mnEvent_804D5044);
 }
 
+inline MnEventData* GET_EVENTDATA(HSD_GObj* gobj)
+{
+    return gobj->user_data;
+}
+
 void fn_8024E1B4(HSD_GObj* gobj)
 {
     HSD_JObj* tree = gobj->hsd_obj;
-    MnEventData* data = gobj->user_data;
+    MnEventData* tmp;
+    MnEventData* data = GET_EVENTDATA(gobj);
     MnEventData* iter;
     int i;
 
     if (mn_8022EC18(tree, &mnEvent_803EF74C, 0x80) >= mnEvent_803EF74C.end_frame)
     {
+        tmp = data;
         iter = data;
         for (i = 0; i < 9; i++) {
             if (iter->gobjs[0] != NULL) {
-                HSD_GObjPLink_80390228(data->gobjs[i]);
+                HSD_GObjPLink_80390228(tmp->gobjs[i]);
                 iter->gobjs[0] = NULL;
             }
             if (iter->texts[0] != NULL) {
-                HSD_SisLib_803A5CC4(data->texts[i]);
+                HSD_SisLib_803A5CC4(tmp->texts[i]);
                 iter->texts[0] = NULL;
             }
             if (iter->icons[0] != NULL) {
-                HSD_SisLib_803A5CC4(data->icons[i]);
+                HSD_SisLib_803A5CC4(tmp->icons[i]);
                 iter->icons[0] = NULL;
             }
             iter = (MnEventData*) ((u8*) iter + 4);
