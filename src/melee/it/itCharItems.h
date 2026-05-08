@@ -418,8 +418,7 @@ typedef struct itLinkBombAttributes {
 typedef struct {
     /* ip+DD4 */ s32 xDD4;
     /* ip+DD8 */ s32 xDD8;
-    /* ip+DDC */ s32 xDDC;
-    /* ip+DE0 */ s32 xDE0;
+    /* ip+DDC */ s32 xDDC[2];
     /* ip+DE4 */ s32 xDE4;
     /* ip+DE8 */ s32 xDE8;
     /* ip+DEC */ s32 xDEC;

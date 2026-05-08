@@ -319,6 +319,7 @@ void grKinokoRoute_80207C88(Ground_GObj* gobj)
     HSD_GObj* fighter;
     HSD_GObj* ground_gobj;
     HSD_JObj* jobj;
+    PAD_STACK(32);
 
     scale = Ground_801C0498();
     fighter = Ground_801C57A4();
@@ -360,7 +361,8 @@ void grKinokoRoute_80207C88(Ground_GObj* gobj)
         }
         Ground_801C3D44(NULL, 30.0f, 10000.0f);
         if (gp->gv.kinokoroute2.phase < 2) {
-            gp->gv.kinokoroute2.spawn_idx = Ground_801C3DB4(NULL, 60.0f, 10000.0f);
+            gp->gv.kinokoroute2.spawn_idx =
+                Ground_801C3DB4(NULL, 60.0f, 10000.0f);
             if (gp->gv.kinokoroute2.spawn_idx != -1) {
                 gp->gv.kinokoroute2.phase = 2;
                 gp->gv.kinokoroute2.cam_timer = 0x3C;

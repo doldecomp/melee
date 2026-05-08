@@ -1,6 +1,7 @@
 #include "ftPp_Init.h"
 
-#include "ftPp_1211.h"
+#include "ftPp_SpecialHi.h"
+#include "ftPp_SpecialLw.h"
 #include "ftPp_SpecialN.h"
 #include "ftPp_SpecialS.h"
 #include "types.h"

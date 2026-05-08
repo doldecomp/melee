@@ -769,7 +769,9 @@ config.libs = [
             # Popo
             Object(Matching, "melee/ft/chara/ftPopo/ftPp_Init.c"),
             Object(Matching, "melee/ft/chara/ftPopo/ftPp_SpecialN.c"),
-            Object(NonMatching, "melee/ft/chara/ftPopo/ftPp_SpecialS.c"),
+            Object(Matching, "melee/ft/chara/ftPopo/ftPp_SpecialS.c"),
+            Object(Matching, "melee/ft/chara/ftPopo/ftPp_SpecialHi.c"),
+            Object(Matching, "melee/ft/chara/ftPopo/ftPp_SpecialLw.c"),
             Object(NonMatching, "melee/ft/chara/ftPp_SpecialS.c"),
             # Nana
             Object(NonMatching, "melee/ft/chara/ftNana/ftNn_Init.c"),
@@ -791,7 +793,7 @@ config.libs = [
             Object(Matching, "melee/ft/chara/ftYoshi/ftYs_Init.c"),
             Object(Matching, "melee/ft/chara/ftYoshi/ftYs_Guard.c"),
             Object(Matching, "melee/ft/chara/ftYoshi/ftYs_SpecialN.c"),
-            Object(NonMatching, "melee/ft/chara/ftYoshi/ftYs_SpecialHi.c"),
+            Object(Matching, "melee/ft/chara/ftYoshi/ftYs_SpecialHi.c"),
             Object(Matching, "melee/ft/chara/ftYoshi/ftYs_SpecialLw.c"),
             Object(NonMatching, "melee/ft/chara/ftYoshi/ftYs_SpecialS.c"),
             # Bowser
@@ -1015,7 +1017,7 @@ config.libs = [
             Object(NonMatching, "melee/gr/grgreens.c"),
             Object(NonMatching, "melee/gr/grflatzone.c"),
             Object(NonMatching, "melee/gr/grpushon.c"),
-            Object(NonMatching, "melee/gr/grfigureget.c"),
+            Object(Matching, "melee/gr/grfigureget.c"),
             Object(Matching, "melee/gr/grbattle.c"),
             Object(Matching, "melee/gr/grlast.c"),
             Object(NonMatching, "melee/gr/grhomerun.c"),

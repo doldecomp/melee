@@ -424,6 +424,7 @@ void Trophy_SetUnlockState(enum_t trophyId, bool addValue)
     u16* ptr;
     u16* statePtr;
     u16 temp;
+    PAD_STACK(8);
 
     if (gm_8016B498() || (u8) gm_801A4310() == 0xC) {
         table = toy->trophyTable;
@@ -1340,6 +1341,7 @@ HSD_LObj* un_80306EEC(void* list_arg, s32 hasAnim_arg)
     u8* posTable;
     u8* animFlag;
     s32 idx;
+    PAD_STACK(8);
 
     prev = NULL;
     idx = 0;
@@ -1443,6 +1445,7 @@ void un_8030715C(f32 cstick_x, f32 cstick_y)
     TyLightArray_* cur;
     s32 i;
     s8* flag_ptr;
+    PAD_STACK(96);
 
     data = (void*) un_804D6E68;
     data2 = un_804D6ED4;
@@ -1547,6 +1550,7 @@ void un_803075E8(s32 arg0)
     void* matanim;
     void* shapanim;
     ToyDataJObj* tdjobj;
+    PAD_STACK(88);
 
     data = un_803FDD18;
     td = un_804D6ED8;
@@ -1980,6 +1984,7 @@ void un_803084A0(s16 arg0)
     tyDispData* display;
     HSD_Text* text;
     s32 one;
+    PAD_STACK(72);
 
     display = un_804D6EE0;
     color = un_804DDCFC;
@@ -2142,6 +2147,7 @@ void un_80308F04(HSD_CObj* cobj)
     f32 right;
     f32 left;
     ToyJObjNode* jobj;
+    PAD_STACK(64);
 
     data = TOY_DATA;
     state = TOY_STATE;
@@ -2351,6 +2357,7 @@ extern f32 un_804DDCF0;
 
 void un_80310324(void)
 {
+    u8 _padA[8];
     char* toy;
     char* data;
     ToyGlobalsS_* tg;
@@ -2943,6 +2950,7 @@ void un_80312050(void)
     u8 color_ff;
     u8 color_00;
     f32 fz, fy, fx;
+    PAD_STACK(40);
 
     data = un_804D6E6C;
     cobj = HSD_CObjGetCurrent();

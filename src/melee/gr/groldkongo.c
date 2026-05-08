@@ -199,10 +199,8 @@ void grOldKongo_8020F6E4(Ground_GObj* gobj)
     gp->gv.oldkongo.xE0 = 0.0f;
     gp->gv.oldkongo.xE4 = 0.0f;
     gp->gv.oldkongo.xEC = grOk_804D6A90->x48;
-    gp->gv.oldkongo.xCC =
-        rand_range(grOk_804D6A90->x18, grOk_804D6A90->x14);
-    gp->gv.oldkongo.xCE =
-        rand_range(grOk_804D6A90->x50, grOk_804D6A90->x4C);
+    gp->gv.oldkongo.xCC = rand_range(grOk_804D6A90->x18, grOk_804D6A90->x14);
+    gp->gv.oldkongo.xCE = rand_range(grOk_804D6A90->x50, grOk_804D6A90->x4C);
     lb_8000B1CC(Ground_801C3FA4(gobj, 1), NULL, &sp14);
     Ground_801C4D70(gobj, &sp14, gp->gv.oldkongo.xDC);
 }
@@ -298,6 +296,7 @@ void grOldKongo_8020F888(Ground_GObj* arg0)
     s32 var_r3_4;
     s32 var_r3_5;
     s32 var_r3_6;
+    PAD_STACK(8);
 
     temp_r31 = GET_GROUND(arg0);
     temp_r30 = Ground_801C3FA4(arg0, 1);
@@ -306,8 +305,7 @@ void grOldKongo_8020F888(Ground_GObj* arg0)
     case 3:
     default:
         temp_f3 = temp_r31->gv.arwing.xE0.y;
-        temp_f31 =
-            0.5f * (temp_f3 * (temp_f3 / DegToRad(grOk_804D6A90->x1C)));
+        temp_f31 = 0.5f * (temp_f3 * (temp_f3 / DegToRad(grOk_804D6A90->x1C)));
         if (temp_f3 > 0.0f) {
             var_f30 = temp_r31->gv.oldkongo.xD8 - temp_r31->gv.arwing.xDC;
         } else if (temp_f3 < 0.0f) {
@@ -676,8 +674,8 @@ s32 grOldKongo_80210454(HSD_GObj* arg0, HSD_GObj* arg1)
     ftLib_80086644(arg1, &pos_ft);
 
     if (!((pos_gnd.x - pos_ft.x) * (pos_gnd.x - pos_ft.x) +
-          (pos_gnd.y - pos_ft.y) * (pos_gnd.y - pos_ft.y) +
-          (pos_gnd.z - pos_ft.z) * (pos_gnd.z - pos_ft.z) <
+              (pos_gnd.y - pos_ft.y) * (pos_gnd.y - pos_ft.y) +
+              (pos_gnd.z - pos_ft.z) * (pos_gnd.z - pos_ft.z) <
           grOk_804D6A90->x10 * grOk_804D6A90->x10))
     {
         goto done;
@@ -765,8 +763,7 @@ f32 grOldKongo_80210650(void)
                             if (temp_r3_7 < 0) {
                                 var_f31 = -1.5707964f;
                             } else {
-                                s32 temp_r3_8 =
-                                    temp_r3_7 - grOk_804D6A90->x38;
+                                s32 temp_r3_8 = temp_r3_7 - grOk_804D6A90->x38;
 
                                 if (temp_r3_8 < 0) {
                                     var_f31 = -2.3561945f;

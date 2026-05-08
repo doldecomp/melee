@@ -147,6 +147,7 @@ f32 DrawASCII(int chr, float x, float y, GXColor* color)
     s32 i;
     u8 p0, p1;
     u8 r, g, b, a;
+    PAD_STACK(56);
 
     if (chr >= '0' && chr <= '9') {
         index = chr - '0';
@@ -716,6 +717,7 @@ static const u32 lbl_804DE8E0 = 0xFFFFFFFF;
 // @TODO: Currently 89.78% match - needs minor control flow and register fixes
 void hsd_8039254C(void)
 {
+    u8 _padA[8];
     GXColor bar_col;
     GXColor bg_col3;
     GXColor bg_col2;
@@ -2076,6 +2078,7 @@ extern u8 lbl_8040AB40[];
 void hsd_80394668(void)
 {
     struct ParticleScreenState* sp = &hsd_804CF810;
+    PAD_STACK(24);
 
     if ((u32) sp->x2C != 0) {
         /* Copy XFB data with brightness adjustment */
@@ -2714,6 +2717,7 @@ void hsd_803957C0(u8 input)
     u8 ch;
     void* saved;
     u8 saved_ch;
+    PAD_STACK(32);
 
     ch = input;
     saved_ch = ch;
@@ -3125,6 +3129,7 @@ s32 hsd_803962A8(void* data)
     s32 old;
     u8* addr;
     s32 i, j, k;
+    PAD_STACK(16);
 
     bit = 1;
     while (bit <= sp->xBC) {
@@ -3296,6 +3301,7 @@ void hsd_80396884(void)
     void* saved;
     s32 x_base;
     u8 ch;
+    PAD_STACK(24);
 
     x_base = (sp->x20 - 30) / 2;
     sprintf(buf, "| INPUT ADDRESS : 8%07lX |", lbl_8040BC3C.x10 & 0x0FFFFFFF);
@@ -3467,7 +3473,6 @@ void hsd_80396E40(s32 keycode)
     s32 j;
     char ch;
 
-    PAD_STACK(8);
     saved = *px50;
     row = sp->x1C - 1;
     *px50 = lbl_8040AB00;
@@ -3855,6 +3860,7 @@ void* fn_80397814(void* arg)
     void* ctx = arg;
     u32 retrace;
     u32* keybuf = &sp->xC0;
+    PAD_STACK(160);
 
     hsd_80393D2C(0);
     hsd_80394314();
@@ -4982,6 +4988,7 @@ void hsd_80398F8C(HSD_Particle* pp, f32 angle)
     f32 sin_angle, cos_angle;
     f32 sin_rand, cos_rand;
     f32 temp;
+    PAD_STACK(24);
 
     temp = vz;
     *(s32*) &temp &= 0x7FFFFFFF;

@@ -81,6 +81,7 @@ void ftCo_8009F834(Fighter_GObj* gobj, int arg1, enum Fighter_Part arg2,
     f32 var_f1;
     f32 var_f1_2;
     u8 temp_r3;
+    PAD_STACK(72);
 
     var_f1 = arg7;
     var_r27 = arg2;

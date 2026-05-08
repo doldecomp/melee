@@ -98,6 +98,7 @@ void grVenom_80203B18(void)
     s32 flag;
     HSD_GObj* gobj;
     HSD_LObj* lobj;
+    PAD_STACK(8);
 
     data = (s32*) &grVe_803E5348;
     grVe_804D6A30 = Ground_801C49F8();
@@ -929,6 +930,7 @@ void grVenom_80206874(Ground_GObj* gobj)
     HSD_JObj* jobj2;
     f32 scl;
     void* attr;
+    PAD_STACK(8);
 
     gp = gobj->user_data;
     jobj = gobj->hsd_obj;

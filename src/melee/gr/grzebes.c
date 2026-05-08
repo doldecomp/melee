@@ -167,6 +167,66 @@ typedef struct grZe_AcidState {
 
 extern const grZe_BubbleConfig grZe_803B8044;
 
+u32 grZe_803E1A10[8] = {
+    0x00010006, 0x00150004, 0x0006000E, 0x00030006,
+    0x00010002, 0x00070006, 0x00050007, 0x00010000,
+};
+
+StageCallbacks grZe_callbacks[] = {
+    { NULL, NULL, NULL, NULL, 0 },
+    { grZebes_801D9F30, grZebes_801D9F7C, grZebes_801D9F84, grZebes_801DA0C0,
+      0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { grZebes_801D9508, grZebes_801D95B0, grZebes_801D95B8, grZebes_801D9754,
+      0 },
+    { grZebes_801D93DC, grZebes_801D9408, grZebes_801D9410, grZebes_801D94EC,
+      0 },
+    { grZebes_801D8644, grZebes_801D8814, grZebes_801D881C, grZebes_801D90FC,
+      0xC0000000 },
+    { grZebes_801D9100, grZebes_801D9254, grZebes_801D925C, grZebes_801D93D8,
+      0 },
+    { grZebes_801D9798, grZebes_801D99D8, grZebes_801D99E0, grZebes_801D9F2C,
+      0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
+    { NULL, NULL, NULL, NULL, 0 },
+};
+
+char grZe_803E1B20[] = "/GrZe.dat";
+
+typedef struct grZe_803E1B2C_t {
+    u32 count;
+    StageCallbacks* cbs;
+    char* datfile;
+    void (*init)(void);
+    void (*reset)(bool);
+    void (*unk528)(void);
+    void (*unk52c)(void);
+    bool (*unk550)(void);
+    DynamicsDesc* (*unkCCB8)(enum_t);
+    bool (*unkCCC0)(Vec3*, int, HSD_JObj*);
+    u32 unkA;
+    u32* unkB;
+    u32 unkC;
+} grZe_803E1B2C_t;
+
+grZe_803E1B2C_t grZe_803E1B2C = {
+    8,
+    grZe_callbacks,
+    grZe_803E1B20,
+    grZebes_801D84A4,
+    grZebes_801D84A0,
+    grZebes_801D8528,
+    grZebes_801D852C,
+    grZebes_801D8550,
+    grZebes_801DCCB8,
+    grZebes_801DCCC0,
+    1,
+    grZe_803E1A10,
+    5,
+};
+
 void grZebes_801D84A0(bool arg) {}
 
 void grZebes_801D84A4(void)
@@ -194,15 +254,6 @@ bool grZebes_801D8550(void)
 {
     return false;
 }
-
-StageCallbacks grZe_callbacks[] = {
-    { NULL, NULL, NULL, NULL, { 0 } }, { NULL, NULL, NULL, NULL, { 0 } },
-    { NULL, NULL, NULL, NULL, { 0 } }, { NULL, NULL, NULL, NULL, { 0 } },
-    { NULL, NULL, NULL, NULL, { 0 } }, { NULL, NULL, NULL, NULL, { 0 } },
-    { NULL, NULL, NULL, NULL, { 0 } }, { NULL, NULL, NULL, NULL, { 0 } },
-    { NULL, NULL, NULL, NULL, { 0 } }, { NULL, NULL, NULL, NULL, { 0 } },
-    { NULL, NULL, NULL, NULL, { 0 } }, { NULL, NULL, NULL, NULL, { 0 } },
-};
 
 Ground_GObj* grZebes_801D8558(int id)
 {
@@ -305,6 +356,7 @@ void grZebes_801D881C(HSD_GObj* gobj)
     Ground* gp = GET_GROUND(gobj);
     HSD_GObj* secondary_gobj = (HSD_GObj*) gp->gv.zebes5.xF0;
     u8 result = grZebes_801DA528(gobj, &gp->gv.zebes5.xC8, 1, 2);
+    PAD_STACK(8);
 
     if ((s32) gp->gv.zebes5.xEC != result) {
         gp->gv.zebes5.xEC = result;
