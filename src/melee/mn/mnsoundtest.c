@@ -695,6 +695,7 @@ void fn_8024B8B4(HSD_GObj* arg0, f32 farg0)
 
 void fn_8024BAF0(HSD_GObj* arg0)
 {
+    u32 pad2;
     HSD_JObj* sp1C;
     HSD_JObj* sp18;
     HSD_JObj* sp14;
@@ -702,10 +703,8 @@ void fn_8024BAF0(HSD_GObj* arg0)
     HSD_GObjProc* proc2;
     HSD_JObj* jobj;
     soundtest_user_data* user_data;
-    HSD_Text* text;
     f32 temp_f31;
-
-    PAD_STACK(8);
+    u32 pad1;
 
     jobj = GET_JOBJ(arg0);
     (lb_80011E24(jobj, &sp1C, 0xB, -1), lb_80011E24(jobj, &sp18, 2, -1),
@@ -723,14 +722,12 @@ void fn_8024BAF0(HSD_GObj* arg0)
             HSD_SisLib_803A5CC4(user_data->unk14);
             user_data->unk14 = NULL;
         }
-        text = user_data->unk18;
-        if (text != NULL) {
-            HSD_SisLib_803A5CC4(text);
+        if (user_data->unk18 != NULL) {
+            HSD_SisLib_803A5CC4(user_data->unk18);
             user_data->unk18 = NULL;
         }
-        text = user_data->unk1C;
-        if (text != NULL) {
-            HSD_SisLib_803A5CC4(text);
+        if (user_data->unk1C != NULL) {
+            HSD_SisLib_803A5CC4(user_data->unk1C);
             user_data->unk1C = NULL;
         }
     } else {
