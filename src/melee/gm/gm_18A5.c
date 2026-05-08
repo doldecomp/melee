@@ -785,11 +785,10 @@ void fn_8018DF68(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
     s32 half;
     GXColor c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10;
 
-
-    c0 = (GXColor){ 255, 255, 0, 255 };
-    c10 = (GXColor){ 255, 255, 0, 255 };
+    c0 = (GXColor) { 255, 255, 0, 255 };
+    c10 = (GXColor) { 255, 255, 0, 255 };
     thickness = ((BracketEntry*) data)->x1C;
-    c1 = (GXColor){ 255, 255, 0, 255 };
+    c1 = (GXColor) { 255, 255, 0, 255 };
     DrawRectangle((f32) arg1, (f32) arg2, thickness, (f32) arg4, &c1);
 
     right = arg1 + arg3;

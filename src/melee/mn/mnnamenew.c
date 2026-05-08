@@ -1212,7 +1212,6 @@ s32 mnNameNew_8023D130(GlyphVariantEntry* arg0, u8 arg1, u8 arg2, s32 arg3)
     GlyphRow* table_lower;
     GXColor* sp2C_ptr;
 
-
     jobj14 = arg0->jobjs[4];
     text = HSD_SisLib_803A6754(0, (s32) mn_804D6BB4);
     jobj18 = arg0->jobjs[5];

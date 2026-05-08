@@ -706,9 +706,9 @@ void gmClassic_801B3500(MinorScene* arg0)
 
     gm_8017DB88(ad->x0.xC.x24, entry->x1, ad->x0.cpu_level,
                 (u8) gm_8017BE84(arg0->idx), sd->x10, sd->x0D[0],
-                (u8(*)(s32, s32, u8)) ad->x58, (u8(*)(s32, s32, u8)) ad->x5C,
-                (u8(*)(s32, s32, u8)) ad->x60, (f32(*)(s32, s32)) ad->x6C,
-                (f32(*)(s32, s32)) ad->x70);
+                (u8 (*)(s32, s32, u8)) ad->x58, (u8 (*)(s32, s32, u8)) ad->x5C,
+                (u8 (*)(s32, s32, u8)) ad->x60, (f32 (*)(s32, s32)) ad->x6C,
+                (f32 (*)(s32, s32)) ad->x70);
 
     for (i = 1; i < 3; i++) {
         sd->x0D[i] = gm_8017DB6C((gm_8017DB6C_arg0_t*) ad->x0.xC.x24, i - 1);

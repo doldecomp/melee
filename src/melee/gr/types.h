@@ -1497,6 +1497,7 @@ struct grHomeRun_GroundVars {
     u16 xC6;
     int xC8;
     int xCC;
+    f32 xD0;
 };
 
 struct Map_GroundVars {

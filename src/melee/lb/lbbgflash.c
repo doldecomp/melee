@@ -151,7 +151,6 @@ void fn_8001FEC4(HSD_GObj* gobj, s32 code)
     s32 y;
     PAD_STACK(24);
 
-
     if (data->state.active) {
         return;
     }

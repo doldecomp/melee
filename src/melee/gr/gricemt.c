@@ -1283,7 +1283,7 @@ bool grIceMt_801FA364(void* state_, f32* out, HSD_GObjEvent cb_,
                       Ground_GObj* gobj)
 {
     grIceMt_FA364_State* state = state_;
-    s32 (*cb)(HSD_GObj*, s32*) = (s32(*)(HSD_GObj*, s32*)) cb_;
+    s32 (*cb)(HSD_GObj*, s32*) = (s32 (*)(HSD_GObj*, s32*)) cb_;
     bool ret = true;
     f32 result;
     s32 next_delay;

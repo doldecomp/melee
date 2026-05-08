@@ -896,7 +896,6 @@ void un_80319EF0(void)
     f32 scale;
     PAD_STACK(16);
 
-
     cobj = (HSD_CObj*) cfg->x00->hsd_obj;
 
     range = grid->x0C_max_x - grid->x04_min_x;
