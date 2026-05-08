@@ -42,12 +42,7 @@ struct MnDataDelData {
     AnimLoopSettings x18;
     AnimLoopSettings x24;
     AnimLoopSettings x30;
-    s32 x3C;
-    s32 x40;
-    s32 x44;
-    s32 x48;
-    s32 x4C;
-    s32 x50;
+    s32 x3C[6];
     s32 x54;
     s16 x58;
     s16 x5A;

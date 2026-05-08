@@ -39,7 +39,7 @@ void mnDataDel_8024E940(void)
     PAD_STACK(24);
 
     temp_r31 = mnDataDel_804D6C68->user_data;
-    data = &mnDataDel_803EF870.x3C;
+    data = mnDataDel_803EF870.x3C;
     temp_ret = mn_80231634((struct mn_80231634_t*) temp_r31->x10[data[1]]);
     lb_80011E24((HSD_JObj*) temp_ret, &sp18, 1, -1);
     temp_f31 = mn_8022F298(sp18);
@@ -84,7 +84,7 @@ void mnDataDel_8024EA6C(void)
     PAD_STACK(24);
 
     var_r29 = 0;
-    var_r30 = &mnDataDel_803EF870.x3C;
+    var_r30 = mnDataDel_803EF870.x3C;
     temp_f30 = 1.0f;
     temp_r31 = mnDataDel_804D6C68->user_data;
     do {
@@ -375,8 +375,9 @@ void fn_8024F318(HSD_GObj* gobj)
         if (user_data->x2 != 0) {
             switch ((s32) cursor) {
             case 0:
-                joint = (HSD_JObj*) mn_80231634((struct mn_80231634_t*)
-                                                    user_data->x10[mnDataDel_803EF870.x3C]);
+                joint = (HSD_JObj*) mn_80231634(
+                    (struct mn_80231634_t*)
+                        user_data->x10[mnDataDel_803EF870.x3C[0]]);
                 lb_80011E24(joint, &joint, 1, -1);
                 frame = mn_8022F298(joint);
                 HSD_JObjReqAnimAll(joint, 1.0f);
@@ -396,8 +397,9 @@ void fn_8024F318(HSD_GObj* gobj)
                 mnDataDel_8024E940();
                 break;
             case 2:
-                joint = (HSD_JObj*) mn_80231634((struct mn_80231634_t*)
-                                                    user_data->x10[mnDataDel_803EF870.x44]);
+                joint = (HSD_JObj*) mn_80231634(
+                    (struct mn_80231634_t*)
+                        user_data->x10[mnDataDel_803EF870.x3C[2]]);
                 lb_80011E24(joint, &joint, 1, -1);
                 frame = mn_8022F298(joint);
                 HSD_JObjReqAnimAll(joint, 1.0f);
@@ -412,8 +414,9 @@ void fn_8024F318(HSD_GObj* gobj)
                 lb_8001CE00();
                 break;
             case 3:
-                joint = (HSD_JObj*) mn_80231634((struct mn_80231634_t*)
-                                                    user_data->x10[mnDataDel_803EF870.x48]);
+                joint = (HSD_JObj*) mn_80231634(
+                    (struct mn_80231634_t*)
+                        user_data->x10[mnDataDel_803EF870.x3C[3]]);
                 lb_80011E24(joint, &joint, 1, -1);
                 frame = mn_8022F298(joint);
                 HSD_JObjReqAnimAll(joint, 1.0f);
@@ -429,8 +432,9 @@ void fn_8024F318(HSD_GObj* gobj)
                 lb_8001CE00();
                 break;
             case 4:
-                joint = (HSD_JObj*) mn_80231634((struct mn_80231634_t*)
-                                                    user_data->x10[mnDataDel_803EF870.x4C]);
+                joint = (HSD_JObj*) mn_80231634(
+                    (struct mn_80231634_t*)
+                        user_data->x10[mnDataDel_803EF870.x3C[4]]);
                 lb_80011E24(joint, &joint, 1, -1);
                 frame = mn_8022F298(joint);
                 HSD_JObjReqAnimAll(joint, 1.0f);
@@ -636,7 +640,6 @@ void fn_8024FD40(HSD_GObj* gobj)
     HSD_GObjProc* proc;
     f32 frame;
     s32 i;
-    s32* offsets;
     struct MnDataDelGObjUserData* user_data;
     struct MnDataDelData* data;
     PAD_STACK(16);
@@ -652,14 +655,10 @@ void fn_8024FD40(HSD_GObj* gobj)
         return;
     }
     frame = mn_8022EE84(jobj, &data->x0, (enum _HSD_TypeMask) 0x480);
-    offsets = &data->x3C;
-    i = 0;
-    do {
-        mn_8022EE84(user_data->x10[*offsets], &data->x0,
+    for (i = 0; i < 6; i++) {
+        mn_8022EE84(user_data->x10[data->x3C[i]], &data->x0,
                     (enum _HSD_TypeMask) 0x480);
-        offsets++;
-        i++;
-    } while (i < 6);
+    }
     if (frame == data->x0.end_frame) {
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
         proc = HSD_GObj_SetupProc(gobj, fn_8024FC48, 0);
@@ -711,7 +710,7 @@ void mnDataDel_8024FE4C(u8 arg0)
     }
     proc = HSD_GObj_SetupProc(gobj, fn_8024FD40, 0U);
     proc->flags_3 = HSD_GObj_804D783C;
-    offsets = &mnDataDel_803EF870.x3C;
+    offsets = mnDataDel_803EF870.x3C;
     for (i = 0; i < 6; i++) {
         joint = HSD_JObjLoadJoint(mnDataDel_804A0928.joint);
         HSD_JObjAddAnimAll(joint, mnDataDel_804A0928.animjoint,
