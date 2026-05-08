@@ -2,17 +2,18 @@
 
 #include <platform.h>
 
-#include "baselib/sislib.h"
 #include "baselib/archive.h"
+#include "baselib/debug.h"
 #include "baselib/gobjgxlink.h"
 #include "baselib/gobjobject.h"
 #include "baselib/jobj.h"
 #include "baselib/memory.h"
+#include "baselib/sislib.h"
 #include "cm/camera.h"
 #include "ft/ftlib.h"
 #include "gm/gmregclear.h"
-#include "gr/ground.h"
 #include "gr/grdatfiles.h"
+#include "gr/ground.h"
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
 #include "gr/stage.h"
@@ -113,6 +114,16 @@ bool grHomeRun_8021C824(void)
 {
     return false;
 }
+
+HSD_GObj* grHomeRun_8021C82C_noinline(int gobj_id);
+#pragma push
+#pragma dont_inline on
+HSD_GObj* grHomeRun_8021C82C_noinline(int gobj_id)
+{
+    return grHomeRun_8021C82C(gobj_id);
+}
+#pragma dont_inline reset
+#pragma pop
 
 HSD_GObj* grHomeRun_8021C82C(int gobj_id)
 {
@@ -740,53 +751,41 @@ HSD_GObj* grHomeRun_8021E500(s16 arg0)
     f32 offset;
 
     idx = (arg0 / grHr_804D6ADC) % 4;
-    switch (idx) {
-    case 0:
+    if (idx == 0) {
         if (grHr_804D6ADC - 1 != arg0 % grHr_804D6ADC) {
             gobj_id = 4;
         } else {
             gobj_id = 5;
         }
-        break;
-    case 1:
+    } else if (idx == 1) {
         if (grHr_804D6ADC - 1 != arg0 % grHr_804D6ADC) {
             gobj_id = 1;
         } else {
             gobj_id = 2;
         }
-        break;
-    case 2:
+    } else if (idx == 2) {
         if (grHr_804D6ADC - 1 != arg0 % grHr_804D6ADC) {
             gobj_id = 6;
         } else {
             gobj_id = 7;
         }
-        break;
-    case 3:
+    } else if (idx == 3) {
         if (grHr_804D6ADC - 1 != arg0 % grHr_804D6ADC) {
             gobj_id = 8;
         } else {
             gobj_id = 9;
         }
-        break;
-    default:
-        __assert("grhomerun.c", 0x3D2, "0");
+    } else {
+        HSD_ASSERT(0x3D2, NULL);
         gobj_id = 0;
-        break;
     }
 
-    gobj = grHomeRun_8021C82C(gobj_id);
-    if (gobj == NULL) {
-        __assert("grhomerun.c", 0x3D5, "gobj");
-    }
+    gobj = grHomeRun_8021C82C_noinline(gobj_id);
+    HSD_ASSERT(0x3D5, gobj);
     jobj = GET_JOBJ(gobj);
-    if (jobj == NULL) {
-        __assert("grhomerun.c", 0x3D6, "jobj");
-    }
+    HSD_ASSERT(0x3D6, jobj);
     gp = GET_GROUND(gobj);
-    if (gp == NULL) {
-        __assert("grhomerun.c", 0x3D7, "gp");
-    }
+    HSD_ASSERT(0x3D7, gp);
 
     HSD_JObjSetScaleX(jobj, grHr_804D6AE4 * HSD_JObjGetScaleX(jobj));
     HSD_JObjSetScaleY(jobj, grHr_804D6AE4 * HSD_JObjGetScaleY(jobj));
