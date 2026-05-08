@@ -221,11 +221,11 @@ void mnEvent_8024D4E0(HSD_JObj* jobj, Vec3* translate)
 
 void mnEvent_8024D5B0(HSD_GObj* gobj, u8 event)
 {
+    HSD_Text* temp_r3_2;
+    HSD_Text* temp_r3;
     char sp18[4];
     char sp14[4];
     char sp10[4];
-    HSD_Text* temp_r3;
-    HSD_Text* temp_r3_2;
     u32 temp_r30;
     MnEventData* temp_r28;
     u8 temp_r27;
@@ -234,7 +234,7 @@ void mnEvent_8024D5B0(HSD_GObj* gobj, u8 event)
     temp_r27 = event;
     temp_r3 = temp_r28->name_text;
     if (temp_r3 != NULL) {
-        HSD_SisLib_803A5CC4(temp_r3);
+        HSD_SisLib_803A5CC4(temp_r28->name_text);
     }
 
     temp_r3_2 = HSD_SisLib_803A6754(0, 1);
@@ -246,9 +246,11 @@ void mnEvent_8024D5B0(HSD_GObj* gobj, u8 event)
     temp_r3_2->default_alignment = 2;
     temp_r3_2->font_size.x = 0.03f;
     temp_r3_2->font_size.y = 0.03f;
-    temp_r30 = gmMainLib_8015CF5C((s32) gm_801BEBC0(temp_r27));
-    if (gm_801BEB8C(gm_801BEBC0(temp_r27)) != 0) {
-        if (gmMainLib_8015CEFC((s32) gm_801BEBC0(temp_r27)) != 0) {
+    temp_r30 = gmMainLib_8015CF5C((s32) gm_801BEBC0(temp_r27 & 0xFF));
+    if ((gm_801BEB8C((u32) gm_801BEBC0((((u32) temp_r27) & 0xFFu) & 0xFFu)) &
+         0xFFu) != 0)
+    {
+        if (gmMainLib_8015CEFC((s32) gm_801BEBC0(event & 0xFFFFFFFFu)) != 0) {
             mn_8022EA78(sp18, 2, (temp_r30 / 60 / 60) % 60);
             mn_8022EA78(sp14, 2, (temp_r30 / 60) % 60);
             mn_8022EA78(sp10, 2,
@@ -265,7 +267,9 @@ void mnEvent_8024D5B0(HSD_GObj* gobj, u8 event)
                             sp14, sp10);
         return;
     }
-    if (gmMainLib_8015CEFC((s32) gm_801BEBC0(temp_r27)) != 0) {
+    if (gmMainLib_8015CEFC((s32) gm_801BEBC0(event & 0xFFFFFFFFFFFFFFFFu)) !=
+        0)
+    {
         HSD_SisLib_803A6B98(temp_r3_2, 0.0f, 0.0f, mnEvent_804D5040, temp_r30);
         return;
     }
