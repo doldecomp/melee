@@ -274,7 +274,7 @@ bool it_802E3884(Item_GObj* gobj)
         it_80275474(gobj);
         it_8027CE44(gobj);
         Camera_80030E44(2, &ip->pos);
-        if (HSD_Randf() < it_804D6D40[2]) {
+        if (HSD_Randf() < it_804D6D40->x8) {
             it_802E4980(gobj);
         } else {
             it_802E48B4(gobj);

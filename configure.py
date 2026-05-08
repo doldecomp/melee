@@ -769,7 +769,9 @@ config.libs = [
             # Popo
             Object(Matching, "melee/ft/chara/ftPopo/ftPp_Init.c"),
             Object(Matching, "melee/ft/chara/ftPopo/ftPp_SpecialN.c"),
-            Object(NonMatching, "melee/ft/chara/ftPopo/ftPp_SpecialS.c"),
+            Object(Matching, "melee/ft/chara/ftPopo/ftPp_SpecialS.c"),
+            Object(Matching, "melee/ft/chara/ftPopo/ftPp_SpecialHi.c"),
+            Object(Matching, "melee/ft/chara/ftPopo/ftPp_SpecialLw.c"),
             Object(NonMatching, "melee/ft/chara/ftPp_SpecialS.c"),
             # Nana
             Object(NonMatching, "melee/ft/chara/ftNana/ftNn_Init.c"),

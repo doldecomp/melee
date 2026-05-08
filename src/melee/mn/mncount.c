@@ -320,6 +320,7 @@ s32 mnCount_8025092C(s32 rank, u32 (*getVal)(s32), bool mode)
 {
     CountEntry entries[NUM_CHARACTERS];
     int i, j, min;
+    PAD_STACK(8);
     if (mnCount_8025092C_inline()) {
         return NUM_CHARACTERS;
     }
@@ -418,6 +419,7 @@ int mnCount_GetRowValue_Character(mnCount_row row)
 unsigned int mnCount_GetRowValue_Number(int row)
 {
     unsigned int ret;
+    PAD_STACK(8);
     switch (row) {
     case POWER_COUNT:
         ret = *(unsigned int*) gmMainLib_GetPowerCount();
@@ -636,6 +638,7 @@ void fn_802514D8(HSD_GObj* gobj)
 {
     MnCountData* userdata = GET_MNCOUNT(gobj);
     HSD_GObjProc* proc;
+    PAD_STACK(16);
     if (mn_804A04F0.cur_menu != MENU_KIND_RECORDS_MISC) {
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
         proc = HSD_GObj_SetupProc(gobj, fn_802514B8, 0);
@@ -693,6 +696,7 @@ void fn_80251640(HSD_GObj* gobj)
     int i;
     HSD_JObj* jobj;
     StaticModelDesc* md;
+    PAD_STACK(24);
 
     if (mn_804A04F0.cur_menu != MENU_KIND_RECORDS_MISC) {
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
