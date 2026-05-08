@@ -182,6 +182,10 @@ void mnSoundTest_8024A790(HSD_GObj* arg0)
 
 void mnSoundTest_8024A958(Soundtest_GObj* arg0)
 {
+    f32 unused1;
+    f32 unused2;
+    soundtest_user_data* new_var;
+    f32 unused3;
     char string[3];
     f32 temp_f1;
     HSD_Text* temp_r3;
@@ -189,35 +193,32 @@ void mnSoundTest_8024A958(Soundtest_GObj* arg0)
     HSD_Text* temp_r3_3;
     HSD_Text* temp_r3_4;
     soundtest_user_data* temp_r30;
-    PAD_STACK(16);
-
-    PAD_STACK(4);
 
     temp_r30 = arg0->user_data;
-    temp_r3 = temp_r30->unk14;
+    temp_r3 = (new_var = temp_r30)->unk14;
     if (temp_r3 != NULL) {
         HSD_SisLib_803A5CC4(temp_r3);
     }
-    temp_r3_2 = temp_r30->unk18;
+    temp_r3_2 = new_var->unk18;
     if (temp_r3_2 != NULL) {
-        HSD_SisLib_803A5CC4(temp_r3_2);
+        HSD_SisLib_803A5CC4(new_var->unk18);
     }
     temp_r3_3 =
         HSD_SisLib_803A5ACC(0, 0, vec_6.x, vec_6.y, 18.0f, 350.0f, 10.0f);
-    temp_r30->unk14 = temp_r3_3;
+    new_var->unk14 = temp_r3_3;
     temp_r3_3->font_size.x = 0.035f;
     temp_r3_3->font_size.y = 0.035f;
     temp_r3_3->default_alignment = 2;
-    HSD_SisLib_803A6368(temp_r3_3, data_2[text_ids[temp_r30->unk1]].text_id);
+    HSD_SisLib_803A6368(temp_r3_3, data_2[text_ids[new_var->unk1]].text_id);
     temp_r3_4 = HSD_SisLib_803A6754(0, 0);
-    temp_r30->unk18 = temp_r3_4;
+    new_var->unk18 = temp_r3_4;
     temp_f1 = vec_7.y;
     temp_r3_4->pos_x = vec_7.x;
     temp_r3_4->pos_y = temp_f1;
     temp_r3_4->pos_z = 18.0f;
     temp_r3_4->font_size.x = 0.04f;
     temp_r3_4->font_size.y = 0.04f;
-    mn_8022EA08((char*) &string, temp_r30->unk1);
+    mn_8022EA08((char*) &string, new_var->unk1);
     temp_r3_4->default_alignment = 1;
     HSD_SisLib_803A6B98(temp_r3_4, 0.0f, 0.0f, string);
 }
