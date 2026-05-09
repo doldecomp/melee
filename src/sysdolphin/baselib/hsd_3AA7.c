@@ -17,6 +17,25 @@ typedef struct CardBufEntry {
     s32 x14, x18, x1C, x20;
 } CardBufEntry;
 
+typedef struct {
+    s32 type;
+    s32 f1;
+    s32 f2;
+    s32 f3;
+    s32 f4;
+    s32 f5;
+} HsdCmdEntry;
+
+typedef struct {
+    u8 pad_0[0x4];
+    s32 x4;
+    u8 pad_8[0x4];
+    s32 xC;
+    s32 x10;
+} Hsd803B2550Ctx;
+
+#define CMD_QUEUE(base) ((HsdCmdEntry*) ((base) + 0x1210))
+
 /// #fn_803AA790
 
 /// #hsd_803AAA48
@@ -869,7 +888,68 @@ void hsd_803B24E4(s32* ctx, int channel, int file_no, void* work_buf)
     ctx[0] = (s32) work_buf;
 }
 
-/// #hsd_803B2550
+int hsd_803B2550(s32* arg0, char* arg1, void (*arg2)(int, int))
+{
+    Hsd803B2550Ctx* ctx;
+    s32 close_retries;
+    s32 read_idx;
+    s32 result;
+    s32 retries;
+    s32 write_idx;
+    u8* base;
+    HsdCmdEntry* entry;
+
+    ctx = (Hsd803B2550Ctx*) arg0;
+    retries = 0;
+    do {
+        result = CARDOpen(ctx->x4, arg1, (CARDFileInfo*) ((u8*) ctx + 0xC));
+        if (result != -1) {
+            break;
+        }
+        retries++;
+    } while (retries < 10);
+    if (result < 0) {
+        return result;
+    }
+
+    retries = 0;
+    do {
+        result = ctx->x10;
+        if (result != -1) {
+            break;
+        }
+        retries++;
+    } while (retries < 10);
+    if (result < 0) {
+        return result;
+    }
+
+    close_retries = 0;
+    do {
+        result = CARDClose((CARDFileInfo*) ((u8*) ctx + 0xC));
+        if (result != -1) {
+            break;
+        }
+        close_retries++;
+    } while (close_retries < 10);
+
+    base = hsd_804D1138;
+    read_idx = hsd_804D7990;
+    write_idx = hsd_804D7994;
+    if (read_idx == write_idx) {
+        if (CMD_QUEUE(base)[read_idx].type != 0) {
+            return -265;
+        }
+    }
+
+    entry = &CMD_QUEUE(base)[write_idx];
+    entry->type = 5;
+    entry->f1 = (s32) arg0;
+    entry->f2 = ctx->x10;
+    entry->f5 = (s32) arg2;
+    hsd_804D7994 = (write_idx + 1) % 32;
+    return 0;
+}
 
 s32 hsd_803B2674(CardState* state)
 {
