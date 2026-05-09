@@ -37,7 +37,81 @@ typedef struct {
 
 #define CMD_QUEUE(base) ((HsdCmdEntry*) ((base) + 0x1210))
 
-/// #fn_803AA790
+s32 fn_803AA790(void)
+{
+    CARDCallback callback;
+    HsdCmdEntry* entry;
+    s32 result;
+    s32 type;
+
+    entry = &((HsdCmdEntry*) &hsd_804D2348)[hsd_804D7990];
+    hsd_804D7990 = (hsd_804D7990 + 1) % 32;
+    type = entry->type;
+    callback = (CARDCallback) entry->f5;
+
+    switch (type) {
+    case 1:
+        result = ((s32(*)(s32, s32, s32, s32, s32)) fn_803ADF90)(
+            entry->f1, entry->f2, entry->f3, 1, entry->f5);
+        if (result < 0 && callback != NULL) {
+            callback(entry->f2, result);
+        }
+        break;
+    case 2:
+        switch (((struct hsd_803AC3E0_arg0_t*) entry->f1)->x28[entry->f2]) {
+        case 0:
+            result = ((s32(*)(s32, s32, s32, s32)) fn_803AE7F8)(
+                entry->f1, entry->f3, 1, entry->f5);
+            break;
+        case 1:
+            result = ((s32(*)(s32, s32, s32, s32)) fn_803AF3F0)(
+                entry->f1, entry->f3, 1, entry->f5);
+            break;
+        case 3:
+            result = ((s32(*)(s32, s32, s32, s32)) fn_803B0120)(
+                entry->f1, entry->f3, 1, entry->f5);
+            break;
+        default:
+            result = -257;
+            break;
+        }
+        if (result < 0 && callback != NULL) {
+            callback(entry->f2, result);
+        }
+        break;
+    case 3:
+        result = fn_803B1F78((CardState*) entry->f1, entry->f2, entry->f3,
+                             entry->f4, entry->f5);
+        if (result < 0 && callback != NULL) {
+            callback(0, result);
+        }
+        break;
+    case 4:
+        result = fn_803B21E8(entry->f1, entry->f3, entry->f4, entry->f5);
+        if (result < 0 && callback != NULL) {
+            callback(0, result);
+        }
+        break;
+    case 5:
+        result = fn_803ADE4C(entry->f1, entry->f2, entry->f5);
+        if (result < 0 && callback != NULL) {
+            callback(0, result);
+        }
+        break;
+    case 6:
+        result = fn_803B26CC((CardState*) entry->f1, entry->f2, entry->f3,
+                             entry->f4, entry->f5);
+        if (result < 0 && callback != NULL) {
+            callback(0, result);
+        }
+        break;
+    default:
+        return -257;
+    }
+
+    entry->type = 0;
+    return result;
+}
 
 /// #hsd_803AAA48
 
