@@ -11,9 +11,10 @@
 #include "baselib/state.h"
 #include "baselib/util.h"
 
-#include <libc/math.h>
-#include <math.h>
 #include <string.h>
+
+extern float __fabsf(float);
+#define fabsf __fabsf
 #include <dolphin/gx.h>
 
 typedef struct {
