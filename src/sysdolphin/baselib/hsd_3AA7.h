@@ -53,7 +53,8 @@ typedef struct CardState {
                              s32 version);
 /* 3AD16C */ UNK_RET fn_803AD16C(UNK_PARAMS);
 /* 3ADE4C */ s32 fn_803ADE4C(s32 card_state, s32 channel, s32 callback);
-/* 3ADF90 */ UNK_RET fn_803ADF90(UNK_PARAMS);
+/* 3ADF90 */ s32 fn_803ADF90(struct hsd_803AC3E0_arg0_t* state, s32 file_id,
+                             void* data, s32 async, s32 callback);
 /* 3AE7F8 */ UNK_RET fn_803AE7F8(UNK_PARAMS);
 /* 3AF3F0 */ UNK_RET fn_803AF3F0(UNK_PARAMS);
 /* 3B0120 */ UNK_RET fn_803B0120(UNK_PARAMS);
