@@ -32,6 +32,8 @@
 #include <baselib/jobj.h>
 #include <baselib/random.h>
 #include <baselib/spline.h>
+#include "it/it_266F.h"
+#include "it/items/itbox.h"
 
 void grKongo_801D5490(Ground_GObj* arg0)
 {

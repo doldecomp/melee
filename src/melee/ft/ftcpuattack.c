@@ -22,6 +22,7 @@
 #include <melee/mp/mpisland.h>
 #include <melee/mp/mplib.h>
 #include <melee/mp/types.h>
+#include "ft/ftlib.h"
 
 /// #ftCo_800B4AB0
 

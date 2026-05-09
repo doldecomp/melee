@@ -22,6 +22,9 @@
 #include <baselib/lobj.h>
 #include <baselib/random.h>
 #include <baselib/sislib.h>
+#include "pl/player.h"
+#include "gr/grmaterial.h"
+#include "it/items/itarwinglaser.h"
 
 /// Forward declaration of grVe_Data for use by multiple functions
 /// @todo This struct should be defined in gr/types.h or a proper header

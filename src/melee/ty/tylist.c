@@ -25,6 +25,8 @@
 #include <baselib/sislib.h>
 #include <baselib/tobj.h>
 #include <baselib/video.h>
+#include "lb/lbaudio_ax.h"
+#include "mn/mnmain.h"
 
 typedef struct {
     u8 pad[0x28];
@@ -299,10 +301,7 @@ void un_80312904(void* arg0, s8 arg1)
     row->text0->font_size.x = un_804DDE30;
     row->text0->font_size.y = un_804DDE34;
     row->text0->default_kerning = 1;
-    {
-        extern s32 un_803082F8(s16);
-        HSD_SisLib_803A6368(row->text0, un_803082F8(row->idx));
-    }
+    HSD_SisLib_803A6368(row->text0, un_80308354(row->idx));
 
     row->text1->pos_x = un_804DDE38 + f30;
     row->text1->pos_y = f29;

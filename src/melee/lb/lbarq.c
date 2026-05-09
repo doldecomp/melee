@@ -1,6 +1,7 @@
 #include "lbarq.h"
 
 #include <dolphin/os.h>
+#include <baselib/debug.h>
 
 u32 lbArq_80014ABC(lbArqNode* arg0)
 {

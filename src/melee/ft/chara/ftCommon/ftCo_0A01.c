@@ -44,6 +44,10 @@
 #include <dolphin/mtx.h>
 #include <melee/ft/ftcmdscript.h>
 #include <MetroTRK/intrinsics.h>
+#include "lb/lbvector.h"
+
+static inline bool inlineI1(struct Fighter_x1A88_t* data);
+static inline bool inlineI1_alt(Fighter* fp);
 
 /**
  * Priority table, mapping ItemKind to priority number,
