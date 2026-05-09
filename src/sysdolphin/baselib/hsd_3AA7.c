@@ -1539,7 +1539,17 @@ s32 fn_803B1338(CardState* state, s32 arg1)
     return result;
 }
 
-/// #fn_803AF3F0
+s32 fn_803AF3F0(struct hsd_803AC3E0_arg0_t* state, s32 file_id, void* data,
+                s32 async, s32 callback)
+{
+    if (file_id >= 9) {
+        return -257;
+    }
+    if (state->x4C[file_id] <= 0) {
+        return 0;
+    }
+    return fn_803AE7F8(state, file_id, data, async, callback);
+}
 
 /// #fn_803B0120
 
