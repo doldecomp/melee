@@ -133,7 +133,25 @@ s32 fn_803AA790(void)
     return result;
 }
 
-/// #hsd_803AAA48
+s32 hsd_803AAA48(void)
+{
+    BOOL intr;
+    HsdCmdEntry* entry;
+    s32 read_idx;
+    s32 write_idx;
+
+    intr = OSDisableInterrupts();
+    read_idx = hsd_804D7990;
+    write_idx = hsd_804D7994;
+    entry = CMD_QUEUE((u8*) hsd_804D1138);
+    OSRestoreInterrupts(intr);
+
+    if (read_idx == write_idx && entry[read_idx].type == 0) {
+        return 0;
+    }
+
+    return fn_803AA790();
+}
 
 /// @todo Currently 91.67% match - volatile load scheduling in critical section
 s32 fn_803AC168(s32* cmd_buf)
