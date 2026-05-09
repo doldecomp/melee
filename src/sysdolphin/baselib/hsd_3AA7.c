@@ -1439,6 +1439,49 @@ s32 fn_803AE7F8(struct hsd_803AC3E0_arg0_t* arg0, s32 arg1, void* arg2, s32 arg3
     return repair_result;
 }
 
+s32 fn_803B1338(CardState* state, s32 arg1)
+{
+    CardStateExt* ext = (CardStateExt*) state;
+    s32 file_id;
+    s32 result;
+    u8* base;
+
+    base = ext->x0;
+    result = 0;
+    for (file_id = 0; file_id < 9; file_id++) {
+        if (ext->x4C[file_id] <= 0) {
+            continue;
+        }
+
+        switch (ext->x28[file_id]) {
+        case 0:
+            result =
+                fn_803AE7F8((struct hsd_803AC3E0_arg0_t*) state, file_id,
+                            base + ext->x70[file_id], arg1, 0);
+            break;
+        case 1:
+            result =
+                fn_803AF3F0((struct hsd_803AC3E0_arg0_t*) state, file_id,
+                            base + ext->x70[file_id], arg1, 0);
+            break;
+        case 3:
+            result =
+                fn_803B0120((struct hsd_803AC3E0_arg0_t*) state, file_id,
+                            base + ext->x70[file_id], arg1, 0);
+            break;
+        default:
+            result = -257;
+            break;
+        }
+
+        if (result < 0) {
+            return result;
+        }
+    }
+
+    return result;
+}
+
 /// #fn_803AF3F0
 
 /// #fn_803B0120

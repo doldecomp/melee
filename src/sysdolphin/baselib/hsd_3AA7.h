@@ -57,8 +57,10 @@ typedef struct CardState {
                              void* data, s32 async, s32 callback);
 /* 3AE7F8 */ s32 fn_803AE7F8(struct hsd_803AC3E0_arg0_t* state, s32 file_id,
                              void* data, s32 async, s32 callback);
-/* 3AF3F0 */ UNK_RET fn_803AF3F0(UNK_PARAMS);
-/* 3B0120 */ UNK_RET fn_803B0120(UNK_PARAMS);
+/* 3AF3F0 */ s32 fn_803AF3F0(struct hsd_803AC3E0_arg0_t* state, s32 file_id,
+                             void* data, s32 async, s32 callback);
+/* 3B0120 */ s32 fn_803B0120(struct hsd_803AC3E0_arg0_t* state, s32 file_id,
+                             void* data, s32 async, s32 callback);
 /* 3B0E9C */ s32 fn_803B0E9C(s32, s32, s32, s32, s32);
 /* 3B1338 */ s32 fn_803B1338(CardState* state, s32);
 /* 3B1F78 */ s32 fn_803B1F78(CardState* state, s32 channel, s32 file_id,
