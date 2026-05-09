@@ -1,5 +1,0 @@
-File: src/sysdolphin/baselib/sobjlib.c
-Funcs:
-- [x] HSD_SObjLib_803A55DC
-- [x] HSD_SObjLib_803A477C
-- [x] HSD_SObjLib_803A4A68
