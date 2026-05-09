@@ -49,7 +49,7 @@
 /* 307BA0 */ HSD_JObj* un_80307BA0(HSD_JObj*, s16);
 /* 307E84 */ void fn_80307E84(HSD_GObj* gobj);
 /* 307F64 */ void un_80307F64(s32, s32);
-/* 30813C */ char* un_8030813C(s32 arg0,
+/* 30813C */ char* un_8030813C(s16 arg0,
                                enum_t unused); /// @todo :: fill out the struct
                                                /// that this uses/returns
 /* 308250 */ void un_80308250(u8* arg0, s32 arg1, s32 arg2);
@@ -135,6 +135,11 @@
 /* un_803053C4 externs */
 /* 4D6EB4 */ extern s16* un_804D6EB4;
 /* 4DDCD0 */ extern f64 un_804DDCD0;
+
+/* un_80308354 externs */
+/* 3FE474 */ extern char un_803FE474[];
+/* 4D5A48 */ extern char un_804D5A48[];
+/* 4D5A50 */ extern char un_804D5A50[];
 
 /* un_803102D0 externs */
 /* 4D6ECC */ extern void* un_804D6ECC;

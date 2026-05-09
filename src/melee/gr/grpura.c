@@ -22,7 +22,7 @@
 #include <baselib/tobj.h>
 #include <sysdolphin/baselib/dobj.h>
 
-/* 213030 */ static void grPura_80213030(Ground_GObj* arg0);
+/* 213030 */ static void grPura_80213030(void);
 
 StageCallbacks grPu_803E6800[] = {
     { grPura_80211EF0, grPura_80211F1C, grPura_80211F24, grPura_80211F28, 0 },
@@ -99,7 +99,6 @@ const f32 grPu_804DBA7C = -30.0;
 
 void grPura_80211D00(void)
 {
-    u8 _padA[8];
     Vec3 cam_offset;
     f32 fVar1;
 
@@ -203,7 +202,7 @@ void grPura_80211FD8(Ground_GObj* arg0)
 {
     grPura_80212EF4(arg0);
     Ground_801C2FE0(arg0);
-    grPura_80213030(arg0);
+    grPura_80213030();
     mpLib_80055E24(0x18);
     lb_800115F4();
 }
@@ -271,7 +270,6 @@ void grPura_8021231C(Ground_GObj* arg0)
     HSD_JObjSetScale(jobj, vec);
 
     // HSD_JObjGetFlags(jobj);
-    PAD_STACK(40);
     if ((HSD_JObjGetFlags(gp->gv.pura2.xC8) & 0x10) &&
         ((HSD_JObjGetFlags(jobj) & 0x10) == NULL))
     {
@@ -355,9 +353,23 @@ void grPura_80212EF4(HSD_GObj* arg0)
     // HSD_JObjGetFlags();
 }
 
-/// #grPura_80212FC0
+void grPura_80212FC0(HSD_GObj* arg0)
+{
+    u16* var_r31 = grPu_803E6C0C;
+    u32 var_r30 = 0;
+    do {
+        if ((s16) var_r31[0] != -1) {
+            HSD_GObj* temp_r3 = Ground_801C2BA4((s32)(s16) var_r31[1]);
+            if (temp_r3 != NULL) {
+                M2C_FIELD(var_r31, HSD_JObj**, 8) = Ground_801C3FA4(temp_r3, (s32)(s16) var_r31[2]);
+            }
+        }
+        var_r30 += 1;
+        var_r31 += 6;
+    } while (var_r30 < 0x2A);
+}
 
-void grPura_80213030(Ground_GObj* arg0)
+void grPura_80213030(void)
 {
     UNUSED unsigned char _[8];
     Point3d spC;

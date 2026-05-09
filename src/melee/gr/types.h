@@ -1790,7 +1790,8 @@ struct UnkStageDat {
     HSD_Spline** unk10;
     s32 unk14;
 
-    u8 x18_fill[0x20 - 0x18];
+    void* unk18;
+    s32 unk1C;
 
     void* unk20;
     s32 unk24;
