@@ -443,7 +443,50 @@ s32 fn_803AC6B8(struct hsd_803AC3E0_arg0_t* file_desc, s32 file_count)
     return blocks;
 }
 
-/// #fn_803AC7DC
+s32 fn_803AC7DC(CardState* state)
+{
+    struct hsd_803AC3E0_arg0_t* file_desc = (struct hsd_803AC3E0_arg0_t*) state;
+    s32 blocks;
+    s32 i;
+    s32 max_extra;
+    s32 total;
+
+    total = fn_803AC634(file_desc, 0);
+    if (total > 0) {
+        total--;
+    }
+    max_extra = 0;
+
+    for (i = 1; i < 9; i++) {
+        if (file_desc->x4C[i] <= 0) {
+            continue;
+        }
+
+        blocks = fn_803AC634(file_desc, i);
+        switch (file_desc->x28[i]) {
+        case 0:
+            total += blocks * 2;
+            break;
+        case 1:
+            total += blocks;
+            if (max_extra < blocks) {
+                max_extra = blocks;
+            }
+            break;
+        case 2:
+            total += blocks;
+            if (max_extra < 1) {
+                max_extra = 1;
+            }
+            break;
+        case 3:
+            total += blocks;
+            break;
+        }
+    }
+
+    return total + max_extra;
+}
 
 s32 fn_803ACB74(s32 seq_a, s32 seq_b)
 {
