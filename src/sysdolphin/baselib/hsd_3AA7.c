@@ -157,7 +157,63 @@ void hsd_803AC3E0(struct hsd_803AC3E0_arg0_t* file_desc, int file_idx,
 
 /// #fn_803AC3F8
 
-/// #hsd_803AC558
+void hsd_803AC558(struct hsd_803AC3E0_arg0_t* file_desc, u8* data)
+{
+    s32 file_size;
+    s32 file_size_2;
+    s32 file_size_3;
+    u8 flags;
+    u8 flags_2;
+    u8 flags_3;
+    u8 flags_size;
+    u8 flags_size_2;
+    u8 flags_size_3;
+    u8 file_idx;
+    u8 file_idx_2;
+    u8 file_idx_3;
+    u8* p;
+    u8 size_mid;
+    u8 size_mid_2;
+    u8 size_mid_3;
+
+    p = data + 1;
+    flags_size = p[0];
+    file_idx = data[0];
+    size_mid = p[1];
+    flags = (flags_size >> 6) & 3;
+    file_size =
+        ((((s32) size_mid & ~0x3F00) | ((flags_size << 8) & 0x3F00)) << 8) | p[2];
+    if (file_size != 0 && file_desc->x4C[file_idx] == 0) {
+        file_desc->x28[file_idx] = flags;
+        file_desc->x4C[file_idx] = file_size;
+    }
+
+    p += 3;
+    flags_size_2 = p[1];
+    file_idx_2 = p[0];
+    size_mid_2 = p[2];
+    flags_2 = (flags_size_2 >> 6) & 3;
+    file_size_2 =
+        ((((s32) size_mid_2 & ~0x3F00) | ((flags_size_2 << 8) & 0x3F00)) << 8) |
+        p[3];
+    p += 4;
+    if (file_size_2 != 0 && file_desc->x4C[file_idx_2] == 0) {
+        file_desc->x28[file_idx_2] = flags_2;
+        file_desc->x4C[file_idx_2] = file_size_2;
+    }
+
+    flags_size_3 = p[1];
+    file_idx_3 = p[0];
+    size_mid_3 = p[2];
+    flags_3 = (flags_size_3 >> 6) & 3;
+    file_size_3 =
+        ((((s32) size_mid_3 & ~0x3F00) | ((flags_size_3 << 8) & 0x3F00)) << 8) |
+        p[3];
+    if (file_size_3 != 0 && file_desc->x4C[file_idx_3] == 0) {
+        file_desc->x28[file_idx_3] = flags_3;
+        file_desc->x4C[file_idx_3] = file_size_3;
+    }
+}
 
 u32 fn_803AC634(struct hsd_803AC3E0_arg0_t* file_desc, s32 file_idx)
 {
