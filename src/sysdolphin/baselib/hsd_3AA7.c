@@ -1552,6 +1552,24 @@ s32 fn_803AF3F0(struct hsd_803AC3E0_arg0_t* state, s32 file_id, void* data,
 }
 
 /// #fn_803B0120
+s32 fn_803B0120(struct hsd_803AC3E0_arg0_t* state, s32 file_id, void* data,
+                s32 async, s32 callback)
+{
+    s32 result;
+
+    if (file_id >= 9) {
+        return -257;
+    }
+    if (state->x4C[file_id] <= 0) {
+        return 0;
+    }
+
+    result = fn_803AF3F0(state, file_id, data, async, callback);
+    if (result == 1) {
+        return 0;
+    }
+    return result;
+}
 
 s32 fn_803B0E9C(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
 {
