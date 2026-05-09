@@ -8,8 +8,10 @@
 #include "baselib/mtx.h"
 #include "baselib/psdisptev.h"
 #include "baselib/psstructs.h"
+#include "baselib/state.h"
 #include "baselib/util.h"
 
+#include <libc/math.h>
 #include <math.h>
 #include <string.h>
 #include <dolphin/gx.h>
