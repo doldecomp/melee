@@ -1,0 +1,26 @@
+File: src/sysdolphin/baselib/hsd_3AA7.c
+Funcs:
+- [x] fn_803ACF30
+- [ ] hsd_803AC558
+- [ ] fn_803AC168
+- [ ] fn_803AC6B8
+- [ ] hsd_803B2550
+- [ ] fn_803B26CC
+- [ ] fn_803ADE4C
+- [ ] fn_803ACC0C
+- [ ] fn_803AC3F8
+- [ ] hsd_803B2374
+- [ ] fn_803B21E8
+- [ ] fn_803ACFC0
+- [ ] fn_803ACD58
+- [ ] fn_803B1F78
+- [ ] fn_803AA790
+- [ ] fn_803AC7DC
+- [ ] fn_803B0E9C
+- [ ] fn_803ADF90
+- [ ] fn_803AE7F8
+- [ ] fn_803B1338
+- [ ] fn_803AD16C
+- [ ] fn_803AF3F0
+- [ ] fn_803B0120
+- [ ] hsd_803AAA48
