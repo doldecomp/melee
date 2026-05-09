@@ -5,7 +5,7 @@ Funcs:
 - [x] fn_803AC168
 - [x] fn_803AC6B8
 - [x] hsd_803B2550
-- [ ] fn_803B26CC
+- [x] fn_803B26CC
 - [ ] fn_803ADE4C
 - [ ] fn_803ACC0C
 - [ ] fn_803AC3F8
