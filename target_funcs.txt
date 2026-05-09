@@ -13,7 +13,7 @@ Funcs:
 - [x] fn_803B21E8
 - [x] fn_803ACFC0
 - [x] fn_803ACD58
-- [ ] fn_803B1F78
+- [x] fn_803B1F78
 - [ ] fn_803AA790
 - [ ] fn_803AC7DC
 - [ ] fn_803B0E9C
