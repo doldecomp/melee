@@ -8,6 +8,7 @@
 
 /* 4D7980 */ extern s32 hsd_804D7980;
 /* 4D7984 */ extern volatile s32 hsd_804D7984;
+/* 4D7988 */ extern s32 hsd_804D7988;
 /* 4D7998 */ extern s32 hsd_804D7998;
 /* 4D799C */ extern s32 hsd_804D799C;
 
@@ -909,7 +910,21 @@ s32 fn_803B21E8(s32 card_state, s32 file_id, s32 seq_num, s32 callback)
     return 0;
 }
 
-/// #hsd_803B2374
+void hsd_803B2374(void)
+{
+    s32 i;
+
+    hsd_804D7990 = 0;
+    hsd_804D7994 = 0;
+    memset(&hsd_804D2348, 0, 0x300);
+    hsd_804D7980 = 0;
+    hsd_804D7984 = 0;
+    hsd_804D799C = 2;
+    for (i = 0; i < 0x80; i++) {
+        hsd_804D1148[i][0] = 0;
+    }
+    hsd_804D7988 = 0;
+}
 
 void hsd_803B24E4(s32* ctx, int channel, int file_no, void* work_buf)
 {
