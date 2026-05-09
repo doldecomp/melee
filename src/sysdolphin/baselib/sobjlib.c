@@ -12,6 +12,7 @@
 #include "dolphin/gx.h"
 
 #include <dolphin/os.h>
+#include <MSL/trigf.h>
 
 /* 004DB670 */ extern const s32 HSD_SObjLib_804DEA90;
 /* 004DB66C */ extern const s32 HSD_SObjLib_804DEA8C;
@@ -266,7 +267,288 @@ void HSD_SObjLib_803A49E0(HSD_GObj* gobj, int unused)
     }
 }
 
-/// #HSD_SObjLib_803A4A68
+void HSD_SObjLib_803A4A68(HSD_SObj* sobj)
+{
+    s32 sp74;
+    s32 sp70;
+    s32 sp6C;
+    s32 sp68;
+    s32 sp64;
+    s32 sp60;
+    s32 sp5C;
+    s32 sp58;
+    s32 sp54;
+    s32 sp50;
+    s32 sp4C;
+    s32 sp48;
+    s32 sp44;
+    s32 sp40;
+    s32 sp3C;
+    s32 sp38;
+    s32 sp34;
+    f32 temp_f0;
+    f32 temp_f26;
+    f32 temp_f27;
+    f32 temp_f28;
+    f32 temp_f28_2;
+    f32 temp_f31;
+    f32 temp_f5;
+    f32 temp_f7;
+    f32 temp_f8;
+    f32 var_f29;
+    f32 var_f30;
+    u16 temp_r30;
+    u16 temp_r31;
+    u8 temp_r29;
+
+    if (sobj->x40 & 1) {
+        return;
+    }
+
+    temp_r31 = sobj->x34;
+    temp_r30 = sobj->x36;
+    temp_r29 = GXGetTexObjFmt(&sobj->x50_texobj);
+    if (sobj->x40 & 2) {
+        var_f30 = sobj->x10;
+        var_f29 = sobj->x14;
+    } else {
+        var_f30 = ((f32) temp_r31 * sobj->x1C * 0.5F) + sobj->x10;
+        var_f29 = ((f32) temp_r30 * sobj->x20 * 0.5F) + sobj->x14;
+    }
+
+    GXClearVtxDesc();
+    if (sobj->x40 & 4) {
+        GXSetZTexture(GX_ZT_REPLACE, GX_TF_Z24X8, 0U);
+        if (sobj->x40 & 8) {
+            HSD_StateSetZMode(1, 1, 0);
+        } else {
+            HSD_StateSetZMode(1, 1, 1);
+        }
+        HSD_StateSetZCompLoc(0);
+        GXSetCullMode(GX_CULL_BACK);
+        GXSetNumTexGens(1U);
+        GXSetNumTevStages(2U);
+    } else {
+        HSD_StateSetZMode(1, 7, 0);
+        GXSetCullMode(GX_CULL_BACK);
+        if (sobj->x40 & 0x10) {
+            GXSetNumTexGens(2U);
+            GXSetNumTevStages(4U);
+        } else {
+            GXSetNumTexGens(1U);
+            GXSetNumTevStages(1U);
+        }
+    }
+
+    if ((u8) (temp_r29 - 8) <= 1U) {
+        GXLoadTlut(&sobj->x70_tlutobj, 0U);
+    }
+    if (!(sobj->x40 & 0x10)) {
+        GXLoadTexObj(&sobj->x50_texobj, GX_TEXMAP0);
+    }
+    GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_POS, GX_POS_XY, GX_F32, 0U);
+    GXSetVtxDesc(GX_VA_POS, GX_DIRECT);
+    GXSetVtxAttrFmt(GX_VTXFMT0, GX_VA_TEX0, GX_TEX_ST, GX_F32, 0U);
+    GXSetVtxDesc(GX_VA_TEX0, GX_DIRECT);
+    GXSetColorUpdate(1U);
+    GXSetAlphaUpdate(0U);
+    if (sobj->x40 & 0x10) {
+        GXSetTevOrder(GX_TEVSTAGE0, GX_TEXCOORD1, GX_TEXMAP1, GX_COLOR_NULL);
+        GXSetTevColorIn(GX_TEVSTAGE0, GX_CC_ZERO, GX_CC_TEXC, GX_CC_QUARTER,
+                        GX_CC_C0);
+        GXSetTevColorOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1,
+                        0U, GX_TEVPREV);
+        GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_ZERO, GX_CA_TEXA, GX_CA_ONE,
+                        GX_CA_A0);
+        GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_SUB, GX_TB_ZERO, GX_CS_SCALE_1,
+                        0U, GX_TEVPREV);
+        GXSetTevKColorSel(GX_TEVSTAGE0, GX_TEV_KCSEL_K0);
+        GXSetTevKAlphaSel(GX_TEVSTAGE0, GX_TEV_KASEL_K0_A);
+        GXSetTevSwapMode(GX_TEVSTAGE0, GX_TEV_SWAP0, GX_TEV_SWAP0);
+        GXSetTevOrder(GX_TEVSTAGE1, GX_TEXCOORD1, GX_TEXMAP2, GX_COLOR_NULL);
+        GXSetTevColorIn(GX_TEVSTAGE1, GX_CC_ZERO, GX_CC_TEXC, GX_CC_QUARTER,
+                        GX_CC_CPREV);
+        GXSetTevColorOp(GX_TEVSTAGE1, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_2,
+                        0U, GX_TEVPREV);
+        GXSetTevAlphaIn(GX_TEVSTAGE1, GX_CA_ZERO, GX_CA_TEXA, GX_CA_ONE,
+                        GX_CA_APREV);
+        GXSetTevAlphaOp(GX_TEVSTAGE1, GX_TEV_SUB, GX_TB_ZERO, GX_CS_SCALE_1,
+                        0U, GX_TEVPREV);
+        GXSetTevKColorSel(GX_TEVSTAGE1, GX_TEV_KCSEL_K1);
+        GXSetTevKAlphaSel(GX_TEVSTAGE1, GX_TEV_KASEL_K1_A);
+        GXSetTevSwapMode(GX_TEVSTAGE1, GX_TEV_SWAP0, GX_TEV_SWAP0);
+        GXSetTevOrder(GX_TEVSTAGE2, GX_TEXCOORD0, GX_TEXMAP0, GX_COLOR_NULL);
+        GXSetTevColorIn(GX_TEVSTAGE2, GX_CC_ZERO, GX_CC_TEXC, GX_CC_ONE,
+                        GX_CC_CPREV);
+        GXSetTevColorOp(GX_TEVSTAGE2, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1,
+                        1U, GX_TEVPREV);
+        GXSetTevAlphaIn(GX_TEVSTAGE2, GX_CA_TEXA, GX_CA_ZERO, GX_CA_ZERO,
+                        GX_CA_APREV);
+        GXSetTevAlphaOp(GX_TEVSTAGE2, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1,
+                        1U, GX_TEVPREV);
+        GXSetTevSwapMode(GX_TEVSTAGE2, GX_TEV_SWAP0, GX_TEV_SWAP0);
+        GXSetTevOrder(GX_TEVSTAGE3, GX_TEXCOORD_NULL, GX_TEXMAP_NULL,
+                      GX_COLOR_NULL);
+        GXSetTevColorIn(GX_TEVSTAGE3, GX_CC_APREV, GX_CC_CPREV, GX_CC_QUARTER,
+                        GX_CC_ZERO);
+        GXSetTevColorOp(GX_TEVSTAGE3, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1,
+                        1U, GX_TEVPREV);
+        GXSetTevAlphaIn(GX_TEVSTAGE3, GX_CA_ZERO, GX_CA_ZERO, GX_CA_ZERO,
+                        GX_CA_ZERO);
+        GXSetTevAlphaOp(GX_TEVSTAGE3, GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1,
+                        1U, GX_TEVPREV);
+        GXSetTevSwapMode(GX_TEVSTAGE3, GX_TEV_SWAP0, GX_TEV_SWAP0);
+        GXSetTevKColorSel(GX_TEVSTAGE3, GX_TEV_KCSEL_K2);
+        GXSetAlphaCompare(GX_ALWAYS, 0U, GX_AOP_OR, GX_ALWAYS, 0U);
+        sp68 = HSD_SObjLib_804DEA80;
+        sp6C = HSD_SObjLib_804DEA84;
+        sp70 = sp68;
+        sp74 = HSD_SObjLib_804DEA84;
+        GXSetTevColorS10(GX_TEVREG0, *(GXColorS10*) &sp70);
+        sp60 = HSD_SObjLib_804DEA88;
+        sp64 = HSD_SObjLib_804DEA88;
+        GXSetTevKColor(GX_KCOLOR0, *(GXColor*) &sp64);
+        sp58 = HSD_SObjLib_804DEA8C;
+        sp5C = HSD_SObjLib_804DEA8C;
+        GXSetTevKColor(GX_KCOLOR1, *(GXColor*) &sp5C);
+        sp50 = HSD_SObjLib_804DEA90;
+        sp54 = HSD_SObjLib_804DEA90;
+        GXSetTevKColor(GX_KCOLOR2, *(GXColor*) &sp54);
+        GXSetTevSwapModeTable(GX_TEV_SWAP0, GX_CH_RED, GX_CH_GREEN,
+                              GX_CH_BLUE, GX_CH_ALPHA);
+        GXSetBlendMode(GX_BM_NONE, GX_BL_ONE, GX_BL_ZERO, GX_LO_CLEAR);
+    } else {
+        GXSetTevOrder(GX_TEVSTAGE0, GX_TEXCOORD0, GX_TEXMAP0, GX_COLOR0A0);
+        if (sobj->x40 & 4) {
+            GXLoadTexObj(&sobj->x7C_texobj, GX_TEXMAP1);
+            GXSetTevOrder(GX_TEVSTAGE1, GX_TEXCOORD0, GX_TEXMAP1,
+                          GX_COLOR0A0);
+        }
+        GXSetAlphaCompare(GX_ALWAYS, 0U, GX_AOP_OR, GX_ALWAYS, 0U);
+        if (sobj->x40 & 4) {
+            sp4C = *(s32*) &sobj->x3C;
+            GXSetTevColor(GX_TEVREG0, *(GXColor*) &sp4C);
+            GXSetTevColorIn(GX_TEVSTAGE0, GX_CC_ZERO, GX_CC_TEXC, GX_CC_C0,
+                            GX_CC_ZERO);
+            GXSetTevColorOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO,
+                            GX_CS_SCALE_1, 1U, GX_TEVPREV);
+            GXSetTevColorIn(GX_TEVSTAGE1, GX_CC_ZERO, GX_CC_ZERO, GX_CC_ZERO,
+                            GX_CC_CPREV);
+            GXSetTevColorOp(GX_TEVSTAGE1, GX_TEV_ADD, GX_TB_ZERO,
+                            GX_CS_SCALE_1, 1U, GX_TEVPREV);
+            GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_ZERO, GX_CA_ZERO, GX_CA_ZERO,
+                            GX_CA_A0);
+            GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO,
+                            GX_CS_SCALE_1, 1U, GX_TEVPREV);
+            GXSetTevAlphaIn(GX_TEVSTAGE1, GX_CA_ZERO, GX_CA_ZERO, GX_CA_ZERO,
+                            GX_CA_A0);
+            GXSetTevAlphaOp(GX_TEVSTAGE1, GX_TEV_ADD, GX_TB_ZERO,
+                            GX_CS_SCALE_1, 1U, GX_TEVPREV);
+            GXSetBlendMode(GX_BM_BLEND, GX_BL_SRCALPHA, GX_BL_INVSRCALPHA,
+                           GX_LO_CLEAR);
+        } else {
+            switch (temp_r29) {
+            case 0:
+            case 1:
+                sp48 = *(s32*) &sobj->x38;
+                GXSetTevColor(GX_TEVREG0, *(GXColor*) &sp48);
+                sp44 = *(s32*) &sobj->x3C;
+                GXSetTevColor(GX_TEVREG1, *(GXColor*) &sp44);
+                GXSetTevColorIn(GX_TEVSTAGE0, GX_CC_C0, GX_CC_C1, GX_CC_TEXC,
+                                GX_CC_ZERO);
+                GXSetTevColorOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO,
+                                GX_CS_SCALE_1, 1U, GX_TEVPREV);
+                GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_ZERO, GX_CA_ZERO,
+                                GX_CA_ZERO, GX_CA_TEXA);
+                GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO,
+                                GX_CS_SCALE_1, 1U, GX_TEVPREV);
+                break;
+            case 2:
+            case 3:
+                sp40 = *(s32*) &sobj->x38;
+                GXSetTevColor(GX_TEVREG0, *(GXColor*) &sp40);
+                sp3C = *(s32*) &sobj->x3C;
+                GXSetTevColor(GX_TEVREG1, *(GXColor*) &sp3C);
+                GXSetTevColorIn(GX_TEVSTAGE0, GX_CC_C0, GX_CC_C1, GX_CC_TEXC,
+                                GX_CC_ZERO);
+                GXSetTevColorOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO,
+                                GX_CS_SCALE_1, 1U, GX_TEVPREV);
+                GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_ZERO, GX_CA_ZERO,
+                                GX_CA_ZERO, GX_CA_TEXA);
+                GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO,
+                                GX_CS_SCALE_1, 1U, GX_TEVPREV);
+                break;
+            case 4:
+                sp38 = *(s32*) &sobj->x3C;
+                GXSetTevColor(GX_TEVREG0, *(GXColor*) &sp38);
+                GXSetTevColorIn(GX_TEVSTAGE0, GX_CC_ZERO, GX_CC_TEXC, GX_CC_C0,
+                                GX_CC_ZERO);
+                GXSetTevColorOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO,
+                                GX_CS_SCALE_1, 1U, GX_TEVPREV);
+                GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_ZERO, GX_CA_ZERO,
+                                GX_CA_ZERO, GX_CA_A0);
+                GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO,
+                                GX_CS_SCALE_1, 1U, GX_TEVPREV);
+                break;
+            case 5:
+            case 6:
+            case 8:
+            case 9:
+            case 10:
+            case 14:
+                sp34 = *(s32*) &sobj->x3C;
+                GXSetTevColor(GX_TEVREG0, *(GXColor*) &sp34);
+                GXSetTevColorIn(GX_TEVSTAGE0, GX_CC_ZERO, GX_CC_TEXC, GX_CC_C0,
+                                GX_CC_ZERO);
+                GXSetTevColorOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO,
+                                GX_CS_SCALE_1, 1U, GX_TEVPREV);
+                GXSetTevAlphaIn(GX_TEVSTAGE0, GX_CA_ZERO, GX_CA_TEXA, GX_CA_A0,
+                                GX_CA_ZERO);
+                GXSetTevAlphaOp(GX_TEVSTAGE0, GX_TEV_ADD, GX_TB_ZERO,
+                                GX_CS_SCALE_1, 1U, GX_TEVPREV);
+                break;
+            }
+            GXSetBlendMode(GX_BM_BLEND, GX_BL_SRCALPHA, GX_BL_INVSRCALPHA,
+                           GX_LO_CLEAR);
+        }
+    }
+
+    temp_f28 = 0.5F * sinf(sobj->x18);
+    temp_f5 = 0.5F * -cosf(sobj->x18);
+    temp_f0 = (f32) temp_r30 * sobj->x20;
+    temp_f31 = temp_f5 * ((f32) temp_r31 * sobj->x1C);
+    temp_f27 = temp_f28 * ((f32) temp_r31 * sobj->x1C);
+    temp_f28_2 = temp_f28 * temp_f0;
+    temp_f26 = temp_f5 * temp_f0;
+    GXBegin(GX_QUADS, GX_VTXFMT0, 4U);
+    temp_f0 = var_f29 + temp_f26;
+    temp_f5 = var_f30 + temp_f28_2;
+    temp_f7 = var_f29 - temp_f26;
+    *(volatile f32*) 0xCC008000 = temp_f31 + temp_f5;
+    temp_f8 = var_f30 - temp_f28_2;
+    *(volatile f32*) 0xCC008000 = -(temp_f0 - temp_f27);
+    *(volatile f32*) 0xCC008000 = sobj->x24;
+    *(volatile f32*) 0xCC008000 = sobj->x28;
+    *(volatile f32*) 0xCC008000 = temp_f5 - temp_f31;
+    *(volatile f32*) 0xCC008000 = -(temp_f27 + temp_f0);
+    *(volatile f32*) 0xCC008000 = sobj->x2C;
+    *(volatile f32*) 0xCC008000 = sobj->x28;
+    *(volatile f32*) 0xCC008000 = temp_f8 - temp_f31;
+    *(volatile f32*) 0xCC008000 = -(temp_f27 + temp_f7);
+    *(volatile f32*) 0xCC008000 = sobj->x2C;
+    *(volatile f32*) 0xCC008000 = sobj->x30;
+    *(volatile f32*) 0xCC008000 = temp_f31 + temp_f8;
+    *(volatile f32*) 0xCC008000 = -(temp_f7 - temp_f27);
+    *(volatile f32*) 0xCC008000 = sobj->x24;
+    *(volatile f32*) 0xCC008000 = sobj->x30;
+    if (sobj->x40 & 4) {
+        GXSetZTexture(GX_ZT_DISABLE, GX_TF_Z24X8, 0U);
+    }
+    HSD_StateInvalidate(-1);
+    HSD_StateInitTev();
+    HSD_ClearVtxDesc();
+    HSD_StateSetZMode(1, 3, 1);
+}
 
 void HSD_SObjLib_803A54EC(HSD_GObj* gobj, int unused)
 {
