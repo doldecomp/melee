@@ -51,6 +51,8 @@ typedef struct {
     s32 x270[64];
     u8 x370[0x40];
     u8 x3B0;
+    u8 pad_3B1[0xAF];
+    s32 x460;
 } CardStateExt;
 
 #define CMD_QUEUE(base) ((HsdCmdEntry*) ((base) + 0x1210))
@@ -815,7 +817,62 @@ s32 fn_803ACFC0(CardState* state, s32 block_idx, s32 file_id, s32 seq_num,
     return result;
 }
 
-/// #fn_803AD16C
+s32 fn_803AD16C(CardState* arg0)
+{
+    CardStateExt* state = (CardStateExt*) arg0;
+    s32 file_id;
+    s32 phys;
+
+    if (state->x460 != fn_803AC7DC(arg0)) {
+        return -257;
+    }
+
+    for (phys = 0; phys <= state->x460; phys++) {
+        if (state->x170[phys] < -0x7FFF) {
+            return -257;
+        }
+    }
+
+    for (file_id = 0; file_id < 9; file_id++) {
+        s32 block_idx;
+        s32 blocks_before;
+        s32 file_blocks;
+
+        if (state->x4C[file_id] <= 0) {
+            continue;
+        }
+
+        if (file_id == 0) {
+            blocks_before = 0;
+        } else {
+            blocks_before = state->x4C[0] > 0
+                                ? fn_803AC634((struct hsd_803AC3E0_arg0_t*) arg0,
+                                              0)
+                                : 1;
+            for (block_idx = 1; block_idx < file_id; block_idx++) {
+                blocks_before +=
+                    fn_803AC634((struct hsd_803AC3E0_arg0_t*) arg0, block_idx);
+            }
+        }
+
+        file_blocks = fn_803AC634((struct hsd_803AC3E0_arg0_t*) arg0, file_id);
+        for (block_idx = 0; block_idx < file_blocks; block_idx++) {
+            s32 found = 0;
+
+            for (phys = 0; phys <= state->x460; phys++) {
+                if (state->x170[phys] == blocks_before + block_idx) {
+                    found++;
+                }
+            }
+
+            if (found == 0) {
+                return -259;
+            }
+        }
+    }
+
+    return 0;
+}
 
 /// @todo Currently 93.46% match - stwx vs stw+disp in rollback, reg swap in
 /// 2nd path
