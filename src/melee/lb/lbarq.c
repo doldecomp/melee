@@ -74,9 +74,7 @@ void lbArq_80014BD0(u32 source, void* dest, size_t length, lbArqCallback callbac
     intr = OSDisableInterrupts();
     rp = global->list[0];
     free_head = &global->list[0];
-    if (rp == NULL) {
-        __assert("lbarq.c", 0x67, "rp");
-    }
+    HSD_ASSERT(0x67, rp);
     *free_head = rp->next;
     rp->callback = callback;
     rp->callback_arg = callback_arg;

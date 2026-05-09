@@ -238,9 +238,6 @@ void un_80312904(void* arg0, s8 arg1)
 {
     TyListState* state = (TyListState*) un_804A2AC0;
     TyListRow* row = (TyListRow*) arg0;
-    HSD_JObj* jobj;
-    HSD_JObj* jobj2;
-    HSD_JObj* jobj3;
     f32 f30;
     f32 f29;
     f32 f31;
@@ -267,21 +264,10 @@ void un_80312904(void* arg0, s8 arg1)
         return;
     }
 
-    jobj = row->jobj;
-    if (jobj == NULL) {
-        __assert("jobj.h", 0x3E1, "jobj");
-    }
-    f30 = jobj->translate.x - un_804DDE28;
-    jobj2 = state->gobj->hsd_obj;
-    if (jobj2 == NULL) {
-        __assert("jobj.h", 0x3EE, "jobj");
-    }
-    f29 = (-row->x30 - jobj2->translate.y) - un_804DDE2C;
-    jobj3 = state->gobj->hsd_obj;
-    if (jobj3 == NULL) {
-        __assert("jobj.h", 0x3FB, "jobj");
-    }
-    f31 = jobj3->translate.z;
+    f30 = HSD_JObjGetTranslationX(row->jobj) - un_804DDE28;
+    f29 = (-row->x30 - HSD_JObjGetTranslationY(state->gobj->hsd_obj)) -
+          un_804DDE2C;
+    f31 = HSD_JObjGetTranslationZ(state->gobj->hsd_obj);
 
     if (arg1 != 0x63) {
         if ((s8) row->x24 == arg1) {
