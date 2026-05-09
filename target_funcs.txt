@@ -1,4 +1,4 @@
 File: src/sysdolphin/baselib/psdisp.c
 Funcs:
 - [x] particleSort
-- [ ] psDispParticles
+- [x] psDispParticles
