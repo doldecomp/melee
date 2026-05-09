@@ -243,7 +243,79 @@ u32 fn_803AC634(struct hsd_803AC3E0_arg0_t* file_desc, s32 file_idx)
     }
 }
 
-/// #fn_803AC6B8
+s32 fn_803AC6B8(struct hsd_803AC3E0_arg0_t* file_desc, s32 file_count)
+{
+    s32 add_blocks;
+    s32 blocks;
+    s32 ctr;
+    s32 file_size;
+    s32 file_size_2;
+    s32 i;
+    s32 positive;
+    s32 remaining;
+    int* file_size_p;
+    u32 sector_size;
+    u32 usable;
+
+    if (file_count >= 9) {
+        return 0;
+    }
+    if (file_count == 0) {
+        return 0;
+    }
+    file_size = file_desc->x4C[0];
+    blocks = 1;
+    positive = file_size > 0;
+    if (positive != 0) {
+        if (positive == 0) {
+            add_blocks = 0;
+        } else {
+            sector_size = file_desc->x8;
+            usable = sector_size - 0x20;
+            remaining = file_size - (s32) (usable -
+                                           (file_desc->x24 + 0x30) %
+                                               sector_size);
+            if (remaining <= 0) {
+                add_blocks = 1;
+            } else {
+                add_blocks = (u32) (remaining + sector_size - 0x21) / usable + 1;
+            }
+        }
+        blocks = add_blocks;
+    }
+    ctr = file_count - 1;
+    file_size_p = &file_desc->x4C[1];
+    i = 1;
+    if (file_count > 1) {
+        do {
+            file_size_2 = *file_size_p;
+            if (file_size_2 <= 0) {
+                add_blocks = 0;
+            } else if (i == 0) {
+                sector_size = file_desc->x8;
+                usable = sector_size - 0x20;
+                remaining = file_size - (s32) (usable -
+                                               (file_desc->x24 + 0x30) %
+                                                   sector_size);
+                if (remaining <= 0) {
+                    add_blocks = 1;
+                } else {
+                    add_blocks =
+                        (u32) (remaining + sector_size - 0x21) / usable + 1;
+                }
+            } else {
+                sector_size = file_desc->x8;
+                add_blocks = (u32) (file_size_2 + sector_size - 0x21) /
+                             (sector_size - 0x20);
+            }
+            blocks += add_blocks;
+            file_size_p++;
+            i++;
+            ctr--;
+        } while (ctr != 0);
+    }
+    return blocks;
+}
 
 /// #fn_803AC7DC
 

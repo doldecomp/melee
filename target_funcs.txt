@@ -3,7 +3,7 @@ Funcs:
 - [x] fn_803ACF30
 - [x] hsd_803AC558
 - [x] fn_803AC168
-- [ ] fn_803AC6B8
+- [x] fn_803AC6B8
 - [ ] hsd_803B2550
 - [ ] fn_803B26CC
 - [ ] fn_803ADE4C
