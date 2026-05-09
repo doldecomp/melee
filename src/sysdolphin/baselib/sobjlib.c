@@ -7,6 +7,7 @@
 #include "objalloc.h"
 #include "state.h"
 #include "tev.h"
+#include "tobj.h"
 
 #include "dolphin/gx.h"
 
@@ -17,7 +18,11 @@
 /* 004DB668 */ extern const s32 HSD_SObjLib_804DEA88;
 /* 004DB664 */ extern const s32 HSD_SObjLib_804DEA84;
 /* 004DB660 */ extern const s32 HSD_SObjLib_804DEA80;
+/* 004DEA78 */ extern const f64 HSD_SObjLib_804DEA78;
+/* 004DEA74 */ extern const f32 HSD_SObjLib_804DEA74;
+/* 004DEA70 */ extern const f32 HSD_SObjLib_804DEA70;
 /* 004D4540 */ extern u8 HSD_SObjLib_804D7960;
+/* 004D6388 */ extern char HSD_SObjLib_804D6388[];
 /* 004CDCC0 */ extern HSD_ObjAllocData HSD_SObjLib_804D10E0;
 /* 00408F90 */ extern s8 HSD_SObjLib_8040C3B0[10];
 typedef struct SObjLibData {
@@ -31,6 +36,12 @@ typedef struct SObjLibData {
     /* 0xA8 */ HSD_Chan xA8_chan1;
     /* 0xD8 */ char xD8_errmsg2[24];
 } SObjLibData;
+
+typedef struct SObjLibSObjDesc {
+    /* 0x00 */ HSD_ImageDesc* x0;
+    /* 0x04 */ HSD_TlutDesc* x4;
+    /* 0x08 */ HSD_ImageDesc* x8;
+} SObjLibSObjDesc;
 
 extern SObjLibData HSD_SObjLib_8040C3A0;
 /* 003B6244 */ extern Vec3 HSD_SObjLib_803B9664;
@@ -153,7 +164,87 @@ void HSD_SObjLib_803A4740(HSD_SObj* sobj)
     }
 }
 
-/// #HSD_SObjLib_803A477C
+HSD_SObj* HSD_SObjLib_803A477C(HSD_GObj* gobj, int desc_arg, int wrap_s,
+                               int wrap_t, int priority, int use_x8)
+{
+    s32 tlut_name;
+    f32 temp_f31;
+    u16 temp_r0;
+    HSD_ImageDesc* image;
+    HSD_TlutDesc* tlut;
+    HSD_ImageDesc* image2;
+    HSD_SObj* sobj;
+    SObjLibSObjDesc* desc = (SObjLibSObjDesc*) desc_arg;
+
+    if ((u8) use_x8 != 0) {
+        image = desc->x0;
+        tlut = desc->x4;
+        image2 = desc->x8;
+    } else {
+        image = desc->x0;
+        image2 = NULL;
+        tlut = desc->x4;
+    }
+
+    sobj = HSD_ObjAlloc(&HSD_SObjLib_804D10E0);
+    if (sobj == NULL) {
+        __assert((char*) HSD_SObjLib_8040C3B0, 0x11F, HSD_SObjLib_804D6388);
+    }
+
+    if (tlut != NULL) {
+        GXInitTlutObj(&sobj->x70_tlutobj, tlut->lut, tlut->fmt,
+                      tlut->n_entries);
+        tlut_name = tlut->tlut_name;
+        GXInitTexObjCI(&sobj->x50_texobj, image->image_ptr, image->width,
+                       image->height, (GXCITexFmt) image->format, wrap_s,
+                       wrap_t, (u8) image->mipmap, tlut_name);
+    } else {
+        GXInitTexObj(&sobj->x50_texobj, image->image_ptr, image->width,
+                     image->height, image->format, wrap_s, wrap_t,
+                     (u8) image->mipmap);
+    }
+
+    if ((u8) use_x8 != 0) {
+        GXInitTexObj(&sobj->x7C_texobj, image2->image_ptr, image2->width,
+                     image2->height, image2->format, wrap_s, wrap_t,
+                     (u8) image2->mipmap);
+    }
+
+    sobj->x0 = NULL;
+    sobj->prev = NULL;
+    sobj->next = NULL;
+    sobj->x14 = HSD_SObjLib_804DEA70;
+    sobj->x10 = HSD_SObjLib_804DEA70;
+    sobj->x18 = HSD_SObjLib_804DEA70;
+    sobj->x20 = HSD_SObjLib_804DEA74;
+    sobj->x1C = HSD_SObjLib_804DEA74;
+    sobj->x3F = 0xFF;
+    sobj->x3E = 0xFF;
+    sobj->x3D = 0xFF;
+    sobj->x3C = 0xFF;
+    sobj->x3B = 0xFF;
+    sobj->x3A = 0xFF;
+    sobj->x39 = 0xFF;
+    sobj->x38 = 0xFF;
+    sobj->x40 = 0;
+    sobj->x48 = 0;
+    sobj->x4C_callback = NULL;
+    sobj->gobj = gobj;
+    if ((u8) use_x8 != 0) {
+        sobj->x40 |= 4;
+    }
+    sobj->x34 = image->width;
+    sobj->x36 = image->height;
+    temp_f31 = HSD_SObjLib_804DEA74 / (f32) GXGetTexObjWidth(&sobj->x50_texobj);
+    temp_r0 = GXGetTexObjHeight(&sobj->x50_texobj);
+    sobj->x24 = HSD_SObjLib_804DEA70;
+    sobj->x28 = HSD_SObjLib_804DEA70;
+    sobj->x2C = (f32) sobj->x34 * temp_f31;
+    sobj->x30 = (f32) sobj->x36 *
+                (HSD_SObjLib_804DEA74 / (f32) temp_r0);
+    HSD_SObjLib_803A44D4(gobj, sobj, (u8) priority);
+    return sobj;
+}
 
 void HSD_SObjLib_803A49E0(HSD_GObj* gobj, int unused)
 {
