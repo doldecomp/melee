@@ -174,7 +174,39 @@ void hsd_803AC3E0(struct hsd_803AC3E0_arg0_t* file_desc, int file_idx,
     file_desc->x70[file_idx] = file_flags;
 }
 
-/// #fn_803AC3F8
+void fn_803AC3F8(void* arg0, u8* data, s32 file_idx)
+{
+    struct hsd_803AC3E0_arg0_t* file_desc = arg0;
+    s32 i;
+    s32 start;
+
+    if (file_idx + 1 >= 9 || file_desc->x4C[file_idx + 1] == 0) {
+        start = file_idx - 2;
+    } else {
+        start = file_idx - 1;
+    }
+    if (start < 0) {
+        start = 0;
+    }
+
+    for (i = 0; i < 3 && start + i < 9; i++) {
+        s32 idx = start + i;
+        data[0] = idx;
+        data[1] = ((u32) file_desc->x4C[idx] >> 0x10 & 0x3F) |
+                  ((file_desc->x28[idx] << 6) & 0xC0);
+        data[2] = (u32) file_desc->x4C[idx] >> 8;
+        data[3] = file_desc->x4C[idx];
+        data += 4;
+    }
+
+    for (; i < 3; i++) {
+        data[0] = 0;
+        data[1] = 0;
+        data[2] = 0;
+        data[3] = 0;
+        data += 4;
+    }
+}
 
 void hsd_803AC558(struct hsd_803AC3E0_arg0_t* file_desc, u8* data)
 {
