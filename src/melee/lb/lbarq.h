@@ -30,7 +30,7 @@ extern lbArqGlobal lbArq_804316C0;
 
 /* 014ABC */ u32 lbArq_80014ABC(lbArqNode* arg0);
 /* 014AC4 */ void lbArq_80014AC4(lbArqHandle* handle);
-/* 014BD0 */ void lbArq_80014BD0(u32, void*, size_t, UNK_T, UNK_T);
+/* 014BD0 */ void lbArq_80014BD0(u32, void*, size_t, lbArqCallback, void*);
 /* 014D2C */ void lbArq_80014D2C(void);
 
 #endif

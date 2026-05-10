@@ -247,7 +247,40 @@ static void HSD_SynthSFXGroupDataReaddressCallback(void* result, int length,
 
 u8 data_pad_2[0x84] = { 0 };
 
-/// #HSD_SynthSFXGroupDataReaddress
+void HSD_SynthSFXGroupDataReaddress(AXVPB* arg0, void* callback)
+{
+    u8* q;
+    int i;
+    int delta;
+    u8* p;
+
+    p = (u8*) arg0 + 0x18;
+    sfxGroupDataReaddressCounter += 1;
+    HSD_DevComRequest(0, (uintptr_t) arg0->callback, (uintptr_t) callback,
+                      arg0->userContext, 0x1B, 0,
+                      (HSD_DevComCallback) HSD_SynthSFXGroupDataReaddressCallback,
+                      NULL);
+    i = 0;
+    delta = ((u8*) callback - (u8*) arg0->callback) * 2;
+    while (i < arg0->priority) {
+        int count = *(int*) (p + 8);
+        q = p;
+        if (count > 0) {
+            do {
+                if (*(u16*) (q + 0x10) != 0) {
+                    *(u32*) (q + 0x14) += delta;
+                }
+                *(u32*) (q + 0x18) += delta;
+                *(u32*) (q + 0x1C) += delta;
+                q += 0x40;
+            } while (--count != 0);
+        }
+        p += (count << 6);
+        p += 0x10;
+        i++;
+    }
+    arg0->callback = (void (*)(void*)) callback;
+}
 
 void HSD_SynthSFXBankDeflag(int bank_id)
 {
