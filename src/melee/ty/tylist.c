@@ -263,19 +263,10 @@ void un_80312904(TyListArg* arg, s8 arg1)
         }
         if (show != 0) {
             jobj = arg->xC;
-            if (jobj == NULL) {
-                __assert(&un_804D5A78, 0x3E1, &un_804D5A80);
-            }
+            pos_x = HSD_JObjGetTranslationX(jobj) - 6.5f;
             parent_jobj = GET_JOBJ(state->gobj);
-            pos_x = jobj->translate.x - 6.5f;
-            if (parent_jobj == NULL) {
-                __assert(&un_804D5A78, 0x3EE, &un_804D5A80);
-            }
-            pos_y = (-arg->x30 - parent_jobj->translate.y) - 0.41f;
-            if (parent_jobj == NULL) {
-                __assert(&un_804D5A78, 0x3FB, &un_804D5A80);
-            }
-            pos_z = parent_jobj->translate.z;
+            pos_y = (-arg->x30 - HSD_JObjGetTranslationY(parent_jobj)) - 0.41f;
+            pos_z = HSD_JObjGetTranslationZ(parent_jobj);
             if (arg1 != 0x63) {
                 if (arg->x24 == arg1) {
                     arg->x18->text_color = lb_804D3764;
@@ -340,23 +331,7 @@ void un_80312BAC(TyListState* state, s8 arg1)
     jobj = state->jobj;
     entry = state->x270;
     if (jobj != NULL) {
-        float pos = entry->x30;
-        if (jobj == NULL) {
-            __assert(&un_804D5A78, 0x3B3, &un_804D5A80);
-        }
-        jobj->translate.y = pos;
-        if ((jobj->flags & 0x02000000) == 0) {
-            if (jobj != NULL) {
-                u32 flags = jobj->flags;
-                s32 skip = 0;
-                if ((flags & 0x800000) == 0 && (flags & 0x40)) {
-                    skip = 1;
-                }
-                if (skip == 0) {
-                    HSD_JObjSetMtxDirtySub(jobj);
-                }
-            }
-        }
+        HSD_JObjSetTranslateY(jobj, entry->x30);
     }
 
     for (i = 0; i < state->entryCount; i++) {
@@ -368,23 +343,7 @@ void un_80312BAC(TyListState* state, s8 arg1)
         {
             jobj = state->jobj;
             if (jobj != NULL) {
-                float pos = entry->x30;
-                if (jobj == NULL) {
-                    __assert(&un_804D5A78, 0x3B3, &un_804D5A80);
-                }
-                jobj->translate.y = pos;
-                if ((jobj->flags & 0x02000000) == 0) {
-                    if (jobj != NULL) {
-                        u32 flags = jobj->flags;
-                        s32 skip = 0;
-                        if ((flags & 0x800000) == 0 && (flags & 0x40)) {
-                            skip = 1;
-                        }
-                        if (skip == 0) {
-                            HSD_JObjSetMtxDirtySub(jobj);
-                        }
-                    }
-                }
+                HSD_JObjSetTranslateY(jobj, entry->x30);
             }
         }
         entry = entry->x4;
@@ -434,60 +393,12 @@ loop:
     if (i == 2) {
         goto next;
     }
-    {
-        float pos = arg->x30;
-        if (jobj == NULL) {
-            __assert(&un_804D5A78, 0x3B3, &un_804D5A80);
-        }
-        jobj->translate.y = pos;
-    }
-
-    if ((jobj->flags & 0x02000000) == 0) {
-        if (jobj == NULL) {
-            goto skip_dirty;
-        }
-        if (jobj == NULL) {
-            __assert(&un_804D5A78, 0x234, &un_804D5A80);
-        }
-        {
-            u32 flags = jobj->flags;
-            s32 skip = 0;
-            if ((flags & 0x800000) == 0 && (flags & 0x40)) {
-                skip = 1;
-            }
-            if (skip == 0) {
-                HSD_JObjSetMtxDirtySub(jobj);
-            }
-        }
-    }
-skip_dirty:
+    HSD_JObjSetTranslateY(jobj, arg->x30);
 
     if (arg->idx == un_GetTrophyTotal() - 1) {
-        float pos;
         jobj = ((TyListState*) data)->jobj;
-        pos = arg->x30;
-        if (jobj == NULL) {
-            __assert(&un_804D5A78, 0x3B3, &un_804D5A80);
-        }
-        jobj->translate.y = pos;
-
-        if ((jobj->flags & 0x02000000) == 0) {
-            if (jobj == NULL) {
-                goto next;
-            }
-            if (jobj == NULL) {
-                __assert(&un_804D5A78, 0x234, &un_804D5A80);
-            }
-            {
-                u32 flags = jobj->flags;
-                s32 skip = 0;
-                if ((flags & 0x800000) == 0 && (flags & 0x40)) {
-                    skip = 1;
-                }
-                if (skip == 0) {
-                    HSD_JObjSetMtxDirtySub(jobj);
-                }
-            }
+        if (jobj != NULL) {
+            HSD_JObjSetTranslateY(jobj, arg->x30);
         }
     }
 
@@ -522,7 +433,7 @@ s8 un_8031305C(TyListState* state, s8 arg2)
             {
                 un_80312E88(entry, delta);
             }
-            entry = (TyListArg*) ((u8*) entry + sizeof(TyListArg));
+            entry++;
         }
 
         state->x29F--;
@@ -655,83 +566,9 @@ HSD_JObj* un_80313508(void* parent, void* symbol, float x, float y, float z)
     jobj = HSD_JObjLoadJoint(joint);
 
     if (x != un_804DDE48 || y != un_804DDE48 || z != un_804DDE48) {
-        // Set X
-        if (jobj == NULL) {
-            __assert(&un_804D5A78, 0x3A4, &un_804D5A80);
-        }
-        jobj->translate.x = x;
-
-        if ((jobj->flags & 0x02000000) == 0) {
-            if (jobj == NULL) {
-                goto skip_x;
-            }
-            if (jobj == NULL) {
-                __assert(&un_804D5A78, 0x234, &un_804D5A80);
-            }
-            {
-                u32 flags = jobj->flags;
-                s32 skip = 0;
-                if ((flags & 0x800000) == 0 && (flags & 0x40)) {
-                    skip = 1;
-                }
-                if (skip == 0) {
-                    HSD_JObjSetMtxDirtySub(jobj);
-                }
-            }
-        }
-    skip_x:
-
-        // Set Y
-        if (jobj == NULL) {
-            __assert(&un_804D5A78, 0x3B3, &un_804D5A80);
-        }
-        jobj->translate.y = y;
-
-        if ((jobj->flags & 0x02000000) == 0) {
-            if (jobj == NULL) {
-                goto skip_y;
-            }
-            if (jobj == NULL) {
-                __assert(&un_804D5A78, 0x234, &un_804D5A80);
-            }
-            {
-                u32 flags = jobj->flags;
-                s32 skip = 0;
-                if ((flags & 0x800000) == 0 && (flags & 0x40)) {
-                    skip = 1;
-                }
-                if (skip == 0) {
-                    HSD_JObjSetMtxDirtySub(jobj);
-                }
-            }
-        }
-    skip_y:
-
-        // Set Z
-        if (jobj == NULL) {
-            __assert(&un_804D5A78, 0x3C2, &un_804D5A80);
-        }
-        jobj->translate.z = z;
-
-        if ((jobj->flags & 0x02000000) == 0) {
-            if (jobj == NULL) {
-                goto skip_z;
-            }
-            if (jobj == NULL) {
-                __assert(&un_804D5A78, 0x234, &un_804D5A80);
-            }
-            {
-                u32 flags = jobj->flags;
-                s32 skip = 0;
-                if ((flags & 0x800000) == 0 && (flags & 0x40)) {
-                    skip = 1;
-                }
-                if (skip == 0) {
-                    HSD_JObjSetMtxDirtySub(jobj);
-                }
-            }
-        }
-    skip_z:;
+        HSD_JObjSetTranslateX(jobj, x);
+        HSD_JObjSetTranslateY(jobj, y);
+        HSD_JObjSetTranslateZ(jobj, z);
     }
 
     if (parent != NULL) {
@@ -798,9 +635,7 @@ void un_80313774(void)
     state->gobj = (HSD_GObj*) un_80313508(NULL, un_803FE880 + 0xAC, 0.0f, 0.0f,
                                           0.0f);
     root_jobj = (HSD_JObj*) state->gobj;
-    if (root_jobj == NULL) {
-        __assert(&un_804D5A78, 0x3E1, &un_804D5A80);
-    }
+    HSD_ASSERTMSG(0x3E1, root_jobj != NULL, "jobj");
 
     step = 5.11f - root_jobj->translate.y;
     pos = -step;
@@ -847,7 +682,7 @@ void un_80313774(void)
             state->x278 = entry;
             break;
         }
-        entry = (TyListArg*) ((u8*) entry + sizeof(TyListArg));
+        entry++;
     }
 
     un_80312BAC(state, state->x2B8);
@@ -1037,7 +872,7 @@ void fn_80313BD8(HSD_GObj* gobj)
                         }
                     }
                     un_80312904(entry, state->x2B8);
-                    entry = (TyListArg*) ((u8*) entry + sizeof(TyListArg));
+                    entry++;
                 }
                 scroll[0xD] = scroll[0xC];
                 return;
@@ -1062,7 +897,7 @@ void fn_80313BD8(HSD_GObj* gobj)
                 entry = state->entries;
                 for (i = 0; i < state->entryCount; i++) {
                     un_80312904(entry, state->entryCount);
-                    entry = (TyListArg*) ((u8*) entry + sizeof(TyListArg));
+                    entry++;
                 }
                 HSD_JObjSetFlagsAll(state->x288, 0x10);
                 if (move_y > 0.0f) {
