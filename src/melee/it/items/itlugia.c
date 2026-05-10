@@ -67,8 +67,6 @@ inline float my_sqrtf_accurate(float x)
     return x;
 }
 
-#include <math_ppc.h>
-
 void it_2725_Logic17_Spawned(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
@@ -552,6 +550,8 @@ void it_802D24A0(Item_GObj* gobj)
         break;
     case 0xCA:
         multiplier = attrs[3];
+        break;
+    default:
         break;
     }
 

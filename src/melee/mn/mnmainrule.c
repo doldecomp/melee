@@ -8,7 +8,6 @@
 #include "gm/gm_18A5.h"
 #include "gm/gm_1A36.h"
 #include "gm/gm_1A3F.h"
-#include "mn/types.h"
 
 #include <sysdolphin/baselib/debug.h>
 #include <sysdolphin/baselib/gobj.h>
@@ -467,9 +466,9 @@ void mn_8022FEC8(HSD_GObj* arg0, HSD_JObj* arg1, u8 arg2, u8 arg3)
     HSD_JObjAnimAll(arg1);
 }
 
-void mn_80230198(HSD_GObj* arg0, HSD_JObj* jobj, u8 mode)
+void mn_80230198(HSD_GObj* gobj, HSD_JObj* jobj, u8 mode)
 {
-    AnimLoopSettings* range;
+    AnimLoopSettings* settings;
     f32 frame;
     int i;
     PAD_STACK(8);
@@ -480,20 +479,20 @@ void mn_80230198(HSD_GObj* arg0, HSD_JObj* jobj, u8 mode)
     case 4:
         frame = mn_8022F298(jobj);
         for (i = 0; i < 5; i++) {
-            range = &mn_803EC770[i];
+            settings = &mn_803EC770[i];
             if (mn_803EC770[i].start_frame <= frame &&
                 frame <= mn_803EC770[i].end_frame)
             {
                 break;
             }
-            range = &mn_803EC734[i];
+            settings = &mn_803EC734[i];
             if (mn_803EC734[i].start_frame <= frame &&
                 frame <= mn_803EC734[i].end_frame)
             {
                 break;
             }
         }
-        mn_8022ED6C(jobj, range);
+        mn_8022ED6C(jobj, settings);
         break;
     case 1:
     case 3:
@@ -720,8 +719,6 @@ void mn_802308F0(HSD_GObj* gobj, int arg1, int arg2)
         break;
     }
 }
-
-extern s32 mn_804D6BD4;
 
 void fn_802309F0(HSD_GObj* arg0)
 {

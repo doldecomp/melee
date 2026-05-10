@@ -4,10 +4,6 @@
 #include <placeholder.h>
 
 #include "baselib/forward.h"
-#include "gr/forward.h"
-
-#include "it/inlines.h"
-
 #include "lb/forward.h"
 #include "mp/forward.h"
 
