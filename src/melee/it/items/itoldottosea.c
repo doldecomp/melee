@@ -47,9 +47,7 @@ void it_802E2470(Item_GObj* gobj)
 
     if (gm_8016AE80() == -1) {
         ip->xDD4_itemVar.oldottosea.x2C = 0;
-    } else if (it_8026D324(It_Kind_Freeze) &&
-               HSD_Randi(attr->x28) == 0)
-    {
+    } else if (it_8026D324(It_Kind_Freeze) && HSD_Randi(attr->x28) == 0) {
         ip->xDD4_itemVar.oldottosea.x2C = 1;
     } else {
         ip->xDD4_itemVar.oldottosea.x2C = 0;
@@ -147,8 +145,8 @@ void it_802E27B4(Item_GObj* gobj)
     if (ip->xDD4_itemVar.oldottosea.x2C != 0) {
         pos = ip->pos;
         pos.x += attr->x14 * ip->facing_dir;
-        ip->xDD4_itemVar.oldottosea.x20 = (s32)
-            it_8028EB88(gobj, &pos, ip->facing_dir, attr->x24);
+        ip->xDD4_itemVar.oldottosea.x20 =
+            (s32) it_8028EB88(gobj, &pos, ip->facing_dir, attr->x24);
         if ((u32) ip->xDD4_itemVar.oldottosea.x20 != 0) {
             it_8028EC98((Item_GObj*) ip->xDD4_itemVar.oldottosea.x20,
                         ip->x40_vel.x * attr->x1C);

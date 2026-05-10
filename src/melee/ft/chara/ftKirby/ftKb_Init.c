@@ -27,6 +27,7 @@
 #include "ft/ft_0881.h"
 #include "ft/ft_0892.h"
 #include "ft/ft_0C31.h"
+#include "ft/ftanim.h"
 #include "ft/ftcamera.h"
 #include "ft/ftcliffcommon.h"
 #include "ft/ftcolanim.h"
@@ -34,7 +35,6 @@
 #include "ft/ftcommon.h"
 #include "ft/ftdata.h"
 #include "ft/ftdynamics.h"
-#include "ft/ftanim.h"
 #include "ft/ftparts.h"
 #include "ft/ftwalkcommon.h"
 #include "ft/inlines.h"
@@ -3305,8 +3305,7 @@ void ftKb_UnkMtxFunc0(Fighter_GObj* gobj, int arg1, Mtx mtx)
         jobj->flags |=
             JOBJ_USER_DEF_MTX | JOBJ_MTX_INDEP_PARENT | JOBJ_MTX_INDEP_SRT;
         HSD_JObjSetMtxDirty(jobj);
-        HSD_JObjDispAll(fp->fv.kb.hat.jobj, mtx,
-                        HSD_GObj_80390EB8(arg1), 0);
+        HSD_JObjDispAll(fp->fv.kb.hat.jobj, mtx, HSD_GObj_80390EB8(arg1), 0);
     }
     PAD_STACK(8);
 }
@@ -3351,8 +3350,7 @@ void ftKb_SpecialN_800EF35C(Fighter_GObj* gobj, int arg1, u8* arg2)
         HSD_Joint* joint;
         HSD_MatAnimJoint* matanim;
     }* costume_data = (void*) ftKb_Init_803C9FC8[arg1];
-    HSD_MatAnimJoint* matanimjoint =
-        costume_data[fp->x619_costume_id].matanim;
+    HSD_MatAnimJoint* matanimjoint = costume_data[fp->x619_costume_id].matanim;
     int idx = 0;
     int i = 0;
     while (matanimjoint != NULL) {
@@ -3381,8 +3379,7 @@ void ftKb_UnkIntBoolFunc0(Fighter* fp, int arg1, bool arg2)
     if (fp->fv.kb.hat.x14.data != NULL) {
         if (arg2) {
             if (fp->fv.kb.hat.jobj != NULL) {
-                ftParts_80074CA0(&fp->fv.kb.hat.x24, arg1,
-                                 &fp->fv.kb.hat.x14);
+                ftParts_80074CA0(&fp->fv.kb.hat.x24, arg1, &fp->fv.kb.hat.x14);
                 return;
             }
             {
@@ -3407,17 +3404,14 @@ void ftKb_UnkIntBoolFunc0(Fighter* fp, int arg1, bool arg2)
                 }
             } else {
                 ftParts_80074D7C(&fp->x5AC, arg1, &fp->dobj_list);
-                ftParts_80074CA0(&fp->fv.kb.hat.x24, arg1,
-                                 &fp->fv.kb.hat.x14);
+                ftParts_80074CA0(&fp->fv.kb.hat.x24, arg1, &fp->fv.kb.hat.x14);
             }
         } else {
             if (fp->fv.kb.hat.jobj == NULL && arg1 == 2) {
-                ftParts_80074D7C(&fp->fv.kb.hat.x24, arg1,
-                                 &fp->fv.kb.hat.x1C);
+                ftParts_80074D7C(&fp->fv.kb.hat.x24, arg1, &fp->fv.kb.hat.x1C);
                 return;
             }
-            ftParts_80074D7C(&fp->fv.kb.hat.x24, arg1,
-                             &fp->fv.kb.hat.x14);
+            ftParts_80074D7C(&fp->fv.kb.hat.x24, arg1, &fp->fv.kb.hat.x14);
         }
     }
 }
@@ -4094,8 +4088,7 @@ void ftKb_SpecialN_800F14B4(Fighter_GObj* gobj)
     fp->fv.kb.hat.x24.xC[4] = temp;
     fp->x5AC.xC[4] = temp;
     ftParts_80074D7C(&fp->fv.kb.hat.x24, 4, &fp->fv.kb.hat.x14);
-    ftKb_SpecialN_800F1420(gobj,
-                           (u32*) ((u8*) new_var->hat_dynamics[4] + 4));
+    ftKb_SpecialN_800F1420(gobj, (u32*) ((u8*) new_var->hat_dynamics[4] + 4));
     *(u32*) &fp->x610_color_rgba[1] =
         *(u32*) ((u8*) new_var->hat_dynamics[4] + 8);
     Fighter_UpdateModelScale(gobj);

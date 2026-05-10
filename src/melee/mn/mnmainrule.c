@@ -48,7 +48,7 @@ extern StaticModelDesc MenMainCursorSs_Top;
 /// #mn_8022FEC8
 
 AnimLoopSettings mn_803EC734[5] = {
-    { 0.0F, 3.0F, -0.1F },  { 20.0F, 23.0F, -0.1F }, { 40.0F, 43.0F, -0.1F },
+    { 0.0F, 3.0F, -0.1F },   { 20.0F, 23.0F, -0.1F }, { 40.0F, 43.0F, -0.1F },
     { 60.0F, 63.0F, -0.1F }, { 80.0F, 83.0F, -0.1F },
 };
 
@@ -75,12 +75,14 @@ void mn_80230198(UNK_T arg0, HSD_JObj* jobj, u8 mode)
         for (i = 0; i < 5; i++) {
             range = &mn_803EC770[i];
             if (mn_803EC770[i].start_frame <= frame &&
-                frame <= mn_803EC770[i].end_frame) {
+                frame <= mn_803EC770[i].end_frame)
+            {
                 break;
             }
             range = &mn_803EC734[i];
             if (mn_803EC734[i].start_frame <= frame &&
-                frame <= mn_803EC734[i].end_frame) {
+                frame <= mn_803EC734[i].end_frame)
+            {
                 break;
             }
         }
@@ -154,8 +156,7 @@ void mn_802308F0(HSD_GObj* gobj, int arg1, int arg2)
         }
         break;
     case 0:
-        if (arg1 != 0 ||
-            (arg2 != 0 && (kind == 0 || kind == 2 || kind == 4)))
+        if (arg1 != 0 || (arg2 != 0 && (kind == 0 || kind == 2 || kind == 4)))
         {
             mn_802307F8((struct mn_802307F8_t*) data, kind,
                         mn_804A04F0.confirmed_selection);

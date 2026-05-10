@@ -498,7 +498,7 @@ void* grHomeRun_8021EC58(int arg)
     text->default_fitting = 1;
     text->x4C = 1;
 
-    HSD_SisLib_803A6B98(text, 0.0F, -29.0F, "%d", (s32)(f32) arg);
+    HSD_SisLib_803A6B98(text, 0.0F, -29.0F, "%d", (s32) (f32) arg);
 
     return text;
 }

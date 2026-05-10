@@ -8,8 +8,8 @@
 #include "it/item.h"
 #include "lb/lb_00B0.h"
 
-#include <MSL/math.h>
 #include <baselib/random.h>
+#include <MSL/math.h>
 
 /* 2EC870 */ static void it_802EC870(Item_GObj*, int);
 

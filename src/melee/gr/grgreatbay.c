@@ -314,7 +314,8 @@ void grGreatBay_801F4694(Ground_GObj* gobj)
     scale.z *= factor;
     HSD_JObjSetScale(jobj, &scale);
 
-    HSD_JObjSetTranslateX(jobj, grGb_804D69E0.x0->kame_x + grGb_804D69E0.x0->kame_x_offset_init);
+    HSD_JObjSetTranslateX(jobj, grGb_804D69E0.x0->kame_x +
+                                    grGb_804D69E0.x0->kame_x_offset_init);
     HSD_JObjSetTranslateY(jobj, grGb_804D69E0.x0->kame_y);
 
     gp->gv.greatbay.xCC = HSD_JObjGetTranslationY(Ground_801C3FA4(gobj, 2));
@@ -376,7 +377,8 @@ void grGreatBay_801F499C(Ground_GObj* gobj)
         if (grAnime_801C83D0(gobj, 0, 7)) {
             gp->gv.greatbay.xC4 = 3;
             gp->gv.greatbay.xC6 =
-                rand_range(grGb_804D69E0.x0->kame_rebirth_frame_b, grGb_804D69E0.x0->kame_rebirth_frame_a);
+                rand_range(grGb_804D69E0.x0->kame_rebirth_frame_b,
+                           grGb_804D69E0.x0->kame_rebirth_frame_a);
             grAnime_801C7A04(gobj, 0, 7, 0.0f);
             HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
             if (gp->gv.greatbay.xC8 != NULL) {
@@ -413,7 +415,8 @@ void grGreatBay_801F499C(Ground_GObj* gobj)
         if (grAnime_801C83D0(gobj, 0, 7)) {
             gp->gv.greatbay.xC4 = 0;
             gp->gv.greatbay.xC6 =
-                rand_range(grGb_804D69E0.x0->kame_wait_frame_b, grGb_804D69E0.x0->kame_wait_frame_a);
+                rand_range(grGb_804D69E0.x0->kame_wait_frame_b,
+                           grGb_804D69E0.x0->kame_wait_frame_a);
             grAnime_801C8138(gobj, gp->map_id, 0);
             mpLib_80057FDC(2);
             mpLib_80057FDC(3);
@@ -438,8 +441,8 @@ void grGreatBay_801F499C(Ground_GObj* gobj)
                 grGreatBay_801F62F8(gp->gv.greatbay.xC5.b0123456);
             switch (gp->gv.greatbay.xC5.b0123456) {
             case 1: {
-                s32 max_x =
-                    rand_range(grGb_804D69E0.x0->kame_x_fb_offset_b, grGb_804D69E0.x0->kame_x_fb_offset_a);
+                s32 max_x = rand_range(grGb_804D69E0.x0->kame_x_fb_offset_b,
+                                       grGb_804D69E0.x0->kame_x_fb_offset_a);
                 HSD_JObjSetTranslateX(jobj, grGb_804D69E0.x0->kame_x + max_x);
                 mpLib_80057BC0(2);
                 mpLib_80057BC0(3);
@@ -451,8 +454,8 @@ void grGreatBay_801F499C(Ground_GObj* gobj)
                 HSD_ASSERT(652, 0);
                 break;
             case 0: {
-                s32 max_x =
-                    rand_range(grGb_804D69E0.x0->kame_x_lr_offset_b, grGb_804D69E0.x0->kame_x_lr_offset_a);
+                s32 max_x = rand_range(grGb_804D69E0.x0->kame_x_lr_offset_b,
+                                       grGb_804D69E0.x0->kame_x_lr_offset_a);
                 HSD_JObjSetTranslateX(jobj, grGb_804D69E0.x0->kame_x + max_x);
                 mpJointListAdd(2);
                 mpJointListAdd(3);
@@ -461,8 +464,8 @@ void grGreatBay_801F499C(Ground_GObj* gobj)
                 break;
             }
             case 3: {
-                s32 max_x =
-                    rand_range(grGb_804D69E0.x0->kame_x_fb_offset_b, grGb_804D69E0.x0->kame_x_fb_offset_a);
+                s32 max_x = rand_range(grGb_804D69E0.x0->kame_x_fb_offset_b,
+                                       grGb_804D69E0.x0->kame_x_fb_offset_a);
                 HSD_JObjSetTranslateX(jobj, grGb_804D69E0.x0->kame_x + max_x);
                 mpLib_80057BC0(2);
                 mpLib_80057BC0(3);
@@ -745,7 +748,8 @@ void grGreatBay_801F5AF8(Ground_GObj* gobj)
                 }
             };
             gp->gv.greatbay2.x10 =
-                rand_range(grGb_804D69E0.x0->moon_fall_wait_b, grGb_804D69E0.x0->moon_fall_wait_a);
+                rand_range(grGb_804D69E0.x0->moon_fall_wait_b,
+                           grGb_804D69E0.x0->moon_fall_wait_a);
         }
     }
 }
@@ -837,7 +841,8 @@ void grGreatBay_801F60C4(Ground* gp, s32 arg1, CollData* arg2, s32 arg3,
     if (temp_r0 == 1 || temp_r0 == 3) {
         HSD_JObj* jobj;
         if (arg4 == 1) {
-            damage = (s32) ((f32) damage * grGb_804D69E0.x0->floatfloor_landing_rate);
+            damage = (s32) ((f32) damage *
+                            grGb_804D69E0.x0->floatfloor_landing_rate);
         }
         jobj = gp->gv.greatbay3.jobj;
         if (jobj != NULL) {
@@ -848,11 +853,15 @@ void grGreatBay_801F60C4(Ground* gp, s32 arg1, CollData* arg2, s32 arg3,
             if (t > 1.0f) {
                 t = 1.0f;
             }
-            rot_amount = t * (0.017453292f * (damage * grGb_804D69E0.x0->floatfloor_slant_mul +
-                                              grGb_804D69E0.x0->floatfloor_slant_add));
+            rot_amount =
+                t * (0.017453292f *
+                     (damage * grGb_804D69E0.x0->floatfloor_slant_mul +
+                      grGb_804D69E0.x0->floatfloor_slant_add));
             disp_amount =
-                t * (damage * grGb_804D69E0.x0->floatfloor_slide_mul + grGb_804D69E0.x0->floatfloor_slide_add);
-            y_amount = damage * grGb_804D69E0.x0->floatfloor_down_mul + grGb_804D69E0.x0->floatfloor_down_add;
+                t * (damage * grGb_804D69E0.x0->floatfloor_slide_mul +
+                     grGb_804D69E0.x0->floatfloor_slide_add);
+            y_amount = damage * grGb_804D69E0.x0->floatfloor_down_mul +
+                       grGb_804D69E0.x0->floatfloor_down_add;
             if (dx < 0.0f) {
                 gp->gv.greatbay3.translation.z += rot_amount;
                 {
@@ -906,7 +915,8 @@ s32 grGreatBay_801F62F8(s32 current)
     do {
         current += 0;
         attr = grGb_804D69E0.x0;
-        total = attr->kame_dir_prob[0] + attr->kame_dir_prob[1] + attr->kame_dir_prob[3] + attr->kame_dir_prob[2];
+        total = attr->kame_dir_prob[0] + attr->kame_dir_prob[1] +
+                attr->kame_dir_prob[3] + attr->kame_dir_prob[2];
         rand = ZRANDI(total);
 
         attr = grGb_804D69E0.x0;
@@ -932,24 +942,24 @@ done:
     return result;
 }
 
-const Vec3 grGb_803B81C8 = {0.99f,35.72f,0.0f};
+const Vec3 grGb_803B81C8 = { 0.99f, 35.72f, 0.0f };
 const SpawnItem grGb_803B81D4 = {
-    NULL, // 0
-    NULL, // 4
-    -1, // 8
-    -1, // C
-    1, // 10
-    {0.0f,0.0f,0.0f}, // 14
-    {0.0f,0.0f,0.0f}, // 20
-    {0.0f,0.0f,0.0f}, // 2C
-    -1.0f, // 38
-    0, // 3C
-    0, // 40
-    0, // 44
-    0x80, // 45
-    0, // 46
-    0, // 47
-    0, // 48
+    NULL,                 // 0
+    NULL,                 // 4
+    -1,                   // 8
+    -1,                   // C
+    1,                    // 10
+    { 0.0f, 0.0f, 0.0f }, // 14
+    { 0.0f, 0.0f, 0.0f }, // 20
+    { 0.0f, 0.0f, 0.0f }, // 2C
+    -1.0f,                // 38
+    0,                    // 3C
+    0,                    // 40
+    0,                    // 44
+    0x80,                 // 45
+    0,                    // 46
+    0,                    // 47
+    0,                    // 48
 };
 
 bool grGreatBay_801F63F4(Ground_GObj* gobj)

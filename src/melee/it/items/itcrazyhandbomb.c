@@ -11,8 +11,8 @@
 
 #include <baselib/jobj.h>
 
-void it_802F0F6C(Fighter_GObj* owner, Vec3* prev_pos, Vec3* pos,
-                  ItemKind kind, f32 facing_dir)
+void it_802F0F6C(Fighter_GObj* owner, Vec3* prev_pos, Vec3* pos, ItemKind kind,
+                 f32 facing_dir)
 {
     SpawnItem spawnitem;
     Item_GObj* gobj;

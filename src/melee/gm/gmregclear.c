@@ -1089,8 +1089,7 @@ s32 fn_8017F09C(void)
     if (p->x24C8.x4_6) {
         lbl_8046B6A0_t* p2 = gm_8016AE38();
         int flag;
-        if (data->x118 != 0 ||
-            (data->x11A != 0 && data->x11B == 0) ||
+        if (data->x118 != 0 || (data->x11A != 0 && data->x11B == 0) ||
             p2->x24C8.x0_7)
         {
             flag = 0;
@@ -1176,8 +1175,7 @@ void fn_8017FE54(HSD_GObj* gobj)
     RegClearEv* ev = gobj->user_data;
 
     lb_800122C8(ev->x1C, 0, 0, 1);
-    lb_800138D8(lbl_80472D28.x2C,
-                (int)(120.0F * lbl_80472D28.x10C) + 1);
+    lb_800138D8(lbl_80472D28.x2C, (int) (120.0F * lbl_80472D28.x10C) + 1);
 
     ev->x20 = 0.0225F * (f32) lbl_80472D28.x110 - 0.175F;
 

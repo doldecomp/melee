@@ -3,6 +3,7 @@
 #include "baselib/forward.h"
 #include "forward.h"
 
+#include "ft/ftdevice.h"
 #include "ft/ftlib.h"
 #include "gr/granime.h"
 #include "gr/grmaterial.h"
@@ -15,7 +16,6 @@
 #include <baselib/gobj.h>
 #include <baselib/jobj.h>
 #include <baselib/random.h>
-#include "ft/ftdevice.h"
 
 static struct {
     s16 x0;
@@ -150,19 +150,16 @@ void grOldPupupu_80210A24(Ground_GObj* gobj)
         gp->gv.unk.xD0 = 0;
         switch (gp->gv.unk.xC8) {
         case 0:
-            grAnime_801C8138(
-                gobj, gp->map_id,
-                grOp_804D48A0[gp->gv.unk.xCC][gp->gv.unk.xD4]);
+            grAnime_801C8138(gobj, gp->map_id,
+                             grOp_804D48A0[gp->gv.unk.xCC][gp->gv.unk.xD4]);
             break;
         case 1:
-            grAnime_801C8138(
-                gobj, gp->map_id,
-                grOp_804D48B0[gp->gv.unk.xCC][gp->gv.unk.xD4]);
+            grAnime_801C8138(gobj, gp->map_id,
+                             grOp_804D48B0[gp->gv.unk.xCC][gp->gv.unk.xD4]);
             break;
         case 2:
-            grAnime_801C8138(
-                gobj, gp->map_id,
-                grOp_804D48A8[gp->gv.unk.xCC][gp->gv.unk.xD4]);
+            grAnime_801C8138(gobj, gp->map_id,
+                             grOp_804D48A8[gp->gv.unk.xCC][gp->gv.unk.xD4]);
             break;
         }
     }
@@ -238,11 +235,9 @@ void grOldPupupu_80210C7C(Ground_GObj* gobj)
     x2 = grOp_804D6A98->x2;
     x0 = grOp_804D6A98->x0;
     *(s16*) &gp->gv.unk.xC4 =
-        x2 > x0
-            ? x0 + (x2 - x0 != 0 ? HSD_Randi(x2 - x0) : 0)
-        : x2 < x0
-            ? x2 + (x0 - x2 != 0 ? HSD_Randi(x0 - x2) : 0)
-            : x2;
+        x2 > x0   ? x0 + (x2 - x0 != 0 ? HSD_Randi(x2 - x0) : 0)
+        : x2 < x0 ? x2 + (x0 - x2 != 0 ? HSD_Randi(x0 - x2) : 0)
+                  : x2;
 }
 
 bool grOldPupupu_80210D08(Ground_GObj* gobj)

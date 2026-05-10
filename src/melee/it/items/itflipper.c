@@ -206,12 +206,10 @@ void itFlipper_UnkMotion3_Phys(Item_GObj* gobj)
     it_80272860(gobj, item_attr->x10_fall_speed,
                 item_attr->x14_fall_speed_max);
     if (ip->xDD4_itemVar.flipper.xDD4 <= 0xA) {
-        ip->x40_vel.x *=
-            (f32) ip->xDD4_itemVar.flipper.xDD4 /
-            (1.0f + (f32) ip->xDD4_itemVar.flipper.xDD4);
-        ip->x40_vel.y *=
-            (f32) ip->xDD4_itemVar.flipper.xDD4 /
-            (1.0f + (f32) ip->xDD4_itemVar.flipper.xDD4);
+        ip->x40_vel.x *= (f32) ip->xDD4_itemVar.flipper.xDD4 /
+                         (1.0f + (f32) ip->xDD4_itemVar.flipper.xDD4);
+        ip->x40_vel.y *= (f32) ip->xDD4_itemVar.flipper.xDD4 /
+                         (1.0f + (f32) ip->xDD4_itemVar.flipper.xDD4);
     }
     it_80274658(gobj, it_804D6D28->x68_float);
 }
@@ -315,8 +313,7 @@ bool it_3F14_Logic20_Clanked(Item_GObj* gobj)
             itColl_BounceOffVictim(gobj);
         } else {
             ip->x40_vel.x = -1.0f * ip->x40_vel.x;
-            ip->x40_vel.y =
-                -1.0f * ip->x40_vel.y + it_804D6D28->x60_float;
+            ip->x40_vel.y = -1.0f * ip->x40_vel.y + it_804D6D28->x60_float;
         }
     } else {
         ip->xDD4_itemVar.flipper.xDDC = attrs->x14;
@@ -341,8 +338,7 @@ bool it_3F14_Logic20_HitShield(Item_GObj* gobj)
             itColl_BounceOffVictim(gobj);
         } else {
             ip->x40_vel.x = -1.0f * ip->x40_vel.x;
-            ip->x40_vel.y =
-                -1.0f * ip->x40_vel.y + it_804D6D28->x60_float;
+            ip->x40_vel.y = -1.0f * ip->x40_vel.y + it_804D6D28->x60_float;
         }
     } else {
         ip->xDD4_itemVar.flipper.xDDC = attrs->x14;

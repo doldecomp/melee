@@ -1,11 +1,11 @@
 #include "ityoshieggthrow.h"
 
+#include "ef/efasync.h"
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
-#include "ef/efasync.h"
 
 void it_802B2890(Item_GObj* gobj)
 {
@@ -21,7 +21,7 @@ void itYoshiEggThrow_Logic43_PickedUp(Item_GObj* gobj)
 }
 
 Item_GObj* it_802B2A10(Fighter_GObj* parent, Vec3* pos, s32 part,
-                        f32 facing_dir)
+                       f32 facing_dir)
 {
     SpawnItem spawn;
     Item_GObj* gobj;

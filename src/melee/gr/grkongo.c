@@ -1581,16 +1581,16 @@ static int fn_801D8134(HSD_GObj* arg0, HSD_GObj* arg1)
     ftLib_80086644(arg1, &pos_ft);
 
     if (!((pos_gnd.x - pos_ft.x) * (pos_gnd.x - pos_ft.x) +
-          (pos_gnd.y - pos_ft.y) * (pos_gnd.y - pos_ft.y) +
-          (pos_gnd.z - pos_ft.z) * (pos_gnd.z - pos_ft.z) <
-          grKg_804D6980->unk28 * grKg_804D6980->unk28)) {
+              (pos_gnd.y - pos_ft.y) * (pos_gnd.y - pos_ft.y) +
+              (pos_gnd.z - pos_ft.z) * (pos_gnd.z - pos_ft.z) <
+          grKg_804D6980->unk28 * grKg_804D6980->unk28))
+    {
         goto done;
     }
 
     rand_val = HSD_Randf();
     diff = grKg_804D6980->unk24 - grKg_804D6980->unk20;
-    gp->gv.kongo3.xCA =
-        (s16)(diff * rand_val + grKg_804D6980->unk20);
+    gp->gv.kongo3.xCA = (s16) (diff * rand_val + grKg_804D6980->unk20);
     gp->gv.kongo3.xD0 = (HSD_JObj*) arg1;
     gp->gv.kongo3.xC6 = 1;
     Ground_801C5440(gp, 0, 0x129U);

@@ -359,10 +359,9 @@ void fn_80200460(Ground* gp_arg, s32 joint_id, CollData* cd, s32 arg3,
         for (i = 0; i < 3; i++) {
             if (gp->gv.rcruise.x3C[i].x02 == joint_id) {
                 u8 state = gp->gv.rcruise.x3C[i].x00;
-                if (state == 1 || (u8)(state - 3) <= 1u) {
+                if (state == 1 || (u8) (state - 3) <= 1u) {
                     gp->gv.rcruise.x3C[i].x04 = 0;
-                    grRCruise_80201B60(gp->gv.rcruise.x3C[i].x0C->child,
-                                       1);
+                    grRCruise_80201B60(gp->gv.rcruise.x3C[i].x0C->child, 1);
                     grAnime_801C7A94(gobj, grRc_804D4790[i], 1, 1.0f);
                     gp->gv.rcruise.x3C[i].x00 = 2;
                 }

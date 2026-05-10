@@ -2,6 +2,7 @@
 
 #include "math.h"
 
+#include "db/db.h"
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
@@ -9,10 +10,9 @@
 #include "it/item.h"
 
 #include <baselib/jobj.h>
-#include "db/db.h"
 
 HSD_GObj* it_802C837C(Item_GObj* parent, Vec3* pos, enum_t kind, u32 arg3,
-                       float facing_dir)
+                      float facing_dir)
 {
     Item_GObj* gobj;
     SpawnItem spawn;

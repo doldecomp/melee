@@ -10,8 +10,8 @@
 #include "it/types.h"
 #include "mp/mpcoll.h"
 #include "mp/mplib.h"
-#include "sysdolphin/baselib/random.h"
 #include "MSL/math.h"
+#include "sysdolphin/baselib/random.h"
 
 void it_802E31F8(Item_GObj* gobj)
 {
@@ -293,8 +293,7 @@ bool itWhitebea_UnkMotion1_Anim(Item_GObj* gobj)
 void itWhitebea_UnkMotion1_Phys(Item_GObj* gobj)
 {
     Item* ip = gobj->user_data;
-    itWhiteBeaAttributes* attrs =
-        ip->xC4_article_data->x4_specialAttributes;
+    itWhiteBeaAttributes* attrs = ip->xC4_article_data->x4_specialAttributes;
     s32 range;
     PAD_STACK(16);
 

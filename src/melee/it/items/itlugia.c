@@ -1,6 +1,5 @@
 #include "itlugia.h"
 
-#include <math_ppc.h>
 #include <placeholder.h>
 #include <platform.h>
 
@@ -12,6 +11,8 @@
 #include "it/it_2725.h"
 #include "it/item.h"
 #include "lb/lb_00B0.h"
+
+#include <math_ppc.h>
 
 void it_2725_Logic17_Spawned(Item_GObj* gobj)
 {
