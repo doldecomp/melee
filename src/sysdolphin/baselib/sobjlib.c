@@ -17,25 +17,16 @@
 /* 004DB668 */ extern const s32 HSD_SObjLib_804DEA88;
 /* 004DB664 */ extern const s32 HSD_SObjLib_804DEA84;
 /* 004DB660 */ extern const s32 HSD_SObjLib_804DEA80;
-/* 004D4540 */ extern u8 HSD_SObjLib_804D7960;
+/* 004D4540 */ u8 HSD_SObjLib_804D7960;
 /* 004CDCC0 */ extern HSD_ObjAllocData HSD_SObjLib_804D10E0;
-/* 00408F90 */ extern s8 HSD_SObjLib_8040C3B0[10];
-typedef struct SObjLibData {
-    /* 0x00 */ UNK_T x0;
-    /* 0x04 */ GObjFuncs x4_funcs;
-    /* 0x10 */ s8 x10_filename[10];
-    /* 0x1A */ u8 pad1A[2];
-    /* 0x1C */ char x1C_errmsg[32];
-    /* 0x3C */ void* x3C_jumptable[15];
-    /* 0x78 */ HSD_Chan x78_chan0;
-    /* 0xA8 */ HSD_Chan xA8_chan1;
-    /* 0xD8 */ char xD8_errmsg2[24];
-} SObjLibData;
 
-extern SObjLibData HSD_SObjLib_8040C3A0;
-/* 003B6244 */ extern Vec3 HSD_SObjLib_803B9664;
-/* 003B6238 */ extern Vec3 HSD_SObjLib_803B9658;
-/* 00408F9C */ extern char HSD_SObjLib_8040C3BC[];
+GObjFunc HSD_SObjLib_8040C3A0[] = { (void*) HSD_SObjLib_803A4740 };
+
+GObjFuncs HSD_SObjLib_8040C3A4 = {
+    NULL,
+    1,
+    HSD_SObjLib_8040C3A0,
+};
 
 HSD_ObjAllocData HSD_SObjLib_804D10E0;
 
@@ -153,6 +144,8 @@ void HSD_SObjLib_803A4740(HSD_SObj* sobj)
     }
 }
 
+static char filename[] = "sobjlib.c";
+
 /// #HSD_SObjLib_803A477C
 
 void HSD_SObjLib_803A49E0(HSD_GObj* gobj, int unused)
@@ -164,7 +157,7 @@ void HSD_SObjLib_803A49E0(HSD_GObj* gobj, int unused)
     sobj = gobj->hsd_obj;
     while (sobj != NULL) {
         if (HSD_SObjLib_804D7960 != gobj->obj_kind) {
-            OSReport(HSD_SObjLib_8040C3BC);
+            OSReport("BadOBJ for SOBJ-displayfunc\n");
             return;
         }
         if (sobj->x4C_callback != NULL) {
@@ -175,12 +168,40 @@ void HSD_SObjLib_803A49E0(HSD_GObj* gobj, int unused)
     }
 }
 
+static u8 data_pad_jumptable[0x3C] = { 0 };
+
 /// #HSD_SObjLib_803A4A68
+
+static HSD_Chan lbl_8040C418 = {
+    NULL,
+    GX_COLOR0,
+    0,
+    { 0 },
+    { 0xFF, 0xFF, 0xFF },
+    false,
+    GX_SRC_REG,
+    GX_SRC_REG,
+    GX_LIGHT_NULL,
+    GX_DF_CLAMP,
+    GX_AF_NONE,
+};
+static HSD_Chan lbl_8040C448 = {
+    NULL,
+    GX_ALPHA0,
+    0,
+    { 0, 0, 0, 0xFF },
+    { 0, 0, 0, 0xFF },
+    false,
+    GX_SRC_REG,
+    GX_SRC_REG,
+    GX_LIGHT_NULL,
+    GX_DF_CLAMP,
+    GX_AF_NONE,
+};
 
 void HSD_SObjLib_803A54EC(HSD_GObj* gobj, int unused)
 {
     Mtx viewmtx;
-    SObjLibData* data = &HSD_SObjLib_8040C3A0;
 
     if (HSD_CObjSetCurrent(GET_COBJ(gobj))) {
         GXSetCurrentMtx(0);
@@ -190,13 +211,13 @@ void HSD_SObjLib_803A54EC(HSD_GObj* gobj, int unused)
                           GX_FALSE, GX_PTIDENTITY);
         GXSetTexCoordGen2(GX_TEXCOORD1, GX_TG_MTX2x4, GX_TG_TEX0, GX_IDENTITY,
                           GX_FALSE, GX_PTIDENTITY);
-        HSD_SetupChannel(&data->x78_chan0);
-        HSD_SetupChannel(&data->xA8_chan1);
+        HSD_SetupChannel(&lbl_8040C418);
+        HSD_SetupChannel(&lbl_8040C448);
         HSD_StateSetNumChans(1);
         HSD_GObj_80390ED0(gobj, 1);
         HSD_CObjEndCurrent();
     } else {
-        OSReport(data->xD8_errmsg2);
+        OSReport("Out CameraDisp Range\n");
     }
     HSD_StateInvalidate(-1);
     HSD_StateSetZMode(1, 3, 1);
@@ -204,20 +225,21 @@ void HSD_SObjLib_803A54EC(HSD_GObj* gobj, int unused)
 
 /* @todo 99.84% match - near_val variable forces 6 FPR saves but adds
  * 4 bytes to stack, shifting local offsets by 4 */
-void HSD_SObjLib_803A55DC(HSD_GObj* gobj, int width, int height, int priority)
+void HSD_SObjLib_803A55DC(HSD_GObj* gobj, u16 width, u16 height, int priority)
 {
     HSD_CObj* cobj;
-    Vec3 eye = HSD_SObjLib_803B9658;
-    Vec3 interest = HSD_SObjLib_803B9664;
     Scissor viewport;
     Scissor scissor;
+    Vec3 eye = { 0, 0, 1 };
+    Vec3 interest = { 0, 0, 0 };
+
     f32 roll = 0.0F;
     f32 near_val = roll;
     f32 far_val = 2.0f;
     f32 top = roll;
-    f32 bottom = (f32) - (s32) (u16) height;
+    f32 bottom = -height;
     f32 left = roll;
-    f32 right = (f32) (u16) width;
+    f32 right = width;
 
     viewport.left = 0;
     viewport.right = width;
