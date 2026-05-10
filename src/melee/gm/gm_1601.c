@@ -2481,7 +2481,7 @@ void gm_801674C4(s8 arg0, u8 arg1, s8 arg2, s8 arg3, bool (*arg4)(s32))
     fn_80169900(new_var->xD, new_var, temp_ptr->xA2, new_var->x20);
     temp_r31 = Player_GetCostumeId(0);
     fn_8016989C((u8*) new_var, (s8) Player_GetPlayerCharacter(0),
-                (s32) temp_r31, (u8*) new_var->xA2, (u8*) temp_ptr->x20);
+                temp_r31, (u8*) new_var->xA2, (u8*) temp_ptr->x20);
     fn_8016A09C();
     fn_80169434(arg4);
 }
@@ -3303,7 +3303,7 @@ void fn_80169574(ssize_t size, s8* buf)
     buf[size] = -2;
 }
 
-s32 fn_801695BC(u8 arg0, s32 arg1, s32 arg2, u8* arg3, u8* arg4)
+s32 fn_801695BC(u8 arg0, u8 arg1, u8 arg2, u8* arg3, u8* arg4)
 {
     u8 sp1C[0x0C];
     s32 temp_r3_2;
@@ -3448,7 +3448,7 @@ void fn_801697FC(s8 character, s8 costume, s8 new_character, s8 new_costume,
 }
 #pragma dont_inline reset
 
-void fn_8016989C(u8* arg0, s32 arg1, s32 arg2, u8* arg3, u8* arg4)
+void fn_8016989C(u8* arg0, u8 arg1, u8 arg2, u8* arg3, u8* arg4)
 {
     s32 i;
     for (i = 0; i < 3; i++) {
