@@ -27,14 +27,8 @@ struct HSD_SObj {
     /* 0x30 */ f32 x30;
     /* 0x34 */ u16 x34;
     /* 0x36 */ u16 x36;
-    /* 0x38 */ u8 x38;
-    /* 0x39 */ u8 x39;
-    /* 0x3A */ u8 x3A;
-    /* 0x3B */ u8 x3B;
-    /* 0x3C */ u8 x3C;
-    /* 0x3D */ u8 x3D;
-    /* 0x3E */ u8 x3E;
-    /* 0x3F */ u8 x3F;
+    /* 0x38 */ GXColor x38;
+    /* 0x3C */ GXColor x3C;
     /* 0x40 */ u32 x40;
     /* 0x44 */ u8 x44;
     /* 0x48 */ u32 x48;
