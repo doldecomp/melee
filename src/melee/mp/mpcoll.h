@@ -85,7 +85,7 @@
 /* 048578 */ bool mpColl_80048578(CollData*);
 /* 048654 */ bool mpColl_80048654(CollData*);
 /* 048768 */ bool mpColl_80048768(CollData*);
-/* 048844 */ bool mpColl_80048844(CollData*, f32);
+/* 048844 */ bool mpColl_80048844(CollData*);
 /* 0488F4 */ bool mpColl_800488F4(CollData*);
 /* 048AB0 */ bool mpColl_80048AB0_RightWall(CollData*);
 /* 0491C8 */ bool mpColl_800491C8_RightWall(CollData*);

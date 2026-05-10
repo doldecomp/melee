@@ -15,7 +15,18 @@ struct ftMars_FighterVars {
 };
 
 struct SwordAttrs {
-    u8 pad_x0[0x14];
+    /* +0x0 */ f32 x0;
+    /* +0x4 */ f32 x4;
+    /* +0x8 */ u8 x8;
+    /* +0x9 */ u8 x9;
+    /* +0xA */ u8 xA;
+    /* +0xB */ u8 xB;
+    /* +0xC */ u8 xC;
+    /* +0xD */ u8 xD;
+    /* +0xE */ u8 xE;
+    /* +0xF */ u8 xF;
+    /* +0x10 */ u8 x10;
+    u8 pad_x11[3];
     int x14;
     float x18;
     float x1C;

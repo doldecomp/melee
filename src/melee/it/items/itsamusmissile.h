@@ -28,12 +28,12 @@ struct _m2c_stack_itSamusmissile_UnkMotion0_Phys {
 /* 2B62D0 */ Item_GObj* it_802B62D0(Item_GObj*, Vec3* pos, bool,
                                     float facing_dir);
 /* 2B63F8 */ void it_802B63F8(HSD_GObj* gobj);
-/* 2B64FC */ Item_GObj* it_802B64FC(Item_GObj* gobj);
+/* 2B64FC */ void it_802B64FC(Item_GObj* gobj);
 /* 2B66A8 */ void* it_802B66A8(HSD_GObj* gobj);
 /* 2B6774 */ long itSamusmissile_UnkMotion0_Anim(struct HSD_GObj*);
 /* 2B67E4 */ void itSamusmissile_UnkMotion0_Phys(Item_GObj* gobj);
 /* 2B6A34 */ bool itSamusmissile_UnkMotion0_Coll(Item_GObj* gobj);
-/* 2B6A60 */ void* it_802B6A60(HSD_GObj* gobj);
+/* 2B6A60 */ void it_802B6A60(HSD_GObj* gobj);
 /* 2B6B1C */ long itSamusmissile_UnkMotion1_Anim(struct HSD_GObj*);
 /* 2B6B8C */ void itSamusmissile_UnkMotion1_Phys(Item_GObj* gobj);
 /* 2B6BFC */ bool itSamusmissile_UnkMotion1_Coll(Item_GObj* gobj);

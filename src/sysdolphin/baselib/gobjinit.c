@@ -37,13 +37,13 @@ void HSD_GObj_80391304(HSD_GObjLibInitDataType* arg0)
         ((HSD_GObj**) HSD_GObj_Entities)[i] = plinklow_gobjs[i] = NULL;
     }
 
-    HSD_GObj_804D7824 =
+    HSD_GObjGXLinkHead =
         HSD_MemAlloc(sizeof(HSD_GObj*) * (arg0->gx_link_max + 2));
     HSD_GObj_804D7820 =
         HSD_MemAlloc(sizeof(HSD_GObj*) * (arg0->gx_link_max + 2));
 
     for (i = 0; i < arg0->gx_link_max + 2; i++) {
-        HSD_GObj_804D7824[i] = HSD_GObj_804D7820[i] = 0;
+        HSD_GObjGXLinkHead[i] = HSD_GObj_804D7820[i] = 0;
     }
 
     HSD_GObj_804D7840 =

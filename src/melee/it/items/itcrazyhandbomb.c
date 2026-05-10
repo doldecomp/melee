@@ -1,7 +1,5 @@
 #include "itcrazyhandbomb.h"
 
-#include <platform.h>
-
 #include "db/db.h"
 #include "it/inlines.h"
 #include "it/it_266F.h"
@@ -9,13 +7,22 @@
 #include "it/it_2725.h"
 #include "it/item.h"
 
-#include <baselib/jobj.h>
+#include <baselib/random.h>
+#include <MSL/math.h>
 
-void it_802F0F6C(Fighter_GObj* owner, Vec3* prev_pos, Vec3* pos,
-                  ItemKind kind, f32 facing_dir)
+ItemStateTable it_803F93A8[] = {
+    { 0, itCrazyhandbomb_UnkMotion0_Anim, itCrazyhandbomb_UnkMotion0_Phys,
+      itCrazyhandbomb_UnkMotion0_Coll },
+    { 1, itCrazyhandbomb_UnkMotion1_Anim, itCrazyhandbomb_UnkMotion1_Phys,
+      itCrazyhandbomb_UnkMotion1_Coll },
+};
+
+void it_802F0F6C(Fighter_GObj* owner, Vec3* prev_pos, Vec3* pos, ItemKind kind,
+                 f32 facing_dir)
 {
     SpawnItem spawnitem;
     Item_GObj* gobj;
+    PAD_STACK(12);
 
     spawnitem.kind = kind;
     spawnitem.prev_pos = *prev_pos;
@@ -77,7 +84,31 @@ bool itCrazyhandbomb_UnkMotion0_Anim(Item_GObj* gobj)
     return false;
 }
 
-/// #itCrazyhandbomb_UnkMotion0_Phys
+void itCrazyhandbomb_UnkMotion0_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itCrazyHandBombAttributes* attrs =
+        ip->xC4_article_data->x4_specialAttributes;
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+    Quaternion rot;
+
+    it_80272860(gobj, attrs->x4, attrs->x8);
+    HSD_JObjGetRotation(jobj, &rot);
+
+    switch (HSD_Randi(3)) {
+    case 0:
+        rot.x += deg_to_rad * (10.0f * ip->x40_vel.y);
+        break;
+    case 1:
+        rot.y += deg_to_rad * (10.0f * ip->x40_vel.y);
+        break;
+    case 2:
+        rot.z += deg_to_rad * (10.0f * ip->x40_vel.y);
+        break;
+    }
+
+    HSD_JObjSetRotation(jobj, &rot);
+}
 
 bool itCrazyhandbomb_UnkMotion0_Coll(Item_GObj* gobj)
 {

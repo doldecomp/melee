@@ -14,7 +14,7 @@
 /* 2C16F8 */ void it_802C16F8(Item_GObj*);
 /* 2C17DC */ void it_802C17DC(Item_GObj*);
 /* 2C17FC */ void it_2725_Logic90_Destroyed(Item_GObj*);
-/* 2C1854 */ bool it_802C1854(void);
+/* 2C1854 */ bool it_802C1854(Item_GObj* gobj);
 /* 2C1950 */ void it_802C1950(Item_GObj*);
 /* 2C198C */ bool itClimbersice_UnkMotion0_Anim(Item_GObj* gobj);
 /* 2C1A14 */ void itClimbersice_UnkMotion0_Phys(Item_GObj* gobj);

@@ -300,7 +300,7 @@ struct lb_800138D8_t {
     /* +11 */ s8 x11;
     /* +12 */ s8 x12;
     /* +13 */ char pad_13[0x18 - 0x13];
-    /* +18 */ int x18;
+    /* +18 */ HSD_GObjEvent x18;
     /* +1C */ s32 x1C;
     /* +20 */ char pad_20[0x24 - 0x20];
 };
@@ -473,13 +473,13 @@ STATIC_ASSERT(sizeof(struct Fighter_804D653C_t) == 8);
 
 struct lb_00F9_UnkDesc1Inner {
     /* 0x00 */ f32 unk_0;
-    /* 0x04 */ f32 unk_4;  /* inferred */
+    /* 0x04 */ f32 unk_4; /* inferred */
     /* 0x08 */ Quaternion unk_8;
-    /* 0x18 */ f32 unk_18; /* inferred */
+    /* 0x18 */ f32 unk_18;  /* inferred */
     /* 0x1C */ Vec3 unk_1C; /* inferred */
     /* 0x28 */ Vec3 unk_28; /* inferred */
-    /* 0x34 */ f32 unk_34; /* inferred */
-    /* 0x38 */ f32 unk_38; /* inferred */
+    /* 0x34 */ f32 unk_34;  /* inferred */
+    /* 0x38 */ f32 unk_38;  /* inferred */
 };
 STATIC_ASSERT(sizeof(struct lb_00F9_UnkDesc1Inner) == 0x3C);
 

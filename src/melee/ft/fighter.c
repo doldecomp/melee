@@ -16,6 +16,7 @@
 #include "ftdynamics.h"
 #include "ftlib.h"
 #include "ftparts.h"
+#include "placeholder.h"
 
 #include <platform.h>
 
@@ -2649,16 +2650,15 @@ void Fighter_TakeDamage_8006CC7C(Fighter* fp, float damage_amount)
     }
 }
 
-/// https://decomp.me/scratch/9QvFG
-void Fighter_8006CDA4(Fighter* fp, s32 arg1, s32 arg2)
+void Fighter_8006CDA4(Fighter* fp, s32 arg1)
 {
-    u8 _[4] = { 0 };
     bool temp_bool;
-    bool hold_item_bool = 0;
+    bool hold_item_bool = false;
     Vec3 vec;
+    PAD_STACK(8);
 
     if (fp->item_gobj && !it_8026B2B4(fp->item_gobj)) {
-        hold_item_bool = 1;
+        hold_item_bool = true;
     }
 
     temp_bool = !((fp->x2220_b3 || fp->x2220_b4 || ftCo_8008E984(fp)));
@@ -2667,7 +2667,6 @@ void Fighter_8006CDA4(Fighter* fp, s32 arg1, s32 arg2)
     if (fp->motion_id != 0x145 && (unsigned) fp->motion_id - 0x122 > 1 &&
         fp->dmg.x1860_element != 0xAU && !fp->x2226_b2)
     {
-        u8 _[4] = { 0 };
         if ( ///// giant if condition
             hold_item_bool && temp_bool &&
             ((HSD_Randi(p_ftCommonData->x418) < arg1) ||

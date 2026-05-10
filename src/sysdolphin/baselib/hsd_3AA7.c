@@ -8,6 +8,7 @@
 
 /* 4D7980 */ extern s32 hsd_804D7980;
 /* 4D7984 */ extern volatile s32 hsd_804D7984;
+/* 4D7988 */ extern s32 hsd_804D7988;
 /* 4D7998 */ extern s32 hsd_804D7998;
 /* 4D799C */ extern s32 hsd_804D799C;
 
@@ -17,7 +18,115 @@ typedef struct CardBufEntry {
     s32 x14, x18, x1C, x20;
 } CardBufEntry;
 
-/// #fn_803AA790
+typedef struct CardQueueEntry {
+    /* 0x00 */ s32 x0;
+    /* 0x04 */ s32 x4;
+    /* 0x08 */ s32 x8;
+    /* 0x0C */ s32 xC;
+    /* 0x10 */ s32 x10;
+    /* 0x14 */ void (*x14)(s32, s32);
+} CardQueueEntry;
+
+s32 fn_803AA790(void)
+{
+    CardQueueEntry* entry;
+    s32 idx;
+    s32 result;
+    s32 arg0;
+    s32 sub_state;
+    void (*cb)(s32, s32);
+
+    idx = hsd_804D7990;
+    entry = (CardQueueEntry*) ((u8*) &hsd_804D2348 + idx * 0x18);
+    arg0 = entry->x4;
+    hsd_804D7990 = (idx + 1) % 32;
+
+    switch (entry->x0) {
+    case 1:
+        result = fn_803ADF90(entry->x4, entry->x8, entry->xC, 1,
+                             (s32) entry->x14);
+        if (result < 0) {
+            cb = entry->x14;
+            if (cb != NULL) {
+                cb(entry->x8, result);
+            }
+        }
+        entry->x0 = 0;
+        return result;
+    case 2:
+        sub_state = ((s32*) (arg0 + 0x28))[entry->x8];
+        switch (sub_state) {
+        case 3:
+            result = fn_803B0120(entry->x4, entry->x8, entry->xC, 1,
+                                 (s32) entry->x14);
+            break;
+        case 0:
+            result = fn_803AE7F8(entry->x4, entry->x8, entry->xC, 1,
+                                 (s32) entry->x14);
+            break;
+        default:
+            if (sub_state > 0 && sub_state < 3) {
+                result = fn_803AF3F0(entry->x4, entry->x8, entry->xC, 1,
+                                     (s32) entry->x14);
+            } else {
+                result = -0x101;
+            }
+            break;
+        }
+        if (result < 0) {
+            cb = entry->x14;
+            if (cb != NULL) {
+                cb(entry->x8, result);
+            }
+        }
+        entry->x0 = 0;
+        return result;
+    case 3:
+        result = fn_803B1F78((CardState*) entry->x4, entry->x8, entry->xC,
+                             entry->x10, (s32) entry->x14);
+        if (result < 0) {
+            cb = entry->x14;
+            if (cb != NULL) {
+                cb(0, result);
+            }
+        }
+        entry->x0 = 0;
+        return result;
+    case 4:
+        result = fn_803B21E8(entry->x4, entry->xC, entry->x10, (s32) entry->x14);
+        if (result < 0) {
+            cb = entry->x14;
+            if (cb != NULL) {
+                cb(0, result);
+            }
+        }
+        entry->x0 = 0;
+        return result;
+    case 5:
+        result = fn_803ADE4C(arg0, entry->x8, (s32) entry->x14);
+        if (result < 0) {
+            cb = entry->x14;
+            if (cb != NULL) {
+                cb(0, result);
+            }
+        }
+        entry->x0 = 0;
+        return result;
+    case 6:
+        result = fn_803B26CC((CardState*) arg0, entry->x8, entry->xC,
+                             entry->x10, (s32) entry->x14);
+        if (result < 0) {
+            cb = entry->x14;
+            if (cb != NULL) {
+                cb(0, result);
+            }
+        }
+        entry->x0 = 0;
+        return result;
+    default:
+        return -0x101;
+    }
+}
 
 /// #hsd_803AAA48
 
@@ -55,16 +164,16 @@ s32 fn_803AC168(s32* cmd_buf)
     return 0;
 }
 
-void fn_803AC258(s32 card_state, s32 block_idx)
+void fn_803AC258(CardState* card_state, s32 block_idx)
 {
     s32 buf[9];
     buf[0] = 13;
-    buf[1] = card_state;
+    buf[1] = (s32) card_state;
     buf[4] = block_idx;
     buf[5] = 0;
     buf[6] = 0;
     buf[8] = 0;
-    buf[7] = fn_803ACBE8((CardState*) card_state, block_idx);
+    buf[7] = fn_803ACBE8(card_state, block_idx);
     fn_803AC168(buf);
 }
 
@@ -155,11 +264,112 @@ void hsd_803AC3E0(struct hsd_803AC3E0_arg0_t* file_desc, int file_idx,
     file_desc->x70[file_idx] = file_flags;
 }
 
-/// #fn_803AC3F8
+void fn_803AC3F8(void* arg0, u8* data, s32 idx)
+{
+    struct hsd_803AC3E0_arg0_t* file_desc = (struct hsd_803AC3E0_arg0_t*) arg0;
+    s32 start;
+    s32 i;
+    s32 remaining;
+    s32 unroll;
 
-/// #hsd_803AC558
+    if (idx + 1 >= 9 || file_desc->x4C[idx + 1] == 0) {
+        start = idx - 2;
+    } else {
+        start = idx - 1;
+    }
+    if (start < 0) {
+        start = 0;
+    }
 
-/// @todo Currently 97.73% match - register allocation in arg1==0 path
+    for (i = 0; i < 3 && i < 9; i++) {
+        s32 j = start + i;
+        u32 flags = file_desc->x28[j];
+        data[0] = (u8) j;
+        data[1] = (u8) (((file_desc->x4C[j] >> 16) & 0x3F) | ((flags << 6) & 0xC0));
+        data[2] = (u8) (file_desc->x4C[j] >> 8);
+        data[3] = (u8) file_desc->x4C[j];
+        data += 4;
+    }
+
+    remaining = 3 - i;
+    if (i >= 3) {
+        return;
+    }
+
+    unroll = remaining >> 3;
+    if (unroll != 0) {
+        do {
+            data[0] = 0;
+            data[1] = 0;
+            data[2] = 0;
+            data[3] = 0;
+            data[4] = 0;
+            data[5] = 0;
+            data[6] = 0;
+            data[7] = 0;
+            data[8] = 0;
+            data[9] = 0;
+            data[10] = 0;
+            data[11] = 0;
+            data[12] = 0;
+            data[13] = 0;
+            data[14] = 0;
+            data[15] = 0;
+            data[16] = 0;
+            data[17] = 0;
+            data[18] = 0;
+            data[19] = 0;
+            data[20] = 0;
+            data[21] = 0;
+            data[22] = 0;
+            data[23] = 0;
+            data[24] = 0;
+            data[25] = 0;
+            data[26] = 0;
+            data[27] = 0;
+            data[28] = 0;
+            data[29] = 0;
+            data[30] = 0;
+            data[31] = 0;
+            data += 0x20;
+            unroll--;
+        } while (unroll != 0);
+        remaining &= 7;
+        if (remaining == 0) {
+            return;
+        }
+    }
+
+    do {
+        data[0] = 0;
+        data[1] = 0;
+        data[2] = 0;
+        data[3] = 0;
+        data += 4;
+        remaining--;
+    } while (remaining != 0);
+}
+
+/// @todo Currently 76.6% match - mwcc emits combined `rlwimi. r6,r0,8,10,23`
+/// (14-bit insert with CR0) and `srawi/clrlwi` for top-2-bit extract; permuter
+/// queued
+void hsd_803AC558(struct hsd_803AC3E0_arg0_t* file_desc, u8* data)
+{
+    int i;
+    for (i = 0; i < 3; i++) {
+        u8 file_idx = data[0];
+        u8 byte1 = data[1];
+        u32 size = (((u32) data[2] | ((byte1 << 8) & 0x3F00)) << 8) | data[3];
+        u8 flags = byte1 >> 6;
+
+        if (size != 0 && file_desc->x4C[file_idx] == 0) {
+            file_desc->x28[file_idx] = flags;
+            file_desc->x4C[file_idx] = size;
+        }
+        data += 4;
+    }
+}
+
 u32 fn_803AC634(struct hsd_803AC3E0_arg0_t* file_desc, s32 file_idx)
 {
     if (file_desc->x4C[file_idx] <= 0) {
@@ -171,9 +381,9 @@ u32 fn_803AC634(struct hsd_803AC3E0_arg0_t* file_desc, s32 file_idx)
         u32 usable;
         s32 remaining;
 
-        remaining =
-            file_desc->x4C[0] -
-            (s32) ((sector_size - 0x20) - (file_desc->x24 + 48) % sector_size);
+        remaining = file_desc->x4C[0];
+        remaining = remaining - (s32) ((sector_size - 0x20) -
+                                       (file_desc->x24 + 48) % sector_size);
         usable = sector_size - 0x20;
         if (remaining <= 0) {
             return 1;
@@ -188,7 +398,65 @@ u32 fn_803AC634(struct hsd_803AC3E0_arg0_t* file_desc, s32 file_idx)
     }
 }
 
-/// #fn_803AC6B8
+/// @todo Currently 93.75% match - 16 mismatches: dead bgt/li/b branch in i=0
+/// path (compiler emits redundant 0-result fallback) plus regalloc swaps
+/// (r5/r6/r8) in inlined sector arithmetic, and +1 absorption order
+s32 fn_803AC6B8(struct hsd_803AC3E0_arg0_t* file_desc, s32 file_count)
+{
+    s32 first_size;
+    s32 total;
+    s32 i;
+    u32 sector_size;
+    u32 usable;
+    s32 remaining;
+    s32 cur_size;
+    s32 cur_blocks;
+
+    if (file_count >= 9) {
+        return 0;
+    }
+    if (file_count == 0) {
+        return 0;
+    }
+
+    first_size = file_desc->x4C[0];
+    total = 1;
+    if (first_size > 0) {
+        sector_size = file_desc->x8;
+        remaining = first_size - (s32) ((sector_size - 0x20) -
+                                        (file_desc->x24 + 0x30) % sector_size);
+        usable = sector_size - 0x20;
+        if (remaining <= 0) {
+            total = 1;
+        } else {
+            total = (u32) (remaining + sector_size - 0x21) / usable + 1;
+        }
+    }
+
+    for (i = 1; i < file_count; i++) {
+        cur_size = file_desc->x4C[i];
+        if (cur_size <= 0) {
+            cur_blocks = 0;
+        } else if (i == 0) {
+            sector_size = file_desc->x8;
+            remaining = first_size - (s32) ((sector_size - 0x20) -
+                                            (file_desc->x24 + 0x30) % sector_size);
+            usable = sector_size - 0x20;
+            if (remaining <= 0) {
+                cur_blocks = 1;
+            } else {
+                cur_blocks = (u32) (remaining + sector_size - 0x21) / usable + 1;
+            }
+        } else {
+            sector_size = file_desc->x8;
+            cur_blocks = (u32) (cur_size + sector_size - 0x21) /
+                         (sector_size - 0x20);
+        }
+        total += cur_blocks;
+    }
+
+    return total;
+}
 
 /// #fn_803AC7DC
 
@@ -218,7 +486,6 @@ s32 fn_803ACB74(s32 seq_a, s32 seq_b)
     return diff;
 }
 
-/// @todo Currently 75.56% match - mwcc reassociates addition order
 s32 fn_803ACBE8(CardState* state, s32 block_idx)
 {
     u32 size = state->x8;
@@ -618,7 +885,7 @@ s32 fn_803B1F78(CardState* state, s32 channel, s32 file_id, s32 seq_num,
         return result;
     }
 
-    result = fn_803B1338((s32) state, 1);
+    result = fn_803B1338(state, 1);
     if (result < 0) {
         snap = hsd_804D7998;
         if (snap >= 0) {
@@ -732,7 +999,21 @@ s32 fn_803B21E8(s32 card_state, s32 file_id, s32 seq_num, s32 callback)
     return 0;
 }
 
-/// #hsd_803B2374
+void hsd_803B2374(void)
+{
+    s32 i;
+
+    hsd_804D7990 = 0;
+    hsd_804D7994 = 0;
+    memset(&hsd_804D2348, 0, sizeof(hsd_804D2348));
+    hsd_804D7980 = 0;
+    hsd_804D7984 = 0;
+    hsd_804D799C = 2;
+    for (i = 0; i < 128; i++) {
+        hsd_804D1148[i][0] = 0;
+    }
+    hsd_804D7988 = 0;
+}
 
 void hsd_803B24E4(s32* ctx, int channel, int file_no, void* work_buf)
 {
@@ -743,9 +1024,78 @@ void hsd_803B24E4(s32* ctx, int channel, int file_no, void* work_buf)
     ctx[0] = (s32) work_buf;
 }
 
-/// #hsd_803B2550
+int hsd_803B2550(s32* arg0, const char* arg1, void (*arg2)(int, int))
+{
+    u8* base;
+    char* filename;
+    s32 chan;
+    s32 retries;
+    s32 result;
+    s32 write_idx;
+    PAD_STACK(8);
 
-/// @todo Currently 90.00% match - same regalloc issue as fn_803ACBE8
+    base = hsd_804D1138;
+    filename = (char*) arg1;
+    chan = arg0[1];
+    retries = 0;
+    do {
+        result = CARDOpen(chan, filename, (CARDFileInfo*) (arg0 + 3));
+        if (result != -1) {
+            break;
+        }
+        retries++;
+    } while (retries < 10);
+
+    if (result < 0) {
+        return result;
+    }
+
+    {
+        s32 tmp = arg0[4];
+        retries = 0;
+        if (tmp == -1) {
+            do {
+                retries++;
+            } while (retries < 10);
+        }
+        if (tmp < 0) {
+            return tmp;
+        }
+        retries = tmp;
+    }
+
+    chan = 0;
+    do {
+        if (CARDClose((CARDFileInfo*) (arg0 + 3)) != -1) {
+            break;
+        }
+        chan++;
+    } while (chan < 10);
+
+    {
+        s32 read_idx = hsd_804D7990;
+        write_idx = hsd_804D7994;
+
+        if (read_idx == write_idx) {
+            if (*(s32*) (base + 0x1210 + read_idx * 0x18) != 0) {
+                return -265;
+            }
+        }
+    }
+
+    {
+        u8* entry = base + 0x1210 + write_idx * 0x18;
+        s32 next = write_idx + 1;
+        *(s32*) (entry + 0x00) = 5;
+        *(s32*) (entry + 0x04) = (s32) arg0;
+        *(s32*) (entry + 0x08) = retries;
+        *(s32*) (entry + 0x14) = (s32) arg2;
+        hsd_804D7994 = next % 32;
+    }
+
+    return 0;
+}
+
 s32 hsd_803B2674(CardState* state)
 {
     s32 blocks;

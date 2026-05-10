@@ -1,30 +1,39 @@
 #include "itsscopebeam.h"
 
-#include <placeholder.h>
-#include <platform.h>
-
-#include "baselib/forward.h"
-
-#include "baselib/gobj.h"
 #include "db/db.h"
-
-#include "it/forward.h"
-
 #include "it/inlines.h"
+#include "it/it_266F.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
-#include "it/types.h"
+#include "lb/lbvector.h"
+#include "MSL/math.h"
 
-typedef struct BeamFloats {
-    float velocity;
-    float scale;
-    float lifetime;
-} BeamFloats;
+#include <baselib/random.h>
+#include <MSL/trigf.h>
 
-typedef struct ScopeBeamAttrs {
-    BeamFloats floats[9];
-} ScopeBeamAttrs;
+ItemStateTable it_803F6568[] = {
+    { 0, itSscopebeam_UnkMotion9_Anim, itSscopebeam_UnkMotion9_Phys,
+      itSscopebeam_UnkMotion9_Coll },
+    { 1, itSscopebeam_UnkMotion9_Anim, itSscopebeam_UnkMotion9_Phys,
+      itSscopebeam_UnkMotion9_Coll },
+    { 2, itSscopebeam_UnkMotion9_Anim, itSscopebeam_UnkMotion9_Phys,
+      itSscopebeam_UnkMotion9_Coll },
+    { 3, itSscopebeam_UnkMotion9_Anim, itSscopebeam_UnkMotion9_Phys,
+      itSscopebeam_UnkMotion9_Coll },
+    { 4, itSscopebeam_UnkMotion9_Anim, itSscopebeam_UnkMotion9_Phys,
+      itSscopebeam_UnkMotion9_Coll },
+    { 5, itSscopebeam_UnkMotion9_Anim, itSscopebeam_UnkMotion9_Phys,
+      itSscopebeam_UnkMotion9_Coll },
+    { 6, itSscopebeam_UnkMotion9_Anim, itSscopebeam_UnkMotion9_Phys,
+      itSscopebeam_UnkMotion9_Coll },
+    { 7, itSscopebeam_UnkMotion9_Anim, itSscopebeam_UnkMotion9_Phys,
+      itSscopebeam_UnkMotion9_Coll },
+    { 8, itSscopebeam_UnkMotion9_Anim, itSscopebeam_UnkMotion9_Phys,
+      itSscopebeam_UnkMotion9_Coll },
+    { 9, itSscopebeam_UnkMotion9_Anim, itSscopebeam_UnkMotion9_Phys,
+      itSscopebeam_UnkMotion9_Coll },
+};
 
 void it_80298DEC(Fighter_GObj* gobj, Vec* vec, int arg2, float arg3)
 {
@@ -53,7 +62,7 @@ void it_80298DEC(Fighter_GObj* gobj, Vec* vec, int arg2, float arg3)
 void it_80298ED0(HSD_GObj* projectile, HSD_GObj* owner)
 {
     Item* it = GET_ITEM(projectile);
-    BeamFloats* data;
+    ScopeBeamFloats* data;
     HSD_JObj* jobj = GET_JOBJ(projectile);
     ScopeBeamAttrs* attrs = it->xC4_article_data->x4_specialAttributes;
     Vec3 scale;
@@ -105,7 +114,7 @@ bool itSscopebeam_UnkMotion9_Anim(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     s32 index = ip->xDD4_itemVar.scopebeam.x0;
     ScopeBeamAttrs* attrs = ip->xC4_article_data->x4_specialAttributes;
-    BeamFloats* data = &attrs->floats[index];
+    ScopeBeamFloats* data = &attrs->floats[index];
 
     if (ip->xD44_lifeTimer == data->lifetime) {
         if (ip->x5D4_hitboxes[0].hit.state >= 1) {
@@ -126,7 +135,56 @@ bool itSscopebeam_UnkMotion9_Anim(Item_GObj* gobj)
 
 void itSscopebeam_UnkMotion9_Phys(Item_GObj* gobj) {}
 
-/// #itSscopebeam_UnkMotion9_Coll
+bool itSscopebeam_UnkMotion9_Coll(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    CollData* coll = &ip->x378_itemColl;
+    ScopeBeamAttrs* attrs = ip->xC4_article_data->x4_specialAttributes;
+    CollData saved_coll;
+    Vec3 vel;
+    Vec3 axis;
+    s32 result;
+    f32 saved_vel_x;
+    Vec3 saved_pos = ip->pos;
+    saved_coll = *coll;
+    saved_vel_x = ip->x40_vel.x;
+
+    result = it_8026DAA8(gobj);
+
+    if (result & 0xE) {
+        return true;
+    }
+
+    if ((result & 1) && (coll->env_flags & 0x18000)) {
+        f32 angle = -atan2f(coll->floor.normal.x, coll->floor.normal.y);
+
+        if (ABS(angle) <= deg_to_rad) {
+            ip->pos = saved_pos;
+            *coll = saved_coll;
+            it_8026D9A0(gobj);
+        } else if (ABS(angle) <= attrs->x78) {
+            f32 rand;
+            vel.x = ip->x40_vel.x * attrs->x7C;
+            vel.y = vel.z = 0.0f;
+            axis.x = axis.y = 0.0f;
+            axis.z = 1.0f;
+            rand = HSD_Randf();
+            lbVector_RotateAboutUnitAxis(
+                &vel, &axis,
+                (2.0f * angle) + (ip->facing_dir * (attrs->x78 * rand)));
+            ip->x40_vel.x = vel.x;
+            ip->x40_vel.y = vel.y;
+            if (ip->x40_vel.y <= 0.0f) {
+                ip->x40_vel.x = saved_vel_x;
+                ip->x40_vel.y = 0.0f;
+            }
+        } else {
+            return true;
+        }
+    }
+
+    return false;
+}
 
 bool itSScopeBeam_Logic38_DmgDealt(Item_GObj* arg0)
 {

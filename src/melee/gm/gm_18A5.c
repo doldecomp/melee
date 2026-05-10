@@ -785,12 +785,10 @@ void fn_8018DF68(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4, s32 arg5,
     s32 half;
     GXColor c0, c1, c2, c3, c4, c5, c6, c7, c8, c9, c10;
 
-    PAD_STACK(8);
-
-    c0 = (GXColor){ 255, 255, 0, 255 };
-    c10 = (GXColor){ 255, 255, 0, 255 };
+    c0 = (GXColor) { 255, 255, 0, 255 };
+    c10 = (GXColor) { 255, 255, 0, 255 };
     thickness = ((BracketEntry*) data)->x1C;
-    c1 = (GXColor){ 255, 255, 0, 255 };
+    c1 = (GXColor) { 255, 255, 0, 255 };
     DrawRectangle((f32) arg1, (f32) arg2, thickness, (f32) arg4, &c1);
 
     right = arg1 + arg3;
@@ -1806,10 +1804,10 @@ static inline int gm_801905F0_inline0(int c_kind)
 
 void gm_801905F0(StartMeleeData* arg0)
 {
+    u8 _padA[8];
     GameRules* temp_r31 = gmMainLib_8015CC34();
     int i;
     TmVsData sp18;
-    PAD_STACK(8);
 
     gm_80168FC4();
     gm_80167A64(&arg0->rules);
@@ -3088,7 +3086,7 @@ void fn_80192BB0(void)
     }
 }
 
-s32 fn_80192E6C(void)
+void fn_80192E6C(void)
 {
     int new_var;
     HSD_GObj* gobj;
@@ -3142,8 +3140,7 @@ s32 fn_80192E6C(void)
         fn_8018FBD8((void*) gobj, j);
     }
 
-    return (s32) fn_8019035C(1, lbl_804D6650->models[1], 0, 0x1A, 2, 1,
-                             fn_80192690, 0.0f);
+    fn_8019035C(1, lbl_804D6650->models[1], 0, 0x1A, 2, 1, fn_80192690, 0.0f);
 }
 
 #pragma push
@@ -4900,9 +4897,7 @@ void fn_80196684(s32 bracket_idx)
     lbl_80473AB8[bracket_idx].x78 = 1;
 }
 
-/// #fn_801967E0
-
-s32 fn_801967E0(s32 arg0)
+void fn_801967E0(s32 arg0)
 {
     s32 rand;
     BracketEntry* ent = &lbl_80473AB8[arg0];
@@ -4919,11 +4914,11 @@ s32 fn_801967E0(s32 arg0)
             if (rand < (s32) ent->xA9) {
                 ent->xA4 = 2;
                 ent->xD0 = 3;
-                return rand;
+                return;
             }
             ent->xA4 = 3;
             ent->xD0 = 2;
-            return rand;
+            return;
         }
         if (rand < (s32) (ent->x7D + ent->xA9)) {
             ent->xA4 = 1;
@@ -4931,22 +4926,22 @@ s32 fn_801967E0(s32 arg0)
             if (rand < (s32) ent->x7D) {
                 ent->x78 = 2;
                 ent->xD0 = 3;
-                return rand;
+                return;
             }
             ent->x78 = 3;
             ent->xD0 = 2;
-            return rand;
+            return;
         }
         ent->xD0 = 1;
         rand = HSD_Randi(ent->x7D + ent->xA9);
         if (rand < (s32) ent->xA9) {
             ent->x78 = 2;
             ent->xA4 = 3;
-            return rand;
+            return;
         }
         ent->x78 = 3;
         ent->xA4 = 2;
-        return rand;
+        return;
     }
 
     if (rand < (s32) (ent->x51 + ent->x7D)) {
@@ -4958,11 +4953,11 @@ s32 fn_801967E0(s32 arg0)
             if (rand < (s32) ent->xA9) {
                 ent->xA4 = 2;
                 ent->xD0 = 3;
-                return rand;
+                return;
             }
             ent->xA4 = 3;
             ent->xD0 = 2;
-            return rand;
+            return;
         }
         if (rand < (s32) (ent->x51 + ent->xA9)) {
             ent->xA4 = 1;
@@ -4970,22 +4965,22 @@ s32 fn_801967E0(s32 arg0)
             if (rand < (s32) ent->x51) {
                 ent->x4C = 2;
                 ent->xD0 = 3;
-                return rand;
+                return;
             }
             ent->x4C = 3;
             ent->xD0 = 2;
-            return rand;
+            return;
         }
         ent->xD0 = 1;
         rand = HSD_Randi(ent->x51 + ent->xA9);
         if (rand < (s32) ent->x51) {
             ent->x4C = 2;
             ent->xA4 = 3;
-            return rand;
+            return;
         }
         ent->x4C = 3;
         ent->xA4 = 2;
-        return rand;
+        return;
     }
 
     if (rand < (s32) (ent->xA9 + ent->x51 + ent->x7D)) {
@@ -4997,11 +4992,11 @@ s32 fn_801967E0(s32 arg0)
             if (rand < (s32) ent->x7D) {
                 ent->x78 = 2;
                 ent->xD0 = 3;
-                return rand;
+                return;
             }
             ent->x78 = 3;
             ent->xD0 = 2;
-            return rand;
+            return;
         }
         if (rand < (s32) (ent->x51 + ent->x7D)) {
             ent->x78 = 1;
@@ -5009,22 +5004,22 @@ s32 fn_801967E0(s32 arg0)
             if (rand < (s32) ent->x51) {
                 ent->x4C = 2;
                 ent->xD0 = 3;
-                return rand;
+                return;
             }
             ent->x4C = 3;
             ent->xD0 = 2;
-            return rand;
+            return;
         }
         ent->xD0 = 1;
         rand = HSD_Randi(ent->x51 + ent->x7D);
         if (rand < (s32) ent->x51) {
             ent->x4C = 2;
             ent->x78 = 3;
-            return rand;
+            return;
         }
         ent->x4C = 3;
         ent->x78 = 2;
-        return rand;
+        return;
     }
 
     ent->xD0 = 0;
@@ -5035,11 +5030,11 @@ s32 fn_801967E0(s32 arg0)
         if (rand < (s32) ent->x7D) {
             ent->x78 = 2;
             ent->xA4 = 3;
-            return rand;
+            return;
         }
         ent->x78 = 3;
         ent->xA4 = 2;
-        return rand;
+        return;
     }
     if (rand < (s32) (ent->x51 + ent->x7D)) {
         ent->x78 = 1;
@@ -5047,22 +5042,22 @@ s32 fn_801967E0(s32 arg0)
         if (rand < (s32) ent->x51) {
             ent->x4C = 2;
             ent->xA4 = 3;
-            return rand;
+            return;
         }
         ent->x4C = 3;
         ent->xA4 = 2;
-        return rand;
+        return;
     }
     ent->xA4 = 1;
     rand = HSD_Randi(ent->x51 + ent->x7D);
     if (rand < (s32) ent->x51) {
         ent->x4C = 2;
         ent->x78 = 3;
-        return rand;
+        return;
     }
     ent->x4C = 3;
     ent->x78 = 2;
-    return rand;
+    return;
 }
 
 s32 fn_80196CF8(void)
@@ -5734,7 +5729,7 @@ void fn_80197FD8(HSD_GObj* gobj)
 
 extern f32 lbl_804DA824; // 0.01f
 
-/// @todo Currently 55.88% match - needs significant rework
+/// @todo Down to linking
 /// Updates player cursor animation and position.
 void fn_801981A0(HSD_GObj* gobj)
 {
@@ -5771,15 +5766,15 @@ void fn_801981A0(HSD_GObj* gobj)
         return;
     }
 
-    state_ptr = &lbl_804799D8.x44[pnum];
-    if (*state_ptr == 6) {
+    if (*(&lbl_804799D8.x44[pnum]) == 6) {
         HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
     }
 
     if ((s32) data->x30 == 4) {
         x_pos = (lbl_804DA7E4 * (f32) pnum) + (lbl_804DA7E0);
     } else if ((s32) data->x30 == 3) {
-        x_pos = lbl_804DA7E8 + ((lbl_804DA7E4 * (f32) pnum) - lbl_804DA7EC);
+        x_pos = lbl_804DA7E4;
+        x_pos = lbl_804DA7E8 + ((x_pos * (f32) pnum) - lbl_804DA7EC);
     } else {
         x_pos = lbl_804DA7E8 +
                 ((lbl_804DA7E4 * (lbl_804DA7F0 * (f32) pnum)) - lbl_804DA7EC);
@@ -5791,7 +5786,7 @@ void fn_801981A0(HSD_GObj* gobj)
     counter = (counter + 1) % 11;
     lbl_804799D8.x21[pnum] = counter;
 
-    if (*state_ptr == 7) {
+    if (*(&lbl_804799D8.x44[pnum]) == 7) {
         fn_8019044C(jobj, (f32) lbl_804799D8.x21[pnum]);
         return;
     }

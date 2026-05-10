@@ -171,6 +171,7 @@ void fn_80247510(HSD_GObj* gobj)
     s32 name_idx;
     u8 rumble_setting;
     HSD_JObj* jobj;
+    PAD_STACK(136);
 
     if (mn_804D6BC8.cooldown != 0) {
         Menu_DecrementAnimTimer();
@@ -908,9 +909,9 @@ void mnVibration_80248ED4(s32 arg0)
     HSD_Text* text;
     s32 i;
     MnVibrationData* data;
-    PAD_STACK(32);
 
     (void) arg0;
+    PAD_STACK(24);
     assets = &mnVibration_804A0898;
     gobj = GObj_Create(6, 7, 0x80);
     mnVibration_804D6C28 = gobj;

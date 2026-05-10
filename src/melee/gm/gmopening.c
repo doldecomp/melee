@@ -3,6 +3,7 @@
 #include "gm_unsplit.h"
 #include "gmtitle.h"
 
+#include <stdio.h>
 #include <sysdolphin/baselib/gobjgxlink.h>
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/gobjplink.h>
@@ -12,14 +13,58 @@
 #include <melee/lb/lbaudio_ax.h>
 #include <melee/lb/lblanguage.h>
 #include <melee/lb/lbmthp.h>
+#include <melee/mn/types.h>
+
+static struct {
+    /* 0x00 */ f32 data[9];
+    /* 0x24 */ char x24[12];
+    /* 0x30 */ char x30[12];
+} gm_803DBF78 = {
+    { 0, 1600.0F, 400.0F, 0, 1330.0F, 130.0F, 0, -3.0F, 0 },
+    "\\cfff00%2d",
+    "\\cfff00%3d",
+};
+
+static PerfLabelLine gm_80480B38[4];
 
 /// #gm_801A9DD0
 
-/// #fn_801A9FCC
+void* fn_801A9FCC(void)
+{
+    u32 ms;
+    s32 idx;
+    PerfLabelLine* lines = gm_80480B38;
+    u8* data = (u8*) &gm_803DBF78;
+
+    lines[0].unk_04 = 0;
+
+    idx = 0;
+    sprintf(lines[idx].text, (char*) (data + 0x24), lbMthp_8001F5F4());
+
+    lines[0].next = &lines[1];
+    lines[1].unk_04 = 0;
+
+    ms = lbMthp_8001F5E4();
+    idx = 1;
+    sprintf(lines[idx].text, (char*) (data + 0x24), ms);
+
+    lines[1].next = &lines[2];
+    lines[2].unk_04 = 0;
+
+    ms = (u32) ((f32) (u32) lbMthp_8001F5D4() /
+                (f32) (*(u32*) 0x800000F8 / 4 / 1000));
+    idx = 2;
+    sprintf(lines[idx].text, (char*) (data + 0x30), ms);
+
+    lines[2].next = &lines[3];
+    lines[2].next = NULL;
+
+    return lines;
+}
 
 void fn_801AA0E8(void)
 {
-    hsd_80392528(fn_801A9FCC);
+    hsd_80392528((Event) fn_801A9FCC);
 }
 
 static bool gm_804D67D0;

@@ -1729,6 +1729,7 @@ void grStadium_801D3BBC(Ground_GObj* arg0)
     TextWrapper* gp2;
     Ground* gp;
     HSD_GObj* text_gobj;
+    PAD_STACK(24);
 
     var_r30 = 0;
     gp = GET_GROUND(arg0);

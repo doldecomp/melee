@@ -36,6 +36,7 @@
 #include <baselib/lobj.h>
 #include <baselib/psappsrt.h>
 #include <baselib/psstructs.h>
+#include <MSL/math_ppc.h>
 
 extern s16 grMc_803E34A4[];
 extern Vec3 grMc_803B81B8;
@@ -971,6 +972,7 @@ void grMuteCity_801F106C(s32 i)
     f32 var_f0;
     grMc_CarEntry* car = &grMc_8049F4B8[i];
     u16 flags16 = car->x20;
+    PAD_STACK(8);
 
     if (!car->x22_flags.b0) {
         if (flags16 & 1) {
@@ -1052,6 +1054,7 @@ void grMuteCity_801F1328(void)
 {
     s32* arr = grMc_8049F440;
     int i, j;
+    PAD_STACK(8);
 
     for (i = 1; i < 30; i++) {
         j = i;
@@ -1301,6 +1304,7 @@ void grMuteCity_801F1A34(HSD_GObj* arg0, Ground_GObj* arg1)
     HSD_Spline* spline;
 
     Ground_801C0498();
+    PAD_STACK(8);
     track_mid = 0.5f * (gp->gv.mutecity.xD4 + gp->gv.mutecity.xD8);
     Camera_GetTransformPosition(&spE8);
 
@@ -1794,6 +1798,7 @@ bool grMuteCity_801F2C10(Vec3* pos, int arg, HSD_JObj* jobj)
     f32 x_max;
     f32 slope;
     f32 y;
+    f32 new_var;
     PAD_STACK(8);
 
     gobj = Ground_801C2BA4(0x1E);
@@ -1806,7 +1811,7 @@ bool grMuteCity_801F2C10(Vec3* pos, int arg, HSD_JObj* jobj)
             {
                 x = pos->x;
                 x_min = gp->gv.mutecity.xE4.x;
-                if (x < x_min) {
+                if ((new_var = x) < x_min) {
                     return false;
                 }
                 x_max = gp->gv.mutecity.xF0.x;

@@ -53,7 +53,7 @@ struct lbl_8046B488_t {
     /* 0x1AE */ s8 x1AE[0x1B2 - 0x1AE];
     /* 0x1B2 */ u8 x1B2;
     /* 0x1AE */ s8 x1B3[0x1B8 - 0x1B3];
-    /* 0x1B8 */ int (*x1B8)(void);
+    /* 0x1B8 */ bool (*x1B8)(s32);
     /* 0x1BC */ char pad_1BC[0x1E0 - 0x1BC];
 }; /* size = 0x1E0 */
 STATIC_ASSERT(sizeof(struct lbl_8046B488_t) == 0x1E0);

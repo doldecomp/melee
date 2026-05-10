@@ -46,7 +46,7 @@
 /* 0EF040 */ void ftKb_SpecialN_800EF040(Fighter_GObj*, int, KirbyHatStruct*);
 /* 0EF0E4 */ UNK_RET ftKb_SpecialN_800EF0E4(Fighter_GObj*, int, u8*);
 /* 0EF35C */ void ftKb_SpecialN_800EF35C(Fighter_GObj*, int, u8*);
-/* 0EF438 */ UNK_RET ftKb_SpecialN_800EF438(Fighter_GObj*, KirbyHatStruct*);
+/* 0EF438 */ void ftKb_SpecialN_800EF438(Fighter_GObj*, KirbyHatStruct*);
 /* 0EF69C */ void ftKb_SpecialN_800EF69C(Fighter_GObj*, int, KirbyHatStruct*);
 /* 0EF87C */ void ftKb_UnkIntBoolFunc0(Fighter*, int, bool);
 /* 0EF9BC */ void ftKb_Init_UnkCallbackPairs0_0(Fighter_GObj* gobj);
@@ -115,7 +115,7 @@
 /* 0F1BAC */ void ftKb_SpecialN_800F1BAC(Fighter_GObj* gobj, s32, bool);
 /* 0F1CD8 */ s32 ftKb_SpecialN_800F1CD8(HSD_GObj* gobj);
 /* 0F1D24 */ void ftKb_SpecialN_800F1D24(Fighter_GObj* gobj);
-/* 0F1DAC */ UNK_RET ftKb_SpecialN_800F1DAC(UNK_PARAMS);
+/* 0F1DAC */ void ftKb_SpecialN_800F1DAC(HSD_GObj* gobj);
 /* 0F1F1C */ void ftKb_SpecialN_800F1F1C(Fighter_GObj* gobj, Vec3*);
 /* 0F1F68 */ void ftKb_SpecialN_800F1F68(Fighter_GObj* gobj);
 /* 0F1FDC */ void fn_800F1FDC(Fighter_GObj* gobj);
@@ -214,7 +214,7 @@
                                          ftCollisionBox* victim_coll_box,
                                          float victim_scale_x);
 /* 0F5874 */ void ftKb_SpecialN_800F5874(Vec2* arg0);
-/* 0F5898 */ HSD_Joint* ftKb_SpecialN_800F5898(Fighter_GObj* gobj, int);
+/* 0F5898 */ HSD_Joint* ftKb_SpecialN_800F5898(Fighter_GObj* gobj);
 /* 0F58AC */ float ftKb_SpecialN_800F58AC(Fighter_GObj* gobj,
                                           Vec3* victim_self_vel,
                                           float victim_facing_dir);

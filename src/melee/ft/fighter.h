@@ -13,11 +13,16 @@
 #include <baselib/objalloc.h>
 
 extern struct Fighter_804D64FC_t {
-    u8** cmdscripts;
-    u8 pad_x4[8];
-    UNK_T* xC;
-    u8 pad_x10[0x10];
-    float* x20;
+    u8** cmdscripts;   ///< +00 per-character command script arrays
+    void** x4;         ///< +04 ground attack tables (per character)
+    void** x8;         ///< +08 air attack tables (per character)
+    UNK_T* xC;         ///< +0C ranged/projectile attack tables
+    void** x10;        ///< +10 smash attack tables (per character)
+    void** x14;        ///< +14 special action tables (per character)
+    void** x18;        ///< +18 weapon attack tables (per character)
+    void** x1C;        ///< +1C edge guard tables (per character)
+    float* x20;        ///< +20 distance thresholds (per character)
+    void* x24;         ///< +24 weapon reach bonus table
 }* Fighter_804D64FC;
 
 struct plAllocInfo;
@@ -57,7 +62,7 @@ struct plAllocInfo;
 /* 06CC30 */ void Fighter_UnkTakeDamage_8006CC30(Fighter* fp,
                                                  float damage_amount);
 /* 06CC7C */ void Fighter_TakeDamage_8006CC7C(Fighter*, float);
-/* 06CDA4 */ void Fighter_8006CDA4(Fighter* fp, s32 arg1, s32 arg2);
+/* 06CDA4 */ void Fighter_8006CDA4(Fighter* fp, s32 arg1);
 /* 06CF5C */ void Fighter_8006CF5C(Fighter* fp, s32 arg1);
 /* 06CFBC */ void Fighter_UnkSetFlag_8006CFBC(Fighter_GObj* gobj);
 /* 06CFE0 */ void Fighter_8006CFE0(Fighter_GObj* gobj);

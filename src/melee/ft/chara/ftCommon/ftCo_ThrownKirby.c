@@ -125,7 +125,7 @@ static inline void inlineB2(Fighter_GObj* gobj, Fighter_GObj* thrower_gobj,
     ftCommon_8007D5D4(fp);
     fp->mv.co.thrownkirby.x18_b0 = false;
     fp->mv.co.thrownkirby.x18_b1 = false;
-    ftCommon_SetAccessory(fp, ftKb_SpecialN_800F5898(thrower_gobj, 0));
+    ftCommon_SetAccessory(fp, ftKb_SpecialN_800F5898(thrower_gobj));
     scale->x = scale->y = scale->z = inlineB0(gobj);
     HSD_JObjSetScale(fp->x20A0_accessory, scale);
     lb_8000C2F8(fp->x20A0_accessory,
@@ -136,6 +136,7 @@ void ftCo_800BDB58(Fighter_GObj* gobj, Fighter_GObj* thrower_gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     Vec3 scale;
+    PAD_STACK(24);
     inlineB2(gobj, thrower_gobj, &scale, ftCo_MS_ThrownKirbyStar,
              ftKb_SpecialN_800F58AC, ftKb_SpecialN_800F5A88);
 
@@ -203,6 +204,7 @@ void ftCo_800BE000(Fighter_GObj* gobj, Fighter_GObj* thrower_gobj)
 {
     Vec3 scale;
     Fighter* fp = GET_FIGHTER(gobj);
+    PAD_STACK(8);
     inlineB2(gobj, thrower_gobj, &scale, ftCo_MS_ThrownCopyStar,
              ftKb_SpecialN_800F58D8, ftKb_SpecialN_800F5AB0);
 

@@ -2879,7 +2879,7 @@ bool mpColl_80048768(CollData* coll)
     return inline0(coll, 0, true);
 }
 
-bool mpColl_80048844(CollData* coll, f32 arg1)
+bool mpColl_80048844(CollData* coll)
 {
     mpCollPrev(coll);
     return inline4(coll, 0);

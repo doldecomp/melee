@@ -1,5 +1,7 @@
 #include "ftCo_ThrownMewtwo.h"
 
+#include "placeholder.h"
+
 #include <platform.h>
 
 #include "ft/fighter.h"
@@ -15,13 +17,7 @@
 void ftCo_800BD0E8(Fighter_GObj* gobj, FtMotionId msid)
 {
     Fighter* fp = GET_FIGHTER(gobj);
-/// @todo #SOLUTION 0
-#define SOLUTION 1
-#if SOLUTION == 0
-    ftCo_Thrown_Enter(gobj, msid,
-                      fp->x2222_b6 ? Ft_MF_None : Ft_MF_FreezeState, 0);
-#elif SOLUTION == 1
-    u8 _[8] = { 0 };
+    PAD_STACK(8);
     fp->facing_dir = GET_FIGHTER(fp->victim_gobj)->facing_dir;
     fp->mv.co.capturekoopa.x0 = false;
     Fighter_ChangeMotionState(gobj, msid,
@@ -30,8 +26,6 @@ void ftCo_800BD0E8(Fighter_GObj* gobj, FtMotionId msid)
     fp->accessory1_cb = ftCo_800DE508;
     ftCommon_8007E2F4(fp, 0x1FF);
     ftAnim_8006EBA4(gobj);
-#endif
-#undef SOLUTION
 }
 
 void ftCo_ThrownMewtwo_Anim(Fighter_GObj* gobj) {}

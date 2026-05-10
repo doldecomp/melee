@@ -21,7 +21,7 @@ s32 HSD_GObj_804D7834;
 HSD_GObjProc* HSD_GObj_804D7830;
 HSD_GObjList* HSD_GObj_Entities;
 HSD_GObj** plinklow_gobjs;
-HSD_GObj** HSD_GObj_804D7824;
+HSD_GObj** HSD_GObjGXLinkHead;
 HSD_GObj** HSD_GObj_804D7820;
 HSD_GObj* HSD_GObj_804D781C;
 HSD_GObj* HSD_GObj_804D7818;
@@ -165,7 +165,7 @@ void HSD_GObj_80390ED0(HSD_GObj* gobj, u32 mask)
             while (prios) {
                 if (prios & 1) {
                     HSD_GObj* cur;
-                    for (cur = HSD_GObj_804D7824[j]; cur != NULL;
+                    for (cur = HSD_GObjGXLinkHead[j]; cur != NULL;
                          cur = cur->next_gx)
                     {
                         if (cur->render_cb != NULL) {
@@ -186,7 +186,7 @@ void HSD_GObj_80390ED0(HSD_GObj* gobj, u32 mask)
 void HSD_GObj_80390FC0(void)
 {
     HSD_GObj* saved;
-    HSD_GObj* cur = HSD_GObj_804D7824[HSD_GObjLibInitData.gx_link_max + 1];
+    HSD_GObj* cur = HSD_GObjGXLinkHead[HSD_GObjLibInitData.gx_link_max + 1];
     while (cur != NULL) {
         if (cur->render_cb != NULL) {
             saved = HSD_GObj_804D7818;

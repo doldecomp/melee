@@ -39,7 +39,7 @@
 /* 272CC0 */ HSD_JObj* it_80272CC0(Item_GObj*, enum_t);
 /* 272D1C */ bool it_80272D1C(Item_GObj*);
 /* 272D40 */ s32 it_80272D40(Item_GObj*);
-/* 272DB0 */ bool itColl_BounceOffVictim(Item_GObj*);
+/* 272DB0 */ void itColl_BounceOffVictim(Item_GObj*);
 /* 272DE4 */ void it_80272DE4(HSD_JObj*, f32);
 /* 272F7C */ void it_80272F7C(HSD_JObj*, f32);
 /* 273030 */ bool it_80273030(Item_GObj*);
@@ -91,7 +91,7 @@
 /* 274E44 */ void it_80274E44(Item_GObj*);
 /* 274ECC */ void it_80274ECC(Item_GObj*, bool);
 /* 274ED8 */ void it_80274ED8(void);
-/* 274EE8 */ void it_80274EE8(u32);
+/* 274EE8 */ void it_80274EE8(void);
 /* 274EF8 */ void it_80274EF8(Item_GObj*);
 /* 274F10 */ void it_80274F10(Item_GObj*);
 /* 274F28 */ void it_80274F28(Item*, s8, HSD_GObjEvent, HSD_GObjInteraction);
@@ -199,7 +199,7 @@
 /* 279B88 */ void it_80279B88(Item*, s32, s32);
 /* 279BBC */ void it_80279BBC(Item*);
 /* 279BE0 */ void it_80279BE0(Item_GObj*);
-/* 279C48 */ void it_80279C48(Item_GObj*, Article*);
+/* 279C48 */ void it_80279C48(Item_GObj*);
 /* 279CDC */ void it_80279CDC(Item_GObj*, f32);
 /* 279D38 */ void it_80279D38(Item_GObj*);
 /* 279D5C */ void it_80279D5C(Item_GObj*, f32);
@@ -260,9 +260,9 @@
 /* 3F23CC */ extern struct ItemLogicTable it_803F23CC[47];
 /* 3F3100 */ extern struct ItemLogicTable it_803F3100[118];
 /* 3F4D20 */ extern struct ItemLogicTable it_803F4D20[30];
-/* 4A0E30 */ extern HSD_ObjAllocUnk4 it_804A0E30;
-/* 4A0E50 */ extern HSD_ObjAllocUnk6 it_804A0E50;
-/* 4A0E60 */ extern HSD_ObjAllocUnk6 it_804A0E60;
+/* 4A0E30 */ extern RandomItemSpawner it_804A0E30;
+/* 4A0E50 */ extern ItemPickTable it_804A0E50;
+/* 4A0E60 */ extern ItemPickTable it_804A0E60;
 /* 4A0F60 */ extern Article* it_804A0F60[];
 /* 4D6D00 */ extern s8 it_804D6D00;
 /* 4D6D08 */ extern s32 it_804D6D08;
@@ -274,5 +274,17 @@
 /* 4D6D28 */ extern ItemCommonData* it_804D6D28;
 /* 4D6D30 */ extern Article** it_804D6D30;
 /* 4D6D38 */ extern Article** it_804D6D38;
+
+typedef struct it_804D6D40_t {
+    /* 0x00 */ s32 x0;
+    /* 0x04 */ f32 x4;
+    /* 0x08 */ f32 x8;
+    /* 0x0C */ f32 xC;
+    /* 0x10 */ f32 x10;
+    /* 0x14 */ f32 x14;
+    /* 0x18 */ f32 x18;
+} it_804D6D40_t;
+
+/* 4D6D40 */ extern it_804D6D40_t* it_804D6D40;
 
 #endif

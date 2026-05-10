@@ -11,13 +11,12 @@
 /// If you get a redefinition error for this too, remove it.
 typedef struct itDoseiAttributes {
     f32 unk0;
-    f32 unk4;
+    s32 unk4;
     f32 unk8;
+    f32 unkC;
+    s32 unk10;
+    s32 unk14;
 } itDoseiAttributes;
-
-/* * NOTE: itDosei_ItemVars is removed from here because
- * it is defined in src/melee/it/itCommonItems.h
- */
 
 /* 281164 */ void it_3F14_Logic7_Spawned(Item_GObj*);
 /* 281390 */ void fn_80281390(Item_GObj*);

@@ -67,7 +67,7 @@ void ftCo_DownAttack_Coll(Fighter_GObj* gobj)
     ft_80084104(gobj);
 }
 
-void ftCo_80098634(HSD_ObjAllocUnk2* arg0)
+void ftCo_80098634(Item_FtTrack* arg0)
 {
     Vec4* cur_vec4 = (Vec4*) arg0;
     Vec3* cur_pos = (Vec3*) arg0;
@@ -86,7 +86,7 @@ void ftCo_80098634(HSD_ObjAllocUnk2* arg0)
         cur_pos[16] = fp->cur_pos;
         ++cur_pos;
     }
-    arg0->x150 = count;
+    arg0->x150_count = count;
 }
 
 bool ftCo_800986B0(Fighter_GObj* gobj)

@@ -1,20 +1,12 @@
 #include "itsamuschargeshot.h"
 
-#include <placeholder.h>
-#include <platform.h>
-
-#include "baselib/forward.h"
-
-#include "baselib/gobj.h"
 #include "baselib/mtx.h"
 #include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "ft/chara/ftKirby/ftKb_Init.h"
+#include "ft/chara/ftSamus/ftSs_SpecialLw_0.h"
 #include "ft/chara/ftSamus/ftSs_SpecialN.h"
 #include "ft/ftlib.h"
-
-#include "it/forward.h"
-
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
@@ -22,8 +14,28 @@
 #include "it/item.h"
 #include "lb/lbvector.h"
 
-#include <math.h>
 #include <trigf.h>
+
+ItemStateTable it_803F7288[] = {
+    { 0, itSamuschargeshot_UnkMotion0_Anim, itSamuschargeshot_UnkMotion0_Phys,
+      itSamuschargeshot_UnkMotion0_Coll },
+    { 1, itSamuschargeshot_UnkMotion8_Anim, itSamuschargeshot_UnkMotion8_Phys,
+      itSamuschargeshot_UnkMotion8_Coll },
+    { 2, itSamuschargeshot_UnkMotion8_Anim, itSamuschargeshot_UnkMotion8_Phys,
+      itSamuschargeshot_UnkMotion8_Coll },
+    { 3, itSamuschargeshot_UnkMotion8_Anim, itSamuschargeshot_UnkMotion8_Phys,
+      itSamuschargeshot_UnkMotion8_Coll },
+    { 4, itSamuschargeshot_UnkMotion8_Anim, itSamuschargeshot_UnkMotion8_Phys,
+      itSamuschargeshot_UnkMotion8_Coll },
+    { 5, itSamuschargeshot_UnkMotion8_Anim, itSamuschargeshot_UnkMotion8_Phys,
+      itSamuschargeshot_UnkMotion8_Coll },
+    { 6, itSamuschargeshot_UnkMotion8_Anim, itSamuschargeshot_UnkMotion8_Phys,
+      itSamuschargeshot_UnkMotion8_Coll },
+    { 7, itSamuschargeshot_UnkMotion8_Anim, itSamuschargeshot_UnkMotion8_Phys,
+      itSamuschargeshot_UnkMotion8_Coll },
+    { 8, itSamuschargeshot_UnkMotion8_Anim, itSamuschargeshot_UnkMotion8_Phys,
+      itSamuschargeshot_UnkMotion8_Coll },
+};
 
 bool it_802B5518(Item_GObj* gobj, CollData* cd)
 {
@@ -78,14 +90,13 @@ HSD_GObj* it_802B55C8(Fighter_GObj* gobj, Vec3* pos, enum Fighter_Part arg2,
         ip->xDD4_itemVar.samuschargeshot.xDE0 = 0.0f;
         ip->xDD4_itemVar.samuschargeshot.xDFC = 0.0f;
         ip->xDD4_itemVar.samuschargeshot.xE00 = gobj;
-        ip->xDD4_itemVar.samuschargeshot.xE04 =
-            ftLib_800869D4((HSD_GObj*) gobj);
+        ip->xDD4_itemVar.samuschargeshot.xE04 = ftLib_800869D4(gobj);
         ip->xDD4_itemVar.samuschargeshot.xE2C = 0.0f;
         ip->xDD4_itemVar.samuschargeshot.xE30 = 0.0f;
         ip->xDD4_itemVar.samuschargeshot.xE34 = 0.0f;
         Item_8026AB54(n, gobj, arg2);
     }
-    return (HSD_GObj*) n;
+    return n;
 }
 
 void it_802B56E4(Item_GObj* gobj, Vec3* vec, f32 farg0, f32 farg1, f32 farg2)
@@ -105,48 +116,43 @@ void it_802B56E4(Item_GObj* gobj, Vec3* vec, f32 farg0, f32 farg1, f32 farg2)
     }
     ip->xDD4_itemVar.samuschargeshot.xDEC = farg1;
     ip->xDD4_itemVar.samuschargeshot.xDF0 = farg2;
+    if (ip->xDD4_itemVar.samuschargeshot.xE00 &&
+        ip->owner == ip->xDD4_itemVar.samuschargeshot.xE00)
     {
-        if (ip->xDD4_itemVar.samuschargeshot.xE00 != NULL &&
-            ip->owner == ip->xDD4_itemVar.samuschargeshot.xE00)
+        it_802B5CBC(gobj, ip->xDD4_itemVar.samuschargeshot.xE00);
         {
-            it_802B5CBC(gobj);
-            {
-                Vec3 sp2C;
-                Vec3 sp20;
+            Vec3 sp2C;
+            Vec3 sp20;
 
-                HSD_MtxGetRotation(
-                    ftLib_80086630(ip->xDD4_itemVar.samuschargeshot.xE00,
-                                   ip->xDC4)
-                        ->mtx,
-                    &sp2C);
-                sp20.x = sp20.y = sp20.z = 0.0f;
-                it_8027429C(gobj, &sp20);
-            }
-            ip->xDC8_word.flags.x14 = 0;
-            it_8026B3A8(gobj);
-            ip->xDD4_itemVar.samuschargeshot.xDDC =
-                (farg1 * ((attr->xC - attr->x8) / farg2)) + attr->x8;
-            ip->xDD4_itemVar.samuschargeshot.xDF8 =
-                (u32) ((farg1 * ((attr->x14 - attr->x10) / farg2)) +
-                       attr->x10);
-            ip->xDD4_itemVar.samuschargeshot.xDE0 = 0.0f;
-            ip->xDD4_itemVar.samuschargeshot.xDE4 =
-                (ip->xDD4_itemVar.samuschargeshot.xDEC *
-                 ((attr->x1C - attr->x18) /
-                  ip->xDD4_itemVar.samuschargeshot.xDF0)) +
-                attr->x18;
-            ip->xDD4_itemVar.samuschargeshot.xDF4 = 0;
-            ip->facing_dir =
-                ftLib_800865C0(ip->xDD4_itemVar.samuschargeshot.xE00);
-            ip->pos = *vec;
-            ip->xDD4_itemVar.samuschargeshot.xDFC = 0;
-            ip->x40_vel.x = ip->xDD4_itemVar.samuschargeshot.xDDC *
-                            cosf(ip->xDD4_itemVar.samuschargeshot.xDD8);
-            ip->x40_vel.y = ip->xDD4_itemVar.samuschargeshot.xDDC *
-                            sinf(ip->xDD4_itemVar.samuschargeshot.xDD8);
-            ip->x40_vel.z = 0.0f;
-            ip->xDD4_itemVar.samuschargeshot.xDE8 = 1;
+            HSD_MtxGetRotation(
+                ftLib_80086630(ip->xDD4_itemVar.samuschargeshot.xE00, ip->xDC4)
+                    ->mtx,
+                &sp2C);
+            sp20.x = sp20.y = sp20.z = 0.0f;
+            it_8027429C(gobj, &sp20);
         }
+        ip->xDC8_word.flags.x14 = 0;
+        it_8026B3A8(gobj);
+        ip->xDD4_itemVar.samuschargeshot.xDDC =
+            (farg1 * ((attr->xC - attr->x8) / farg2)) + attr->x8;
+        ip->xDD4_itemVar.samuschargeshot.xDF8 =
+            (u32) ((farg1 * ((attr->x14 - attr->x10) / farg2)) + attr->x10);
+        ip->xDD4_itemVar.samuschargeshot.xDE0 = 0.0f;
+        ip->xDD4_itemVar.samuschargeshot.xDE4 =
+            (ip->xDD4_itemVar.samuschargeshot.xDEC *
+             ((attr->x1C - attr->x18) /
+              ip->xDD4_itemVar.samuschargeshot.xDF0)) +
+            attr->x18;
+        ip->xDD4_itemVar.samuschargeshot.xDF4 = 0;
+        ip->facing_dir = ftLib_800865C0(ip->xDD4_itemVar.samuschargeshot.xE00);
+        ip->pos = *vec;
+        ip->xDD4_itemVar.samuschargeshot.xDFC = 0;
+        ip->x40_vel.x = ip->xDD4_itemVar.samuschargeshot.xDDC *
+                        cosf(ip->xDD4_itemVar.samuschargeshot.xDD8);
+        ip->x40_vel.y = ip->xDD4_itemVar.samuschargeshot.xDDC *
+                        sinf(ip->xDD4_itemVar.samuschargeshot.xDD8);
+        ip->x40_vel.z = 0.0f;
+        ip->xDD4_itemVar.samuschargeshot.xDE8 = 1;
     }
 }
 
@@ -157,7 +163,7 @@ void it_2725_Logic108_Destroyed(Item_GObj* gobj)
 
     if (gobj != NULL) {
         ip = GET_ITEM(gobj);
-        efLib_DestroyAll((HSD_GObj*) gobj);
+        efLib_DestroyAll(gobj);
         if (ip->xDD4_itemVar.samuschargeshot.xDE8 == 0) {
             if ((ip->xDD4_itemVar.samuschargeshot.xE00 != NULL) &&
                 (ip->owner == ip->xDD4_itemVar.samuschargeshot.xE00))
@@ -187,7 +193,7 @@ void it_802B5974(Item_GObj* gobj)
 
     if (gobj != NULL) {
         ip = GET_ITEM(gobj);
-        efLib_DestroyAll((HSD_GObj*) gobj);
+        efLib_DestroyAll(gobj);
         ip->xDD4_itemVar.samuschargeshot.xDFC = 0;
         Item_8026A8EC(gobj);
     }
@@ -201,26 +207,76 @@ void it_2725_Logic108_PickedUp(Item_GObj* gobj)
     Item_80268E5C(gobj, 0, ITEM_ANIM_UPDATE);
     switch (ip->kind) {
     case It_Kind_Samus_Charge:
-        efSync_Spawn(0x47F, (HSD_GObj*) gobj, grandchild);
+        efSync_Spawn(0x47F, gobj, grandchild);
         ip->xDD4_itemVar.samuschargeshot.xDFC = 1;
         return;
     case It_Kind_Kirby_SamusCharge:
-        efSync_Spawn(0x4A1, (HSD_GObj*) gobj, grandchild);
+        efSync_Spawn(0x4A1, gobj, grandchild);
         ip->xDD4_itemVar.samuschargeshot.xDFC = 1;
         return;
     }
 }
 
-bool itSamuschargeshot_UnkMotion8_Anim(Item_GObj* gobj)
+bool itSamuschargeshot_UnkMotion0_Anim(Item_GObj* gobj)
 {
     Vec3 scale;
     Item* ip = GET_ITEM(gobj);
+    itSamusChargeShot_Attributes* attr =
+        ip->xC4_article_data->x4_specialAttributes;
     HSD_JObj* grandchild = itGetJObjGrandchild(gobj);
+    PAD_STACK(8);
 
-    scale.x = scale.y = scale.z = ip->xDD4_itemVar.samuschargeshot.xDE4;
+    if (ip->xDD4_itemVar.samuschargeshot.xE00 != NULL &&
+        ip->owner == ip->xDD4_itemVar.samuschargeshot.xE00)
+    {
+        switch (ip->kind) {
+        case It_Kind_Samus_Charge:
+            if (ftSs_SpecialLw_80129158(
+                    ip->xDD4_itemVar.samuschargeshot.xE00) != 0)
+            {
+                return true;
+            }
+            if (ftSs_SpecialN_801291A8(
+                    ip->xDD4_itemVar.samuschargeshot.xE00) != 0)
+            {
+                return true;
+            }
+            if (ftSs_SpecialLw_80129100(
+                    ip->xDD4_itemVar.samuschargeshot.xE00,
+                    &ip->xDD4_itemVar.samuschargeshot.xDEC,
+                    &ip->xDD4_itemVar.samuschargeshot.xDF0) == -1)
+            {
+                return true;
+            }
+            break;
+        case It_Kind_Kirby_SamusCharge:
+            if (ftKb_SpecialNSs_800FCC6C(
+                    ip->xDD4_itemVar.samuschargeshot.xE00) != 0)
+            {
+                return true;
+            }
+            if (ftKb_SpecialNSs_800FCCBC(
+                    ip->xDD4_itemVar.samuschargeshot.xE00) != 0)
+            {
+                return true;
+            }
+            if (ftKb_SpecialNSs_800FCC14(
+                    ip->xDD4_itemVar.samuschargeshot.xE00,
+                    &ip->xDD4_itemVar.samuschargeshot.xDEC,
+                    &ip->xDD4_itemVar.samuschargeshot.xDF0) == -1)
+            {
+                return true;
+            }
+            break;
+        }
+    }
 
+    scale.x = scale.y = scale.z =
+        (ip->xDD4_itemVar.samuschargeshot.xDEC *
+         ((attr->x1C - attr->x18) / ip->xDD4_itemVar.samuschargeshot.xDF0)) +
+        attr->x18;
     HSD_JObjSetScale(grandchild, &scale);
-    return it_80273130(gobj);
+    return false;
 }
 
 void itSamuschargeshot_UnkMotion0_Phys(Item_GObj* gobj) {}
@@ -230,7 +286,7 @@ bool itSamuschargeshot_UnkMotion0_Coll(Item_GObj* gobj)
     return false;
 }
 
-void it_802B5CBC(Item_GObj* gobj)
+void it_802B5CBC(Item_GObj* gobj, Fighter_GObj* unused)
 {
     Item* ip = GET_ITEM(gobj);
     itSamusChargeShot_Attributes* attr =
@@ -250,6 +306,19 @@ void it_802B5CBC(Item_GObj* gobj)
     Item_80268E5C(gobj, ip->xDD4_itemVar.samuschargeshot.xDEC + 1,
                   ITEM_ANIM_UPDATE);
     ip->on_accessory = it_802B5EDC;
+}
+
+bool itSamuschargeshot_UnkMotion8_Anim(Item_GObj* gobj)
+{
+    u8 _pad[4];
+    Vec3 scale;
+    Item* ip = gobj->user_data;
+    HSD_JObj* grandchild = itGetJObjGrandchild(gobj);
+
+    scale.x = scale.y = scale.z = ip->xDD4_itemVar.samuschargeshot.xDE4;
+
+    HSD_JObjSetScale(grandchild, &scale);
+    return it_80273130(gobj);
 }
 
 void itSamuschargeshot_UnkMotion8_Phys(Item_GObj* gobj)

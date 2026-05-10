@@ -27,6 +27,7 @@ typedef struct FighterBone FighterBone;
 typedef struct FighterPartsTable FighterPartsTable;
 typedef struct UnkPlBonusBits UnkPlBonusBits;
 typedef struct ft_800898B4_t ft_800898B4_t;
+typedef struct IKState IKState;
 typedef struct ftCo_DatAttrs_xBC_t ftCo_DatAttrs_xBC_t;
 typedef struct ftCommonData ftCommonData;
 typedef struct ftData_x8 ftData_x8;

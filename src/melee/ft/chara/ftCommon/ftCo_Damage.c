@@ -277,7 +277,7 @@ void ftCo_8008DCE0(Fighter_GObj* gobj, int arg1, float facing_dir)
     float y;
     int var_r27 = 1;
     float kb_applied = fp->dmg.kb_applied;
-    Fighter_8006CDA4(fp, fp->dmg.x1838_percentTemp, ftCo_803C5520[0][0]);
+    Fighter_8006CDA4(fp, fp->dmg.x1838_percentTemp);
     fp->dmg.x18d8.kb_applied1 = kb_applied;
     pl_80040270(fp->player_id, fp->x221F_b4, kb_applied);
     temp_f30 = kb_applied * p_ftCommonData->x154;
@@ -737,6 +737,7 @@ static bool inlineB0(Fighter_GObj* gobj)
 #pragma inline_depth(1)
 void ftCo_8008EB58(Fighter_GObj* gobj)
 {
+    PAD_STACK(8);
     if (inlineB0(gobj)) {
         ftCo_800C8D00(gobj);
         inlineF0(gobj);
@@ -785,6 +786,7 @@ void ftCo_8008EC90(Fighter_GObj* gobj)
     bool ret0 = false;
     Fighter* fp = gobj->user_data;
     float facing_dir = 0;
+    PAD_STACK(64);
     if (fp->x2220_b3 || fp->x2220_b4 || !fp->dmg.kb_applied) {
         inlineB2(gobj);
         goto ret_A8C;

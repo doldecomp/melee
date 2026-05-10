@@ -25,15 +25,13 @@ ItemStateTable it_803F7AC8[] = {
 
 void it_802C9588(Item_GObj* item_gobj)
 {
-    Article* article;
     Item* item;
     itChicoritaAttr* attr;
     PAD_STACK(12);
 
-    item = GET_ITEM((HSD_GObj*) item_gobj);
-    article = item->xC4_article_data;
-    attr = article->x4_specialAttributes;
-    it_80279C48(item_gobj, article);
+    item = GET_ITEM(item_gobj);
+    attr = item->xC4_article_data->x4_specialAttributes;
+    it_80279C48(item_gobj);
     item->xDD4_itemVar.chicorita.x60 = -1;
     item->xDBC_itcmd_var4.flags.x0 = false;
     it_80279CDC(item_gobj, attr->scale);

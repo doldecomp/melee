@@ -16,7 +16,7 @@
 /* 12CCE0 */ float ftYs_SpecialN_GetDatAttr1C(Fighter_GObj* gobj);
 /* 12CCF0 */ float ftYs_SpecialN_GetDatAttr20(Fighter_GObj* gobj);
 /* 12CD00 */ float ftYs_SpecialN_GetDatAttr24(Fighter_GObj* gobj);
-/* 12CD10 */ float ftYs_SpecialN_GetExtAttr28(Fighter_GObj* gobj);
+/* 12CD10 */ float ftYs_SpecialN_GetExtAttr28(void);
 /* 12CD28 */ float ftYs_SpecialN_GetExtAttr2C(void);
 /* 12CD40 */ float ftYs_SpecialN_8012CD40(void);
 /* 12CD58 */ float ftYs_SpecialN_GetExtAttr34(void);

@@ -177,10 +177,25 @@ struct ItemModelDesc {
     u8 xC_bit_field;
 };
 
+// Mirrors HurtCapsule[a_offset..scale] but with a leading bone_id where
+// HurtCapsule has its state field. Stored inline in Article::x8_hurtbones,
+// then copied into Item::xACC_itemHurtbox by it_8027163C.
+typedef struct {
+    enum_t bone_id;
+    Vec3 a_offset;
+    Vec3 b_offset;
+    f32 scale;
+} ItHurtBoneDesc;
+
+typedef struct {
+    s32 count;
+    ItHurtBoneDesc* descs;
+} ItHurtBoneList;
+
 struct Article {
     ItemAttr* x0_common_attr;
     void* x4_specialAttributes;
-    UNK_T x8_hurtbox;
+    ItHurtBoneList* x8_hurtbones;
     ItemStateArray* xC_itemStates;
     ItemModelDesc* x10_modelDesc;
     ItemDynamics* x14_dynamics;
@@ -196,6 +211,10 @@ typedef struct it_266F_ItemVars {
     UnkFlagStruct x18;
     struct lbColl_8000A10C_arg0_t x1C;
 } it_266F_ItemVars;
+
+struct ItemModStruct {
+    GXColor x0_unk;
+};
 
 struct Item {
     void* x0;
@@ -336,11 +355,8 @@ struct Item {
     // u32 xBB8;
     DynamicBoneTable* xBBC_dynamicBoneTable;
     UNK_T xBC0;
-    u8 xBC4;
-    u8 xBC5;
-    u8 xBC6;
-    u8 xBC7;
-    u32 xBC8;
+    GXColor xBC4;
+    ItemModStruct xBC8;
     Vec2 xBCC_unk;
     Vec2 xBD4_grabRange;
     itECB xBDC;
@@ -543,8 +559,10 @@ struct Item {
         itBox_ItemVars box;
         itCapsule_ItemVars capsule;
         itChicorita_ItemVars chicorita;
+        itCLinkMilk_ItemVars clinkmilk;
         itClimbersBlizzard_ItemVars climbersblizzard;
         itClimbersIce_ItemVars climbersice;
+        itClimbersString_ItemVars climbersstring;
         itCoin_ItemVars coin;
         itDosei_ItemVars dosei;
         itDrMarioPill_ItemVars drmariopill;
@@ -570,10 +588,12 @@ struct Item {
         itHeiho_ItemVars heiho;
         itHinoarashi_ItemVars hinoarashi;
         itHitodeman_ItemVars hitodeman;
+        itHouou_ItemVars houou;
         itKabigon_ItemVars kabigon;
         itKinoko_ItemVars kinoko;
         itKirbyHammer_ItemVars kirbyhammer;
         itKirbyCutterBeam_ItemVars kirbycutterbeam;
+        itKirby2F23_ItemVars kirby2f23;
         itkireihana_ItemVars kireihana;
         itKlap_ItemVars klap;
         itKoopaFlame_ItemVars koopaflame;
@@ -604,6 +624,7 @@ struct Item {
         itMewtwoShadowball_ItemVars mewtwoshadowball;
         itMsBomb_ItemVars msbomb;
         itNessbat_ItemVars nessbat;
+        itNessYoyo_ItemVars nessyoyo;
         itNokoNoko_ItemVars nokonoko;
         itOctarock_ItemVars octarock;
         itOldkuri_ItemVars oldkuri;
@@ -689,10 +710,6 @@ struct SpawnItem {
     /* +48 */ GroundOrAir x48_ground_or_air;
 };
 
-struct ItemModStruct {
-    GXColor x0_unk;
-};
-
 struct ItemCommonData {
     s32 x0;
     u32 x4;
@@ -740,18 +757,14 @@ struct ItemCommonData {
     s32 xDC;
     f32 unk_degrees; ///< @at{E0}
     u8 filler_1a[0xE8 - 0xE4];
-    u8 xE8; // struct that has a float (scale?) as the first member? See
-            // it_80275BC8
+    f32 xE8;
     u8 filler_1a_2[0xF0 - 0xEC];
     f32 xF0;
     f32 xF4;
     f32 xF8;
-    u8 filler_1b[0x124 - 0xFC];
-    s32 x124; // max value for a random integer generation in it_8026F6BC
-    s32 x128; // used in it_8026CF04
-    s32 x12C; // used in it_8026CF04
-    s32 x130; // used in it_8026CF04
-    s32 x134; // used in it_8026CF04
+    s32 xFC[(0x124 - 0xFC) / 4];
+    s32 x124;    // max value for a random integer generation in it_8026F6BC
+    s32 x128[4]; // monster item counts for it_8026CF04
     // u8 filler_2[0x148 - 0x138]; - replaced with vars that are used for
     // calc's in it_8026F8B4
     s32 x138;
@@ -775,24 +788,19 @@ struct Item_r13_Data {
     s32 x14;
 };
 
-struct HSD_ObjAllocUnk2 {
-    // float x0;
-    // float x4;
-    // float x8;
-    // float xC;
-    // u8 pad_10[0xB0 - 0x10];
-    itECB ecb_arr[11];
-    int xB0;
-    int xB4;
-    int xB8;
-    M2C_UNK xBC;
-    // Vec3 xC0;
-    // u8 pad_CC[0x148 - 0xCC];
-    Vec3 xC0_vec3_arr[11];
+// Per-fighter ECB/position record. Populated by ftCo_80098634 (one entry per
+// fighter); read by it_80271B60 to detect item/fighter ECB overlap.
+struct Item_FtTrack {
+    itECB x0_ecb_arr[11];
+    s32 xB0;
+    s32 xB4;
+    s32 xB8;
+    s32 xBC;
+    Vec3 xC0_pos_arr[11];
     u32 x144;
     u32 x148;
     u32 x14C;
-    u32 x150; // num of itECB/Vec3's with data?
+    u32 x150_count;
     UnkFlagStruct x154;
 };
 
@@ -829,21 +837,39 @@ struct HSD_ObjAllocUnk {
     s32 x64; // u32 or s32?
 };
 
-struct HSD_ObjAllocUnk6 {
-    u8 x0;  // Gets incremented and decremented by 1 for various checks. Gets
-            // indexed into x4's struct
-    u8* x4; // Points to struct of ItemKinds (or array?)
-    u16 x8; // Max value for random integers
-    u16 xA;
-    u16* xC; // Points to struct of ???
+// Weighted random pick table for item selection. Holds N parallel entries:
+//
+//   x4[i] is the ItemKind of entry i.
+//   xC[i] is the cumulative weight threshold of entry i (sum of weights of
+//         entries 0..i-1; xC[0] == 0).
+//   x8    is the total weight (== xC[N], implicit; xC[N] is not stored).
+//
+// To pick an item, draw r in [0, x8) and binary-search xC for the largest i
+// with xC[i] <= r; entry i is the chosen item.
+//
+// Allocated by HSD_MemAlloc with size N*4 (so xC has 2*N u16 slots, but only
+// the first N are populated; the rest are unused over-allocation).
+//
+// Built by it_8026CA4C / it_8026CB9C / it_8026CD50 / it_8026CF04;
+// queried by it_8026C530 (binary search) and it_8026C75C (full pick).
+struct ItemPickTable {
+    u8 x0; // entry count N (incremented/decremented as items get added/picked)
+    u8* x4; // ItemKind values, length N
+    u16 x8; // total weight, used as the upper bound of HSD_Randi
+    u8 pad_xA[2];
+    u16* xC; // cumulative weight thresholds, length N
 };
 
-struct HSD_ObjAllocUnk4 {
-    u32 x0;
-    HSD_ObjAllocUnk6 x4;
-    s32 x14;
-    u64 x18; // Gets set equal to gm_8016AEA4(), aka lbl_8046B6A0.unk_24D3
-             // (which is an s8?)
+// State for the periodic ambient item-spawn system. fn_8026C88C runs each
+// frame: decrements x0; when it reaches 0, picks an item from x4 and tries to
+// spawn it, then resets x0 to a fresh random duration scaled by stage
+// parameters. Initialized in it_8026D018; queried by it_8026D324 to gate
+// individual kinds.
+struct RandomItemSpawner {
+    s32 x0;           // spawn countdown (frames until next spawn attempt)
+    ItemPickTable x4; // weighted pick table, built from x18 + stage weights
+    s32 x14;          // unused
+    u64 x18;          // stage's allowed-items bitmask, from gm_8016AEA4()
 };
 
 struct HSD_ObjAllocUnk5 {
@@ -854,12 +880,14 @@ struct HSD_ObjAllocUnk5 {
     u16 xC;
 };
 
-typedef struct HSD_ObjAllocUnk7 {
+// Each entry records a single damage hit; x0 selects which member of x4 is
+// valid (1 = fighter, 2 = item).
+typedef struct DamageLogEntry {
     s32 x0;
     void* x4;
     HitCapsule* x8;
-    void* xC;
-} HSD_ObjAllocUnk7;
+    HurtCapsule* xC;
+} DamageLogEntry;
 
 struct it_8026C47C_arg0_t {
     s32 unk0;
@@ -879,7 +907,7 @@ struct it_8026F3D4_arg1_t {
 };
 
 struct it_8026F3D4_body_t {
-    u8 x0[32]; // This array length was a guess
+    ItemKind x0[8]; // This array length was a guess
 };
 
 #endif

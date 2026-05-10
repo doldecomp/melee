@@ -96,7 +96,7 @@
 /* 802A7764 */ void it_802A7764(HSD_GObj* arg0);
 /* 802A77DC */ void it_802A77DC(Item_GObj* gobj);
 /* 802A7840 */ void it_802A7840(HSD_GObj* arg0);
-/* 802A78B8 */ void it_802A78B8(HSD_GObj* arg0, Vec3* arg1, f32 arg2);
+/* 802A78B8 */ void it_802A78B8(HSD_GObj* arg0, Vec3* arg1);
 /* 802A793C */ void it_802A793C(HSD_GObj* arg0);
 /* 802A79A0 */ void it_802A79A0(HSD_GObj* arg0);
 /* 802A7A04 */ void it_802A7A04(HSD_GObj* arg0);

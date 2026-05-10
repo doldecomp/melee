@@ -33,6 +33,12 @@ int lb_80019BB8(int card_result)
     }
 }
 
+struct CardTask* lb_80019C38_noinline(void);
+struct CardTask* lb_80019C38_noinline(void)
+{
+    return lb_80019C38();
+}
+
 struct CardTask* lb_80019C38(void)
 {
     int i;
@@ -761,12 +767,46 @@ int lb_8001BB48(int chan, char* filename, void* file_entries, void* save_data,
                 const char* write_buf, int write_offset, int write_len,
                 UNK_T status_out)
 {
+    int new_var;
+    struct CardTask* task;
     lb_80019EF0(chan, save_data, status_out, 0);
+
+    task = lb_80019C38_noinline();
+    task->x0 = 0;
+    task->x4 = 0x10000;
+    new_var = 0x20;
+    task = lb_80019C38_noinline();
+    task->x0 = 1;
+    task->x4 = 0x201;
+    lb_8001A4CC_dontinline(filename, file_entries);
+    task = lb_80019C38_noinline();
+    task->x0 = 3;
+    task->x4 = -1;
+
+    task = lb_80019C38_noinline();
+    task->x0 = 7;
+    task->x4 = 0x10;
+    memcpy(task->x10, filename, new_var);
+    lb_80432A68.unk_14 = write_buf;
+    lb_80432A68.unk_18 = write_offset;
+    lb_80432A68.unk_1C = write_len;
+    return lb_80019CB0(0x10);
+}
+
+inline int lb_8001BB48_inline(int chan, char* filename, void* file_entries,
+                              void* save_data, const char* write_buf,
+                              int write_offset, int write_len,
+                              UNK_T status_out)
+{
+    int new_var;
+    lb_80019EF0(chan, save_data, status_out, 0);
+
     setup_task(0, 0x10000);
+    new_var = 0x20;
     setup_task(1, 0x201);
     lb_8001A4CC_dontinline(filename, file_entries);
     setup_task(3, -1);
-    memcpy(setup_task(7, 0x10)->x10, filename, 0x20);
+    memcpy(setup_task(7, 0x10)->x10, filename, new_var);
     lb_80432A68.unk_14 = write_buf;
     lb_80432A68.unk_18 = write_offset;
     lb_80432A68.unk_1C = write_len;
@@ -777,8 +817,9 @@ int lb_8001BC18(int chan, char* filename, void** file_entries, void* save_data,
                 const char* write_buf, int write_offset, int write_len,
                 UNK_T status_out)
 {
-    s32 result = lb_8001BB48(chan, filename, file_entries, save_data,
-                             write_buf, write_offset, write_len, status_out);
+    s32 result =
+        lb_8001BB48_inline(chan, filename, file_entries, save_data, write_buf,
+                           write_offset, write_len, status_out);
     if (result == 0xB) {
         do {
         } while ((result = lb_8001B6F8()) == 0xB);
@@ -811,37 +852,66 @@ int lb_8001BD34(int chan, const char* filename, UNK_T file_entries,
     return result;
 }
 
+#pragma push
+#pragma dont_inline on
 int lb_8001BE30(int chan, const char* filename, UNK_T file_entries,
                 const char* read_buf, int read_offset, int read_len,
                 UNK_T status_out, UNK_T callback)
 {
+    struct CardTask* task;
     lb_80019EF0(chan, 0, status_out, callback);
-    setup_task(0, 0x10000);
-    setup_task(1, 0x201);
-    lb_8001A4CC_dontinline(filename, 0);
-    setup_task(3, -1);
-    setup_task(10, 2);
+
+    task = lb_80019C38();
+    task->x0 = 0;
+    task->x4 = 0x10000;
+    task = lb_80019C38();
+    task->x0 = 1;
+    task->x4 = 0x201;
+    lb_8001A4CC(filename, 0);
+    task = lb_80019C38();
+    task->x0 = 3;
+    task->x4 = -1;
+    task = lb_80019C38();
+    task->x0 = 10;
+    task->x4 = 2;
     lb_80432A68.unk_14 = read_buf;
     lb_80432A68.unk_18 = read_offset;
     lb_80432A68.unk_1C = read_len;
-    setup_task(9, 3)->x8 = file_entries;
+    task = lb_80019C38();
+    task->x0 = 9;
+    task->x4 = 3;
+    task->x8 = file_entries;
     return lb_80019CB0(0x10);
 }
+#pragma dont_inline reset
+#pragma pop
 
 int lb_8001BF04(int chan, char* filename, void* file_entries,
                 const char* write_buf, int write_offset, int write_len,
                 UNK_T status_out)
 {
+    struct CardTask* task;
     lb_80019EF0(chan, 0, status_out, 0);
-    setup_task(0, 0x10000);
-    setup_task(1, 0x201);
+    task = lb_80019C38_noinline();
+    task->x0 = 0;
+    task->x4 = 0x10000;
+    task = lb_80019C38_noinline();
+    task->x0 = 1;
+    task->x4 = 0x201;
     lb_8001A4CC_dontinline(filename, 0);
-    setup_task(3, -1);
-    setup_task(11, 2);
+    task = lb_80019C38_noinline();
+    task->x0 = 3;
+    task->x4 = -1;
+    task = lb_80019C38_noinline();
+    task->x0 = 11;
+    task->x4 = 2;
     lb_80432A68.unk_14 = write_buf;
     lb_80432A68.unk_18 = write_offset;
     lb_80432A68.unk_1C = write_len;
-    setup_task(8, 3)->x8 = file_entries;
+    task = lb_80019C38_noinline();
+    task->x0 = 8;
+    task->x4 = 3;
+    task->x8 = file_entries;
     return lb_80019CB0(0x10);
 }
 
@@ -873,14 +943,24 @@ int lb_8001C0F4(int chan, const char* name_a, const char* name_b,
     struct CardTask* task;
 
     lb_80019EF0(chan, 0, status_out, 0);
-    setup_task(0, 0x10000);
-    setup_task(1, 0x201);
+    task = lb_80019C38_noinline();
+    task->x0 = 0;
+    task->x4 = 0x10000;
+    task = lb_80019C38_noinline();
+    task->x0 = 1;
+    task->x4 = 0x201;
     lb_8001A4CC_dontinline(name_a, 0);
-    setup_task(3, -1);
-    task = setup_task(6, 14);
+    task = lb_80019C38_noinline();
+    task->x0 = 3;
+    task->x4 = -1;
+    task = lb_80019C38_noinline();
+    task->x0 = 6;
+    task->x4 = 14;
     strncpy(task->x10, name_a, 0x20);
     strncpy(task->x19, name_c, 0x20);
-    task = setup_task(2, 1);
+    task = lb_80019C38_noinline();
+    task->x0 = 2;
+    task->x4 = 1;
     if (name_b != NULL) {
         task->xC = task->x10;
         strncpy(task->x10, name_b, 0x20);
@@ -888,11 +968,17 @@ int lb_8001C0F4(int chan, const char* name_a, const char* name_b,
         task->xC = NULL;
     }
     task->x8 = 0;
-    setup_task(3, -1);
-    task = setup_task(6, 14);
+    task = lb_80019C38_noinline();
+    task->x0 = 3;
+    task->x4 = -1;
+    task = lb_80019C38_noinline();
+    task->x0 = 6;
+    task->x4 = 14;
     strncpy(task->x10, name_b, 0x20);
     strncpy(task->x19, name_a, 0x20);
-    task = setup_task(2, 1);
+    task = lb_80019C38_noinline();
+    task->x0 = 2;
+    task->x4 = 1;
     if (name_c != NULL) {
         task->xC = task->x10;
         strncpy(task->x10, name_c, 0x20);
@@ -900,8 +986,12 @@ int lb_8001C0F4(int chan, const char* name_a, const char* name_b,
         task->xC = NULL;
     }
     task->x8 = 0;
-    setup_task(3, -1);
-    task = setup_task(6, 14);
+    task = lb_80019C38_noinline();
+    task->x0 = 3;
+    task->x4 = -1;
+    task = lb_80019C38_noinline();
+    task->x0 = 6;
+    task->x4 = 14;
     strncpy(task->x10, name_c, 0x20);
     strncpy(task->x19, name_b, 0x20);
     return lb_80019CB0(0x10);

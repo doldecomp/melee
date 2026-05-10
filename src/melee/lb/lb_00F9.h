@@ -51,7 +51,7 @@ lb_800122C8(HSD_ImageDesc* image_desc, u16 origx, u16 origy,
                               float, float);
 /* 013614 */ void fn_80013614(HSD_GObj*);
 /* 0138AC */ void fn_800138AC(void* ptr); ///< #HSD_Free wrapper
-/* 0138CC */ void lb_800138CC(HSD_GObj* gobj, int arg1);
+/* 0138CC */ void lb_800138CC(HSD_GObj* gobj, HSD_GObjEvent arg1);
 /* 0138D8 */ void lb_800138D8(HSD_GObj* gobj, s8 arg1);
 /* 0138EC */ void lb_800138EC(s32 arg0, GObj_RenderFunc render_func, u32 arg2,
                               s8 arg3, f32 x, f32 y, f32 w, f32 h);

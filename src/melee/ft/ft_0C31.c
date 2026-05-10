@@ -54,7 +54,7 @@ void ftCo_800C61B0(Fighter_GObj* gobj)
     fp->mv.co.entry.x14.z = fp->mv.co.entry.x8.z;
     HSD_JObjSetScale(jobj, &fp->mv.co.entry.x14);
 
-    fp->mv.co.common.x4 = fp->cur_pos.y;
+    fp->mv.co.common.x4.x = fp->cur_pos.y;
     Fighter_ChangeMotionState(gobj, ftCo_MS_Entry, 0, 0.0F, 1.0F, 0.0F, NULL);
     fp->invisible = true;
     fp->x2219_b1 = true;
@@ -564,7 +564,7 @@ bool ftCo_800C74F4(Fighter_GObj* gobj)
     Fighter* fp = GET_FIGHTER(gobj);
     if (fp->dmg.x1860_element == 16 && fp->capture_timer == 0 &&
         fp->motion_id != ftCo_MS_CaptureLeadead &&
-        it_802EAF28(fp->dmg.x1868_source) == NULL)
+        it_802EAF28(fp->dmg.x1868_source) == 0U)
     {
         ftCo_800C7590(gobj);
         return true;
@@ -625,7 +625,7 @@ void fn_800C7890(Fighter_GObj* gobj)
     ftCo_800C7A30(gobj);
 }
 
-UNK_RET ftCo_800C78B0(UNK_PARAMS)
+UNK_RET ftCo_800C78B0(HSD_GObj* gobj, HSD_GObj* owner)
 {
     NOT_IMPLEMENTED;
 }

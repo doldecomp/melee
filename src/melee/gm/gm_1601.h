@@ -53,10 +53,10 @@ struct lbl_8046B488_t;
 /* 160C90 */ void gm_80160C90(HSD_Text* text, u8 fighter_id, bool arg2);
 /* 160DE8 */ void fn_80160DE8(HSD_JObj*, u8, s32, u8, f32, f32);
 /* 160F58 */ float fn_80160F58(u8 ckind);
-/* 161004 */ UNK_RET fn_80161004(UNK_PARAMS);
+/* 161004 */ s32 fn_80161004(MatchEnd*);
 /* 161154 */ UNK_RET fn_80161154(UNK_PARAMS);
-/* 161C90 */ UNK_RET fn_80161C90(UNK_PARAMS);
-/* 162068 */ void fn_80162068(void);
+/* 161C90 */ void fn_80161C90(MatchEnd*, s32, u16*);
+/* 162068 */ void fn_80162068(MatchEnd*);
 /* 162170 */ s32 fn_80162170(MatchEnd*);
 /* 1623A4 */ s32 gm_801623A4(MatchEnd*);
 /* 1623D8 */ int gm_801623D8(void);
@@ -161,7 +161,7 @@ struct lbl_8046B488_t;
 /* 16588C */ UNK_RET fn_8016588C(UNK_PARAMS);
 /* 165AC0 */ UNK_RET fn_80165AC0(MatchEnd*);
 /* 165D60 */ MatchEnd* fn_80165D60(MatchEnd*);
-/* 165E7C */ UNK_RET fn_80165E7C(MatchEnd*);
+/* 165E7C */ void fn_80165E7C(MatchEnd*);
 /* 165FA4 */ UNK_RET fn_80165FA4(MatchEnd*);
 /* 1661E0 */ s32 fn_801661E0(MatchEnd*);
 /* 166378 */ void gm_80166378(UNK_T);
@@ -173,7 +173,7 @@ struct lbl_8046B488_t;
 /* 16719C */ void fn_8016719C(s32, s32);
 /* 167320 */ void gm_80167320(int slot, bool);
 /* 167470 */ void gm_80167470(long, long);
-/* 1674C4 */ void gm_801674C4(s8, u8, s8, s8, s32);
+/* 1674C4 */ void gm_801674C4(s8, u8, s8, s8, bool (*arg4)(s32));
 /* 16758C */ void fn_8016758C(void);
 /* 167638 */ s32 fn_80167638(s32, Vec3*, Vec3*);
 /* 1677C0 */ void gm_801677C0(struct gm_801677C0_s* arg0);
@@ -196,7 +196,7 @@ gm_80167BC8(struct VsModeData*); // inits VsModeData from game rules
 /* 168940 */ int gm_80168940(MatchEnd*);
 /* 16895C */ void gm_8016895C(HSD_JObj*, DynamicModelDesc*, int idx);
 /* 1689E4 */ void fn_801689E4(HSD_JObj*, DynamicModelDesc*, int);
-/* 168A6C */ s32 fn_80168A6C(void*, void*, s32);
+/* 168A6C */ void fn_80168A6C(void*, void*, s32);
 /* 168B34 */ float gm_80168B34(CharacterKind, int, int);
 /* 168BF8 */ float gm_80168BF8(int);
 /* 168C5C */ void gm_80168C5C(u32);
@@ -216,18 +216,18 @@ gm_80167BC8(struct VsModeData*); // inits VsModeData from game rules
 /* 169384 */ int gm_80169384(void);
 /* 169394 */ s32 gm_80169394(void);
 /* 1693BC */ bool gm_801693BC(int);
-/* 169434 */ void fn_80169434(s32 arg0);
-/* 169444 */ bool fn_80169444(long);
+/* 169434 */ void fn_80169434(bool (*fn)(s32));
+/* 169444 */ bool fn_80169444(bool);
 /* 1694A0 */ int gm_801694A0(HSD_GObj*);
 /* 169520 */ void* gm_80169520(void);
 /* 169530 */ void* gm_80169530(void);
 /* 169540 */ void* gm_80169540(void);
 /* 169550 */ void fn_80169550(int slot);
 /* 169574 */ void fn_80169574(ssize_t size, s8* buf);
-/* 1695BC */ long fn_801695BC(u8, s32, s32, u8*, u8*);
+/* 1695BC */ long fn_801695BC(u8, u8, u8, u8*, u8*);
 /* 1697FC */ void fn_801697FC(signed char, signed char, signed char,
                               signed char, signed char*);
-/* 16989C */ void fn_8016989C(unsigned char*, long, long, u8*, u8*);
+/* 16989C */ void fn_8016989C(unsigned char*, u8, u8, u8*, u8*);
 /* 169900 */ void fn_80169900(unsigned char, struct lbl_8046B488_t*,
                               signed char*, signed char*);
 /* 169A84 */ long fn_80169A84(u8, s8*, s8*);
@@ -253,7 +253,7 @@ gm_80167BC8(struct VsModeData*); // inits VsModeData from game rules
 /* 16A97C */ void* gm_8016A97C(void);
 /* 16A98C */ struct lbl_8046B668_t* gm_8016A98C(void);
 /* 16A998 */ int gm_8016A998(s8, s8);
-/* 16A9E8 */ UNK_RET gm_8016A9E8(UNK_PARAMS);
+/* 16A9E8 */ int gm_8016A9E8(u8 arg0, s8 arg1);
 /* 16AC44 */ UNK_RET gm_8016AC44(s8 ckind, s8 costume_id);
 
 #endif

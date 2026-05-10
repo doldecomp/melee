@@ -4,6 +4,7 @@
 #include "ft_0CD1.h"
 #include "ft_0CDD.h"
 #include "ft_0D31.h"
+#include "ft_0D4D.h"
 #include "ftcamera.h"
 #include "ftcliffcommon.h"
 #include "ftcolanim.h"

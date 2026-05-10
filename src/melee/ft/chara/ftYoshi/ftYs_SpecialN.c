@@ -77,7 +77,7 @@ float ftYs_SpecialN_GetDatAttr24(HSD_GObj* gobj)
     return da->x24;
 }
 
-float ftYs_SpecialN_GetExtAttr28(Fighter_GObj* gobj)
+float ftYs_SpecialN_GetExtAttr28(void)
 {
     ftYoshiAttributes* ext_attr = gFtDataList[FTKIND_YOSHI]->ext_attr;
     return ext_attr->x28;

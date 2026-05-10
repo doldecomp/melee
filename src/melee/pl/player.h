@@ -295,7 +295,7 @@ pl_StaleMoveTableExt_t* Player_GetStaleMoveTableIndexPtr2(s32 slot);
 FighterKind Player_80036394(s32 slot);
 s32 Player_80036428(s32 slot);
 void Player_SetUnk45(s32 slot, int unk45);
-u8 Player_GetUnk45(s32 slot);
+u32 Player_GetUnk45(s32 slot);
 void Player_UpdateJoystickCountByIndex(s32 slot, s32 index);
 s32 Player_GetJoystickCountByIndex(s32 slot, s32 index);
 void Player_800366DC(s32 slot, s32 arg1);

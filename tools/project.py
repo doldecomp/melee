@@ -285,7 +285,7 @@ class ProjectConfig:
     def use_wibo(self) -> bool:
         return (
             self.wibo_tag is not None
-            and (sys.platform == "linux" or sys.platform == "darwin")
+            and sys.platform == "linux"
             and platform.machine() in ("i386", "x86_64", "aarch64", "arm64")
             and self.wrapper is None
         )

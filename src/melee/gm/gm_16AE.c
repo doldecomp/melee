@@ -982,7 +982,7 @@ int gm_8016C75C(HSD_GObj* arg0)
 
 void fn_8016C7D0(HSD_GObj* gobj)
 {
-    fn_80171DC4(gobj);
+    fn_80171DC4();
 }
 
 void fn_8016C7F0(void)
@@ -1107,7 +1107,7 @@ void fn_8016CA68(lbl_8046B6A0_t* arg0, int arg1)
                 }
                 gm_801A0FEC(var_r31, var_r4);
             }
-            gm_801A4634(arg1);
+            gm_801A4634((long long) arg1);
             if (arg0->x24C8.x4_0) {
                 var_r0 = fn_8016CA68_inline(var_r31);
                 if (arg0->x24C8.x3C != NULL) {
@@ -1429,7 +1429,7 @@ void fn_8016D634(void)
 
     PAD_STACK(8);
 
-    if (++lbl_8046B6A0.unk_30 <= lbl_8046B6A0.x24C8.xD) {
+    if (lbl_8046B6A0.unk_30++ <= lbl_8046B6A0.x24C8.xD) {
         return;
     }
     if (gm_8016B3D8()) {
@@ -1683,6 +1683,16 @@ static float direction(float x)
     }
 }
 
+static inline void getSpawnPoint(int i, Vec3* v)
+{
+    lbl_8046B6A0_t* tmp = &lbl_8046B6A0;
+    if (tmp->FighterMatchInfo[i].spawn_point == -1) {
+        Stage_80224E64(i, v);
+    } else {
+        Stage_80224E64(tmp->FighterMatchInfo[i].spawn_point, v);
+    }
+}
+
 void fn_8016DEEC(void)
 {
     lbl_8046B6A0_t* tmp = &lbl_8046B6A0;
@@ -1700,12 +1710,7 @@ void fn_8016DEEC(void)
 
     for (i = 0; i < 6; i++) {
         if (Player_GetPlayerSlotType(i) != Gm_PKind_NA) {
-            if (tmp->FighterMatchInfo[i].spawn_point == -1) {
-                Stage_80224E64(i, &spC);
-            } else {
-                int x = tmp2->FighterMatchInfo[i].spawn_point;
-                Stage_80224E64(x, &spC);
-            }
+            getSpawnPoint(i, &spC);
             sp18[i] = spC.x;
         }
     }
@@ -1819,12 +1824,7 @@ void fn_8016E2BC(void)
         var_r0 = false;
     }
     if (var_r0) {
-        if (tmp->FighterMatchInfo[0].spawn_point == -1) {
-            Stage_80224E64(0, &sp24);
-        } else {
-            int x = tmp->FighterMatchInfo[0].spawn_point;
-            Stage_80224E64(x, &sp24);
-        }
+        getSpawnPoint(0, &sp24);
         if (Player_GetFacingDirection(0) == 0.0F) {
             if (Stage_80224DC8(tmp->x24C8.xE) != 0) {
                 Player_SetFacingDirection(0, 1.0F);
@@ -1847,12 +1847,7 @@ void fn_8016E2BC(void)
         fn_8016DEEC();
         for (i = 0; i < 6; i++) {
             if (Player_GetPlayerSlotType(i) != Gm_PKind_NA) {
-                if (tmp->FighterMatchInfo[i].spawn_point == -1) {
-                    Stage_80224E64(i, &sp18);
-                } else {
-                    Stage_80224E64(tmp->FighterMatchInfo[i].spawn_point,
-                                   &sp18);
-                }
+                getSpawnPoint(i, &sp18);
                 if (Player_GetFacingDirection(i) == 0.0F) {
                     if (Stage_80224DC8(tmp->x24C8.xE) != 0) {
                         Player_SetFacingDirection(i, 1.0F);
@@ -2107,7 +2102,6 @@ bool gm_8016EDDC(int arg0, PlayerInitData* arg1)
     u8 temp_r30;
     u8 temp_r29;
     bool is_teams;
-    s8 temp_r3;
     PAD_STACK(4);
 
     if (lbl_8046B6A0.is_singleplayer == 0 &&
@@ -2117,12 +2111,7 @@ bool gm_8016EDDC(int arg0, PlayerInitData* arg1)
         Player_80036D24(arg0);
         fn_8016D8AC(arg0, arg1);
 
-        temp_r3 = tmp->FighterMatchInfo[arg0].spawn_point;
-        if (temp_r3 == -1) {
-            Stage_80224E64(arg0, &sp18);
-        } else {
-            Stage_80224E64(temp_r3, &sp18);
-        }
+        getSpawnPoint(arg0, &sp18);
 
         if (Player_GetFacingDirection(arg0) == 0.0F) {
             if (Stage_80224DC8(lbl_8046B6A0.x24C8.xE) != 0) {

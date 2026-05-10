@@ -21,8 +21,9 @@
 #include "ftCommon/forward.h"
 #include "ftPopo/forward.h"
 
-#include "ftPopo/ftPp_1211.h"
 #include "ftPopo/ftPp_Init.h"
+#include "ftPopo/ftPp_SpecialHi.h"
+#include "ftPopo/ftPp_SpecialLw.h"
 #include "ftPopo/ftPp_SpecialN.h"
 #include "ftPopo/ftPp_SpecialS.h"
 #include "ftPopo/types.h"
@@ -465,6 +466,7 @@ bool ftNn_Init_801230D0(Fighter_GObj* nana_gobj)
     Fighter_GObj* popo_gobj = Player_GetEntityAtIndex(nana_fp->player_id, 0);
     Vec popo_vec;
     Vec nana_vec;
+    PAD_STACK(16);
     if (popo_gobj != NULL) {
         Fighter* popo_fp = GET_FIGHTER(popo_gobj);
         if (popo_fp->motion_id < 347 || popo_fp->motion_id > 352) {
@@ -719,6 +721,7 @@ void ftNn_Init_801238E4(Fighter_GObj* gobj)
 bool ftNn_Init_80123954(Fighter_GObj* nana_gobj, GroundOrAir pp_ga)
 {
     bool ret;
+    PAD_STACK(24);
     if (nana_gobj != NULL) {
         Fighter* nana_fp = GET_FIGHTER(nana_gobj);
         Fighter* popo_fp =
