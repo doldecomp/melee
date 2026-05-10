@@ -229,6 +229,169 @@ extern u8 hsd_804D79B0;
 
 void fn_803B376C(void* arg0);
 void hsd_803B3CD8(s32 arg0);
+void fn_803B376C(void* arg0)
+{
+    s32* data = arg0;
+    s32* p;
+    int i;
+    f32 s07;
+    f32 s16;
+    f32 s25;
+    f32 s34;
+    f32 t0;
+    f32 t1;
+    f32 t2;
+    f32 t3;
+    f32 d34;
+    f32 d25;
+    f32 d16;
+    f32 d07;
+    f32 v0;
+    f32 v1;
+    f32 w0;
+    f32 w1;
+    f32 w2;
+    f32 w3;
+
+    p = data;
+    for (i = 0; i < 8; i++) {
+        s07 = (f32) (p[0] + p[7]);
+        s16 = (f32) (p[1] + p[6]);
+        s25 = (f32) (p[2] + p[5]);
+        s34 = (f32) (p[3] + p[4]);
+        t0 = s16 + s25;
+        t1 = s07 + s34;
+        t2 = s07 - s34;
+        t3 = s16 - s25;
+        d34 = (f32) (p[3] - p[4]);
+        d25 = (f32) (p[2] - p[5]);
+        d16 = (f32) (p[1] - p[6]);
+        d07 = (f32) (p[0] - p[7]);
+        v0 = (f32) (0.707107 * (f64) (d25 + d16));
+        v1 = (f32) (0.707107 * (f64) (d25 - d16));
+        w0 = v0 + d07;
+        w1 = -d34 + v1;
+        w2 = -v0 + d07;
+        w3 = d34 + v1;
+
+        p[0] = (s32) (0.707107 * (f64) (t1 + t0));
+        p[4] = (s32) (0.707107 * (f64) (t1 - t0));
+        p[6] = (s32) ((-0.92388 * (f64) t3) + (0.382683 * (f64) t2));
+        p[2] = (s32) ((0.382683 * (f64) t3) + (0.92388 * (f64) t2));
+        p[7] = (s32) ((0.980785 * (f64) w1) + (0.19509 * (f64) w0));
+        p[5] = (s32) ((0.83147 * (f64) w3) + (0.55557 * (f64) w2));
+        p[3] = (s32) ((-0.55557 * (f64) w3) + (0.83147 * (f64) w2));
+        p[1] = (s32) ((-0.19509 * (f64) w1) + (0.980785 * (f64) w0));
+        p += 8;
+    }
+
+    p = data;
+    for (i = 0; i < 8; i++) {
+        s07 = (f32) (p[0] + p[56]);
+        s16 = (f32) (p[8] + p[48]);
+        s25 = (f32) (p[16] + p[40]);
+        s34 = (f32) (p[24] + p[32]);
+        t0 = s16 + s25;
+        t1 = s07 + s34;
+        t2 = s07 - s34;
+        t3 = s16 - s25;
+        d34 = (f32) (p[24] - p[32]);
+        d25 = (f32) (p[16] - p[40]);
+        d16 = (f32) (p[8] - p[48]);
+        d07 = (f32) (p[0] - p[56]);
+        v0 = (f32) (0.707107 * (f64) (d25 + d16));
+        v1 = (f32) (0.707107 * (f64) (d25 - d16));
+        w0 = v0 + d07;
+        w1 = -d34 + v1;
+        w2 = -v0 + d07;
+        w3 = d34 + v1;
+
+        p[0] = (s32) (0.707107 * (f64) (t1 + t0));
+        p[32] = (s32) (0.707107 * (f64) (t1 - t0));
+        p[48] = (s32) ((-0.92388 * (f64) t3) + (0.382683 * (f64) t2));
+        p[16] = (s32) ((0.382683 * (f64) t3) + (0.92388 * (f64) t2));
+        p[56] = (s32) ((0.980785 * (f64) w1) + (0.19509 * (f64) w0));
+        p[40] = (s32) ((0.83147 * (f64) w3) + (0.55557 * (f64) w2));
+        p[24] = (s32) ((-0.55557 * (f64) w3) + (0.83147 * (f64) w2));
+        p[8] = (s32) ((-0.19509 * (f64) w1) + (0.980785 * (f64) w0));
+        p += 1;
+    }
+
+    for (i = 0; i < 64; i++) {
+        data[i] >>= 2;
+    }
+}
+
+void hsd_803B3CD8(s32 arg0)
+{
+    HSDJpegWork* work = (HSDJpegWork*) &hsd_804D2648;
+    const u16* dc_code = arg0 == 0 ? lbl_80431678 : lbl_8043169C;
+    const u8* dc_size = arg0 == 0 ? lbl_80431690 : lbl_804316B4;
+    const u16* ac_code = (const u16*) (arg0 == 0 ? &lbl_80431090[0x80] : &lbl_80431090[0x268]);
+    const u8* ac_size = arg0 == 0 ? &lbl_80431090[0x1C4] : &lbl_80431090[0x3AC];
+    int diff = work->tmp[0] - work->pred[arg0];
+    int value = diff;
+    int bits = 0;
+    int run;
+    int i;
+    int coeff;
+    int abs_coeff;
+    int coeff_bits;
+    int symbol;
+
+    work->pred[arg0] = work->tmp[0];
+    if (value < 0) {
+        value = -value;
+    }
+    while (value != 0) {
+        bits++;
+        value >>= 1;
+    }
+#define HSD_JPEG_EMIT_BITS(code_, size_)                                              do {                                                                                  int _size = (size_);                                                              int _code = (code_);                                                              while (_size-- > 0) {                                                                 hsd_804D79AC += 1;                                                                hsd_804D79B0 <<= 1;                                                               if (_code & (1 << _size)) {                                                           hsd_804D79B0 |= 1;                                                            }                                                                                 if (hsd_804D79AC == 8) {                                                              hsd_803B3344(hsd_804D79B0);                                                       if (hsd_804D79B0 == 0xFF) {                                                           hsd_803B3344(0);                                                              }                                                                                 hsd_804D79AC = 0;                                                                 hsd_804D79B0 = 0;                                                             }                                                                             }                                                                             } while (0)
+
+    HSD_JPEG_EMIT_BITS(dc_code[bits], dc_size[bits]);
+    if (bits != 0) {
+        if (diff < 0) {
+            diff -= 1;
+        }
+        HSD_JPEG_EMIT_BITS(diff, bits);
+    }
+
+    run = 0;
+    for (i = 1; i < 64; i++) {
+        coeff = work->tmp[lbl_80431638[i]];
+        abs_coeff = coeff;
+        coeff_bits = 0;
+
+        if (coeff == 0) {
+            run++;
+            continue;
+        }
+        while (run > 15) {
+            HSD_JPEG_EMIT_BITS(ac_code[0xF0], ac_size[0xF0]);
+            run -= 16;
+        }
+        if (abs_coeff < 0) {
+            abs_coeff = -abs_coeff;
+        }
+        while (abs_coeff != 0) {
+            coeff_bits++;
+            abs_coeff >>= 1;
+        }
+        symbol = (run << 4) | coeff_bits;
+        HSD_JPEG_EMIT_BITS(ac_code[symbol], ac_size[symbol]);
+        if (coeff < 0) {
+            coeff -= 1;
+        }
+        HSD_JPEG_EMIT_BITS(coeff, coeff_bits);
+        run = 0;
+    }
+    if (run != 0) {
+        HSD_JPEG_EMIT_BITS(ac_code[0], ac_size[0]);
+    }
+#undef HSD_JPEG_EMIT_BITS
+}
+
 void hsd_803B4D64(s32 arg0, s32 arg1)
 {
     __jmp_buf* env = &hsd_804D2648;
