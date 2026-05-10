@@ -2493,7 +2493,7 @@ void gm_80167470(s32 arg0, s32 arg1)
     }
 }
 
-void gm_801674C4(s8 arg0, u8 arg1, s8 arg2, s8 arg3, bool (*arg4)(s32))
+void gm_801674C4(s8 arg0, u8 arg1, s8 arg2, s8 arg3, GmRouteCallback arg4)
 {
     s8 temp_r31;
     struct lbl_8046B488_t* new_var;
@@ -3277,7 +3277,7 @@ bool gm_801693BC(int arg0)
     return false;
 }
 
-void fn_80169434(bool (*fn)(s32))
+void fn_80169434(GmRouteCallback fn)
 {
     lbl_8046B488.x1B8 = fn;
 }

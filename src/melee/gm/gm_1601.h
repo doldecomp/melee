@@ -173,7 +173,7 @@ struct lbl_8046B488_t;
 /* 16719C */ void fn_8016719C(s32, s32);
 /* 167320 */ void gm_80167320(int slot, bool);
 /* 167470 */ void gm_80167470(long, long);
-/* 1674C4 */ void gm_801674C4(s8, u8, s8, s8, bool (*arg4)(s32));
+/* 1674C4 */ void gm_801674C4(s8, u8, s8, s8, GmRouteCallback);
 /* 16758C */ void fn_8016758C(void);
 /* 167638 */ s32 fn_80167638(s32, Vec3*, Vec3*);
 /* 1677C0 */ void gm_801677C0(struct gm_801677C0_s* arg0);
@@ -216,7 +216,7 @@ gm_80167BC8(struct VsModeData*); // inits VsModeData from game rules
 /* 169384 */ int gm_80169384(void);
 /* 169394 */ s32 gm_80169394(void);
 /* 1693BC */ bool gm_801693BC(int);
-/* 169434 */ void fn_80169434(bool (*fn)(s32));
+/* 169434 */ void fn_80169434(GmRouteCallback fn);
 /* 169444 */ bool fn_80169444(bool);
 /* 1694A0 */ int gm_801694A0(HSD_GObj*);
 /* 169520 */ void* gm_80169520(void);
