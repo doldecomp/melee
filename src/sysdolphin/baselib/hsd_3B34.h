@@ -7,6 +7,7 @@ int hsd_803B51C8(int, int, int, char*, int);
 void hsd_803B5C2C(int);
 int hsd_803B5C4C(int);
 u8 hsd_803B5D70(int, int);
+void hsd_803B5EA0(int);
 int hsd_803B6BE4(char*, int, void*);
 
 #endif
