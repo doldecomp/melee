@@ -174,6 +174,65 @@ u8 lbl_80431690[0xC] = { 2, 3, 3, 3, 3, 3, 4, 5, 6, 7, 8, 9 };
 u16 lbl_8043169C[0xC] = { 0, 1, 2, 6, 0xE, 0x1E, 0x3E, 0x7E, 0xFE, 0x1FE, 0x3FE, 0x7FE };
 u8 lbl_804316B4[0xC] = { 2, 2, 2, 3, 4, 5, 6, 7, 8, 9, 0xA, 0xB };
 
+
+typedef struct HSDJpegWork {
+    u8 pad_000[0x118];
+    s32 luma[256];
+    s32 cb[64];
+    s32 cr[64];
+    s32 tmp[64];
+    s32 pred[3];
+} HSDJpegWork;
+
+static const u8 lbl_803B9670[] = {
+    0x48, 0x41, 0x4C, 0x20, 0x4C, 0x61, 0x62, 0x6F, 0x72, 0x61, 0x74, 0x6F,
+    0x72, 0x79, 0x2C, 0x20, 0x49, 0x6E, 0x63, 0x2E, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x01, 0x05, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
+    0x08, 0x09, 0x0A, 0x0B, 0x00, 0x03, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01,
+    0x01, 0x01, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x02, 0x03,
+    0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0A, 0x0B, 0x00, 0x02, 0x01, 0x03,
+    0x03, 0x02, 0x04, 0x03, 0x05, 0x05, 0x04, 0x04, 0x00, 0x00, 0x01, 0x7D,
+    0x01, 0x02, 0x03, 0x00, 0x04, 0x11, 0x05, 0x12, 0x21, 0x31, 0x41, 0x06,
+    0x13, 0x51, 0x61, 0x07, 0x22, 0x71, 0x14, 0x32, 0x81, 0x91, 0xA1, 0x08,
+    0x23, 0x42, 0xB1, 0xC1, 0x15, 0x52, 0xD1, 0xF0, 0x24, 0x33, 0x62, 0x72,
+    0x82, 0x09, 0x0A, 0x16, 0x17, 0x18, 0x19, 0x1A, 0x25, 0x26, 0x27, 0x28,
+    0x29, 0x2A, 0x34, 0x35, 0x36, 0x37, 0x38, 0x39, 0x3A, 0x43, 0x44, 0x45,
+    0x46, 0x47, 0x48, 0x49, 0x4A, 0x53, 0x54, 0x55, 0x56, 0x57, 0x58, 0x59,
+    0x5A, 0x63, 0x64, 0x65, 0x66, 0x67, 0x68, 0x69, 0x6A, 0x73, 0x74, 0x75,
+    0x76, 0x77, 0x78, 0x79, 0x7A, 0x83, 0x84, 0x85, 0x86, 0x87, 0x88, 0x89,
+    0x8A, 0x92, 0x93, 0x94, 0x95, 0x96, 0x97, 0x98, 0x99, 0x9A, 0xA2, 0xA3,
+    0xA4, 0xA5, 0xA6, 0xA7, 0xA8, 0xA9, 0xAA, 0xB2, 0xB3, 0xB4, 0xB5, 0xB6,
+    0xB7, 0xB8, 0xB9, 0xBA, 0xC2, 0xC3, 0xC4, 0xC5, 0xC6, 0xC7, 0xC8, 0xC9,
+    0xCA, 0xD2, 0xD3, 0xD4, 0xD5, 0xD6, 0xD7, 0xD8, 0xD9, 0xDA, 0xE1, 0xE2,
+    0xE3, 0xE4, 0xE5, 0xE6, 0xE7, 0xE8, 0xE9, 0xEA, 0xF1, 0xF2, 0xF3, 0xF4,
+    0xF5, 0xF6, 0xF7, 0xF8, 0xF9, 0xFA, 0x00, 0x00, 0x00, 0x02, 0x01, 0x02,
+    0x04, 0x04, 0x03, 0x04, 0x07, 0x05, 0x04, 0x04, 0x00, 0x01, 0x02, 0x77,
+    0x00, 0x01, 0x02, 0x03, 0x11, 0x04, 0x05, 0x21, 0x31, 0x06, 0x12, 0x41,
+    0x51, 0x07, 0x61, 0x71, 0x13, 0x22, 0x32, 0x81, 0x08, 0x14, 0x42, 0x91,
+    0xA1, 0xB1, 0xC1, 0x09, 0x23, 0x33, 0x52, 0xF0, 0x15, 0x62, 0x72, 0xD1,
+    0x0A, 0x16, 0x24, 0x34, 0xE1, 0x25, 0xF1, 0x17, 0x18, 0x19, 0x1A, 0x26,
+    0x27, 0x28, 0x29, 0x2A, 0x35, 0x36, 0x37, 0x38, 0x39, 0x3A, 0x43, 0x44,
+    0x45, 0x46, 0x47, 0x48, 0x49, 0x4A, 0x53, 0x54, 0x55, 0x56, 0x57, 0x58,
+    0x59, 0x5A, 0x63, 0x64, 0x65, 0x66, 0x67, 0x68, 0x69, 0x6A, 0x73, 0x74,
+    0x75, 0x76, 0x77, 0x78, 0x79, 0x7A, 0x82, 0x83, 0x84, 0x85, 0x86, 0x87,
+    0x88, 0x89, 0x8A, 0x92, 0x93, 0x94, 0x95, 0x96, 0x97, 0x98, 0x99, 0x9A,
+    0xA2, 0xA3, 0xA4, 0xA5, 0xA6, 0xA7, 0xA8, 0xA9, 0xAA, 0xB2, 0xB3, 0xB4,
+    0xB5, 0xB6, 0xB7, 0xB8, 0xB9, 0xBA, 0xC2, 0xC3, 0xC4, 0xC5, 0xC6, 0xC7,
+    0xC8, 0xC9, 0xCA, 0xD2, 0xD3, 0xD4, 0xD5, 0xD6, 0xD7, 0xD8, 0xD9, 0xDA,
+    0xE2, 0xE3, 0xE4, 0xE5, 0xE6, 0xE7, 0xE8, 0xE9, 0xEA, 0xF2, 0xF3, 0xF4,
+    0xF5, 0xF6, 0xF7, 0xF8, 0xF9, 0xFA,
+};
+
+extern s32 hsd_804D79AC;
+extern u8 hsd_804D79B0;
+
+void fn_803B376C(void* arg0);
+void hsd_803B3CD8(s32 arg0);
+void hsd_803B4D64(s32 arg0, s32 arg1);
+void fn_803B61B4(void* arg0);
+void fn_803B6820(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4);
+
 void hsd_803B4A2C(void)
 {
     __jmp_buf* env = &hsd_804D2648;
@@ -660,4 +719,644 @@ void hsd_803B5EA0(int arg0)
         data[order[run] + 0x1C6] = value;
         run++;
     }
+}
+
+
+void fn_803B376C(void* arg0)
+{
+    s32* data = arg0;
+    s32* p;
+    int i;
+    f32 s07;
+    f32 s16;
+    f32 s25;
+    f32 s34;
+    f32 t0;
+    f32 t1;
+    f32 t2;
+    f32 t3;
+    f32 d34;
+    f32 d25;
+    f32 d16;
+    f32 d07;
+    f32 v0;
+    f32 v1;
+    f32 w0;
+    f32 w1;
+    f32 w2;
+    f32 w3;
+
+    p = data;
+    for (i = 0; i < 8; i++) {
+        s07 = (f32) (p[0] + p[7]);
+        s16 = (f32) (p[1] + p[6]);
+        s25 = (f32) (p[2] + p[5]);
+        s34 = (f32) (p[3] + p[4]);
+        t0 = s16 + s25;
+        t1 = s07 + s34;
+        t2 = s07 - s34;
+        t3 = s16 - s25;
+        d34 = (f32) (p[3] - p[4]);
+        d25 = (f32) (p[2] - p[5]);
+        d16 = (f32) (p[1] - p[6]);
+        d07 = (f32) (p[0] - p[7]);
+        v0 = (f32) (0.707107 * (f64) (d25 + d16));
+        v1 = (f32) (0.707107 * (f64) (d25 - d16));
+        w0 = v0 + d07;
+        w1 = -d34 + v1;
+        w2 = -v0 + d07;
+        w3 = d34 + v1;
+
+        p[0] = (s32) (0.707107 * (f64) (t1 + t0));
+        p[4] = (s32) (0.707107 * (f64) (t1 - t0));
+        p[6] = (s32) ((-0.92388 * (f64) t3) + (0.382683 * (f64) t2));
+        p[2] = (s32) ((0.382683 * (f64) t3) + (0.92388 * (f64) t2));
+        p[7] = (s32) ((0.980785 * (f64) w1) + (0.19509 * (f64) w0));
+        p[5] = (s32) ((0.83147 * (f64) w3) + (0.55557 * (f64) w2));
+        p[3] = (s32) ((-0.55557 * (f64) w3) + (0.83147 * (f64) w2));
+        p[1] = (s32) ((-0.19509 * (f64) w1) + (0.980785 * (f64) w0));
+        p += 8;
+    }
+
+    p = data;
+    for (i = 0; i < 8; i++) {
+        s07 = (f32) (p[0] + p[56]);
+        s16 = (f32) (p[8] + p[48]);
+        s25 = (f32) (p[16] + p[40]);
+        s34 = (f32) (p[24] + p[32]);
+        t0 = s16 + s25;
+        t1 = s07 + s34;
+        t2 = s07 - s34;
+        t3 = s16 - s25;
+        d34 = (f32) (p[24] - p[32]);
+        d25 = (f32) (p[16] - p[40]);
+        d16 = (f32) (p[8] - p[48]);
+        d07 = (f32) (p[0] - p[56]);
+        v0 = (f32) (0.707107 * (f64) (d25 + d16));
+        v1 = (f32) (0.707107 * (f64) (d25 - d16));
+        w0 = v0 + d07;
+        w1 = -d34 + v1;
+        w2 = -v0 + d07;
+        w3 = d34 + v1;
+
+        p[0] = (s32) (0.707107 * (f64) (t1 + t0));
+        p[32] = (s32) (0.707107 * (f64) (t1 - t0));
+        p[48] = (s32) ((-0.92388 * (f64) t3) + (0.382683 * (f64) t2));
+        p[16] = (s32) ((0.382683 * (f64) t3) + (0.92388 * (f64) t2));
+        p[56] = (s32) ((0.980785 * (f64) w1) + (0.19509 * (f64) w0));
+        p[40] = (s32) ((0.83147 * (f64) w3) + (0.55557 * (f64) w2));
+        p[24] = (s32) ((-0.55557 * (f64) w3) + (0.83147 * (f64) w2));
+        p[8] = (s32) ((-0.19509 * (f64) w1) + (0.980785 * (f64) w0));
+        p += 1;
+    }
+
+    for (i = 0; i < 64; i++) {
+        data[i] >>= 2;
+    }
+}
+
+void hsd_803B3CD8(s32 arg0)
+{
+    HSDJpegWork* work = (HSDJpegWork*) &hsd_804D2648;
+    const u16* dc_code = arg0 == 0 ? lbl_80431678 : lbl_8043169C;
+    const u8* dc_size = arg0 == 0 ? lbl_80431690 : lbl_804316B4;
+    const u16* ac_code = (const u16*) (arg0 == 0 ? &lbl_80431090[0x80] : &lbl_80431090[0x268]);
+    const u8* ac_size = arg0 == 0 ? &lbl_80431090[0x1C4] : &lbl_80431090[0x3AC];
+    int diff = work->tmp[0] - work->pred[arg0];
+    int value = diff;
+    int bits = 0;
+    int run;
+    int i;
+    int coeff;
+    int abs_coeff;
+    int coeff_bits;
+    int symbol;
+
+    work->pred[arg0] = work->tmp[0];
+    if (value < 0) {
+        value = -value;
+    }
+    while (value != 0) {
+        bits++;
+        value >>= 1;
+    }
+#define HSD_JPEG_EMIT_BITS(code_, size_)                                              do {                                                                                  int _size = (size_);                                                              int _code = (code_);                                                              while (_size-- > 0) {                                                                 hsd_804D79AC += 1;                                                                hsd_804D79B0 <<= 1;                                                               if (_code & (1 << _size)) {                                                           hsd_804D79B0 |= 1;                                                            }                                                                                 if (hsd_804D79AC == 8) {                                                              hsd_803B3344(hsd_804D79B0);                                                       if (hsd_804D79B0 == 0xFF) {                                                           hsd_803B3344(0);                                                              }                                                                                 hsd_804D79AC = 0;                                                                 hsd_804D79B0 = 0;                                                             }                                                                             }                                                                             } while (0)
+
+    HSD_JPEG_EMIT_BITS(dc_code[bits], dc_size[bits]);
+    if (bits != 0) {
+        if (diff < 0) {
+            diff -= 1;
+        }
+        HSD_JPEG_EMIT_BITS(diff, bits);
+    }
+
+    run = 0;
+    for (i = 1; i < 64; i++) {
+        coeff = work->tmp[lbl_80431638[i]];
+        abs_coeff = coeff;
+        coeff_bits = 0;
+
+        if (coeff == 0) {
+            run++;
+            continue;
+        }
+        while (run > 15) {
+            HSD_JPEG_EMIT_BITS(ac_code[0xF0], ac_size[0xF0]);
+            run -= 16;
+        }
+        if (abs_coeff < 0) {
+            abs_coeff = -abs_coeff;
+        }
+        while (abs_coeff != 0) {
+            coeff_bits++;
+            abs_coeff >>= 1;
+        }
+        symbol = (run << 4) | coeff_bits;
+        HSD_JPEG_EMIT_BITS(ac_code[symbol], ac_size[symbol]);
+        if (coeff < 0) {
+            coeff -= 1;
+        }
+        HSD_JPEG_EMIT_BITS(coeff, coeff_bits);
+        run = 0;
+    }
+    if (run != 0) {
+        HSD_JPEG_EMIT_BITS(ac_code[0], ac_size[0]);
+    }
+#undef HSD_JPEG_EMIT_BITS
+}
+
+void hsd_803B4D64(s32 arg0, s32 arg1)
+{
+    hsd_803B3344(0xFF);
+    hsd_803B3344(0xC0);
+    hsd_803B3344(0x00);
+    hsd_803B3344(0x11);
+    hsd_803B3344(0x08);
+    hsd_803B3344((u8) (arg1 >> 8));
+    hsd_803B3344((u8) arg1);
+    hsd_803B3344((u8) (arg0 >> 8));
+    hsd_803B3344((u8) arg0);
+    hsd_803B3344(0x03);
+    hsd_803B3344(0x00);
+    hsd_803B3344(0x22);
+    hsd_803B3344(0x00);
+    hsd_803B3344(0x01);
+    hsd_803B3344(0x11);
+    hsd_803B3344(0x01);
+    hsd_803B3344(0x02);
+    hsd_803B3344(0x11);
+    hsd_803B3344(0x01);
+}
+
+int hsd_803B51C8(int arg0, int arg1, int arg2, char* arg3, int arg4)
+{
+    HSDJpegWork* work = (HSDJpegWork*) &hsd_804D2648;
+    size_t comment_size;
+    int x;
+    int y;
+    int block;
+    int i;
+    int pad;
+    s32* src;
+
+    *((s32*) &hsd_804D79A8) = arg4;
+    hsd_804D79AC = 0;
+    hsd_804D79A0 = arg3;
+    hsd_804D79A4 = arg3;
+    work->pred[0] = 0;
+    work->pred[1] = 0;
+    work->pred[2] = 0;
+    if (__setjmp(&hsd_804D2648) != 0) {
+        return 0;
+    }
+
+    hsd_803B3344(0xFF);
+    hsd_803B3344(0xD8);
+    hsd_803B46D4();
+
+    comment_size = strlen((char*) lbl_803B9670) + 1;
+    hsd_803B3344(0xFF);
+    hsd_803B3344(0xFE);
+    hsd_803B3344((u8) ((comment_size + 2) >> 8));
+    hsd_803B3344((u8) (comment_size + 2));
+    hsd_803B3398((void*) lbl_803B9670, comment_size);
+
+    hsd_803B4A2C();
+
+    hsd_803B3344(0xFF);
+    hsd_803B3344(0xC4);
+    hsd_803B3344(0x00);
+    hsd_803B3344(0x1F);
+    hsd_803B3344(0x00);
+    hsd_803B3398((void*) &lbl_803B9670[0x18], 0x1C);
+
+    hsd_803B3344(0xFF);
+    hsd_803B3344(0xC4);
+    hsd_803B3344(0x00);
+    hsd_803B3344(0x1F);
+    hsd_803B3344(0x01);
+    hsd_803B3398((void*) &lbl_803B9670[0x34], 0x1C);
+
+    hsd_803B3344(0xFF);
+    hsd_803B3344(0xC4);
+    hsd_803B3344(0x00);
+    hsd_803B3344(0xB5);
+    hsd_803B3344(0x10);
+    hsd_803B3398((void*) &lbl_803B9670[0x50], 0xB2);
+
+    hsd_803B3344(0xFF);
+    hsd_803B3344(0xC4);
+    hsd_803B3344(0x00);
+    hsd_803B3344(0xB5);
+    hsd_803B3344(0x11);
+    hsd_803B3398((void*) &lbl_803B9670[0x102], 0xB2);
+
+    hsd_803B4D64(arg1, arg2);
+
+    hsd_803B3344(0xFF);
+    hsd_803B3344(0xDA);
+    hsd_803B3344(0x00);
+    hsd_803B3344(0x0C);
+    hsd_803B3344(0x03);
+    hsd_803B3344(0x00);
+    hsd_803B3344(0x00);
+    hsd_803B3344(0x01);
+    hsd_803B3344(0x11);
+    hsd_803B3344(0x02);
+    hsd_803B3344(0x11);
+    hsd_803B3344(0x00);
+    hsd_803B3344(0x3F);
+    hsd_803B3344(0x00);
+
+    for (y = 0; y < arg2; y += 0x10) {
+        for (x = 0; x < arg1; x += 0x10) {
+            hsd_803B3408(arg0, x, y, arg1);
+            for (block = 0; block < 4; block++) {
+                src = &work->luma[block * 64];
+                fn_803B376C(src);
+                for (i = 0; i < 64; i++) {
+                    work->tmp[i] = src[i] / (lbl_80430C40[i] / lbl_804D6398);
+                }
+                hsd_803B3CD8(0);
+            }
+
+            fn_803B376C(work->cb);
+            for (i = 0; i < 64; i++) {
+                work->tmp[i] = work->cb[i] / (lbl_80430C80[i] / lbl_804D6398);
+            }
+            hsd_803B3CD8(1);
+
+            fn_803B376C(work->cr);
+            for (i = 0; i < 64; i++) {
+                work->tmp[i] = work->cr[i] / (lbl_80430C80[i] / lbl_804D6398);
+            }
+            hsd_803B3CD8(2);
+        }
+    }
+
+    if (hsd_804D79AC != 0) {
+        pad = 8 - hsd_804D79AC;
+        hsd_804D79B0 <<= pad;
+        hsd_804D79B0 |= (1 << pad) - 1;
+        hsd_803B3344(hsd_804D79B0);
+        hsd_804D79B0 = 0;
+        hsd_804D79AC = 0;
+    }
+
+    hsd_803B3344(0xFF);
+    hsd_803B3344(0xD9);
+    return (u8*) hsd_804D79A0 - (u8*) hsd_804D79A4;
+}
+
+void fn_803B61B4(void* arg0)
+{
+    s32* data = arg0;
+    s32* p;
+    int i;
+    f32 a;
+    f32 b;
+    f32 c;
+    f32 d;
+    f32 e;
+    f32 f;
+    f32 g;
+    f32 h;
+    f32 j;
+    f32 k;
+    f32 l;
+    f32 m;
+    f32 n;
+    f32 o;
+    f32 q;
+    f32 r;
+    f32 s;
+    f32 t;
+
+    p = data;
+    for (i = 0; i < 8; i++) {
+        a = (f32) ((0.980785 * (f64) p[7]) - (0.19509 * (f64) p[1]));
+        b = (f32) ((0.83147 * (f64) p[5]) - (0.55557 * (f64) p[3]));
+        c = (f32) ((0.55557 * (f64) p[5]) + (0.83147 * (f64) p[3]));
+        d = (f32) ((0.19509 * (f64) p[7]) + (0.980785 * (f64) p[1]));
+        e = (f32) (0.707107 * (f64) (p[0] + p[4]));
+        f = (f32) (0.707107 * (f64) (p[0] - p[4]));
+        g = a + b;
+        h = -c + d;
+        j = c + d;
+        k = (f32) ((0.382683 * (f64) p[6]) + (0.92388 * (f64) p[2]));
+        l = (f32) ((-0.92388 * (f64) p[6]) + (0.382683 * (f64) p[2]));
+        m = (f32) (0.707107 * (f64) (-g + h));
+        n = (f32) (0.707107 * (f64) (g + h));
+        o = -a + b;
+        q = e + k;
+        r = f + l;
+        s = f - l;
+        t = e - k;
+
+        p[0] = (s32) (q + j);
+        p[1] = (s32) (r + m);
+        p[2] = (s32) (s + n);
+        p[3] = (s32) (t + o);
+        p[4] = (s32) (t - o);
+        p[5] = (s32) (s - n);
+        p[6] = (s32) (r - m);
+        p[7] = (s32) (q - j);
+        p += 8;
+    }
+
+    p = data;
+    for (i = 0; i < 8; i++) {
+        a = (f32) ((0.980785 * (f64) p[56]) - (0.19509 * (f64) p[8]));
+        b = (f32) ((0.83147 * (f64) p[40]) - (0.55557 * (f64) p[24]));
+        c = (f32) ((0.55557 * (f64) p[40]) + (0.83147 * (f64) p[24]));
+        d = (f32) ((0.19509 * (f64) p[56]) + (0.980785 * (f64) p[8]));
+        e = (f32) (0.707107 * (f64) (p[0] + p[32]));
+        f = (f32) (0.707107 * (f64) (p[0] - p[32]));
+        g = a + b;
+        h = -c + d;
+        j = c + d;
+        k = (f32) ((0.382683 * (f64) p[48]) + (0.92388 * (f64) p[16]));
+        l = (f32) ((-0.92388 * (f64) p[48]) + (0.382683 * (f64) p[16]));
+        m = (f32) (0.707107 * (f64) (-g + h));
+        n = (f32) (0.707107 * (f64) (g + h));
+        o = -a + b;
+        q = e + k;
+        r = f + l;
+        s = f - l;
+        t = e - k;
+
+        p[0] = (s32) (q + j);
+        p[8] = (s32) (r + m);
+        p[16] = (s32) (s + n);
+        p[24] = (s32) (t + o);
+        p[32] = (s32) (t - o);
+        p[40] = (s32) (s - n);
+        p[48] = (s32) (r - m);
+        p[56] = (s32) (q - j);
+        p += 1;
+    }
+
+    for (i = 0; i < 64; i++) {
+        data[i] >>= 2;
+    }
+}
+
+void fn_803B6820(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
+{
+    HSDJpegWork* work = (HSDJpegWork*) hsd_804D2E70;
+    s32 temp_r18;
+    s32 temp_r19;
+    s32 temp_r20;
+    s32 temp_r6;
+    s32 var_ctr;
+    s32 var_ctr_2;
+    s32 var_r10;
+    s32 var_r12;
+    s32 var_r21;
+    s32 var_r22;
+    s32 var_r23;
+    s32 var_r24;
+    s32 var_r25;
+    s32 var_r31;
+    s32 var_r4;
+    s32 var_r5;
+    s32 var_r6;
+    s32 var_r7;
+    s32 var_r8_2;
+    s32 var_r9_2;
+    s32 idx;
+    u8 r;
+    u8 g;
+    u8 b;
+    s32* var_r27;
+    s32* var_r8;
+    s32* var_r9;
+    u8* dst;
+    f32 temp_f0;
+    f32 temp_f0_2;
+    f32 temp_f0_3;
+
+    (void) arg4;
+    var_r10 = 0;
+    var_r9 = work->luma;
+    do {
+        var_ctr = 4;
+        var_r8 = var_r9;
+        do {
+            var_r8[0] += 0x80;
+            var_r8[1] += 0x80;
+            var_r8[2] += 0x80;
+            var_r8[3] += 0x80;
+            var_r8[4] += 0x80;
+            var_r8[5] += 0x80;
+            var_r8[6] += 0x80;
+            var_r8[7] += 0x80;
+            var_r8[8] += 0x80;
+            var_r8[9] += 0x80;
+            var_r8[10] += 0x80;
+            var_r8[11] += 0x80;
+            var_r8[12] += 0x80;
+            var_r8[13] += 0x80;
+            var_r8[14] += 0x80;
+            var_r8[15] += 0x80;
+            var_r8 += 16;
+            var_ctr -= 1;
+        } while (var_ctr != 0);
+        var_r10 += 1;
+        var_r9 += 64;
+    } while (var_r10 < 4);
+
+    temp_r6 = (arg3 + 0xF) / 0x10;
+    var_r23 = arg2 / 4;
+    var_r22 = 0;
+    var_r21 = 0;
+    var_r6 = 0;
+    do {
+        var_r25 = var_r22;
+        dst = (u8*) arg0 + ((((arg1 / 4) * 0x10) + ((temp_r6 << 6) * var_r23)) * 2);
+        var_r7 = 0;
+        var_r24 = 0;
+        do {
+            var_r4 = 0;
+            var_r12 = var_r21 * 8;
+            do {
+                var_r31 = (var_r24 + var_r12) * 4;
+                var_r5 = 0;
+                do {
+                    var_ctr_2 = 4;
+                    var_r8_2 = 0;
+                    var_r27 = &work->luma[var_r31 / 4];
+                    do {
+                        temp_r19 = *var_r27;
+                        idx = (var_r5 >> 1) + (var_r25 + ((var_r4 * 4) & 8)) +
+                              (((var_r8_2 % 2) * 4) + ((var_r8_2 / 2) << 5));
+                        temp_r20 = work->cr[idx];
+                        temp_r18 = work->cb[idx];
+                        temp_f0 = (f32) ((1.402 * (f64) temp_r20) + (f64) temp_r19);
+                        if (temp_f0 < 0.0f) {
+                            r = 0;
+                        } else if (temp_f0 > 255.0f) {
+                            r = 0xFF;
+                        } else {
+                            r = (u8) (s32) temp_f0;
+                        }
+                        temp_f0_2 = -((0.7139f * (f32) temp_r20) -
+                                      -((0.3441f * (f32) temp_r18) - (f32) temp_r19));
+                        if (temp_f0_2 < 0.0f) {
+                            g = 0;
+                        } else if (temp_f0_2 > 255.0f) {
+                            g = 0xFF;
+                        } else {
+                            g = (u8) (s32) temp_f0_2;
+                        }
+                        temp_f0_3 = (f32) -((0.0012 * (f64) temp_r20) -
+                                            (f64) ((1.7718f * (f32) temp_r18) +
+                                                   (f32) temp_r19));
+                        if (temp_f0_3 < 0.0f) {
+                            b = 0;
+                        } else if (temp_f0_3 > 255.0f) {
+                            b = 0xFF;
+                        } else {
+                            b = (u8) (s32) temp_f0_3;
+                        }
+                        *(u16*) (dst + ((((var_r8_2 << 5) & 0x20) +
+                                         (temp_r6 * 0x10 * ((var_r8_2 * 4) & 8))) * 2)) =
+                            ((g << 3) & 0x07E0) | ((r << 8) & 0xF800) |
+                            ((b >> 3) & 0x001F);
+                        var_r27 += 64;
+                        var_r8_2 += 1;
+                        var_ctr_2 -= 1;
+                    } while (var_ctr_2 != 0);
+                    var_r5 += 1;
+                    dst += 2;
+                    var_r31 += 4;
+                } while (var_r5 < 4);
+                var_r4 += 1;
+                var_r12 += 8;
+            } while (var_r4 < 4);
+            var_r7 += 1;
+            var_r25 += 2;
+            var_r24 += 4;
+        } while (var_r7 < 2);
+        var_r6 += 1;
+        var_r23 += 1;
+        var_r22 += 0x10;
+        var_r21 += 4;
+    } while (var_r6 < 2);
+}
+
+
+int hsd_803B6BE4(char* arg0, int arg1, void* arg2)
+{
+    HSDJpegWork* work = (HSDJpegWork*) hsd_804D2E70;
+    u8* data = (u8*) arg0;
+    u8* end = data + arg1;
+    u8* p = data;
+    u16 width = 0;
+    u16 height = 0;
+    int i;
+    int y;
+    int x;
+    int block;
+    s32* dst;
+
+    hsd_804D79C0 = arg1;
+    hsd_804D79B8 = data;
+    hsd_804D79BC = (s32) data;
+    work->pred[0] = 0;
+    work->pred[1] = 0;
+    work->pred[2] = 0;
+    hsd_804D79C4 = 0;
+    if (__setjmp((__jmp_buf*) hsd_804D2E70) != 0) {
+        return 0;
+    }
+
+    while (p + 4 < end && ((p[0] << 8) | p[1]) != 0xFFDB) {
+        p++;
+    }
+    if (p + 4 >= end) {
+        longjmp((__jmp_buf*) hsd_804D2E70, 1);
+    }
+    p += 5;
+    for (i = 0; i < 64; i++) {
+        lbl_80431090[lbl_80431638[i]] = *p++;
+    }
+
+    while (p + 4 < end && ((p[0] << 8) | p[1]) != 0xFFDB) {
+        p++;
+    }
+    if (p + 4 >= end) {
+        longjmp((__jmp_buf*) hsd_804D2E70, 1);
+    }
+    p += 5;
+    for (i = 0; i < 64; i++) {
+        lbl_80431090[0x40 + lbl_80431638[i]] = *p++;
+    }
+
+    while (p + 8 < end && ((p[0] << 8) | p[1]) != 0xFFC0) {
+        p++;
+    }
+    if (p + 8 >= end) {
+        longjmp((__jmp_buf*) hsd_804D2E70, 1);
+    }
+    height = (u16) ((p[5] << 8) | p[6]);
+    width = (u16) ((p[7] << 8) | p[8]);
+    p += 2 + ((p[2] << 8) | p[3]);
+
+    while (p + 4 < end && ((p[0] << 8) | p[1]) != 0xFFDA) {
+        p++;
+    }
+    if (p + 4 >= end) {
+        longjmp((__jmp_buf*) hsd_804D2E70, 1);
+    }
+    p += 2 + ((p[2] << 8) | p[3]);
+    hsd_804D79B8 = p;
+
+    for (y = 0; y < height; y += 0x10) {
+        for (x = 0; x < width; x += 0x10) {
+            for (block = 0; block < 4; block++) {
+                dst = &work->luma[block * 64];
+                hsd_803B5EA0(0);
+                for (i = 0; i < 64; i++) {
+                    dst[i] = work->tmp[i] * lbl_80431090[i];
+                }
+                fn_803B61B4(dst);
+            }
+
+            hsd_803B5EA0(1);
+            for (i = 0; i < 64; i++) {
+                work->cb[i] = work->tmp[i] * lbl_80431090[0x40 + i];
+            }
+            fn_803B61B4(work->cb);
+
+            hsd_803B5EA0(2);
+            for (i = 0; i < 64; i++) {
+                work->cr[i] = work->tmp[i] * lbl_80431090[0x40 + i];
+            }
+            fn_803B61B4(work->cr);
+            fn_803B6820(arg2, x, y, width, height);
+        }
+    }
+
+    return width * height * 2;
 }
