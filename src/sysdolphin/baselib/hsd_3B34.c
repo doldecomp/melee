@@ -1,6 +1,7 @@
 #include "hsd_3B34.h"
 
 #include "hsd_3A94.h"
+#include "hsd_3B33.h"
 
 /// hsd_803B5C2C
 static int lbl_804D6398 = 3;
@@ -10,6 +11,23 @@ extern s32 hsd_804D79BC;
 extern s32 hsd_804D79C0;
 extern s32 hsd_804D79C4;
 extern u8 hsd_804D79C8;
+u8 lbl_80430C40[0x40] = {
+    0x10, 0x0B, 0x0A, 0x10, 0x18, 0x28, 0x33, 0x3D, 0x0C, 0x0C, 0x0E, 0x13,
+    0x1A, 0x3A, 0x3C, 0x37, 0x0E, 0x0D, 0x10, 0x18, 0x28, 0x39, 0x45, 0x38,
+    0x0E, 0x11, 0x16, 0x1D, 0x33, 0x57, 0x50, 0x3E, 0x12, 0x16, 0x25, 0x38,
+    0x44, 0x6D, 0x67, 0x4D, 0x18, 0x23, 0x37, 0x40, 0x51, 0x68, 0x71, 0x5C,
+    0x31, 0x40, 0x4E, 0x57, 0x67, 0x79, 0x78, 0x65, 0x48, 0x5C, 0x5F, 0x62,
+    0x70, 0x64, 0x67, 0x63,
+};
+
+u8 lbl_80430C80[0x40] = {
+    0x11, 0x12, 0x18, 0x2F, 0x63, 0x63, 0x63, 0x63, 0x12, 0x15, 0x1A, 0x42,
+    0x63, 0x63, 0x63, 0x63, 0x18, 0x1A, 0x38, 0x63, 0x63, 0x63, 0x63, 0x63,
+    0x2F, 0x42, 0x63, 0x63, 0x63, 0x63, 0x63, 0x63, 0x63, 0x63, 0x63, 0x63,
+    0x63, 0x63, 0x63, 0x63, 0x63, 0x63, 0x63, 0x63, 0x63, 0x63, 0x63, 0x63,
+    0x63, 0x63, 0x63, 0x63, 0x63, 0x63, 0x63, 0x63, 0x63, 0x63, 0x63, 0x63,
+    0x63, 0x63, 0x63, 0x63,
+};
 u8 lbl_80431090[0x5A8] = {
     0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01,
     0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01,
@@ -151,6 +169,111 @@ u16 lbl_80431678[0xC] = { 0, 2, 3, 4, 5, 6, 0xE, 0x1E, 0x3E, 0x7E, 0xFE, 0x1FE }
 u8 lbl_80431690[0xC] = { 2, 3, 3, 3, 3, 3, 4, 5, 6, 7, 8, 9 };
 u16 lbl_8043169C[0xC] = { 0, 1, 2, 6, 0xE, 0x1E, 0x3E, 0x7E, 0xFE, 0x1FE, 0x3FE, 0x7FE };
 u8 lbl_804316B4[0xC] = { 2, 2, 2, 3, 4, 5, 6, 7, 8, 9, 0xA, 0xB };
+
+void hsd_803B4A2C(void)
+{
+    __jmp_buf* env = &hsd_804D2648;
+    int i;
+    u8* temp_r4;
+    u8* var_r28;
+    u8* var_r30;
+
+    temp_r4 = hsd_804D79A0;
+    if ((u32) temp_r4 < (u32) hsd_804D79A4 + (u32) hsd_804D79A8) {
+        hsd_804D79A0 = temp_r4 + 1;
+        *temp_r4 = 0xFF;
+    } else {
+        longjmp(env, 1);
+    }
+    temp_r4 = hsd_804D79A0;
+    if ((u32) temp_r4 < (u32) hsd_804D79A4 + (u32) hsd_804D79A8) {
+        hsd_804D79A0 = temp_r4 + 1;
+        *temp_r4 = 0xDB;
+    } else {
+        longjmp(env, 1);
+    }
+    temp_r4 = hsd_804D79A0;
+    if ((u32) temp_r4 < (u32) hsd_804D79A4 + (u32) hsd_804D79A8) {
+        hsd_804D79A0 = temp_r4 + 1;
+        *temp_r4 = 0;
+    } else {
+        longjmp(env, 1);
+    }
+    temp_r4 = hsd_804D79A0;
+    if ((u32) temp_r4 < (u32) hsd_804D79A4 + (u32) hsd_804D79A8) {
+        hsd_804D79A0 = temp_r4 + 1;
+        *temp_r4 = 0x43;
+    } else {
+        longjmp(env, 1);
+    }
+    temp_r4 = hsd_804D79A0;
+    if ((u32) temp_r4 < (u32) hsd_804D79A4 + (u32) hsd_804D79A8) {
+        hsd_804D79A0 = temp_r4 + 1;
+        *temp_r4 = 0;
+    } else {
+        longjmp(env, 1);
+    }
+
+    var_r28 = lbl_80431638;
+    var_r30 = lbl_80431638;
+    for (i = 0; i < 0x40; i++) {
+        temp_r4 = hsd_804D79A0;
+        if ((u32) temp_r4 < (u32) hsd_804D79A4 + (u32) hsd_804D79A8) {
+            hsd_804D79A0 = temp_r4 + 1;
+            *temp_r4 = lbl_80430C40[*var_r28] / lbl_804D6398;
+        } else {
+            longjmp(env, 1);
+        }
+        var_r28 += 1;
+    }
+
+    temp_r4 = hsd_804D79A0;
+    if ((u32) temp_r4 < (u32) hsd_804D79A4 + (u32) hsd_804D79A8) {
+        hsd_804D79A0 = temp_r4 + 1;
+        *temp_r4 = 0xFF;
+    } else {
+        longjmp(env, 1);
+    }
+    temp_r4 = hsd_804D79A0;
+    if ((u32) temp_r4 < (u32) hsd_804D79A4 + (u32) hsd_804D79A8) {
+        hsd_804D79A0 = temp_r4 + 1;
+        *temp_r4 = 0xDB;
+    } else {
+        longjmp(env, 1);
+    }
+    temp_r4 = hsd_804D79A0;
+    if ((u32) temp_r4 < (u32) hsd_804D79A4 + (u32) hsd_804D79A8) {
+        hsd_804D79A0 = temp_r4 + 1;
+        *temp_r4 = 0;
+    } else {
+        longjmp(env, 1);
+    }
+    temp_r4 = hsd_804D79A0;
+    if ((u32) temp_r4 < (u32) hsd_804D79A4 + (u32) hsd_804D79A8) {
+        hsd_804D79A0 = temp_r4 + 1;
+        *temp_r4 = 0x43;
+    } else {
+        longjmp(env, 1);
+    }
+    temp_r4 = hsd_804D79A0;
+    if ((u32) temp_r4 < (u32) hsd_804D79A4 + (u32) hsd_804D79A8) {
+        hsd_804D79A0 = temp_r4 + 1;
+        *temp_r4 = 1;
+    } else {
+        longjmp(env, 1);
+    }
+
+    for (i = 0; i < 0x40; i++) {
+        temp_r4 = hsd_804D79A0;
+        if ((u32) temp_r4 < (u32) hsd_804D79A4 + (u32) hsd_804D79A8) {
+            hsd_804D79A0 = temp_r4 + 1;
+            *temp_r4 = lbl_80430C80[*var_r30] / lbl_804D6398;
+        } else {
+            longjmp(env, 1);
+        }
+        var_r30 += 1;
+    }
+}
 
 void hsd_803B5C2C(int mode)
 {
