@@ -12,6 +12,7 @@
 
 #include <baselib/forward.h>
 
+#include <dolphin/os.h>
 #include <baselib/debug.h>
 #include <baselib/dobj.h>
 #include <baselib/gobj.h>
@@ -22,8 +23,6 @@
 #include <baselib/tev.h>
 #include <baselib/texp.h>
 #include <baselib/tobj.h>
-
-#include <dolphin/os.h>
 
 /* 1C897C */ static void grMaterial_801C897C(HSD_JObj* jobj, u32 flags);
 /* 1C8D44 */ Item_GObj*

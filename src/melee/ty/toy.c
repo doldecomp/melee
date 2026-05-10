@@ -2003,8 +2003,7 @@ s16 un_80308354(s16 idx)
 lbl_return:
     return target;
 
-lbl_end:
-    ;
+lbl_end:;
 }
 
 void un_803083D8(HSD_JObj* jobj, s32 arg1)

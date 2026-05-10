@@ -15,7 +15,9 @@
 #include "gr/grzakogenerator.h"
 #include "gr/inlines.h"
 #include "gr/stage.h"
+#include "it/it_266F.h"
 #include "it/it_26B1.h"
+#include "it/items/itbox.h"
 #include "it/items/itklap.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
@@ -32,8 +34,6 @@
 #include <baselib/jobj.h>
 #include <baselib/random.h>
 #include <baselib/spline.h>
-#include "it/it_266F.h"
-#include "it/items/itbox.h"
 
 void grKongo_801D5490(Ground_GObj* arg0)
 {
@@ -1487,9 +1487,8 @@ void grKongo_801D77E0(HSD_GObj* gobj, s32 arg1)
             }
             q->gv.kongo.xC4 += q->gv.kongo.xC8;
             v = q->gv.kongo.xC4;
-            limit = 0.017453292f *
-                    (grKg_804D6980->unkB8 -
-                     0.017453292f * grKg_804D6980->unkAC);
+            limit = 0.017453292f * (grKg_804D6980->unkB8 -
+                                    0.017453292f * grKg_804D6980->unkAC);
             if (v > limit) {
                 q->gv.kongo.xC4 = limit;
                 q->gv.kongo.xC8 = 0.0f;
@@ -1547,15 +1546,15 @@ void grKongo_801D7BBC(HSD_GObj* gobj)
     } else {
         var_f31 = 0.0f;
     }
-    var_f31 = HSD_Randf() *
-              (grKg_804D6980->unk10 * (1.0f - grKg_804D6980->unk18) +
-               (grKg_804D6980->unk10 * grKg_804D6980->unk18 +
-                (grKg_804D6980->unk8 + var_f31)));
+    var_f31 =
+        HSD_Randf() * (grKg_804D6980->unk10 * (1.0f - grKg_804D6980->unk18) +
+                       (grKg_804D6980->unk10 * grKg_804D6980->unk18 +
+                        (grKg_804D6980->unk8 + var_f31)));
     {
         f32 r = HSD_Randf();
-        gp->gv.kongo.xE4 = (s16) ((grKg_804D6980->unk4 - grKg_804D6980->unk0) *
-                                      r +
-                                  grKg_804D6980->unk0);
+        gp->gv.kongo.xE4 =
+            (s16) ((grKg_804D6980->unk4 - grKg_804D6980->unk0) * r +
+                   grKg_804D6980->unk0);
     }
     var_f31 -= grKg_804D6980->unk8;
     if (var_f31 < 0.0f) {

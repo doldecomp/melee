@@ -5,7 +5,9 @@
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 #include "lb/lbarchive.h"
+#include "lb/lbaudio_ax.h"
 #include "lb/lblanguage.h"
+#include "mn/mnmain.h"
 #include "ty/toy.h"
 #include "ty/types.h"
 
@@ -25,8 +27,6 @@
 #include <baselib/sislib.h>
 #include <baselib/tobj.h>
 #include <baselib/video.h>
-#include "lb/lbaudio_ax.h"
-#include "mn/mnmain.h"
 
 typedef struct {
     u8 pad[0x28];
@@ -375,8 +375,7 @@ done_first_dirty:
         row->idx = var_r28;
         un_80312904(row, arg1);
         un_80313464(row);
-        if (row->x24 >= 0 &&
-            row->x24 < (s8) state->entryCount - 2 &&
+        if (row->x24 >= 0 && row->x24 < (s8) state->entryCount - 2 &&
             row->idx == un_GetTrophyTotal() - 1)
         {
             HSD_JObj* jobj2 = state->jobj;
@@ -406,7 +405,7 @@ done_first_dirty:
                 }
             }
         }
-done_inner_dirty:
+    done_inner_dirty:
         row = row->x4;
         var_r28++;
         if (var_r28 >= un_GetTrophyTotal()) {
@@ -416,7 +415,7 @@ done_inner_dirty:
 
     i = 0;
     while (i < 3) {
-        HSD_JObj* anim_jobj = *((HSD_JObj**)((u8*) archive + i * 4 + 0x18));
+        HSD_JObj* anim_jobj = *((HSD_JObj**) ((u8*) archive + i * 4 + 0x18));
         if (i == (s8) state->x29B) {
             HSD_JObjReqAnim(anim_jobj, un_804DDE44);
         } else {
@@ -544,7 +543,8 @@ s8 un_8031305C(void* a, TyListState* state, s8 movedFlag)
         while (i < (s8) state->entryCount) {
             s8 x2A1 = state->x2A1;
             if (((s8) x2A1 != 0 || (entry->x24 != -1)) &&
-                ((s8) x2A1 != 1 || (s8) state->entryCount - 1 != entry->x24)) {
+                ((s8) x2A1 != 1 || (s8) state->entryCount - 1 != entry->x24))
+            {
                 un_80312E88(entry, delta);
             }
             entry = (TyListArg*) ((u8*) entry + 0x34);
@@ -950,8 +950,7 @@ void fn_80313BD8(HSD_GObj* gobj)
                 un_80313358(state, 9, 4, 0);
             } else {
                 un_80313358(state,
-                            (s8) (un_GetTrophyTotal() -
-                                  state->entries[0].idx),
+                            (s8) (un_GetTrophyTotal() - state->entries[0].idx),
                             4, 0);
             }
             state->pad_29D = state->x29E;
@@ -1081,9 +1080,8 @@ void fn_8031438C(HSD_GObj* arg0)
                     HSD_JObjReqAnim(*(HSD_JObj**) (base_p + 0x18),
                                     un_804DDE48);
                 }
-                HSD_AObjSetRate(
-                    archive->jobjs[0]->u.dobj->mobj->tobj->aobj,
-                    un_804DDE48);
+                HSD_AObjSetRate(archive->jobjs[0]->u.dobj->mobj->tobj->aobj,
+                                un_804DDE48);
             }
             HSD_JObjAnimAll((HSD_JObj*) archive->x0[10]);
         } else {
@@ -1176,8 +1174,8 @@ void un_8031457C(void)
         scissor.top = viewport.ymin;
         scissor.bottom = viewport.ymax;
         HSD_CObjSetScissor(cobj, &scissor);
-        un_804D6EE8 = HSD_SisLib_803A611C(0, entry->x4, 0xB, 0xB, 0, 0x3E, 0,
-                                          0);
+        un_804D6EE8 =
+            HSD_SisLib_803A611C(0, entry->x4, 0xB, 0xB, 0, 0x3E, 0, 0);
     }
 }
 

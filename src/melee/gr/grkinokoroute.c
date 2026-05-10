@@ -188,9 +188,7 @@ void grKinokoRoute_8020836C(Ground_GObj* gobj, int arg1)
         mpJointListAdd(0x3C);
         mpJointListAdd(0x33);
 
-        for (cur = HSD_GObj_Entities->items; cur != NULL;
-             cur = cur->next)
-        {
+        for (cur = HSD_GObj_Entities->items; cur != NULL; cur = cur->next) {
             if (itGetKind(cur) == 0xA0) {
                 grMaterial_801C8E08(cur);
             }
@@ -205,9 +203,7 @@ void grKinokoRoute_8020836C(Ground_GObj* gobj, int arg1)
         mpLib_80057BC0(0x3C);
         mpLib_80057BC0(0x33);
 
-        for (cur = HSD_GObj_Entities->items; cur != NULL;
-             cur = cur->next)
-        {
+        for (cur = HSD_GObj_Entities->items; cur != NULL; cur = cur->next) {
             if (itGetKind(cur) == 0xA0) {
                 grMaterial_801C8E28(cur);
             }

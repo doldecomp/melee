@@ -1159,10 +1159,10 @@ typedef struct LightOverrideEntry {
 } LightOverrideEntry;
 
 typedef struct LightOverrideFlags {
-    u8 a:1;
-    u8 b:1;
-    u8 c:1;
-    u8 _:5;
+    u8 a : 1;
+    u8 b : 1;
+    u8 c : 1;
+    u8 _ : 5;
 } LightOverrideFlags;
 
 LightList** Ground_801C20E0(UnkArchiveStruct* archive, LightList** lights)
@@ -1191,14 +1191,15 @@ LightList** Ground_801C20E0(UnkArchiveStruct* archive, LightList** lights)
     matched = 0;
     while (*walker != NULL) {
         dat = archive->unk4;
-        desc = *(HSD_LightDesc**)*walker;
+        desc = *(HSD_LightDesc**) *walker;
         count = dat->unk1C;
         if (count != 0) {
             found = 0;
             for (i = 0, byte_off = 0; i < count; byte_off += 8, i++) {
-                arr = (LightOverrideEntry*)dat->unk18;
-                if (*(u32*)((u8*)arr + byte_off) == (u32)desc) {
-                    LightOverrideFlags* p = (LightOverrideFlags*)((u8*)arr + i * 8 + 4);
+                arr = (LightOverrideEntry*) dat->unk18;
+                if (*(u32*) ((u8*) arr + byte_off) == (u32) desc) {
+                    LightOverrideFlags* p =
+                        (LightOverrideFlags*) ((u8*) arr + i * 8 + 4);
                     found = 1;
                     b6 = p->b;
                     b7 = p->a;
@@ -1222,16 +1223,16 @@ LightList** Ground_801C20E0(UnkArchiveStruct* archive, LightList** lights)
 
     out = lights;
     while (*out != NULL) {
-        desc = *(HSD_LightDesc**)*out;
+        desc = *(HSD_LightDesc**) *out;
         if (desc->flags & 3) {
             dat = archive->unk4;
             count = dat->unk1C;
             if (count != 0) {
                 found = 0;
                 for (i = 0, byte_off = 0; i < count; byte_off += 8, i++) {
-                    arr = (LightOverrideEntry*)dat->unk18;
-                    if (*(u32*)((u8*)arr + byte_off) == (u32)desc) {
-                        u8* p = (u8*)arr + i * 8 + 4;
+                    arr = (LightOverrideEntry*) dat->unk18;
+                    if (*(u32*) ((u8*) arr + byte_off) == (u32) desc) {
+                        u8* p = (u8*) arr + i * 8 + 4;
                         found = 1;
                         b6 = (*p >> 6) & 1;
                         b7 = (*p >> 7) & 1;
@@ -1255,14 +1256,14 @@ LightList** Ground_801C20E0(UnkArchiveStruct* archive, LightList** lights)
                     desc->flags &= ~4;
                 }
                 if (b7) {
-                    (*(HSD_LightDesc**)*out)->flags |= 8;
+                    (*(HSD_LightDesc**) *out)->flags |= 8;
                 } else {
-                    (*(HSD_LightDesc**)*out)->flags &= ~8;
+                    (*(HSD_LightDesc**) *out)->flags &= ~8;
                 }
                 if (b5) {
-                    (*(HSD_LightDesc**)*out)->flags |= 0x400;
+                    (*(HSD_LightDesc**) *out)->flags |= 0x400;
                 } else {
-                    (*(HSD_LightDesc**)*out)->flags &= ~0x400;
+                    (*(HSD_LightDesc**) *out)->flags &= ~0x400;
                 }
             }
         }
@@ -1479,14 +1480,22 @@ void Ground_801C28CC(void* arg0, s32 arg1)
             s32 k;
             s32 n = 0;
             for (k = 0; k < 4; k++) {
-                out[0] = *(s16*) ((u8*) stage_info.param + n + 0x6A) * *(s16*) ((u8*) b + 0x1A);
-                out[1] = *(s16*) ((u8*) stage_info.param + n + 0x6C) * *(s16*) ((u8*) b + 0x1C);
-                out[2] = *(s16*) ((u8*) stage_info.param + n + 0x6E) * *(s16*) ((u8*) b + 0x1E);
-                out[3] = *(s16*) ((u8*) stage_info.param + n + 0x70) * *(s16*) ((u8*) b + 0x20);
-                out[4] = *(s16*) ((u8*) stage_info.param + n + 0x72) * *(s16*) ((u8*) b + 0x22);
-                out[5] = *(s16*) ((u8*) stage_info.param + n + 0x74) * *(s16*) ((u8*) b + 0x24);
-                out[6] = *(s16*) ((u8*) stage_info.param + n + 0x76) * *(s16*) ((u8*) b + 0x26);
-                out[7] = *(s16*) ((u8*) stage_info.param + n + 0x78) * *(s16*) ((u8*) b + 0x28);
+                out[0] = *(s16*) ((u8*) stage_info.param + n + 0x6A) *
+                         *(s16*) ((u8*) b + 0x1A);
+                out[1] = *(s16*) ((u8*) stage_info.param + n + 0x6C) *
+                         *(s16*) ((u8*) b + 0x1C);
+                out[2] = *(s16*) ((u8*) stage_info.param + n + 0x6E) *
+                         *(s16*) ((u8*) b + 0x1E);
+                out[3] = *(s16*) ((u8*) stage_info.param + n + 0x70) *
+                         *(s16*) ((u8*) b + 0x20);
+                out[4] = *(s16*) ((u8*) stage_info.param + n + 0x72) *
+                         *(s16*) ((u8*) b + 0x22);
+                out[5] = *(s16*) ((u8*) stage_info.param + n + 0x74) *
+                         *(s16*) ((u8*) b + 0x24);
+                out[6] = *(s16*) ((u8*) stage_info.param + n + 0x76) *
+                         *(s16*) ((u8*) b + 0x26);
+                out[7] = *(s16*) ((u8*) stage_info.param + n + 0x78) *
+                         *(s16*) ((u8*) b + 0x28);
                 b = (UnkBgmStruct*) ((u8*) b + 0x10);
                 out += 8;
                 n += 0x10;
@@ -1494,7 +1503,8 @@ void Ground_801C28CC(void* arg0, s32 arg1)
             if ((n >> 1) < 0x23) {
                 s16* bp = (s16*) ((u8*) b + 0x1A);
                 do {
-                    *out++ = *(s16*) ((u8*) stage_info.param + n + 0x6A) * *bp++;
+                    *out++ =
+                        *(s16*) ((u8*) stage_info.param + n + 0x6A) * *bp++;
                     n += 2;
                 } while ((n >> 1) < 0x23);
             }
@@ -1512,7 +1522,8 @@ void Ground_801C28CC(void* arg0, s32 arg1)
             p++;
         }
     }
-    while (1) {}
+    while (1) {
+    }
 }
 
 s32* Ground_801C2AD8(void)

@@ -742,18 +742,18 @@ int SimplifySrc(HSD_TExp* arg0)
     return result;
 }
 
-#define CLEAR_ARG(arg)                  \
-    do {                               \
-        *(u32*) &(arg) = HSD_TExpDag_804D5FF8; \
-        (arg).exp = HSD_TExpDag_804D5FFC;      \
+#define CLEAR_ARG(arg)                                                        \
+    do {                                                                      \
+        *(u32*) &(arg) = HSD_TExpDag_804D5FF8;                                \
+        (arg).exp = HSD_TExpDag_804D5FFC;                                     \
     } while (0)
 
 #define BIAS_TO_INT(bias) ((bias) == 1 ? 1 : ((bias) == 2 ? -1 : 0))
 #define INT_TO_BIAS(v) ((v) == 1 ? 1 : ((v) == -1 ? 2 : 0))
-#define RESOURCE_CONFLICT(tex_obj, chan_id, src_exp)                             \
-    ((((tex_obj) != NULL) && ((src_exp)->tev.tex != NULL) &&                    \
-      ((tex_obj) != (src_exp)->tev.tex)) ||                                     \
-     (((chan_id) != 0xFF) && ((src_exp)->tev.chan != 0xFF) &&                  \
+#define RESOURCE_CONFLICT(tex_obj, chan_id, src_exp)                          \
+    ((((tex_obj) != NULL) && ((src_exp)->tev.tex != NULL) &&                  \
+      ((tex_obj) != (src_exp)->tev.tex)) ||                                   \
+     (((chan_id) != 0xFF) && ((src_exp)->tev.chan != 0xFF) &&                 \
       ((chan_id) != (src_exp)->tev.chan)))
 
 int SimplifyThis(HSD_TExp* arg0)
@@ -900,8 +900,7 @@ int SimplifyThis(HSD_TExp* arg0)
                 }
                 if (arg0->tev.c_in[0].sel == HSD_TE_0 &&
                     arg0->tev.c_in[1].sel == HSD_TE_0 &&
-                    arg0->tev.c_in[3].sel == HSD_TE_0 &&
-                    arg0->tev.c_bias == 0)
+                    arg0->tev.c_in[3].sel == HSD_TE_0 && arg0->tev.c_bias == 0)
                 {
                     arg0->tev.c_op = 0xFF;
                     HSD_TExpUnref(arg0->tev.c_in[2].exp,
@@ -1156,8 +1155,8 @@ int SimplifyByMerge(HSD_TExp* arg0)
                             if (child->tev.c_scale == 0 &&
                                 (arg0->tev.c_bias == 0 ||
                                  arg0->tev.c_bias != child->tev.c_bias) &&
-                                !RESOURCE_CONFLICT(arg0->tev.tex, arg0->tev.chan,
-                                                   child))
+                                !RESOURCE_CONFLICT(arg0->tev.tex,
+                                                   arg0->tev.chan, child))
                             {
                                 for (i = 0; i < 4; i++) {
                                     arg0->tev.c_in[i] = child->tev.c_in[i];

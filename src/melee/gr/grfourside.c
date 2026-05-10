@@ -5,9 +5,10 @@
 
 #include <platform.h>
 
+#include "cm/camera.h"
+
 #include "forward.h"
 
-#include "cm/camera.h"
 #include "gr/granime.h"
 #include "gr/grdisplay.h"
 #include "gr/grlib.h"
@@ -20,8 +21,6 @@
 #include "lb/lb_00F9.h"
 #include "mp/mplib.h"
 
-#include <MSL/trigf.h>
-
 #include <dolphin/mtx.h>
 #include <baselib/gobj.h>
 #include <baselib/gobjgxlink.h>
@@ -30,6 +29,7 @@
 #include <baselib/gobjuserdata.h>
 #include <baselib/jobj.h>
 #include <baselib/random.h>
+#include <MSL/trigf.h>
 
 static struct {
     /* 00 */ int heli_wait;
@@ -454,7 +454,9 @@ void grFourside_801F3894(Ground_GObj* arg0)
             if (gp->gv.foursideUfo.x8 != 0) {
                 prob = grFs_804D69D8->x46;
             }
-            if ((s16) gp->gv.foursideUfo.x2 >= (s16) grFs_804D69D8->ufo_challenge) {
+            if ((s16) gp->gv.foursideUfo.x2 >=
+                (s16) grFs_804D69D8->ufo_challenge)
+            {
                 prob = grFs_804D69D8->x48;
             }
             if (prob != 0 && HSD_Randi(prob) == 0) {
@@ -465,7 +467,8 @@ void grFourside_801F3894(Ground_GObj* arg0)
                 } while (prev_building == building);
                 if (building == 2 || grFourside_801F3F10() == 0) {
                     gp->gv.foursideUfo.x1 = building;
-                    grAnime_801C8138(arg0, gp->map_id, gp->gv.foursideUfo.x1 * 4);
+                    grAnime_801C8138(arg0, gp->map_id,
+                                     gp->gv.foursideUfo.x1 * 4);
                     mpLib_80055E9C(4);
                     mpLib_80057424(4);
                     HSD_JObjClearFlagsAll(jobj, 0x10);
@@ -646,10 +649,11 @@ void grFourside_801F3CC8(Ground_GObj* gobj)
         if (grAnime_801C83D0(gobj, 0, 7)) {
             HSD_JObjSetFlagsAll(jobj, JOBJ_HIDDEN);
             gp->gv.fourside2.x0 = 0;
-            gp->gv.fourside2.x4 = grFs_804D69D8->heli_wait +
-                                  (grFs_804D69D8->heli_wait_add != 0
-                                       ? HSD_Randi(grFs_804D69D8->heli_wait_add)
-                                       : 0);
+            gp->gv.fourside2.x4 =
+                grFs_804D69D8->heli_wait +
+                (grFs_804D69D8->heli_wait_add != 0
+                     ? HSD_Randi(grFs_804D69D8->heli_wait_add)
+                     : 0);
         }
         gp->gv.fourside2.x4 += 1;
         break;
