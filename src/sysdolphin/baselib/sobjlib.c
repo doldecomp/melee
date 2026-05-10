@@ -47,8 +47,6 @@ void HSD_SObjLib_803A44A4(void)
     HSD_ObjAllocInit(&HSD_SObjLib_804D10E0, 0x9C, 4);
 }
 
-/* @todo 99.56% match - needs register allocation fix (r4 vs r5 for cur) */
-/* @todo 99.56% match - needs register allocation fix (r4 vs r5 for cur) */
 void HSD_SObjLib_803A44D4(HSD_GObj* gobj, HSD_SObj* sobj, u8 priority)
 {
     HSD_SObj* cur;
