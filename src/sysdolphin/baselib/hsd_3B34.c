@@ -3,8 +3,12 @@
 #include "hsd_3A94.h"
 #include "hsd_3B33.h"
 
+#include <__mem.h>
+
 /// hsd_803B5C2C
 static int lbl_804D6398 = 3;
+static s32 lbl_804DEB88 = 0x4A464946;
+static u8 lbl_804DEB8C = 0;
 
 extern u8* hsd_804D79B8;
 extern s32 hsd_804D79BC;
@@ -273,6 +277,114 @@ void hsd_803B4A2C(void)
         }
         var_r30 += 1;
     }
+}
+
+void hsd_803B46D4(void)
+{
+    __jmp_buf* env = &hsd_804D2648;
+    u8 spC;
+    s32 sp8;
+    s8* temp_r4;
+
+    temp_r4 = hsd_804D79A0;
+    sp8 = lbl_804DEB88;
+    spC = lbl_804DEB8C;
+    if ((u32) temp_r4 < (u32) hsd_804D79A4 + (u32) hsd_804D79A8) {
+        hsd_804D79A0 = temp_r4 + 1;
+        *temp_r4 = 0xFF;
+    } else {
+        longjmp(env, 1);
+    }
+    temp_r4 = hsd_804D79A0;
+    if ((u32) temp_r4 < (u32) hsd_804D79A4 + (u32) hsd_804D79A8) {
+        hsd_804D79A0 = temp_r4 + 1;
+        *temp_r4 = 0xE0;
+    } else {
+        longjmp(env, 1);
+    }
+    temp_r4 = hsd_804D79A0;
+    if ((u32) temp_r4 < (u32) hsd_804D79A4 + (u32) hsd_804D79A8) {
+        hsd_804D79A0 = temp_r4 + 1;
+        *temp_r4 = 0;
+    } else {
+        longjmp(env, 1);
+    }
+    temp_r4 = hsd_804D79A0;
+    if ((u32) temp_r4 < (u32) hsd_804D79A4 + (u32) hsd_804D79A8) {
+        hsd_804D79A0 = temp_r4 + 1;
+        *temp_r4 = 0x10;
+    } else {
+        longjmp(env, 1);
+    }
+    if ((u32) hsd_804D79A0 < (u32) hsd_804D79A4 + ((u32) hsd_804D79A8 - 5)) {
+        memcpy(hsd_804D79A0, &sp8, 5);
+        *((u32*) &hsd_804D79A0) += 5;
+    } else {
+        longjmp(env, 1);
+    }
+    temp_r4 = hsd_804D79A0;
+    if ((u32) temp_r4 < (u32) hsd_804D79A4 + (u32) hsd_804D79A8) {
+        hsd_804D79A0 = temp_r4 + 1;
+        *temp_r4 = 1;
+    } else {
+        longjmp(env, 1);
+    }
+    temp_r4 = hsd_804D79A0;
+    if ((u32) temp_r4 < (u32) hsd_804D79A4 + (u32) hsd_804D79A8) {
+        hsd_804D79A0 = temp_r4 + 1;
+        *temp_r4 = 2;
+    } else {
+        longjmp(env, 1);
+    }
+    temp_r4 = hsd_804D79A0;
+    if ((u32) temp_r4 < (u32) hsd_804D79A4 + (u32) hsd_804D79A8) {
+        hsd_804D79A0 = temp_r4 + 1;
+        *temp_r4 = 1;
+    } else {
+        longjmp(env, 1);
+    }
+    temp_r4 = hsd_804D79A0;
+    if ((u32) temp_r4 < (u32) hsd_804D79A4 + (u32) hsd_804D79A8) {
+        hsd_804D79A0 = temp_r4 + 1;
+        *temp_r4 = 0;
+    } else {
+        longjmp(env, 1);
+    }
+    temp_r4 = hsd_804D79A0;
+    if ((u32) temp_r4 < (u32) hsd_804D79A4 + (u32) hsd_804D79A8) {
+        hsd_804D79A0 = temp_r4 + 1;
+        *temp_r4 = 0x48;
+    } else {
+        longjmp(env, 1);
+    }
+    temp_r4 = hsd_804D79A0;
+    if ((u32) temp_r4 < (u32) hsd_804D79A4 + (u32) hsd_804D79A8) {
+        hsd_804D79A0 = temp_r4 + 1;
+        *temp_r4 = 0;
+    } else {
+        longjmp(env, 1);
+    }
+    temp_r4 = hsd_804D79A0;
+    if ((u32) temp_r4 < (u32) hsd_804D79A4 + (u32) hsd_804D79A8) {
+        hsd_804D79A0 = temp_r4 + 1;
+        *temp_r4 = 0x48;
+    } else {
+        longjmp(env, 1);
+    }
+    temp_r4 = hsd_804D79A0;
+    if ((u32) temp_r4 < (u32) hsd_804D79A4 + (u32) hsd_804D79A8) {
+        hsd_804D79A0 = temp_r4 + 1;
+        *temp_r4 = 0;
+    } else {
+        longjmp(env, 1);
+    }
+    temp_r4 = hsd_804D79A0;
+    if ((u32) temp_r4 < (u32) hsd_804D79A4 + (u32) hsd_804D79A8) {
+        hsd_804D79A0 = temp_r4 + 1;
+        *temp_r4 = 0;
+        return;
+    }
+    longjmp(env, 1);
 }
 
 void hsd_803B5C2C(int mode)
