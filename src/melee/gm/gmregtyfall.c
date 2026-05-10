@@ -116,9 +116,9 @@ void fn_801A6664(HSD_GObj* arg0)
             }
         }
         if (gm_804D6750 > 0xFF) {
-            temp_r3->x3F = 0xFF;
+            temp_r3->x3C.a = 0xFF;
         } else {
-            temp_r3->x3F = gm_804D6750;
+            temp_r3->x3C.a = gm_804D6750;
         }
     }
     if (gm_804D6780 != 0) {
@@ -134,16 +134,16 @@ void fn_801A6664(HSD_GObj* arg0)
                                          0x80, 0);
         temp_r3_2->x10 = 60.0f;
         temp_r3_2->x14 = 0.0f;
-        temp_r3_2->x3C = gm_804D4278.x0;
-        temp_r3_2->x3D = gm_804D4278.x1;
-        temp_r3_2->x3E = gm_804D4278.x2;
+        temp_r3_2->x3C.r = gm_804D4278.x0;
+        temp_r3_2->x3C.g = gm_804D4278.x1;
+        temp_r3_2->x3C.b = gm_804D4278.x2;
         if (gm_804D6794 < 0xBE) {
             gm_804D6794 += 0xA;
             if (gm_804D6794 > 0xBE) {
                 gm_804D6794 = 0xBE;
             }
         }
-        temp_r3_2->x3F = gm_804D6794;
+        temp_r3_2->x3C.a = gm_804D6794;
         gm_804D6784 = gm_804D6784 == 0;
     }
 }
