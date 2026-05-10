@@ -6,6 +6,7 @@
 #include "dolphin/gx/GXStruct.h"
 
 #include <sysdolphin/baselib/forward.h>
+#include <sysdolphin/baselib/gobj.h>
 
 extern GObjFuncs HSD_SObjLib_8040C3A4;
 extern u8 HSD_SObjLib_804D7960;
@@ -54,6 +55,6 @@ typedef HSD_SObj HSD_SObj_803A477C_t;
 /* 3A49E0 */ void HSD_SObjLib_803A49E0(HSD_GObj*, int);
 /* 3A4A68 */ void HSD_SObjLib_803A4A68(HSD_SObj*);
 /* 3A54EC */ void HSD_SObjLib_803A54EC(HSD_GObj*, int);
-/* 3A55DC */ void HSD_SObjLib_803A55DC(HSD_GObj*, int, int, int);
+/* 3A55DC */ void HSD_SObjLib_803A55DC(HSD_GObj*, u16, u16, int);
 
 #endif
