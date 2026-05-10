@@ -727,14 +727,6 @@ extern f32 grOk_804DBA14;
 extern f32 grOk_804DBA18;
 extern f32 grOk_804DBA1C;
 
-// HSD_ASSERT in grOldKongo_80210650 below passes __FILE__ to __assert.
-// The original binary references the pre-existing "groldkongo.c" string
-// at grOk_803E6640; point __FILE__ at that symbol so the relocation
-// matches exactly rather than pulling in a fresh string-literal copy.
-extern char grOk_803E6640[];
-#undef __FILE__
-#define __FILE__ grOk_803E6640
-
 f32 grOldKongo_80210650(void)
 {
     f32 result;
