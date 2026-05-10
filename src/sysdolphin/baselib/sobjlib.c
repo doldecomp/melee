@@ -9,24 +9,19 @@
 #include "tev.h"
 #include "tobj.h"
 
+#include "baselib/debug.h"
 #include "baselib/pobj.h"
 #include "dolphin/gx.h"
 
 #include <dolphin/os.h>
 #include <MSL/trigf.h>
 
-/* 004DB670 */ extern const s32 HSD_SObjLib_804DEA90;
-/* 004DB66C */ extern const s32 HSD_SObjLib_804DEA8C;
-/* 004DB668 */ extern const s32 HSD_SObjLib_804DEA88;
-/* 004DB664 */ extern const s32 HSD_SObjLib_804DEA84;
-/* 004DB660 */ extern const s32 HSD_SObjLib_804DEA80;
-/* 004DEA78 */ extern const f64 HSD_SObjLib_804DEA78;
-/* 004DEA74 */ extern const f32 HSD_SObjLib_804DEA74;
-/* 004DEA70 */ extern const f32 HSD_SObjLib_804DEA70;
+static const GXColorS10 lbl_804DEA80 = { -90, 0, -114, 135 };
+static const GXColor lbl_804DEA88 = { 0x00, 0x00, 0xE2, 0x58 };
+static const GXColor lbl_804DEA8C = { 0xB3, 0x00, 0x00, 0xB6 };
+static const GXColor lbl_804DEA90 = { 0xFF, 0x00, 0xFF, 0x80 };
 /* 004D4540 */ extern u8 HSD_SObjLib_804D7960;
-/* 004D6388 */ extern char HSD_SObjLib_804D6388[];
 /* 004CDCC0 */ extern HSD_ObjAllocData HSD_SObjLib_804D10E0;
-/* 00408F90 */ extern s8 HSD_SObjLib_8040C3B0[10];
 typedef struct SObjLibData {
     /* 0x00 */ UNK_T x0;
     /* 0x04 */ GObjFuncs x4_funcs;
@@ -44,11 +39,6 @@ typedef struct SObjLibSObjDesc {
     /* 0x04 */ HSD_TlutDesc* x4;
     /* 0x08 */ HSD_ImageDesc* x8;
 } SObjLibSObjDesc;
-
-extern SObjLibData HSD_SObjLib_8040C3A0;
-/* 003B6244 */ extern Vec3 HSD_SObjLib_803B9664;
-/* 003B6238 */ extern Vec3 HSD_SObjLib_803B9658;
-/* 00408F9C */ extern char HSD_SObjLib_8040C3BC[];
 
 HSD_ObjAllocData HSD_SObjLib_804D10E0;
 
@@ -189,9 +179,7 @@ HSD_SObj* HSD_SObjLib_803A477C(HSD_GObj* gobj, int desc_arg, int wrap_s,
     }
 
     sobj = HSD_ObjAlloc(&HSD_SObjLib_804D10E0);
-    if (sobj == NULL) {
-        __assert((char*) HSD_SObjLib_8040C3B0, 0x11F, HSD_SObjLib_804D6388);
-    }
+    HSD_ASSERT(0x11F, sobj);
 
     if (tlut != NULL) {
         GXInitTlutObj(&sobj->x70_tlutobj, tlut->lut, tlut->fmt,
@@ -215,11 +203,11 @@ HSD_SObj* HSD_SObjLib_803A477C(HSD_GObj* gobj, int desc_arg, int wrap_s,
     sobj->x0 = NULL;
     sobj->prev = NULL;
     sobj->next = NULL;
-    sobj->x14 = HSD_SObjLib_804DEA70;
-    sobj->x10 = HSD_SObjLib_804DEA70;
-    sobj->x18 = HSD_SObjLib_804DEA70;
-    sobj->x20 = HSD_SObjLib_804DEA74;
-    sobj->x1C = HSD_SObjLib_804DEA74;
+    sobj->x14 = 0.0f;
+    sobj->x10 = 0.0f;
+    sobj->x18 = 0.0f;
+    sobj->x20 = 1.0f;
+    sobj->x1C = 1.0f;
     sobj->x3F = 0xFF;
     sobj->x3E = 0xFF;
     sobj->x3D = 0xFF;
@@ -237,13 +225,13 @@ HSD_SObj* HSD_SObjLib_803A477C(HSD_GObj* gobj, int desc_arg, int wrap_s,
     }
     sobj->x34 = image->width;
     sobj->x36 = image->height;
-    temp_f31 = HSD_SObjLib_804DEA74 / (f32) GXGetTexObjWidth(&sobj->x50_texobj);
+    temp_f31 = 1.0f / (f32) GXGetTexObjWidth(&sobj->x50_texobj);
     temp_r0 = GXGetTexObjHeight(&sobj->x50_texobj);
-    sobj->x24 = HSD_SObjLib_804DEA70;
-    sobj->x28 = HSD_SObjLib_804DEA70;
+    sobj->x24 = 0.0f;
+    sobj->x28 = 0.0f;
     sobj->x2C = (f32) sobj->x34 * temp_f31;
     sobj->x30 = (f32) sobj->x36 *
-                (HSD_SObjLib_804DEA74 / (f32) temp_r0);
+                (1.0f / (f32) temp_r0);
     HSD_SObjLib_803A44D4(gobj, sobj, (u8) priority);
     return sobj;
 }
@@ -270,16 +258,6 @@ void HSD_SObjLib_803A49E0(HSD_GObj* gobj, int unused)
 
 void HSD_SObjLib_803A4A68(HSD_SObj* sobj)
 {
-    s32 sp74;
-    s32 sp70;
-    s32 sp6C;
-    s32 sp68;
-    s32 sp64;
-    s32 sp60;
-    s32 sp5C;
-    s32 sp58;
-    s32 sp54;
-    s32 sp50;
     s32 sp4C;
     s32 sp48;
     s32 sp44;
@@ -401,20 +379,10 @@ void HSD_SObjLib_803A4A68(HSD_SObj* sobj)
         GXSetTevSwapMode(GX_TEVSTAGE3, GX_TEV_SWAP0, GX_TEV_SWAP0);
         GXSetTevKColorSel(GX_TEVSTAGE3, GX_TEV_KCSEL_K2);
         GXSetAlphaCompare(GX_ALWAYS, 0U, GX_AOP_OR, GX_ALWAYS, 0U);
-        sp68 = HSD_SObjLib_804DEA80;
-        sp6C = HSD_SObjLib_804DEA84;
-        sp70 = sp68;
-        sp74 = HSD_SObjLib_804DEA84;
-        GXSetTevColorS10(GX_TEVREG0, *(GXColorS10*) &sp70);
-        sp60 = HSD_SObjLib_804DEA88;
-        sp64 = HSD_SObjLib_804DEA88;
-        GXSetTevKColor(GX_KCOLOR0, *(GXColor*) &sp64);
-        sp58 = HSD_SObjLib_804DEA8C;
-        sp5C = HSD_SObjLib_804DEA8C;
-        GXSetTevKColor(GX_KCOLOR1, *(GXColor*) &sp5C);
-        sp50 = HSD_SObjLib_804DEA90;
-        sp54 = HSD_SObjLib_804DEA90;
-        GXSetTevKColor(GX_KCOLOR2, *(GXColor*) &sp54);
+        GXSetTevColorS10(GX_TEVREG0, lbl_804DEA80);
+        GXSetTevKColor(GX_KCOLOR0, lbl_804DEA88);
+        GXSetTevKColor(GX_KCOLOR1, lbl_804DEA8C);
+        GXSetTevKColor(GX_KCOLOR2, lbl_804DEA90);
         GXSetTevSwapModeTable(GX_TEV_SWAP0, GX_CH_RED, GX_CH_GREEN,
                               GX_CH_BLUE, GX_CH_ALPHA);
         GXSetBlendMode(GX_BM_NONE, GX_BL_ONE, GX_BL_ZERO, GX_LO_CLEAR);
