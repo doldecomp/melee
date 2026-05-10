@@ -110,7 +110,7 @@
 /* 15DA68 */ void gmMainLib_8015DA68(u32);
 /* 15DA90 */ int gmMainLib_8015DA90(u32);
 /* 15DAB4 */ void gmMainLib_8015DAB4(u32);
-/* 15DADC */ s32 gmMainLib_8015DADC(u32);
+/* 15DADC */ bool gmMainLib_8015DADC(u32);
 /* 15DB00 */ u8 gmMainLib_8015DB00(void);
 /* 15DB0C */ void gmMainLib_8015DB0C(u8);
 /* 15DB18 */ void gmMainLib_8015DB18(void);

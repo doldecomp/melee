@@ -26,7 +26,7 @@ struct lbl_804D65A8_t;
 /* 16F740 */ int fn_8016F740(void*, u16, u8, u8);
 /* 16F870 */ int fn_8016F870(void*, u16, u8, u8);
 /* 16F9A8 */ int fn_8016F9A8(void*, u16, u8, u8);
-/* 16FAD4 */ int fn_8016FAD4(struct lbl_8046B6A0_24C_t*, u32, int, u8);
+/* 16FAD4 */ int fn_8016FAD4(struct lbl_8046B6A0_24C_t*, int, int, u8);
 /* 16FFD4 */ int fn_8016FFD4(struct lbl_8046B6A0_24C_t*, int, u8);
 /* 170110 */ int fn_80170110(void*, int, int, u8);
 /* 1701A0 */ UNK_RET gm_801701A0(UNK_PARAMS);
