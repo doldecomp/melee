@@ -61,15 +61,9 @@ typedef struct TrophyData {
 
 /* Trophy list entry. Size: 0x34 bytes. */
 typedef struct TyListArg {
-    /* 0x00 */ struct TyListArg* x0;
-    /* 0x04 */ struct TyListArg* x4;
-    /* 0x08 */ void* x8;
-    /* 0x0C */ struct HSD_JObj* xC;
-    /* 0x10 */ struct HSD_JObj* x10;
-    /* 0x14 */ struct HSD_JObj* x14;
-    /* 0x18 */ struct HSD_Text* x18;
-    /* 0x1C */ struct HSD_Text* x1C;
-    /* 0x20 */ struct HSD_Text* x20;
+    /* 0x00 */ struct TyListArg* links[3];
+    /* 0x0C */ struct HSD_JObj* jobjs[3];
+    /* 0x18 */ struct HSD_Text* texts[3];
     /* 0x24 */ s8 x24;
     /* 0x25 */ u8 x25;
     /* 0x26 */ s16 idx;

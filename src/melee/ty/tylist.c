@@ -262,48 +262,48 @@ void un_80312904(TyListArg* arg, s8 arg1)
             show = 1;
         }
         if (show != 0) {
-            jobj = arg->xC;
+            jobj = arg->jobjs[0];
             pos_x = HSD_JObjGetTranslationX(jobj) - 6.5f;
             parent_jobj = GET_JOBJ(state->gobj);
             pos_y = (-arg->x30 - HSD_JObjGetTranslationY(parent_jobj)) - 0.41f;
             pos_z = HSD_JObjGetTranslationZ(parent_jobj);
             if (arg1 != 0x63) {
                 if (arg->x24 == arg1) {
-                    arg->x18->text_color = lb_804D3764;
-                    arg->x1C->text_color = lb_804D3764;
-                    arg->x20->text_color = lb_804D3764;
+                    arg->texts[0]->text_color = lb_804D3764;
+                    arg->texts[1]->text_color = lb_804D3764;
+                    arg->texts[2]->text_color = lb_804D3764;
                 } else {
-                    arg->x18->text_color = lb_804D3760;
-                    arg->x1C->text_color = lb_804D3760;
-                    arg->x20->text_color = lb_804D3760;
+                    arg->texts[0]->text_color = lb_804D3760;
+                    arg->texts[1]->text_color = lb_804D3760;
+                    arg->texts[2]->text_color = lb_804D3760;
                 }
             }
-            arg->x18->pos_x = pos_x;
-            arg->x18->pos_y = pos_y;
-            arg->x18->pos_z = pos_z;
-            arg->x18->font_size.x = 0.028f;
-            arg->x18->font_size.y = 0.029f;
-            arg->x18->default_kerning = 1;
-            HSD_SisLib_803A6368(arg->x18,
+            arg->texts[0]->pos_x = pos_x;
+            arg->texts[0]->pos_y = pos_y;
+            arg->texts[0]->pos_z = pos_z;
+            arg->texts[0]->font_size.x = 0.028f;
+            arg->texts[0]->font_size.y = 0.029f;
+            arg->texts[0]->default_kerning = 1;
+            HSD_SisLib_803A6368(arg->texts[0],
                                 un_803063D4(un_80308354(arg->idx), 2, 0x128));
 
-            arg->x1C->pos_x = pos_x + 14.7f;
-            arg->x1C->pos_y = pos_y;
-            arg->x1C->pos_z = pos_z;
-            arg->x1C->font_size.x = 0.028f;
-            arg->x1C->font_size.y = 0.029f;
-            HSD_SisLib_803A6368(arg->x1C, 0x13B);
+            arg->texts[1]->pos_x = pos_x + 14.7f;
+            arg->texts[1]->pos_y = pos_y;
+            arg->texts[1]->pos_z = pos_z;
+            arg->texts[1]->font_size.x = 0.028f;
+            arg->texts[1]->font_size.y = 0.029f;
+            HSD_SisLib_803A6368(arg->texts[1], 0x13B);
 
-            un_80312834(arg->x20->string_buffer,
+            un_80312834(arg->texts[2]->string_buffer,
                         un_803048C0(un_80308354(arg->idx)));
-            arg->x20->default_alignment = 2;
-            arg->x20->default_kerning = 1;
-            arg->x20->pos_x = pos_x + 10.5f;
-            arg->x20->pos_y = pos_y;
-            arg->x20->pos_z = pos_z;
-            arg->x20->font_size.x = 0.038f;
-            arg->x20->font_size.y = 0.029f;
-            HSD_SisLib_803A6368(arg->x20, arg->x28 + 0x12E);
+            arg->texts[2]->default_alignment = 2;
+            arg->texts[2]->default_kerning = 1;
+            arg->texts[2]->pos_x = pos_x + 10.5f;
+            arg->texts[2]->pos_y = pos_y;
+            arg->texts[2]->pos_z = pos_z;
+            arg->texts[2]->font_size.x = 0.038f;
+            arg->texts[2]->font_size.y = 0.029f;
+            HSD_SisLib_803A6368(arg->texts[2], arg->x28 + 0x12E);
         }
     }
 }
@@ -346,7 +346,7 @@ void un_80312BAC(TyListState* state, s8 arg1)
                 HSD_JObjSetTranslateY(jobj, entry->x30);
             }
         }
-        entry = entry->x4;
+        entry = entry->links[1];
         idx++;
         if (idx >= un_GetTrophyTotal()) {
             idx = 0;
@@ -367,7 +367,6 @@ void un_80312E88(TyListArg* arg, float delta)
     HSD_JObj* jobj;
     char* data;
     s32 i;
-    PAD_STACK(8);
 
     arg->x30 = arg->x30 + delta;
 
@@ -383,30 +382,20 @@ void un_80312E88(TyListArg* arg, float delta)
         }
     }
 
-    ptr = arg;
     data = un_804A2AC0;
-    i = 0;
-loop:
-    if ((jobj = ptr->xC) == NULL) {
-        goto next;
-    }
-    if (i == 2) {
-        goto next;
-    }
-    HSD_JObjSetTranslateY(jobj, arg->x30);
-
-    if (arg->idx == un_GetTrophyTotal() - 1) {
-        jobj = ((TyListState*) data)->jobj;
-        if (jobj != NULL) {
-            HSD_JObjSetTranslateY(jobj, arg->x30);
+    for (i = 0; i < 3; i++) {
+        if ((jobj = arg->jobjs[i]) == NULL) {
+            continue;
         }
-    }
+        if (i == 2) {
+            continue;
+        }
+        HSD_JObjSetTranslateY(jobj, arg->x30);
 
-next:
-    i = i + 1;
-    ptr = (TyListArg*) ((s8*) ptr + 4);
-    if (i < 3) {
-        goto loop;
+        if (arg->idx == un_GetTrophyTotal() - 1) {
+            jobj = ((TyListState*) data)->jobj;
+                HSD_JObjSetTranslateY(jobj, arg->x30);
+        }
     }
 
     un_80312904(arg, 0x63);
@@ -452,7 +441,7 @@ s8 un_8031305C(TyListState* state, s8 arg2)
                         entry->x24 = -1;
                     }
                 }
-                entry = entry->x4;
+                entry = entry->links[1];
             }
 
             if (state->x2A1 == 0) {
@@ -461,20 +450,20 @@ s8 un_8031305C(TyListState* state, s8 arg2)
                     state->x270->idx = 0;
                 }
                 un_80312904(state->x270, un_804A2D6C.xC);
-                state->x278 = state->x278->x4;
+                state->x278 = state->x278->links[1];
                 state->selectedIdx = state->x278->idx;
-                state->x270 = state->x270->x4;
-                state->x274 = state->x274->x4;
+                state->x270 = state->x270->links[1];
+                state->x274 = state->x274->links[1];
             } else {
                 state->x274->idx = state->x270->idx - 1;
                 if (state->x274->idx < 0) {
                     state->x274->idx = un_GetTrophyTotal() - 1;
                 }
                 un_80312904(state->x274, un_804A2D6C.xC);
-                state->x278 = state->x278->x0;
+                state->x278 = state->x278->links[0];
                 state->selectedIdx = state->x278->idx;
-                state->x270 = state->x270->x0;
-                state->x274 = state->x274->x0;
+                state->x270 = state->x270->links[0];
+                state->x274 = state->x274->links[0];
             }
 
             if (state->x29E > 0) {
@@ -514,14 +503,14 @@ void un_80313358(TyListState* state, s8 arg2, s8 arg3, s8 arg4)
     if (state->x2A1 == 0) {
         for (i = 0; i < state->entryCount; i++) {
             TyListArg* entry = &state->entries[i];
-            TyListArg* sub = entry->x0;
+            TyListArg* sub = entry->links[0];
             entry->x2C = sub->x30;
             un_80312904(entry, state->entryCount + 1);
         }
     } else {
         for (i = 0; i < state->entryCount; i++) {
             TyListArg* entry = &state->entries[i];
-            TyListArg* sub = entry->x4;
+            TyListArg* sub = entry->links[1];
             entry->x2C = sub->x30;
             un_80312904(entry, state->entryCount + 1);
         }
@@ -536,15 +525,15 @@ void un_80313464(TyListArg* arg)
 
     val = un_804D6EDC[arg->idx];
 
-    un_803083D8(arg->x14, val);
+    un_803083D8(arg->jobjs[2], val);
 
-    if (arg->x10 != NULL) {
-        HSD_JObjUnref(arg->x10);
-        arg->x10 = NULL;
+    if (arg->jobjs[1] != NULL) {
+        HSD_JObjUnref(arg->jobjs[1]);
+        arg->jobjs[1] = NULL;
     }
 
     if (un_80304924(val) != 0) {
-        arg->x10 = un_80313508(((TyListState*) data)->gobj, un_803FE8D0,
+        arg->jobjs[1] = un_80313508(((TyListState*) data)->gobj, un_803FE8D0,
                                un_804DDE60, arg->x30, un_804DDE48);
     }
 }
@@ -617,14 +606,14 @@ void un_80313774(void)
     for (i = 0; i < state->entryCount; i++) {
         entry = &state->entries[i];
         if (i == 0) {
-            entry->x0 = &state->entries[state->entryCount - 1];
+            entry->links[0] = &state->entries[state->entryCount - 1];
         } else {
-            entry->x0 = &state->entries[i - 1];
+            entry->links[0] = &state->entries[i - 1];
         }
         if (i == state->entryCount - 1) {
-            entry->x4 = &state->entries[0];
+            entry->links[1] = &state->entries[0];
         } else {
-            entry->x4 = &state->entries[i + 1];
+            entry->links[1] = &state->entries[i + 1];
         }
     }
 
@@ -644,15 +633,15 @@ void un_80313774(void)
     entry = &state->entries[0];
     for (i = 0; i < state->entryCount; i++) {
         entry->x28 = i;
-        entry->xC = un_80313508(state->gobj, un_803FE880 + 0xCC, 0.0f, pos, 0.0f);
-        entry->x14 = entry->xC != NULL ? entry->xC->child : NULL;
-        un_80306A48(entry->xC, NULL, un_803FE880 + 0xE8, NULL, archive->data, 0);
-        entry->x18 = HSD_SisLib_803A5ACC(0, un_804D6EE8, 0.0f, 0.0f, 17.2f,
-                                         640.0f, 64.0f);
-        entry->x1C = HSD_SisLib_803A5ACC(0, un_804D6EE8, 0.0f, 0.0f, 17.2f,
-                                         64.0f, 64.0f);
-        entry->x20 = HSD_SisLib_803A5ACC(0, un_804D6EE8, 0.0f, 0.0f, 17.2f,
-                                         192.0f, 64.0f);
+        entry->jobjs[0] = un_80313508(state->gobj, un_803FE880 + 0xCC, 0.0f, pos, 0.0f);
+        entry->jobjs[2] = entry->jobjs[0] != NULL ? entry->jobjs[0]->child : NULL;
+        un_80306A48(entry->jobjs[0], NULL, un_803FE880 + 0xE8, NULL, archive->data, 0);
+        entry->texts[0] = HSD_SisLib_803A5ACC(0, un_804D6EE8, 0.0f, 0.0f, 17.2f,
+                                              640.0f, 64.0f);
+        entry->texts[1] = HSD_SisLib_803A5ACC(0, un_804D6EE8, 0.0f, 0.0f, 17.2f,
+                                              64.0f, 64.0f);
+        entry->texts[2] = HSD_SisLib_803A5ACC(0, un_804D6EE8, 0.0f, 0.0f, 17.2f,
+                                              192.0f, 64.0f);
         entry->x30 = pos;
         entry->x24 = i - 1;
         entry->idx = idx;
@@ -661,7 +650,7 @@ void un_80313774(void)
             idx = 0;
         }
         pos += step;
-        entry = entry->x4;
+        entry = entry->links[1];
     }
 
     state->selectedIdx = state->x278->idx;
@@ -824,7 +813,7 @@ void fn_80313BD8(HSD_GObj* gobj)
             if (un_80305C44() & 0x400) {
                 HSD_JObjSetFlagsAll(state->x288, 0x10);
                 if (state->x274->idx == 0 ||
-                    state->x274->x0->idx + 9 < un_GetTrophyTotal())
+                    state->x274->links[0]->idx + 9 < un_GetTrophyTotal())
                 {
                     un_80313358(state, 9, 4, 0);
                 } else {
@@ -837,11 +826,11 @@ void fn_80313BD8(HSD_GObj* gobj)
             if (un_80305C44() & 0x800) {
                 HSD_JObjSetFlagsAll(state->x288, 0x10);
                 if (state->x270->idx == un_GetTrophyTotal() - 1 ||
-                    state->x270->x4->idx - 9 > 0)
+                    state->x270->links[1]->idx - 9 > 0)
                 {
                     un_80313358(state, 9, 4, 1);
                 } else {
-                    un_80313358(state, state->x270->x4->idx, 4, 1);
+                    un_80313358(state, state->x270->links[1]->idx, 4, 1);
                 }
                 state->x29D = state->x29E;
                 return;
