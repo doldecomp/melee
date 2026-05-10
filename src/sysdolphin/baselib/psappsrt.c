@@ -5,10 +5,10 @@
 
 #include <string.h>
 
-/* 004D4538 */ extern u16 HSD_PSAppSrt_804D7958[4];
-/* 004CDC90 */ extern HSD_ObjAllocData HSD_PSAppSrt_804D10B0;
-extern u16 hsd_804D78DE;
+/* 004D4538 */ static u16 HSD_PSAppSrt_804D7958[4];
+/* 004CDC90 */ HSD_ObjAllocData HSD_PSAppSrt_804D10B0;
 extern u16 hsd_804D78D8;
+extern u16 hsd_804D78DE;
 
 bool psInitAppSRT(int num, int size)
 {
