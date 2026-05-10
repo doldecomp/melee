@@ -4,6 +4,7 @@
 #include <platform.h>
 
 #include "cm/camera.h"
+#include "gm/gm_16AE.h"
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
