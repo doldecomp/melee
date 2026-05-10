@@ -256,10 +256,10 @@ void HSD_SynthSFXGroupDataReaddress(AXVPB* arg0, void* callback)
 
     p = (u8*) arg0 + 0x18;
     sfxGroupDataReaddressCounter += 1;
-    HSD_DevComRequest(0, (uintptr_t) arg0->callback, (uintptr_t) callback,
-                      arg0->userContext, 0x1B, 0,
-                      (HSD_DevComCallback) HSD_SynthSFXGroupDataReaddressCallback,
-                      NULL);
+    HSD_DevComRequest(
+        0, (uintptr_t) arg0->callback, (uintptr_t) callback, arg0->userContext,
+        0x1B, 0, (HSD_DevComCallback) HSD_SynthSFXGroupDataReaddressCallback,
+        NULL);
     i = 0;
     delta = ((u8*) callback - (u8*) arg0->callback) * 2;
     while (i < arg0->priority) {

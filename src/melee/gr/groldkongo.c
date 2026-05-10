@@ -718,72 +718,52 @@ void grOldKongo_802105C8(HSD_GObj* gobj)
     }
 }
 
+extern f32 grOk_804DB9CC;
+extern f32 grOk_804DBA04;
+extern f32 grOk_804DBA08;
+extern f32 grOk_804DBA0C;
+extern f32 grOk_804DBA10;
+extern f32 grOk_804DBA14;
+extern f32 grOk_804DBA18;
+extern f32 grOk_804DBA1C;
+
 f32 grOldKongo_80210650(void)
 {
-    s32 var_r3;
-    f32 var_f31;
-    s32 temp_r3 = grOk_804D6A90->x2C + grOk_804D6A90->x2E +
-                  grOk_804D6A90->x30 + grOk_804D6A90->x32 +
-                  grOk_804D6A90->x34 + grOk_804D6A90->x36 +
-                  grOk_804D6A90->x38 + grOk_804D6A90->x3A;
+    f32 result;
+    s32 total;
+    s32 r;
 
-    if (temp_r3 != 0) {
-        var_r3 = HSD_Randi(temp_r3);
+    total = grOk_804D6A90->x2C + grOk_804D6A90->x2E + grOk_804D6A90->x30 +
+            grOk_804D6A90->x32 + grOk_804D6A90->x34 + grOk_804D6A90->x36 +
+            grOk_804D6A90->x38 + grOk_804D6A90->x3A;
+
+    if (total != 0) {
+        r = HSD_Randi(total);
     } else {
-        var_r3 = 0;
-    }
-    {
-        s32 temp_r3_2 = var_r3 - grOk_804D6A90->x2C;
-
-        if (temp_r3_2 < 0) {
-            var_f31 = 2.3561945f;
-        } else {
-            s32 temp_r3_3 = temp_r3_2 - grOk_804D6A90->x2E;
-
-            if (temp_r3_3 < 0) {
-                var_f31 = 1.5707964f;
-            } else {
-                s32 temp_r3_4 = temp_r3_3 - grOk_804D6A90->x30;
-
-                if (temp_r3_4 < 0) {
-                    var_f31 = 0.7853982f;
-                } else {
-                    s32 temp_r3_5 = temp_r3_4 - grOk_804D6A90->x32;
-
-                    if (temp_r3_5 < 0) {
-                        var_f31 = 0.0f;
-                    } else {
-                        s32 temp_r3_6 = temp_r3_5 - grOk_804D6A90->x34;
-
-                        if (temp_r3_6 < 0) {
-                            var_f31 = -0.7853982f;
-                        } else {
-                            s32 temp_r3_7 = temp_r3_6 - grOk_804D6A90->x36;
-
-                            if (temp_r3_7 < 0) {
-                                var_f31 = -1.5707964f;
-                            } else {
-                                s32 temp_r3_8 = temp_r3_7 - grOk_804D6A90->x38;
-
-                                if (temp_r3_8 < 0) {
-                                    var_f31 = -2.3561945f;
-                                } else {
-                                    temp_r3_8 -= grOk_804D6A90->x3A;
-                                    if (temp_r3_8 < 0) {
-                                        var_f31 = -3.1415927f;
-                                    } else {
-                                        HSD_ASSERT(0x312,NULL);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        r = 0;
     }
 
-    return var_f31;
+    if ((r -= grOk_804D6A90->x2C) < 0) {
+        result = grOk_804DBA04;
+    } else if ((r -= grOk_804D6A90->x2E) < 0) {
+        result = grOk_804DBA08;
+    } else if ((r -= grOk_804D6A90->x30) < 0) {
+        result = grOk_804DBA0C;
+    } else if ((r -= grOk_804D6A90->x32) < 0) {
+        result = grOk_804DB9CC;
+    } else if ((r -= grOk_804D6A90->x34) < 0) {
+        result = grOk_804DBA10;
+    } else if ((r -= grOk_804D6A90->x36) < 0) {
+        result = grOk_804DBA14;
+    } else if ((r -= grOk_804D6A90->x38) < 0) {
+        result = grOk_804DBA18;
+    } else if ((r -= grOk_804D6A90->x3A) < 0) {
+        result = grOk_804DBA1C;
+    } else {
+        HSD_ASSERT(786, 0);
+    }
+
+    return result;
 }
 
 DynamicsDesc* grOldKongo_80210780(enum_t gobj)

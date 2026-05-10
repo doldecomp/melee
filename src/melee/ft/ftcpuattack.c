@@ -2,6 +2,8 @@
 
 #include "ftcmdscript.h"
 
+#include "ft/ftlib.h"
+
 #include <melee/ft/chara/ftDonkey/forward.h>
 #include <melee/ft/chara/ftKoopa/forward.h>
 #include <melee/ft/chara/ftSamus/forward.h>
@@ -22,7 +24,6 @@
 #include <melee/mp/mpisland.h>
 #include <melee/mp/mplib.h>
 #include <melee/mp/types.h>
-#include "ft/ftlib.h"
 
 /// #ftCo_800B4AB0
 
@@ -772,7 +773,7 @@ bool ftCo_800B8A9C(Fighter* fp)
     if (fp->ground_or_air == GA_Air) {
         if (ftCo_800B89CC(fp)) {
             result = ftCo_800B4AB0(fp, target,
-                                   ((void**)Fighter_804D64FC->x8)[fp->kind]);
+                                   ((void**) Fighter_804D64FC->x8)[fp->kind]);
             if (result != 0) {
                 cpu->xA4 = result;
                 return true;
@@ -790,7 +791,7 @@ bool ftCo_800B8A9C(Fighter* fp)
             cpu->xC8++;
         }
         result = ftCo_800B4AB0(fp, target,
-                               ((void**)Fighter_804D64FC->x4)[fp->kind]);
+                               ((void**) Fighter_804D64FC->x4)[fp->kind]);
         if (result != 0) {
             cpu->xA4 = result;
             return true;
@@ -804,22 +805,22 @@ bool ftCo_800B8A9C(Fighter* fp)
         } else {
             switch (item->kind) {
             case It_Kind_Harisen:
-                weapon_reach = ((float*)Fighter_804D64FC->x24)[0];
+                weapon_reach = ((float*) Fighter_804D64FC->x24)[0];
                 break;
             case It_Kind_LipStick:
-                weapon_reach = ((float*)Fighter_804D64FC->x24)[1];
+                weapon_reach = ((float*) Fighter_804D64FC->x24)[1];
                 break;
             case It_Kind_StarRod:
-                weapon_reach = ((float*)Fighter_804D64FC->x24)[2];
+                weapon_reach = ((float*) Fighter_804D64FC->x24)[2];
                 break;
             case It_Kind_Sword:
-                weapon_reach = ((float*)Fighter_804D64FC->x24)[3];
+                weapon_reach = ((float*) Fighter_804D64FC->x24)[3];
                 break;
             case It_Kind_Bat:
-                weapon_reach = ((float*)Fighter_804D64FC->x24)[4];
+                weapon_reach = ((float*) Fighter_804D64FC->x24)[4];
                 break;
             case It_Kind_Parasol:
-                weapon_reach = ((float*)Fighter_804D64FC->x24)[5];
+                weapon_reach = ((float*) Fighter_804D64FC->x24)[5];
                 break;
             default:
                 weapon_reach = 0.0f;
@@ -827,7 +828,7 @@ bool ftCo_800B8A9C(Fighter* fp)
             }
         }
         result = ftCo_800B52AC(fp, target,
-                               ((void**)Fighter_804D64FC->x18)[fp->kind],
+                               ((void**) Fighter_804D64FC->x18)[fp->kind],
                                weapon_reach);
         if (result != 0) {
             cpu->xA4 = result;
@@ -836,7 +837,7 @@ bool ftCo_800B8A9C(Fighter* fp)
     }
     if (cpu->level > 5 && ftCo_800B9F6C(target)) {
         result = ftCo_800B4AB0(fp, target,
-                               ((void**)Fighter_804D64FC->x10)[fp->kind]);
+                               ((void**) Fighter_804D64FC->x10)[fp->kind]);
         if (result != 0) {
             cpu->xA4 = result;
             return true;
@@ -850,10 +851,8 @@ bool ftCo_800B8A9C(Fighter* fp)
             var_r0 = 0;
         } else {
             if (ftCo_800A0FB0(&sp1C, &sp34, &sp38, &sp28, -1, -1, -1,
-                              target3->cur_pos.x,
-                              5.0f + target3->cur_pos.y,
-                              target3->cur_pos.x,
-                              target3->cur_pos.y - 1000.0f,
+                              target3->cur_pos.x, 5.0f + target3->cur_pos.y,
+                              target3->cur_pos.x, target3->cur_pos.y - 1000.0f,
                               0.0f) != 0)
             {
                 var_r0 = 0;
@@ -864,22 +863,21 @@ bool ftCo_800B8A9C(Fighter* fp)
     }
     if (var_r0 != 0) {
         result = ftCo_800B4AB0(fp, target,
-                               ((void**)Fighter_804D64FC->x1C)[fp->kind]);
+                               ((void**) Fighter_804D64FC->x1C)[fp->kind]);
         if (result != 0) {
             cpu->xA4 = result;
             cpu->xF8_b7 = 1;
             return true;
         }
     }
-    result = ftCo_800B4AB0(fp, target,
-                           ((void**)Fighter_804D64FC->x4)[fp->kind]);
+    result =
+        ftCo_800B4AB0(fp, target, ((void**) Fighter_804D64FC->x4)[fp->kind]);
     if (result != 0) {
         cpu->xA4 = result;
         return true;
     }
     if (cpu->x50 != 0) {
-        result = ftCo_800B5AB0(fp,
-                               ((void**)Fighter_804D64FC->x14)[fp->kind]);
+        result = ftCo_800B5AB0(fp, ((void**) Fighter_804D64FC->x14)[fp->kind]);
         if (result != 0) {
             cpu->xA4 = result;
             return true;
@@ -1671,9 +1669,7 @@ int ftCo_800BB220(Fighter* fp, Item* ip, Vec3* arg2, f32 arg3)
     if (ip->owner == fp->gobj) {
         return 0;
     }
-    if (ftLib_80086960(ip->owner) &&
-        ftCo_IsAlly(fp, GET_FIGHTER(ip->owner)))
-    {
+    if (ftLib_80086960(ip->owner) && ftCo_IsAlly(fp, GET_FIGHTER(ip->owner))) {
         return 0;
     }
     if (ip->kind == It_Kind_Unk4 || ip->kind == It_Kind_Star) {

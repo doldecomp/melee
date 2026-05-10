@@ -4,11 +4,11 @@
 #include <placeholder.h>
 #include <platform.h>
 
+#include "baselib/archive.h"
 #include "baselib/controller.h"
 
 #include "baselib/forward.h"
 
-#include "baselib/archive.h"
 #include "baselib/gobj.h"
 #include "baselib/gobjgxlink.h"
 #include "baselib/gobjobject.h"
@@ -54,9 +54,8 @@ typedef struct _SisLibUnkStruct {
 /// extern SisLibUnkStruct HSD_SisLib_804D1124;
 
 f32 gmCamera_803DA630[12] = {
-    0.6f, 0.6f, 40.0f,  416.0f,
-    0.6f, 0.6f, 340.0f, 416.0f,
-    0.6f, 0.6f, 40.0f,  44.0f,
+    0.6f,   0.6f,   40.0f, 416.0f, 0.6f,  0.6f,
+    340.0f, 416.0f, 0.6f,  0.6f,   40.0f, 44.0f,
 };
 
 gmCameraUnkFuncTable gmCamera_803DA6B4[9] = {
@@ -466,9 +465,7 @@ void gmCamera_801A2D44(void)
         gmCamera_801A3048(0);
         return;
     }
-    if ((HSD_PadCopyStatus[3].trigger & 0x40001) &&
-        (s32) gcus->x18 != 0)
-    {
+    if ((HSD_PadCopyStatus[3].trigger & 0x40001) && (s32) gcus->x18 != 0) {
         lbAudioAx_80024030(2);
         gcus->x18 = 0;
         lb_80011E24(gcus->x8, &jobj, 0xC, -1);
@@ -578,7 +575,8 @@ void gmCamera_801A31FC(void)
     gcus->x4 = HSD_JObjLoadJoint(*joint_a);
     HSD_GObjObject_80390A70(gobj_a, HSD_GObj_804D7849, gcus->x4);
     GObj_SetupGXLink(gobj_a, HSD_GObj_JObjCallback, 0xB, 0);
-    mdl_b = HSD_ArchiveGetPublicAddress(gcus->ifvscam, "IfCamera_Top_model_set");
+    mdl_b =
+        HSD_ArchiveGetPublicAddress(gcus->ifvscam, "IfCamera_Top_model_set");
     gobj_b = GObj_Create(0xE, 0x10, 0);
     jobj_b = HSD_JObjLoadJoint(mdl_b->joint);
     gcus->x8 = jobj_b;
@@ -604,18 +602,15 @@ void gmCamera_801A33BC(void)
     s32 spC;
 
     gmCamera_801A25C8();
-    gmCamera_80479C20.slot_a = gmCamera_801A2334(0, gmCamera_803DA758[2],
-                                                 gmCamera_803DA758[3],
-                                                 gmCamera_803DA758[0],
-                                                 gmCamera_803DA758[1]);
-    gmCamera_80479C20.slot_b = gmCamera_801A2334(1, gmCamera_803DA758[6],
-                                                 gmCamera_803DA758[7],
-                                                 gmCamera_803DA758[4],
-                                                 gmCamera_803DA758[5]);
+    gmCamera_80479C20.slot_a =
+        gmCamera_801A2334(0, gmCamera_803DA758[2], gmCamera_803DA758[3],
+                          gmCamera_803DA758[0], gmCamera_803DA758[1]);
+    gmCamera_80479C20.slot_b =
+        gmCamera_801A2334(1, gmCamera_803DA758[6], gmCamera_803DA758[7],
+                          gmCamera_803DA758[4], gmCamera_803DA758[5]);
     gmCamera_801A253C(&sp10, &spC);
-    text = HSD_SisLib_803A5ACC(3, gmCamera_801A2640(),
-                               gmCamera_803DA758[10], gmCamera_803DA758[11],
-                               0.0f, 914.2857f, 64.0f);
+    text = HSD_SisLib_803A5ACC(3, gmCamera_801A2640(), gmCamera_803DA758[10],
+                               gmCamera_803DA758[11], 0.0f, 914.2857f, 64.0f);
     gmCamera_80479C20.bottom_text = text;
     text->default_alignment = 1;
     text->default_kerning = 1;

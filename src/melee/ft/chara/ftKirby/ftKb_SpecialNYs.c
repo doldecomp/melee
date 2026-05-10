@@ -560,9 +560,9 @@ void ftKb_YsSpecialNCapture2_0_Anim(Fighter_GObj* gobj)
         ftCommon_8007E2F4(fp, 0);
         {
             Fighter* fp2 = GET_FIGHTER(gobj);
-            lb_8000B1CC(fp2->parts[ftParts_GetBoneIndex(fp2, FtPart_TransN2)]
-                            .joint,
-                        NULL, &item_attrs.pos);
+            lb_8000B1CC(
+                fp2->parts[ftParts_GetBoneIndex(fp2, FtPart_TransN2)].joint,
+                NULL, &item_attrs.pos);
         }
         {
             Fighter* fp2 = GET_FIGHTER(gobj);
@@ -637,9 +637,9 @@ void ftKb_YsSpecialAirN2_1_Anim(Fighter_GObj* gobj)
         ftCommon_8007E2F4(fp, 0);
         {
             Fighter* fp2 = GET_FIGHTER(gobj);
-            lb_8000B1CC(fp2->parts[ftParts_GetBoneIndex(fp2, FtPart_TransN2)]
-                            .joint,
-                        NULL, &item_attrs.pos);
+            lb_8000B1CC(
+                fp2->parts[ftParts_GetBoneIndex(fp2, FtPart_TransN2)].joint,
+                NULL, &item_attrs.pos);
         }
         {
             Fighter* fp2 = GET_FIGHTER(gobj);
@@ -1119,7 +1119,8 @@ void ftKb_SpecialNMs_8010B4A0(HSD_GObj* gobj)
         // InStateChange callback
         fp->x21EC = fn_8010B2E8;
 
-        fp->self_vel.x = fp->self_vel.x / ms_da->air_horizontal_momentum_preservation;
+        fp->self_vel.x =
+            fp->self_vel.x / ms_da->air_horizontal_momentum_preservation;
         if (fp->self_vel.y <= 0.0f) {
             fp->self_vel.y = 0.0f;
         }

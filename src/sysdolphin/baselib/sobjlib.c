@@ -173,29 +173,13 @@ static u8 data_pad_jumptable[0x3C] = { 0 };
 /// #HSD_SObjLib_803A4A68
 
 static HSD_Chan lbl_8040C418 = {
-    NULL,
-    GX_COLOR0,
-    0,
-    { 0 },
-    { 0xFF, 0xFF, 0xFF },
-    false,
-    GX_SRC_REG,
-    GX_SRC_REG,
-    GX_LIGHT_NULL,
-    GX_DF_CLAMP,
+    NULL,       GX_COLOR0,  0,          { 0 },         { 0xFF, 0xFF, 0xFF },
+    false,      GX_SRC_REG, GX_SRC_REG, GX_LIGHT_NULL, GX_DF_CLAMP,
     GX_AF_NONE,
 };
 static HSD_Chan lbl_8040C448 = {
-    NULL,
-    GX_ALPHA0,
-    0,
-    { 0, 0, 0, 0xFF },
-    { 0, 0, 0, 0xFF },
-    false,
-    GX_SRC_REG,
-    GX_SRC_REG,
-    GX_LIGHT_NULL,
-    GX_DF_CLAMP,
+    NULL,       GX_ALPHA0,  0,          { 0, 0, 0, 0xFF }, { 0, 0, 0, 0xFF },
+    false,      GX_SRC_REG, GX_SRC_REG, GX_LIGHT_NULL,     GX_DF_CLAMP,
     GX_AF_NONE,
 };
 

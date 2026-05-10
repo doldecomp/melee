@@ -13,16 +13,16 @@
 #include <baselib/objalloc.h>
 
 extern struct Fighter_804D64FC_t {
-    u8** cmdscripts;   ///< +00 per-character command script arrays
-    void** x4;         ///< +04 ground attack tables (per character)
-    void** x8;         ///< +08 air attack tables (per character)
-    UNK_T* xC;         ///< +0C ranged/projectile attack tables
-    void** x10;        ///< +10 smash attack tables (per character)
-    void** x14;        ///< +14 special action tables (per character)
-    void** x18;        ///< +18 weapon attack tables (per character)
-    void** x1C;        ///< +1C edge guard tables (per character)
-    float* x20;        ///< +20 distance thresholds (per character)
-    void* x24;         ///< +24 weapon reach bonus table
+    u8** cmdscripts; ///< +00 per-character command script arrays
+    void** x4;       ///< +04 ground attack tables (per character)
+    void** x8;       ///< +08 air attack tables (per character)
+    UNK_T* xC;       ///< +0C ranged/projectile attack tables
+    void** x10;      ///< +10 smash attack tables (per character)
+    void** x14;      ///< +14 special action tables (per character)
+    void** x18;      ///< +18 weapon attack tables (per character)
+    void** x1C;      ///< +1C edge guard tables (per character)
+    float* x20;      ///< +20 distance thresholds (per character)
+    void* x24;       ///< +24 weapon reach bonus table
 }* Fighter_804D64FC;
 
 struct plAllocInfo;

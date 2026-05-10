@@ -1,6 +1,8 @@
 #ifndef MELEE_GM_FORWARD_H
 #define MELEE_GM_FORWARD_H
 
+#include <platform.h>
+
 typedef enum MajorSceneKind {
     /* 00 */ MJ_TITLE,
     /* 01 */ MJ_MENU,
@@ -152,5 +154,7 @@ typedef struct lbl_8046DBD8_t lbl_8046DBD8_t;
 typedef struct VsApproachData VsApproachData;
 typedef struct MenuExitData MenuExitData;
 typedef struct MenuEnterData MenuEnterData;
+
+typedef bool (*GmRouteCallback)(int);
 
 #endif

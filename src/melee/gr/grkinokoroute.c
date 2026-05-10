@@ -459,11 +459,10 @@ void grKinokoRoute_80207C88(Ground_GObj* gobj)
 
 void grKinokoRoute_80208368(Ground_GObj* arg) {}
 
-void grKinokoRoute_8020836C(HSD_GObj* gobj, s32 arg1)
+void grKinokoRoute_8020836C(Ground_GObj* gobj, int arg1)
 {
-    HSD_GObj* item;
     HSD_JObj* jobj = Ground_801C3FA4(gobj, 0x53);
-
+    Item_GObj* cur;
     PAD_STACK(16);
 
     if (jobj == NULL) {
@@ -474,37 +473,36 @@ void grKinokoRoute_8020836C(HSD_GObj* gobj, s32 arg1)
         HSD_JObjClearFlagsAll(jobj, 0x10);
         mpJointListAdd(0x3C);
         mpJointListAdd(0x33);
-        item = HSD_GObj_Entities->items;
-        while (item != NULL) {
-            if (itGetKind((Item_GObj*) item) == 0xA0) {
-                grMaterial_801C8E08((Item_GObj*) item);
-            }
-            item = item->next;
-        }
-        mpJointListAdd(0xC);
-        mpJointListAdd(0xD);
-        mpJointListAdd(0xE);
-        mpJointListAdd(0xF);
-        return;
-    }
 
-    HSD_JObjSetFlagsAll(jobj, 0x10);
-    mpLib_80057BC0(0x3C);
-    mpLib_80057BC0(0x33);
-    item = HSD_GObj_Entities->items;
-    while (item != NULL) {
-        if (itGetKind((Item_GObj*) item) == 0xA0) {
-            grMaterial_801C8E28(item);
+        for (cur = HSD_GObj_Entities->items; cur != NULL; cur = cur->next) {
+            if (itGetKind(cur) == 0xA0) {
+                grMaterial_801C8E08(cur);
+            }
         }
-        item = item->next;
+
+        mpJointListAdd(0x0C);
+        mpJointListAdd(0x0D);
+        mpJointListAdd(0x0E);
+        mpJointListAdd(0x0F);
+    } else {
+        HSD_JObjSetFlagsAll(jobj, 0x10);
+        mpLib_80057BC0(0x3C);
+        mpLib_80057BC0(0x33);
+
+        for (cur = HSD_GObj_Entities->items; cur != NULL; cur = cur->next) {
+            if (itGetKind(cur) == 0xA0) {
+                grMaterial_801C8E28(cur);
+            }
+        }
+
+        mpLib_80057BC0(0x0C);
+        mpLib_80057BC0(0x0D);
+        mpLib_80057BC0(0x0E);
+        mpLib_80057BC0(0x0F);
     }
-    mpLib_80057BC0(0xC);
-    mpLib_80057BC0(0xD);
-    mpLib_80057BC0(0xE);
-    mpLib_80057BC0(0xF);
 }
 
-bool grKinokoRoute_80208480(s32 arg)
+bool grKinokoRoute_80208480(int arg)
 {
     if (arg == 1) {
         Ground_801C5740(arg);

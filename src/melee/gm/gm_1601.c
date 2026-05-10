@@ -2493,7 +2493,7 @@ void gm_80167470(s32 arg0, s32 arg1)
     }
 }
 
-void gm_801674C4(s8 arg0, u8 arg1, s8 arg2, s8 arg3, bool (*arg4)(s32))
+void gm_801674C4(s8 arg0, u8 arg1, s8 arg2, s8 arg3, GmRouteCallback arg4)
 {
     s8 temp_r31;
     struct lbl_8046B488_t* new_var;
@@ -2513,8 +2513,8 @@ void gm_801674C4(s8 arg0, u8 arg1, s8 arg2, s8 arg3, bool (*arg4)(s32))
     fn_80169574((s32) new_var->x7, new_var->x20);
     fn_80169900(new_var->xD, new_var, temp_ptr->xA2, new_var->x20);
     temp_r31 = Player_GetCostumeId(0);
-    fn_8016989C((u8*) new_var, (s8) Player_GetPlayerCharacter(0),
-                temp_r31, (u8*) new_var->xA2, (u8*) temp_ptr->x20);
+    fn_8016989C((u8*) new_var, (s8) Player_GetPlayerCharacter(0), temp_r31,
+                (u8*) new_var->xA2, (u8*) temp_ptr->x20);
     fn_8016A09C();
     fn_80169434(arg4);
 }
@@ -3277,7 +3277,7 @@ bool gm_801693BC(int arg0)
     return false;
 }
 
-void fn_80169434(bool (*fn)(s32))
+void fn_80169434(GmRouteCallback fn)
 {
     lbl_8046B488.x1B8 = fn;
 }
