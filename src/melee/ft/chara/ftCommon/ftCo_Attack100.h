@@ -144,7 +144,8 @@
 /* 0DA784 */ void ftCo_CatchCut_Phys(Fighter_GObj* gobj);
 /* 0DA7E4 */ void ftCo_CatchCut_Coll(Fighter_GObj* gobj);
 /* 0DA824 */ float ftCo_800DA824(Fighter*);
-/* 0DA8E4 */ void fn_800DA8E4(Fighter_GObj* arg0, Fighter_GObj* arg1, s32 arg2);
+/* 0DA8E4 */ void fn_800DA8E4(Fighter_GObj* arg0, Fighter_GObj* arg1,
+                              s32 arg2);
 /* 0DAA40 */ void fn_800DAA40(Fighter_GObj*, Fighter_GObj*);
 /* 0DAC70 */ void ftCo_CapturePulledHi_Anim(Fighter_GObj* gobj);
 /* 0DAC74 */ void ftCo_CapturePulledHi_IASA(Fighter_GObj* gobj);

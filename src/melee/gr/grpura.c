@@ -359,9 +359,10 @@ void grPura_80212FC0(HSD_GObj* arg0)
     u32 var_r30 = 0;
     do {
         if ((s16) var_r31[0] != -1) {
-            HSD_GObj* temp_r3 = Ground_801C2BA4((s32)(s16) var_r31[1]);
+            HSD_GObj* temp_r3 = Ground_801C2BA4((s32) (s16) var_r31[1]);
             if (temp_r3 != NULL) {
-                M2C_FIELD(var_r31, HSD_JObj**, 8) = Ground_801C3FA4(temp_r3, (s32)(s16) var_r31[2]);
+                M2C_FIELD(var_r31, HSD_JObj**, 8) =
+                    Ground_801C3FA4(temp_r3, (s32) (s16) var_r31[2]);
             }
         }
         var_r30 += 1;

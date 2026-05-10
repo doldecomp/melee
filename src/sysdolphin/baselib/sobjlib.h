@@ -6,6 +6,7 @@
 #include "dolphin/gx/GXStruct.h"
 
 #include <sysdolphin/baselib/forward.h>
+
 #include <sysdolphin/baselib/gobj.h>
 
 extern GObjFuncs HSD_SObjLib_8040C3A4;

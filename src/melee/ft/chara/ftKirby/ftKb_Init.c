@@ -83,10 +83,10 @@
 #include <stddef.h>
 #include <trigf.h>
 #include <baselib/gobj.h>
+#include <baselib/id.h>
 #include <baselib/jobj.h>
 #include <baselib/random.h>
 #include <MSL/math.h>
-#include <baselib/id.h>
 
 void ftAnim_80070458(Fighter* fp, CostumeTObjList*, u32 tobj_idx, float frame);
 void fn_800F9260(HSD_GObj*);
@@ -3439,9 +3439,8 @@ void ftKb_SpecialN_800EF0E4(Fighter_GObj* gobj, int arg1, u8* arg2)
             bone = (FighterBone*) ((u8*) bone + 0x10);
             part_off += 0x10;
         }
-        HSD_IDInsertToTable(
-            NULL, (u32) sp28,
-            ((FighterBone*) ((u8*) parts + part_off))->joint);
+        HSD_IDInsertToTable(NULL, (u32) sp28,
+                            ((FighterBone*) ((u8*) parts + part_off))->joint);
         part_off += 0x10;
         ftAnim_GetNextJointInTree(&sp28, &sp24);
     }
@@ -3498,8 +3497,7 @@ void ftKb_SpecialN_800EF0E4(Fighter_GObj* gobj, int arg1, u8* arg2)
             }
             if (group_count >= 0x80) {
                 OSReport(ftKb_Init_assert_msg_2);
-                __assert(ftKb_Init_assert_msg_1, 0x44C,
-                         ftKb_Init_804D3DAC);
+                __assert(ftKb_Init_assert_msg_1, 0x44C, ftKb_Init_804D3DAC);
             }
             ((FighterBone*) ((u8*) fp->parts + part_off))->flags_b6 = true;
         }
@@ -3655,13 +3653,13 @@ void ftKb_SpecialN_800EF69C(Fighter_GObj* gobj, int arg1, KirbyHatStruct* hat)
                 u8 b9 = *b9p;
                 if ((b9 >> 1) & 1) {
                     if ((b9 >> 2) & 1) {
-                        dobj = *(HSD_DObj**) ((u8*) fp->x203C.data +
-                                              ((((u8*) bone)[0xD] * 2) &
-                                               0x1FC));
+                        dobj =
+                            *(HSD_DObj**) ((u8*) fp->x203C.data +
+                                           ((((u8*) bone)[0xD] * 2) & 0x1FC));
                     } else {
-                        dobj = *(HSD_DObj**) ((u8*) fp->dobj_list.data +
-                                              ((((u8*) bone)[0xD] * 2) &
-                                               0x1FC));
+                        dobj =
+                            *(HSD_DObj**) ((u8*) fp->dobj_list.data +
+                                           ((((u8*) bone)[0xD] * 2) & 0x1FC));
                     }
                     HSD_DObjRemoveAll(dobj != NULL ? dobj->next : NULL);
                     lb_8000CE30(dobj, NULL);

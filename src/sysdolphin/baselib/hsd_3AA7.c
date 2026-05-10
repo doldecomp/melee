@@ -43,8 +43,8 @@ s32 fn_803AA790(void)
 
     switch (entry->x0) {
     case 1:
-        result = fn_803ADF90(entry->x4, entry->x8, entry->xC, 1,
-                             (s32) entry->x14);
+        result =
+            fn_803ADF90(entry->x4, entry->x8, entry->xC, 1, (s32) entry->x14);
         if (result < 0) {
             cb = entry->x14;
             if (cb != NULL) {
@@ -93,7 +93,8 @@ s32 fn_803AA790(void)
         entry->x0 = 0;
         return result;
     case 4:
-        result = fn_803B21E8(entry->x4, entry->xC, entry->x10, (s32) entry->x14);
+        result =
+            fn_803B21E8(entry->x4, entry->xC, entry->x10, (s32) entry->x14);
         if (result < 0) {
             cb = entry->x14;
             if (cb != NULL) {
@@ -285,7 +286,8 @@ void fn_803AC3F8(void* arg0, u8* data, s32 idx)
         s32 j = start + i;
         u32 flags = file_desc->x28[j];
         data[0] = (u8) j;
-        data[1] = (u8) (((file_desc->x4C[j] >> 16) & 0x3F) | ((flags << 6) & 0xC0));
+        data[1] =
+            (u8) (((file_desc->x4C[j] >> 16) & 0x3F) | ((flags << 6) & 0xC0));
         data[2] = (u8) (file_desc->x4C[j] >> 8);
         data[3] = (u8) file_desc->x4C[j];
         data += 4;
@@ -439,18 +441,20 @@ s32 fn_803AC6B8(struct hsd_803AC3E0_arg0_t* file_desc, s32 file_count)
             cur_blocks = 0;
         } else if (i == 0) {
             sector_size = file_desc->x8;
-            remaining = first_size - (s32) ((sector_size - 0x20) -
-                                            (file_desc->x24 + 0x30) % sector_size);
+            remaining =
+                first_size - (s32) ((sector_size - 0x20) -
+                                    (file_desc->x24 + 0x30) % sector_size);
             usable = sector_size - 0x20;
             if (remaining <= 0) {
                 cur_blocks = 1;
             } else {
-                cur_blocks = (u32) (remaining + sector_size - 0x21) / usable + 1;
+                cur_blocks =
+                    (u32) (remaining + sector_size - 0x21) / usable + 1;
             }
         } else {
             sector_size = file_desc->x8;
-            cur_blocks = (u32) (cur_size + sector_size - 0x21) /
-                         (sector_size - 0x20);
+            cur_blocks =
+                (u32) (cur_size + sector_size - 0x21) / (sector_size - 0x20);
         }
         total += cur_blocks;
     }

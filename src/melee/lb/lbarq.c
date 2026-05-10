@@ -62,7 +62,8 @@ void lbArq_80014AC4(lbArqHandle* handle)
     }
 }
 
-void lbArq_80014BD0(u32 source, void* dest, size_t length, lbArqCallback callback, void* callback_arg)
+void lbArq_80014BD0(u32 source, void* dest, size_t length,
+                    lbArqCallback callback, void* callback_arg)
 {
     lbArqGlobal* global = &lbArq_804316C0;
     lbArqNode* rp;
@@ -87,11 +88,13 @@ void lbArq_80014BD0(u32 source, void* dest, size_t length, lbArqCallback callbac
     rp->next = NULL;
     rp->state = 1;
 
-    ARQPostRequest(&rp->arq, (u32) rp, 1, 0, source, (u32) dest, length, (ARQCallback) lbArq_80014AC4);
+    ARQPostRequest(&rp->arq, (u32) rp, 1, 0, source, (u32) dest, length,
+                   (ARQCallback) lbArq_80014AC4);
 
     if (rp->callback == NULL) {
         OSRestoreInterrupts(intr);
-        while (lbArq_80014ABC(rp) != 2) {}
+        while (lbArq_80014ABC(rp) != 2) {
+        }
         intr = OSDisableInterrupts();
         tail = &global->list[rp->state];
         while (*tail != rp) {
