@@ -1,6 +1,7 @@
 #include "lbarq.h"
 
 #include <dolphin/os.h>
+#include <baselib/debug.h>
 
 u32 lbArq_80014ABC(lbArqNode* arg0)
 {
@@ -61,7 +62,54 @@ void lbArq_80014AC4(lbArqHandle* handle)
     }
 }
 
-/// #lbArq_80014BD0
+void lbArq_80014BD0(u32 source, void* dest, size_t length,
+                    lbArqCallback callback, void* callback_arg)
+{
+    lbArqGlobal* global = &lbArq_804316C0;
+    lbArqNode* rp;
+    lbArqNode** tail;
+    lbArqNode** free_head;
+    BOOL intr;
+
+    DCInvalidateRange(dest, length);
+    intr = OSDisableInterrupts();
+    rp = global->list[0];
+    free_head = &global->list[0];
+    HSD_ASSERT(0x67, rp);
+    *free_head = rp->next;
+    rp->callback = callback;
+    rp->callback_arg = callback_arg;
+
+    tail = &global->list[1];
+    while (*tail != NULL) {
+        tail = &(*tail)->next;
+    }
+    *tail = rp;
+    rp->next = NULL;
+    rp->state = 1;
+
+    ARQPostRequest(&rp->arq, (u32) rp, 1, 0, source, (u32) dest, length,
+                   (ARQCallback) lbArq_80014AC4);
+
+    if (rp->callback == NULL) {
+        OSRestoreInterrupts(intr);
+        while (lbArq_80014ABC(rp) != 2) {
+        }
+        intr = OSDisableInterrupts();
+        tail = &global->list[rp->state];
+        while (*tail != rp) {
+            tail = &(*tail)->next;
+        }
+        *tail = rp->next;
+        while (*free_head != NULL) {
+            free_head = &(*free_head)->next;
+        }
+        *free_head = rp;
+        rp->next = NULL;
+        rp->state = 0;
+    }
+    OSRestoreInterrupts(intr);
+}
 
 void lbArq_80014D2C(void)
 {

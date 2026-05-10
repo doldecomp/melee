@@ -13,7 +13,7 @@
 /* 28ECF0 */ Item* it_8028ECF0(Item_GObj* gobj, Vec3* v);
 /* 28ED10 */ void itFreeze_Logic17_Destroyed(Item_GObj*);
 /* 28ED50 */ void it_3F14_Logic17_Spawned(Item_GObj*);
-/* 28EDBC */ UNK_RET it_8028EDBC(Item_GObj* gobj);
+/* 28EDBC */ void it_8028EDBC(Item_GObj* gobj);
 /* 28EF34 */ void it_8028EF34(Item_GObj* gobj);
 /* 28EF88 */ bool itFreeze_UnkMotion0_Anim(Item_GObj* gobj);
 /* 28EF90 */ void itFreeze_UnkMotion0_Phys(Item_GObj* gobj);

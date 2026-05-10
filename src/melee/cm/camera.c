@@ -708,6 +708,7 @@ inline float get_max_bounds_length(CameraBounds* bounds)
 
 void Camera_80029CF8(CameraBounds* bounds, CameraTransformState* transform)
 {
+    u8 _padA[16];
     f32 len;
     Vec3 scroll_offset;
     Vec3 scroll_offset2;
@@ -729,7 +730,6 @@ void Camera_80029CF8(CameraBounds* bounds, CameraTransformState* transform)
     f32 pitch_angle;
     f32 temp_f30;
     f32 var_f3;
-    PAD_STACK(16);
 
     Stage_UnkSetVec3TCam_Offset(&scroll_offset);
     len = get_max_bounds_length(bounds);
@@ -1960,6 +1960,7 @@ void Camera_8002C5B4(Camera_x2D0* arg0)
     f32 pitch;
     f32 yaw;
     f32 limit;
+    PAD_STACK(16);
 
     cam = &cm_80452C68;
     params = arg0;
@@ -2049,6 +2050,7 @@ void Camera_8002C5B4(Camera_x2D0* arg0)
 
 void Camera_8002C908(void* arg0)
 {
+    u8 _padA[24];
     CameraBounds bounds;
     Vec3 sp1C;
     Vec3 sp10;
@@ -3075,7 +3077,6 @@ void Camera_8002DDC4(void* arg0)
     CameraTransformState* transform_copy;
     CameraUnkGlobals* globals;
     f32 smooth;
-    PAD_STACK(8);
 
     cam = &cm_80452C68;
     Camera_80030DF8();
@@ -4041,14 +4042,14 @@ void Camera_8002F9E4(s8 arg0, s8 arg1)
         s8 slot = cm_80452C68.x304;
         cm_80452C68.x314.x = cm_80452C68.x314.y = cm_80452C68.x314.z = 0.0f;
         cm_80452C68.pause_eye_offset.x = 0.0f;
-        cm_80452C68.pause_eye_offset.y = 85.0f;
-        cm_80452C68.pause_eye_offset.z = 730.0f;
+        cm_80452C68.pause_eye_offset.y = 5.0f;
+        cm_80452C68.pause_eye_offset.z = 20.0f;
         cm_80452C68.pause_up.x = 0.0f;
         cm_80452C68.pause_up.y = 1.0f;
         cm_80452C68.pause_up.z = 0.0f;
 
         if (slot == 0xA) {
-            cm_80452C68.pause_eye_distance = 35.0f * scale;
+            cm_80452C68.pause_eye_distance = 3.0f * scale;
         } else {
             cm_80452C68.pause_eye_distance = scale;
         }
@@ -4162,6 +4163,7 @@ void Camera_8002FEEC(s32 arg0)
 {
     HSD_CObj* cobj;
     CmSubject* box;
+    float new_var;
     Vec3 target;
     Vec3 eye;
     f32 fov;
@@ -4197,13 +4199,11 @@ void Camera_8002FEEC(s32 arg0)
             temp_f1_3 = cm_80453004.follow_eye_offset.x;
             temp_f1 = temp_f1_3 * temp_f1_3;
 
-            temp_f1_4 =
-                temp_f31 /
-                sqrtf__Ff((cm_80453004.follow_eye_offset.z *
-                           cm_80453004.follow_eye_offset.z) +
-                          (temp_f1 + (cm_80453004.follow_eye_offset.y *
-                                      cm_80453004.follow_eye_offset.y)));
-
+            new_var = (cm_80453004.follow_eye_offset.z *
+                       cm_80453004.follow_eye_offset.z) +
+                      (temp_f1 + (cm_80453004.follow_eye_offset.y *
+                                  cm_80453004.follow_eye_offset.y));
+            temp_f1_4 = temp_f31 / sqrtf__Ff(new_var);
             cm_80453004.follow_eye_offset.x *= temp_f1_4;
             cm_80453004.follow_eye_offset.y *= temp_f1_4;
             cm_80453004.follow_eye_offset.z *= temp_f1_4;

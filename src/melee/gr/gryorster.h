@@ -6,6 +6,7 @@
 #include "baselib/forward.h"
 #include "gr/forward.h"
 #include "lb/forward.h"
+#include "mp/forward.h"
 
 #include <dolphin/mtx.h>
 
@@ -27,7 +28,8 @@
 /* 2022A4 */ void grYorster_802022A4(Ground_GObj*);
 /* 202428 */ void grYorster_80202428(HSD_GObj*, Ground*, Vec3*, HSD_GObj*,
                                      f32);
-/* 2024F0 */ UNK_RET grYorster_802024F0(UNK_PARAMS);
+/* 2024F0 */ void grYorster_802024F0(Ground*, s32, CollData*, s32,
+                                     mpLib_GroundEnum, f32);
 /* 20266C */ void grYorster_8020266C(HSD_GObj*);
 /* 202B5C */ DynamicsDesc* grYorster_80202B5C(enum_t);
 /* 202B64 */ bool grYorster_80202B64(Vec3*, int _, HSD_JObj*);

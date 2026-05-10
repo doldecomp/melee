@@ -48,8 +48,6 @@
                                           u32 type, void* param, int arg5);
 ///* 1C7B24 */ static void grAnime_801C7B24(HSD_GObj* gobj, int arg1, u32 arg2,
 ///                                          f32 arg8);
-/* 1C7BA0 */ static void grAnime_801C7BA0(HSD_GObj* gobj, int arg1, u32 arg2,
-                                          f32 arg8);
 /* 1C82E8 */ static void fn_801C82E8(int arg0, int* arg1);
 /* 4D6958 */ static float grAnime_804D6958;
 /* 4D695C */ static float grAnime_804D695C;
@@ -239,6 +237,7 @@ void grAnime_801C6A54(HSD_JObj* jobj, HSD_AnimJoint* animjoint,
                       HSD_MatAnimJoint* matanimjoint,
                       HSD_ShapeAnimJoint* shapeanimjoint)
 {
+    PAD_STACK(16);
     if (jobj == NULL) {
         return;
     }
@@ -263,6 +262,7 @@ void grAnime_801C6C0C(HSD_JObj* jobj, HSD_AnimJoint* animjoint,
                       HSD_MatAnimJoint* matanimjoint,
                       HSD_ShapeAnimJoint* shapeanimjoint)
 {
+    PAD_STACK(16);
     if (jobj == NULL) {
         return;
     }
@@ -722,7 +722,71 @@ void grAnime_801C8098(Ground_GObj* gobj, int arg1, int arg2, int arg3,
     }
 }
 
-/// #grAnime_801C8138
+void grAnime_801C8138(HSD_GObj* gobj, enum_t arg1, bool arg2)
+{
+    HSD_JObj* jobj = gobj->hsd_obj;
+    UnkArchiveStruct* archive;
+    HSD_Joint* joint;
+    HSD_AnimJoint** ajp;
+    HSD_MatAnimJoint** mjp;
+    HSD_ShapeAnimJoint** sap;
+    HSD_AnimJoint* aj;
+    HSD_MatAnimJoint* ma;
+    HSD_ShapeAnimJoint* sa;
+    u8* flags;
+    s32 flag;
+
+    if (arg2 < 0) {
+        return;
+    }
+    archive = grDatFiles_801C6330(arg1);
+    if (archive == NULL) {
+        __assert("granime.c", 0x556, "archive");
+    }
+    joint = archive->unk4->unk8[arg1].unk0;
+    if (HSD_JObjGetChild(jobj) != NULL) {
+        jobj = HSD_JObjGetChild(jobj);
+    }
+    if (joint != NULL) {
+        lb_8000B804(jobj, joint);
+    }
+    grMaterial_801C8B68(jobj, 0);
+    HSD_JObjRemoveAnimAll(jobj);
+    sap = *(HSD_ShapeAnimJoint***) ((u8*) &archive->unk4->unk8[arg1] + 0xC);
+    ajp = *(HSD_AnimJoint***) ((u8*) &archive->unk4->unk8[arg1] + 0x4);
+    mjp = *(HSD_MatAnimJoint***) ((u8*) &archive->unk4->unk8[arg1] + 0x8);
+    if (sap != NULL) {
+        sa = sap[arg2];
+    } else {
+        sa = NULL;
+    }
+    if (mjp != NULL) {
+        ma = mjp[arg2];
+    } else {
+        ma = NULL;
+    }
+    if (ajp != NULL) {
+        aj = ajp[arg2];
+    } else {
+        aj = NULL;
+    }
+    HSD_JObjAddAnimAll(jobj, aj, ma, sa);
+    HSD_JObjReqAnimAll(jobj, 0.0f);
+    archive = grDatFiles_801C6330(arg1);
+    if (archive == NULL) {
+        __assert("granime.c", 0x148, "archive");
+    }
+    flags = (u8*) archive->unk4->unk8[arg1].x28;
+    if (flags != NULL) {
+        flag = flags[arg2];
+    } else {
+        flag = 0;
+    }
+    if ((s32) flag != 0) {
+        grAnime_801C752C(jobj, 1, 0x77A4, HSD_AObjSetFlags, 3, 0x20000000);
+    }
+    HSD_JObjAnimAll(jobj);
+}
 
 extern __jmp_buf grAnime_8049EE40;
 
@@ -760,6 +824,7 @@ HSD_AObj* grAnime_801C8318(HSD_GObj* gobj, int arg1, u32 arg2)
 bool grAnime_801C83D0(HSD_GObj* gobj, bool arg1, enum_t arg2)
 {
     HSD_AObj* aobj = grAnime_801C8318(gobj, arg1, arg2);
+    PAD_STACK(8);
     if (HSD_AObjGetFlags(aobj) & 0x40000000) {
         return true;
     }

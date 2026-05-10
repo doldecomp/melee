@@ -131,6 +131,7 @@ void un_802FE6A8(void)
     GXColor color = { 0x5A, 0x5A, 0x5A, 0xFF };
     HSD_Text* text;
     HSD_Text* text2;
+    PAD_STACK(24);
     gobj_camera = GObj_Create(HSD_GOBJ_CLASS_CAMERA, 20, 0);
     HSD_GObjObject_80390A70(gobj_camera, HSD_GObj_804D784B,
                             HSD_CObjLoadDesc(un_804D6D9C->cameras[0].desc));
@@ -205,6 +206,7 @@ void un_802FEBE0_OnEnter(void* arg0_)
     int i;
     unsigned short arg0x0;
     int arg0x4;
+    PAD_STACK(8);
 
     un_803124BC();
     un_803F9D48.x28 = arg0;

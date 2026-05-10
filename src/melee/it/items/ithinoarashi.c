@@ -1,8 +1,6 @@
 #include "ithinoarashi.h"
 
-#include "placeholder.h"
-
-#include "baselib/gobj.h"
+#include "baselib/random.h"
 #include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "it/inlines.h"
@@ -10,11 +8,52 @@
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/item.h"
+#include "it/items/itmaril.h"
 #include "lb/lb_00B0.h"
+#include "lb/lbvector.h"
 
-/* 2D5D7C */ void it_802D5D7C(HSD_GObj*);
+#include <math.h>
+#include <MSL/trigf.h>
+
 /* 2D60C8 */ static bool itHinoarashi_UnkMotion2_Anim(Item_GObj* gobj);
-/* 2D64B8 */ void it_802D64B8(HSD_GObj*, Vec3*, u32, f32);
+
+ItemStateTable it_803F8270[] = {
+    {
+        -1,
+        it_802D5EC8,
+        it_802D5EEC,
+        it_802D5F0C,
+    },
+    {
+        1,
+        itHinoarashi_UnkMotion1_Anim,
+        itHinoarashi_UnkMotion1_Phys,
+        itHinoarashi_UnkMotion1_Coll,
+    },
+    {
+        -1,
+        itHinoarashi_UnkMotion2_Anim,
+        itHinoarashi_UnkMotion2_Phys,
+        NULL,
+    },
+};
+
+ItemStateTable it_803F82A0[] = {
+    { 0, it_802D66F8, it_802D6740, it_802D6798 },
+};
+
+void it_802D5CF8(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ip->xDAC_itcmd_var0 = 0;
+    ip->xDB0_itcmd_var1 = 0;
+    ip->xDD4_itemVar.hinoarashi.x60.b0 = false;
+    ip->xDD4_itemVar.hinoarashi.x60.b1 = false;
+    ip->xDD4_itemVar.hinoarashi.x64 = 0.0f;
+    it_80279CDC(gobj, ip->scl);
+    Item_8026AE84(ip, 0x2734, 0x7FU, 0x40U);
+    it_802D5E4C(gobj);
+}
 
 void it_802D5D7C(HSD_GObj* gobj)
 {
@@ -37,19 +76,6 @@ void it_802D5D7C(HSD_GObj* gobj)
     }
 }
 
-void it_802D5CF8(Item_GObj* gobj)
-{
-    Item* ip = GET_ITEM(gobj);
-    ip->xDAC_itcmd_var0 = 0;
-    ip->xDB0_itcmd_var1 = 0;
-    ip->xDD4_itemVar.hinoarashi.x60.b0 = false;
-    ip->xDD4_itemVar.hinoarashi.x60.b1 = false;
-    ip->xDD4_itemVar.hinoarashi.x64 = 0.0f;
-    it_80279CDC(gobj, ip->scl);
-    Item_8026AE84(ip, 0x2734, 0x7FU, 0x40U);
-    it_802D5E4C(gobj);
-}
-
 void it_802D5E4C(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
@@ -67,30 +93,14 @@ bool it_802D5EC8(Item_GObj* gobj)
     return false;
 }
 
-void itHinoarashi_UnkMotion1_Phys(Item_GObj* gobj)
-{
-    it_8027A344(gobj);
-}
-
-bool itHinoarashi_UnkMotion1_Coll(Item_GObj* gobj)
-{
-    it_8026DA08(gobj);
-    return false;
-}
-
-bool itHinoarashi_UnkMotion2_Anim(Item_GObj* gobj)
-{
-    return false;
-}
-
 void it_802D5EEC(Item_GObj* gobj)
 {
     it_8027A09C(gobj);
 }
 
-void it_802D5F0C(Item_GObj* gobj)
+bool it_802D5F0C(Item_GObj* gobj)
 {
-    it_8027A118(gobj, it_802D5F34);
+    return it_8027A118(gobj, it_802D5F34);
 }
 
 void it_802D5F34(HSD_GObj* gobj)
@@ -99,10 +109,10 @@ void it_802D5F34(HSD_GObj* gobj)
     Item_80268E5C(gobj, 1, ITEM_ANIM_UPDATE);
     ip->entered_hitlag = efLib_PauseAll;
     ip->exited_hitlag = efLib_ResumeAll;
-    it_802756E0((Item_GObj*) gobj);
-    it_802754D4((Item_GObj*) gobj);
-    it_802754BC((Item_GObj*) gobj);
-    it_80273454((Item_GObj*) gobj);
+    it_802756E0(gobj);
+    it_802754D4(gobj);
+    it_802754BC(gobj);
+    it_80273454(gobj);
     ip->on_accessory = it_802D5D7C;
     ip->xDD1_flag.b1 = true;
 }
@@ -127,6 +137,29 @@ bool itHinoarashi_UnkMotion1_Anim(Item_GObj* gobj)
     return false;
 }
 
+void itHinoarashi_UnkMotion1_Phys(Item_GObj* gobj)
+{
+    it_8027A344(gobj);
+}
+
+bool itHinoarashi_UnkMotion1_Coll(Item_GObj* gobj)
+{
+    it_8026DA08(gobj);
+    return false;
+}
+
+bool itHinoarashi_UnkMotion2_Anim(Item_GObj* gobj)
+{
+    return false;
+}
+
+void itHinoarashi_UnkMotion2_Phys(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    ItemAttr* attrs = ip->xCC_item_attr;
+    it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
+}
+
 bool it_2725_Logic27_DmgReceived(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
@@ -147,11 +180,151 @@ void it_802D61A8(Item_GObj* gobj, Item_GObj* ref_gobj)
     it_8026B894(gobj, ref_gobj);
 }
 
-void itHinoarashi_UnkMotion2_Phys(Item_GObj* gobj)
+void it_802D61C8(Item_GObj* gobj, s32 coll)
 {
     Item* ip = GET_ITEM(gobj);
-    ItemAttr* attrs = ip->xCC_item_attr;
-    it_80272860(gobj, attrs->x10_fall_speed, attrs->x14_fall_speed_max);
+    Vec3 normal;
+
+    normal.z = 0.0f;
+    normal.y = 0.0f;
+    normal.x = 0.0f;
+
+    while (ip->xDD4_itemVar.hinoarashi.x78 < -M_PI) {
+        ip->xDD4_itemVar.hinoarashi.x78 += 2 * M_PI;
+    }
+    while (ip->xDD4_itemVar.hinoarashi.x78 > M_PI) {
+        ip->xDD4_itemVar.hinoarashi.x78 -= 2 * M_PI;
+    }
+
+    if (coll & 1) {
+        normal.x += ip->x378_itemColl.floor.normal.x;
+        normal.y += ip->x378_itemColl.floor.normal.y;
+    }
+    if (coll & 2) {
+        normal.x += ip->x378_itemColl.ceiling.normal.x;
+        normal.y += ip->x378_itemColl.ceiling.normal.y;
+    }
+    if (coll & 8) {
+        normal.x += ip->x378_itemColl.left_facing_wall.normal.x;
+        normal.y += ip->x378_itemColl.left_facing_wall.normal.y;
+    }
+    if (coll & 4) {
+        normal.x += ip->x378_itemColl.right_facing_wall.normal.x;
+        normal.y += ip->x378_itemColl.right_facing_wall.normal.y;
+    }
+
+    lbVector_Normalize(&normal);
+    *(Vec3*) &ip->xDD4_itemVar.hinoarashi.x60 = normal;
+}
+
+void it_802D6310(Item_GObj* gobj, s32 coll)
+{
+    Item* ip = GET_ITEM(gobj);
+
+    if (coll != 0) {
+        f32 target_angle = atan2f(*(f32*) &ip->xDD4_itemVar.hinoarashi.x60,
+                                  ip->xDD4_itemVar.hinoarashi.x64);
+        f32 delta = atan2f(ip->xDD4_itemVar.hinoarashi.x6C.x,
+                           ip->xDD4_itemVar.hinoarashi.x6C.y) -
+                    target_angle;
+        f32 angle_factor;
+
+        while (delta > M_PI) {
+            delta -= 2 * M_PI;
+        }
+        while (delta < -M_PI) {
+            delta += 2 * M_PI;
+        }
+
+        if (delta == 0.0f) {
+            angle_factor = 0.0f;
+        } else {
+            f32 angle =
+                lbVector_Angle((Vec3*) &ip->xDD4_itemVar.hinoarashi.x60,
+                               &ip->xDD4_itemVar.hinoarashi.x6C);
+            f32 scale;
+
+            if (ABS(delta) < M_PI_2) {
+                scale = 0.02f * (ABS(delta) / M_PI);
+            } else {
+                scale = 0.5f * (ABS(delta) / M_PI);
+            }
+            {
+                f32 signed_scale;
+                if (delta < 0.0f) {
+                    signed_scale = -scale;
+                } else {
+                    signed_scale = scale;
+                }
+                angle_factor = angle * signed_scale;
+            }
+        }
+
+        ip->xDD4_itemVar.hinoarashi.x78 -= angle_factor;
+
+        while (ip->xDD4_itemVar.hinoarashi.x78 < -M_PI) {
+            ip->xDD4_itemVar.hinoarashi.x78 += 2 * M_PI;
+        }
+        while (ip->xDD4_itemVar.hinoarashi.x78 > M_PI) {
+            ip->xDD4_itemVar.hinoarashi.x78 -= 2 * M_PI;
+        }
+    }
+}
+
+void it_802D64B8(HSD_GObj* gobj, Vec3* pos, u32 arg2, f32 facing_dir)
+{
+    Item* ip = GET_ITEM(gobj);
+    SpawnItem spawn;
+
+    spawn.kind = 0xCE;
+    spawn.prev_pos = *pos;
+    spawn.prev_pos.z = 0.0f;
+    it_8026BB88(gobj, &spawn.pos);
+    spawn.facing_dir = facing_dir;
+    spawn.x3C_damage = 0;
+    spawn.vel.x = spawn.vel.y = spawn.vel.z = 0.0f;
+    spawn.x0_parent_gobj = ip->owner;
+    spawn.x4_parent_gobj2 = gobj;
+    spawn.x44_flag.b0 = true;
+    spawn.x40 = arg2;
+    {
+        Item_GObj* new_gobj = Item_80268B18(&spawn);
+        if (new_gobj != NULL) {
+            Item* new_ip = GET_ITEM(new_gobj);
+            itHinoarashiAttributes* attr =
+                new_ip->xC4_article_data->x4_specialAttributes;
+            f32 speed;
+            f32 angle;
+
+            angle = attr->x0;
+            it_80275158(new_gobj, angle);
+            {
+                f32 rand = HSD_Randf();
+                f32 new_var; // permuterslop
+                f32 a = (attr->x14 - attr->x10) * (new_var = rand) + attr->x10;
+                angle = ((new_ip->facing_dir == 1.0f) ? a : -a) - M_PI_2;
+            }
+
+            while (angle < 0.0f) {
+                angle += 2 * M_PI;
+            }
+            while (angle > 2 * M_PI) {
+                angle -= 2 * M_PI;
+            }
+            new_ip->xDD4_itemVar.hinoarashi.x78 = angle;
+
+            {
+                f32 rand = HSD_Randf();
+                f32 new_var;
+                speed = ((attr->x8 - attr->x4) * (new_var = rand)) + attr->x4;
+            }
+            new_ip->x40_vel.x = speed * cosf(angle);
+            new_ip->x40_vel.y = speed * sinf(angle);
+            new_ip->x40_vel.z = 0.0f;
+            new_ip->xDCC_flag.b3 = 0;
+            it_802D6674(new_gobj, HSD_Randi(4));
+        }
+    }
 }
 
 void it_802D6674(Item_GObj* gobj, s32 arg1)

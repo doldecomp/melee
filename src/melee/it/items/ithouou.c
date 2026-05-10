@@ -13,22 +13,43 @@
 #include "it/item.h"
 #include "mp/mplib.h"
 
+ItemStateTable it_803F7F58[] = {
+    { 0, it_802D2C54, it_802D2C78, it_802D2D04 },
+    { 1, itHouou_UnkMotion1_Anim, itHouou_UnkMotion1_Phys,
+      itHouou_UnkMotion1_Coll },
+    { 2, itHouou_UnkMotion2_Anim, itHouou_UnkMotion2_Phys,
+      itHouou_UnkMotion2_Coll },
+    { 3, itHouou_UnkMotion3_Anim, itHouou_UnkMotion3_Phys,
+      itHouou_UnkMotion3_Coll },
+    { 4, itHouou_UnkMotion4_Anim, itHouou_UnkMotion4_Phys,
+      itHouou_UnkMotion4_Coll },
+    { 5, itHouou_UnkMotion5_Anim, itHouou_UnkMotion5_Phys,
+      itHouou_UnkMotion5_Coll },
+};
+
+ItemStateTable it_803F7FB8[] = { {
+    0,
+    it_802D2F3C,
+    it_802D2F70,
+    it_802D2FE8,
+} };
+
 void it_2725_Logic18_Spawned(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itHououAttr* attr = ip->xC4_article_data->x4_specialAttributes;
-    *(Vec3*) &ip->xDD4_itemVar.pokemon.x64 = ip->pos;
+    ip->xDD4_itemVar.houou.start_pos = ip->pos;
     ip->facing_dir = 0.0F;
     ip->xDAC_itcmd_var0 = 0;
     ip->xDB0_itcmd_var1 = 0;
-    ip->xDD4_itemVar.pokemon.timer = attr->x14;
+    ip->xDD4_itemVar.houou.timer = attr->x14;
     ip->xDCC_flag.b3 = false;
     it_802D2BE0(gobj);
     it_80279CDC(gobj, attr->timer);
-    ip->xDD4_itemVar.pokemon.xE44 = 0.0F;
+    ip->xDD4_itemVar.houou.vel_accum = 0.0F;
 }
 
-void it_802D25B8(void) {}
+void it_802D25B8(HSD_GObj* gobj) {}
 
 void it_802D25BC(Item_GObj* gobj, Item_GObj* ref_gobj)
 {
@@ -69,7 +90,7 @@ bool itHouou_UnkMotion1_Coll(Item_GObj* gobj)
 void it_802D2668(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    ip->xDD4_itemVar.pokemon.xE44 = 0.0f;
+    ip->xDD4_itemVar.houou.vel_accum = 0.0f;
     Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);
     ip->entered_hitlag = efLib_PauseAll;
     ip->exited_hitlag = efLib_ResumeAll;
@@ -99,12 +120,12 @@ void itHouou_UnkMotion2_Phys(Item_GObj* gobj)
     it_8027A344(gobj);
 
     if (it_80272C6C(gobj)) {
-        ip->xDD4_itemVar.pokemon.xE44 += attr->x8;
+        ip->xDD4_itemVar.houou.vel_accum += attr->x8;
     } else {
-        ip->xDD4_itemVar.pokemon.xE44 += attr->xC;
+        ip->xDD4_itemVar.houou.vel_accum += attr->xC;
     }
 
-    ip->x40_vel.y += ip->xDD4_itemVar.pokemon.xE44;
+    ip->x40_vel.y += ip->xDD4_itemVar.houou.vel_accum;
 
     if (ip->pos.y > Stage_GetBlastZoneTopOffset()) {
         ip->x40_vel.y = 0.0F;
@@ -157,8 +178,8 @@ void itHouou_UnkMotion3_Phys(Item_GObj* gobj)
 
     it_8027A344(gobj);
 
-    timer = ip->xDD4_itemVar.pokemon.timer;
-    ip->xDD4_itemVar.pokemon.timer = timer - 1;
+    timer = ip->xDD4_itemVar.houou.timer;
+    ip->xDD4_itemVar.houou.timer = timer - 1;
 
     if (timer != 0) {
         ip->x40_vel.z = attr->x10;
@@ -181,7 +202,7 @@ void it_802D290C(Item_GObj* gobj)
     Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
     ip->entered_hitlag = efLib_PauseAll;
     ip->exited_hitlag = efLib_ResumeAll;
-    ip->xDD4_itemVar.pokemon.xE44 = attr->x18;
+    ip->xDD4_itemVar.houou.vel_accum = attr->x18;
 }
 
 bool itHouou_UnkMotion4_Anim(Item_GObj* gobj)
@@ -212,10 +233,10 @@ void itHouou_UnkMotion4_Phys(Item_GObj* gobj)
 
     it_8027A344(gobj);
 
-    ip->xDD4_itemVar.pokemon.xE44 += attr->x1C;
-    ip->x40_vel.y += ip->xDD4_itemVar.pokemon.xE44;
+    ip->xDD4_itemVar.houou.vel_accum += attr->x1C;
+    ip->x40_vel.y += ip->xDD4_itemVar.houou.vel_accum;
 
-    if (ip->pos.y < (*(f32*) ((u8*) ip + 0xE3C)) - 1.0f) {
+    if (ip->pos.y < ip->xDD4_itemVar.houou.start_pos.y - 10.0f) {
         ip->x40_vel.y = 0.0f;
     }
 }
@@ -310,10 +331,40 @@ void it_802D2C78(Item_GObj* gobj)
 
 bool it_802D2D04(Item_GObj* gobj)
 {
-    return it_8027A118(gobj, (void (*)(HSD_GObj*)) it_802D25B8);
+    return it_8027A118(gobj, it_802D25B8);
 }
 
-/// #it_802D2D2C
+void it_802D2D2C(Item_GObj* gobj)
+{
+    u8 _pad[8];
+    SpawnItem spawn;
+    Vec3 hit_pos;
+    Vec3 tmp;
+    Item_GObj* new_gobj;
+    int line_id;
+    Item* ip = GET_ITEM(gobj);
+
+    tmp = ip->xDD4_itemVar.houou.start_pos;
+    if (mpCheckAllRemap(&hit_pos, &line_id, NULL, NULL, -1, -1, tmp.x, tmp.y,
+                        tmp.x, Stage_GetBlastZoneBottomOffset()) ||
+        mpCheckAllRemap(&hit_pos, &line_id, NULL, NULL, -1, -1, tmp.x,
+                        Stage_GetBlastZoneTopOffset(), tmp.x, tmp.y))
+    {
+        spawn.prev_pos = hit_pos;
+        spawn.pos = ip->xDD4_itemVar.houou.start_pos;
+        spawn.facing_dir = ip->facing_dir;
+        spawn.x3C_damage = 0;
+        spawn.vel.y = spawn.vel.x = 0.0f;
+        spawn.vel.z = 0.0f;
+        spawn.kind = Pokemon_Houou_SacredFire;
+        spawn.x0_parent_gobj = ip->owner;
+        spawn.x4_parent_gobj2 = gobj;
+        spawn.x44_flag.b0 = true;
+        spawn.x40 = 0;
+        new_gobj = Item_80268B18(&spawn);
+        GET_ITEM(new_gobj)->xDD4_itemVar.houou.timer = line_id;
+    }
+}
 
 void it_2725_Logic42_Spawned(Item_GObj* item_gobj)
 {
@@ -321,7 +372,7 @@ void it_2725_Logic42_Spawned(Item_GObj* item_gobj)
     itHououAttr* attr;
     PAD_STACK(8);
 
-    item = GET_ITEM((HSD_GObj*) item_gobj);
+    item = GET_ITEM(item_gobj);
     attr = item->xC4_article_data->x4_specialAttributes;
     if ((item_gobj && item_gobj) && item_gobj) {
     }
@@ -359,8 +410,8 @@ void it_802D2F70(Item_GObj* gobj)
     Vec3 sp10;
     Item* ip = GET_ITEM(gobj);
 
-    if (mpLib_80054ED8(ip->xDD4_itemVar.pokemon.timer)) {
-        mpGetSpeed(ip->xDD4_itemVar.pokemon.timer, &ip->pos, &sp10);
+    if (mpLib_80054ED8(ip->xDD4_itemVar.houou.timer)) {
+        mpGetSpeed(ip->xDD4_itemVar.houou.timer, &ip->pos, &sp10);
         ip->pos.x += sp10.x;
         ip->pos.y += sp10.y;
         ip->pos.z += sp10.z;

@@ -100,7 +100,7 @@ static HSD_ObjAllocData item_dynamic_bones_alloc_data;
 
 HSD_ObjAllocData item_link_alloc_data;
 HSD_ObjAllocUnk Item_804A0C64;
-HSD_ObjAllocUnk2 Item_804A0CCC;
+Item_FtTrack Item_804A0CCC;
 S32Vec3 Item_804A0E24;
 
 /// Init item struct?
@@ -140,7 +140,7 @@ void Item_80266FCC(void)
     Item_804A0C64.x64 = it_804D6D28->x148;
 
     Item_804A0CCC.x154.b0 = true;
-    Item_804A0CCC.x150 = 1;
+    Item_804A0CCC.x150_count = 1;
 
     Item_804A0E24.x = -1;
     Item_804A0E24.y = -1;
@@ -697,10 +697,10 @@ static void Item_80267AA8(HSD_GObj* gobj, SpawnItem* spawnItem)
     }
 
     item_data->x5C8 = 0;
-    item_data->xBC7 = 0;
-    item_data->xBC6 = 0;
-    item_data->xBC5 = 0;
-    item_data->xBC4 = 0;
+    item_data->xBC4.a = 0;
+    item_data->xBC4.b = 0;
+    item_data->xBC4.g = 0;
+    item_data->xBC4.r = 0;
     item_data->x5C9 = 255;
 
     it_80279B64(item_data);

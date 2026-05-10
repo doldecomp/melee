@@ -81,26 +81,24 @@ int lbSnap_8001D40C(int chan)
 
 void lbSnap_8001D4A4(int chan, char* arg1)
 {
+    int new_var;
     struct Unk80433380_48* ptr = &lbSnap_80433380.x48[chan];
     OSTime time2 = OSGetTime();
     unsigned int time = OSTicksToSeconds(time2);
     int i;
+    new_var = ptr->num;
 
     do {
-        i = 0;
-        while (i < ptr->num) {
+        for (i = 0; i < new_var; i++) {
             if (time == ptr->unk10[i].unk0) {
                 time++;
                 break;
             }
-            i++;
         }
     } while (i != ptr->num);
 
-    i = 0;
-    while (i < 0x21) {
+    for (i = 0; i < 0x21; i++) {
         arg1[i] = '\0';
-        i++;
     }
     sprintf(arg1, "%u", time);
 }
@@ -187,6 +185,7 @@ int lbSnap_8001D7B0(int chan, int index, int jndex)
 void lbSnap_8001DA5C(int arg0)
 {
     int r4, r5, r6, r7, r9, r10, r25, r27, r28, ctr;
+    PAD_STACK(16);
 
     r7 = 0;
     for (r10 = 0; r10 < 32; r10++) {

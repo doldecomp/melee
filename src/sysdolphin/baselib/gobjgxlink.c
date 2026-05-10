@@ -17,8 +17,8 @@ void GObj_GXReorder(HSD_GObj* gobj, HSD_GObj* hiprio_gobj)
     } else {
         // If there's not a higher priority GObj of this type, this gobj
         // becomes the highest priority
-        gobj->next_gx = HSD_GObj_804D7824[link];
-        HSD_GObj_804D7824[link] = gobj;
+        gobj->next_gx = HSD_GObjGXLinkHead[link];
+        HSD_GObjGXLinkHead[link] = gobj;
     }
 
     if (gobj->next_gx != NULL) {
@@ -69,7 +69,7 @@ inline HSD_GObj* GObj_GXFindPrioPosition(HSD_GObj* gobj)
 {
     HSD_GObj* i;
 
-    i = HSD_GObj_804D7824[gobj->gx_link];
+    i = HSD_GObjGXLinkHead[gobj->gx_link];
     while (i != NULL && i->render_priority < gobj->render_priority) {
         i = i->next_gx;
     }
@@ -108,7 +108,7 @@ void HSD_GObjGXLink_8039084C(HSD_GObj* gobj)
     if (prev != NULL) {
         prev->next_gx = gobj->next_gx;
     } else {
-        HSD_GObj_804D7824[gobj->gx_link] = gobj->next_gx;
+        HSD_GObjGXLinkHead[gobj->gx_link] = gobj->next_gx;
     }
     next = gobj->next_gx;
     if (next != NULL) {
@@ -124,7 +124,7 @@ void HSD_GObjGXLink_8039084C(HSD_GObj* gobj)
 
 inline HSD_GObj* get_by_prio(HSD_GObj* gobj)
 {
-    HSD_GObj* cur = HSD_GObj_804D7824[gobj->gx_link];
+    HSD_GObj* cur = HSD_GObjGXLinkHead[gobj->gx_link];
     while (cur != NULL && cur->render_priority < gobj->render_priority) {
         cur = cur->next_gx;
     }

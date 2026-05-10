@@ -279,12 +279,12 @@ void fn_801A6C30(HSD_GObj* gobj)
 
 static u8 gm_804D6740;
 static SceneDesc* gm_804D6748;
-static HSD_Joint* gm_804D6798;
-static HSD_Archive* gm_804D679C;
-static SceneDesc* gm_804D67A0;
-static SceneDesc* gm_804D67A4;
-static SceneDesc* gm_804D67A8;
-static SceneDesc* gm_804D67AC;
+HSD_Joint* gm_804D6798;
+HSD_Archive* gm_804D679C;
+SceneDesc* gm_804D67A0;
+SceneDesc* gm_804D67A4;
+SceneDesc* gm_804D67A8;
+SceneDesc* gm_804D67AC;
 
 void gm_801A6C54(void)
 {

@@ -9,7 +9,7 @@
 
 /* 290938 */ HSD_GObj* it_80290938(HSD_JObj*);
 /* 290A20 */ void itFlipper_Logic20_Spawned(Item_GObj*);
-/* 290A7C */ UNK_RET it_80290A7C(UNK_PARAMS);
+/* 290A7C */ void it_80290A7C(Item_GObj*);
 /* 290C38 */ void it_80290C38(Item_GObj*, Vec3*, f32);
 /* 290CE8 */ void it_80290CE8(Item_GObj*);
 /* 290DD4 */ void it_80290DD4(Item_GObj* gobj, s32 kind, Vec3* pos);

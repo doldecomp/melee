@@ -211,6 +211,7 @@ static inline void inlineD0(Fighter_GObj* gobj)
 void ftCo_80091E78(HSD_GObj* gobj, float arg1)
 {
     Fighter* fp = gobj->user_data;
+    PAD_STACK(8);
     if (fp->reflecting || fp->x221B_b0) {
         ftCo_80091BC4(fp);
         if (fp->mv.co.guard.x4) {
@@ -256,6 +257,7 @@ void ftCo_80092158(Fighter_GObj* gobj, int arg1, HSD_JObj* arg2)
 void ftCo_800921DC(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
+    PAD_STACK(8);
     ftCo_80092158(gobj, 1047, fp->parts[fp->ft_data->x8->x11].joint);
     fp->x2219_b0 = true;
     fp->mv.co.guard.xC = false;
@@ -583,6 +585,7 @@ void ftCo_80092F2C(HSD_GObj* gobj, bool arg1)
     Fighter* fp = gobj->user_data;
     Fighter_ChangeMotionState(gobj, ftCo_MS_GuardSetOff, Ft_MF_None, 0, 1, 0,
                               NULL);
+    PAD_STACK(8);
     fp->hitlag_cb = ftCo_80093240;
     fp->x670_timer_lstick_tilt_x = -2;
     fp->post_hitlag_cb = ftCo_800932DC;
@@ -658,6 +661,7 @@ void ftCo_800932DC(Fighter_GObj* gobj)
 void ftCo_GuardSetOff_Anim(HSD_GObj* gobj)
 {
     Fighter* fp = gobj->user_data;
+    PAD_STACK(8);
     ftCo_80093BC0(gobj);
     if (!ftAnim_IsFramesRemaining(gobj)) {
         if (fp->mv.co.guard.xC) {
@@ -703,9 +707,8 @@ bool ftCo_80093694(Fighter_GObj* gobj)
 
 void ftCo_8009370C(Fighter_GObj* gobj, HSD_GObjEvent on_reflect)
 {
-    u8 _[8] = { 0 };
     ReflectDesc reflect;
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     reflect.x0_bone_id = fp->ft_data->x8->x11;
     reflect.x4_max_damage = fp->shield_health;
     reflect.x8_offset.x = reflect.x8_offset.y = reflect.x8_offset.z = 0;
@@ -743,7 +746,7 @@ void ftCo_80093850(Fighter_GObj* gobj)
 
 void ftCo_8009388C(HSD_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     Fighter_ChangeMotionState(gobj, ftCo_MS_GuardReflect,
                               Ft_MF_SkipAnim | Ft_MF_KeepGfx,
                               fp->cur_anim_frame, 1, 0, NULL);
@@ -762,7 +765,7 @@ void ftCo_8009388C(HSD_GObj* gobj)
 /// @todo Shares a lot of code with #ftCo_800923B4
 void ftCo_800939B4(Fighter_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     switch (fp->kind) {
     case FTKIND_YOSHI:
         ftYs_Shield_8012C914(gobj);
@@ -782,7 +785,7 @@ void ftCo_800939B4(Fighter_GObj* gobj)
 /// @todo Shared code with #ftCo_8009388C.
 void ftCo_80093A50(Fighter_GObj* gobj)
 {
-    Fighter* fp = gobj->user_data;
+    Fighter* fp = GET_FIGHTER(gobj);
     Fighter_ChangeMotionState(gobj, 182, Ft_MF_SkipAnim, 0, 1, 0, NULL);
     ftAnim_8006EBA4(gobj);
     fp->x672_input_timer_counter = 0xFE;
@@ -821,6 +824,7 @@ void ftCo_80093BC0(Fighter_GObj* gobj)
 
 void ftCo_GuardReflect_Anim(HSD_GObj* gobj)
 {
+    PAD_STACK(16);
     ftCo_80093BC0(gobj);
     ftCo_GuardOn_Anim(gobj);
 }

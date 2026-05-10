@@ -34,7 +34,7 @@ ItemStateTable it_803F8128[] = {
     },
 };
 
-static void ordering_func()
+static void ordering_func(void)
 {
     HSD_JObjSetRotationY(NULL, 10);
 }

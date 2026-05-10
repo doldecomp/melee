@@ -57,6 +57,8 @@
                                    lbColl_80008D30_arg1* arg3, f32 farg0);
 /* 0C7C60 */ void ftCo_800C7C60(Fighter_GObj* gobj, int damage_amount);
 /* 0C7CA0 */ bool ftCo_800C7CA0(Fighter_GObj* gobj);
+/* 0C7DC4 */ void fn_800C7DC4(HSD_GObj* gobj, s32 motion_state, Vec3* normal,
+                              Vec3* offset);
 /* 0C7FC8 */ void ftCo_DownReflect_Anim(Fighter_GObj* gobj);
 /* 0C8004 */ void ftCo_DownReflect_IASA(Fighter_GObj* gobj);
 /* 0C8008 */ void ftCo_DownReflect_Phys(Fighter_GObj* gobj);

@@ -140,8 +140,8 @@ void ftCo_800D0CBC(Fighter_GObj* fgp)
 
 float ftCo_800D0EC8(Fighter* fp)
 {
-    return -ftCo_CalcYScaledKnockback(Fighter_804D6524->x30, fp->x34_scale.y,
-                                      p_ftCommonData->x310);
+    return -ftCo_CalcYScaledKnockback(p_ftCommonData->x310, fp->x34_scale.y,
+                                      Fighter_804D6524->x30);
 }
 
 void ftCo_800D0FA0(Fighter_GObj* gobj)

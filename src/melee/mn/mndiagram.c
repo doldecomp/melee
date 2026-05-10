@@ -139,7 +139,7 @@ u32 mnDiagram_ConvertDistanceForDisplay(u32 distance)
         if (distance >= 0x274A6) {
             return distance / 160934;
         }
-        return (u32) ((f64) distance / 30.4788F);
+        return (u32) ((f64) distance / 30.4788);
     }
     if (distance >= 0x186A0) {
         return distance / 100000;
@@ -666,6 +666,7 @@ void mnDiagram_8023FA6C(void)
     int i, j;
     u8* src = mnDiagram_803EE74C;
     u8* dst = mnDiagram_804A0750.sorted_fighters;
+    PAD_STACK(8);
 
     for (i = 0; i < 0x19; i++) {
         u32 total = 0;
@@ -783,6 +784,7 @@ void mnDiagram_InputProc(HSD_GObj* gobj)
     HSD_GObjProc* proc;
     Diagram* data = mnDiagram_804D6C10->user_data;
     u64 input = Menu_GetAllInputs();
+    PAD_STACK(80);
 
     if ((u32) input & 0x10) {
         lbAudioAx_80024030(1);
@@ -968,6 +970,7 @@ void mnDiagram_80240D94(void* arg0, s32 arg1, s32 arg2, s32 arg3)
     u16 sd_count;
 
     HSD_Text* text = HSD_SisLib_803A6754(0, 1);
+    PAD_STACK(24);
     data->text[0] = text;
     lb_8000B1CC(data->jobjs[8], mnDiagram_803EE728, &pos);
     text->font_size.x = 0.0521f;
@@ -1410,6 +1413,7 @@ void mnDiagram_OnFrame(HSD_GObj* gobj)
     u8 col_idx;
     s32 row_idx;
     int count;
+    PAD_STACK(8);
 
     if ((mn_804A04F0.cur_menu != 0x1E) || (mn_804A04F0.x10 != 0)) {
         if (mn_804A04F0.cur_menu == 0x1E) {
@@ -1592,6 +1596,7 @@ void mnDiagram_8024227C(void* arg0, s32 arg1, s32 arg2, u8 arg3)
     u8* var_r17;
     u8* var_r17_2;
     u8* var_r17_3;
+    PAD_STACK(32);
 
     var_r30 = 0;
     do {
@@ -1891,6 +1896,7 @@ void mnDiagram_802427B4(void* arg0, s32 arg1, s32 arg2)
 
     // Column headers
     text = HSD_SisLib_803A6754(0, 1);
+    PAD_STACK(104);
     data->col_header_text = text;
     text->font_size.x = 0.02f;
     text->font_size.y = 0.03f;
@@ -1973,6 +1979,7 @@ void mnDiagram_80242C0C(void* arg0, int arg1, int arg2)
     u8 fighter_id;
     f32 x_spacing;
     f32 y_spacing;
+    PAD_STACK(80);
 
     joint_data = (void**) &mnDiagram_804A0834;
 
@@ -2033,6 +2040,7 @@ void mnDiagram_CursorProc(HSD_GObj* gobj)
     f32 y_spacing;
     f32 x_pos;
     f32 y_pos;
+    PAD_STACK(40);
 
     if ((mn_804A04F0.cur_menu != 0x1E) || (mn_804A04F0.x10 != 0)) {
         HSD_GObjPLink_80390228(gobj);
@@ -2091,6 +2099,7 @@ void mnDiagram_80243434(u8 arg0)
     u16 indices;
     u8 col_idx;
     u8 row_idx;
+    PAD_STACK(32);
 
     joint_data = (void**) &mnDiagram_804A0824;
     gobj = GObj_Create(6, 7, 0x80);
@@ -2185,6 +2194,7 @@ void mnDiagram_802437E8(s32 arg0, s32 arg1)
 {
     mnDiagram_Assets* assets = (mnDiagram_Assets*) &mnDiagram_804A0750;
     HSD_GObjProc* proc;
+    PAD_STACK(24);
 
     mn_804A04F0.prev_menu = mn_804A04F0.cur_menu;
     mn_804A04F0.cur_menu = 0x1E;

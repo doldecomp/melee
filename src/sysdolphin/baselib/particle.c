@@ -23,6 +23,7 @@
 #include <baselib/state.h>
 #include <baselib/video.h>
 #include <MetroTRK/ppc_reg.h>
+#include <MSL/math_ppc.h>
 #include <MSL/trigf.h>
 
 typedef struct {
@@ -147,6 +148,7 @@ f32 DrawASCII(int chr, float x, float y, GXColor* color)
     s32 i;
     u8 p0, p1;
     u8 r, g, b, a;
+    PAD_STACK(56);
 
     if (chr >= '0' && chr <= '9') {
         index = chr - '0';
@@ -716,6 +718,7 @@ static const u32 lbl_804DE8E0 = 0xFFFFFFFF;
 // @TODO: Currently 89.78% match - needs minor control flow and register fixes
 void hsd_8039254C(void)
 {
+    u8 _padA[8];
     GXColor bar_col;
     GXColor bg_col3;
     GXColor bg_col2;
@@ -1318,8 +1321,6 @@ void fn_803932D0(s32 type, u32 flags, s32 value)
     }
 }
 
-// @TODO: Currently 99.71% match - r30/r31 register swap
-// (startTick/ticksPerUnit)
 s32 hsd_80393328(void)
 {
     u32 ticksPerUnit;
@@ -1338,7 +1339,7 @@ s32 hsd_80393328(void)
     }
     result = 1;
     startTick = OSGetTick();
-    ticksPerUnit = *(u32*) 0x800000F8 >> 2;
+    ticksPerUnit = (*(u32*) 0x800000F8 >> 2) & 0xFFFFFFFFFFFFFFFF;
     do {
         hsd_80392E80();
         if (hsd_804D78B0 == 0) {
@@ -1635,13 +1636,13 @@ void fn_80393C14(const u8* buf, size_t size)
     int i;
 
     const u32 out_size = hsd_804CF7E8.buf_size;
-    const u32 tmp = out_size - 1;
 
     int write_pos = hsd_804CF7E8.xC;
     u8* out_buf = hsd_804CF7E8.out_buf;
     u8 line_len = hsd_804CF7E8.x11;
 
     for (i = 0; i < size; i++) {
+        const u32 tmp = out_size - 1;
         switch (buf[i]) {
         case '\r':
             break;
@@ -2078,6 +2079,7 @@ extern u8 lbl_8040AB40[];
 void hsd_80394668(void)
 {
     struct ParticleScreenState* sp = &hsd_804CF810;
+    PAD_STACK(24);
 
     if ((u32) sp->x2C != 0) {
         /* Copy XFB data with brightness adjustment */
@@ -2716,6 +2718,7 @@ void hsd_803957C0(u8 input)
     u8 ch;
     void* saved;
     u8 saved_ch;
+    PAD_STACK(32);
 
     ch = input;
     saved_ch = ch;
@@ -3127,6 +3130,7 @@ s32 hsd_803962A8(void* data)
     s32 old;
     u8* addr;
     s32 i, j, k;
+    PAD_STACK(16);
 
     bit = 1;
     while (bit <= sp->xBC) {
@@ -3243,7 +3247,6 @@ s32 hsd_803962A8(void* data)
 // @TODO: Currently 96.49% match - needs minor register allocation fix
 s32 hsd_803966A0(void* data)
 {
-    struct ParticleScreenState* sp = &hsd_804CF810;
     s32 result;
 
     result = hsd_80395550(data);
@@ -3254,32 +3257,32 @@ s32 hsd_803966A0(void* data)
         u32 cmd = *(u32*) ((u8*) data + 0x14);
         switch (cmd) {
         case 0:
-            sp->xBC = 8;
+            (&hsd_804CF810)->xBC = 8;
             break;
         case 1:
-            sp->xBC = 4;
+            (&hsd_804CF810)->xBC = 4;
             break;
         case 2:
-            sp->xBC = 1;
+            (&hsd_804CF810)->xBC = 1;
             break;
         case 3:
-            sp->xBC = 2;
+            (&hsd_804CF810)->xBC = 2;
             break;
         case 4:
-            sp->xBC = 0x100;
+            (&hsd_804CF810)->xBC = 0x100;
             break;
         case 5:
-            sp->xBC = 0x400;
+            (&hsd_804CF810)->xBC = 0x400;
             break;
         case 6:
-            sp->xBC = 0x200;
+            (&hsd_804CF810)->xBC = 0x200;
             break;
         }
-        ps_remove_node(sp, data);
+        ps_remove_node(&hsd_804CF810, data);
         return 0;
     }
     case -1:
-        ps_remove_node(sp, data);
+        ps_remove_node(&hsd_804CF810, data);
         return 1;
     default:
         return 0;
@@ -3299,6 +3302,7 @@ void hsd_80396884(void)
     void* saved;
     s32 x_base;
     u8 ch;
+    PAD_STACK(24);
 
     x_base = (sp->x20 - 30) / 2;
     sprintf(buf, "| INPUT ADDRESS : 8%07lX |", lbl_8040BC3C.x10 & 0x0FFFFFFF);
@@ -3470,7 +3474,6 @@ void hsd_80396E40(s32 keycode)
     s32 j;
     char ch;
 
-    PAD_STACK(8);
     saved = *px50;
     row = sp->x1C - 1;
     *px50 = lbl_8040AB00;
@@ -3694,29 +3697,32 @@ void hsd_80397110(void)
 // order)
 s32 fn_80397374(void* data)
 {
-    struct ParticleScreenState* sp = &hsd_804CF810;
+    struct ParticleScreenState* sp;
     extern u8 lbl_8040BEC4[];
     u32 bit = 1;
     u32 spr_off = *(u32*) (lbl_8040BEC4 + 0x10);
     u32 sel = *(u32*) (lbl_8040BEC4 + 0x14);
 
-    while (bit <= sp->xBC) {
-        switch (sp->xBC & bit) {
+    while (bit <= (&hsd_804CF810)->xBC) {
+        switch ((&hsd_804CF810)->xBC & bit) {
         case 0x8:
             if (sel != 0) {
                 sel--;
             } else if (spr_off != 0) {
                 spr_off--;
             } else {
-                u32 max = sp->x1C - 4;
+                u32 max = (&hsd_804CF810)->x1C - 4;
                 sel = max;
-                spr_off = 0x44 - max;
+                spr_off = 0x44;
+                spr_off = spr_off - max;
             }
             *(u32*) (lbl_8040BEC4 + 0x10) = spr_off;
             *(u32*) (lbl_8040BEC4 + 0x14) = sel;
+            if ((&hsd_804CF810)->x1C) {
+            }
             return 1;
         case 0x4:
-            if (sel < (u32) (sp->x1C - 4)) {
+            if (sel < (u32) ((&hsd_804CF810)->x1C - 4)) {
                 sel++;
             } else if (spr_off + sel < 0x43) {
                 spr_off++;
@@ -3735,7 +3741,7 @@ s32 fn_80397374(void* data)
         case 0x1000:
             return 1;
         case 0x200:
-            ps_remove_node(sp, data);
+            ps_remove_node(&hsd_804CF810, data);
             return 1;
         default:
             bit <<= 1;
@@ -3855,6 +3861,7 @@ void* fn_80397814(void* arg)
     void* ctx = arg;
     u32 retrace;
     u32* keybuf = &sp->xC0;
+    PAD_STACK(160);
 
     hsd_80393D2C(0);
     hsd_80394314();
@@ -4982,6 +4989,7 @@ void hsd_80398F8C(HSD_Particle* pp, f32 angle)
     f32 sin_angle, cos_angle;
     f32 sin_rand, cos_rand;
     f32 temp;
+    PAD_STACK(24);
 
     temp = vz;
     *(s32*) &temp &= 0x7FFFFFFF;

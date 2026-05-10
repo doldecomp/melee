@@ -119,6 +119,7 @@ void ftCo_8009794C(Fighter_GObj* gobj)
 {
     u8 _[12] = { 0 };
     Fighter* fp = gobj->user_data;
+    PAD_STACK(16);
     if (fp->ground_or_air == GA_Air) {
         ftCommon_8007D7FC(fp);
     }
@@ -147,6 +148,7 @@ void ftCo_80097AF4(Fighter_GObj* gobj)
     HSD_JObj* jobj = fp->parts[ftParts_GetBoneIndex(fp, FtPart_HipN)].joint;
     float rot0, rot1;
     HSD_JObjSetupMatrix(jobj);
+    PAD_STACK(40);
     if (fp->x2226_b0) {
         rot0 = jobj->mtx[0][2];
         rot1 = jobj->mtx[1][2];

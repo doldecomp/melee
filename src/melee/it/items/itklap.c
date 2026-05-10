@@ -1,10 +1,7 @@
 #include "itklap.h"
 
-#include "placeholder.h"
-
-#include "dolphin/types.h"
 #include "gr/grkongo.h"
-#include "it/inlines.h"
+#include "gr/ground.h"
 #include "it/it_26B1.h"
 #include "it/it_2725.h"
 #include "it/itcoll.h"
@@ -13,8 +10,20 @@
 #include "lb/lbcollision.h"
 
 #include <math.h>
-#include <baselib/jobj.h>
 #include <baselib/random.h>
+
+ItemStateTable it_803F8940[] = {
+    { 0, itKlap_UnkMotion1_Anim, itKlap_UnkMotion1_Phys,
+      itKlap_UnkMotion1_Coll },
+    { 1, itKlap_UnkMotion1_Anim, itKlap_UnkMotion1_Phys,
+      itKlap_UnkMotion1_Coll },
+    { 2, itKlap_UnkMotion2_Anim, itKlap_UnkMotion2_Phys,
+      itKlap_UnkMotion2_Coll },
+    { 3, itKlap_UnkMotion3_Anim, itKlap_UnkMotion3_Phys,
+      itKlap_UnkMotion3_Coll },
+    { 2, itKlap_UnkMotion4_Anim, itKlap_UnkMotion4_Phys,
+      itKlap_UnkMotion4_Coll },
+};
 
 void it_802E1820(Item_GObj* gobj)
 {
@@ -84,7 +93,34 @@ void itKlap_UnkMotion1_Phys(Item_GObj* gobj)
     }
 }
 
-/// #itKlap_UnkMotion1_Coll
+bool itKlap_UnkMotion1_Coll(Item_GObj* gobj)
+{
+    Vec3 pos;
+    Quaternion quat;
+    Item* ip = GET_ITEM(gobj);
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+    HSD_JObj* child;
+
+    if (ip->xDD4_itemVar.klap.x20 != NULL) {
+        HSD_JObj* ref_jobj = GET_JOBJ(ip->xDD4_itemVar.klap.x20);
+        HSD_JObjGetTranslation2(ref_jobj, &pos);
+        HSD_JObjGetRotation(ref_jobj, &quat);
+        pos.y -= 5.0;
+        ip->pos = pos;
+        HSD_JObjSetTranslate(jobj, &pos);
+        HSD_JObjSetRotation(jobj, &quat);
+    } else {
+        it_802E1C84(gobj);
+    }
+
+    if ((child = HSD_JObjGetChild(jobj))) {
+        lb_8000B1CC(child, NULL, &pos);
+        if (pos.z >= 0.0f) {
+            it_802E1C84(gobj);
+        }
+    }
+    return false;
+}
 
 void it_802E1C4C(Item_GObj* gobj)
 {
@@ -222,51 +258,58 @@ bool itKlap_UnkMotion3_Coll(Item_GObj* gobj)
     return false;
 }
 
-/// #it_802E215C
+void it_802E215C(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    HSD_JObj* jobj = GET_JOBJ(gobj);
+    f32 angle;
+    Vec3 pos;
+    Quaternion quat;
+
+    Ground_801C4DA0(&pos, &angle);
+    pos.x += 6.0f * -sinf(angle);
+    pos.y += 6.0f * cosf(angle);
+    ip->pos = pos;
+    HSD_JObjSetTranslate(jobj, &ip->pos);
+    quat.x = 1.5707964f;
+    quat.z = angle;
+    quat.w = 0.0f;
+    quat.y = 0.0f;
+    HSD_JObjSetRotation(jobj, &quat);
+}
 
 static inline void it_802E2330_inline(Item_GObj* gobj)
 {
-    Item* ip = gobj->user_data;
+    Item* ip = GET_ITEM(gobj);
+    f32 rand;
     it_802762BC(ip);
     if (it_8027B798(gobj, &ip->x40_vel)) {
         it_802762BC(ip);
     }
-    ip->xDD4_itemVar.klap.x24 = 0.17453292f * (HSD_Randf() - 0.5f);
-    ip->xDD4_itemVar.klap.x28 = 0.17453292f * (HSD_Randf() - 0.5f);
+    rand = HSD_Randf();
+    ip->xDD4_itemVar.klap.x24 = 0.17453292f * (rand - 0.5f);
+    rand = HSD_Randf();
+    ip->xDD4_itemVar.klap.x28 = 0.17453292f * (rand - 0.5f);
     Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
-}
-
-inline f32 inline_fn()
-{
-    return HSD_Randf();
 }
 
 void it_802E2330(Item_GObj* gobj, Vec3* pos, lbColl_80008D30_arg1* arg2,
                  f32 angle)
 {
-    HitCapsule hit;
-    Item* ip = gobj->user_data;
-    u8 _pad[8];
+    struct SmallerHitCapsule hit;
+    Item* ip = GET_ITEM(gobj);
+    PAD_STACK(4);
 
     ip->pos = *pos;
-    lbColl_80008D30(&hit, arg2);
-    Item_80269CA0(ip, hit.b_offset.x);
+    lbColl_80008D30((HitCapsule*) &hit, arg2);
+    Item_80269CA0(ip, hit.damage);
     if (angle < 0.0f) {
         angle += 360.0f;
     }
-    ip->xCC8_knockback = it_80270CD8(ip, &hit);
+    ip->xCC8_knockback = it_80270CD8(ip, (HitCapsule*) &hit);
     ip->xCAC_angle = angle;
     ip->xCCC_incDamageDirection = ip->facing_dir;
-    {
-        ip = gobj->user_data;
-        it_802762BC(ip);
-        if (it_8027B798(gobj, &ip->x40_vel)) {
-            it_802762BC(ip);
-        }
-        ip->xDD4_itemVar.klap.x24 = 0.17453292f * (inline_fn() - 0.5f);
-        ip->xDD4_itemVar.klap.x28 = 0.17453292f * (inline_fn() - 0.5f);
-        Item_80268E5C(gobj, 4, ITEM_ANIM_UPDATE);
-    }
+    it_802E2330_inline(gobj);
 }
 
 void it_802E2450(Item_GObj* gobj, Item_GObj* ref_gobj)

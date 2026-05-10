@@ -1,7 +1,10 @@
 #include "toy.h"
 
+#include "stddef.h"
+
 #include "baselib/cobj.h"
 #include "baselib/controller.h"
+#include "baselib/debug.h"
 #include "baselib/displayfunc.h"
 #include "baselib/fog.h"
 #include "baselib/gobj.h"
@@ -424,6 +427,7 @@ void Trophy_SetUnlockState(enum_t trophyId, bool addValue)
     u16* ptr;
     u16* statePtr;
     u16 temp;
+    PAD_STACK(8);
 
     if (gm_8016B498() || (u8) gm_801A4310() == 0xC) {
         table = toy->trophyTable;
@@ -1091,7 +1095,66 @@ void un_8030663C(void)
     }
 }
 
-/// #un_803067BC
+void un_803067BC(s32 arg0, s32 arg1)
+{
+    s32 var_r29;
+    s32 var_r30;
+    s16* var_r31;
+    s16 temp_r6;
+    s16 var_r3;
+    s16* var_r4;
+    s16* var_r5;
+    s16 temp_r0_3;
+    s16 temp_r0_4;
+    u32 temp_r0_2;
+
+    var_r29 = (s32) un_804D6E64;
+    var_r30 = arg0;
+    if (arg1 == 0) {
+        var_r31 = (s16*) (var_r30 * 2 + var_r29);
+        var_r29 = 0;
+        var_r30 = 0;
+        while (var_r29 < (s16) *gmMainLib_8015CC90()) {
+            s16 temp = *var_r31;
+            var_r31 += 3;
+            var_r29++;
+            *(s16*) ((char*) un_804D6EDC + var_r30) = temp;
+            var_r30 += 2;
+        }
+        return;
+    }
+    temp_r6 = *gmMainLib_8015CC90();
+    var_r4 = (s16*) (var_r29 + var_r30 * 2);
+    var_r3 = temp_r6;
+    var_r5 = (s16*) ((char*) un_804D6EDC + (s32) temp_r6 * 2);
+    if (temp_r6 != 0) {
+        temp_r0_2 = (u32) var_r3 >> 3U;
+        if (temp_r0_2 != 0) {
+            do {
+                var_r5[0] = var_r4[0];
+                var_r5[-1] = var_r4[3];
+                var_r5[-2] = var_r4[6];
+                var_r5[-3] = var_r4[9];
+                var_r5[-4] = var_r4[12];
+                var_r5[-5] = var_r4[15];
+                var_r5[-6] = var_r4[18];
+                temp_r0_3 = var_r4[21];
+                var_r4 += 24;
+                var_r5[-7] = temp_r0_3;
+                var_r5 -= 8;
+            } while (--temp_r0_2 != 0);
+        }
+        var_r3 &= 7;
+        if (var_r3 != 0) {
+            do {
+                temp_r0_4 = *var_r4;
+                var_r4 += 3;
+                *var_r5 = temp_r0_4;
+                var_r5--;
+            } while (--var_r3 != 0);
+        }
+    }
+}
 
 s32 un_803068E0(HSD_GObj* gobj)
 {
@@ -1319,14 +1382,14 @@ void un_80306D70(s32 arg0)
         entry = (TyLightEntry*) (base + arg0 * 0xC);
         idx = entry->xFC_idx;
         sym = (TyLightSymbol*) (base + idx * 8);
-        OSReport(base + 0x64C, sym->xCC_name);
-        __assert("toy.c", 0x8CD, "0");
+        HSD_ASSERTREPORT(0x8CD, NULL, base + 0x64C, sym->xCC_name);
     }
 }
 
 /* 96.3% match */
 static char un_804D5A54[] = "lobj.h";
 static char un_804D5A5C[] = "lobj";
+extern f32 un_804DDCD8;
 
 HSD_LObj* un_80306EEC(void* list_arg, s32 hasAnim_arg)
 {
@@ -1340,6 +1403,7 @@ HSD_LObj* un_80306EEC(void* list_arg, s32 hasAnim_arg)
     u8* posTable;
     u8* animFlag;
     s32 idx;
+    PAD_STACK(8);
 
     prev = NULL;
     idx = 0;
@@ -1362,8 +1426,8 @@ HSD_LObj* un_80306EEC(void* list_arg, s32 hasAnim_arg)
                     *hasAnim = 1;
                 }
                 HSD_LObjAddAnimAll(lobj, *anims);
-                HSD_LObjReqAnimAll(lobj, 0.0F);
-                if ((*anims)->next != NULL) {
+                HSD_LObjReqAnimAll(lobj, un_804DDCD8);
+                if ((*anims)->position_anim != NULL) {
                     *animFlag = 1;
                 }
             }
@@ -1373,11 +1437,7 @@ HSD_LObj* un_80306EEC(void* list_arg, s32 hasAnim_arg)
             idx += 1;
         }
         if (prev != NULL) {
-            /* FAKE MATCH: Dead code needed for binary match */
-            if (prev == NULL) {
-                __assert(un_804D5A54, 0x136, un_804D5A5C);
-            }
-            prev->next = lobj;
+            HSD_LObjSetNext(prev, lobj);
         } else {
             first = lobj;
         }
@@ -1403,8 +1463,7 @@ void un_80307018(void)
     ptr2 = un_804D6ED4;
 
     if (ptr1->x50 == NULL) {
-        OSReport("*** BG data aren't being loaded!\n");
-        __assert("toy.c", 0x912, "0");
+        HSD_ASSERTREPORT(0x912, NULL, "*** BG data aren't being loaded!\n");
     }
 
     jobj = HSD_ArchiveGetPublicAddress(ptr1->x50, un_803FE3DC);
@@ -1443,6 +1502,7 @@ void un_8030715C(f32 cstick_x, f32 cstick_y)
     TyLightArray_* cur;
     s32 i;
     s8* flag_ptr;
+    PAD_STACK(96);
 
     data = (void*) un_804D6E68;
     data2 = un_804D6ED4;
@@ -1547,13 +1607,13 @@ void un_803075E8(s32 arg0)
     void* matanim;
     void* shapanim;
     ToyDataJObj* tdjobj;
+    PAD_STACK(88);
 
     data = un_803FDD18;
     td = un_804D6ED8;
 
     if (td->archive == NULL) {
-        OSReport(data + 0x6A0);
-        __assert("toy.c", 0xA41, "0");
+        HSD_ASSERTREPORT(0xA41, NULL, "*** BG data aren\'t being loaded!\n");
     }
 
     if (td->gobj != NULL) {
@@ -1592,8 +1652,7 @@ void un_803075E8(s32 arg0)
                 HSD_GObj_80390CD4(td->gobj);
             }
         } else {
-            OSReport(data + 0x718, *ptr);
-            __assert("toy.c", 0xA75, "0");
+            HSD_ASSERTREPORT(0xA75, NULL, "*** Can not Load Panel Label(%s)");
         }
     } else if (td->x54 != 0) {
         tdjobj = ((ToyData*) un_804D6ED8)->x8->x28;
@@ -1843,17 +1902,20 @@ void un_80307F64(s32 arg0, s32 arg1)
         }
     }
 }
-/* 95.7% match */
-char* un_8030813C(s16 arg0, enum_t unused)
+extern char un_803FE454[0x1F];
+
+char* un_8030813C(s32 arg0, enum_t unused)
 {
     char* ptr;
     s32 i;
     s32 found;
-
     found = 0;
 
     if (lbLang_IsSettingUS()) {
-        if (*(s32*) (ptr = un_804D6EA4) == arg0) {
+        ptr = un_804D6EA4;
+        if ((arg0 && arg0) && arg0) {
+        }
+        if (*(s32*) ptr == arg0) {
             found = 1;
         } else if (*(s32*) (ptr += 0x54) == arg0) {
             found = 1;
@@ -1880,8 +1942,7 @@ char* un_8030813C(s16 arg0, enum_t unused)
     }
 
     if (found == 0) {
-        OSReport("**** Not Found Toy Model!(%d)\n", arg0);
-        __assert("toy.c", 0xBA3, "0");
+        HSD_ASSERTREPORT(0xBA3, NULL, "**** Not Found Toy Model!(%d)\n", arg0);
     }
 
     return ptr;
@@ -1891,7 +1952,6 @@ void un_80308250(u8* arg0, s32 arg1, s32 arg2)
 {
     void* sym;
     char* ptr;
-
     ptr = un_8030813C(arg1, arg1);
 
     if (*(HSD_Archive**) (arg0 + 0x14) != NULL) {
@@ -1918,29 +1978,32 @@ void un_80308328(s32 arg0)
 {
     un_803063D4((s16) arg0, 2, 0x128);
 }
-/* 68.1% match */
 s16 un_80308354(s16 idx)
 {
-    s32 i;
-    s16 target;
     TrophyData* entry;
+    register s32 target;
+    s32 i;
 
-    target = un_804D6EDC[idx];
     entry = un_804D6EC4;
-
+    target = un_804D6EDC[idx];
     for (i = 0; i < 0x125; i++) {
         if (target == entry->id) {
             break;
         }
         entry++;
     }
-
-    if (i == 0x125) {
-        OSReport(un_803FE474);
-        __assert(un_804D5A48, 0xC2A, un_804D5A50);
+    if (i != 0x125) {
+        goto lbl_return;
     }
+    HSD_ASSERTREPORT(0xC2A, NULL,
+                     "*** Error : Not Found Model Name!(To Idx %d)", target,
+                     entry);
+    goto lbl_end;
 
+lbl_return:
     return target;
+
+lbl_end:;
 }
 
 void un_803083D8(HSD_JObj* jobj, s32 arg1)
@@ -1980,6 +2043,7 @@ void un_803084A0(s16 arg0)
     tyDispData* display;
     HSD_Text* text;
     s32 one;
+    PAD_STACK(72);
 
     display = un_804D6EE0;
     color = un_804DDCFC;
@@ -2142,6 +2206,7 @@ void un_80308F04(HSD_CObj* cobj)
     f32 right;
     f32 left;
     ToyJObjNode* jobj;
+    PAD_STACK(64);
 
     data = TOY_DATA;
     state = TOY_STATE;
@@ -2281,7 +2346,10 @@ void un_80308F04(HSD_CObj* cobj)
     }
 }
 
-static Vec3 un_803B88D4;
+extern Vec3 un_803B88D4;
+extern f32 un_804DDCD8;
+extern f64 un_804DDD88;
+extern f64 un_804DDD90;
 
 f32 un_80309338(Vec3* arg0, Vec3* arg1)
 {
@@ -2290,9 +2358,8 @@ f32 un_80309338(Vec3* arg0, Vec3* arg1)
     volatile f32 sp10;
     Vec3* var_r3;
     Vec3* var_r4;
-    f32 dy;
-    f32 dx;
-    f32 dz;
+    f32 temp_f4;
+    f32 temp_f2;
     f32 var_f1;
     f64 guess;
 
@@ -2305,15 +2372,17 @@ f32 un_80309338(Vec3* arg0, Vec3* arg1)
     if (var_r4 == NULL) {
         var_r4 = &sp14;
     }
-    dy = var_r3->y - var_r4->y;
-    dx = var_r3->x - var_r4->x;
-    dz = var_r3->z - var_r4->z;
-    var_f1 = dy * dy + dx * dx + dz * dz;
-    if (var_f1 > 0.0F) {
+    var_f1 = var_r3->y - var_r4->y;
+    temp_f4 = var_r3->x - var_r4->x;
+    temp_f2 = var_r3->z - var_r4->z;
+    var_f1 = var_f1 * var_f1;
+    var_f1 = temp_f4 * temp_f4 + var_f1;
+    var_f1 = temp_f2 * temp_f2 + var_f1;
+    if (var_f1 > un_804DDCD8) {
         guess = __frsqrte((f64) var_f1);
-        guess = 0.5 * guess * (3.0 - guess * guess * var_f1);
-        guess = 0.5 * guess * (3.0 - guess * guess * var_f1);
-        guess = 0.5 * guess * (3.0 - guess * guess * var_f1);
+        guess = un_804DDD88 * guess * (un_804DDD90 - guess * guess * var_f1);
+        guess = un_804DDD88 * guess * (un_804DDD90 - guess * guess * var_f1);
+        guess = un_804DDD88 * guess * (un_804DDD90 - guess * guess * var_f1);
         sp10 = (f32) (var_f1 * guess);
         var_f1 = sp10;
     }
@@ -2335,13 +2404,16 @@ void un_803102C4(s8 arg0)
     ((TyViewData*) un_804D6E6C)->x4 = arg0;
 }
 
-/* 72.4% match */
+/* 99.3% match */
 void un_803102D0(void)
 {
-    if (un_804D6ECC == NULL) {
-        un_804D6ECC = lbArchive_LoadSymbols(str_TyDataf_dat, &un_804D6EA8,
-                                            str_tyModelFileTbl, &un_804D6EA4,
-                                            str_tyModelFileUsTbl, NULL);
+    char* temp_r3;
+
+    temp_r3 = un_803FDD18;
+    if ((void*) un_804D6ECC == NULL) {
+        un_804D6ECC = lbArchive_LoadSymbols(temp_r3 + 0xA58, &un_804D6EA8,
+                                            temp_r3 + 0xA64, &un_804D6EA4,
+                                            temp_r3 + 0xA74, NULL);
     }
 }
 
@@ -2351,6 +2423,7 @@ extern f32 un_804DDCF0;
 
 void un_80310324(void)
 {
+    u8 _padA[8];
     char* toy;
     char* data;
     ToyGlobalsS_* tg;
@@ -2943,6 +3016,7 @@ void un_80312050(void)
     u8 color_ff;
     u8 color_00;
     f32 fz, fy, fx;
+    PAD_STACK(40);
 
     data = un_804D6E6C;
     cobj = HSD_CObjGetCurrent();
