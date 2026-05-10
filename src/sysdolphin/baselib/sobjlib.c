@@ -9,6 +9,7 @@
 #include "tev.h"
 #include "tobj.h"
 
+#include "baselib/pobj.h"
 #include "dolphin/gx.h"
 
 #include <dolphin/os.h>
