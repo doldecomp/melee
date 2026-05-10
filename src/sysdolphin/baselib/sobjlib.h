@@ -50,8 +50,7 @@ typedef HSD_SObj HSD_SObj_803A477C_t;
 /* 3A44D4 */ void HSD_SObjLib_803A44D4(HSD_GObj*, HSD_SObj*, u8);
 /* 3A466C */ void HSD_SObjLib_803A466C(HSD_SObj*);
 /* 3A4740 */ void HSD_SObjLib_803A4740(HSD_SObj*);
-/* 3A477C */ HSD_SObj* HSD_SObjLib_803A477C(HSD_GObj*, int, int, int, int,
-                                            int);
+/* 3A477C */ HSD_SObj* HSD_SObjLib_803A477C(HSD_GObj*, int, int, int, u8, int);
 /* 3A49E0 */ void HSD_SObjLib_803A49E0(HSD_GObj*, int);
 /* 3A4A68 */ void HSD_SObjLib_803A4A68(HSD_SObj*);
 /* 3A54EC */ void HSD_SObjLib_803A54EC(HSD_GObj*, int);

@@ -155,11 +155,11 @@ void HSD_SObjLib_803A4740(HSD_SObj* sobj)
 }
 
 HSD_SObj* HSD_SObjLib_803A477C(HSD_GObj* gobj, int desc_arg, int wrap_s,
-                               int wrap_t, int priority, int use_x8)
+                               int wrap_t, u8 priority, int use_x8)
 {
     s32 tlut_name;
     f32 temp_f31;
-    u16 temp_r0;
+    f32 temp_f30;
     HSD_ImageDesc* image;
     HSD_TlutDesc* tlut;
     HSD_ImageDesc* image2;
@@ -224,13 +224,12 @@ HSD_SObj* HSD_SObjLib_803A477C(HSD_GObj* gobj, int desc_arg, int wrap_s,
     sobj->x34 = image->width;
     sobj->x36 = image->height;
     temp_f31 = 1.0f / (f32) GXGetTexObjWidth(&sobj->x50_texobj);
-    temp_r0 = GXGetTexObjHeight(&sobj->x50_texobj);
+    temp_f30 = 1.0f / (f32) GXGetTexObjHeight(&sobj->x50_texobj);
     sobj->x24 = 0.0f;
     sobj->x28 = 0.0f;
     sobj->x2C = (f32) sobj->x34 * temp_f31;
-    sobj->x30 = (f32) sobj->x36 *
-                (1.0f / (f32) temp_r0);
-    HSD_SObjLib_803A44D4(gobj, sobj, (u8) priority);
+    sobj->x30 = (f32) sobj->x36 * temp_f30;
+    HSD_SObjLib_803A44D4(gobj, sobj, priority);
     return sobj;
 }
 
