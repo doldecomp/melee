@@ -55,7 +55,7 @@ struct lbl_8046B488_t;
 /* 160F58 */ float fn_80160F58(u8 ckind);
 /* 161004 */ s32 fn_80161004(MatchEnd*);
 /* 161154 */ UNK_RET fn_80161154(UNK_PARAMS);
-/* 161C90 */ void fn_80161C90(MatchEnd*, s32, u16*);
+/* 161C90 */ void fn_80161C90(MatchEnd*, int, u16*);
 /* 162068 */ void fn_80162068(MatchEnd*);
 /* 162170 */ s32 fn_80162170(MatchEnd*);
 /* 1623A4 */ s32 gm_801623A4(MatchEnd*);

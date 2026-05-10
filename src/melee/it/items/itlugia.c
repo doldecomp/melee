@@ -551,6 +551,8 @@ void it_802D24A0(Item_GObj* gobj)
     case 0xCA:
         multiplier = attrs[3];
         break;
+    default:
+        break;
     }
 
     ip->x40_vel.z *= multiplier;
