@@ -4,6 +4,7 @@
 #include <platform.h>
 
 int hsd_803B51C8(int, int, int, char*, int);
+void hsd_803B3408(int, int, int, int);
 void hsd_803B46D4(void);
 void hsd_803B4A2C(void);
 void hsd_803B5C2C(int);

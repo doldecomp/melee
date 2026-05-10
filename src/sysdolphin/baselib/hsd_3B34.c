@@ -279,6 +279,122 @@ void hsd_803B4A2C(void)
     }
 }
 
+void hsd_803B3408(int arg0, int arg1, int arg2, int arg3)
+{
+    int block_pitch = (((arg3 + 0xF) / 0x10) << 6);
+    int block_row = 0;
+    int y_offset = 0;
+    int uv_offset = 0;
+    int macro = 0;
+    s32* y0 = (s32*) ((u8*) &hsd_804D2648 + 0x118);
+    s32* y1 = (s32*) ((u8*) &hsd_804D2648 + 0x218);
+    s32* cb = (s32*) ((u8*) &hsd_804D2648 + 0x518);
+    s32* cr = (s32*) ((u8*) &hsd_804D2648 + 0x618);
+
+    do {
+        int chroma_base = block_row;
+        int src = arg0 + ((((arg1 / 4) * 0x10) + ((arg2 / 4) * block_pitch) +
+                           y_offset) *
+                          2);
+        int tile = 0;
+        int luma_base = 0;
+
+        do {
+            int row = 0;
+
+            do {
+                int col = 0;
+
+                do {
+                    int group = (col * 4) & 8;
+                    u16* pixel =
+                        (u16*) (src + ((((col * 2) & 2) +
+                                        (group +
+                                         (((row << 5) & 0x20) +
+                                          ((row & 2) * block_pitch)))) *
+                                       2));
+                    u16 packed = *pixel;
+                    int idx = (col & 1) + group +
+                              (chroma_base +
+                               (((row * 4) & 4) + ((row * 0x10) & 0x20)));
+
+                    cb[idx] = (s32) ((0.5f * (f32) ((packed * 8) & 0xF8)) +
+                                     ((-0.1687f *
+                                       (f32) ((packed >> 8) & 0xF8)) -
+                                      (0.3313f * (f32) ((packed >> 3) & 0xFC))));
+                    cr[idx] =
+                        (s32) -((0.0813f * (f32) ((packed * 8) & 0xF8)) -
+                                ((0.5f * (f32) ((packed >> 8) & 0xF8)) -
+                                 (0.4187f * (f32) ((packed >> 3) & 0xFC))));
+                    col += 1;
+                } while (col < 4);
+                row += 1;
+            } while (row < 4);
+
+            {
+                int row8 = uv_offset;
+                int y_block = 0;
+
+                do {
+                    int col4 = 0;
+                    int src_row = row8 * 8;
+
+                    do {
+                        int pair = 0;
+                        int dst_idx = luma_base + src_row;
+
+                        do {
+                            u16 packed = *(u16*) (src + ((((pair << 5) & 0x20) +
+                                                          ((pair & 2) *
+                                                           block_pitch)) *
+                                                         2));
+                            int pair2 = pair + 1;
+                            int pair_off =
+                                ((((pair2 << 5) & 0x20) +
+                                  ((pair2 & 2) * block_pitch)) *
+                                 2);
+
+                            y0[dst_idx] =
+                                (s32) ((0.114f * (f32) ((packed * 8) & 0xF8)) +
+                                       ((0.299f *
+                                         (f32) ((packed >> 8) & 0xF8)) +
+                                        (0.587f *
+                                         (f32) ((packed >> 3) & 0xFC)))) -
+                                0x80;
+                            packed = *(u16*) (src + pair_off);
+                            y1[dst_idx] =
+                                (s32) ((0.114f * (f32) ((packed * 8) & 0xF8)) +
+                                       ((0.299f *
+                                         (f32) ((packed >> 8) & 0xF8)) +
+                                        (0.587f *
+                                         (f32) ((packed >> 3) & 0xFC)))) -
+                                0x80;
+                            dst_idx += 0x80;
+                            pair += 2;
+                        } while (pair < 4);
+
+                        col4 += 1;
+                        src += 2;
+                        src_row += 1;
+                    } while (col4 < 4);
+
+                    y_block += 1;
+                    row8 += 1;
+                } while (y_block < 4);
+            }
+
+            tile += 1;
+            chroma_base += 2;
+            luma_base += 4;
+        } while (tile < 2);
+
+        macro += 1;
+        y_offset += block_pitch;
+        block_row += 0x10;
+        uv_offset += 4;
+    } while (macro < 2);
+}
+
 void hsd_803B46D4(void)
 {
     __jmp_buf* env = &hsd_804D2648;
