@@ -340,8 +340,12 @@ melee/ft/ft_0819.c:
 	.sdata2     start:0x804D83A0 end:0x804D83A8
 
 melee/ft/ft_081B.c:
-	.text       start:0x80081B38 end:0x8008521C
-	.sdata2     start:0x804D83A8 end:0x804D83C0
+	.text       start:0x80081B38 end:0x80084E1C
+	.sdata2     start:0x804D83A8 end:0x804D83B8
+
+melee/ft/ft_084E.c:
+	.text       start:0x80084E1C end:0x8008521C
+	.sdata2     start:0x804D83B8 end:0x804D83C0
 
 melee/ft/ft_0852.c:
 	.text       start:0x8008521C end:0x80085560
