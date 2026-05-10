@@ -9,6 +9,9 @@
 #include "ftCommon/forward.h"
 #include <baselib/forward.h>
 
+// TODO transitive include hack, should be included directly by dependers
+#include <melee/ft/ft_084E.h>
+
 /* 081B38 */ void ft_80081B38(Fighter_GObj* gobj);
 /* 081C88 */ void ft_80081C88(Fighter_GObj* dst_gobj, float scl_y);
 /* 081D0C */ GroundOrAir ft_80081D0C(Fighter_GObj* gobj);
