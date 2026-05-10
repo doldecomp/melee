@@ -149,8 +149,7 @@ void fn_8001FEC4(HSD_GObj* gobj, s32 code)
     BgFlashData* data = &lbl_80433658;
     s32 mode;
     s32 y;
-
-    PAD_STACK(8);
+    PAD_STACK(24);
 
     if (data->state.active) {
         return;

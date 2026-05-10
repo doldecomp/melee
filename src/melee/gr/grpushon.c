@@ -415,9 +415,10 @@ void grPushOn_802190D0(HSD_GObj* gobj)
     lobj = cur == NULL ? NULL : cur->next;
     entry = light_configs;
 
-#define HSD_LObjGetType(lobj) ((u32) ((lobj)->flags & LOBJ_TYPE_MASK))
     for (i = 0; i < 9 && lobj != NULL; i++, entry++) {
-        HSD_ASSERT(0x2BA, HSD_LObjGetType(lobj)==LOBJ_POINT);
+        // Equivalent to HSD_LObjGetType(lobj); inlined here to match
+        // the original assembly (the real function is in lobj.c).
+        HSD_ASSERT(0x2BA, (u32) (lobj->flags & LOBJ_TYPE_MASK) == LOBJ_POINT);
         lobj->flags = LOBJ_POINT | LOBJ_DIFFUSE;
         color = entry->color;
         HSD_LObjSetColor(lobj, color);
@@ -430,7 +431,6 @@ void grPushOn_802190D0(HSD_GObj* gobj)
                             entry->dist_func);
         lobj = lobj == NULL ? NULL : lobj->next;
     }
-#undef HSD_LObjGetType
 }
 
 f32 grPushOn_803E7CCC[13] = {

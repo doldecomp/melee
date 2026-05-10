@@ -249,11 +249,13 @@ inline void quicksort(TySortElem* base, s32 lo, s32 hi)
 
 void un_8031830C(TySortElem* base, s32 lo, s32 hi)
 {
+    PAD_STACK(16);
     quicksort(base, lo, hi);
 }
 
 void un_80318714(TySortElem* base, s32 lo, s32 hi)
 {
+    PAD_STACK(16);
     quicksort(base, lo, hi);
 }
 
@@ -892,8 +894,7 @@ void un_80319EF0(void)
     HSD_CObj* cobj;
     f32 range;
     f32 scale;
-
-    PAD_STACK(0x18);
+    PAD_STACK(16);
 
     cobj = (HSD_CObj*) cfg->x00->hsd_obj;
 
@@ -1480,7 +1481,7 @@ void un_8031B460_OnEnter(void* arg0)
     HSD_GObj* gobj;
     int i;
     char* strbase = (char*) un_803FEFF0;
-    PAD_STACK(16);
+    PAD_STACK(8);
 
     un_804D6F10 = HSD_MemAlloc(0x4B0);
     un_804D6F14 = HSD_MemAlloc(0x12E4);

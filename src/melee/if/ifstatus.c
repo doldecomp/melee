@@ -890,44 +890,48 @@ void ifStatus_802F6E3C(s32 player_num)
 void ifStatus_802F7034(UNK_T arg0)
 {
     lbl_8046B6A0_t* big_thing;
-    int v0;
-    int v1;
-    int v2;
+    int a;
+    int b;
+    int c;
+    u8 unkB;
+    u8 mr;
 
     big_thing = gm_8016AE38();
-
     if (big_thing->unk_10 != 0) {
-        v0 = big_thing->unk_10 - 1;
+        a = big_thing->unk_10 - 1;
     } else {
-        v0 = -1;
+        a = -1;
     }
-
     if (big_thing->unk_14 != 0) {
-        v1 = big_thing->unk_14 - 1;
+        b = big_thing->unk_14 - 1;
     } else {
-        v1 = -1;
+        b = -1;
     }
-
     if (big_thing->unk_18 != 0) {
-        v2 = big_thing->unk_18;
+        c = big_thing->unk_18;
     } else {
-        v2 = 0;
+        c = 0;
     }
 
-    if (big_thing->unk_B != 0) {
-        ifStatus_802F6EA4(big_thing->unk_B - 1, v0, v1, v2, (Event) arg0,
-                          NULL);
-    } else if (big_thing->match_result == 1) {
-        ifStatus_802F6EA4(0, v0, v1, v2, (Event) arg0, NULL);
-    } else if (big_thing->x24C8.x5_1) {
-        if (big_thing->match_result == 6) {
-            ifStatus_802F6EA4(7, v0, v1, v2, (Event) arg0, NULL);
-        } else {
-            ifStatus_802F6EA4(6, v0, v1, v2, (Event) arg0, NULL);
-        }
-    } else {
-        ifStatus_802F6EA4(5, v0, v1, v2, (Event) arg0, NULL);
+    unkB = big_thing->unk_B;
+    if (unkB != 0) {
+        ifStatus_802F6EA4(unkB - 1, a, b, c, arg0, NULL);
+        return;
     }
+    mr = big_thing->match_result;
+    if (mr == 1) {
+        ifStatus_802F6EA4(0, a, b, c, arg0, NULL);
+        return;
+    }
+    if (big_thing->x24C8.x5_1) {
+        if (mr == 6) {
+            ifStatus_802F6EA4(7, a, b, c, arg0, NULL);
+            return;
+        }
+        ifStatus_802F6EA4(6, a, b, c, arg0, NULL);
+        return;
+    }
+    ifStatus_802F6EA4(5, a, b, c, arg0, NULL);
 }
 
 void ifStatus_802F7134(void)
