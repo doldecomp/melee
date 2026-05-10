@@ -277,6 +277,7 @@ void HSD_SObjLib_803A4A68(HSD_SObj* sobj)
     u16 temp_r30;
     u16 temp_r31;
     u8 temp_r29;
+    PAD_STACK(0x20);
 
     if (sobj->x40 & 1) {
         return;
