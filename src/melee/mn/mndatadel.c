@@ -51,7 +51,7 @@ void mnDataDel_8024E940(void)
 
     temp_r31 = mnDataDel_804D6C68->user_data;
     temp_ret = mn_80231634(
-        (struct mn_80231634_t*) temp_r31->x10[mnDataDel_803EF8AC[0]]);
+        (struct mn_80231634_t*) temp_r31->x10[mnDataDel_803EF8AC[1]]);
     lb_80011E24((HSD_JObj*) temp_ret, &sp18, 1, -1);
     temp_f31 = mnDataDel_8024E940_inline(sp18);
     HSD_JObjReqAnimAll(sp18, (0, 1.0f));
@@ -62,7 +62,7 @@ void mnDataDel_8024E940(void)
     HSD_JObjReqAnimAll(sp18, tmp2);
     mn_8022F3D8(sp18, 0xFFU, tmp);
     HSD_JObjAnimAll((0, sp18));
-    temp_r31->x4 = 1;
+    temp_r31->x3[1] = 1;
     gm_801647D0();
     gmMainLib_8015F490();
     var_r30 = (i = 0);
@@ -83,26 +83,24 @@ void mnDataDel_8024E940(void)
 
 void mnDataDel_8024EA6C(void)
 {
-    HSD_JObj* sp18;
     f32 temp_f31;
     f32 temp_f30;
-    s32 temp_r0;
-    s32 temp_r30;
-    s32* var_r30;
     struct MnDataDelGObjUserData* temp_r31;
+    enum_t lang;
+    int i;
     s32 temp_ret;
-    s32 var_r29;
-    PAD_STACK(24);
+    u8 pad[0x8];
+    HSD_JObj* sp18;
+    PAD_STACK(0x10);
 
-    var_r29 = 0;
-    var_r30 = mnDataDel_803EF870.x3C;
     temp_f30 = 1.0f;
     temp_r31 = mnDataDel_804D6C68->user_data;
-    do {
+
+    for (i = 0; i < 6; i++) {
         temp_ret = mn_80231634(
             (struct mn_80231634_t*) ((struct MnDataDelGObjUserData*)
                                          mnDataDel_804D6C68->user_data)
-                ->x10[*var_r30]);
+                ->x10[mnDataDel_803EF8AC[i]]);
         lb_80011E24((HSD_JObj*) temp_ret, &sp18, 1, -1);
         temp_f31 = mn_8022F298(sp18);
         HSD_JObjReqAnimAll(sp18, temp_f30);
@@ -111,23 +109,20 @@ void mnDataDel_8024EA6C(void)
         HSD_JObjReqAnimAll(sp18, temp_f31);
         mn_8022F3D8(sp18, 0xFFU, (enum _HSD_TypeMask) 0x480);
         HSD_JObjAnimAll(sp18);
-        temp_r0 = var_r29 + 3;
-        var_r29 += 1;
-        *((u8*) temp_r31 + temp_r0) = 1;
-        var_r30 += 1;
-    } while (var_r29 < 6);
+        temp_r31->x3[i] = 1;
+    }
 
-    temp_r30 = lbLang_GetSavedLanguage();
+    lang = lbLang_GetSavedLanguage();
     gmMainLib_8015FBA4();
     gm_801A3EF4();
-    if (temp_r30 == lbLang_GetSavedLanguage()) {
+    if (lang == lbLang_GetSavedLanguage()) {
         lbAudioAx_800237A8(0xBF, 0x7F, 0x40);
     } else {
-        lbLang_SetSavedLanguage(temp_r30);
+        lbLang_SetSavedLanguage(lang);
         lbAudioAx_80027AB0(0xBF);
     }
     gm_801603B0();
-    gmMainLib_8015F588((s32) gmMainLib_8015F4E8());
+    gmMainLib_8015F588((u8) gmMainLib_8015F4E8());
     gm_801729EC();
     lb_8001CE00();
 }
@@ -146,15 +141,15 @@ void mnDataDel_8024EBC8(HSD_JObj* root, u8 unused, u8 a, u8 b)
     lb_80011E24(root, &j2, WARN_JOINT_BACKGROUND, -1);
     if (a) {
         if (b) {
-            frame = mnDataDel_803EF870.x18.end_frame;
+            frame = mnDataDel_803EF888.end_frame;
         } else {
-            frame = mnDataDel_803EF870.x18.start_frame;
+            frame = mnDataDel_803EF888.start_frame;
         }
     } else {
         if (b) {
-            frame = mnDataDel_803EF870.x24.end_frame;
+            frame = mnDataDel_803EF894.end_frame;
         } else {
-            frame = mnDataDel_803EF870.x24.start_frame;
+            frame = mnDataDel_803EF894.start_frame;
         }
     }
     HSD_JObjReqAnimAll(j2, frame);
@@ -176,23 +171,21 @@ void fn_8024ECCC(HSD_GObj* arg0)
     s32 sis_id;
     u8 visible;
     u8 cursor_idx;
-    struct MnDataDelData* anim_data;
     struct WarnCmnData* data;
     PAD_STACK(16);
 
-    anim_data = &mnDataDel_803EF870;
     root = GET_JOBJ(arg0);
     data = mnDataDel_804D6C68->user_data;
     lb_80011E24(root, &panel, WARN_JOINT_PANEL, -1);
     if (data->visible != 0) {
         curr_frame = mn_8022F298(root);
-        if ((anim_data->x30.start_frame <= curr_frame) &&
-            (curr_frame < anim_data->x30.end_frame))
+        if ((mnDataDel_803EF8A0.start_frame <= curr_frame) &&
+            (curr_frame < mnDataDel_803EF8A0.end_frame))
         {
-            curr_frame = mn_8022EFD8(panel, &anim_data->x30);
-            lb_80011E24(root, &exclaim, WARN_JOINT_EXCLAIM, -1, curr_frame);
-            mn_8022EFD8(exclaim, &anim_data->x30);
-            if (curr_frame >= anim_data->x30.end_frame) {
+            curr_frame = mn_8022EFD8(panel, &mnDataDel_803EF8A0);
+            lb_80011E24(root, &exclaim, WARN_JOINT_EXCLAIM, -1);
+            mn_8022EFD8(exclaim, &mnDataDel_803EF8A0);
+            if (curr_frame >= mnDataDel_803EF8A0.end_frame) {
                 visible = data->visible;
                 if (mnDataDel_804D6C6C != NULL) {
                     HSD_SisLib_803A5CC4(mnDataDel_804D6C6C);
@@ -203,8 +196,8 @@ void fn_8024ECCC(HSD_GObj* arg0)
                     sis_id = 319;
                 }
                 text = HSD_SisLib_803A5ACC(
-                    0, 1, mnDataDel_803EF870.x64, mnDataDel_803EF870.x68,
-                    mnDataDel_803EF870.x6C, 250.0f, 5.0f);
+                    0, 1, lbl_803EF8D4.x, lbl_803EF8D4.y,
+                    lbl_803EF8D4.z, 250.0f, 5.0f);
                 mnDataDel_804D6C6C = text;
                 text->font_size.x = 0.05f;
                 text->font_size.y = 0.05f;
@@ -356,8 +349,8 @@ void fn_8024F318(HSD_GObj* gobj)
                     sis_id = 0x13F;
                 }
                 text = HSD_SisLib_803A5ACC(
-                    0, 1, mnDataDel_803EF870.x64, mnDataDel_803EF870.x68,
-                    mnDataDel_803EF870.x6C, 250.0f, 5.0f);
+                    0, 1, lbl_803EF8D4.x, lbl_803EF8D4.y,
+                    lbl_803EF8D4.z, 250.0f, 5.0f);
                 mnDataDel_804D6C6C = text;
                 text->font_size.x = 0.05f;
                 text->font_size.y = 0.05f;
@@ -379,7 +372,7 @@ void fn_8024F318(HSD_GObj* gobj)
             case 0:
                 joint = (HSD_JObj*) mn_80231634(
                     (struct mn_80231634_t*)
-                        user_data->x10[mnDataDel_803EF870.x3C[0]]);
+                        user_data->x10[mnDataDel_803EF8AC[0]]);
                 lb_80011E24(joint, &joint, 1, -1);
                 frame = mn_8022F298(joint);
                 HSD_JObjReqAnimAll(joint, 1.0f);
@@ -388,7 +381,7 @@ void fn_8024F318(HSD_GObj* gobj)
                 HSD_JObjReqAnimAll(joint, frame);
                 mn_8022F3D8(joint, 0xFFU, (enum _HSD_TypeMask) 0x480);
                 HSD_JObjAnimAll(joint);
-                user_data->x3 = 1;
+                user_data->x3[0] = 1;
                 gm_8016505C();
                 gmMainLib_8015F464();
                 gm_801729EC();
@@ -401,7 +394,7 @@ void fn_8024F318(HSD_GObj* gobj)
             case 2:
                 joint = (HSD_JObj*) mn_80231634(
                     (struct mn_80231634_t*)
-                        user_data->x10[mnDataDel_803EF870.x3C[2]]);
+                        user_data->x10[mnDataDel_803EF8AC[2]]);
                 lb_80011E24(joint, &joint, 1, -1);
                 frame = mn_8022F298(joint);
                 HSD_JObjReqAnimAll(joint, 1.0f);
@@ -410,7 +403,7 @@ void fn_8024F318(HSD_GObj* gobj)
                 HSD_JObjReqAnimAll(joint, frame);
                 mn_8022F3D8(joint, 0xFFU, (enum _HSD_TypeMask) 0x480);
                 HSD_JObjAnimAll(joint);
-                user_data->x5 = 1;
+                user_data->x3[2] = 1;
                 gmMainLib_8015EEC8();
                 gm_801729EC();
                 lb_8001CE00();
@@ -418,7 +411,7 @@ void fn_8024F318(HSD_GObj* gobj)
             case 3:
                 joint = (HSD_JObj*) mn_80231634(
                     (struct mn_80231634_t*)
-                        user_data->x10[mnDataDel_803EF870.x3C[3]]);
+                        user_data->x10[mnDataDel_803EF8AC[3]]);
                 lb_80011E24(joint, &joint, 1, -1);
                 frame = mn_8022F298(joint);
                 HSD_JObjReqAnimAll(joint, 1.0f);
@@ -427,7 +420,7 @@ void fn_8024F318(HSD_GObj* gobj)
                 HSD_JObjReqAnimAll(joint, frame);
                 mn_8022F3D8(joint, 0xFFU, (enum _HSD_TypeMask) 0x480);
                 HSD_JObjAnimAll(joint);
-                user_data->x6 = 1;
+                user_data->x3[3] = 1;
                 gmMainLib_8015F150();
                 gmMainLib_8015F260();
                 gm_801729EC();
@@ -436,7 +429,7 @@ void fn_8024F318(HSD_GObj* gobj)
             case 4:
                 joint = (HSD_JObj*) mn_80231634(
                     (struct mn_80231634_t*)
-                        user_data->x10[mnDataDel_803EF870.x3C[4]]);
+                        user_data->x10[mnDataDel_803EF8AC[4]]);
                 lb_80011E24(joint, &joint, 1, -1);
                 frame = mn_8022F298(joint);
                 HSD_JObjReqAnimAll(joint, 1.0f);
@@ -445,7 +438,7 @@ void fn_8024F318(HSD_GObj* gobj)
                 HSD_JObjReqAnimAll(joint, frame);
                 mn_8022F3D8(joint, 0xFFU, (enum _HSD_TypeMask) 0x480);
                 HSD_JObjAnimAll(joint);
-                user_data->x7 = 1;
+                user_data->x3[4] = 1;
                 un_80311960();
                 gmMainLib_8015F4BC();
                 gm_80174238();
@@ -522,7 +515,7 @@ void fn_8024F840(HSD_GObj* gobj)
         lbAudioAx_80024030(2);
         joint = (HSD_JObj*) mn_80231634(
             (struct mn_80231634_t*) user_data
-                ->x10[((s32*) &mnDataDel_803EF870.x3C)[user_data->x0]]);
+                ->x10[mnDataDel_803EF8AC[user_data->x0]]);
         mnDataDel_8024EBC8(joint, user_data->x0, 0U, 0U);
         cursor = user_data->x0;
         if (cursor != 0) {
@@ -532,12 +525,13 @@ void fn_8024F840(HSD_GObj* gobj)
         }
         joint = (HSD_JObj*) mn_80231634(
             (struct mn_80231634_t*) user_data
-                ->x10[((s32*) &mnDataDel_803EF870.x3C)[user_data->x0]]);
+                ->x10[mnDataDel_803EF8AC[user_data->x0]]);
         mnDataDel_8024EBC8(joint, user_data->x0, 1U, 0U);
+        user_data = mnDataDel_804D6C68->user_data;
         if (user_data->xC != NULL) {
             HSD_SisLib_803A5CC4(user_data->xC);
         }
-        sis_id = ((u16*) &mnDataDel_803EF870.x58)[user_data->x0];
+        sis_id = mnDataDel_803EF8C8[user_data->x0];
         text = HSD_SisLib_803A5ACC(0, 0, -9.5f, 9.1f, 17.0f, 364.68332f,
                                    38.38772f);
         user_data->xC = text;
@@ -550,7 +544,7 @@ void fn_8024F840(HSD_GObj* gobj)
         lbAudioAx_80024030(2);
         joint = (HSD_JObj*) mn_80231634(
             (struct mn_80231634_t*) user_data
-                ->x10[((s32*) &mnDataDel_803EF870.x3C)[user_data->x0]]);
+                ->x10[mnDataDel_803EF8AC[user_data->x0]]);
         mnDataDel_8024EBC8(joint, user_data->x0, 0U, 0U);
         cursor = user_data->x0;
         if (cursor == 5) {
@@ -560,12 +554,13 @@ void fn_8024F840(HSD_GObj* gobj)
         }
         joint = (HSD_JObj*) mn_80231634(
             (struct mn_80231634_t*) user_data
-                ->x10[((s32*) &mnDataDel_803EF870.x3C)[user_data->x0]]);
+                ->x10[mnDataDel_803EF8AC[user_data->x0]]);
         mnDataDel_8024EBC8(joint, user_data->x0, 1U, 0U);
+        user_data = mnDataDel_804D6C68->user_data;
         if (user_data->xC != NULL) {
             HSD_SisLib_803A5CC4(user_data->xC);
         }
-        sis_id = ((u16*) &mnDataDel_803EF870.x58)[user_data->x0];
+        sis_id = mnDataDel_803EF8C8[user_data->x0];
         text = HSD_SisLib_803A5ACC(0, 0, -9.5f, 9.1f, 17.0f, 364.68332f,
                                    38.38772f);
         user_data->xC = text;
@@ -585,10 +580,10 @@ void fn_8024FBA4(HSD_GObj* gobj)
 
     data = &mnDataDel_803EF870;
     user_data = gobj->user_data;
-    frame = mn_8022EE84(GET_JOBJ(gobj), &data->xC, (enum _HSD_TypeMask) 0x480);
+    frame = mn_8022EE84(GET_JOBJ(gobj), &mnDataDel_803EF870.xC, (enum _HSD_TypeMask) 0x480);
     for (i = 0; i < 6; i++) {
         mn_8022EE84(*(HSD_JObj**) (user_data +
-                                   ((s32*) ((u8*) &data->x3C))[i] * 4 + 0x10),
+                                   mnDataDel_803EF8AC[i] * 4 + 0x10),
                     &data->xC, (enum _HSD_TypeMask) 0x480);
     }
     if (frame >= data->xC.end_frame) {
@@ -606,10 +601,8 @@ void fn_8024FC48(HSD_GObj* gobj)
 {
     s32 i;
     HSD_JObj* jobj;
-    struct MnDataDelData* data;
     u8* user_data;
 
-    data = &mnDataDel_803EF870;
     user_data = gobj->user_data;
 
     if (mn_804A04F0.cur_menu != 0x18) {
@@ -623,14 +616,14 @@ void fn_8024FC48(HSD_GObj* gobj)
             lb_80011E24(
                 fn_8024FC48_inline(mn_80231634(
                     *(struct mn_80231634_t**) ((u8*) gobj->user_data +
-                                               ((s32*) ((u8*) &data->x3C))[i] *
+                                               mnDataDel_803EF8AC[i] *
                                                    4 +
                                                0x10))),
                 &jobj, 1, -1);
             if (user_data[0] == i) {
-                mn_8022EC18(jobj, &data->x18, (HSD_TypeMask) 0x400);
+                mn_8022EC18(jobj, &mnDataDel_803EF888, (HSD_TypeMask) 0x400);
             } else {
-                mn_8022EC18(jobj, &data->x24, (HSD_TypeMask) 0x400);
+                mn_8022EC18(jobj, &mnDataDel_803EF894, (HSD_TypeMask) 0x400);
             }
         }
     }
@@ -638,16 +631,14 @@ void fn_8024FC48(HSD_GObj* gobj)
 
 void fn_8024FD40(HSD_GObj* gobj)
 {
-    HSD_JObj* jobj;
-    HSD_GObjProc* proc;
     f32 frame;
     s32 i;
     struct MnDataDelGObjUserData* user_data;
-    struct MnDataDelData* data;
+    HSD_GObjProc* proc;
+    HSD_JObj* jobj;
     PAD_STACK(16);
 
     jobj = GET_JOBJ(gobj);
-    data = &mnDataDel_803EF870;
     user_data = gobj->user_data;
     if ((u8) mn_804A04F0.cur_menu != 0x18) {
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
@@ -656,12 +647,12 @@ void fn_8024FD40(HSD_GObj* gobj)
         HSD_SisLib_803A5CC4(user_data->xC);
         return;
     }
-    frame = mn_8022EE84(jobj, &data->x0, (enum _HSD_TypeMask) 0x480);
+    frame = mn_8022EE84(jobj, &mnDataDel_803EF870.x0, (enum _HSD_TypeMask) 0x480);
     for (i = 0; i < 6; i++) {
-        mn_8022EE84(user_data->x10[data->x3C[i]], &data->x0,
+        mn_8022EE84(user_data->x10[mnDataDel_803EF8AC[i]], &mnDataDel_803EF870.x0,
                     (enum _HSD_TypeMask) 0x480);
     }
-    if (frame == data->x0.end_frame) {
+    if (frame == mnDataDel_803EF870.x0.end_frame) {
         HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
         proc = HSD_GObj_SetupProc(gobj, fn_8024FC48, 0);
         proc->flags_3 = HSD_GObj_804D783C;
@@ -679,7 +670,6 @@ void mnDataDel_8024FE4C(u8 arg0)
     f32 frame;
     s32 enabled;
     s32 i;
-    s32* offsets;
     u16 sis_id;
     u8 is_enabled;
     struct MnDataDelGObjUserData* user_data;
@@ -699,20 +689,16 @@ void mnDataDel_8024FE4C(u8 arg0)
     user_data->x0 = arg0;
     user_data->x1 = 0;
     user_data->x2 = 0;
-    user_data->x3 = 0;
-    user_data->x4 = 0;
-    user_data->x5 = 0;
-    user_data->x6 = 0;
-    user_data->x7 = 0;
-    user_data->x8 = 0;
+    for (i = 0; i < ARRAY_SIZE(user_data->x3); i++) {
+        user_data->x3[i] = 0;
+    }
     user_data->xC = NULL;
     GObj_InitUserData(gobj, 0U, HSD_Free, user_data);
-    for (i = 0; i < 8; i++) {
+    for (i = 0; i < (int) ARRAY_SIZE(user_data->x10); i++) {
         lb_80011E24(root, &user_data->x10[i], i, -1);
     }
     proc = HSD_GObj_SetupProc(gobj, fn_8024FD40, 0U);
     proc->flags_3 = HSD_GObj_804D783C;
-    offsets = mnDataDel_803EF870.x3C;
     for (i = 0; i < 6; i++) {
         joint = HSD_JObjLoadJoint(mnDataDel_804A0928.joint);
         HSD_JObjAddAnimAll(joint, mnDataDel_804A0928.animjoint,
@@ -720,7 +706,7 @@ void mnDataDel_8024FE4C(u8 arg0)
                            mnDataDel_804A0928.shapeanim_joint);
         HSD_JObjReqAnimAll(joint, (f32) i);
         HSD_JObjAnimAll(joint);
-        HSD_JObjAddChild(user_data->x10[*offsets], joint);
+        HSD_JObjAddChild(user_data->x10[mnDataDel_803EF8AC[i]], joint);
         mnDataDel_8024EBC8(joint, i, user_data->x0 == i, 1U);
         is_enabled = ((u8*) &user_data->x3)[i];
         lb_80011E24(joint, &child, 1, -1);
@@ -736,13 +722,12 @@ void mnDataDel_8024FE4C(u8 arg0)
         HSD_JObjReqAnimAll(child, frame);
         mn_8022F3D8(child, 0xFFU, (enum _HSD_TypeMask) 0x480);
         HSD_JObjAnimAll(child);
-        offsets++;
     }
-    text = user_data->xC;
-    if (text != NULL) {
-        HSD_SisLib_803A5CC4(text);
+    user_data = gobj->user_data;
+    if (user_data->xC != NULL) {
+        HSD_SisLib_803A5CC4(user_data->xC);
     }
-    sis_id = ((u16*) &mnDataDel_803EF870.x58)[user_data->x0];
+    sis_id = mnDataDel_803EF8C8[user_data->x0];
     text =
         HSD_SisLib_803A5ACC(0, 0, -9.5f, 9.1f, 17.0f, 364.68332f, 38.38772f);
     user_data->xC = text;
