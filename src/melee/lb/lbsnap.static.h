@@ -50,12 +50,14 @@ struct Unk803BACC8 {
     char pad0[0x14];
     int x14;
     char pad18[0x1C - 0x18];
-    struct Unk80433380_0* x1C;
+    void* x1C;
+    struct Unk80433380_0* x20;
+    u32 pad[2];
 };
 
 static struct Unk80433380 lbSnap_80433380;
 static struct Unk803BACC8 lbSnap_803BACC8 = {
-    { 2, 0, 1, 0, 0, 0, 0, 0, 0, 0, 3 }, 0, { 0, 0, 0, 3 }, (void*) -1
+    { 2, 0, 1, 0, 0, 0, 0, 0, 0, 0, 3 }, 0, { 0, 0, 0, 3 }, 0, (void*) -1
 };
 
 #endif

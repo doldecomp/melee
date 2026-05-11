@@ -130,11 +130,16 @@ melee/lb/lbanim.c:
 	.sdata2     start:0x804D7CC0 end:0x804D7CC8
 
 melee/lb/lbmthp.c:
-	.text       start:0x8001E910 end:0x8001FC08
+	.text       start:0x8001E910 end:0x8001F890
 	.data       start:0x803BADB0 end:0x803BB000
-	.bss        start:0x804333E0 end:0x80433658
+	.bss        start:0x804333E0 end:0x804335B8
 	.sdata      start:0x804D3830 end:0x804D3840
-	.sdata2     start:0x804D7CC8 end:0x804D7CE8
+	.sdata2     start:0x804D7CC8 end:0x804D7CE0
+
+melee/lb/lb_01F8.c:
+	.text       start:0x8001F890 end:0x8001FC08
+	.bss        start:0x804335B8 end:0x80433658
+	.sdata2     start:0x804D7CE0 end:0x804D7CE8
 
 melee/lb/lbbgflash.c:
 	.text       start:0x8001FC08 end:0x80021CE8
