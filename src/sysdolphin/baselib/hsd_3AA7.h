@@ -30,8 +30,8 @@ typedef struct CardState {
 /* 3AC334 */ UNK_RET fn_803AC334(UNK_PARAMS);
 /* 3AC340 */ int hsd_803AC340(void* header);
 /* 3AC3E0 */ void hsd_803AC3E0(struct hsd_803AC3E0_arg0_t* file_desc,
-                               int file_idx, int file_size, int file_offset,
-                               int file_flags);
+                               int file_idx, int file_size, int file_flags,
+                               int data_size);
 /* 3AC3F8 */ void fn_803AC3F8(void*, u8*, s32);
 /* 3AC558 */ void hsd_803AC558(struct hsd_803AC3E0_arg0_t*, u8*);
 /* 3AC634 */ u32 fn_803AC634(struct hsd_803AC3E0_arg0_t* file_desc,
