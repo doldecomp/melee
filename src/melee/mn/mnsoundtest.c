@@ -77,6 +77,7 @@ AnimLoopSettings vec_5 = {
 };
 Vec3 vec_6 = { -2, -6.6, 0 };
 Vec3 vec_7 = { -1.7, -4.7, 0 };
+Vec3 vec_8 = { -1.7, 2, 0 };
 
 typedef struct {
     u16 text_id;
@@ -118,7 +119,7 @@ soundtest_data data_2[] = {
 u8 data_3[] = { 0,  1,  2,  3,  4,  5,  6,  7,  8,  9,  10, 11, 12, 13, 14,
                 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29 };
 
-u32 data_4[] = { 25, 8,  1,  6,  16, 17, 4,  2,  13, 0,  11, 5,  12, 14, 18,
+s32 data_4[] = { 25, 8,  1,  6,  16, 17, 4,  2,  13, 0,  11, 5,  12, 14, 18,
                  7,  15, 10, 9,  3,  21, 20, 24, 19, 23, 22, 29, 28, 26, 27,
                  6,  8,  11, 18, 14, 15, 16, 17, 18, 19, 20, 21, 22, 24, 13,
                  25, 26, 28, 27, 10, 7,  9,  31, 23, 30, 4,  0,  39, 3,  32 };
@@ -252,8 +253,8 @@ void mnSoundTest_8024AA70(HSD_GObj* arg0, u8 arg1)
         }
         temp_r3_2 = HSD_SisLib_803A6754(0, 0);
         new_var->unk1C = (temp_r3_4 = temp_r3_2);
-        temp_f1 = vec_7.y;
-        temp_r3_2->pos_x = vec_7.x;
+        temp_f1 = vec_8.y;
+        temp_r3_2->pos_x = vec_8.x;
         temp_r3_2->pos_y = temp_f1;
         temp_r3_2->pos_z = 18.0f;
         temp_r3_2->font_size.x = 0.04f;
@@ -351,8 +352,8 @@ static inline void fn_8024AED0_inline(HSD_GObj* arg0)
     }
     temp_r3_6 = HSD_SisLib_803A6754(0, 0);
     temp_r28_4->unk1C = temp_r3_6;
-    temp_r3_6->pos_x = vec_6.x;
-    temp_r3_6->pos_y = vec_6.y;
+    temp_r3_6->pos_x = vec_8.y;
+    temp_r3_6->pos_y = vec_8.x;
     temp_r3_6->pos_z = 18.0f;
     temp_r3_6->font_size.x = 0.04f;
     temp_r3_6->font_size.y = 0.04f;
@@ -437,7 +438,7 @@ void fn_8024AED0(HSD_GObj* arg0)
             HSD_JObjReqAnimAll(sp7C, vec_4.start_frame);
             mn_8022F3D8(sp7C, 0xFFU, MOBJ_MASK);
             HSD_JObjAnimAll(sp7C);
-        } else if (events & MenuInput_LTrigger) {
+        } else if (events & MenuInput_StartButton) {
             if (user_data->unkC == 1.0f) {
                 user_data->unkC = 0.98f;
             }
@@ -799,16 +800,16 @@ void mnSoundTest_8024BCA0(int arg0)
     text->font_size.y = 0.0521f;
     HSD_SisLib_803A6368(text, 0xBE);
     temp_r29_2 = user_data->unk0;
-    mnSoundTest_8024ABF8(gobj, (u8) (-(s32) temp_r29_2 == 0));
+    mnSoundTest_8024ABF8(gobj, temp_r29_2 == 0);
     mnSoundTest_8024AD58(gobj, temp_r29_2);
-    temp_r29_3 = data_4[user_data->unk3];
+    temp_r29_3 = data_3[user_data->unk3];
     lb_80011E24(GET_JOBJ(gobj), &sp24, 0x15, -1);
-    HSD_JObjReqAnimAll(sp24, (f32) data_4[temp_r29_3 + 30]);
+    HSD_JObjReqAnimAll(sp24, data_4[temp_r29_3]);
     mn_8022F3D8(sp24, 0xFFU, 0xA0);
     HSD_JObjAnimAll(sp24);
 }
 
-s32 mnSoundTest_8024BEE0(s32 arg0)
+HSD_GObjProc* mnSoundTest_8024BEE0(s32 arg0)
 {
     HSD_GObjProc* proc;
     s32 temp_ret;
@@ -830,5 +831,5 @@ s32 mnSoundTest_8024BEE0(s32 arg0)
     mnSoundTest_8024BCA0(arg0);
     proc = HSD_GObj_SetupProc(GObj_Create(0U, 1U, 0x80U), fn_8024B2B0, 0U);
     proc->flags_3 = HSD_GObj_804D783C;
-    return (s32) proc;
+    return proc;
 }
