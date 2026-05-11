@@ -1,6 +1,5 @@
-#include "lbmthp.h"
-
 #include "lbfile.h"
+#include "lbmthp.h"
 
 #include <sysdolphin/baselib/memory.h>
 #include <sysdolphin/baselib/sobjlib.h>
@@ -45,8 +44,8 @@ void* lbMthp8001F890(HSD_GObj* gobj)
     lbl_804335B8.x80 = 0.0F;
     lbl_804335B8.x88 = &lbl_804335B8.x70;
     lbl_804335B8.x8C = 0;
-    lbl_804335B8.x90 = HSD_SObjLib_803A477C(
-        gobj, (int) &lbl_804335B8.x88, 0, 0, 0x80, 0);
+    lbl_804335B8.x90 =
+        HSD_SObjLib_803A477C(gobj, (int) &lbl_804335B8.x88, 0, 0, 0x80, 0);
     lbl_804335B8.x90->x40 |= 0x10;
     return lbl_804335B8.x90;
 }
@@ -59,22 +58,19 @@ void lbMthp8001F928(HSD_GObj* gobj, int arg1)
     /* First texture - full size */
     GXInitTexObj(&lbl_804335B8.tex0, lbl_804335B8.x20, lbl_804335B8.x6C,
                  lbl_804335B8.x6E, 1, 0, 0, 0);
-    GXInitTexObjLOD(&lbl_804335B8.tex0, 0, 0, 0.0F, 0.0F,
-                    0.0F, 0, 0, 0);
+    GXInitTexObjLOD(&lbl_804335B8.tex0, 0, 0, 0.0F, 0.0F, 0.0F, 0, 0, 0);
     GXLoadTexObj(&lbl_804335B8.tex0, 0);
 
     /* Second texture - half size */
     GXInitTexObj(&lbl_804335B8.tex1, lbl_804335B8.x44, (u16) (*pWidth >> 1),
                  (u16) (*pHeight >> 1), 1, 0, 0, 0);
-    GXInitTexObjLOD(&lbl_804335B8.tex1, 0, 0, 0.0F, 0.0F,
-                    0.0F, 0, 0, 0);
+    GXInitTexObjLOD(&lbl_804335B8.tex1, 0, 0, 0.0F, 0.0F, 0.0F, 0, 0, 0);
     GXLoadTexObj(&lbl_804335B8.tex1, 1);
 
     /* Third texture - half size */
     GXInitTexObj(&lbl_804335B8.tex2, lbl_804335B8.x68, (u16) (*pWidth >> 1),
                  (u16) (*pHeight >> 1), 1, 0, 0, 0);
-    GXInitTexObjLOD(&lbl_804335B8.tex2, 0, 0, 0.0F, 0.0F,
-                    0.0F, 0, 0, 0);
+    GXInitTexObjLOD(&lbl_804335B8.tex2, 0, 0, 0.0F, 0.0F, 0.0F, 0, 0, 0);
     GXLoadTexObj(&lbl_804335B8.tex2, 2);
 
     HSD_SObjLib_803A49E0(gobj, arg1);

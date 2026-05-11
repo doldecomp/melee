@@ -84,12 +84,7 @@ static AnimLoopSettings mnDataDel_803EF8A0 = {
 }; /// mnDataDel_803EF870[4]
 static u32 mnDataDel_803EF8AC[] = { 1, 2, 3, 4, 5, 6, 7 };
 static u16 mnDataDel_803EF8C8[] = {
-    0xC0,
-    0xC1,
-    0xC2,
-    0xC3,
-    0xC4,
-    0xC6,
+    0xC0, 0xC1, 0xC2, 0xC3, 0xC4, 0xC6,
 };
 static Vec3 lbl_803EF8D4 = { -5.5, -2.8, 23 };
 static StaticModelDesc mnDataDel_804A0918;
