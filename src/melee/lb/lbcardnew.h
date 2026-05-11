@@ -4,6 +4,8 @@
 #include <placeholder.h>
 #include <platform.h>
 
+#include <melee/lb/forward.h>
+
 #include <sysdolphin/baselib/gobj.h>
 
 /* 019BB8 */ int lb_80019BB8(int card_result);
@@ -54,8 +56,9 @@
 /* 01BF04 */ int lb_8001BF04(int chan, char* filename, void* file_entries,
                              const char* write_buf, int write_offset,
                              int write_len, UNK_T status_out);
-/* 01BFD8 */ int lb_8001BFD8(int chan, UNK_T snap_buf, UNK_T snap_count,
-                             UNK_T snap_max);
+/* 01BFD8 */ int lb_8001BFD8(int chan,
+                             lbCardNew_SnapshotEntry* snapshot_entries,
+                             int* free_blocks, int* free_files);
 /* 01C0F4 */ int lb_8001C0F4(int chan, const char* name_a, const char* name_b,
                              const char* name_c, UNK_T status_out);
 /* 01C2D8 */ int lb_8001C2D8(int chan, const char* company,

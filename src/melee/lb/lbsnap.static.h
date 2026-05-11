@@ -7,20 +7,14 @@
 #include <platform.h>
 
 #include "it/types.h"
-
-struct Unk80433380_48_10 {
-    unsigned int unk0;
-    s16 unk4;
-    u16 unk6;
-};
-STATIC_ASSERT(sizeof(struct Unk80433380_48_10) == 0x8);
+#include "lb/types.h"
 
 struct Unk80433380_48 {
-    int unk0;
+    int card_result;
     int num;
-    int unk8;
-    int unkC;
-    struct Unk80433380_48_10 unk10[0x7F];
+    int free_blocks;
+    int free_files;
+    lbCardNew_SnapshotEntry entries[0x7F];
 };
 STATIC_ASSERT(sizeof(struct Unk80433380_48) == 0x408);
 

@@ -311,6 +311,13 @@ struct lb_80432A68_38_t {
 };
 STATIC_ASSERT(sizeof(struct lb_80432A68_38_t) == 0x8);
 
+struct lbCardNew_SnapshotEntry {
+    /* 0x0 */ u32 time;
+    /* 0x4 */ s16 file_no;
+    /* 0x6 */ u16 blocks;
+};
+STATIC_ASSERT(sizeof(lbCardNew_SnapshotEntry) == 0x8);
+
 struct lb_80432A68_t {
     /* 0x000 */ UNK_T work_area;
     /* 0x004 */ UNK_T lib_area;
@@ -320,9 +327,9 @@ struct lb_80432A68_t {
     /* 0x014 */ const char* unk_14;
     /* 0x018 */ s32 unk_18;
     /* 0x01C */ s32 unk_1C;
-    /* 0x020 */ UNK_T unk_20;
-    /* 0x024 */ int* unk_24;
-    /* 0x028 */ int* unk_28;
+    /* 0x020 */ lbCardNew_SnapshotEntry* snapshot_entries;
+    /* 0x024 */ int* free_blocks;
+    /* 0x028 */ int* free_files;
     /* 0x02C */ char x2C[2];
     /* 0x02C */ char x2E;
     /* 0x02C */ char x2F[4];

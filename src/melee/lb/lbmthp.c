@@ -50,7 +50,7 @@ void fn_8001E910(int arg0, int arg1, void* arg2, bool cancelflag)
         Movieplayer.unk_138 = 0;
         if ((u32) Movieplayer.unk_74 != (u32) Movieplayer.unk_40) {
             struct lbl_804333E0_t* streamPlayer = &Movieplayer;
-            HSD_ASSERTREPORT(0x121, (u32)streamPlayer->currPackedSize != 0,
+            HSD_ASSERTREPORT(0x121, (u32) streamPlayer->currPackedSize != 0,
                              "filnum = %d, ofs = %d, by sugano.",
                              Movieplayer.unk_128, Movieplayer.unk_120);
 
@@ -340,7 +340,7 @@ s32 fn_8001F13C(THPDecComp* streamPlayer)
         streamPlayer->unk_13C = OSGetTick();
         streamPlayer->unk_138 = 0;
         if (streamPlayer->unk_74 != streamPlayer->unk_40) {
-            HSD_ASSERTREPORT(0x121, (u32)streamPlayer->currPackedSize != 0,
+            HSD_ASSERTREPORT(0x121, (u32) streamPlayer->currPackedSize != 0,
                              "filnum = %d, ofs = %d, by sugano.",
                              streamPlayer->unk_128, streamPlayer->unk_120);
             HSD_DevComRequest(streamPlayer->unk_128, streamPlayer->unk_120,

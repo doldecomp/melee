@@ -6,6 +6,7 @@
 
 #include "lb/forward.h"
 #include <baselib/forward.h>
+
 #include <dolphin/gx/GXStruct.h>
 
 /* THPDec function declarations */
