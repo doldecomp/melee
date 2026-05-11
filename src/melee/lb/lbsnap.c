@@ -36,10 +36,10 @@ int lbSnap_8001D338(int arg0)
 int lbSnap_8001D350(int chan)
 {
     struct Unk80433380_48* ptr = &lbSnap_80433380.x48[chan];
-    if (ptr->unk0 == 0 && lbSnap_80433380.x54_stateChanged[chan]) {
-        ptr->unk0 = 8;
+    if (ptr->card_result == 0 && lbSnap_80433380.x54_stateChanged[chan]) {
+        ptr->card_result = 8;
     }
-    return ptr->unk0;
+    return ptr->card_result;
 }
 
 int lbSnap_8001D394(int chan)
@@ -49,34 +49,35 @@ int lbSnap_8001D394(int chan)
 
 int lbSnap_8001D3B0(int chan)
 {
-    return lbSnap_80433380.x48[chan].unk8;
+    return lbSnap_80433380.x48[chan].free_blocks;
 }
 
 int lbSnap_8001D3CC(int chan)
 {
-    return lbSnap_80433380.x48[chan].unkC;
+    return lbSnap_80433380.x48[chan].free_files;
 }
 
 int lbSnap_8001D3E8(int chan, int index)
 {
-    return lbSnap_80433380.x48[chan].unk10[index].unk6;
+    return lbSnap_80433380.x48[chan].entries[index].blocks;
 }
 
 int lbSnap_8001D40C(int chan)
 {
     struct Unk80433380_48* ptr = &lbSnap_80433380.x48[chan];
     lbSnap_80433380.x54_stateChanged[chan] = 0;
-    ptr->unk0 = lb_8001BFD8(chan, &ptr->unk10, &ptr->unk8, &ptr->unkC);
-    if (ptr->unk0 == 0) {
+    ptr->card_result =
+        lb_8001BFD8(chan, ptr->entries, &ptr->free_blocks, &ptr->free_files);
+    if (ptr->card_result == 0) {
         int i;
         for (i = 0; i < 0x7F; i++) {
-            if (ptr->unk10[i].unk4 == -1) {
+            if (ptr->entries[i].file_no == -1) {
                 break;
             }
         }
         ptr->num = i;
     }
-    return ptr->unk0;
+    return ptr->card_result;
 }
 
 void lbSnap_8001D4A4(int chan, char* arg1)
@@ -90,7 +91,7 @@ void lbSnap_8001D4A4(int chan, char* arg1)
 
     do {
         for (i = 0; i < new_var; i++) {
-            if (time == ptr->unk10[i].unk0) {
+            if (time == ptr->entries[i].time) {
                 time++;
                 break;
             }
@@ -110,10 +111,10 @@ int lbSnap_8001D5FC(int chan, int index)
     int i;
     PAD_STACK(8);
 
-    if (ptr->unk0 == 0 && lbSnap_80433380.x54_stateChanged[chan] != 0) {
-        ptr->unk0 = 8;
+    if (ptr->card_result == 0 && lbSnap_80433380.x54_stateChanged[chan] != 0) {
+        ptr->card_result = 8;
     }
-    if (ptr->unk0 == 0) {
+    if (ptr->card_result == 0) {
         HSD_ASSERTMSG(410, index < lbSnap_80433380.x48[chan].num,
                       "index < _p(slot)[chan].num");
         i = 0;
@@ -121,11 +122,11 @@ int lbSnap_8001D5FC(int chan, int index)
             text[i] = '\0';
             i++;
         }
-        sprintf(text, "%u", lbSnap_80433380.x48[chan].unk10[index].unk0);
-        lbSnap_80433380.x48[chan].unk0 = 8;
+        sprintf(text, "%u", lbSnap_80433380.x48[chan].entries[index].time);
+        lbSnap_80433380.x48[chan].card_result = 8;
         return lb_8001B99C(chan, text, 0);
     } else {
-        return ptr->unk0;
+        return ptr->card_result;
     }
 }
 
@@ -138,10 +139,10 @@ int lbSnap_8001D7B0(int chan, int index, int jndex)
     int i;
     PAD_STACK(8);
 
-    if (ptr->unk0 == 0 && lbSnap_80433380.x54_stateChanged[chan] != 0) {
-        ptr->unk0 = 8;
+    if (ptr->card_result == 0 && lbSnap_80433380.x54_stateChanged[chan] != 0) {
+        ptr->card_result = 8;
     }
-    if (ptr->unk0 == 0) {
+    if (ptr->card_result == 0) {
         HSD_ASSERTMSG(410, index < lbSnap_80433380.x48[chan].num,
                       "index < _p(slot)[chan].num");
         i = 0;
@@ -149,7 +150,7 @@ int lbSnap_8001D7B0(int chan, int index, int jndex)
             text1[i] = '\0';
             i++;
         }
-        sprintf(text1, "%u", lbSnap_80433380.x48[chan].unk10[index].unk0);
+        sprintf(text1, "%u", lbSnap_80433380.x48[chan].entries[index].time);
         HSD_ASSERTMSG(410, jndex < lbSnap_80433380.x48[chan].num,
                       "index < _p(slot)[chan].num");
         i = 0;
@@ -157,12 +158,12 @@ int lbSnap_8001D7B0(int chan, int index, int jndex)
             text2[i] = '\0';
             i++;
         }
-        sprintf(text2, "%u", lbSnap_80433380.x48[chan].unk10[jndex].unk0);
+        sprintf(text2, "%u", lbSnap_80433380.x48[chan].entries[jndex].time);
         lbSnap_8001D4A4(chan, text3);
-        lbSnap_80433380.x48[chan].unk0 = 8;
+        lbSnap_80433380.x48[chan].card_result = 8;
         return lb_8001C0F4(chan, text1, text2, text3, 0);
     } else {
-        return ptr->unk0;
+        return ptr->card_result;
     }
 }
 
@@ -299,12 +300,12 @@ int lbSnap_8001DF6C(int chan)
     int ret;
     PAD_STACK(8);
 
-    if (ptr->unk0 == 0 && lbSnap_80433380.x54_stateChanged[chan] != 0) {
-        ptr->unk0 = 8;
+    if (ptr->card_result == 0 && lbSnap_80433380.x54_stateChanged[chan] != 0) {
+        ptr->card_result = 8;
     }
-    ret = ptr->unk0;
+    ret = ptr->card_result;
     if (ret == 0) {
-        lbSnap_80433380.x48[chan].unk0 = 8;
+        lbSnap_80433380.x48[chan].card_result = 8;
         lbSnap_8001D4A4(chan, text);
         // This is probably an offsetof call, but I don't know what pointer is
         // in xC
@@ -327,10 +328,10 @@ int lbSnap_8001E058(int chan, int index)
     char text[0x21];
     PAD_STACK(8);
 
-    if (ptr->unk0 == 0 && lbSnap_80433380.x54_stateChanged[chan] != 0) {
-        ptr->unk0 = 8;
+    if (ptr->card_result == 0 && lbSnap_80433380.x54_stateChanged[chan] != 0) {
+        ptr->card_result = 8;
     }
-    if (ptr->unk0 == 0) {
+    if (ptr->card_result == 0) {
         HSD_ASSERTMSG(410, index < lbSnap_80433380.x48[chan].num,
                       "index < _p(slot)[chan].num");
         i = 0;
@@ -338,14 +339,14 @@ int lbSnap_8001E058(int chan, int index)
             text[i] = '\0';
             i++;
         }
-        sprintf(text, "%u", lbSnap_80433380.x48[chan].unk10[index].unk0);
+        sprintf(text, "%u", lbSnap_80433380.x48[chan].entries[index].time);
         lbSnap_803BACC8.x1C = lbSnap_80433380.x0;
         return lb_8001BF04(chan, text, &lbSnap_803BACC8.x14,
                            lbSnap_80433380.x4_string,
                            lbSnap_80433380.x44_LbMcSnap_MemSnapIconData[0],
                            lbSnap_80433380.x44_LbMcSnap_MemSnapIconData[1], 0);
     } else {
-        return ptr->unk0;
+        return ptr->card_result;
     }
 }
 
@@ -363,8 +364,8 @@ void lbSnap_8001E218(void* arg0, struct Unk80433380_48* arg1)
 {
     lbSnap_80433380.x0 = arg0;
     lbSnap_80433380.x48 = arg1;
-    lbSnap_80433380.x48->unk0 = 8;
-    lbSnap_80433380.x48[1].unk0 = 8;
+    lbSnap_80433380.x48->card_result = 8;
+    lbSnap_80433380.x48[1].card_result = 8;
     lbArchive_80016DBC("LbMcSnap.",
                        (void**) &lbSnap_80433380.x44_LbMcSnap_MemSnapIconData,
                        "MemSnapIconData", 0);

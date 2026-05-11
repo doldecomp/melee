@@ -258,11 +258,11 @@ int hsd_803AC340(void* header)
 }
 
 void hsd_803AC3E0(struct hsd_803AC3E0_arg0_t* file_desc, int file_idx,
-                  int file_size, int file_offset, int file_flags)
+                  int file_size, int file_flags, int data_size)
 {
-    file_desc->x28[file_idx] = file_offset;
+    file_desc->x28[file_idx] = file_flags;
     file_desc->x4C[file_idx] = file_size;
-    file_desc->x70[file_idx] = file_flags;
+    file_desc->x70[file_idx] = data_size;
 }
 
 void fn_803AC3F8(void* arg0, u8* data, s32 idx)
