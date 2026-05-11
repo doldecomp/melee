@@ -49,8 +49,8 @@ void fn_8001E910(int arg0, int arg1, void* arg2, bool cancelflag)
         var_r4 = 0;
         Movieplayer.unk_138 = 0;
         if ((u32) Movieplayer.unk_74 != (u32) Movieplayer.unk_40) {
-            struct lbl_804333E0_t streamPlayer = Movieplayer;
-            HSD_ASSERTREPORT(0x121, (u32) streamPlayer.currPackedSize != 0,
+            struct lbl_804333E0_t* streamPlayer = &Movieplayer;
+            HSD_ASSERTREPORT(0x121, (u32)streamPlayer->currPackedSize != 0,
                              "filnum = %d, ofs = %d, by sugano.",
                              Movieplayer.unk_128, Movieplayer.unk_120);
 
@@ -270,7 +270,7 @@ s32 fn_8001EF5C(THPDecComp* data)
     if ((u32) data->unk_94 != data->unk_90) {
         intr = OSDisableInterrupts();
         data->unk_98 =
-            THPVideoDecode(&data->unk_A8, &spC, data->unk_98,
+            THPVideoDecode(&data->unk_A8, &spC, (void*) data->unk_98,
                            data->unk_4C[data->unk_90] + 4, &data->unk_9C);
         OSRestoreInterrupts(intr);
 
@@ -340,8 +340,8 @@ s32 fn_8001F13C(THPDecComp* streamPlayer)
         streamPlayer->unk_13C = OSGetTick();
         streamPlayer->unk_138 = 0;
         if (streamPlayer->unk_74 != streamPlayer->unk_40) {
-            HSD_ASSERTREPORT(0x121, (u32) streamPlayer->currPackedSize != 0,
-                             "filnum = %d, ofs = %d, by sugano.\n",
+            HSD_ASSERTREPORT(0x121, (u32)streamPlayer->currPackedSize != 0,
+                             "filnum = %d, ofs = %d, by sugano.",
                              streamPlayer->unk_128, streamPlayer->unk_120);
             HSD_DevComRequest(streamPlayer->unk_128, streamPlayer->unk_120,
                               streamPlayer->unk_4C[streamPlayer->unk_8C],
@@ -598,95 +598,4 @@ s32 fn_8001F294(void)
 void lbMthp_8001F87C(void)
 {
     Movieplayer.power = 0;
-}
-
-void* lbMthp8001F890(HSD_GObj* gobj)
-{
-    lbl_804335B8.x70 = 0;
-    lbl_804335B8.x74 = lbl_804335B8.x6C;
-    lbl_804335B8.x76 = lbl_804335B8.x6E;
-    lbl_804335B8.x78 = 6;
-    lbl_804335B8.x7C = 0;
-    lbl_804335B8.x84 = lbl_804D7CE0;
-    lbl_804335B8.x80 = lbl_804D7CE0;
-    lbl_804335B8.x88 = &lbl_804335B8.x70;
-    lbl_804335B8.x8C = 0;
-    lbl_804335B8.x90 = (struct HSD_SObj*) HSD_SObjLib_803A477C(
-        gobj, (int) &lbl_804335B8.x88, 0, 0, 0x80, 0);
-    lbl_804335B8.x90->x40 |= 0x10;
-    return lbl_804335B8.x90;
-}
-
-void lbMthp8001F928(HSD_GObj* gobj, int arg1)
-{
-    u16* pWidth = &lbl_804335B8.x6C;
-    u16* pHeight = &lbl_804335B8.x6E;
-
-    /* First texture - full size */
-    GXInitTexObj(&lbl_804335B8.tex0, lbl_804335B8.x20, lbl_804335B8.x6C,
-                 lbl_804335B8.x6E, 1, 0, 0, 0);
-    GXInitTexObjLOD(&lbl_804335B8.tex0, 0, 0, lbl_804D7CE0, lbl_804D7CE0,
-                    lbl_804D7CE0, 0, 0, 0);
-    GXLoadTexObj(&lbl_804335B8.tex0, 0);
-
-    /* Second texture - half size */
-    GXInitTexObj(&lbl_804335B8.tex1, lbl_804335B8.x44, (u16) (*pWidth >> 1),
-                 (u16) (*pHeight >> 1), 1, 0, 0, 0);
-    GXInitTexObjLOD(&lbl_804335B8.tex1, 0, 0, lbl_804D7CE0, lbl_804D7CE0,
-                    lbl_804D7CE0, 0, 0, 0);
-    GXLoadTexObj(&lbl_804335B8.tex1, 1);
-
-    /* Third texture - half size */
-    GXInitTexObj(&lbl_804335B8.tex2, lbl_804335B8.x68, (u16) (*pWidth >> 1),
-                 (u16) (*pHeight >> 1), 1, 0, 0, 0);
-    GXInitTexObjLOD(&lbl_804335B8.tex2, 0, 0, lbl_804D7CE0, lbl_804D7CE0,
-                    lbl_804D7CE0, 0, 0, 0);
-    GXLoadTexObj(&lbl_804335B8.tex2, 2);
-
-    HSD_SObjLib_803A49E0(gobj, arg1);
-}
-
-void lbMthp8001FAA0(const char* filename, int width, int height)
-{
-    struct {
-        u16 w;
-        u16 h;
-        u8 pad[0x18];
-    } header;
-    s32 output;
-    s32 yuv_size;
-    s32 uv_size;
-    void* context;
-    void* decode_buf;
-    s32 decoded;
-
-    lbl_804335B8.x6C = (u16) width;
-    lbl_804335B8.x6E = (u16) height;
-    THPInit();
-    lbFile_80016760(filename, &lbl_804335B8.unk94, &lbl_804335B8.unk98);
-    yuv_size = lbl_804335B8.x6C * lbl_804335B8.x6E;
-    lbl_804335B8.x20 = HSD_MemAlloc(yuv_size);
-    DCInvalidateRange(lbl_804335B8.x20, (u32) yuv_size);
-    uv_size = (s32) (lbl_804335B8.x6C * lbl_804335B8.x6E) >> 2;
-    lbl_804335B8.x44 = HSD_MemAlloc(uv_size);
-    DCInvalidateRange(lbl_804335B8.x44, (u32) uv_size);
-    lbl_804335B8.x68 = HSD_MemAlloc(uv_size);
-    DCInvalidateRange(lbl_804335B8.x68, (u32) uv_size);
-    context = HSD_MemAlloc(0xC);
-    memset(&header, 0, 0x1CU);
-    header.w = (u16) width;
-    header.h = (u16) height;
-    THPDec_8032F8D4(lbl_804335B8.unk94, context);
-    decode_buf = HSD_MemAlloc(THPDec_8032FD40(context, header.h));
-    decoded = THPVideoDecode(&header, &output, (s32) decode_buf,
-                             (s32) lbl_804335B8.unk94, context);
-    if ((u16) lbl_804335B8.x6C == 0x280) {
-        THPDec_80331340(decoded, lbl_804335B8.x20, lbl_804335B8.x44,
-                        lbl_804335B8.x68, lbl_804335B8.x6C);
-    } else {
-        THPDec_803313D0(decoded, lbl_804335B8.x20, lbl_804335B8.x44,
-                        lbl_804335B8.x68);
-    }
-    HSD_Free(context);
-    HSD_Free(decode_buf);
 }

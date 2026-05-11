@@ -3,86 +3,11 @@
 
 #include "lbmthp.h" // IWYU pragma: export
 
-#include <dolphin/gx/GXStruct.h>
 #include <dolphin/os/OSAlarm.h>
-
-struct lbl_804333E0_t {
-    /* 0x000 */ char pad_0[0x20];
-    /* 0x020 */ u32 unk_20;
-    /* 0x024 */ char pad_24[0x1C];
-    /* 0x040 */ u32 unk_40;
-    /* 0x044 */ u32 unk_44;
-    /* 0x048 */ u32 unk_48;
-    /* 0x04C */ void** unk_4C;
-    /* 0x050 */ void* unk_50;
-    /* 0x054 */ void* unk_54;
-    /* 0x058 */ void* unk_58;
-    /* 0x05C */ char pad_5C[0xC];
-    /* 0x068 */ s32 unk_68;
-    /* 0x06C */ char pad_6C[0x4];
-    /* 0x070 */ s32 unk_70;
-    /* 0x074 */ u32 unk_74;
-    /* 0x078 */ s32 unk_78;
-    /* 0x07C */ s32 unk_7C;
-    /* 0x080 */ s32 unk_80;
-    /* 0x084 */ s32 unk_84;
-    /* 0x088 */ s32 unk_88;
-    /* 0x08C */ u32 unk_8C;
-    /* 0x090 */ s32 unk_90;
-    /* 0x094 */ char pad_94[0x70];
-    /* 0x104 */ u32 unk_104;
-    /* 0x108 */ s32 unk_108;
-    /* 0x10C */ s32 unk_10C;
-    /* 0x110 */ s32 unk_110;
-    /* 0x114 */ char pad_114[0xC];
-    /* 0x120 */ u32 unk_120;
-    /* 0x124 */ u32 currPackedSize;
-    /* 0x128 */ s32 unk_128;
-    /* 0x12C */ s32 unk_12C;
-    /* 0x130 */ s32 unk_130;
-    /* 0x134 */ s32 unk_134;
-    /* 0x138 */ s32 unk_138;
-    /* 0x13C */ u32 unk_13C;
-    /* 0x140 */ void* unk_140;
-    /* 0x144 */ s32 unk_144;
-    /* 0x148 */ s32 unk_148;
-    /* 0x14C */ s32 power;
-    /* 0x150 */ OSAlarm unk_150;
-    /* 0x178 */ GXTexObj unk_178;
-    /* 0x198 */ GXTexObj unk_198;
-    /* 0x1B8 */ GXTexObj unk_1B8;
-}; /* size = 0x1D8 */
-STATIC_ASSERT(sizeof(struct lbl_804333E0_t) == 0x1D8);
 
 /* 4333E0 */ static struct lbl_804333E0_t Movieplayer;
 /* 4D7CC0 */ static float lb_804D7CC0;
 
-struct lbl_804335B8_t {
-    /* 0x00 */ GXTexObj tex0; /* 0x00-0x20 (size 0x20) */
-    /* 0x20 */ void* x20;     /* image ptr for tex0 */
-    /* 0x24 */ GXTexObj tex1; /* 0x24-0x44 (size 0x20) */
-    /* 0x44 */ void* x44;     /* image ptr for tex1 */
-    /* 0x48 */ GXTexObj tex2; /* 0x48-0x68 (size 0x20) */
-    /* 0x68 */ void* x68;     /* image ptr for tex2 */
-    /* 0x6C */ u16 x6C;       /* width */
-    /* 0x6E */ u16 x6E;       /* height */
-    /* 0x70 */ s32 x70;
-    /* 0x74 */ u16 x74;
-    /* 0x76 */ u16 x76;
-    /* 0x78 */ s32 x78;
-    /* 0x7C */ s32 x7C;
-    /* 0x80 */ float x80;
-    /* 0x84 */ float x84;
-    /* 0x88 */ void* x88;
-    /* 0x8C */ s32 x8C;
-    /* 0x90 */ struct HSD_SObj* x90;
-    /* 0x94 */ u32 unk94;
-    /* 0x98 */ u32 unk98;
-    /* 0x9C */ char pad_9C[0xA0 - 0x9C];
-}; /* size = 0xA0 */
-STATIC_ASSERT(sizeof(struct lbl_804335B8_t) == 0xA0);
-
-/* 4335B8 */ static struct lbl_804335B8_t lbl_804335B8;
 /* 4D7CE0 */ static float lbl_804D7CE0;
 
 struct lbl_803BAFE8_t {

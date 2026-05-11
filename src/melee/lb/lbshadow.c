@@ -344,7 +344,7 @@ void lbShadow_8000F38C(s32 arg0)
     HSD_ASSERT(0x181, lobj);
 
     if (!HSD_LObjGetPosition(lobj, &lightPos)) {
-        HSD_ASSERTREPORT(0x184, NULL, "couldn't get light position");
+        HSD_ASSERTREPORT(0x184, 0, "coudn t get light position ...\n");
     }
 
     if (HSD_LObjGetInterest(lobj, &lightDir)) {
