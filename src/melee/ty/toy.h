@@ -8,6 +8,7 @@
 #include "gm/types.h"
 
 #include "if/forward.h"
+#include "sc/forward.h"
 
 /* 305058 */ s32 un_80305058(s32, s32, s32, f32);
 /* 3053C4 */ void un_803053C4(s32, s32, s32);
@@ -39,7 +40,7 @@
 /* 306CF4 */ void Toy_RemoveUserData(void* ptr);
 /* 306D14 */ void un_80306D14(void);
 /* 306D70 */ void un_80306D70(s32 arg0);
-/* 306EEC */ HSD_LObj* un_80306EEC(void*, s32);
+/* 306EEC */ HSD_LObj* Toy_LoadLObjList(LightList**, s32*);
 /* 307018 */ void un_80307018(void);
 /* 30715C */ void un_8030715C(f32, f32);
 /* 307470 */ void un_80307470(s32);
@@ -49,7 +50,7 @@
 /* 307BA0 */ HSD_JObj* un_80307BA0(HSD_JObj*, s16);
 /* 307E84 */ void fn_80307E84(HSD_GObj* gobj);
 /* 307F64 */ void un_80307F64(s32, s32);
-/* 30813C */ char* un_8030813C(s16 arg0,
+/* 30813C */ char* un_8030813C(s32 arg0,
                                enum_t unused); /// @todo :: fill out the struct
                                                /// that this uses/returns
 /* 308250 */ void un_80308250(u8* arg0, s32 arg1, s32 arg2);
@@ -57,7 +58,7 @@
 /* 308328 */ void un_80308328(s32 arg0);
 /* 308354 */ s16 un_80308354(s16 idx);
 /* 3083D8 */ void un_803083D8(HSD_JObj* jobj, s32 arg1);
-/* 3084A0 */ void un_803084A0(s16 arg0);
+/* 3084A0 */ void un_803084A0(s32 arg0);
 /* 3087F4 */ HSD_GObj* un_803087F4(void*);
 /* 308DC8 */ void un_80308DC8(HSD_CObj*);
 /* 308F04 */ void un_80308F04(HSD_CObj*);
@@ -134,6 +135,7 @@
 
 /* un_803053C4 externs */
 /* 4D6EB4 */ extern s16* un_804D6EB4;
+/* 4DDCC8 */ extern f32 un_804DDCC8;
 /* 4DDCD0 */ extern f64 un_804DDCD0;
 
 /* un_80308354 externs */
@@ -188,7 +190,13 @@ extern s32 un_804D6E74;
 extern s32 un_804D6E78;
 extern s32 un_804D6E7C;
 extern f32 un_804DDCD8;
+extern f32 un_804DDCEC;
 extern f32 un_804DDCF0;
+extern f32 un_804DDD78;
+extern f32 un_804DDD7C;
+extern f32 un_804DDD80;
+extern f32 un_804DDD84;
+extern f32 un_804DDE00;
 extern Vec3 un_803B88F8;
 extern Vec3 un_803B8904;
 

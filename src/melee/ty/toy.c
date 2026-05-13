@@ -43,6 +43,7 @@
 #include "ty/tylist.h"
 #include "ty/types.h"
 
+#include <dolphin/gx.h>
 #include <melee/if/textlib.h>
 #include <MSL/math.h> // for ABS
 
@@ -59,8 +60,10 @@ typedef struct {
 } TyDisplayData;
 
 typedef struct {
-    u8 pad[4];
-    HSD_GObj* gobj;
+    /* 0x00 */ u8 pad[4];
+    /* 0x04 */ HSD_GObj* gobj;
+    /* 0x08 */ u8 pad8[4];
+    /* 0x0C */ HSD_Archive* archive;
 } TyLightData;
 
 typedef struct {
@@ -73,20 +76,34 @@ typedef struct {
 } ToyNameData;
 
 typedef struct {
-    char pad[0xFC];
-    s32 xFC_idx;
-} TyLightEntry;
+    char* name;
+    void* unk;
+} TyLightSymbolEntry;
 
 typedef struct {
-    char pad[0xCC];
-    char* xCC_name;
-} TyLightSymbol;
+    s32 idx;
+    u8 pad[8];
+} TyLightIndexEntry;
+
+typedef struct {
+    u8 pad0[0xCC];
+    TyLightSymbolEntry symbols[6];
+    TyLightIndexEntry entries[1];
+} TyLightFile;
 
 typedef struct {
     /* 0x00 */ HSD_GObj* x0;
     /* 0x04 */ void* x4;
     /* 0x08 */ HSD_GObj* x8;
 } tyUnkStruct;
+
+typedef struct {
+    /* 0x00 */ void* x0;
+    /* 0x04 */ void* x4;
+    /* 0x08 */ void* x8;
+    /* 0x0C */ void* xC;
+    /* 0x10 */ void* x10;
+} TyCleanupObj;
 
 typedef struct {
     /* 0x00 */ u8 pad[0x50];
@@ -269,21 +286,28 @@ typedef struct TyUnk25 {
     s16 x154;
 } TyUnk25;
 
+typedef struct {
+    u8 pad[0x14];
+    void* x14;
+} Ty25Entry;
+
 s32 un_80305058(s32 arg0, s32 arg1, s32 arg2, f32 farg0)
 {
-    s32 new_arr[293];
     s32 obtained_arr[293];
-    s32 new_count;
-    s32 obtained_count;
+    s32 new_arr[293];
     s32 total;
-    s32 trophy;
     s32 byte_off;
+    u16* default_flags;
+    s32 trophy;
+    s32 obtained_count;
+    s32 new_count;
     s16* skip_list;
     u16* flags;
     s32 skip;
 
-    PAD_STACK(24);
+    PAD_STACK(20);
 
+    default_flags = &un_804A284C[5];
     new_count = 0;
     obtained_count = 0;
     total = 0;
@@ -308,7 +332,7 @@ s32 un_80305058(s32 arg0, s32 arg1, s32 arg2, f32 farg0)
         if (skip != 0) {
             if (arg0 == 0x63) {
                 if (gm_8016B498() != 0 || (u8) gm_801A4310() == 0xC) {
-                    flags = &un_804A284C[5];
+                    flags = default_flags;
                 } else {
                     flags = gmMainLib_8015CC78();
                 }
@@ -322,13 +346,11 @@ s32 un_80305058(s32 arg0, s32 arg1, s32 arg2, f32 farg0)
                             if (gm_8016B498() != 0 ||
                                 (u8) gm_801A4310() == 0xC)
                             {
-                                flags = &un_804A284C[5];
+                                flags = default_flags;
                             } else {
                                 flags = gmMainLib_8015CC78();
                             }
-                            if (!(M2C_FIELD(flags, u16*, byte_off) & 0x4000)) {
-                                goto add_trophy;
-                            } else {
+                            if (M2C_FIELD(flags, u16*, byte_off) & 0x4000) {
                                 goto add_obtained;
                             }
                         } else {
@@ -342,13 +364,11 @@ s32 un_80305058(s32 arg0, s32 arg1, s32 arg2, f32 farg0)
                 if (arg1 != 0x63 && (f32) arg1 == un_803060BC(trophy, 6)) {
                     if (arg2 != 0) {
                         if (gm_8016B498() != 0 || (u8) gm_801A4310() == 0xC) {
-                            flags = &un_804A284C[5];
+                            flags = default_flags;
                         } else {
                             flags = gmMainLib_8015CC78();
                         }
-                        if (!(M2C_FIELD(flags, u16*, byte_off) & 0x4000)) {
-                            goto add_trophy;
-                        } else {
+                        if (M2C_FIELD(flags, u16*, byte_off) & 0x4000) {
                             goto add_obtained;
                         }
                     } else {
@@ -357,29 +377,25 @@ s32 un_80305058(s32 arg0, s32 arg1, s32 arg2, f32 farg0)
                 }
             } else if (arg2 != 0) {
                 if (gm_8016B498() != 0 || (u8) gm_801A4310() == 0xC) {
-                    flags = &un_804A284C[5];
+                    flags = default_flags;
                 } else {
                     flags = gmMainLib_8015CC78();
                 }
-                if (!(M2C_FIELD(flags, u16*, byte_off) & 0x4000)) {
-                    goto add_trophy;
-                } else {
+                if (M2C_FIELD(flags, u16*, byte_off) & 0x4000) {
                     goto add_obtained;
                 }
             } else {
             add_obtained:
                 if (gm_8016B498() != 0 || (u8) gm_801A4310() == 0xC) {
-                    flags = &un_804A284C[5];
+                    flags = default_flags;
                 } else {
                     flags = gmMainLib_8015CC78();
                 }
                 if ((u8) * (u16*) ((u8*) flags + byte_off) != 0) {
-                    obtained_arr[obtained_count] = trophy;
-                    obtained_count++;
+                    obtained_arr[obtained_count++] = trophy;
                 } else {
                 add_trophy:
-                    new_arr[new_count] = trophy;
-                    new_count++;
+                    new_arr[new_count++] = trophy;
                 }
                 total++;
             }
@@ -390,11 +406,12 @@ s32 un_80305058(s32 arg0, s32 arg1, s32 arg2, f32 farg0)
 
     if (total != 0) {
         s32 use_new;
-        if (farg0 >= 100.0F || obtained_count == 0) {
+        if (farg0 >= un_804DDCC8 || obtained_count == 0) {
             use_new = 1;
         } else {
             f32 rand = HSD_Randf();
-            if ((f32) HSD_Randi(0x64) + rand < farg0) {
+            s32 rand_int = HSD_Randi(0x64);
+            if ((f32) rand_int + rand < farg0) {
                 use_new = 1;
             } else {
                 use_new = 0;
@@ -423,12 +440,14 @@ void un_803053C4(s32 targetValue, s32 count, s32 flag)
 {
     s16* list;
     u16* ptr;
+    u16* default_flags;
     s32 trophyId;
     s32 i;
     s32 found;
     u16 val;
 
     if (flag != 0) {
+        default_flags = &un_804A284C[5];
         while (count != 0) {
             trophyId = 0;
             i = 0;
@@ -452,7 +471,7 @@ void un_803053C4(s32 targetValue, s32 count, s32 flag)
                     if ((f32) targetValue == un_803060BC(trophyId, 6)) {
                         if (HSD_Randi(2) == 0) {
                             if (gm_8016B498() || (u8) gm_801A4310() == 0xC) {
-                                ptr = &un_804A284C[5];
+                                ptr = default_flags;
                             } else {
                                 ptr = gmMainLib_8015CC78();
                             }
@@ -463,7 +482,7 @@ void un_803053C4(s32 targetValue, s32 count, s32 flag)
 
                                 if (gm_8016B498() || (u8) gm_801A4310() == 0xC)
                                 {
-                                    ptr = &un_804A284C[5];
+                                    ptr = default_flags;
                                 } else {
                                     ptr = gmMainLib_8015CC78();
                                 }
@@ -473,12 +492,11 @@ void un_803053C4(s32 targetValue, s32 count, s32 flag)
                                 count = count - 1;
                                 val ^= 0x8000;
                                 *ptr = val;
-
-                                if (count == 0) {
-                                    goto done;
-                                }
                             }
                         }
+                    }
+                    if (count == 0) {
+                        break;
                     }
                 }
 
@@ -487,6 +505,7 @@ void un_803053C4(s32 targetValue, s32 count, s32 flag)
             }
         }
     } else {
+        default_flags = &un_804A284C[5];
         trophyId = 0;
         i = 0;
 
@@ -510,7 +529,7 @@ void un_803053C4(s32 targetValue, s32 count, s32 flag)
                     Trophy_SetUnlockState((s16) trophyId, HSD_Randi(0xFE) + 1);
 
                     if (gm_8016B498() || (u8) gm_801A4310() == 0xC) {
-                        ptr = &un_804A284C[5];
+                        ptr = default_flags;
                     } else {
                         ptr = gmMainLib_8015CC78();
                     }
@@ -536,20 +555,23 @@ done:
     return;
 }
 
-/* 94.9% match */
+/* 100% match */
 void Trophy_SetUnlockState(enum_t trophyId, bool addValue)
 {
     s32 newCount;
+    s32 oldCount;
     s32 byteOffset;
     s16 idx;
-    s16 count;
+    s32 count;
+    s32 stateFlag;
     Toy* toy = (Toy*) &un_804A26B8;
     u16* table;
     s32 newVal;
     u16* ptr;
     u16* statePtr;
     u16 temp;
-    PAD_STACK(8);
+    UNUSED u8 state_pad[8];
+    u16 state[3];
 
     if (gm_8016B498() || (u8) gm_801A4310() == 0xC) {
         table = toy->trophyTable;
@@ -572,10 +594,11 @@ void Trophy_SetUnlockState(enum_t trophyId, bool addValue)
         *table = temp;
 
         if (gm_8016B498() || (u8) gm_801A4310() == 0xC) {
-            newCount = toy->trophyCount + 1;
+            oldCount = toy->trophyCount;
         } else {
-            newCount = *gmMainLib_8015CC90() + 1;
+            oldCount = *gmMainLib_8015CC90();
         }
+        newCount = oldCount + 1;
         if (gm_8016B498() || (u8) gm_801A4310() == 0xC) {
             toy->trophyCount = (s16) newCount;
         } else {
@@ -614,20 +637,25 @@ void Trophy_SetUnlockState(enum_t trophyId, bool addValue)
     }
 
     if (gm_8016B498() || (u8) gm_801A4310() == 0xC) {
-        statePtr = &toy->x19A;
-        *statePtr = toy->x19A | toy->x19C;
+        state[2] = toy->x19A | toy->x19C;
+        statePtr = &state[2];
     } else {
         statePtr = gmMainLib_8015CC84();
     }
 
-    if (!(*statePtr & 0x80)) {
+    if (*statePtr & 0x80) {
+        stateFlag = 1;
+    } else {
+        stateFlag = 0;
+    }
+    if (stateFlag == 0) {
         if (gm_8016B498() || (u8) gm_801A4310() == 0xC) {
             count = toy->trophyCount;
         } else {
             count = *gmMainLib_8015CC90();
         }
         if (count >= 0xFA) {
-            toy->x194 = 2;
+            *(u8*) &toy->x194 = 2;
             un_80305918(7, 0, 0);
         }
     }
@@ -638,8 +666,8 @@ void Trophy_SetUnlockState(enum_t trophyId, bool addValue)
         gm_80164504(0x14U);
     }
 
-    if ((s32) un_803060BC((s32) (s16) trophyId, 6) == 1) {
-        gm_80172C44((s16) trophyId);
+    if ((s32) un_803060BC((s32) idx, 6) == 1) {
+        gm_80172C44(idx);
     }
 }
 
@@ -730,14 +758,12 @@ void un_80305918(s8 arg0, s32 arg1, s32 arg2)
 
     if (arg1 != 0) {
         if (arg2 != 0) {
-            u16* ptr5;
             u16 val4;
             s32 mask2;
-            ptr5 = (u16*) ((u8*) base + 0x19C);
-            val4 = *ptr5;
+            val4 = M2C_FIELD(base, u16*, 0x19C);
             mask2 = 1 << arg0;
             if (val4 & mask2) {
-                *ptr5 = (u16) (val4 ^ mask2);
+                M2C_FIELD(base, u16*, 0x19C) = (u16) (val4 ^ mask2);
             }
         } else {
             if (gm_8016B498() != 0 || (u8) gm_801A4310() == 0xC) {
@@ -770,7 +796,7 @@ s32 un_80305B88(void)
 {
     int i;
     u32 button;
-    PAD_STACK(4);
+    PAD_STACK(8);
 
     for (i = 0; i < 4; i++) {
         if ((button = HSD_PadCopyStatus[(u8) i].trigger)) {
@@ -1219,32 +1245,35 @@ void un_8030663C(void)
 
 void un_803067BC(s32 arg0, s32 arg1)
 {
+    s16* src;
+    s32 offset;
     s32 i;
+    s16* dest;
+    s32 count;
+    s16* base;
+
+    base = un_804D6E64;
 
     if (arg1 == 0) {
-        s16* src = un_804D6E64 + arg0;
+        src = base + arg0;
         i = 0;
+        offset = 0;
         while (i < *gmMainLib_8015CC90()) {
-            un_804D6EDC[i] = *src;
+            M2C_FIELD(un_804D6EDC, s16*, offset) = *src;
             src += 3;
             i++;
+            offset += 2;
         }
         return;
     }
 
-    {
-        s16 count;
-        s16* src;
-        s16* dest;
-
-        count = *gmMainLib_8015CC90();
-        src = un_804D6E64 + arg0;
-        dest = un_804D6EDC + count;
-        if (count != 0) {
-            for (i = count; i != 0; i--) {
-                *dest-- = *src;
-                src += 3;
-            }
+    count = *gmMainLib_8015CC90();
+    src = base + arg0;
+    dest = un_804D6EDC + count;
+    if (count != 0) {
+        for (i = count; i != 0; i--) {
+            *dest-- = *src;
+            src += 3;
         }
     }
 }
@@ -1425,85 +1454,162 @@ void un_80306D14(void)
         lbAudioAx_800237A8(0xAB, 0x7F, 0x40);
     }
 }
-/// Attempt 7: Try struct-based array access
-
-/* 82.6% match */
+/* 94.0% match */
 void un_80306D70(s32 arg0)
 {
-    void* sp14;
-    s32 spC;
-    char* base;
-    u8* data;
-    TyLightEntry* entry;
-    TyLightSymbol* sym;
+    UNUSED u8 framepad[8];
+    LightList** sp14;
+    TyLightFile* base;
+    TyLightData* data;
+    char* sym;
     s32 idx;
+    u8 kind;
 
-    base = un_803FDD18;
+    base = (TyLightFile*) un_803FDD18;
     data = un_804D6ED4;
 
-    if (*(HSD_Archive**) (data + 0xC) != NULL &&
-        *(HSD_GObj**) (data + 0x4) != NULL)
-    {
-        HSD_GObjProc_8038FED4(*(HSD_GObj**) (data + 0x4));
-        HSD_GObjPLink_80390228(*(HSD_GObj**) (data + 0x4));
-        *(HSD_GObj**) (data + 0x4) = NULL;
-        entry = (TyLightEntry*) (base + arg0 * 0xC);
-        idx = entry->xFC_idx;
-        sym = (TyLightSymbol*) (base + idx * 8);
-        sp14 = HSD_ArchiveGetPublicAddress(*(HSD_Archive**) (data + 0xC),
-                                           sym->xCC_name);
+    if (data->archive != NULL && data->gobj != NULL) {
+        HSD_GObjProc_8038FED4(data->gobj);
+        HSD_GObjPLink_80390228(data->gobj);
+        data->gobj = NULL;
+        idx = base->entries[arg0].idx;
+        sym = base->symbols[idx].name;
+        sp14 = HSD_ArchiveGetPublicAddress(data->archive, sym);
     } else {
-        entry = (TyLightEntry*) (base + arg0 * 0xC);
-        idx = entry->xFC_idx;
-        sym = (TyLightSymbol*) (base + idx * 8);
-        *(HSD_Archive**) (data + 0xC) =
-            lbArchive_80016DBC(base, &sp14, sym->xCC_name);
+        idx = base->entries[arg0].idx;
+        sym = base->symbols[idx].name;
+        data->archive = lbArchive_80016DBC((char*) base, &sp14, sym, 0);
     }
 
     if (sp14 != NULL) {
-        *(HSD_GObj**) (data + 0x4) = GObj_Create(2, 1, 0);
-        HSD_GObjObject_80390A70(*(HSD_GObj**) (data + 0x4), HSD_GObj_804D784A,
-                                un_80306EEC(sp14, (s32) &spC));
-        GObj_SetupGXLink(*(HSD_GObj**) (data + 0x4), HSD_GObj_LObjCallback,
-                         0x37, 0);
+        s32 spC;
+        HSD_LObj* lobj;
+
+        data->gobj = GObj_Create(2, 1, 0);
+        lobj = Toy_LoadLObjList(sp14, &spC);
+        kind = HSD_GObj_804D784A;
+        HSD_GObjObject_80390A70(data->gobj, kind, lobj);
+        GObj_SetupGXLink(data->gobj, HSD_GObj_LObjCallback, 0x37, 0);
         if (spC != 0) {
-            HSD_GObj_SetupProc(*(HSD_GObj**) (data + 0x4),
-                               (HSD_GObjEvent) un_80306C5C, 0);
-            HSD_GObj_80390CD4(*(HSD_GObj**) (data + 0x4));
+            HSD_GObj_SetupProc(data->gobj, (HSD_GObjEvent) un_80306C5C, 0);
+            HSD_GObj_80390CD4(data->gobj);
         }
     } else {
-        entry = (TyLightEntry*) (base + arg0 * 0xC);
-        idx = entry->xFC_idx;
-        sym = (TyLightSymbol*) (base + idx * 8);
-        HSD_ASSERTREPORT(0x8CD, NULL, base + 0x64C, sym->xCC_name);
+        idx = base->entries[arg0].idx;
+        sym = base->symbols[idx].name;
+        OSReport((char*) base + 0x64C, sym);
+        __assert(un_804D5A48, 0x8CD, un_804D5A50);
     }
 }
 
-/* 96.3% match */
+/* 98.9% match */
 static char un_804D5A54[] = "lobj.h";
 static char un_804D5A5C[] = "lobj";
-extern f32 un_804DDCD8;
-
-HSD_LObj* un_80306EEC(void* list_arg, s32 hasAnim_arg)
+static char un_804D5A64[] = "jobj.h";
+static char un_804D5A6C[] = "jobj";
+static inline bool Toy_JObjMtxIsDirty(HSD_JObj* jobj)
 {
-    u8* base;
-    HSD_LObj* prev;
-    HSD_LObj* first;
-    s32 idx;
-    LightList** list;
-    u8* posTable;
-    u8* animFlag;
+    bool result;
+
+    (jobj) ? ((void) 0) : __assert(un_804D5A64, 0x234, un_804D5A6C);
+    result = false;
+    if (!(jobj->flags & JOBJ_USER_DEF_MTX) && (jobj->flags & JOBJ_MTX_DIRTY)) {
+        result = true;
+    }
+    return result;
+}
+
+static inline void Toy_JObjSetMtxDirty(HSD_JObj* jobj)
+{
+    if (jobj != NULL && !Toy_JObjMtxIsDirty(jobj)) {
+        HSD_JObjSetMtxDirtySub(jobj);
+    }
+}
+
+static inline void Toy_JObjSetTranslateX(HSD_JObj* jobj, f32 x)
+{
+    (jobj) ? ((void) 0) : __assert(un_804D5A64, 0x3A4, un_804D5A6C);
+    jobj->translate.x = x;
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
+        Toy_JObjSetMtxDirty(jobj);
+    }
+}
+
+static inline void Toy_JObjSetTranslateY(HSD_JObj* jobj, f32 y)
+{
+    (jobj) ? ((void) 0) : __assert(un_804D5A64, 0x3B3, un_804D5A6C);
+    jobj->translate.y = y;
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
+        Toy_JObjSetMtxDirty(jobj);
+    }
+}
+
+static inline void Toy_JObjSetTranslateZ(HSD_JObj* jobj, f32 z)
+{
+    (jobj) ? ((void) 0) : __assert(un_804D5A64, 0x3C2, un_804D5A6C);
+    jobj->translate.z = z;
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
+        Toy_JObjSetMtxDirty(jobj);
+    }
+}
+
+static inline void Toy_JObjSetScaleX(HSD_JObj* jobj, f32 x)
+{
+    (jobj) ? ((void) 0) : __assert(un_804D5A64, 0x308, un_804D5A6C);
+    jobj->scale.x = x;
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
+        Toy_JObjSetMtxDirty(jobj);
+    }
+}
+
+static inline void Toy_JObjSetScaleY(HSD_JObj* jobj, f32 y)
+{
+    (jobj) ? ((void) 0) : __assert(un_804D5A64, 0x317, un_804D5A6C);
+    jobj->scale.y = y;
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
+        Toy_JObjSetMtxDirty(jobj);
+    }
+}
+
+static inline void Toy_JObjSetScaleZ(HSD_JObj* jobj, f32 z)
+{
+    (jobj) ? ((void) 0) : __assert(un_804D5A64, 0x326, un_804D5A6C);
+    jobj->scale.z = z;
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
+        Toy_JObjSetMtxDirty(jobj);
+    }
+}
+
+static inline void Toy_JObjSetRotationY(HSD_JObj* jobj, f32 y, char* data)
+{
+    (jobj) ? ((void) 0) : __assert(un_804D5A64, 0x294, un_804D5A6C);
+    (!(jobj->flags & JOBJ_USE_QUATERNION))
+        ? ((void) 0)
+        : __assert(un_804D5A64, 0x295, data + 0x78C);
+    jobj->rotate.y = y;
+    if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
+        Toy_JObjSetMtxDirty(jobj);
+    }
+}
+
+HSD_LObj* Toy_LoadLObjList(LightList** list, s32* hasAnim)
+{
     HSD_LObj* lobj;
+    HSD_LObj* first;
+    HSD_LObj* prev;
     HSD_LightAnim** anims;
-    s32* hasAnim;
+    LightList** cur;
+    s32 idx;
+    u8* base;
+    u8* animFlag;
+    u8* posTable;
 
-    PAD_STACK(8);
+    PAD_STACK(4);
 
-    hasAnim = (s32*) hasAnim_arg;
-    list = list_arg;
     prev = NULL;
-    base = un_804D6ED4;
+    cur = list;
     idx = 0;
+    base = un_804D6ED4;
 
     if (hasAnim != NULL) {
         *hasAnim = 0;
@@ -1511,11 +1617,11 @@ HSD_LObj* un_80306EEC(void* list_arg, s32 hasAnim_arg)
 
     posTable = base + idx * 0xC;
 
-    while (*list != NULL) {
-        lobj = HSD_LObjLoadDesc((*list)->desc);
+    while (*cur != NULL) {
+        lobj = HSD_LObjLoadDesc((*cur)->desc);
         if (lobj != NULL) {
             animFlag = base + idx + 0xDC;
-            anims = (*list)->anims;
+            anims = (*cur)->anims;
             *animFlag = 0;
             if (anims != NULL && *anims != NULL) {
                 if (hasAnim != NULL) {
@@ -1533,12 +1639,15 @@ HSD_LObj* un_80306EEC(void* list_arg, s32 hasAnim_arg)
             idx += 1;
         }
         if (prev != NULL) {
-            HSD_LObjSetNext(prev, lobj);
+            if (prev == NULL) {
+                __assert(un_804D5A54, 0x136U, un_804D5A5C);
+            }
+            prev->next = lobj;
         } else {
             first = lobj;
         }
         prev = lobj;
-        list++;
+        cur++;
     }
     return first;
 }
@@ -1547,7 +1656,7 @@ void un_80307018(void)
 {
     u8 _pad[16];
     HSD_Fog* fog;
-    HSD_JObj* jobj;
+    LightList** lights;
     void* obj;
     u8 kind;
     tyUnkStruct2* ptr1;
@@ -1562,10 +1671,10 @@ void un_80307018(void)
         HSD_ASSERTREPORT(0x912, NULL, "*** BG data aren't being loaded!\n");
     }
 
-    jobj = HSD_ArchiveGetPublicAddress(ptr1->x50, un_803FE3DC);
-    if (jobj != NULL) {
+    lights = HSD_ArchiveGetPublicAddress(ptr1->x50, un_803FE3DC);
+    if (lights != NULL) {
         ptr2->x0 = GObj_Create(2, 3, 0);
-        obj = un_80306EEC(jobj, 0);
+        obj = Toy_LoadLObjList(lights, 0);
         kind = HSD_GObj_804D784A;
         HSD_GObjObject_80390A70(ptr2->x0, kind, obj);
         GObj_SetupGXLink(ptr2->x0, HSD_GObj_LObjCallback, 0x36, 0);
@@ -1584,21 +1693,23 @@ void un_80307018(void)
 /* 92.2% match */
 void un_8030715C(f32 cstick_x, f32 cstick_y)
 {
+    Vec3 euler;
+    Vec3 light_pos;
     Vec3 interest;
     Vec3 new_interest;
     Mtx mtx;
+    UNUSED u8 midpad[0x30];
     Vec3 up_vec;
     Vec3 left_vec;
-    Vec3 euler;
     Vec3 angles;
     TyCameraData_* data;
     TyLightArray_* data2;
-    HSD_CObj* cobj;
     HSD_LObj* lobj;
     TyLightArray_* cur;
     s32 i;
     s8* flag_ptr;
-    PAD_STACK(96);
+    HSD_CObj* cobj;
+    PAD_STACK(36);
 
     data = (void*) un_804D6E68;
     data2 = un_804D6ED4;
@@ -1649,42 +1760,32 @@ void un_8030715C(f32 cstick_x, f32 cstick_y)
         angles.z = 0.0F;
 
         if (*flag_ptr != 0) {
-            HSD_LObjGetPosition(lobj, &interest);
+            HSD_LObjGetPosition(lobj, &light_pos);
         } else {
-            *(s32*) &interest.x = cur->x1C;
-            *(s32*) &interest.y = cur->x20;
-            *(s32*) &interest.z = cur->x24;
+            light_pos = *(Vec3*) &cur->x1C;
         }
 
         if (*flag_ptr != 0) {
-            cur->x1C = *(s32*) &interest.x;
-            cur->x20 = *(s32*) &interest.y;
-            cur->x24 = *(s32*) &interest.z;
+            *(Vec3*) &cur->x1C = light_pos;
         }
 
-        lbVector_ApplyEulerRotation(&interest, &angles);
-        HSD_LObjSetPosition(lobj, &interest);
+        lbVector_ApplyEulerRotation(&light_pos, &angles);
+        HSD_LObjSetPosition(lobj, &light_pos);
 
-        if (HSD_LObjGetInterest(lobj, &interest) != 0) {
+        if (HSD_LObjGetInterest(lobj, &light_pos) != 0) {
             if (*flag_ptr != 0) {
-                cur->x7C = *(s32*) &interest.x;
-                cur->x80 = *(s32*) &interest.y;
-                cur->x84 = *(s32*) &interest.z;
+                *(Vec3*) &cur->x7C = light_pos;
             } else {
-                *(s32*) &interest.x = cur->x7C;
-                *(s32*) &interest.y = cur->x80;
-                *(s32*) &interest.z = cur->x84;
+                light_pos = *(Vec3*) &cur->x7C;
             }
-            lbVector_ApplyEulerRotation(&interest, &angles);
-            HSD_LObjSetInterest(lobj, &interest);
+            lbVector_ApplyEulerRotation(&light_pos, &angles);
+            HSD_LObjSetInterest(lobj, &light_pos);
         }
 
         cur = (TyLightArray_*) ((u8*) cur + 0xC);
         i += 1;
 
-        if (lobj != NULL) {
-            lobj = lobj->next;
-        }
+        lobj = HSD_LObjGetNext(lobj);
     }
 }
 
@@ -1692,12 +1793,14 @@ void un_80307470(s32 arg0)
 {
     char* data;
     ToyGlobalsS_* tg;
-    HSD_JObj* loaded_jobj;
     HSD_AnimJoint* anim;
     HSD_MatAnimJoint* matanim;
-    void* shapanim;
-    void* joint;
-    char* entry;
+    HSD_JObj* loaded_jobj;
+    HSD_Joint* joint;
+    char** entry;
+    u8 kind;
+
+    PAD_STACK(24);
 
     data = un_803FDD18;
     tg = un_804D6ED8;
@@ -1712,33 +1815,33 @@ void un_80307470(s32 arg0)
         tg->x0 = NULL;
     }
 
-    entry = data + arg0 * 4;
-    joint = HSD_ArchiveGetPublicAddress(tg->x50, *(void**) (entry + 0x188));
+    entry = (char**) (data + arg0 * 4);
+    joint = HSD_ArchiveGetPublicAddress(tg->x50, *(entry += 0x188 / 4));
 
     if (joint != NULL) {
         tg->x0 = GObj_Create(9, 9, 0);
 
         loaded_jobj = HSD_JObjLoadJoint(joint);
-        entry = data + arg0 * 0xC;
-        anim = HSD_ArchiveGetPublicAddress(tg->x50, *(void**) (entry + 0x224));
-        matanim =
-            HSD_ArchiveGetPublicAddress(tg->x50, *(void**) (entry + 0x228));
-        shapanim =
-            HSD_ArchiveGetPublicAddress(tg->x50, *(void**) (entry + 0x22C));
-
-        HSD_JObjAddAnimAll(loaded_jobj, anim, matanim, shapanim);
-        HSD_JObjReqAnimAll(loaded_jobj, 0.0F);
-        HSD_GObjObject_80390A70(tg->x0, HSD_GObj_804D7849, loaded_jobj);
+        entry = (char**) (data + arg0 * 0xC);
+        anim = HSD_ArchiveGetPublicAddress(tg->x50, entry[0x224 / 4]);
+        matanim = HSD_ArchiveGetPublicAddress(tg->x50, entry[0x228 / 4]);
+        HSD_JObjAddAnimAll(
+            loaded_jobj, anim, matanim,
+            HSD_ArchiveGetPublicAddress(tg->x50, entry[0x22C / 4]));
+        HSD_JObjReqAnimAll(loaded_jobj, un_804DDCD8);
+        kind = HSD_GObj_804D7849;
+        HSD_GObjObject_80390A70(tg->x0, kind, loaded_jobj);
         GObj_SetupGXLink(tg->x0, HSD_GObj_JObjCallback, 0x3C, 0);
 
         lb_8001204C(loaded_jobj, (void*) ((u8*) tg + 0x10),
                     (u16*) (data + 0x6E0), 9);
 
         un_803083D8(tg->x30, 0x3E7);
-    } else {
-        OSReport(data + 0x6F4, *(void**) (entry + 0x188), joint);
-        __assert(un_804D5A48, 0x9E6, un_804D5A50);
+        return;
     }
+
+    OSReport(data + 0x6F4, *entry);
+    __assert(un_804D5A48, 0x9E6, un_804D5A50);
 }
 
 /* 96.3% match */
@@ -1747,13 +1850,14 @@ void un_803075E8(s32 arg0)
 {
     char* data;
     ToyData* td;
-    void* joint;
+    HSD_Joint* joint;
     char** ptr;
     HSD_JObj* jobj;
-    void* animjoint;
-    void* matanim;
-    void* shapanim;
+    HSD_AnimJoint* animjoint;
+    HSD_MatAnimJoint* matanim;
+    HSD_ShapeAnimJoint* shapanim;
     ToyDataJObj* tdjobj;
+    u8 kind;
 
     PAD_STACK(88);
 
@@ -1761,7 +1865,8 @@ void un_803075E8(s32 arg0)
     td = un_804D6ED8;
 
     if (td->archive == NULL) {
-        HSD_ASSERTREPORT(0xA41, NULL, "*** BG data aren\'t being loaded!\n");
+        OSReport(data + 0x6A0);
+        __assert(un_804D5A48, 0xA41, un_804D5A50);
     }
 
     if (td->gobj != NULL) {
@@ -1782,7 +1887,8 @@ void un_803075E8(s32 arg0)
         if (joint != NULL) {
             td->gobj = GObj_Create(4, 7, 0);
             jobj = HSD_JObjLoadJoint(joint);
-            HSD_GObjObject_80390A70(td->gobj, HSD_GObj_804D7849, jobj);
+            kind = HSD_GObj_804D7849;
+            HSD_GObjObject_80390A70(td->gobj, kind, jobj);
             GObj_SetupGXLink(td->gobj, HSD_GObj_JObjCallback, 0x33, 0);
 
             ptr = (char**) (data + arg0 * 0xC);
@@ -1794,13 +1900,14 @@ void un_803075E8(s32 arg0)
 
             if (animjoint != NULL || matanim != NULL || shapanim != NULL) {
                 HSD_JObjAddAnimAll(jobj, animjoint, matanim, shapanim);
-                HSD_JObjReqAnimAll(jobj, 0.0F);
+                HSD_JObjReqAnimAll(jobj, un_804DDCD8);
                 HSD_JObjAnimAll(jobj);
                 HSD_GObj_SetupProc(td->gobj, un_80306BB8, 0);
                 HSD_GObj_80390CD4(td->gobj);
             }
         } else {
-            HSD_ASSERTREPORT(0xA75, NULL, "*** Can not Load Panel Label(%s)");
+            OSReport(data + 0x718, *ptr);
+            __assert(un_804D5A48, 0xA75, un_804D5A50);
         }
     } else if (td->x54 != 0) {
         tdjobj = ((ToyData*) un_804D6ED8)->x8->x28;
@@ -1855,6 +1962,7 @@ void un_803078E4(void)
 {
     tyLightData* data;
     char* table;
+    void* syms[7];
     PosArrayFull pos_en;
     PosArrayFull pos_jp;
     HSD_SObj* sobj;
@@ -1869,8 +1977,6 @@ void un_803078E4(void)
     pos_jp = un_803B889C;
 
     if (data->x58 == NULL) {
-        void* syms[7];
-        void** sym_ptr;
         char* filename;
 
         if (lbLang_IsSavedLanguageJP() != 0) {
@@ -1890,13 +1996,12 @@ void un_803078E4(void)
         GObj_SetupGXLink(data->x0C, HSD_SObjLib_803A49E0, 0x38, 0);
 
         i = 0;
-        sym_ptr = &syms[i];
         jp_ptr = pos_jp.a[0].xy;
         en_ptr = pos_en.a[0].xy;
 
         do {
             sobj =
-                HSD_SObjLib_803A477C(data->x0C, (int) *sym_ptr, 0, 0, 0x80, 0);
+                HSD_SObjLib_803A477C(data->x0C, (int) syms[i], 0, 0, 0x80, 0);
             if (sobj != NULL) {
                 if (lbLang_IsSavedLanguageJP() != 0) {
                     sobj->x10 = (f32) jp_ptr[0];
@@ -1907,7 +2012,6 @@ void un_803078E4(void)
                 }
             }
             i += 1;
-            sym_ptr += 1;
             jp_ptr += 2;
             en_ptr += 2;
         } while (i < 7);
@@ -2045,17 +2149,19 @@ void un_80307F64(s32 arg0, s32 arg1)
 }
 extern char un_803FE454[0x1F];
 
-char* un_8030813C(s16 arg0, enum_t unused)
+char* un_8030813C(s32 arg0, enum_t unused)
 {
     char* ptr;
     s32 i;
     s32 found;
+    s32 cur;
     s32 id = arg0;
 
     found = 0;
 
     if (lbLang_IsSettingUS()) {
-        if (*(s32*) (ptr = un_804D6EA4) == id) {
+        cur = *(s32*) (ptr = un_804D6EA4);
+        if (cur == id) {
             found = 1;
         } else if (*(s32*) (ptr += 0x54) == id) {
             found = 1;
@@ -2091,6 +2197,7 @@ char* un_8030813C(s16 arg0, enum_t unused)
 
 void un_80308250(u8* arg0, s32 arg1, s32 arg2)
 {
+    char* un_8030813C(s16 arg0, enum_t unused);
     void* sym;
     char* ptr;
     ptr = un_8030813C(arg1, arg1);
@@ -2121,24 +2228,24 @@ void un_80308328(s32 arg0)
 s16 un_80308354(s16 idx)
 {
     s32 i;
-    s16 target;
+    s32 target;
     TrophyData* entry;
 
     target = un_804D6EDC[idx];
     entry = un_804D6EC4;
 
-    for (i = 0; i < 0x125; i++, entry++) {
+    for (i = 0; i < 0x125; entry++, i++) {
         if (target == entry->id) {
             break;
         }
     }
 
-    if (i != 0x125) {
+    if (i == 0x125) {
+        OSReport(un_803FE474, target, entry);
+        __assert(un_804D5A48, 0xC2A, un_804D5A50);
+    } else {
         return target;
     }
-
-    OSReport(un_803FE474);
-    __assert(un_804D5A48, 0xC2A, un_804D5A50);
 }
 
 void un_803083D8(HSD_JObj* jobj, s32 arg1)
@@ -2172,15 +2279,17 @@ static s32 un_804DDCFC = 0xFFBA00FF;
 #pragma push
 #pragma peephole on
 
-void un_803084A0(s16 arg0)
+void un_803084A0(s32 arg0)
 {
     volatile s32 color;
     tyDispData* display;
     HSD_Text* text;
     s32 one;
+    s32 id;
 
     PAD_STACK(72);
 
+    id = arg0;
     display = un_804D6EE0;
     color = un_804DDCFC;
 
@@ -2192,7 +2301,7 @@ void un_803084A0(s16 arg0)
         text->default_fitting = one;
         text = display->x144;
         text->default_alignment = one;
-        text = display->x144;
+        text = *(HSD_Text* volatile*) &display->x144;
         *(s32*) &text->text_color = color;
         if (lbLang_IsSavedLanguageJP()) {
             text = display->x144;
@@ -2211,7 +2320,7 @@ void un_803084A0(s16 arg0)
             text->x34.y = 1.0F;
         }
     }
-    HSD_SisLib_803A6368(display->x144, un_803063D4(arg0, 2, 0x128));
+    HSD_SisLib_803A6368(display->x144, un_803063D4(id, 2, 0x128));
 
     if (display->x148 == NULL) {
         if (lbLang_IsSavedLanguageJP()) {
@@ -2235,7 +2344,7 @@ void un_803084A0(s16 arg0)
         text = display->x148;
         text->default_kerning = 1;
     }
-    HSD_SisLib_803A6368(display->x148, un_803063D4(arg0, 2, 0x374));
+    HSD_SisLib_803A6368(display->x148, un_803063D4(id, 2, 0x374));
 
     if (display->x14C == NULL) {
         if (lbLang_IsSavedLanguageJP()) {
@@ -2274,8 +2383,8 @@ void un_803084A0(s16 arg0)
         display->x14C->default_alignment = 0;
         display->x150->default_alignment = 0;
     }
-    HSD_SisLib_803A6368(display->x14C, un_803063D4(arg0, 0x128, 0x37A));
-    HSD_SisLib_803A6368(display->x150, un_803063D4(arg0, 0x24E, 0x380));
+    HSD_SisLib_803A6368(display->x14C, un_803063D4(id, 0x128, 0x37A));
+    HSD_SisLib_803A6368(display->x150, un_803063D4(id, 0x24E, 0x380));
 }
 
 #pragma pop
@@ -2296,19 +2405,24 @@ HSD_GObj* un_803087F4(void* arg0)
     ToyAnimState* anim;
     HSD_JObj* parent_jobj;
     HSD_JObj* trophy_jobj;
+    HSD_Joint* joint;
     s16 trophy_id;
     char* model_name;
+    f32 v1, v2, v3, v4, v5;
+    f32 scale, rot;
+    UNUSED u8 pad[0x10];
+    char buf[0x48];
     void* spC;
-    f32 tx, ty, tz, scale, rot;
-
-    PAD_STACK(16);
+    u8 kind;
 
     data = un_803FDD18;
     anim = &un_804A2AA8;
 
     if (entry->x14 == NULL) {
+        char* un_8030813C();
+
         trophy_id = entry->x10;
-        model_name = un_8030813C(trophy_id, 0);
+        model_name = un_8030813C(trophy_id);
         if (entry->x14 != NULL) {
             lbArchive_80016EFC(entry->x14);
             entry->x14 = NULL;
@@ -2319,8 +2433,8 @@ HSD_GObj* un_803087F4(void* arg0)
         entry->x14 = lbArchive_LoadSymbols(entry->x8, &spC, entry->xC, 0);
     }
 
-    trophy_jobj = HSD_ArchiveGetPublicAddress(entry->x14, entry->xC);
-    if (trophy_jobj == NULL) {
+    joint = HSD_ArchiveGetPublicAddress(entry->x14, entry->xC);
+    if (joint == NULL) {
         goto assert_fail;
     }
 
@@ -2337,41 +2451,28 @@ HSD_GObj* un_803087F4(void* arg0)
     parent_jobj = HSD_JObjAlloc();
     un_80307BA0(parent_jobj, anim->xC);
 
-    trophy_jobj = HSD_JObjLoadJoint((void*) trophy_jobj);
+    trophy_jobj = HSD_JObjLoadJoint(joint);
     HSD_JObjAddChild(parent_jobj, trophy_jobj);
 
-    HSD_GObjObject_80390A70(anim->gobj, HSD_GObj_804D7849, parent_jobj);
+    kind = HSD_GObj_804D7849;
+    HSD_GObjObject_80390A70(anim->gobj, kind, parent_jobj);
     GObj_SetupGXLink(anim->gobj, HSD_GObj_JObjCallback, 0x39, 0);
 
-    tx = un_803060BC((s32) anim->xC, 0);
-    HSD_JObjSetTranslateX(trophy_jobj, tx);
+    Toy_JObjSetTranslateX(trophy_jobj, un_803060BC((s32) anim->xC, 0));
 
-    ty = un_803060BC((s32) anim->xC, 1);
-    HSD_JObjSetTranslateY(trophy_jobj, ty);
+    Toy_JObjSetTranslateY(trophy_jobj, un_803060BC((s32) anim->xC, 1));
 
-    tz = un_803060BC((s32) anim->xC, 2);
-    HSD_JObjSetTranslateZ(trophy_jobj, tz);
+    Toy_JObjSetTranslateZ(trophy_jobj, un_803060BC((s32) anim->xC, 2));
 
-    rot = un_803060BC((s32) anim->xC, 3);
-    HSD_JObjSetRotationY(trophy_jobj, rot);
+    scale = un_803060BC((s32) anim->xC, 3);
+    Toy_JObjSetScaleX(trophy_jobj, scale);
+    Toy_JObjSetScaleY(trophy_jobj, scale);
+    Toy_JObjSetScaleZ(trophy_jobj, scale);
 
-    scale = un_803060BC((s32) anim->xC, 4);
-    HSD_JObjSetScaleX(parent_jobj, scale);
-    HSD_JObjSetScaleY(parent_jobj, scale);
-    HSD_JObjSetScaleZ(parent_jobj, scale);
-
-    if (un_804D6E98 != NULL) {
-        un_803062EC(0, 3, tx);
-        un_803062EC(1, 3, ty);
-        un_803062EC(2, 3, tz);
-        un_803062EC(3, 3, rot);
-        un_803062EC(4, 3, scale);
-    }
+    rot = un_804DDCEC * un_803060BC((s32) anim->xC, 5);
+    Toy_JObjSetRotationY(trophy_jobj, rot, data);
 
     if (un_804D6E9C != NULL) {
-        char buf[0x48];
-        f32 v5, v4, v3, v2, v1;
-
         DevText_Erase(un_804D6E9C);
         DevText_SetCursorXY(un_804D6E9C, 0, 0);
 
@@ -2392,12 +2493,14 @@ HSD_GObj* un_803087F4(void* arg0)
         anim->x0E = 0;
     }
 
-    return anim->gobj;
+    goto done;
 
 assert_fail:
-    OSReport(data + 0x7B4, M2C_FIELD(entry, void**, 0xC), trophy_jobj);
+    OSReport(data + 0x7B4);
     __assert(un_804D5A48, 0xD1E, un_804D5A50);
-    return NULL;
+
+done:
+    return anim->gobj;
 }
 
 void un_80307F64(s32 a, s32 b);
@@ -2451,6 +2554,7 @@ void un_80308DC8(HSD_CObj* cobj)
 
 void un_80308F04(HSD_CObj* cobj)
 {
+    UNUSED u8 interest_pad[16];
     Vec3 interest;
     Toy26B8* data;
     Toy6E68* state;
@@ -2461,7 +2565,7 @@ void un_80308F04(HSD_CObj* cobj)
     f32 left;
     ToyJObjNode* jobj;
 
-    PAD_STACK(64);
+    PAD_STACK(48);
 
     data = TOY_DATA;
     state = TOY_STATE;
@@ -2648,100 +2752,694 @@ static Vec3 un_803B88E0;
 static Vec3 un_803B88EC;
 
 #pragma push
-#pragma dont_inline on
+#pragma dont_inline off
 
 void fn_80309404(HSD_GObj* gobj)
 {
+    UNUSED u8 eye_pad[0x48];
     Vec3 eye_pos;
-    Vec3 interest;
+    Vec3 transition_eye;
+    Vec3 transition_interest;
+    void* ed4;
     HSD_CObj* cobj;
+    u8* base;
     void* ed8;
     Toy6E68* state;
-    void* ed4;
+    ToyAnimState* anim;
     f32 dist;
-    f32 stick_x, stick_y, substick_x, substick_y;
-    f32 abs_val;
-    s32 i;
+    f32 tmp;
+    f32 rotate_update;
+    f32 movement_update;
+    f32 zoom_update;
+    u32 trigger;
+    u32 button;
+    s32 sign;
+    s32 sp138;
+    s32 sp134;
+    s32 sp130;
+    s32 sp12C;
+
+    PAD_STACK(264);
 
     cobj = gobj->hsd_obj;
+    base = (u8*) un_804A26B8;
     ed8 = un_804D6ED8;
     state = (Toy6E68*) un_804D6E68;
+    anim = (ToyAnimState*) (base + 0x3F0);
     ed4 = un_804D6ED4;
+    rotate_update = 0.0f;
+    movement_update = 0.0f;
+    zoom_update = 0.0f;
 
     HSD_CObjGetEyePosition(cobj, &eye_pos);
     dist = un_80309338(&eye_pos, NULL);
 
-    /* Poll stick X from 4 pads with 0.1 deadzone */
-    stick_x = 0.0F;
-    for (i = 0; i < 4; i++) {
-        f32 sx = HSD_PadCopyStatus[i].nml_stickX;
-        abs_val = (sx < 0.0F) ? -sx : sx;
-        if (abs_val > 0.1F) {
-            gm_801677E8(i);
-            stick_x = sx;
-            break;
+    {
+        f32 val;
+        f32 abs;
+        s32 i;
+
+        for (i = 0; i < 4; i++) {
+            val = HSD_PadCopyStatus[(u8) i].nml_stickX;
+            if (val < 0.0F) {
+                abs = -val;
+            } else {
+                abs = val;
+            }
+            if (abs > 0.1F) {
+                break;
+            }
+        }
+        state->x30 = val;
+    }
+
+    state->x34 = un_80305DB0();
+    state->x54 = 0.0f;
+    state->x50 = 0.0f;
+
+    tmp = state->x30;
+    if ((tmp > -0.2f) && (tmp < 0.2f)) {
+        state->x30 = 0.0f;
+    } else {
+        if (tmp > 0.0f) {
+            sign = 1;
+        } else {
+            sign = -1;
+        }
+        state->x30 = (f32) (-((0.2f * (f32) sign) - tmp) / 0.8f);
+    }
+
+    tmp = state->x34;
+    if ((tmp > -0.2f) && (tmp < 0.2f)) {
+        state->x34 = 0.0f;
+    } else {
+        if (tmp > 0.0f) {
+            sign = 1;
+        } else {
+            sign = -1;
+        }
+        state->x34 = (f32) (-((0.2f * (f32) sign) - tmp) / 0.8f);
+    }
+
+    state->x40 = un_80305EB4();
+
+    state->x44 = un_80305FB8();
+
+    tmp = state->x40;
+    if ((tmp > -0.2f) && (tmp < 0.2f)) {
+        state->x40 = 0.0f;
+    } else {
+        if (tmp > 0.0f) {
+            sign = 1;
+        } else {
+            sign = -1;
+        }
+        state->x40 = (f32) (-((0.2f * (f32) sign) - tmp) / 0.8f);
+    }
+
+    tmp = state->x44;
+    if ((tmp > -0.2f) && (tmp < 0.2f)) {
+        state->x44 = 0.0f;
+    } else {
+        if (tmp > 0.0f) {
+            sign = 1;
+        } else {
+            sign = -1;
+        }
+        state->x44 = (f32) (-((0.2f * (f32) sign) - tmp) / 0.8f);
+    }
+
+    {
+        u8 cooldown = state->x60;
+        if ((s8) cooldown != 0) {
+            state->x60 = (s8) (cooldown - 1);
+            un_8030715C(0.0f, 0.0f);
+            return;
         }
     }
 
-    /* Poll stick Y from 4 pads with 0.1 deadzone */
-    stick_y = 0.0F;
-    for (i = 0; i < 4; i++) {
-        f32 sy = HSD_PadCopyStatus[i].nml_stickY;
-        abs_val = (sy < 0.0F) ? -sy : sy;
-        if (abs_val > 0.1F) {
-            gm_801677E8(i);
-            stick_y = sy;
-            break;
-        }
-    }
-
-    /* Poll substick X from 4 pads */
-    substick_x = 0.0F;
-    for (i = 0; i < 4; i++) {
-        f32 sx = HSD_PadCopyStatus[i].nml_subStickX;
-        abs_val = (sx < 0.0F) ? -sx : sx;
-        if (abs_val > 0.1F) {
-            gm_801677E8(i);
-            substick_x = sx;
-            break;
-        }
-    }
-
-    /* Poll substick Y from 4 pads */
-    substick_y = 0.0F;
-    for (i = 0; i < 4; i++) {
-        f32 sy = HSD_PadCopyStatus[i].nml_subStickY;
-        abs_val = (sy < 0.0F) ? -sy : sy;
-        if (abs_val > 0.1F) {
-            gm_801677E8(i);
-            substick_y = sy;
-            break;
-        }
-    }
-
-    /* Check for menu interrupt */
     if (mn_8022F218() != 0) {
+        lbAudioAx_80024030(0);
+        HSD_GObjProc_8038FE24(HSD_GObj_804D7838);
         un_80310660(1);
         HSD_GObj_80390CD4(gobj);
         mn_8022F268();
-        M2C_FIELD(un_804A26B8, u8*, 0x198) = 1;
+        M2C_FIELD(base, u8*, 0x198) = 1;
         return;
     }
 
-    /* State machine */
     switch ((s8) state->x61) {
-    case 0:
-        /* Normal input: trophy cycling, camera orbit, idle timer */
-        break;
-    case 3:
-        state->x61 = 0;
-        state->x60 = 4;
-        HSD_PadRenewStatus();
-        break;
-    case 2:
-        /* Timeout/transition handling */
+    case 0: {
+        s16 trophy_count;
+
+        trigger = un_80305B88();
+
+        if (trigger & 0x200) {
+            lbAudioAx_80024030(0);
+            un_80310660(1);
+            HSD_GObj_80390CD4(gobj);
+            un_803147C4();
+            return;
+        }
+
+        if ((gm_8016B498() != 0) || (gm_801A4310() == 0xC)) {
+            trophy_count = M2C_FIELD(base, s16*, 0x3EC);
+        } else {
+            trophy_count = *gmMainLib_8015CC90();
+        }
+        if (trophy_count == 0) {
+            return;
+        }
+
+        if ((state->x40 + state->x44) != 0.0f) {
+            state->x58 = 0;
+        } else {
+            trigger = un_80305B88();
+
+            if (trigger & 0xF) {
+                state->x58 = 0;
+            } else {
+                if ((f32) state->x58 > 2400.0f) {
+                    state->x24 = (f32) (state->x24 + 0.01f);
+                    if (state->x24 > 1.0f) {
+                        state->x24 = 1.0f;
+                    }
+                    state->x1C = (f32) (state->x1C + state->x24);
+                    tmp = state->x1C;
+                    if (tmp < -360.0f) {
+                        state->x1C = (f32) (tmp + 360.0f);
+                    }
+                    tmp = state->x1C;
+                    if (tmp > 360.0f) {
+                        state->x1C = (f32) (tmp - 360.0f);
+                    }
+                    M2C_FIELD(ed4, f32*, 0x18) = (f32) state->x1C;
+                }
+                state->x58 = state->x58 + 1;
+            }
+        }
+
+        if (trophy_count == 1) {
+            if ((state->x30 + state->x34) != 0.0f) {
+                state->x34 = 0.0f;
+                state->x30 = 0.0f;
+            }
+        }
+
+        trigger = un_80305B88();
+        if (trigger & 0xD00) {
+            lbAudioAx_80024030(1);
+            un_804D6E80 = HSD_CObjGetTop(cobj);
+            un_804D6E84 = HSD_CObjGetBottom(cobj);
+            un_804D6E88 = HSD_CObjGetRight(cobj);
+            un_804D6E8C = HSD_CObjGetLeft(cobj);
+            state->x5C = 0;
+            *(s32*) (M2C_FIELD(state, u8**, 0x00) + 0x24) = 0;
+            *(s32*) (M2C_FIELD(state, u8**, 0x00) + 0x20) = 0x480000;
+            *(s32*) (M2C_FIELD(state, u8**, 0x04) + 0x24) = 0;
+            *(s32*) (M2C_FIELD(state, u8**, 0x04) + 0x20) = 0;
+            *(s32*) (M2C_FIELD(state, u8**, 0x0C) + 0x24) = 0;
+            *(s32*) (M2C_FIELD(state, u8**, 0x0C) + 0x20) = 0;
+            state->x61 = 1;
+            un_8030715C(0.0f, 0.0f);
+            return;
+        }
+        rotate_update = 1.0f;
         break;
     }
+    case 1:
+    case 3:
+        un_80308F04(cobj);
+        break;
+    case 2:
+        trigger = un_80305B88();
+        if (trigger & 0x100) {
+            ToyJObjNode* jobj_node;
+
+            un_804D6E58 ^= 1;
+            jobj_node = (ToyJObjNode*) ((ToyED8Data*) ed8)->xC->x28;
+            if (un_804D6E58 != 0) {
+                while (jobj_node != NULL) {
+                    jobj_node->x40 = 9;
+                    jobj_node = (ToyJObjNode*) jobj_node->x4;
+                }
+            } else {
+                while (jobj_node != NULL) {
+                    jobj_node->x40 = 8;
+                    jobj_node = (ToyJObjNode*) jobj_node->x4;
+                }
+            }
+        }
+
+        trigger = un_80305B88();
+
+        if ((trigger & 0x200) || ((f32) state->x5C > 7200.0f)) {
+            ToyJObjNode* jobj_node;
+
+            lbAudioAx_80024030(0);
+            un_804D6E80 = HSD_CObjGetTop(cobj);
+            un_804D6E84 = HSD_CObjGetBottom(cobj);
+            un_804D6E88 = HSD_CObjGetRight(cobj);
+            un_804D6E8C = HSD_CObjGetLeft(cobj);
+
+            *(s32*) (M2C_FIELD(state, u8**, 0x00) + 0x24) = 0;
+            *(s32*) (M2C_FIELD(state, u8**, 0x00) + 0x20) = 0x50480000;
+            *(s32*) (M2C_FIELD(state, u8**, 0x04) + 0x24) = 0;
+            *(s32*) (M2C_FIELD(state, u8**, 0x04) + 0x20) = (s32) 0x80000000U;
+            *(s32*) (M2C_FIELD(state, u8**, 0x0C) + 0x24) = 0;
+            *(s32*) (M2C_FIELD(state, u8**, 0x0C) + 0x20) = 0x40000000;
+            jobj_node = (ToyJObjNode*) ((ToyED8Data*) ed8)->xC->x28;
+            while (jobj_node != NULL) {
+                jobj_node->x40 = 9;
+                jobj_node = (ToyJObjNode*) jobj_node->x4;
+            }
+
+            state->x5C = 0;
+            transition_eye = un_803B88E0;
+            transition_interest = un_803B88EC;
+            HSD_CObjGetEyePosition(cobj, &eye_pos);
+            transition_eye.y = 8.0f;
+            HSD_CObjGetInterest(cobj, &transition_interest);
+            M2C_FIELD(base, f32*, 0x0) =
+                (transition_eye.x - transition_interest.x) / 10.0f;
+            M2C_FIELD(base, f32*, 0x4) =
+                (transition_eye.y - transition_interest.y) / 10.0f;
+            M2C_FIELD(base, f32*, 0x8) =
+                (transition_eye.z - transition_interest.z) / 10.0f;
+            un_804D6E90 = (state->x20 - 38.0f) / 10.0f;
+            un_804D6E94 = state->x18 / 10.0f;
+            state->x61 = 3;
+        }
+
+        trigger = un_80305B88();
+
+        if ((state->x44 + (state->x40 + (state->x30 + state->x34)) +
+             (f32) trigger) == 0.0f)
+        {
+            state->x5C = state->x5C + 1;
+        } else {
+            state->x5C = 0;
+        }
+
+        button = un_80305C44();
+        if (button & 1) {
+            state->x50 = (f32) (-0.3f * (dist / 38.0f));
+        }
+
+        button = un_80305C44();
+        if (button & 2) {
+            state->x50 = (f32) (0.3f * (dist / 38.0f));
+        }
+
+        button = un_80305C44();
+        if (button & 8) {
+            state->x54 = (f32) (0.3f * (dist / 38.0f));
+        }
+
+        button = un_80305C44();
+        if (button & 4) {
+            state->x54 = (f32) (-0.3f * (dist / 38.0f));
+        }
+
+        button = un_80305C44();
+        if (button & 0x100) {
+            tmp = state->x30;
+            if ((tmp != 0.0f) && (tmp < 0.0f)) {
+                state->x50 = (f32) (0.3f * tmp * (dist / 38.0f));
+            }
+        }
+
+        button = un_80305C44();
+        if (button & 0x100) {
+            tmp = state->x30;
+            if ((tmp != 0.0f) && (tmp > 0.0f)) {
+                state->x50 = (f32) (0.3f * tmp * (dist / 38.0f));
+            }
+        }
+
+        button = un_80305C44();
+        if (button & 0x100) {
+            tmp = state->x34;
+            if ((tmp != 0.0f) && (tmp > 0.0f)) {
+                state->x54 = (f32) (0.3f * tmp * (dist / 38.0f));
+            }
+        }
+
+        button = un_80305C44();
+        if (button & 0x100) {
+            tmp = state->x34;
+            if ((tmp != 0.0f) && (tmp < 0.0f)) {
+                state->x54 = (f32) (0.3f * tmp * (dist / 38.0f));
+            }
+        }
+
+        if ((state->x50 == 0.0f) && (state->x54 == 0.0f)) {
+            button = un_80305C44();
+            if (button & 0x100) {
+                un_803102C4(0);
+            } else {
+                un_803102C4(1);
+            }
+        } else {
+            un_803102C4(0);
+            movement_update = 1.0f;
+        }
+
+        if (movement_update == 0.0f) {
+            button = un_80305C44();
+            if (button & 0x800) {
+                state->x20 = (f32) - ((0.025f * dist) - state->x20);
+                zoom_update = 1.0f;
+            } else {
+                button = un_80305C44();
+                if (button & 0x400) {
+                    state->x20 = (f32) - ((-0.025f * dist) - state->x20);
+                    zoom_update = 1.0f;
+                } else {
+                    tmp = state->x34;
+                    if (tmp != 0.0f) {
+                        state->x20 =
+                            (f32) - ((dist * (0.025f * tmp)) - state->x20);
+                        zoom_update = 1.0f;
+                    }
+                }
+            }
+            if (state->x20 < 5.0f) {
+                state->x20 = 5.0f;
+            }
+            if (state->x20 > 250.0f) {
+                state->x20 = 250.0f;
+            }
+        }
+        rotate_update = 1.0f;
+        break;
+    }
+
+    if (rotate_update != 0.0f) {
+        state->x1C = (f32) - ((3.0f * state->x40) - state->x1C);
+        state->x18 = (f32) - ((3.0f * state->x44) - state->x18);
+        if (state->x18 < -89.0f) {
+            state->x18 = -89.0f;
+        }
+        if (state->x18 > 89.0f) {
+            state->x18 = 89.0f;
+        }
+        tmp = state->x1C;
+        if (tmp < -360.0f) {
+            state->x1C = (f32) (tmp + 360.0f);
+        }
+        tmp = state->x1C;
+        if (tmp > 360.0f) {
+            state->x1C = (f32) (tmp - 360.0f);
+        }
+        M2C_FIELD(ed4, f32*, 0x18) = (f32) state->x1C;
+        M2C_FIELD(ed4, f32*, 0x14) = (f32) state->x18;
+        if ((state->x40 + state->x44) != 0.0f) {
+            state->x24 = 0.0f;
+        }
+
+        if ((movement_update == 0.0f) && (zoom_update == 0.0f)) {
+            s16 trophy_count;
+
+            if ((gm_8016B498() != 0) || (gm_801A4310() == 0xC)) {
+                trophy_count = M2C_FIELD(base, s16*, 0x3EC);
+            } else {
+                trophy_count = *gmMainLib_8015CC90();
+            }
+            if (trophy_count > 1) {
+                trigger = un_80305B88();
+                if (trigger & 0x60) {
+                    void* display;
+                    u32 trig2;
+
+                    display = un_804D6EE0;
+                    trig2 = un_80305B88();
+                    if (trig2 & 0x441) {
+                        s16 new_idx;
+                        s16 total;
+
+                        lbAudioAx_80024030(2);
+                        new_idx = M2C_FIELD(display, s16*, 0x154) - 1;
+                        M2C_FIELD(display, s16*, 0x154) = new_idx;
+                        if (new_idx < 0) {
+                            if ((gm_8016B498() != 0) || (gm_801A4310() == 0xC))
+                            {
+                                total = M2C_FIELD(base, s16*, 0x3EC);
+                            } else {
+                                total = *gmMainLib_8015CC90();
+                            }
+                            M2C_FIELD(display, s16*, 0x154) =
+                                (s16) (total - 1);
+                        }
+                        if ((gm_8016B498() != 0) || (gm_801A4310() == 0xC)) {
+                            total = M2C_FIELD(base, s16*, 0x3EC);
+                        } else {
+                            total = *gmMainLib_8015CC90();
+                        }
+                        if (total > 3) {
+                            s16 cur_idx = M2C_FIELD(display, s16*, 0x154);
+                            if ((cur_idx - 1) < 0) {
+                                s16 cnt;
+                                s32 lk;
+                                u8* entry;
+                                HSD_Archive* oa;
+                                char* md;
+
+                                if ((gm_8016B498() != 0) ||
+                                    (gm_801A4310() == 0xC))
+                                {
+                                    cnt = M2C_FIELD(base, s16*, 0x3EC);
+                                } else {
+                                    cnt = *gmMainLib_8015CC90();
+                                }
+                                lk = cnt + cur_idx;
+                                entry = M2C_FIELD(display, u8**, 0x138);
+                                {
+                                    s16 tid = un_804D6EDC[lk - 1];
+                                    oa = *(HSD_Archive**) (entry + 0x14);
+                                    md = un_8030813C(tid, lk);
+                                    if (oa != NULL) {
+                                        lbArchive_80016EFC(oa);
+                                        *(HSD_Archive**) (entry + 0x14) = NULL;
+                                    }
+                                    *(char**) (entry + 0x8) = md + 4;
+                                    *(char**) (entry + 0xC) = md + 0x24;
+                                    *(s16*) (entry + 0x10) = tid;
+                                    *(HSD_Archive**) (entry + 0x14) =
+                                        lbArchive_LoadSymbols(
+                                            *(char**) (entry + 0x08), &sp138,
+                                            *(char**) (entry + 0x0C), 0);
+                                }
+                            } else {
+                                u8* entry;
+                                HSD_Archive* oa;
+                                char* md;
+                                s16 tid;
+
+                                entry = M2C_FIELD(display, u8**, 0x138);
+                                tid = un_804D6EDC[cur_idx - 1];
+                                oa = *(HSD_Archive**) (entry + 0x14);
+                                md = un_8030813C(
+                                    tid, (enum_t) &un_804D6EDC[cur_idx]);
+                                if (oa != NULL) {
+                                    lbArchive_80016EFC(oa);
+                                    *(HSD_Archive**) (entry + 0x14) = NULL;
+                                }
+                                *(char**) (entry + 0x8) = md + 4;
+                                *(char**) (entry + 0xC) = md + 0x24;
+                                *(s16*) (entry + 0x10) = tid;
+                                *(HSD_Archive**) (entry + 0x14) =
+                                    lbArchive_LoadSymbols(
+                                        *(char**) (entry + 0x08), &sp134,
+                                        *(char**) (entry + 0x0C), 0);
+                            }
+                            {
+                                HSD_Archive* ma =
+                                    *(HSD_Archive**) (M2C_FIELD(display, u8**,
+                                                                0x13C) +
+                                                      0x14);
+                                if (ma != NULL) {
+                                    lbArchive_80016EFC(ma);
+                                    *(HSD_Archive**) (M2C_FIELD(display, u8**,
+                                                                0x13C) +
+                                                      0x14) = NULL;
+                                }
+                            }
+                            M2C_FIELD(display, void**, 0x140) =
+                                *(void**) M2C_FIELD(display, u8**, 0x140);
+                            M2C_FIELD(display, void**, 0x138) =
+                                *(void**) M2C_FIELD(display, u8**, 0x138);
+                            M2C_FIELD(display, void**, 0x13C) =
+                                *(void**) M2C_FIELD(display, u8**, 0x13C);
+                        } else {
+                            M2C_FIELD(display, void**, 0x140) =
+                                *(void**) M2C_FIELD(display, u8**, 0x140);
+                        }
+                    } else {
+                        s16 total;
+                        s16 cur_idx;
+
+                        lbAudioAx_80024030(2);
+                        M2C_FIELD(display, s16*, 0x154) =
+                            M2C_FIELD(display, s16*, 0x154) + 1;
+                        if ((gm_8016B498() != 0) || (gm_801A4310() == 0xC)) {
+                            total = M2C_FIELD(base, s16*, 0x3EC);
+                        } else {
+                            total = *gmMainLib_8015CC90();
+                        }
+                        if (M2C_FIELD(display, s16*, 0x154) >= total) {
+                            M2C_FIELD(display, s16*, 0x154) = 0;
+                        }
+                        if ((gm_8016B498() != 0) || (gm_801A4310() == 0xC)) {
+                            total = M2C_FIELD(base, s16*, 0x3EC);
+                        } else {
+                            total = *gmMainLib_8015CC90();
+                        }
+                        if (total > 3) {
+                            s16 cnt;
+
+                            if ((gm_8016B498() != 0) || (gm_801A4310() == 0xC))
+                            {
+                                cnt = M2C_FIELD(base, s16*, 0x3EC);
+                            } else {
+                                cnt = *gmMainLib_8015CC90();
+                            }
+                            cur_idx = M2C_FIELD(display, s16*, 0x154);
+                            if ((s32) (cur_idx + 1) >= cnt) {
+                                s16 cnt2;
+                                u8* entry;
+                                HSD_Archive* oa;
+                                char* md;
+                                s16 tid;
+                                s32 lk;
+
+                                if ((gm_8016B498() != 0) ||
+                                    (gm_801A4310() == 0xC))
+                                {
+                                    cnt2 = M2C_FIELD(base, s16*, 0x3EC);
+                                } else {
+                                    cnt2 = *gmMainLib_8015CC90();
+                                }
+                                entry =
+                                    *(u8**) (M2C_FIELD(display, u8**, 0x13C) +
+                                             0x04);
+                                lk = cur_idx - cnt2;
+                                tid =
+                                    M2C_FIELD(un_804D6EDC, s16*, (lk * 2) + 2);
+                                oa = *(HSD_Archive**) (entry + 0x14);
+                                md = un_8030813C(tid, (enum_t) un_804D6EDC);
+                                if (oa != NULL) {
+                                    lbArchive_80016EFC(oa);
+                                    *(HSD_Archive**) (entry + 0x14) = NULL;
+                                }
+                                *(char**) (entry + 0x8) = md + 4;
+                                *(char**) (entry + 0xC) = md + 0x24;
+                                *(s16*) (entry + 0x10) = tid;
+                                *(HSD_Archive**) (entry + 0x14) =
+                                    lbArchive_LoadSymbols(
+                                        *(char**) (entry + 0x08), &sp130,
+                                        *(char**) (entry + 0x0C), 0);
+                            } else {
+                                u8* entry;
+                                HSD_Archive* oa;
+                                char* md;
+                                s16 tid;
+
+                                entry =
+                                    *(u8**) (M2C_FIELD(display, u8**, 0x13C) +
+                                             0x04);
+                                tid = un_804D6EDC[cur_idx + 1];
+                                oa = *(HSD_Archive**) (entry + 0x14);
+                                md = un_8030813C(
+                                    tid, (enum_t) &un_804D6EDC[cur_idx]);
+                                if (oa != NULL) {
+                                    lbArchive_80016EFC(oa);
+                                    *(HSD_Archive**) (entry + 0x14) = NULL;
+                                }
+                                *(char**) (entry + 0x8) = md + 4;
+                                *(char**) (entry + 0xC) = md + 0x24;
+                                *(s16*) (entry + 0x10) = tid;
+                                *(HSD_Archive**) (entry + 0x14) =
+                                    lbArchive_LoadSymbols(
+                                        *(char**) (entry + 0x08), &sp12C,
+                                        *(char**) (entry + 0x0C), 0);
+                            }
+                            {
+                                HSD_Archive* ma =
+                                    *(HSD_Archive**) (M2C_FIELD(display, u8**,
+                                                                0x138) +
+                                                      0x14);
+                                if (ma != NULL) {
+                                    lbArchive_80016EFC(ma);
+                                    *(HSD_Archive**) (M2C_FIELD(display, u8**,
+                                                                0x138) +
+                                                      0x14) = NULL;
+                                }
+                            }
+                            M2C_FIELD(display, void**, 0x140) =
+                                *(void**) (M2C_FIELD(display, u8**, 0x140) +
+                                           0x04);
+                            M2C_FIELD(display, void**, 0x138) =
+                                *(void**) (M2C_FIELD(display, u8**, 0x138) +
+                                           0x04);
+                            M2C_FIELD(display, void**, 0x13C) =
+                                *(void**) (M2C_FIELD(display, u8**, 0x13C) +
+                                           0x04);
+                        } else {
+                            M2C_FIELD(display, void**, 0x140) =
+                                *(void**) (M2C_FIELD(display, u8**, 0x140) +
+                                           0x04);
+                        }
+                    }
+
+                    un_80307828(0);
+                    un_8030715C(0.0f, 0.0f);
+                    state->x58 = 0x95E;
+                    un_803087F4(M2C_FIELD(display, void**, 0x140));
+                    un_803084A0(
+                        *(s16*) (M2C_FIELD(display, u8**, 0x140) + 0x10));
+                    un_803083D8(
+                        M2C_FIELD(ed8, HSD_JObj**, 0x30),
+                        (s32) *
+                            (s16*) (M2C_FIELD(display, u8**, 0x140) + 0x10));
+                    state->x60 = 0x14;
+                }
+            }
+        }
+
+        trigger = un_80305B88();
+        if (trigger & 0x1000) {
+            lbAudioAx_80024030(2);
+            state->x58 = 0;
+            M2C_FIELD(ed4, s32*, 0x10) =
+                (s32) (M2C_FIELD(ed4, s32*, 0x10) + 1);
+            if (M2C_FIELD(ed4, s32*, 0x10) == 6) {
+                M2C_FIELD(ed4, s32*, 0x10) = 0;
+            }
+            un_80306D70(M2C_FIELD(ed4, s32*, 0x10));
+            un_803075E8(M2C_FIELD(ed4, s32*, 0x10));
+        }
+
+        trigger = un_80305B88();
+        if (trigger & 0x10) {
+            un_80307828(0);
+            M2C_FIELD(ed4, s32*, 0x10) = 0;
+            un_80306D70(M2C_FIELD(ed4, s32*, 0x10));
+            un_803075E8(M2C_FIELD(ed4, s32*, 0x10));
+            anim->x11 = 2;
+            anim->x10 = 2;
+            anim->x0F = 0;
+            anim->x0E = 0;
+            un_80307F64(2, 0);
+        }
+    }
+
+    un_80308DC8(cobj);
+    un_8030715C(state->x50, state->x54);
+    state->x38 = state->x30;
+    state->x3C = state->x34;
+    state->x48 = state->x40;
+    state->x4C = state->x44;
 }
 
 #pragma pop
@@ -2760,7 +3458,6 @@ void fn_8030B530(HSD_GObj* arg0)
         HSD_JObj* jobj_next;
         f32 stick_x;
         f32 stick_y;
-        f32 abs_val;
         f32 adj_x;
         f32 adj_y;
         f32 substick_x;
@@ -2775,6 +3472,8 @@ void fn_8030B530(HSD_GObj* arg0)
         s32 sp188;
         s32 sp184;
 
+        PAD_STACK(312);
+
         {
             void* anim_state_ptr = M2C_FIELD(un_804A26B8, void**, 0x3F0);
             void* x28_ptr = M2C_FIELD(anim_state_ptr, void**, 0x28);
@@ -2783,45 +3482,25 @@ void fn_8030B530(HSD_GObj* arg0)
             jobj_next = jobj_base->next;
         }
 
-        stick_x = HSD_PadCopyStatus[0].nml_stickX;
-        abs_val = (stick_x < 0.0f) ? -stick_x : stick_x;
-        if (!(abs_val > 0.1f)) {
-            stick_x = HSD_PadCopyStatus[1].nml_stickX;
-            abs_val = (stick_x < 0.0f) ? -stick_x : stick_x;
-            if (!(abs_val > 0.1f)) {
-                stick_x = HSD_PadCopyStatus[2].nml_stickX;
-                abs_val = (stick_x < 0.0f) ? -stick_x : stick_x;
-                if (!(abs_val > 0.1f)) {
-                    stick_x = HSD_PadCopyStatus[3].nml_stickX;
-                    if (stick_x < 0.0f) {
-                    }
-                }
-            }
-        }
+        {
+            f32 val;
+            f32 abs;
+            s32 i;
 
-        stick_y = HSD_PadCopyStatus[0].nml_stickY;
-        abs_val = (stick_y < 0.0f) ? -stick_y : stick_y;
-        if (abs_val > 0.1f) {
-            gm_801677E8(0);
-        } else {
-            stick_y = HSD_PadCopyStatus[1].nml_stickY;
-            abs_val = (stick_y < 0.0f) ? -stick_y : stick_y;
-            if (abs_val > 0.1f) {
-                gm_801677E8(1);
-            } else {
-                stick_y = HSD_PadCopyStatus[2].nml_stickY;
-                abs_val = (stick_y < 0.0f) ? -stick_y : stick_y;
-                if (abs_val > 0.1f) {
-                    gm_801677E8(2);
+            for (i = 0; i < 4; i++) {
+                val = HSD_PadCopyStatus[(u8) i].nml_stickX;
+                if (val < 0.0F) {
+                    abs = -val;
                 } else {
-                    stick_y = HSD_PadCopyStatus[3].nml_stickY;
-                    abs_val = (stick_y < 0.0f) ? -stick_y : stick_y;
-                    if (abs_val > 0.1f) {
-                        gm_801677E8(3);
-                    }
+                    abs = val;
+                }
+                if (abs > 0.1F) {
+                    break;
                 }
             }
+            stick_x = val;
         }
+        stick_y = un_80305DB0();
 
         if ((stick_x > -0.2f) && (stick_x < 0.2f)) {
             adj_x = 0.0f;
@@ -2847,53 +3526,8 @@ void fn_8030B530(HSD_GObj* arg0)
             adj_y = -((0.2f * (f32) sign) - stick_y) / 0.8f;
         }
 
-        substick_x = HSD_PadCopyStatus[0].nml_subStickX;
-        abs_val = (substick_x < 0.0f) ? -substick_x : substick_x;
-        if (abs_val > 0.1f) {
-            gm_801677E8(0);
-        } else {
-            substick_x = HSD_PadCopyStatus[1].nml_subStickX;
-            abs_val = (substick_x < 0.0f) ? -substick_x : substick_x;
-            if (abs_val > 0.1f) {
-                gm_801677E8(1);
-            } else {
-                substick_x = HSD_PadCopyStatus[2].nml_subStickX;
-                abs_val = (substick_x < 0.0f) ? -substick_x : substick_x;
-                if (abs_val > 0.1f) {
-                    gm_801677E8(2);
-                } else {
-                    substick_x = HSD_PadCopyStatus[3].nml_subStickX;
-                    abs_val = (substick_x < 0.0f) ? -substick_x : substick_x;
-                    if (abs_val > 0.1f) {
-                        gm_801677E8(3);
-                    }
-                }
-            }
-        }
-
-        substick_y = HSD_PadCopyStatus[0].nml_subStickY;
-        abs_val = (substick_y < 0.0f) ? -substick_y : substick_y;
-        if (abs_val > 0.1f) {
-            gm_801677E8(0);
-        } else {
-            substick_y = HSD_PadCopyStatus[1].nml_subStickY;
-            abs_val = (substick_y < 0.0f) ? -substick_y : substick_y;
-            if (abs_val > 0.1f) {
-                gm_801677E8(1);
-            } else {
-                substick_y = HSD_PadCopyStatus[2].nml_subStickY;
-                abs_val = (substick_y < 0.0f) ? -substick_y : substick_y;
-                if (abs_val > 0.1f) {
-                    gm_801677E8(2);
-                } else {
-                    substick_y = HSD_PadCopyStatus[3].nml_subStickY;
-                    abs_val = (substick_y < 0.0f) ? -substick_y : substick_y;
-                    if (abs_val > 0.1f) {
-                        gm_801677E8(3);
-                    }
-                }
-            }
-        }
+        substick_x = un_80305EB4();
+        substick_y = un_80305FB8();
 
         if ((substick_x > -0.2f) && (substick_x < 0.2f)) {
             adj_sx = 0.0f;
@@ -2927,25 +3561,7 @@ void fn_8030B530(HSD_GObj* arg0)
             }
         }
 
-        trigger = HSD_PadCopyStatus[0].trigger;
-        if (trigger != 0) {
-            gm_801677E8(0);
-        } else {
-            trigger = HSD_PadCopyStatus[1].trigger;
-            if (trigger != 0) {
-                gm_801677E8(1);
-            } else {
-                trigger = HSD_PadCopyStatus[2].trigger;
-                if (trigger != 0) {
-                    gm_801677E8(2);
-                } else {
-                    trigger = HSD_PadCopyStatus[3].trigger;
-                    if (trigger != 0) {
-                        gm_801677E8(3);
-                    }
-                }
-            }
-        }
+        trigger = un_80305B88();
 
         if (trigger & 0x10) {
             lbAudioAx_80024030(0);
@@ -2969,25 +3585,7 @@ void fn_8030B530(HSD_GObj* arg0)
             }
         }
 
-        trigger = HSD_PadCopyStatus[0].trigger;
-        if (trigger != 0) {
-            gm_801677E8(0);
-        } else {
-            trigger = HSD_PadCopyStatus[1].trigger;
-            if (trigger != 0) {
-                gm_801677E8(1);
-            } else {
-                trigger = HSD_PadCopyStatus[2].trigger;
-                if (trigger != 0) {
-                    gm_801677E8(2);
-                } else {
-                    trigger = HSD_PadCopyStatus[3].trigger;
-                    if (trigger != 0) {
-                        gm_801677E8(3);
-                    }
-                }
-            }
-        }
+        trigger = un_80305B88();
 
         if (trigger & 0x400) {
             un_804D6E80 = HSD_CObjGetTop(cobj);
@@ -2995,25 +3593,7 @@ void fn_8030B530(HSD_GObj* arg0)
             un_804D6E88 = HSD_CObjGetRight(cobj);
             un_804D6E8C = HSD_CObjGetLeft(cobj);
 
-            trigger = HSD_PadCopyStatus[0].trigger;
-            if (trigger != 0) {
-                gm_801677E8(0);
-            } else {
-                trigger = HSD_PadCopyStatus[1].trigger;
-                if (trigger != 0) {
-                    gm_801677E8(1);
-                } else {
-                    trigger = HSD_PadCopyStatus[2].trigger;
-                    if (trigger != 0) {
-                        gm_801677E8(2);
-                    } else {
-                        trigger = HSD_PadCopyStatus[3].trigger;
-                        if (trigger != 0) {
-                            gm_801677E8(3);
-                        }
-                    }
-                }
-            }
+            trigger = un_80305B88();
             OSReport(str + 0x860, trigger);
             state->x5C = 0;
 
@@ -3050,71 +3630,17 @@ void fn_8030B530(HSD_GObj* arg0)
         }
     check_buttons:
 
-        button = HSD_PadCopyStatus[0].button;
-        if (button != 0) {
-            gm_801677E8(0);
-        } else {
-            button = HSD_PadCopyStatus[1].button;
-            if (button != 0) {
-                gm_801677E8(1);
-            } else {
-                button = HSD_PadCopyStatus[2].button;
-                if (button != 0) {
-                    gm_801677E8(2);
-                } else {
-                    button = HSD_PadCopyStatus[3].button;
-                    if (button != 0) {
-                        gm_801677E8(3);
-                    }
-                }
-            }
-        }
+        button = un_80305C44();
 
         if (button & 0x400) {
             u32 btn2;
-            btn2 = HSD_PadCopyStatus[0].button;
-            if (btn2 != 0) {
-                gm_801677E8(0);
-            } else {
-                btn2 = HSD_PadCopyStatus[1].button;
-                if (btn2 != 0) {
-                    gm_801677E8(1);
-                } else {
-                    btn2 = HSD_PadCopyStatus[2].button;
-                    if (btn2 != 0) {
-                        gm_801677E8(2);
-                    } else {
-                        btn2 = HSD_PadCopyStatus[3].button;
-                        if (btn2 != 0) {
-                            gm_801677E8(3);
-                        }
-                    }
-                }
-            }
+            btn2 = un_80305C44();
             if (btn2 & 2) {
                 adj_x = 0.01f;
                 state->x60 = 8;
             }
 
-            btn2 = HSD_PadCopyStatus[0].button;
-            if (btn2 != 0) {
-                gm_801677E8(0);
-            } else {
-                btn2 = HSD_PadCopyStatus[1].button;
-                if (btn2 != 0) {
-                    gm_801677E8(1);
-                } else {
-                    btn2 = HSD_PadCopyStatus[2].button;
-                    if (btn2 != 0) {
-                        gm_801677E8(2);
-                    } else {
-                        btn2 = HSD_PadCopyStatus[3].button;
-                        if (btn2 != 0) {
-                            gm_801677E8(3);
-                        }
-                    }
-                }
-            }
+            btn2 = un_80305C44();
             if (btn2 & 1) {
                 adj_x = -0.01f;
                 state->x60 = 8;
@@ -3139,119 +3665,29 @@ void fn_8030B530(HSD_GObj* arg0)
             }
         } else {
             u32 btn3;
-            btn3 = HSD_PadCopyStatus[0].button;
-            if (btn3 != 0) {
-                gm_801677E8(0);
-            } else {
-                btn3 = HSD_PadCopyStatus[1].button;
-                if (btn3 != 0) {
-                    gm_801677E8(1);
-                } else {
-                    btn3 = HSD_PadCopyStatus[2].button;
-                    if (btn3 != 0) {
-                        gm_801677E8(2);
-                    } else {
-                        btn3 = HSD_PadCopyStatus[3].button;
-                        if (btn3 != 0) {
-                            gm_801677E8(3);
-                        }
-                    }
-                }
-            }
+            btn3 = un_80305C44();
 
             if (btn3 & 0x100) {
                 u32 btn4;
-                btn4 = HSD_PadCopyStatus[0].button;
-                if (btn4 != 0) {
-                    gm_801677E8(0);
-                } else {
-                    btn4 = HSD_PadCopyStatus[1].button;
-                    if (btn4 != 0) {
-                        gm_801677E8(1);
-                    } else {
-                        btn4 = HSD_PadCopyStatus[2].button;
-                        if (btn4 != 0) {
-                            gm_801677E8(2);
-                        } else {
-                            btn4 = HSD_PadCopyStatus[3].button;
-                            if (btn4 != 0) {
-                                gm_801677E8(3);
-                            }
-                        }
-                    }
-                }
+                btn4 = un_80305C44();
                 if (btn4 & 2) {
                     adj_x = 1.0f;
                     state->x60 = 8;
                 }
 
-                btn4 = HSD_PadCopyStatus[0].button;
-                if (btn4 != 0) {
-                    gm_801677E8(0);
-                } else {
-                    btn4 = HSD_PadCopyStatus[1].button;
-                    if (btn4 != 0) {
-                        gm_801677E8(1);
-                    } else {
-                        btn4 = HSD_PadCopyStatus[2].button;
-                        if (btn4 != 0) {
-                            gm_801677E8(2);
-                        } else {
-                            btn4 = HSD_PadCopyStatus[3].button;
-                            if (btn4 != 0) {
-                                gm_801677E8(3);
-                            }
-                        }
-                    }
-                }
+                btn4 = un_80305C44();
                 if (btn4 & 1) {
                     adj_x = -1.0f;
                     state->x60 = 8;
                 }
 
-                btn4 = HSD_PadCopyStatus[0].button;
-                if (btn4 != 0) {
-                    gm_801677E8(0);
-                } else {
-                    btn4 = HSD_PadCopyStatus[1].button;
-                    if (btn4 != 0) {
-                        gm_801677E8(1);
-                    } else {
-                        btn4 = HSD_PadCopyStatus[2].button;
-                        if (btn4 != 0) {
-                            gm_801677E8(2);
-                        } else {
-                            btn4 = HSD_PadCopyStatus[3].button;
-                            if (btn4 != 0) {
-                                gm_801677E8(3);
-                            }
-                        }
-                    }
-                }
+                btn4 = un_80305C44();
                 if (btn4 & 8) {
                     adj_y = 1.0f;
                     state->x60 = 8;
                 }
 
-                btn4 = HSD_PadCopyStatus[0].button;
-                if (btn4 != 0) {
-                    gm_801677E8(0);
-                } else {
-                    btn4 = HSD_PadCopyStatus[1].button;
-                    if (btn4 != 0) {
-                        gm_801677E8(1);
-                    } else {
-                        btn4 = HSD_PadCopyStatus[2].button;
-                        if (btn4 != 0) {
-                            gm_801677E8(2);
-                        } else {
-                            btn4 = HSD_PadCopyStatus[3].button;
-                            if (btn4 != 0) {
-                                gm_801677E8(3);
-                            }
-                        }
-                    }
-                }
+                btn4 = un_80305C44();
                 if (btn4 & 4) {
                     adj_y = -1.0f;
                     state->x60 = 8;
@@ -3298,124 +3734,33 @@ void fn_8030B530(HSD_GObj* arg0)
                 }
             } else {
                 u32 btn5;
-                btn5 = HSD_PadCopyStatus[0].button;
-                if (btn5 != 0) {
-                    gm_801677E8(0);
-                } else {
-                    btn5 = HSD_PadCopyStatus[1].button;
-                    if (btn5 != 0) {
-                        gm_801677E8(1);
-                    } else {
-                        btn5 = HSD_PadCopyStatus[2].button;
-                        if (btn5 != 0) {
-                            gm_801677E8(2);
-                        } else {
-                            btn5 = HSD_PadCopyStatus[3].button;
-                            if (btn5 != 0) {
-                                gm_801677E8(3);
-                            }
-                        }
-                    }
-                }
+                btn5 = un_80305C44();
 
                 if (btn5 & 0x200) {
                     if (!(adj_y > 0.8f)) {
                         u32 btn6;
-                        btn6 = HSD_PadCopyStatus[0].button;
-                        if (btn6 != 0) {
-                            gm_801677E8(0);
-                        } else {
-                            btn6 = HSD_PadCopyStatus[1].button;
-                            if (btn6 != 0) {
-                                gm_801677E8(1);
-                            } else {
-                                btn6 = HSD_PadCopyStatus[2].button;
-                                if (btn6 != 0) {
-                                    gm_801677E8(2);
-                                } else {
-                                    btn6 = HSD_PadCopyStatus[3].button;
-                                    if (btn6 != 0) {
-                                        gm_801677E8(3);
-                                    }
-                                }
-                            }
-                        }
+                        btn6 = un_80305C44();
                         if (btn6 & 8) {
                             goto scale_up_all;
                         }
 
                         if (!(adj_y < -0.8f)) {
                             u32 btn7;
-                            btn7 = HSD_PadCopyStatus[0].button;
-                            if (btn7 != 0) {
-                                gm_801677E8(0);
-                            } else {
-                                btn7 = HSD_PadCopyStatus[1].button;
-                                if (btn7 != 0) {
-                                    gm_801677E8(1);
-                                } else {
-                                    btn7 = HSD_PadCopyStatus[2].button;
-                                    if (btn7 != 0) {
-                                        gm_801677E8(2);
-                                    } else {
-                                        btn7 = HSD_PadCopyStatus[3].button;
-                                        if (btn7 != 0) {
-                                            gm_801677E8(3);
-                                        }
-                                    }
-                                }
-                            }
+                            btn7 = un_80305C44();
                             if (btn7 & 4) {
                                 goto scale_down_all;
                             }
 
                             if (!(adj_x > 0.8f)) {
                                 u32 btn8;
-                                btn8 = HSD_PadCopyStatus[0].button;
-                                if (btn8 != 0) {
-                                    gm_801677E8(0);
-                                } else {
-                                    btn8 = HSD_PadCopyStatus[1].button;
-                                    if (btn8 != 0) {
-                                        gm_801677E8(1);
-                                    } else {
-                                        btn8 = HSD_PadCopyStatus[2].button;
-                                        if (btn8 != 0) {
-                                            gm_801677E8(2);
-                                        } else {
-                                            btn8 = HSD_PadCopyStatus[3].button;
-                                            if (btn8 != 0) {
-                                                gm_801677E8(3);
-                                            }
-                                        }
-                                    }
-                                }
+                                btn8 = un_80305C44();
                                 if (btn8 & 2) {
                                     goto scale_up_xz;
                                 }
 
                                 if (!(adj_x < -0.8f)) {
                                     u32 btn9;
-                                    btn9 = HSD_PadCopyStatus[0].button;
-                                    if (btn9 != 0) {
-                                        gm_801677E8(0);
-                                    } else {
-                                        btn9 = HSD_PadCopyStatus[1].button;
-                                        if (btn9 != 0) {
-                                            gm_801677E8(1);
-                                        } else {
-                                            btn9 = HSD_PadCopyStatus[2].button;
-                                            if (btn9 != 0) {
-                                                gm_801677E8(2);
-                                            } else {
-                                                btn9 = HSD_PadCopyStatus[3]
-                                                           .button;
-                                                if (btn9 != 0) {
-                                                    gm_801677E8(3);
-                                                }
-                                            }
-                                        }
-                                    }
+                                    btn9 = un_80305C44();
                                     if (btn9 & 1) {
                                         goto scale_down_xz;
                                     }
@@ -3433,27 +3778,7 @@ void fn_8030B530(HSD_GObj* arg0)
                                                             0x3FC),
                                             4U, n2->scale.x);
                                     }
-                                    btn10 = HSD_PadCopyStatus[0].button;
-                                    if (btn10 != 0) {
-                                        gm_801677E8(0);
-                                    } else {
-                                        btn10 = HSD_PadCopyStatus[1].button;
-                                        if (btn10 != 0) {
-                                            gm_801677E8(1);
-                                        } else {
-                                            btn10 =
-                                                HSD_PadCopyStatus[2].button;
-                                            if (btn10 != 0) {
-                                                gm_801677E8(2);
-                                            } else {
-                                                btn10 = HSD_PadCopyStatus[3]
-                                                            .button;
-                                                if (btn10 != 0) {
-                                                    gm_801677E8(3);
-                                                }
-                                            }
-                                        }
-                                    }
+                                    btn10 = un_80305C44();
                                     if (btn10 & 1) {
                                         state->x60 = 8;
                                     }
@@ -3472,26 +3797,7 @@ void fn_8030B530(HSD_GObj* arg0)
                                             (s16*) ((u8*) un_804A26B8 + 0x3FC),
                                         4U, n2->scale.x);
                                 }
-                                btn10 = HSD_PadCopyStatus[0].button;
-                                if (btn10 != 0) {
-                                    gm_801677E8(0);
-                                } else {
-                                    btn10 = HSD_PadCopyStatus[1].button;
-                                    if (btn10 != 0) {
-                                        gm_801677E8(1);
-                                    } else {
-                                        btn10 = HSD_PadCopyStatus[2].button;
-                                        if (btn10 != 0) {
-                                            gm_801677E8(2);
-                                        } else {
-                                            btn10 =
-                                                HSD_PadCopyStatus[3].button;
-                                            if (btn10 != 0) {
-                                                gm_801677E8(3);
-                                            }
-                                        }
-                                    }
-                                }
+                                btn10 = un_80305C44();
                                 if (btn10 & 2) {
                                     state->x60 = 8;
                                 }
@@ -3505,25 +3811,7 @@ void fn_8030B530(HSD_GObj* arg0)
                             un_803062EC((s32) *
                                             (s16*) ((u8*) un_804A26B8 + 0x3FC),
                                         3U, jobj_next->scale.x);
-                            btn10 = HSD_PadCopyStatus[0].button;
-                            if (btn10 != 0) {
-                                gm_801677E8(0);
-                            } else {
-                                btn10 = HSD_PadCopyStatus[1].button;
-                                if (btn10 != 0) {
-                                    gm_801677E8(1);
-                                } else {
-                                    btn10 = HSD_PadCopyStatus[2].button;
-                                    if (btn10 != 0) {
-                                        gm_801677E8(2);
-                                    } else {
-                                        btn10 = HSD_PadCopyStatus[3].button;
-                                        if (btn10 != 0) {
-                                            gm_801677E8(3);
-                                        }
-                                    }
-                                }
-                            }
+                            btn10 = un_80305C44();
                             if (btn10 & 4) {
                                 state->x60 = 8;
                             }
@@ -3536,25 +3824,7 @@ void fn_8030B530(HSD_GObj* arg0)
                         HSD_JObjAddScaleZ(jobj_next, 0.01f);
                         un_803062EC((s32) * (s16*) ((u8*) un_804A26B8 + 0x3FC),
                                     3U, jobj_next->scale.x);
-                        btn10 = HSD_PadCopyStatus[0].button;
-                        if (btn10 != 0) {
-                            gm_801677E8(0);
-                        } else {
-                            btn10 = HSD_PadCopyStatus[1].button;
-                            if (btn10 != 0) {
-                                gm_801677E8(1);
-                            } else {
-                                btn10 = HSD_PadCopyStatus[2].button;
-                                if (btn10 != 0) {
-                                    gm_801677E8(2);
-                                } else {
-                                    btn10 = HSD_PadCopyStatus[3].button;
-                                    if (btn10 != 0) {
-                                        gm_801677E8(3);
-                                    }
-                                }
-                            }
-                        }
+                        btn10 = un_80305C44();
                         if (btn10 & 8) {
                             state->x60 = 8;
                         }
@@ -3562,89 +3832,16 @@ void fn_8030B530(HSD_GObj* arg0)
                 } else {
                     if ((s8) state->x61 == 0) {
                         u32 bm;
-                        bm = HSD_PadCopyStatus[0].button;
-                        if (bm != 0) {
-                            gm_801677E8(0);
-                        } else {
-                            bm = HSD_PadCopyStatus[1].button;
-                            if (bm != 0) {
-                                gm_801677E8(1);
-                            } else {
-                                bm = HSD_PadCopyStatus[2].button;
-                                if (bm != 0) {
-                                    gm_801677E8(2);
-                                } else {
-                                    bm = HSD_PadCopyStatus[3].button;
-                                    if (bm != 0) {
-                                        gm_801677E8(3);
-                                    }
-                                }
-                            }
-                        }
+                        bm = un_80305C44();
                         if (bm != 8) {
                             u32 bm2;
-                            bm2 = HSD_PadCopyStatus[0].button;
-                            if (bm2 != 0) {
-                                gm_801677E8(0);
-                            } else {
-                                bm2 = HSD_PadCopyStatus[1].button;
-                                if (bm2 != 0) {
-                                    gm_801677E8(1);
-                                } else {
-                                    bm2 = HSD_PadCopyStatus[2].button;
-                                    if (bm2 != 0) {
-                                        gm_801677E8(2);
-                                    } else {
-                                        bm2 = HSD_PadCopyStatus[3].button;
-                                        if (bm2 != 0) {
-                                            gm_801677E8(3);
-                                        }
-                                    }
-                                }
-                            }
+                            bm2 = un_80305C44();
                             if (bm2 != 4) {
                                 u32 bm3;
-                                bm3 = HSD_PadCopyStatus[0].button;
-                                if (bm3 != 0) {
-                                    gm_801677E8(0);
-                                } else {
-                                    bm3 = HSD_PadCopyStatus[1].button;
-                                    if (bm3 != 0) {
-                                        gm_801677E8(1);
-                                    } else {
-                                        bm3 = HSD_PadCopyStatus[2].button;
-                                        if (bm3 != 0) {
-                                            gm_801677E8(2);
-                                        } else {
-                                            bm3 = HSD_PadCopyStatus[3].button;
-                                            if (bm3 != 0) {
-                                                gm_801677E8(3);
-                                            }
-                                        }
-                                    }
-                                }
+                                bm3 = un_80305C44();
                                 if (bm3 != 1) {
                                     u32 bm4;
-                                    bm4 = HSD_PadCopyStatus[0].button;
-                                    if (bm4 != 0) {
-                                        gm_801677E8(0);
-                                    } else {
-                                        bm4 = HSD_PadCopyStatus[1].button;
-                                        if (bm4 != 0) {
-                                            gm_801677E8(1);
-                                        } else {
-                                            bm4 = HSD_PadCopyStatus[2].button;
-                                            if (bm4 != 0) {
-                                                gm_801677E8(2);
-                                            } else {
-                                                bm4 = HSD_PadCopyStatus[3]
-                                                          .button;
-                                                if (bm4 != 0) {
-                                                    gm_801677E8(3);
-                                                }
-                                            }
-                                        }
-                                    }
+                                    bm4 = un_80305C44();
                                     if (bm4 == 2) {
                                         goto do_mode_switch;
                                     }
@@ -3695,25 +3892,7 @@ void fn_8030B530(HSD_GObj* arg0)
             }
         }
 
-        trigger = HSD_PadCopyStatus[0].trigger;
-        if (trigger != 0) {
-            gm_801677E8(0);
-        } else {
-            trigger = HSD_PadCopyStatus[1].trigger;
-            if (trigger != 0) {
-                gm_801677E8(1);
-            } else {
-                trigger = HSD_PadCopyStatus[2].trigger;
-                if (trigger != 0) {
-                    gm_801677E8(2);
-                } else {
-                    trigger = HSD_PadCopyStatus[3].trigger;
-                    if (trigger != 0) {
-                        gm_801677E8(3);
-                    }
-                }
-            }
-        }
+        trigger = un_80305B88();
         if (trigger & 0x1000) {
             state->x58 = 0;
             M2C_FIELD(ed4, s32*, 0x10) = M2C_FIELD(ed4, s32*, 0x10) + 1;
@@ -3726,50 +3905,14 @@ void fn_8030B530(HSD_GObj* arg0)
 
         un_80308DC8(cobj);
 
-        trigger = HSD_PadCopyStatus[0].trigger;
-        if (trigger != 0) {
-            gm_801677E8(0);
-        } else {
-            trigger = HSD_PadCopyStatus[1].trigger;
-            if (trigger != 0) {
-                gm_801677E8(1);
-            } else {
-                trigger = HSD_PadCopyStatus[2].trigger;
-                if (trigger != 0) {
-                    gm_801677E8(2);
-                } else {
-                    trigger = HSD_PadCopyStatus[3].trigger;
-                    if (trigger != 0) {
-                        gm_801677E8(3);
-                    }
-                }
-            }
-        }
+        trigger = un_80305B88();
 
         if (trigger & 0x60) {
             void* display;
             u32 trig2;
             display = un_804D6EE0;
 
-            trig2 = HSD_PadCopyStatus[0].trigger;
-            if (trig2 != 0) {
-                gm_801677E8(0);
-            } else {
-                trig2 = HSD_PadCopyStatus[1].trigger;
-                if (trig2 != 0) {
-                    gm_801677E8(1);
-                } else {
-                    trig2 = HSD_PadCopyStatus[2].trigger;
-                    if (trig2 != 0) {
-                        gm_801677E8(2);
-                    } else {
-                        trig2 = HSD_PadCopyStatus[3].trigger;
-                        if (trig2 != 0) {
-                            gm_801677E8(3);
-                        }
-                    }
-                }
-            }
+            trig2 = un_80305B88();
 
             if (trig2 & 0x441) {
                 s16 new_idx;
@@ -3972,25 +4115,7 @@ void fn_8030B530(HSD_GObj* arg0)
                             (s16*) (M2C_FIELD(display, u8**, 0x140) + 0x10));
         }
 
-        trigger = HSD_PadCopyStatus[0].trigger;
-        if (trigger != 0) {
-            gm_801677E8(0);
-        } else {
-            trigger = HSD_PadCopyStatus[1].trigger;
-            if (trigger != 0) {
-                gm_801677E8(1);
-            } else {
-                trigger = HSD_PadCopyStatus[2].trigger;
-                if (trigger != 0) {
-                    gm_801677E8(2);
-                } else {
-                    trigger = HSD_PadCopyStatus[3].trigger;
-                    if (trigger != 0) {
-                        gm_801677E8(3);
-                    }
-                }
-            }
-        }
+        trigger = un_80305B88();
         if (trigger & 0x1000) {
             un_80307828(0);
         }
@@ -4046,7 +4171,8 @@ void fn_8030B530(HSD_GObj* arg0)
 void fn_8030E110(HSD_GObj* arg0)
 {
     Vec3 sp140;
-    f32 sp13C, sp138, sp134, sp130, sp12C, sp128;
+    Vec3 sp134;
+    Vec3 sp128;
     void* spD8;
     void* spD4;
     void* spCC;
@@ -4054,7 +4180,6 @@ void fn_8030E110(HSD_GObj* arg0)
     Toy6E68* state;
     void* ed4;
     HSD_CObj* cobj;
-    f32 stickX, stickY, cstickX, cstickY;
     f32 abs_val, tmp;
     s32 sign;
     f32 moved_x, moved_y;
@@ -4064,82 +4189,36 @@ void fn_8030E110(HSD_GObj* arg0)
     char* result;
     s16 trophy_id;
     HSD_Archive* archive;
+    ToyAnimState* anim;
 
-    moved_y = 0.0f;
-    stickX = HSD_PadCopyStatus[0].nml_stickX;
-    moved_x = 0.0f;
+    PAD_STACK(176);
+
+    anim = (ToyAnimState*) ((u8*) un_804A26B8 + 0x3F0);
     state = (Toy6E68*) un_804D6E68;
     ed4 = un_804D6ED4;
     cobj = arg0->hsd_obj;
+    moved_y = 0.0f;
+    moved_x = 0.0f;
+    {
+        f32 val;
+        f32 abs;
+        s32 i;
 
-    if (stickX < 0.0f) {
-        abs_val = -stickX;
-    } else {
-        abs_val = stickX;
-    }
-    if (!(abs_val > 0.1f)) {
-        stickX = HSD_PadCopyStatus[1].nml_stickX;
-        if (stickX < 0.0f) {
-            abs_val = -stickX;
-        } else {
-            abs_val = stickX;
-        }
-        if (!(abs_val > 0.1f)) {
-            stickX = HSD_PadCopyStatus[2].nml_stickX;
-            if (stickX < 0.0f) {
-                abs_val = -stickX;
+        for (i = 0; i < 4; i++) {
+            val = HSD_PadCopyStatus[(u8) i].nml_stickX;
+            if (val < 0.0F) {
+                abs = -val;
             } else {
-                abs_val = stickX;
+                abs = val;
             }
-            if (!(abs_val > 0.1f)) {
-                stickX = HSD_PadCopyStatus[3].nml_stickX;
-                if (stickX < 0.0f) {
-                }
+            if (abs > 0.1F) {
+                break;
             }
         }
+        state->x30 = val;
     }
-    state->x30 = stickX;
 
-    stickY = HSD_PadCopyStatus[0].nml_stickY;
-    if (stickY < 0.0f) {
-        abs_val = -stickY;
-    } else {
-        abs_val = stickY;
-    }
-    if (abs_val > 0.1f) {
-        gm_801677E8(0);
-    } else {
-        stickY = HSD_PadCopyStatus[1].nml_stickY;
-        if (stickY < 0.0f) {
-            abs_val = -stickY;
-        } else {
-            abs_val = stickY;
-        }
-        if (abs_val > 0.1f) {
-            gm_801677E8(1);
-        } else {
-            stickY = HSD_PadCopyStatus[2].nml_stickY;
-            if (stickY < 0.0f) {
-                abs_val = -stickY;
-            } else {
-                abs_val = stickY;
-            }
-            if (abs_val > 0.1f) {
-                gm_801677E8(2);
-            } else {
-                stickY = HSD_PadCopyStatus[3].nml_stickY;
-                if (stickY < 0.0f) {
-                    abs_val = -stickY;
-                } else {
-                    abs_val = stickY;
-                }
-                if (abs_val > 0.1f) {
-                    gm_801677E8(3);
-                }
-            }
-        }
-    }
-    state->x34 = stickY;
+    state->x34 = un_80305DB0();
     state->x54 = 0.0f;
     state->x50 = 0.0f;
 
@@ -4166,87 +4245,9 @@ void fn_8030E110(HSD_GObj* arg0)
         state->x34 = (f32) (-((0.2f * (f32) sign) - tmp) / 0.8f);
     }
 
-    cstickX = HSD_PadCopyStatus[0].nml_subStickX;
-    if (cstickX < 0.0f) {
-        abs_val = -cstickX;
-    } else {
-        abs_val = cstickX;
-    }
-    if (abs_val > 0.1f) {
-        gm_801677E8(0);
-    } else {
-        cstickX = HSD_PadCopyStatus[1].nml_subStickX;
-        if (cstickX < 0.0f) {
-            abs_val = -cstickX;
-        } else {
-            abs_val = cstickX;
-        }
-        if (abs_val > 0.1f) {
-            gm_801677E8(1);
-        } else {
-            cstickX = HSD_PadCopyStatus[2].nml_subStickX;
-            if (cstickX < 0.0f) {
-                abs_val = -cstickX;
-            } else {
-                abs_val = cstickX;
-            }
-            if (abs_val > 0.1f) {
-                gm_801677E8(2);
-            } else {
-                cstickX = HSD_PadCopyStatus[3].nml_subStickX;
-                if (cstickX < 0.0f) {
-                    abs_val = -cstickX;
-                } else {
-                    abs_val = cstickX;
-                }
-                if (abs_val > 0.1f) {
-                    gm_801677E8(3);
-                }
-            }
-        }
-    }
-    state->x40 = cstickX;
+    state->x40 = un_80305EB4();
 
-    cstickY = HSD_PadCopyStatus[0].nml_subStickY;
-    if (cstickY < 0.0f) {
-        abs_val = -cstickY;
-    } else {
-        abs_val = cstickY;
-    }
-    if (abs_val > 0.1f) {
-        gm_801677E8(0);
-    } else {
-        cstickY = HSD_PadCopyStatus[1].nml_subStickY;
-        if (cstickY < 0.0f) {
-            abs_val = -cstickY;
-        } else {
-            abs_val = cstickY;
-        }
-        if (abs_val > 0.1f) {
-            gm_801677E8(1);
-        } else {
-            cstickY = HSD_PadCopyStatus[2].nml_subStickY;
-            if (cstickY < 0.0f) {
-                abs_val = -cstickY;
-            } else {
-                abs_val = cstickY;
-            }
-            if (abs_val > 0.1f) {
-                gm_801677E8(2);
-            } else {
-                cstickY = HSD_PadCopyStatus[3].nml_subStickY;
-                if (cstickY < 0.0f) {
-                    abs_val = -cstickY;
-                } else {
-                    abs_val = cstickY;
-                }
-                if (abs_val > 0.1f) {
-                    gm_801677E8(3);
-                }
-            }
-        }
-    }
-    state->x44 = cstickY;
+    state->x44 = un_80305FB8();
 
     tmp = state->x40;
     if ((tmp > -0.2f) && (tmp < 0.2f)) {
@@ -4284,25 +4285,7 @@ void fn_8030E110(HSD_GObj* arg0)
         u8 mode = state->x61;
         switch ((s8) mode) {
         case 0:
-            trigger = HSD_PadCopyStatus[0].trigger;
-            if (trigger != 0) {
-                gm_801677E8(0);
-            } else {
-                trigger = HSD_PadCopyStatus[1].trigger;
-                if (trigger != 0) {
-                    gm_801677E8(1);
-                } else {
-                    trigger = HSD_PadCopyStatus[2].trigger;
-                    if (trigger != 0) {
-                        gm_801677E8(2);
-                    } else {
-                        trigger = HSD_PadCopyStatus[3].trigger;
-                        if (trigger != 0) {
-                            gm_801677E8(3);
-                        }
-                    }
-                }
-            }
+            trigger = un_80305B88();
 
             if (trigger & 0x200) {
                 lbAudioAx_80024030(0);
@@ -4319,62 +4302,157 @@ void fn_8030E110(HSD_GObj* arg0)
                 } else {
                     tc = *gmMainLib_8015CC90();
                 }
-                if (tc != 0) {
-                    trigger = HSD_PadCopyStatus[0].trigger;
-                    if (trigger != 0) {
-                        gm_801677E8(0);
+                if (tc == 0) {
+                    return;
+                }
+                trigger = un_80305B88();
+
+                if (trigger & 0xD00) {
+                    lbAudioAx_80024030(1);
+                    un_804D6E80 = HSD_CObjGetTop(cobj);
+                    un_804D6E84 = HSD_CObjGetBottom(cobj);
+                    un_804D6E88 = HSD_CObjGetRight(cobj);
+                    un_804D6E8C = HSD_CObjGetLeft(cobj);
+                    state->x5C = 0;
+                    state->x61 = 1;
+                    un_8030715C(0.0f, 0.0f);
+                    return;
+                }
+            }
+            goto case_default;
+
+        case 1:
+        case 3:
+            un_80308F04(cobj);
+            goto case_default;
+
+        case 2:
+            trigger = un_80305B88();
+
+            if ((trigger & 0x200) || ((f32) state->x5C > 7200.0f)) {
+                ToyJObjNode* jobj_node;
+                lbAudioAx_80024030(0);
+                un_804D6E80 = HSD_CObjGetTop(cobj);
+                un_804D6E84 = HSD_CObjGetBottom(cobj);
+                un_804D6E88 = HSD_CObjGetRight(cobj);
+                un_804D6E8C = HSD_CObjGetLeft(cobj);
+                jobj_node =
+                    (ToyJObjNode*) ((ToyED8Data*) un_804D6ED8)->xC->x28;
+                while (jobj_node != NULL) {
+                    jobj_node->x40 = 9;
+                    jobj_node = (ToyJObjNode*) jobj_node->x4;
+                }
+                state->x5C = 0;
+                sp134 = un_803B88F8;
+                sp128 = un_803B8904;
+                HSD_CObjGetEyePosition(cobj, &sp140);
+                sp134.y = 8.0f;
+                HSD_CObjGetInterest(cobj, &sp128);
+                M2C_FIELD(un_804A26B8, f32*, 0x0) =
+                    (f32) ((sp134.x - sp128.x) / 10.0f);
+                M2C_FIELD(un_804A26B8, f32*, 0x4) =
+                    (f32) ((sp134.y - sp128.y) / 10.0f);
+                M2C_FIELD(un_804A26B8, f32*, 0x8) =
+                    (f32) ((sp134.z - sp128.z) / 10.0f);
+                un_804D6E90 = (state->x20 - 38.0f) / 10.0f;
+                un_804D6E94 = state->x18 / 10.0f;
+                state->x61 = 3;
+            }
+
+            trigger = un_80305B88();
+
+            if ((state->x44 + (state->x40 + (state->x30 + state->x34)) +
+                 (f32) trigger) == 0.0f)
+            {
+                state->x5C = state->x5C + 1;
+            } else {
+                state->x5C = 0;
+            }
+
+            button = un_80305C44();
+            if (button & 0x100) {
+                f32 sx = state->x30;
+                if ((sx != 0.0f) && (sx < 0.0f)) {
+                    state->x50 = (f32) (0.3f * sx * (state->x20 / 38.0f));
+                }
+            }
+
+            button = un_80305C44();
+            if (button & 0x100) {
+                f32 sx = state->x30;
+                if ((sx != 0.0f) && (sx > 0.0f)) {
+                    state->x50 = (f32) (0.3f * sx * (state->x20 / 38.0f));
+                }
+            }
+
+            button = un_80305C44();
+            if (button & 0x100) {
+                f32 sy = state->x34;
+                if ((sy != 0.0f) && (sy > 0.0f)) {
+                    state->x54 = (f32) (0.3f * sy * (state->x20 / 38.0f));
+                }
+            }
+
+            button = un_80305C44();
+            if (button & 0x100) {
+                f32 sy = state->x34;
+                if ((sy != 0.0f) && (sy < 0.0f)) {
+                    state->x54 = (f32) (0.3f * sy * (state->x20 / 38.0f));
+                }
+            }
+
+            if ((state->x50 == 0.0f) && (state->x54 == 0.0f)) {
+                button = HSD_PadCopyStatus[0].button;
+                if (button != 0) {
+                    gm_801677E8(0);
+                } else {
+                    button = HSD_PadCopyStatus[1].button;
+                    if (button != 0) {
+                        gm_801677E8(1);
                     } else {
-                        trigger = HSD_PadCopyStatus[1].trigger;
-                        if (trigger != 0) {
-                            gm_801677E8(1);
+                        button = HSD_PadCopyStatus[2].button;
+                        if (button != 0) {
+                            gm_801677E8(2);
                         } else {
-                            trigger = HSD_PadCopyStatus[2].trigger;
-                            if (trigger != 0) {
-                                gm_801677E8(2);
-                            } else {
-                                trigger = HSD_PadCopyStatus[3].trigger;
-                                if (trigger != 0) {
-                                    gm_801677E8(3);
-                                }
+                            button = HSD_PadCopyStatus[3].button;
+                            if (button != 0) {
+                                gm_801677E8(3);
                             }
                         }
                     }
+                }
+                if (button & 0x100) {
+                    goto pan_active;
+                }
+                un_803102C4(1);
+            } else {
+            pan_active:
+                un_803102C4(0);
+            }
 
-                    if (trigger & 0xD00) {
-                        lbAudioAx_80024030(1);
-                        un_804D6E80 = HSD_CObjGetTop(cobj);
-                        un_804D6E84 = HSD_CObjGetBottom(cobj);
-                        un_804D6E88 = HSD_CObjGetRight(cobj);
-                        un_804D6E8C = HSD_CObjGetLeft(cobj);
-                        state->x5C = 0;
-                        state->x61 = 1;
-                        un_8030715C(0.0f, 0.0f);
-                        return;
-                    }
+            if ((state->x50 != 0.0f) || (state->x54 != 0.0f)) {
+                moved_x = 1.0f;
+            }
+
+            if (moved_x == 0.0f) {
+                f32 sy = state->x34;
+                if (sy != 0.0f) {
+                    f32 dist = state->x20;
+                    state->x20 = (f32) - ((dist * (0.025f * sy)) - dist);
+                    moved_y = 1.0f;
+                }
+                if (state->x20 < 5.0f) {
+                    state->x20 = 5.0f;
+                }
+                if (state->x20 > 250.0f) {
+                    state->x20 = 250.0f;
                 }
             }
-        /* FALLTHROUGH */
+            goto case_default;
+
         default:
         case_default:
-            trigger = HSD_PadCopyStatus[0].trigger;
-            if (trigger != 0) {
-                gm_801677E8(0);
-            } else {
-                trigger = HSD_PadCopyStatus[1].trigger;
-                if (trigger != 0) {
-                    gm_801677E8(1);
-                } else {
-                    trigger = HSD_PadCopyStatus[2].trigger;
-                    if (trigger != 0) {
-                        gm_801677E8(2);
-                    } else {
-                        trigger = HSD_PadCopyStatus[3].trigger;
-                        if (trigger != 0) {
-                            gm_801677E8(3);
-                        }
-                    }
-                }
-            }
+            trigger = un_80305B88();
             if (trigger & 0x800) {
                 un_804D6E54 ^= 1;
             }
@@ -4402,25 +4480,7 @@ void fn_8030E110(HSD_GObj* arg0)
             }
 
             if ((moved_x == 0.0f) && (moved_y == 0.0f)) {
-                trigger = HSD_PadCopyStatus[0].trigger;
-                if (trigger != 0) {
-                    gm_801677E8(0);
-                } else {
-                    trigger = HSD_PadCopyStatus[1].trigger;
-                    if (trigger != 0) {
-                        gm_801677E8(1);
-                    } else {
-                        trigger = HSD_PadCopyStatus[2].trigger;
-                        if (trigger != 0) {
-                            gm_801677E8(2);
-                        } else {
-                            trigger = HSD_PadCopyStatus[3].trigger;
-                            if (trigger != 0) {
-                                gm_801677E8(3);
-                            }
-                        }
-                    }
-                }
+                trigger = un_80305B88();
                 if (trigger & 0x60) {
                     display = un_804D6EE0;
                     {
@@ -4436,48 +4496,12 @@ void fn_8030E110(HSD_GObj* arg0)
                         }
                     }
                     if (!(state->x30 < 0.0f)) {
-                        trigger = HSD_PadCopyStatus[0].trigger;
-                        if (trigger != 0) {
-                            gm_801677E8(0);
-                        } else {
-                            trigger = HSD_PadCopyStatus[1].trigger;
-                            if (trigger != 0) {
-                                gm_801677E8(1);
-                            } else {
-                                trigger = HSD_PadCopyStatus[2].trigger;
-                                if (trigger != 0) {
-                                    gm_801677E8(2);
-                                } else {
-                                    trigger = HSD_PadCopyStatus[3].trigger;
-                                    if (trigger != 0) {
-                                        gm_801677E8(3);
-                                    }
-                                }
-                            }
-                        }
+                        trigger = un_80305B88();
                         if (trigger & 0x441) {
                             goto cycle_prev;
                         }
                         if (!(state->x30 > 0.0f)) {
-                            trigger = HSD_PadCopyStatus[0].trigger;
-                            if (trigger != 0) {
-                                gm_801677E8(0);
-                            } else {
-                                trigger = HSD_PadCopyStatus[1].trigger;
-                                if (trigger != 0) {
-                                    gm_801677E8(1);
-                                } else {
-                                    trigger = HSD_PadCopyStatus[2].trigger;
-                                    if (trigger != 0) {
-                                        gm_801677E8(2);
-                                    } else {
-                                        trigger = HSD_PadCopyStatus[3].trigger;
-                                        if (trigger != 0) {
-                                            gm_801677E8(3);
-                                        }
-                                    }
-                                }
-                            }
+                            trigger = un_80305B88();
                             if (trigger & 0x822) {
                                 goto cycle_next;
                             }
@@ -4721,25 +4745,7 @@ void fn_8030E110(HSD_GObj* arg0)
             }
 
         after_trophy_cycle:
-            trigger = HSD_PadCopyStatus[0].trigger;
-            if (trigger != 0) {
-                gm_801677E8(0);
-            } else {
-                trigger = HSD_PadCopyStatus[1].trigger;
-                if (trigger != 0) {
-                    gm_801677E8(1);
-                } else {
-                    trigger = HSD_PadCopyStatus[2].trigger;
-                    if (trigger != 0) {
-                        gm_801677E8(2);
-                    } else {
-                        trigger = HSD_PadCopyStatus[3].trigger;
-                        if (trigger != 0) {
-                            gm_801677E8(3);
-                        }
-                    }
-                }
-            }
+            trigger = un_80305B88();
             if (trigger & 0x1000) {
                 lbAudioAx_80024030(2);
                 state->x58 = 0;
@@ -4751,42 +4757,20 @@ void fn_8030E110(HSD_GObj* arg0)
                 un_803075E8(M2C_FIELD(ed4, s32*, 0x10));
             }
 
-            trigger = HSD_PadCopyStatus[0].trigger;
-            if (trigger != 0) {
-                gm_801677E8(0);
-            } else {
-                trigger = HSD_PadCopyStatus[1].trigger;
-                if (trigger != 0) {
-                    gm_801677E8(1);
-                } else {
-                    trigger = HSD_PadCopyStatus[2].trigger;
-                    if (trigger != 0) {
-                        gm_801677E8(2);
-                    } else {
-                        trigger = HSD_PadCopyStatus[3].trigger;
-                        if (trigger != 0) {
-                            gm_801677E8(3);
-                        }
-                    }
-                }
-            }
+            trigger = un_80305B88();
             if (trigger & 0x10) {
                 void* ed4_2;
-                ToyAnimState* anim;
                 un_80307828(0);
                 ed4_2 = un_804D6ED4;
                 M2C_FIELD(ed4_2, s32*, 0x10) = 0;
                 un_80306D70(M2C_FIELD(ed4_2, s32*, 0x10));
                 un_803075E8(M2C_FIELD(ed4_2, s32*, 0x10));
-                anim = (ToyAnimState*) ((u8*) un_804A26B8 + 0x3F0);
                 anim->x11 = 0;
                 anim->x10 = 0;
                 anim->x0E = 1;
             }
 
             {
-                ToyAnimState* anim =
-                    (ToyAnimState*) ((u8*) un_804A26B8 + 0x3F0);
                 HSD_JObjSetFlagsAll(anim->jobj[0], 0x10U);
                 HSD_JObjSetFlagsAll(anim->jobj[1], 0x10U);
             }
@@ -4797,252 +4781,13 @@ void fn_8030E110(HSD_GObj* arg0)
             state->x48 = state->x40;
             state->x4C = state->x44;
             break;
-
-        case 3:
-            un_80308F04(cobj);
-            goto case_default;
-
-        case 2:
-            trigger = HSD_PadCopyStatus[0].trigger;
-            if (trigger != 0) {
-                gm_801677E8(0);
-            } else {
-                trigger = HSD_PadCopyStatus[1].trigger;
-                if (trigger != 0) {
-                    gm_801677E8(1);
-                } else {
-                    trigger = HSD_PadCopyStatus[2].trigger;
-                    if (trigger != 0) {
-                        gm_801677E8(2);
-                    } else {
-                        trigger = HSD_PadCopyStatus[3].trigger;
-                        if (trigger != 0) {
-                            gm_801677E8(3);
-                        }
-                    }
-                }
-            }
-
-            if ((trigger & 0x200) || ((f32) state->x5C > 7200.0f)) {
-                ToyJObjNode* jobj_node;
-                lbAudioAx_80024030(0);
-                un_804D6E80 = HSD_CObjGetTop(cobj);
-                un_804D6E84 = HSD_CObjGetBottom(cobj);
-                un_804D6E88 = HSD_CObjGetRight(cobj);
-                un_804D6E8C = HSD_CObjGetLeft(cobj);
-                jobj_node =
-                    (ToyJObjNode*) ((ToyED8Data*) un_804D6ED8)->xC->x28;
-                while (jobj_node != NULL) {
-                    jobj_node->x40 = 9;
-                    jobj_node = (ToyJObjNode*) jobj_node->x4;
-                }
-                state->x5C = 0;
-                sp134 = un_803B88F8.x;
-                sp138 = un_803B88F8.y;
-                sp13C = un_803B88F8.z;
-                sp128 = un_803B8904.x;
-                sp12C = un_803B8904.y;
-                sp130 = un_803B8904.z;
-                HSD_CObjGetEyePosition(cobj, &sp140);
-                sp138 = 8.0f;
-                HSD_CObjGetInterest(cobj, (Vec3*) &sp128);
-                M2C_FIELD(un_804A26B8, f32*, 0x0) =
-                    (f32) ((sp134 - sp128) / 10.0f);
-                M2C_FIELD(un_804A26B8, f32*, 0x4) =
-                    (f32) ((sp138 - sp12C) / 10.0f);
-                M2C_FIELD(un_804A26B8, f32*, 0x8) =
-                    (f32) ((sp13C - sp130) / 10.0f);
-                un_804D6E90 = (state->x20 - 38.0f) / 10.0f;
-                un_804D6E94 = state->x18 / 10.0f;
-                state->x61 = 3;
-            }
-
-            trigger = HSD_PadCopyStatus[0].trigger;
-            if (trigger != 0) {
-                gm_801677E8(0);
-            } else {
-                trigger = HSD_PadCopyStatus[1].trigger;
-                if (trigger != 0) {
-                    gm_801677E8(1);
-                } else {
-                    trigger = HSD_PadCopyStatus[2].trigger;
-                    if (trigger != 0) {
-                        gm_801677E8(2);
-                    } else {
-                        trigger = HSD_PadCopyStatus[3].trigger;
-                        if (trigger != 0) {
-                            gm_801677E8(3);
-                        }
-                    }
-                }
-            }
-
-            if ((state->x44 + (state->x40 + (state->x30 + state->x34)) +
-                 (f32) trigger) == 0.0f)
-            {
-                state->x5C = state->x5C + 1;
-            } else {
-                state->x5C = 0;
-            }
-
-            button = HSD_PadCopyStatus[0].button;
-            if (button != 0) {
-                gm_801677E8(0);
-            } else {
-                button = HSD_PadCopyStatus[1].button;
-                if (button != 0) {
-                    gm_801677E8(1);
-                } else {
-                    button = HSD_PadCopyStatus[2].button;
-                    if (button != 0) {
-                        gm_801677E8(2);
-                    } else {
-                        button = HSD_PadCopyStatus[3].button;
-                        if (button != 0) {
-                            gm_801677E8(3);
-                        }
-                    }
-                }
-            }
-            if (button & 0x100) {
-                f32 sx = state->x30;
-                if ((sx != 0.0f) && (sx < 0.0f)) {
-                    state->x50 = (f32) (0.3f * sx * (state->x20 / 38.0f));
-                }
-            }
-
-            button = HSD_PadCopyStatus[0].button;
-            if (button != 0) {
-                gm_801677E8(0);
-            } else {
-                button = HSD_PadCopyStatus[1].button;
-                if (button != 0) {
-                    gm_801677E8(1);
-                } else {
-                    button = HSD_PadCopyStatus[2].button;
-                    if (button != 0) {
-                        gm_801677E8(2);
-                    } else {
-                        button = HSD_PadCopyStatus[3].button;
-                        if (button != 0) {
-                            gm_801677E8(3);
-                        }
-                    }
-                }
-            }
-            if (button & 0x100) {
-                f32 sx = state->x30;
-                if ((sx != 0.0f) && (sx > 0.0f)) {
-                    state->x50 = (f32) (0.3f * sx * (state->x20 / 38.0f));
-                }
-            }
-
-            button = HSD_PadCopyStatus[0].button;
-            if (button != 0) {
-                gm_801677E8(0);
-            } else {
-                button = HSD_PadCopyStatus[1].button;
-                if (button != 0) {
-                    gm_801677E8(1);
-                } else {
-                    button = HSD_PadCopyStatus[2].button;
-                    if (button != 0) {
-                        gm_801677E8(2);
-                    } else {
-                        button = HSD_PadCopyStatus[3].button;
-                        if (button != 0) {
-                            gm_801677E8(3);
-                        }
-                    }
-                }
-            }
-            if (button & 0x100) {
-                f32 sy = state->x34;
-                if ((sy != 0.0f) && (sy > 0.0f)) {
-                    state->x54 = (f32) (0.3f * sy * (state->x20 / 38.0f));
-                }
-            }
-
-            button = HSD_PadCopyStatus[0].button;
-            if (button != 0) {
-                gm_801677E8(0);
-            } else {
-                button = HSD_PadCopyStatus[1].button;
-                if (button != 0) {
-                    gm_801677E8(1);
-                } else {
-                    button = HSD_PadCopyStatus[2].button;
-                    if (button != 0) {
-                        gm_801677E8(2);
-                    } else {
-                        button = HSD_PadCopyStatus[3].button;
-                        if (button != 0) {
-                            gm_801677E8(3);
-                        }
-                    }
-                }
-            }
-            if (button & 0x100) {
-                f32 sy = state->x34;
-                if ((sy != 0.0f) && (sy < 0.0f)) {
-                    state->x54 = (f32) (0.3f * sy * (state->x20 / 38.0f));
-                }
-            }
-
-            if ((state->x50 == 0.0f) && (state->x54 == 0.0f)) {
-                button = HSD_PadCopyStatus[0].button;
-                if (button != 0) {
-                    gm_801677E8(0);
-                } else {
-                    button = HSD_PadCopyStatus[1].button;
-                    if (button != 0) {
-                        gm_801677E8(1);
-                    } else {
-                        button = HSD_PadCopyStatus[2].button;
-                        if (button != 0) {
-                            gm_801677E8(2);
-                        } else {
-                            button = HSD_PadCopyStatus[3].button;
-                            if (button != 0) {
-                                gm_801677E8(3);
-                            }
-                        }
-                    }
-                }
-                if (button & 0x100) {
-                    goto pan_active;
-                }
-                un_803102C4(1);
-            } else {
-            pan_active:
-                un_803102C4(0);
-            }
-
-            if ((state->x50 != 0.0f) || (state->x54 != 0.0f)) {
-                moved_x = 1.0f;
-            }
-
-            if (moved_x == 0.0f) {
-                f32 sy = state->x34;
-                if (sy != 0.0f) {
-                    f32 dist = state->x20;
-                    state->x20 = (f32) - ((dist * (0.025f * sy)) - dist);
-                    moved_y = 1.0f;
-                }
-                if (state->x20 < 5.0f) {
-                    state->x20 = 5.0f;
-                }
-                if (state->x20 > 250.0f) {
-                    state->x20 = 250.0f;
-                }
-            }
-            goto case_default;
         }
     }
 }
 
 void un_8030FA50(void)
 {
+    UNUSED u8 framepad[16];
     Vec3 eye;
     Mtx mtx;
     HSD_GObj* gobj;
@@ -5050,8 +4795,13 @@ void un_8030FA50(void)
     char* str;
     HSD_CObj* cobj;
     void** state;
+    f32 frustum_top;
+    f32 frustum_bottom;
+    f32 frustum_far;
+    f32 frustum_near;
+    u8 kind;
 
-    PAD_STACK(64);
+    PAD_STACK(48);
 
     str = un_803FDD18;
     {
@@ -5069,8 +4819,9 @@ void un_8030FA50(void)
 
     /* Main CObj (offset 0x00) */
     state[0] = GObj_Create(1U, 2U, 0U);
-    HSD_GObjObject_80390A70(state[0], HSD_GObj_804D784B,
-                            lb_80013B14(cam_desc));
+    cobj = lb_80013B14(cam_desc);
+    kind = HSD_GObj_804D784B;
+    HSD_GObjObject_80390A70(state[0], kind, cobj);
     GObj_SetupGXLinkMax(state[0], (GObj_RenderFunc) un_80306954, 0U);
     gobj = state[0];
     gobj->gxlink_prios = 0x1048000000000000ULL;
@@ -5084,8 +4835,14 @@ void un_8030FA50(void)
     /* Frustum camera (offset 0x08) */
     state[2] = GObj_Create(1U, 2U, 0U);
     cobj = lb_80013B14((HSD_CameraDescPerspective*) (str + 0x914));
-    HSD_CObjSetFrustum(cobj, 0.049584f, -0.035585f, -0.026839f, 0.076839f);
-    HSD_GObjObject_80390A70(state[2], HSD_GObj_804D784B, cobj);
+    frustum_top = un_804DDD78;
+    frustum_bottom = un_804DDD7C;
+    frustum_far = un_804DDD80;
+    frustum_near = un_804DDD84;
+    HSD_CObjSetFrustum(cobj, frustum_top, frustum_bottom, frustum_near,
+                       frustum_far);
+    kind = HSD_GObj_804D784B;
+    HSD_GObjObject_80390A70(state[2], kind, cobj);
     GObj_SetupGXLinkMax(state[2], (GObj_RenderFunc) un_803068E0, 0U);
     gobj = state[2];
     gobj->gxlink_prios = 0x0E80000000000000ULL;
@@ -5104,12 +4861,13 @@ void un_8030FA50(void)
     ((Toy6E68*) state)->x61 = 0;
     ((Toy6E68*) state)->x60 = 4;
     un_80307828(0);
-    ((Toy6E68*) state)->x58 = 0x95E;
+    ((Toy6E68*) un_804D6E68)->x58 = 0x95E;
 
     /* Camera2 (offset 0x04) */
     state[1] = GObj_Create(1U, 2U, 0U);
     cobj = lb_80013B14((HSD_CameraDescPerspective*) (str + 0x974));
-    HSD_GObjObject_80390A70(state[1], HSD_GObj_804D784B, cobj);
+    kind = HSD_GObj_804D784B;
+    HSD_GObjObject_80390A70(state[1], kind, cobj);
     GObj_SetupGXLinkMax(state[1], (GObj_RenderFunc) un_803068E0, 0U);
     gobj = state[1];
     gobj->gxlink_prios = 0x8000000000000000ULL;
@@ -5118,17 +4876,18 @@ void un_8030FA50(void)
         HSD_SisLib_803A611C(0, state[1], 0xBU, 0xCU, 0U, 0x3FU, 0U, 0U);
 
     HSD_CObjGetEyePosition(cobj, &eye);
-    eye.x = 0.0f;
-    eye.y = 0.0f;
+    eye.y = un_804DDCD8;
+    eye.x = un_804DDCD8;
     eye.z = HSD_CObjGetEyeDistance(cobj);
-    MTXRotRad(mtx, 'y', 0.57595867f);
+    MTXRotRad(mtx, 'y', un_804DDE00);
     PSMTXMultVecSR(mtx, &eye, &eye);
     HSD_CObjSetEyePosition(cobj, &eye);
 
     /* Light camera (offset 0x0C) */
     state[3] = GObj_Create(1U, 2U, 0U);
-    HSD_GObjObject_80390A70(state[3], HSD_GObj_804D784B,
-                            lb_80013B14(cam_desc));
+    cobj = lb_80013B14(cam_desc);
+    kind = HSD_GObj_804D784B;
+    HSD_GObjObject_80390A70(state[3], kind, cobj);
     GObj_SetupGXLinkMax(state[3], HSD_GObj_803910D8, 0U);
     gobj = state[3];
     gobj->gxlink_prios = 0x4000000000000000ULL;
@@ -5158,6 +4917,7 @@ void un_8030FA50(void)
 
 void un_8030FE48(void* arg0, s32 arg1)
 {
+    char* un_8030813C();
     u8* toy = (u8*) un_804A26B8;
     u8* data = arg0;
     u8* sel = toy + 0x3E8;
@@ -5165,16 +4925,19 @@ void un_8030FE48(void* arg0, s32 arg1)
     s32 var_r26 = 0;
     s16* ptr;
     s32 count;
-    s32 var_r7;
     char* result;
     s16 trophyIdx;
     void* sym;
     void* sym2;
+    void* zero;
+    s32 start;
+    u8* zero_entry;
+    s32 remaining;
+    s32 var_r7;
     PAD_STACK(8);
 
+    ptr = &un_804D6E64[(s8) toy[0x195]];
     *(s16*) (data + 0x154) = *(s16*) sel;
-
-    ptr = (s16*) ((u8*) un_804D6E64 + (s8) toy[0x195] * 2);
 
     goto loop_check;
 
@@ -5201,63 +4964,59 @@ loop_check:
 
 loop_done:
     if (gm_8016B498() != 0 || (u8) gm_801A4310() == 0xC) {
-        var_r7 = *(s16*) (toy + 0x3EC);
+        count = *(s16*) (toy + 0x3EC);
     } else {
-        var_r7 = *gmMainLib_8015CC90();
+        count = *gmMainLib_8015CC90();
     }
 
-    if (var_r7 > 3) {
+    var_r7 = count;
+    if (count > 3) {
         *(s8*) (data + 0x157) = 3;
         var_r7 = 0xD;
     } else {
-        *(s8*) (data + 0x157) = (s8) var_r7;
+        *(s8*) (data + 0x157) = (s8) count;
     }
 
     if (arg1_copy == 0) {
         s32 last = var_r7 - 1;
         u8* entry = data;
         s32 i;
-        if (var_r7 > 0) {
-            for (i = 0; i < var_r7; i++) {
-                if (i == 0) {
-                    *(void**) (entry + 0x00) = (void*) (data + last * 0x18);
-                } else {
-                    *(void**) (entry + 0x00) = (void*) (data + (i - 1) * 0x18);
-                }
-                if (i == last) {
-                    *(void**) (entry + 0x04) = (void*) data;
-                } else {
-                    *(void**) (entry + 0x04) = (void*) (data + (i + 1) * 0x18);
-                }
-                entry += 0x18;
+        u8* last_entry = data + last * 0x18;
+        for (i = 0; i < var_r7; i++) {
+            if (i == 0) {
+                *(void**) (entry + 0x00) = last_entry;
+            } else {
+                *(void**) (entry + 0x00) = (void*) (data + (i - 1) * 0x18);
             }
+            if (i == last) {
+                *(void**) (entry + 0x04) = (void*) data;
+            } else {
+                *(void**) (entry + 0x04) = (void*) (data + (i + 1) * 0x18);
+            }
+            entry += 0x18;
         }
     }
 
-    {
-        s32 zero = 0;
-        s32 start = 8;
-        u8* entry;
-        s32 remaining;
+    zero = NULL;
+    start = 8;
+    *(void**) (data + 0x14) = zero;
+    *(void**) (data + 0x2C) = zero;
+    *(void**) (data + 0x44) = zero;
+    *(void**) (data + 0x5C) = zero;
+    *(void**) (data + 0x74) = zero;
+    *(void**) (data + 0x8C) = zero;
+    *(void**) (data + 0xA4) = zero;
+    *(void**) (data + 0xBC) = zero;
+    goto clear_archive_setup;
 
-        *(s32*) (data + 0x14) = zero;
-        *(s32*) (data + 0x2C) = zero;
-        *(s32*) (data + 0x44) = zero;
-        *(s32*) (data + 0x5C) = zero;
-        *(s32*) (data + 0x74) = zero;
-        *(s32*) (data + 0x8C) = zero;
-        *(s32*) (data + 0xA4) = zero;
-        *(s32*) (data + 0xBC) = zero;
-
-        entry = data + start * 0x18;
-        remaining = 0xD - start;
-        if (start < 0xD) {
-            do {
-                *(s32*) (entry + 0x14) = zero;
-                entry += 0x18;
-                remaining -= 1;
-            } while (remaining != 0);
-        }
+clear_archive_loop:
+    remaining = 0xD - start;
+    if (start < 0xD) {
+        do {
+            *(void**) (zero_entry + 0x14) = zero;
+            zero_entry += 0x18;
+            remaining -= 1;
+        } while (remaining != 0);
     }
 
     if ((s8) * (u8*) (data + 0x157) == var_r7) {
@@ -5265,16 +5024,15 @@ loop_done:
         s32 offset = 0;
         u8* entry = data;
 
-        while (j < (s8) * (u8*) (data + 0x157)) {
+        for (; j < (s8) * (u8*) (data + 0x157);
+             j += 1, offset += 2, entry += 0x18)
+        {
             if (j == *(s16*) (data + 0x154)) {
                 trophyIdx = M2C_FIELD(un_804D6EDC, s16*, offset);
-                result = un_8030813C(trophyIdx, trophyIdx);
-                {
-                    HSD_Archive* archive = *(HSD_Archive**) (entry + 0x14);
-                    if (archive != NULL) {
-                        lbArchive_80016EFC(archive);
-                        *(HSD_Archive**) (entry + 0x14) = NULL;
-                    }
+                result = un_8030813C(trophyIdx);
+                if (*(HSD_Archive**) (entry + 0x14) != NULL) {
+                    lbArchive_80016EFC(*(HSD_Archive**) (entry + 0x14));
+                    *(HSD_Archive**) (entry + 0x14) = NULL;
                 }
 
                 *(char**) (entry + 0x08) = result + 4;
@@ -5285,23 +5043,16 @@ loop_done:
                                           *(char**) (entry + 0x0C), 0);
             } else {
                 trophyIdx = M2C_FIELD(un_804D6EDC, s16*, offset);
-                result = un_8030813C(trophyIdx, trophyIdx);
-                {
-                    HSD_Archive* archive = *(HSD_Archive**) (entry + 0x14);
-                    if (archive != NULL) {
-                        lbArchive_80016EFC(archive);
-                        *(HSD_Archive**) (entry + 0x14) = NULL;
-                    }
+                result = un_8030813C(trophyIdx);
+                if (*(HSD_Archive**) (entry + 0x14) != NULL) {
+                    lbArchive_80016EFC(*(HSD_Archive**) (entry + 0x14));
+                    *(HSD_Archive**) (entry + 0x14) = NULL;
                 }
 
                 *(char**) (entry + 0x08) = result + 4;
                 *(char**) (entry + 0x0C) = result + 0x24;
                 *(s16*) (entry + 0x10) = trophyIdx;
             }
-
-            offset += 2;
-            entry += 0x18;
-            j += 1;
         }
 
         *(void**) (data + 0x140) =
@@ -5314,27 +5065,32 @@ loop_done:
 
     {
         s32 startIdx;
-        s32 loopCount = 0;
+        s32 prevIdx;
+        s32 loopCount;
         u8* cur;
 
-        startIdx = *(s16*) (data + 0x154) - 1;
-        if (startIdx < 0) {
-            s16 tcount;
+        prevIdx = *(s16*) (data + 0x154) - 1;
+        if (prevIdx < 0) {
+            s32 tcount;
             if (gm_8016B498() != 0 || (u8) gm_801A4310() == 0xC) {
                 tcount = *(s16*) (toy + 0x3EC);
             } else {
                 tcount = *gmMainLib_8015CC90();
             }
-            startIdx = tcount + *(s16*) (data + 0x154) - 1;
+            startIdx = tcount + *(s16*) (data + 0x154);
+            startIdx -= 1;
+        } else {
+            startIdx = prevIdx;
         }
 
         *(void**) (data + 0x140) = data;
+        loopCount = 0;
         *(void**) (data + 0x138) = *(void**) (*(u8**) (data + 0x140) + 0x00);
         *(void**) (data + 0x13C) = *(void**) (*(u8**) (data + 0x140) + 0x04);
         cur = *(u8**) (data + 0x138);
 
         while (loopCount < (s8) * (u8*) (data + 0x157)) {
-            s16 tcount2;
+            s32 tcount2;
 
             if (gm_8016B498() != 0 || (u8) gm_801A4310() == 0xC) {
                 tcount2 = *(s16*) (toy + 0x3EC);
@@ -5348,13 +5104,10 @@ loop_done:
 
             if (startIdx == *(s16*) (data + 0x154)) {
                 trophyIdx = un_804D6EDC[startIdx];
-                result = un_8030813C(trophyIdx, trophyIdx);
-                {
-                    HSD_Archive* archive = *(HSD_Archive**) (cur + 0x14);
-                    if (archive != NULL) {
-                        lbArchive_80016EFC(archive);
-                        *(HSD_Archive**) (cur + 0x14) = NULL;
-                    }
+                result = un_8030813C(trophyIdx);
+                if (*(HSD_Archive**) (cur + 0x14) != NULL) {
+                    lbArchive_80016EFC(*(HSD_Archive**) (cur + 0x14));
+                    *(HSD_Archive**) (cur + 0x14) = NULL;
                 }
 
                 *(char**) (cur + 0x08) = result + 4;
@@ -5364,13 +5117,10 @@ loop_done:
                     *(char**) (cur + 0x08), &sym2, *(char**) (cur + 0x0C), 0);
             } else {
                 trophyIdx = un_804D6EDC[startIdx];
-                result = un_8030813C(trophyIdx, trophyIdx);
-                {
-                    HSD_Archive* archive = *(HSD_Archive**) (cur + 0x14);
-                    if (archive != NULL) {
-                        lbArchive_80016EFC(archive);
-                        *(HSD_Archive**) (cur + 0x14) = NULL;
-                    }
+                result = un_8030813C(trophyIdx);
+                if (*(HSD_Archive**) (cur + 0x14) != NULL) {
+                    lbArchive_80016EFC(*(HSD_Archive**) (cur + 0x14));
+                    *(HSD_Archive**) (cur + 0x14) = NULL;
                 }
 
                 *(char**) (cur + 0x08) = result + 4;
@@ -5383,6 +5133,11 @@ loop_done:
             loopCount += 1;
         }
     }
+    return;
+
+clear_archive_setup:
+    zero_entry = data + start * 0x18;
+    goto clear_archive_loop;
 }
 
 void un_803102C4(s8 arg0)
@@ -5407,7 +5162,6 @@ void un_803102D0(void)
 
 void un_80310324(void)
 {
-    u8 _padA[8];
     char* toy;
     char* data;
     ToyGlobalsS_* tg;
@@ -5417,22 +5171,18 @@ void un_80310324(void)
     ToyGlobals4S_* tg5;
     ToyGlobals5S_* tg6;
     ToySubStructS_* sub;
-    s32 sp18;
-    s32 sp1C;
-    s32 sp20;
-    s32 sp24;
-    s32* ptr;
+    s32 sp[4];
     s32 i;
     s32 one;
     s16 idx;
-    s16 var_r0;
+    s32 var_r0;
     char* str;
     HSD_SObj* sobj;
     HSD_GObj* gobj;
     u16* flags;
     f32 two;
 
-    PAD_STACK(8);
+    PAD_STACK(4);
 
     data = un_803FDD18;
     toy = (char*) un_804A26B8;
@@ -5448,7 +5198,7 @@ void un_80310324(void)
             str = data + 0x5F8;
         }
         tg->x50 =
-            lbArchive_LoadSymbols(str, &sp24, *(void**) (data + 0x188), NULL);
+            lbArchive_LoadSymbols(str, &sp[3], *(void**) (data + 0x188), NULL);
     }
 
     memzero(un_804D6E68, 0x64);
@@ -5460,22 +5210,20 @@ void un_80310324(void)
     tg2 = un_804D6ED8;
     if (tg2->x54 == NULL) {
         tg2->x54 = lbArchive_LoadSymbols(
-            data + 0x640, &sp18, *(void**) (data + 0x320), &sp1C,
-            *(void**) (data + 0x324), &sp20, *(void**) (data + 0x328), 0);
+            data + 0x640, &sp[0], *(void**) (data + 0x320), &sp[1],
+            *(void**) (data + 0x324), &sp[2], *(void**) (data + 0x328), 0);
 
         tg2->x8 = GObj_Create(4, 5, 0);
         GObj_SetupGXLink(tg2->x8, HSD_SObjLib_803A49E0, 0x32, 0);
 
         i = 0;
-        ptr = &sp18;
         two = un_804DDCF0;
         one = 1;
         do {
-            sobj = HSD_SObjLib_803A477C(tg2->x8, *ptr, 0, 0, 0x80, 0);
+            sobj = HSD_SObjLib_803A477C(tg2->x8, sp[i], 0, 0, 0x80, 0);
             *(f32*) ((char*) sobj + 0x1C) = two;
             i += 1;
             *(f32*) ((char*) sobj + 0x20) = two;
-            ptr += 1;
             *(s32*) ((char*) sobj + 0x40) = one;
         } while (i < 3);
     }
@@ -5522,7 +5270,8 @@ void un_80310324(void)
                 flags = gmMainLib_8015CC78();
             }
 
-            flags[idx] ^= 0x8000;
+            flags += idx;
+            *flags ^= 0x8000;
         }
 
         tg6 = un_804D6EE0;
@@ -5561,11 +5310,11 @@ void un_80310660(s32 arg0)
     s32 arg;
     u8* state;
     void** ty31;
-    void* ty28;
+    TyCleanupObj* ty28;
     u8* ty27;
     void* ty26;
     TyUnk25* ty25;
-    void* ty30;
+    tyLightData* ty30;
 
     state = (u8*) un_804A26B8;
     arg = arg0;
@@ -5600,7 +5349,8 @@ void un_80310660(s32 arg0)
             } else {
                 ptr = gmMainLib_8015CC78();
             }
-            ptr[idx] ^= 0x8000;
+            ptr += idx;
+            *ptr ^= 0x8000;
         }
 
         *(s16*) (state + 0x3E8) = ty25->x154;
@@ -5608,7 +5358,7 @@ void un_80310660(s32 arg0)
     }
 
     if (arg != 0) {
-        void* loopPtr;
+        Ty25Entry* loopPtr;
         s32 count;
 
         HSD_SisLib_803A5E70();
@@ -5624,16 +5374,16 @@ void un_80310660(s32 arg0)
         }
 
         if (idx != 0) {
-            loopPtr = ty25;
+            loopPtr = (Ty25Entry*) ty25;
             count = 0;
             arg = 0;
             do {
-                if (M2C_FIELD(loopPtr, void**, 0x14) != NULL) {
-                    lbArchive_80016EFC(M2C_FIELD(loopPtr, void**, 0x14));
-                    M2C_FIELD(loopPtr, void**, 0x14) = (void*) arg;
+                if (loopPtr->x14 != NULL) {
+                    lbArchive_80016EFC(loopPtr->x14);
+                    loopPtr->x14 = (void*) arg;
                 }
                 count += 1;
-                loopPtr = (u8*) loopPtr + 0x18;
+                loopPtr += 1;
             } while (count < 0xD);
         }
 
@@ -5642,18 +5392,18 @@ void un_80310660(s32 arg0)
             un_804D6EC8 = NULL;
         }
 
-        if (M2C_FIELD(ty28, void**, 0xC) != NULL) {
-            lbArchive_80016EFC(M2C_FIELD(ty28, void**, 0xC));
-            M2C_FIELD(ty28, void**, 0xC) = NULL;
+        if (ty28->xC != NULL) {
+            lbArchive_80016EFC(ty28->xC);
+            ty28->xC = NULL;
         }
 
-        if (M2C_FIELD(ty30, void**, 0x58) != NULL) {
-            lbArchive_80016EFC(M2C_FIELD(ty30, void**, 0x58));
+        if (ty30->x58 != NULL) {
+            lbArchive_80016EFC(ty30->x58);
             arg = 0;
-            M2C_FIELD(ty30, void**, 0x58) = (void*) arg;
-            if (M2C_FIELD(ty30, void**, 0xC) != NULL) {
-                HSD_GObjPLink_80390228(M2C_FIELD(ty30, void**, 0xC));
-                M2C_FIELD(ty30, void**, 0xC) = (void*) arg;
+            ty30->x58 = (void*) arg;
+            if (ty30->x0C != NULL) {
+                HSD_GObjPLink_80390228(ty30->x0C);
+                ty30->x0C = (void*) arg;
             }
         }
 
@@ -5669,27 +5419,27 @@ void un_80310660(s32 arg0)
             *(void**) ty26 = NULL;
         }
 
-        if (*(void**) ty28 != NULL) {
-            HSD_GObjPLink_80390228(*(void**) ty28);
-            *(void**) ty28 = NULL;
-            M2C_FIELD(ty28, void**, 0x10) = NULL;
+        if (ty28->x0 != NULL) {
+            HSD_GObjPLink_80390228(ty28->x0);
+            ty28->x0 = NULL;
+            ty28->x10 = NULL;
         }
 
-        if (M2C_FIELD(ty28, void**, 0x4) != NULL) {
-            HSD_GObjProc_8038FED4(M2C_FIELD(ty28, void**, 0x4));
-            HSD_GObjPLink_80390228(M2C_FIELD(ty28, void**, 0x4));
-            M2C_FIELD(ty28, void**, 0x4) = NULL;
+        if (ty28->x4 != NULL) {
+            HSD_GObjProc_8038FED4(ty28->x4);
+            HSD_GObjPLink_80390228(ty28->x4);
+            ty28->x4 = NULL;
         }
 
-        if (M2C_FIELD(ty28, void**, 0x8) != NULL) {
-            HSD_GObjPLink_80390228(M2C_FIELD(ty28, void**, 0x8));
-            M2C_FIELD(ty28, void**, 0x8) = NULL;
+        if (ty28->x8 != NULL) {
+            HSD_GObjPLink_80390228(ty28->x8);
+            ty28->x8 = NULL;
             HSD_FogSet(NULL);
         }
 
-        if (M2C_FIELD(ty30, void**, 0xC) != NULL) {
-            HSD_GObjPLink_80390228(M2C_FIELD(ty30, void**, 0xC));
-            M2C_FIELD(ty30, void**, 0xC) = NULL;
+        if (ty30->x0C != NULL) {
+            HSD_GObjPLink_80390228(ty30->x0C);
+            ty30->x0C = NULL;
         }
 
         if (ty31[0] != NULL) {
@@ -5734,47 +5484,50 @@ void un_803109A0(s32 arg0, s32 arg1, s32 arg2)
     ToyTable table;
     char buf[16];
     s32 idx;
+    s32 target;
+
+    target = arg0;
 
     /* Copy table from un_803B8910 to stack */
     table = *(ToyTable*) un_803B8910;
 
     /* Search for matching entry using pointer walk */
     {
-        ToyEntry* p = table.entries - 1;
+        ToyEntry* p = table.entries;
         idx = 0;
-        if (arg0 == (++p)->id) {
+        if (target == p->id) {
             goto found;
         }
         idx = 1;
-        if (arg0 == (++p)->id) {
+        if (target == (++p)->id) {
             goto found;
         }
         idx = 2;
-        if (arg0 == (++p)->id) {
+        if (target == (++p)->id) {
             goto found;
         }
         idx = 3;
-        if (arg0 == (++p)->id) {
+        if (target == (++p)->id) {
             goto found;
         }
         idx = 4;
-        if (arg0 == (++p)->id) {
+        if (target == (++p)->id) {
             goto found;
         }
         idx = 5;
-        if (arg0 == (++p)->id) {
+        if (target == (++p)->id) {
             goto found;
         }
         idx = 6;
-        if (arg0 == (++p)->id) {
+        if (target == (++p)->id) {
             goto found;
         }
         idx = 7;
-        if (arg0 == (++p)->id) {
+        if (target == (++p)->id) {
             goto found;
         }
         idx = 8;
-        if (arg0 == (++p)->id) {
+        if (target == (++p)->id) {
             goto found;
         }
         idx = 9;
@@ -5787,11 +5540,11 @@ found:
         DevText_StoreColorIndex(un_804D6E98, 0);
     }
 
-    if (arg0 == 8) {
-        s32 ret = un_80304B94(arg0);
+    if (target == 8) {
+        s32 ret = un_80304B94(target);
         sprintf(buf, un_803FE7A0, table.entries[idx].value_byte, arg1, ret);
     } else {
-        s32 ret = un_80304B94(arg0);
+        s32 ret = un_80304B94(target);
         sprintf(buf, un_803FE7B0, table.entries[idx].value_byte, arg1, ret);
     }
     DevText_Printf(un_804D6E98, buf);
@@ -5809,55 +5562,39 @@ void un_80310B48(HSD_GObj* gobj)
     f32 stickX;
     f32 stickY;
     f32 absVal;
-    f32 dirX;
     f32 dirY;
+    f32 dirX;
     u32 buttons;
     s32 changed;
-    s32 i;
     s16* valptr;
+    s32 i;
     s32 slot;
     s32 maxVal;
+
+    PAD_STACK(72);
 
     changed = 0;
     editor = (ToyParamEditor*) un_804D6E5C;
 
-    stickX = HSD_PadCopyStatus[0].nml_stickX;
-    absVal = (stickX < 0.0f) ? -stickX : stickX;
-    if (!(absVal > 0.1f)) {
-        stickX = HSD_PadCopyStatus[1].nml_stickX;
-        absVal = (stickX < 0.0f) ? -stickX : stickX;
-        if (!(absVal > 0.1f)) {
-            stickX = HSD_PadCopyStatus[2].nml_stickX;
-            absVal = (stickX < 0.0f) ? -stickX : stickX;
-            if (!(absVal > 0.1f)) {
-                stickX = HSD_PadCopyStatus[3].nml_stickX;
-            }
-        }
-    }
+    {
+        f32 val;
+        f32 abs;
+        s32 i;
 
-    stickY = HSD_PadCopyStatus[0].nml_stickY;
-    absVal = (stickY < 0.0f) ? -stickY : stickY;
-    if (absVal > 0.1f) {
-        gm_801677E8(0);
-    } else {
-        stickY = HSD_PadCopyStatus[1].nml_stickY;
-        absVal = (stickY < 0.0f) ? -stickY : stickY;
-        if (absVal > 0.1f) {
-            gm_801677E8(1);
-        } else {
-            stickY = HSD_PadCopyStatus[2].nml_stickY;
-            absVal = (stickY < 0.0f) ? -stickY : stickY;
-            if (absVal > 0.1f) {
-                gm_801677E8(2);
+        for (i = 0; i < 4; i++) {
+            val = HSD_PadCopyStatus[(u8) i].nml_stickX;
+            if (val < 0.0F) {
+                abs = -val;
             } else {
-                stickY = HSD_PadCopyStatus[3].nml_stickY;
-                absVal = (stickY < 0.0f) ? -stickY : stickY;
-                if (absVal > 0.1f) {
-                    gm_801677E8(3);
-                }
+                abs = val;
+            }
+            if (abs > 0.1F) {
+                break;
             }
         }
+        stickX = val;
     }
+    stickY = un_80305DB0();
 
     if (stickX < -0.6f) {
         dirX = 1.0f;
@@ -5882,25 +5619,7 @@ void un_80310B48(HSD_GObj* gobj)
         return;
     }
 
-    buttons = HSD_PadCopyStatus[0].trigger;
-    if (buttons != 0) {
-        gm_801677E8(0);
-    } else {
-        buttons = HSD_PadCopyStatus[1].trigger;
-        if (buttons != 0) {
-            gm_801677E8(1);
-        } else {
-            buttons = HSD_PadCopyStatus[2].trigger;
-            if (buttons != 0) {
-                gm_801677E8(2);
-            } else {
-                buttons = HSD_PadCopyStatus[3].trigger;
-                if (buttons != 0) {
-                    gm_801677E8(3);
-                }
-            }
-        }
-    }
+    buttons = un_80305B88();
 
     if (buttons & 0x200) {
         lbAudioAx_80024030(0);
@@ -5910,57 +5629,21 @@ void un_80310B48(HSD_GObj* gobj)
         return;
     }
 
-    buttons = HSD_PadCopyStatus[0].trigger;
-    if (buttons != 0) {
-        gm_801677E8(0);
-    } else {
-        buttons = HSD_PadCopyStatus[1].trigger;
-        if (buttons != 0) {
-            gm_801677E8(1);
-        } else {
-            buttons = HSD_PadCopyStatus[2].trigger;
-            if (buttons != 0) {
-                gm_801677E8(2);
-            } else {
-                buttons = HSD_PadCopyStatus[3].trigger;
-                if (buttons != 0) {
-                    gm_801677E8(3);
-                }
-            }
-        }
-    }
+    buttons = un_80305B88();
 
     if (buttons & 0x1100) {
         lbAudioAx_80024030(1);
         un_80311960();
-        valptr = editor->values;
+        valptr = (s16*) editor;
         i = 0;
         do {
-            if (*valptr != 0) {
+            if (valptr[3] != 0) {
                 un_80305918((s8) i, 0, 0);
-                buttons = HSD_PadCopyStatus[0].trigger;
-                if (buttons != 0) {
-                    gm_801677E8(0);
-                } else {
-                    buttons = HSD_PadCopyStatus[1].trigger;
-                    if (buttons != 0) {
-                        gm_801677E8(1);
-                    } else {
-                        buttons = HSD_PadCopyStatus[2].trigger;
-                        if (buttons != 0) {
-                            gm_801677E8(2);
-                        } else {
-                            buttons = HSD_PadCopyStatus[3].trigger;
-                            if (buttons != 0) {
-                                gm_801677E8(3);
-                            }
-                        }
-                    }
-                }
+                buttons = un_80305B88();
                 if (buttons & 0x1000) {
-                    un_803053C4(i, (s32) *valptr, 0);
+                    un_803053C4(i, (s32) valptr[3], 0);
                 } else {
-                    un_803053C4(i, (s32) *valptr, 1);
+                    un_803053C4(i, (s32) valptr[3], 1);
                 }
             } else if (i == 2) {
                 un_80305918((s8) i, 0, 0);
@@ -5981,45 +5664,9 @@ void un_80310B48(HSD_GObj* gobj)
     }
 
     if (!(dirX > 0.0f)) {
-        buttons = HSD_PadCopyStatus[0].button;
-        if (buttons != 0) {
-            gm_801677E8(0);
-        } else {
-            buttons = HSD_PadCopyStatus[1].button;
-            if (buttons != 0) {
-                gm_801677E8(1);
-            } else {
-                buttons = HSD_PadCopyStatus[2].button;
-                if (buttons != 0) {
-                    gm_801677E8(2);
-                } else {
-                    buttons = HSD_PadCopyStatus[3].button;
-                    if (buttons != 0) {
-                        gm_801677E8(3);
-                    }
-                }
-            }
-        }
+        buttons = un_80305C44();
         if (!(buttons & 0x800)) {
-            buttons = HSD_PadCopyStatus[0].trigger;
-            if (buttons != 0) {
-                gm_801677E8(0);
-            } else {
-                buttons = HSD_PadCopyStatus[1].trigger;
-                if (buttons != 0) {
-                    gm_801677E8(1);
-                } else {
-                    buttons = HSD_PadCopyStatus[2].trigger;
-                    if (buttons != 0) {
-                        gm_801677E8(2);
-                    } else {
-                        buttons = HSD_PadCopyStatus[3].trigger;
-                        if (buttons != 0) {
-                            gm_801677E8(3);
-                        }
-                    }
-                }
-            }
+            buttons = un_80305B88();
             if (!(buttons & 1)) {
                 goto skip_increment;
             }
@@ -6041,45 +5688,9 @@ void un_80310B48(HSD_GObj* gobj)
 skip_increment:
 
     if (!(dirX < 0.0f)) {
-        buttons = HSD_PadCopyStatus[0].button;
-        if (buttons != 0) {
-            gm_801677E8(0);
-        } else {
-            buttons = HSD_PadCopyStatus[1].button;
-            if (buttons != 0) {
-                gm_801677E8(1);
-            } else {
-                buttons = HSD_PadCopyStatus[2].button;
-                if (buttons != 0) {
-                    gm_801677E8(2);
-                } else {
-                    buttons = HSD_PadCopyStatus[3].button;
-                    if (buttons != 0) {
-                        gm_801677E8(3);
-                    }
-                }
-            }
-        }
+        buttons = un_80305C44();
         if (!(buttons & 0x400)) {
-            buttons = HSD_PadCopyStatus[0].trigger;
-            if (buttons != 0) {
-                gm_801677E8(0);
-            } else {
-                buttons = HSD_PadCopyStatus[1].trigger;
-                if (buttons != 0) {
-                    gm_801677E8(1);
-                } else {
-                    buttons = HSD_PadCopyStatus[2].trigger;
-                    if (buttons != 0) {
-                        gm_801677E8(2);
-                    } else {
-                        buttons = HSD_PadCopyStatus[3].trigger;
-                        if (buttons != 0) {
-                            gm_801677E8(3);
-                        }
-                    }
-                }
-            }
+            buttons = un_80305B88();
             if (!(buttons & 2)) {
                 goto skip_decrement;
             }
@@ -6115,12 +5726,12 @@ skip_decrement:
         DevText_Erase(un_804D6E98);
         DevText_SetCursorXY(un_804D6E98, 0, 0);
         i = 0;
-        valptr = editor->values;
+        valptr = (s16*) editor;
         do {
             if (i == (s8) editor->selected_slot) {
-                un_803109A0(i, (s32) *valptr, 1);
+                un_803109A0(i, (s32) valptr[3], 1);
             } else {
-                un_803109A0(i, (s32) *valptr, 0);
+                un_803109A0(i, (s32) valptr[3], 0);
             }
             i += 1;
             valptr += 1;
@@ -6266,18 +5877,18 @@ void un_80311788(void)
 }
 void un_80311960(void)
 {
-    void* base;
+    u8* base;
     u16* save_data;
     s16* save_data2;
     int i;
 
-    base = un_804A26B8;
+    base = (u8*) un_804A26B8;
     save_data = gmMainLib_8015CC78();
     save_data2 = gmMainLib_8015CC84();
 
     for (i = 0; i < 0x125; i++) {
         save_data[i] = 0;
-        ((u16*) ((u8*) base + 0x194))[i] = 0;
+        ((u16*) (base + 0x194))[i + 5] = 0;
     }
 
     *save_data2 = 0;
@@ -6293,82 +5904,32 @@ void un_80311960(void)
 void un_80311AB0_OnEnter(void* arg0)
 {
     char* str;
+    u8* base;
+    s16* selp;
     u32 buttons;
-    s16 sel;
-    s16 count;
+    s32 count;
+
+    PAD_STACK(40);
 
     str = un_803FDD18;
+    base = (u8*) un_804A26B8;
     un_804D6EA2 = 0;
     un_804D6E50 = 0;
     un_804D6EA1 = 0;
 
     if (g_debugLevel >= 3) {
         /* Check Z button */
-        buttons = HSD_PadCopyStatus[0].button;
-        if (buttons == 0) {
-            buttons = HSD_PadCopyStatus[1].button;
-            if (buttons == 0) {
-                buttons = HSD_PadCopyStatus[2].button;
-                if (buttons == 0) {
-                    buttons = HSD_PadCopyStatus[3].button;
-                    if (buttons != 0) {
-                        gm_801677E8(3);
-                    }
-                } else {
-                    gm_801677E8(2);
-                }
-            } else {
-                gm_801677E8(1);
-            }
-        } else {
-            gm_801677E8(0);
-        }
+        buttons = un_80305C44();
 
         un_804D6E50 = (buttons & 0x40) ? 1 : 0;
 
         /* Check Start button */
-        buttons = HSD_PadCopyStatus[0].button;
-        if (buttons == 0) {
-            buttons = HSD_PadCopyStatus[1].button;
-            if (buttons == 0) {
-                buttons = HSD_PadCopyStatus[2].button;
-                if (buttons == 0) {
-                    buttons = HSD_PadCopyStatus[3].button;
-                    if (buttons != 0) {
-                        gm_801677E8(3);
-                    }
-                } else {
-                    gm_801677E8(2);
-                }
-            } else {
-                gm_801677E8(1);
-            }
-        } else {
-            gm_801677E8(0);
-        }
+        buttons = un_80305C44();
 
         un_804D6EA2 = (buttons & 0x10) ? 1 : 0;
 
         /* Check D-pad down */
-        buttons = HSD_PadCopyStatus[0].button;
-        if (buttons == 0) {
-            buttons = HSD_PadCopyStatus[1].button;
-            if (buttons == 0) {
-                buttons = HSD_PadCopyStatus[2].button;
-                if (buttons == 0) {
-                    buttons = HSD_PadCopyStatus[3].button;
-                    if (buttons != 0) {
-                        gm_801677E8(3);
-                    }
-                } else {
-                    gm_801677E8(2);
-                }
-            } else {
-                gm_801677E8(1);
-            }
-        } else {
-            gm_801677E8(0);
-        }
+        buttons = un_80305C44();
 
         if (buttons & 0x1000) {
             un_804D6EA0 = 0;
@@ -6378,25 +5939,7 @@ void un_80311AB0_OnEnter(void* arg0)
         }
 
         /* Check D-pad left */
-        buttons = HSD_PadCopyStatus[0].button;
-        if (buttons == 0) {
-            buttons = HSD_PadCopyStatus[1].button;
-            if (buttons == 0) {
-                buttons = HSD_PadCopyStatus[2].button;
-                if (buttons == 0) {
-                    buttons = HSD_PadCopyStatus[3].button;
-                    if (buttons != 0) {
-                        gm_801677E8(3);
-                    }
-                } else {
-                    gm_801677E8(2);
-                }
-            } else {
-                gm_801677E8(1);
-            }
-        } else {
-            gm_801677E8(0);
-        }
+        buttons = un_80305C44();
 
         if (buttons & 0x20) {
             un_804D6EA0 = 1;
@@ -6423,22 +5966,22 @@ void un_80311AB0_OnEnter(void* arg0)
     un_8031263C();
 
     /* Validate saved selection index */
-    sel = (s16) ((u16*) un_804A26B8)[0x1F4];
-    if (sel >= 0) {
-        if (gm_8016B498() != 0 || (u8) gm_801A4310() == 0xC) {
-            count = (s16) ((u16*) un_804A26B8)[0x1F6];
-        } else {
-            count = *gmMainLib_8015CC90();
-        }
-        if (sel > count) {
-            ((u16*) un_804A26B8)[0x1F4] = 0;
-        }
+    selp = &((s16*) base)[0x1F4];
+    if (*selp < 0) {
+        goto reset_selection;
+    }
+    if (gm_8016B498() != 0 || (u8) gm_801A4310() == 0xC) {
+        count = *(s16*) (base + 0x3EC);
     } else {
-        ((u16*) un_804A26B8)[0x1F4] = 0;
+        count = *gmMainLib_8015CC90();
+    }
+    if (*selp > count) {
+    reset_selection:
+        *selp = 0;
     }
 
-    M2C_FIELD(un_804A26B8, u8*, 0x195) = 0;
-    M2C_FIELD(un_804A26B8, u8*, 0x196) = 0;
+    M2C_FIELD(base, u8*, 0x195) = 0;
+    M2C_FIELD(base, u8*, 0x196) = 0;
 
     /* Set up SIS font tables based on language */
     if (lbLang_IsSavedLanguageJP() != 0) {
@@ -6505,14 +6048,13 @@ void un_80312018_OnFrame(void)
         gm_801A4B60();
     }
 }
-/* 91.8% match */
+/* 100% match */
 void un_80312050(void)
 {
+    UNUSED u64 framepad;
     Vec3 interest;
     Vec3 sp98;
-    Vec3 result2;
-    Vec3 result3;
-    Vec3 result4;
+    UNUSED u8 pad[16];
     Mtx viewMtx;
     Vec3 up;
     Vec3 left;
@@ -6520,11 +6062,9 @@ void un_80312050(void)
     Vec3 scaled;
     HSD_CObj* cobj;
     TyViewData* data;
-    volatile f32* wgpipe_f32;
     u8 color_ff;
     u8 color_00;
-    f32 fz, fy, fx;
-    PAD_STACK(40);
+    PAD_STACK(4);
 
     data = un_804D6E6C;
     cobj = HSD_CObjGetCurrent();
@@ -6547,85 +6087,36 @@ void un_80312050(void)
         PSVECScale(&left, &scaled, un_804DDE1C);
         PSVECAdd(&scaled, &interest, &sp98);
 
-        fz = sp98.z;
-        wgpipe_f32 = (volatile f32*) 0xCC008000;
-        fy = sp98.y;
         color_ff = 0xFF;
-        fx = sp98.x;
         color_00 = 0;
 
-        *wgpipe_f32 = fx;
-        *wgpipe_f32 = fy;
-        *wgpipe_f32 = fz;
-        *(volatile u8*) wgpipe_f32 = color_ff;
-        *(volatile u8*) wgpipe_f32 = color_00;
-        *(volatile u8*) wgpipe_f32 = color_00;
-        *(volatile u8*) wgpipe_f32 = color_ff;
+        GXPosition3f32(sp98.x, sp98.y, sp98.z);
+        GXColor4u8(color_ff, color_00, color_00, color_ff);
 
         PSVECScale(&left, &scaled, un_804DDE20);
-        PSVECAdd(&scaled, &interest, &result2);
-        fz = result2.z;
-        fy = result2.y;
-        fx = result2.x;
-        *wgpipe_f32 = fx;
-        *wgpipe_f32 = fy;
-        *wgpipe_f32 = fz;
-        *(volatile u8*) wgpipe_f32 = color_ff;
-        *(volatile u8*) wgpipe_f32 = color_00;
-        *(volatile u8*) wgpipe_f32 = color_00;
-        *(volatile u8*) wgpipe_f32 = color_ff;
+        PSVECAdd(&scaled, &interest, &sp98);
+        GXPosition3f32(sp98.x, sp98.y, sp98.z);
+        GXColor4u8(color_ff, color_00, color_00, color_ff);
 
         PSVECScale(&up, &scaled, un_804DDE1C);
         PSVECAdd(&scaled, &interest, &sp98);
-        fz = sp98.z;
-        fy = sp98.y;
-        fx = sp98.x;
-        *wgpipe_f32 = fx;
-        *wgpipe_f32 = fy;
-        *wgpipe_f32 = fz;
-        *(volatile u8*) wgpipe_f32 = color_00;
-        *(volatile u8*) wgpipe_f32 = color_ff;
-        *(volatile u8*) wgpipe_f32 = color_00;
-        *(volatile u8*) wgpipe_f32 = color_ff;
+        GXPosition3f32(sp98.x, sp98.y, sp98.z);
+        GXColor4u8(color_00, color_ff, color_00, color_ff);
 
         PSVECScale(&up, &scaled, un_804DDE20);
-        PSVECAdd(&scaled, &interest, &result3);
-        fz = result3.z;
-        fy = result3.y;
-        fx = result3.x;
-        *wgpipe_f32 = fx;
-        *wgpipe_f32 = fy;
-        *wgpipe_f32 = fz;
-        *(volatile u8*) wgpipe_f32 = color_00;
-        *(volatile u8*) wgpipe_f32 = color_ff;
-        *(volatile u8*) wgpipe_f32 = color_00;
-        *(volatile u8*) wgpipe_f32 = color_ff;
+        PSVECAdd(&scaled, &interest, &sp98);
+        GXPosition3f32(sp98.x, sp98.y, sp98.z);
+        GXColor4u8(color_00, color_ff, color_00, color_ff);
 
         PSVECScale(&eye, &scaled, un_804DDE1C);
         PSVECAdd(&scaled, &interest, &sp98);
-        fz = sp98.z;
-        fy = sp98.y;
-        fx = sp98.x;
-        *wgpipe_f32 = fx;
-        *wgpipe_f32 = fy;
-        *wgpipe_f32 = fz;
-        *(volatile u8*) wgpipe_f32 = color_00;
-        *(volatile u8*) wgpipe_f32 = color_00;
-        *(volatile u8*) wgpipe_f32 = color_ff;
-        *(volatile u8*) wgpipe_f32 = color_ff;
+        GXPosition3f32(sp98.x, sp98.y, sp98.z);
+        GXColor4u8(color_00, color_00, color_ff, color_ff);
 
         PSVECScale(&eye, &scaled, un_804DDE20);
-        PSVECAdd(&scaled, &interest, &result4);
-        fz = result4.z;
-        fy = result4.y;
-        fx = result4.x;
-        *wgpipe_f32 = fx;
-        *wgpipe_f32 = fy;
-        *wgpipe_f32 = fz;
-        *(volatile u8*) wgpipe_f32 = color_00;
-        *(volatile u8*) wgpipe_f32 = color_00;
-        *(volatile u8*) wgpipe_f32 = color_ff;
-        *(volatile u8*) wgpipe_f32 = color_ff;
+        PSVECAdd(&scaled, &interest, &sp98);
+        GXPosition3f32(sp98.x, sp98.y, sp98.z);
+        GXColor4u8(color_00, color_00, color_ff, color_ff);
     }
 }
 void un_803122D0_OnInit(void)
