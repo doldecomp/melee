@@ -203,12 +203,12 @@ static s8 lbl_803BA2C0[0xB] = "lbmemory.c";
 static s8 lbMemory_804D3794[8] = "p->size";
 
 struct LBMgr {
-    OSAlarm alarm;  // 0x00
-    u8* src;        // 0x28
-    u8* dst;        // 0x2C
-    u32 size;       // 0x30
-    u32 offset;     // 0x34
-    u32 cb_arg;     // 0x38
+    OSAlarm alarm;                  // 0x00
+    u8* src;                        // 0x28
+    u8* dst;                        // 0x2C
+    u32 size;                       // 0x30
+    u32 offset;                     // 0x34
+    u32 cb_arg;                     // 0x38
     void (*cb)(u32, u32, u32, u32); // 0x3C
 };
 
@@ -239,7 +239,6 @@ void fn_80015184(void)
     OSCreateAlarm(&temp_r3->alarm);
     OSSetAlarm(&temp_r3->alarm, 0x10624DD3, NULL);
 }
-
 
 u32 lbMemory_8001529C(Handle* h, void* arg1, u32 arg2)
 {

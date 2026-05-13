@@ -259,10 +259,14 @@ void fn_803B61B4(s32* arg0)
         temp_r5_2 = var_r4[5];
         temp_r11 = var_r4[0];
         temp_r10 = var_r4[4];
-        temp_f22 = (f32) ((0.980785 * (f64) temp_r6) - (0.19509 * (f64) temp_r5));
-        temp_f31 = (f32) ((0.83147 * (f64) temp_r5_2) - (0.55557 * (f64) temp_r0));
-        temp_f23 = (f32) ((0.55557 * (f64) temp_r5_2) + (0.83147 * (f64) temp_r0));
-        temp_f24 = (f32) ((0.19509 * (f64) temp_r6) + (0.980785 * (f64) temp_r5));
+        temp_f22 =
+            (f32) ((0.980785 * (f64) temp_r6) - (0.19509 * (f64) temp_r5));
+        temp_f31 =
+            (f32) ((0.83147 * (f64) temp_r5_2) - (0.55557 * (f64) temp_r0));
+        temp_f23 =
+            (f32) ((0.55557 * (f64) temp_r5_2) + (0.83147 * (f64) temp_r0));
+        temp_f24 =
+            (f32) ((0.19509 * (f64) temp_r6) + (0.980785 * (f64) temp_r5));
         temp_f10 = (f32) (0.707107 * (f64) (temp_r11 + temp_r10));
         temp_f11 = (f32) (0.707107 * (f64) (temp_r11 - temp_r10));
         temp_r0_2 = var_r4[2];
@@ -270,9 +274,11 @@ void fn_803B61B4(s32* arg0)
         temp_r5_3 = var_r4[6];
         temp_f13 = -temp_f23 + temp_f24;
         temp_f13_2 = temp_f23 + temp_f24;
-        temp_f12_2 = (f32) ((0.382683 * (f64) temp_r5_3) + (0.92388 * (f64) temp_r0_2));
+        temp_f12_2 =
+            (f32) ((0.382683 * (f64) temp_r5_3) + (0.92388 * (f64) temp_r0_2));
         temp_f9 = (f32) (0.707107 * (f64) (-temp_f12 + temp_f13));
-        temp_f25 = (f32) ((-0.92388 * (f64) temp_r5_3) + (0.382683 * (f64) temp_r0_2));
+        temp_f25 = (f32) ((-0.92388 * (f64) temp_r5_3) +
+                          (0.382683 * (f64) temp_r0_2));
         temp_f23_2 = temp_f10 + temp_f12_2;
         temp_f22_2 = (f32) (0.707107 * (f64) (temp_f12 + temp_f13));
         temp_f24_2 = temp_f11 + temp_f25;
@@ -299,10 +305,14 @@ void fn_803B61B4(s32* arg0)
         temp_r5_5 = var_r4_2[40];
         temp_r11_2 = var_r4_2[0];
         temp_r10_2 = var_r4_2[32];
-        temp_f26 = (f32) ((0.980785 * (f64) temp_r6_2) - (0.19509 * (f64) temp_r5_4));
-        temp_f9_2 = (f32) ((0.83147 * (f64) temp_r5_5) - (0.55557 * (f64) temp_r0_3));
-        temp_f27 = (f32) ((0.55557 * (f64) temp_r5_5) + (0.83147 * (f64) temp_r0_3));
-        temp_f30 = (f32) ((0.19509 * (f64) temp_r6_2) + (0.980785 * (f64) temp_r5_4));
+        temp_f26 =
+            (f32) ((0.980785 * (f64) temp_r6_2) - (0.19509 * (f64) temp_r5_4));
+        temp_f9_2 =
+            (f32) ((0.83147 * (f64) temp_r5_5) - (0.55557 * (f64) temp_r0_3));
+        temp_f27 =
+            (f32) ((0.55557 * (f64) temp_r5_5) + (0.83147 * (f64) temp_r0_3));
+        temp_f30 =
+            (f32) ((0.19509 * (f64) temp_r6_2) + (0.980785 * (f64) temp_r5_4));
         temp_f10_3 = (f32) (0.707107 * (f64) (temp_r11_2 + temp_r10_2));
         temp_f25_3 = (f32) (0.707107 * (f64) (temp_r11_2 - temp_r10_2));
         temp_r0_4 = var_r4_2[16];
@@ -310,9 +320,11 @@ void fn_803B61B4(s32* arg0)
         temp_r5_6 = var_r4_2[48];
         temp_f29 = -temp_f27 + temp_f30;
         temp_f11_2 = temp_f27 + temp_f30;
-        temp_f26_2 = (f32) ((0.382683 * (f64) temp_r5_6) + (0.92388 * (f64) temp_r0_4));
+        temp_f26_2 =
+            (f32) ((0.382683 * (f64) temp_r5_6) + (0.92388 * (f64) temp_r0_4));
         temp_f12_3 = (f32) (0.707107 * (f64) (-temp_f13_4 + temp_f29));
-        temp_f13_5 = (f32) ((-0.92388 * (f64) temp_r5_6) + (0.382683 * (f64) temp_r0_4));
+        temp_f13_5 = (f32) ((-0.92388 * (f64) temp_r5_6) +
+                            (0.382683 * (f64) temp_r0_4));
         temp_f27_2 = temp_f10_3 + temp_f26_2;
         temp_f23_3 = (f32) (0.707107 * (f64) (temp_f13_4 + temp_f29));
         temp_f24_3 = temp_f25_3 + temp_f13_5;
