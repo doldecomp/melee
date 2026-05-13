@@ -212,7 +212,7 @@ struct LBMgr {
     void (*cb)(u32, u32, u32, u32); // 0x3C
 };
 
-void fn_80015184(void)
+void fn_80015184(OSAlarm* alarm, OSContext* context)
 {
     struct LBMgr* temp_r3;
     u32 temp_r3_2;
