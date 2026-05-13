@@ -2197,7 +2197,9 @@ char* un_8030813C(s32 arg0, enum_t unused)
 
 void un_80308250(u8* arg0, s32 arg1, s32 arg2)
 {
+#ifdef __MWERKS__
     char* un_8030813C(s16 arg0, enum_t unused);
+#endif
     void* sym;
     char* ptr;
     ptr = un_8030813C(arg1, arg1);
@@ -2419,10 +2421,15 @@ HSD_GObj* un_803087F4(void* arg0)
     anim = &un_804A2AA8;
 
     if (entry->x14 == NULL) {
+#ifdef __MWERKS__
         char* un_8030813C();
-
+#endif
         trophy_id = entry->x10;
+#ifdef __MWERKS__
         model_name = un_8030813C(trophy_id);
+#else
+        model_name = un_8030813C(trophy_id, trophy_id);
+#endif
         if (entry->x14 != NULL) {
             lbArchive_80016EFC(entry->x14);
             entry->x14 = NULL;
@@ -4917,7 +4924,9 @@ void un_8030FA50(void)
 
 void un_8030FE48(void* arg0, s32 arg1)
 {
+#ifdef __MWERKS__
     char* un_8030813C();
+#endif
     u8* toy = (u8*) un_804A26B8;
     u8* data = arg0;
     u8* sel = toy + 0x3E8;
@@ -5029,7 +5038,11 @@ clear_archive_loop:
         {
             if (j == *(s16*) (data + 0x154)) {
                 trophyIdx = M2C_FIELD(un_804D6EDC, s16*, offset);
+#ifdef __MWERKS__
                 result = un_8030813C(trophyIdx);
+#else
+                result = un_8030813C(trophyIdx, trophyIdx);
+#endif
                 if (*(HSD_Archive**) (entry + 0x14) != NULL) {
                     lbArchive_80016EFC(*(HSD_Archive**) (entry + 0x14));
                     *(HSD_Archive**) (entry + 0x14) = NULL;
@@ -5043,7 +5056,11 @@ clear_archive_loop:
                                           *(char**) (entry + 0x0C), 0);
             } else {
                 trophyIdx = M2C_FIELD(un_804D6EDC, s16*, offset);
+#ifdef __MWERKS__
                 result = un_8030813C(trophyIdx);
+#else
+                result = un_8030813C(trophyIdx, trophyIdx);
+#endif
                 if (*(HSD_Archive**) (entry + 0x14) != NULL) {
                     lbArchive_80016EFC(*(HSD_Archive**) (entry + 0x14));
                     *(HSD_Archive**) (entry + 0x14) = NULL;
@@ -5104,7 +5121,11 @@ clear_archive_loop:
 
             if (startIdx == *(s16*) (data + 0x154)) {
                 trophyIdx = un_804D6EDC[startIdx];
+#ifdef __MWERKS__
                 result = un_8030813C(trophyIdx);
+#else
+                result = un_8030813C(trophyIdx, trophyIdx);
+#endif
                 if (*(HSD_Archive**) (cur + 0x14) != NULL) {
                     lbArchive_80016EFC(*(HSD_Archive**) (cur + 0x14));
                     *(HSD_Archive**) (cur + 0x14) = NULL;
@@ -5117,7 +5138,11 @@ clear_archive_loop:
                     *(char**) (cur + 0x08), &sym2, *(char**) (cur + 0x0C), 0);
             } else {
                 trophyIdx = un_804D6EDC[startIdx];
+#ifdef __MWERKS__
                 result = un_8030813C(trophyIdx);
+#else
+                result = un_8030813C(trophyIdx, trophyIdx);
+#endif
                 if (*(HSD_Archive**) (cur + 0x14) != NULL) {
                     lbArchive_80016EFC(*(HSD_Archive**) (cur + 0x14));
                     *(HSD_Archive**) (cur + 0x14) = NULL;
