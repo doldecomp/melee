@@ -54,9 +54,25 @@ typedef struct {
     s8 x4;
 } TyViewData;
 
+typedef struct ToyListEntry {
+    /* 0x00 */ struct ToyListEntry* prev;
+    /* 0x04 */ struct ToyListEntry* next;
+    /* 0x08 */ char* archive_name;
+    /* 0x0C */ char* symbol_name;
+    /* 0x10 */ s16 trophy_id;
+    /* 0x12 */ u8 pad_12[2];
+    /* 0x14 */ HSD_Archive* archive;
+} ToyListEntry;
+
 typedef struct {
-    u8 pad[0x154];
-    s16 selectedIdx;
+    /* 0x000 */ u8 pad_000[0x138];
+    /* 0x138 */ ToyListEntry* first_entry;
+    /* 0x13C */ ToyListEntry* last_entry;
+    /* 0x140 */ ToyListEntry* selected_entry;
+    /* 0x144 */ u8 pad_144[0x154 - 0x144];
+    /* 0x154 */ s16 selectedIdx;
+    /* 0x156 */ u8 pad_156;
+    /* 0x157 */ s8 visible_count;
 } TyDisplayData;
 
 typedef struct {
@@ -192,9 +208,24 @@ typedef struct un_804D6E68_t {
 } un_804D6E68_t;
 
 typedef struct {
-    Vec3 x0;
-    u8 pad[0x3F0 - 0xC];
-    void* x3F0;
+    /* 0x000 */ Vec3 x0;
+    /* 0x00C */ u8 pad_00C[0x195 - 0x00C];
+    /* 0x195 */ s8 x195;
+    /* 0x196 */ s8 x196;
+    /* 0x197 */ u8 x197;
+    /* 0x198 */ u8 x198;
+    /* 0x199 */ u8 pad_199;
+    /* 0x19A */ u16 x19A;
+    /* 0x19C */ u16 x19C;
+    /* 0x19E */ u16 trophy_flags[293];
+    /* 0x3E8 */ s16 selectedIdx;
+    /* 0x3EA */ s16 selectedTrophyId;
+    /* 0x3EC */ s16 trophy_count;
+    /* 0x3EE */ u8 pad_3EE[0x3F0 - 0x3EE];
+    /* 0x3F0 */ union {
+        ToyAnimState anim;
+        void* x3F0;
+    };
 } Toy26B8;
 
 typedef struct {
@@ -267,22 +298,25 @@ typedef struct ToyGlobals4S_ {
     s32 x58;
 } ToyGlobals4S_;
 
-typedef struct ToyGlobals5S_ {
-    u8 pad0[0x140];
-    void* x140;
-    u8 pad144[0x10];
-    s16 x154;
-} ToyGlobals5S_;
-
 typedef struct ToySubStructS_ {
     u8 pad0[0x10];
     s16 x10;
 } ToySubStructS_;
 
+typedef struct ToyGlobals5S_ {
+    u8 pad0[0x140];
+    ToySubStructS_* x140;
+    u8 pad144[0x10];
+    s16 x154;
+} ToyGlobals5S_;
+
 typedef struct TyUnk25 {
     u8 pad[0x140];
-    void* x140;
-    u8 pad2[0x10];
+    ToySubStructS_* x140;
+    void* x144;
+    void* x148;
+    void* x14C;
+    void* x150;
     s16 x154;
 } TyUnk25;
 
@@ -760,10 +794,10 @@ void un_80305918(s8 arg0, s32 arg1, s32 arg2)
         if (arg2 != 0) {
             u16 val4;
             s32 mask2;
-            val4 = M2C_FIELD(base, u16*, 0x19C);
+            val4 = ((Toy26B8*) base)->x19C;
             mask2 = 1 << arg0;
             if (val4 & mask2) {
-                M2C_FIELD(base, u16*, 0x19C) = (u16) (val4 ^ mask2);
+                ((Toy26B8*) base)->x19C = (u16) (val4 ^ mask2);
             }
         } else {
             if (gm_8016B498() != 0 || (u8) gm_801A4310() == 0xC) {
@@ -2891,7 +2925,7 @@ void fn_80309404(HSD_GObj* gobj)
         un_80310660(1);
         HSD_GObj_80390CD4(gobj);
         mn_8022F268();
-        M2C_FIELD(base, u8*, 0x198) = 1;
+        ((Toy26B8*) base)->x198 = 1;
         return;
     }
 
@@ -5379,7 +5413,7 @@ void un_80310660(s32 arg0)
         }
 
         *(s16*) (state + 0x3E8) = ty25->x154;
-        *(s16*) (state + 0x3EA) = M2C_FIELD(ty25->x140, s16*, 0x10);
+        *(s16*) (state + 0x3EA) = ty25->x140->x10;
     }
 
     if (arg != 0) {
@@ -5387,10 +5421,10 @@ void un_80310660(s32 arg0)
         s32 count;
 
         HSD_SisLib_803A5E70();
-        M2C_FIELD(ty25, s32*, 0x150) = 0;
-        M2C_FIELD(ty25, s32*, 0x14C) = 0;
-        M2C_FIELD(ty25, s32*, 0x148) = 0;
-        M2C_FIELD(ty25, s32*, 0x144) = 0;
+        ty25->x150 = NULL;
+        ty25->x14C = NULL;
+        ty25->x148 = NULL;
+        ty25->x144 = NULL;
 
         if (gm_8016B498() != 0 || (u8) gm_801A4310() == 0xC) {
             idx = *(s16*) (state + 0x3EC);
@@ -5921,7 +5955,7 @@ void un_80311960(void)
     ((u16*) base)[0xCD] = 0;
     ((u16*) base)[0x1F4] = 0;
     ((u16*) base)[0x1F5] = 0;
-    M2C_FIELD(base, u8*, 0x197) = 0;
+    ((Toy26B8*) base)->x197 = 0;
     *gmMainLib_8015CC90() = 0;
     ((u16*) base)[0x1F6] = 0;
 }
@@ -6005,8 +6039,8 @@ void un_80311AB0_OnEnter(void* arg0)
         *selp = 0;
     }
 
-    M2C_FIELD(base, u8*, 0x195) = 0;
-    M2C_FIELD(base, u8*, 0x196) = 0;
+    ((Toy26B8*) base)->x195 = 0;
+    ((Toy26B8*) base)->x196 = 0;
 
     /* Set up SIS font tables based on language */
     if (lbLang_IsSavedLanguageJP() != 0) {
