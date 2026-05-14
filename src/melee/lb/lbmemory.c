@@ -199,6 +199,47 @@ void lbMemory_800150F0(Handle* h, void* arg1)
     __assert("lbmemory.c", 283, "0");
 }
 
+static s8 lbl_803BA2C0[0xB] = "lbmemory.c";
+static s8 lbMemory_804D3794[8] = "p->size";
+
+struct LBMgr {
+    OSAlarm alarm;                  // 0x00
+    u8* src;                        // 0x28
+    u8* dst;                        // 0x2C
+    u32 size;                       // 0x30
+    u32 offset;                     // 0x34
+    u32 cb_arg;                     // 0x38
+    void (*cb)(u32, u32, u32, u32); // 0x3C
+};
+
+void fn_80015184(OSAlarm* alarm, OSContext* context)
+{
+    struct LBMgr* temp_r3;
+    u32 temp_r3_2;
+    u32 temp_r6;
+    u32 var_r30;
+
+    temp_r3 = (struct LBMgr*) ((u8*) &g_alloc + 0x6A0);
+    if ((u32) temp_r3->size == 0U) {
+        __assert("lbmemory.c", 0x127U, "p->size");
+    }
+    temp_r6 = temp_r3->offset;
+    temp_r3_2 = temp_r3->size - temp_r6;
+    var_r30 = temp_r3_2;
+    if (temp_r3_2 > 0x19000U) {
+        var_r30 = 0x19000;
+    }
+    memcpy(temp_r3->dst + temp_r6, temp_r3->src + temp_r6, var_r30);
+    temp_r3->offset = temp_r3->offset + var_r30;
+    if (temp_r3->offset == temp_r3->size) {
+        temp_r3->size = 0U;
+        temp_r3->cb(0, temp_r3->cb_arg, 0, 0);
+        return;
+    }
+    OSCreateAlarm(&temp_r3->alarm);
+    OSSetAlarm(&temp_r3->alarm, 0x10624DD3, NULL);
+}
+
 u32 lbMemory_8001529C(Handle* h, void* arg1, u32 arg2)
 {
     void* lo;
