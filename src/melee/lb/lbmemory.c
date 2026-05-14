@@ -59,7 +59,7 @@ void lbMemory_80015320(s32 arg0, Handle* arg1, void* arg2, s32 cancelflag)
         if (temp_r31 != temp_r29) {
             arg1->x4_lo = (void*) temp_r29;
             g_alloc.x6E4 = (void*) ((u32) arg1->x4_lo + (u32) arg1->x8_hi);
-            if (arg1->x4_lo < (u8*) 0x80000000) {
+            if (((u32) arg1->x4_lo) < 0x80000000U) {
                 HSD_DevComRequest(0, (u32) arg1->x4_lo, (u32) temp_r29,
                                   ((u32) arg1->x8_hi + 0x1F) & ~0x1F, 0x1B, 1,
                                   (void*) lbMemory_80015320, arg1->x0_next);
