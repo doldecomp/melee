@@ -5,7 +5,15 @@
 #include "gm/types.h"
 
 struct DebugResultsData {
-    u8 pad_x0[0x2284];
+    u8 x0_0 : 1;
+    u8 x0_1 : 1;
+    u8 x0_other : 6;
+    u8 x1;
+    u8 x2;
+    u8 x3;
+    u8 x4;
+    u8 pad_x5[3];
+    MatchEnd match_end;
 }; /// data used by gm_801B0DD0
 
 struct DebugMemcardData {

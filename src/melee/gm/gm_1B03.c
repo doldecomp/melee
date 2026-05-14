@@ -692,43 +692,40 @@ void gm_801B0CF0(GameScene* arg0)
     }
 }
 
-typedef struct GmB03MatchData {
-    /* 0x0 */ u8 x0;
-    /* 0x1 */ s8 x1;
-    /* 0x2 */ s8 x2;
-    /* 0x3 */ s8 x3;
-    /* 0x4 */ s8 x4;
-    /* 0x5 */ u8 pad5[3];
-    /* 0x8 */ MatchEnd me;
-} GmB03MatchData;
-
 void gm_801B0DD0(GameScene* arg0)
 {
-    GmB03MatchData* data = gm_801A427C(arg0);
-    MatchEnd* me = &data->me;
-    s32 i;
+    u64 sfx_result = 0;
+    int i;
+    struct DebugResultsData* data = gm_801A427C(arg0);
+    MatchEnd* match_end = &data->match_end;
 
-    data->x0 = (data->x0 & ~0x80) | ((un_803FA258[0x178 / 4] << 7) & 0x80);
-    data->x0 = (data->x0 & ~0x40) | ((un_803FA258[0x17C / 4] << 6) & 0x40);
-    data->x1 = un_803FA258[0x168 / 4];
-    data->x2 = un_803FA258[0x16C / 4];
-    data->x3 = un_803FA258[0x170 / 4];
-    data->x4 = un_803FA258[0x174 / 4];
-    gm_80166A98(me, un_803FA258[0x180 / 4], un_803FA258[0x144 / 4],
-                un_803FA258[0x158 / 4] - 1, un_803FA258[0x148 / 4],
-                un_803FA258[0x15C / 4] - 1, un_803FA258[0x14C / 4],
-                un_803FA258[0x160 / 4] - 1, un_803FA258[0x150 / 4],
-                un_803FA258[0x164 / 4] - 1);
+    data->x0_0 = un_803FA258[0x5E];
+    data->x0_1 = un_803FA258[0x5F];
+    data->x1 = un_803FA258[0x5A];
+    data->x2 = un_803FA258[0x5B];
+    data->x3 = un_803FA258[0x5C];
+    data->x4 = un_803FA258[0x5D];
+
+    gm_80166A98(match_end, un_803FA258[0x60] & 0xFF, (s8) un_803FA258[0x51],
+                un_803FA258[0x56] - 1, (s8) un_803FA258[0x52],
+                un_803FA258[0x57] - 1, (s8) un_803FA258[0x53],
+                un_803FA258[0x58] - 1, (s8) un_803FA258[0x54],
+                un_803FA258[0x59] - 1);
+
     for (i = 0; i < 4; i++) {
-        if (me->player_standings[i].slot_type != 3 &&
-            me->player_standings[i].is_big_loser == 0) {
-            lbAudioAx_80026E84(me->player_standings[i].character_kind);
+        if (match_end->player_standings[i].slot_type != 3 &&
+            match_end->player_standings[i].is_big_loser == 0)
+        {
+            sfx_result |= lbAudioAx_80026E84(
+                match_end->player_standings[i].character_kind);
         }
     }
+
     lbAudioAx_80026F2C(0x14);
-    lbAudioAx_8002702C(4, 0);
+    lbAudioAx_8002702C(0x4, sfx_result);
     gm_80168FC4();
     gm_801701A0();
+    PAD_STACK(8);
 }
 
 void gm_801B0F1C(GameScene* arg0)
