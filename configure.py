@@ -1669,6 +1669,7 @@ config.libs = [
                 extra_cflags=["-Cpp_exceptions on"],
             ),
             Object(NonMatching, "sysdolphin/baselib/hsd_3B34.c"),
+            Object(NonMatching, "sysdolphin/baselib/hsd_3B5C.c"),
         ],
     ),
 ]
