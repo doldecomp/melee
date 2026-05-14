@@ -320,7 +320,7 @@ void lb_80019628(void)
         if (lb_804329F0.x0[0].x8 < 0) {
             lb_804329F0.x0[0].x8 = 0;
         }
-        
+
         if (lb_804329F0.x0[0].x0 >= 0) {
             ticks = lb_804329F0.x0[0].x0;
         }
@@ -330,12 +330,14 @@ void lb_80019628(void)
         if (ticks < 0) {
             ticks = (1.0f / 60.0f) * OS_TIMER_CLOCK;
         }
-        
+
         if (lb_804329F0.x40 != ticks) {
             u32 rate;
             lb_804329F0.x40 = ticks;
             rate = OS_TIMER_CLOCK / ticks;
-            if (rate > 11) rate = 11;
+            if (rate > 11) {
+                rate = 11;
+            }
             if (lb_804329F0.x4 != rate) {
                 PADSetSamplingRate(rate);
                 lb_804329F0.x4 = rate;
@@ -344,7 +346,8 @@ void lb_80019628(void)
                 OSCancelAlarm(&lb_804329F0.alarm);
             }
             OSCreateAlarm(&lb_804329F0.alarm);
-            OSSetPeriodicAlarm(&lb_804329F0.alarm, 0, lb_804329F0.x40, (OSAlarmHandler)lb_80019900);
+            OSSetPeriodicAlarm(&lb_804329F0.alarm, 0, lb_804329F0.x40,
+                               (OSAlarmHandler) lb_80019900);
             lb_804329F0.x48 = 1;
         }
     }

@@ -2,9 +2,9 @@
 
 #include <platform.h>
 
+#include <dolphin/ar.h>
 #include <baselib/debug.h>
 #include <baselib/devcom.h>
-#include <dolphin/ar.h>
 
 struct Allocator {
     void* x0_arenaLo;
@@ -23,6 +23,9 @@ struct Allocator {
     u8 x6EC[0x6F0 - 0x6EC];
 };
 static s8 lbl_803BA2C0[0xB] = "lbmemory.c";
+
+
+/// lbMemory_804318B0
 static struct Allocator g_alloc;
 STATIC_ASSERT(sizeof(g_alloc) == 0x6F0);
 
@@ -57,7 +60,9 @@ void lbMemory_80015320(s32 arg0, Handle* arg1, void* arg2, s32 cancelflag)
             arg1->x4_lo = (void*) temp_r29;
             g_alloc.x6E4 = (void*) ((u32) arg1->x4_lo + (u32) arg1->x8_hi);
             if (arg1->x4_lo < (u8*) 0x80000000) {
-                HSD_DevComRequest(0, (u32) arg1->x4_lo, (u32) temp_r29, ((u32) arg1->x8_hi + 0x1F) & ~0x1F, 0x1B, 1, (void*)lbMemory_80015320, arg1->x0_next);
+                HSD_DevComRequest(0, (u32) arg1->x4_lo, (u32) temp_r29,
+                                  ((u32) arg1->x8_hi + 0x1F) & ~0x1F, 0x1B, 1,
+                                  (void*) lbMemory_80015320, arg1->x0_next);
                 return;
             }
             temp_r30 = (struct LBMgr*) ((u8*) &g_alloc + 0x6A0);
@@ -72,7 +77,7 @@ void lbMemory_80015320(s32 arg0, Handle* arg1, void* arg2, s32 cancelflag)
             temp_r30->size = temp_r26;
             temp_r30->offset = 0;
             temp_r30->cb_arg = (u32) arg1->x8_hi;
-            temp_r30->cb = (void*)lbMemory_80015320;
+            temp_r30->cb = (void*) lbMemory_80015320;
             OSRestoreInterrupts(temp_r28);
             OSCreateAlarm(&temp_r30->alarm);
             OSSetAlarm(&temp_r30->alarm, OS_MSEC_TO_TICKS(3), fn_80015184);
@@ -84,7 +89,6 @@ void lbMemory_80015320(s32 arg0, Handle* arg1, void* arg2, s32 cancelflag)
     }
     ((void (*)(u32)) g_alloc.x6E8)(g_alloc.x6E0);
 }
-
 
 /// might need to change to take lvalue instead of pointer if codegen is bad
 #define PUSH_HANDLE(list, handle)                                             \
@@ -344,7 +348,6 @@ void lbMemory_800155A4(void)
     g_alloc.x69C = NULL;
 }
 
-
 void lbMemory_8001564C(void)
 {
     u32 sp14;
@@ -355,25 +358,25 @@ void lbMemory_8001564C(void)
     ARFree(&sp14);
     var_r0 = 0x01000000;
     if (ARGetSize() > 0x01000000U) {
-
     } else {
         var_r0 = ARGetSize();
     }
     g_alloc.x4_arenaHi = (void*) var_r0;
-    
-    g_alloc.x62C_free_mem = (Handle*) &g_alloc.x8[0];
-    
-    for (i = 0; i < 0x81; i++) {
-        ((Handle*)&g_alloc.x8[i * 0xC])->x0_next = (Handle*)&g_alloc.x8[(i + 1) * 0xC];
-    }
-    ((Handle*)&g_alloc.x8[0x81 * 0xC])->x0_next = NULL;
 
-    
-    g_alloc.x698_free_heap = (Handle*)g_alloc.x638;
-    for (i = 0; i < 7; i++) {
-        ((Handle*)&g_alloc.x638[i * 0xC])->x0_next = (Handle*)&g_alloc.x638[(i + 1) * 0xC];
+    g_alloc.x62C_free_mem = (Handle*) &g_alloc.x8[0];
+
+    for (i = 0; i < 0x81; i++) {
+        ((Handle*) &g_alloc.x8[i * 0xC])->x0_next =
+            (Handle*) &g_alloc.x8[(i + 1) * 0xC];
     }
-    ((Handle*)&g_alloc.x638[7 * 0xC])->x0_next = NULL;
+    ((Handle*) &g_alloc.x8[0x81 * 0xC])->x0_next = NULL;
+
+    g_alloc.x698_free_heap = (Handle*) g_alloc.x638;
+    for (i = 0; i < 7; i++) {
+        ((Handle*) &g_alloc.x638[i * 0xC])->x0_next =
+            (Handle*) &g_alloc.x638[(i + 1) * 0xC];
+    }
+    ((Handle*) &g_alloc.x638[7 * 0xC])->x0_next = NULL;
 
     g_alloc.x69C = lbMemory_80014E24(g_alloc.x0_arenaLo, g_alloc.x4_arenaHi);
 }
