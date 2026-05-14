@@ -56,26 +56,26 @@ void lbMemory_80015320(s32 arg0, Handle* arg1, void* arg2, s32 cancelflag)
         if (temp_r31 != temp_r29) {
             arg1->x4_lo = (void*) temp_r29;
             g_alloc.x6E4 = (void*) ((u32) arg1->x4_lo + (u32) arg1->x8_hi);
-            if ((u32) arg1->x4_lo < 0x80000000U) {
-                HSD_DevComRequest(0, temp_r31, temp_r29, ((u32) arg1->x8_hi + 0x1F) & 0xFFFFFFE0, 0x1B, 1, (void*)lbMemory_80015320, arg1->x0_next);
+            if (arg1->x4_lo < (u8*) 0x80000000) {
+                HSD_DevComRequest(0, (u32) arg1->x4_lo, (u32) temp_r29, ((u32) arg1->x8_hi + 0x1F) & ~0x1F, 0x1B, 1, (void*)lbMemory_80015320, arg1->x0_next);
                 return;
             }
             temp_r30 = (struct LBMgr*) ((u8*) &g_alloc + 0x6A0);
             temp_r25 = arg1->x0_next;
-            temp_r26 = ((u32) arg1->x8_hi + 0x1F) & 0xFFFFFFE0;
+            temp_r26 = ((u32) arg1->x8_hi + 0x1F) & ~0x1F;
             temp_r28 = OSDisableInterrupts();
             if ((u32) temp_r30->size != 0) {
                 __assert(temp_r3, 0x14FU, temp_r3 + 0xA8);
             }
-            temp_r30->src = (u8*) temp_r31;
+            temp_r30->src = arg1->x4_lo;
             temp_r30->dst = (u8*) temp_r29;
             temp_r30->size = temp_r26;
             temp_r30->offset = 0;
-            temp_r30->cb_arg = (u32) temp_r25;
-            temp_r30->cb = (void*) lbMemory_80015320;
+            temp_r30->cb_arg = (u32) arg1->x8_hi;
+            temp_r30->cb = (void*)lbMemory_80015320;
             OSRestoreInterrupts(temp_r28);
             OSCreateAlarm(&temp_r30->alarm);
-            OSSetAlarm(&temp_r30->alarm, 0x10624DD3, NULL);
+            OSSetAlarm(&temp_r30->alarm, OS_MSEC_TO_TICKS(3), fn_80015184);
             return;
         }
         g_alloc.x6E4 = (void*) (temp_r31 + (u32) arg1->x8_hi);
@@ -285,7 +285,7 @@ void fn_80015184(OSAlarm* alarm, OSContext* context)
         return;
     }
     OSCreateAlarm(&temp_r3->alarm);
-    OSSetAlarm(&temp_r3->alarm, 0x10624DD3, NULL);
+    OSSetAlarm(&temp_r3->alarm, OS_MSEC_TO_TICKS(3), fn_80015184);
 }
 
 u32 lbMemory_8001529C(Handle* h, void* arg1, u32 arg2)
