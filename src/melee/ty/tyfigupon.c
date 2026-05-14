@@ -1425,12 +1425,12 @@ void un_80317D80_OnEnter(void* arg0)
         OSPanic(str_file, 0x627, "");
     }
     {
-        void* temp =
+        LightList** temp =
             HSD_ArchiveGetPublicAddress(ef4->archive, str_scene_lights);
         if (temp != NULL) {
             *(HSD_GObj**) ed4 = GObj_Create(2, 3, 0);
             HSD_GObjObject_80390A70(*(HSD_GObj**) ed4, HSD_GObj_804D784A,
-                                    un_80306EEC(temp, 0));
+                                    Toy_LoadLObjList(temp, 0));
             GObj_SetupGXLink(*(HSD_GObj**) ed4, HSD_GObj_LObjCallback, 0x34,
                              0);
         }
