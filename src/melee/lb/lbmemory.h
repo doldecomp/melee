@@ -26,5 +26,6 @@ typedef struct _Handle {
 /* 0154D4 */ Handle* lbMemory_800154D4(void* lo, void* hi);
 /* 0155A4 */ void lbMemory_800155A4(void);
 /* 01564C */ void lbMemory_8001564C(void);
+/* 015320 */ void lbMemory_80015320(s32, Handle*, void*, s32);
 
 #endif
