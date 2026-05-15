@@ -10,7 +10,7 @@
 typedef struct _Handle {
     struct _Handle* x0_next;
     void* x4_lo;
-    // is this hi or size?
+    // Arena high bound for heap handles; allocation size for child handles.
     void* x8_hi;
     struct _Handle* xC_prev;
 } Handle;
