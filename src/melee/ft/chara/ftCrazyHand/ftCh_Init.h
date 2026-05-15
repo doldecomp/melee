@@ -5,6 +5,9 @@
 
 #include "ftCrazyHand/forward.h"
 
+extern f32 ftCh_Init_804DA05C;
+extern f32 ftCh_Init_804DA060;
+
 /* 155E18 */ void ftCh_Init_OnDeath(HSD_GObj* gobj);
 /* 155E1C */ void ftCh_Init_OnLoad(HSD_GObj* gobj);
 /* 155F8C */ void ftCh_Init_LoadSpecialAttrs(HSD_GObj* gobj);

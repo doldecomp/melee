@@ -1086,102 +1086,100 @@ void ftCh_Wait1_0_Phys(HSD_GObj* gobj)
 
 void ftCh_Wait1_0_Coll(HSD_GObj* gobj) {}
 
-static inline u32 btn_pressed(u32 mask)
-{
-    return HSD_PadMasterStatus[3].button & mask;
-}
-
+#define buttons (HSD_PadMasterStatus[3].button)
 static void ftCh_Init_80156AD8(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     ftCrazyHand_DatAttrs* da = fp->ft_data->ext_attr;
     Vec3 pos;
+    u32 l_pressed = buttons & HSD_PAD_L;
 
-    if (btn_pressed(HSD_PAD_L) && btn_pressed(HSD_PAD_DPADUP)) {
+    if (l_pressed && (buttons & HSD_PAD_DPADUP)) {
         mpFloorGetLeft(0, &pos);
         pos.y = da->x24;
         ftCh_GrabUnk1_8015BA34(gobj, fn_80157080, &pos);
-    } else if (btn_pressed(HSD_PAD_L) && btn_pressed(HSD_PAD_DPADRIGHT)) {
+    } else if (l_pressed && (buttons & HSD_PAD_DPADRIGHT)) {
         mpFloorGetLeft(0, &pos);
         pos.y = da->x20;
         ftCh_GrabUnk1_8015BA34(gobj, fn_80156F6C, &pos);
-    } else if (btn_pressed(HSD_PAD_L) && btn_pressed(HSD_PAD_DPADDOWN)) {
+    } else if (l_pressed && (buttons & HSD_PAD_DPADDOWN)) {
         pos.x = da->x2C;
         pos.y = da->x30_pos2.x;
-        pos.z = 0;
+        pos.z = ftCh_Init_804DA05C;
         ftCh_GrabUnk1_8015BA34(gobj, fn_8015746C, &pos);
-    } else if (btn_pressed(HSD_PAD_L) && btn_pressed(HSD_PAD_DPADLEFT)) {
+    } else if (l_pressed && (buttons & HSD_PAD_DPADLEFT)) {
         pos.x = da->x30_pos2.y;
         pos.y = da->x38;
-        pos.z = 0;
+        pos.z = ftCh_Init_804DA05C;
         ftCh_GrabUnk1_8015BA34(gobj, fn_8015755C, &pos);
-    } else if (btn_pressed(HSD_PAD_R) && btn_pressed(HSD_PAD_DPADUP)) {
+    } else if ((buttons & HSD_PAD_R) && (buttons & HSD_PAD_DPADUP)) {
         pos.x = da->x6C;
         pos.y = da->x70;
-        pos.z = 0;
+        pos.z = ftCh_Init_804DA05C;
         ftCh_GrabUnk1_8015BA34(gobj, fn_801578E8, &pos);
-    } else if (btn_pressed(HSD_PAD_R) && btn_pressed(HSD_PAD_DPADRIGHT)) {
+    } else if ((buttons & HSD_PAD_R) && (buttons & HSD_PAD_DPADRIGHT)) {
         pos.x = da->x80;
         pos.y = da->x84;
-        pos.z = 0;
+        pos.z = ftCh_Init_804DA05C;
         ftCh_GrabUnk1_8015BA34(gobj, fn_80157C50, &pos);
-    } else if (btn_pressed(HSD_PAD_R) && btn_pressed(HSD_PAD_DPADDOWN)) {
+    } else if ((buttons & HSD_PAD_R) && (buttons & HSD_PAD_DPADDOWN)) {
         ftCh_Init_80157DF8(gobj);
-    } else if (btn_pressed(HSD_PAD_R) && btn_pressed(HSD_PAD_DPADLEFT)) {
+    } else if ((buttons & HSD_PAD_R) && (buttons & HSD_PAD_DPADLEFT)) {
         pos.x = da->x4C;
         pos.y = da->x50;
-        pos.z = 0;
+        pos.z = ftCh_Init_804DA05C;
         ftCh_GrabUnk1_8015BA34(gobj, fn_80158144, &pos);
-    } else if (btn_pressed(HSD_PAD_B) && btn_pressed(HSD_PAD_DPADUP)) {
+    } else if ((buttons & HSD_PAD_B) && (buttons & HSD_PAD_DPADUP)) {
         float rand = HSD_Randf();
-        pos.x = da->x90 * rand * 2 + da->x88_pos.x - da->x90;
+        pos.x = da->x90 * rand * ftCh_Init_804DA060 + da->x88_pos.x - da->x90;
         rand = HSD_Randf();
-        pos.y = da->x94 * rand * 2 + da->x88_pos.y - da->x94;
-        pos.z = 0;
+        pos.y = da->x94 * rand * ftCh_Init_804DA060 + da->x88_pos.y - da->x94;
+        pos.z = ftCh_Init_804DA05C;
         ftCh_GrabUnk1_8015BA34(gobj, fn_801582D8, &pos);
-    } else if (btn_pressed(HSD_PAD_B) && btn_pressed(HSD_PAD_DPADRIGHT)) {
+    } else if ((buttons & HSD_PAD_B) && (buttons & HSD_PAD_DPADRIGHT)) {
         pos.x = da->x98;
         pos.y = da->x9C;
-        pos.z = 0;
+        pos.z = ftCh_Init_804DA05C;
         ftCh_GrabUnk1_8015BA34(gobj, fn_801587B0, &pos);
-    } else if (btn_pressed(HSD_PAD_A) && btn_pressed(HSD_PAD_DPADUP)) {
+    } else if ((buttons & HSD_PAD_Z) && (buttons & HSD_PAD_DPADUP)) {
         fp->fv.ch.x2250 = ftMh_MS_BackAirplane2;
         ftCh_Init_80158B3C(gobj);
-    } else if (btn_pressed(HSD_PAD_A) && btn_pressed(HSD_PAD_DPADRIGHT)) {
+    } else if ((buttons & HSD_PAD_Z) && (buttons & HSD_PAD_DPADRIGHT)) {
         fp->fv.ch.x2250 = ftMh_MS_BackAirplane3;
         ftCh_Init_80158B3C(gobj);
-    } else if (btn_pressed(HSD_PAD_Z) && btn_pressed(HSD_PAD_DPADUP)) {
+    } else if ((buttons & HSD_PAD_A) && (buttons & HSD_PAD_DPADUP)) {
         ftCh_Init_801597F0(gobj, fn_80159908);
-    } else if (btn_pressed(HSD_PAD_Z) && btn_pressed(HSD_PAD_DPADRIGHT)) {
+    } else if ((buttons & HSD_PAD_A) && (buttons & HSD_PAD_DPADRIGHT)) {
         ftCh_Init_801597F0(gobj, fn_80159AA4);
-    } else if (btn_pressed(HSD_PAD_Z) && btn_pressed(HSD_PAD_DPADDOWN)) {
+    } else if ((buttons & HSD_PAD_A) && (buttons & HSD_PAD_DPADDOWN)) {
         ftCh_Init_80159F40(gobj);
-    } else if (btn_pressed(HSD_PAD_Y) && btn_pressed(HSD_PAD_DPADUP)) {
+    } else if ((buttons & HSD_PAD_Y) && (buttons & HSD_PAD_DPADUP)) {
         pos.x = da->x104;
         pos.y = da->x108;
-        pos.z = 0;
+        pos.z = ftCh_Init_804DA05C;
         fp->fv.ch.x2250 = ftMh_MS_Squeezing1;
         ftCh_GrabUnk1_8015BA34(gobj, fn_8015AAC8, &pos);
-    } else if (btn_pressed(HSD_PAD_Y) && btn_pressed(HSD_PAD_DPADRIGHT)) {
+    } else if ((buttons & HSD_PAD_Y) && (buttons & HSD_PAD_DPADRIGHT)) {
         pos.x = da->x10C;
         pos.y = da->x110_pos.x;
-        pos.z = 0;
+        pos.z = ftCh_Init_804DA05C;
         fp->fv.ch.x2250 = ftMh_MS_Squeeze;
         ftCh_GrabUnk1_8015BA34(gobj, fn_8015AAC8, &pos);
-    } else if (btn_pressed(HSD_PAD_Y) && btn_pressed(HSD_PAD_DPADDOWN)) {
+    } else if ((buttons & HSD_PAD_Y) && (buttons & HSD_PAD_DPADDOWN)) {
         pos.x = da->x110_pos.y;
         pos.y = da->x118_pos.x;
-        pos.z = 0;
+        pos.z = ftCh_Init_804DA05C;
         fp->fv.ch.x2250 = ftMh_MS_Throw;
         ftCh_GrabUnk1_8015BA34(gobj, fn_8015AAC8, &pos);
-    } else if (btn_pressed(HSD_PAD_Y) && btn_pressed(HSD_PAD_DPADLEFT)) {
+    } else if ((buttons & HSD_PAD_Y) && (buttons & HSD_PAD_DPADLEFT)) {
         pos.x = da->x118_pos.y;
         pos.y = da->x120;
-        pos.z = 0;
+        pos.z = ftCh_Init_804DA05C;
         fp->fv.ch.x2250 = ftMh_MS_Slam;
         ftCh_GrabUnk1_8015BA34(gobj, fn_8015AAC8, &pos);
     }
 }
+#undef buttons
 
 void fn_80156F6C(HSD_GObj* gobj)
 {
