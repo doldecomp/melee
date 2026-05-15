@@ -1023,7 +1023,7 @@ config.libs = [
             Object(Matching, "melee/gr/grbattle.c"),
             Object(Matching, "melee/gr/grlast.c"),
             Object(NonMatching, "melee/gr/grhomerun.c"),
-            Object(NonMatching, "melee/gr/grheal.c"),
+            Object(Matching, "melee/gr/grheal.c"),
             # Break the Targets stages
             Object(Matching, "melee/gr/grtmario.c"),
             Object(Matching, "melee/gr/grtcaptain.c"),
