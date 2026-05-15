@@ -75,7 +75,7 @@ extern int psNumTexGroup[65];
 static HSD_PSFormGroup** psFormGroupArray[65];
 
 /* 4CF7E8 */ static struct ParticleConsoleState hsd_804CF7E8;
-/* 4CF810 */ static struct ParticleScreenState hsd_804CF810;
+/* 4CF810 */ struct ParticleScreenState hsd_804CF810;
 /* 4D0908 */ static void* hsd_804D0908[146];
 /* 4D0B50 */ static HSD_PSTexGroup** psTexGroupArray[65];
 /* 4D0C54 */ static HSD_PSCmdList** psCmdListArray[65];
