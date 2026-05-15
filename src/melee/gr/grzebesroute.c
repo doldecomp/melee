@@ -27,6 +27,16 @@ typedef struct grZebesRoute_LightData {
     f32 pad;
 } grZebesRoute_LightData;
 
+typedef struct grZebesRoute_Params {
+    int camera_timer;
+    int zako_spawn_chance;
+} grZebesRoute_Params;
+
+typedef struct grZebesRoute_ParamStore {
+    grZebesRoute_Params* params;
+    u32 pad;
+} grZebesRoute_ParamStore;
+
 const grZebesRoute_LightData grZe_Route_803B83A0 = {
     { 0.0F, 0.0F, 0.0F },     { 0.0F, -30.0F, 50.0F },
     { 0.0F, 680.0F, -20.0F }, { -5.0F, 980.0F, 5.0F },
@@ -82,10 +92,7 @@ char grZe_Route_803E5E64[] = "grzebesroute.c";
 SDATA char grZe_Route_804D4840[] = "gobj";
 SDATA char grZe_Route_804D4848[] = "0";
 
-static struct {
-    int x0;
-    int x4;
-}* grZe_Route_804D6A60;
+grZebesRoute_ParamStore grZe_Route_804D6A60;
 
 const f32 grZe_Route_804DB918 = -50.0F;
 const f32 grZe_Route_804DB91C = 0.0F;
@@ -105,7 +112,7 @@ void grZebesRoute_8020B160(bool arg) {}
 /// #grZebesRoute_8020B164
 void grZebesRoute_8020B164(void)
 {
-    grZe_Route_804D6A60 = Ground_801C49F8();
+    grZe_Route_804D6A60.params = Ground_801C49F8();
     stage_info.unk8C.b4 = 0;
     stage_info.unk8C.b5 = 1;
     grZebesRoute_8020B260(0);
@@ -124,9 +131,9 @@ void grZebesRoute_8020B1F4(void)
 {
     int val;
     grZakoGenerator_801CAE04(NULL);
-    val = grZe_Route_804D6A60->x4;
+    val = grZe_Route_804D6A60.params->zako_spawn_chance;
     if (val != 0) {
-        val = HSD_Randi(grZe_Route_804D6A60->x4);
+        val = HSD_Randi(grZe_Route_804D6A60.params->zako_spawn_chance);
     } else {
         val = 0;
     }
@@ -205,7 +212,7 @@ void grZebesRoute_8020B3C0(Ground_GObj* gobj)
     gp->x8_callback = NULL;
     gp->xC_callback = NULL;
     mpJointSetCb1(1, gp, (mpLib_Callback) fn_8020B4D8);
-    gp->gv.zebes2.xC4 = (s16) grZe_Route_804D6A60->x0;
+    gp->gv.zebes2.xC4 = (s16) grZe_Route_804D6A60.params->camera_timer;
 }
 
 bool grZebesRoute_8020B424(Ground_GObj* arg)
