@@ -97,16 +97,16 @@ s32 fn_8001EB14(THPDecComp* data, const char* path)
     data->file_entrynum = DVDConvertPathToEntrynum(path);
     lbFile_800161C4(data->file_entrynum, 0, (u32) data, 0x40, 0x21, 1);
 
-    data->unk_40 = data->unk_1C;
-    data->width = data->unk_10;
-    data->height = data->unk_14;
-    data->unk_100 = data->unk_0C;
+    data->unk_40 = data->num_frames;
+    data->width = data->x_size;
+    data->height = data->y_size;
+    data->unk_100 = data->buf_size;
 
-    if (data->unk_24 != 0) {
+    if (data->frame_offsets != 0) {
         OSReport(str_Warning_frame_offsets_not_supported);
     }
 
-    if (data->unk_08 > 2) {
+    if (data->version > 2) {
         OSReport(lbl_803BAE3C);
     }
 
@@ -125,10 +125,10 @@ s32 fn_8001EB14(THPDecComp* data, const char* path)
 s32 fn_8001EBF0(THPDecComp* data)
 {
     s32 size = 0;
-    u32 width;
     u32 aligned_100;
-    u32 height;
     u32 unk_104_val;
+    u32 width;
+    u32 height;
     u32 wh;
     u32 wh_div4;
     PAD_STACK(16);
@@ -136,11 +136,9 @@ s32 fn_8001EBF0(THPDecComp* data)
     data->unk_104 = 0x20;
 
     width = data->width;
-    aligned_100 = data->unk_100;
+    aligned_100 = ALIGN_32(data->unk_100);
     height = data->height;
     unk_104_val = data->unk_104;
-
-    aligned_100 = ALIGN_32(aligned_100);
 
     data->unk_9C.val1 = (u16) width;
 
@@ -204,10 +202,10 @@ void fn_8001ECF4(THPDecComp* data, void* buf)
     uv_size = y_size >> 2U;
     var_r29 = (u8*) buf + (((count * 4) + 0x1F) & 0xFFFFFFE0);
     if (((s32) data->unk_6C != 0) && ((s32) data->unk_11C != 0)) {
-        var_r24 = data->unk_28;
-        csizep = (u8*) &data->unk_28;
+        var_r24 = data->first_frame_size;
+        csizep = (u8*) &data->first_frame_size;
         var_r25 = 0;
-        data->curr_file_offset = data->unk_20;
+        data->curr_file_offset = data->first_frame;
         for (; var_r25 < (u32) data->unk_104; var_r25++) {
             data->frame_buffers[var_r25] = (u32) var_r29;
             if (var_r24 == 0) {
@@ -217,15 +215,15 @@ void fn_8001ECF4(THPDecComp* data, void* buf)
                 OSReport(lbl_803BAE98, var_r25);
                 OSReport(lbl_803BAEA4, csizep);
                 OSReport(lbl_803BAEB0, data);
-                OSReport(lbl_803BAEC8, data->unk_08);
-                OSReport(lbl_803BAEE0, data->unk_0C);
-                OSReport(lbl_803BAEF8, data->unk_10);
-                OSReport(lbl_803BAF10, data->unk_14);
-                OSReport(lbl_803BAF28, data->unk_18);
-                OSReport(lbl_803BAF44, data->unk_1C);
-                OSReport(lbl_803BAF60, data->unk_20);
-                OSReport(lbl_803BAF7C, data->unk_24);
-                OSReport(lbl_803BAF98, data->unk_28);
+                OSReport(lbl_803BAEC8, data->version);
+                OSReport(lbl_803BAEE0, data->buf_size);
+                OSReport(lbl_803BAEF8, data->x_size);
+                OSReport(lbl_803BAF10, data->y_size);
+                OSReport(lbl_803BAF28, data->frame_rate);
+                OSReport(lbl_803BAF44, data->num_frames);
+                OSReport(lbl_803BAF60, data->first_frame);
+                OSReport(lbl_803BAF7C, data->frame_offsets);
+                OSReport(lbl_803BAF98, data->first_frame_size);
                 LBMTHP_ASSERT(0x10A, 0, str_0);
             }
             lbFile_800161C4(data->file_entrynum, data->curr_file_offset,
@@ -461,8 +459,8 @@ void lbMthp_8001F410(const char* filename, void* rate_table, int buf,
     OSCreateAlarm(&streamPlayer->unk_150);
     OSSetPeriodicAlarm(
         &streamPlayer->unk_150,
-        __cvt_dbl_usll((f64) (0.016666668f * (f32) (*(u32*) 0x800000F8 >> 2))),
-        __cvt_dbl_usll((f64) (0.016666668f * (f32) (*(u32*) 0x800000F8 >> 2))),
+        __cvt_dbl_usll((f64) (lbl_804D7CC8 * (f32) (*(u32*) 0x800000F8 >> 2))),
+        __cvt_dbl_usll((f64) (lbl_804D7CC8 * (f32) (*(u32*) 0x800000F8 >> 2))),
         (OSAlarmHandler) fn_8001F2A4);
 }
 
@@ -528,24 +526,24 @@ void lbMthp_8001F67C(HSD_GObj* gobj, int arg1)
         GXInitTexObj(&streamPlayer->unk_178, streamPlayer->unk_50,
                      (u16) streamPlayer->unk_44, (u16) streamPlayer->unk_48,
                      GX_TF_I8, GX_CLAMP, GX_CLAMP, 0U);
-        GXInitTexObjLOD(&streamPlayer->unk_178, GX_NEAR, GX_NEAR, 0.0f, 0.0f,
-                        0.0f, 0U, 0U, GX_ANISO_1);
+        GXInitTexObjLOD(&streamPlayer->unk_178, GX_NEAR, GX_NEAR, lbl_804D7CD8,
+                        lbl_804D7CD8, lbl_804D7CD8, 0U, 0U, GX_ANISO_1);
         GXLoadTexObj(&streamPlayer->unk_178, GX_TEXMAP0);
 
         GXInitTexObj(&streamPlayer->unk_198, streamPlayer->unk_54,
                      (u16) ((u32) streamPlayer->unk_44 >> 1U),
                      (u16) ((u32) streamPlayer->unk_48 >> 1U), GX_TF_I8,
                      GX_CLAMP, GX_CLAMP, 0U);
-        GXInitTexObjLOD(&streamPlayer->unk_198, GX_NEAR, GX_NEAR, 0.0f, 0.0f,
-                        0.0f, 0U, 0U, GX_ANISO_1);
+        GXInitTexObjLOD(&streamPlayer->unk_198, GX_NEAR, GX_NEAR, lbl_804D7CD8,
+                        lbl_804D7CD8, lbl_804D7CD8, 0U, 0U, GX_ANISO_1);
         GXLoadTexObj(&streamPlayer->unk_198, GX_TEXMAP1);
 
         GXInitTexObj(&streamPlayer->unk_1B8, streamPlayer->unk_58,
                      (u16) ((u32) streamPlayer->unk_44 >> 1U),
                      (u16) ((u32) streamPlayer->unk_48 >> 1U), GX_TF_I8,
                      GX_CLAMP, GX_CLAMP, 0U);
-        GXInitTexObjLOD(&streamPlayer->unk_1B8, GX_NEAR, GX_NEAR, 0.0f, 0.0f,
-                        0.0f, 0U, 0U, GX_ANISO_1);
+        GXInitTexObjLOD(&streamPlayer->unk_1B8, GX_NEAR, GX_NEAR, lbl_804D7CD8,
+                        lbl_804D7CD8, lbl_804D7CD8, 0U, 0U, GX_ANISO_1);
         GXLoadTexObj(&streamPlayer->unk_1B8, GX_TEXMAP2);
 
         HSD_SObjLib_803A49E0(gobj, arg1);
