@@ -17,7 +17,7 @@
 #include <dolphin/mtx.h>
 
 /* 00F9F8 */ void lb_8000F9F8(HSD_JObj* jobj);
-/* 00FA94 */ UNK_RET lb_8000FA94(UNK_PARAMS);
+/* 00FA94 */ void lb_8000FA94(void);
 /* 00FCDC */ void lb_8000FCDC(void);
 /* 00FD18 */ void lb_8000FD18(DynamicsDesc*);
 /* 00FD48 */ void lb_8000FD48(HSD_JObj*, DynamicsDesc*, size_t);
@@ -67,7 +67,7 @@ lb_800122C8(HSD_ImageDesc* image_desc, u16 origx, u16 origy,
 /* 014498 */ void lb_80014498(ColorOverlay*);
 /* 0144C8 */ bool lb_800144C8(ColorOverlay*, struct Fighter_804D653C_t*, int,
                               int);
-/* 014534 */ UNK_RET lb_80014534(UNK_PARAMS);
+/* 014534 */ void lb_80014534(void);
 /* 014574 */ void lb_80014574(u8, int, int, int);
 /* 0145C0 */ void lb_800145C0(u8 slot); ///< Reset pad rumble
 /* 0145F4 */ void lb_800145F4(void);
