@@ -80,66 +80,82 @@ void fn_8001FC08(void)
     f32 val;
 
     if (data->x20[0] > 0.0f) {
-        val = data->x10[0] + data->x20[0];
-        if (val < (f32) data->x8.r) {
-            data->x10[0] = val;
+        u8 target = data->x8.r;
+        f32* cur = &data->x10[0];
+        val = *cur + data->x20[0];
+        if (val < (f32) target) {
+            *cur = val;
         } else {
-            data->x10[0] = (f32) data->x8.r;
+            *cur = (f32) target;
         }
     } else {
-        val = data->x10[0] + data->x20[0];
-        if (val > (f32) data->x8.r) {
-            data->x10[0] = val;
+        u8 target = data->x8.r;
+        f32* cur = &data->x10[0];
+        val = *cur + data->x20[0];
+        if (val > (f32) target) {
+            *cur = val;
         } else {
-            data->x10[0] = (f32) data->x8.r;
+            *cur = (f32) target;
         }
     }
 
     if (data->x20[1] > 0.0f) {
-        val = data->x10[1] + data->x20[1];
-        if (val < (f32) data->x8.g) {
-            data->x10[1] = val;
+        u8 target = data->x8.g;
+        f32* cur = &data->x10[1];
+        val = *cur + data->x20[1];
+        if (val < (f32) target) {
+            *cur = val;
         } else {
-            data->x10[1] = (f32) data->x8.g;
+            *cur = (f32) target;
         }
     } else {
-        val = data->x10[1] + data->x20[1];
-        if (val > (f32) data->x8.g) {
-            data->x10[1] = val;
+        u8 target = data->x8.g;
+        f32* cur = &data->x10[1];
+        val = *cur + data->x20[1];
+        if (val > (f32) target) {
+            *cur = val;
         } else {
-            data->x10[1] = (f32) data->x8.g;
+            *cur = (f32) target;
         }
     }
 
     if (data->x20[2] > 0.0f) {
-        val = data->x10[2] + data->x20[2];
-        if (val < (f32) data->x8.b) {
-            data->x10[2] = val;
+        u8 target = data->x8.b;
+        f32* cur = &data->x10[2];
+        val = *cur + data->x20[2];
+        if (val < (f32) target) {
+            *cur = val;
         } else {
-            data->x10[2] = (f32) data->x8.b;
+            *cur = (f32) target;
         }
     } else {
-        val = data->x10[2] + data->x20[2];
-        if (val > (f32) data->x8.b) {
-            data->x10[2] = val;
+        u8 target = data->x8.b;
+        f32* cur = &data->x10[2];
+        val = *cur + data->x20[2];
+        if (val > (f32) target) {
+            *cur = val;
         } else {
-            data->x10[2] = (f32) data->x8.b;
+            *cur = (f32) target;
         }
     }
 
     if (data->x20[3] > 0.0f) {
-        val = data->x10[3] + data->x20[3];
-        if (val < (f32) data->x8.a) {
-            data->x10[3] = val;
+        u8 target = data->x8.a;
+        f32* cur = &data->x10[3];
+        val = *cur + data->x20[3];
+        if (val < (f32) target) {
+            *cur = val;
         } else {
-            data->x10[3] = (f32) data->x8.a;
+            *cur = (f32) target;
         }
     } else {
-        val = data->x10[3] + data->x20[3];
-        if (val > (f32) data->x8.a) {
-            data->x10[3] = val;
+        u8 target = data->x8.a;
+        f32* cur = &data->x10[3];
+        val = *cur + data->x20[3];
+        if (val > (f32) target) {
+            *cur = val;
         } else {
-            data->x10[3] = (f32) data->x8.a;
+            *cur = (f32) target;
         }
     }
 }
