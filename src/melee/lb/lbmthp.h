@@ -21,15 +21,15 @@ s32 THPVideoDecode(void*, void*, void*, void*, void*);
 /* Struct used by fn_8001EBF0 for THP decode component init */
 typedef struct THPDecComp {
     /* 0x00 */ u8 pad0[0x08];
-    /* 0x08 */ u32 unk_08;
-    /* 0x0C */ u32 unk_0C;
-    /* 0x10 */ u32 unk_10;
-    /* 0x14 */ u32 unk_14;
-    /* 0x18 */ u32 unk_18;
-    /* 0x1C */ u32 unk_1C;
-    /* 0x20 */ u32 unk_20;
-    /* 0x24 */ u32 unk_24;
-    /* 0x28 */ u32 unk_28;
+    /* 0x08 */ u32 version;
+    /* 0x0C */ u32 buf_size;
+    /* 0x10 */ u32 x_size;
+    /* 0x14 */ u32 y_size;
+    /* 0x18 */ u32 frame_rate;
+    /* 0x1C */ u32 num_frames;
+    /* 0x20 */ u32 first_frame;
+    /* 0x24 */ u32 frame_offsets;
+    /* 0x28 */ u32 first_frame_size;
     /* 0x2C */ u8 pad2C[0x40 - 0x2C];
     /* 0x40 */ u32 unk_40;
     /* 0x44 */ u32 width;

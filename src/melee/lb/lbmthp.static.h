@@ -7,9 +7,9 @@
 
 /* 4333E0 */ static struct lbl_804333E0_t lbl_804333E0;
 #define Movieplayer lbl_804333E0
-/* 4D7CC0 */ static float lb_804D7CC0;
-
-/* 4D7CE0 */ static float lbl_804D7CE0;
+/* 4D7CC8 */ static const float lbl_804D7CC8 = 0.016666668f;
+/* 4D7CD0 */ static const f64 lbl_804D7CD0 = 4503599627370496e0;
+/* 4D7CD8 */ static const float lbl_804D7CD8 = 0.0f;
 
 struct lbl_803BAFE8_t {
     /* 0x00 */ s32 x0;
