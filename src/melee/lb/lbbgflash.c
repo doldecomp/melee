@@ -595,11 +595,11 @@ void lbBgFlash_80020E38(HSD_JObj* jobj, Vec3* dir, f32 max_angle,
     f32 z_col_z;
     f32 z_col_y;
     f32 z_col_x;
-    f32 dz2 = dz * dz;
     f32 dx2 = dx * dx;
     f32 dy2 = dy * dy;
+    f32 dz2 = dz * dz;
     volatile f32 tmp;
-    if (dz2 + dy2 + dx2 == 0.0f) {
+    if (dx2 + dy2 + dz2 == 0.0f) {
         return;
     }
 
