@@ -688,11 +688,12 @@ void fn_8002113C(HSD_JObj* jobj, Vec3* axis, f32 angle)
     PSMTXRotAxisRad(rotMtx, (Vec*) &localAxis, -angle);
 
     if (!(jobj->flags & JOBJ_USE_QUATERNION)) {
-        Fake_HSD_JObjGetRotation(jobj, &rot);
-        HSD_MkRotationMtx(tmpMtx, (Vec3*) &rot);
+        Quaternion* volatile rot_ptr = &rot;
+        Fake_HSD_JObjGetRotation(jobj, rot_ptr);
+        HSD_MkRotationMtx(tmpMtx, (Vec3*) rot_ptr);
         PSMTXConcat(tmpMtx, rotMtx, result);
-        HSD_QuatLib_8037EB28(result, (Vec3*) &rot);
-        FakeHSD_JObjSetRotation(jobj, &rot);
+        HSD_QuatLib_8037EB28(result, (Vec3*) rot_ptr);
+        FakeHSD_JObjSetRotation(jobj, rot_ptr);
     } else {
         HSD_JObjGetRotation(jobj, &rot2);
         HSD_MtxQuat(tmpMtx, &rot2);
