@@ -2114,22 +2114,21 @@ void fn_800268B4(void)
     lbl_804D6450 = 0;
     lbl_804D644C = 0;
     lbl_804D6448 = 0;
-
-    arr_38a4 = lbl_80433710.x194;
-    arr_3984 = lbl_80433710.x274;
+    arr_38a4 = lbl_804338A4;
+    arr_3984 = lbl_80433984;
     arr_4e4 = offsets_arr_803BC4E4;
 
-    for (i = 0x37; i > 0; i--) {
+    for (i = 0x37; i != 0; i--) {
         int flag1, flag2;
         int flags;
 
-        if (arr_38a4[i] == -1) {
+        if (*arr_38a4 == -1) {
             flag1 = 0;
         } else {
             flag1 = 1;
         }
 
-        if (arr_3984[i] == -1) {
+        if (*arr_3984 == -1) {
             flag2 = 0;
         } else {
             flag2 = 2;
@@ -2141,17 +2140,20 @@ void fn_800268B4(void)
         case 0:
             break;
         case 1:
-            lbl_804D644C += arr_4e4[i][0];
-            lbl_804D6450 += arr_4e4[i][0];
+            lbl_804D644C += (*arr_4e4)[0];
+            lbl_804D6450 += (*arr_4e4)[0];
             break;
         case 2:
-            lbl_804D6448 += arr_4e4[i][0];
+            lbl_804D6448 += (*arr_4e4)[0];
             break;
         case 3:
-            lbl_804D644C += arr_4e4[i][0];
-            lbl_804D6448 += arr_4e4[i][0];
+            lbl_804D644C += (*arr_4e4)[0];
+            lbl_804D6448 += (*arr_4e4)[0];
             break;
         }
+        arr_38a4++;
+        arr_3984++;
+        arr_4e4++;
     }
 }
 
