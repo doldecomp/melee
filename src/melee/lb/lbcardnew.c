@@ -642,7 +642,6 @@ int lb_8001B14C(void)
     int count;
     int i;
     struct SnapshotNode** scan;
-    lbCardNew_SnapshotEntry* snapshot_entries;
 
     head = NULL;
     disk_id = DVDGetCurrentDiskID();
@@ -655,7 +654,6 @@ int lb_8001B14C(void)
     }
     nodes = HSD_MemAlloc(0x5F4);
     node = nodes;
-    snapshot_entries = lb_80432A68.snapshot_entries;
     company = (char*) stat[0].company;
     game = (char*) stat[0].gameName;
     count = 0;
@@ -684,14 +682,14 @@ int lb_8001B14C(void)
 
         copy_scan = &head;
         for (j = 0; j < count; j++) {
-            snapshot_entries[j].time = (*copy_scan)->time;
-            snapshot_entries[j].file_no = (*copy_scan)->file_no;
-            snapshot_entries[j].blocks = (*copy_scan)->blocks;
+            lb_80432A68.snapshot_entries[j].time = (*copy_scan)->time;
+            lb_80432A68.snapshot_entries[j].file_no = (*copy_scan)->file_no;
+            lb_80432A68.snapshot_entries[j].blocks = (*copy_scan)->blocks;
             copy_scan = &(*copy_scan)->next;
         }
     }
     for (i = count; i < 0x7F; i++) {
-        snapshot_entries[i].file_no = -1;
+        lb_80432A68.snapshot_entries[i].file_no = -1;
     }
     HSD_Free(nodes);
     lb_80432A68.unk_34 = 0;

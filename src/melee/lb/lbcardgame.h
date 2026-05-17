@@ -6,8 +6,8 @@
 
 #include <sysdolphin/baselib/gobj.h>
 
-/* 01C600 */ UNK_RET lb_8001C600(UNK_PARAMS);
-/* 01C658 */ const char* lb_8001C658(UNK_PARAMS);
+/* 01C600 */ void lb_8001C600(void);
+/* 01C658 */ const char* lb_8001C658(void);
 /* 01C820 */ int lb_8001C820(void);
 /* 01C87C */ u32 lb_8001C87C(void);
 /* 01C8BC */ bool lb_8001C8BC(void);
@@ -22,9 +22,9 @@
 /* 01CE78 */ u8 lb_8001CE78(void);
 /* 01CEC0 */ void fn_8001CEC0(HSD_GObj*);
 /* 01CEE4 */ void fn_8001CEE4(HSD_GObj*, int);
-/* 01CF18 */ UNK_RET lb_8001CF18(UNK_PARAMS);
+/* 01CF18 */ void lb_8001CF18(void);
 /* 01D164 */ void lb_8001D164(int);
-/* 01D1F4 */ UNK_RET lb_8001D1F4(UNK_PARAMS);
+/* 01D1F4 */ void lb_8001D1F4(void);
 /* 01D21C */ void lb_8001D21C(void);
 
 #endif

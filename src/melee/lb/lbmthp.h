@@ -8,32 +8,33 @@
 #include <baselib/forward.h>
 
 #include <dolphin/gx/GXStruct.h>
+#include <dolphin/thp/thp.h>
 
 /* THPDec function declarations */
 BOOL THPInit(void);
 void THPDec_8032F8D4(u32, void*);
-s32 THPDec_8032FD40(void* arg0, u16 height);
+s32 THPDec_8032FD40(THPDec_8032FD40_Data* arg0, u16 height);
 void THPDec_80331340(s32, void*, void*, void*, s32);
 void THPDec_803313D0(s32, void*, void*, void*);
-s32 THPVideoDecode(void*, void*, void*, s32, void*);
+s32 THPVideoDecode(void*, void*, void*, void*, void*);
 
 /* Struct used by fn_8001EBF0 for THP decode component init */
 typedef struct THPDecComp {
     /* 0x00 */ u8 pad0[0x08];
-    /* 0x08 */ u32 unk_08;
-    /* 0x0C */ u32 unk_0C;
-    /* 0x10 */ u32 unk_10;
-    /* 0x14 */ u32 unk_14;
-    /* 0x18 */ u32 unk_18;
-    /* 0x1C */ u32 unk_1C;
-    /* 0x20 */ u32 unk_20;
-    /* 0x24 */ u32 unk_24;
-    /* 0x28 */ u32 unk_28;
+    /* 0x08 */ u32 version;
+    /* 0x0C */ u32 buf_size;
+    /* 0x10 */ u32 x_size;
+    /* 0x14 */ u32 y_size;
+    /* 0x18 */ u32 frame_rate;
+    /* 0x1C */ u32 num_frames;
+    /* 0x20 */ u32 first_frame;
+    /* 0x24 */ u32 frame_offsets;
+    /* 0x28 */ u32 first_frame_size;
     /* 0x2C */ u8 pad2C[0x40 - 0x2C];
     /* 0x40 */ u32 unk_40;
     /* 0x44 */ u32 width;
     /* 0x48 */ u32 height;
-    /* 0x4C */ u32* unk_4C;
+    /* 0x4C */ u32* frame_buffers;
     /* 0x50 */ void* unk_50;
     /* 0x54 */ void* unk_54;
     /* 0x58 */ void* unk_58;
@@ -52,11 +53,7 @@ typedef struct THPDecComp {
     /* 0x90 */ u32 unk_90;
     /* 0x94 */ s32 unk_94;
     /* 0x98 */ s32 unk_98;
-    /* 0x9C */ u32 unk_9C;
-    /* 0xA0 */ u16 unk_A0;
-    /* 0xA2 */ u16 unk_A2;
-    /* 0xA4 */ u8 unk_A4;
-    /* 0xA5 */ u8 padA5[0xA8 - 0xA5];
+    /* 0x9C */ THPDec_8032FD40_Data unk_9C;
     /* 0xA8 */ u16 unk_A8;
     /* 0xAA */ u16 unk_AA;
     /* 0xAC */ u8 unk_AC;
@@ -68,9 +65,9 @@ typedef struct THPDecComp {
     /* 0x110 */ s32 unk_110;
     /* 0x114 */ u8 pad114[0x11C - 0x114];
     /* 0x11C */ s32 unk_11C;
-    /* 0x120 */ u32 unk_120;
+    /* 0x120 */ u32 curr_file_offset;
     /* 0x124 */ u32 currPackedSize;
-    /* 0x128 */ s32 unk_128;
+    /* 0x128 */ s32 file_entrynum;
     /* 0x12C */ u8 pad12C[0x130 - 0x12C];
     /* 0x130 */ s32 unk_130;
     /* 0x134 */ s32 unk_134;
@@ -85,7 +82,7 @@ struct lbl_804333E0_t {
     /* 0x040 */ u32 unk_40;
     /* 0x044 */ u32 unk_44;
     /* 0x048 */ u32 unk_48;
-    /* 0x04C */ void** unk_4C;
+    /* 0x04C */ void** frame_buffers;
     /* 0x050 */ void* unk_50;
     /* 0x054 */ void* unk_54;
     /* 0x058 */ void* unk_58;
@@ -107,10 +104,10 @@ struct lbl_804333E0_t {
     /* 0x10C */ s32 unk_10C;
     /* 0x110 */ s32 unk_110;
     /* 0x114 */ char pad_114[0xC];
-    /* 0x120 */ u32 unk_120;
+    /* 0x120 */ u32 curr_file_offset;
     /* 0x124 */ u32 currPackedSize;
-    /* 0x128 */ s32 unk_128;
-    /* 0x12C */ s32 unk_12C;
+    /* 0x128 */ s32 file_entrynum;
+    /* 0x12C */ u32* rate_table;
     /* 0x130 */ s32 unk_130;
     /* 0x134 */ s32 unk_134;
     /* 0x138 */ s32 unk_138;
@@ -126,7 +123,7 @@ struct lbl_804333E0_t {
 }; /* size = 0x1D8 */
 STATIC_ASSERT(sizeof(struct lbl_804333E0_t) == 0x1D8);
 
-/* 01E910 */ void fn_8001E910(int, int, void*, bool);
+/* 01E910 */ void fn_8001E910(int, int, void*, int);
 /* 01EB14 */ s32 fn_8001EB14(THPDecComp* data, const char* path);
 /* 01EBF0 */ s32 fn_8001EBF0(THPDecComp* data);
 /* 01ECF4 */ void fn_8001ECF4(THPDecComp* data, void* buf);
@@ -135,7 +132,8 @@ STATIC_ASSERT(sizeof(struct lbl_804333E0_t) == 0x1D8);
 /* 01F13C */ s32 fn_8001F13C(THPDecComp* data);
 /* 01F294 */ s32 fn_8001F294(void);
 /* 01F2A4 */ s32 fn_8001F2A4(void);
-/* 01F410 */ void lbMthp_8001F410(const char* filename, UNK_T, int, int, int);
+/* 01F410 */ void lbMthp_8001F410(const char* filename, void* rate_table,
+                                  int buf, int heap_size, int loop);
 /* 01F578 */ void lbMthp_8001F578(void);
 /* 01F5C4 */ s32 lbMthp_8001F5C4(void);
 /* 01F5D4 */ s32 lbMthp_8001F5D4(void);
