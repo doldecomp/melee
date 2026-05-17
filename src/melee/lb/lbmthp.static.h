@@ -3,87 +3,13 @@
 
 #include "lbmthp.h" // IWYU pragma: export
 
-#include <dolphin/gx/GXStruct.h>
 #include <dolphin/os/OSAlarm.h>
 
-struct lbl_804333E0_t {
-    /* 0x000 */ char pad_0[0x20];
-    /* 0x020 */ u32 unk_20;
-    /* 0x024 */ char pad_24[0x1C];
-    /* 0x040 */ u32 unk_40;
-    /* 0x044 */ u32 unk_44;
-    /* 0x048 */ u32 unk_48;
-    /* 0x04C */ void** unk_4C;
-    /* 0x050 */ void* unk_50;
-    /* 0x054 */ void* unk_54;
-    /* 0x058 */ void* unk_58;
-    /* 0x05C */ char pad_5C[0xC];
-    /* 0x068 */ s32 unk_68;
-    /* 0x06C */ char pad_6C[0x4];
-    /* 0x070 */ s32 unk_70;
-    /* 0x074 */ u32 unk_74;
-    /* 0x078 */ s32 unk_78;
-    /* 0x07C */ s32 unk_7C;
-    /* 0x080 */ s32 unk_80;
-    /* 0x084 */ s32 unk_84;
-    /* 0x088 */ s32 unk_88;
-    /* 0x08C */ u32 unk_8C;
-    /* 0x090 */ s32 unk_90;
-    /* 0x094 */ char pad_94[0x70];
-    /* 0x104 */ u32 unk_104;
-    /* 0x108 */ s32 unk_108;
-    /* 0x10C */ s32 unk_10C;
-    /* 0x110 */ s32 unk_110;
-    /* 0x114 */ char pad_114[0xC];
-    /* 0x120 */ u32 unk_120;
-    /* 0x124 */ u32 currPackedSize;
-    /* 0x128 */ s32 unk_128;
-    /* 0x12C */ s32 unk_12C;
-    /* 0x130 */ s32 unk_130;
-    /* 0x134 */ s32 unk_134;
-    /* 0x138 */ s32 unk_138;
-    /* 0x13C */ u32 unk_13C;
-    /* 0x140 */ void* unk_140;
-    /* 0x144 */ s32 unk_144;
-    /* 0x148 */ s32 unk_148;
-    /* 0x14C */ s32 power;
-    /* 0x150 */ OSAlarm unk_150;
-    /* 0x178 */ GXTexObj unk_178;
-    /* 0x198 */ GXTexObj unk_198;
-    /* 0x1B8 */ GXTexObj unk_1B8;
-}; /* size = 0x1D8 */
-STATIC_ASSERT(sizeof(struct lbl_804333E0_t) == 0x1D8);
-
-/* 4333E0 */ static struct lbl_804333E0_t Movieplayer;
-/* 4D7CC0 */ static float lb_804D7CC0;
-
-struct lbl_804335B8_t {
-    /* 0x00 */ GXTexObj tex0; /* 0x00-0x20 (size 0x20) */
-    /* 0x20 */ void* x20;     /* image ptr for tex0 */
-    /* 0x24 */ GXTexObj tex1; /* 0x24-0x44 (size 0x20) */
-    /* 0x44 */ void* x44;     /* image ptr for tex1 */
-    /* 0x48 */ GXTexObj tex2; /* 0x48-0x68 (size 0x20) */
-    /* 0x68 */ void* x68;     /* image ptr for tex2 */
-    /* 0x6C */ u16 x6C;       /* width */
-    /* 0x6E */ u16 x6E;       /* height */
-    /* 0x70 */ s32 x70;
-    /* 0x74 */ u16 x74;
-    /* 0x76 */ u16 x76;
-    /* 0x78 */ s32 x78;
-    /* 0x7C */ s32 x7C;
-    /* 0x80 */ float x80;
-    /* 0x84 */ float x84;
-    /* 0x88 */ void* x88;
-    /* 0x8C */ s32 x8C;
-    /* 0x90 */ struct HSD_SObj* x90;
-    /* 0x94 */ u32 unk94;
-    /* 0x98 */ u32 unk98;
-    /* 0x9C */ char pad_9C[0xA0 - 0x9C];
-}; /* size = 0xA0 */
-STATIC_ASSERT(sizeof(struct lbl_804335B8_t) == 0xA0);
-
-/* 4335B8 */ static struct lbl_804335B8_t lbl_804335B8;
-/* 4D7CE0 */ static float lbl_804D7CE0;
+/* 4333E0 */ static struct lbl_804333E0_t lbl_804333E0;
+#define Movieplayer lbl_804333E0
+/* 4D7CC8 */ static const float lbl_804D7CC8 = 0.016666668f;
+/* 4D7CD0 */ static const f64 lbl_804D7CD0 = 4503599627370496e0;
+/* 4D7CD8 */ static const float lbl_804D7CD8 = 0.0f;
 
 struct lbl_803BAFE8_t {
     /* 0x00 */ s32 x0;
@@ -95,7 +21,68 @@ struct lbl_803BAFE8_t {
     /* 0x14 */ s32 x14;
 }; /* size = 0x18 */
 
-/* 3BAFE8 */ extern struct lbl_803BAFE8_t lbl_803BAFE8;
+typedef struct lbMthp_DataBlock {
+    /* 0x000 */ char file[0xC];
+    /* 0x00C */ char assert_cancelflag[0xC];
+    /* 0x018 */ char report_filnum[0x24];
+    /* 0x03C */ char assert_curr_packed_size[0x28];
+    /* 0x064 */ char warning_frame_offsets[0x28];
+    /* 0x08C */ char warning_file_format[0x2C];
+    /* 0x0B8 */ char report_by_sugano[0x18];
+    /* 0x0D0 */ char report_base[0xC];
+    /* 0x0DC */ char report_size[0xC];
+    /* 0x0E8 */ char report_count[0xC];
+    /* 0x0F4 */ char report_csizep[0xC];
+    /* 0x100 */ char report_magic[0x18];
+    /* 0x118 */ char report_version[0x18];
+    /* 0x130 */ char report_buf_size[0x18];
+    /* 0x148 */ char report_x_size[0x18];
+    /* 0x160 */ char report_y_size[0x18];
+    /* 0x178 */ char report_framerate[0x1C];
+    /* 0x194 */ char report_num_frames[0x1C];
+    /* 0x1B0 */ char report_first_frame[0x1C];
+    /* 0x1CC */ char report_frame_offsets[0x1C];
+    /* 0x1E8 */ char report_first_frame_size[0x20];
+    /* 0x208 */ char assert_movieplayer_power[0x14];
+    /* 0x21C */ char assert_heap_size[0x1C];
+    /* 0x238 */ struct lbl_803BAFE8_t sobj_desc;
+} lbMthp_DataBlock;
+STATIC_ASSERT(sizeof(lbMthp_DataBlock) == 0x250);
+
+/* 3BADB0 */ static char lbl_803BADB0[9] = "lbmthp.c";
+/* 3BADBC */ static char lbl_803BADBC[0xC] = "!cancelflag";
+/* 3BADC8 */ static char lbl_803BADC8[0x22] =
+    "filnum = %d, ofs = %d, by sugano.";
+/* 3BADEC */ static char lbl_803BADEC[0x27] =
+    "(u32)streamPlayer->currPackedSize != 0";
+/* 3BAE14 */ static char str_Warning_frame_offsets_not_supported[0x27] =
+    "Warning : frame offsets not supported\n";
+/* 3BAE3C */ static char lbl_803BAE3C[0x2C] =
+    "Warning : file format is newer than player\n";
+/* 3BAE68 */ static char lbl_803BAE68[0x16] = "by sugano & yoshiki.\n";
+/* 3BAE80 */ static char lbl_803BAE80[0x9] = "base %x\n";
+/* 3BAE8C */ static char lbl_803BAE8C[0x9] = "size %d\n";
+/* 3BAE98 */ static char lbl_803BAE98[0xA] = "count %d\n";
+/* 3BAEA4 */ static char lbl_803BAEA4[0xB] = "csizep %x\n";
+/* 3BAEB0 */ static char lbl_803BAEB0[0x15] = "[LbMthp] magic = %s\n";
+/* 3BAEC8 */ static char lbl_803BAEC8[0x17] = "[LbMthp] version = %d\n";
+/* 3BAEE0 */ static char lbl_803BAEE0[0x17] = "[LbMthp] bufSize = %d\n";
+/* 3BAEF8 */ static char lbl_803BAEF8[0x15] = "[LbMthp] xSize = %d\n";
+/* 3BAF10 */ static char lbl_803BAF10[0x15] = "[LbMthp] ySize = %d\n";
+/* 3BAF28 */ static char lbl_803BAF28[0x19] = "[LbMthp] framerate = %d\n";
+/* 3BAF44 */ static char lbl_803BAF44[0x19] = "[LbMthp] numFrames = %d\n";
+/* 3BAF60 */ static char lbl_803BAF60[0x1A] = "[LbMthp] firstFrame = %d\n";
+/* 3BAF7C */ static char lbl_803BAF7C[0x1C] = "[LbMthp] frameOffsets = %d\n";
+/* 3BAF98 */ static char lbl_803BAF98[0x1E] = "[LbMthp] firstFrameSize = %d\n";
+/* 3BAFB8 */ static char lbl_803BAFB8[0x13] = "!MoviePlayer.power";
+/* 3BAFCC */ static char lbl_803BAFCC[0x1C] = "heap_size >= memoryRequired";
+/* 3BAFE8 */ static struct lbl_803BAFE8_t lbMthp_803BAFE8 = {
+    0, 0x280, 0x1E0, 6, 0, 0, 0,
+};
+
+#define lbl_803BAFE8 (((lbMthp_DataBlock*) lbl_803BADB0)->sobj_desc)
+
+/* 4D3830 */ static SDATA char str_0[] = "0";
 /* 4D3834 */ extern s32 lbl_804D3834;
 
 #endif

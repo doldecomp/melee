@@ -1038,10 +1038,13 @@ struct Fighter_x1A88_t {
     /*  +94 */ int x94;
     /*  +98 */ Vec3 x98;
     /*  +A4 */ int xA4;
-    /*  +A8 */ u8 pad_xA8[0xC8 - 0xA8];
-    /*  +C8 */ u8 xC8;
-    /*  +C9 */ u8 pad_xC9[0xEC - 0xC9];
-    /*  +EC */ u8 xEC;
+    /*  +A8 */ s32
+        xA8_array[8];  ///< defend move queue (up to 8 entries, count in xC8)
+    /*  +C8 */ u8 xC8; ///< defend move queue count
+    /*  +C9 */ u8 pad_xC9[0xCC - 0xC9];
+    /*  +CC */ s32
+        xCC_array[8];  ///< attack move queue (up to 8 entries, count in xEC)
+    /*  +EC */ u8 xEC; ///< attack move queue count
     /*  +ED */ u8 pad_xED[0xF0 - 0xED];
     /*  +F0 */ Fighter* xF0;
     /*  +F4 */ Item* xF4;

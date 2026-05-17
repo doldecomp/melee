@@ -20,6 +20,7 @@ typedef struct HitResult HitResult;
 typedef struct HitVictim HitVictim;
 typedef struct HSD_AllocEntry HSD_AllocEntry;
 typedef struct HurtCapsule HurtCapsule;
+typedef struct lbCardNew_SnapshotEntry lbCardNew_SnapshotEntry;
 typedef struct lbRefract_CallbackData lbRefract_CallbackData;
 typedef struct PreloadCache PreloadCache;
 typedef struct PreloadCacheScene PreloadCacheScene;

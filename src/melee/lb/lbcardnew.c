@@ -8,6 +8,7 @@
 #include <sysdolphin/baselib/hsd_3B27.h>
 #include <sysdolphin/baselib/memory.h>
 #include <melee/lb/lb_0192.h>
+#include <MSL/strtoul.h>
 
 int lb_80019BB8(int card_result)
 {
@@ -153,9 +154,9 @@ void lb_80019EF0(int chan, UNK_T save_data, UNK_T status_out, UNK_T callback)
     lb_80432A68.unk_14 = NULL;
     lb_80432A68.unk_18 = 0;
     lb_80432A68.unk_1C = 0;
-    lb_80432A68.unk_20 = 0;
-    lb_80432A68.unk_24 = NULL;
-    lb_80432A68.unk_28 = NULL;
+    lb_80432A68.snapshot_entries = NULL;
+    lb_80432A68.free_blocks = NULL;
+    lb_80432A68.free_files = NULL;
     lb_80432A68.unk_34 = 0x10;
 
     for (i = 0; i < 9; i++) {
@@ -315,6 +316,33 @@ void lb_8001A4CC(const char* filename, UNK_T file_entries)
     task->x8 = file_entries;
 }
 
+struct CardEntry {
+    int file_size, file_flags, data_size;
+};
+
+struct SnapshotNode {
+    struct SnapshotNode* next;
+    u32 time;
+    s16 file_no;
+    u16 blocks;
+};
+
+inline void setup_card_entries(void* ctx, void* icon, struct CardEntry* entry)
+{
+    int i;
+
+    hsd_803B2ADC(ctx, icon);
+    i = 0;
+    while (entry->file_size != -1) {
+        if (entry->file_size != 0) {
+            hsd_803AC3E0(ctx, i, entry->file_size, entry->file_flags,
+                         entry->data_size);
+        }
+        i++;
+        entry++;
+    }
+}
+
 int lb_8001A594(char* filename, void* file_entries)
 {
     int open_result;
@@ -324,10 +352,6 @@ int lb_8001A594(char* filename, void* file_entries)
     int unused_2;
     int unused_3;
     int unused_4;
-    int i;
-    struct {
-        int unk0, unk4, unk8;
-    }* entry;
     u8 _[8];
 
     unused_2 = 0;
@@ -365,18 +389,8 @@ int lb_8001A594(char* filename, void* file_entries)
                 } else if (lb_80432A68.unused_files == 0) {
                     lb_80432A68.unk_34 = 6;
                 } else {
-                    entry = file_entries;
-                    hsd_803B2ADC(&lb_80432A68.unk_A8, lb_80432A68.unk_C);
-                    i = 0;
-                    while (entry->unk0 != -1) {
-                        if (entry->unk0 != 0) {
-                            hsd_803AC3E0((void*) &lb_80432A68.unk_A8, i,
-                                         entry->unk0, entry->unk4,
-                                         entry->unk8);
-                        }
-                        i++;
-                        entry++;
-                    }
+                    setup_card_entries(&lb_80432A68.unk_A8, lb_80432A68.unk_C,
+                                       file_entries);
                     if (lb_80432A68.unused_bytes <
                         (hsd_803B2674((void*) &lb_80432A68.unk_A8) << 0xD))
                     {
@@ -519,9 +533,7 @@ int lb_8001ACEC(UNK_T file_entries)
     int hsd_result;
     int unused;
     int i;
-    struct {
-        int unk0, unk4, unk8;
-    }* entries = file_entries; ///< @todo this seems fake
+    struct CardEntry* entries = file_entries; ///< @todo this seems fake
     volatile int cached_flag;
     volatile int pad_stack;
     volatile int cached_data;
@@ -531,8 +543,8 @@ int lb_8001ACEC(UNK_T file_entries)
         cached_flag = lb_80432A68.xF4[i];
         cached_data = lb_80432A68.xD0[i];
         if (lb_80432A68.xF4[i] != 0) {
-            hsd_result = hsd_803B29D8(&lb_80432A68.unk_A8, i, entries[i].unk8,
-                                      fn_8001A0B0);
+            hsd_result = hsd_803B29D8(&lb_80432A68.unk_A8, i,
+                                      entries[i].data_size, fn_8001A0B0);
             lb_80432A68.unk_38[i].unk_0 = convert_hsdcard_error(hsd_result);
             lb_80432A68.unk_38[i].unk_4 = hsd_result;
             file_error = lb_80432A68.unk_38[i].unk_0;
@@ -555,9 +567,7 @@ int lb_8001AE38(UNK_T file_entries)
     int hsd_result;
     int unused;
     int i;
-    struct {
-        int unk0, unk4, unk8;
-    }* entries = file_entries; ///< @todo this seems fake
+    struct CardEntry* entries = file_entries; ///< @todo this seems fake
     volatile int cached_flag;
     volatile int pad_stack;
     volatile int cached_data;
@@ -567,8 +577,8 @@ int lb_8001AE38(UNK_T file_entries)
         cached_flag = lb_80432A68.xF4[i];
         cached_data = lb_80432A68.xD0[i];
         if (lb_80432A68.xF4[i] != 0) {
-            hsd_result = hsd_803B2A4C(&lb_80432A68.unk_A8, i, entries[i].unk8,
-                                      fn_8001A0B0);
+            hsd_result = hsd_803B2A4C(&lb_80432A68.unk_A8, i,
+                                      entries[i].data_size, fn_8001A0B0);
             lb_80432A68.unk_38[i].unk_0 = convert_hsdcard_error(hsd_result);
             lb_80432A68.unk_38[i].unk_4 = hsd_result;
             file_error = lb_80432A68.unk_38[i].unk_0;
@@ -619,10 +629,69 @@ int lb_8001B068(void)
     return lb_80432A68.unk_34;
 }
 
-/// UnclePunch map calls this "MemoryCard_ScanForSnapshots"
-/// Stubbing it out for now
 int lb_8001B14C(void)
 {
+    struct SnapshotNode* head;
+    CARDStat stat[1];
+    struct SnapshotNode* node;
+    char* company;
+    char* game;
+    struct SnapshotNode* nodes;
+    DVDDiskID* disk_id;
+    int file_no;
+    int count;
+    int i;
+    struct SnapshotNode** scan;
+
+    head = NULL;
+    disk_id = DVDGetCurrentDiskID();
+    lb_80432A68.x8AC = 0;
+    if (lb_80432A68.free_blocks != NULL) {
+        *lb_80432A68.free_blocks = lb_80432A68.unused_bytes / 0x2000;
+    }
+    if (lb_80432A68.free_files != NULL) {
+        *lb_80432A68.free_files = lb_80432A68.unused_files;
+    }
+    nodes = HSD_MemAlloc(0x5F4);
+    node = nodes;
+    company = (char*) stat[0].company;
+    game = (char*) stat[0].gameName;
+    count = 0;
+    for (file_no = 0; file_no < 0x7F; file_no++) {
+        if (CARDGetStatus(lb_80432A68.chan, file_no, stat) == 0 &&
+            strncmp(company, disk_id->company, 2) == 0 &&
+            strncmp(game, disk_id->gameName, 4) == 0 &&
+            isdigit(stat[0].fileName[0]))
+        {
+            node->time = strtoul(stat[0].fileName, NULL, 10);
+            node->file_no = file_no;
+            node->blocks = stat[0].length >> 13;
+            scan = &head;
+            while (*scan != NULL && (*scan)->time > node->time) {
+                scan = &(*scan)->next;
+            }
+            node->next = *scan;
+            count++;
+            *scan = node;
+            node++;
+        }
+    }
+    {
+        struct SnapshotNode** copy_scan;
+        int j;
+
+        copy_scan = &head;
+        for (j = 0; j < count; j++) {
+            lb_80432A68.snapshot_entries[j].time = (*copy_scan)->time;
+            lb_80432A68.snapshot_entries[j].file_no = (*copy_scan)->file_no;
+            lb_80432A68.snapshot_entries[j].blocks = (*copy_scan)->blocks;
+            copy_scan = &(*copy_scan)->next;
+        }
+    }
+    for (i = count; i < 0x7F; i++) {
+        lb_80432A68.snapshot_entries[i].file_no = -1;
+    }
+    HSD_Free(nodes);
     lb_80432A68.unk_34 = 0;
     return lb_80432A68.unk_34;
 }
@@ -755,7 +824,16 @@ int lb_8001B99C(int chan, const char* filename, UNK_T status_out)
 
 int lb_8001BA44(int chan, const char* filename, UNK_T status_out)
 {
-    s32 result = lb_8001B99C(chan, filename, status_out);
+    s32 result;
+    u8 _[0x10];
+
+    lb_80019EF0(chan, 0, status_out, 0);
+    setup_task(0, 0x10000);
+    setup_task(1, 0x201);
+    lb_8001A4CC_dontinline(filename, 0);
+    setup_task(3, -1);
+    strncpy(setup_task(5, 0xE)->x10, filename, 0x20);
+    result = lb_80019CB0(0x10);
     if (result == 0xB) {
         do {
         } while ((result = lb_8001B6F8()) == 0xB);
@@ -817,9 +895,23 @@ int lb_8001BC18(int chan, char* filename, void** file_entries, void* save_data,
                 const char* write_buf, int write_offset, int write_len,
                 UNK_T status_out)
 {
-    s32 result =
-        lb_8001BB48_inline(chan, filename, file_entries, save_data, write_buf,
-                           write_offset, write_len, status_out);
+    int new_var;
+    s32 result;
+    u8 _[0x18];
+
+    lb_80019EF0(chan, save_data, status_out, 0);
+
+    setup_task(0, 0x10000);
+    new_var = 0x20;
+    setup_task(1, 0x201);
+    lb_8001A4CC_dontinline(filename, file_entries);
+    setup_task(3, -1);
+    memcpy(setup_task(7, 0x10)->x10, filename, new_var);
+    lb_80432A68.unk_14 = write_buf;
+    lb_80432A68.unk_18 = write_offset;
+    lb_80432A68.unk_1C = write_len;
+    result = lb_80019CB0(0x10);
+
     if (result == 0xB) {
         do {
         } while ((result = lb_8001B6F8()) == 0xB);
@@ -915,7 +1007,8 @@ int lb_8001BF04(int chan, char* filename, void* file_entries,
     return lb_80019CB0(0x10);
 }
 
-int lb_8001BFD8(int chan, UNK_T snap_buf, UNK_T snap_count, UNK_T snap_max)
+int lb_8001BFD8(int chan, lbCardNew_SnapshotEntry* snapshot_entries,
+                int* free_blocks, int* free_files)
 {
     s32 result;
     u8 _[0x18];
@@ -926,9 +1019,9 @@ int lb_8001BFD8(int chan, UNK_T snap_buf, UNK_T snap_count, UNK_T snap_max)
     lb_8001A4CC_dontinline(NULL, 0);
     setup_task(3, -1);
     setup_task(12, 0x80);
-    lb_80432A68.unk_20 = snap_buf;
-    lb_80432A68.unk_24 = snap_count;
-    lb_80432A68.unk_28 = snap_max;
+    lb_80432A68.snapshot_entries = snapshot_entries;
+    lb_80432A68.free_blocks = free_blocks;
+    lb_80432A68.free_files = free_files;
     result = lb_80019CB0(0x10);
     if (result == 0xB) {
         do {
@@ -1034,24 +1127,29 @@ int lb_8001C404(int chan)
 
 int lb_8001C4A8(void* file_entries, void* icon_data)
 {
-    struct {
-        int unk0, unk4, unk8;
-    }* entry;
-    int i;
+    void* icon = icon_data;
+    struct CardEntry* entry;
+    s32* ctx;
 
     entry = file_entries;
-    hsd_803B24E4(&lb_80432A68.unk_A8, 0, 0x2000, lb_80432A68.lib_area);
-    hsd_803B2ADC(&lb_80432A68.unk_A8, icon_data);
-    i = 0;
-    while (entry->unk0 != -1) {
-        if (entry->unk0 != 0) {
-            hsd_803AC3E0((struct hsd_803AC3E0_arg0_t*) &lb_80432A68.unk_A8, i,
-                         entry->unk0, entry->unk4, entry->unk8);
+    ctx = &lb_80432A68.unk_A8;
+    hsd_803B24E4(ctx, 0, 0x2000, lb_80432A68.lib_area);
+    hsd_803B2ADC(ctx, icon);
+    {
+        int i;
+
+        i = 0;
+        while (entry->file_size != -1) {
+            if (entry->file_size != 0) {
+                hsd_803AC3E0((struct hsd_803AC3E0_arg0_t*) ctx, i,
+                             entry->file_size, entry->file_flags,
+                             entry->data_size);
+            }
+            i++;
+            entry++;
         }
-        i++;
-        entry++;
     }
-    return hsd_803B2674((CardState*) &lb_80432A68.unk_A8);
+    return hsd_803B2674((CardState*) ctx);
 }
 
 void lb_8001C550(void)
