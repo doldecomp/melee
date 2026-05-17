@@ -146,6 +146,17 @@ void lb_8000FD18(DynamicsDesc* desc)
     desc->data = NULL;
 }
 
+static inline struct DynamicsData* popDynamicsData(void)
+{
+    struct DynamicsData* entry = cur_data;
+    if (entry == NULL) {
+        return NULL;
+    }
+    cur_data = entry->next;
+    entry->next = NULL;
+    return entry;
+}
+
 void lb_8000FD48(HSD_JObj* jobj, DynamicsDesc* desc, size_t max_count)
 {
     struct DynamicsData* prev;
@@ -163,27 +174,11 @@ void lb_8000FD48(HSD_JObj* jobj, DynamicsDesc* desc, size_t max_count)
     desc->count = 0;
 
     while ((s32) desc->count < (s32) max_count) {
-        struct DynamicsData* entry;
-
         if ((s32) desc->count == 0) {
-            entry = cur_data;
-            if (entry == NULL) {
-                entry = NULL;
-            } else {
-                cur_data = entry->next;
-                entry->next = NULL;
-            }
-            prev = entry;
+            prev = popDynamicsData();
             desc->data = prev;
         } else {
-            entry = cur_data;
-            if (entry == NULL) {
-                entry = NULL;
-            } else {
-                cur_data = entry->next;
-                entry->next = NULL;
-            }
-            prev->next = entry;
+            prev->next = popDynamicsData();
             prev = prev->next;
         }
 
