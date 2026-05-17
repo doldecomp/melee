@@ -16,21 +16,21 @@ extern s32 hsd_804D79C0;
 extern s32 hsd_804D79C4;
 extern u8 hsd_804D79C8;
 u8 lbl_80430C40[0x40] = {
-    0x10, 0x0B, 0x0A, 0x10, 0x18, 0x28, 0x33, 0x3D, 0x0C, 0x0C, 0x0E, 0x13,
-    0x1A, 0x3A, 0x3C, 0x37, 0x0E, 0x0D, 0x10, 0x18, 0x28, 0x39, 0x45, 0x38,
-    0x0E, 0x11, 0x16, 0x1D, 0x33, 0x57, 0x50, 0x3E, 0x12, 0x16, 0x25, 0x38,
-    0x44, 0x6D, 0x67, 0x4D, 0x18, 0x23, 0x37, 0x40, 0x51, 0x68, 0x71, 0x5C,
-    0x31, 0x40, 0x4E, 0x57, 0x67, 0x79, 0x78, 0x65, 0x48, 0x5C, 0x5F, 0x62,
-    0x70, 0x64, 0x67, 0x63,
+    0x10, 0x0B, 0x0A, 0x10, 0x18, 0x28, 0x33, 0x3D, 0x0C, 0x0C, 0x0E,
+    0x13, 0x1A, 0x3A, 0x3C, 0x37, 0x0E, 0x0D, 0x10, 0x18, 0x28, 0x39,
+    0x45, 0x38, 0x0E, 0x11, 0x16, 0x1D, 0x33, 0x57, 0x50, 0x3E, 0x12,
+    0x16, 0x25, 0x38, 0x44, 0x6D, 0x67, 0x4D, 0x18, 0x23, 0x37, 0x40,
+    0x51, 0x68, 0x71, 0x5C, 0x31, 0x40, 0x4E, 0x57, 0x67, 0x79, 0x78,
+    0x65, 0x48, 0x5C, 0x5F, 0x62, 0x70, 0x64, 0x67, 0x63,
 };
 
 u8 lbl_80430C80[0x40] = {
-    0x11, 0x12, 0x18, 0x2F, 0x63, 0x63, 0x63, 0x63, 0x12, 0x15, 0x1A, 0x42,
-    0x63, 0x63, 0x63, 0x63, 0x18, 0x1A, 0x38, 0x63, 0x63, 0x63, 0x63, 0x63,
-    0x2F, 0x42, 0x63, 0x63, 0x63, 0x63, 0x63, 0x63, 0x63, 0x63, 0x63, 0x63,
-    0x63, 0x63, 0x63, 0x63, 0x63, 0x63, 0x63, 0x63, 0x63, 0x63, 0x63, 0x63,
-    0x63, 0x63, 0x63, 0x63, 0x63, 0x63, 0x63, 0x63, 0x63, 0x63, 0x63, 0x63,
-    0x63, 0x63, 0x63, 0x63,
+    0x11, 0x12, 0x18, 0x2F, 0x63, 0x63, 0x63, 0x63, 0x12, 0x15, 0x1A,
+    0x42, 0x63, 0x63, 0x63, 0x63, 0x18, 0x1A, 0x38, 0x63, 0x63, 0x63,
+    0x63, 0x63, 0x2F, 0x42, 0x63, 0x63, 0x63, 0x63, 0x63, 0x63, 0x63,
+    0x63, 0x63, 0x63, 0x63, 0x63, 0x63, 0x63, 0x63, 0x63, 0x63, 0x63,
+    0x63, 0x63, 0x63, 0x63, 0x63, 0x63, 0x63, 0x63, 0x63, 0x63, 0x63,
+    0x63, 0x63, 0x63, 0x63, 0x63, 0x63, 0x63, 0x63, 0x63,
 };
 u8 lbl_80431090[0x5A8] = {
     0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01,
@@ -169,11 +169,13 @@ u8 lbl_80431638[0x88] = {
     0x08, 0x09, 0x0A, 0x0B,
 };
 
-u16 lbl_80431678[0xC] = { 0, 2, 3, 4, 5, 6, 0xE, 0x1E, 0x3E, 0x7E, 0xFE, 0x1FE };
+u16 lbl_80431678[0xC] = {
+    0, 2, 3, 4, 5, 6, 0xE, 0x1E, 0x3E, 0x7E, 0xFE, 0x1FE
+};
 u8 lbl_80431690[0xC] = { 2, 3, 3, 3, 3, 3, 4, 5, 6, 7, 8, 9 };
-u16 lbl_8043169C[0xC] = { 0, 1, 2, 6, 0xE, 0x1E, 0x3E, 0x7E, 0xFE, 0x1FE, 0x3FE, 0x7FE };
+u16 lbl_8043169C[0xC] = { 0,    1,    2,    6,     0xE,   0x1E,
+                          0x3E, 0x7E, 0xFE, 0x1FE, 0x3FE, 0x7FE };
 u8 lbl_804316B4[0xC] = { 2, 2, 2, 3, 4, 5, 6, 7, 8, 9, 0xA, 0xB };
-
 
 typedef struct HSDJpegWork {
     u8 pad_000[0x118];
@@ -227,9 +229,7 @@ static const u8 lbl_803B9670[] = {
 extern s32 hsd_804D79AC;
 extern u8 hsd_804D79B0;
 
-void fn_803B376C(void* arg0);
-void hsd_803B3CD8(s32 arg0);
-void fn_803B376C(void* arg0)
+void fn_803B376C(UNK_T arg0)
 {
     s32* data = arg0;
     s32* p;
@@ -327,8 +327,10 @@ void hsd_803B3CD8(s32 arg0)
     HSDJpegWork* work = (HSDJpegWork*) &hsd_804D2648;
     const u16* dc_code = arg0 == 0 ? lbl_80431678 : lbl_8043169C;
     const u8* dc_size = arg0 == 0 ? lbl_80431690 : lbl_804316B4;
-    const u16* ac_code = (const u16*) (arg0 == 0 ? &lbl_80431090[0x80] : &lbl_80431090[0x268]);
-    const u8* ac_size = arg0 == 0 ? &lbl_80431090[0x1C4] : &lbl_80431090[0x3AC];
+    const u16* ac_code =
+        (const u16*) (arg0 == 0 ? &lbl_80431090[0x80] : &lbl_80431090[0x268]);
+    const u8* ac_size =
+        arg0 == 0 ? &lbl_80431090[0x1C4] : &lbl_80431090[0x3AC];
     int diff = work->tmp[0] - work->pred[arg0];
     int value = diff;
     int bits = 0;
@@ -347,7 +349,26 @@ void hsd_803B3CD8(s32 arg0)
         bits++;
         value >>= 1;
     }
-#define HSD_JPEG_EMIT_BITS(code_, size_)                                              do {                                                                                  int _size = (size_);                                                              int _code = (code_);                                                              while (_size-- > 0) {                                                                 hsd_804D79AC += 1;                                                                hsd_804D79B0 <<= 1;                                                               if (_code & (1 << _size)) {                                                           hsd_804D79B0 |= 1;                                                            }                                                                                 if (hsd_804D79AC == 8) {                                                              hsd_803B3344(hsd_804D79B0);                                                       if (hsd_804D79B0 == 0xFF) {                                                           hsd_803B3344(0);                                                              }                                                                                 hsd_804D79AC = 0;                                                                 hsd_804D79B0 = 0;                                                             }                                                                             }                                                                             } while (0)
+#define HSD_JPEG_EMIT_BITS(code_, size_)                                      \
+    do {                                                                      \
+        int _size = (size_);                                                  \
+        int _code = (code_);                                                  \
+        while (_size-- > 0) {                                                 \
+            hsd_804D79AC += 1;                                                \
+            hsd_804D79B0 <<= 1;                                               \
+            if (_code & (1 << _size)) {                                       \
+                hsd_804D79B0 |= 1;                                            \
+            }                                                                 \
+            if (hsd_804D79AC == 8) {                                          \
+                hsd_803B3344(hsd_804D79B0);                                   \
+                if (hsd_804D79B0 == 0xFF) {                                   \
+                    hsd_803B3344(0);                                          \
+                }                                                             \
+                hsd_804D79AC = 0;                                             \
+                hsd_804D79B0 = 0;                                             \
+            }                                                                 \
+        }                                                                     \
+    } while (0)
 
     HSD_JPEG_EMIT_BITS(dc_code[bits], dc_size[bits]);
     if (bits != 0) {
@@ -531,7 +552,6 @@ void hsd_803B4D64(s32 arg0, s32 arg1)
     }
     longjmp(env, 1);
 }
-
 
 int hsd_803B51C8(int arg0, int arg1, int arg2, char* arg3, int arg4)
 {
@@ -746,7 +766,7 @@ void fn_803B61B4(void* arg0)
     }
 }
 
-void fn_803B6820(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
+void fn_803B6820(UNK_T arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
 {
     HSDJpegWork* work = (HSDJpegWork*) hsd_804D2E70;
     s32 temp_r18;
@@ -818,7 +838,8 @@ void fn_803B6820(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     var_r6 = 0;
     do {
         var_r25 = var_r22;
-        dst = (u8*) arg0 + ((((arg1 / 4) * 0x10) + ((temp_r6 << 6) * var_r23)) * 2);
+        dst = (u8*) arg0 +
+              ((((arg1 / 4) * 0x10) + ((temp_r6 << 6) * var_r23)) * 2);
         var_r7 = 0;
         var_r24 = 0;
         do {
@@ -837,7 +858,8 @@ void fn_803B6820(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
                               (((var_r8_2 % 2) * 4) + ((var_r8_2 / 2) << 5));
                         temp_r20 = work->cr[idx];
                         temp_r18 = work->cb[idx];
-                        temp_f0 = (f32) ((1.402 * (f64) temp_r20) + (f64) temp_r19);
+                        temp_f0 =
+                            (f32) ((1.402 * (f64) temp_r20) + (f64) temp_r19);
                         if (temp_f0 < 0.0f) {
                             r = 0;
                         } else if (temp_f0 > 255.0f) {
@@ -845,8 +867,9 @@ void fn_803B6820(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
                         } else {
                             r = (u8) (s32) temp_f0;
                         }
-                        temp_f0_2 = -((0.7139f * (f32) temp_r20) -
-                                      -((0.3441f * (f32) temp_r18) - (f32) temp_r19));
+                        temp_f0_2 =
+                            -((0.7139f * (f32) temp_r20) -
+                              -((0.3441f * (f32) temp_r18) - (f32) temp_r19));
                         if (temp_f0_2 < 0.0f) {
                             g = 0;
                         } else if (temp_f0_2 > 255.0f) {
@@ -854,9 +877,10 @@ void fn_803B6820(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
                         } else {
                             g = (u8) (s32) temp_f0_2;
                         }
-                        temp_f0_3 = (f32) -((0.0012 * (f64) temp_r20) -
-                                            (f64) ((1.7718f * (f32) temp_r18) +
-                                                   (f32) temp_r19));
+                        temp_f0_3 =
+                            (f32) - ((0.0012 * (f64) temp_r20) -
+                                     (f64) ((1.7718f * (f32) temp_r18) +
+                                            (f32) temp_r19));
                         if (temp_f0_3 < 0.0f) {
                             b = 0;
                         } else if (temp_f0_3 > 255.0f) {
@@ -864,10 +888,12 @@ void fn_803B6820(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
                         } else {
                             b = (u8) (s32) temp_f0_3;
                         }
-                        *(u16*) (dst + ((((var_r8_2 << 5) & 0x20) +
-                                         (temp_r6 * 0x10 * ((var_r8_2 * 4) & 8))) * 2)) =
-                            ((g << 3) & 0x07E0) | ((r << 8) & 0xF800) |
-                            ((b >> 3) & 0x001F);
+                        *(u16*) (dst +
+                                 ((((var_r8_2 << 5) & 0x20) +
+                                   (temp_r6 * 0x10 * ((var_r8_2 * 4) & 8))) *
+                                  2)) = ((g << 3) & 0x07E0) |
+                                        ((r << 8) & 0xF800) |
+                                        ((b >> 3) & 0x001F);
                         var_r27 += 64;
                         var_r8_2 += 1;
                         var_ctr_2 -= 1;
@@ -889,7 +915,6 @@ void fn_803B6820(void* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
         var_r21 += 4;
     } while (var_r6 < 2);
 }
-
 
 int hsd_803B6BE4(char* arg0, int arg1, void* arg2)
 {
