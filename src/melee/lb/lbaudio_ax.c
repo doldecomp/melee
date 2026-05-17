@@ -2034,8 +2034,8 @@ s32 fn_80026650(void)
 
     for (priority = 4; priority >= 0; priority--) {
         s8(*arr_5d0)[4] = s32_arr_803BB5D0;
-        int* arr_38a4 = lbl_80433710.x194;
-        int* arr_3984 = lbl_80433710.x274;
+        int* arr_38a4 = lbl_804338A4;
+        int* arr_3984 = lbl_80433984;
 
         for (i = 0; i < 0x37; i++) {
             if (priority == arr_5d0[i][1] && arr_38a4[i] == 1 &&
