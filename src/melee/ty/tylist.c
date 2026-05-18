@@ -529,14 +529,15 @@ next:
     un_80312904(arg, 0x63);
     un_80313464(arg);
 }
-s8 un_8031305C(TyListState* state, s8 movedFlag)
+
+s32 un_8031305C(void* a, TyListState* state, s8 movedFlag)
 {
     TyListArg* entry;
     f32 delta;
     s32 i;
-    PAD_STACK(8);
-
-    if ((s8) state->x29F > 0) {
+    PAD_STACK(0xC);
+    i = ((s8) state->x29F) > 0;
+    if (i) {
         delta = state->x2A4;
         if ((s8) state->x2A1 == 0) {
             delta *= un_804DDE50;
@@ -791,7 +792,7 @@ void un_80313774(void)
 
     for (i = 0; i < state->x2B8; i++) {
         un_80313358(state, 0, 1, 1);
-        un_8031305C(state, 0);
+        un_8031305C(NULL, state, 0);
     }
 
     entry = &state->entries[0];
@@ -840,7 +841,7 @@ void fn_80313BD8(HSD_GObj* gobj)
     s8 v;
 
     if (un_GetTrophyTotal() > 10) {
-        if (un_8031305C(state, 1) != 0) {
+        if (un_8031305C(g, state, 1) != 0) {
             return;
         }
         if ((s8) state->pad_2A0 != 0) {
