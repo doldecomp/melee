@@ -480,8 +480,7 @@ void hsd_803A949C(s32 arg1)
             state->x270[slot] = 0;
         } else {
             state->x270[slot] = block->x12;
-            hsd_803AC558((struct hsd_803AC3E0_arg0_t*) state,
-                         ((u8*) block) + 0x13);
+            hsd_803AC558((CardState*) state, ((u8*) block) + 0x13);
         }
         break;
     }
