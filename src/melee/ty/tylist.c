@@ -406,7 +406,7 @@ done_first_dirty:
             }
         }
     done_inner_dirty:
-        row = row->x4;
+        row = row->links[1];
         var_r28++;
         if (var_r28 >= un_GetTrophyTotal()) {
             var_r28 = 0;
@@ -453,7 +453,7 @@ void un_80312E88(TyListArg* arg, float delta)
     data = un_804A2AC0;
     i = 0;
 loop:
-    if ((jobj = ptr->xC) == NULL) {
+    if ((jobj = ptr->jobjs[0]) == NULL) {
         goto next;
     }
     if (i == 2) {
@@ -526,7 +526,7 @@ next:
     un_80312904(arg, 0x63);
     un_80313464(arg);
 }
-s8 un_8031305C(void* a, TyListState* state, s8 movedFlag)
+s8 un_8031305C(TyListState* state, s8 movedFlag)
 {
     TyListArg* entry;
     f32 delta;
@@ -567,7 +567,7 @@ s8 un_8031305C(void* a, TyListState* state, s8 movedFlag)
                         entry->x24 = (s8) -1;
                     }
                 }
-                entry = entry->x4;
+                entry = entry->links[1];
                 i++;
             }
             if ((s8) state->x2A1 == 0) {
@@ -576,20 +576,20 @@ s8 un_8031305C(void* a, TyListState* state, s8 movedFlag)
                     state->x270->idx = 0;
                 }
                 un_80312904(state->x270, un_804A2D6C.x0C);
-                state->x278 = state->x278->x4;
+                state->x278 = state->x278->links[1];
                 state->selectedIdx = state->x278->idx;
-                state->x270 = state->x270->x4;
-                state->x274 = state->x274->x4;
+                state->x270 = state->x270->links[1];
+                state->x274 = state->x274->links[1];
             } else {
                 state->x274->idx = (s16) (state->x270->idx - 1);
                 if (state->x274->idx < 0) {
                     state->x274->idx = (s16) (un_GetTrophyTotal() - 1);
                 }
                 un_80312904(entry, un_804A2D6C.x0C);
-                state->x278 = state->x278->x0;
+                state->x278 = state->x278->links[0];
                 state->selectedIdx = state->x278->idx;
-                state->x270 = state->x270->x0;
-                state->x274 = state->x274->x0;
+                state->x270 = state->x270->links[0];
+                state->x274 = state->x274->links[0];
             }
             if ((s8) state->x29E > 0) {
                 state->x29E = (u8) (state->x29E - 1);
@@ -626,20 +626,20 @@ void un_80313358(TyListState* state, s8 arg2, s8 arg3, s8 arg4)
     if (state->x2A1 == 0) {
         for (i = 0; i < state->entryCount; i++) {
             TyListArg* entry = &state->entries[i];
-            TyListArg* sub = entry->x0;
+            TyListArg* sub = entry->links[0];
             entry->x2C = sub->x30;
             un_80312904(entry, state->entryCount + 1);
         }
     } else {
         for (i = 0; i < state->entryCount; i++) {
             TyListArg* entry = &state->entries[i];
-            TyListArg* sub = entry->x4;
+            TyListArg* sub = entry->links[1];
             entry->x2C = sub->x30;
             un_80312904(entry, state->entryCount + 1);
         }
     }
 }
-
+extern s32 un_804D6EE8;
 void un_80313464(TyListArg* arg)
 {
     char* data = un_804A2AC0;
@@ -648,18 +648,19 @@ void un_80313464(TyListArg* arg)
 
     val = un_804D6EDC[arg->idx];
 
-    un_803083D8(arg->x14, val);
+    un_803083D8(arg->jobjs[2], val);
 
-    if (arg->x10 != NULL) {
-        HSD_JObjUnref(arg->x10);
-        arg->x10 = NULL;
+    if (arg->jobjs[1] != NULL) {
+        HSD_JObjUnref(arg->jobjs[1]);
+        arg->jobjs[1] = NULL;
     }
 
     if (un_80304924(val) != 0) {
-        arg->x10 = un_80313508(((TyListState*) data)->gobj, un_803FE8D0,
-                               un_804DDE60, arg->x30, un_804DDE48);
+        arg->jobjs[1] = un_80313508(((TyListState*) data)->gobj, un_803FE8D0,
+                                    un_804DDE60, arg->x30, un_804DDE48);
     }
 }
+
 HSD_JObj* un_80313508(void* parent, void* symbol, float x, float y, float z)
 {
     HSD_JObj* jobj;
@@ -678,83 +679,9 @@ HSD_JObj* un_80313508(void* parent, void* symbol, float x, float y, float z)
     jobj = HSD_JObjLoadJoint(joint);
 
     if (x != un_804DDE48 || y != un_804DDE48 || z != un_804DDE48) {
-        // Set X
-        if (jobj == NULL) {
-            __assert(&un_804D5A78, 0x3A4, &un_804D5A80);
-        }
-        jobj->translate.x = x;
-
-        if ((jobj->flags & 0x02000000) == 0) {
-            if (jobj == NULL) {
-                goto skip_x;
-            }
-            if (jobj == NULL) {
-                __assert(&un_804D5A78, 0x234, &un_804D5A80);
-            }
-            {
-                u32 flags = jobj->flags;
-                s32 skip = 0;
-                if ((flags & 0x800000) == 0 && (flags & 0x40)) {
-                    skip = 1;
-                }
-                if (skip == 0) {
-                    HSD_JObjSetMtxDirtySub(jobj);
-                }
-            }
-        }
-    skip_x:
-
-        // Set Y
-        if (jobj == NULL) {
-            __assert(&un_804D5A78, 0x3B3, &un_804D5A80);
-        }
-        jobj->translate.y = y;
-
-        if ((jobj->flags & 0x02000000) == 0) {
-            if (jobj == NULL) {
-                goto skip_y;
-            }
-            if (jobj == NULL) {
-                __assert(&un_804D5A78, 0x234, &un_804D5A80);
-            }
-            {
-                u32 flags = jobj->flags;
-                s32 skip = 0;
-                if ((flags & 0x800000) == 0 && (flags & 0x40)) {
-                    skip = 1;
-                }
-                if (skip == 0) {
-                    HSD_JObjSetMtxDirtySub(jobj);
-                }
-            }
-        }
-    skip_y:
-
-        // Set Z
-        if (jobj == NULL) {
-            __assert(&un_804D5A78, 0x3C2, &un_804D5A80);
-        }
-        jobj->translate.z = z;
-
-        if ((jobj->flags & 0x02000000) == 0) {
-            if (jobj == NULL) {
-                goto skip_z;
-            }
-            if (jobj == NULL) {
-                __assert(&un_804D5A78, 0x234, &un_804D5A80);
-            }
-            {
-                u32 flags = jobj->flags;
-                s32 skip = 0;
-                if ((flags & 0x800000) == 0 && (flags & 0x40)) {
-                    skip = 1;
-                }
-                if (skip == 0) {
-                    HSD_JObjSetMtxDirtySub(jobj);
-                }
-            }
-        }
-    skip_z:;
+        HSD_JObjSetTranslateX(jobj, x);
+        HSD_JObjSetTranslateY(jobj, y);
+        HSD_JObjSetTranslateZ(jobj, z);
     }
 
     if (parent != NULL) {
@@ -775,7 +702,107 @@ HSD_JObj* un_80313508(void* parent, void* symbol, float x, float y, float z)
     return jobj;
 }
 
-/// #un_80313774
+void un_80313774(void)
+{
+    TyListState* state = (TyListState*) un_804A2AC0;
+    TyArchiveData* archive = un_804D6ED8;
+    ToyGlobalsS_* disp = un_804D6EE0;
+    TyListArg* entry;
+    HSD_JObj* root_jobj;
+    f32 step;
+    f32 pos;
+    s16 idx;
+    s32 i;
+
+    state->selectedIdx = un_804A284C[0x12A];
+    state->x29B = un_804A284C[1];
+    state->x29C = un_804A284C[2];
+    state->x2B8 = un_804A284C[3];
+    *(u8*) ((u8*) state + 0x2B9) = un_804A284C[3];
+
+    if (un_GetTrophyTotal() <= 0xA) {
+        state->entryCount = un_GetTrophyTotal() + 2;
+    } else {
+        state->entryCount = 0xC;
+    }
+
+    idx = un_803062BC(disp->x140->x10);
+    for (i = 0; i < state->entryCount; i++) {
+        entry = &state->entries[i];
+        if (i == 0) {
+            entry->links[0] = &state->entries[state->entryCount - 1];
+        } else {
+            entry->links[0] = &state->entries[i - 1];
+        }
+        if (i == state->entryCount - 1) {
+            entry->links[1] = &state->entries[0];
+        } else {
+            entry->links[1] = &state->entries[i + 1];
+        }
+    }
+
+    state->x278 = &state->entries[1];
+    state->x270 = &state->entries[0];
+    state->x274 = &state->entries[state->entryCount - 1];
+
+    state->gobj =
+        (HSD_GObj*) un_80313508(NULL, un_803FE880 + 0xAC, 0.0f, 0.0f, 0.0f);
+    root_jobj = (HSD_JObj*) state->gobj;
+    HSD_ASSERTMSG(0x3E1, root_jobj != NULL, "jobj");
+
+    step = 5.11f - root_jobj->translate.y;
+    pos = -step;
+    state->x2A8 = step;
+
+    entry = &state->entries[0];
+    for (i = 0; i < state->entryCount; i++) {
+        entry->x28 = i;
+        entry->jobjs[0] =
+            un_80313508(state->gobj, un_803FE880 + 0xCC, 0.0f, pos, 0.0f);
+        entry->jobjs[2] =
+            entry->jobjs[0] != NULL ? entry->jobjs[0]->child : NULL;
+        un_80306A48(entry->jobjs[0], NULL, un_803FE880 + 0xE8, NULL,
+                    archive->data, 0);
+        entry->texts[0] = HSD_SisLib_803A5ACC(0, un_804D6EE8, 0.0f, 0.0f,
+                                              17.2f, 640.0f, 64.0f);
+        entry->texts[1] = HSD_SisLib_803A5ACC(0, un_804D6EE8, 0.0f, 0.0f,
+                                              17.2f, 64.0f, 64.0f);
+        entry->texts[2] = HSD_SisLib_803A5ACC(0, un_804D6EE8, 0.0f, 0.0f,
+                                              17.2f, 192.0f, 64.0f);
+        entry->x30 = pos;
+        entry->x24 = i - 1;
+        entry->idx = idx;
+        idx++;
+        if (idx >= un_GetTrophyTotal()) {
+            idx = 0;
+        }
+        pos += step;
+        entry = entry->links[1];
+    }
+
+    state->selectedIdx = state->x278->idx;
+    state->jobj = un_80313508(state->gobj, un_803FE880 + 0x10C, 0.0f,
+                              state->x278->x30, 0.0f);
+    state->x288 = un_80313508(state->gobj, un_803FE880 + 0x12C, 0.0f,
+                              state->entries[state->x2B8].x30, 0.0f);
+
+    for (i = 0; i < state->x2B8; i++) {
+        un_80313358(state, 0, 1, 1);
+        un_8031305C(state, 0);
+    }
+
+    entry = &state->entries[0];
+    for (i = 0; i < state->entryCount; i++) {
+        if (entry->x24 == state->x2B8) {
+            state->selectedIdx = entry->idx;
+            state->x278 = entry;
+            break;
+        }
+        entry++;
+    }
+
+    un_80312BAC(state, state->x2B8);
+}
 
 extern s32 un_804D6EE8;
 extern s32 un_804D6EEC;
@@ -795,7 +822,6 @@ extern f32 un_804DDE98;
 extern char un_803FE5E8[];
 extern char un_804D5A88[3];
 
-s8 un_8031305C(void* a, TyListState* state, s8 movedFlag);
 void un_80312BAC(TyListState* state, s8 arg1);
 
 void fn_80313BD8(HSD_GObj* gobj)
@@ -811,7 +837,7 @@ void fn_80313BD8(HSD_GObj* gobj)
     s8 v;
 
     if (un_GetTrophyTotal() > 10) {
-        if (un_8031305C(g, state, 1) != 0) {
+        if (un_8031305C(state, 1) != 0) {
             return;
         }
         if ((s8) state->pad_2A0 != 0) {
@@ -945,7 +971,7 @@ void fn_80313BD8(HSD_GObj* gobj)
         if (un_80305C44() & 0x400) {
             HSD_JObjSetFlagsAll(state->jobj, 0x10);
             if (state->entries[0].idx == 0 ||
-                state->entries[0].x0->idx + 9 < un_GetTrophyTotal())
+                state->entries[0].links[0]->idx + 9 < un_GetTrophyTotal())
             {
                 un_80313358(state, 9, 4, 0);
             } else {
@@ -961,7 +987,7 @@ void fn_80313BD8(HSD_GObj* gobj)
             HSD_JObjSetFlagsAll(state->jobj, 0x10);
             idx = state->entries[0].idx;
             if (idx == un_GetTrophyTotal() - 1 ||
-                state->entries[0].x4->idx - 9 > 0)
+                state->entries[0].links[1]->idx - 9 > 0)
             {
                 un_80313358(state, 9, 4, 1);
             } else {
@@ -995,7 +1021,7 @@ void fn_80313BD8(HSD_GObj* gobj)
         for (; i < (s8) state->entryCount; i++, p++) {
             if (((s8*) p)[0x24] == g[0xC]) {
                 state->selectedIdx = p->idx;
-                state->entries[10].x0 = (TyListArg*) p;
+                state->entries[10].links[0] = (TyListArg*) p;
                 lbAudioAx_80024030(2);
                 jobj = state->jobj;
                 ftmp = p->x30;
@@ -1181,14 +1207,17 @@ void un_8031457C(void)
 
 void un_803147C4(void)
 {
-    TyListState* state = (TyListState*) un_804A2AC0;
+    char* data = un_804A2AC0;
     char* strs = un_803FE880;
     TyArchiveData* archive;
+    LightList** jobj;
+    HSD_GObj** gobj;
     PAD_STACK(8);
 
-    memzero(&state->gobj_2AC, 0x18);
+    memzero(data + 0x2AC, 0x18);
     un_8031457C();
-    memzero(&state->gobj_2C4, 0x14);
+    gobj = (HSD_GObj**) (data + 0x2C4);
+    memzero(gobj, 0x14);
 
     archive = un_804D6ED8;
 
@@ -1197,20 +1226,17 @@ void un_803147C4(void)
         OSPanic(strs + 0x70, 0x636, un_804D5A8C);
     }
 
-    {
-        LightList** jobj =
-            HSD_ArchiveGetPublicAddress(archive->data, strs + 0x170);
-        if (jobj != NULL) {
-            state->gobj_2C4 = GObj_Create(2, 3, 0);
-            HSD_GObjObject_80390A70(state->gobj_2C4, (u8) HSD_GObj_804D784A,
-                                    Toy_LoadLObjList(jobj, 0));
-            GObj_SetupGXLink(state->gobj_2C4, HSD_GObj_LObjCallback, 0x34, 0);
-        }
+    jobj = HSD_ArchiveGetPublicAddress(archive->data, strs + 0x170);
+    if (jobj != NULL) {
+        *gobj = GObj_Create(2, 3, 0);
+        HSD_GObjObject_80390A70(*gobj, (u8) HSD_GObj_804D784A,
+                                Toy_LoadLObjList(jobj, 0));
+        GObj_SetupGXLink(*gobj, HSD_GObj_LObjCallback, 0x34, 0);
     }
 
     un_80307470(0);
     if (un_GetTrophyTotal() != 0) {
-        memzero(state, 0x2AC);
+        memzero(data, 0x2AC);
         un_80313774();
     }
     HSD_PadRenewStatus();

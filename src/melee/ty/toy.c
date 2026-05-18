@@ -271,55 +271,6 @@ typedef struct {
     s8 x61;
 } Toy6E68;
 
-typedef struct ToyGlobalsS_ {
-    HSD_GObj* x0;
-    u8 pad4[0x4];
-    HSD_GObj* x8;
-    HSD_GObj* xC;
-    u8 pad10[0x20];
-    void* x30;
-    u8 pad34[0x1C];
-    void* x50;
-    void* x54;
-} ToyGlobalsS_;
-
-typedef struct ToyGlobals2S_ {
-    HSD_GObj* x0;
-    u8 x4;
-} ToyGlobals2S_;
-
-typedef struct ToyGlobals3S_ {
-    u8 pad0[0x10];
-    s32 x10;
-} ToyGlobals3S_;
-
-typedef struct ToyGlobals4S_ {
-    u8 pad0[0x58];
-    s32 x58;
-} ToyGlobals4S_;
-
-typedef struct ToySubStructS_ {
-    u8 pad0[0x10];
-    s16 x10;
-} ToySubStructS_;
-
-typedef struct ToyGlobals5S_ {
-    u8 pad0[0x140];
-    ToySubStructS_* x140;
-    u8 pad144[0x10];
-    s16 x154;
-} ToyGlobals5S_;
-
-typedef struct TyUnk25 {
-    u8 pad[0x140];
-    ToySubStructS_* x140;
-    void* x144;
-    void* x148;
-    void* x14C;
-    void* x150;
-    s16 x154;
-} TyUnk25;
-
 typedef struct {
     u8 pad[0x14];
     void* x14;
@@ -5225,10 +5176,10 @@ void un_80310324(void)
     char* data;
     ToyGlobalsS_* tg;
     ToyGlobalsS_* tg2;
-    ToyGlobals2S_* tg3;
-    ToyGlobals3S_* tg4;
-    ToyGlobals4S_* tg5;
-    ToyGlobals5S_* tg6;
+    ToyGlobalsS_* tg3;
+    ToyGlobalsS_* tg4;
+    ToyGlobalsS_* tg5;
+    ToyGlobalsS_* tg6;
     ToySubStructS_* sub;
     s32 sp[4];
     s32 i;
@@ -5350,7 +5301,7 @@ void un_80310324(void)
 
     un_80307828(0);
 
-    tg5 = (ToyGlobals4S_*) un_804D6E68;
+    tg5 = (ToyGlobalsS_*) un_804D6E68;
     tg5->x58 = 0x95E;
 
     un_8030715C(un_804DDCD8, un_804DDCD8);
@@ -5372,7 +5323,7 @@ void un_80310660(s32 arg0)
     TyCleanupObj* ty28;
     u8* ty27;
     void* ty26;
-    TyUnk25* ty25;
+    ToyGlobalsS_* ty25;
     tyLightData* ty30;
 
     state = (u8*) un_804A26B8;
