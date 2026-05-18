@@ -15,9 +15,7 @@ typedef struct HSDJpegWork {
 /* 3B3408 */ void hsd_803B3408(int, int, int, int);
 /* 3B376C */ void fn_803B376C(void*);
 /* 3B3CD8 */ void hsd_803B3CD8(s32);
-/* 3B46D4 */ UNK_RET hsd_803B46D4(UNK_PARAMS);
 /* 3B46D4 */ void hsd_803B46D4(void);
-/* 3B4A2C */ UNK_RET hsd_803B4A2C(UNK_PARAMS);
 /* 3B4A2C */ void hsd_803B4A2C(void);
 /* 3B4D64 */ void hsd_803B4D64(s32, s32);
 /* 3B51C8 */ int hsd_803B51C8(int, int, int, char*, int);
