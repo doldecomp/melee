@@ -1103,6 +1103,8 @@ void fn_8031438C(HSD_GObj* arg0)
     TyListGobjEntry* entry = (TyListGobjEntry*) &state->gobj_2AC;
     TyListArchive* archive = un_804D6ED8;
     s32 i;
+    HSD_Text* new_var;
+
     PAD_STACK(0x18);
 
     if (state->x2C2 != 0) {
@@ -1125,10 +1127,11 @@ void fn_8031438C(HSD_GObj* arg0)
             }
             state->x290 = HSD_SisLib_803A6754(3, un_804D6EEC);
             state->x290->pos_z = un_804DDE68;
+            new_var = state->x290;
             state->x290->font_size.x = un_804DDE40;
-            state->x290->font_size.y = un_804DDE34;
+            new_var->font_size.y = un_804DDE34;
             state->x290->default_kerning = 1;
-            state->x290->default_alignment = 2;
+            state->x290->default_alignment = (double) 2;
             HSD_SisLib_803A6B98(state->x290, un_804DDE88, un_804DDE8C,
                                 un_804D5A88, un_GetTrophyTotal());
         }
