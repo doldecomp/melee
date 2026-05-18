@@ -46,6 +46,12 @@ typedef struct {
     void* data;
 } TyArchiveData;
 
+typedef struct {
+    u8 pad[0x20];
+    u32 x20;
+    s32 x24;
+} TyListWaitData;
+
 void un_803124BC(void)
 {
     char* data = un_803FDD18;
@@ -1097,29 +1103,25 @@ void fn_8031438C(HSD_GObj* arg0)
     TyListGobjEntry* entry = (TyListGobjEntry*) &state->gobj_2AC;
     TyListArchive* archive = un_804D6ED8;
     s32 i;
-    HSD_GObj* tmp;
     PAD_STACK(0x18);
 
-    if (((s8*) state)[0x2C2] != 0) {
+    if (state->x2C2 != 0) {
         if (entry->x16 > 1) {
             for (i = 0; i < 3; i++) {
-                u8* base_p = (u8*) archive + i * 4;
                 if (i == (s8) state->x29B) {
-                    HSD_JObjReqAnim(*(HSD_JObj**) (base_p + 0x18),
-                                    un_804DDE44);
+                    HSD_JObjReqAnim(archive->jobjs[i], un_804DDE44);
                 } else {
-                    HSD_JObjReqAnim(*(HSD_JObj**) (base_p + 0x18),
-                                    un_804DDE48);
+                    HSD_JObjReqAnim(archive->jobjs[i], un_804DDE48);
                 }
                 HSD_AObjSetRate(archive->jobjs[0]->u.dobj->mobj->tobj->aobj,
                                 un_804DDE48);
             }
             HSD_JObjAnimAll((HSD_JObj*) archive->x0[10]);
         } else {
-            tmp = entry->x4;
-            if (tmp != NULL) {
-                ((s32*) tmp)[9] = 0;
-                ((s32*) tmp)[8] = 0x42100000;
+            TyListWaitData* wait_data = (TyListWaitData*) entry->x4;
+            if (wait_data != NULL) {
+                wait_data->x24 = 0;
+                wait_data->x20 = 0x42100000;
             }
             state->x290 = HSD_SisLib_803A6754(3, un_804D6EEC);
             state->x290->pos_z = un_804DDE68;

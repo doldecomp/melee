@@ -101,7 +101,9 @@ typedef struct TyListState {
     /* 0x2B0 */ struct HSD_GObj* gobj_2B0;
     /* 0x2B4 */ u8 pad_2B4[4];
     /* 0x2B8 */ u8 x2B8;
-    /* 0x2B9 */ u8 pad_2B9[0xB];
+    /* 0x2B9 */ u8 pad_2B9[9];
+    /* 0x2C2 */ s8 x2C2;
+    /* 0x2C3 */ u8 pad_2C3;
     /* 0x2C4 */ struct HSD_GObj* gobj_2C4;
     /* 0x2C8 */ u8 pad_2C8[0x10];
 } TyListState;
