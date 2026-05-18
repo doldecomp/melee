@@ -168,26 +168,6 @@ typedef struct {
 
 #define CMD_QUEUE(base) ((HsdCmdEntry*) ((base) + 0x1210))
 
-s32 hsd_803AAA48(void)
-{
-    BOOL intr;
-    HsdCmdEntry* entry;
-    s32 read_idx;
-    s32 write_idx;
-
-    intr = OSDisableInterrupts();
-    read_idx = hsd_804D7990;
-    write_idx = hsd_804D7994;
-    entry = CMD_QUEUE((u8*) hsd_804D1138);
-    OSRestoreInterrupts(intr);
-
-    if (read_idx == write_idx && entry[read_idx].type == 0) {
-        return 0;
-    }
-
-    return fn_803AA790();
-}
-
 /// @todo Currently 91.67% match - volatile load scheduling in critical section
 s32 fn_803AC168(s32* cmd_buf)
 {
@@ -464,51 +444,6 @@ s32 fn_803AC6B8(struct hsd_803AC3E0_arg0_t* file_desc, s32 file_count)
     }
 
     return total;
-}
-
-s32 fn_803AC7DC(CardState* state)
-{
-    struct hsd_803AC3E0_arg0_t* file_desc = (struct hsd_803AC3E0_arg0_t*) state;
-    s32 blocks;
-    s32 i;
-    s32 max_extra;
-    s32 total;
-
-    total = fn_803AC634(file_desc, 0);
-    if (total > 0) {
-        total--;
-    }
-    max_extra = 0;
-
-    for (i = 1; i < 9; i++) {
-        if (file_desc->x4C[i] <= 0) {
-            continue;
-        }
-
-        blocks = fn_803AC634(file_desc, i);
-        switch (file_desc->x28[i]) {
-        case 0:
-            total += blocks * 2;
-            break;
-        case 1:
-            total += blocks;
-            if (max_extra < blocks) {
-                max_extra = blocks;
-            }
-            break;
-        case 2:
-            total += blocks;
-            if (max_extra < 1) {
-                max_extra = 1;
-            }
-            break;
-        case 3:
-            total += blocks;
-            break;
-        }
-    }
-
-    return total + max_extra;
 }
 
 s32 fn_803ACB74(s32 seq_a, s32 seq_b)
@@ -818,63 +753,6 @@ s32 fn_803ACFC0(CardState* state, s32 block_idx, s32 file_id, s32 seq_num,
     }
 
     return result;
-}
-
-s32 fn_803AD16C(CardState* arg0)
-{
-    CardStateExt* state = (CardStateExt*) arg0;
-    s32 file_id;
-    s32 phys;
-
-    if (state->x460 != fn_803AC7DC(arg0)) {
-        return -257;
-    }
-
-    for (phys = 0; phys <= state->x460; phys++) {
-        if (state->x170[phys] < -0x7FFF) {
-            return -257;
-        }
-    }
-
-    for (file_id = 0; file_id < 9; file_id++) {
-        s32 block_idx;
-        s32 blocks_before;
-        s32 file_blocks;
-
-        if (state->x4C[file_id] <= 0) {
-            continue;
-        }
-
-        if (file_id == 0) {
-            blocks_before = 0;
-        } else {
-            blocks_before = state->x4C[0] > 0
-                                ? fn_803AC634((struct hsd_803AC3E0_arg0_t*) arg0,
-                                              0)
-                                : 1;
-            for (block_idx = 1; block_idx < file_id; block_idx++) {
-                blocks_before +=
-                    fn_803AC634((struct hsd_803AC3E0_arg0_t*) arg0, block_idx);
-            }
-        }
-
-        file_blocks = fn_803AC634((struct hsd_803AC3E0_arg0_t*) arg0, file_id);
-        for (block_idx = 0; block_idx < file_blocks; block_idx++) {
-            s32 found = 0;
-
-            for (phys = 0; phys <= state->x460; phys++) {
-                if (state->x170[phys] == blocks_before + block_idx) {
-                    found++;
-                }
-            }
-
-            if (found == 0) {
-                return -259;
-            }
-        }
-    }
-
-    return 0;
 }
 
 /// @todo Currently 93.46% match - stwx vs stw+disp in rollback, reg swap in
@@ -1499,77 +1377,6 @@ s32 fn_803AE7F8(struct hsd_803AC3E0_arg0_t* arg0, s32 arg1, s32 arg2, s32 arg3,
     return repair_result;
 }
 
-s32 fn_803B1338(CardState* state, s32 arg1)
-{
-    CardStateExt* ext = (CardStateExt*) state;
-    s32 file_id;
-    s32 result;
-    u8* base;
-
-    base = ext->x0;
-    result = 0;
-    for (file_id = 0; file_id < 9; file_id++) {
-        if (ext->x4C[file_id] <= 0) {
-            continue;
-        }
-
-        switch (ext->x28[file_id]) {
-        case 0:
-            result = fn_803AE7F8((struct hsd_803AC3E0_arg0_t*) state, file_id,
-                                 (s32) base + ext->x70[file_id], arg1, 0);
-            break;
-        case 1:
-            result = fn_803AF3F0((struct hsd_803AC3E0_arg0_t*) state, file_id,
-                                 (s32) base + ext->x70[file_id], arg1, 0);
-            break;
-        case 3:
-            result = fn_803B0120((struct hsd_803AC3E0_arg0_t*) state, file_id,
-                                 (s32) base + ext->x70[file_id], arg1, 0);
-            break;
-        default:
-            result = -257;
-            break;
-        }
-
-        if (result < 0) {
-            return result;
-        }
-    }
-
-    return result;
-}
-
-s32 fn_803AF3F0(struct hsd_803AC3E0_arg0_t* state, s32 file_id, s32 data,
-                s32 async, s32 callback)
-{
-    if (file_id >= 9) {
-        return -257;
-    }
-    if (state->x4C[file_id] <= 0) {
-        return 0;
-    }
-    return fn_803AE7F8(state, file_id, data, async, callback);
-}
-
-s32 fn_803B0120(struct hsd_803AC3E0_arg0_t* state, s32 file_id, s32 data,
-                s32 async, s32 callback)
-{
-    s32 result;
-
-    if (file_id >= 9) {
-        return -257;
-    }
-    if (state->x4C[file_id] <= 0) {
-        return 0;
-    }
-
-    result = fn_803AF3F0(state, file_id, data, async, callback);
-    if (result == 1) {
-        return 0;
-    }
-    return result;
-}
-
 s32 fn_803B0E9C(struct hsd_803AC3E0_arg0_t* arg0, s32 arg1, s32 arg2, s32 arg3,
                 s32 arg4)
 {
@@ -1793,8 +1600,6 @@ s32 fn_803B0E9C(struct hsd_803AC3E0_arg0_t* arg0, s32 arg1, s32 arg2, s32 arg3,
 
     return 0;
 }
-
-/// #fn_803B1338
 
 /// @todo Currently 90.28% match - stwx vs stw+disp in rollback (same as
 /// fn_803ADE4C)
