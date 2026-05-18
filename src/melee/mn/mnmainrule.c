@@ -75,16 +75,16 @@ typedef union {
 } JObjIndices;
 
 AnimLoopSettings mn_803EC734[5] = {
-    { 0.0f, 3.0f, -0.1f },   { 20.0f, 23.0f, -0.1f }, { 40.0f, 43.0f, -0.1f },
-    { 60.0f, 63.0f, -0.1f }, { 80.0f, 83.0f, -0.1f },
+    { 0.0F, 3.0F, -0.1F },   { 20.0F, 23.0F, -0.1F }, { 40.0F, 43.0F, -0.1F },
+    { 60.0F, 63.0F, -0.1F }, { 80.0F, 83.0F, -0.1F },
 };
 
 AnimLoopSettings mn_803EC770[9] = {
-    { 100.0f, 103.0f, -0.1f }, { 120.0f, 123.0f, -0.1f },
-    { 140.0f, 143.0f, -0.1f }, { 160.0f, 163.0f, -0.1f },
-    { 180.0f, 183.0f, -0.1f }, { 30.0f, 49.0f, -0.1f },
-    { 70.0f, 89.0f, -0.1f },   { 90.0f, 109.0f, -0.1f },
-    { 50.0f, 69.0f, -0.1f },
+    { 100.0F, 103.0F, -0.1F }, { 120.0F, 123.0F, -0.1F },
+    { 140.0F, 143.0F, -0.1F }, { 160.0F, 163.0F, -0.1F },
+    { 180.0F, 183.0F, -0.1F }, { 30.0F, 49.0F, -0.1F },
+    { 70.0F, 89.0F, -0.1F },   { 90.0F, 109.0F, -0.1F },
+    { 50.0F, 69.0F, -0.1F },
 };
 
 extern f32 mn_804D4B90;
@@ -466,63 +466,40 @@ void mn_8022FEC8(HSD_GObj* arg0, HSD_JObj* arg1, u8 arg2, u8 arg3)
     HSD_JObjAnimAll(arg1);
 }
 
-void mn_80230198(HSD_GObj* gobj, HSD_JObj* jobj, u8 arg2)
+void mn_80230198(HSD_GObj* gobj, HSD_JObj* jobj, u8 mode)
 {
     AnimLoopSettings* settings;
     f32 frame;
-    s32 i;
-    s32 option;
-
+    int i;
     PAD_STACK(8);
 
-    option = arg2;
-    if (option == 3) {
-        return;
-    }
-
-    if (option >= 3) {
-        goto seven;
-    }
-
-    if (option == 1) {
-        return;
-    }
-    if (option >= 1) {
-        goto func;
-    }
-
-    if (option >= 0) {
-        goto func;
-    }
-    return;
-
-seven:
-    if (option >= 7) {
-        return;
-    }
-    if (option >= 5) {
-        return;
-    }
-
-func:
-    frame = mn_8022F298(jobj);
-
-    for (i = 0; i != 5; i++) {
-        settings = &mn_803EC770[i];
-        if (mn_803EC770[i].start_frame <= frame &&
-            frame <= mn_803EC770[i].end_frame)
-        {
-            break;
+    switch (mode) {
+    case 0:
+    case 2:
+    case 4:
+        frame = mn_8022F298(jobj);
+        for (i = 0; i < 5; i++) {
+            settings = &mn_803EC770[i];
+            if (mn_803EC770[i].start_frame <= frame &&
+                frame <= mn_803EC770[i].end_frame)
+            {
+                break;
+            }
+            settings = &mn_803EC734[i];
+            if (mn_803EC734[i].start_frame <= frame &&
+                frame <= mn_803EC734[i].end_frame)
+            {
+                break;
+            }
         }
-        settings = &mn_803EC734[i];
-        if (mn_803EC734[i].start_frame <= frame &&
-            frame <= mn_803EC734[i].end_frame)
-        {
-            break;
-        }
+        mn_8022ED6C(jobj, settings);
+        break;
+    case 1:
+    case 3:
+    case 5:
+    case 6:
+        break;
     }
-
-    mn_8022ED6C(jobj, settings);
 }
 
 extern MenuKindData mn_803EB6B0[];

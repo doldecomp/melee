@@ -1218,7 +1218,7 @@ HSD_LObj* grShrineRoute_8020AC44(HSD_GObj* gobj)
     return new_lobj;
 }
 
-bool grShrineRoute_8020AD24(s32 arg)
+bool grShrineRoute_8020AD24(int arg)
 {
     if (arg == 1) {
         Ground_801C5740(arg);

@@ -45,6 +45,9 @@
 #include <melee/sc/types.h>
 #include <MSL/trigf.h>
 
+#undef __FILE__
+#define __FILE__ "lbspdisplay.c"
+
 typedef bool (*lb_803BA248_fn)(ColorOverlay*);
 
 struct lb_Collider {
@@ -143,6 +146,17 @@ void lb_8000FD18(DynamicsDesc* desc)
     desc->data = NULL;
 }
 
+static inline struct DynamicsData* popDynamicsData(void)
+{
+    struct DynamicsData* entry = cur_data;
+    if (entry == NULL) {
+        return NULL;
+    }
+    cur_data = entry->next;
+    entry->next = NULL;
+    return entry;
+}
+
 void lb_8000FD48(HSD_JObj* jobj, DynamicsDesc* desc, size_t max_count)
 {
     struct DynamicsData* prev;
@@ -160,27 +174,11 @@ void lb_8000FD48(HSD_JObj* jobj, DynamicsDesc* desc, size_t max_count)
     desc->count = 0;
 
     while ((s32) desc->count < (s32) max_count) {
-        struct DynamicsData* entry;
-
         if ((s32) desc->count == 0) {
-            entry = cur_data;
-            if (entry == NULL) {
-                entry = NULL;
-            } else {
-                cur_data = entry->next;
-                entry->next = NULL;
-            }
-            prev = entry;
+            prev = popDynamicsData();
             desc->data = prev;
         } else {
-            entry = cur_data;
-            if (entry == NULL) {
-                entry = NULL;
-            } else {
-                cur_data = entry->next;
-                entry->next = NULL;
-            }
-            prev->next = entry;
+            prev->next = popDynamicsData();
             prev = prev->next;
         }
 
@@ -1808,8 +1806,8 @@ void lb_800138D8(HSD_GObj* gobj, s8 arg1)
     data->x11 = arg1;
 }
 
-static Vec3 lb_803B72A8 = { 0.0F, 0.0F, 1.0F };
-static Vec3 lb_803B72B4 = { 0.0F, 0.0F, 0.0F };
+static const Vec3 lb_803B72A8 = { 0.0F, 0.0F, 1.0F };
+static const Vec3 lb_803B72B4 = { 0.0F, 0.0F, 0.0F };
 
 void lb_800138EC(s32 arg0, GObj_RenderFunc render_func, u32 arg2, s8 arg3,
                  f32 x, f32 y, f32 w, f32 h)
@@ -1823,9 +1821,9 @@ void lb_800138EC(s32 arg0, GObj_RenderFunc render_func, u32 arg2, s8 arg3,
     Vec3 interest;
     f32 zero = 0.0F;
     f32 roll;
-    f32 far = -480.0F;
+    f32 far = 2.0F;
     f32 ortho_top = zero;
-    f32 ortho_bot = 2.0F;
+    f32 ortho_bot = -480.0F;
     f32 ortho_left = zero;
     f32 ortho_right = 640.0F;
 

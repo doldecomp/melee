@@ -357,18 +357,14 @@ int fn_8016F9A8(void* arg0, u16 arg1, u8 mask, u8 player_id)
     PAD_STACK(8);
 }
 
-int fn_8016FAD4(struct lbl_8046B6A0_24C_t* rules, u32 kind, int flags,
+int fn_8016FAD4(struct lbl_8046B6A0_24C_t* rules, int kind, int flags,
                 u8 player)
 {
     struct lbl_803D5A4C_t* entry = lbl_803D5A4C;
     struct lbl_8046B6A0_24C_58_t* x58 = rules->x58;
-    u8 rankings[7];
+    u8 rankings[7] = { 0 };
     s32 scores[6];
     int i;
-
-    *(s32*) rankings = lbl_804DA2E8;
-    *(u16*) &rankings[4] = lbl_804DA2EC;
-    rankings[6] = lbl_804DA2EE;
 
     while (entry->kind != kind) {
         if (entry->kind == 0x29A) {
@@ -2485,9 +2481,22 @@ static inline bool gm_80173EEC_inline(void)
     bool result = true;
 
     for (i = 0; i < 0x100; i++) {
-        if (i != 0x29 && i - 0x42 > 1U && i != 0xB9 && i - 0xC9 > 1U &&
-            i != 9 && gmMainLib_8015DADC(i) == 0)
-        {
+        if (i == 0x29) {
+            continue;
+        }
+        if (i == 0x42 || i == 0x43) {
+            continue;
+        }
+        if (i == 0xB9) {
+            continue;
+        }
+        if (i == 0xC9 || i == 0xCA) {
+            continue;
+        }
+        if (i == 9) {
+            continue;
+        }
+        if (!gmMainLib_8015DADC(i)) {
             result = false;
             break;
         }

@@ -20,20 +20,27 @@ typedef union {
     f32 f;
 } ByteCodeVal;
 
-static inline float fmodf(float x, float m)
+static inline f32 fmodf(f32 divisor, f32 dividend)
 {
-    return __fabsf(x) > __fabsf(m) ? x : (m - x * (long long) (m / x));
+    long long quotient;
+
+    if (__fabsf(divisor) > __fabsf(dividend)) {
+        return dividend;
+    }
+    quotient = dividend / divisor;
+    return dividend - divisor * quotient;
 }
 
-float HSD_ByteCodeEval(u8* bytecode, float* args, int nb_args)
+float HSD_ByteCodeEval(u8* bytecode, f32* args, s32 nb_args)
 {
-    HSD_SList *stack, *list;
-    u32 i;
+    HSD_SList* stack;
+    int i;
     u8 last_command;
-    int operand_count;
+    s32 operand_count;
     u32 operand;
+    HSD_SList* list;
     f32 fv, f0, f1;
-    int d0, d1;
+    s32 d0, d1;
 
     stack = NULL;
     operand_count = 0;
@@ -266,8 +273,7 @@ float HSD_ByteCodeEval(u8* bytecode, float* args, int nb_args)
             HSD_ASSERTMSG(525, stack->next, "stack->next");
             f0 = ((ByteCodeVal*) &stack->data)->f;
             stack = HSD_SListRemove(stack);
-            f1 = ((ByteCodeVal*) &stack->data)->f;
-            fv = fmodf(f0, f1);
+            fv = fmodf(f0, ((ByteCodeVal*) &stack->data)->f);
             stack->data = *(void**) &fv;
             break;
         case 0x1C:
@@ -360,16 +366,12 @@ float HSD_ByteCodeEval(u8* bytecode, float* args, int nb_args)
             f0 = ((ByteCodeVal*) &stack->data)->f;
             stack = HSD_SListRemove(stack);
             f1 = ((ByteCodeVal*) &stack->data)->f;
-            {
-                {
-                    if (fabsf_bitwise(f0) == 0.0F) {
-                        fv = f1 >= 0.0F ? 90.0F : -90.0F;
-                    } else {
-                        fv = (f32) (RAD_TO_DEG * atan2f(f1, f0));
-                    }
-                }
-                stack->data = *(void**) &fv;
+            if (fabsf_bitwise(f0) == 0.0F) {
+                fv = f1 >= 0.0F ? 90.0F : -90.0F;
+            } else {
+                fv = (f32) (RAD_TO_DEG * atan2f(f1, f0));
             }
+            stack->data = *(void**) &fv;
             break;
         case 0x33:
             HSD_ASSERT(603, stack);
@@ -498,27 +500,11 @@ float HSD_ByteCodeEval(u8* bytecode, float* args, int nb_args)
         case 0x32:
             HSD_ASSERT(673, stack);
             HSD_ASSERTMSG(673, stack->next, "stack->next");
-            {
-                bool c, val;
-                d1 = ((ByteCodeVal*) &stack->data)->i;
-                stack = HSD_SListRemove(stack);
-                d0 = ((ByteCodeVal*) &stack->data)->i;
-                val = true;
-                c = false;
-                if ((d0 == 0 && d1 != 0)) {
-                    c = true;
-                }
-                if (c == false) {
-                    c = false;
-                    if (d0 != 0 && d1 == 0) {
-                        c = true;
-                    }
-                    if (c == false) {
-                        val = false;
-                    }
-                }
-                ((ByteCodeVal*) &stack->data)->i = val;
-            }
+            d1 = ((ByteCodeVal*) &stack->data)->i;
+            stack = HSD_SListRemove(stack);
+            d0 = ((ByteCodeVal*) &stack->data)->i;
+            ((ByteCodeVal*) &stack->data)->i =
+                (d0 == 0 && d1 != 0) || (d0 != 0 && d1 == 0);
             break;
         case 0x39:
             HSD_ASSERT(678, stack);
