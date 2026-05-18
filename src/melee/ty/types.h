@@ -152,7 +152,7 @@ typedef struct ToyGlobalsS_ {
     void* x50;
     void* x54;
     s32 x58;
-    u8 pad0[0x140 - 0x58];
+    u8 pad0[0x140 - 0x5C];
     ToySubStructS_* x140;
     void* x144;
     void* x148;
