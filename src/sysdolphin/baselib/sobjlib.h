@@ -3,12 +3,19 @@
 
 #include <placeholder.h>
 
-#include "dolphin/gx/GXStruct.h"
-
 #include <sysdolphin/baselib/forward.h>
+
+#include <dolphin/gx/GXStruct.h>
+#include <sysdolphin/baselib/gobj.h>
 
 extern GObjFuncs HSD_SObjLib_8040C3A4;
 extern u8 HSD_SObjLib_804D7960;
+
+typedef struct HSD_SObjDesc {
+    /* 0x00 */ HSD_ImageDesc* image;
+    /* 0x04 */ struct _HSD_Tlut* tlut;
+    /* 0x08 */ HSD_ImageDesc* image2;
+} HSD_SObjDesc;
 
 struct HSD_SObj {
     /* 0x00 */ void* x0;
@@ -26,14 +33,24 @@ struct HSD_SObj {
     /* 0x30 */ f32 x30;
     /* 0x34 */ u16 x34;
     /* 0x36 */ u16 x36;
-    /* 0x38 */ u8 x38;
-    /* 0x39 */ u8 x39;
-    /* 0x3A */ u8 x3A;
-    /* 0x3B */ u8 x3B;
-    /* 0x3C */ u8 x3C;
-    /* 0x3D */ u8 x3D;
-    /* 0x3E */ u8 x3E;
-    /* 0x3F */ u8 x3F;
+    /* 0x38 */ union {
+        GXColor x38_color;
+        struct {
+            u8 x38;
+            u8 x39;
+            u8 x3A;
+            u8 x3B;
+        };
+    };
+    /* 0x3C */ union {
+        GXColor x3C_color;
+        struct {
+            u8 x3C;
+            u8 x3D;
+            u8 x3E;
+            u8 x3F;
+        };
+    };
     /* 0x40 */ u32 x40;
     /* 0x44 */ u8 x44;
     /* 0x48 */ u32 x48;
@@ -49,11 +66,17 @@ typedef HSD_SObj HSD_SObj_803A477C_t;
 /* 3A44D4 */ void HSD_SObjLib_803A44D4(HSD_GObj*, HSD_SObj*, u8);
 /* 3A466C */ void HSD_SObjLib_803A466C(HSD_SObj*);
 /* 3A4740 */ void HSD_SObjLib_803A4740(HSD_SObj*);
+#ifdef SOBJLIB_INTERNAL
+/* 3A477C */ HSD_SObj* HSD_SObjLib_803A477C(HSD_GObj*, HSD_SObjDesc*,
+                                            GXTexWrapMode, GXTexWrapMode, u8,
+                                            u8);
+#else
 /* 3A477C */ HSD_SObj* HSD_SObjLib_803A477C(HSD_GObj*, int, int, int, int,
                                             int);
+#endif
 /* 3A49E0 */ void HSD_SObjLib_803A49E0(HSD_GObj*, int);
 /* 3A4A68 */ void HSD_SObjLib_803A4A68(HSD_SObj*);
 /* 3A54EC */ void HSD_SObjLib_803A54EC(HSD_GObj*, int);
-/* 3A55DC */ void HSD_SObjLib_803A55DC(HSD_GObj*, int, int, int);
+/* 3A55DC */ void HSD_SObjLib_803A55DC(HSD_GObj*, u16, u16, int);
 
 #endif

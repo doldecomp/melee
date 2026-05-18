@@ -139,7 +139,7 @@ u32 mnDiagram_ConvertDistanceForDisplay(u32 distance)
         if (distance >= 0x274A6) {
             return distance / 160934;
         }
-        return (u32) ((f64) distance / 30.4788F);
+        return (u32) ((f64) distance / 30.4788);
     }
     if (distance >= 0x186A0) {
         return distance / 100000;

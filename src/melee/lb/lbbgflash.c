@@ -80,66 +80,82 @@ void fn_8001FC08(void)
     f32 val;
 
     if (data->x20[0] > 0.0f) {
-        val = data->x10[0] + data->x20[0];
-        if (val < (f32) data->x8.r) {
-            data->x10[0] = val;
+        u8 target = data->x8.r;
+        f32* cur = &data->x10[0];
+        val = *cur + data->x20[0];
+        if (val < (f32) target) {
+            *cur = val;
         } else {
-            data->x10[0] = (f32) data->x8.r;
+            *cur = (f32) target;
         }
     } else {
-        val = data->x10[0] + data->x20[0];
-        if (val > (f32) data->x8.r) {
-            data->x10[0] = val;
+        u8 target = data->x8.r;
+        f32* cur = &data->x10[0];
+        val = *cur + data->x20[0];
+        if (val > (f32) target) {
+            *cur = val;
         } else {
-            data->x10[0] = (f32) data->x8.r;
+            *cur = (f32) target;
         }
     }
 
     if (data->x20[1] > 0.0f) {
-        val = data->x10[1] + data->x20[1];
-        if (val < (f32) data->x8.g) {
-            data->x10[1] = val;
+        u8 target = data->x8.g;
+        f32* cur = &data->x10[1];
+        val = *cur + data->x20[1];
+        if (val < (f32) target) {
+            *cur = val;
         } else {
-            data->x10[1] = (f32) data->x8.g;
+            *cur = (f32) target;
         }
     } else {
-        val = data->x10[1] + data->x20[1];
-        if (val > (f32) data->x8.g) {
-            data->x10[1] = val;
+        u8 target = data->x8.g;
+        f32* cur = &data->x10[1];
+        val = *cur + data->x20[1];
+        if (val > (f32) target) {
+            *cur = val;
         } else {
-            data->x10[1] = (f32) data->x8.g;
+            *cur = (f32) target;
         }
     }
 
     if (data->x20[2] > 0.0f) {
-        val = data->x10[2] + data->x20[2];
-        if (val < (f32) data->x8.b) {
-            data->x10[2] = val;
+        u8 target = data->x8.b;
+        f32* cur = &data->x10[2];
+        val = *cur + data->x20[2];
+        if (val < (f32) target) {
+            *cur = val;
         } else {
-            data->x10[2] = (f32) data->x8.b;
+            *cur = (f32) target;
         }
     } else {
-        val = data->x10[2] + data->x20[2];
-        if (val > (f32) data->x8.b) {
-            data->x10[2] = val;
+        u8 target = data->x8.b;
+        f32* cur = &data->x10[2];
+        val = *cur + data->x20[2];
+        if (val > (f32) target) {
+            *cur = val;
         } else {
-            data->x10[2] = (f32) data->x8.b;
+            *cur = (f32) target;
         }
     }
 
     if (data->x20[3] > 0.0f) {
-        val = data->x10[3] + data->x20[3];
-        if (val < (f32) data->x8.a) {
-            data->x10[3] = val;
+        u8 target = data->x8.a;
+        f32* cur = &data->x10[3];
+        val = *cur + data->x20[3];
+        if (val < (f32) target) {
+            *cur = val;
         } else {
-            data->x10[3] = (f32) data->x8.a;
+            *cur = (f32) target;
         }
     } else {
-        val = data->x10[3] + data->x20[3];
-        if (val > (f32) data->x8.a) {
-            data->x10[3] = val;
+        u8 target = data->x8.a;
+        f32* cur = &data->x10[3];
+        val = *cur + data->x20[3];
+        if (val > (f32) target) {
+            *cur = val;
         } else {
-            data->x10[3] = (f32) data->x8.a;
+            *cur = (f32) target;
         }
     }
 }
@@ -579,11 +595,11 @@ void lbBgFlash_80020E38(HSD_JObj* jobj, Vec3* dir, f32 max_angle,
     f32 z_col_z;
     f32 z_col_y;
     f32 z_col_x;
-    f32 dz2 = dz * dz;
     f32 dx2 = dx * dx;
     f32 dy2 = dy * dy;
+    f32 dz2 = dz * dz;
     volatile f32 tmp;
-    if (dz2 + dy2 + dx2 == 0.0f) {
+    if (dx2 + dy2 + dz2 == 0.0f) {
         return;
     }
 
@@ -672,11 +688,12 @@ void fn_8002113C(HSD_JObj* jobj, Vec3* axis, f32 angle)
     PSMTXRotAxisRad(rotMtx, (Vec*) &localAxis, -angle);
 
     if (!(jobj->flags & JOBJ_USE_QUATERNION)) {
-        Fake_HSD_JObjGetRotation(jobj, &rot);
-        HSD_MkRotationMtx(tmpMtx, (Vec3*) &rot);
+        Quaternion* volatile rot_ptr = &rot;
+        Fake_HSD_JObjGetRotation(jobj, rot_ptr);
+        HSD_MkRotationMtx(tmpMtx, (Vec3*) rot_ptr);
         PSMTXConcat(tmpMtx, rotMtx, result);
-        HSD_QuatLib_8037EB28(result, (Vec3*) &rot);
-        FakeHSD_JObjSetRotation(jobj, &rot);
+        HSD_QuatLib_8037EB28(result, (Vec3*) rot_ptr);
+        FakeHSD_JObjSetRotation(jobj, rot_ptr);
     } else {
         HSD_JObjGetRotation(jobj, &rot2);
         HSD_MtxQuat(tmpMtx, &rot2);

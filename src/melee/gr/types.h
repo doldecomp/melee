@@ -1493,11 +1493,25 @@ struct ScrollVars {
 };
 
 struct grHomeRun_GroundVars {
-    u16 xC4;
-    u16 xC6;
-    int xC8;
-    int xCC;
-    f32 xD0;
+    /* +00 gp+C4 */ u16 xC4;
+    /* +02 gp+C6 */ u16 xC6;
+    /* +04 gp+C8 */ int xC8;
+    /* +08 gp+CC */ int xCC;
+    /* +0C gp+D0 */ float xD0;
+    /* +0C gp+D4 */ u8 pad_D4[0x14];
+    /* +24 gp+E8 */ union {
+        u8 xE8;
+        struct {
+            u8 xE8_b0 : 1;
+            u8 xE8_b1 : 1;
+            u8 xE8_b2 : 1;
+            u8 xE8_b3 : 1;
+            u8 xE8_b4 : 1;
+            u8 xE8_b5 : 1;
+            u8 xE8_b6 : 1;
+            u8 xE8_b7 : 1;
+        };
+    };
 };
 
 struct Map_GroundVars {
@@ -1790,7 +1804,8 @@ struct UnkStageDat {
     HSD_Spline** unk10;
     s32 unk14;
 
-    u8 x18_fill[0x20 - 0x18];
+    void* unk18;
+    s32 unk1C;
 
     void* unk20;
     s32 unk24;

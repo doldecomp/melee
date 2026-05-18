@@ -4,6 +4,7 @@
 #include <placeholder.h>
 #include <platform.h>
 
+#include "gm/forward.h"
 #include "gr/forward.h"
 
 #include "gr/types.h"
@@ -125,10 +126,10 @@ extern f32 grIm_804DB570;
 /* 1F8CDC */ void grIceMt_801F8CDC(Ground_GObj*, s16* joint_indices, int count,
                                    HSD_GObj** output_array);
 /* 1F8E58 */ UNK_RET fn_801F8E58(Ground_GObj*);
-/* 1F9038 */ UNK_RET fn_801F9038(Ground_GObj*);
+/* 1F9038 */ int fn_801F9038(Ground_GObj*);
 /* 1F9150 */ IceMountainParams* fn_801F9150(HSD_GObj*);
 /* 1F91A4 */ void fn_801F91A4(void);
-/* 1F91A8 */ HSD_GObj* fn_801F91A8(HSD_GObj*);
+/* 1F91A8 */ int fn_801F91A8(Ground_GObj*);
 /* 1F91EC */ void grIceMt_801F91EC(HSD_GObj*, s16*, int, int, int, int, int,
                                    mpLib_Callback);
 /* 1F929C */ void grIceMt_801F929C(HSD_GObj* arg0, void* arg1);
@@ -142,7 +143,7 @@ extern f32 grIm_804DB570;
 /* 1F96E0 */ float grIceMt_801F96E0(HSD_GObj*, float);
 /* 1F98A8 */ void grIceMt_801F98A8(HSD_GObj* param1);
 /* 1F993C */ f32 grIceMt_801F993C(s32, s32);
-/* 1F9ACC */ void grIceMt_801F9ACC(HSD_GObj*, float, HSD_GObjEvent,
+/* 1F9ACC */ void grIceMt_801F9ACC(Ground_GObj*, float, GrIceMtSegmentLookup,
                                    Ground_GObj*);
 /* 1FA0BC */ UNK_RET grIceMt_801FA0BC(s16*);
 /* 1FA364 */ bool grIceMt_801FA364(void* state, float* out, HSD_GObjEvent cb,

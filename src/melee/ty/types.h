@@ -67,7 +67,9 @@ typedef struct TyListArg {
     /* 0x0C */ struct HSD_JObj* xC;
     /* 0x10 */ struct HSD_JObj* x10;
     /* 0x14 */ struct HSD_JObj* x14;
-    /* 0x18 */ u8 pad_18[0x26 - 0x18];
+    /* 0x18 */ u8 pad_18[0x24 - 0x18];
+    /* 0x24 */ s8 x24;
+    /* 0x25 */ u8 pad_25;
     /* 0x26 */ s16 idx;
     /* 0x28 */ u8 pad_28[0x2C - 0x28];
     /* 0x2C */ float x2C;
@@ -77,11 +79,15 @@ typedef struct TyListArg {
 /* Trophy list UI state. Size: 0x2D8 bytes. */
 typedef struct TyListState {
     /* 0x000 */ TyListArg entries[12]; /* 12 * 0x34 = 0x270 */
-    /* 0x270 */ u8 pad_270[0xC];
+    /* 0x270 */ struct TyListArg* x270;
+    /* 0x274 */ struct TyListArg* x274;
+    /* 0x278 */ struct TyListArg* x278;
     /* 0x27C */ struct HSD_GObj* gobj;
-    /* 0x280 */ u8 pad_280[0xC];
+    /* 0x280 */ u8 pad_280[0x8];
+    /* 0x288 */ struct HSD_JObj* x288;
     /* 0x28C */ struct HSD_JObj* jobj;
-    /* 0x290 */ u8 pad_290[8];
+    /* 0x290 */ struct HSD_Text* x290;
+    /* 0x294 */ u8 pad_294[4];
     /* 0x298 */ s16 selectedIdx;
     /* 0x29A */ s8 entryCount;
     /* 0x29B */ u8 x29B;
