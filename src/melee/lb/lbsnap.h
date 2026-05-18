@@ -26,7 +26,7 @@
 /* 01E204 */ int lbSnap_8001E204(void);
 /* 01E210 */ int lbSnap_8001E210(void);
 /* 01E218 */ void lbSnap_8001E218(void* arg0, Unk80433380_48* arg1);
-/* 01E27C */ UNK_RET lbSnap_8001E27C(UNK_PARAMS);
+/* 01E27C */ void lbSnap_8001E27C(void);
 /* 01E290 */ void lbSnap_8001E290(void);
 
 #endif

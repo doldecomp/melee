@@ -24,6 +24,7 @@
 #include "gr/inlines.h"
 #include "gr/stage.h"
 #include "it/it_26B1.h"
+#include "it/types.h"
 #include "lb/lb_00B0.h"
 #include "lb/lb_00F9.h"
 #include "lb/lblanguage.h"
@@ -882,28 +883,30 @@ void fn_8021EB10(HSD_GObj* target_cam_gobj)
     }
 }
 
-HSD_Text* grHomeRun_8021EC58(s32 arg0)
+HSD_Text* grHomeRun_8021EC58(int arg)
 {
+    GXColor color = { 0xFF, 0xFF, 0xFF, 0xFF };
     HSD_Text* text;
-    f32 temp_f31;
-    f32 temp_f31_2;
-    GXColor color = grHr_804DBC74;
+    f32 temp;
 
     text = HSD_SisLib_803A6754(1, 0);
     text->pos_z = 0.0F;
-    temp_f31 = grHr_804DBC78 * (grHr_804D6AE4 * Ground_801C0498());
-    text->box_size_x = grHr_804DBC7C * (grHr_804D6AE4 * Ground_801C0498());
-    text->box_size_y = temp_f31;
+
+    temp = grHr_804D6AE4 * Ground_801C0498() * 8.0F;
+    text->box_size_x = grHr_804D6AE4 * Ground_801C0498() * 13.0F;
+    text->box_size_y = temp;
     text->default_kerning = 0;
-    temp_f31_2 = grHr_804DBC80 * (grHr_804D6AE4 * Ground_801C0498());
-    text->x34.x = grHr_804DBC80 * (grHr_804D6AE4 * Ground_801C0498());
-    text->x34.y = temp_f31_2;
+
+    temp = grHr_804D6AE4 * Ground_801C0498() * 0.2F;
+    text->x34.x = grHr_804D6AE4 * Ground_801C0498() * 0.2F;
+    text->x34.y = temp;
     text->text_color = color;
     text->default_alignment = 1;
     text->default_fitting = 1;
     text->x4C = 1;
-    HSD_SisLib_803A6B98(text, 0.0F, grHr_804DBC84, grHr_804D49D0,
-                        (s32) (f32) arg0);
+
+    HSD_SisLib_803A6B98(text, 0.0F, -29.0F, "%d", (s32) (f32) arg);
+
     return text;
 }
 

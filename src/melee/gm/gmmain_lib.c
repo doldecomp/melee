@@ -728,7 +728,7 @@ void gmMainLib_8015DAB4(u32 arg0)
     base[arg0 / 32] |= (1 << (arg0 % 32));
 }
 
-s32 gmMainLib_8015DADC(u32 arg0)
+bool gmMainLib_8015DADC(u32 arg0)
 {
     u32* base = &gmMainLib_804D3EE0->thing.x1C88[0];
     return (1 << (arg0 % 32)) & base[arg0 / 32];

@@ -24,13 +24,17 @@
 #include <baselib/state.h>
 #include <baselib/tev.h>
 #include <MetroTRK/intrinsics.h>
+#include <MSL/math_ppc.h>
 
 /* 006E58 */ static bool lbColl_80006E58(Vec3* arg0, Vec3* arg1, Vec3* arg2,
                                          Vec3* arg3, Vec3* arg4, Vec3* arg5,
-                                         MtxPtr arg6, Vec3* arg7, float* arg8,
-                                         float scl, float arg10, float arg11);
+                                         MtxPtr arg6, Vec3* arg7, float scl,
+                                         float arg10, float arg11,
+                                         float* arg8);
 
 /// .sdata
+static GXColor lbColl_804D36C4 = { 0, 0xFF, 0xFF, 0x80 };
+static GXColor lbColl_804D36C8 = { 0, 0x80, 0x80, 0x80 };
 static GXColor lbColl_804D36D4 = { 0, 0x80, 0xFF, 0x80 };
 static GXColor lbColl_804D36D8 = { 0, 0x40, 0x80, 0x80 };
 
@@ -85,6 +89,16 @@ u8 lbl_803B9E20[0xA0] = { 0 };
 u8 lbColl_803B9EC0[0x60] = { 0 };
 u8 lbColl_803B9F20[0xA0] = { 0 };
 
+static char lbColl_804D3700[] = "jobj.h";
+static char lbColl_804D3708[] = "jobj";
+
+static inline MtxPtr lbColl_JObjGetMtxPtr(HSD_JObj* jobj)
+{
+    (jobj) ? ((void) 0) : __assert(lbColl_804D3700, 1144, lbColl_804D3708);
+    HSD_JObjSetupMatrix(jobj);
+    return jobj->mtx;
+}
+
 /// .text
 
 int lbColl_80005BB0(HitCapsule* arg0, int arg1)
@@ -113,18 +127,11 @@ static inline void vector_sub(Vec3* a, Vec3* b, Vec3* result)
     result->z = a->z - b->z;
 }
 
-static inline bool between(float x, float lo, float hi)
-{
-    if (x < hi && x > lo) {
-        return true;
-    } else {
-        return false;
-    }
-}
-
 static inline bool nearzero(float x)
 {
-    if (x < 1e-5F && x > -1e-5F) {
+    if (x < *(volatile const float*) &lbColl_804D79F0 &&
+        x > *(volatile const float*) &lbColl_804D79F4)
+    {
         return true;
     } else {
         return false;
@@ -135,20 +142,19 @@ bool lbColl_80005C44(const Vec3* arg0, const Vec3* arg1, const Vec3* arg2,
                      Vec3* arg3, float arg8, float arg9)
 {
     float temp_f2;
-    float tmp_x;
     float scale;
-    Vec3 d1;
     Vec3 sp38;
     Vec3 sp2C;
-    Vec3 d2;
+    Vec3 d1;
+    float d2_x;
+    float d2_y;
+    float d2_z;
     float d1_dot_d1;
     float d1_dot_d2;
 
     temp_f2 = arg8 + arg9;
     sp38 = *arg0;
     sp2C = *arg2;
-
-    tmp_x = arg1->x;
 
     if (sp38.x > arg1->x) {
         if (sp38.x + temp_f2 < sp2C.x) {
@@ -200,21 +206,21 @@ bool lbColl_80005C44(const Vec3* arg0, const Vec3* arg1, const Vec3* arg2,
     d1.y = arg1->y - sp38.y;
     d1.z = arg1->z - sp38.z;
 
-    d2.x = sp38.x - sp2C.x;
-    d2.y = sp38.y - sp2C.y;
-    d2.z = sp38.z - sp2C.z;
+    d2_x = sp38.x - sp2C.x;
+    d2_y = sp38.y - sp2C.y;
+    d2_z = sp38.z - sp2C.z;
 
     d1_dot_d1 = d1.x * d1.x + d1.y * d1.y + d1.z * d1.z;
-    d1_dot_d2 = d1.x * d2.x + d1.y * d2.y + d1.z * d2.z;
+    d1_dot_d2 = d1.x * d2_x + d1.y * d2_y + d1.z * d2_z;
 
-    if (between(d1_dot_d1, -1e-5, 1e-5)) {
-        scale = 0.0;
+    if (nearzero(d1_dot_d1)) {
+        scale = *(volatile const float*) &lbColl_804D79F8;
     } else {
         scale = -d1_dot_d2 / d1_dot_d1;
-        if (scale > 1.0) {
-            scale = 1.0;
-        } else if (scale < 0.0) {
-            scale = 0.0;
+        if (scale > *(volatile const f64*) &lbColl_804D7A00) {
+            scale = *(volatile const float*) &lbColl_804D7A08;
+        } else if (scale < *(volatile const f64*) &lbColl_804D7A10) {
+            scale = *(volatile const float*) &lbColl_804D79F8;
         }
     }
 
@@ -222,11 +228,11 @@ bool lbColl_80005C44(const Vec3* arg0, const Vec3* arg1, const Vec3* arg2,
     arg3->y = d1.y * scale + sp38.y;
     arg3->z = d1.z * scale + sp38.z;
 
-    d2.x = arg3->x - sp2C.x;
-    d2.y = arg3->y - sp2C.y;
-    d2.z = arg3->z - sp2C.z;
+    d2_x = arg3->x - sp2C.x;
+    d2_y = arg3->y - sp2C.y;
+    d2_z = arg3->z - sp2C.z;
 
-    if (tmp_x * tmp_x < d2.x * d2.x + d2.y * d2.y + d2.z * d2.z) {
+    if (temp_f2 * temp_f2 < d2_x * d2_x + d2_y * d2_y + d2_z * d2_z) {
         return false;
     } else {
         return true;
@@ -329,53 +335,49 @@ inline bool end(Vec3* a, Vec3* b, float unk_sum)
 int lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3, Vec3* arg4,
                     Vec3* arg5, float arg6, float arg7)
 {
-    PAD_STACK(64);
+    PAD_STACK(56);
     {
-        Vec3 vec4;
-        float sp30;
+        Vec3 vec4 = *arg0;
+        float sp30 = vec4.z;
         float sp34;
         float sp38;
-        Vec3 arg4_offset;
+        Vec3 arg4_offset = vec4;
         Vec3 arg5_offset;
         float sp3C;
         float temp_f1;
         float unk_sum = arg6 + arg7;
-        vec4.x = arg0->x;
-        vec4.y = arg0->y;
-        vec4.z = arg0->z;
-
-        sp30 = vec4.z;
-        sp34 = arg2->x;
-        sp38 = arg2->y;
-
-        arg4_offset.x = vec4.x;
-        arg4_offset.y = vec4.y;
-        arg4_offset.z = vec4.z;
 
         {
-            float temp_r0_2 = arg2->z;
+            Vec3 vec2 = *arg2;
+            float temp_r0_2 = vec2.z;
+            sp34 = vec2.x;
+            sp38 = vec2.y;
             sp3C = temp_r0_2;
 
-            arg5_offset.x = sp34;
-            arg5_offset.y = sp38;
-            arg5_offset.z = temp_r0_2;
+            arg5_offset = vec2;
         }
 
         {
             float arg1_x = arg1->x;
             if (arg4_offset.x > arg1_x) {
-                if (!testPlusX(&arg4_offset, &arg5_offset, arg3, unk_sum)) {
-                    return false;
+                {
+                    float x = arg4_offset.x + unk_sum;
+                    if (x < arg5_offset.x && x < arg3->x) {
+                        return false;
+                    }
                 }
-
-                if (!testMinusX(&arg4_offset, &arg5_offset, arg3, unk_sum)) {
-                    return false;
+                {
+                    float x = arg1_x - unk_sum;
+                    if (x > arg5_offset.x && x > arg3->x) {
+                        return false;
+                    }
                 }
 
                 goto block_13;
             }
             {
-                if (!testMinusX(&arg4_offset, &arg5_offset, arg3, unk_sum)) {
+                float x = arg4_offset.x - unk_sum;
+                if (x > arg5_offset.x && x > arg3->x) {
                     return false;
                 }
             }
@@ -485,8 +487,8 @@ int lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3, Vec3* arg4,
 
             {
                 float arg5_scl;
-                if (approximatelyZero(temp_f7)) {
-                    if (approximatelyZero(temp_f3_5)) {
+                if (nearzero(temp_f7)) {
+                    if (nearzero(temp_f3_5)) {
                         arg4_scl = 0.0f;
                         arg5_scl = 0.0f;
                     } else {
@@ -503,7 +505,7 @@ int lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3, Vec3* arg4,
                         }
                     }
                 } else {
-                    if (approximatelyZero(temp_f10)) {
+                    if (nearzero(temp_f10)) {
                         float temp_f9 = (0.5 * temp_f22 + arg5_offset.y);
                         float temp_f7_2 = (0.5 * temp_f23 + arg5_offset.x);
                         float temp_f10_2 = arg4_offset.y - temp_f9;
@@ -577,12 +579,12 @@ int lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3, Vec3* arg4,
                             sp60 = arg1->z;
                             {
                                 float var_f2_2 =
-                                    -temp_f11_3 * (sp48 - sp60) +
-                                    temp_f9_4 * sp40 - sp58 +
-                                    temp_f10_3 * sp44 -
-                                    sp5C / (temp_f11_3 * temp_f11_3) +
-                                    temp_f9_4 * temp_f9_4 +
-                                    temp_f10_3 * temp_f10_3;
+                                    -((temp_f11_3 * (sp48 - sp60)) +
+                                      ((temp_f9_4 * (sp40 - sp58)) +
+                                       (temp_f10_3 * (sp44 - sp5C)))) /
+                                    ((temp_f11_3 * temp_f11_3) +
+                                     ((temp_f9_4 * temp_f9_4) +
+                                      (temp_f10_3 * temp_f10_3)));
 
                                 if (var_f2_2 > (float) 1.0) {
                                     var_f2_2 = 1.0f;
@@ -595,7 +597,8 @@ int lbColl_80006094(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3, Vec3* arg4,
                         }
                     } else {
                         float temp_f1_3 =
-                            temp_f8 * temp_f12 - temp_f7 * temp_f11 / temp_f10;
+                            ((temp_f8 * temp_f12) - (temp_f7 * temp_f11)) /
+                            temp_f10;
                         arg5_scl =
                             ((temp_f3_5 * temp_f12) - (temp_f8 * temp_f11)) /
                             temp_f10;
@@ -661,32 +664,18 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
                      float p, float q, float r)
 {
     float sum_pq = p + q;
-
     float a_z;
-    Vec3 a0;
-    Vec3 a1;
-    PAD_STACK(16);
+    Vec3 a0 = *a;
+    Vec3 a1 = a0;
+    PAD_STACK(24);
 
-    a0.x = a->x;
-    a0.y = a->y;
-    a0.z = a_z = a->z;
-    a1.x = a0.x;
-    a1.y = a0.y;
-    a1.z = a_z;
+    a_z = a0.z;
     {
-        Vec3 c0;
-        float temp_r0_2;
-
-        c0.x = c->x;
-        c0.y = c->y;
-        c0.z = temp_r0_2 = c->z;
+        Vec3 c0 = *c;
+        float temp_r0_2 = c0.z;
 
         {
-            Vec3 c1;
-
-            c1.x = c0.x;
-            c1.y = c0.y;
-            c1.z = temp_r0_2;
+            Vec3 c1 = c0;
             {
                 float b_x = b->x;
                 if (a1.x > b_x) {
@@ -782,8 +771,8 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
                         {
                             float scl_e;
                             float scl_f;
-                            if (approximatelyZero(sqdist2_dc)) {
-                                if (approximatelyZero(sqdist2_ba)) {
+                            if (nearzero(sqdist2_dc)) {
+                                if (nearzero(sqdist2_ba)) {
                                     scl_e = 0.0f;
                                     scl_f = 0.0f;
                                 } else {
@@ -797,7 +786,7 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
                                         scl_e = 0.0f;
                                     }
                                 }
-                            } else if (approximatelyZero(determinant)) {
+                            } else if (nearzero(determinant)) {
                                 float temp_f7_2 = 0.5 * diff_dc_y + c1.y;
                                 float temp_f5_2 = 0.5 * diff_dc_x + c1.x;
                                 float temp_f6_2 = a1.y - temp_f7_2;
@@ -828,18 +817,16 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
                                                 a2.z = a0.z;
                                                 scl_e = 0.0f;
                                                 temp_scl_f =
-                                                    -(diff_dc_z *
-                                                      (c3.z - a2.z)) +
-                                                    ((diff_dc_x *
-                                                      (c3.x - a2.x)) +
-                                                     (temp_f8_2 *
-                                                      (c3.y - a2.y))) /
-                                                        ((diff_dc_z *
-                                                          diff_dc_z) +
-                                                         ((diff_dc_x *
-                                                           diff_dc_x) +
-                                                          (temp_f8_2 *
-                                                           temp_f8_2)));
+                                                    -((diff_dc_z *
+                                                       (c3.z - a2.z)) +
+                                                      ((diff_dc_x *
+                                                        (c3.x - a2.x)) +
+                                                       (temp_f8_2 *
+                                                        (c3.y - a2.y)))) /
+                                                    ((diff_dc_z * diff_dc_z) +
+                                                     ((diff_dc_x * diff_dc_x) +
+                                                      (temp_f8_2 *
+                                                       temp_f8_2)));
                                             }
                                         }
                                         if (temp_scl_f > (float) 1.0) {
@@ -981,19 +968,14 @@ bool lbColl_800067F8(Vec3* a, Vec3* b, Vec3* c, Vec3* d, Vec3* e, Vec3* f,
 
 bool lbColl_80006E58(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3,
                      Vec3* arg4, Vec3* arg5, MtxPtr arg6, Vec3* arg7,
-                     float* arg8, float scl, float arg10, float arg11)
+                     float scl, float arg10, float arg11, float* arg8)
 {
-    float sp124;
-    float sp120;
-    float sp11C;
-    float sp118;
-    float sp114;
-    float sp110;
-    float sp10C;
-    float sp108;
-    float sp104;
+    Vec3 sp11C;
+    Vec3 sp110;
+    Vec3 sp104;
     float spD0;
     float spCC;
+    Mtx sp9C;
     float sp8C;
     float sp88;
     float sp84;
@@ -1091,98 +1073,95 @@ bool lbColl_80006E58(Vec3* arg0, Vec3* arg1, Vec3* arg2, Vec3* arg3,
     s32 var_r0_2;
     s32 var_r0_3;
     s32 var_r0_4;
-    PAD_STACK(144);
+    PAD_STACK(112);
 
     temp_f3 = (arg10 * arg11) + scl;
-    sp11C = arg0->x;
-    sp120 = arg0->y;
-    sp124 = arg0->z;
-    sp110 = arg2->x;
-    sp114 = arg2->y;
-    sp118 = arg2->z;
+    sp11C = *arg0;
+    sp110 = *arg2;
     temp_f5 = arg1->x;
-    if (sp11C > temp_f5) {
-        temp_f2 = sp11C + temp_f3;
-        if ((temp_f2 < sp110) && (temp_f2 < arg3->x)) {
+    if (sp11C.x > temp_f5) {
+        temp_f2 = sp11C.x + temp_f3;
+        if ((temp_f2 < sp110.x) && (temp_f2 < arg3->x)) {
             return 0;
         }
         temp_f2_2 = temp_f5 - temp_f3;
-        if ((temp_f2_2 > sp110) && (temp_f2_2 > arg3->x)) {
+        if ((temp_f2_2 > sp110.x) && (temp_f2_2 > arg3->x)) {
             return 0;
         }
         goto block_13;
     }
-    temp_f2_3 = sp11C - temp_f3;
-    if ((temp_f2_3 > sp110) && (temp_f2_3 > arg3->x)) {
+    temp_f2_3 = sp11C.x - temp_f3;
+    if ((temp_f2_3 > sp110.x) && (temp_f2_3 > arg3->x)) {
         return 0;
     }
     temp_f2_4 = temp_f5 + temp_f3;
-    if ((temp_f2_4 < sp110) && (temp_f2_4 < arg3->x)) {
+    if ((temp_f2_4 < sp110.x) && (temp_f2_4 < arg3->x)) {
         return 0;
     }
 block_13:
     temp_f6 = arg1->y;
-    if (sp120 > temp_f6) {
-        temp_f4 = sp120 + temp_f3;
-        if ((temp_f4 < sp114) && (temp_f4 < arg3->y)) {
+    if (sp11C.y > temp_f6) {
+        temp_f4 = sp11C.y + temp_f3;
+        if ((temp_f4 < sp110.y) && (temp_f4 < arg3->y)) {
             return 0;
         }
         temp_f4_2 = temp_f6 - temp_f3;
-        if ((temp_f4_2 > sp114) && (temp_f4_2 > arg3->y)) {
+        if ((temp_f4_2 > sp110.y) && (temp_f4_2 > arg3->y)) {
             return 0;
         }
         goto block_26;
     }
-    temp_f4_3 = sp120 - temp_f3;
-    if ((temp_f4_3 > sp114) && (temp_f4_3 > arg3->y)) {
+    temp_f4_3 = sp11C.y - temp_f3;
+    if ((temp_f4_3 > sp110.y) && (temp_f4_3 > arg3->y)) {
         return 0;
     }
     temp_f4_4 = temp_f6 + temp_f3;
-    if ((temp_f4_4 < sp114) && (temp_f4_4 < arg3->y)) {
+    if ((temp_f4_4 < sp110.y) && (temp_f4_4 < arg3->y)) {
         return 0;
     }
 block_26:
     temp_f7 = arg1->z;
-    if (sp124 > temp_f7) {
-        temp_f6_2 = sp124 + temp_f3;
-        if ((temp_f6_2 < sp118) && (temp_f6_2 < arg3->z)) {
+    if (sp11C.z > temp_f7) {
+        temp_f6_2 = sp11C.z + temp_f3;
+        if ((temp_f6_2 < sp110.z) && (temp_f6_2 < arg3->z)) {
             return 0;
         }
         temp_f4_5 = temp_f7 - temp_f3;
-        if ((temp_f4_5 > sp118) && (temp_f4_5 > arg3->z)) {
+        if ((temp_f4_5 > sp110.z) && (temp_f4_5 > arg3->z)) {
             return 0;
         }
         goto block_39;
     }
-    temp_f6_3 = sp124 - temp_f3;
-    if ((temp_f6_3 > sp118) && (temp_f6_3 > arg3->z)) {
+    temp_f6_3 = sp11C.z - temp_f3;
+    if ((temp_f6_3 > sp110.z) && (temp_f6_3 > arg3->z)) {
         return 0;
     }
     temp_f4_6 = temp_f7 + temp_f3;
-    if ((temp_f4_6 < sp118) && (temp_f4_6 < arg3->z)) {
+    if ((temp_f4_6 < sp110.z) && (temp_f4_6 < arg3->z)) {
         return 0;
     }
 block_39:
-    temp_f3_2 = temp_f5 - sp11C;
-    sp104 = temp_f3_2;
-    sp108 = arg1->y - sp120;
-    sp10C = arg1->z - sp124;
+    temp_f3_2 = temp_f5 - sp11C.x;
+    sp104.x = temp_f3_2;
+    sp104.y = arg1->y - sp11C.y;
+    sp104.z = arg1->z - sp11C.z;
     temp_f7_2 = arg3->y;
-    temp_f21 = sp120 - sp114;
-    temp_f26 = temp_f7_2 - sp114;
+    temp_f21 = sp11C.y - sp110.y;
+    temp_f26 = temp_f7_2 - sp110.y;
     temp_f6_4 = arg3->x;
-    temp_f27 = temp_f6_4 - sp110;
+    temp_f27 = temp_f6_4 - sp110.x;
     temp_f8 = arg3->z;
-    temp_f20 = sp11C - sp110;
-    temp_f25 = temp_f8 - sp118;
+    temp_f20 = sp11C.x - sp110.x;
+    temp_f25 = temp_f8 - sp110.z;
     temp_f10 =
-        (sp10C * temp_f25) + ((temp_f3_2 * temp_f27) + (sp108 * temp_f26));
+        (sp104.z * temp_f25) + ((temp_f3_2 * temp_f27) + (sp104.y * temp_f26));
     temp_f9 = (temp_f25 * temp_f25) +
               ((temp_f27 * temp_f27) + (temp_f26 * temp_f26));
-    temp_f21_2 = sp124 - sp118;
-    temp_f5_2 = (sp10C * sp10C) + ((temp_f3_2 * temp_f3_2) + (sp108 * sp108));
-    temp_f4_7 =
-        (sp10C * temp_f21_2) + ((temp_f3_2 * temp_f20) + (sp108 * temp_f21));
+    temp_f21_2 = sp11C.z - sp110.z;
+    temp_f5_2 =
+        (sp104.z * sp104.z) + ((temp_f3_2 * temp_f3_2) + (sp104.y * sp104.y));
+    temp_f4_7 = (sp104.z * temp_f21_2) +
+                ((temp_f3_2 * temp_f20) + (sp104.y * temp_f21));
     temp_f11 = (temp_f25 * temp_f21_2) +
                ((temp_f27 * temp_f20) + (temp_f26 * temp_f21));
     temp_f12 = (temp_f5_2 * temp_f9) - (temp_f10 * temp_f10);
@@ -1218,16 +1197,16 @@ block_39:
         }
         if (var_r0_3 != 0) {
             temp_f11_2 =
-                (float) ((lbColl_804D7A18 * (f64) temp_f26) + (f64) sp114);
+                (float) ((lbColl_804D7A18 * (f64) temp_f26) + (f64) sp110.y);
             temp_f10_2 =
-                (float) ((lbColl_804D7A18 * (f64) temp_f27) + (f64) sp110);
-            temp_f1_2 = sp120 - temp_f11_2;
+                (float) ((lbColl_804D7A18 * (f64) temp_f27) + (f64) sp110.x);
+            temp_f1_2 = sp11C.y - temp_f11_2;
             temp_f9_2 =
-                (float) ((lbColl_804D7A18 * (f64) temp_f25) + (f64) sp118);
+                (float) ((lbColl_804D7A18 * (f64) temp_f25) + (f64) sp110.z);
             temp_f11_3 = arg1->y - temp_f11_2;
-            temp_f4_8 = sp11C - temp_f10_2;
+            temp_f4_8 = sp11C.x - temp_f10_2;
             temp_f5_3 = arg1->x - temp_f10_2;
-            temp_f2_5 = sp124 - temp_f9_2;
+            temp_f2_5 = sp11C.z - temp_f9_2;
             temp_f3_3 = arg1->z - temp_f9_2;
             if (((temp_f2_5 * temp_f2_5) +
                  ((temp_f4_8 * temp_f4_8) + (temp_f1_2 * temp_f1_2))) <
@@ -1315,12 +1294,12 @@ block_39:
             }
         }
     }
-    arg4->x = (sp104 * var_f0) + sp11C;
-    arg4->y = (sp108 * var_f0) + sp120;
-    arg4->z = (sp10C * var_f0) + sp124;
-    arg5->x = (temp_f27 * var_f24) + sp110;
-    arg5->y = (temp_f26 * var_f24) + sp114;
-    arg5->z = (temp_f25 * var_f24) + sp118;
+    arg4->x = (sp104.x * var_f0) + sp11C.x;
+    arg4->y = (sp104.y * var_f0) + sp11C.y;
+    arg4->z = (sp104.z * var_f0) + sp11C.z;
+    arg5->x = (temp_f27 * var_f24) + sp110.x;
+    arg5->y = (temp_f26 * var_f24) + sp110.y;
+    arg5->z = (temp_f25 * var_f24) + sp110.z;
     temp_f1_4 = arg4->y - arg5->y;
     temp_f4_9 = arg4->x - arg5->x;
     temp_f2_6 = arg4->z - arg5->z;
@@ -1348,18 +1327,18 @@ block_39:
         var_r0_4 = 0;
     }
     if (var_r0_4 != 0) {
-        arg2->x = (scl + arg10) - var_f30;
+        *arg8 = (scl + arg10) - var_f30;
         arg7->x = arg4->x;
         arg7->y = arg4->y;
         arg7->z = arg4->z;
         return 1;
     }
-    // HSD_MtxInverse(arg6, (float(*)[4]) & sp9C[0]);
-    // PSMTXMultVec((float(*)[4]) & sp9C[0], arg4, (Vec3*) &sp11C);
-    // PSMTXMultVec((float(*)[4]) & sp9C[0], arg5, (Vec3*) &sp104);
-    temp_f1_9 = sp120 - sp108;
-    temp_f4_10 = sp11C - sp104;
-    temp_f2_7 = sp124 - sp10C;
+    HSD_MtxInverse(arg6, sp9C);
+    PSMTXMultVec(sp9C, arg4, &sp11C);
+    PSMTXMultVec(sp9C, arg5, &sp104);
+    temp_f1_9 = sp11C.y - sp104.y;
+    temp_f4_10 = sp11C.x - sp104.x;
+    temp_f2_7 = sp11C.z - sp104.z;
     temp_f1_10 = (temp_f2_7 * temp_f2_7) +
                  ((temp_f4_10 * temp_f4_10) + (temp_f1_9 * temp_f1_9));
     if (temp_f1_10 > lbColl_804D79F8) {
@@ -1381,7 +1360,7 @@ block_39:
     temp_f0 = (arg10 * var_f30) / var_f1_2;
     temp_f2_8 = temp_f0 / var_f30;
     temp_f1_14 = scl + temp_f0;
-    arg2->x = temp_f1_14 - var_f30;
+    *arg8 = temp_f1_14 - var_f30;
     temp_f1_15 = arg5->x;
     arg7->x = (temp_f2_8 * (arg4->x - temp_f1_15)) + temp_f1_15;
     temp_f1_16 = arg5->y;
@@ -1532,12 +1511,12 @@ bool lbColl_80007BCC(HitCapsule* arg0, HitResult* shield_hit, void* arg2,
         return 1;
     }
     if (arg2 != NULL) {
-        PSMTXConcat(arg2, HSD_JObjGetMtxPtr(shield_hit->bone), sp38);
+        PSMTXConcat(arg2, lbColl_JObjGetMtxPtr(shield_hit->bone), sp38);
     }
     if (arg2 != NULL) {
         var_r9 = sp38;
     } else {
-        var_r9 = HSD_JObjGetMtxPtr(shield_hit->bone);
+        var_r9 = lbColl_JObjGetMtxPtr(shield_hit->bone);
     }
     if (arg0->x43_b1) {
         var_f1 = arg0->scale;
@@ -1545,18 +1524,18 @@ bool lbColl_80007BCC(HitCapsule* arg0, HitResult* shield_hit, void* arg2,
         var_f1 = arg0->scale * arg4;
     }
 
-    return lbColl_80006E58(&arg0->x58,            // arg0
-                           &arg0->x4C,            // arg1
-                           &shield_hit->pos,      // arg2
-                           &shield_hit->pos,      // arg3
-                           &sp74,                 // arg4
-                           &sp68,                 // arg5
-                           var_r9,                // arg6
-                           &arg0->hurt_coll_pos,  // arg7
-                           &arg0->coll_distance,  // arg8
-                           var_f1,                // arg9
-                           shield_hit->size,      // arg10
-                           lbColl_804D7A34 * arg5 // arg11
+    return lbColl_80006E58(&arg0->x58,             // arg0
+                           &arg0->x4C,             // arg1
+                           &shield_hit->pos,       // arg2
+                           &shield_hit->pos,       // arg3
+                           &sp74,                  // arg4
+                           &sp68,                  // arg5
+                           var_r9,                 // arg6
+                           &arg0->hurt_coll_pos,   // arg7
+                           var_f1,                 // arg9
+                           shield_hit->size,       // arg10
+                           lbColl_804D7A34 * arg5, // arg11
+                           &arg0->coll_distance    // arg8
     );
 }
 
@@ -1568,7 +1547,7 @@ void lbColl_80007DD8(HitCapsule* capsule, HitResult* hit, Mtx hit_transform,
     Mtx transformed_hit;
 
     if (hit_transform != NULL) {
-        PSMTXConcat(hit_transform, HSD_JObjGetMtxPtr(hit->bone),
+        PSMTXConcat(hit_transform, lbColl_JObjGetMtxPtr(hit->bone),
                     transformed_hit);
     }
     if (capsule->x43_b1) {
@@ -1578,7 +1557,7 @@ void lbColl_80007DD8(HitCapsule* capsule, HitResult* hit, Mtx hit_transform,
     }
     lbColl_800077A0(&hit->pos,
                     hit_transform != NULL ? transformed_hit
-                                          : HSD_JObjGetMtxPtr(hit->bone),
+                                          : lbColl_JObjGetMtxPtr(hit->bone),
                     &capsule->x58, &capsule->x4C, &unused_result, arg3, angle,
                     hit->size, dist_offset);
 }
@@ -1603,12 +1582,12 @@ bool lbColl_80007ECC(HitCapsule* arg0, HurtCapsule* arg1, Mtx arg2,
             arg1->skip_update_pos = 1;
         }
         if (arg2 != NULL) {
-            PSMTXConcat(arg2, HSD_JObjGetMtxPtr(arg1->bone), sp34);
+            PSMTXConcat(arg2, lbColl_JObjGetMtxPtr(arg1->bone), sp34);
         }
         if (arg2 != NULL) {
             var_r9 = sp34;
         } else {
-            var_r9 = HSD_JObjGetMtxPtr(arg1->bone);
+            var_r9 = lbColl_JObjGetMtxPtr(arg1->bone);
         }
         if (arg0->x43_b1) {
             var_f1 = arg0->scale;
@@ -1617,8 +1596,8 @@ bool lbColl_80007ECC(HitCapsule* arg0, HurtCapsule* arg1, Mtx arg2,
         }
         return lbColl_80006E58(
             &arg0->x58, &arg0->x4C, &arg1->a_pos, &arg1->b_pos, &sp70, &sp64,
-            var_r9, &arg0->hurt_coll_pos, &arg0->coll_distance, var_f1,
-            arg1->scale, lbColl_804D7A38 * hurt_scl_y);
+            var_r9, &arg0->hurt_coll_pos, var_f1, arg1->scale,
+            lbColl_804D7A38 * hurt_scl_y, &arg0->coll_distance);
     }
     return 0;
 }
@@ -1650,12 +1629,12 @@ bool lbColl_8000805C(HitCapsule* arg0, HurtCapsule* arg1, Mtx arg2, s32 arg3,
             return 1;
         }
         if (arg2 != NULL) {
-            PSMTXConcat(arg2, HSD_JObjGetMtxPtr(arg1->bone), sp38);
+            PSMTXConcat(arg2, lbColl_JObjGetMtxPtr(arg1->bone), sp38);
         }
         if (arg2 != NULL) {
             var_r9 = sp38;
         } else {
-            var_r9 = HSD_JObjGetMtxPtr(arg1->bone);
+            var_r9 = lbColl_JObjGetMtxPtr(arg1->bone);
         }
         if (arg0->x43_b1) {
             var_f1 = arg0->scale;
@@ -1665,8 +1644,8 @@ bool lbColl_8000805C(HitCapsule* arg0, HurtCapsule* arg1, Mtx arg2, s32 arg3,
 
         return lbColl_80006E58(&arg0->x58, &arg0->x4C, &arg1->a_pos,
                                &arg1->b_pos, &sp74, &sp68, var_r9,
-                               &arg0->hurt_coll_pos, &arg0->coll_distance,
-                               var_f1, arg1->scale, lbColl_804D7A38 * arg5);
+                               &arg0->hurt_coll_pos, var_f1, arg1->scale,
+                               lbColl_804D7A38 * arg5, &arg0->coll_distance);
     }
     return 0;
 }
@@ -1690,7 +1669,7 @@ inline void mtxConcat(HurtCapsule* hurt, Mtx mtx)
 {
     Mtx sp34;
     if (mtx != NULL) {
-        PSMTXConcat(mtx, HSD_JObjGetMtxPtr(hurt->bone), &sp34[0]);
+        PSMTXConcat(mtx, lbColl_JObjGetMtxPtr(hurt->bone), &sp34[0]);
     }
 }
 
@@ -1701,7 +1680,7 @@ inline MtxPtr pickMtx(HurtCapsule* hurt, Mtx mtx)
     if (mtx != NULL) {
         var_r9 = sp34;
     } else {
-        var_r9 = HSD_JObjGetMtxPtr(hurt->bone);
+        var_r9 = lbColl_JObjGetMtxPtr(hurt->bone);
     }
     return var_r9;
 }
@@ -1736,12 +1715,12 @@ bool lbColl_80008248(HitCapsule* arg0, HurtCapsule* arg1, Mtx arg2, f32 arg3,
         arg1->skip_update_pos = 1;
     }
     if (arg2 != NULL) {
-        PSMTXConcat(arg2, HSD_JObjGetMtxPtr(arg1->bone), sp34);
+        PSMTXConcat(arg2, lbColl_JObjGetMtxPtr(arg1->bone), sp34);
     }
     if (arg2 != NULL) {
         var_r9 = sp34;
     } else {
-        var_r9 = HSD_JObjGetMtxPtr(arg1->bone);
+        var_r9 = lbColl_JObjGetMtxPtr(arg1->bone);
     }
     if (arg0->x43_b1) {
         var_f1 = arg0->scale;
@@ -1749,9 +1728,8 @@ bool lbColl_80008248(HitCapsule* arg0, HurtCapsule* arg1, Mtx arg2, f32 arg3,
         var_f1 = arg0->scale * arg3;
     }
     return lbColl_80006E58(&arg0->x58, &arg0->x4C, &arg1->a_pos, &arg1->b_pos,
-                           &sp70, &sp64, var_r9, &arg0->hurt_coll_pos,
-                           &arg0->coll_distance, var_f1, arg1->scale,
-                           3.0f * arg4);
+                           &sp70, &sp64, var_r9, &arg0->hurt_coll_pos, var_f1,
+                           arg1->scale, 3.0f * arg4, &arg0->coll_distance);
 }
 
 void lbColl_800083C4(HurtCapsule* arg0)
@@ -2290,7 +2268,7 @@ void lbColl_800096B4(MtxPtr arg0, Vec3 arg1, Vec3 arg2, GXColor* arg3,
 void lbColl_80009DD4(Vec3* v0, Vec3* v1, GXColor* clr)
 {
     Mtx viewMtx;
-    float x0, y0, z0, x1, y1;
+    float x1, x0, y0, z0, y1;
     u8 r, g, b, a;
 
     HSD_StateInvalidate(-1);
@@ -2435,7 +2413,7 @@ bool lbColl_8000A244(HurtCapsule* hurt, u32 arg1, Mtx arg2, float arg3)
             hurt->skip_update_pos = 1;
         }
         if (arg2 != NULL) {
-            PSMTXConcat(arg2, HSD_JObjGetMtxPtr(hurt->bone), sp9C);
+            PSMTXConcat(arg2, lbColl_JObjGetMtxPtr(hurt->bone), sp9C);
         }
         temp_f31 = hurt->scale;
         temp_r31_2 = lbColl_803B9928[hurt->state].pad_x;
@@ -2444,7 +2422,7 @@ bool lbColl_8000A244(HurtCapsule* hurt, u32 arg1, Mtx arg2, float arg3)
         if (arg2 != NULL) {
             var_r28 = sp9C;
         } else {
-            var_r28 = HSD_JObjGetMtxPtr(hurt->bone);
+            var_r28 = lbColl_JObjGetMtxPtr(hurt->bone);
         }
         HSD_MtxInverse(var_r28, sp3C);
         PSMTXMultVec(sp3C, &sp90, &sp6C);
@@ -2512,8 +2490,8 @@ bool lbColl_8000A460(Fighter_x1670_t* hurt, u32 arg1)
     }
     if (var_r0 == arg1) {
         HSD_JObjSetupMatrix(hurt->jobj);
-        lbColl_800096B4(HSD_JObjGetMtxPtr(hurt->jobj), hurt->v1, hurt->v1, r31,
-                        r30, hurt->v2);
+        lbColl_800096B4(lbColl_JObjGetMtxPtr(hurt->jobj), hurt->v1, hurt->v1,
+                        r31, r30, hurt->v2);
         return true;
     }
     return false;
@@ -2526,9 +2504,9 @@ bool lbColl_8000A584(HurtCapsule* hurt, u32 arg1, u32 arg2, Mtx arg3, f32 arg8)
         Mtx spA0;
         Vec3 sp94;
         Vec3 sp88;
-        Mtx sp40;
         Vec3 sp34;
         Vec3 sp28;
+        Mtx sp40;
         f32 temp_f31;
         GXColor* temp_r31_2;
         MtxPtr var_r28;
@@ -2557,7 +2535,7 @@ bool lbColl_8000A584(HurtCapsule* hurt, u32 arg1, u32 arg2, Mtx arg3, f32 arg8)
                 hurt->skip_update_pos = 1;
             }
             if (arg3 != NULL) {
-                PSMTXConcat(arg3, HSD_JObjGetMtxPtr(hurt->bone), spA0);
+                PSMTXConcat(arg3, lbColl_JObjGetMtxPtr(hurt->bone), spA0);
             }
             temp_f31 = hurt->scale;
             temp_r31_2 = lbColl_803B9928[var_r4].pad_x;
@@ -2566,7 +2544,7 @@ bool lbColl_8000A584(HurtCapsule* hurt, u32 arg1, u32 arg2, Mtx arg3, f32 arg8)
             if (arg3 != NULL) {
                 var_r28 = spA0;
             } else {
-                var_r28 = HSD_JObjGetMtxPtr(hurt->bone);
+                var_r28 = lbColl_JObjGetMtxPtr(hurt->bone);
             }
             HSD_MtxInverse(var_r28, sp40);
             PSMTXMultVec(sp40, &sp94, &sp28);
@@ -2579,14 +2557,61 @@ bool lbColl_8000A584(HurtCapsule* hurt, u32 arg1, u32 arg2, Mtx arg3, f32 arg8)
     }
 }
 
+bool lbColl_8000A78C(HitResult* hit, u32 arg1, Mtx arg2, f32 pos_z)
+{
+    Mtx sp9C;
+    Vec3 sp90;
+    Vec3 sp84;
+    Vec3 sp30;
+    Vec3 sp24;
+    Mtx sp3C;
+
+    f32 temp_f31;
+    MtxPtr var_r31;
+    u32 var_r0;
+
+    if (lbColl_804D36C4.a == 0xFF) {
+        var_r0 = 0;
+    } else {
+        var_r0 = 2;
+    }
+    if (var_r0 == arg1) {
+        if (!hit->skip_update_pos) {
+            lb_8000B1CC(hit->bone, &hit->offset, &hit->pos);
+            if (arg2 != NULL) {
+                hit->pos.z = pos_z;
+            }
+            hit->skip_update_pos = true;
+        }
+        if (arg2 != NULL) {
+            PSMTXConcat(arg2, lbColl_JObjGetMtxPtr(hit->bone), sp9C);
+        }
+        temp_f31 = hit->size;
+        sp84 = hit->pos;
+        sp90 = hit->pos;
+        if (arg2 != NULL) {
+            var_r31 = sp9C;
+        } else {
+            var_r31 = lbColl_JObjGetMtxPtr(hit->bone);
+        }
+        HSD_MtxInverse(var_r31, sp3C);
+        PSMTXMultVec(sp3C, &sp90, &sp24);
+        PSMTXMultVec(sp3C, &sp84, &sp30);
+        lbColl_800096B4(var_r31, sp24, sp30, &lbColl_804D36C4,
+                        &lbColl_804D36C8, temp_f31);
+        return true;
+    }
+    return false;
+}
+
 bool lbColl_8000A95C(HitResult* hit, u32 arg1, Mtx arg2, f32 pos_z)
 {
     Mtx sp9C;
     Vec3 sp90;
     Vec3 sp84;
-    Mtx sp3C;
     Vec3 sp30;
     Vec3 sp24;
+    Mtx sp3C;
 
     f32 temp_f31;
     MtxPtr var_r31;
@@ -2606,7 +2631,7 @@ bool lbColl_8000A95C(HitResult* hit, u32 arg1, Mtx arg2, f32 pos_z)
             hit->skip_update_pos = 1;
         }
         if (arg2 != NULL) {
-            PSMTXConcat(arg2, HSD_JObjGetMtxPtr(hit->bone), sp9C);
+            PSMTXConcat(arg2, lbColl_JObjGetMtxPtr(hit->bone), sp9C);
         }
         temp_f31 = hit->size;
         sp84 = hit->pos;
@@ -2614,7 +2639,7 @@ bool lbColl_8000A95C(HitResult* hit, u32 arg1, Mtx arg2, f32 pos_z)
         if (arg2 != NULL) {
             var_r31 = sp9C;
         } else {
-            var_r31 = HSD_JObjGetMtxPtr(hit->bone);
+            var_r31 = lbColl_JObjGetMtxPtr(hit->bone);
         }
         HSD_MtxInverse(var_r31, sp3C);
         PSMTXMultVec(sp3C, &sp90, &sp24);
@@ -2653,7 +2678,7 @@ bool lbColl_8000AB2C(HitResult* hit, u32 arg1, MtxPtr arg2, f32 pos_z)
             hit->skip_update_pos = true;
         }
         if (arg2 != NULL) {
-            PSMTXConcat(arg2, HSD_JObjGetMtxPtr(hit->bone), sp9C);
+            PSMTXConcat(arg2, lbColl_JObjGetMtxPtr(hit->bone), sp9C);
         }
         temp_f31 = hit->size;
         sp84 = hit->pos;
@@ -2661,7 +2686,7 @@ bool lbColl_8000AB2C(HitResult* hit, u32 arg1, MtxPtr arg2, f32 pos_z)
         if (arg2 != NULL) {
             var_r31 = sp9C;
         } else {
-            var_r31 = HSD_JObjGetMtxPtr(hit->bone);
+            var_r31 = lbColl_JObjGetMtxPtr(hit->bone);
         }
         HSD_MtxInverse(var_r31, sp3C);
         PSMTXMultVec(sp3C, &sp90, &sp24);

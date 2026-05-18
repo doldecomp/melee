@@ -232,6 +232,66 @@ void fn_800195FC(void)
     lbSnap_8001D2BC();
 }
 
+void lb_80019628(void)
+{
+    OSAlarm* alarm = &lb_804329F0.alarm;
+    OSTime period;
+    u64 new_val = lb_804329F0.x38;
+
+    if ((s64) new_val == lb_804329F0.x0[0].x0) {
+        return;
+    }
+
+    lb_804329F0.x0[0].x0 = (s64) new_val;
+
+    if (lb_804329F0.x0[0].x8 >= lb_804329F0.x0[0].x0) {
+        lb_804329F0.x0[0].x8 = 0;
+    }
+
+    period = (OSTime) (f64) (u32) OS_TIMER_CLOCK;
+
+    if (lb_804329F0.x0[0].x0 < period) {
+        period = lb_804329F0.x0[0].x0;
+    }
+
+    if (lb_804329F0.x0[1].x0 < period) {
+        period = lb_804329F0.x0[1].x0;
+    }
+
+    {
+        OSTime fps_period =
+            (OSTime) (f64) (0.016666668f * (f32) (u32) OS_TIMER_CLOCK);
+        if (period >= fps_period) {
+            period = fps_period;
+        }
+    }
+
+    if ((s64) lb_804329F0.x40 == period) {
+        return;
+    }
+
+    lb_804329F0.x40 = (u64) period;
+
+    {
+        u32 rate = (u32) ((u64) period / (OS_TIMER_CLOCK / 1000));
+        if (rate > 11) {
+            rate = 11;
+        }
+        if (lb_804329F0.x4 != rate) {
+            PADSetSamplingRate(rate);
+            lb_804329F0.x4 = rate;
+        }
+    }
+
+    if (lb_804329F0.x48 != 0) {
+        OSCancelAlarm(alarm);
+    }
+    OSCreateAlarm(alarm);
+    OSSetPeriodicAlarm(alarm, lb_804329F0.x40, lb_804329F0.x40,
+                       (OSAlarmHandler) fn_800195FC);
+    lb_804329F0.x48 = 1;
+}
+
 void lb_80019880(u64 arg0)
 {
     lb_804329F0.x38 = arg0;

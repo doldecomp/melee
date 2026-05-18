@@ -2,6 +2,8 @@
 
 #include "ftcmdscript.h"
 
+#include "ft/ftlib.h"
+
 #include <melee/ft/chara/ftDonkey/forward.h>
 #include <melee/ft/chara/ftKoopa/forward.h>
 #include <melee/ft/chara/ftSamus/forward.h>
@@ -714,7 +716,177 @@ bool ftCo_800B89CC(Fighter* fp)
     return true;
 }
 
-/// #ftCo_800B8A9C
+bool ftCo_800B8A9C(Fighter* fp)
+{
+    struct Fighter_x1A88_t* cpu = &fp->x1A88;
+    Fighter* target;
+    Item* item;
+    float weapon_reach;
+    int result;
+    int var_r0;
+    Vec3 sp1C;
+    Vec3 sp28;
+    int sp34;
+    u32 sp38;
+
+    if (!cpu->xF9_b2) {
+        return false;
+    }
+    target = cpu->x44;
+    cpu->xEC = 0;
+    cpu->xC8 = 0;
+    if (target == NULL || fp->motion_id == ftCo_MS_Pass ||
+        ftCo_800A1C44(target) || ftCo_800B885C(fp) || ftCo_800A1CA8(fp))
+    {
+        cpu->xA4 = 0;
+        return false;
+    }
+    {
+        Fighter* target2 = cpu->x44;
+        if (target2->motion_id >= ftCo_MS_Catch &&
+            target2->motion_id <= ftCo_MS_EscapeAir)
+        {
+            if (cpu->xEC < 8U) {
+                cpu->xCC_array[cpu->xEC] = 0x28;
+                cpu->xEC++;
+            }
+            if (cpu->xEC < 8U) {
+                cpu->xCC_array[cpu->xEC] = 0x29;
+                cpu->xEC++;
+            }
+        } else if (target2->x34_scale.y > fp->x34_scale.y) {
+            if (cpu->xEC < 8U) {
+                cpu->xCC_array[cpu->xEC] = 0x28;
+                cpu->xEC++;
+            }
+            if (cpu->xEC < 8U) {
+                cpu->xCC_array[cpu->xEC] = 0x29;
+                cpu->xEC++;
+            }
+            if (fp->kind == FTKIND_KIRBY && cpu->xEC < 8U) {
+                cpu->xCC_array[cpu->xEC] = 0x11;
+                cpu->xEC++;
+            }
+        }
+    }
+    ftCo_800B77E8(fp);
+    if (fp->ground_or_air == GA_Air) {
+        if (ftCo_800B89CC(fp)) {
+            result = ftCo_800B4AB0(fp, target,
+                                   ((void**) Fighter_804D64FC->x8)[fp->kind]);
+            if (result != 0) {
+                cpu->xA4 = result;
+                return true;
+            }
+        }
+        goto done;
+    }
+    if (ftCo_800A3134(target) || ftCo_800A3200(target)) {
+        if (cpu->xC8 < 8U) {
+            cpu->xA8_array[cpu->xC8] = 0xa;
+            cpu->xC8++;
+        }
+        if (cpu->xC8 < 8U) {
+            cpu->xA8_array[cpu->xC8] = 0xe;
+            cpu->xC8++;
+        }
+        result = ftCo_800B4AB0(fp, target,
+                               ((void**) Fighter_804D64FC->x4)[fp->kind]);
+        if (result != 0) {
+            cpu->xA4 = result;
+            return true;
+        }
+        goto done;
+    }
+    if (fp->item_gobj != NULL && ftCo_800A59E4(GET_ITEM(fp->item_gobj))) {
+        item = GET_ITEM(fp->item_gobj);
+        if (!ftCo_800A59E4(item)) {
+            weapon_reach = 0.0f;
+        } else {
+            switch (item->kind) {
+            case It_Kind_Harisen:
+                weapon_reach = ((float*) Fighter_804D64FC->x24)[0];
+                break;
+            case It_Kind_LipStick:
+                weapon_reach = ((float*) Fighter_804D64FC->x24)[1];
+                break;
+            case It_Kind_StarRod:
+                weapon_reach = ((float*) Fighter_804D64FC->x24)[2];
+                break;
+            case It_Kind_Sword:
+                weapon_reach = ((float*) Fighter_804D64FC->x24)[3];
+                break;
+            case It_Kind_Bat:
+                weapon_reach = ((float*) Fighter_804D64FC->x24)[4];
+                break;
+            case It_Kind_Parasol:
+                weapon_reach = ((float*) Fighter_804D64FC->x24)[5];
+                break;
+            default:
+                weapon_reach = 0.0f;
+                break;
+            }
+        }
+        result = ftCo_800B52AC(fp, target,
+                               ((void**) Fighter_804D64FC->x18)[fp->kind],
+                               weapon_reach);
+        if (result != 0) {
+            cpu->xA4 = result;
+            return true;
+        }
+    }
+    if (cpu->level > 5 && ftCo_800B9F6C(target)) {
+        result = ftCo_800B4AB0(fp, target,
+                               ((void**) Fighter_804D64FC->x10)[fp->kind]);
+        if (result != 0) {
+            cpu->xA4 = result;
+            return true;
+        }
+    }
+    {
+        Fighter* target3 = cpu->x44;
+        if (fp->item_gobj != NULL) {
+            var_r0 = 0;
+        } else if (ftCo_800A3200(target3)) {
+            var_r0 = 0;
+        } else {
+            if (ftCo_800A0FB0(&sp1C, &sp34, &sp38, &sp28, -1, -1, -1,
+                              target3->cur_pos.x, 5.0f + target3->cur_pos.y,
+                              target3->cur_pos.x, target3->cur_pos.y - 1000.0f,
+                              0.0f) != 0)
+            {
+                var_r0 = 0;
+            } else {
+                var_r0 = 1;
+            }
+        }
+    }
+    if (var_r0 != 0) {
+        result = ftCo_800B4AB0(fp, target,
+                               ((void**) Fighter_804D64FC->x1C)[fp->kind]);
+        if (result != 0) {
+            cpu->xA4 = result;
+            cpu->xF8_b7 = 1;
+            return true;
+        }
+    }
+    result =
+        ftCo_800B4AB0(fp, target, ((void**) Fighter_804D64FC->x4)[fp->kind]);
+    if (result != 0) {
+        cpu->xA4 = result;
+        return true;
+    }
+    if (cpu->x50 != 0) {
+        result = ftCo_800B5AB0(fp, ((void**) Fighter_804D64FC->x14)[fp->kind]);
+        if (result != 0) {
+            cpu->xA4 = result;
+            return true;
+        }
+    }
+done:
+    cpu->xA4 = 0;
+    return false;
+}
 
 void ftCo_800B9020(Fighter* fp)
 {
@@ -1484,7 +1656,121 @@ bool ftCo_800BB104(Fighter* fp, Fighter* arg1, Vec3* arg2, f32 arg3)
     return false;
 }
 
-/// #ftCo_800BB220
+int ftCo_800BB220(Fighter* fp, Item* ip, Vec3* arg2, f32 arg3)
+{
+    Vec3 dst;
+    int i;
+    s32 count;
+    HitCapsule* hit;
+    HitCapsuleState state;
+    bool result;
+    struct Fighter_x1A88_t* temp_r31;
+
+    if (ip->owner == fp->gobj) {
+        return 0;
+    }
+    if (ftLib_80086960(ip->owner) && ftCo_IsAlly(fp, GET_FIGHTER(ip->owner))) {
+        return 0;
+    }
+    if (ip->kind == It_Kind_Unk4 || ip->kind == It_Kind_Star) {
+        result = true;
+    } else {
+        result = ftCo_800A5980((Fighter*) ip);
+    }
+    if (result) {
+        return 0;
+    }
+
+    temp_r31 = &fp->x1A88;
+    if (fp->x1A88.level < 3) {
+        count = (s32) (20.0f * HSD_Randf()) + 10;
+    } else if (temp_r31->level < 6) {
+        count = (s32) (10.0f * HSD_Randf()) + 5;
+    } else if (temp_r31->level < 9) {
+        count = (s32) (5.0f * HSD_Randf()) + 3;
+    } else {
+        count = 1;
+    }
+
+    dst.x = fp->pos_delta.x * count + arg2->x;
+    dst.y = fp->pos_delta.y * count + arg2->y;
+    dst.z = fp->pos_delta.z * count + arg2->z;
+
+    if (fp->kind == FTKIND_NESS && temp_r31->level > 3) {
+        if (count < 21) {
+            Vec3 sp94;
+            Vec3 spAC;
+            Vec3 spB8;
+            for (i = 0; i < 4; i++) {
+                state = ip->x5D4_hitboxes[i].hit.state;
+                hit = &ip->x5D4_hitboxes[i].hit;
+                if (state != HitCapsule_Disabled &&
+                    state != HitCapsule_Enabled && !hit->x43_b2 &&
+                    hit->element != 0xB && !lbColl_8000ACFC(fp, hit))
+                {
+                    sp94.x = (hit->x4C.x - hit->x58.x) * count + hit->x4C.x;
+                    sp94.y = (hit->x4C.y - hit->x58.y) * count + hit->x4C.y;
+                    sp94.z = (hit->x4C.z - hit->x58.z) * count + hit->x4C.z;
+                    if (lbColl_80006094(&hit->x4C, &sp94, arg2, &dst, &spAC,
+                                        &spB8, hit->scale, arg3))
+                    {
+                        return 2;
+                    }
+                }
+            }
+            return 0;
+        } else {
+            Vec3 sp60;
+            Vec3 sp78;
+            Vec3 sp84;
+            for (i = 0; i < 4; i++) {
+                state = ip->x5D4_hitboxes[i].hit.state;
+                hit = &ip->x5D4_hitboxes[i].hit;
+                if (state != HitCapsule_Disabled &&
+                    state != HitCapsule_Enabled && !hit->x43_b2 &&
+                    hit->element != 0xB && !lbColl_8000ACFC(fp, hit))
+                {
+                    sp60.x = (hit->x4C.x - hit->x58.x) * count + hit->x4C.x;
+                    sp60.y = (hit->x4C.y - hit->x58.y) * count + hit->x4C.y;
+                    sp60.z = (hit->x4C.z - hit->x58.z) * count + hit->x4C.z;
+                    if (lbColl_80006094(&hit->x4C, &sp60, arg2, &dst, &sp78,
+                                        &sp84, hit->scale, arg3))
+                    {
+                        if (hit->x42_b0) {
+                            return 3;
+                        }
+                        return 2;
+                    }
+                }
+            }
+            return 0;
+        }
+    }
+
+    {
+        Vec3 sp2C;
+        Vec3 sp44;
+        Vec3 sp50;
+        for (i = 0; i < 4; i++) {
+            state = ip->x5D4_hitboxes[i].hit.state;
+            hit = &ip->x5D4_hitboxes[i].hit;
+            if (state != HitCapsule_Disabled && state != HitCapsule_Enabled &&
+                !hit->x43_b2 && hit->element != 0xB &&
+                !lbColl_8000ACFC(fp, hit))
+            {
+                sp2C.x = (hit->x4C.x - hit->x58.x) * count + hit->x4C.x;
+                sp2C.y = (hit->x4C.y - hit->x58.y) * count + hit->x4C.y;
+                sp2C.z = (hit->x4C.z - hit->x58.z) * count + hit->x4C.z;
+                if (lbColl_80006094(&hit->x4C, &sp2C, arg2, &dst, &sp44, &sp50,
+                                    hit->scale, arg3))
+                {
+                    return 2;
+                }
+            }
+        }
+    }
+    return 0;
+}
 
 bool ftCo_800BB768(Fighter* fp, Fighter* arg1)
 {

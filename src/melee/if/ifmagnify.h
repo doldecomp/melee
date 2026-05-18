@@ -8,7 +8,8 @@
 #include <dolphin/mtx.h>
 
 /* 2FB6E8 */ s32 ifMagnify_802FB6E8(s32);
-/* 2FB73C */ ifMagnifyPlayer* ifMagnify_802FB73C(ifMagnifyPlayer*, Vec2*, Vec2*);
+/* 2FB73C */ ifMagnifyPlayer* ifMagnify_802FB73C(ifMagnifyPlayer*, Vec2*,
+                                                 Vec2*);
 /* 2FB8C0 */ void ifMagnify_802FB8C0(HSD_GObj*, s32);
 /* 2FBBDC */ void ifMagnify_802FBBDC(HSD_GObj*);
 /* 2FC3BC */ void ifMagnify_802FC3BC(void);

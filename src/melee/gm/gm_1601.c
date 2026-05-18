@@ -490,7 +490,7 @@ bool gm_80160474(CharacterKind ckind, MajorSceneKind scene)
 
 char* gm_801604DC(CharacterKind ckind, MajorSceneKind scene)
 {
-    s16 var_r3;
+    s32 var_r3;
 
     switch (scene) {
     case MJ_CLASSIC_GOVER:
@@ -510,7 +510,7 @@ char* gm_801604DC(CharacterKind ckind, MajorSceneKind scene)
 
 char* gm_80160564(CharacterKind ckind, MajorSceneKind scene)
 {
-    s16 var_r3;
+    s32 var_r3;
 
     switch (scene) {
     case MJ_CLASSIC_GOVER:
@@ -1950,7 +1950,40 @@ bool gm_80164840(u8 ckind)
     return false;
 }
 
-/// #gm_80164910
+void gm_80164910(int arg0)
+{
+    u16* char_unlock_mask;
+    u8 internal_id;
+    s32 i;
+    u8 unlock_idx;
+    u8 notify_val;
+
+    char_unlock_mask = gmMainLib_8015ED8C();
+    internal_id = lbl_803B78A4[(u8) arg0];
+
+    for (i = 0; i < NUM_UNLOCKABLE_CHARACTERS; i++) {
+        if ((s32) internal_id == (s32) lbl_803B78C8[i].ckind) {
+            unlock_idx = lbl_803B78C8[i].idx;
+            goto found_char;
+        }
+    }
+    unlock_idx = NUM_UNLOCKABLE_CHARACTERS;
+
+found_char:
+    if (unlock_idx != NUM_UNLOCKABLE_CHARACTERS) {
+        for (i = 0; i < NUM_UNLOCKABLE_CHARACTERS; i++) {
+            if ((s32) unlock_idx == (s32) lbl_803B78C8[i].idx) {
+                notify_val = lbl_803B78C8[i].x2;
+                goto found_notify;
+            }
+        }
+        notify_val = 0x42;
+
+    found_notify:
+        gmMainLib_8015D818(notify_val);
+        *char_unlock_mask |= (1LL << (s32) unlock_idx);
+    }
+}
 
 s32 gm_80164A0C(u8 arg0)
 {
@@ -2460,7 +2493,7 @@ void gm_80167470(s32 arg0, s32 arg1)
     }
 }
 
-void gm_801674C4(s8 arg0, u8 arg1, s8 arg2, s8 arg3, bool (*arg4)(s32))
+void gm_801674C4(s8 arg0, u8 arg1, s8 arg2, s8 arg3, GmRouteCallback arg4)
 {
     s8 temp_r31;
     struct lbl_8046B488_t* new_var;
@@ -2480,8 +2513,8 @@ void gm_801674C4(s8 arg0, u8 arg1, s8 arg2, s8 arg3, bool (*arg4)(s32))
     fn_80169574((s32) new_var->x7, new_var->x20);
     fn_80169900(new_var->xD, new_var, temp_ptr->xA2, new_var->x20);
     temp_r31 = Player_GetCostumeId(0);
-    fn_8016989C((u8*) new_var, (s8) Player_GetPlayerCharacter(0),
-                (s32) temp_r31, (u8*) new_var->xA2, (u8*) temp_ptr->x20);
+    fn_8016989C((u8*) new_var, (s8) Player_GetPlayerCharacter(0), temp_r31,
+                (u8*) new_var->xA2, (u8*) temp_ptr->x20);
     fn_8016A09C();
     fn_80169434(arg4);
 }
@@ -3244,7 +3277,7 @@ bool gm_801693BC(int arg0)
     return false;
 }
 
-void fn_80169434(bool (*fn)(s32))
+void fn_80169434(GmRouteCallback fn)
 {
     lbl_8046B488.x1B8 = fn;
 }
@@ -3303,7 +3336,7 @@ void fn_80169574(ssize_t size, s8* buf)
     buf[size] = -2;
 }
 
-s32 fn_801695BC(u8 arg0, s32 arg1, s32 arg2, u8* arg3, u8* arg4)
+s32 fn_801695BC(u8 arg0, u8 arg1, u8 arg2, u8* arg3, u8* arg4)
 {
     u8 sp1C[0x0C];
     s32 temp_r3_2;
@@ -3448,7 +3481,7 @@ void fn_801697FC(s8 character, s8 costume, s8 new_character, s8 new_costume,
 }
 #pragma dont_inline reset
 
-void fn_8016989C(u8* arg0, s32 arg1, s32 arg2, u8* arg3, u8* arg4)
+void fn_8016989C(u8* arg0, u8 arg1, u8 arg2, u8* arg3, u8* arg4)
 {
     s32 i;
     for (i = 0; i < 3; i++) {
