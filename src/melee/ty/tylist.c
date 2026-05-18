@@ -8,6 +8,9 @@
 #include "lb/lbaudio_ax.h"
 #include "lb/lblanguage.h"
 #include "mn/mnmain.h"
+
+#include "sc/forward.h"
+
 #include "ty/toy.h"
 #include "ty/types.h"
 
@@ -1030,7 +1033,7 @@ void un_803147C4(void)
     char* data = un_804A2AC0;
     char* strs = un_803FE880;
     TyArchiveData* archive;
-    HSD_JObj* jobj;
+    LightList** jobj;
     HSD_GObj** gobj;
     PAD_STACK(8);
 
