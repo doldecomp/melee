@@ -1215,8 +1215,8 @@ void HSD_TObjSetup(HSD_TObj* tobj)
             }
 
             GXInitTexObjCI(&texobj, imagedesc->image_ptr, imagedesc->width,
-                           imagedesc->height, (GXCITexFmt) imagedesc->format,
-                           tobj->wrap_s, tobj->wrap_t,
+                           imagedesc->height, imagedesc->format, tobj->wrap_s,
+                           tobj->wrap_t,
                            imagedesc->mipmap ? GX_TRUE : GX_FALSE,
                            tlut->tlut_name);
             if (min_filter == GX_LIN_MIP_LIN) {

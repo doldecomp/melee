@@ -53,6 +53,6 @@ typedef struct {
 /* 24B8B4 */ void fn_8024B8B4(HSD_GObj*, f32);
 /* 24BAF0 */ void fn_8024BAF0(HSD_GObj*);
 /* 24BCA0 */ void mnSoundTest_8024BCA0(int);
-/* 24BEE0 */ s32 mnSoundTest_8024BEE0(s32);
+/* 24BEE0 */ HSD_GObjProc* mnSoundTest_8024BEE0(s32);
 
 #endif

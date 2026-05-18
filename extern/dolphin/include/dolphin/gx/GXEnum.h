@@ -164,14 +164,11 @@ typedef enum _GXTexFmt
     GX_CTF_Z16L = 0xC | _GX_TF_ZTF | _GX_TF_CTF,
 
     GX_TF_A8 = GX_CTF_A8,
-} GXTexFmt;
 
-typedef enum _GXCITexFmt
-{
     GX_TF_C4 = 0x8,
     GX_TF_C8 = 0x9,
     GX_TF_C14X2 = 0xA,
-} GXCITexFmt;
+} GXTexFmt;
 
 typedef enum _GXTexWrapMode
 {

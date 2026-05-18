@@ -466,6 +466,7 @@ config.libs = [
             Object(Matching, "melee/lb/lbgx.c"),
             Object(Matching, "melee/lb/lbanim.c"),
             Object(NonMatching, "melee/lb/lbmthp.c"),
+            Object(Matching, "melee/lb/lb_01F8.c"),
             Object(NonMatching, "melee/lb/lbbgflash.c"),
             Object(NonMatching, "melee/lb/lbrefract.c"),
             Object(NonMatching, "melee/lb/lbaudio_ax.c"),
@@ -1022,7 +1023,7 @@ config.libs = [
             Object(Matching, "melee/gr/grbattle.c"),
             Object(Matching, "melee/gr/grlast.c"),
             Object(NonMatching, "melee/gr/grhomerun.c"),
-            Object(NonMatching, "melee/gr/grheal.c"),
+            Object(Matching, "melee/gr/grheal.c"),
             # Break the Targets stages
             Object(Matching, "melee/gr/grtmario.c"),
             Object(Matching, "melee/gr/grtcaptain.c"),
@@ -1206,7 +1207,7 @@ config.libs = [
             Object(Matching, "melee/it/items/itgamewatchgreenhouse.c"),
             Object(Matching, "melee/it/items/itgamewatchmanhole.c"),
             Object(Matching, "melee/it/items/itgamewatchfire.c"),
-            Object(NonMatching, "melee/it/items/itgamewatchparachute.c"),
+            Object(Matching, "melee/it/items/itgamewatchparachute.c"),
             Object(Matching, "melee/it/items/itgamewatchturtle.c"),
             Object(Matching, "melee/it/items/itgamewatchbreath.c"),
             Object(Matching, "melee/it/items/itkirbygamewatchchefpan.c"),
@@ -1668,6 +1669,7 @@ config.libs = [
                 extra_cflags=["-Cpp_exceptions on"],
             ),
             Object(NonMatching, "sysdolphin/baselib/hsd_3B34.c"),
+            Object(NonMatching, "sysdolphin/baselib/hsd_3B5C.c"),
         ],
     ),
 ]

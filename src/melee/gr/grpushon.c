@@ -37,6 +37,14 @@ struct grPushOn_Lookup {
     s32 value;
 };
 
+struct grPushOn_LightConfig {
+    GXColor color;
+    Vec3 pos;
+    f32 ref_br;
+    f32 ref_dist;
+    s32 dist_func;
+};
+
 static struct {
     s32 x0;
     DynamicsDesc* x4;
@@ -52,8 +60,8 @@ static struct {
 extern Vec3 grPushOn_803B8440;
 extern Vec3 grPushOn_803B8458;
 extern Vec3 grPushOn_803B8464;
-extern HSD_LightDesc grPushOn_803E7B74;
-extern HSD_LightDesc grPushOn_803E7B90;
+extern u8 grPushOn_804D4934;
+extern u8 grPushOn_804D4948;
 
 StageCallbacks grPushOn_803E7AC8[3] = {
     { grPushOn_802184CC, grPushOn_80218590, grPushOn_80218598,
@@ -142,6 +150,76 @@ HSD_GObj* grPushOn_802183E4(int gobj_id)
 
     return gobj;
 }
+
+HSD_LightDesc grPushOn_803E7B74 = {
+    NULL,
+    NULL,
+    6,
+    0,
+    { 0xFF, 0xFF, 0xFF, 0xFF },
+    NULL,
+    NULL,
+    { &grPushOn_804D4934 },
+};
+
+HSD_LightDesc grPushOn_803E7B90 = {
+    NULL,
+    NULL,
+    0xA,
+    0,
+    { 0xFF, 0xFF, 0xFF, 0xFF },
+    NULL,
+    NULL,
+    { &grPushOn_804D4948 },
+};
+
+static struct grPushOn_LightConfig light_configs[9] = {
+    { { 0xBE, 0xE6, 0xE6, 0xFF },
+      { -12.0F, 735.0F, -20.0F },
+      0.1F,
+      800.0F,
+      3 },
+    { { 0xF0, 0xF0, 0xF0, 0xFF },
+      { 250.0F, 708.0F, -30.0F },
+      0.4F,
+      500.0F,
+      3 },
+    { { 0xC3, 0x56, 0xCD, 0xFF },
+      { 550.0F, 655.0F, -50.0F },
+      0.2F,
+      600.0F,
+      3 },
+    { { 0xF0, 0xF0, 0xF0, 0xFF },
+      { 860.0F, 550.0F, -30.0F },
+      0.1F,
+      700.0F,
+      3 },
+    { { 0x7C, 0xE7, 0xFF, 0xFF },
+      { 1150.0F, 675.0F, -60.0F },
+      0.2F,
+      800.0F,
+      3 },
+    { { 0xFF, 0x4B, 0x4B, 0xFF },
+      { 1400.0F, 370.0F, -60.0F },
+      0.01F,
+      500.0F,
+      3 },
+    { { 0xE6, 0xE6, 0xE6, 0xFF },
+      { 1580.0F, 20.0F, -30.0F },
+      0.1F,
+      500.0F,
+      3 },
+    { { 0xFF, 0x6E, 0x6E, 0xFF },
+      { 2093.0F, 120.0F, -20.0F },
+      0.3F,
+      600.0F,
+      3 },
+    { { 0xBE, 0xE6, 0xFF, 0xFF },
+      { 1700.0F, 630.0F, -20.0F },
+      0.2F,
+      800.0F,
+      3 },
+};
 
 void grPushOn_802184CC(Ground_GObj* gobj)
 {
@@ -324,7 +402,52 @@ void fn_802190A0(Ground* gp, s32 joint_id, CollData* coll, s32 unk,
     }
 }
 
-/// #grPushOn_802190D0
+void grPushOn_802190D0(HSD_GObj* gobj)
+{
+    HSD_LObj* cur = gobj->hsd_obj;
+    f32 scale = Ground_801C0498();
+    struct grPushOn_LightConfig* entry;
+    GXColor color;
+    Vec3 pos;
+    s32 i;
+    HSD_LObj* lobj;
+
+    lobj = cur == NULL ? NULL : cur->next;
+    entry = light_configs;
+
+    for (i = 0; i < 9 && lobj != NULL; i++, entry++) {
+        // Equivalent to HSD_LObjGetType(lobj); inlined here to match
+        // the original assembly (the real function is in lobj.c).
+        HSD_ASSERT(0x2BA, (u32) (lobj->flags & LOBJ_TYPE_MASK) == LOBJ_POINT);
+        lobj->flags = LOBJ_POINT | LOBJ_DIFFUSE;
+        color = entry->color;
+        HSD_LObjSetColor(lobj, color);
+        pos = entry->pos;
+        pos.x *= scale;
+        pos.y *= scale;
+        pos.z *= scale;
+        HSD_LObjSetPosition(lobj, &pos);
+        HSD_LObjSetDistAttn(lobj, scale * entry->ref_dist, entry->ref_br,
+                            entry->dist_func);
+        lobj = lobj == NULL ? NULL : lobj->next;
+    }
+}
+
+f32 grPushOn_803E7CCC[13] = {
+    1441.428955078125F,
+    1645.62890625F,
+    340.57470703125F,
+    1306.4332275390625F,
+    1361.6331787109375F,
+    361.5741882324219F,
+    1193.4345703125F,
+    1268.634521484375F,
+    367.57391357421875F,
+    1121.16015625F,
+    1157.6820068359375F,
+    354.6068115234375F,
+    0.0F,
+};
 
 void grPushOn_80219204(int arg0, int* out1, int* out2)
 {

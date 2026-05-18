@@ -694,7 +694,7 @@ void HSD_RObjFree(HSD_RObj* robj)
 
 static char HSD_RObj_80406F14[] = "(ptr && nitems) || !ptr";
 
-extern float HSD_ByteCodeEval(u8*, float*, u32);
+extern float HSD_ByteCodeEval(u8*, f32*, s32);
 
 static void expEvaluate(HSD_Exp* exp, u32 type, void* obj,
                         HSD_ObjUpdateFunc update_func)

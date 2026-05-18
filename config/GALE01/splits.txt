@@ -130,11 +130,16 @@ melee/lb/lbanim.c:
 	.sdata2     start:0x804D7CC0 end:0x804D7CC8
 
 melee/lb/lbmthp.c:
-	.text       start:0x8001E910 end:0x8001FC08
+	.text       start:0x8001E910 end:0x8001F890
 	.data       start:0x803BADB0 end:0x803BB000
-	.bss        start:0x804333E0 end:0x80433658
+	.bss        start:0x804333E0 end:0x804335B8
 	.sdata      start:0x804D3830 end:0x804D3840
-	.sdata2     start:0x804D7CC8 end:0x804D7CE8
+	.sdata2     start:0x804D7CC8 end:0x804D7CE0
+
+melee/lb/lb_01F8.c:
+	.text       start:0x8001F890 end:0x8001FC08
+	.bss        start:0x804335B8 end:0x80433658
+	.sdata2     start:0x804D7CE0 end:0x804D7CE8
 
 melee/lb/lbbgflash.c:
 	.text       start:0x8001FC08 end:0x80021CE8
@@ -5111,10 +5116,17 @@ sysdolphin/baselib/hsd_3B33.c:
 	.text       start:0x803B3344 end:0x803B3408
 
 sysdolphin/baselib/hsd_3B34.c:
-	extab       start:0x80005668 end:0x800056B0
-	extabindex  start:0x800058AC end:0x80005918
-	.text       start:0x803B3408 end:0x803B7230
+	extab       start:0x80005668 end:0x80005690
+	extabindex  start:0x800058AC end:0x800058E8
+	.text       start:0x803B3408 end:0x803B5C4C
 	.rodata     start:0x803B9670 end:0x803B9826
-	.data       start:0x80430C40 end:0x804316C0
+	.data       start:0x80430C40 end:0x80431090
 	.sdata      start:0x804D6398 end:0x804D639C
-	.sdata2     start:0x804DEB10 end:0x804DEC00
+	.sdata2     start:0x804DEB10 end:0x804DEB90
+
+sysdolphin/baselib/hsd_3B5C.c:
+	extab       start:0x80005690 end:0x800056B0
+	extabindex  start:0x800058E8 end:0x80005918
+	.text       start:0x803B5C4C end:0x803B7230
+	.data       start:0x80431090 end:0x804316C0
+	.sdata2     start:0x804DEB90 end:0x804DEC00

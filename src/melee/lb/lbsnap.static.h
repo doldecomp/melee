@@ -7,20 +7,14 @@
 #include <platform.h>
 
 #include "it/types.h"
-
-struct Unk80433380_48_10 {
-    unsigned int unk0;
-    s16 unk4;
-    u16 unk6;
-};
-STATIC_ASSERT(sizeof(struct Unk80433380_48_10) == 0x8);
+#include "lb/types.h"
 
 struct Unk80433380_48 {
-    int unk0;
+    int card_result;
     int num;
-    int unk8;
-    int unkC;
-    struct Unk80433380_48_10 unk10[0x7F];
+    int free_blocks;
+    int free_files;
+    lbCardNew_SnapshotEntry entries[0x7F];
 };
 STATIC_ASSERT(sizeof(struct Unk80433380_48) == 0x408);
 
@@ -50,12 +44,14 @@ struct Unk803BACC8 {
     char pad0[0x14];
     int x14;
     char pad18[0x1C - 0x18];
-    struct Unk80433380_0* x1C;
+    void* x1C;
+    struct Unk80433380_0* x20;
+    u32 pad[2];
 };
 
 static struct Unk80433380 lbSnap_80433380;
 static struct Unk803BACC8 lbSnap_803BACC8 = {
-    { 2, 0, 1, 0, 0, 0, 0, 0, 0, 0, 3 }, 0, { 0, 0, 0, 3 }, (void*) -1
+    { 2, 0, 1, 0, 0, 0, 0, 0, 0, 0, 3 }, 0, { 0, 0, 0, 3 }, 0, (void*) -1
 };
 
 #endif

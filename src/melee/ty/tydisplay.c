@@ -1431,7 +1431,7 @@ void un_8031B328(void)
     HSD_FogDesc* fogDesc;
     TyDspBgData* ptr = un_804D6F1C;
     TyDspSceneGfx* scene = (TyDspSceneGfx*) un_804D6ED4;
-    void* lightData;
+    LightList** lightData;
     TyDspBgData* temp3;
     s8 temp2;
     HSD_LObj* lobj;
@@ -1448,7 +1448,7 @@ void un_8031B328(void)
                                             "ScMenDisplay_scene_lights");
     if (lightData != NULL) {
         scene->x00 = GObj_Create(2, 3, 0);
-        lobj = un_80306EEC(lightData, 0);
+        lobj = Toy_LoadLObjList(lightData, 0);
         HSD_GObjObject_80390A70(scene->x00, (unsigned long) HSD_GObj_804D784A,
                                 lobj);
         temp = scene->x00;

@@ -2481,11 +2481,21 @@ static inline bool gm_80173EEC_inline(void)
     bool result = true;
 
     for (i = 0; i < 0x100; i++) {
-        if (i == 0x29) continue;
-        if (i == 0x42 || i == 0x43) continue;
-        if (i == 0xB9) continue;
-        if (i == 0xC9 || i == 0xCA) continue;
-        if (i == 9) continue;
+        if (i == 0x29) {
+            continue;
+        }
+        if (i == 0x42 || i == 0x43) {
+            continue;
+        }
+        if (i == 0xB9) {
+            continue;
+        }
+        if (i == 0xC9 || i == 0xCA) {
+            continue;
+        }
+        if (i == 9) {
+            continue;
+        }
         if (!gmMainLib_8015DADC(i)) {
             result = false;
             break;
