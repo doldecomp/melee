@@ -42,6 +42,33 @@ static inline ItemStateDesc* it_2E5A_ItemStateDesc(Item* ip)
         .anim_joint;
 }
 
+static inline float sqrtf_store(float x, volatile float* y)
+{
+    if (x > 0.0f) {
+        double guess = __frsqrte((double) x);
+        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        *y = (float) (x * guess);
+        return *y;
+    }
+    return x;
+}
+
+static inline float sqrtf_accurate_store(float x, volatile float* y)
+{
+    if (x > 0.0f) {
+        double guess = __frsqrte((double) x);
+        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        *y = (float) (x * guess);
+        return *y;
+    }
+    return x;
+}
+
 bool it_802E5AC4(Item_GObj* item_gobj, bool arg_check)
 {
     Vec3 sp40;
@@ -49,12 +76,14 @@ bool it_802E5AC4(Item_GObj* item_gobj, bool arg_check)
     Vec3 sp28;
     Item* item;
     f32 temp_f1_10;
-    f32 var_f31;
     ItemAttr* comm_attr;
     it_2E5A_Attrs* spec_attr;
     CollData* coll_data;
     bool check1;
     bool check2;
+    volatile f32 sqrt_0;
+    volatile f32 sqrt_1;
+    f32 var_f31;
     PAD_STACK(8);
 
     item = GET_ITEM(item_gobj);
@@ -82,7 +111,7 @@ bool it_802E5AC4(Item_GObj* item_gobj, bool arg_check)
             goto block_18;
         }
     block_16:
-        if (item->xDCD_flag.b4 || (comm_attr->x58 == 0.0f)) {
+        if (item->xDCD_flag.b4 || !comm_attr->x58) {
         block_18:
             itResetVelocity(item);
             item->xD50_landNum = 0;
@@ -91,8 +120,8 @@ bool it_802E5AC4(Item_GObj* item_gobj, bool arg_check)
             sp34 = it_803B8718;
             check1 = false;
             sp28 = it_803B8724;
-            var_f31 =
-                sqrtf_accurate(SQ(item->x40_vel.x) + SQ(item->x40_vel.y));
+            var_f31 = sqrtf_accurate_store(
+                SQ(item->x40_vel.x) + SQ(item->x40_vel.y), &sqrt_0);
             if (((item->x40_vel.x * coll_data->floor.normal.x) +
                  (item->x40_vel.y * coll_data->floor.normal.y)) < 0.0f)
             {
@@ -106,7 +135,9 @@ bool it_802E5AC4(Item_GObj* item_gobj, bool arg_check)
             }
             if (check2) {
                 lbVector_NormalizeXY(&sp28);
-                if (sqrtf(SQ(sp28.x) + SQ(sp28.y) + SQ(sp28.z)) < 0.01f) {
+                if (sqrtf_store(SQ(sp28.x) + SQ(sp28.y) + SQ(sp28.z),
+                                &sqrt_1) < 0.01f)
+                {
                     sp28.x = item->x40_vel.x;
                     sp28.y = -1.0f * item->x40_vel.y;
                 }
@@ -284,21 +315,49 @@ void it_802E628C(Item_GObj* item_gobj, f32 arg8, f32 arg9)
     item->x40_vel.z = 0.0f;
 }
 
-s32 it_802E6380(Item_GObj* item_gobj, it_802E5FXX_struct* arg1)
+static inline void it_802E6380_inline(Item_GObj* item_gobj)
 {
-    u8 _padA[24];
     Item* item = GET_ITEM(item_gobj);
-    it_2E5A_Attrs* attr = item->xC4_article_data->x4_specialAttributes;
-    it_2E5A_TierEntry* tier;
-    s32 off = 2;
+    item->xDD4_itemVar.it_2E5A.x18.b0 =
+        (item->xDD4_itemVar.it_2E5A.x18.b1 = 0);
 
-    tier = attr->tiers;
-    if (arg1->xC < tier[2].threshold) {
+    if (item->xDD4_itemVar.it_2E5A.x8 != 0) {
+        it_2E5A_Attrs* attr = item->xC4_article_data->x4_specialAttributes;
+        it_2E5A_SubVars* sub = &item->xDD4_itemVar.it_2E5A.sub;
+        sub->x4 = GET_JOBJ(item_gobj);
+        sub->x0 = (0.003906f * attr->x28) / item->scl;
+        item->x3C = sub->x0;
+        lb_8000B1CC(sub->x4, NULL, &sub->x8);
+        sub->x14 = sub->x8;
+        if (db_ShowCoinPickupRange()) {
+            item->xDAA_flag.b0 = 1;
+        }
+    }
+}
+
+static inline s32 it_802E6380_tier(Item_GObj* item_gobj, it_2E5A_Attrs* attr,
+                                   it_802E5FXX_struct* arg1)
+{
+    // NOTE: tiers[0].ecb[9] should be tiers[1].threshold, but writing it
+    // that way produces different asm offsets
+    s32 off = 2;
+    s32* tier_thresholds = (s32*) &attr->tiers[0].ecb;
+    if (arg1->xC < attr->tiers[2].threshold) {
         off = 1;
-        if (arg1->xC < tier[1].threshold) {
+        if (arg1->xC < tier_thresholds[9]) {
             off = 0;
         }
     }
+    return off;
+}
+
+s32 it_802E6380(Item_GObj* item_gobj, it_802E5FXX_struct* arg1)
+{
+    Item* item = GET_ITEM(item_gobj);
+    it_2E5A_Attrs* attr = item->xC4_article_data->x4_specialAttributes;
+    s32 off = it_802E6380_tier(item_gobj, attr, arg1);
+    PAD_STACK(8);
+
     item->xDD4_itemVar.it_2E5A.x4 = off;
 
     arg1->xC -= attr->tiers[off].threshold;
@@ -310,40 +369,24 @@ s32 it_802E6380(Item_GObj* item_gobj, it_802E5FXX_struct* arg1)
     }
     it_80275158(item_gobj, attr->x0);
     item->xDD4_itemVar.it_2E5A.x10 = attr->x4;
+
     item->xDD4_itemVar.it_2E5A.x14 = attr->x8;
     item->xDD4_itemVar.it_2E5A.x8 = arg1->x14;
-    item->xDCD_flag.b6 = off;
+    item->xDCD_flag.b6 = 1;
 
-    tier = &attr->tiers[off];
-    item->xD84 = attr->tiers[off].xD84_value;
-    item->scl = attr->tiers[off].scale;
-
-    it_80273318(item_gobj, attr->tiers[off].joint);
-    it_80275D5C(item_gobj, &attr->tiers[off].ecb);
+    {
+        s32 tier_idx = off;
+        item->xD84 = attr->tiers[tier_idx].xD84_value;
+        item->scl = attr->tiers[tier_idx].scale;
+        it_80273318(item_gobj, attr->tiers[tier_idx].joint);
+        it_80275D5C(item_gobj, &attr->tiers[tier_idx].ecb);
+    }
 
     item->xC0C = item->xC1C;
     item->xC1C.bottom *= item->scl;
     item->xDD4_itemVar.it_2E5A.xC = 0;
 
-    {
-        Item* item = GET_ITEM(item_gobj);
-        s8 old = item->xDD4_itemVar.it_2E5A.x18.u8;
-        item->xDD4_itemVar.it_2E5A.x18.b1 = 0;
-        item->xDD4_itemVar.it_2E5A.x18.b0 = (old >> 6) & 1;
-    }
-
-    if (item->xDD4_itemVar.it_2E5A.x8 != 0) {
-        it_2E5A_Attrs* attr = item->xC4_article_data->x4_specialAttributes;
-        it_2E5A_SubVars* sub = &item->xDD4_itemVar.it_2E5A.sub;
-        sub->x4 = GET_JOBJ(item_gobj);
-        sub->x0 = (0.003906f * attr->x28) / item->scl;
-        item->x3C = sub->x0;
-        lb_8000B1CC(sub->x4, NULL, &sub->x8);
-        sub->x14 = sub->x8;
-        if (db_ShowCoinPickupRange()) {
-            item->xDAA_flag.b0 = 0;
-        }
-    }
+    it_802E6380_inline(item_gobj);
     return arg1->xC;
 }
 

@@ -1704,17 +1704,17 @@ void grVenom_80205F30(Ground_GObj* gobj)
                         }
                     }
                     if (fire_kind == 1) {
-                        it_802E7654(
-                            (s32) gobj, Ground_801C3FA4((HSD_GObj*) gobj, 7),
-                            &sp88, 3, 0, *(f32*) ((u8*) grVe_804D6A30 + 0x34));
+                        it_802E7654(gobj, Ground_801C3FA4((HSD_GObj*) gobj, 7),
+                                    &sp88, 3, 0,
+                                    *(f32*) ((u8*) grVe_804D6A30 + 0x34));
                     } else {
                         if (gp->gv.venom.x100 != 0) {
-                            it_802E7654((s32) gobj,
+                            it_802E7654(gobj,
                                         Ground_801C3FA4((HSD_GObj*) gobj, 5),
                                         &sp88, 1, 0,
                                         *(f32*) ((u8*) grVe_804D6A30 + 0x34));
                         } else {
-                            it_802E7654((s32) gobj,
+                            it_802E7654(gobj,
                                         Ground_801C3FA4((HSD_GObj*) gobj, 6),
                                         &sp88, 1, 0,
                                         *(f32*) ((u8*) grVe_804D6A30 + 0x34));

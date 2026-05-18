@@ -121,7 +121,6 @@ void it_802B64FC(Item_GObj* gobj)
     Item* ip;
     f32 temp_f2;
     f32 var_f0;
-    Vec3 vec4;
     f32 var_f1;
     itSamusMissileAttributes* sa;
 
@@ -159,10 +158,7 @@ block_6:
     if (var_f1 < sa->x20) {
         goto block_18;
     }
-    vec4 = vec1;
-    vec0.x = vec4.x;
-    vec0.y = vec4.y;
-    vec0.z = vec1.z;
+    vec0 = vec1;
     lbVector_Sub(&vec0, &vec2);
     if ((vec0.y > 0.001f)) {
         ip->xDD4_itemVar.samusmissile.x8 -= M2C_FIELD(sa, f32*, 0x18);

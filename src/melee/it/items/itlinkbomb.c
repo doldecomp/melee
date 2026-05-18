@@ -36,13 +36,9 @@ ItemStateTable it_803F6888[] = {
       itLinkbomb_UnkMotion6_Coll },
 };
 
-/// @todo This uses the de-duplicated function ftCo_800C6AFC
-/// which is likely an inline from a header file.
-/// Come back to this once lbcoll is matched.
-
 static inline void fake_HSD_JObjAddTranslationY(HSD_JObj* jobj, float y)
 {
-    HSD_ASSERT(1114, jobj);
+    ((jobj) ? ((void) 0) : __assert("jobj.h", 1114, "jobj"));
     jobj->translate.y += y;
     if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
         ftCo_800C6AFC(jobj);
@@ -51,14 +47,12 @@ static inline void fake_HSD_JObjAddTranslationY(HSD_JObj* jobj, float y)
 
 static inline void fake_HSD_JObjAddRotationX(HSD_JObj* jobj, float x)
 {
-    HSD_ASSERT(1029, jobj);
+    ((jobj) ? ((void) 0) : __assert("jobj.h", 1029, "jobj"));
     jobj->rotate.x += x;
     if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
         ftCo_800C6AFC(jobj);
     }
 }
-
-#define TEST_REAL 0
 
 void it_8029D968(Item_GObj* gobj)
 {
@@ -343,9 +337,6 @@ bool itLinkbomb_UnkMotion2_Anim(HSD_GObj* gobj)
         it_8029E5D0(gobj);
     }
 
-#if TEST_REAL
-    it_8029DB5C(gobj);
-#else
     item = GET_ITEM(gobj);
     article = item->xC4_article_data;
     sa = article->x4_specialAttributes;
@@ -354,7 +345,6 @@ bool itLinkbomb_UnkMotion2_Anim(HSD_GObj* gobj)
     } else {
         it_8029DB5C_Inline_Matching(gobj, item, article, sa);
     }
-#endif
 
     return 0;
 }
@@ -672,9 +662,6 @@ bool itLinkbomb_UnkMotion6_Anim(HSD_GObj* gobj)
         Item_80268E5C(gobj, 6, ITEM_ANIM_UPDATE);
     }
 
-#if TEST_REAL
-    it_8029DB5C(gobj);
-#else
     item = GET_ITEM(gobj);
     article = item->xC4_article_data;
     sa = article->x4_specialAttributes;
@@ -683,7 +670,6 @@ bool itLinkbomb_UnkMotion6_Anim(HSD_GObj* gobj)
     } else {
         it_8029DB5C_Inline_Matching(gobj, item, article, sa);
     }
-#endif
 
     return 0;
 }

@@ -1,10 +1,6 @@
 #include "it_2725.h"
 
-#include "inlines.h"
 #include "it_266F.h"
-#include "placeholder.h"
-
-#include <platform.h>
 
 #include "cm/camera.h"
 #include "db/db.h"
@@ -19,43 +15,23 @@
 #include "gr/grlib.h"
 #include "gr/ground.h"
 #include "gr/grzakogenerator.h"
-
-#include "it/forward.h"
-
-#include "it/it_26B1.h"
 #include "it/itcoll.h"
 #include "it/items/it_2ADA.h"
 #include "it/items/it_2E5A.h"
 #include "it/items/it_2E6A.h"
 #include "it/items/it_2F28.h"
 #include "it/items/itarwinglaser.h"
-#include "it/items/itbat.h"
-#include "it/items/itbombhei.h"
-#include "it/items/itbox.h"
-#include "it/items/itcapsule.h"
 #include "it/items/itcerebi.h"
 #include "it/items/itchicorita.h"
 #include "it/items/itclimbersblizzard.h"
 #include "it/items/itclimbersice.h"
 #include "it/items/itclimbersstring.h"
 #include "it/items/itclinkmilk.h"
-#include "it/items/itcoin.h"
-#include "it/items/itcrazyhandbomb.h"
-#include "it/items/itdkinoko.h"
-#include "it/items/itdosei.h"
 #include "it/items/itdrmariopill.h"
-#include "it/items/itegg.h"
 #include "it/items/itentei.h"
-#include "it/items/itevyoshiegg.h"
-#include "it/items/itfflower.h"
-#include "it/items/itfflowerflame.h"
 #include "it/items/itfire.h"
-#include "it/items/itflipper.h"
-#include "it/items/itfoods.h"
 #include "it/items/itfoxblaster.h"
-#include "it/items/itfoxillusion.h"
 #include "it/items/itfoxlaser.h"
-#include "it/items/itfreeze.h"
 #include "it/items/itfreezer.h"
 #include "it/items/itfushigibana.h"
 #include "it/items/itgamewatchbreath.h"
@@ -69,40 +45,26 @@
 #include "it/items/itgamewatchrescue.h"
 #include "it/items/itgamewatchturtle.h"
 #include "it/items/itgreatfoxlaser.h"
-#include "it/items/itgshell.h"
-#include "it/items/ithammer.h"
-#include "it/items/ithammerhead.h"
-#include "it/items/itharisen.h"
 #include "it/items/ithassam.h"
-#include "it/items/itheart.h"
 #include "it/items/itheiho.h"
 #include "it/items/ithinoarashi.h"
 #include "it/items/ithitodeman.h"
 #include "it/items/ithouou.h"
 #include "it/items/itkabigon.h"
 #include "it/items/itkamex.h"
-#include "it/items/itkinoko.h"
 #include "it/items/itkirbycutterbeam.h"
 #include "it/items/itkirbygamewatchchefpan.h"
 #include "it/items/itkirbyhammer.h"
 #include "it/items/itkireihana.h"
 #include "it/items/itklap.h"
 #include "it/items/itkoopaflame.h"
-#include "it/items/itkusudama.h"
 #include "it/items/itkyasarin.h"
 #include "it/items/itkyasarinegg.h"
 #include "it/items/itleadead.h"
-#include "it/items/itlgun.h"
-#include "it/items/itlgunbeam.h"
-#include "it/items/itlgunray.h"
 #include "it/items/itlikelike.h"
-#include "it/items/itlinkarrow.h"
 #include "it/items/itlinkbomb.h"
-#include "it/items/itlinkboomerang.h"
 #include "it/items/itlinkbow.h"
 #include "it/items/itlinkhookshot.h"
-#include "it/items/itlipstick.h"
-#include "it/items/itlipstickspore.h"
 #include "it/items/itlizardon.h"
 #include "it/items/itlucky.h"
 #include "it/items/itlugia.h"
@@ -115,12 +77,10 @@
 #include "it/items/itmasterhandlaser.h"
 #include "it/items/itmatadogas.h"
 #include "it/items/itmato.h"
-#include "it/items/itmetalb.h"
 #include "it/items/itmetamon.h"
 #include "it/items/itmew.h"
 #include "it/items/itmewtwodisable.h"
 #include "it/items/itmewtwoshadowball.h"
-#include "it/items/itmsbomb.h"
 #include "it/items/itnessbat.h"
 #include "it/items/itnesspkfire.h"
 #include "it/items/itnesspkfirepillar.h"
@@ -134,7 +94,6 @@
 #include "it/items/itoctarockstone.h"
 #include "it/items/itoldkuri.h"
 #include "it/items/itoldottosea.h"
-#include "it/items/itparasol.h"
 #include "it/items/itpatapata.h"
 #include "it/items/itpeachexplode.h"
 #include "it/items/itpeachparasol.h"
@@ -146,47 +105,31 @@
 #include "it/items/itpikachutjoltground.h"
 #include "it/items/itpippi.h"
 #include "it/items/itporygon2.h"
-#include "it/items/itrabbitc.h"
 #include "it/items/itraikou.h"
-#include "it/items/itrshell.h"
 #include "it/items/itsamusbomb.h"
 #include "it/items/itsamuschargeshot.h"
 #include "it/items/itsamusgrapple.h"
 #include "it/items/itsamusmissile.h"
-#include "it/items/itscball.h"
 #include "it/items/itseakchain.h"
 #include "it/items/itseakneedleheld.h"
 #include "it/items/itseakneedlethrown.h"
 #include "it/items/itseakvanish.h"
 #include "it/items/itsonans.h"
-#include "it/items/itspycloak.h"
-#include "it/items/itsscope.h"
-#include "it/items/itsscopebeam.h"
-#include "it/items/itstar.h"
-#include "it/items/itstarrod.h"
-#include "it/items/itstarrodstar.h"
 #include "it/items/itsuikun.h"
-#include "it/items/itsword.h"
-#include "it/items/ittaru.h"
-#include "it/items/ittarucann.h"
 #include "it/items/itthunder.h"
 #include "it/items/ittincle.h"
 #include "it/items/ittogepy.h"
-#include "it/items/ittomato.h"
 #include "it/items/ittools.h"
 #include "it/items/ittosakinto.h"
 #include "it/items/itunknown.h"
 #include "it/items/itwhispyapple.h"
 #include "it/items/itwhitebea.h"
-#include "it/items/itwstar.h"
-#include "it/items/ityoshiegglay.h"
 #include "it/items/ityoshieggthrow.h"
 #include "it/items/ityoshistar.h"
 #include "it/items/itzeldadinfire.h"
 #include "it/items/itzeldadinfireexplode.h"
 #include "it/items/itzgshell.h"
 #include "it/items/itzrshell.h"
-#include "it/types.h"
 #include "items/itbat.h"
 #include "items/itbombhei.h"
 #include "items/itbox.h"
@@ -251,14 +194,9 @@
 #include "pl/pltrick.h"
 #include "ty/tydisplay.h"
 
-#include <math.h>
 #include <math_ppc.h>
-#include <dolphin/mtx.h>
-#include <baselib/dobj.h>
 #include <baselib/gobjobject.h>
 #include <baselib/gobjproc.h>
-#include <baselib/mobj.h>
-#include <baselib/random.h>
 #include <baselib/tev.h>
 
 extern Vec3 it_803B8570;       // { 0.0f, 0.0f, 0.0f }
@@ -1059,16 +997,15 @@ struct ItemLogicTable it_803F14C4[ARRAY_SIZE(it_803F1418)] = {
     },
 };
 
-char it_803F1ED8[] = "ItCo.dat";
-char it_803F1EE4[] = "ItCo.usd";
-char it_803F1EF0[] = "itPublicData";
-char it_803F1F00[] = "translate";
-char it_803F1F0C[] = "!(jobj->flags & JOBJ_USE_QUATERNION)";
+extern char it_803F1ED8[];
+extern char it_803F1EE4[];
+extern char it_803F1EF0[];
+extern char it_803F1F00[];
+extern char it_803F1F0C[];
+extern char it_803F1F38[];
+extern char it_803F1F58[0x38];
 
-char* it_803F1F38;
-char* it_803F1F58;
-
-extern struct it_MObjInfo {
+struct it_MObjInfo {
     /*   +0 */ HSD_ClassInfo parent;
     /*  +3C */ HSD_MObjSetupFunc setup;
     /*  +40 */ int (*load)(HSD_MObj* mobj, HSD_MObjDesc* desc);
@@ -1083,30 +1020,10 @@ extern struct it_MObjInfo {
     /*  +F4 */ char report_fmt_no_register[0x118 - 0xF4];
     /* +118 */ char assert_file[0x128 - 0x118];
     /* +128 */ char report_fmt_no_register_2[0x150 - 0x128];
-} it_803F1F90;
-///  = {
-///     (struct _HSD_ClassInfoHead) {
-///         it_80277D08, // void (*info_init)(void);
-///         0x00000000, // u32 flags;
-///         0x00000000, // char* library_name;
-///         0x00000000, // char* class_name;
-///         0x00000000, // s16 obj_size;
-///         0x00000000, // s16 info_size;
-///         0x00000000, // struct _HSD_ClassInfo* parent;
-///         0x00000000, // struct _HSD_ClassInfo* next;
-///         0x00000000, // struct _HSD_ClassInfo* child;
-///         0x00000000, // u32 nb_exist;
-///         0x00000000, // u32 nb_peak;
-///     },
-///     0x00000000, // HSD_Class* (*alloc)(struct _HSD_ClassInfo* c);
-///     0x00000000, // int (*init)(struct _HSD_Class* c);
-///     0x00000000, // void (*release)(struct _HSD_Class* c);
-///     0x00000000, // void (*destroy)(struct _HSD_Class* c);
-///     0x00000000, // void (*amnesia)(struct _HSD_ClassInfo* c);
-///     // ... lots more data, but no other struct elements to put them in
-/// };
+};
+extern struct it_MObjInfo it_803F1F90;
 
-void* jumptable_803F20E0[114];
+static void* jumptable_803F20E0[114] = { (void*) 1 };
 
 static ItCmd it_803F22A8[16] = {
     // static void* it_803F22A8[16] = {
@@ -4692,27 +4609,31 @@ struct ItemLogicTable it_803F4D20[ARRAY_SIZE(it_803F4CA8)] = {
 };
 
 char it_803F5428[] = "can t init zako pos\n";
-char it_803F5440[] = "!(jobj->flags & JOBJ_USE_QUATERNION)";
+char it_803F5440[0x28] = "!(jobj->flags & JOBJ_USE_QUATERNION)";
 RandomItemSpawner it_804A0E30;
 ItemPickTable it_804A0E50;
 ItemPickTable it_804A0E60;
 /// u8 it_804A0E70[0xF0];
 /// Article* it_804A0F60[30];
-/// static char it_804D5188[] = "src/sysdolphin/baselib/jobj.h"; // ?
-/// static char it_804D5190[] = "jobj";
-static char it_804D5198;
-/// static char it_804D519C[]; // Not sure of type
-/// static char it_804D51A4[]; // Not sure of type
-static char it_804D51B8;
+static char it_804D5188[] = "jobj.h";
+static char it_804D5190[] = "jobj";
+static char it_804D5198[] = "0";
+static char it_804D519C[] = "jobj.h";
+static char it_804D51A4[] = "jobj";
+static u32 it_804D51AC_pad = 1;
+static char it_804D51B0[] = "it_mobj";
+static char it_804D51B8[] = "0";
+static u32 it_804D51BC_pad = 1;
 static char it_804D51C0[] = "0";
+static u32 it_804D51C4_pad = 1;
 static ItCmd it_804D51C8[2] = {
     it_80279AF0,
     it_80279B10,
 };
-/// static char it_804D51D0[]; // Not sure of type
-/// static char it_804D51D8[]; // Not sure of type
-/// static char it_804D51E0[];
-/// static char it_804D51E8[];
+static char it_804D51D0[] = "jobj.h";
+static char it_804D51D8[] = "jobj";
+static char it_804D51E0[] = "jobj.h";
+static char it_804D51E8[] = "jobj";
 
 /// s8 it_804D6D00; // Not sure of type
 struct Fighter_804D653C_t* it_804D6D04;
@@ -6589,7 +6510,7 @@ void it_80275BC8(Item_GObj* item_gobj, HSD_GObj* arg_gobj)
             break;
         default:
             OSReport(it_803F1F38);
-            __assert(it_803F1F58, 0x7FU, &it_804D5198);
+            __assert(it_803F1F58, 0x7FU, it_804D5198);
             break;
         }
     } else {
@@ -7328,11 +7249,26 @@ bool it_80277040(Item_GObj* item_gobj)
     return ret_val;
 }
 
+static inline float sqrtf_accurate_store(float x, volatile float* y)
+{
+    if (x > 0.0f) {
+        double guess = __frsqrte((double) x);
+        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        guess = 0.5 * guess * (3.0 - guess * guess * x);
+        *y = (float) (x * guess);
+        return *y;
+    }
+    return x;
+}
+
 void it_8027737C(Item_GObj* item_gobj, Vec3* pos)
 {
     Vec3 sp1C;
     Item* item;
     f32 temp_f1;
+    volatile f32 sqrt_0;
     u8 _[4];
 
     item = GET_ITEM(item_gobj);
@@ -7340,7 +7276,7 @@ void it_8027737C(Item_GObj* item_gobj, Vec3* pos)
         PSVECAdd(&item->x88, &item->x7C, &item->x7C);
         item->x7C.x *= item->xCC_item_attr->x54;
         item->x7C.y *= item->xCC_item_attr->x54;
-        if (sqrtf_accurate(SQ(item->x7C.x) + SQ(item->x7C.y)) >
+        if (sqrtf_accurate_store(SQ(item->x7C.x) + SQ(item->x7C.y), &sqrt_0) >
             it_804D6D28->xC8)
         {
             lbVector_NormalizeXY(&item->x7C);
@@ -8565,34 +8501,47 @@ void it_8027978C(Item_GObj* item_gobj, CommandInfo* cmd)
     if (opcode < 10) {
         if (opcode < 3) {
             if (opcode >= 0) {
-                arg1 = *(u32*) cmd->u;
-                ++cmd->u;
-                arg2 = ((u8*) cmd->u)[2];
-                arg3 = ((u8*) cmd->u)[3];
-                switch (opcode) {
-                case 0:
-                    Item_8026AE84(item, arg1, arg2, arg3);
-                    break;
-                case 1:
-                    Item_8026AF0C(item, arg1, arg2, arg3);
-                    break;
-                case 2:
-                    Item_8026AFA0(item, arg1, arg2, arg3);
-                    break;
-                }
+                goto low_opcode;
             }
         }
-    } else if (opcode < 12) {
-        ++cmd->u;
-        switch (opcode) {
-        case 10:
-            Item_8026B034(item);
-            break;
-        case 11:
-            Item_8026B074(item);
-            break;
+        goto done;
+    } else {
+        if (opcode >= 12) {
+            goto done;
         }
+        goto high_opcode;
     }
+
+low_opcode:
+    arg1 = *(u32*) cmd->u;
+    ++cmd->u;
+    arg2 = ((u8*) cmd->u)[2];
+    arg3 = ((u8*) cmd->u)[3];
+    switch (opcode) {
+    case 0:
+        Item_8026AE84(item, arg1, arg2, arg3);
+        break;
+    case 1:
+        Item_8026AF0C(item, arg1, arg2, arg3);
+        break;
+    case 2:
+        Item_8026AFA0(item, arg1, arg2, arg3);
+        break;
+    }
+    goto done;
+
+high_opcode: {
+    ++cmd->u;
+    switch (opcode) {
+    case 10:
+        Item_8026B034(item);
+        break;
+    case 11:
+        Item_8026B074(item);
+        break;
+    }
+}
+done:
     ++cmd->u;
 }
 #pragma pop
@@ -9634,10 +9583,10 @@ void it_8027BB1C(Vec3* arg0, Vec3* arg1)
 static inline void it_8027C0F0_JObjSetRotationX(HSD_JObj* jobj, f32 x,
                                                 char* assert_base)
 {
-    ((jobj) ? ((void) 0) : __assert("jobj.h", 639, "jobj"));
+    ((jobj) ? ((void) 0) : __assert(it_804D51E0, 639, it_804D51E8));
     ((!(jobj->flags & JOBJ_USE_QUATERNION))
          ? ((void) 0)
-         : __assert("jobj.h", 640, assert_base + 0x18));
+         : __assert(it_804D51E0, 640, assert_base + 0x18));
     jobj->rotate.x = x;
     if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
         HSD_JObjSetMtxDirty(jobj);
@@ -9647,10 +9596,10 @@ static inline void it_8027C0F0_JObjSetRotationX(HSD_JObj* jobj, f32 x,
 static inline void it_8027C0F0_JObjSetRotationY(HSD_JObj* jobj, f32 y,
                                                 char* assert_base)
 {
-    ((jobj) ? ((void) 0) : __assert("jobj.h", 660, "jobj"));
+    ((jobj) ? ((void) 0) : __assert(it_804D51E0, 660, it_804D51E8));
     ((!(jobj->flags & JOBJ_USE_QUATERNION))
          ? ((void) 0)
-         : __assert("jobj.h", 661, assert_base + 0x18));
+         : __assert(it_804D51E0, 661, assert_base + 0x18));
     jobj->rotate.y = y;
     if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
         HSD_JObjSetMtxDirty(jobj);
@@ -9660,10 +9609,10 @@ static inline void it_8027C0F0_JObjSetRotationY(HSD_JObj* jobj, f32 y,
 static inline void it_8027C0F0_JObjSetRotationZ(HSD_JObj* jobj, f32 z,
                                                 char* assert_base)
 {
-    ((jobj) ? ((void) 0) : __assert("jobj.h", 681, "jobj"));
+    ((jobj) ? ((void) 0) : __assert(it_804D51E0, 681, it_804D51E8));
     ((!(jobj->flags & JOBJ_USE_QUATERNION))
          ? ((void) 0)
-         : __assert("jobj.h", 682, assert_base + 0x18));
+         : __assert(it_804D51E0, 682, assert_base + 0x18));
     jobj->rotate.z = z;
     if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
         HSD_JObjSetMtxDirty(jobj);
@@ -9676,6 +9625,7 @@ void it_8027BBF4(Item_GObj* item_gobj, bool arg_chk, f64 arg8, f32 arg9)
     f32 temp_f30;
     f32 var_f29;
     f32 var_f28;
+    char* assert_base = it_803F5428;
     const Vec3* vecs = it_803B85A8;
     Vec3 sp74;
     Vec3 sp68;
@@ -9747,9 +9697,9 @@ block_7:
     lbVector_CrossprodNormalized(&sp44, &sp38, &sp50);
     lbVector_EulerAnglesFromONB(&sp74, &sp50, &sp44, &sp38);
 
-    HSD_JObjSetRotationX(item_jobj, sp74.x);
-    HSD_JObjSetRotationY(item_jobj, sp74.y);
-    HSD_JObjSetRotationZ(item_jobj, sp74.z);
+    it_8027C0F0_JObjSetRotationX(item_jobj, sp74.x, assert_base);
+    it_8027C0F0_JObjSetRotationY(item_jobj, sp74.y, assert_base);
+    it_8027C0F0_JObjSetRotationZ(item_jobj, sp74.z, assert_base);
 }
 
 /// Might take in and pass more vars
@@ -10113,5 +10063,29 @@ void it_8027CE64(Item_GObj* item_gobj, HSD_GObj* fighter_gobj,
     it_80274594(item_gobj);
     item->xDD4_itemVar.it_27CE.attr = arg_attr_address;
 }
+
+char it_803F1ED8[] = "ItCo.dat";
+char it_803F1EE4[] = "ItCo.usd";
+char it_803F1EF0[] = "itPublicData";
+char it_803F1F00[] = "translate";
+char it_803F1F0C[] = "!(jobj->flags & JOBJ_USE_QUATERNION)";
+
+char it_803F1F38[] = "couldn't get Owner_GObj_Kind!!";
+char it_803F1F58[0x38] = "itmaplib.c\0\0!(jobj->flags & JOBJ_USE_QUATERNION)";
+
+struct it_MObjInfo it_803F1F90 = {
+    { { it_80277D08 } },
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    { NULL, 1, 0, 0xFF, 0xFF, 0xFF },
+    { HSD_TE_CNST, NULL, NULL, HSD_TE_RGB, HSD_TE_U8, 0xFF, 0xFF },
+    "sysdolphin_base_library",
+    "can't find free color register!\n",
+    "itmaterial.c",
+    "can't find free color ratio register!\n",
+};
 
 #pragma pop

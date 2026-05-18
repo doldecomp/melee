@@ -12,7 +12,7 @@
 
 static inline void fake_HSD_JObjSetTranslateY(HSD_JObj* jobj, f32 y)
 {
-    HSD_ASSERT(947, jobj);
+    ((jobj) ? ((void) 0) : __assert("jobj.h", 947, "jobj"));
     jobj->translate.y = y;
     if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
         ftCo_800C6AFC(jobj);
@@ -21,8 +21,10 @@ static inline void fake_HSD_JObjSetTranslateY(HSD_JObj* jobj, f32 y)
 
 static inline void fake_HSD_JObjSetRotationX(HSD_JObj* jobj, f32 x)
 {
-    HSD_ASSERT(639, jobj);
-    HSD_ASSERT(640, !(jobj->flags & JOBJ_USE_QUATERNION));
+    ((jobj) ? ((void) 0) : __assert("jobj.h", 639, "jobj"));
+    ((!(jobj->flags & JOBJ_USE_QUATERNION))
+         ? ((void) 0)
+         : __assert("jobj.h", 640, "!(jobj->flags & JOBJ_USE_QUATERNION)"));
     jobj->rotate.x = x;
     if (!(jobj->flags & JOBJ_MTX_INDEP_SRT)) {
         ftCo_800C6AFC(jobj);

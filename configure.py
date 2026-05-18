@@ -1131,7 +1131,7 @@ config.libs = [
             Object(Matching, "melee/it/items/itfoods.c"),
             Object(Matching, "melee/it/items/itmsbomb.c"),
             Object(NonMatching, "melee/it/items/itflipper.c"),
-            Object(NonMatching, "melee/it/items/itsscope.c"),
+            Object(Matching, "melee/it/items/itsscope.c"),
             Object(Matching, "melee/it/items/itstarrod.c"),
             Object(Matching, "melee/it/items/itharisen.c"),
             Object(Matching, "melee/it/items/itfflower.c"),
@@ -1261,7 +1261,7 @@ config.libs = [
             Object(Matching, "melee/it/items/itwhitebea.c"),
             # Stage-related items
             Object(Matching, "melee/it/items/itoctarock.c"),
-            Object(NonMatching, "melee/it/items/it_2E5A.c"),
+            Object(Matching, "melee/it/items/it_2E5A.c"),
             Object(Matching, "melee/it/items/it_2E6A.c"),
             Object(NonMatching, "melee/it/items/itarwinglaser.c"),
             Object(Matching, "melee/it/items/itoctarockstone.c"),

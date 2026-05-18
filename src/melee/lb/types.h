@@ -1033,7 +1033,7 @@ struct CommandInfo {
             struct spawn_hitbox_3 create_hitbox_3;
             struct spawn_hitbox_4 create_hitbox_4;
             struct spawn_hitbox_5 create_hitbox_5;
-            struct it_create_hitbox_0 it_create_hitbox_0; ///< it_802790C0
+            struct it_create_hitbox_0 it_create_hitbox_0;
             struct it_create_hitbox_4 it_create_hitbox_4;
             struct sound_effect_0 sound_effect_0;
             struct sound_effect_1 sound_effect_1;

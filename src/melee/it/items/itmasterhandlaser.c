@@ -47,6 +47,22 @@ static inline float my_sqrtf(float x)
     return x;
 }
 
+static inline float sqrtf_store(float x, volatile float* y)
+{
+    static const double _half = .5;
+    static const double _three = 3.0;
+
+    if (x > 0.0f) {
+        double guess = __frsqrte((double) x);
+        guess = _half * guess * (_three - guess * guess * x);
+        guess = _half * guess * (_three - guess * guess * x);
+        guess = _half * guess * (_three - guess * guess * x);
+        *y = (float) (x * guess);
+        return *y;
+    }
+    return x;
+}
+
 Item_GObj* it_802F0340(Item_GObj* gobj, Vec3* prev_pos, Vec3* pos,
                        Fighter_Part part, ItemKind kind, f32 facing_dir)
 {
@@ -145,11 +161,16 @@ void it_802F063C(Item_GObj* gobj, Item_GObj* arg1)
     itMasterHandLaserAttributes* attrs;
 
     f32 x0, y0, x1, y1;
+    f32 z_diff;
     Vec3 pos_0;     // 58, 5C, 60
     Vec3 pos_1;     // 4C, 50, 54
     Vec3 pos_2;     // 40, 44, 48
     Vec3 translate; // 34, 38, 3C
-    PAD_STACK(8);
+    u8 _padA[4];
+    volatile f32 sqrt_0;
+    volatile f32 sqrt_1;
+    volatile f32 sqrt_2;
+    PAD_STACK(4);
 
     ip = GET_ITEM(gobj);
     fp = GET_FIGHTER(ip->owner);
@@ -175,13 +196,18 @@ void it_802F063C(Item_GObj* gobj, Item_GObj* arg1)
     {
         translate.x = 0.0f;
         translate.z = 0.0f;
-        translate.y = sqrtf(((pos_0.x - pos_2.x) * (pos_0.x - pos_2.x)) +
+        translate.y =
+            sqrtf_store(((pos_0.x - pos_2.x) * (pos_0.x - pos_2.x)) +
                             ((pos_0.y - pos_2.y) * (pos_0.y - pos_2.y)) +
-                            ((pos_0.z - pos_2.z) * (pos_0.z - pos_2.z))) *
-                      -(sqrtf(((pos_0.x - pos_1.x) * (pos_0.x - pos_1.x)) +
-                              ((pos_0.y - pos_1.y) * (pos_0.y - pos_1.y))) /
-                        sqrtf(((pos_0.x - pos_2.x) * (pos_0.x - pos_2.x)) +
-                              ((pos_0.y - pos_2.y) * (pos_0.y - pos_2.y))));
+                            ((z_diff = pos_0.z - pos_2.z) *
+                             (pos_0.z - pos_2.z)),
+                        &sqrt_0) *
+            -(sqrtf_store(((pos_0.x - pos_1.x) * (pos_0.x - pos_1.x)) +
+                              ((pos_0.y - pos_1.y) * (pos_0.y - pos_1.y)),
+                          &sqrt_1) /
+              sqrtf_store(((pos_0.x - pos_2.x) * (pos_0.x - pos_2.x)) +
+                              ((pos_0.y - pos_2.y) * (pos_0.y - pos_2.y)),
+                          &sqrt_2));
         HSD_JObjSetTranslate(ip->xBBC_dynamicBoneTable->bones[2], &translate);
 
         if (--ip->xDD4_itemVar.masterhandlaser.x8 < 0) {
