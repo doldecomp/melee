@@ -361,30 +361,15 @@ void un_80312BAC(TyListState* state, s8 arg1)
     }
 }
 
-void un_80312E88(TyListArg* arg, float delta)
+inline void un_80312E88_inline(TyListArg* arg)
 {
-    TyListArg* ptr;
     HSD_JObj* jobj;
-    char* data;
+    char* data = un_804A2AC0;
+
     s32 i;
-
-    arg->x30 = arg->x30 + delta;
-
-    if (un_804DDE4C == delta) {
-        arg->x30 = arg->x2C;
-    } else if (delta < un_804DDE48) {
-        if (arg->x30 < arg->x2C) {
-            arg->x30 = arg->x2C;
-        }
-    } else {
-        if (arg->x30 > arg->x2C) {
-            arg->x30 = arg->x2C;
-        }
-    }
-
-    data = un_804A2AC0;
     for (i = 0; i < 3; i++) {
-        if ((jobj = arg->jobjs[i]) == NULL) {
+        jobj = arg->jobjs[i];
+        if (jobj == NULL) {
             continue;
         }
         if (i == 2) {
@@ -394,9 +379,30 @@ void un_80312E88(TyListArg* arg, float delta)
 
         if (arg->idx == un_GetTrophyTotal() - 1) {
             jobj = ((TyListState*) data)->jobj;
-                HSD_JObjSetTranslateY(jobj, arg->x30);
+            HSD_JObjSetTranslateY(jobj, arg->x30);
         }
     }
+}
+
+void un_80312E88(TyListArg* arg, float delta)
+{
+    TyListArg* ptr;
+
+    arg->x30 = arg->x30 + delta;
+
+    if (999.0f == delta) {
+        arg->x30 = arg->x2C;
+    } else if (delta < 0.0f) {
+        if (arg->x30 < arg->x2C) {
+            arg->x30 = arg->x2C;
+        }
+    } else {
+        if (arg->x30 > arg->x2C) {
+            arg->x30 = arg->x2C;
+        }
+    }
+
+    un_80312E88_inline(arg);
 
     un_80312904(arg, 0x63);
     un_80313464(arg);
