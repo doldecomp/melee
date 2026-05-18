@@ -140,7 +140,7 @@ extern u8 lbl_80431690[0xC];
 extern u16 lbl_8043169C[0xC];
 extern u8 lbl_804316B4[0xC];
 
-s32 hsd_803B5C4C(s32 arg0)
+int hsd_803B5C4C(int arg0)
 {
     u8* jmp_buf = hsd_804D2E70;
     s32 bits;
@@ -179,7 +179,7 @@ s32 hsd_803B5C4C(s32 arg0)
     return bits;
 }
 
-s32 hsd_803B5D70(s32 arg0, s32 arg1)
+u8 hsd_803B5D70(int arg0, int arg1)
 {
     s32 value_idx;
     s32 code;
@@ -254,7 +254,7 @@ block_23:
     return 0U;
 }
 
-void hsd_803B5EA0(s32 arg0)
+void hsd_803B5EA0(int arg0)
 {
     s32 temp_r29;
     s32 temp_r29_2;
@@ -760,7 +760,7 @@ static void fn_803B6820(u8* arg0, s32 arg1, s32 arg2, s32 arg3,
     }
 }
 
-s32 hsd_803B6BE4(char* arg0, s32 arg1, void* arg2)
+int hsd_803B6BE4(char* arg0, int arg1, void* arg2)
 {
     s32 temp_r6_4;
     s32 temp_r7;
