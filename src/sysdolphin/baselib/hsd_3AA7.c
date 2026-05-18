@@ -410,7 +410,47 @@ s32 fn_803AC6B8(struct CardState* file_desc, s32 file_count)
     return total;
 }
 
-/// #fn_803AC7DC
+s32 fn_803AC7DC(CardState* state)
+{
+    s32 total = 0;
+    s32 extra = 0;
+    s32 i;
+
+    if (state->x4C[0] > 0) {
+        total = (s32) fn_803AC634(state, 0) - 1;
+    }
+
+    for (i = 1; i < 9; i++) {
+        s32 size = state->x4C[i];
+
+        if (size <= 0) {
+            continue;
+        }
+
+        switch (state->x28[i]) {
+        case 0:
+            total += fn_803AC634(state, i) * 2;
+            break;
+        case 1:
+            total += fn_803AC634(state, i);
+            if (extra < (s32) fn_803AC634(state, i)) {
+                extra = (s32) fn_803AC634(state, i);
+            }
+            break;
+        case 2:
+            total += fn_803AC634(state, i);
+            if (extra < 1) {
+                extra = 1;
+            }
+            break;
+        case 3:
+            total += fn_803AC634(state, i);
+            break;
+        }
+    }
+
+    return total + extra;
+}
 
 s32 fn_803ACB74(s32 seq_a, s32 seq_b)
 {
@@ -1805,20 +1845,14 @@ void hsd_803B24E4(s32* ctx, int channel, int file_no, void* work_buf)
 
 int hsd_803B2550(s32* arg0, const char* arg1, void (*arg2)(int, int))
 {
-    u8* base;
-    char* filename;
-    s32 chan;
-    s32 retries;
+    u8* base = hsd_804D1138;
+    s32 chan = arg0[1];
+    s32 retries = 0;
     s32 result;
     s32 write_idx;
-    PAD_STACK(8);
 
-    base = hsd_804D1138;
-    filename = (char*) arg1;
-    chan = arg0[1];
-    retries = 0;
     do {
-        result = CARDOpen(chan, filename, (CARDFileInfo*) (arg0 + 3));
+        result = CARDOpen(chan, (char*) arg1, (CARDFileInfo*) (arg0 + 3));
         if (result != -1) {
             break;
         }
@@ -1829,18 +1863,18 @@ int hsd_803B2550(s32* arg0, const char* arg1, void (*arg2)(int, int))
         return result;
     }
 
+    result = 0;
     {
         s32 tmp = arg0[4];
-        retries = 0;
         if (tmp == -1) {
             do {
-                retries++;
-            } while (retries < 10);
+                result++;
+            } while (result < 10);
         }
         if (tmp < 0) {
             return tmp;
         }
-        retries = tmp;
+        write_idx = tmp;
     }
 
     chan = 0;
@@ -1853,22 +1887,22 @@ int hsd_803B2550(s32* arg0, const char* arg1, void (*arg2)(int, int))
 
     {
         s32 read_idx = hsd_804D7990;
-        write_idx = hsd_804D7994;
+        retries = hsd_804D7994;
 
-        if (read_idx == write_idx) {
-            if (*(s32*) (base + 0x1210 + read_idx * 0x18) != 0) {
+        if (read_idx == retries) {
+            if (*(s32*) (base + read_idx * 0x18 + 0x1210) != 0) {
                 return -265;
             }
         }
     }
 
     {
-        u8* entry = base + 0x1210 + write_idx * 0x18;
-        s32 next = write_idx + 1;
-        *(s32*) (entry + 0x00) = 5;
-        *(s32*) (entry + 0x04) = (s32) arg0;
-        *(s32*) (entry + 0x08) = retries;
-        *(s32*) (entry + 0x14) = (s32) arg2;
+        u8* entry = base + retries * 0x18;
+        s32 next = retries + 1;
+        *(s32*) (entry + 0x1210) = 5;
+        *(s32*) (entry + 0x1214) = (s32) arg0;
+        *(s32*) (entry + 0x1218) = write_idx;
+        *(s32*) (entry + 0x1224) = (s32) arg2;
         hsd_804D7994 = next % 32;
     }
 
