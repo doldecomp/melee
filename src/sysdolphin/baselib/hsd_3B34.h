@@ -4,7 +4,14 @@
 #include "placeholder.h"
 
 #include <platform.h>
-
+typedef struct HSDJpegWork {
+    u8 pad_000[0x118];
+    s32 luma[256];
+    s32 cb[64];
+    s32 cr[64];
+    s32 tmp[64];
+    s32 pred[3];
+} HSDJpegWork;
 /* 3B3408 */ void hsd_803B3408(int, int, int, int);
 /* 3B376C */ void fn_803B376C(void*);
 /* 3B3CD8 */ void hsd_803B3CD8(s32);
@@ -18,7 +25,7 @@
 /* 3B5C4C */ int hsd_803B5C4C(int);
 /* 3B5D70 */ u8 hsd_803B5D70(int, int);
 /* 3B5EA0 */ void hsd_803B5EA0(int);
-/* 3B61B4 */ void fn_803B61B4(u8*);
+/* 3B61B4 */ void fn_803B61B4(s32*);
 /* 3B6820 */ void fn_803B6820(u8* arg0, s32 arg1, s32 arg2, s32 arg3,
                               s32 arg4);
 /* 3B6BE4 */ int hsd_803B6BE4(char*, int, void*);
