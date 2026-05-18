@@ -1050,7 +1050,7 @@ void un_803147C4(void)
     if (jobj != NULL) {
         *gobj = GObj_Create(2, 3, 0);
         HSD_GObjObject_80390A70(*gobj, (u8) HSD_GObj_804D784A,
-                                un_80306EEC(jobj, 0));
+                                Toy_LoadLObjList(jobj, 0));
         GObj_SetupGXLink(*gobj, HSD_GObj_LObjCallback, 0x34, 0);
     }
 
