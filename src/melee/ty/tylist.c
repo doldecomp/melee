@@ -1,5 +1,7 @@
 #include "tylist.h"
 
+#include "stddef.h"
+
 #include "gm/gmmain_lib.h"
 #include "if/textlib.h"
 #include "lb/lb_00B0.h"
@@ -677,33 +679,32 @@ HSD_JObj* un_80313508(void* parent, void* symbol, float x, float y, float z)
 
     if (joint == NULL) {
         OSPanic(un_803FE8F0, 0x337, un_803FE8FC);
-        return NULL;
-    }
-
-    jobj = HSD_JObjLoadJoint(joint);
-
-    if (x != un_804DDE48 || y != un_804DDE48 || z != un_804DDE48) {
-        HSD_JObjSetTranslateX(jobj, x);
-        HSD_JObjSetTranslateY(jobj, y);
-        HSD_JObjSetTranslateZ(jobj, z);
-    }
-
-    if (parent != NULL) {
-        HSD_JObj* parentJobj = ((HSD_GObj*) parent)->hsd_obj;
-        HSD_JObj* child;
-        HSD_JObjAddChild(parentJobj, jobj);
-        child = parentJobj->child;
-        while (child->next != NULL) {
-            child = child->next;
-        }
     } else {
-        HSD_GObj* gobj;
-        gobj = GObj_Create(6, 7, 0);
-        HSD_GObjObject_80390A70(gobj, (u8) HSD_GObj_804D7849, jobj);
-        GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0x39, 0);
-    }
+        jobj = HSD_JObjLoadJoint(joint);
 
-    return jobj;
+        if (x != un_804DDE48 || y != un_804DDE48 || z != un_804DDE48) {
+            HSD_JObjSetTranslateX(jobj, x);
+            HSD_JObjSetTranslateY(jobj, y);
+            HSD_JObjSetTranslateZ(jobj, z);
+        }
+
+        if (parent != NULL) {
+            HSD_JObj* parentJobj = ((HSD_GObj*) parent)->hsd_obj;
+            HSD_JObj* child;
+            HSD_JObjAddChild(parentJobj, jobj);
+            child = parentJobj->child;
+            while (child->next != NULL) {
+                child = child->next;
+            }
+            return child;
+        } else {
+            HSD_GObj* gobj;
+            gobj = GObj_Create(6, 7, 0);
+            HSD_GObjObject_80390A70(gobj, (u8) HSD_GObj_804D7849, jobj);
+            GObj_SetupGXLink(gobj, HSD_GObj_JObjCallback, 0x39, 0);
+            return (HSD_JObj*) gobj;
+        }
+    }
 }
 
 void un_80313774(void)
