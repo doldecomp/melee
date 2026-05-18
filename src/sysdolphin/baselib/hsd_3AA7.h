@@ -71,7 +71,7 @@ typedef struct CardState {
 /* 3B2374 */ void hsd_803B2374(void);
 /* 3B24E4 */ void hsd_803B24E4(s32* ctx, int channel, int file_no,
                                void* work_buf);
-/* 3B2550 */ int hsd_803B2550(s32*, char*, void (*)(int, int));
+/* 3B2550 */ int hsd_803B2550(s32*, const char*, void (*)(int, int));
 /* 3B2674 */ s32 hsd_803B2674(CardState* state);
 /* 3B26CC */ s32 fn_803B26CC(CardState* state, s32 file_id, s32 seq_num,
                              s32 version, s32 callback);
