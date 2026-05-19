@@ -89,9 +89,6 @@ u8 lbl_803B9E20[0xA0] = { 0 };
 u8 lbColl_803B9EC0[0x60] = { 0 };
 u8 lbColl_803B9F20[0xA0] = { 0 };
 
-static char lbColl_804D3700[] = "jobj.h";
-static char lbColl_804D3708[] = "jobj";
-
 /// .text
 
 int lbColl_80005BB0(HitCapsule* arg0, int arg1)
@@ -131,9 +128,7 @@ static inline bool between(float x, float lo, float hi)
 
 static inline bool nearzero(float x)
 {
-    if (x < *(volatile const float*) &lbColl_804D79F0 &&
-        x > *(volatile const float*) &lbColl_804D79F4)
-    {
+    if (x < 1e-5F && x > -1e-5F) {
         return true;
     } else {
         return false;
