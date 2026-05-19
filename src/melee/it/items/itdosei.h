@@ -13,7 +13,7 @@ typedef struct itDoseiAttributes {
     f32 unk0;
     s32 unk4;
     f32 unk8;
-    f32 unkC;
+    s32 unkC;
     s32 unk10;
     s32 unk14;
 } itDoseiAttributes;

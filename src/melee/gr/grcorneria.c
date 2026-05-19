@@ -1368,18 +1368,17 @@ void grCorneria_801DED50(Ground_GObj* gobj)
                                 }
                             }
                             if (grp_off == 1) {
-                                it_802E7654((s32) gobj,
-                                            Ground_801C3FA4(gobj, 7), &pos, 3,
-                                            3, grCn_804D69A0->x70);
+                                it_802E7654(gobj, Ground_801C3FA4(gobj, 7),
+                                            &pos, 3, 3, grCn_804D69A0->x70);
                             } else {
                                 if (gp->gv.corneria2.x100 != 0) {
-                                    it_802E7654((s32) gobj,
-                                                Ground_801C3FA4(gobj, 5), &pos,
-                                                1, 3, grCn_804D69A0->x70);
+                                    it_802E7654(gobj, Ground_801C3FA4(gobj, 5),
+                                                &pos, 1, 3,
+                                                grCn_804D69A0->x70);
                                 } else {
-                                    it_802E7654((s32) gobj,
-                                                Ground_801C3FA4(gobj, 6), &pos,
-                                                1, 3, grCn_804D69A0->x70);
+                                    it_802E7654(gobj, Ground_801C3FA4(gobj, 6),
+                                                &pos, 1, 3,
+                                                grCn_804D69A0->x70);
                                 }
                                 gp->gv.corneria2.x100 =
                                     (gp->gv.corneria2.x100 + 1) & 1;

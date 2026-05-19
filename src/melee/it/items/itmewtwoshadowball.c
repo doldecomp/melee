@@ -41,7 +41,8 @@ void it_802C4D10(Item_GObj* gobj)
             ip->xDD4_itemVar.mewtwoshadowball.x3C +=
                 ((M_PI / 4) * (2.0f * (HSD_Randf() - 0.5f)));
             ip->xDD4_itemVar.mewtwoshadowball.x44 =
-                -ip->xDD4_itemVar.mewtwoshadowball.x40 / (attr->x20 / 2);
+                -ip->xDD4_itemVar.mewtwoshadowball.x40 /
+                ((u32) attr->x20 / 2u);
             Item_8026AF0C(ip, it_803F7880[HSD_Randi(3)], 127, 64);
         }
         ip->xDD4_itemVar.mewtwoshadowball.x40 +=

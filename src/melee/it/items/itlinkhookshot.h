@@ -79,8 +79,8 @@
                                itLinkHookshotAttributes* arg2, f32 arg8);
 /* 802A5FE0 */ s32 it_802A5FE0(ItemLink* arg0, ItemLink* arg1, Vec3* arg2,
                                itLinkHookshotAttributes* arg3, f32 arg8);
-/* 802A6474 */ void it_802A6474(ItemLink* arg0, ItemLink* arg1, Vec3* arg2,
-                                itLinkHookshotAttributes* arg3);
+/* 802A6474 */ void it_802A6474(ItemLink* arg0, ItemLink* arg1, Vec3* pos,
+                                itLinkHookshotAttributes* attrs);
 /* 802A678C */ s32 it_802A678C(ItemLink* arg0, Vec3* arg1,
                                itLinkHookshotAttributes* arg2, f32 arg8);
 /* 802A6944 */ void it_802A6944(Item*, f32);
