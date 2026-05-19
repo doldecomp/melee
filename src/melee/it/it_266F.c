@@ -39,7 +39,7 @@
 extern HSD_ObjAllocUnk Item_804A0C64;
 extern ItemCommonData* it_804D6D28;
 
-extern u64 __shr2u(u64, u32, s32);
+extern u64 __shr2u(u32, u32, s32);
 
 Quaternion it_803B8560 = { 0.0f, 0.0f, 1.0f, 0.0f };
 static Vec3 it_803B8570 = { 0.0f, 0.0f, 0.0f };
@@ -104,15 +104,19 @@ s32 it_8026C530(s32 arg0, ItemPickTable* arg1, s32 arg2, s32 arg3)
     s32 mid;
     u16* temp_r9;
     s32 var_r5;
+    s32 last;
 
     var_r5 = arg2;
-    if (var_r5 == (arg3 - 1)) {
+    last = arg3 - 1;
+    if (var_r5 == last) {
         return var_r5;
     }
     temp_r10 = arg1->xC;
     mid = (var_r5 + arg3) / 2;
     if (temp_r10[mid] > arg0) {
-        if (var_r5 != (mid - 1)) {
+        if (var_r5 == (mid - 1)) {
+
+        } else {
             temp_r6 = (var_r5 + mid) / 2;
             if (temp_r10[temp_r6] > arg0) {
                 var_r5 = it_8026C530(arg0, arg1, var_r5, temp_r6);
@@ -124,11 +128,11 @@ s32 it_8026C530(s32 arg0, ItemPickTable* arg1, s32 arg2, s32 arg3)
         }
         return var_r5;
     }
-    temp_r9 = temp_r10 + 1;
+    temp_r9 = (u16*) ((u8*) temp_r10 + 2);
     if (temp_r9[mid] > arg0) {
         return mid;
     }
-    if (mid == (arg3 - 1)) {
+    if (mid == last) {
         return mid;
     }
     temp_r7 = (mid + arg3) / 2;
@@ -190,10 +194,14 @@ ItemKind it_8026C75C(ItemPickTable* arg_struct)
     u16 var_r30;
     u8 temp_r4;
     ItemKind kind;
-    PAD_STACK(4);
+    PAD_STACK(16);
 
-    chk1 = it_8026C704(); // Check if pokeball or Item_804A0C64.x1C >=
-                          // Item_804A0C64.x20 (something related to hold kind)
+    chk1 = false;
+    if ((Item_804A0C64.x1C >= Item_804A0C64.x20) ||
+        (it_8026D324(It_Kind_M_Ball) == false))
+    {
+        chk1 = true;
+    }
     chk2 = false;
     if (arg_struct->x8 == 0) {
         return -1;
@@ -350,9 +358,15 @@ void it_8026CB9C(s32* counts, u64 mask, f32 weight)
 
 void it_8026CD50(s32* arg0, u64 arg1, f32 arg2)
 {
+    typedef struct {
+        RandomItemSpawner alloc;
+        ItemPickTable common;
+        ItemPickTable monster;
+    } ItemSpawnTables;
+    ItemSpawnTables* tables = (ItemSpawnTables*) &it_804A0E30;
     s32 struct_size;
     ItemKind it_kind;
-    s16 cumulative;
+    s32 cumulative;
     s32 idx;
     s32* p;
     s32 cnt;
@@ -365,33 +379,36 @@ void it_8026CD50(s32* arg0, u64 arg1, f32 arg2)
     p = arg0 + It_Kind_BombHei;
     cnt = 0;
     it_kind = It_Kind_BombHei;
-    while (it_kind < It_Kind_L_Gun_Ray) {
-        if (((mask & 1) != 0) && (*p != 0)) {
-            cnt++;
+    {
+        s32 new_var = It_Kind_L_Gun_Ray;
+        while (it_kind < new_var) {
+            if (((mask & 1) != 0) && (*p != 0)) {
+                cnt++;
+            }
+            p++;
+            it_kind++;
+            temp_ret = __shr2u(mask, mask_low, 1);
+            mask = temp_ret;
         }
-        p++;
-        it_kind++;
-        temp_ret = __shr2u(mask, mask_low, 1);
-        mask_low = (u32) temp_ret;
-        mask = temp_ret;
     }
     struct_size = cnt * 4;
     idx = struct_size;
-    it_804A0E50.x0 = cnt;
-    it_804A0E50.x4 = HSD_MemAlloc(idx);
-    it_804A0E50.xC = HSD_MemAlloc(idx);
+    mask_low = (u32) temp_ret;
+    tables->common.x0 = cnt;
+    tables->common.x4 = HSD_MemAlloc(idx);
+    tables->common.xC = HSD_MemAlloc(idx);
     cnt = 0;
-    mask_low = (u32) arg1;
     p = arg0 + It_Kind_BombHei;
     idx = 0;
     cumulative = 0;
     it_kind = It_Kind_BombHei;
     while (it_kind < It_Kind_L_Gun_Ray) {
+        mask_low = (u32) arg1;
         struct_size = cumulative;
         if ((((mask & 1) ^ 0) != 0) && (*p != 0)) {
-            it_804A0E50.x4[cnt] = it_kind;
+            tables->common.x4[cnt] = it_kind;
             cnt++;
-            it_804A0E50.xC[idx] = struct_size;
+            tables->common.xC[idx] = struct_size;
             idx++;
             cumulative = cumulative + ((arg2 * *p) + 0.99f);
         }
@@ -429,8 +446,8 @@ void it_8026CF04(void)
     if (sum != 0) {
         tables->monster.x8 = sum;
         tables->monster.x0 = 4;
-        tables->monster.x4 = HSD_MemAlloc(tables->monster.x0 * 4);
-        x4_loc = &tables->monster.x4;
+        *(x4_loc = &tables->monster.x4) =
+            HSD_MemAlloc(tables->monster.x0 * 4);
         tables->monster.xC = HSD_MemAlloc(tables->monster.x0 * 4);
         xC_loc = &tables->monster.xC;
         item_common = it_804D6D28;
@@ -1485,6 +1502,9 @@ bool it_8026ECE0(Item_GObj* gobj, u32 arg1)
     return chk;
 }
 
+#define it_8026EECC_VARS(ip)                                                  \
+    (*(it_266F_ItemVars**) &((ip)->xDD4_itemVar.it_266F))
+
 static inline void it_8026EECC_inline_1(HSD_GObj* gobj, s32 arg1, Vec3* pos)
 {
     Item* ip = gobj->user_data;
@@ -1492,18 +1512,18 @@ static inline void it_8026EECC_inline_1(HSD_GObj* gobj, s32 arg1, Vec3* pos)
 
     ip->xDCF_flag.b4 = 1;
     ip->xDCF_flag.b5 = 0;
-    it_8026EC54(gobj, ip->xDD4_itemVar.it_266F.x0,
-                ip->xDD4_itemVar.it_266F.x4);
-    it_8026EBC8(gobj, ip->xDD4_itemVar.it_266F.x8,
-                ip->xDD4_itemVar.it_266F.xC);
+    it_8026EC54(gobj, it_8026EECC_VARS(ip)->x0,
+                it_8026EECC_VARS(ip)->x4);
+    it_8026EBC8(gobj, it_8026EECC_VARS(ip)->x8,
+                it_8026EECC_VARS(ip)->xC);
     if (ip->xDCF_flag.b7) {
         new_pos = pos;
     }
     it_8026EB18(gobj, arg1, new_pos);
-    it_8026EBC8(gobj, ip->xDD4_itemVar.it_266F.x0,
-                ip->xDD4_itemVar.it_266F.x4);
-    it_8026EC54(gobj, ip->xDD4_itemVar.it_266F.x8,
-                ip->xDD4_itemVar.it_266F.xC);
+    it_8026EBC8(gobj, it_8026EECC_VARS(ip)->x0,
+                it_8026EECC_VARS(ip)->x4);
+    it_8026EC54(gobj, it_8026EECC_VARS(ip)->x8,
+                it_8026EECC_VARS(ip)->xC);
 }
 
 static inline void it_8026EECC_inline_2(HSD_GObj* gobj, s32 arg1, Vec3* pos)
@@ -1526,10 +1546,10 @@ static inline void it_8026EECC_inline_3(HSD_GObj* gobj, s32 arg1, Vec3* pos)
 
     ip->xDCF_flag.b4 = 1;
     ip->xDCF_flag.b5 = 1;
-    it_8026EC54(gobj, ip->xDD4_itemVar.it_266F.x0,
-                ip->xDD4_itemVar.it_266F.x4);
-    it_8026EBC8(gobj, ip->xDD4_itemVar.it_266F.x8,
-                ip->xDD4_itemVar.it_266F.xC);
+    it_8026EC54(gobj, it_8026EECC_VARS(ip)->x0,
+                it_8026EECC_VARS(ip)->x4);
+    it_8026EBC8(gobj, it_8026EECC_VARS(ip)->x8,
+                it_8026EECC_VARS(ip)->xC);
     if (ip->xDCF_flag.b7) {
         new_pos = pos;
     } else {
@@ -1537,10 +1557,10 @@ static inline void it_8026EECC_inline_3(HSD_GObj* gobj, s32 arg1, Vec3* pos)
     }
 
     it_8026EB18(gobj, arg1, new_pos);
-    it_8026EBC8(gobj, ip->xDD4_itemVar.it_266F.x0,
-                ip->xDD4_itemVar.it_266F.x4);
-    it_8026EC54(gobj, ip->xDD4_itemVar.it_266F.x8,
-                ip->xDD4_itemVar.it_266F.xC);
+    it_8026EBC8(gobj, it_8026EECC_VARS(ip)->x0,
+                it_8026EECC_VARS(ip)->x4);
+    it_8026EC54(gobj, it_8026EECC_VARS(ip)->x8,
+                it_8026EECC_VARS(ip)->xC);
 }
 
 void it_8026EECC(HSD_GObj* gobj, int arg1)
@@ -1618,14 +1638,16 @@ static bool it_8026C704_outline(void)
 }
 #pragma pop
 
-void it_8026F3D4(Item_GObj* item_gobj, struct it_8026F3D4_arg1_t* arg1,
+bool it_8026F3D4(Item_GObj* item_gobj, struct it_8026F3D4_arg1_t* arg1,
                  s32 num, s32 arg3)
 {
-    u8 _padA[136];
     ItemPickTable* common = &it_804A0E50;
-    struct it_8026F3D4_body_t sp30;
+    u8 _padA[0x48];
     volatile s32 cnt2;
+    u8 _padB[0x30];
+    struct it_8026F3D4_body_t sp30;
     Vec3 sp24;
+    u8 _padC[12];
     ItemKind it_kind;
     int new_var;
     Item* item;
@@ -1677,6 +1699,7 @@ void it_8026F3D4(Item_GObj* item_gobj, struct it_8026F3D4_arg1_t* arg1,
         arg1->x4 = it_kind;
         arg1->x8 = spawned_item_gobj;
     }
+    return chk1;
 }
 
 void it_8026F53C(Item_GObj* item_gobj, Vec3* vel, bool chk)

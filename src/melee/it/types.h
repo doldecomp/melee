@@ -318,9 +318,11 @@ struct Item {
     u8 x5CB;
     f32 x5CC_currentAnimFrame;
     f32 x5D0_animFrameSpeed;
-    struct {
+    struct ItemHitbox {
         HitCapsule hit; // x5D4, x710, x84C, x988
-        s32 x138;       // x70C, x848, x984, xAC0
+        u8 x138 : 1;    // x70C, x848, x984, xAC0
+        u8 x138_b1_7 : 7;
+        u8 x139[3];
     } x5D4_hitboxes[4];
     u32 xAC4_ignoreItemID;           // Cannot hit items with this index?
     u8 xAC8_hurtboxNum;              // Number of hurtboxes this item has

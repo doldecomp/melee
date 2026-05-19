@@ -59,11 +59,16 @@ static Vec2 it_803F8E48[] = {
     { 200.0f, 0.0f },
 };
 
+static inline s32 itArwinglaser_GetCollArg(Item* ip)
+{
+    return ip->xDD4_itemVar.arwinglaser.xE48;
+}
+
 s32 it_802E70BC(Item_GObj* gobj)
 {
     Item* ip;
+    int i;
     s32 hit_count;
-    s32 i;
     int sp44;
     u32 sp40;
     Vec3 sp34;
@@ -78,38 +83,46 @@ s32 it_802E70BC(Item_GObj* gobj)
     sp1C.z = 0.0f;
     sp28.z = 0.0f;
     if (it_8026EA9C(gobj, &sp1C, &sp28, &sp34, &sp44, &sp40,
-                    ip->xDD4_itemVar.arwinglaser.xE48) != 0)
+                    itArwinglaser_GetCollArg(ip)))
     {
         mpGetSpeed(sp44, &ip->pos, &ip->x40_vel);
         return 1;
     }
-    i = 0;
-    hit_count = 0;
-    for (i = 0; i < 4; i++) {
+    i = (hit_count = 0);
+    while (i < 4) {
+        // surely fake
+        u32 copy_x;
+        u32 copy_y;
         sp1C = sp10;
-        sp28 = sp1C;
+        copy_x = *(u32*) &sp1C.x;
+        copy_y = *(u32*) &sp1C.y;
+        *(u32*) &sp28.x = copy_x;
+        copy_x = *(u32*) &sp1C.z;
+        *(u32*) &sp28.y = copy_y;
+        *(u32*) &sp28.z = copy_x;
         sp28.x += it_803F8E48[i].x;
         sp28.y += it_803F8E48[i].y;
         sp1C.z = 0.0f;
         sp28.z = 0.0f;
         if (it_8026EA9C(gobj, &sp1C, &sp28, &sp34, &sp44, &sp40,
-                        ip->xDD4_itemVar.arwinglaser.xE48) != 0)
+                        itArwinglaser_GetCollArg(ip)))
         {
             sp1C = sp10;
             sp1C.z = 0.0f;
             sp28.z = 0.0f;
             if (it_8026EA9C(gobj, &sp28, &sp1C, &sp34, &sp44, &sp40,
-                            ip->xDD4_itemVar.arwinglaser.xE48) != 0 &&
+                            itArwinglaser_GetCollArg(ip)) &&
                 !(mpLineGetFlags(sp44) & 0x100))
             {
                 hit_count++;
             }
         } else if (it_8026EA9C(gobj, &sp28, &sp1C, &sp34, &sp44, &sp40,
-                               ip->xDD4_itemVar.arwinglaser.xE48) != 0 &&
+                               itArwinglaser_GetCollArg(ip)) &&
                    !(mpLineGetFlags(sp44) & 0x100))
         {
             hit_count++;
         }
+        i++;
     }
     if (hit_count != 0) {
         return 1;
@@ -150,7 +163,7 @@ Item_GObj* it_802E72E0(Item_GObj* parent, HSD_JObj* bone, s32 type, f32 scale,
     }
     }
     spawn.pos = sp24;
-    spawn.prev_pos = sp24;
+    spawn.prev_pos = spawn.pos;
     spawn.kind = 0xEA;
     spawn.facing_dir = scale;
     spawn.x3C_damage = 0;
@@ -226,18 +239,18 @@ Item_GObj* it_802E72E0(Item_GObj* parent, HSD_JObj* bone, s32 type, f32 scale,
     return new_gobj;
 }
 
-void it_802E7654(s32 owner, HSD_JObj* bone, Vec3* target, s32 type, s32 arg4,
-                 f32 scale)
+void it_802E7654(Item_GObj* owner, HSD_JObj* bone, Vec3* target, s32 type,
+                 s32 arg4, f32 scale)
 {
     SpawnItem spawn;
     Vec3 sp28;
-    HSD_JObj* jobj;
-    Item* ip;
     Item_GObj* new_gobj;
+    Item* ip;
+    HSD_JObj* jobj;
     f32 rot;
 
     lb_8000B1CC(bone, NULL, &sp28);
-    spawn.kind = 0xEA;
+    spawn.kind = It_Kind_Arwing_Laser;
     spawn.prev_pos = sp28;
     spawn.facing_dir = 0.0f;
     spawn.x3C_damage = 0;
@@ -256,7 +269,7 @@ void it_802E7654(s32 owner, HSD_JObj* bone, Vec3* target, s32 type, s32 arg4,
         ip->xDD4_itemVar.arwinglaser.xE18 = ip->xDD4_itemVar.arwinglaser.xE24;
         ip->xDD4_itemVar.arwinglaser.xE30 = 0;
         ip->xDD4_itemVar.arwinglaser.xDFC = Ground_801C0498();
-        ip->xDD4_itemVar.arwinglaser.xDF4 = (Item_GObj*) (s32) owner;
+        ip->xDD4_itemVar.arwinglaser.xDF4 = owner;
         ip->xDD4_itemVar.arwinglaser.xDF8 = bone;
         ip->xDD4_itemVar.arwinglaser.xE34 = scale;
         ip->xDD4_itemVar.arwinglaser.xE38 = type;

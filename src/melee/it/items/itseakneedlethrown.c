@@ -241,6 +241,7 @@ void itSeakneedlethrown_UnkMotion4_Phys(Item_GObj* gobj)
 static inline bool itSeakNeedleThrown_CheckGroundHit(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
+    CollData* coll = &ip->x378_itemColl;
     Vec3 hit_pos;
     u32 line_id;
 
@@ -249,8 +250,7 @@ static inline bool itSeakNeedleThrown_CheckGroundHit(Item_GObj* gobj)
                     &line_id) &&
         mpLib_80054ED8(ip->xDD4_itemVar.seakneedlethrown.xDF4))
     {
-        mpColl_80043558(&ip->x378_itemColl,
-                        ip->xDD4_itemVar.seakneedlethrown.xDF4);
+        mpColl_80043558(coll, ip->xDD4_itemVar.seakneedlethrown.xDF4);
         mpGetSpeed(ip->xDD4_itemVar.seakneedlethrown.xDF4, &ip->pos,
                    &ip->x40_vel);
         {
@@ -316,8 +316,7 @@ bool itSeakneedlethrown_UnkMotion1_Coll(Item_GObj* gobj)
     return false;
 }
 
-static inline void itSeakNeedleThrown_Coll2_Inline(Item_GObj* gobj,
-                                                   HSD_JObj* child)
+static inline void itSeakNeedleThrown_Coll2_Inline(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     CollData* coll = &ip->x378_itemColl;
@@ -337,6 +336,10 @@ static inline void itSeakNeedleThrown_Coll2_Inline(Item_GObj* gobj,
     } else {
         itResetVelocity(ip);
     }
+}
+
+static inline void itSeakNeedleThrown_Coll2_Rotate(Item* ip, HSD_JObj* child)
+{
     if (ip->xDD4_itemVar.seakneedlethrown.xDF8 !=
         ip->xDD4_itemVar.seakneedlethrown.xDFC)
     {
@@ -353,7 +356,8 @@ bool itSeakneedlethrown_UnkMotion2_Coll(Item_GObj* gobj)
     HSD_JObj* child = HSD_JObjGetChild(gobj->hsd_obj);
     it_802762BC(ip);
     itResetVelocity(ip);
-    itSeakNeedleThrown_Coll2_Inline(gobj, child);
+    itSeakNeedleThrown_Coll2_Inline(gobj);
+    itSeakNeedleThrown_Coll2_Rotate(ip, child);
     return false;
 }
 

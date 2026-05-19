@@ -135,7 +135,7 @@ static inline int it_80291DAC_level(Item_GObj* gobj, int arg1)
 int it_80291DAC(Item_GObj* gobj, int arg1)
 {
     Item* ip = GET_ITEM(gobj);
-    int level;
+    s32 level;
     int cost;
     int i;
     PAD_STACK(12);
@@ -156,8 +156,9 @@ int it_80291DAC(Item_GObj* gobj, int arg1)
             }
             level--;
         }
+    } else {
+        return level;
     }
-    return level;
 }
 
 void it_80291F14(Item_GObj* gobj, int charge_level)
