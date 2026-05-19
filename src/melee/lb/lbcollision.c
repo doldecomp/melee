@@ -139,15 +139,10 @@ bool lbColl_80005C44(const Vec3* arg0, const Vec3* arg1, const Vec3* arg2,
                      Vec3* arg3, float arg8, float arg9)
 {
     float temp_f2;
-    float scale;
     Vec3 sp38;
     Vec3 sp2C;
     Vec3 d1;
-    float d2_x;
-    float d2_y;
-    float d2_z;
-    float d1_dot_d1;
-    float d1_dot_d2;
+    float d2_x, d2_y, d2_z;
 
     temp_f2 = arg8 + arg9;
     sp38 = *arg0;
@@ -207,29 +202,32 @@ bool lbColl_80005C44(const Vec3* arg0, const Vec3* arg1, const Vec3* arg2,
     d2_y = sp38.y - sp2C.y;
     d2_z = sp38.z - sp2C.z;
 
-    d1_dot_d1 = d1.x * d1.x + d1.y * d1.y + d1.z * d1.z;
-    d1_dot_d2 = d1.x * d2_x + d1.y * d2_y + d1.z * d2_z;
+    {
+        float d1_dot_d1 = d1.x * d1.x + d1.y * d1.y + d1.z * d1.z;
+        float d1_dot_d2 = d1.x * d2_x + d1.y * d2_y + d1.z * d2_z;
+        float scale;
 
-    if (nearzero(d1_dot_d1)) {
-        scale = *(volatile const float*) &lbColl_804D79F8;
-    } else {
-        scale = -d1_dot_d2 / d1_dot_d1;
-        if (scale > *(volatile const f64*) &lbColl_804D7A00) {
-            scale = *(volatile const float*) &lbColl_804D7A08;
-        } else if (scale < *(volatile const f64*) &lbColl_804D7A10) {
-            scale = *(volatile const float*) &lbColl_804D79F8;
+        if (nearzero(d1_dot_d1)) {
+            scale = 0.0f;
+        } else {
+            scale = -d1_dot_d2 / d1_dot_d1;
+            if (scale > 1.0) {
+                scale = 1.0f;
+            } else if (scale < 0.0) {
+                scale = 0.0f;
+            }
         }
-    }
 
-    arg3->x = d1.x * scale + sp38.x;
-    arg3->y = d1.y * scale + sp38.y;
-    arg3->z = d1.z * scale + sp38.z;
+        arg3->x = d1.x * scale + sp38.x;
+        arg3->y = d1.y * scale + sp38.y;
+        arg3->z = d1.z * scale + sp38.z;
+    }
 
     d2_x = arg3->x - sp2C.x;
     d2_y = arg3->y - sp2C.y;
     d2_z = arg3->z - sp2C.z;
 
-    if (temp_f2 * temp_f2 < d2_x * d2_x + d2_y * d2_y + d2_z * d2_z) {
+    if (SQ(temp_f2) < SQ(d2_x) + SQ(d2_y) + SQ(d2_z)) {
         return false;
     } else {
         return true;
