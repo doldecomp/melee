@@ -61,17 +61,14 @@ typedef struct TrophyData {
 
 /* Trophy list entry. Size: 0x34 bytes. */
 typedef struct TyListArg {
-    /* 0x00 */ struct TyListArg* x0;
-    /* 0x04 */ struct TyListArg* x4;
-    /* 0x08 */ void* x8;
-    /* 0x0C */ struct HSD_JObj* xC;
-    /* 0x10 */ struct HSD_JObj* x10;
-    /* 0x14 */ struct HSD_JObj* x14;
-    /* 0x18 */ u8 pad_18[0x24 - 0x18];
+    /* 0x00 */ struct TyListArg* links[3];
+    /* 0x0C */ struct HSD_JObj* jobjs[3];
+    /* 0x18 */ struct HSD_Text* texts[3];
     /* 0x24 */ s8 x24;
-    /* 0x25 */ u8 pad_25;
+    /* 0x25 */ u8 x25;
     /* 0x26 */ s16 idx;
-    /* 0x28 */ u8 pad_28[0x2C - 0x28];
+    /* 0x28 */ s8 x28;
+    /* 0x29 */ u8 pad_29[0x2C - 0x29];
     /* 0x2C */ float x2C;
     /* 0x30 */ float x30;
 } TyListArg;
@@ -104,7 +101,9 @@ typedef struct TyListState {
     /* 0x2B0 */ struct HSD_GObj* gobj_2B0;
     /* 0x2B4 */ u8 pad_2B4[4];
     /* 0x2B8 */ u8 x2B8;
-    /* 0x2B9 */ u8 pad_2B9[0xB];
+    /* 0x2B9 */ u8 pad_2B9[9];
+    /* 0x2C2 */ s8 x2C2;
+    /* 0x2C3 */ u8 pad_2C3;
     /* 0x2C4 */ struct HSD_GObj* gobj_2C4;
     /* 0x2C8 */ u8 pad_2C8[0x10];
 } TyListState;
@@ -137,4 +136,30 @@ typedef struct TyDspEntry {
     /* 0x0C */ f32 x0C;
 } TyDspEntry;
 STATIC_ASSERT(sizeof(struct TyDspEntry) == 0x10);
+
+typedef struct ToySubStructS_ {
+    u8 pad0[0x10];
+    s16 x10;
+} ToySubStructS_;
+
+typedef struct ToyGlobalsS_ {
+    HSD_GObj* x0;
+    u8 x4;
+    HSD_GObj* x8;
+    HSD_GObj* xC;
+    s32 x10;
+    u8 pad14[0x1C];
+    void* x30;
+    u8 pad34[0x1C];
+    void* x50;
+    void* x54;
+    s32 x58;
+    u8 pad0[0x140 - 0x5C];
+    ToySubStructS_* x140;
+    void* x144;
+    void* x148;
+    void* x14C;
+    void* x150;
+    s16 x154;
+} ToyGlobalsS_;
 #endif

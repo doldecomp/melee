@@ -18,7 +18,7 @@ struct TyListState;
 /* 312904 */ void un_80312904(void*, s8);
 /* 312BAC */ void un_80312BAC(struct TyListState* state, s8 arg1);
 /* 312E88 */ void un_80312E88(struct TyListArg* arg, float delta);
-/* 31305C */ s8 un_8031305C(void* a, struct TyListState* state, s8 movedFlag);
+/* 31305C */ s32 un_8031305C(void* a, struct TyListState* state, s8 movedFlag);
 /* 313358 */ void un_80313358(struct TyListState* state, s8 arg2, s8 arg3,
                               s8 arg4);
 /* 313464 */ void un_80313464(struct TyListArg* arg);

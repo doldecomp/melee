@@ -70,7 +70,7 @@
 /* 26ECE0 */ bool it_8026ECE0(Item_GObj*, u32);
 /* 26EECC */ void it_8026EECC(HSD_GObj*, int);
 /* 26F3AC */ ItemKind it_8026F3AC(void);
-/* 26F3D4 */ void it_8026F3D4(Item_GObj*, struct it_8026F3D4_arg1_t*, s32,
+/* 26F3D4 */ bool it_8026F3D4(Item_GObj*, struct it_8026F3D4_arg1_t*, s32,
                               s32);
 /* 26F53C */ void it_8026F53C(Item_GObj*, Vec3*, bool);
 /* 26F5C8 */ Item_GObj* it_8026F5C8(Item_GObj*, ItemKind, Vec3*);

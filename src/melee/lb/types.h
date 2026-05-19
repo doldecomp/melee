@@ -853,6 +853,23 @@ struct spawn_hitbox_5 {
     u32 x1_b6 : 1;
     u32 x1_b7 : 1;
 };
+struct it_create_hitbox_0 {
+    u32 opcode : 6;
+    u32 id : 3;
+    u32 hit_group : 3;
+    u32 bone : 7;
+    u32 damage : 13;
+};
+struct it_create_hitbox_4 {
+    u32 base_knockback : 9;
+    u32 element : 5;
+    u32 x40_b0 : 1;
+    s32 shield_damage : 8;
+    u32 sfx_severity : 3;
+    u32 sfx_kind : 4;
+    u32 x40_b3 : 1;
+    u32 x40_b2 : 1;
+};
 struct spawn_hitbox_skip {
     u8 _0[0xF];
     u32 xF_b0 : 1;
@@ -1016,6 +1033,8 @@ struct CommandInfo {
             struct spawn_hitbox_3 create_hitbox_3;
             struct spawn_hitbox_4 create_hitbox_4;
             struct spawn_hitbox_5 create_hitbox_5;
+            struct it_create_hitbox_0 it_create_hitbox_0;
+            struct it_create_hitbox_4 it_create_hitbox_4;
             struct sound_effect_0 sound_effect_0;
             struct sound_effect_1 sound_effect_1;
             struct sound_effect_2 sound_effect_2;
