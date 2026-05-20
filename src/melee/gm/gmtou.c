@@ -825,7 +825,7 @@ void gm_8019DF8C_OnFrame(void)
                     lbl_80479A58.x18[i] = (u8) (lbl_80479A58.x18[i] + 1);
                     if ((u8) lbl_80479A58.x18[i] > 0x5AU) {
                         lbAudioAx_80024030(1);
-                        gm_SetScenePendingMinor(0U);
+                        gm_SetPendingScene(0U);
                         gm_801A4B60();
                         return;
                     }

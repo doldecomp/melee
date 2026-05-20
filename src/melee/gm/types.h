@@ -35,22 +35,24 @@ struct DebugGameOverData {
     /* 18 */ u16 x18;
 };
 
-struct MinorScene {
+/// @note Colloquially known as "Minor Scene"
+struct GameScene {
     /* 00 */ u8 idx;
     /* 01 */ u8 preload;
     /* 02 */ u16 flags;
 
-    /* 04 */ void (*Prep)(MinorScene*);
-    /* 08 */ void (*Decide)(MinorScene*);
+    /* 04 */ void (*Prep)(GameScene*);
+    /* 08 */ void (*Decide)(GameScene*);
 
-    struct MinorSceneInfo {
+    struct GameSceneInfo {
         /* 0C */ u8 class_id;
         /* 10 */ void* load_data;  ///< data passed to OnLoad callback
         /* 14 */ void* leave_data; ///< data passed to OnLeave callback
     } info;
 };
 
-struct MajorScene {
+/// @note Colloquially known as "Major Scene"
+struct GameMode {
     u8 preload;
     u8 idx;
 
@@ -58,10 +60,10 @@ struct MajorScene {
     void (*Unload)(void);
     void (*Init)(void);
 
-    MinorScene* minor_scenes;
+    GameScene* scenes;
 }; // 803DACA4
 
-struct MinorSceneHandler {
+struct GameSceneHandler {
     u8 class_id;
 
     void (*OnFrame)(void);
@@ -71,17 +73,17 @@ struct MinorSceneHandler {
 }; // 803DA920
 
 typedef struct {
-    u8 curr_major;
-    u8 pending_major;
-    u8 prev_major;
-    u8 curr_minor;
-    u8 prev_minor;
-    u8 pending_minor;
-} SceneNums;
+    u8 curr_mode;
+    u8 pending_mode;
+    u8 prev_mode;
+    u8 curr_scene;
+    u8 prev_scene;
+    u8 pending_scene;
+} GameRouting;
 
 typedef struct {
-    SceneNums nums;
-    SceneNums nums2;
+    GameRouting routing;
+    GameRouting backup;
     u8 pending;
     u8 x0D;
     u8 x0E;
@@ -978,7 +980,7 @@ struct VsApproachData {
     u8 x1;
 };
 
-/// @brief data passed to OnLoad callback for MJ_MENU
+/// @brief data passed to OnLoad callback for GM_MENU
 struct MenuEnterData {
     /* +00 */ u8 menu_kind;         ///< will set the next menu kind
     /* +01 */ u8 hovered_selection; ///< will set the next hovered selection
@@ -988,9 +990,9 @@ struct MenuEnterData {
 };
 STATIC_ASSERT(sizeof(struct MenuEnterData) == 0x4);
 
-/// @brief data passed to OnLeave callback for MJ_MENU
+/// @brief data passed to OnLeave callback for GM_MENU
 struct MenuExitData {
-    /* +00 */ s8 pending_major; ///< will set the next major scene
+    /* +00 */ s8 pending_mode; ///< will set the next game mode
     /* +01 */ u8 _1[0x3];
 };
 STATIC_ASSERT(sizeof(struct MenuExitData) == 0x4);

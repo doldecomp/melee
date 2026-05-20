@@ -4159,7 +4159,7 @@ void mnCharSel_802669F4_OnFrame(void)
         mn_8022F138(1, 8);
         HSD_SisLib_803A5E70();
         mn_8022F268();
-        gm_801A42F8(MJ_MENU);
+        gm_801A42F8(GM_MENU);
         gm_801A4B60();
         return;
     }

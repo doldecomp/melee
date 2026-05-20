@@ -271,14 +271,14 @@ struct PreloadEntry {
 struct PreloadCacheScene {
     bool is_heap_persistent[2];
     struct GameCache {
-        u8 major_id;
+        u8 mode_id;
         u8 field2_0x9;
         u8 field3_0xa;
         u8 field4_0xb;
         InternalStageId stage_id;
         PreloadCacheSceneEntry entries[8];
     } game_cache;
-    s32 major_scene_changes;
+    s32 mode_scene_changes;
 };
 
 struct PreloadCache {
