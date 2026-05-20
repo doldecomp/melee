@@ -7528,23 +7528,21 @@ void it_80277D08(void)
                      it_803F1F90.library_name, "it_mobj", 0x50, 0x20);
     it_803F1F90.parent.release = hsdMObj.parent.release;
     it_803F1F90.parent.amnesia = hsdMObj.parent.amnesia;
-    it_803F1F90.setup = fn_80277D8C;
+    it_803F1F90.setup = (HSD_MObjSetupFunc) fn_80277D8C;
     it_803F1F90.load = hsdMObj.load;
     it_803F1F90.make_texp = hsdMObj.make_texp;
 }
 
-void fn_80277D8C(HSD_MObj* mobj, u32 rendermode_arg)
+void fn_80277D8C(HSD_MObj* mobj, u32 rendermode_arg, u32 unused_arg)
 {
     HSD_TObj* tobj2;
     HSD_TExp sp38;
     HSD_PEDesc pe_desc;
-    Item* item;
+    Item* item = GET_ITEM(HSD_GObj_804D7814);
     HSD_PEDesc* setup_render_arg;
     HSD_TObj** tobj1_ptr;
     u32 rendermode;
-    u32 unused[1];
 
-    item = GET_ITEM(HSD_GObj_804D7814);
     HSD_StateInitTev();
     rendermode = mobj->rendermode;
     HSD_SetMaterialColor(mobj->mat->ambient, mobj->mat->diffuse,
@@ -7561,8 +7559,8 @@ void fn_80277D8C(HSD_MObj* mobj, u32 rendermode_arg)
         }
         *tobj1_ptr = tobj_shadows;
     }
-    if ((rendermode & 0x1000) && ((HSD_TObj*) tobj_toon != NULL) &&
-        ((HSD_ImageDesc*) tobj_toon->imagedesc != NULL))
+    if ((rendermode & 0x1000) && (tobj_toon != NULL) &&
+        (tobj_toon->imagedesc != NULL))
     {
         tobj_toon->next = tobj2;
         tobj2 = tobj_toon;
@@ -7644,9 +7642,9 @@ void it_80278108(Item* item, HSD_MObj* mobj, HSD_TExp* texp)
     u8 _padA[84];
     HSD_TECnst spFC;
     u8 _padB[80];
+    GXColor unused;
     HSD_TECnst sp90;
     HSD_TevDesc sp1C;
-    GXColor sp18;
     bool chk1;
     s32 var_r0;
     s32 reg1;
@@ -7757,10 +7755,15 @@ void it_80278108(Item* item, HSD_MObj* mobj, HSD_TExp* texp)
             spFC.next = NULL;
         }
         spFC.reg = reg2;
-        sp18.r = sp168.a;
-        sp18.g = sp168.a;
-        sp18.b = sp168.a;
-        spFC.val = &sp18;
+        {
+            GXColor* color = (GXColor*) ((u8*) &sp1C - 4);
+            u8 alpha = sp168.a;
+
+            color->r = alpha;
+            color->g = alpha;
+            color->b = alpha;
+            spFC.val = color;
+        }
         HSD_TExpSetReg((HSD_TExp*) &spFC);
         sp1C = info->tevdesc_tmpl;
         sp1C.stage = HSD_StateAssignTev();
@@ -9099,24 +9102,37 @@ bool it_8027AB64(Item_GObj* item_gobj)
         spawn.kind = (&it_803F2ED0 == NULL) ? Pokemon_Sonans
                                             : it_8027A780(item, &it_803F2ED0);
     } else if (gm_801A4310() == 0x18) {
-        it_279D_DatAttrs* attr = item->xC4_article_data->x4_specialAttributes;
-        s32 rand_int = HSD_Randi(it_8027A364(item));
-        s32 var_r4 = 0;
-        s32 index = Pokemon_Tosakinto;
+        s32 var_r4;
+        s32 index;
         s32 var_ctr;
-        s32 var_r0 = 0;
+        s32 var_r0;
+        it_279D_DatAttrs* attr;
+        s32 rand_int;
+        s32 recent_x_val;
+        s32 recent_y_val;
+        s32* recent_y;
+
+        attr = item->xC4_article_data->x4_specialAttributes;
+        rand_int = HSD_Randi(it_8027A364(item));
+        recent_y = &Item_804A0E24.y;
+        recent_x_val = Item_804A0E24.x;
+        var_r4 = 0;
+        index = Pokemon_Tosakinto;
+        recent_y_val = Item_804A0E24.y;
         for (var_ctr = 30; var_ctr != 0; var_ctr--) {
-            if (Item_804A0E24.x != index && Item_804A0E24.y != index) {
+            if (recent_x_val != index && recent_y_val != index) {
                 var_r4 += attr->x3C[index - Pokemon_Tosakinto];
                 if (var_r4 >= rand_int) {
-                    Item_804A0E24.y = Item_804A0E24.x;
+                    *recent_y = recent_x_val;
                     var_r0 = index - Pokemon_Tosakinto;
                     Item_804A0E24.x = index;
-                    break;
+                    goto selected;
                 }
             }
             index++;
         }
+        var_r0 = 0;
+    selected:
         spawn.kind = var_r0;
     } else {
         spawn.kind = db_GetCurrentlySelectedPokemon();
@@ -9274,23 +9290,21 @@ void it_8027B1F4(Item_GObj* item_gobj)
     ft_80089768(&item->xD94);
 }
 
-void it_8027B288(Item_GObj* item_gobj, u32 arg1)
+void it_8027B288(Item_GObj* item_gobj, volatile u32 arg1)
 {
     union Struct2070 sp14;
-    volatile union Struct2070 spC;
     Item* item;
     struct Struct2074* temp_r3;
+    PAD_STACK(4);
 
-    spC.x2070_int = arg1;
     item = item_gobj->user_data;
-    sp14 = spC;
-    // if ((sp14.flags.x0 == 0) || (sp14.flags.x0 != (u8) item->unkD93)) {
+    sp14.x2070_int = arg1;
     if ((sp14.x2073 == 0) || (sp14.x2073 != item->xD90.x2073)) {
         item->xDA8_short = plAttack_80037B08();
     }
     item->xD90 = sp14;
     if (ftLib_80086960(item->owner)) {
-        temp_r3 = ft_800898A8((Fighter_GObj*) item->owner);
+        temp_r3 = ft_800898A8(item->owner);
         item->xD94 = temp_r3->x2074_vec;
         item->xD9C = temp_r3->x207C;
         item->xDA4_word = temp_r3->x2084;

@@ -1,16 +1,10 @@
 #include "itmewtwoshadowball.h"
 
-#include "placeholder.h"
-
-#include "db/db.h"
 #include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "ft/chara/ftKirby/ftKb_Init.h"
 #include "ft/chara/ftMewtwo/ftMt_SpecialN.h"
 #include "ft/ftlib.h"
-
-#include "it/forward.h"
-
 #include "it/inlines.h"
 #include "it/it_266F.h"
 #include "it/it_26B1.h"
@@ -18,14 +12,16 @@
 #include "it/item.h"
 #include "lb/lb_00B0.h"
 #include "lb/lbvector.h"
-#include "MSL/trigf.h"
 
-#include <math.h>
-#include <baselib/jobj.h>
 #include <baselib/mtx.h>
 #include <baselib/random.h>
+#include <MSL/trigf.h>
 
-extern s32 it_803F7880[];
+s32 it_803F7880[] = {
+    0x00030DAA,
+    0x00030DAD,
+    0x00030DB0,
+};
 
 void it_802C4D10(Item_GObj* gobj)
 {
@@ -41,8 +37,7 @@ void it_802C4D10(Item_GObj* gobj)
             ip->xDD4_itemVar.mewtwoshadowball.x3C +=
                 ((M_PI / 4) * (2.0f * (HSD_Randf() - 0.5f)));
             ip->xDD4_itemVar.mewtwoshadowball.x44 =
-                -ip->xDD4_itemVar.mewtwoshadowball.x40 /
-                ((u32) attr->x20 / 2u);
+                -ip->xDD4_itemVar.mewtwoshadowball.x40 / (0.5f * attr->x20);
             Item_8026AF0C(ip, it_803F7880[HSD_Randi(3)], 127, 64);
         }
         ip->xDD4_itemVar.mewtwoshadowball.x40 +=
@@ -234,7 +229,9 @@ void it_802C53F0(Item_GObj* gobj, Vec3* pos, float angle, float charge,
     itMewtwoShadowball_DatAttrs* attr =
         ip->xC4_article_data->x4_specialAttributes;
     HSD_JObj* jobj;
-    PAD_STACK(8);
+    Vec3 rot;
+    Vec3 tr;
+    PAD_STACK(4);
 
     ip->xDD4_itemVar.mewtwoshadowball.x4.x = angle;
     it_80275158(gobj, attr->x0);
@@ -251,9 +248,6 @@ void it_802C53F0(Item_GObj* gobj, Vec3* pos, float angle, float charge,
     if (ip->xDD4_itemVar.mewtwoshadowball.x2C != NULL &&
         ip->owner == ip->xDD4_itemVar.mewtwoshadowball.x2C)
     {
-        Vec3 rot;
-        Vec3 tr;
-
         it_802C5B18(gobj);
         HSD_MtxGetRotation(
             ftLib_80086630(ip->xDD4_itemVar.mewtwoshadowball.x2C, ip->xDC4)
@@ -348,12 +342,12 @@ void it_2725_Logic101_PickedUp(Item_GObj* gobj)
 
 bool itMewtwoshadowball_UnkMotion0_Anim(Item_GObj* gobj)
 {
-    Item* ip = GET_ITEM(gobj);
+    Item* ip = gobj->user_data;
     itMewtwoShadowball_DatAttrs* attr =
         ip->xC4_article_data->x4_specialAttributes;
     HSD_JObj* grandchild = itGetJObjGrandchild(gobj);
-    Vec3 scale;
     Vec3 trans;
+    Vec3 scale;
 
     if (ip->xDD4_itemVar.mewtwoshadowball.x2C != NULL &&
         ip->owner == ip->xDD4_itemVar.mewtwoshadowball.x2C)
@@ -398,7 +392,7 @@ bool itMewtwoshadowball_UnkMotion0_Anim(Item_GObj* gobj)
             }
             break;
         default:
-            return false;
+            break;
         }
     }
     scale.x = scale.y = scale.z =
@@ -509,10 +503,11 @@ bool itMewtwoshadowball_UnkMotion9_Coll(Item_GObj* gobj)
 void fn_802C5E18(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
-    // cursed, wtf
-    bool _unused = ip->xDD4_itemVar.mewtwoshadowball.x18 ==
-                   ip->xDD4_itemVar.mewtwoshadowball.x1C;
-    if (_unused) {
+
+    /// @todo original asm compares these, but doesn't actually branch, wtf
+    if (ip->xDD4_itemVar.mewtwoshadowball.x18 ==
+        ip->xDD4_itemVar.mewtwoshadowball.x1C)
+    {
         return;
     }
     ip->xDD4_itemVar.mewtwoshadowball.x20++;

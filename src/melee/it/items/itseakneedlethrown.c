@@ -263,6 +263,31 @@ static inline bool itSeakNeedleThrown_CheckGroundHit(Item_GObj* gobj)
     return false;
 }
 
+static inline bool itSeakNeedleThrown_CheckGroundHit4(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    CollData* coll = &ip->x378_itemColl;
+    u32 line_id;
+    Vec3 hit_pos;
+
+    if (it_8026EA20(gobj, &ip->xDD4_itemVar.seakneedlethrown.xDE4, &ip->pos,
+                    &hit_pos, &ip->xDD4_itemVar.seakneedlethrown.xDF4,
+                    &line_id) &&
+        mpLib_80054ED8(ip->xDD4_itemVar.seakneedlethrown.xDF4))
+    {
+        mpColl_80043558(coll, ip->xDD4_itemVar.seakneedlethrown.xDF4);
+        mpGetSpeed(ip->xDD4_itemVar.seakneedlethrown.xDF4, &ip->pos,
+                   &ip->x40_vel);
+        {
+            f32 angle = atan2f(hit_pos.y, hit_pos.x);
+            ip->xDD4_itemVar.seakneedlethrown.xDFC = angle;
+            ip->xDD4_itemVar.seakneedlethrown.xDF8 = angle;
+        }
+        return true;
+    }
+    return false;
+}
+
 bool itSeakneedlethrown_UnkMotion0_Coll(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
@@ -316,9 +341,8 @@ bool itSeakneedlethrown_UnkMotion1_Coll(Item_GObj* gobj)
     return false;
 }
 
-static inline void itSeakNeedleThrown_Coll2_Inline(Item_GObj* gobj)
+static inline void itSeakNeedleThrown_Coll2_Inline(Item_GObj* gobj, Item* ip)
 {
-    Item* ip = GET_ITEM(gobj);
     CollData* coll = &ip->x378_itemColl;
     Vec3 normal;
 
@@ -354,21 +378,22 @@ bool itSeakneedlethrown_UnkMotion2_Coll(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     HSD_JObj* child = HSD_JObjGetChild(gobj->hsd_obj);
+    PAD_STACK(8);
     it_802762BC(ip);
     itResetVelocity(ip);
-    itSeakNeedleThrown_Coll2_Inline(gobj);
+    itSeakNeedleThrown_Coll2_Inline(gobj, GET_ITEM(gobj));
     itSeakNeedleThrown_Coll2_Rotate(ip, child);
     return false;
 }
 
 bool itSeakneedlethrown_UnkMotion4_Coll(Item_GObj* gobj)
 {
-    Item* ip = HSD_GObjGetUserData(gobj);
+    Item* ip = GET_ITEM(gobj);
     itSeakNeedleThrownAttributes* attr =
         ip->xC4_article_data->x4_specialAttributes;
     HSD_JObj* child = HSD_JObjGetChild(gobj->hsd_obj);
     PAD_STACK(8);
-    if (itSeakNeedleThrown_CheckGroundHit(gobj) != 0) {
+    if (itSeakNeedleThrown_CheckGroundHit4(gobj) != 0) {
         it_80275158(gobj, attr->x4);
         ip->xDD4_itemVar.seakneedlethrown.xDF0 = HSD_JObjGetRotationX(child);
         Item_80268E5C(gobj, 2, ITEM_ANIM_UPDATE);

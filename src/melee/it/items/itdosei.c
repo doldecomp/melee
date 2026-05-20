@@ -44,6 +44,8 @@ ItemStateTable it_803F55D0[] = {
       itDosei_UnkMotion11_Coll },
 };
 
+char it_803F5690[] = "!(jobj->flags & JOBJ_USE_QUATERNION)";
+
 s32 it_803F56B8[] = { 0x109, 0x10A, 0x10B, 0 };
 
 static inline void itDosei_SetFacingAngle(Item_GObj* gobj, f32 m)
@@ -668,17 +670,12 @@ bool itDosei_UnkMotion9_Anim(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
     itDoseiAttributes* attr = ip->xC4_article_data->x4_specialAttributes;
-    PAD_STACK(8);
 
     ip->xDD4_itemVar.dosei.xDE4 = ip->pos;
     ip->xDD4_itemVar.dosei.xDDC =
         (ip->xDD4_itemVar.dosei.xDDC - (M_PI / attr->unkC));
     if (ip->xDD4_itemVar.dosei.xDD8 == 1) {
-        HSD_JObj* jobj = gobj->hsd_obj;
-        f32 facing_dir = GET_ITEM(gobj)->facing_dir;
-        f32 angle = ((M_PI_2 * facing_dir) +
-                     (facing_dir * -ip->xDD4_itemVar.dosei.xDDC));
-        HSD_JObjSetRotationY(jobj, angle);
+        itDosei_SetFacingAngle(gobj, -ip->xDD4_itemVar.dosei.xDDC);
         if (ip->xDD4_itemVar.dosei.xDDC <= 0.0f) {
             ip->xDD4_itemVar.dosei.xDD8 = 2;
             ip->x40_vel.x = ip->facing_dir * attr->unk8;

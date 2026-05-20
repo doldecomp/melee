@@ -27,6 +27,30 @@ static inline void itBombhei_UpdateStatePreserveBoneMotion10(Item_GObj* igp,
     fake_HSD_JObjSetRotationX(jobj, x);
 }
 
+static inline void fn_80280974_inline(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itBombHeiAttributes* attrs = GET_ATTRS(ip);
+    it_8026B3A8(gobj);
+    ip->x40_vel.x = attrs->xC * ip->facing_dir;
+    ip->xD5C = 0;
+    it_80275444(gobj);
+}
+
+static inline void itBombhei_UnkMotion1_Setup(Item_GObj* gobj)
+{
+    Item* ip = GET_ITEM(gobj);
+    itBombHeiAttributes* ap = GET_ATTRS(ip);
+    if ((ip->msid == 3) || (ip->msid == 0)) {
+        ip->xDC8_word.flags.x19 = 1;
+        ip->xDC8_word.flags.x17 = 1;
+        it_80274740(gobj);
+    }
+    if ((s32) ip->msid == 3) {
+        ip->xDD4_itemVar.bombhei.xDD4 = (s32) ap->x14;
+    }
+}
+
 Item_GObj* it_8027D670(Vec3* pos)
 {
     SpawnItem data;
@@ -281,24 +305,20 @@ bool itBombhei_UnkMotion3_Coll(Item_GObj* gobj)
     return false;
 }
 
-void it_8027EE04(Item_GObj* arg0)
+void it_8027EE04(Item_GObj* gobj)
 {
-    Item* ip;
-    itBombHeiAttributes* attrs;
-
-    ip = GET_ITEM(arg0);
-    attrs = GET_ATTRS(ip);
-    it_8026B3A8(arg0);
+    Item* ip = GET_ITEM(gobj);
+    itBombHeiAttributes* attrs = GET_ATTRS(ip);
+    it_8026B3A8(gobj);
     ip->x40_vel.x = attrs->xC * ip->facing_dir;
     ip->xD5C = 0;
-    it_80275444(arg0);
-    itBombhei_UpdateStatePreserveBone(arg0, 2, 0x1A);
+    it_80275444(gobj);
+    itBombhei_UpdateStatePreserveBone(gobj, 2, 0x1A);
 }
 
 bool itBombhei_UnkMotion2_Anim(Item_GObj* gobj)
 {
     Item* ip;
-    itBombHeiAttributes* attrs;
 
     ip = GET_ITEM(gobj);
     ip->xDD4_itemVar.bombhei.xDD4 -= 1;
@@ -307,12 +327,7 @@ bool itBombhei_UnkMotion2_Anim(Item_GObj* gobj)
         it_8027F8E0(gobj);
     }
     if (it_80272C6C(gobj) == 0) {
-        ip = GET_ITEM(gobj);
-        attrs = GET_ATTRS(ip);
-        it_8026B3A8(gobj);
-        ip->x40_vel.x = attrs->xC * ip->facing_dir;
-        ip->xD5C = 0;
-        it_80275444(gobj);
+        fn_80280974_inline(gobj);
         itBombhei_UpdateStatePreserveBoneFake(gobj, 2, 0x1A);
     }
     inline2_UnkMotion0_Anim(gobj);
@@ -323,9 +338,6 @@ void itBombhei_UnkMotion2_Phys(Item_GObj* gobj) {}
 
 bool itBombhei_UnkMotion2_Coll(Item_GObj* gobj)
 {
-    itBombHeiAttributes* attr;
-    Item* ip;
-    s32 temp_r0;
     PAD_STACK(8);
 
     if (it_8026D8A4(gobj, (void (*)(HSD_GObj*)) it_8027F42C) != 0) {
@@ -334,17 +346,7 @@ bool itBombhei_UnkMotion2_Coll(Item_GObj* gobj)
         }
         it_80276CB8(gobj);
     } else {
-        ip = GET_ITEM(gobj);
-        temp_r0 = ip->msid;
-        attr = GET_ATTRS(ip);
-        if ((temp_r0 == 3) || (temp_r0 == 0)) {
-            ip->xDC8_word.flags.x19 = 1;
-            ip->xDC8_word.flags.x17 = 1;
-            it_80274740(gobj);
-        }
-        if (ip->msid == 3) {
-            ip->xDD4_itemVar.bombhei.xDD4 = attr->x14;
-        }
+        itBombhei_UnkMotion1_Setup(gobj);
         itBombhei_UpdateStatePreserveBoneFake(gobj, 1, ITEM_ANIM_UPDATE);
     }
     return false;
@@ -366,17 +368,11 @@ void it_8027F42C(Item_GObj* arg0)
 bool itBombhei_UnkMotion4_Anim(Item_GObj* gobj)
 {
     Item* ip;
-    itBombHeiAttributes* temp_r29;
 
     ip = GET_ITEM(gobj);
     if (it_80272C6C(gobj) == 0) {
         ip->facing_dir = -ip->facing_dir;
-        ip = GET_ITEM(gobj);
-        temp_r29 = GET_ATTRS(ip);
-        it_8026B3A8(gobj);
-        ip->x40_vel.x = temp_r29->xC * ip->facing_dir;
-        ip->xD5C = 0;
-        it_80275444(gobj);
+        fn_80280974_inline(gobj);
         itBombhei_UpdateStatePreserveBoneFake(gobj, 2, 0x1A);
     }
     ip->xDD4_itemVar.bombhei.xDD4 -= 1;
@@ -471,35 +467,35 @@ void itBombhei_UnkMotion6_Phys(Item_GObj* gobj)
     it_80274658(gobj, it_804D6D28->x68_float);
 }
 
-void fn_8028007C(Item_GObj* arg0)
+static inline void fn_8028007C_inline(Item_GObj* gobj)
 {
-    Item* ip;
-    itBombHeiAttributes* attr;
-    PAD_STACK(8);
-
-    ip = GET_ITEM(arg0);
-    {
-        itBombHeiAttributes* cmp_attr = GET_ATTRS(ip);
-        if (ABS(ip->xDD4_itemVar.bombhei.xE0C.x) > cmp_attr->x20.x ||
-            ABS(ip->xDD4_itemVar.bombhei.xE0C.y) > cmp_attr->x20.y)
-        {
-            it_80280DC0(arg0);
-            return;
-        }
-    }
-    attr = GET_ATTRS(ip);
+    Item* ip = GET_ITEM(gobj);
+    itBombHeiAttributes* attr = GET_ATTRS(ip);
     ip->x40_vel.x = 0.0f;
-    it_8026B390(arg0);
+    it_8026B390(gobj);
     if (ip->xDD4_itemVar.bombhei.xDE0 == 0) {
         ip->xDD4_itemVar.bombhei.xDD4 = attr->x18;
         ip->xDD4_itemVar.bombhei.xDD8 = 1;
         ip->xD44_lifeTimer = it_804D6D28->x30_lifetime;
         ip->xDD4_itemVar.bombhei.xDF0 = attr->x8;
         ip->xDD4_itemVar.bombhei.xDE0 = 1;
-        itBombhei_UpdateStatePreserveBoneFake(arg0, 5, ITEM_ANIM_UPDATE);
+        itBombhei_UpdateStatePreserveBoneFake(gobj, 5, ITEM_ANIM_UPDATE);
     } else {
-        itBombhei_UpdateStatePreserveBoneFake(arg0, 5, ITEM_UNK_0x1);
+        itBombhei_UpdateStatePreserveBoneFake(gobj, 5, ITEM_UNK_0x1);
     }
+}
+
+void fn_8028007C(Item_GObj* arg0)
+{
+    Item* ip = GET_ITEM(arg0);
+    itBombHeiAttributes* attr = GET_ATTRS(ip);
+    if (ABS(ip->xDD4_itemVar.bombhei.xE0C.x) > attr->x20.x ||
+        ABS(ip->xDD4_itemVar.bombhei.xE0C.y) > attr->x20.y)
+    {
+        it_80280DC0(arg0);
+        return;
+    }
+    fn_8028007C_inline(arg0);
 }
 
 bool itBombhei_UnkMotion6_Coll(Item_GObj* gobj)
@@ -571,27 +567,18 @@ void itBombhei_UnkMotion10_Phys(Item_GObj* gobj)
     it_80274658(gobj, it_804D6D28->x68_float);
 }
 
-void fn_80280974(Item_GObj* arg0)
+void fn_80280974(Item_GObj* gobj)
 {
-    Item* ip;
-    itBombHeiAttributes* ap;
-
-    ip = GET_ITEM(arg0);
+    Item* ip = GET_ITEM(gobj);
+    itBombHeiAttributes* attr = GET_ATTRS(ip);
+    if (ABS(ip->xDD4_itemVar.bombhei.xE0C.x) > attr->x20.x ||
+        ABS(ip->xDD4_itemVar.bombhei.xE0C.y) > attr->x20.y)
     {
-        itBombHeiAttributes* cmp_ap = GET_ATTRS(ip);
-        if (ABS(ip->xDD4_itemVar.bombhei.xE0C.x) > cmp_ap->x20.x ||
-            ABS(ip->xDD4_itemVar.bombhei.xE0C.y) > cmp_ap->x20.y)
-        {
-            it_80280DC0(arg0);
-            return;
-        }
+        it_80280DC0(gobj);
+        return;
     }
-    ap = GET_ATTRS(GET_ITEM(arg0));
-    it_8026B3A8(arg0);
-    ip->x40_vel.x = ap->xC * ip->facing_dir;
-    ip->xD5C = 0;
-    it_80275444(arg0);
-    itBombhei_UpdateStatePreserveBoneMotion10(arg0, 2, 0x1A);
+    fn_80280974_inline(gobj);
+    itBombhei_UpdateStatePreserveBoneMotion10(gobj, 2, 0x1A);
 }
 
 bool itBombhei_UnkMotion10_Coll(Item_GObj* gobj)
