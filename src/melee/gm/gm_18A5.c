@@ -4663,7 +4663,7 @@ void fn_8019610C(s32* state, u32 buttons, u32 trigger)
         if (*state == 0x11) {
             lbAudioAx_80024030(i);
             if (gm_804771C4.match_type == 0) {
-                gm_SetScenePendingMinor(1);
+                gm_SetPendingScene(1);
             } else {
                 td = gm_8018F634();
                 i = 0;
@@ -4685,7 +4685,7 @@ void fn_8019610C(s32* state, u32 buttons, u32 trigger)
                     dst_ptr += 0xA;
                     i++;
                 }
-                gm_SetScenePendingMinor(2);
+                gm_SetPendingScene(2);
             }
             gm_801A4B60();
         } else {
@@ -4835,7 +4835,7 @@ void fn_801965C4(void)
 
     if (fn_80196594(temp_r3)) {
         temp_r3->x32 = 1;
-        gm_SetScenePendingMinor(3);
+        gm_SetPendingScene(3);
         gm_801A4B60();
         return;
     }
@@ -4843,7 +4843,7 @@ void fn_801965C4(void)
         temp_r3->x32 = 1;
         temp_r3->x28 = lbl_804D4190;
     }
-    gm_SetScenePendingMinor(4);
+    gm_SetPendingScene(4);
     gm_801A4B60();
 }
 
@@ -6791,7 +6791,7 @@ void fn_8019A86C(s32* arg0, u32 arg1, u32 arg2)
             }
             if (cond != 0) {
                 t->x32 = 1;
-                gm_SetScenePendingMinor(3U);
+                gm_SetPendingScene(3U);
                 gm_801A4B60();
                 return;
             }
@@ -6804,7 +6804,7 @@ void fn_8019A86C(s32* arg0, u32 arg1, u32 arg2)
                 t->x32 = 1;
                 t->x28 = (u32) lbl_804D4190;
             }
-            gm_SetScenePendingMinor(4U);
+            gm_SetPendingScene(4U);
             gm_801A4B60();
         }
     } else {
@@ -6935,7 +6935,7 @@ void fn_8019A86C(s32* arg0, u32 arg1, u32 arg2)
                         }
                         if (cond2 != 0) {
                             t3->x32 = 1;
-                            gm_SetScenePendingMinor(3U);
+                            gm_SetPendingScene(3U);
                             gm_801A4B60();
                             return;
                         }
@@ -6949,7 +6949,7 @@ void fn_8019A86C(s32* arg0, u32 arg1, u32 arg2)
                             t3->x32 = 1;
                             t3->x28 = (u32) lbl_804D4190;
                         }
-                        gm_SetScenePendingMinor(4U);
+                        gm_SetPendingScene(4U);
                         gm_801A4B60();
                     }
                 }

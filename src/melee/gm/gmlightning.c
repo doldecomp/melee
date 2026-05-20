@@ -8,7 +8,7 @@
 #include <melee/gm/gmmain_lib.h>
 #include <melee/gm/types.h>
 
-MinorScene gm_803DF540_MinorScenes[] = {
+GameScene gm_803DF540_Scenes[] = {
     {
         0,
         3,
@@ -16,7 +16,7 @@ MinorScene gm_803DF540_MinorScenes[] = {
         gm_801BA704,
         gm_801BA730,
         {
-            MN_CSS,
+            GS_CSS,
             &gm_804807B0,
             &gm_804807B0,
         },
@@ -28,7 +28,7 @@ MinorScene gm_803DF540_MinorScenes[] = {
         gm_801BA758,
         gm_801BA780,
         {
-            MN_SSS,
+            GS_SSS,
             &gm_80480668,
             &gm_80480668,
         },
@@ -40,7 +40,7 @@ MinorScene gm_803DF540_MinorScenes[] = {
         gm_801BA7B8,
         gm_801BA7EC,
         {
-            MN_VS,
+            GS_VS,
             &gm_80480530,
             &gm_80479D98,
         },
@@ -52,7 +52,7 @@ MinorScene gm_803DF540_MinorScenes[] = {
         gm_801BA814,
         gm_801BA848,
         {
-            MN_SUDDEN_DEATH,
+            GS_SUDDEN_DEATH,
             &gm_80480530,
             &gm_8047E2A4,
         },
@@ -64,7 +64,7 @@ MinorScene gm_803DF540_MinorScenes[] = {
         gm_801BA868,
         gm_801BA888,
         {
-            MN_RESULTS,
+            GS_RESULTS,
             &gm_8047C020,
             NULL,
         },
@@ -76,7 +76,7 @@ MinorScene gm_803DF540_MinorScenes[] = {
         gm_801BFA6C,
         NULL,
         {
-            MN_APPROACH,
+            GS_APPROACH,
             &gm_804D6860,
             &gm_804D6860,
         },
@@ -88,7 +88,7 @@ MinorScene gm_803DF540_MinorScenes[] = {
         gm_801BFABC,
         gm_801A6254,
         {
-            MN_VS,
+            GS_VS,
             &gm_80480530,
             &gm_80479D98,
         },
@@ -100,7 +100,7 @@ MinorScene gm_803DF540_MinorScenes[] = {
         gm_801BFCFC,
         gm_801A6308,
         {
-            MN_PRIZE_INTERFACE,
+            GS_PRIZE_INTERFACE,
             &un_804A1F48,
             NULL,
         },
@@ -108,22 +108,22 @@ MinorScene gm_803DF540_MinorScenes[] = {
     { -1 },
 };
 
-void gm_801BA704(MinorScene* scene)
+void gm_801BA704(GameScene* scene)
 {
     gm_801A5618(scene, &gmMainLib_804D3EE0->unk_1350, 9);
 }
 
-void gm_801BA730(MinorScene* scene)
+void gm_801BA730(GameScene* scene)
 {
     gm_801A5680(scene, &gmMainLib_804D3EE0->unk_1350);
 }
 
-void gm_801BA758(MinorScene* scene)
+void gm_801BA758(GameScene* scene)
 {
     gm_801A5754(scene, &gmMainLib_804D3EE0->unk_1350);
 }
 
-void gm_801BA780(MinorScene* scene)
+void gm_801BA780(GameScene* scene)
 {
     gm_801A57A8(scene, &gmMainLib_804D3EE0->unk_1350, 0);
 }
@@ -134,34 +134,34 @@ static void fn_801BA7AC(StartMeleeData* data, StartMeleeData* unused)
     data->rules.x34 = 1.25F;
 }
 
-void gm_801BA7B8(MinorScene* scene)
+void gm_801BA7B8(GameScene* scene)
 {
     VsModeData* data = &gmMainLib_804D3EE0->unk_1350;
     gm_801A583C(scene, data, fn_801BA7AC, NULL);
 }
 
-void gm_801BA7EC(MinorScene* scene)
+void gm_801BA7EC(GameScene* scene)
 {
     gm_801A5AF0(scene, 4, 3);
 }
 
-void gm_801BA814(MinorScene* scene)
+void gm_801BA814(GameScene* scene)
 {
     VsModeData* data = &gmMainLib_804D3EE0->unk_1350;
     gm_801A5C3C(scene, data, fn_801BA7AC, NULL);
 }
 
-void gm_801BA848(MinorScene* scene)
+void gm_801BA848(GameScene* scene)
 {
     gm_801A5EC8(scene);
 }
 
-void gm_801BA868(MinorScene* scene)
+void gm_801BA868(GameScene* scene)
 {
     gm_801A5F00(scene);
 }
 
-void gm_801BA888(MinorScene* scene)
+void gm_801BA888(GameScene* scene)
 {
     gm_801A5F64(scene, &gmMainLib_804D3EE0->unk_1350, 0);
 }

@@ -191,7 +191,7 @@ func main() {
 				itKind := strings.TrimPrefix(strings.TrimSuffix(filepath.Base(path), filepath.Ext(path)), "it")
 				itKind = strings.ToUpper(itKind[:1]) + itKind[1:]
 				return fmt.Sprintf("it%s_UnkMotion", itKind)
-			case "MinorScene":
+			case "GameScene":
 				gmKind := strings.TrimPrefix(strings.TrimSuffix(filepath.Base(path), filepath.Ext(path)), "gm")
 				gmKind = strings.ToUpper(gmKind[:1]) + gmKind[1:]
 				return fmt.Sprintf("gm%s_UnkScene", gmKind)
@@ -212,7 +212,7 @@ func main() {
 			switch typeName {
 			case "ItemStateTable":
 				return []string{"", "Anim", "Phys", "Coll"}
-			case "MinorScene":
+			case "GameScene":
 				return []string{"", "Prep", "Decide"}
 			case "StageData":
 				return []string{"", "", "", "", "", "OnLoad", "OnStart", "", "", "", "", "", ""}

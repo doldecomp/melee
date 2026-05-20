@@ -18,7 +18,7 @@ extern DebugGameOverData gmClassic_80470850;
 extern MatchExitInfo gmClassic_8047086C;
 extern StartMeleeData gmClassic_80472AF8;
 
-MinorScene gm_803DE930_MinorScenes[] = {
+GameScene gm_803DE930_Scenes[] = {
     {
         0,
         3,
@@ -26,7 +26,7 @@ MinorScene gm_803DE930_MinorScenes[] = {
         gm_801B5624,
         gm_801B59AC,
         {
-            MN_VS,
+            GS_VS,
             &gmClassic_80472AF8,
             &gmClassic_8047086C,
         },
@@ -38,7 +38,7 @@ MinorScene gm_803DE930_MinorScenes[] = {
         gm_801B5ACC,
         gm_801B5E7C,
         {
-            MN_VS,
+            GS_VS,
             &gmClassic_80472AF8,
             &gmClassic_8047086C,
         },
@@ -50,7 +50,7 @@ MinorScene gm_803DE930_MinorScenes[] = {
         gm_801B5624,
         gm_801B59AC,
         {
-            MN_VS,
+            GS_VS,
             &gmClassic_80472AF8,
             &gmClassic_8047086C,
         },
@@ -62,7 +62,7 @@ MinorScene gm_803DE930_MinorScenes[] = {
         gm_801B5ACC,
         gm_801B5E7C,
         {
-            MN_VS,
+            GS_VS,
             &gmClassic_80472AF8,
             &gmClassic_8047086C,
         },
@@ -74,7 +74,7 @@ MinorScene gm_803DE930_MinorScenes[] = {
         gm_801B5624,
         gm_801B59AC,
         {
-            MN_VS,
+            GS_VS,
             &gmClassic_80472AF8,
             &gmClassic_8047086C,
         },
@@ -86,7 +86,7 @@ MinorScene gm_803DE930_MinorScenes[] = {
         gm_801B5ACC,
         gm_801B5E7C,
         {
-            MN_VS,
+            GS_VS,
             &gmClassic_80472AF8,
             &gmClassic_8047086C,
         },
@@ -98,7 +98,7 @@ MinorScene gm_803DE930_MinorScenes[] = {
         gm_801B5624,
         gm_801B59AC,
         {
-            MN_VS,
+            GS_VS,
             &gmClassic_80472AF8,
             &gmClassic_8047086C,
         },
@@ -110,7 +110,7 @@ MinorScene gm_803DE930_MinorScenes[] = {
         gm_801B5ACC,
         gm_801B5E7C,
         {
-            MN_VS,
+            GS_VS,
             &gmClassic_80472AF8,
             &gmClassic_8047086C,
         },
@@ -122,7 +122,7 @@ MinorScene gm_803DE930_MinorScenes[] = {
         gm_801B5624,
         gm_801B59AC,
         {
-            MN_VS,
+            GS_VS,
             &gmClassic_80472AF8,
             &gmClassic_8047086C,
         },
@@ -134,7 +134,7 @@ MinorScene gm_803DE930_MinorScenes[] = {
         gm_801B5ACC,
         gm_801B5E7C,
         {
-            MN_VS,
+            GS_VS,
             &gmClassic_80472AF8,
             &gmClassic_8047086C,
         },
@@ -146,7 +146,7 @@ MinorScene gm_803DE930_MinorScenes[] = {
         gm_801B5624,
         gm_801B59AC,
         {
-            MN_VS,
+            GS_VS,
             &gmClassic_80472AF8,
             &gmClassic_8047086C,
         },
@@ -158,7 +158,7 @@ MinorScene gm_803DE930_MinorScenes[] = {
         gm_801B5ACC,
         gm_801B5E7C,
         {
-            MN_VS,
+            GS_VS,
             &gmClassic_80472AF8,
             &gmClassic_8047086C,
         },
@@ -170,7 +170,7 @@ MinorScene gm_803DE930_MinorScenes[] = {
         gm_801B5624,
         gm_801B59AC,
         {
-            MN_VS,
+            GS_VS,
             &gmClassic_80472AF8,
             &gmClassic_8047086C,
         },
@@ -182,7 +182,7 @@ MinorScene gm_803DE930_MinorScenes[] = {
         gm_801B5ACC,
         gm_801B5E7C,
         {
-            MN_VS,
+            GS_VS,
             &gmClassic_80472AF8,
             &gmClassic_8047086C,
         },
@@ -194,7 +194,7 @@ MinorScene gm_803DE930_MinorScenes[] = {
         gm_801B5624,
         gm_801B59AC,
         {
-            MN_VS,
+            GS_VS,
             &gmClassic_80472AF8,
             &gmClassic_8047086C,
         },
@@ -206,7 +206,7 @@ MinorScene gm_803DE930_MinorScenes[] = {
         gm_801B5ACC,
         gm_801B5E7C,
         {
-            MN_VS,
+            GS_VS,
             &gmClassic_80472AF8,
             &gmClassic_8047086C,
         },
@@ -218,7 +218,7 @@ MinorScene gm_803DE930_MinorScenes[] = {
         gm_801B5624,
         gm_801B59AC,
         {
-            MN_VS,
+            GS_VS,
             &gmClassic_80472AF8,
             &gmClassic_8047086C,
         },
@@ -230,7 +230,7 @@ MinorScene gm_803DE930_MinorScenes[] = {
         gm_801B5ACC,
         gm_801B5E7C,
         {
-            MN_VS,
+            GS_VS,
             &gmClassic_80472AF8,
             &gmClassic_8047086C,
         },
@@ -242,7 +242,7 @@ MinorScene gm_803DE930_MinorScenes[] = {
         gm_801B5624,
         gm_801B59AC,
         {
-            MN_VS,
+            GS_VS,
             &gmClassic_80472AF8,
             &gmClassic_8047086C,
         },
@@ -254,7 +254,7 @@ MinorScene gm_803DE930_MinorScenes[] = {
         gm_801B5ACC,
         gm_801B5E7C,
         {
-            MN_VS,
+            GS_VS,
             &gmClassic_80472AF8,
             &gmClassic_8047086C,
         },
@@ -266,7 +266,7 @@ MinorScene gm_803DE930_MinorScenes[] = {
         gm_801B5624,
         gm_801B59AC,
         {
-            MN_VS,
+            GS_VS,
             &gmClassic_80472AF8,
             &gmClassic_8047086C,
         },
@@ -278,7 +278,7 @@ MinorScene gm_803DE930_MinorScenes[] = {
         gm_801B5ACC,
         gm_801B5E7C,
         {
-            MN_VS,
+            GS_VS,
             &gmClassic_80472AF8,
             &gmClassic_8047086C,
         },
@@ -290,7 +290,7 @@ MinorScene gm_803DE930_MinorScenes[] = {
         gm_801B5624,
         gm_801B59AC,
         {
-            MN_VS,
+            GS_VS,
             &gmClassic_80472AF8,
             &gmClassic_8047086C,
         },
@@ -302,7 +302,7 @@ MinorScene gm_803DE930_MinorScenes[] = {
         gm_801B5ACC,
         gm_801B5E7C,
         {
-            MN_VS,
+            GS_VS,
             &gmClassic_80472AF8,
             &gmClassic_8047086C,
         },
@@ -314,7 +314,7 @@ MinorScene gm_803DE930_MinorScenes[] = {
         gm_801B5624,
         gm_801B59AC,
         {
-            MN_VS,
+            GS_VS,
             &gmClassic_80472AF8,
             &gmClassic_8047086C,
         },
@@ -326,7 +326,7 @@ MinorScene gm_803DE930_MinorScenes[] = {
         NULL,
         gm_801B607C,
         {
-            MN_COMING_SOON,
+            GS_COMING_SOON,
             NULL,
             NULL,
         },
@@ -338,7 +338,7 @@ MinorScene gm_803DE930_MinorScenes[] = {
         gm_801B5EB4,
         gm_801B5EE4,
         {
-            MN_GAMEOVER,
+            GS_GAMEOVER,
             &gmClassic_80470850,
             &gmClassic_80470850,
         },
@@ -350,7 +350,7 @@ MinorScene gm_803DE930_MinorScenes[] = {
         gm_801B5F50,
         gm_801B5FB4,
         {
-            MN_CSS,
+            GS_CSS,
             &gmClassic_80470708,
             &gmClassic_80470708,
         },
@@ -394,7 +394,7 @@ void gm_801B5324(UnkAllstarData* arg0, u8 arg1)
     s32 i;
     PAD_STACK(16);
 
-    base = (u8*) gm_803DE930_MinorScenes;
+    base = (u8*) gm_803DE930_Scenes;
     is_last_round = 0;
     count_processed = 0;
 
@@ -506,7 +506,7 @@ void gm_801B5324(UnkAllstarData* arg0, u8 arg1)
     lbAudioAx_80027168();
 }
 
-void gm_801B5624(MinorScene* arg0)
+void gm_801B5624(GameScene* arg0)
 {
     s8 chars[3];
     StartMeleeData* data;
@@ -519,7 +519,7 @@ void gm_801B5624(MinorScene* arg0)
     u8 color;
     PAD_STACK(8);
 
-    base = (u8*) gm_803DE930_MinorScenes;
+    base = (u8*) gm_803DE930_Scenes;
     data = gm_801A427C(arg0);
     allstar = &gm_80473A18;
     round = gm_8017BE84(arg0->idx);
@@ -620,9 +620,9 @@ void gm_801B5624(MinorScene* arg0)
     allstar->x0.x7 = arg0->idx;
 }
 
-void gm_801B59AC(MinorScene* arg0)
+void gm_801B59AC(GameScene* arg0)
 {
-    u8* base = (u8*) gm_803DE930_MinorScenes;
+    u8* base = (u8*) gm_803DE930_Scenes;
     MatchExitInfo* exit = gm_801A4284(arg0);
     u8 idx = arg0->idx;
     s32 result = exit->x8;
@@ -648,7 +648,7 @@ void fn_801B5AA8(int arg0)
     lbBgFlash_8002063C(0x78);
 }
 
-void gm_801B5ACC(MinorScene* arg0)
+void gm_801B5ACC(GameScene* arg0)
 {
     s8 chars[3];
     StartMeleeData* data;
@@ -663,7 +663,7 @@ void gm_801B5ACC(MinorScene* arg0)
     chars[0] = 0x21;
     chars[1] = 0x21;
     chars[2] = 0x21;
-    base = (u8*) gm_803DE930_MinorScenes;
+    base = (u8*) gm_803DE930_Scenes;
     data = gm_801A427C(arg0);
     allstar = &gm_80473A18;
     allstar->x0.x8 |= 0x80;
@@ -735,20 +735,20 @@ void gm_801B5ACC(MinorScene* arg0)
     data->rules.x50 = (void (*)(u8)) fn_801B5AA8;
 }
 
-void gm_801B5E7C(MinorScene* arg0)
+void gm_801B5E7C(GameScene* arg0)
 {
     MatchExitInfo* exit = gm_801A4284(arg0);
     gm_80473A18.x74 = exit->match_end.player_standings[0].percent;
     gm_8017D7AC(exit, &gm_80473A18.x0, 0x69);
 }
 
-void gm_801B5EB4(MinorScene* arg0)
+void gm_801B5EB4(GameScene* arg0)
 {
     DebugGameOverData* data = gm_801A427C(arg0);
     gm_8017C9A8(data, &gm_80473A18.x0, 2);
 }
 
-void gm_801B5EE4(MinorScene* arg0)
+void gm_801B5EE4(GameScene* arg0)
 {
     DebugGameOverData* data = gm_801A4284(arg0);
     UnkAllstarData* r30 = &gm_80473A18;
@@ -758,7 +758,7 @@ void gm_801B5EE4(MinorScene* arg0)
     }
 }
 
-void gm_801B5F50(MinorScene* arg0)
+void gm_801B5F50(GameScene* arg0)
 {
     CSSData* temp_r31;
     struct gmm_x0_528_t* temp_r3;
@@ -773,14 +773,14 @@ void gm_801B5F50(MinorScene* arg0)
 
 /// #gm_801B5F50
 
-void gm_801B5FB4(MinorScene* arg0)
+void gm_801B5FB4(GameScene* arg0)
 {
     CSSData* temp_r31 = gm_801A4284(arg0);
     struct gmm_x0_528_t* temp_r30 = gmMainLib_8015CDE0();
     UnkAllstarData* r29 = &gm_80473A18;
 
     if (temp_r31->pending_scene_change == 2) {
-        gm_801A42F8(MJ_MENU);
+        gm_801A42F8(GM_MENU);
         return;
     }
     gm_801B0730(temp_r31, &temp_r30->c_kind, &temp_r30->stocks,
@@ -790,14 +790,14 @@ void gm_801B5FB4(MinorScene* arg0)
     r29->x0.cpu_level = temp_r30->cpu_level;
     r29->x0.stocks = temp_r30->stocks;
     r29->x0.x4 = temp_r30->x4;
-    gm_SetScenePendingMinor((temp_r30->x5 * 8) & 0xF8);
+    gm_SetPendingScene((temp_r30->x5 * 8) & 0xF8);
     gm_80168F88();
     gm_801B5324(r29, temp_r30->x5);
 }
 
-void gm_801B607C(MinorScene* unused)
+void gm_801B607C(GameScene* unused)
 {
-    gm_801A42E8(MJ_MENU);
+    gm_801A42E8(GM_MENU);
     gm_801A42D4();
 }
 
@@ -897,7 +897,7 @@ void gm_801B60A4_OnLoad(void)
         p[3] = 1;
     }
 
-    gm_SetSceneMinor(0x70U);
+    gm_SetScene(0x70U);
     gm_80172174();
     Ground_801C5A28();
 }

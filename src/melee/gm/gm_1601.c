@@ -474,31 +474,31 @@ char* gm_80160438(s32 ckind)
     }
 }
 
-bool gm_80160474(CharacterKind ckind, MajorSceneKind scene)
+bool gm_80160474(CharacterKind ckind, GameModeKind scene)
 {
     switch (scene) {
-    case MJ_CLASSIC_GOVER:
-    case MJ_CLASSIC:
+    case GM_CLASSIC_GOVER:
+    case GM_CLASSIC:
         return lbl_803B7978[ckind];
-    case MJ_ADVENTURE_GOVER:
-    case MJ_ADVENTURE:
+    case GM_ADVENTURE_GOVER:
+    case GM_ADVENTURE:
         return lbl_803B79BC[ckind];
     default:
         return lbl_803B7A00[ckind];
     }
 }
 
-char* gm_801604DC(CharacterKind ckind, MajorSceneKind scene)
+char* gm_801604DC(CharacterKind ckind, GameModeKind scene)
 {
     s32 var_r3;
 
     switch (scene) {
-    case MJ_CLASSIC_GOVER:
-    case MJ_CLASSIC:
+    case GM_CLASSIC_GOVER:
+    case GM_CLASSIC:
         var_r3 = lbl_803B7978[ckind];
         break;
-    case MJ_ADVENTURE_GOVER:
-    case MJ_ADVENTURE:
+    case GM_ADVENTURE_GOVER:
+    case GM_ADVENTURE:
         var_r3 = lbl_803B79BC[ckind];
         break;
     default:
@@ -508,17 +508,17 @@ char* gm_801604DC(CharacterKind ckind, MajorSceneKind scene)
     return un_8030813C(var_r3, scene) + 4;
 }
 
-char* gm_80160564(CharacterKind ckind, MajorSceneKind scene)
+char* gm_80160564(CharacterKind ckind, GameModeKind scene)
 {
     s32 var_r3;
 
     switch (scene) {
-    case MJ_CLASSIC_GOVER:
-    case MJ_CLASSIC:
+    case GM_CLASSIC_GOVER:
+    case GM_CLASSIC:
         var_r3 = lbl_803B7978[ckind];
         break;
-    case MJ_ADVENTURE_GOVER:
-    case MJ_ADVENTURE:
+    case GM_ADVENTURE_GOVER:
+    case GM_ADVENTURE:
         var_r3 = lbl_803B79BC[ckind];
         break;
     default:
@@ -2238,7 +2238,7 @@ void fn_80165E7C(MatchEnd* arg0)
         if ((u8) arg0->player_standings[i].slot_type != 3) {
             u8 team = arg0->player_standings[i].team;
 
-            if (gm_801A4310() == MJ_STAMINA_VS || arg0->x5 == 1) {
+            if (gm_801A4310() == GM_STAMINA_VS || arg0->x5 == 1) {
                 int player_score = new_var = arg0->player_standings[i].score;
 
                 if (player_score < 0) {

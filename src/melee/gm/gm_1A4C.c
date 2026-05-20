@@ -714,14 +714,14 @@ void gm_801A9B30_OnEnter(UNK_T unused)
     GObj_SetupGXLink(gobj, lbMthp8001F928, 0xB, 0);
     temp_r31 = gm_801BEFB0();
     var_r3 = gm_801A4310();
-    if (var_r3 == MJ_DEBUG_GOVER) {
+    if (var_r3 == GM_DEBUG_GOVER) {
         var_r3 = gm_801BF050();
     }
     switch (var_r3) {
-    case MJ_CLASSIC_GOVER:
+    case GM_CLASSIC_GOVER:
         thpfile = gm_803DB8B8[temp_r31];
         break;
-    case MJ_ADVENTURE_GOVER:
+    case GM_ADVENTURE_GOVER:
         thpfile = gm_803DBBF4[temp_r31];
         break;
     default:
@@ -734,10 +734,10 @@ void gm_801A9B30_OnEnter(UNK_T unused)
     temp_r3_3->x14 = 240.0F;
     temp_r3_3->x40 |= 2;
     switch (gm_801A4310()) {
-    case MJ_CLASSIC_GOVER:
+    case GM_CLASSIC_GOVER:
         var_r3_3 = gm_8017DFF4(1);
         break;
-    case MJ_ADVENTURE_GOVER:
+    case GM_ADVENTURE_GOVER:
         var_r3_3 = gm_8017DFF4(0);
         break;
     default:
@@ -758,7 +758,7 @@ void gm_801A9D0C_OnFrame(void)
     } else if (gm_804D67C9 != 0) {
         gm_804D67C9--;
         if (gm_804D67C9 == 0) {
-            if (gm_801A4310() == MJ_DEBUG_GOVER) {
+            if (gm_801A4310() == GM_DEBUG_GOVER) {
                 gm_801A6630(6);
             } else {
                 gm_801A6630(1);
