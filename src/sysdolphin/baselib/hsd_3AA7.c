@@ -648,19 +648,18 @@ s32 fn_803ACD58(CardState* state, void* icon_data, void* file_data)
     return 0;
 }
 
-/// @todo Currently 93.89% match - mwcc reassociates addition order in loop
-/// cond
 s32 fn_803ACF30(CardState* state, s32 file_id, s32 seq_num, s32 version)
 {
     s32 buf[9];
-    u32 i;
     s32 ret;
+    u32 i;
     PAD_STACK(4);
 
-    for (i = 0; i < (state->x24 + state->x8 + 0x2F) / state->x8; i++) {
+    i = 0;
+    while (i < (u32) (((state->x24 + state->x8) + 0x2F) / state->x8)) {
         buf[0] = 11;
         buf[1] = (s32) state;
-        buf[2] = (s32) i;
+        buf[2] = i;
         buf[3] = file_id;
         buf[4] = seq_num;
         buf[5] = version;
@@ -668,6 +667,7 @@ s32 fn_803ACF30(CardState* state, s32 file_id, s32 seq_num, s32 version)
         if (ret < 0) {
             return ret;
         }
+        i++;
     }
     return 0;
 }
