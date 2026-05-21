@@ -43,11 +43,11 @@ static Vec3 gm_803DB2E0 = { 0.5, -7, 0 };
 bool gm_801A659C(int arg0)
 {
     switch (gm_801A4310()) {
-    case MJ_CLASSIC_GOVER:
+    case GM_CLASSIC_GOVER:
         return gm_80160474(arg0, 3);
-    case MJ_ADVENTURE_GOVER:
+    case GM_ADVENTURE_GOVER:
         return gm_80160474(arg0, 4);
-    case MJ_DEBUG_GOVER:
+    case GM_DEBUG_GOVER:
         return gm_80160474(arg0, gm_801BF050());
     default:
         return gm_80160474(arg0, 5);
@@ -352,7 +352,7 @@ static void data_reorder(HSD_JObj* jobj)
 
 void gm_801A6EE4(void)
 {
-    MajorSceneKind var_r29;
+    GameModeKind var_r29;
 
     PAD_STACK(4);
 
@@ -360,17 +360,17 @@ void gm_801A6EE4(void)
     un_803124BC();
     un_803102D0();
     switch (gm_801A4310()) {
-    case MJ_CLASSIC_GOVER:
-        var_r29 = MJ_CLASSIC;
+    case GM_CLASSIC_GOVER:
+        var_r29 = GM_CLASSIC;
         break;
-    case MJ_ADVENTURE_GOVER:
-        var_r29 = MJ_ADVENTURE;
+    case GM_ADVENTURE_GOVER:
+        var_r29 = GM_ADVENTURE;
         break;
-    case MJ_DEBUG_GOVER:
+    case GM_DEBUG_GOVER:
         var_r29 = gm_801BF050();
         break;
     default:
-        var_r29 = MJ_ALLSTAR;
+        var_r29 = GM_ALLSTAR;
         break;
     }
     lbArchive_LoadSymbols(gm_801604DC(gm_801BEFB0(), var_r29), &gm_804D6798,
@@ -381,12 +381,12 @@ void gm_801A6EE4(void)
         "cut3BgScene", 0);
     lbArchive_LoadSymbols("GmRgStnd.dat", &gm_804D67AC, "standScene", 0);
     switch (var_r29) {
-    case MJ_CLASSIC_GOVER:
-    case MJ_CLASSIC:
+    case GM_CLASSIC_GOVER:
+    case GM_CLASSIC:
         gm_804D679C = lbArchive_LoadSymbols("TyMcCmDs.dat", NULL);
         break;
-    case MJ_ADVENTURE_GOVER:
-    case MJ_ADVENTURE:
+    case GM_ADVENTURE_GOVER:
+    case GM_ADVENTURE:
         gm_804D679C = lbArchive_LoadSymbols("TyMcR1Ds.dat", NULL);
         break;
     default:

@@ -30,11 +30,11 @@ struct lbl_8046B488_t;
 /* 160400 */ u32
     fn_80160400(CharacterKind);      ///< gets character victory theme id
 /* 160438 */ char* gm_80160438(s32); ///< gets character result anim path
-/* 160474 */ bool gm_80160474(CharacterKind, MajorSceneKind);
+/* 160474 */ bool gm_80160474(CharacterKind, GameModeKind);
 /* 1604DC */ char*
     gm_801604DC(CharacterKind,
-                MajorSceneKind); ///< gets characters trophy model
-/* 160564 */ char* gm_80160564(CharacterKind, MajorSceneKind);
+                GameModeKind); ///< gets characters trophy model
+/* 160564 */ char* gm_80160564(CharacterKind, GameModeKind);
 /* 1605EC */ u8 fn_801605EC(s32);
 /* 160638 */ s8 gm_80160638(s32);
 /* 1606A8 */ u8 fn_801606A8(int);

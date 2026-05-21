@@ -16,25 +16,25 @@
 /* 1A55C4 */ void gm_801A55C4(void); /// Zeroes KO Star Counts
 /* 1A55EC */ void gm_801A55EC_OnLoad(void);
 /* 1A5614 */ void gm_801A5614_OnUnload(void);
-/* 1A5618 */ void gm_801A5618(MinorScene*, struct VsModeData*,
+/* 1A5618 */ void gm_801A5618(GameScene*, struct VsModeData*,
                               int);                             /// CSS_Enter
-/* 1A5680 */ void gm_801A5680(MinorScene*, struct VsModeData*); /// CSS_Exit
-/* 1A5754 */ void gm_801A5754(MinorScene*, struct VsModeData*); /// SSS_Enter
-/* 1A57A8 */ void gm_801A57A8(MinorScene*, struct VsModeData*,
+/* 1A5680 */ void gm_801A5680(GameScene*, struct VsModeData*); /// CSS_Exit
+/* 1A5754 */ void gm_801A5754(GameScene*, struct VsModeData*); /// SSS_Enter
+/* 1A57A8 */ void gm_801A57A8(GameScene*, struct VsModeData*,
                               u8); /// SSS_Exit
 /* 1A583C */ void gm_801A583C(
-    MinorScene*, struct VsModeData*,
+    GameScene*, struct VsModeData*,
     void (*callback)(StartMeleeData*, StartMeleeData*),
     void (*callback2)(PlayerInitData*, PlayerInitData*)); /// Match_Enter
-/* 1A5AF0 */ void gm_801A5AF0(MinorScene*, u8, u8);       // Match_Exit
+/* 1A5AF0 */ void gm_801A5AF0(GameScene*, u8, u8);       // Match_Exit
 /* 1A5C3C */ void
-gm_801A5C3C(MinorScene*, struct VsModeData*,
+gm_801A5C3C(GameScene*, struct VsModeData*,
             void (*callback)(StartMeleeData*, StartMeleeData*),
             void (*callback2)(PlayerInitData*,
                               PlayerInitData*)); /// SuddenDeath_Enter ??
-/* 1A5EC8 */ void gm_801A5EC8(MinorScene*);      /// SuddenDeath_Exit ??
-/* 1A5F00 */ void gm_801A5F00(MinorScene*);      /// Results_Enter ??
-/* 1A5F64 */ void gm_801A5F64(MinorScene*, struct VsModeData*,
+/* 1A5EC8 */ void gm_801A5EC8(GameScene*);      /// SuddenDeath_Exit ??
+/* 1A5F00 */ void gm_801A5F00(GameScene*);      /// Results_Enter ??
+/* 1A5F64 */ void gm_801A5F64(GameScene*, struct VsModeData*,
                               u8); /// Results_Exit ??
 
 #endif

@@ -6138,7 +6138,7 @@ void un_803122D0_OnInit(void)
 
     un_804D6EA1 = 0;
 
-    if (gm_8016B498() || gm_801A4310() == MJ_TOY_LOTTERY) {
+    if (gm_8016B498() || gm_801A4310() == GM_TOY_LOTTERY) {
         targetPtr = &userData->x19A;
     } else {
         targetPtr = gmMainLib_8015CC84();

@@ -181,9 +181,9 @@ void lbDvd_80017960(void)
     int i;
     u8 _[4];
 
-    if (preloadCache.new_scene.game_cache.major_id != MJ_COUNT) {
-        switch (preloadCache.new_scene.game_cache.major_id) {
-        case MJ_CAMERA_MODE:
+    if (preloadCache.new_scene.game_cache.mode_id != GM_COUNT) {
+        switch (preloadCache.new_scene.game_cache.mode_id) {
+        case GM_CAMERA_MODE:
             gm_801B23F0();
             break;
         }
@@ -460,8 +460,8 @@ PreloadCacheScene* lbDvd_8001822C(void)
 
 void lbDvd_8001823C(void)
 {
-    preloadCache.scene.major_scene_changes =
-        preloadCache.new_scene.major_scene_changes + 1;
+    preloadCache.scene.mode_scene_changes =
+        preloadCache.new_scene.mode_scene_changes + 1;
 }
 
 void lbDvd_80018254(void)
@@ -737,8 +737,8 @@ void lbDvd_80018CF4(int arg0)
     int i;
 
     if (preloadCache.persistent_heaps != arg0) {
-        preloadCache.scene.major_scene_changes =
-            preloadCache.new_scene.major_scene_changes + 1;
+        preloadCache.scene.mode_scene_changes =
+            preloadCache.new_scene.mode_scene_changes + 1;
     }
     preloadCache.persistent_heaps = arg0;
     lbHeap_800158D0(2, 1);

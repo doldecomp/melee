@@ -379,13 +379,13 @@ void fn_8019F9C4(u32 arg0)
 
     switch (gm_801A4310()) {
     case 3:
-        char_idx = gm_80160474(arg0, MJ_CLASSIC);
+        char_idx = gm_80160474(arg0, GM_CLASSIC);
         break;
     case 4:
-        char_idx = gm_80160474(arg0, MJ_ADVENTURE);
+        char_idx = gm_80160474(arg0, GM_ADVENTURE);
         break;
     default:
-        char_idx = gm_80160474(arg0, MJ_ALLSTAR);
+        char_idx = gm_80160474(arg0, GM_ALLSTAR);
         break;
     }
     if (char_idx == -1) {
@@ -586,13 +586,13 @@ void fn_8019F9C4(u32 arg0)
 
     switch (gm_801A4310()) {
     case 3:
-        char_idx = gm_80160474(char_kind, MJ_CLASSIC);
+        char_idx = gm_80160474(char_kind, GM_CLASSIC);
         break;
     case 4:
-        char_idx = gm_80160474(char_kind, MJ_ADVENTURE);
+        char_idx = gm_80160474(char_kind, GM_ADVENTURE);
         break;
     default:
-        char_idx = gm_80160474(char_kind, MJ_ALLSTAR);
+        char_idx = gm_80160474(char_kind, GM_ALLSTAR);
         break;
     }
 

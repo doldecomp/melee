@@ -293,7 +293,7 @@ bool un_802FFC6C(bool update_scene)
         lbAudioAx_800245D4(0x7F);
         lbAudioAx_800245F4(0x7F);
         lbAudioAx_80024614(0x7F);
-        gm_801A42F8(MJ_TITLE);
+        gm_801A42F8(GM_TITLE);
         gm_801A4B60();
     }
     return true;
@@ -335,7 +335,7 @@ int fn_802FFE0C(int arg0)
         break;
     case 6:
         lbAudioAx_80024030(1);
-        gm_SetScenePendingMinor(4);
+        gm_SetPendingScene(4);
         gm_801A4B60();
         break;
     }
@@ -358,7 +358,7 @@ bool un_802FFEA4(bool update_scene)
 {
     if (update_scene == true) {
         lbAudioAx_80024030(1);
-        gm_SetScenePendingMinor(0x4);
+        gm_SetPendingScene(0x4);
         gm_801A4B60();
     }
 
@@ -383,7 +383,7 @@ bool un_803001DC(bool update_scene)
 {
     if (update_scene == true) {
         lbAudioAx_80024030(1);
-        gm_SetScenePendingMinor(0x1);
+        gm_SetPendingScene(0x1);
         gm_801A4B60();
     }
 
@@ -420,7 +420,7 @@ bool un_803002FC(bool update_scene)
 {
     if (update_scene == true) {
         lbAudioAx_80024030(1);
-        gm_SetScenePendingMinor(0x2);
+        gm_SetPendingScene(0x2);
         gm_801A4B60();
     }
 
@@ -647,7 +647,7 @@ bool un_80300968(bool update_scene)
 {
     if (update_scene == true) {
         lbAudioAx_80024030(1);
-        gm_801A42F8(MJ_HANYU_CSS);
+        gm_801A42F8(GM_HANYU_CSS);
         gm_801A4B60();
     }
 
@@ -658,7 +658,7 @@ bool un_803009A4(bool update_scene)
 {
     if (update_scene == true) {
         lbAudioAx_80024030(1);
-        gm_801A42F8(MJ_HANYU_SSS);
+        gm_801A42F8(GM_HANYU_SSS);
         gm_801A4B60();
     }
 
@@ -705,7 +705,7 @@ bool un_80300AB8(bool update_scene)
 {
     if (update_scene == true) {
         lbAudioAx_80024030(1);
-        gm_SetScenePendingMinor(0x4);
+        gm_SetPendingScene(0x4);
         gm_801A4B60();
     }
 
@@ -721,7 +721,7 @@ bool un_80300AF4(int arg0)
         un_803FA258.x28 = 3;
         un_803FA258.x2C = 3;
         un_803FA258.x30 = 3;
-        gm_SetScenePendingMinor(4);
+        gm_SetPendingScene(4);
         gm_801A4B60();
     }
     return false;
@@ -736,7 +736,7 @@ bool un_80300B58(int arg0)
         un_803FA258.x28 = 3;
         un_803FA258.x2C = 3;
         un_803FA258.x30 = 3;
-        gm_SetScenePendingMinor(4);
+        gm_SetPendingScene(4);
         gm_801A4B60();
     }
     return false;
@@ -747,7 +747,7 @@ bool un_80300BBC(bool update_scene)
     if (update_scene == true) {
         un_803124BC();
         un_80311680();
-        gm_801A42F8(MJ_TOY_GALLERY);
+        gm_801A42F8(GM_TOY_GALLERY);
         gm_801A4B60();
     }
 
@@ -759,7 +759,7 @@ bool un_80300BF8(bool update_scene)
     if (update_scene == true) {
         un_803124BC();
         Trophy_SetUnlockState(0xE6, true);
-        gm_801A42F8(MJ_MENU);
+        gm_801A42F8(GM_MENU);
         gm_801A4B60();
     }
 
@@ -771,7 +771,7 @@ bool un_80300C3C(bool update_scene)
     if (update_scene == true) {
         un_803124BC();
         Trophy_SetUnlockState(0xC9, true);
-        gm_801A42F8(MJ_MENU);
+        gm_801A42F8(GM_MENU);
         gm_801A4B60();
     }
 
@@ -911,7 +911,7 @@ bool un_80300FEC(bool update_scene)
 {
     if (update_scene == true) {
         lbAudioAx_80024030(1);
-        gm_SetScenePendingMinor(0x4);
+        gm_SetPendingScene(0x4);
         gm_801A4B60();
     }
 
@@ -1040,7 +1040,7 @@ bool un_80301328(bool update_scene)
     if (update_scene == true) {
         lbAudioAx_80024030(1);
         gm_801BF708(0x0);
-        gm_801A42F8(MJ_OPENING_MV);
+        gm_801A42F8(GM_OPENING_MV);
         gm_801A4B60();
     }
 
@@ -1052,7 +1052,7 @@ bool un_8030136C(bool update_scene)
     if (update_scene == true) {
         lbAudioAx_80024030(1);
         gm_801BF708(0x5);
-        gm_801A42F8(MJ_OPENING_MV);
+        gm_801A42F8(GM_OPENING_MV);
         gm_801A4B60();
     }
 
@@ -1063,7 +1063,7 @@ bool un_803013B0(bool update_scene)
 {
     if (update_scene == true) {
         lbAudioAx_80024030(1);
-        gm_801A42F8(MJ_DEBUG_CUTSCENE);
+        gm_801A42F8(GM_DEBUG_CUTSCENE);
         gm_801A4B60();
     }
 
@@ -1088,7 +1088,7 @@ bool un_80301454(bool update_scene)
 {
     if (update_scene == true) {
         lbAudioAx_80024030(1);
-        gm_801A42F8(MJ_BOOT);
+        gm_801A42F8(GM_BOOT);
         gm_801A4B60();
     }
 
@@ -1099,7 +1099,7 @@ bool un_80301490(bool update_scene)
 {
     if (update_scene == true) {
         lbAudioAx_80024030(1);
-        gm_SetScenePendingMinor(0xD);
+        gm_SetPendingScene(0xD);
         gm_801A4B60();
     }
 
@@ -1110,7 +1110,7 @@ bool un_803014CC(bool update_scene)
 {
     if (update_scene == true) {
         lbAudioAx_80024030(1);
-        gm_SetScenePendingMinor(0x7);
+        gm_SetPendingScene(0x7);
         gm_801A4B60();
     }
 
@@ -1121,7 +1121,7 @@ bool un_80301508(bool update_scene)
 {
     if (update_scene == true) {
         lbAudioAx_80024030(1);
-        gm_SetScenePendingMinor(0x3);
+        gm_SetPendingScene(0x3);
         gm_801A4B60();
     }
 
@@ -1132,7 +1132,7 @@ bool un_80301544(bool update_scene)
 {
     if (update_scene == true) {
         lbAudioAx_80024030(1);
-        gm_SetScenePendingMinor(0x9);
+        gm_SetPendingScene(0x9);
         gm_801A4B60();
     }
 
@@ -1143,7 +1143,7 @@ bool un_80301580(bool update_scene)
 {
     if (update_scene == true) {
         lbAudioAx_80024030(1);
-        gm_SetScenePendingMinor(0xC);
+        gm_SetPendingScene(0xC);
         gm_801A4B60();
     }
 
@@ -1154,7 +1154,7 @@ bool un_803015BC(bool update_scene)
 {
     if (update_scene == true) {
         lbAudioAx_80024030(1);
-        gm_801A42F8(MJ_PROGRESSIVE_SCAN);
+        gm_801A42F8(GM_PROGRESSIVE_SCAN);
         gm_801A4B60();
     }
 
@@ -1165,7 +1165,7 @@ bool un_803015F8(bool update_scene)
 {
     if (update_scene == true) {
         lbAudioAx_80024030(1);
-        gm_SetScenePendingMinor(0xA);
+        gm_SetPendingScene(0xA);
         gm_801A4B60();
     }
 
@@ -1376,7 +1376,7 @@ int un_80301B48(int arg0)
         break;
     case 6:
         lbAudioAx_80024030(1);
-        gm_SetScenePendingMinor(6);
+        gm_SetPendingScene(6);
         gm_801A4B60();
         break;
     }
@@ -1428,7 +1428,7 @@ int un_80301C80(int arg0)
         break;
     case 6:
         lbAudioAx_80024030(1);
-        gm_SetScenePendingMinor(0xB);
+        gm_SetPendingScene(0xB);
         gm_801A4B60();
         break;
     }
@@ -1440,7 +1440,7 @@ void un_80301CE0(int arg0)
     switch (arg0) {
     case 6:
         lbAudioAx_80024030(1);
-        gm_SetScenePendingMinor(0xB);
+        gm_SetPendingScene(0xB);
         gm_801A4B60();
         break;
     case 1:
@@ -1453,7 +1453,7 @@ bool un_80301D40(bool update_scene)
 {
     if (update_scene == true) {
         lbAudioAx_80024030(1);
-        gm_801A42F8(MJ_FIXED_CAMERA_VS);
+        gm_801A42F8(GM_FIXED_CAMERA_VS);
         gm_801A4B60();
     }
 
@@ -1475,7 +1475,7 @@ bool un_80301DCC(bool update_scene)
 {
     if (update_scene == true) {
         lbAudioAx_80024030(1);
-        gm_SetScenePendingMinor(0x4);
+        gm_SetPendingScene(0x4);
         gm_801A4B60();
     }
 
@@ -1486,7 +1486,7 @@ bool un_80301E08(bool update_scene)
 {
     if (update_scene == true) {
         lbAudioAx_80024030(1);
-        gm_SetScenePendingMinor(0xE);
+        gm_SetPendingScene(0xE);
         gm_801A4B60();
     }
 

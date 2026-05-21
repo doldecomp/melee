@@ -46,7 +46,7 @@
 #include <melee/vi/vi1201v1.h>
 #include <melee/vi/vi1201v2.h>
 
-MinorScene gm_803DF618_MinorScenes[] = {
+GameScene gm_803DF618_Scenes[] = {
     {
         0,
         3,
@@ -54,7 +54,7 @@ MinorScene gm_803DF618_MinorScenes[] = {
         gm_801BAA60,
         gm_801BAAD0,
         {
-            MN_CSS,
+            GS_CSS,
             &gm_80497758,
             &gm_80497758,
         },
@@ -66,7 +66,7 @@ MinorScene gm_803DF618_MinorScenes[] = {
         gm_801BAD70,
         gm_801BB758,
         {
-            MN_VS,
+            GS_VS,
             &gm_804978A0,
             &gm_804979D8,
         },
@@ -121,7 +121,7 @@ void gm_801BA938(struct EventData* arg0, int lo, int hi, bool arg3)
 
 #pragma push
 #pragma dont_inline on
-void gm_801BAA60(MinorScene* arg0)
+void gm_801BAA60(GameScene* arg0)
 {
     struct EventData* temp_r31 = &gmMainLib_804D3EE0->unk_530;
     CSSData* css = gm_801A427C(arg0);
@@ -135,7 +135,7 @@ void gm_801BAA60(MinorScene* arg0)
 }
 #pragma pop
 
-void gm_801BAAD0(MinorScene* arg0)
+void gm_801BAAD0(GameScene* arg0)
 {
     CSSData* temp_r3;
     struct EventData* temp_r31;
@@ -143,7 +143,7 @@ void gm_801BAAD0(MinorScene* arg0)
     temp_r31 = &gmMainLib_804D3EE0->unk_530;
     temp_r3 = gm_801A4284(arg0);
     if (temp_r3->pending_scene_change == 2) {
-        gm_801A42F8(MJ_MENU);
+        gm_801A42F8(GM_MENU);
         return;
     }
     gm_801B0730(temp_r3, &temp_r31->x2, NULL, &temp_r31->x3, &temp_r31->x4,
@@ -304,7 +304,7 @@ void gm_801BBEA8_OnLoad(void)
     temp_r30->x40 = 0;
     gm_801BBB64();
     if (*temp_r29[temp_r28]->x14 != 0x21) {
-        gm_SetSceneMinor(1);
+        gm_SetScene(1);
     }
 }
 
@@ -1515,34 +1515,34 @@ UNK_T gm_801BEC54(void)
     return temp_r3->x4;
 }
 
-void gm_801BEC80(MinorScene* arg)
+void gm_801BEC80(GameScene* arg)
 {
-    gm_801A42E8(MJ_MENU);
+    gm_801A42E8(GM_MENU);
     gm_801A42D4();
 }
 
-void gm_801BECA8(MinorScene* arg)
+void gm_801BECA8(GameScene* arg)
 {
     lb_8001C550();
     lb_8001D164(0);
 }
 
-void gm_801BECD0(MinorScene* arg)
+void gm_801BECD0(GameScene* arg)
 {
     gm_80172898(4);
     if (!gm_80173754(1, 0)) {
-        gm_801A42E8(MJ_MENU);
+        gm_801A42E8(GM_MENU);
         gm_801A42D4();
     }
 }
 
-void gm_801BED14(MinorScene* arg)
+void gm_801BED14(GameScene* arg)
 {
-    gm_801A42E8(MJ_MENU);
+    gm_801A42E8(GM_MENU);
     gm_801A42D4();
 }
 
-void gm_801BED3C(MinorScene* arg0)
+void gm_801BED3C(GameScene* arg0)
 {
     CSSData* temp_r31 = gm_801A427C(arg0);
     temp_r31->data = *gm_801A5244();
@@ -1553,7 +1553,7 @@ void gm_801BED3C(MinorScene* arg0)
     }
 }
 
-void gm_801BEDA8(MinorScene* arg0)
+void gm_801BEDA8(GameScene* arg0)
 {
     CSSData* css = gm_801A427C(arg0);
     VsModeData* vs = gm_801A5244();
@@ -1571,13 +1571,13 @@ void gm_801BEDA8(MinorScene* arg0)
     *vs = css->data;
 }
 
-void gm_801BEE58(MinorScene* arg0)
+void gm_801BEE58(GameScene* arg0)
 {
     SSSData* var_r3 = gm_801A427C(arg0);
     var_r3->data = gmMainLib_804D3EE0->unk_590;
 }
 
-void gm_801BEE9C(MinorScene* arg0)
+void gm_801BEE9C(GameScene* arg0)
 {
     s8* temp_r28;
     u8 temp_r27; ///< maybe CharacterKind?
@@ -1597,12 +1597,12 @@ void gm_801BEE9C(MinorScene* arg0)
     } else {
         gm_801736E8(gm_801BEFB0(), gm_801BEFD0(), gm_801BF010(), gm_801BEFF0(),
                     temp_r27, *temp_r28);
-        gm_801A42E8(MJ_CHALLENGER_APPROACH);
+        gm_801A42E8(GM_CHALLENGER_APPROACH);
     }
     gm_801A42D4();
 }
 
-void gm_801BEF84(MinorScene* arg)
+void gm_801BEF84(GameScene* arg)
 {
     lbMthp_8001F800();
 }
@@ -1675,28 +1675,28 @@ int gm_801BF050(void)
     return M2C_FIELD(&gm_8049C178, u8*, 2);
 }
 
-void gm_801BF060(MinorScene* arg0)
+void gm_801BF060(GameScene* arg0)
 {
     int* temp_r3 = gm_801A4284(arg0);
     if (g_debugLevel >= 3) {
         if (*temp_r3 & 0x100) {
-            gm_801A42E8(MJ_DEBUG_VS);
+            gm_801A42E8(GM_DEBUG_VS);
             gm_801A42D4();
         } else if (*temp_r3 & 0x1000) {
-            gm_801A42E8(MJ_MENU);
+            gm_801A42E8(GM_MENU);
             gm_801A42D4();
         } else if (*temp_r3 & 0x400) {
-            gm_801A42E8(MJ_DEBUG_SOUND_TEST);
+            gm_801A42E8(GM_DEBUG_SOUND_TEST);
             gm_801A42D4();
         } else if (*temp_r3 & 0x800) {
-            gm_801A42E8(MJ_DEBUG);
+            gm_801A42E8(GM_DEBUG);
             gm_801A42D4();
         }
     } else if (*temp_r3 & 0x1000) {
         gm_80173EEC();
         gm_80172898(0x100);
         if (!gm_80173754(1, 0)) {
-            gm_801A42E8(MJ_MENU);
+            gm_801A42E8(GM_MENU);
         }
         gm_801A42D4();
     }
@@ -1735,7 +1735,7 @@ void gm_801BF3F8(void)
     lbAudioAx_80027168();
 }
 
-void gm_801BF4DC(MinorScene* arg0)
+void gm_801BF4DC(GameScene* arg0)
 {
     StartMeleeData* temp_r31;
     VsModeData* temp_r30;
@@ -1845,7 +1845,7 @@ u8 gm_801BF718(void)
     return gm_8049E548.unk_E;
 }
 
-void gm_801BF728(MinorScene* arg)
+void gm_801BF728(GameScene* arg)
 {
     s32 temp_r31;
     s32 temp_r31_2;
@@ -1869,13 +1869,13 @@ void gm_801BF728(MinorScene* arg)
     gm_801BEFC0(HSD_Randi(4));
 }
 
-void gm_801BF834(MinorScene* arg)
+void gm_801BF834(GameScene* arg)
 {
-    gm_801A42E8(MJ_TITLE);
+    gm_801A42E8(GM_TITLE);
     gm_801A42D4();
 }
 
-void gm_801BF85C(MinorScene* arg)
+void gm_801BF85C(GameScene* arg)
 {
     PreloadCacheScene* temp_r31 = lbDvd_8001822C();
     PAD_STACK(4);
@@ -1884,29 +1884,29 @@ void gm_801BF85C(MinorScene* arg)
     lbDvd_80018254();
 }
 
-void gm_801BF898(MinorScene* arg)
+void gm_801BF898(GameScene* arg)
 {
     lbMthp_8001F800();
 }
 
-void gm_801BF8B8(MinorScene* arg)
+void gm_801BF8B8(GameScene* arg)
 {
     lbMthp_8001F800();
 }
 
-void gm_801BF8D8(MinorScene* arg)
+void gm_801BF8D8(GameScene* arg)
 {
     lbMthp_8001F800();
 }
 
-void gm_801BF8F8(MinorScene* arg0)
+void gm_801BF8F8(GameScene* arg0)
 {
     int* val = gm_801A427C(arg0);
     *val = 1;
 }
 
-void gm_801BF920(MinorScene* arg0)
+void gm_801BF920(GameScene* arg0)
 {
     gm_801A4284(arg0);
-    gm_801A42F8(MJ_BOOT);
+    gm_801A42F8(GM_BOOT);
 }

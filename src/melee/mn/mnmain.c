@@ -646,10 +646,10 @@ u32 mn_80229624(u32 slot)
     return ret;
 }
 
-void mn_80229860(s8 pending_major)
+void mn_80229860(s8 pending_mode)
 {
     MenuExitData* data = gm_801A4B9C();
-    data->pending_major = pending_major;
+    data->pending_mode = pending_mode;
     gm_801A4B60();
 }
 
@@ -1866,61 +1866,61 @@ void mn_8022C4F4(HSD_GObj* gp)
         case SEL_SPECIAL_VS_CAMERA:
             lbAudioAx_80024030(1);
             data = gm_801A4B9C();
-            data->pending_major = MJ_CAMERA_MODE;
+            data->pending_mode = GM_CAMERA_MODE;
             gm_801A4B60();
             break;
         case SEL_SPECIAL_VS_STAMINA:
             lbAudioAx_80024030(1);
             data = gm_801A4B9C();
-            data->pending_major = MJ_STAMINA_VS;
+            data->pending_mode = GM_STAMINA_VS;
             gm_801A4B60();
             break;
         case SEL_SPECIAL_VS_SUDDEN_DEATH:
             lbAudioAx_80024030(1);
             data = gm_801A4B9C();
-            data->pending_major = MJ_SUPER_SUDDEN_DEATH_VS;
+            data->pending_mode = GM_SUPER_SUDDEN_DEATH_VS;
             gm_801A4B60();
             break;
         case SEL_SPECIAL_VS_GIANT:
             lbAudioAx_80024030(1);
             data = gm_801A4B9C();
-            data->pending_major = MJ_GIANT_VS;
+            data->pending_mode = GM_GIANT_VS;
             gm_801A4B60();
             break;
         case SEL_SPECIAL_VS_TINY:
             lbAudioAx_80024030(1);
             data = gm_801A4B9C();
-            data->pending_major = MJ_TINY_VS;
+            data->pending_mode = GM_TINY_VS;
             gm_801A4B60();
             break;
         case SEL_SPECIAL_VS_INVISIBLE:
             lbAudioAx_80024030(1);
             data = gm_801A4B9C();
-            data->pending_major = MJ_INVISIBLE_VS;
+            data->pending_mode = GM_INVISIBLE_VS;
             gm_801A4B60();
             break;
         case SEL_SPECIAL_VS_FIXED_CAMERA:
             lbAudioAx_80024030(1);
             data = gm_801A4B9C();
-            data->pending_major = MJ_FIXED_CAMERA_VS;
+            data->pending_mode = GM_FIXED_CAMERA_VS;
             gm_801A4B60();
             break;
         case SEL_SPECIAL_VS_SINGLE_BUTTON:
             lbAudioAx_80024030(1);
             data = gm_801A4B9C();
-            data->pending_major = MJ_SINGLE_BUTTON_VS;
+            data->pending_mode = GM_SINGLE_BUTTON_VS;
             gm_801A4B60();
             break;
         case SEL_SPECIAL_VS_LIGHTNING:
             lbAudioAx_80024030(1);
             data = gm_801A4B9C();
-            data->pending_major = MJ_LIGHTNING_VS;
+            data->pending_mode = GM_LIGHTNING_VS;
             gm_801A4B60();
             break;
         case SEL_SPECIAL_VS_SLOMO:
             lbAudioAx_80024030(1);
             data = gm_801A4B9C();
-            data->pending_major = MJ_SLOMO_VS;
+            data->pending_mode = GM_SLOMO_VS;
             gm_801A4B60();
             break;
         }
@@ -1980,14 +1980,14 @@ void mn_8022C7CC(HSD_GObj* gp)
             lbAudioAx_80024030(1);
             gm_801677E8(mn_8022C7CC_inline());
             data = gm_801A4B9C();
-            data->pending_major = MJ_TARGET_TEST;
+            data->pending_mode = GM_TARGET_TEST;
             gm_801A4B60();
             return;
         case SEL_STADIUM_HOMERUN:
             lbAudioAx_80024030(1);
             gm_801677E8(mn_8022C7CC_inline());
             data = gm_801A4B9C();
-            data->pending_major = MJ_HOME_RUN_CONTEST;
+            data->pending_mode = GM_HOME_RUN_CONTEST;
             gm_801A4B60();
             return;
         case SEL_STADIUM_MULTIMAN:
@@ -2105,19 +2105,19 @@ void mn_8022CC28(HSD_GObj* gp)
         case SEL_REG_CLASSIC:
             lbAudioAx_80024030(1);
             data = gm_801A4B9C();
-            data->pending_major = MJ_CLASSIC;
+            data->pending_mode = GM_CLASSIC;
             gm_801A4B60();
             return;
         case SEL_REG_ADVENTURE:
             lbAudioAx_80024030(1);
             data = gm_801A4B9C();
-            data->pending_major = MJ_ADVENTURE;
+            data->pending_mode = GM_ADVENTURE;
             gm_801A4B60();
             return;
         case SEL_REG_ALLSTAR:
             lbAudioAx_80024030(1);
             data = gm_801A4B9C();
-            data->pending_major = MJ_ALLSTAR;
+            data->pending_mode = GM_ALLSTAR;
             gm_801A4B60();
             return;
         }
@@ -2355,19 +2355,19 @@ void mn_8022D34C(HSD_GObj* gp)
         case SEL_TOY_GALLERY:
             lbAudioAx_80024030(1);
             data = gm_801A4B9C();
-            data->pending_major = MJ_TOY_GALLERY;
+            data->pending_mode = GM_TOY_GALLERY;
             gm_801A4B60();
             return;
         case SEL_TOY_LOTTERY:
             lbAudioAx_80024030(1);
             data = gm_801A4B9C();
-            data->pending_major = MJ_TOY_LOTTERY;
+            data->pending_mode = GM_TOY_LOTTERY;
             gm_801A4B60();
             return;
         case SEL_TOY_COLLECTION:
             lbAudioAx_80024030(1);
             data = gm_801A4B9C();
-            data->pending_major = MJ_TOY_COLLECTION;
+            data->pending_mode = GM_TOY_COLLECTION;
             gm_801A4B60();
             return;
         }
@@ -2431,13 +2431,13 @@ void mn_8022D594(HSD_GObj* gp)
         case SEL_VS_MELEE:
             lbAudioAx_80024030(1);
             data = gm_801A4B9C();
-            data->pending_major = MJ_VS;
+            data->pending_mode = GM_VS;
             gm_801A4B60();
             break;
         case SEL_VS_TOURNAMENT:
             lbAudioAx_80024030(1);
             data = gm_801A4B9C();
-            data->pending_major = MJ_TOURNAMENT;
+            data->pending_mode = GM_TOURNAMENT;
             gm_801A4B60();
             break;
         case SEL_VS_SPECIAL:
@@ -2555,7 +2555,7 @@ void mn_8022D7F4(HSD_GObj* gp)
         case SEL_1P_TRAINING:
             lbAudioAx_80024030(1);
             data = gm_801A4B9C();
-            data->pending_major = MJ_TRAINING;
+            data->pending_mode = GM_TRAINING;
             gm_801A4B60();
             break;
         }
@@ -2661,7 +2661,7 @@ void mn_8022DB10(HSD_GObj* gp)
         mf->entering_menu = 0;
         mn_804D6BC8.cooldown = 5;
         data = gm_801A4B9C();
-        data->pending_major = MJ_TITLE;
+        data->pending_mode = GM_TITLE;
         gm_801A4B60();
     } else if (buttons & MenuInput_Up) {
         lbAudioAx_80024030(2);
@@ -2685,7 +2685,7 @@ void mn_8022DD38_OnFrame(void)
         mn_8022EBDC();
         HSD_SisLib_803A5E70();
         data = gm_801A4B9C();
-        data->pending_major = MJ_MENU;
+        data->pending_mode = GM_MENU;
         gm_801A4B60();
     }
 }
@@ -3262,13 +3262,13 @@ int mn_8022F470(int* x, int* target, int dx)
 #pragma dont_inline on
 void mn_8022F4CC(void)
 {
-    if (gm_801A4310() == MJ_TOURNAMENT) {
+    if (gm_801A4310() == GM_TOURNAMENT) {
         HSD_SisLib_803A5E70();
         mn_8022EBDC();
         gm_80190EA4();
         return;
     }
-    if (gm_801A4310() == MJ_MENU) {
+    if (gm_801A4310() == GM_MENU) {
         mn_80229894(2, 3, 3);
         return;
     }

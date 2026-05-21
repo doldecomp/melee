@@ -566,7 +566,7 @@ void gm_8017CA38(DebugGameOverData* arg0, Unk1PData* arg1, gmm_x0_528_t* arg2,
         arg1->xC.x18 = lbTime_8000AEC8((u32) arg0->x4, 1U);
         arg1->stocks = arg2->stocks;
         arg1->xC.xD = lbTime_8000AF74((u32) arg1->xC.xD, 1);
-        gm_SetScenePendingMinor(arg1->x7);
+        gm_SetPendingScene(arg1->x7);
     }
 }
 
@@ -1058,18 +1058,18 @@ bool gm_8017D7AC(MatchExitInfo* arg0, Unk1PData* arg1, u8 arg2)
             if (arg0->match_end.result == 1) {
                 arg1->stocks--;
                 if (arg1->stocks == 0) {
-                    gm_SetScenePendingMinor(arg2);
+                    gm_SetPendingScene(arg2);
                     return 0;
                 }
                 if (!(arg1->x8 & 0x40)) {
                     arg1->xC.x10++;
-                    gm_SetScenePendingMinor(gm_801A42C4());
+                    gm_SetPendingScene(gm_801A42C4());
                     return 0;
                 }
             }
         } else {
             arg1->xC.x10 = 0;
-            gm_SetScenePendingMinor(arg2);
+            gm_SetPendingScene(arg2);
             return 0;
         }
     }
@@ -1296,11 +1296,11 @@ Unk1PData* fn_8017DEC8(int arg0)
 Unk1PData* fn_8017DF28(void)
 {
     switch (gm_801A4310()) {
-    case MJ_CLASSIC:
+    case GM_CLASSIC:
         return &gm_8017EB30()->x0;
-    case MJ_ADVENTURE:
+    case GM_ADVENTURE:
         return &gm_8017E424()->x0;
-    case MJ_ALLSTAR:
+    case GM_ALLSTAR:
         return &gm_80473A18.x0;
     default:
         return NULL;
@@ -1310,11 +1310,11 @@ Unk1PData* fn_8017DF28(void)
 u8 fn_8017DF90(void)
 {
     switch (gm_801A4310()) {
-    case MJ_CLASSIC:
+    case GM_CLASSIC:
         return 1;
-    case MJ_ADVENTURE:
+    case GM_ADVENTURE:
         return 0;
-    case MJ_ALLSTAR:
+    case GM_ALLSTAR:
         return 2;
     default:
         return 3;
@@ -1437,12 +1437,12 @@ u8 gm_8017E440(void)
     return r31->x0.slot;
 }
 
-u8 gm_8017E48C(MinorScene* scene)
+u8 gm_8017E48C(GameScene* scene)
 {
     u8 count = 0;
     int i;
-    for (i = 0; scene->idx != gm_803DE1B8_MinorScenes[i].idx; i++) {
-        if (gm_803DE1B8_MinorScenes[i].info.class_id == 2) {
+    for (i = 0; scene->idx != gm_803DE1B8_Scenes[i].idx; i++) {
+        if (gm_803DE1B8_Scenes[i].info.class_id == 2) {
             count++;
         }
     }
@@ -1549,10 +1549,10 @@ void gm_8017E7FC(u8 arg0)
         struct StartMeleeRules* rules = gm_8016AE50();
         rules->x4_5 = 1;
         r31->x77 = 0;
-        gm_SetScenePendingMinor(0x5A);
+        gm_SetPendingScene(0x5A);
     } else {
         r31->x77 = 1;
-        gm_SetScenePendingMinor(0x5A);
+        gm_SetPendingScene(0x5A);
     }
 }
 
@@ -1720,7 +1720,7 @@ bool fn_8017EDDC(void)
 {
     UnkAllstarData* p;
 
-    if (gm_801A4310() == MJ_CLASSIC) {
+    if (gm_801A4310() == GM_CLASSIC) {
         p = &lbl_80472CB0;
         if (p->x0.xC.xD == 0 && p->x0.cpu_level >= 2 && p->x0.xC.x20 < 0x5208)
         {
@@ -3876,7 +3876,7 @@ void fn_80182F40(HSD_GObj* unused)
         lbAudioAx_80023694();
         lbAudioAx_80024030(1);
         gm_801A4B60();
-        gm_801A42E8(MJ_TITLE);
+        gm_801A42E8(GM_TITLE);
         gm_801A42D4();
         return;
     }
@@ -3885,7 +3885,7 @@ void fn_80182F40(HSD_GObj* unused)
         lbAudioAx_80023694();
         if (gm_801A42C4() == 3 && gmMainLib_8015DB00() % 2 == 0) {
             gmMainLib_8015DB18();
-            gm_SetScenePendingMinor(0);
+            gm_SetPendingScene(0);
         }
         gm_801A4B60();
         return;

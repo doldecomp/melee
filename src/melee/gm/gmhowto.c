@@ -66,11 +66,11 @@ void gm_801ACD8C_OnFrame(void)
         }
         if (gm_801A36A0(4) & 0x1100) {
             lbAudioAx_80024030(1);
-            gm_801A42E8(MJ_TITLE);
+            gm_801A42E8(GM_TITLE);
             gm_801A42D4();
         } else if (gmMainLib_8015DB00() != 5) {
             gmMainLib_8015DB18();
-            gm_SetScenePendingMinor(0);
+            gm_SetPendingScene(0);
         }
     }
 }

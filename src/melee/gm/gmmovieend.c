@@ -1,5 +1,5 @@
 /**
- * @todo this file also contains the OnEnter callback for MN_DEBUG_MENU,
+ * @todo this file also contains the OnEnter callback for GS_DEBUG_MENU,
  * which should probably be split out into a separate file
  */
 
@@ -20,7 +20,7 @@
 #include <sysdolphin/baselib/gobjobject.h>
 #include <sysdolphin/baselib/sobjlib.h>
 
-void gm_801A6254(MinorScene* arg0)
+void gm_801A6254(GameScene* arg0)
 {
     u8 temp_ret;
     u8 temp_r0;
@@ -43,13 +43,13 @@ void gm_801A6254(MinorScene* arg0)
     gm_80173EEC();
     gm_80172898(0x100);
     if (gm_801721EC() == 0) {
-        gm_SetScenePendingMinor(0);
+        gm_SetPendingScene(0);
     }
 }
 
-void gm_801A6308(MinorScene* arg0)
+void gm_801A6308(GameScene* arg0)
 {
-    gm_SetScenePendingMinor(0);
+    gm_SetPendingScene(0);
 }
 
 void gm_801A632C_OnEnter(void* arg0_)

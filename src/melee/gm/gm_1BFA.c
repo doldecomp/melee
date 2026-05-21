@@ -21,7 +21,7 @@ extern StartMeleeData gm_80480530;
 extern MatchExitInfo gm_80479D98;
 extern struct un_804A1F48_t un_804A1F48[];
 
-MinorScene gm_803DFE48_MinorScenes[] = {
+GameScene gm_803DFE48_Scenes[] = {
     {
         0,
         2,
@@ -29,7 +29,7 @@ MinorScene gm_803DFE48_MinorScenes[] = {
         gm_801BFA6C,
         NULL,
         {
-            MN_APPROACH,
+            GS_APPROACH,
             gm_804D6860,
             gm_804D6860,
         },
@@ -41,7 +41,7 @@ MinorScene gm_803DFE48_MinorScenes[] = {
         gm_801BFABC,
         gm_801BFBA8,
         {
-            MN_VS,
+            GS_VS,
             &gm_80480530,
             &gm_80479D98,
         },
@@ -53,7 +53,7 @@ MinorScene gm_803DFE48_MinorScenes[] = {
         gm_801BFCFC,
         gm_801BFF7C,
         {
-            MN_PRIZE_INTERFACE,
+            GS_PRIZE_INTERFACE,
             un_804A1F48,
             NULL,
         },
@@ -61,7 +61,7 @@ MinorScene gm_803DFE48_MinorScenes[] = {
     { -1 },
 };
 
-void gm_801BFA6C(MinorScene* arg0)
+void gm_801BFA6C(GameScene* arg0)
 {
     lbl_8046DBD8_t* temp_r3;
     VsApproachData* temp_r31;
@@ -75,7 +75,7 @@ void gm_801BFA6C(MinorScene* arg0)
     lb_8001CE00();
 }
 
-void gm_801BFABC(MinorScene* arg0)
+void gm_801BFABC(GameScene* arg0)
 {
     lbl_8046DBD8_t* temp_r31;
     StartMeleeData* temp_r30;
@@ -100,7 +100,7 @@ void gm_801BFABC(MinorScene* arg0)
     gm_8016F088(temp_r30);
 }
 
-void gm_801BFBA8(MinorScene* arg0)
+void gm_801BFBA8(GameScene* arg0)
 {
     lbl_8046DBD8_t* temp_r31;
     u8 temp_r0;
@@ -150,7 +150,7 @@ s32** gm_801BFC60(s16 arg0, s32 arg1, s16 arg2, s32 arg3, void** arg4)
 
 static u8 gm_8049E558[0x170];
 
-void gm_801BFCFC(MinorScene* arg0)
+void gm_801BFCFC(GameScene* arg0)
 {
     s32 var_r27_2;
     s32 var_r30;
@@ -251,7 +251,7 @@ void gm_801BFCFC(MinorScene* arg0)
     lb_8001CE00();
 }
 
-void gm_801BFF7C(MinorScene* arg0)
+void gm_801BFF7C(GameScene* arg0)
 {
     gm_801A42E8((s8) gm_801736DC()->x5);
     gm_801A42D4();
