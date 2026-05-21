@@ -749,7 +749,77 @@ s32 fn_803ACFC0(CardState* state, s32 block_idx, s32 file_id, s32 seq_num,
     return result;
 }
 
-/// #fn_803AD16C
+typedef struct CardStateExtAd16C {
+    u8* x0;
+    u8 pad_04[0x4];
+    u32 x8;
+    CARDFileInfo file_info;
+    s32 x20;
+    u32 x24;
+    s32 x28[9];
+    s32 x4C[9];
+    s32 x70[9];
+    u8 pad_94[0xDC];
+    s32 x170[64];
+    s32 x270[64];
+    u8 x370[0x40];
+    u8 x3B0;
+    u8 pad_3B1[0xAF];
+    s32 x460;
+} CardStateExtAd16C;
+
+s32 fn_803AD16C(CardState* arg0)
+{
+    CardStateExtAd16C* state = (CardStateExtAd16C*) arg0;
+    s32 file_id;
+    s32 phys;
+
+    if (state->x460 != fn_803AC7DC(arg0)) {
+        return -257;
+    }
+
+    for (phys = 0; phys <= state->x460; phys++) {
+        if (state->x170[phys] < -0x7FFF) {
+            return -257;
+        }
+    }
+
+    for (file_id = 0; file_id < 9; file_id++) {
+        s32 block_idx;
+        s32 blocks_before;
+        s32 file_blocks;
+
+        if (state->x4C[file_id] <= 0) {
+            continue;
+        }
+
+        if (file_id == 0) {
+            blocks_before = 0;
+        } else {
+            blocks_before = state->x4C[0] > 0 ? fn_803AC634(arg0, 0) : 1;
+            for (block_idx = 1; block_idx < file_id; block_idx++) {
+                blocks_before += fn_803AC634(arg0, block_idx);
+            }
+        }
+
+        file_blocks = fn_803AC634(arg0, file_id);
+        for (block_idx = 0; block_idx < file_blocks; block_idx++) {
+            s32 found = 0;
+
+            for (phys = 0; phys <= state->x460; phys++) {
+                if (state->x170[phys] == blocks_before + block_idx) {
+                    found++;
+                }
+            }
+
+            if (found == 0) {
+                return -259;
+            }
+        }
+    }
+
+    return 0;
+}
 
 s32 fn_803ADE4C(s32 card_state, s32 channel, s32 callback)
 {
