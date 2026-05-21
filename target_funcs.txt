@@ -1,7 +1,7 @@
 File: src/sysdolphin/baselib/hsd_3AA7.c
 Funcs:
 - [x] fn_803ACF30
-- [ ] hsd_803AC558
+- [x] hsd_803AC558
 - [ ] fn_803AC168
 - [ ] fn_803AC6B8
 - [ ] hsd_803B2550

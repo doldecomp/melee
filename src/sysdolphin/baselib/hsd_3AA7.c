@@ -300,9 +300,6 @@ void fn_803AC3F8(void* arg0, u8* data, s32 file_idx)
     }
 }
 
-/// @todo Currently 76.6% match - mwcc emits combined `rlwimi. r6,r0,8,10,23`
-/// (14-bit insert with CR0) and `srawi/clrlwi` for top-2-bit extract; permuter
-/// queued
 void hsd_803AC558(struct CardState* file_desc, u8* data)
 {
     int i;
