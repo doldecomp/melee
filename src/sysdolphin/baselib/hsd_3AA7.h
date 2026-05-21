@@ -15,7 +15,7 @@ typedef struct CardState {
 } CardState;
 
 /* 3AA790 */ s32 fn_803AA790(void);
-/* 3AAA48 */ UNK_RET hsd_803AAA48(UNK_PARAMS);
+/* 3AAA48 */ s32 hsd_803AAA48(void);
 /* 3AC168 */ s32 fn_803AC168(s32* cmd_buf);
 /* 3AC258 */ void fn_803AC258(CardState* card_state, s32 block_idx);
 /* 3AC2A4 */ void fn_803AC2A4(s32 card_state);

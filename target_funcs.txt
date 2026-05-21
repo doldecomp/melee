@@ -22,4 +22,4 @@ Funcs:
 - [x] fn_803AD16C
 - [x] fn_803AF3F0
 - [x] fn_803B0120
-- [ ] hsd_803AAA48
+- [x] hsd_803AAA48

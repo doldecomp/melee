@@ -19,6 +19,15 @@ typedef struct CardBufEntry {
     s32 x14, x18, x1C, x20;
 } CardBufEntry;
 
+typedef struct HsdCmdEntry {
+    s32 type;
+    s32 f1;
+    s32 f2;
+    s32 f3;
+    s32 f4;
+    s32 f5;
+} HsdCmdEntry;
+
 typedef struct CardQueueEntry {
     /* 0x00 */ s32 x0;
     /* 0x04 */ s32 x4;
@@ -27,6 +36,8 @@ typedef struct CardQueueEntry {
     /* 0x10 */ s32 x10;
     /* 0x14 */ void (*x14)(s32, s32);
 } CardQueueEntry;
+
+#define CMD_QUEUE(base) ((HsdCmdEntry*) ((base) + 0x1210))
 
 s32 fn_803AA790(void)
 {
@@ -130,7 +141,25 @@ s32 fn_803AA790(void)
     }
 }
 
-/// #hsd_803AAA48
+s32 hsd_803AAA48(void)
+{
+    BOOL intr;
+    HsdCmdEntry* entry;
+    s32 read_idx;
+    s32 write_idx;
+
+    intr = OSDisableInterrupts();
+    read_idx = hsd_804D7990;
+    write_idx = hsd_804D7994;
+    entry = CMD_QUEUE((u8*) hsd_804D1138);
+    OSRestoreInterrupts(intr);
+
+    if (read_idx == write_idx && entry[read_idx].type == 0) {
+        return 0;
+    }
+
+    return fn_803AA790();
+}
 
 s32 fn_803AC168(s32* cmd_buf)
 {
