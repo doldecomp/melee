@@ -1642,8 +1642,6 @@ s32 fn_803B0E9C(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
 
 /// #fn_803B1338
 
-/// @todo Currently 90.28% match - stwx vs stw+disp in rollback (same as
-/// fn_803ADE4C)
 s32 fn_803B1F78(CardState* state, s32 channel, s32 file_id, s32 seq_num,
                 s32 callback)
 {
