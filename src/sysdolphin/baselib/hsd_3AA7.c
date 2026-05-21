@@ -484,7 +484,6 @@ s32 fn_803ACBE8(CardState* state, s32 block_idx)
         return size * idx;
     }
 }
-/// @todo Currently 95.90% match - arg0/arg1 register swap (r27/r22 vs r26/r27)
 s32 fn_803ACC0C(CardState* state, s32 block_idx, s32 file_id, s32 seq_num,
                 void* expected_data, s32 data_size)
 {
