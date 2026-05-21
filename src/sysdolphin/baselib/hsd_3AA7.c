@@ -1640,7 +1640,45 @@ s32 fn_803B0E9C(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     return 0;
 }
 
-/// #fn_803B1338
+s32 fn_803B1338(CardState* state, s32 arg1)
+{
+    CardStateExt* ext = (CardStateExt*) state;
+    s32 file_id;
+    s32 result;
+    u8* base;
+
+    base = ext->x0;
+    result = 0;
+    for (file_id = 0; file_id < 9; file_id++) {
+        if (ext->x4C[file_id] <= 0) {
+            continue;
+        }
+
+        switch (ext->x28[file_id]) {
+        case 0:
+            result = fn_803AE7F8(state, file_id, (s32) base + ext->x70[file_id],
+                                 arg1, 0);
+            break;
+        case 1:
+            result = fn_803AF3F0((s32) state, file_id,
+                                 (s32) base + ext->x70[file_id], arg1, 0);
+            break;
+        case 3:
+            result = fn_803B0120((s32) state, file_id,
+                                 (s32) base + ext->x70[file_id], arg1, 0);
+            break;
+        default:
+            result = -257;
+            break;
+        }
+
+        if (result < 0) {
+            return result;
+        }
+    }
+
+    return result;
+}
 
 s32 fn_803B1F78(CardState* state, s32 channel, s32 file_id, s32 seq_num,
                 s32 callback)
