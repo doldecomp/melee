@@ -544,8 +544,6 @@ s32 fn_803ACC0C(CardState* state, s32 block_idx, s32 file_id, s32 seq_num,
     return 0;
 }
 
-/// @todo Currently 95.49% match - compiler hoists state+0x370 to r31, shifting
-/// regalloc
 s32 fn_803ACD58(CardState* state, void* icon_data, void* file_data)
 {
     s32 icon_size;
