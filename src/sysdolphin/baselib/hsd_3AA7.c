@@ -1914,7 +1914,6 @@ s32 hsd_803B2674(CardState* state)
     return blocks;
 }
 
-/// @todo Currently 87.04% match - result saved to r27 instead of staying in r3
 s32 fn_803B26CC(CardState* state, s32 file_id, s32 seq_num, s32 version,
                 s32 callback)
 {
