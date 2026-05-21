@@ -756,8 +756,6 @@ s32 fn_803ACFC0(CardState* state, s32 block_idx, s32 file_id, s32 seq_num,
 
 /// #fn_803AD16C
 
-/// @todo Currently 93.46% match - stwx vs stw+disp in rollback, reg swap in
-/// 2nd path
 s32 fn_803ADE4C(s32 card_state, s32 channel, s32 callback)
 {
     s32 buf1[9];
