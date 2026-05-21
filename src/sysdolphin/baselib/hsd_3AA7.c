@@ -132,7 +132,6 @@ s32 fn_803AA790(void)
 
 /// #hsd_803AAA48
 
-/// @todo Currently 91.67% match - volatile load scheduling in critical section
 s32 fn_803AC168(s32* cmd_buf)
 {
     BOOL state;
