@@ -344,9 +344,6 @@ u32 fn_803AC634(struct CardState* file_desc, s32 file_idx)
     }
 }
 
-/// @todo Currently 93.75% match - 16 mismatches: dead bgt/li/b branch in i=0
-/// path (compiler emits redundant 0-result fallback) plus regalloc swaps
-/// (r5/r6/r8) in inlined sector arithmetic, and +1 absorption order
 s32 fn_803AC6B8(struct CardState* file_desc, s32 file_count)
 {
     s32 first_size;
