@@ -20,6 +20,6 @@ Funcs:
 - [x] fn_803AE7F8
 - [x] fn_803B1338
 - [x] fn_803AD16C
-- [ ] fn_803AF3F0
+- [x] fn_803AF3F0
 - [ ] fn_803B0120
 - [ ] hsd_803AAA48

@@ -1481,7 +1481,18 @@ s32 fn_803AE7F8(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     return repair_result;
 }
 
-/// #fn_803AF3F0
+s32 fn_803AF3F0(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
+{
+    CardState* state = (CardState*) arg0;
+
+    if (arg1 >= 9) {
+        return -257;
+    }
+    if (state->x4C[arg1] <= 0) {
+        return 0;
+    }
+    return fn_803AE7F8(state, arg1, arg2, arg3, arg4);
+}
 
 /// #fn_803B0120
 
