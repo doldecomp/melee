@@ -1494,7 +1494,24 @@ s32 fn_803AF3F0(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     return fn_803AE7F8(state, arg1, arg2, arg3, arg4);
 }
 
-/// #fn_803B0120
+s32 fn_803B0120(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
+{
+    s32 result;
+    CardState* state = (CardState*) arg0;
+
+    if (arg1 >= 9) {
+        return -257;
+    }
+    if (state->x4C[arg1] <= 0) {
+        return 0;
+    }
+
+    result = fn_803AF3F0(arg0, arg1, arg2, arg3, arg4);
+    if (result == 1) {
+        return 0;
+    }
+    return result;
+}
 
 s32 fn_803B0E9C(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
 {
