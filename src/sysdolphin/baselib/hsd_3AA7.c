@@ -664,8 +664,6 @@ s32 fn_803ACF30(CardState* state, s32 file_id, s32 seq_num, s32 version)
     return 0;
 }
 
-/// @todo Currently 87.18% match - expression ordering and stbx vs stb+disp in
-/// byte stores
 s32 fn_803ACFC0(CardState* state, s32 block_idx, s32 file_id, s32 seq_num,
                 void* payload, s32 payload_size, s32 version)
 {
