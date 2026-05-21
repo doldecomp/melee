@@ -1745,8 +1745,6 @@ s32 fn_803B1F78(CardState* state, s32 channel, s32 file_id, s32 seq_num,
     return 0;
 }
 
-/// @todo Currently 94.85% match - stwx vs stw+disp in rollback (same as
-/// fn_803ADE4C)
 s32 fn_803B21E8(s32 card_state, s32 file_id, s32 seq_num, s32 callback)
 {
     s32 buf[9];
