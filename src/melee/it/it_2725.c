@@ -8337,8 +8337,9 @@ void it_802790C0(Item_GObj* item_gobj, CommandInfo* cmd)
     Item* item = item_gobj->user_data;
     struct ItemHitbox* hb;
     HitCapsule* hit;
-    u32 hitbox_idx = cmd->u->it_create_hitbox_0.id;
-    u32 x4 = cmd->u->it_create_hitbox_0.hit_group;
+    union CmdUnion* u = cmd->u;
+    u32 hitbox_idx = u->it_create_hitbox_0.id;
+    u32 x4 = u->it_create_hitbox_0.hit_group;
     u32 bone_idx;
     hb = &item->x5D4_hitboxes[hitbox_idx];
     hit = &hb->hit;

@@ -1,5 +1,6 @@
 #include "itmewtwoshadowball.h"
 
+#include "baselib/jobj.h"
 #include "ef/eflib.h"
 #include "ef/efsync.h"
 #include "ft/chara/ftKirby/ftKb_Init.h"
@@ -28,14 +29,16 @@ void it_802C4D10(Item_GObj* gobj)
     Item* ip = GET_ITEM(gobj);
     itMewtwoShadowball_DatAttrs* attr =
         ip->xC4_article_data->x4_specialAttributes;
-    HSD_JObj* child = itGetJObjGrandchild(gobj);
+    HSD_JObj* child = HSD_JObjGetChild(HSD_JObjGetChild(GET_JOBJ(gobj)));
 
     if (ip->xDD4_itemVar.mewtwoshadowball.x4C > 0) {
         ip->xDD4_itemVar.mewtwoshadowball.x48++;
         if (ip->xDD4_itemVar.mewtwoshadowball.x48 >= attr->x20) {
+            f32 rand;
             ip->xDD4_itemVar.mewtwoshadowball.x48 = 0;
+            rand = HSD_Randf();
             ip->xDD4_itemVar.mewtwoshadowball.x3C +=
-                ((M_PI / 4) * (2.0f * (HSD_Randf() - 0.5f)));
+                ((M_PI / 4) * (2.0f * (rand - 0.5f)));
             ip->xDD4_itemVar.mewtwoshadowball.x44 =
                 -ip->xDD4_itemVar.mewtwoshadowball.x40 / (0.5f * attr->x20);
             Item_8026AF0C(ip, it_803F7880[HSD_Randi(3)], 127, 64);
@@ -225,10 +228,10 @@ Item_GObj* it_802C519C(Item_GObj* parent, Vec3* pos, s32 kind, s32 max_charge,
 void it_802C53F0(Item_GObj* gobj, Vec3* pos, float angle, float charge,
                  float max_charge)
 {
+    HSD_JObj* jobj;
     Item* ip = GET_ITEM(gobj);
     itMewtwoShadowball_DatAttrs* attr =
         ip->xC4_article_data->x4_specialAttributes;
-    HSD_JObj* jobj;
     Vec3 rot;
     Vec3 tr;
     PAD_STACK(4);
@@ -242,8 +245,8 @@ void it_802C53F0(Item_GObj* gobj, Vec3* pos, float angle, float charge,
     if (charge > max_charge) {
         charge = max_charge;
     }
-    ip->xDD4_itemVar.mewtwoshadowball.x18 = (s32) charge;
-    ip->xDD4_itemVar.mewtwoshadowball.x1C = (s32) max_charge;
+    ip->xDD4_itemVar.mewtwoshadowball.x18 = charge;
+    ip->xDD4_itemVar.mewtwoshadowball.x1C = max_charge;
 
     if (ip->xDD4_itemVar.mewtwoshadowball.x2C != NULL &&
         ip->owner == ip->xDD4_itemVar.mewtwoshadowball.x2C)
@@ -289,7 +292,8 @@ void it_802C53F0(Item_GObj* gobj, Vec3* pos, float angle, float charge,
         ip->x40_vel.z = 0.0f;
         ip->xDD4_itemVar.mewtwoshadowball.x14 = 1;
         ip->xDD4_itemVar.mewtwoshadowball.x4C = 0;
-        jobj = HSD_JObjGetChild(gobj->hsd_obj);
+        jobj = gobj->hsd_obj;
+        jobj = HSD_JObjGetChild(jobj);
         tr.x = tr.y = tr.z = 1.0f;
         HSD_JObjSetScale(jobj, &tr);
     }
@@ -345,9 +349,10 @@ bool itMewtwoshadowball_UnkMotion0_Anim(Item_GObj* gobj)
     Item* ip = gobj->user_data;
     itMewtwoShadowball_DatAttrs* attr =
         ip->xC4_article_data->x4_specialAttributes;
-    HSD_JObj* grandchild = itGetJObjGrandchild(gobj);
+    HSD_JObj* grandchild = HSD_JObjGetChild(HSD_JObjGetChild(GET_JOBJ(gobj)));
     Vec3 trans;
     Vec3 scale;
+    PAD_STACK(4);
 
     if (ip->xDD4_itemVar.mewtwoshadowball.x2C != NULL &&
         ip->owner == ip->xDD4_itemVar.mewtwoshadowball.x2C)

@@ -446,6 +446,30 @@ s32 it_802BF28C(ItemLink* link, Vec3* target, itYoyoAttributes* attrs,
     }
 }
 
+static inline void it_802BF4A0_adjust_tail(ItemLink* cur, Vec3* target,
+                                           Vec3* dir2, f32 size)
+{
+    ItemLink* tail;
+    ItemLink* prev;
+
+    prev = cur->prev;
+    tail = cur;
+    it_802A3C98(&tail->pos, target, dir2);
+    cur->pos.x = (dir2->x * size) + target->x;
+    cur->pos.y = (dir2->y * size) + target->y;
+    cur->pos.z = (dir2->z * size) + target->z;
+
+    while (prev != NULL) {
+        if (it_802A3C98(&prev->pos, &tail->pos, dir2) > size) {
+            prev->pos.x = (dir2->x * size) + tail->pos.x;
+            prev->pos.y = (dir2->y * size) + tail->pos.y;
+            prev->pos.z = (dir2->z * size) + tail->pos.z;
+        }
+        tail = prev;
+        prev = prev->prev;
+    }
+}
+
 s32 it_802BF4A0(ItemLink* link, Vec3* target, itYoyoAttributes* attrs,
                 Item* ip)
 {
@@ -455,8 +479,6 @@ s32 it_802BF4A0(ItemLink* link, Vec3* target, itYoyoAttributes* attrs,
     Vec3 dir2;
     ItemLink* cur;
     ItemLink* next;
-    ItemLink* tail;
-    ItemLink* prev;
     s32 coll_flags;
     s32 count;
     f32 size;
@@ -528,22 +550,7 @@ s32 it_802BF4A0(ItemLink* link, Vec3* target, itYoyoAttributes* attrs,
         next = next->next;
     }
 
-    prev = cur->prev;
-    tail = cur;
-    it_802A3C98(&tail->pos, target, &dir2);
-    cur->pos.x = (dir2.x * size) + target->x;
-    cur->pos.y = (dir2.y * size) + target->y;
-    cur->pos.z = (dir2.z * size) + target->z;
-
-    while (prev != NULL) {
-        if (it_802A3C98(&prev->pos, &tail->pos, &dir2) > size) {
-            prev->pos.x = (dir2.x * size) + tail->pos.x;
-            prev->pos.y = (dir2.y * size) + tail->pos.y;
-            prev->pos.z = (dir2.z * size) + tail->pos.z;
-        }
-        tail = prev;
-        prev = prev->prev;
-    }
+    it_802BF4A0_adjust_tail(cur, target, &dir2, size);
 
     link->vel.x *= 0.9f;
     return 2;

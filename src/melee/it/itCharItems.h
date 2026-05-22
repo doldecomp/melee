@@ -436,6 +436,12 @@ typedef struct {
     /* ip+F98 */ Item_GObj* xF98;
 } itLinkBoomerang_ItemVars;
 
+typedef struct {
+    HSD_AnimJoint* anim;
+    HSD_MatAnimJoint* matanim;
+    HSD_ShapeAnimJoint* shapeanim;
+} AnimBundle;
+
 typedef struct itLinkBoomerangAttributes {
     /* x0 */ u32 x0;
     /* x4 */ u32 x4;
@@ -456,10 +462,10 @@ typedef struct itLinkBoomerangAttributes {
     /* x40 */ f32 x40;
     /* x44 */ HSD_Joint* x44;
     /* x48 */ HSD_Joint* x48;
-    /* x4C */ HSD_AnimJoint* x4C_anim;
+    /* x4C */ AnimBundle x4C_anim;
     /* x50 */ HSD_MatAnimJoint* x50_matanim;
     /* x54 */ HSD_ShapeAnimJoint* x54_shapeanim;
-    /* x58 */ HSD_AnimJoint* x58_anim;
+    /* x58 */ AnimBundle x58_anim;
     /* x5C */ HSD_MatAnimJoint* x5C_matanim;
     /* x60 */ HSD_ShapeAnimJoint* x60_shapeanim;
 } itLinkBoomerangAttributes;
