@@ -28,6 +28,15 @@
 #include <math.h>
 #include <baselib/gobj.h>
 
+ItemStateTable it_803F9378[] = {
+    {
+        0,
+        itMasterhandlaser_UnkMotion0_Anim,
+        itMasterhandlaser_UnkMotion0_Phys,
+        itMasterhandlaser_UnkMotion0_Coll,
+    },
+};
+
 static inline float my_sqrtf(float x)
 {
     static const double _half = .5;
