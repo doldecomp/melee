@@ -11,6 +11,33 @@
 #define GET_ATTRS(ip)                                                         \
     ((itBombHeiAttributes*) ip->xC4_article_data->x4_specialAttributes)
 
+ItemStateTable it_803F54D8[] = {
+    { -1, itBombhei_UnkMotion0_Anim, itBombhei_UnkMotion0_Phys,
+      itBombhei_UnkMotion0_Coll },
+    { -1, itBombhei_UnkMotion1_Anim, itBombhei_UnkMotion1_Phys,
+      itBombhei_UnkMotion1_Coll },
+    { 0, itBombhei_UnkMotion2_Anim, itBombhei_UnkMotion2_Phys,
+      itBombhei_UnkMotion2_Coll },
+    { 0, itBombhei_UnkMotion3_Anim, itBombhei_UnkMotion3_Phys,
+      itBombhei_UnkMotion3_Coll },
+    { 6, itBombhei_UnkMotion4_Anim, itBombhei_UnkMotion4_Phys,
+      itBombhei_UnkMotion4_Coll },
+    { 4, itBombhei_UnkMotion5_Anim, itBombhei_UnkMotion5_Phys,
+      itBombhei_UnkMotion5_Coll },
+    { 4, itBombhei_UnkMotion6_Anim, itBombhei_UnkMotion6_Phys,
+      itBombhei_UnkMotion6_Coll },
+    { 1, itBombhei_UnkMotion8_Anim, itBombhei_UnkMotion8_Phys, NULL },
+    { 4, itBombhei_UnkMotion8_Anim, itBombhei_UnkMotion8_Phys, NULL },
+    { 2, itBombhei_UnkMotion10_Anim, itBombhei_UnkMotion10_Phys,
+      itBombhei_UnkMotion10_Coll },
+    { 5, itBombhei_UnkMotion10_Anim, itBombhei_UnkMotion10_Phys,
+      itBombhei_UnkMotion10_Coll },
+    { 3, itBombhei_UnkMotion11_Anim, itBombhei_UnkMotion11_Phys,
+      itBombhei_UnkMotion11_Coll },
+    { -1, itBombhei_UnkMotion12_Anim, itBombhei_UnkMotion12_Phys,
+      itBombhei_UnkMotion12_Coll },
+};
+
 static inline void itBombhei_UpdateStatePreserveBoneMotion10(Item_GObj* igp,
                                                              int anim_id,
                                                              int flags)

@@ -504,11 +504,11 @@ void fn_802C5E18(Item_GObj* gobj)
 {
     Item* ip = GET_ITEM(gobj);
 
-    /// @todo original asm compares these, but doesn't actually branch, wtf
     if (ip->xDD4_itemVar.mewtwoshadowball.x18 ==
         ip->xDD4_itemVar.mewtwoshadowball.x1C)
     {
-        return;
+        if (ip == NULL) {
+        }
     }
     ip->xDD4_itemVar.mewtwoshadowball.x20++;
     ip->xDD4_itemVar.mewtwoshadowball.x20 =
