@@ -2225,7 +2225,73 @@ s32 ftCo_800A6A98(Fighter* fp, Vec3* arg1)
     return 1;
 }
 
-/// #ftCo_800A6D2C
+s32 ftCo_800A6D2C(Fighter* fp, Vec3* arg1)
+{
+    struct Fighter_x1A88_t* data = &fp->x1A88;
+    mp_UnkStruct0* island;
+    mp_UnkStruct0* cur_island;
+    f32 best;
+    Vec3 a;
+    Vec3 b;
+    Vec3 floor_pos;
+    Vec3 floor_normal;
+    int line_id;
+    u32 flags;
+    f32 mx;
+    f32 my;
+    s32 result;
+    s32 blocked;
+    f32 dx;
+    f32 dy;
+    f32 dist;
+
+    best = -1.0f;
+    cur_island = mpIsland_8005AB54(fp->coll_data.floor.index);
+    for (island = mpIsland_80458E88.next; island != NULL;
+         island = island->next)
+    {
+        if (ftCo_800A2718(island) == 0 && island != cur_island) {
+            a = island->x8;
+            b = island->x14;
+            HSD_Randf();
+            blocked = 0;
+            line_id = -1;
+            mx = 0.5f * (b.x + a.x);
+            my = 0.5f * (b.y + a.y);
+            result = mpCheckFloor(mx, 5.0f + my, mx, my - 20.0f, 0.0f,
+                                  &floor_pos, &line_id, &flags, &floor_normal,
+                                  -1, -1, -1, NULL, NULL);
+            if (result != 0) {
+                if (ftCo_800A6A98_inline0(line_id)) {
+                    blocked = 1;
+                }
+                if (blocked != 0) {
+                    result = 0;
+                }
+            }
+            if (result != 0) {
+                f32 fx = floor_pos.x;
+                if (floor_pos.y >= fp->cur_pos.y - data->x558) {
+                    if (!ftCo_800A4768_inline0(fp, &floor_pos)) {
+                        dx = fx - fp->cur_pos.x;
+                        dy = floor_pos.y - fp->cur_pos.y;
+                        dist = dx * dx + dy * dy;
+                        if (best < 0.0 || dist < best) {
+                            arg1->x = fx;
+                            best = dist;
+                            arg1->y = floor_pos.y;
+                            arg1->z = 0.0f;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    if (best < 0.0) {
+        return 0;
+    }
+    return 1;
+}
 
 /// #ftCo_800A6FC4
 
