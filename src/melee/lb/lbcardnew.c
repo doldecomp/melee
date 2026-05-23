@@ -1141,9 +1141,8 @@ int lb_8001C4A8(void* file_entries, void* icon_data)
         i = 0;
         while (entry->file_size != -1) {
             if (entry->file_size != 0) {
-                hsd_803AC3E0((struct hsd_803AC3E0_arg0_t*) ctx, i,
-                             entry->file_size, entry->file_flags,
-                             entry->data_size);
+                hsd_803AC3E0((struct CardState*) ctx, i, entry->file_size,
+                             entry->file_flags, entry->data_size);
             }
             i++;
             entry++;
