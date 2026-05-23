@@ -1977,15 +1977,16 @@ int hsd_803B2550(s32* arg0, const char* arg1, void (*arg2)(int, int))
     result = 0;
     {
         s32 tmp = arg0[4];
-        if (tmp == -1) {
-            do {
-                result++;
-            } while (result < 10);
-        }
+        do {
+            if (tmp != -1) {
+                break;
+            }
+            result++;
+        } while (result < 10);
+        write_idx = tmp;
         if (tmp < 0) {
             return tmp;
         }
-        write_idx = tmp;
     }
 
     chan = 0;
@@ -2001,7 +2002,8 @@ int hsd_803B2550(s32* arg0, const char* arg1, void (*arg2)(int, int))
         retries = hsd_804D7994;
 
         if (read_idx == retries) {
-            if (*(s32*) (base + read_idx * 0x18 + 0x1210) != 0) {
+            u8* entry = base + read_idx * 0x18;
+            if (*(s32*) (entry + 0x1210) != 0) {
                 return -265;
             }
         }
