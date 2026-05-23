@@ -1,6 +1,5 @@
 #include "ftCh_Slam.h"
 
-#include "ftCh_Init.h"
 #include "types.h"
 
 #include <placeholder.h>

@@ -1,6 +1,5 @@
 #include "ftCh_Walk.h"
 
-#include "ftCh_Init.h"
 #include "types.h"
 
 #include <placeholder.h>

@@ -1,6 +1,5 @@
 #include "ftCh_GrabUnk1_B174.h"
 
-#include "ftCh_Init.h"
 #include "math.h"
 #include "types.h"
 

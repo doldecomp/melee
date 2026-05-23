@@ -1,6 +1,5 @@
 #include "ftCh_TagCancel.h"
 
-#include "ftCh_Init.h"
 #include "types.h"
 
 #include <placeholder.h>

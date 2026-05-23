@@ -3,7 +3,8 @@
 
 #include "ft/forward.h"
 #include <baselib/forward.h>
-void fn_80157080(Fighter_GObj* gobj);
+
+/* 157080 */ void fn_80157080(Fighter_GObj* gobj);
 /* 1570CC */ void ftCh_Damage_Anim(HSD_GObj* gobj);
 /* 157108 */ void ftCh_Damage_IASA(HSD_GObj* gobj);
 /* 15714C */ void ftCh_Damage_Phys(HSD_GObj* gobj);

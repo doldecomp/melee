@@ -1,7 +1,5 @@
 #include "ftCh_CaptureWaitCrazyHand.h"
 
-#include "ftCh_Init.h"
-
 #include <placeholder.h>
 #include <platform.h>
 

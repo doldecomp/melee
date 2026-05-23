@@ -1,7 +1,5 @@
 #include "ftCh_Squeezing_1.h"
 
-#include "ftCh_Init.h"
-
 #include <placeholder.h>
 #include <platform.h>
 
