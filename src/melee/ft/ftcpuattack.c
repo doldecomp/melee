@@ -242,7 +242,209 @@ int ftCo_800B4AB0(Fighter* fp, Fighter* target, void* arg2)
     __assert("ftcpuattack.c", 0xFA, "0");
 }
 
-/// #ftCo_800B52AC
+int ftCo_800B52AC(Fighter* fp, Fighter* target, void* arg2, f32 reach)
+{
+    ftCo_AttackEntry sp40[32];
+    ftCo_AttackEntry* list = arg2;
+    ftCo_AttackEntry* sel;
+    struct Fighter_x1A88_t* cpu = &fp->x1A88;
+    s32 count;
+    s32 i;
+    s32 j;
+    bool found;
+    bool nearzero;
+    f32 r;
+    f32 sum;
+    f32 acc;
+    f32 inv;
+    f32 t;
+    f32 relx;
+    f32 fpPredY;
+    f32 relPredY;
+    f32 v;
+    f32 sq;
+    f32 scale;
+    f32 dirx;
+    f32 diry;
+    f32 rangeF;
+    f32 rangeB;
+    f32 halfRange;
+    f32 fpTermNeg;
+    f32 tgtTermNeg;
+    f32 fpY;
+    f32 fpVy;
+    f32 fpGrav;
+    f32 tgtY;
+    f32 tgtVy;
+    f32 tgtGrav;
+    f32 fpX;
+    f32 fpVx;
+    f32 tgtX;
+    f32 tgtVx;
+    f32 x568;
+
+    cpu->x74.y = 0.0f;
+    cpu->x74.x = 0.0f;
+    cpu->x6C.y = 0.0f;
+    cpu->x6C.x = 0.0f;
+    halfRange = (f32) (0.5 * cpu->x570 + 0.5);
+    if (list == NULL) {
+        return 0;
+    }
+    fpTermNeg = -fp->co_attrs.terminal_vel;
+    tgtTermNeg = -target->co_attrs.terminal_vel;
+    fpY = fp->cur_pos.y;
+    fpVy = fp->pos_delta.y;
+    fpGrav = fp->co_attrs.grav;
+    tgtY = target->cur_pos.y;
+    tgtVy = target->pos_delta.y;
+    tgtGrav = target->co_attrs.grav;
+    fpX = fp->cur_pos.x;
+    fpVx = fp->pos_delta.x;
+    tgtX = target->cur_pos.x;
+    tgtVx = target->pos_delta.x;
+    x568 = target->x1A88.x568;
+    if (target->facing_dir > 0.0f) {
+        rangeF = target->x1A88.x55C;
+        rangeB = target->x1A88.x560;
+    } else {
+        rangeF = target->x1A88.x560;
+        rangeB = target->x1A88.x55C;
+    }
+    count = 0;
+    while (list->cmd != 0) {
+        found = false;
+        if (list->x20 > cpu->level) {
+            list++;
+            continue;
+        }
+        for (j = 0; j < cpu->xEC; j++) {
+            if (cpu->xCC_array[j] == list->cmd) {
+                found = true;
+                break;
+            }
+        }
+        if (found) {
+            list++;
+            continue;
+        }
+        t = list->x04;
+        relx = (tgtVx * t + tgtX) - (fpVx * t + fpX);
+        if (target->ground_or_air == GA_Air) {
+            if (fpGrav < 0.00001f && fpGrav > -0.00001f) {
+                nearzero = true;
+            } else {
+                nearzero = false;
+            }
+            if (nearzero) {
+                v = 1000.0f;
+            } else {
+                v = -(fpTermNeg - fpY) / fpGrav;
+            }
+            if (v <= 0.0f) {
+                fpPredY = fpVy * t + fpY;
+            } else if (t < v) {
+                sq = sqrtf(t);
+                fpPredY = (f32) ((f64) fpY +
+                                 ((f64) (fpVy * t) -
+                                  0.5 * (f64) (fpGrav * sq)));
+            } else {
+                sq = sqrtf(v);
+                fpPredY = (f32) ((f64) fpY +
+                                 ((f64) (fpTermNeg * (t - v)) +
+                                  ((f64) (fpVy * t) -
+                                   0.5 * (f64) (fpGrav * sq))));
+            }
+        } else {
+            fpPredY = fpVy * t + fpY;
+        }
+        if (target->ground_or_air == GA_Air) {
+            if (tgtGrav < 0.00001f && tgtGrav > -0.00001f) {
+                nearzero = true;
+            } else {
+                nearzero = false;
+            }
+            if (nearzero) {
+                v = 1000.0f;
+            } else {
+                v = -(tgtTermNeg - tgtVy) / tgtGrav;
+            }
+            if (v <= 0.0f) {
+                relPredY = (tgtVy * t + tgtY) - fpPredY;
+            } else if (t < v) {
+                sq = sqrtf(t);
+                relPredY = (f32) (((f64) (tgtVy * t + tgtY) -
+                                   0.5 * (f64) (tgtGrav * sq)) -
+                                  (f64) fpPredY);
+            } else {
+                sq = sqrtf(v);
+                relPredY = (f32) (((f64) (tgtTermNeg * (t - v)) +
+                                   ((f64) (tgtVy * t + tgtY) -
+                                    0.5 * (f64) (tgtGrav * sq))) -
+                                  (f64) fpPredY);
+            }
+        } else {
+            relPredY = (tgtVy * t + tgtY) - fpPredY;
+        }
+        scale = fp->x34_scale.y;
+        if (fp->facing_dir > 0.0f) {
+            dirx = list->x08 * scale;
+            diry = list->x0C * scale + reach;
+        } else {
+            dirx = -list->x0C * scale - reach;
+            diry = -list->x08 * scale;
+        }
+        scale = fp->x34_scale.y;
+        if ((list->x14 * scale + reach) * halfRange > relPredY &&
+            list->x10 * scale * halfRange < relPredY + x568 &&
+            dirx * halfRange < relx + rangeF && diry * halfRange > relx - rangeB)
+        {
+            if (cpu->xC8 != 0) {
+                for (j = 0; j < cpu->xC8; j++) {
+                    if (cpu->xA8_array[j] == list->cmd) {
+                        sp40[count] = *list;
+                        count++;
+                    }
+                }
+            } else if (cpu->x80 % list->x1C == 0) {
+                sp40[count] = *list;
+                count++;
+            }
+        }
+        list++;
+    }
+    if (count == 0) {
+        return 0;
+    }
+    r = HSD_Randf();
+    sum = 0.0f;
+    for (i = 0; i < count; i++) {
+        sum += sp40[i].weight;
+    }
+    if (sum < 0.00001f && sum > -0.00001f) {
+        nearzero = true;
+    } else {
+        nearzero = false;
+    }
+    if (nearzero) {
+        return 0;
+    }
+    inv = 1.0 / sum;
+    acc = 0.0f;
+    sel = sp40;
+    for (i = 0; i < count; i++) {
+        acc += sel->weight;
+        if (acc * inv >= r) {
+            cpu->x6C.x = fp->x34_scale.y * sp40[i].x08;
+            cpu->x6C.y = fp->x34_scale.y * sp40[i].x10;
+            cpu->x74.x = fp->x34_scale.y * sp40[i].x0C;
+            cpu->x74.y = fp->x34_scale.y * sp40[i].x14;
+            return sp40[i].cmd;
+        }
+        sel++;
+    }
+    __assert("ftcpuattack.c", 0x1C5, "0");
+}
 
 /// #ftCo_800B5AB0
 
