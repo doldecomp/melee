@@ -75,9 +75,9 @@ Funcs:
 
 File: src/melee/gm/gmtou.c
 Funcs:
-- [ ] fn_8019C048
-- [ ] gm_8019B8C4_OnEnter
-- [ ] gm_8019ECAC_OnEnter
+- [x] fn_8019C048
+- [x] gm_8019B8C4_OnEnter
+- [x] gm_8019ECAC_OnEnter
 
 File: src/melee/gm/gm_1A3F.c
 Funcs:
