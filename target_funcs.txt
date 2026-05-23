@@ -36,18 +36,18 @@ Funcs:
 
 File: src/melee/gm/gmregclear.c
 Funcs:
-- [ ] fn_8017D9C0
-- [ ] fn_8017EE40
-- [ ] fn_8017F2A4
-- [ ] fn_8017F47C
-- [ ] fn_80181C80
-- [ ] fn_80181E18
-- [ ] fn_80182B5C
-- [ ] fn_80181598
-- [ ] gm_8017DB88
-- [ ] gm_80181998
-- [ ] gm_80182174
-- [ ] gm_80182554
+- [x] fn_8017D9C0
+- [x] fn_8017EE40
+- [x] fn_8017F2A4
+- [x] fn_8017F47C
+- [x] fn_80181C80
+- [x] fn_80181E18
+- [x] fn_80182B5C
+- [x] fn_80181598
+- [x] gm_8017DB88
+- [x] gm_80181998
+- [x] gm_80182174
+- [x] gm_80182554
 
 File: src/melee/gm/gmresultplayer.c
 Funcs:
