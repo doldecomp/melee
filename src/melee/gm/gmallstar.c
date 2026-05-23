@@ -671,9 +671,10 @@ void gm_801B5ACC(GameScene* arg0)
 
     round = gm_8017BE84(arg0->idx);
     {
-        u32 s = gm_803DEC4C[round].start;
-        u32 opp_idx = gm_803DEBE8[s].x0;
-        color = gm_80490940[opp_idx].x0;
+        gm_803DEBE8_t* opp =
+            (gm_803DEBE8_t*) (base + 0x2B8) + gm_803DEC4C[round].start;
+        color =
+            ((u8*) gm_80490940)[((u32) opp - (u32) (base + 0x2B8)) >> 2];
     }
 
     gm_8017CE34(data, (UnkAdventureData*) allstar, chars, 0, 0, 0, 0, 0x55, 0,

@@ -1,6 +1,6 @@
 File: src/melee/gm/gmallstar.c
 Funcs:
-- [ ] gm_801B5ACC
+- [x] gm_801B5ACC
 - [x] gm_801B59AC
 - [ ] gm_801B60A4_OnLoad
 - [ ] gm_801B5324
