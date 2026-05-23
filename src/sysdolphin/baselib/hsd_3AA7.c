@@ -495,19 +495,16 @@ s32 fn_803ACC0C(CardState* state, s32 block_idx, s32 file_id, s32 seq_num,
     }
 
     sector_size = state->x8;
-    retries = 0;
     buf = state->x0;
     offset = sector_size *
              (block_idx + (state->x24 + sector_size + 0x2F) / sector_size - 1);
 
-    do {
-        result =
-            CARDRead(&state->file_info, buf, sector_size, offset);
+    for (retries = 0; retries < 10; retries++) {
+        result = CARDRead(&state->file_info, buf, sector_size, offset);
         if (result != -1) {
             break;
         }
-        retries++;
-    } while (retries < 10);
+    }
 
     if (result < 0) {
         return result;
@@ -567,16 +564,13 @@ s32 fn_803ACD58(CardState* state, void* icon_data, void* file_data)
 
         offset = i * state->x8;
         buf = state->x0;
-        retries = 0;
-
-        do {
+        for (retries = 0; retries < 10; retries++) {
             result =
                 CARDRead(&state->file_info, buf, state->x8, offset);
             if (result != -1) {
                 break;
             }
-            retries++;
-        } while (retries < 10);
+        }
 
         if (result < 0) {
             return result;
@@ -679,16 +673,13 @@ s32 fn_803ACFC0(CardState* state, s32 block_idx, s32 file_id, s32 seq_num,
 
             buf = state->x0;
             hdr_offset = hdr_start % sector_size;
-            retries = 0;
-
-            do {
+            for (retries = 0; retries < 10; retries++) {
                 result = CARDRead(&state->file_info, buf,
                                   sector_size, offset);
                 if (result != -1) {
                     break;
                 }
-                retries++;
-            } while (retries < 10);
+            }
 
             if (result < 0) {
                 return result;
@@ -930,15 +921,13 @@ s32 fn_803ADF90(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     if (arg3 != 0) {
         hsd_804D7998 = hsd_804D7984;
     } else {
-        s32 retries = 0;
-
-        do {
+        s32 retries;
+        for (retries = 0; retries < 10; retries++) {
             result = CARDFastOpen(state->x4, state->x20, &state->file_info);
             if (result != -1) {
                 break;
             }
-            retries++;
-        } while (retries < 10);
+        }
 
         if (result < 0) {
             return result;
@@ -1094,15 +1083,13 @@ s32 fn_803ADF90(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     }
 
     if (arg3 == 0) {
-        s32 retries = 0;
-
-        do {
+        s32 retries;
+        for (retries = 0; retries < 10; retries++) {
             result = CARDClose(&state->file_info);
             if (result != -1) {
                 break;
             }
-            retries++;
-        } while (retries < 10);
+        }
 
         if (result < 0) {
             return -267;
@@ -1216,15 +1203,13 @@ s32 fn_803AE7F8(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     if (arg3 != 0) {
         hsd_804D7998 = hsd_804D7984;
     } else {
-        s32 retries = 0;
-
-        do {
+        s32 retries;
+        for (retries = 0; retries < 10; retries++) {
             result = CARDFastOpen(state->x4, state->x20, &state->file_info);
             if (result != -1) {
                 break;
             }
-            retries++;
-        } while (retries < 10);
+        }
 
         if (result < 0) {
             return result;
@@ -1279,14 +1264,12 @@ s32 fn_803AE7F8(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
                                              blocks_before + i, current_seq,
                                              data, chunk);
                         if (result < 0) {
-                            s32 retries = 0;
-
-                            do {
+                            s32 retries;
+                            for (retries = 0; retries < 10; retries++) {
                                 if (CARDClose(&state->file_info) != -1) {
                                     break;
                                 }
-                                retries++;
-                            } while (retries < 10);
+                            }
                             return result;
                         }
                         if (result > 0) {
@@ -1315,15 +1298,13 @@ s32 fn_803AE7F8(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
                     return result;
                 }
             } else {
-                s32 retries = 0;
-
-                do {
+                s32 retries;
+                for (retries = 0; retries < 10; retries++) {
                     result = CARDClose(&state->file_info);
                     if (result != -1) {
                         break;
                     }
-                    retries++;
-                } while (retries < 10);
+                }
 
                 if (result < 0) {
                     return -267;
@@ -1385,14 +1366,12 @@ s32 fn_803AE7F8(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
                             state->x170[phys] = -0x7FFF;
                             state->x270[phys] = 0;
                             {
-                                s32 retries = 0;
-
-                                do {
+                                s32 retries;
+                                for (retries = 0; retries < 10; retries++) {
                                     if (CARDClose(&state->file_info) != -1) {
                                         break;
                                     }
-                                    retries++;
-                                } while (retries < 10);
+                                }
                             }
                             return pass == 0 ? -260 : -258;
                         }
@@ -1409,15 +1388,13 @@ s32 fn_803AE7F8(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     }
 
     if (arg3 == 0) {
-        s32 retries = 0;
-
-        do {
+        s32 retries;
+        for (retries = 0; retries < 10; retries++) {
             result = CARDClose(&state->file_info);
             if (result != -1) {
                 break;
             }
-            retries++;
-        } while (retries < 10);
+        }
 
         if (result < 0) {
             return repair_result == 0 ? -267 : repair_result;
@@ -1570,16 +1547,14 @@ s32 fn_803B0E9C(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
         if (arg3 != 0) {
             memset(state->x0, 0, sector_size);
         } else {
-            s32 retries = 0;
-
-            do {
+            s32 retries;
+            for (retries = 0; retries < 10; retries++) {
                 result =
                     CARDRead(&state->file_info, state->x0, sector_size, 0);
                 if (result != -1) {
                     break;
                 }
-                retries++;
-            } while (retries < 10);
+            }
 
             if (result < 0) {
                 return result;
@@ -1948,13 +1923,11 @@ int hsd_803B2550(s32* arg0, const char* arg1, void (*arg2)(int, int))
         }
     }
 
-    chan = 0;
-    do {
+    for (chan = 0; chan < 10; chan++) {
         if (CARDClose((CARDFileInfo*) (arg0 + 3)) != -1) {
             break;
         }
-        chan++;
-    } while (chan < 10);
+    }
 
     {
         s32 read_idx = hsd_804D7990;
