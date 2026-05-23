@@ -673,6 +673,7 @@ GXColor gm_80160968(u8 arg0)
 }
 
 /// Get SJIS character name for a given CharacterKind
+#pragma dont_inline on
 const char* gm_80160980(u8 ckind)
 {
     if (lbLang_IsSavedLanguageUS()) {
@@ -696,6 +697,7 @@ const char* fn_801609E0(u8 ckind)
         return lbl_803D4D74[ckind];
     }
 }
+#pragma dont_inline reset
 
 const char* gm_80160A60(int arg0)
 {
@@ -761,25 +763,9 @@ void gm_80160C90(HSD_Text* text, u8 fighter_id, bool arg2)
     }
 
     if ((u8) arg2) {
-        if (lbLang_IsSavedLanguageUS() != 0) {
-            if (lbl_803D50E4[fighter_id] != 0) {
-                var_r29 = lbl_803D50E4[fighter_id];
-            } else {
-                var_r29 = lbl_803D4FDC[fighter_id];
-            }
-        } else {
-            if (lbl_803D5060[fighter_id] != 0) {
-                var_r29 = lbl_803D5060[fighter_id];
-            } else {
-                var_r29 = lbl_803D4D74[fighter_id];
-            }
-        }
+        var_r29 = fn_801609E0(fighter_id);
     } else {
-        if (lbLang_IsSavedLanguageUS() != 0) {
-            var_r29 = lbl_803D4FDC[fighter_id];
-        } else {
-            var_r29 = lbl_803D4D74[fighter_id];
-        }
+        var_r29 = gm_80160980(fighter_id);
     }
 
     if (lbLang_IsSavedLanguageUS() != 0) {
