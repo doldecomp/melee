@@ -3418,16 +3418,24 @@ void hsd_803B24E4(s32* ctx, int channel, int file_no, void* work_buf)
     ctx[0] = (s32) work_buf;
 }
 
+inline HsdCmdEntry* hsd_803B2550_inline(u8* arg0, s32 arg1)
+{
+    return &((HsdCmdEntry*) (arg0 + 0x1210))[arg1];
+}
+
 int hsd_803B2550(s32* arg0, const char* arg1, void (*arg2)(int, int))
 {
+    s32 new_var;
     u8* base = hsd_804D1138;
     s32 chan = arg0[1];
+    s32 new_var3;
+    s32 new_var2;
     s32 retries;
     s32 result;
     s32 write_idx;
-
+    new_var2 = chan;
     for (retries = 0; retries < 10; retries++) {
-        result = CARDOpen(chan, (char*) arg1, (CARDFileInfo*) (arg0 + 3));
+        result = CARDOpen(new_var2, (char*) arg1, (CARDFileInfo*) (arg0 + 3));
         if (result != -1) {
             break;
         }
@@ -3446,9 +3454,11 @@ int hsd_803B2550(s32* arg0, const char* arg1, void (*arg2)(int, int))
             }
             result++;
         } while (result < 10);
-        write_idx = tmp;
+        write_idx = arg0[4];
+        retries = (new_var = (new_var3 = arg0[4]));
+        write_idx = retries;
         if (tmp < 0) {
-            return tmp;
+            return new_var;
         }
     }
 
@@ -3470,7 +3480,7 @@ int hsd_803B2550(s32* arg0, const char* arg1, void (*arg2)(int, int))
     }
 
     {
-        HsdCmdEntry* entry = &CMD_QUEUE(base)[retries];
+        HsdCmdEntry* entry = hsd_803B2550_inline(base, retries);
         s32 next = retries + 1;
         entry->type = 5;
         entry->f1 = (s32) arg0;

@@ -377,8 +377,8 @@ int lb_8001A594(char* filename, void* file_entries)
                 hsd_803B24E4(&lb_80432A68.unk_A8, lb_80432A68.chan, 0x2000,
                              lb_80432A68.lib_area);
                 if (open_result == 0) {
-                    hsd_result = hsd_803B2550(&lb_80432A68.unk_A8, filename,
-                                              fn_8001A0B0);
+                    hsd_result = hsd_803B2550_inline(&lb_80432A68.unk_A8,
+                                                     filename, fn_8001A0B0);
 
                     lb_80432A68.unk_34 = convert_hsdcard_error(hsd_result);
                     if (lb_80432A68.unk_34 == 0) {
