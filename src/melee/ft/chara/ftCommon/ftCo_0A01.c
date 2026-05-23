@@ -2141,8 +2141,6 @@ Item* ftCo_800A5F4C(Fighter* fp, ItemKind arg1)
     return closest_ip;
 }
 
-/// #ftCo_800A61D8
-
 static inline f32 ftCo_800A648C_inline0(Fighter* fp, Item* ip)
 {
     f32 dx;
@@ -2153,6 +2151,57 @@ static inline f32 ftCo_800A648C_inline0(Fighter* fp, Item* ip)
     dy = fp->cur_pos.y - ip->pos.y;
     dx = fp->cur_pos.x - ip->pos.x;
     return sqrtf(dx * dx + dy * dy);
+}
+
+Item* ftCo_800A61D8(Fighter* fp)
+{
+    HSD_GObj* cur;
+    Item* ip;
+    Item* closest;
+    f32 best;
+    f32 dist;
+    s32 relevant;
+    s32 prio;
+
+    if (fp == NULL) {
+        return NULL;
+    }
+    closest = NULL;
+    for (cur = HSD_GObj_Entities->items; cur != NULL; cur = cur->next) {
+        ip = GET_ITEM(cur);
+        if (Item_IsGrabbable((Item_GObj*) cur)) {
+            if (ip->kind == It_Kind_Heart) {
+                relevant = 1;
+            } else if (ip->kind == It_Kind_Tomato) {
+                relevant = 1;
+            } else if (ip->kind == It_Kind_Foods) {
+                relevant = 1;
+            } else {
+                relevant = 0;
+            }
+            if (relevant != 0) {
+                if (!inlineD0_it(fp, ip)) {
+                    if (ip->kind < 0x23) {
+                        prio = ftCo_803C5A68[ip->kind];
+                        if (prio >= fp->x1A88.x2C) {
+                            if (closest == NULL) {
+                                closest = ip;
+                                best = ftCo_800A648C_inline0(fp, ip);
+                            } else if (prio >=
+                                       ftCo_803C5A68[closest->kind]) {
+                                dist = ftCo_800A648C_inline0(fp, ip);
+                                if (best > dist) {
+                                    best = dist;
+                                    closest = ip;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return closest;
 }
 
 static inline bool ftCo_800A648C_inline1(Item* ip)
