@@ -1965,11 +1965,12 @@ s32 fn_803B26CC(CardState* state, s32 file_id, s32 seq_num, s32 version,
     s32 saved;
     s32 snap;
     CardBufEntry* entries = (CardBufEntry*) hsd_804D1138;
-    PAD_STACK(16);
+    PAD_STACK(24);
 
     state->x24 = hsd_803AC340(&state->x3B0);
     hsd_804D7998 = hsd_804D7984;
 
+    result = 0;
     for (i = 0; i < (state->x24 + state->x8 + 0x2F) / state->x8; i++) {
         buf[0] = 11;
         buf[1] = (s32) state;
