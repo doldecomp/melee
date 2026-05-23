@@ -5569,7 +5569,108 @@ void ftCo_800B1478(Fighter* fp)
     ftCo_800ADE48(fp);
 }
 
-/// #ftCo_800B17D0
+void ftCo_800B17D0(Fighter* fp)
+{
+    struct Fighter_x1A88_t* data = &fp->x1A88;
+    Vec3 sp28;
+    s32 cmd;
+    Fighter* target;
+    Fighter* attack_target;
+    s32 do_act;
+    s32 is_food;
+    Item_GObj* item_gobj;
+    ItemKind kind;
+
+    cmd = ftCo_800A229C(fp, &sp28);
+    if (cmd != 0) {
+        ftCo_800AE7AC(fp, &sp28, cmd);
+        return;
+    }
+    target = ftCo_800A5CE0(fp);
+    data->x44 = target;
+    if (target != NULL) {
+        data->xF8_b0 = true;
+        data->xF9_b2 = false;
+        data->xF9_b4 = false;
+        data->xF9_b3 = false;
+        data->xF9_b5 = false;
+        data->xF9_b6 = false;
+        data->xF9_b7 = false;
+        data->xF9_b1 = true;
+        ftCo_800A20A0_dontinline(fp);
+        if (data->x18 != data->x20 && data->x18 != data->x1C) {
+            data->x60 = 0;
+        }
+        if (data->x18 == 4) {
+            do_act = 0;
+        } else {
+            data->xFA_b2 = false;
+            do_act = 1;
+        }
+        if (do_act != 0) {
+            ftCo_800A80E4_dontinline(fp);
+        }
+        ftCo_800ADE48(fp);
+        return;
+    }
+    data->xF8_b0 = false;
+    is_food = 1;
+    data->xF9_b2 = true;
+    data->xF9_b4 = true;
+    data->xF9_b3 = true;
+    data->xF9_b5 = true;
+    data->xF9_b6 = true;
+    data->xF9_b7 = true;
+    data->xF9_b1 = false;
+    data->x44 = ftCo_800A4BEC(fp);
+    item_gobj = fp->item_gobj;
+    if (item_gobj != NULL) {
+        kind = GET_ITEM(item_gobj)->kind;
+        if (kind == It_Kind_Heart) {
+            is_food = 1;
+        } else if (kind == It_Kind_Tomato) {
+            is_food = 1;
+        } else if (kind == It_Kind_Foods) {
+            is_food = 1;
+        } else {
+            is_food = 0;
+        }
+        if (is_food == 0) {
+            data->x4C = NULL;
+        } else {
+            goto block_22;
+        }
+    } else {
+    block_22:
+        if (fp->x2168 != 0) {
+            data->x4C = NULL;
+        } else {
+            data->x4C = ftCo_800A5F4C(fp, It_Kind_L_Gun_Ray);
+        }
+    }
+    data->x50 = ftCo_800A648C(fp);
+    if (data->x18 != data->x20 && data->x18 != data->x1C) {
+        data->x60 = 0;
+    }
+    if (data->x18 == 4) {
+        do_act = 0;
+    } else {
+        data->xFA_b2 = false;
+        do_act = 1;
+    }
+    if (do_act != 0) {
+        if (data->x4C != NULL && fp->item_gobj == NULL) {
+            ftCo_800A866C(fp);
+        } else {
+            attack_target = ftCo_800A53DC(fp);
+            if (attack_target == NULL) {
+                attack_target = data->x44;
+            }
+            ftCo_800A75DC(fp, attack_target);
+        }
+    }
+    ftCo_800ADE48(fp);
+}
 
 /// #ftCo_800B1AB8
 
