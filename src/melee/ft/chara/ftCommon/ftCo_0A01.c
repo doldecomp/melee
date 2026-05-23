@@ -1459,7 +1459,71 @@ Fighter* ftCo_800A4A40(Fighter* fp)
 
 /// #ftCo_800A4BEC
 
-/// #ftCo_800A4E8C
+static inline bool ftCo_800A4E8C_inline0(Fighter* fp)
+{
+    if (fp->x2219_b1) {
+        return true;
+    }
+    if (fp->x2164 != 0) {
+        return true;
+    }
+    if (fp->x2168 != 0 && fp->x2338.x == 0) {
+        return true;
+    }
+    if (fp->x221F_b3) {
+        return true;
+    }
+    return false;
+}
+
+Fighter* ftCo_800A4E8C(Fighter* fp, Vec3* arg1)
+{
+    Fighter* cur_fp;
+    HSD_GObj* cur;
+    Fighter* closest_fp;
+    f32 closest;
+    f32 distance;
+    f32 dx;
+    f32 dy;
+    f32 dz;
+
+    PAD_STACK(0x18);
+
+    if (fp == NULL) {
+        return NULL;
+    }
+    closest_fp = NULL;
+    for (cur = HSD_GObj_Entities->fighters; cur != NULL; cur = cur->next) {
+        if (fp->gobj != cur) {
+            cur_fp = GET_FIGHTER(cur);
+            if (!inlineD0(fp, cur_fp) && !ftCo_IsAlly_dontinline(fp, cur_fp)) {
+                if (!ftCo_800A4E8C_inline0(cur_fp)) {
+                    if (!inlineD1(cur_fp)) {
+                        if (closest_fp == NULL) {
+                            closest_fp = cur_fp;
+                            dy = cur_fp->cur_pos.y - arg1->y;
+                            dx = cur_fp->cur_pos.x - arg1->x;
+                            dz = cur_fp->cur_pos.z - arg1->z;
+                            closest =
+                                sqrtf__Ff(dz * dz + (dx * dx + dy * dy));
+                        } else {
+                            dy = cur_fp->cur_pos.y - arg1->y;
+                            dx = cur_fp->cur_pos.x - arg1->x;
+                            dz = cur_fp->cur_pos.z - arg1->z;
+                            distance =
+                                sqrtf__Ff(dz * dz + (dx * dx + dy * dy));
+                            if (closest > distance) {
+                                closest = distance;
+                                closest_fp = cur_fp;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    return closest_fp;
+}
 
 /// Returns the closest enemy fighter
 Fighter* ftCo_800A50D4(Fighter* fp)
