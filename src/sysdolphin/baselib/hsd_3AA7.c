@@ -1446,7 +1446,7 @@ s32 fn_803B0E9C(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
     u32 sector_size;
     u8* file_data;
 
-    state->x24 = hsd_803AC340(state->x370);
+    state->x24 = hsd_803AC340(&state->x3B0);
     file_data = (u8*) arg2;
 
     if (arg3 == 0) {
