@@ -4394,7 +4394,81 @@ void ftCo_800B00F8(Fighter* fp)
     ftCo_800ADE48(fp);
 }
 
-/// #ftCo_800B04DC
+void ftCo_800B04DC(Fighter* fp)
+{
+    struct Fighter_x1A88_t* data = &fp->x1A88;
+    Item_GObj* item_gobj;
+    s32 is_food;
+    s32 do_target;
+    Fighter* target;
+    f32 dist;
+    Vec3 sp24;
+
+    is_food = 1;
+    data->xF8_b0 = true;
+    data->xF9_b2 = false;
+    data->xF9_b4 = false;
+    data->xF9_b3 = false;
+    data->xF9_b5 = false;
+    data->xF9_b6 = false;
+    data->xF9_b7 = false;
+    data->xF9_b1 = true;
+    data->x44 = ftCo_800A4BEC(fp);
+    item_gobj = fp->item_gobj;
+    if (item_gobj != NULL) {
+        switch (GET_ITEM(item_gobj)->kind) {
+        case It_Kind_Heart:
+            break;
+        case It_Kind_Tomato:
+            break;
+        case It_Kind_Foods:
+            break;
+        default:
+            is_food = 0;
+            break;
+        }
+        if (is_food == 0) {
+            data->x4C = NULL;
+        } else {
+            goto block_10;
+        }
+    } else {
+    block_10:
+        if (fp->x2168 != 0) {
+            data->x4C = NULL;
+        } else {
+            data->x4C = ftCo_800A61D8(fp);
+        }
+    }
+    data->x50 = ftCo_800A648C(fp);
+    if (data->x18 != data->x20 && data->x18 != data->x1C) {
+        data->x60 = 0;
+    }
+    if (data->x18 == 4) {
+        do_target = 0;
+    } else {
+        data->xFA_b2 = false;
+        do_target = 1;
+    }
+    if (do_target != 0) {
+        target = data->x44;
+        if (target != NULL && fp->ground_or_air != GA_Air) {
+            f32 dy = fp->cur_pos.y - target->cur_pos.y;
+            f32 dx = fp->cur_pos.x - target->cur_pos.x;
+            dist = sqrtf(dx * dx + dy * dy);
+            if (!(dist > 50.0) &&
+                ftCo_800A6700(fp, &target->cur_pos, &sp24) != 0 &&
+                data->x60 == 0)
+            {
+                data->x54.x = sp24.x;
+                data->x54.y = sp24.y;
+                data->x38 = 5.0f;
+                ftCo_800A1CC4(fp, ftCo_803C6594[stage_info.internal_stage_id]);
+            }
+        }
+    }
+    ftCo_800ADE48(fp);
+}
 
 static inline void inlineI0(Fighter* fp, struct Fighter_x1A88_t* data)
 {
