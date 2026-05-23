@@ -743,6 +743,11 @@ bool ftCo_800A1C44(Fighter* fp)
     return false;
 }
 
+static inline bool ftCo_800A1C44_dontinline(Fighter* fp)
+{
+    return ftCo_800A1C44(fp);
+}
+
 bool ftCo_800A1CA8(Fighter* fp)
 {
     return fp->x2168 ? true : false;
@@ -4648,7 +4653,7 @@ static inline bool inlineI1_alt(Fighter* fp)
 static inline void ftCo_800AF78C_inline0(Fighter* fp)
 {
     struct Fighter_x1A88_t* data = &fp->x1A88;
-    if (ftCo_800A1C44(fp)) {
+    if (ftCo_800A1C44_dontinline(fp)) {
         data->xF8_b6 = false;
     } else {
         if ((data->x44 != NULL) && (fp->ground_or_air == GA_Ground)) {
@@ -5889,7 +5894,95 @@ void ftCo_800B1EF0(Fighter* fp)
     ftCo_800ADE48(fp);
 }
 
-/// #ftCo_800B21C8
+void ftCo_800B21C8(Fighter* fp)
+{
+    struct Fighter_x1A88_t* data = &fp->x1A88;
+    Vec3 sp20;
+    s32 cmd;
+    Fighter* target;
+    Fighter* attack_target;
+    s32 do_act;
+    f32 dx;
+    f32 dy;
+
+    cmd = ftCo_800A229C(fp, &sp20);
+    if (cmd != 0) {
+        ftCo_800AE7AC(fp, &sp20, cmd);
+        return;
+    }
+    target = ftCo_800A5CE0(fp);
+    data->x44 = target;
+    if (target != NULL) {
+        data->xF8_b0 = true;
+        data->xF9_b2 = false;
+        data->xF9_b4 = false;
+        data->xF9_b3 = false;
+        data->xF9_b5 = false;
+        data->xF9_b6 = false;
+        data->xF9_b7 = false;
+        data->xF9_b1 = true;
+        ftCo_800A20A0_dontinline(fp);
+        if (data->x18 != data->x20 && data->x18 != data->x1C) {
+            data->x60 = 0;
+        }
+        if (data->x18 == 4) {
+            do_act = 0;
+        } else {
+            data->xFA_b2 = false;
+            do_act = 1;
+        }
+        if (do_act != 0) {
+            ftCo_800A80E4_dontinline(fp);
+        }
+        ftCo_800ADE48(fp);
+        return;
+    }
+    data->xF8_b0 = false;
+    data->xF9_b2 = true;
+    data->xF9_b4 = true;
+    data->xF9_b3 = true;
+    data->xF9_b5 = true;
+    data->xF9_b6 = true;
+    data->xF9_b7 = false;
+    data->xF9_b1 = false;
+    data->x44 = ftCo_800A4BEC(fp);
+    data->x50 = ftCo_800A648C(fp);
+    if (ftCo_800A1C44_dontinline(fp)) {
+        data->xF8_b6 = false;
+    } else {
+        target = data->x44;
+        if (target != NULL && fp->ground_or_air == GA_Ground) {
+            dy = fp->cur_pos.y - target->cur_pos.y;
+            dx = fp->cur_pos.x - target->cur_pos.x;
+            if (sqrtf__Ff(dx * dx + dy * dy) <
+                Fighter_804D64FC->x20[fp->kind])
+            {
+                data->xF8_b6 = true;
+            } else {
+                data->xF8_b6 = false;
+            }
+        } else {
+            data->xF8_b6 = false;
+        }
+    }
+    if (data->x18 != data->x20 && data->x18 != data->x1C) {
+        data->x60 = 0;
+    }
+    if (data->x18 == 4) {
+        do_act = 0;
+    } else {
+        data->xFA_b2 = false;
+        do_act = 1;
+    }
+    if (do_act != 0) {
+        attack_target = ftCo_800A53DC(fp);
+        if (attack_target == NULL) {
+            attack_target = data->x44;
+        }
+        ftCo_800A75DC(fp, attack_target);
+    }
+    ftCo_800ADE48(fp);
+}
 
 void ftCo_800B24B8(Fighter* fp)
 {
