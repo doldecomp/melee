@@ -18,7 +18,7 @@ Funcs:
 - [x] fn_803B0E9C
 - [x] fn_803ADF90
 - [x] fn_803AE7F8
-- [ ] fn_803B1338  SYSTEMIC: real fn is 3136B (inlines fn_803AE7F8/fn_803AF3F0/fn_803B0120 in the loop); ours is a 380B stub.
+- [x] fn_803B1338 (37%, was 7% stub; sync path, async TODO)
 - [x] fn_803AD16C (58%, was 15% stub)
 - [x] fn_803AF3F0 (48%, was 1.8% stub)
 - [x] fn_803B0120 (48%, was 2.9% stub)
