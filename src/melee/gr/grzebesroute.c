@@ -1,9 +1,15 @@
 #include "grzebesroute.h"
 
+#include "placeholder.h"
+
 #include <platform.h>
 
 #include "baselib/debug.h"
+
+#include "baselib/forward.h"
+
 #include "cm/camera.h"
+#include "dolphin/mtx.h"
 #include "ft/ftlib.h"
 #include "gr/grdisplay.h"
 #include "gr/ground.h"
@@ -87,29 +93,10 @@ struct {
     "%s:%d: couldn t get gobj(id=%d)\n",
 };
 
-char grZe_Route_803E5E64[] = "grzebesroute.c";
-
-SDATA char grZe_Route_804D4840[] = "gobj";
-SDATA char grZe_Route_804D4848[] = "0";
-
 grZebesRoute_ParamStore grZe_Route_804D6A60;
-
-const f32 grZe_Route_804DB918 = -50.0F;
-const f32 grZe_Route_804DB91C = 0.0F;
-const GXColor grZe_Route_804DB920 = { 0xFF, 0xFF, 0xCC, 0xFF };
-const GXColor grZe_Route_804DB924 = { 0xFD, 0xFD, 0xBF, 0xFF };
-const GXColor grZe_Route_804DB928 = { 0x00, 0x00, 0xF7, 0xFF };
-const f32 grZe_Route_804DB92C = 600.0F;
-const f32 grZe_Route_804DB930 = 1000.0F;
-const f32 grZe_Route_804DB934 = 400.0F;
-const f32 grZe_Route_804DB938 = 45.0F;
-const f32 grZe_Route_804DB93C = 0.99F;
-const f32 grZe_Route_804DB940 = 500.0F;
-const f32 grZe_Route_804DB944 = 0.03F;
 
 void grZebesRoute_8020B160(bool arg) {}
 
-/// #grZebesRoute_8020B164
 void grZebesRoute_8020B164(void)
 {
     grZe_Route_804D6A60.params = Ground_801C49F8();
@@ -169,7 +156,7 @@ HSD_GObj* grZebesRoute_8020B260(int gobj_id)
             HSD_GObj_SetupProc(gobj, callbacks->callback2, 4);
         }
     } else {
-        OSReport(grZe_Route_803E5E0C.fmt, grZe_Route_803E5E64, 0xC5, gobj_id);
+        OSReport(grZe_Route_803E5E0C.fmt, __FILE__, 0xC5, gobj_id);
     }
 
     return gobj;
@@ -230,10 +217,10 @@ void grZebesRoute_8020B42C(Ground_GObj* gobj)
     fighter = Ground_801C57A4();
     if (fighter != NULL) {
         ftLib_80086644(fighter, &pos);
-        if (pos.y < grZe_Route_804DB918) {
-            pos.y = grZe_Route_804DB918;
+        if (pos.y < -50.0f) {
+            pos.y = -50.0f;
         }
-        pos.x = grZe_Route_804DB91C;
+        pos.x = 0.0f;
         Ground_801C38BC(pos.x, pos.y);
     }
 
@@ -262,10 +249,24 @@ void fn_8020B4D8(Ground* gp, s32 arg1, CollData* coll, s32 arg3,
     }
 }
 
-/// #grZebesRoute_8020B548
+inline HSD_LObj* grZebesRoute_8020B548_inline1(HSD_GObj* light_gobj)
+{
+    return (HSD_LObj*) light_gobj->hsd_obj;
+}
+
+inline HSD_LObj* grZebesRoute_8020B548_inline2(HSD_LObj* arg0)
+{
+    return HSD_LObjGetNext(arg0);
+}
+
+inline int grZebesRoute_8020B548_inline3(HSD_LObj* lobj)
+{
+    return lobj->flags & LOBJ_TYPE_MASK;
+}
+
 void grZebesRoute_8020B548(void)
 {
-    HSD_GObj* light_gobj = HSD_GObjGXLinkHead[4];
+    HSD_GObj* gobj = HSD_GObjGXLinkHead[4];
     HSD_LObj* first_lobj;
     HSD_LObj* lobj;
     f32 scale;
@@ -275,34 +276,32 @@ void grZebesRoute_8020B548(void)
     f32 split_y;
     s32 i;
 
-    if (light_gobj == NULL) {
-        __assert(grZe_Route_803E5E64, 0x169U, grZe_Route_804D4840);
-    }
+    HSD_ASSERT(0x169, gobj);
 
-    first_lobj = light_gobj->hsd_obj;
+    first_lobj = grZebesRoute_8020B548_inline1(gobj);
     scale = Ground_801C0498();
-    lobj = HSD_LObjGetNext(first_lobj);
-    spot_ref_dist = grZe_Route_804DB92C * scale;
-    upper_ref_dist = grZe_Route_804DB930 * scale;
-    lower_ref_dist = grZe_Route_804DB934 * scale;
-    split_y = grZe_Route_804DB940;
+    lobj = grZebesRoute_8020B548_inline2(first_lobj);
+    spot_ref_dist = 600.0f * scale;
+    upper_ref_dist = 1000.0f * scale;
+    lower_ref_dist = 400.0f * scale;
+    split_y = 500.0f;
 
-    i = 0;
-    while (i < 3 && lobj != NULL) {
+    for (i = 0; i < 3 && lobj != NULL;
+         i++, lobj = grZebesRoute_8020B548_inline2(lobj))
+    {
         Vec3 current_pos;
         u32 light_type;
 
         if (!HSD_LObjGetPosition(lobj, &current_pos)) {
-            __assert(grZe_Route_803E5E64, 0x174U, grZe_Route_804D4848);
+            HSD_ASSERT(0x174, 0);
         }
 
-        light_type = lobj->flags & LOBJ_TYPE_MASK;
+        light_type = grZebesRoute_8020B548_inline3(lobj);
         if (light_type == LOBJ_SPOT) {
-            GXColor color;
+            GXColor color = { 0xFF, 0xFF, 0xCC, 0xFF };
             Vec3 pos = grZe_Route_803B83A0.spot_pos;
             Vec3 interest = grZe_Route_803B83A0.spot_interest;
 
-            color = grZe_Route_804DB920;
             HSD_LObjSetColor(lobj, color);
             pos.x *= scale;
             pos.y *= scale;
@@ -312,35 +311,29 @@ void grZebesRoute_8020B548(void)
             interest.y *= scale;
             interest.z *= scale;
             HSD_LObjSetInterest(lobj, &interest);
-            HSD_LObjSetSpot(lobj, grZe_Route_804DB938, 3);
-            HSD_LObjSetDistAttn(lobj, spot_ref_dist, grZe_Route_804DB93C, 3);
+            HSD_LObjSetSpot(lobj, 45.0f, 3);
+            HSD_LObjSetDistAttn(lobj, spot_ref_dist, 0.99f, 3);
         } else if (light_type == LOBJ_POINT && current_pos.y > split_y) {
-            GXColor color;
+            GXColor color = { 0xFD, 0xFD, 0xBF, 0xFF };
             Vec3 pos = grZe_Route_803B83A0.upper_point_pos;
 
-            color = grZe_Route_804DB924;
             HSD_LObjSetColor(lobj, color);
             pos.x *= scale;
             pos.y *= scale;
             pos.z *= scale;
             HSD_LObjSetPosition(lobj, &pos);
-            HSD_LObjSetDistAttn(lobj, upper_ref_dist, grZe_Route_804DB944, 3);
+            HSD_LObjSetDistAttn(lobj, upper_ref_dist, 0.03f, 3);
         } else if (light_type == LOBJ_POINT && current_pos.y < split_y) {
-            GXColor color;
+            GXColor color = { 0x00, 0x00, 0xF7, 0xFF };
             Vec3 pos = grZe_Route_803B83A0.lower_point_pos;
-            int pad[3];
 
-            color = grZe_Route_804DB928;
             HSD_LObjSetColor(lobj, color);
             pos.x *= scale;
             pos.y *= scale;
             pos.z *= scale;
             HSD_LObjSetPosition(lobj, &pos);
-            HSD_LObjSetDistAttn(lobj, lower_ref_dist, grZe_Route_804DB944, 3);
+            HSD_LObjSetDistAttn(lobj, lower_ref_dist, 0.03f, 3);
         }
-
-        i++;
-        lobj = HSD_LObjGetNext(lobj);
     }
 }
 
