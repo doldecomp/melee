@@ -673,7 +673,37 @@ void ftCo_800C7C60(Fighter_GObj* gobj, int damage_amount)
 
 bool ftCo_800C7CA0(Fighter_GObj* gobj)
 {
-    NOT_IMPLEMENTED;
+    Vec3 ef_offset;
+    Fighter* fp = GET_FIGHTER(gobj);
+    f32 threshold = p_ftCommonData->x1B0;
+    f32 vel_x = fp->x8c_kb_vel.x;
+    CollData* coll = &fp->coll_data;
+    PAD_STACK(8);
+    if (vel_x < -threshold && (coll->env_flags & Collide_RightWallHug) &&
+        fp->mv.co.downreflect.x4 != 1)
+    {
+        ef_offset.x = coll->ecb.left.x;
+        ef_offset.y = coll->ecb.left.y;
+        ef_offset.z = 0.0F;
+        ftKb_SpecialN_800F1F1C(gobj, &ef_offset);
+        fn_800C7DC4(gobj, ftCo_MS_DownReflect, &coll->right_facing_wall.normal,
+                    &ef_offset);
+        fp->mv.co.downreflect.x4 = 1;
+        return true;
+    }
+    if (vel_x > threshold && (coll->env_flags & Collide_LeftWallHug) &&
+        fp->mv.co.downreflect.x4 != 2)
+    {
+        ef_offset.x = coll->ecb.right.x;
+        ef_offset.y = coll->ecb.right.y;
+        ef_offset.z = 0.0F;
+        ftKb_SpecialN_800F1F1C(gobj, &ef_offset);
+        fn_800C7DC4(gobj, ftCo_MS_DownReflect, &coll->left_facing_wall.normal,
+                    &ef_offset);
+        fp->mv.co.downreflect.x4 = 2;
+        return true;
+    }
+    return false;
 }
 
 void ftCo_DownReflect_Anim(Fighter_GObj* gobj)

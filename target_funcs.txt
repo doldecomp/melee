@@ -2,7 +2,7 @@ File: src/melee/ft/ft_0C31.c
 Funcs:
 - [x] ftCo_800C739C
 - [x] ftCo_800C7434
-- [ ] ftCo_800C7CA0
+- [x] ftCo_800C7CA0
 - [ ] ftCo_800C7B0C
 - [ ] ftCo_800C78B0
 - [ ] ftCo_800C7590
