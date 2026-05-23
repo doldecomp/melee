@@ -935,78 +935,43 @@ bool ftCo_800A21FC(Fighter* fp)
 static inline bool inlineL0(mp_UnkStruct0* arg0)
 {
     Item_GObj* cur;
-    s32 temp_cr0_eq;
-    s32 var_r0;
     Item* cur_ip;
-    cur = HSD_GObj_Entities->items;
-    goto loop_8;
-block_3:
-    cur_ip = GET_ITEM(cur);
-    if (it_8026C1B4(cur) == 0) {
-        goto block_7;
+
+    for (cur = HSD_GObj_Entities->items; cur != NULL; cur = cur->next) {
+        cur_ip = GET_ITEM(cur);
+        if (it_8026C1B4(cur) == 0) {
+            continue;
+        }
+        if (!ftCo_800A5944(cur_ip)) {
+            continue;
+        }
+        if (arg0 == mpIsland_8005AB54(cur_ip->x378_itemColl.floor.index)) {
+            return true;
+        }
     }
-    if (!ftCo_800A5944(cur_ip)) {
-        goto block_7;
-    }
-    if (arg0 != mpIsland_8005AB54(cur_ip->x378_itemColl.floor.index)) {
-        goto block_7;
-    }
-    return 1;
-block_7:
-    cur = cur->next;
-loop_8:
-    if (cur != NULL) {
-        goto block_3;
-    }
-    if (stage_info.internal_stage_id == STORY) {
-        goto block_15;
-    }
-    if (stage_info.internal_stage_id >= 0xA) {
-        goto block_13;
-    }
-    if (stage_info.internal_stage_id == ZEBES) {
-        goto block_16;
-    }
-    goto block_37;
-block_13:
-    temp_cr0_eq = stage_info.internal_stage_id == ONETT;
-    if (temp_cr0_eq != 0) {
-        goto block_21;
-        goto block_37;
-    block_15:
+
+    switch (stage_info.internal_stage_id) {
+    case STORY:
         return mpIsland_8005AC8C(arg0);
-    block_16:
+    case ZEBES:
         if (ftCo_800A1F98(0x5A, arg0->x14.y) != 0) {
-            return 1;
+            return true;
         }
         if (ftCo_800A1F98(0x5A, arg0->x8.y) != 0) {
-            return 1;
+            return true;
         }
-        return 0;
+        return false;
+    case ONETT:
+        return arg0->x14.y <= 5.0 && Ground_801C5794() != 0;
+    default:
+        return false;
     }
-block_21:
-    if (temp_cr0_eq == 0) {
-        return 0;
-    }
-    if (arg0->x14.y <= 5.0 || Ground_801C5794() == 0) {
-        return 0;
-    }
-    return 1;
-block_37:
-    return 0;
 }
 
 static inline bool inlineL1(mp_UnkStruct0* arg0)
 {
-    if (stage_info.internal_stage_id != ONETT) {
-        return false;
-    }
-    if (!(arg0->x8.y <= 5.0)) {
-        if (Ground_801C5794() != 0) {
-            return true;
-        }
-    }
-    return false;
+    return stage_info.internal_stage_id == ONETT &&
+           arg0->x8.y <= 5.0 && Ground_801C5794() != 0;
 }
 
 bool ftCo_800A2718(mp_UnkStruct0* arg0)
@@ -1015,13 +980,7 @@ bool ftCo_800A2718(mp_UnkStruct0* arg0)
     if (arg0 == NULL) {
         return false;
     }
-    if (!inlineL0(arg0)) {
-        if (inlineL1(arg0)) {
-            return true;
-        }
-        return false;
-    }
-    return false;
+    return inlineL0(arg0) || inlineL1(arg0);
 }
 
 bool ftCo_800A28D0(Fighter* fp, float arg1)
