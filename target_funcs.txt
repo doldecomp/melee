@@ -6,4 +6,4 @@ Funcs:
 - [x] ftCo_800C7B0C
 - [x] ftCo_800C78B0
 - [x] ftCo_800C7590
-- [ ] fn_800C7DC4
+- [x] fn_800C7DC4
