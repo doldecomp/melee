@@ -2091,7 +2091,60 @@ Item* ftCo_800A5F4C(Fighter* fp, ItemKind arg1)
 
 /// #ftCo_800A61D8
 
-/// #ftCo_800A648C
+static inline f32 ftCo_800A648C_inline0(Fighter* fp, Item* ip)
+{
+    f32 dx;
+    f32 dy;
+    if (ip == NULL) {
+        return 10000.0f;
+    }
+    dy = fp->cur_pos.y - ip->pos.y;
+    dx = fp->cur_pos.x - ip->pos.x;
+    return sqrtf(dx * dx + dy * dy);
+}
+
+static inline bool ftCo_800A648C_inline1(Item* ip)
+{
+    if (ip->kind >= 0x2B && ip->kind < 0x2F) {
+        return true;
+    }
+    if (ip->kind == 0xD3 || (u32) (ip->kind - 0xD4) <= 1 || ip->kind == 0xD9) {
+        return true;
+    }
+    return false;
+}
+
+int ftCo_800A648C(Fighter* fp)
+{
+    HSD_GObj* cur;
+    Item* ip;
+    Item* closest;
+    f32 best;
+    f32 dist;
+
+    if (fp == NULL) {
+        return 0;
+    }
+    closest = NULL;
+    for (cur = HSD_GObj_Entities->items; cur != NULL; cur = cur->next) {
+        ip = GET_ITEM(cur);
+        if (ftCo_800A648C_inline1(ip)) {
+            if (!inlineD0_it(fp, ip)) {
+                if (closest == NULL) {
+                    closest = ip;
+                    best = ftCo_800A648C_inline0(fp, ip);
+                } else {
+                    dist = ftCo_800A648C_inline0(fp, ip);
+                    if (best > dist) {
+                        best = dist;
+                        closest = ip;
+                    }
+                }
+            }
+        }
+    }
+    return (int) closest;
+}
 
 /// #ftCo_800A6700
 

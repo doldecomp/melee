@@ -7,7 +7,7 @@ Funcs:
 - [x] ftCo_800A4E8C
 - [x] ftCo_800A4768
 - [x] ftCo_800AEA8C
-- [ ] ftCo_800A648C
+- [x] ftCo_800A648C
 - [ ] ftCo_800B04DC
 - [ ] ftCo_800A6A98
 - [ ] ftCo_800A6D2C
