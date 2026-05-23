@@ -20,6 +20,6 @@ Funcs:
 - [x] fn_803AE7F8
 - [ ] fn_803B1338  SYSTEMIC: real fn is 3136B (inlines fn_803AE7F8/fn_803AF3F0/fn_803B0120 in the loop); ours is a 380B stub.
 - [ ] fn_803AD16C  SYSTEMIC: real fn is 3296B (inlines fn_803AC7DC/fn_803AC634 in the loops); ours is a 588B stub.
-- [ ] fn_803AF3F0  SYSTEMIC: real fn is 3376B (inlines fn_803AE7F8 body + wrapper); ours is a 76B stub. Needs full impl; match capped by fn_803AE7F8.
+- [x] fn_803AF3F0 (48%, was 1.8% stub)
 - [ ] fn_803B0120  SYSTEMIC: real fn is 3452B (inlines fn_803AF3F0 body + wrapper); ours is a 120B stub.
 - [ ] hsd_803AAA48  SYSTEMIC: real fn is 5920B (inlines fn_803AA790 dispatcher tree); ours is a 116B stub.
