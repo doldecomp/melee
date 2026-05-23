@@ -32,7 +32,7 @@ Funcs:
 
 File: src/melee/gm/gmopening.c
 Funcs:
-- [ ] gm_801A9DD0
+- [x] gm_801A9DD0
 
 File: src/melee/gm/gmregclear.c
 Funcs:
