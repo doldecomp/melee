@@ -900,8 +900,8 @@ void fn_8003CC84(int player)
                 }
                 {
                     temp_r5 = temp_ret / 100;
-                    temp_r3_3 = temp_ret % 100 / 10;
-                    temp_r0 = temp_ret % 100 % 10;
+                    temp_r3_3 = (temp_ret - (temp_r5 * 100)) / 10;
+                    temp_r0 = (temp_ret - (temp_r5 * 100)) - (temp_r3_3 * 10);
                 }
                 if ((temp_r5 != 0 && temp_r5 == temp_r3_3 &&
                      temp_r3_3 == temp_r0) ||
