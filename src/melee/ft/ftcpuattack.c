@@ -1277,7 +1277,454 @@ int ftCo_800B7638(Fighter* fp)
     return 0;
 }
 
-/// #ftCo_800B77E8
+void ftCo_800B77E8(Fighter* fp)
+{
+    struct Fighter_x1A88_t* cpu = &fp->x1A88;
+    u32 f1;
+    int L1;
+    Vec3 n1;
+    Vec3 p1;
+    u32 f2;
+    int L2;
+    Vec3 n2;
+    Vec3 p2;
+    u32 f3;
+    int L3;
+    Vec3 n3;
+    Vec3 p3;
+    u32 f4;
+    int L4;
+    Vec3 n4;
+    Vec3 p4;
+    u32 f5;
+    int L5;
+    Vec3 n5;
+    Vec3 p5;
+    u32 f6;
+    int L6;
+    Vec3 n6;
+    Vec3 p6;
+    u32 f7;
+    int L7;
+    Vec3 n7;
+    Vec3 p7;
+    u32 f8;
+    int L8;
+    Vec3 n8;
+    Vec3 p8;
+    u32 f9;
+    int L9;
+    Vec3 n9;
+    Vec3 p9;
+    u32 f10;
+    int L10;
+    Vec3 n10;
+    Vec3 p10;
+    Fighter* temp_r30 = cpu->x44;
+    Fighter* target;
+    int var_r0;
+    int charge;
+    f32 x;
+    f32 y;
+
+    if ((cpu->xC == 7 || ftCo_800A1C44(fp)) && cpu->xEC < 8U) {
+        cpu->xCC_array[cpu->xEC] = 0x34;
+        cpu->xEC++;
+    }
+    switch (fp->kind) {
+    case FTKIND_MARIO:
+        target = cpu->x44;
+        if (target != NULL &&
+            mpCheckAll(&p1, &L1, &f1, &n1, -1, -1, fp->cur_pos.x,
+                       fp->cur_pos.y, target->cur_pos.x, target->cur_pos.y))
+        {
+            var_r0 = 1;
+        } else if (fp->facing_dir > 0.0) {
+            y = fp->cur_pos.y;
+            x = fp->cur_pos.x + 22.0f;
+            if (ftCo_800A0FB0(&p1, &L1, &f1, &n1, -1, -1, -1, x, 5.0 + y, x,
+                              y - 1000.0, 0.0f) == 0)
+            {
+                var_r0 = 1;
+            } else {
+                var_r0 = 0;
+            }
+        } else {
+            y = fp->cur_pos.y;
+            x = fp->cur_pos.x - 22.0f;
+            if (ftCo_800A0FB0(&p1, &L1, &f1, &n1, -1, -1, -1, x, 5.0 + y, x,
+                              y - 1000.0, 0.0f) == 0)
+            {
+                var_r0 = 1;
+            } else {
+                var_r0 = 0;
+            }
+        }
+        if (var_r0 != 0 && cpu->xEC < 8U) {
+            cpu->xCC_array[cpu->xEC] = 0x1F;
+            cpu->xEC++;
+            return;
+        }
+        break;
+    case FTKIND_FOX:
+    case FTKIND_FALCO:
+        target = cpu->x44;
+        if (target != NULL &&
+            mpCheckAll(&p2, &L2, &f2, &n2, -1, -1, fp->cur_pos.x,
+                       fp->cur_pos.y, target->cur_pos.x, target->cur_pos.y))
+        {
+            var_r0 = 1;
+        } else if (fp->facing_dir > 0.0) {
+            y = fp->cur_pos.y;
+            x = fp->cur_pos.x + 62.0f;
+            if (ftCo_800A0FB0(&p2, &L2, &f2, &n2, -1, -1, -1, x, 5.0 + y, x,
+                              y - 1000.0, 0.0f) == 0)
+            {
+                var_r0 = 1;
+            } else {
+                var_r0 = 0;
+            }
+        } else {
+            y = fp->cur_pos.y;
+            x = fp->cur_pos.x - 62.0f;
+            if (ftCo_800A0FB0(&p2, &L2, &f2, &n2, -1, -1, -1, x, 5.0 + y, x,
+                              y - 1000.0, 0.0f) == 0)
+            {
+                var_r0 = 1;
+            } else {
+                var_r0 = 0;
+            }
+        }
+        if (var_r0 != 0 && cpu->xEC < 8U) {
+            cpu->xCC_array[cpu->xEC] = 0x1B;
+            cpu->xEC++;
+            return;
+        }
+        break;
+    case FTKIND_CAPTAIN:
+    case FTKIND_GANON:
+        target = cpu->x44;
+        if (target != NULL &&
+            mpCheckAll(&p3, &L3, &f3, &n3, -1, -1, fp->cur_pos.x,
+                       fp->cur_pos.y, target->cur_pos.x, target->cur_pos.y))
+        {
+            var_r0 = 1;
+        } else if (fp->facing_dir > 0.0) {
+            y = fp->cur_pos.y;
+            x = fp->cur_pos.x + 102.0f;
+            if (ftCo_800A0FB0(&p3, &L3, &f3, &n3, -1, -1, -1, x, 5.0 + y, x,
+                              y - 1000.0, 0.0f) == 0)
+            {
+                var_r0 = 1;
+            } else {
+                var_r0 = 0;
+            }
+        } else {
+            y = fp->cur_pos.y;
+            x = fp->cur_pos.x - 102.0f;
+            if (ftCo_800A0FB0(&p3, &L3, &f3, &n3, -1, -1, -1, x, 5.0 + y, x,
+                              y - 1000.0, 0.0f) == 0)
+            {
+                var_r0 = 1;
+            } else {
+                var_r0 = 0;
+            }
+        }
+        if (var_r0 != 0 && cpu->xEC < 8U) {
+            cpu->xCC_array[cpu->xEC] = 0x26;
+            cpu->xEC++;
+        }
+        target = cpu->x44;
+        if (target != NULL &&
+            mpCheckAll(&p4, &L4, &f4, &n4, -1, -1, fp->cur_pos.x,
+                       fp->cur_pos.y, target->cur_pos.x, target->cur_pos.y))
+        {
+            var_r0 = 1;
+        } else if (fp->facing_dir > 0.0) {
+            y = fp->cur_pos.y;
+            x = fp->cur_pos.x + 58.0f;
+            if (ftCo_800A0FB0(&p4, &L4, &f4, &n4, -1, -1, -1, x, 5.0 + y, x,
+                              y - 1000.0, 0.0f) == 0)
+            {
+                var_r0 = 1;
+            } else {
+                var_r0 = 0;
+            }
+        } else {
+            y = fp->cur_pos.y;
+            x = fp->cur_pos.x - 58.0f;
+            if (ftCo_800A0FB0(&p4, &L4, &f4, &n4, -1, -1, -1, x, 5.0 + y, x,
+                              y - 1000.0, 0.0f) == 0)
+            {
+                var_r0 = 1;
+            } else {
+                var_r0 = 0;
+            }
+        }
+        if (var_r0 != 0) {
+            if (cpu->xEC < 8U) {
+                cpu->xCC_array[cpu->xEC] = 0x1B;
+                cpu->xEC++;
+            }
+            if (cpu->xEC < 8U) {
+                cpu->xCC_array[cpu->xEC] = 0x37;
+                cpu->xEC++;
+            }
+            if (cpu->xEC < 8U) {
+                cpu->xCC_array[cpu->xEC] = 0x38;
+                cpu->xEC++;
+                return;
+            }
+        }
+        break;
+    case FTKIND_PIKACHU:
+    case FTKIND_PICHU:
+        target = cpu->x44;
+        if (target != NULL &&
+            mpCheckAll(&p5, &L5, &f5, &n5, -1, -1, fp->cur_pos.x,
+                       fp->cur_pos.y, target->cur_pos.x, target->cur_pos.y))
+        {
+            var_r0 = 1;
+        } else if (fp->facing_dir > 0.0) {
+            y = fp->cur_pos.y;
+            x = fp->cur_pos.x + 57.0f;
+            if (ftCo_800A0FB0(&p5, &L5, &f5, &n5, -1, -1, -1, x, 5.0 + y, x,
+                              y - 1000.0, 0.0f) == 0)
+            {
+                var_r0 = 1;
+            } else {
+                var_r0 = 0;
+            }
+        } else {
+            y = fp->cur_pos.y;
+            x = fp->cur_pos.x - 57.0f;
+            if (ftCo_800A0FB0(&p5, &L5, &f5, &n5, -1, -1, -1, x, 5.0 + y, x,
+                              y - 1000.0, 0.0f) == 0)
+            {
+                var_r0 = 1;
+            } else {
+                var_r0 = 0;
+            }
+        }
+        if (var_r0 != 0 && cpu->xEC < 8U) {
+            cpu->xCC_array[cpu->xEC] = 0x1B;
+            cpu->xEC++;
+            return;
+        }
+        break;
+    case FTKIND_KOOPA:
+        if (fp->ground_or_air == GA_Ground) {
+            target = cpu->x44;
+            if (target != NULL &&
+                mpCheckAll(&p6, &L6, &f6, &n6, -1, -1, fp->cur_pos.x,
+                           fp->cur_pos.y, target->cur_pos.x, target->cur_pos.y))
+            {
+                var_r0 = 1;
+            } else if (fp->facing_dir > 0.0) {
+                y = fp->cur_pos.y;
+                x = fp->cur_pos.x + 27.0f;
+                if (ftCo_800A0FB0(&p6, &L6, &f6, &n6, -1, -1, -1, x, 5.0 + y, x,
+                                  y - 1000.0, 0.0f) == 0)
+                {
+                    var_r0 = 1;
+                } else {
+                    var_r0 = 0;
+                }
+            } else {
+                y = fp->cur_pos.y;
+                x = fp->cur_pos.x - 27.0f;
+                if (ftCo_800A0FB0(&p6, &L6, &f6, &n6, -1, -1, -1, x, 5.0 + y, x,
+                                  y - 1000.0, 0.0f) == 0)
+                {
+                    var_r0 = 1;
+                } else {
+                    var_r0 = 0;
+                }
+            }
+            if (var_r0 != 0 && cpu->xEC < 8U) {
+                cpu->xCC_array[cpu->xEC] = 0x26;
+                cpu->xEC++;
+                return;
+            }
+        } else if (!cpu->xFA_b2 && cpu->xEC < 8U) {
+            cpu->xCC_array[cpu->xEC] = 0x26;
+            cpu->xEC++;
+            return;
+        }
+        break;
+    case FTKIND_GKOOPS:
+        if (fp->ground_or_air == GA_Ground) {
+            target = cpu->x44;
+            if (target != NULL &&
+                mpCheckAll(&p7, &L7, &f7, &n7, -1, -1, fp->cur_pos.x,
+                           fp->cur_pos.y, target->cur_pos.x, target->cur_pos.y))
+            {
+                var_r0 = 1;
+            } else if (fp->facing_dir > 0.0) {
+                y = fp->cur_pos.y;
+                x = fp->cur_pos.x + 53.0f;
+                if (ftCo_800A0FB0(&p7, &L7, &f7, &n7, -1, -1, -1, x, 5.0 + y, x,
+                                  y - 1000.0, 0.0f) == 0)
+                {
+                    var_r0 = 1;
+                } else {
+                    var_r0 = 0;
+                }
+            } else {
+                y = fp->cur_pos.y;
+                x = fp->cur_pos.x - 53.0f;
+                if (ftCo_800A0FB0(&p7, &L7, &f7, &n7, -1, -1, -1, x, 5.0 + y, x,
+                                  y - 1000.0, 0.0f) == 0)
+                {
+                    var_r0 = 1;
+                } else {
+                    var_r0 = 0;
+                }
+            }
+            if (var_r0 != 0 && cpu->xEC < 8U) {
+                cpu->xCC_array[cpu->xEC] = 0x26;
+                cpu->xEC++;
+                return;
+            }
+        } else if (!cpu->xFA_b2 && cpu->xEC < 8U) {
+            cpu->xCC_array[cpu->xEC] = 0x26;
+            cpu->xEC++;
+            return;
+        }
+        break;
+    case FTKIND_YOSHI:
+        if (fp->ground_or_air == GA_Ground) {
+            target = cpu->x44;
+            if (target != NULL &&
+                mpCheckAll(&p8, &L8, &f8, &n8, -1, -1, fp->cur_pos.x,
+                           fp->cur_pos.y, target->cur_pos.x, target->cur_pos.y))
+            {
+                var_r0 = 1;
+            } else if (fp->facing_dir > 0.0) {
+                y = fp->cur_pos.y;
+                x = fp->cur_pos.x + 16.0f;
+                if (ftCo_800A0FB0(&p8, &L8, &f8, &n8, -1, -1, -1, x, 5.0 + y, x,
+                                  y - 1000.0, 0.0f) == 0)
+                {
+                    var_r0 = 1;
+                } else {
+                    var_r0 = 0;
+                }
+            } else {
+                y = fp->cur_pos.y;
+                x = fp->cur_pos.x - 16.0f;
+                if (ftCo_800A0FB0(&p8, &L8, &f8, &n8, -1, -1, -1, x, 5.0 + y, x,
+                                  y - 1000.0, 0.0f) == 0)
+                {
+                    var_r0 = 1;
+                } else {
+                    var_r0 = 0;
+                }
+            }
+            if (var_r0 != 0 && cpu->xEC < 8U) {
+                cpu->xCC_array[cpu->xEC] = 0x26;
+                cpu->xEC++;
+                return;
+            }
+        } else if (!cpu->xFA_b2 && cpu->xEC < 8U) {
+            cpu->xCC_array[cpu->xEC] = 0x26;
+            cpu->xEC++;
+            return;
+        }
+        break;
+    case FTKIND_LUIGI:
+        target = cpu->x44;
+        if (target != NULL &&
+            mpCheckAll(&p9, &L9, &f9, &n9, -1, -1, fp->cur_pos.x,
+                       fp->cur_pos.y, target->cur_pos.x, target->cur_pos.y))
+        {
+            var_r0 = 1;
+        } else if (fp->facing_dir > 0.0) {
+            y = fp->cur_pos.y;
+            x = fp->cur_pos.x + 60.0f;
+            if (ftCo_800A0FB0(&p9, &L9, &f9, &n9, -1, -1, -1, x, 5.0 + y, x,
+                              y - 1000.0, 0.0f) == 0)
+            {
+                var_r0 = 1;
+            } else {
+                var_r0 = 0;
+            }
+        } else {
+            y = fp->cur_pos.y;
+            x = fp->cur_pos.x - 60.0f;
+            if (ftCo_800A0FB0(&p9, &L9, &f9, &n9, -1, -1, -1, x, 5.0 + y, x,
+                              y - 1000.0, 0.0f) == 0)
+            {
+                var_r0 = 1;
+            } else {
+                var_r0 = 0;
+            }
+        }
+        if (var_r0 != 0 && cpu->xEC < 8U) {
+            cpu->xCC_array[cpu->xEC] = 0x26;
+            cpu->xEC++;
+            return;
+        }
+        break;
+    case FTKIND_PEACH:
+        target = cpu->x44;
+        if (target != NULL &&
+            mpCheckAll(&p10, &L10, &f10, &n10, -1, -1, fp->cur_pos.x,
+                       fp->cur_pos.y, target->cur_pos.x, target->cur_pos.y))
+        {
+            var_r0 = 1;
+        } else if (fp->facing_dir > 0.0) {
+            y = fp->cur_pos.y;
+            x = fp->cur_pos.x + 32.0f;
+            if (ftCo_800A0FB0(&p10, &L10, &f10, &n10, -1, -1, -1, x, 5.0 + y, x,
+                              y - 1000.0, 0.0f) == 0)
+            {
+                var_r0 = 1;
+            } else {
+                var_r0 = 0;
+            }
+        } else {
+            y = fp->cur_pos.y;
+            x = fp->cur_pos.x - 32.0f;
+            if (ftCo_800A0FB0(&p10, &L10, &f10, &n10, -1, -1, -1, x, 5.0 + y, x,
+                              y - 1000.0, 0.0f) == 0)
+            {
+                var_r0 = 1;
+            } else {
+                var_r0 = 0;
+            }
+        }
+        if (var_r0 != 0 && cpu->xEC < 8U) {
+            cpu->xCC_array[cpu->xEC] = 0x26;
+            cpu->xEC++;
+            return;
+        }
+        break;
+    case FTKIND_KIRBY:
+        if (fp->ground_or_air == GA_Air && !cpu->xFA_b2 && cpu->xEC < 8U) {
+            cpu->xCC_array[cpu->xEC] = 0x26;
+            cpu->xEC++;
+        }
+        charge = fp->fv.gw.x2238_panicCharge;
+        if (charge == 3 || charge == 0xD || charge == 0x10) {
+            if (cpu->xEC < 8U) {
+                cpu->xCC_array[cpu->xEC] = 0x11;
+                cpu->xEC++;
+                return;
+            }
+        } else {
+            if (cpu->xEC < 8U) {
+                cpu->xCC_array[cpu->xEC] = 0x12;
+                cpu->xEC++;
+            }
+            if (fp->x34_scale.y < temp_r30->x34_scale.y && cpu->xEC < 8U) {
+                cpu->xCC_array[cpu->xEC] = 0x11;
+                cpu->xEC++;
+            }
+        }
+        break;
+    }
+}
 
 bool ftCo_800B885C(Fighter* fp)
 {

@@ -5,4 +5,4 @@ Funcs:
 - [x] ftCo_800B5AB0
 - [x] ftCo_800B4AB0
 - [x] ftCo_800B52AC
-- [ ] ftCo_800B77E8
+- [x] ftCo_800B77E8
