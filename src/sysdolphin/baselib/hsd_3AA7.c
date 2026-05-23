@@ -1137,7 +1137,6 @@ s32 fn_803ACC0C(CardState* state, s32 block_idx, s32 file_id, s32 seq_num,
     s32 offset;
     s32 result;
     u8* data;
-    PAD_STACK(8);
 
     if (data_size == 0) {
         return 0;
@@ -3496,7 +3495,7 @@ s32 hsd_803B2674(CardState* state)
 {
     s32 blocks;
 
-    state->x24 = hsd_803AC340((u8*) state + 0x3B0);
+    state->x24 = hsd_803AC340(&state->x3B0);
 
     blocks = (0x2F + state->x24 + state->x8) / state->x8;
     blocks += fn_803AC7DC(state);
