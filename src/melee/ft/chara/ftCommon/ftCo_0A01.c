@@ -4443,26 +4443,25 @@ bool ftCo_800B0E98(Fighter* fp0, Fighter* fp1)
         if (fp0->ground_or_air == GA_Air) {
             return false;
         }
-        if (!data->xFB_b0) {
-            if (inlineK0(fp0)) {
-                if (!inlineI1_alt(fp0) && fp0->motion_id != ftCo_MS_Wait) {
-                    return false;
-                }
-                {
-                    float x = fp0->pos_delta.x - fp1->pos_delta.x,
-                          y = fp0->pos_delta.y - fp1->pos_delta.y,
-                          r = fp0->co_attrs.mid_walk_point;
-                    if (SQ(x) + SQ(y) > SQ(r)) {
-                        return false;
-                    }
-                }
-                {
-                    float x = fp0->cur_pos.x - fp1->cur_pos.x,
-                          y = fp1->cur_pos.y - fp0->cur_pos.y;
-                    if (SQ(x) + SQ(y) < SQ(25.0)) {
-                        return true;
-                    }
-                }
+        if (data->xFB_b0 || inlineK0(fp0)) {
+            return false;
+        }
+        if (!inlineI1_alt(fp0) && fp0->motion_id != ftCo_MS_Wait) {
+            return false;
+        }
+        {
+            float x = fp0->pos_delta.x - fp1->pos_delta.x,
+                  y = fp0->pos_delta.y - fp1->pos_delta.y,
+                  r = fp0->co_attrs.mid_walk_point;
+            if (SQ(x) + SQ(y) > SQ(r)) {
+                return false;
+            }
+        }
+        {
+            float x = fp0->cur_pos.x - fp1->cur_pos.x,
+                  y = fp1->cur_pos.y - fp0->cur_pos.y;
+            if (SQ(x) + SQ(y) < SQ(25.0)) {
+                return true;
             }
         }
     }
