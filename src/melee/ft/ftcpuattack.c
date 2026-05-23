@@ -851,8 +851,8 @@ bool ftCo_800B8A9C(Fighter* fp)
             var_r0 = 0;
         } else {
             if (ftCo_800A0FB0(&sp1C, &sp34, &sp38, &sp28, -1, -1, -1,
-                              target3->cur_pos.x, 5.0f + target3->cur_pos.y,
-                              target3->cur_pos.x, target3->cur_pos.y - 1000.0f,
+                              target3->cur_pos.x, 5.0 + target3->cur_pos.y,
+                              target3->cur_pos.x, target3->cur_pos.y - 1000.0,
                               0.0f) != 0)
             {
                 var_r0 = 0;
