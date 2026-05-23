@@ -51,14 +51,14 @@ Funcs:
 
 File: src/melee/gm/gmresultplayer.c
 Funcs:
-- [ ] fn_8017A9B4
-- [ ] fn_8017A67C
-- [ ] fn_8017A078
-- [ ] fn_8017A318
-- [ ] fn_8017AA78
-- [ ] fn_80177B7C
-- [ ] fn_80179854
-- [ ] fn_80179990
+- [x] fn_8017A9B4
+- [x] fn_8017A67C
+- [x] fn_8017A078
+- [x] fn_8017A318
+- [x] fn_8017AA78
+- [x] fn_80177B7C
+- [x] fn_80179854
+- [x] fn_80179990
 
 File: src/melee/gm/gmresult.c
 Funcs:
