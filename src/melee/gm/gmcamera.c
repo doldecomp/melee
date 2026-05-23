@@ -200,8 +200,8 @@ void gmCamera_801A253C(s32* arg0, s32* arg1)
         *arg0 = gcus->x44;
     }
     if (arg1 != NULL) {
-        u32 var_r3 = 0;
-        u32 var_r6 = 0;
+        s32 var_r3 = 0;
+        s32 var_r6 = 0;
         if (gcus->x30 == 1) {
             var_r3 = gcus->x28;
         }

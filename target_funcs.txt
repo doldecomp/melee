@@ -15,9 +15,9 @@ Funcs:
 - [ ] gmCamera_801A30E4
 - [ ] gmCamera_801A31FC
 - [x] gmCamera_801A33BC
-- [ ] gmCamera_801A253C
+- [x] gmCamera_801A253C
 - [x] gmCamera_801A292C
-- [ ] gmCamera_801A2334
+- [x] gmCamera_801A2334
 
 File: src/melee/gm/gmclassic.c
 Funcs:
