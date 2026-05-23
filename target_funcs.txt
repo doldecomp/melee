@@ -112,20 +112,20 @@ Funcs:
 
 File: src/melee/gm/gm_16AE.c
 Funcs:
-- [ ] fn_8016CFE0
-- [ ] fn_8016D634
-- [ ] fn_8016E2BC
-- [ ] gm_8016EDDC
+- [x] fn_8016CFE0
+- [x] fn_8016D634
+- [x] fn_8016E2BC
+- [x] gm_8016EDDC
 
 File: src/melee/gm/gm_16F1.c
 Funcs:
-- [ ] fn_8016F39C
-- [ ] fn_8016FFD4
-- [ ] fn_80171BA4
-- [ ] fn_80173098
-- [ ] gm_80173EEC
-- [ ] gm_801736E8
-- [ ] gm_80173754
+- [x] fn_8016F39C
+- [x] fn_8016FFD4
+- [x] fn_80171BA4
+- [x] fn_80173098
+- [x] gm_80173EEC
+- [x] gm_801736E8
+- [x] gm_80173754
 
 File: src/melee/gm/gm_18A5.c
 Funcs:
@@ -168,8 +168,8 @@ Funcs:
 
 File: src/melee/gm/gm_19EF.c
 Funcs:
-- [ ] fn_8019EFC4
-- [ ] fn_8019F2D4
+- [x] fn_8019EFC4
+- [x] fn_8019F2D4
 
 File: src/melee/gm/gm_1601.c
 Funcs:
