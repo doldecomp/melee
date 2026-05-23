@@ -30,13 +30,13 @@ Funcs:
 - [ ] ftCo_800A229C
 - [ ] ftCo_800A8940
 - [ ] ftCo_800A2C80
-- [ ] ftCo_800AF78C
+- [x] ftCo_800AF78C
 - [ ] ftCo_800A75DC
 - [ ] ftCo_800AF290
 - [ ] ftCo_800B33B0
 - [ ] ftCo_800A6FC4
 - [ ] ftCo_800A7AAC
-- [ ] ftCo_800A9CB4
+- [x] ftCo_800A9CB4
 - [ ] ftCo_800A3908
 - [ ] ftCo_800A4038
 - [ ] ftCo_800ABBA8
