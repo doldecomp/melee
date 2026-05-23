@@ -674,8 +674,7 @@ s32 fn_803ACF30(CardState* state, s32 file_id, s32 seq_num, s32 version)
     u32 i;
     PAD_STACK(4);
 
-    i = 0;
-    while (i < (u32) (((state->x24 + state->x8) + 0x2F) / state->x8)) {
+    for (i = 0; i < (state->x24 + state->x8 + 0x2F) / state->x8; i++) {
         buf[0] = 11;
         buf[1] = (s32) state;
         buf[2] = i;
@@ -686,7 +685,6 @@ s32 fn_803ACF30(CardState* state, s32 file_id, s32 seq_num, s32 version)
         if (ret < 0) {
             return ret;
         }
-        i++;
     }
     return 0;
 }
