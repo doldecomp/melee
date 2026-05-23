@@ -811,7 +811,37 @@ void gm_80160C90(HSD_Text* text, u8 fighter_id, bool arg2)
                         var_f31, 1.0f);
 }
 
-/// #fn_80160DE8
+void fn_80160DE8(HSD_JObj* arg0, u8 arg1, s32 arg2, u8 arg3, f32 farg0,
+                 f32 farg1)
+{
+    const char* str;
+    f32 size;
+    s32 is_us = lbLang_IsSavedLanguageUS();
+
+    if (is_us != 0) {
+        ((u8*) arg0)[0x49] = 1;
+    }
+    if (arg3 != 0) {
+        str = fn_801609E0(arg1);
+    } else {
+        str = gm_80160980(arg1);
+    }
+    if (is_us != 0) {
+        if (arg3 != 0 && lbl_803D50E4[arg1] != NULL) {
+            size = lbl_803B75F8[arg1 + 0x63];
+        } else {
+            size = lbl_803B75F8[arg1 + 0x21];
+        }
+    } else {
+        if (arg3 != 0 && lbl_803D5060[arg1] != NULL) {
+            size = lbl_803B75F8[arg1 + 0x42];
+        } else {
+            size = lbl_803B75F8[arg1];
+        }
+    }
+    HSD_SisLib_803A70A0((HSD_Text*) arg0, arg2, (char*) str);
+    HSD_SisLib_803A7548((HSD_Text*) arg0, arg2, size * farg0, farg1);
+}
 
 f32 fn_80160F58(u8 ckind)
 {
