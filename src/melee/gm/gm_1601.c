@@ -1018,7 +1018,51 @@ void gm_80162574(u8 arg0, u8 arg1)
     *ptr = val;
 }
 
-/// #gm_8016260C
+void gm_8016260C(u8 arg0, u8 arg1)
+{
+    u32* counter = NULL;
+
+    if ((u8) (arg1 - 7) <= 1) {
+        u32* p = gmMainLib_GetMatchResetCounter();
+        *p = MIN(*p + 1, 0xFFFFFFFFU);
+        return;
+    }
+    if (gm_801A4310() == 0x1F) {
+        counter = gmMainLib_8015CD5C();
+    } else {
+        switch ((s32) arg0) {
+        case 0:
+            counter = gmMainLib_GetTimeMatchTotal();
+            break;
+        case 1:
+            counter = gmMainLib_GetStockMatchTotal();
+            break;
+        case 2:
+            counter = gmMainLib_GetCoinMatchTotal();
+            {
+                struct gmm_retval_EDBC* q = gmMainLib_8015EDBC();
+                q->x4 = MIN(q->x4 + 1, 0xFFFFFFFFU);
+            }
+            break;
+        case 3:
+            counter = gmMainLib_GetBonusMatchTotal();
+            break;
+        }
+    }
+    *counter = MIN(*counter + 1, 0xFFFFFFFFU);
+    {
+        struct gmm_retval_ED98* a = gmMainLib_8015ED98();
+        a->x0 = MIN(a->x0 + 1, 0xFFFFFFFFU);
+    }
+    {
+        struct gmm_retval_EDB0* b = gmMainLib_8015EDB0();
+        b->x0 = MIN((u32) b->x0 + 1, 0xFFFFFFFFU);
+    }
+    {
+        struct gmm_retval_EDBC* c = gmMainLib_8015EDBC();
+        c->x0 = MIN((u32) c->x0 + 1, 0xFFFFFFFFU);
+    }
+}
 
 u32 gm_GetVsPlayMatchTotal(void)
 {
