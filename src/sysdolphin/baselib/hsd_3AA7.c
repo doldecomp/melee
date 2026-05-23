@@ -1702,14 +1702,14 @@ s32 fn_803B1F78(CardState* state, s32 channel, s32 file_id, s32 seq_num,
     s32 saved;
     s32 snap;
     CardBufEntry* entries = (CardBufEntry*) hsd_804D1138;
-    PAD_STACK(8);
+    PAD_STACK(12);
 
     hsd_804D7998 = hsd_804D7984;
-    blocks = hsd_803B2674(state);
+    blocks = state->x8 * hsd_803B2674(state);
     buf1[0] = 7;
     buf1[1] = (s32) state;
     buf1[2] = channel;
-    buf1[3] = state->x8 * blocks;
+    buf1[3] = blocks;
     result = fn_803AC168(buf1);
     if (result < 0) {
         snap = hsd_804D7998;
