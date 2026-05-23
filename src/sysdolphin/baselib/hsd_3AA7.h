@@ -20,7 +20,12 @@ typedef struct CardState {
     /* 0x270 */ s32 x270[64];
     /* 0x370 */ u8 x370[0x40];
     /* 0x3B0 */ u8 x3B0;
-    /* 0x3B1 */ u8 pad_3B1[0xAF];
+    /* 0x3B1 */ u8 pad_3B1[1];
+    /* 0x3B2 */ u8 icon_format[8];
+    /* 0x3BA */ u8 icon_speed[8];
+    /* 0x3C2 */ u8 pad_3C2[2];
+    /* 0x3C4 */ CARDStat stat;
+    /* 0x430 */ u8 digest[0x30];
     /* 0x460 */ s32 x460;
 } CardState;
 
