@@ -935,7 +935,140 @@ bool ftCo_800A21FC(Fighter* fp)
     return false;
 }
 
-/// #ftCo_800A229C
+s32 ftCo_800A229C(Fighter* fp, Vec3* arg1)
+{
+    Vec3 sp2C;
+    Vec3 sp20;
+    f32 sp18;
+    f32 sp1C;
+    enum InternalStageId stage;
+    f32 w;
+    f32 h;
+    f32 margin;
+    f32 bottom;
+    f32 mag;
+    f32 frac;
+    s32 var_r0;
+
+    if (grGreatBay_801F66A4() != 0 && fp->cur_pos.x > -5.0) {
+        *arg1 = fp->cur_pos;
+        return 2;
+    }
+    if (grCastle_801CDF54(arg1) != 0) {
+        return 1;
+    }
+    if (stage_info.internal_stage_id != ZEBES) {
+        var_r0 = 0;
+    } else {
+        Ground_801C4368(&sp18, &sp1C);
+        bottom = Stage_GetBlastZoneBottomOffset();
+        if (sp18 > bottom) {
+            var_r0 = 1;
+            arg1->x = 0.5f * (Stage_GetBlastZoneLeftOffset() +
+                              Stage_GetBlastZoneRightOffset());
+            arg1->y = bottom;
+            arg1->z = 0.0f;
+        } else {
+            var_r0 = 0;
+        }
+    }
+    if (var_r0 != 0) {
+        return 1;
+    }
+    stage = stage_info.internal_stage_id;
+    grLib_801C9E60(&sp2C);
+    switch (stage) {
+    case RCRUISE:
+        w = Stage_GetBlastZoneRightOffset() - Stage_GetBlastZoneLeftOffset();
+        if (sp2C.x < 0.0f) {
+            if (fp->cur_pos.x <
+                0.4f * w + Stage_GetBlastZoneLeftOffset())
+            {
+                *arg1 = fp->cur_pos;
+                return 2;
+            }
+            goto block_18;
+        }
+        if (fp->cur_pos.x >
+            -(0.4f * w - Stage_GetBlastZoneRightOffset()))
+        {
+            *arg1 = fp->cur_pos;
+            return 2;
+        }
+    block_18:
+        h = Stage_GetBlastZoneTopOffset() - Stage_GetBlastZoneBottomOffset();
+        if (sp2C.y > 0.0f) {
+            if (fp->cur_pos.y >
+                -(0.4f * h - Stage_GetBlastZoneTopOffset()))
+            {
+                *arg1 = fp->cur_pos;
+                return 2;
+            }
+            goto block_23;
+        }
+        if (fp->cur_pos.y <
+            0.4f * h + Stage_GetBlastZoneBottomOffset())
+        {
+            *arg1 = fp->cur_pos;
+            return 2;
+        }
+    block_23:
+        margin = 0.2f * w;
+        if (fp->cur_pos.x < margin + Stage_GetBlastZoneLeftOffset() ||
+            fp->cur_pos.x > Stage_GetBlastZoneRightOffset() - margin ||
+            (margin = 0.2f * h,
+             fp->cur_pos.y > Stage_GetBlastZoneTopOffset() - margin) ||
+            fp->cur_pos.y < margin + Stage_GetBlastZoneBottomOffset())
+        {
+            *arg1 = fp->cur_pos;
+            return 2;
+        }
+    default:
+    block_43:
+        if (Camera_8003118C(&fp->cur_pos, 0.0f) == 0) {
+            *arg1 = fp->cur_pos;
+            return -1;
+        }
+        return 0;
+    case BIGBLUE:
+        w = Stage_GetBlastZoneRightOffset() - Stage_GetBlastZoneLeftOffset();
+        h = Stage_GetBlastZoneTopOffset() - Stage_GetBlastZoneBottomOffset();
+        margin = 0.2f * w;
+        if (fp->cur_pos.x < margin + Stage_GetBlastZoneLeftOffset() ||
+            fp->cur_pos.x > Stage_GetBlastZoneRightOffset() - margin ||
+            (margin = 0.2f * h,
+             fp->cur_pos.y > Stage_GetBlastZoneTopOffset() - margin) ||
+            fp->cur_pos.y < margin + Stage_GetBlastZoneBottomOffset())
+        {
+            *arg1 = fp->cur_pos;
+            return 2;
+        }
+        goto block_43;
+    case ICEMTN:
+        h = Stage_GetBlastZoneTopOffset() - Stage_GetBlastZoneBottomOffset();
+        grLib_801C9E60(&sp20);
+        if (sp20.y < 0.0f) {
+            mag = -sp20.y;
+        } else {
+            mag = sp20.y;
+        }
+        frac = 0.4 * mag + 0.4;
+        if (sp20.y < 0.0f) {
+            if (fp->cur_pos.y <
+                h * frac + Stage_GetBlastZoneBottomOffset())
+            {
+                *arg1 = fp->cur_pos;
+                return 2;
+            }
+            goto block_43;
+        }
+        if (fp->cur_pos.y > -(h * frac - Stage_GetBlastZoneTopOffset())) {
+            *arg1 = fp->cur_pos;
+            return 2;
+        }
+        goto block_43;
+    }
+}
 
 static inline bool inlineL0(mp_UnkStruct0* arg0)
 {
