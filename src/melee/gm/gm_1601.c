@@ -2197,7 +2197,39 @@ u8 fn_801654A0(MatchEnd* match_end)
     return winner;
 }
 
-/// #fn_80165548
+u8 fn_80165548(MatchEnd* me, s8 arg1, u8 team)
+{
+    s8 ret;
+    MatchPlayerData* p;
+    MatchPlayerData* q;
+    s32 i;
+    s32 j;
+
+    ret = 0;
+    if (me->is_teams == 1) {
+        for (i = 0; i < 4; i++) {
+            p = &me->player_standings[i];
+            if (p->slot_type != 3 && (s32) p->team == (s32) team) {
+                s8 result = i;
+                q = me->player_standings;
+                for (j = 0; j < 4; j++, q++) {
+                    if (q->slot_type != 3 && (s32) q->team == (s32) team &&
+                        i != j && p->is_small_loser > q->is_small_loser)
+                    {
+                        result = -1;
+                        break;
+                    }
+                }
+                if (result >= 0) {
+                    ret = result;
+                }
+            }
+        }
+    } else {
+        ret = arg1;
+    }
+    return ret;
+}
 
 /// #fn_801656A8
 
