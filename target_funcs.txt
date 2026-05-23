@@ -21,7 +21,7 @@ Funcs:
 
 File: src/melee/gm/gmclassic.c
 Funcs:
-- [ ] gmClassic_801B2BA4
+- [x] gmClassic_801B2BA4
 
 File: src/melee/gm/gmmain_lib.c
 Funcs:
