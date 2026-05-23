@@ -2923,7 +2923,147 @@ bool ftCo_800A6FC4(Fighter* fp, Vec3* arg1, Vec3* arg2)
     return 1;
 }
 
-/// #ftCo_800A75DC
+void ftCo_800A75DC(Fighter* fp0, Fighter* fp1)
+{
+    Vec3 floor_pos;
+    Vec3 floor_normal;
+    Vec3 sp18;
+    int line_id;
+    u32 flags;
+    mp_UnkStruct0* island;
+    mp_UnkStruct0* fp0_island;
+    s32 result;
+    s32 blocked;
+    s32 same_island;
+    f32 fx;
+    f32 fy;
+    f32 d;
+    f32 cx;
+
+    if (fp1 == NULL) {
+        return;
+    }
+    if (fp1->ground_or_air == GA_Air) {
+        fx = fp1->cur_pos.x;
+        fy = fp1->cur_pos.y;
+        blocked = 0;
+        line_id = -1;
+        result = mpCheckFloor(fx, 10.0f + fy, fx, fy - 1000.0f, 0.0f,
+                              &floor_pos, &line_id, &flags, &floor_normal, -1,
+                              -1, -1, NULL, NULL);
+        if (result != 0) {
+            if (grBigBlue_801EF844(line_id) ||
+                grInishie1_801FCAAC(line_id) ||
+                grCorneria_801E2D90(line_id) || grVenom_80206D10(line_id))
+            {
+                blocked = 1;
+            }
+            if (blocked != 0) {
+                result = 0;
+            }
+        }
+        if (result != 0) {
+            island = mpIsland_8005AB54(line_id);
+            if (ftCo_800A2718(island) == 0) {
+                if (fp0->x1A88.x60 == 0) {
+                    fp0->x1A88.x54.x = floor_pos.x;
+                    fp0->x1A88.x54.y = floor_pos.y;
+                    fp0->x1A88.x38 = fp0->x1A88.x56C + fp1->x1A88.x564;
+                    ftCo_800A1CC4(
+                        fp0, ftCo_803C6594[stage_info.internal_stage_id]);
+                }
+                if (island != NULL) {
+                    d = island->x14.x - fp0->x1A88.x54.x;
+                    if (d < 0.0f) {
+                        d = -d;
+                    }
+                    if (d < 5.0) {
+                        if (fp0->x1A88.x60 == 0) {
+                            fp0->x1A88.x54.x = island->x14.x - 5.0;
+                            fp0->x1A88.x54.y = island->x14.y;
+                            fp0->x1A88.x38 =
+                                fp0->x1A88.x56C + fp1->x1A88.x564;
+                            ftCo_800A1CC4(
+                                fp0,
+                                ftCo_803C6594[stage_info.internal_stage_id]);
+                        }
+                    } else {
+                        d = island->x8.x - fp0->x1A88.x54.x;
+                        if (d < 0.0f) {
+                            d = -d;
+                        }
+                        if (d < 5.0 && fp0->x1A88.x60 == 0) {
+                            fp0->x1A88.x54.x = 5.0 + island->x8.x;
+                            fp0->x1A88.x54.y = island->x8.y;
+                            fp0->x1A88.x38 =
+                                fp0->x1A88.x56C + fp1->x1A88.x564;
+                            ftCo_800A1CC4(
+                                fp0,
+                                ftCo_803C6594[stage_info.internal_stage_id]);
+                        }
+                    }
+                }
+            }
+        } else {
+            ftCo_800A4768(fp1, &sp18);
+            if (fp0->x1A88.x60 == 0) {
+                fp0->x1A88.x54.x = sp18.x;
+                fp0->x1A88.x54.y = sp18.y;
+                fp0->x1A88.x38 = fp0->x1A88.x56C + fp1->x1A88.x564;
+                ftCo_800A1CC4(fp0,
+                              ftCo_803C6594[stage_info.internal_stage_id]);
+            }
+        }
+    } else if (ftCo_800A2718(mpIsland_8005AB54(
+                   fp1->coll_data.floor.index)) == 0)
+    {
+        if (fp0->x1A88.x60 == 0) {
+            fp0->x1A88.x54.x = fp1->cur_pos.x;
+            fp0->x1A88.x54.y = fp1->cur_pos.y;
+            fp0->x1A88.x38 = fp0->x1A88.x56C + fp1->x1A88.x564;
+            ftCo_800A1CC4(fp0, ftCo_803C6594[stage_info.internal_stage_id]);
+        }
+        if (fp0->ground_or_air == GA_Air) {
+            same_island = 0;
+        } else if (fp1->ground_or_air == GA_Air) {
+            same_island = 0;
+        } else {
+            fp0_island = mpIsland_8005AB54(fp0->coll_data.floor.index);
+            if (fp0_island == NULL) {
+                same_island = 0;
+            } else if (mpIsland_8005AB54(fp1->coll_data.floor.index) ==
+                       fp0_island)
+            {
+                same_island = 1;
+            } else {
+                same_island = 0;
+            }
+        }
+        if (same_island == 0 &&
+            (island = mpIsland_8005AB54(fp1->coll_data.floor.index)) != NULL &&
+            fp0->x1A88.x54.y - fp0->cur_pos.y > 0.0f)
+        {
+            cx = fp0->cur_pos.x;
+            if (fp0->x1A88.x54.x - cx > 0.0f) {
+                if (cx < island->x8.x && fp0->x1A88.x60 == 0) {
+                    fp0->x1A88.x54.x = 5.0 + island->x8.x;
+                    fp0->x1A88.x54.y = island->x8.y;
+                    fp0->x1A88.x38 = fp0->x1A88.x56C + fp1->x1A88.x564;
+                    ftCo_800A1CC4(
+                        fp0, ftCo_803C6594[stage_info.internal_stage_id]);
+                }
+            } else {
+                if (cx > island->x14.x && fp0->x1A88.x60 == 0) {
+                    fp0->x1A88.x54.x = island->x14.x - 5.0;
+                    fp0->x1A88.x54.y = island->x14.y;
+                    fp0->x1A88.x38 = fp0->x1A88.x56C + fp1->x1A88.x564;
+                    ftCo_800A1CC4(
+                        fp0, ftCo_803C6594[stage_info.internal_stage_id]);
+                }
+            }
+        }
+    }
+}
 
 /// #ftCo_800A7AAC
 
