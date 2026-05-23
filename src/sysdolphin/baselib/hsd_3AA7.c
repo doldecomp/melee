@@ -502,7 +502,7 @@ s32 fn_803ACC0C(CardState* state, s32 block_idx, s32 file_id, s32 seq_num,
 
     do {
         result =
-            CARDRead((CARDFileInfo*) state->_pad1, buf, sector_size, offset);
+            CARDRead(&state->file_info, buf, sector_size, offset);
         if (result != -1) {
             break;
         }
@@ -572,7 +572,7 @@ s32 fn_803ACD58(CardState* state, void* icon_data, void* file_data)
 
         do {
             result =
-                CARDRead((CARDFileInfo*) state->_pad1, buf, state->x8, offset);
+                CARDRead(&state->file_info, buf, state->x8, offset);
             if (result != -1) {
                 break;
             }
@@ -683,7 +683,7 @@ s32 fn_803ACFC0(CardState* state, s32 block_idx, s32 file_id, s32 seq_num,
             retries = 0;
 
             do {
-                result = CARDRead((CARDFileInfo*) state->_pad1, buf,
+                result = CARDRead(&state->file_info, buf,
                                   sector_size, offset);
                 if (result != -1) {
                     break;
@@ -730,7 +730,7 @@ s32 fn_803ACFC0(CardState* state, s32 block_idx, s32 file_id, s32 seq_num,
         buf = state->x0;
 
         do {
-            result = CARDWrite((CARDFileInfo*) state->_pad1, buf, write_size,
+            result = CARDWrite(&state->file_info, buf, write_size,
                                offset);
             if (result != -1) {
                 break;
@@ -742,32 +742,12 @@ s32 fn_803ACFC0(CardState* state, s32 block_idx, s32 file_id, s32 seq_num,
     return result;
 }
 
-typedef struct CardStateExtAd16C {
-    u8* x0;
-    u8 pad_04[0x4];
-    u32 x8;
-    CARDFileInfo file_info;
-    s32 x20;
-    u32 x24;
-    s32 x28[9];
-    s32 x4C[9];
-    s32 x70[9];
-    u8 pad_94[0xDC];
-    s32 x170[64];
-    s32 x270[64];
-    u8 x370[0x40];
-    u8 x3B0;
-    u8 pad_3B1[0xAF];
-    s32 x460;
-} CardStateExtAd16C;
-
-s32 fn_803AD16C(CardState* arg0)
+s32 fn_803AD16C(CardState* state)
 {
-    CardStateExtAd16C* state = (CardStateExtAd16C*) arg0;
     s32 file_id;
     s32 phys;
 
-    if (state->x460 != fn_803AC7DC(arg0)) {
+    if (state->x460 != fn_803AC7DC(state)) {
         return -257;
     }
 
@@ -789,13 +769,13 @@ s32 fn_803AD16C(CardState* arg0)
         if (file_id == 0) {
             blocks_before = 0;
         } else {
-            blocks_before = state->x4C[0] > 0 ? fn_803AC634(arg0, 0) : 1;
+            blocks_before = state->x4C[0] > 0 ? fn_803AC634(state, 0) : 1;
             for (block_idx = 1; block_idx < file_id; block_idx++) {
-                blocks_before += fn_803AC634(arg0, block_idx);
+                blocks_before += fn_803AC634(state, block_idx);
             }
         }
 
-        file_blocks = fn_803AC634(arg0, file_id);
+        file_blocks = fn_803AC634(state, file_id);
         for (block_idx = 0; block_idx < file_blocks; block_idx++) {
             s32 found = 0;
 
@@ -866,28 +846,9 @@ s32 fn_803ADE4C(s32 card_state, s32 channel, s32 callback)
     return 0;
 }
 
-typedef struct {
-    u8* x0;
-    s32 x4;
-    u32 x8;
-    CARDFileInfo file_info;
-    s32 x20;
-    u32 x24;
-    s32 x28[9];
-    s32 x4C[9];
-    s32 x70[9];
-    u8 pad_94[0xDC];
-    s32 x170[64];
-    s32 x270[64];
-    u8 x370[0x40];
-    u8 x3B0;
-    u8 pad_3B1[0xAF];
-    s32 x460;
-} CardStateExt;
-
 s32 fn_803ADF90(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
 {
-    CardStateExt* state = (CardStateExt*) arg0;
+    CardState* state = arg0;
     CardBufEntry* entry;
     s32 block_map[64];
     s32 blocks_before;
@@ -1161,7 +1122,7 @@ s32 fn_803ADF90(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
 
 s32 fn_803AE7F8(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
 {
-    CardStateExt* state = (CardStateExt*) arg0;
+    CardState* state = arg0;
     CardBufEntry* entry;
     s32 primary[64];
     s32 secondary[64];
@@ -1508,7 +1469,7 @@ s32 fn_803B0120(s32 arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
 
 s32 fn_803B0E9C(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
 {
-    CardStateExt* state = (CardStateExt*) arg0;
+    CardState* state = arg0;
     u8 digest[0x30];
     s32 block_idx;
     s32 digest_idx;
@@ -1733,30 +1694,29 @@ s32 fn_803B0E9C(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
 
 s32 fn_803B1338(CardState* state, s32 arg1)
 {
-    CardStateExt* ext = (CardStateExt*) state;
     s32 file_id;
     s32 result;
     u8* base;
 
-    base = ext->x0;
+    base = state->x0;
     result = 0;
     for (file_id = 0; file_id < 9; file_id++) {
-        if (ext->x4C[file_id] <= 0) {
+        if (state->x4C[file_id] <= 0) {
             continue;
         }
 
-        switch (ext->x28[file_id]) {
+        switch (state->x28[file_id]) {
         case 0:
-            result = fn_803AE7F8(state, file_id, (s32) base + ext->x70[file_id],
-                                 arg1, 0);
+            result = fn_803AE7F8(state, file_id,
+                                 (s32) (base + state->x70[file_id]), arg1, 0);
             break;
         case 1:
             result = fn_803AF3F0((s32) state, file_id,
-                                 (s32) base + ext->x70[file_id], arg1, 0);
+                                 (s32) (base + state->x70[file_id]), arg1, 0);
             break;
         case 3:
             result = fn_803B0120((s32) state, file_id,
-                                 (s32) base + ext->x70[file_id], arg1, 0);
+                                 (s32) (base + state->x70[file_id]), arg1, 0);
             break;
         default:
             result = -257;

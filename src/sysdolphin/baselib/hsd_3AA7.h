@@ -3,15 +3,25 @@
 
 #include <placeholder.h>
 
+#include <dolphin/card.h>
+
 typedef struct CardState {
     /* 0x00 */ u8* x0;
-    /* 0x04 */ u8 _pad0[0x4];
+    /* 0x04 */ s32 x4;
     /* 0x08 */ u32 x8;
-    /* 0x0C */ u8 _pad1[0x18];
+    /* 0x0C */ CARDFileInfo file_info;
+    /* 0x20 */ s32 x20;
     /* 0x24 */ u32 x24;
-    /* +28 */ int x28[9];
-    /* +4C */ int x4C[9];
-    /* +70 */ int x70[9];
+    /* 0x28 */ int x28[9];
+    /* 0x4C */ int x4C[9];
+    /* 0x70 */ int x70[9];
+    /* 0x94 */ u8 pad_94[0xDC];
+    /* 0x170 */ s32 x170[64];
+    /* 0x270 */ s32 x270[64];
+    /* 0x370 */ u8 x370[0x40];
+    /* 0x3B0 */ u8 x3B0;
+    /* 0x3B1 */ u8 pad_3B1[0xAF];
+    /* 0x460 */ s32 x460;
 } CardState;
 
 /* 3AA790 */ s32 fn_803AA790(void);
