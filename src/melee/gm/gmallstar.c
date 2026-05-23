@@ -628,13 +628,14 @@ void gm_801B59AC(GameScene* arg0)
     s32 result = exit->x8;
     UnkAllstarData* data = &gm_80473A18;
     u16 round = gm_8017BE84(idx);
-    u32 opp_start = gm_803DEC4C[round].start;
-    u32 opp_idx = gm_803DEBE8[opp_start].x0;
+    gm_803DEBE8_t* opp = (gm_803DEBE8_t*) (base + 0x2B8) +
+                         ((AllstarRoundInfo*) (base + 0x31C))[round].start;
+    u32 i = ((u32) opp - (u32) (base + 0x2B8)) >> 2;
 
     if (result != 0) {
-        (gm_80490940)[opp_idx].x0 = 2;
+        ((u8*) gm_80490940)[i] = 2;
     } else {
-        (gm_80490940)[opp_idx].x0 = 1;
+        ((u8*) gm_80490940)[i] = 1;
     }
     data->x74 = exit->match_end.player_standings[0].percent;
     data->x9C += exit->match_end.frame_count;

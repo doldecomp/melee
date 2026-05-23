@@ -1,0 +1,234 @@
+File: src/melee/gm/gmallstar.c
+Funcs:
+- [ ] gm_801B5ACC
+- [x] gm_801B59AC
+- [ ] gm_801B60A4_OnLoad
+- [ ] gm_801B5324
+- [ ] gm_801B5624
+
+File: src/melee/gm/gmcamera.c
+Funcs:
+- [ ] gmCamera_801A2AAC
+- [ ] gmCamera_801A2BF0
+- [ ] gmCamera_801A2D44
+- [ ] gmCamera_801A26C0
+- [ ] gmCamera_801A30E4
+- [ ] gmCamera_801A31FC
+- [ ] gmCamera_801A33BC
+- [ ] gmCamera_801A253C
+- [ ] gmCamera_801A292C
+- [ ] gmCamera_801A2334
+
+File: src/melee/gm/gmclassic.c
+Funcs:
+- [ ] gmClassic_801B2BA4
+
+File: src/melee/gm/gmmain_lib.c
+Funcs:
+- [ ] gmMainLib_8015D984
+- [ ] gmMainLib_8015EA80
+- [ ] gmMainLib_8015F150
+- [ ] gmMainLib_8015F600
+
+File: src/melee/gm/gmopening.c
+Funcs:
+- [ ] gm_801A9DD0
+
+File: src/melee/gm/gmregclear.c
+Funcs:
+- [ ] fn_8017D9C0
+- [ ] fn_8017EE40
+- [ ] fn_8017F2A4
+- [ ] fn_8017F47C
+- [ ] fn_80181C80
+- [ ] fn_80181E18
+- [ ] fn_80182B5C
+- [ ] fn_80181598
+- [ ] gm_8017DB88
+- [ ] gm_80181998
+- [ ] gm_80182174
+- [ ] gm_80182554
+
+File: src/melee/gm/gmresultplayer.c
+Funcs:
+- [ ] fn_8017A9B4
+- [ ] fn_8017A67C
+- [ ] fn_8017A078
+- [ ] fn_8017A318
+- [ ] fn_8017AA78
+- [ ] fn_80177B7C
+- [ ] fn_80179854
+- [ ] fn_80179990
+
+File: src/melee/gm/gmresult.c
+Funcs:
+- [ ] fn_80175A94
+- [ ] fn_80175D34
+- [ ] fn_80176D3C
+- [ ] fn_801749B8
+- [ ] fn_801771C0
+- [ ] fn_80174284
+- [ ] fn_80174920
+- [ ] fn_80175240
+- [ ] fn_80175880
+- [ ] gm_80177368_OnEnter
+
+File: src/melee/gm/gmtou.c
+Funcs:
+- [ ] fn_8019C048
+- [ ] gm_8019B8C4_OnEnter
+- [ ] gm_8019ECAC_OnEnter
+
+File: src/melee/gm/gm_1A3F.c
+Funcs:
+- [ ] gm_801A4014
+
+File: src/melee/gm/gm_1A4C.c
+Funcs:
+- [ ] fn_801A94BC
+- [ ] gm_801A9094
+
+File: src/melee/gm/gm_1B03.c
+Funcs:
+- [ ] gm_801B0DD0
+- [ ] gm_801B1C24
+- [ ] gm_801B0474
+- [ ] gm_801B2790
+
+File: src/melee/gm/gm_1BA8.c
+Funcs:
+- [ ] gm_801BAC9C
+- [ ] gm_801BB758
+- [ ] gm_801BBB64
+- [ ] gm_801BC00C
+- [ ] gm_801BCC9C
+- [ ] gm_801BD028
+- [ ] gm_801BE638
+- [ ] gm_801BF128
+
+File: src/melee/gm/gm_1BFA.c
+Funcs:
+- [ ] gm_801BFCFC
+
+File: src/melee/gm/gm_16AE.c
+Funcs:
+- [ ] fn_8016CFE0
+- [ ] fn_8016D634
+- [ ] fn_8016E2BC
+- [ ] gm_8016EDDC
+
+File: src/melee/gm/gm_16F1.c
+Funcs:
+- [ ] fn_8016F39C
+- [ ] fn_8016FFD4
+- [ ] fn_80171BA4
+- [ ] fn_80173098
+- [ ] gm_80173EEC
+- [ ] gm_801736E8
+- [ ] gm_80173754
+
+File: src/melee/gm/gm_18A5.c
+Funcs:
+- [ ] fn_8018A514
+- [ ] fn_8018DC18
+- [ ] fn_8018E46C
+- [ ] fn_8018E85C
+- [ ] fn_8018E618
+- [ ] fn_8018ECA8
+- [ ] fn_8018F888
+- [ ] fn_8018FA24
+- [ ] fn_8018FBE0
+- [ ] fn_8019A71C
+- [ ] fn_8019AF50
+- [ ] fn_8019B458
+- [ ] fn_8019B860
+- [ ] fn_80190ABC
+- [ ] fn_80191FD4
+- [ ] fn_80193B58
+- [ ] fn_80194BC4
+- [ ] fn_80195AF0
+- [ ] fn_80195CCC
+- [ ] fn_80196FFC
+- [ ] fn_80197AF0
+- [ ] fn_801913BC
+- [ ] fn_801935B8
+- [ ] fn_801937C4
+- [ ] fn_801949B4
+- [ ] fn_801977AC
+- [ ] fn_801985D4
+- [ ] fn_8019175C
+- [ ] fn_8019249C
+- [ ] fn_80191154
+- [ ] fn_80191240
+- [ ] fn_80192758
+- [ ] fn_80192938
+- [ ] fn_80194658
+- [ ] fn_80198824
+- [ ] gm_801963B4_OnEnter
+
+File: src/melee/gm/gm_19EF.c
+Funcs:
+- [ ] fn_8019EFC4
+- [ ] fn_8019F2D4
+
+File: src/melee/gm/gm_1601.c
+Funcs:
+- [ ] fn_8016A4C8
+- [ ] fn_80160DE8
+- [ ] fn_80161C90
+- [ ] fn_80164B48
+- [ ] fn_80165AC0
+- [ ] fn_80165FA4
+- [ ] fn_80169A84
+- [ ] fn_80169C54
+- [ ] fn_80169F50
+- [ ] fn_801652D8
+- [ ] fn_801656A8
+- [ ] fn_801695BC
+- [ ] fn_8016588C
+- [ ] fn_8016719C
+- [ ] fn_80162170
+- [ ] fn_80165548
+- [ ] fn_80167638
+- [ ] fn_80169000
+- [ ] fn_80169900
+- [ ] gm_8016A22C
+- [ ] gm_8016A164
+- [ ] gm_8016AC44
+- [ ] gm_80160B40
+- [ ] gm_80160C90
+- [ ] gm_80162A98
+- [ ] gm_80163B9C
+- [ ] gm_80164A0C
+- [ ] gm_80166A98
+- [ ] gm_80166CCC
+- [ ] gm_80167BC8
+- [ ] gm_801674C4
+- [ ] gm_8016247C
+- [ ] gm_8016260C
+- [ ] gm_80164330
+- [ ] gm_80164504
+- [ ] gm_80164910
+- [ ] gm_80168710
+
+File: src/melee/gm/gm_1832.c
+Funcs:
+- [ ] fn_8018A000
+- [ ] fn_80185A0C
+- [ ] fn_80185F5C
+- [ ] fn_80186EFC
+- [ ] fn_80187AB4
+- [ ] fn_80187CF4
+- [ ] fn_80188B3C
+- [ ] fn_80188EE8
+- [ ] fn_80189B88
+- [ ] fn_801851C0
+- [ ] fn_801857C4
+- [ ] fn_801884F8
+- [ ] fn_80187910
+- [ ] fn_80188550
+- [ ] fn_80188644
+- [ ] fn_80188738
+- [ ] fn_80188910
+- [ ] gm_80187F48_OnEnter
+- [ ] gm_80189CDC
