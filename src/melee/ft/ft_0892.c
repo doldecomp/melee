@@ -15,6 +15,7 @@
 #include "ftCommon/ftCo_DownSpot.h"
 #include "ftCommon/ftCo_HammerWait.h"
 #include "ftCrazyHand/ftCh_Init.h"
+#include "ftCrazyHand/ftCh_TagCancel.h"
 #include "ftLink/ftLk_AttackAir.h"
 #include "ftMasterHand/ftMh_Wait1_2.h"
 #include "it/it_26B1.h"

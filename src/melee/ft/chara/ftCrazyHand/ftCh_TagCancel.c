@@ -1,8 +1,6 @@
 #include "ftCh_TagCancel.h"
 
 #include "ftCh_Init.h"
-
-#include "math.h"
 #include "types.h"
 
 #include <placeholder.h>
@@ -10,36 +8,13 @@
 
 #include "baselib/forward.h"
 
-#include "cm/camera.h"
-#include "ft/chara/ftCommon/ftCo_Attack100.h"
-#include "ft/chara/ftCommon/ftCo_CaptureCut.h"
-#include "ft/chara/ftCommon/ftCo_Lift.h"
-#include "ft/chara/ftCommon/ftCo_Throw.h"
-#include "ft/chara/ftCommon/ftCo_Thrown.h"
 #include "ft/fighter.h"
-#include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
-#include "ft/ft_0881.h"
-#include "ft/ft_0D4D.h"
+#include "ft/ft_084E.h"
 #include "ft/ftbosslib.h"
-#include "ft/ftcamera.h"
-#include "ft/ftcommon.h"
-#include "ft/ftlib.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
-
-#include "ftCrazyHand/forward.h"
-
+#include "ftCrazyHand/ftCh_Wait1_0.h"
 #include "ftMasterHand/types.h"
-#include "gr/stage.h"
-#include "it/it_26B1.h"
-#include "it/items/itcrazyhandbomb.h"
-#include "it/items/itmasterhandlaser.h"
-#include "lb/lb_00B0.h"
-#include "lb/lbaudio_ax.h"
-#include "lb/lbvector.h"
-#include "mp/mplib.h"
-#include "pl/player.h"
 
 #include <common_structs.h>
 #include <dolphin/mtx.h>
@@ -74,7 +49,6 @@ void ftCh_GrabUnk1_8015B998(HSD_GObj* gobj)
 }
 #pragma pop
 
-void ftCh_GrabUnk1_8015BA34(HSD_GObj*, HSD_GObjEvent, Vec3*);
 void ftCh_GrabUnk1_8015BA34(HSD_GObj* gobj, HSD_GObjEvent cb, Vec3* pos)
 {
     Fighter* fp = GET_FIGHTER(gobj);
@@ -105,7 +79,7 @@ void ftCh_GrabUnk1_8015BA34(HSD_GObj* gobj, HSD_GObjEvent cb, Vec3* pos)
 
 void ftCh_TagCancel_Anim(HSD_GObj* gobj)
 {
-    u8 _[4];
+    u32 pad;
     if (!ftAnim_IsFramesRemaining(gobj)) {
         Fighter* fp = GET_FIGHTER(gobj);
         fp->fv.mh.x2258 = ftMh_MS_TagCancel;
@@ -142,7 +116,8 @@ void ftCh_GrabUnk1_8015BC88(HSD_GObj* gobj)
     fp->mv.ch.unk0.x20 = 0;
     {
         Vec3 pos;
-        u8 _[8];
+        u32 pad1;
+        u32 pad2;
         pos.x = da->x18;
         pos.y = da->x1C;
         pos.z = 0;
@@ -159,4 +134,3 @@ void ftCh_GrabUnk1_8015BC88(HSD_GObj* gobj)
         }
     }
 }
-

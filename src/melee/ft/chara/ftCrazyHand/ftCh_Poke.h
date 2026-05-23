@@ -2,7 +2,7 @@
 #define GALE01_1582D8
 
 #include <baselib/forward.h>
-
+void fn_801582D8(HSD_GObj* gobj);
 /* 158340 */ void ftCh_PaperCrush_Anim(HSD_GObj* gobj);
 /* 15837C */ void ftCh_PaperCrush_IASA(HSD_GObj* gobj);
 /* 1583C0 */ void ftCh_PaperCrush_Phys(HSD_GObj* gobj);

@@ -1823,12 +1823,12 @@ melee/ft/chara/ftMasterHand/ftMh_ThrownMasterHand.c:
 
 melee/ft/chara/ftCrazyHand/ftCh_Init.c:
 	.text       start:0x80155E18 end:0x80155FCC
-	.data       start:0x803D41F8 end:0x803D49C0
-	.sdata      start:0x804D3EC0 end:0x804D3ED0
+	.data       start:0x803D41F8 end:0x803D4878
 	.sdata2     start:0x804DA050 end:0x804DA058
 
 melee/ft/chara/ftCrazyHand/ftCh_Wait1_0.c:
 	.text       start:0x80155FCC end:0x80156F6C
+	.data       start:0x803D4878 end:0x803D4998
 	.sdata2     start:0x804DA058 end:0x804DA068
 
 melee/ft/chara/ftCrazyHand/ftCh_Entry.c:
@@ -1897,6 +1897,7 @@ melee/ft/chara/ftCrazyHand/ftCh_BackDisappear.c:
 
 melee/ft/chara/ftCrazyHand/ftCh_Wait1_1.c:
 	.text       start:0x80159AA4 end:0x80159F40
+	.sdata      start:0x804D3EC0 end:0x804D3ED0
 	.sdata2     start:0x804DA138 end:0x804DA148
 
 melee/ft/chara/ftCrazyHand/ftCh_Grab.c:
@@ -1941,6 +1942,7 @@ melee/ft/chara/ftCrazyHand/ftCh_TagGrab.c:
 
 melee/ft/chara/ftCrazyHand/ftCh_GrabUnk1_B174.c:
 	.text       start:0x8015B174 end:0x8015B548
+	.data       start:0x803D4998 end:0x803D49C0
 	.sdata2     start:0x804DA198 end:0x804DA1D0
 
 melee/ft/chara/ftCrazyHand/ftCh_CaptureCrazyHand.c:

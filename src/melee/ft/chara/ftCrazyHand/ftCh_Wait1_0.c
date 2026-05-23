@@ -1,8 +1,8 @@
 #include "ftCh_Wait1_0.h"
 
+#include "ftCh_GrabUnk1_B174.h"
 #include "ftCh_Init.h"
-
-#include "math.h"
+#include "ftCh_TagCancel.h"
 #include "types.h"
 
 #include <placeholder.h>
@@ -10,34 +10,29 @@
 
 #include "baselib/forward.h"
 
-#include "cm/camera.h"
-#include "ft/chara/ftCommon/ftCo_Attack100.h"
-#include "ft/chara/ftCommon/ftCo_CaptureCut.h"
-#include "ft/chara/ftCommon/ftCo_Lift.h"
-#include "ft/chara/ftCommon/ftCo_Throw.h"
-#include "ft/chara/ftCommon/ftCo_Thrown.h"
 #include "ft/fighter.h"
-#include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
-#include "ft/ft_0881.h"
-#include "ft/ft_0D4D.h"
+#include "ft/ft_084E.h"
 #include "ft/ftbosslib.h"
-#include "ft/ftcamera.h"
-#include "ft/ftcommon.h"
-#include "ft/ftlib.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
-
-#include "ftCrazyHand/forward.h"
-
+#include "ftCrazyHand/ftCh_BackCrush.h"
+#include "ftCrazyHand/ftCh_BackDisappear.h"
+#include "ftCrazyHand/ftCh_Damage_0.h"
+#include "ftCrazyHand/ftCh_Drill.h"
+#include "ftCrazyHand/ftCh_Entry.h"
+#include "ftCrazyHand/ftCh_FingerBeam.h"
+#include "ftCrazyHand/ftCh_FingerBeam_0.h"
+#include "ftCrazyHand/ftCh_Grab.h"
+#include "ftCrazyHand/ftCh_Poke.h"
+#include "ftCrazyHand/ftCh_RockCrush_0.h"
+#include "ftCrazyHand/ftCh_RockCrush_1.h"
+#include "ftCrazyHand/ftCh_Sweep.h"
+#include "ftCrazyHand/ftCh_SweepWait.h"
+#include "ftCrazyHand/ftCh_TagRockPaper.h"
+#include "ftCrazyHand/ftCh_Wait1_1.h"
+#include "ftCrazyHand/ftCh_Walk.h"
 #include "ftMasterHand/types.h"
 #include "gr/stage.h"
-#include "it/it_26B1.h"
-#include "it/items/itcrazyhandbomb.h"
-#include "it/items/itmasterhandlaser.h"
-#include "lb/lb_00B0.h"
-#include "lb/lbaudio_ax.h"
-#include "lb/lbvector.h"
 #include "mp/mplib.h"
 #include "pl/player.h"
 
@@ -47,6 +42,31 @@
 
 static void ftCh_Init_80156310(HSD_GObj* gobj);
 static void ftCh_Init_80156AD8(HSD_GObj* gobj);
+
+typedef struct {
+    u8 a;
+    u8 b;
+} u8_pair;
+
+struct ftCh_Init_803D4878_t {
+    s32 states[18];
+    u8 x48[20];
+    u8_pair x5C[6];
+    u8 x68[32];
+};
+
+struct ftCh_Init_803D4878_t ftCh_Init_803D4878 = {
+    { ftMh_MS_Entry, ftMh_MS_Damage2, ftMh_MS_SweepLoop, ftMh_MS_Slap,
+      ftMh_MS_WalkLoop, ftMh_MS_Drill, ftMh_MS_RockCrushUp,
+      ftMh_MS_RockCrushDown, ftMh_MS_BackDisappear, ftMh_MS_Wait1_1,
+      ftMh_MS_Grab, ftMh_MS_Poke1, ftMh_MS_FingerBeamStart,
+      ftMh_MS_BackAirplane2, ftMh_MS_BackAirplane3, ftMh_MS_Squeezing1,
+      ftMh_MS_Squeeze, ftMh_MS_Throw },
+    { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 0, 0 },
+    { { 0, 4 }, { 4, 4 }, { 8, 3 }, { 11, 2 }, { 13, 2 }, { 15, 3 } },
+    { 1, 2, 3, 4, 5, 0, 2, 3, 4, 5, 0, 1, 3, 4, 5, 0,
+      1, 2, 4, 5, 0, 1, 2, 3, 5, 0, 1, 2, 3, 4, 0, 0 }
+};
 
 void ftCh_Init_80155FCC(HSD_GObj* gobj)
 {
@@ -116,8 +136,6 @@ static void ftCh_Init_80156310(HSD_GObj* gobj)
     fp->cur_pos.y = da->x1C;
     ftCh_Init_80156018(gobj);
 }
-
-extern struct ftCh_Init_803D4878_t ftCh_Init_803D4878;
 
 inline void doAnim0(HSD_GObj* gobj)
 {
@@ -206,15 +224,15 @@ void ftCh_Wait1_0_Anim(HSD_GObj* gobj)
                     tmp2 = ftMh_MS_Wait1_0;
                 }
                 switch (tmp2) {
-                case ftMh_MS_Entry:
-                    mpFloorGetLeft(0, &vec);
-                    vec.y = da->x24;
-                    ftCh_GrabUnk1_8015BA34(gobj, fn_80156F6C, &vec);
-                    break;
                 case ftMh_MS_Damage2:
                     mpFloorGetLeft(0, &vec);
-                    vec.y = da->x20;
+                    vec.y = da->x24;
                     ftCh_GrabUnk1_8015BA34(gobj, fn_80157080, &vec);
+                    break;
+                case ftMh_MS_Entry:
+                    mpFloorGetLeft(0, &vec);
+                    vec.y = da->x20;
+                    ftCh_GrabUnk1_8015BA34(gobj, fn_80156F6C, &vec);
                     break;
                 case ftMh_MS_SweepLoop:
                     vec.x = da->x2C;
@@ -422,4 +440,3 @@ static void ftCh_Init_80156AD8(HSD_GObj* gobj)
         ftCh_GrabUnk1_8015BA34(gobj, fn_8015AAC8, &pos);
     }
 }
-

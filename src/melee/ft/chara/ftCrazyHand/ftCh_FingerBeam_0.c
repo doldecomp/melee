@@ -1,8 +1,6 @@
 #include "ftCh_FingerBeam_0.h"
 
 #include "ftCh_Init.h"
-
-#include "math.h"
 #include "types.h"
 
 #include <placeholder.h>
@@ -10,35 +8,15 @@
 
 #include "baselib/forward.h"
 
-#include "cm/camera.h"
-#include "ft/chara/ftCommon/ftCo_Attack100.h"
-#include "ft/chara/ftCommon/ftCo_CaptureCut.h"
-#include "ft/chara/ftCommon/ftCo_Lift.h"
-#include "ft/chara/ftCommon/ftCo_Throw.h"
-#include "ft/chara/ftCommon/ftCo_Thrown.h"
 #include "ft/fighter.h"
-#include "ft/ft_081B.h"
+#include "ft/ft_084E.h"
 #include "ft/ft_0877.h"
-#include "ft/ft_0881.h"
-#include "ft/ft_0D4D.h"
 #include "ft/ftbosslib.h"
-#include "ft/ftcamera.h"
-#include "ft/ftcommon.h"
-#include "ft/ftlib.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
-
-#include "ftCrazyHand/forward.h"
-
-#include "ftMasterHand/types.h"
-#include "gr/stage.h"
-#include "it/it_26B1.h"
+#include "ftCrazyHand/ftCh_TagCancel.h"
 #include "it/items/itcrazyhandbomb.h"
-#include "it/items/itmasterhandlaser.h"
 #include "lb/lb_00B0.h"
-#include "lb/lbaudio_ax.h"
-#include "lb/lbvector.h"
-#include "mp/mplib.h"
 #include "pl/player.h"
 
 #include <common_structs.h>
@@ -123,4 +101,3 @@ static void fn_801588B8(HSD_GObj* gobj)
         ft_PlaySFX(fp, 0x4E203, 0x7F, 0x40);
     }
 }
-

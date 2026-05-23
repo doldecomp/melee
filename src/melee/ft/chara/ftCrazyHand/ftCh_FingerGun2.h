@@ -3,6 +3,8 @@
 
 #include <baselib/forward.h>
 
+void ftCh_GrabUnk1_8015ABD0(HSD_GObj* gobj);
+void ftCh_GrabUnk1_8015AC50(HSD_GObj* gobj);
 /* 15ACD0 */ void ftCh_FingerGun2_Anim(HSD_GObj* gobj);
 /* 15AD28 */ void ftCh_FingerGun2_IASA(HSD_GObj* gobj);
 /* 15AD6C */ void ftCh_FingerGun2_Phys(HSD_GObj* gobj);

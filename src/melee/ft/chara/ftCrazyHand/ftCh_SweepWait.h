@@ -2,7 +2,7 @@
 #define GALE01_15755C
 
 #include <baselib/forward.h>
-
+void fn_8015755C(HSD_GObj* gobj);
 /* 1575A8 */ void ftCh_SweepWait_Anim(HSD_GObj* gobj);
 /* 1575E4 */ void ftCh_SweepWait_IASA(HSD_GObj* gobj);
 /* 157628 */ void ftCh_SweepWait_Phys(HSD_GObj* gobj);

@@ -1,7 +1,6 @@
 #include "ftCh_GrabUnk1_B174.h"
 
 #include "ftCh_Init.h"
-
 #include "math.h"
 #include "types.h"
 
@@ -11,41 +10,21 @@
 #include "baselib/forward.h"
 
 #include "cm/camera.h"
-#include "ft/chara/ftCommon/ftCo_Attack100.h"
-#include "ft/chara/ftCommon/ftCo_CaptureCut.h"
-#include "ft/chara/ftCommon/ftCo_Lift.h"
-#include "ft/chara/ftCommon/ftCo_Throw.h"
-#include "ft/chara/ftCommon/ftCo_Thrown.h"
 #include "ft/fighter.h"
-#include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
 #include "ft/ft_0881.h"
-#include "ft/ft_0D4D.h"
 #include "ft/ftbosslib.h"
-#include "ft/ftcamera.h"
-#include "ft/ftcommon.h"
 #include "ft/ftlib.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
-
-#include "ftCrazyHand/forward.h"
-
+#include "ftCrazyHand/ftCh_TagCancel.h"
 #include "ftMasterHand/types.h"
-#include "gr/stage.h"
-#include "it/it_26B1.h"
-#include "it/items/itcrazyhandbomb.h"
-#include "it/items/itmasterhandlaser.h"
 #include "lb/lb_00B0.h"
-#include "lb/lbaudio_ax.h"
-#include "lb/lbvector.h"
-#include "mp/mplib.h"
 #include "pl/player.h"
 
 #include <common_structs.h>
 #include <dolphin/mtx.h>
 #include <MetroTRK/intrinsics.h>
 
-static void fn_8015B2C0(HSD_GObj* gobj);
 bool fn_8015B4EC(Vec3* vec);
 
 void ftCh_GrabUnk1_8015B174(HSD_GObj* gobj)
@@ -84,7 +63,7 @@ void ftCh_TagFail_Phys(HSD_GObj* gobj) {}
 
 void ftCh_TagFail_Coll(HSD_GObj* gobj) {}
 
-static void fn_8015B2C0(HSD_GObj* gobj)
+void fn_8015B2C0(HSD_GObj* gobj)
 {
     Fighter* fp = GET_FIGHTER(gobj);
     u8 _[16];
@@ -195,4 +174,3 @@ bool fn_8015B4EC(Vec3* vec)
     }
     return false;
 }
-

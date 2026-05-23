@@ -1,6 +1,5 @@
 #include "ftCh_Init.h"
 
-#include "math.h"
 #include "types.h"
 
 #include <placeholder.h>
@@ -8,137 +7,56 @@
 
 #include "baselib/forward.h"
 
-#include "cm/camera.h"
-#include "ft/chara/ftCommon/ftCo_Attack100.h"
-#include "ft/chara/ftCommon/ftCo_CaptureCut.h"
-#include "ft/chara/ftCommon/ftCo_Lift.h"
-#include "ft/chara/ftCommon/ftCo_Throw.h"
-#include "ft/chara/ftCommon/ftCo_Thrown.h"
 #include "ft/fighter.h"
-#include "ft/ft_081B.h"
-#include "ft/ft_0877.h"
-#include "ft/ft_0881.h"
-#include "ft/ft_0D4D.h"
 #include "ft/ftbosslib.h"
 #include "ft/ftcamera.h"
-#include "ft/ftcommon.h"
-#include "ft/ftlib.h"
 #include "ft/inlines.h"
 #include "ft/types.h"
 
 #include "ftCrazyHand/forward.h"
 
+#include "ftCrazyHand/ftCh_BackAirplane1.h"
+#include "ftCrazyHand/ftCh_BackAirplane2.h"
+#include "ftCrazyHand/ftCh_BackAirplane3.h"
+#include "ftCrazyHand/ftCh_BackCrush.h"
+#include "ftCrazyHand/ftCh_BackDisappear.h"
+#include "ftCrazyHand/ftCh_Cancel.h"
+#include "ftCrazyHand/ftCh_Damage_0.h"
+#include "ftCrazyHand/ftCh_Drill.h"
+#include "ftCrazyHand/ftCh_Entry.h"
+#include "ftCrazyHand/ftCh_FingerBeam.h"
+#include "ftCrazyHand/ftCh_FingerBeam_0.h"
+#include "ftCrazyHand/ftCh_FingerGun2.h"
+#include "ftCrazyHand/ftCh_Grab.h"
+#include "ftCrazyHand/ftCh_GrabUnk1_B174.h"
+#include "ftCrazyHand/ftCh_Poke.h"
+#include "ftCrazyHand/ftCh_RockCrush_0.h"
+#include "ftCrazyHand/ftCh_RockCrush_1.h"
+#include "ftCrazyHand/ftCh_Slam.h"
+#include "ftCrazyHand/ftCh_Squeeze.h"
+#include "ftCrazyHand/ftCh_Squeezing_0.h"
+#include "ftCrazyHand/ftCh_Squeezing_1.h"
+#include "ftCrazyHand/ftCh_Sweep.h"
+#include "ftCrazyHand/ftCh_SweepWait.h"
+#include "ftCrazyHand/ftCh_TagCancel.h"
+#include "ftCrazyHand/ftCh_TagGrab.h"
+#include "ftCrazyHand/ftCh_TagRockPaper.h"
+#include "ftCrazyHand/ftCh_Throw.h"
+#include "ftCrazyHand/ftCh_Wait1_0.h"
+#include "ftCrazyHand/ftCh_Wait1_1.h"
+#include "ftCrazyHand/ftCh_Walk.h"
 #include "ftMasterHand/types.h"
-#include "gr/stage.h"
 #include "it/it_26B1.h"
-#include "it/items/itcrazyhandbomb.h"
-#include "it/items/itmasterhandlaser.h"
-#include "lb/lb_00B0.h"
-#include "lb/lbaudio_ax.h"
-#include "lb/lbvector.h"
-#include "mp/mplib.h"
-#include "pl/player.h"
 
 #include <common_structs.h>
 #include <dolphin/mtx.h>
 #include <MetroTRK/intrinsics.h>
-
-/* 156F6C */ static void fn_80156F6C(HSD_GObj* gobj);
-
-static inline float my_sqrtf(float x)
-{
-    static const double _half = .5;
-    static const double _three = 3.0;
-
-    u8 _[4] = { 0 };
-
-    volatile float y;
-    if (x > 0) {
-        double guess = __frsqrte((double) x);
-        guess = _half * guess * (_three - guess * guess * x);
-        guess = _half * guess * (_three - guess * guess * x);
-        guess = _half * guess * (_three - guess * guess * x);
-        y = (float) (x * guess);
-        return y;
-    }
-    return x;
-}
-
-static inline float my_lbVector_Len(Vec3* vec)
-{
-    return my_sqrtf(vec->x * vec->x + vec->y * vec->y + vec->z * vec->z);
-}
 
 /// @todo Figure out how to use #GET_JOBJ instead.
 static inline HSD_JObj* get_jobj(HSD_GObj* gobj)
 {
     return gobj->hsd_obj;
 }
-
-/* 156310 */ static void ftCh_Init_80156310(HSD_GObj* gobj);
-/* 157080 */ static void fn_80157080(Fighter_GObj* gobj);
-/* 15746C */ static void fn_8015746C(HSD_GObj* gobj);
-/* 15755C */ static void fn_8015755C(HSD_GObj* gobj);
-/* 1578E8 */ static void fn_801578E8(HSD_GObj* gobj);
-/* 159288 */ static void fn_80159288(HSD_GObj* gobj);
-/* 159908 */ static void fn_80159908(HSD_GObj* gobj);
-/* 1582D8 */ static void fn_801582D8(HSD_GObj* gobj);
-/* 158534 */ static void fn_80158534(HSD_GObj* gobj);
-/* 1587B0 */ static void fn_801587B0(HSD_GObj* gobj);
-/* 1588B8 */ static void fn_801588B8(HSD_GObj* gobj);
-/* 15868C */ static void ftCh_Init_8015868C(HSD_GObj* gobj);
-/* 15ABD0 */ static void ftCh_GrabUnk1_8015ABD0(HSD_GObj* gobj);
-/* 15AC50 */ static void ftCh_GrabUnk1_8015AC50(HSD_GObj* gobj);
-/* 15B174 */ void ftCh_GrabUnk1_8015B174(HSD_GObj* gobj);
-/* 15B548 */ static void fn_8015B548(HSD_GObj* gobj, HSD_GObj* gobj2);
-/* 15B2C0 */ static void fn_8015B2C0(HSD_GObj* gobj);
-/* 15B670 */ static void ftCh_GrabUnk1_8015B670(HSD_GObj* gobj);
-/* 15B998 */ static void ftCh_GrabUnk1_8015B998(HSD_GObj* gobj);
-/* 156198 */ static void ftCh_Init_80156198(HSD_GObj* gobj);
-/* 156AD8 */ static void ftCh_Init_80156AD8(HSD_GObj* gobj);
-/* 15B4EC */ bool fn_8015B4EC(Vec3* vec);
-/* 1577B4 */ static void fn_801577B4(HSD_GObj* gobj);
-/* 159AA4 */ static void fn_80159AA4(HSD_GObj* gobj);
-/* 15BA34 */ void ftCh_GrabUnk1_8015BA34(HSD_GObj*, HSD_GObjEvent, Vec3*);
-
-/* static */ void ftCh_Init_801566B4(void);
-/* static */ void ftCh_Init_80156A5C(void);
-/* static */ void ftCh_Init_80156688(void);
-/* static */ void ftCh_Init_80156A5C(void);
-/* static */ void ftCh_Init_801566E0(void);
-/* static */ void ftCh_Init_80156A5C(void);
-/* static */ void ftCh_Init_80156710(void);
-/* static */ void ftCh_Init_80156A5C(void);
-/* static */ void ftCh_Init_80156740(void);
-/* static */ void ftCh_Init_80156A5C(void);
-/* static */ void ftCh_Init_80156A5C(void);
-/* static */ void ftCh_Init_80156770(void);
-/* static */ void ftCh_Init_801567A0(void);
-/* static */ void ftCh_Init_80156A5C(void);
-/* static */ void ftCh_Init_801567AC(void);
-/* static */ void ftCh_Init_80156A5C(void);
-/* static */ void ftCh_Init_801567DC(void);
-/* static */ void ftCh_Init_80156A5C(void);
-/* static */ void ftCh_Init_8015683C(void);
-/* static */ void ftCh_Init_80156A5C(void);
-/* static */ void ftCh_Init_80156A5C(void);
-/* static */ void ftCh_Init_80156A5C(void);
-/* static */ void ftCh_Init_80156A5C(void);
-/* static */ void ftCh_Init_80156A5C(void);
-/* static */ void ftCh_Init_80156A5C(void);
-/* static */ void ftCh_Init_8015686C(void);
-/* static */ void ftCh_Init_80156878(void);
-/* static */ void ftCh_Init_80156A5C(void);
-/* static */ void ftCh_Init_80156A5C(void);
-/* static */ void ftCh_Init_80156884(void);
-/* static */ void ftCh_Init_80156898(void);
-/* static */ void ftCh_Init_801568AC(void);
-/* static */ void ftCh_Init_80156A5C(void);
-/* static */ void ftCh_Init_80156A5C(void);
-/* static */ void ftCh_Init_801568B8(void);
-/* static */ void ftCh_Init_801568E8(void);
-/* static */ void ftCh_Init_80156918(void);
-/* static */ void ftCh_Init_80156948(void);
 
 MotionState ftCh_Init_MotionStateTable[ftCh_MS_SelfCount] = {
     {
@@ -692,40 +610,6 @@ Fighter_CostumeStrings ftCh_Init_CostumeStrings[] = {
     { ftCh_Init_803D4834, ftCh_Init_803D4840, NULL },
 };
 
-jtbl_t ftCh_Init_803D4900 = {
-    ftCh_Init_801566B4, ftCh_Init_80156A5C, ftCh_Init_80156688,
-    ftCh_Init_80156A5C, ftCh_Init_801566E0, ftCh_Init_80156A5C,
-    ftCh_Init_80156710, ftCh_Init_80156A5C, ftCh_Init_80156740,
-    ftCh_Init_80156A5C, ftCh_Init_80156A5C, ftCh_Init_80156770,
-    ftCh_Init_801567A0, ftCh_Init_80156A5C, ftCh_Init_801567AC,
-    ftCh_Init_80156A5C, ftCh_Init_801567DC, ftCh_Init_80156A5C,
-    ftCh_Init_8015683C, ftCh_Init_80156A5C, ftCh_Init_80156A5C,
-    ftCh_Init_80156A5C, ftCh_Init_80156A5C, ftCh_Init_80156A5C,
-    ftCh_Init_80156A5C, ftCh_Init_8015686C, ftCh_Init_80156878,
-    ftCh_Init_80156A5C, ftCh_Init_80156A5C, ftCh_Init_80156884,
-    ftCh_Init_80156898, ftCh_Init_801568AC, ftCh_Init_80156A5C,
-    ftCh_Init_80156A5C, ftCh_Init_801568B8, ftCh_Init_801568E8,
-    ftCh_Init_80156918, ftCh_Init_80156948,
-};
-
-/* static */ void ftCh_GrabUnk1_8015B2FC(void);
-/* static */ void ftCh_GrabUnk1_8015B35C(void);
-/* static */ void ftCh_GrabUnk1_8015B390(void);
-/* static */ void ftCh_GrabUnk1_8015B3B8(void);
-/* static */ void ftCh_GrabUnk1_8015B3EC(void);
-/* static */ void ftCh_GrabUnk1_8015B404(void);
-/* static */ void ftCh_GrabUnk1_8015B43C(void);
-/* static */ void ftCh_GrabUnk1_8015B46C(void);
-/* static */ void ftCh_GrabUnk1_8015B4AC(void);
-/* static */ void ftCh_GrabUnk1_8015B4BC(void);
-
-jtbl_t ftCh_Init_803D4998 = {
-    ftCh_GrabUnk1_8015B2FC, ftCh_GrabUnk1_8015B35C, ftCh_GrabUnk1_8015B390,
-    ftCh_GrabUnk1_8015B3B8, ftCh_GrabUnk1_8015B3EC, ftCh_GrabUnk1_8015B404,
-    ftCh_GrabUnk1_8015B43C, ftCh_GrabUnk1_8015B46C, ftCh_GrabUnk1_8015B4AC,
-    ftCh_GrabUnk1_8015B4BC,
-};
-
 void ftCh_Init_OnDeath(HSD_GObj* gobj) {}
 
 void ftCh_Init_OnLoad(HSD_GObj* gobj)
@@ -778,17 +662,3 @@ void ftCh_Init_LoadSpecialAttrs(HSD_GObj* gobj)
 {
     COPY_ATTRS(gobj, ftCrazyHand_DatAttrs);
 }
-
-
-struct ftCh_Init_803D4878_t ftCh_Init_803D4878 = {
-    { ftMh_MS_Entry, ftMh_MS_Damage2, ftMh_MS_SweepLoop, ftMh_MS_Slap,
-      ftMh_MS_WalkLoop, ftMh_MS_Drill, ftMh_MS_RockCrushUp,
-      ftMh_MS_RockCrushDown, ftMh_MS_BackDisappear, ftMh_MS_Wait1_1,
-      ftMh_MS_Grab, ftMh_MS_Poke1, ftMh_MS_FingerBeamStart,
-      ftMh_MS_BackAirplane2, ftMh_MS_BackAirplane3, ftMh_MS_Squeezing1,
-      ftMh_MS_Squeeze, ftMh_MS_Throw },
-    { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 0, 0 },
-    { { 0, 4 }, { 4, 4 }, { 8, 3 }, { 11, 2 }, { 13, 2 }, { 15, 3 } },
-    { 1, 2, 3, 4, 5, 0, 2, 3, 4, 5, 0, 1, 3, 4, 5, 0,
-      1, 2, 4, 5, 0, 1, 2, 3, 5, 0, 1, 2, 3, 4, 0, 0 }
-};

@@ -2,7 +2,7 @@
 #define GALE01_1578E8
 
 #include <baselib/forward.h>
-
+void fn_801578E8(HSD_GObj* gobj);
 /* 157934 */ void ftCh_WalkLoop_Anim(HSD_GObj* gobj);
 /* 15798C */ void ftCh_WalkLoop_IASA(HSD_GObj* gobj);
 /* 1579D0 */ void ftCh_WalkLoop_Phys(HSD_GObj* gobj);
