@@ -2,7 +2,7 @@ File: src/melee/ft/ftcpuattack.c
 Funcs:
 - [x] ftCo_800BB220
 - [x] ftCo_800B8A9C
-- [ ] ftCo_800B5AB0
+- [x] ftCo_800B5AB0
 - [x] ftCo_800B4AB0
 - [x] ftCo_800B52AC
 - [ ] ftCo_800B77E8
