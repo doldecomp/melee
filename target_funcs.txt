@@ -26,7 +26,7 @@ Funcs:
 - [x] ftCo_800B2790
 - [x] ftCo_800A6700
 - [x] ftCo_800A9904
-- [ ] ftCo_800A8210
+- [x] ftCo_800A8210
 - [ ] ftCo_800A229C
 - [ ] ftCo_800A8940
 - [ ] ftCo_800A2C80

@@ -2683,7 +2683,128 @@ static inline void ftCo_800A80E4_dontinline(Fighter* fp)
     ftCo_800A80E4(fp);
 }
 
-/// #ftCo_800A8210
+void ftCo_800A8210(Fighter* fp, Vec3* arg1)
+{
+    struct Fighter_x1A88_t* data = &fp->x1A88;
+    Vec3 out;
+    Vec3 dir;
+    f32 left;
+    f32 cx;
+    f32 bottom;
+    f32 sum_y;
+    f32 cy;
+
+    if (fp->ground_or_air == GA_Air) {
+        return;
+    }
+    switch (stage_info.internal_stage_id) {
+    case ICEMTN:
+        grLib_801C9E60(&dir);
+        if (dir.y < 0.0f) {
+            if (ftCo_800A6A98(fp, &out)) {
+                if (data->x60 == 0) {
+                    data->x54.x = out.x;
+                    data->x54.y = out.y;
+                    data->x38 = 5.0f;
+                    ftCo_800A1CC4(
+                        fp, ftCo_803C6594[stage_info.internal_stage_id]);
+                }
+                return;
+            }
+        } else {
+            if (ftCo_800A6D2C(fp, &out)) {
+                if (data->x60 == 0) {
+                    data->x54.x = out.x;
+                    data->x54.y = out.y;
+                    data->x38 = 5.0f;
+                    ftCo_800A1CC4(
+                        fp, ftCo_803C6594[stage_info.internal_stage_id]);
+                }
+                return;
+            }
+            return;
+        }
+        break;
+    case RCRUISE:
+        left = Stage_GetBlastZoneLeftOffset();
+        cx = 0.5f * (Stage_GetBlastZoneRightOffset() + left);
+        bottom = Stage_GetBlastZoneBottomOffset();
+        sum_y = Stage_GetBlastZoneTopOffset() + bottom;
+        cy = 0.5f * sum_y;
+        dir.x = cx - fp->cur_pos.x;
+        dir.y = cy - fp->cur_pos.y;
+        dir.z = 0.0f;
+        if (ftCo_800A6FC4(fp, &out, &dir)) {
+            if (data->x60 == 0) {
+                data->x54.x = out.x;
+                data->x54.y = out.y;
+                data->x38 = 5.0f;
+                ftCo_800A1CC4(fp,
+                              ftCo_803C6594[stage_info.internal_stage_id]);
+            }
+            return;
+        }
+        grLib_801C9E60(&dir);
+        dir.x = -dir.x;
+        dir.y = -dir.y;
+        if (ftCo_800A6FC4(fp, &out, &dir)) {
+            if (data->x60 == 0) {
+                data->x54.x = out.x;
+                data->x54.y = out.y;
+                data->x38 = 5.0f;
+                ftCo_800A1CC4(fp,
+                              ftCo_803C6594[stage_info.internal_stage_id]);
+            }
+            return;
+        }
+        return;
+    case BIGBLUE:
+        left = Stage_GetBlastZoneLeftOffset();
+        cx = 0.5f * (Stage_GetBlastZoneRightOffset() + left);
+        bottom = Stage_GetBlastZoneBottomOffset();
+        sum_y = Stage_GetBlastZoneTopOffset() + bottom;
+        cy = 0.5f * sum_y;
+        dir.x = cx - fp->cur_pos.x;
+        dir.y = cy - fp->cur_pos.y;
+        dir.z = 0.0f;
+        if (ftCo_800A6FC4(fp, &out, &dir)) {
+            if (data->x60 == 0) {
+                data->x54.x = out.x;
+                data->x54.y = out.y;
+                data->x38 = 5.0f;
+                ftCo_800A1CC4(fp,
+                              ftCo_803C6594[stage_info.internal_stage_id]);
+            }
+            return;
+        }
+        grLib_801C9E60(&dir);
+        dir.x = -dir.x;
+        dir.y = -dir.y;
+        if (ftCo_800A6FC4(fp, &out, &dir)) {
+            if (data->x60 == 0) {
+                data->x54.x = out.x;
+                data->x54.y = out.y;
+                data->x38 = 5.0f;
+                ftCo_800A1CC4(fp,
+                              ftCo_803C6594[stage_info.internal_stage_id]);
+            }
+            return;
+        }
+        return;
+    default:
+        if (ftCo_800A6700(fp, arg1, &out)) {
+            if (data->x60 == 0) {
+                data->x54.x = out.x;
+                data->x54.y = out.y;
+                data->x38 = 5.0f;
+                ftCo_800A1CC4(fp,
+                              ftCo_803C6594[stage_info.internal_stage_id]);
+            }
+            return;
+        }
+        return;
+    }
+}
 
 void ftCo_800A866C(Fighter* fp)
 {
