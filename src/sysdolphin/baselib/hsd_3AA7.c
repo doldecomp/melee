@@ -949,10 +949,7 @@ s32 fn_803ADF90(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
                     cmd[1] = (s32) arg0;
                     cmd[4] = data_block;
                     cmd[6] = (s32) dst;
-                    cmd[7] =
-                        state->x8 *
-                        (data_block +
-                         ((state->x24 + state->x8 + 0x2F) / state->x8) - 1);
+                    cmd[7] = fn_803ACBE8(arg0, data_block);
                     cmd[8] = chunk;
                     result = fn_803AC168(cmd);
                     if (result < 0) {
@@ -965,10 +962,7 @@ s32 fn_803ADF90(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
                     s32 offset;
                     s32 retries;
 
-                    offset =
-                        state->x8 *
-                        (data_block +
-                         ((state->x24 + state->x8 + 0x2F) / state->x8) - 1);
+                    offset = fn_803ACBE8(arg0, data_block);
                     for (retries = 0; retries < 10; retries++) {
                         result = CARDRead(&state->file_info, state->x0,
                                           state->x8, offset);
@@ -1023,10 +1017,7 @@ s32 fn_803ADF90(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
                     cmd[1] = (s32) arg0;
                     cmd[4] = data_block;
                     cmd[6] = (s32) dst;
-                    cmd[7] =
-                        state->x8 *
-                        (data_block +
-                         ((state->x24 + state->x8 + 0x2F) / state->x8) - 1);
+                    cmd[7] = fn_803ACBE8(arg0, data_block);
                     cmd[8] = remaining;
                     result = fn_803AC168(cmd);
                     if (result < 0) {
@@ -1040,10 +1031,7 @@ s32 fn_803ADF90(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
                     s32 retries;
                     s32 read_ofs;
 
-                    offset =
-                        state->x8 *
-                        (data_block +
-                         ((state->x24 + state->x8 + 0x2F) / state->x8) - 1);
+                    offset = fn_803ACBE8(arg0, data_block);
                     for (retries = 0; retries < 10; retries++) {
                         result = CARDRead(&state->file_info, state->x0,
                                           state->x8, offset);
@@ -1237,11 +1225,7 @@ s32 fn_803AE7F8(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
                         cmd[4] = blocks_before + i;
                         cmd[5] = current_seq;
                         cmd[6] = (s32) data;
-                        cmd[7] =
-                            state->x8 *
-                            (phys +
-                             ((state->x24 + state->x8 + 0x2F) / state->x8) -
-                             1);
+                        cmd[7] = fn_803ACBE8(arg0, phys);
                         cmd[8] = chunk;
                         result = fn_803AC168(cmd);
                         if (result < 0) {
@@ -1336,11 +1320,7 @@ s32 fn_803AE7F8(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
                         cmd[4] = blocks_before + i;
                         cmd[5] = current_seq;
                         cmd[6] = (s32) data;
-                        cmd[7] =
-                            state->x8 *
-                            (phys +
-                             ((state->x24 + state->x8 + 0x2F) / state->x8) -
-                             1);
+                        cmd[7] = fn_803ACBE8(arg0, phys);
                         cmd[8] = chunk;
                         result = fn_803AC168(cmd);
                         if (result < 0) {
