@@ -103,7 +103,7 @@ Funcs:
 - [ ] gm_801BC00C
 - [ ] gm_801BCC9C
 - [x] gm_801BD028
-- [ ] gm_801BE638
+- [x] gm_801BE638
 - [ ] gm_801BF128
 
 File: src/melee/gm/gm_1BFA.c
