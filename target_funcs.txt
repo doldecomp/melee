@@ -102,7 +102,7 @@ Funcs:
 - [ ] gm_801BBB64
 - [ ] gm_801BC00C
 - [ ] gm_801BCC9C
-- [ ] gm_801BD028
+- [x] gm_801BD028
 - [ ] gm_801BE638
 - [ ] gm_801BF128
 

@@ -18,6 +18,7 @@
 #include <melee/gm/gmresult.h>
 #include <melee/gm/gmresultplayer.h>
 #include <melee/gm/gmtou.h>
+#include <melee/it/items/itevyoshiegg.h>
 #include <melee/gm/gmvsmelee.h>
 #include <melee/gm/types.h>
 #include <melee/gr/ground.h>
@@ -734,7 +735,45 @@ void gm_801BCF40(HSD_GObj* gobj)
     }
 }
 
-/// #gm_801BD028
+void gm_801BD028(HSD_GObj* arg0)
+{
+    Vec3 pos;
+    lbl_8046B6A0_t* rules;
+    s32 cond;
+    struct EventData* ev = &gmMainLib_804D3EE0->unk_530;
+
+    if (ev->x10 == 0) {
+        Vec3* src = (Vec3*) gm_804D6900[ev->unk_535]->x4;
+        pos.x = src->x;
+        pos.y = src->y;
+        pos.z = src->z;
+        itEvYoshiEgg_Spawn(&pos);
+        ev->x10 += 1;
+    }
+    if (ev->x18 != 0) {
+        ev->xB_1 = 0;
+        lbAudioAx_80028B90();
+        gm_SetGameSpeed(1.0f);
+        gm_8016B33C(6);
+        gm_8016B364(0x148);
+        gm_8016B378(0x28);
+        gm_8016B328();
+        HSD_GObjPLink_80390228(arg0);
+        return;
+    }
+    rules = gm_8016AE38();
+    if (ev->xB_0) {
+        cond = 0;
+    } else if (((((u8*) &rules->x24C8)[0] >> 1) & 1) && gm_8016AEEC() == 0 &&
+               gm_8016AEFC() == 0x3B) {
+        cond = 1;
+    } else {
+        cond = 0;
+    }
+    if (cond != 0) {
+        gm_801BC4F4(arg0);
+    }
+}
 
 void gm_801BD164(HSD_GObj* gobj)
 {
