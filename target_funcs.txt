@@ -17,7 +17,7 @@ Funcs:
 - [x] ftCo_800A866C
 - [x] ftCo_800AEFB8
 - [x] ftCo_800B1EF0
-- [ ] ftCo_800B24B8
+- [x] ftCo_800B24B8
 - [ ] ftCo_800AE7AC
 - [ ] ftCo_800B17D0
 - [ ] ftCo_800B1AB8
