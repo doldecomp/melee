@@ -52,6 +52,8 @@ int pl_800386E8(pl_800386E8_arg0_t* arg0)
     return temp + arg0->unk_5B0;
 }
 
+#pragma push
+#pragma dont_inline on
 int fn_80038700(int* arg0, int arg1, int arg2)
 {
     int sum = 0;
@@ -62,6 +64,7 @@ int fn_80038700(int* arg0, int arg1, int arg2)
     }
     return sum;
 }
+#pragma pop
 
 void pl_80038788(int player, int kind, int arg2)
 {
@@ -414,7 +417,320 @@ void pl_80039450(int player)
     }
 }
 
-/// #fn_80039618
+void fn_80039618(int player)
+{
+    pl_StaleMoveTableExt_t* table = Player_GetStaleMoveTableIndexPtr2(player);
+    plActionStats* stats = Player_GetActionStats(player);
+    HSD_GObj* gobj = Player_GetEntity(player);
+    u32 aerials = stats->hits.aerials_count;
+    u32 atk_thrown = stats->attacks.thrown_item_count;
+    u32* atk_counts = stats->attacks.by_attack_counts;
+    u32 hit_x1A8 = stats->hits.x1A8;
+    u32 atk_x1A8 = stats->attacks.x1A8;
+    u32* hit_counts = stats->hits.by_attack_counts;
+    u32 hit_thrown = stats->hits.thrown_item_count;
+    u32* x358_counts = stats->x358_hits.by_attack_counts;
+    u32 hit_specials = stats->hits.specials_count;
+    u32 hit_x1A0 = stats->hits.x1A0_count;
+    u32 x358_x1A8 = stats->x358_hits.x1A8;
+    u32 attacks_total = stats->attacks.total;
+    u32 hits_total = stats->hits.total;
+    u32 x358_total = stats->x358_hits.total;
+    int i;
+    int j;
+    int k;
+
+    if (aerials != 0 && aerials == hits_total) {
+        setFlag(player, 0);
+    }
+    if (hit_specials != 0 && hit_specials == hits_total) {
+        setFlag(player, 0x21);
+    }
+    if (hit_x1A0 != 0 && hit_x1A0 == hits_total) {
+        setFlag(player, 0x22);
+    }
+    if (hits_total != 0) {
+        for (i = 1; i < 100; i++) {
+            if (!((i >= 0x33 && i <= 0x3D) || hit_counts[i] == 0)) {
+                goto skip_only_low_moves;
+            }
+        }
+        setFlag(player, 0x24);
+    skip_only_low_moves:;
+    }
+    {
+        u32 sum = 0;
+        u32 sub_sum = 0;
+        for (i = 0x40; i <= 0x62; i++) {
+            u32 count = hit_counts[i];
+            sum += count;
+            switch (i) {
+            case 0x42:
+            case 0x46:
+            case 0x4A:
+            case 0x4E:
+            case 0x56:
+                sub_sum += count;
+                break;
+            }
+        }
+        if (sum != 0) {
+            if (hits_total == hit_counts[0x62]) {
+                setFlag(player, 0x95);
+            } else if (hits_total == sub_sum) {
+                setFlag(player, 0x96);
+            } else if (hits_total == sum) {
+                setFlag(player, 0x94);
+            }
+        }
+    }
+    for (j = 0; j < 6; j++) {
+        for (k = 1; k <= 0x10; k++) {
+            if (!(pl_80037B2C(stats, j, k) != 0 ||
+                  pl_80038628(gobj, k) == 0))
+            {
+                break;
+            }
+        }
+        if (k == 0x11) {
+            setFlag(player, 0x11);
+            break;
+        }
+    }
+    if (Player_GetStaleMoveTableIndexPtr2(player)->x0_staleMoveTable.x904[0x11] ==
+        0)
+    {
+        int found_low = 0;
+        int found_high = 0;
+        for (k = 1; k <= 0xB; k++) {
+            if (!(hit_counts[k] != 0 || pl_80038628(gobj, k) == 0)) {
+                break;
+            }
+        }
+        if (k == 0xC) {
+            found_low = 1;
+        }
+        for (k = 0xC; k <= 0x10; k++) {
+            if (!(hit_counts[k] != 0 || pl_80038628(gobj, k) == 0)) {
+                break;
+            }
+        }
+        if (k == 0x11) {
+            found_high = 1;
+        }
+        if (found_low != 0 && found_high != 0) {
+            setFlag(player, 0x10);
+        } else if (found_low != 0) {
+            setFlag(player, 0xE);
+        } else if (found_high != 0) {
+            setFlag(player, 0xF);
+        }
+    }
+    {
+        u32* p = &x358_counts[1];
+        int count = 0;
+        s32 max = 0;
+        s32 min = 0;
+        for (i = 99; i != 0; i--) {
+            u32 c = *p;
+            if (c != 0) {
+                count++;
+                if (c > (u32) max) {
+                    max = c;
+                }
+                if (min == 0 || c < (u32) min) {
+                    min = c;
+                }
+            }
+            if (max != 0 && min != 0 &&
+                (f32) (max - min) >= (f32) max * pl_804D6470->x28)
+            {
+                goto skip_combo_count;
+            }
+            p++;
+        }
+        if (count >= (s32) pl_804D6470->x24) {
+            setFlag(player, 0x12);
+        }
+    skip_combo_count:;
+    }
+    if (hits_total != 0) {
+        if (hit_thrown == hits_total) {
+            setFlag(player, 0x15);
+        } else if (pl_CalculateAverage(hit_thrown, hits_total) >=
+                   pl_804D6470->x34)
+        {
+            setFlag(player, 0x14);
+        }
+    }
+    if (atk_thrown == 0) {
+        setFlag(player, 0x16);
+    }
+    {
+        int hit_count = 0;
+        for (i = 1; i < 100; i++) {
+            if (hit_counts[i] != 0 && i >= 0x11 && i <= 0x30) {
+                hit_count++;
+            }
+        }
+        if (hit_count != 0) {
+            if (hit_count == 1) {
+                setFlag(player, 0x18);
+            } else {
+                setFlag(player, 0x17);
+            }
+        }
+    }
+    if (hits_total != 0) {
+        if (pl_CalculateAverage(stats->x56C, hits_total) >= pl_804D6470->x8) {
+            setFlag(player, 3);
+        }
+    }
+    if (hits_total != 0 && stats->x574 == hits_total) {
+        setFlag(player, 5);
+    } else if (hits_total >= pl_804D6470->xC) {
+        if (pl_CalculateAverage(stats->x574, hits_total) >= pl_804D6470->x10) {
+            setFlag(player, 4);
+        }
+    }
+    if (attacks_total == 0 && table->x0_staleMoveTable.xC60 == 0.0f) {
+        setFlag(player, 0x64);
+    } else {
+        if (attacks_total == 0) {
+            setFlag(player, 0x60);
+        } else if (table->xD04 >= pl_804D6470->x54) {
+            setFlag(player, 0x2F);
+        } else if (table->xD04 >= pl_804D6470->x50) {
+            setFlag(player, 0x2E);
+        }
+        if (table->x0_staleMoveTable.xC60 == 0.0f) {
+            setFlag(player, 0x62);
+        } else if (table->xD0C >= pl_804D6470->xF0) {
+            setFlag(player, 0x61);
+        }
+    }
+    {
+        u32 falls = Player_GetFalls(player) + gm_80172140();
+        if (falls == 0) {
+            setFlag(player, 0x63);
+        } else if (falls == (u32) table->x0_staleMoveTable.xC94) {
+            setFlag(player, 0x66);
+        }
+    }
+    if (table->xDD1.bit0 && table->xDD1.bit1 && table->xDD1.bit2 &&
+        table->xDD1.bit3)
+    {
+        setFlag(player, 0x86);
+    }
+    if (atk_x1A8 != 0 && atk_x1A8 == x358_x1A8 &&
+        hit_x1A8 == (u32) Player_GetStaleMoveTableIndexPtr2(player)
+                        ->x0_staleMoveTable.x904[6])
+    {
+        setFlag(player, 8);
+    }
+    if (gm_801720B4() == 0) {
+        s32 dmg = (s32) table->x0_staleMoveTable.xC64;
+        if ((f32) dmg >= 400.0f) {
+            setFlag(player, 0x20);
+        } else if ((f32) dmg >= 350.0f) {
+            setFlag(player, 0x1F);
+        } else if ((f32) dmg >= 300.0f) {
+            if (gm_8016B3A0() == 0) {
+                setFlag(player, 0x1E);
+            }
+        } else if ((f32) dmg >= 250.0f) {
+            setFlag(player, 0x1D);
+        } else if ((f32) dmg >= 200.0f) {
+            setFlag(player, 0x1C);
+        } else if ((f32) dmg >= 150.0f) {
+            setFlag(player, 0x1B);
+        }
+    }
+    if ((u32) table->xDC8 != 0) {
+        if (x358_total == attacks_total) {
+            setFlag(player, 0xD);
+        } else if (pl_CalculateAverage(x358_total, attacks_total) >=
+                   pl_804D6470->x20)
+        {
+            setFlag(player, 0xC);
+        }
+    }
+    {
+        u32 sum_attacks = fn_80038700((int*) stats, 1, 0x10);
+        u32 sum_x358 = fn_80038700((int*) &stats->x358_hits, 1, 0x10);
+        if (sum_x358 != 0 && sum_attacks == sum_x358 && !table->xDD1.bit4) {
+            setFlag(player, 0x23);
+        }
+    }
+    if (table->x0_staleMoveTable.xC74 >= pl_804D6470->x160) {
+        setFlag(player, 0xAA);
+    }
+    if (pl_800414C0(player) >= pl_804D6470->x0) {
+        setFlag(player, 1);
+    }
+    if (pl_80038628(gobj, 2) != 0) {
+        u32 atk1 = atk_counts[1];
+        if (atk1 != 0 && atk1 == atk_counts[2]) {
+            u32 hit1 = x358_counts[1];
+            if (hit1 == x358_counts[2] && atk1 == hit1) {
+                if (pl_80038628(gobj, 3) != 0) {
+                    u32 atk1b = atk_counts[1];
+                    if (atk1b == atk_counts[3] && atk1b == x358_counts[3]) {
+                        setFlag(player, 0x19);
+                    }
+                } else {
+                    setFlag(player, 0x19);
+                }
+            }
+        }
+    }
+    {
+        f32 max_ratio = 0.0f;
+        f32 sum_ratio = 0.0f;
+        for (i = 0; i < 6; i++) {
+            if (i != player) {
+                f32 val = Player_GetStaleMoveTableIndexPtr2(i)
+                              ->x0_staleMoveTable.xC78[player];
+                if (max_ratio < val) {
+                    max_ratio = val;
+                }
+                sum_ratio += val;
+            }
+        }
+        if (sum_ratio != 0.0f) {
+            if (gm_8016B558() == 3 &&
+                pl_CalculateAverage(max_ratio, sum_ratio) >= pl_804D6470->xF8)
+            {
+                setFlag(player, 0x67);
+            } else if (gm_8016B558() >= 4 &&
+                       pl_CalculateAverage(max_ratio, sum_ratio) >=
+                           pl_804D6470->xFC)
+            {
+                setFlag(player, 0x67);
+            }
+        }
+    }
+    if (gm_8016B558() >= 3) {
+        int streak = 0;
+        for (i = 0; i < 6; i++) {
+            if (i != player) {
+                s32 kos = Player_GetKOsByPlayerIndex(player, i);
+                if (kos != 0) {
+                    if ((f32) kos >= pl_804D6470->x100 && streak == 0) {
+                        streak = 1;
+                    } else {
+                        streak = 0;
+                        break;
+                    }
+                }
+            }
+        }
+        if (streak != 0) {
+            setFlag(player, 0x68);
+        }
+    }
+    PAD_STACK(16);
+}
 
 void fn_8003B044(int player)
 {
