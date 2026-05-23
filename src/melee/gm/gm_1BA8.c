@@ -243,7 +243,112 @@ s32 gm_801BAC9C(GameScene* arg0, s32 arg1)
 
 /// #gm_801BAD70
 
-/// #gm_801BB758
+void gm_801BB758(GameScene* arg0)
+{
+    MatchExitInfo* exit = gm_801A4284(arg0);
+    struct EventData* ev = &gmMainLib_804D3EE0->unk_530;
+    u8 stage = ev->unk_535;
+    u8 b;
+    enum CharacterKind kind;
+    s32 t;
+
+    gm_8016A164();
+    if (*(u8*) ((u8*) exit + 0x10) == 8) {
+        s32 do_save = 0;
+        if (ev->x20 != 0) {
+            do_save = 1;
+        }
+        if (stage == 0x31) {
+            do_save = 0;
+        }
+        ev->xB_5 = 0;
+        ev->x20 = 0;
+        ev->x24 = 0;
+        ev->x28 = 0;
+        ev->x2C = 0;
+        ev->x30 = 0;
+        ev->x34 = 0;
+        ev->x38 = 0x21;
+        ev->x3C = 0;
+        ev->x40 = 0;
+        gm_801BBB64();
+        if (do_save != 0) {
+            PreloadCacheScene* gc = lbDvd_8001822C();
+            lbDvd_80018C6C();
+            gc->game_cache.entries[0].char_id = (s8) ev->x0;
+            gc->game_cache.entries[0].color = ev->x1;
+            lbDvd_80018254();
+            lbDvd_80017700(4);
+        }
+        gm_SetPendingScene(1);
+        return;
+    }
+    if (*(u8*) ((u8*) exit + 0x10) == 7) {
+        gm_801A42F8(1);
+        return;
+    }
+    ev->x3C += gm_80168940((MatchEnd*) ((u8*) &gm_80497758 + 0x28C));
+    ev->x40 += *(s32*) ((u8*) exit + 0x14);
+    b = ((u8*) ev)[0xB];
+    if (((b >> 3) & 1) && ((b >> 5) & 1)) {
+        ev->x24 = *(s8*) ((u8*) &gm_80497758 + 0x2EC);
+        ev->x28 = *(u16*) ((u8*) &gm_80497758 + 0x2F0);
+        ev->xB_2 = 0;
+        ev->xB_5 = 0;
+        t = ev->x20;
+        ev->x20 = t + 1;
+        gm_801BBB64();
+        gm_SetPendingScene(1);
+        return;
+    }
+    if (ev->xB_1) {
+        s32 cur = ev->xC;
+        s32 best = gmMainLib_8015CF5C(stage);
+        s32 upd = 0;
+        if (ev->xB_6) {
+            if (best == 0 || cur < best) {
+                best = cur;
+                upd = 1;
+            }
+        } else if ((u32) cur > (u32) best) {
+            best = cur;
+            upd = 1;
+        }
+        if (upd != 0) {
+            gmMainLib_8015CF70(stage, best);
+        }
+        gmMainLib_8015CEB4(stage);
+    }
+    gm_8016247C(ev->x3C);
+    gm_80162968((u32) ev->x40 / 60);
+    if (ev->xB_1) {
+        kind = gm_801732D8(ev->unk_535);
+    } else {
+        kind = CHKIND_MAX;
+    }
+    if (ev->unk_535 == gm_801BEBC0(0x32) && *(s32*) ((u8*) exit + 0x6C) == 3) {
+        gmMainLib_8015CF84();
+    }
+    if (ev->xB_1) {
+        u16 sid = gm_8017335C();
+        if (sid != 0x148) {
+            gm_80164504(sid);
+        }
+    }
+    if (ev->xB_1) {
+        gm_80173D3C(ev->unk_535);
+    }
+    gm_80173EEC();
+    gm_80172898(0x10);
+    if ((u8) kind != 0x21) {
+        gm_801736E8(ev->x0, ev->x1, ev->x6, ev->x4, kind, 1);
+        gm_801A42F8(0x14);
+        return;
+    }
+    if (gm_80173754(1, ev->x6) == 0) {
+        gm_801A42F8(1);
+    }
+}
 
 void gm_801BBA60_OnInit(void)
 {
