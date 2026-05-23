@@ -62,11 +62,11 @@ Funcs:
 
 File: src/melee/gm/gmresult.c
 Funcs:
-- [ ] fn_80175A94
+- [x] fn_80175A94
 - [ ] fn_80175D34
 - [ ] fn_80176D3C
 - [ ] fn_801749B8
-- [ ] fn_801771C0
+- [x] fn_801771C0
 - [ ] fn_80174284
 - [ ] fn_80174920
 - [ ] fn_80175240
