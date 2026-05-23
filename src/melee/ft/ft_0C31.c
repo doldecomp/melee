@@ -513,7 +513,17 @@ void ftCo_800C737C(Fighter_GObj* gobj)
 
 void ftCo_800C739C(Fighter_GObj* gobj)
 {
-    NOT_IMPLEMENTED;
+    Fighter* fp = GET_FIGHTER(gobj);
+    ftCommon_MotionState ms;
+    if (fp->kind == FTKIND_KIRBY) {
+        ms = ftCo_MS_WalkFast;
+    } else {
+        inlineB2(gobj);
+        return;
+    }
+    Fighter_ChangeMotionState(gobj, ms, 0, 0.0F, 1.0F, 0.0F, NULL);
+    fp->x2219_b2 = true;
+    fp->x2219_b1 = true;
 }
 
 void ftCo_800C7414(Fighter_GObj* gobj)
