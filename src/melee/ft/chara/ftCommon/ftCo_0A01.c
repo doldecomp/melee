@@ -3065,7 +3065,187 @@ void ftCo_800A75DC(Fighter* fp0, Fighter* fp1)
     }
 }
 
-/// #ftCo_800A7AAC
+void ftCo_800A7AAC(Fighter* fp)
+{
+    Fighter* partner;
+    HSD_GObj* cur;
+    Vec3 floor_pos;
+    Vec3 floor_normal;
+    int line_id;
+    u32 flags;
+    mp_UnkStruct0* island;
+    mp_UnkStruct0* fp_island;
+    s32 result;
+    s32 blocked;
+    s32 same_island;
+    s32 sub;
+    f32 px;
+    f32 py;
+    f32 pz;
+    f32 d;
+    f32 cx;
+
+    if (fp == NULL) {
+        partner = NULL;
+    } else {
+        cur = HSD_GObj_Entities->fighters;
+        while (1) {
+            if (cur == NULL) {
+                partner = NULL;
+                break;
+            }
+            if (fp->gobj != cur &&
+                fp->player_id == (partner = GET_FIGHTER(cur))->player_id)
+            {
+                if (partner->x221F_b3) {
+                    partner = NULL;
+                }
+                break;
+            }
+            cur = cur->next;
+        }
+    }
+    if (partner == NULL) {
+        return;
+    }
+    px = partner->cur_pos.x;
+    py = partner->cur_pos.y;
+    pz = partner->cur_pos.z;
+    if (partner->ground_or_air == GA_Air) {
+        blocked = 0;
+        line_id = -1;
+        result = mpCheckFloor(px, 10.0f + py, px, py - 1000.0f, 0.0f,
+                              &floor_pos, &line_id, &flags, &floor_normal, -1,
+                              -1, -1, NULL, NULL);
+        if (result != 0) {
+            if (ftCo_800A6A98_inline0(line_id)) {
+                blocked = 1;
+            }
+            if (blocked != 0) {
+                result = 0;
+            }
+        }
+        if (result != 0 &&
+            ftCo_800A2718(island = mpIsland_8005AB54(line_id)) == 0)
+        {
+            if (fp->x1A88.x60 == 0) {
+                fp->x1A88.x54.x = floor_pos.x;
+                fp->x1A88.x54.y = floor_pos.y;
+                fp->x1A88.x38 = fp->x1A88.x56C + partner->x1A88.x564;
+                ftCo_800A1CC4(fp,
+                              ftCo_803C6594[stage_info.internal_stage_id]);
+            }
+            if (island != NULL) {
+                d = island->x14.x - fp->x1A88.x54.x;
+                if (d < 0.0f) {
+                    d = -d;
+                }
+                if (d < 5.0) {
+                    if (fp->x1A88.x60 == 0) {
+                        fp->x1A88.x54.x = island->x14.x - 5.0;
+                        fp->x1A88.x54.y = island->x14.y;
+                        fp->x1A88.x38 = fp->x1A88.x56C + partner->x1A88.x564;
+                        ftCo_800A1CC4(
+                            fp, ftCo_803C6594[stage_info.internal_stage_id]);
+                    }
+                } else {
+                    d = island->x8.x - fp->x1A88.x54.x;
+                    if (d < 0.0f) {
+                        d = -d;
+                    }
+                    if (d < 5.0 && fp->x1A88.x60 == 0) {
+                        fp->x1A88.x54.x = 5.0 + island->x8.x;
+                        fp->x1A88.x54.y = island->x8.y;
+                        fp->x1A88.x38 = fp->x1A88.x56C + partner->x1A88.x564;
+                        ftCo_800A1CC4(
+                            fp, ftCo_803C6594[stage_info.internal_stage_id]);
+                    }
+                }
+            }
+        }
+    } else if (ftCo_800A2718(mpIsland_8005AB54(
+                   partner->coll_data.floor.index)) == 0)
+    {
+        blocked = 0;
+        line_id = -1;
+        result = mpCheckFloor(px, 2.0 + py, px, py - 2.0, 0.0f, &floor_pos,
+                              &line_id, &flags, &floor_normal, -1, -1, -1, NULL,
+                              NULL);
+        if (result != 0) {
+            if (ftCo_800A6A98_inline0(line_id)) {
+                blocked = 1;
+            }
+            if (blocked != 0) {
+                result = 0;
+            }
+        }
+        if (result == 0) {
+            if (fp->x1A88.x60 == 0) {
+                fp->x1A88.x54.x = partner->cur_pos.x;
+                fp->x1A88.x54.y = partner->cur_pos.y;
+                fp->x1A88.x38 = fp->x1A88.x56C + partner->x1A88.x564;
+                ftCo_800A1CC4(fp,
+                              ftCo_803C6594[stage_info.internal_stage_id]);
+            }
+        } else if (fp->x1A88.x60 == 0) {
+            fp->x1A88.x54.x = px;
+            fp->x1A88.x54.y = py;
+            fp->x1A88.x38 = fp->x1A88.x56C + partner->x1A88.x564;
+            ftCo_800A1CC4(fp, ftCo_803C6594[stage_info.internal_stage_id]);
+        }
+        if (fp->ground_or_air == GA_Air) {
+            same_island = 0;
+        } else if (partner->ground_or_air == GA_Air) {
+            same_island = 0;
+        } else {
+            fp_island = mpIsland_8005AB54(fp->coll_data.floor.index);
+            if (fp_island == NULL) {
+                same_island = 0;
+            } else if (mpIsland_8005AB54(partner->coll_data.floor.index) ==
+                       fp_island)
+            {
+                same_island = 1;
+            } else {
+                same_island = 0;
+            }
+        }
+        if (same_island == 0) {
+            if (fp->motion_id == 0xFC) {
+                sub = 1;
+            } else if (fp->motion_id == 0xFD) {
+                sub = 2;
+            } else {
+                sub = 0;
+            }
+            if (sub != 0) {
+                return;
+            }
+            island = mpIsland_8005AB54(partner->coll_data.floor.index);
+            if (island != NULL && fp->x1A88.x54.y - fp->cur_pos.y > 0.0f) {
+                cx = fp->cur_pos.x;
+                if (fp->x1A88.x54.x - cx > 0.0f) {
+                    if (cx < island->x8.x && fp->x1A88.x60 == 0) {
+                        fp->x1A88.x54.x = 5.0 + island->x8.x;
+                        fp->x1A88.x54.y = island->x8.y;
+                        fp->x1A88.x38 =
+                            fp->x1A88.x56C + partner->x1A88.x564;
+                        ftCo_800A1CC4(
+                            fp, ftCo_803C6594[stage_info.internal_stage_id]);
+                    }
+                } else {
+                    if (cx > island->x14.x && fp->x1A88.x60 == 0) {
+                        fp->x1A88.x54.x = island->x14.x - 5.0;
+                        fp->x1A88.x54.y = island->x14.y;
+                        fp->x1A88.x38 =
+                            fp->x1A88.x56C + partner->x1A88.x564;
+                        ftCo_800A1CC4(
+                            fp, ftCo_803C6594[stage_info.internal_stage_id]);
+                    }
+                }
+            }
+        }
+    }
+}
 
 void ftCo_800A80E4(Fighter* fp)
 {
