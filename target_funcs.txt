@@ -5,5 +5,5 @@ Funcs:
 - [x] ftCo_800C7CA0
 - [x] ftCo_800C7B0C
 - [x] ftCo_800C78B0
-- [ ] ftCo_800C7590
+- [x] ftCo_800C7590
 - [ ] fn_800C7DC4
