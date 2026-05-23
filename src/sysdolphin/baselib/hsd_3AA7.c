@@ -716,17 +716,15 @@ s32 fn_803ACFC0(CardState* state, s32 block_idx, s32 file_id, s32 seq_num,
 
     {
         u32 write_size = state->x8;
-        retries = 0;
         buf = state->x0;
 
-        do {
+        for (retries = 0; retries < 10; retries++) {
             result = CARDWrite(&state->file_info, buf, write_size,
                                offset);
             if (result != -1) {
                 break;
             }
-            retries++;
-        } while (retries < 10);
+        }
     }
 
     return result;
@@ -970,20 +968,19 @@ s32 fn_803ADF90(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
                     }
                 } else {
                     s32 offset;
-                    s32 retries = 0;
+                    s32 retries;
 
                     offset =
                         state->x8 *
                         (data_block +
                          ((state->x24 + state->x8 + 0x2F) / state->x8) - 1);
-                    do {
+                    for (retries = 0; retries < 10; retries++) {
                         result = CARDRead(&state->file_info, state->x0,
                                           state->x8, offset);
                         if (result != -1) {
                             break;
                         }
-                        retries++;
-                    } while (retries < 10);
+                    }
 
                     if (result < 0) {
                         callback_seq = -259;
@@ -1045,21 +1042,20 @@ s32 fn_803ADF90(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
                     }
                 } else {
                     s32 offset;
-                    s32 retries = 0;
+                    s32 retries;
                     s32 read_ofs;
 
                     offset =
                         state->x8 *
                         (data_block +
                          ((state->x24 + state->x8 + 0x2F) / state->x8) - 1);
-                    do {
+                    for (retries = 0; retries < 10; retries++) {
                         result = CARDRead(&state->file_info, state->x0,
                                           state->x8, offset);
                         if (result != -1) {
                             break;
                         }
-                        retries++;
-                    } while (retries < 10);
+                    }
 
                     if (result < 0) {
                         callback_seq = -259;
@@ -1592,16 +1588,14 @@ s32 fn_803B0E9C(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
             remaining -= copied;
             hsd_803B2B20(state->x0, sector_size, &digest[digest_idx]);
 
-            retries = 0;
             offset = sector_size * block_idx;
-            do {
+            for (retries = 0; retries < 10; retries++) {
                 result = CARDWrite(&state->file_info, state->x0, sector_size,
                                    offset);
                 if (result != -1) {
                     break;
                 }
-                retries++;
-            } while (retries < 10);
+            }
 
             if (result < 0) {
                 return result;
@@ -1615,17 +1609,16 @@ s32 fn_803B0E9C(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
                 if (arg3 != 0) {
                     memset(state->x0, 0, state->x8);
                 } else {
-                    s32 retries2 = 0;
+                    s32 retries2;
                     s32 offset2 = state->x8 * block_idx;
 
-                    do {
+                    for (retries2 = 0; retries2 < 10; retries2++) {
                         result = CARDRead(&state->file_info, state->x0,
                                           state->x8, offset2);
                         if (result != -1) {
                             break;
                         }
-                        retries2++;
-                    } while (retries2 < 10);
+                    }
 
                     if (result < 0) {
                         return result;
@@ -1642,17 +1635,16 @@ s32 fn_803B0E9C(struct CardState* arg0, s32 arg1, s32 arg2, s32 arg3, s32 arg4)
         remaining = -1;
 
         {
-            s32 retries = 0;
+            s32 retries;
             s32 offset = state->x8 * block_idx;
 
-            do {
+            for (retries = 0; retries < 10; retries++) {
                 result =
                     CARDWrite(&state->file_info, state->x0, state->x8, offset);
                 if (result != -1) {
                     break;
                 }
-                retries++;
-            } while (retries < 10);
+            }
         }
 
         if (result < 0) {
@@ -1892,17 +1884,16 @@ int hsd_803B2550(s32* arg0, const char* arg1, void (*arg2)(int, int))
 {
     u8* base = hsd_804D1138;
     s32 chan = arg0[1];
-    s32 retries = 0;
+    s32 retries;
     s32 result;
     s32 write_idx;
 
-    do {
+    for (retries = 0; retries < 10; retries++) {
         result = CARDOpen(chan, (char*) arg1, (CARDFileInfo*) (arg0 + 3));
         if (result != -1) {
             break;
         }
-        retries++;
-    } while (retries < 10);
+    }
 
     if (result < 0) {
         return result;
