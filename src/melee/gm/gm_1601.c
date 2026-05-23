@@ -3014,7 +3014,36 @@ void gm_80168638(MatchEnd* arg0)
     }
 }
 
-/// #gm_80168710
+void gm_80168710(MatchEnd* arg0, VsModeData* arg1)
+{
+    u8 buf[4];
+    s32 count;
+    s32 best;
+    s32 j;
+
+    best = -1;
+    memzero(buf, 4);
+    for (j = 0; j < 4; j++) {
+        if (arg0->player_standings[j].slot_type == 0) {
+            if ((s32) arg0->player_standings[j].is_big_loser > best) {
+                best = arg0->player_standings[j].is_big_loser;
+            }
+        }
+    }
+    count = 0;
+    for (j = 0; j < 4; j++) {
+        if (arg0->player_standings[j].slot_type == 0 &&
+            (s32) arg0->player_standings[j].is_big_loser == best) {
+            buf[count] = j;
+            count++;
+        }
+    }
+    if (count != 0) {
+        arg1->winner = (s8) buf[HSD_Randi(count)];
+        return;
+    }
+    arg1->winner = -1;
+}
 
 s32 gm_801688AC(MatchEnd* arg0)
 {

@@ -209,7 +209,7 @@ Funcs:
 - [x] gm_80164330
 - [x] gm_80164504
 - [x] gm_80164910
-- [ ] gm_80168710
+- [x] gm_80168710
 
 File: src/melee/gm/gm_1832.c
 Funcs:
