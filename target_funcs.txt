@@ -81,19 +81,19 @@ Funcs:
 
 File: src/melee/gm/gm_1A3F.c
 Funcs:
-- [ ] gm_801A4014
+- [x] gm_801A4014
 
 File: src/melee/gm/gm_1A4C.c
 Funcs:
-- [ ] fn_801A94BC
-- [ ] gm_801A9094
+- [x] fn_801A94BC
+- [x] gm_801A9094
 
 File: src/melee/gm/gm_1B03.c
 Funcs:
 - [ ] gm_801B0DD0
 - [ ] gm_801B1C24
-- [ ] gm_801B0474
-- [ ] gm_801B2790
+- [x] gm_801B0474
+- [x] gm_801B2790
 
 File: src/melee/gm/gm_1BA8.c
 Funcs:
@@ -108,7 +108,7 @@ Funcs:
 
 File: src/melee/gm/gm_1BFA.c
 Funcs:
-- [ ] gm_801BFCFC
+- [x] gm_801BFCFC
 
 File: src/melee/gm/gm_16AE.c
 Funcs:
