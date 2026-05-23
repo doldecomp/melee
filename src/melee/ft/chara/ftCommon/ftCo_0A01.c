@@ -1361,7 +1361,63 @@ static inline bool ftCo_IsAlly_dontinline(Fighter* fp0, Fighter* fp1)
 
 /// #ftCo_800A4038
 
-/// #ftCo_800A4768
+static inline bool ftCo_800A4768_inline0(Fighter* fp, Vec3* p)
+{
+    struct Fighter_x1A88_t* data = &fp->x1A88;
+    if (p->x < data->half_width + Stage_GetBlastZoneLeftOffset() ||
+        p->x > Stage_GetBlastZoneRightOffset() - data->half_width ||
+        p->y < data->half_height + Stage_GetBlastZoneBottomOffset() ||
+        p->y > Stage_GetBlastZoneTopOffset() - data->half_height)
+    {
+        return true;
+    }
+    return false;
+}
+
+s32 ftCo_800A4768(Fighter* fp, Vec3* arg1)
+{
+    mp_UnkStruct0* island;
+    f32 best;
+    Vec3 pt;
+    f32 dx;
+    f32 dy;
+    f32 dist;
+
+    best = -1.0f;
+    for (island = mpIsland_80458E88.next; island != NULL;
+         island = island->next)
+    {
+        pt = island->x14;
+        if (!ftCo_800A4768_inline0(fp, &pt)) {
+            dx = fp->cur_pos.x - pt.x;
+            if (dx > 0.0f) {
+                dy = fp->cur_pos.y - pt.y;
+                dist = dx * dx + dy * dy;
+                if (best < 0.0 || best > dist) {
+                    best = dist;
+                    arg1->x = pt.x - 5.0;
+                    arg1->y = pt.y;
+                    arg1->z = pt.z;
+                }
+            }
+        }
+        if (!ftCo_800A4768_inline0(fp, &pt)) {
+            pt = island->x8;
+            dx = fp->cur_pos.x - pt.x;
+            if (dx < 0.0f) {
+                dy = fp->cur_pos.y - pt.y;
+                dist = dx * dx + dy * dy;
+                if (best < 0.0 || best > dist) {
+                    best = dist;
+                    arg1->x = pt.x + 5.0;
+                    arg1->y = pt.y;
+                    arg1->z = pt.z;
+                }
+            }
+        }
+    }
+    return 0;
+}
 
 void ftCo_800A49B4(Fighter* fp)
 {
