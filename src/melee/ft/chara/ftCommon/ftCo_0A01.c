@@ -2506,7 +2506,158 @@ s32 ftCo_800A6D2C(Fighter* fp, Vec3* arg1)
     return 1;
 }
 
-/// #ftCo_800A6FC4
+bool ftCo_800A6FC4(Fighter* fp, Vec3* arg1, Vec3* arg2)
+{
+    mp_UnkStruct0* island;
+    mp_UnkStruct0* cur_island;
+    f32 best;
+    Vec3 floor_pos;
+    Vec3 floor_normal;
+    Vec3 dir;
+    Vec3 a;
+    Vec3 b;
+    int line_id;
+    u32 flags;
+    f32 px;
+    f32 fx;
+    f32 mx;
+    f32 my;
+    f32 ddx;
+    f32 ddy;
+    f32 dist;
+    s32 result;
+    s32 blocked;
+
+    best = -1.0f;
+    cur_island = mpIsland_8005AB54(fp->coll_data.floor.index);
+    lbVector_Normalize(arg2);
+    for (island = mpIsland_80458E88.next; island != NULL;
+         island = island->next)
+    {
+        if (island == cur_island) {
+            continue;
+        }
+        b = island->x14;
+        a = island->x8;
+        HSD_Randf();
+        blocked = 0;
+        line_id = -1;
+        my = 0.5f * (a.y + b.y);
+        mx = 0.5f * (a.x + b.x);
+        result = mpCheckFloor(mx, my + 10.0, mx, my - 10.0, 0.0f, &floor_pos,
+                              &line_id, &flags, &floor_normal, -1, -1, -1, NULL,
+                              NULL);
+        if (result != 0) {
+            if (ftCo_800A6A98_inline0(line_id)) {
+                blocked = 1;
+            }
+            if (blocked != 0) {
+                result = 0;
+            }
+        }
+        if (result == 0) {
+            continue;
+        }
+        fx = floor_pos.x;
+        if (grRCruise_80201988(line_id) != 0) {
+            continue;
+        }
+        dir.x = fx - fp->cur_pos.x;
+        dir.y = floor_pos.y - fp->cur_pos.y;
+        dir.z = 0.0f;
+        lbVector_Normalize(&dir);
+        if (lbVector_Angle(arg2, &dir) > 0.7853982f) {
+            continue;
+        }
+        ddx = fx - fp->cur_pos.x;
+        ddy = floor_pos.y - fp->cur_pos.y;
+        dist = ddx * ddx + ddy * ddy;
+        if (!ftCo_800A6700_inline0(fp, fx, floor_pos.y)) {
+            if (best < 0.0 || dist < best) {
+                arg1->x = fx;
+                best = dist;
+                arg1->y = floor_pos.y;
+                arg1->z = 0.0f;
+            }
+        }
+        line_id = -1;
+        blocked = 0;
+        px = a.x + 5.0;
+        result = mpCheckFloor(px, a.y + 10.0, px, a.y - 10.0, 0.0f, &floor_pos,
+                              &line_id, &flags, &floor_normal, -1, -1, -1, NULL,
+                              NULL);
+        if (result != 0) {
+            if (ftCo_800A6A98_inline0(line_id)) {
+                blocked = 1;
+            }
+            if (blocked != 0) {
+                result = 0;
+            }
+        }
+        if (result == 0) {
+            continue;
+        }
+        fx = floor_pos.x;
+        dir.x = fx - fp->cur_pos.x;
+        dir.y = floor_pos.y - fp->cur_pos.y;
+        dir.z = 0.0f;
+        lbVector_Normalize(&dir);
+        if (lbVector_Angle(arg2, &dir) > 0.7853982f) {
+            continue;
+        }
+        ddx = fx - fp->cur_pos.x;
+        ddy = floor_pos.y - fp->cur_pos.y;
+        dist = ddx * ddx + ddy * ddy;
+        if (!ftCo_800A6700_inline0(fp, fx, floor_pos.y)) {
+            if (dist < best) {
+                arg1->x = fx;
+                best = dist;
+                arg1->y = floor_pos.y;
+                arg1->z = 0.0f;
+            }
+        }
+        line_id = -1;
+        blocked = 0;
+        px = b.x - 5.0;
+        result = mpCheckFloor(px, b.y + 10.0, px, b.y - 10.0, 0.0f,
+                              &floor_pos, &line_id, &flags, &floor_normal, -1,
+                              -1, -1, NULL, NULL);
+        if (result != 0) {
+            if (ftCo_800A6A98_inline0(line_id)) {
+                blocked = 1;
+            }
+            if (blocked != 0) {
+                result = 0;
+            }
+        }
+        if (result == 0) {
+            continue;
+        }
+        fx = floor_pos.x;
+        dir.x = fx - fp->cur_pos.x;
+        dir.y = floor_pos.y - fp->cur_pos.y;
+        dir.z = 0.0f;
+        lbVector_Normalize(&dir);
+        if (lbVector_Angle(arg2, &dir) > 0.7853982f) {
+            continue;
+        }
+        ddx = fx - fp->cur_pos.x;
+        ddy = floor_pos.y - fp->cur_pos.y;
+        dist = ddx * ddx + ddy * ddy;
+        if (!ftCo_800A6700_inline0(fp, fx, floor_pos.y)) {
+            if (dist < best) {
+                arg1->x = fx;
+                best = dist;
+                arg1->y = floor_pos.y;
+                arg1->z = 0.0f;
+            }
+        }
+    }
+    if (best < 0.0) {
+        return 0;
+    }
+    return 1;
+}
 
 /// #ftCo_800A75DC
 
@@ -4351,7 +4502,7 @@ void ftCo_800AE7AC(Fighter* fp, Vec3* arg1, int arg2)
     ItemKind kind;
     s32 is_food;
     s32 do_act;
-    Vec2 out;
+    Vec3 out;
     Vec3 dir;
     f32 left;
     f32 cx;
@@ -4423,7 +4574,7 @@ void ftCo_800AE7AC(Fighter* fp, Vec3* arg1, int arg2)
             dy = cy - fp->cur_pos.y;
             dir.y = dy;
             dir.z = 0.0f;
-            if (ftCo_800A6FC4(fp, &out, &dir, dy, cy, sum_y) != 0) {
+            if (ftCo_800A6FC4(fp, &out, &dir) != 0) {
                 if (data->x60 == 0) {
                     data->x54.x = out.x;
                     data->x54.y = out.y;

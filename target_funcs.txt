@@ -34,7 +34,7 @@ Funcs:
 - [ ] ftCo_800A75DC
 - [ ] ftCo_800AF290
 - [ ] ftCo_800B33B0
-- [ ] ftCo_800A6FC4
+- [x] ftCo_800A6FC4
 - [ ] ftCo_800A7AAC
 - [x] ftCo_800A9CB4
 - [ ] ftCo_800A3908
